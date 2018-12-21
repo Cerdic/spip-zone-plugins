@@ -23,6 +23,7 @@
 
 	// Preparer les requests
 	set_request("case_1", "oui");
+	set_request("case_2", "");
 	set_request("a", "a");
 	set_request("b", "b");
 	set_request("c", "c");
@@ -99,6 +100,18 @@
 			'champ_uniquement' => array(
 				0 => true,
 				1 => "@case_1@"
+			),
+			'champ_uniquement_faux' => array(
+				0 => false,
+				1 => "@case_2@"
+			),
+			'champ_uniquement_negation' => array(
+				0 => true,
+				1 => "!@case_2@"
+			),
+			'champ_uniquement_negation_faux' => array(
+				0 => false,
+				1 => "!@case_1@"
 			)
 		);
 		return $essais;

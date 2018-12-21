@@ -292,7 +292,9 @@ function saisies_verifier_securite_afficher_si($condition) {
  * @return string $condition
 **/
 function saisies_transformer_condition_afficher_si($condition, $env = null) {
-	$regexp = "(?:@(?<champ>.+?)@)" // @champ_@
+	$regexp =
+	  "(?<negation>!?)" // négation éventuelle
+		. "(?:@(?<champ>.+?)@)" // @champ_@
 		. "(" // partie operateur + valeur (optionnelle) : debut
 		. "(?:\s*?)" // espaces éventuels après
 		. "(?<operateur>==|!=|IN|!IN)" // opérateur
@@ -312,6 +314,9 @@ function saisies_transformer_condition_afficher_si($condition, $env = null) {
 			$operateur = isset($test['operateur']) ? $test['operateur'] : null;
 			$valeur = isset($test['valeur']) ? $test['valeur'] : null;
 			$test_modifie = saisies_tester_condition_afficher_si($champ, $operateur, $valeur) ? 'true' : 'false';
+			if (isset($test['negation'])) {
+				$test_modifie = $test['negation'].$test_modifie;
+			}
 			$condition = str_replace($expression, $test_modifie, $condition);
 		}
 	}
