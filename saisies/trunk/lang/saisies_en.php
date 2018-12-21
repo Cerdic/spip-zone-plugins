@@ -165,7 +165,7 @@ It is possible to use Boolean operators <code> || </code> (or) and <code> && </c
 
 	// S
 	'saisie_auteurs_explication' => 'Allows you to select one or more authors',
-	'saisie_auteurs_titre' => 'Autors',
+	'saisie_auteurs_titre' => 'Authors',
 	'saisie_case_explication' => 'Used to activate or deactivate a particular option.',
 	'saisie_case_titre' => 'Single check box',
 	'saisie_checkbox_explication' => 'Used to select several options using check boxes.',
