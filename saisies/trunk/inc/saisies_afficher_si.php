@@ -404,10 +404,12 @@ function saisies_tester_condition_afficher_si_string($champ, $operateur, $valeur
  * @return bool false / true selon la condition
 **/
 function saisies_tester_condition_afficher_si_array($champ, $operateur, $valeur) {
+	$valeur = explode(',', $valeur);
+	$intersection = array_intersect($champ, $valeur);
 	if ($operateur == "==" or $operateur == "IN") {
-		return in_array($valeur, $champ);
+		return count($intersection) > 0;
 	} else {
-		return !in_array($valeur, $champ);
+		return count($intersection) == 0;
 	}
 	return false;
 }

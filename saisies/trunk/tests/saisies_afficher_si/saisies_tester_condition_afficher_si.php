@@ -159,6 +159,30 @@
 				2 => '!IN',
 				3 => '4',
 			),
+			"array_presence_IN_multiple" => array(
+				0 => true,
+				1 => array("2"),
+				2 => "IN",
+				3 => "2,3"
+			),
+			"array_absence_IN_multiple" => array(
+				0 => false,
+				1 => array("4", "5"),
+				2 => "IN",
+				3 => "2,3"
+			),
+			"array_absence_NOT_IN_multiple" => array(
+				0 => true,
+				1 => array("4", "5"),
+				2 => "!IN",
+				3 => "2,3"
+			),
+			"array_presence_NOT_IN_multiple" => array(
+				0 => false,
+				1 => array("2", "1"),
+				2 => "!IN",
+				3 => "2,3"
+			)
 		);
 		return $essais;
 	}
