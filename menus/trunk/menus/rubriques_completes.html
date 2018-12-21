@@ -72,7 +72,7 @@
 ]
 <BOUCLE_appel(CONDITION){si #ENV{appel_menu}|oui}>
 	<BOUCLE_rubriques(RUBRIQUES){id_parent=#GET{id_rubrique}}{id_secteur !IN #GET{id_secteur_exclus}}{id_rubrique !IN #GET{id_rubriques_exclues}}{par num #GET{tri_num}}{inverse #GET{tri_num_inverse}}{par #GET{tri_alpha}}{inverse #GET{tri_alpha_inverse}}{0,#GET{rubriques_max_affichees}}>
-		[(#SET{niveau_actuel,1})]<li class="menu-entree item menu-items__item[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})] rub#ID_RUBRIQUE">[(#REM) 
+		[(#SET{niveau_actuel,1})]<li class="menu-entree item menu-items__item menu-items__item_objet menu-items__item_rubrique[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})] rub#ID_RUBRIQUE">[(#REM) 
 				si articles uniques masqués
 				faire le lien vers l'article quand il est seul dans la rubrique ?
 			]<BOUCLE_cpt_art(ARTICLES){id_rubrique}{lang}{si #GET{masquer_articles_uniques}}{si #GET{lien_direct_articles_uniques}}> #SET{id_article_unique, #ID_ARTICLE}</BOUCLE_cpt_art>
@@ -96,7 +96,7 @@
 					[(#SET{niveau_actuel,#GET{niveau_actuel}|plus{1}})][(#REM) 
 						Doit-on descendre recursivement plus loin ? 
 					][(#SET{cond,#GET{niveau_max}|>{#GET{niveau_actuel}}|et{#GET{sousrub_cond}|?{#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}},'on'}}})]
-					<li class="menu-entree item menu-items__item[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})] rub#ID_RUBRIQUE">[(#REM) 
+					<li class="menu-entree item menu-items__item menu-items__item_objet menu-items__item_rubrique[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})] rub#ID_RUBRIQUE">[(#REM) 
 						------------------------------------------------
 						Positionnement de la classe daddy sur le lien pour indiquer qu'il a un ul a suivre, un autre sous-menu a ouvrir
 						si on doit descendre plus loin et
@@ -132,7 +132,7 @@
 					On affiche le lien vers le reste si on a dépassé le quota 
 					
 					][(#GET{cpt_sousrub}|>{#GET{rubriques_max_affichees}}|oui)
-						<li class="menu-entree item menu-items__item"><a class="menu-items__lien suite" href="#URL_RUBRIQUE"><:menus:toutes_les_rubriques:></a></li>]
+						<li class="menu-entree item menu-items__item menu-items__item_objet menu-items__item_rubrique"><a class="menu-items__lien suite" href="#URL_RUBRIQUE"><:menus:toutes_les_rubriques:></a></li>]
 					[(#REM) ------------------------------------------------
 							Premier cas de gestion de l'affichage des articles 
 							Ce code est dupliqué dans les 2e et 3e cas, voir ci dessous (a un ul pres)
@@ -155,12 +155,12 @@
 							#SET{afficher,oui}]
 						<BOUCLE_test_afficher_si_sousrub(CONDITION){si #GET{afficher}|=={oui}|oui}>
 							<BOUCLE_articles_si_sousrub(ARTICLES){id_rubrique}{lang}{par num #GET{tri_num_articles}}{inverse #GET{tri_num_articles_inverse}}{par #GET{tri_alpha_articles}}{inverse #GET{tri_alpha_articles_inverse}}{0,#GET{articles_max_affiches}}>
-								<li class="menu-entree item menu-items__item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
+								<li class="menu-entree item menu-items__item menu-items__item_objet menu-items__item_article[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
 									<a href="#URL_ARTICLE" class="menu-items__lien">#TITRE</a>
 								</li>
 							</BOUCLE_articles_si_sousrub>
 							[(#GET{cpt}|>{#GET{articles_max_affiches}}|oui)
-								<li class="menu-entree item menu-items__item"><a class="menu-items__liens suite" href="[(#URL_RUBRIQUE|parametre_url{connect,''})]"><:menus:tous_les_articles:></a></li>]
+								<li class="menu-entree item menu-items__item menu-items__item_objet menu-items__item_rubrique"><a class="menu-items__liens suite" href="[(#URL_RUBRIQUE|parametre_url{connect,''})]"><:menus:tous_les_articles:></a></li>]
 							</B_articles_si_sousrub>
 						</BOUCLE_test_afficher_si_sousrub>
 					</BOUCLE_test_articles_si_sousrub>[(#REM)
@@ -187,12 +187,12 @@
 							<B_articles_pas_de_sousrub>
 								<ul class="menu-liste menu-items menu-items"[ data-depth="(#GET{depth}|plus{1})"]>
 							<BOUCLE_articles_pas_de_sousrub(ARTICLES){id_rubrique}{lang}{par num #GET{tri_num_articles}}{inverse #GET{tri_num_articles_inverse}}{par #GET{tri_alpha_articles}}{inverse #GET{tri_alpha_articles_inverse}}{0,#GET{articles_max_affiches}}>
-								<li class="menu-entree item menu-items__item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
+								<li class="menu-entree item menu-items__item menu-items__item_objet menu-items__item_article[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
 										<a href="#URL_ARTICLE" class="menu-items__lien">#TITRE</a>
 								</li>
 							</BOUCLE_articles_pas_de_sousrub>
 								[(#GET{cpt}|>{#GET{articles_max_affiches}}|oui)
-									<li class="menu-entree item menu-items__item"><a class="menu-items__lien suite" href="[(#URL_RUBRIQUE|parametre_url{connect,''})]"><:menus:tous_les_articles:></a></li>]
+									<li class="menu-entree item menu-items__item menu-items__item_objet menu-items__item_rubrique"><a class="menu-items__lien suite" href="[(#URL_RUBRIQUE|parametre_url{connect,''})]"><:menus:tous_les_articles:></a></li>]
 								</ul>
 							</B_articles_pas_de_sousrub>
 						</BOUCLE_test_afficher_pas_de_sousrub>
@@ -216,11 +216,11 @@
 	<BOUCLE_test_afficher_pas_de_rub(CONDITION){si #GET{afficher}|=={oui}|oui}>
 			<B_articles_pas_de_rub>
 			<BOUCLE_articles_pas_de_rub(ARTICLES){id_rubrique=#GET{id_rubrique}}{lang}{par num #GET{tri_num_articles}}{inverse #GET{tri_num_articles_inverse}}{par #GET{tri_alpha_articles}}{inverse #GET{tri_alpha_articles_inverse}}{0,#GET{articles_max_affiches}}>
-			<li class="menu-entree item menu-items__item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
+			<li class="menu-entree item menu-items__item menu-items__item_objet menu-items__item_article[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
 				<a href="#URL_ARTICLE" class="menu-items__lien">#TITRE</a>
 			</li>
 			</BOUCLE_articles_pas_de_rub>[(#GET{cpt}|>{#GET{articles_max_affiches}}|oui)
-			<li class="menu-entree item menu-items__item"><a class="menu-items__lien suite" href="[(#URL_RUBRIQUE|parametre_url{connect,''})]"><:menus:tous_les_articles:></a></li>]
+			<li class="menu-entree item menu-items__item menu-items__item_objet menu-items__item_rubrique"><a class="menu-items__lien suite" href="[(#URL_RUBRIQUE|parametre_url{connect,''})]"><:menus:tous_les_articles:></a></li>]
 			</B_articles_pas_de_rub>
 		</BOUCLE_test_afficher_pas_de_rub>
 	</BOUCLE_test_articles_pas_de_rub>

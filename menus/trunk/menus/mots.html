@@ -23,13 +23,13 @@
 ]
 <BOUCLE_appel(CONDITION){si #ENV{appel_menu}|oui}>
 	<BOUCLE_mot(MOTS){id_mot=#GET{id_mot}}>
-		<li class="menu-entree item menu-items__item[ (#ID_MOT|menus_exposer{mot,#ENV*{env}})]">
+		<li class="menu-entree item menu-items__item menu-items__item_objet menu-items__item_mot[ (#ID_MOT|menus_exposer{mot,#ENV*{env}})]">
 			<a href="#URL_MOT" title="[(#TITRE|attribut_html)]" class="menu-items__lien">#TITRE</a>
 			<BOUCLE_infini(CONDITION){si #GET{nombre}|=={0}}>
 				<B_articles_infini>
 				<ul class="menu-liste menu-items menu-items"[ data-depth="(#GET{depth}|plus{1})"]>
 					<BOUCLE_articles_infini(ARTICLES){id_mot}{par num #GET{tri_num}}{inverse #GET{tri_num_inverse}}{par #GET{tri_alpha}}{inverse #GET{tri_alpha_inverse}}>
-						<li class="menu-entree item menu-items__item[ (#ID_ARTICLE|menus_exposer{rubrique,#ENV*{env}})]">
+						<li class="menu-entree item menu-items__item menu-items__item_objet menu-items__item_article[ (#ID_ARTICLE|menus_exposer{rubrique,#ENV*{env}})]">
 							<a href="#URL_ARTICLE" class="menu-items__lien">#TITRE</a>
 						</li>
 					</BOUCLE_articles_infini>
@@ -40,7 +40,7 @@
 			<B_articles_limite>
 				<ul class="menu-liste menu-items menu-items_submenu"[ data-depth="(#GET{depth}|plus{1})"]>
 					<BOUCLE_articles_limite(ARTICLES){id_mot}{par num #GET{tri_num}}{inverse #GET{tri_num_inverse}}{par #GET{tri_alpha}}{inverse #GET{tri_alpha_inverse}}{0,#GET{nombre}}>
-						<li class="menu-entree item menu-items__item[ (#ID_ARTICLE|menus_exposer{rubrique,#ENV*{env}})]">
+						<li class="menu-entree item menu-items__item menu-items__item_objet menu-items__item_article[ (#ID_ARTICLE|menus_exposer{rubrique,#ENV*{env}})]">
 							<a href="#URL_ARTICLE" class="menu-items__lien">#TITRE</a>
 						</li>
 					</BOUCLE_articles_limite>

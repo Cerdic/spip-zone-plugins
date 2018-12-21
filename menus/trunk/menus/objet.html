@@ -54,6 +54,6 @@
 	#SET{url,#GET{url}|parametre_url{#GET{param/0},#GET{param/1}}}
 	</BOUCLE_parametres>
 	#SET{url,#GET{url}|ancre_url{#ENV{ancre}}}
-	<li class="menu-entree item menu-items__item[ (#ENV{css})][ (#GET{id_objet}|menus_exposer{#ENV{type_objet},#ENV*{env}})]">
+	<li class="menu-entree item menu-items__item menu-items__item_objet menu-items__item_#ENV{type_objet}[ (#ENV{css})][ (#GET{id_objet}|menus_exposer{#ENV{type_objet},#ENV*{env}})]">
 		<a href="#GET{url}" class="menu-items__lien[ (#ENV{css_lien})]">#GET{titre}</a>
 </BOUCLE_public>

@@ -4,6 +4,6 @@
 	<div class="infos"> </div>
 ]
 [(#ENV{appel_menu}|et{#SESSION{id_auteur}|>{0}|oui}|oui)
-	<li class="menu-entree item menu-items__item[ (#ENV{css})][(#ENV{env/type}|=={auteur}|ou{#ENV{env/type-page}|=={auteur}}|et{#ENV{env/id_auteur}|=={#SESSION{id_auteur}}}) on active]">
+	<li class="menu-entree item menu-items__item menu-items__item_mapage[ (#ENV{css})][(#ENV{env/type}|=={auteur}|ou{#ENV{env/type-page}|=={auteur}}|et{#ENV{env/id_auteur}|=={#SESSION{id_auteur}}}) on active]">
 		<a href="#URL_AUTEUR{#SESSION{id_auteur}}" class="menu-items__lien">#GET{titre}</a>
 ]

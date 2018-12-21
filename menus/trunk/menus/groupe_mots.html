@@ -25,12 +25,12 @@
 
 <BOUCLE_appel(CONDITION){si #ENV{appel_menu}|oui}>
 <BOUCLE_mots(MOTS){id_groupe=#GET{id_groupe}}{par num #GET{tri_num}}{inverse #GET{tri_num_inverse}}{par #GET{tri_alpha}}{inverse #GET{tri_alpha_inverse}}>
-	<li class="menu-entree item menu-items__item">
+	<li class="menu-entree item menu-items__item menu-items__item_objet menu-items__item_mot">
 		<a href="#URL_MOT" class="menu-items__lien">#TITRE</a>
 		<B_articles_mots>
 			<ul class="menu-liste menu-items menu-items"[ data-depth="(#GET{depth}|plus{1})"]>
 				<BOUCLE_articles_mots(ARTICLES){id_mot=#ID_MOT}{par num #GET{tri_num}}{inverse #GET{tri_num_inverse}}{par #GET{tri_alpha}}{inverse #GET{tri_alpha_inverse}}{0,#GET{nombre_articles_mot}}>
-				<li class="menu-entree item menu-items__item">
+				<li class="menu-entree item menu-items__item menu-items__item_objet menu-items__item_article">
 					<a href="#URL_ARTICLE" class="menu-items__lien">#TITRE</a>
 				</li>
 				</BOUCLE_articles_mots>
@@ -40,17 +40,17 @@
 </BOUCLE_mots>
 </B_mots>
 	<BOUCLE_groupe_mots(GROUPES_MOTS){par num #GET{tri_num}}{inverse #GET{tri_num_inverse}}{par #GET{tri_alpha}}{inverse #GET{tri_alpha_inverse}}>
-	<li class="menu-entree item menu-items__item">
+	<li class="menu-entree item menu-items__item menu-items__item_objet menu-items__item_groupe">
 		<a[(#CHEMIN{groupes_mot.html}|oui) href="#URL_PAGE{groupes_mot,id_groupe=#ID_GROUPE}"][(#CHEMIN{groupes_mot.html}|non) href="#"] title="[(#TITRE|attribut_html)]" class="menu-items__lien">#TITRE</a>
 		<B_mots_tous>
 			<ul class="menu-liste menu-items menu-items"[ data-depth="(#GET{depth}|plus{1})"]>
 				<BOUCLE_mots_tous(MOTS){id_groupe}{par num #GET{tri_num}}{inverse #GET{tri_num_inverse}}{par #GET{tri_alpha}}{inverse #GET{tri_alpha_inverse}}>
-				<li class="menu-entree item menu-items__item">
+				<li class="menu-entree item menu-items__item menu-items__item_objet menu-items__item_mot">
 					<a href="#URL_MOT" class="menu-items__lien">#TITRE</a>
 						<B_mots_articles_mots>
 							<ul class="menu-liste menu-items menu-items"[ data-depth="(#GET{depth}|plus{2})"]>
 								<BOUCLE_mots_articles_mots(ARTICLES){id_mot=#ID_MOT}{par num #GET{tri_num}}{inverse #GET{tri_num_inverse}}{par #GET{tri_alpha}}{inverse #GET{tri_alpha_inverse}}{0,#GET{nombre_articles_mot}}>
-									<li class="menu-entree item menu-items__item">
+									<li class="menu-entree item menu-items__item menu-items__item_objet menu-items__item_article">
 									<a href="#URL_ARTICLE" class="menu-items__lien">#TITRE</a>
 									</li>
 								</BOUCLE_mots_articles_mots>

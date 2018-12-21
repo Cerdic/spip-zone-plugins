@@ -4,6 +4,6 @@
 	<div class="infos"> </div>
 ]
 [(#ENV{appel_menu}|et{#SESSION{id_auteur}|>{0}|oui}|oui)
-	<li class="menu-entree item menu-items__item[ (#ENV{css})]">
+	<li class="menu-entree item menu-items__item menu-items__item_deconnecter[ (#ENV{css})]">
 		<a href="#URL_LOGOUT" class="menu-items__lien">#GET{titre}</a>
 ]

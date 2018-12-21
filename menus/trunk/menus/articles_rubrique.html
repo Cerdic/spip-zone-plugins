@@ -20,32 +20,36 @@
 	<BOUCLE_cpt_articles_orig(ARTICLES){id_rubrique=#GET{id_rubrique}}{origine_traduction}> </BOUCLE_cpt_articles_orig>#SET{cpt,#TOTAL_BOUCLE}</B_cpt_articles_orig>
 	<BOUCLE_articles_orig(ARTICLES){id_rubrique=#GET{id_rubrique}}{par num #GET{tri_num}}{inverse #GET{tri_num_inverse}}{par #GET{tri_alpha}}{inverse #GET{tri_alpha_inverse}}{origine_traduction}{0,#GET{articles_max_affiches}}>
 		<BOUCLE_trad(ARTICLES){traduction}{id_rubrique=#GET{id_rubrique}}{lang=#ENV{lang}}>
-		<li class="menu-entree item menu-items__item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
+		<li class="menu-entree item menu-items__item menu-items__item_objet menu-items__item_article[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
 			<a href="#URL_ARTICLE" class="menu-items__lien">#TITRE</a>
 		</li>
 		</BOUCLE_trad>
 		</B_trad>
-		<li class="menu-entree item menu-items__item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
+		<li class="menu-entree item menu-items__item menu-items__item_objet menu-items__item_article[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
 			<a href="#URL_ARTICLE" class="menu-items__lien">#TITRE</a>
 		</li>
 		<//B_trad>
 	</BOUCLE_articles_orig>
 	[(#GET{cpt}|>{#GET{articles_max_affiches}}|oui)
-    	<li><a class="suite menu-items__lien" href="[(#URL_RUBRIQUE|parametre_url{connect,''})]"><:menus:tous_les_articles:></a></li>	
-    ]
+		<li class="menu-entree item menu-items__item menu-items__item_objet menu-items__item_rubrique">
+			<a class="suite menu-items__lien" href="[(#URL_RUBRIQUE|parametre_url{connect,''})]"><:menus:tous_les_articles:></a>
+		</li>
+	]
 	</B_articles_orig>
 	</BOUCLE_env_trad>
 	</B_env_trad>
 	#SET{cpt,0}
 	<BOUCLE_cpt_articles(ARTICLES){id_rubrique=#GET{id_rubrique}}> </BOUCLE_cpt_articles>#SET{cpt,#TOTAL_BOUCLE}</B_cpt_articles>
 	<BOUCLE_articles(ARTICLES){id_rubrique=#GET{id_rubrique}}{par num #GET{tri_num}}{inverse #GET{tri_num_inverse}}{par #GET{tri_alpha}}{inverse #GET{tri_alpha_inverse}}{0,#GET{articles_max_affiches}}>
-		<li class="menu-entree item menu-items__item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
+		<li class="menu-entree item menu-items__item menu-items__item_objet menu-items__item_article[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
 			<a href="#URL_ARTICLE" class="menu-items__lien">#TITRE</a>
 		</li>
 	</BOUCLE_articles>
 	[(#GET{cpt}|>{#GET{articles_max_affiches}}|oui)
-    	<li><a class="suite menu-items__lien" href="[(#URL_RUBRIQUE|parametre_url{connect,''})]"><:menus:tous_les_articles:></a></li>	
-    ]
+		<li class="menu-entree item menu-items__item menu-items__item_objet menu-items__item_rubrique">
+			<a class="suite menu-items__lien" href="[(#URL_RUBRIQUE|parametre_url{connect,''})]"><:menus:tous_les_articles:></a>
+		</li>
+	]
 	</B_articles>
 	<//B_env_trad>
 </BOUCLE_appel>
