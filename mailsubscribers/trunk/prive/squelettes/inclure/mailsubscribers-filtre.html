@@ -31,7 +31,9 @@
 
 	<h3>Envois à #ENV{recherche}</h3>
 
-	<INCLURE{fond=prive/objets/liste/mailshots_destinataires,email=#GET{emails},nb=100,par=date,env,recherche='',sinon=<:mailshot:info_aucun_envoi:>}>
+	<div class="dest_un_destinataire">
+		<INCLURE{fond=prive/objets/liste/mailshots_destinataires,email=#GET{emails},nb=100,par=date,env,recherche='',sinon=<:mailshot:info_aucun_envoi:>}>
+	</div>
 
 ]
 
