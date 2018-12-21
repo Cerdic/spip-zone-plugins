@@ -92,8 +92,17 @@ class MailsubscribinglistClean extends Command {
 		$output->writeln("<info>Mailsubscribers vus vivants depuis $from : " . count($id_mailsubscribers_alive) . "</info>");
 
 		// trouver tous les zombies
-		$id_mailsubscribers_zombies = sql_allfetsel('id_mailsubscriber', 'spip_mailsubscribers', "statut='valide' AND " . sql_in('id_mailsubscriber', $id_mailsubscribers_alive, 'NOT'));
-		$id_mailsubscribers_zombies = array_column($id_mailsubscribers_zombies, 'id_mailsubscriber');
+		$zombies = sql_allfetsel('id_mailsubscriber, email', 'spip_mailsubscribers', "statut='valide' AND " . sql_in('id_mailsubscriber', $id_mailsubscribers_alive, 'NOT'));
+		$id_mailsubscribers_zombies = array_column($zombies, 'id_mailsubscriber');
+
+		// ceux a qui on a rien envoye depuis from ne sont pas des vrais zombies mais surement des nouveaux inscrits, on les enleve donc
+		$email_zombies = array_column($zombies, 'email');
+		$email_vrai_zombies = sql_allfetsel('distinct email', 'spip_mailshots_destinataires', sql_in('statut', array('todo', 'fail'), 'NOT') . ' AND ' .sql_in('email', $email_zombies) . ' AND date>' . sql_quote($from));
+		$email_vrai_zombies = array_column($email_vrai_zombies, 'email');
+		$zombies = sql_allfetsel('id_mailsubscriber, email', 'spip_mailsubscribers', "statut='valide' AND " . sql_in('email', $email_vrai_zombies));
+		$id_mailsubscribers_zombies = array_column($zombies, 'id_mailsubscriber');
+
+
 		$output->writeln("Mailsubscribers zombies depuis $from : " . count($id_mailsubscribers_zombies));
 
 
