@@ -524,7 +524,6 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 			} else {
 				$condition = preg_replace('#@(.+)@#U', '$env["valeurs"][\'$1\']', $condition);
 			}
-
 			/**
 			 * Tester si la condition utilise des champs qui sont des tableaux
 			 * Si _request() ou $env["valeurs"] est un tableau, changer == et != par in_array et !in_array
@@ -616,4 +615,63 @@ function saisies_verifier_securite_afficher_si($condition) {
 	}
 	//Sinon c'est que c'est bon
 	return true;
+}
+
+/**
+ * Teste une condition d'afficher_si
+ * @param string|array champ le champ à tester. Cela peut être :
+ *	- un string
+ *	- un tableau
+ *	- un tableau sérializé
+ * @param string $operateur : l'opérateur:
+ *	- IN
+ *	- !IN
+ *	- ==
+ *	- !=
+ *	@param string $valeur la valeur à tester pour un IN. Par exemple "23" ou encore "23", "25"
+ * @return booleen false / true selon la condition
+ **/
+function saisies_tester_condition_afficher_si($champ, $operateur, $valeur) {
+	// Dans tous les cas, enlever les guillemets qui sont au sein de valeur
+	$valeur = str_replace("'", "", $valeur);
+	$valeur = str_replace('"', "", $valeur);
+
+	//Si champ est de type string, tenter d'unserializer
+	$tenter_unserialize = @unserialize($champ);
+	if ($tenter_unserialize)  {
+		$champ = $tenter_unserialize;
+	}
+
+	//Et maintenant appeler les sous fonctions qui vont bien
+	if (is_string($champ)) {
+		return saisies_tester_condition_afficher_si_string($champ, $operateur, $valeur);
+	}  elseif (is_array($champ)) {
+		return saisies_tester_condition_afficher_si_array($champ, $operateur, $valeur);
+	} else {
+		return false;
+	}
+}
+
+
+
+function saisies_tester_condition_afficher_si_string($champ, $operateur, $valeur) {
+	if ($operateur == "==") {
+		return $champ == $valeur;
+	} elseif ($operateur == "!=") {
+		return $champ != $valeur;
+	} else {//Si mauvaise operateur -> on annule
+		return false;
+	}
+}
+
+function saisies_tester_condition_afficher_si_array($champ, $operateur, $valeur) {
+	// Convertir les valeurs en vrai tableau
+	$valeur = explode(",", $valeur);
+	$intersection = array_intersect($champ, $valeur);
+	if ($operateur == "==" or $operateur == "IN") {
+		return count($intersection) > 0;
+	} else {
+		return count($intersection) == 0;
+	}
+	return false;
 }
