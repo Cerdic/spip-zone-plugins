@@ -192,8 +192,8 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 		return array();
 	}
 	// Economiser un peu de calcul, notamment pour formidable
-	static $precedent_saisies;
-	static $precedent_env;
+	static $precedent_saisies = array();
+	static $precedent_env = array();
 	if ($precedent_saisies == $saisies and $precedent_env == $env) {
 		return $saisies;
 	}
