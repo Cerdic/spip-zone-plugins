@@ -503,26 +503,30 @@ function formidable_raccourcis_arobases_2_valeurs_champs($chaine, $saisies, $bru
  * On met les résultats en statiques pour gagner un peu de temps
  */
 function formidable_tableau_valeurs_saisies($saisies, $sans_reponse = true) {
-	if ($sans_reponse === true) {
-		$sans_reponse =  _T('saisies:sans_reponse');
-	}
 	if (isset($valeurs)) {
 		return array($valeurs,$valeurs_libellees);
 	}
 	// On parcourt les champs pour générer le tableau des valeurs
 	static $valeurs = array();
 	static $valeurs_libellees = array();
+	if ($sans_reponse === true) {
+		$sans_reponse =  _T('saisies:sans_reponse');
+	}
+	include_spip('inc/saisies_afficher_si');
+	$saisies_apres_afficher_si = saisies_verifier_afficher_si($saisies);
 	$saisies_fichiers = saisies_lister_avec_type($saisies, 'fichiers');
-	$saisies_explication = saisies_lister_avec_type($saisies, 'explication');
 	$saisies_par_nom = saisies_lister_par_nom($saisies);
+	$saisies_par_nom_apres_afficher_si = saisies_lister_par_nom($saisies_apres_afficher_si);
 	$champs = saisies_lister_champs($saisies);
+
+
 	// On n'utilise pas formulaires_formidable_fichiers,
 	// car celui-ci retourne les saisies fichiers du formulaire dans la base… or, on sait-jamais,
 	// il peut y avoir eu une modification entre le moment où l'utilisateur a vu le formulaire et maintenant
 	foreach ($champs as $champ) {
 		if (array_key_exists($champ, $saisies_fichiers)) {// si on a affaire à une saisie de type fichiers, on considère qu'il n'y pas vraiment de valeur brute
-		} elseif (array_key_exists($champ, $saisies_explication)) {
-			$valeurs[$champ] = $saisies_par_nom[$champ]['options']['texte'];
+		} elseif ($saisies_par_nom[$champ]['saisie'] == 'explication') {
+			$valeurs[$champ] = $saisies_par_nom_apres_afficher_si[$champ]['options']['texte'];
 			$valeurs_libellees[$champ] =  $valeurs[$champ];
 		}	else {
 			// On récupère la valeur postée

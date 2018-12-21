@@ -1,7 +1,7 @@
 <paquet
 	prefix="formidable"
 	categorie="communication"
-	version="3.34.0"
+	version="3.34.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/formidable-64.png"
@@ -38,7 +38,7 @@
 
 	<pipeline nom="corbeille_table_infos" inclure="formidable_pipelines.php" />
 	<necessite nom="spip_bonux" compatibilite="[3.3.8;[" />
-	<necessite nom="saisies" compatibilite="[3.8.11;[" />
+	<necessite nom="saisies" compatibilite="[3.10.0;[" />
 	<necessite nom="verifier" compatibilite="[1.6.2;[" />
 	<necessite nom="yaml" compatibilite="[1.5.2;[" />
 	<necessite nom="facteur" compatibilite="[3.5.2;[" />
