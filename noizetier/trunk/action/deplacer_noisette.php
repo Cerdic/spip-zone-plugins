@@ -37,22 +37,20 @@ function action_deplacer_noisette_dist() {
 
 	// Test de l'autorisation
 	include_spip('inc/noizetier_conteneur');
-	if (!autoriser('configurerpage', 'noizetier', '', 0, noizetier_conteneur_decomposer($id_conteneur_origine))
-	or !autoriser('configurerpage', 'noizetier', '', 0, noizetier_conteneur_decomposer($id_conteneur_destination))) {
-		include_spip('inc/minipres');
-		echo minipres();
-		exit();
-	}
+	if (autoriser('configurerpage', 'noizetier', '', 0, noizetier_conteneur_decomposer($id_conteneur_origine))
+	or autoriser('configurerpage', 'noizetier', '', 0, noizetier_conteneur_decomposer($id_conteneur_destination))) {
+		// Déplacement de la noisette dans le conteneur destination au rang choisi.
+		include_spip('inc/ncore_noisette');
+		$deplacer = noisette_deplacer('noizetier', $id_noisette, $id_conteneur_destination, $rang);
 
-	// Déplacement de la noisette dans le conteneur destination au rang choisi.
-	include_spip('inc/ncore_noisette');
-	$deplacer = noisette_deplacer('noizetier', $id_noisette, $id_conteneur_destination, $rang);
-
-	if ($deplacer) {
-		$done = true;
-		$success = array($id_noisette);
+		if ($deplacer) {
+			$done = true;
+			$success = array($id_noisette);
+		} else {
+			// TODO : remettre le rang d'origine
+			$errors = array(_T('erreur'));
+		}
 	} else {
-		// TODO : remettre le rang d'origine
 		$errors = array(_T('erreur'));
 	}
 
