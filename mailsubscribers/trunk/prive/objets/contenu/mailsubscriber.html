@@ -58,6 +58,8 @@
 
 <h3>Envois</h3>
 
+<div class="dest_un_destinataire">
 <INCLURE{fond=prive/objets/liste/mailshots_destinataires,email=#ENV{email}|sinon{#EMAIL},nb=100,par=date,env,sinon=<:mailshot:info_aucun_envoi:>}>
+</div>
 
 </BOUCLE_mailsubscriber>
