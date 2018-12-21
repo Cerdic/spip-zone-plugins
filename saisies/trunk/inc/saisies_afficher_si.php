@@ -229,7 +229,11 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 					unset($saisies[$cle]);
 				}
 				if (is_null($env)) {
-					saisies_set_request_null_recursivement($saisie);
+					if ($saisie['saisie'] == 'explication') {
+						unset($saisies[$cle]);
+					} else {
+						saisies_set_request_null_recursivement($saisie);
+					}
 				}
 			}
 		}
@@ -238,7 +242,6 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 			$saisies[$cle]['saisies'] = saisies_verifier_afficher_si($saisies[$cle]['saisies'], $env);
 		}
 	}
-
 	return $saisies;
 }
 
