@@ -118,7 +118,7 @@ class MailsubscribinglistClean extends Command {
 			$id_mailsubscribers_prop = sql_allfetsel("DISTINCT id_mailsubscriber", 'spip_mailsubscriptions', sql_in('id_mailsubscriber',$id_mailsubscribers_inscrits_a_rien). " AND statut='prop' AND id_segment=0");
 			$id_mailsubscribers_prop = array_column($id_mailsubscribers_prop, 'id_mailsubscriber');
 			if (count($id_mailsubscribers_prop)) {
-				$this->io->care(count($id_mailsubscribers_prop) . ' sont en fait en attente de confirmation : ' . implode(', ', array_slice($id_mailsubscribers_prop,0, 10)) . ' ...');
+				$this->io->care(count($id_mailsubscribers_prop) . ' sont en fait en attente de confirmation : ' . MailsubscribinglistClean::extraitListe($id_mailsubscribers_prop));
 				if (
 					$input->getOption('yes')
 					or $this->io->confirm("Repasser les " . count($id_mailsubscribers_prop) . " subscribers en prop ?", false)
@@ -131,7 +131,7 @@ class MailsubscribinglistClean extends Command {
 
 			// desinscrire ceux qui ne sont vraiment inscrits a riens
 			if (count($id_mailsubscribers_inscrits_a_rien)) {
-				$this->io->care(count($id_mailsubscribers_inscrits_a_rien) . ' ne sont inscrits a rien : ' . implode(', ', array_slice($id_mailsubscribers_inscrits_a_rien,0, 10)) . ' ...');
+				$this->io->care(count($id_mailsubscribers_inscrits_a_rien) . ' ne sont inscrits a rien : ' . MailsubscribinglistClean::extraitListe($id_mailsubscribers_inscrits_a_rien));
 				if (
 					$input->getOption('yes')
 					or $this->io->confirm("Desinscrire les " . count($id_mailsubscribers_inscrits_a_rien) . " inscrits a rien ?", false)
@@ -147,6 +147,7 @@ class MailsubscribinglistClean extends Command {
 
 		$nb_unsub = count($id_mailsubscribers_unsub);
 		$this->io->care("Mailsubscribers a désabonner".($listes ? " des listes ". implode(',',$listes) : '') . " : " . $nb_unsub);
+		$this->io->text(MailsubscribinglistClean::extraitListe($id_mailsubscribers_unsub, 20));
 
 		// compter par liste pour indication
 		$details = sql_allfetsel("id_mailsubscribinglist, count(id_mailsubscriber) as N", 'spip_mailsubscriptions', sql_in('id_mailsubscriber',$id_mailsubscribers_zombies). " AND statut='valide' AND id_segment=0" . $in_listes,'id_mailsubscribinglist');
@@ -210,5 +211,18 @@ class MailsubscribinglistClean extends Command {
 			$unsubscribe($email, $options);
 		}
 
+	}
+
+	public static function extraitListe($liste, $nb = 10) {
+
+		if (count($liste)<= $nb) {
+			return implode(', ', $liste);
+		}
+		$out =
+			implode(', ', array_slice($liste,0, intval($nb/2)))
+			. ' ... '
+			. implode(', ', array_slice($liste,-intval($nb/2)))
+		;
+		return $out;
 	}
 }
