@@ -5,6 +5,7 @@
 	points,-1
 }})]#SET{autoreload,''}[(#SET{recherche,[(#ENV{recherche}|?{[%(#ENV{recherche})%],'%'})]})]<B_mailshot_dest>
 #ANCRE_PAGINATION
+[<h3>(#ENV*{titre_liste})</h3>]
 <div class="liste-objets mailshots_destinataires">
 <table class='spip liste'>
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{mailshot:info_1_mailshot_destinataire,mailshot:info_nb_mailshots_destinataires}})</strong></caption>]
