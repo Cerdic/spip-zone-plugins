@@ -59,71 +59,101 @@
 				2 => '!=',
 				3 => '"a"',
 			),
-			"array_presence_test_recoupement_double_egal" => array (
+			"array_presence_test_double_egal" => array (
 				0 => true,
 				1 => array("2","3"),
 				2 => '==',
 				3 => '"2"',
 			),
-			"array_presence_test_recoupement_double_egal_serialize" => array (
+			"array_presence_test_double_egal_serialize" => array (
 				0 => true,
 				1 => serialize(array("2","3")),
 				2 => '==',
 				3 => '"2"',
 			),
-			"array_identique_test_recoupement_double_egal" => array (
+			"array_presence_test_IN" => array (
 				0 => true,
 				1 => array("2","3"),
-				2 => '==',
-				3 => '"3","2"',
+				2 => 'IN',
+				3 => '"2"',
 			),
-			"array_identique_test_recoupement_double_egal_serialize" => array (
+			"array_presence_test_IN_serialize" => array (
 				0 => true,
 				1 => serialize(array("2","3")),
-				2 => '==',
-				3 => '"3","2"',
+				2 => 'IN',
+				3 => '"2"',
 			),
-			"array_recoupement_test_recoupement_double_egal" => array (
-				0 => true,
-				1 => array("2","3"),
-				2 => '==',
-				3 => '"3","4"',
-			),
-			"array_recoupement_test_recoupement_double_egal_serialize" => array (
-				0 => true,
-				1 => serialize(array("2","3")),
-				2 => '==',
-				3 => '"3","4"',
-			),
-			"array_sans_recoupement_test_recoupement_double_egal" => array (
+			"array_presence_test_double_egal_faux" => array (
 				0 => false,
 				1 => array("2","3"),
 				2 => '==',
-				3 => '"1","4"',
+				3 => '"4"',
 			),
-			"array_sans_recoupement_test_recoupement_double_egal_serialize"=> array (
+			"array_presence_test_double_egal_faux_serialize" => array (
 				0 => false,
 				1 => serialize(array("2","3")),
 				2 => '==',
-				3 => '"1","4"',
+				3 => '"4"',
 			),
-			"array_recoupement_test_non_recoupement_negation" => array (
-				0 => true,
-				1 => array("2","3"),
-				2 => '!=',
-				3 => '"1","4"',
-			),
-			"array_recoupement_test_non_recoupement_negation_IN" => array (
-				0 => true,
-				1 => array("2","3"),
-				2 => '!IN',
-				3 => '"1","4"',
-			),
-			"array_recoupement_test_recoupement_negation_IN" => array (
+			"array_presence_test_IN_faux" => array (
 				0 => false,
 				1 => array("2","3"),
 				2 => 'IN',
-				3 => '"1","4"',
+				3 => '"4"',
+			),
+			"array_presence_test_IN_faux_serialize" => array (
+				0 => false,
+				1 => serialize(array("2","3")),
+				2 => 'IN',
+				3 => '"4"',
+			),
+			"array_absence_test_negation_faux" => array (
+				0 => false,
+				1 => array("2","3"),
+				2 => '!=',
+				3 => '"2"',
+			),
+			"array_absence_test_negation_faux_serialize" => array (
+				0 => false,
+				1 => serialize(array("2","3")),
+				2 => '!=',
+				3 => '"2"',
+			),
+			"array_absence_test_NOT_IN_faux" => array (
+				0 => false,
+				1 => array("2","3"),
+				2 => '!IN',
+				3 => '"2"',
+			),
+			"array_absence_test_NOT_IN_serialize" => array (
+				0 => false,
+				1 => serialize(array("2","3")),
+				2 => '!IN',
+				3 => '"2"',
+			),
+			"array_absence_test_neagation" => array (
+				0 => true,
+				1 => array("2","3"),
+				2 => '!=',
+				3 => '"4"',
+			),
+			"array_absence_test_negation_serialize" => array (
+				0 => true,
+				1 => serialize(array("2","3")),
+				2 => '!=',
+				3 => '"4"',
+			),
+			"array_absence_test_NOT_IN" => array (
+				0 => true,
+				1 => array("2","3"),
+				2 => '!IN',
+				3 => '"4"',
+			),
+			"array_presence_test_NOT_IN_serialize" => array (
+				0 => true,
+				1 => serialize(array("2","3")),
+				2 => '!IN',
+				3 => '"4"',
 			),
 		);
 		return $essais;
