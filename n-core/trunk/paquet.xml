@@ -1,7 +1,7 @@
 <paquet
 	prefix="ncore"
 	categorie="outil"
-	version="0.5.12"
+	version="0.5.13"
 	etat="dev"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="ncore-32.png"

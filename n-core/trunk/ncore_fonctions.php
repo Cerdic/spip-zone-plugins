@@ -254,6 +254,7 @@ function noisette_contextualiser($plugin, $noisette, $type_noisette, $environnem
 			cache_ecrire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_CONTEXTE, $contextes_type_noisette[$plugin]);
 		}
 	}
+
 	// -- on inverse les index et valeurs du tableau de contexte pour obtenir un tableau similaire au contexte.
 	$contexte_type_noisette = array_flip(unserialize($contextes_type_noisette[$plugin][$type_noisette]));
 
@@ -263,7 +264,7 @@ function noisette_contextualiser($plugin, $noisette, $type_noisette, $environnem
 	// - env ou vide => l'environnement complet également.
 	// - une liste de variables => on renvoie également l'intersection de cette liste avec l'environnement.
 	if (!isset($contexte_type_noisette['aucun'])) {
-		if (isset($contexte_noisette['env'])) {
+		if (isset($contexte_type_noisette['env'])) {
 			$contexte = array_merge($environnement, $contexte);
 		} else {
 			$contexte = array_merge(array_intersect_key($environnement, $contexte_type_noisette), $contexte);
