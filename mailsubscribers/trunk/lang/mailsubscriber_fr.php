@@ -121,6 +121,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_mailsubscriber' => 'Logo de cet inscrit',
 	'titre_mailsubscriber' => 'Inscrit à la newsletter',
 	'titre_mailsubscribers' => 'Inscrits aux envois par email',
+	'titre_recherche_email' => 'Email &#171; @email@ &#187;',
+	'titre_recherche_envois' => 'Envois à &#171; @email@ &#187;',
 
 	// U
 	'unsubscribe_deja_texte' => 'L’adresse email @email@ n’est pas inscrite à cette newsletter',

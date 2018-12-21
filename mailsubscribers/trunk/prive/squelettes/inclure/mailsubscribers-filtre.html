@@ -20,19 +20,20 @@
 #FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 <div class="nettoyeur"></div>
 
+[
+	<h3><:resultats_recherche:> &#171;&nbsp;(#ENV{recherche})&nbsp;&#187;</h3>
+]
 <INCLURE{fond=prive/objets/liste/mailsubscribers,par=num email,statut=#GET{statut},nb=20,env,ajax,sinon=<:mailsubscriber:info_aucun_mailsubscriber:>}>
 
 [(#ENV{recherche}|oui)
 
-	<h3>Email #ENV{recherche}</h3>
-
+	[(#SET{titre_liste,#VAL{mailsubscriber:titre_recherche_email}|_T{#ARRAY{email,#ENV{recherche}}}})]
 	[(#SET{emails,[(#LISTE{[(#ENV{recherche}|trim)],[(#ENV{recherche}|trim|email_variante_obfusquee)]})]})]
-	<INCLURE{fond=prive/objets/liste/mailsubscribers,email=#GET{emails},statut=all,nb=20,env,recherche='',sinon=<:mailsubscriber:info_aucun_mailsubscriber:>}>
+	<INCLURE{fond=prive/objets/liste/mailsubscribers,email=#GET{emails},statut=all,nb=20,env,recherche='',sinon='',titre_liste=#GET{titre_liste}}>
 
-	<h3>Envois à #ENV{recherche}</h3>
-
+	[(#SET{titre_liste,#VAL{mailsubscriber:titre_recherche_envois}|_T{#ARRAY{email,#ENV{recherche}}}})]
 	<div class="dest_un_destinataire">
-		<INCLURE{fond=prive/objets/liste/mailshots_destinataires,email=#GET{emails},nb=100,par=date,env,recherche='',sinon=<:mailshot:info_aucun_envoi:>}>
+		<INCLURE{fond=prive/objets/liste/mailshots_destinataires,email=#GET{emails},nb=100,par=date,env,recherche='',sinon='',titre_liste=#GET{titre_liste}}>
 	</div>
 
 ]

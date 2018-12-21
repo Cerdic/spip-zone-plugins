@@ -5,6 +5,7 @@
 	points,-1
 }})]<B_mailsubscribers>
 #ANCRE_PAGINATION
+[<h3>(#ENV*{titre_liste})</h3>]
 <div class="liste-objets mailsubscribers">
 <table class='spip liste'>
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{mailsubscriber:info_1_mailsubscriber,mailsubscriber:info_nb_mailsubscribers}})</strong></caption>]
@@ -35,5 +36,6 @@
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
 </B_mailsubscribers>[
+[<h3>(#ENV*{titre_liste})</h3>]
 <div class="liste-objets mailsubscribers caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
 ]<//B_mailsubscribers>
