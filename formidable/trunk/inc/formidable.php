@@ -513,15 +513,18 @@ function formidable_tableau_valeurs_saisies($saisies, $sans_reponse = true) {
 	static $valeurs = array();
 	static $valeurs_libellees = array();
 	$saisies_fichiers = saisies_lister_avec_type($saisies, 'fichiers');
+	$saisies_explication = saisies_lister_avec_type($saisies, 'explication');
 	$saisies_par_nom = saisies_lister_par_nom($saisies);
 	$champs = saisies_lister_champs($saisies);
-
 	// On n'utilise pas formulaires_formidable_fichiers,
 	// car celui-ci retourne les saisies fichiers du formulaire dans la base… or, on sait-jamais,
 	// il peut y avoir eu une modification entre le moment où l'utilisateur a vu le formulaire et maintenant
 	foreach ($champs as $champ) {
 		if (array_key_exists($champ, $saisies_fichiers)) {// si on a affaire à une saisie de type fichiers, on considère qu'il n'y pas vraiment de valeur brute
-		} else {
+		} elseif (array_key_exists($champ, $saisies_explication)) {
+			$valeurs[$champ] = $saisies_par_nom[$champ]['options']['texte'];
+			$valeurs_libellees[$champ] =  $valeurs[$champ];
+		}	else {
 			// On récupère la valeur postée
 			$valeurs[$champ] = _request($champ);
 			$valeurs_libellees[$champ] = formidable_nettoyer_saisie_vue(recuperer_fond(
