@@ -338,9 +338,6 @@ function saisies_verifier_securite_afficher_si($condition) {
  **/
 function saisies_tester_condition_afficher_si($champ, $operateur, $valeur) {
 	// Dans tous les cas, enlever les guillemets qui sont au sein de valeur
-	$valeur = str_replace("'", "", $valeur);
-	$valeur = str_replace('"', "", $valeur);
-
 	//Si champ est de type string, tenter d'unserializer
 	$tenter_unserialize = @unserialize($champ);
 	if ($tenter_unserialize)  {
