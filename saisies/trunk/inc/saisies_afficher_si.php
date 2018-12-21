@@ -302,7 +302,7 @@ function saisies_set_request_null_recursivement($saisie) {
 }
 
 /**
- * Vérifie qu'on tente pas de faire executer du code PHP en utilisant afficher_si.
+ * Vérifie qu'on ne tente pas de faire executer du code PHP en utilisant afficher_si.
  * N'importe quoi autorisé entre @@ et "" et ''
  * Liste de mot clé autorisé en dehors
  * @param string $condition
@@ -334,7 +334,7 @@ function saisies_verifier_securite_afficher_si($condition) {
  *	- ==
  *	- !=
  *	@param string $valeur la valeur à tester pour un IN. Par exemple "23" ou encore "23", "25"
- * @return booleen false / true selon la condition
+ * @return bool false / true selon la condition
  **/
 function saisies_tester_condition_afficher_si($champ, $operateur, $valeur) {
 	// Dans tous les cas, enlever les guillemets qui sont au sein de valeur
@@ -357,8 +357,17 @@ function saisies_tester_condition_afficher_si($champ, $operateur, $valeur) {
 	}
 }
 
-
-
+/**
+ * Teste un condition d'afficher_si lorsqu'il s'agit d'une chaîne
+ * @param string champ le champ à tester.
+ * @param string $operateur : l'opérateur:
+ *	- IN
+ *	- !IN
+ *	- ==
+ *	- !=
+ *	@param string $valeur la valeur à tester pour un IN. Par exemple "23" ou encore "23", "25"
+ * @return bool false / true selon la condition
+**/
 function saisies_tester_condition_afficher_si_string($champ, $operateur, $valeur) {
 	if ($operateur == "==") {
 		return $champ == $valeur;
@@ -369,6 +378,17 @@ function saisies_tester_condition_afficher_si_string($champ, $operateur, $valeur
 	}
 }
 
+/**
+ * Teste un condition d'afficher_si lorsqu'il s'agit d'un tableau
+ * @param array champ le champ à tester.
+ * @param string $operateur : l'opérateur:
+ *	- IN
+ *	- !IN
+ *	- ==
+ *	- !=
+ * @param string $valeur la valeur à tester pour un IN. Par exemple "23" ou encore "23", "25"
+ * @return bool false / true selon la condition
+**/
 function saisies_tester_condition_afficher_si_array($champ, $operateur, $valeur) {
 	// Convertir les valeurs en vrai tableau
 	$valeur = explode(",", $valeur);
