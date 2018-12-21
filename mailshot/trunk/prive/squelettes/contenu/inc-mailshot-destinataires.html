@@ -1,34 +1,13 @@
-[
+<BOUCLE_statuts(POUR){tableau #LISTE{todo,sent,read,clic,spam,fail}}>[
 	[(#GET{un}|non)
 		#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 		<div class="nettoyeur"></div>
 	]
-	<h2><:mailshot:titre_envois_destinataires_todo:></h2>#SET{un,' '}
-	<div class="dest_todo">
-	(#INCLURE{fond=prive/objets/liste/mailshots_destinataires,env,statut=#LISTE{todo},ajax})
+	<h2>[(#VAL{mailshot:titre_envois_destinataires_}|concat{#VALEUR}|_T)]</h2>#SET{un,' '}
+	<div class="dest_un_statut dest_#VALEUR">
+		(#INCLURE{fond=prive/objets/liste/mailshots_destinataires,env,statut=#VALEUR,ajax})
 	</div>
-]
-
-[
-	[(#GET{un}|non)
-		#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
-		<div class="nettoyeur"></div>
-	]
-	<h2><:mailshot:titre_envois_destinataires_ok:></h2>#SET{un,' '}
-	(#INCLURE{fond=prive/objets/liste/mailshots_destinataires,env,par=date,statut=#LISTE{sent,read,clic,spam},ajax})
-]
-
-[
-	[(#GET{un}|non)
-		#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
-		<div class="nettoyeur"></div>
-	]
-	<h2><:mailshot:titre_envois_destinataires_fail:></h2>#SET{un,' '}
-	<div class="dest_fail">
-	(#INCLURE{fond=prive/objets/liste/mailshots_destinataires,env,par=date,statut=#LISTE{fail},ajax})
-	</div>
-]
-
+]</BOUCLE_statuts>
 [(#GET{un}|non)
 	[(#ENV{recherche}|oui)
 		#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
