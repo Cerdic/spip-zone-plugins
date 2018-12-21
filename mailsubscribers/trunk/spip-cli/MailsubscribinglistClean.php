@@ -96,9 +96,46 @@ class MailsubscribinglistClean extends Command {
 		$id_mailsubscribers_zombies = array_column($id_mailsubscribers_zombies, 'id_mailsubscriber');
 		$output->writeln("Mailsubscribers zombies depuis $from : " . count($id_mailsubscribers_zombies));
 
+
 		// et restreindre aux listes demandées uniquement (si besoin)
 		$id_mailsubscribers_unsub = sql_allfetsel("DISTINCT id_mailsubscriber", 'spip_mailsubscriptions', sql_in('id_mailsubscriber',$id_mailsubscribers_zombies). " AND statut='valide' AND id_segment=0" . $in_listes);
 		$id_mailsubscribers_unsub = array_column($id_mailsubscribers_unsub, 'id_mailsubscriber');
+
+		// trouver les inscrits a rien
+		if (!$in_listes
+		  and count($id_mailsubscribers_inscrits_a_rien = array_diff($id_mailsubscribers_zombies, $id_mailsubscribers_unsub))) {
+
+			// il y en a peut etre des prop dans le lot, on les repasse en prop
+			$id_mailsubscribers_prop = sql_allfetsel("DISTINCT id_mailsubscriber", 'spip_mailsubscriptions', sql_in('id_mailsubscriber',$id_mailsubscribers_inscrits_a_rien). " AND statut='prop' AND id_segment=0");
+			$id_mailsubscribers_prop = array_column($id_mailsubscribers_prop, 'id_mailsubscriber');
+			if (count($id_mailsubscribers_prop)) {
+				$this->io->care(count($id_mailsubscribers_prop) . ' sont en fait en attente de confirmation : ' . implode(', ', array_slice($id_mailsubscribers_prop,0, 10)) . ' ...');
+				if (
+					$input->getOption('yes')
+					or $this->io->confirm("Repasser les " . count($id_mailsubscribers_prop) . " subscribers en prop ?", false)
+				){
+					sql_updateq("spip_mailsubscribers", array('statut' => 'prop'), sql_in('id_mailsubscriber', $id_mailsubscribers_prop));
+					$this->io->check(count($id_mailsubscribers_prop) . ' corrigés');
+				}
+				$id_mailsubscribers_inscrits_a_rien = array_diff($id_mailsubscribers_inscrits_a_rien, $id_mailsubscribers_prop);
+			}
+
+			// desinscrire ceux qui ne sont vraiment inscrits a riens
+			if (count($id_mailsubscribers_inscrits_a_rien)) {
+				$this->io->care(count($id_mailsubscribers_inscrits_a_rien) . ' ne sont inscrits a rien : ' . implode(', ', array_slice($id_mailsubscribers_inscrits_a_rien,0, 10)) . ' ...');
+				if (
+					$input->getOption('yes')
+					or $this->io->confirm("Desinscrire les " . count($id_mailsubscribers_inscrits_a_rien) . " inscrits a rien ?", false)
+				){
+					$emails_arien = sql_allfetsel('email', 'spip_mailsubscribers', sql_in('id_mailsubscriber', $id_mailsubscribers_inscrits_a_rien));
+					$emails_arien = array_column($emails_arien, 'email');
+					MailsubscribinglistClean::unsubscribeAll($this->io, $emails_arien, $options);
+					$this->io->check(count($id_mailsubscribers_inscrits_a_rien) . ' corrigés');
+				}
+			}
+		}
+
+
 		$nb_unsub = count($id_mailsubscribers_unsub);
 		$this->io->care("Mailsubscribers a désabonner".($listes ? " des listes ". implode(',',$listes) : '') . " : " . $nb_unsub);
 
