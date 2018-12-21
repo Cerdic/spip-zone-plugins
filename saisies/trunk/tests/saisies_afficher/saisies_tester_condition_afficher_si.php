@@ -12,7 +12,7 @@
 	while (!is_dir($remonte."ecrire"))
 		$remonte = "../$remonte";
 	require $remonte.'tests/test.inc';
-	find_in_path("../plugins/saisies/inc/saisies_afficher.php",'',true);
+	find_in_path("../plugins/saisies/inc/saisies_afficher_si.php",'',true);
 
 	// chercher la fonction si elle n'existe pas
 	if (!function_exists($f='saisies_tester_condition_afficher_si')){
