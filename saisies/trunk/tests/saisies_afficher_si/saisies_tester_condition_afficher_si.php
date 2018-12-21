@@ -35,6 +35,10 @@
 
 	function essais_saisies_tester_condition_afficher_si(){
 		$essais = array (
+			"champ_uniquement" => array(
+				0 => true,
+				1 => "case_1",
+			),
 			"chaines_egales_test_egalite" => array (
 				0 => true,
 				1 => 'a',

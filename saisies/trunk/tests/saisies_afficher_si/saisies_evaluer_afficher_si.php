@@ -22,6 +22,7 @@
 
 
 	// Preparer les requests
+	set_request("case_1", "oui");
 	set_request("a", "a");
 	set_request("b", "b");
 	set_request("c", "c");
@@ -95,6 +96,10 @@
 				0 => true,
 				1 => "@tableau_1@ !IN 'b' || @tableau_2@ !IN 'c'"
 			),
+			'champ_uniquement' => array(
+				0 => true,
+				1 => "@case_1@"
+			)
 		);
 		return $essais;
 	}

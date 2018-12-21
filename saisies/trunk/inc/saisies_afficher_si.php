@@ -293,10 +293,12 @@ function saisies_verifier_securite_afficher_si($condition) {
 **/
 function saisies_transformer_condition_afficher_si($condition, $env = null) {
 	$regexp = "(?:@(?<champ>.+?)@)" // @champ_@
+		. "(" // partie operateur + valeur (optionnelle) : debut
 		. "(?:\s*?)" // espaces éventuels après
 		. "(?<operateur>==|!=|IN|!IN)" // opérateur
 		. "(?:\s*?)" // espaces éventuels après
-		. "(?<guillemet>\"|')(?<valeur>.*?)(\k<guillemet>)"; // valeur
+		. "(?<guillemet>\"|')(?<valeur>.*?)(\k<guillemet>)" // valeur
+		. ")?"; // partie operateur + valeur (optionnelle) : fin
 	$regexp = "#$regexp#";
 	if (preg_match_all($regexp, $condition, $tests, PREG_SET_ORDER)) {
 		foreach ($tests as $test) {
@@ -307,8 +309,8 @@ function saisies_transformer_condition_afficher_si($condition, $env = null) {
 			} else {
 				$champ = $env["valeurs"][$champ];
 			}
-			$operateur = $test['operateur'];
-			$valeur = $test['valeur'];
+			$operateur = isset($test['operateur']) ? $test['operateur'] : null;
+			$valeur = isset($test['valeur']) ? $test['valeur'] : null;
 			$test_modifie = saisies_tester_condition_afficher_si($champ, $operateur, $valeur) ? 'true' : 'false';
 			$condition = str_replace($expression, $test_modifie, $condition);
 		}
@@ -330,7 +332,12 @@ function saisies_transformer_condition_afficher_si($condition, $env = null) {
  *	@param string $valeur la valeur à tester pour un IN. Par exemple "23" ou encore "23", "25"
  * @return bool false / true selon la condition
  **/
-function saisies_tester_condition_afficher_si($champ, $operateur, $valeur) {
+function saisies_tester_condition_afficher_si($champ, $operateur=null, $valeur=null) {
+	// Si operateur null => on test juste qu'un champ est cochée / validé
+	if ($operateur === null and $valeur === null) {
+		return isset($champ) and $champ;
+	}
+
 	// Dans tous les cas, enlever les guillemets qui sont au sein de valeur
 	//Si champ est de type string, tenter d'unserializer
 	$tenter_unserialize = @unserialize($champ);
