@@ -4,7 +4,7 @@
 	version="0.5.13"
 	etat="dev"
 	compatibilite="[3.2.0;3.2.*]"
-	logo="ncore-32.png"
+	logo="ncore_logo-32.png"
 >
 <!-- Icon : https://www.shareicon.net/3d-interface-shapes-cube-cubes-squares-geometrical-shapes-and-symbols-823704 -->
 	<nom>N-Core</nom>
