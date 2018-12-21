@@ -6,9 +6,13 @@
 	</dl>
 
 	<BOUCLE_champs(POUR){tableau #SAISIES*|unserialize|saisies_lister_par_nom{0}}>
-	[(#SET{label, [(#VALEUR|table_valeur{options}|table_valeur{label})]})]
-	[(#SET{label_case, [(#VALEUR|table_valeur{options}|table_valeur{label_case})]})]
-	
+	[(#VALEUR{saisie}|=={explication}|oui)
+		#SET{label,#VALEUR{options/texte}}
+	]
+	[(#VALEUR{saisie}|=={explication}|non)
+		[(#SET{label, [(#VALEUR|table_valeur{options}|table_valeur{label})]})]
+		[(#SET{label_case, [(#VALEUR|table_valeur{options}|table_valeur{label_case})]})]
+	]
 	<dl>
 		<dt>@#CLE@</dt>
 		[<dd>(#GET{label}|sinon{#GET{label_case}})</dd>]
