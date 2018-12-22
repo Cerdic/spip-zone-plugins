@@ -333,7 +333,7 @@ function OpenTag($tag,$e,$LineFeedHeight)
 	if ($tag=='IMG') {
 		$this->SRC=extraire_attribut($e,'src');
 		//élimine les ?34423/ABC345 qui suive le nom de fichier
-		$this->SRC = preg_replace(',[?].*+$,','',$this->SRC);
+		$this->SRC = supprimer_timestamp($this->SRC);
 
 		// si l'image est manquante mettre un lien avec le texte alt
 		if (!@getimagesize($this->SRC)){

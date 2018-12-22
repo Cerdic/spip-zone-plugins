@@ -1,7 +1,7 @@
 <paquet
 	prefix="article_pdf"
 	categorie="edition"
-	version="1.0.9"
+	version="1.0.10"
 	etat="stable"
 	compatibilite="[3.1.0;3.2.*]"
 	logo="prive/themes/spip/images/article_pdf-64.png"
