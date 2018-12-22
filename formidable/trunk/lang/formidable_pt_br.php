@@ -37,7 +37,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_objets_explication' => 'Escolher os conteúdos a que os formulários podem ser vinculados.',
 	'cfg_objets_label' => 'Vincular os formulários aos conteúdos',
 	'cfg_titre_page_configurer_formidable' => 'Configurar Formidable',
-	'cfg_titre_parametrages_analyse' => 'Parâmetros de análise das respostas',
 	'champs' => 'Campos',
 	'changer_statut' => 'Este formulário está:',
 	'creer_dossier_formulaire_erreur_impossible_creer' => 'Não foi possível criar a pasta @dossier@,  necessária para armazenar os arquivos. Verifique os direitos de acesso.',

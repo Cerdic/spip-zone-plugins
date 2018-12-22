@@ -52,7 +52,7 @@ $(document).ready(function(){
 					$reponses = "<small> - " + $reponses + "</small>";
 				}
 				$text = "\
-				<div class='[(#CONFIG{formidable/analyse/classe}) ]progress-bar'>\
+				<div class='[(#CONFIG{formidable/classe}) ]progress-bar'>\
 					<span></span><strong>" + $taux + "%" + $reponses + "</strong>\
 				</div>";
 				$(this).html($text).find('span').width($taux + '%');

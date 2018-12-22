@@ -51,7 +51,7 @@ function formulaires_importer_formulaire_traiter() {
 		} else {
 			$id_formulaire = intval($erreur_ou_id);
 			// Tout a fonctionné. En fonction de la config, on attribue l'auteur courant
-			$auteurs = lire_config('formidable/analyse/auteur');
+			$auteurs = lire_config('formidable/auteur');
 			if ($auteurs == 'on') {
 				if ($id_auteur = session_get('id_auteur')) {
 					// association (par défaut) du formulaire et de l'auteur courant

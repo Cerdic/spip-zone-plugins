@@ -57,8 +57,8 @@ function formidable_autoriser_par_auteur($id, $id_auteur = 0) {
 */
 function formidable_auteur_admin_reponse($qui) {
 	// L'auteur peut-il administrer les réponses ?
-	$admin_reponses_auteur = lire_config('formidable/analyse/admin_reponses_auteur');
-	$auteurs = lire_config('formidable/analyse/auteur');
+	$admin_reponses_auteur = lire_config('formidable/admin_reponses_auteur');
+	$auteurs = lire_config('formidable/auteur');
 	$is_admin = (isset($qui['statut']) and $qui['statut'] == '0minirezo');
 	$retour = ($is_admin or (($auteurs == 'on') and ($admin_reponses_auteur == 'on')));
 
@@ -85,7 +85,7 @@ function formidable_autoriser() {
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_formulaire_editer_dist($faire, $type, $id, $qui, $opt) {
-	$auteurs = lire_config('formidable/analyse/auteur');
+	$auteurs = lire_config('formidable/auteur');
 	/* administrateur ? */
 	if (isset($qui['statut']) and $qui['statut'] == '0minirezo' and (count($qui['restreint']) == 0)) {
 		return true;
@@ -100,7 +100,7 @@ function autoriser_formulaire_editer_dist($faire, $type, $id, $qui, $opt) {
 	if (count($qui['restreint'])) {
 		$autoriser_admin_restreint = isset($GLOBALS['autoriser_admin_restreint'])
 				? $GLOBALS['autoriser_admin_restreint']
-					: lire_config('formidable/analyse/autoriser_admin_restreint') == 'on'
+					: lire_config('formidable/autoriser_admin_restreint') == 'on'
 						? true
 						: false;
 

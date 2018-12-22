@@ -32,7 +32,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		<code>orange</code>, <code>green</code> o las que quieras!', # MODIF
 	'cfg_analyse_classe_label' => 'Clase CSS de la barra de progreso',
 	'cfg_titre_page_configurer_formidable' => 'Configurar Formidable',
-	'cfg_titre_parametrages_analyse' => 'Configuración en el análisis de respuestas',
 	'champs' => 'Campos',
 	'changer_statut' => 'Este formulario es:',
 

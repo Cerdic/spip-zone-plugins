@@ -57,7 +57,7 @@ function formulaires_editer_formulaire_traiter($id_formulaire, $nouveau) {
 		// Si c'était un nouveau on reste sur l'édition
 		if (!intval($id_formulaire) and $nouveau == 'oui') {
 			// Tout a fonctionné. En fonction de la config, on attribue l'auteur courant
-			$auteurs = lire_config('formidable/analyse/auteur');
+			$auteurs = lire_config('formidable/auteur');
 			if ($auteurs == 'on') {
 				if ($id_auteur = session_get('id_auteur')) {
 					// association (par défaut) du formulaire et de l'auteur courant

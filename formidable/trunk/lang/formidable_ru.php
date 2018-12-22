@@ -27,7 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_titre_page_configurer_formidable' => 'Настройки Formidable',
-	'cfg_titre_parametrages_analyse' => 'Настройки просмотра ответов',
 	'champs' => 'Поля',
 	'changer_statut' => 'Статус формы:',
 

@@ -94,6 +94,9 @@ function formidable_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.11.0'] = array(
 		array('formidable_migrer_anonymisation')
 	);
+	$maj['0.12.0'] = array(
+		array('formidable_migrer_config')
+	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -314,6 +317,17 @@ function formidable_migrer_resume_reponse() {
 	sql_alter("TABLE spip_formulaires DROP COLUMN resume_reponse");
 
 }
+
+
+/**
+ * migre la config depuis formidable/analyse vers formidable
+**/
+function formidable_migrer_config() {
+	include_spip('inc/config');
+	$config = lire_config("formidable/analyse");
+	effacer_config("formidable/analyse");
+	ecrire_config("formidable", $config);
+}
 /**
  * Désinstallation/suppression des tables de formidable
  *
@@ -501,3 +515,4 @@ function formidable_importer_forms_donnees() {
 		} while ($rows = sql_allfetsel('*', 'spip_forms_donnees', sql_in('id_form', array_keys($trans)).' AND id_formulaires_reponse=0', '', 'id_donnee', '0,100'));
 	}
 }
+

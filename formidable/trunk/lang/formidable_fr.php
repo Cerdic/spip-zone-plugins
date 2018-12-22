@@ -37,7 +37,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_objets_explication' => 'Choisir les contenus auxquels pourront être liés les formulaires.',
 	'cfg_objets_label' => 'Lier les formulaires aux contenus',
 	'cfg_titre_page_configurer_formidable' => 'Configurer Formidable',
-	'cfg_titre_parametrages_analyse' => 'Paramétrages de l’analyse des réponses',
 	'champs' => 'Champs',
 	'changer_statut' => 'Ce formulaire est :',
 	'creer_dossier_formulaire_erreur_impossible_creer' => 'Impossible de créer le dossier @dossier@,  nécessaire pour stocker les fichiers. Vérifier les droits d’accès.',

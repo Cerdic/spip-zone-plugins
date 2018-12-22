@@ -44,7 +44,7 @@ function action_dupliquer_formulaire_dist($arg = null) {
 				'id_formulaire = '.$id_formulaire
 			);
 			// Tout a fonctionné. En fonction de la config, on attribue l'auteur courant
-			$auteurs = lire_config('formidable/analyse/auteur');
+			$auteurs = lire_config('formidable/auteur');
 			if ($auteurs == 'on') {
 				if ($id_auteur = session_get('id_auteur')) {
 					// association (par défaut) du formulaire et de l'auteur courant

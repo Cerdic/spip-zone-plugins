@@ -11,7 +11,7 @@
 		|parametre_url{avertissement,''}
 		|icone_horizontale{<:formidable:editer_menu_formulaire:>,formulaire-editer-24})]
 
-	[(#CONFIG{formidable/analyse/auteur}|=={on}|oui)
+	[(#CONFIG{formidable/auteur}|=={on}|oui)
 		[(#URL_ECRIRE{formulaire_edit}
 			|parametre_url{id_formulaire, #ID_FORMULAIRE}
 			|parametre_url{configurer,auteurs}

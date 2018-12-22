@@ -31,7 +31,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_titre_page_configurer_formidable' => 'إعداد ملحق الاستمارات',
-	'cfg_titre_parametrages_analyse' => 'إعداد وحدة تحليل الإجابات',
 	'champs' => 'الحقول',
 	'changer_statut' => 'هذه الاستمارة:',
 

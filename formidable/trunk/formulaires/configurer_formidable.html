@@ -1,6 +1,6 @@
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM">
 
-	<h3 class="titrem"><:formidable:cfg_titre_parametrages_analyse:></h3>
+	<h3 class="titrem"><:formidable:cfg_titre_page_configurer_formidable:></h3>
 
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -43,7 +43,6 @@
 				explication=<:formidable:cfg_analyse_classe_explication:>
 				})]
 		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
-		<input type="hidden" name="_meta_casier" value="formidable/analyse" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div>
 	</form>

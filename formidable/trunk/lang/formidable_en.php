@@ -42,7 +42,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_objets_explication' => 'Choose the content to which the forms can be linked.',
 	'cfg_objets_label' => 'Link forms to content',
 	'cfg_titre_page_configurer_formidable' => 'Configure Formidable',
-	'cfg_titre_parametrages_analyse' => 'Settings in the answers analysis',
 	'champs' => 'Fields',
 	'changer_statut' => 'This form is:',
 	'creer_dossier_formulaire_erreur_impossible_creer' => 'Impossible to create @dossier@ folder, needed to store files. Check access rights.',
