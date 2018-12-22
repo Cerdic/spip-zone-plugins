@@ -18,9 +18,9 @@
 	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
 
 	<licence>GNU/GPL v3</licence>
-	<necessite nom="saisies" compatibilite="[1.28.1;]" /> 
+	<necessite nom="saisies" compatibilite="[1.42.11;]" /> 
 	<necessite nom="verifier" compatibilite="[1.0.0;]" /> 
-	<necessite nom="yaml" compatibilite="[1.5.0;]" />
+	<necessite nom="yaml" compatibilite="[1.5.2;]" />
 	<necessite nom="facteur" compatibilite="[3.5.2;]" />
 	<utilise nom="commandes" compatibilite="[1.6.8;]" />
 	
