@@ -98,8 +98,6 @@ function WriteHTML($html,$LineFeedHeight)
 	//Parseur remis + loin pour l'édition du texte
 	//$html=$this->unhtmlentities($html);
 
-	// Supprimer les commentaires html
-	$html = preg_replace("/<!--(.|\s)*?-->/",'', $html);
 	$a=preg_split(',(<[/a-zA-Z].*>),Ums', $html, -1, PREG_SPLIT_DELIM_CAPTURE);
 
 	// $a = le tableau de tags
