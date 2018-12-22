@@ -70,12 +70,7 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 					$condition = preg_replace('#@plugin:'.$plug.'@#U', 'false', $condition);
 				}
 			}
-			// On gère le cas @config:plugin:meta@ suivi d'un test
-			preg_match_all('#@config:(.+):(.+)@#U', $condition, $matches);
-			foreach ($matches[1] as $plugin) {
-				$config = lire_config($plugin);
-				$condition = preg_replace('#@config:'.$plugin.':'.$matches[2][0].'@#U', '"'.$config[$matches[2][0]].'"', $condition);
-			}
+			$condition = saisies_transformer_condition_afficher_si_config($condition);
 			// On transforme en une condition valide
 			preg_match_all('#@(.+)@#U', $condition, $matches);
 			foreach ($matches[1] as $nom) {
@@ -224,12 +219,7 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 					$condition = preg_replace('#@plugin:'.$plug.'@#U', 'false', $condition);
 				}
 			}
-			// On gère le cas @config:plugin:meta@ suivi d'un test
-			preg_match_all('#@config:(.+):(.+)@#U', $condition, $matches);
-			foreach ($matches[1] as $plugin) {
-				$config = lire_config($plugin);
-				$condition = preg_replace('#@config:'.$plugin.':'.$matches[2][0].'@#U', '"'.$config[$matches[2][0]].'"', $condition);
-			}
+			$condition = saisies_transformer_condition_afficher_si_config($condition);
 			// On transforme en une condition PHP valide
 			$ok = saisies_evaluer_afficher_si($condition, $env);
 			if (!$ok) {
@@ -289,6 +279,25 @@ function saisies_verifier_securite_afficher_si($condition) {
 	}
 	//Sinon c'est que c'est bon
 	return true;
+}
+
+/**
+ * Prend un test conditionnel
+ * cherche dedans les test @config:xxx@
+ * remplace par la valeur de la config
+ * @param string condition;
+ * @return string condition;
+**/
+function saisies_transformer_condition_afficher_si_config($condition) {
+	include_spip("inc/config");
+	preg_match_all('#@config:(.*)@#U', $condition, $matches, PREG_SET_ORDER);
+	foreach ($matches as $plugin) {
+		$arobase = $plugin[0];
+		$config_a_tester = str_replace(":", "/", $plugin[1]);
+		$config = lire_config($config_a_tester);
+		$condition = str_replace($arobase, '"'.$config.'"', $condition);
+	}
+	return $condition;
 }
 
 /**
