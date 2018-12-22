@@ -321,7 +321,7 @@ function formidable_migrer_resume_reponse() {
 
 
 /**
- * migre la config depuis formidable/analyse vers formidable
+ * Migre la config depuis formidable/analyse vers formidable
 **/
 function formidable_migrer_config() {
 	include_spip('inc/config');
@@ -356,7 +356,7 @@ function formidable_vider_tables($nom_meta_base_version) {
 	if ($trouver_table('spip_forms_donnees')) {
 		sql_alter('TABLE spip_forms_donnees DROP id_formulaires_reponse');
 	}
-	// On efface la version entregistrée
+	// On efface la version enregistrée
 	effacer_config("formidable");
 	effacer_meta($nom_meta_base_version);
 }
