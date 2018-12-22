@@ -356,6 +356,10 @@ function formidable_vider_tables($nom_meta_base_version) {
 	if ($trouver_table('spip_forms_donnees')) {
 		sql_alter('TABLE spip_forms_donnees DROP id_formulaires_reponse');
 	}
+	// Effacer les PJ
+	include_spip('inc/formidable_fichiers');
+	supprimer_repertoire(_DIR_FICHIERS_FORMIDABLE);
+
 	// On efface la version enregistrée
 	effacer_config("formidable");
 	effacer_meta($nom_meta_base_version);
