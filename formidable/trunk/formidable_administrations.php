@@ -338,6 +338,7 @@ function formidable_migrer_config() {
 function formidable_vider_tables($nom_meta_base_version) {
 
 	include_spip('inc/meta');
+	include_spip('inc/config');
 	include_spip('base/abstract_sql');
 
 	// On efface les tables du plugin
@@ -355,6 +356,7 @@ function formidable_vider_tables($nom_meta_base_version) {
 		sql_alter('TABLE spip_forms_donnees DROP id_formulaires_reponse');
 	}
 	// On efface la version entregistrée
+	effacer_config("formidable");
 	effacer_meta($nom_meta_base_version);
 }
 
