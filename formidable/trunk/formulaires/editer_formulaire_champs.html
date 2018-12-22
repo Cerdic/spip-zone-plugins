@@ -3,7 +3,7 @@
 	<p class="explication message_saisies_modifiees"><strong><:saisies:construire_attention_enregistrer:></strong></p>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	
+
 	[(#ENV*{message_erreur}|non)
 	<div class="ajax">
 		#FORMULAIRE_CONSTRUIRE_FORMULAIRE{#ENV{saisie_id}, #ENV{_saisies}}
@@ -12,7 +12,7 @@
 
 	[(#ENV{editable}|oui)
 	<form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
-		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 

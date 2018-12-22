@@ -5,7 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 /**
-* CNIL -- Informatique et libertes
+ * CNIL -- Informatique et libertes
 *
 * masquer le numero IP des vieilles réponses
 * date de reference = 4 mois
