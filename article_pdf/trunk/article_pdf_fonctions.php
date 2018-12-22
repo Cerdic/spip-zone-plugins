@@ -20,6 +20,7 @@ function pdf_first_clean($texte){
 	// PB avec l'utilisation de <code>
 	$trans = get_html_translation_table(HTML_ENTITIES);
 	$texte = preg_replace(',<!.*-->,msU', '', $texte); // supprimer les remarques HTML (du Couteau Suisse ?) + les <!--[if IE] --> et co (pdfjson)
+	$texte = preg_replace(",<script.*<\/script,smU", '', $texte); // supprimer le js (ex: insertion de carte, etc)
 	$trans = array_flip($trans);
 	$trans["<br />\n"] = "<BR>";        // Pour éviter que le \n ne se tranforme en espace dans les <DIV class=spip_code> (TT, tag SPIP : code)
 	$trans['&#176;'] = "°";
