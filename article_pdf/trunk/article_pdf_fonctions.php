@@ -38,7 +38,7 @@ function pdf_first_clean($texte){
 	$trans['&nbsp;'] = ' ';
 	// certains titles font paniquer l'analyse
 	$texte = preg_replace(',title=".*",msU', 'title=""', $texte);
-	
+
 	$texte = unicode2charset(charset2unicode($texte), 'iso-8859-1'); // repasser tout dans un charset acceptable par export PDF
 	$texte = strtr($texte, $trans);
 
@@ -62,7 +62,7 @@ function pdf_nommer($titre_parent, $objet, $id_parent){
 //  au choix, selon le cas (voir les avantages et les inconvéniants de chaque selon le site):
 //	$path_pdf = sous_repertoire(_DIR_CACHE, "article_PDF"); // stockage dans le cache SPIP
 //	$path_pdf = sous_repertoire(_DIR_IMG, "article_PDF"); //stockage sous le dossier IMG
-	
+
 	include_spip('action/editer_url');
 	$titre = url_nettoyer($titre_parent,60);
 	$lettre = substr($objet, 0, 1);
@@ -73,15 +73,15 @@ function pdf_nommer($titre_parent, $objet, $id_parent){
 /**
  *
  * [(#TITRE|pdf_nommer_ancien{article, #ID_ARTICLE})]
- * 
+ *
 **/
 function pdf_nommer_ancien($titre_parent, $objet='article', $id_article){
-	
+
 	//$titre_article = translitteration(corriger_caracteres('[(#TITRE|supprimer_numero|pdf_first_clean|supprimer_tags|texte_script)]'));
 	$titre_article = translitteration(corriger_caracteres(texte_script(supprimer_tags(pdf_first_clean($titre_parent)))));
-	
+
 	// Reprise du code de urls/propres.php (pourquoi c'est pas une fonction de l'API de SPIP ?)
-	
+
 	// on va convertir tous les caracteres de ponctuation et espaces
 	// a l'exception de l'underscore (_), car on veut le conserver dans l'url
 	$titre_article = str_replace('_', chr(7), $titre_article);
@@ -130,5 +130,5 @@ function pdf_nommer_ancien($titre_parent, $objet='article', $id_article){
 
 	$files_pdf = $titre_article."_a".$id_article.".pdf";
 	return $files_pdf;
-	
+
 }
