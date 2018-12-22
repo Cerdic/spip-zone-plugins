@@ -101,6 +101,7 @@ Dies führt bei zahlreichem Versenden zu einer großen Datenmenge, weshalb es ra
 	'titre_envois_destinataires_fail' => 'Fehlgeschlagene Sendungen',
 	'titre_envois_destinataires_init_encours' => 'Kein Empfänger vorprogrammiert (wird initialisiert)',
 	'titre_envois_destinataires_ok' => 'Erfolgreiche Sendungen',
+	'titre_envois_destinataires_sent' => 'Erfolgreiche Sendungen',
 	'titre_envois_destinataires_todo' => 'Anstehende Sendungen',
 	'titre_envois_en_cours' => 'Versand wird ausgeführt',
 	'titre_envois_planifies' => 'Geplante Versendungen',

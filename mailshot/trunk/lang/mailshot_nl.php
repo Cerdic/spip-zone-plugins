@@ -103,6 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_envois_destinataires_fail' => 'Mislukte mailings',
 	'titre_envois_destinataires_init_encours' => 'Geen ontvanger geprogrammeerd ( initialisatie in uitvoering)',
 	'titre_envois_destinataires_ok' => 'Verzending geslaagd',
+	'titre_envois_destinataires_sent' => 'Verzending geslaagd',
 	'titre_envois_destinataires_todo' => 'Toekomstige verzendingen',
 	'titre_envois_en_cours' => 'Bezig met verzenden',
 	'titre_envois_planifies' => 'Geplande verzendingen',

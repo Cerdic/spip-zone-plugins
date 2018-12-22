@@ -101,6 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_envois_destinataires_fail' => 'الإرسالات التي فشلت',
 	'titre_envois_destinataires_init_encours' => 'لا يوجد اي مرسل اليه مبرمج (جاري التأصيل)',
 	'titre_envois_destinataires_ok' => 'الإرسالات الناجحة',
+	'titre_envois_destinataires_sent' => 'الإرسالات الناجحة',
 	'titre_envois_destinataires_todo' => 'إراسلات قادمة',
 	'titre_envois_en_cours' => 'إرسالات حالية',
 	'titre_envois_planifies' => 'إرسالات مبرمجة',

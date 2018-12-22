@@ -102,6 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_envois_destinataires_fail' => 'Failed Mailings',
 	'titre_envois_destinataires_init_encours' => 'No recipient programmed (initialization in progress)',
 	'titre_envois_destinataires_ok' => 'Shipments successful',
+	'titre_envois_destinataires_sent' => 'Shipments successful',
 	'titre_envois_destinataires_todo' => 'Mailings to come',
 	'titre_envois_en_cours' => 'Sending in progress',
 	'titre_envois_planifies' => 'Scheduled distributions',

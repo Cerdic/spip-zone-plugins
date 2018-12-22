@@ -103,6 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_envois_destinataires_fail' => '送信失敗',
 	'titre_envois_destinataires_init_encours' => 'どんな設定された宛先人もいません。（初期化中）',
 	'titre_envois_destinataires_ok' => '送信済み',
+	'titre_envois_destinataires_sent' => '送信済み',
 	'titre_envois_destinataires_todo' => '送信すべきメール',
 	'titre_envois_en_cours' => '送信中',
 	'titre_envois_planifies' => '計画送信',

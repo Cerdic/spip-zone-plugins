@@ -77,6 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_envois_destinataires_fail' => 'Ошибка',
 	'titre_envois_destinataires_init_encours' => 'Получатель не создан (инициализация в процессе)',
 	'titre_envois_destinataires_ok' => 'Доставлено',
+	'titre_envois_destinataires_sent' => 'Доставлено',
 	'titre_envois_destinataires_todo' => 'Ожидаемые рассылки',
 	'titre_envois_en_cours' => 'В процессе отправки...',
 	'titre_envois_termines' => 'Отправлено',
