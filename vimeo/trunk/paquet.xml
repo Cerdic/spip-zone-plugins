@@ -1,7 +1,7 @@
 <paquet
 	prefix="vimeo"
 	categorie="multimedia"
-	version="1.0.4"
+	version="1.0.5"
 	etat="test"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/vimeo-64.png"
@@ -21,10 +21,9 @@
 	<licence>GNU/GPL</licence>
 
 	<lib nom="vimeo" lien="https://github.com/vimeo/vimeo.php/archive/master.zip" />
-	<necessite nom="saisies" compatibilite="[2.18.23;]" />
+	<necessite nom="saisies" compatibilite="[2.28.00;]" />
 	<necessite nom="yaml" compatibilite="[1.5.3;]" />
-	<necessite nom="multilang" compatibilite="[1.2.2;]" />
-	<necessite nom="saisies" compatibilite="[2.4.0;]" />
+	<necessite nom="multilang" compatibilite="[1.3.0;]" />
 
 	<pipeline nom="autoriser" inclure="vimeo_autorisations.php" />
 
