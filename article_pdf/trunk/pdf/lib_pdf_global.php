@@ -8,7 +8,6 @@
 
  //  Fichier de dump pour debug
 define ('DUMP_FILE_FULL_PATH_NAME',"Dump.txt");
-
 class PDF extends FPDF
 {
 var $HREF;
@@ -347,7 +346,7 @@ function OpenTag($tag,$e,$LineFeedHeight)
 				$this->PutLink($this->HREF,"$alt");
 			}
 
-			spip_log('NO ? '.$e.' !@getimagesize pour'. $this->SRC.' alt ='.$alt,'article_pdf');
+			spip_log('NO ? '.$e.' !@getimagesize pour'. $this->SRC.' alt ='.$alt,'article_pdf'._LOG_AVERTISSEMENT);
 
 		} else {
 
