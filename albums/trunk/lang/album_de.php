@@ -117,7 +117,7 @@ Wenn die Dokumente verschoben wurden erscheint am Ende ders Liste ein Formular u
 
 	// M
 	'message_1_album_ajoute' => '1 Album wurde hinzugefügt.',
-	'message_activer_cfg_documents' => 'Aktivieren sie unter Konfiguration ->Inhalte der Website -> beigefügte Dokumente, die Checkbox für Alben.',
+	'message_activer_cfg_documents' => 'Aktivieren sie unter Konfiguration ->Inhalte der Website -> Dokumente, die Checkbox für Alben.',
 	'message_album_non_editable' => 'Dieses Album ist nicht editierbar: es wird von einem oder mehreren Objekten benutzt, die Sie nicht bearbeiten dürfen.',
 	'message_avertissement_cfg_documents' => 'Achtung! Das Hinzufügen von Dokumenten zu Alben ist nicht aktiviert. Dies ist notwendig  damit das Plugin Alben funktionieren kann.',
 	'message_balise_inseree_succes' => 'Der Tag wurde in den Text eingefügt.',

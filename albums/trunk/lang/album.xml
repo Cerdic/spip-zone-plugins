@@ -1,5 +1,6 @@
 <traduction module="album" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/albums/trunk/lang/" reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/album?lang_cible=de" total="115" traduits="115" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
 	<langue code="en" url="https://trad.spip.net/tradlang_module/album?lang_cible=en" total="115" traduits="110" relire="0" modifs="1" nouveaux="4" pourcent="95.65">
