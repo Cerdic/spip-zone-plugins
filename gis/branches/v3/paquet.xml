@@ -23,7 +23,7 @@
 	<traduire module="paquet-gis" reference="fr" gestionnaire="salvatore" />
 
 	<utilise nom="selecteurgenerique" compatibilite="[1.12;]" />
-	<necessite nom="saisies" compatibilite="[1.19.0;]" />
+	<necessite nom="saisies" compatibilite="[1.42.11;]" />
 	<lib nom="mxn-gis-2.4.11" lien="https://contrib.spip.net/IMG/zip/mxn-gis-2.4.11.zip" />
 
 	<pipeline
@@ -75,7 +75,7 @@
 	<pipeline
 		nom="xmlrpc_server_class"
 		inclure="gis_pipelines.php"
-	/>	
+	/>
 	<menu nom="gis_tous" titre="gis:icone_gis_tous" parent="menu_edition" icone="images/gis-16.png" />
 	<menu nom="configurer_gis" titre="gis:cfg_titre_gis" parent="menu_configuration" icone="images/gis-16.png" />
 	<menu nom="gis_nouveau" titre="gis:editer_gis_nouveau" parent="outils_rapides" icone="images/gis-new-16.png" action="gis_edit" parametres="new=oui" />

@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/diogene-128.png"
->	
+>
 
 	<nom>Diogene - Mots</nom>
 	<!-- Complément mots-clés pour "Diogene" -->
@@ -28,7 +28,7 @@
 
 	<necessite nom="diogene" compatibilite="[1.9.0;[" />
 	<necessite nom="mots" compatibilite="[2.4.6;[" />
-	<necessite nom="saisies" compatibilite="[1.26.2;[" />
+	<necessite nom="saisies" compatibilite="[1.42.11;[" />
 
 	<utilise nom="chosen" compatibilite="[1.4.3;[" />
 </paquet>

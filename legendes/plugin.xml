@@ -52,8 +52,10 @@
 		<nom>jqueryui_forcer</nom>
 		<inclure>legendes_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="saisies" version="[1.1;]" />
- 	<necessite id='SPIP' version='[2.1.0;3.1.99]' />
+
+ 	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
+	<necessite id="saisies" version="[1.42.11;]" />
 	<necessite id="jqueryui" version="[1.8.2;]" />
+
 	<utilise id="cfg" version="[1.14.4;]" />
 </plugin>

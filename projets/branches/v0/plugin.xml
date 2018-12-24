@@ -63,8 +63,8 @@
 		<inclure>projets_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.9;2.1.99]" />
-	<necessite id="spip_bonux" version="[1.8;]" />
+	<necessite id="spip_bonux" version="[1.8.0;]" />
 	<necessite id="cfg" version="[1.14.0;]" />
-	<necessite id="saisies" version="[1.2;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
 	<necessite id="gouverneur" version="[0.1.1;]" />
 </plugin>

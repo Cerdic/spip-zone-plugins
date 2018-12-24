@@ -19,11 +19,11 @@
 	<auteur lien='http://www.latribunedelart.fr'>La tribune de l'art</auteur>
 
 	<licence>GNU/GPL</licence>
-	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
+	<necessite nom="saisies" compatibilite="[1.42.11;]" /> 
 	<necessite nom="yaml" compatibilite="[1.5.0;]" /> 
 	<necessite nom="verifier" compatibilite="[0.1.18;]" /> 
 	<necessite nom="spip_bonux" compatibilite="[3.0.3;]" /> 
-	
+
 	<pipeline nom="autoriser" inclure="campagnes_autorisations.php" /> 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/campagnes.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/campagnes.php" />

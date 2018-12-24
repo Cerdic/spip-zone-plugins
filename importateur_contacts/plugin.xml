@@ -14,7 +14,7 @@
 	<icon>images/importateur_contacts-32.png</icon>
 	<traduire gestionnaire="salvatore" module="importateurcontacts" reference="fr" />
 	<lien>https://contrib.spip.net/?article3902</lien>
-	
+
 	<prefix>importateur_contacts</prefix>
 	<options>importateur_contacts_options.php</options>
 	<install>importateur_contacts_administrations.php</install>
@@ -25,5 +25,5 @@
 	<necessite id="SPIP" version="[2.1.10;3.0.99]" />
 	<necessite id="spip_bonux" version="[2.2.21;]" />
 	<necessite id="cvtm" version="[0.2.0;]" />
-	<necessite id="saisies" version="[1.11.0;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
 </plugin>

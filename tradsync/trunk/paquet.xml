@@ -1,9 +1,9 @@
 <paquet
 	prefix="tradsync"
 	categorie="edition"
-	version="2.0.1"
+	version="2.0.2"
 	etat="test"
-	compatibilite="[3.0.0-beta2;3.2.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/tradsync-32.png"
 >
 
@@ -16,11 +16,11 @@
 
 	<pipeline nom="autoriser" inclure="tradsync_autorisations.php" />
 
-	<necessite nom="saisies" compatibilite="[1.6.6;[" />
+	<necessite nom="saisies" compatibilite="[1.42.11;[" />
 	<necessite nom="tradrub" compatibilite="[2.0.0;[" />
 
 	<!-- pour #SET_PUSH , {compteur} et #COMPTEUR -->
-	<necessite nom="spip_bonux" compatibilite="[3.0.0-dev;[" />
+	<necessite nom="spip_bonux" compatibilite="[3.0.1;[" />
 
 	<menu nom="traductions" titre="tradsync:espace_traducteurs" parent="menu_publication" icone="images/tradsync-16.png" />
 </paquet>

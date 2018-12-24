@@ -19,7 +19,7 @@
 	<pipeline nom="autoriser" inclure="rubriqueur_autorisations.php"/>
 	<pipeline nom="header_prive" inclure="rubriqueur_pipelines.php"/>
 
-	<necessite nom="saisies" compatibilite="[2.0.3;[" />
+	<necessite nom="saisies" compatibilite="[2.28.0;[" />
 	<necessite nom="yaml" compatibilite="[1.5.3;[" />
 
 </paquet>

@@ -25,5 +25,5 @@
 	<pipeline nom="post_edition" inclure="podcast_pipelines.php" />
 	<pipeline nom="editer_contenu_objet" inclure="podcast_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite='[1.14.1;[' />
+	<necessite nom="saisies" compatibilite="[1.42.11;[" />
 </paquet>

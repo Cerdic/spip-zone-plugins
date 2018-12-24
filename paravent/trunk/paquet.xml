@@ -6,7 +6,7 @@
 	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/paravent-64.png"
 	documentation="https://contrib.spip.net/Paravent"
-	schema="1.1.0" 
+	schema="1.1.0"
 >
 	<nom>Paravent</nom>
 	<!-- Surcharge du plugin en travaux ouvrant le site aux auteurs identifiés -->
@@ -14,9 +14,9 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
+	<necessite nom="saisies" compatibilite="[1.42.11;]" /> 
 	<necessite nom="entravaux" compatibilite="[3.1.14;]" />
-	
+
 	<pipeline nom="autoriser" inclure="paravent_autorisations.php" />
 
 </paquet>

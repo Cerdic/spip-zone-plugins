@@ -66,7 +66,7 @@
 		<url>configurer_manuelsite</url>
 	</bouton>
 	<necessite id="SPIP" version="[2.1.0;3.2.99]" />
-	<necessite id="saisies" version="[1.9.0;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
 	<necessite id="spip_bonux" version="[2.2.23;]" />
 	<necessite id="yaml" version="[1.5.3;]" />
 	<utilise id="palette" version="[1.2.2;]" />

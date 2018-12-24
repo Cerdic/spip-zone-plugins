@@ -41,9 +41,9 @@
 		<inclure>soapsympa_header_prive.php</inclure>
 	</pipeline>
 	
-	<necessite id='SPIP' version='[2.1.0;3.0.99]' />
-	<necessite id='saisies' version='[1.5.0;]' />
-	<necessite id='spip_bonux' version='[1.0;]' />
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+	<necessite id="saisies" version="[1.42.11;]" />
+	<necessite id="spip_bonux" version="[2.3.6;]" />
 	
 	<bouton id='edition_soapsympa' parent='naviguer'>
 	<titre>soapsympa:edition_soapsympa</titre>

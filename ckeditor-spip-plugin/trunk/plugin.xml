@@ -101,15 +101,15 @@ _ &#1608;&#1607;&#1606;&#1575; &#1606;&#1587;&#1578;&#1582;&#1583;&#1605; &#1575
 
 	<icon>images/ckspip-logo.png</icon>
 	<necessite id="SPIP" version="[2.0.9;3.2.99]" />
-	<necessite id='saisies' version='[1.27.0;]' />
-	<necessite id='spip_bonux' version='[1.8.2;]' />
-	<necessite id='cfg' version='' />
-	<necessite id='YAML' version='[1.5.1;]' />
-	<utilise id='iterateurs' version='[0.2.4;]' />
-	<utilise id='crayons' version='[1.9.4;]' />
-	<necessite id='lib:ckeditor' src='http://download.cksource.com/CKEditor/CKEditor/CKEditor%203.6.6.2/ckeditor_3.6.6.2.zip' />
-	<utilise id='lib:html2spip-0.6' src='https://files.spip.net/contribs/html2spip-0.6.zip' />
-	<utilise id='lib:kcfinder-2.51' src='http://netcologne.dl.sourceforge.net/project/kcfinder/KCFinder/2.51/kcfinder-2.51.zip'/>
+	<necessite id="saisies" version="[1.42.11;]" />
+	<necessite id="spip_bonux" version="[1.8.2;]" />
+	<necessite id="cfg" version="" />
+	<necessite id="YAML" version="[1.5.1;]" />
+	<utilise id="iterateurs" version="[0.2.4;]" />
+	<utilise id="crayons" version="[1.9.4;]" />
+	<necessite id="lib:ckeditor" src="http://download.cksource.com/CKEditor/CKEditor/CKEditor%203.6.6.2/ckeditor_3.6.6.2.zip" />
+	<utilise id="lib:html2spip-0.6" src="https://files.spip.net/contribs/html2spip-0.6.zip" />
+	<utilise id="lib:kcfinder-2.51" src="http://netcologne.dl.sourceforge.net/project/kcfinder/KCFinder/2.51/kcfinder-2.51.zip"/>
 	<utilise id="couteau_suisse" version="[1.8.0.0;]" />
 	<install>inc/ckeditor_install.php</install>
 </plugin>

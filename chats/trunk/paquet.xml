@@ -1,9 +1,9 @@
 <paquet
 	prefix="chats"
 	categorie="edition"
-	version="2.0.3"
+	version="2.0.4"
 	etat="stable"
-	compatibilite="[3.0.0-alpha2;["
+	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/chat-128.png"
 	schema="1.6.0"
 	documentation="http://marcimat.magraine.net/?article356"
@@ -17,7 +17,6 @@
 
 	<credit lien="http://www.yootheme.com/icons">Logo de YOOtheme</credit>
 
-
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/chats.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/chats.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/chats.php" />
@@ -25,8 +24,7 @@
 	<pipeline nom="affiche_milieu" inclure="chats_pipelines.php" />
 
 	<!-- facilitons les champs de formulaires -->
-	<necessite nom="saisies" compatibilite="[1.14.0;]" />
-
+	<necessite nom="saisies" compatibilite="[3.11.1;]" />
 
 	<menu nom="chats" titre="chat:titre_chats" parent="menu_edition" icone="images/chat-16.png" />
 	<menu nom="chat_creer" titre="chat:icone_creer_chat" parent="outils_rapides" icone="images/chat-new-16.png" action="chat_edit" parametres="new=oui" />

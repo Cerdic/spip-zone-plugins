@@ -57,11 +57,11 @@ _ Icon from [Pawel Kadysz->http://oneseventyseven.com/]
 		<nom>post_edition</nom>
 		<inclure>spipicious_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version='[2.0.9;2.1.99]' />
-	<necessite id="SelecteurGenerique" version="[0.7;]" />
-	<necessite id='cfg' version='[1.10.1;]' />
-	<necessite id="saisies" version='[1.1;]' />
-	<utilise id="nuage" version='[3.2.1;]' />
+	<necessite id="SPIP" version="[2.0.9;2.1.99]" />
+	<necessite id="SelecteurGenerique" version="[0.7.0;]" />
+	<necessite id="cfg" version="[1.10.1;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
+	<utilise id="nuage" version="[3.2.1;]" />
 	<categorie>communication</categorie>
 	<traduire gestionnaire="salvatore" module="spipicious" reference="fr" />
 </plugin>

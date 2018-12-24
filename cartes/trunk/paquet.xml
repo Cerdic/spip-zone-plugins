@@ -8,12 +8,12 @@
 	documentation=""
 	schema="1.0.6"
 >
-	<nom>CrÃ©ation de cartes</nom>
+	<nom>Création de cartes</nom>
 
 	<auteur lien='http://www.kent1.info'>kent1</auteur>
 
 	<licence>GNU/GPL</licence>
-	<necessite nom="saisies" compatibilite="[1.24.0;]" />
+	<necessite nom="saisies" compatibilite="[1.42.11;]" />
 	<necessite nom="gis" compatibilite="[4.36.2;]" />
 	<necessite nom="gisgeom" compatibilite="[1.9.1;]" />
 	<necessite nom="roles_gis" compatibilite="[1.0.0;]" />

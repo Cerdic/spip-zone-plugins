@@ -62,7 +62,7 @@ _ This plugin requires [Contacts &amp; Organisations->https://files.spip.net/spi
 	<categorie>divers</categorie>
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="spip_bonux" version="[2.2.0;]" />
-	<necessite id="saisies" version="[1.8.0;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
 	<!-- pour la deco -->
 	<necessite id="afficher_objets" version="[1.1.0;]" />
 </plugin>

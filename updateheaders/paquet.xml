@@ -8,12 +8,12 @@
 	documentation="https://contrib.spip.net/update-headers"
 >
 	<nom>Update Headers</nom>
-	
+
 	<auteur lien="http://marc.brillault.fr">Marc Brillault</auteur>
-	
+
 	<credit lien="http://www.fatcow.com/free-icons">FatCow (Logo)</credit>
 	<credit>Gonzalo Moreno (Espagnol)</credit>
-	
+
 	<licence lien="http://creativecommons.org/licenses/by-sa/4.0/deed.fr">CC by-sa 4.0</licence>
 
 	<menu
@@ -29,6 +29,6 @@
 	<pipeline
 		nom="header_prive"
 		inclure="updateheaders_pipelines.php" />
-	
-	<necessite nom="saisies" compatibilite="[1.21.0;]" />
+
+	<necessite nom="saisies" compatibilite="[1.42.11;]" />
 </paquet>

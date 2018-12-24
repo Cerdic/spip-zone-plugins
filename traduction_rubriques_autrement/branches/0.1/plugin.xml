@@ -38,7 +38,7 @@
 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="spip_bonux" version="[2.2.14;]" />
 	<necessite id="tradrub" version="[2.1.0;]" />	
-	<necessite id="saisies" version="[1.8.12;]" />		
+	<necessite id="saisies" version="[1.42.11;]" />		
 	<utilise id="afficher_objets" version="[1.1.8;]" />	
 	<utilise id="taa" version="[0.1.5;]" />		
 	<traduire gestionnaire="salvatore" module="tra" reference="fr" />

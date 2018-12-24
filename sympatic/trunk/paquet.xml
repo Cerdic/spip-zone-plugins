@@ -22,7 +22,7 @@
 	<pipeline nom="post_edition" inclure="sympatic_pipelines.php" />
 	<pipeline nom="affiche_auteurs_interventions" inclure="sympatic_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[2.19.8;[" />
+	<necessite nom="saisies" compatibilite="[2.28.0;[" />
 
 	<menu nom="sympatic_tous" titre="sympatic:icone_sympatic_tous" parent="menu_edition" icone="images/sympatic-16.png" />
 </paquet>

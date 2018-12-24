@@ -20,7 +20,7 @@
 		</multi>
 	</description>
 	<icon>images/emballe_medias.png</icon>
-	<version>0.9.5</version>
+	<version>0.9.6</version>
 	<version_base>0.2.2</version_base>
 	<etat>stable</etat>
 	
@@ -81,21 +81,21 @@
 		<nom>autoriser</nom>
 		<inclure>emballe_medias_autoriser.php</inclure>
 	</pipeline>
-	<necessite id='SPIP' version='[2.1.2;2.1.99]' />
-	<necessite id='cfg' version='[1.14.4;]' />
-	<necessite id='saisies' version='[1.1;]' />
-	<necessite id='spip_bonux' version='[1.8;]' />
-	<necessite id='diogene' version='[0.4.1;]' />
-	<necessite id='swfupload' version='[0.2;]' />
+	<necessite id="SPIP" version="[2.1.2;2.1.99]" />
+	<necessite id="cfg" version="[1.14.4;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
+	<necessite id="spip_bonux" version="[2.3.6;]" />
+	<necessite id="diogene" version="[0.4.1;]" />
+	<necessite id="swfupload" version="[0.2.0;]" />
 	<necessite id="jqueryui" version="[1.8.5;]" />
-	<utilise id='ancres_douces' version='[1.2;]' />
-	<utilise id='palette' />
-	<utilise id='legendes' />
-	<utilise id='photo_infos' />
-	<utilise id='spipmotion' />
-	<utilise id='doc2img' />
-	<utilise id='diogene_licence' />
-	<utilise id='diogene_spipicious' />
-	<utilise id='diogene_gerer_auteurs' />
+	<utilise id="ancres_douces" version="[1.2.0;]" />
+	<utilise id="palette" />
+	<utilise id="legendes" />
+	<utilise id="photo_infos" />
+	<utilise id="spipmotion" />
+	<utilise id="doc2img" />
+	<utilise id="diogene_licence" />
+	<utilise id="diogene_spipicious" />
+	<utilise id="diogene_gerer_auteurs" />
 	<categorie>edition</categorie>
 </plugin>

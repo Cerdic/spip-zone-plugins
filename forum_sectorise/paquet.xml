@@ -9,7 +9,7 @@
 	documentation="https://contrib.spip.net/Forum-sectorise"
 >
 
-	<nom>Forum Sectoris&#233;</nom>
+	<nom>Forum Sectorisé</nom>
 	<!-- Configurer les forums par secteur -->
 
 	<auteur>Yffic</auteur>
@@ -22,7 +22,7 @@
 	<pipeline nom="ieconfig_metas" inclure="forumsectorise_ieconfig_metas.php" />
 	<pipeline nom="afficher_config_objet" inclure="forumsectorise_pipelines.php" />
 	
-	<necessite nom="saisies" compatibilite="[1.9.0;[" />
+	<necessite nom="saisies" compatibilite="[1.42.11;[" />
 	<necessite nom="forum" compatibilite="[1.8.43;[" />
 
 	<menu nom="forumsectorise" titre="forumsectorise:titre_menu" parent="bando_configuration" icone="images/forumsectorise-16.png" action="configurer_forumsectorise" />

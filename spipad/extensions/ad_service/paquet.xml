@@ -1,7 +1,7 @@
 <paquet
 	prefix="ad_service"
 	categorie="divers"
-	version="1.0.0"
+	version="1.0.1"
 	etat="dev"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/ad_service-64.png"
@@ -17,9 +17,8 @@
 	<auteur lien='http://montpel-libre.fr/'>Collectif SPIP - Montpellier</auteur>
 
 	<licence>GNU/GPL</licence>
-	<necessite nom="saisies" compatibilite="[1.21.0;]" />
+	<necessite nom="saisies" compatibilite="[1.42.11;]" />
 	<necessite nom="spipad" compatibilite="[1.0.1;]" />
-	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
 
 	<pipeline nom="autoriser" inclure="ad_service_autorisations.php" /> 
 

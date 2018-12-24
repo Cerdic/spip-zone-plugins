@@ -41,9 +41,9 @@
 		<nom>editer_contenu_objet</nom>
 		<inclure>podcast_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="saisies" version='[1.7.6;]' />
 	<necessite id="SPIP" version="[2.1.1;2.1.99]" />
-	<necessite id='spip_bonux' version='[1.8.10;]' />
-	<necessite id='cfg' version='[1.13.0;]' />
+	<necessite id="saisies" version="[1.42.11;]" />
+	<necessite id="spip_bonux" version="[1.8.10;]" />
+	<necessite id="cfg" version="[1.13.0;]" />
 	<categorie>multimedia</categorie>
 </plugin>

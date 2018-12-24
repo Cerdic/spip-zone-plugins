@@ -37,8 +37,8 @@
 		<url>configurer_jquerymasonry</url>
 	</bouton>
 	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
-	<necessite id="saisies" version="[1.9.0;]" />
-	<necessite id="YAML" version="[1.5;]" /> <!-- pour Saisies -->
-	<necessite id="spip_bonux" version="[1.8;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
+	<necessite id="YAML" version="[1.5.2;]" /> <!-- pour Saisies -->
+	<necessite id="spip_bonux" version="[2.3.6;]" />
 	<categorie>multimedia</categorie>
 </plugin>

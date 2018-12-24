@@ -7,7 +7,7 @@
 		</multi>
 	</slogan>
 	<auteur>jQuery Team</auteur>
-	<version>1.8.19</version>
+	<version>1.8.20</version>
 	<etat>stable</etat>
 	<description><multi>
 		[fr]De plus en plus de plugins int&#232;grent dans leurs fichiers des morceaux de la biblioth&#232;que [jQuery UI->http://jqueryui.com/] et ce dans des versions plus ou moins &#224; jour imposant ainsi de temps &#224; autre plusieurs versions de cette biblioth&#232;que en fonction du nombre de plugins install&#233;s sur un site.
@@ -37,7 +37,7 @@ This meta plugin takes care to properly manage the inclusion of the jQuery UI li
 	<pipeline><nom>jqueryui_forcer</nom></pipeline>
 	<necessite id="SPIP" version="[2.0.0;2.0.99]" />
 	<necessite id="lib:jquery.ui-1.6" src="http://jquery-ui.googlecode.com/files/jquery.ui-1.6.zip" />
-	<necessite id="saisies" />
+	<necessite id="saisies" version="[1.42.11;]" />
 	<categorie>outil</categorie>
 </plugin>
 <plugin spip="[2.1.0;2.1.99]">
@@ -49,7 +49,7 @@ This meta plugin takes care to properly manage the inclusion of the jQuery UI li
 		</multi>
 	</slogan>
 	<auteur>jQuery Team</auteur>
-	<version>1.8.19</version>
+	<version>1.8.20</version>
 	<etat>stable</etat>
 	<description><multi>
 		[fr]De plus en plus de plugins int&#232;grent dans leurs fichiers des morceaux de la biblioth&#232;que [jQuery UI->http://jqueryui.com/] et ce dans des versions plus ou moins &#224; jour imposant ainsi de temps &#224; autre plusieurs versions de cette biblioth&#232;que en fonction du nombre de plugins install&#233;s sur un site.
@@ -81,7 +81,7 @@ This meta plugin takes care to properly manage the inclusion of the jQuery UI li
 		<action>insert_head</action>
 	</pipeline>
 	<pipeline><nom>jqueryui_forcer</nom></pipeline>
-	<necessite id="saisies" />
+	<necessite id="saisies" version="[1.42.11;]" />
 	<utilise id="spip_bonux" />
 	<categorie>outil</categorie>
 </plugin>

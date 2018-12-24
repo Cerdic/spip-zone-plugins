@@ -19,9 +19,9 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/elements.php" /> 
 	<pipeline nom="afficher_fiche_objet" inclure="elements_pipelines.php" /> 
 
-	<necessite nom="saisies" compatibilite="[1.26.6;["/>
+	<necessite nom="saisies" compatibilite="[1.42.11;["/>
 	<necessite nom="verifier" compatibilite="[0.1.16;[" />
-	<necessite nom="yaml" compatibilite="[1.1;[" />
+	<necessite nom="yaml" compatibilite="[1.5.2;[" />
 
 	<menu nom="configurer_elements" titre="elements:elements_titre" parent="menu_squelette"  icone="images/elements-16.png" />
 

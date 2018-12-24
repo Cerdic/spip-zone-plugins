@@ -14,7 +14,7 @@
 	<auteur lien='https://www.erational.org'>erational</auteur>
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[2.0.3;]" />
+	<necessite nom="saisies" compatibilite="[2.28.0]" />
 
 	<pipeline nom="alertes_auteur" inclure="vacances_pipelines.php" />
 

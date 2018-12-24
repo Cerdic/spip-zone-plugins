@@ -8,17 +8,17 @@
 	documentation=""
 	schema="1.0.0" 
 >
-	<nom>AutocomplÃ©tion et gÃ©olocalisation</nom>
+	<nom>Autocomplétion et géolocalisation</nom>
 
 	<auteur>Dimitri EXBRAYAT</auteur>
 	<licence>GNU/GPL</licence>
-        
+
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/autocompletion_tables.php" />
 
 	<pipeline nom="jquery_plugins"  inclure="autocompletion_pipelines.php" />
 	<pipeline nom="insert_head"     inclure="autocompletion_pipelines.php" />
 	<pipeline nom="header_prive"    inclure="autocompletion_pipelines.php" />
-       
-        <necessite nom="saisies" compatibilite="[1.25.12;]" />
-       
+
+	<necessite nom="saisies" compatibilite="[1.42.11;]" />
+
 </paquet>

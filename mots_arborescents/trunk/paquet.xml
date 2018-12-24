@@ -1,9 +1,9 @@
 <paquet
 	prefix="motsar"
 	categorie="navigation"
-	version="1.1.6"
+	version="1.1.7"
 	etat="test"
-	compatibilite="[3.0.0;3.2.*]"
+	compatibilite="[3.0.4;3.2.*]"
 	logo="prive/themes/spip/images/motsar-64.png"
 	documentation="https://contrib.spip.net/4726"
 	schema="1.0.0" 
@@ -17,7 +17,7 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies"   compatibilite="[2.5.15;]" />
+	<necessite nom="saisies"   compatibilite="[2.28.0;]" />
 	<necessite nom="mots"      compatibilite="[2.4.8;]" />
 	<!-- necessite nom="querypath" compatibilite="[1.1.1;]" / -->
 

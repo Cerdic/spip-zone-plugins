@@ -3,7 +3,7 @@
 	categorie="auteur"
 	version="0.6.5"
 	etat="dev"
-	compatibilite="[2.1.10;3.0.99]"
+	compatibilite="[2.1.10;3.0.*]"
 	logo="images/clients-32.png"
 	schema="0.1"
 >
@@ -11,13 +11,13 @@
 	<nom>Clients</nom>
 	<!-- Formulaires pour clients -->
 
-	<auteur lien="http://www.ldd.fr">Les DÃ©veloppements Durables</auteur>
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 	<pipeline nom="header_prive" inclure="clients_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[1.9.0;[" />
+	<necessite nom="saisies" compatibilite="[1.42.11;[" />
 	<necessite nom="contacts" compatibilite="[2.10.2;[" />
 	<necessite nom="coordonnees" compatibilite="[2.1.0;[" />
 

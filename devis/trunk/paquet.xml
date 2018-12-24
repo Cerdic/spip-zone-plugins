@@ -18,8 +18,7 @@
 	<auteur>RastaPopoulos</auteur>
 
 	<licence>GNU/GPL</licence>
-	<necessite nom="saisies" compatibilite="[2.4.0;]" /> 
-
+	<necessite nom="saisies" compatibilite="[2.28.0;]" /> 
 
 	<pipeline nom="autoriser" inclure="devis_autorisations.php" /> 
 

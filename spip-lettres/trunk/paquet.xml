@@ -37,8 +37,8 @@
 	<pipeline nom="taches_generales_cron" inclure="inc/lettres_pipelines.php" />
 
 	<necessite nom="facteur" compatibilite="[3.5.2;[" />
-	<necessite nom="YAML" compatibilite="[1.5;[" />
-	<necessite nom="saisies" compatibilite="[1.9.6;[" />
+	<necessite nom="YAML" compatibilite="[1.5.2;[" />
+	<necessite nom="saisies" compatibilite="[1.42.11;[" />
 	<necessite nom="grenier" compatibilite="[0.2.1;[" />
 
 	<menu nom="lettres_tous" titre="lettresprive:lettres_information" parent="bando_edition" icone="images/lettre-16.png" action="lettres_tous" />

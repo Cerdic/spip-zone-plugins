@@ -141,11 +141,10 @@ _ {{Plugin spipbb en cours de developpement. Vous l\'utilisez &#224; vos risques
 		<inclure>spipbb_fonctions.php</inclure>
 	</pipeline>
 
-
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="cfg" version="[1.0.0;]" />
-	<necessite id="saisies" version="[1.7.7;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
 	<categorie>communication</categorie>
 	<traduire gestionnaire="salvatore" module="spipbb" reference="fr" />
 </plugin>

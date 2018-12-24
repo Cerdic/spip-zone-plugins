@@ -1,7 +1,7 @@
 <plugin>
 	<nom>GetText</nom>
 	<auteur>Matthieu Marcillaud</auteur>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	
 	<etat>dev</etat>
 	<description>
@@ -23,13 +23,13 @@
 	</bouton>
 
 	
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 
 	<!-- boucle POUR -->
-	<necessite id="spip_bonux" version="[1.0;]" />
+	<necessite id="spip_bonux" version="[1.0.0;]" />
 	<!-- #SAISIE -->
-	<necessite id="saisies" version="[1.0;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
 	<!-- cvt multi etapes -->
-	<necessite id="cvtm" version="[0.1;]" />
+	<necessite id="cvtm" version="[0.1.0;]" />
 
 </plugin>

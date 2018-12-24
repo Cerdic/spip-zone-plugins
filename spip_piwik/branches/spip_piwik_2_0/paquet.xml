@@ -23,5 +23,5 @@
 	<pipeline nom="header_prive" inclure="piwik_pipelines.php" />
 	<pipeline nom="formulaire_verifier" inclure="piwik_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[1.1;[" />
+	<necessite nom="saisies" compatibilite="[1.42.11;[" />
 </paquet>

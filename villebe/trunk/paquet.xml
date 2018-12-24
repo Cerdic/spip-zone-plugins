@@ -14,7 +14,7 @@
 	<auteur lien='http://p.henix.be'>Phenix</auteur>
 
 	<licence>GNU/GPL</licence>
-	<necessite nom="saisies" compatibilite="[2.0.3;]" />
+	<necessite nom="saisies" compatibilite="[2.28.0;]" />
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/villebe.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/villebe.php" />

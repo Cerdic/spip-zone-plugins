@@ -3,7 +3,7 @@
 	categorie="auteur"
 	version="1.0.3"
 	etat="test"
-	compatibilite="[3.1.0-rc;3.1.*]"
+	compatibilite="[3.1.0;3.1.*]"
 	logo="prive/themes/spip/images/simplesaml-64.png"
 	documentation=""
 	schema="1.1.0" 
@@ -21,6 +21,6 @@
 	<pipeline nom="preparer_composer_json" inclure="simplesaml_pipelines.php" />
 	<pipeline nom="trig_auth_trace" inclure="simplesaml_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[2.5.19;]" />
+	<necessite nom="saisies" compatibilite="[2.28.0;]" />
 	<necessite nom="composer" compatibilite="[1.0.0;1.*.*]" />
 </paquet>

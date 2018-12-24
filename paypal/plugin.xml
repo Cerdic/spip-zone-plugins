@@ -41,7 +41,7 @@
 	<traduire gestionnaire="salvatore" module="paypal" reference="fr" />
 	<necessite id="SPIP" version="[2.1.8;3.2.99]" />
 	<necessite id="spip_bonux" version="[2.3.3;]" />
-	<necessite id="saisies" version="[1.42.6;]" />
-	<utilise id="verifier" version="[0.1.6;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
+	<utilise id="verifier" version="[0.1.11;]" />
 	<categorie>outil</categorie>
 </plugin>

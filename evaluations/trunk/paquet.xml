@@ -17,7 +17,7 @@
 	<credit lien="http://bogo-d.deviantart.com/">Mihaiciuc Bogdan (icone visualisation des réponses)</credit>
 
 	<licence>GNU/GPL</licence>
-	<necessite nom="saisies" compatibilite="[1.24.0;]" />
+	<necessite nom="saisies" compatibilite="[1.42.11;]" />
 	<!-- pour les js des étoiles -->
 	<necessite nom="notation" compatibilite="[2.0.6;]" />
 	<necessite nom="verifier" compatibilite="[1.0.0;]" />

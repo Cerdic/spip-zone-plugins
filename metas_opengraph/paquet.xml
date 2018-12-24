@@ -1,11 +1,11 @@
 <paquet
 	prefix="metas_opengraph"
 	categorie="outil"
-	version="1.3"
+	version="1.3.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	schema="1.5.5"
->	
+>
 	<nom>Métadonnées OpenGraph, Twitter et Facebook</nom>
 
 	<auteur lien="http://www.paris-beyrouth.org">ARNO*</auteur>
@@ -14,10 +14,8 @@
 	<pipeline nom="declarer_champs_extras" inclure="base/metas_opengraph.php" />
 
 	<chemin path="squelettes" />
-	<necessite nom="saisies" compatibilite="[1.8.5;[" />
+	<necessite nom="saisies" compatibilite="[1.42.11;[" />
 	<necessite nom="cextras" compatibilite="[1.4.3;[" />
 	<necessite nom="centre_image" compatibilite="[0.8.0;[" />
-	
+
 </paquet>
-
-

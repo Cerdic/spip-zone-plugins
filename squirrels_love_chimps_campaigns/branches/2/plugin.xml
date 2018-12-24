@@ -12,7 +12,7 @@
 	<necessite id="squirrel_chimp" version="[2.0.0;]" />
 	<necessite id="squirrel_chimp_lists" version="[2.0.0;]" />
 	<necessite id="spip_bonux" version="[2.2.17;]" />
-	<necessite id="saisies" version='[1.9.9;]'/>	
+	<necessite id="saisies" version='[1.42.11;]'/>	
 	<pipeline>
 		<nom>squirrel_chimp_definitions</nom>		
 		<inclure>squirrel_chimp_campaigns_pipelines.php</inclure>
@@ -25,7 +25,7 @@
 		<nom>pre_edition</nom>		
 		<inclure>squirrel_chimp_campaigns_pipelines.php</inclure>
 	</pipeline>
-	
+
 	<fonctions>squirrel_chimp_campaigns_fonctions.php</fonctions>
 	<categorie>communication</categorie>
 	<traduire gestionnaire="salvatore" module="scc" reference="fr" />

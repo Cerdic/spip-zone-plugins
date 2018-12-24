@@ -15,8 +15,8 @@
 	<auteur>tofulm</auteur>
 	<licence>GNU/GPL</licence>
 
-  <necessite nom="saisies" compatibilite="[1.24.0;]" />
-  <pipeline nom="header_prive" inclure="csv2spip_pipelines.php" />
+	<necessite nom="saisies" compatibilite="[1.42.11;]" />
+	<pipeline nom="header_prive" inclure="csv2spip_pipelines.php" />
 	<menu nom="csv2spip" titre="csv2spip:csv2spip_titre" parent="menu_administration"  icone="images/csv2spip-16.png" />
 
 </paquet>

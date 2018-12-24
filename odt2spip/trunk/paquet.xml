@@ -18,7 +18,7 @@
 
 	<pipeline nom="affiche_gauche" inclure="odt2spip_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[2.18.0;]" />
+	<necessite nom="saisies" compatibilite="[2.42.0;]" />
 	<utilise nom="bigup" compatibilite="[1.0.0-dev;]" />
 
 	<genie nom="nettoyer_repertoire_upload" periode="3600" />

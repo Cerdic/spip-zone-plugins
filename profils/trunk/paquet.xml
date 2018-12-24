@@ -9,18 +9,18 @@
 	documentation=""
 >
 	<nom>Profils</nom>
-	
-	<auteur lien='https://www.ldd.fr'>Les DÃ©veloppements Durables</auteur>
+
+	<auteur lien='https://www.ldd.fr'>Les Développements Durables</auteur>
 	<auteur lien='https://www.mukt.fr'>Mukt</auteur>
 	<licence>GNU/GPL</licence>
-	
-	<necessite nom="saisies" compatibilite="[2.26.0;]" />
+
+	<necessite nom="saisies" compatibilite="[2.28.0;]" />
 	<necessite nom="spip_bonux" compatibilite="[3.4.6;]" />
 	<utilise nom="contacts" compatibilite="[3.1.0;]" />
 	<utilise nom="coordonnees" compatibilite="[2.3.28;]" />
 	<utilise nom="cextras" compatibilite="[3.11.4;]" />
 	<utilise nom="inscriptionmotdepasse" />
-	
+
 	<pipeline nom="autoriser" inclure="profils_autorisations.php" /> 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/profils.php" /> 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/profils.php" /> 

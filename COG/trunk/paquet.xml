@@ -17,7 +17,6 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>	
 	<copyright>2012</copyright>
 
-
 	<pipeline nom="autoriser" inclure="cog_autorisations.php" /> 	
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/cog.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/cog.php" /> 
@@ -29,8 +28,8 @@
 	<pipeline nom="jqueryui_plugins" inclure="cog_pipeline.php" />
 
 	<necessite nom="spip_bonux" compatibilite="[3.0.5;[" />
-	<necessite nom="saisies"  compatibilite="[1.24.0;]" /> 
-	
+	<necessite nom="saisies"  compatibilite="[1.42.11;]" /> 
+
 	<lib nom="PHPExcel" lien="https://github.com/PHPOffice/PHPExcel/archive/master.zip" />
 
 	<menu nom="cog" titre="C.O.G." parent="menu_edition" icone="images/cog-24.png" action="cog" />

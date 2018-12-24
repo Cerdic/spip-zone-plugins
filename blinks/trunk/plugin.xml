@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Blinks</nom>
-	<version>1.0</version>
+	<version>1.0.1</version>
 	<etat>dev</etat>
 	
 	<slogan>Keyword Stuffer for Linkbuilders ! That's SEO b*tch !</slogan>
@@ -15,9 +15,9 @@
 	<licence>(c) 2012 CGG &quot;<a href="http://alias.codiferes.net/wordpress/?page_id=51">Cr&eacute;atif Grande Gueule</a>&quot; v1 - </licence>
 	
 	<categorie>statistique</categorie>
-	<necessite id="SPIP" version="[2.0.9;]" />
+	<necessite id="SPIP" version="[2.0.9;3.2.99]" />
 	<necessite id="spip_bonux" version="[1.8.10;]" />
-	<necessite id="saisies" version="[1.7.5;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
 	
 	<prefix>blinks</prefix>
 	<version_base>1.0</version_base>
@@ -47,6 +47,4 @@
 		<inclure>base/blinks.php</inclure>
 	</pipeline>
 
-
-	
 </plugin>

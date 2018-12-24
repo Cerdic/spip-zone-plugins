@@ -17,7 +17,7 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[2.0.3;]" />
+	<necessite nom="saisies" compatibilite="[2.28.0;]" />
 	<necessite nom="cextras" compatibilite="[3.7.1;]" />
 	<utilise nom="mediabox" compatibilite="[1.0.1;]" />
 

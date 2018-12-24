@@ -1,7 +1,7 @@
 <plugin>
 	<nom>doc2article</nom>
 	<auteur>b_b, kent1</auteur>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<version_base>0.0.1</version_base>
 	<etat>dev</etat>
 	<icon>images/doc2article-32.png</icon>
@@ -30,6 +30,7 @@
 		<titre>doc2article:icone_doc2article</titre>
 		<url>doc2article</url>
 	</bouton>
-	<necessite id="crud" version='[0.3.4;]' />
-	<necessite id="saisies" version='[1.9.9;]' />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="crud" version="[0.3.4;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
 </plugin>

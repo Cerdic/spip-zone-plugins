@@ -7,7 +7,7 @@
 	logo="prive/themes/spip/images/moderation.png"
 	documentation="https://contrib.spip.net/Moderation-Moderee"
 	schema="1.0.0"
->	
+>
 
 	<nom>Mod&#233;ration Mod&#233;r&#233;e</nom>
 	<!-- Amélioration de la modération -->
@@ -19,5 +19,5 @@
 
 	<menu nom="configurer_moderation" titre="moderation:titre" parent="menu_configuration" icone="images/moderation-16.png" />
 	<necessite nom="forum" />
-	<necessite nom="saisies" />
+	<necessite nom="saisies" compatibilite="[3.11.1;[" />
 </paquet>

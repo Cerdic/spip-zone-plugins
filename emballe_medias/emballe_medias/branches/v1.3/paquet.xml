@@ -20,7 +20,7 @@
 
 	<pipeline nom="em_types" />
 	<pipeline nom="em_post_upload_medias" />
-	
+
 	<pipeline nom="declarer_tables_principales" inclure="base/emballe_medias.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/emballe_medias.php" />
 	<pipeline nom="affiche_gauche" inclure="emballe_medias_pipelines.php" />
@@ -36,8 +36,8 @@
 	<pipeline nom="post_edition" inclure="emballe_medias_pipelines.php" />
 	<pipeline nom="autoriser" inclure="emballe_medias_autoriser.php" />
 
-	<necessite nom="saisies" compatibilite="[2.18.20;[" />
-	<necessite nom="medias" compatibilite="[2.7.29;[" />
+	<necessite nom="saisies" compatibilite="[2.28.0;[" />
+	<necessite nom="medias" compatibilite="[2.7.30;[" />
 	<necessite nom="diogene" compatibilite="[1.9.3;[" />
 	<necessite nom="swfupload" compatibilite="[1.1.2;[" />
 	<necessite nom="jfu" compatibilite="[5.16.8;[" />

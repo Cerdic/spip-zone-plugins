@@ -114,16 +114,16 @@ It allows to define for a particular sector a form mask per object, adding or re
 	<install>base/diogene_installer.php</install>
 	<options>diogene_options.php</options>
 	<fonctions>diogene_fonctions.php</fonctions>
-	<necessite id='SPIP' version='[2.1.1;2.1.99]' />
-	<necessite id='saisies' version='[1.1;]' />
-	<necessite id='spip_bonux' version='[1.9.1;]' />
-	<necessite id='images' />
-	<utilise id='menus' />
-	<utilise id='polyhier' />
-	<utilise id='medias' />
-	<utilise id='cextras' />
-	<utilise id='iextras' />
-	<utilise id='pages' />
-	<utilise id='Z' />
+	<necessite id="SPIP" version="[2.1.1;2.1.99]" />
+	<necessite id="saisies" version="[1.42.11;]" />
+	<necessite id="spip_bonux" version="[1.9.1;]" />
+	<necessite id="images" />
+	<utilise id="menus" />
+	<utilise id="polyhier" />
+	<utilise id="medias" />
+	<utilise id="cextras" />
+	<utilise id="iextras" />
+	<utilise id="pages" />
+	<utilise id="Z" />
 	<categorie>edition</categorie>
 </plugin>

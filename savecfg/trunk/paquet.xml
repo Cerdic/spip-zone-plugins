@@ -19,7 +19,7 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
-	<necessite nom="saisies" compatibilite="[2.3.1;[" />
+	<necessite nom="saisies" compatibilite="[2.28.0;[" />
 
 	<pipeline nom="declarer_tables_principales" inclure="base/savecfg_install.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/savecfg_install.php" />

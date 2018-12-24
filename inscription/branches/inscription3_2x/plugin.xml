@@ -128,16 +128,16 @@ when registering and changing their profile.
 		<nom>openid_inscrire_redirect</nom>
 		<inclure>inscription3_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version='[2.1.2;2.1.99]' />
+	<necessite id="SPIP" version="[2.1.2;2.1.99]" />
 	<necessite id="cfg" version="[1.14;]" />
-	<necessite id='spip_bonux' version='[1.8.2;]' />
-	<necessite id='saisies' version='[1.8.5;]' />
-	<necessite id='cextras' version='[1.4.3;]' />
-	<necessite id='verifier' version='[0.1.13;]' />
+	<necessite id="spip_bonux' version="[1.8.2;]" />
+	<necessite id="saisies' version="[1.42.11;]" />
+	<necessite id="cextras' version="[1.4.3;]" />
+	<necessite id="verifier' version="[0.1.13;]" />
 	<necessite id="lib:jquery-validation-1.9.0" src="https://github.com/downloads/jzaefferer/jquery-validation/jquery-validation-1.9.0.zip" />
 	<utilise id="Z" />
 	<utilise id="mediabox" />
 	<utilise id="pages" />
-	<utilise id='notifications' />
+	<utilise id="notifications" />
 	<categorie>auteur</categorie>
 </plugin>

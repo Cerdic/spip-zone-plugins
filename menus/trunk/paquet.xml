@@ -35,7 +35,7 @@
 	<menu nom="menus" titre="menus:editer_menus_titre" parent="menu_squelette" icone="images/menu-16.png" />
 
 	<!-- pour _T_ou_typo -->
-	<necessite nom="saisies" compatibilite="[1.14.0;]" />
+	<necessite nom="saisies" compatibilite="[1.42.11;]" />
 
 	<utilise nom="Z" />
 	<utilise nom="Zpip" />

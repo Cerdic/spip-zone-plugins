@@ -17,7 +17,7 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
-	<necessite nom="saisies" compatibilite="[1.24.0;]" />
+	<necessite nom="saisies" compatibilite="[1.42.11;]" />
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/titre_logo.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/titre_logo.php" />

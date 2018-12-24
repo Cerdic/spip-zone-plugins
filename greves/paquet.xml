@@ -7,9 +7,9 @@
 	schema="0.1"
 	logo="prive/themes/spip/images/greves-64.png"
 	documentation="https://contrib.spip.net/Mettre-son-site-en-greve"
->	
+>
 
-	<nom>En gr&#232;ve</nom>
+	<nom>En grève</nom>
 	<!-- Ce n'est qu'un début, continuons le combat ! -->
 
 	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
@@ -21,7 +21,7 @@
 	<pipeline nom="autoriser" inclure="greves_autorisations.php" />
 	<pipeline nom="styliser" inclure="greves_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[1.42.6;]"/>
+	<necessite nom="saisies" compatibilite="[1.42.11;]"/>
 
 	<utilise nom="Z" compatibilite="[1.0.0;]"/>
 

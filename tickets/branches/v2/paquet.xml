@@ -34,7 +34,7 @@
 	<pipeline nom="notifications_destinataires" inclure="tickets_pipelines.php" />
 	<pipeline nom="revisions_chercher_label" inclure="tickets_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[2.19.1;[" />
+	<necessite nom="saisies" compatibilite="[2.28.0;[" />
 	<utilise nom="Zpip" compatibilite="[2.0.3;[" />
 	<utilise nom="Z" compatibilite="[1.7.21;[" />
 

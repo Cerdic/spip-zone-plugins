@@ -20,10 +20,8 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[1.20.0;[" />
+	<necessite nom="saisies" compatibilite="[1.42.11;[" />
 	<utilise nom="nospam" compatibilite="[1.0.0;[" />
-
-	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
 
 	<pipeline nom="autoriser" inclure="guestbook_autorisations.php" /> 
 
@@ -31,7 +29,7 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/guestbook.php" /> 
 	<pipeline nom="affiche_milieu" inclure="guestbook_pipelines.php" /> 
 	<pipeline nom="affiche_auteurs_interventions" inclure="guestbook_pipelines.php" /> 
-	
+
 	<pipeline nom="insert_head_css" inclure="guestbook_pipelines.php" />
 
 	<menu nom="guestmessages" titre="guestmessage:titre_guestmessages" parent="menu_edition" icone="images/guestmessage-16.png" action="guestmessages" /> 

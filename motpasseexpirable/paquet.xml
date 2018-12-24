@@ -12,7 +12,7 @@
 	<auteur lien='https://www.erational.org'>erational</auteur>
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[2.2.3;]" />
+	<necessite nom="saisies" compatibilite="[2.28.0;]" />
 
 	<pipeline nom="taches_generales_cron" inclure="motpasseexpirable_pipelines.php" />
 </paquet>

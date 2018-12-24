@@ -100,12 +100,12 @@
 
 	<categorie>divers</categorie>
 	<necessite id="SPIP" version="[2.0.0;2.0.99]" />
-	<necessite id="saisies" version="[1.3;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
 	<!-- pour les boucles pour des "selections" de saisies, je suis vraiment sincerement desole -->
-	<necessite id="spip_bonux" version="[1.8;]" />
+	<necessite id="spip_bonux" version="[1.8.0;]" />
 	<utilise id="cfg" version="[1.14.1;]" />
 </plugin>
-<plugin spip='[2.1.0;2.1.99]'>
+<plugin spip="[2.1.0;2.1.99]">
 	<nom>
 		<multi>
 		[fr]Tickets
@@ -234,13 +234,13 @@
 	<chemin dir='spip21/' />
 
 	<categorie>divers</categorie>
-	<necessite id="saisies" version="[1.3;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
 	<!-- pour les boucles pour des "selections" de saisies -->
-	<necessite id="spip_bonux" version="[1.8;]" />
+	<necessite id="spip_bonux" version="[1.8.0;]" />
 	<!-- 
 		pour la gestion des forums dans la table spip_forums 
 		svn://zone.spip.org/spip-zone/_core_/branches/spip-2.1/plugins/forum
 	-->
-	<necessite id="forum" version="[1.2;]" />
+	<necessite id="forum" version="[1.2.0;]" />
 	<utilise id="cfg" version="[1.14.1;]" />
 </plugin>

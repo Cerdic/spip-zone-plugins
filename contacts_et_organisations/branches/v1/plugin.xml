@@ -138,11 +138,11 @@ This plugin has been developped inside the [SPIPMINE->https://contrib.spip.net/P
 	</pipeline>
 
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
-	<necessite id="saisies" version="[1.7.7;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
 	<necessite id="spip_bonux" version="[2;]" />
-	<necessite id="medias" version="[1.6;]" />
+	<necessite id="medias" version="[1.6.0;]" />
 	<!-- listes plus jolies avec le plugin "afficher_objet" -->
-	<utilise id="coordonnees" version="[1.2;]" />
+	<utilise id="coordonnees" version="[1.2.0;]" />
 	<utilise id="crayons" version="[1.10.0;]" />
 
 	<categorie>auteur</categorie>

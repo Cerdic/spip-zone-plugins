@@ -1,20 +1,20 @@
 <plugin>
 
 	<version>1.0.0</version>
-	
+
 	<nom>Rep&#232;res</nom>
 	<slogan>Outil pour cr&#233;er des squelettes au pixel pr&#232;s !</slogan>
-	
+
 	<prefix>reperes</prefix>
-	
+
 	<auteur>Cyril MARION, Matthieu Marcillaud</auteur>
-	
+
     <licence>&#169; 2009 GNU/GPL</licence>
-	
+
 	<etat>stable</etat>
-	
+
 	<icon>img_pack/picto_reperes_64x64.png</icon>
-	
+
 	<description>
 	Ce plugin ajoute des rep&#232;res verticaux et horizontaux &#224; l'&#233;cran.
 	
@@ -24,7 +24,7 @@ M&#234;mes fonctionnalit&#233;s que le plugin {WebDeveloper - Lignes de rep&#232
 	</description>
 
 	<lien>https://contrib.spip.net/Plugin-Reperes</lien>
-	
+
 	<!--pipeline>
 		<nom>insert_head_css</nom>
 		<inclure>reperes_pipelines.php</inclure>
@@ -34,23 +34,23 @@ M&#234;mes fonctionnalit&#233;s que le plugin {WebDeveloper - Lignes de rep&#232
 		<nom>insert_head</nom>
 		<inclure>reperes_pipelines.php</inclure>
 	</pipeline-->
-	
+
 	<pipeline>
 		<nom>affichage_final</nom>
 		<inclure>reperes_pipelines.php</inclure>
 	</pipeline>
-	
+
 	<pipeline>
 		<nom>jqueryui_forcer</nom>
 		<inclure>reperes_pipelines.php</inclure>
 	</pipeline>
 
 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
-	<necessite id='cfg' version='[1.0;]' />
-	<necessite id='saisies' version='[1.0;]' />
-	<necessite id='spip_bonux' version='[1.8;]' />
+	<necessite id="cfg" version="[1.0.0;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
+	<necessite id="spip_bonux" version="[2.3.6;]" />
 	<necessite id="jqueryui" version="[1.8.5;]" />
-	<necessite id='palette' version='[1.0;]' />
+	<necessite id="palette" version="[1.0.0;]" />
 	
 	<categorie>outil</categorie>
 </plugin>

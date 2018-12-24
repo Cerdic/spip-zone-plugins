@@ -15,7 +15,7 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[2.4.0;]" />
+	<necessite nom="saisies" compatibilite="[2.28.0;]" />
 	<necessite nom="verifier" compatibilite="[1.6.5;]" />
 
 	<pipeline nom="autoriser" inclure="liens_associes_autorisations.php" />
@@ -25,7 +25,6 @@
 	<pipeline nom="affiche_milieu" inclure="liens_associes_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="liens_associes_pipelines.php" />
 	<pipeline nom="jqueryui_plugins" inclure="liens_associes_pipelines.php" />
-
 
 	<menu nom="associe_liens" titre="associe_lien:titre_associe_liens" parent="menu_edition" icone="images/associe_lien-16.png" action="associe_liens" />
 </paquet>

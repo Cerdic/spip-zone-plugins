@@ -13,7 +13,7 @@
 
 	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
 	<auteur lien="http://www.kent1.info">kent1</auteur>
-	
+
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 	<pipeline nom="bigbrother_journaliser" action="" />
@@ -29,7 +29,7 @@
 	<pipeline nom="affichage_final" inclure="bigbrother_pipelines.php" />
 	<pipeline nom="autoriser" inclure="bigbrother_autoriser.php" />
 
-	<necessite nom="saisies" compatibilite="[1.24.0;[" />
+	<necessite nom="saisies" compatibilite="[1.42.11;[" />
 	<lib nom="flot" lien="http://www.flotcharts.org/downloads/flot-0.6.zip" />
 
 	<menu nom="journal_stats" titre="bigbrother:naviguer_journal_stats" parent="menu_activite" icone="images/bigbrother-24.png" action="journal_stats" />

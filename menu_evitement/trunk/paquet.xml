@@ -2,7 +2,7 @@
 	prefix="menu_evitement"
 	categorie="navigation"
 	version="1.0.0"
-  schema="1.0.0"
+	schema="1.0.0"
 	etat="dev"
 	compatibilite="[3.0.5;3.0.*]"
 	logo=""
@@ -18,12 +18,12 @@
 
 	<licence>GNU/GPL</licence>
 
-  <lib nom="phpQuery" lien="https://code.google.com/p/phpquery/downloads/detail?name=phpQuery-0.9.5.386.zip" />
-  
-  <necessite nom="saisies" compatibilite="[1.27.4;[" />
+	<lib nom="phpQuery" lien="https://code.google.com/p/phpquery/downloads/detail?name=phpQuery-0.9.5.386.zip" />
 
-  <pipeline nom="affichage_final" inclure="menu_evitement_pipelines.php" />
-  <pipeline nom="insert_head_css" inclure="menu_evitement_pipelines.php" />
-  <pipeline nom="jqueryui_plugins" inclure="menu_evitement_pipelines.php" />
+	<necessite nom="saisies" compatibilite="[1.42.0;[" />
+
+	<pipeline nom="affichage_final" inclure="menu_evitement_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="menu_evitement_pipelines.php" />
+	<pipeline nom="jqueryui_plugins" inclure="menu_evitement_pipelines.php" />
 
 </paquet>

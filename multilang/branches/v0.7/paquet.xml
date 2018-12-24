@@ -7,7 +7,7 @@
 	logo="images/multilang-32.png"
 	schema="0.1"
 	documentation="https://contrib.spip.net/?article3498"
->	
+>
 
 	<nom>Multilang</nom>
 	<!-- Gérer l'affichage du contenu des tags multi par un menu -->
@@ -27,7 +27,7 @@
 	<pipeline nom="multilang_objets_supplementaires" action="" />
 
 	<menu nom="configurer_multilangue" titre="multilang:configuration_multilang" parent="menu_configuration" icone="images/multilang-16.png" />
-	<necessite nom="saisies" compatibilite="[1.1;[" />
+	<necessite nom="saisies" compatibilite="[1.42.11;[" />
 
 	<utilise nom="crayons" />
 </paquet>

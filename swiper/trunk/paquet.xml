@@ -14,8 +14,8 @@
 
 	<licence>GNU/GPL</licence>
 	<lib nom="Swiper" lien="https://github.com/nolimits4web/Swiper/archive/v4.0.2.zip" />
-	<necessite nom="saisies" compatibilite="[2.4.0;]" />
-	<necessite nom="cextras"  compatibilite="[3.4.1;[" />
+	<necessite nom="saisies" compatibilite="[2.28.0;]" />
+	<necessite nom="cextras"  compatibilite="[3.11.3;[" />
 
 	<pipeline nom="autoriser" inclure="swiper_autorisations.php" />
 

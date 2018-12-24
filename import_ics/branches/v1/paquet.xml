@@ -21,18 +21,14 @@
 	<necessite nom="icalendar" compatibilite="[0.2.1;]" />
 	<necessite nom="cextras" compatibilite="[3.0.5;[" />
 	<necessite nom="seminaire" compatibilite="[2.1.10;]" />
-
-
-	<necessite nom="saisies" compatibilite="[1.24.0;]" />
+	<necessite nom="saisies" compatibilite="[1.42.11;]" />
 
 	<pipeline nom="autoriser" inclure="import_ics_autorisations.php" />
-
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/import_ics.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/import_ics.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/import_ics.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="import_ics_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="import_ics_pipelines.php"/>
-
 
 	<menu nom="almanachs" titre="almanach:titre_almanachs" parent="menu_edition" icone="images/almanach-16.png" action="almanachs" />
 	<menu nom="almanach_creer" titre="almanach:icone_creer_almanach" parent="outils_rapides" icone="images/almanach-new-16.png" action="almanach_edit" parametres="new=oui" />

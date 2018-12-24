@@ -79,11 +79,11 @@ _ Icon from [mattrich->http://mattrich.deviantart.com/art/Picnic-101256405] unde
 		<nom>declarer_type_surnoms</nom>
 		<inclure>gis_pipelines.php</inclure>
 	</pipeline>
-	<utilise id="cfg" version="[1.12;]" />
-	<utilise id="selecteurgenerique" version="[1.12;]" />
+	<utilise id="cfg" version="[1.12.0;]" />
+	<utilise id="selecteurgenerique" version="[1.12.0;]" />
 	<necessite id="SPIP" version="[2.1.10;2.1.99]" />
-	<necessite id="saisies" version="[1.7.1;]" />
-	<necessite id="spip_bonux" version="[1.8;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
+	<necessite id="spip_bonux" version="[1.8.0;]" />
 	<necessite id="afficher_objets" version="[1.2.0;]" />
 	<necessite id="lib:mxn-gis-cluster-2.0.10" src="https://github.com/downloads/brunob/mxn/mxn-gis-cluster-2.0.10.zip" />
 	<categorie>divers</categorie>

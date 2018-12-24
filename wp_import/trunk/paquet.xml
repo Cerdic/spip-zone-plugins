@@ -11,11 +11,11 @@
 
 	<auteur lien="http://www.declic3000.com">Guillaume Wauquier</auteur>
 	<auteur>peetdu</auteur>
-	
+
 	<licence>GPL v3</licence>
 
-	<necessite nom="saisies" compatibilite="[1.19.0;]" />
+	<necessite nom="saisies" compatibilite="[1.42.11;]" />
 	<necessite nom="sale" compatibilite="[0.1.5;]" />
-	
+
 	<menu nom="wp_import" titre="wp_import:migration" parent="menu_developpement" icone="images/wp_import-16.png" />
 </paquet>

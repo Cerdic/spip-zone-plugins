@@ -46,7 +46,7 @@
 
 	<necessite id="spip" version="[2.1.20;2.1.99]" />
 	<necessite id="spip_bonux" version="[2.2.17;]" />
-	<necessite id="saisies" version="[1.20.0;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
 	<necessite id="afficher_objets" version="[1.2.1;]" />
 
 </plugin>

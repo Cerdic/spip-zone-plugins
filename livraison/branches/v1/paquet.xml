@@ -13,25 +13,25 @@
 	<auteur lien='http://websimple.be/'>Rainer Müller</auteur>
 
 	<licence>GNU/GPL</licence>
-	
-	<necessite nom="saisies" compatibilite="[2.0.3;]" />
-	
+
+	<necessite nom="saisies" compatibilite="[2.28.0;]" />
+
 	<necessite nom="pays" compatibilite="[3.0.10;]" />
 	<necessite nom="continents" compatibilite="[1.0.2;]" />
 	<necessite nom="cextras" compatibilite="[3.4.1;]" />	
-	
+
 	<utilise nom="prix_objets" compatibilite="[1.6.7;]" />
 	<utilise nom="shop" compatibilite="[1.4.2;]" />  
-	
+
 	<pipeline nom="autoriser" inclure="livraison_autorisations.php" /> 
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/livraison.php" /> 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/livraison.php" /> 
 	<pipeline nom="declarer_tables_principales" inclure="base/livraison.php" />
 	<pipeline nom="declarer_champs_extras" inclure="base/livraison.php" />
-	
+
 	<pipeline nom="post_insertion" inclure="livraison_pipelines.php" />	
 	<pipeline nom="formulaire_traiter" inclure="livraison_pipelines.php" />
-	
+
 	<menu nom="livraisons" titre="livraison:livraison_titre" parent="menu_edition" icone="images/livraison-16.png" action="livraisons" />
 </paquet>

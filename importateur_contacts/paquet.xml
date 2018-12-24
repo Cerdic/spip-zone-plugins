@@ -12,11 +12,11 @@
 	<nom>Importateur de contacts</nom>
 	<!-- Formulaire d'importation de contacts. -->
 
-	<auteur lien="http://www.ldd.fr">Les DÃ©veloppements Durables</auteur>
-	
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
-	
+
 	<pipeline nom="importateur_contacts_moteurs" inclure="importateur_contacts_pipelines.php" />
-	
-	<necessite nom="saisies" compatibilite="[1.11.0;[" />
+
+	<necessite nom="saisies" compatibilite="[1.42.11;[" />
 </paquet>

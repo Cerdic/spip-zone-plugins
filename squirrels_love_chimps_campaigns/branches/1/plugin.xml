@@ -12,7 +12,7 @@
 	<necessite id="squirrel_chimp" version="[0.0.1;]" />
 	<necessite id="squirrel_chimp_lists" version="[0.0.1;]" />
 	<necessite id="spip_bonux" version="[2.2.17;]" />
-	<necessite id="saisies" version='[1.9.9;]'/>	
+	<necessite id="saisies" version="[1.42.11;]"/>	
 	<pipeline>
 		<nom>squirrel_chimp_definitions</nom>		
 		<inclure>squirrel_chimp_campaigns_pipelines.php</inclure>

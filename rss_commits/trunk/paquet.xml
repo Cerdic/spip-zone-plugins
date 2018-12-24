@@ -15,8 +15,8 @@
 	<credit lien="https://www.iconfinder.com/icons/282472/branch_git_svn_icon">IcoCenter (Logo, icones)</credit>
 
 	<licence>GNU/GPL</licence>
-	<necessite nom="saisies"  compatibilite="[2.2.3;]" />
-	<necessite nom="projets"  compatibilite="[1.0.10;]" />
+	<necessite nom="saisies" compatibilite="[2.28.0;]" />
+	<necessite nom="projets" compatibilite="[1.0.10;]" />
 	<necessite nom="cextras" compatibilite="[3.0.5;[" />
 
 	<pipeline nom="autoriser" inclure="rss_commits_autorisations.php" />

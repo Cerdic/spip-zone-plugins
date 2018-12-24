@@ -11,13 +11,13 @@
 	<nom>Clients</nom>
 	<!-- Formulaires pour clients -->
 
-	<auteur lien="http://www.ldd.fr">Les DÃ©veloppements Durables</auteur>
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 	<pipeline nom="header_prive" inclure="clients_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[2.23.3;[" />
+	<necessite nom="saisies" compatibilite="[2.28.0;[" />
 	<necessite nom="contacts" compatibilite="[3.1.1;[" />
 	<necessite nom="coordonnees" compatibilite="[2.3.11;[" />
 

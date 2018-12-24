@@ -14,8 +14,8 @@
 	<auteur lien='http://www.ldd.fr'>Les Développements Durables</auteur>
 	
 	<licence>GNU/GPL v3</licence>
-	<necessite nom="saisies" compatibilite="[2.0.0;]" />
-	<necessite nom="verifier" compatibilite="[1.0.5;]" />
+	<necessite nom="saisies" compatibilite="[2.28.0;]" />
+	<necessite nom="verifier" compatibilite="[1.0.6;]" />
 	<necessite nom="licence" compatibilite="[0.5.5;]" />
 	
 	<pipeline nom="autoriser" inclure="ayantsdroit_autorisations.php" />

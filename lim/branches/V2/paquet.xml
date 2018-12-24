@@ -17,8 +17,8 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies"  compatibilite="[1.24.0;[" />
-	<necessite nom="medias"  compatibilite="[2.20.13;[" />
+	<necessite nom="saisies" compatibilite="[1.42.11;[" />
+	<necessite nom="medias" compatibilite="[2.20.15;[" />
 	<necessite nom="php" compatibilite="[5.5.0;[" />
 
 	<pipeline nom="autoriser" inclure="lim_autorisations.php" />

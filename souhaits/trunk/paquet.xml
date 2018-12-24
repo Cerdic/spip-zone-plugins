@@ -17,7 +17,7 @@
 	<auteur>RastaPopoulos</auteur>
 
 	<licence>GNU/GPL v3</licence>
-	<necessite nom="saisies" compatibilite="[1.24.0;]" />
+	<necessite nom="saisies" compatibilite="[1.42.11;]" />
 	<necessite nom="verifier" compatibilite="[0.1.17;]" /> 
 
 	<pipeline nom="autoriser" inclure="souhaits_autorisations.php" /> 
@@ -31,7 +31,7 @@
 	<pipeline nom="post_edition" inclure="souhaits_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="souhaits_pipelines.php" />
 	<pipeline nom="nospam_lister_formulaires" inclure="souhaits_pipelines.php" />
-	
+
 	<menu nom="souhaits" titre="souhait:titre_souhaits" parent="menu_edition" icone="images/souhait-16.png" action="souhaits" /> 
 	<menu nom="souhait_creer" titre="souhait:icone_creer_souhait" parent="outils_rapides" icone="images/souhait-new-16.png" action="souhait_edit" parametres="new=oui" /> 
 </paquet>

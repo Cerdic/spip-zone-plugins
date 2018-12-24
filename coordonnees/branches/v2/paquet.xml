@@ -14,7 +14,7 @@
 	<licence>GNU/GPL</licence>
 	<traduire gestionnaire="salvatore" module="coordonnees" reference="fr" />
 
-	<necessite nom="saisies" compatibilite="[1.24.0;]" />
+	<necessite nom="saisies" compatibilite="[1.42.11;]" />
 	<necessite nom="pays" compatibilite="[1.0.6;]" />
 	<necessite nom="verifier" compatibilite="[0.1.15;]" />
 

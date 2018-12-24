@@ -7,7 +7,7 @@
 	logo="prive/themes/spip/images/jquerycorner-32.png"
 	schema="0.1"
 	documentation="https://contrib.spip.net/JQuery-Corner"
->	
+>
 
 	<nom>jQuery Corner</nom>
 	<!-- Le plugin qui arrondit les angles -->
@@ -20,7 +20,7 @@
 	<pipeline nom="autoriser" inclure="inc/jquerycorner_autoriser.php" />
 	<pipeline nom="ieconfig_metas" inclure="jquerycorner_ieconfig_metas.php" />
 
-	<necessite nom="saisies" compatibilite="[1.9.0;[" />
+	<necessite nom="saisies" compatibilite="[1.42.11;[" />
 
 	<menu nom="jquerycorner" titre="jquerycorner:titre_menu" parent="bando_squelette" icone="images/jquerycorner-16.png" action="configurer_jquerycorner" />
 </paquet>

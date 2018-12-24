@@ -68,7 +68,7 @@ Los nombres de divisas est&#225;n en Ingl&#233;s, Franc&#233;s y Espa&#241;ol.
 	</pipeline>
 
 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
-	<necessite id="cextras" version="[0.8;]" />
-	<necessite id="saisies" />
+	<necessite id="cextras" version="[0.8.0;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
 	<categorie>divers</categorie>
 </plugin>

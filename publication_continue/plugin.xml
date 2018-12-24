@@ -2,31 +2,31 @@
 
 	<nom>Publication continue</nom>
 	<auteur>Cyril MARION - [Ateliers CYM->http://www.cym.fr]</auteur>
-	
+
 	<etat>test</etat>
-	
+
 	<description>
 		<multi>
 			[fr]Ce plugin permet d'ajouter du contenu directement depuis les pages publiques.
 			[en]This plugin allows to add content directly from public pages.
 		</multi>
 	</description>
-	
+
 	<lien>https://contrib.spip.net/Publication_continue</lien>
 	<icon>images/publication-128.png</icon>
-	
+
 	<prefix>publication_continue</prefix>
-	
-	<version>0.0.1</version>
+
+	<version>0.0.2</version>
 
 	<pipeline>
 		<nom>insert_head</nom>
 		<action>insert_head</action>
 		<inclure>publication_continue_pipelines.php</inclure>
 	</pipeline>
-	
-	<necessite id="SPIP" version="[2.1.0;]" />
-	<necessite id="saisies" version="[1.7.7;]" />
-	
+
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="saisies" version="[1.42.11;]" />
+
 	<categorie>publication</categorie>
 </plugin>

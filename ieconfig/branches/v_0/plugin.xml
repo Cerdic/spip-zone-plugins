@@ -41,7 +41,7 @@
 	<categorie>maintenance</categorie>
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="spip_bonux" version="[1.8.10;]" />
-	<necessite id="saisies" version="[1.7.9;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
 	<necessite id="verifier" />
-	<necessite id="YAML" />
+	<necessite id="YAML" version="[1.5.2;]" />
 </plugin>

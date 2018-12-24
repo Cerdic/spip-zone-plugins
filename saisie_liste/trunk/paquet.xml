@@ -20,7 +20,7 @@
 	<pipeline nom="header_prive" inclure="saisie_liste_pipelines.php" />
 	<pipeline nom="saisies_autonomes" inclure="saisie_liste_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[1.31.4;[" />
+	<necessite nom="saisies" compatibilite="[1.42.11;[" />
 	<utilise nom="yaml" compatibilite="[1.5.1;[" />
 
 </paquet>

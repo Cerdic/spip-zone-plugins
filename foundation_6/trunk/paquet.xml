@@ -24,7 +24,7 @@
 	<menu nom="foundation_6_titre" titre="foundation_6:foundation_6_titre" parent="menu_configuration" icone="images/foundation_6-16.png" action="configurer_foundation_6" />
 
 	<!-- Les plugins indispensable -->
-	<necessite nom="saisies" compatibilite="[2.0.3;[" />
+	<necessite nom="saisies" compatibilite="[2.28.0;[" />
 	<necessite nom="jquery" compatibilite="[1.11.3;[" />
 	<necessite nom="compresseur" compatibilite="[1.6.4;[" />
 

@@ -9,12 +9,12 @@
 	schema="1.0.0" 
 >
 	<nom>Prestations</nom>
-	
+
 	<auteur lien='https://www.ldd.fr'>RastaPopoulos</auteur>
 	<licence>GNU/GPL</licence>
-	
+
 	<necessite nom="prix" compatibilite="[0.1.15;]" />
-	<necessite nom="saisies" compatibilite="[2.4.0;]" />
+	<necessite nom="saisies" compatibilite="[2.28.0;]" />
 	<necessite nom="verifier" compatibilite="[1.8.0;]" />
 
 	<pipeline nom="autoriser" inclure="prestations_autorisations.php" />

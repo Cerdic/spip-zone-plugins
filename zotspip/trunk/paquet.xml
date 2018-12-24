@@ -1,7 +1,7 @@
 <paquet
 	prefix="zotspip"
 	categorie="edition"
-	version="3.5.2"
+	version="3.5.3"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/zotspip-48.png"
@@ -30,7 +30,7 @@
 	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="zotspip_pipelines.php" />
 	<pipeline nom="post_boucle" inclure="zotspip_pipelines.php" />
 
-	<necessite nom="saisies" />
+	<necessite nom="saisies" compatibilite="[3.11.1;]" />
 
 	<menu nom="zotspip" titre="zotspip:zotspip" parent="bando_configuration" icone="images/zotspip-16.png" action="configurer_zotspip" />
 	<menu nom="zitems" titre="zotspip:items_zotero" parent="bando_edition" icone="images/zotspip-16.png" action="zitems" />

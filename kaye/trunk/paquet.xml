@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/kaye-64.png"
 	documentation="https://contrib.spip.net/Kaye-3"
-	schema="1.0.0" 
+	schema="1.0.0"
 >
 
 
@@ -16,7 +16,7 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[1.24.0;]" />
+	<necessite nom="saisies" compatibilite="[1.42.11;]" />
 	<necessite nom="verifier" compatibilite="[0.1.16;]" />
 	<necessite nom="jqueryui" compatibilite="[1.8.20;]" />
 
@@ -27,7 +27,7 @@
 	<pipeline nom="affiche_auteurs_interventions" inclure="kaye_pipelines.php" />
 	<pipeline nom="insert_head" inclure="kaye_pipelines.php" />
 	<pipeline nom="jqueryui_plugins" inclure="kaye_pipelines.php" />
-	
+
 	<menu nom="classes" titre="classe:titre_classes" parent="menu_edition" icone="images/classe-16.png" action="classes" /> 
 	<menu nom="devoirs" titre="devoir:titre_devoirs" parent="menu_edition" icone="images/devoir-16.png" action="devoirs" /> 
 	<menu nom="devoir_creer" titre="devoir:icone_creer_devoir" parent="outils_rapides" icone="images/devoir-new-16.png" action="devoir_edit" parametres="new=oui" />

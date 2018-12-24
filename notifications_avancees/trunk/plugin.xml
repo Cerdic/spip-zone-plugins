@@ -40,7 +40,7 @@
 	<necessite id="SPIP" version="[2.1.0;3.2.99]" />
 	<necessite id="spip_bonux" version="[2.2.23;]" />
 	<necessite id="queue" version="[0.6.2;]" />
-	<necessite id="saisies" version="[1.8.5;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
 	<necessite id="yaml" version="[1.5.3;]" />
 	<necessite id="facteur" version="[3.5.2;]"/>
 </plugin>

@@ -21,7 +21,7 @@
 
 	<necessite nom="prix" compatibilite="[0.1.8;]" />
 	<necessite nom="spip_bonux" compatibilite="[3.0.7;]" />
-	<necessite nom="saisies" compatibilite="[2.0.3;]" />
+	<necessite nom="saisies" compatibilite="[2.28.0;]" />
 
 	<pipeline nom="declarer_tables_principales" inclure="base/paniers.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/paniers.php" />

@@ -14,8 +14,8 @@
 	<necessite id="facteur" version="[1.5.1;]" />
 	<necessite id="queue" version="[0.3.4;]" />
 	<necessite id="spip_bonux" version="[1.9.3;]" />
-	<necessite id="saisies" version="[1.9.6;]" />
-	<necessite id="YAML" version="[1.5;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
+	<necessite id="YAML" version="[1.5.2;]" />
 	<utilise id="bando" version="[;]" />
 
 	<categorie>communication</categorie>

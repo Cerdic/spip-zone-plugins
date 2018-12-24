@@ -25,9 +25,9 @@
 		<inclure>piwik_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.8;3.1.99]" />
-	<necessite id='cfg' version='[1.13.0;]' />
-	<necessite id='saisies' version='[1.1;]' />
-	<necessite id='spip_bonux' version='[1.8;]' />
+	<necessite id="cfg" version="[1.13.0;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
+	<necessite id="spip_bonux" version="[2.3.6;]" />
 	<categorie>statistique</categorie>
 	<traduire gestionnaire="salvatore" module="piwik" reference="fr" />
 </plugin>

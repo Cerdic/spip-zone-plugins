@@ -7,10 +7,10 @@
 	logo="images/legendes-128.png"
 	schema="0.1"
 	documentation="https://contrib.spip.net/Legendes"
->	
+>
 
-	<nom>L&#233;gendes</nom>
-	<!-- LÃ©gender ses photos -->
+	<nom>Légendes</nom>
+	<!-- Légender ses photos -->
 
 	<auteur>b_b</auteur>
 
@@ -23,7 +23,7 @@
 	<pipeline nom="post_edition" inclure="legendes_pipelines.php" />
 	<pipeline nom="jqueryui_plugins" inclure="legendes_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[1.1;[" />
+	<necessite nom="saisies" compatibilite="[1.42.11;[" />
 	<necessite nom="jqueryui" compatibilite="[1.8.2;[" />
-	<necessite nom="medias" compatibilite="[2.7.28;[" />
+	<necessite nom="medias" compatibilite="[2.7.27;[" />
 </paquet>

@@ -10,7 +10,7 @@
 >
 
 	<nom>Inscription 3</nom>
-	<!-- Étendre les informations sur les auteurs -->
+	<!-- Attendre les informations sur les auteurs -->
 
 	<auteur>cmtmt2003</auteur>
 	<auteur lien="http://www.kent1.info">kent1</auteur>
@@ -47,9 +47,9 @@
 	<pipeline nom="openid_inscrire_redirect" inclure="inscription3_pipelines.php" />
 	<pipeline nom="post_edition" inclure="inscription3_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[2.0.0;]" />
+	<necessite nom="saisies" compatibilite="[2.28.0;]" />
 	<necessite nom="cextras" compatibilite="[3.4.1;]" />
-	<necessite nom="verifier" compatibilite="[1.0.5;]" />
+	<necessite nom="verifier" compatibilite="[1.0.6;]" />
 
 	<lib nom="jquery-validation-1.10.0" lien="https://github.com/downloads/jzaefferer/jquery-validation/jquery-validation-1.10.0.zip" />
 

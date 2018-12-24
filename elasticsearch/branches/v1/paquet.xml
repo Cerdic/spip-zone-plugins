@@ -13,10 +13,10 @@
 
 	<auteur>Guy Cesaro</auteur>
 	<auteur>Joachim Guedj</auteur>
-	
+
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies"  compatibilite="[2.0.3;]" />
+	<necessite nom="saisies"  compatibilite="[2.28.0;]" />
 	<necessite nom="phpcurl"  compatibilite="[1.0.0;]" />
 
 	<utilise nom="extrairedoc"  compatibilite="[1.2.2;]" />

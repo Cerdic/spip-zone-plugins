@@ -28,9 +28,9 @@ _ Exemples sur le site de [l'Association Point-C&oelig;ur->http://france.pointsc
 
 	<necessite id="SPIP" version="[2.0.0;2.0.99]" />
 	<necessite id="spip_bonux" version="[1.9.3;]" />
-	<necessite id="saisies" version="[1.7.5;]" />
-	<necessite id="verifier" version="[0.1;]" />
-	<necessite id="yaml" version="[1.1;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
+	<necessite id="verifier" version="[0.1.0;]" />
+	<necessite id="yaml" version="[1.5.2;]" />
 	<necessite id="facteur" version="[1.5.3;]" />
 	<necessite id="formidable" version="[0.5.3;]" />
 	<categorie>communication</categorie>
@@ -64,7 +64,7 @@ _ Exemples sur le site de [l'Association Point-C&oelig;ur->http://france.pointsc
 	</pipeline>
 
 	<necessite id="spip_bonux" version="[3.4.6;]" />
-	<necessite id="saisies" version="[2.24.3;]" />
+	<necessite id="saisies" version="[2.28.0;]" />
 	<necessite id="verifier" version="[1.7.1;]" />
 	<necessite id="yaml" version="[1.5.3;]" />
 	<necessite id="facteur" version="[3.5.2;]" />

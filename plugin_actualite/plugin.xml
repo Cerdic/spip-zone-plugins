@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Plugin actualites</nom>
 	<auteur>klelugi</auteur>
-	<version>0.1</version>
+	<version>0.1.1</version>
 	<version_base>0.1</version_base>
 
 	<icon>img_pack/actualites_64.png</icon>
@@ -140,12 +140,12 @@
 	</pipeline>
 
 
-	<necessite id="spip" version="[2.1.0;]" />
-	<necessite id="saisies" version="[1.8.5;]" />
+	<necessite id="spip" version="[2.1.0;2.1.99]" />
+	<necessite id="saisies" version="[1.42.11;]" />
 	<necessite id="spip_bonux" version="[1.8.4;]" />
 	<necessite id="cextras" version="[1.6.1;]" />
 	<necessite id="medias" version="[1.5.0;]" />
-	<utilise id='CFG' version='[1.0;]' /> 
+	<utilise id='CFG' version='[1.0.0;]' /> 
 
 	<!-- Ajouter bouton de navigation dans l'interface privee -->
 	<bouton id="actualites_tous" parent="naviguer">

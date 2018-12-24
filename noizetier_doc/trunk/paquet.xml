@@ -13,7 +13,7 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
-	<necessite nom="saisies" compatibilite="[2.18.21;]" />
+	<necessite nom="saisies" compatibilite="[2.28.0;]" />
 	<necessite nom="noizetier" compatibilite="[2.7.0;3.0.0[" />
 
 	<pipeline nom="autoriser" inclure="noizetier_doc_autorisations.php" />

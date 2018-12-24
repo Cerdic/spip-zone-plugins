@@ -7,7 +7,7 @@
 	logo="prive/themes/spip/images/gestionml-32.png"
 	schema="0.2"
 	documentation="https://contrib.spip.net/Gestion-ML-avec-Soap"
->	
+>
 
 	<nom>Gestion ML avec SOAP</nom>
 	<!-- Gérer les mailing lists chez votre hébergeur avec le protocole SOAP -->
@@ -19,7 +19,7 @@
 	<pipeline nom="autoriser" inclure="inc/gestionml_autoriser.php" />
 	<pipeline nom="ieconfig_metas" inclure="gestionml_ieconfig_metas.php" />
 
-	<necessite nom="saisies" compatibilite="[2.0.3;[" />
+	<necessite nom="saisies" compatibilite="[2.28.0;[" />
 	<necessite nom="YAML" compatibilite="[1.5.2;[" />
 
 	<menu nom="gestionml1" titre="gestionml:titre_menu_gerer" parent="bando_edition" icone="images/gestionml-16.png" action="gestionml" />

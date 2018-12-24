@@ -31,7 +31,7 @@
 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="cextras" version="[1.10.0;]" />
 	<necessite id="spip_bonux" version="[2.0.0;]" />
-	<necessite id="saisies" version="[1.13.0;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
 	
 	<pipeline>
 		<nom>declarer_champs_extras</nom>

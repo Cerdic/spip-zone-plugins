@@ -9,7 +9,7 @@
 	documentation="https://contrib.spip.net/Rubrique-a-l-inscription"
 >	
 
-	<nom>Rubrique &#224; l'inscription</nom>
+	<nom>Rubrique à l'inscription</nom>
 	<!-- Créer une rubrique à l'inscription d'un admin -->
 
 	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
@@ -21,8 +21,7 @@
 
 	<menu nom="configurer_rubrique_a_linscription" titre="rubrique_a_linscription:rubrique_a_linscription" parent="bando_configuration" icone="images/rubrique_a_linscription-12.png" action="configurer_rubrique_a_linscription" />
 
-	<necessite nom="saisies" compatibilite="[2.23.2;[" />
-
+	<necessite nom="saisies" compatibilite="[2.28.0;[" />
 	<necessite nom="duplicator" compatibilite="[1.5.9;[" />
 
 </paquet>

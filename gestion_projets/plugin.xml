@@ -2,7 +2,7 @@
 	<nom>Gestion Projets</nom>
 	<auteur>Rainer Müller</auteur>
 	<licence>GNU/GLP</licence>
-	<version>0.1.7</version>
+	<version>0.1.8</version>
 	<version_base>0.1.7</version_base>	
 	<description>
 		Gestionnaitre de projet. 
@@ -42,7 +42,7 @@
 	</pipeline>		
 	<fonctions>gestion_projets_fonctions.php</fonctions>
 	<options>gestion_projets_options.php</options>	
-	<necessite id="SPIP" version="[2.0;]" />
-	<necessite id="saisies" version="[1.8.12;]" />	
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
+	<necessite id="saisies" version="[1.42.11;]" />	
 	<necessite id="spip_bonux" version="[2.2.15;]" />		
 </plugin>

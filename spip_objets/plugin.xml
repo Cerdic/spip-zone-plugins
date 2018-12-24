@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Spip objets suppl&eacute;mentaires ou tables extra</nom>
 	<auteur>Yoann NOGUES</auteur>
-	<version>1.0</version>
+	<version>1.0.1</version>
 	<version_base>1.0</version_base>
 	<install>base/objets_upgrade.php</install>
 	<etat>dev</etat>
@@ -31,12 +31,11 @@
 		<titre>objets:gestion_objets</titre>
 	</onglet>
 
-	
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/objets.php</inclure>
 	</pipeline>
-	
+
 	<pipeline> 
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/objets.php</inclure>
@@ -45,11 +44,9 @@
 		<nom>declarer_tables_auxiliaires</nom>
 		<inclure>base/objets.php</inclure>
 	</pipeline>
-	
-	
 
 	<!-- avec plugin champs extras 2 -->
-  <pipeline>
+	<pipeline>
 		<nom>objets_extensibles</nom>
 		<inclure>objets_pipelines.php</inclure>
 	</pipeline>
@@ -57,8 +54,7 @@
 		<nom>rechercher_liste_des_champs</nom>
 		<inclure>objets_pipelines.php</inclure>
 	</pipeline>
-	
-	
+
 	<!-- ajoute le bloc des documents -->
 	<pipeline>
 		<nom>affiche_gauche</nom>
@@ -68,15 +64,13 @@
 		<nom>post_edition</nom>
 		<inclure>objets_pipelines.php</inclure>
 	</pipeline>
-	
+
 	<!-- ajoute les listes dobjets dans articles et rubriques -->
 	<pipeline>
 		<nom>affiche_enfants</nom>
 		<inclure>objets_pipelines.php</inclure>
 	</pipeline>
-	
-	
-	
+
 	<!-- Gestion des urls de ces nouveaux objets -->
 	<pipeline>
 		<nom>declarer_url_objets</nom>
@@ -88,13 +82,12 @@
 		<inclure>objets_pipelines.php</inclure>
 	</pipeline>
 
-	
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<!-- facilitons les champs de formulaires -->
-	<necessite id="saisies" version="[1.8.5;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
 	<!-- filtre |icone et boucles CONDITIONS -->
 	<necessite id="spip_bonux" version="[1.8.4;]" />
 	<necessite id="cextras" version="[1.6.1;]" />
-	<necessite id="medias" version="[1.4.2;]" />
+	<necessite id="medias" version="[1.5.0;]" />
 	<categorie>outil</categorie>
 </plugin>

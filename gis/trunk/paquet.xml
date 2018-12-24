@@ -31,7 +31,7 @@
 	<traduire module="paquet-gis" reference="fr" gestionnaire="salvatore" />
 
 	<utilise nom="selecteurgenerique" compatibilite="[0.8.6;]" />
-	<necessite nom="saisies" compatibilite="[2.4.0;]" />
+	<necessite nom="saisies" compatibilite="[2.28.0;]" />
 
 	<pipeline
 		nom="gis_modele_parametres_autorises"

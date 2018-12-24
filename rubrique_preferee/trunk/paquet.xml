@@ -9,7 +9,7 @@
 	documentation="https://contrib.spip.net/Rubrique-preferee"
 >
 
-	<nom>Rubrique pr&#233;f&#233;r&#233;e</nom>
+	<nom>Rubrique préférée</nom>
 	<!-- Associer une rubrique à un auteur -->
 
 	<auteur>Yffic</auteur>
@@ -17,7 +17,7 @@
 
 	<pipeline nom="declarer_champs_extras" inclure="rubriquepreferee_administrations.php" />
 
-	<necessite nom="saisies" compatibilite="[1.30.0;[" />
+	<necessite nom="saisies" compatibilite="[1.42.11;[" />
 	<necessite nom="cextras" compatibilite="[3.2.3;[" />
 
 	<utilise nom="aveline" compatibilite="[1.7.0;[" />
