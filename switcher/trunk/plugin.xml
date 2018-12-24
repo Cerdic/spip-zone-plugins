@@ -3,7 +3,7 @@
 	<slogan>Switcheur de squelettes</slogan>
 	<auteur>Philippe Drouot, adaptation en plugin de la contrib switcher de Fil</auteur>
 	<licence>&#169; 2006, GNU/GPL</licence>
-	<version>0.2.4</version>
+	<version>0.2.5</version>
 	<etat>test</etat>
 	<icon>prive/themes/spip/images/switcher-64.png</icon>
 	<description>
@@ -35,7 +35,7 @@
 		<action>insert_head_css</action>
 		<inclure>head.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
-	<necessite id="saisies" />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
+	<necessite id="saisies" version='[1.42.11;]' />
 	<categorie>maintenance</categorie>
 </plugin>
