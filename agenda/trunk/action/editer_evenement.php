@@ -259,6 +259,8 @@ function evenement_instituer($id_evenement, $c) {
 
 	$champs = array();
 
+	if (!$id_parent && autoriser('instituerorphelin', 'evenement')) return ''; // pas d'erreur si on a pas de parent et qu'on a le droit d'instituer
+
 	if (!autoriser('modifier', 'article', $id_parent)
 		or (isset($c['id_parent'])
 		and !autoriser('modifier', 'article', $c['id_parent']))) {

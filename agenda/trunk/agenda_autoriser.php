@@ -35,7 +35,7 @@ function autoriser_evenements_menu_dist($faire, $type = '', $id = 0, $qui = null
  */
 function autoriser_article_creerevenementdans_dist($faire, $quoi, $id, $qui, $options) {
 	if (!$id) {
-		return false; // interdit de creer un evenement sur un article vide !
+		return autoriser('creerorphelin', 'evenement');
 	}
 	// si on a le droit de modifier l'article alors on a peut-etre le droit d'y creer un evenement
 	$afficher = false;
@@ -88,7 +88,7 @@ function autoriser_evenement_modifier_dist($faire, $quoi, $id, $qui, $options) {
 		$id_article = sql_getfetsel('id_article', 'spip_evenements', 'id_evenement='.intval($id));
 	}
 	if (!$id_article) {
-		return false;
+		return autoriser('modifierorphelin', 'evenement');
 	}
 	return autoriser('modifier', 'article', $id_article, $qui);
 }
@@ -107,7 +107,7 @@ function autoriser_evenement_instituer_dist($faire, $quoi, $id, $qui, $options) 
 		$id_article = sql_getfetsel('id_article', 'spip_evenements', 'id_evenement='.intval($id));
 	}
 	if (!$id_article) {
-		return false;
+		return autoriser('instituerorphelin', 'evenement');
 	}
 	$statut = sql_getfetsel('statut', 'spip_articles', 'id_article='.intval($id_article));
 	// interdit de publier un evenement sur un article non publie
@@ -135,7 +135,7 @@ function autoriser_evenement_voir_dist($faire, $quoi, $id, $qui, $options) {
 		$id_article = sql_getfetsel('id_article', 'spip_evenements', 'id_evenement='.intval($id));
 	}
 	if (!$id_article) {
-		return false;
+		return autoriser('voirorphelin', 'evenement');
 	}
 	return autoriser('voir', 'article', $id_article, $qui);
 }
@@ -163,4 +163,48 @@ function autoriser_evenement_supprimer_dist($faire, $quoi, $id, $qui, $options) 
 		}
 	}
 	return autoriser('modifier', 'article', $id_article, $qui);
+}
+
+/**
+ * Autorisation de voir un evenement orphelin : constante
+ *
+ * @param string $faire
+ * @param string $quoi
+ * @return bool
+ */
+function autoriser_evenement_creerorphelin_dist($faire, $quoi) {
+	return _AGENDA_AUTORISER_ORPHELINS && $GLOBALS['auteur_session']['statut'] == '0minirezo' and !$GLOBALS['auteur_session']['restreint'];
+}
+
+/**
+ * Autorisation de modifier un evenement orphelin : constante
+ *
+ * @param string $faire
+ * @param string $quoi
+ * @return bool
+ */
+function autoriser_evenement_voirorphelin_dist($faire, $quoi) {
+	return _AGENDA_AUTORISER_ORPHELINS;
+}
+
+/**
+ * Autorisation de modifier un evenement orphelin : constante
+ *
+ * @param string $faire
+ * @param string $quoi
+ * @return bool
+ */
+function autoriser_evenement_modifierorphelin_dist($faire, $quoi) {
+	return _AGENDA_AUTORISER_ORPHELINS && $GLOBALS['auteur_session']['statut'] == '0minirezo' and !$GLOBALS['auteur_session']['restreint'];
+}
+
+/**
+ * Autorisation d’instituer un evenement orphelin : constante + admin
+ *
+ * @param string $faire
+ * @param string $quoi
+ * @return bool
+ */
+function autoriser_evenement_instituerorphelin_dist($faire, $quoi) {
+	return _AGENDA_AUTORISER_ORPHELINS && $GLOBALS['auteur_session']['statut'] == '0minirezo' and !$GLOBALS['auteur_session']['restreint'];
 }
