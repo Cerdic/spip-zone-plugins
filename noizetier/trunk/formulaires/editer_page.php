@@ -256,7 +256,7 @@ function formulaires_editer_page_traiter_dist($edition, $page, $redirect = '') {
 		}
 	}
 
-	// Mise ou insertion de la composition virtuelle
+	// Mise à jour ou insertion de la composition virtuelle
 	if ($edition == 'modifier') {
 		// -- Update de la composition modifiée
 		$where = array('page=' . sql_quote($identifiant));
