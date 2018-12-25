@@ -83,7 +83,7 @@
 	<necessite id="SPIP" version="[2.1.8;2.1.99]" />
 	<necessite id="spip_bonux" version="[2.2.17;]" />
 	<necessite id="saisies" version="[1.42.11;]" />
-	<necessite id="prix" version="[0.1;.0]" />
+	<necessite id="prix" version="[0.1.0;]" />
 	<necessite id="afficher_objets" version="[1.1.9;]" />
 	<necessite id="medias" version="[1.6.2;]" />
 </plugin>
