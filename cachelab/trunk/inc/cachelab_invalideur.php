@@ -37,18 +37,13 @@ function suivre_invalideur($cond, $modif = true) {
 	if (!$modif) {
 		return;
 	}
-	
-global $Memoization;
-static $len_prefix;
-	if (!isset($Memoization) or !$Memoization or !in_array($Memoization->methode(), array('apc', 'apcu'))) {
-		spip_log("suivre_invalideur($cond, $modif) : Memoization n'est pas activé", 'cachelab_erreur');
-		return false;
-	}
 
+	$objet='';
 	// determiner l'objet modifie : forum, article, etc
 	if (preg_match(',["\']([a-z_]+)[/"\'],', $cond, $r)) {
 		$objet = objet_type($r[1]);
-		if (!$objet) {
+		if (!$objet) {	// cas par exemple de 'recalcul' ?
+			spip_log("suivre_invalideur avec typesignal {$r[1]} sans objet_type", 'cachelab_signal_exotique_ou_erreur');
 			// stocker la date_modif_extra_$extra (ne sert a rien)
 			ecrire_meta('derniere_modif_extra_' . $r[1], time());
 			$f="cachelab_suivre_invalideur_{$r[1]}";
@@ -58,6 +53,7 @@ static $len_prefix;
 			ecrire_meta('derniere_modif_' . $objet, time());
 			$f="cachelab_suivre_invalideur_$objet";
 		}
+
 		if (function_exists($f)) {
 			spip_log ("suivre_invalideur appelle $f($cond,$modif)", "cachelab");
 			$modif = $f($cond, $modif);	 // $f renvoie la nouvelle valeur de $modif
@@ -67,26 +63,20 @@ static $len_prefix;
 		}
 	}
 
-	// si $derniere_modif_invalide est un array('article', 'rubrique')
-	// n'affecter la meta que si c'est un de ces objets qui est modifié
-	if (is_array($GLOBALS['derniere_modif_invalide'])) {
-		if (in_array($objet, $GLOBALS['derniere_modif_invalide'])) {
-			include_spip ('inc/cachelab');
-			cachelab_cibler('del');
-			spip_log ("suivre_invalideur / objet invalidant : '$objet' ($cond)", "cachelab");
-			spip_log ("suivre_invalideur / objet invalidant : '$objet' ($cond)", "suivre_invalideur");
-			ecrire_meta('derniere_modif', time());
-		}
-		else
-			spip_log ("NON invalidant : $cond", "suivre_invalideur");
-
-	} // sinon, cas standard du core, toujours affecter la meta et tout effacer
+	
+	// n'affecter la meta que 
+	// si $derniere_modif_invalide est un array('article', 'rubrique') 
+	// et que c'est un de ces objets qui est modifié
+	// OU bien si ce n'est pas un array
+	if ($objet
+		and is_array($GLOBALS['derniere_modif_invalide'])
+		and !in_array($objet, $GLOBALS['derniere_modif_invalide'])) {
+			spip_log ("invalidation évitée : $cond", "cachelab_not");
+	} // sinon, cas par défaut du core, affecter la meta et tout effacer
 	else {
 		ecrire_meta('derniere_modif', time());
 		include_spip ('inc/cachelab');
-		cachelab_cibler('del');
-		spip_log ("suivre_invalideur standard / objet '$objet' ($cond)", "cachelab");
-		spip_log ("suivre_invalideur standard / objet '$objet' ($cond)", "suivre_invalideur");
+		spip_log ("invalidation totale / objet '$objet' ($cond)", "suivre_invalideur");
 		// et tout effacer
 	}
 }
