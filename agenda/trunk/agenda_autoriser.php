@@ -172,8 +172,9 @@ function autoriser_evenement_supprimer_dist($faire, $quoi, $id, $qui, $options) 
  * @param string $quoi
  * @return bool
  */
-function autoriser_evenement_creerorphelin_dist($faire, $quoi, $id, $qui) {
-	return _AGENDA_AUTORISER_ORPHELINS && $qui['statut'] == '0minirezo' && !$qui['restreint'];
+function autoriser_evenement_creerorphelin_dist($faire, $quoi, $id, $qui)
+{
+    return lire_config('agenda/autoriser_orphelins') && $qui['statut'] == '0minirezo' && !$qui['restreint'];
 }
 
 /**
@@ -183,8 +184,9 @@ function autoriser_evenement_creerorphelin_dist($faire, $quoi, $id, $qui) {
  * @param string $quoi
  * @return bool
  */
-function autoriser_evenement_voirorphelin_dist($faire, $quoi, $id, $qui) {
-	return _AGENDA_AUTORISER_ORPHELINS;
+function autoriser_evenement_voirorphelin_dist($faire, $quoi, $id, $qui)
+{
+    return lire_config('agenda/autoriser_orphelins');
 }
 
 /**
@@ -194,8 +196,9 @@ function autoriser_evenement_voirorphelin_dist($faire, $quoi, $id, $qui) {
  * @param string $quoi
  * @return bool
  */
-function autoriser_evenement_modifierorphelin_dist($faire, $quoi, $id, $qui) {
-	return _AGENDA_AUTORISER_ORPHELINS && $qui['statut'] == '0minirezo' && !$qui['restreint'];
+function autoriser_evenement_modifierorphelin_dist($faire, $quoi, $id, $qui)
+{
+    return lire_config('agenda/autoriser_orphelins') && $qui['statut'] == '0minirezo' && !$qui['restreint'];
 }
 
 /**
@@ -205,6 +208,7 @@ function autoriser_evenement_modifierorphelin_dist($faire, $quoi, $id, $qui) {
  * @param string $quoi
  * @return bool
  */
-function autoriser_evenement_instituerorphelin_dist($faire, $quoi, $id, $qui) {
-	return _AGENDA_AUTORISER_ORPHELINS && $qui['statut'] == '0minirezo' && !$qui['restreint'];
+function autoriser_evenement_instituerorphelin_dist($faire, $quoi, $id, $qui)
+{
+    return lire_config('agenda/autoriser_orphelins') && $qui['statut'] == '0minirezo' && !$qui['restreint'];
 }
