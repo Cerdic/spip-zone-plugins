@@ -104,8 +104,6 @@ You can choose a new identifier or suffix the reference identifier as follows:
 	'formulaire_icon' => 'Icon',
 	'formulaire_icon_explication' => 'You can enter the relative path to an icon (for example : <i>images/list-item-contenus.png</i>).',
 	'formulaire_identifiant_deja_pris' => 'This identifier already exists!',
-	'formulaire_import_fusion' => 'Merge with the current configuration',
-	'formulaire_import_remplacer' => 'Replace the current configuration',
 	'formulaire_liste_compos_config' => 'This configuration file defines the following Nuts Manager compositions:', # MODIF
 	'formulaire_liste_pages_config' => 'This configuration file defines
 nuts on the following pages:', # MODIF

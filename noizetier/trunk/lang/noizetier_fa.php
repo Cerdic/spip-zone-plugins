@@ -50,8 +50,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_icon_explication' => 'مي‌توانيد مسير نسبي به سوي يك صورتك را وارد كنيد (براي نمونه : <i>images/objet-liste-contenus.png</i>)
 براي ديدن فهرست تصاوير اخيراً نصب شده مي‌توانيد  به اين صفحه مرجعه كنيد: <a href="../spip.php?page=icones_preview">', # MODIF
 	'formulaire_identifiant_deja_pris' => 'از اين شناسه اكنون استفاده مي‌شود!',
-	'formulaire_import_fusion' => 'ادغام با پيكربندي فعلي',
-	'formulaire_import_remplacer' => 'جايگزين سازي پيكربندي فعلي',
 	'formulaire_liste_compos_config' => 'اين پرونده‌ي پيكربندي تركيب‌هاي فندق‌هاي بعدي را تعريف مي‌كند: ', # MODIF
 	'formulaire_liste_pages_config' => 'اين پرونده‌ي پيكربندي فندق‌هاي روي اين صفحه‌ها را تعريف مي‌كند:‌', # MODIF
 	'formulaire_modifier_composition' => 'اصلاح اين تركيب: ', # MODIF

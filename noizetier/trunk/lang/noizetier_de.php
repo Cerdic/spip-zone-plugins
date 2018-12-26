@@ -50,8 +50,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_icon' => 'Icon',
 	'formulaire_icon_explication' => 'Sie können den relativen Pfad zu einem Icon angeben (z.B.: <i>images/objekt-liste-inhalte.png</i>). Eine Liste der Icons in Standardverzeichnissen finden sie<a href="../spip.php?page=icones_preview">auf dieser Seite</a>.', # MODIF
 	'formulaire_identifiant_deja_pris' => 'Dieser Bezeichner wird bereits verwndet!',
-	'formulaire_import_fusion' => 'Mit der aktuellen Konfiguration zusammenführen',
-	'formulaire_import_remplacer' => 'Aktuelle Konfiguration ersetzen',
 	'formulaire_liste_compos_config' => 'Diese Konfigurationsdatei definiert die Kompositionen des folgenden Nussbaums:', # MODIF
 	'formulaire_liste_pages_config' => 'Diese Konfigurationsdatei definiert Code-Nüsse auf folgenden Seiten:', # MODIF
 	'formulaire_modifier_composition' => 'Diese Komposition ändern:', # MODIF
