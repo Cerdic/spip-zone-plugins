@@ -291,7 +291,7 @@ class Markdownify {
           if ($this->skipConversion) {
             $this->isMarkdownable(); # update notConverted
             $this->handleTagToText();
-            break;
+            continue 2;
           }
           if (!$this->parser->keepWhitespace && $this->parser->isBlockElement && $this->parser->isStartTag) {
             $this->parser->html = ltrim($this->parser->html);
