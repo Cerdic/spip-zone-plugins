@@ -1,7 +1,7 @@
 <paquet
 	prefix="emogrifier"
 	categorie="outil"
-	version="1.0.12"
+	version="1.0.13"
 	etat="test"
 	compatibilite="[3.0.5;3.2.*]"
 	documentation="https://github.com/bystrano/emogrifier"
@@ -17,6 +17,6 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="php" compatibilite="[5.5;]" />
+	<necessite nom="php" compatibilite="[5.5.0;]" />
 	<chemin path=""/>
 </paquet>
