@@ -60,45 +60,45 @@ function ajouter_traitement_automatique($interfaces, $traitement, $balise, $tabl
  *	   Déclarations d'interface pour le compilateur
  */
 function massicot_declarer_tables_interfaces($interfaces) {
-
-	$interfaces = ajouter_traitement_automatique(
-		$interfaces,
-		'massicoter_document(%s)',
-		'FICHIER',
-		'documents'
-	);
-
-	$interfaces = ajouter_traitement_automatique(
-		$interfaces,
-		'massicoter_logo_document(%s, $Pile[1])',
-		'LOGO_DOCUMENT'
-	);
-
-	$interfaces = ajouter_traitement_automatique(
-		$interfaces,
-		'massicoter_document(%s)',
-		'URL_DOCUMENT',
-		'documents'
-	);
-
-	/* On traîte aussi les balises #HAUTEUR et #LARGEUR des documents */
-	$interfaces = ajouter_traitement_automatique(
-		$interfaces,
-		'massicoter_largeur(%s, $Pile[1])',
-		'LARGEUR',
-		'documents'
-	);
-
-	$interfaces = ajouter_traitement_automatique(
-		$interfaces,
-		'massicoter_hauteur(%s, $Pile[1])',
-		'HAUTEUR',
-		'documents'
-	);
-
-	/* Pour chaque objet éditorial existant, ajouter un traitement sur
-	   les logos */
+	// Ne pas empêcher l'installation quand le plugin est dans plugins-dist
 	if (isset($GLOBALS['spip_connect_version'])) {
+		$interfaces = ajouter_traitement_automatique(
+			$interfaces,
+			'massicoter_document(%s)',
+			'FICHIER',
+			'documents'
+		);
+
+		$interfaces = ajouter_traitement_automatique(
+			$interfaces,
+			'massicoter_logo_document(%s, $Pile[1])',
+			'LOGO_DOCUMENT'
+		);
+
+		$interfaces = ajouter_traitement_automatique(
+			$interfaces,
+			'massicoter_document(%s)',
+			'URL_DOCUMENT',
+			'documents'
+		);
+
+		/* On traîte aussi les balises #HAUTEUR et #LARGEUR des documents */
+		$interfaces = ajouter_traitement_automatique(
+			$interfaces,
+			'massicoter_largeur(%s, $Pile[1])',
+			'LARGEUR',
+			'documents'
+		);
+
+		$interfaces = ajouter_traitement_automatique(
+			$interfaces,
+			'massicoter_hauteur(%s, $Pile[1])',
+			'HAUTEUR',
+			'documents'
+		);
+
+		/* Pour chaque objet éditorial existant, ajouter un traitement sur
+		   les logos */
 		foreach (lister_tables_objets_sql() as $table => $valeurs) {
 			if ($table !== 'spip_documents') {
 				$interfaces = ajouter_traitement_automatique(
@@ -120,26 +120,26 @@ function massicot_declarer_tables_interfaces($interfaces) {
 				);
 			}
 		}
+
+		/* sans oublier #LOGO_ARTICLE_RUBRIQUE… */
+		$interfaces = ajouter_traitement_automatique(
+			$interfaces,
+			'massicoter_logo(%s,null,null,null,$Pile[0])',
+			'LOGO_ARTICLE_RUBRIQUE'
+		);
+
+		/* …ni les #LOGO_SITE_SPIP ! */
+		$interfaces = ajouter_traitement_automatique(
+			$interfaces,
+			'massicoter_logo(%s,"site","0","",$Pile[0])',
+			'LOGO_SITE_SPIP'
+		);
+		$interfaces = ajouter_traitement_automatique(
+			$interfaces,
+			'massicoter_logo(%s,"site","0","logo_survol",$Pile[0])',
+			'LOGO_SITE_SPIP_SURVOL'
+		);
 	}
-
-	/* sans oublier #LOGO_ARTICLE_RUBRIQUE… */
-	$interfaces = ajouter_traitement_automatique(
-		$interfaces,
-		'massicoter_logo(%s,null,null,null,$Pile[0])',
-		'LOGO_ARTICLE_RUBRIQUE'
-	);
-
-	/* …ni les #LOGO_SITE_SPIP ! */
-	$interfaces = ajouter_traitement_automatique(
-		$interfaces,
-		'massicoter_logo(%s,"site","0","",$Pile[0])',
-		'LOGO_SITE_SPIP'
-	);
-	$interfaces = ajouter_traitement_automatique(
-		$interfaces,
-		'massicoter_logo(%s,"site","0","logo_survol",$Pile[0])',
-		'LOGO_SITE_SPIP_SURVOL'
-	);
 
 	return $interfaces;
 }
