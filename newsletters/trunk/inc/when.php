@@ -17,12 +17,16 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return string
  */
 function when_rule_to_next_date($date_start,$rule,$prev=''){
-	include_spip("lib/when/When");
+	include_spip("lib/when/src/When");
+	include_spip("lib/when/src/Valid");
 
 	try {
-		$r = new When();
-		$r->recur($date_start)->rrule($rule);
-		while ($next=$r->next()
+		$r = new When\When();
+		$r->startDate(new DateTime($date_start))->rrule($rule);
+		if (!$prev) {
+			$prev = $date_start;
+		}
+		while ($next=$r->getNextOccurrence(new DateTime($prev))
 			AND $prev AND strtotime($prev)>=strtotime($next->format("Y-m-d H:i:s")));
 
 		if ($next){

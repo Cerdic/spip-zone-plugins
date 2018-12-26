@@ -1,7 +1,7 @@
 <paquet
 	prefix="newsletters"
 	categorie="communication"
-	version="1.5.5"
+	version="1.6.0"
 	etat="stable"
 	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/newsletters-64.png"
@@ -11,6 +11,8 @@
 	<nom>Newsletters</nom>
 
 	<auteur lien='http://nursit.com/'>Cedric Morin</auteur>
+	<credit lien='https://github.com/tplaner/When'>When</credit>
+	<credit lien='https://github.com/ecenter/markdownify'>Markdownify</credit>
 
 	<licence>GNU/GPL</licence>
 
