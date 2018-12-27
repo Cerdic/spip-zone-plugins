@@ -789,7 +789,7 @@ body,p,td,th,input,submit { font-size:0.8em;font-family:arial,helvetica,sans-ser
 td { vertical-align:top }
 a { color:black; font-weight:none; text-decoration:none; }
 a:hover { text-decoration:underline; }
-div.content { padding:1em 1em 1em 1em; width:97%; z-index:100; }
+div.content { padding:1em 1em 1em 1em; width:97%; z-index:100; position: relative;}
 
 h1.apc { background:rgb(153,153,204); margin:0; padding:0.5em 1em 0.5em 1em; }
 * html h1.apc { margin-bottom:-7px; }
