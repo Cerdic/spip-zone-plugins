@@ -73,6 +73,49 @@ function conteneur_construire($plugin, $id_conteneur, $stockage = '') {
 }
 
 /**
+ * Détermine si un conteneur est une noisette ou pas.
+ *
+ * @api
+ * @filtre
+ *
+ * @uses ncore_conteneur_construire()
+ * @uses ncore_conteneur_verifier()
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param string|array $conteneur
+ *        Identifiant unique du conteneur ou tableau du conteneur.
+ * @param string $stockage
+ *        Identifiant du service de stockage à utiliser si précisé.
+ *
+ * @return bool
+ *        `true` si le conteneur est une noisette `false` sinon.
+ */
+function conteneur_est_noisette($plugin, $conteneur, $stockage = '') {
+
+	// Initialiser la sortie
+	$est_noisette = false;
+
+	// Suivant le format du conteneur on calcule le tableau ou on le vérifie.
+	include_spip('ncore/ncore');
+	if (is_string($conteneur)) {
+		$conteneur = ncore_conteneur_construire($plugin, $conteneur, $stockage);
+	} else {
+		$conteneur = ncore_conteneur_verifier($plugin, $conteneur, $stockage);
+	}
+
+	// On détermine à partir du tableau si le conteneur est une noisette.
+	if (isset($conteneur['type_noisette'], $conteneur['id_noisette'])
+	and $conteneur['type_noisette']
+	and intval($conteneur['id_noisette'])) {
+		$est_noisette = true;
+	}
+
+	return $est_noisette;
+}
+
+/**
  * Supprime toutes les noisettes d’un conteneur.
  * L'éventuelle imbrication de conteneurs est gérée dans la fonction de service ncore_conteneur_destocker().
  *
