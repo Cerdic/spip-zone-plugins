@@ -35,7 +35,7 @@ function autoriser_evenements_menu_dist($faire, $type = '', $id = 0, $qui = null
  */
 function autoriser_article_creerevenementdans_dist($faire, $quoi, $id, $qui, $options) {
 	if (!$id) {
-		return autoriser('creerorphelin', 'evenement');
+		return false; // interdit de creer un evenement sur un article vide !
 	}
 	// si on a le droit de modifier l'article alors on a peut-etre le droit d'y creer un evenement
 	$afficher = false;
@@ -88,7 +88,7 @@ function autoriser_evenement_modifier_dist($faire, $quoi, $id, $qui, $options) {
 		$id_article = sql_getfetsel('id_article', 'spip_evenements', 'id_evenement='.intval($id));
 	}
 	if (!$id_article) {
-		return autoriser('modifierorphelin', 'evenement', $id, $qui);
+		return false;
 	}
 	return autoriser('modifier', 'article', $id_article, $qui);
 }
@@ -107,7 +107,7 @@ function autoriser_evenement_instituer_dist($faire, $quoi, $id, $qui, $options) 
 		$id_article = sql_getfetsel('id_article', 'spip_evenements', 'id_evenement='.intval($id));
 	}
 	if (!$id_article) {
-		return autoriser('instituerorphelin', 'evenement', $id, $qui);
+		return false;
 	}
 	$statut = sql_getfetsel('statut', 'spip_articles', 'id_article='.intval($id_article));
 	// interdit de publier un evenement sur un article non publie
@@ -135,7 +135,7 @@ function autoriser_evenement_voir_dist($faire, $quoi, $id, $qui, $options) {
 		$id_article = sql_getfetsel('id_article', 'spip_evenements', 'id_evenement='.intval($id));
 	}
 	if (!$id_article) {
-		return autoriser('voirorphelin', 'evenement', $id, $qui);
+		return false;
 	}
 	return autoriser('voir', 'article', $id_article, $qui);
 }
@@ -163,52 +163,4 @@ function autoriser_evenement_supprimer_dist($faire, $quoi, $id, $qui, $options) 
 		}
 	}
 	return autoriser('modifier', 'article', $id_article, $qui);
-}
-
-/**
- * Autorisation de voir un evenement orphelin : constante
- *
- * @param string $faire
- * @param string $quoi
- * @return bool
- */
-function autoriser_evenement_creerorphelin_dist($faire, $quoi, $id, $qui)
-{
-    return lire_config('agenda/autoriser_orphelins') && $qui['statut'] == '0minirezo' && !$qui['restreint'];
-}
-
-/**
- * Autorisation de modifier un evenement orphelin : constante
- *
- * @param string $faire
- * @param string $quoi
- * @return bool
- */
-function autoriser_evenement_voirorphelin_dist($faire, $quoi, $id, $qui)
-{
-    return lire_config('agenda/autoriser_orphelins');
-}
-
-/**
- * Autorisation de modifier un evenement orphelin : constante
- *
- * @param string $faire
- * @param string $quoi
- * @return bool
- */
-function autoriser_evenement_modifierorphelin_dist($faire, $quoi, $id, $qui)
-{
-    return lire_config('agenda/autoriser_orphelins') && $qui['statut'] == '0minirezo' && !$qui['restreint'];
-}
-
-/**
- * Autorisation d’instituer un evenement orphelin : constante + admin
- *
- * @param string $faire
- * @param string $quoi
- * @return bool
- */
-function autoriser_evenement_instituerorphelin_dist($faire, $quoi, $id, $qui)
-{
-    return lire_config('agenda/autoriser_orphelins') && $qui['statut'] == '0minirezo' && !$qui['restreint'];
 }

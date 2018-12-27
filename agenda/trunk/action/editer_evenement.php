@@ -259,82 +259,63 @@ function evenement_instituer($id_evenement, $c) {
 
 	$champs = array();
 
+	if (!autoriser('modifier', 'article', $id_parent)
+		or (isset($c['id_parent'])
+		and !autoriser('modifier', 'article', $c['id_parent']))) {
+		spip_log("editer_evenement $id_evenement refus " . join(' ', $c));
+		return false;
+	}
 
-	if (!$id_parent) {
-		if (!autoriser('instituerorphelin', 'evenement', $id_evement)) {
-			return false; // pas le droit d'instituer des orphelins : on abandonne
-		} else {
-			// si pas d'article lie, et statut par defaut
-			// on met en propose
-			if ($statut=='0') {
-				$champs['statut'] = $statut = 'prop';
-			} else {
-				if (isset($c['statut']) and $s = $c['statut'] and $s != $statut) {
-					$champs['statut'] = $statut = $s;
+	// Verifier que l'article demande existe et est different
+	// de l'article actuel
+	if (isset($c['id_parent'])
+		and $c['id_parent'] != $id_parent
+		and (sql_countsel('spip_articles', 'id_article='.intval($c['id_parent'])))) {
+		$id_parent = $champs['id_article'] = $c['id_parent'];
+	}
+
+	$sa = sql_getfetsel('statut', 'spip_articles', 'id_article='.intval($id_parent));
+	if ($id_parent
+		and (
+			$id_parent !== $id_parent_ancien
+			or $statut == '0'
+		)) {
+		switch ($sa) {
+			case 'publie':
+				// statut par defaut si besoin
+				if ($statut == '0') {
+					$champs['statut'] = $statut = 'publie';
 				}
-			}
+				break;
+			case 'poubelle':
+				// si article a la poubelle, evenement aussi
+				$champs['statut'] = $statut = 'poubelle';
+				break;
+			default:
+				// pas de publie ni 0 si article pas publie
+				if (in_array($statut, array('publie','0'))) {
+					$champs['statut'] = $statut = 'prop';
+				}
+				break;
 		}
-	} else {
+	}
 
-		if (!autoriser('modifier', 'article', $id_parent)
-			or (isset($c['id_parent'])
-			and !autoriser('modifier', 'article', $c['id_parent']))) {
+	// si pas d'article lie, et statut par defaut
+	// on met en propose
+	if ($statut=='0') {
+		$champs['statut'] = $statut = 'prop';
+	}
+
+	if (isset($c['statut'])
+		and $s = $c['statut']
+		and $s != $statut) {
+		// pour instituer un evenement il faut avoir le droit d'instituer l'article associe avec le meme statut
+		if (autoriser('instituer', 'article', $id_parent, null, array('statut'=>$s))
+			and ($sa=='publie' or $s!=='publie')) {
+			$champs['statut'] = $statut = $s;
+		} else {
 			spip_log("editer_evenement $id_evenement refus " . join(' ', $c));
-			return false;
 		}
-
-		// Verifier que l'article demande existe et est different
-		// de l'article actuel
-		if (isset($c['id_parent'])
-			and $c['id_parent'] != $id_parent
-			and (sql_countsel('spip_articles', 'id_article='.intval($c['id_parent'])))) {
-			$id_parent = $champs['id_article'] = $c['id_parent'];
-		}
-
-		$sa = sql_getfetsel('statut', 'spip_articles', 'id_article='.intval($id_parent));
-		if ($id_parent
-			and (
-				$id_parent !== $id_parent_ancien
-				or $statut == '0'
-			)) {
-			switch ($sa) {
-				case 'publie':
-					// statut par defaut si besoin
-					if ($statut == '0') {
-						$champs['statut'] = $statut = 'publie';
-					}
-					break;
-				case 'poubelle':
-					// si article a la poubelle, evenement aussi
-					$champs['statut'] = $statut = 'poubelle';
-					break;
-				default:
-					// pas de publie ni 0 si article pas publie
-					if (in_array($statut, array('publie','0'))) {
-						$champs['statut'] = $statut = 'prop';
-					}
-					break;
-			}
-		}
-
-		// si pas d'article lie, et statut par defaut
-		// on met en propose
-		if ($statut=='0') {
-			$champs['statut'] = $statut = 'prop';
-		}
-
-		if (isset($c['statut'])
-			and $s = $c['statut']
-			and $s != $statut) {
-			// pour instituer un evenement il faut avoir le droit d'instituer l'article associe avec le meme statut
-			if (autoriser('instituer', 'article', $id_parent, null, array('statut'=>$s))
-				and ($sa=='publie' or $s!=='publie')) {
-				$champs['statut'] = $statut = $s;
-			} else {
-				spip_log("editer_evenement $id_evenement refus " . join(' ', $c));
-			}
-		}
-
 	}
 
 	// Envoyer aux plugins
