@@ -63,22 +63,18 @@ function suivre_invalideur($cond, $modif = true) {
 		}
 	}
 
-	
-	// n'affecter la meta que 
-	// si $derniere_modif_invalide est un array('article', 'rubrique') 
+	// affecter la meta si $derniere_modif_invalide est un array (de types d'objets)
 	// et que c'est un de ces objets qui est modifié
 	// OU bien si ce n'est pas un array
-	if ($objet
-		and is_array($GLOBALS['derniere_modif_invalide'])
-		and !in_array($objet, $GLOBALS['derniere_modif_invalide'])) {
-			spip_log ("invalidation évitée : $cond", "cachelab_not");
-	} // sinon, cas par défaut du core, affecter la meta et tout effacer
-	else {
+	if (!is_array($GLOBALS['derniere_modif_invalide'])
+		or ($objet
+			and in_array($objet, $GLOBALS['derniere_modif_invalide']))) {
 		ecrire_meta('derniere_modif', time());
 		include_spip ('inc/cachelab');
-		spip_log ("invalidation totale / objet '$objet' ($cond)", "suivre_invalideur");
-		// et tout effacer
+		spip_log ("invalidation totale / signal '$cond' avec objet '$objet'", "suivre_invalideur");
 	}
+	else 
+		spip_log ("invalidation évitée : $cond", "cachelab_not");
 }
 
 //
@@ -133,7 +129,8 @@ static $var_cache;
 				return;
 			}
 			$duree = $f($page['contexte'][$arg]);
-			spip_log ("#CACHE $f ($arg={$page['contexte'][$arg]}) renvoie : $duree s", "cachelab");
+			if (!defined('LOG_CACHELAB_DUREES_DYNAMIQUES') or LOG_CACHELAB_DUREES_DYNAMIQUES)
+				spip_log ("#CACHE $f ($arg={$page['contexte'][$arg]}) renvoie : $duree s", "cachelab");
 
 			if ($var_cache)
 				echo "<div class='cachelab_blocs' $hint_squel><h6>Durée dynamique : $duree</h6><small>$infos</small></div>";
@@ -158,7 +155,8 @@ static $var_cache;
 		$f = 'cachelab_filtre_'.$page['entetes']['X-Spip-Filtre-Cache'];
 		list ($f, $arg) = split_first_arg($f);
 		if (function_exists($f)) {
-			spip_log ("#CACHE appelle le filtre $f ($arg)", "cachelab");
+			if (!defined('LOG_CACHELAB_FILTRES') or LOG_CACHELAB_FILTRES)
+				spip_log ("#CACHE appelle le filtre $f ($arg)", "cachelab");
 			$toset = $f($page, $arg);
 			// Le filtre renvoie un booléen qui indique s'il faut mémoizer le cache
 			if ($toset)
