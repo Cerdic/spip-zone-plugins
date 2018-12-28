@@ -206,12 +206,15 @@ include_spip('public/noisette_repertorier');
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param mixed  $noisette
- *        Tableau des identifiants de la noisette qui peut prendre la forme d'un tableau avec pour index
+ * @param array  $noisette
+ *        Identifiants de la noisette qui prend la forme d'un tableau avec pour index
  *        id_noisette, id conteneur et rang_noisette, ce qui permet d'utiliser l'un ou l'autre des identifiants
  *        de la noisette.
  * @param string $type_noisette
  * 	      Identifiant du type de noisette.
+ * @param int    $profondeur
+ *        Profondeur de la noisette. Est inclus systématiquement dans le contexte sous le nom de variable
+ *        `profondeur_noisette`.
  * @param array  $environnement
  * 	      Tableau de l'environnement reçu par la noisette.
  * @param string $stockage
@@ -220,7 +223,7 @@ include_spip('public/noisette_repertorier');
  * @return array
  * 		Le tableau éventuellement vide des éléments de contexte de la noisette.
  */
-function noisette_contextualiser($plugin, $noisette, $type_noisette, $environnement, $stockage = '') {
+function noisette_contextualiser($plugin, $noisette, $type_noisette, $profondeur, $environnement, $stockage = '') {
 
 	// Initialisation du tableau des contexte générique de chaque type de noisette.
 	static $contextes_type_noisette = array();
@@ -229,6 +232,7 @@ function noisette_contextualiser($plugin, $noisette, $type_noisette, $environnem
 	// -- on transmet toujours les identifiants de la noisette id_noisette et couple (id_conteneur, rang) qui sont
 	//    fournis par la balise.
 	$contexte = $noisette ? $noisette : array();
+	$contexte['profondeur_noisette'] = $profondeur;
 
 	// Récupération du contexte défini pour le type de noisette. Ce contexte est juste une liste de variables non
 	// valorisées. La valorisation sera faite avec l'environnement.
@@ -298,8 +302,8 @@ function noisette_contextualiser($plugin, $noisette, $type_noisette, $environnem
  *        `oui`, `non`, `defaut` pour une capsule et `conteneur` pour une noisette conteneur.
  * @param string $parametres
  *        Liste des paramètres de l'encapsulation. Pour une capsule, les index sont limités à `type_noisette`,
- *        `id_noisette` et `css`. Pour une noisette conteneur cette liste correspond au champ `parametres` de la
- *        noisette et à son type.
+ *        `id_noisette`, `css` et `profondeur`. Pour une noisette conteneur cette liste correspond au champ `parametres`
+ *        de la noisette, à son type et à sa profondeur.
  * @param string $stockage
  *        Identifiant du service de stockage à utiliser si précisé.
  *

@@ -83,11 +83,18 @@ function noisette_ajouter($plugin, $type_noisette, $conteneur, $rang = 0, $stock
 				'est_conteneur' => type_noisette_lire($plugin, $type_noisette, 'conteneur', false, $stockage),
 				'parametres'    => serialize($parametres),
 				'encapsulation' => 'defaut',
-				'css'           => ''
+				'css'           => '',
+				'profondeur'    => 0
 			);
 			// -- Pour les noisettes conteneur pas de capsule englobante.
 			if ($description['est_conteneur'] == 'oui') {
 				$description['encapsulation'] = 'non';
+			}
+
+			// -- Pour une noisette incluse dans un conteneur noisette on calcule la profondeur.
+			if (ncore_conteneur_est_noisette($plugin, $conteneur, $stockage)) {
+				$description_conteneur = ncore_noisette_decrire($plugin, $conteneur['id_noisette'], $stockage);
+				$description['profondeur'] = $description_conteneur['profondeur'] + 1;
 			}
 
 			// Complément à la description par défaut, spécifique au plugin utilisateur, si nécessaire.
@@ -419,9 +426,10 @@ function noisette_deplacer($plugin, $noisette, $conteneur_destination, $rang_des
 
 		// On détermine l'id du conteneur destination en fonction du mode d'identification fourni par l'argument.
 		if (is_array($conteneur_destination)) {
+			$conteneur_destination = ncore_conteneur_verifier($plugin, $conteneur_destination, $stockage);
 			$id_conteneur_destination = ncore_conteneur_identifier(
 				$plugin,
-				ncore_conteneur_verifier($plugin, $conteneur_destination, $stockage),
+				$conteneur_destination,
 				$stockage
 			);
 		} else {
@@ -442,12 +450,25 @@ function noisette_deplacer($plugin, $noisette, $conteneur_destination, $rang_des
 			);
 			$rang_conteneur_destination = $rangs ? max($rangs) + 1 : 1;
 
+			// Pour éviter que chaque plugin ait à gérer la profondeur, N-Core calcule la profondeur de la noisette à son
+			// nouvel emplacement avant de déplacer celle-ci et la fournit à la fonction de changement de conteneur.
+			if (!is_array($conteneur_destination)) {
+				$conteneur_destination = ncore_conteneur_construire($plugin, $id_conteneur_destination, $stockage);
+			}
+			if (ncore_conteneur_est_noisette($plugin, $conteneur_destination, $stockage)) {
+				$description_conteneur = ncore_noisette_decrire($plugin, $conteneur_destination['id_noisette'], $stockage);
+				$profondeur_destination = $description_conteneur['profondeur'] + 1;
+			} else {
+				$profondeur_destination = 0;
+			}
+
 			// On transfère la noisette vers le conteneur destination à la position calculée (max + 1).
 			$description = ncore_noisette_changer_conteneur(
 				$plugin,
 				$description,
 				$id_conteneur_destination,
 				$rang_conteneur_destination,
+				$profondeur_destination,
 				$stockage
 			);
 

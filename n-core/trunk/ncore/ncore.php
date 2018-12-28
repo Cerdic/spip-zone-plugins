@@ -418,7 +418,7 @@ function ncore_noisette_stocker($plugin, $description, $stockage = '') {
 }
 
 /**
- * Transfère une noisette d'un conteneur vers un autre à un rang donné.
+ * Transfère une noisette d'un conteneur vers un autre à un rang donné et met à jour la profondeur.
  * Le rang destination n'est pas vérifié lors du rangement dans le conteneur destination. Il convient
  * à l'appelant de vérifier que le rang est libre.
  *
@@ -426,16 +426,20 @@ function ncore_noisette_stocker($plugin, $description, $stockage = '') {
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param array  $description
- *        Description de la noisette. Soit la description ne contient pas l'id de la noisette et c'est un ajout,
- *        soit la description contient l'id et c'est une mise à jour.
+ *        Description de la noisette à changer de conteneur.
  * @param string $id_conteneur
+ *        Identifiant unique sous forme de chaine du conteneur destination.
  * @param int    $rang
+ *        Rang où positionner la noisette dans le conteneur destination. Il faut toujours vérifier au préalable
+ *        que ce rang est libre.
+ * @param int    $profondeur
+ *        Profondeur de la noisette à sa nouvelle position.
  * @param string $stockage
  *        Identifiant du service de stockage à utiliser si précisé.
  *
  * @return array
  */
-function ncore_noisette_changer_conteneur($plugin, $description, $id_conteneur, $rang, $stockage = '') {
+function ncore_noisette_changer_conteneur($plugin, $description, $id_conteneur, $rang, $profondeur, $stockage = '') {
 
 	// On cherche le service de stockage à utiliser selon la logique suivante :
 	// - si le service de stockage est non vide on l'utilise en considérant que la fonction existe forcément;
@@ -444,7 +448,7 @@ function ncore_noisette_changer_conteneur($plugin, $description, $id_conteneur, 
 	include_spip('inc/ncore_utils');
 	if ($changer = ncore_chercher_service($plugin, 'noisette_changer_conteneur', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
-		$description = $changer($plugin, $description, $id_conteneur, $rang);
+		$description = $changer($plugin, $description, $id_conteneur, $rang, $profondeur);
 	} else {
 		// Le plugin ne propose pas de fonction propre ou le stockage N-Core est explicitement demandé.
 		// -- N-Core stocke les noisettes dans une meta propre au plugin appelant contenant un tableau au format
@@ -458,10 +462,11 @@ function ncore_noisette_changer_conteneur($plugin, $description, $id_conteneur, 
 		$noisettes = lire_config("${plugin}_noisettes", array());
 
 		// On rajoute la description à son emplacement destination en prenant soin de modifier les index id_conteneur,
-		// conteneur et rang_noisette qui doivent représenter le conteneur destination.
+		// conteneur, rang_noisette et profondeur qui doivent représenter le conteneur destination.
 		$description['id_conteneur'] = $id_conteneur;
 		$description['conteneur'] = ncore_conteneur_construire($plugin, $id_conteneur, $stockage);
 		$description['rang_noisette'] = $rang;
+		$description['profondeur'] = $profondeur;
 		$noisettes[$id_conteneur][$rang] = $description;
 
 		// On met à jour la meta
@@ -934,7 +939,7 @@ function ncore_conteneur_identifier($plugin, $conteneur, $stockage = '') {
 /**
  * Reconstruit le conteneur sous forme de tableau à partir de son identifiant unique (fonction inverse
  * de `ncore_conteneur_identifier`).
- * N-Core ne fournit le conteneur pour les noisettes conteneur.
+ * N-Core ne fournit le conteneur que pour les noisettes conteneur.
  * Pour les autres conteneurs, c'est au plugin utilisateur de calculer le tableau.
  *
  * @package SPIP\NCORE\CONTENEUR\SERVICE
@@ -977,6 +982,39 @@ function ncore_conteneur_construire($plugin, $id_conteneur, $stockage = '') {
 	}
 
 	return $conteneur;
+}
+
+/**
+ * Détermine si un conteneur est une noisette ou pas. Le conteneur a été vérifié au préalable.
+ * Ce service est le seul a ne pas être surchargeable par un plugin utilisateur car les noisettes conteneur
+ * sont gérées entièrement par N-Core.
+ *
+ * @package SPIP\NCORE\CONTENEUR\SERVICE
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array $conteneur
+ *        Identifiant du conteneur sous forme de tableau canonique.
+ * @param string $stockage
+ *        Identifiant du service de stockage à utiliser si précisé.
+ *
+ * @return bool
+ *        `true` si le conteneur est une noisette `false` sinon.
+ */
+function ncore_conteneur_est_noisette($plugin, $conteneur, $stockage = '') {
+
+	// Initialiser la sortie
+	$est_noisette = false;
+
+	// On détermine à partir du tableau si le conteneur est une noisette.
+	if (isset($conteneur['type_noisette'], $conteneur['id_noisette'])
+	and $conteneur['type_noisette']
+	and intval($conteneur['id_noisette'])) {
+		$est_noisette = true;
+	}
+
+	return $est_noisette;
 }
 
 /**

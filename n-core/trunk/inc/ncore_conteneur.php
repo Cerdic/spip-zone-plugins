@@ -94,9 +94,6 @@ function conteneur_construire($plugin, $id_conteneur, $stockage = '') {
  */
 function conteneur_est_noisette($plugin, $conteneur, $stockage = '') {
 
-	// Initialiser la sortie
-	$est_noisette = false;
-
 	// Suivant le format du conteneur on calcule le tableau ou on le vérifie.
 	include_spip('ncore/ncore');
 	if (is_string($conteneur)) {
@@ -105,12 +102,8 @@ function conteneur_est_noisette($plugin, $conteneur, $stockage = '') {
 		$conteneur = ncore_conteneur_verifier($plugin, $conteneur, $stockage);
 	}
 
-	// On détermine à partir du tableau si le conteneur est une noisette.
-	if (isset($conteneur['type_noisette'], $conteneur['id_noisette'])
-	and $conteneur['type_noisette']
-	and intval($conteneur['id_noisette'])) {
-		$est_noisette = true;
-	}
+	// On appelle le service de N-Core qui est le seul service a ne pas être surchargeable par un plugin utilisateur.
+	$est_noisette = ncore_conteneur_est_noisette($plugin, $conteneur, $stockage);
 
 	return $est_noisette;
 }

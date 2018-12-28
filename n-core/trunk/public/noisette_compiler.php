@@ -44,6 +44,7 @@ function balise_NOISETTE_COMPILER_dist($p) {
 
 	// On extrait les autres informations de la noisette
 	$type_noisette = champ_sql('type_noisette', $p);
+	$profondeur = champ_sql('profondeur', $p);
 	$est_conteneur = champ_sql('est_conteneur', $p);
 	$parametres = champ_sql('parametres', $p);
 
@@ -76,7 +77,7 @@ function balise_NOISETTE_COMPILER_dist($p) {
 			array()
 		),
 		'conteneur',
-		array_merge(unserialize($parametres), array('type_noisette' => $type_noisette)),
+		array_merge(unserialize($parametres), array('type_noisette' => $type_noisette, 'profondeur_noisette' => $profondeur)),
 		$stockage
 	)";
 
@@ -90,11 +91,11 @@ function balise_NOISETTE_COMPILER_dist($p) {
 		\".$plugin.\",
 		recuperer_fond(
 			\".type_noisette_localiser($plugin, $type_noisette).\",
-			\".var_export(array_merge(unserialize($parametres), noisette_contextualiser($plugin, $noisette, $type_noisette, $environnement, $stockage)),true).\",
+			\".var_export(array_merge(unserialize($parametres), noisette_contextualiser($plugin, $noisette, $type_noisette, $profondeur, $environnement, $stockage)),true).\",
 			\".var_export(array('ajax'=>(type_noisette_ajaxifier($plugin, $type_noisette, $stockage))), true).\"
 		),
 		\".$encapsulation.\",
-		\".var_export(array('id_noisette' => $id_noisette, 'type_noisette' => $type_noisette, 'css' => $css)), true).\",
+		\".var_export(array('id_noisette' => $id_noisette, 'type_noisette' => $type_noisette, 'css' => $css, 'profondeur_noisette' => $profondeur)), true).\",
 		\".$stockage.\"
 	);?>\"";
 	$inclusion_dynamique_noisette = '';
@@ -102,11 +103,11 @@ function balise_NOISETTE_COMPILER_dist($p) {
 		$plugin,
 		recuperer_fond(
 			type_noisette_localiser($plugin, $type_noisette),
-			array_merge(unserialize($parametres), noisette_contextualiser($plugin, $noisette, $type_noisette, $environnement, $stockage)),
+			array_merge(unserialize($parametres), noisette_contextualiser($plugin, $noisette, $type_noisette, $profondeur, $environnement, $stockage)),
 			array('ajax' => type_noisette_ajaxifier($plugin, $type_noisette, $stockage))
 		),
 		$encapsulation,
-		array('id_noisette' => $id_noisette, 'type_noisette' => $type_noisette, 'css' => $css),
+		array('id_noisette' => $id_noisette, 'type_noisette' => $type_noisette, 'css' => $css, 'profondeur' => $profondeur),
 		$stockage
 	)";
 
