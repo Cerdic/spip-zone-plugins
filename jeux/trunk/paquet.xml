@@ -1,7 +1,7 @@
 <paquet
 	prefix="jeux"
 	categorie="divers"
-	version="3.4.3"
+	version="3.4.4"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/jeux-48.png"
@@ -32,8 +32,6 @@
 	<pipeline nom="optimiser_base_disparus" inclure="jeux_pipelines.php" />
 	<pipeline nom="affichage_final" inclure="jeux_pipelines.php" />
 	<pipeline nom="affiche_gauche" inclure="jeux_pipelines.php" />
-
-	<!-- Déclarations de pipelines -->
 	<pipeline nom="jeux_caracteristiques" action="" />
 
 	<menu nom="jeux" titre="jeux:jeux" parent="menu_edition" icone="images/jeu-16.png" />
