@@ -8,6 +8,7 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type="hidden" name="conteneur_id" value="#ENV{id_conteneur}" />
+		<input type="hidden" name="est_conteneur" value="#ENV{est_conteneur}" />
 
 		<fieldset>
 			<legend><:noizetier:legende_copie_pages_compatibles:></legend>
@@ -27,13 +28,15 @@
 					class=pleine_largeur
 				})]
 
-				[(#SAISIE{case, copie_balise,
-					label_case=<:noizetier:label_copie_noisette_balise:>,
-				})]
+				[(#ENV{est_conteneur}|=={non}|oui)
+					[(#SAISIE{case, copie_encapsulation,
+						label_case=<:noizetier:label_copie_noisette_balise:>,
+					})]
 
-				[(#SAISIE{case, copie_css,
-					label_case=<:noizetier:label_copie_noisette_css:>,
-				})]
+					[(#SAISIE{case, copie_css,
+						label_case=<:noizetier:label_copie_noisette_css:>,
+					})]
+				]
 			</div>
 		</fieldset>
 

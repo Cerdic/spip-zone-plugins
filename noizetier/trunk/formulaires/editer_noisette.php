@@ -110,13 +110,18 @@ function formulaires_editer_noisette_traiter_dist($id_noisette, $redirect = '') 
 			}
 		}
 
-		// Paramètres généraux d'inclusion de la noisette
-		include_spip('inc/config');
-		$encapsulation = _request('encapsulation');
-		$css = _request('css');
-		if (($encapsulation == 'non') or (($encapsulation == 'defaut') and !lire_config('noizetier/encapsulation_noisette'))) {
-			// on remet à zéro les css si la capsule englobante n'est pas active
-			$css = '';
+		// Paramètres généraux d'inclusion de la noisette : on distingue les noisettes conteneur et les autres.
+		// Pour les noisettes conteneur, l'encapsulation et les css ne sont pas éditables.
+		$valeurs = array('parametres' => serialize($parametres));
+		if (_request('est_conteneur') != 'oui') {
+			include_spip('inc/config');
+			$encapsulation = _request('encapsulation');
+			$css = _request('css');
+			if (($encapsulation == 'non') or (($encapsulation == 'defaut') and !lire_config('noizetier/encapsulation_noisette'))) {
+				// on remet à zéro les css si la capsule englobante n'est pas active
+				$css = '';
+			}
+			$valeurs = array_merge($valeurs, array('encapsulation' => $encapsulation, 'css' => $css));
 		}
 
 		// Fermeture de la modale
@@ -124,7 +129,6 @@ function formulaires_editer_noisette_traiter_dist($id_noisette, $redirect = '') 
 
 		// Mise à jour de la noisette en base de données
 		include_spip('inc/ncore_noisette');
-		$valeurs = array('parametres' => serialize($parametres), 'encapsulation' => $encapsulation, 'css' => $css);
 		if (noisette_parametrer('noizetier', intval($id_noisette), $valeurs)) {
 			// On invalide le cache
 			include_spip('inc/invalideur');

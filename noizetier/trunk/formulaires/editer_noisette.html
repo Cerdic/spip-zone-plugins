@@ -6,6 +6,7 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type="hidden" name="type_noisette" value="#ENV{type_noisette}" />
+		<input type="hidden" name="est_conteneur" value="#ENV{est_conteneur}" />
 
 		[(#REM) Paramètres de configuration propres à la noisette ]
 		<fieldset>

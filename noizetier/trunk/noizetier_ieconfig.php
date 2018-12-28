@@ -285,9 +285,16 @@ function noizetier_ieconfig_exporter() {
 
 	// Exportation de la tables spip_noisettes qui contient les noisettes associées aux pages explicites,
 	// aux compositions virtuelles et à certains objets précis.
+	// -- on fait en sorte que les noisettes conteneur soient les premiers index suivies des noisettes non conteneur.
 	// -- on supprime l'id_noisette de chaque noisette car il sera recréé lors de l'import.
 	include_spip('ncore_fonctions');
-	$export['noisettes'] = noisette_repertorier('noizetier', array(), 'id_noisette');
+	$noisettes_conteneur = noisette_repertorier('noizetier', array('est_conteneur' => 'oui'), 'id_noisette');
+	$export['noisettes'] = array_merge(
+		$noisettes_conteneur,
+		noisette_repertorier('noizetier', array('est_conteneur' => 'non'), 'id_noisette')
+	);
+	// -- le array_merge a changé les index numériques de 0 à n, il faut remettre les id de noisette.
+	$export['noisettes'] = array_column($export['noisettes'], null, 'id_noisette');
 	foreach($export['noisettes'] as $_id => $_noisette) {
 		unset($export['noisettes'][$_id]['id_noisette']);
 	}
@@ -392,7 +399,7 @@ function noizetier_ieconfig_importer($importation, $contenu_import) {
 		if ($importation['noisettes'] == 'remplacer') {
 			// On vide d'abord la table spip_noisettes de toutes les noisettes du noiZetier.
 			$where = array('plugin=' . sql_quote('noizetier'));
-			if (!sql_delete('spip_noisettes', $where)) {
+			if (sql_delete('spip_noisettes', $where) === false) {
 				$retour = false;
 			}
 		}
@@ -408,10 +415,14 @@ function noizetier_ieconfig_importer($importation, $contenu_import) {
 			$where = array('plugin=' . sql_quote('noizetier'));
 			$group_by = array('id_conteneur');
 			$nb_noisettes_base = sql_allfetsel($select, 'spip_noisettes', $where, $group_by);
-			$nb_noisettes_base = array_column($nb_noisettes_base, 'nb_noisettes', 'id_conteneur');
+			if ($nb_noisettes_base) {
+				$nb_noisettes_base = array_column($nb_noisettes_base, 'nb_noisettes', 'id_conteneur');
+			}
 
 			// On insère les noisettes du fichier d'import appartenant à des pages ou des objets disponibles dans la
-			// base. Cette opération se fait en deux passes pour gérer le fait que les noisettes conteneur vont
+			// base. Dans le fichier d'export, les noisettes conteneur sont classées avant les autres noisettes de façon
+			// à être créées quand les noisettes imbriquées le nécessiteront.
+			// Cette opération se fait en deux passes pour gérer le fait que les noisettes conteneur vont
 			// changer d'id ce qui change leur identifiant de conteneur :
 			// - Passe 1 : si la noisette est à insérer on l'ajoute dans le conteneur sans se préoccuper du changement
 			//             d'id de conteneur pour les noisettes conteneur. On stocke toutes les informations nécessaires
@@ -450,7 +461,10 @@ function noizetier_ieconfig_importer($importation, $contenu_import) {
 					$conteneur = unserialize($_noisette['conteneur']);
 					$conteneur_est_noisette = conteneur_est_noisette('noizetier', $conteneur);
 					if (!$conteneur_est_noisette) {
-						$rang = $nb_noisettes_base[$_noisette['id_conteneur']] + $_noisette['rang_noisette'];
+						$rang = !empty($nb_noisettes_base[$_noisette['id_conteneur']])
+							? $nb_noisettes_base[$_noisette['id_conteneur']]
+							: 0;
+						$rang += $_noisette['rang_noisette'];
 					}
 					$id_noisette_nouveau = noisette_ajouter(
 						'noizetier',

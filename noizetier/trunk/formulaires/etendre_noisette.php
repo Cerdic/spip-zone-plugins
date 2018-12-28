@@ -28,10 +28,12 @@ function formulaires_etendre_noisette_charger_dist($noisette, $bloc, $redirect) 
 	// Initialisation
 	$valeurs = array();
 
-	// On récupère le type de page et la composition associé au type de noisette
-	$select = array('type', 'composition');
+	// On récupère le type de page et la composition associé au type de noisette.
+	// On récupère aussi sa nature conteneur ou pas qui s'applique donc à la noisette à copier.
+	$select = array('type', 'composition', 'conteneur');
 	$where = array('type_noisette=' . sql_quote($noisette['type_noisette']));
 	$type_noisette = sql_fetsel($select, 'spip_types_noisettes', $where);
+	$valeurs['est_conteneur'] = $type_noisette['conteneur'];
 
 	// On cherche la liste des pages:
 	// - compatibles avec la noisette
@@ -100,7 +102,11 @@ function formulaires_etendre_noisette_traiter_dist($noisette, $bloc, $redirect) 
 				// On construit une seule fois le tableau des modifications si il y en a et on l'utilise
 				// pour chaque page.
 				$valeurs = array();
-				foreach (array('copie_parametres', 'copie_balise', 'copie_css') as $_champ) {
+				$champs = array('copie_parametres');
+				if (_request('est_conteneur') != 'oui') {
+					$champs = array_merge($valeurs, array('copie_encapsulation', 'copie_css'));
+				}
+				foreach ($champs as $_champ) {
 					if (_request($_champ)) {
 						$champ_noisette = str_replace('copie_', '', $_champ);
 						$valeurs[$champ_noisette] = $noisette[$champ_noisette];

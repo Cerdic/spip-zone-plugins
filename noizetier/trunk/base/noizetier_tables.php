@@ -148,6 +148,7 @@ function noizetier_declarer_tables_principales($tables_principales) {
 		'parametres'    => "text DEFAULT '' NOT NULL",
 		'encapsulation' => "varchar(6) DEFAULT 'defaut' NOT NULL",
 		'css'           => "tinytext DEFAULT '' NOT NULL",
+		'profondeur'    => "smallint DEFAULT 0 NOT NULL",
 	);
 
 	$noisettes_cles = array(

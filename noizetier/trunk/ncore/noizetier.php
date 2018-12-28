@@ -261,21 +261,25 @@ function noizetier_noisette_stocker($plugin, $description) {
  * Le rang destination n'est pas vérifié lors du rangement dans le conteneur destination. Il convient
  * à l'appelant de vérifier que le rang est libre.
  * La description complète de la noisette est renvoyée avec mise à jour des champs de positionnement (id_conteneur,
- * conteneur et rang_noisette).
+ * conteneur, rang_noisette et profondeur).
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param array  $description
- *        Description de la noisette. Soit la description ne contient pas l'id de la noisette et c'est un ajout,
- *        soit la description contient l'id et c'est une mise à jour.
+ *        Description de la noisette à changer de conteneur.
  * @param string $id_conteneur
+ *        Identifiant unique sous forme de chaine du conteneur destination.
  * @param int    $rang
+ *        Rang où positionner la noisette dans le conteneur destination. Il faut toujours vérifier au préalable
+ *        que ce rang est libre.
+ * @param int    $profondeur
+ *        Profondeur de la noisette à sa nouvelle position.
  *
  * @return array
  *         Description de la noisette mise à jour avec les informations sur le nouvel emplacement
  */
-function noizetier_noisette_changer_conteneur($plugin, $description, $id_conteneur, $rang) {
+function noizetier_noisette_changer_conteneur($plugin, $description, $id_conteneur, $rang, $profondeur) {
 
 	// On rajoute la description à son emplacement destination en prenant soin de modifier les index id_conteneur,
 	// conteneur et rang_noisette qui doivent représenter le conteneur destination.
@@ -283,6 +287,7 @@ function noizetier_noisette_changer_conteneur($plugin, $description, $id_contene
 	$description['conteneur'] = serialize(conteneur_construire($plugin, $id_conteneur));
 	$description['id_conteneur'] = $id_conteneur;
 	$description['rang_noisette'] = $rang;
+	$description['profondeur'] = $profondeur;
 
 	// On met à jour l'objet en base
 	// On sauvegarde l'id de la noisette et on le retire de la description pour éviter une erreur à l'update.
@@ -333,14 +338,18 @@ function noizetier_noisette_completer($plugin, $description) {
 		$conteneur = unserialize($description['conteneur']);
 
 		// Détermination du complément en fonction du fait que le conteneur soit une noisette ou pas.
-		// TODO : pourquoi on utilise pas la fonction qui permet de décomposer le conteneur ?
-		if (!empty($conteneur['id_noisette']) and ($id_noisette = intval($conteneur['id_noisette']))) {
+		include_spip('inc/ncore_conteneur');
+		if (conteneur_est_noisette('noizetier', $conteneur)) {
 			// -- si le conteneur est une noisette on récupère les informations de son conteneur. Comme les noisettes
 			//    sont insérées par niveau on duplique forcément les informations du bloc supérieur à chaque imbrication.
 			//    Il est donc inutile de remonter au bloc racine.
 			$select = array_keys($complement);
-			$where = array('id_noisette=' . $id_noisette, 'plugin=' . sql_quote($plugin));
-			$complement = sql_fetsel($select, 'spip_noisettes', $where);
+			$where = array('id_noisette=' . intval($conteneur['id_noisette']), 'plugin=' . sql_quote($plugin));
+			// Il est possible que le conteneur ne soit pas déjà en base (cas improbable) et donc pour éviter une
+			// notice on fait en sorte que $complement soit toujours un tableau.
+			if ($informations_bloc = sql_fetsel($select, 'spip_noisettes', $where)) {
+				$complement = $informations_bloc;
+			}
 		} else {
 			// -- si le conteneur n'est pas une noisette, le complément se déduit du conteneur lui-même.
 			if (!empty($conteneur['squelette'])) {
