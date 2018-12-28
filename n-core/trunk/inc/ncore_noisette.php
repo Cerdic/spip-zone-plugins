@@ -156,7 +156,8 @@ function noisette_ajouter($plugin, $type_noisette, $conteneur, $rang = 0, $stock
  *        `balise`, `css` et éventuellement ceux spécifiquement définis par le plugin utilisateur dans
  *        l'argument $editables_specifiques.
  * @param array  $editables_specifiques
- *        Liste de champs éditables spécifiques au plugin utilisateur ou tableau vide sinon.
+ *        Liste de champs éditables spécifiques au plugin utilisateur ou tableau vide sinon. Le tableau possède deux
+ *        index, l'un pour les noisettes conteneur `conteneur`, l'autre pour les noisettes non conteneur `non_conteneur`.
  * @param string $stockage
  *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
  *        ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
@@ -183,7 +184,18 @@ function noisette_parametrer($plugin, $noisette, $modifications, $editables_spec
 		$description = ncore_noisette_decrire($plugin, $noisette, $stockage);
 
 		// On contrôle les champs éditables et on met à jour la description de la noisette.
-		$parametres = array_merge(array('parametres', 'encapsulation', 'css'), $editables_specifiques);
+		// Pour une noisette conteneur les champs encapsulation et css ne sont pas éditables
+		if ($description['est_conteneur'] == 'oui') {
+			$parametres = array_merge(
+				array('parametres'),
+				(isset($editables_specifiques['conteneur']) ? $editables_specifiques['conteneur'] : array())
+			);
+		} else {
+			$parametres = array_merge(
+				array('parametres', 'encapsulation', 'css'),
+				(isset($editables_specifiques['non_conteneur']) ? $editables_specifiques['non_conteneur'] : array())
+			);
+		}
 		$modifications = array_intersect_key($modifications, array_flip($parametres));
 		$description = array_merge($description, $modifications);
 
