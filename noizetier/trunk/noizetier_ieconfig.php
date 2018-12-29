@@ -328,6 +328,11 @@ function noizetier_ieconfig_importer($importation, $contenu_import) {
 	// On appelle le pipeline pour éventuellement modifier le contenu à importer.
 	$contenu_import = pipeline('noizetier_config_import', $contenu_import);
 
+	// On récupère la liste des blocs par défaut des pages du site pour filtrer des blocs non autorisés
+	// provenant éventuellement de l'import. Cette liste sert pour les pages explicites et les compositions virtuelles.
+	include_spip('inc/noizetier_bloc');
+	$blocs_defaut = noizetier_bloc_lister_defaut();
+
 	// La configuration
 	if ($importation['configuration']) {
 		// On remplace la configuration actuelle par celle du fichier d'import.
@@ -348,8 +353,11 @@ function noizetier_ieconfig_importer($importation, $contenu_import) {
 		//    les pages communes (même identifiant).
 		foreach ($pages_explicites_base as $_page_explicite) {
 			if (isset($blocs_exclus_import[$_page_explicite['page']])) {
-				// Remplacement des blocs exclus de la page actuelle par ceux du fichier d'import.
-				$modification = array('blocs_exclus' => $blocs_exclus_import[$_page_explicite['page']]);
+				// Remplacement des blocs exclus de la page actuelle par ceux du fichier d'import. On filtre
+				// les blocs éventuellement non autorisés sur le site.
+				$modification = array(
+					'blocs_exclus' => array_intersect($blocs_exclus_import[$_page_explicite['page']], $blocs_defaut)
+				);
 				$where = array('page=' . sql_quote($_page_explicite['page']));
 				sql_updateq('spip_noizetier_pages', $modification, $where);
 			}
@@ -378,15 +386,19 @@ function noizetier_ieconfig_importer($importation, $contenu_import) {
 			// Suivant le mode d'importation et l'existence ou pas de la composition en base on ajoute ou
 			// on met à jour la composition virtuelle ou on ne fait rien.
 			foreach ($contenu_import['compositions_virtuelles'] as $_composition) {
-				if (in_array($_composition['page'], $compositions_base)) {
+				// On filtre les blocs exclus avec la liste des blocs par défaut du site.
+				$composition = $_composition;
+				$composition['blocs_exclus'] = array_intersect($composition['blocs_exclus'], $blocs_defaut);
+
+				// On détermine l'opération à faire ou pas.
+				if (in_array($composition['page'], $compositions_base)) {
 					if ($importation['compositions_virtuelles'] == 'fusionner') {
-						$where = 'page=' . sql_quote($_composition['page']);
-						$modifications = $_composition;
-						unset($modifications['page']);
-						sql_updateq('spip_noizetier_pages', $modifications, $where);
+						$where = 'page=' . sql_quote($composition['page']);
+						unset($composition['page']);
+						sql_updateq('spip_noizetier_pages', $composition, $where);
 					}
 				} else {
-					sql_insertq('spip_noizetier_pages', $_composition);
+					sql_insertq('spip_noizetier_pages', $composition);
 				}
 			}
 		}
