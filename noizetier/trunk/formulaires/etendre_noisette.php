@@ -23,7 +23,7 @@ if (!function_exists('autoriser')) {
  * @return array
  * 		Tableau des champs postés pour l'affichage du formulaire.
  */
-function formulaires_etendre_noisette_charger_dist($noisette, $bloc, $redirect) {
+function formulaires_etendre_noisette_charger_dist($noisette, $page_noisette, $bloc, $redirect) {
 
 	// Initialisation
 	$valeurs = array();
@@ -51,7 +51,8 @@ function formulaires_etendre_noisette_charger_dist($noisette, $bloc, $redirect) 
 	$valeurs['_pages'] = array();
 	if ($pages) {
 		foreach ($pages as $_page) {
-			if ((!in_array($bloc, unserialize($_page['blocs_exclus'])))
+			if (($_page['page'] != $page_noisette)
+			and (!in_array($bloc, unserialize($_page['blocs_exclus'])))
 			and autoriser('configurerpage', 'noizetier', 0, '', array('page' => $_page['page']))) {
 				$valeurs['_pages'][$_page['page']] = _T_ou_typo($_page['nom']) . " (<em>{$_page['page']}</em>)";
 			}
@@ -67,7 +68,7 @@ function formulaires_etendre_noisette_charger_dist($noisette, $bloc, $redirect) 
 	return $valeurs;
 }
 
-function formulaires_etendre_noisette_verifier_dist($noisette, $bloc, $redirect) {
+function formulaires_etendre_noisette_verifier_dist($noisette, $page_noisette, $bloc, $redirect) {
 
 	$erreurs = array();
 	if (!_request('pages')) {
@@ -78,7 +79,7 @@ function formulaires_etendre_noisette_verifier_dist($noisette, $bloc, $redirect)
 }
 
 
-function formulaires_etendre_noisette_traiter_dist($noisette, $bloc, $redirect) {
+function formulaires_etendre_noisette_traiter_dist($noisette, $page_noisette, $bloc, $redirect) {
 
 	$retour = array();
 

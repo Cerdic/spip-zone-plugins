@@ -1,8 +1,9 @@
 [(#AUTORISER{configurer, noizetier}|sinon_interdire_acces)]
 <BOUCLE_noisette(NOISETTES types_noisettes){id_noisette}>
 
+[(#SET{page_noisette, #TYPE[-(#COMPOSITION)]})]
 [(#SET{redirect, [(#URL_ECRIRE{noizetier_page}
-					|parametre_url{page, #TYPE[-(#COMPOSITION)]}
+					|parametre_url{page, #GET{page_noisette}}
 					|parametre_url{bloc, #BLOC})]})]
 
 <div class='cadre-formulaire-editer'>
@@ -23,8 +24,9 @@
 			id_noisette, #ID_NOISETTE,
 			type_noisette, #TYPE_NOISETTE,
 			parametres, #PARAMETRES**,
-			balise, #BALISE,
+			encapsulation, #ENCAPSULATION,
 			css, #CHAMP_SQL{css}},
+		#GET{page_noisette},
 		#ENV{bloc},
 		#GET{redirect}}
 </div>
