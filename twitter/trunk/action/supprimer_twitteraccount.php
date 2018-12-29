@@ -8,7 +8,9 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 
 /**
@@ -17,19 +19,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param null|string $account
  */
 function action_supprimer_twitteraccount_dist($account = null) {
-	if (is_null($account)){
+	if (is_null($account)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$account = $securiser_action();
 	}
 
 	include_spip("inc/autoriser");
-	if(autoriser("supprimer","twitteraccount",$account)){
+	if (autoriser("supprimer", "twitteraccount", $account)) {
 
 		$cfg = @unserialize($GLOBALS['meta']['microblog']);
-		if (isset($cfg['twitter_accounts'][$account])){
+		if (isset($cfg['twitter_accounts'][$account])) {
 			unset($cfg['twitter_accounts'][$account]);
 			if (!isset($cfg['default_account'])
-			  OR !isset($cfg['twitter_accounts'][$cfg['default_account']])){
+				OR !isset($cfg['twitter_accounts'][$cfg['default_account']])) {
 				$accounts = array_keys($cfg['twitter_accounts']);
 				$cfg['default_account'] = reset($accounts);
 			}
@@ -38,4 +40,5 @@ function action_supprimer_twitteraccount_dist($account = null) {
 		}
 	}
 }
+
 ?>

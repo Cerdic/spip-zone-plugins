@@ -8,7 +8,9 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 include_spip("inc/twitter");
 
@@ -19,11 +21,11 @@ include_spip("inc/twitter");
  * $user, $pass : identifiants
  * $service : quel service
  * $api : si on est vraiment desespere :-)
- * $tokens : dans le cas de oAuth chez twitter pouvoir passer des tokens différents
- * de ceux de la conf générale du site
+ * $tokens : dans le cas de oAuth chez twitter pouvoir passer des tokens diffï¿½rents
+ * de ceux de la conf gï¿½nï¿½rale du site
  */
-if (!function_exists('microblog')){
-function microblog($status, $user=null, $pass=null, $service=null, $api=null, $tokens=null){
-	return tweet($status, $tokens);
-}
+if (!function_exists('microblog')) {
+	function microblog($status, $user = null, $pass = null, $service = null, $api = null, $tokens = null) {
+		return tweet($status, $tokens);
+	}
 }

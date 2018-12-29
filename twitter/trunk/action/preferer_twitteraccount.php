@@ -8,7 +8,9 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 
 /**
@@ -17,20 +19,21 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param null|string $account
  */
 function action_preferer_twitteraccount_dist($account = null) {
-	if (is_null($account)){
+	if (is_null($account)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$account = $securiser_action();
 	}
 
 	include_spip("inc/autoriser");
-	if(autoriser("preferer","twitteraccount",$account)){
+	if (autoriser("preferer", "twitteraccount", $account)) {
 
 		$cfg = @unserialize($GLOBALS['meta']['microblog']);
-		if (isset($cfg['twitter_accounts'][$account])){
+		if (isset($cfg['twitter_accounts'][$account])) {
 			$cfg['default_account'] = $account;
 
 			ecrire_meta("microblog", serialize($cfg));
 		}
 	}
 }
+
 ?>

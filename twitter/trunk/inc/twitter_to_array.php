@@ -8,7 +8,9 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 
 function inc_twitter_to_array_dist($url, $options = array()) {
@@ -17,12 +19,13 @@ function inc_twitter_to_array_dist($url, $options = array()) {
 
 	$command = $url['path'];
 	$params = array();
-	parse_str($url['query'],$params);
+	parse_str($url['query'], $params);
 
-	if (!function_exists('twitter_api_call'))
+	if (!function_exists('twitter_api_call')) {
 		include_spip("inc/twitter");
+	}
 
-	$res = twitter_api_call($command,'get',$params,$options);
+	$res = twitter_api_call($command, 'get', $params, $options);
 
 	return $res;
 }
