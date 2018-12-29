@@ -156,7 +156,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'import_pages_explicites_avertissement2' => 'Aucune pages ou compositions explicites disponibles sur le site. Toute importation est donc inutile.',
 	'import_pages_explicites_explication' => 'Il existe des pages et compositions explicites communes entre le site et le fichier d’import.',
 	'import_pages_explicites_label' => 'Les blocs exclus des pages explicites',
-	'import_pages_explicites_labelcase' => 'Remplacer les blocs exclus des pages explicites du site par ceux du fichier d\'import',
+	'import_pages_explicites_labelcase' => 'Remplacer les blocs exclus des pages explicites du site par ceux du fichier d’import',
 	'import_resume' => 'Le fichier à importer a été construit avec le noiZetier en version @version@, schéma de données @schema@.',
 	'info_1_noisette_ajoutee' => '1 noisette a été ajoutée',
 	'info_composition' => 'COMPOSITION :',
@@ -169,7 +169,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_afficher_titre_noisette' => 'Afficher un titre de noisettes ?',
 	'label_code' => 'Code Spip :',
-	'label_copie_noisette_balise' => 'Copier l’indicateur d\'encapsulation.',
+	'label_copie_noisette_balise' => 'Copier l’indicateur d’encapsulation.',
 	'label_copie_noisette_css' => 'Copier les styles éventuels associés à la capsule englobante.',
 	'label_copie_noisette_parametres' => 'Copier les paramètres de configuration de la noisette source.',
 	'label_description_code' => 'Description :',

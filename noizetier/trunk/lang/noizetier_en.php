@@ -143,9 +143,9 @@ nuts on the following pages:', # MODIF
 	// L
 	'label_afficher_titre_noisette' => 'Display a title of nut?',
 	'label_code' => 'Spip code:',
-	'label_copie_noisette_balise' => 'Copy the wrapping tag indicator.',
+	'label_copie_noisette_balise' => 'Copy the wrapping tag indicator.', # MODIF
 	'label_copie_noisette_css' => 'Copy any styles associated to the wrapping tag.
-',
+', # MODIF
 	'label_copie_noisette_parametres' => 'Copy the configuration settings of the source nut.',
 	'label_description_code' => 'Description:',
 	'label_identifiant' => 'identifier:',

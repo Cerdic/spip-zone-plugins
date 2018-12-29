@@ -149,8 +149,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_afficher_titre_noisette' => 'Toon een titel voor de nootjes?',
 	'label_code' => 'SPIP code:',
-	'label_copie_noisette_balise' => 'Kopieer de indicator van het omhullende baken.',
-	'label_copie_noisette_css' => 'Kopieer de eventueel aan het omhullende baken gekoppelde stijlen.',
+	'label_copie_noisette_balise' => 'Kopieer de indicator van het omhullende baken.', # MODIF
+	'label_copie_noisette_css' => 'Kopieer de eventueel aan het omhullende baken gekoppelde stijlen.', # MODIF
 	'label_copie_noisette_parametres' => 'Kopieer de configuratieparameters van het bronnootje.',
 	'label_description_code' => 'Omschrijving:',
 	'label_identifiant' => 'identificatie:',
