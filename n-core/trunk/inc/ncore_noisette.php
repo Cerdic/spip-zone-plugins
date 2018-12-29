@@ -500,7 +500,7 @@ function noisette_deplacer($plugin, $noisette, $conteneur_destination, $rang_des
 				// On lit les noisettes restantes dans l'ordre décroissant pour éviter d'écraser une noisette.
 				ksort($autres_noisettes);
 				foreach ($autres_noisettes as $_rang => $_autre_description) {
-					if ($_rang > $description['rang_noisette']) {
+					if ($_rang > $rang_origine) {
 						ncore_noisette_ranger($plugin, $_autre_description, $_autre_description['rang_noisette'] - 1, $stockage);
 					}
 				}
