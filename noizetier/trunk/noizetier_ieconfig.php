@@ -286,15 +286,13 @@ function noizetier_ieconfig_exporter() {
 	// Exportation de la tables spip_noisettes qui contient les noisettes associées aux pages explicites,
 	// aux compositions virtuelles et à certains objets précis.
 	// -- on fait en sorte que les noisettes conteneur soient les premiers index suivies des noisettes non conteneur.
+	//    Pour chaque groupe, on sous-classe par profondeur de 0 à n. On utilise donc l'API SQL et pas celle de N-Core.
 	// -- on supprime l'id_noisette de chaque noisette car il sera recréé lors de l'import.
-	include_spip('ncore_fonctions');
-	$noisettes_conteneur = noisette_repertorier('noizetier', array('est_conteneur' => 'oui'), 'id_noisette');
-	$export['noisettes'] = array_merge(
-		$noisettes_conteneur,
-		noisette_repertorier('noizetier', array('est_conteneur' => 'non'), 'id_noisette')
-	);
+	$where = array('plugin=' . sql_quote('noizetier'));
+	$order_by = array('est_conteneur DESC', 'profondeur ASC');
+	$noisettes = sql_allfetsel('*', 'spip_noisettes', $where, array(), $order_by);
 	// -- le array_merge a changé les index numériques de 0 à n, il faut remettre les id de noisette.
-	$export['noisettes'] = array_column($export['noisettes'], null, 'id_noisette');
+	$export['noisettes'] = array_column($noisettes, null, 'id_noisette');
 	foreach($export['noisettes'] as $_id => $_noisette) {
 		unset($export['noisettes'][$_id]['id_noisette']);
 	}
@@ -420,8 +418,8 @@ function noizetier_ieconfig_importer($importation, $contenu_import) {
 			}
 
 			// On insère les noisettes du fichier d'import appartenant à des pages ou des objets disponibles dans la
-			// base. Dans le fichier d'export, les noisettes conteneur sont classées avant les autres noisettes de façon
-			// à être créées quand les noisettes imbriquées le nécessiteront.
+			// base. Dans le fichier d'export, les noisettes conteneur sont classées avant les autres noisettes et
+			// suivant une profondeur croissante de façon à être créées quand les noisettes imbriquées le nécessiteront.
 			// Cette opération se fait en deux passes pour gérer le fait que les noisettes conteneur vont
 			// changer d'id ce qui change leur identifiant de conteneur :
 			// - Passe 1 : si la noisette est à insérer on l'ajoute dans le conteneur sans se préoccuper du changement
@@ -431,7 +429,6 @@ function noizetier_ieconfig_importer($importation, $contenu_import) {
 			include_spip('inc/ncore_conteneur');
 			include_spip('inc/ncore_noisette');
 			$noisettes_conteneur = $noisettes_imbriquees = array();
-			$champs_modifiables = array_flip(array('parametres', 'encapsulation', 'css'));
 			foreach ($contenu_import['noisettes'] as $_id_noisette_ancien => $_noisette) {
 				// On vérifie qu'il faut bien importer la noisette
 				$noisette_a_importer = false;
@@ -453,18 +450,18 @@ function noizetier_ieconfig_importer($importation, $contenu_import) {
 
 				if ($noisette_a_importer) {
 					// La noisette à importer est bien associée à une page ou un objet de la base.
-					// Les noisettes ne sont pas triées dans l'ordre d'insertion, il faut donc se baser sur le rang
-					// dans le fichier d'import. Pour une noisette appartenant à un conteneur noisette on reprend le
-					// rang tel que mais pour une noisette incluse dans un bloc Z il faut recalculer le rang en tenant
-					// compte des noisettes déjà incluses dans la base.
+					// Les noisettes ne sont pas triées dans l'ordre d'insertion pour un conteneur donné,
+					// il faut donc se baser sur le rang dans le fichier d'import. Pour une noisette appartenant à un
+					// conteneur noisette on reprend le rang tel que mais pour une noisette incluse dans un bloc Z il
+					// faut recalculer le rang en tenant compte des noisettes déjà incluses dans la base.
 					$rang = $_noisette['rang_noisette'];
 					$conteneur = unserialize($_noisette['conteneur']);
 					$conteneur_est_noisette = conteneur_est_noisette('noizetier', $conteneur);
 					if (!$conteneur_est_noisette) {
-						$rang = !empty($nb_noisettes_base[$_noisette['id_conteneur']])
+						$rang_max = !empty($nb_noisettes_base[$_noisette['id_conteneur']])
 							? $nb_noisettes_base[$_noisette['id_conteneur']]
 							: 0;
-						$rang += $_noisette['rang_noisette'];
+						$rang += $rang_max;
 					}
 					$id_noisette_nouveau = noisette_ajouter(
 						'noizetier',
@@ -474,7 +471,11 @@ function noizetier_ieconfig_importer($importation, $contenu_import) {
 					// La noisette a été ajoutée de façon générique (paramètres par défaut). Pour finaliser l'importation
 					// il faut aussi mettre à jour les données paramétrables : parametres, encapsulation et css.
 					if ($id_noisette_nouveau) {
-						$modifications = array_intersect_key($_noisette, $champs_modifiables);
+						$champs_modifiables = array('parametres');
+						if ($_noisette['est_conteneur'] != 'oui') {
+							$champs_modifiables = array_merge($champs_modifiables, array('parametres', 'encapsulation', 'css'));
+						}
+						$modifications = array_intersect_key($_noisette, array_flip($champs_modifiables));
 						noisette_parametrer('noizetier', $id_noisette_nouveau, $modifications);
 					}
 
@@ -498,16 +499,30 @@ function noizetier_ieconfig_importer($importation, $contenu_import) {
 			}
 
 			// - Passe 2 : On reprend les noisettes venant d'être insérées dans une noisette conteneur et
-			//             on rétablit le bon conteneur (id et tableau sérialisé).
+			//             on rétablit le bon conteneur (id et tableau sérialisé), la profondeur et les informations
+			//             du bloc Z accueillant les noisettes.
 			if ($noisettes_imbriquees) {
 				foreach ($noisettes_imbriquees as $_id_noisette_nouveau => $_conteneur_ancien) {
-					$where = array('plugin=' . sql_quote('noizetier'), 'id_noisette=' . intval($_id_noisette_nouveau));
+					// Détermination du conteneur
 					$nouveau_conteneur = $_conteneur_ancien;
 					$nouveau_conteneur['id_noisette'] = $noisettes_conteneur[$_conteneur_ancien['id_noisette']];
-					$modifications = array(
-						'conteneur' => serialize($nouveau_conteneur),
-						'id_conteneur' => conteneur_identifier('noizetier', $nouveau_conteneur)
+
+					// Détermination de la profondeur et des caractéristiques du bloc Z de plus haut niveau.
+					// Le conteneur est une noisette, qui a été insérée précédemment, on la lit.
+					$select = array('type', 'composition', 'objet',	'id_objet',	'bloc', 'profondeur');
+					$where = array(
+						'id_noisette=' . intval($nouveau_conteneur['id_noisette']),
+						'plugin=' . sql_quote('noizetier')
 					);
+					$modifications = sql_fetsel($select, 'spip_noisettes', $where);
+
+					// On finalise les modifications
+					$modifications['profondeur'] += 1;
+					$modifications['conteneur'] = serialize($nouveau_conteneur);
+					$modifications['id_conteneur'] = conteneur_identifier('noizetier', $nouveau_conteneur);
+
+					// On met à jour le contenu de la noisette en base.
+					$where = array('plugin=' . sql_quote('noizetier'), 'id_noisette=' . intval($_id_noisette_nouveau));
 					sql_updateq('spip_noisettes', $modifications, $where);
 				}
 			}
