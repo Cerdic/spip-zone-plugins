@@ -143,9 +143,14 @@ function type_noisette_charger($plugin, $recharger = false, $stockage = '') {
 				// Traitement spécifique d'un type de noisette conteneur : l'ajax et l'inclusion dynamique 
 				// ne sont pas autorisés et le contexte est défini lors de l'encapsulation.
 				if ($description['conteneur'] == 'oui') {
-					$description['contexte'] = array();
+					$description['contexte'] = array('aucun');
 					$description['ajax'] = 'non';
 					$description['inclusion'] = 'statique';
+				}
+				// Si le contexte est vide alors on le force à env pour éviter de traiter ce cas (contexte vide)
+				// lors de la compilation.
+				if (!$description['contexte']) {
+					$description['contexte'] = array('env');
 				}
 				// Sérialisation des champs 'necessite', 'contexte' et 'parametres' qui sont des tableaux
 				$description['necessite'] = serialize($description['necessite']);

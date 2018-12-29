@@ -265,8 +265,9 @@ function noisette_contextualiser($plugin, $noisette, $type_noisette, $profondeur
 	// On construit le contexte final en fonction de celui du type de noisette.
 	// On renvoie systématiquement le contexte minimal déjà initialisé et si le contexte du type de noisette contient:
 	// - aucun => rien de plus.
-	// - env ou vide => l'environnement complet également.
+	// - env => l'environnement complet également.
 	// - une liste de variables => on renvoie également l'intersection de cette liste avec l'environnement.
+	// (Si le contexte n'est pas précisé dans le YAML on le force à env lors du chargement).
 	if (!isset($contexte_type_noisette['aucun'])) {
 		if (isset($contexte_type_noisette['env'])) {
 			$contexte = array_merge($environnement, $contexte);
