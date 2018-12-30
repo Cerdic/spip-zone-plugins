@@ -47,8 +47,9 @@ function menus_affiche_milieu($flux) {
 	include_spip('inf/config');
 
 	// Menus sur les objets configurés
-	if (
-		!$e['edition']
+	if ($e !== false
+		and isset($e['edition'], $e['table_objet_sql'])
+		and !$e['edition']
 		and in_array($e['table_objet_sql'], lire_config('menus/objets', array()))
 	) {
 		$texte .= recuperer_fond('prive/objets/editer/liens', array(
