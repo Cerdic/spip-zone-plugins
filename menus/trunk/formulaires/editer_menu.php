@@ -149,19 +149,18 @@ function formulaires_editer_menu_charger($id_menu = 'new', $retour = '', $associ
  *     Tableau des erreurs
  */
 function formulaires_editer_menu_verifier($id_menu = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
-	include_spip('base/abstract_sql');
-	$erreurs = array();
 
+	// On vérifie que les champs obligatoires sont bien saisis.
 	$oblis = array('titre','identifiant');
 	$erreurs = formulaires_editer_objet_verifier('menu', $id_menu, $oblis);
 
+	// On vérifie que l'identifiant est bon.
 	$identifiant = _request('identifiant');
-
-	// On vérifie que l'identifiant est bon
 	if (empty($erreurs['identifiant']) and !preg_match('/^[\w-]+$/', $identifiant)) {
 		$erreurs['identifiant'] = _T('menus:erreur_identifiant_forme');
 	}
 	// On vérifie que l'identifiant n'est pas déjà utilisé
+	include_spip('base/abstract_sql');
 	if (empty($erreurs['identifiant'])) {
 		$deja = sql_getfetsel(
 			'id_menu',
@@ -189,7 +188,7 @@ function formulaires_editer_menu_verifier($id_menu = 'new', $retour = '', $assoc
  *
  * @param int|string $id_menu
  *     Identifiant du menu. 'new' pour un nouveau menu.
- * @param string $retour
+ * @param string $redirect
  *     URL de redirection après le traitement
  * @param string $associer_objet
  *     Éventuel `objet|x` indiquant de lier le menu créé à cet objet,
@@ -205,21 +204,21 @@ function formulaires_editer_menu_verifier($id_menu = 'new', $retour = '', $assoc
  * @return array
  *     Retours des traitements
  */
-function formulaires_editer_menu_traiter($id_menu = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
-	$res = formulaires_editer_objet_traiter('menu', $id_menu, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+function formulaires_editer_menu_traiter($id_menu = 'new', $redirect = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+	$retour = formulaires_editer_objet_traiter('menu', $id_menu, '', $lier_trad, $redirect, $config_fonc, $row, $hidden);
 
 	// Si ça va pas on errorise
-	if (!$res['id_menu']) {
-		$res['message_erreur'] = _T('menus:erreur_mise_a_jour');
+	if (!$retour['id_menu']) {
+		$retour['message_erreur'] = _T('menus:erreur_mise_a_jour');
 	} else {
 		// Si on est dans l'espace privé on force la redirection
 		if (_request('exec') == 'menus_editer') {
-			$res['redirect'] = generer_url_ecrire('menus_editer', 'id_menu='.$res['id_menu']);
+			$retour['redirect'] = generer_url_ecrire('menus_editer', 'id_menu='.$retour['id_menu']);
 		}
 	}
 
 	// Un lien a prendre en compte ?
-	if ($associer_objet and $id_menu = $res['id_menu']) {
+	if ($associer_objet and $id_menu = $retour['id_menu']) {
 		list($objet, $id_objet) = explode('|', $associer_objet);
 
 		if ($objet and $id_objet and autoriser('modifier', $objet, $id_objet)) {
@@ -227,8 +226,8 @@ function formulaires_editer_menu_traiter($id_menu = 'new', $retour = '', $associ
 			
 			objet_associer(array('menu' => $id_menu), array($objet => $id_objet));
 			
-			if (isset($retours['redirect'])) {
-				$retours['redirect'] = parametre_url($retours['redirect'], 'id_lien_ajoute', $id_menu, '&');
+			if (isset($retour['redirect'])) {
+				$retour['redirect'] = parametre_url($retour['redirect'], 'id_lien_ajoute', $id_menu, '&');
 			}
 		}
 	}
@@ -237,14 +236,14 @@ function formulaires_editer_menu_traiter($id_menu = 'new', $retour = '', $associ
 	// on renvoie sur la page d'édition du menu pour ajouter les entrées
 	if (
 		!intval($id_menu)
-		and $res['id_menu']
-		and !$retour
+		and $retour['id_menu']
+		and !$redirect
 	) {
-		$res['redirect'] = generer_url_ecrire_entite_edit($res['id_menu'], 'menu');
+		$retour['redirect'] = generer_url_ecrire_entite_edit($retour['id_menu'], 'menu');
 	}
 
 	// Dans tous les cas le formulaire est toujours éditable
-	$res['editable'] = true;
+	$retour['editable'] = true;
 
-	return $res;
+	return $retour;
 }
