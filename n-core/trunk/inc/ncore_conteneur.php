@@ -132,10 +132,17 @@ function conteneur_vider($plugin, $conteneur, $stockage = '') {
 	// Initialisation du retour
 	$retour = false;
 
-	if (ncore_conteneur_verifier($plugin, $conteneur, $stockage)) {
+	// Suivant le format du conteneur on calcule le tableau ou on le vérifie.
+	include_spip('ncore/ncore');
+	if (is_string($conteneur)) {
+		$conteneur = ncore_conteneur_construire($plugin, $conteneur, $stockage);
+	} else {
+		$conteneur = ncore_conteneur_verifier($plugin, $conteneur, $stockage);
+	}
+
+	if ($conteneur) {
 		// On charge l'API de N-Core.
 		// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
-		include_spip('ncore/ncore');
 		$retour = ncore_conteneur_destocker($plugin, $conteneur, $stockage);
 	}
 
