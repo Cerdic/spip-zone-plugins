@@ -1,1 +1,4 @@
-<BOUCLE_menu(MENUS){identifiant=#ENV{identifiant}}>[<a href="#URL_ECRIRE{menus_editer,id_menu=#ID_MENU}">(#TITRE)</a>]</BOUCLE_menu>
+<BOUCLE_menu(MENUS){identifiant=#ENV{identifiant}}>
+	<:menus:formulaire_identifiant:>&nbsp;:&nbsp;<a href="#URL_ECRIRE{menus_editer,id_menu=#ID_MENU}">#IDENTIFIANT</a>
+	[<br />(#TITRE)]
+</BOUCLE_menu>
