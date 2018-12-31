@@ -205,35 +205,37 @@ function selections_editoriales_afficher_complement_objet($flux) {
  */
 function selections_editoriales_affiche_enfants($flux) {
 	if (version_compare($GLOBALS['spip_version_branche'], '3.2.1', '>=')) {
-		$exec = trouver_objet_exec($flux['args']['objet']);
-		$id = intval($flux['args']['id_objet']);
+		if (isset($flux['args']['objet'])) {
+			$exec = trouver_objet_exec($flux['args']['objet']);
+			$id = intval($flux['args']['id_objet']);
 
-		if (
-			$exec !== false // page d'un objet éditorial
-			and $exec['edition'] === false // pas en mode édition
-			and $type = $exec['type']
-			and (
-				autoriser('associerselections', $type, $id)
+			if (
+				$exec !== false // page d'un objet éditorial
+				and $exec['edition'] === false // pas en mode édition
+				and $type = $exec['type']
 				and (
-					autoriser('creer', 'selection')
-					or autoriser('modifier', 'selection')
+					autoriser('associerselections', $type, $id)
+					and (
+						autoriser('creer', 'selection')
+						or autoriser('modifier', 'selection')
+					)
 				)
-			)
-		) {
-			$selections = recuperer_fond(
-				'prive/squelettes/inclure/selections_objet',
-				array(
-					'objet' => $type,
-					'id_objet' => $id,
-					'editer_contenu' => _request('editer_contenu'),
-					'editer_contenu_logo' => _request('editer_contenu_logo'),
-					'ajouter' => _request('ajouter'),
-					'id_selection_ajoutee' => _request('id_selection_ajoutee'),
-				),
-				array('ajax'=>'selections')
-			);
-			
-			$flux['data'] .= $selections;
+			) {
+				$selections = recuperer_fond(
+					'prive/squelettes/inclure/selections_objet',
+					array(
+						'objet' => $type,
+						'id_objet' => $id,
+						'editer_contenu' => _request('editer_contenu'),
+						'editer_contenu_logo' => _request('editer_contenu_logo'),
+						'ajouter' => _request('ajouter'),
+						'id_selection_ajoutee' => _request('id_selection_ajoutee'),
+					),
+					array('ajax'=>'selections')
+				);
+
+				$flux['data'] .= $selections;
+			}
 		}
 	}
 	
