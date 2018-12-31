@@ -103,10 +103,12 @@ function produit_inserer($id_rubrique, $set = null) {
 		array(
 			'args' => array(
 				'table' => 'spip_produits',
+				'id_objet' => $id_produit
 			),
 			'data' => $champs
 		)
 	);
+
 
 	return $id_produit;
 }
