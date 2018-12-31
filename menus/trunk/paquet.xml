@@ -1,7 +1,7 @@
 <paquet
 	prefix="menus"
 	categorie="navigation"
-	version="1.7.15"
+	version="1.7.16"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/menu-32.png"
@@ -28,7 +28,7 @@
 	<pipeline nom="ieconfig_metas" inclure="menus_ieconfig.php" />
 	<pipeline nom="affiche_milieu" inclure="menus_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="menus_pipelines.php" />
-	
+
 	<!-- Déclaration des pipelines du plugin -->
 	<pipeline nom="menus_utiles" action="" />
 

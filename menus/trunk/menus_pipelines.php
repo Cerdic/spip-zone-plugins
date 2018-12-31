@@ -44,7 +44,7 @@ function menus_declarer_url_objets($array) {
 function menus_affiche_milieu($flux) {
 	$texte = '';
 	$e = trouver_objet_exec($flux['args']['exec']);
-	include_spip('inf/config');
+	include_spip('inc/config');
 
 	// Menus sur les objets configurés
 	if ($e !== false
