@@ -18,7 +18,12 @@
 	[#BOITE_OUVRIR{'','success'}(#ENV*{message_ok})#BOITE_FERMER]
 
 	<a name="bloc-#ENV{bloc}"></a>
-	[(#BOITE_OUVRIR{#GET{infos_bloc/nom}, simple, titrem})]
+	[(#BOITE_OUVRIR{
+	#GET{infos_bloc/nom}[(#GET{infos_bloc/nom}|!={#ENV{bloc}}|oui) <i>\(#ENV{bloc}\)</i>]
+		[(#CHEMIN_IMAGE{#GET{infos_bloc/icone}}|image_reduire{24}|extraire_attribut{src}|balise_img{page,cadre-icone})],
+		simple,
+		 titrem}
+	 )]
 		[<p>(#GET{infos_bloc/description})</p>]
 		<B_noisettes>
 		<ul

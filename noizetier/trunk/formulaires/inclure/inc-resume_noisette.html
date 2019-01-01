@@ -26,7 +26,7 @@
 	</BOUCLE_type_noisette>
 	[(#GET{type_noisette_disponible}|oui)
 		[(#CHEMIN_IMAGE{#GET{type_noisette_icone}}|image_reduire{24}|inserer_attribut{class,resume__icone})]
-		[<strong class="resume__nom">(#GET{type_noisette_nom})</strong>]
+		[<strong class="resume__nom"[ title="id: (#ID_NOISETTE) - rang: #RANG_NOISETTE - profondeur: #PROFONDEUR"]>(#GET{type_noisette_nom})</strong>]
 		[<div class="resume__content">
 			(#NOISETTE_PREVIEW{#ID_NOISETTE, #GET{type_noisette_actif}, #GET{type_noisette_necessite}})
 		</div>]
