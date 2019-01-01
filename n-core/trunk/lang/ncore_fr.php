@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_conteneur_css_label' => 'Style à affecter à la balise conteneur',
 
 // T
-	'type_noisette_conteneur_nom' => 'Bloc conteneur',
+	'type_noisette_conteneur_titre' => 'Bloc conteneur',
 	'type_noisette_conteneur_description' => 'Conteneur pouvant accueillir des noisettes',
 	'type_noisette_conteneur_preview' => 'Balise englobante : @balise@',
 );

@@ -1,4 +1,4 @@
-nom: '<:ncore:type_noisette_conteneur_nom:>'
+nom: '<:ncore:type_noisette_conteneur_titre:>'
 description: '<:ncore:type_noisette_conteneur_description:>'
 icon: 'conteneur-24.png'
 conteneur: 'oui'
