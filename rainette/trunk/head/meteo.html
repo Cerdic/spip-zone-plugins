@@ -1,6 +1,0 @@
-#SET{nom_ville, #RAINETTE_INFOS{#ENV{ville, FRXX0076}, ville, #ENV{service, weather}}}
-#SET{pays, #RAINETTE_INFOS{#ENV{pays, FRXX0076}, pays, #ENV{service, weather}}}
-[(#SET{nom_ville, [(#GET{nom_ville})[, (#GET{pays})]]})]
-<title><:rainette:meteo_de{ville=#GET{nom_ville}}:> - [(#NOM_SITE_SPIP|textebrut)]</title>
-<meta name="robots" content="none" />
-<INCLURE{fond=inclure/head}>
