@@ -11,8 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_type_noisette_inactif' => 'Le type de noisette @type_noisette@ est inactivé car le ou les plugins suivants sont désactivés : @plugins@.',
 
 // L
-	'label_conteneur_balise' => 'Balise matérialisant le conteneur',
-	'label_conteneur_css' => 'Style à affecter à la balise conteneur',
+	'saisie_conteneur_balise_label' => 'Balise matérialisant le conteneur',
+	'saisie_conteneur_css_label' => 'Style à affecter à la balise conteneur',
 
 // T
 	'type_noisette_conteneur_nom' => 'Bloc conteneur',

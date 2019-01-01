@@ -10,7 +10,7 @@ parametres:
     saisie: 'selection'
     options:
       nom: 'conteneur_balise'
-      label: '<:ncore:label_conteneur_balise:>'
+      label: '<:ncore:saisie_conteneur_balise_label:>'
       defaut: 'div'
       cacher_option_intro: 'oui'
       datas:
@@ -24,4 +24,4 @@ parametres:
     saisie: 'input'
     options:
       nom: 'conteneur_css'
-      label: '<:ncore:label_conteneur_css:>'
+      label: '<:ncore:saisie_conteneur_css_label:>'
