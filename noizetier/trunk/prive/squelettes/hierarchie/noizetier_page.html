@@ -1,8 +1,8 @@
 <BOUCLE_page_hierarchie(CONDITION) {si #ENV{exec}|=={noizetier_page}}>
 	<BOUCLE_si_page(NOIZETIER_PAGES) {page}>
 		[(#REM) <!-- Inutile d'utiliser l'autorisation noizetier car l'autorisation de cette page l'inclut déjà	-->]
-		<a href="[(#URL_ECRIRE{noizetier_pages}|parametre_url{est_page_objet, #EST_PAGE_OBJET})]">
-			[(#VAL{noizetier:liste_pages_objet_}|concat{#EST_PAGE_OBJET}|_T)]
+		<a href="[(#URL_ECRIRE{noizetier_pages})]">
+			<:noizetier:liste_pages:>
 		</a> &gt;
 		<strong class="on">[ (#NOM)]</strong>
 	</BOUCLE_si_page>

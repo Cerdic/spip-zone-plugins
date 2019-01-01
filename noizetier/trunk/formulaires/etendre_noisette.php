@@ -105,7 +105,7 @@ function formulaires_etendre_noisette_traiter_dist($noisette, $page_noisette, $b
 				$valeurs = array();
 				$champs = array('copie_parametres');
 				if (_request('est_conteneur') != 'oui') {
-					$champs = array_merge($valeurs, array('copie_encapsulation', 'copie_css'));
+					$champs = array_merge($champs, array('copie_encapsulation', 'copie_css'));
 				}
 				foreach ($champs as $_champ) {
 					if (_request($_champ)) {

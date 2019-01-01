@@ -217,6 +217,9 @@ function formulaires_editer_page_traiter_dist($edition, $page, $redirect = '') {
 
 	// Traitement des blocs configurables
 	$blocs_exclus = _request('blocs_exclus');
+	if ($blocs_exclus == null) {
+		$blocs_exclus = array();
+	}
 	$description['blocs_exclus'] = $blocs_exclus;
 	// TODO : si on exclut des blocs il faut supprimer leurs éventuelles noisettes.
 	// TODO : une autre solution serait d'interdire l'exclusion d'un bloc contenant une noisette
