@@ -123,7 +123,7 @@ function duree($date_debut,$date_fin,$type_affichage='court') {
 		break ;          
       default:          break;
       
-  }   
+	}   
 
 	return $str;
 }

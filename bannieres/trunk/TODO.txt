@@ -15,5 +15,3 @@ si aucune campagne n'est active sur le site, et surtout passer au bannière respo
 - dans le cas de contenus flash, proposer une image de fallback
 si flash player n'est pas présent (obligatoire en regie pub normalement)
 
-- aucune verifs sur les champs de la cration de banniere, vérifier la structure de l'email et de l'url
-
