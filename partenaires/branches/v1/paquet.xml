@@ -1,17 +1,13 @@
 <paquet
 	prefix="partenaires"
 	categorie="divers"
-	version="1.6.2"
+	version="1.7.0"
 	etat="dev"
 	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/partenaires-64.png"
 	documentation=""
-	schema="1.5.1"
+	schema="1.5.3"
 >
-	<!--
-		Paquet généré le 2013-02-17 17:08:48
-	-->
-
 	<nom>Partenaires</nom>
 
 	<auteur>Teddy Payet</auteur>

@@ -1,0 +1,11 @@
+<B_partenaires>
+	<div class="partenaires">
+		<dl class="row">
+			<BOUCLE_partenaires (PARTENAIRES) {par num nom, nom} {tout}>
+				<dt class="col-sm-3 h-auto">[(#URL_SITE|strlen|>{0}|oui)<a href="[(#URL_SITE)]" class="spip_out">][(#LOGO_PARTENAIRE|image_reduire{#ENV{largeur,400},#ENV{hauteur,300}}|inserer_attribut{class,spip_logo spip_logos h-auto img-fluid}|inserer_attribut{alt,#NOM|attribut_html}) ][(#URL_SITE|strlen|>{0}|oui)</a>]</dt>
+				<dd class="col-sm-9 h-auto">[(#URL_SITE|strlen|>{0}|oui)<a href="[(#URL_SITE)]" class="spip_out">][<strong class="nom">(#NOM)</strong>][(#URL_SITE|strlen|>{0}|oui)</a>]
+					[(#DESCRIPTIF)]</dd>
+			</BOUCLE_partenaires>
+		</dl>
+	</div>
+</B_partenaires>

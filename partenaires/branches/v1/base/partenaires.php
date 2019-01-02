@@ -14,10 +14,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function partenaires_declarer_tables_interfaces($interfaces) {
 
 	$interfaces['table_des_tables']['partenaires'] = 'partenaires';
+	$interfaces['table_des_tables']['partenaires_liens'] = 'partenaires_liens';
 	$interfaces['table_des_tables']['partenaires_types'] = 'partenaires_types';
-
-    $interfaces['exceptions_des_jointures']['partenaires']['titre_type'] = array('spip_partenaires_types', 'titre');
-    $interfaces['exceptions_des_jointures']['partenaires']['id_type'] = array('spip_partenaires_types', 'id_type');
+	$interfaces['table_des_tables']['partenaires_types_liens'] = 'partenaires_types_liens';
 
 	return $interfaces;
 }
@@ -25,6 +24,10 @@ function partenaires_declarer_tables_interfaces($interfaces) {
 
 /**
  * Déclaration des objets éditoriaux
+ *
+ * @param array $tables tableau des tables des objets de SPIP.
+ *
+ * @return array
  */
 function partenaires_declarer_tables_objets_sql($tables) {
 
