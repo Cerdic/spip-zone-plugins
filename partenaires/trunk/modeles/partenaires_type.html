@@ -1,0 +1,21 @@
+<B_type>
+	<BOUCLE_type (PARTENAIRES_TYPES) {titre?} {id_type?}>
+		<B_liens>
+	<div class="type_partenaire partenaires_type">
+		[(#ENV{titre_bloc,oui}|=={oui}|oui)<h2>[(#TITRE)]</h2>]
+
+			<dl class="row">
+			<BOUCLE_liens (spip_partenaires_types_liens) {id_type} {objet="partenaire"}>
+				<B_partenaires>
+						<BOUCLE_partenaires (PARTENAIRES) {id_partenaire=#ID_OBJET} {par num nom, nom}>
+							<dt class="col-sm-3 h-auto">[(#URL_SITE|strlen|>{0}|oui)<a href="[(#URL_SITE)]" class="spip_out">][(#LOGO_PARTENAIRE|image_reduire{#ENV{largeur,400},#ENV{hauteur,300}}|inserer_attribut{class,spip_logo spip_logos h-auto img-fluid}|inserer_attribut{alt,#NOM|attribut_html}) ][(#URL_SITE|strlen|>{0}|oui)</a>]</dt>
+							<dd class="col-sm-9 h-auto">[(#URL_SITE|strlen|>{0}|oui)<a href="[(#URL_SITE)]" class="spip_out">][<strong class="nom">(#NOM)</strong>][(#URL_SITE|strlen|>{0}|oui)</a>]
+								[(#DESCRIPTIF)]</dd>
+						</BOUCLE_partenaires>
+				</B_partenaires>
+			</BOUCLE_liens>
+			</dl>
+	</div>
+		</B_liens>
+	</BOUCLE_type>
+</B_type>
