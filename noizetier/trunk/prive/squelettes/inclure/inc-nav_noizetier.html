@@ -8,14 +8,14 @@
 				<:noizetier:liste_pages_toutes:>,
 				#GET{page_exec}|=={#ENV{exec}}|et{#ENV{est_page_objet}|non}})
 		</li>]
-	[<li class="item">
+	[<li class="item filtre_pages">
 		(#URL_ECRIRE{#GET{page_exec}}
 			|parametre_url{est_page_objet, oui}
 			|lien_ou_expose{
 				<:noizetier:liste_pages_objet_oui:>,
 				#GET{page_exec}|=={#ENV{exec}}|et{#ENV{est_page_objet}|=={oui}}})
 	</li>]
-	[<li class="item">
+	[<li class="item filtre_pages">
 		(#URL_ECRIRE{#GET{page_exec}}
 			|parametre_url{est_page_objet, non}
 			|lien_ou_expose{
