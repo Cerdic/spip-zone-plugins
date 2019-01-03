@@ -512,6 +512,7 @@ function etat2resume_wunderground(&$tableau, $configuration) {
 
 		// Determination de l'icone qui sera affiché.
 		// -- on stocke le code afin de le fournir en alt dans la balise img
+		$tableau['icone'] = array();
 		$tableau['icone']['code'] = $tableau['code_meteo'];
 		// -- on calcule le chemin complet de l'icone.
 		if ($configuration['condition'] == $configuration['alias']) {
