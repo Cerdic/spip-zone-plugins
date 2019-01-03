@@ -254,11 +254,9 @@ function weather_complement2conditions($tableau, $configuration) {
 
 	if ($tableau) {
 		// Compléter le tableau standard avec les états météorologiques calculés
-		if ($tableau['code_meteo']) {
-			// La traduction du resume dans la bonne langue est toujours faite par les fichiers de langue SPIP
-			// car l'API ne permet pas de choisir la langue. On ne stocke donc que le code meteo
-			etat2resume_weather($tableau, $configuration);
-		}
+		// La traduction du resume dans la bonne langue est toujours faite par les fichiers de langue SPIP
+		// car l'API ne permet pas de choisir la langue. On ne stocke donc que le code meteo
+		etat2resume_weather($tableau, $configuration);
 	}
 
 	return $tableau;
@@ -322,16 +320,19 @@ function etat2resume_weather(&$tableau, $configuration) {
 		// Détermination du résumé à afficher.
 		$tableau['resume'] = $tableau['code_meteo'];
 
-		// Determination de l'icone qui sera affiché.
-		// -- on stocke le code afin de le fournir en alt dans la balise img
-		$tableau['icone']['code'] = $tableau['code_meteo'];
-		// -- on calcule le chemin complet de l'icone.
-		include_spip('inc/rainette_normaliser');
-		$chemin = icone_weather_normaliser(
-			$tableau['code_meteo'],
-			$configuration['theme_local']);
-
-		include_spip('inc/utils');
-		$tableau['icone']['source'] = find_in_path($chemin);
+		// Code le l"icone à afficher
+		$code = $tableau['code_meteo'];
+	} else {
+		// On renvoie le pseudo code na pour afficher l'icone correspondante.
+		$code = 'na';
 	}
+
+	// Determination de l'icone qui sera affiché.
+	// -- on stocke le code afin de le fournir en alt dans la balise img
+	// -- on calcule le chemin complet de l'icone.
+	include_spip('inc/rainette_normaliser');
+	$chemin = icone_weather_normaliser($code, $configuration['theme_local']);
+
+	include_spip('inc/utils');
+	$tableau['icone'] =array('code' => $code, 'source' => find_in_path($chemin));
 }
