@@ -325,10 +325,10 @@ function noizetier_noizetier_config_import($flux) {
  * @return mixed
  */
 function noizetier_formulaire_admin($flux) {
-	if (autoriser('configurer', 'noizetier')) {
-		$bouton = recuperer_fond('prive/squelettes/inclure/inc-bouton_voir_noisettes');
-		$flux['data'] = preg_replace('%(<!--extra-->)%is', $bouton.'$1', $flux['data']);
-	}
+//	if (autoriser('configurer', 'noizetier')) {
+//		$bouton = recuperer_fond('prive/squelettes/inclure/inc-bouton_voir_noisettes');
+//		$flux['data'] = preg_replace('%(<!--extra-->)%is', $bouton.'$1', $flux['data']);
+//	}
 
 	return $flux;
 }
