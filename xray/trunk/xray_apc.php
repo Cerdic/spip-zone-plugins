@@ -131,7 +131,7 @@ function explique_echec ($info) {
 	if (!$data_success)
 		return "fetch failed";
 	if (!is_array($data))
-		return "fetch result not array : ".substr(print_r($data,1),0,300);
+		return "fetch result not array pour $info : ".substr(print_r($data,1),0,300);
 	if (count($data) != 1)
 		return "fetch result not singleton : ".substr(print_r($data,1),0,300);
 	if (!is_serialized($data[0]))
@@ -1033,7 +1033,9 @@ switch ($MYREQUEST['OB']) {
 
 		echo "<div class='info div1'><h2>Mémoization SPIP - Le ".date(JOLI_DATE_FORMAT,time())."</h2>
 			<table cellspacing=0><tbody>
+			<tr class=tr-0><td class=td-0>Config</td><td><pre>".preg_replace('/(^Array\s*\(|^\s*|^\)$)/im', '', print_r(unserialize($GLOBALS['meta']['memoization']),1))."</pre></td></tr>
 			<tr class=tr-0><td class=td-0>_CACHE_NAMESPACE</td><td>"._CACHE_NAMESPACE."</td></tr>
+			<tr class=tr-0><td class=td-0>_CACHE_KEY</td><td>"._CACHE_KEY."</td></tr>
 			<tr class=tr-0><td class=td-0 title='meta SPIP : derniere_modif'>Dernière invalidation</td><td>".date(JOLI_DATE_FORMAT, $meta_derniere_modif)."</td></tr> 
 			<tr class=tr-0><td class=td-0 title='meta spip'>Invalidation de '".XRAY_OBJET_SPECIAL."'</td><td>".date(JOLI_DATE_FORMAT, lire_meta('derniere_modif_'.XRAY_OBJET_SPECIAL))."</td></tr> 
 			<tr class=tr-0><td class=td-0 title='meta SPIP : cache_mark'>Dernière purge</td><td>".date(JOLI_DATE_FORMAT, $GLOBALS['meta']['cache_mark'])."</td></tr> ";

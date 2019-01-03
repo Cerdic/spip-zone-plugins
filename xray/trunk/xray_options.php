@@ -12,16 +12,27 @@ include_spip('inc/xray_options_default');
 if (!isset($_GET['exec']) or ($_GET['exec']!='xray')) 
 	return;
 
-// détecter (?) les vidages de caches yc car saturation de l'espace dispo
+// détecter les vidages de caches yc car saturation de l'espace dispo
 if (!apc_exists('apc_key_test_flush')) {
-  spip_log ('xray says : le cache APC a été vidé', 'APC_cache_flush');
-  apc_store('apc_key_test_flush', 'apc_test_value_flush');
+  spip_log ('xray détecte un vidage du cache APC');
+  apc_store('apc_key_test_flush', date(DATE_RFC2822).': recréation du cache APC (aprés vidage total ?)');
 }
 
+//
+// Le filtre xray_marqueur_invisible met ce qu'il reçoit dans un cache APC 'xray_marqueur_visible'
+// et renvoie une chaine vide pour le html, si bien que ce qui est caché... reste invisible
+//
 function xray_marqueur_invisible($t) {
-	recuperer_fond('inclure/xray_marqueur_visible', array('what'=>'session','texte'=>$t));
+	// souriez :
+	recuperer_fond('inclure/xray_marqueur_visible', array('what'=>'session','texte'=>$t));	
+	// circulez :
 	return '';
 }
+
+!defined ('_CACHE_KEY') or define('_CACHE_KEY', '');
+if (_CACHE_KEY) 
+	die ("XRay ne fonctionne pas avec des caches cryptés. Ajoutez &nbsp; <code> define('_CACHE_KEY', ''); </code> &nbsp; dans votre mes_options.php");
+
 
 global $Memoization;
 $cfg = @unserialize($GLOBALS['meta']['memoization']);
