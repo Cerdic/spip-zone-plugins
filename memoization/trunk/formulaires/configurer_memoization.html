@@ -2,6 +2,15 @@
 <!-- refus=<:cfg:refus_configuration_webmestre:> -->
 <!-- nom=memoization -->
 
+<?php
+include_spip('inc/config');
+if ($methode=lire_config('memoization/pages')) {
+    ecrire_config('memoization/methode', $methode);
+    effacer_config('memoization/pages');
+    echo "<p class='notice'><strong>"._T('memoization:option_pages_obsolete')."</strong></p>";
+}
+?>
+
 <div class="formulaire_spip formulaire_config formulaire_config_memoization">
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
