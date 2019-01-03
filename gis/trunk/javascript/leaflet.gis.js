@@ -225,6 +225,9 @@ L.Map.Gis = L.Map.extend({
 					// Déclarer le contenu de la popup s'il y en a
 					map.setGeoJsonFeaturePopup(feature, marker);
 
+					// On garde en mémoire toute la feature d'origine dans le marker, comme sans clusters
+					marker.feature = feature;
+					// Pour compat, on continue de garde l'id à part
 					marker.id = feature.id;
 					markers.push(marker);
 				} else {
