@@ -195,6 +195,16 @@ function cachelab_duree_progapprox($date_creation) {
 	return 10;				// 10secondes si moins d'une minute
 }
 
+/**
+ * Calcule une durée de cache sans rafraîchissement jusqu'au lendemain minuit cinq.
+ *
+ * @param $date_unused : inutilisé
+ * @return int : le nombre de secondes restant jusqu'au prochain minuit cinq
+ */
+function cachelab_duree_jusqueminuit($date_unused) {
+    return strtotime('tomorrow') + 300 - time();
+}
+
 //
 // Log tout ou un élément contenu par le tableau de cache
 // dans un fichier de log dont le nom reprend le chemin du squelette
@@ -294,6 +304,7 @@ function cachelab_filtre_session (&$cache, $totarg) {
 				}
 			}
 			break;
+
 	case 'insert' :
 		global $Memoization;
 		if (!isset($Memoization)) {
@@ -325,5 +336,3 @@ function cachelab_etat_sessionnement ($invalideurs, $detail=false) {
 		return 'oui_login';
 	return 'oui_anonyme';
 }
-
-	

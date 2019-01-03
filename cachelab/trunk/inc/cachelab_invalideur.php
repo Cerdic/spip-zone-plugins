@@ -128,23 +128,25 @@ static $var_cache;
 				spip_log ("#CACHE avec squelette {$page['source']} et calcul de durée avec $f mais pas de '$arg' dans le contexte ".print_r($page['contexte'],1), "cachelab_erreur");
 				return;
 			}
-			$duree = $f($page['contexte'][$arg]);
-			if (!defined('LOG_CACHELAB_DUREES_DYNAMIQUES') or LOG_CACHELAB_DUREES_DYNAMIQUES)
-				spip_log ("#CACHE $f ($arg={$page['contexte'][$arg]}) renvoie : $duree s", "cachelab");
+			$duree = $f($page['contexte'][$arg],$page);
+			if (!is_null($duree)) {
+				if (!defined('LOG_CACHELAB_DUREES_DYNAMIQUES') or LOG_CACHELAB_DUREES_DYNAMIQUES)
+					spip_log ("#CACHE $f ($arg={$page['contexte'][$arg]}) renvoie : $duree s", "cachelab");
 
-			if ($var_cache)
-				echo "<div class='cachelab_blocs' $hint_squel><h6>Durée dynamique : $duree</h6><small>$infos</small></div>";
+				if ($var_cache)
+					echo "<div class='cachelab_blocs' $hint_squel><h6>Durée dynamique : $duree</h6><small>$infos</small></div>";
 
-			$page['duree'] = $duree;
-			$page['entetes']['X-Spip-Cache']=$duree;
+				$page['duree'] = $duree;
+				$page['entetes']['X-Spip-Cache']=$duree;
 
-			// On garde un souvenir
-			// unset ($page['entetes']['X-Spip-Methode-Duree-Cache']);
+				// On garde un souvenir
+				// unset ($page['entetes']['X-Spip-Methode-Duree-Cache']);
 
-			// Comme memoization, on ajoute une heure "histoire de pouvoir tourner
-			// sur le cache quand la base de donnees est plantée (à tester)"
-			// TODO CORE ? changer creer_cache pour qu'il appelle maj_invalideurs *avant* d'avoir écrit le cache
-			$Memoization->set($fichier, $page, 3600+$duree);
+				// Comme memoization, on ajoute une heure "histoire de pouvoir tourner
+				// sur le cache quand la base de donnees est plantée (à tester)"
+				// TODO CORE ? changer creer_cache pour qu'il appelle maj_invalideurs *avant* d'avoir écrit le cache
+				$Memoization->set($fichier, $page, 3600+$duree);
+			}
 		}
 		else 
 			spip_log ("#CACHE duree cache : la fonction '$f' n'existe pas (arg='$arg')\n".print_r($page,1), "cachelab_erreur");
