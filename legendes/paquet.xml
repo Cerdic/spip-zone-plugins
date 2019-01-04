@@ -1,7 +1,7 @@
 <paquet
 	prefix="legendes"
 	categorie="multimedia"
-	version="1.1.4"
+	version="1.1.5"
 	etat="stable"
 	compatibilite="[2.1.0;3.1.*]"
 	logo="images/legendes-128.png"
@@ -9,8 +9,8 @@
 	documentation="https://contrib.spip.net/Legendes"
 >
 
-	<nom>Légendes</nom>
-	<!-- Légender ses photos -->
+	<nom>LÃ©gendes</nom>
+	<!-- LÃ©gender ses photos -->
 
 	<auteur>b_b</auteur>
 
