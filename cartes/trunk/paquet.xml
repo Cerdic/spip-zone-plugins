@@ -1,14 +1,14 @@
 <paquet
 	prefix="cartes"
 	categorie="edition"
-	version="1.1.1"
+	version="1.1.2"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/cartes-64.png"
 	documentation=""
 	schema="1.0.6"
 >
-	<nom>Création de cartes</nom>
+	<nom>CrÃ©ation de cartes</nom>
 
 	<auteur lien='http://www.kent1.info'>kent1</auteur>
 
