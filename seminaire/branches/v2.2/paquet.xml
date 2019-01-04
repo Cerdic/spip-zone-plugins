@@ -1,14 +1,14 @@
 <paquet
 	prefix="seminaire"
 	categorie="date"
-	version="2.3.2"
+	version="2.3.3"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/seminaire-64.png"
 	documentation="https://contrib.spip.net/?article4288"
 	schema="1.1.0" 
 >
-	<nom>Séminaire</nom>
+	<nom>SÃ©minaire</nom>
 
 	<auteur lien='https://contrib.spip.net/Amaury-Adon'>Amaury Adon</auteur>
 
