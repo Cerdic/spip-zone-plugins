@@ -1,12 +1,12 @@
 <plugin>
 	<nom>Blinks</nom>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<etat>dev</etat>
 	
 	<slogan>Keyword Stuffer for Linkbuilders ! That's SEO b*tch !</slogan>
 	<description>
 		Keyword Stuffer for Linkbuilders !
-		NON FONCTIONNEL ! (on vous aura prévenu ...) 		
+		NON FONCTIONNEL ! (on vous aura prÃ©venu ...) 		
 	</description>
 	<lien>http://trikapalanet.lachimere.net/</lien>
 	<icon>images/blinks-128.png</icon>
