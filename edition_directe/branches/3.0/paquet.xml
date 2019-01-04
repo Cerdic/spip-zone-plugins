@@ -1,7 +1,7 @@
 <paquet
 	prefix="edition_directe"
 	categorie="edition"
-	version="3.3.0"
+	version="3.3.1"
 	etat="stable"
 	compatibilite="[3.0.17;3.2.*]"
 	logo="img/logo_aed_edit_128.png"
