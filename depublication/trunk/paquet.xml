@@ -1,7 +1,7 @@
 <paquet
 	prefix="depublication2"
 	categorie="maintenance"
-	version="1.1.1"
+	version="1.1.2"
 	etat="dev"
 	compatibilite="[3.0.10;3.0.*]"
 	logo="prive/themes/spip/images/depublication2-64.png"
@@ -13,7 +13,7 @@
 		(Vous pouvez bien entendu supprimer ces commentaires) 
 	-->
 
-	<nom>Dépublication 2</nom>
+	<nom>DÃ©publication 2</nom>
 
 	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs --> 
 	<auteur>Web</auteur>
