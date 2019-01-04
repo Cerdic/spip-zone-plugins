@@ -91,7 +91,9 @@ function inc_chercher_logo($id_objet, $id_table_objet, $role = 'on', $historique
 			)
 		)) {
 			$document = array_shift($document);
-			$chemin = find_in_path(_NOM_PERMANENTS_ACCESSIBLES . $document['fichier']);
+			$chemin = (substr($document['fichier'], 0, 4) === 'http' ?
+				$document['fichier'] :
+				find_in_path(_NOM_PERMANENTS_ACCESSIBLES . $document['fichier']));
 			$dossier = find_in_path(_NOM_PERMANENTS_ACCESSIBLES . substr($document['fichier'], 0, strrpos($document['fichier'], '/')));
 			$logo = array(
 				$chemin,
