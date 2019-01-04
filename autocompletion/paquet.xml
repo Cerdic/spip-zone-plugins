@@ -1,14 +1,14 @@
 <paquet
 	prefix="autocompletion"
 	categorie="communication"
-	version="1.0.0"
+	version="1.0.1"
 	etat="dev"
 	compatibilite="[3.0.2;3.0.*]"
 	logo="prive/themes/spip/images/autocompletion-64.png"
 	documentation=""
 	schema="1.0.0" 
 >
-	<nom>Autocomplétion et géolocalisation</nom>
+	<nom>AutocomplÃ©tion et gÃ©olocalisation</nom>
 
 	<auteur>Dimitri EXBRAYAT</auteur>
 	<licence>GNU/GPL</licence>
