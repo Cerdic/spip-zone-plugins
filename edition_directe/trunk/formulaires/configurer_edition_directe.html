@@ -1,10 +1,3 @@
-<!-- nom=edition_directe -->
-
-
-
-		
-
-
 #SET{objets,#ARRAY}
 
 <BOUCLE_objets_liste(DATA){source tableau,#VAL|lister_tables_objets_sql}{par cle}{editable = oui}>
@@ -21,20 +14,18 @@
 
 	<form action="#ENV{action}" method="post"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
-			<li class="fieldset">
-				<ul>
-					[(#SAISIE{checkbox, objets,
-						label=<:edir:activer_edition_directe:>,
-						datas=#GET{objets}}
-						)]
-				</ul>
-			</li>
-		</ul>
-		
+		<div>
+			<div class="fieldset">
+				[(#SAISIE{checkbox, objets,
+					label=<:edir:activer_edition_directe:>,
+					datas=#GET{objets}}
+					)]
+			</div>
+		</div>
+
 		<p class="boutons">
 			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
 		</p>
-		
+
 	</div></form>
 </div>
