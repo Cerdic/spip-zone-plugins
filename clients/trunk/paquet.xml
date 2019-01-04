@@ -1,7 +1,7 @@
 <paquet
 	prefix="clients"
 	categorie="auteur"
-	version="1.0.10"
+	version="1.0.11"
 	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/clients-32.png"
@@ -11,7 +11,7 @@
 	<nom>Clients</nom>
 	<!-- Formulaires pour clients -->
 
-	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<auteur lien="http://www.ldd.fr">Les DÃ©veloppements Durables</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
