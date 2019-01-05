@@ -83,8 +83,8 @@
 		<inclure>inc/notifications_autoriser.php</inclure>
 	</pipeline>
 
-	<necessite id="spip_bonux" version="[2.2.23;]" />
-	<necessite id="queue" version="[0.6.2;]" />
+	<necessite id="spip_bonux" version="[3.4.6;]" />
+	<necessite id="queue" version="[0.6.6;]" />
 	<necessite id="saisies" version="[1.42.11;]" />
 	<necessite id="yaml" version="[1.5.3;]" />
 	<necessite id="facteur" version="[3.6.2;]"/>
