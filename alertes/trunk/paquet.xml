@@ -1,7 +1,7 @@
 <paquet
 	prefix="alertes"
 	categorie="communication"
-	version="2.1.1"
+	version="2.1.2"
 	schema="1.1.1"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
@@ -27,6 +27,6 @@
 	<pipeline nom="affiche_droite" inclure="alertes_pipelines.php" />
 	<pipeline nom="afficher_complement_objet" inclure="alertes_pipelines.php" />
 
-	<necessite nom="facteur" compatibilite="[3.5.2;]" />
+	<necessite nom="facteur" compatibilite="[3.6.2;]" />
 	<utilise nom="accesrestreint" compatibilite="[3.0.0;]" />
 </paquet>

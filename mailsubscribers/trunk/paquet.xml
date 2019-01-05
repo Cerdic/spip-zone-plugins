@@ -1,7 +1,7 @@
 <paquet
 	prefix="mailsubscribers"
 	categorie="communication"
-	version="2.11.2"
+	version="2.11.3"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/mailsubscriber-32.png"
@@ -34,5 +34,5 @@
 
 	<menu nom="mailsubscribers" titre="mailsubscriber:titre_mailsubscribers" parent="menu_activite" icone="images/mailsubscriber-16.png" action="mailsubscribers" />
 	<menu nom="mailsubscribinglists" titre="mailsubscribinglist:titre_mailsubscribinglists" parent="menu_activite" icone="images/mailsubscribinglist-16.png" action="mailsubscribinglists" />
-	<necessite nom="facteur" compatibilite="[3.5.2;]" />
+	<necessite nom="facteur" compatibilite="[3.6.2;]" />
 </paquet>

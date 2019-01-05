@@ -1,7 +1,7 @@
 <paquet
 	prefix="mailsubscribers"
 	categorie="communication"
-	version="1.10.1"
+	version="1.10.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/mailsubscriber-32.png"
@@ -28,5 +28,5 @@
 	<pipeline nom="taches_generales_cron" inclure="mailsubscribers_pipelines.php" />
 
 	<menu nom="mailsubscribers" titre="mailsubscriber:titre_mailsubscribers" parent="menu_activite" icone="images/mailsubscriber-16.png" action="mailsubscribers" />
-	<necessite nom="facteur" compatibilite="[3.5.2;]" />
+	<necessite nom="facteur" compatibilite="[3.6.2;]" />
 </paquet>

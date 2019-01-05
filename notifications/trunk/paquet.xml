@@ -1,7 +1,7 @@
 <paquet
 	prefix="notifications"
 	categorie="communication"
-	version="3.6.7"
+	version="3.6.8"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="notifications-32.png"
@@ -24,6 +24,6 @@
 	<pipeline nom="notifications" inclure="notifications_pipelines.php" action="go" />
 
 	<utilise nom="forum" compatibilite="[1.8.12;]"/>
-	<necessite nom="facteur" compatibilite="[3.5.2;]"/>
+	<necessite nom="facteur" compatibilite="[3.6.2;]"/>
 
 </paquet>

@@ -1,7 +1,7 @@
 <paquet
 	prefix="formidable"
 	categorie="communication"
-	version="1.9.12"
+	version="1.9.13"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/formidable-64.png"
@@ -29,7 +29,7 @@
 	<necessite nom="saisies" compatibilite="[1.42.11;[" />
 	<necessite nom="verifier" compatibilite="[0.1.0;[" />
 	<necessite nom="yaml" compatibilite="[1.5.0;[" />
-	<necessite nom="facteur" compatibilite="[3.5.2;[" />
+	<necessite nom="facteur" compatibilite="[3.6.2;[" />
 
 	<menu nom="formulaires" titre="formidable:bouton_formulaires" parent="menu_edition" icone="images/formulaire-16.png" />
 </paquet>

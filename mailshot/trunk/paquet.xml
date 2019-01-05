@@ -1,7 +1,7 @@
 <paquet
 	prefix="mailshot"
 	categorie="communication"
-	version="1.27.2"
+	version="1.27.3"
 	etat="stable"
 	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/mailshot-32.png"
@@ -27,6 +27,6 @@
 	<pipeline nom="newsletter_pre_envoi" action="" />
 
 
-	<necessite nom="facteur" compatibilite="[3.5.2;]" />
+	<necessite nom="facteur" compatibilite="[3.6.2;]" />
 	<menu nom="mailshots" titre="mailshot:titre_menu_mailshots" parent="menu_publication" icone="images/mailshot-16.png" action="mailshots" />
 </paquet>

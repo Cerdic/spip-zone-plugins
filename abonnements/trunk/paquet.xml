@@ -1,7 +1,7 @@
 <paquet
 	prefix="abonnements"
 	categorie="auteur"
-	version="3.3.5"
+	version="3.3.6"
 	schema="2.3.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
@@ -21,7 +21,7 @@
 	<necessite nom="saisies" compatibilite="[1.42.11;]" />
 	<necessite nom="verifier" compatibilite="[1.0.0;]" />
 	<necessite nom="yaml" compatibilite="[1.5.0;]" />
-	<necessite nom="facteur" compatibilite="[3.5.2;]" />
+	<necessite nom="facteur" compatibilite="[3.6.2;]" />
 	<necessite nom="prix" compatibilite="[0.1.11;]" />
 	<utilise nom="commandes" compatibilite="[1.6.8;]" />
 

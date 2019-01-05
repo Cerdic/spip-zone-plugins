@@ -1,7 +1,7 @@
 <paquet
 	prefix="clevermail"
 	categorie="communication"
-	version="3.0.21"
+	version="3.0.22"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/fatcow/32/email_open.png"
@@ -25,7 +25,7 @@
 	<pipeline nom="taches_generales_cron" inclure="clevermail_pipelines.php" />
   
 
-	<necessite nom="facteur" compatibilite="[3.5.2;]" />
+	<necessite nom="facteur" compatibilite="[3.6.2;]" />
 
 
 	<menu nom="clevermail" titre="clevermail:clevermail" parent="bando_publication" icone="images/fatcow/16/email_open.png" position="1" action="clevermail_lists" />

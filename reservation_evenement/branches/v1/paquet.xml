@@ -1,7 +1,7 @@
 <paquet
 	prefix="reservation_evenement"
 	categorie="date"
-	version="1.29.9"
+	version="1.29.10"
 	etat="stable"
 	compatibilite="[3.0.16;3.2.*]"
 	logo="prive/themes/spip/images/reservation_evenement-64.png"
@@ -13,7 +13,7 @@
 	<auteur lien='https://websimple.be'>Rainer Müller</auteur>
 	<licence>GNU/GPL</licence>
 	<necessite nom="agenda" compatibilite="[3.18.4;]" />
-	<necessite nom="facteur" compatibilite="[3.5.2;]" />
+	<necessite nom="facteur" compatibilite="[3.6.2;]" />
 	<necessite nom="nospam" compatibilite="[1.5.17;]" />
 	<necessite nom="saisies" compatibilite="[2.28.0;]" />
 	<necessite nom="verifier" compatibilite="[1.6.4;]" />

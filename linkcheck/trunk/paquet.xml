@@ -1,7 +1,7 @@
 <paquet
 	prefix="linkcheck"
 	categorie="maintenance"
-	version="1.5.2"
+	version="1.5.3"
 	etat="stable"
 	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/linkcheck-64.png"
@@ -20,7 +20,7 @@
 	<licence>GNU/GPL</licence>
 
 	<necessite nom="saisies" compatibilite="[2.28.0;]" />
-	<necessite nom="facteur" compatibilite="[3.5.2;]" />
+	<necessite nom="facteur" compatibilite="[3.6.2;]" />
 
 	<pipeline nom="autoriser" inclure="linkcheck_autorisations.php" />
 	<pipeline nom="linkcheck_champs_a_traiter" />

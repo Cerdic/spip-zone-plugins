@@ -1,7 +1,7 @@
 <paquet
 	prefix="lettres"
 	categorie="communication"
-	version="5.8.4"
+	version="5.8.5"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/lettre-48.png"
@@ -36,7 +36,7 @@
 	<pipeline nom="libelle_association_mots" inclure="inc/lettres_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="inc/lettres_pipelines.php" />
 
-	<necessite nom="facteur" compatibilite="[3.5.2;[" />
+	<necessite nom="facteur" compatibilite="[3.6.2;[" />
 	<necessite nom="YAML" compatibilite="[1.5.2;[" />
 	<necessite nom="saisies" compatibilite="[1.42.11;[" />
 	<necessite nom="grenier" compatibilite="[0.2.1;[" />

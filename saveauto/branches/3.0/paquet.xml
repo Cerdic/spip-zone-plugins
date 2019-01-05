@@ -1,7 +1,7 @@
 <paquet
 	prefix="saveauto"
 	categorie="maintenance"
-	version="0.8.4"
+	version="0.8.5"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/img_pack/saveauto-24.png"
@@ -21,7 +21,7 @@
 	<pipeline nom="autoriser" inclure="saveauto_autoriser.php" />
 	<pipeline nom="taches_generales_cron" inclure="saveauto_pipelines.php" />
 
-	<necessite nom="facteur" compatibilite="[3.5.2;[" />
+	<necessite nom="facteur" compatibilite="[3.6.2;[" />
 	<menu nom="configurer_saveauto" titre="saveauto:titre_page_saveauto" parent="menu_configuration" icone="img_pack/saveauto-16.png" />
 	
 </paquet>

@@ -1,7 +1,7 @@
 <paquet 
 	prefix="spiplistes" 
 	categorie="communication" 
-	version="3.0.14"
+	version="3.0.15"
 	etat="test" 
 	compatibilite="[3.0.0;3.0.*]" 
 	logo="prive/themes/spip/images/spip-listes.png" 
@@ -27,6 +27,6 @@
 	<onglet nom="spiplistes_listes_toutes" titre="spiplistes:icone_listes_toutes" parent="spip-listes" icone="images/reply-to-all-24.gif" action="spiplistes_listes_toutes" />
 	<onglet nom="spiplistes_abonnes_tous" titre="spiplistes:icone__abonnes_tous" parent="spip-listes" icone="images/addressbook-24.gif" action="spiplistes_abonnes_tous" />
 
-	<necessite nom="facteur" compatibilite="[3.5.2;[" />
+	<necessite nom="facteur" compatibilite="[3.6.2;[" />
 
 </paquet>
