@@ -29,7 +29,7 @@ function xray_marqueur_invisible($t) {
 	return '';
 }
 
-!defined ('_CACHE_KEY') or define('_CACHE_KEY', '');
+defined ('_CACHE_KEY') or define('_CACHE_KEY', '');
 if (_CACHE_KEY) 
 	die ("XRay ne fonctionne pas avec des caches cryptés. Ajoutez &nbsp; <code> define('_CACHE_KEY', ''); </code> &nbsp; dans votre mes_options.php");
 
