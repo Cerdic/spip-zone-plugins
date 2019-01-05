@@ -1,5 +1,4 @@
 <?php
-include_spip('inc/config');
 
 function secteur_explicite($crit) {
 	foreach($crit as $critere){
@@ -23,20 +22,20 @@ function secteur_explicite($crit) {
 
 function id_explicite($crit, $type) {
 	//test de cfg
+	include_spip('inc/config');
 	$cfg = lire_config('secteur/idexplicite');
-
 
 	if ($cfg == false) {
 		return false;
 	}
 	$id = 'id_'.substr($type, 0, -1);
 
-
 	foreach($crit as $critere) {
 		if (
 			!empty($critere->param[0][0]->texte)
 			and $critere->param[0][0]->texte == $id
-			and $critere->not!='!'
+			and $critere->not != '!'
+			and $critere->exclus != '!'
 		) {
 			switch ($critere->op){
 				case '=' :
@@ -51,11 +50,13 @@ function id_explicite($crit, $type) {
 			return true;
 		}
 	}
-	return false;
 
+	return false;
 }
 
 function exclure_sect_choisir($crit, $type) {
+
+	include_spip('inc/config');
 	$cfg =lire_config('secteur/exclure_sect');
 	if ($cfg == null) {
 		$cfg = array();
