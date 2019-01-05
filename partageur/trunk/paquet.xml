@@ -1,7 +1,7 @@
 <paquet
 	prefix="partageur"
 	categorie="edition"
-	version="1.1.1"
+	version="1.1.2"
 	etat="stable"
 	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/partageur-64.png"

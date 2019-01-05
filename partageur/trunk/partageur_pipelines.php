@@ -30,38 +30,40 @@ function partageur_insert_head_prive_css($flux){
  * @return array
 **/
 function partageur_affiche_enfants($flux) {
-	if (
-		$e = trouver_objet_exec($flux['args']['exec'])
-		AND $e['type'] == 'rubrique'
-		AND $e['edition'] == false
-		AND autoriser('voir', 'partageur'))
-	{
-		$id_rubrique = $flux['args']['id_rubrique'];
+	if (isset($flux['args']['exec'])
+		and $e = trouver_objet_exec($flux['args']['exec'])
+		and $e['type'] == 'rubrique'
+		and $e['edition'] == false
+		and autoriser('voir', 'partageur')) {
 
-		$bouton_sites .= 
-			icone_verticale(
-				_T('partageur:ajout_via_partageur'), 
-				generer_url_ecrire('partageur_add', "id_rubrique=$id_rubrique"), 
-				"partageur-24.png", 
-				"new", 
-				'right'
-			)
-			. "<br class='nettoyeur' />";   
+		$id_rubrique = $flux['args']['id_rubrique'];
+		$bouton_sites = icone_verticale(
+			_T('partageur:ajout_via_partageur'),
+			generer_url_ecrire('partageur_add', "id_rubrique=$id_rubrique"),
+			"partageur-24.png",
+			"new",
+			'right'
+		)
+		. "<br class='nettoyeur' />";
 
 		$flux['data'] .= $bouton_sites;
 	}
 	return $flux;
 }
 
-function partageur_affiche_milieu($flux) {
-	$exec = $flux["args"]["exec"];
 
-	if ($exec == "article") {
-		$id_article = $flux["args"]["id_article"];
-		$contexte = array('id_article'=>$id_article);
-		$ret = recuperer_fond("prive/squelettes/inc/partageur_origine", $contexte);
-		$flux["data"] .= $ret;
+function partageur_affiche_milieu($flux) {
+
+	if (isset($flux['args']['exec'])) {
+		$exec = $flux["args"]["exec"];
+
+		if ($exec == "article") {
+			$id_article = $flux["args"]["id_article"];
+			$contexte = array('id_article'=>$id_article);
+			$ret = recuperer_fond("prive/squelettes/inc/partageur_origine", $contexte);
+			$flux["data"] .= $ret;
+		}
 	}
- 
+
 	return $flux;
 }
