@@ -123,6 +123,23 @@ function coloration_code_color($code, $language, $cadre = 'cadre', $englobant = 
 		$datatext_content = ' data-clipboard-text="' . attribut_html($code) . '"';
 	}
 
+	$traitement_par_precode = false;
+	if (defined('_DIR_PLUGIN_PRECODE') && _DIR_PLUGIN_PRECODE) {
+		// si le plugin PRECODE est activé, on utilise son balisage moderne
+		// header <pre> pour ne pas générer de <br>
+		$geshi->set_header_type(GESHI_HEADER_PRE);
+		$geshi->enable_line_numbers(GESHI_NO_LINE_NUMBERS);
+		$code_corps = $geshi->parse_code();
+		// si le code est sur plusieurs lignes, on passe le traitement à precode
+		// sinon, c'est du code inline que precode ne gère pas
+		if (is_int(strpos($code, "\n"))) {
+			$traitement_par_precode = true;
+			// supprimer le <pre> englobant, qui sera ajouté par PRECODE
+			$code_corps = trim(preg_replace('!^<pre[^>]*>|</pre>$!', '', $code_corps), "\n\r");
+			$rempl      = precode_balisage_code('class="' . $language . '"', $code_corps);
+		}
+	}
+
 	if ($cadre == 'cadre' OR $englobant == "div") {
 		$geshi->set_header_type(GESHI_HEADER_DIV);
 		$geshi->enable_line_numbers(GESHI_NORMAL_LINE_NUMBERS);
@@ -130,21 +147,9 @@ function coloration_code_color($code, $language, $cadre = 'cadre', $englobant = 
 		$geshi->set_header_type(GESHI_HEADER_NONE);
 		$geshi->enable_line_numbers(GESHI_NO_LINE_NUMBERS);
 	}
-
-	//
-	// And echo the result!
-	//
-	if (defined('_DIR_PLUGIN_PRECODE') && _DIR_PLUGIN_PRECODE) {
-		// si le plugin PRECODE est activé, on utilise son balisage moderne
-		// header <pre> pour ne pas générer de <br>
-		$geshi->set_header_type(GESHI_HEADER_PRE);
-		$geshi->enable_line_numbers(GESHI_NO_LINE_NUMBERS);
-		$code_corps = $geshi->parse_code();
-		// supprimer le <pre> englobant, qui sera ajouté par PRECODE
-		$code_corps = trim(preg_replace('!^<pre[^>]*>|</pre>$!', '', $code_corps), "\n\r");
-		$rempl      = precode_balisage_code('class="' . $language . '"', $code_corps);
-	} else {
-		$rempl = $stylecss . '<' . $englobant . ' class="coloration_code ' . $cadre . '"><' . $balise_code . ' class="spip_' . $language . ' ' . $cadre . '"' . $datatext_content . '>' . $geshi->parse_code() . '</' . $balise_code . '>';
+	
+	if(!$traitement_par_precode) {
+		$rempl = $stylecss . '<' . $englobant . ' class="coloration_code ' . $cadre . '"><' . $balise_code . ' class="spip_' . $language . ' ' . $cadre. '"' . $datatext_content . '>' . $geshi->parse_code() . '</' . $balise_code . '>';
 		if ($telecharge) {
 			$rempl .= "<p class='download " . $cadre . "_download'><a href='$fichier'>" . _T('bouton_download') . "</a></p>";
 		}
