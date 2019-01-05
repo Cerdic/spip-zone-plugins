@@ -61,7 +61,6 @@ function menus_declarer_tables_objets_sql($tables) {
 		'texte_ajouter'        => 'menus:texte_ajouter_menu',
 		'texte_objets'         => 'menus:editer_menus_titre',
 		'texte_objet'          => 'menus:titre_menu',
-		'texte_logo_objet'     => 'menus:titre_logo_menu',
 		'info_aucun_objet'     => 'menus:info_aucun_menu',
 		'info_1_objet'         => 'menus:info_1_menu',
 		'info_nb_objets'       => 'menus:info_nb_menus',
@@ -90,6 +89,16 @@ function menus_declarer_tables_objets_sql($tables) {
 		'rechercher_champs' => array(),
 		'join'              => array('id_menu' => 'id_menu'),
 		'tables_jointures'  => array(),
+		// chaînes de langue
+		'texte_modifier'       => 'menus:editer_menus_entrees_editer',
+		'texte_creer'          => 'menus:editer_menus_entrees_nouveau',
+		'texte_creer_associer' => 'menus:texte_creer_associer_menu_entree',
+		'texte_ajouter'        => 'menus:texte_ajouter_menu_entree',
+		'texte_objets'         => 'menus:editer_menus_entrees_titre',
+		'texte_objet'          => 'menus:titre_menu_entree',
+		'info_aucun_objet'     => 'menus:info_aucun_menu_entree',
+		'info_1_objet'         => 'menus:info_1_menu_entree',
+		'info_nb_objets'       => 'menus:info_nb_menus_entrees',
 	);
 
 	return $tables;

@@ -38,10 +38,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'editer_menus_editer' => 'Modifier ce menu',
+	'editer_menus_entrees_editer' => 'Modifier cette entrée de menu',
 	'editer_menus_explication' => 'Créez et configurez ici les menus de votre site.',
 	'editer_menus_exporter' => 'Exporter ce menu',
 	'editer_menus_nouveau' => 'Créer un nouveau menu',
+	'editer_menus_entrees_nouveau' => 'Créer une nouvelle entrée de menu',
 	'editer_menus_titre' => 'Menus du site',
+	'editer_menus_entrees_titre' => 'Entrées de menu du site',
 	'entree_afficher_articles' => 'Inclure les articles dans le menu ? (mettre "oui" pour cela)',
 	'entree_afficher_item_suite' => 'Inclure les articles dans le menu ? (mettre "oui" pour cela)',
 	'entree_ancre' => 'Ancre',
@@ -99,7 +102,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_type_menu_inexistant' => 'Ce type de menu n’est pas/plus disponible',
 
 	// F
-	'formulaire_ajouter_entree' => 'Ajouter une entrée',
 	'formulaire_ajouter_sous_menu' => 'Créer un sous-menu',
 	'formulaire_css' => 'Classes CSS',
 	'formulaire_css_explication' => 'Vous pouvez ajouter au menu d’éventuelles classes CSS supplémentaires.',
@@ -129,15 +131,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_1_menu' => 'Un menu',
+	'info_1_menu_entree' => 'Une entrée de menu',
 	'info_afficher_articles' => 'Les articles seront inclus dans le menu.',
 	'info_articles_max' => 'Seulement si la rubrique contient au plus @max@ articles',
 	'info_articles_max_affiches' => 'Affichage limité à @max@ articles',
 	'info_aucun_menu' => 'Aucun menu',
+	'info_aucun_menu_entree' => 'Aucune entrée de menu',
 	'info_classe_parent' => 'Classe des éléments parents : ',
 	'info_connexion_obligatoire' => 'Connexion obligatoire',
 	'info_deconnexion_obligatoire' => 'Uniquement déconnecté',
 	'info_masquer_articles_uniques' => 'Articles uniques masqués',
 	'info_nb_menus' => '@nb@ menus',
+	'info_nb_menus_entrees' => '@nb@ entrées de menu',
 	'info_numero_menu' => 'MENU NUMÉRO :',
 	'info_page_speciale' => 'Lien vers la page « @page@ »',
 	'info_page_speciale_zajax' => 'Modalbox de la page « @page@ » pour le bloc « @bloc@ &#187',
@@ -181,8 +186,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_ajouter_menu' => 'Ajouter un menu',
+	'texte_ajouter_menu_entree' => 'Ajouter une entrée de menu',
 	'texte_creer_associer_menu' => 'Créer et associer un menu',
+	'texte_creer_associer_menu_entree' => 'Créer et associer une entrée de menu',
 	'titre_menu' => 'Menu',
+	'titre_menu_entrée' => 'Entrée de menu',
 	'titre_objets_lies_menu' => 'Liés à ce menu',
 	'tous_les_articles' => '... Tous les articles',
 	'toutes_les_rubriques' => '... Toutes les rubriques',
