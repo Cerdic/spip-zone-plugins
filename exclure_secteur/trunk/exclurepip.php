@@ -1,11 +1,14 @@
 <?php
-include_spip('inc/exclure_utils');
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /** 
  * Filtrer les boucles pour ne pas afficher le ou les secteurs configurés
  */
 function exclure_sect_pre_boucle($boucle){
 
+	include_spip('inc/config');
 	if (
 		!empty($boucle->modificateur['tout_voir']) 
 		or (!empty($boucle->modificateur['tout']) and lire_config('secteur/tout') == 'oui') 
@@ -18,6 +21,7 @@ function exclure_sect_pre_boucle($boucle){
 
 	$type = $boucle->id_table;
 	$crit = $boucle->criteres;
+	include_spip('inc/exclure_utils');
 	$exclut = exclure_sect_choisir($crit, $type);
 
 	if (in_array($type, array('articles', 'rubriques', 'syndic'))) {

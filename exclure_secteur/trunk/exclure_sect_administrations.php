@@ -8,8 +8,9 @@
  * @licence    GPL 3
  * @package    SPIP\exclure_sect\Installation
  */
-
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Fonction d'installation et de mise à jour du plugin
@@ -48,10 +49,9 @@ function exclure_sect_conf(){
  * @return void
 **/
 function exclure_sect_vider_tables($nom_meta_base_version){
+	include_spip('inc/config');
 	if (lire_config('secteur')){
 		effacer_config('secteur');
 	}
 	effacer_meta($nom_meta_base_version);
 }
-
-?>
