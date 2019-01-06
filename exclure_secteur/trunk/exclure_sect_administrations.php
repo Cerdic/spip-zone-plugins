@@ -1,12 +1,13 @@
 <?php
 /**
- * Fichier gérant l'installation et désinstallation du plugin Exclure secteur
+ * Fichier gérant l'installation et désinstallation du plugin Exclure secteur.
+ * Le schéma de données du plugin consiste uniquement en une configuration meta.
  *
  * @plugin     Exclure secteur
  * @copyright  2013
  * @author     Maïeul Rouquette
  * @licence    GPL 3
- * @package    SPIP\exclure_sect\Installation
+ *
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -21,10 +22,17 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
  * @return void
 **/
-function exclure_sect_upgrade($nom_meta_base_version, $version_cible){
+function exclure_sect_upgrade($nom_meta_base_version, $version_cible) {
+
+	// Initialisation du tableau des mises à jour.
 	$maj = array();
+
+	// Initialisation des valeurs par défaut.
+	$config_defaut = configurer_exclure_sect();
+
+	// Pour la première installation du plugin
 	$maj['create'] = array(
-		array('exclure_sect_conf')
+		array('ecrire_config', 'secteur', $config_defaut)
 	);
 
 	include_spip('base/upgrade');
@@ -32,26 +40,37 @@ function exclure_sect_upgrade($nom_meta_base_version, $version_cible){
 }
 
 /**
- * Fonction d'installation : écriture config
+ * Initialise la configuration du plugin.
+ *
+ * @return array
+ * 		Le tableau de la configuration par défaut qui servira à initialiser la meta `secteur`.
 **/
-function exclure_sect_conf(){
-	include_spip('inc/config');
-	if (!lire_config('secteur/exclure_sect')){
-		ecrire_config('secteur/exclure_sect',array());
-	}
+function configurer_exclure_sect() {
+
+	$config = array(
+		'exclure_sect' => array(),
+		'tout'         => '',
+		'idexplicite'  => ''
+	);
+
+	return $config;
 }
 
 /**
- * Fonction de désinstallation du plugin
+ * Fonction de désinstallation du plugin.
  *
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
  * @return void
 **/
-function exclure_sect_vider_tables($nom_meta_base_version){
+function exclure_sect_vider_tables($nom_meta_base_version) {
+
+	// On efface la configuration spécifique du plugin
 	include_spip('inc/config');
 	if (lire_config('secteur')){
 		effacer_config('secteur');
 	}
+
+	// Puis la meta de version du schéma du plugin.
 	effacer_meta($nom_meta_base_version);
 }
