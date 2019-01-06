@@ -1,7 +1,7 @@
 <paquet
 	prefix="exclure_sect"
 	categorie="outil"
-	version="2.0.15"
+	version="2.0.16"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/exclure_secteur.jpg"
@@ -15,6 +15,6 @@
 	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
-	<menu nom="configurer_exclure_sect" titre="exclure_sect:exclure_secteur" parent="menu_squelette" icone="images/exclure_secteur-16.jpg" />
+	<menu nom="configurer_exclure_sect" titre="exclure_sect:configurer_menu_entree" parent="menu_squelette" icone="images/exclure_secteur-16.jpg" />
 	<pipeline nom="pre_boucle" inclure="exclure_sect_pipelines.php" />
 </paquet>
