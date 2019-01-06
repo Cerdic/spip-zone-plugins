@@ -59,7 +59,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_type_menu' => 'Has d’escollir un tipus de menú',
 
 	// F
-	'formulaire_ajouter_entree' => 'Afegir una entrada',
 	'formulaire_ajouter_sous_menu' => 'Crear un submenú',
 	'formulaire_css' => 'Classes CSS',
 	'formulaire_css_explication' => 'Podeu afegir al menú eventuals classes CSS suplementàries.',

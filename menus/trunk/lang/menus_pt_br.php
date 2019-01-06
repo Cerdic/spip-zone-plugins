@@ -94,7 +94,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_type_menu_inexistant' => 'Esse tipo de menu não é, ou não esta mais disponível.',
 
 	// F
-	'formulaire_ajouter_entree' => 'Incluir uma entrada',
 	'formulaire_ajouter_sous_menu' => 'Criar um submenu',
 	'formulaire_css' => 'Classes CSS',
 	'formulaire_css_explication' => 'Você pode incluir no menu eventuais classes CSS suplementares.',

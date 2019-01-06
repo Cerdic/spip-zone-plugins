@@ -97,7 +97,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_type_menu_inexistant' => 'اين نوع مينو فعلا/ديگر در دسترس نيست',
 
 	// F
-	'formulaire_ajouter_entree' => 'يك مدخل اضافه كنيد',
 	'formulaire_ajouter_sous_menu' => 'ايجاد يك زيرمنيو',
 	'formulaire_css' => 'سي.اس.اس طبقات',
 	'formulaire_css_explication' => 'مي‌توانيد به منيوي خود طبقات سي.اس.اس تكميلي اضافه كنيد.',

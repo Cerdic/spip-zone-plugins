@@ -94,7 +94,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_type_menu_inexistant' => 'Dieser Menütyp ist nicht verfügbar.',
 
 	// F
-	'formulaire_ajouter_entree' => 'Eintrag hinzufügen',
 	'formulaire_ajouter_sous_menu' => 'Untermenü hinzufügen',
 	'formulaire_css' => 'CSS-Klassen',
 	'formulaire_css_explication' => 'Sie können dem Menü eventuell vorhandene zusätzliche CSS-Klassen zuordnen.',

@@ -94,7 +94,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_type_menu_inexistant' => 'Tia menuo ne (plu) disponeblas',
 
 	// F
-	'formulaire_ajouter_entree' => 'Aldoni elementon',
 	'formulaire_ajouter_sous_menu' => 'Krei submenuon',
 	'formulaire_css' => 'CSS-klasoj',
 	'formulaire_css_explication' => 'Vi povas aldoni al la menuo pliajn CSS-klasojn.',

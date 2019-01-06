@@ -101,7 +101,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_type_menu_inexistant' => 'Dit type menu is niet (meer) beschikbaar',
 
 	// F
-	'formulaire_ajouter_entree' => 'Voeg een regel toe',
 	'formulaire_ajouter_sous_menu' => 'Maak een submenu',
 	'formulaire_css' => 'CSS class',
 	'formulaire_css_explication' => 'Je kunt eventueel extra CSS classes aan het menu toevoegen.',

@@ -53,7 +53,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_type_menu' => 'يجب اختيار نوع قوائم',
 
 	// F
-	'formulaire_ajouter_entree' => 'إضافة بند',
 	'formulaire_ajouter_sous_menu' => 'إنشاء قائمة فرعية',
 	'formulaire_deplacer_bas' => 'نقل الى الأسفل',
 	'formulaire_deplacer_haut' => 'نقل الى الأعلى',

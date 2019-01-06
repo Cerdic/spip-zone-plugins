@@ -37,7 +37,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_mise_a_jour' => 'Произошла ошибка при обновлении базы.',
 
 	// F
-	'formulaire_ajouter_entree' => 'Добавить пункт меню',
 	'formulaire_ajouter_sous_menu' => 'Создать подменю',
 	'formulaire_css' => 'CSS классы',
 	'formulaire_css_explication' => 'Вы можете добавить дополнительный классы CSS к вашему меню.',

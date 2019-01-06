@@ -92,7 +92,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_type_menu_inexistant' => 'Tento typ menu (už viac) nie je dostupný',
 
 	// F
-	'formulaire_ajouter_entree' => 'Pridať položku menu',
 	'formulaire_ajouter_sous_menu' => 'Vytvoriť podmenu',
 	'formulaire_css' => 'Triedy CSS',
 	'formulaire_css_explication' => 'K svojmu menu môžete pridať ďalšie triedy CSS.',
