@@ -98,3 +98,103 @@ function roles_documents_presents_sur_objet($objet, $id_objet, $id_document = 0,
 
 	return $done[$hash] = $roles;
 }
+
+/**
+ * Surcharge du critère `logo`
+ *
+ * Tout comme le critère {logo} par défaut, on permet de sélectionner tous les
+ * objets qui ont un logo, quel qu'il soit, au format historique ou au format
+ * document.
+ *
+ * Un unique paramètre optionnel permet de se restreindre à un rôle
+ * particulier. Par exemple, {logo accueil} permet de sélectionner les logos
+ * dont le rôle est 'logo_accueil'.
+ *
+ * {!logo} permet d'inverser la sélection, pour avoir les objets qui n'ont PAS
+ * de logo.
+ *
+ * @uses lister_objets_avec_logos()
+ *     Pour obtenir les éléments qui ont un logo enregistrés avec la méthode
+ *     "historique".
+ *
+ * @param string $idb Identifiant de la boucle
+ * @param array $boucles AST du squelette
+ * @param Critere $crit Paramètres du critère dans cette boucle
+ * @return void
+ */
+function critere_logo($idb, &$boucles, $crit) {
+
+	$boucle = &$boucles[$idb];
+
+	// On interprète le premier paramètre du critère, qui nous donne le type de
+	// logo
+	if (count($crit->param)) {
+		$type_logo = calculer_liste(
+			array_shift($crit->param),
+			array(),
+			$boucles,
+			$boucle->id_parent
+		);
+		$type_logo = trim($type_logo, "'");
+	}
+
+	// Pour ajouter la jointure qu'il nous faut à la boucle, on lui donne le
+	// premier alias L* qui n'est pas utilisé.
+	$i = 1;
+	while (isset($boucle->from["L$i"])) {
+		$i++;
+	}
+	$alias_jointure = "L$i";
+
+	$alias_table = $boucle->id_table;
+	$id_table_objet = $boucle->primary;
+
+	// On fait un LEFT JOIN avec les liens de documents qui correspondent au(x)
+	// rôle(s) cherchés. Cela permet de sélectionner aussi les objets qui n'ont
+	// pas de logo, dont le rôle sera alors NULL. C'est nécessaire pour pouvoir
+	// gérer les logos enregistrés avec l'ancienne méthode, et pour {!logo}.
+	$boucle->from[$alias_jointure] = 'spip_documents_liens';
+	$boucle->from_type[$alias_jointure] = 'LEFT';
+	$boucle->join[$alias_jointure] = array(
+		"'$alias_table'",
+		"'id_objet'",
+		"'$id_table_objet'",
+		"'$alias_jointure.objet='.sql_quote('" . objet_type($alias_table) . "')." .
+		"' AND $alias_jointure.role LIKE \'logo\_" . ($type_logo ?: '%') . "\''",
+	);
+	$boucle->group[] = "$alias_table.$id_table_objet";
+
+	// On calcule alors le where qui va bien.
+	if ($crit->not) {
+		$where = "$alias_jointure.role IS NULL";
+	} else {
+		$where = array(
+			"'LIKE'",
+			"'$alias_jointure.role'",
+			"'\'logo\_" . ($type_logo ?: '%') . "\''",
+		);
+	}
+
+	// Rétro-compatibilité : Si l'on ne cherche pas un type de logo particulier,
+	// on retourne aussi les logos enregistrés avec la méthode "historique".
+	if (! $type_logo) {
+		$where_historique =
+			'sql_in('
+			. "'$alias_table.$id_table_objet', "
+			. "lister_objets_avec_logos('$id_table_objet'), "
+			. "'')";
+
+		if ($crit->not) {
+			$where_historique = array("'NOT'", $where_historique);
+		}
+
+		$where = array(
+			"'OR'",
+			$where,
+			$where_historique
+		);
+	}
+
+	// On ajoute le where à la boucle
+	$boucle->where[] = $where;
+}
