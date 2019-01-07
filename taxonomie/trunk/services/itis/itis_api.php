@@ -935,6 +935,15 @@ function itis_build_url($format, $group, $action, $key) {
 	return $url;
 }
 
+/**
+ *
+ * @internal
+ *
+ * @param $tsn
+ * @param $data
+ * @param $index
+ * @return array
+ */
 function itis_format_hierarchyfull($tsn, $data, $index) {
 
 	$information = array(

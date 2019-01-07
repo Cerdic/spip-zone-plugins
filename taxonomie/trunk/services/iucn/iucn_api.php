@@ -262,24 +262,24 @@ function iucn_credit($id_taxon, $informations) {
 // ----------------------------------------------------------------
 
 /**
- * Construit l'URL de la requête Wikipedia correspondant à la demande utilisateur.
+ * Construit l'URL de la requête IUCN correspondant à la demande utilisateur.
  *
  * @internal
  *
- * @param string $search
- *        Clé de recherche qui est essentiellement le nom scientifique dans l'utilisation normale.
+ * @param string $group
+ *        Groupe d'actions du même type. Prend les valeurs:
+ *        - `species` : groupe des actions de recherche du TSN à partir du nom commun ou scientifique
+ * @param string $action
+ *        Nom de l'action du service IUCN. Les valeurs pour le groupe species sont, par exemple, `assessment`,
+ *        `commonname` et `history`.
+ * @param string $key
+ *        Clé de recherche qui dépend de l'action demandée. Ce peut être le nom scientifique, le TSN, etc.
  *        Cette clé doit être encodée si besoin par l'appelant.
- * @param string $language
- *        Code de langue au sens de Wikipedia qui préfixe l'url du endpoint. Vaut `fr`, `en`, `es` pour l'instant.
- * @param array  $section
- *        Section de page dont le texte est à renvoyer. Entier supérieur ou égal à 0 ou `null`
- *        pour tout la page.
- *        Cet argument est optionnel.
  *
  * @return string
  *        L'URL de la requête au service
  */
-function iucn_build_url($action, $name) {
+function iucn_build_url($group, $action, $key) {
 
 	// On récupère le token enregistré pour l'accès à l'API
 	include_spip('inc/config');
@@ -288,8 +288,8 @@ function iucn_build_url($action, $name) {
 	// Construire la partie standard de l'URL de l'api sollicitée
 	$url = _TAXONOMIE_IUCN_ENDPOINT_BASE_URL
 		. $action
-		. '/' . rawurlencode($name)
-		. '?token=' . $token;
+		. '/' . rawurlencode($action)
+		. '?token=' . $key;
 
 	return $url;
 }

@@ -318,7 +318,7 @@ function taxon_crediter($id_taxon, $sources_specifiques = null) {
  * @return array
  *        Image de la puce.
  */
-function taxon_afficher_statut($statut, $id_objet = 0) {
+function taxon_afficher_statut($statut, $id_taxon = 0) {
 
 	// On évite de charger la fonction n fois.
 	static $afficher_puce = null;
@@ -330,7 +330,7 @@ function taxon_afficher_statut($statut, $id_objet = 0) {
 
 	// On affiche la puce sans proposer le formulaire rapide de changement de statut qui pose un problème avec
 	// l'ajax sachant qu'un changement peut en provoquer d'autres, la liste n'est plus à jour.
-	$puce = $afficher_puce($id_objet, $statut, 0, 'taxon', false, false);
+	$puce = $afficher_puce($id_taxon, $statut, 0, 'taxon', false, false);
 
 	return $puce;
 }
