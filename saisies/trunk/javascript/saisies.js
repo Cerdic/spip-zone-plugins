@@ -11,6 +11,12 @@ function saisies_fieldset_pliable(){
 			var groupe = jQuery(this).find('> fieldset > .editer-groupe');
 			var legend = jQuery(this).find('> fieldset > .legend');
 
+			// On éviter de plier un fieldset qui contient des erreurs lors de
+			// l'initialisation.
+			if (fieldset.find('.erreur').length > 0) {
+				fieldset.removeClass('plie');
+			}
+
 			// S'il est déjà plié on cache le contenu
 			if (fieldset.is('.plie'))
 				groupe.hide();
