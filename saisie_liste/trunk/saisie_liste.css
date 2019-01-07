@@ -12,6 +12,9 @@ li.saisie_liste,
 .formulaire_spip div.saisie_liste {
   padding: 0;
   margin: 5px; }
+  li.saisie_liste.erreur,
+  .formulaire_spip div.saisie_liste.erreur {
+    background-color: inherit; }
   li.saisie_liste > label,
   .formulaire_spip div.saisie_liste > label {
     display: inline-block;
@@ -25,15 +28,9 @@ li.saisie_liste,
     margin-left: 0; }
   li.saisie_liste > fieldset,
   .formulaire_spip div.saisie_liste > fieldset {
-    border: none; }
-  li.saisie_liste fieldset,
-  .formulaire_spip div.saisie_liste fieldset {
-    margin: 0;
-    padding: 0; }
-    li.saisie_liste fieldset .legend,
-    .formulaire_spip div.saisie_liste fieldset .legend {
-      margin-left: -8px;
-      margin-right: 0; }
+    border: none;
+    padding: 0;
+    margin: 0; }
 
 .saisie-liste {
   border: none; }
@@ -50,9 +47,10 @@ li.saisie_liste,
     .saisie-liste .liste-saisies p {
       margin-bottom: 0; }
   .saisie-liste fieldset {
-    border: none;
-    margin: 0;
-    padding: 0; }
+    border: none; }
+    .saisie-liste fieldset .legend {
+      margin-left: -8px;
+      margin-right: 0; }
   .saisie-liste > li,
   .saisie-liste > div {
     padding: 3px; }
