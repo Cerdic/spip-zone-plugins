@@ -103,15 +103,18 @@ function agenda_optimiser_base_disparus($flux) {
 
     # passer a la poubelle
     # les evenements lies a un article inexistant (et orphelin interdit)
-    $where = lire_config('agenda/autoriser_orphelins') ? '' : 'articles.id_article IS NULL';
-    $res = sql_select(
-        'DISTINCT evenements.id_article',
-        'spip_evenements AS evenements LEFT JOIN spip_articles AS articles ON evenements.id_article=articles.id_article',
-        $where
-    );
-    while ($row = sql_fetch($res)) {
-        sql_updateq('spip_evenements', array('statut'=>'poubelle'), 'id_article='.$row['id_article']);
-    }
+    if (lire_config('agenda/autoriser_orphelins')) {
+		$where = 'articles.id_article IS NULL';
+		$res = sql_select(
+			'DISTINCT evenements.id_article',
+			'spip_evenements AS evenements LEFT JOIN spip_articles AS articles ON evenements.id_article=articles.id_article',
+			$where
+		);
+
+		while ($row = sql_fetch($res)) {
+			sql_updateq('spip_evenements', array('statut'=>'poubelle'), 'id_article='.$row['id_article']);
+		}
+	}
 
 	// Evenements a la poubelle
 	sql_delete('spip_evenements', "statut='poubelle' AND maj < ".$flux['args']['date']);
