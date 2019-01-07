@@ -1,0 +1,15 @@
+#SET{description,#ARRAY} 
+<BOUCLE_evenements(EVENEMENTS) {par date_debut} {id_evenement IN #ENV{valeur}}>
+	[(#ENV{type_affichage}|=={titre_date}|oui)
+		#SET{texte,#TITRE|concat{' - ', #DATE_DEBUT|agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE}}}
+	]
+	[(#ENV{type_affichage}|=={titre}|oui)
+		#SET{texte,#TITRE}
+	]
+	[(#ENV{type_affichage}|=={date}|oui)
+		#SET{texte,#DATE_DEBUT|agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE}}
+	]
+	[(#SET{description,#GET{description}|array_merge{#ARRAY{#GET{texte},#ID_EVENEMENT}}})]
+</BOUCLE_evenements>
+#SET{description,#GET{description}|array_flip}
+#INCLURE{fond=saisies-vues/#ENV{type_choix,radio},data=#GET{description},env}
