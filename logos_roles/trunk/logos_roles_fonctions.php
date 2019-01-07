@@ -240,64 +240,6 @@ function forcer_dimensions_role($logo, $objet, $id_objet, $role) {
 }
 
 /**
- * Surcharge du critère `logo`
- *
- * @uses lister_objets_avec_logos_roles()
- *     Pour obtenir les éléments qui ont un logo
- *
- * @param string $idb Identifiant de la boucle
- * @param array $boucles AST du squelette
- * @param Critere $crit Paramètres du critère dans cette boucle
- * @return void
- */
-function critere_logo($idb, &$boucles, $crit) {
-
-	$not = $crit->not;
-	$boucle = &$boucles[$idb];
-
-	$c = "sql_in('" .
-		$boucle->id_table . '.' . $boucle->primary
-			. "', lister_objets_avec_logos_roles('" . $boucle->primary . "'), '')";
-
-	if ($crit->cond) {
-		$c = "($arg ? $c : 1)";
-	}
-
-	if ($not) {
-		$boucle->where[] = array("'NOT'", $c);
-	} else {
-		$boucle->where[] = $c;
-	}
-}
-
-/**
- * Retourne pour une clé primaire d'objet donnée les identifiants ayant un logo
- *
- * Version pour les logos par rôle de la fonction lister_objets_avec_logos du
- * core. On utilise l'API chercher_logo au lieu de parcourir le dossier IMG/.
- *
- * @param string $type
- *     Nom de la clé primaire de l'objet
- * @return string
- *     Liste des identifiants ayant un logo (séparés par une virgule)
- **/
-function lister_objets_avec_logos_roles($type) {
-
-	$logos = array();
-	$chercher_logo = charger_fonction('chercher_logo', 'inc/');
-
-	$rows = sql_allfetsel($type, table_objet_sql($type));
-
-	foreach ($rows as $r) {
-		if (! empty($chercher_logo($r[$type], $type))) {
-			$logos[] = $r[$type];
-		}
-	}
-
-	return join(',', $logos);
-}
-
-/**
  * Modifier le logo d'un objet à partir d'un document
  *
  * @param string $objet
