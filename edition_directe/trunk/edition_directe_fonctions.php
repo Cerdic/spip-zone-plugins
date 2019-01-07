@@ -3,7 +3,7 @@
  * Fonctions utiles au plugin Edition_directe
  *
  * @plugin     Edition_directe
- * @copyright  2011 - 2018
+ * @copyright  2013 - 2019
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Edition_directe\Fonctions
