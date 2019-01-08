@@ -9,9 +9,21 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * {enfants} ou {enfants #ID_RUBRIQUE}
- * renvoit tous les enfants d'une rubrique ou article
- * directs (liens descendants) ou indirects (liens transverses)
+ * {enfants} renvoie les enfants d'une rubrique ou d'un article,
+ * directs (liens descendants) et/ou indirects (liens transverses)
+ *
+ * Critères :
+ *
+ * {enfants}           : renvoie tous les enfants, directs ET indirects
+ * {enfants_directs}   : ne renvoie que les enfants directs
+ * {enfants_indirects} : ne renvoie que les enfants indirects
+ *
+ * Syntaxe :
+ *
+ * {enfants}                     : rubrique du contexte
+ * {enfants #ID_RUBRIQUE}        : rubrique passée en paramètre
+ * {enfants #LISTE{1,2,3}}       : rubriques passées en paramètre
+ * {enfants?#ENV{id_rubrique,0}} : rubrique passée en paramètre, mais rend le critère optionnel
  *
  * @global <type> $exceptions_des_tables
  * @param <type> $idb
@@ -22,6 +34,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function critere_enfants($idb, &$boucles, $crit, $tous=true) {
 	global $exceptions_des_tables;
 	$boucle = &$boucles[$idb];
+	$not = $crit->not;
 
 	if (isset($crit->param[0])) {
 		$arg = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
@@ -42,10 +55,12 @@ function critere_enfants($idb, &$boucles, $crit, $tous=true) {
 
 	$where = array();
 
+	// Si c'est tout ou que directs, on ajoute le critère principal
 	if ($tous!=='indirects') {
 		$where[] = "is_array(\$r=$arg)?sql_in('$mparent',\$r):array('=', '$mparent', \$r)";
 	}
 
+	// Si c'est tout ou que indirects, on ajoute le critère secondaire, avec la table de liens
 	if ($tous !== 'directs'
 	  AND in_array(table_objet_sql($boucle->type_requete),array_keys(lister_tables_objets_sql()))){
 		$type = objet_type($boucle->type_requete);
@@ -54,14 +69,17 @@ function critere_enfants($idb, &$boucles, $crit, $tous=true) {
 		$where[] = "array('IN', '" . $boucle->id_table . "." . $boucle->primary . "', '(SELECT * FROM('.$sous.') AS subquery)')";
 	}
 	
+	// S'il y a les deux critères, c'est l'un ou l'autre
 	if (count($where) == 2) {
-		$where = array("'OR'", $where[0], $where[1]);
+		$where = "array('OR'," . $where[0] . "," . $where[1] . ")";
 	}
 	else {
 		$where = reset($where);
 	}
 
-	$boucle->where[]= $where;
+	$boucle->where[] = !$crit->cond ?
+		$where :
+		("($arg ? $where : '1=1')");
 }
 
 function critere_enfants_directs_dist($idb, &$boucles, $crit) {
