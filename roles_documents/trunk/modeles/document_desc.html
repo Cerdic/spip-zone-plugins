@@ -100,7 +100,7 @@
 						<a href="#URL_ECRIRE{document_edit,id_document=#ID_DOCUMENT}" target="_blank" class="editbox" tabindex="0" role="button"><:medias:bouton_modifier_document:></a>
 					</div>
 				]<//B_compte>
-				[(#PIPELINE{document_desc_actions,#ARRAY{args,#ARRAY{id_document,#ID_DOCUMENT,position,document_desc,variante,#ENV{variante},objet,#OBJET,id_objet,#ID_OBJET},data,''}})]
+				[(#PIPELINE{document_desc_actions,#ARRAY{args,#ARRAY{id_document,#ID_DOCUMENT,position,document_desc,variante,#ENV{variante},objet,#OBJET,id_objet,#ID_OBJET,role,#ENV{role}},data,''}})]
 			</div>
 		</div>
 	</div>
