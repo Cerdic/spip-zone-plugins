@@ -8,10 +8,16 @@
 
 <body>
 [(#UNIT|non)
-<p>On peut tester logé administrateur ou bien non identifié. Sur 2 navigateurs c'est plus facile, et comparer les résultats. Pour tester non identifié, il faut mettre un define('CACHELAB_DATE_TESTS','2018-12-12') à la date du jour ou à 'TOUJOURS' dans votre fichier d'options</p>
+<p>On peut tester logé administrateur sur un navigateur, et non identifié sur un autre navigateur : ça permet de comparer les résultats. Pour tester non identifié, il faut mettre un define('CACHELAB_DATE_TESTS','2018-12-12') à la date du jour de test ou à 'TOUJOURS' dans votre fichier d'options</p>
 <p>Dans le menu de chaque test, «<code>recalcul et assert</code>» active les assertions, et «<code>recalcul et var_cache</code>» active la visualisation des infos de sessionnement des caches</p>
-<p>Avec Memoization activé par APC ou APCu, XRay permet visualiser les contenus des caches et leurs métadonnées. On trouve les caches concernés en cherchant 'cachetests/'.</p>
-<p>Dans chaque noisette*, il y a une assertion sur le sessionnement qui affiche une erreur si le sessionnement n'est pas comme attendu.  <small>* Sauf certaines inclusions de plus bas niveau, dans cachetests/inclure, qui ne génèrent pas de sessionnement et qui sont partagées par les différents tests.</small></p>
+<p>Dans les noisette testée*, il y a une assertion sur le sessionnement qui affiche une erreur si le sessionnement n'est pas comme attendu <small>(* Certaines des inclusions de cachetests/inclure ne le sont pas.)</small> Dans le "test des tests", 2 erreurs sont commises intentionnellement : elles permettent de tester les assertions. La version buguée de SPIP n'en détecte qu'une seule.</p>
+<p>Avec Memoization par APC ou APCu, XRay permet visualiser les contenus des caches et leurs métadonnées. On trouve les caches concernés en cherchant 'cachetests/'. La sélection "Caches sessionnés" et l'option d'affichage "Squelettes" (<a href="#URL_ECRIRE{xray,OB=2&S_KEY=H&TYPELISTE=squelettes&COUNT=20&TYPECACHE=SESSIONS}">Liste XRay des caches sessionnés</a>) donne la liste des squelettes sessionnés. Aprés être passé sur tous les tests sans recalculer (sinon ça vide les caches !), ces listes sont les suivantes :
+<ul>
+<li>Avec le fix : \[ statique_B.html, dynamique_B.html, emboite_A.html, emboite_C.html, inclure/erreur_sessionne.html, suite_statique.html, suite_modele.html, emboite_B.html  \]</li> 
+<li>Sans le fix : les mêmes plus \[ dynamique_C.html, dynamique_D.html, inclure/dyn_B.html, inclure/dyn_C.html, inclure/erreur_non_sessionne.html, inclure/stat_C.html, statique_C.html, statique_D.html \] qui sont induement sessionnés.
+</li>
+</ul>
+</p>
 ]
 <?php
 if (!defined('CACHELAB_DATE_TESTS'))
