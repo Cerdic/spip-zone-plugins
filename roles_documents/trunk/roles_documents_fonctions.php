@@ -74,6 +74,16 @@ function roles_documents_presents_sur_objet($objet, $id_objet, $id_document = 0,
 	$res = sql_allfetsel($select, 'spip_documents_liens', $where);
 	$roles_attribues = array_column($res, 'role');
 
+	// On trie les rôles attribués dans le même ordre que les rôles possibles,
+	// et non dans l'ordre de création des liens dans la base.
+	$roles_attribues_ordonnes = array();
+	foreach ($roles_possibles as $role) {
+		if (in_array($role, $roles_attribues)) {
+			$roles_attribues_ordonnes[] = $role;
+		}
+	}
+	$roles_attribues = $roles_attribues_ordonnes;
+
 	// Liste des rôles non attribués
 	$roles_attribuables = array_diff($roles_possibles, $roles_attribues);
 
