@@ -136,6 +136,119 @@ function charger_valeurs($tableau_saisie, $valeurs, $index_objet) {
 }
 
 /**
+ * Fusionner une saisie avec des options passées en argument.
+ *
+ * Les options sont un tableau de saisies, dont on peut omettre tous les
+ * paramètres sauf le nom. Les paramètres des options prennent le pas sur les
+ * options définies dans la saisie de base.
+ *
+ * @param array $tableau_saisie
+ *     Un tableau de saisies au format de #GENERER_SAISIES représentant
+ *     un objet de la saisie liste.
+ * @param array $options_saisies
+ *     Des options à remplacer.
+ * @return array
+ *     Un tableau de saisies correspondant au $tableau_saisie, dans lequel les
+ *     options définies dans $options_saisies ont remplacé les valeurs de
+ *     départ.
+ *
+ * @example
+
+var_dump(fusionner_options_saisies(
+	array(
+		array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'test1',
+				'label' => 'test1',
+			),
+		),
+		array(
+			'saisie' => 'select',
+			'options' => array(
+				'nom' => 'test2',
+				'label' => 'test222',
+			),
+		),
+		array(
+			'saisie' => 'select',
+			'options' => array(
+				'nom' => 'test3',
+				'label' => 'test3',
+			),
+		),
+	),
+	array(
+		array(
+			'options' => array(
+				'nom' => 'test2',
+				'label' => 'test2'
+			),
+		),
+		array(
+			'saisie' => 'textarea',
+			'options' => array(
+				'nom' => 'test3',
+			),
+		),
+	)
+));
+
+/** ==>
+
+array(
+	array(
+		'saisie' => 'input',
+		'options' => array(
+			'nom' => 'test1',
+			'label' => 'test1',
+		),
+	),
+	array(
+		'saisie' => 'select',
+		'options' => array(
+			'nom' => 'test2',
+			'label' => 'test2',
+		),
+	),
+	array(
+		'saisie' => 'textarea',
+		'options' => array(
+			'nom' => 'test3',
+			'label' => 'test3',
+		),
+	),
+)
+**/
+function fusionner_options_saisies($tableau_saisie, $options_saisies) {
+
+	if (is_array($options_saisies)) {
+		foreach ($options_saisies as $options) {
+			$nom_option = $options['options']['nom'];
+			foreach ($tableau_saisie as $i => $saisie) {
+				if ($saisie['options']['nom'] === $nom_option) {
+					if (isset($options['saisie'])) {
+						$tableau_saisie[$i]['saisie'] = $options['saisie'];
+					}
+					foreach ($options['options'] as $cle => $val) {
+						$tableau_saisie[$i]['options'][$cle] = $val;
+					}
+					if (isset($options['saisies'])) {
+						$tableau_saisie[$i]['saisies'] = fusionner_options_saisies(
+							$tableau_saisie[$i]['saisies'],
+							$options['saisies']
+						);
+					}
+				}
+			}
+		}
+	}
+
+	return $tableau_saisie;
+}
+
+
+/**
  * renommer_saisies - renomme les saisies d'un objet d'une saisie liste_objet
  * pour en faire des sous-saisies.
  *

@@ -50,7 +50,9 @@
 
         <div class="objet td">
           <div class="liste-saisies">
-            <BOUCLE_saisies_objet(DATA) {source table, #ENV{saisies}}>
+            <BOUCLE_saisies_objet(DATA)
+               {source table, #ENV{saisies}|fusionner_options_saisies{
+                 #ENV{#ENV{nom}_options_saisies}|table_valeur{#GET{compteur_objets}}}}>
 
               #SET{saisie, #VALEUR}
 
