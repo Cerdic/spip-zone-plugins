@@ -124,6 +124,7 @@ function autoriser_noizetier_configurerpage_dist($faire, $type, $id, $qui, $opti
  * Autorisation d'activation des compositions sur un type d'objet. Permet de lancer l'action depuis le noiZetier
  * sans passer par la configuration du plugin Compositions.
  * Il faut :
+ * - que le plugin compositions soit activé
  * - être autorisé à configurer le noiZetier
  * - que la page source existe et ne soit pas une composition
  * - que le plugin Compositions soit bien activé
@@ -142,13 +143,16 @@ function autoriser_noizetier_activercomposition_dist($faire, $type, $id, $qui, $
 	$autoriser = false;
 
 	include_spip('inc/noizetier_page');
-	if (autoriser('noizetier')
-	and (is_array($options) and !empty($options))
-	and (!empty($options['page']) and ($configuration = noizetier_page_lire($options['page'], false))
-	and !$configuration['composition'])
-	and ($configuration['est_page_objet'] == 'oui')
-	and !noizetier_page_composition_activee($configuration['type'])
-	and autoriser('configurer', 'compositions')) {
+	if (
+		test_plugin_actif('compositions')
+		and autoriser('noizetier')
+		and (is_array($options) and !empty($options))
+		and (!empty($options['page']) and ($configuration = noizetier_page_lire($options['page'], false))
+		and !$configuration['composition'])
+		and ($configuration['est_page_objet'] == 'oui')
+		and !noizetier_page_composition_activee($configuration['type'])
+		and autoriser('configurer', 'compositions')
+	) {
 		$autoriser = true;
 	}
 
