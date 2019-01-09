@@ -76,8 +76,6 @@ function lister_roles_logos($objet = null, $role = null, $tous_les_objets = null
 	}
 
 
-	$roles_logos = pipeline('roles_logos', $roles_logos);
-
 	if (is_array(lire_config('logos_roles/roles_logos'))) {
 		include_spip('inc/filtres');
 		foreach (lire_config('logos_roles/roles_logos') as $r) {
@@ -93,6 +91,8 @@ function lister_roles_logos($objet = null, $role = null, $tous_les_objets = null
 			}
 		}
 	}
+
+	$roles_logos = pipeline('roles_logos', $roles_logos);
 
 	include_spip('base/objets');
 
