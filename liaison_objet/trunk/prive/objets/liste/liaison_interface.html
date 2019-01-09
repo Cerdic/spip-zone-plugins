@@ -1,7 +1,7 @@
 #CACHE{0}
 <br class="nettoyeur"/>
 <div class="liste-elements liaison_objets" id="liaison_objets">#ENV**{type_lien}
-#SET{n_langues,#ENV**{langue}|count}
+#SET{n_langues,#ENV**{langue,#ARRAY}|count}
 #SET{tables,#VAL|lister_tables_objets_sql}
 [(#VAL)]
 [(#BOITE_OUVRIR{

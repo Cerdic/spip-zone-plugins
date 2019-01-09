@@ -66,7 +66,7 @@
 
 						[(#REM) Les types de lien]
 
-						[(#ENV{types_lien}|count|>{0}|oui)
+						[(#ENV{types_lien,#ARRAY}|count|>{0}|oui)
 								[(#SAISIE{selection,type_lien,
 										label=<:liaison_objet:liaison_type_lien:> [(#GET{objets}|table_valeur{#VALEUR})],
 										datas=#ENV{types_lien}})

@@ -1,9 +1,14 @@
 <?php
 /**
- * Plugin Liaison d'objets
- * (c) 2012 Rainer Müller
- * Licence GNU/GPL
+ * Déclarations relatives à la base de données
+ *
+ * @plugin     Liaison_objets
+ * @copyright  2012 - 2019
+ * @author     Rainer Müller
+ * @licence    GNU/GPL
+ * @package    SPIP\Liaison_objets\Pipelines
  */
+
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 

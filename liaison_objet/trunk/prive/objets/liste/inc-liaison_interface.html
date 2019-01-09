@@ -2,7 +2,7 @@
 <B_liaison>
 <table class='spip liste'>
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{liaison_objet:info_1_liaison_objet,liaison_objet:info_nb_liaison_objets}})
-		[(#GET{langues}|count|>{1}|oui)
+		[(#ENV{langues,#ARRAY}|count|>{1}|oui)
 			[(#VALEUR)]
 		]</strong>
 		</caption>]

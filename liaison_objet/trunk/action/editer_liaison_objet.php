@@ -1,4 +1,14 @@
 <?php
+/**
+ * Des actions pour la gestion de l'objet liaison_objet
+ *
+ * @plugin     Liaison_objets
+ * @copyright  2012 - 2019
+ * @author     Rainer Müller
+ * @licence    GNU/GPL
+ * @package    SPIP\Immeubles\Action
+ */
+
 if (!defined("_ECRIRE_INC_VERSION"))
 	return;
 

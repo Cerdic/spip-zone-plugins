@@ -1,8 +1,12 @@
 <?php
 /**
- * Plugin Liaisons d'objets
- * (c) 2012 Rainer Müller
- * Licence GNU/GPL
+ * Définit les autorisations du plugin Liaison_objets
+ *
+ * @plugin     Liaison_objets
+ * @copyright  2012 - 2019
+ * @author     Rainer Müller
+ * @licence    GNU/GPL
+ * @package    SPIP\Liaison_objets\Autorisations
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -31,9 +35,6 @@ function autoriser_configurer_liaison_objet_dist($faire, $type, $id, $qui, $opt)
 // -----------------
 // Objet liaison_objets
 
-
-
-
 // creer
 function autoriser_objet_creer_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array('0minirezo', '1comite'));
@@ -53,8 +54,3 @@ function autoriser_objet_modifier_dist($faire, $type, $id, $qui, $opt) {
 function autoriser_objet_supprimer_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
 }
-
-
-
-
-?>

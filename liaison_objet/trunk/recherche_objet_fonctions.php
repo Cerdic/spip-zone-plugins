@@ -1,10 +1,18 @@
 <?php
+/**
+ * Fonctions pour le squelette recherche_objets.html
+ *
+ * @plugin     Liaison_objets
+ * @copyright  2012 - 2019
+ * @author     Rainer Müller
+ * @licence    GNU/GPL
+ * @package    SPIP\Liaison_objets
+ */
 
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 /*Fournit un tableau avec id_objet=>donnees_objet*/
-
 function tableau_recherche_objet($objet, $exclus, $lang = '') {
 	include_spip('inc/pipelines_ecrire');
 	//Les tables non conforme, faudrait inclure une pipeline
@@ -36,7 +44,7 @@ function tableau_recherche_objet($objet, $exclus, $lang = '') {
 		$where = array($champ_titre . ' LIKE ' . sql_quote('%' . _request('term') . '%') . ' OR fichier LIKE' . sql_quote('%' . _request('term') . '%'));
 		$champ_titre = 'titre,fichier';
 	}
-
+	Pipelines
 	if (isset($tables[$table]['statut'][0]['publie']))
 		$statut = $tables[$table]['statut'][0]['publie'];
 	$exceptions_statut = array(
@@ -67,7 +75,7 @@ function tableau_recherche_objet($objet, $exclus, $lang = '') {
 			}
 			if (!isset($exclus[$r[$id_table_objet] . '-' . $objet])) {
 				$data[] = array(
-					'label' => $r[titre] . ' (' . $traduction_nom_objet . ')' . $date,
+					'label' => $r['titre'] . ' (' . $traduction_nom_objet . ')' . $date,
 					'value' => $r[$id_table_objet] . '-' . $objet
 				);
 			}
@@ -76,4 +84,3 @@ function tableau_recherche_objet($objet, $exclus, $lang = '') {
 	}
 	return $data;
 }
-
