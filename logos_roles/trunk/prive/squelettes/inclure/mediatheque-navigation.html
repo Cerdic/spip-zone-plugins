@@ -18,9 +18,18 @@
 	[<li class='#VALEUR'>(#GET{self}|parametre_url{media,#VALEUR}|parametre_url{role,''}|lien_ou_expose{#VAL{medias:media_}|concat{#VALEUR}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{media}|=={#VALEUR},ajax})</li>]
 	<//B_comptem>
 </BOUCLE_medias>
-<BOUCLE_comptelogos(documents_liens){role=logo} />
-	[<li class='logo'>(#GET{self}|parametre_url{role,logo}|parametre_url{media,''}|lien_ou_expose{#VAL{roles_documents:media_logos}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{role}|=={logo},ajax})</li>]
-<//B_comptelogos>
+<BOUCLE_type_logos(DATA){source table, #REM|lister_roles_logos}>
+  <BOUCLE_comptelogos(documents_liens){role=#CLE} />
+	[<li class='#CLE'>
+    (#GET{self}|parametre_url{role, #CLE}|parametre_url{media, ''}
+      |lien_ou_expose{
+        #VAL{#VALEUR|table_valeur{label}}|concat{' (', #TOTAL_BOUCLE, ')'},
+        #ENV{role}|=={#CLE},
+        ajax
+      })
+  </li>]
+  <//B_comptelogos>
+</BOUCLE_type_logos>
 </ul>
 <div class="nettoyeur"></div>
 </div>
