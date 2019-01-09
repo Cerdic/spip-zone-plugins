@@ -20,6 +20,8 @@ function formulaires_configurer_logos_roles_saisies_dist() {
 				'label' => _T('logos_roles:titre_saisie_roles'),
 				'ordre_fixe' => 'oui',
 				'masquer_nouveaux' => 'oui',
+				'texte_bouton_ajouter' => _T('logos_roles:texte_bouton_ajouter_type'),
+				'texte_bouton_supprimer' => _T('logos_roles:texte_bouton_supprimer_type'),
 			),
 			'saisies' => array(
 				array(
