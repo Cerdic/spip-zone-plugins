@@ -57,6 +57,13 @@
       grid-column-end: 5;
       margin-top: -3px; } }
 
+.formulaire_configurer_logos_roles .saisie-liste li:nth-child(1) .bouton-supprimer,
+.formulaire_configurer_logos_roles .saisie-liste li:nth-child(2) .bouton-supprimer {
+  min-width: 24px; }
+  .formulaire_configurer_logos_roles .saisie-liste li:nth-child(1) .bouton-supprimer input,
+  .formulaire_configurer_logos_roles .saisie-liste li:nth-child(2) .bouton-supprimer input {
+    display: none; }
+
 .formulaire_configurer_logos_roles .saisie_etat {
   float: right; }
   .formulaire_configurer_logos_roles .saisie_etat > label {
