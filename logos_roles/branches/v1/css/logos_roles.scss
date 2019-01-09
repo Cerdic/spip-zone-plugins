@@ -53,6 +53,7 @@
                 grid-column-start: 1;
                 grid-column-end: 5;
                 width: auto;
+                padding-bottom: 5px;
             }
             .choix {
                 border: none;
@@ -71,9 +72,44 @@
 }
 
 .formulaire_configurer_logos_roles {
-    .fieldset .editer-groupe .editer {
-        padding: 10px;
-        display: inline-block;
-        max-width: 225px;
+    .fieldset_options_avancees {
+        & > fieldset {
+            border: 1px solid #d7d7d7;
+            border-radius: 5px;
+        }
+        &.plie > fieldset {
+            border: none;
+        }
+        & > fieldset > legend.legend {
+            margin: 0 0 0 -1px;
+            padding: 2px 5px 3px 3px;
+            border: 1px solid #d7d7d7;
+            border-radius: 3px;
+            background-color: #ddd;
+            &:hover {
+                background-color: #c9c9c9;
+            }
+        }
+        &.plie > fieldset legend.legend {
+            margin: 0;
+        }
+        .editer, .fieldset {
+            padding: 0 20px 10px;
+        }
+    }
+    .fieldset_dimensions {
+        .legend {
+            padding-bottom: 3px;
+            margin-bottom: 2px;
+        }
+        .explication {
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+        .editer {
+            display: inline-block;
+            padding: 8px 0 0;
+            width: 49.6%;
+        }
     }
 }

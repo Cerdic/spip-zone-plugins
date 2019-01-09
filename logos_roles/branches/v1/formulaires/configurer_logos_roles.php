@@ -38,36 +38,49 @@ function formulaires_configurer_logos_roles_saisies_dist() {
 					),
 				),
 				array(
-					'saisie' => 'checkbox',
-					'options' => array(
-						'nom' => 'objets',
-						'label' => _T('logos_roles:label_saisie_objets_role'),
-						'datas' => $datas_objets,
-					),
-				),
-				array(
 					'saisie' => 'fieldset',
 					'options' => array(
-						'nom' => 'dimensions',
-						'label' => _T('logos_roles:label_fieldset_dimensions_role'),
-						'explication' => _T('logos_roles:explication_fieldset_dimensions_role'),
+						'nom' => 'options_avancees',
+						'label' => _T('logos_roles:label_fieldset_options_avancees'),
+						'pliable' => 'oui',
+						'plie' => 'oui',
+						'conteneur_class' => 'fieldset_options_avancees',
 					),
 					'saisies' => array(
 						array(
-							'saisie' => 'input',
+							'saisie' => 'checkbox',
 							'options' => array(
-								'nom' => 'dimensions[largeur]',
-								'label' => _T('logos_roles:label_saisie_largeur_role'),
+								'nom' => 'objets',
+								'label' => _T('logos_roles:label_saisie_objets_role'),
+								'datas' => $datas_objets,
 							),
 						),
 						array(
-							'saisie' => 'input',
+							'saisie' => 'fieldset',
 							'options' => array(
-								'nom' => 'dimensions[hauteur]',
-								'label' => _T('logos_roles:label_saisie_hauteur_role'),
+								'nom' => 'dimensions',
+								'label' => _T('logos_roles:label_fieldset_dimensions_role'),
+								'explication' => _T('logos_roles:explication_fieldset_dimensions_role'),
+								'conteneur_class' => 'fieldset_dimensions',
 							),
+							'saisies' => array(
+								array(
+									'saisie' => 'input',
+									'options' => array(
+										'nom' => 'dimensions[largeur]',
+										'label' => _T('logos_roles:label_saisie_largeur_role'),
+									),
+								),
+								array(
+									'saisie' => 'input',
+									'options' => array(
+										'nom' => 'dimensions[hauteur]',
+										'label' => _T('logos_roles:label_saisie_hauteur_role'),
+									),
+								),
+							)
 						),
-					)
+					),
 				),
 			),
 		),

@@ -37,7 +37,8 @@
     .formulaire_configurer_logos_roles .saisie_checkbox label {
       grid-column-start: 1;
       grid-column-end: 5;
-      width: auto; }
+      width: auto;
+      padding-bottom: 5px; }
     .formulaire_configurer_logos_roles .saisie_checkbox .choix {
       border: none;
       padding: 0;
@@ -49,9 +50,39 @@
         margin: 0;
         padding: 3px; } }
 
-.formulaire_configurer_logos_roles .fieldset .editer-groupe .editer {
-  padding: 10px;
+.formulaire_configurer_logos_roles .fieldset_options_avancees > fieldset {
+  border: 1px solid #d7d7d7;
+  border-radius: 5px; }
+
+.formulaire_configurer_logos_roles .fieldset_options_avancees.plie > fieldset {
+  border: none; }
+
+.formulaire_configurer_logos_roles .fieldset_options_avancees > fieldset > legend.legend {
+  margin: 0 0 0 -1px;
+  padding: 2px 5px 3px 3px;
+  border: 1px solid #d7d7d7;
+  border-radius: 3px;
+  background-color: #ddd; }
+  .formulaire_configurer_logos_roles .fieldset_options_avancees > fieldset > legend.legend:hover {
+    background-color: #c9c9c9; }
+
+.formulaire_configurer_logos_roles .fieldset_options_avancees.plie > fieldset legend.legend {
+  margin: 0; }
+
+.formulaire_configurer_logos_roles .fieldset_options_avancees .editer, .formulaire_configurer_logos_roles .fieldset_options_avancees .fieldset {
+  padding: 0 20px 10px; }
+
+.formulaire_configurer_logos_roles .fieldset_dimensions .legend {
+  padding-bottom: 3px;
+  margin-bottom: 2px; }
+
+.formulaire_configurer_logos_roles .fieldset_dimensions .explication {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px; }
+
+.formulaire_configurer_logos_roles .fieldset_dimensions .editer {
   display: inline-block;
-  max-width: 225px; }
+  padding: 8px 0 0;
+  width: 49.6%; }
 
 /*# sourceMappingURL=logos_roles.css.map */
