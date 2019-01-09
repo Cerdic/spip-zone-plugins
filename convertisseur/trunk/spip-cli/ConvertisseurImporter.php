@@ -39,6 +39,13 @@ class ConvertisseurImporter extends Command {
 				'0'
 			)
 			->addOption(
+				'auteur_defaut',
+				'a',
+				InputOption::VALUE_OPTIONAL,
+				'Auteur par défaut (id_auteur)',
+				'1'
+			)
+			->addOption(
 				'racine_documents',
 				'r',
 				InputOption::VALUE_OPTIONAL,
@@ -66,6 +73,7 @@ class ConvertisseurImporter extends Command {
 		$id_parent = $input->getOption('dest') ;
 		$racine_documents = $input->getOption('racine_documents') ;
 		$conserver_id_article = $input->getOption('conserver_id_article') ;
+		$auteur_defaut = $input->getOption('auteur_defaut') ;
 		
 		// Répertoire source
 		if(!is_dir($source)){
@@ -102,14 +110,15 @@ class ConvertisseurImporter extends Command {
 				}
 				// Ajout d'un champ la premiere fois pour stocker l'id_article original (pour ensuite remapper les liens [->123]).
 				if(!in_array('id_source', $champs)){
-					$output->writeln("MAJ BDD : alter table spip_articles add id_source BIGINT(21) NOT NULL DEFAULT ''");
-					sql_query("alter table spip_articles add id_source BIGINT(21) NOT NULL DEFAULT ''");
+					$output->writeln("MAJ BDD : alter table spip_articles add id_source BIGINT(21)");
+					sql_query("alter table spip_articles add id_source BIGINT(21)");
 				}
 				// Ajout d'un champ la premiere fois pour stocker le nom du fichier source, pour reconnaitre un article déjà importé.
 				if(!in_array('fichier_source', $champs)){
 					$output->writeln("MAJ BDD : alter table spip_articles add fichier_source MEDIUMTEXT NOT NULL DEFAULT ''");
 					sql_query("alter table spip_articles add fichier_source MEDIUMTEXT NOT NULL DEFAULT ''");
 				}
+				
 				// on prend tous les fichiers txt dans la source, sauf si metadata.txt a la fin.
 				$fichiers = preg_files($source . "/", "(?:(?<!\.metadata\.)txt$)", 100000);
 				if(sizeof($fichiers)>0){
@@ -190,7 +199,7 @@ class ConvertisseurImporter extends Command {
 						include_spip("inc/convertisseur");
 						
 						// auteur par défaut (admin)
-						$id_admin = sql_getfetsel("id_auteur", "spip_auteurs", "id_auteur=1");
+						$id_admin = sql_getfetsel("id_auteur", "spip_auteurs", "id_auteur=" . $auteur_defaut);
 						$id_admin = ($id_admin)? $id_admin : 12166 ;
 						
 						$GLOBALS['auteur_session']['id_auteur'] = $id_admin ;
