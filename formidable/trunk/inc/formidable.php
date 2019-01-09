@@ -111,15 +111,11 @@ function formidable_trouver_reponse_a_editer($id_formulaire, $id_formulaires_rep
 	} else {
 		// calcul des paramètres d'anonymisation
 
-		$options = array_filter($options);
-
-		if (!empty($options)) {
-			$reponses = formidable_verifier_reponse_formulaire(
-				$id_formulaire,
-				$options['identification'],
-				$options['variable_php']
-			);
-		}
+		$reponses = formidable_verifier_reponse_formulaire(
+			$id_formulaire,
+			$options['identification'],
+			$options['variable_php']
+		);
 
 		//A-t-on demandé de vérifier que l'auteur soit bien celui de la réponse?
 		if ($id_formulaires_reponse = intval($id_formulaires_reponse)
@@ -132,9 +128,10 @@ function formidable_trouver_reponse_a_editer($id_formulaire, $id_formulaires_rep
 
 		// Si multiple = non mais que c'est modifiable, alors on va chercher
 		// la dernière réponse si elle existe
-		if (is_array($reponses)
+		if ($options
 			and !$options['multiple']
 			and $options['modifiable']
+			and is_array($reponses)
 			) {
 				$id_formulaires_reponse = array_pop($reponses);
 		}
