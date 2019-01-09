@@ -1,12 +1,30 @@
+[(#REM)
+
+		Depuis la version 1.2.2, le plugin roles_documents embarque sa propre
+		version de ce modèle. Dans ce cas on inclut un autre fichier qui surcharge
+		en se basant sur cette nouvelle version.
+
+]
+[(#SET{
+  roles_documents_actif,
+  #PLUGIN{roles_documents, version}|version_compare{1.2.2, '>'}
+})]
+[(#GET{roles_documents_actif}|oui)
+  [(#INCLURE{fond=formulaires/inc-apercu-logo-roles-documents, env})]
+]
+[(#GET{roles_documents_actif}|non)
+
+[(#SET{logo_recadre, #ENV{logo}|massicoter_objet{#ENV{objet},#ENV{id_objet},#GET{role}}})]
+
 [(#SET{role, #ENV{quoi}|=={logo_off}|?{logo_survol,''}})]
 <div class="apercu">
   [<div class="spip_logo">
-    <a href="[(#ENV{logo}|massicoter_objet{#ENV{objet},#ENV{id_objet},#GET{role}})]" class='mediabox'>
-      (#ENV{logo}|massicoter_objet{#ENV{objet},#ENV{id_objet},#GET{role}}|image_reduire{[(#ENV{_options}|table_valeur{image_reduire}|sinon{100})]}|inserer_attribut{alt,#ENV{quoi,logo_on}})
+    <a href="#GET{logo_recadre}" class='mediabox'>
+      (#GET{logo_recadre}|image_reduire{[(#ENV{_options}|table_valeur{image_reduire}|sinon{100})]}|inserer_attribut{alt,#ENV{quoi,logo_on}})
     </a>
   </div>]
-  #SET{largeur,#ENV{logo}|massicoter_objet{#ENV{objet},#ENV{id_objet},#GET{role}}|largeur}
-  #SET{hauteur,#ENV{logo}|massicoter_objet{#ENV{objet},#ENV{id_objet},#GET{role}}|hauteur}
+  #SET{largeur,#GET{logo_recadre}|largeur}
+  #SET{hauteur,#GET{logo_recadre}|hauteur}
   [<div class="titre">(#ENV{titre,''})</div>]
   <div class="taille"><:info_largeur_vignette{largeur_vignette=#GET{largeur},hauteur_vignette=#GET{hauteur}}:></div>
   <a href="[(#URL_ECRIRE{massicoter_image, objet=#ENV{objet}&id_objet=#ENV{id_objet}}|parametre_url{redirect,#SELF}|parametre_url{role, #GET{role}})]"
@@ -17,3 +35,4 @@
   <input type='submit' class='submit supprimer' id="supprimer_#ENV{quoi,logo_on}_#ENV{objet}_#ENV{id_objet}" name="supprimer_#ENV{quoi,logo_on}" value='<:lien_supprimer|ucfirst|attribut_html:>' />
   ]
 </div>
+]

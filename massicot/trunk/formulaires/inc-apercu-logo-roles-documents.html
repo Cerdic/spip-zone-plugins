@@ -1,0 +1,99 @@
+[(#REM)
+
+	Aperçu d'un logo pour le formulaire de logo.
+
+	Surcharge du plugin Rôles de documents
+
+	Différences :
+		- Passer l'image dans le massicot
+		- Ajouter un lien de recadrage
+
+]
+[(#SET{role, #ENV{quoi}|=={logo_off}|?{logo_survol,''}})]
+[(#SET{logo_recadre, #ENV{logo/0}|massicoter_objet{#ENV{objet}, #ENV{id_objet}, #GET{role}}})]
+
+#SET{largeur, #GET{logo_recadre}|largeur}
+#SET{hauteur, #GET{logo_recadre}|hauteur}
+
+<div class="item etat-#ENV{logo/6}" id="logo#ENV{logo/6}" onclick="jQuery(this).toggleClass('hover');">
+	<div class="presentation">
+		[<div class='vignette'>
+			<a class="mediabox" href="#GET{logo_recadre}">
+				(#GET{logo_recadre}|balise_img|image_reduire{150,150})
+			</a>
+		</div>]
+
+		<div class="descriptions">
+			<h4 class="titrem">
+				<span class="titre">
+					<span class="fichier">[(#ENV{logo/2})][.(#ENV{logo/3})]</span>
+				</span>
+				<span class="image_loading"></span>
+			</h4>
+
+			<div class="infos">
+				<div class="permanentes">
+					[(#ENV{logo/3})]
+					[- (#VAL{info_largeur_vignette}|_T{#ARRAY{largeur_vignette,#GET{largeur},hauteur_vignette,#GET{hauteur}}})]
+					<a class="lien_details"
+						onClick="$(this).parent().next('.detaillees').toggle(); return true;"
+						title="<:medias:details_document_afficher_masquer|attribut_html:>"><:medias:details_document:></a>
+				</div>
+				<div class="detaillees">
+					<table class="compact">
+						<tr>
+							<th><:medias:info_dimensions_image:></th>
+							<td>[(#VAL{info_largeur_vignette}|_T{#ARRAY{largeur_vignette,#GET{largeur},hauteur_vignette,#GET{hauteur}}})]</td>
+						</tr>
+						<tr>
+							<th><:medias:info_resolution_image:></th>
+							<td>[(#VAL{medias:info_resolution_mpx}|_T{#ARRAY{resolution,#GET{largeur}|mult{#GET{hauteur}}|div{1000000}|round{1}|number_format{1}}})]</td>
+						</tr>
+						<tr>
+							<th><:medias:info_taille:></th>
+							<td>[(#ENV{logo/0}|filesize|taille_en_octets)]</td>
+						</tr>
+						<tr>
+							<th><:date:></th>
+							<td>[(#VAL{Y/m/d h:i:s}|date{#ENV{logo/4}}|affdate)]</td>
+						</tr>
+						</tr>
+						<tr>
+							<th><:medias:label_fichier:></th>
+							<td>[(#ENV{logo/2})][.(#ENV{logo/3})]</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	[(#AUTORISER{iconifier,#ENV{objet},#ENV{id_objet}}|oui)
+	<div class="actions">
+		[(#BOUTON_ACTION{
+			<:roles_documents:bouton_iconifier_logo:>,
+			#URL_ACTION_AUTEUR{
+				iconifier_logo,
+				#ENV{objet}-#ENV{id_objet}-#ENV{logo/6},
+				#SELF
+			},
+			'ajax',
+		})]
+		[(#BOUTON_ACTION{
+			<:lien_supprimer:>,
+			#URL_ACTION_AUTEUR{
+				supprimer_logo,
+				#ENV{objet}-#ENV{id_objet}-#ENV{logo/6},
+				#SELF
+			},
+			'ajax supprimer',
+		})]
+    <a href="[(#URL_ECRIRE{massicoter_image, objet=#ENV{objet}&id_objet=#ENV{id_objet}}|parametre_url{redirect,#SELF}|parametre_url{role, #GET{role}})]"
+       class="bouton">
+      <strong><:massicot:massicoter:></strong>
+    </a>
+	</div>
+	]
+
+	<div class="nettoyeur"></div>
+</div>

@@ -1,7 +1,7 @@
 <paquet
 	prefix="massicot"
 	categorie="multimedia"
-	version="0.8.2"
+	version="0.8.3"
 	etat="stable"
 	compatibilite="[3.0.17;3.2.*]"
 	logo="prive/themes/spip/images/massicot-48.png"
@@ -16,7 +16,7 @@
 
 	<licence>GNU/GPL</licence>
 
-	<traduire module="massicot" reference="fr" gestionnaire="salvatore" /> 
+	<traduire module="massicot" reference="fr" gestionnaire="salvatore" />
 
 	<pipeline nom="declarer_tables_interfaces"  inclure="base/massicot.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/massicot.php" />
@@ -36,4 +36,5 @@
 	<necessite nom="medias" compatibilite="[2.7.59;[" />
 	<necessite nom="saisies" compatibilite="[2.28.0;[" />
 
+	<utilise nom="roles_documents" compatibilite="[1.1.8;[" />
 </paquet>
