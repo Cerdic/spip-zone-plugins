@@ -25,6 +25,7 @@ Sélectionnez les types d'objets éditoriaux dont vous voulez migrer les logos p
 
 	// L
 	'label_fieldset_dimensions_role' => 'Dimensions du logo',
+	'label_fieldset_options_avancees' => 'Options avancées',
 	'label_saisie_largeur_role' => 'Largeur [px]',
 	'label_saisie_hauteur_role' => 'Hauteur [px]',
 	'label_saisie_objets_role' => 'Les objets éditoriaux pour lesquels ce type de logos sera proposé :',
