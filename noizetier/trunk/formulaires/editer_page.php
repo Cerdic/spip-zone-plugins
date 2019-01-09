@@ -147,9 +147,9 @@ function formulaires_editer_page_verifier_dist($edition, $page, $redirect = '') 
 	// - l'identifiant saisi n'est pas déjà utilisé par une autre composition
 	// - la syntaxe de l'identifiant qui ne doit contenir ni espace, ni tiret.
 	if ($edition != 'modifier') {
-		$type_page = _request('type_page');
 		$composition = _request('composition');
-
+		// Identifiant libre
+		$type_page = _request('type_page');
 		$where = array('composition!=' . sql_quote(''));
 		$pages = sql_allfetsel('page', 'spip_noizetier_pages', $where);
 		if ($pages) {
@@ -157,9 +157,10 @@ function formulaires_editer_page_verifier_dist($edition, $page, $redirect = '') 
 			if (isset($pages[$type_page.'-'.$composition])) {
 				$erreurs['composition'] = _T('noizetier:formulaire_identifiant_deja_pris');
 			}
-			if (!preg_match('#^[a-z0-9_]+$#', $composition)) {
-				$erreurs['composition'] = _T('noizetier:formulaire_erreur_format_identifiant');
-			}
+		}
+		// Syntaxe
+		if (!preg_match('#^[a-z0-9_]+$#', $composition)) {
+			$erreurs['composition'] = _T('noizetier:formulaire_erreur_format_identifiant');
 		}
 	}
 
