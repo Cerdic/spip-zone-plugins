@@ -56,15 +56,17 @@ function lister_roles_logos($objet = null, $role = null, $tous_les_objets = null
 		);
 	}
 
-	if (lire_config('activer_logos') === 'oui') {
-		// Logos par défaut
-		$roles_logos = array(
-			'logo' => array(
-				'label' => 'logos_roles:logo',
-				'objets' => $tous_les_objets,
-			)
-		);
+	$conf_logos = lire_config('logos_roles/roles_logos');
 
+	if (! is_array($conf_logos)) {
+		if (lire_config('activer_logos_survol') === 'oui') {
+			$roles_logos = array(
+				'logo' => array(
+					'label' => 'logos_roles:logo',
+					'objets' => $tous_les_objets,
+				)
+			);
+		}
 		if (lire_config('activer_logos_survol') === 'oui') {
 			$roles_logos['logo_survol'] = array(
 				'label' => 'logo_survol',
@@ -72,23 +74,42 @@ function lister_roles_logos($objet = null, $role = null, $tous_les_objets = null
 			);
 		}
 	} else {
-		$roles_logos = array();
-	}
-
-
-	if (is_array(lire_config('logos_roles/roles_logos'))) {
 		include_spip('inc/filtres');
-		foreach (lire_config('logos_roles/roles_logos') as $r) {
-			$roles_logos['logo_' . $r['slug']] = array(
-				'label' => extraire_multi($r['titre']) ?: $r['slug'],
-				'objets' => $r['objets'],
-			);
 
-			if (isset($r['dimensions']) and
-					isset($r['dimensions']['largeur']) and ($r['dimensions']['largeur'] > 0) and
-					isset($r['dimensions']['hauteur']) and ($r['dimensions']['hauteur'] > 0)) {
-				$roles_logos['logo_' . $r['slug']]['dimensions'] = $r['dimensions'];
+		$roles_logos = array();
+		foreach ($conf_logos as $r) {
+			if ($r['etat']) {
+				$roles_logos['logo_' . $r['slug']] = array(
+					'label' => extraire_multi($r['titre']) ?: $r['slug'],
+					'objets' => $r['objets'],
+				);
+
+				if (isset($r['dimensions']) and
+						isset($r['dimensions']['largeur']) and ($r['dimensions']['largeur'] > 0) and
+						isset($r['dimensions']['hauteur']) and ($r['dimensions']['hauteur'] > 0)) {
+					$roles_logos['logo_' . $r['slug']]['dimensions'] = $r['dimensions'];
+				}
 			}
+		}
+
+		// Le logo qui est enregistré dans la méta comme 'logo_defaut' doit en
+		// fait être 'logo' tout court
+		if (isset($roles_logos['logo_defaut'])) {
+			$roles_logos = array_merge(
+				array('logo' => $roles_logos['logo_defaut']),
+				$roles_logos
+			);
+			unset($roles_logos['logo_defaut']);
+		}
+
+		// Les métas des logos ont le dernier mot
+		if (isset($roles_logos['logo']) and
+				(lire_config('activer_logos') === 'non')) {
+			unset($roles_logos['logo']);
+		}
+		if (isset($roles_logos['logo_survol']) and
+				(lire_config('activer_logos_survol') === 'non')) {
+			unset($roles_logos['logo_survol']);
 		}
 	}
 
