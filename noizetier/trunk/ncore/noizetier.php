@@ -360,7 +360,7 @@ function noizetier_noisette_completer($plugin, $description) {
 					$complement['id_objet'] = $id;
 					$complement['bloc'] = isset($conteneur['bloc']) ? $conteneur['bloc'] : $bloc;
 				} else {
-					$squelette = strtolower($conteneur['squelette']);
+					$squelette = $conteneur['squelette'];
 					$page = basename($squelette);
 					$identifiants_page = explode('-', $page, 2);
 					if (!empty($identifiants_page[1])) {
