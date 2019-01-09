@@ -1,7 +1,7 @@
 <paquet
 	prefix="logos_roles"
 	categorie="multimedia"
-	version="0.10.1"
+	version="0.10.2"
 	etat="dev"
 	compatibilite="[3.1.1;3.2.*]"
 	logo="prive/themes/spip/images/logos_roles-48.png"
@@ -15,7 +15,7 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="roles_documents" compatibilite="[1.2.19;[" />
+	<necessite nom="roles_documents" compatibilite="[1.2.21;[" />
 	<necessite nom="saisie_liste" compatibilite="[1.4.14;[" />
 
 	<utilise nom="massicot" compatibilite="[0.7.4;[" />

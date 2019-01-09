@@ -1,3 +1,18 @@
+[(#REM)
+		Depuis la version 1.2.2, le plugin roles_documents embarque sa propre
+		version de ce squelette. Dans ce cas on inclut un autre fichier qui
+		surcharge en se basant sur cette nouvelle version.
+]
+[(#SET{
+  roles_documents_actif,
+  #PLUGIN{roles_documents, version}|version_compare{1.2.2, '>'}
+})]
+[(#GET{roles_documents_actif}|oui)
+  [(#INCLURE{fond=formulaires/inc-apercu-logo-roles-documents, env})]
+]
+[(#GET{roles_documents_actif}|non)
+
+
 [(#SET{role, #ENV{quoi}})]
 
 [(#GET{role}|=={logo_off}|oui)
@@ -102,3 +117,4 @@
     ]
 	]
 </div>
+]

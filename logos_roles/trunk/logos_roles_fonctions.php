@@ -340,3 +340,15 @@ function table_objet_simple($type) {
 	// S'il y a un "spip_" ou un "id_" au début, on le retire.
 	return preg_replace(',^spip_|^id_,', '', $type);
 }
+
+/**
+ * Gros hack : pour pouvoir fonctionner sans massicot, mais sans non plus
+ * s'embêter à traiter les deux cas dans les squelettes, on définit ici la
+ * fonction dont on a besoin, dans le cas où le plugin n'est pas installé.
+ */
+if (! test_plugin_actif('massicot')) {
+	function massicoter_objet($fichier, $objet, $id_objet, $role = null) {
+
+		return $fichier;
+	}
+}
