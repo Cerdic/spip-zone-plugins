@@ -149,6 +149,10 @@ function formulaires_configurer_logos_roles_verifier_dist() {
 		)) {
 			$erreurs['roles_logos'][$i]['slug'] = _T('logos_roles:erreur_doublon_slug');
 		}
+
+		if ((! isset($role['objets'])) or (! count($role['objets']))) {
+			$erreurs['roles_logos'][$i]['objets'] = _T('logos_roles:erreur_sans_objets');
+		}
 	}
 
 	return $erreurs;

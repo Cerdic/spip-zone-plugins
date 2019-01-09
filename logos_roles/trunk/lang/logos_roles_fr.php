@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_doublon_slug' => 'Vous ne pouvez pas utiliser deux fois le même identifiant',
+	'erreur_sans_objets' => 'Veuillez choisir au moins un objet éditorial',
 	'erreur_slug_invalide' => 'Seules les lettres minuscules et les _ sont autorisés dans ce champ',
 	'explication_saisie_slug_role' => 'Un nom "machine" unique pour définir le nom de la balise qui permet de récupérer le logo. P.ex. « accueil » donnera #LOGO_ACCUEIL.',
 	'explication_saisie_titre_role' => "Le titre du rôle, tel qu'il apparaitra dans l'interface. Pour les sites multilingues, on peut aussi utiliser une <a href='https://www.spip.net/fr_article2124.html'>balise multi</a> ou une chaîne de langue du type \"module:chaine_de_langue\".",
