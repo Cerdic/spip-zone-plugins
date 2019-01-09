@@ -135,6 +135,19 @@ function formulaires_configurer_logos_roles_verifier_dist() {
 			$erreurs['roles_logos'][$i]['slug'] = _T('info_obligatoire');
 		} elseif (! preg_match('/^[a-z_]+$/', $role['slug'])) {
 			$erreurs['roles_logos'][$i]['slug'] = _T('logos_roles:erreur_slug_invalide');
+		} elseif (1 < count(
+			// Vérifier qu'il n'y ait pas de doublons de slugs
+			array_keys(
+				array_map(
+					function ($r) {
+						return $r['slug'];
+					},
+					$roles
+				),
+				$role['slug']
+			)
+		)) {
+			$erreurs['roles_logos'][$i]['slug'] = _T('logos_roles:erreur_doublon_slug');
 		}
 	}
 
