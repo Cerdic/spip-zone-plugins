@@ -70,6 +70,8 @@
 .formulaire_configurer_logos_roles .saisie_slug, .formulaire_configurer_logos_roles .saisie_titre {
   clear: none;
   width: 25em; }
+  .formulaire_configurer_logos_roles .saisie_slug input, .formulaire_configurer_logos_roles .saisie_titre input {
+    background-color: white; }
 
 .formulaire_configurer_logos_roles .fieldset_options_avancees {
   margin-top: 4px; }

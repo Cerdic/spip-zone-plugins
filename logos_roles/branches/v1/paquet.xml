@@ -16,7 +16,7 @@
 	<licence>GNU/GPL</licence>
 
 	<necessite nom="roles_documents" compatibilite="[1.1.0;1.1.*]" />
-	<necessite nom="saisie_liste" compatibilite="[1.4.8;[" />
+	<necessite nom="saisie_liste" compatibilite="[1.4.14;[" />
 
 	<utilise nom="massicot" compatibilite="[0.7.4;[" />
 	<utilise nom="multilingue" compatibilite="[1.0.9;[" />
