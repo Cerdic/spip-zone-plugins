@@ -321,7 +321,7 @@ define('OB_CACHELAB', 4);
 
 // check validity of input variables
 $vardom = array(
-	'exec' => '/^[a-zA-Z_\-0-9]+$/', // pour #URL_ECRIRE{xray}
+	'exec' => '/^[a-zA-Z0-9_\-\.]+$/', // pour #URL_ECRIRE{xray}
 	'OB' => '/^\d+$/', // operational mode switch
 	'CC' => '/^[01]$/', // clear cache requested
 	'PP' => '/^[01]$/', // Purger Précache de compilation des squelettes en plus de vider le cache APC user
@@ -329,7 +329,7 @@ $vardom = array(
 	'SH' => '/^[a-z0-9]*$/', // shared object description
 	
 	'IMG' => '/^[123]$/', // image to generate
-	'SOURCE' => '/^[a-z0-9\-_\/\.]+$/', // file source to display
+	'SOURCE' => '/^[a-zA-Z0-9_\-\.\/]+$/', // file source to display
 //	'LO' => '/^1$/', // login requested
 	'TYPELISTE' => '/^(caches|squelettes)$/',
 	'COUNT' => '/^\d+$/', // number of line displayed in list
