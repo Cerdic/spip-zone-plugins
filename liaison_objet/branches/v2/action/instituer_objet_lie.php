@@ -1,4 +1,14 @@
 <?php
+/**
+ * Action pour l'institution  d'un objet_lie
+ *
+ * @plugin     Liaison_objets
+ * @copyright  2012 - 2019
+ * @author     Rainer Müller
+ * @licence    GNU/GPL
+ * @package    SPIP\Liaison_objets\Action
+ */
+
 if (!defined("_ECRIRE_INC_VERSION"))
 	return;
 
@@ -28,7 +38,7 @@ function action_instituer_objet_lie_dist($arg = null) {
 	}
 
 	// si l'objet n'est pas définit par langue on l'enregistre pour chaque langue du site
-	if (count($langue) > 1) {
+	if (is_array($langue) AND count($langue) > 1) {
 
 		foreach ($langue as $key => $l) {
 

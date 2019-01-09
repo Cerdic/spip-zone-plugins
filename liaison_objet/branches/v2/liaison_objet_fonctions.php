@@ -1,4 +1,13 @@
 <?php
+/**
+ * Fonctions utiles au plugin Liaison_objets
+ *
+ * @plugin     Liaison_objets
+ * @copyright  2012 - 2019
+ * @author     Rainer Müller
+ * @licence    GNU/GPL
+ * @package    SPIP\Liaison_objets\Fonctions
+ */
 
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;

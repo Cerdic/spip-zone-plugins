@@ -1,4 +1,13 @@
 <?php
+/**
+ * Utilisations de pipelines par Liaison_objets
+ *
+ * @plugin     Liaison_objets
+ * @copyright  2012 - 2019
+ * @author     Rainer Müller
+ * @licence    GNU/GPL
+ * @package    SPIP\Liaison_objets\Pipelines
+ */
 
 if (!defined("_ECRIRE_INC_VERSION"))
 	return;
@@ -139,7 +148,7 @@ function liaison_objet_formulaire_charger($flux) {
 		$objets_cibles = lire_config('liaison_objet/objets_cible', array());
 
 		foreach ($objets_cibles as $objet) {
-			if ($types_lien = lire_config('liaison_objet/type_liens_' . $objet)) {
+			if ($types_lien = lire_config('liaison_objet/type_liens_' . $objet, array())) {
 				$flux['data']['type_liens_' . $objet] = '';
 				foreach ($types_lien as $key => $value) {
 					if ($key)
@@ -194,4 +203,4 @@ function types_liaisons2array($type) {
 
 	return $tableau;
 }
-?>
+

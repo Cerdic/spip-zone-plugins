@@ -1,7 +1,7 @@
 <paquet
 	prefix="liaison_objet"
 	categorie="edition"
-	version="2.0.3"
+	version="2.0.4"
 	etat="stable"
 	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/liaison_objet-64.png"
@@ -10,9 +10,10 @@
 >
 
 	<nom>Liaison d'objets</nom>
-	<auteur lien='http://websimple.be'>Rainer Müller</auteur>
+	<auteur lien='https://websimple.be'>Rainer Müller</auteur>
 	<licence>GNU/GPL</licence>
 	<necessite nom="saisies" compatibilite="[2.28.0;]" />
+	
 	<pipeline nom="autoriser" inclure="liaison_objet_autorisations.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/liaison_objet.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/liaison_objet.php" />
