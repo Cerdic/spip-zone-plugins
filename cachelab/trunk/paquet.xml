@@ -1,7 +1,7 @@
 <paquet
 	prefix="cachelab"
 	categorie="outil"
-	version="0.11.7"
+	version="0.12.0"
 	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/cachelab-32.png"

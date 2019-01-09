@@ -131,7 +131,7 @@ static $var_cache;
 			$duree = $f($page['contexte'][$arg],$page);
 			if (!is_null($duree)) {
 				if (!defined('LOG_CACHELAB_DUREES_DYNAMIQUES') or LOG_CACHELAB_DUREES_DYNAMIQUES)
-					spip_log ("#CACHE $f ($arg={$page['contexte'][$arg]}) renvoie : $duree s", "cachelab");
+					spip_log ("#CACHE $f (arg={$page['contexte'][$arg]}) renvoie : $duree s", "cachelab");
 
 				if ($var_cache)
 					echo "<div class='cachelab_blocs' $hint_squel><h6>Durée dynamique : $duree</h6><small>$infos</small></div>";
@@ -152,6 +152,26 @@ static $var_cache;
 			spip_log ("#CACHE duree cache : la fonction '$f' n'existe pas (arg='$arg')\n".print_r($page,1), "cachelab_erreur");
 	}
 	
+	// Exemple : <INCLURE{fond=mes_scores,duree-cache=#GET{duree_sicestmoi_oupas}}/>
+	if (isset($page['contexte']['duree-cache'])) {
+		if (!defined('LOG_CACHELAB_DUREES_DYNAMIQUES') or LOG_CACHELAB_DUREES_DYNAMIQUES)
+			spip_log ("Pour $fichier, contexte[duree-cache]={$page['contexte']['duree-cache']}", "cachelab");
+
+		if ($var_cache)
+			echo "<div class='cachelab_blocs' $hint_squel><h6>Contexte duree-cache : $duree</h6><small>$infos</small></div>";
+
+		$page['entetes']['X-Spip-Cache']
+		= $page['entetes']['X-Spip-Contexte-Duree-Cache']
+		= $page['duree'] 
+		= $duree 
+		= intval($page['contexte']['duree-cache']);
+
+		// Comme memoization, on ajoute une heure "histoire de pouvoir tourner
+		// sur le cache quand la base de donnees est plantée (à tester)"
+		// TODO CORE ? changer creer_cache pour qu'il appelle maj_invalideurs *avant* d'avoir écrit le cache
+		$Memoization->set($fichier, $page, 3600+$duree);
+	}
+
 	// Exemple : #CACHE{1200,filtre-bidouille grave} peut grave bidouiller le cache yc ses métadonnées
 	if (isset($page['entetes']['X-Spip-Filtre-Cache'])) {
 		$f = 'cachelab_filtre_'.$page['entetes']['X-Spip-Filtre-Cache'];
