@@ -41,6 +41,8 @@ Sélectionnez les types d'objets éditoriaux dont vous voulez migrer les logos p
 	'saisie_objets_migration_label' => 'Objets éditoriaux à migrer',
 
 	// T
+	'texte_bouton_ajouter_type' => 'Ajouter un nouveau type de logo',
+	'texte_bouton_supprimer_type' => 'Supprimer le type de logo',
 	'titre_formulaire_migrer_logos_roles' => 'Migration des logos',
 	'titre_modifier_logo' => 'Modifier le logo',
 	'titre_saisie_roles' => 'Types de logos :',
