@@ -78,6 +78,15 @@
 }
 
 .formulaire_configurer_logos_roles {
+    .saisie-liste li:nth-child(1),
+    .saisie-liste li:nth-child(2) {
+        .bouton-supprimer {
+            min-width: 24px;
+            input {
+                display: none;
+            }
+        }
+    }
     .saisie_etat {
         float: right;
         & > label {

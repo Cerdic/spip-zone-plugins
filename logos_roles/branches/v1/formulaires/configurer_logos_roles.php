@@ -202,6 +202,16 @@ function formulaires_configurer_logos_roles_charger_dist() {
  */
 function formulaires_configurer_logos_roles_verifier_dist() {
 
+	// Avant l'appel à saisies_liste_verifier, on peut intercepter les boutons
+	// de suppression
+	$raw_post = _request('roles_logos');
+	if (isset($raw_post['action']['supprimer-0'])) {
+		return array('message_erreur' => _T('logos_roles:erreur_suppression_logo_defaut'));
+	}
+	if (isset($raw_post['action']['supprimer-1'])) {
+		return array('message_erreur' => _T('logos_roles:erreur_suppression_logo_survol'));
+	}
+
 	if (saisies_liste_verifier('roles_logos')) {
 		return array();
 	}
