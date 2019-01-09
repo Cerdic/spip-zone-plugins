@@ -36,7 +36,7 @@ function memoization_upgrade($nom_meta_base_version, $version_cible) {
 
 function memoization_migrer_config_pages() {
 	include_spip('inc/config');
-	debug_log ("memoization_migrer_config_pages done", "memoization_migrer_config_pages");
+	spip_log ("memoization_migrer_config_pages done", "memoization_migrer_config_pages");
 	if ($methode=lire_config('memoization/pages')) {
 		ecrire_config('memoization/methode', $methode);
 		effacer_config('memoization/pages');

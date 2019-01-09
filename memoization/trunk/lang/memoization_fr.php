@@ -51,7 +51,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_methode_nocache' => 'Désactivé (nocache)',
 	'option_methode_redis' => 'Redis',
 	'option_methode_xcache' => 'XCache',
-	'option_pages_obsolete' => 'Le choix obsolète de méthode pour les pages a été converti en choix de méthode pour Mémoization',
 
 	// R
 	'redis_auth' => 'Mot de passe :',
