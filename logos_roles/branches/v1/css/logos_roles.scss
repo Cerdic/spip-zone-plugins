@@ -78,6 +78,27 @@
 }
 
 .formulaire_configurer_logos_roles {
+    .saisie_etat {
+        float: right;
+        & > label {
+            display: none;
+        }
+        .choix {
+            padding: 0 5px 0 0;
+            label {
+                position: relative;
+                top: -2px;
+            }
+        }
+
+        .radio {
+            margin: 4px 1px 0 3px;
+        }
+    }
+    .saisie_slug, .saisie_titre {
+        clear: none;
+        width: 25em;
+    }
     .fieldset_options_avancees {
         margin-top: 4px;
         & > fieldset {
