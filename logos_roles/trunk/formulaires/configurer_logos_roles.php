@@ -121,8 +121,74 @@ function formulaires_configurer_logos_roles_charger_dist() {
 			'roles_logos' => _request('roles_logos'),
 		);
 	} else {
-		$valeurs = lire_config('logos_roles/', array());
+		$valeurs = lire_config('logos_roles/', array('roles_logos' => array()));
 	}
+
+	// S'il n'y a pas encore de type défini ou que le premier type n'est pas le
+	// type par défaut (suite à une migration depuis une ancienne version du
+	// plugin), on ajoute les logos et les logos de survol.
+	if ((! isset($valeurs['roles_logos'][0])) or
+			($valeurs['roles_logos'][0]['slug'] !== 'defaut')) {
+		$tous_les_objets = array_map(
+			'table_objet_simple',
+			array_filter(array_keys(lister_tables_objets_sql()))
+		);
+
+		array_unshift(
+			$valeurs['roles_logos'],
+			array(
+				'slug' => 'defaut',
+				'titre' => _T('logos_roles:logo'),
+				'objets' => $tous_les_objets,
+			),
+			array(
+				'slug' => 'survol',
+				'titre' => _T('ecrire:logo_survol'),
+				'objets' => $tous_les_objets,
+			)
+		);
+	}
+
+	// Les logos par défaut sont activés par des métas, on leur donne la
+	// priorité.
+	$valeurs['roles_logos'][0]['etat'] =
+		(lire_config('activer_logos') === 'oui') ? 1 : 0;
+	$valeurs['roles_logos'][1]['etat'] =
+		(lire_config('activer_logos_survol') === 'oui') ? 1 : 0;
+
+	// Les slugs et titres des logos et des logos de survol ne sont pas
+	// éditables.
+	$valeurs['roles_logos_options_saisies'] = array(
+		array(
+			array(
+				'options' => array(
+					'nom' => 'slug',
+					'disable_avec_post' => 'oui',
+				),
+			),
+			array(
+				'options' => array(
+					'nom' => 'titre',
+					'disable_avec_post' => 'oui',
+				),
+			)
+		),
+		array(
+			array(
+				'options' => array(
+					'nom' => 'slug',
+					'disable_avec_post' => 'oui',
+				),
+			),
+			array(
+				'options' => array(
+					'nom' => 'titre',
+					'disable_avec_post' => 'oui',
+				),
+			)
+		),
+	);
+
 	return $valeurs;
 }
 
@@ -199,10 +265,22 @@ function formulaires_configurer_logos_roles_traiter_dist() {
 		return array('editable' => 'oui');
 	}
 
+	$roles_logos = _request('roles_logos');
+
+	// Mettre à jour les metas de SPIP pour les logos par défaut
+	ecrire_config(
+		'activer_logos',
+		$roles_logos[0]['etat'] ? 'oui' : 'non'
+	);
+	ecrire_config(
+		'activer_logos_survol',
+		$roles_logos[1]['etat'] ? 'oui' : 'non'
+	);
+
 	ecrire_config(
 		'logos_roles',
 		array(
-			'roles_logos' => _request('roles_logos'),
+			'roles_logos' => $roles_logos,
 		)
 	);
 

@@ -104,6 +104,9 @@
     .saisie_slug, .saisie_titre {
         clear: none;
         width: 25em;
+        input {
+            background-color: white;
+        }
     }
     .fieldset_options_avancees {
         margin-top: 4px;
