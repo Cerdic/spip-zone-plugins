@@ -11,7 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
- * Installation/maj des tables de formidable...
+ * Installation/maj des tables de memoization...
  *
  * @param string $nom_meta_base_version
  *	 Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
@@ -19,11 +19,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *	 Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
  * @return void
  */
-function formidable_upgrade($nom_meta_base_version, $version_cible) {
+function memoization_upgrade($nom_meta_base_version, $version_cible) {
 	// Création des tables
 	include_spip('base/create');
 	include_spip('base/abstract_sql');
-	include_spip('inc/formidable_migrer_depuis_ft');
 
 	$maj = array();
 	// Pas de create
