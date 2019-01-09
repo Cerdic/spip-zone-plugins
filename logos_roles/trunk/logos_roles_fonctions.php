@@ -247,6 +247,12 @@ function forcer_dimensions_role($logo, $objet, $id_objet, $role) {
 
 	include_spip('inc/filtres');
 
+	if ($role === 'on') {
+		$role = 'logo';
+	} elseif ($role === 'off') {
+		$role = 'logo_survol';
+	}
+
 	if ($dimensions = get_dimensions_role($role)) {
 		$image_recadre = charger_filtre('image_recadre');
 		$image_passe_partout = charger_filtre('image_passe_partout');
