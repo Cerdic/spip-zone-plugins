@@ -25,6 +25,19 @@ function formulaires_configurer_logos_roles_saisies_dist() {
 			),
 			'saisies' => array(
 				array(
+					'saisie' => 'radio',
+					'options' => array(
+						'nom' => 'etat',
+						'label' => _T('logos_roles:label_etat_type'),
+						'datas' => array(
+							1 => _T('logos_roles:label_etat_actif'),
+							0 => _T('logos_roles:label_etat_inactif'),
+						),
+						'defaut' => 1,
+						'conteneur_class' => 'saisie_etat',
+					),
+				),
+				array(
 					'saisie' => 'input',
 					'options' => array(
 						'nom' => 'slug',
@@ -128,6 +141,20 @@ function formulaires_configurer_logos_roles_verifier_dist() {
 	}
 
 	$erreurs = array();
+
+	// On ne garde que les rôles pour lesquels on a saisi autre chose qu'un
+	// état.
+	set_request('roles_logos', array_filter(
+		_request('roles_logos'),
+		function ($role) {
+			return ($role['slug'] !== '') or
+				($role['titre'] !== '') or
+				(isset($role['objets']) and is_array($role['objets'])) or
+				($role['dimensions']['largeur'] !== '') or
+				($role['dimensions']['hauteur'] !== '');
+		}
+	));
+
 	$roles = _request('roles_logos');
 
 	foreach ($roles as $i => $role) {

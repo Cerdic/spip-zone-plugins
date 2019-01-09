@@ -26,6 +26,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Sélectionnez les types d'objets éditoriaux dont vous voulez migrer les logos puis cliquez sur « Convertir les logos ».",
 
 	// L
+	'label_etat_type' => 'État',
+	'label_etat_actif' => 'Actif',
+	'label_etat_inactif' => 'Inactif',
 	'label_fieldset_dimensions_role' => 'Dimensions du logo',
 	'label_fieldset_options_avancees' => 'Options avancées',
 	'label_saisie_largeur_role' => 'Largeur [px]',

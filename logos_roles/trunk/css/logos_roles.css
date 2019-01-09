@@ -57,6 +57,22 @@
       grid-column-end: 5;
       margin-top: -3px; } }
 
+.formulaire_configurer_logos_roles .saisie_etat {
+  float: right; }
+  .formulaire_configurer_logos_roles .saisie_etat > label {
+    display: none; }
+  .formulaire_configurer_logos_roles .saisie_etat .choix {
+    padding: 0 5px 0 0; }
+    .formulaire_configurer_logos_roles .saisie_etat .choix label {
+      position: relative;
+      top: -2px; }
+  .formulaire_configurer_logos_roles .saisie_etat .radio {
+    margin: 4px 1px 0 3px; }
+
+.formulaire_configurer_logos_roles .saisie_slug, .formulaire_configurer_logos_roles .saisie_titre {
+  clear: none;
+  width: 25em; }
+
 .formulaire_configurer_logos_roles .fieldset_options_avancees {
   margin-top: 4px; }
   .formulaire_configurer_logos_roles .fieldset_options_avancees > fieldset {
