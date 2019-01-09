@@ -41,6 +41,7 @@
       padding-bottom: 5px; }
     .formulaire_configurer_logos_roles .saisie_checkbox .choix {
       border: none;
+      border-radius: 0;
       padding: 0;
       display: grid;
       grid-template-columns: 30px 1fr;
@@ -48,36 +49,42 @@
       .formulaire_configurer_logos_roles .saisie_checkbox .choix > * {
         grid-area: 1;
         margin: 0;
-        padding: 3px; } }
+        padding: 3px; }
+    .formulaire_configurer_logos_roles .saisie_checkbox .erreur_message {
+      grid-column-start: 1;
+      grid-column-end: 5;
+      margin-top: -3px; } }
 
-.formulaire_configurer_logos_roles .editer_roles_logos.erreur {
-  background-color: inherit; }
-
-.formulaire_configurer_logos_roles .fieldset_options_avancees > fieldset {
-  border: 1px solid #d7d7d7;
-  border-radius: 5px; }
-
-.formulaire_configurer_logos_roles .fieldset_options_avancees.plie > fieldset {
-  border: none; }
-
-.formulaire_configurer_logos_roles .fieldset_options_avancees > fieldset > legend.legend {
-  margin: 0 0 0 -1px;
-  padding: 2px 5px 3px 3px;
-  border: 1px solid #d7d7d7;
-  border-radius: 3px;
-  background-color: #ddd; }
-  .formulaire_configurer_logos_roles .fieldset_options_avancees > fieldset > legend.legend:hover {
-    background-color: #c9c9c9; }
-
-.formulaire_configurer_logos_roles .fieldset_options_avancees.plie > fieldset legend.legend {
-  margin: 0; }
-
-.formulaire_configurer_logos_roles .fieldset_options_avancees .editer, .formulaire_configurer_logos_roles .fieldset_options_avancees .fieldset {
-  padding: 0 20px 10px; }
+.formulaire_configurer_logos_roles .fieldset_options_avancees {
+  margin-top: 4px; }
+  .formulaire_configurer_logos_roles .fieldset_options_avancees > fieldset {
+    padding: 0;
+    border: 1px solid #d7d7d7;
+    border-radius: 5px; }
+  .formulaire_configurer_logos_roles .fieldset_options_avancees.plie > fieldset {
+    border: none; }
+  .formulaire_configurer_logos_roles .fieldset_options_avancees > fieldset > legend.legend {
+    margin: 0 0 0 -1px;
+    padding: 2px 5px 3px 3px;
+    border: 1px solid #d7d7d7;
+    border-radius: 3px;
+    background-color: #ddd; }
+    .formulaire_configurer_logos_roles .fieldset_options_avancees > fieldset > legend.legend:hover {
+      background-color: #c9c9c9; }
+  .formulaire_configurer_logos_roles .fieldset_options_avancees.plie > fieldset legend.legend {
+    margin: 0; }
+  .formulaire_configurer_logos_roles .fieldset_options_avancees > fieldset > .editer-groupe {
+    margin: 0; }
+  .formulaire_configurer_logos_roles .fieldset_options_avancees .editer, .formulaire_configurer_logos_roles .fieldset_options_avancees .fieldset {
+    padding: 0 20px 10px; }
 
 .formulaire_configurer_logos_roles .fieldset_dimensions .legend {
   padding-bottom: 3px;
   margin-bottom: 2px; }
+
+.formulaire_configurer_logos_roles .fieldset_dimensions fieldset {
+  padding-left: 0;
+  padding-right: 0; }
 
 .formulaire_configurer_logos_roles .fieldset_dimensions .explication {
   border-bottom-left-radius: 5px;

@@ -57,6 +57,7 @@
             }
             .choix {
                 border: none;
+                border-radius: 0;
                 padding: 0;
                 display: grid;
                 grid-template-columns: 30px 1fr;
@@ -67,16 +68,20 @@
                     padding: 3px;
                 }
             }
+            .erreur_message {
+                grid-column-start: 1;
+                grid-column-end: 5;
+                margin-top: -3px;
+            }
         }
     }
 }
 
 .formulaire_configurer_logos_roles {
-    .editer_roles_logos.erreur {
-        background-color: inherit;
-    }
     .fieldset_options_avancees {
+        margin-top: 4px;
         & > fieldset {
+            padding: 0;
             border: 1px solid #d7d7d7;
             border-radius: 5px;
         }
@@ -96,6 +101,9 @@
         &.plie > fieldset legend.legend {
             margin: 0;
         }
+        & > fieldset > .editer-groupe {
+            margin: 0;
+        }
         .editer, .fieldset {
             padding: 0 20px 10px;
         }
@@ -104,6 +112,10 @@
         .legend {
             padding-bottom: 3px;
             margin-bottom: 2px;
+        }
+        fieldset {
+            padding-left: 0;
+            padding-right: 0;
         }
         .explication {
             border-bottom-left-radius: 5px;
