@@ -28,6 +28,7 @@ function formulaires_configurer_logos_roles_saisies_dist() {
 						'nom' => 'slug',
 						'label' => _T('logos_roles:label_saisie_slug_role'),
 						'explication' => _T('logos_roles:explication_saisie_slug_role'),
+						'conteneur_class' => 'saisie_slug'
 					),
 				),
 				array(
@@ -36,6 +37,7 @@ function formulaires_configurer_logos_roles_saisies_dist() {
 						'nom' => 'titre',
 						'label' => _T('logos_roles:label_saisie_titre_role'),
 						'explication' => _T('logos_roles:explication_saisie_titre_role'),
+						'conteneur_class' => 'saisie_titre'
 					),
 				),
 				array(
