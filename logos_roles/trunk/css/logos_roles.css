@@ -52,6 +52,9 @@
         margin: 0;
         padding: 3px; } }
 
+.formulaire_configurer_logos_roles .editer_roles_logos.erreur {
+  background-color: inherit; }
+
 .formulaire_configurer_logos_roles .fieldset_options_avancees > fieldset {
   border: 1px solid #d7d7d7;
   border-radius: 5px; }

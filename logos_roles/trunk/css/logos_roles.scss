@@ -78,6 +78,9 @@
 }
 
 .formulaire_configurer_logos_roles {
+    .editer_roles_logos.erreur {
+        background-color: inherit;
+    }
     .fieldset_options_avancees {
         & > fieldset {
             border: 1px solid #d7d7d7;
