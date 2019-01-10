@@ -3,7 +3,7 @@
  * Définit les autorisations du plugin Prix Objets
  *
  * @plugin     Prix Objets
- * @copyright  2012 - 2018
+ * @copyright  2012 - 2019
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Prix_objets\Autorisations
