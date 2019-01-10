@@ -3,7 +3,7 @@
  * Fonctions utiles au plugin Prix Objets
  *
  * @plugin     Prix Objets
- * @copyright  2012 - 2018
+ * @copyright  2012 - 2019
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Promotions_commandes\Fonctions
@@ -469,7 +469,13 @@ function prix_par_objet($objet, $id_objet, $contexte, $type = 'prix_ht', $option
 		// passer l'info sur le prix total dans l'environnement
 		set_request('prix_total', $data_source['prix_total']);
 
-		$extensions = sql_allfetsel('extension,id_extension,titre', 'spip_prix_objets', 'id_prix_objet_source=' . $id_prix_objet);
+		if (!$extensions = sql_allfetsel(
+			'extension,id_extension,titre',
+			'spip_prix_objets',
+			'id_prix_objet_source=' . $id_prix_objet)) {
+			$extensions = [];
+		}
+
 		$prix = $fonction_prix('prix_objet', $id_prix_objet);
 		$count_sextensions = count($extensions);
 

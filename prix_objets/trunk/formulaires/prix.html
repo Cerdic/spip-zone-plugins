@@ -8,7 +8,7 @@
 			</button>&#93;
 		</div>
 		<INCLURE {fond=formulaires/inc-prix_affichage,env} />
-<BOUCLE_test0(CONDITION){si #ENV{devises}|count|>{0}}>
+<BOUCLE_test0(CONDITION){si #ENV{devises,#ARRAY}|count|>{0}}>
 	<BOUCLE_editable_visible(CONDITION){si #ENV{visible,0}|et{#ENV{editable}}|oui}>
 	<div class="selecteur[(#ENV{recherche}|oui)filtre]">
 		<h3 class="titrem"><:prix_objets:ajouter_prix:></h3>
@@ -18,7 +18,7 @@
 					[<div class='erreur_message'>(#ENV**{erreurs}|table_valeur{prix})</div>]
 					<label><:prix_objets:info_prix:></label>
 					<input type="text" name="prix" value="#ENV{prix}"/>
-					<BOUCLE_test(CONDITION){si #ENV{devises}|count|<{2}}>
+					<BOUCLE_test(CONDITION){si #ENV{devises,#ARRAY}|count|<{2}}>
 					[(#ENV{devises}|table_valeur{0}|traduire_devise)]
 					<input type="hidden" name="code_devise" value="[(#ENV{devises}|table_valeur{0})]"/>
 					</BOUCLE_test>

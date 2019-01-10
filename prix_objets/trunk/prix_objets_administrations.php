@@ -3,7 +3,7 @@
  * Fichier gérant l'installation et désinstallation du plugin Prix Objets
  *
  * @plugin     Prix Objets
- * @copyright  2012 - 2018
+ * @copyright  2012 - 2019
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Reservation_evenement\Installation

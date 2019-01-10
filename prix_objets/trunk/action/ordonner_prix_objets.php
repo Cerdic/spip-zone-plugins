@@ -4,7 +4,7 @@
  * Action ordonnant un lien sur une table de liens, adapté du plugin Media
  *
  * @plugin     Prix Objets
- * @copyright  2012 - 2018
+ * @copyright  2012 - 2019
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Prix_objets\Action
