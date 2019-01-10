@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_migrer_logos' => 'Convertir les logos',
 
 	// C
+	'cfg_gros_titre' => 'Configuration des types de logos',
 	'cfg_titre_parametrages' => 'Configurer les types de logos',
 	'changer_de_logo' => 'Changer de logo',
 	'choisir_mediatheque' => 'Choisir dans la médiathèque',
