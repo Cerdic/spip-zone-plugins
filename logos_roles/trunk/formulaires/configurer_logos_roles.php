@@ -202,34 +202,61 @@ function formulaires_configurer_logos_roles_charger_dist() {
  */
 function formulaires_configurer_logos_roles_verifier_dist() {
 
+	// On ne garde que les rôles pour lesquels on a saisi autre chose qu'un
+	// état.
+	$raw_post = _request('roles_logos');
+	$i = 0;
+	while (isset($raw_post[$i])) {
+		$r = $raw_post[$i];
+		if (($r['slug'] === '') and ($r['titre'] === '') and
+				((! isset($r['objets'])) or (! is_array($r['objets']))) and
+				($r['dimensions']['largeur'] === '') and
+				($r['dimensions']['hauteur'] === '')) {
+			unset($raw_post[$i]);
+			$raw_post['permutations'] = preg_replace("/,?$i/", '', $raw_post['permutations']);
+		}
+		$i++;
+	}
+	set_request('roles_logos', $raw_post);
+
+
 	// Avant l'appel à saisies_liste_verifier, on peut intercepter les boutons
 	// de suppression
 	$raw_post = _request('roles_logos');
 	if (isset($raw_post['action']['supprimer-0'])) {
-		return array('message_erreur' => _T('logos_roles:erreur_suppression_logo_defaut'));
+		$erreurs = array('message_erreur' => _T('logos_roles:erreur_suppression_logo_defaut'));
+		unset($raw_post['action']);
+		set_request('roles_logos', $raw_post);
 	}
 	if (isset($raw_post['action']['supprimer-1'])) {
-		return array('message_erreur' => _T('logos_roles:erreur_suppression_logo_survol'));
+		$erreurs = array('message_erreur' => _T('logos_roles:erreur_suppression_logo_survol'));
+		unset($raw_post['action']);
+		set_request('roles_logos', $raw_post);
+	}
+	$i = 2;
+	while (isset($raw_post[$i])) {
+		if (isset($raw_post['action']["supprimer-$i"]) and
+				(0 < sql_countsel(
+					'spip_documents_liens',
+					'role = '.sql_quote('logo_'.$raw_post[$i]['slug'])
+				))) {
+			$erreurs = array('message_erreur' => _T(
+				'logos_roles:erreur_suppression_logo_utilise',
+				array('role' => $raw_post[$i]['titre'])
+			));
+			unset($raw_post['action']);
+			set_request('roles_logos', $raw_post);
+		}
+		$i++;
 	}
 
 	if (saisies_liste_verifier('roles_logos')) {
 		return array();
+	} elseif ($erreurs) {
+		return $erreurs;
 	}
 
 	$erreurs = array();
-
-	// On ne garde que les rôles pour lesquels on a saisi autre chose qu'un
-	// état.
-	set_request('roles_logos', array_filter(
-		_request('roles_logos'),
-		function ($role) {
-			return ($role['slug'] !== '') or
-				($role['titre'] !== '') or
-				(isset($role['objets']) and is_array($role['objets'])) or
-				($role['dimensions']['largeur'] !== '') or
-				($role['dimensions']['hauteur'] !== '');
-		}
-	));
 
 	$roles = _request('roles_logos');
 
