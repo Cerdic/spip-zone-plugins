@@ -92,9 +92,9 @@ function taxonomie_declarer_tables_objets_sql($tables) {
         'rechercher_champs' => array('nom_scientifique' => 10, 'nom_commun' => 10, 'auteur' => 2, 'descriptif' => 5, 'texte' => 5),
         'tables_jointures'  => array(),
         'statut_textes_instituer' => array(
-            'prop'     => 'taxonomie:texte_statut_prop',
-            'publie'   => 'taxonomie:texte_statut_publie',
-            'poubelle' => 'taxonomie:texte_statut_poubelle',
+            'prop'     => 'taxon:texte_statut_prop',
+            'publie'   => 'taxon:texte_statut_publie',
+            'poubelle' => 'taxon:texte_statut_poubelle',
         ),
         'statut'=> array(
             array(
@@ -105,6 +105,19 @@ function taxonomie_declarer_tables_objets_sql($tables) {
             )
         ),
         'texte_changer_statut' => 'taxon:texte_changer_statut_taxon',
+
+		// Textes standard
+		'texte_retour' 			=> 'icone_retour',
+		'texte_modifier' 		=> 'taxon:icone_modifier_taxon',
+		'texte_creer' 			=> 'taxon:icone_creer_taxon',
+		'texte_creer_associer' 	=> '',
+		'texte_signale_edition' => '',
+		'texte_objet' 			=> 'taxon:titre_taxon',
+		'texte_objets' 			=> 'taxon:titre_taxons',
+		'info_aucun_objet'		=> 'taxon:info_aucun_taxon',
+		'info_1_objet' 			=> 'taxon:info_1_taxon',
+		'info_nb_objets' 		=> 'taxon:info_nb_taxons',
+		'texte_logo_objet' 		=> 'taxon:titre_logo_taxon',
 	);
 
 	return $tables;

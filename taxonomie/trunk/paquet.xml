@@ -25,6 +25,6 @@
 
 	<genie nom="actualiser_itis" periode="86400" />
 
-	<menu nom="especes" titre="espece:titre_especes" parent="menu_edition" icone="images/espece-16.png" action="taxons" parametres="espece=oui" />
-	<menu nom="espece_creer" titre="espece:icone_creer_espece" parent="outils_rapides" icone="images/espece-new-16.png" action="espece_creer" />
+	<menu nom="especes" titre="taxon:titre_especes" parent="menu_edition" icone="images/espece-16.png" action="taxons" parametres="espece=oui" />
+	<menu nom="espece_creer" titre="taxon:icone_creer_taxon" parent="outils_rapides" icone="images/espece-new-16.png" action="espece_creer" />
 </paquet>

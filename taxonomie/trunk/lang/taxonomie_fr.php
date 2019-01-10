@@ -56,10 +56,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'filtre_statut_tout' => 'Tous',
 
 	// I
-	'info_1_espece' => 'Une espèce ou taxon de rang inférieur',
-	'info_1_taxon' => 'Un taxon du règne au genre',
-	'info_nb_especes' => '@nb@ espèces et taxons de rang inférieur',
-	'info_nb_taxons' => '@nb@ taxons du règne au genre',
 	'info_boite_taxonomie_configuration' => 'Cette page permet de configurer les paramètres de base du plugin comme la liste des langues utilisables pour nommer ou décrire les taxons.',
 	'info_boite_regnes' => 'Cette page permet de charger, mettre à jour ou vider les taxons du règne au genre (rangs principaux, secondaires et intercalaires) importés à partir des rapports hiérarchiques extraits de la base ITIS. Ces taxons peuvent être rechargés sans danger pour les autres taxons et pour les modifications éventuellement effectuées.',
 	'info_boite_taxons' => 'Cette page permet de consulter la liste des taxons dont le rang est strictement supérieur au rang espèce. Ces taxons sont tous créés automatiquement même si ils peuvent être modifiés manuellement après coup.',
@@ -172,9 +168,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'succes_charger_regne' => 'Le règne @regne@ a bien été chargé en base de données.',
 
 	// T
-	'texte_statut_prop' => 'pour publication',
-	'texte_statut_publie' => 'publié',
-	'texte_statut_poubelle' => 'à la poubelle',
 	'titre_form_configuration' => 'Configuration du plugin',
 	'titre_form_gestion_regne' => 'Gestion des règnes',
 	'titre_liste_regnes' => 'Liste des règnes chargés en base de données',

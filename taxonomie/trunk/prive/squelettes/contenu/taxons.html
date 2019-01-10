@@ -10,14 +10,16 @@
 [(#ENV{espece}|=={oui}|oui)
 	#SET{nb, 15}
 	#SET{filtres, #ARRAY{statut, prop:publie:poubelle}}
-	#SET{titre_1, taxonomie:info_1_espece}
-	#SET{titre_n, taxonomie:info_nb_especes}
+	#SET{titre_1, taxon:info_1_espece}
+	#SET{titre_n, taxon:info_nb_especes}
+	#SET{titre_0, taxon:info_aucune_espece}
 ]
 [(#ENV{espece}|=={oui}|non)
 	#SET{nb, 100}
 	#SET{filtres, #ARRAY{edite, oui:non, importe, oui:non}}
-	#SET{titre_1, taxonomie:info_1_taxon}
-	#SET{titre_n, taxonomie:info_nb_taxons}
+	#SET{titre_1, taxon:info_1_taxon}
+	#SET{titre_n, taxon:info_nb_taxons}
+	#SET{titre_0, taxon:info_aucun_taxon}
 ]
 <INCLURE{fond=prive/squelettes/inclure/inc-filtres_listes,
 	filtres=#GET{filtres},
@@ -31,9 +33,9 @@
 	par=nom_scientifique,
 	info_1=#GET{titre_1},
 	info_nb=#GET{titre_n},
-	sinon=<:taxon:info_aucun_taxon:>,
+	sinon=#GET{titre_0},
 	env, ajax} />
 
 [(#AUTORISER{creer, espece}|oui)
-	[(#URL_ECRIRE{espece_creer}|icone_verticale{<:espece:icone_creer_espece:>, espece, new, right})]
+	[(#URL_ECRIRE{espece_creer}|icone_verticale{<:taxon:icone_creer_taxon:>, espece, new, right})]
 ]

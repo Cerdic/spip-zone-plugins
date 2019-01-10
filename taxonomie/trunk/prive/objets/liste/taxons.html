@@ -10,8 +10,16 @@
 #ANCRE_PAGINATION
 <div class="liste-objets taxons[ (#ENV{classe})]">
 <table class="spip liste">
-	[(#SET{un, #ENV*{info_1, taxon:info_1_taxon}})]
-	[(#SET{nb, #ENV*{info_nb, taxon:info_nb_taxons}})]
+	[(#ENV{espece}|=={oui}|oui)
+		[(#SET{un, #ENV*{info_1, taxon:info_1_espece}})]
+		[(#SET{nb, #ENV*{info_nb, taxon:info_nb_especes}})]
+		[(#SET{aucun, #ENV*{sinon, taxon:info_aucune_espece}})]
+	]
+	[(#ENV{espece}|=={oui}|non)
+		[(#SET{un, #ENV*{info_1, taxon:info_1_taxon}})]
+		[(#SET{nb, #ENV*{info_nb, taxon:info_nb_taxons}})]
+		[(#SET{aucun, #ENV*{sinon, taxon:info_aucun_taxon}})]
+	]
 	[<caption>
 		<strong class="caption">
 			(#ENV*{titre, #GRAND_TOTAL|singulier_ou_pluriel{#GET{un}, #GET{nb}}})
@@ -55,5 +63,5 @@
 [<p class="pagination">(#PAGINATION{prive})</p>]
 </div>
 </B_liste_taxons>[
-<div class="liste-objets taxons caption-wrap"><strong class="caption">(#ENV*{sinon,""})</strong></div>
+<div class="liste-objets taxons caption-wrap"><strong class="caption">(#GET{aucun})</strong></div>
 ]<//B_liste_taxons>
