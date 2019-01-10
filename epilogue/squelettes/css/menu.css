@@ -56,13 +56,13 @@ a.menu_btn:hover{
 	display: block;
 }
 
-#menu ul li.active {
+/*#menu ul li.active {
 	background:#787746;
-}
+}*/
 
-#menu ul li:hover {
+/*#menu ul li:hover {
 	background:#787746;
-}
+}*/
 #menu ul li.item {
 	padding:0 0 0 1em;
 	height:47px;
@@ -132,6 +132,3 @@ screen and (max-device-width: 480px) {
 
 
 }
-
-
-

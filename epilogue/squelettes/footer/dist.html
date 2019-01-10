@@ -1,11 +1,53 @@
 <footer id="footer">
-	<ul class="icons">
-<!-- 		<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-		<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-		<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-		<li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li> -->
-		<li><a href="#URL_AUTEUR{1}"  class="icon fa-envelope"><span class="label">Email</span></a></li>
-	</ul>
+
+[(#REM)Pas si honteusement pompé sur solid state adapté par le génial marcimat]
+
+<BOUCLE_si_contenu_contact(CONDITION)
+	{si #CONFIG{epilogue/contact_adresse}
+		|ou{#CONFIG{epilogue/contact_telephone}}
+		|ou{#PLUGIN{contact}}
+		|ou{#PLUGIN{sociaux}}}>
+<h2 class="major" id="contacter"><:contact:></h2>
+[(#REM)Si le plugin formulaire de contact avancé est présent, on en affiche un accompagné des reseignements contenus contact et d'une carte associée à l'auteur 1]
+[(#PLUGIN{contact}|oui)
+<div class="row-fluid">
+
+<div class="contact_form span6">
+	<div class="ajax">
+	#FORMULAIRE_CONTACT
+	</div>
+</div>
+<div class="span6 icons ">
+		[<p class="icon fa-home">(#CONFIG{epilogue/contact_adresse}|propre|ptobr)</p>]
+			[(#INCLURE{fond=modeles/carte_gis,
+				objets=auteurs,
+				id_auteur=1})]
+		[<p class="icon fa-phone"><a href="tel:(#CONFIG{epilogue/contact_telephone})">(#CONFIG{epilogue/contact_telephone})</a></p>]
+		[<p class="fa-envelope"><a href="mailto:#CONFIG{sociaux/mail}">(#CONFIG{sociaux/mail})</a></p>]
+</div>
+</div>
+]
+[(#REM) Si le plugin n'est pas là on n'affiche que les renseignements centrés avant les icons de réseaux sociaux]
+
+[(#PLUGIN{contact}|non)
+	[<p class="icon fa-home">(#CONFIG{epilogue/contact_adresse}|propre|ptobr)</p>]
+	[<p class="icon fa-phone"><a href="tel:(#CONFIG{epilogue/contact_telephone})">(#CONFIG{epilogue/contact_telephone})</a></p>]
+	[<p class="fa-envelope"><a href="mailto:#CONFIG{sociaux/mail}">(#CONFIG{sociaux/mail})</a></p>]
+]
+
+<ul class="icons">
+	[(#REM) Avec plugin sociaux ]
+	[(#SET{rezo,[(#PIPELINE{sociaux_lister,#ARRAY{args,#ARRAY{skel,#SQUELETTE,date,#ENV**{date}},data,#ARRAY}})]})]
+	<BOUCLE_sociaux(DATA){source tableau,#GET{rezo}}{cle !IN mail}>
+		#SET{icone,fa-#CLE}
+		[(#CLE|=={googleplus}|?{#SET{icone,fa-google-plus}})]
+		[<li><a href="(#CONFIG{sociaux/#CLE})" class="icon #GET{icone}"><span class="label">#VALEUR</span></a></li>]
+	</BOUCLE_sociaux>
+</ul>
+</BOUCLE_si_contenu_contact>
+
+
+
 	<p class="copyright">&copy;
 		<BOUCLE_annee(ARTICLES){par date}{0,1}>[(#DATE|annee|!={#VAL{Y}|date}|oui)[(#DATE|annee)]]</BOUCLE_annee>-</B_annee>[(#DATE|annee) ] &mdash; #NOM_SITE_SPIP
 		. Design: <a href="https://templated.co">TEMPLATED</a>. 

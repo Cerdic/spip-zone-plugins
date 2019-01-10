@@ -630,6 +630,7 @@
 	textarea {
 		background: rgba(144, 144, 144, 0.075);
 		border-color: #666666;
+		width:100% !important;
 	}
 
 		input[type="text"]:focus,

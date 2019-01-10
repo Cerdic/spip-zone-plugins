@@ -9,6 +9,62 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 
+		<fieldset>
+			<legend>Décoration du menu</legend>
+			<div class="editer-groupe">
+				[(#SAISIE{input,couleur_bg,
+					label=Couleur sombre principale,
+					explication=Couleur sombre du menu pour les éléments sélectionnés ou au survol,
+					class=palette,
+					defaut=#2e3141})]
+
+				[(#SAISIE{input,couleur_accent,
+					label=Couleur vive principale,
+					explication=Couleur vive servant de fond pourles éléments du menu,
+					class=palette,
+					defaut=#4c5c96})]
+
+				[(#SAISIE{input,couleur_texte,
+					label=Couleur du texte,
+					explication=Couleur du texte du menu,
+					class=palette,
+					defaut=#000000})]
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>Contact</legend>
+			<div class="editer-groupe">
+
+				<div class="editer pleine_largeur">
+					<span class="explication">
+						[(#PLUGIN{contact}|non)
+							Activer le plugin «Formulaire de contact avancé» pour afficher un formulaire de contact
+						][(#PLUGIN{contact}|oui)
+						<a href="#URL_ECRIRE{configurer_contact}">Configurer le plugin : Contact</a>
+						]
+					</span>
+				</div>
+
+				<div class="editer pleine_largeur">
+					<span class="explication">
+						[(#PLUGIN{sociaux}|non)
+							Activer le plugin «Liens vers les réseaux sociaux» pour afficher de tels liens.
+						][(#PLUGIN{sociaux}|oui)
+						<a href="#URL_ECRIRE{configurer_sociaux}">Configurer le plugin : Liens sociaux</a>
+						]
+					</span>
+				</div>
+
+				[(#SAISIE{textarea,contact_adresse,
+					label=Adresse de contact,
+					rows=4})]
+
+				[(#SAISIE{input,contact_telephone,
+					label=Téléphone})]
+			</div>
+		</fieldset>
+
+
 		<input type="hidden" name="_meta_casier" value="epilogue" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div>
