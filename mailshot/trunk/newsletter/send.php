@@ -91,6 +91,11 @@ function newsletter_send_dist($destinataire,$corps,$options=array()){
 
 	// preparer les messages : generer un texte si manquant ou un html si manquant ?
 	if (!$corps_cont['html']){
+		if (!$corps_cont['texte']) {
+			// il y a eu un gros probleme, on ne peut rien faire => log et erreur
+			spip_log("Message vide pour " . $corps['sujet'] . " destinataire : ". var_export($destinataire), "mailshot_send" . _LOG_CRITIQUE);
+			return "erreur lors de la personalisation de la newsletter";
+		}
 		$corps_cont['html'] = recuperer_fond("emails/texte",array('texte'=>$corps_cont['texte'],'sujet'=>$corps_cont['sujet']));
 	}
 	elseif (!$corps_cont['texte']){
@@ -206,7 +211,7 @@ function newsletter_send_dist($destinataire,$corps,$options=array()){
 
 	// Et c'est parti on envoie enfin
 	spip_log("mail via mailshot\n$head"."Destinataire:".print_r($destinataire['email'],true),'mail');
-	spip_log("mail "."a :".print_r($destinataire['email'],true)."\n".trim($head),'mailshot_send'._LOG_DEBUG);
+	spip_log("mail "."a :".print_r($destinataire['email'],true)."\n".trim($head)."\nHTML Length : ".strlen($corps_cont['html']) . " | Texte Length : " . strlen($corps_cont['texte']),'mailshot_send'._LOG_DEBUG);
 
 	// fixer les options d'envoi si possible (non dispo par Facteur mais par les surcharges)
 	if (isset($mailer->send_options))
