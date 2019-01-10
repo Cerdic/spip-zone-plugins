@@ -10,15 +10,16 @@ jQuery(function($) {
 			editable: false,
 			navLinks: true,
 			eventLimit: true,
+			firstDay: #CONFIG{calendriermini/jour1,1},
 			events: "[(#URL_PAGE{agenda.json}|parametre_url{couleur,#ENV{couleur},&})]",
-			header: { 
-				left: [(#LANG_DIR|=={ltr}|?{"'prevYear,prev,next,nextYear today'","'listMonth,month,agendaWeek,agendaDay'"})], 
-				center: 'title', 
-				right: [(#LANG_DIR|=={ltr}|?{"'agendaDay,agendaWeek,month,listMonth'","'today nextYear,next,prev,prevYear'"})] 
-				}, 
+			header: {
+				left: [(#LANG_DIR|=={ltr}|?{"'prevYear,prev,next,nextYear today'","'listMonth,month,agendaWeek,agendaDay'"})],
+				center: 'title',
+				right: [(#LANG_DIR|=={ltr}|?{"'agendaDay,agendaWeek,month,listMonth'","'today nextYear,next,prev,prevYear'"})]
+				},
 			fixedWeekCount: false,
 			eventRender: function( event, element, view ) {
-				var title = element.find('.fc-title, .fc-list-item-title');          
+				var title = element.find('.fc-title, .fc-list-item-title');
 				title.html(title.text());
 			},
 			allDayHtml:'<:organiseur:cal_jour_entier|textebrut:>',
