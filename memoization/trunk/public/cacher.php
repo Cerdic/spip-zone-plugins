@@ -269,7 +269,7 @@ function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmod
 			include_spip("memoization_options");
 		}
 		$cfg = @unserialize($GLOBALS['meta']['memoization']);
-		$memo = new MCache((isset($cfg['pages']) AND $cfg['pages'])? $cfg['pages'] : $cfg['methode']);
+		$memo = new MCache($cfg['methode']);
 	}
 
 	/* compat SPIP 1.9 */
