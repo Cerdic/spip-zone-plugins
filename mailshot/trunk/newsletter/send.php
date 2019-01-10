@@ -93,7 +93,7 @@ function newsletter_send_dist($destinataire,$corps,$options=array()){
 	if (!$corps_cont['html']){
 		if (!$corps_cont['texte']) {
 			// il y a eu un gros probleme, on ne peut rien faire => log et erreur
-			spip_log("Message vide pour " . $corps['sujet'] . " destinataire : ". var_export($destinataire), "mailshot_send" . _LOG_CRITIQUE);
+			spip_log("Message vide pour " . $corps['sujet'] . " destinataire : ". var_export($destinataire, true), "mailshot_send" . _LOG_CRITIQUE);
 			return "erreur lors de la personalisation de la newsletter";
 		}
 		$corps_cont['html'] = recuperer_fond("emails/texte",array('texte'=>$corps_cont['texte'],'sujet'=>$corps_cont['sujet']));
