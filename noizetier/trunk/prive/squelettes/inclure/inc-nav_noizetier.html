@@ -29,19 +29,10 @@
 				<:noizetier:liste_objets:>,
 				#GET{page_exec}|=={#ENV{exec}}})
 	</li>]
-	[(#AUTORISER{configurer, noizetier})
-	#SET{page_exec, configurer_noizetier}
-	[<li class="item">
-		(#URL_ECRIRE{#GET{page_exec}}
-			|lien_ou_expose{
-				<:noizetier:configurer_titre:>,
-				#GET{page_exec}|=={#ENV{exec}}})
-	</li>]
-	]
 </ul>
 
-[(#REM) Racourcis de rechargement des pages et des noisettes à partir de leur fichier de configuration ]
-<INCLURE{fond=prive/squelettes/inclure/inc-raccourcis_rechargement} />
+[(#REM) Raccourcis d'administration : configuration et rechargement des pages et des noisettes à partir de leur fichier de configuration ]
+<INCLURE{fond=prive/squelettes/inclure/inc-raccourcis_admin} />
 
 [(#REM) Racourcis d'import et d'export d'une configuration de noisettes ]
 [(#PLUGIN{ieconfig}|oui)
