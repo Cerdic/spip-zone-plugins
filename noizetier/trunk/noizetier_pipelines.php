@@ -311,8 +311,8 @@ function noizetier_affiche_milieu($flux) {
 		// Initialisation de la page du privé
 		$exec = $flux['args']['exec'];
 
-		// Administration des plugins
 		if ($exec == 'admin_plugin') {
+			// Administration des plugins
 			// On recharge les pages du noiZetier dont la liste ou l'activité a pu changer. Inutile de forcer un
 			// rechargement complet.
 			include_spip('inc/noizetier_page');
@@ -327,17 +327,15 @@ function noizetier_affiche_milieu($flux) {
 			cache_supprimer('noizetier', _NCORE_NOMCACHE_TYPE_NOISETTE_CONTEXTE);
 			cache_supprimer('noizetier', _NCORE_NOMCACHE_TYPE_NOISETTE_AJAX);
 			cache_supprimer('noizetier', _NCORE_NOMCACHE_TYPE_NOISETTE_INCLUSION);
-		}
 
-		// Page d'un objet
-		$objet_exec  = trouver_objet_exec($exec);
-		if (
-			$objet_exec
+		} elseif
+		(
+			($objet_exec  = trouver_objet_exec($exec))
 			and !$objet_exec['edition']
 			and include_spip('inc/autoriser')
 			and autoriser('configurerpage', 'noizetier', 0, '', array('page' => $objet))
 		) {
-			// On initialise les données de l'objet
+			// Page d'un objet
 			$cle_objet   = $objet_exec['id_table_objet'];
 			$objet       = $objet_exec['type'];
 			$id_objet    = $flux['args'][$cle_objet];
