@@ -307,60 +307,63 @@ function noizetier_formulaire_admin($flux) {
  */
 function noizetier_affiche_milieu($flux) {
 
-	$exec        = $flux['args']['exec'];
-	$objet_exec  = trouver_objet_exec($exec);
-	$table_objet = $objet_exec['table_objet_sql'];
-	$cle_objet   = $objet_exec['id_table_objet'];
-	$objet       = $objet_exec['type'];
-	$id_objet    = $flux['args'][$cle_objet];
+	if (isset($flux['args']['exec'])) {
+		// Initialisation de la page du privé
+		$exec = $flux['args']['exec'];
 
-	// Administration des plugins
-	if ($exec == 'admin_plugin') {
-		// On recharge les pages du noiZetier dont la liste ou l'activité a pu changer. Inutile de forcer un
-		// rechargement complet.
-		include_spip('inc/noizetier_page');
-		noizetier_page_charger();
-		// On recharge les types de noisettes dont la liste ou l'activité a pu changer. Inutile de forcer un
-		// rechargement complet.
-		include_spip('inc/ncore_type_noisette');
-		type_noisette_charger('noizetier');
+		// Administration des plugins
+		if ($exec == 'admin_plugin') {
+			// On recharge les pages du noiZetier dont la liste ou l'activité a pu changer. Inutile de forcer un
+			// rechargement complet.
+			include_spip('inc/noizetier_page');
+			noizetier_page_charger();
+			// On recharge les types de noisettes dont la liste ou l'activité a pu changer. Inutile de forcer un
+			// rechargement complet.
+			include_spip('inc/ncore_type_noisette');
+			type_noisette_charger('noizetier');
 
-		// Suppression des caches N-Core nécessaires à la compilation des noisettes
-		include_spip('inc/ncore_cache');
-		cache_supprimer('noizetier', _NCORE_NOMCACHE_TYPE_NOISETTE_CONTEXTE);
-		cache_supprimer('noizetier', _NCORE_NOMCACHE_TYPE_NOISETTE_AJAX);
-		cache_supprimer('noizetier', _NCORE_NOMCACHE_TYPE_NOISETTE_INCLUSION);
-	}
-
-	// Page d'un objet
-	if (
-		$objet_exec
-		and !$objet_exec['edition']
-		and include_spip('inc/autoriser')
-		and autoriser('configurerpage', 'noizetier', 0, '', array('page' => $objet))
-	) {
-
-		// Identifier la page et la composition
-		if (test_plugin_actif('compositions')) {
-			include_spip('inc/compositions');
-			$composition = compositions_determiner($objet, $id_objet);
-		};
-		$page = $composition ? "$objet-$composition" : $objet;
-
-		$contexte = array(
-			'objet'       => $objet,
-			'id_objet'    => $id_objet,
-			'page'        => $page,
-			'composition' => $composition,
-		);
-		if ($texte = recuperer_fond('prive/squelettes/inclure/inc-noisettes_objet', $contexte)) {
-			if ($pos = strpos($flux['data'],'<!--affiche_milieu-->')) {
-				$flux['data'] = substr_replace($flux['data'], $texte, $pos, 0);
-			} else {
-				$flux['data'] .= $texte;
-			}
+			// Suppression des caches N-Core nécessaires à la compilation des noisettes
+			include_spip('inc/ncore_cache');
+			cache_supprimer('noizetier', _NCORE_NOMCACHE_TYPE_NOISETTE_CONTEXTE);
+			cache_supprimer('noizetier', _NCORE_NOMCACHE_TYPE_NOISETTE_AJAX);
+			cache_supprimer('noizetier', _NCORE_NOMCACHE_TYPE_NOISETTE_INCLUSION);
 		}
 
+		// Page d'un objet
+		$objet_exec  = trouver_objet_exec($exec);
+		if (
+			$objet_exec
+			and !$objet_exec['edition']
+			and include_spip('inc/autoriser')
+			and autoriser('configurerpage', 'noizetier', 0, '', array('page' => $objet))
+		) {
+			// On initialise les données de l'objet
+			$cle_objet   = $objet_exec['id_table_objet'];
+			$objet       = $objet_exec['type'];
+			$id_objet    = $flux['args'][$cle_objet];
+
+			// Identifier la page et la composition
+			if (test_plugin_actif('compositions')) {
+				include_spip('inc/compositions');
+				$composition = compositions_determiner($objet, $id_objet);
+			};
+			$page = $composition ? "$objet-$composition" : $objet;
+
+			$contexte = array(
+				'objet'       => $objet,
+				'id_objet'    => $id_objet,
+				'page'        => $page,
+				'composition' => $composition,
+			);
+			if ($texte = recuperer_fond('prive/squelettes/inclure/inc-noisettes_objet', $contexte)) {
+				if ($pos = strpos($flux['data'],'<!--affiche_milieu-->')) {
+					$flux['data'] = substr_replace($flux['data'], $texte, $pos, 0);
+				} else {
+					$flux['data'] .= $texte;
+				}
+			}
+
+		}
 	}
 
 	return $flux;
