@@ -307,8 +307,12 @@ function noizetier_formulaire_admin($flux) {
  */
 function noizetier_affiche_milieu($flux) {
 
-	$exec = $flux['args']['exec'];
-	$objet_exec = trouver_objet_exec($exec);
+	$exec        = $flux['args']['exec'];
+	$objet_exec  = trouver_objet_exec($exec);
+	$table_objet = $objet_exec['table_objet_sql'];
+	$cle_objet   = $objet_exec['id_table_objet'];
+	$objet       = $objet_exec['type'];
+	$id_objet    = $flux['args'][$cle_objet];
 
 	// Administration des plugins
 	if ($exec == 'admin_plugin') {
@@ -333,18 +337,15 @@ function noizetier_affiche_milieu($flux) {
 		$objet_exec
 		and !$objet_exec['edition']
 		and include_spip('inc/autoriser')
-		and autoriser('configurerpage', 'noizetier', 0, '', array('page' => $objet_exec['type']))
+		and autoriser('configurerpage', 'noizetier', 0, '', array('page' => $objet))
 	) {
 
-		$table_objet = $objet_exec['table_objet_sql'];
-		$cle_objet   = $objet_exec['id_table_objet'];
-		$objet       = $objet_exec['type'];
-		$id_objet    = $flux['args'][$cle_objet];
-
 		// Identifier la page et la composition
-		// Attention, la composition est présente dans args, mais toujours vide
-		$composition = sql_getfetsel('composition', $table_objet, $cle_objet.'='.intval($id_objet));
-		$page        = $composition ? "$objet-$composition" : $objet;
+		if (test_plugin_actif('compositions')) {
+			include_spip('inc/compositions');
+			$composition = compositions_determiner($objet, $id_objet);
+		};
+		$page = $composition ? "$objet-$composition" : $objet;
 
 		$contexte = array(
 			'objet'       => $objet,

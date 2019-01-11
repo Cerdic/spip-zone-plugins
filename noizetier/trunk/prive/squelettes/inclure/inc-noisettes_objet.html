@@ -55,7 +55,7 @@
 	#SET{exposer_page,#GET{exposer}|et{#GET{source}|=={page}}}
 	<li class="item[ (#GET{exposer_page}|?{on})]">
 		[(#GET{exposer_page}|oui)[(#CHEMIN_IMAGE{ok-16}|balise_img{<:noizetier:label_source_noisettes:>,icone-actif})]]
-		<a href="[(#GET{url_page})]" title="<:noizetier:bulle_configurer_page_noisettes|attribut_html:>">
+		<a href="[(#GET{url_page})]" title="[(#COMPOSITION|?{<:noizetier:bulle_configurer_composition_noisettes|attribut_html:>,<:noizetier:bulle_configurer_page_noisettes|attribut_html:>})]">
 			[(#GET{label_page})]
 		</a>
 	</li>
