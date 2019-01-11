@@ -69,7 +69,9 @@ function inc_ressource_dist($r) {
 
 	// 4. traiter les parametres d'image / logo / vignette / resize
 	// supprimera le href si necessaire
+	$GLOBALS['debugsrc'] = true;
 	$image = ressource_image($attrs, $meta);
+	$GLOBALS['debugsrc'] = false;
 
 	$final = array_merge($meta, $attrs);
 
@@ -455,7 +457,7 @@ function ressource_image($attrs, $meta) {
 		$f = charger_fonction('vignette','inc');
 		$img = $f($meta['extension'], false);
 		if ($resize)
-			$a = filtrer('image_reduire', $img, $attrs['largeur'] ? $attrs['largeur'] : -1, $attrs['hauteur'] ? $attrs['hauteur'] : -1);
+			$a = filtrer('image_graver', filtrer('image_reduire', $img, $attrs['largeur'] ? $attrs['largeur'] : -1, $attrs['hauteur'] ? $attrs['hauteur'] : -1));
 		else
 			$a = '<img src="'.$img.'" />';
 
@@ -476,7 +478,7 @@ function ressource_image($attrs, $meta) {
 	// TODO: parametre à mieux nommer ?
 	// parametre |dest=800 pour reduire l'image LIEE a 800px max
 	if ($attrs['dest']) {
-		$tmp = filtrer('image_reduire', $meta['local'], $attrs['dest']);
+		$tmp = filtrer('image_graver', filtrer('image_reduire', $meta['local'], $attrs['dest']));
 		if ($tmp = extraire_attribut($tmp, 'src'))
 			$image['href'] = $tmp;
 	}
@@ -539,8 +541,8 @@ function image_stdsize($meta, $attrs) {
 		case 'square':
 			# la c'est dur
 			$d = 75;
-			$img = filtrer('image_passe_partout', $img, $d, $d);
-			$img = filtrer('image_recadre', $img, $d, $d);
+			$img = filtrer('image_graver', filtrer('image_passe_partout', $img, $d, $d));
+			$img = filtrer('image_graver', filtrer('image_recadre', $img, $d, $d));
 			break;
 		case 't':
 		case 'thumb':
@@ -582,10 +584,9 @@ function image_stdsize($meta, $attrs) {
 	}
 
 	if ($a)
-		$img = filtrer('image_reduire', $img, $a);
+		$img = filtrer('image_graver', filtrer('image_reduire', $img, $a));
 	else if (is_numeric($s))
-		$img = filtrer('image_reduire', $img, $s);
-
+		$img = filtrer('image_graver', filtrer('image_reduire', $img, $s));
 	return $img;
 }
 
