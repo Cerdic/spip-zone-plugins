@@ -21,6 +21,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bulle_dupliquer_composition' => 'Créer une composition virtuelle copiée de la composition « @page@ »',
 	'bulle_modifier_composition' => 'Editer la composition',
 	'bulle_modifier_page' => 'Editer la page',
+	'bouton_configurer_noisettes_objets' => 'Configurer pour les @objets@',
+	'bouton_configurer_noisettes_composition' => 'Configurer pour cette composition',
+	'bouton_configurer_noisettes_objet' => 'Configurer pour ce contenu',
 
 	// C
 	'choisir_noisette' => 'Choisissez la noisette que vous voulez ajouter :',
@@ -179,6 +182,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_noisette_encapsulation' => 'Encapsulation',
 	'label_noizetier_ajax' => 'Par défaut, inclure chaque noisette en AJAX',
 	'label_noizetier_balise' => 'Par défaut, inclure chaque noisette dans une capsule (markup HTML)',
+	'label_noisettes_objet' => 'Pour ce contenu',
+	'label_noisettes_objets' => 'Pour les @objets@',
+	'label_noisettes_page' => 'Pour cette page',
+	'label_noisettes_composition' => 'Pour cette composition',
 	'label_texte' => 'Texte :',
 	'label_texte_introductif' => 'Texte introductif (optionnel) :',
 	'label_titre' => 'Titre :',
@@ -195,6 +202,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_pages_objet_non' => 'Pages non liées à un type de contenu',
 	'liste_pages_objet_oui' => 'Pages liées à un type de contenu',
 	'liste_pages_toutes' => 'Toutes les pages',
+	'label_source_noisettes' => 'Source des noisettes',
 
 	// M
 	'masquer' => 'Masquer',
@@ -207,9 +215,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ne_pas_definir_d_heritage' => 'Ne pas définir de composition héritée',
 	'noisette_numero' => 'noisette numéro :',
 	'noisettes_composition' => 'Noisettes spécifiques à la composition <i>@composition@</i> :',
-	'noisettes_configurees_aucune' => 'Aucune noisette configurée',
-	'noisettes_configurees_nb' => '@nb@ noisettes configurées',
-	'noisettes_configurees_une' => 'Une noisette configurée',
+	'noisettes_configurees_aucune' => 'Aucune noisette',
+	'noisettes_configurees_nb' => '@nb@ noisettes',
+	'noisettes_configurees_une' => 'Une noisette',
 	'noisettes_disponibles' => 'Types de noisette disponibles',
 	'noisettes_page' => 'Types de noisette spécifiques à la page <i>@type@</i> :',
 	'noisettes_pour' => 'Noisettes pour : ',
@@ -249,6 +257,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'suggestions' => 'Suggestions',
+
+	// T
+	'texte_noisette' => 'Noisette',
+	'texte_noisettes' => 'Noisettes',
 
 	// W
 	'warning_noisette_plus_disponible' => 'ATTENTION : cette noisette n’est plus disponible.',

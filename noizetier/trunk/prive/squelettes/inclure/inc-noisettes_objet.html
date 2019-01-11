@@ -1,0 +1,78 @@
+[(#REM)
+
+	Squelette inclus sur la page d'un objet via le pipeline affiche_milieu.
+
+	Affiche des liens pour configurer les noisettes :
+	- En priorité les noisettes pour l'objet précis
+	- Sinon les noisettes pour la page de l'objet
+
+	Paramètres :
+
+	- objet       : Type d'objet
+	- id_objet    : N° de l'objet
+	- page        : Identifiant de la page pour le noizetier
+	                Dans ce cas précis : objet-composition
+	- composition : Composition éventuelle de l'objet
+
+]
+[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{noisettes-24}|balise_img)] <:noizetier:texte_noisettes:> : ,noisettes noisettes_milieu})]
+
+[(#REM) Autorisation de configurer les noisettes pour cet objet précis ]
+#SET{autoriser_objet,#AUTORISER{configurerpage,noizetier,0,'',#ARRAY{objet,#ENV{objet},id_objet,#ENV{id_objet}}}}
+
+[(#REM) Compter les noisettes de cet objet précis ]
+<BOUCLE_nb_noisettes_objet(NOISETTES)
+	{plugin = noizetier}
+	{objet}
+	{id_objet}
+	{si #GET{autoriser_objet}}
+/>#SET{nb_noisettes_objet,#TOTAL_BOUCLE}<//B_nb_noisettes_objet>
+
+[(#REM) Compter les noisettes de la page de l'objet ]
+<BOUCLE_nb_noisettes_page(NOISETTES)
+	{plugin = noizetier}
+	{type = #ENV{objet}}
+	{composition}
+/>#SET{nb_noisettes_page,#TOTAL_BOUCLE}<//B_nb_noisettes_page>
+
+[(#REM) Identifier les noisettes utilisées : celles de la page ou celle de l'objet ]
+#SET{source,#GET{autoriser_objet}|?{
+	#GET{nb_noisettes_objet}|?{objet,page},
+	page}
+}
+
+[(#REM) Exposer les entrées uniquement s'il y a page + objet ]
+#SET{exposer,#GET{autoriser_objet}}
+
+<ul class="liste-items liste-items_noisettes">
+	<BOUCLE_page(NOIZETIER_PAGES) {page} {composition}>
+	#SET{url_page,#URL_ECRIRE{noizetier_page}|parametre_url{page,#ENV{page}}}
+	#SET{texte_objets,#TYPE|objet_info{texte_objets}|_T}
+	#SET{label_page,#COMPOSITION|?{
+		#VAL{#VAL{noizetier:bouton_configurer_noisettes_composition}|_T},
+		#VAL{noizetier:bouton_configurer_noisettes_objets}|_T{#ARRAY{objets,#GET{texte_objets}}}
+	}|concat{'&nbsp;',\(#GET{nb_noisettes_page}\)}}
+	#SET{exposer_page,#GET{exposer}|et{#GET{source}|=={page}}}
+	<li class="item[ (#GET{exposer_page}|?{on})]">
+		[(#GET{exposer_page}|oui)[(#CHEMIN_IMAGE{ok-16}|balise_img{<:noizetier:label_source_noisettes:>,icone-actif})]]
+		<a href="[(#GET{url_page})]" title="<:noizetier:bulle_configurer_page_noisettes|attribut_html:>">
+			[(#GET{label_page})]
+		</a>
+	</li>
+	</BOUCLE_page>
+	[(#GET{autoriser_objet}|oui)
+	#SET{url_objet,#URL_ECRIRE{noizetier_page}|parametre_url{objet,#ENV{objet}}|parametre_url{id_objet,#ENV{id_objet}}}
+	#SET{label_objet,#VAL{noizetier:bouton_configurer_noisettes_objet}|_T|concat{'&nbsp;',\(#GET{nb_noisettes_objet}\)}}
+	#SET{exposer_objet,#GET{exposer}|et{#GET{source}|=={objet}}}
+	<li class="item[ (#GET{exposer_objet}|?{on})]">
+		[(#GET{exposer_objet}|oui)[(#CHEMIN_IMAGE{ok-16}|balise_img{<:noizetier:label_source_noisettes:>,icone-actif})]]
+		<a href="[(#GET{url_objet})]" title="<:noizetier:bulle_configurer_objet_noisettes|attribut_html:>">
+			[(#GET{label_objet})]
+		</a>
+	</li>
+	]
+</ul>
+
+#BOITE_FERMER
+
+

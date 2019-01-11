@@ -30,7 +30,6 @@
 	<pipeline nom="noizetier_blocs_defaut" inclure="noizetier_pipelines.php" />
 	<pipeline nom="formulaire_admin" inclure="noizetier_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="noizetier_pipelines.php" />
-	<pipeline nom="boite_infos" inclure="noizetier_pipelines.php" />
 	<pipeline nom="compagnon_messages" inclure="noizetier_pipelines.php" />
 	<pipeline nom="pre_boucle" inclure="noizetier_pipelines.php" />
 	<pipeline nom="ieconfig" inclure="noizetier_ieconfig.php" />

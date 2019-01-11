@@ -145,47 +145,6 @@ function noizetier_recuperer_fond($flux) {
 }
 
 /**
- * Insertion dans le pipeline boite_infos : ajouter un lien pour configurer les noisettes de ce contenu précisément.
- * 
- * @param array $flux 
- * 		Le contexte du pipeline
- * @return array $flux
- * 		Le contexte modifié
- */
-function noizetier_boite_infos($flux){
-
-	include_spip('inc/autoriser');
-	$opt = array('objet' => $flux['args']['type'], 'id_objet' => intval($flux['args']['id']));
-	if (autoriser('configurerpage', 'noizetier', 0, '', $opt)) {
-		// On cherche le nombre de noisettes déjà configurées pour ce contenu.
-		$where = array(
-			'plugin=' . sql_quote('noizetier'),
-			'objet = ' . sql_quote($flux['args']['type']),
-			'id_objet = ' . intval($flux['args']['id']));
-		$nbr_noisettes = sql_countsel('spip_noisettes', $where);
-		if (!$nbr_noisettes) {
-			$texte = _T('noizetier:noisettes_configurees_aucune');
-		}
-		elseif ($nbr_noisettes == 1) {
-			$texte = _T('noizetier:noisettes_configurees_une');
-		}
-		else {
-			$texte = _T('noizetier:noisettes_configurees_nb', array('nb'=>$nbr_noisettes));
-		}
-
-		// On construit le bouton avec l'url adéquate.
-		include_spip('inc/presentation');
-		$url = generer_url_ecrire('noizetier_page');
-		$url = parametre_url($url, 'objet', $flux['args']['type']);
-		$url = parametre_url($url, 'id_objet', $flux['args']['id']);
-		$flux['data'] .= icone_horizontale($texte, $url, 'noisette', $fonction='', $dummy='', $javascript='');
-	}
-	
-	return $flux;
-}
-
-
-/**
  * Pipeline compositions_lister_disponibles pour ajouter les compositions du noizetier.
  *
  * @param array $flux
@@ -333,18 +292,25 @@ function noizetier_formulaire_admin($flux) {
 	return $flux;
 }
 
-// Lorsque l'on affiche la page admin_plugin, on supprime le cache des noisettes.
-// C'est un peu grossier mais pas trouvé de pipeline pour agir à la mise à jour d'un plugin.
-// Au moins, le cache est supprimé à chaque changement, mise à jour des plugins.
 
 /**
- * @param $flux
+ * Ajouter du contenu au centre de la page sur les pages privées
  *
+ * Page d'adminisration des plugin : on supprime le cache des noisettes.
+ * C'est un peu grossier mais pas trouvé de pipeline pour agir à la mise à jour d'un plugin.
+ * Au moins, le cache est supprimé à chaque changement, mise à jour des plugins.
+ *
+ * Page d'un objet : inclure le squelette qui affiche un lien pour configurer les noisettes.
+ *
+ * @param $flux
  * @return mixed
  */
 function noizetier_affiche_milieu($flux) {
-	$exec = $flux['args']['exec'];
 
+	$exec = $flux['args']['exec'];
+	$objet_exec = trouver_objet_exec($exec);
+
+	// Administration des plugins
 	if ($exec == 'admin_plugin') {
 		// On recharge les pages du noiZetier dont la liste ou l'activité a pu changer. Inutile de forcer un
 		// rechargement complet.
@@ -360,6 +326,40 @@ function noizetier_affiche_milieu($flux) {
 		cache_supprimer('noizetier', _NCORE_NOMCACHE_TYPE_NOISETTE_CONTEXTE);
 		cache_supprimer('noizetier', _NCORE_NOMCACHE_TYPE_NOISETTE_AJAX);
 		cache_supprimer('noizetier', _NCORE_NOMCACHE_TYPE_NOISETTE_INCLUSION);
+	}
+
+	// Page d'un objet
+	if (
+		$objet_exec
+		and !$objet_exec['edition']
+		and include_spip('inc/autoriser')
+		and autoriser('configurerpage', 'noizetier', 0, '', array('page' => $objet_exec['type']))
+	) {
+
+		$table_objet = $objet_exec['table_objet_sql'];
+		$cle_objet   = $objet_exec['id_table_objet'];
+		$objet       = $objet_exec['type'];
+		$id_objet    = $flux['args'][$cle_objet];
+
+		// Identifier la page et la composition
+		// Attention, la composition est présente dans args, mais toujours vide
+		$composition = sql_getfetsel('composition', $table_objet, $cle_objet.'='.intval($id_objet));
+		$page        = $composition ? "$objet-$composition" : $objet;
+
+		$contexte = array(
+			'objet'       => $objet,
+			'id_objet'    => $id_objet,
+			'page'        => $page,
+			'composition' => $composition,
+		);
+		if ($texte = recuperer_fond('prive/squelettes/inclure/inc-noisettes_objet', $contexte)) {
+			if ($pos = strpos($flux['data'],'<!--affiche_milieu-->')) {
+				$flux['data'] = substr_replace($flux['data'], $texte, $pos, 0);
+			} else {
+				$flux['data'] .= $texte;
+			}
+		}
+
 	}
 
 	return $flux;
