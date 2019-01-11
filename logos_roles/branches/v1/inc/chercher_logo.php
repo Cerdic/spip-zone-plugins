@@ -78,11 +78,6 @@ function inc_chercher_logo_dist($id, $_id_objet, $mode = 'on') {
 		);
 	}
 
-	// S'il n'y a pas de logo avec le bon rôle, on se rabat sur le logo de base
-	if ($mode !== 'on') {
-		return inc_chercher_logo_dist($id, $_id_objet, 'on');
-	}
-
 	/* Si le plugin « multilingue » est actif, et qu'on a toujours rien trouvé,
 	 * on va chercher le logo d'une éventuelle version originale. */
 	if (test_plugin_actif('multilingue')) {
