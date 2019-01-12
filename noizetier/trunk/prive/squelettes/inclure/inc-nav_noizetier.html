@@ -34,7 +34,5 @@
 [(#REM) Raccourcis d'administration : configuration et rechargement des pages et des noisettes à partir de leur fichier de configuration ]
 <INCLURE{fond=prive/squelettes/inclure/inc-raccourcis_admin} />
 
-[(#REM) Racourcis d'import et d'export d'une configuration de noisettes ]
-[(#PLUGIN{ieconfig}|oui)
-	<INCLURE{fond=prive/squelettes/inclure/inc-raccourcis_config} />
-]
+[(#REM) Racourcis de configuration du plugin et d'import ou export d'une configuration de noisettes ]
+<INCLURE{fond=prive/squelettes/inclure/inc-raccourcis_config} />
