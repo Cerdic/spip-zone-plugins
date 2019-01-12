@@ -56,6 +56,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'filtre_statut_tout' => 'Tous',
 
 	// I
+	'ieconfig_taxonomie_export_explication' => 'Exporte la configuration du plugin et les données de production concernant les taxons du règne au genre édités après insertion et les taxons de type espèce et descendants créés manuellement.',
+	'ieconfig_taxonomie_export_option' => 'Inclure les données de Taxonomie dans l’export ?',
 	'info_boite_taxonomie_configuration' => 'Cette page permet de configurer les paramètres de base du plugin comme la liste des langues utilisables pour nommer ou décrire les taxons.',
 	'info_boite_regnes' => 'Cette page permet de charger, mettre à jour ou vider les taxons du règne au genre (rangs principaux, secondaires et intercalaires) importés à partir des rapports hiérarchiques extraits de la base ITIS. Ces taxons peuvent être rechargés sans danger pour les autres taxons et pour les modifications éventuellement effectuées.',
 	'info_boite_taxons' => 'Cette page permet de consulter la liste des taxons dont le rang est strictement supérieur au rang espèce. Ces taxons sont tous créés automatiquement même si ils peuvent être modifiés manuellement après coup.',

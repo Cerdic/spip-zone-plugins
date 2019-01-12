@@ -25,16 +25,17 @@ function taxonomie_ieconfig($flux) {
 			array(
 				'saisie' => 'fieldset',
 				'options' => array(
-					'label' => '<:noizetier:noizetier:>',
-					'icone' => 'noizetier-24.png',
+					'nom'   => 'taxonomie_fieldset',
+					'label' => '<:taxonomie:titre_page_taxonomie:>',
+					'icone' => 'taxon-16.png',
 				),
 				'saisies' => array(
 					array(
 						'saisie' => 'oui_non',
 						'options' => array(
-							'nom' => 'noizetier_export_option',
-							'label' => '<:noizetier:ieconfig_noizetier_export_option:>',
-							'explication' => '<:noizetier:ieconfig_noizetier_export_explication:>',
+							'nom' => 'taxonomie_export_option',
+							'label' => '<:taxonomie:ieconfig_taxonomie_export_option:>',
+							'explication' => '<:taxonomie:ieconfig_taxonomie_export_explication:>',
 							'defaut' => '',
 						),
 					),
@@ -43,9 +44,9 @@ function taxonomie_ieconfig($flux) {
 		);
 		$flux['data'] = array_merge($flux['data'], $saisies);
 
-	} elseif (($action == 'export') and (_request('noizetier_export_option') == 'on')) {
+	} elseif (($action == 'export') and (_request('taxonomie_export_option') == 'on')) {
 		// Générer le tableau d'export
-		$flux['data']['noizetier'] = noizetier_ieconfig_exporter();
+		$flux['data']['taxonomie'] = taxonomie_ieconfig_exporter();
 
 	} elseif (($action == 'form_import') and isset($flux['args']['config']['noizetier'])) {
 		// Construire le formulaire d'import :
@@ -240,8 +241,13 @@ function taxonomie_ieconfig($flux) {
 // --------------------------------------------------------------------
 
 /**
- * Retourne le tableau d'export du plugin Taxonomie contenant toujours sa configuration et les taxons du règne au genre
- * édités après insertion et les taxons de type espèce et descendants créés manuellement.
+ * Retourne le tableau d'export du plugin Taxonomie contenant toujours sa configuration et les taxons nécessitant d'être
+ * sauvegardés car non créés via les fichiers ITIS.
+ * Les taxons concernés sont :
+ * - les taxons du règne au genre, importés via les fichiers ITIS puis édités manuellement;
+ * - les taxons ascendants d'une espèce (entre le genre et l'espèce non compris), non inclus dans un fichier ITIS
+ *   et insérés lors de la création d'une espèce;
+ * - les taxons de type espèce et descendants créés manuellement.
  *
  * @return array
  *         Tableau d'export pour le pipeline ieconfig_exporter.
@@ -265,50 +271,46 @@ function taxonomie_ieconfig_exporter() {
 
 	// Les metas de chargement de chaque règne ne sont pas exportées mais on identifie quand même la liste des règnes
 	// insérés dans la base. Les taxons seront ensuite exportés par règne pour permettre un import plus ciblé.
-	$export['contenu']['regnes'] = array();
+	include_spip('taxonomie_fonctions');
+	include_spip('inc/taxonomie');
+	$export['regnes'] = array();
 	$regnes = regne_lister();
 	foreach ($regnes as $_regne) {
 		if (regne_existe($_regne, $meta_regne)) {
-			$export['contenu']['regnes'][] = $_regne;
+			$export['regnes'][] = $_regne;
 		}
 	}
+	$export['contenu']['regnes'] = $export['regnes'] ? 'on' : '';
 
-	// Exportation de la table spip_taxons qui contient les taxons du règne au genre créés automatiquement mais pouvant
-	// être édités et les taxons espèces et descendants qui sont créés manuellement.
+	// Exportation de la table spip_taxons des taxons nécessitant d'être sauvegardés.
 	if ($export['contenu']['regnes']) {
+		// Récupération de la description de la table spip_taxons afin de connaitre la liste des colonnes.
+		include_spip('base/objets');
 		$from ='spip_taxons';
+		$description_table = lister_tables_objets_sql($from);
+		$select = array_diff(array_keys($description_table['field']), array('id_taxon', 'maj'));
 
 		// Pour faciliter l'import et aussi mieux le cibler les taxons exportés sont rangés par règne (index au nom
-		// du règne). Ensuite, on sépare aussi les taxons édités (index taxons) et les espèces créées manuellement
-		// (index espèces).
-		$select = array('page', 'blocs_exclus');
-		$where = array('est_virtuelle=' . sql_quote('non'));
-		$export['pages_explicites'] = sql_allfetsel($select, $from, $where);
-		$export['contenu']['pages_explicites'] = $export['pages_explicites'] ? 'on' : '';
+		// du règne). Ensuite, on sépare aussi les taxons édités (index [taxons][edites]), les taxons créés en tant
+		// qu'ascendant d'une espèce (index [taxons][crees]) et les espèces créées manuellement (index [especes]).
+		foreach ($export['regnes'] as $_regne) {
+			// Extraction des taxons du règne au genre édités manuellement par les utilisateurs ou créés lors d'un
+			// ajout d'espèce.
+			// On sauvegarde les champs éditables uniquement des édités et tous les champs pour les autres.
+			$export[$_regne]['taxons'] = taxon_preserver($_regne);
+			$export['contenu']['taxons']['edites'][$_regne] = $export[$_regne]['taxons']['edites'] ? 'on' : '';
+			$export['contenu']['taxons']['crees'][$_regne] = $export[$_regne]['taxons']['crees'] ? 'on' : '';
 
-		// -- pour les compositions virtuelles il faut tout sauvegarder (sauf le timestamp 'maj') car elles sont créées
-		//    de zéro.
-		$trouver_table = charger_fonction('trouver_table', 'base');
-		$table = $trouver_table($from);
-		$select = array_diff(array_keys($table['field']), array('maj'));
-		$where = array('est_virtuelle=' . sql_quote('oui'));
-		$export['compositions_virtuelles'] = sql_allfetsel($select, $from, $where);
-		$export['contenu']['compositions_virtuelles'] = $export['compositions_virtuelles'] ? 'on' : '';
-
-		// Exportation de la tables spip_noisettes qui contient les noisettes associées aux pages explicites,
-		// aux compositions virtuelles et à certains objets précis.
-		// -- on fait en sorte que les noisettes conteneur soient les premiers index suivies des noisettes non conteneur.
-		//    Pour chaque groupe, on sous-classe par profondeur de 0 à n. On utilise donc l'API SQL et pas celle de N-Core.
-		// -- on supprime l'id_noisette de chaque noisette car il sera recréé lors de l'import.
-		$where = array('plugin=' . sql_quote('noizetier'));
-		$order_by = array('est_conteneur DESC', 'profondeur ASC');
-		$noisettes = sql_allfetsel('*', 'spip_noisettes', $where, array(), $order_by);
-		// -- le array_merge a changé les index numériques de 0 à n, il faut remettre les id de noisette.
-		$export['noisettes'] = array_column($noisettes, null, 'id_noisette');
-		foreach($export['noisettes'] as $_id => $_noisette) {
-			unset($export['noisettes'][$_id]['id_noisette']);
+			// Extraction des espèces et descendants.
+			$export[$_regne]['especes'] = array();
+			$where = array(
+				'regne=' . sql_quote($_regne),
+				'importe=' . sql_quote('non'),
+				'espece=' . sql_quote('oui')
+			);
+			$export[$_regne]['especes'] = sql_allfetsel($select, $from, $where);
+			$export['contenu']['especes'][$_regne] = $export[$_regne]['especes'] ? 'on' : '';
 		}
-		$export['contenu']['noisettes'] = $export['noisettes'] ? 'on' : '';
 	}
 
 	return $export;
