@@ -41,10 +41,12 @@
 	page}
 }
 
-[(#REM) Exposer les entrées uniquement s'il y a page + objet ]
-#SET{exposer,#GET{autoriser_objet}}
+[(#REM) Items à afficher ]
+#SET{afficher_objet,#GET{autoriser_objet}}
+#SET{afficher_page,#GET{autoriser_objet}|non|ou{#GET{autoriser_objet}|et{#GET{nb_noisettes_objet}|non}}}
+#SET{exposer,#GET{afficher_objet}|et{#GET{afficher_page}}}
 
-[(#GET{autoriser_objet}|oui)
+[(#GET{afficher_objet}|oui)
 #SET{url_objet,#URL_ECRIRE{noizetier_page}|parametre_url{objet,#ENV{objet}}|parametre_url{id_objet,#ENV{id_objet}}}
 #SET{label_nb_noisettes_objet,#GET{nb_noisettes_objet}|?{
 	#GET{nb_noisettes_objet}|singulier_ou_pluriel{noizetier:noisettes_configurees_une,noizetier:noisettes_configurees_nb},
@@ -52,7 +54,7 @@
 }|strtolower}
 #SET{texte_objet,#ENV{objet}|objet_info{texte_objet}|_T}
 #SET{exposer_objet,#GET{exposer}|et{#GET{source}|=={objet}}}
-<span class="cfg-noisettes cfg-noisettes_objet[ (#GET{exposer_objet}|oui)on]">
+<span class="cfg-noisettes cfg-noisettes_objet">
 	<span class="cfg-noisettes__label">
 		<:noizetier:label_noisettes_objet:> : #GET{label_nb_noisettes_objet}
 	</span>
@@ -69,17 +71,21 @@
 <BOUCLE_page(NOIZETIER_PAGES)
 	{page}
 	{composition}
-	{si #GET{autoriser_objet}|non|ou{#GET{autoriser_objet}|et{#GET{nb_noisettes_objet}|non}}}
+	{si #GET{afficher_page}}
 >
 #SET{url_page,#URL_ECRIRE{noizetier_page}|parametre_url{page,#PAGE}}
 #SET{label_nb_noisettes_page,#GET{nb_noisettes_page}|?{
 	#GET{nb_noisettes_page}|singulier_ou_pluriel{noizetier:noisettes_configurees_une,noizetier:noisettes_configurees_nb},
 	#VAL{#VAL{noizetier:noisettes_configurees_aucune}|_T}
 }|strtolower}
+#SET{texte_objets,#TYPE|objet_info{texte_objets}|_T|strtolower}
 #SET{exposer_page,#GET{exposer}|et{#GET{source}|=={page}}}
-<span class="cfg-noisettes cfg-noisettes_page[ (#GET{exposer_page}|oui)on]">
+<span class="cfg-noisettes cfg-noisettes_page">
 	<span class="cfg-noisettes__label">
-		[(#COMPOSITION|?{<:noizetier:label_noisettes_composition:>,<:noizetier:label_noisettes_page_nom{page=#NOM}:>})] : #GET{label_nb_noisettes_page}
+		[(#COMPOSITION|?{
+			<:noizetier:label_noisettes_composition:>,
+			#VAL{noizetier:label_noisettes_page_objets}|_T{#ARRAY{objets,#GET{texte_objets}}}
+		})] : #GET{label_nb_noisettes_page}
 	</span>
 	<a
 		class="cfg-noisettes__bouton"
