@@ -328,17 +328,17 @@ function noizetier_affiche_milieu($flux) {
 			cache_supprimer('noizetier', _NCORE_NOMCACHE_TYPE_NOISETTE_AJAX);
 			cache_supprimer('noizetier', _NCORE_NOMCACHE_TYPE_NOISETTE_INCLUSION);
 
-		} elseif
-		(
-			($objet_exec  = trouver_objet_exec($exec))
+		} elseif (
+			($objet_exec = trouver_objet_exec($exec))
 			and !$objet_exec['edition']
 			and include_spip('inc/autoriser')
-			and autoriser('configurerpage', 'noizetier', 0, '', array('page' => $objet))
+			and autoriser('configurerpage', 'noizetier', 0, '', array('page' => $flux['args']['exec']))
 		) {
+
 			// Page d'un objet
-			$cle_objet   = $objet_exec['id_table_objet'];
-			$objet       = $objet_exec['type'];
-			$id_objet    = $flux['args'][$cle_objet];
+			$cle_objet = $objet_exec['id_table_objet'];
+			$objet     = $objet_exec['type'];
+			$id_objet  = $flux['args'][$cle_objet];
 
 			// Identifier la page et la composition
 			if (test_plugin_actif('compositions')) {
