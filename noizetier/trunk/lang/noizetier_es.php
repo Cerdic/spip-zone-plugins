@@ -29,8 +29,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_composition' => 'Modificar esta composición',
 	'editer_composition_heritages' => 'Definir las herencias.',
 	'editer_configurer_page' => 'Configurar  las noisettes de esta página', # No se en que estaba pensando, en alguno de mis comentarios había dicho que noisette es nuez y la verdad es que es avellana, ustedes perdonen por mi falta de concentración, en cuanto pueda lo corregiré.
-	'editer_exporter_configuration' => 'Exportar la configuración',
-	'editer_importer_configuration' => 'Importar una config.',
+	'editer_exporter_configuration' => 'Exportar la configuración', # MODIF
+	'editer_importer_configuration' => 'Importar una config.', # MODIF
 	'editer_noizetier_explication' => 'Selecione la página de la cual quiere configurar las noisettes ', # Ya lo dije noisette =avellana, pero lo dejo sin traducir. Si alguien piensa que es mejor traducirlo...
 	'editer_noizetier_titre' => 'Gestionar las noisettes',
 	'editer_nouvelle_page' => 'Crear una nueva página / composición',

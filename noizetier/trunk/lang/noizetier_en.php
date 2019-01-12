@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'compositions_non_installe' => '<b>Plugin Compositions:</b> this plugin isn’t installed on your site. It’s not necessary to the correct working of the nuts. However, when it’s activated, you can create compositions directly inside your Nuts Manager.',
 	'configurer_objets_noisettes_explication' => 'On these types of content, it will be allowed to customize the nuts <strong>content by content</strong>.',
 	'configurer_objets_noisettes_label' => 'Allow customization by content on:',
-	'configurer_titre' => 'NoiZetier configuration',
+	'configurer_titre' => 'NoiZetier configuration', # MODIF
 	'copie_de' => 'Copy of @source@',
 
 	// D
@@ -43,8 +43,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_composition' => 'Edit this composition',
 	'editer_composition_heritages' => 'Define heritages',
 	'editer_configurer_page' => 'Configure the nuts of this page',
-	'editer_exporter_configuration' => 'Export the configuration',
-	'editer_importer_configuration' => 'Import a configuration.',
+	'editer_exporter_configuration' => 'Export the configuration', # MODIF
+	'editer_importer_configuration' => 'Import a configuration.', # MODIF
 	'editer_noizetier_explication' => 'Select the page where you want to configure the nuts.',
 	'editer_noizetier_explication_objets' => 'Select the content you want to customize the nuts.',
 	'editer_noizetier_titre' => 'Manage the nuts',
@@ -181,9 +181,9 @@ nuts on the following pages:', # MODIF
 	'ne_pas_definir_d_heritage' => 'Do not define inherited composition',
 	'noisette_numero' => 'nut number :',
 	'noisettes_composition' => 'Specific nuts to the composition <i>@composition@</i>:',
-	'noisettes_configurees_aucune' => 'No nut configured',
-	'noisettes_configurees_nb' => '@nb@ nuts configured',
-	'noisettes_configurees_une' => 'A nut configured',
+	'noisettes_configurees_aucune' => 'No nut configured', # MODIF
+	'noisettes_configurees_nb' => '@nb@ nuts configured', # MODIF
+	'noisettes_configurees_une' => 'A nut configured', # MODIF
 	'noisettes_disponibles' => 'Type of nuts available',
 	'noisettes_page' => 'Nut types specific to the page<i>@type@</i>:',
 	'noisettes_pour' => 'Nuts for:',

@@ -14,17 +14,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bloc_sans_noisette' => 'Ajouter des noisettes en utilisant le bouton “ajouter une noisette” ou en glissant-déposant le type de noisette désiré sur cet emplacement.',
+	'bouton_configurer_noisettes_composition' => 'Configurer pour cette composition',
+	'bouton_configurer_noisettes_objet' => 'Configurer pour ce contenu',
+	'bouton_configurer_noisettes_objets' => 'Configurer pour les @objets@',
 	'bulle_activer_composition' => 'Activer les compositions sur le type de contenu « @type@ »',
+	'bulle_configurer_composition_noisettes' => 'Configurer les noisettes de la composition',
 	'bulle_configurer_objet_noisettes' => 'Configurer les noisettes spécifiques à ce contenu',
 	'bulle_configurer_page_noisettes' => 'Configurer les noisettes de la page',
-	'bulle_configurer_composition_noisettes' => 'Configurer les noisettes de la composition',
 	'bulle_creer_composition' => 'Créer une composition virtuelle de la page « @page@ »',
 	'bulle_dupliquer_composition' => 'Créer une composition virtuelle copiée de la composition « @page@ »',
 	'bulle_modifier_composition' => 'Editer la composition',
 	'bulle_modifier_page' => 'Editer la page',
-	'bouton_configurer_noisettes_objets' => 'Configurer pour les @objets@',
-	'bouton_configurer_noisettes_composition' => 'Configurer pour cette composition',
-	'bouton_configurer_noisettes_objet' => 'Configurer pour ce contenu',
 
 	// C
 	'choisir_noisette' => 'Choisissez la noisette que vous voulez ajouter :',
@@ -181,12 +181,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_niveau_titre' => 'Niveau du titre :',
 	'label_noisette_css' => 'Classes CSS',
 	'label_noisette_encapsulation' => 'Encapsulation',
-	'label_noizetier_ajax' => 'Par défaut, inclure chaque noisette en AJAX',
-	'label_noizetier_balise' => 'Par défaut, inclure chaque noisette dans une capsule (markup HTML)',
+	'label_noisettes_composition' => 'Pour cette composition',
 	'label_noisettes_objet' => 'Pour ce contenu',
 	'label_noisettes_objets' => 'Pour les @objets@',
 	'label_noisettes_page' => 'Pour cette page',
-	'label_noisettes_composition' => 'Pour cette composition',
+	'label_noizetier_ajax' => 'Par défaut, inclure chaque noisette en AJAX',
+	'label_noizetier_balise' => 'Par défaut, inclure chaque noisette dans une capsule (markup HTML)',
+	'label_source_noisettes' => 'Source des noisettes',
 	'label_texte' => 'Texte :',
 	'label_texte_introductif' => 'Texte introductif (optionnel) :',
 	'label_titre' => 'Titre :',
@@ -203,7 +204,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_pages_objet_non' => 'Pages non liées à un type de contenu',
 	'liste_pages_objet_oui' => 'Pages liées à un type de contenu',
 	'liste_pages_toutes' => 'Toutes les pages',
-	'label_source_noisettes' => 'Source des noisettes',
 
 	// M
 	'masquer' => 'Masquer',
