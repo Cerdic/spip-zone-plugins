@@ -1,7 +1,7 @@
 <paquet
 	prefix="agenda"
 	categorie="date"
-	version="3.26.0"
+	version="3.26.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/evenement-32.png"
@@ -49,7 +49,7 @@
 	<utilise nom="corbeille" compatibilite="[3.1.1;[" />
 	<utilise nom="saisies" compatibilite="[2.24.0;[" />
 	<utilise nom="verifier" compatibilite="[1.7.1;[" />
-	<utilise nom="urls_etendues" compatibilite="[1.4.12;[" />
+	<utilise nom="urls" compatibilite="[1.4.12;[" />
 
 
 	<necessite nom="calendriermini" compatibilite="[2.3.7;[" />
