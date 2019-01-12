@@ -160,7 +160,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'onglet_espece' => 'Espèces et descendants',
 	'onglet_gestion' => 'Gestion des règnes',
-	'onglet_configuration' => 'Configuration du plugin',
 	'onglet_navigation' => 'Ascendants des espèces',
 
 	// S
