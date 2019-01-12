@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_objets_noisettes_explication' => 'Sur ces types de contenus, il sera permis de personnaliser les noisettes <strong>contenu par contenu</strong>.',
 	'configurer_objets_noisettes_label' => 'Autoriser la personnalisation par contenu sur :',
 	'configurer_profondeur_max_label' => 'Profondeur d’imbrication',
-	'configurer_titre' => 'Configurer le noiZetier',
+	'configurer_titre' => 'Configurer le plugin noiZetier',
 	'copie_de' => 'Copie de @source@',
 
 	// D
@@ -45,8 +45,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_composition' => 'Modifier cette composition',
 	'editer_composition_heritages' => 'Définir les héritages',
 	'editer_configurer_page' => 'Configurer les noisettes de cette page',
-	'editer_exporter_configuration' => 'Exporter les données',
-	'editer_importer_configuration' => 'Importer des données',
 	'editer_noizetier_explication' => 'Sélectionnez la page dont vous souhaitez configurer les noisettes.',
 	'editer_noizetier_explication_objets' => 'Sélectionnez le contenu dont vous souhaitez personnaliser les noisettes.',
 	'editer_noizetier_titre' => 'Gérer les noisettes',
