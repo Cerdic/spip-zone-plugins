@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_importer_configuration' => 'Cette option vous permet de restaurer une sauvegarde précédemment effectuée de votre configuration ou bien importer une configuration fournie par un plugin. Soyez prudent avec cette fonctionnalité : <strong>les modifications, pertes éventuelles, sont irréversibles</strong>.',
 	'texte_nom' => 'Nom :',
 	'texte_plugins_manquants' => 'Ce fichier contient des configurations pour les plugins suivants qui ne sont pas activés sur votre site : <i>@plugins@</i>. Ces configurations ne seront donc pas importées.',
-	'titre_export' => 'Exporter la configuration',
+	'titre_export' => 'Exporter des données',
 	'titre_ieconfig' => 'Import / Export de configurations',
-	'titre_import' => 'Importer une configuration'
+	'titre_import' => 'Importer des données'
 );
