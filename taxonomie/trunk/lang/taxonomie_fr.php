@@ -168,7 +168,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'succes_charger_regne' => 'Le règne @regne@ a bien été chargé en base de données.',
 
 	// T
-	'titre_form_configuration' => 'Configuration du plugin',
+	'titre_form_configuration' => 'Configurer le plugin Taxonomie',
 	'titre_form_gestion_regne' => 'Gestion des règnes',
 	'titre_liste_regnes' => 'Liste des règnes chargés en base de données',
 	'titre_liste_fils_taxon' => 'Liste des descendants directs',
