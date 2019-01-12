@@ -14,9 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bloc_sans_noisette' => 'Ajouter des noisettes en utilisant le bouton “ajouter une noisette” ou en glissant-déposant le type de noisette désiré sur cet emplacement.',
-	'bouton_configurer_noisettes_composition' => 'Configurer pour cette composition',
-	'bouton_configurer_noisettes_objet' => 'Configurer pour ce contenu',
-	'bouton_configurer_noisettes_objets' => 'Configurer pour les @objets@',
+	'bouton_configurer' => 'Configurer',
 	'bulle_activer_composition' => 'Activer les compositions sur le type de contenu « @type@ »',
 	'bulle_configurer_composition_noisettes' => 'Configurer les noisettes de la composition',
 	'bulle_configurer_objet_noisettes' => 'Configurer les noisettes spécifiques à ce contenu',
@@ -185,6 +183,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_noisettes_objet' => 'Pour ce contenu',
 	'label_noisettes_objets' => 'Pour les @objets@',
 	'label_noisettes_page' => 'Pour cette page',
+	'label_noisettes_page_nom' => 'Pour la page @page@',
 	'label_noizetier_ajax' => 'Par défaut, inclure chaque noisette en AJAX',
 	'label_noizetier_balise' => 'Par défaut, inclure chaque noisette dans une capsule (markup HTML)',
 	'label_source_noisettes' => 'Source des noisettes',
@@ -218,7 +217,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisettes_composition' => 'Noisettes spécifiques à la composition <i>@composition@</i> :',
 	'noisettes_configurees_aucune' => 'Aucune noisette',
 	'noisettes_configurees_nb' => '@nb@ noisettes',
-	'noisettes_configurees_une' => 'Une noisette',
+	'noisettes_configurees_une' => '1 noisette',
 	'noisettes_disponibles' => 'Types de noisette disponibles',
 	'noisettes_page' => 'Types de noisette spécifiques à la page <i>@type@</i> :',
 	'noisettes_pour' => 'Noisettes pour : ',
