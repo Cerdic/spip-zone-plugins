@@ -16,6 +16,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @api
  * @uses type_noisette_lire()
+ * @uses ncore_conteneur_verifier()
+ * @uses ncore_conteneur_identifier()
  * @uses ncore_noisette_completer()
  * @uses ncore_noisette_lister()
  * @uses ncore_noisette_stocker()
@@ -27,11 +29,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param string $type_noisette
  *        Identifiant du type de noisette à ajouter au squelette.
  * @param array  $conteneur
- *        Tableau associatif descriptif du conteneur accueillant la noisette. Un conteneur peut-être un squelette seul
- *        ou associé à un contexte d'utilisation et dans ce cas il possède un index `squelette` ou un objet quelconque
- *        sans lien avec un squelette. Dans tous les cas, les index, à l'exception de `squelette`, sont spécifiques
- *        à l'utilisation qui en est faite par le plugin.
- * @param int    $rang
+ *        Identifiant du conteneur accueillant la noisette qui prend soit la forme d'un tableau soit celui d'un id.
+* @param int    $rang
  *        Rang dans le squelette contextualisé où insérer la noisette. Si l'argument n'est pas fourni ou est égal à 0
  *        on insère la noisette en fin de bloc.
  * @param string $stockage
@@ -66,13 +65,22 @@ function noisette_ajouter($plugin, $type_noisette, $conteneur, $rang = 0, $stock
 		// Ce sont ces fonctions qui aiguillent ou pas vers un service spécifique du plugin.
 		include_spip('ncore/ncore');
 
+		// Suivant que le conteneur est passé au format tableau ou id on complète les deux identifiants
+		$id_conteneur = '';
+		if (is_array($conteneur)) {
+			// -- Vérification des index du conteneur.
+			$conteneur = ncore_conteneur_verifier($plugin, $conteneur, $stockage);
+			// -- Calcul de l'id
+			if ($conteneur) {
+				$id_conteneur = ncore_conteneur_identifier($plugin, $conteneur, $stockage);
+			}
+		} elseif (is_string($conteneur)) {
+			$id_conteneur = $conteneur;
+		}
+
 		// On initialise la description de la noisette à ajouter et en particulier on stocke le tableau et l'id du
 		// conteneur pour simplifier les traitements par la suite.
-		// -- Vérification des index du conteneur.
-		$conteneur = ncore_conteneur_verifier($plugin, $conteneur, $stockage);
-		if ($conteneur) {
-			// -- Calculer l'identifiant du conteneur
-			$id_conteneur = ncore_conteneur_identifier($plugin, $conteneur, $stockage);
+		if ($id_conteneur) {
 			// -- Initialisation par défaut
 			$description = array(
 				'plugin'        => $plugin,
@@ -168,7 +176,7 @@ function noisette_ajouter($plugin, $type_noisette, $conteneur, $rang = 0, $stock
 function noisette_parametrer($plugin, $noisette, $modifications, $editables_specifiques = array(), $stockage = '') {
 
 	// Initialisation du retour
-	$retour = false;
+	$noisette_parametree = false;
 
 	// On charge les services de N-Core.
 	// Ce sont ces fonctions qui aiguillent ou pas vers un service spécifique du plugin.
@@ -200,12 +208,12 @@ function noisette_parametrer($plugin, $noisette, $modifications, $editables_spec
 		$description = array_merge($description, $modifications);
 
 		// La description est prête à être stockée en remplacement de l'existante.
-		if ($id_noisette = ncore_noisette_stocker($plugin, $description, $stockage)) {
-			$retour = true;
+		if (ncore_noisette_stocker($plugin, $description, $stockage)) {
+			$noisette_parametree = true;
 		}
 	}
 
-	return $retour;
+	return $noisette_parametree;
 }
 
 /**
@@ -235,7 +243,7 @@ function noisette_parametrer($plugin, $noisette, $modifications, $editables_spec
 function noisette_supprimer($plugin, $noisette, $stockage = '') {
 
 	// Initialisation du retour
-	$retour = true;
+	$noisette_supprimee = false;
 
 	// On charge les services de N-Core.
 	// Ce sont ces fonctions qui aiguillent ou pas vers un service spécifique du plugin.
@@ -254,37 +262,41 @@ function noisette_supprimer($plugin, $noisette, $stockage = '') {
 
 		// Si la noisette est de type conteneur, il faut d'abord vider le conteneur qu'elle représente
 		// et ce de façon récursive. La récursivité est gérée par la fonction de service ncore_conteneur_destocker().
+		$conteneur_destocke = true;
 		if ($description['est_conteneur'] == 'oui') {
 			// Inutile de redéfinir un conteneur car la description de la noisette contient les deux champs
 			// essentiels, à savoir, type_noisette et id_noisette.
-			ncore_conteneur_destocker($plugin, $description, $stockage);
+			$conteneur_destocke = ncore_conteneur_destocker($plugin, $description, $stockage);
 		}
+
 		// Suppression de la noisette. On passe la description complète ce qui permet à la fonction de
 		// destockage de choisir la méthode d'identification la plus adaptée.
-		ncore_noisette_destocker($plugin, $description, $stockage);
+		if ($conteneur_destocke and ncore_noisette_destocker($plugin, $description, $stockage)) {
+			// On récupère les noisettes restant affectées au conteneur sous la forme d'un tableau indexé par rang.
+			$autres_noisettes = ncore_noisette_lister(
+				$plugin,
+				$description['id_conteneur'],
+				'',
+				'rang_noisette',
+				$stockage
+			);
 
-		// On récupère les noisettes restant affectées au conteneur sous la forme d'un tableau indexé par rang.
-		$autres_noisettes = ncore_noisette_lister(
-			$plugin,
-			$description['id_conteneur'],
-			'',
-			'rang_noisette',
-			$stockage
-		);
-
-		// Si il reste des noisettes, on tasse d'un rang les noisettes qui suivaient la noisette supprimée.
-		if ($autres_noisettes) {
-			// On lit les noisettes restantes dans l'ordre décroissant pour éviter d'écraser une noisette.
-			ksort($autres_noisettes);
-			foreach ($autres_noisettes as $_rang => $_autre_description) {
-				if ($_rang > $description['rang_noisette']) {
-					ncore_noisette_ranger($plugin, $_autre_description, $_autre_description['rang_noisette'] - 1, $stockage);
+			// Si il reste des noisettes, on tasse d'un rang les noisettes qui suivaient la noisette supprimée.
+			if ($autres_noisettes) {
+				// On lit les noisettes restantes dans l'ordre décroissant pour éviter d'écraser une noisette.
+				ksort($autres_noisettes);
+				foreach ($autres_noisettes as $_rang => $_autre_description) {
+					if ($_rang > $description['rang_noisette']) {
+						ncore_noisette_ranger($plugin, $_autre_description, $_autre_description['rang_noisette'] - 1, $stockage);
+					}
 				}
 			}
+
+			$noisette_supprimee = true;
 		}
 	}
 
-	return $retour;
+	return $noisette_supprimee;
 }
 
 /**
@@ -323,7 +335,7 @@ function noisette_lire($plugin, $noisette, $information = '', $traiter_typo = fa
 	static $description_noisette_par_rang = array();
 
 	// Initialisation de la description en sortie.
-	$retour = array();
+	$noisette_lue = array();
 
 	if (!empty($noisette) and (is_string($noisette) or is_numeric($noisette) or is_array($noisette))) {
 		// On charge les services de N-Core.
@@ -371,21 +383,21 @@ function noisette_lire($plugin, $noisette, $information = '', $traiter_typo = fa
 				if ((!is_array($noisette) and isset($description_noisette_par_id[$plugin][$noisette][$information]))
 					or (is_array($noisette)
 						and isset($description_noisette_par_rang[$plugin][$noisette['id_conteneur']][$noisette['rang_noisette']][$information]))) {
-					$retour = is_array($noisette)
+					$noisette_lue = is_array($noisette)
 						? $description_noisette_par_rang[$plugin][$noisette['id_conteneur']][$noisette['rang_noisette']][$information]
 						: $description_noisette_par_id[$plugin][$noisette][$information];
 				} else {
-					$retour = '';
+					$noisette_lue = '';
 				}
 			} else {
-				$retour = is_array($noisette)
+				$noisette_lue = is_array($noisette)
 					? $description_noisette_par_rang[$plugin][$noisette['id_conteneur']][$noisette['rang_noisette']]
 					: $description_noisette_par_id[$plugin][$noisette];
 			}
 		}
 	}
 
-	return $retour;
+	return $noisette_lue;
 }
 
 /**
@@ -415,11 +427,13 @@ function noisette_lire($plugin, $noisette, $information = '', $traiter_typo = fa
  *        Identifiant du service de stockage à utiliser si précisé.
  *
  * @return bool
+ *         Renvoie `false` si la noisette n'est pas déplacée à cause d'une erreur de traitement ou parce que le
+ *         rang destination est identique au rang origine, sinon `true`.
  */
 function noisette_deplacer($plugin, $noisette, $conteneur_destination, $rang_destination, $stockage = '') {
 
 	// Initialisation du retour
-	$retour = true;
+	$noisette_deplacee = false;
 
 	// On charge les services de N-Core.
 	// Ce sont ces fonctions qui aiguillent ou pas vers un service spécifique du plugin.
@@ -437,128 +451,242 @@ function noisette_deplacer($plugin, $noisette, $conteneur_destination, $rang_des
 		$rang_origine = $description['rang_noisette'];
 
 		// On détermine l'id du conteneur destination en fonction du mode d'identification fourni par l'argument.
+		$id_conteneur_destination = '';
 		if (is_array($conteneur_destination)) {
+			// -- Vérification des index du conteneur.
 			$conteneur_destination = ncore_conteneur_verifier($plugin, $conteneur_destination, $stockage);
-			$id_conteneur_destination = ncore_conteneur_identifier(
-				$plugin,
-				$conteneur_destination,
-				$stockage
-			);
-		} else {
+			// -- Calcul de l'id
+			if ($conteneur_destination) {
+				$id_conteneur_destination = ncore_conteneur_identifier(
+					$plugin,
+					$conteneur_destination,
+					$stockage
+				);
+			}
+		} elseif (is_string($conteneur_destination)) {
 			$id_conteneur_destination = $conteneur_destination;
 		}
 
 		// Si le conteneur destination est différent du conteneur origine, la première opération consiste à
 		// transférer la noisette en fin du conteneur destination, ce qui est toujours possible.
 		// Ensuite on tasse le conteneur d'origine.
-		if ($id_conteneur_destination != $id_conteneur_origine) {
-			// On recherche le dernier rang utilisé dans le conteneur destination et on se positionne après.
-			$rangs = ncore_noisette_lister(
-				$plugin,
-				$id_conteneur_destination,
-				'rang_noisette',
-				'id_noisette',
-				$stockage
-			);
-			$rang_conteneur_destination = $rangs ? max($rangs) + 1 : 1;
+		if ($id_conteneur_destination) {
+			if ($id_conteneur_destination != $id_conteneur_origine) {
+				// On recherche le dernier rang utilisé dans le conteneur destination et on se positionne après.
+				$rangs = ncore_noisette_lister(
+					$plugin,
+					$id_conteneur_destination,
+					'rang_noisette',
+					'id_noisette',
+					$stockage
+				);
+				$rang_conteneur_destination = $rangs ? max($rangs) + 1 : 1;
 
-			// Pour éviter que chaque plugin ait à gérer la profondeur, N-Core calcule la profondeur de la noisette à son
-			// nouvel emplacement avant de déplacer celle-ci et la fournit à la fonction de changement de conteneur.
-			if (!is_array($conteneur_destination)) {
-				$conteneur_destination = ncore_conteneur_construire($plugin, $id_conteneur_destination, $stockage);
-			}
-			if (ncore_conteneur_est_noisette($plugin, $conteneur_destination, $stockage)) {
-				$description_conteneur = ncore_noisette_decrire($plugin, $conteneur_destination['id_noisette'], $stockage);
-				$profondeur_destination = $description_conteneur['profondeur'] + 1;
-			} else {
-				$profondeur_destination = 0;
-			}
-
-			// On transfère la noisette vers le conteneur destination à la position calculée (max + 1).
-			$description = ncore_noisette_changer_conteneur(
-				$plugin,
-				$description,
-				$id_conteneur_destination,
-				$rang_conteneur_destination,
-				$profondeur_destination,
-				$stockage
-			);
-
-			// Il faut maintenant tasser les noisettes du conteneur d'origine qui a perdu une noisette.
-			// -- On récupère les noisettes restant affectées au conteneur origine sous la forme d'un tableau
-			//    indexé par rang.
-			$autres_noisettes = ncore_noisette_lister(
-				$plugin,
-				$id_conteneur_origine,
-				'',
-				'rang_noisette',
-				$stockage
-			);
-
-			// Si il reste des noisettes, on tasse d'un rang les noisettes qui suivaient la noisette supprimée.
-			if ($autres_noisettes) {
-				// On lit les noisettes restantes dans l'ordre décroissant pour éviter d'écraser une noisette.
-				ksort($autres_noisettes);
-				foreach ($autres_noisettes as $_rang => $_autre_description) {
-					if ($_rang > $rang_origine) {
-						ncore_noisette_ranger($plugin, $_autre_description, $_autre_description['rang_noisette'] - 1, $stockage);
-					}
+				// Pour éviter que chaque plugin ait à gérer la profondeur, N-Core calcule la profondeur de la noisette à son
+				// nouvel emplacement avant de déplacer celle-ci et la fournit à la fonction de changement de conteneur.
+				if (!is_array($conteneur_destination)) {
+					$conteneur_destination = ncore_conteneur_construire($plugin, $id_conteneur_destination, $stockage);
 				}
-			}
-
-			// Le rang origine devient donc le nouveau rang de la noisette dans le conteneur destination.
-			$rang_origine = $description['rang_noisette'];
-		}
-
-		// A partir de là, le déplacement est un déplacement à l'intérieur d'un conteneur.
-		// Si les rangs origine et destination sont identiques on ne fait rien !
-		if ($rang_destination != $rang_origine) {
-			// On récupère les noisettes affectées au même conteneur sous la forme d'un tableau indexé par le rang.
-			$noisettes = ncore_noisette_lister(
-				$plugin,
-				$description['id_conteneur'],
-				'',
-				'rang_noisette',
-				$stockage
-			);
-
-			// On vérifie que le rang destination est bien compris entre 1 et le rang max, sinon on le force à l'une
-			// des bornes.
-			$rang_destination = max(1, $rang_destination);
-			$rang_max = $noisettes ? max(array_keys($noisettes)) : 0;
-			$rang_destination = min($rang_max, $rang_destination);
-
-			// Suivant la position d'origine et de destination de la noisette déplacée on trie les noisettes
-			// du conteneur.
-			if ($rang_destination < $rang_origine) {
-				krsort($noisettes);
-			} else {
-				ksort($noisettes);
-			}
-
-			// On déplace les noisettes impactées à l'exception de la noisette concernée par le déplacement
-			// afin de créer une position libre.
-			foreach ($noisettes as $_rang => $_description) {
-				if ($rang_destination < $rang_origine) {
-					// On "descend" les noisettes du rang destination au rang origine non compris.
-					if (($_rang >= $rang_destination) and ($_rang < $rang_origine)) {
-						ncore_noisette_ranger($plugin, $_description, $_rang + 1, $stockage);
-					}
+				if (ncore_conteneur_est_noisette($plugin, $conteneur_destination, $stockage)) {
+					$description_conteneur = ncore_noisette_decrire($plugin, $conteneur_destination['id_noisette'], $stockage);
+					$profondeur_destination = $description_conteneur['profondeur'] + 1;
 				} else {
-					// On "remonte" les noisettes du rang destination au rang origine non compris.
-					if (($_rang <= $rang_destination) and ($_rang > $rang_origine)) {
-						ncore_noisette_ranger($plugin, $_description, $_rang - 1, $stockage);
+					$profondeur_destination = 0;
+				}
+
+				// On transfère la noisette vers le conteneur destination à la position calculée (max + 1).
+				$description = ncore_noisette_changer_conteneur(
+					$plugin,
+					$description,
+					$id_conteneur_destination,
+					$rang_conteneur_destination,
+					$profondeur_destination,
+					$stockage
+				);
+
+				// Il faut maintenant tasser les noisettes du conteneur d'origine qui a perdu une noisette.
+				// -- On récupère les noisettes restant affectées au conteneur origine sous la forme d'un tableau
+				//    indexé par rang.
+				$autres_noisettes = ncore_noisette_lister(
+					$plugin,
+					$id_conteneur_origine,
+					'',
+					'rang_noisette',
+					$stockage
+				);
+
+				// Si il reste des noisettes, on tasse d'un rang les noisettes qui suivaient la noisette supprimée.
+				if ($autres_noisettes) {
+					// On lit les noisettes restantes dans l'ordre décroissant pour éviter d'écraser une noisette.
+					ksort($autres_noisettes);
+					foreach ($autres_noisettes as $_rang => $_autre_description) {
+						if ($_rang > $rang_origine) {
+							ncore_noisette_ranger($plugin, $_autre_description, $_autre_description['rang_noisette'] - 1, $stockage);
+						}
 					}
 				}
+
+				// Le rang origine devient donc le nouveau rang de la noisette dans le conteneur destination.
+				$rang_origine = $description['rang_noisette'];
 			}
 
-			// On positionne le rang de la noisette à déplacer au rang destination.
-			// On met le rang à zéro pour indiquer que l'emplacement d'origine n'est plus occupé par la
-			// noisette et qu'il ne faut pas le supprimer lors du rangement.
-			$description['rang_noisette'] = 0;
-			ncore_noisette_ranger($plugin, $description, $rang_destination, $stockage);
+			// A partir de là, le déplacement est un déplacement à l'intérieur d'un conteneur.
+			// Si les rangs origine et destination sont identiques on ne fait rien !
+			if ($rang_destination != $rang_origine) {
+				// On récupère les noisettes affectées au même conteneur sous la forme d'un tableau indexé par le rang.
+				$noisettes = ncore_noisette_lister(
+					$plugin,
+					$description['id_conteneur'],
+					'',
+					'rang_noisette',
+					$stockage
+				);
+
+				// On vérifie que le rang destination est bien compris entre 1 et le rang max, sinon on le force à l'une
+				// des bornes.
+				$rang_destination = max(1, $rang_destination);
+				$rang_max = $noisettes ? max(array_keys($noisettes)) : 0;
+				$rang_destination = min($rang_max, $rang_destination);
+
+				// Suivant la position d'origine et de destination de la noisette déplacée on trie les noisettes
+				// du conteneur.
+				if ($rang_destination < $rang_origine) {
+					krsort($noisettes);
+				} else {
+					ksort($noisettes);
+				}
+
+				// On déplace les noisettes impactées à l'exception de la noisette concernée par le déplacement
+				// afin de créer une position libre.
+				foreach ($noisettes as $_rang => $_description) {
+					if ($rang_destination < $rang_origine) {
+						// On "descend" les noisettes du rang destination au rang origine non compris.
+						if (($_rang >= $rang_destination) and ($_rang < $rang_origine)) {
+							ncore_noisette_ranger($plugin, $_description, $_rang + 1, $stockage);
+						}
+					} else {
+						// On "remonte" les noisettes du rang destination au rang origine non compris.
+						if (($_rang <= $rang_destination) and ($_rang > $rang_origine)) {
+							ncore_noisette_ranger($plugin, $_description, $_rang - 1, $stockage);
+						}
+					}
+				}
+
+				// On positionne le rang de la noisette à déplacer au rang destination.
+				// On met le rang à zéro pour indiquer que l'emplacement d'origine n'est plus occupé par la
+				// noisette et qu'il ne faut pas le supprimer lors du rangement.
+				$description['rang_noisette'] = 0;
+				if (ncore_noisette_ranger($plugin, $description, $rang_destination, $stockage)) {
+					$noisette_deplacee = true;
+				}
+			}
 		}
 	}
 
-	return $retour;
+	return $noisette_deplacee;
+}
+
+/**
+ * Duplique une noisette donnée dans un conteneur destination et, si cette noisette est un conteneur, duplique aussi
+ * les noisettes contenues de façon récursive.
+ *
+ * @api
+ * @uses ncore_noisette_decrire()
+ * @uses noisette_ajouter()
+ * @uses noisette_parametrer()
+ * @uses ncore_noisette_lister()
+ *
+ * @param string       $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param mixed        $noisette
+ *        Identifiant de la noisette qui peut prendre soit la forme d'un entier ou d'une chaine unique, soit la forme
+ *        d'un couple (id conteneur, rang).
+ * @param array|string $conteneur
+ *        Identifiant du conteneur destination qui prend soit la forme d'un tableau soit celui d'un id.
+ * @param array        $parametrage
+ *        Tableau indiquant les champs éditables de la noisette source à copier dans la noisette dupliquée.
+ * @param string       $stockage
+ *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
+ *        ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
+ *        fournissant le service de stockage souhaité.
+ *
+ * @return bool
+ */
+function noisette_dupliquer($plugin, $noisette, $conteneur, $parametrage = array(), $stockage = '') {
+
+	// Initialisation du retour
+	$noisette_dupliquee = false;
+
+	// On charge les services de N-Core.
+	// Ce sont ces fonctions qui aiguillent ou pas vers un service spécifique du plugin.
+	include_spip('ncore/ncore');
+
+	// L'identifiant d'une noisette peut être fourni de deux façons :
+	// - par une valeur unique, celle créée lors de l'ajout et qui peut-être un entier (id d'une table SPIP) ou
+	//   une chaine unique par exemple générée par uniqid().
+	// - ou par un tableau à deux entrées fournissant le conteneur et le rang dans le conteneur
+	//   (qui est unique pour un conteneur donné).
+	if (!empty($noisette) and (is_string($noisette) or is_numeric($noisette) or is_array($noisette))) {
+		// Avant de dupliquer la noisette on sauvegarde sa description car il faudra utiliser ses paramètres
+		// d'affichage, d'encapsulation et de style pour la duplication.
+		$description = ncore_noisette_decrire($plugin, $noisette, $stockage);
+
+		// On ajoute la noisette à la fin du conteneur destination : la noisette est créée par défaut.
+		if ($id_noisette = noisette_ajouter($plugin, $description['type_noisette'], $conteneur, 0, $stockage)) {
+			// Suivant le paramétrage demandé on copie les champs idoines de la noisette source.
+			if ($parametrage) {
+				$modifications = array();
+				foreach ($parametrage as $_champ) {
+					if (($description['est_conteneur'] == 'non')
+					or (($description['est_conteneur'] == 'oui') and ($_champ == 'parametres'))) {
+						$modifications[$_champ] = $description[$_champ];
+					}
+				}
+
+				if ($modifications) {
+					noisette_parametrer($plugin, $id_noisette, $modifications, array(), $stockage);
+				}
+			}
+
+			// Si la noisette est de type conteneur, il faut aussi dupliquer les noisettes éventuellement contenues
+			// et ce de façon récursive.
+			if ($description['est_conteneur'] == 'oui') {
+				// On récupère les noisettes incluses dans la noisette origine qui est un conteneur.
+				$autres_noisettes = ncore_noisette_lister(
+					$plugin,
+					array('type_noisette' => $description['type_noisette'], 'id_noisette' => $description['id_noisette']),
+					'',
+					'rang_noisette',
+					$stockage
+				);
+
+				// Si il reste des noisettes, on tasse d'un rang les noisettes qui suivaient la noisette supprimée.
+				if ($autres_noisettes) {
+					// On calcule l'id conteneur de la noisette conteneur venant d'être dupliquée pour y dupliquer les
+					// noisettes incluses.
+					$conteneur_noisette_dupliquee = array(
+						'type_noisette' => $description['type_noisette'],
+						'id_noisette' => $id_noisette
+					);
+
+					// On lit les noisettes incluses et on appelle la fonction dupliquer récursivement.
+					ksort($autres_noisettes);
+					foreach ($autres_noisettes as $_rang => $_autre_description) {
+						noisette_dupliquer(
+							$plugin,
+							$_autre_description['id_noisette'],
+							$conteneur_noisette_dupliquee,
+							$parametrage,
+							$stockage
+						);
+					}
+				}
+			}
+
+			$noisette_dupliquee = true;
+		}
+	}
+
+	return $noisette_dupliquee;
 }
