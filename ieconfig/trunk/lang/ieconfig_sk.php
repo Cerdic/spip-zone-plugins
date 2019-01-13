@@ -43,7 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_importer_configuration' => 'Táto možnosť vám umožňuje obnoviť databázu vytvorenú pred vykonaním zmien v nastaveniach alebo nahrať nastavenia, ktoré poskytuje zásuvný modul. Túto funkciu používajte opatrne: <strong>zmeny, potenciálne straty sa nedajú vrátiť späť.</strong>',
 	'texte_nom' => 'Názov:',
 	'texte_plugins_manquants' => 'V tomto súbore sú nastavenia pre tieto zásuvné moduly, ktoré neboli  aktivované na vašej stránke: <i>@plugins@.</i> Tieto nastavenia sa nenahrajú.',
-	'titre_export' => 'Exportovať nastavenia',
+	'titre_export' => 'Exportovať nastavenia', # MODIF
 	'titre_ieconfig' => 'Nahrať/Exportovať nastavenia',
-	'titre_import' => 'Nahrať nastavenia'
+	'titre_import' => 'Nahrať nastavenia' # MODIF
 );
