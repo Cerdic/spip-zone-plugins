@@ -58,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_code' => 'ATTENTION : pour utilisateur avancé. Vous pouvez saisir du code Spip (boucles et balises) qui sera interprété comme s’il s’agissait d’un squelette. La noisette aura par ailleurs accès à toutes les variables de l’environnement de la page.',
 	'explication_composition' => 'Composition dérivée de la page « @type@ »',
 	'explication_composition_virtuelle' => 'Composition <strong>virtuelle</strong> dérivée de la page « @type@ »',
+	'explication_copie_noisette_conteneur' => 'Les paramètres de configuration s\'appliqueront à la noisette conteneur et aussi à toutes les noisettes incluses qui seront aussi dupliquées.',
 	'explication_copie_noisette_parametres' => 'Choisissez les paramètres de configuration de la noisette source que vous souhaitez copier sinon les valeurs par défaut seront utilisées.',
 	'explication_copie_pages_compatibles' => 'Choisissez les pages dans lesquelles créer une noisette du même type que celui de la noisette source.',
 	'explication_description_code' => 'À usage interne. Non affichée sur le site public.',

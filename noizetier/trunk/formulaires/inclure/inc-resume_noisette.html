@@ -55,13 +55,15 @@
 							<:noizetier:formulaire_supprimer_noisette:>
 						</a>
 					</li>]
-					[<li>
-						<a href="(#URL_ECRIRE{noisette_copy}
-							|parametre_url{id_noisette, #ID_NOISETTE}
-							|parametre_url{bloc, #ENV{bloc}})">
-							<:noizetier:formulaire_etendre_noisette:>
-						</a>
-					</li>]
+					[(#PROFONDEUR|=={0}|oui)
+						[<li>
+							<a href="(#URL_ECRIRE{noisette_copy}
+								|parametre_url{id_noisette, #ID_NOISETTE}
+								|parametre_url{bloc, #ENV{bloc}})">
+								<:noizetier:formulaire_etendre_noisette:>
+							</a>
+						</li>]
+					]
 					[(#ENV{nb_noisettes}|>{1}|oui)
 						[<li class="groupe">
 							<a href="(#URL_ACTION_AUTEUR{decaler_noisette, [haut:(#ID_NOISETTE):#ID_CONTENEUR:#ENV{nb_noisettes}], #ENV{url_page}})">

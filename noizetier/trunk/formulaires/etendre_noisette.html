@@ -22,21 +22,25 @@
 
 		<fieldset>
 			<legend><:noizetier:legende_copie_noisette_parametres:></legend>
+
+			<div class="explication">
+				<:noizetier:explication_copie_noisette_parametres:>
+				[(#ENV{est_conteneur}|=={oui}|oui) <strong><:noizetier:explication_copie_noisette_conteneur:></strong>]
+			</div>
+
 			<div class="editer-groupe">
 				[(#SAISIE{case, copie_parametres,
 					label_case=<:noizetier:label_copie_noisette_parametres:>,
 					class=pleine_largeur
 				})]
-
-				[(#ENV{est_conteneur}|=={non}|oui)
-					[(#SAISIE{case, copie_encapsulation,
-						label_case=<:noizetier:label_copie_noisette_balise:>,
-					})]
-
-					[(#SAISIE{case, copie_css,
-						label_case=<:noizetier:label_copie_noisette_css:>,
-					})]
-				]
+				[(#SAISIE{case, copie_encapsulation,
+					label_case=<:noizetier:label_copie_noisette_balise:>,
+					class=pleine_largeur
+				})]
+				[(#SAISIE{case, copie_css,
+					label_case=<:noizetier:label_copie_noisette_css:>,
+					class=pleine_largeur
+				})]
 			</div>
 		</fieldset>
 

@@ -86,6 +86,16 @@ function formulaires_etendre_noisette_traiter_dist($noisette, $page_noisette, $b
 	// Récupération des pages sélectionnées.
 	$pages = _request('pages');
 
+	// Construire la liste des paramètres à diffuser dans les noisettes copiées.
+	$parametres = array();
+	$champs = array('copie_parametres', 'copie_encapsulation', 'copie_css');
+	foreach ($champs as $_champ) {
+		if (_request($_champ)) {
+			$champ_noisette = str_replace('copie_', '', $_champ);
+			$parametres[] = $champ_noisette;
+		}
+	}
+
 	// Pour chaque page on copie la noisette avec tous ses paramètres.
 	// Il est inutile de tester l'autorisation sur la page car cela a déjà été fait lors du chargement.
 	include_spip('inc/ncore_noisette');
@@ -94,30 +104,8 @@ function formulaires_etendre_noisette_traiter_dist($noisette, $page_noisette, $b
 	foreach ($pages as $_page) {
 		// Définir le conteneur de la noisette, à savoir, le squelette du bloc de la page concernée.
 		$conteneur['squelette'] = "${bloc}/${_page}";
-		if (!$id_noisette = noisette_ajouter('noizetier', $noisette['type_noisette'], $conteneur)) {
+		if (!noisette_dupliquer('noizetier', $noisette['id_noisette'], $conteneur, $parametres)) {
 			$erreurs[] = $_page;
-		} else {
-			// Mettre à jour les informations spécifiques de la noisette source si demandé.
-			static $valeurs = null;
-			if ($valeurs === null) {
-				// On construit une seule fois le tableau des modifications si il y en a et on l'utilise
-				// pour chaque page.
-				$valeurs = array();
-				$champs = array('copie_parametres');
-				if (_request('est_conteneur') != 'oui') {
-					$champs = array_merge($champs, array('copie_encapsulation', 'copie_css'));
-				}
-				foreach ($champs as $_champ) {
-					if (_request($_champ)) {
-						$champ_noisette = str_replace('copie_', '', $_champ);
-						$valeurs[$champ_noisette] = $noisette[$champ_noisette];
-					};
-				}
-			}
-			if ($valeurs) {
-				// Mise à jour de la noisette créée avec les champs demandés.
-				noisette_parametrer('noizetier', intval($id_noisette), $valeurs);
-			}
 		}
 	}
 
