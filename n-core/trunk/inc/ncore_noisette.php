@@ -30,9 +30,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *        Identifiant du type de noisette à ajouter au squelette.
  * @param array  $conteneur
  *        Identifiant du conteneur accueillant la noisette qui prend soit la forme d'un tableau soit celui d'un id.
-* @param int    $rang
- *        Rang dans le squelette contextualisé où insérer la noisette. Si l'argument n'est pas fourni ou est égal à 0
- *        on insère la noisette en fin de bloc.
+ * @param int    $rang
+ *        Rang dans le conteneur où insérer la noisette. Si l'argument n'est pas fourni ou est égal à 0
+ *        on insère la noisette en fin de conteneur.
  * @param string $stockage
  *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
  *        ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
@@ -604,6 +604,9 @@ function noisette_deplacer($plugin, $noisette, $conteneur_destination, $rang_des
  *        d'un couple (id conteneur, rang).
  * @param array|string $conteneur
  *        Identifiant du conteneur destination qui prend soit la forme d'un tableau soit celui d'un id.
+ * @param int    $rang
+ *        Rang dans le conteneur destination où insérer la noisette dupliquée. Si l'argument n'est pas fourni ou
+ *        est égal à 0 on insère la noisette en fin de conteneur.
  * @param array        $parametrage
  *        Tableau indiquant les champs éditables de la noisette source à copier dans la noisette dupliquée.
  * @param string       $stockage
@@ -613,7 +616,7 @@ function noisette_deplacer($plugin, $noisette, $conteneur_destination, $rang_des
  *
  * @return bool
  */
-function noisette_dupliquer($plugin, $noisette, $conteneur, $parametrage = array(), $stockage = '') {
+function noisette_dupliquer($plugin, $noisette, $conteneur, $rang = 0, $parametrage = array(), $stockage = '') {
 
 	// Initialisation du retour
 	$noisette_dupliquee = false;
@@ -633,13 +636,13 @@ function noisette_dupliquer($plugin, $noisette, $conteneur, $parametrage = array
 		$description = ncore_noisette_decrire($plugin, $noisette, $stockage);
 
 		// On ajoute la noisette à la fin du conteneur destination : la noisette est créée par défaut.
-		if ($id_noisette = noisette_ajouter($plugin, $description['type_noisette'], $conteneur, 0, $stockage)) {
+		if ($id_noisette = noisette_ajouter($plugin, $description['type_noisette'], $conteneur, $rang, $stockage)) {
 			// Suivant le paramétrage demandé on copie les champs idoines de la noisette source.
 			if ($parametrage) {
 				$modifications = array();
 				foreach ($parametrage as $_champ) {
 					if (($description['est_conteneur'] == 'non')
-					or (($description['est_conteneur'] == 'oui') and ($_champ == 'parametres'))) {
+					or (($description['est_conteneur'] == 'oui') and (($_champ == 'encapsulation') or ($_champ == 'css')))) {
 						$modifications[$_champ] = $description[$_champ];
 					}
 				}
