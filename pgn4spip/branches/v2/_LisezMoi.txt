@@ -1,20 +1,20 @@
-Le plug-in pgn4spip affiche l'Èchiquier et la partie de jeu d'Èchecs
-saisie au format PGN ‡ l'intÈrieur d'un article entre les balises [pgn] et [/pgn]
+Le plug-in pgn4spip affiche l'√©chiquier et la partie de jeu d'√©checs
+saisie au format PGN √† l'int√©rieur d'un article entre les balises [pgn] et [/pgn]
 ou [PGN] et [/PGN].
 
 Usage dans le corps d'un article :
 
 Avant
 [pgn] 1. e4 Nf6 [/pgn]
-AprËs
+Apr√®s
 
 pgn4spip est l'interface pour SPIP de pgn4web de Paolo Casaschi
 http://pgn4web.casaschi.net/home.html
 
-DÈmo en ligne
+D√©mo en ligne
 http://pgn4web.casaschi.net/demo.html
 
-pgn4spip a ÈtÈ dÈveloppÈ par Matt Chesstale en PHP, Javascript, HTML, CSS, CFG et SPIP.
+pgn4spip a √©t√© d√©velopp√© par Matt Chesstale en PHP, Javascript, HTML, CSS, CFG et SPIP.
 matteo.chesstale@gmail.com
 Licence : GNU GPL 3.0 (c) 2012
 
@@ -31,22 +31,22 @@ Licence : GNU GPL 3.0 (c) 2012
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-En cas d'usage de la lame "AmÈliorations des textes : Guillemets typographiques" du  plugin Couteau Suisse, pgn4spip doit Ítre activÈ APRES le Couteau Suisse.
+En cas d'usage de la lame "Am√©liorations des textes : Guillemets typographiques" du  plugin Couteau Suisse, pgn4spip doit √™tre activ√© APRES le Couteau Suisse.
 
 ________________
 
 1. Installation du plug-in
 
-Comme tous les plugins, en auto via svp si on crÈÈ :
+Comme tous les plugins, en auto via svp si on cr√©√© :
 - un dossier plugins/auto/
 - un dossier lib/
 
-Le plugin pgn4web sera automatiquement tÈlÈchargÈ dans le dossier lib/.
+Le plugin pgn4web sera automatiquement t√©l√©charg√© dans le dossier lib/.
 
-Le rÈpertoire pgn4web a une taille de 13 Mo.
-Dans le cas de site ayant une place disque rÈduite,
-on peut Èventuellement effacer certaines polices non utilisÈes 
-parmi alpha, merida, svgchess ou des fichiers de dÈmo.
+Le r√©pertoire pgn4web a une taille de 13 Mo.
+Dans le cas de site ayant une place disque r√©duite,
+on peut √©ventuellement effacer certaines polices non utilis√©es 
+parmi alpha, merida, svgchess ou des fichiers de d√©mo.
 Garder les polices uscf/20 et 26.
 ________________
 
@@ -60,17 +60,17 @@ Confirmer en cliquant sur "Valider".
 
 Cliquer sur le nom "pgn4spip" pour avoir l'aide.
 
-Cliquer sur l'icÙne du tournevis et de la clef ‡ droite en face du nom pgn4spip
+Cliquer sur l'ic√¥ne du tournevis et de la clef √† droite en face du nom pgn4spip
 
-La configuration peut Ítre facultativement testÈe en anglais en ligne dans
+La configuration peut √™tre facultativement test√©e en anglais en ligne dans
 http://pgn4web.casaschi.net/board-generator.html
 
 ________________
 
-3. Usage avancÈ
+3. Usage avanc√©
 
-Le plugin peut Ítre optionnellement configurÈ dans les paramËtres de la balise [pgn]
-‡ l'intÈrieur d'un article. Voir l'aide lors de la configuration du plugin.
+Le plugin peut √™tre optionnellement configur√© dans les param√®tres de la balise [pgn]
+√† l'int√©rieur d'un article. Voir l'aide lors de la configuration du plugin.
 
 doc\pgn4web parameters.txt
 http://localhost/spip/plugins/pgn4spip/pgn4web/board.html?help=true
@@ -79,46 +79,46 @@ Exemple dans le corps d'un article :
 
 Avant
 [pgn height=500 autoplayMode=loop] 1. e4 Nf6 [/pgn]
-AprËs
+Apr√®s
 
-Fichier texte exemple de test ‡ copier-coller dans un article SPIP 2 ou SPIP 3 :
+Fichier texte exemple de test √† copier-coller dans un article SPIP 2 ou SPIP 3 :
 
-Test01 Symbol eval.txt : variations, Èvaluations symboles "avec l'idÈe de"
-Test02 MultiPgn.txt    : plusieurs parties de jeu d'Èchecs
-Test03 Puzzle Fen.txt  : deux problËmes d'Èchecs
-Test04 Puzzle URL      : problËmes d'Èchecs via l'URL du fichier .pgn
-Test05 Puzzle Doc.txt  : problËmes d'Èchecs dans fichier .pgn attachÈ ‡ l'article
-Test06 Comment.txt     : commentaires dans une partie d'Èchecs
-Test07 Puzzle Docs     : le fichier .pgn est attachÈ ‡ l'article comme un document
+Test01 Symbol eval.txt : variations, √©valuations symboles "avec l'id√©e de"
+Test02 MultiPgn.txt    : plusieurs parties de jeu d'√©checs
+Test03 Puzzle Fen.txt  : deux probl√®mes d'√©checs
+Test04 Puzzle URL      : probl√®mes d'√©checs via l'URL du fichier .pgn
+Test05 Puzzle Doc.txt  : probl√®mes d'√©checs dans fichier .pgn attach√© √† l'article
+Test06 Comment.txt     : commentaires dans une partie d'√©checs
+Test07 Puzzle Docs     : le fichier .pgn est attach√© √† l'article comme un document
 Test08 Table 2 board   : deux balises pgn horizontalement dans une table
-Test09 Live horizontal : diffusion en temps rÈel de la partie live.pgn mode horizontal
-Test10 Live vertical   : diffusion en temps rÈel de la partie live.pgn mode vertical
+Test09 Live horizontal : diffusion en temps r√©el de la partie live.pgn mode horizontal
+Test10 Live vertical   : diffusion en temps r√©el de la partie live.pgn mode vertical
 
-Le rÈpertoire test\ n'est pas nÈcessaire ‡ l'exÈcution du plugin.
+Le r√©pertoire test\ n'est pas n√©cessaire √† l'ex√©cution du plugin.
 ________________
 
-3.1 RÈsolution de problËmes
+3.1 R√©solution de probl√®mes
 
-SymptÙme 1 : avec le Couteau Suisse activÈ
-A la place de l'Èchiquier, je vois l'entÍte du PGN avec Èventuellement
-quelques Ètranges guillemets ou mÍme des figurines d'Echecs ‡ l'intÈrieur des commentaires PGN.
+Sympt√¥me 1 : avec le Couteau Suisse activ√©
+A la place de l'√©chiquier, je vois l'ent√™te du PGN avec √©ventuellement
+quelques √©tranges guillemets ou m√™me des figurines d'Echecs √† l'int√©rieur des commentaires PGN.
 
-Solution 1: dÈsactiver pgn4spip puis rÈactiver pgn4spip.
-Cela permet d'activer pgn4spip aprËs le Couteau Suisse.
+Solution 1: d√©sactiver pgn4spip puis r√©activer pgn4spip.
+Cela permet d'activer pgn4spip apr√®s le Couteau Suisse.
 
-Solution 2: si le problËme persiste, essayer ‡ nouveau en vidant le cache de SPIP
-entre la dÈsactivation et la rÈactivation du plugin pgn4spip.
-SPIP 3 : Maintenance > Vider le cache > Cliquer "Vider le cache" dans Taille du rÈpertoire cache.
+Solution 2: si le probl√®me persiste, essayer √† nouveau en vidant le cache de SPIP
+entre la d√©sactivation et la r√©activation du plugin pgn4spip.
+SPIP 3 : Maintenance > Vider le cache > Cliquer "Vider le cache" dans Taille du r√©pertoire cache.
 
-Solution 3: si le problËme persiste, essayer ‡ nouveau en vidant Ègalement le cache du navigateur sinon
-dÈsactiver le Couteau Suisse ou sa lame "AmÈliorations des textes : Guillemets typographiques".
+Solution 3: si le probl√®me persiste, essayer √† nouveau en vidant √©galement le cache du navigateur sinon
+d√©sactiver le Couteau Suisse ou sa lame "Am√©liorations des textes : Guillemets typographiques".
 ____________
 
-SymptÙme 2 : les paramËtres ‡ l'intÈrieur de la balise <pgn> de document attachÈ ne sont pas pris en compte
-Syntaxe erronÈe : <pgn1 | movesDisplay = puzzle bd = s>
+Sympt√¥me 2 : les param√®tres √† l'int√©rieur de la balise <pgn> de document attach√© ne sont pas pris en compte
+Syntaxe erron√©e : <pgn1 | movesDisplay = puzzle bd = s>
 
-Solution: ajouter option="..." et enlever chaque espace sÈparateur 
-sauf aprËs une valeur et le paramËtre suivant.
+Solution: ajouter option="..." et enlever chaque espace s√©parateur 
+sauf apr√®s une valeur et le param√®tre suivant.
 <pgn1|option="movesDisplay=puzzle bd=s sS=35">
 
 Voir test\Test05
@@ -126,16 +126,16 @@ ________________
 
 3.2 Diffusion en live de la partie d'Echecs
 
-test\Test09 et Test10 montrent l'usage du paramËtre movesDisplay=live et refreshMinutes=0.25
-qui gÈrent le rafraichissement pÈriodique de l'Èchiquier ‡ partir du fichier
+test\Test09 et Test10 montrent l'usage du param√®tre movesDisplay=live et refreshMinutes=0.25
+qui g√©rent le rafraichissement p√©riodique de l'√©chiquier √† partir du fichier
 pgnData=http://localhost/spip/plugins/pgn4spip/pgn4web/live/live.pgn
-mis ‡ jour ‡ une autre frÈquence gr‚ce au simulateur 
+mis √† jour √† une autre fr√©quence gr√¢ce au simulateur 
 spip\plugins\pgn4spip\pgn4web\live\live-simulation.sh
 
 C'est un script Unix Bash que l'on peut faire fonctionner dans Windows avec le freeware c:\cygwin
 Lire instructions dans test\Test09
 
-spip\plugins\pgn4spip\test\MacroRunSimu.bat est un outil batch ‡ personnaliser.
-Indiquer le chemin complet du serveur web et le rÈpertoire du plugin.
-Il dÈfinit des macros doskey pour la ligne de commande "Command Prompt" de Windows
+spip\plugins\pgn4spip\test\MacroRunSimu.bat est un outil batch √† personnaliser.
+Indiquer le chemin complet du serveur web et le r√©pertoire du plugin.
+Il d√©finit des macros doskey pour la ligne de commande "Command Prompt" de Windows
 afin de lancer votre serveur web et le (s)imulateur.
