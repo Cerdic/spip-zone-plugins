@@ -191,39 +191,46 @@ ul.noizetier-liste-pages li.page .composition .icone {left: 30px;}
 .formulaire_editer_noisette li.editer_description_code label, .formulaire_editer_noisette li.editer_code label {width:100%; margin-left:0; float:none;}
 
 /* Bloc noisettes affiche_milieu */
-.box.noisettes_milieu .top,
-.box.noisettes_milieu .bottom {
+.box.noisettes-cfg .top,
+.box.noisettes-cfg .bottom {
 	display: none;
 }
-.noisettes_milieu .inner {
+.noisettes-cfg .inner {
 	display: flex;
 	align-items: center;
 	width: 100%;
+	background-color: #f8f8f8; /* Idem bloc compositions */
 }
-.noisettes_milieu .inner .hd {
+.noisettes-cfg .inner .hd {
 	background: transparent;
 	padding-top: 0;
 	padding-bottom: 0;
 }
-.noisettes_milieu h3 {
+.noisettes-cfg h3 {
 	font-size: 1em;
 }
-.noisettes_milieu img {
+.noisettes-cfg img {
 	vertical-align: middle;
 }
-.noisettes_milieu .inner .bd {
+.noisettes-cfg .inner .bd {
 	flex: 1 1 auto;
 	padding: 0.5em;
-}
-.cfg-noisettes {
 	display: flex;
 }
-.cfg-noisettes__bouton {
-	margin-#ENV{left}: auto;
+/* 2ème lien éventuel : affiché sous forme de toggle_link */
+.noisettes-cfg__lien_objet:nth-child(2) {
+	margin-left: auto;
+	padding-left: 1em;
 	font-size: 10px;
 	opacity: 0.66;
 }
-.cfg-noisettes__bouton:hover,
-.cfg-noisettes__bouton:focus {
+.noisettes-cfg__lien_objet:nth-child(2):before {
+	content: "[";
+}
+.noisettes-cfg__lien_objet:nth-child(2):after {
+	content: "]";
+}
+.noisettes-cfg:hover .noisettes-cfg__lien_objet:nth-child(2),
+.noisettes-cfg:focus .noisettes-cfg__lien_objet:nth-child(2) {
 	opacity: 1;
 }

@@ -15,7 +15,7 @@
 	- composition : Composition éventuelle de l'objet
 
 ]
-[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{noisettes-16}|balise_img)] <:noizetier:texte_noisettes:>,noisettes noisettes_milieu})]
+[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{noisettes-16}|balise_img)] <:noizetier:texte_noisettes:>,noisettes-cfg})]
 
 [(#REM) Autorisation de configurer les noisettes pour cet objet précis ]
 #SET{autoriser_objet,#AUTORISER{configurerpage,noizetier,0,'',#ARRAY{objet,#ENV{objet},id_objet,#ENV{id_objet}}}}
@@ -46,55 +46,47 @@
 #SET{afficher_page,#GET{autoriser_objet}|non|ou{#GET{autoriser_objet}|et{#GET{nb_noisettes_objet}|non}}}
 #SET{exposer,#GET{afficher_objet}|et{#GET{afficher_page}}}
 
+[(#GET{afficher_page}|oui)
+#SET{url_page,#URL_ECRIRE{noizetier_page}|parametre_url{page,#ENV{page}}}
+#SET{texte_objets,#ENV{objet}|objet_info{texte_objets}|_T|strtolower}
+#SET{label_noisettes_page,#ENV{composition}|?{
+	#GET{nb_noisettes_page}|?{
+		#GET{nb_noisettes_page}|singulier_ou_pluriel{noizetier:info_1_noisette_composition,noizetier:info_nb_noisettes_composition},
+		#VAL{#VAL{noizetier:info_0_noisette_composition}|_T}
+	},
+	#GET{nb_noisettes_page}|?{
+		#GET{nb_noisettes_page}|singulier_ou_pluriel{noizetier:info_1_noisette_objets,noizetier:info_nb_noisettes_objets,nb,#ARRAY{objets,#GET{texte_objets}}},
+		#VAL{#VAL{noizetier:info_0_noisette_objets}|_T{#ARRAY{objets,#GET{texte_objets}}}}
+	}
+}}
+#SET{exposer_page,#GET{exposer}|et{#GET{source}|=={page}}}
+<a
+	class="noisettes-cfg__lien noisettes-cfg__lien_page"
+	href="[(#GET{url_page})]"
+	title="[(#ENV{composition}|?{<:noizetier:bulle_configurer_composition_noisettes:>,<:noizetier:bulle_configurer_page_noisettes:>}|attribut_html)]"
+>
+#GET{label_noisettes_page}
+</a>
+]
+
 [(#GET{afficher_objet}|oui)
 #SET{url_objet,#URL_ECRIRE{noizetier_page}|parametre_url{objet,#ENV{objet}}|parametre_url{id_objet,#ENV{id_objet}}}
-#SET{label_nb_noisettes_objet,#GET{nb_noisettes_objet}|?{
-	#GET{nb_noisettes_objet}|singulier_ou_pluriel{noizetier:noisettes_configurees_une,noizetier:noisettes_configurees_nb},
-	#VAL{#VAL{noizetier:noisettes_configurees_aucune}|_T}
+#SET{label_noisettes_objet,#GET{nb_noisettes_objet}|?{
+	#GET{nb_noisettes_objet}|singulier_ou_pluriel{noizetier:info_1_noisette_objet,noizetier:info_nb_noisettes_objet},
+	#GET{afficher_page}|?{
+		#VAL{#VAL{noizetier:bouton_configurer_noisettes_objet}|_T},
+		#VAL{#VAL{noizetier:info_0_noisette_objet}|_T}
+	}
 }|strtolower}
 #SET{texte_objet,#ENV{objet}|objet_info{texte_objet}|_T}
 #SET{exposer_objet,#GET{exposer}|et{#GET{source}|=={objet}}}
-<span class="cfg-noisettes cfg-noisettes_objet">
-	<span class="cfg-noisettes__label">
-		<:noizetier:label_noisettes_objet:> : #GET{label_nb_noisettes_objet}
-	</span>
-	<a
-		class="cfg-noisettes__bouton"
-		href="[(#GET{url_objet})]" 
-		title="<:noizetier:bulle_configurer_objet_noisettes|attribut_html:>"
-	>
-	<:noizetier:bouton_configurer:>
-	</a>
-</span>
-]
-
-<BOUCLE_page(NOIZETIER_PAGES)
-	{page}
-	{composition}
-	{si #GET{afficher_page}}
+<a
+	class="noisettes-cfg__lien noisettes-cfg__lien_objet"
+	href="[(#GET{url_objet})]"
+	title="<:noizetier:bulle_configurer_objet_noisettes|attribut_html:>"
 >
-#SET{url_page,#URL_ECRIRE{noizetier_page}|parametre_url{page,#PAGE}}
-#SET{label_nb_noisettes_page,#GET{nb_noisettes_page}|?{
-	#GET{nb_noisettes_page}|singulier_ou_pluriel{noizetier:noisettes_configurees_une,noizetier:noisettes_configurees_nb},
-	#VAL{#VAL{noizetier:noisettes_configurees_aucune}|_T}
-}|strtolower}
-#SET{texte_objets,#TYPE|objet_info{texte_objets}|_T|strtolower}
-#SET{exposer_page,#GET{exposer}|et{#GET{source}|=={page}}}
-<span class="cfg-noisettes cfg-noisettes_page">
-	<span class="cfg-noisettes__label">
-		[(#COMPOSITION|?{
-			<:noizetier:label_noisettes_composition:>,
-			#VAL{noizetier:label_noisettes_page_objets}|_T{#ARRAY{objets,#GET{texte_objets}}}
-		})] : #GET{label_nb_noisettes_page}
-	</span>
-	<a
-		class="cfg-noisettes__bouton"
-		href="[(#GET{url_page})]"
-		title="[(#COMPOSITION|?{<:noizetier:bulle_configurer_composition_noisettes|attribut_html:>,<:noizetier:bulle_configurer_page_noisettes|attribut_html:>})]"
-	>
-	<:noizetier:bouton_configurer:>
-	</a>
-</span>
-</BOUCLE_page>
+#GET{label_noisettes_objet}
+</a>
+]
 
 #BOITE_FERMER
