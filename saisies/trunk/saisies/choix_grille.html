@@ -67,7 +67,7 @@
 					#SET{name, #GET{name}\[\]}
 					#SET{coche, #CLE|in_array{#GET{valeur/#_lignes:CLE, #ARRAY}}}
 				]
-				<input type="#GET{type}" name="#GET{name}" value="#CLE"[ (#GET{coche}|oui)checked="checked"] />
+				<input type="#GET{type}"[ (#ENV{disabled}|oui)disabled="disabled"] name="#GET{name}" value="#CLE"[ (#GET{coche}|oui)checked="checked"] />
 			</td>
 			</BOUCLE_colonnes>
 		</tr>

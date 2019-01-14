@@ -89,13 +89,13 @@ function saisie_traitement_vue($valeur, $env) {
 	if (!function_exists('propre')) {
 		include_spip('inc/texte');
 	}
-
-	$valeur = trim($valeur);
-
+	if (!is_array($valeur)) {
+		$valeur = trim($valeur);
+	}
 	// si traitement est renseigne, alors le champ est deja mis en forme
 	// (saisies)
 	// sinon on fait une mise en forme smart
-	if ($valeur and !isset($env['traitements'])) {
+	if ($valeur and !is_array($valeur) and !isset($env['traitements'])) {
 		if (in_array($env['type_saisie'], array('textarea'))) {
 			$valeur = propre($valeur);
 		} else {
