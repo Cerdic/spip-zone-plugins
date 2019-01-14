@@ -192,7 +192,11 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 		$obligatoire = isset($saisie['options']['obligatoire']) ? $saisie['options']['obligatoire'] : '';
 		$champ = $saisie['options']['nom'];
 		$file = (($saisie['saisie'] == 'input' and isset($saisie['options']['type']) and $saisie['options']['type'] == 'file') or $saisie['saisie'] == 'fichiers');
-		$verifier = isset($saisie['verifier']) ? $saisie['verifier'] : false;
+		if (isset($saisie['verifier']) and $saisie['verifier']) {
+			$verifier = $saisie['verifier'];
+		} else {
+			$verifier = false;
+		}
 
 		// Cas de la saisie 'fichiers':
 		if ($file) {
