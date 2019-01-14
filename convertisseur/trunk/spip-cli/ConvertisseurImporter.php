@@ -180,7 +180,54 @@ class ConvertisseurImporter extends Command {
 						}
 						
 						include_spip("inc/rubriques");
-						$id_rubrique = creer_rubrique_nommee("$hierarchie", $id_parent);
+						
+						// Les éventuels / sont échappés \/ ; exemple : 1999/1999\/06
+						$hierarchie = preg_replace("`\\\/`","`--**--`", $hierarchie);
+						
+						// rétablir les échapemments
+						// ajout  des échapemments à creer_rubrique_nommee($titre, $id_parent = 0, $serveur = '')
+						
+						$arbo = explode("/", $hierarchie);
+						
+						$id_parent_rubrique = $id_parent ;
+						
+						foreach ($arbo as $titre) {
+							// retablir les </multi> et autres balises fermantes html
+							$titre = preg_replace(",<@([a-z][^>]*)>,ims", "</\\1>", $titre);
+							// rétablir les échapemments \/
+							$titre = preg_replace(",`--\*\*--`,","/", $titre);
+							
+							$r = sql_getfetsel("id_rubrique", "spip_rubriques",
+								"titre = " . sql_quote($titre) . " AND id_parent=" . intval($id_parent_rubrique),
+								$groupby = array(), $orderby = array(), $limit = '', $having = array(), $serveur);
+							
+							if ($r !== null) {
+								$id_parent_rubrique = $r;
+							} else {
+								$id_rubrique = sql_insertq('spip_rubriques', array(
+										'titre' => $titre,
+										'id_parent' => $id_parent_rubrique,
+										'statut' => 'prepa'
+									), $desc = array(), $serveur);
+								if ($id_parent_rubrique > 0) {
+									$data = sql_fetsel("id_secteur,lang", "spip_rubriques", "id_rubrique=$id_parent_rubrique",
+										$groupby = array(), $orderby = array(), $limit = '', $having = array(), $serveur);
+									$id_secteur = $data['id_secteur'];
+									$lang = $data['lang'];
+								} else {
+									$id_secteur = $id_rubrique;
+									$lang = $GLOBALS['meta']['langue_site'];
+								}
+								
+								sql_updateq('spip_rubriques', array('id_secteur' => $id_secteur, "lang" => $lang),
+									"id_rubrique=" . intval($id_rubrique), $desc = '', $serveur);
+								
+								// pour la recursion
+								$id_parent_rubrique = $id_rubrique;
+							}
+						}
+						
+						$id_rubrique = intval($id_parent_rubrique);
 						
 						if($descriptif_rubrique OR $texte_rubrique){
 							$up = sql_update('spip_rubriques', array('statut' => sql_quote("publie"), 'texte' => sql_quote($texte_rubrique), 'descriptif' => sql_quote($descriptif_rubrique)), "id_rubrique=$id_rubrique");
