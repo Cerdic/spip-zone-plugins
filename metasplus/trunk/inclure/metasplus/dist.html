@@ -1,4 +1,10 @@
-[(#ENV{debug}|oui)#HTTP_HEADER{Content-Type:text/plain}]
+[(#REM)
+
+	Pour déboguer sur spip.php?page=inclure/metasplus/dist :
+	- var_mode=debug pour le débug normal (sql, etc.)
+	- debug=oui pour avoir un simple retour texte
+
+][(#ENV{var_mode}|=={debug}|?{#HTTP_HEADER{Content-Type:text/html},#ENV{debug}|?{#HTTP_HEADER{Content-Type:text/plain}}})]
 [(#REM)
 
 	Métas+ : ce squelette génère les métas pour Dublin Core, Open Graph et Twitter.
@@ -117,15 +123,21 @@
 [(#REM) Les images : logo de l'objet puis images liées ]
 <BOUCLE_logo_objet(CONDITION){si #ENV{logos}|non}>
 #SET{logo_objet, #ENV{id_objet}|quete_logo_objet{#ENV{objet},on}}
-#SET{logos_auto, #GET{logo_objet}|?{#LISTE{#ARRAY{url,#GET{logo_objet/chemin}}}}
+#SET{logos_auto, #GET{logo_objet}|?{#LISTE{#ARRAY{url,#GET{logo_objet/chemin}}},#ARRAY}}
+#SET{par,#SPIP_VERSION|floatval|>{3.1}|?{rang_lien,largeur}}
+#SET{defaut_tri,#ARRAY{
+	rang_lien, 1,
+	largeur, -1,
+}}
 <BOUCLE_images_objet(DOCUMENTS)
 	{objet}
 	{id_objet}
 	{media = image}
 	{!extension = svg}
 	{!fichier = #GET{logos_auto/0/url}|replace{#VAL{_NOM_PERMANENTS_ACCESSIBLES}|constant}|replace{'\.\./'}}
-	{!par largeur}
+	{tri #GET{par}, #GET{defaut_tri}}
 	{0,#GET{logos_auto}|?{2,3}}
+	{!par largeur}
 	{tout}
 >
 #SET{logos_auto, #GET{logos_auto}|push{#ARRAY{
@@ -135,6 +147,7 @@
 </BOUCLE_images_objet>
 </BOUCLE_logo_objet>
 </BOUCLE_objet>
+
 
 [(#REM)
 
