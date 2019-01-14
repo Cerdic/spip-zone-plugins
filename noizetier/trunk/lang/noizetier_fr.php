@@ -96,6 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_description_blocs_exclus' => 'Vous pouvez choisir d’exclure certains blocs de la configuration de noisettes.',
 	'formulaire_description_explication' => 'Vous pouvez utilisez les raccourcis SPIP usuels, notamment la balise &lt;multi&gt;.',
 	'formulaire_description_peuplement' => 'Vous pouvez peupler automatiquement la nouvelle composition virtuelle avec les noisettes de la page source.',
+	'formulaire_dupliquer_noisette' => 'Dupliquer cette noisette',
 	'formulaire_dupliquer_page' => 'Dupliquer cette composition',
 	'formulaire_dupliquer_page_entete' => 'Dupliquer une page',
 	'formulaire_dupliquer_page_titre' => 'Dupliquer la page « @page@ »',
