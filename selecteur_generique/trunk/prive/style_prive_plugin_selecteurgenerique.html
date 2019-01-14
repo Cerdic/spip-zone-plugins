@@ -1,4 +1,4 @@
-[(#REM)
+[(#REM)<style>
 
 	Ce squelette definit les styles de l'espace prive
 
@@ -11,13 +11,22 @@
 	c'est du text/html !
 ]
 #CACHE{3600*100,cache-client}
-#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
 #SET{claire,##ENV{couleur_claire,edf3fe}}
 #SET{foncee,##ENV{couleur_foncee,3874b0}}
 #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+/**
+ * Passer devant les modales colorbox qui ont un z-index de 9999
+ * En principe la colorbox est avant la liste déroulante, juste avant la fermeture du body.
+ * Virer le sélecteur #colorbox ~ si ça pose problème.
+ */
+#colorbox ~ .ui-front {
+	z-index: 10000;
+}
 
 .ui-menu.ui-autocomplete .ui-menu-item-wrapper {
 		display: block;
