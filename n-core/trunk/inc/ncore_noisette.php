@@ -76,6 +76,7 @@ function noisette_ajouter($plugin, $type_noisette, $conteneur, $rang = 0, $stock
 			}
 		} elseif (is_string($conteneur)) {
 			$id_conteneur = $conteneur;
+			$conteneur = ncore_conteneur_construire($plugin, $id_conteneur, $stockage);
 		}
 
 		// On initialise la description de la noisette à ajouter et en particulier on stocke le tableau et l'id du
