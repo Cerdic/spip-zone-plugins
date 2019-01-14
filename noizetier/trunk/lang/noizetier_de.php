@@ -12,6 +12,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'apercu' => 'Vorschau',
 
+	// B
+	'bouton_configurer_noisettes_objet' => 'Configurer pour ce contenu', # MODIF
+
 	// C
 	'choisir_noisette' => 'Wählen sie die Nuss, welche sie hinzufügen wollen:',
 	'compositions_non_installe' => 'Das Plugin <b>Kompositionen:</b> ist nicht installiert. Das Plugin Nussbaum funktioniert auch ohne, jedoch können sie ihre Kompositionen direkt im Nussbaum-Plugin deklarieren, wenn es aktiv ist.', # MODIF

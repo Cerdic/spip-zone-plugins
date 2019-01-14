@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bloc_sans_noisette' => 'Nootjes toevoegen door gebruik te maken van de knop "een nootje toevoegen", of door het type nootje naar een gewenste plek te schuiven.',
+	'bouton_configurer_noisettes_objet' => 'Configurer pour ce contenu', # MODIF
 	'bulle_activer_composition' => 'Composities op inhoudstype « @type@ » activeren',
 	'bulle_configurer_objet_noisettes' => 'De nootjes configureren die specifiek zijn voor deze inhoud',
 	'bulle_configurer_page_noisettes' => 'De nootjes van de pagina configureren',
@@ -207,9 +208,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ne_pas_definir_d_heritage' => 'Geen geërfde compositie bepalen',
 	'noisette_numero' => 'nootje nummer:',
 	'noisettes_composition' => 'nootjes specifiek voor compositie <i>@composition@</i>:',
-	'noisettes_configurees_aucune' => 'Geen enkel geconfigureerd nootje', # MODIF
-	'noisettes_configurees_nb' => '@nb@ geconfigureerde nootjes', # MODIF
-	'noisettes_configurees_une' => 'Eén geconfigureerd nootje', # MODIF
 	'noisettes_disponibles' => 'Beschikbare types nootjes',
 	'noisettes_page' => 'Specifiek type nootjes voor de bladzijde <i>@type@</i>:',
 	'noisettes_pour' => 'Nootjes voor: ',

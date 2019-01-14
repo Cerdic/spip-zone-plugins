@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bloc_sans_noisette' => 'V tomto bloku nie sú žiadne oriešky.', # MODIF
+	'bouton_configurer_noisettes_objet' => 'Configurer pour ce contenu', # MODIF
 
 	// C
 	'choisir_noisette' => 'Vyberte si oriešok, ktorý chcete pridať:',

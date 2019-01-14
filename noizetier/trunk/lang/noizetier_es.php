@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bloc_sans_noisette' => 'Este bloc no contiene noisette ', # "Bloc" en castellano sería "bloque", y "noisette" "nuez", pero prefiero dejar las palabras  en francés, pues son términos que considero es preferible dejarlos en la lengua de origen. MODIF
+	'bouton_configurer_noisettes_objet' => 'Configurer pour ce contenu', # MODIF
 
 	// C
 	'choisir_noisette' => 'Elija la noisette que usted quiere añadir :',

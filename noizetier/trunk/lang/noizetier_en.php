@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bloc_sans_noisette' => 'Add nuts using the button "add a nut" or by dragging and dropping the desired nut type on this position.
 ',
+	'bouton_configurer_noisettes_objet' => 'Configurer pour ce contenu', # MODIF
 	'bulle_activer_composition' => 'Enable compositions on the content type "@type@"',
 	'bulle_configurer_objet_noisettes' => 'Configure nuts specific to this content',
 	'bulle_configurer_page_noisettes' => 'Configure the nuts of the page',
@@ -179,9 +180,6 @@ nuts on the following pages:', # MODIF
 	'ne_pas_definir_d_heritage' => 'Do not define inherited composition',
 	'noisette_numero' => 'nut number :',
 	'noisettes_composition' => 'Specific nuts to the composition <i>@composition@</i>:',
-	'noisettes_configurees_aucune' => 'No nut configured', # MODIF
-	'noisettes_configurees_nb' => '@nb@ nuts configured', # MODIF
-	'noisettes_configurees_une' => 'A nut configured', # MODIF
 	'noisettes_disponibles' => 'Type of nuts available',
 	'noisettes_page' => 'Nut types specific to the page<i>@type@</i>:',
 	'noisettes_pour' => 'Nuts for:',

@@ -9,6 +9,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// B
+	'bouton_configurer_noisettes_objet' => 'Configurer pour ce contenu', # MODIF
+
 	// C
 	'choisir_noisette' => 'انتخاب فندقي كه مي‌خواهيد اضافه كنيد:',
 	'compositions_non_installe' => '<b>پلاگين تركيب‌ها: </b> اين پلاگين روي سايت شما نصب نشده است. براي كاركرد درست فندق‌ها لازم نيست. با اين همه، وقتي فعال شود، مي‌توانيد به صورت مستقيم در درون «مديريت فندق‌ها»ي خود تركيب‌هاي ايجاد كنيد. 
