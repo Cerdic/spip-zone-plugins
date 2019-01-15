@@ -177,9 +177,6 @@ function formulaires_editer_page_verifier_dist($edition, $page, $redirect = '') 
  * 		- `dupliquer`: copie d'une composition pour créer une nouvelle composition virtuelle
  * @param string $page
  * 		L'identifiant de la page ou de la composition :
- * 		- `modifier`: la composition virtuelle en cours d'édition
- * 		- `créer`: la page source
- * 		- `dupliquer`: la composition source
  * @param string $redirect
  * 		URL de redirection. La valeur dépend du type d'édition.
  *
@@ -273,25 +270,42 @@ function formulaires_editer_page_traiter_dist($edition, $page, $redirect = '') {
 		// de la page source si requis.
 		// -- on préremplit avec les noisettes de la page source, systématiquement en cas de duplication
 		//    ou si demandé, en cas de création.
-		if ($retour_sql) {
+		if ($retour_sql !== false) {
 			if (($type_page != 'page')
 			and (($edition == 'dupliquer') or (($edition == 'creer') and _request('peupler')))) {
-				// Récupération des noisettes de la page source
-				$select = array('plugin', 'rang_noisette', 'type', 'composition', 'bloc', 'type_noisette', 'parametres');
+				// Récupération des noisettes de la page source de profondeur 0, classées par bloc puis par rang.
+				// En effet, la fonction de duplication gérera la récursivité (profondeur > 0) si besoin.
+				include_spip('inc/noizetier_page');
+				$select = array('id_noisette', 'rang_noisette', 'bloc');
 				$from = 'spip_noisettes';
 				$where = array(
 					'plugin=' . sql_quote('noizetier'),
+					'profondeur=0',
 					'type=' . sql_quote($type_page),
 					'composition=' . sql_quote(noizetier_page_extraire_composition($page))
 				);
-				$noisettes_source = sql_allfetsel($select, $from, $where);
-				// Injection des noisettes de la source dans la composition virtuelle en cours de création qui diffère
-				// uniquement par l'identifiant de composition.
+				$order_by = array('bloc', 'rang_noisette');
+				$noisettes_source = sql_allfetsel($select, $from, $where, '', $order_by);
+				// Injection des noisettes de la source dans la composition virtuelle en cours de création.
 				if ($noisettes_source) {
-					foreach ($noisettes_source as $_index => $_noisette) {
-						$noisettes_source[$_index]['composition'] = $composition;
+					$conteneur_destination = array();
+					include_spip('inc/ncore_noisette');
+					$parametrage = array('parametres', 'encapsulation', 'css');
+					foreach ($noisettes_source as $_noisette) {
+						// On calcule le nouveau conteneur sachant que l'identifiant de la page est déjà connu
+						// que le bloc doit être le même que celui de la noisette source et que le conteneur est forcément
+						// un squelette (pas un objet).
+						$conteneur_destination['squelette'] = $_noisette['bloc'] . '/' . $identifiant;
+						// On duplique la noisette source dans le conteneur de la composition virtuelle : le
+						// rang de la noisette source est conservé et le paramétrage entièrement copié
+						noisette_dupliquer(
+							'noizetier',
+							$_noisette['id_noisette'],
+							$conteneur_destination,
+							$_noisette['rang_noisette'],
+							$parametrage
+						);
 					}
-					sql_insertq_multi($from, $noisettes_source);
 				}
 			}
 

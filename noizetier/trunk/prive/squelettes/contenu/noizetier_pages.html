@@ -7,7 +7,7 @@
 <ul class="liste-items liste-pages noizetier-liste-pages">
 <BOUCLE_pages(NOIZETIER_PAGES) {est_page_objet?}{par type, composition}>
 	<li class="item page[(#EST_VIRTUELLE|=={oui}|oui) virtuelle]">
-		<div[(#COMPOSITION|oui) class="composition"]>
+		<div[(#CHAMP_SQL{composition}|oui) class="composition"]>
 			[(#REM) Informations de base sur la page ]
 			<div class="resume">
 				[(#REM) <!-- Inutile d'utiliser l'autorisation configurerpage car
