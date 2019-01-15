@@ -1407,7 +1407,7 @@ EOB;
 					}
 				};
 
-				if ((!$pattern_typecache or preg_match($pattern_typecache, $entry['info']))
+				if ((!isset($pattern_typecache) or !$pattern_typecache or preg_match($pattern_typecache, $entry['info']))
 					and (!$MYREQUEST['SEARCH']
 						or (!$MYREQUEST['WHERE']
 							and preg_match($MYREQUEST['SEARCH'], $entry['info']))
@@ -1417,7 +1417,7 @@ EOB;
 						or ($also_required($entry['info'], $data)== $also_required_bool))
 					) {
 					$descriptif = "%s caches listés, sur un total de %s";
-					if ($_REQUEST['DelSubmit']=='X') {
+					if (isset($_REQUEST['DelSubmit']) and ($_REQUEST['DelSubmit']=='X')) {
 						cachelab_cibler('del', array ('chemin'=>$entry['info']));
 						$i++;
 						$descriptif = "%s caches effacés sur un total de %s caches";
@@ -1603,7 +1603,7 @@ EOB;
 					echo '</td>
 					<td class="td-n center">', $entry['num_hits'], '</td>
 					<td class="td-n right">', $entry['mem_size'], '</td>
-					<td class="td-n center">', date(DATE_FORMAT, $entry['access_time']), '</td>
+					
 					<td class="td-n center">', date(DATE_FORMAT, $entry['creation_time']), '</td>';
 					
 					if ($entry['ttl'])
@@ -1677,7 +1677,8 @@ EOB;
 		</tbody></table>
 		</div>";
 
-		printf("<p>$descriptif</p>", $i, count($list));
+		if (isset ($descriptif))
+			printf("<p>$descriptif</p>", $i, count($list));
 
 		break;
 	
@@ -1757,5 +1758,6 @@ EOB;
 <!--
 Based on APCGUI By R.Becker\n$VERSION
 -->
+
 </body>
 </html>

@@ -12,12 +12,6 @@ include_spip('inc/xray_options_default');
 if (!isset($_GET['exec']) or ($_GET['exec']!='xray')) 
 	return;
 
-// détecter les vidages de caches yc car saturation de l'espace dispo
-if (!apc_exists('apc_key_test_flush')) {
-  spip_log ('xray détecte un vidage du cache APC');
-  apc_store('apc_key_test_flush', date(DATE_RFC2822).': recréation du cache APC (aprés vidage total ?)');
-}
-
 //
 // Le filtre xray_marqueur_invisible met ce qu'il reçoit dans un cache APC 'xray_marqueur_visible'
 // et renvoie une chaine vide pour le html, si bien que ce qui est caché... reste invisible
@@ -31,19 +25,39 @@ function xray_marqueur_invisible($t) {
 
 defined ('_CACHE_KEY') or define('_CACHE_KEY', '');
 if (_CACHE_KEY) 
-	die ("XRay ne fonctionne pas avec des caches cryptés. Ajoutez &nbsp; <code> define('_CACHE_KEY', ''); </code> &nbsp; dans votre mes_options.php");
+	die ("XRay ne fonctionne pas encore avec des caches cryptés. Ajoutez &nbsp; <code> define('_CACHE_KEY', ''); </code> &nbsp; dans votre mes_options.php");
 
 
 global $Memoization;
 $cfg = @unserialize($GLOBALS['meta']['memoization']);
-if ($Memoization and 
-	(($Memoization->methode == 'apc') or ($Memoization->methode == 'apcu'))
-	and $cfg and (($cfg['methode']=='apc') or ($cfg['methode']=='apcu'))) {
-	include_once ('xray_apc.php');
-	exit;
-}
+$err = '';
+if (!$Memoization or !$cfg )
+	$err = "Pour XRay, activez memoization par apc ou apcu";
+elseif (($Memoization->methode != 'apc') and ($Memoization->methode != 'apcu'))
+	$err = "Le plugin XRay nécessite d'activer le plugin memoization avec APC ou APCu";
 else {
-	echo "Erreur : le plugin XRay nécessite d'activer le plugin memoization avec APC ou APCu";
-	exit;
-};
+	$methode = $Memoization->methode;
+	$fexists = $methode.'_exists';
+	if (!function_exists($fexists))
+		$err = "Memoization est activée avec $methode, mais il manque la fonction $fexists";
+}
+	
+if ($err) {
+	if (isset($_GET['exec']) and ($_GET['exec']=='xray')) {
+		echo "<h1>$err</h1>";
+		exit;
+	}
+	spip_log($err, 'xray');
+	return;
+}
 
+// détecter les vidages de caches yc car saturation de l'espace dispo
+$fstore = $methode.'_store';
+if (!$fexists($methode.'_key_test_flush')) {
+  spip_log ("xray détecte un vidage du cache $methode");
+  $fstore($methode.'_key_test_flush', date(DATE_RFC2822).': recréation du cache APC ou APCu (aprés vidage total ?)');
+}
+
+include_once ('xray_apc.php');
+
+exit;
