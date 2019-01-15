@@ -37,6 +37,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'construire_verifications_aucune' => 'Aucune',
 	'construire_verifications_label' => 'Type de vérification à effectuer',
 
+	// D
+	'data_cols_label' => 'Réponses possibles (en colonne)',
+	'data_rows_label' => 'Questions (en ligne)',
+
 	// E
 	'erreur_generique' => 'Il y a des erreurs dans les champs ci-dessous, veuillez vérifier vos saisies',
 	'erreur_option_nom_unique' => 'Ce nom est déjà utilisé par un autre champ et il doit être unique dans ce formulaire.',
@@ -167,12 +171,10 @@ Vous trouverez la <a href="https://contrib.spip.net/5080">documentation complèt
 	'saisie_auteurs_titre' => 'Auteurs',
 	'saisie_case_explication' => 'Permet d’activer ou de désactiver quelque chose.',
 	'saisie_case_titre' => 'Case unique',
-	'data_cols_label' => 'Réponses possibles (en colonne)',
-	'data_rows_label' => 'Questions (en ligne)',
-	'saisie_choix_grille_titre' => 'Grille de questions',
-	'saisie_choix_grille_explication' => 'Permet de poser une série de questions à choix multiple d\'une manière uniformisé et sous forme de grille',
 	'saisie_checkbox_explication' => 'Permet de choisir plusieurs options avec des cases.',
 	'saisie_checkbox_titre' => 'Cases à cocher',
+	'saisie_choix_grille_explication' => 'Permet de poser une série de questions à choix multiple d’une manière uniformisé et sous forme de grille',
+	'saisie_choix_grille_titre' => 'Grille de questions',
 	'saisie_date_explication' => 'Permet de saisir une date ? l’aide d’un calendrier',
 	'saisie_date_titre' => 'Date',
 	'saisie_destinataires_explication' => 'Permet de choisir un ou plusieurs destinataires parmis des auteurs pré-sélectionné.',
