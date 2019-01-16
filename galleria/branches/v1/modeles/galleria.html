@@ -1,13 +1,11 @@
 <B_galleria>
 #ANCRE_PAGINATION
 #SET{artUID,#UID}
-[(#SET{largeur,[(#ENV{width,0}|match{.*\..*}|?{0,#ENV{width,0}})]})]
-[(#SET{hauteur,[(#ENV{height,0}|match{.*\..*}|?{0,#ENV{height,0}})]})]
 [<p class="pagination">(#PAGINATION)</p>]
 <div id="galleria#GET{artUID}">
 <BOUCLE_galleria (DOCUMENTS){id_article=#ENV{id}}{extension==jpg|gif|png} {pagination #ENV{pagesize,30}} {mode=#ENV{mode,image}} {par ?#ENV{tri}} {inverse ?#ENV{senstri}}>
-  <a href="#FICHIER"><img src="[(#FICHIER|image_passe_partout{#GET{largeur},#GET{hauteur}}
-    |image_recadre{#GET{largeur},#GET{hauteur},center}|extraire_attribut{src})]" [title="(#TITRE|textebrut)" ][alt="(#DESCRIPTIF|textebrut)" ]/></a>
+  <a href="#FICHIER"><img src="[(#FICHIER|image_passe_partout{#ENV{largeurvignette,0},#ENV{hauteurvignette,0}}
+    |image_recadre{#ENV{largeurvignette,0},#ENV{hauteurvignette,0},center}|extraire_attribut{src})]" [title="(#TITRE|textebrut)" ][alt="(#DESCRIPTIF|textebrut)" ]/></a>
 </BOUCLE_galleria>
 </div>
 [<p class="pagination">(#PAGINATION)</p>]
