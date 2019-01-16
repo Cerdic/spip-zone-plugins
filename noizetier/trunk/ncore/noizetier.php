@@ -84,7 +84,7 @@ function noizetier_type_noisette_stocker($plugin, $types_noisettes, $recharger) 
  *        nécessite d'être compléter avant son stockage.
  *
  * @return array
- *        Description du type de noisette éventuellement complétée par le plugin utilisateur.
+ *        Description du type de noisette complétée avec le type de page et la composition (éventuellement vides).
  */
 function noizetier_type_noisette_completer($plugin, $description) {
 
@@ -150,7 +150,7 @@ function noizetier_type_noisette_decrire($plugin, $type_noisette) {
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param string $information
- *        Identifiant d'un champ de la description d'un type de noisette ou `signature`.
+ *        Identifiant d'un champ de la description d'un type de noisette.
  *        Si l'argument est vide, la fonction renvoie les descriptions complètes et si l'argument est
  *        un champ invalide la fonction renvoie un tableau vide.
  *
@@ -160,17 +160,25 @@ function noizetier_type_noisette_decrire($plugin, $type_noisette) {
  */
 function noizetier_type_noisette_lister($plugin, $information = '') {
 
+	// Initialiser le tableau de sortie en cas d'erreur
+	$types_noisettes = array();
+
 	$from = 'spip_types_noisettes';
-	$where = array('plugin=' . sql_quote($plugin));
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$table = $trouver_table($from);
+	$champs = array_keys($table['field']);
 	if ($information) {
+		// Si une information précise est demandée on vérifie sa validité
+		$information_valide = in_array($information, $champs);
 		$select = array('type_noisette', $information);
 	} else {
 		// Tous les champs sauf le timestamp 'maj' sont renvoyés.
-		$trouver_table = charger_fonction('trouver_table', 'base');
-		$table = $trouver_table($from);
-		$select = array_diff(array_keys($table['field']), array('maj'));
+		$select = array_diff($champs, array('maj'));
 	}
-	if ($types_noisettes = sql_allfetsel($select, $from, $where)) {
+	$where = array('plugin=' . sql_quote($plugin));
+
+	if ((!$information or ($information and $information_valide))
+	and ($types_noisettes = sql_allfetsel($select, $from, $where))) {
 		if ($information) {
 			$types_noisettes = array_column($types_noisettes, $information, 'type_noisette');
 		} else {
