@@ -50,6 +50,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_choix_label' => 'Type de choix',
 	'option_type_choix_radio' => 'Choix unique (boutons radios)',
 
+	'places_dispo_label_case' => 'Afficher le nombre de places restantes',
+
 	// S
 	'saisie_evenements_chronologie_texte' => 'Les critères de date pour les choix des événements sont cumulatifs avec les critères précédents d’association à des objets.',
 	'saisie_evenements_explication' => 'Un choix d’un ou plusieurs événements',

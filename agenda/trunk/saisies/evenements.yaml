@@ -46,6 +46,12 @@ options:
           label_case: '<:saisie_evenements:masquer_heure_label_case:>'
           li_class: 'pleine_largeur'
       -
+        saisie: 'case'
+        options:
+          nom: 'places_dispo'
+          label_case: '<:saisie_evenements:places_dispo_label_case:>'
+          li_class: 'pleine_largeur'
+      -
         saisie: 'radio'
         options:
           nom: 'type_choix'
