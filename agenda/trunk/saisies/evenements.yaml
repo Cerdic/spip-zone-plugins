@@ -58,6 +58,7 @@ options:
           label: '<:saisie_evenements:option_type_choix_label:>'
           data:
             radio:  '<:saisie_evenements:option_type_choix_radio:>'
+            selection:  '<:saisie_evenements:option_type_choix_selection:>'
             checkbox:  '<:saisie_evenements:option_type_choix_checkbox:>'
           defaut: 'radio'
       -
