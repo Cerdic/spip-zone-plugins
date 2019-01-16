@@ -39,7 +39,9 @@ function traiter_participation_dist($args, $retours){
 		$organisme_participation = _request($options['champ_organisme_participation']);
 	}
 
-	if ($options['champ_choix_participation']) {
+	if ($options['participation_auto'] == 'auto') {
+		$choix_participation = 'oui';
+	} elseif ($options['champ_choix_participation']) {
 		$choix_participation = _request($options['champ_choix_participation']);
 
 		if ($options['choix_participation_oui']) {

@@ -7,47 +7,68 @@ options:
     options:
       texte: '<:formidableparticipation:traiter_participation_necessite_explication:>'
   -
-    saisie: 'champ'
+    saisie: 'selection'
     options:
-      nom: 'champ_choix_participation'
-      label: '<:formidableparticipation:traiter_participation_champ_choix_participation_label:>'
-      explication: '<:formidableparticipation:traiter_participation_champ_choix_participation_explication:>'
-      env: true
+      nom: 'participation_auto'
+      label: '<:formidableparticipation:traiter_participation_champ_participation_auto_label:>'
+      data:
+        auto: '<:formidableparticipation:traiter_participation_champ_participation_auto_choix_auto_label:>'
+        variable: '<:formidableparticipation:traiter_participation_champ_participation_auto_choix_variable_label:>'
   -
-    saisie: 'input'
+    saisie: 'fieldset'
     options:
-      nom: 'choix_participation_oui'
-      label: '<:formidableparticipation:traiter_participation_champ_participation_oui:>'
+      nom: 'participation'
+      label: '<:formidableparticipation:traiter_participation_champ_participation_label:>'
+      afficher_si: '@traitements[participation][participation_auto]@=="variable"'
+    saisies:
+      -
+        saisie: 'champ'
+        options:
+          nom: 'champ_choix_participation'
+          label: '<:formidableparticipation:traiter_participation_champ_choix_participation_label:>'
+          explication: '<:formidableparticipation:traiter_participation_champ_choix_participation_explication:>'
+          env: true
+      -
+        saisie: 'input'
+        options:
+          nom: 'choix_participation_oui'
+          label: '<:formidableparticipation:traiter_participation_champ_participation_oui:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'choix_participation_non'
+          label: '<:formidableparticipation:traiter_participation_champ_participation_non:>'
+      -
+        saisie: 'champ'
+        options:
+          nom: 'champ_email_participation'
+          label: '<:formidableparticipation:traiter_participation_champ_email_label:>'
+          obligatoire: 'oui'
+          env: true
   -
-    saisie: 'input'
+    saisie: 'fieldset'
     options:
-      nom: 'choix_participation_non'
-      label: '<:formidableparticipation:traiter_participation_champ_participation_non:>'
-  -
-    saisie: 'champ'
-    options:
-      nom: 'champ_email_participation'
-      label: '<:formidableparticipation:traiter_participation_champ_email_label:>'
-      obligatoire: 'oui'
-      env: true
-  -
-    saisie: 'champ'
-    options:
-      nom: 'champ_nom_participation'
-      label: '<:formidableparticipation:traiter_participation_option_champ_nom_label:>'
-      env: true
-  -
-    saisie: 'champ'
-    options:
-      nom: 'champ_prenom_participation'
-      label: '<:formidableparticipation:traiter_participation_option_champ_prenom_label:>'
-      env: true
-  -
-    saisie: 'champ'
-    options:
-      nom: 'champ_organisme_participation'
-      label: '<:formidableparticipation:traiter_participation_option_champ_organisme_label:>'
-      env: true
+      nom: 'participant'
+      label: '<:formidableparticipation:traiter_participation_champ_participant:>'
+    saisies:
+      -
+        saisie: 'champ'
+        options:
+          nom: 'champ_nom_participation'
+          label: '<:formidableparticipation:traiter_participation_option_champ_nom_label:>'
+          env: true
+      -
+        saisie: 'champ'
+        options:
+          nom: 'champ_prenom_participation'
+          label: '<:formidableparticipation:traiter_participation_option_champ_prenom_label:>'
+          env: true
+      -
+        saisie: 'champ'
+        options:
+          nom: 'champ_organisme_participation'
+          label: '<:formidableparticipation:traiter_participation_option_champ_organisme_label:>'
+          env: true
   -
     saisie: 'input'
     options:

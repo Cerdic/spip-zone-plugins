@@ -22,7 +22,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_participation_option_champ_prenom_label' => 'Champ du Prénom',
 	'traiter_participation_option_champ_organisme_label' => 'Champ de l\'Organisme',
 	'traiter_participation_necessite_explication' => 'Pour la prise en charge de la participation, il est nécessaire d\'enregistrer les résultats dans la base de données.',
-
+	'traiter_participation_champ_participation_auto_label' => 'Participation',
+	'traiter_participation_champ_participation_label' => 'Champs de participation',
+	'traiter_participation_champ_participant' => 'Informations sur le ou la participant·e',
+	'traiter_participation_champ_participation_auto_choix_auto_label' => 'Le remplissage du formulaire implique automatiquement la participation à l\'évènement',
+	'traiter_participation_champ_participation_auto_choix_variable_label' => 'La participation à l\'événement dépend d\'un champ du formulaire',
 
 );
 
