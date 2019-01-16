@@ -8,8 +8,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'formidableparticipation_titre' => 'Formulaires de participation',
 
-	'traiter_participation_titre' => 'Participation',
-	'traiter_participation_description' => 'Traiter une participation à la saisie du formulaire',
+	'traiter_participation_titre' => 'Participation à un évènement',
+	'traiter_participation_description' => 'Inscrit comme participant·e à un évènement',
 
 	'traiter_participation_champ_email_label' => 'Champ de l\'Email',
 	'traiter_participation_champ_choix_participation_label' => 'Champ de la participation',
