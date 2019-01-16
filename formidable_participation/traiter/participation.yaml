@@ -22,7 +22,7 @@ options:
     saisie: 'input'
     options:
       nom: 'choix_participation_non'
-      label: '<:formidableparticipation:traiter_participation_champ_participation_non:>'     
+      label: '<:formidableparticipation:traiter_participation_champ_participation_non:>'
   -
     saisie: 'champ'
     options:

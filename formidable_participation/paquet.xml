@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/formidableparticipation-64.png"
-	documentation="https://contrib.spip.net/4532" 
+	documentation="https://contrib.spip.net/4532"
 	schema="1.0.0"
 >
 
@@ -15,7 +15,7 @@
 
 	<licence>GNU/GPL</licence>
 	<pipeline nom="traiter_formidableparticipation" inclure="formidableparticipation_pipelines.php" />
-	
+
 	<necessite nom="formidable" compatibilite="[3.15.0;3.*.*]" />
 	<utilise nom="agenda" compatibilite="[3.14.3;[" />
 

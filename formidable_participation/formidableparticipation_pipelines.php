@@ -27,7 +27,7 @@ function formidableparticipation_traiter_formidableparticipation($flux){
 		$prenom = $flux['args']['prenom'];
 		if($flux['args']['organisme']) $organisme = '('.$flux['args']['organisme'].')';
 		$nom = "$prenom $nom $organisme";
-		
+
 		$champs = array(
 			'id_auteur'=>$id_auteur,
 			'nom'=>$nom,
@@ -36,7 +36,7 @@ function formidableparticipation_traiter_formidableparticipation($flux){
 			'id_evenement'=>$id_evenement,
 			'date'=>date('Y-m-d H:i:s'),
 		);
-		
+
 		// si evenement, on insere le participant et ses données
 		// et on laisse le traitement du nombre de places à la charge du webmestre et du squelette evenements
 		if(isset($id_evenement)){
@@ -46,9 +46,9 @@ function formidableparticipation_traiter_formidableparticipation($flux){
 				}
 				else{
 					sql_insertq("spip_evenements_participants", $champs);
-				}    
+				}
 		}
-		
+
 		spip_log("pipeline evenement $id_evenement pour $email et id_auteur=$id_auteur reponse=$reponse","formidable_participation");
 	}
 
