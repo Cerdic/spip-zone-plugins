@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_debut_min_fixe_label' => 'Date de début minimale',
 	'date_debut_min_mobile_explication' => 'Proposer uniquement les événements qui commencent  à partir de <i>x</i> jours. Pour les événements qui commencent demain ou plus tard, mettre 1. Pour les événements qui commencent  hier ou plus tard, mettre -1.',
 	'date_debut_min_mobile_label' => 'Date de début minimale (mobile)',
+	'disable_complet_label_case' => 'Empêcher de choisir les évènements où les inscriptions sont complètes',
 
 	// I
 	'id_article_explication' => 'Proposer les événements des articles suivants.',

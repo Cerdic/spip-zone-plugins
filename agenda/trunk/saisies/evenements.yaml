@@ -62,6 +62,12 @@ options:
             checkbox:  '<:saisie_evenements:option_type_choix_checkbox:>'
           defaut: 'radio'
       -
+        saisie: 'case'
+        options:
+          nom: 'disable_complet'
+          label_case: '<:saisie_evenements:disable_complet_label_case:>'
+          li_class: 'pleine_largeur'
+      -
         saisie: 'explication'
         options:
           nom: 'saisie_evenements_id'
