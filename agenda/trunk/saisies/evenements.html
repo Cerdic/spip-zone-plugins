@@ -1,5 +1,10 @@
 #SET{description,#ARRAY}
 #SET{disable_choix,''}
+[(#ENV{afficher_annee_obligatoire}|=={on}|?{
+	#SET{forme,annee},
+	#SET{forme,''}
+}
+)]
 <BOUCLE_evenements(EVENEMENTS)
 	{par date_debut}
 	{id_evenement ?IN #ENV{id_evenement}|explode{","}}
@@ -14,11 +19,6 @@
 	{inscription ?IN #ENV{inscription}|substr{5,1}}
 	>
 	[(#REM) Le mult -1 permet d'avoir une numérotation logique dans le constructeur : nombre négatif pour le passé, positif pour le futur)]
-	[(#ENV{afficher_annee_obligatoire}|=={on}|?{
-		#SET{forme,annee},
-		#SET{forme,''}
-	}
-	)]
 	[(#ENV{masquer_heure}|oui)#SET{horaire,#HORAIRE}]
 	[(#ENV{masquer_heure}|non)#SET{horaire,oui}]
 	#SET{places_dispo,''}
