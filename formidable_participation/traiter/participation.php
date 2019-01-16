@@ -18,31 +18,39 @@ function traiter_participation_dist($args, $retours){
 	$traitements = unserialize($formulaire['traitements']);
 
 	// saisies dans le formulaire
-	if ($options['champ_choix_participation'])
-	  $choix_participation = _request($options['champ_choix_participation']);
+	if ($options['champ_choix_participation']) {
+		$choix_participation = _request($options['champ_choix_participation']);
+	}
 
-	if ($options['champ_email_participation'])
-	  $email_participation = _request($options['champ_email_participation']);
-
-
-	if ($options['champ_nom_participation'])
-	  $nom_participation = _request($options['champ_nom_participation']);
+	if ($options['champ_email_participation']) {
+		$email_participation = _request($options['champ_email_participation']);
+	}
 
 
-	if ($options['champ_prenom_participation'])
-	  $prenom_participation = _request($options['champ_prenom_participation']);
+	if ($options['champ_nom_participation']) {
+		$nom_participation = _request($options['champ_nom_participation']);
+	}
 
-	if ($options['champ_organisme_participation'])
-	  $organisme_participation = _request($options['champ_organisme_participation']);
+	if ($options['champ_prenom_participation']) {
+		$prenom_participation = _request($options['champ_prenom_participation']);
+	}
 
-	if ($options['champ_choix_participation']){
-		  $choix_participation = _request($options['champ_choix_participation']);
+	if ($options['champ_organisme_participation']) {
+		$organisme_participation = _request($options['champ_organisme_participation']);
+	}
 
-		  if ($options['choix_participation_oui'])
-		  	  $participation_oui = $options['choix_participation_oui'];
+	if ($options['champ_choix_participation']) {
+		$choix_participation = _request($options['champ_choix_participation']);
 
-		  if($choix_participation == $participation_oui) $choix_participation='oui';
-		  else $choix_participation='non';
+		if ($options['choix_participation_oui']) {
+			$participation_oui = $options['choix_participation_oui'];
+		}
+
+		if($choix_participation == $participation_oui) {
+			$choix_participation='oui';
+		} else {
+			$choix_participation='non';
+		}
 	}
 
 	$options = array(
