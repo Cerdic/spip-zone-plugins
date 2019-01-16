@@ -55,8 +55,15 @@ function traiter_participation_dist($args, $retours){
 		}
 	}
 
+	// détermination de l'évènement où s'inscrire
+	if ($options['evenement_type'] == 'fixe') {
+		$id_evenement = $options['id_evenement_participation'];
+	} elseif ($options['evenement_type'] == 'variable' and isset($options['champ_evenement_participation'])) {
+		$id_evenement = _request($options['champ_evenement_participation']);
+	}
+
 	$options = array(
-		'id_evenement'=> $options['id_evenement_participation'], //si oui, traitement avec agenda
+		'id_evenement'=> $id_evenement, //si oui, traitement avec agenda
 		'choix_participation' => $choix_participation,
 		'email' => $email_participation,
 		'nom' => $nom_participation,

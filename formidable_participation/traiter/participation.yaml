@@ -70,8 +70,31 @@ options:
           label: '<:formidableparticipation:traiter_participation_option_champ_organisme_label:>'
           env: true
   -
-    saisie: 'input'
+    saisie: 'fieldset'
     options:
-      nom: 'id_evenement_participation'
-      label: '<:formidableparticipation:traiter_participation_id_evenement_participation:>'
-      explication: '<:formidableparticipation:traiter_participation_id_evenement_participation_explication:>'
+      nom: 'evenement'
+      label: '<:formidableparticipation:traiter_participation_evenement_label:>'
+    saisies:
+      -
+        saisie: 'selection'
+        options:
+          nom: 'evenement_type'
+          label: '<:formidableparticipation:traiter_participation_champ_evenement_type_label:>'
+          data:
+            fixe: '<:formidableparticipation:traiter_participation_champ_evenement_type_fixe_label:>'
+            variable: '<:formidableparticipation:traiter_participation_champ_evenement_type_variable_label:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'id_evenement_participation'
+          label: '<:formidableparticipation:traiter_participation_id_evenement_participation:>'
+          explication: '<:formidableparticipation:traiter_participation_id_evenement_participation_explication:>'
+          afficher_si : '@traitements[participation][evenement_type]@=="fixe"'
+      -
+        saisie: 'champ'
+        options:
+          nom: 'champ_evenement_participation'
+          label: '<:formidableparticipation:traiter_participation_champ_evenement_participation_label:>'
+          env: true
+          forcer_type: 'evenements'
+          afficher_si : '@traitements[participation][evenement_type]@=="variable"'

@@ -27,7 +27,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_participation_champ_participant' => 'Informations sur le ou la participant·e',
 	'traiter_participation_champ_participation_auto_choix_auto_label' => 'Le remplissage du formulaire implique automatiquement la participation à l\'évènement',
 	'traiter_participation_champ_participation_auto_choix_variable_label' => 'La participation à l\'événement dépend d\'un champ du formulaire',
-
+	'traiter_participation_evenement_label' => "Choix de l'évènement auquel participer",
+	'traiter_participation_champ_evenement_type_label' => 'Type d\'évènement',
+	'traiter_participation_champ_evenement_type_fixe_label' => 'Évènement fixe',
+	'traiter_participation_champ_evenement_type_variable_label' => 'Évènement variable - dépendant d\'un champ',
+	'traiter_participation_champ_evenement_participation_label' => 'Champ d\'évènement',
 );
 
 ?>
