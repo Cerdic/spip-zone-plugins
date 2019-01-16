@@ -180,3 +180,25 @@ function pages_autorisation_defaut_dist($qui) {
 	return (($qui['statut'] == '0minirezo')
 			and !$qui['restreint']);
 }
+
+/**
+ * Autorisation de créer un article dans une rubrique $id
+ *
+ * Il faut pouvoir voir la rubrique et pouvoir créer un article…
+ * y compris tant qu'il n'y a pas de rubrique (pour une page unique)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type Type d'objet sur lequel appliquer l'action
+ * @param  int $id Identifiant de l'objet
+ * @param  array $qui Description de l'auteur demandant l'autorisation
+ * @param  array $opt Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_rubrique_creerarticledans($faire, $type, $id, $qui, $opt) {
+	return
+		(($id == -1) and pages_autorisation_defaut_dist($qui))
+		OR ($id
+		and autoriser('voir', 'rubrique', $id)
+		and autoriser('creer', 'article'));
+}
+
