@@ -269,7 +269,9 @@ function saisies_modifier($saisies, $id_ou_nom_ou_chemin, $modifs) {
 function saisies_transformer_noms($saisies, $masque, $remplacement) {
 	if (is_array($saisies)) {
 		foreach ($saisies as $cle => $saisie) {
-			$saisies[$cle]['options']['nom'] = preg_replace($masque, $remplacement, $saisie['options']['nom']);
+			if (isset($saisies[$cle]['options']['nom'])) {
+				$saisies[$cle]['options']['nom'] = preg_replace($masque, $remplacement, $saisie['options']['nom']);
+			}
 			if (isset($saisie['saisies']) and is_array($saisie['saisies'])) {
 				$saisies[$cle]['saisies'] = saisies_transformer_noms($saisie['saisies'], $masque, $remplacement);
 			}
