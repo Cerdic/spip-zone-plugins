@@ -326,7 +326,7 @@ $conv_formats['MediaWiki_SPIP'] = array(
 	$conv_formats['XMLOCR_SPIP'] = 'xml_ocr'; // function extract/
 	$conv_formats['XMLDE_SPIP'] = 'xml_de'; // function extract/
 	$conv_formats['PMG_SPIP'] = 'pmg'; // function extract/
-
+	$conv_formats['SaveAsXML'] = 'saveasxml'; // function extract/
 	//
 	//  Les conversions SPIP vers qqchose ....
 	//

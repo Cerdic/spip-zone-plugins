@@ -78,6 +78,11 @@ function inc_xml_de_to_array_dist($u){
 	return activer_iterateur('xml_de', $u) ;
 }
 
+// Iterateur pour l'extracteur SaveAsXML
+function inc_SaveAsXML_to_array_dist($u){
+	return activer_iterateur('saveasxml', $u) ;
+}
+
 // Iterateur pour l'extracteur pmg
 function inc_pmg_to_array_dist($u){
 	// le format PMG est une liste d'articles <artikel-liste> qui contient des <artikel>.
