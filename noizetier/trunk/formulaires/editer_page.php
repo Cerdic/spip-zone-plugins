@@ -320,7 +320,8 @@ function formulaires_editer_page_traiter_dist($edition, $page, $redirect = '') {
 	} else {
 		$retour['message_ok'] = _T('noizetier:formulaire_composition_mise_a_jour');
 		if (in_array($edition, array('creer', 'dupliquer'))) {
-			$retour['redirect'] = $redirect;
+			// On redirige vers la page de la composition virtuelle venant d'être créée.
+			$retour['redirect'] = parametre_url(generer_url_ecrire('noizetier_page'), 'page', $identifiant);
 		} elseif ($redirect) {
 			if (strncmp($redirect, 'javascript:', 11) == 0) {
 				$retour['message_ok'] .= '<script type="text/javascript">/*<![CDATA[*/'.substr($redirect, 11).'/*]]>*/</script>';
