@@ -5,8 +5,8 @@
 }
 )]
 <BOUCLE_evenements(EVENEMENTS) {par date_debut} {id_evenement IN #ENV{valeur}}>
-	[(#ENV{masquer_heure}|oui)#SET{horaire,#HORAIRE}]
-	[(#ENV{masquer_heure}|non)#SET{horaire,oui}]
+	[(#ENV{masquer_heure}|oui)#SET{horaire,non}]
+	[(#ENV{masquer_heure}|non)#SET{horaire,#HORAIRE}]
 	[(#ENV{type_affichage}|=={titre_date}|oui)
 		#SET{texte,#TITRE|concat{' - ', #DATE_DEBUT|agenda_affdate_debut_fin{#DATE_FIN,#GET{horaire},#GET{forme}}}}
 	]

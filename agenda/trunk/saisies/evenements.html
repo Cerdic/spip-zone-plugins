@@ -19,7 +19,7 @@
 	{inscription ?IN #ENV{inscription}|substr{5,1}}
 	>
 	[(#REM) Le mult -1 permet d'avoir une numérotation logique dans le constructeur : nombre négatif pour le passé, positif pour le futur)]
-	[(#ENV{masquer_heure}|oui)#SET{horaire,#HORAIRE}]
+	[(#ENV{masquer_heure}|oui)#SET{horaire,non}]
 	[(#ENV{masquer_heure}|non)#SET{horaire,oui}]
 	#SET{places_dispo,''}
 	#SET{inscrits,0}
