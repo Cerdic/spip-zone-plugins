@@ -40,6 +40,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'editer_menus_editer' => 'Pas menu aan',
+	'editer_menus_entrees_editer' => 'Dit menu item aanpassen',
+	'editer_menus_entrees_nouveau' => 'Een nieuw menu item aanmaken',
+	'editer_menus_entrees_titre' => 'Menu items van de site',
 	'editer_menus_explication' => 'Maak en configureer hier de menu’s van de site.',
 	'editer_menus_exporter' => 'Exporteer dit menu',
 	'editer_menus_nouveau' => 'Maak een nieuw menu',
@@ -130,15 +133,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_1_menu' => 'Een menu',
+	'info_1_menu_entree' => 'Een menu item',
 	'info_afficher_articles' => 'De artikelen worden in het menu opgenomen.',
 	'info_articles_max' => 'Alleen indien de rubriek maximaal @max@ artikelen heeft',
 	'info_articles_max_affiches' => 'Beperkt tot @max@ artikelen',
 	'info_aucun_menu' => 'Geen menu',
+	'info_aucun_menu_entree' => 'Geen enkel menu item',
 	'info_classe_parent' => 'Class van bovenliggende elementen: ',
 	'info_connexion_obligatoire' => 'Aangemeld',
 	'info_deconnexion_obligatoire' => 'Niet aangemeld',
 	'info_masquer_articles_uniques' => 'Enkele artikelen verborgen',
 	'info_nb_menus' => '@nb@ menu’s',
+	'info_nb_menus_entrees' => '@nb@ menu items',
 	'info_numero_menu' => 'MENU NUMMER:',
 	'info_page_speciale' => 'Link naar bladzijde « @page@ »',
 	'info_page_speciale_zajax' => 'Modalbox van bladzijde « @page@ » voor blok « @bloc@ &#187',
@@ -182,8 +188,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_ajouter_menu' => 'Een menu toevoegen',
+	'texte_ajouter_menu_entree' => 'Een menu item toevoegen',
 	'texte_creer_associer_menu' => 'Een menu maken en koppelen',
+	'texte_creer_associer_menu_entree' => 'Een menu item maken en koppelen',
 	'titre_menu' => 'Menu',
+	'titre_menu_entrée' => 'Menu item',
 	'titre_objets_lies_menu' => 'Aan dit menu gekoppeld',
 	'tous_les_articles' => '... Alle artikelen',
 	'toutes_les_rubriques' => '... Alle rubrieken',
