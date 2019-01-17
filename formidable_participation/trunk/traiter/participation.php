@@ -62,20 +62,24 @@ function traiter_participation_dist($args, $retours){
 		$id_evenement = _request($options['champ_evenement_participation']);
 	}
 
-	$options = array(
-		'id_evenement'=> $id_evenement, //si oui, traitement avec agenda
-		'choix_participation' => $choix_participation,
-		'email' => $email_participation,
-		'nom' => $nom_participation,
-		'prenom' => $prenom_participation,
-		'organisme' => $organisme_participation,
-		'id_auteur' => (isset($GLOBALS['visiteur_session']['id_auteur'])?$GLOBALS['visiteur_session']['id_auteur']:0),
-		'parrain' => 'form'.$formulaire['id_formulaire'].':'.$formulaire['identifiant'],
-		'tracking_id' => $retours['id_formulaires_reponse'],
-	);
-
-	// fabrique le pipeline traiter_formidableparticipation.
-	$pipeline = pipeline('traiter_formidableparticipation',array('args'=>$options,'data'=>$pipeline));
+	if (!is_array($id_evenement)) {
+		$id_evenement = array($id_evenement);
+	}
+	foreach ($id_evenement as $evenement) {
+		$options = array(
+			'id_evenement'=> $evenement, //si oui, traitement avec agenda
+			'choix_participation' => $choix_participation,
+			'email' => $email_participation,
+			'nom' => $nom_participation,
+			'prenom' => $prenom_participation,
+			'organisme' => $organisme_participation,
+			'id_auteur' => (isset($GLOBALS['visiteur_session']['id_auteur'])?$GLOBALS['visiteur_session']['id_auteur']:0),
+			'parrain' => 'form'.$formulaire['id_formulaire'].':'.$formulaire['identifiant'],
+			'tracking_id' => $retours['id_formulaires_reponse'],
+		);
+		// fabrique le pipeline traiter_formidableparticipation.
+		$pipeline = pipeline('traiter_formidableparticipation',array('args'=>$options,'data'=>$pipeline));
+	}
 
 	// noter qu'on a deja fait le boulot, pour ne pas risquer double appel
 	$retours['traitements']['participation'] = true;
