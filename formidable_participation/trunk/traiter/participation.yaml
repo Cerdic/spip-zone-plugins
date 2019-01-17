@@ -6,6 +6,7 @@ options:
     saisie: 'explication'
     options:
       texte: '<:formidableparticipation:traiter_participation_necessite_explication:>'
+      nom: 'traiter_participation_necessite_explication'
   -
     saisie: 'selection'
     options:
