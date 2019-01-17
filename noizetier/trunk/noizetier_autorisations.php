@@ -196,7 +196,7 @@ function autoriser_noizetier_creercomposition_dist($faire, $type, $id, $qui, $op
 /**
  * Autorisation de suppression d'une composition virtuelle du noiZetier.
  * Il faut :
- * - être autorisé à configurer le noiZetier
+ * - être autorisé à configurer la page concernée (pour la suppression des noisettes)
  * - et que la page existe toujours et soit bien une composition virtuelle.
  *
  * @param $faire
@@ -211,10 +211,10 @@ function autoriser_noizetier_supprimercomposition_dist($faire, $type, $id, $qui,
 	$autoriser = false;
 
 	include_spip('inc/noizetier_page');
-	if (autoriser('noizetier')
-	and (is_array($options) and !empty($options))
-	and (!empty($options['page']) and ($configuration = noizetier_page_lire($options['page'], false))
-	and $configuration['composition'])
+	if ((is_array($options) and !empty($options['page']))
+	and autoriser('configurerpage', 'noizetier', 0, '', $options)
+	and ($configuration = noizetier_page_lire($options['page'], false))
+	and $configuration['composition']
 	and ($configuration['est_virtuelle'] == 'oui')) {
 		$autoriser = true;
 	}

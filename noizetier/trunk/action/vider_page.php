@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Cette action permet à l'utilisateur de supprimer de sa base de données, de façon sécurisée,
- * toutes les noisettes d'un conteneur, d'une page ou d'un objet.
+ * toutes les noisettes d'une page ou d'un objet.
  * Les compositions de page explicites ou virtuelles (créée par le noizetier) sont aussi prises en compte.
  *
  * Cette action est réservée aux utilisateurs autorisés.
@@ -47,28 +47,28 @@ function action_vider_page_dist() {
 			exit();
 		}
 
-		// Suppression des noisettes concernées.
-		// -- On ne s'occupe que des noisettes du noizetier
-		$where[] = 'plugin=' . sql_quote('noizetier');
-		if (!empty($options['objet'])) {
-			// -- Suppression des noisettes d'un objet d'un type donnée
-			$where[] = 'objet=' . sql_quote($options['objet']);
-			$where[] = 'id_objet=' . intval($options['id_objet']);
+		// On récupère la liste des blocs ayant des noisettes
+		if ($options['page']) {
+			include_spip('inc/noizetier_page');
+			$blocs = noizetier_page_compter_noisettes($options['page']);
+			$page_ou_objet = $options['page'];
 		} else {
-			// -- Suppression des noisettes d'une page.
-			//    Il faut tenir compte du cas où la page est une composition auquel cas le type et la
-			//    composition sont insérées séparément dans la table spip_noisettes.
-			$identifiants = explode('-', $options['page'], 2);
-			$where[] = 'type=' . sql_quote($identifiants[0]);
-			if (isset($identifiants[1])) {
-				$where[] = 'composition=' . sql_quote($identifiants[1]);
-			} else {
-				$where[] = 'composition=' . sql_quote('');
-			}
+			include_spip('inc/noizetier_objet');
+			$blocs = noizetier_objet_compter_noisettes($options['objet'], $options['id_objet']);
+			$page_ou_objet = $options;
 		}
 
-		// Suppression en base de données
-		sql_delete('spip_noisettes', $where);
+		// Suppression des noisettes concernées en utilisant l'API de vidage d'un conteneur, le conteneur étant
+		// chaque bloc de la page ou de l'objet contenant des noisettes.
+		if ($blocs) {
+			include_spip('inc/ncore_conteneur');
+			include_spip('inc/noizetier_conteneur');
+			foreach (array_keys($blocs) as $_bloc) {
+				// On calcule le conteneur sous sa forme identifiant chaine.
+				$id_conteneur = noizetier_conteneur_composer($page_ou_objet, $_bloc);
+				conteneur_vider('noizetier', $id_conteneur);
+			}
+		}
 
 		// On invalide le cache
 		include_spip('inc/invalideur');

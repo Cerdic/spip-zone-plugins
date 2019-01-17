@@ -29,7 +29,23 @@ function action_supprimer_composition_dist(){
 	}
 
 	if ($page) {
+		// On récupère la liste des blocs ayant des noisettes
+		include_spip('inc/noizetier_page');
+		$blocs = noizetier_page_compter_noisettes($page);
+
+		// Suppression des noisettes concernées en utilisant l'API de vidage d'un conteneur, le conteneur étant
+		// chaque bloc de la composition virtuelle.
+		if ($blocs) {
+			include_spip('inc/ncore_conteneur');
+			include_spip('inc/noizetier_conteneur');
+			foreach (array_keys($blocs) as $_bloc) {
+				// On calcule le conteneur sous sa forme identifiant chaine.
+				$id_conteneur = noizetier_conteneur_composer($page, $_bloc);
+				conteneur_vider('noizetier', $id_conteneur);
+			}
+		}
+
+		// On supprime la composition elle-même.
 		sql_delete('spip_noizetier_pages', array('page=' . sql_quote($page)));
-		// TODO : ne faudrait-il pas supprimer les noisettes utilisées dans la page ?
 	}
 }
