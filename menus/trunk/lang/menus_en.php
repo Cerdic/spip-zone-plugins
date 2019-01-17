@@ -40,6 +40,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'editer_menus_editer' => 'Edit this menu',
+	'editer_menus_entrees_nouveau' => 'Create a new menu entry',
+	'editer_menus_entrees_titre' => 'Menu entries of this site',
 	'editer_menus_explication' => 'Create and configure menus for your site.',
 	'editer_menus_exporter' => 'Export this menu',
 	'editer_menus_nouveau' => 'Create a new menu',
@@ -130,15 +132,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_1_menu' => 'A menu',
+	'info_1_menu_entree' => 'One menu entry',
 	'info_afficher_articles' => 'The articles will be included in the menu.',
 	'info_articles_max' => 'Only if the section contains more than @max@ articles',
 	'info_articles_max_affiches' => 'Display limited to @max@ articles',
 	'info_aucun_menu' => 'No menu',
+	'info_aucun_menu_entree' => 'No menu entries',
 	'info_classe_parent' => 'Class of the parent elements:',
 	'info_connexion_obligatoire' => 'Connection required',
 	'info_deconnexion_obligatoire' => 'Only when disconnected',
 	'info_masquer_articles_uniques' => 'Unique articles hidden',
 	'info_nb_menus' => '@nb@ menus',
+	'info_nb_menus_entrees' => '@nb@ menu entries',
 	'info_numero_menu' => 'MENU NUMBER:',
 	'info_page_speciale' => 'Link to the page « @page@ »',
 	'info_page_speciale_zajax' => 'Modalbox for the "@page@" page for the "@bloc@" block',
@@ -182,8 +187,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_ajouter_menu' => 'Add a menu',
+	'texte_ajouter_menu_entree' => 'Add a menu entry',
 	'texte_creer_associer_menu' => 'Create and associate a menu',
+	'texte_creer_associer_menu_entree' => 'Create and associate a menu entry',
 	'titre_menu' => 'Menu',
+	'titre_menu_entrée' => 'Menu entry',
 	'titre_objets_lies_menu' => 'Related to this menu',
 	'tous_les_articles' => '... All articles',
 	'toutes_les_rubriques' => '... All sections',
