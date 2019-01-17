@@ -38,6 +38,12 @@ options:
         options:
           nom: 'choix_participation_non'
           label: '<:formidableparticipation:traiter_participation_champ_participation_non:>'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'participant'
+      label: '<:formidableparticipation:traiter_participation_champ_participant:>'
+    saisies:
       -
         saisie: 'champ'
         options:
@@ -45,12 +51,6 @@ options:
           label: '<:formidableparticipation:traiter_participation_champ_email_label:>'
           obligatoire: 'oui'
           env: true
-  -
-    saisie: 'fieldset'
-    options:
-      nom: 'participant'
-      label: '<:formidableparticipation:traiter_participation_champ_participant:>'
-    saisies:
       -
         saisie: 'champ'
         options:
