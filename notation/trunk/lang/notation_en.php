@@ -50,10 +50,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
                     This parameter must be fixed once and for all when creating ratings.',
 	'info_fonctionnement_note' => 'How rating works',
 	'info_ip' => 'To be the easiest possible to use, the rating is attached to the IP address of the voter, which avoids two successive votes in the database, with a few drawbacks ...  especially if you manage author’s votes.<br />
-				In this case, we set the note on the user identifier (when he is registered, of course).<br />
-                If you want to guarantee the uniqueness of the note, limit the voting <b>only</b> to registered users (above).', # MODIF
+				In this case, we set the note on the user identifier (when he is registered, of course).',
+	'info_methode_id' => 'Verification of uniqueness of votes',
 	'info_modifications' => 'Changing of the ratings',
 	'info_ponderation' => 'The weighting factor lends more value to items that have received enough votes.<br />Enter below the number of votes beyond which you think the score is reliable.',
+	'info_vote_unique_auteur' => 'If you want to guarantee the uniqueness of the note, limit voting to registered persones <b>only</b>.',
 	'ip' => 'IP',
 	'item_adm' => 'to the administrators',
 	'item_all' => 'to all',
@@ -61,6 +62,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_id' => 'One vote by user',
 	'item_ide' => 'to registered people',
 	'item_ip' => 'one vote by IP',
+	'item_methode_id_cookie' => 'By cookie',
+	'item_methode_id_hash' => 'By browser fingerprint',
+	'item_methode_id_ip' => 'By IP address',
 
 	// J
 	'jaidonnemonavis' => 'I gave my opinion !',
