@@ -83,6 +83,10 @@ function lesscss_compile($style, $contexte = array()){
 			$parser_options['cache_callback_set'] = 'lesscss_compile_cache_set';
 		}
 		$parser_options['import_dirs'] = lesscss_import_dirs();
+		// il faut prefixer avec une empreinte du import_dirs qui inclue les URLs absolues correspondantes
+		// car cela change le contenu et n'est pas pris en compte par la gestion du cache less, on a donc un risque d'empoisonement
+		// du cache d'un domaine par un autre domaine ou entre 2 variantes de chemin SPIP
+		$parser_options['prefix'] = 'lessphp_'. substr(md5(json_encode($parser_options['import_dirs'])),0,4) . '_';
 
 		if (defined('_VAR_MODE') and in_array(_VAR_MODE, array('css', 'recalcul'))) {
 			$parser_options['use_cache'] = false;
