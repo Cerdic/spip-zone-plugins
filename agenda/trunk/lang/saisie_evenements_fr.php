@@ -51,6 +51,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_choix_label' => 'Type de choix',
 	'option_type_choix_radio' => 'Choix unique (boutons radios)',
 	'option_type_choix_selection' => 'Choix unique (liste déroulante)',
+
+	// P
 	'places_dispo_label_case' => 'Afficher le nombre de places restantes',
 
 	// S
