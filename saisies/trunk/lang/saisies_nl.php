@@ -39,6 +39,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'construire_verifications_aucune' => 'Geen',
 	'construire_verifications_label' => 'Toe te passen verificatie',
 
+	// D
+	'data_cols_label' => 'Reacties mogelijk (in kolom)',
+	'data_rows_label' => 'Vragen (online)',
+
 	// E
 	'erreur_generique' => 'Er zitten fouten in onderstaande velden. Controleer je invoer',
 	'erreur_option_nom_unique' => 'Deze naam wordt al door een ander veld gebruikt. Het moet binnen het formulier een unieke naam hebben.',
@@ -170,6 +174,8 @@ Je vindt <a href="https://contrib.spip.net/5080">volledige documentatie van de s
 	'saisie_case_titre' => 'Enkele checkbox',
 	'saisie_checkbox_explication' => 'Voor het kiezen van verschillende opties met checkboxes.',
 	'saisie_checkbox_titre' => 'Checkboxes',
+	'saisie_choix_grille_explication' => 'Maakt het mogelijk een serie multiple choice vragen te stellen op een standaard manier in de vorm van een raster',
+	'saisie_choix_grille_titre' => 'Vragenraster',
 	'saisie_date_explication' => 'Datuminvoer via een kalender-tool',
 	'saisie_date_titre' => 'Datum',
 	'saisie_destinataires_explication' => 'Voor het kiezen van een of meer ontvangers uit voorgeselecteerde auteurs.',
