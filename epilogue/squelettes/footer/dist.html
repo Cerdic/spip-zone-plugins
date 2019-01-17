@@ -18,18 +18,19 @@
 	</div>
 </div>
 <div class="span6 icons ">
-		[<p class="icon fa-home">(#CONFIG{epilogue/contact_adresse}|propre|ptobr)</p>]
-			[(#INCLURE{fond=modeles/carte_gis,
-				objets=auteurs,
-				id_auteur=1})]
-		[<p class="icon fa-phone"><a href="tel:(#CONFIG{epilogue/contact_telephone})">(#CONFIG{epilogue/contact_telephone})</a></p>]
+		<h3 class="icon fa-home">Adresse</h3>
+		[<p>(#CONFIG{epilogue/contact_adresse}|propre|ptobr)</p>]
+		<h3 class="icon fa-phone">Téléphone</h3>
+		[<p><a href="tel:(#CONFIG{epilogue/contact_telephone})">(#CONFIG{epilogue/contact_telephone})</a></p>]
 		[<p class="fa-envelope"><a href="mailto:#CONFIG{sociaux/mail}">(#CONFIG{sociaux/mail})</a></p>]
+		[(#INCLURE{fond=modeles/carte_gis,objets=auteurs,id_auteur=1})]
 </div>
 </div>
 ]
 [(#REM) Si le plugin n'est pas là on n'affiche que les renseignements centrés avant les icons de réseaux sociaux]
 
 [(#PLUGIN{contact}|non)
+	<h3>Adresse</h3>
 	[<p class="icon fa-home">(#CONFIG{epilogue/contact_adresse}|propre|ptobr)</p>]
 	[<p class="icon fa-phone"><a href="tel:(#CONFIG{epilogue/contact_telephone})">(#CONFIG{epilogue/contact_telephone})</a></p>]
 	[<p class="fa-envelope"><a href="mailto:#CONFIG{sociaux/mail}">(#CONFIG{sociaux/mail})</a></p>]
