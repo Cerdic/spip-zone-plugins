@@ -21,7 +21,7 @@
 	[(#REM) Le mult -1 permet d'avoir une numérotation logique dans le constructeur : nombre négatif pour le passé, positif pour le futur)]
 	[(#ENV{masquer_heure}|oui)#SET{horaire,non}]
 	[(#ENV{masquer_heure}|non)#SET{horaire,oui}]
-	#SET{places_dispo,''}
+	#SET{places_dispo_texte,''}
 	#SET{inscrits,0}
 	<BOUCLE_participants(spip_evenements_participants){id_evenement}{reponse=oui} />#SET{inscrits,#TOTAL_BOUCLE}<//B_participants>
 	#SET{places_dispo,#PLACES|moins{#GET{inscrits}}}
@@ -30,8 +30,8 @@
 		#SET{disable_choix,#GET{disable_choix}|concat{",",#ID_EVENEMENT}}
 	]
 	[(#ENV{places_dispo}|oui)
-	[(#SET{places_dispo,#GET{places_dispo}|singulier_ou_pluriel{agenda:info_1_place,agenda:info_nb_places}|sinon{<:agenda:aucune_place:>}})]
-	#SET{places_dispo,#VAL{' - '}|concat{#GET{places_dispo}}
+	[(#SET{places_dispo_texte,#GET{places_dispo}|singulier_ou_pluriel{agenda:info_1_place,agenda:info_nb_places}|sinon{<:agenda:aucune_place:>}})]
+	#SET{places_dispo_texte,#VAL{' - '}|concat{#GET{places_dispo_texte}}
 	]
 
 	[(#ENV{type_affichage}|=={titre_date}|oui)
@@ -43,7 +43,7 @@
 	[(#ENV{type_affichage}|=={date}|oui)
 		#SET{texte,#DATE_DEBUT|agenda_affdate_debut_fin{#DATE_FIN,#GET{horaire},#GET{forme}}}
 	]
-	#SET{texte,#GET{texte}|concat{#GET{places_dispo}}}
+	#SET{texte,#GET{texte}|concat{#GET{places_dispo_texte}}}
 	[(#SET{description,#GET{description}|array_merge{#ARRAY{#GET{texte},#ID_EVENEMENT}}})]
 
 </BOUCLE_evenements>
