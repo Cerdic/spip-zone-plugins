@@ -16,8 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bloc_sans_noisette' => 'Nootjes toevoegen door gebruik te maken van de knop "een nootje toevoegen", of door het type nootje naar een gewenste plek te schuiven.',
-	'bouton_configurer_noisettes_objet' => 'Configurer pour ce contenu', # MODIF
+	'bouton_configurer_noisettes_objet' => 'Configureren voor deze inhoud',
 	'bulle_activer_composition' => 'Composities op inhoudstype « @type@ » activeren',
+	'bulle_configurer_composition_noisettes' => 'De nootjes van de compositie configureren',
 	'bulle_configurer_objet_noisettes' => 'De nootjes configureren die specifiek zijn voor deze inhoud',
 	'bulle_configurer_page_noisettes' => 'De nootjes van de pagina configureren',
 	'bulle_creer_composition' => 'Een virtuele compositie van pagina « @page@ » maken',
@@ -33,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_objets_noisettes_explication' => 'Bij dit soort inhoud mogen de nootjes <strong>per inhoud</strong> worden aangepast.',
 	'configurer_objets_noisettes_label' => 'Aanpassing op inhoud toestaan voor:',
 	'configurer_profondeur_max_label' => 'Diepte',
-	'configurer_titre' => 'NoiZetier configureren', # MODIF
+	'configurer_titre' => 'NoiZetier configureren',
 	'copie_de' => 'Kopie van @source@',
 
 	// D
@@ -59,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_code' => 'LET OP: voor gevorderde gebruikers. Je kunt SPIP code (lussen en bakens) gebruiken die als in een skelet worden geïnterpreteerd. Het nootje zal zo teogang hebben tot alle omgevingsvariabelen van de bladzijde.',
 	'explication_composition' => 'Compositie afgeleid van pagina « @type@ »',
 	'explication_composition_virtuelle' => '<strong>Virtuele</strong> compositie, afgeleid van pagina « @type@ »',
+	'explication_copie_noisette_conteneur' => 'De configuratieparameters hebben betrekking op de container en alle ingesloten nootjes die ook worden gedupliceerd.',
 	'explication_copie_noisette_parametres' => 'Kies de configuratieparameters van het bronnootje dat je wil kopiëren; anders worden de standaardwaardes gebruikt.',
 	'explication_copie_pages_compatibles' => 'Kies de pagina’s waarin een nootje van hetzelfde type als het bronnootje moet worden gemaakt.',
 	'explication_description_code' => 'Voor intern gebruik. Wordt niet op de publieke site weergegeven.',
@@ -96,6 +98,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_description_blocs_exclus' => 'Je kun ervoor kiezen bepaalde blokken uit te sluiten van de configuratie van nootjes.',
 	'formulaire_description_explication' => 'Je kunt de SPIP snelkoppelingen gebruiken en in het bijzonder &lt;multi&gt;.',
 	'formulaire_description_peuplement' => 'Je kunt de nieuwe virtuele compositie automatisch vullen met nootjes uit de bronpagina.',
+	'formulaire_dupliquer_noisette' => 'Dit nootje dupliceren',
 	'formulaire_dupliquer_page' => 'Deze compositie dupliceren',
 	'formulaire_dupliquer_page_entete' => 'Een bladzijde dupliceren',
 	'formulaire_dupliquer_page_titre' => 'Bladzijde « @page@ » dupliceren',
@@ -159,10 +162,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'import_pages_explicites_label' => 'Blokken uitgesloten van specifieke pagina’s',
 	'import_pages_explicites_labelcase' => 'De uitgesloten blokken van expliciete pagina’s van de site vervangen door die van het importbestand',
 	'import_resume' => 'Het te importeren bestand werd gemaakt met versie @version@, dataschema @schema@.',
+	'info_0_noisette' => 'Geen enkel nootje',
+	'info_0_noisette_composition' => 'Geen enkel nootje voor deze compositie',
+	'info_0_noisette_objet' => 'Geen enkel nootje voor deze inhoud',
+	'info_0_noisette_objets' => 'Geen enkel nootje voor de @objets@',
+	'info_1_noisette' => 'Eén nootje',
 	'info_1_noisette_ajoutee' => '1 nootje werd toegevoegd',
+	'info_1_noisette_composition' => '1 nootje voor deze compositie',
+	'info_1_noisette_objet' => '1 nootje voor deze inhoud',
+	'info_1_noisette_objets' => '1 nootje voor @objets@',
 	'info_composition' => 'COMPOSITIE:',
 	'info_etendre_noisette' => 'Kopieer het nootje @noisette@ in blok @bloc@ van de andere pagina’sd’autres pages',
+	'info_nb_noisettes' => '@nb@ nootjes',
 	'info_nb_noisettes_ajoutees' => '@nb@ nootjes werden toegevoegd',
+	'info_nb_noisettes_composition' => '@nb@ nootjes voor deze compositie',
+	'info_nb_noisettes_objet' => '@nb@ nootjes voor deze inhoud',
+	'info_nb_noisettes_objets' => '@nb@ nootjes voor @objets@',
 	'info_page' => 'BLADZIJDE:',
 	'installation_tables' => 'Tabellen van plugin Notenboom geïnstalleerd.<br />',
 	'item_titre_perso' => 'aangepaste titel',
@@ -180,6 +195,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_noisette_encapsulation' => 'Omhulling',
 	'label_noizetier_ajax' => 'Ieder nootje standaard in AJAX opnemen',
 	'label_noizetier_balise' => 'Neem standaard ieder nootje in een baken op (HTML markup)',
+	'label_source_noisettes' => 'Bron van de nootjes',
 	'label_texte' => 'Tekst:',
 	'label_texte_introductif' => 'Introductietekst (optioneel):',
 	'label_titre' => 'Titel:',
@@ -247,6 +263,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'suggestions' => 'Suggesties',
+
+	// T
+	'texte_noisette' => 'Nootje',
+	'texte_noisettes' => 'Nootjes',
 
 	// W
 	'warning_noisette_plus_disponible' => 'LET OP: dit nootje is niet meer beschikbaar.',
