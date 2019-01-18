@@ -7,6 +7,8 @@ Insertion du modele <articleX|owl>
 @param : id-carousel : id unique du carousel
 @param : caption : oui : Affiche la description de l'image.
 @param : docs : 1,2,3 : selectionne individuellement les documents
+@param : items : 2 : le nombre d'items affiches ensemble
+@param : slideBy : le nombre d'items qui defilent ensemble
 @param : dots : true par defaut : affiche les points de navigation
 @param : navigation : true par defaut : affiche les boutons précédents suivants
 @param : caption_css : ajouter des css sur la description (par exemple : invisible).
@@ -36,6 +38,7 @@ jQuery(function($){
     $("[#(#ENV{id-carousel,demo})]").owlCarousel({
         loop:true,[
         items: (#ENV{items, 1}),][
+        slideBy:(#ENV{slideBy}),][
         margin:(#ENV{margin}),][
         dots:(#ENV{dots, true}),][
         nav:(#ENV{navigation, false}),][

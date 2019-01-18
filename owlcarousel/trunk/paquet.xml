@@ -1,9 +1,9 @@
 <paquet
 	prefix="owlcarousel"
 	categorie="multimedia"
-	version="1.0.18"
+	version="1.0.19"
 	schema="0.0.1"
-	etat="test"
+	etat="stable"
 	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/owlcarousel-64.png"
 	documentation="https://contrib.spip.net/Owl-Carousel-2"
