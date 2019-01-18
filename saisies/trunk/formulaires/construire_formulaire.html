@@ -196,6 +196,10 @@
 						if (!ou) {
 							// sinon dans le parent
 							ou = ui.item.closest('.fieldset').data('id');
+							// Si jamais match lui-même, ca veut dire qu'on déplace un fieldest
+							if (ou == id) {
+								ou = ui.item.parents('.fieldset').first().data("id");
+							}
 							if (ou) {
 								ou = '\[' + ou + '\]';
 							}
