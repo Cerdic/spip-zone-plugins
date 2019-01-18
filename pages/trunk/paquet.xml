@@ -1,7 +1,7 @@
 <paquet
 	prefix="pages"
 	categorie="divers"
-	version="1.3.9"
+	version="1.3.10"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/page-32.png"
@@ -13,7 +13,7 @@
 	<!-- Gestion des pages sans rubrique -->
 
 	<auteur>RastaPopoulos</auteur>
-	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<auteur lien="http://www.ldd.fr">Les DÃ©veloppements Durables</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL v3</licence>
 
