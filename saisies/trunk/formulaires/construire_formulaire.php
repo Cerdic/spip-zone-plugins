@@ -547,7 +547,7 @@ function construire_formulaire_generer_saisie_configurable($saisie, $env) {
 		} else {
 			$env2["saisie_modifiee_$nom"] = $env2['_saisies_par_nom'][$nom];
 			// il n'y a pas toujours de verification...
-			if (isset($env2["saisie_modifiee_$nom"]['verifier'])) {
+			if (isset($env2["saisie_modifiee_$nom"]['verifier']) and isset($env2["saisie_modifiee_$nom"]['verifier']['type'])) {
 				$env2["saisie_modifiee_$nom"]['verifier'][ $env2["saisie_modifiee_$nom"]['verifier']['type'] ]
 					= $env2["saisie_modifiee_$nom"]['verifier']['options'];
 			}
