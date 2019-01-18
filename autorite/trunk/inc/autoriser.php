@@ -219,12 +219,12 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
         $a
         or (
             // Cas du wiki, on appelle la fonction qui verifie les droits wiki
-            $GLOBALS['autorite']['espace_wiki']
+            isset($GLOBALS['autorite']['espace_wiki'])
             and autorisation_wiki_visiteur($qui, $r['id_secteur'])
         )
         or (
             // Cas du wiki par mot clefs, on appelle la fonction qui verifie les droits wiki
-            $GLOBALS['autorite']['espace_wiki_motsclef']
+            isset($GLOBALS['autorite']['espace_wiki_motsclef'])
             and autorisation_wiki_motsclef_visiteur($qui, _q($id))
         )
         or (
