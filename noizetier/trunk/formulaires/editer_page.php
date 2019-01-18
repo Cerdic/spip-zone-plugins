@@ -43,6 +43,7 @@ function formulaires_editer_page_charger_dist($edition, $page, $redirect = '') {
 		'est_virtuelle' => 'oui',
 		'_blocs' => array(),
 		'_blocs_defaut' => array(),
+		'_blocs_disable' => array(),
 	);
 
 	include_spip('inc/noizetier_page');
@@ -61,6 +62,12 @@ function formulaires_editer_page_charger_dist($edition, $page, $redirect = '') {
 				$valeurs['description'] = $description_page['description'];
 				$valeurs['icon'] = $description_page['icon'];
 			}
+
+			// On considère que les blocs contenant des noisettes ne peuvent pas être exclus.
+			// Il est nécessaire de les vider au préalable, ce qui a pour intérêt de conserver une cohérence : les
+			// blocs exclus ne possèdent pas de noisettes "invisibles".
+			$blocs_non_vides = noizetier_page_compter_noisettes($page);
+			$valeurs['_blocs_disable'] = array_keys($blocs_non_vides);
 
 		} elseif ($edition == 'dupliquer') {
 			// La page désignée est la composition source que l'on souhaite dupliquer pour créer une nouvelle
@@ -248,7 +255,8 @@ function formulaires_editer_page_traiter_dist($edition, $page, $redirect = '') {
 		$description = array_merge($description_defaut, $description);
 	}
 
-	// On termine en sérialisant les tableaux des blocs exclus, necessite et branche.
+	// On termine en sérialisant les tableaux des blocs exclus, necessite et branche. On réserve la liste des blocs
+	// exclus pour la copie des noisettes.
 	$description['blocs_exclus'] = serialize($description['blocs_exclus']);
 	if ($est_virtuelle == 'oui') {
 		$description['branche'] = serialize($description['branche']);
@@ -292,19 +300,23 @@ function formulaires_editer_page_traiter_dist($edition, $page, $redirect = '') {
 					include_spip('inc/ncore_noisette');
 					$parametrage = array('parametres', 'encapsulation', 'css');
 					foreach ($noisettes_source as $_noisette) {
-						// On calcule le nouveau conteneur sachant que l'identifiant de la page est déjà connu
-						// que le bloc doit être le même que celui de la noisette source et que le conteneur est forcément
-						// un squelette (pas un objet).
-						$conteneur_destination['squelette'] = $_noisette['bloc'] . '/' . $identifiant;
-						// On duplique la noisette source dans le conteneur de la composition virtuelle : le
-						// rang de la noisette source est conservé et le paramétrage entièrement copié
-						noisette_dupliquer(
-							'noizetier',
-							$_noisette['id_noisette'],
-							$conteneur_destination,
-							$_noisette['rang_noisette'],
-							$parametrage
-						);
+						// On ne copie pas les noisettes source incluses dans un bloc non autorisé par la
+						// composition virtuelle créée.
+						if ($blocs_exclus and in_array($_noisette['bloc'], $blocs_exclus)) {
+							// On calcule le nouveau conteneur sachant que l'identifiant de la page est déjà connu
+							// que le bloc doit être le même que celui de la noisette source et que le conteneur est forcément
+							// un squelette (pas un objet).
+							$conteneur_destination['squelette'] = $_noisette['bloc'] . '/' . $identifiant;
+							// On duplique la noisette source dans le conteneur de la composition virtuelle : le
+							// rang de la noisette source est conservé et le paramétrage entièrement copié
+							noisette_dupliquer(
+								'noizetier',
+								$_noisette['id_noisette'],
+								$conteneur_destination,
+								$_noisette['rang_noisette'],
+								$parametrage
+							);
+						}
 					}
 				}
 			}
@@ -318,7 +330,6 @@ function formulaires_editer_page_traiter_dist($edition, $page, $redirect = '') {
 	if ($retour_sql === false) {
 		$retour['message_nok'] = _T('noizetier:formulaire_composition_erreur');
 	} else {
-		$retour['message_ok'] = _T('noizetier:formulaire_composition_mise_a_jour');
 		if (in_array($edition, array('creer', 'dupliquer'))) {
 			// On redirige vers la page de la composition virtuelle venant d'être créée.
 			$retour['redirect'] = parametre_url(generer_url_ecrire('noizetier_page'), 'page', $identifiant);
