@@ -194,11 +194,12 @@ function pages_autorisation_defaut_dist($qui) {
  * @param  array $opt Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
  **/
-function autoriser_rubrique_creerarticledans($faire, $type, $id, $qui, $opt) {
-	return
-		(($id == -1) and pages_autorisation_defaut_dist($qui))
-		OR ($id
-		and autoriser('voir', 'rubrique', $id)
-		and autoriser('creer', 'article'));
+if (!function_exists('autoriser_rubrique_creerarticledans')) {
+	function autoriser_rubrique_creerarticledans($faire, $type, $id, $qui, $opt) {
+		return
+			(($id == -1) and pages_autorisation_defaut_dist($qui))
+			OR ($id
+			and autoriser('voir', 'rubrique', $id)
+			and autoriser('creer', 'article'));
+	}
 }
-
