@@ -207,7 +207,9 @@ function formulaires_editer_page_traiter_dist($edition, $page, $redirect = '') {
 	if ($est_virtuelle == 'oui') {
 		$description['nom'] = _request('nom');
 		$description['description'] = _request('description');
-		$description['icon'] = _request('icon');
+		if (_request('icon')) {
+			$description['icon'] = _request('icon');
+		}
 
 		// Traitement des branches éventuelles pour la composition virtuelle résultante
 		$branche = array();
@@ -274,7 +276,7 @@ function formulaires_editer_page_traiter_dist($edition, $page, $redirect = '') {
 		// -- Insertion de la nouvelle composition
 		$retour_sql = sql_insertq('spip_noizetier_pages', $description);
 
-		// Pour une création ou un duplication, il faut traiter le peuplement automatique des noisettes
+		// Pour une création ou une duplication, il faut traiter le peuplement automatique des noisettes
 		// de la page source si requis.
 		// -- on préremplit avec les noisettes de la page source, systématiquement en cas de duplication
 		//    ou si demandé, en cas de création.
