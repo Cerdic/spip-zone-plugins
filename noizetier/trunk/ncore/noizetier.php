@@ -336,46 +336,16 @@ function noizetier_noisette_completer($plugin, $description) {
 			'bloc'        => ''
 		);
 
-		// On desérialise le conteneur et après on traite les compléments.
-		$conteneur = unserialize($description['conteneur']);
+		// La description de la noisette contient l'id du conteneur : on le décompose car il contient certains
+		// des champs complémentaires.
+		$id_conteneur = $description['id_conteneur'];
+		$conteneur_etendu = noizetier_conteneur_decomposer($id_conteneur);
 
-		// Détermination du complément en fonction du fait que le conteneur soit une noisette ou pas.
-		include_spip('inc/ncore_conteneur');
-		if (conteneur_est_noisette('noizetier', $conteneur)) {
-			// -- si le conteneur est une noisette on récupère les informations de son conteneur. Comme les noisettes
-			//    sont insérées par niveau on duplique forcément les informations du bloc supérieur à chaque imbrication.
-			//    Il est donc inutile de remonter au bloc racine.
-			$select = array_keys($complement);
-			$where = array('id_noisette=' . intval($conteneur['id_noisette']), 'plugin=' . sql_quote($plugin));
-			// Il est possible que le conteneur ne soit pas déjà en base (cas improbable) et donc pour éviter une
-			// notice on fait en sorte que $complement soit toujours un tableau.
-			if ($informations_bloc = sql_fetsel($select, 'spip_noisettes', $where)) {
-				$complement = $informations_bloc;
-			}
-		} else {
-			// -- si le conteneur n'est pas une noisette, le complément se déduit du conteneur lui-même.
-			if (!empty($conteneur['squelette'])) {
-				list($bloc, ) = explode('/', $conteneur['squelette']);
-				if (!empty($conteneur['objet']) and !empty($conteneur['id_objet']) and ($id = intval($conteneur['id_objet']))) {
-					// Objet
-					$complement['objet'] = $conteneur['objet'];
-					$complement['id_objet'] = $id;
-					$complement['bloc'] = isset($conteneur['bloc']) ? $conteneur['bloc'] : $bloc;
-				} else {
-					$squelette = $conteneur['squelette'];
-					$page = basename($squelette);
-					$identifiants_page = explode('-', $page, 2);
-					if (!empty($identifiants_page[1])) {
-						// Forcément une composition
-						$complement['type'] = $identifiants_page[0];
-						$complement['composition'] = $identifiants_page[1];
-					} else {
-						// Page simple
-						$complement['type'] = $identifiants_page[0];
-					}
-					$complement['bloc'] = isset($conteneur['bloc']) ? $conteneur['bloc'] : $bloc;
-				}
-			}
+		if ($conteneur_etendu) {
+			// On ajoute les index manquants avec leur valeur par défaut
+			$conteneur_etendu = array_merge($complement, $conteneur_etendu);
+			// On filtre les index inutiles comme squelette par exemple.
+			$complement = array_intersect_key($conteneur_etendu, $complement);
 		}
 
 		// Ajout du complément à la description.

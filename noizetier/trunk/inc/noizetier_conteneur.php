@@ -34,15 +34,14 @@ function noizetier_conteneur_composer($page_ou_objet, $bloc, $noisette=array()) 
 
 	$conteneur = array();
 
-	// Construction du tableau associatif du conteneur.
+	// Construction du tableau associatif canonique du conteneur.
 	if (!empty($noisette['type_noisette']) and !empty($noisette['id_noisette'])) {
 		// Le conteneur est une noisette.
 		$conteneur = $noisette;
 	} else {
 		if (is_array($page_ou_objet)) {
 			// Le conteneur est un objet.
-			$conteneur['objet'] = $page_ou_objet['objet'];
-			$conteneur['id_objet'] = $page_ou_objet['id_objet'];
+			$conteneur = $page_ou_objet;
 			$conteneur['squelette'] = "${bloc}/{$page_ou_objet['objet']}";
 		}
 		else {
