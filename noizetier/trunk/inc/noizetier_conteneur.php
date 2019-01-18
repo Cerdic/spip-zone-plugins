@@ -76,8 +76,6 @@ function noizetier_conteneur_composer($page_ou_objet, $bloc, $noisette=array()) 
  */
 function noizetier_conteneur_decomposer($id_conteneur) {
 
-	$conteneur = array();
-
 	// Construction du tableau associatif propre au noizetier contenant les éléments
 	// d'un conteneur mais aussi les éléments propres au noiZetier comme la page,
 	// la composition, le type, l'objet ou la noisette conteneur
@@ -100,7 +98,6 @@ function noizetier_conteneur_decomposer($id_conteneur) {
 		if (!empty($conteneur['id_noisette'])) {
 			// C'est une noisette conteneur : les index type de noisette et id_noisette sont initialisés.
 			// -- le squelette
-			// TODO : revoir l'intérêt voire la cohérence de ce champ
 			include_spip('ncore_fonctions');
 			$conteneur['squelette'] = type_noisette_localiser('noizetier', $conteneur['type_noisette']);
 			// -- les éléments du conteneur de la noisette parent utiles pour les autorisations
