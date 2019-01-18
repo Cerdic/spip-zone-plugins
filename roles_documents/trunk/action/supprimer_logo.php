@@ -34,9 +34,8 @@ function action_supprimer_logo_dist($arg = null) {
 	if (is_null($arg)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
-		//$arg = $_REQUEST['arg']; // temporaire pour dev
 	}
-	list($objet, $id_objet, $etat) = explode('-', $arg);
+	list($objet, $id_objet, $etat) = explode('/', $arg);
 
 	// Suppression
 	include_spip('inc/autoriser');

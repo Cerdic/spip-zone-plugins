@@ -148,7 +148,10 @@ function supprimer_lien_document_role($id_document, $objet, $id_objet, $role, $s
 		)
 	);
 
-	if ($check) {
+	if (
+		$check
+		and $objet != 'site_spip' // pas de vérif pour le faux objet utilisé pour le logo du site
+	) {
 		// si demande, on verifie que ses documents vus sont bien lies !
 		$spip_table_objet = table_objet_sql($objet);
 		$table_objet = table_objet($objet);
