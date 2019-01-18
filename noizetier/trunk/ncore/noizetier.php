@@ -255,12 +255,6 @@ function noizetier_noisette_stocker($plugin, $description) {
 		}
 	}
 
-	if ($id_noisette) {
-		// On invalide le cache si le stockage a fonctionné.
-		include_spip('inc/invalideur');
-		suivre_invalideur("id='noisette/$id_noisette'");
-	}
-
 	return $id_noisette;
 }
 
@@ -553,7 +547,7 @@ function noizetier_noisette_decrire($plugin, $noisette) {
 
 	$description = array();
 
-	$where = array('plugin=' . sql_quote($plugin));
+	$where = array();
 	if (!is_array($noisette)) {
 		// L'identifiant est l'id unique de la noisette. Il faut donc parcourir le tableau pour trouver la
 		// noisette désirée
@@ -566,6 +560,7 @@ function noizetier_noisette_decrire($plugin, $noisette) {
 	}
 
 	if ($where) {
+		$where[] = 'plugin=' . sql_quote($plugin);
 		$description = sql_fetsel('*', 'spip_noisettes', $where);
 	}
 

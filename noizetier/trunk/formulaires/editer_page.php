@@ -228,8 +228,6 @@ function formulaires_editer_page_traiter_dist($edition, $page, $redirect = '') {
 		$blocs_exclus = array();
 	}
 	$description['blocs_exclus'] = $blocs_exclus;
-	// TODO : si on exclut des blocs il faut supprimer leurs éventuelles noisettes.
-	// TODO : une autre solution serait d'interdire l'exclusion d'un bloc contenant une noisette
 
 	if ($edition != 'modifier') {
 		// Initialisation de la description pour une composition virtuelle.
