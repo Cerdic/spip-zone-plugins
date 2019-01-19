@@ -95,7 +95,7 @@ function type_noisette_charger($plugin, $recharger = false, $stockage = '') {
 				'conteneur'     => 'non',
 				'contexte'      => array(),
 				'ajax'          => 'defaut',
-				'inclusion'     => 'statique',
+				'inclusion'     => 'defaut',
 				'parametres'    => array(),
 				'plugin'        => $plugin,
 				'signature'     => '',

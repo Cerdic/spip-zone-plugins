@@ -121,11 +121,16 @@ function type_noisette_dynamiser($plugin, $type_noisette, $stockage = '') {
 			// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
 			include_spip("ncore/ncore");
 
+			// On détermine la valeur par défaut de l'ajax des noisettes pour le plugin appelant.
+			$defaut_inclusion = ncore_type_noisette_initialiser_inclusion($plugin);
+
 			// On répertorie la configuration d'inclusion de toutes le types noisettes disponibles et on
 			// détermine si le type demandé est dynamique ou pas.
 			if ($inclusion_types_noisette = ncore_type_noisette_lister($plugin, 'inclusion', $stockage)) {
 				foreach ($inclusion_types_noisette as $_type_noisette => $_inclusion) {
-					$est_dynamique[$plugin][$_type_noisette] = ($_inclusion == 'dynamique') ? true : false;
+					$est_dynamique[$plugin][$_type_noisette] = ($_inclusion == 'defaut')
+						? $defaut_inclusion
+						: ($_inclusion == 'dynamique') ? true : false;
 				}
 			}
 
