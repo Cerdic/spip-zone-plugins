@@ -27,7 +27,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *        `a_effacer` : liste des identifiants de type de noisette devenus obsolètes.
  *        `a_changer` : liste des descriptions des types de noisette dont le fichier YAML a été modifié.
  *        `a_ajouter` : liste des descriptions des nouveaux types de noisette.
- *        Si $recharger est à `true`, seul l'index `nouvelles` est fourni dans le tableau $types_noisette.
+ *        Si $recharger est à `true`, seul l'index `a_ajouter` est fourni dans le tableau $types_noisette.
  * @param bool   $recharger
  *        Indique si le chargement en cours est forcé ou pas. Cela permet à la fonction N-Core ou au service
  *        concerné d'optimiser le traitement sachant que seules les types de noisette nouveaux sont fournis.

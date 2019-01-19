@@ -11,10 +11,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * Le schéma comprend des tables et des variables de configuration propres au plugin.
  *
- * @api
- * @see boussole_declarer_tables_principales()
- * @see boussole_declarer_tables_interfaces()
- *
  * @param string $nom_meta_base_version
  * 		Nom de la meta dans laquelle sera rangée la version du schéma
  * @param string $version_cible
@@ -71,8 +67,6 @@ function noizetier_upgrade($nom_meta_base_version, $version_cible) {
 /**
  * Suppression de l'ensemble du schéma de données propre au plugin, c'est-à-dire
  * les tables et les variables de configuration.
- *
- * @api
  *
  * @param string $nom_meta_base_version
  * 		Nom de la meta dans laquelle sera rangée la version du schéma
