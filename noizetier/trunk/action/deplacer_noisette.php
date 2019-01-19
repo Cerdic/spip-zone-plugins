@@ -21,13 +21,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @Note : cette action diffère de decaler_noisette.php qui permet de déplacer d'un unique rang, au sein du même conteneur
  *
- * @return
+ * @return void
  */
 function action_deplacer_noisette_dist() {
 
 	// Initialisation des variables d'état de la fonction
-	$done = false;
-	$success = $errors = array();
+	$retour = array(
+		'done'    => 'false',
+		'success' => array(),
+		'errors'  => array(),
+	);
 
 	// Récupération des inputs
 	$id_noisette = _request('_id_noisette');
@@ -37,36 +40,24 @@ function action_deplacer_noisette_dist() {
 
 	// Test de l'autorisation
 	include_spip('inc/noizetier_conteneur');
-	if (autoriser('configurerpage', 'noizetier', '', 0, noizetier_conteneur_decomposer($id_conteneur_origine))
-	or autoriser('configurerpage', 'noizetier', '', 0, noizetier_conteneur_decomposer($id_conteneur_destination))) {
-		// Déplacement de la noisette dans le conteneur destination au rang choisi.
-		include_spip('inc/ncore_noisette');
-		$deplacer = noisette_deplacer('noizetier', $id_noisette, $id_conteneur_destination, $rang);
-
-		if ($deplacer) {
-			$done = true;
-			$success = array($id_noisette);
-		} else {
-			// TODO : remettre le rang d'origine
-			$errors = array(_T('erreur'));
-		}
-	} else {
-		$errors = array(_T('erreur'));
+	if (!autoriser('configurerpage', 'noizetier', '', 0, noizetier_conteneur_decomposer($id_conteneur_origine))
+	or !autoriser('configurerpage', 'noizetier', '', 0, noizetier_conteneur_decomposer($id_conteneur_destination))) {
+		include_spip('inc/minipres');
+		echo minipres();
+		exit();
 	}
 
-	return envoyer_json_envoi(array(
-		'done'    => $done,
-		'success' => $success,
-		'errors'  => $errors,
-	));
-}
+	// Déplacement de la noisette dans le conteneur destination au rang choisi.
+	include_spip('inc/ncore_noisette');
+	$deplacer = noisette_deplacer('noizetier', $id_noisette, $id_conteneur_destination, $rang);
 
-/**
- * @param $data
- *
- * @return void
- */
-function envoyer_json_envoi($data) {
+	if ($deplacer) {
+		$retour['done'] = true;
+		$retour['success'] = array($id_noisette);
+	} else {
+		$retour['errors'] = array(_T('noizetier:erreur_deplacement_noisette', array('noisette' => $id_noisette)));
+	}
+
 	header('Content-Type: application/json; charset=' . $GLOBALS['meta']['charset']);
-	echo json_encode($data);
+	echo json_encode($retour);
 }

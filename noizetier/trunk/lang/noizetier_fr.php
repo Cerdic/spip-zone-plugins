@@ -50,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_noizetier_titre' => 'Gérer les noisettes',
 	'editer_nouvelle_page' => 'Créer une nouvelle page / composition',
 	'erreur_ajout_noisette' => 'Les noisettes suivantes n’ont pas été ajoutées : @noisettes@',
+	'erreur_deplacement_noisette' => 'Le noisette @noisette@ n’a pas été déplacée.',
 	'erreur_aucune_noisette_selectionnee' => 'Vous devez sélectionner une noisette !',
 	'erreur_doit_choisir_noisette' => 'Vous devez choisir une noisette.',
 	'erreur_mise_a_jour' => 'Une erreur s’est produite pendant la mise à jour de la base de donnée.',

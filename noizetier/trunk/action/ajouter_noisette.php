@@ -1,6 +1,6 @@
 <?php
 /**
- * Action ajouter une noisette en ajax
+ * Action ajouter une noisette en ajax.
  *
  * Crée la noisette dans un conteneur donné à un rang donné.
  * Retourne du JSON.
@@ -15,11 +15,18 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+/**
+ *
+ * @return void
+  */
 function action_ajouter_noisette_dist() {
 
-	// Initialisation des variables d'état de la fonction
-	$done = false;
-	$success = $errors = array();
+	// Initialisation de la variable d'état de la fonction
+	$retour = array(
+		'done'    => 'false',
+		'success' => array(),
+		'errors'  => array(),
+	);
 
 	// Récupération des inputs du formulaire d'ajout
 	$type_noisette = _request('_type_noisette');
@@ -41,22 +48,14 @@ function action_ajouter_noisette_dist() {
 	include_spip('inc/ncore_noisette');
 	$id_noisette = noisette_ajouter('noizetier', $type_noisette, $conteneur, $rang);
 
+	// Préparation du tableau de retour pour l'envoi en JSON.
 	if (intval($id_noisette)) {
-		$done = true;
-		$success = array($id_noisette);
+		$retour['done'] = true;
+		$retour['success'] = array($id_noisette);
 	} else {
-		$done = false;
-		$errors = array(_T('noizetier:erreur_ajout_noisette', array('noisettes' => $type_noisette)));
+		$retour['errors'] = array(_T('noizetier:erreur_ajout_noisette', array('noisettes' => $type_noisette)));
 	}
 
-	return envoyer_json_envoi(array(
-		'done'    => $done,
-		'success' => $success,
-		'errors'  => $errors,
-	));
-}
-
-function envoyer_json_envoi($data) {
 	header('Content-Type: application/json; charset=' . $GLOBALS['meta']['charset']);
-	echo json_encode($data);
+	echo json_encode($retour);
 }
