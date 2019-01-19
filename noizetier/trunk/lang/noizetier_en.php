@@ -91,7 +91,7 @@ You can choose a new identifier or suffix the reference identifier as follows:
 	'formulaire_deplacer_bas' => 'Move down',
 	'formulaire_deplacer_haut' => 'Move up',
 	'formulaire_description' => 'Description',
-	'formulaire_description_blocs_exclus' => 'You can choose to exclude some blocks from the nut configuration.',
+	'formulaire_description_blocs_exclus' => 'You can choose to exclude some blocks from the nut configuration.', # MODIF
 	'formulaire_description_explication' => 'You can use the usual SPIP shortcuts, especially the &lt;multi&gt; tag.',
 	'formulaire_description_peuplement' => 'You can automatically populate the new virtual composition with the nuts on the source page.',
 	'formulaire_dupliquer_page' => 'Duplicate this composition',
