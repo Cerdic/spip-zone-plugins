@@ -192,7 +192,7 @@ function noizetier_page_charger($recharger = false) {
  * 		Identifiant de la page ou de la composition.
  * @param boolean	$traitement_typo
  *      Indique si les données textuelles doivent être retournées brutes ou si elles doivent être traitées
- *      en utilisant la fonction _T_ou_typo.
+ *      en utilisant la fonction typo.
  * 		Les champs sérialisés sont toujours désérialisés.
  *
  * @return array
@@ -209,9 +209,9 @@ function noizetier_page_lire($page, $traitement_typo = true) {
 		if ($description) {
 			// Traitements des champs textuels
 			if ($traitement_typo) {
-				$description['nom'] = _T_ou_typo($description['nom']);
+				$description['nom'] = typo($description['nom']);
 				if (isset($description['description'])) {
-					$description['description'] = _T_ou_typo($description['description']);
+					$description['description'] = typo($description['description']);
 				}
 			}
 			// Traitements des champs tableaux sérialisés

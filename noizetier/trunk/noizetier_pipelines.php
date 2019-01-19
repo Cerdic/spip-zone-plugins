@@ -176,8 +176,8 @@ function noizetier_compositions_lister_disponibles($flux) {
 		foreach ($compositions_virtuelles as $_identifiant => $_configuration) {
 			if ($informer){
 				$flux['data'][$_configuration['type']][$_configuration['composition']] = array(
-					'nom' 			=> _T_ou_typo($_configuration['nom']),
-					'description'	=> isset($_configuration['description']) ? _T_ou_typo($_configuration['description']) : '',
+					'nom' 			=> typo($_configuration['nom']),
+					'description'	=> isset($_configuration['description']) ? typo($_configuration['description']) : '',
 					'icon' 			=> chemin_image($_configuration['icon']),
 					'branche' 		=> unserialize($_configuration['branche']),
 					'class' 		=> '',
@@ -341,6 +341,7 @@ function noizetier_affiche_milieu($flux) {
 			$id_objet  = $flux['args'][$cle_objet];
 
 			// Identifier la page et la composition
+			$composition = '';
 			if (test_plugin_actif('compositions')) {
 				include_spip('inc/compositions');
 				$composition = compositions_determiner($objet, $id_objet);

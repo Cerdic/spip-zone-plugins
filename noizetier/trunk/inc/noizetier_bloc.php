@@ -66,9 +66,9 @@ function noizetier_bloc_lire($bloc, $information = '') {
 				// Un YAML de bloc ne peut pas contenir d'inclusion YAML.
 				include_spip('inc/yaml');
 				if ($description = yaml_decode_file($fichier)) {
-					$description['nom'] = isset($description['nom']) ? _T_ou_typo($description['nom']) : ucfirst($bloc);
+					$description['nom'] = isset($description['nom']) ? typo($description['nom']) : ucfirst($bloc);
 					if (isset($description['description'])) {
-						$description['description'] = _T_ou_typo($description['description']);
+						$description['description'] = typo($description['description']);
 					}
 					if (!isset($description['icon'])) {
 						$description['icon'] = 'bloc-24.png';

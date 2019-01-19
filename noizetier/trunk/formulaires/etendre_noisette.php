@@ -54,7 +54,7 @@ function formulaires_etendre_noisette_charger_dist($noisette, $page_noisette, $b
 			if (($_page['page'] != $page_noisette)
 			and (!in_array($bloc, unserialize($_page['blocs_exclus'])))
 			and autoriser('configurerpage', 'noizetier', 0, '', array('page' => $_page['page']))) {
-				$valeurs['_pages'][$_page['page']] = _T_ou_typo($_page['nom']) . " (<em>{$_page['page']}</em>)";
+				$valeurs['_pages'][$_page['page']] = typo($_page['nom']) . " (<em>{$_page['page']}</em>)";
 			}
 		}
 	}

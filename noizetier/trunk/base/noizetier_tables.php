@@ -26,18 +26,18 @@ function noizetier_declarer_tables_interfaces($interface) {
 	$interface['table_des_tables']['noisettes'] = 'noisettes';
 
 	// Les traitements
-	// - table spip_noizetier_pages : on desérialise les tableaux et on passe _T_ou_typo
+	// - table spip_noizetier_pages : on desérialise les tableaux et on passe typo
 	$interface['table_des_traitements']['BLOCS_EXCLUS']['noizetier_pages'] = 'unserialize(%s)';
 	$interface['table_des_traitements']['BRANCHE']['noizetier_pages'] = 'unserialize(%s)';
 	$interface['table_des_traitements']['NECESSITE']['noizetier_pages'] = 'unserialize(%s)';
-	$interface['table_des_traitements']['NOM']['noizetier_pages'] = '_T_ou_typo(%s)';
-	$interface['table_des_traitements']['DESCRIPTION']['noizetier_pages'] = '_T_ou_typo(%s)';
-	// - table spip_types_noisettes : on desérialise les tableaux et on passe _T_ou_typo
+	$interface['table_des_traitements']['NOM']['noizetier_pages'] = 'typo(%s)';
+	$interface['table_des_traitements']['DESCRIPTION']['noizetier_pages'] = 'typo(%s)';
+	// - table spip_types_noisettes : on desérialise les tableaux et on passe typo
 	$interface['table_des_traitements']['PARAMETRES']['types_noisettes'] = 'unserialize(%s)';
 	$interface['table_des_traitements']['CONTEXTE']['types_noisettes'] = 'unserialize(%s)';
 	$interface['table_des_traitements']['NECESSITE']['types_noisettes'] = 'unserialize(%s)';
-	$interface['table_des_traitements']['NOM']['types_noisettes'] = '_T_ou_typo(%s)';
-	$interface['table_des_traitements']['DESCRIPTION']['types_noisettes'] = '_T_ou_typo(%s)';
+	$interface['table_des_traitements']['NOM']['types_noisettes'] = 'typo(%s)';
+	$interface['table_des_traitements']['DESCRIPTION']['types_noisettes'] = 'typo(%s)';
 	// - table spip_noisettes : on desérialise les tableaux
 	$interface['table_des_traitements']['PARAMETRES']['noisettes'] = 'unserialize(%s)';
 	$interface['table_des_traitements']['CONTENEUR']['noisettes'] = 'unserialize(%s)';

@@ -18,7 +18,7 @@
 	<div class="resume">
 	#SET{type_noisette_disponible, ''}
 	<BOUCLE_type_noisette(TYPES_NOISETTES) {type_noisette}>
-		#SET{type_noisette_nom, #NOM|_T_ou_typo}
+		#SET{type_noisette_nom, #NOM|typo}
 		#SET{type_noisette_icone, #ICON}
 		#SET{type_noisette_actif, #ACTIF}
 		#SET{type_noisette_necessite, #NECESSITE**}
