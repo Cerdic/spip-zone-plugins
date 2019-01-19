@@ -88,17 +88,17 @@ function balise_NOISETTE_COMPILER_dist($p) {
 	$encapsulation = champ_sql('encapsulation', $p);
 	$css = champ_sql('css', $p);
 	$inclusion_dynamique_noisette = "\"<?php echo noisette_encapsuler(
-		\".$plugin.\",
+		'\".$plugin.\"',
 		recuperer_fond(
-			\".type_noisette_localiser($plugin, $type_noisette).\",
+			'\".type_noisette_localiser($plugin, $type_noisette).\"',
 			\".var_export(array_merge(unserialize($parametres), noisette_contextualiser($plugin, $noisette, $type_noisette, $profondeur, $environnement, $stockage)),true).\",
 			\".var_export(array('ajax'=>(type_noisette_ajaxifier($plugin, $type_noisette, $stockage))), true).\"
 		),
-		\".$encapsulation.\",
-		\".var_export(array('id_noisette' => $id_noisette, 'type_noisette' => $type_noisette, 'css' => $css, 'profondeur_noisette' => $profondeur)), true).\",
-		\".$stockage.\"
+		'\".$encapsulation.\"',
+		\".var_export(array('id_noisette' => $id_noisette, 'type_noisette' => $type_noisette, 'css' => $css, 'profondeur_noisette' => $profondeur), true).\",
+		'\".$stockage.\"'
 	);?>\"";
-	$inclusion_dynamique_noisette = '';
+	#$inclusion_dynamique_noisette = '';
 	$inclusion_statique_noisette = "noisette_encapsuler(
 		$plugin,
 		recuperer_fond(
