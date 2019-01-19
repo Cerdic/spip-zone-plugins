@@ -31,16 +31,17 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param string $objet
  *     Type d'objet lié
  * @param integer $id_objet
- *     Identifiant de l'objet lié
+ *     Numéro de l'objet lié
  * @param integer $id_document
- *     Identifiant d'un document pour renvoyer les rôles de ce document précis
- * @param bool|mixed $principaux
- *     true : ne renvoyer que les rôles principaux (logos)
- *     false : exclure les rôles principaux (logos)
- * @return array
+ *     Numéro d'un document pour renvoyer les rôles de ce document précis
+ * @param null|bool|string $principaux
+ *     null : ne pas filtrer les rôles principaux
+ *     true : ne renvoyer que les rôles principaux
+ *     false ou '' : exclure les rôles principaux
+  * @return array
  *     Tableau associatif avec 3 clés
  *     - possibles : tous les rôles possibles
- *     - attribués : ceux attribués
+ *     - attribues : ceux attribués
  *     - attribuables : ceux non attribues
  */
 function roles_documents_presents_sur_objet($objet, $id_objet, $id_document = 0, $principaux = null) {
@@ -59,6 +60,10 @@ function roles_documents_presents_sur_objet($objet, $id_objet, $id_document = 0,
 		return $done['hash'] = false;
 	}
 	$roles_possibles = $infos_roles['roles']['choix'];
+	// Fallback rôles principaux si non déclarés
+	if (empty($infos_roles['roles']['principaux'])) {
+		$infos_roles['roles']['principaux'] = array('logo', 'logo_survol');
+	}
 
 	// Liste des rôles attribués
 	$select = 'distinct(role)';
@@ -89,8 +94,8 @@ function roles_documents_presents_sur_objet($objet, $id_objet, $id_document = 0,
 
 	// On filtre éventuellement les rôles principaux (=logos)
 	// Note : array_values pour remettre les bonnes clés
-	if (!is_null($principaux)
-		and !empty($infos_roles['roles']['principaux'])
+	if (
+		!is_null($principaux)
 		and $roles_principaux = $infos_roles['roles']['principaux']
 	){
 		$filtrer = ($principaux ? 'array_intersect' : 'array_diff');
