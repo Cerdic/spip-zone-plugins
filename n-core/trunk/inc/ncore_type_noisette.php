@@ -249,7 +249,7 @@ function type_noisette_charger($plugin, $recharger = false, $stockage = '') {
  *        Information spécifique à retourner ou vide pour retourner toute la description.
  * @param boolean $traiter_typo
  *        Indique si les données textuelles doivent être retournées brutes ou si elles doivent être traitées
- *        en utilisant la fonction _T_ou_typo. Par défaut l'indicateur vaut `false`.
+ *        en utilisant la fonction typo. Par défaut l'indicateur vaut `false`.
  *        Les champs sérialisés sont eux toujours désérialisés.
  * @param string  $stockage
  *        Identifiant du service de stockage à utiliser si précisé.
@@ -257,7 +257,7 @@ function type_noisette_charger($plugin, $recharger = false, $stockage = '') {
  * @return array|string
  *        La description complète ou champ précis demandé pour un type de noisette donné. Les champs
  *        de type tableau sont systématiquement désérialisés et si demandé, les champs textuels peuvent être
- *        traités avec la fonction _T_ou_typo().
+ *        traités avec la fonction typo().
  */
 function type_noisette_lire($plugin, $type_noisette, $information = '', $traiter_typo = false, $stockage = '') {
 
@@ -291,7 +291,7 @@ function type_noisette_lire($plugin, $type_noisette, $information = '', $traiter
 		if (isset($description_noisette[$plugin][$type_noisette][$information])) {
 			if (in_array($information, $donnees_typo) and $traiter_typo) {
 				// Traitements de la donnée textuelle
-				$retour = _T_ou_typo($description_noisette[$plugin][$type_noisette][$information]);
+				$retour = typo($description_noisette[$plugin][$type_noisette][$information]);
 			} else {
 				$retour = $description_noisette[$plugin][$type_noisette][$information];
 			}
@@ -304,7 +304,7 @@ function type_noisette_lire($plugin, $type_noisette, $information = '', $traiter
 		if ($traiter_typo) {
 			foreach ($donnees_typo as $_champ) {
 				if (isset($retour[$_champ])) {
-					$retour[$_champ] = _T_ou_typo($retour[$_champ]);
+					$retour[$_champ] = typo($retour[$_champ]);
 				}
 			}
 		}

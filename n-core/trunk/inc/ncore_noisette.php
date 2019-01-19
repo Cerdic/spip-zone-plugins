@@ -317,7 +317,7 @@ function noisette_supprimer($plugin, $noisette, $stockage = '') {
  *        Information spécifique à retourner ou vide pour retourner toute la description.
  * @param boolean $traiter_typo
  *        Indique si les données textuelles doivent être retournées brutes ou si elles doivent être traitées
- *        en utilisant la fonction _T_ou_typo. Par défaut l'indicateur vaut `false`.
+ *        en utilisant la fonction typo. Par défaut l'indicateur vaut `false`.
  *        Les champs sérialisés sont eux toujours désérialisés.
  *        Pour l'instant il n'y a pas de champ textuel directement associé à une noisette.
  * @param string  $stockage
