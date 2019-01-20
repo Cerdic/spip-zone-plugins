@@ -101,7 +101,7 @@ function conteneur_est_noisette($plugin, $conteneur, $stockage = '') {
 	// Suivant le format du conteneur on calcule le tableau ou on le vérifie.
 	include_spip('ncore/ncore');
 	if (is_string($conteneur)) {
-		$conteneur = conteneur_est_noisette($plugin, $conteneur, $stockage);
+		$conteneur = ncore_conteneur_construire($plugin, $conteneur, $stockage);
 	} else {
 		$conteneur = ncore_conteneur_verifier($plugin, $conteneur, $stockage);
 	}
