@@ -87,6 +87,7 @@ function balise_NOISETTE_COMPILER_dist($p) {
 	$environnement = "\$Pile[0]";
 	$encapsulation = champ_sql('encapsulation', $p);
 	$css = champ_sql('css', $p);
+
 	$inclusion_dynamique_noisette = "\"<?php echo noisette_encapsuler(
 		'\".$plugin.\"',
 		recuperer_fond(
@@ -98,7 +99,7 @@ function balise_NOISETTE_COMPILER_dist($p) {
 		\".var_export(array('id_noisette' => $id_noisette, 'type_noisette' => $type_noisette, 'css' => $css, 'profondeur_noisette' => $profondeur), true).\",
 		'\".$stockage.\"'
 	);?>\"";
-	#$inclusion_dynamique_noisette = '';
+
 	$inclusion_statique_noisette = "noisette_encapsuler(
 		$plugin,
 		recuperer_fond(

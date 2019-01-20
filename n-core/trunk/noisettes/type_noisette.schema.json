@@ -94,6 +94,7 @@
     "inclusion": {
       "type": "string",
       "enum": [
+        "defaut",
         "statique",
         "dynamique"
       ],

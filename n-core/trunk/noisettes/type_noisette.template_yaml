@@ -25,8 +25,8 @@ contexte: 'aucun'
 # - 'defaut', 'oui' ou 'non'
 ajax: 'non'
 # Indique la méthode d'inclusion de ce type de noisette
-# - facultatif, 'statique' si absent
-# - 'statique' ou 'dynamique'
+# - facultatif, 'defaut' si absent
+# - 'defaut', 'statique' ou 'dynamique'
 inclusion: 'statique'
 # Liste des plugins nécessités pour le fonctionnement de la noisette
 # - facultatif, [] si absent
