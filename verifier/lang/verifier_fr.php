@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'data_choix' => 'Choix possibles :',
 
 	// E
+	'erreur_attribut_class' => 'La syntaxe de cet attribut class est invalide.',
 	'erreur_code_postal' => 'Ce code postal est incorrect.',
 	'erreur_comparaison_egal' => 'La valeur doit être égale au champ "@nom_champ@".',
 	'erreur_comparaison_egal_type' => 'La valeur doit être égale et de même type que le champ "@nom_champ@".',
@@ -136,6 +137,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_page_verifier_doc' => 'Documentation de l’API de vérification',
+	'type_attribut_class' => 'Attribut class',
+	'type_attribut_class_description' => 'Vérifie que la valeur est un attribut class valide.',
 	'type_code_postal' => 'Code postal',
 	'type_code_postal_description' => 'Vérifie que la valeur est un code postal valide.',
 	'type_comparaison_champ' => 'Comparaison',
