@@ -32,5 +32,5 @@ function action_recharger_pages_dist() {
 
 	// Rechargement des pages : on force le recalcul complet, c'est le but.
 	include_spip('inc/noizetier_page');
-	noizetier_page_charger(true);
+	page_noizetier_charger(true);
 }

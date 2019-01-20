@@ -240,16 +240,6 @@ function noizetier_jqueryui_forcer($plugins) {
 	return $plugins;
 }
 
-// TODO : à supprimer ou transformer pour exclure certaines pages pour l'utilisateur admin et pas webmestre
-/**
- * @param $flux
- *
- * @return mixed
- */
-function noizetier_noizetier_lister_pages($flux) {
-	return $flux;
-}
-
 /**
  * @param $flux
  *
