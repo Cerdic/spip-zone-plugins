@@ -3,7 +3,6 @@ description: '<:noizetier:description_bloctexte:>'
 icon: 'texte-24.png'
 contexte: 'aucun'
 ajax: 'non'
-inclusion: 'dynamique'
 parametres:
   -
     saisie: 'input'

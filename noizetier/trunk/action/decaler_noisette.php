@@ -76,6 +76,11 @@ function action_decaler_noisette_dist() {
 			// Déplacement de la noisette par modification de son rang en base de données.
 			include_spip('inc/ncore_noisette');
 			noisette_deplacer('noizetier', $id_noisette, $id_conteneur, $rang_destination);
+
+			// On invalide le cache
+			include_spip('inc/invalideur');
+			$invalideur = "id='noisette/${id_noisette}'";
+			suivre_invalideur($invalideur);
 		}
 	}
 }
