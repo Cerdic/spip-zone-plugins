@@ -17,7 +17,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @return array
  */
-function noizetier_bloc_lister_defaut() {
+function bloc_z_lister_defaut() {
 
 	// Stocker la liste des blocs par défaut pour éviter le recalcul sur le même hit.
 	static $blocs_defaut = null;
@@ -54,12 +54,12 @@ function noizetier_bloc_lister_defaut() {
  * @return array|string
  *         La description complète sous forme de tableau ou l'information précise demandée.
  */
-function noizetier_bloc_lire($bloc, $information = '') {
+function bloc_z_lire($bloc, $information = '') {
 
 	static $description_bloc = array();
 	$retour = $information ? '' : array();
 
-	if (in_array($bloc, noizetier_bloc_lister_defaut())) {
+	if (in_array($bloc, bloc_z_lister_defaut())) {
 		if (!isset($description_bloc[$bloc])) {
 			if ($fichier = find_in_path("${bloc}/bloc.yaml")) {
 				// Il y a un fichier YAML de configuration dans le répertoire du bloc, on le lit.

@@ -35,7 +35,7 @@ function action_ajouter_noisette_dist() {
 
 	// Décomposition de l'id du conteneur en éléments du noiZetier
 	include_spip('inc/noizetier_conteneur');
-	$conteneur = noizetier_conteneur_decomposer($id_conteneur);
+	$conteneur = conteneur_noizetier_decomposer($id_conteneur);
 
 	// Test de l'autorisation
 	if (!autoriser('configurerpage', 'noizetier', '', 0, $conteneur)) {

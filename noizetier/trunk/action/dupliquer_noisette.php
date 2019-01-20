@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Cette action est réservée aux utilisateurs autorisés.
  * Elle nécessite l'id de la noisette comme argument unique.
  *
- * @uses noizetier_conteneur_decomposer()
+ * @uses conteneur_noizetier_decomposer()
  * @uses noisette_supprimer()
  *
  * @return void
@@ -34,7 +34,7 @@ function action_dupliquer_noisette_dist() {
 
 		// Décomposition de l'id du conteneur en éléments du noiZetier
 		include_spip('inc/noizetier_conteneur');
-		$conteneur = noizetier_conteneur_decomposer($noisette['id_conteneur']);
+		$conteneur = conteneur_noizetier_decomposer($noisette['id_conteneur']);
 
 		// Vérification de l'autorisation associée à l'action.
 		if (!autoriser('configurerpage', 'noizetier', '', 0, $conteneur)) {

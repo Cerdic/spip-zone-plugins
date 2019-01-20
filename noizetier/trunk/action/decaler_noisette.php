@@ -18,7 +18,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Cette action est réservée aux utilisateurs autorisés à modifier la configuration de la page
  * à laquelle est rattachée la noisette. Elle nécessite des arguments dont le sens et l'id de la noisette.
  *
- * @uses noizetier_conteneur_decomposer()
+ * @uses conteneur_noizetier_decomposer()
  * @uses noisette_deplacer()
  *
  * @return void
@@ -44,7 +44,7 @@ function action_decaler_noisette_dist() {
 
 			// Décomposition de l'id du conteneur en éléments du noiZetier
 			include_spip('inc/noizetier_conteneur');
-			$conteneur = noizetier_conteneur_decomposer($id_conteneur);
+			$conteneur = conteneur_noizetier_decomposer($id_conteneur);
 
 			// Test de l'autorisation
 			if (!autoriser('configurerpage', 'noizetier', '', 0, $conteneur)) {

@@ -31,7 +31,7 @@ function action_supprimer_composition_dist(){
 	if ($page) {
 		// On récupère la liste des blocs ayant des noisettes
 		include_spip('inc/noizetier_page');
-		$blocs = noizetier_page_compter_noisettes($page);
+		$blocs = page_noizetier_compter_noisettes($page);
 
 		// Suppression des noisettes concernées en utilisant l'API de vidage d'un conteneur, le conteneur étant
 		// chaque bloc de la composition virtuelle.
@@ -40,7 +40,7 @@ function action_supprimer_composition_dist(){
 			include_spip('inc/noizetier_conteneur');
 			foreach (array_keys($blocs) as $_bloc) {
 				// On calcule le conteneur sous sa forme identifiant chaine.
-				$id_conteneur = noizetier_conteneur_composer($page, $_bloc);
+				$id_conteneur = conteneur_noizetier_composer($page, $_bloc);
 				conteneur_vider('noizetier', $id_conteneur);
 			}
 		}

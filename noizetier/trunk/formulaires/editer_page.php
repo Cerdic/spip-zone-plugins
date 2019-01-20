@@ -47,7 +47,7 @@ function formulaires_editer_page_charger_dist($edition, $page, $redirect = '') {
 	);
 
 	include_spip('inc/noizetier_page');
-	$description_page = noizetier_page_lire($page, false);
+	$description_page = page_noizetier_lire($page, false);
 	if ($description_page) {
 		if ($edition == 'modifier') {
 			// La page désignée par $page est déjà une composition virtuelle dont on souhaite modifier une
@@ -66,7 +66,7 @@ function formulaires_editer_page_charger_dist($edition, $page, $redirect = '') {
 			// On considère que les blocs contenant des noisettes ne peuvent pas être exclus.
 			// Il est nécessaire de les vider au préalable, ce qui a pour intérêt de conserver une cohérence : les
 			// blocs exclus ne possèdent pas de noisettes "invisibles".
-			$blocs_non_vides = noizetier_page_compter_noisettes($page);
+			$blocs_non_vides = page_noizetier_compter_noisettes($page);
 			$valeurs['_blocs_disable'] = array_keys($blocs_non_vides);
 
 		} elseif ($edition == 'dupliquer') {
@@ -98,9 +98,9 @@ function formulaires_editer_page_charger_dist($edition, $page, $redirect = '') {
 		// -- pour une duplication ou une création de composition, à la liste des blocs exclus de la source.
 		// Ainsi cette liste est toujours l'inverse de l'index [blocs] de l'argument $description_page.
 		include_spip('inc/noizetier_bloc');
-		$blocs = noizetier_bloc_lister_defaut();
+		$blocs = bloc_z_lister_defaut();
 		foreach ($blocs as $_bloc) {
-			$valeurs['_blocs'][$_bloc] = noizetier_bloc_lire($_bloc, 'nom');
+			$valeurs['_blocs'][$_bloc] = bloc_z_lire($_bloc, 'nom');
 			if (!in_array($_bloc, $description_page['blocs'])) {
 				$valeurs['_blocs_defaut'][] = $_bloc;
 			}
@@ -290,7 +290,7 @@ function formulaires_editer_page_traiter_dist($edition, $page, $redirect = '') {
 					'plugin=' . sql_quote('noizetier'),
 					'profondeur=0',
 					'type=' . sql_quote($type_page),
-					'composition=' . sql_quote(noizetier_page_extraire_composition($page))
+					'composition=' . sql_quote(page_noizetier_extraire_composition($page))
 				);
 				$order_by = array('bloc', 'rang_noisette');
 				$noisettes_source = sql_allfetsel($select, $from, $where, '', $order_by);

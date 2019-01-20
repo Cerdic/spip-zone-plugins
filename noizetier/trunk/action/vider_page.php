@@ -50,11 +50,11 @@ function action_vider_page_dist() {
 		// On récupère la liste des blocs ayant des noisettes
 		if ($options['page']) {
 			include_spip('inc/noizetier_page');
-			$blocs = noizetier_page_compter_noisettes($options['page']);
+			$blocs = page_noizetier_compter_noisettes($options['page']);
 			$page_ou_objet = $options['page'];
 		} else {
 			include_spip('inc/noizetier_objet');
-			$blocs = noizetier_objet_compter_noisettes($options['objet'], $options['id_objet']);
+			$blocs = objet_noizetier_compter_noisettes($options['objet'], $options['id_objet']);
 			$page_ou_objet = $options;
 		}
 
@@ -65,7 +65,7 @@ function action_vider_page_dist() {
 			include_spip('inc/noizetier_conteneur');
 			foreach (array_keys($blocs) as $_bloc) {
 				// On calcule le conteneur sous sa forme identifiant chaine.
-				$id_conteneur = noizetier_conteneur_composer($page_ou_objet, $_bloc);
+				$id_conteneur = conteneur_noizetier_composer($page_ou_objet, $_bloc);
 				conteneur_vider('noizetier', $id_conteneur);
 			}
 		}

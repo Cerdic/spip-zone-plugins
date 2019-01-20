@@ -42,7 +42,7 @@ function formulaires_ajouter_noisette_charger_dist($page_ou_objet, $bloc, $noise
 
 		// Ajout de l'identifiant du conteneur
 		include_spip('inc/noizetier_conteneur');
-		$valeurs['id_conteneur'] = noizetier_conteneur_composer($page_ou_objet, $bloc, $noisette);
+		$valeurs['id_conteneur'] = conteneur_noizetier_composer($page_ou_objet, $bloc, $noisette);
 
 		$valeurs['editable'] = true;
 	} else {
@@ -72,7 +72,7 @@ function formulaires_ajouter_noisette_traiter_dist($page_ou_objet, $bloc, $noise
 
 	// Décomposition du conteneur en tableau associatif.
 	include_spip('inc/noizetier_conteneur');
-	$conteneur = noizetier_conteneur_decomposer($id_conteneur);
+	$conteneur = conteneur_noizetier_decomposer($id_conteneur);
 
 	if (autoriser('configurerpage', 'noizetier', 0, '', $conteneur)) {
 		if ($type_noisette = _request('type_noisette')) {

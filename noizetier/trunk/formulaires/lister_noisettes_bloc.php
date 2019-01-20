@@ -38,7 +38,7 @@ function formulaires_lister_noisettes_bloc_charger_dist($page_ou_objet, $bloc) {
 
 	// Ajout de l'identifiant du conteneur qui servira à la boucle des noisettes
 	include_spip('inc/noizetier_conteneur');
-	$valeurs['id_conteneur'] = noizetier_conteneur_composer($page_ou_objet, $bloc);
+	$valeurs['id_conteneur'] = conteneur_noizetier_composer($page_ou_objet, $bloc);
 	
 	return $valeurs;
 }
@@ -64,7 +64,7 @@ function formulaires_lister_noisettes_bloc_traiter_dist($page_ou_objet, $bloc) {
 	// et conversion en tableau associatif.
 	include_spip('inc/noizetier_conteneur');
 	$id_conteneur = _request('conteneur_id');
-	$conteneur = noizetier_conteneur_decomposer($id_conteneur);
+	$conteneur = conteneur_noizetier_decomposer($id_conteneur);
 
 	if (!autoriser('configurerpage', 'noizetier', 0, '', $conteneur)) {
 		$retour['message_erreur'] = _T('noizetier:probleme_droits');

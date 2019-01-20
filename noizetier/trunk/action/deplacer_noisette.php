@@ -40,8 +40,8 @@ function action_deplacer_noisette_dist() {
 
 	// Test de l'autorisation
 	include_spip('inc/noizetier_conteneur');
-	if (!autoriser('configurerpage', 'noizetier', '', 0, noizetier_conteneur_decomposer($id_conteneur_origine))
-	or !autoriser('configurerpage', 'noizetier', '', 0, noizetier_conteneur_decomposer($id_conteneur_destination))) {
+	if (!autoriser('configurerpage', 'noizetier', '', 0, conteneur_noizetier_decomposer($id_conteneur_origine))
+	or !autoriser('configurerpage', 'noizetier', '', 0, conteneur_noizetier_decomposer($id_conteneur_destination))) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit();

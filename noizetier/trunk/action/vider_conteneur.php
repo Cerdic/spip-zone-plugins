@@ -16,7 +16,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Cette action est réservée aux utilisateurs autorisés.
  * Elle nécessite l'id du conteneur comme argument unique.
  *
- * @uses noizetier_conteneur_decomposer()
+ * @uses conteneur_noizetier_decomposer()
  * @uses conteneur_vider()
  *
  * @return void
@@ -31,7 +31,7 @@ function action_vider_conteneur_dist() {
 	if ($id_conteneur) {
 		// Décomposition de l'id du conteneur en éléments du noiZetier
 		include_spip('inc/noizetier_conteneur');
-		$conteneur = noizetier_conteneur_decomposer($id_conteneur);
+		$conteneur = conteneur_noizetier_decomposer($id_conteneur);
 
 		// Vérification de l'autorisation associée à l'action.
 		if (!autoriser('configurerpage', 'noizetier', '', 0, $conteneur)) {

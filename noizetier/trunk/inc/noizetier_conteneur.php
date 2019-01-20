@@ -30,7 +30,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @return string
  */
-function noizetier_conteneur_composer($page_ou_objet, $bloc, $noisette=array()) {
+function conteneur_noizetier_composer($page_ou_objet, $bloc, $noisette=array()) {
 
 	$conteneur = array();
 
@@ -65,8 +65,8 @@ function noizetier_conteneur_composer($page_ou_objet, $bloc, $noisette=array()) 
  *
  * @api
  *
- * @uses noizetier_page_extraire_type()
- * @uses noizetier_page_extraire_composition()
+ * @uses page_noizetier_extraire_type()
+ * @uses page_noizetier_extraire_composition()
  * @uses type_noisette_localiser()
  *
  * @param string $id_conteneur
@@ -74,7 +74,7 @@ function noizetier_conteneur_composer($page_ou_objet, $bloc, $noisette=array()) 
  *
  * @return array
  */
-function noizetier_conteneur_decomposer($id_conteneur) {
+function conteneur_noizetier_decomposer($id_conteneur) {
 
 	// Construction du tableau associatif propre au noizetier contenant les éléments
 	// d'un conteneur mais aussi les éléments propres au noiZetier comme la page,
@@ -92,8 +92,8 @@ function noizetier_conteneur_decomposer($id_conteneur) {
 		$conteneur['page'] = $page;
 		// -- Type et composition
 		include_spip('inc/noizetier_page');
-		$conteneur['type'] = noizetier_page_extraire_type($conteneur['page']);
-		$conteneur['composition'] = noizetier_page_extraire_composition($conteneur['page']);
+		$conteneur['type'] = page_noizetier_extraire_type($conteneur['page']);
+		$conteneur['composition'] = page_noizetier_extraire_composition($conteneur['page']);
 	} else {
 		if (!empty($conteneur['id_noisette'])) {
 			// C'est une noisette conteneur : les index type de noisette et id_noisette sont initialisés.

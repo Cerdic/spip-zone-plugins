@@ -118,7 +118,7 @@ function balise_NOIZETIER_BLOC_INFOS_dist($p) {
 function calculer_infos_bloc($bloc = '', $information = '') {
 
 	include_spip('inc/noizetier_bloc');
-	return noizetier_bloc_lire($bloc, $information);
+	return bloc_z_lire($bloc, $information);
 }
 
 
@@ -188,7 +188,7 @@ function calculer_infos_page($page, $information = '') {
 		$retour = true;
 
 		// Détermination du répertoire par défaut
-		$repertoire = noizetier_page_initialiser_dossier();
+		$repertoire = page_noizetier_initialiser_dossier();
 
 		// Récupération du md5 enregistré en base de données
 		$from = 'spip_noizetier_pages';
@@ -214,8 +214,8 @@ function calculer_infos_page($page, $information = '') {
 		);
 
 		// Acquisition du type et de la composition éventuelle.
-		$type = noizetier_page_extraire_type($page);
-		$composition = noizetier_page_extraire_composition($page);
+		$type = page_noizetier_extraire_type($page);
+		$composition = page_noizetier_extraire_composition($page);
 
 		// Les compteurs de types de noisette d'une page sont calculés par une lecture de la table 'spip_types_noisettes'.
 		$from = array('spip_types_noisettes');
@@ -252,9 +252,9 @@ function calculer_infos_page($page, $information = '') {
 
 		$retour['total'] = array_sum($retour);
 	} elseif ($information == 'compteurs_noisette') {
-		$retour = noizetier_page_compter_noisettes($page);
+		$retour = page_noizetier_compter_noisettes($page);
 	} else {
-		$retour = noizetier_page_lire($page, $information);
+		$retour = page_noizetier_lire($page, $information);
 	}
 
 	return $retour;
@@ -319,9 +319,9 @@ function calculer_infos_objet($objet, $id_objet, $information = '') {
 
 	include_spip('inc/noizetier_objet');
 	if ($information == 'compteurs_noisette') {
-		$retour = noizetier_objet_compter_noisettes($objet, $id_objet);
+		$retour = objet_noizetier_compter_noisettes($objet, $id_objet);
 	} else {
-		$retour = noizetier_objet_lire($objet, $id_objet, $information);
+		$retour = objet_noizetier_lire($objet, $id_objet, $information);
 	}
 	return $retour;
 }
@@ -356,5 +356,5 @@ function balise_NOIZETIER_OBJET_LISTE_dist($p) {
 function calculer_liste_objets() {
 
 	include_spip('inc/noizetier_objet');
-	return noizetier_objet_repertorier();
+	return objet_noizetier_repertorier();
 }

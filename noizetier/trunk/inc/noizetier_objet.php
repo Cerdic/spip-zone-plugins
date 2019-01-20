@@ -25,7 +25,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return mixed
  *         La description complète sous forme de tableau ou l'information précise demandée.
  */
-function noizetier_objet_lire($type_objet, $id_objet, $information = '') {
+function objet_noizetier_lire($type_objet, $id_objet, $information = '') {
 
 	static $description_objet = array();
 
@@ -62,7 +62,7 @@ function noizetier_objet_lire($type_objet, $id_objet, $information = '') {
 
 		// On rajoute les blocs du type de page dont l'objet est une instance
 		include_spip('inc/noizetier_page');
-		$description['blocs'] = noizetier_page_lister_blocs($type_objet);
+		$description['blocs'] = page_noizetier_lister_blocs($type_objet);
 
 		// On sauvegarde finalement la description complète.
 		$description_objet[$type_objet][$id_objet] = $description;
@@ -95,7 +95,7 @@ function noizetier_objet_lire($type_objet, $id_objet, $information = '') {
  * 		   Tableau des descriptions de chaque objet trouvés. Ce tableau est éventuellement filtré sur
  *         un ou plusieurs champs de la description.
  */
-function noizetier_objet_repertorier($filtres = array()) {
+function objet_noizetier_repertorier($filtres = array()) {
 
 	static $objets = null;
 
@@ -112,8 +112,8 @@ function noizetier_objet_repertorier($filtres = array()) {
 		if ($objets_configures) {
 			foreach ($objets_configures as $_objet) {
 				// On ne retient que les objets dont le type est activé dans la configuration du plugin.
-				if (noizetier_objet_type_active($_objet['objet'])) {
-					$description = noizetier_objet_lire($_objet['objet'], $_objet['id_objet']);
+				if (objet_noizetier_type_active($_objet['objet'])) {
+					$description = objet_noizetier_lire($_objet['objet'], $_objet['id_objet']);
 					if ($description) {
 						// Si un filtre existe on teste le contenu de l'objet récupéré avant de le garder
 						// sinon on le sauvegarde immédiatement.
@@ -150,7 +150,7 @@ function noizetier_objet_repertorier($filtres = array()) {
  * @return boolean
  * 		True si le type d'objet est activé, false sinon.
  */
-function noizetier_objet_type_active($type_objet) {
+function objet_noizetier_type_active($type_objet) {
 
 	static $tables_actives = null;
 	$est_active = false;
@@ -183,7 +183,7 @@ function noizetier_objet_type_active($type_objet) {
  * @return array
  * 	       Tableau des nombre de noisettes incluses par bloc de la forme [bloc] = nombre de noisettes.
  */
-function noizetier_objet_compter_noisettes($objet, $id_objet) {
+function objet_noizetier_compter_noisettes($objet, $id_objet) {
 
 	static $blocs_compteur = array();
 

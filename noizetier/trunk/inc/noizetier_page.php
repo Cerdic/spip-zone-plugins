@@ -17,17 +17,17 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @return bool
  */
-function noizetier_page_charger($recharger = false) {
+function page_noizetier_charger($recharger = false) {
 
 	// Retour de la fonction
 	$retour = false;
 
 	// Initialiser les blocs par défaut
 	include_spip('inc/noizetier_bloc');
-	$options['blocs_defaut'] = noizetier_bloc_lister_defaut();
+	$options['blocs_defaut'] = bloc_z_lister_defaut();
 
 	// Choisir le bon répertoire des pages
-	$options['repertoire_pages'] = noizetier_page_initialiser_dossier();
+	$options['repertoire_pages'] = page_noizetier_initialiser_dossier();
 
 	// Initialiser le contexte de rechargement
 	$forcer_chargement = $recharger;
@@ -65,7 +65,7 @@ function noizetier_page_charger($recharger = false) {
 		foreach ($fichiers as $_squelette => $_chemin) {
 			$page = basename($_squelette, '.html');
 			$dossier = dirname($_chemin);
-			$est_composition = (noizetier_page_extraire_composition($page) != '');
+			$est_composition = (page_noizetier_extraire_composition($page) != '');
 			// Exclure certaines pages :
 			// -- celles du privé situes dans prive/contenu
 			// -- page liée au plugin Zpip en v1
@@ -81,7 +81,7 @@ function noizetier_page_charger($recharger = false) {
 				// retournée est vide.
 				$options['md5'] = isset($signatures[$page]) ? $signatures[$page] : '';
 				$options['recharger'] = $forcer_chargement;
-				if ($configuration = page_phraser_fichier($page, $options)) {
+				if ($configuration = phraser_fichier_descriptif_page($page, $options)) {
 					if (empty($configuration['identique'])) {
 						// On met à jour les blocs exclus avec la sauvegarde effectuée au préalable (si la page
 						// existait déjà en base).
@@ -186,7 +186,7 @@ function noizetier_page_charger($recharger = false) {
  *
  * @api
  *
- * @uses noizetier_bloc_lister_defaut()
+ * @uses bloc_z_lister_defaut()
  *
  * @param string	$page
  * 		Identifiant de la page ou de la composition.
@@ -197,7 +197,7 @@ function noizetier_page_charger($recharger = false) {
  *
  * @return array
  */
-function noizetier_page_lire($page, $traitement_typo = true) {
+function page_noizetier_lire($page, $traitement_typo = true) {
 
 	static $description_page = array();
 
@@ -219,7 +219,7 @@ function noizetier_page_lire($page, $traitement_typo = true) {
 			$description['necessite'] = unserialize($description['necessite']);
 			$description['branche'] = unserialize($description['branche']);
 			// Calcul des blocs
-			$description['blocs'] = noizetier_page_lister_blocs($page, $description['blocs_exclus']);
+			$description['blocs'] = page_noizetier_lister_blocs($page, $description['blocs_exclus']);
 			$description_page[$traitement_typo][$page] = $description;
 		} else {
 			$description_page[$traitement_typo][$page] = array();
@@ -240,11 +240,11 @@ function noizetier_page_lire($page, $traitement_typo = true) {
  *
  * @return array
  */
-function noizetier_page_lister_blocs($page, $blocs_exclus = array()) {
+function page_noizetier_lister_blocs($page, $blocs_exclus = array()) {
 
 	// Initialisation des blocs avec la liste des blocs par défaut
 	include_spip('inc/noizetier_bloc');
-	$blocs = noizetier_bloc_lister_defaut();
+	$blocs = bloc_z_lister_defaut();
 
 	// Si la liste des blocs exclus n'a pas été passé en argument on les cherche dans la configuration
 	// de la page
@@ -277,7 +277,7 @@ function noizetier_page_lister_blocs($page, $blocs_exclus = array()) {
  * 		- soit l'identifiant complet de la page,
  * 		- soit le mot précédent le tiret dans le cas d'une composition.
  */
-function noizetier_page_extraire_type($page) {
+function page_noizetier_extraire_type($page) {
 
 	$type = explode('-', $page, 2);
 	$type = $type[0];
@@ -297,7 +297,7 @@ function noizetier_page_extraire_type($page) {
  *      La composition de la page choisie, à savoir, le mot suivant le tiret,
  * 		ou la chaine vide sinon.
  */
-function noizetier_page_extraire_composition($page) {
+function page_noizetier_extraire_composition($page) {
 
 	$composition = explode('-', $page, 2);
 	$composition = isset($composition[1]) ? $composition[1] : '';
@@ -316,7 +316,7 @@ function noizetier_page_extraire_composition($page) {
  * @return boolean
  * 		True si les compositions sont autorisées, false sinon.
  */
-function noizetier_page_composition_activee($type) {
+function page_noizetier_composition_activee($type) {
 
 	$est_activee = false;
 
@@ -339,7 +339,7 @@ function noizetier_page_composition_activee($type) {
  * @return string
  * 		Le répertoire des pages sous la forme dossier/.
  */
-function noizetier_page_initialiser_dossier() {
+function page_noizetier_initialiser_dossier() {
 
 	if (defined('_NOIZETIER_REPERTOIRE_PAGES')) {
 		$repertoire_pages = _NOIZETIER_REPERTOIRE_PAGES;
@@ -364,7 +364,7 @@ function noizetier_page_initialiser_dossier() {
  * @return array
  * 	       Tableau des nombre de noisettes incluses par bloc de la forme [bloc] = nombre de noisettes.
  */
-function noizetier_page_compter_noisettes($page) {
+function page_noizetier_compter_noisettes($page) {
 
 	static $blocs_compteur = array();
 
@@ -378,8 +378,8 @@ function noizetier_page_compter_noisettes($page) {
 		// -- Construction du where identifiant précisément le type et la composition de la page
 		$where = array(
 			'plugin=' . sql_quote('noizetier'),
-			'type=' . sql_quote(noizetier_page_extraire_type($page)),
-			'composition=' . sql_quote(noizetier_page_extraire_composition($page))
+			'type=' . sql_quote(page_noizetier_extraire_type($page)),
+			'composition=' . sql_quote(page_noizetier_extraire_composition($page))
 		);
 		$group = array('bloc');
 		$blocs_non_vides = sql_allfetsel($select, $from, $where, $group);
@@ -401,28 +401,28 @@ function noizetier_page_compter_noisettes($page) {
  *
  * @internal
  *
- * @uses noizetier_page_initialiser_dossier()
- * @uses noizetier_bloc_lister_defaut()
+ * @uses page_noizetier_initialiser_dossier()
+ * @uses bloc_z_lister_defaut()
  *
  * @param       $page
  * @param array $options
  *
  * @return array
  */
-function page_phraser_fichier($page, $options = array()) {
+function phraser_fichier_descriptif_page($page, $options = array()) {
 
 	// Initialisation de la description
 	$description = array();
 
 	// Choisir le bon répertoire des pages
 	if (empty($options['repertoire_pages'])) {
-		$options['repertoire_pages'] = noizetier_page_initialiser_dossier();
+		$options['repertoire_pages'] = page_noizetier_initialiser_dossier();
 	}
 
 	// Initialiser les blocs par défaut
 	if (empty($options['blocs_defaut'])) {
 		include_spip('inc/noizetier_bloc');
-		$options['blocs_defaut'] = noizetier_bloc_lister_defaut();
+		$options['blocs_defaut'] = bloc_z_lister_defaut();
 	}
 
 	// Initialiser le contexte de chargement
