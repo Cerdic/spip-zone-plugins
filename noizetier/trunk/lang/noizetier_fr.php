@@ -53,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_ajout_noisette' => 'Les noisettes suivantes n’ont pas été ajoutées : @noisettes@',
 	'erreur_aucune_noisette_selectionnee' => 'Vous devez sélectionner une noisette !',
 	'erreur_deplacement_noisette' => 'Le noisette @noisette@ n’a pas été déplacée.',
+	'erreur_saisie_css_invalide' => 'La syntaxe de saisie des CSS est erronée (mot, tiret et espace autorisés).',
 	'erreur_doit_choisir_noisette' => 'Vous devez choisir une noisette.',
 	'erreur_mise_a_jour' => 'Une erreur s’est produite pendant la mise à jour de la base de donnée.',
 	'erreur_page_inactive' => 'La page est inactive car le ou les plugins suivants sont désactivés : @plugins@.',

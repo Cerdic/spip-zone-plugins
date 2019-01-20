@@ -85,7 +85,7 @@ function formulaires_editer_noisette_verifier_dist($id_noisette, $redirect = '')
 	}
 
 	// On vérifie la syntaxe des sélecteurs de classe
-	if (!preg_match('#([\w-]+)(\s+([\w-]+))*#', _request('css'))) {
+	if (!preg_match('#^([\w\s-]+)$#Uims', _request('css'))) {
 		$erreurs['css'] = _T('noizetier:erreur_saisie_css_invalide');
 	}
 
