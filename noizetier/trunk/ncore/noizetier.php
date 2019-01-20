@@ -201,7 +201,7 @@ function noizetier_type_noisette_lister($plugin, $information = '') {
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  *
  * @return bool
- * 		`true` si par défaut une noisette est insérée en ajax, `false` sinon.
+ * 		`true` si par défaut un type de noisette est insérée en ajax, `false` sinon.
  */
 function noizetier_type_noisette_initialiser_ajax($plugin) {
 
@@ -210,6 +210,29 @@ function noizetier_type_noisette_initialiser_ajax($plugin) {
 	$defaut_ajax = lire_config("${plugin}/ajax_noisette");
 
 	return $defaut_ajax;
+}
+
+/**
+ * Renvoie la configuration par défaut de l'inclusion à appliquer pour la compilation des noisettes.
+ * Cette information est utilisée si la description YAML d'un type noisette ne contient pas de tag inclusion
+ * ou contient un tag inclusion à `defaut`.
+ *
+ * @package SPIP\NOIZETIER\TYPE_NOISETTE\SERVICE
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ *
+ * @return bool
+ * 		`true` si par défaut un type noisette est insérée en dynamique, `false` sinon.
+ */
+function noizetier_type_noisette_initialiser_inclusion($plugin) {
+
+	// La valeur d'inclusion dynamique par défaut est inscrite dans la configuration du plugin.
+	include_spip('inc/config');
+	$defaut_inclusion = lire_config("${plugin}/inclusion_dynamique_noisette");
+
+	return $defaut_inclusion;
 }
 
 

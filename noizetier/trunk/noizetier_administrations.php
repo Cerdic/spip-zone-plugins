@@ -26,6 +26,7 @@ function noizetier_upgrade($nom_meta_base_version, $version_cible) {
 		'objets_noisettes' => array(),
 		'encapsulation_noisette' => 'on',
 		'ajax_noisette' => 'on',
+		'inclusion_dynamique_noisette' => 'on',
 		'profondeur_max' => '',
 	);
 
