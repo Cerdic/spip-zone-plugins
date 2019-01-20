@@ -84,9 +84,11 @@ function formulaires_editer_noisette_verifier_dist($id_noisette, $redirect = '')
 		$erreurs = saisies_verifier($champs, false);
 	}
 
-	// On vérifie la syntaxe des sélecteurs de classe
-	if (!preg_match('#^([\w\s-]+)$#Uims', _request('css'))) {
-		$erreurs['css'] = _T('noizetier:erreur_saisie_css_invalide');
+	// On vérifie la syntaxe des attributs class d'une balise HTML
+	if (($css = _request('css'))
+		and	($verifier = charger_fonction('verifier', 'inc/'))
+		and ($erreur_css = $verifier($css, 'attribut_class'))) {
+			$erreurs['css'] = $erreur_css;
 	}
 
 	return $erreurs;

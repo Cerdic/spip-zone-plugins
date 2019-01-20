@@ -316,7 +316,7 @@ function noizetier_affiche_milieu($flux) {
 			// On recharge les pages du noiZetier dont la liste ou l'activité a pu changer. Inutile de forcer un
 			// rechargement complet.
 			include_spip('inc/noizetier_page');
-			noizetier_page_charger();
+			page_noizetier_charger();
 			// On recharge les types de noisettes dont la liste ou l'activité a pu changer. Inutile de forcer un
 			// rechargement complet.
 			include_spip('inc/ncore_type_noisette');
