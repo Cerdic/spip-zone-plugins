@@ -25,3 +25,5 @@ parametres:
     options:
       nom: 'conteneur_css'
       label: '<:ncore:saisie_conteneur_css_label:>'
+    verifier:
+      type: 'attribut_class'
