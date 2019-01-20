@@ -18,10 +18,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @uses type_noisette_lire()
  * @uses ncore_conteneur_verifier()
  * @uses ncore_conteneur_identifier()
+ * @uses ncore_conteneur_construire()
+ * @uses ncore_conteneur_est_noisette()
+ * @uses ncore_noisette_decrire()
  * @uses ncore_noisette_completer()
  * @uses ncore_noisette_lister()
- * @uses ncore_noisette_stocker()
  * @uses ncore_noisette_ranger()
+ * @uses ncore_noisette_stocker()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -411,6 +414,8 @@ function noisette_lire($plugin, $noisette, $information = '', $traiter_typo = fa
  * @uses ncore_conteneur_verifier()
  * @uses ncore_conteneur_identifier()
  * @uses ncore_noisette_lister()
+ * @uses ncore_conteneur_construire()
+ * @uses ncore_conteneur_est_noisette()
  * @uses ncore_noisette_changer_conteneur()
  * @uses ncore_noisette_ranger()
  *
@@ -596,6 +601,7 @@ function noisette_deplacer($plugin, $noisette, $conteneur_destination, $rang_des
  * @uses noisette_ajouter()
  * @uses noisette_parametrer()
  * @uses ncore_noisette_lister()
+ * @uses noisette_dupliquer()
  *
  * @param string       $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou

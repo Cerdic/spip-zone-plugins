@@ -92,6 +92,7 @@ function type_noisette_ajaxifier($plugin, $type_noisette, $stockage = '') {
  *
  * @uses cache_lire()
  * @uses cache_ecrire()
+ * @uses ncore_type_noisette_initialiser_inclusion()
  * @uses ncore_type_noisette_lister()
  *
  * @param string $plugin
@@ -387,6 +388,7 @@ function noisette_encapsuler($plugin, $contenu, $encapsulation, $parametres, $st
  * @api
  * @filtre
  *
+ * @uses ncore_conteneur_verifier()
  * @uses ncore_noisette_lister()
  *
  * @param string $plugin

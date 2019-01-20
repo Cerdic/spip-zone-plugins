@@ -59,7 +59,6 @@ if (!defined('_NCORE_NOMCACHE_TYPE_NOISETTE_CONTEXTE')) {
  * éventuellement vide.
  *
  * @api
- * @uses lire_fichier_securise()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
@@ -91,7 +90,6 @@ function cache_lire($plugin, $nom_cache) {
  * Ecrit le contenu d'un tableau dans le cache spécifié d'un plugin donné.
  *
  * @api
- * @uses ecrire_fichier_securise()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
@@ -127,7 +125,6 @@ function cache_ecrire($plugin, $nom_cache, $contenu_cache) {
  * Supprime le cache cache spécifié d'un plugin donné.
  *
  * @api
- * @uses supprimer_fichier()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier

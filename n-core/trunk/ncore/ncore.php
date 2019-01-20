@@ -460,6 +460,12 @@ function ncore_noisette_stocker($plugin, $description, $stockage = '') {
  * Le rang destination n'est pas vérifié lors du rangement dans le conteneur destination. Il convient
  * à l'appelant de vérifier que le rang est libre.
  *
+ * @package SPIP\NCORE\NOISETTE\SERVICE
+ *
+ * @uses ncore_chercher_service()
+ * @uses ncore_noisette_destocker()
+ * @uses ncore_conteneur_construire()
+ *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
@@ -1061,8 +1067,9 @@ function ncore_conteneur_est_noisette($plugin, $conteneur, $stockage = '') {
  *
  * @package SPIP\NCORE\CONTENEUR\SERVICE
  *
- * @uses ncore_chercher_service()
  * @uses ncore_noisette_lister()
+ * @uses ncore_conteneur_destocker()
+ * @uses ncore_chercher_service()
  * @uses ncore_conteneur_identifier()
  *
  * @param string       $plugin

@@ -16,6 +16,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @package SPIP\NCORE\NOISETTE\BALISE
  * @balise
  *
+ * @uses calculer_preview_noisette()
+ *
  * @param Champ $p
  *        Pile au niveau de la balise.
  *

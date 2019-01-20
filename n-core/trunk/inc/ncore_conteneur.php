@@ -18,6 +18,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @api
  * @filtre
  *
+ * @uses ncore_conteneur_verifier()
+ * @uses ncore_conteneur_identifier()
+ *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
@@ -80,6 +83,7 @@ function conteneur_construire($plugin, $id_conteneur, $stockage = '') {
  *
  * @uses ncore_conteneur_construire()
  * @uses ncore_conteneur_verifier()
+ * @uses ncore_conteneur_est_noisette()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -97,7 +101,7 @@ function conteneur_est_noisette($plugin, $conteneur, $stockage = '') {
 	// Suivant le format du conteneur on calcule le tableau ou on le vérifie.
 	include_spip('ncore/ncore');
 	if (is_string($conteneur)) {
-		$conteneur = ncore_conteneur_construire($plugin, $conteneur, $stockage);
+		$conteneur = conteneur_est_noisette($plugin, $conteneur, $stockage);
 	} else {
 		$conteneur = ncore_conteneur_verifier($plugin, $conteneur, $stockage);
 	}
@@ -115,6 +119,8 @@ function conteneur_est_noisette($plugin, $conteneur, $stockage = '') {
  * @api
  * @filtre
  *
+ * @uses ncore_conteneur_construire()
+ * @uses ncore_conteneur_verifier()
  * @uses ncore_conteneur_destocker()
  *
  * @param string $plugin
