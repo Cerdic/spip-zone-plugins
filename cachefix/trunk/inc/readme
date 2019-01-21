@@ -1,0 +1,4 @@
+Par ftp ou ssh
+- dans ecrire/inc il faut sauvegarder la version distribuée de utils.php en la renommant utils.php.sav 
+- puis il faut y copier, en la renommant utils.php,
+  la version de utils.fix correspondant à la branche de votre spip
