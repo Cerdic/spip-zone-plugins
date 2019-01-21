@@ -1,0 +1,15 @@
+<paquet
+	prefix="cachefix"
+	categorie="maintenance"
+	version="0.1.0"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="images/cachefix-32.png"
+	documentation="https://contrib.spip.net"
+>
+	<nom>cachefix</nom>
+	<!-- Correction du bug de calcul des sessionnements du cache https://core.spip.net/issues/4235 -->
+	<auteur lien="https://contrib.spip.net/JLuc">JLuc</auteur>
+	<credit lien="https://thenounproject.com/search/?i=633971">Icone de Gan Khoon Lay, Licence Creative Commons</credit>
+	<utilise nom="spip" compatibilite="[3.0.0;3.3.*]"/>
+</paquet>
