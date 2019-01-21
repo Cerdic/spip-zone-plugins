@@ -68,7 +68,6 @@ You can choose a new identifier or suffix the reference identifier as follows:
 	'explication_heritages_composition' => 'The composition being edited is based on the "@type@" content type that has child content types. You can define for each type of child content a composition to apply by default.',
 	'explication_noisette' => 'Nut type « @noisette@ »',
 	'explication_noisette_css' => 'You can add to the wrapping nut tag any additional CSS classes.', # MODIF
-	'explication_noizetier_ajax' => 'The default AJAX inclusion mode can be changed individually for each nut (YAML file).',
 	'explication_noizetier_balise' => 'The default mode of inclusion in a wrapping tag can be modified individually for each nut (parameterization).', # MODIF
 	'explication_noizetier_profondeur_max' => 'You can nest container-type nuts. Choose the number of nesting levels you want.', # MODIF
 	'explication_objet' => 'Type of content "@type@"',
@@ -150,7 +149,7 @@ nuts on the following pages:', # MODIF
 	'label_identifiant' => 'identifier:',
 	'label_niveau_titre' => 'Title level:',
 	'label_noisette_css' => 'CSS classes',
-	'label_noizetier_ajax' => 'By default, include each nut in AJAX',
+	'label_noizetier_ajax' => 'By default, include each nut in AJAX', # MODIF
 	'label_noizetier_balise' => 'By default, include each nut in a tag', # MODIF
 	'label_texte' => 'Text:',
 	'label_texte_introductif' => 'Introduction text (optional):',
