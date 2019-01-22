@@ -37,7 +37,7 @@ function smsfactor($message,$destinataire,$arg) {
 	$username = lire_config('sms/login_smsfactor');
 	$password = lire_config('sms/mdp_smsfactor');
 	$sender   = ($arg['sender']) ? $arg['sender'] : lire_config('sms/expediteur_smsfactor');
-	$message  = nettoyer_xml($message);
+	//$message  = nettoyer_xml($message);
 
 	require_once('classes/smsfactor/sendSMSclass.php');
 	$SENDSMS = new SendSMSclass();
@@ -123,7 +123,7 @@ function octopush($sms_text,$sms_recipients,$arg) {
  * Afficher la balance de sms disponible
  *
  * <INCLURE{fond=inclure/octopush_balance} /> pour l'affichage
- * 
+ *
  * @param string $type
  *		standard ou premium
  * @return boolean
