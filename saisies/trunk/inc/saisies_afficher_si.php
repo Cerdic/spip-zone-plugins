@@ -126,7 +126,8 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 							."$sel.obligatoire > textarea, "// si le afficher_si porte directement sur le textearea
 							."$sel .obligatoire > textarea, "// si le afficher_si porte sur le fiedset
 							."$sel.obligatoire > select, "//si le afficher_si porte directement sur le select
-							."$sel .obligatoire > select";//si le afficher_si porte sur le fieldset
+							."$sel .obligatoire > select, "//si le afficher_si porte sur le fieldset
+							."$sel.obligatoire input ";//si le afficher_si porte sur un radio
 			$code .=	"\t\t$(form).find("
 							.'"'."$pour_html_5\")".
 							".attr(\"required\",true);\n";
