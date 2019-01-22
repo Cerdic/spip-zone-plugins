@@ -14,9 +14,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 if (find_in_path('images/logo-spip.png')) {
-	define( _SPIP_LOGO_MUTU,find_in_path('images/logo-spip.png'));
+	define('_SPIP_LOGO_MUTU', find_in_path('images/logo-spip.png'));
 } else {
-	define( _SPIP_LOGO_MUTU,find_in_path('images/logo-spip.gif'));
+	define('_SPIP_LOGO_MUTU', find_in_path('images/logo-spip.gif'));
 }
 
 define('_PRIVILEGES_MYSQL_USER_BASE', 'Alter, Select, Insert, Update, Delete, Create, Drop');
