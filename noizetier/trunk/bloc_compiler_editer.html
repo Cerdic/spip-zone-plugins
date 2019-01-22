@@ -2,8 +2,8 @@
 #SET{composition, #ENV{objet}|?{'', #ENV{composition}}}
 [(#SET{page, #GET{type}[-(#GET{composition})]})]
 [(#ENV{objet}|?{
-	#SET{informations, #NOIZETIER_OBJET_INFOS{#ENV{objet}, #ENV{id_objet}}},
-	#SET{informations, #NOIZETIER_PAGE_INFOS{#ENV{page}}}
+	#SET{informations, #OBJET_NOIZETIER_INFOS{#ENV{objet}, #ENV{id_objet}}},
+	#SET{informations, #PAGE_NOIZETIER_INFOS{#ENV{page}}}
 })]
 
 <div class="noizetier-bloc" id="noizetier-bloc-#ENV{bloc}">
@@ -17,7 +17,7 @@
 	]
 
 	<div class="bloc-nom">
-		[(#NOIZETIER_BLOC_INFOS{#ENV{bloc}, nom})]
+		[(#BLOC_Z_INFOS{#ENV{bloc}, nom})]
 	</div>
 
 	<BOUCLE_noisettes(NOISETTES) {plugin=noizetier}{id_conteneur=#ENV{id_conteneur}}{par rang_noisette}>

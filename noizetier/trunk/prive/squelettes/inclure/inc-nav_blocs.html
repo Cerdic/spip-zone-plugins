@@ -1,8 +1,8 @@
 [(#REM) <!-- Navigation dans les blocs configurables de la page --> ]
 #SET{blocs_decompte,
 	#ENV{page}|?{
-		#NOIZETIER_PAGE_INFOS{#ENV{page}, compteurs_noisette},
-		#NOIZETIER_OBJET_INFOS{#ENV{objet}, #ENV{id_objet}, compteurs_noisette}
+		#PAGE_NOIZETIER_INFOS{#ENV{page}, compteurs_noisette},
+		#OBJET_NOIZETIER_INFOS{#ENV{objet}, #ENV{id_objet}, compteurs_noisette}
 	}
 }
 <B_blocs>
@@ -14,7 +14,7 @@
 			(#SELF
 				|parametre_url{bloc, #VALEUR}
 				|lien_ou_expose{
-					#NOIZETIER_BLOC_INFOS{#VALEUR, nom}&nbsp;\(#GET{nb_noisettes}\),
+					#BLOC_Z_INFOS{#VALEUR, nom}&nbsp;\(#GET{nb_noisettes}\),
 					#VALEUR|=={#ENV{bloc_affiche}}})
 		</li>]
 </BOUCLE_blocs>

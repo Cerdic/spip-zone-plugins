@@ -28,16 +28,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 // -------------------------------------------------------------------
 
 /**
- * Compile la balise `#NOIZETIER_ICONE_LISTE` qui fournit la liste des icones d'une taille donnée en pixels
+ * Compile la balise `#ICONE_NOIZETIER_LISTE` qui fournit la liste des icones d'une taille donnée en pixels
  * disponibles dans les thèmes SPIP de l'espace privé.
- * La signature de la balise est : `#NOIZETIER_ICONE_LISTE{taille}`.
+ * La signature de la balise est : `#ICONE_NOIZETIER_LISTE{taille}`.
  *
  * @package SPIP\NOIZETIER\ICONE\BALISE
  * @balise
  *
  * @example
  *     ```
- *     #NOIZETIER_BLOC_INFOS{24}, renvoie les icones de taille 24px présents dans les thèmes du privé
+ *     #ICONE_NOIZETIER_LISTE{24}, renvoie les icones de taille 24px présents dans les thèmes du privé
  *     ```
  *
  * @param Champ $p
@@ -46,7 +46,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return Champ
  *         Pile complétée par le code à générer.
  **/
-function balise_NOIZETIER_ICONE_LISTE_dist($p) {
+function balise_ICONE_NOIZETIER_LISTE_dist($p) {
 	$taille = interprete_argument_balise(1, $p);
 	$taille = str_replace('\'', '"', $taille);
 	$p->code = "calculer_liste_icones($taille)";
@@ -79,17 +79,17 @@ function calculer_liste_icones($taille = 24) {
 // -------------------------------------------------------------------
 
 /**
- * Compile la balise `#NOIZETIER_BLOC_INFOS` qui fournit un champ ou tous les champs descriptifs d'un bloc Z
+ * Compile la balise `#BLOC_Z_INFOS` qui fournit un champ ou tous les champs descriptifs d'un bloc Z
  * donné. Ces champs sont lus dans le fichier YAML du bloc si il existe.
- * La signature de la balise est : `#NOIZETIER_BLOC_INFOS{bloc, information}`.
+ * La signature de la balise est : `#BLOC_Z_INFOS{bloc, information}`.
  *
  * @package SPIP\NOIZETIER\BLOC\BALISE
  * @balise
  *
  * @example
  *     ```
- *     #NOIZETIER_BLOC_INFOS{content}, renvoie tous les champs descriptifs du bloc content
- *     #NOIZETIER_BLOC_INFOS{content, nom}, renvoie le titre du bloc content
+ *     #BLOC_Z_INFOS{content}, renvoie tous les champs descriptifs du bloc content
+ *     #BLOC_Z_INFOS{content, nom}, renvoie le titre du bloc content
  *     ```
  * @param Champ $p
  *        Pile au niveau de la balise.
@@ -97,7 +97,7 @@ function calculer_liste_icones($taille = 24) {
  * @return Champ
  *         Pile complétée par le code à générer.
  **/
-function balise_NOIZETIER_BLOC_INFOS_dist($p) {
+function balise_BLOC_Z_INFOS_dist($p) {
 	$bloc = interprete_argument_balise(1, $p);
 	$bloc = str_replace('\'', '"', $bloc);
 	$information = interprete_argument_balise(2, $p);
@@ -127,9 +127,9 @@ function calculer_infos_bloc($bloc = '', $information = '') {
 // -------------------------------------------------------------------
 
 /**
- * Compile la balise `#NOIZETIER_PAGE_INFOS` qui fournit un champ ou tous les champs descriptifs d'une page
+ * Compile la balise `#PAGE_NOIZETIER_INFOS` qui fournit un champ ou tous les champs descriptifs d'une page
  * ou d'une composition donnée. Ces champs sont lus dans la table `spip_noizetier_pages`.
- * La signature de la balise est : `#NOIZETIER_PAGE_INFOS{page, information}`.
+ * La signature de la balise est : `#PAGE_NOIZETIER_INFOS{page, information}`.
  *
  * La fonction peut aussi renvoyer d'autres informations calculées, à savoir :
  * - `est_modifiee` qui indique si la configuration du fichier YAML ou XML de la page a été modifiée ou pas.
@@ -143,12 +143,12 @@ function calculer_infos_bloc($bloc = '', $information = '') {
  *
  * @example
  *     ```
- *     #NOIZETIER_PAGE_INFOS{article}, renvoie tous les champs descriptifs de la page article
- *     #NOIZETIER_PAGE_INFOS{article, nom}, renvoie le titre de la page article
- *     #NOIZETIER_PAGE_INFOS{article-forum, nom}, renvoie le titre de la composition forum de la page article
- *     #NOIZETIER_PAGE_INFOS{article, est_modifiee}, indique si la configuration de la page article a été modifiée
- *     #NOIZETIER_PAGE_INFOS{article, compteurs_type_noisette}, fournit les compteurs de types de noisette compatibles
- *     #NOIZETIER_PAGE_INFOS{article, compteurs_noisette}, fournit les compteurs de noisettes incluses par bloc
+ *     #PAGE_NOIZETIER_INFOS{article}, renvoie tous les champs descriptifs de la page article
+ *     #PAGE_NOIZETIER_INFOS{article, nom}, renvoie le titre de la page article
+ *     #PAGE_NOIZETIER_INFOS{article-forum, nom}, renvoie le titre de la composition forum de la page article
+ *     #PAGE_NOIZETIER_INFOS{article, est_modifiee}, indique si la configuration de la page article a été modifiée
+ *     #PAGE_NOIZETIER_INFOS{article, compteurs_type_noisette}, fournit les compteurs de types de noisette compatibles
+ *     #PAGE_NOIZETIER_INFOS{article, compteurs_noisette}, fournit les compteurs de noisettes incluses par bloc
  *     ```
  *
  * @param Champ $p
@@ -157,7 +157,7 @@ function calculer_infos_bloc($bloc = '', $information = '') {
  * @return Champ
  *         Pile complétée par le code à générer.
  **/
-function balise_NOIZETIER_PAGE_INFOS_dist($p) {
+function balise_PAGE_NOIZETIER_INFOS_dist($p) {
 
 	// Récupération des arguments de la balise.
 	// -- seul l'argument information est optionnel.
@@ -266,9 +266,9 @@ function calculer_infos_page($page, $information = '') {
 // --------------------------------------------------------------------
 
 /**
- * Compile la balise `#NOIZETIER_OBJET_INFOS` qui fournit un champ ou tous les champs descriptifs d'un objet
+ * Compile la balise `#OBJET_NOIZETIER_INFOS` qui fournit un champ ou tous les champs descriptifs d'un objet
  * donné. Ces champs sont lus dans la table de l'objet.
- * La signature de la balise est : `#NOIZETIER_OBJET_INFOS{type_objet, id_objet, information}`.
+ * La signature de la balise est : `#OBJET_NOIZETIER_INFOS{type_objet, id_objet, information}`.
  *
  * La fonction peut aussi renvoyer d'autres informations calculées, à savoir :
  * - `compteurs_noisette` qui donne le nombre de noisettes incluses dans chaque bloc de l'objet.
@@ -278,9 +278,9 @@ function calculer_infos_page($page, $information = '') {
  *
  * @example
  *     ```
- *     #NOIZETIER_OBJET_INFOS{article, 12}, renvoie tous les champs descriptifs de la page article
- *     #NOIZETIER_OBJET_INFOS{article, 12, nom}, renvoie le titre de la page article
- *     #NOIZETIER_OBJET_INFOS{article, 12, compteurs_noisette}, fournit les compteurs de noisettes incluses par bloc
+ *     #OBJET_NOIZETIER_INFOS{article, 12}, renvoie tous les champs descriptifs de la page article
+ *     #OBJET_NOIZETIER_INFOS{article, 12, nom}, renvoie le titre de la page article
+ *     #OBJET_NOIZETIER_INFOS{article, 12, compteurs_noisette}, fournit les compteurs de noisettes incluses par bloc
  *     ```
  *
  * @param Champ $p
@@ -289,7 +289,7 @@ function calculer_infos_page($page, $information = '') {
  * @return Champ
  *         Pile complétée par le code à générer.
  **/
-function balise_NOIZETIER_OBJET_INFOS_dist($p) {
+function balise_OBJET_NOIZETIER_INFOS_dist($p) {
 
 	// Récupération des arguments de la balise.
 	// -- seul l'argument information est optionnel.
@@ -328,9 +328,9 @@ function calculer_infos_objet($objet, $id_objet, $information = '') {
 
 
 /**
- * Compile la balise `#NOIZETIER_OBJET_LISTE` qui renvoie la liste des objets possédant des noisettes
+ * Compile la balise `#OBJET_NOIZETIER_LISTE` qui renvoie la liste des objets possédant des noisettes
  * configurées. Chaque objet est fourni avec sa description complète.
- * La signature de la balise est : `#NOIZETIER_OBJET_LISTE`.
+ * La signature de la balise est : `#OBJET_NOIZETIER_LISTE`.
  *
  * @balise
  *
@@ -340,7 +340,7 @@ function calculer_infos_objet($objet, $id_objet, $information = '') {
  * @return Champ
  *         Pile complétée par le code à générer.
  **/
-function balise_NOIZETIER_OBJET_LISTE_dist($p) {
+function balise_OBJET_NOIZETIER_LISTE_dist($p) {
 
 	// Aucun argument à la balise.
 	$p->code = "calculer_liste_objets()";

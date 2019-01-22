@@ -8,7 +8,7 @@
 	[<p class="explication">(#ENV{explication}|_T{#ARRAY{type, #ENV{type}}})</p>]
 
 	[(#ENV{est_virtuelle}|=={non}
-		|et{#NOIZETIER_PAGE_INFOS{#ENV{page}, est_modifiee}}
+		|et{#PAGE_NOIZETIER_INFOS{#ENV{page}, est_modifiee}}
 		|et{#ENV{id_objet}|non}
 		|oui)
 		[(#SET{libelle, #ENV{composition}|?{<:noizetier:recharger_composition:>, <:noizetier:recharger_page:>}})]

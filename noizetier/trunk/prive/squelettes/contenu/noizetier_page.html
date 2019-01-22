@@ -21,7 +21,7 @@
 			</div>]
 		</div>
 	</BOUCLE_si_page>
-	#SET{informations, #NOIZETIER_OBJET_INFOS{#OBJET, #ID_OBJET}}
+	#SET{informations, #OBJET_NOIZETIER_INFOS{#OBJET, #ID_OBJET}}
 	[(#BOITE_OUVRIR{
 		<h1>
 			<a[ href="(#ID_OBJET|generer_url_entite{#OBJET})"]>[(#GET{informations/titre})]</a>
@@ -34,7 +34,7 @@
 	[(#REM) <!-- Liste des blocs configurables pour la page en cours --> ]
 	<br class="clear" />
 	<h3><:noizetier:menu_blocs:></h3>
-	#SET{blocs, #NOIZETIER_PAGE_INFOS{#ENV{page, #OBJET}}|table_valeur{blocs}}
+	#SET{blocs, #PAGE_NOIZETIER_INFOS{#ENV{page, #OBJET}}|table_valeur{blocs}}
 	#SET{bloc_affiche, #ENV{bloc}|sinon{#GET{blocs}|reset}}
 	<INCLURE{fond=prive/squelettes/inclure/inc-nav_blocs,
 		blocs=#GET{blocs},

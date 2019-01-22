@@ -6,7 +6,7 @@
 	plugin,1,
 }}
 #SET{tri,conteneur}
-#SET{compteurs, #NOIZETIER_PAGE_INFOS{#ENV{page, #OBJET}, compteurs_type_noisette}}
+#SET{compteurs, #PAGE_NOIZETIER_INFOS{#ENV{page, #OBJET}, compteurs_type_noisette}}
 <BOUCLE_si_type_noisette(CONDITION) {si #GET{compteurs/total}}>
 	<BOUCLE_infos_page(NOIZETIER_PAGES) {page=#ENV{page, #OBJET}}>
 		[(#SET{type, #TYPE})]

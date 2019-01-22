@@ -8,7 +8,7 @@
 	#SET{url_add, #URL_ECRIRE{noisette_add, page=#ENV{page}&bloc=#ENV{bloc}}},
 	#SET{url_add, #URL_ECRIRE{noisette_add, objet=#ENV{objet}&id_objet=#ENV{id_objet}&bloc=#ENV{bloc}}}
 })]
-#SET{infos_bloc, #NOIZETIER_BLOC_INFOS{#ENV{bloc}}}
+#SET{infos_bloc, #BLOC_Z_INFOS{#ENV{bloc}}}
 <form method="post" action="#ENV{action}">
 	[(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
 	#ACTION_FORMULAIRE{#ENV{action}}

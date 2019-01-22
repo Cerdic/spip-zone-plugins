@@ -11,7 +11,7 @@
 		</a> &gt;
 		<a href="[(#URL_ECRIRE{noizetier_page}|parametre_url{page, #PAGE})]">[ (#NOM)]</a> &gt;
 	</BOUCLE_page>
-		[(#NOIZETIER_BLOC_INFOS{#_noisette_edit:BLOC, nom}) &gt;]
+		[(#BLOC_Z_INFOS{#_noisette_edit:BLOC, nom}) &gt;]
 		<strong class="on">[ (#GET{nom_noisette})]</strong>
 	</B_page>
 		<a href="#URL_ECRIRE{noizetier_objets}"><:noizetier:liste_objets:></a> &gt;
@@ -19,7 +19,7 @@
 		<a href="[(#URL_ECRIRE{noizetier_page}|parametre_url{objet, #OBJET}|parametre_url{id_objet, #ID_OBJET})]">
 			[ (#INFO_TITRE{#OBJET, #ID_OBJET}|couper{80})]
 		</a> &gt;
-		[(#NOIZETIER_BLOC_INFOS{#_noisette_edit:BLOC, nom}) &gt;]
+		[(#BLOC_Z_INFOS{#_noisette_edit:BLOC, nom}) &gt;]
 		<strong class="on">[ (#GET{nom_noisette})]</strong>
 		[(#REM|changer_typo)]
 	<//B_page>

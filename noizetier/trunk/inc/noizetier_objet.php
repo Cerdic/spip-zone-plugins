@@ -11,7 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Renvoie la description complète ou uniquement une information précise pour un objet donné.
- * Cette fonction est utilisable dans le public via la balise #NOIZETIER_OBJET_INFOS.
+ * Cette fonction est utilisable dans le public via la balise #OBJET_NOIZETIER_INFOS.
  *
  * @api
  *
@@ -84,7 +84,7 @@ function objet_noizetier_lire($type_objet, $id_objet, $information = '') {
 
 /**
  * Lister les contenus ayant des noisettes spécifiquement configurées pour leur page.
- * Cette fonction est utilisable dans le public via la balise #NOIZETIER_OBJET_LISTE.
+ * Cette fonction est utilisable dans le public via la balise #OBJET_NOIZETIER_LISTE.
  *
  * @api
  *
