@@ -207,11 +207,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legende_noisette_inclusion' => 'Paramètres d’inclusion',
 	'legende_noisette_parametrage' => 'Paramètres de configuration',
 	'liste_icones' => 'Liste d’icônes',
-	'liste_objets' => 'Contenus possédant une configuration de noisettes',
+	'liste_objets' => 'Contenus possédant des noisettes',
 	'liste_objets_configures' => 'Liste des objets',
 	'liste_pages' => 'Liste des pages',
-	'liste_pages_objet_non' => 'Pages non liées à un type de contenu',
-	'liste_pages_objet_oui' => 'Pages liées à un type de contenu',
+	'liste_pages_objet_non' => 'Pages autonomes',
+	'liste_pages_objet_oui' => 'Pages des contenus',
 	'liste_pages_toutes' => 'Toutes les pages',
 
 	// M
