@@ -355,9 +355,11 @@ function noizetier_ieconfig_importer($importation, $contenu_import) {
 			if (isset($blocs_exclus_import[$_page_explicite['page']])) {
 				// Remplacement des blocs exclus de la page actuelle par ceux du fichier d'import. On filtre
 				// les blocs éventuellement non autorisés sur le site.
-				$modification = array(
-					'blocs_exclus' => array_intersect(unserialize($blocs_exclus_import[$_page_explicite['page']]), $blocs_defaut)
+				$blocs_exclus = array_intersect(
+					unserialize($blocs_exclus_import[$_page_explicite['page']]),
+					$blocs_defaut
 				);
+				$modification = array('blocs_exclus' => serialize($blocs_exclus));
 				$where = array('page=' . sql_quote($_page_explicite['page']));
 				sql_updateq('spip_noizetier_pages', $modification, $where);
 			}
