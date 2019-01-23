@@ -48,7 +48,7 @@ function formulaires_configurer_noizetier_traiter_dist() {
 	$objets_configurables = is_array($objets_configurables) ? array_filter($objets_configurables) : array();
 	set_request('objets_noisettes', $objets_configurables);
 
-	// On enregistre les nouvelles valeurs saisies.***********************************************************
+	// On enregistre les nouvelles valeurs saisies.
 	include_spip('inc/cvt_configurer');
 	$trace = cvtconf_formulaires_configurer_enregistre('configurer_noizetier', array());
 	$retour['message_ok'] = _T('config_info_enregistree') . $trace;

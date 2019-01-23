@@ -30,9 +30,8 @@ function formulaires_etendre_noisette_charger_dist($noisette, $page_noisette, $b
 
 	// On récupère le type de page et la composition associé au type de noisette.
 	// On récupère aussi sa nature conteneur ou pas qui s'applique donc à la noisette à copier.
-	$select = array('type', 'composition', 'conteneur');
-	$where = array('type_noisette=' . sql_quote($noisette['type_noisette']));
-	$type_noisette = sql_fetsel($select, 'spip_types_noisettes', $where);
+	include_spip('inc/ncore_type_noisette');
+	$type_noisette = type_noisette_lire('noizetier', $noisette['type_noisette']);
 	$valeurs['est_conteneur'] = $type_noisette['conteneur'];
 
 	// On cherche la liste des pages:
