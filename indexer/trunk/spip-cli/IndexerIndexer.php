@@ -19,6 +19,13 @@ class IndexerIndexer extends Command {
 				'Indexer les contenus d\'une table en particulier',
 				null
 			)
+			->addOption(
+				'source',
+				null,
+				InputOption::VALUE_OPTIONAL,
+				'Indexer les contenus d\'une source en particulier',
+				null
+			)
 		;
 	}
 
@@ -61,6 +68,34 @@ class IndexerIndexer extends Command {
 		else {
 			// Appeler la fonction qui liste les sources et qui comporte un pipeline pour étendre
 			$sources = indexer_sources();
+		}
+
+		if ($source = $input->getOption('source')) {
+
+			$remove = array();
+			$found = false;
+
+			$i = $sources->getIterator();
+			while ($i->valid()){
+				$skey = $i->key();
+				$ssource = $i->current();
+				if ($skey==$source){
+					$found = true;
+				} else {
+					$remove[] = $skey;
+				}
+				$i->next();
+			}
+			if ($found){
+				foreach ($remove as $key){
+					$sources->unregister($key);
+				}
+			} else {
+				$output->writeln("<error>Source $source inconnue</error>");
+				$output->writeln(implode(', ', $remove));
+				exit(1);
+			}
+
 		}
 		
 		$SpipSourcesIndexer = new Spip\Indexer\Sources\SpipSourcesIndexer($indexer, $sources);
