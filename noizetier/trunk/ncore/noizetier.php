@@ -361,6 +361,7 @@ function noizetier_noisette_completer($plugin, $description) {
 
 		// La description de la noisette contient l'id du conteneur : on le décompose car il contient certains
 		// des champs complémentaires.
+		include_spip('inc/noizetier_conteneur');
 		$id_conteneur = $description['id_conteneur'];
 		$conteneur_etendu = conteneur_noizetier_decomposer($id_conteneur);
 
