@@ -1,11 +1,12 @@
 <?php
 
-use Symfony\Component\Console\Command\Command;
+use Spip\Cli\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\ProgressHelper;
+
 
 class IndexerObjet extends Command {
 	protected function configure() {
