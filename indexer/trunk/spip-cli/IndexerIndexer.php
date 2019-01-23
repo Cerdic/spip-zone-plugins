@@ -26,10 +26,24 @@ class IndexerIndexer extends Command {
 				'Indexer les contenus d\'une source en particulier',
 				null
 			)
+			->addOption(
+				'parts',
+				null,
+				InputOption::VALUE_OPTIONAL,
+				'Indiquer le nombre de parts dans chaque paquet d\'indexation',
+				null
+			)
 		;
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output) {
+
+		// d'abord l'option parts !
+		if ($parts = intval($tables = $input->getOption('parts'))
+		  and !defined('_INDEXER_PARTS_NUMBER')) {
+			define('_INDEXER_PARTS_NUMBER', $parts);
+		}
+
 		include_spip('inc/indexer');
 		global $spip_racine;
 		global $spip_loaded;
