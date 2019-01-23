@@ -32,6 +32,7 @@ class IndexerObjet extends Command {
 
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		include_spip('inc/indexer');
+		include_spip('indexer_pipelines');
 		global $spip_racine;
 		global $spip_loaded;
 
