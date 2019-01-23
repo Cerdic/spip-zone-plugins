@@ -276,8 +276,10 @@ function declarer_url_arbo_multidomaines_rec($url, $type, $parent, $type_parent,
 	if (isset($contexte['id_parent'])) {
 		unset($contexte['id_parent']);
 	}
-	// Si pas de parent ou si son URL est vide, on ne renvoit que l'URL de l'objet en court
-	// MODIF : on ne va pas jusqu'à $parent=0, on s'arrête au niveau supérieur sinon on retrouve la rubrique du site dans l'URL finale... ce qu'on ne veut pas.
+
+	// Retrouver le parent et son URL
+	// [Multidomaines] Il faut exclure le secteur.
+	// On ne va pas jusqu'à $parent=0, on s'arrête au niveau supérieur.
 	$niveau_superieur = $parent;
 	if ($type == 'rubrique') {
 		if ($parent == '0') {
@@ -291,12 +293,15 @@ function declarer_url_arbo_multidomaines_rec($url, $type, $parent, $type_parent,
 			$niveau_superieur = '0';
 		}
 	}
-	if ($niveau_superieur == 0 or !($url_parent = declarer_url_arbo_multidomaines($type_parent ? $type_parent : 'rubrique', $parent, $contexte))) {
+	$no_parent = ($niveau_superieur == 0 or !($url_parent = declarer_url_arbo_multidomaines($type_parent ? $type_parent : 'rubrique', $parent, $contexte, $options)));
+	// Si pas de parent ou si son URL est vide, on ne renvoit que l'URL de l'objet en court
+	if ($no_parent) {
 		return rtrim($url, '/');
 	} // Sinon on renvoit l'URL de l'objet concaténée avec celle du parent
 	else {
 		return rtrim($url_parent, '/') . '/' . rtrim($url, '/');
 	}
+
 }
 
 
@@ -497,7 +502,13 @@ function declarer_url_arbo_multidomaines($type, $id_objet, $contexte = array()) 
 	if ($url == $url_propre
 		and $u['id_parent'] == $u['parent']
 	) {
-		return declarer_url_arbo_multidomaines_rec($url_propre, $type, $u['parent'], $u['type_parent'], $contexte);
+		return declarer_url_arbo_multidomaines_rec(
+			$url_propre,
+			$type,
+			$u['parent'],
+			$u['type_parent'],
+			$contexte
+		);
 	}
 
 	// verifier l'autorisation, maintenant qu'on est sur qu'on va agir
@@ -650,12 +661,16 @@ function _generer_url_arbo_multidomaines($type, $id, $args = '', $ancre = '') {
  * @return array|string
  */
 function urls_arbo_multidomaines_dist($i, $entite, $args = '', $ancre = '') {
+
 	if (is_numeric($i)) {
 		return _generer_url_arbo_multidomaines($entite, $i, $args, $ancre);
 	}
 
+	// Ne pas travailler directement sur la globale
+	$profondeur_url = $GLOBALS['profondeur_url'];
+
 	// traiter les injections du type domaine.org/spip.php/cestnimportequoi/ou/encore/plus/rubrique23
-	if ($GLOBALS['profondeur_url'] > 0 and $entite == 'sommaire') {
+	if ($profondeur_url > 0 and $entite == 'sommaire') {
 		$entite = 'type_urls';
 	}
 
@@ -673,7 +688,7 @@ function urls_arbo_multidomaines_dist($i, $entite, $args = '', $ancre = '') {
 
 	// Migration depuis anciennes URLs ?
 	// traiter les injections domain.tld/spip.php/n/importe/quoi/rubrique23
-	if ($GLOBALS['profondeur_url'] <= 0
+	if ($profondeur_url <= 0
 		and $_SERVER['REQUEST_METHOD'] != 'POST'
 	) {
 		include_spip('inc/urls');
@@ -738,8 +753,8 @@ function urls_arbo_multidomaines_dist($i, $entite, $args = '', $ancre = '') {
 		$parents_vus = array();
 
 		// [Multidomaines]
-		// Si on se trouve dans un des domaines configurés, ajouter son URL au début
-		// afin de détecter le bon secteur quand on parse les segments
+		// Si on se trouve dans un des domaines configurés,
+		// ajouter l'URL du secteur comme premier segment afin de retrouver le bon contexte par la suite
 		$url_propre_originale = $url_propre;
 		$host = $_SERVER['HTTP_HOST'];
 		include_spip('inc/config');
@@ -762,7 +777,7 @@ function urls_arbo_multidomaines_dist($i, $entite, $args = '', $ancre = '') {
 					)
 				) {
 					$url_propre = $url_domaine . '/' . $url_propre;
-					$GLOBALS['profondeur_url'] =+ 1;
+					$profondeur_url =+ 1;
 					break;
 				}
 			}
@@ -778,6 +793,7 @@ function urls_arbo_multidomaines_dist($i, $entite, $args = '', $ancre = '') {
 		$dernier_parent_vu = false;
 		$objet_segments = 0;
 
+		// Gestion de la langue
 		$langue = '';
 		if (_url_arbo_multilang === true) {
 			// la langue : si fourni en QS prioritaire car vient du skel ou de forcer_lang
@@ -799,6 +815,8 @@ function urls_arbo_multidomaines_dist($i, $entite, $args = '', $ancre = '') {
 			$langue = _url_arbo_multilang;
 		}
 
+		// Retrouver le contexte (objet/id_objet)
+		// On parse les segments, en cherchant les URLs correspondantes
 		while (count($url_arbo) > 0) {
 			$type = null;
 			if (count($url_arbo) > 1) {
@@ -879,6 +897,7 @@ function urls_arbo_multidomaines_dist($i, $entite, $args = '', $ancre = '') {
 			}
 		}
 
+		// Définir la redirection éventuelle
 		if (count($url_arbo_new)) {
 			$caller = debug_backtrace();
 			$caller = $caller[1]['function'];
@@ -899,13 +918,14 @@ function urls_arbo_multidomaines_dist($i, $entite, $args = '', $ancre = '') {
 			} else {
 
 				// [Multidomaines]
-				// Retirer le segment du domaine (le 1er)
+				// Retirer le segment correspondant au domaine (le 1er)
 				foreach ($url_arbo_new as $k => $o) {
 					if ($url_domaine) {
 						$url_arbo_new[$k]['segment'] = array_splice($url_arbo_new[$k]['segment'], 1);
 					}
 				}
 
+				// Gibolinage mystérieux
 				foreach ($url_arbo_new as $k => $o) {
 					$c = array( 'langue' => $langue );
 					if (isset($parents_vus['rubrique'])) {
@@ -918,6 +938,24 @@ function urls_arbo_multidomaines_dist($i, $entite, $args = '', $ancre = '') {
 					}
 				}
 				$url_arbo_new = ltrim(implode('/', $url_arbo_new), '/');
+
+				// [Multidomaines]
+				// Rustine : s'assurer de ne pas avoir le secteur dans l'URL
+				// (à ce niveau, le cas ne devrait jamais se présenter normalement)
+				if ($url_domaine) {
+					$url_arbo_new = preg_replace('#'.$url_domaine.'\/#', '', $url_arbo_new);
+				}
+
+				// Rustine Nginx
+				// les segments de l'URL arbo sont ajoutés en query_string q=truc/machin
+				// On la retire si c'est le cas
+				if (
+					isset($contexte['q'])
+					and preg_match('#\/?'.$url_arbo_new.'\/?#', $contexte['q'])
+				) {
+					unset($contexte['q']);
+				}
+
 				if ($langue and _url_arbo_multilang === true) {
 					$url_arbo_new = "$langue/" . $url_arbo_new;
 					if (strpos($args, 'lang=') !== false) {
@@ -926,6 +964,7 @@ function urls_arbo_multidomaines_dist($i, $entite, $args = '', $ancre = '') {
 						$args = http_build_query($cl);
 					}
 				}
+				// Si l'URL a changé, on redirige
 				if ($url_arbo_new !== $url_propre_originale) {
 					$url_redirect = _debut_urls_arbo
 						. $url_arbo_new
@@ -964,12 +1003,12 @@ function urls_arbo_multidomaines_dist($i, $entite, $args = '', $ancre = '') {
 		// Si on est dans un domaine, une fois la redirection générée,
 		// remettre la profondeur initiale
 		if ($url_domaine) {
-			$GLOBALS['profondeur_url'] =- 1;
+			$profondeur_url =- 1;
 		}
 
 		// gerer le retour depuis des urls propres
 		if (($entite == '' or $entite == 'type_urls')
-			and $GLOBALS['profondeur_url'] <= 0
+			and $profondeur_url <= 0
 		) {
 			$urls_anciennes = charger_fonction('propres', 'urls');
 
@@ -992,8 +1031,8 @@ function urls_arbo_multidomaines_dist($i, $entite, $args = '', $ancre = '') {
 		define('_SET_HTML_BASE', 1);
 	}
 
-	//var_dump($contexte, $entite, $url_redirect);
-	//die();
+	//var_dump($contexte, $url_redirect);
+	//die('debug');
 
 	return array($contexte, $entite, $url_redirect, null);
 }
