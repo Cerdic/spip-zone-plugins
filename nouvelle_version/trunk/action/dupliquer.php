@@ -87,8 +87,11 @@ return $documents;
 }
 
 function remettre_les_documents($documents,$id,$type){
+	/* ON MET A BLANC POUR EVITER LES REDONDANCES A LA PUBLICATION*/
+	$p = sql_delete("spip_documents_liens", "id_objet=$id AND objet='$type'");
+	
 	foreach($documents as $champ => $valeur){
-	    $n = sql_insertq('spip_documents_lien', array(
+	    $n = sql_insertq('spip_documents_liens', array(
 	    'id_document'=> $valeur['id_document'],
 	    'id_objet'=> $id,
 	    'objet'=>$type
@@ -104,6 +107,9 @@ function remettre_les_documents($documents,$id,$type){
 /* cette fonction realise la copie d'un logo d'article et de son logo de survol */
 /* vers le nouvel article. */
 function dupliquer_logo($id_source, $id_destination, $type='article', $bsurvol = false ){
+
+/****** NON FONCTIONNEL - A FAIRE *****/
+	/****
 	include_spip('action/iconifier');
 	global $formats_logos;
 
@@ -127,5 +133,6 @@ function dupliquer_logo($id_source, $id_destination, $type='article', $bsurvol =
 	$source['size'] = @filesize($logo_source);
 
 	action_spip_image_ajouter_dist(substr($type,0,3). $logo_type .$id_destination, 'local', $source );
+	****/
 	return true;
 }

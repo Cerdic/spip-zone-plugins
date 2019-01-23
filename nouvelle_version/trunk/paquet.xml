@@ -1,9 +1,9 @@
 <paquet
 	prefix="versioning"
 	categorie="edition"
-	version="3.0.2"
+	version="3.2.1"
 	etat="test"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="images/article_new_version-24.png"
 	schema="0.1"
 	documentation="https://contrib.spip.net/Nouvelle-version-Moderation-de-modifications"
@@ -17,6 +17,8 @@
 	<copyright>2014</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+    <menu nom="configurer_versioning" titre="versioning:versioning_menu" parent="bando_configuration" icone="images/logomenu-16.png" />
+
 
 	<pipeline nom="boite_infos" inclure="versioning_pipeline.php" />  
 	<pipeline nom="declarer_tables_principales" inclure="base/versioning.php" />

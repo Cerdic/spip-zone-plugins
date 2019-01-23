@@ -25,10 +25,27 @@ function formulaires_publiversion_article_confirm_traiter_dist($article,$article
 	
 	if(_request('confirmer')){
 		include_spip('action/remplacer');
+		/** AJOUT 20 JANVIER 2019 POUR OPERER LE SWITCH DES MOTS-CLEFS ET DOCUMENTS **/
+		include_spip('action/dupliquer');
+		/*****/
 
 spip_log("ID ARTICLE CIBLE : $article");
 spip_log("ID ARTICLE VERSION : $article_orig");
 
+		/** AJOUT 20 JANVIER 2019 POUR OPERER LE SWITCH DES MOTS-CLEFS ET DOCUMENTS **/
+		$mots_clefs_orig = lire_les_mots_clefs(intval($article_orig),'article');
+		$mots_clefs_newversion = lire_les_mots_clefs(intval($article),'article');
+		
+		$documents_orig=lire_les_documents(intval($article_orig),'article');
+		$documents_newversion=lire_les_documents(intval($article),'article');
+		
+		remettre_les_mots_clefs($mots_clefs_orig,intval($article),'article');
+		remettre_les_mots_clefs($mots_clefs_newversion,intval($article_orig),'article');
+		
+		remettre_les_documents($documents_orig,intval($article),'article');
+		remettre_les_documents($documents_newversion,intval($article_orig),'article');
+		/*******/
+		
 		$remplacer_article = remplacer_article(intval($article),intval($article_orig),$newstatut);
 
 		$message = array('message_ok'=>array(

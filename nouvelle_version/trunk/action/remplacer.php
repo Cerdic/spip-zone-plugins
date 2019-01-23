@@ -67,12 +67,40 @@ function remplacer_article($article,$article_orig,$newstatut='poubelle'){
 	
 	/// On passe article à archi si le statut existe
 		instituer_article($article, array('statut'=>$newstatut,'id_parent'=>$infos_de_l_article_orig['id_rubrique']) );
-			
-	/// On update les deux articles avec les bons auteurs 
+	/// Choix entre les 2 workflows 20 JANVIER 2019
+	
+	$option = lire_config('versioning/workflow');
+		
+	/// On update les deux articles avec les bons auteurs
+	/// MISE A JOUR 28 JUIN 2018 ///
+	/// ON AJOUTE UN AUTEUR S'IL LA MODIFICATION PROCEDE D'UN AUTRE AUTEUR SANS SUPPRIMER L'EXISTANT ///
+		////// WORKFLOW 1 (OLD) //////
+		if($option!='2'){
 		$maj_auteur_article_orig = sql_updateq("spip_auteurs_liens", $infosAuteurArticle[0], "id_objet=".$article_orig." AND objet='".$type."'");
 		$maj_auteur_article = sql_updateq("spip_auteurs_liens", $infosAuteurArticleOrig[0], "id_objet=".$article." AND objet='".$type."'");
+		}
+		////// FIN WORKFLOW 1 ///////
+
+
+		///// WORKFLOW 2 /////
+		else {
+		//// ON AJOUTE LE/LES AUTEUR/S DE LA MODIFICATION EN COURS AUX AUTEURS DE L'ARTICLE /////
+		foreach($infosAuteurArticle as $eachAuteur)
+                	{
+                	$maj_auteur_article = sql_insertq('spip_auteurs_liens', array('id_auteur' => $eachAuteur[id_auteur],'id_objet' => $article_orig, 'objet' => $type ));                
+			}
 		
-		
+		/////// MISE A ZERO DES AUTEURS DE LARTICLE QUI ACCUEILLERA L'ARCHIVE DE L'ARTICLE COURANT ////
+		$delete_precAuteurs = sql_delete("spip_auteurs_liens", "id_objet=$article");
+
+		////// ON REMET LES AUTEURS DE L'ARTICLE ARCHIVE TELS QU'ILS ETAIENT AVANT LA MODIFICATION ///
+		foreach($infosAuteurArticleOrig as $eachAuteurOrig)
+			{
+			$maj_auteur_articleOrig = sql_insertq('spip_auteurs_liens', array('id_auteur' => $eachAuteurOrig[id_auteur],'id_objet' => $article, 'objet' => $type )); 
+			}
+			
+		////// FIN WORKFLOW 2 /////	
+		}
 	
 	//DEBLOQUAGE DES 2 ARTICLES pour l'auteur courant
 		debloquer_edition($GLOBALS['visiteur_session']['id_auteur'], $article, 'article');
