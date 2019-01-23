@@ -29,8 +29,6 @@ class IndexerIndexer extends Command {
 		
 		// Appeler la fonction qui donne l'indexeur configuré pour ce SPIP
 		$indexer = indexer_indexer();
-		// Appeler la fonction qui liste les sources et qui comporte un pipeline pour étendre
-		$sources_possibles =
 
 		if ($tables = $input->getOption('table')) {
 
@@ -61,6 +59,7 @@ class IndexerIndexer extends Command {
 
 		}
 		else {
+			// Appeler la fonction qui liste les sources et qui comporte un pipeline pour étendre
 			$sources = indexer_sources();
 		}
 		
