@@ -65,8 +65,9 @@ function indexer_post_edition_lien($flux){
  *
  * @param string $objet Le type d'objet (article, rubrique etc)
  * @param string $id_objet 
+ * @param bool $async pour lancer l'indexation via job_queue et pas immediatement
 */
-function indexer_redindex_objet($objet,$id_objet){	
+function indexer_redindex_objet($objet,$id_objet, $async = true){
 	include_spip('inc/indexer');
 	// On récupère toutes les sources compatibles avec l'indexation
 	$sources = indexer_sources();
@@ -84,13 +85,19 @@ function indexer_redindex_objet($objet,$id_objet){
 
 		// Si l'objet de la source est le même que dans l'édition, on met à jour l'indexation de l'objet
 		if ($objet_source == $objet){
-			job_queue_add(
-				'indexer_job_indexer_source',
-				"Réindexer l'objet ($objet - $id_objet)",
-				array($alias, $id_objet, $id_objet+1), // +1 car le test est normalement : id < $end
-				'inc/indexer',
-				true // pas de duplication
-			);
+			if ($async) {
+				job_queue_add(
+					'indexer_job_indexer_source',
+					"Réindexer l'objet ($objet - $id_objet)",
+					array($alias, $id_objet, $id_objet+1), // +1 car le test est normalement : id < $end
+					'inc/indexer',
+					true // pas de duplication
+				);
+			}
+			else {
+				// +1 car le test est normalement : id < $end
+				indexer_job_indexer_source($alias, $id_objet, $id_objet + 1);
+			}
 		}
 	}
 

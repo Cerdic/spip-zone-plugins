@@ -23,7 +23,7 @@ class SpipSourcesIndexer {
      *
      *
      * @param \Indexer\Indexer $indexer
-     * @param \Indexer\Sources\Sourcesr $sources
+     * @param \Indexer\Sources\Sources $sources
     **/
     public function __construct(Indexer $indexer, Sources $sources) {
         $this->indexer = $indexer;
