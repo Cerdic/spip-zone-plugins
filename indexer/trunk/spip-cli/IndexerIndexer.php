@@ -12,6 +12,13 @@ class IndexerIndexer extends Command {
 		$this
 			->setName('indexer:indexer')
 			->setDescription('Lancer l’indexation des contenus SPIP configurés.')
+			->addOption(
+				'table',
+				null,
+				InputOption::VALUE_OPTIONAL,
+				'Indexer les contenus d\'une table en particulier',
+				null
+			)
 		;
 	}
 
@@ -23,7 +30,39 @@ class IndexerIndexer extends Command {
 		// Appeler la fonction qui donne l'indexeur configuré pour ce SPIP
 		$indexer = indexer_indexer();
 		// Appeler la fonction qui liste les sources et qui comporte un pipeline pour étendre
-		$sources = indexer_sources();
+		$sources_possibles =
+
+		if ($tables = $input->getOption('table')) {
+
+			$tables = explode(',', $tables);
+			$tables = array_map('trim', $tables);
+			$tables = array_filter($tables);
+			if (!$tables) {
+				$output->writeln("<error>Indiquez une table</error>");
+				exit(1);
+			}
+
+			include_spip('base/objets');
+			include_spip('inc/config');
+
+			// On crée la liste des sources
+			$sources = new Indexer\Sources\Sources();
+
+			// On ajoute chaque objet configuré aux sources à indexer
+			// Par défaut on enregistre les articles s'il n'y a rien
+			foreach ($tables as $table) {
+				if ($table) {
+					$sources->register(
+						table_objet($table),
+						new Spip\Indexer\Sources\SpipDocuments(objet_type($table))
+					);
+				}
+			}
+
+		}
+		else {
+			$sources = indexer_sources();
+		}
 		
 		$SpipSourcesIndexer = new Spip\Indexer\Sources\SpipSourcesIndexer($indexer, $sources);
 		$SpipSourcesIndexer->resetIndexesStats();
