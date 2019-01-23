@@ -138,7 +138,7 @@ function formidable_affiche_milieu($flux) {
 	$texte = '';
 	$e = trouver_objet_exec($flux['args']['exec']);
 
-	if (!$e['edition'] and in_array($e['table_objet_sql'], lire_config('formidable/objets', array()))) {
+	if (!$e['edition'] and isset($flux['args'][$e['id_table_objet']]) and in_array($e['table_objet_sql'], lire_config('formidable/objets', array()))) {
 		$texte .= recuperer_fond('prive/objets/editer/liens', array(
 			'table_source' => 'formulaires',
 			'objet' => $e['type'],
