@@ -205,11 +205,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legende_noisette_inclusion' => 'Parameters voor insluiting',
 	'legende_noisette_parametrage' => 'Configuratieparameters',
 	'liste_icones' => 'Lijst van ikonen',
-	'liste_objets' => 'Inhoud die een configuratie van nootjes heeft',
+	'liste_objets' => 'Inhoud die een configuratie van nootjes heeft', # MODIF
 	'liste_objets_configures' => 'Lijst van objecten',
 	'liste_pages' => 'Lijst van bladzijdes',
-	'liste_pages_objet_non' => 'Pagina’s niet gekoppeld aan een inhoudstype',
-	'liste_pages_objet_oui' => 'Pagina’s gekoppeld aan een inhoudstype',
+	'liste_pages_objet_non' => 'Pagina’s niet gekoppeld aan een inhoudstype', # MODIF
+	'liste_pages_objet_oui' => 'Pagina’s gekoppeld aan een inhoudstype', # MODIF
 	'liste_pages_toutes' => 'Alle pagina’s',
 
 	// M

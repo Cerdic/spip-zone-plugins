@@ -161,11 +161,11 @@ nuts on the following pages:', # MODIF
 	'legende_noisette_inclusion' => 'Inclusion parameters',
 	'legende_noisette_parametrage' => 'Configuration parameters',
 	'liste_icones' => 'Icons list',
-	'liste_objets' => 'Contents with a nut configuration',
+	'liste_objets' => 'Contents with a nut configuration', # MODIF
 	'liste_objets_configures' => 'List of objects',
 	'liste_pages' => 'List of the pages',
-	'liste_pages_objet_non' => 'Pages not linked to a content type',
-	'liste_pages_objet_oui' => 'Pages linked to a content type',
+	'liste_pages_objet_non' => 'Pages not linked to a content type', # MODIF
+	'liste_pages_objet_oui' => 'Pages linked to a content type', # MODIF
 	'liste_pages_toutes' => 'All pages',
 
 	// M
