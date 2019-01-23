@@ -276,13 +276,10 @@ function retire_caches($chemin = '') {
 
 
 // Fonction permettant au compilo de calculer les invalideurs d'une page
-// (note: si absente, n'est pas appellee)
-/*
 // http://code.spip.net/@calcul_invalideurs
 function calcul_invalideurs($corps, $primary, &$boucles, $id_boucle) {
 	return $corps;
 }
-*/
 
 // Cette fonction permet de supprimer tous les invalideurs
 // Elle ne touche pas aux fichiers cache eux memes ; elle est
