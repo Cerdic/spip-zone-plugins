@@ -6,80 +6,78 @@
 	<form method="post" action="#ENV{action}">
 		<div>
 			#ACTION_FORMULAIRE{#ENV{action}}
-			<ul class="editer-groupe">
-				<li class="editer editer_url">
+			<[(#DIV|sinon{ul})] class="editer-groupe">
+				<[(#DIV|sinon{li})] class="editer">
 					<label for="editer_url">
 						<:multidomaines:label_editer_url:>
 					</label>
 					<input type="text" name="defaut[url]" class="text" id="editer_url" value="#ENV{defaut/url}"/>
-				</li>
-				<li class="editer squelette">
+				</[(#DIV|sinon{li})]>
+				<[(#DIV|sinon{li})] class="editer">
 					<label for="squelette">
 						<:multidomaines:label_squelette:>
 					</label>
 					<input type="text" name="defaut[squelette]" class="text" id="squelette" value="#ENV{defaut/squelette}"/>
-				</li>
+				</[(#DIV|sinon{li})]>
 				<BOUCLE_multiracine(RUBRIQUES){id_parent=#VAL{_MULTIDOMAINE_RACINE}|constant|sinon{0}}{tous} {par num titre, titre}>
-				<li class="fieldset">
+				<[(#DIV|sinon{li})] class="fieldset [(#VAL{_MULTIDOMAINE_RUBRIQUE}|constant|oui)multidomaines__secteur]">
 					<fieldset>
 						<legend>#TITRE</legend>
-						<ul>
-							<li class="editer editer_url">
+						<[(#DIV|sinon{ul})] class="editer-groupe">
+							<[(#DIV|sinon{li})] class="editer">
 								<label for="editer_url">
 									<:multidomaines:label_editer_url_secteur:>
 								</label>
 								<input type="text" name="#ID_RUBRIQUE[url]" class="text" id="editer_url_#ID_RUBRIQUE" value="#ENV{#ID_RUBRIQUE/url}"/>
-							</li>
-							<li class="editer squelette">
+							</[(#DIV|sinon{li})]>
+							<[(#DIV|sinon{li})] class="editer">
 								<label for="squelette">
 									<:multidomaines:label_squelette_secteur:>
 								</label>
 								<input type="text" name="#ID_RUBRIQUE[squelette]" class="text" id="squelette_#ID_RUBRIQUE" value="#ENV{#ID_RUBRIQUE/squelette}"/>
-							</li>
-							<li class="editer identifiant">
-								<p class="explication"><:multidomaines:explication_identifiant:></p>
+							</[(#DIV|sinon{li})]>
+							<[(#DIV|sinon{li})] class="editer">
 								<label for="identifiant">
 									<:multidomaines:label_identifiant:>
 								</label>
 								<input type="text" name="#ID_RUBRIQUE[identifiant]" class="text" id="identifiant_#ID_RUBRIQUE" value="#ENV{#ID_RUBRIQUE/identifiant}"/>
-							</li>
-						</ul>
+							</[(#DIV|sinon{li})]>
+						</[(#DIV|sinon{ul})]>
 					</fieldset>
 					<B_multidomaines>
-						<ul>
+						<[(#DIV|sinon{ul})] class="editer-groupe">
 							<BOUCLE_multidomaines(RUBRIQUES) {si #VAL{_MULTIDOMAINE_RUBRIQUE}|constant|oui} {id_parent}{tous} {par num titre, titre}>
-							<li class="fieldset">
+							<[(#DIV|sinon{li})] class="fieldset multidomaines__rubrique">
 								<fieldset>
 									<legend>#TITRE</legend>
-									<ul>
-										<li class="editer editer_url">
+									<[(#DIV|sinon{ul})] class="editer-groupe">
+										<[(#DIV|sinon{li})] class="editer">
 											<label for="editer_url">
 												<:multidomaines:label_editer_url_rubrique:>
 											</label>
 											<input type="text" name="#ID_RUBRIQUE[url]" class="text" id="editer_url_#ID_RUBRIQUE" value="#ENV{#ID_RUBRIQUE/url}"/>
-										</li>
-										<li class="editer squelette">
+										</[(#DIV|sinon{li})]>
+										<[(#DIV|sinon{li})] class="editer">
 											<label for="squelette">
 												<:multidomaines:label_squelette_rubrique:>
 											</label>
 											<input type="text" name="#ID_RUBRIQUE[squelette]" class="text" id="squelette_#ID_RUBRIQUE" value="#ENV{#ID_RUBRIQUE/squelette}"/>
-										</li>
-										<li class="editer identifiant">
-											<p class="explication"><:multidomaines:explication_identifiant:></p>
+										</[(#DIV|sinon{li})]>
+										<[(#DIV|sinon{li})] class="editer">
 											<label for="identifiant">
 												<:multidomaines:label_identifiant:>
 											</label>
 											<input type="text" name="#ID_RUBRIQUE[identifiant]" class="text" id="identifiant_#ID_RUBRIQUE" value="#ENV{#ID_RUBRIQUE/identifiant}"/>
-										</li>
-									</ul>
+										</[(#DIV|sinon{li})]>
+									</[(#DIV|sinon{ul})]>
 								</fieldset>
-							</li>
+							</[(#DIV|sinon{li})]>
 							</BOUCLE_multidomaines>
-						</ul>
+						</[(#DIV|sinon{ul})]>
 					</B_multidomaines>
-				</li>
+				</[(#DIV|sinon{li})]>
 				</BOUCLE_multiracine>
-			</ul>
+			</[(#DIV|sinon{ul})]>
 			<p class="boutons">
 				<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit"/>
 			</p>
