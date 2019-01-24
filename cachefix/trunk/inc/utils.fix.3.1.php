@@ -3130,15 +3130,15 @@ function recuperer_fond($fond, $contexte = array(), $options = array(), $connect
 		}
 		
 		// fix #4235 : contamination de la session appelante, pour les inclusions statiques
-		if (isset($options['sessionnement_contaminant'])
-		    and isset($page['invalideurs']['session']))
+		if (isset($page['invalideurs']['session']))
 			$cache_utilise_session_appelant = $page['invalideurs']['session'];
 	}
 
 	// fix #4235 : restaurer le sessionnement du contexte appelant, 
 	// éventuellement contaminé si on vient de récupérer une inclusion statique sessionnée
-	$GLOBALS['cache_utilise_session']
-		= (isset($cache_utilise_session_appelant) ? $cache_utilise_session_appelant : null);
+	if (isset($cache_utilise_session_appelant)) {
+			$GLOBALS['cache_utilise_session'] = $cache_utilise_session_appelant;
+	}
 
 	$GLOBALS['_INC_PUBLIC']--;
 
