@@ -157,7 +157,7 @@
 #SET{dc-type_auto,    Text}
 #SET{titre_auto,      ''}
 #SET{desc_auto,       ''}
-#SET{url_auto,        #URL_PAGE{#ENV{type-page}}}
+#SET{url_auto,        #ENV{type-page,sommaire}|=={sommaire}|?{#URL_SITE_SPIP,#URL_PAGE{#ENV{type-page}}}}
 #SET{date_auto,       #DATE}
 #SET{maj_auto,        ''}
 #SET{langue_auto,     #LANG}
