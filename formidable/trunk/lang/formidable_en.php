@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'activer_pages_explication' => 'By default, public pages of the forms are not allowed',
-	'activer_pages_label' => 'Allow creation of public pages for the forms.',
+	'activer_pages_label' => 'Allow creation of public pages for the forms.', # MODIF
 	'admin_reponses_auteur' => 'Allow forms author to modify the answers',
 	'admin_reponses_auteur_explication' => 'Only administrators can normally modify the answers filled in a form (to the bin, published, proposed to evaluation). This option allows the author of a form to modify the status (with the risk to alterate potentiall statistics)
 ',

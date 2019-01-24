@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'activer_pages_explication' => 'Por padrão, as páginas públicas dos formulários não são autorizadas',
-	'activer_pages_label' => 'Autorizar a criação de páginas publicas para os formulários',
+	'activer_pages_label' => 'Autorizar a criação de páginas publicas para os formulários', # MODIF
 	'admin_reponses_auteur' => 'Autorizar os autores dos formulários a alterar as respostas',
 	'admin_reponses_auteur_explication' => 'Apenas os administradores podem alterar as respostas enviadas por um formulário (Na lixeira, publicado, proposto para avaliação). Essa opção permite que o autor de um formulário modifique o status (com risco de distorcer eventuais dados estatísticos).',
 	'analyse_avec_reponse' => 'Respostas não vazias',

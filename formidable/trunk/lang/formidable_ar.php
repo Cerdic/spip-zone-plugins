@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'activer_pages_explication' => 'افتراضياً صفحات الاستمارات العمومية غير مسموح بها',
-	'activer_pages_label' => 'السماح بإنشاء صفحات عمومية للاستمارات',
+	'activer_pages_label' => 'السماح بإنشاء صفحات عمومية للاستمارات', # MODIF
 	'admin_reponses_auteur' => 'السماح لواضعي الاستمارات بتعديل إجاباتهم',
 	'analyse_avec_reponse' => 'أجابات غير فارغة',
 	'analyse_exclure_champs_label' => 'الحقول المطلوب استبعادها', # MODIF
