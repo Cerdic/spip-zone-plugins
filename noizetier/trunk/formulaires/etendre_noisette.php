@@ -38,29 +38,32 @@ function formulaires_etendre_noisette_charger_dist($noisette, $page_noisette, $b
 	// - compatibles avec la noisette
 	// - dont le bloc concerné est bien configurable
 	// - pouvant être configurées par l'utilisateur
-	$select = array('nom', 'page', 'blocs_exclus');
-	$where = array();
+	include_spip('inc/noizetier_page');
+	$informations = array('nom', 'blocs_exclus');
+	$filtres = array();
 	if (!empty($type_noisette['type'])) {
-		$where[] = 'type=' . sql_quote($type_noisette['type']);
+		$filtres['type'] = $type_noisette['type'];
 	}
 	if (!empty($type_noisette['composition'])) {
-		$where[] = 'composition=' . sql_quote($type_noisette['composition']);
+		$filtres['composition'] = $type_noisette['composition'];
 	}
-	$pages = sql_allfetsel($select, 'spip_noizetier_pages', $where);
+	$pages = page_noizetier_repertorier($informations, $filtres);
+
 	$valeurs['_pages'] = array();
 	if ($pages) {
-		foreach ($pages as $_page) {
-			if (($_page['page'] != $page_noisette)
+		foreach ($pages as $_id_page => $_page) {
+			if (($_id_page != $page_noisette)
 			and (!in_array($bloc, unserialize($_page['blocs_exclus'])))
-			and autoriser('configurerpage', 'noizetier', 0, '', array('page' => $_page['page']))) {
-				$valeurs['_pages'][$_page['page']] = typo($_page['nom']) . " (<em>{$_page['page']}</em>)";
+			and autoriser('configurerpage', 'noizetier', 0, '', array('page' => $_id_page))) {
+				$valeurs['_pages'][$_id_page] = typo($_page['nom']) . " (<em>{$_id_page}</em>)";
 			}
 		}
 	}
 
-	if ($valeurs['_pages']) {
-		$valeurs['editable'] = true;
-	} else {
+	// On désactive le formulaire si aucune page n'est disponible pour la copie et on envoie un message d'erreur.
+	$valeurs['editable'] = true;
+	if (!$valeurs['_pages']) {
+		$valeurs['message_erreur'] = _T('noizetier:erreur_etendre_aucune_page', array('page' => $page_noisette));
 		$valeurs['editable'] = false;
 	}
 

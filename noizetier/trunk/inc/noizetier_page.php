@@ -229,6 +229,87 @@ function page_noizetier_lire($page, $traitement_typo = true) {
 	return $description_page[$traitement_typo][$page];
 }
 
+/**
+ * Retourne la description complète ou partielle d'une liste de pages explicites, compositions explicite et
+ * compositions virtuelles filtrées sur une liste de critères.
+ *
+ * @api
+ *
+ * @param string  $information
+ *        Information spécifique à retourner ou vide pour retourner toute la description. L'information peut être une
+ *        chaine correspondant à un champ de la page ou un tableau avec une liste de champs.
+ * @param array  $filtres
+ *        Tableau associatif `[champ] = valeur` de critères de filtres sur les descriptions de types de noisette.
+ *        Le seul opérateur possible est l'égalité.
+ *
+ * @return array
+ *        Tableau des descriptions des pages et compositions trouvées indexé par l'identifiant de la page.
+ */
+function page_noizetier_repertorier($information = array(), $filtres = array()) {
+
+	// Initialiser la sortie.
+	$pages = array();
+
+	// On initialise la liste des champs de la table des pages
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$table = $trouver_table('spip_noizetier_pages');
+
+	// On vérifie les champs à retourner et on calcule le contenu du select.
+	$champs = array_diff(array_keys($table['field']), array('maj'));
+	$information_valide = true;
+	$information_unique = false;
+	if (!$information) {
+		$select = $champs;
+	} else {
+		if (is_string($information)) {
+			$select = array($information);
+			$information_unique = true;
+		} else {
+			$select = $information;
+		}
+
+		// On vérifie que les champs sont bien valides.
+		foreach ($select as $_champ) {
+			if (!in_array($_champ, $champs)) {
+				$information_valide = false;
+				break;
+			}
+		}
+
+		// On ajoute toujours l'identifiant page car il sert à l'indexation du tableau de sortie.
+		if ($information_valide) {
+			$select = array_merge($select, array('page'));
+		}
+	}
+
+	if ($information_valide) {
+		// On calcule le where à partir des filtres sachant que tous les champs sont des chaines.
+		$where = array();
+		if ($filtres) {
+			foreach ($filtres as $_champ => $_valeur) {
+				$where[] = $_champ . '=' . sql_quote($_valeur);
+			}
+		}
+
+		// Chargement des pages et compositions.
+		$pages = sql_allfetsel($select, 'spip_noizetier_pages', $where);
+
+		// On renvoie l'information demandée indexée par page.
+		if ($information_unique) {
+			$pages = array_column($pages, $information, 'page');
+		} else {
+			$pages = array_column($pages, null, 'page');
+			if ($information and !in_array('page', $information)) {
+				// On supprime le champ 'page' qui n'a pas été demandé
+				foreach ($pages as $_id_page => $_page) {
+					unset($pages[$_id_page]['page']);
+				}
+			}
+		}
+	}
+
+	return $pages;
+}
 
 
 /**
