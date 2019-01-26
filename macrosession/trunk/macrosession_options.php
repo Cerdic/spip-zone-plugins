@@ -17,6 +17,9 @@
 include_spip('inc/session');
 include_spip ('inc/filtres'); 
 
+// TODO : ne charger inc/autoriser qu'au besoin, dans le code inséré à la place de chaque appel de balise
+include_spip ('inc/autoriser'); 
+
 unset($_GET['debug']); // commenter pour permettre l'analyse et debug
 
 // on utilise nobreak quand il n'y a pas de break entre 2 cases d'un switch,
