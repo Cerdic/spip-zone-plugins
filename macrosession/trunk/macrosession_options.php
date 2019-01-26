@@ -260,7 +260,7 @@ function compile_appel_macro_autoriser ($p) {
 	// Comme leur source php est inséré dans une chaine il faut l'enchasser entre accolades, et enlever le @
 	// TODO : assurer une évaluation hors chaine
 	if ((substr ($id,0,11) == '@$Pile[0][\'')
-		and preg_match("/[a-z_]+'\]\$/iu", substr ($id, 11))) {
+		and preg_match("/[a-z_]+'\]$/iu", substr ($id, 11))) { // c'était \$ ce qui semble une erreur
 		$id = 'macrosession_pipe({'.substr($id, 1).'})';
 	}
 	// 2) #GET{variable}
