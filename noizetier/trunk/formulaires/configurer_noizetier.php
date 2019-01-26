@@ -79,10 +79,13 @@ function lister_objets_exclus() {
 		$tables = array_keys($tables);
 
 		// On récupère la liste des pages disponibles et on transforme le type d'objet en table SQL.
-		$where = array('composition=' . sql_quote(''), 'est_page_objet=' . sql_quote('oui'));
-		$pages = sql_allfetsel('type', 'spip_noizetier_pages', $where);
-		$pages = array_map('reset', $pages);
-		$pages = array_map('table_objet_sql', $pages);
+		include_spip('inc/noizetier_page');
+		$informations = array('type');
+		$filtres = array('composition' => '', 'est_page_objet' => 'oui');
+		$pages = page_noizetier_repertorier($informations, $filtres);
+
+		// On extrait uniquement la colonne 'type' et on transforme le type d'objet en nom de table.
+		$pages = array_map('table_objet_sql', array_column($pages, 'type'));
 
 		// On exclut donc les tables qui ne sont pas dans la liste issues des pages.
 		$exclusions = array_diff($tables, $pages);
