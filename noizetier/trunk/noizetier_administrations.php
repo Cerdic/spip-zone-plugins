@@ -157,24 +157,27 @@ function maj_060($config_defaut) {
 	$noisettes = sql_allfetsel($select, $from);
 	if ($noisettes) {
 		include_spip('inc/ncore_conteneur');
+		include_spip('inc/noizetier_conteneur');
 		foreach ($noisettes as $_cle => $_noisette) {
 			// C'est le plugin noizetier
 			$noisettes[$_cle]['plugin'] = 'noizetier';
 			// On calcule le conteneur au format tableau et on appelle la fonction de service de construction
 			// de l'id du conteneur
-			// TODO : utiliser la fonction composer_conteneur
-			$conteneur = array();
+			$page = array();
 			if (!empty($_noisette['objet']) and !empty($_noisette['id_objet']) and intval($_noisette['id_objet'])) {
-				$conteneur['objet'] = $_noisette['objet'];
-				$conteneur['id_objet'] = $_noisette['id_objet'];
-				$conteneur['squelette'] = $_noisette['bloc'];
+				$page['objet'] = $_noisette['objet'];
+				$page['id_objet'] = $_noisette['id_objet'];
 			}
 			else {
 				$page = $_noisette['type'] . ($_noisette['composition'] ? "-{$_noisette['composition']}" : '');
-				$conteneur['squelette'] = "{$_noisette['bloc']}/${page}";
 			}
-			$noisettes[$_cle]['conteneur'] = serialize($conteneur);
-			$noisettes[$_cle]['id_conteneur'] = conteneur_identifier('noizetier', $conteneur);
+			$noisettes[$_cle]['id_conteneur'] = conteneur_noizetier_composer($page, $_noisette['bloc']);
+			$noisettes[$_cle]['conteneur'] = serialize(
+				conteneur_construire(
+					'noizetier',
+					$noisettes[$_cle]['id_conteneur']
+				)
+			);
 		}
 		sql_replace_multi($from, $noisettes);
 	}
