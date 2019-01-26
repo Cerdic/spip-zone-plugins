@@ -14,21 +14,12 @@ function formulaires_editer_noisette_charger_dist($id_noisette, $redirect = '') 
 
 	if (autoriser( 'editernoisette', 'noizetier', $id_noisette)) {
 		// Récupération des informations sur la noisette en cours d'édition et sur le type de noisette
-		$valeurs['id_noisette'] = intval($id_noisette);
-		$select = array(
-			't1.type_noisette as type_noisette',
-			't1.est_conteneur as est_conteneur',
-			't1.parametres as parametres',
-			't1.encapsulation as encapsulation',
-			't1.css as css',
-			't2.parametres as champs');
-		$from = array('spip_noisettes as t1', 'spip_types_noisettes as t2');
-		$where = array(
-			't1.plugin=' . sql_quote('noizetier'),
-			't1.id_noisette=' . $valeurs['id_noisette'],
-			't1.type_noisette=t2.type_noisette');
-		$noisette = sql_fetsel($select, $from, $where);
+		include_spip('inc/ncore_noisette');
+		$noisette = noisette_lire('noizetier', intval($id_noisette));
+
 		if ($noisette) {
+			// Id de la noisette
+			$valeurs['id_noisette'] = intval($id_noisette);
 			// Type de la noisette
 			$valeurs['type_noisette'] = $noisette['type_noisette'];
 			$valeurs['est_conteneur'] = $noisette['est_conteneur'];
@@ -37,13 +28,16 @@ function formulaires_editer_noisette_charger_dist($id_noisette, $redirect = '') 
 			// Cette configuration peut comporter des paramètres de saisie spécifiques dont les valeurs sont ensuite
 			// stockées dans le champ 'parametres' de la table 'spip_noisettes'.
 			// Cette structure de formulaire est générée automatiquement par le plugin Saisies.
-			$valeurs['_champs'] = unserialize($noisette['champs']);
+			// Récupération des informations sur le type de noisette
+			include_spip('inc/ncore_type_noisette');
+			$champs = type_noisette_lire('noizetier', $noisette['type_noisette'], 'parametres');
+			$valeurs['_champs'] = $champs;
 
 			// Insérer dans le contexte les valeurs des paramètres spécifiques stockées en BD.
 			// On doit passer par saisies_charger_champs() au cas ou la définition de la noisette a changé
 			// et qu'il y a de nouveaux champs à prendre en compte
 			include_spip('inc/saisies');
-			$parametres = unserialize($noisette['parametres']);
+			$parametres = $noisette['parametres'];
 			$valeurs = array_merge($valeurs, saisies_charger_champs($valeurs['_champs']), $parametres);
 
 			// Insérer dans le contexte les valeurs des paramètres généraux stockées en BD.
