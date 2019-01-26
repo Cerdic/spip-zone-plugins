@@ -181,52 +181,73 @@ function page_noizetier_charger($recharger = false) {
 }
 
 /**
- * Retourne la configuration de la page, de la composition explicite ou de la composition virtuelle demandée.
- * La configuration est stockée en base de données, certains champs sont recalculés avant d'être fournis.
+ * Retourne la description complète de la page, de la composition explicite ou de la composition virtuelle demandée ou
+ * une information donnée uniquement.
+ * La description est stockée en base de données, certains champs sont recalculés avant d'être fournis.
  *
  * @api
  *
- * @uses bloc_z_lister_defaut()
+ * @uses page_noizetier_lister_blocs()
  *
  * @param string	$page
  * 		Identifiant de la page ou de la composition.
- * @param boolean	$traitement_typo
+ * @param string  $information
+ *        Information spécifique à retourner ou vide pour retourner toute la description.
+ * @param boolean	$traiter_typo
  *      Indique si les données textuelles doivent être retournées brutes ou si elles doivent être traitées
  *      en utilisant la fonction typo.
  * 		Les champs sérialisés sont toujours désérialisés.
  *
- * @return array
+ * @return array|string
+ *        La description complète ou un champ précis demandé pour une page donnée. Les champs
+ *        de type tableau sont systématiquement désérialisés et si demandé, les champs textuels peuvent être
+ *        traités avec la fonction typo().
  */
-function page_noizetier_lire($page, $traitement_typo = true) {
+function page_noizetier_lire($page, $information = '', $traiter_typo = false) {
 
 	static $description_page = array();
 
-	if (!isset($description_page[$traitement_typo][$page])) {
+	if (!isset($description_page[$traiter_typo][$page])) {
 		// Chargement de toute la configuration de la page en base de données.
 		$description = sql_fetsel('*', 'spip_noizetier_pages', array('page=' . sql_quote($page)));
 
 		// Sauvegarde de la description de la page pour une consultation ultérieure dans le même hit.
 		if ($description) {
 			// Traitements des champs textuels
-			if ($traitement_typo) {
+			if ($traiter_typo) {
 				$description['nom'] = typo($description['nom']);
-				if (isset($description['description'])) {
+				if ($description['description']) {
 					$description['description'] = typo($description['description']);
 				}
 			}
+
 			// Traitements des champs tableaux sérialisés
 			$description['blocs_exclus'] = unserialize($description['blocs_exclus']);
 			$description['necessite'] = unserialize($description['necessite']);
 			$description['branche'] = unserialize($description['branche']);
+
 			// Calcul des blocs
 			$description['blocs'] = page_noizetier_lister_blocs($page, $description['blocs_exclus']);
-			$description_page[$traitement_typo][$page] = $description;
+
+			// Stockage de la description
+			$description_page[$traiter_typo][$page] = $description;
 		} else {
-			$description_page[$traitement_typo][$page] = array();
+			// En cas d'erreur stocker une description vide
+			$description_page[$traiter_typo][$page] = array();
 		}
 	}
 
-	return $description_page[$traitement_typo][$page];
+	if ($information) {
+		if (isset($description_page[$traiter_typo][$page][$information])) {
+			$page_lue = $description_page[$traiter_typo][$page][$information];
+		} else {
+			$page_lue = '';
+		}
+	} else {
+		$page_lue = $description_page[$traiter_typo][$page];
+	}
+
+	return $page_lue;
 }
 
 /**

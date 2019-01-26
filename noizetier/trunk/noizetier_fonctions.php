@@ -254,7 +254,7 @@ function calculer_infos_page($page, $information = '') {
 	} elseif ($information == 'compteurs_noisette') {
 		$retour = page_noizetier_compter_noisettes($page);
 	} else {
-		$retour = page_noizetier_lire($page, $information);
+		$retour = page_noizetier_lire($page, $information, true);
 	}
 
 	return $retour;

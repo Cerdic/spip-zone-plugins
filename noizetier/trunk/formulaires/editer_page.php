@@ -47,7 +47,7 @@ function formulaires_editer_page_charger_dist($edition, $page, $redirect = '') {
 	);
 
 	include_spip('inc/noizetier_page');
-	$description_page = page_noizetier_lire($page, false);
+	$description_page = page_noizetier_lire($page);
 	if ($description_page) {
 		if ($edition == 'modifier') {
 			// La page désignée par $page est déjà une composition virtuelle dont on souhaite modifier une

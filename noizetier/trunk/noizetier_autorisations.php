@@ -95,7 +95,7 @@ function autoriser_noizetier_configurerpage_dist($faire, $type, $id, $qui, $opti
 	include_spip('inc/noizetier_objet');
 	if (autoriser('noizetier')
 	and (is_array($options) and !empty($options))) {
-		if (!empty($options['page']) and ($configuration = page_noizetier_lire($options['page'], false))
+		if (!empty($options['page']) and ($configuration = page_noizetier_lire($options['page']))
 		and (!$configuration['composition']
 			or (defined('_DIR_PLUGIN_COMPOSITIONS')
 			and $configuration['composition']
@@ -147,7 +147,7 @@ function autoriser_noizetier_activercomposition_dist($faire, $type, $id, $qui, $
 		test_plugin_actif('compositions')
 		and autoriser('noizetier')
 		and (is_array($options) and !empty($options))
-		and (!empty($options['page']) and ($configuration = page_noizetier_lire($options['page'], false))
+		and (!empty($options['page']) and ($configuration = page_noizetier_lire($options['page']))
 		and !$configuration['composition'])
 		and ($configuration['est_page_objet'] == 'oui')
 		and !page_noizetier_composition_activee($configuration['type'])
@@ -182,7 +182,7 @@ function autoriser_noizetier_creercomposition_dist($faire, $type, $id, $qui, $op
 	include_spip('inc/noizetier_page');
 	if (autoriser('noizetier')
 	and (is_array($options) and !empty($options))
-	and (!empty($options['page']) and ($configuration = page_noizetier_lire($options['page'], false))
+	and (!empty($options['page']) and ($configuration = page_noizetier_lire($options['page']))
 	and !$configuration['composition'])
 	and (defined('_DIR_PLUGIN_COMPOSITIONS'))
 	and (($configuration['est_page_objet'] == 'non')
@@ -213,7 +213,7 @@ function autoriser_noizetier_supprimercomposition_dist($faire, $type, $id, $qui,
 	include_spip('inc/noizetier_page');
 	if ((is_array($options) and !empty($options['page']))
 	and autoriser('configurerpage', 'noizetier', 0, '', $options)
-	and ($configuration = page_noizetier_lire($options['page'], false))
+	and ($configuration = page_noizetier_lire($options['page']))
 	and $configuration['composition']
 	and ($configuration['est_virtuelle'] == 'oui')) {
 		$autoriser = true;
@@ -267,7 +267,7 @@ function autoriser_noizetier_dupliquercomposition_dist($faire, $type, $id, $qui,
 	include_spip('inc/noizetier_page');
 	if (autoriser('noizetier')
 	and (is_array($options) and !empty($options))
-	and (!empty($options['page']) and ($configuration = page_noizetier_lire($options['page'], false))
+	and (!empty($options['page']) and ($configuration = page_noizetier_lire($options['page']))
 	and $configuration['composition'])
 	and defined('_DIR_PLUGIN_COMPOSITIONS')) {
 		$autoriser = true;
