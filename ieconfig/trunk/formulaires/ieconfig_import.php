@@ -43,7 +43,7 @@ function ieconfig_saisies_import() {
 		include_spip('inc/yaml');
 		$config = yaml_decode(_request('_code_yaml'));
 		$texte_explication = '<b>' . _T('ieconfig:texte_nom') . '</b> ' . _T_ou_typo($config['nom']);
-		if ($config['description'] != '') {
+		if (!empty($config['description'])) {
 			$texte_explication .= '<br /><b>' . _T('ieconfig:texte_description') . '</b> ' . _T_ou_typo($config['description']);
 		}
 		// On identifie les entrées ne correspondant pas à un plugin
