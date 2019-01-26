@@ -277,8 +277,8 @@ function page_noizetier_repertorier($information = array(), $filtres = array()) 
 		}
 
 		// On ajoute toujours l'identifiant page car il sert à l'indexation du tableau de sortie.
-		if ($information_valide) {
-			$select = array_merge($select, array('page'));
+		if ($information_valide and !in_array('page', $select)) {
+			$select[] = 'page';
 		}
 	}
 
@@ -286,8 +286,14 @@ function page_noizetier_repertorier($information = array(), $filtres = array()) 
 		// On calcule le where à partir des filtres sachant que tous les champs sont des chaines.
 		$where = array();
 		if ($filtres) {
-			foreach ($filtres as $_champ => $_valeur) {
-				$where[] = $_champ . '=' . sql_quote($_valeur);
+			foreach ($filtres as $_champ => $_critere) {
+				$operateur = '=';
+				$valeur = $_critere;
+				if (substr($_critere, 0, 1) == '!') {
+					$operateur = '!=';
+					$valeur = ltrim($_critere, '!');
+				}
+				$where[] = $_champ . $operateur . sql_quote($valeur);
 			}
 		}
 

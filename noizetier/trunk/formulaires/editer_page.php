@@ -155,18 +155,20 @@ function formulaires_editer_page_verifier_dist($edition, $page, $redirect = '') 
 	// - la syntaxe de l'identifiant qui ne doit contenir ni espace, ni tiret.
 	if ($edition != 'modifier') {
 		$composition = _request('composition');
-		// Identifiant libre
 		$type_page = _request('type_page');
-		$where = array('composition!=' . sql_quote(''));
-		$pages = sql_allfetsel('page', 'spip_noizetier_pages', $where);
-		if ($pages) {
-			$pages = array_map('reset', $pages);
-			if (isset($pages[$type_page.'-'.$composition])) {
-				$erreurs['composition'] = _T('noizetier:formulaire_identifiant_deja_pris');
-			}
-		}
-		// Syntaxe
-		if (!preg_match('#^[a-z0-9_]+$#', $composition)) {
+		$informations = array('nom');
+		$filtres = array(
+			'type' => $type_page,
+			'composition' => $composition
+		);
+		include_spip('inc/noizetier_page');
+		$page = page_noizetier_repertorier($informations, $filtres);
+
+		if ($page) {
+			// Existence d'une composition de même nom.
+			$erreurs['composition'] = _T('noizetier:formulaire_identifiant_deja_pris');
+		} elseif (!preg_match('#^[a-z0-9_]+$#', $composition)) {
+			// Erreur de syntaxe sur le nom de la composition
 			$erreurs['composition'] = _T('noizetier:formulaire_erreur_format_identifiant');
 		}
 	}
@@ -364,9 +366,10 @@ function construire_heritages($type, $page = '') {
 	$heritages = array('_heritiers' => array());
 
 	// Récupération des compositions explicites et virtuelles
-	$select = array('page', 'type', 'composition', 'nom', 'branche');
-	$where = array('composition!=' . sql_quote(''));
-	$compositions = sql_allfetsel($select, 'spip_noizetier_pages', $where);
+	include_spip('inc/noizetier_page');
+	$informations = array('page', 'type', 'composition', 'nom', 'branche');
+	$filtres = array('composition' => '!');
+	$compositions = page_noizetier_repertorier($informations, $filtres);
 	if ($compositions) {
 		// On réindexe le tableau entier par l'identifiant de la page
 		$compositions = array_column($compositions, null, 'page');
