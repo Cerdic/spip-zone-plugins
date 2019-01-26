@@ -328,7 +328,10 @@ function noisette_supprimer($plugin, $noisette, $stockage = '') {
  *        ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
  *        fournissant le service de stockage souhaité.
  *
- * @return bool
+ * @return array|string|int
+ *        La description complète ou champ précis demandé pour une noisette donnée. Les champs
+ *        de type tableau sont systématiquement désérialisés et si demandé, les champs textuels peuvent être
+ *        traités avec la fonction typo().
  */
 function noisette_lire($plugin, $noisette, $information = '', $traiter_typo = false, $stockage = '') {
 
