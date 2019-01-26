@@ -295,21 +295,17 @@ function autoriser_noizetier_editernoisette_dist($faire, $type, $id, $qui, $opti
 	$autoriser = false;
 
 	if ($id_noisette = intval($id)) {
-		// On vérifie que la noisette existe bien et on récupère sa localisation (page ou objet) afin d'appeler
+		// On lit le conteneur de la noisette
+		include_spip('inc/ncore_noisette');
+		$id_conteneur = noisette_lire('noizetier', $id_noisette, 'id_conteneur');
+
+		// On récupère détermine la localisation (page ou objet) afin d'appeler
 		// l'autorisation de configurer cette page ou objet.
-		$select = array('type', 'composition', 'objet', 'id_objet');
-		$where = array('plugin=' . sql_quote('noizetier'), 'id_noisette=' . $id_noisette);
-		$noisette = sql_fetsel($select, 'spip_noisettes', $where);
-		if ($noisette) {
-			if ($noisette['objet'] and intval($noisette['id_objet'])) {
-				$options['objet'] = $noisette['objet'];
-				$options['id_objet'] = $noisette['id_objet'];
-			} else {
-				$options['page'] = $noisette['composition']
-					? $noisette['type'] . '-' . $noisette['composition']
-					: $noisette['type'];
-			}
-			if (autoriser('configurerpage', 'noizetier', 0, '', $options)) {
+		if ($id_conteneur) {
+			include_spip('inc/noizetier_conteneur');
+			$conteneur = conteneur_noizetier_decomposer($id_conteneur);
+
+			if (autoriser('configurerpage', 'noizetier', 0, '', $conteneur)) {
 				$autoriser = true;
 			}
 		}
