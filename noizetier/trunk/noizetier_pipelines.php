@@ -161,19 +161,17 @@ function noizetier_compositions_lister_disponibles($flux) {
 	// étant donné qu'elles ne peuvent pas être détectées par Compositions car sans XML
 	// -- filtre sur l'indicateur est_virtuelle qui n'est à oui que pour les compositions
 	// -- filtre sur le type de contenu ou pas suivant l'appel
-	$select = array('page', 'type', 'composition', 'nom', 'description', 'icon', 'branche');
-	$where = array('est_virtuelle=' . sql_quote('oui'));
+	include_spip('inc/noizetier_page');
+	$informations = array('type', 'composition', 'nom', 'description', 'icon', 'branche');
+	$filtres = array('est_virtuelle' => 'oui');
 	if ($type) {
-		$where[] = 'type=' . sql_quote($type);
+		$filtres['type'] = $type;
 	}
-	$compositions_virtuelles = sql_allfetsel($select, 'spip_noizetier_pages', $where);
+	$compositions_virtuelles = page_noizetier_repertorier($informations, $filtres);
 
 	if ($compositions_virtuelles) {
-		// On réindexe le tableau entier par l'identifiant de la page
-		$compositions_virtuelles = array_column($compositions_virtuelles, null, 'page');
-
 		// On insère les compositions virtuelles selon le format imposé par le plugin Compositions
-		foreach ($compositions_virtuelles as $_identifiant => $_configuration) {
+		foreach ($compositions_virtuelles as $_configuration) {
 			if ($informer){
 				$flux['data'][$_configuration['type']][$_configuration['composition']] = array(
 					'nom' 			=> typo($_configuration['nom']),
