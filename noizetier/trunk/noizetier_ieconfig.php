@@ -75,12 +75,12 @@ function noizetier_ieconfig($flux) {
 		// Les pages explicites : seuls les bloc exclus peuvent être restaurés. Une case suffit car on applique
 		// toujours une fusion des blocs exclus sur les pages de la base ayant le même identifiant.
 		// On désactive toutefois l'option si aucune page explicite n'est commune entre les deux listes.
+		include_spip('inc/noizetier_page');
 		$disable_pages_explicites = false;
-		$select = array('page');
-		$where = array('est_virtuelle=' . sql_quote('non'));
-		if ($pages_explicites = sql_allfetsel($select,'spip_noizetier_pages', $where)) {
-			$pages_explicites = array_map('reset', $pages_explicites);
-			if (count(array_intersect($pages_explicites, array_column($import['pages_explicites'], 'page'))) > 0) {
+		$informations = 'page';
+		$filtres = array('est_virtuelle' => 'non');
+		if ($pages_explicites = page_noizetier_repertorier($informations, $filtres)) {
+			if (count(array_intersect_key($pages_explicites, $import['pages_explicites'])) > 0) {
 				$explication_pages_explicites = _T('noizetier:import_pages_explicites_explication');
 			} else {
 				// Aucune page explicite commune entre la base et le fichier d'import.
@@ -100,8 +100,8 @@ function noizetier_ieconfig($flux) {
 		$data_compositions = array();
 		if ($import['contenu']['compositions_virtuelles']) {
 			$data_compositions['ajouter'] = _T('noizetier:import_compositions_virtuelles_ajouter');
-			$where = array('est_virtuelle=' . sql_quote('oui'));
-			if (!sql_countsel('spip_noizetier_pages', $where)) {
+			$filtres = array('est_virtuelle' => 'oui');
+			if (count(page_noizetier_repertorier('page', $filtres)) == 0) {
 				$explication_compositions = _T('noizetier:import_compositions_virtuelles_avertissement1');
 			} else {
 				$data_compositions['remplacer'] = _T('noizetier:import_compositions_virtuelles_remplacer');
@@ -115,8 +115,7 @@ function noizetier_ieconfig($flux) {
 		// -- Les noisettes : 2 possibilités en radio, remplacement ou ajout.
 		$data_noisettes = array();
 		if ($import['contenu']['noisettes']) {
-			$pages_base = sql_allfetsel('page','spip_noizetier_pages');
-			$pages_base = array_map('reset', $pages_base);
+			$pages_base = page_noizetier_repertorier('page');
 
 			include_spip('base/objets');
 			$importation_noisettes_possible = false;
@@ -265,22 +264,19 @@ function noizetier_ieconfig_exporter() {
 	$export['contenu']['configuration'] = $export['configuration'] ? 'on' : '';
 
 	// Exportation de la tables spip_noizetier_pages qui contient les pages explicites et compositions virtuelles.
-	$from ='spip_noizetier_pages';
-
+	include_spip('inc/noizetier_page');
 	// -- pour les pages explicites il faut sauvegarder les blocs exclus qui peuvent être modifiés après chargement,
 	//    les autres champs n'ont pas d'intérêt à être sauvegardés car ils proviennent du fichier XML/YAML.
-	$select = array('page', 'blocs_exclus');
-	$where = array('est_virtuelle=' . sql_quote('non'));
-	$export['pages_explicites'] = sql_allfetsel($select, $from, $where);
+	$informations = 'blocs_exclus';
+	$filtres = array('est_virtuelle' => 'non');
+	$export['pages_explicites'] = page_noizetier_repertorier($informations, $filtres);
 	$export['contenu']['pages_explicites'] = $export['pages_explicites'] ? 'on' : '';
 
 	// -- pour les compositions virtuelles il faut tout sauvegarder (sauf le timestamp 'maj') car elles sont créées
 	//    de zéro.
-	$trouver_table = charger_fonction('trouver_table', 'base');
-	$table = $trouver_table($from);
-	$select = array_diff(array_keys($table['field']), array('maj'));
-	$where = array('est_virtuelle=' . sql_quote('oui'));
-	$export['compositions_virtuelles'] = sql_allfetsel($select, $from, $where);
+	$informations = array();
+	$filtres = array('est_virtuelle' => 'oui');
+	$export['compositions_virtuelles'] = page_noizetier_repertorier($informations, $filtres);
 	$export['contenu']['compositions_virtuelles'] = $export['compositions_virtuelles'] ? 'on' : '';
 
 	// Exportation de la tables spip_noisettes qui contient les noisettes associées aux pages explicites,
@@ -341,26 +337,25 @@ function noizetier_ieconfig_importer($importation, $contenu_import) {
 	}
 
 	// Les pages explicites
+	include_spip('inc/noizetier_page');
 	if ($importation['pages_explicites']) {
 		// On fusionne les blocs exclus de la configuration avec ceux des pages explicites de la base.
 		// -- On récupère toutes les pages de la base avec leur blocs exclus
-		$select = array('page', 'blocs_exclus');
-		$where = array('est_virtuelle=' . sql_quote('non'));
-		$pages_explicites_base = sql_allfetsel($select,'spip_noizetier_pages', $where);
-		// -- on structure les blocs exclus du fichier d'import sous la forme [page] = blocs exclus
-		$blocs_exclus_import = array_column($contenu_import['pages_explicites'], 'blocs_exclus', 'page');
+		$informations = 'blocs_exclus';
+		$filtres = array('est_virtuelle' => 'non');
+		$pages_explicites_base = page_noizetier_repertorier($informations, $filtres);
 		// -- on compare les pages de la base et celles de l'import et on met à jour systématiquement
 		//    les pages communes (même identifiant).
-		foreach ($pages_explicites_base as $_page_explicite) {
-			if (isset($blocs_exclus_import[$_page_explicite['page']])) {
+		foreach ($pages_explicites_base as $_page => $_blocs_exclus) {
+			if (isset($contenu_import['pages_explicites'][$_page])) {
 				// Remplacement des blocs exclus de la page actuelle par ceux du fichier d'import. On filtre
 				// les blocs éventuellement non autorisés sur le site.
 				$blocs_exclus = array_intersect(
-					unserialize($blocs_exclus_import[$_page_explicite['page']]),
+					unserialize($contenu_import['pages_explicites'][$_page]),
 					$blocs_defaut
 				);
 				$modification = array('blocs_exclus' => serialize($blocs_exclus));
-				$where = array('page=' . sql_quote($_page_explicite['page']));
+				$where = array('page=' . sql_quote($_page));
 				sql_updateq('spip_noizetier_pages', $modification, $where);
 			}
 		}
@@ -378,29 +373,31 @@ function noizetier_ieconfig_importer($importation, $contenu_import) {
 
 		if ($retour) {
 			// On collecte les compositions virtuelles actuellement en base.
-			$select = array('page');
-			$where = array('est_virtuelle=' . sql_quote('oui'));
-			$compositions_base = sql_allfetsel($select, 'spip_noizetier_pages', $where);
-			if ($compositions_base) {
-				$compositions_base = array_map('reset', $compositions_base);
-			}
+			$informations = 'page';
+			$filtres = array('est_virtuelle' => 'oui');
+			$compositions_base = page_noizetier_repertorier($informations, $filtres);
 
 			// Suivant le mode d'importation et l'existence ou pas de la composition en base on ajoute ou
 			// on met à jour la composition virtuelle ou on ne fait rien.
-			foreach ($contenu_import['compositions_virtuelles'] as $_composition) {
+			foreach ($contenu_import['compositions_virtuelles'] as $_page => $_description) {
 				// On filtre les blocs exclus avec la liste des blocs par défaut du site.
-				$composition = $_composition;
-				$composition['blocs_exclus'] = array_intersect($composition['blocs_exclus'], $blocs_defaut);
+				$description = $_description;
+				$description['blocs_exclus'] = serialize(
+					array_intersect(
+						unserialize($_description['blocs_exclus']),
+						$blocs_defaut
+					)
+				);
 
 				// On détermine l'opération à faire ou pas.
-				if (in_array($composition['page'], $compositions_base)) {
+				if (in_array($_page, $compositions_base)) {
 					if ($importation['compositions_virtuelles'] == 'fusionner') {
-						$where = 'page=' . sql_quote($composition['page']);
-						unset($composition['page']);
-						sql_updateq('spip_noizetier_pages', $composition, $where);
+						$where = 'page=' . sql_quote($_page);
+						unset($description['page']);
+						sql_updateq('spip_noizetier_pages', $description, $where);
 					}
 				} else {
-					sql_insertq('spip_noizetier_pages', $composition);
+					sql_insertq('spip_noizetier_pages', $description);
 				}
 			}
 		}
@@ -418,8 +415,9 @@ function noizetier_ieconfig_importer($importation, $contenu_import) {
 
 		if ($retour) {
 			// Liste des pages génériques disponibles dans la base.
-			$pages_base = sql_allfetsel('page','spip_noizetier_pages');
-			$pages_base = array_map('reset', $pages_base);
+			$informations = 'page';
+			$filtres = array();
+			$pages_base = page_noizetier_repertorier($informations, $filtres);
 
 			// Nombre de noisettes par conteneur. On récupère l'ensemble des conteneurs y compris les noisettes
 			// conteneur mais seuls les blocs Z du noiZetier sont utiles.

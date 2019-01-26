@@ -238,14 +238,17 @@ function page_noizetier_lire($page, $traitement_typo = true) {
  * @param string  $information
  *        Information spécifique à retourner ou vide pour retourner toute la description. L'information peut être une
  *        chaine correspondant à un champ de la page ou un tableau avec une liste de champs.
- * @param array  $filtres
+ * @param array   $filtres
  *        Tableau associatif `[champ] = valeur` de critères de filtres sur les descriptions de types de noisette.
  *        Le seul opérateur possible est l'égalité.
+ * @param boolean $indexer_par_page
+ *      Indique si le tableau doit être indexé par d'identifiant de page ou pas. `true` par défaut.
  *
  * @return array
- *        Tableau des descriptions des pages et compositions trouvées indexé par l'identifiant de la page.
+ *        Tableau des descriptions des pages et compositions trouvées indexé par l'identifiant de la page ou par
+ *        entier de 0 à n.
  */
-function page_noizetier_repertorier($information = array(), $filtres = array()) {
+function page_noizetier_repertorier($information = array(), $filtres = array(), $indexer_par_page = true) {
 
 	// Initialiser la sortie.
 	$pages = array();
@@ -277,7 +280,9 @@ function page_noizetier_repertorier($information = array(), $filtres = array()) 
 		}
 
 		// On ajoute toujours l'identifiant page car il sert à l'indexation du tableau de sortie.
-		if ($information_valide and !in_array('page', $select)) {
+		if ($indexer_par_page
+		and $information_valide
+		and !in_array('page', $select)) {
 			$select[] = 'page';
 		}
 	}
@@ -300,15 +305,17 @@ function page_noizetier_repertorier($information = array(), $filtres = array()) 
 		// Chargement des pages et compositions.
 		$pages = sql_allfetsel($select, 'spip_noizetier_pages', $where);
 
-		// On renvoie l'information demandée indexée par page.
-		if ($information_unique) {
-			$pages = array_column($pages, $information, 'page');
-		} else {
-			$pages = array_column($pages, null, 'page');
-			if ($information and !in_array('page', $information)) {
-				// On supprime le champ 'page' qui n'a pas été demandé
-				foreach ($pages as $_id_page => $_page) {
-					unset($pages[$_id_page]['page']);
+		// On renvoie l'information demandée indexée par page si demandé ainsi.
+		if ($indexer_par_page) {
+			if ($information_unique) {
+				$pages = array_column($pages, $information, 'page');
+			} else {
+				$pages = array_column($pages, null, 'page');
+				if ($information and !in_array('page', $information)) {
+					// On supprime le champ 'page' qui n'a pas été demandé
+					foreach ($pages as $_id_page => $_page) {
+						unset($pages[$_id_page]['page']);
+					}
 				}
 			}
 		}
