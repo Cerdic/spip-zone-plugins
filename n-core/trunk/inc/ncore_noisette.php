@@ -176,6 +176,7 @@ function noisette_ajouter($plugin, $type_noisette, $conteneur, $rang = 0, $stock
  *        fournissant le service de stockage souhaité.
  *
  * @return bool
+ *        `true` si la modification s'est bien passée, `false` sinon.
  */
 function noisette_parametrer($plugin, $noisette, $modifications, $editables_specifiques = array(), $stockage = '') {
 
@@ -243,6 +244,7 @@ function noisette_parametrer($plugin, $noisette, $modifications, $editables_spec
  *        fournissant le service de stockage souhaité.
  *
  * @return bool
+ *        `true` si la suppression s'est bien passée, `false` sinon.
  */
 function noisette_supprimer($plugin, $noisette, $stockage = '') {
 
@@ -626,6 +628,7 @@ function noisette_deplacer($plugin, $noisette, $conteneur_destination, $rang_des
  *        fournissant le service de stockage souhaité.
  *
  * @return bool
+ *        `true` si la duplication s'est bien passée, `false` sinon.
  */
 function noisette_dupliquer($plugin, $noisette, $conteneur, $rang = 0, $parametrage = array(), $stockage = '') {
 

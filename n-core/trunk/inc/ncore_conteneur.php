@@ -45,10 +45,10 @@ function conteneur_identifier($plugin, $conteneur, $stockage = '') {
 }
 
 /**
- * Reconstruit le conteneur sous forme de tableau à partir de son identifiant unique (fonction inverse
+ * Reconstruit le conteneur sous forme de tableau canonique à partir de son identifiant unique (fonction inverse
  * de `conteneur_identifier`).
  * Cette fonction est juste un wrapper pour le service `ncore_conteneur_construire()` mais est très utilisée
- * par les plugins utilisateurs.
+ * par les plugins utilisateur.
  *
  * @api
  * @filtre
@@ -59,7 +59,7 @@ function conteneur_identifier($plugin, $conteneur, $stockage = '') {
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param string $id_conteneur
- *        Identifiant unique du conteneur.
+ *        Identifiant unique du conteneur au format chaine.
  * @param string $stockage
  *        Identifiant du service de stockage à utiliser si précisé.
  *
@@ -132,6 +132,7 @@ function conteneur_est_noisette($plugin, $conteneur, $stockage = '') {
  *        Identifiant du service de stockage à utiliser si précisé.
  *
  * @return bool
+ *        `true` si le vidage s'est bien passé, `false` sinon.
  */
 function conteneur_vider($plugin, $conteneur, $stockage = '') {
 
