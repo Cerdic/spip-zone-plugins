@@ -138,10 +138,8 @@ function ncore_type_noisette_completer($plugin, $description, $stockage = '') {
 
 	$description_complete = $description;
 
-	// On cherche le service de stockage à utiliser selon la logique suivante :
-	// - si le service de stockage est non vide on l'utilise en considérant que la fonction existe forcément;
-	// - sinon, on utilise la fonction du plugin appelant si elle existe;
-	// - et sinon, on utilise la fonction de N-Core.
+	// Si le plugin utilisateur complète la description avec des champs spécifiques il doit proposer un service
+	// de complément propre.
 	include_spip('inc/ncore_utils');
 	if ($completer = ncore_chercher_service($plugin, 'type_noisette_completer', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
@@ -149,6 +147,47 @@ function ncore_type_noisette_completer($plugin, $description, $stockage = '') {
 	}
 
 	return $description_complete;
+}
+
+/**
+ * Traite les champs textuels de la description brute d'un type de noisette issue de la lecture de l'espace de stockage
+ * avec la fonction typo(). Si le plugin utilisateur complète la description du type de noisette avec de tels champs
+ * textuels il doit donc les traiter dans son service dédié.
+ *
+ * Le plugin N-Core traite toujours les champs `nom` et `description.
+ *
+ * @package SPIP\NCORE\TYPE_NOISETTE\SERVICE
+ *
+ * @uses ncore_chercher_service()
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array  $description
+ *        Description brute du type de noisette issue de la lecture dans l'espace de stockage du plugin utilisateur.
+ * @param string $stockage
+ *        Identifiant du service de stockage à utiliser si précisé.
+ *
+ * @return array
+ *        Description du type de noisette dont les champs textuels ont été traités avec la fonction typo().
+ */
+function ncore_type_noisette_traiter_typo($plugin, $description, $stockage = '') {
+
+	// N-Core traite toujours les champs nom et description inclus dans les YAML.
+	$description['nom'] = typo($description['nom']);
+	if ($description['description']) {
+		$description['description'] = typo($description['description']);
+	}
+
+	// Si le plugin appelant complète la description du type de noisette avec des champs textuels il doit
+	// proposer un service propre de traitement de ces champs.
+	include_spip('inc/ncore_utils');
+	if ($traiter_typo = ncore_chercher_service($plugin, 'type_noisette_traiter_typo', $stockage)) {
+		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
+		$description = $traiter_typo($plugin, $description);
+	}
+
+	return $description;
 }
 
 /**
@@ -556,6 +595,42 @@ function ncore_noisette_completer($plugin, $description, $stockage = '') {
 	}
 
 	return $description_complete;
+}
+
+/**
+ * Traite les champs textuels de la description brute d'une noisette issue de la lecture de l'espace de stockage
+ * avec la fonction typo(). Si le plugin utilisateur complète la description de la noisette avec de tels champs
+ * textuels il doit donc les traiter dans son service dédié.
+ *
+ * Le plugin N-Core n'a aucun champ textuel à traiter dans la description de base d'une noisette.
+ *
+ * @package SPIP\NCORE\TYPE_NOISETTE\SERVICE
+ *
+ * @uses ncore_chercher_service()
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array  $description
+ *        Description brute de la noisette issue de la lecture dans l'espace de stockage du plugin utilisateur.
+ * @param string $stockage
+ *        Identifiant du service de stockage à utiliser si précisé.
+ *
+ * @return array
+ *        Description du type de noisette dont les champs textuels ont été traités avec la fonction typo().
+ */
+function ncore_noisette_traiter_typo($plugin, $description, $stockage = '') {
+
+	// N-Core n'a aucun champ textuel à traiter dans la description de base d'une noisette.
+	// Si le plugin appelant complète la description du type de noisette avec des champs textuels il doit
+	// proposer un service propre de traitement de ces champs.
+	include_spip('inc/ncore_utils');
+	if ($traiter_typo = ncore_chercher_service($plugin, 'noisette_traiter_typo', $stockage)) {
+		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
+		$description = $traiter_typo($plugin, $description);
+	}
+
+	return $description;
 }
 
 

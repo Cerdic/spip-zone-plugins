@@ -263,11 +263,10 @@ function type_noisette_lire($plugin, $type_noisette, $information = '', $traiter
 
 	// On indexe le tableau des descriptions par le plugin appelant en cas d'appel sur le même hit
 	// par deux plugins différents.
-	static $donnees_typo = array('nom', 'description');
-	static $description_noisette = array();
+	static $description_type_noisette = array();
 
 	// Stocker la description de la noisette si besoin
-	if (!isset($description_noisette[$plugin][$type_noisette])) {
+	if (!isset($description_type_noisette[$plugin][$traiter_typo][$type_noisette])) {
 		// On charge l'API de N-Core.
 		// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
 		include_spip("ncore/ncore");
@@ -275,42 +274,33 @@ function type_noisette_lire($plugin, $type_noisette, $information = '', $traiter
 		// Lecture de toute la configuration de la noisette: les données retournées sont brutes.
 		$description = ncore_type_noisette_decrire($plugin, $type_noisette, $stockage);
 
-		// Sauvegarde de la description de la page pour une consultation ultérieure dans le même hit.
 		if ($description) {
+			// Traitements des champs textuels
+			if ($traiter_typo) {
+				$description = ncore_type_noisette_traiter_typo($plugin, $description, $stockage);
+			}
+
 			// Traitements des champs tableaux sérialisés
 			$description['contexte'] = unserialize($description['contexte']);
 			$description['necessite'] = unserialize($description['necessite']);
 			$description['parametres'] = unserialize($description['parametres']);
 		}
 
-		// Stockage de la description
-		$description_noisette[$plugin][$type_noisette] = $description;
+		// Sauvegarde de la description de la page pour une consultation ultérieure dans le même hit.
+		$description_type_noisette[$plugin][$traiter_typo][$type_noisette] = $description;
 	}
 
 	if ($information) {
-		if (isset($description_noisette[$plugin][$type_noisette][$information])) {
-			if (in_array($information, $donnees_typo) and $traiter_typo) {
-				// Traitements de la donnée textuelle
-				$retour = typo($description_noisette[$plugin][$type_noisette][$information]);
-			} else {
-				$retour = $description_noisette[$plugin][$type_noisette][$information];
-			}
+		if (isset($description_type_noisette[$plugin][$traiter_typo][$type_noisette][$information])) {
+			$type_noisette_lu = $description_type_noisette[$plugin][$traiter_typo][$type_noisette][$information];
 		} else {
-			$retour = '';
+			$type_noisette_lu = '';
 		}
 	} else {
-		$retour = $description_noisette[$plugin][$type_noisette];
-		// Traitements des données textuels
-		if ($traiter_typo) {
-			foreach ($donnees_typo as $_champ) {
-				if (isset($retour[$_champ])) {
-					$retour[$_champ] = typo($retour[$_champ]);
-				}
-			}
-		}
+		$type_noisette_lu = $description_type_noisette[$plugin][$traiter_typo][$type_noisette];
 	}
 
-	return $retour;
+	return $type_noisette_lu;
 }
 
 /**

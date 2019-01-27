@@ -353,9 +353,9 @@ function noisette_lire($plugin, $noisette, $information = '', $traiter_typo = fa
 		$description_existe = false;
 		$noisette_invalide = false;
 		if (!is_array($noisette)) {
-			$description_existe = isset($description_noisette_par_id[$plugin][$noisette]) ? true : false;
+			$description_existe = isset($description_noisette_par_id[$plugin][$traiter_typo][$noisette]) ? true : false;
 		} elseif (isset($noisette['id_conteneur'], $noisette['rang_noisette'])) {
-			$description_existe = isset($description_noisette_par_rang[$plugin][$noisette['id_conteneur']][$noisette['rang_noisette']])
+			$description_existe = isset($description_noisette_par_rang[$plugin][$traiter_typo][$noisette['id_conteneur']][$noisette['rang_noisette']])
 				? true
 				: false;
 		} else {
@@ -367,39 +367,40 @@ function noisette_lire($plugin, $noisette, $information = '', $traiter_typo = fa
 				// Lecture de toute la configuration de la noisette: les données retournées sont brutes.
 				$description = ncore_noisette_decrire($plugin, $noisette, $stockage);
 
-				// Traitements des champs tableaux sérialisés si nécessaire
 				if ($description) {
-					if (isset($description['parametres']) and is_string($description['parametres'])) {
-						$description['parametres'] = unserialize($description['parametres']);
+					// Traitements des champs textuels : aucun champ textuel à traiter dans la description par défaut.
+					if ($traiter_typo) {
+						$description = ncore_noisette_traiter_typo($plugin, $description, $stockage);
 					}
-					if (isset($description['conteneur']) and is_string($description['conteneur'])) {
-						$description['conteneur'] = unserialize($description['conteneur']);
-					}
+
+					// Traitements des champs tableaux sérialisés si nécessaire
+					$description['parametres'] = unserialize($description['parametres']);
+					$description['conteneur'] = unserialize($description['conteneur']);
 				}
 
 				// Sauvegarde de la description de la noisette pour une consultation ultérieure dans le même hit
 				// en suivant le type d'identification.
 				if (!is_array($noisette)) {
-					$description_noisette_par_id[$plugin][$noisette] = $description;
+					$description_noisette_par_id[$plugin][$traiter_typo][$noisette] = $description;
 				} else {
-					$description_noisette_par_rang[$plugin][$noisette['id_conteneur']][$noisette['rang_noisette']] = $description;
+					$description_noisette_par_rang[$plugin][$traiter_typo][$noisette['id_conteneur']][$noisette['rang_noisette']] = $description;
 				}
 			}
 
 			if ($information) {
-				if ((!is_array($noisette) and isset($description_noisette_par_id[$plugin][$noisette][$information]))
+				if ((!is_array($noisette) and isset($description_noisette_par_id[$plugin][$traiter_typo][$noisette][$information]))
 					or (is_array($noisette)
-						and isset($description_noisette_par_rang[$plugin][$noisette['id_conteneur']][$noisette['rang_noisette']][$information]))) {
+						and isset($description_noisette_par_rang[$plugin][$traiter_typo][$noisette['id_conteneur']][$noisette['rang_noisette']][$information]))) {
 					$noisette_lue = is_array($noisette)
-						? $description_noisette_par_rang[$plugin][$noisette['id_conteneur']][$noisette['rang_noisette']][$information]
-						: $description_noisette_par_id[$plugin][$noisette][$information];
+						? $description_noisette_par_rang[$plugin][$traiter_typo][$noisette['id_conteneur']][$noisette['rang_noisette']][$information]
+						: $description_noisette_par_id[$plugin][$traiter_typo][$noisette][$information];
 				} else {
 					$noisette_lue = '';
 				}
 			} else {
 				$noisette_lue = is_array($noisette)
-					? $description_noisette_par_rang[$plugin][$noisette['id_conteneur']][$noisette['rang_noisette']]
-					: $description_noisette_par_id[$plugin][$noisette];
+					? $description_noisette_par_rang[$plugin][$traiter_typo][$noisette['id_conteneur']][$noisette['rang_noisette']]
+					: $description_noisette_par_id[$plugin][$traiter_typo][$noisette];
 			}
 		}
 	}
