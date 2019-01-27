@@ -122,7 +122,7 @@ function cache_ecrire($plugin, $nom_cache, $contenu_cache) {
 
 
 /**
- * Supprime le cache cache spécifié d'un plugin donné.
+ * Supprime le cache spécifié d'un plugin donné.
  *
  * @api
  *
