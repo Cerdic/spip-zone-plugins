@@ -1,0 +1,10 @@
+[(#REM) Exemple d'usage
+    [(#BOUTON_ACTION{
+        <:medias:bouton_enlever_supprimer_document:>,
+        <INCLURE{fond=url_action_auteur,action=dissocier_document,arg=#ID_OBJET-#OBJET-#ID_DOCUMENT-suppr-safe,url=#SELF}>,
+        ajax,
+        <:medias:bouton_enlever_supprimer_document_confirmation:>
+    })]
+]
+
+#URL_ACTION_AUTEUR{#ACTION,#ARG,#URL}

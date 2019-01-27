@@ -17,7 +17,7 @@ Session :<br>
 <br>
 <br>
 <br>
-<h3>val d'url [(#VAL{id_article}|_request)]</h3>
+<h3>val d'url de id_article : [(#VAL{id_article}|_request)]</h3>
 #_AUTORISER_SI{modifier,article,url}
 	oui article avec _request = [(#VAL{id_article}|_request)]
 #_AUTORISER_SINON
@@ -27,7 +27,7 @@ Session :<br>
 <br> 
 <br>
 <br>
-<h3>val d'env #ID_ARTICLE</h3>
+<h3>val d'env de id_article : #ID_ARTICLE</h3>
 #_AUTORISER_SI{modifier,article,env}
 	oui article avec env = #ID_ARTICLE
 #_AUTORISER_SINON
@@ -48,7 +48,7 @@ Session :<br>
 <br>
 <h3>val de # GET{id_article} #GET{id_article}</h3>
 #_AUTORISER_SI{modifier,article,#GET{id_article}}
-	oui article avec env = #GET{id_article}
+	oui article avec GET{article} = #GET{id_article}
 #_AUTORISER_SINON
-	non article avec env = #GET{id_article}
+	non article avec GET{article} = #GET{id_article}
 #_AUTORISER_FIN

@@ -1,7 +1,7 @@
 <paquet
 	prefix="macrosession"
 	categorie="outil"
-	version="0.9.2"
+	version="0.10.0"
 	etat="test"
 	compatibilite="[2.1.0;3.2.*]"
 	documentation="https://contrib.spip.net/4823"

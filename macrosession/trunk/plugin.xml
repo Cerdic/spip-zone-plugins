@@ -4,7 +4,7 @@
 	<icon>images/macrosession-128.png</icon>
 	<auteur>JLuc</auteur>
 	<licence>GPL</licence>
-	<version>0.9.2</version>
+	<version>0.10.0</version>
 	<etat>test</etat>
 	<description>
 	Macros SPIP #_SESSION, #_SESSION_SI, #_AUTORISER_SI, etc
