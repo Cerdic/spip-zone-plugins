@@ -1,0 +1,7 @@
+<h2>Filtres avec arguments calculés</h2>
+#SET{debut, aime le code}
+#SET{fin, et la tendresse}
+<ul>
+    <li>nom:«#_SESSION{nom}»</li>
+    <li>_SESSION{nom,concat,#GET{debut}}:#_SESSION{nom,concat,#GET{debut}}</li>
+</ul>

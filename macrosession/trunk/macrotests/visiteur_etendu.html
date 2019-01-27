@@ -1,4 +1,4 @@
-#_SESSION{nbreste,plus,3}
+#SQUELETTE<br>
 <h1>Appel de _SESSION avec champ de session étendue</h1>
 
 nom : #_SESSION{nom}<br>
@@ -6,7 +6,6 @@ nom : #_SESSION{nom}<br>
 <h4>champ étendu : nbreste</h4>
 <dl>
 	<dt>nbreste</dt><dd> #_SESSION{nbreste}</dd>
-	<dt>a reçu</dt><dd>#_SESSION{envois_revues_liste}</dd>
 </dl>
 <h4>avec filtres</h4>
 <dl>
@@ -16,16 +15,5 @@ nom : #_SESSION{nom}<br>
 		<dd> #_SESSION{nbreste,choixsivide,vide!,pasvide}</dd>
 	<dt>nbreste |? pasvide! vide </dt>
 		<dd> #_SESSION{nbreste,?,pas vide!,vide}</dd>
-	<dt>a reçu |strlen</dt>
-		<dd>#_SESSION{envois_revues_liste,strlen}</dd>
 </dl>
-</ul>
-
-<hr>
-<h3>Tous les tests</h3>
-<ul>
-<li><a href="?page=test_visiteur">test_visiteur</a></li>
-<li><a href="?page=test_visiteur_etendu">test_visiteur_etendu</a></li>
-<li><a href="?page=test_visiteur_si">test_visiteur_si</a></li>
-<li><a href="?page=test_visiteur_si_etendu">test_visiteur_si_etendu</a></li>
 </ul>
