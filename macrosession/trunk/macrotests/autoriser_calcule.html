@@ -1,54 +1,52 @@
 Pour tester ce squelette il faut debug=oui dans l'url<br>
 et avoir activé le debug dans macrosession_options.php<br>
-<br>
+Et l'article dont l'id_article est en url doit exister.<br>
+#SQUELETTE
 <h1># _AUTORISER_SI avec valeurs calculées d'id - HORS BOUCLE</h1>
 <br>
-<h3>Dans inclu : id_article=#ID_ARTICLE</h3>
-Session :<br>
-#_SESSION{nom}<br>
-#_SESSION{statut}<br>
-<hr>
+<h3>Ici id_article=#ID_ARTICLE venu de l'env</h3>
+_SESSION :<br>
+nom=#_SESSION{nom}<br>
+statut=#_SESSION{statut}<br>
 <br>
+_AUTORISER:<br>
 #_AUTORISER_SI{modifier,article,1}
-	oui article 1
+	OUI _AUTORISER modifier article 1
 #_AUTORISER_SINON
-	non article 1
+	NON _AUTORISER modifier article 1
 #_AUTORISER_FIN
-<br>
-<br>
-<br>
-<h3>val d'url de id_article : [(#VAL{id_article}|_request)]</h3>
+
+<h3>Avec url : _AUTORISER_SI{modifier,article,url}</h3>
+_AUTORISER modifier article url avec val de id_article : [(#VAL{id_article}|_request)]
 #_AUTORISER_SI{modifier,article,url}
-	oui article avec _request = [(#VAL{id_article}|_request)]
+	OUI
 #_AUTORISER_SINON
-	non article avec _request = [(#VAL{id_article}|_request)]
+	NON
 #_AUTORISER_FIN
-
-<br> 
 <br>
-<br>
-<h3>val d'env de id_article : #ID_ARTICLE</h3>
+<h3>Avec env : AUTORISER_SI{modifier,article,env}</h3>
+Val d'env de id_article : #ID_ARTICLE
 #_AUTORISER_SI{modifier,article,env}
-	oui article avec env = #ID_ARTICLE
+	OUI
 #_AUTORISER_SINON
-	non article avec env = #ID_ARTICLE
+	NON
 #_AUTORISER_FIN
 
 <br>
 <br>
-<h3>val de # ID_ARTICLE #ID_ARTICLE</h3>
+<h3>avec \#ID_ARTICLE : _AUTORISER_SI{modifier,article,\#ID_ARTICLE}</h3>
+Val de \#ID_ARTICLE : #ID_ARTICLE
 #_AUTORISER_SI{modifier,article,#ID_ARTICLE}
-	oui article avec env = #ID_ARTICLE
+	OUI
 #_AUTORISER_SINON
-	non article avec env = #ID_ARTICLE
+	NON
 #_AUTORISER_FIN
 
-#SET{id_article,1234}
-<br>
-<br>
-<h3>val de # GET{id_article} #GET{id_article}</h3>
+#SET{id_article,2}
+<h3>Avec un #GET : \#_AUTORISER_SI{modifier,article,#GET{id_article}}</h3>
+Aprés un \#SET, # GET{id_article} vaut : #GET{id_article}<br>
 #_AUTORISER_SI{modifier,article,#GET{id_article}}
-	oui article avec GET{article} = #GET{id_article}
+	OUI
 #_AUTORISER_SINON
-	non article avec GET{article} = #GET{id_article}
+	NON
 #_AUTORISER_FIN
