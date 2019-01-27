@@ -39,10 +39,7 @@ function type_noisette_charger($plugin, $recharger = false, $stockage = '') {
 	// Retour de la fonction
 	$retour = true;
 
-	// Initialiser le contexte de rechargement
-	// TODO : voir si on ajoute un var_mode=recalcul_types_noisette ?
-
-	// On charge l'API de stockge de N-Core.
+	// On charge l'API de stockage de N-Core.
 	// Ce sont ces fonctions qui aiguillent ou pas vers une éventuelle fonction spécifique de stockage.
 	include_spip("ncore/ncore");
 
