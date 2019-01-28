@@ -101,11 +101,11 @@
 	{id_objet}
 	{par nom}
 	{si #ENV{auteurs}|non}
-	{si #EVAL{_METASPLUS_MASQUER_AUTEURS}|!={oui}}
+	{si #CONFIG{metasplus/masquer_auteurs}|non}
 >
 #SET{auteurs_auto, #GET{auteurs_auto}|push{#NOM}}
 </BOUCLE_auteurs_objet>
-#SET{auteurs_auto, #GET{auteurs_auto}|push{#NOM_SITE_SPIP}}
+#SET{auteurs_auto, #NOM_SITE_SPIP}
 <//B_auteurs_objet>
 
 [(#REM) Les mots-clés ]
@@ -162,7 +162,7 @@
 #SET{maj_auto,        ''}
 #SET{langue_auto,     #LANG}
 #SET{territoire_auto, ''}
-#SET{auteurs_auto,    ''}
+#SET{auteurs_auto,    #NOM_SITE_SPIP}
 #SET{mots_auto,       ''}
 <//B_objet>
 
