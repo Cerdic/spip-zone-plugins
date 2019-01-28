@@ -34,7 +34,9 @@ function choix_selon ($test, $sioui, $sinon) {
 //
 // Prépare une expression compilée à être réinjectée dans le code compilé
 //
-// OK pour une petite variété de formes syntaxiques : #ID_ARTICLE, #ID_ARTICLE|plus{1}, ...
+// OK pour une petite variété de formes syntaxiques :
+// - Balises sans traitements : #ID_ARTICLE, #TITRE*...
+// - #GET{variabledenv}
 // À mieux tester et étendre en prenant autrement le pb
 //
 function reinjecte_expression_compilee($expr_org) {
@@ -46,8 +48,9 @@ function reinjecte_expression_compilee($expr_org) {
 	// #GET{aa} est implémenté par un appel à table_valeur
 	// On traduit en appels de tableau php
 	// Pour #GET, le 3eme argument de table_valeur est toujours 'null' donc osef
+	// La syntaxe #GET{vartableau/index1/index2} n'est pas gérée
 	$expr = preg_replace (
-		'/table_valeur\((.*),(.*),.*\)/',
+		'/table_valeur\((.*),(.*),.*\)/',   // TODO : affiner pour pouvoir traiter une plus grande variété de codes
 		'$1[$2]',
 		$expr
 	);
@@ -55,7 +58,7 @@ function reinjecte_expression_compilee($expr_org) {
 	if (($expr!=$expr_org) and isset($_GET['debug']))
 		echo "Passe par : <pre style='display:inline'>$expr</pre> ";
 
-	// Variables scalaires et tableaux multiniveaux
+	// Variables scalaires $truc et tableaux multiniveaux $Pile[0][$SP]['index']
 	$expr = preg_replace(
 		'/@?(\$\w+(\[[^\]]*\])*)/',
 		'\'{$1}\'',
