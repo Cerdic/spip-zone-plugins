@@ -50,5 +50,3 @@ function maj02_svpstats() {
 
 	spip_log('Maj 0.2 des donnees du plugin','boussole' . _LOG_INFO);
 }
-
-?>

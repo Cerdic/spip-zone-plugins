@@ -42,5 +42,3 @@ function svpstats_declarer_tables_interfaces($interface) {
 
 	return $interface;
 }
-
-?>

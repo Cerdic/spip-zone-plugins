@@ -1,7 +1,7 @@
 <paquet
 	prefix="svpstats"
 	categorie="statistique"
-	version="0.3.0"
+	version="0.3.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="svpstats_logo-64.png"

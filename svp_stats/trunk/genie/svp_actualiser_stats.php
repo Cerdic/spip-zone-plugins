@@ -13,5 +13,3 @@ function genie_svp_actualiser_stats_dist ($last) {
 
 	return 1;
 }
-
-?>

@@ -28,5 +28,3 @@ function action_actualiser_stats_dist(){
 		spip_log("MODULE STATS - ACTION ACTUALISER STATS (manuel)", 'svp_actions.' . _LOG_INFO);
 	}
 }
-
-?>
