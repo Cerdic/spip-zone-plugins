@@ -1,10 +1,13 @@
+#SQUELETTE
 Pour tester ce squelette il faut debug=oui dans l'url<br>
 et avoir activé le debug dans macrosession_options.php<br>
 Et l'article dont l'id_article est en url doit exister.<br>
-#SQUELETTE
+Environnement reçu  # ID_ARTICLE=#ID_ARTICLE<br>
+<a href="[(#SELF|parametre_url{id_article,1}">Ajouter id_article=1 à l'url</a><br>
 <h1># _AUTORISER_SI avec valeurs calculées d'id - HORS BOUCLE</h1>
 <br>
 <h3>Ici id_article=#ID_ARTICLE venu de l'env</h3>
+
 _SESSION :<br>
 nom=#_SESSION{nom}<br>
 statut=#_SESSION{statut}<br>
@@ -32,21 +35,3 @@ Val d'env de id_article : #ID_ARTICLE
 	NON
 #_AUTORISER_FIN
 
-<br>
-<br>
-<h3>avec \#ID_ARTICLE : _AUTORISER_SI{modifier,article,\#ID_ARTICLE}</h3>
-Val de \#ID_ARTICLE : #ID_ARTICLE
-#_AUTORISER_SI{modifier,article,#ID_ARTICLE}
-	OUI
-#_AUTORISER_SINON
-	NON
-#_AUTORISER_FIN
-
-#SET{id_article,2}
-<h3>Avec un #GET : \#_AUTORISER_SI{modifier,article,#GET{id_article}}</h3>
-Aprés un \#SET, # GET{id_article} vaut : #GET{id_article}<br>
-#_AUTORISER_SI{modifier,article,#GET{id_article}}
-	OUI
-#_AUTORISER_SINON
-	NON
-#_AUTORISER_FIN

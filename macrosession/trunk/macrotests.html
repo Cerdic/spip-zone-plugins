@@ -1,5 +1,10 @@
-<INCLURE{fond=macrotests/#TEST,env}>
-<hr>
+<style>
+#spip-debug-header {background-color: transparent !important;}
+</style>
+[(#TEST|oui)
+    <INCLURE{fond=macrotests/#TEST,env}/>
+    <hr>
+]
 <h3>Tous les tests</h3>
 <ul>
     <li><a href="?page=macrotests&test=visiteur">visiteur</a></li>
@@ -12,6 +17,6 @@
     <li><a href="?page=macrotests&test=visiteur_comparaison">visiteur_comparaison</a></li>
     <li style="margin-bottom:0.5em"><a href="?page=macrotests&test=visiteur_limitations">!! visiteur_limitations !!</a></li>
     <li><a href="?page=macrotests&test=autoriser">autoriser</a></li>
-    <li><a href="?page=macrotests&test=autoriser_calcule">autoriser_calcule</a></li>
-    <li><a href="?page=macrotests&test=autoriser_calcule2">autoriser_calcule2</a></li>
+    <li><a href="?page=macrotests&test=autoriser_motcle">autoriser_motcle env boucle url</a></li>
+    <li><a href="?page=macrotests&test=autoriser_calcul">autoriser avec argument calculé</a></li>
 </ul>

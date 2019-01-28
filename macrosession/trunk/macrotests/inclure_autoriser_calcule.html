@@ -1,5 +1,26 @@
-<br>
-Dans incluant : id_article=#ID_ARTICLE
+Dans #SQUELETTE : id_article=#ID_ARTICLE (venant de l'url)<br>
+<a href="[(#SELF|parametre_url{id_article,1}">Ajouter id_article=1 à l'url</a><br>
 <hr>
+<br>
+<br>
+<h2>Filtres avec arguments calculés</h2>
+
+<h4>avec \#ID_ARTICLE venant de l'url : _AUTORISER_SI{modifier,article,\#ID_ARTICLE}</h4>
+Val de \#ID_ARTICLE : #ID_ARTICLE
+#_AUTORISER_SI{modifier,article,#ID_ARTICLE}
+OUI
+#_AUTORISER_SINON
+NON
+#_AUTORISER_FIN
+
+<h4>Avec un #GET : \#_AUTORISER_SI{modifier,article,\#GET{id_article}}</h4>
+#SET{id_article,2}
+Aprés un \#SET à 2, \#GET{id_article} vaut : #GET{id_article}<br>
+#_AUTORISER_SI{modifier,article,#GET{id_article}}
+OUI
+#_AUTORISER_SINON
+NON
+#_AUTORISER_FIN
+
 <br>
 <INCLURE{fond=autoriser_calcule,id_article=333}>
