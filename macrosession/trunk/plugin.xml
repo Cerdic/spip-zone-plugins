@@ -4,13 +4,13 @@
 	<icon>images/macrosession-128.png</icon>
 	<auteur>JLuc</auteur>
 	<licence>GPL</licence>
-	<version>0.10.0</version>
+	<version>0.11.0</version>
 	<etat>test</etat>
 	<description>
 	Macros SPIP #_SESSION, #_SESSION_SI, #_AUTORISER_SI, etc
-	pour accéder aux données de la session de la _session courant et les tester efficacement
+	pour accéder aux données de la session de la _session courant
 	ou à des données de sessions d'autre origine que la session spip,
-	et les tester et tester les autorisations
+	et les tester efficacement ainsi que les autorisations
 	sans multiplier les caches sessionnés
 	</description>
 	<prefix>macrosession</prefix>
