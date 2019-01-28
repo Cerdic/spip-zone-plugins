@@ -1,0 +1,9 @@
+nom:«#_SESSION{nom}»<br>
+
+[(#QUOI|non)
+    Pas d'argument 'quoi' dans l'url
+    <a href="[(#SELF|parametre_url{quoi,---elle})]">ajouter quoi=---elle dans l'url</a><br>
+]
+Il y a quoi : «#QUOI» dans l'url <br>
+\#_SESSION{nom,concat,\#QUOI=#QUOI}:«#_SESSION{nom,concat,#QUOI}»</li>
+

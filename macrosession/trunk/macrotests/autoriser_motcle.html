@@ -1,25 +1,39 @@
-#SQUELETTE
-Pour tester ce squelette il faut debug=oui dans l'url<br>
-et avoir activé le debug dans macrosession_options.php<br>
-Et l'article dont l'id_article est en url doit exister.<br>
-Environnement reçu  # ID_ARTICLE=#ID_ARTICLE<br>
-<a href="[(#SELF|parametre_url{id_article,1}">Ajouter id_article=1 à l'url</a><br>
-<h1># _AUTORISER_SI avec valeurs calculées d'id - HORS BOUCLE</h1>
-<br>
-<h3>Ici id_article=#ID_ARTICLE venu de l'env</h3>
+#SQUELETTE<br>
 
-_SESSION :<br>
-nom=#_SESSION{nom}<br>
-statut=#_SESSION{statut}<br>
+Environnement reçu  # ID_ARTICLE=«#ID_ARTICLE»<br>
+[(#ID_ARTICLE|non)
+Il faut un id_article existant dans l'url.<br>
+<a href="[(#SELF|parametre_url{id_article,1})]">Ajouter id_article=1 à l'url</a><br>]
 <br>
-_AUTORISER:<br>
-#_AUTORISER_SI{modifier,article,1}
-	OUI _AUTORISER modifier article 1
+_SESSION : nom=#_SESSION{nom} - statut=#_SESSION{statut}
+<br>
+
+<h1>\#_AUTORISER_SI avec id calculés / motclés HORS BOUCLE</h1>
+
+
+<hr>
+<i>Avec testotor : trace bleue + OUI</i><br>
+
+<h3>Avec motcle url : _AUTORISER_SI{testotor,article,url}</h3>
+_request(id_article) : [(#VAL{id_article}|_request)]
+#_AUTORISER_SI{testotor,article,url}
+OUI
 #_AUTORISER_SINON
-	NON _AUTORISER modifier article 1
+NON
 #_AUTORISER_FIN
+<br>
+<h3>Avec motcle env : AUTORISER_SI{testotor,article,env}</h3>
+Val d'env de id_article : #ID_ARTICLE
+#_AUTORISER_SI{testotor,article,env}
+OUI
+#_AUTORISER_SINON
+NON
+#_AUTORISER_FIN
+<br>
+<hr>
+<i>Avec modifier</i><br>
 
-<h3>Avec url : _AUTORISER_SI{modifier,article,url}</h3>
+<h3>Avec motcle url : _AUTORISER_SI{modifier,article,url}</h3>
 _AUTORISER modifier article url avec val de id_article : [(#VAL{id_article}|_request)]
 #_AUTORISER_SI{modifier,article,url}
 	OUI
@@ -27,7 +41,7 @@ _AUTORISER modifier article url avec val de id_article : [(#VAL{id_article}|_req
 	NON
 #_AUTORISER_FIN
 <br>
-<h3>Avec env : AUTORISER_SI{modifier,article,env}</h3>
+<h3>Avec motcle env : AUTORISER_SI{modifier,article,env}</h3>
 Val d'env de id_article : #ID_ARTICLE
 #_AUTORISER_SI{modifier,article,env}
 	OUI

@@ -5,18 +5,30 @@
     <INCLURE{fond=macrotests/#TEST,env}/>
     <hr>
 ]
-<h3>Tous les tests</h3>
+<h3>Tester et comprendre</h3>
+[(#DEBUG|non)
+    <a href="[(#SELF|parametre_url{var_mode,recalcul}|parametre_url{debug,oui})]">Ajouter recalcul et afficher traces macrosession</a>
+]
+
 <ul>
-    <li><a href="?page=macrotests&test=visiteur">visiteur</a></li>
-    <li><a href="?page=macrotests&test=visiteur_etendu">visiteur_etendu</a></li>
-    <li><a href="?page=macrotests&test=visiteur_si">visiteur_si</a></li>
-    <li><a href="?page=macrotests&test=visiteur_si_etendu">visiteur_si_etendu</a></li>
-    <li><a href="?page=macrotests&test=visiteur_non">visiteur_non</a></li>
-    <li><a href="?page=macrotests&test=visiteur_filtre">visiteur_filtre </a></li>
-    <li><a href="?page=macrotests&test=visiteur_filtre_calcul">visiteur_filtre avec argument calculé</a></li>
-    <li><a href="?page=macrotests&test=visiteur_comparaison">visiteur_comparaison</a></li>
-    <li style="margin-bottom:0.5em"><a href="?page=macrotests&test=visiteur_limitations">!! visiteur_limitations !!</a></li>
+    <li><a href="?page=macrotests&test=session">\#_SESSION sans et avec filtres simples</a></li>
+    <li><a href="?page=macrotests&test=session_non">\#_SESSION avec filtres 'non' ou '?'</a></li>
+    <li><a href="?page=macrotests&test=session_comparaison">\#_SESSION avec filtres de comparaison</a></li>
+    <li><a href="?page=macrotests&test=session_si">\#_SESSION_SI</a></li>
+    <li><a href="?page=macrotests&test=session_etendu">\#_SESSION étendues</a></li>
+    <li><a href="?page=macrotests&test=session_si_etendu">\#_SESSION_SI etendu</a></li>
+    <li><a href="?page=macrotests&test=session_si_etendu_emboite">\#_SESSION_SI étendus et emboités</a></li>
+    <li><a href="?page=macrotests&test=session_balise_get">\#_SESSION + filtre avec \#GET</a></li>
+    <li><a href="?page=macrotests&test=session_balise_env">\#_SESSION + filtre avec \#BALISE de l'environnement</a></li>
+    <li><a href="?page=macrotests&test=session_balise_boucle_etoile">\#_SESSION + filtre avec \#CHAMP* de BOUCLE</a></li>
+    <li><a href="?page=macrotests&test=session_balise_boucle_id_article">\#_SESSION + filtre avec \#ID_ARTICLE de BOUCLE (balise sans 'traitement')</a></li>
+    <li style="padding-bottom: 0.5em"><a href="?page=macrotests&test=session_balise_boucle_id_auteur">\#_SESSION comparaison \#ID_AUTEUR de BOUCLE (balise sans 'traitement')</a></li>
+    <li><a href="?page=macrotests&test=session_balise_boucle">ERREUR : \#_SESSION + filtre avec \#TITRE de BOUCLE (balise avec 'traitement')</a></li>
+    <li style="padding-bottom: 0.5em"><a href="?page=macrotests&test=session_limitations">!! Limitations des macros !!</a></li>
     <li><a href="?page=macrotests&test=autoriser">autoriser</a></li>
-    <li><a href="?page=macrotests&test=autoriser_motcle">autoriser_motcle env boucle url</a></li>
-    <li><a href="?page=macrotests&test=autoriser_calcul">autoriser avec argument calculé</a></li>
+    <li><a href="?page=macrotests&test=autoriser_motcle">_autoriser avec calcul par 'env' et 'url'</a></li>
+    <li><a href="?page=macrotests&test=autoriser_motcle_boucle">_autoriser dans BOUCLE, avec calcul par motclé 'boucle'</a></li>
+    <li><a href="?page=macrotests&test=autoriser_balise_boucle">_autoriser dans BOUCLE, avec calcul par balise #CHAMP sans 'traitement'</a></li>
+    <li><a href="?page=macrotests&test=autoriser_balise_get">_autoriser avec calcul par balise #GET</a></li>
+    <li><a href="?page=macrotests&test=autoriser_dans_boucle">autoriser avec argument calculé dans une boucle</a></li>
 </ul>

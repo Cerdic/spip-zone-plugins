@@ -2,22 +2,30 @@
 id : #_SESSION{id_auteur}<br>
 nom : #_SESSION{nom}<br>
 statut : #_SESSION{statut}<br>
-<br>
-<br>avant autoriser_si webmestre<br>
+
+<h4>\#_AUTORISER_SI{webmestre}</h4>
 
 #_AUTORISER_SI{webmestre}
-webmestre
+OUI webmestre
 #_AUTORISER_SINON
-pas webmestre
+NON, pas webmestre
 #_AUTORISER_FIN
 
-<br>après<br>
-<br>avant autoriser_si modifier article 2<br>
+<h4>\#_AUTORISER_SI{modifier,article,2}</h4>
 
 #_AUTORISER_SI{modifier,article,2}
-peut modifier article 2
+OUI modifier article 2
 #_AUTORISER_SINON
-peut pas modifier article 2
+NON, pas modifier article 2
 #_AUTORISER_FIN
 
-<br>après<br>
+<h4>\#_AUTORISER_SI{testotor,article,2}</h4>
+
+#_AUTORISER_SI{testotor,article,2}
+OUI testotor article 2
+#_AUTORISER_SINON
+NON, pas testotor article 2
+#_AUTORISER_FIN
+
+
+<br><br>Fin

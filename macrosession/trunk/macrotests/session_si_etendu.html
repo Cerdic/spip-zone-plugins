@@ -1,0 +1,21 @@
+<h1>Test # _SESSION avec _SI, _SINON, _FIN et accés session étendue</h1>
+<ul>
+<li>nom : #_SESSION{nom}</li>
+<li>est abonne : #_SESSION{est_abonne}</li>
+<li>nbreste : #_SESSION{nbreste}</li>
+<li>a reçu : #_SESSION{envois_revues_liste}</li>
+</ul>
+<h4>SI nbreste</h4>
+#_SESSION_SI{nbreste}
+il vous reste des numéros à recevoir
+#_SESSION_SINON
+	vous n'êtes plus abonné
+#_SESSION_FIN
+<h4>SI nbreste==0</h4>
+#_SESSION_SI{nbreste,==,0}
+il vous reste exactement plus aucun numéro à recevoir !
+#_SESSION_SINON
+	ah, il vous reste des numéros à recevoir... exactement #_SESSION{nbreste}
+#_SESSION_FIN
+
+

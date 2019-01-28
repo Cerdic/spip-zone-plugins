@@ -1,0 +1,43 @@
+#SQUELETTE<br>
+<h1># _AUTORISER_SI  dans une BOUCLE<br>avec valeurs calculées d'id par motclés, \#CHAMP et  \#GET</h1>
+- Environnement d'url reçu  id_article=#ID_ARTICLE<br>
+[(#ID_ARTICLE|non)
+Ajoutez l'id_article d'un article existant dans l'url ou <a href="[(#SELF|parametre_url{id_article,5})]">ajoutez id_article=5 à l'url</a><br>
+<br>
+]
+- #SET{id_article,2}
+Aprés SET, \#GET{id_article}=#GET{id_article}
+<br>
+<hr>
+<h3>\#_AUTORISER_SI{testotor,article,...} dans BOUCLE(ARTICLE){1,3}></h3>
+<BOUCLE_ar(ARTICLES){1,3}{tout}{'<hr><hr>'}>
+	#ID_ARTICLE) #TITRE
+	<br><br>
+	Avec env :
+	#_AUTORISER_SI{testotor,article,env} OUI
+	#_AUTORISER_SINON NON
+	#_AUTORISER_FIN
+	<br>
+	Avec url :
+	#_AUTORISER_SI{testotor,article,url} OUI
+	#_AUTORISER_SINON NON
+	#_AUTORISER_FIN
+	<br>
+	Avec boucle :
+	#_AUTORISER_SI{testotor,article,boucle} OUI
+	#_AUTORISER_SINON NON
+	#_AUTORISER_FIN
+	<br>
+	Avec \#ID_ARTICLE = #ID_ARTICLE :
+	#_AUTORISER_SI{testotor,article,#ID_ARTICLE} OUI
+	#_AUTORISER_SINON NON
+	#_AUTORISER_FIN
+	<br>
+	Avec \#GET{id_article}=#GET{id_article} :
+	#_AUTORISER_SI{testotor,article,#GET{id_article}} OUI
+	#_AUTORISER_SINON NON
+	#_AUTORISER_FIN
+	<br>
+</BOUCLE_ar>
+Pas de résultat de boucle. Créez des articles.
+<//B_ar>

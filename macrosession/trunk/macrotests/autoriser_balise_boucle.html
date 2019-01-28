@@ -1,0 +1,40 @@
+#SQUELETTE<br>
+
+Environnement reçu  # ID_ARTICLE=«#ID_ARTICLE»<br>
+[(#ID_ARTICLE|non)
+Il faut un id_article existant dans l'url.<br>
+<a href="[(#SELF|parametre_url{id_article,1})]">Ajouter id_article=1 à l'url</a><br>]
+<br>
+_SESSION : nom=#_SESSION{nom} - statut=#_SESSION{statut}
+<br>
+
+<h1>\#_AUTORISER_SI dans BOUCLE avec balise \#CHAMP</h1>
+3 itérations :
+<hr>
+
+<BOUCLE_test(ARTICLES){id_article?}{0,3}{'<br><hr><hr><br>'}>
+<i>Avec testotor : trace bleue + OUI</i><br>
+
+<h3>Avec motcle boucle : _AUTORISER_SI{testotor,article,\#ID_ARTICLE}</h3>
+_request(id_article) : [(#VAL{id_article}|_request)]
+#_AUTORISER_SI{testotor,article,#ID_ARTICLE}
+OUI
+#_AUTORISER_SINON
+NON
+#_AUTORISER_FIN
+<br>
+<hr>
+<i>Avec modifier</i><br>
+
+<h3>Avec motcle boucle : _AUTORISER_SI{modifier,article,\#ID_ARTICLE}</h3>
+_AUTORISER modifier article url avec val de id_article : [(#VAL{id_article}|_request)]
+#_AUTORISER_SI{modifier,article,#ID_ARTICLE}
+OUI
+#_AUTORISER_SINON
+NON
+#_AUTORISER_FIN
+<br>
+
+</BOUCLE_test>
+
+Et voilà
