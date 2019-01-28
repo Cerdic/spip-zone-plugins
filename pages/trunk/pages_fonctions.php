@@ -39,3 +39,31 @@ function balise_URL_PAGE_UNIQUE_dist($p) {
 	$p->interdire_scripts = false;
 	return $p;
 }
+
+
+/**
+ * Lister les pages uniques utiles qui ne sont pas encore créées
+ *
+ * Cette liste est complétée par les plugins tiers au moyen du pipeline pages_uniques_utiles.
+ *
+ * @uses pages_uniques_utiles()
+ * @return array
+ *     Tableau associatif : page => titre
+ */
+function pages_uniques_utiles() {
+
+	if (
+		$pages_utiles = pipeline('pages_uniques_utiles', array())
+		and is_array($pages_utiles)
+	) {
+		include_spip('base/abstract_sql');
+		foreach ($pages_utiles as $page => $titre) {
+			// Si la page existe déjà, on la vire
+			if (sql_countsel('spip_articles', 'page = '.sql_quote($page))) {
+				unset($pages_utiles[$page]);
+			}
+		}
+	}
+
+	return $pages_utiles;
+}

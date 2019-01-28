@@ -10,6 +10,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'aucune_page' => 'Il n’y a aucune page pour l’instant.',
 
+	// B
+	'bouton_generer_page_utile' => 'Créer la page <strong>@titre@ (<em>@page@</em>)</strong>',
+	'bouton_generer_pages_utiles' => 'Créer <em>toutes</em> les pages utiles',
+
 	// C
 	'convertir_article' => 'Convertir en article',
 	'convertir_page' => 'Convertir en page',
@@ -19,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_champ_page_doublon' => 'Cet identifiant existe déjà',
 	'erreur_champ_page_format' => 'Charactères alphanumériques en minuscules ou "_" uniquement',
 	'erreur_champ_page_taille' => '255 charactères maximum',
+	'explication_pages_utiles' => 'Les squelettes actuels du site peuvent utiliser les pages suivantes.',
 
 	// L
 	'label_champ_page' => 'Page :',
@@ -31,5 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_page' => 'Page',
+	'titre_pages_utiles' => 'Pages utiles',
 	'toutes_les_pages' => 'Toutes les pages'
 );
