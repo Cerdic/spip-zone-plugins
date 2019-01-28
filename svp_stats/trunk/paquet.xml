@@ -1,8 +1,8 @@
 <paquet
 	prefix="svpstats"
 	categorie="statistique"
-	version="0.2.2"
-	etat="dev"
+	version="0.3.0"
+	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="svpstats_logo-64.png"
 	schema="0.2"
