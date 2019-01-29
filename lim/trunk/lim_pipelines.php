@@ -133,7 +133,6 @@ function lim_formulaire_verifier($flux) {
 			// en fait, cela ne sert à rien...snif...à cause de /echafaudage qui intercepte les créations avant le CVT (?!).
 			// if (!autoriser($faire, 'rubrique', _request('id_parent'))) {
 			// 	$flux['data']['id_parent'] = _T('lim:info_creer_dans_rubrique_non_autorise');
-			}
 		}
 	}
 
