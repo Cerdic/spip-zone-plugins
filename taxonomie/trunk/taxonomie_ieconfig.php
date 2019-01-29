@@ -34,8 +34,8 @@ function taxonomie_ieconfig($flux) {
 						'saisie' => 'oui_non',
 						'options' => array(
 							'nom' => 'taxonomie_export_option',
-							'label' => '<:taxonomie:ieconfig_taxonomie_export_option:>',
-							'explication' => '<:taxonomie:ieconfig_taxonomie_export_explication:>',
+							'label' => '<:taxonomie:export_option:>',
+							'explication' => '<:taxonomie:export_explication:>',
 							'defaut' => '',
 						),
 					),
@@ -48,163 +48,54 @@ function taxonomie_ieconfig($flux) {
 		// Générer le tableau d'export
 		$flux['data']['taxonomie'] = taxonomie_ieconfig_exporter();
 
-	} elseif (($action == 'form_import') and isset($flux['args']['config']['noizetier'])) {
+	} elseif (($action == 'form_import') and isset($flux['args']['config']['taxonomie'])) {
 		// Construire le formulaire d'import :
-		// On affiche la version du noiZetier et le schéma de base de données avec lesquels le fichier d'import
+		// On affiche la version de Taxonomie et le schéma de base de données avec lesquels le fichier d'import
 		// à été créé.
-		$import = $flux['args']['config']['noizetier'];
+		$import = $flux['args']['config']['taxonomie'];
 		$texte_explication = _T(
-			'noizetier:import_resume',
+			'taxonomie:import_resume',
 			array('version' => $import['version'], 'schema' => $import['schema']));
 
 		// La configuration : une case suffit car on applique toujours un remplacement et la configuration est
 		// toujours présente dans un export.
 		$informer_plugin = chercher_filtre('info_plugin');
-		$version = $informer_plugin('noizetier', 'version', true);
-		$schema = $informer_plugin('noizetier', 'schema');
+		$version = $informer_plugin('taxonomie', 'version', true);
+		$schema = $informer_plugin('taxonomie', 'schema');
+		$plugin = $informer_plugin('taxonomie', 'nom');
 		if ($schema == $import['schema']) {
 			$explication_config = _T(
-				'noizetier:import_configuration_explication',
+				'taxonomie:import_configuration_explication',
 				array('version' => $version, 'schema' => $schema));
 		} else {
 			$explication_config = _T(
-				'noizetier:import_configuration_avertissement',
+				'taxonomie:import_configuration_avertissement',
 				array('version' => $version, 'schema' => $schema));
-		}
-
-		// Les pages explicites : seuls les bloc exclus peuvent être restaurés. Une case suffit car on applique
-		// toujours une fusion des blocs exclus sur les pages de la base ayant le même identifiant.
-		// On désactive toutefois l'option si aucune page explicite n'est commune entre les deux listes.
-		$disable_pages_explicites = false;
-		$select = array('page');
-		$where = array('est_virtuelle=' . sql_quote('non'));
-		if ($pages_explicites = sql_allfetsel($select,'spip_noizetier_pages', $where)) {
-			$pages_explicites = array_map('reset', $pages_explicites);
-			if (count(array_intersect($pages_explicites, array_column($import['pages_explicites'], 'page'))) > 0) {
-				$explication_pages_explicites = _T('noizetier:import_pages_explicites_explication');
-			} else {
-				// Aucune page explicite commune entre la base et le fichier d'import.
-				$disable_pages_explicites = true;
-				$explication_pages_explicites = _T('noizetier:import_pages_explicites_avertissement1');
-			}
-		} else {
-			// Aucune page explicite dans la base, ce n'est pas normal mais on envoie quand un même un avertissement.
-			$disable_pages_explicites = true;
-			$explication_pages_explicites = _T('noizetier:import_pages_explicites_avertissement2');
-		}
-
-		// Les compositions virtuelles : 3 possibilités en radio, remplacement, ajout (avec vérification de
-		// l'absence d'une composition identique) et la fusion avec ajout. Si aucune composition virtuelle dans la
-		// base seul l'ajout est possible et si aucune composition virtuelle n'est incluse dans l'import on ne propose
-		// aucune action.
-		$data_compositions = array();
-		if ($import['contenu']['compositions_virtuelles']) {
-			$data_compositions['ajouter'] = _T('noizetier:import_compositions_virtuelles_ajouter');
-			$where = array('est_virtuelle=' . sql_quote('oui'));
-			if (!sql_countsel('spip_noizetier_pages', $where)) {
-				$explication_compositions = _T('noizetier:import_compositions_virtuelles_avertissement1');
-			} else {
-				$data_compositions['remplacer'] = _T('noizetier:import_compositions_virtuelles_remplacer');
-				$data_compositions['fusionner'] = _T('noizetier:import_compositions_virtuelles_fusionner');
-				$explication_compositions = _T('noizetier:import_compositions_virtuelles_explication');
-			}
-		} else {
-			$explication_compositions = _T('noizetier:import_compositions_virtuelles_avertissement2');
-		}
-
-		// -- Les noisettes : 2 possibilités en radio, remplacement ou ajout.
-		$data_noisettes = array();
-		if ($import['contenu']['noisettes']) {
-			$pages_base = sql_allfetsel('page','spip_noizetier_pages');
-			$pages_base = array_map('reset', $pages_base);
-
-			include_spip('base/objets');
-			$importation_noisettes_possible = false;
-			foreach ($import['noisettes'] as $_noisette) {
-				if ($_noisette['type']) {
-					$page_import = $_noisette['composition']
-						? $_noisette['type'] . '-' . $_noisette['composition']
-						: $_noisette['type'];
-					if (in_array($page_import, $pages_base)) {
-						$importation_noisettes_possible = true;
-						break;
-					}
-				} else {
-					$table_objet = table_objet_sql($_noisette['objet']);
-					$id_table_objet = id_table_objet($_noisette['objet']);
-					$where = array($id_table_objet. '=' . intval($_noisette['id_objet']));
-					if (sql_countsel($table_objet, $where)) {
-						$importation_noisettes_possible = true;
-						break;
-					}
-				}
-			}
-
-			if ($importation_noisettes_possible) {
-				$data_noisettes = array(
-					'remplacer' => '<:noizetier:import_noisettes_remplacer:>',
-					'ajouter'   => '<:noizetier:import_noisettes_ajouter:>'
-				);
-				$explication_noisettes = _T('noizetier:import_noisettes_explication');
-			} else {
-				// Aucune page commune entre la base et le fichier d'import.
-				$explication_noisettes = _T('noizetier:import_noisettes_avertissement1');
-			}
-		} else {
-			$explication_noisettes = _T('noizetier:import_noisettes_avertissement2');
 		}
 
 		$saisies = array(
 			array(
 				'saisie'  => 'fieldset',
 				'options' => array(
-					'nom'   => 'noizetier_export',
-					'label' => '<:noizetier:noizetier:>',
-					'icone' => 'noizetier-24.png',
+					'nom'   => 'taxonomie_export',
+					'label' => $plugin,
+					'icone' => 'taxonomie-24.png',
 				),
 				'saisies' => array(
 					array(
 						'saisie'  => 'explication',
 						'options' => array(
-							'nom'   => 'noizetier_export_explication',
+							'nom'   => 'taxonomie_export_explication',
 							'texte' => $texte_explication,
 						),
 					),
 					array(
 						'saisie'  => 'case',
 						'options' => array(
-							'nom'         => 'noizetier_import_config',
-							'label'       => '<:noizetier:import_configuration_label:>',
-							'label_case'  => '<:noizetier:import_configuration_labelcase:>',
+							'nom'         => 'taxonomie_import_config',
+							'label'       => '<:taxonomie:import_configuration_label:>',
+							'label_case'  => '<:taxonomie:import_configuration_labelcase:>',
 							'explication' => $explication_config
-						),
-					),
-					array(
-						'saisie'  => 'case',
-						'options' => array(
-							'nom'         => 'noizetier_import_pages',
-							'label'       => '<:noizetier:import_pages_explicites_label:>',
-							'label_case'  => '<:noizetier:import_pages_explicites_labelcase:>',
-							'explication' => $explication_pages_explicites,
-							'disable'     => $disable_pages_explicites
-						),
-					),
-					array(
-						'saisie'  => 'radio',
-						'options' => array(
-							'nom'         => 'noizetier_import_compositions',
-							'label'       => '<:noizetier:import_compositions_virtuelles_label:>',
-							'datas'       => $data_compositions,
-							'explication' => $explication_compositions
-						),
-					),
-					array(
-						'saisie'  => 'radio',
-						'options' => array(
-							'nom'         => 'noizetier_import_noisettes',
-							'label'       => '<:noizetier:import_noisettes_label:>',
-							'datas'       => $data_noisettes,
-							'explication' => $explication_noisettes
 						),
 					),
 				),
@@ -216,7 +107,7 @@ function taxonomie_ieconfig($flux) {
 	// Import de la configuration
 	if (($action == 'import') and isset($flux['args']['config']['noizetier'])) {
 		// On récupère les demandes d'importation.
-		$importation['configuration'] = _request('noizetier_import_config');
+		$importation['configuration'] = _request('taxonomie_import_config');
 		$importation['pages_explicites'] = _request('noizetier_import_pages');
 		$importation['compositions_virtuelles'] = _request('noizetier_import_compositions');
 		$importation['noisettes'] = _request('noizetier_import_noisettes');

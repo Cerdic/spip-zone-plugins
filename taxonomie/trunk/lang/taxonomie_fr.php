@@ -41,6 +41,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_wikipedia_langue' => 'Si vous utilisez plusieurs langues pour traduire vos taxons, choisissez la langue à utiliser pour récupérer la page Wikipedia.',
 	'explication_wikipedia_page' => 'Vérifier si cette page est bien celle qui décrit le mieux le taxon. Si non, choisissez une page alternative parmi celle éventuellement proposée dans la liste ci-dessous.',
 	'explication_wikipedia_lien' => 'Choisissez la page Wikipedia que vous souhaitez intégrer dans le champ «&nbsp;@element@&nbsp;» du taxon.',
+	'export_explication' => 'Exporte la configuration du plugin et les données de production concernant les taxons du règne au genre édités après insertion et les taxons de type espèce et descendants créés manuellement.',
+	'export_option' => 'Inclure les données de Taxonomie dans l’export ?',
 
 	// F
 	'filtre_edite_oui' => 'Edités',
@@ -56,8 +58,31 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'filtre_statut_tout' => 'Tous',
 
 	// I
-	'ieconfig_taxonomie_export_explication' => 'Exporte la configuration du plugin et les données de production concernant les taxons du règne au genre édités après insertion et les taxons de type espèce et descendants créés manuellement.',
-	'ieconfig_taxonomie_export_option' => 'Inclure les données de Taxonomie dans l’export ?',
+	'import_resume' => 'Le fichier à importer a été construit avec le plugin Taxonomie en version @version@, schéma de données @schema@.',
+	'import_configuration_avertissement' => 'La version @version@ du plugin Taxonomie actif sur ce site possède un schéma @schema@ différent de celui du fichier d’import. <b>Vérifier la compatibilité des configurations avant d’importer celle du fichier</b>.',
+	'import_configuration_explication' => 'La version @version@ du plugin Taxonomie actif sur ce site possède le même schéma @schema@ que celui du fichier d’import.',
+	'import_configuration_label' => 'La configuration du plugin',
+	'import_configuration_labelcase' => 'Remplacer la configuration actuelle du plugin Taxonomie par celle du fichier d’import',
+
+	'import_compositions_virtuelles_ajouter' => 'Ajouter les compositions virtuelles du fichier d’import. Les compositions virtuelles disponibles sur le site ne seront pas modifiées.',
+	'import_compositions_virtuelles_avertissement1' => 'Il n’existe pas de compositions virtuelles dans la site. Il est juste possible d\\importer celles du fichier d’import.',
+	'import_compositions_virtuelles_avertissement2' => 'Aucune composition virtuelle n’est disponible dans le fichier d’import. Aucune importation n’est donc possible.',
+	'import_compositions_virtuelles_explication' => 'Il existe des compositions virtuelles dans le site et dans le fichier d’import.',
+	'import_compositions_virtuelles_fusionner' => 'Ajouter les compositions virtuelles du fichier d’import et remplacer les compositions virtuelles du site aussi disponibles dans le fichier d’import.',
+	'import_compositions_virtuelles_label' => 'Les compositions virtuelles',
+	'import_compositions_virtuelles_remplacer' => 'Remplacer les compositions virtuelles disponibles sur le site par celles du fichier d’import',
+	'import_noisettes_ajouter' => 'Ajouter les noisettes du fichier d’import dans les pages ou objets concernés. Les noisettes actuellement configurées sur le site ne seront pas modifiées',
+	'import_noisettes_avertissement1' => 'Il n’existe pas de pages ou objets communs dans le site et dans le fichier d’import. Aucune importation n’est donc possible.',
+	'import_noisettes_avertissement2' => 'Aucune noisette n’est disponible dans le fichier d’import. Aucune importation n’est donc possible.',
+	'import_noisettes_explication' => 'Il existe des pages ou objets communs dans le site et dans le fichier d’import.',
+	'import_noisettes_label' => 'Les noisettes',
+	'import_noisettes_remplacer' => 'Remplacer, pour les pages ou objets concernés, les noisettes actuellement configurées pour le site par les noisettes du fichier d’import',
+	'import_pages_explicites_avertissement1' => 'Il n’existe pas de pages ou compositions explicites communes entre le site et le fichier d’import. Toute importation est donc inutile.',
+	'import_pages_explicites_avertissement2' => 'Aucune pages ou compositions explicites disponibles sur le site. Toute importation est donc inutile.',
+	'import_pages_explicites_explication' => 'Il existe des pages et compositions explicites communes entre le site et le fichier d’import.',
+	'import_pages_explicites_label' => 'Les blocs exclus des pages explicites',
+	'import_pages_explicites_labelcase' => 'Remplacer les blocs exclus des pages explicites du site par ceux du fichier d’import',
+
 	'info_boite_taxonomie_configuration' => 'Cette page permet de configurer les paramètres de base du plugin comme la liste des langues utilisables pour nommer ou décrire les taxons.',
 	'info_boite_regnes' => 'Cette page permet de charger, mettre à jour ou vider les taxons du règne au genre (rangs principaux, secondaires et intercalaires) importés à partir des rapports hiérarchiques extraits de la base ITIS. Ces taxons peuvent être rechargés sans danger pour les autres taxons et pour les modifications éventuellement effectuées.',
 	'info_boite_taxons' => 'Cette page permet de consulter la liste des taxons dont le rang est strictement supérieur au rang espèce. Ces taxons sont tous créés automatiquement même si ils peuvent être modifiés manuellement après coup.',
