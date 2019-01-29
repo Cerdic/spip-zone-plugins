@@ -1,4 +1,4 @@
-<?php
+fo<?php
 
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -413,7 +413,7 @@ Techniquement, cet outil a pour effet :
 
 Les blocs multi s\'affichent alors toujours dans la langue demandée par le visiteur.',
 	'forcer_langue:nom' => 'Force la langue',
-	'format_spip' => 'Les articles au format SPIP',
+	'format_spip' => 'Les textes au format SPIP',
 	'forum_lgrmaxi:description' => 'Par défaut, SPIP ne limite pas la taille maximale des messages de forum, mais oblige une taille minimale de 10 caractères. Cet outil vous permet de modifier ces valeurs (la valeur minimale est modifiable dès SPIP 3.0).
 
 Lorsqu\'un message de taille incompatible est posté, il est refusé et un message d\'erreur est affiché.[[De %forum_lgrmini% à %forum_lgrmaxi%@_CS_ASTER@ caractères.]]<q3>@_CS_ASTER@ Une valeur vide ou égale à 0 signifie que la taille des messages ne sera pas limitée.</q3>',
