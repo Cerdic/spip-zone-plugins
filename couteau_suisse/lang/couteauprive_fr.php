@@ -161,7 +161,7 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 	'blocs:nom' => 'Blocs Dépliables',
 	'boites_privees:description' => 'Toutes les boîtes décrites ci-dessous apparaissent ici ou là dans la partie privée.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Les révisions du Couteau Suisse}} : un cadre sur la présente page de configuration, indiquant les dernières modifications apportées au code du plugin ([Source->@_CS_RSS_SOURCE@]).
-- {{Les articles au format SPIP}} : un cadre dépliable pour vos articles permettant de connaître le code source utilisé par leurs auteurs.
+- {{Les textes au format SPIP}} : un cadre dépliable pour vos articles et vos newsletters permettant de connaître le code source utilisé par leurs auteurs.
 - {{Les auteurs en stat}} : un cadre dépliable sur [la page des auteurs->./?exec=auteurs] indiquant les 10 derniers connectés et les inscriptions non confirmées. Seuls les administrateurs voient ces informations.
 - {{Les webmestres SPIP}} : un cadre dépliable sur [la page des auteurs->./?exec=auteurs] indiquant les administrateurs élevés au rang de webmestre SPIP. Seuls les administrateurs voient ces informations. Si vous êtes webmestre vous-même, voyez aussi l\'outil « [.->webmestres] ».
 - {{Les URLs propres}} : un cadre dépliable pour chaque objet de contenu (article, rubrique, auteur, ...) indiquant l\'URL propre associée ainsi que leurs alias éventuels. L\'outil « [.->type_urls] » vous permet une configuration fine des URLs de votre site.

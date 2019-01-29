@@ -57,7 +57,13 @@ function boites_privees_affiche_milieu($flux){
 		case 'article': case 'articles': {
 			// texte original au format spip
 			if(defined('boites_privees_ARTICLES'))
-				$flux['data'] .= cs_formatspip($flux['args']['id_article']);
+				$flux['data'] .= cs_formatspip($flux['args']['id_article'], 'id_article');
+			break;
+		}
+		case 'newsletter': case 'newsletters': {
+			// texte original au format spip
+			if(defined('boites_privees_ARTICLES'))
+				$flux['data'] .= cs_formatspip($flux['args']['id_newsletter'], 'id_newsletter');
 			break;
 		}
 		default:
@@ -189,9 +195,9 @@ function cs_infos_connection() {
 		recuperer_fond('fonds/derniers_connectes'));
 }
 
-function cs_formatspip($id_article){
+function cs_formatspip($id_objet, $type_id='id_article'){
 	include_spip('public/assembler');
-	if(!$txt = recuperer_fond('fonds/format_spip', array('id_article'=>$id_article))) return '';
+	if(!$txt = recuperer_fond('fonds/format_spip', array($type_id=>$id_objet))) return '';
 	$txt = explode('@TITRE@=', $txt, 2);
 	// compatibilite avec SPIP 1.92
 	$compat = function_exists('bouton_block_depliable');
