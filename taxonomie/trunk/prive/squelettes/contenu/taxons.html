@@ -36,6 +36,8 @@
 	sinon=#GET{titre_0},
 	env, ajax} />
 
-[(#AUTORISER{creer, espece}|oui)
-	[(#URL_ECRIRE{espece_creer}|icone_verticale{<:taxon:icone_creer_taxon:>, espece, new, right})]
+[(#ENV{espece}|=={oui}|oui)
+	[(#AUTORISER{creer, espece}|oui)
+		[(#URL_ECRIRE{espece_creer}|icone_verticale{<:taxon:icone_creer_taxon:>, espece, new, right})]
+	]
 ]
