@@ -31,7 +31,7 @@ function svp_actualiser_stats() {
 	} else {
 		foreach ($stats as $_stat) {
 			$prefixe = strtoupper($_stat->nom);
-			if ($id_plugin = sql_fetsel('id_plugin', 'spip_plugins', array('prefixe='. sql_quote($prefixe)))) {
+			if ($id_plugin = sql_getfetsel('id_plugin', 'spip_plugins', array('prefixe='. sql_quote($prefixe)))) {
 				// Si le plugin est bien dans la base on peut lui mettre a jour ses statistiques
 				sql_updateq('spip_plugins', 
 							array('nbr_sites'=> $_stat->sites, 'popularite'=> floatval(trim($_stat->pourcentage, '%'))),
