@@ -1,5 +1,21 @@
+[(#REM)
+    Si ce squelette est appelé par le formulaire d'édition de logo (comme le
+    fait le plugin roles_document), le lien doit pointer vers le formulaire de
+    massicotage du logo, et non du document.
+]
+[(#SET{objet_lien, #ENV{variante}|=={editer_logo}|?{
+  #ENV{objet},
+  document}})]
+
+[(#SET{id_objet_lien, #ENV{variante}|=={editer_logo}|?{
+  #ENV{id_objet},
+  #ENV{id_document}}})]
+
 <BOUCLE_document(DOCUMENTS) {id_document}{media=image}{tout}{distant=non}>
-  <a class="bouton" role="button" href="[(#URL_ECRIRE{massicoter_image, objet=document&id_objet=#ID_DOCUMENT}|parametre_url{redirect,#SELF\#doc#ID_DOCUMENT})]">
+  <a class="bouton" role="button"
+     href="[(#URL_ECRIRE{massicoter_image,
+            objet=#GET{objet_lien}&id_objet=#GET{id_objet_lien}}
+              |parametre_url{redirect,#SELF\#doc#ID_DOCUMENT})]">
     <strong><:massicot:massicoter:></strong>
   </a>
 </BOUCLE_document>
