@@ -201,7 +201,7 @@ function massicot_editer_contenu_objet($flux) {
 function massicot_formulaire_charger($flux) {
 
 	if (($flux['args']['form'] === 'illustrer_document')
-			and $id_vignette) {
+			and isset($id_vignette) and $id_vignette) {
 		$parametres = massicot_get_parametres(
 			'document',
 			$flux['data']['id_vignette']
