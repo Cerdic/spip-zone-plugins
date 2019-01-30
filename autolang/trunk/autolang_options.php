@@ -55,6 +55,8 @@ function autolang_utiliser_langue_visiteur() {
 function autolang_aiguiller(){
 	// Ne rien faire si la langue est déjà définie
 	if (_request('lang')) return;
+	// Ne rien faire pour le flux RSS
+	if (_request('page')==='backend') return;
 	// Ne rien faire dans l'espace privé
 	if (test_espace_prive()) return;
 	// Pour ne rien faire si appelé depuis la ligne de commande (ex : SPIP-cli)
