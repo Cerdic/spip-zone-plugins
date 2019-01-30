@@ -1,4 +1,4 @@
-<BOUCLE_nav(TAXONS){id_taxon}{si #ENV{exec}|=={taxon_decrire}}>
+<BOUCLE_nav(TAXONS){id_taxon}{statut==.*}{si #ENV{exec}|=={taxon_decrire}}>
 #BOITE_OUVRIR{'','info'}
     #PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','taxon','id',#ENV{id_taxon}}}}
 #BOITE_FERMER

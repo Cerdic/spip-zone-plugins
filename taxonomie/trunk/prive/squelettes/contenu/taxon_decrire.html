@@ -1,5 +1,5 @@
 [(#AUTORISER{modifier, taxon, #ENV{id_taxon}}|sinon_interdire_acces)]
-<BOUCLE_taxon_decrire(TAXONS) {id_taxon}>
+<BOUCLE_taxon_decrire(TAXONS) {id_taxon}{statut==.*}>
 <h1 class="grostitre">
 	<span class="nom_scientifique_inline">#NOM_SCIENTIFIQUE</span>
 	[ - (#VAL{taxonomie:bouton_wikipedia_}|concat{#ENV{element}}|_T)]
