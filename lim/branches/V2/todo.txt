@@ -1,6 +1,0 @@
-﻿Todo
-
-1- récursivité dans les choix des restrictions par rubriques
-2- rubriques pliables/dépliables dans la gestion des restrictions par rubriques
-3- pouvoir figer les choix dans la gestion des restrictions par rubriques
-

@@ -64,7 +64,7 @@ function autoriser_iconifier($faire, $type, $id, $qui, $opt) {
 /**********************************************************/
 /************* RESTRICTION DANS LES RUBRIQUES *************/
 /**
- * gérer création et modification (en fait publierdans)
+ * gérer création et modification (en fait creerobjetrdans)
  * @pipeline autoriser 
  */
 
@@ -126,26 +126,26 @@ if (!function_exists('autoriser_rubrique_creersitedans')) {
 	}
 }
 
-if (!function_exists('autoriser_rubrique_publierdans')) {
-	function autoriser_rubrique_publierdans($faire, $type, $id, $qui, $opt) {
+// if (!function_exists('autoriser_rubrique_publierdans')) {
+// 	function autoriser_rubrique_publierdans($faire, $type, $id, $qui, $opt) {
 
-		// Dans LIM l'appel à cette autorisation signifie que forcément $opt est renseigné
-		if (is_array($opt) AND array_key_exists('lim_except_rub',$opt) AND array_key_exists('type',$opt)) {
-			$type = $opt['type'];
-			$quelles_rubriques = lire_config("lim_rubriques/$type");
-			if (!is_null($quelles_rubriques)) {
-				$rubrique_except = array(0 => $opt['lim_except_rub']);
-				$quelles_rubriques = array_diff($quelles_rubriques, $opt);
-				$lim_rub = !in_array($id,$quelles_rubriques);
-			}
-			// cas possible : un objet peut avoir été sélectionné dans ?exec=configurer_lim_rubriques, mais aucune restriction activée
-			else $lim_rub = true;
-		}
-		// ici gestion hors CVT
-		else $lim_rub = true;
+// 		// Dans LIM l'appel à cette autorisation signifie que forcément $opt est renseigné
+// 		if (is_array($opt) AND array_key_exists('lim_except_rub',$opt) AND array_key_exists('type',$opt)) {
+// 			$type = $opt['type'];
+// 			$quelles_rubriques = lire_config("lim_rubriques/$type");
+// 			if (!is_null($quelles_rubriques)) {
+// 				$rubrique_except = array(0 => $opt['lim_except_rub']);
+// 				$quelles_rubriques = array_diff($quelles_rubriques, $opt);
+// 				$lim_rub = !in_array($id,$quelles_rubriques);
+// 			}
+// 			// cas possible : un objet peut avoir été sélectionné dans ?exec=configurer_lim_rubriques, mais aucune restriction activée
+// 			else $lim_rub = true;
+// 		}
+// 		// ici gestion hors CVT
+// 		else $lim_rub = true;
 
-		return
-			$lim_rub
-			AND autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt);
-	}
-}
+// 		return
+// 			$lim_rub
+// 			AND autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt);
+// 	}
+// }
