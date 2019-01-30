@@ -29,8 +29,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'choisir_noisette' => 'Choose the nut you want to add:',
 	'compositions_non_installe' => '<b>Plugin Compositions:</b> this plugin isn’t installed on your site. It’s not necessary to the correct working of the nuts. However, when it’s activated, you can create compositions directly inside your Nuts Manager.',
+	'configurer_balise_noisette_label' => 'Wrapping',
 	'configurer_objets_noisettes_explication' => 'On these types of content, it will be allowed to customize the nuts <strong>content by content</strong>.',
 	'configurer_objets_noisettes_label' => 'Allow customization by content on:',
+	'configurer_profondeur_max_label' => 'Imbrication depth',
 	'configurer_titre' => 'NoiZetier configuration', # MODIF
 	'copie_de' => 'Copy of @source@',
 
@@ -102,7 +104,7 @@ You can choose a new identifier or suffix the reference identifier as follows:
 	'formulaire_icon' => 'Icon',
 	'formulaire_icon_explication' => 'You can enter the relative path to an icon (for example : <i>images/list-item-contenus.png</i>).',
 	'formulaire_identifiant_deja_pris' => 'This identifier already exists!',
-	'formulaire_liste_compos_config' => 'This configuration file defines the following Nuts Manager compositions:', # MODIF
+	'formulaire_liste_compos_config' => 'This configuration file defines the following Nuts Manager compositions:',
 	'formulaire_liste_pages_config' => 'This configuration file defines
 nuts on the following pages:', # MODIF
 	'formulaire_modifier_composition' => 'Edit this composition',
@@ -132,8 +134,10 @@ nuts on the following pages:', # MODIF
 	'ieconfig_noizetier_export_option' => 'Included in the export?', # MODIF
 	'ieconfig_non_installe' => '<b>Configuration Import/Export Plugin:</b> this plugin isn’t installed on your site. It is not necessarry to the correct working of the Nuts Manager. However, when it’s activated, you can  export and import some nuts configurations into the Nuts Manager.',
 	'ieconfig_probleme_import_config' => 'A problem occured while importing the Nuts Manager configuration.',
+	'info_1_noisette_ajoutee' => '1 nut has been added',
 	'info_composition' => 'COMPOSITION:',
 	'info_etendre_noisette' => 'Copy the nut @noisette@ in the block@bloc@ of other pages',
+	'info_nb_noisettes_ajoutees' => '@nb@ nuts have been added',
 	'info_page' => 'PAGE:',
 	'installation_tables' => 'Installed tables of the Nuts Manager Plugin.<br />',
 	'item_titre_perso' => 'custom title',
@@ -149,6 +153,7 @@ nuts on the following pages:', # MODIF
 	'label_identifiant' => 'identifier:',
 	'label_niveau_titre' => 'Title level:',
 	'label_noisette_css' => 'CSS classes',
+	'label_noisette_encapsulation' => 'Wrapping',
 	'label_noizetier_ajax' => 'By default, include each nut in AJAX', # MODIF
 	'label_noizetier_balise' => 'By default, include each nut in a tag', # MODIF
 	'label_texte' => 'Text:',
@@ -164,8 +169,8 @@ nuts on the following pages:', # MODIF
 	'liste_objets' => 'Contents with a nut configuration', # MODIF
 	'liste_objets_configures' => 'List of objects',
 	'liste_pages' => 'List of the pages',
-	'liste_pages_objet_non' => 'Pages not linked to a content type', # MODIF
-	'liste_pages_objet_oui' => 'Pages linked to a content type', # MODIF
+	'liste_pages_objet_non' => 'Autonomous pages',
+	'liste_pages_objet_oui' => 'Contents pages',
 	'liste_pages_toutes' => 'All pages',
 
 	// M
@@ -194,6 +199,9 @@ nuts on the following pages:', # MODIF
 
 	// O
 	'operation_annulee' => 'Operation canceled.',
+	'option_noisette_encapsulation_oui' => 'Wrap the nut',
+	'option_noizetier_encapsulation_non' => 'without wrapping',
+	'option_noizetier_encapsulation_oui' => 'with wrapping',
 	'oui' => 'Yes',
 
 	// P
