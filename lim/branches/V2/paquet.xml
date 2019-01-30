@@ -17,13 +17,8 @@
 
 	<licence>GNU/GPL</licence>
 
-<<<<<<< .working
 	<necessite nom="saisies" compatibilite="[1.42.11;[" />
 	<necessite nom="medias" compatibilite="[2.20.15;[" />
-=======
-	<necessite nom="saisies"  compatibilite="[1.42.11;[" />
-	<necessite nom="medias"  compatibilite="[2.20.15;[" />
->>>>>>> .merge-right.r113693
 	<necessite nom="php" compatibilite="[5.5.0;[" />
 
 	<pipeline nom="autoriser" inclure="lim_autorisations.php" />
