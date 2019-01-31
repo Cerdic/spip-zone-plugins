@@ -21,16 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return bool true si valeur ok, false sinon,
 **/
 function oui_non_valeurs_acceptables($valeur, $description) {
-	if (saisies_verifier_gel_saisie($description)) {
-		$options = $description['options'];
-		if (isset($options['defaut']) and $options['defaut'] == 'on') {
-			return $valeur == 'on';
-		}	else {
-			return $valeur === '';// Notons le strictement égale, dès fois que des gens postent 0
-		}
-	} elseif ($valeur!='on' and $valeur!='') {
-		return false;
-	}
-	return true;
+	include_spip('saisies/case');
+	return case_valeurs_acceptables($valeur, $description);
 }
 
