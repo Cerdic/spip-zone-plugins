@@ -46,6 +46,21 @@ options:
           nom: 'disable_avec_post'
           label: '<:saisies:option_disable_avec_post_label:>'
           explication: '<:saisies:option_disable_avec_post_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'valeur_oui'
+          label: '<:saisies:option_valeur_oui_label:>'
+          explication: '<:saisies:option_oui_non_valeur_oui_explication:>'
+          size: 50
+          defaut: 'on'
+      -
+        saisie: 'input'
+        options:
+          nom: 'valeur_non'
+          label: '<:saisies:option_valeur_non_label:>'
+          explication: '<:saisies:option_valeur_non_explication:>'
+          size: 50
   -
     saisie: 'fieldset'
     options:

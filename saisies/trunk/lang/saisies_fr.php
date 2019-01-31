@@ -158,9 +158,11 @@ Vous trouverez la <a href="https://contrib.spip.net/5080">documentation complèt
 	'option_type_label' => 'Type du champ',
 	'option_type_password' => 'Texte masqué lors de la saisie (ex : mot de passe)',
 	'option_type_text' => 'Normal',
-	'option_valeur_non_explication' => 'Valeur postée si la case n’est pas cochée. Attention, il s’agit d’une valeur technique et non d’une valeur affichée.',
+	'option_oui_non_valeur_non_explication' => 'Valeur postée si le non est sélectionné.',
+	'option_case_valeur_non_explication' => 'Valeur postée si la case n’est pas cochée. Attention, il s’agit d’une valeur technique et non d’une valeur affichée.',
 	'option_valeur_non_label' => 'Valeur non',
-	'option_valeur_oui_explication' => 'Valeur postée si la case est cochée. Attention, il s’agit d’une valeur technique et non d’une valeur affichée.',
+	'option_case_valeur_oui_explication' => 'Valeur postée si la case est cochée. Attention, il s’agit d’une valeur technique et non d’une valeur affichée.',
+	'option_oui_non_valeur_oui_explication' => 'Valeur postée si le oui est sélectionné.',
 	'option_valeur_oui_label' => 'Valeur oui',
 
 	// P

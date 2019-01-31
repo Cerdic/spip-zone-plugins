@@ -83,7 +83,7 @@ Pode-se usar operadores boleanos <code>||</code> (ou) e  <code>&&</code> (e)', #
 	'option_cols_label' => 'Largura',
 	'option_datas_explication' => 'Você deve informar uma opção por linha,  no formato "chave|Rótulo da escolha"',
 	'option_datas_label' => 'Lista de opções aceitáveis',
-	'option_datas_sous_groupe_explication' => 'Você deve indicar uma opção por linha, no formato "chave|Rótulo" da opção.<br /> 
+	'option_datas_sous_groupe_explication' => 'Você deve indicar uma opção por linha, no formato "chave|Rótulo" da opção.<br />
 Você pode indicar o início de um subgrupo, no formato "*Título do subgrupo". Para encerrar um subgrupo, você pode iniciar um outro ou inserir uma linha contendo apenas "/*".',
 	'option_defaut_label' => 'Valor padrão',
 	'option_disable_avec_post_explication' => 'Igual na opção anterior, mas envia ainda o valor dentro um campo escondido.',
@@ -150,9 +150,9 @@ Você pode indicar o início de um subgrupo, no formato "*Título do subgrupo". 
 	'option_type_label' => 'Tipo do campo',
 	'option_type_password' => 'Texto mascarado durante o preenchimento (ex: senha).',
 	'option_type_text' => 'Normal',
-	'option_valeur_non_explication' => 'Valor postado se o checkbox não estiver selecionado. Atenção, trata-se de um valor tecnico e não de um valor exibido.',
+	'option_case_valeur_non_explication' => 'Valor postado se o checkbox não estiver selecionado. Atenção, trata-se de um valor tecnico e não de um valor exibido.',
 	'option_valeur_non_label' => 'Valor não',
-	'option_valeur_oui_explication' => 'Valor postado se o checkbox estiver selecionado. Atenção, trata-se de um valor tecnico e não de um valor exibido.',
+	'option_case_valeur_oui_explication' => 'Valor postado se o checkbox estiver selecionado. Atenção, trata-se de um valor tecnico e não de um valor exibido.',
 	'option_valeur_oui_label' => 'Valor sim',
 
 	// P

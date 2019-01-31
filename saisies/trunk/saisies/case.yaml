@@ -62,8 +62,8 @@ options:
         saisie: 'input'
         options:
           nom: 'valeur_oui'
-          label: '<:saisies:option_valeur_oui_label:>'
-          explication: '<:saisies:option_valeur_oui_explication:>'
+          label: '<:saisies:option_case_valeur_oui_label:>'
+          explication: '<:saisies:option_case_valeur_oui_explication:>'
           size: 50
           defaut: 'on'
       -

@@ -159,9 +159,9 @@ Je vindt <a href="https://contrib.spip.net/5080">volledige documentatie van de s
 	'option_type_label' => 'Veldtype',
 	'option_type_password' => 'Verborgen tekst tijdens invoer (bv: wachtwoord)',
 	'option_type_text' => 'Normaal',
-	'option_valeur_non_explication' => 'Geposte waarde wanneer de checkbox niet wordt geselecteerd. Let op: het gaat om een technische waarde, niet om een weergegeven waarde.',
+	'option_case_valeur_non_explication' => 'Geposte waarde wanneer de checkbox niet wordt geselecteerd. Let op: het gaat om een technische waarde, niet om een weergegeven waarde.',
 	'option_valeur_non_label' => 'Waarde non',
-	'option_valeur_oui_explication' => 'Geposte waarde wanneer de checkbox is geselecteerd. Let op: het gaat om een technische waarde, niet om een weergegeven waarde.',
+	'option_case_valeur_oui_explication' => 'Geposte waarde wanneer de checkbox is geselecteerd. Let op: het gaat om een technische waarde, niet om een weergegeven waarde.',
 	'option_valeur_oui_label' => 'Waarde oui',
 
 	// P
