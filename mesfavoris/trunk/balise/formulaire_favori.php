@@ -46,7 +46,7 @@ function balise_FORMULAIRE_FAVORI_stat($args) {
 	}
 	$objet = $args[0];
 	$id_objet = $args[1];
-	$categorie = isset($args[2]) ? $args[2] : '';
+	$categorie = (isset($args[2]) ? $args[2] : '');
 	
 	// pas dans une boucle ? on generera une erreur ?
 	if ($objet == "'balise_hors_boucle'") {
