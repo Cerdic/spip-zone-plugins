@@ -207,7 +207,8 @@ function taxon_preserver($regne) {
 
 	// Récupération de la liste des taxons non importés via le fichier ITIS du règne concerné mais créés lors de l'ajout
 	// d'une espèce.
-	// Ces taxons seront réinjectés après le chargement du règne via un create.
+	// Ces taxons préservés uniquement pour le besoin de l'exportation par IEConfig car il ne sont pas effacés
+	// lors du rechargement du règne.
 	// -- on récupère tous les champs du taxons sauf ceux qui seront mis à jour automatique lors de l'insertion de
 	//    l'objet en BD (id_taxon, maj).
 	$select = array_diff(array_keys($description_table['field']), array('id_taxon', 'maj'));

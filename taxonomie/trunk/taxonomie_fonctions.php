@@ -13,6 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Charge tous les taxons d'un règne donné fourni dans le fichier ITIS, du règne lui-même jusqu'aux taxons de genre.
  * Les nom communs anglais, français, espagnols, etc, peuvent aussi être chargés en complément mais
  * ne couvrent pas l'ensemble des taxons.
+ * Le modifications effectuées manuellement sur ces taxons sont conservées.
  *
  * @package SPIP\TAXONOMIE\REGNE
  *
@@ -113,12 +114,6 @@ function regne_charger($regne, $codes_langue = array()) {
 		// On formate le taxon pour l'insertion en BD.
 		$taxons = array_values($taxons);
 
-		// Ré-injection des taxons créés lors de l'ajout d'une espèce et donc jamais importés via le fichier ITIS
-		// du règne.
-		if (!empty($taxons_preserves['crees'])) {
-			$taxons = array_merge($taxons, $taxons_preserves['crees']);
-		}
-
 		// Insertion dans la base de données
 		$retour = sql_insertq_multi('spip_taxons', $taxons);
 		if ($retour) {
@@ -140,8 +135,7 @@ function regne_charger($regne, $codes_langue = array()) {
 /**
  * Supprime de la base de données tous les taxons importés à partir du rapport hiérarchique d'un règne donné.
  * La meta concernant les informations de chargement du règne est aussi effacée.
- * Les modifications manuelles effectuées sur les taxons concernés ainsi que les taxons ajoutés lors de la création
- * d'une espèce sont perdues : elles doivent donc être préservées au préalable.
+ * Les modifications manuelles effectuées sur ces taxons sont effacées : elles doivent donc être préservées au préalable.
  *
  * @package SPIP\TAXONOMIE\REGNE
  *
