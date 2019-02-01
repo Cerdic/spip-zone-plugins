@@ -1,7 +1,7 @@
 <paquet
 	prefix="chosen"
 	categorie="navigation"
-	version="1.7.3"
+	version="1.8.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/chosen-64.png"
