@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annee_suivante' => 'volgend jaar',
 	'aucun_evenement' => 'geen gebeurtenissen',
 	'aucun_inscrit' => 'Geen inschrijvingen',
+	'aucune_place' => 'Geen enkele plaats',
 	'aucune_rubrique_mode_agenda' => 'Standaard kunnen aan elke rubriek gebeurtenissen worden toegevoegd. Activeer je de agenda voor een of meer rubrieken, dan zal het beheer van evenementen tot die tak beperkt blijven.',
 
 	// B
