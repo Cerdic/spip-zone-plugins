@@ -101,6 +101,12 @@ function correction_liens_internes_correction($texte){
 			if(isset($racc[$objet])){
 				$objet = $racc[$objet];
 			}
+			// Exception historique : sites, cf https://core.spip.net/issues/4283
+			if ($objet === 'site') {
+				if (!defined('_CORRECTION_LIENS_INTERNES_LIEN_SITES'))
+					define('_CORRECTION_LIENS_INTERNES_LIEN_SITES', 'site');
+				$objet = _CORRECTION_LIENS_INTERNES_LIEN_SITES;
+			}
 			$bonne_url  = $objet . $id_objet . $ancre;
 			$bon_raccourci = str_replace($mauvaise_url, $bonne_url, $mauvais_raccourci);
 			$texte = str_replace($mauvais_raccourci, $bon_raccourci, $texte);
