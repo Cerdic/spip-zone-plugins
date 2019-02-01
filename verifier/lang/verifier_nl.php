@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'data_choix' => 'Mogelijke keuzes:',
 
 	// E
+	'erreur_attribut_class' => 'De syntax van deze attribute class is ongeldig.',
 	'erreur_code_postal' => 'Deze postcode is ongeldig.',
 	'erreur_comparaison_egal' => 'De waarde moet gelijk zijn aan het veld "@nom_champ@"',
 	'erreur_comparaison_egal_type' => 'De waarde moet gelijk zijn aan en hetzelfde type hebben als het veld "@nom_champ@"',
@@ -138,6 +139,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_page_verifier_doc' => 'Documentatie van de verificatie-API',
+	'type_attribut_class' => 'Attribute class',
+	'type_attribut_class_description' => 'Zorg ervoor dat de waarde een geldige attribute class is.',
 	'type_code_postal' => 'Postcode',
 	'type_code_postal_description' => 'Controleer of de waarde een geldige postcode is.',
 	'type_comparaison_champ' => 'Vergelijking',
