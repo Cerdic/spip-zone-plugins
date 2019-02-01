@@ -562,7 +562,7 @@ function itis_list_vernaculars($language) {
 			if (!empty($_data[$destination])
 				and !empty($_data[$key])
 			) {
-				$vernaculars[$_data[$destination]][] = $tag_language . $_data[$key];
+				$vernaculars[$_data[$key]][] = $tag_language . $_data[$destination];
 			}
 		}
 	}
@@ -933,50 +933,4 @@ function itis_build_url($format, $group, $action, $key) {
 		   . $GLOBALS['itis_webservice'][$group][$action]['argument'] . '=' . $key;
 
 	return $url;
-}
-
-/**
- *
- * @internal
- *
- * @param $tsn
- * @param $data
- * @param $index
- * @return array
- */
-function itis_format_hierarchyfull($tsn, $data, $index) {
-
-	$information = array(
-		'ascendants' => array(),
-		'fils'       => array(),
-		'taxon'      => array()
-	);
-
-	if (!empty($data)) {
-		foreach ($data as $_data) {
-			// On constitue le bloc du taxon.
-			$taxon = array();
-			foreach ($index as $_key_information => $_key_data) {
-				if ($_key_information == 'rang_taxon') {
-					$taxon[$_key_information] = strtolower($_data[$_key_data]);
-				} elseif (($_key_information == 'tsn') or ($_key_information == 'tsn_parent')) {
-					$taxon[$_key_information] = $_data[$_key_data] ? intval($_data[$_key_data]) : 0;
-				} else {
-					$taxon[$_key_information] = $_data[$_key_data];
-				}
-			}
-
-			// On affecte ce bloc soit dans la liste des parents, soit dans la liste des enfants, soit dans
-			// l'index du taxon lui-même.
-			if ($tsn == $taxon['tsn']) {
-				$information['taxon'] = $taxon;
-			} elseif ($tsn == $taxon['tsn_parent']) {
-				$information['fils'][] = $taxon;
-			} else {
-				$information['ascendants'][] = $taxon;
-			}
-		}
-	}
-
-	return $information;
 }

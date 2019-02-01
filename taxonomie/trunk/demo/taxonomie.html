@@ -5,6 +5,20 @@
 <body dir="#LANG_DIR">
 <div id="container">
 <?php
+	include_spip('services/itis/itis_api');
+	include_spip('inc/filtres');
+	include_spip('inc/taxonomie');
+?>
+
+	<h2>Action : list_vernaculars</h2>
+<?php
+$langue = 'french';
+ $tsns = itis_list_vernaculars($langue);
+ var_dump("Noms communs en $langue", $tsns);
+?>
+	<?php die(); ?>
+
+<?php
     include_spip('services/itis/itis_api');
     include_spip('inc/filtres');
     include_spip('inc/taxonomie');
@@ -18,7 +32,6 @@
     var_dump(itis_get_information('hierarchyfull', 183803));
 ?>
 
-	<?php die(); ?>
 	<h1>TAXONOMER</h1>
 
 	<h2>Fonction : taxon_merger_traductions</h2>
@@ -118,13 +131,6 @@
 
     $info = itis_get_information('othersources', $tsn);
     var_dump('othersources', $info);
-?>
-
-    <h2>Action : list_vernaculars</h2>
-<?php
-	$langue = 'french';
-    $tsns = itis_list_vernaculars($langue);
-    var_dump("Noms communs en $langue", $tsns);
 ?>
 
 	<h2>Action : read_hierarchy</h2>

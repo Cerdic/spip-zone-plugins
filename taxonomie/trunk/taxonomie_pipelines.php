@@ -89,13 +89,13 @@ function taxonomie_post_edition($flux) {
 					if ($ascendance) {
 						// On publie les taxons en évitant une ré-entrance (donc sans appeler l'api objet)
 						// mais en utilisant directement une mise à jour sql.
-	//					include_spip('action/editer_objet');
+//						include_spip('action/editer_objet');
 						foreach ($ascendance as $_parent) {
 							if ($_parent['espece'] == 'oui') {
 								if (($_parent['statut'] <> 'publie')) {
 									$maj = array('statut' => $statut_nouveau, 'edite' => 'oui');
 									sql_updateq($from, $maj, 'id_taxon=' . intval($_parent['id_taxon']));
-	//								objet_modifier('taxon', intval($_parent['id_taxon']), array('statut' => $statut_nouveau));
+//									objet_modifier('taxon', intval($_parent['id_taxon']), array('statut' => $statut_nouveau));
 								}
 							} else {
 								// Dès que l'on est sur un taxon non espèce on peut s'arrêter vu que les ascendants sont
