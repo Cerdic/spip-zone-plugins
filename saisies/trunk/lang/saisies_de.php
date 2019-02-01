@@ -147,9 +147,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_label' => 'Feldtyp',
 	'option_type_password' => 'Bei der Eingabe verborgener Text (z.B. Passwort)',
 	'option_type_text' => 'Normal',
-	'option_case_valeur_non_explication' => 'Wert der übergeben wird, wenn das Kästchen nicht ausgewählt wird. Achtung, es handelt sich um den technischen, nicht um den angezeigten Wert.',
 	'option_valeur_non_label' => 'Wert nein',
-	'option_case_valeur_oui_explication' => 'Wert der übergeben wird, wenn das Kästchen ausgewählt wird. Achtung, es handelt sich um den technischen, nicht um den angezeigten Wert.',
 	'option_valeur_oui_label' => 'Wert ja',
 
 	// P

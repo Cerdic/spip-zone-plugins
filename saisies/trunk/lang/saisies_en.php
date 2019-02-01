@@ -156,9 +156,7 @@ You will find <a href="https://contrib.spip.net/5080">full documentation of the 
 	'option_type_label' => 'Field type',
 	'option_type_password' => 'Text, hidden during input (eg. password)',
 	'option_type_text' => 'Normal',
-	'option_case_valeur_non_explication' => 'Posted value if the checkbox is not selected. Attention, this is a technical value and not a displayed value.',
 	'option_valeur_non_label' => 'Value No',
-	'option_case_valeur_oui_explication' => 'Posted value if the checkbox is selected. Attention, this is a technical value and not a displayed value.',
 	'option_valeur_oui_label' => 'Value Yes',
 
 	// P
