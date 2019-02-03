@@ -210,7 +210,6 @@ function cache_taxonomie_repertorier($service = '') {
 					$description = array();
 					$description['nom_cache'] = basename($_fichier_cache, '.txt');
 					$description['fichier_cache'] = $_fichier_cache;
-					$description['service'] = $_service;
 
 					// On extrait le service qui sert toujours d'index principal du tableau
 					$description['service'] = $_service;

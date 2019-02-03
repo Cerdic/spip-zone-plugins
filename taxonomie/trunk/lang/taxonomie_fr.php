@@ -5,6 +5,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bouton_cocher_aucun' => 'Tout décocher',
+	'bouton_cocher_tout' => 'Tout cocher',
 	'bouton_vider_cache' => 'Vider les caches Taxonomie',
 	'bouton_continuer' => 'Passer à l\'étape suivante',
 	'bouton_retourner' => 'Retourner à l\'étape @etape@',
