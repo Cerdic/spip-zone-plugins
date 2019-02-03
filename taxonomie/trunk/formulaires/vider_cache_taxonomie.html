@@ -1,0 +1,58 @@
+<div class="formulaire_spip formulaire_vider_cache">
+
+	<h3 class="titrem"><:taxonomie:titre_form_vidage_cache:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<div class="editer-groupe">
+			<div class="editer editer_caches">
+				<label><:taxonomie:label_vider_cache:></label>
+			<BOUCLE_services(DATA) {source table, #ENV{_caches}}{par cle}>
+				<h4>#VALEUR{titre_service}</h4>
+				<BOUCLE_caches(DATA) {source table, #VALEUR{caches}}{par cle}>
+					<div class="choix">
+						<input
+							type="checkbox"
+							name="caches[]"
+							class="checkbox checkbox_caches #_services:CLE"
+							id="#VALEUR{nom_cache}"
+							value="#VALEUR{fichier_cache}" />
+						<label for="#VALEUR{nom_cache}">
+							[(#VALEUR{tsn})&nbsp;|&nbsp;#VALEUR{action}[&nbsp;|&nbsp;(#VALEUR{langue})][&nbsp;-&nbsp;<i>(#VALEUR{nom_scientifique})</i>]]
+						</label>
+					</div>
+				</BOUCLE_caches>
+				<div class="action-checkbox">
+					<a href="#" id="tout_#CLE"><:langonet:bouton_cocher_tout:></a><span class="sep"> | </span>
+					<a href="#" id="rien_#CLE"><:langonet:bouton_cocher_aucun:></a>
+				</div>
+			</BOUCLE_services>
+			</div>
+		</div>
+
+		<p class="boutons">
+			<span class="image_loading">&nbsp;</span>
+			<input type="submit" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div>
+	</form>
+</div>
+[(#REM) <!-- Gestion des liens tout cocher et tout décocher --> ]
+<script type="text/javascript">
+//<![CDATA[
+	(function($){
+		jQuery(".action-checkbox a").click(function(){
+			var id = $(this).attr('id').split('_');
+			var action = id[0];
+			var service = id[1];
+			jQuery("input." + service).prop("checked", action === 'tout');
+			return false;
+		});
+	})(jQuery);
+//]]>
+</script>

@@ -328,3 +328,33 @@ function taxon_afficher_statut($statut, $id_taxon = 0) {
 
 	return $puce;
 }
+
+
+/**
+ * Renvoie la liste des services de taxonomie utilisés par le plugin en tenant compte de la configuration
+ * choisi par le webmestre.
+ *
+ * @package SPIP\TAXONOMIE\TAXON
+ *
+ * @api
+ * @filtre
+ *
+ * @return array
+ *        Tableau des services utilisés sous la forme [alias] = titre du service.
+ */
+function taxon_lister_services() {
+
+	// On initialise la liste avec le service ITOS qui est toujours utilisé.
+	$services = array('itis');
+
+	// On lit la configuration pour voir quels autres services sont autorisés à l'utilisation
+	include_spip('inc/config');
+	$services = array_flip(array_merge($services, lire_config('taxonomie/services_utilises')));
+
+	// On met à jour la liste avec le titre de chaque service
+	foreach ($services as $_service => $_index) {
+		$services[$_service] = _T("taxonomie:label_service_${_service}");
+	}
+
+	return $services;
+}

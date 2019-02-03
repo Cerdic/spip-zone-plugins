@@ -97,7 +97,7 @@ function wikipedia_get_page($search, $spip_language, $section = null, $options =
 		}
 
 		if (!empty($options['reload'])
-		or !$file_cache = cache_taxonomie_existe('wikipedia', '', $search['tsn'], $options_cache)
+		or !$file_cache = cache_taxonomie_existe('wikipedia', 'get', $search['tsn'], $options_cache)
 		or !filemtime($file_cache)
 		or (time() - filemtime($file_cache) > _TAXONOMIE_WIKIPEDIA_CACHE_TIMEOUT)
 		or (_TAXONOMIE_CACHE_FORCER)) {

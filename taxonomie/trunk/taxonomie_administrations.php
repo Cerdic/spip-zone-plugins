@@ -74,7 +74,7 @@ function configurer_taxonomie() {
 
 	$config = array(
 		'langues_utilisees' => array('fr'),
-		'services'          => array('wikipedia'),
+		'services_utilises' => array('wikipedia'),
 		'iucn_token'        => ''
 	);
 
