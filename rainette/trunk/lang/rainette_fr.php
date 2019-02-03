@@ -89,7 +89,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'humidite' => 'humidité',
 
 	// I
-	'info_page_configurer' => 'Rainette propose une configuration pour chacun des services de météorologie intégré au plugin. Néanmoins, seuls les services utilisés dans votre site nécessitent d\'être configurés.',
+	'info_page_configurer' => 'Rainette propose une configuration pour chacun des services de météorologie intégré au plugin. Néanmoins, seuls les services utilisés dans votre site nécessitent d\'être configurés.
+	<br />Pour chaque service, il est aussi possible de vider tout ou partie des caches créés.',
 
 	// I
 	'indice_uv' => 'Indice UV',
@@ -288,7 +289,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tendance_texte_falling' => 'en baisse',
 	'tendance_texte_rising' => 'en hausse',
 	'tendance_texte_steady' => 'stable',
-	'titre_page_configurer' => 'Configuration du plugin Rainette',
+	'titre_menu' => 'Services météo Rainette',
+	'titre_page_configurer' => 'Rainette - @service@',
+	'titre_form_configuration' => 'Configurer le service',
 	'titre_form_vidage_cache' => 'Vider les caches du service',
 
 	// U

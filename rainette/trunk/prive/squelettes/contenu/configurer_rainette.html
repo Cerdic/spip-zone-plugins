@@ -1,5 +1,7 @@
 [(#AUTORISER{configurer}|sinon_interdire_acces)]
-<h1 class="grostitre"><:rainette:titre_page_configurer:></h1>
+#SET{services, #VAL{tableau}|rainette_lister_services}
+#SET{titre_service, #GET{services/#ENV{service, weather}}}
+<h1 class="grostitre"><:rainette:titre_page_configurer{service=#GET{titre_service}}:></h1>
 
 [<div class='ajax'>
 	(#FORMULAIRE_CONFIGURER_RAINETTE_SERVICE{#ENV{service, weather}})
