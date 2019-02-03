@@ -147,7 +147,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'notice_vider_regne_inexistant' => 'Le règne @regne@ n\'a pas été trouvé en base de données.',
 	'notice_liste_aucun_regne' => 'Aucun règne n\'a encore été chargé en base de données. Utiliser le formulaire ci-dessous pour y remédier.',
-	'notice_liste_aucun_cache' => 'Aucun cache n\'a encore été créé par le service.',
+	'notice_liste_aucun_cache' => 'Aucun cache n\'a encore été créé par les services.',
 
 	// R
 	'rang_kingdom' => 'règne',
