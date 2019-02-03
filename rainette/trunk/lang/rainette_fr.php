@@ -5,6 +5,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	//B
+	'bouton_cocher_aucun' => 'Tout décocher',
+	'bouton_cocher_tout' => 'Tout cocher',
+
 	// C
 	'coucher_soleil' => 'coucher du soleil',
 	'credits' => 'Données fournies par @service@',
@@ -94,6 +98,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'jour' => 'jour',
 
 	// L
+	'label_vider_cache' => 'Caches créés par le service',
 	'label_cle' => 'Clé d\'inscription',
 	'label_compteur_month' => 'Compteur mois',
 	'label_compteur_day' => 'Compteur jour',
@@ -254,6 +259,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_conditions' => 'Conditions météorologiques',
 	'noisette_titre_previsions_24h' => 'Prévisions météorologiques 24h',
 	'noisette_preview_previsions' => 'Jours de prévisions : @nb_jours@ - Premier jour : @jour_1@.',
+	'notice_liste_aucun_cache' => 'Aucun cache n\'a encore été créé par le service.',
 	'nuit' => 'nuit',
 
 	// P
@@ -268,6 +274,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'station_observation' => 'station',
+	'succes_vider_caches' => 'Les caches sélectionnés ont bien été supprimés.',
 
 	// T
 	'temperature_max' => 'max',
@@ -282,6 +289,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tendance_texte_rising' => 'en hausse',
 	'tendance_texte_steady' => 'stable',
 	'titre_page_configurer' => 'Configuration du plugin Rainette',
+	'titre_form_vidage_cache' => 'Vider les caches du service',
 
 	// U
 	'unite_angle_metrique' => '°',

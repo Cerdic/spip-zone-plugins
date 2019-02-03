@@ -1,4 +1,10 @@
 [(#AUTORISER{configurer}|sinon_interdire_acces)]
 <h1 class="grostitre"><:rainette:titre_page_configurer:></h1>
 
-[<div class='ajax'>(#FORMULAIRE_CONFIGURER_RAINETTE_SERVICE{#ENV{service, weather}})</div>]
+[<div class='ajax'>
+	(#FORMULAIRE_CONFIGURER_RAINETTE_SERVICE{#ENV{service, weather}})
+</div>]
+
+[<div class='ajax'>
+	(#FORMULAIRE_VIDER_CACHE_RAINETTE_SERVICE{#ENV{service, weather}})
+</div>]

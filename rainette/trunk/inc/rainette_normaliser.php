@@ -315,6 +315,19 @@ $GLOBALS['rainette_config']['langues_alternatives'] = array(
 	'zu'           => array()            // zoulou
 );
 
+if (!defined('_RAINETTE_CACHE_NOMDIR')) {
+	/**
+	 * Nom du dossier contenant les fichiers caches
+	 */
+	define('_RAINETTE_CACHE_NOMDIR', 'cache-rainette/');
+}
+if (!defined('_RAINETTE_CACHE_DIR')) {
+	/**
+	 * Chemin du dossier contenant les fichiers caches
+	 */
+	define('_RAINETTE_CACHE_DIR', _DIR_VAR . _RAINETTE_CACHE_NOMDIR);
+}
+
 
 /**
  * Normalise les données issues du service dans un tableau standard aux index prédéfinis pour chaque mode.
@@ -663,7 +676,7 @@ function cache_nommer($lieu, $mode, $periodicite, $configuration_service) {
 
 	// Construction du chemin du fichier cache
 	// Création et/ou détermination du dossier de destination du cache en fonction du service
-	$dossier_cache = sous_repertoire(_DIR_VAR, 'cache-rainette');
+	$dossier_cache = sous_repertoire(_DIR_VAR, trim(_RAINETTE_CACHE_NOMDIR, '/'));
 	$dossier_cache = sous_repertoire($dossier_cache, $configuration_service['alias']);
 
 	// Le nom du fichier cache est composé comme suit, chaque élément étant séparé par un underscore :
@@ -679,6 +692,111 @@ function cache_nommer($lieu, $mode, $periodicite, $configuration_service) {
 					 . '.txt';
 
 	return $fichier_cache;
+}
+
+
+/**
+ * Construit le nom du cache en fonction du servide, du lieu, du type de données et de la langue utilisée par le site.
+ *
+ * @param string       $service
+ *        Alias du service météorologique.
+ * @param array|string $caches
+ *        Liste des fichiers à supprimer ou vide si tous les fichiers cache doivent être supprimés.
+ *        Il est possible de passer un seul fichier comme une chaine.
+ *
+ * @return boolean
+ *        Toujours à `true`.
+ */
+function cache_supprimer($service, $caches = array()) {
+
+	include_spip('inc/flock');
+
+	if ($caches) {
+		$fichiers_cache = is_string($caches) ? array($caches) : $caches;
+	} else {
+		$fichiers_cache = glob(_RAINETTE_CACHE_DIR . $service . '/*.txt');
+	}
+
+	if ($fichiers_cache) {
+		foreach ($fichiers_cache as $_fichier) {
+			supprimer_fichier($_fichier);
+		}
+	}
+
+	return true;
+}
+
+
+/**
+ * Répertorie les fichiers caches issu de l'utilisation de l'API d'un service donné.
+ * La fonction renvoie une description de chaque fichier cache, à savoir, à minima, l'action lancée, le TSN
+ * du taxon concerné et le nom du fichier cache.
+ *
+ * @package SPIP\TAXONOMIE\CACHE
+ *
+ * @param string $service
+ *        Alias en minuscules du service pour lequel on veut lister les caches créés ou chaine vide si on souhaite
+ *        tous les caches sans distinction de service.
+ *
+ * @return array
+ *        Tableau des descriptions des fichiers cache créés par le ou les services.
+ */
+function cache_repertorier($service = '') {
+
+	// Initialisation de la liste des descriptions des caches du service
+	$descriptions_cache = array();
+
+	// On constitue la liste des services requis par l'appel
+	include_spip('rainette_fonctions');
+	$services = rainette_lister_services();
+	if ($service) {
+		if (array_key_exists($service, $services)) {
+			$services = array($service => $services[$service]);
+		} else {
+			$services = array();
+		}
+	}
+
+	if ($services) {
+		foreach ($services as $_service => $_titre) {
+			// Récupération des fichiers cache du service.
+			$fichiers_cache = glob(_RAINETTE_CACHE_DIR . $_service . '/*.txt');
+
+			if ($fichiers_cache) {
+				foreach ($fichiers_cache as $_fichier_cache) {
+					// On raz la description pour éviter de garder des éléments du cache précédent et on initialise avec
+					// le nom du fichier qui peut servir d'id, le chemin complet et le service.
+					$description = array();
+					$description['nom_cache'] = basename($_fichier_cache, '.txt');
+					$description['fichier_cache'] = $_fichier_cache;
+
+					// On extrait le service qui sert toujours d'index principal du tableau
+					$description['service'] = $_service;
+					$description['titre_service'] = $_titre;
+
+					// On décompose le nom pour récupérer l'action et le TSN correspondant ainsi que la langue.
+					// Le nom du fichier est composé d'éléments séparés par un underscore. La structure est toujours
+					// composée dans l'ordre du service, de l'action et du TSN et peut être complétée par la langue.
+					$elements = explode('_', $description['nom_cache']);
+					$description['lieu'] = $elements[0];
+					$description['modele'] = $elements[1];
+					$description['langue'] = $elements[2];
+
+					// On structure le tableau suivant que l'on demande un service ou tous.
+					if ($service) {
+						$descriptions_cache['ervice'] = $_service;
+						$descriptions_cache['titre_service'] = $_titre;
+						$descriptions_cache['caches'][] = $description;
+					} else {
+						$descriptions_cache[$_service]['titre_service'] = $_titre;
+						$descriptions_cache[$_service]['caches'][] = $description;
+					}
+				}
+			}
+		}
+	}
+
+	return $descriptions_cache;
 }
 
 
@@ -726,7 +844,7 @@ function langue_determiner($configuration_service) {
 
 	// On détermine la "bonne langue" : on choisit soit celle de la page en cours
 	// soit celle en cours pour l'affichage.
-	$langue_spip = $GLOBALS['lang'] ? $GLOBALS['lang'] : $GLOBALS['spip_lang'];
+	$langue_spip = !empty($GLOBALS['lang']) ? $GLOBALS['lang'] : $GLOBALS['spip_lang'];
 
 	// On cherche d'abord si le service fournit la langue utilisée par le site.
 	// -- Pour cela on utilise la configuration du service qui fournit un tableau des langues disponibles
