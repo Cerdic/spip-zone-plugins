@@ -153,60 +153,6 @@ function cache_lire($plugin, $conteneur) {
 
 
 /**
- * Construit le chemin complet du fichier cache.
- *
- * @api
- *
- * @param string $plugin
- *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
- *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param array  $conteneur
- *        Tableau identifiant le cache pour lequel on veut construire le nom.
- * @param array  $configuration
- *        Configuration complète des caches du plugin utlisateur.
- *
- * @return string
- */
-function cache_nommer($plugin, $conteneur, $configuration) {
-
-	// Initialisation du chemin complet du fichier cache
-	$fichier_cache = '';
-
-	// Détermination du répertoire final du fichier cache qui peut-être inclus dans un sous-dossier du dossier
-	// de base des caches du plugin.
-	$dir_cache = $configuration['dossier_base'];
-	if (!empty($conteneur['sous_dossier'])) {
-		// Si le conteneur nécessite un sous-dossier, appelé service dans l'identifiant du conteneur.
-		$dir_cache .= rtrim($conteneur['sous_dossier'], '/');
-	}
-
-	// Détermination du nom du cache sans extension.
-	// Celui-ci est construit à partir des éléments fournis sur le conteneur et de la configuration
-	// fournie par le plugin (liste ordonnée de composant).
-	$nom_cache = '';
-	foreach ($configuration['nom'] as $_composant) {
-		if (isset($conteneur[$_composant])) {
-			$nom_cache .= ($nom_cache ? $configuration['separateur'] : '') . $conteneur[$_composant];
-		}
-	}
-
-	// Si le nom a pu être construit on finalise le chemin complet, sinon on renvoie une chaine vide.
-	if ($nom_cache) {
-		// L'extension par défaut est dans la configuration mais peut-être forcée pour un cache donné.
-		// Par contre, si le cache est sécurisé alors on ne tient pas compte du forçage éventuel car l'extension
-		// doit toujours être .php et celle-ci a été forcée lors de la configuration des caches du plugin.
-		$extension = (!empty($conteneur['extension']) and !$configuration['securisation'])
-			? $conteneur['extension']
-			: $configuration['extension'];
-		// Le chemin complet 
-		$fichier_cache = "${dir_cache}${nom_cache}${extension}";
-	}
-	
-	return $fichier_cache;
-}
-
-
-/**
  * Renvoie le chemin complet du cache si celui-ci existe sinon renvoie une chaine vide.
  *
  * @api
