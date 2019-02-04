@@ -13,7 +13,7 @@
 	</slogan>
 	<icon>img_pack/licence_logo.png</icon>
 	<auteur>[fanouch->lesguppies@free.fr], sur une id&#233;e originale de erational</auteur>
-	<version>0.9.3</version>
+	<version>0.9.4</version>
 	<version_base>0.2</version_base>
 	<etat>stable</etat>
 	<description>
@@ -64,7 +64,7 @@
 		<nom>licence_licences</nom>
 		<action></action>
 	</pipeline>
-	
+
 	<necessite id="SPIP" version="[2.0.10;3.2.99]" />
 	<necessite id="spip_bonux" version="[1.8.7;]" />
 	<categorie>divers</categorie>
