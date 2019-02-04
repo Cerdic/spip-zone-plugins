@@ -316,9 +316,10 @@ function commandes_envoyer_notification($qui, $id_type, $id_commande, $expediteu
  *
  * @param int|string $id_commande
  *     Identifiant de la commande
+ * @param string|null $statut_ancien
  * @return void
  */
-function commandes_notifier($id_commande = 0){
+function commandes_notifier($id_commande = 0, $statut_ancien = null){
 
 	if (intval($id_commande)==0){
 		return;
@@ -341,7 +342,13 @@ function commandes_notifier($id_commande = 0){
 		}
 
 		// Déterminer l'expéditeur
-		$options = array();
+		$options = array(
+			'statut' => $statut,
+		);
+		if (!is_null($statut_ancien)) {
+			$options['statut_ancien'] = $statut_ancien;
+		}
+
 		if ($config['expediteur']!="facteur"){
 			$options['expediteur'] = $config['expediteur_' . $config['expediteur']];
 		}
@@ -349,23 +356,14 @@ function commandes_notifier($id_commande = 0){
 		include_spip('inc/utils');
 
 		// Envoyer au vendeur
-		spip_log("traiter_notifications_commande : notification vendeur pour la commande $id_commande", 'commandes.' . _LOG_INFO);
-		if ($notification_statut = trouver_fond('commande_vendeur_' . $statut, 'notifications')){
-			$notifications('commande_vendeur_' . $statut, $id_commande, $options);
-		} else {
-			$notifications('commande_vendeur', $id_commande, $options);
-		}
+		spip_log("commandes_notifier : notification vendeur pour la commande #$id_commande " . json_encode($options), 'commandes.' . _LOG_INFO);
+		$notifications('commande_vendeur', $id_commande, $options);
 
 		// Envoyer optionnellement au client
 		if ($config['client']){
 
-			spip_log("traiter_notifications_commande : notification client pour la commande $id_commande", 'commandes.' . _LOG_INFO);
-
-			if ($notification_statut = trouver_fond('notifications/commande_client_' . $statut)){
-				$notifications('commande_client_' . $statut, $id_commande, $options);
-			} else {
-				$notifications('commande_client', $id_commande, $options);
-			}
+			spip_log("commandes_notifier : notification client pour la commande #$id_commande " . json_encode($options), 'commandes.' . _LOG_INFO);
+			$notifications('commande_client', $id_commande, $options);
 		}
 
 	}

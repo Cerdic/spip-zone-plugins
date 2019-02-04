@@ -127,7 +127,8 @@ function commande_inserer($id_parent=null, $champs=array()) {
 		// Envoi des notifications par email
 		spip_log("inserer_commande : appel des notifications pour la commande $id_commande",'commandes.'._LOG_INFO);
 		include_spip('inc/commandes');
-		commandes_notifier($id_commande);
+		// c'est une creation : statut_ancien=''
+		commandes_notifier($id_commande, '');
 
 	}
 
@@ -299,7 +300,7 @@ function commande_instituer($id_commande, $c, $calcul_details=true){
 	// Envoi des notifications par email
 	if ($statut != $statut_ancien) {
 		spip_log("instituer_commande : appel des notifications pour la commande $id_commande",'commandes.'._LOG_INFO);
-		commandes_notifier($id_commande);
+		commandes_notifier($id_commande, $statut_ancien);
 	}
 
 	return ''; // pas d'erreur
