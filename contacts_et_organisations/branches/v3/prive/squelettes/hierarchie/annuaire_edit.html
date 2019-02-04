@@ -1,0 +1,5 @@
+<a href="#URL_ECRIRE{repertoire}"><:contacts:bouton_contacts_organisations:></a><span class="sep divider">
+&gt; </span><:contacts:annuaires:><span class="sep divider">
+&gt; </span>[(#ENV{id_annuaire}
+	|?{<a href="[(#URL_ECRIRE{annuaire,id_annuaire=#ENV{id_annuaire}})]">[(#INFO_TITRE{annuaire,#ENV{id_annuaire}})]</a><span class="sep divider"> &gt; </span><strong><:contacts:annuaire_editer:></strong>,
+	<strong><:contacts:annuaire_creer:></strong>})]

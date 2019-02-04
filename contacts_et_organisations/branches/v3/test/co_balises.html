@@ -1,0 +1,106 @@
+<INCLURE{fond=test/co_inc-entete,page,titre=C&O : Balises} />
+
+
+
+<h1>La balise <code>\#LESORGANISATIONS</code></h1>
+
+<div class='description'>
+<p>Cette balise, à l'instar de <code>\#LESAUTEURS</code> dans SPIP liste les organisations
+d'un contact, séparés par des virgules, avec un lien vers leur page.</p>
+
+<p>Cette balise appelle le modèle <code>lesorganisations</code></p>
+
+<pre>
+\#LESORGANISATIONS
+</pre>
+</div>
+
+<B_lesorgas>
+	<div class='exemple'>
+<BOUCLE_lesorgas(CONTACTS){par hasard}{0,1}>
+	<p>Pour le contact #ID_CONTACT (#PRENOM #NOM) :</p>
+	#LESORGANISATIONS
+</BOUCLE_lesorgas>
+	</div>
+</B_lesorgas>
+
+
+
+<h1>La balise <code>\#COMPTEUR_CONTACTS</code></h1>
+
+<div class='description'>
+<p>Associée au critère <code>{compteur_contacts}</code>, sur une boucle
+<code>ORGANISATIONS</code>, cette balise retourne le nombre de contacts
+attachés à l'organisation.</p>
+
+<pre>
+&lt;BOUCLE_nb_orgas(ORGANISATIONS){compteur_contacts}{par nom}>
+	\[(\#COMPTEUR_CONTACTS
+		|singulier_ou_pluriel{contacts:nb_contact,contacts:nb_contacts}
+		|sinon{\<:contacts:contact_aucun:\>})\]
+</pre>
+</div>
+
+<B_nb_orgas>
+	<ul class='exemple'>
+<BOUCLE_nb_orgas(ORGANISATIONS){compteur_contacts}{par nom}{pagination 3}>
+	<li>#NOM :
+	[(#COMPTEUR_CONTACTS
+		|singulier_ou_pluriel{contacts:nb_contact,contacts:nb_contacts}
+		|sinon{<:contacts:contact_aucun:>})]
+	</li>
+</BOUCLE_nb_orgas>
+	[(#PAGINATION|?{<li>…</li>})]
+	</ul>
+</B_nb_orgas>
+
+
+
+
+
+
+
+<h1>La balise <code>\#IDS_ORGANISATION_BRANCHE</code></h1>
+
+<div class='description'>
+<p>Retourne la liste des identifiants d'organisation d'une branche
+d'organisations, séparés par des virgules.</p>
+
+<p>Il peut être utile avec l'opérateur <code>IN</code> dans
+un critère de boucle tel que <code>{id_organisation IN \#IDS_ORGANISATION_BRANCHE}</code>.</p>
+
+<p>Ainsi on peut afficher tous les contacts d'une organisation et de ses filles :</p>
+<pre>
+&lt;BOUCLE_contacts(CONTACTS){id_organisation IN \#IDS_ORGANISATION_BRANCHE}{par nom}>
+	\#NOM
+	...
+</pre>
+
+<p>Il conviendra cependant de préférer le critère <code>branche_organisation</code> pour cet usage.</p>
+<pre>
+&lt;BOUCLE_contacts(CONTACTS){branche_organisation}{par nom}>
+	\#NOM
+	...
+</pre>
+</div>
+
+<B_orgas>
+	<ul class='exemple'>
+<BOUCLE_orgas(ORGANISATIONS){racine}{par nom}{pagination 3}>
+	<li>#NOM
+	<B_contacts>
+		<ul>
+	<BOUCLE_contacts(CONTACTS){par nom}{id_organisation IN #IDS_ORGANISATION_BRANCHE}{pagination 3}>
+		<li>#NOM #PRENOM</li>
+	</BOUCLE_contacts>
+		[(#PAGINATION|?{<li>…</li>})]
+		</ul>
+	</B_contacts>
+	</li>
+</BOUCLE_orgas>
+	[(#PAGINATION|?{<li>…</li>})]
+	</ul>
+</B_orgas>
+
+
+<INCLURE{fond=test/co_inc-pied} />

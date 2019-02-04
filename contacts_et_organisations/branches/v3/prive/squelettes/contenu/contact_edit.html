@@ -1,0 +1,31 @@
+[(#ID_CONTACT|intval|oui)
+	[(#AUTORISER{modifier,contact,#ID_CONTACT}|sinon_interdire_acces)]
+][(#ID_CONTACT|intval|non)
+	[(#AUTORISER{creer,contact}|sinon_interdire_acces)]
+]
+#SET{retour,#ENV{redirect}|sinon{#ID_CONTACT|intval|?{#URL_ECRIRE{contact,id_contact=#ID_CONTACT},#URL_ECRIRE{contacts}}}}
+
+<div class='cadre-formulaire-editer'>
+	<div class="entete-formulaire">
+		[(#ID_CONTACT|oui)
+		[(#GET{retour}|icone_verticale{<:icone_retour:>,contact,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+		]
+		[[(#ID_CONTACT|?{<:contacts:contact_editer:>,#ENV{associer_objet}|?{<:contacts:contact_ajouter_associe_a:>,<:contacts:contact_ajouter:>}})]
+		[(#ENV{associer_objet}|oui) [(#SET{associer_objet,[(#ENV{associer_objet}|explode{"|"})]})]
+		 <a href="[(#GET{associer_objet/1}|generer_url_entite{#GET{associer_objet/0}})]">[(#INFO_TITRE{#GET{associer_objet/0},#GET{associer_objet/1}})]</a>
+		]
+		<h1>(#ENV{titre,#INFO_PRENOM{contact,#ID_CONTACT}|concat{' ',#INFO_NOM{contact,#ID_CONTACT}}|trim|sinon{<:info_sans_titre:>}})</h1>]
+	</div>
+
+	#SET{redirect,#ENV{redirect,#ID_CONTACT|generer_url_entite{contact}}}
+	[(#ENV{retourajax,''}|oui)
+		#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+		<div class="ajax">
+	]
+	#FORMULAIRE_EDITER_CONTACT{#ENV{id_contact,oui},#ENV{id_organisation},#GET{redirect},#ENV{associer_objet}}
+	[(#ENV{retourajax,''}|oui)
+		</div>
+		<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#extra');/*\]\]>*/</script>
+	]
+
+</div>

@@ -1,0 +1,71 @@
+<INCLURE{fond=test/co_inc-entete,page,titre=C&O : Critères} />
+
+
+
+<h1>Le critère <code>branche_organisation</code></h1>
+
+<div class='description'>
+<p>Conditionne la boucle aux organisations appartenant à la branche de l'organisation parente.</p>
+
+<p>Ainsi on peut afficher tous les contacts d'une organisation et de ses filles :</p>
+<pre>
+&lt;BOUCLE_contacts(CONTACTS){branche_organisation}{par nom}>
+	\#NOM
+	...
+</pre>
+
+<p>Il est également possible d'indiquer une branche précise avec <code>{branche_organisation 5}</code></p>
+
+</div>
+
+<B_orgas>
+	<ul class='exemple'>
+<BOUCLE_orgas(ORGANISATIONS){racine}{par nom}{pagination 3}>
+	<li>#NOM
+	<B_contacts>
+		<ul>
+	<BOUCLE_contacts(CONTACTS){par nom}{branche_organisation}{pagination 3}>
+		<li>#NOM #PRENOM</li>
+	</BOUCLE_contacts>
+		[(#PAGINATION|?{<li>…</li>})]
+		</ul>
+	</B_contacts>
+	</li>
+</BOUCLE_orgas>
+	[(#PAGINATION|?{<li>…</li>})]
+	</ul>
+</B_orgas>
+
+
+
+<h1>Le critère <code>compteur_contacts</code></h1>
+
+<div class='description'>
+
+<p>Il s'ajoute à une boucle <code>ORGANISATIONS</code>, et permet de
+peupler la balise <code>\#COMPTEUR_CONTACTS</code> du nombre de
+contacts associés à cette organisation.</p>
+
+<pre>
+&lt;BOUCLE_nb_orgas(ORGANISATIONS){compteur_contacts}{par nom}{pagination 3}>
+	\[(\#COMPTEUR_CONTACTS
+		|singulier_ou_pluriel{contacts:nb_contact,contacts:nb_contacts}
+		|sinon{\<:contacts:contact_aucun:\>})\]
+</pre>
+</div>
+
+<B_nb_orgas>
+	<ul class='exemple'>
+<BOUCLE_nb_orgas(ORGANISATIONS){compteur_contacts}{par nom}{pagination 3}>
+	<li>#NOM :
+	[(#COMPTEUR_CONTACTS
+		|singulier_ou_pluriel{contacts:nb_contact,contacts:nb_contacts}
+		|sinon{<:contacts:contact_aucun:>})]
+	</li>
+</BOUCLE_nb_orgas>
+	[(#PAGINATION|?{<li>…</li>})]
+	</ul>
+</B_nb_orgas>
+
+
+<INCLURE{fond=test/co_inc-pied} />

@@ -1,0 +1,222 @@
+<INCLURE{fond=test/co_inc-entete,page,titre=C&O : Jointures} />
+
+<p class='clearfix'>Quelques boucles très particulières que l'on souhaite surveiller !</p>
+
+
+
+
+<h1>Jointure Auteurs - contacts</h1>
+
+<div class='description'>
+
+<p>Lister les auteurs - contacts d'un coup (depuis la table auteurs).</p>
+
+<pre>
+&lt;BOUCLE_auteurs(AUTEURS contacts)>
+</pre>
+
+<p>
+Cette jointure <code>AUTEURS contacts</code> pose problème à SPIP 3
+(Voir <a href="https://core.spip.net/issues/2940">https://core.spip.net/issues/2940</a>)
+qui ne joint pas sur le bon champ.
+</p>
+
+<p>
+Il faut pour l'instant ajouter à la boucle <code>(AUTEURS)</code> le critère
+<code>{contacts_auteurs}</code> qui en plus de réaliser une jointure
+correcte permet d'utiliser les balises <code>\#NOM_CONTACT</code>,
+<code>\#PRENOM_CONTACT</code>, <code>\#CIVILITE_CONTACT</code> sur la boucle
+<code>AUTEURS</code>.
+</p>
+
+<pre>
+&lt;BOUCLE_auteurs(AUTEURS){contacts_auteurs}>
+	\#NOM
+	\#NOM_CONTACT (table contacts)
+	...
+</pre>
+</div>
+
+
+<B_auteurs>
+	<ul class='exemple'>
+<BOUCLE_auteurs(AUTEURS){contacts_auteurs}{pagination 3}>
+		<li class='espacer'>
+			\#NOM : #NOM,<br />
+			\#PRENOM : #PRENOM,<br />
+			\#NOM_CONTACT : #NOM_CONTACT,<br />
+			\#PRENOM_CONTACT : #PRENOM_CONTACT,
+		</li>
+</BOUCLE_auteurs>
+	[(#PAGINATION|?{<li>…</li>})]
+	</ul>
+</B_auteurs>
+
+
+
+
+
+<h1>Jointure Auteurs - contacts - articles</h1>
+
+<div class='description'>
+<p>Lister les auteurs - contacts avec critère sur la table articles.</p>
+
+<p>Cette triple jointure posait problème à SPIP 2, verifions là. Pour
+le moment, il faut d'abord corriger la jointure <code>AUTEURS contacts</code>.
+</p>
+
+<pre>
+&lt;BOUCLE_auteurs(AUTEURS contacts){articles.id_secteur=1}>
+</pre>
+
+<p>Donc on utilise : </p>
+
+<pre>
+&lt;BOUCLE_auteurs(AUTEURS){contacts_auteurs}{articles.id_secteur=1}>
+</pre>
+
+</div>
+
+
+<B_auteurs2>
+	<ul class='exemple'>
+<BOUCLE_auteurs2(AUTEURS){contacts_auteurs}{articles.id_secteur=1}{pagination 3}>
+		<li class='espacer'>
+			\#NOM : #NOM,<br />
+			\#PRENOM : #PRENOM, (table contact)<br />
+			\#NOM_CONTACT : #NOM_CONTACT, (table contact)<br />
+			\#PRENOM_CONTACT : #PRENOM_CONTACT (table contact)
+		</li>
+</BOUCLE_auteurs2>
+	[(#PAGINATION|?{<li>…</li>})]
+	</ul>
+</B_auteurs2>
+
+
+
+
+
+<h1>Jointure Contacts - auteurs</h1>
+
+<div class='description'>
+
+<p>Lister les auteurs - contacts d'un coup (depuis la table contacts).</p>
+
+<pre>
+&lt;BOUCLE_auteurs(CONTACTS auteurs)>
+</pre>
+
+<p>
+Cette jointure <code>CONTACTS auteurs</code> fonctionne en SPIP 3, contrairement
+à l'inverse. Cependant elle ne permet pas d'obtenir le champ  <code>\#NOM</code>
+de la table <code>auteurs</code>
+</p>
+
+<p>
+Si on souhaite obtenir ce champ, il faut utiliser le critère <code>{contacts_auteurs}</code>
+qui en plus de réaliser la jointure, permet d'utiliser la balise <code>\#NOM_AUTEUR</code>,
+ sur la boucle <code>CONTACTS</code>.
+</p>
+
+<pre>
+&lt;BOUCLE_auteurs(CONTACTS){contacts_auteurs}>
+	\#NOM
+	\#NOM_AUTEUR (table auteurs)
+	...
+</pre>
+</div>
+
+
+<B_contacts>
+	<ul class='exemple'>
+<BOUCLE_contacts(CONTACTS){contacts_auteurs}{pagination 3}>
+		<li class='espacer'>
+			\#NOM : #NOM,<br />
+			\#PRENOM : #PRENOM,<br />
+			\#LOGIN : #LOGIN, (table auteur)<br />
+			\#NOM_AUTEUR : #NOM_AUTEUR (table auteur)
+		</li>
+</BOUCLE_contacts>
+	[(#PAGINATION|?{<li>…</li>})]
+	</ul>
+</B_contacts>
+
+
+
+
+
+<h1>Jointure Auteurs - organisations</h1>
+
+<div class='description'>
+
+<p>Lister les auteurs - organisations d'un coup (depuis la table auteurs).
+Voir la jointure auteurs-contacts pour des explications supplémentaires</p>
+
+<p>Il faut ajouter à la boucle <code>(AUTEURS)</code> le critère
+<code>{organisations_auteurs}</code> qui en plus de réaliser une jointure
+correcte permet d'utiliser la balise <code>\#NOM_ORGANISATION</code> sur la boucle
+<code>AUTEURS</code>.
+</p>
+
+<pre>
+&lt;BOUCLE_auteurs(AUTEURS){organisations_auteurs}>
+	\#NOM
+	\#NOM_ORGANISATION (table organisation)
+	...
+</pre>
+</div>
+
+
+<B_auteurs3>
+	<ul class='exemple'>
+<BOUCLE_auteurs3(AUTEURS){organisations_auteurs}{pagination 3}>
+		<li class='espacer'>
+			\#NOM : #NOM,<br />
+			\#NOM_ORGANISATION : #NOM_ORGANISATION
+		</li>
+</BOUCLE_auteurs3>
+	[(#PAGINATION|?{<li>…</li>})]
+	</ul>
+</B_auteurs3>
+
+
+
+
+
+<h1>Jointure Organisations - auteurs</h1>
+
+<div class='description'>
+
+<p>Lister les auteurs - organisations d'un coup (depuis la table organisations).
+Voir jointure contacts-auteurs pour des explications supplémentaires.</p>
+
+<p>
+Il faut utiliser le critère <code>{organisations_auteurs}</code>
+qui en plus de réaliser la jointure, permet l'usage de la balise <code>\#NOM_AUTEUR</code>,
+sur la boucle <code>ORGANISATIONS</code>.
+</p>
+
+<pre>
+&lt;BOUCLE_auteurs(ORGANISATIONS){organisations_auteurs}>
+	\#NOM
+	\#NOM_AUTEUR (table auteurs)
+	...
+</pre>
+</div>
+
+
+<B_organisations>
+	<ul class='exemple'>
+<BOUCLE_organisations(ORGANISATIONS){organisations_auteurs}{pagination 3}>
+		<li class='espacer'>
+			\#NOM : #NOM,<br />
+			\#NOM_AUTEUR : #NOM_AUTEUR (table auteur)
+		</li>
+</BOUCLE_organisations>
+	[(#PAGINATION|?{<li>…</li>})]
+	</ul>
+</B_organisations>
+
+
+
+<INCLURE{fond=test/co_inc-pied} />

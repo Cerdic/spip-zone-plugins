@@ -1,0 +1,23 @@
+#SET{rien,1}
+<BOUCLE_est_un_contact(CONTACTS){id_auteur}>
+#SET{rien,0}
+</BOUCLE_est_un_contact>
+	<BOUCLE_est_une_organisation(ORGANISATIONS){id_auteur}>
+	#SET{rien,0}
+	</BOUCLE_est_une_organisation>
+<//B_est_un_contact>
+[(#AUTORISER{modifier,auteur,#ENV{id_auteur}})
+	[(#GET{rien}|oui)
+		#BOITE_OUVRIR{#CHEMIN_IMAGE{contacts-24.png}
+			|balise_img{'',cadre-icone}
+			|concat{#VAL{contacts:infos_contacts_ou_organisations}|_T},'simple','titrem'}
+
+			<p class='explication'><:contacts:explication_contacts_ou_organisations:></p>
+
+			[(#URL_ACTION_AUTEUR{definir_contact,contact/#ID_AUTEUR,#SELF}|bouton_action_horizontal{<:contacts:definir_auteur_comme_contact:>,contact})]
+
+			[(#URL_ACTION_AUTEUR{definir_contact,organisation/#ID_AUTEUR,#SELF}|bouton_action_horizontal{<:contacts:definir_auteur_comme_organisation:>,organisation})]
+
+		#BOITE_FERMER
+	]
+]

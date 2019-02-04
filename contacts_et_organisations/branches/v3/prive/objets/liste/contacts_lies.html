@@ -1,0 +1,85 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi nom,1
+}})
+]
+#SET{selection,#ENV**{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
+#SET{debut,#ENV{debutcol,#EVAL{_request("debutcol");}}}
+<B_contacts>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutcol,#EVAL{_request("debutcol");}}}
+#SET{afficher_lettres,#TRI|=={'multi nom'}|oui}
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies contacts">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{contacts:contact_un,contacts:contacts_nb}})</strong></caption>]
+	<thead>
+		#SET{p,''}
+		<BOUCLE_lettre(CONTACTS){si #_contacts:GRAND_TOTAL|>{20}}{tout}{id_contact IN #GET{selection}}{where?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_contact==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#NOM**|extraire_multi|initiale|unique|oui)
+		[(#SET{p,#GET{p}|concat{
+		#SELF|parametre_url{debutcol,@#ID_CONTACT}|ancre_url{paginationcol}|afficher_initiale{#NOM**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		}})]
+		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
+		(#SET{p,
+			#GET{p}|concat{
+				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
+			}
+		})]</B_lettre>
+		[<tr><td colspan="4"><p class='pagination'>(#GET{p})</p></td></tr>]
+
+[(#REM) Afficher ou non la liaison ]
+[(#SET{afftype,[(#ENV{objet}|=={organisation}|ou{#ENV{_objet_lien}|=={contact}})]})]
+
+		<tr class='first_row'>
+			<th class="picto" scope='col'></th>
+			<th class="nom" scope='col'>[(#TRI{multi nom,<:contacts:label_nom:>,ajax})]</th>
+			[(#GET{afftype}|oui)<th class="type" scope='col'><:contacts:label_type_liaison:></th>]
+			<th class='action' scope='col'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_contacts(CONTACTS){id_contact IN #GET{selection}}
+		{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} col}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_CONTACT|=={#ENV{id_lien_ajoute}}|oui)append]">
+
+			<td class="picto"><a href="[(#ID_CONTACT|generer_url_entite{contact})]">#INCLURE{fond=logo/contact, id_contact}</a></td>
+			<td class='nom'><a href="[(#ID_CONTACT|generer_url_entite{contact})]">[(#PRENOM) ]#NOM</a></td>
+
+			[(#REM) sur boucle pour le crayon, en fonction de la table de liaison ]
+			<BOUCLE_liaison_sur_organisation(organisations_liens)
+				{si (#ENV{objet}|=={organisation})}
+				{id_objet=#ID_CONTACT}{objet=contact}{id_organisation=#ENV{id_objet}}>
+				<td class='type #EDIT{type_liaison}'>[(#TYPE_LIAISON|sinon{-})]</td>
+			</BOUCLE_liaison_sur_organisation>
+				<BOUCLE_liaison_autre(contacts_liens)
+					{si #ENV{_objet_lien}|=={contact}}
+					{id_objet=#ENV{id_objet}}{objet=#ENV{objet}}{id_contact}>
+					<td class='type #EDIT{type_liaison}'>[(#TYPE_LIAISON|sinon{-})]</td>
+				</BOUCLE_liaison_autre>
+					[(#REM)
+						Ici, on liste les organisations mais elles sont liées
+						sur autre chose que sur spip_contacts_liens
+						On ne peut savoir si la table a un type de liaison...
+						<td class='type'></td>
+					]
+				<//B_liaison_autre>
+			<//B_liaison_sur_organisation>
+
+			<td class='action'>
+				[(#AUTORISER{modifier, contact, #ID_CONTACT}|oui)
+					<button type="submit" class="button link delete" name="supprimer_lien#EVAL{chr(91)}#OBJET-#ID_OBJET-contact-#ID_CONTACT#EVAL{chr(93)}" value="X"><:contacts:contact_retirer_lien:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+				]
+			</td>
+		</tr>
+	</BOUCLE_contacts>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien#EVAL{chr(91)}#OBJET-#ID_OBJET-contact-*#EVAL{chr(93)}" value="X"><:contacts:contact_retirer_tous_lien:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+</div>
+</B_contacts>
+<div class="liste-objets  liste-objets-lies contacts caption-wrap">
+	<strong class="caption">[(#ENV*{titre,<:contacts:contact_aucun:>})]</strong>
+</div>
+<//B_contacts>

@@ -1,0 +1,26 @@
+[(#CONFIG{contacts_et_organisations/utiliser_annuaires}|oui)
+[(#SAISIE{annuaires,#ENV{prefixe,''}id_annuaire,
+	defaut=#ENV{id_annuaire},
+	label=<:contacts:annuaire:>,
+	option_intro=<:contacts:annuaire_aucun:>})]
+]
+
+[(#SAISIE{input,#ENV{prefixe,''}civilite,
+	label=<:contacts:label_civilite:>})]
+
+[(#SAISIE{input,#ENV{prefixe,''}prenom,
+	label=<:contacts:label_prenom:>})]
+
+[(#SAISIE{input,#ENV{prefixe,''}nom,
+	label=<:contacts:label_nom:>})]
+
+[(#SAISIE{input,#ENV{prefixe,''}fonction,
+	label=<:contacts:label_fonction:>})]
+
+[(#SAISIE{date_jour_mois_annee,#ENV{prefixe,''}date_naissance,
+	label=<:contacts:label_date_naissance:>})]
+
+[(#SAISIE{textarea,#ENV{prefixe,''}descriptif,
+	label=<:contacts:label_descriptif:> <em class="aide">[(#AIDER{raccourcis})]</em>,
+	class='inserer_barre_edition inserer_previsualisation',
+	li_class=haut})]

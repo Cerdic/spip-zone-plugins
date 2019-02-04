@@ -1,0 +1,89 @@
+<INCLURE{fond=test/co_inc-entete,page,titre=C&O : Boucles et critères} />
+
+
+<h1>Contacts d'une organisation, et liaisons</h1>
+
+<div class='description'>
+<p>Pour lister les contacts d'une organisation :</p>
+<pre>
+&lt;BOUCLE_c(CONTACTS){id_organisation}{par nom}>
+	\#CIVILITE
+	\#PRENOM
+	\#NOM
+	\#ID_CONTACT
+	...
+</pre>
+
+<p>Pour lister les liaisons d'un contact :</p>
+<pre>
+&lt;BOUCLE_cl(CONTACTS_LIENS){id_contact}{par objet, id_objet}>
+	\#OBJET
+	\#ID_OBJET
+	\#TYPE_LIAISON
+</pre>
+</div>
+
+<B_o>
+<ul class='example'>
+<BOUCLE_o(ORGANISATIONS){par nom}{pagination 3}>
+	<li>#NOM, #ID_ORGANISATION (auteur: #ID_AUTEUR)
+		<B_c>
+		<ul>
+		<BOUCLE_c(CONTACTS){id_organisation}{par nom}{pagination 3}>
+			<li>#NOM #PRENOM, #ID_CONTACT
+				<B_cl>
+				<ul>
+				<BOUCLE_cl(CONTACTS_LIENS){id_contact}{par objet, id_objet}{pagination 3}>
+					<li>( #OBJET, #ID_OBJET, #TYPE_LIAISON )</li>
+				</BOUCLE_cl>
+					[(#PAGINATION|?{<li>…</li>})]
+				</ul>
+				</B_cl>
+			</li>
+		</BOUCLE_c>
+			[(#PAGINATION|?{<li>…</li>})]
+		</ul>
+		</B_c>
+	</li>
+</BOUCLE_o>
+	[(#PAGINATION|?{<li>…</li>})]
+</ul>
+</B_o>
+
+
+
+
+<h1>Organisations d'un contact</h1>
+
+<div class='description'>
+<p>Pour lister les organisations d'un contact :</p>
+<pre>
+&lt;BOUCLE_o(ORGANISATIONS){id_contact}{par nom}>
+	\#NOM
+	\#ACTIVITE
+	\#ID_ORGANISATION
+	...
+</pre>
+</div>
+
+<B__c>
+<ul class='example'>
+<BOUCLE__c(CONTACTS){par nom}{pagination 3}>
+	<li>#NOM #PRENOM, #ID_CONTACT
+		<B__o>
+		<ul>
+		<BOUCLE__o(ORGANISATIONS){id_contact}{par nom}{pagination 3}>
+			<li>#NOM, #ACTIVITE, #ID_ORGANISATION</li>
+		</BOUCLE__o>
+			[(#PAGINATION|?{<li>…</li>})]
+		</ul>
+		</B__o>
+	</li>
+</BOUCLE__c>
+	[(#PAGINATION|?{<li>…</li>})]
+</ul>
+</B__c>
+
+
+
+<INCLURE{fond=test/co_inc-pied} />

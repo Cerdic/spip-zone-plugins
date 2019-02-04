@@ -1,0 +1,76 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi nom,1
+}})
+]
+#SET{selection,#ENV**{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
+#SET{debut,#ENV{debutcol,#EVAL{_request("debutcol");}}}
+<B_liste_orga>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutcol,#EVAL{_request("debutcol");}}}
+#SET{afficher_lettres,#TRI|=={'multi nom'}|oui}
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies organisations">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{contacts:organisation_un,contacts:organisations_nb}})</strong></caption>]
+	<thead>
+		#SET{p,''}
+		<BOUCLE_lettre(ORGANISATIONS){si #_liste_orga:GRAND_TOTAL|>{20}}{tout}{id_organisation IN #GET{selection}}{where?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_organisation==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#NOM**|extraire_multi|initiale|unique|oui)
+		[(#SET{p,#GET{p}|concat{
+		#SELF|parametre_url{debutcol,@#ID_ORGANISATION}|ancre_url{paginationcol}|afficher_initiale{#NOM**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		}})]
+		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
+		(#SET{p,
+			#GET{p}|concat{
+				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
+			}
+		})]</B_lettre>
+		[<tr><td colspan="4"><p class='pagination'>(#GET{p})</p></td></tr>]
+
+[(#REM) Afficher ou non la liaison ]
+[(#SET{afftype,[(#ENV{objet}|=={contact}|ou{#ENV{_objet_lien}|=={organisation}})]})]
+
+		<tr class='first_row'>
+			<th class="picto" scope='col'></th>
+			<th class='nom' scope='col'>[(#TRI{multi nom,<:info_nom:>,ajax})]</th>
+			[(#GET{afftype}|oui)<th class="type" scope='col'><:contacts:label_type_liaison:></th>]
+			<th class='action' scope='col'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_orga(ORGANISATIONS){id_organisation IN #GET{selection}}
+		{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} col}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_ORGANISATION|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class="picto"><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#INCLURE{fond=logo/organisation, id_organisation}</a></td>
+			<td class='nom'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a></td>
+
+			[(#REM) sur boucle pour le crayon, en fonction de la table de liaison ]
+			<BOUCLE_liaison(organisations_liens){id_objet=#ENV{id_objet}}{objet=#ENV{objet}}{id_organisation}>
+				<td class='type #EDIT{type_liaison}'>[(#TYPE_LIAISON|sinon{-})]</td>
+			</BOUCLE_liaison>
+				[(#REM)
+					Ici, on liste les organisations mais elles sont liées
+					sur autre chose que sur spip_organisations_liens
+					On ne peut savoir si la table a un type de liaison...
+					<td class='type'></td>
+				]
+			<//B_liaison>
+
+			<td class='action'>
+				[(#AUTORISER{modifier, organisation, #ID_ORGANISATION}|oui)
+					<button type="submit" class="button link delete" name="supprimer_lien#EVAL{chr(91)}organisation-#ID_ORGANISATION-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="X"><:contacts:organisation_retirer_lien:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+				]
+			</td>
+		</tr>
+	</BOUCLE_liste_orga>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien#EVAL{chr(91)}organisation-*-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="X"><:contacts:organisation_retirer_tous_lien:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+</div>
+</B_liste_orga>
+<div class="liste-objets liste-objets-lies organisations caption-wrap">
+	<strong class="caption">[(#ENV*{titre,<:contacts:organisation_aucun:>})]</strong>
+</div>
+<//B_liste_orga>

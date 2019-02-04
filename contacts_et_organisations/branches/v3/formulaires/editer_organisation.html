@@ -1,0 +1,21 @@
+<div class='formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id_organisation,nouveau}'>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<BOUCLE_editable(CONDITION){si #ENV{editable}}>
+		<form method='post' action='[(#ENV{action})]'><div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<input type='hidden' name='id_organisation' value='#ENV{id_organisation}' />
+			<[(#DIV|sinon{ul})] class="editer-groupe">
+				<INCLURE{fond=formulaires/inc-editer_organisation,env} />
+			</[(#DIV|sinon{ul})]>
+			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+			<!--extra-->
+			<p class='boutons'>
+				<input type='submit' name='enregistrer' value='<:bouton_enregistrer:>' />
+			</p>
+
+		</div></form>
+	</BOUCLE_editable>
+</div>

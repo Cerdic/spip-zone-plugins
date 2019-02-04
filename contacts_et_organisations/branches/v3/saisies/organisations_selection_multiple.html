@@ -1,0 +1,25 @@
+[(#REM)
+
+    Un select multiple qui permet de choisir parmi les organisations.
+
+	Parametres : Tous les paramètres acceptés par la saisie
+                 selection_multiple sont acceptés, même si utiliser le
+                 paramètre datas, n'as aucun intérêt…
+]
+
+#SET{organisations, #ARRAY}
+<BOUCLE_organisations(ORGANISATIONS){par nom}{racine}>
+  [(#SET{organisations, #GET{organisations}|table_cle_valeur{#ID_ORGANISATION, #NOM}})]
+  #SET{profondeur_recursion, 0}
+  <BOUCLE_sous_organisations(ORGANISATIONS){par nom}{id_parent=#ID_ORGANISATION}>
+	[(#SET{profondeur_recursion, #GET{profondeur_recursion}|plus{1}})]
+	[(#SET{
+	  organisations,
+	  #GET{organisations}|table_cle_valeur{#ID_ORGANISATION, #VAL{ > }|str_repeat{#GET{profondeur_recursion}}|concat{#NOM}}
+	})]
+	<BOUCLE_recursion(BOUCLE_sous_organisations) />
+	[(#SET{profondeur_recursion, #GET{profondeur_recursion}|mois{1}})]
+  </BOUCLE_sous_organisations>
+</BOUCLE_organisations>
+
+<INCLURE{fond=saisies/selection_multiple, datas=#GET{organisations}, env} />

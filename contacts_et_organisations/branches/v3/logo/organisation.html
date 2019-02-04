@@ -1,0 +1,12 @@
+<BOUCLE_logo_organisation(ORGANISATIONS){id_organisation}>
+<BOUCLE_auteur(AUTEURS){id_auteur}>
+	[(#LOGO_AUTEUR
+		|sinon{#_logo_organisation:LOGO_ORGANISATION}
+		|sinon{[<img src="(#CHEMIN_IMAGE{organisation-24.png})" alt="picto organisation" class="spip_logos" />]}
+		|image_reduire{20,26})]
+</BOUCLE_auteur>
+	[(#LOGO_ORGANISATION
+		|sinon{[<img src="(#CHEMIN_IMAGE{organisation-24.png})" alt="picto organisation" class="spip_logos" />]}
+		|image_reduire{20,26})]
+<//B_auteur>
+</BOUCLE_logo_organisation>

@@ -1,0 +1,46 @@
+[(#REM) 
+
+	Parametres :
+	- class : classe(s) css ajoutes au select
+	- option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+	- cacher_option_intro : pas de premier option vide  (defaut:"")
+	
+	Exemple d'appel :
+	[(#SAISIE{organisations, id_parent,
+		label=<:plugin:info_organisation:>})] 
+]
+#SET{id,#VAL|uniqid}
+<a href="#" id="changer_selection_organisation_#GET{id}" class='changer_selection_organisation'><:contacts:changer:></a>
+<div id="selection_organisation_#GET{id}">
+<BOUCLE_organisation(ORGANISATIONS){id_organisation=#ENV{valeur,#ENV{defaut}}}{tout}>
+<input type="text" name="#ENV{nom}" readonly="readonly" value="#NOM" />
+<input type="hidden" name="#ENV{nom}" value="#ID_ORGANISATION" />[(#REM) La vrai valeur a priorite]
+</BOUCLE_organisation>
+[(#REM) Indiquer les inputs même si l'orga n'existe pas, pour les formulaires de configuration automatique ]
+<input type="text" name="#ENV{nom}" readonly="readonly" value="<:contacts:non_renseigne|attribut_html:>" />
+<input type="hidden" name="#ENV{nom}" value="" />
+<//B_organisation>
+</div>
+
+<script type='text/javascript'>
+(function($){
+$(document).ready(function(){
+$("#changer_selection_organisation_#GET{id}").click(function(){
+	$(this).animeajax();
+	$.get("[(#URL_PAGE{saisie_organisations})]",  {
+		id_organisation: "#ENV{valeur,#ENV{defaut}}",
+		id_source: "#ENV{id_organisation}",
+		['class':	"(#ENV{class})",]
+		['cacher_option_intro':	"(#ENV{cacher_option_intro})",]
+		['defaut':	"(#ENV{defaut})",]
+		['valeur':	"(#ENV{valeur})",]
+		nom:	"#ENV{nom}"
+		}, function(data)
+	{
+		$('#selection_organisation_#GET{id}').html(data);
+		$('#changer_selection_organisation_#GET{id}').remove();
+	});
+});
+});
+})(jQuery);
+</script>
