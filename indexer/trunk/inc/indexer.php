@@ -118,23 +118,32 @@ function indexer_job_indexer_source($alias_de_sources, $start, $end){
 	// On va chercher les sources du SPIP
 	$sources = indexer_sources();
 	// On récupère celle demandée en paramètre
-	$source = $sources->getSource($alias_de_sources);
-	// On va chercher les documents à indexer
-	$documents = $source->getDocuments($start, $end);
-	// Et on le remplace (ou ajoute) dans l'indexation
-	$res = $indexer->replaceDocuments($documents);
+	// les alias de source correpondent en principe a la table (ex 'articles'), donc si $alias_de_sources est un objet ('article') on ne va pas trouver la source
+	if (!function_exists('table_objet')) {
+		include_spip('base/objets');
+	}
+	if ($source = $sources->getSource($alias_de_sources)
+	  or $source = $sources->getSource(table_objet($alias_de_sources))) {
+		// On va chercher les documents à indexer
+		$documents = $source->getDocuments($start, $end);
+		// Et on le remplace (ou ajoute) dans l'indexation
+		$res = $indexer->replaceDocuments($documents);
 
-	// en cas d'erreur, on se reprogramme pour une autre fois
-	if (!$res) {
-		job_queue_add(
-			'indexer_job_indexer_source',
-			"Replan indexation $alias_de_sources $start $end",
-			array($alias_de_sources, $start, $end, uniqid()),
-			'inc/indexer',
-			false, // duplication possible car ce job-ci n'est pas encore nettoyé
-			time() + 15*60, // attendre 15 minutes
-			-10 // priorite basse
-		);
+		// en cas d'erreur, on se reprogramme pour une autre fois
+		if (!$res) {
+			job_queue_add(
+				'indexer_job_indexer_source',
+				"Replan indexation $alias_de_sources $start $end",
+				array($alias_de_sources, $start, $end, uniqid()),
+				'inc/indexer',
+				false, // duplication possible car ce job-ci n'est pas encore nettoyé
+				time() + 15*60, // attendre 15 minutes
+				-10 // priorite basse
+			);
+		}
+	}
+	else {
+		spip_log("indexer_job_indexer_source: Source $alias_de_sources inconnue", 'indexer'._LOG_ERREUR);
 	}
 }
 
