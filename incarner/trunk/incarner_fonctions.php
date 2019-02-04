@@ -50,7 +50,7 @@ function incarner_renouveler_cle() {
 	include_spip('inc/cookie');
 	include_spip('inc/session');
 
-	$cle_actuelle = isset($_COOKIE['spip_cle_incarner']) ? $_COOKIE['spip_cle_incarner'] : '';
+	$cle_actuelle = (isset($_COOKIE['spip_cle_incarner']) ? $_COOKIE['spip_cle_incarner'] : '');
 
 	if (! $cles = lire_config('incarner/cles')) {
 		$cles = array();
@@ -90,7 +90,7 @@ function incarner_invalider_cle() {
 	include_spip('inc/config');
 	include_spip('inc/cookie');
 
-	$cle_actuelle = $_COOKIE['spip_cle_incarner'];
+	$cle_actuelle = (isset($_COOKIE['spip_cle_incarner']) ? $_COOKIE['spip_cle_incarner'] : '');
 
 	if (! $cles = lire_config('incarner/cles')) {
 		$cles = array();
