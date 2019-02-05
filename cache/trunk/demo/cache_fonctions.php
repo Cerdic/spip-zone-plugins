@@ -9,31 +9,23 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/cache');
 include_spip('inc/config');
 
-function demo_cache_taxonomie() {
+function demo_cache() {
 
-	// Initialisation du plugin et de sa configuration minimale (non redondante avec celle de Cache Factory)
+	// Initialisation du plugin. La configuration du plugin est fournie par le service taxonomie_cache_configurer().
 	$plugin = 'taxonomie';
-	$configuration = array(
-		'racine'        => _DIR_VAR,
-		'nom'           => array('service', 'action', 'tsn', 'langue', 'section'),
-//		'extension'     => _CACHE_EXTENSION,
-//		'securisation'  => _CACHE_SECURISE,
-//		'serialisation' => _CACHE_CONTENU_SERIALISE,
-//		'separateur'    => _CACHE_NOM_SEPARATEUR
-	);
 
-	echo 'Nettoyage de la configuration du plugin pour être sur de partir de zéro.'
+	echo '<br />Nettoyage de la configuration du plugin pour être sur de partir de zéro.';
 	$config_cache = lire_config('cache', array());
-	if (isset($config_cache[$plugin]) {
+	if (isset($config_cache[$plugin])) {
 		unset($config_cache[$plugin]);
-		ecrire_config('cache', config_cache);
+		ecrire_config('cache', $config_cache);
 	}
 
-	echo 'Lecture de la configuration : vide car jamais enregistrée'
+	echo '<br />Lecture de la configuration : vide car jamais enregistrée';
 	$retour = cache_configuration_lire($plugin);
 	var_dump($retour);
 
-	echo 'Test de cache inexistant : la configuration est enregistrée.'
+	echo '<br />Test de cache inexistant : la configuration est enregistrée.';
 	$cache1 = array(
 		'service' => 'itis',
 		'action'  => 'record',
@@ -42,28 +34,29 @@ function demo_cache_taxonomie() {
 	$retour = cache_existe($plugin, $cache1);
 	var_dump($retour);
 
-	echo 'Lecture de la configuration : cette fois elle est complète'
+	echo '<br />Lecture de la configuration : cette fois elle est complète';
 	$retour = cache_configuration_lire($plugin);
 	var_dump($retour);
 
-	echo 'Ecriture d\'un tableau dans cache wikipedia inexistant : on stocke la config des caches récupérée à l\'étape précédente.'
+	echo '<br />Ecriture d\'un tableau dans cache wikipedia inexistant : on stocke la config des caches récupérée à l\'étape précédente.';
 	$cache2 = array(
 		'service' => 'wikipedia',
-		'get'     => 'record',
+		'action'     => 'get',
 		'tsn'     => 132588,
 		'langue'  => 'fr'
 	);
 	$retour = cache_ecrire($plugin, $cache2, $retour);
 	var_dump($retour);
 
-	echo 'Test de cache existant : le chemin complet est retourné.'
+	echo '<br />Test de cache existant : le chemin complet est retourné.';
 	$retour = cache_existe($plugin, $cache2);
 	var_dump($retour);
 
-	echo 'Lecture du cache précédemment écrit : on retrouve la config désérialisée'
+	echo '<br />Lecture du cache précédemment écrit : on retrouve la config désérialisée';
 	$retour = cache_lire($plugin, $cache2);
 	var_dump($retour);
 
-	
-	return $html;
+	echo '<br />Suppression du cache créé';
+//	$retour = cache_supprimer($plugin, $cache2);
+	var_dump($retour);
 }
