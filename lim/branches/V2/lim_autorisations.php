@@ -89,17 +89,6 @@ if (!function_exists('autoriser_rubrique_creerarticledans')) {
 	}
 }
 
-if (!function_exists('autoriser_joindredocument')) {
-	function autoriser_joindredocument($faire, $type, $id, $qui, $opt) {
-		$quelles_rubriques = lire_config('lim_rubriques/document');
-		is_null($quelles_rubriques) ? $lim_rub = true : $lim_rub = !in_array($id,$quelles_rubriques);
-		
-		return
-			$lim_rub
-			AND autoriser_joindredocument_dist($faire, $type, $id, $qui, $opt);
-	}
-}
-
 if (!function_exists('autoriser_rubrique_creerbrevedans')) {
 	function autoriser_rubrique_creerbrevedans($faire, $type, $id, $qui, $opt) {
 		$r = sql_fetsel("id_parent", "spip_rubriques", "id_rubrique=".intval($id));
@@ -123,6 +112,23 @@ if (!function_exists('autoriser_rubrique_creersitedans')) {
 		return
 			$lim_rub
 			AND autoriser_rubrique_creersitedans_dist($faire, $type, $id, $qui, $opt);
+	}
+}
+
+
+if (!function_exists('autoriser_joindredocument')) {
+	function autoriser_joindredocument($faire, $type, $id, $qui, $opt) {
+		// Attention : ici il faut vérifier que le contexte est bien une rubrique
+		if ($type == 'rubrique') {
+			$quelles_rubriques = lire_config('lim_rubriques/document');
+			is_null($quelles_rubriques) ? $lim_rub = true : $lim_rub = !in_array($id,$quelles_rubriques);
+		}
+		else {
+			$lim_rub = true;
+		}
+		return
+			$lim_rub
+			AND autoriser_joindredocument_dist($faire, $type, $id, $qui, $opt);
 	}
 }
 
