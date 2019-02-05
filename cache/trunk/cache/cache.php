@@ -41,12 +41,12 @@ if (!defined('_CACHE_CONTENU_SERIALISE')) {
 	define('_CACHE_CONTENU_SERIALISE', true);
 }
 
-if (!defined('_CACHE_SEPARATEUR')) {
+if (!defined('_CACHE_NOM_SEPARATEUR')) {
 	/**
 	 * Dossier racine dans lesquels tous les caches par défaut seront rangés.
 	 * Les caches sont répartis suivant le plugin appelant dans un sous-dossier `/${plugin}`.
 	 */
-	define('_CACHE_SEPARATEUR', '_');
+	define('_CACHE_NOM_SEPARATEUR', '_');
 }
 
 
@@ -55,11 +55,11 @@ if (!defined('_CACHE_SEPARATEUR')) {
 // -----------------------------------------------------------------------
 
 /**
- * Complète la description d'un type de noisette issue de la lecture de son fichier YAML.
+ * Récupère la configuration des caches d'un plugin, la complète et la stocke dans une meta.
  *
- * Le plugin N-Core ne complète pas les types de noisette.
+ * Le plugin Cache Factory propose une configuration par défaut des caches.
  *
- * @uses ncore_chercher_service()
+ * @uses cache_chercher_service()
  * @uses sous_repertoire()
  * @uses lire_config()
  * @uses ecrire_config()
@@ -67,14 +67,9 @@ if (!defined('_CACHE_SEPARATEUR')) {
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param array  $description
- *        Description du type de noisette issue de la lecture du fichier YAML. Suivant le plugin utilisateur elle
- *        nécessite d'être compléter avant son stockage.
- * @param string $stockage
- *        Identifiant du service de stockage à utiliser si précisé.
  *
  * @return array
- *        Description du type de noisette éventuellement complétée par le plugin utilisateur.
+ *        Tableau de la configuration complétée des caches d'un plugin venant d'être enregistrée.
  */
 function cache_cache_configurer($plugin) {
 
@@ -85,7 +80,7 @@ function cache_cache_configurer($plugin) {
 		'extension'     => _CACHE_EXTENSION,
 		'securisation'  => _CACHE_SECURISE,
 		'serialisation' => _CACHE_CONTENU_SERIALISE,
-		'separateur'    => _CACHE_SEPARATEUR
+		'separateur'    => _CACHE_NOM_SEPARATEUR
 	);
 
 	// Le plugin utilisateur doit fournir un service propre pour la configuration de ses caches.
@@ -136,25 +131,25 @@ function cache_cache_configurer($plugin) {
 /**
  * Construit le chemin complet du fichier cache.
  *
- * @uses ncore_chercher_service()
+ * @uses cache_chercher_service()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param array  $conteneur
+ * @param array  $cache
  *        Tableau identifiant le cache pour lequel on veut construire le nom.
  * @param array  $configuration
- *        Configuration complète des caches du plugin utlisateur.
+ *        Configuration complète des caches du plugin utlisateur lue à partir de la meta de stockage.
  *
  * @return string
  */
-function cache_cache_nommer($plugin, $conteneur, $configuration) {
+function cache_cache_nommer($plugin, $cache, $configuration) {
 
 	// Le plugin utilisateur peut fournir un service propre pour construire le chemin complet du fichier cache.
 	// Néanmoins, étant donné la généricité du mécanisme offert par le plugin Cache cela devrait être rare.
 	if ($nommer = cache_chercher_service($plugin, 'cache_nommer')) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
-		$fichier_cache = $nommer($plugin, $conteneur, $configuration);
+		$fichier_cache = $nommer($plugin, $cache, $configuration);
 	} else {
 		// On utilise le mécanisme de nommage standard du plugin Cache.
 		// Initialisation du chemin complet du fichier cache
@@ -163,18 +158,18 @@ function cache_cache_nommer($plugin, $conteneur, $configuration) {
 		// Détermination du répertoire final du fichier cache qui peut-être inclus dans un sous-dossier du dossier
 		// de base des caches du plugin.
 		$dir_cache = $configuration['dossier_base'];
-		if (!empty($conteneur['sous_dossier'])) {
-			// Si le conteneur nécessite un sous-dossier, appelé service dans l'identifiant du conteneur.
-			$dir_cache .= rtrim($conteneur['sous_dossier'], '/');
+		if (!empty($cache['sous_dossier'])) {
+			// Si le cache nécessite un sous-dossier, appelé service dans l'identifiant du cache.
+			$dir_cache .= rtrim($cache['sous_dossier'], '/');
 		}
 
 		// Détermination du nom du cache sans extension.
-		// Celui-ci est construit à partir des éléments fournis sur le conteneur et de la configuration
+		// Celui-ci est construit à partir des éléments fournis sur le cache et de la configuration
 		// fournie par le plugin (liste ordonnée de composant).
 		$nom_cache = '';
 		foreach ($configuration['nom'] as $_composant) {
-			if (isset($conteneur[$_composant])) {
-				$nom_cache .= ($nom_cache ? $configuration['separateur'] : '') . $conteneur[$_composant];
+			if (isset($cache[$_composant])) {
+				$nom_cache .= ($nom_cache ? $configuration['separateur'] : '') . $cache[$_composant];
 			}
 		}
 
@@ -183,8 +178,8 @@ function cache_cache_nommer($plugin, $conteneur, $configuration) {
 			// L'extension par défaut est dans la configuration mais peut-être forcée pour un cache donné.
 			// Par contre, si le cache est sécurisé alors on ne tient pas compte du forçage éventuel car l'extension
 			// doit toujours être .php et celle-ci a été forcée lors de la configuration des caches du plugin.
-			$extension = (!empty($conteneur['extension']) and !$configuration['securisation'])
-				? $conteneur['extension']
+			$extension = (!empty($cache['extension']) and !$configuration['securisation'])
+				? $cache['extension']
 				: $configuration['extension'];
 			// Le chemin complet
 			$fichier_cache = "${dir_cache}${nom_cache}${extension}";

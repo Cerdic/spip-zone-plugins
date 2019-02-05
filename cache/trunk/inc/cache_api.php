@@ -1,6 +1,6 @@
 <?php
 /**
- * Ce fichier contient les fonctions d'API de gestion des caches.
+ * Ce fichier contient les fonctions d'API du plugin Cache Factory.
  *
  * @package SPIP\CACHE\API
  */
@@ -14,6 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @api
  *
+ * @uses cache_configuration_lire()
  * @uses cache_cache_configurer()
  * @uses cache_cache_nommer()
  *
@@ -95,6 +96,7 @@ function cache_ecrire($plugin, $cache, $contenu) {
  *
  * @api
  *
+ * @uses cache_configuration_lire()
  * @uses cache_cache_configurer()
  * @uses cache_cache_nommer()
  *
@@ -163,6 +165,7 @@ function cache_lire($plugin, $cache) {
  *
  * @api
  *
+ * @uses cache_configuration_lire()
  * @uses cache_cache_configurer()
  * @uses cache_cache_nommer()
  *
@@ -215,6 +218,8 @@ function cache_existe($plugin, $cache) {
  *
  * @api
  *
+ * @uses cache_configuration_lire()
+ * @uses cache_cache_configurer()
  * @uses cache_cache_nommer()
  *
  * @param string $plugin
@@ -252,6 +257,7 @@ function cache_nommer($plugin, $cache) {
  *
  * @api
  *
+ * @uses cache_configuration_lire()
  * @uses cache_cache_configurer()
  * @uses cache_cache_nommer()
  * @uses supprimer_fichier()
@@ -339,6 +345,8 @@ function cache_vider($plugin, $caches = array()) {
  * Lit la configuration standard des caches d'un plugin utilisateur.
  *
  * @api
+ *
+ * @uses lire_config()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
