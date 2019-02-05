@@ -129,7 +129,7 @@ function cache_lire($plugin, $cache) {
 		// Détermination du chemin du cache :
 		// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
 		//   de la configuration du nom pour le plugin.
-		$fichier_cache = cache_cache_nommer($plugin, $cache, $configuration[$plugin])) {
+		$fichier_cache = cache_cache_nommer($plugin, $cache, $configuration[$plugin]);
 	} elseif (is_string($cache)) {
 		// Le chemin complet du fichier cache est fourni. Aucune vérification ne peut être faite
 		// il faut donc que l'appelant ait utilisé l'API cache_existe() pour calculer le fichier au préalable.
@@ -194,7 +194,7 @@ function cache_existe($plugin, $cache) {
 		// Détermination du chemin du cache :
 		// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
 		//   de la configuration du nom pour le plugin.
-		$fichier_cache = cache_cache_nommer($plugin, $cache, $configuration[$plugin])) {
+		$fichier_cache = cache_cache_nommer($plugin, $cache, $configuration[$plugin]);
 	} elseif (is_string($cache)) {
 		// Le chemin complet du fichier cache est fourni. Aucune vérification ne peut être faite
 		// il faut donc que l'appelant ait utilisé l'API cache_existe() pour calculer le fichier au préalable.
@@ -245,7 +245,7 @@ function cache_nommer($plugin, $cache) {
 		// Détermination du chemin du cache :
 		// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
 		//   de la configuration du nom pour le plugin.
-		$fichier_cache = cache_cache_nommer($plugin, $cache, $configuration[$plugin])) {
+		$fichier_cache = cache_cache_nommer($plugin, $cache, $configuration[$plugin]);
 	}
 
 	return $fichier_cache;
@@ -291,7 +291,7 @@ function cache_supprimer($plugin, $cache) {
 		// Détermination du chemin du cache :
 		// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
 		//   de la configuration du nom pour le plugin.
-		$fichier_cache = cache_cache_nommer($plugin, $cache, $configuration[$plugin])) {
+		$fichier_cache = cache_cache_nommer($plugin, $cache, $configuration[$plugin]);
 	} elseif (is_string($cache)) {
 		// Le chemin complet du fichier cache est fourni. Aucune vérification ne peut être faite
 		// il faut donc que l'appelant ait utilisé l'API cache_existe() pour calculer le fichier au préalable.
