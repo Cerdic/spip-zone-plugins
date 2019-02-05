@@ -17,14 +17,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param array  $conteneur
+ * @param array|string  $cache
  *        Nom et extension du fichier cache.
  * @param array  $contenu
  *        Contenu sous forme de tableau à stocker dans un fichier cache après sérialisation.
  *
  * @return bool
  */
-function cache_ecrire($plugin, $conteneur, $contenu) {
+function cache_ecrire($plugin, $cache, $contenu) {
 
 	// Initialisation du retour de la fonction
 	$cache_ecrit = false;
@@ -32,24 +32,35 @@ function cache_ecrire($plugin, $conteneur, $contenu) {
 	// Lecture de la configuration des caches du plugin.
 	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel).
 	static $configuration = array();
-	if (!$configuration and (!$configuration = cache_configuration_lire($plugin))) {
-		$configuration = cache_cache_configurer($plugin);
+	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_configuration_lire($plugin))) {
+		$configuration[$plugin] = cache_cache_configurer($plugin);
 	}
 	
-	// Création du répertoire du cache à créer, si besoin.
-	if (!empty($conteneur['sous_dossier'])) {
-		// Si le conteneur nécessite un sous-dossier, appelé service dans l'identifiant du conteneur.
-		sous_repertoire($configuration['dossier_base'], rtrim($conteneur['sous_dossier'], '/'));
-	}
+	// Le cache peut-être fourni soit sous la forme d'un chemin complet soit sous la forme d'un
+	// tableau permettant de calculer le chemin complet. On prend en compte ces deux cas.
+	$fichier_cache = '';
+	if (is_array($cache)) {
+		// Création du répertoire du cache à créer, si besoin.
+		if (!empty($cache['sous_dossier'])) {
+			// Si le conteneur nécessite un sous-dossier, appelé service dans l'identifiant du conteneur.
+			sous_repertoire($configuration[$plugin]['dossier_base'], rtrim($cache['sous_dossier'], '/'));
+		}
 
-	// Détermination du chemin du cache :
-	// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
-	//   de la configuration du nom pour le plugin.
-	if ($fichier_cache = cache_nommer($plugin, $conteneur, $configuration)) {
+		// Détermination du chemin du cache :
+		// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
+		//   de la configuration du nom pour le plugin.
+		$fichier_cache = cache_cache_nommer($plugin, $cache, $configuration[$plugin])) {
+	} elseif (is_string($cache)) {
+		// Le chemin complet du fichier cache est fourni. Aucune vérification ne peut être faite
+		// il faut donc que l'appelant ait utilisé l'API cache_existe() pour calculer le fichier au préalable.
+		$fichier_cache = $cache;
+	}
+	
+	if ($fichier_cache) {
  		// Suivant que la configuration demande un sérialisation ou pas, on vérife le format du contenu
 		// de façon à toujours écrire une chaine.
 		$contenu_cache = '';
-		if ($configuration['serialisation']) {
+		if ($configuration[$plugin]['serialisation']) {
 			if (!is_array($contenu)) {
 				$contenu_cache = $contenu_cache ? array($contenu_cache) : array();
 			}
@@ -63,13 +74,196 @@ function cache_ecrire($plugin, $conteneur, $contenu) {
 		// Ecriture du fichier cache sécurisé ou pas suivant la configuration.
 		include_spip('inc/flock');
 		$ecrire = 'ecrire_fichier';
-		if ($configuration['securisation']) {
+		if ($configuration[$plugin]['securisation']) {
 			$ecrire = 'ecrire_fichier_securise';
 		}
 		$cache_ecrit = $ecrire($fichier_cache, $contenu_cache);
 	}
 	
 	return $cache_ecrit;
+}
+
+
+/**
+ * Lit le cache spécifié d'un plugin donné et renvoie le contenu sous forme de tableau
+ * éventuellement vide.
+ *
+ * @api
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array|string $cache
+ *        Nom et extension du fichier cache.
+ *
+ * @return array|string|bool
+ *        Contenu du fichier sous la forme d'un tableau, d'une chaine ou false si une erreur s'est produite.
+ */
+function cache_lire($plugin, $cache) {
+
+	// Initialisation du contenu du cache
+	$cache_lu = false;
+	
+	// Lecture de la configuration des caches du plugin.
+	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel, peu probable pour une lecture).
+	static $configuration = array();
+	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_configuration_lire($plugin))) {
+		$configuration[$plugin] = cache_cache_configurer($plugin);
+	}
+
+	// Le cache peut-être fourni soit sous la forme d'un chemin complet soit sous la forme d'un
+	// tableau permettant de calculer le chemin complet. On prend en compte ces deux cas.
+	$fichier_cache = '';
+	if (is_array($cache)) {
+		// Détermination du chemin du cache :
+		// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
+		//   de la configuration du nom pour le plugin.
+		$fichier_cache = cache_cache_nommer($plugin, $cache, $configuration[$plugin])) {
+	} elseif (is_string($cache)) {
+		// Le chemin complet du fichier cache est fourni. Aucune vérification ne peut être faite
+		// il faut donc que l'appelant ait utilisé l'API cache_existe() pour calculer le fichier au préalable.
+		$fichier_cache = $cache;
+	}
+
+	// Détermination du nom du cache en fonction du plugin appelant et du type
+	if ($fichier_cache) {
+		// Lecture du fichier cache sécurisé ou pas suivant la configuration.
+		include_spip('inc/flock');
+		$lire = 'lire_fichier';
+		if ($configuration[$plugin]['securisation']) {
+			$lire = 'lire_fichier_securise';
+		}
+		$contenu_cache = '';
+		$lecture_ok = $lire($fichier_cache, $contenu_cache);
+		
+		if ($lecture_ok) {
+			if ($configuration[$plugin]['serialisation']) {
+				$cache_lu = unserialize($contenu_cache);
+			} else {
+				$cache_lu = $contenu_cache;
+			}
+		}
+	}
+
+	return $cache_lu;
+}
+
+
+/**
+ * Renvoie le chemin complet du cache si celui-ci existe sinon renvoie une chaine vide.
+ *
+ * @api
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array  $cache
+ *        Tableau identifiant le cache pour lequel on veut construire le nom.
+ * @param array  $configuration
+ *        Configuration complète des caches du plugin utlisateur.
+ *
+ * @return string
+ */
+function cache_existe($plugin, $cache) {
+
+	// Lecture de la configuration des caches du plugin.
+	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel).
+	static $configuration = array();
+	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_configuration_lire($plugin))) {
+		$configuration[$plugin] = cache_cache_configurer($plugin);
+	}
+
+	// Le cache peut-être fourni soit sous la forme d'un chemin complet soit sous la forme d'un
+	// tableau permettant de calculer le chemin complet. On prend en compte ces deux cas.
+	$fichier_cache = '';
+	if (is_array($cache)) {
+		// Détermination du chemin du cache :
+		// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
+		//   de la configuration du nom pour le plugin.
+		$fichier_cache = cache_cache_nommer($plugin, $cache, $configuration[$plugin])) {
+	} elseif (is_string($cache)) {
+		// Le chemin complet du fichier cache est fourni. Aucune vérification ne peut être faite
+		// il faut donc que l'appelant ait utilisé l'API cache_existe() pour calculer le fichier au préalable.
+		$fichier_cache = $cache;
+	}
+
+	// Vérifier l'existence du fichier.
+	if ($fichier_cache) {
+		if (!file_exists($fichier_cache)) {
+			$fichier_cache = '';
+		}
+	}
+
+	return $fichier_cache;
+}
+
+
+/**
+ * Renvoie le chemin complet du cache si celui-ci existe sinon renvoie une chaine vide.
+ *
+ * @api
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array  $cache
+ *        Tableau identifiant le cache pour lequel on veut construire le nom.
+ * @param array  $configuration
+ *        Configuration complète des caches du plugin utlisateur.
+ *
+ * @return string
+ */
+function cache_nommer($plugin, $cache) {
+
+	// Lecture de la configuration des caches du plugin.
+	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel).
+	static $configuration = array();
+	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_configuration_lire($plugin))) {
+		$configuration[$plugin] = cache_cache_configurer($plugin);
+	}
+
+	// Le cache est toujours fourni sous la forme d'un tableau permettant de calculer le chemin complet.
+	$fichier_cache = '';
+	if (is_array($cache)) {
+		// Détermination du chemin du cache :
+		// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
+		//   de la configuration du nom pour le plugin.
+		$fichier_cache = cache_cache_nommer($plugin, $cache, $configuration[$plugin])) {
+	}
+
+	return $fichier_cache;
+}
+
+
+/**
+ * Supprime le ou les caches spécifiés d'un plugin donné.
+ * A AMELIORER
+ *
+ * @api
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param string $nom_cache
+ *        Nom et extension du fichier cache.
+ *
+ * @return void
+ */
+function cache_vider($plugin, $caches = array()) {
+
+	// Initialisation du retour
+	$cache_vide = false;
+
+	if ($caches) {
+		$fichiers_cache = is_string($caches) ? array($caches) : $caches;
+		include_spip('inc/flock');
+		foreach ($fichiers_cache as $_fichier) {
+			supprimer_fichier($_fichier);
+		}
+		$cache_vide = true;
+	}
+	
+	return $cache_vide;
 }
 
 
@@ -98,117 +292,4 @@ function cache_configuration_lire($plugin) {
 	}
 
 	return $configuration_lue;
-}
-
-
-/**
- * Lit le cache spécifié d'un plugin donné et renvoie le contenu sous forme de tableau
- * éventuellement vide.
- *
- * @api
- *
- * @param string $plugin
- *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
- *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param string $nom_cache
- *        Nom et extension du fichier cache.
- *
- * @return array|string|bool
- *        Contenu du fichier sous la forme d'un tableau, d'une chaine ou false si une erreur s'est produite.
- */
-function cache_lire($plugin, $conteneur) {
-
-	// Initialisation du contenu du cache
-	$cache_lu = false;
-	
-	// Lecture de la configuration des caches du plugin.
-	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel, peu probable pour une lecture).
-	static $configuration = array();
-	if (!$configuration and (!$configuration = cache_configuration_lire($plugin))) {
-		$configuration = cache_cache_configurer($plugin);
-	}
-
-	// Détermination du nom du cache en fonction du plugin appelant et du type
-	if ($fichier_cache = cache_nommer($plugin, $conteneur, $configuration)) {
-		// Lecture du fichier cache sécurisé ou pas suivant la configuration.
-		include_spip('inc/flock');
-		$lire = 'lire_fichier';
-		if ($configuration['securisation']) {
-			$lire = 'lire_fichier_securise';
-		}
-		$contenu_cache = '';
-		$lecture_ok = $lire($fichier_cache, $contenu_cache);
-		
-		if ($lecture_ok) {
-			if ($configuration['serialisation']) {
-				$cache_lu = unserialize($contenu_cache);
-			} else {
-				$cache_lu = $contenu_cache;
-			}
-		}
-	}
-
-	return $cache_lu;
-}
-
-
-/**
- * Renvoie le chemin complet du cache si celui-ci existe sinon renvoie une chaine vide.
- *
- * @api
- *
- * @param string $plugin
- *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
- *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param array  $conteneur
- *        Tableau identifiant le cache pour lequel on veut construire le nom.
- * @param array  $configuration
- *        Configuration complète des caches du plugin utlisateur.
- *
- * @return string
- */
-function cache_existe($plugin, $conteneur) {
-
-	// Lecture de la configuration des caches du plugin.
-	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel, peu probable pour cette fonction).
-	static $configuration = array();
-	if (!$configuration and (!$configuration = cache_configuration_lire($plugin))) {
-		$configuration = cache_cache_configurer($plugin);
-	}
-
-	// Détermination du nom du cache en fonction du plugin appelant et du type
-	if ($fichier_cache = cache_nommer($plugin, $conteneur, $configuration)) {
-		// Vérifier l'existence du fichier.
-		if (!file_exists($fichier_cache)) {
-			$fichier_cache = '';
-		}
-	} else {
-		$fichier_cache = '';
-	}
-
-	return $fichier_cache;
-}
-
-
-/**
- * Supprime le cache spécifié d'un plugin donné.
- *
- * @api
- *
- * @param string $plugin
- *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
- *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param string $nom_cache
- *        Nom et extension du fichier cache.
- *
- * @return void
- */
-function cache_vider($plugin, $caches = array()) {
-
-	// Détermination du nom du cache en fonction du plugin appelant et du type
-	$fichier_cache = '';
-
-	// Suppression du fichier cache
-	include_spip('inc/flock');
-	supprimer_fichier($fichier_cache);
 }

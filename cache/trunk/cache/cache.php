@@ -88,8 +88,9 @@ function cache_cache_configurer($plugin) {
 		'separateur'    => _CACHE_SEPARATEUR
 	);
 
-	// Si le plugin utilisateur complète la description avec des champs spécifiques il doit proposer un service
-	// de complément propre.
+	// Le plugin utilisateur doit fournir un service propre pour la configuration de ses caches.
+	// Cette configuration peut-être partielle, dans ce cas les données manquantes sont complétées
+	// par celles par défaut.
 	$configuration_plugin = array();
 	if ($configurer = cache_chercher_service($plugin, 'cache_configurer')) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
@@ -97,29 +98,29 @@ function cache_cache_configurer($plugin) {
 	}
 
 	// On merge la configuration du plugin avec celle par défaut pour assure la complétude.
-	$configuration_plugin = array_merge($configuration_defaut, $configuration_plugin);
+	$configuration = array_merge($configuration_defaut, $configuration_plugin);
 
 	// On vérifie l'indicateur de sécurisation : si le cache doit être sécurisé alors son extension
 	// doit absolument être .php. Si ce n'est pas le cas on la force.
-	if ($configuration_plugin['securisation']
-	and ($configuration_plugin['extension'] != '.php')) {
-		$configuration_plugin['extension'] = '.php';
+	if ($configuration['securisation']
+	and ($configuration['extension'] != '.php')) {
+		$configuration['extension'] = '.php';
 	}
 
 	// Pour faciliter la construction du chemin des caches on détermine une fois pour toute le dossier
 	// de base des caches du plugin.
 	// -- Vérification de la localisation de la racine qui ne peut être que dans les trois dossiers SPIP
 	//    prévus et de la présence du / final.
-	if (!in_array($configuration_plugin['racine'], array(_DIR_CACHE, _DIR_TMP, _DIR_VAR))) {
-		$configuration_plugin['racine'] = $configuration_defaut['racine'];
+	if (!in_array($configuration['racine'], array(_DIR_CACHE, _DIR_TMP, _DIR_VAR))) {
+		$configuration['racine'] = $configuration_defaut['racine'];
 	} else {
-		$configuration_plugin['racine'] = rtrim($configuration_plugin['racine'], '/') . '/';
+		$configuration['racine'] = rtrim($configuration['racine'], '/') . '/';
 	}
 	// -- Sous-dossier spécifique au plugin
-	$sous_dossier = ($configuration_plugin['racine'] == _DIR_VAR) ? "cache-${plugin}" : "$plugin";
+	$sous_dossier = ($configuration['racine'] == _DIR_VAR) ? "cache-${plugin}" : "$plugin";
 	// -- Création et enregistrement du dossier de base
-	sous_repertoire($configuration_plugin['racine'], $sous_dossier);
-	$configuration['dossier_base'] = $configuration_plugin['racine'] . "${sous_dossier}/";
+	sous_repertoire($configuration['racine'], $sous_dossier);
+	$configuration['dossier_base'] = $configuration['racine'] . "${sous_dossier}/";
 	
 	// Enregistrement de la configuration du plugin utilisateur dans la meta prévue.
 	// Si une configuration existe déjà on l'écrase.
@@ -128,7 +129,7 @@ function cache_cache_configurer($plugin) {
 	$meta_cache[$plugin] = $configuration;
 	ecrire_config('cache', $meta_cache);
 
-	return $configuration_plugin;
+	return $configuration;
 }
 
 
@@ -147,39 +148,47 @@ function cache_cache_configurer($plugin) {
  *
  * @return string
  */
-function cache_cache_nommer_dist($plugin, $conteneur, $configuration) {
+function cache_cache_nommer($plugin, $conteneur, $configuration) {
 
-	// Initialisation du chemin complet du fichier cache
-	$fichier_cache = '';
+	// Le plugin utilisateur peut fournir un service propre pour construire le chemin complet du fichier cache.
+	// Néanmoins, étant donné la généricité du mécanisme offert par le plugin Cache cela devrait être rare.
+	if ($nommer = cache_chercher_service($plugin, 'cache_nommer')) {
+		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
+		$fichier_cache = $nommer($plugin, $conteneur, $configuration);
+	} else {
+		// On utilise le mécanisme de nommage standard du plugin Cache.
+		// Initialisation du chemin complet du fichier cache
+		$fichier_cache = '';
 
-	// Détermination du répertoire final du fichier cache qui peut-être inclus dans un sous-dossier du dossier
-	// de base des caches du plugin.
-	$dir_cache = $configuration['dossier_base'];
-	if (!empty($conteneur['sous_dossier'])) {
-		// Si le conteneur nécessite un sous-dossier, appelé service dans l'identifiant du conteneur.
-		$dir_cache .= rtrim($conteneur['sous_dossier'], '/');
-	}
-
-	// Détermination du nom du cache sans extension.
-	// Celui-ci est construit à partir des éléments fournis sur le conteneur et de la configuration
-	// fournie par le plugin (liste ordonnée de composant).
-	$nom_cache = '';
-	foreach ($configuration['nom'] as $_composant) {
-		if (isset($conteneur[$_composant])) {
-			$nom_cache .= ($nom_cache ? $configuration['separateur'] : '') . $conteneur[$_composant];
+		// Détermination du répertoire final du fichier cache qui peut-être inclus dans un sous-dossier du dossier
+		// de base des caches du plugin.
+		$dir_cache = $configuration['dossier_base'];
+		if (!empty($conteneur['sous_dossier'])) {
+			// Si le conteneur nécessite un sous-dossier, appelé service dans l'identifiant du conteneur.
+			$dir_cache .= rtrim($conteneur['sous_dossier'], '/');
 		}
-	}
 
-	// Si le nom a pu être construit on finalise le chemin complet, sinon on renvoie une chaine vide.
-	if ($nom_cache) {
-		// L'extension par défaut est dans la configuration mais peut-être forcée pour un cache donné.
-		// Par contre, si le cache est sécurisé alors on ne tient pas compte du forçage éventuel car l'extension
-		// doit toujours être .php et celle-ci a été forcée lors de la configuration des caches du plugin.
-		$extension = (!empty($conteneur['extension']) and !$configuration['securisation'])
-			? $conteneur['extension']
-			: $configuration['extension'];
-		// Le chemin complet
-		$fichier_cache = "${dir_cache}${nom_cache}${extension}";
+		// Détermination du nom du cache sans extension.
+		// Celui-ci est construit à partir des éléments fournis sur le conteneur et de la configuration
+		// fournie par le plugin (liste ordonnée de composant).
+		$nom_cache = '';
+		foreach ($configuration['nom'] as $_composant) {
+			if (isset($conteneur[$_composant])) {
+				$nom_cache .= ($nom_cache ? $configuration['separateur'] : '') . $conteneur[$_composant];
+			}
+		}
+
+		// Si le nom a pu être construit on finalise le chemin complet, sinon on renvoie une chaine vide.
+		if ($nom_cache) {
+			// L'extension par défaut est dans la configuration mais peut-être forcée pour un cache donné.
+			// Par contre, si le cache est sécurisé alors on ne tient pas compte du forçage éventuel car l'extension
+			// doit toujours être .php et celle-ci a été forcée lors de la configuration des caches du plugin.
+			$extension = (!empty($conteneur['extension']) and !$configuration['securisation'])
+				? $conteneur['extension']
+				: $configuration['extension'];
+			// Le chemin complet
+			$fichier_cache = "${dir_cache}${nom_cache}${extension}";
+		}
 	}
 
 	return $fichier_cache;
