@@ -10,19 +10,21 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 
 /**
- * Ecrit un contenu dans le cache spécifié d'un plugin utilisateur.
+ * Ecrit un contenu dans un cache spécifié par son identifiant.
  *
  * @api
  *
- * @param string $plugin
+ * @param string        $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param array|string  $cache
- *        Nom et extension du fichier cache.
- * @param array  $contenu
- *        Contenu sous forme de tableau à stocker dans un fichier cache après sérialisation.
+ *        Identifiant du cache sous la forme d'une chaine (le chemin du fichier) ou d'un tableau fournissant
+ *        les composants canoniques du nom.
+ * @param array|string  $contenu
+ *        Contenu sous forme de tableau à sérialiser ou sous la forme d'une chaine.
  *
  * @return bool
+ *         True si l'écriture s'est bien passée, false sinon.
  */
 function cache_ecrire($plugin, $cache, $contenu) {
 
@@ -85,16 +87,17 @@ function cache_ecrire($plugin, $cache, $contenu) {
 
 
 /**
- * Lit le cache spécifié d'un plugin donné et renvoie le contenu sous forme de tableau
- * éventuellement vide.
+ * Lit le cache spécifié par son identifiant et renvoie le contenu sous forme de tableau
+ * ou de chaine éventuellement vide.
  *
  * @api
  *
- * @param string $plugin
+ * @param string        $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param array|string $cache
- *        Nom et extension du fichier cache.
+ * @param array|string  $cache
+ *        Identifiant du cache sous la forme d'une chaine (le chemin du fichier) ou d'un tableau fournissant
+ *        les composants canoniques du nom.
  *
  * @return array|string|bool
  *        Contenu du fichier sous la forme d'un tableau, d'une chaine ou false si une erreur s'est produite.
@@ -150,17 +153,16 @@ function cache_lire($plugin, $cache) {
 
 
 /**
- * Renvoie le chemin complet du cache si celui-ci existe sinon renvoie une chaine vide.
+ * Teste l'existence d'un cache sur le disque et, si il existe, renvoie le chemin complet.
  *
  * @api
  *
- * @param string $plugin
+ * @param string        $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param array  $cache
- *        Tableau identifiant le cache pour lequel on veut construire le nom.
- * @param array  $configuration
- *        Configuration complète des caches du plugin utlisateur.
+ * @param array|string  $cache
+ *        Identifiant du cache sous la forme d'une chaine (le chemin du fichier) ou d'un tableau fournissant
+ *        les composants canoniques du nom.
  *
  * @return string
  */
@@ -199,7 +201,8 @@ function cache_existe($plugin, $cache) {
 
 
 /**
- * Renvoie le chemin complet du cache si celui-ci existe sinon renvoie une chaine vide.
+ * Renvoie le chemin complet du cache sans tester son existence.
+ * Cette fonction est une encapsulation du service cache_cache_nommer().
  *
  * @api
  *
@@ -207,9 +210,7 @@ function cache_existe($plugin, $cache) {
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param array  $cache
- *        Tableau identifiant le cache pour lequel on veut construire le nom.
- * @param array  $configuration
- *        Configuration complète des caches du plugin utlisateur.
+ *        Identifiant du cache sous la forme d'un tableau fournissant les composants canoniques du nom.
  *
  * @return string
  */
@@ -232,6 +233,58 @@ function cache_nommer($plugin, $cache) {
 	}
 
 	return $fichier_cache;
+}
+
+
+/**
+ * Supprime le cache spécifié par son identifiant.
+ *
+ * @api
+ *
+ * @param string        $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array|string  $cache
+ *        Identifiant du cache sous la forme d'une chaine (le chemin du fichier) ou d'un tableau fournissant
+ *        les composants canoniques du nom.
+ *
+ * @return bool
+ *         True si la suppression s'est bien passée, false sinon.
+ */
+function cache_supprimer($plugin, $cache) {
+
+	// Initialisation du contenu du cache
+	$cache_supprime = false;
+	
+	// Lecture de la configuration des caches du plugin.
+	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel, peu probable pour une lecture).
+	static $configuration = array();
+	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_configuration_lire($plugin))) {
+		$configuration[$plugin] = cache_cache_configurer($plugin);
+	}
+
+	// Le cache peut-être fourni soit sous la forme d'un chemin complet soit sous la forme d'un
+	// tableau permettant de calculer le chemin complet. On prend en compte ces deux cas.
+	$fichier_cache = '';
+	if (is_array($cache)) {
+		// Détermination du chemin du cache :
+		// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
+		//   de la configuration du nom pour le plugin.
+		$fichier_cache = cache_cache_nommer($plugin, $cache, $configuration[$plugin])) {
+	} elseif (is_string($cache)) {
+		// Le chemin complet du fichier cache est fourni. Aucune vérification ne peut être faite
+		// il faut donc que l'appelant ait utilisé l'API cache_existe() pour calculer le fichier au préalable.
+		$fichier_cache = $cache;
+	}
+
+	// Détermination du nom du cache en fonction du plugin appelant et du type
+	if ($fichier_cache) {
+		// Lecture du fichier cache sécurisé ou pas suivant la configuration.
+		include_spip('inc/flock');
+		$cache_supprime = supprimer_fichier($fichier_cache);
+	}
+
+	return $cache_supprime;
 }
 
 
@@ -268,7 +321,7 @@ function cache_vider($plugin, $caches = array()) {
 
 
 /**
- * Lit la configuration des caches d'un plugin utilisateur.
+ * Lit la configuration standard des caches d'un plugin utilisateur.
  *
  * @api
  *
