@@ -38,6 +38,7 @@ function cache_ecrire($plugin, $cache, $contenu) {
 	// Lecture de la configuration des caches du plugin.
 	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel).
 	static $configuration = array();
+	include_spip('cache/cache');
 	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_configuration_lire($plugin))) {
 		$configuration[$plugin] = cache_cache_configurer($plugin);
 	}
@@ -68,9 +69,9 @@ function cache_ecrire($plugin, $cache, $contenu) {
 		$contenu_cache = '';
 		if ($configuration[$plugin]['serialisation']) {
 			if (!is_array($contenu)) {
-				$contenu_cache = $contenu_cache ? array($contenu_cache) : array();
+				$contenu = $contenu ? array($contenu) : array();
 			}
-			$contenu_cache = serialize($contenu_cache);
+			$contenu_cache = serialize($contenu);
 		} else {
 			if (is_string($contenu)) {
 				$contenu_cache = $contenu;
@@ -118,6 +119,7 @@ function cache_lire($plugin, $cache) {
 	// Lecture de la configuration des caches du plugin.
 	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel, peu probable pour une lecture).
 	static $configuration = array();
+	include_spip('cache/cache');
 	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_configuration_lire($plugin))) {
 		$configuration[$plugin] = cache_cache_configurer($plugin);
 	}
@@ -183,6 +185,7 @@ function cache_existe($plugin, $cache) {
 	// Lecture de la configuration des caches du plugin.
 	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel).
 	static $configuration = array();
+	include_spip('cache/cache');
 	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_configuration_lire($plugin))) {
 		$configuration[$plugin] = cache_cache_configurer($plugin);
 	}
@@ -235,6 +238,7 @@ function cache_nommer($plugin, $cache) {
 	// Lecture de la configuration des caches du plugin.
 	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel).
 	static $configuration = array();
+	include_spip('cache/cache');
 	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_configuration_lire($plugin))) {
 		$configuration[$plugin] = cache_cache_configurer($plugin);
 	}
@@ -280,6 +284,7 @@ function cache_supprimer($plugin, $cache) {
 	// Lecture de la configuration des caches du plugin.
 	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel, peu probable pour une lecture).
 	static $configuration = array();
+	include_spip('cache/cache');
 	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_configuration_lire($plugin))) {
 		$configuration[$plugin] = cache_cache_configurer($plugin);
 	}
@@ -321,7 +326,7 @@ function cache_supprimer($plugin, $cache) {
  * @param string $nom_cache
  *        Nom et extension du fichier cache.
  *
- * @return void
+ * @return bool
  */
 function cache_vider($plugin, $caches = array()) {
 
