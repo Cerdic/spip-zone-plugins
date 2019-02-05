@@ -38,10 +38,14 @@ function inc_exec_wkhtmltopdf_dist($html_file, $pdf_file, $args = array()) {
 		spip_log($cmd,"wkhtmltopdf");
 
 		$output = array();
-		exec($cmd, $output);
+		$return_var = 0;
+		exec($cmd, $output, $return_var);
 		spip_log(implode("\n",$output),"wkhtmltopdf");
+		if ($return_var) {
+			spip_log("Erreur $return_var","wkhtmltopdf" . _LOG_ERREUR);
+		}
 
-		return;
+		return true;
 	}
 
 	if($methode === 'http'
@@ -76,10 +80,11 @@ function inc_exec_wkhtmltopdf_dist($html_file, $pdf_file, $args = array()) {
 
 		spip_log($wkhtmltopdf_api_url . " $html_file -> $pdf_file : " . var_export($res, true), "wkhtmltopdf");
 
-		return;
+		return true;
 	}
 
 	spip_log("methode $methode inconnue ou non configuree","wkhtmltopdf");
+	return false;
 
 }
 
