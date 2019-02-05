@@ -136,7 +136,7 @@ function cache_cache_configurer($plugin) {
 /**
  * Construit le chemin complet du fichier cache.
  *
- * @api
+ * @uses ncore_chercher_service()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier

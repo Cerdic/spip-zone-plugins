@@ -14,6 +14,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @api
  *
+ * @uses cache_cache_configurer()
+ * @uses cache_cache_nommer()
+ *
  * @param string        $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
@@ -92,6 +95,9 @@ function cache_ecrire($plugin, $cache, $contenu) {
  *
  * @api
  *
+ * @uses cache_cache_configurer()
+ * @uses cache_cache_nommer()
+ *
  * @param string        $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
@@ -157,6 +163,9 @@ function cache_lire($plugin, $cache) {
  *
  * @api
  *
+ * @uses cache_cache_configurer()
+ * @uses cache_cache_nommer()
+ *
  * @param string        $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
@@ -206,6 +215,8 @@ function cache_existe($plugin, $cache) {
  *
  * @api
  *
+ * @uses cache_cache_nommer()
+ *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
@@ -240,6 +251,10 @@ function cache_nommer($plugin, $cache) {
  * Supprime le cache spécifié par son identifiant.
  *
  * @api
+ *
+ * @uses cache_cache_configurer()
+ * @uses cache_cache_nommer()
+ * @uses supprimer_fichier()
  *
  * @param string        $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
