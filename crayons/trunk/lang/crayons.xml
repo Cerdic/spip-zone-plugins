@@ -1,6 +1,6 @@
 <traduction module="crayons" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/crayons/trunk/lang/" reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/crayons?lang_cible=ar" total="52" traduits="14" relire="0" modifs="0" nouveaux="38" pourcent="26.92">
-		<traducteur nom="akomarani" lien="https://trad.spip.net/auteur/akomarani" />
+		<traducteur nom="Aku Marani" lien="https://trad.spip.net/auteur/akomarani" />
 	</langue>
 	<langue code="ast" url="https://trad.spip.net/tradlang_module/crayons?lang_cible=ast" total="52" traduits="39" relire="0" modifs="3" nouveaux="10" pourcent="75.00">
 		<traducteur nom="Xuacu" lien="https://trad.spip.net/auteur/xuacu" />
