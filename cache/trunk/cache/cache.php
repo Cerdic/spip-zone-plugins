@@ -12,43 +12,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-if (!defined('_CACHE_RACINE')) {
-	/**
-	 * Dossier racine dans lesquels tous les caches par défaut seront rangés.
-	 * Les caches sont répartis suivant le plugin appelant dans un sous-dossier `/${plugin}`.
-	 */
-	define('_CACHE_RACINE', _DIR_CACHE);
-}
-
-if (!defined('_CACHE_EXTENSION')) {
-	/**
-	 * Extension par défaut d'un cache.
-	 */
-	define('_CACHE_EXTENSION', '.txt');
-}
-
-if (!defined('_CACHE_SECURISE')) {
-	/**
-	 * Extension par défaut d'un cache.
-	 */
-	define('_CACHE_SECURISE', false);
-}
-
-if (!defined('_CACHE_CONTENU_SERIALISE')) {
-	/**
-	 * Extension par défaut d'un cache.
-	 */
-	define('_CACHE_CONTENU_SERIALISE', true);
-}
-
-if (!defined('_CACHE_NOM_SEPARATEUR')) {
-	/**
-	 * Caractère séparateur des composants du nom d'un fichier cache.
-	 * De fait, ce caractère ne doit pas être utilisé dans les composants.
-	 */
-	define('_CACHE_NOM_SEPARATEUR', '_');
-}
-
 
 // -----------------------------------------------------------------------
 // ---------------------- SERVICES SURCHARGEABLES ------------------------
@@ -75,12 +38,12 @@ function cache_cache_configurer($plugin) {
 
 	// Initialisation du tableau de configuration avec les valeurs par défaut du plugin Cache.
 	$configuration_defaut = array(
-		'racine'        => _CACHE_RACINE,
+		'racine'        => _DIR_CACHE,
 		'nom'           => array('nom'),
-		'extension'     => _CACHE_EXTENSION,
-		'securisation'  => _CACHE_SECURISE,
-		'serialisation' => _CACHE_CONTENU_SERIALISE,
-		'separateur'    => _CACHE_NOM_SEPARATEUR
+		'extension'     => '.txt',
+		'securisation'  => false,
+		'serialisation' => true,
+		'separateur'    => '_'
 	);
 
 	// Le plugin utilisateur doit fournir un service propre pour la configuration de ses caches.
