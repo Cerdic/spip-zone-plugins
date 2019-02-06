@@ -16,7 +16,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @uses cache_configuration_lire()
  * @uses cache_cache_configurer()
- * @uses cache_cache_nommer()
+ * @uses cache_cache_composer()
  *
  * @param string        $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
@@ -46,6 +46,7 @@ function cache_ecrire($plugin, $cache, $contenu) {
 	// Le cache peut-être fourni soit sous la forme d'un chemin complet soit sous la forme d'un
 	// tableau permettant de calculer le chemin complet. On prend en compte ces deux cas.
 	$fichier_cache = '';
+	include_spip('inc/flock');
 	if (is_array($cache)) {
 		// Création du répertoire du cache à créer, si besoin.
 		if (!empty($cache['sous_dossier'])) {
@@ -56,15 +57,15 @@ function cache_ecrire($plugin, $cache, $contenu) {
 		// Détermination du chemin du cache :
 		// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
 		//   de la configuration du nom pour le plugin.
-		$fichier_cache = cache_cache_nommer($plugin, $cache, $configuration[$plugin]);
+		$fichier_cache = cache_cache_composer($plugin, $cache, $configuration[$plugin]);
 	} elseif (is_string($cache)) {
 		// Le chemin complet du fichier cache est fourni. Aucune vérification ne peut être faite
-		// il faut donc que l'appelant ait utilisé l'API cache_existe() pour calculer le fichier au préalable.
+		// il faut donc que l'appelant ait utilisé l'API pour calculer le fichier au préalable.
 		$fichier_cache = $cache;
 	}
 	
 	if ($fichier_cache) {
- 		// Suivant que la configuration demande un sérialisation ou pas, on vérife le format du contenu
+ 		// Suivant que la configuration demande une sérialisation ou pas, on vérife le format du contenu
 		// de façon à toujours écrire une chaine.
 		$contenu_cache = '';
 		if ($configuration[$plugin]['serialisation']) {
@@ -79,7 +80,6 @@ function cache_ecrire($plugin, $cache, $contenu) {
 		}
 
 		// Ecriture du fichier cache sécurisé ou pas suivant la configuration.
-		include_spip('inc/flock');
 		$ecrire = 'ecrire_fichier';
 		if ($configuration[$plugin]['securisation']) {
 			$ecrire = 'ecrire_fichier_securise';
@@ -99,7 +99,7 @@ function cache_ecrire($plugin, $cache, $contenu) {
  *
  * @uses cache_configuration_lire()
  * @uses cache_cache_configurer()
- * @uses cache_cache_nommer()
+ * @uses cache_cache_composer()
  *
  * @param string        $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
@@ -131,10 +131,10 @@ function cache_lire($plugin, $cache) {
 		// Détermination du chemin du cache :
 		// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
 		//   de la configuration du nom pour le plugin.
-		$fichier_cache = cache_cache_nommer($plugin, $cache, $configuration[$plugin]);
+		$fichier_cache = cache_cache_composer($plugin, $cache, $configuration[$plugin]);
 	} elseif (is_string($cache)) {
 		// Le chemin complet du fichier cache est fourni. Aucune vérification ne peut être faite
-		// il faut donc que l'appelant ait utilisé l'API cache_existe() pour calculer le fichier au préalable.
+		// il faut donc que l'appelant ait utilisé l'API pour calculer le fichier au préalable.
 		$fichier_cache = $cache;
 	}
 
@@ -169,7 +169,7 @@ function cache_lire($plugin, $cache) {
  *
  * @uses cache_configuration_lire()
  * @uses cache_cache_configurer()
- * @uses cache_cache_nommer()
+ * @uses cache_cache_composer()
  *
  * @param string        $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
@@ -197,7 +197,7 @@ function cache_existe($plugin, $cache) {
 		// Détermination du chemin du cache :
 		// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
 		//   de la configuration du nom pour le plugin.
-		$fichier_cache = cache_cache_nommer($plugin, $cache, $configuration[$plugin]);
+		$fichier_cache = cache_cache_composer($plugin, $cache, $configuration[$plugin]);
 	} elseif (is_string($cache)) {
 		// Le chemin complet du fichier cache est fourni. Aucune vérification ne peut être faite
 		// il faut donc que l'appelant ait utilisé l'API cache_existe() pour calculer le fichier au préalable.
@@ -217,13 +217,13 @@ function cache_existe($plugin, $cache) {
 
 /**
  * Renvoie le chemin complet du cache sans tester son existence.
- * Cette fonction est une encapsulation du service cache_cache_nommer().
+ * Cette fonction est une encapsulation du service cache_cache_composer().
  *
  * @api
  *
  * @uses cache_configuration_lire()
  * @uses cache_cache_configurer()
- * @uses cache_cache_nommer()
+ * @uses cache_cache_composer()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
@@ -249,7 +249,7 @@ function cache_nommer($plugin, $cache) {
 		// Détermination du chemin du cache :
 		// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
 		//   de la configuration du nom pour le plugin.
-		$fichier_cache = cache_cache_nommer($plugin, $cache, $configuration[$plugin]);
+		$fichier_cache = cache_cache_composer($plugin, $cache, $configuration[$plugin]);
 	}
 
 	return $fichier_cache;
@@ -263,7 +263,7 @@ function cache_nommer($plugin, $cache) {
  *
  * @uses cache_configuration_lire()
  * @uses cache_cache_configurer()
- * @uses cache_cache_nommer()
+ * @uses cache_cache_composer()
  * @uses supprimer_fichier()
  *
  * @param string        $plugin
@@ -296,7 +296,7 @@ function cache_supprimer($plugin, $cache) {
 		// Détermination du chemin du cache :
 		// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
 		//   de la configuration du nom pour le plugin.
-		$fichier_cache = cache_cache_nommer($plugin, $cache, $configuration[$plugin]);
+		$fichier_cache = cache_cache_composer($plugin, $cache, $configuration[$plugin]);
 	} elseif (is_string($cache)) {
 		// Le chemin complet du fichier cache est fourni. Aucune vérification ne peut être faite
 		// il faut donc que l'appelant ait utilisé l'API cache_existe() pour calculer le fichier au préalable.
