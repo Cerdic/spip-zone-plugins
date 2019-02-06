@@ -784,7 +784,7 @@ function cache_repertorier($service = '') {
 
 					// On structure le tableau suivant que l'on demande un service ou tous.
 					if ($service) {
-						$descriptions_cache['ervice'] = $_service;
+						$descriptions_cache['service'] = $_service;
 						$descriptions_cache['titre_service'] = $_titre;
 						$descriptions_cache['caches'][] = $description;
 					} else {
