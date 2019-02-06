@@ -101,18 +101,11 @@ function wikipedia_get_page($search, $spip_language, $section = null, $options =
 			$cache['section'] = $section;
 		}
 
-		include_spip('inc/taxonomie_cacher');
-		$options_cache = array('language' => $spip_language);
-		if ($section !== null) {
-			$options_cache['section'] = $section;
-		}
-
 		if (!empty($options['reload'])
-		or !$file_cache = cache_taxonomie_existe('wikipedia', 'get', $search['tsn'], $options_cache)
-//		or !$file_cache = cache_existe('taxonomie', $cache)
+		or (!$file_cache = cache_existe('taxonomie', $cache))
 		or !filemtime($file_cache)
 		or (time() - filemtime($file_cache) > _TAXONOMIE_WIKIPEDIA_CACHE_TIMEOUT)
-		or (_TAXONOMIE_CACHE_FORCER)) {
+		or (defined('_TAXONOMIE_CACHE_FORCER') ? _TAXONOMIE_CACHE_FORCER : false)) {
 			// Normaliser la recherche: trim et mise en lettres minuscules
 			$title = strtolower(trim($search['name']));
 
@@ -135,13 +128,7 @@ function wikipedia_get_page($search, $spip_language, $section = null, $options =
 				}
 
 				// Mise en cache systématique pour gérer le cas où la page cherchée n'existe pas.
-				cache_taxonomie_ecrire(
-					serialize($information),
-					'wikipedia',
-					'get',
-					$search['tsn'],
-					$options_cache);
-//				cache_ecrire('taxonomie', $cache, $information);
+				cache_ecrire('taxonomie', $cache, $information);
 			}
 		} else {
 			// Lecture et désérialisation du cache

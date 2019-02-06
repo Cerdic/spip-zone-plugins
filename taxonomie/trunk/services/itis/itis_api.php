@@ -354,13 +354,17 @@ function itis_get_record($tsn) {
 
 	if (intval($tsn)) {
 		// Construction des options permettant de nommer le fichier cache.
-		include_spip('inc/taxonomie_cacher');
-		$options_cache = array();
+		include_spip('inc/cache');
+		$cache = array(
+			'service'  => 'itis',
+			'action'   => 'record',
+			'tsn'      => $tsn
+		);
 
-		if (!$file_cache = cache_taxonomie_existe('itis', 'record', $tsn, $options_cache)
+		if ((!$file_cache = cache_existe('taxonomie', $cache))
 		or !filemtime($file_cache)
 		or (time() - filemtime($file_cache) > _TAXONOMIE_ITIS_CACHE_TIMEOUT)
-		or (_TAXONOMIE_CACHE_FORCER)) {
+		or (defined('_TAXONOMIE_CACHE_FORCER') ? _TAXONOMIE_CACHE_FORCER : false)) {
 			// Construire l'URL de l'api sollicitée
 			$url = itis_build_url('json', 'getfull', 'record', strval($tsn));
 
@@ -416,11 +420,10 @@ function itis_get_record($tsn) {
 			$record['zone_geographique'][$GLOBALS['itis_language']['english']] = $zones;
 
 			// Mise en cache systématique pour gérer le cas où la page cherchée n'existe pas.
-			cache_taxonomie_ecrire(serialize($record), 'itis', 'record', $tsn, $options_cache);
+			cache_ecrire('taxonomie', $cache, $record);
 		} else {
 			// Lecture et désérialisation du cache
-			lire_fichier($file_cache, $contenu);
-			$record = unserialize($contenu);
+			$record = cache_lire('taxonomie', $file_cache);
 		}
 	}
 
@@ -456,64 +459,73 @@ function itis_get_record($tsn) {
  */
 function itis_get_information($action, $tsn) {
 
-	include_spip('inc/taxonomie_cacher');
-	$options_cache = array();
+	$information = array();
 
-	if (!$file_cache = cache_taxonomie_existe('itis', $action, $tsn, $options_cache)
-	or !filemtime($file_cache)
-	or (time() - filemtime($file_cache) > _TAXONOMIE_ITIS_CACHE_TIMEOUT)
-	or (_TAXONOMIE_CACHE_FORCER)) {
-		// Construire l'URL de l'api sollicitée
-		$url = itis_build_url('json', 'get', $action, strval($tsn));
+	if (intval($tsn)) {
+		// Construction des options permettant de nommer le fichier cache.
+		include_spip('inc/cache');
+		$cache = array(
+			'service'  => 'itis',
+			'action'   => $action,
+			'tsn'      => $tsn
+		);
 
-		// Acquisition des données spécifiées par l'url
-		$requeter = charger_fonction('taxonomie_requeter', 'inc');
-		$data = $requeter($url);
+		if ((!$file_cache = cache_existe('taxonomie', $cache))
+		or !filemtime($file_cache)
+		or (time() - filemtime($file_cache) > _TAXONOMIE_ITIS_CACHE_TIMEOUT)
+		or (defined('_TAXONOMIE_CACHE_FORCER') ? _TAXONOMIE_CACHE_FORCER : false)) {
+			// Construire l'URL de l'api sollicitée
+			$url = itis_build_url('json', 'get', $action, strval($tsn));
 
-		// On vérifie que le tableau est complet sinon on retourne un tableau vide
-		$api = $GLOBALS['itis_webservice']['get'][$action];
-		include_spip('inc/filtres');
-		$data = $api['list'] ? table_valeur($data, $api['list'], null) : $data;
-		$type = $api['type'];
-		$index = $api['index'];
+			// Acquisition des données spécifiées par l'url
+			$requeter = charger_fonction('taxonomie_requeter', 'inc');
+			$data = $requeter($url);
 
-		if ($type == 'string') {
-			// L'information est limitée à une chaine ou un entier unique.
-			// On renvoie la valeur seule.
-			$information = '';
-			if (!empty($data[$index])) {
-				$information = $data[$index];
-				if (in_array($action, array('rankname', 'kingdomname'))) {
-					$information = strtolower($information);
-				} elseif ($action == 'parent') {
-					$information = intval($information);
+			// On vérifie que le tableau est complet sinon on retourne un tableau vide
+			$api = $GLOBALS['itis_webservice']['get'][$action];
+			include_spip('inc/filtres');
+			$data = $api['list'] ? table_valeur($data, $api['list'], null) : $data;
+			$type = $api['type'];
+			$index = $api['index'];
+
+			// TODO : problème si l'information est une chaine
+			if ($type == 'string') {
+				// L'information est limitée à une chaine ou un entier unique.
+				// On renvoie la valeur seule.
+				$information = '';
+				if (!empty($data[$index])) {
+					$information = $data[$index];
+					if (in_array($action, array('rankname', 'kingdomname'))) {
+						$information = strtolower($information);
+					} elseif ($action == 'parent') {
+						$information = intval($information);
+					}
 				}
-			}
-		} else {
-			// L'information demandée est un tableau.
-			$information = array();
-			if (!empty($data)) {
-				$format = "itis_format_$action";
-				if (function_exists($format)) {
-					$information = $format($tsn, $data, $index);
-				} else {
-					foreach ($data as $_data) {
-						$item = array();
-						foreach ($index as $_key_information => $_key_data) {
-							$item[$_key_information] = $_data[$_key_data];
+			} else {
+				// L'information demandée est un tableau.
+				$information = array();
+				if (!empty($data)) {
+					$format = "itis_format_$action";
+					if (function_exists($format)) {
+						$information = $format($tsn, $data, $index);
+					} else {
+						foreach ($data as $_data) {
+							$item = array();
+							foreach ($index as $_key_information => $_key_data) {
+								$item[$_key_information] = $_data[$_key_data];
+							}
+							$information[] = $item;
 						}
-						$information[] = $item;
 					}
 				}
 			}
-		}
 
-		// Mise en cache systématique pour gérer le cas où la page cherchée n'existe pas.
-		cache_taxonomie_ecrire(serialize($information), 'itis', $action, $tsn, $options_cache);
-	} else {
-		// Lecture et désérialisation du cache
-		lire_fichier($file_cache, $contenu);
-		$information = unserialize($contenu);
+			// Mise en cache systématique pour gérer le cas où la page cherchée n'existe pas.
+			cache_ecrire('taxonomie', $cache, $information);
+		} else {
+			// Lecture et désérialisation du cache
+			$information = cache_lire('taxonomie', $file_cache);
+		}
 	}
 
 	return $information;

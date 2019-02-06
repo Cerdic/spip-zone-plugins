@@ -152,15 +152,19 @@ function iucn_get_assessment($search) {
 
 	if (!empty($search['scientific_name'] and !empty($search['tsn']))) {
 		// Construction des options permettant de nommer le fichier cache.
-		include_spip('inc/taxonomie_cacher');
-		$options_cache = array();
+		include_spip('inc/cache');
+		$cache = array(
+			'service'  => 'iucn',
+			'action'   => 'assessment',
+			'tsn'      => $search['tsn']
+		);
 
-		if (!$file_cache = cache_taxonomie_existe('iucn', 'assessment', $search['tsn'], $options_cache)
+		if ((!$file_cache = cache_existe('taxonomie', $cache))
 		or !filemtime($file_cache)
 		or (time() - filemtime($file_cache) > _TAXONOMIE_IUCN_CACHE_TIMEOUT)
-		or (_TAXONOMIE_CACHE_FORCER)) {
+			or (defined('_TAXONOMIE_CACHE_FORCER') ? _TAXONOMIE_CACHE_FORCER : false)) {
 			// Construire l'URL de l'api sollicitée
-			$url = iucn_build_url('species', $search['scientific_name']);
+			$url = iucn_build_url('species', 'assessment', $search['scientific_name']);
 
 			// Acquisition des données spécifiées par l'url
 			$requeter = charger_fonction('taxonomie_requeter', 'inc');
@@ -184,11 +188,10 @@ function iucn_get_assessment($search) {
 				: '';
 
 			// Mise en cache systématique pour gérer le cas où la page cherchée n'existe pas.
-			cache_taxonomie_ecrire(serialize($assessment), 'iucn', 'assessment', $search['tsn'], $options_cache);
+			cache_ecrire('taxonomie', $cache, $assessment);
 		} else {
 			// Lecture et désérialisation du cache
-			lire_fichier($file_cache, $contenu);
-			$assessment = unserialize($contenu);
+			$assessment = cache_lire('taxonomie', $file_cache);
 		}
 	}
 
@@ -287,7 +290,7 @@ function iucn_build_url($group, $action, $key) {
 
 	// Construire la partie standard de l'URL de l'api sollicitée
 	$url = _TAXONOMIE_IUCN_ENDPOINT_BASE_URL
-		. $action
+		. $group
 		. '/' . rawurlencode($action)
 		. '?token=' . $key;
 

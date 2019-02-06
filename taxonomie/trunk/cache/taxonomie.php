@@ -23,7 +23,7 @@ function taxonomie_cache_configurer($plugin) {
 	// Initialisation du tableau de configuration avec les valeurs par défaut du plugin Cache.
 	$configuration = array(
 		'racine'        => _DIR_VAR,
-		'nom'           => array('service', 'action', 'tsn', 'langue', 'section'),
+		'nom'           => array('tsn', 'service', 'action', 'language', 'section'),
 		'extension'     => '.txt',
 		'securisation'  => false,
 		'serialisation' => true,
