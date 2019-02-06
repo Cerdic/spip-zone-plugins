@@ -18,13 +18,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @uses cache_cache_configurer()
  * @uses cache_cache_composer()
  *
- * @param string        $plugin
+ * @param string       $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param array|string  $cache
+ * @param array|string $cache
  *        Identifiant du cache sous la forme d'une chaine (le chemin du fichier) ou d'un tableau fournissant
  *        les composants canoniques du nom.
- * @param array|string  $contenu
+ * @param array|string $contenu
  *        Contenu sous forme de tableau à sérialiser ou sous la forme d'une chaine.
  *
  * @return bool
@@ -101,10 +101,10 @@ function cache_ecrire($plugin, $cache, $contenu) {
  * @uses cache_cache_configurer()
  * @uses cache_cache_composer()
  *
- * @param string        $plugin
+ * @param string       $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param array|string  $cache
+ * @param array|string $cache
  *        Identifiant du cache sous la forme d'une chaine (le chemin du fichier) ou d'un tableau fournissant
  *        les composants canoniques du nom.
  *
@@ -171,10 +171,10 @@ function cache_lire($plugin, $cache) {
  * @uses cache_cache_configurer()
  * @uses cache_cache_composer()
  *
- * @param string        $plugin
+ * @param string       $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param array|string  $cache
+ * @param array|string $cache
  *        Identifiant du cache sous la forme d'une chaine (le chemin du fichier) ou d'un tableau fournissant
  *        les composants canoniques du nom.
  *
@@ -266,10 +266,10 @@ function cache_nommer($plugin, $cache) {
  * @uses cache_cache_composer()
  * @uses supprimer_fichier()
  *
- * @param string        $plugin
+ * @param string       $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param array|string  $cache
+ * @param array|string $cache
  *        Identifiant du cache sous la forme d'une chaine (le chemin du fichier) ou d'un tableau fournissant
  *        les composants canoniques du nom.
  *
@@ -323,12 +323,12 @@ function cache_supprimer($plugin, $cache) {
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param string $nom_cache
- *        Nom et extension du fichier cache.
+ * @param array  $caches
+ *        Liste des fichiers caches (chemin complet) à supprimer.
  *
  * @return bool
  */
-function cache_vider($plugin, $caches = array()) {
+function cache_vider($plugin, $caches) {
 
 	// Initialisation du retour
 	$cache_vide = false;

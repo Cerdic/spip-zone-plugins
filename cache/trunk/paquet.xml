@@ -7,7 +7,7 @@
 	logo="cache_logo-64.png"
 >
 	<nom>Cache Factory</nom>
-	<!-- La fabrique de caches pour plugins -->
+	<!-- La fabrique de fichiers cache pour plugins -->
 
 	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
 
