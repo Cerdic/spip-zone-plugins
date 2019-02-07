@@ -1,7 +1,7 @@
 <paquet
 	prefix="taxonomie"
 	categorie="divers"
-	version="0.4.1"
+	version="0.4.2"
 	etat="dev"
 	compatibilite="[3.0.17;3.2.*]"
 	logo="taxonomie_logo-64.png"
@@ -22,7 +22,7 @@
 	<pipeline nom="ieconfig" inclure="taxonomie_ieconfig.php" />
 
 	<necessite nom="cache" compatibilite="[0.1.0;]" />
-	<necessite nom="saisies" compatibilite="[1.42.11;]" />
+	<necessite nom="saisies" compatibilite="[2.28.0;[" />
 	<utilise nom="convertisseur" compatibilite="[0.5.0;]" />
 
 	<genie nom="actualiser_itis" periode="86400" />
