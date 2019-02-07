@@ -111,9 +111,9 @@ function cache_cache_composer($plugin, $cache, $configuration) {
 
 	// Le plugin utilisateur peut fournir un service propre pour construire le chemin complet du fichier cache.
 	// Néanmoins, étant donné la généricité du mécanisme offert par le plugin Cache cela devrait être rare.
-	if ($nommer = cache_chercher_service($plugin, 'cache_nommer')) {
+	if ($composer = cache_chercher_service($plugin, 'cache_composer')) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
-		$fichier_cache = $nommer($plugin, $cache, $configuration);
+		$fichier_cache = $composer($plugin, $cache, $configuration);
 	} else {
 		// On utilise le mécanisme de nommage standard du plugin Cache.
 		// Initialisation du chemin complet du fichier cache
@@ -151,6 +151,55 @@ function cache_cache_composer($plugin, $cache, $configuration) {
 	}
 
 	return $fichier_cache;
+}
+
+
+/**
+ * Décompose le chemin complet du fichier cache en composants déterminé par configuration.
+ *
+ * @uses cache_chercher_service()
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array  $fichier_cache
+ *        Le chemin complet du fichier à phraser.
+ * @param array  $configuration
+ *        Configuration complète des caches du plugin utlisateur lue à partir de la meta de stockage.
+ *
+ * @return array
+ *         Tableau des composants constitutifs du cache
+ */
+function cache_cache_decomposer($plugin, $fichier_cache, $configuration) {
+
+	// Le plugin utilisateur peut fournir un service propre pour construire le chemin complet du fichier cache.
+	// Néanmoins, étant donné la généricité du mécanisme offert par le plugin Cache cela devrait être rare.
+	if ($decomposer = cache_chercher_service($plugin, 'cache_decomposer')) {
+		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
+		$cache = $decomposer($plugin, $cache, $configuration);
+	} else {
+		// On utilise le mécanisme de nommage standard du plugin Cache. De fait, on considère qu'aucun composant
+		// n'est facultatif ou du moins qu'un seul composant est facultatif et positionné en dernier.
+
+		// Initialisation du tableau cache
+		$cache = array();
+
+		// On supprime le dossier de base pour n'avoir que la partie spécifique du cache.
+		$fichier_cache = str_replace($configuration['dossier_base'], '', $fichier_cache);
+
+		// Détermination du nom du cache sans extension et décomposition suivant la configuration du nom.		
+		$nom_cache = basename($fichier_cache, $configuration['extension']);
+		foreach (explode($configuration['separateur'], $nom_cache) as $_cle => $_composant) {
+			$cache[$configuration['nom'][$_cle]] = $_composant;
+		}
+
+		// Identification d'un sous-dossier si il existe.
+		if ($sous_dossier = dirname($fichier_cache)) {
+			$cache['sous_dossier'] = $sous_dossier;
+		}
+	}
+
+	return $cache;
 }
 
 
