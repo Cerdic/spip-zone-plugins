@@ -1,6 +1,6 @@
 ﻿<B_tables>
 <BOUCLE_tables(DATA) {source table, #ENV{tables}} {si #SESSION{webmestre}|=={oui}}>
-[(#SET{spip_table,[(#VALEUR|table_objet_sql)]})]
+[(#SET{spip_table,[(#VALEUR|table_objet_sql)]})] [(#SET{tables_infos,[(#VAL|lister_tables_principales|table_valeur{#GET{spip_table}})]})]
 #SET{prefixe_lang,#LISTE{label,documentation,explication}}
 [(#ENV{label_perso}|=={''}|non)
     #SET{prefixe_lang,#GET{prefixe_lang}|array_merge{#ENV{label_perso}|explode{','}}}
@@ -8,8 +8,8 @@
 #SET{prefixe_lang,#GET{prefixe_lang}|array_unique|array_filter}
 	<B_info_table>
 <textarea rows="20" cols="40" class="doc_tech_lang_regroupe">
-<BOUCLE_info_table(DATA) {source table, [(#REM|lister_tables_principales|table_valeur{#GET{spip_table}})]}{cle==field}>// ----------
-// [Objet : (#_tables:GET{spip_table})] 
+<BOUCLE_info_table(DATA) {source table, #GET{tables_infos}} {cle='field'}>// ----------
+// [Objet : (#_tables:GET{spip_table})]
 // <:doc_tech:chaines_a_placer_dans:> [(#_tables:VALEUR|table_objet)]/lang/[(#_tables:VALEUR|concat{'_',#LANG,'.php'})]
 // La chaine de langue 'explication' peut être utile sur les # SAISIES des pages d'édition de l'objet.
 // Liste des prefixes : [(#GET{prefixe_lang}|join{', '})]

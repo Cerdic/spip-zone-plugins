@@ -7,10 +7,10 @@
 <B_tables>
 [(#BOITE_OUVRIR{<:doc_tech:sommaire:>,'simple','titrem'})]
 <BOUCLE_tables(DATA) {source table, #GET{tables}} {si #SESSION{webmestre}|=={oui}}>
-[(#SET{spip_table,[(#VALEUR|table_objet_sql)]})]
+		[(#SET{spip_table,[(#VALEUR|table_objet_sql)]})] [(#SET{tables_infos,[(#VAL|lister_tables_principales|table_valeur{#GET{spip_table}})]})]
 	<B_info_table>
 	<ul class="menu-liste menu-items">
-		<BOUCLE_info_table(DATA) {source table, [(#REM|lister_tables_principales|table_valeur{#GET{spip_table}})]}{cle==field}>
+		<BOUCLE_info_table(DATA) {source table, #GET{tables_infos}} {cle='field'}>
 		<li class="menu-entree item"><a href="[#(#_tables:GET{spip_table}|attribut_html)]">#_tables:GET{spip_table}</a>
 			<B_label>
 			<ul class="menu-liste menu-items">
