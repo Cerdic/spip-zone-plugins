@@ -110,16 +110,10 @@ function lim_formulaire_verifier($flux) {
 			// récupérer l'id_rubrique actuel de l'objet 
 			// note : dans l'idéal, il faudrait utiliser le plugin déclarer parent ici
 			$where = id_table_objet($objet).'='.$id_objet;
-			switch ($objet) {
-				case 'rubrique':
-					$id_rub_en_cours = sql_getfetsel('id_parent', $nom_table, $where);
-					break;
-				case 'document':
-					// rien à faire ici
-					break;
-				default:
-					$id_rub_en_cours = sql_getfetsel('id_rubrique', $nom_table, $where);
-					break;
+			$trouver_table = charger_fonction('trouver_table', 'base');
+			$desc = $trouver_table($nom_table);
+			if (isset($desc['field']['id_rubrique'])) {
+				$id_rub_en_cours = sql_getfetsel('id_rubrique', $nom_table, $where);
 			}
 
 			// si c'est un déplacement vers une autre rubrique, on vérifie
