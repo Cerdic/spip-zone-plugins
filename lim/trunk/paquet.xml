@@ -1,7 +1,7 @@
 <paquet
 	prefix="lim"
 	categorie="maintenance"
-	version="2.0.2"
+	version="2.0.3"
 	etat="stable"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/lim-64.png"
