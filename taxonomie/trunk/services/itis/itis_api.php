@@ -505,17 +505,19 @@ function itis_get_information($action, $tsn) {
 				// L'information demandée est un tableau.
 				$information = array();
 				if (!empty($data)) {
+					// On vérifie si une fonction de post-formatage existe
 					$format = "itis_format_$action";
-					if (function_exists($format)) {
-						$information = $format($tsn, $data, $index);
-					} else {
-						foreach ($data as $_data) {
-							$item = array();
-							foreach ($index as $_key_information => $_key_data) {
-								$item[$_key_information] = $_data[$_key_data];
-							}
-							$information[] = $item;
+					if (!function_exists($format)) {
+						$format = '';
+					}
+					foreach ($data as $_data) {
+						$item = array();
+						// On construit le tableau de l'item brut correspondant à la configuration de l'action
+						foreach ($index as $_key_information => $_key_data) {
+							$item[$_key_information] = $_data[$_key_data];
 						}
+						// Si un formatage existe on formate l'item avant de l'ajouter au tableau de sortie.
+						$information[] = $format ? $format($item) : $item;
 					}
 				}
 			}
@@ -906,6 +908,32 @@ function itis_review_sha() {
 	}
 
 	return $shas;
+}
+
+
+// ----------------------------------------------------------------
+// ---------- Fonctions internes de formatage des sorties ---------
+// ----------------------------------------------------------------
+
+/**
+ * Formatage d'un item de la liste des ascendants d'un taxon.
+ *
+ * @internal
+ *
+ * @param array $item
+ *        Tableau extrait du service get et représentant un taxon ascendant. Les valeurs sont insérées btutes.
+ *
+ * @return array
+ *        Tableau dont les valeurs ont été formatées (rang taxonomique en minuscules).
+ */
+function itis_format_hierarchyfull($item) {
+
+	// Le formatage d'un item de la hiérarchie consiste uniquement à passer en minuscule l'identifiant du rang.
+	if (isset($item['rang_taxon'])) {
+		$item['rang_taxon'] = strtolower($item['rang_taxon']);
+	}
+
+	return $item;
 }
 
 

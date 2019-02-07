@@ -111,144 +111,150 @@ function formulaires_creer_espece_verifier_1() {
 	// Initialisation des erreurs de vérification.
 	$erreurs = array();
 
-	// Si on a déjà choisi une langue, on peut accéder à Wikipedia avec le nom scientifique et retourner
-	// les pages trouvées (étape 2).
-	if ($recherche = ltrim(_request('recherche'))) {
-		// On récupère le type de recherche et la correspondance.
-		$type_recherche = _request('type_recherche');
-		$correspondance = _request('correspondance');
-		$recherche_exacte = ($correspondance == 'exact');
-		$recherche_commence_par = ($correspondance == 'debut');
+	// Il est inutile de vérifier à nouveau les valeurs de l'étape 1 si on est dans une étape ultérieure
+	// car on ne modifie rien. On gagne du temps en passant outre.
+	if (_request('_etape') == 1) {
+		// Si on a déjà choisi une langue, on peut accéder à Wikipedia avec le nom scientifique et retourner
+		// les pages trouvées (étape 2).
+		if ($recherche = ltrim(_request('recherche'))) {
+			// On récupère le type de recherche et la correspondance.
+			$type_recherche = _request('type_recherche');
+			$correspondance = _request('correspondance');
+			$recherche_exacte = ($correspondance == 'exact');
+			$recherche_commence_par = ($correspondance == 'debut');
 
-		// Si la recherche est de type nom commun on ne peut rien vérifier sur le texte.
-		// Si la recherche est de type nom scientifique, on vérifie que le texte de recherche :
-		// - contient au moins deux mots
-		// - que le deuxième mot n'est pas un 'x' (désigne uniquement un taxon de rang supérieur hybride)
-		// - et que le deuxième mot n'est pas entre parenthèses (sous-genre).
-		$recherche_conforme = true;
-		if ($type_recherche == 'scientificname') {
-			$nombre_mots = preg_match_all('#\w+#', $recherche, $mots);
-			if (($nombre_mots < 2) and ($recherche_exacte)) {
-				$recherche_conforme = false;
-			} elseif ($nombre_mots == 2) {
-				if ((strtolower($mots[0][1]) == 'x')
-				or ((substr($mots[0][1], 0, 1) == '(') and (substr($mots[0][1], -1) == ')'))) {
+			// Si la recherche est de type nom commun on ne peut rien vérifier sur le texte.
+			// Si la recherche est de type nom scientifique, on vérifie que le texte de recherche :
+			// - contient au moins deux mots
+			// - que le deuxième mot n'est pas un 'x' (désigne uniquement un taxon de rang supérieur hybride)
+			// - et que le deuxième mot n'est pas entre parenthèses (sous-genre).
+			$recherche_conforme = true;
+			if ($type_recherche == 'scientificname') {
+				$nombre_mots = preg_match_all('#\w+#', $recherche, $mots);
+				if (($nombre_mots < 2) and ($recherche_exacte)) {
 					$recherche_conforme = false;
-				}
-			}
-		}
-
-		if ($recherche_conforme) {
-			// On recherche le ou les taxons correspondant au texte saisi.
-			// -- récupération du règne
-			$regne =  _request('regne');
-			// -- suppression des espaces en trop dans la chaîne de recherche pour permettre la comparaison
-			//    avec le combinedName ou le commonName d'ITIS.
-			$recherche = preg_replace('#\s{2,}#', ' ', $recherche);
-
-			// Appel de l'API de recherche d'ITIS en fonction du type et de la correspondance de recherche
-			include_spip('services/itis/itis_api');
-			$action = $type_recherche;
-			if (($type_recherche == 'commonname') and ($correspondance == 'debut')) {
-				$action = 'commonnamebegin';
-			} elseif (($type_recherche == 'commonname') and ($correspondance == 'fin')) {
-				$action = 'commonnameend';
-			}
-			$taxons = itis_search_tsn($action, $recherche, $recherche_exacte);
-			if ($taxons) {
-				if ($recherche_exacte) {
-					// Si la correspondance est exacte, les informations de chaque taxon sont suffisantes pour limiter
-					// d'emblée le nombre de taxon au seul qui correspond.
-					$taxon_exact = array();
-					foreach ($taxons as $_taxon) {
-						if ((($type_recherche == 'scientificname') and (strcasecmp($_taxon['nom_scientifique'], $recherche) === 0))
-						or (($type_recherche == 'commonname') and (strcasecmp($_taxon['nom_commun'], $recherche) === 0))) {
-							$taxon_exact = $_taxon;
-							break;
-						}
-					}
-					$taxons = $taxon_exact ? array($taxon_exact) : array();
-				} elseif ($recherche_commence_par and ($type_recherche == 'scientificname')) {
-					// Si la correspondance est 'commence par' et que l'on recherche par nom scientifique, les informations
-					// de chaque taxon sont suffisantes pour limiter d'emblée le nombre de taxons à ceux qui commencent
-					// par la recherche.
-					foreach ($taxons as $_cle => $_taxon) {
-						if (substr_compare($_taxon['nom_scientifique'], $recherche, 0, strlen($recherche), true) !== 0) {
-							unset($taxons[$_cle]);
-						}
+				} elseif ($nombre_mots == 2) {
+					if ((strtolower($mots[0][1]) == 'x')
+					or ((substr($mots[0][1], 0, 1) == '(') and (substr($mots[0][1], -1) == ')'))) {
+						$recherche_conforme = false;
 					}
 				}
+			}
 
-				// Etant donné qu'on a filtré le tableau issu de l'appel au service ITIS on vérifie à nouveau que
-				// ce tableau n'est pas vide.
+			if ($recherche_conforme) {
+				// On recherche le ou les taxons correspondant au texte saisi.
+				// -- récupération du règne
+				$regne =  _request('regne');
+				// -- suppression des espaces en trop dans la chaîne de recherche pour permettre la comparaison
+				//    avec le combinedName ou le commonName d'ITIS.
+				$recherche = preg_replace('#\s{2,}#', ' ', $recherche);
+
+				// Appel de l'API de recherche d'ITIS en fonction du type et de la correspondance de recherche
+				include_spip('services/itis/itis_api');
+				$action = $type_recherche;
+				if (($type_recherche == 'commonname') and ($correspondance == 'debut')) {
+					$action = 'commonnamebegin';
+				} elseif (($type_recherche == 'commonname') and ($correspondance == 'fin')) {
+					$action = 'commonnameend';
+				}
+				$taxons = itis_search_tsn($action, $recherche, $recherche_exacte);
 				if ($taxons) {
-					// Si le nombre de taxons récupérés est trop important on renvoie une erreur.
-					// TODO : est-on sur qu'il y a forcément un taxon ?
-					if (count($taxons) <= _TAXONOMIE_RECHERCHE_MAX_ESPECES) {
-						// Construire le tableau des taxons trouvés en supprimant:
-						// - les taxons qui n'appartiennent pas au règne concerné
-						// - ou qui n'ont pas un rang compatible (uniquement pour la recherche par nom commun)
-						// - ou qui ne sont pas des appellations valides
-						// - ou qui sont déjà créés.
-						$valeurs['_taxons'] = array();
-						$valeurs['_taxon_defaut'] = 0;
-						include_spip('inc/taxonomie');
-						foreach ($taxons as $_taxon) {
-							if (!sql_countsel('spip_taxons', array('tsn=' . intval($_taxon['tsn'])))) {
-								$taxon = itis_get_record($_taxon['tsn']);
-								if (($taxon['usage_valide'])
-								and (strcasecmp($taxon['regne'], $regne) === 0)
-								and (rang_est_espece($taxon['rang_taxon']))) {
-									if ($type_recherche == 'scientificname') {
-										$valeurs['_taxons'][$taxon['tsn']] = '<span class="nom_scientifique_inline">'
-											. $_taxon['nom_scientifique']
-											. '</span>'
-											. ' - '
-											. _T('taxonomie:rang_' . $taxon['rang_taxon']);
-										if (strcasecmp($recherche, $_taxon['nom_scientifique']) === 0) {
-											$valeurs['_taxon_defaut'] = $taxon['tsn'];
-										}
-									} else {
-										// Vérifier que ce rang est compatible avec une espèce ou un rang inférieur.
-										$valeurs['_taxons'][$taxon['tsn']] = $_taxon['nom_commun']
-											. " [{$_taxon['langage']}]"
-											. ' - '
-											. _T('taxonomie:rang_' . $taxon['rang_taxon']);
-										if (strcasecmp($recherche, $_taxon['nom_commun']) === 0) {
-											$valeurs['_taxon_defaut'] = $taxon['tsn'];
+					if ($recherche_exacte) {
+						// Si la correspondance est exacte, les informations de chaque taxon sont suffisantes pour limiter
+						// d'emblée le nombre de taxon au seul qui correspond.
+						// Néanmoins si un seul taxon est renvoyé rien est à faire car on a déjà le bon taxon.
+						if (count($taxons) > 1) {
+							$taxon_exact = array();
+							foreach ($taxons as $_taxon) {
+								if ((($type_recherche == 'scientificname') and (strcasecmp($_taxon['nom_scientifique'], $recherche) === 0))
+								or (($type_recherche == 'commonname') and (strcasecmp($_taxon['nom_commun'], $recherche) === 0))) {
+									$taxon_exact = $_taxon;
+									break;
+								}
+							}
+							$taxons = $taxon_exact ? array($taxon_exact) : array();
+						}
+					} elseif ($recherche_commence_par and ($type_recherche == 'scientificname')) {
+						// Si la correspondance est 'commence par' et que l'on recherche par nom scientifique, les informations
+						// de chaque taxon sont suffisantes pour limiter d'emblée le nombre de taxons à ceux qui commencent
+						// par la recherche.
+						foreach ($taxons as $_cle => $_taxon) {
+							if (substr_compare($_taxon['nom_scientifique'], $recherche, 0, strlen($recherche), true) !== 0) {
+								unset($taxons[$_cle]);
+							}
+						}
+					}
+
+					// Etant donné qu'on a filtré le tableau issu de l'appel au service ITIS on vérifie à nouveau que
+					// ce tableau n'est pas vide.
+					if ($taxons) {
+						// Si le nombre de taxons récupérés est trop important on renvoie une erreur.
+						if (count($taxons) <= _TAXONOMIE_RECHERCHE_MAX_ESPECES) {
+							// Construire le tableau des taxons trouvés en supprimant:
+							// - les taxons qui n'appartiennent pas au règne concerné
+							// - ou qui n'ont pas un rang compatible (uniquement pour la recherche par nom commun)
+							// - ou qui ne sont pas des appellations valides
+							// - ou qui sont déjà créés.
+							$valeurs['_taxons'] = array();
+							$valeurs['_taxon_defaut'] = 0;
+							include_spip('inc/taxonomie');
+							foreach ($taxons as $_taxon) {
+								if (!sql_countsel('spip_taxons', array('tsn=' . intval($_taxon['tsn'])))) {
+									$taxon = itis_get_record($_taxon['tsn']);
+									if (($taxon['usage_valide'])
+									and (strcasecmp($taxon['regne'], $regne) === 0)
+									and (rang_est_espece($taxon['rang_taxon']))) {
+										if ($type_recherche == 'scientificname') {
+											$valeurs['_taxons'][$taxon['tsn']] = '<span class="nom_scientifique_inline">'
+												. $_taxon['nom_scientifique']
+												. '</span>'
+												. ' - '
+												. _T('taxonomie:rang_' . $taxon['rang_taxon']);
+											if (strcasecmp($recherche, $_taxon['nom_scientifique']) === 0) {
+												$valeurs['_taxon_defaut'] = $taxon['tsn'];
+											}
+										} else {
+											// Vérifier que ce rang est compatible avec une espèce ou un rang inférieur.
+											$valeurs['_taxons'][$taxon['tsn']] = $_taxon['nom_commun']
+												. " [{$_taxon['langage']}]"
+												. ' - '
+												. _T('taxonomie:rang_' . $taxon['rang_taxon']);
+											if (strcasecmp($recherche, $_taxon['nom_commun']) === 0) {
+												$valeurs['_taxon_defaut'] = $taxon['tsn'];
+											}
 										}
 									}
 								}
 							}
-						}
 
-						if ($valeurs['_taxons']) {
-							// Si aucun taxon par défaut, on prend le premier taxon de la liste.
-							if (!$valeurs['_taxon_defaut']) {
-								reset($valeurs['_taxons']);
-								$valeurs['_taxon_defaut'] = key($valeurs['_taxons']);
-							}
-							// On fournit ces informations au formulaire pour l'étape 2.
-							foreach ($valeurs as $_champ => $_valeur) {
-								set_request($_champ, $_valeur);
+							if ($valeurs['_taxons']) {
+								// Si aucun taxon par défaut, on prend le premier taxon de la liste.
+								if (!$valeurs['_taxon_defaut']) {
+									reset($valeurs['_taxons']);
+									$valeurs['_taxon_defaut'] = key($valeurs['_taxons']);
+								}
+								// On fournit ces informations au formulaire pour l'étape 2.
+								foreach ($valeurs as $_champ => $_valeur) {
+									set_request($_champ, $_valeur);
+								}
+							} else {
+								$erreurs['message_erreur'] = _T('taxonomie:erreur_recherche_aucun_taxon');
 							}
 						} else {
-							$erreurs['message_erreur'] = _T('taxonomie:erreur_recherche_aucun_taxon');
+							$erreurs['message_erreur'] = _T('taxonomie:erreur_recherche_max_reponses', array('nb' => count($taxons)));
 						}
 					} else {
-						$erreurs['message_erreur'] = _T('taxonomie:erreur_recherche_max_reponses', array('nb' => count($taxons)));
+						$erreurs['message_erreur'] = _T('taxonomie:erreur_recherche_aucun_taxon');
 					}
 				} else {
 					$erreurs['message_erreur'] = _T('taxonomie:erreur_recherche_aucun_taxon');
 				}
 			} else {
-				$erreurs['message_erreur'] = _T('taxonomie:erreur_recherche_aucun_taxon');
+				$erreurs['recherche'] = _T('taxonomie:erreur_recherche_nom_scientifique');
 			}
 		} else {
-			$erreurs['recherche'] = _T('taxonomie:erreur_recherche_nom_scientifique');
+			$erreurs['recherche'] = _T('info_obligatoire');
 		}
-	} else {
-		$erreurs['recherche'] = _T('info_obligatoire');
 	}
 
 	return $erreurs;
@@ -275,6 +281,8 @@ function formulaires_creer_espece_verifier_2() {
 	// Initialisation des erreurs de vérification.
 	$erreurs = array();
 
+	// Il est cette fois indispensable de vérifier à nouveau les valeurs de l'étape 2 si on est dans une l'étape 3
+	// car on a besoin de l'espèce et de ses ascendants jusqu'au genre compris.
 	if ($tsn = intval(_request('tsn'))) {
 		// On récupère les informations de base du taxon afin de les présenter à l'utilisateur pour validation
 		// finale. Ces informations existent forcément car elles ont été demandées à l'étape précédentes et son
@@ -297,8 +305,9 @@ function formulaires_creer_espece_verifier_2() {
 		set_request('_espece', $espece);
 
 		// On récupère la hiérarchie complète du taxon à partir de la base ITIS.
-		$hierarchie = itis_get_information('hierarchyfull', $espece['tsn']);
-		$ascendants = $hierarchie['ascendants'];
+		// Comme la hiérarchie intègre aussi le taxon concerné on le supprime (dernière position).
+		$ascendants = itis_get_information('hierarchyfull', $espece['tsn']);
+		unset($ascendants[count($ascendants) - 1]);
 
 		// On classe la liste des ascendants du plus proche au plus éloigné.
 		include_spip('inc/taxonomie');
@@ -354,7 +363,8 @@ function formulaires_creer_espece_traiter() {
 		$champs['spip_taxons'] = $description_table['field'];
 
 		// On range la liste des taxons de plus haut rang (genre) à celui de plus petit rang et on ajoute le
-		// taxon espèce en fin de liste.
+		// taxon espèce en fin de liste. La variable _parents est toujours un tableau d'au moins une unité et
+		// l'espèce existe toujours.
 		$taxons = _request('_parents');
 		$taxons[] = _request('_espece');
 
