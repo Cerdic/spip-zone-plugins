@@ -1,7 +1,7 @@
 <paquet
 	prefix="pdf_version"
 	categorie="edition"
-	version="1.1.0"
+	version="1.1.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="pdf_version-32.png"

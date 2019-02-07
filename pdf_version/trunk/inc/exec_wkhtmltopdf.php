@@ -71,8 +71,14 @@ function inc_exec_wkhtmltopdf_dist($html_file, $pdf_file, $args = array()) {
 			$res = recuperer_url($wkhtmltopdf_api_url, array(
 				'methode' => 'POST',
 				'datas' => $args,
-				'file' => $pdf_file,
+				'file' => "{$pdf_file}.tmp",
 			));
+			if (!$res or $res['status']>300) {
+				@unlink("{$pdf_file}.tmp");
+			}
+			else {
+				@rename("{$pdf_file}.tmp", $pdf_file);
+			}
 		}
 		else {
 			$res = recuperer_page($wkhtmltopdf_api_url, $pdf_file, false, null, $args);
