@@ -118,8 +118,9 @@
 		[(#GET{responsive}|=={oui}|oui)<div class="capsule-video"><div class="mini_capsule-video">]
 			#SET{url_youtube,//www.youtube-nocookie.com/embed}
 			[(#GET{mode_confidentialite}|=={non}|oui)#SET{url_youtube,//www.youtube.com/embed}]
+			[(#SET{url_separator,[(#GET{fichier}|match{\?}|?{&amp;,?})]})]
 			[(#SET{url_complete,
-				#GET{url_youtube}/#GET{fichier}?hd=1&amp;wmode=#GET{wmode}&amp;autoplay=#ENV{autoplay,0}[&amp;rel=0(#GET{afficher_suggestions}|=={non}|oui)][&amp;controls=0(#GET{afficher_commandes}|=={non}|oui)][&amp;enablejsapi=1(#GET{enablejsapi}|=={oui}|oui)][&amp;showinfo=0(#GET{afficher_titres_et_actions}|=={non}|oui)]})]
+				#GET{url_youtube}/#GET{fichier}#GET{url_separator}hd=1&amp;wmode=#GET{wmode}&amp;autoplay=#ENV{autoplay,0}[&amp;rel=0(#GET{afficher_suggestions}|=={non}|oui)][&amp;controls=0(#GET{afficher_commandes}|=={non}|oui)][&amp;enablejsapi=1(#GET{enablejsapi}|=={oui}|oui)][&amp;showinfo=0(#GET{afficher_titres_et_actions}|=={non}|oui)]})]
 			<iframe[ title="(#GET{titre_video}|couper{80})"] width="#GET{largeur}" height="#GET{hauteur}" src="[(#GET{url_complete}|replace{' ',''})]" allowfullscreen class="youtube-player"></iframe>
 		[(#GET{responsive}|=={oui}|oui)</div></div> <!-- .capsule-video .mini_capsule-video -->]
 	]
