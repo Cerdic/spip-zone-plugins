@@ -176,7 +176,7 @@ function cache_cache_decomposer($plugin, $fichier_cache, $configuration) {
 	// Néanmoins, étant donné la généricité du mécanisme offert par le plugin Cache cela devrait être rare.
 	if ($decomposer = cache_chercher_service($plugin, 'cache_decomposer')) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
-		$cache = $decomposer($plugin, $cache, $configuration);
+		$cache = $decomposer($plugin, $fichier_cache, $configuration);
 	} else {
 		// On utilise le mécanisme de nommage standard du plugin Cache. De fait, on considère qu'aucun composant
 		// n'est facultatif ou du moins qu'un seul composant est facultatif et positionné en dernier.
