@@ -1,7 +1,7 @@
 <paquet
 	prefix="timecircles"
 	categorie="squelette"
-	version="1.5.3.23"
+	version="1.5.3.24"
 	etat="dev"
 	compatibilite="[3.1.0;3.3.*]"
 	logo="images/timecircles-32.png"
