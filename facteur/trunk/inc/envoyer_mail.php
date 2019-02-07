@@ -287,8 +287,11 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	$head = $facteur->CreateHeader();
 
 	// Et c'est parti on envoie enfin
-	spip_log("mail via facteur\n$head"."Destinataire:".print_r($destinataire,true),'mail');
-	spip_log("mail\n$head"."Destinataire:".print_r($destinataire,true),'facteur');
+	$backtrace = facteur_backtrace();
+	$trace = trim($head)
+		. ($destinataire ? "\nDestinataire: " . implode(', ', $destinataire): '');
+	spip_log("mail via facteur\n$trace",'mail');
+	spip_log("mail\n$backtrace\n$trace",'facteur');
 	$retour = $facteur->Send();
 
 	if (!$retour){
@@ -296,4 +299,34 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	}
 
 	return $retour ;
+}
+
+/**
+ * Retourne la pile de fonctions utilisée pour envoyer un mail
+ *
+ * @note
+ *     Ignore les fonctions `include_once`, `include_spip`, `find_in_path`
+ * @return array|string
+ *     pile d'appel
+ **/
+function facteur_backtrace($limit=10) {
+	$trace = debug_backtrace();
+	$caller = array_shift($trace);
+	while (count($trace) and (empty($trace[0]['file']) or $trace[0]['file'] === $caller['file'] or $trace[0]['file'] === __FILE__)) {
+		array_shift($trace);
+	}
+
+	$message = count($trace) ? $trace[0]['file'] . " L" . $trace[0]['line'] : "";
+	$f = array();
+	while (count($trace) and $t = array_shift($trace) and count($f)<$limit) {
+		if (in_array($t['function'], array('include_once', 'include_spip', 'find_in_path'))) {
+			break;
+		}
+		$f[] = $t['function'];
+	}
+	if (count($f)) {
+		$message .= " [" . implode("(),", $f) . "()]";
+	}
+
+	return $message;
 }
