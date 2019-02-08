@@ -1,11 +1,11 @@
 <paquet
 	prefix="fbantispam"
 	categorie="performance"
-	version="1.3.1"
+	version="1.3.2"
 	etat="test"
 	compatibilite="[2.1.0;3.2.*]"
 	logo="images/beos-stop-icone-8929-32.png"
-	documentation="http://contrib.spip.net/CAPTCHA-pour-forums"
+	documentation="https://contrib.spip.net/FB-Antispam-CAPTCHA-et-reCAPTCHA-pour-forums"
 >
 
 	<nom>FB Antispam</nom>

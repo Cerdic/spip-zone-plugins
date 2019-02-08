@@ -6,13 +6,13 @@
 	<auteur>Fabio Bertagnin - FBServices www.fbservices.fr</auteur>
 	<icon>images/beos-stop-icone-8929-32.png</icon>
 	<licence>(c) 2013-2017 GPL</licence>
-	<version>1.3.0</version>
+	<version>1.3.2</version>
 	<etat>test</etat>
 	<description>
 	Le plugin modifie le formulaire du forum, en ajoutant un champ pour saisir un captcha.
 	La saisie n'est pas prise en compte si le captcha n'est pas correct.
 	</description>
-	<lien>http://contrib.spip.net/CAPTCHA-pour-forums</lien>
+	<lien>https://contrib.spip.net/FB-Antispam-CAPTCHA-et-reCAPTCHA-pour-forums</lien>
 	<prefix>fbantispam</prefix>
 	<pipeline>
 		<nom>pre_edition</nom>
@@ -40,5 +40,5 @@
 	</pipeline>
         
 	<categorie>performance</categorie>
-	<necessite id="SPIP" version="[2.1.0;3.2.*]" />
+	<necessite id="SPIP" version="[2.1.0;3.2.99]" />
 </plugin>
