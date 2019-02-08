@@ -3,7 +3,6 @@
  * Ce fichier contient l'ensemble des constantes et fonctions implémentant le service de taxonomie ITIS.
  *
  * @package SPIP\TAXONOMIE\SERVICES\ITIS
- * @todo    phpdoc : exemples
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -326,10 +325,12 @@ function itis_search_tsn($action, $search, $strict = true) {
  * Renvoie l'ensemble des informations sur un taxon désigné par son identifiant unique TSN.
  *
  * @api
- * @uses cache_taxonomie_existe()
+ *
+ * @uses cache_existe()
  * @uses itis_build_url()
  * @uses inc_taxonomie_requeter_dist()
- * @uses cache_taxonomie_ecrire()
+ * @uses cache_ecrire()
+ * @uses cache_lire()
  *
  * @param int $tsn
  *        Identifiant unique du taxon dans la base ITIS, le TSN
@@ -435,8 +436,12 @@ function itis_get_record($tsn) {
  * Renvoie les informations demandées sur un taxon désigné par son identifiant unique TSN.
  *
  * @api
+ *
+ * @uses cache_existe()
  * @uses itis_build_url()
  * @uses inc_taxonomie_requeter_dist()
+ * @uses cache_ecrire()
+ * @uses cache_lire()
  *
  * @param string $action
  *        Type d'information demandé. Prend les valeurs

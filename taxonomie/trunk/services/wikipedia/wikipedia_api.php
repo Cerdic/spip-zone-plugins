@@ -3,7 +3,6 @@
  * Ce fichier contient l'ensemble des constantes et fonctions implémentant le service web de Wikipedia.
  *
  * @package SPIP\TAXONOMIE\SERVICES\WIKIPEDIA
- * @todo    phpdoc : exemples
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -54,10 +53,11 @@ $GLOBALS['wikipedia_language'] = array(
  * sans accès à Wikipedia.
  *
  * @api
- * @uses cache_taxonomie_existe()
- * @uses cache_taxonomie_ecrire()
+ * @uses cache_existe()
  * @uses wikipedia_build_url()
  * @uses inc_taxonomie_requeter()
+ * @uses cache_ecrire()
+ * @uses cache_lire()
  *
  * @param array  $search
  *        Tableau contenant le taxon à cherché sous une forme textuelle et numérique:

@@ -3,7 +3,6 @@
  * Ce fichier contient l'ensemble des constantes et fonctions implémentant le service web de IUCN Red List.
  *
  * @package SPIP\TAXONOMIE\SERVICES\IUCN
- * @todo    phpdoc : exemples
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -129,10 +128,11 @@ $GLOBALS['iucn_webservice'] = array(
  * Renvoie l'ensemble des informations sur un taxon désigné par son identifiant unique TSN.
  *
  * @api
- * @uses cache_taxonomie_existe()
+ * @uses cache_existe()
  * @uses itis_build_url()
  * @uses inc_taxonomie_requeter_dist()
- * @uses cache_taxonomie_ecrire()
+ * @uses cache_ecrire()
+ * @uses cache_lire()
  *
  * @param array  $search
  *        Tableau contenant le taxon à cherché sous une forme textuelle et numérique:
