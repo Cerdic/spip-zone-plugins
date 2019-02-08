@@ -295,14 +295,26 @@ function massicoter_fichier($fichier, $parametres) {
 
 	list($width, $height) = getimagesize($fichier);
 
-	$fichier = extraire_attribut(
-		image_reduire(
-			$fichier,
-			$parametres['zoom'] * $width,
-			$parametres['zoom'] * $height
-		),
-		'src'
-	);
+	if ($parametres['zoom'] <= 1) {
+		$fichier = extraire_attribut(
+			image_reduire(
+				$fichier,
+				$parametres['zoom'] * $width,
+				$parametres['zoom'] * $height
+			),
+			'src'
+		);
+	} else {
+		$fichier = extraire_attribut(
+			image_recadre(
+				$fichier,
+				$parametres['zoom'] * $width,
+				$parametres['zoom'] * $height,
+				center
+			),
+			'src'
+		);
+	}
 
 	/* on vire un éventuel query string */
 	$fichier = parse_url($fichier);
