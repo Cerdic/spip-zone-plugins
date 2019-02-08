@@ -10,67 +10,67 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS['_taxonomie']['regnes'] = array('animalia', 'plantae', 'fungi');
 
-if (!defined('_TAXONOMIE_RANG_TYPE_PRINCIPAL')) {
+if (!defined('_TAXONOMIE_TYPE_RANG_PRINCIPAL')) {
 	/**
 	 * Type de rang selon la nomenclature taxonomique.
 	 */
-	define('_TAXONOMIE_RANG_TYPE_PRINCIPAL', 'principal');
+	define('_TAXONOMIE_TYPE_RANG_PRINCIPAL', 'principal');
 }
-if (!defined('_TAXONOMIE_RANG_TYPE_SECONDAIRE')) {
+if (!defined('_TAXONOMIE_TYPE_RANG_SECONDAIRE')) {
 	/**
 	 * Type de rang selon la nomenclature taxonomique.
 	 */
-	define('_TAXONOMIE_RANG_TYPE_SECONDAIRE', 'secondaire');
+	define('_TAXONOMIE_TYPE_RANG_SECONDAIRE', 'secondaire');
 }
-if (!defined('_TAXONOMIE_RANG_TYPE_INTERCALAIRE')) {
+if (!defined('_TAXONOMIE_TYPE_RANG_INTERCALAIRE')) {
 	/**
 	 * Type de rang selon la nomenclature taxonomique.
 	 */
-	define('_TAXONOMIE_RANG_TYPE_INTERCALAIRE', 'intercalaire');
+	define('_TAXONOMIE_TYPE_RANG_INTERCALAIRE', 'intercalaire');
 }
 
 // TODO : vérifier les rangs stirp, morph, aberration, unspecified.
 // TODO : vérifier pourquoi le rang serie n'est pas dans la liste de ITIS
 $GLOBALS['_taxonomie']['rangs'] = array(
-	'kingdom'       => array('type' => _TAXONOMIE_RANG_TYPE_PRINCIPAL, 'est_espece' => false, 'synonyme' => ''),
-	'subkingdom'    => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
-	'infrakingdom'  => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
-	'superphylum'   => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => false, 'synonyme' => 'superdivision'),
-	'phylum'        => array('type' => _TAXONOMIE_RANG_TYPE_PRINCIPAL, 'est_espece' => false, 'synonyme' => 'division'),
-	'subphylum'     => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => false, 'synonyme' => 'subdivision'),
-	'infraphylum'   => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => false, 'synonyme' => 'infradivision'),
-	'superdivision' => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => false, 'synonyme' => 'superphylum'),
-	'division'      => array('type' => _TAXONOMIE_RANG_TYPE_PRINCIPAL, 'est_espece' => false, 'synonyme' => 'phylum'),
-	'subdivision'   => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => false, 'synonyme' => 'subphylum'),
-	'infradivision' => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => false, 'synonyme' => 'infraphylum'),
-	'superclass'    => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
-	'class'         => array('type' => _TAXONOMIE_RANG_TYPE_PRINCIPAL, 'est_espece' => false, 'synonyme' => ''),
-	'subclass'      => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
-	'infraclass'    => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
-	'superorder'    => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
-	'order'         => array('type' => _TAXONOMIE_RANG_TYPE_PRINCIPAL, 'est_espece' => false, 'synonyme' => ''),
-	'suborder'      => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
-	'infraorder'    => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
-	'section'       => array('type' => _TAXONOMIE_RANG_TYPE_SECONDAIRE, 'est_espece' => false, 'synonyme' => ''),
-	'subsection'    => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
-	'superfamily'   => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
-	'family'        => array('type' => _TAXONOMIE_RANG_TYPE_PRINCIPAL, 'est_espece' => false, 'synonyme' => ''),
-	'subfamily'     => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
-	'tribe'         => array('type' => _TAXONOMIE_RANG_TYPE_SECONDAIRE, 'est_espece' => false, 'synonyme' => ''),
-	'subtribe'      => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
-	'genus'         => array('type' => _TAXONOMIE_RANG_TYPE_PRINCIPAL, 'est_espece' => false, 'synonyme' => ''),
-	'subgenus'      => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
-	'species'       => array('type' => _TAXONOMIE_RANG_TYPE_PRINCIPAL, 'est_espece' => true, 'synonyme' => ''),
-	'subspecies'    => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => true, 'synonyme' => ''),
-	'variety'       => array('type' => _TAXONOMIE_RANG_TYPE_SECONDAIRE, 'est_espece' => true, 'synonyme' => ''),
-	'subvariety'    => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => true, 'synonyme' => ''),
-	'form'          => array('type' => _TAXONOMIE_RANG_TYPE_SECONDAIRE, 'est_espece' => true, 'synonyme' => ''),
-	'subform'       => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => true, 'synonyme' => ''),
-	'race'          => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => true, 'synonyme' => 'variety'),
-	'stirp'         => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => true, 'synonyme' => ''),
-	'morph'         => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => true, 'synonyme' => ''),
-	'aberration'    => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => true, 'synonyme' => ''),
-	'unspecified'   => array('type' => _TAXONOMIE_RANG_TYPE_INTERCALAIRE, 'est_espece' => true, 'synonyme' => '')
+	'kingdom'       => array('type' => _TAXONOMIE_TYPE_RANG_PRINCIPAL, 'est_espece' => false, 'synonyme' => ''),
+	'subkingdom'    => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
+	'infrakingdom'  => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
+	'superphylum'   => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => false, 'synonyme' => 'superdivision'),
+	'phylum'        => array('type' => _TAXONOMIE_TYPE_RANG_PRINCIPAL, 'est_espece' => false, 'synonyme' => 'division'),
+	'subphylum'     => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => false, 'synonyme' => 'subdivision'),
+	'infraphylum'   => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => false, 'synonyme' => 'infradivision'),
+	'superdivision' => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => false, 'synonyme' => 'superphylum'),
+	'division'      => array('type' => _TAXONOMIE_TYPE_RANG_PRINCIPAL, 'est_espece' => false, 'synonyme' => 'phylum'),
+	'subdivision'   => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => false, 'synonyme' => 'subphylum'),
+	'infradivision' => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => false, 'synonyme' => 'infraphylum'),
+	'superclass'    => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
+	'class'         => array('type' => _TAXONOMIE_TYPE_RANG_PRINCIPAL, 'est_espece' => false, 'synonyme' => ''),
+	'subclass'      => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
+	'infraclass'    => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
+	'superorder'    => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
+	'order'         => array('type' => _TAXONOMIE_TYPE_RANG_PRINCIPAL, 'est_espece' => false, 'synonyme' => ''),
+	'suborder'      => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
+	'infraorder'    => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
+	'section'       => array('type' => _TAXONOMIE_TYPE_RANG_SECONDAIRE, 'est_espece' => false, 'synonyme' => ''),
+	'subsection'    => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
+	'superfamily'   => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
+	'family'        => array('type' => _TAXONOMIE_TYPE_RANG_PRINCIPAL, 'est_espece' => false, 'synonyme' => ''),
+	'subfamily'     => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
+	'tribe'         => array('type' => _TAXONOMIE_TYPE_RANG_SECONDAIRE, 'est_espece' => false, 'synonyme' => ''),
+	'subtribe'      => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
+	'genus'         => array('type' => _TAXONOMIE_TYPE_RANG_PRINCIPAL, 'est_espece' => false, 'synonyme' => ''),
+	'subgenus'      => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => false, 'synonyme' => ''),
+	'species'       => array('type' => _TAXONOMIE_TYPE_RANG_PRINCIPAL, 'est_espece' => true, 'synonyme' => ''),
+	'subspecies'    => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => true, 'synonyme' => ''),
+	'variety'       => array('type' => _TAXONOMIE_TYPE_RANG_SECONDAIRE, 'est_espece' => true, 'synonyme' => ''),
+	'subvariety'    => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => true, 'synonyme' => ''),
+	'form'          => array('type' => _TAXONOMIE_TYPE_RANG_SECONDAIRE, 'est_espece' => true, 'synonyme' => ''),
+	'subform'       => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => true, 'synonyme' => ''),
+	'race'          => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => true, 'synonyme' => 'variety'),
+	'stirp'         => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => true, 'synonyme' => ''),
+	'morph'         => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => true, 'synonyme' => ''),
+	'aberration'    => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => true, 'synonyme' => ''),
+	'unspecified'   => array('type' => _TAXONOMIE_TYPE_RANG_INTERCALAIRE, 'est_espece' => true, 'synonyme' => '')
 );
 
 if (!defined('_TAXONOMIE_RANG_REGNE')) {
@@ -234,7 +234,6 @@ function regne_charger($regne, $codes_langue = array()) {
  * @package SPIP\TAXONOMIE\REGNE
  *
  * @api
- * @filtre
  *
  * @param string $regne
  *        Nom scientifique du règne en lettres minuscules : `animalia`, `plantae`, `fungi`.
@@ -527,7 +526,6 @@ function taxon_traduire_champ($champ) {
  * @package SPIP\TAXONOMIE\TAXON
  *
  * @api
- * @filtre
  *
  * @return array
  *        Tableau des services utilisés sous la forme [alias] = titre du service.
