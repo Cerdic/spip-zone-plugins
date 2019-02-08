@@ -187,7 +187,7 @@ function cache_taxonomie_repertorier($service = '') {
 	static $taxons = array();
 
 	// On constitue la liste des services requis par l'appel
-	include_spip('taxonomie_fonctions');
+	include_spip('inc/taxonomie');
 	$services = taxon_lister_services();
 	if ($service) {
 		if (array_key_exists($service, $services)) {

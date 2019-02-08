@@ -287,10 +287,8 @@ function autoriser_espececreer_menu_dist($faire, $type, $id, $qui, $opt){
 **/
 function autoriser_espece_creer_dist($faire, $type, $id, $qui, $opt) {
 
-	include_spip('inc/taxonomie');
-	include_spip('taxonomie_fonctions');
-
 	// On vérifie qu'un règne est bien déjà chargé
+	include_spip('inc/taxonomie');
 	$regnes = regne_lister();
 	$regne_existe = false;
 	foreach ($regnes as $_regne) {

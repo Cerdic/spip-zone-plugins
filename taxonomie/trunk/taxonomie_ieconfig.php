@@ -162,7 +162,6 @@ function taxonomie_ieconfig_exporter() {
 
 	// Les metas de chargement de chaque règne ne sont pas exportées mais on identifie quand même la liste des règnes
 	// insérés dans la base. Les taxons seront ensuite exportés par règne pour permettre un import plus ciblé.
-	include_spip('taxonomie_fonctions');
 	include_spip('inc/taxonomie');
 	$export['regnes'] = array();
 	$regnes = regne_lister();

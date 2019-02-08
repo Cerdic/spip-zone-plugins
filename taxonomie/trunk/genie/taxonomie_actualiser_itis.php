@@ -35,7 +35,6 @@ function genie_taxonomie_actualiser_itis_dist($last) {
 	include_spip('services/itis/itis_api');
 	$shas = itis_review_sha();
 
-	include_spip('taxonomie_fonctions');
 	foreach ($regnes as $_regne) {
 		$regne_a_recharger = false;
 		if (regne_existe($_regne, $meta_regne)) {

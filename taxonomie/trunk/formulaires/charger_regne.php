@@ -25,8 +25,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 		- `_langue_defaut`		: (affichage) la première langue de la liste des langues utilisées
  */
 function formulaires_charger_regne_charger() {
+
+	// Initialisation du tableau des variables fournies au formulaire.
 	$valeurs = array();
-	include_spip('inc/taxonomie');
 
 	// Lister les actions sur les règnes
 	$valeurs['_actions_regne'] = array(
@@ -36,6 +37,7 @@ function formulaires_charger_regne_charger() {
 
 	// Acquérir la liste des règnes gérer par le plugin et leur statut de chargement
 	// Désactiver l'action vider si aucun règne n'est chargé
+	include_spip('inc/taxonomie');
 	$aucun_regne_charge = true;
 	$regnes = regne_lister();
 	foreach ($regnes as $_regne) {
@@ -51,6 +53,7 @@ function formulaires_charger_regne_charger() {
 	}
 
 	// Acquérir la liste des langues utilisables par le plugin et stockées dans la configuration.
+	include_spip('inc/lang');
 	$langues_utilisees = lire_config('taxonomie/langues_utilisees');
 	foreach ($langues_utilisees as $_code_langue) {
 		$valeurs['_langues_regne'][$_code_langue] = traduire_nom_langue($_code_langue);
@@ -69,6 +72,8 @@ function formulaires_charger_regne_charger() {
  * 		Tableau des erreurs sur l'action et/ou le règne ou tableau vide si aucune erreur.
  */
 function formulaires_charger_regne_verifier() {
+
+	// Initialisation des messages d'erreur
 	$erreurs = array();
 
 	$obligatoires = array('action_regne', 'regne');
@@ -93,10 +98,16 @@ function formulaires_charger_regne_verifier() {
  * 		d'erreur. L'indicateur editable est toujours à vrai.
  */
 function formulaires_charger_regne_traiter() {
+
+	// Initialisation du retour de traitement du formulaire (message, editable).
 	$retour = array();
 
+	// Lecture de l'action et règne concerné
 	$action = _request('action_regne');
 	$regne = _request('regne');
+
+	// Vérifier que le règne existe (cad a déjà été chargé).
+	include_spip('inc/taxonomie');
 	$regne_existe = regne_existe($regne, $meta_regne);
 
 	if ($action == 'vider') {

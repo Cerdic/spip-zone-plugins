@@ -67,7 +67,6 @@ function formulaires_creer_espece_charger() {
 	// Acquérir la liste des règnes déjà chargés. Si un règne n'est pas chargé il n'apparait pas dans la liste
 	// car il ne sera alors pas possible de créer correctement l'espèce avec sa hiérarchie de taxons.
 	include_spip('inc/taxonomie');
-	include_spip('taxonomie_fonctions');
 	$regnes = regne_lister();
 	foreach ($regnes as $_regne) {
 		if (regne_existe($_regne, $meta_regne)) {
@@ -150,13 +149,13 @@ function formulaires_creer_espece_verifier_1() {
 				$recherche = preg_replace('#\s{2,}#', ' ', $recherche);
 
 				// Appel de l'API de recherche d'ITIS en fonction du type et de la correspondance de recherche
-				include_spip('services/itis/itis_api');
 				$action = $type_recherche;
 				if (($type_recherche == 'commonname') and ($correspondance == 'debut')) {
 					$action = 'commonnamebegin';
 				} elseif (($type_recherche == 'commonname') and ($correspondance == 'fin')) {
 					$action = 'commonnameend';
 				}
+				include_spip('services/itis/itis_api');
 				$taxons = itis_search_tsn($action, $recherche, $recherche_exacte);
 				if ($taxons) {
 					if ($recherche_exacte) {
