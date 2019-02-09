@@ -49,15 +49,23 @@ function cache_ecrire($plugin, $cache, $contenu) {
 	include_spip('inc/flock');
 	if (is_array($cache)) {
 		// Création du répertoire du cache à créer, si besoin.
-		if (!empty($cache['sous_dossier'])) {
-			// Si le conteneur nécessite un sous-dossier, appelé service dans l'identifiant du conteneur.
-			sous_repertoire($configuration[$plugin]['dossier_base'], rtrim($cache['sous_dossier'], '/'));
+		$erreur_sous_dossier = false;
+		if ($configuration[$plugin]['sous_dossier']) {
+			if (!empty($cache['sous_dossier'])) {
+				// Si le cache nécessite un sous-dossier on crée le répertoire au besoin.
+				sous_repertoire($configuration[$plugin]['dossier_base'], rtrim($cache['sous_dossier'], '/'));
+			} else {
+				// C'est une erreur, le sous-dossier n'a pas été fourni alors qu'il est requis. On arrête l'écriture.
+				$erreur_sous_dossier = true;
+			}
 		}
 
-		// Détermination du chemin du cache :
+		// Détermination du chemin du cache si pas d'erreur sur le sous-dossier :
 		// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
 		//   de la configuration du nom pour le plugin.
-		$fichier_cache = cache_cache_composer($plugin, $cache, $configuration[$plugin]);
+		if (!$erreur_sous_dossier) {
+			$fichier_cache = cache_cache_composer($plugin, $cache, $configuration[$plugin]);
+		}
 	} elseif (is_string($cache)) {
 		// Le chemin complet du fichier cache est fourni. Aucune vérification ne peut être faite
 		// il faut donc que l'appelant ait utilisé l'API pour calculer le fichier au préalable.
@@ -315,8 +323,96 @@ function cache_supprimer($plugin, $cache) {
 
 
 /**
- * Supprime le ou les caches spécifiés d'un plugin donné.
- * A AMELIORER
+ * Retourne la description complète des caches d'un plugin filtrés sur une liste de critères.
+ *
+ * @api
+ *
+ * @uses cache_configuration_lire()
+ * @uses cache_cache_configurer()
+ * @uses cache_cache_composer()
+ * @uses cache_cache_decomposer()
+ * @uses cache_cache_completer()
+ *
+ * @param string       $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array $filtres
+ *        Tableau associatif `[champ] = valeur` ou `[champ] = !valeur` de critères de filtres sur les composants
+ *        de caches. Les opérateurs égalité et inégalité sont possibles.
+ *
+ * @return array
+ *        Tableau des descriptions des fichiers cache créés par le plugin indexé par le chemin complet de
+ *        chaque fichier cache.
+ */
+function cache_repertorier($plugin, $filtres = array()) {
+
+	// Initialisation de la liste des caches
+	$caches = array();
+
+	// Lecture de la configuration des caches du plugin.
+	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel, peu probable pour une lecture).
+	static $configuration = array();
+	include_spip('cache/cache');
+	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_configuration_lire($plugin))) {
+		$configuration[$plugin] = cache_cache_configurer($plugin);
+	}
+
+	// Rechercher les caches du plugin sans appliquer de filtre si ce n'est sur le sous-dossier éventuellement.
+	// Les autres filtres seront appliqués sur les fichiers récupérés.
+	$pattern_fichier = $configuration[$plugin]['dossier_base'];
+	if ($configuration[$plugin]['sous_dossier']) {
+		if (array_key_exists('sous_dossier', $filtres)) {
+			$pattern_fichier .= rtrim($filtres['sous_dossier'], '/') . '/';
+		} else {
+			$pattern_fichier .= '*/';
+		}
+	}
+
+	// On complète le pattern avec une recherche d'un nom quelconque mais avec l'extension configurée.
+	$pattern_fichier .= '*' . $configuration[$plugin]['extension'];
+
+	// On recherche les fichiers correspondant au pattern.
+	$fichiers_cache = glob($pattern_fichier);
+
+	if ($fichiers_cache) {
+		foreach ($fichiers_cache as $_fichier_cache) {
+			// On décompose le chemin de chaque cache afin de renvoyer l'identifiant canonique du cache.
+			$cache = cache_cache_decomposer($plugin, $_fichier_cache, $configuration[$plugin]);
+
+			// Maintenant que les composants sont déterminés on applique les filtres pour savoir si on
+			// complète et stocke le cache.
+			$cache_conforme = true;
+			foreach ($filtres as $_critere => $_valeur) {
+				$operateur_egalite = true;
+				$valeur = $_valeur;
+				if (substr($_valeur, 0, 1) == '!') {
+					$operateur_egalite = false;
+					$valeur = ltrim($_valeur, '!');
+				}
+				if (isset($cache[$_critere])
+				and (($operateur_egalite and ($cache[$_critere] != $valeur))
+					or (!$operateur_egalite and ($cache[$_critere] == $valeur)))) {
+					$cache_conforme = false;
+					break;
+				}
+			}
+
+			if ($cache_conforme) {
+				// On permet au plugin de completer la description canonique
+				$cache = cache_cache_completer($plugin, $cache, $configuration[$plugin]);
+
+				// On stocke la description du fichier cache dans le tableau de sortie.
+				$caches[$_fichier_cache] = $cache;
+			}
+		}
+	}
+
+	return $caches;
+}
+
+
+/**
+ * Supprime, pour un plugin donné, les caches désignés par leur chemin complet.
  *
  * @api
  *
@@ -324,9 +420,10 @@ function cache_supprimer($plugin, $cache) {
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param array  $caches
- *        Liste des fichiers caches (chemin complet) à supprimer.
+ *        Liste des fichiers caches désignés par leur chemin complet.
  *
  * @return bool
+ *         True si la suppression s'est bien passée, false sinon.
  */
 function cache_vider($plugin, $caches) {
 

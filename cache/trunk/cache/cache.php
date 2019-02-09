@@ -38,12 +38,14 @@ function cache_cache_configurer($plugin) {
 
 	// Initialisation du tableau de configuration avec les valeurs par défaut du plugin Cache.
 	$configuration_defaut = array(
-		'racine'        => _DIR_CACHE,
-		'nom'           => array('nom'),
-		'extension'     => '.txt',
-		'securisation'  => false,
-		'serialisation' => true,
-		'separateur'    => '_'
+		'racine'          => _DIR_CACHE,
+		'sous_dossier'    => false,
+		'nom_obligatoire' => array('nom'),
+		'nom_facultatif'  => array(),
+		'extension'       => '.txt',
+		'securisation'    => false,
+		'serialisation'   => true,
+		'separateur'      => '_'
 	);
 
 	// Le plugin utilisateur doit fournir un service propre pour la configuration de ses caches.
@@ -75,12 +77,17 @@ function cache_cache_configurer($plugin) {
 		// On s'assure que la racine se termine toujours par un slash.
 		$configuration['racine'] = rtrim($configuration['racine'], '/') . '/';
 	}
+
 	// -- Sous-dossier spécifique au plugin
 	$sous_dossier = ($configuration['racine'] == _DIR_VAR) ? "cache-${plugin}" : "$plugin";
 	// -- Création et enregistrement du dossier de base
 	include_spip('inc/flock');
 	$configuration['dossier_base'] = sous_repertoire($configuration['racine'], $sous_dossier);
-	
+
+	// -- Construction du tableau des composants du nom : dans l'ordre on a toujours les composants obligatoires
+	//    suivis des composants faclutatifs.
+	$configuration['nom'] = array_merge($configuration['nom_obligatoire'], $configuration['nom_facultatif']);
+
 	// Enregistrement de la configuration du plugin utilisateur dans la meta prévue.
 	// Si une configuration existe déjà on l'écrase.
 	include_spip('inc/config');
@@ -122,18 +129,25 @@ function cache_cache_composer($plugin, $cache, $configuration) {
 		// Détermination du répertoire final du fichier cache qui peut-être inclus dans un sous-dossier du dossier
 		// de base des caches du plugin.
 		$dir_cache = $configuration['dossier_base'];
-		if (!empty($cache['sous_dossier'])) {
-			// Si le cache nécessite un sous-dossier, appelé service dans l'identifiant du cache.
-			$dir_cache .= rtrim($cache['sous_dossier'], '/') . '/';
+		if ($configuration['sous_dossier']) {
+			if (!empty($cache['sous_dossier'])) {
+				// Si le cache nécessite un sous-dossier, appelé service dans l'identifiant du cache.
+				$dir_cache .= rtrim($cache['sous_dossier'], '/') . '/';
+			} else {
+				// C'est une erreur, le sous-dossier n'a pas été fourni alors qu'il est requis.
+				$dir_cache = '';
+			}
 		}
 
 		// Détermination du nom du cache sans extension.
 		// Celui-ci est construit à partir des éléments fournis sur le cache et de la configuration
 		// fournie par le plugin (liste ordonnée de composant).
 		$nom_cache = '';
-		foreach ($configuration['nom'] as $_composant) {
-			if (isset($cache[$_composant])) {
-				$nom_cache .= ($nom_cache ? $configuration['separateur'] : '') . $cache[$_composant];
+		if ($dir_cache) {
+			foreach ($configuration['nom'] as $_composant) {
+				if (isset($cache[$_composant])) {
+					$nom_cache .= ($nom_cache ? $configuration['separateur'] : '') . $cache[$_composant];
+				}
 			}
 		}
 
@@ -197,6 +211,37 @@ function cache_cache_decomposer($plugin, $fichier_cache, $configuration) {
 		if ($sous_dossier = dirname($fichier_cache)) {
 			$cache['sous_dossier'] = $sous_dossier;
 		}
+	}
+
+	return $cache;
+}
+
+
+/**
+ * Complète la description canonique d'un cache.
+ *
+ * Le plugin Cache Factory ne complète pas la description canonique.
+ *
+ * @uses cache_chercher_service()
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array  $cache
+  *       Tableau identifiant le cache pour lequel on veut construire le nom.
+ * @param array  $configuration
+ *        Configuration complète des caches du plugin utlisateur lue à partir de la meta de stockage.
+ *
+ * @return array
+ *         Description du cache complétée par un ensemble de données propres au plugin.
+ */
+function cache_cache_completer($plugin, $cache, $configuration) {
+
+	// Le plugin utilisateur peut fournir un service propre pour construire le chemin complet du fichier cache.
+	// Néanmoins, étant donné la généricité du mécanisme offert par le plugin Cache cela devrait être rare.
+	if ($completer = cache_chercher_service($plugin, 'cache_completer')) {
+		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
+		$cache = $completer($plugin, $cache, $configuration);
 	}
 
 	return $cache;
