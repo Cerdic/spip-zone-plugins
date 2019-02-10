@@ -24,16 +24,16 @@ function formulaires_cache_vider_charger($plugin) {
 
 	// Lecture de la configuration des caches du plugin.
 	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel, peu probable pour une lecture).
-	static $configuration = array();
+	$configuration = array();
 	include_spip('inc/cache');
 	include_spip('cache/cache');
-	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_configuration_lire($plugin))) {
-		$configuration[$plugin] = cache_cache_configurer($plugin);
+	if (empty($configuration) and (!$configuration = cache_configuration_lire($plugin))) {
+		$configuration = cache_cache_configurer($plugin);
 	}
 
 	// On appelle le service de chargement des variables qui est soit celui par défaut de Cache Factory
 	// soit celui spécifique au plugin si il existe.
-	$valeurs = cache_cache_vider_charger($plugin, $configuration[$plugin]);
+	$valeurs = cache_cache_vider_charger($plugin, $configuration);
 
 	return $valeurs;
 }
@@ -78,7 +78,7 @@ function formulaires_cache_vider_traiter($plugin) {
 	include_spip('inc/cache');
 	cache_vider($plugin, $caches);
 
-	$retour['message_ok'] = _T('cache:succes_vider_caches');
+	$retour['message_ok'] = _T('cache:cache_vider_succes');
 	$retour['editable'] = true;
 
 	return $retour;

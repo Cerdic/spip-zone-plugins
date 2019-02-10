@@ -28,7 +28,7 @@ function cache_plugin_repertorier() {
 
 	// Récupération de la meta du plugin Cache
 	include_spip('inc/config');
-	$configuration = lire_config("cache", array());
+	$configuration = lire_config('cache', array());
 
 	if ($configuration) {
 		// Chaque plugin est un index de la meta 'cache'.

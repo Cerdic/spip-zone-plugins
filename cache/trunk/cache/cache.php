@@ -279,8 +279,7 @@ function cache_cache_vider_charger($plugin, $configuration) {
 	$informer = chercher_filtre('info_plugin');
 	$valeurs['_nom_plugin'] = $informer($plugin, 'nom', true);
 
-	// Le plugin utilisateur peut fournir un service propre pour construire le chemin complet du fichier cache.
-	// Néanmoins, étant donné la généricité du mécanisme offert par le plugin Cache cela devrait être rare.
+	// Le plugin utilisateur peut fournir un service propre pour construire le tableau des valeurs du formulaire.
 	if ($charger = cache_chercher_service($plugin, 'cache_vider_charger')) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		$valeurs_plugin = $charger($plugin, $configuration);
