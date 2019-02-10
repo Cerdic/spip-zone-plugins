@@ -5,8 +5,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_cocher_aucun' => 'Tout décocher',
-	'bouton_cocher_tout' => 'Tout cocher',
 	'bouton_vider_cache' => 'Vider les caches Taxonomie',
 	'bouton_continuer' => 'Passer à l\'étape suivante',
 	'bouton_retourner' => 'Retourner à l\'étape @etape@',
@@ -144,12 +142,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_recherche_correspondance_fin' => 'Se termine par le texte de la recherche',
 	'label_recherche_regne' => 'Limiter la recherche à un règne',
 	'label_parents_espece' => 'Ascendance jusqu\'au genre',
-	'label_vider_cache' => 'Caches rangés par service',
 
 	// N
 	'notice_vider_regne_inexistant' => 'Le règne @regne@ n\'a pas été trouvé en base de données.',
 	'notice_liste_aucun_regne' => 'Aucun règne n\'a encore été chargé en base de données. Utiliser le formulaire ci-dessous pour y remédier.',
-	'notice_liste_aucun_cache' => 'Aucun cache n\'a encore été créé par les services.',
 
 	// R
 	'rang_kingdom' => 'règne',
@@ -199,11 +195,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'succes_vider_regne' => 'Le règne @regne@ a bien été supprimé de la base de données.',
 	'succes_charger_regne' => 'Le règne @regne@ a bien été chargé en base de données.',
-	'succes_vider_caches' => 'Les caches sélectionnés ont bien été supprimés.',
 
 	// T
 	'titre_form_configuration' => 'Configurer le plugin Taxonomie',
-	'titre_form_vidage_cache' => 'Vider les caches des services taxonomiques',
 	'titre_form_gestion_regne' => 'Gestion des règnes',
 	'titre_liste_regnes' => 'Liste des règnes chargés en base de données',
 	'titre_liste_fils_taxon' => 'Liste des descendants directs',

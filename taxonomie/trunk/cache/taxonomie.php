@@ -74,3 +74,44 @@ function taxonomie_cache_completer($plugin, $cache, $fichier_cache, $configurati
 
 	return $cache;
 }
+
+
+/**
+ * Effectue le chargement du formulaire de vidage des caches pour le plugin Taxonomie.
+ * L'intérêt est de permette le rangement des caches par service.
+ *
+ * @uses cache_chercher_service()
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array  $configuration
+ *        Configuration complète des caches du plugin utilisateur lue à partir de la meta de stockage.
+ *
+ * @return array
+ *         Tableau des valeurs spécifique au plugin taxonomie.
+ */
+function taxonomie_cache_vider_charger($plugin, $configuration) {
+
+	$valeurs = array();
+
+	// On constitue la liste des services requis par l'appel
+	include_spip('inc/taxonomie');
+	$services = taxon_lister_services();
+
+	// On récupère les caches et leur description pour donner un maximum d'explication sur le contenu.
+	include_spip('inc/cache');
+	foreach ($services as $_service => $_titre) {
+		// On récupère les caches du service
+		$filtres = array('service' => $_service);
+		$caches = cache_repertorier('taxonomie', $filtres);
+
+		// Si il existe des caches pour le service on stocke les informations recueillies
+		if ($caches) {
+			$valeurs['_caches'][$_service]['titre_service'] = $_titre;
+			$valeurs['_caches'][$_service]['caches'] = $caches;
+		}
+	}
+
+	return $valeurs;
+}
