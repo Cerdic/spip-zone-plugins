@@ -234,7 +234,7 @@ function reservation_bank_formulaire_traiter($flux) {
 		}
 	}
 
-	// Adapte la transaction aorès la modification du montan payé.
+	// Adapte la transaction après la modification du montan payé.
 	if ($form == 'editer_reservations_detail') {
 		if ($id_reservation = sql_getfetsel('id_reservation',
 				'spip_reservations_details',
@@ -245,7 +245,6 @@ function reservation_bank_formulaire_traiter($flux) {
 				'cacher_paiement_public' => TRUE
 			)));
 			$donnees['options']['force'] = FALSE;
-			spip_log($donnees,'teste');
 			$inserer_transaction($donnees['montant'], $donnees['options']);
 		}
 
