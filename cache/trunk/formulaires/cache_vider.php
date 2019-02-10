@@ -11,18 +11,21 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Chargement des données : le formulaire affiche la liste des caches issus de l'utilisation du service et propose
  * le vidage de tout ou partie des fichiers.
  *
- * @uses cache_repertorier()
+ * @uses cache_configuration_lire()
+ * @uses cache_cache_configurer()
+ * @uses cache_cache_vider_charger()
  *
  * @return array
  * 		Tableau des données à charger par le formulaire (affichage). Aucune donnée chargée n'est un
  * 		champ de saisie, celle-ci sont systématiquement remises à zéro.
  * 		- `_caches`	: (affichage) liste des descriptions des caches rangés par service
  */
-function formulaires_vider_cache_charger($plugin) {
+function formulaires_cache_vider_charger($plugin) {
 
 	// Lecture de la configuration des caches du plugin.
 	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel, peu probable pour une lecture).
 	static $configuration = array();
+	include_spip('inc/cache');
 	include_spip('cache/cache');
 	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_configuration_lire($plugin))) {
 		$configuration[$plugin] = cache_cache_configurer($plugin);
@@ -42,7 +45,7 @@ function formulaires_vider_cache_charger($plugin) {
  * @return array
  * 		Tableau des erreurs qui se limite à la non sélection d'au moins un cache.
  */
-function formulaires_vider_cache_verifier($plugin) {
+function formulaires_cache_vider_verifier($plugin) {
 
 	$erreurs = array();
 
@@ -64,7 +67,7 @@ function formulaires_vider_cache_verifier($plugin) {
  *        Tableau retourné par le formulaire contenant toujours un message de bonne exécution. L'indicateur
  *        editable est toujours à vrai.
  */
-function formulaires_vider_cache_traiter($plugin) {
+function formulaires_cache_vider_traiter($plugin) {
 
 	$retour = array();
 
@@ -73,7 +76,7 @@ function formulaires_vider_cache_traiter($plugin) {
 
 	// On appelle l'API des caches
 	include_spip('inc/cache');
-	cache_vider('taxonomie', $caches);
+	cache_vider($plugin, $caches);
 
 	$retour['message_ok'] = _T('cache:succes_vider_caches');
 	$retour['editable'] = true;

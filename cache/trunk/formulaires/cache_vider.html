@@ -9,11 +9,11 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 
-		[(#CHEMIN{[formulaires/inc-(#ENV{_prefixe})_vider_cache.html]}|oui)
-			<INCLURE{fond=formulaires/inc-#ENV{_prefixe}_vider_cache, env} />
+		[(#CHEMIN{[formulaires/inc-(#ENV{_prefixe})_cache_vider.html]}|oui)
+			<INCLURE{fond=formulaires/inc-#ENV{_prefixe}_cache_vider, env} />
 		]
-		[(#CHEMIN{[formulaires/inc-(#ENV{_prefixe})_vider_cache.html]}|non)
-			<INCLURE{fond=formulaires/inc-cache_vider_cache, env} />
+		[(#CHEMIN{[formulaires/inc-(#ENV{_prefixe})_cache_vider.html]}|non)
+			<INCLURE{fond=formulaires/inc-cache_cache_vider, env} />
 		]
 
 		<p class="boutons">
