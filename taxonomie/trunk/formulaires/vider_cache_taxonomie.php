@@ -22,12 +22,27 @@ function formulaires_vider_cache_taxonomie_charger() {
 
 	$valeurs = array();
 
+	// On constitue la liste des services requis par l'appel
+	include_spip('inc/taxonomie');
+	$services = taxon_lister_services();
+
 	// On récupère les caches et leur description pour donner un maximum d'explication sur le contenu.
-	include_spip('inc/taxonomie_cacher');
-	$valeurs['_caches'] = cache_taxonomie_repertorier();
+	include_spip('inc/cache');
+	foreach ($services as $_service => $_titre) {
+		// On récupère les caches du service
+		$filtres = array('service' => $_service);
+		$caches = cache_repertorier('taxonomie', $filtres);
+
+		// Si il existe des caches pour le service on stocke les informations recueillies
+		if ($caches) {
+			$valeurs['_caches'][$_service]['titre_service'] = $_titre;
+			$valeurs['_caches'][$_service]['caches'] = $caches;
+		}
+	}
 
 	return $valeurs;
 }
+
 
 /**
  * Vérification des saisies : il est indispensable de choisir un cache à supprimer.
@@ -51,7 +66,7 @@ function formulaires_vider_cache_taxonomie_verifier() {
 /**
  * Exécution du formulaire : la liste des caches sélectionnés est récupérée et fournie à l'API cache pour suppression.
  *
- * @uses cache_taxonomie_supprimer()
+ * @uses cache_vider()
  *
  * @return array
  *        Tableau retourné par le formulaire contenant toujours un message de bonne exécution. L'indicateur
@@ -65,8 +80,8 @@ function formulaires_vider_cache_taxonomie_traiter() {
 	$caches = _request('caches');
 
 	// On appelle l'API des caches
-	include_spip('inc/taxonomie_cacher');
-	cache_taxonomie_supprimer($caches);
+	include_spip('inc/cache');
+	cache_vider('taxonomie', $caches);
 
 	$retour['message_ok'] = _T('taxonomie:succes_vider_caches');
 	$retour['editable'] = true;

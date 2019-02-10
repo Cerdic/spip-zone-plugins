@@ -8,15 +8,26 @@
 	include_spip('services/itis/itis_api');
 	include_spip('inc/filtres');
 	include_spip('inc/taxonomie');
+	include_spip('inc/cache');
 ?>
+
+	<h2>Cache</h2>
+<?php
+	$filtres = array(
+		'service' => 'itis',
+	);
+	$caches = cache_repertorier('taxonomie', $filtres);
+	var_dump("Liste des caches", $caches);
+	var_dump(glob('../local/cache-taxonomie/*.txt'));
+?>
+	<?php die(); ?>
 
 	<h2>Action : list_vernaculars</h2>
 <?php
-$langue = 'french';
- $tsns = itis_list_vernaculars($langue);
- var_dump("Noms communs en $langue", $tsns);
+	$langue = 'french';
+	$tsns = itis_list_vernaculars($langue);
+	var_dump("Noms communs en $langue", $tsns);
 ?>
-	<?php die(); ?>
 
 <?php
     include_spip('services/itis/itis_api');
