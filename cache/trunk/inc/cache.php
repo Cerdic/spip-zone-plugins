@@ -399,7 +399,7 @@ function cache_repertorier($plugin, $filtres = array()) {
 
 			if ($cache_conforme) {
 				// On permet au plugin de completer la description canonique
-				$cache = cache_cache_completer($plugin, $cache, $configuration[$plugin]);
+				$cache = cache_cache_completer($plugin, $cache, $_fichier_cache, $configuration[$plugin]);
 
 				// On stocke la description du fichier cache dans le tableau de sortie.
 				$caches[$_fichier_cache] = $cache;

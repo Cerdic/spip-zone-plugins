@@ -208,7 +208,7 @@ function cache_cache_decomposer($plugin, $fichier_cache, $configuration) {
 		}
 
 		// Identification d'un sous-dossier si il existe.
-		if ($sous_dossier = dirname($fichier_cache)) {
+		if ($configuration['sous_dossier'] and ($sous_dossier = dirname($fichier_cache))) {
 			$cache['sous_dossier'] = $sous_dossier;
 		}
 	}
@@ -220,7 +220,7 @@ function cache_cache_decomposer($plugin, $fichier_cache, $configuration) {
 /**
  * Complète la description canonique d'un cache.
  *
- * Le plugin Cache Factory ne complète pas la description canonique.
+ * Le plugin Cache Factory complète la description canonique avec le nom sans extension et l'extension du fichier.
  *
  * @uses cache_chercher_service()
  *
@@ -228,23 +228,72 @@ function cache_cache_decomposer($plugin, $fichier_cache, $configuration) {
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param array  $cache
-  *       Tableau identifiant le cache pour lequel on veut construire le nom.
+ *       Tableau identifiant le cache pour lequel on veut construire le nom.
+ * @param string $fichier_cache
+ *        Fichier cache désigné par son chemin complet.
  * @param array  $configuration
  *        Configuration complète des caches du plugin utlisateur lue à partir de la meta de stockage.
  *
  * @return array
  *         Description du cache complétée par un ensemble de données propres au plugin.
  */
-function cache_cache_completer($plugin, $cache, $configuration) {
+function cache_cache_completer($plugin, $cache, $fichier_cache, $configuration) {
+
+	// Cache Factory complète la description avec le nom sans extension et l'extension du fichier cache avant
+	// de passer la main au plugin utilisateur.
+	$cache['nom_cache'] = basename($fichier_cache, $configuration['extension']);
+	$cache['extension_cache'] = $configuration['extension'];
 
 	// Le plugin utilisateur peut fournir un service propre pour construire le chemin complet du fichier cache.
 	// Néanmoins, étant donné la généricité du mécanisme offert par le plugin Cache cela devrait être rare.
 	if ($completer = cache_chercher_service($plugin, 'cache_completer')) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
-		$cache = $completer($plugin, $cache, $configuration);
+		$cache = $completer($plugin, $cache, $fichier_cache, $configuration);
 	}
 
 	return $cache;
+}
+
+
+/**
+ * Effectue le chargement du formulaire de vidage des caches pour un plugin utilisateur donné.
+ *
+ * Le plugin Cache Factory propose une version simplifié du formulaire où tous les fichiers caches
+ * sont listées par ordre alphabétique sans possibilité de regroupement.
+ *
+ * @uses cache_chercher_service()
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array  $configuration
+ *        Configuration complète des caches du plugin utilisateur lue à partir de la meta de stockage.
+ *
+ * @return array
+ *         Description du cache complétée par un ensemble de données propres au plugin.
+ */
+function cache_cache_vider_charger($plugin, $configuration) {
+
+	// Stocker le préfixe et le nom du plugin de façon systématique.
+	$valeurs = array('_prefixe' => $plugin);
+	$informer = chercher_filtre('info_plugin');
+	$valeurs['_nom_plugin'] = $informer($plugin, 'nom', true);
+
+	// Le plugin utilisateur peut fournir un service propre pour construire le chemin complet du fichier cache.
+	// Néanmoins, étant donné la généricité du mécanisme offert par le plugin Cache cela devrait être rare.
+	if ($charger = cache_chercher_service($plugin, 'cache_vider_charger')) {
+		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
+		$valeurs_plugin = $charger($plugin, $configuration);
+		if ($valeurs_plugin) {
+			$valeurs = array_merge($valeurs, $valeurs_plugin);
+		}
+	} else {
+		// On présente simplement les fichiers caches en ordre alphabétique en visualisant uniquement
+		// le sous-dossuer éventuel et le nom du fichier sans décomposition.
+		$valeurs['_caches'] = cache_repertorier($plugin, array());
+	}
+
+	return $valeurs;
 }
 
 

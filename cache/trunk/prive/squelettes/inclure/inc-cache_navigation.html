@@ -1,0 +1,15 @@
+[(#REM) <!-- Menu des onglets de vidage des caches des plugins utilisant Cache Factory et du vidage du cache SPIP --> ]
+<ul class="liste-items sous_navigation">
+	[<li class="item">
+		(#URL_ECRIRE{admin_vider}
+			|lien_ou_expose{
+				<:texte_vider_cache:>,
+				[(#ENV{exec}|=={admin_vider})]})
+	</li>]
+	[<li class="item">
+		(#URL_ECRIRE{cache_vider}
+			|lien_ou_expose{
+				<:cache:menu_vider_cache_plugin:>,
+				[(#ENV{exec}|=={cache_vider})]})
+	</li>]
+</ul>
