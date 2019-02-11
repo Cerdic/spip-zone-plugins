@@ -602,7 +602,7 @@ function massicoter_hauteur($hauteur, $doc = array()) {
  * Rétro-portage d'une fonction du plugin Médias qui apparaît dans SPIP 3.2 et
  * qu'on utilise dans le squelettes modeles/document_desc.html
  */
-if (function_exists('duree_en_secondes')) {
+if (! function_exists('duree_en_secondes')) {
 	function duree_en_secondes($duree, $precis = false) {
 		$out = '';
 		$heures = $minutes = 0;
