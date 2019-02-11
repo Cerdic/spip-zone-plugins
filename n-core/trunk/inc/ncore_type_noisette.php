@@ -130,9 +130,6 @@ function type_noisette_charger($plugin, $recharger = false, $stockage = '') {
 					}
 				}
 
-				// En mode rechargement forcé toute noisette est considérée comme nouvelle.
-				// Sinon, la noisette doit être retirée de la base car un plugin qu'elle nécessite a été désactivée:
-				// => il suffit pour cela de la laisser dans la liste des noisettes obsolètes.
 				// Mise à jour du md5
 				$description['signature'] = $md5;
 				// Complétude de la description avec les valeurs par défaut
@@ -348,4 +345,37 @@ function type_noisette_repertorier($plugin, $filtres = array(), $stockage = '') 
 	}
 
 	return $types_noisette_filtres;
+}
+
+
+/**
+ * Supprime les caches liés à la compilation. Les autres caches fournis par N-Core comme un espace de stokage
+ * possible pour les plugins utilisateurs ne sont pas concernés par cette fonction.
+ *
+ * @api
+ * @uses cache_supprimer()
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array  $fonction
+ *        Identification de la fonction du cache qui participe à son nommage (uniquement liée à la compilation).
+ *
+ * @return array
+ *        Tableau des descriptions des types de noisette trouvés indexé par le type de noisette.
+ */
+function type_noisette_supprimer_cache($plugin, $fonction) {
+
+	// Initialisation de l'identifiant du cache des descriptions
+	$cache = array(
+		'sous_dossier' => $plugin,
+		'objet'        => 'type_noisette',
+		'fonction'     => $fonction
+	);
+
+	// Suppression du cache spécifié.
+	include_spip('inc/cache');
+	$retour = cache_supprimer('ncore', $cache);
+	
+	return $retour;
 }
