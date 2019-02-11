@@ -105,7 +105,7 @@ function traiter_enregistrement_dist($args, $retours) {
 					$retours['fichiers'][$nom] = $valeur;
 				}
 			}
-			if (($valeur = _request($nom)) !== null) {
+			if (($valeur = _request($nom)) !== null or saisies_saisie_est_tabulaire($saisie)) {
 				// Pour le saisies différentes de fichiers,
 				// on ne prend que les champs qui ont effectivement été envoyés par le formulaire
 				$champs[] = $nom;
