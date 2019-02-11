@@ -22,12 +22,14 @@ function ncore_cache_configurer($plugin) {
 
 	// Initialisation du tableau de configuration avec les valeurs par défaut du plugin Cache.
 	$configuration = array(
-		'racine'        => _DIR_CACHE,
-		'nom'           => array('objet', 'type'),
-		'extension'     => '.php',
-		'securisation'  => true,
-		'serialisation' => true,
-		'separateur'    => '-'
+		'racine'          => _DIR_CACHE,
+		'sous_dossier'    => true,
+		'nom_obligatoire' => array('objet', 'fonction'),
+		'nom_facultatif'  => array(),
+		'extension'       => '.php',
+		'securisation'    => true,
+		'serialisation'   => true,
+		'separateur'      => '-'
 	);
 
 	return $configuration;

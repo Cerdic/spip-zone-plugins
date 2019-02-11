@@ -45,13 +45,20 @@ function type_noisette_ajaxifier($plugin, $type_noisette, $stockage = '') {
 	static $est_ajax = array();
 
 	if (!isset($est_ajax[$plugin][$type_noisette])) {
-		include_spip('inc/ncore_cache');
+		// Initialisation de l'identifiant du cache des indicateurs Ajax
+		include_spip('inc/cache');
+		$cache = array(
+			'sous_dossier' => $plugin,
+			'objet'        => 'type_noisette',
+			'fonction'     => 'ajax'
+		);
+
 		// On vérifie si on doit recalculer le cache ou pas.
 		if ((_request('var_mode') == 'recalcul')
 		or (defined('_NO_CACHE') and (_NO_CACHE != 0))
-		or (!$est_ajax[$plugin] = cache_lire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_AJAX))) {
+		or (!$est_ajax[$plugin] = cache_lire('ncore', $cache))) {
 			// On charge l'API de N-Core.
-			include_spip("ncore/ncore");
+			include_spip('ncore/ncore');
 
 			// On détermine la valeur par défaut de l'ajax des noisettes pour le plugin appelant.
 			$defaut_ajax = ncore_type_noisette_initialiser_ajax($plugin);
@@ -74,7 +81,7 @@ function type_noisette_ajaxifier($plugin, $type_noisette, $stockage = '') {
 			}
 
 			// In fine, on met à jour le cache
-			cache_ecrire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_AJAX, $est_ajax[$plugin]);
+			cache_ecrire('ncore', $cache, $est_ajax[$plugin]);
 		}
 	}
 
@@ -113,14 +120,21 @@ function type_noisette_dynamiser($plugin, $type_noisette, $stockage = '') {
 	static $est_dynamique = array();
 
 	if (!isset($est_dynamique[$plugin][$type_noisette])) {
-		include_spip('inc/ncore_cache');
+		// Initialisation de l'identifiant du cache des indicateurs d'inclusion dynamique
+		include_spip('inc/cache');
+		$cache = array(
+			'sous_dossier' => $plugin,
+			'objet'        => 'type_noisette',
+			'fonction'     => 'inclusions'
+		);
+
 		// On doit recalculer le cache ou pas.
 		if ((_request('var_mode') == 'recalcul')
 		or (defined('_NO_CACHE') and (_NO_CACHE != 0))
-		or (!$est_dynamique[$plugin] = cache_lire($type_noisette, _NCORE_NOMCACHE_TYPE_NOISETTE_INCLUSION))) {
+		or (!$est_dynamique[$plugin] = cache_lire('ncore', $cache))) {
 			// On charge l'API de N-Core.
 			// Ce sont ces fonctions qui aiguillent ou pas vers une fonction spécifique du service.
-			include_spip("ncore/ncore");
+			include_spip('ncore/ncore');
 
 			// On détermine la valeur par défaut de l'ajax des noisettes pour le plugin appelant.
 			$defaut_inclusion = ncore_type_noisette_initialiser_inclusion($plugin);
@@ -142,7 +156,7 @@ function type_noisette_dynamiser($plugin, $type_noisette, $stockage = '') {
 			}
 
 			// In fine, on met à jour le cache
-			cache_ecrire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_INCLUSION, $est_dynamique[$plugin]);
+			cache_ecrire('ncore', $cache, $est_dynamique[$plugin]);
 		}
 	}
 
@@ -244,11 +258,18 @@ function noisette_contextualiser($plugin, $noisette, $type_noisette, $profondeur
 	// valorisées. La valorisation sera faite avec l'environnement.
 	// -- les contextes sont stockés dans un cache dédié.
 	if (!isset($contextes_type_noisette[$plugin][$type_noisette])) {
+		// Initialisation de l'identifiant du cache des indicateurs d'inclusion dynamique
+		include_spip('inc/cache');
+		$cache = array(
+			'sous_dossier' => $plugin,
+			'objet'        => 'type_noisette',
+			'fonction'     => 'contextes'
+		);
+
 		// On vérifie si on doit recalculer le cache le cache ou pas.
-		include_spip('inc/ncore_cache');
 		if ((_request('var_mode') == 'recalcul')
 		or (defined('_NO_CACHE') and (_NO_CACHE != 0))
-		or (!$contextes_type_noisette[$plugin] = cache_lire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_CONTEXTE))) {
+		or (!$contextes_type_noisette[$plugin] = cache_lire('ncore', $cache))) {
 			// On répertorie la configuration du contexte de toutes les noisettes disponibles et on
 			// le renvoie le résultat tel quel.
 			include_spip('ncore/ncore');
@@ -261,7 +282,7 @@ function noisette_contextualiser($plugin, $noisette, $type_noisette, $profondeur
 			}
 
 			// In fine, on met à jour le cache
-			cache_ecrire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_CONTEXTE, $contextes_type_noisette[$plugin]);
+			cache_ecrire('ncore', $cache, $contextes_type_noisette[$plugin]);
 		}
 	}
 

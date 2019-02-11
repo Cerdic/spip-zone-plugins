@@ -1,7 +1,7 @@
 <paquet
 	prefix="ncore"
 	categorie="outil"
-	version="0.8.4"
+	version="0.9.0"
 	etat="test"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="ncore_logo-32.png"
@@ -14,4 +14,5 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 	<necessite nom="yaml" compatibilite="[2.0.7;[" />
+	<necessite nom="cache" compatibilite="[0.1.0;[" />
 </paquet>

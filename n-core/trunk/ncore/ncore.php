@@ -67,20 +67,29 @@ function ncore_type_noisette_stocker($plugin, $types_noisette, $recharger, $stoc
 
 		// Initialisation de la sortie.
 		$retour = true;
+		
+		// Initialisation des identifiants des caches
+		$cache_descriptions = array(
+			'sous_dossier' => $plugin,
+			'objet'        => 'type_noisette',
+			'fonction'     => 'descriptions'
+		);
+		$cache_signatures = $cache_descriptions;
+		$cache_signatures['fonction'] = 'signatures';
 
-		include_spip('inc/ncore_cache');
+		include_spip('inc/cache');
 		if ($recharger) {
 			// Si le rechargement est forcé, tous les types de noisette sont nouveaux, on peut donc écraser les caches
 			// existants sans s'en préoccuper.
 			$descriptions = array_column($types_noisette['a_ajouter'], null, 'type_noisette');
-			cache_ecrire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_DESCRIPTION, $descriptions);
+			cache_ecrire('ncore', $cache_descriptions, $descriptions);
 
 			$signatures = array_column($types_noisette['a_ajouter'], 'signature', 'type_noisette');
-			cache_ecrire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_SIGNATURE, $signatures);
+			cache_ecrire('ncore', $cache_signatures, $signatures);
 		} else {
 			// On lit les cache existants et on applique les modifications.
-			$descriptions = cache_lire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_DESCRIPTION);
-			$signatures = cache_lire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_SIGNATURE);
+			$descriptions = cache_lire('ncore', $cache_descriptions);
+			$signatures = cache_lire('ncore', $cache_signatures, $signatures);
 
 			// On supprime les noisettes obsolètes
 			if (!empty($types_noisette['a_effacer'])) {
@@ -104,8 +113,8 @@ function ncore_type_noisette_stocker($plugin, $types_noisette, $recharger, $stoc
 			}
 
 			// On recrée les caches.
-			cache_ecrire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_DESCRIPTION, $descriptions);
-			cache_ecrire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_SIGNATURE, $signatures);
+			cache_ecrire('ncore', $cache_descriptions, $descriptions);
+			cache_ecrire('ncore', $cache_signatures, $signatures);
 		}
 	}
 
@@ -228,9 +237,16 @@ function ncore_type_noisette_decrire($plugin, $type_noisette, $stockage = '') {
 
 		// Initialisation de la description à renvoyer.
 		$description = array();
+				
+		// Initialisation des identifiants des caches
+		$cache_descriptions = array(
+			'sous_dossier' => $plugin,
+			'objet'        => 'type_noisette',
+			'fonction'     => 'descriptions'
+		);
 
-		include_spip('inc/ncore_cache');
-		$descriptions = cache_lire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_DESCRIPTION);
+		include_spip('inc/cache');
+		$descriptions = cache_lire('ncore', $cache_descriptions);
 		if (isset($descriptions[$type_noisette])) {
 			$description = $descriptions[$type_noisette];
 		}
@@ -271,15 +287,24 @@ function ncore_type_noisette_lister($plugin, $information = '', $stockage = '') 
 		$types_noisettes = $lister($plugin, $information);
 	} else {
 		// Le plugin ne propose pas de fonction propre ou le stockage N-Core est explicitement demandé.
-		// -- On lit le cache des sesxcriptions ou des signatures suivant la demande.
+		// -- On lit le cache des descriptions ou des signatures suivant la demande.
 		// -- Initialisation du tableau de sortie
 		$types_noisettes = array();
 
-		include_spip('inc/ncore_cache');
+		// Initialisation de l'identifiant du cache des descriptions
+		$cache = array(
+			'sous_dossier' => $plugin,
+			'objet'        => 'type_noisette',
+			'fonction'     => 'descriptions'
+		);
+
+		include_spip('inc/cache');
 		if ($information == 'signature') {
 			// Les signatures md5 sont sockées dans un fichier cache séparé de celui des descriptions de noisettes.
-			$types_noisettes = cache_lire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_SIGNATURE);
-		} elseif ($descriptions = cache_lire($plugin, _NCORE_NOMCACHE_TYPE_NOISETTE_DESCRIPTION)) {
+			$cache['fonction'] = 'signatures';
+			$types_noisettes = cache_lire('ncore', $cache);
+
+		} elseif ($descriptions = cache_lire('ncore', $cache)) {
 			if ($information) {
 				// Si $information n'est pas une colonne valide array_column retournera un tableau vide.
 				$types_noisettes = array_column($descriptions, $information, 'type_noisette');
