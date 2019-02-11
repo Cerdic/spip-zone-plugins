@@ -349,33 +349,61 @@ function type_noisette_repertorier($plugin, $filtres = array(), $stockage = '') 
 
 
 /**
- * Supprime les caches liés à la compilation. Les autres caches fournis par N-Core comme un espace de stokage
- * possible pour les plugins utilisateurs ne sont pas concernés par cette fonction.
+ * Supprime tout ou partie des caches liés à la compilation uniquement.
  *
  * @api
+ *
  * @uses cache_supprimer()
  *
- * @param string $plugin
+ * @param string        $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param array  $fonction
- *        Identification de la fonction du cache qui participe à son nommage (uniquement liée à la compilation).
+ * @param array|string  $fonctions
+ *        Identifiants des fonctions permettant de nommer le cache : les valeurs possibles sont `ajax`, `inclusions`
+ *        et `contextes`. Il est possible de fournir un tableau vide pour supprimer tous les caches
+ *        ou juste une fonction sous forme de chaine.
  *
- * @return array
- *        Tableau des descriptions des types de noisette trouvés indexé par le type de noisette.
+ * @return bool
+ *        `false` si une erreur de fonction s'est produite, `true` sinon.
  */
-function type_noisette_supprimer_cache($plugin, $fonction) {
+function type_noisette_decacher($plugin, $fonctions = array()) {
 
-	// Initialisation de l'identifiant du cache des descriptions
-	$cache = array(
-		'sous_dossier' => $plugin,
-		'objet'        => 'type_noisette',
-		'fonction'     => $fonction
-	);
+	// Retour de la fonction
+	$retour = false;
 
-	// Suppression du cache spécifié.
-	include_spip('inc/cache');
-	$retour = cache_supprimer('ncore', $cache);
-	
+	// Liste des fonctions valides pour cette API.
+	static $fonctions_autorisees = array('ajax', 'inclusions', 'contextes');
+
+	// Identification des caches à supprimer.
+	// -- si vide on supprime tous les caches.
+	// -- si une seule fonction est passée en chaine on la transforme en tableau.
+	// -- si une liste on vérifie que les fonctions sont valides.
+	if (!$fonctions) {
+		$fonctions = $fonctions_autorisees;
+	} elseif (is_string($fonctions)) {
+		$fonctions = array($fonctions);
+	} elseif (is_array($fonctions)) {
+		$fonctions = array_intersect($fonctions, $fonctions_autorisees);
+	} else {
+		$fonctions = array();
+	}
+
+	if ($fonctions) {
+		// Initialisation de l'identifiant du cache
+		include_spip('inc/cache');
+		$cache = array(
+			'sous_dossier' => $plugin,
+			'objet'        => 'type_noisette'
+		);
+		foreach ($fonctions as $_fonction) {
+			// Complétude de l'identifiant du cache
+			$cache['fonction'] = $_fonction;
+
+			// Suppression du cache spécifié.
+			cache_supprimer('ncore', $cache);
+		}
+		$retour = true;
+	}
+
 	return $retour;
 }

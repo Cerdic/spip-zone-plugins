@@ -148,7 +148,6 @@ function ncore_type_noisette_completer($plugin, $description, $stockage = '') {
 
 	// Si le plugin utilisateur complète la description avec des champs spécifiques il doit proposer un service
 	// de complément propre.
-	include_spip('inc/ncore_utils');
 	if ($completer = ncore_chercher_service($plugin, 'type_noisette_completer', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		$description_complete = $completer($plugin, $description);
@@ -190,7 +189,6 @@ function ncore_type_noisette_traiter_typo($plugin, $description, $stockage = '')
 
 	// Si le plugin appelant complète la description du type de noisette avec des champs textuels il doit
 	// proposer un service propre de traitement de ces champs.
-	include_spip('inc/ncore_utils');
 	if ($traiter_typo = ncore_chercher_service($plugin, 'type_noisette_traiter_typo', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		$description = $traiter_typo($plugin, $description);
@@ -226,7 +224,6 @@ function ncore_type_noisette_decrire($plugin, $type_noisette, $stockage = '') {
 
 	// Si le plugin utilisateur possède un stockage propre il doit proposer un service spécifique pour récupérer
 	// la description brute d'un type de noisette.
-	include_spip('inc/ncore_utils');
 	if ($decrire = ncore_chercher_service($plugin, 'type_noisette_decrire', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		$description = $decrire($plugin, $type_noisette);
@@ -281,7 +278,6 @@ function ncore_type_noisette_lister($plugin, $information = '', $stockage = '') 
 
 	// Si le plugin utilisateur possède un stockage propre il doit proposer un service spécifique pour récupérer
 	// les données requises de tous les types de noisette disponibles.
-	include_spip('inc/ncore_utils');
 	if ($lister = ncore_chercher_service($plugin, 'type_noisette_lister', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		$types_noisettes = $lister($plugin, $information);
@@ -339,7 +335,6 @@ function ncore_type_noisette_initialiser_ajax($plugin) {
 
 	// Si le plugin utilisateur permet la configuration du défaut Ajax ou ne suit pas la configuration de N-Core, il
 	// doit proposer un service pour fournir cette valeur.
-	include_spip('inc/ncore_utils');
 	if ($configurer = ncore_chercher_service($plugin, 'type_noisette_initialiser_ajax', '')) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		// On autorise la fonction du plugin à retourner autre chose que true ou false si tant est que l'on puisse
@@ -375,7 +370,6 @@ function ncore_type_noisette_initialiser_inclusion($plugin) {
 
 	// Si le plugin utilisateur permet la configuration du défaut d'inclusion ou ne suit pas la configuration de N-Core,
 	// il doit proposer un service pour fournir cette valeur.
-	include_spip('inc/ncore_utils');
 	if ($configurer = ncore_chercher_service($plugin, 'type_noisette_initialiser_inclusion', '')) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		// On autorise la fonction du plugin à retourner autre chose que true ou false si tant est que l'on puisse
@@ -410,7 +404,6 @@ function ncore_type_noisette_initialiser_dossier($plugin) {
 
 	// Si le plugin utilisateur permet la configuration du dossier des types de noisette ou ne suit pas la configuration
 	// de N-Core, il doit proposer un service pour fournir cette valeur.
-	include_spip('inc/ncore_utils');
 	if ($configurer = ncore_chercher_service($plugin, 'type_noisette_initialiser_dossier', '')) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		// On autorise la fonction du plugin à retourner autre chose que true ou false si tant est que l'on puisse
@@ -455,7 +448,6 @@ function ncore_noisette_stocker($plugin, $description, $stockage = '') {
 
 	// Si le plugin utilisateur possède un stockage propre il doit proposer un service spécifique pour stocker
 	// les données d'une noisette.
-	include_spip('inc/ncore_utils');
 	if ($stocker = ncore_chercher_service($plugin, 'noisette_stocker', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		$id_noisette = $stocker($plugin, $description);
@@ -540,7 +532,6 @@ function ncore_noisette_changer_conteneur($plugin, $description, $id_conteneur, 
 
 	// Si le plugin utilisateur possède un stockage propre il doit proposer un service spécifique pour effectuer
 	// le changement de conteneur d'une noisette.
-	include_spip('inc/ncore_utils');
 	if ($changer = ncore_chercher_service($plugin, 'noisette_changer_conteneur', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		$description = $changer($plugin, $description, $id_conteneur, $rang, $profondeur);
@@ -596,7 +587,6 @@ function ncore_noisette_completer($plugin, $description, $stockage = '') {
 
 	// Si le plugin utilisateur complète la description avec des champs spécifiques il doit proposer un service
 	// de complément propre.
-	include_spip('inc/ncore_utils');
 	if ($completer = ncore_chercher_service($plugin, 'noisette_completer', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		$description = $completer($plugin, $description);
@@ -632,7 +622,6 @@ function ncore_noisette_traiter_typo($plugin, $description, $stockage = '') {
 	// N-Core n'a aucun champ textuel à traiter dans la description de base d'une noisette.
 	// Si le plugin appelant complète la description du type de noisette avec des champs textuels il doit
 	// proposer un service propre de traitement typo de ces champs.
-	include_spip('inc/ncore_utils');
 	if ($traiter_typo = ncore_chercher_service($plugin, 'noisette_traiter_typo', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		$description = $traiter_typo($plugin, $description);
@@ -666,7 +655,6 @@ function ncore_noisette_ranger($plugin, $description, $rang_destination, $stocka
 
 	// Si le plugin utilisateur possède un stockage propre il doit proposer un service spécifique pour changer
 	// la position d'une noisette au sein d'un conteneur.
-	include_spip('inc/ncore_utils');
 	if ($ranger = ncore_chercher_service($plugin, 'noisette_ranger', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		$retour = $ranger($plugin, $description, $rang_destination);
@@ -726,7 +714,6 @@ function ncore_noisette_destocker($plugin, $description, $stockage = '') {
 
 	// Si le plugin utilisateur possède un stockage propre il doit proposer un service spécifique pour supprimer
 	// une noisette de son conteneur.
-	include_spip('inc/ncore_utils');
 	if ($destocker = ncore_chercher_service($plugin, 'noisette_destocker', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		$retour = $destocker($plugin, $description);
@@ -791,7 +778,6 @@ function ncore_noisette_lister($plugin, $conteneur = array(), $information = '',
 
 	// Si le plugin utilisateur possède un stockage propre il doit proposer un service spécifique pour récupérer
 	// les données demandées d'une liste noisette.
-	include_spip('inc/ncore_utils');
 	if ($lister = ncore_chercher_service($plugin, 'noisette_lister', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		$noisettes = $lister($plugin, $conteneur, $information, $cle);
@@ -862,7 +848,6 @@ function ncore_noisette_decrire($plugin, $noisette, $stockage = '') {
 
 	// Si le plugin utilisateur possède un stockage propre il doit proposer un service spécifique pour récupérer
 	// la description brute d'une noisette.
-	include_spip('inc/ncore_utils');
 	if ($decrire = ncore_chercher_service($plugin, 'noisette_decrire', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		$description = $decrire($plugin, $noisette);
@@ -935,7 +920,6 @@ function ncore_noisette_initialiser_encapsulation($plugin) {
 
 	// Si le plugin utilisateur permet la configuration du défaut d'encapsulaiton ou ne suit pas la configuration
 	// de N-Core, il doit proposer un service pour fournir cette valeur.
-	include_spip('inc/ncore_utils');
 	if ($configurer = ncore_chercher_service($plugin, 'noisette_initialiser_encapsulation', '')) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		// On autorise la fonction du plugin à retourner autre chose que true ou false si tant est que l'on puisse
@@ -994,7 +978,6 @@ function ncore_conteneur_verifier($plugin, $conteneur, $stockage = '') {
 			}
 		} else {
 			// Le conteneur est spécifique au plugin utilisateur, c'est donc au plugin faire la vérification des index.
-			include_spip('inc/ncore_utils');
 			if ($verifier = ncore_chercher_service($plugin, 'conteneur_verifier', $stockage)) {
 				$conteneur_verifie = $verifier($plugin, $conteneur);
 			}
@@ -1042,7 +1025,6 @@ function ncore_conteneur_identifier($plugin, $conteneur, $stockage = '') {
 			$id_conteneur = $conteneur['type_noisette'] . '|noisette|' . $conteneur['id_noisette'];
 		} else {
 			// Le conteneur est spécifique au plugin utilisateur, c'est donc au plugin de le calculer.
-			include_spip('inc/ncore_utils');
 			if ($identifier = ncore_chercher_service($plugin, 'conteneur_identifier', $stockage)) {
 				$id_conteneur = $identifier($plugin, $conteneur);
 			}
@@ -1090,7 +1072,6 @@ function ncore_conteneur_construire($plugin, $id_conteneur, $stockage = '') {
 			$conteneur['id_noisette'] = intval($elements[2]);
 		} else {
 			// Le conteneur est spécifique au plugin utilisateur, c'est donc au plugin de le calculer.
-			include_spip('inc/ncore_utils');
 			if ($construire = ncore_chercher_service($plugin, 'conteneur_construire', $stockage)) {
 				$conteneur = $construire($plugin, $id_conteneur);
 			}
@@ -1171,7 +1152,6 @@ function ncore_conteneur_destocker($plugin, $conteneur, $stockage = '') {
 
 	// Si le plugin utilisateur possède un stockage propre il doit proposer un service spécifique pour supprimer
 	// les noisettes d'un conteneur.
-	include_spip('inc/ncore_utils');
 	if ($destocker = ncore_chercher_service($plugin, 'conteneur_destocker', $stockage)) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		$retour = $destocker($plugin, $conteneur);
@@ -1198,4 +1178,49 @@ function ncore_conteneur_destocker($plugin, $conteneur, $stockage = '') {
 	}
 
 	return $retour;
+}
+
+
+// -----------------------------------------------------------------------
+// ---------------- UTILITAIRE PROPRE AU PLUGIN N-CORE -------------------
+// -----------------------------------------------------------------------
+
+/**
+ * Cherche une fonction donnée en se basant sur le service de stockage ou à défaut sur le plugin appelant.
+ * Si ni le service de stockage ni le plugin ne fournissent la fonction demandée la chaîne vide est renvoyée.
+ *
+ * @internal
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param bool   $fonction
+ *        Nom de la fonction à chercher.
+ * @param string $stockage
+ *        Identifiant du service de stockage à utiliser si précisé. Dans ce cas, ni celui du plugin
+ *        ni celui de N-Core ne seront utilisés. En général, cet identifiant est le préfixe d'un plugin
+ *        fournissant le service de stockage souhaité.
+ *
+ * @return string
+ *        Nom complet de la fonction si trouvée ou chaine vide sinon.
+ */
+function ncore_chercher_service($plugin, $fonction, $stockage = '') {
+
+	$fonction_trouvee = '';
+
+	// Si le stockage n'est pas précisé on cherche la fonction dans le plugin appelant.
+	if (!$stockage) {
+		$stockage = $plugin;
+	}
+
+	// Eviter la réentrance si on demande explicitement le stockage N-Core
+	if ($stockage != 'ncore') {
+		include_spip("ncore/${stockage}");
+		$fonction_trouvee = "${stockage}_${fonction}";
+		if (!function_exists($fonction_trouvee)) {
+			$fonction_trouvee = '';
+		}
+	}
+
+	return $fonction_trouvee;
 }
