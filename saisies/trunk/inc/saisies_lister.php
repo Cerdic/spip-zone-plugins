@@ -455,6 +455,23 @@ function saisies_autonomes() {
 }
 
 /**
+ * La saisie renvoie t-elle un tableau?
+ * note: on teste saisie par saisie, et non pas type de saisie par type de saisie, car certaine type (Evenements par ex) peut, en fonction des options, être tabulaire ou pas.
+ * @param $saisie
+ * @return return bool true si la saisie est tabulaire, false sinon
+**/
+function saisies_saisie_est_tabulaire($saisie) {
+	if (in_array($saisie['saisie'], array('checkbox', 'selection_multiple'))) {
+		$est_tabulaire = true;
+	} else {
+		$est_tabulaire =  false;
+	}
+	return pipeline('saisie_est_tabulaire',
+		array('args' => $saisie, 'data' => $est_tabulaire)
+	);
+}
+
+/**
  * Indique si une saisie à sa valeur gelée
  * - soit par option disabled avec envoi cachée
  * - soit par option readonly
