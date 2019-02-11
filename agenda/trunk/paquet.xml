@@ -48,7 +48,7 @@
 	<utilise nom="Fulltext" compatibilite="[1.0.0;[" />
 	<utilise nom="mots" compatibilite="[2.4.6;[" />
 	<utilise nom="corbeille" compatibilite="[3.1.1;[" />
-	<utilise nom="saisies" compatibilite="[2.24.0;[" />
+	<utilise nom="saisies" compatibilite="[3.13.0;[" />
 	<utilise nom="verifier" compatibilite="[1.7.1;[" />
 	<utilise nom="urls" compatibilite="[1.4.12;[" />
 
