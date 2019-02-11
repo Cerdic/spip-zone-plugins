@@ -318,3 +318,19 @@ function agenda_propres_creer_chaine_url($flux) {
 	}
 	return $flux;
 }
+
+/**
+ * Pour la saisie de type événement, indique si les données renvoyées sont tabulaire ou pas
+ * @param $flux
+ * @return $flux
+**/
+function agenda_saisie_est_tabulaire($flux) {
+	$args = $flux['args'];
+	if ($args['saisie'] != 'evenements') {
+		return $flux;
+	}
+	if ($args['options']['type_choix'] == 'checkbox') {
+		$flux['data'] = true;
+	}
+	return $flux;
+}
