@@ -311,10 +311,7 @@ function noizetier_affiche_milieu($flux) {
 			type_noisette_charger('noizetier');
 
 			// Suppression des caches N-Core nécessaires à la compilation des noisettes
-			include_spip('inc/ncore_cache');
-			cache_supprimer('noizetier', _NCORE_NOMCACHE_TYPE_NOISETTE_CONTEXTE);
-			cache_supprimer('noizetier', _NCORE_NOMCACHE_TYPE_NOISETTE_AJAX);
-			cache_supprimer('noizetier', _NCORE_NOMCACHE_TYPE_NOISETTE_INCLUSION);
+			type_noisette_decacher('noizetier');
 
 		} elseif (
 			($objet_exec = trouver_objet_exec($exec))

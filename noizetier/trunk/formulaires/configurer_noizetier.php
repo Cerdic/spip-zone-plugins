@@ -29,9 +29,9 @@ function formulaires_configurer_noizetier_traiter_dist() {
 	include_spip('inc/config');
 	$defaut_ajax = lire_config('noizetier/ajax_noisette');
 
+	include_spip('inc/ncore_type_noisette');
 	if ($defaut_ajax != _request('ajax_noisette')) {
-		include_spip('inc/ncore_cache');
-		cache_supprimer('noizetier', _NCORE_NOMCACHE_TYPE_NOISETTE_AJAX);
+		type_noisette_decacher('noizetier', 'ajax');
 	}
 
 	// Si on a changé la configuration de l'inclusion dynamique par défaut, on supprime le cache associé des types de
@@ -39,8 +39,7 @@ function formulaires_configurer_noizetier_traiter_dist() {
 	$defaut_inclusion = lire_config('noizetier/inclusion_dynamique_noisette');
 
 	if ($defaut_inclusion != _request('inclusion_dynamique_noisette')) {
-		include_spip('inc/ncore_cache');
-		cache_supprimer('noizetier', _NCORE_NOMCACHE_TYPE_NOISETTE_INCLUSION);
+		type_noisette_decacher('noizetier', 'inclusions');
 	}
 
 	// On filtre le tableau des objets configurables pour éviter l'index vide fourni systématiquement par la saisie.
