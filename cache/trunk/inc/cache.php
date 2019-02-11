@@ -48,22 +48,12 @@ function cache_ecrire($plugin, $cache, $contenu) {
 	$fichier_cache = '';
 	include_spip('inc/flock');
 	if (is_array($cache)) {
-		// Création du répertoire du cache à créer, si besoin.
-		$erreur_sous_dossier = false;
-		if ($configuration[$plugin]['sous_dossier']) {
-			if (!empty($cache['sous_dossier'])) {
-				// Si le cache nécessite un sous-dossier on crée le répertoire au besoin.
-				sous_repertoire($configuration[$plugin]['dossier_base'], rtrim($cache['sous_dossier'], '/'));
-			} else {
-				// C'est une erreur, le sous-dossier n'a pas été fourni alors qu'il est requis. On arrête l'écriture.
-				$erreur_sous_dossier = true;
-			}
-		}
-
-		// Détermination du chemin du cache si pas d'erreur sur le sous-dossier :
-		// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
-		//   de la configuration du nom pour le plugin.
-		if (!$erreur_sous_dossier) {
+		// Vérification de la conformité entre la configuration et le sous-dossier du cache.
+		if (!$configuration[$plugin]['sous_dossier']
+		or ($configuration[$plugin]['sous_dossier'] and !empty($cache['sous_dossier']))) {
+			// Détermination du chemin du cache si pas d'erreur sur le sous-dossier :
+			// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
+			//   de la configuration du nom pour le plugin.
 			$fichier_cache = cache_cache_composer($plugin, $cache, $configuration[$plugin]);
 		}
 	} elseif (is_string($cache)) {
@@ -73,6 +63,12 @@ function cache_ecrire($plugin, $cache, $contenu) {
 	}
 	
 	if ($fichier_cache) {
+		// On crée les répertoires si besoin
+		sous_repertoire($configuration[$plugin]['racine'], rtrim($configuration[$plugin]['dossier_plugin'], '/'));
+		if ($configuration[$plugin]['sous_dossier']) {
+			sous_repertoire($configuration[$plugin]['dossier_base'], rtrim($cache['sous_dossier'], '/'));
+		}
+
  		// Suivant que la configuration demande une sérialisation ou pas, on vérife le format du contenu
 		// de façon à toujours écrire une chaine.
 		$contenu_cache = '';

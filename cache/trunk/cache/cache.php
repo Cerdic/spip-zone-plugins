@@ -79,10 +79,9 @@ function cache_cache_configurer($plugin) {
 	}
 
 	// -- Sous-dossier spécifique au plugin
-	$sous_dossier = ($configuration['racine'] == _DIR_VAR) ? "cache-${plugin}" : "$plugin";
-	// -- Création et enregistrement du dossier de base
-	include_spip('inc/flock');
-	$configuration['dossier_base'] = sous_repertoire($configuration['racine'], $sous_dossier);
+	$configuration['dossier_plugin'] = ($configuration['racine'] == _DIR_VAR) ? "cache-${plugin}/" : "${plugin}/";
+	// -- Enregistrement du dossier de base
+	$configuration['dossier_base'] = $configuration['racine'] . $configuration['dossier_plugin'];
 
 	// -- Construction du tableau des composants du nom : dans l'ordre on a toujours les composants obligatoires
 	//    suivis des composants faclutatifs.
