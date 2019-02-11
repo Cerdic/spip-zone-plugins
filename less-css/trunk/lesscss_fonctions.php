@@ -136,30 +136,31 @@ function lesscss_compile($style, $contexte = array()){
 			spip_log('lesscss_compile getCSS '.(isset($contexte['file'])?$contexte['file']:substr($style,0,100)).' :: '.spip_timer('lesscss_compile'), 'less');
 		}
 
-		if ($files = Less_Parser::AllParsedFiles()
-		  AND count($files)){
-
-			$l = strlen(_DIR_RACINE);
-			foreach($files as $k=>$file){
-				if (strncmp($file,_DIR_RACINE,$l)==0){
-					$files[$k] = substr($file,$l);
-				}
-			}
-			$out = "/*\n#@".implode("\n#@",$files)."\n*"."/\n" . $out;
-		}
-
-		return $out;
 	}
 	// en cas d'erreur, on retourne du vide...
 	catch (exception $ex) {
-		spip_log('less.php fatal error:'.$ex->getMessage(),'less'._LOG_ERREUR);
+		spip_log($e = 'LESS Echec compilation :'.$ex->getMessage(),'less'._LOG_ERREUR);
+		$out = "/* LESS Echec compilation *"."/\n";
 		erreur_squelette(
 			"LESS : Echec compilation"
 			. (isset($contexte['file'])?" fichier ".$contexte['file']:"")
 		  . "<br />".$ex->getMessage()
 		);
-		return '';
 	}
+
+	if ($files = Less_Parser::AllParsedFiles()
+	  AND count($files)){
+
+		$l = strlen(_DIR_RACINE);
+		foreach($files as $k=>$file){
+			if (strncmp($file,_DIR_RACINE,$l)==0){
+				$files[$k] = substr($file,$l);
+			}
+		}
+		$out = "/*\n#@".implode("\n#@",$files)."\n*"."/\n" . $out;
+	}
+
+	return $out;
 }
 
 /**
