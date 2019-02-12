@@ -11,7 +11,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Chargement des données : le formulaire affiche la liste des caches issus de l'utilisation du service et propose
  * le vidage de tout ou partie des fichiers.
  *
- * @uses cache_configuration_lire()
+ * @uses cache_obtenir_configuration()
  * @uses cache_cache_configurer()
  * @uses cache_cache_vider_charger()
  *
@@ -27,7 +27,7 @@ function formulaires_cache_vider_charger($plugin) {
 	$configuration = array();
 	include_spip('inc/cache');
 	include_spip('cache/cache');
-	if (empty($configuration) and (!$configuration = cache_configuration_lire($plugin))) {
+	if (empty($configuration) and (!$configuration = cache_obtenir_configuration($plugin))) {
 		$configuration = cache_cache_configurer($plugin);
 	}
 

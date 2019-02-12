@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @api
  *
- * @uses cache_configuration_lire()
+ * @uses cache_obtenir_configuration()
  * @uses cache_cache_configurer()
  * @uses cache_cache_composer()
  *
@@ -39,7 +39,7 @@ function cache_ecrire($plugin, $cache, $contenu) {
 	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel).
 	static $configuration = array();
 	include_spip('cache/cache');
-	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_configuration_lire($plugin))) {
+	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_obtenir_configuration($plugin))) {
 		$configuration[$plugin] = cache_cache_configurer($plugin);
 	}
 	
@@ -64,9 +64,12 @@ function cache_ecrire($plugin, $cache, $contenu) {
 	
 	if ($fichier_cache) {
 		// On crée les répertoires si besoin
-		sous_repertoire($configuration[$plugin]['racine'], rtrim($configuration[$plugin]['dossier_plugin'], '/'));
+		$dir_cache = sous_repertoire(
+			constant($configuration[$plugin]['racine']),
+			rtrim($configuration[$plugin]['dossier_plugin'], '/')
+		);
 		if ($configuration[$plugin]['sous_dossier']) {
-			sous_repertoire($configuration[$plugin]['dossier_base'], rtrim($cache['sous_dossier'], '/'));
+			sous_repertoire($dir_cache, rtrim($cache['sous_dossier'], '/'));
 		}
 
  		// Suivant que la configuration demande une sérialisation ou pas, on vérife le format du contenu
@@ -101,7 +104,7 @@ function cache_ecrire($plugin, $cache, $contenu) {
  *
  * @api
  *
- * @uses cache_configuration_lire()
+ * @uses cache_obtenir_configuration()
  * @uses cache_cache_configurer()
  * @uses cache_cache_composer()
  *
@@ -124,7 +127,7 @@ function cache_lire($plugin, $cache) {
 	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel, peu probable pour une lecture).
 	static $configuration = array();
 	include_spip('cache/cache');
-	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_configuration_lire($plugin))) {
+	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_obtenir_configuration($plugin))) {
 		$configuration[$plugin] = cache_cache_configurer($plugin);
 	}
 
@@ -171,7 +174,7 @@ function cache_lire($plugin, $cache) {
  *
  * @api
  *
- * @uses cache_configuration_lire()
+ * @uses cache_obtenir_configuration()
  * @uses cache_cache_configurer()
  * @uses cache_cache_composer()
  *
@@ -190,7 +193,7 @@ function cache_existe($plugin, $cache) {
 	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel).
 	static $configuration = array();
 	include_spip('cache/cache');
-	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_configuration_lire($plugin))) {
+	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_obtenir_configuration($plugin))) {
 		$configuration[$plugin] = cache_cache_configurer($plugin);
 	}
 
@@ -225,7 +228,7 @@ function cache_existe($plugin, $cache) {
  *
  * @api
  *
- * @uses cache_configuration_lire()
+ * @uses cache_obtenir_configuration()
  * @uses cache_cache_configurer()
  * @uses cache_cache_composer()
  *
@@ -243,7 +246,7 @@ function cache_nommer($plugin, $cache) {
 	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel).
 	static $configuration = array();
 	include_spip('cache/cache');
-	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_configuration_lire($plugin))) {
+	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_obtenir_configuration($plugin))) {
 		$configuration[$plugin] = cache_cache_configurer($plugin);
 	}
 
@@ -265,7 +268,7 @@ function cache_nommer($plugin, $cache) {
  *
  * @api
  *
- * @uses cache_configuration_lire()
+ * @uses cache_obtenir_configuration()
  * @uses cache_cache_configurer()
  * @uses cache_cache_composer()
  * @uses supprimer_fichier()
@@ -289,7 +292,7 @@ function cache_supprimer($plugin, $cache) {
 	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel, peu probable pour une lecture).
 	static $configuration = array();
 	include_spip('cache/cache');
-	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_configuration_lire($plugin))) {
+	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_obtenir_configuration($plugin))) {
 		$configuration[$plugin] = cache_cache_configurer($plugin);
 	}
 
@@ -323,7 +326,7 @@ function cache_supprimer($plugin, $cache) {
  *
  * @api
  *
- * @uses cache_configuration_lire()
+ * @uses cache_obtenir_configuration()
  * @uses cache_cache_configurer()
  * @uses cache_cache_composer()
  * @uses cache_cache_decomposer()
@@ -349,7 +352,7 @@ function cache_repertorier($plugin, $filtres = array()) {
 	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel, peu probable pour une lecture).
 	static $configuration = array();
 	include_spip('cache/cache');
-	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_configuration_lire($plugin))) {
+	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_obtenir_configuration($plugin))) {
 		$configuration[$plugin] = cache_cache_configurer($plugin);
 	}
 
@@ -454,7 +457,7 @@ function cache_vider($plugin, $caches) {
  *        Tableau de configuration des caches d'un plugin utilisateur ou tableau vide si aucune configuration n'est encore
  *        enregistrée.
  */
-function cache_configuration_lire($plugin) {
+function cache_obtenir_configuration($plugin) {
 
 	// Initialisation de la configuration à retourner
 	$configuration_lue = array();
@@ -466,4 +469,42 @@ function cache_configuration_lire($plugin) {
 	}
 
 	return $configuration_lue;
+}
+
+
+/**
+ * Efface la configuration standard des caches d'un plugin utilisateur ou de tous les plugins utilisateur.
+ *
+ * @api
+ *
+ * @uses lire_config()
+ * @uses effacer_config()
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ *        Si vide, toutes les configurations sont effacées.
+ *
+ * @return bool
+ *         True si la suppression s'est bien passée, false sinon.
+ */
+function cache_effacer_configuration($plugin) {
+
+	// Initialisation de la configuration à retourner
+	include_spip('inc/config');
+	$configuration_effacee = true;
+
+	if ($plugin) {
+		// Récupération de la meta du plugin Cache
+		$configuration_plugin = lire_config("cache/${plugin}", array());
+		if ($configuration_plugin) {
+			effacer_config("cache/${plugin}");
+		} else {
+			$configuration_effacee = false;
+		}
+	} else {
+		effacer_config('cache');
+	}
+
+	return $configuration_effacee;
 }

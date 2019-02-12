@@ -38,7 +38,7 @@ function cache_cache_configurer($plugin) {
 
 	// Initialisation du tableau de configuration avec les valeurs par défaut du plugin Cache.
 	$configuration_defaut = array(
-		'racine'          => _DIR_CACHE,
+		'racine'          => '_DIR_CACHE',
 		'sous_dossier'    => false,
 		'nom_obligatoire' => array('nom'),
 		'nom_facultatif'  => array(),
@@ -67,24 +67,18 @@ function cache_cache_configurer($plugin) {
 		$configuration['extension'] = '.php';
 	}
 
-	// Pour faciliter la construction du chemin des caches on détermine une fois pour toute le dossier
-	// de base des caches du plugin.
+	// Pour faciliter la construction du chemin des caches on stocke les éléments récurrents composant
+	// le dossier de base.
 	// -- Vérification de la localisation de la racine qui ne peut être que dans les trois dossiers SPIP
-	//    prévus et de la présence du / final.
-	if (!in_array($configuration['racine'], array(_DIR_CACHE, _DIR_TMP, _DIR_VAR))) {
+	//    prévus.
+	if (!in_array($configuration['racine'], array('_DIR_CACHE', '_DIR_TMP', '_DIR_VAR'))) {
 		$configuration['racine'] = $configuration_defaut['racine'];
-	} else {
-		// On s'assure que la racine se termine toujours par un slash.
-		$configuration['racine'] = rtrim($configuration['racine'], '/') . '/';
 	}
-
 	// -- Sous-dossier spécifique au plugin
-	$configuration['dossier_plugin'] = ($configuration['racine'] == _DIR_VAR) ? "cache-${plugin}/" : "${plugin}/";
-	// -- Enregistrement du dossier de base
-	$configuration['dossier_base'] = $configuration['racine'] . $configuration['dossier_plugin'];
+	$configuration['dossier_plugin'] = ($configuration['racine'] == '_DIR_VAR') ? "cache-${plugin}/" : "${plugin}/";
 
-	// -- Construction du tableau des composants du nom : dans l'ordre on a toujours les composants obligatoires
-	//    suivis des composants faclutatifs.
+	// Construction du tableau des composants du nom : dans l'ordre on a toujours les composants obligatoires
+	// suivis des composants faclutatifs.
 	$configuration['nom'] = array_merge($configuration['nom_obligatoire'], $configuration['nom_facultatif']);
 
 	// Enregistrement de la configuration du plugin utilisateur dans la meta prévue.
@@ -127,7 +121,7 @@ function cache_cache_composer($plugin, $cache, $configuration) {
 
 		// Détermination du répertoire final du fichier cache qui peut-être inclus dans un sous-dossier du dossier
 		// de base des caches du plugin.
-		$dir_cache = $configuration['dossier_base'];
+		$dir_cache = $configuration['racine'] . $configuration['dossier_plugin'];
 		if ($configuration['sous_dossier']) {
 			if (!empty($cache['sous_dossier'])) {
 				// Si le cache nécessite un sous-dossier, appelé service dans l'identifiant du cache.
@@ -198,7 +192,8 @@ function cache_cache_decomposer($plugin, $fichier_cache, $configuration) {
 		$cache = array();
 
 		// On supprime le dossier de base pour n'avoir que la partie spécifique du cache.
-		$fichier_cache = str_replace($configuration['dossier_base'], '', $fichier_cache);
+		$dir_cache = $configuration['racine'] . $configuration['dossier_plugin'];
+		$fichier_cache = str_replace($dir_cache, '', $fichier_cache);
 
 		// Détermination du nom du cache sans extension et décomposition suivant la configuration du nom.		
 		$nom_cache = basename($fichier_cache, $configuration['extension']);
