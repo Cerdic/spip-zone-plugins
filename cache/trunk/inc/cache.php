@@ -488,7 +488,7 @@ function cache_obtenir_configuration($plugin) {
  * @return bool
  *         True si la suppression s'est bien passée, false sinon.
  */
-function cache_effacer_configuration($plugin) {
+function cache_effacer_configuration($plugin = '') {
 
 	// Initialisation de la configuration à retourner
 	include_spip('inc/config');
