@@ -1,6 +1,9 @@
 [(#AUTORISER{configurer}|sinon_interdire_acces)]
 <h1 class="grostitre"><:cache:cache_vider_titre_page:></h1>
-<BOUCLE_plugins_cache(DATA){source table, #VAL|cache_plugin_repertorier}{par valeur}>
+#SET{plugins, #ARRAY}
+#SET{config_cache, #CONFIG{cache}}
+[(#GET{config_cache}|oui) #SET{plugins, #GET{config_cache}|unserialize|array_keys}]
+<BOUCLE_plugins_cache(DATA){source table, #GET{plugins}}{par valeur}>
 [<div class="ajax">
 	(#FORMULAIRE_CACHE_VIDER*{#VALEUR})
 </div>]
