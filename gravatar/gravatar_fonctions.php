@@ -72,9 +72,10 @@ function gravatar_balise_img($img,$alt="",$class=""){
  *
  * @param  string $email        le mail qui sert a recuperer l'image sur gravatar.com
  * @param  string $logo_auteur  Le logo de l'auteur s'il existe
+ * @param  bool $force          forcer le refresh du gravatar
  * @return string               La balise IMG
  */
-function gravatar_img($email, $logo_auteur='') {
+function gravatar_img($email, $logo_auteur='', $force = false) {
 	include_spip('inc/config');
 	$config = function_exists('lire_config')?lire_config('gravatar'):unserialize($GLOBALS['meta']['gravatar']);
 	$default = '404'; // par defaut rien si ni logo ni gravatar (consigne a passer a gravatar)
@@ -91,7 +92,7 @@ function gravatar_img($email, $logo_auteur='') {
 	// logo_auteur si il existe
 	// ou gravatar si on a un email et si on trouve le gravatar
 	if (!$img = $logo_auteur){
-		if (!$g = gravatar($email,$default)) // chercher le gravatar etendu pour cet email
+		if (!$g = gravatar($email,$default,$force)) // chercher le gravatar etendu pour cet email
 			$img = '';
 		else
 			$img = gravatar_balise_img($g, "", "spip_logo spip_logos photo avatar");
@@ -150,7 +151,7 @@ function gravatar_verifier_index($tmp) {
  * @staticvar int         $max      le nombre max de nouveaux
  * @param     string      $email    le mail qui va servir pour calculer le gravatar
  * @param     int|string  $default  gravatar par defaut : 404 ou identicon/monsterid/wavatar
- * @param     bool        $force    forcer la recuperation synchrone
+ * @param     bool        $force    forcer le refresh synchrone
  * @return    null|string           le chemin du fichier gravatar, s'il existe
  */
 function gravatar($email, $default='404', $force=false) {
@@ -214,7 +215,7 @@ function gravatar($email, $default='404', $force=false) {
 	}
 
 	// si on a un cache valide, on l'utilise
-	if ($gravatar==$gravatar_cache){
+	if ($gravatar==$gravatar_cache and !$force){
 		$duree = $_SERVER['REQUEST_TIME']-filemtime($gravatar_cache);
 		if ($duree<_GRAVATAR_CACHE_DELAY_REFRESH OR $nb--<=0){
 			return $gravatar;

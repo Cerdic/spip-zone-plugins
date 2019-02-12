@@ -73,7 +73,7 @@ function gravatar_recuperer_fond($flux){
 	  AND $email = sql_getfetsel('email', 'spip_auteurs', 'id_auteur='.intval($id_auteur))){
 
 		include_spip('inc/gravatar');
-		if ($gravatar = gravatar_img($email)) {
+		if ($gravatar = gravatar_img($email, '', _VAR_MODE==='recalcul' ? true : false)) {
 			$gravatar = extraire_attribut($gravatar,'src');
 			$logo = recuperer_fond('formulaires/inc-apercu-logo',array('logo'=>$gravatar,'quoi'=>'logo_on','editable'=>'','titre'=>_T('gravatar:titre_gravatar_auteur')));
 			$p = strpos($flux['data']['texte'],'<label');
