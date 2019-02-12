@@ -443,7 +443,7 @@ function cache_vider($plugin, $caches) {
 
 
 /**
- * Lit la configuration standard des caches d'un plugin utilisateur.
+ * Lit la configuration standard des caches d'un plugin utilisateur ou de tous les plugins utilisateur.
  *
  * @api
  *
@@ -452,20 +452,20 @@ function cache_vider($plugin, $caches) {
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ *        Si vide, toutes les configurations sont fournies.
  *
  * @return array
  *        Tableau de configuration des caches d'un plugin utilisateur ou tableau vide si aucune configuration n'est encore
  *        enregistrée.
  */
-function cache_obtenir_configuration($plugin) {
+function cache_obtenir_configuration($plugin = '') {
 
-	// Initialisation de la configuration à retourner
-	$configuration_lue = array();
-
+	// Retourner la configuration du plugin ou de tous les plugins utilisateur.
+	include_spip('inc/config');
 	if ($plugin) {
-		// Récupération de la meta du plugin Cache
-		include_spip('inc/config');
 		$configuration_lue = lire_config("cache/${plugin}", array());
+	} else {
+		$configuration_lue = lire_config('cache', array());
 	}
 
 	return $configuration_lue;
