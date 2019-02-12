@@ -121,7 +121,7 @@ function cache_cache_composer($plugin, $cache, $configuration) {
 
 		// Détermination du répertoire final du fichier cache qui peut-être inclus dans un sous-dossier du dossier
 		// de base des caches du plugin.
-		$dir_cache = $configuration['racine'] . $configuration['dossier_plugin'];
+		$dir_cache = constant($configuration['racine']) . $configuration['dossier_plugin'];
 		if ($configuration['sous_dossier']) {
 			if (!empty($cache['sous_dossier'])) {
 				// Si le cache nécessite un sous-dossier, appelé service dans l'identifiant du cache.
@@ -192,7 +192,7 @@ function cache_cache_decomposer($plugin, $fichier_cache, $configuration) {
 		$cache = array();
 
 		// On supprime le dossier de base pour n'avoir que la partie spécifique du cache.
-		$dir_cache = $configuration['racine'] . $configuration['dossier_plugin'];
+		$dir_cache = constant($configuration['racine']) . $configuration['dossier_plugin'];
 		$fichier_cache = str_replace($dir_cache, '', $fichier_cache);
 
 		// Détermination du nom du cache sans extension et décomposition suivant la configuration du nom.		
