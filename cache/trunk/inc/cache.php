@@ -358,7 +358,7 @@ function cache_repertorier($plugin, $filtres = array()) {
 
 	// Rechercher les caches du plugin sans appliquer de filtre si ce n'est sur le sous-dossier éventuellement.
 	// Les autres filtres seront appliqués sur les fichiers récupérés.
-	$pattern_fichier = $configuration[$plugin]['dossier_base'];
+	$pattern_fichier = constant($configuration[$plugin]['racine']) . $configuration[$plugin]['dossier_plugin'];
 	if ($configuration[$plugin]['sous_dossier']) {
 		if (array_key_exists('sous_dossier', $filtres)) {
 			$pattern_fichier .= rtrim($filtres['sous_dossier'], '/') . '/';
