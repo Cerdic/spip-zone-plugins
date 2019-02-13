@@ -787,7 +787,7 @@ body,p,td,th,input,submit { font-size:0.8em;font-family:arial,helvetica,sans-ser
 * html input  {font-size:0.8em}
 * html submit {font-size:0.8em}
 td { vertical-align:top }
-a { color:black; font-weight:none; text-decoration:none; }
+a { color:black; text-decoration:none; }
 a:hover { text-decoration:underline; }
 div.content { padding:1em 1em 1em 1em; width:97%; z-index:100; position: relative;}
 
@@ -1290,8 +1290,7 @@ EOB;
 		else {
 			echo '<th align="left">Caches - ', sortheader('S', 'tri par Squelette').'</th>',
 				'<th>', sortheader('H', 'Hits'), '</th>', 
-				'<th>', sortheader('Z', 'Size'), '</th>', 
-				'<th>', sortheader('A', 'Last accessed'), '</th>', 
+				'<th>', sortheader('Z', 'Size'), '</th>',
 				'<th>', sortheader('C', 'Created at'), '</th>',
 				'<th>', sortheader('T', 'Timeout'), '</th>',
 				'<th>Del</th>
