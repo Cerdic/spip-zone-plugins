@@ -288,8 +288,12 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 
 	// Et c'est parti on envoie enfin
 	$backtrace = facteur_backtrace();
-	$trace = trim($head)
-		. ($destinataire ? "\nDestinataire: " . implode(', ', $destinataire): '');
+	$trace = trim($head);
+	// si c'est un envoi par mail() on a pas le sujet dans le head, ce qui rend le debug complique, on l'ajoute manuellement
+	if (strpos($trace, 'Subject:') === false) {
+		$trace .= "\nSubject: $sujet";
+	}
+	$trace .= ($destinataire ? "\nDestinataire: " . implode(', ', $destinataire): '');
 	spip_log("mail via facteur\n$trace",'mail');
 	spip_log("mail\n$backtrace\n$trace",'facteur');
 	$retour = $facteur->Send();
