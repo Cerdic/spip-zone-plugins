@@ -159,7 +159,7 @@ function lienscontenus_initialiser()
     );
     // parcourir les tables et les champs
     foreach ($liste_tables as $table => $col_id) {
-        $type_objet_contenant = ereg_replace("^spip_(.*[^s])s?$", "\\1", $table);
+		$type_objet_contenant = preg_replace("#^spip_(.*[^s])s?$#", "\\1", $table);
         if ($res = sql_select("*", $table)) {
             while ($row = sql_fetch($res)) {
                 $id_objet_contenant = $row[$col_id];
