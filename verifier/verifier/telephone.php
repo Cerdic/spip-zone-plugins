@@ -53,7 +53,7 @@ function verifier_telephone_dist($valeur, $options = array()) {
 	$pays = isset($options['pays']) ? $options['pays'] : null;
 	switch ($pays) {
 		case 'CH':
-			if (!preg_match('/^0[1-9]{9}$/', $tel)) {
+			if (!preg_match('/^0[0-9]{9}$/', $tel)) {
 				return $erreur;
 			}
 			break;
