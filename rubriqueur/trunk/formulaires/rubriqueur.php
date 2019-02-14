@@ -8,9 +8,16 @@ define('_RUBRIQUEUR_DEUX_POINTS_SUBSTITUT', '%%DEUXPOINTS%%');
 
 function formulaires_rubriqueur_charger_dist() {
 
+	$langues_utilisees = liste_options_langues('var_lang');
+	foreach ($langues_utilisees as $langue) {
+		$langues[$langue] = spip_ucfirst(html_entity_decode($GLOBALS['codes_langues'][$langue]));
+	}
+
 	return array(
 		'rubrique_racine' => '',
 		'rubriques'       => '',
+		'langue'          => _request('langue') ? _request('langue') : lire_config('langue_site'),
+		'langues'         => $langues,
 	);
 }
 
@@ -37,7 +44,11 @@ function formulaires_rubriqueur_verifier_dist() {
 			} else {
 				$previsu .= _T('rubriqueur:a_la_racine');
 			}
-			$previsu                  .= _rubriqueur_traiter_rubrique($data, $rubrique_racine, 'previsu');
+			$langue    = _request('langue');
+			if(!$langue){
+				$langue = lire_config('langue_site');
+			}
+			$previsu                  .= _rubriqueur_traiter_rubrique($data, $rubrique_racine, 'previsu', 0, '', $langue);
 			$retour['previsu']        = $previsu;
 			$retour['message_erreur'] = _T('rubriqueur:confirmer_import');
 		} 
@@ -56,9 +67,13 @@ function formulaires_rubriqueur_traiter_dist() {
 	if(_request('rubrique_racine')) {
 		$rubrique_racine = array_pop(picker_selected(_request('rubrique_racine'), 'rubrique'));
 	}
-	$rubriques       = _rubriqueur_parse_texte(_request('rubriques'));
-
-	_rubriqueur_traiter_rubrique($rubriques, $rubrique_racine);
+	$rubriques = _rubriqueur_parse_texte(_request('rubriques'));
+	$langue    = _request('langue');
+	if(!$langue){
+		$langue = lire_config('langue_site');
+	}
+	
+	_rubriqueur_traiter_rubrique($rubriques, $rubrique_racine, 'creer', 0, '', $langue);
 
 	// mettre à jour les status, id_secteur et profondeur
 	include_spip('inc/rubriques');
@@ -71,7 +86,7 @@ function formulaires_rubriqueur_traiter_dist() {
 	);
 }
 
-function _rubriqueur_traiter_rubrique($rubriques, $id_parent = 0, $mode = 'creer', $profondeur = 0, $retour = '') {
+function _rubriqueur_traiter_rubrique($rubriques, $id_parent = 0, $mode = 'creer', $profondeur = 0, $retour = '', $langue = '') {
 	if(!is_array($rubriques)) {
 		return;
 	}
@@ -83,6 +98,7 @@ function _rubriqueur_traiter_rubrique($rubriques, $id_parent = 0, $mode = 'creer
 					'titre'       => $titre,
 					'id_rubrique' => $id_parent,
 					'statut'      => 'publie',
+					'lang'        => $langue,
 					'date'        => date('Y-m-d H:i:s'),
 				));
 			} else {
@@ -95,12 +111,13 @@ function _rubriqueur_traiter_rubrique($rubriques, $id_parent = 0, $mode = 'creer
 					'titre'     => $titre,
 					'id_parent' => $id_parent,
 					'statut'    => 'publie',
+					'lang'      => $langue,
 					'date'      => date('Y-m-d H:i:s'),
 				));
 			} else {
 				$retour .= "\n" . '-' . str_repeat('*', $profondeur) . '* <span class="rubrique">' . $titre . '</span>';
 			}
-			$retour .= _rubriqueur_traiter_rubrique($value, $id_rubrique, $mode, $profondeur + 1);
+			$retour .= _rubriqueur_traiter_rubrique($value, $id_rubrique, $mode, $profondeur + 1, '', $langue);
 		}
 	}
 

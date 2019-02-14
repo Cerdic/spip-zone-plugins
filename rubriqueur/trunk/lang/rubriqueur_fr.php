@@ -23,6 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_analyse'               => 'Erreur dans l\'analyse des rubriques',
 
+	// L
+	'langue'                       => 'Langue',
+
 	// P
 	'pas_autorise'                 => 'Vous n\'êtes pas autorisé•e à modifier cette rubrique',
 

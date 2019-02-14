@@ -15,6 +15,10 @@
 				label=<:rubriqueur:rubrique_racine:>, 
 				explication=<:rubriqueur:rubrique_racine_explications:>})]
 
+			[(#ENV{langues}|count|>{1}|oui)
+			[(#SAISIE{selection, langue, label=<:rubriqueur:langue:>, data=#ENV{langues}, cacher_option_intro=oui, obligatoire=oui})]
+			]
+
 			[(#SAISIE{textarea, rubriques, obligatoire=oui, 
 				label=<:rubriqueur:rubriques:>, 
 				explication=<:rubriqueur:rubriques_explications:>})]
