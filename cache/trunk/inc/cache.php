@@ -15,7 +15,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @api
  *
  * @uses cache_obtenir_configuration()
- * @uses cache_cache_configurer()
  * @uses cache_cache_composer()
  *
  * @param string       $plugin
@@ -36,25 +35,20 @@ function cache_ecrire($plugin, $cache, $contenu) {
 	$cache_ecrit = false;
 	
 	// Lecture de la configuration des caches du plugin.
-	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel).
-	static $configuration = array();
-	include_spip('cache/cache');
-	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_obtenir_configuration($plugin))) {
-		$configuration[$plugin] = cache_cache_configurer($plugin);
-	}
-	
+	$configuration = cache_obtenir_configuration($plugin);
+
 	// Le cache peut-être fourni soit sous la forme d'un chemin complet soit sous la forme d'un
 	// tableau permettant de calculer le chemin complet. On prend en compte ces deux cas.
 	$fichier_cache = '';
-	include_spip('inc/flock');
 	if (is_array($cache)) {
 		// Vérification de la conformité entre la configuration et le sous-dossier du cache.
-		if (!$configuration[$plugin]['sous_dossier']
-		or ($configuration[$plugin]['sous_dossier'] and !empty($cache['sous_dossier']))) {
+		if (!$configuration['sous_dossier']
+		or ($configuration['sous_dossier'] and !empty($cache['sous_dossier']))) {
 			// Détermination du chemin du cache si pas d'erreur sur le sous-dossier :
 			// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
 			//   de la configuration du nom pour le plugin.
-			$fichier_cache = cache_cache_composer($plugin, $cache, $configuration[$plugin]);
+			include_spip('cache/cache');
+			$fichier_cache = cache_cache_composer($plugin, $cache, $configuration);
 		}
 	} elseif (is_string($cache)) {
 		// Le chemin complet du fichier cache est fourni. Aucune vérification ne peut être faite
@@ -64,18 +58,19 @@ function cache_ecrire($plugin, $cache, $contenu) {
 	
 	if ($fichier_cache) {
 		// On crée les répertoires si besoin
+		include_spip('inc/flock');
 		$dir_cache = sous_repertoire(
-			constant($configuration[$plugin]['racine']),
-			rtrim($configuration[$plugin]['dossier_plugin'], '/')
+			constant($configuration['racine']),
+			rtrim($configuration['dossier_plugin'], '/')
 		);
-		if ($configuration[$plugin]['sous_dossier']) {
+		if ($configuration['sous_dossier']) {
 			sous_repertoire($dir_cache, rtrim($cache['sous_dossier'], '/'));
 		}
 
  		// Suivant que la configuration demande une sérialisation ou pas, on vérife le format du contenu
 		// de façon à toujours écrire une chaine.
 		$contenu_cache = '';
-		if ($configuration[$plugin]['serialisation']) {
+		if ($configuration['serialisation']) {
 			if (!is_array($contenu)) {
 				$contenu = $contenu ? array($contenu) : array();
 			}
@@ -88,7 +83,7 @@ function cache_ecrire($plugin, $cache, $contenu) {
 
 		// Ecriture du fichier cache sécurisé ou pas suivant la configuration.
 		$ecrire = 'ecrire_fichier';
-		if ($configuration[$plugin]['securisation']) {
+		if ($configuration['securisation']) {
 			$ecrire = 'ecrire_fichier_securise';
 		}
 		$cache_ecrit = $ecrire($fichier_cache, $contenu_cache);
@@ -105,7 +100,6 @@ function cache_ecrire($plugin, $cache, $contenu) {
  * @api
  *
  * @uses cache_obtenir_configuration()
- * @uses cache_cache_configurer()
  * @uses cache_cache_composer()
  *
  * @param string       $plugin
@@ -122,14 +116,9 @@ function cache_lire($plugin, $cache) {
 
 	// Initialisation du contenu du cache
 	$cache_lu = false;
-	
+
 	// Lecture de la configuration des caches du plugin.
-	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel, peu probable pour une lecture).
-	static $configuration = array();
-	include_spip('cache/cache');
-	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_obtenir_configuration($plugin))) {
-		$configuration[$plugin] = cache_cache_configurer($plugin);
-	}
+	$configuration = cache_obtenir_configuration($plugin);
 
 	// Le cache peut-être fourni soit sous la forme d'un chemin complet soit sous la forme d'un
 	// tableau permettant de calculer le chemin complet. On prend en compte ces deux cas.
@@ -138,7 +127,8 @@ function cache_lire($plugin, $cache) {
 		// Détermination du chemin du cache :
 		// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
 		//   de la configuration du nom pour le plugin.
-		$fichier_cache = cache_cache_composer($plugin, $cache, $configuration[$plugin]);
+		include_spip('cache/cache');
+		$fichier_cache = cache_cache_composer($plugin, $cache, $configuration);
 	} elseif (is_string($cache)) {
 		// Le chemin complet du fichier cache est fourni. Aucune vérification ne peut être faite
 		// il faut donc que l'appelant ait utilisé l'API pour calculer le fichier au préalable.
@@ -150,14 +140,14 @@ function cache_lire($plugin, $cache) {
 		// Lecture du fichier cache sécurisé ou pas suivant la configuration.
 		include_spip('inc/flock');
 		$lire = 'lire_fichier';
-		if ($configuration[$plugin]['securisation']) {
+		if ($configuration['securisation']) {
 			$lire = 'lire_fichier_securise';
 		}
 		$contenu_cache = '';
 		$lecture_ok = $lire($fichier_cache, $contenu_cache);
 		
 		if ($lecture_ok) {
-			if ($configuration[$plugin]['serialisation']) {
+			if ($configuration['serialisation']) {
 				$cache_lu = unserialize($contenu_cache);
 			} else {
 				$cache_lu = $contenu_cache;
@@ -175,7 +165,6 @@ function cache_lire($plugin, $cache) {
  * @api
  *
  * @uses cache_obtenir_configuration()
- * @uses cache_cache_configurer()
  * @uses cache_cache_composer()
  *
  * @param string       $plugin
@@ -190,12 +179,7 @@ function cache_lire($plugin, $cache) {
 function cache_existe($plugin, $cache) {
 
 	// Lecture de la configuration des caches du plugin.
-	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel).
-	static $configuration = array();
-	include_spip('cache/cache');
-	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_obtenir_configuration($plugin))) {
-		$configuration[$plugin] = cache_cache_configurer($plugin);
-	}
+	$configuration = cache_obtenir_configuration($plugin);
 
 	// Le cache peut-être fourni soit sous la forme d'un chemin complet soit sous la forme d'un
 	// tableau permettant de calculer le chemin complet. On prend en compte ces deux cas.
@@ -204,7 +188,8 @@ function cache_existe($plugin, $cache) {
 		// Détermination du chemin du cache :
 		// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
 		//   de la configuration du nom pour le plugin.
-		$fichier_cache = cache_cache_composer($plugin, $cache, $configuration[$plugin]);
+		include_spip('cache/cache');
+		$fichier_cache = cache_cache_composer($plugin, $cache, $configuration);
 	} elseif (is_string($cache)) {
 		// Le chemin complet du fichier cache est fourni. Aucune vérification ne peut être faite
 		// il faut donc que l'appelant ait utilisé l'API cache_existe() pour calculer le fichier au préalable.
@@ -229,7 +214,6 @@ function cache_existe($plugin, $cache) {
  * @api
  *
  * @uses cache_obtenir_configuration()
- * @uses cache_cache_configurer()
  * @uses cache_cache_composer()
  *
  * @param string $plugin
@@ -243,12 +227,7 @@ function cache_existe($plugin, $cache) {
 function cache_nommer($plugin, $cache) {
 
 	// Lecture de la configuration des caches du plugin.
-	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel).
-	static $configuration = array();
-	include_spip('cache/cache');
-	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_obtenir_configuration($plugin))) {
-		$configuration[$plugin] = cache_cache_configurer($plugin);
-	}
+	$configuration = cache_obtenir_configuration($plugin);
 
 	// Le cache est toujours fourni sous la forme d'un tableau permettant de calculer le chemin complet.
 	$fichier_cache = '';
@@ -256,7 +235,8 @@ function cache_nommer($plugin, $cache) {
 		// Détermination du chemin du cache :
 		// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
 		//   de la configuration du nom pour le plugin.
-		$fichier_cache = cache_cache_composer($plugin, $cache, $configuration[$plugin]);
+		include_spip('cache/cache');
+		$fichier_cache = cache_cache_composer($plugin, $cache, $configuration);
 	}
 
 	return $fichier_cache;
@@ -269,7 +249,6 @@ function cache_nommer($plugin, $cache) {
  * @api
  *
  * @uses cache_obtenir_configuration()
- * @uses cache_cache_configurer()
  * @uses cache_cache_composer()
  * @uses supprimer_fichier()
  *
@@ -287,14 +266,9 @@ function cache_supprimer($plugin, $cache) {
 
 	// Initialisation du contenu du cache
 	$cache_supprime = false;
-	
+
 	// Lecture de la configuration des caches du plugin.
-	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel, peu probable pour une lecture).
-	static $configuration = array();
-	include_spip('cache/cache');
-	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_obtenir_configuration($plugin))) {
-		$configuration[$plugin] = cache_cache_configurer($plugin);
-	}
+	$configuration = cache_obtenir_configuration($plugin);
 
 	// Le cache peut-être fourni soit sous la forme d'un chemin complet soit sous la forme d'un
 	// tableau permettant de calculer le chemin complet. On prend en compte ces deux cas.
@@ -303,7 +277,8 @@ function cache_supprimer($plugin, $cache) {
 		// Détermination du chemin du cache :
 		// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
 		//   de la configuration du nom pour le plugin.
-		$fichier_cache = cache_cache_composer($plugin, $cache, $configuration[$plugin]);
+		include_spip('cache/cache');
+		$fichier_cache = cache_cache_composer($plugin, $cache, $configuration);
 	} elseif (is_string($cache)) {
 		// Le chemin complet du fichier cache est fourni. Aucune vérification ne peut être faite
 		// il faut donc que l'appelant ait utilisé l'API cache_existe() pour calculer le fichier au préalable.
@@ -327,7 +302,6 @@ function cache_supprimer($plugin, $cache) {
  * @api
  *
  * @uses cache_obtenir_configuration()
- * @uses cache_cache_configurer()
  * @uses cache_cache_composer()
  * @uses cache_cache_decomposer()
  * @uses cache_cache_completer()
@@ -349,17 +323,12 @@ function cache_repertorier($plugin, $filtres = array()) {
 	$caches = array();
 
 	// Lecture de la configuration des caches du plugin.
-	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel, peu probable pour une lecture).
-	static $configuration = array();
-	include_spip('cache/cache');
-	if (empty($configuration[$plugin]) and (!$configuration[$plugin] = cache_obtenir_configuration($plugin))) {
-		$configuration[$plugin] = cache_cache_configurer($plugin);
-	}
+	$configuration = cache_obtenir_configuration($plugin);
 
 	// Rechercher les caches du plugin sans appliquer de filtre si ce n'est sur le sous-dossier éventuellement.
 	// Les autres filtres seront appliqués sur les fichiers récupérés.
-	$pattern_fichier = constant($configuration[$plugin]['racine']) . $configuration[$plugin]['dossier_plugin'];
-	if ($configuration[$plugin]['sous_dossier']) {
+	$pattern_fichier = constant($configuration['racine']) . $configuration['dossier_plugin'];
+	if ($configuration['sous_dossier']) {
 		if (array_key_exists('sous_dossier', $filtres)) {
 			$pattern_fichier .= rtrim($filtres['sous_dossier'], '/') . '/';
 		} else {
@@ -368,7 +337,7 @@ function cache_repertorier($plugin, $filtres = array()) {
 	}
 
 	// On complète le pattern avec une recherche d'un nom quelconque mais avec l'extension configurée.
-	$pattern_fichier .= '*' . $configuration[$plugin]['extension'];
+	$pattern_fichier .= '*' . $configuration['extension'];
 
 	// On recherche les fichiers correspondant au pattern.
 	$fichiers_cache = glob($pattern_fichier);
@@ -376,7 +345,8 @@ function cache_repertorier($plugin, $filtres = array()) {
 	if ($fichiers_cache) {
 		foreach ($fichiers_cache as $_fichier_cache) {
 			// On décompose le chemin de chaque cache afin de renvoyer l'identifiant canonique du cache.
-			$cache = cache_cache_decomposer($plugin, $_fichier_cache, $configuration[$plugin]);
+			include_spip('cache/cache');
+			$cache = cache_cache_decomposer($plugin, $_fichier_cache, $configuration);
 
 			// Maintenant que les composants sont déterminés on applique les filtres pour savoir si on
 			// complète et stocke le cache.
@@ -398,7 +368,7 @@ function cache_repertorier($plugin, $filtres = array()) {
 
 			if ($cache_conforme) {
 				// On permet au plugin de completer la description canonique
-				$cache = cache_cache_completer($plugin, $cache, $_fichier_cache, $configuration[$plugin]);
+				$cache = cache_cache_completer($plugin, $cache, $_fichier_cache, $configuration);
 
 				// On stocke la description du fichier cache dans le tableau de sortie.
 				$caches[$_fichier_cache] = $cache;
@@ -448,6 +418,7 @@ function cache_vider($plugin, $caches) {
  * @api
  *
  * @uses lire_config()
+ * @uses cache_cache_configurer()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
@@ -460,10 +431,17 @@ function cache_vider($plugin, $caches) {
  */
 function cache_obtenir_configuration($plugin = '') {
 
+	static $configuration = array();
+
 	// Retourner la configuration du plugin ou de tous les plugins utilisateur.
 	include_spip('inc/config');
 	if ($plugin) {
-		$configuration_lue = lire_config("cache/${plugin}", array());
+		// Lecture de la configuration des caches du plugin. Si celle-ci n'existe pas encore elle est créée.
+		if (empty($configuration[$plugin]) and (!$configuration[$plugin] = lire_config("cache/${plugin}", array()))) {
+			include_spip('cache/cache');
+			$configuration[$plugin] = cache_cache_configurer($plugin);
+		}
+		$configuration_lue = $configuration[$plugin];
 	} else {
 		$configuration_lue = lire_config('cache', array());
 	}
