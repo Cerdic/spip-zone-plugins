@@ -23,7 +23,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Le plugin Cache Factory propose une configuration par défaut des caches.
  *
  * @uses cache_chercher_service()
- * @uses sous_repertoire()
  * @uses lire_config()
  * @uses ecrire_config()
  *
