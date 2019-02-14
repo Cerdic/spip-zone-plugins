@@ -10,6 +10,7 @@
 	<!-- La fabrique de fichiers cache pour plugins -->
 
 	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
-
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="affiche_milieu" inclure="cache_pipelines.php" />
 </paquet>
