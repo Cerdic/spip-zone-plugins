@@ -1,0 +1,85 @@
+[(#REM)
+
+	Grille : décalage
+
+	La valeur retournée est un tableau contenant plusieurs clés :
+	- ''        : décalage de base -> nombre
+	- {media}   : décalage pour un média -> nombre
+	- direction : direction du décalage -> push | pull
+	- mode      : décalage absolu ou relatif -> absolute | relative
+
+	Exemple d'appel :
+	#SAISIE{grid_offset,truc,
+		label=machin,
+		medias=oui,
+	}
+
+	Paramètres :
+		**obligatoires
+		*recommandés
+
+		- medias : « oui » pour différencier par médias
+		- obligatoire : « oui »
+										S'il y a plusieurs médias, seul le 1er est obligatoire (mobile first oblige).
+
+]
+#SET{valeur,      #ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}
+#SET{grille,      #REM|noizetier_layout_decrire_grille}
+#SET{medias,      #ENV{medias}|=={oui}|?{#GET{grille/medias},#ARRAY{'',''}}}
+#SET{nb_colonnes, #GET{grille/nb_colonnes}}
+
+[(#REM) Valeur du décalage ]
+<BOUCLE_medias(DATA){source table, #GET{medias}}>
+<div class="gridedit">
+
+	[<div class="gridedit__item gridedit__item_media">
+		[<img src="(#CHEMIN{#VALEUR{img}})" width="32" heigh="32" alt="">]
+		<span>(#VALEUR{label})</span>
+	</div>]
+
+	<div class="gridedit__item gridedit__item_slider">
+		#SET{name,#ENV{nom}|concat{\[,#CLE,\]}}
+		#SET{id,#VAL{champ_}|concat{#ENV{id,#ENV{nom}},_,#CLE}|saisie_nom2classe}
+		#SET{required,#ENV{obligatoire}|=={oui}|et{#COMPTEUR_BOUCLE|=={1}}}
+		#SET{disabled,#GET{required}|et{#CLE|non}}
+		<input
+			type="range"
+			min="-#GET{nb_colonnes}"
+			max="#GET{nb_colonnes}"
+			step="1"
+			name="#GET{name}"
+			value="#GET{valeur}"
+			class="rangeslider"
+			id="#GET{id}"
+			[(#GET{required}|oui)required="required"]
+			[(#GET{disabled}|oui)disabled="disabled"]
+		/>
+		<div class="rangeslider__labels">
+			<BOUCLE_values(DATA){enum -#GET{nb_colonnes},#GET{nb_colonnes},1}><span class="rangeslider__label">[(#VALEUR|sinon{<:gridle:grid_null:>})]</span></BOUCLE_values>
+		</div>
+	</div>
+
+</div>
+</BOUCLE_medias>
+
+[(#REM) Sens et mode du décalage ]
+#SET{cle,relative}
+#SET{name,#ENV{nom}|concat{\[,#GET{cle},\]}}
+#SET{id,#VAL{champ_}|concat{#ENV{id,#ENV{nom}},_,#GET{cle},_,#CLE}|saisie_nom2classe}
+#SET{checked,#GET{value}|in_any{#GET{valeur/#GET{cle}}}|ou{#COMPTEUR_BOUCLE|=={1}}}
+#SET{required,#ENV{obligatoire}|=={oui}}
+<div class="choix">
+	<input
+		type="checkbox"
+		name="#GET{name}"
+		value="oui"
+		class="checkbox"
+		id="#GET{id}"
+		[(#GET{checked}|oui)checked="checked"]
+		[(#GET{required}|oui)required="required"]
+		[(#GET{disabled}|oui)disabled="disabled"]
+	/>
+	<label for="#GET{id}">
+		Affecter les autres colonnes
+	</label>
+</div>

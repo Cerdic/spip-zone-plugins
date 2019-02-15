@@ -1,0 +1,81 @@
+[(#REM)
+
+	Grille : input range affiché sous forme de slider
+
+	Exemple d'appel :
+	#SAISIE{grid_radioslider,truc,
+		label=machin,
+		medias=oui,
+		data=#ARRAY{
+			patate,#ARRAY{label,Patates,description,des jolies patates},
+			poireaux,#ARRAY{label,Poireaux,description,des jolis poireaux},
+		},
+	}
+
+	Paramètres :
+		**obligatoires
+		*recommandés
+
+		- min** : nombre minimal
+		- max** : nombre maximal
+		- step* : pas
+		- debut : Valeur considérée comme le début
+		- medias : « oui » pour différencier par médias
+		          Dans ce cas on obtient des sous-valeurs name\[media\]
+		- obligatoire : « oui »
+		          S'il y a plusieurs médias, seul le 1er est obligatoire (mobile first oblige).
+]
+[(#SET{medias,#ARRAY{
+	'',#ARRAY{
+		label,<:noizetier:grid_media_mobile:>,
+		img,prive/themes/spip/images/grid-media-mobile.svg,
+	},
+	tablet,#ARRAY{
+		label,<:noizetier:grid_media_tablet:>,
+		img,prive/themes/spip/images/grid-media-tablet.svg,
+	},
+	desktop,#ARRAY{
+		label,<:noizetier:grid_media_desktop:>,
+		img,prive/themes/spip/images/grid-media-desktop.svg,
+	}
+}})]
+#SET{valeur,#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}
+#SET{medias,#ENV{medias}|=={oui}|?{#GET{medias},#ARRAY{'',''}}}
+<BOUCLE_medias(DATA){source table, #GET{medias}}>
+#SET{media,#CLE}
+#SET{name,#ENV{nom}|concat{\[,#GET{media},\]}}
+<div class="grid-medias">
+
+	[<div class="grid-medias__media">
+		[<img src="(#CHEMIN{#VALEUR{img}})" class="icone_layout" width="32" heigh="32" alt="">]
+		<span>(#VALEUR{label})</span>
+	</div>]
+
+	<div class="grid-medias__inputs rangeslider-container">
+		#SET{value,#CLE|concat{#GET{media}|?{@#GET{media}}}}
+		#SET{checked,#GET{media}|?{
+			#GET{value}|in_any{#GET{valeur/#GET{media}}},
+			#GET{value}|=={#GET{valeur}}
+		}}
+		#SET{id,#VAL{champ_}|concat{#ENV{id,#ENV{nom}},_,#GET{media}}|saisie_nom2classe}
+		#SET{required,#ENV{obligatoire}|=={oui}|et{#_medias:COMPTEUR_BOUCLE|=={1}}}
+		#SET{disabled,#GET{required}|et{#CLE|non}}
+		<input
+			type="range"
+			min="#ENV{min}"
+			max="#ENV{max}"
+			step="#ENV{step,1}"
+			name="#GET{name}"
+			value="#GET{valeur}"
+			class="rangeslider"
+			id="#GET{id}"
+			[(#GET{required}|oui)required="required"]
+			[(#GET{disabled}|oui)disabled="disabled"]
+		/>
+		<div class="rangeslider__labels">
+			<BOUCLE_values(DATA){enum #ENV{min},#ENV{max},#ENV{step,1}}><span class="rangeslider__label">[(#VALEUR|sinon{<:noizetier:grid_null:>})]</span></BOUCLE_values>
+		</div>
+	</div>
+
+</div>
+</BOUCLE_medias>

@@ -1,0 +1,80 @@
+[(#REM)
+
+	Grille : visibilité
+
+]
+[(#SET{medias,#ARRAY{
+	mobile,#ARRAY{
+		label,<:noizetier:grid_media_mobile_up:>,
+		img,prive/themes/spip/images/grid-media-mobile.svg,
+	},
+	tablet,#ARRAY{
+		label,<:noizetier:grid_media_tablet_up:>,
+		img,prive/themes/spip/images/grid-media-tablet.svg,
+	},
+	desktop,#ARRAY{
+		label,<:noizetier:grid_media_desktop_up:>,
+		img,prive/themes/spip/images/grid-media-desktop.svg,
+	}
+}})]
+[(#SET{visibility,#ARRAY{
+	visible,#ARRAY{
+		label,<:noizetier:grid_visibility_visible:>,
+		img,prive/themes/spip/images/grid-visibility-visible.svg,
+	},
+	hidden,#ARRAY{
+		label,<:noizetier:grid_visibility_hidden:>,
+		img,prive/themes/spip/images/grid-visibility-hidden.svg,
+	}
+}})]
+#SET{valeur,#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}
+<table class="choix_table">
+	<thead>
+		<tr>
+			<th></th>
+			<th>
+				<img src="#CHEMIN{prive/themes/spip/images/grid-default.svg}" class="icone_layout" width="32" heigh="32" alt="">
+				<span><:noizetier:grid_default:></span>
+			</th>
+			<BOUCLE_thead(DATA){source table, #GET{visibility}}>
+			<th>
+				<img src="#CHEMIN{#VALEUR{img}}" class="icone_layout" width="32" heigh="32" alt="">
+				<span>#VALEUR{label}</span>
+			</th>
+			</BOUCLE_thead>
+		</tr>
+	</thead>
+	<tbody>
+		<BOUCLE_medias(DATA){source table, #GET{medias}}>
+		#SET{media,#CLE}
+		#SET{name,#ENV{nom}|concat{\[,#GET{media},\]}}
+		<tr>
+			#SET{value,''}
+			#SET{checked,#GET{valeur/#GET{media}}|non}
+			#SET{id,#VAL{champ_}|concat{#ENV{id,#ENV{nom}},_,#GET{media},#COMPTEUR_BOUCLE}|saisie_nom2classe}
+			#SET{required,''}
+			<th>
+				<img src="#CHEMIN{#VALEUR{img}}" class="icone_layout" width="32" heigh="32" alt="">
+				<span>#VALEUR{label}</span>
+			</th>
+			<td>
+				[(#GET{media}|oui)
+				<input type="radio" name="#GET{name}" value="#GET{value}" class="radio" id="GET{id}"[ (#GET{checked}|oui)checked="checked"][ (#GET{required}|oui)required="required"] />
+				]
+			</td>
+			<BOUCLE_visibility(DATA) {source table, #GET{visibility}}>
+			#SET{value,#CLE|concat{@#GET{media}}}
+			#SET{checked,#GET{media}|?{
+				#GET{value}|in_any{#GET{valeur/#GET{media}}},
+				#GET{value}|=={#GET{valeur}}
+			}}
+			#SET{id,#VAL{champ_}|concat{#ENV{id,#ENV{nom}},_,#GET{media},_,#CLE}|saisie_nom2classe}
+			#SET{required,''}
+			<td>
+				<input type="radio" name="#GET{name}" value="#GET{value}" class="radio" id="#GET{id}"[ (#GET{checked}|oui)checked="checked"][ (#GET{required}|oui)required="required"] />
+			</td>
+			</BOUCLE_visibility>
+		</tr>
+		</BOUCLE_medias>
+	</tbody>
+</table>

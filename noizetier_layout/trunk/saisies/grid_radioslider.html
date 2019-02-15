@@ -1,0 +1,74 @@
+[(#REM)
+
+	Grille : Ligne de radios affichées sous forme de slider
+
+	Exemple d'appel :
+	#SAISIE{grid_radioslider,truc,
+		label=machin,
+		medias=oui,
+		data=#ARRAY{
+			patate,#ARRAY{label,Patates,description,des jolies patates},
+			poireaux,#ARRAY{label,Poireaux,description,des jolis poireaux},
+		},
+	}
+
+	Paramètres :
+		**obligatoire
+		*recommandé
+
+		- data** : tableau associatif des valeurs
+		           valeur => label
+		                  => explication
+		- medias : « oui » pour différencier par médias
+		          Dans ce cas on obtient des sous-valeurs name\[media\]
+		- obligatoire : « oui »
+		          S'il y a plusieurs médias, seul le 1er est obligatoire (mobile first oblige).
+]
+#SET{valeur, #ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}
+#SET{medias, #VAL{medias}|noizetier_layout_decrire_grille}
+#SET{medias, #ENV{medias}|=={oui}|?{#GET{medias},#ARRAY{'',''}}}
+
+<BOUCLE_medias(DATA){source table, #GET{medias}}>
+[(#REM)
+	#SET{media,#CLE|=={#GET{medias}|array_keys|array_shift}|?{'',#CLE}}
+]
+#SET{media,#CLE}
+#SET{name,#ENV{nom}|concat{\[,#GET{media},\]}}
+<B_data>
+<div class="grid-medias">
+
+	[<div class="grid-medias__media">
+		[<img src="(#CHEMIN{#VALEUR{img}})" class="icone_layout" width="32" heigh="32" alt="">]
+		<span>(#VALEUR{label})</span>
+	</div>]
+
+	<div class="grid-medias__inputs radioslider">
+		<BOUCLE_data(DATA){source table, #ENV{data}}>
+		#SET{value,#CLE|concat{#GET{media}|?{@#GET{media}}}}
+		[(#REM)
+			#SET{checked,#GET{media}|?{
+				#GET{value}|in_any{#GET{valeur/#GET{media}}},
+				#GET{value}|=={#GET{valeur}}
+			}}
+		]
+		#SET{checked,#GET{value}|in_any{#GET{valeur}}}
+		#SET{id,#VAL{champ_}|concat{#ENV{id,#ENV{nom}},_,#GET{media},_,#CLE}|saisie_nom2classe}
+		#SET{required,#ENV{obligatoire}|=={oui}|et{#_medias:COMPTEUR_BOUCLE|=={1}}}
+		#SET{disabled,#GET{required}|et{#CLE|non}}
+		<input
+			type="radio"
+			name="#GET{name}"
+			value="#GET{value}"
+			class="radio"
+			id="#GET{id}"
+			[(#GET{checked}|oui)checked="checked"]
+			[(#GET{required}|oui)required="required"]
+			[(#GET{disabled}|oui)disabled="disabled"]
+		/>
+		[<label for="#GET{id}" class="[ (#GET{checked}|oui)on][ (#GET{required}|oui)obligatoire]"[ title="(#VALEUR{explication}|attribut_html)"]>(#VALEUR{label})</label>]
+		</BOUCLE_data>
+	</div>
+
+</div>
+</B_data>
+</BOUCLE_medias>

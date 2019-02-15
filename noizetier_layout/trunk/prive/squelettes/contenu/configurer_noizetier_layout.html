@@ -1,0 +1,74 @@
+<style>
+	dl.grille {display: flex; flex-flow: row wrap}
+	dl.grille dt {flex: 0 1 33%}
+	dl.grille dd {flex: 1 1 66%}
+	dl.grille dd.table {flex: 1 0 100%}
+</style>
+
+<h1 class="grostitre"><:noizetier_layout:titre_grille:></h1>
+
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_NOIZETIER_LAYOUT
+</div>
+
+#SET{grille,#REM|noizetier_layout_decrire_grille}
+<BOUCLE_grille(CONDITION) {si #GET{grille}}>
+[(#BOITE_OUVRIR{[<h2>(#GET{grille/nom})</h2>]})]
+
+[(#GET{grille/description}|propre)]
+
+<dl class="grille">
+
+	[<dt><:noizetier_layout:champ_grille_lien_label:></dt>
+	<dd><a href="#GET{grille/lien}" rel="external" class="spip_out">(#GET{grille/lien})</a></dd>]
+
+	[<dt><:noizetier_layout:champ_grille_demo_label:></dt>
+	<dd><a href="#GET{grille/demo}" rel="external" class="spip_out">(#GET{grille/demo})</a></dd>]
+
+	[<dt><:noizetier_layout:champ_grille_documentation_label:></dt>
+	<dd><a href="#GET{grille/documentation}" rel="external" class="spip_out">(#GET{grille/documentation})</a></dd>]
+
+	[<dt><:noizetier_layout:champ_grille_mobile_first_label:></dt>
+	<dd>(#GET{grille/mobile_first}|?{<:oui:>,<:non:>})</dd>]
+
+	[<dt><:noizetier_layout:champ_grille_nb_colonnes_label:></dt>
+	<dd>(#GET{grille/nb_colonnes})</dd>]
+
+	<dt><:noizetier_layout:champ_grille_breakpoints_label:></dt>
+	<dd class="table">
+		<table>
+			<thead>
+				<tr>
+					<th><:noizetier_layout:champ_grille_media_label:></th>
+					<th><:noizetier_layout:champ_grille_media_min_label:></th>
+					<th><:noizetier_layout:champ_grille_media_max_label:></th>
+				</tr>
+			</thead>
+			<tbody>
+				<BOUCLE_breakpoints(DATA){source table, #GET{grille/medias}}>
+				<tr>
+					<td>
+						[<img src="(#CHEMIN{#VALEUR{img}})">]
+						#VALEUR{label}
+					</td>
+					<td>
+						[(#VALEUR{breakpoints/min}|sinon{-})]
+					</td>
+					<td>
+						[(#VALEUR{breakpoints/max}|sinon{∞})]
+					</td>
+				</tr>
+				</BOUCLE_breakpoints>
+			</tbody>
+		</table>
+	</dd>
+
+</dl>
+
+#BOITE_FERMER
+</BOUCLE_grille>
+
+#BOITE_OUVRIR{'',error}
+<:noizetier_layout:message_aucune_grille:>
+#BOITE_FERMER
+<//B_grille>

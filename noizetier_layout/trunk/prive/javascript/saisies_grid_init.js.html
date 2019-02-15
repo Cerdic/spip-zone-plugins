@@ -1,0 +1,29 @@
+[(#REM)
+
+	Initialisation du script Radios to slider
+
+]
+<script>
+;jQuery(function($) {
+
+	function saisies_grid_init(){
+
+		/* Radio to slider */
+		$('.radioslider').each(function(){
+			var radioslider = $(this).radiosToSlider({
+				fitContainer: false,
+			})[0];
+		});
+
+		/* Rangeslider */
+		/*
+		var rangeslider = $('input.rangeslider').rangeslider({
+			polyfill: false,
+		});
+		*/
+
+	}
+	saisies_grid_init();
+
+});
+</script>

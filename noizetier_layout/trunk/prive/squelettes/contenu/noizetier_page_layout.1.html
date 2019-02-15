@@ -1,0 +1,61 @@
+[(#REM)
+
+	Aperçu et édition du layout d'une page
+
+]
+[(#AUTORISER{configurerpage, noizetier, '', '', #ENV{page}|?{#ARRAY{page, #ENV{page}}, #ARRAY{objet,#OBJET,id_objet,#ID_OBJET}}}|sinon_interdire_acces)]
+<BOUCLE_page_contenu(CONDITION) {si #ENV{page}|ou{#OBJET|et{#ID_OBJET}}}>
+
+<h1>Layout</h1>
+
+<BOUCLE_blocs(DATA) {source table, #NOIZETIER_PAGE_INFOS{#ENV{page, #OBJET}}|table_valeur{blocs}}>
+#SET{id_conteneur,#ENV{page}|noizetier_conteneur_composer{#VALEUR}}
+
+	#BOITE_OUVRIR{#VALEUR}
+
+	<BOUCLE_noisettes(NOISETTES)
+		{plugin = noizetier}
+		{par rang_noisette}
+		{id_conteneur = #GET{id_conteneur}}
+	>
+	#SET{params, #PARAMETRES**|unserialize}
+	#SET{profondeur, 0}
+	<section class="noisette_layout[ (#CHAMP_SQL{css})][ (#GET{params/conteneur_css})]">
+		<INCLURE{fond=prive/squelettes/inclure/resume_noisette_layout,
+			id_noisette,
+			type_noisette}
+		>
+		#SET{id_conteneur, #CONTENEUR_IDENTIFIER{noizetier, #ARRAY{type_noisette, #TYPE_NOISETTE, id_noisette, #ID_NOISETTE}}}
+		#GET{id_conteneur}
+
+		<BOUCLE_noisettes_enfants(NOISETTES)
+			{plugin = noizetier}
+			{id_conteneur = #GET{id_conteneur}}
+			{par rang_noisette}
+		>
+		#SET{params, #PARAMETRES**|unserialize}
+		#SET{profondeur, #GET{profondeur}|plus{1}}
+		<div class="noisette_layout[ (#CHAMP_SQL{css})][ (#GET{params/conteneur_css})]">
+			<INCLURE{fond=prive/squelettes/inclure/resume_noisette_layout,
+				id_noisette,
+				type_noisette}
+			>
+			#SET{id_conteneur, #CONTENEUR_IDENTIFIER{noizetier, #ARRAY{type_noisette, #TYPE_NOISETTE, id_noisette, #ID_NOISETTE}}}
+		</div>
+
+		<BOUCLE_noisettes_petits_enfants(BOUCLE_noisettes_enfants)></BOUCLE_noisettes_petits_enfants>
+		#SET{profondeur,#GET{profondeur}|moins{1}}
+		</BOUCLE_noisettes_enfants>
+
+	</section>
+
+	</BOUCLE_noisettes>
+
+	#BOITE_FERMER
+
+</BOUCLE_blocs>
+
+#FORMULAIRE_LISTER_NOISETTES_BLOC{#ENV{page, #ARRAY{objet, #OBJET, id_objet, #ID_OBJET}}, content}
+
+
+</BOUCLE_page_contenu>

@@ -1,0 +1,133 @@
+[(#REM)<style>]#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
+#HTTP_HEADER{Vary: Accept-Encoding}
+/**
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+*/
+
+/**
+ * =======
+ * Saisies
+ * =======
+ */
+
+/* Ligne contenant 1 ou plusieurs inputs */
+.gridedit {
+  display: flex;
+  flex-flow: row nowrap;
+  box-sizing: border-box;
+}
+.gridedit__item {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  margin-right: 1em;
+  text-align: center;
+  flex: 0 1 2em; /* % pour forcer largeurs égales */
+}
+.gridedit__item:last-child {
+  margin-right: 0;
+}
+.gridedit__item_media {
+  flex: 0 0 5em;
+}
+.gridedit__item_select,
+.gridedit__item_slider {
+  flex: 1 1 auto;
+  display: block;
+}
+.gridedit__item_exposer {
+  background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];
+}
+.gridedit__item input {
+  margin: 0 0 0.5em;
+}
+.gridedit__item label {
+  display: flex !important;
+  flex-flow: column;
+  align-items: center;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: center !important;
+  line-height: 1;
+}
+.gridedit__item:not(.radioslider) label {
+  width: auto !important;
+}
+.gridedit__item label img {
+  margin-bottom: 0.5em;
+}
+
+/* Radioslider & rangeslider : choses communes */
+.editer .rangeslider,
+.editer .radios-to-slider {
+  background: hsla(0, 0%, 0%, 0.1);
+}
+.editer .radios-to-slider .slider-bar,
+.editer .rangeslider__fill {
+  background-color: #GET{foncee};
+}
+.editer .radios-to-slider.medium .slider-knob,
+.editer .rangeslider__handle {
+  background: white;
+  border: 1px solid hsla(0, 0%, 0%, 0.2);
+  box-shadow: 0 0 0.2em hsla(0, 0%, 0%, 0.2);
+}
+
+/* Radioslider */
+.editer .radios-to-slider.medium {
+  margin-bottom: 3em;
+}
+.editer .radios-to-slider.medium .slider-label {
+  top: 3em;
+}
+.editer .radios-to-slider.medium label {
+  margin: 0;
+  text-align: center;
+}
+
+/* Rangeslider */
+/*
+.editer .grid-medias__inputs.rangeslider-container {
+  flex: 0 1 100%;
+}
+.rangeslider__labels {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  margin-top: 5px;
+}
+.rangeslider__label {
+  display: table-cell;
+}
+.editer .rangeslider,
+.editer .rangeslider__fill {
+  box-shadow: none;
+}
+.editer .rangeslider .rangeslider__handle {
+  width: 20px;
+  height: 20px;
+  top: 0;
+}
+.editer .rangeslider__handle:after {
+  display: none;
+}
+*/
+
+
+
+/**
+ * ==============
+ * Prévisu layout
+ * ==============
+ */
+.noisettes_layout .noisette,
+.noisettes_layout .noisette__resume_conteneur {
+  margin-bottom: 0.5em;
+}
+.noisettes_layout .noisette__resume {
+  display: flex;
+  background-color: hsla(0, 0%, 0%, 0.05);
+  transition: background 0.2s;
+}

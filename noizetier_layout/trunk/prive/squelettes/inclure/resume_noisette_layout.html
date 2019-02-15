@@ -1,0 +1,28 @@
+<BOUCLE_noisette(NOISETTES) {id_noisette}>
+<div class="noisette__resume[ (#EST_CONTENEUR|=={oui}|oui)noisette__resume_conteneur]">
+	<BOUCLE_type_noisette(TYPES_NOISETTES) {type_noisette}>
+		#SET{type, #ARRAY{
+			nom, #VAL{#NOM|_T_ou_typo},
+			icone, #ICON,
+			actif, #ACTIF,
+			necessite, #NECESSITE**,
+			disponible, oui,
+		}}
+	</BOUCLE_type_noisette>
+	[(#GET{type/disponible}|oui)
+		<div class="noisette__resume__content">
+			[(#CHEMIN_IMAGE{#GET{type/icone}}|image_reduire{32}|inserer_attribut{class,noisette__resume__icone})]
+			[<strong class="noisette__resume__nom">(#GET{type/nom})</strong>]
+			[<div class="noisette__resume__preview">
+				(#NOISETTE_PREVIEW{#ID_NOISETTE, #GET{type/actif}, #GET{type/necessite}})
+			</div>]
+		</div>
+		<div class="noisette__resume__actions"></div>
+	]
+	[(#GET{type/disponible}|non)
+		<span clas="error">
+			<:noizetier:erreur_type_noisette_indisponible{type_noisette=#TYPE_NOISETTE}:>
+		</span>
+	]
+</div>
+</BOUCLE_noisette>

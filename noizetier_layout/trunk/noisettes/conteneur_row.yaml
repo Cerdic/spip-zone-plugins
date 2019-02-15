@@ -1,0 +1,17 @@
+nom: '<:noizetier_layout:noisette_conteneur_row_nom:>'
+description: '<:noizetier_layout:noisette_conteneur_row_description:>'
+icon: 'conteneur_row-24.png'
+conteneur: 'oui'
+contexte: 'aucun'
+ajax: 'non'
+parametres:
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'conteneur_balise'
+      defaut: 'div'
+  -
+    saisie: 'input'
+    options:
+      nom: 'conteneur_css'
+      label: '<:ncore:label_conteneur_css:>'

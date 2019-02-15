@@ -1,0 +1,26 @@
+<paquet
+	prefix="noizetier_layout"
+	categorie="maintenance"
+	version="0.1.0"
+	schema="0.1.0"
+	etat="dev"
+	compatibilite="[3.1.0;3.2.*]"
+	logo="noizetier_layout-32.png"
+>
+	<nom>NoiZetier : agencements</nom>
+
+	<auteur lien="https://www.mukt.fr">Mukt</auteur>
+	<copyright>2019</copyright>
+	<licence>GPL v3</licence>
+
+	<pipeline nom="formulaire_fond" inclure="noizetier_layout_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="noizetier_layout_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="noizetier_layout_pipelines.php" />
+	<pipeline nom="header_prive" inclure="noizetier_layout_pipelines.php" />
+	<pipeline nom="insert_head" inclure="noizetier_layout_pipelines.php" />
+	<pipeline nom="noizetier_layout_decrire_grille" action="" />
+	<pipeline nom="noizetier_layout_saisies_grille" action="" />
+
+	<necessite nom="noizetier" compatibilite="[3.0.74;]" />
+	<necessite nom="ncore" compatibilite="[0.8.3;]" />
+</paquet>

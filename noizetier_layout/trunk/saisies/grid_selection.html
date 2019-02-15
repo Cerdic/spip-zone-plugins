@@ -1,0 +1,68 @@
+[(#REM)
+
+	Saisie radio
+
+	Différences avec la saisie normale :
+	- radios affichées en inline
+
+	Paramètres :
+		**obligatoire
+		*recommandé
+
+		- data** : tableau associatif des valeurs
+		- medias : « oui » pour ajouter une ligne par média
+		  Dans ce cas on obtient des sous-valeurs name\[media\]
+		- obligatoire : « oui »
+			S'il y a plusieurs médias et que la grille est mobile-first,
+			seul le 1er est obligatoire.
+		- slider : « oui » pour afficher sous forme de slider
+]
+
+#SET{valeur, #ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}
+#SET{grille, #REM|noizetier_layout_decrire_grille}
+#SET{medias, #ENV{medias}|=={oui}|?{#GET{grille/medias},#ARRAY{'',''}}}
+#SET{slider, #ENV{slider}|=={oui}}
+
+<BOUCLE_medias(DATA){source table, #GET{medias}}>
+#SET{media,    #CLE}
+#SET{name,     #ENV{nom}|concat{\[,#GET{media},\]}}
+#SET{id,       #VAL{champ_}|concat{#ENV{id,#ENV{nom}},_,#GET{media}}|saisie_nom2classe}
+#SET{required, #ENV{obligatoire}|=={oui}|et{#GET{grille/mobile_first}|?{#COMPTEUR_BOUCLE|=={1},oui}}}
+#SET{disable_choix, #ENV{disable_choix}|explode{','}}
+<B_selection>
+<div class="gridedit[ gridedit_(#GET{media}|attribut_html)][ (#ENV{class}|attribut_html)]">
+
+	[<div class="gridedit__item gridedit__item_media">
+		[<img src="(#CHEMIN{#VALEUR{img}})" width="32" heigh="32" alt="">]
+		<label>(#VALEUR{label})</label>
+	</div>]
+
+	<div class="gridedit__item gridedit__item_select">
+		<select
+			type="select"
+			name="#GET{name}"
+			class="select"
+			id="#GET{id}"
+			[(#GET{required}|oui)required="required"]
+			[(#GET{disabled}|oui)disabled="disabled"]
+			[readonly="(#ENV{readonly})"]
+			[aria-describedby="(#ENV{describedby})"]
+			[size="(#ENV{size})"]
+			[(#ENV*{attributs})]
+		>
+			[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]]
+			<BOUCLE_selection(POUR){tableau #ENV*{data}}>
+			#SET{value,    #CLE|noizetier_layout_creer_classe_media{#GET{media}}}
+			#SET{selected, #GET{value}|in_any{#GET{valeur}}}
+			#SET{disabled, ''}
+			<option
+				value="#GET{value}"
+				[(#GET{selected}|oui)selected="selected"]
+				[(#GET{disabled}|oui)disabled="disabled"]
+			/>#VALEUR</option>
+			</BOUCLE_selection>
+		</select>
+	</div>
+</div>
+</B_selection>
+</BOUCLE_medias>

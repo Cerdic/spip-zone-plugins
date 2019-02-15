@@ -1,0 +1,30 @@
+[(#REM)
+
+	Noisette de type conteneur row.
+
+	Sert à faire du colonnage, peut optionnellement avoir un .container
+
+	- Markup sans .container :
+	.noisette.row
+
+	- Markup avec .container :
+	.noisette
+		.container
+			.row
+
+]
+#SET{balise,        #ENV{conteneur_balise}|sinon{div}}
+#SET{css,           #ENV{conteneur_css}}
+#SET{css_container, #ENV{css_container}}
+#SET{css_row,       #ENV{css_row}}
+[<(#GET{balise}) class="noisette[ noisette_(#ENV{type_noisette})][ (#GET{css})][ (#GET{css_container}|non)[(#GET{css_row})]]">]
+[(#GET{css_container}|oui)
+	<div class="[(#GET{css_container})]">
+		<div class="[(#GET{css_row})]">
+]
+			<!--noisettes-->
+[(#GET{css_container}|oui)
+		</div>
+	</div>
+]
+[</(#GET{balise})>]

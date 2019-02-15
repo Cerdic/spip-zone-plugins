@@ -1,0 +1,71 @@
+[(#REM)
+
+	Aperçu et édition du layout d'une page
+
+]
+[(#AUTORISER{configurerpage, noizetier, '', '', #ENV{page}|?{#ARRAY{page, #ENV{page}}, #ARRAY{objet,#OBJET,id_objet,#ID_OBJET}}}|sinon_interdire_acces)]
+<BOUCLE_page_contenu(CONDITION) {si #ENV{page}|ou{#OBJET|et{#ID_OBJET}}}>
+
+<link rel='stylesheet' href='#CHEMIN{css/gridle.min.css}' type='text/css' media='all' />
+
+<h1>Layout</h1>
+
+<BOUCLE_blocs(DATA) {source table, #NOIZETIER_PAGE_INFOS{#ENV{page, #OBJET}}|table_valeur{blocs}}>
+#SET{id_conteneur,#ENV{page}|noizetier_conteneur_composer{#VALEUR}}
+
+	#BOITE_OUVRIR{#VALEUR,noisettes_layout}
+
+	<BOUCLE_noisettes(NOISETTES)
+		{plugin = noizetier}
+		{par rang_noisette}
+		{id_conteneur = #GET{id_conteneur}}
+	>
+	#SET{params, #PARAMETRES**|unserialize}
+	#SET{profondeur,0}
+	#SET{id_conteneur, #CONTENEUR_IDENTIFIER{noizetier, #ARRAY{type_noisette, #TYPE_NOISETTE, id_noisette, #ID_NOISETTE}}}
+	#SET{englober0,#CHEMIN{#VAL{capsules/}|concat{#TYPE_NOISETTE,.html}}|?{#VAL{capsules/}|concat{#TYPE_NOISETTE},capsules/dist}}
+
+	[(#EST_CONTENEUR|=={oui}|oui)
+	<INCLURE{fond=prive/squelettes/inclure/resume_noisette_layout, id_noisette}>
+	]
+
+	<INCLURE{fond=#GET{englober0}, ouvrir, id_noisette, profondeur=#GET{profondeur}}>
+
+		[(#EST_CONTENEUR|=={oui}|non)
+		<INCLURE{fond=prive/squelettes/inclure/resume_noisette_layout, id_noisette}>
+		]
+
+		<BOUCLE_noisettes_enfants(NOISETTES)
+			{plugin = noizetier}
+			{id_conteneur = #GET{id_conteneur}}
+			{par rang_noisette}
+		>
+		#SET{params, #PARAMETRES**|unserialize}
+		#SET{profondeur, #GET{profondeur}|plus{1}}
+		#SET{englober1,#CHEMIN{#VAL{capsules/}|concat{#TYPE_NOISETTE,.html}}|?{#VAL{capsules/}|concat{#TYPE_NOISETTE},capsules/dist}}
+
+		[(#EST_CONTENEUR|=={oui}|oui)
+		<INCLURE{fond=prive/squelettes/inclure/resume_noisette_layout, id_noisette}>
+		]
+
+		<INCLURE{fond=#GET{englober1}, ouvrir, id_noisette, profondeur=#GET{profondeur}}>
+
+			[(#EST_CONTENEUR|=={oui}|non)
+			<INCLURE{fond=prive/squelettes/inclure/resume_noisette_layout, id_noisette}>
+			]
+
+			#SET{id_conteneur, #CONTENEUR_IDENTIFIER{noizetier, #ARRAY{type_noisette, #TYPE_NOISETTE, id_noisette, #ID_NOISETTE}}}
+			<BOUCLE_noisettes_petits_enfants(BOUCLE_noisettes_enfants)></BOUCLE_noisettes_petits_enfants>
+			#SET{profondeur,#GET{profondeur}|moins{1}}
+
+		<INCLURE{fond=#GET{englober1}, fermer, id_noisette, profondeur=#GET{profondeur}}>
+		</BOUCLE_noisettes_enfants>
+
+	<INCLURE{fond=#GET{englober0}, fermer, id_noisette, profondeur=#GET{profondeur}}>
+	</BOUCLE_noisettes>
+
+	#BOITE_FERMER
+
+</BOUCLE_blocs>
+
+</BOUCLE_page_contenu>

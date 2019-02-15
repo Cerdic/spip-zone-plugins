@@ -1,0 +1,25 @@
+[(#REM)
+
+	Encapsulation par défaut des noisettes.
+
+	Nb : ne concerne pas les noisettes de type conteneur,
+	voir directement dans noisettes/{conteneur}.html pour ces derniers.
+
+	Ajoute un .container si besoin :
+	.noisette
+	  .container
+
+	Paramètres :
+		**obligatoire
+		*recommandé
+
+		- **id_noisette
+]
+<BOUCLE_noisette_englober(NOISETTES) {id_noisette}>
+#SET{params, #PARAMETRES}
+<div class="noisette noisette_#TYPE_NOISETTE[ (#CHAMP_SQL{css})][ (#GET{params/css_column})]">
+	[<div class="(#GET{params/css_container})">]
+		<!--noisettes-->
+	[(#GET{params/css_container}|oui)</div>]
+</div>
+</BOUCLE_noisette_englober>

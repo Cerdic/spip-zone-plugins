@@ -1,0 +1,44 @@
+[(#REM) 
+
+	Grille : alignement
+
+	Paramètres :
+		- align: horizontal | vertical
+]
+[(#SET{horizontal,#ARRAY{
+	'',<:noizetier:grid_null:>,
+	row-align-left,<:noizetier:grid_align_left:>,
+	row-align-center,<:noizetier:grid_align_center:>,
+	row-align-right,<:noizetier:grid_align_right:>,
+	row-align-between,<:noizetier:grid_align_between:>,
+	row-align-around,<:noizetier:grid_align_around:>,
+}})]
+[(#SET{vertical,#ARRAY{
+	'',<:noizetier:grid_null:>,
+	row-align-top,<:noizetier:grid_align_top:>,
+	row-align-middle,<:noizetier:grid_align_middle:>,
+	row-align-bottom,<:noizetier:grid_align_bottom:>,
+}})]
+#SET{valeur, #ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}
+<div class="choix_inline">
+	<BOUCLE_align(DATA){source table, #GET{#ENV{align,horizontal}}}>
+	#SET{value,#CLE}
+	#SET{checked,#GET{value}|in_any{#GET{valeur}}}
+	#SET{id,#VAL{champ_}|concat{#ENV{id,#ENV{nom}},_,#CLE}|saisie_nom2classe}
+	#SET{required,#ENV{obligatoire}|=={oui}}
+	#SET{disabled,#GET{required}|et{#CLE|non}}
+	<div class="#ENV{choix,choix}[ (#ENV{choix,choix})_#CLE]">
+		<input
+			type="radio"
+			name="#ENV{nom}"
+			value="[(#GET{value}|attribut_html)]"
+			class="radio"
+			id="#GET{id}"
+			[(#GET{checked}|oui)checked="checked"]
+			[(#GET{required}|oui)required="required"]
+			[(#GET{disabled}|oui)disabled="disabled"]
+		/>
+		<label for="#GET{id}" class="[ (#GET{checked}|oui)on][ (#GET{required}|oui)obligatoire]"><img src="#CHEMIN{#VAL{prive/themes/spip/images/grid-}|concat{#CLE|sinon{default},.svg}}" class="icone_layout" width="50" heigh="50">#VALEUR</label>
+	</div>
+	</BOUCLE_align>
+</div>

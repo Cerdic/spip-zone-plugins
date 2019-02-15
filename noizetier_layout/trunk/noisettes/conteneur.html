@@ -1,0 +1,23 @@
+[(#REM)
+
+	Noisette de type conteneur lambda.
+
+	Surcharge : ajout de la possibilité d'avoir un .container
+
+	- Markup :
+	.noisette
+		.container
+
+]
+#SET{balise,        #ENV{conteneur_balise}|sinon{div}}
+#SET{css,           #ENV{conteneur_css}}
+#SET{css_container, #ENV{css_container}}
+[<(#GET{balise}) class="noisette[ noisette_(#ENV{type_noisette})][ (#GET{css})]">]
+[(#GET{css_container}|oui)
+	<div class="[(#GET{css_container})]">
+]
+		<!--noisettes-->
+[(#GET{css_container}|oui)
+	</div>
+]
+[</(#GET{balise})>]
