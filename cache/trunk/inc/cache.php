@@ -160,7 +160,8 @@ function cache_lire($plugin, $cache) {
 
 
 /**
- * Teste l'existence d'un cache sur le disque et, si il existe, renvoie le chemin complet.
+ * Teste l'existence d'un cache sur le disque et, si il existe, teste ensuite si la date d'expiration
+ * du fichier n'est pas dépassée. Si le fichier existe et n'est pas périmé, la fonction renvoie le chemin complet.
  *
  * @api
  *
@@ -175,8 +176,9 @@ function cache_lire($plugin, $cache) {
  *        les composants canoniques du nom.
  *
  * @return string
+ *         Le chemin complet du fichier si valide, la chaine vide sinon.
  */
-function cache_existe($plugin, $cache) {
+function cache_est_valide($plugin, $cache) {
 
 	// Lecture de la configuration des caches du plugin.
 	$configuration = cache_obtenir_configuration($plugin);
@@ -196,10 +198,20 @@ function cache_existe($plugin, $cache) {
 		$fichier_cache = $cache;
 	}
 
-	// Vérifier l'existence du fichier.
 	if ($fichier_cache) {
+		// Vérifier en premier lieu l'existence du fichier.
 		if (!file_exists($fichier_cache)) {
 			$fichier_cache = '';
+		} else {
+			// Vérifier la péremption ou pas du fichier.
+			// -- un délai de conservation est configuré pour les caches du plugin utilisateur mais il possible
+			//    de préciser un délai spécifique à un cache donné (index 'conservation' dans l'id du cache).
+			// -- si le délai est à 0 cela correspond à un cache dont la durée de vie est infinie.
+			$conservation = isset($cache['conservation']) ? $cache['conservation'] : $configuration['conservation'];
+			if (($conservation > 0)
+			and (!filemtime($fichier_cache) or (time() - filemtime($fichier_cache) > $conservation))) {
+				$fichier_cache = '';
+			}
 		}
 	}
 

@@ -44,7 +44,8 @@ function cache_cache_configurer($plugin) {
 		'extension'       => '.txt',
 		'securisation'    => false,
 		'serialisation'   => true,
-		'separateur'      => '_'
+		'separateur'      => '_',
+		'conservation'    => 0
 	);
 
 	// Le plugin utilisateur doit fournir un service propre pour la configuration de ses caches.
@@ -58,6 +59,10 @@ function cache_cache_configurer($plugin) {
 
 	// On merge la configuration du plugin avec celle par défaut pour assure la complétude.
 	$configuration = array_merge($configuration_defaut, $configuration_plugin);
+
+	// On vérifie que la durée de conservation du cache est bien un entier supérieur ou égal à 0.
+	// La durée est exprimée en secondes.
+	$configuration['conservation'] = abs(intval($configuration['conservation']));
 
 	// On vérifie l'indicateur de sécurisation : si le cache doit être sécurisé alors son extension
 	// doit absolument être .php. Si ce n'est pas le cas on la force.
@@ -77,7 +82,7 @@ function cache_cache_configurer($plugin) {
 	$configuration['dossier_plugin'] = ($configuration['racine'] == '_DIR_VAR') ? "cache-${plugin}/" : "${plugin}/";
 
 	// Construction du tableau des composants du nom : dans l'ordre on a toujours les composants obligatoires
-	// suivis des composants faclutatifs.
+	// suivis des composants facultatifs.
 	$configuration['nom'] = array_merge($configuration['nom_obligatoire'], $configuration['nom_facultatif']);
 
 	// Enregistrement de la configuration du plugin utilisateur dans la meta prévue.

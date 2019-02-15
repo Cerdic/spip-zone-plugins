@@ -26,10 +26,23 @@ function cache_affiche_milieu($flux) {
 
 		if ($exec == 'admin_plugin') {
 			// Administration des plugins
+
 			// Supprime la meta du plugin Cache Factory de façon à mettre à jour la configuration des
 			// plugins utilisateur si besoin.
+			// Recharge la configuration des plugins utilisateur :
+			// -- on lit la meta pour obtenir la liste des plugins
 			include_spip('inc/cache');
-			cache_effacer_configuration();
+			$configuration = cache_obtenir_configuration();
+			if ($configuration) {
+				$plugins = array_keys($configuration);
+				// -- on supprime la meta
+				cache_effacer_configuration();
+				// -- on reconfigure chaque plugin
+				include_spip('cache/cache');
+				foreach ($plugins as $_plugin) {
+					cache_cache_configurer($_plugin);
+				}
+			}
 		}
 	}
 

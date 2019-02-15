@@ -23,16 +23,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function formulaires_cache_vider_charger($plugin) {
 
 	// Lecture de la configuration des caches du plugin.
-	// Si celle-ci n'existe pas encore elle est créée (cas d'un premier appel, peu probable pour une lecture).
-	$configuration = array();
 	include_spip('inc/cache');
-	include_spip('cache/cache');
-	if (empty($configuration) and (!$configuration = cache_obtenir_configuration($plugin))) {
-		$configuration = cache_cache_configurer($plugin);
-	}
+	$configuration = cache_obtenir_configuration($plugin);
 
 	// On appelle le service de chargement des variables qui est soit celui par défaut de Cache Factory
 	// soit celui spécifique au plugin si il existe.
+	include_spip('cache/cache');
 	$valeurs = cache_cache_vider_charger($plugin, $configuration);
 
 	return $valeurs;
