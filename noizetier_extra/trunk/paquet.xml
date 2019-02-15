@@ -1,0 +1,21 @@
+<paquet
+	prefix="noizetier_extra"
+	categorie="maintenance"
+	version="0.1.0"
+	etat="experimental"
+	compatibilite="[3.1.0;3.2.*]"
+	logo="noizetier_extra-32.png"
+>
+	<nom>NoiZetier : compléments</nom>
+
+	<auteur lien="https://www.mukt.fr">Mukt</auteur>
+	<copyright>2019</copyright>
+	<licence>GPL v3</licence>
+
+	<pipeline nom="formulaire_charger" inclure="noizetier_extra_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="noizetier_extra_pipelines.php" />
+	<pipeline nom="noizetier_lister_saisies_classes" action="" />
+
+	<necessite nom="noizetier" compatibilite="[3.0.74;]" />
+	<necessite nom="ncore" compatibilite="[0.8.3;]" />
+</paquet>
