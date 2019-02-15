@@ -44,7 +44,7 @@ if (!defined('_TAXONOMIE_ITIS_CACHE_TIMEOUT')) {
 	/**
 	 * Période de renouvellement du cache de Wikipedia (365 jours)
 	 */
-	define('_TAXONOMIE_ITIS_CACHE_TIMEOUT', 86400 * 365);
+	define('_TAXONOMIE_ITIS_CACHE_TIMEOUT', 86400 * 30 * 6);
 }
 
 
@@ -326,7 +326,7 @@ function itis_search_tsn($action, $search, $strict = true) {
  *
  * @api
  *
- * @uses cache_existe()
+ * @uses cache_est_valide()
  * @uses itis_build_url()
  * @uses inc_taxonomie_requeter_dist()
  * @uses cache_ecrire()
@@ -355,6 +355,7 @@ function itis_get_record($tsn) {
 
 	if (intval($tsn)) {
 		// Construction des options permettant de nommer le fichier cache.
+		// -- inutile de préciser la durée de conservation car on utilise la valeur par défaut à savoir 6 mois.
 		include_spip('inc/cache');
 		$cache = array(
 			'service'  => 'itis',
@@ -362,9 +363,7 @@ function itis_get_record($tsn) {
 			'tsn'      => $tsn
 		);
 
-		if ((!$file_cache = cache_existe('taxonomie', $cache))
-		or !filemtime($file_cache)
-		or (time() - filemtime($file_cache) > _TAXONOMIE_ITIS_CACHE_TIMEOUT)
+		if ((!$file_cache = cache_est_valide('taxonomie', $cache))
 		or (defined('_TAXONOMIE_CACHE_FORCER') ? _TAXONOMIE_CACHE_FORCER : false)) {
 			// Construire l'URL de l'api sollicitée
 			$url = itis_build_url('json', 'getfull', 'record', strval($tsn));
@@ -437,7 +436,7 @@ function itis_get_record($tsn) {
  *
  * @api
  *
- * @uses cache_existe()
+ * @uses cache_est_valide()
  * @uses itis_build_url()
  * @uses inc_taxonomie_requeter_dist()
  * @uses cache_ecrire()
@@ -468,6 +467,7 @@ function itis_get_information($action, $tsn) {
 
 	if (intval($tsn)) {
 		// Construction des options permettant de nommer le fichier cache.
+		// -- inutile de préciser la durée de conservation car on utilise la valeur par défaut à savoir 6 mois.
 		include_spip('inc/cache');
 		$cache = array(
 			'service'  => 'itis',
@@ -475,9 +475,7 @@ function itis_get_information($action, $tsn) {
 			'tsn'      => $tsn
 		);
 
-		if ((!$file_cache = cache_existe('taxonomie', $cache))
-		or !filemtime($file_cache)
-		or (time() - filemtime($file_cache) > _TAXONOMIE_ITIS_CACHE_TIMEOUT)
+		if ((!$file_cache = cache_est_valide('taxonomie', $cache))
 		or (defined('_TAXONOMIE_CACHE_FORCER') ? _TAXONOMIE_CACHE_FORCER : false)) {
 			// Construire l'URL de l'api sollicitée
 			$url = itis_build_url('json', 'get', $action, strval($tsn));

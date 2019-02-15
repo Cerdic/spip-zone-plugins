@@ -128,7 +128,7 @@ $GLOBALS['iucn_webservice'] = array(
  * Renvoie l'ensemble des informations sur un taxon désigné par son identifiant unique TSN.
  *
  * @api
- * @uses cache_existe()
+ * @uses cache_est_valide()
  * @uses itis_build_url()
  * @uses inc_taxonomie_requeter_dist()
  * @uses cache_ecrire()
@@ -152,6 +152,7 @@ function iucn_get_assessment($search) {
 
 	if (!empty($search['scientific_name'] and !empty($search['tsn']))) {
 		// Construction des options permettant de nommer le fichier cache.
+		// -- inutile de préciser la durée de conservation car on utilise la valeur par défaut à savoir 6 mois.
 		include_spip('inc/cache');
 		$cache = array(
 			'service'  => 'iucn',
@@ -159,10 +160,8 @@ function iucn_get_assessment($search) {
 			'tsn'      => $search['tsn']
 		);
 
-		if ((!$file_cache = cache_existe('taxonomie', $cache))
-		or !filemtime($file_cache)
-		or (time() - filemtime($file_cache) > _TAXONOMIE_IUCN_CACHE_TIMEOUT)
-			or (defined('_TAXONOMIE_CACHE_FORCER') ? _TAXONOMIE_CACHE_FORCER : false)) {
+		if ((!$file_cache = cache_est_valide('taxonomie', $cache))
+		or (defined('_TAXONOMIE_CACHE_FORCER') ? _TAXONOMIE_CACHE_FORCER : false)) {
 			// Construire l'URL de l'api sollicitée
 			$url = iucn_build_url('species', 'assessment', $search['scientific_name']);
 

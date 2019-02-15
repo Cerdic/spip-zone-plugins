@@ -53,7 +53,7 @@ $GLOBALS['wikipedia_language'] = array(
  * sans accès à Wikipedia.
  *
  * @api
- * @uses cache_existe()
+ * @uses cache_est_valide()
  * @uses wikipedia_build_url()
  * @uses inc_taxonomie_requeter()
  * @uses cache_ecrire()
@@ -90,21 +90,21 @@ function wikipedia_get_page($search, $spip_language, $section = null, $options =
 		$language = wikipedia_find_language($spip_language);
 
 		// Construction des options permettant de nommer le fichier cache.
+		// -- on précise la durée de conservation car ce service utilise 1 mois et pas 6 mois (par défaut).
 		include_spip('inc/cache');
 		$cache = array(
-			'service'  => 'wikipedia',
-			'action'   => 'get',
-			'tsn'      => $search['tsn'],
-			'language' => $spip_language
+			'service'      => 'wikipedia',
+			'action'       => 'get',
+			'tsn'          => $search['tsn'],
+			'language'     => $spip_language,
+			'conservation' => _TAXONOMIE_WIKIPEDIA_CACHE_TIMEOUT
 		);
 		if ($section !== null) {
 			$cache['section'] = $section;
 		}
 
 		if (!empty($options['reload'])
-		or (!$file_cache = cache_existe('taxonomie', $cache))
-		or !filemtime($file_cache)
-		or (time() - filemtime($file_cache) > _TAXONOMIE_WIKIPEDIA_CACHE_TIMEOUT)
+		or (!$file_cache = cache_est_valide('taxonomie', $cache))
 		or (defined('_TAXONOMIE_CACHE_FORCER') ? _TAXONOMIE_CACHE_FORCER : false)) {
 			// Normaliser la recherche: trim et mise en lettres minuscules
 			$title = strtolower(trim($search['name']));

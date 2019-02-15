@@ -29,7 +29,8 @@ function taxonomie_cache_configurer($plugin) {
 		'extension'       => '.txt',
 		'securisation'    => false,
 		'serialisation'   => true,
-		'separateur'      => '_'
+		'separateur'      => '_' ,
+		'conservation'    => 86400 * 30 * 6
 	);
 
 	return $configuration;

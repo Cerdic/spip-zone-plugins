@@ -36,7 +36,7 @@
 			var id = $(this).attr('id').split('_');
 			var action = id[0];
 			var service = id[1];
-			jQuery("input." + service).prop("checked", action === 'tout');
+			jQuery("input.checkbox.checkbox_caches." + service).prop("checked", action === 'tout');
 			return false;
 		});
 	})(jQuery);
