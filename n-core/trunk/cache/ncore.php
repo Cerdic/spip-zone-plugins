@@ -29,7 +29,8 @@ function ncore_cache_configurer($plugin) {
 		'extension'       => '.php',
 		'securisation'    => true,
 		'serialisation'   => true,
-		'separateur'      => '-'
+		'separateur'      => '-',
+		'conservation'    => 0
 	);
 
 	return $configuration;
