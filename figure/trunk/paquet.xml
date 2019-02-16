@@ -10,8 +10,8 @@
 	<nom>Figures</nom>
 	<auteur lien="http://spip.tetue.net">Tetue</auteur>
 
-	<utilise nom="medias" compatibilite="[1.6.8;]" />
-	<utilise nom="medoc" compatibilite="[1.0.0;]" />
-	<utilise nom="accessibilite" />
+	<utilise nom="medias" compatibilite="[2.20.15;]" />
+	<utilise nom="medoc" compatibilite="[2.3.1;]" />
+	<utilise nom="accessibilite" compatibilite="[2.0.3;]" />
 	<utilise nom="oembed" compatibilite="[1.8.0;]"/>
 </paquet>
