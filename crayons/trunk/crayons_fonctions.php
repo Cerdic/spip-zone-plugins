@@ -170,7 +170,9 @@ function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode = 'pag
 	 * Si pas forcer_lang, on charge le contrôleur dans la langue que l'utilisateur a dans le privé
 	 */
 	if (!isset($GLOBALS['forcer_lang']) or !$GLOBALS['forcer_lang'] or ($GLOBALS['forcer_lang'] === 'non')) {
-		lang_select($GLOBALS['auteur_session']['lang']);
+		if (isset($GLOBALS['auteur_session']) and isset($GLOBALS['auteur_session']['lang'])) {
+			lang_select($GLOBALS['auteur_session']['lang']);
+		}
 	}
 
 	$jsFile = generer_url_public('crayons.js');
