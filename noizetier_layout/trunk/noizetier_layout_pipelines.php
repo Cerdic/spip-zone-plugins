@@ -42,7 +42,7 @@ function noizetier_layout_formulaire_fond($flux) {
 /**
  * Modifier le tableau de valeurs envoyé par la fonction charger d’un formulaire CVT
  *
- * => Édition de noisette : ajout des saisies pour les classes et le layout
+ * => Édition de noisette : ajout des saisies pour le layout
  *
  * @param array $flux
  * @return array
