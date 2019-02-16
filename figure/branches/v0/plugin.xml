@@ -1,0 +1,19 @@
+<plugin>
+	<nom>Figures</nom>
+	<prefix>figure</prefix>
+	<icon>figure.png</icon>
+
+	<version>0.4.2</version>
+	<etat>dev</etat>
+	<categorie>multimedia</categorie>
+
+	<slogan>Figures HTML5</slogan>
+	<description>Modèles d'insertion des documents en HTML5, avec figure et figcaption.</description>
+	<auteur>[tetue->http://spip.tetue.net] 2015-2017</auteur>
+
+	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
+	<utilise id="medias" version="[1.6.8;]" />
+	<utilise id="medoc" version="[1.0.0;]" />
+	<utilise id="accessibilite" />
+	<utilise id="oembed" version="[1.8.0;]"/>
+</plugin>

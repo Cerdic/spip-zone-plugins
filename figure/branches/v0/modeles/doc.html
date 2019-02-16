@@ -1,0 +1,9 @@
+[(#REM)
+
+	Patch de compatibilité avec le plugion Medoc
+
+][(#PLUGIN{medoc}|?{
+	#MODELE{medoc,id_document,env,align=#ENV{align}}
+,
+	#MODELE{spipdoc,id_document,env,align=#ENV{align},mode_force=document}
+})]

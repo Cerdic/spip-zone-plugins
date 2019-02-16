@@ -1,0 +1,8 @@
+<BOUCLE_tous (DOCUMENTS types_documents) {id_document=#ID} {tout}
+	>[<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{align})]'[
+	(#TITRE|ou{#DESCRIPTIF}|ou{#CREDITS}|oui)role="group"]
+><pre>(#FICHIER|contenu_document{#ENV{charset,auto}}|echapper_tags)</pre>[
+	(#TITRE|ou{#DESCRIPTIF}|ou{#CREDITS}|oui)
+	<INCLURE{fond=modeles/inc_figcaption,titre=#TITRE,descriptif=#DESCRIPTIF,credits=#CREDITS}>]
+</figure>
+]</BOUCLE_tous>
