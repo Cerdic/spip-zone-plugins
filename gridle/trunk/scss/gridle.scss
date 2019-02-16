@@ -17,13 +17,13 @@
 /**
  * Paramètres généraux de la grille
  */
-$spacing: 2em;
+$gutter: 2em;
 $grid-settings: (
   context :       12,
-  gutter-width :  $spacing,
+  gutter-width :  $gutter,
   gutter-height : 0,
-  gutter-left :   $spacing/2,
-  gutter-right :  $spacing/2,
+  gutter-left :   $gutter/2,
+  gutter-right :  $gutter/2,
   gutter-top :    0,
   gutter-bottom : 0,
   direction :     ltr,
@@ -56,6 +56,8 @@ $grid-settings: (
   @include g-container();
   margin-left: auto;
   margin-right: auto;
+  padding-left: $gutter/2;
+  padding-right: $gutter/2;
 }
 .container {
   max-width: em(960);
