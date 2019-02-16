@@ -1,6 +1,6 @@
 <?php
 /**
- * Ce fichier contient la fonction standard de chargement et fourniture du fichier cache des données météo.
+ * Ce fichier contient la fonction standard de chargement et fourniture des données météo.
  * Elle s'applique à tous les services et à tous les types de données.
  *
  * @package SPIP\RAINETTE\CACHE
@@ -11,8 +11,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 
 /**
- * Renvoyer le nom du fichier cache des données météos correspondant au lieu et au type de données choisis après l'avoir
- * éventuellement mis à jour.
+ * Renvoyer le contenu du fichier cache des données météos correspondant au lieu et au type de données choisis
+ * après l'avoir éventuellement mis à jour.
  *
  * Si le fichier cache est obsolète ou absent, on le crée après avoir chargé puis phrasé le flux XML ou JSON
  * et stocké les données collectées et transcodées dans un tableau standardisé. L'appelant doit s'assurer que la
@@ -44,11 +44,15 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *            - `wunderground` pour Wunderground
  *            - `owm` pour Open Weather Map
  *            - `apixu` pour APIXU
+ *            - `weatherbit` pour Weatherbit.io
  *
- * @return string
- *        Le nom du fichier cache correspondant à la demande.
+ * @return array
+ *        Le contenu du fichier cache contenant les données à jour demandées.
  */
 function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $service = 'weather') {
+
+	// Initialisation du tableau de sortie.
+	$tableau = array();
 
 	// Traitement des cas ou les arguments sont vides (ce qui est différent de non passés à l'appel)
 	// On considère à ce stade que la cohérence entre le mode, la périodicité et le service (qui selon ne supporte
@@ -85,34 +89,14 @@ function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 		$periodicite = $configuration['previsions']['periodicite_defaut'];
 	}
 
-	// Construire le nom du fichier cache
-	$cache = cache_nommer($lieu, $mode, $periodicite, $configuration);
-
-	// Déterminer le système d'unité utilisé dans le cache et celui requis par la configuration.
-	// Si ces systèmes d'unité diffèrent il faut renouveler le cache sinon on affichera des données
-	// fausses avec une unité correcte et ce jusqu'à la prochaine échéance du cache.
-	$unite_configuree = '';
-	$unite_cache = '';
-	if (file_exists($cache) and ($mode != 'infos')) {
-		$unite_configuree = $configuration['unite']
-			? $configuration['unite']
-			: $configuration['defauts']['unite'];
-
-		lire_fichier($cache, $contenu);
-		$tableau = unserialize($contenu);
-		$index = count($tableau) - 1;
-		$unite_cache = isset($tableau[$index]['config']['unite'])
-			? $tableau[$index]['config']['unite']
-			: $configuration['defauts']['unite'];
-	}
+	// Construire le tableau identifiant le cache
+ 	$cache = cache_normaliser($lieu, $mode, $periodicite, $configuration);
 
 	// Mise à jour du cache avec les nouvelles données météo si:
 	// - le fichier cache n'existe pas
 	// - la période de validité du cache est échue
-	// - le système d'unités du cache n'est pas celui requis
-	if (!file_exists($cache)
-	or (!filemtime($cache) or (time() - filemtime($cache) > $configuration['periode_maj']))
-	or (($mode != 'infos') and ($unite_configuree != $unite_cache))) {
+	include_spip('inc/cache');
+	if (!$fichier_cache = cache_est_valide('rainette', $cache)) {
 		// Construire l'url de la requête
 		$urler = "${service}_service2url";
 		$url = $urler($lieu, $mode, $periodicite, $configuration);
@@ -120,12 +104,9 @@ function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 		// Acquérir le flux XML ou JSON dans un tableau si les limites du service ne sont pas atteintes
 		// et traiter les cas d'erreurs du plugin ou du service.
 		include_spip('inc/rainette_requeter');
-		$tableau = array();
 		$erreur = array(
-			'type' => '',
-			'service' => array(
-				'code' => '',
-				'message' => ''
+			'type' => '', 'service' => array(
+				'code' => '', 'message' => ''
 			)
 		);
 		if (!requete_autorisee($configuration['offres']['limites'], $service)) {
@@ -149,7 +130,7 @@ function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 				}
 
 				// On normalise le flux en utilisant le mode d'erreur pour vérifier si on obtient bien une erreur.
-				$erreur_service = meteo_normaliser($configuration_erreur,'erreurs', $flux_erreur, -1);
+				$erreur_service = meteo_normaliser($configuration_erreur, 'erreurs', $flux_erreur, -1);
 				$verifier = "${service}_erreur_verifier";
 				if ($verifier($erreur_service)) {
 					// Une erreur est renvoyée par le service, on formate l'erreur correctement.
@@ -191,7 +172,7 @@ function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 							// On crée donc le tableau des index correspondant au mode choisi et on boucle dessus.
 							$periodes_horaires = array(-1);
 							if ($periodicite) {
-								for ($i = 0; $i <  (24 / $periodicite); $i++) {
+								for ($i = 0; $i < (24 / $periodicite); $i++) {
 									$periodes_horaires[] = $i;
 								}
 							}
@@ -199,7 +180,7 @@ function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 							// On détermine le flux heure en fonction du service. Ce flux heure coincide avec le flux jour dans
 							// la majeure partie des cas
 							$flux_heure = $_flux_jour;
-							if ((count($periodes_horaires) > 1)	and !empty($configuration['cle_heure'])) {
+							if ((count($periodes_horaires) > 1) and !empty($configuration['cle_heure'])) {
 								$flux_heure = table_valeur($_flux_jour, implode('/', $configuration['cle_heure']), null);
 							}
 
@@ -209,23 +190,15 @@ function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 								//    fournies par le service.
 								//    Suivant la période il faut prendre le flux jour ou le flux heure. On calcule donc le flux heure
 								//    quand c'est nécessaire.
-								$flux_a_normaliser = $_periode == -1
-									? $_flux_jour
-									: ($configuration['structure_heure'] ? $flux_heure[$_periode] : $flux_heure);
-								$donnees = meteo_normaliser(
-									$configuration,
-									$mode,
-									$flux_a_normaliser,
-									$_periode);
+								$flux_a_normaliser = $_periode == -1 ? $_flux_jour : ($configuration['structure_heure'] ? $flux_heure[$_periode] : $flux_heure);
+								$donnees = meteo_normaliser($configuration, $mode, $flux_a_normaliser, $_periode);
 
 								if ($donnees) {
 									// 2- Compléments spécifiques au service et au mode.
 									//    Si ces compléments sont inutiles, la fonction n'existe pas
 									$completer = "${service}_complement2${mode}";
 									if (function_exists($completer)) {
-										$donnees = $mode == 'previsions'
-											? $completer($donnees, $configuration, $_periode)
-											: $completer($donnees, $configuration);
+										$donnees = $mode == 'previsions' ? $completer($donnees, $configuration, $_periode) : $completer($donnees, $configuration);
 									}
 
 									// 3- Compléments standard communs à tous les services mais fonction du mode
@@ -233,9 +206,7 @@ function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 										// Vérifier que l'indice uv si celui-ci est fourni
 										// Calcul du risque uv à partir de l'indice uv si celui-ci est fourni
 										include_spip('inc/rainette_convertir');
-										$donnees['risque_uv'] = is_int($donnees['indice_uv'])
-											? indice2risque_uv($donnees['indice_uv'])
-											: $donnees['indice_uv'];
+										$donnees['risque_uv'] = is_int($donnees['indice_uv']) ? indice2risque_uv($donnees['indice_uv']) : $donnees['indice_uv'];
 									}
 
 									// Ajout du bloc à l'index en cours
@@ -255,11 +226,7 @@ function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 		// 4- Compléments standard à tous les services et tous les modes
 		$extras = array();
 		$extras['credits'] = $configuration['credits'];
-		$extras['config'] = array_merge(
-			$configuration_utilisateur,
-			array('source' => configuration_donnees_normaliser($mode, $configuration['donnees'])),
-			array('nom_service' => $configuration['nom'])
-		);
+		$extras['config'] = array_merge($configuration_utilisateur, array('source' => configuration_donnees_normaliser($mode, $configuration['donnees'])), array('nom_service' => $configuration['nom']));
 		$extras['lieu'] = $lieu;
 		$extras['mode'] = $mode;
 		$extras['periodicite_cache'] = $periodicite;
@@ -273,30 +240,33 @@ function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 			// les prévisions.
 			// Pour les prévisions l'index 0 à n désigne le jour, il faut donc le conserver
 			$tableau = array(
-				'donnees' => ($mode != 'previsions' ? array_shift($tableau) : $tableau),
-				'extras' => $extras
+				'donnees' => ($mode != 'previsions' ? array_shift($tableau) : $tableau), 'extras' => $extras
 			);
 		} else {
 			// Traitement des erreurs de flux. On positionne toujours les bloc extra contenant l'erreur,
 			// le bloc des données qui est mis à tableau vide dans ce cas à l'index 1.
 			$tableau = array(
-				'donnees' => array(),
-				'extras'  => $extras
+				'donnees' => array(), 'extras' => $extras
 			);
 		}
 
 		// Pipeline de fin de chargement des données météo. Peut-être utilisé :
 		// -- pour effectuer des traitements annexes à partir des données météo (archivage, par exemple)
 		// -- pour ajouter ou modifier des données au tableau (la modification n'est pas conseillée cependant)
-		$tableau = pipeline('post_chargement_meteo',
-							array(
-								'args' => array('lieu' => $lieu, 'mode' => $mode, 'service' => $service),
-								'data' => $tableau
-							));
+		$tableau = pipeline(
+			'post_chargement_meteo',
+			array(
+				'args' => array('lieu' => $lieu, 'mode' => $mode, 'service' => $service),
+				'data' => $tableau
+			)
+		);
 
-		// Création du nouveau cache
-		ecrire_fichier($cache, serialize($tableau));
+		// Mise à jour du cache
+		cache_ecrire('rainette', $cache, $tableau);
+	} else {
+		// Lecture des données du fichier cache valide
+		$tableau = cache_lire('rainette', $fichier_cache);
 	}
 
-	return $cache;
+	return $tableau;
 }

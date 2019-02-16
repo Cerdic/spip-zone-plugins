@@ -52,12 +52,10 @@ function calculer_infos($lieu, $type, $service) {
 
 		// Récupération des informations sur le lieu
 		$charger = charger_fonction('meteo_charger', 'inc');
-		$nom_cache = $charger($lieu, 'infos', 0, $service);
-		lire_fichier($nom_cache, $contenu_cache);
+		$tableau = $charger($lieu, 'infos', 0, $service);
 		if (!isset($type) or !$type) {
-			$info = $contenu_cache;
+			$info = serialize($tableau);
 		} else {
-			$tableau = unserialize($contenu_cache);
 			if (isset($tableau['donnees'][strtolower($type)])) {
 				$info = $tableau['donnees'][strtolower($type)];
 			}
@@ -487,9 +485,7 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 	} else {
 		// Récupération du tableau des données météo
 		$charger = charger_fonction('meteo_charger', 'inc');
-		$nom_cache = $charger($lieu, $mode, $periodicite, $service);
-		lire_fichier($nom_cache, $contenu_cache);
-		$tableau = unserialize($contenu_cache);
+		$tableau = $charger($lieu, $mode, $periodicite, $service);
 
 		// Séparation des données communes liées au service et au mode et des données météorologiques
 		$extras = $tableau['extras'];

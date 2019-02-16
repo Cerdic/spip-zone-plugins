@@ -39,28 +39,25 @@ function rainette_debug_afficher_cache($lieu, $mode = 'previsions', $service = '
 			$configuration = $configurer($mode);
 			$periodicite = $configuration['periodicite_defaut'];
 		}
+
 		// Chargement du cache
 		$charger = charger_fonction('meteo_charger', 'inc');
-		$nom_cache = $charger($lieu, $mode, $periodicite, $service);
-		if ($nom_cache) {
-			$contenu = '';
-			lire_fichier($nom_cache, $contenu);
-			$tableau = unserialize($contenu);
-			// Pour le mode prévisions, on supprime tous les jours postérieur au lendemain pour éviter d'avoir un
-			// affichage trop conséquent.
-			if ($mode == 'previsions') {
-				// Récupérer les index de prévisions à afficher
-				if (!$cles_previsions) {
-					$cles_previsions = explode(',', _RAINETTE_DEBUG_CLES_PREVISIONS);
-				}
-				foreach ($tableau['donnees'] as $_jour => $_valeurs) {
-					if (!in_array($_jour, $cles_previsions)) {
-						unset($tableau['donnees'][$_jour]);
-					}
+		$tableau = $charger($lieu, $mode, $periodicite, $service);
+
+		// Pour le mode prévisions, on supprime tous les jours postérieur au lendemain pour éviter d'avoir un
+		// affichage trop conséquent.
+		if ($mode == 'previsions') {
+			// Récupérer les index de prévisions à afficher
+			if (!$cles_previsions) {
+				$cles_previsions = explode(',', _RAINETTE_DEBUG_CLES_PREVISIONS);
+			}
+			foreach ($tableau['donnees'] as $_jour => $_valeurs) {
+				if (!in_array($_jour, $cles_previsions)) {
+					unset($tableau['donnees'][$_jour]);
 				}
 			}
-			$debug = bel_env(serialize($tableau), true);
 		}
+		$debug = bel_env(serialize($tableau), true);
 	}
 
 	return $debug;
@@ -124,9 +121,7 @@ function rainette_debug_comparer_services($mode = 'conditions', $jeu = array()) 
 
 			// Chargement des données
 			$charger = charger_fonction('meteo_charger', 'inc');
-			$nom_cache = $charger($_lieu, $mode, $periodicite, $_service);
-			lire_fichier($nom_cache, $contenu_cache);
-			$tableau = unserialize($contenu_cache);
+			$tableau = $charger($_lieu, $mode, $periodicite, $_service);
 
 			if (!$tableau['extras']['erreur']['type']) {
 				// Suivant le mode on extrait les données à afficher. Pour le mode prévisions, on choisit le

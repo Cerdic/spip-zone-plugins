@@ -1,0 +1,44 @@
+<div class="editer-groupe">
+	<div class="editer editer_caches">
+		<label><:cache:cache_vider_label_choix:></label>
+	<BOUCLE_services(DATA) {source table, #ENV{_caches}}{par cle}>
+		<h4>#VALEUR{titre_service}</h4>
+		<BOUCLE_caches(DATA) {source table, #VALEUR{caches}}{par cle}>
+			<div class="choix">
+				[(#SET{id, [(#ENV{_prefixe})_][(#VALEUR{nom_cache})]})]
+				<input
+					type="checkbox"
+					name="caches[]"
+					class="checkbox checkbox_caches #_services:CLE"
+					id="#GET{id}"
+					value="#CLE" />
+				<label for="#GET{id}">
+					[(#VALEUR{lieu})&nbsp;|&nbsp;#VALEUR{donnees}&nbsp;|&nbsp;#VALEUR{langage}[&nbsp;|&nbsp;(#VALEUR{unite})]]
+				</label>
+			</div>
+		</BOUCLE_caches>
+		<div class="action-checkbox">
+			<a href="#" id="tout_#CLE"><:cache:cache_vider_cocher_tout:></a><span class="sep"> | </span>
+			<a href="#" id="rien_#CLE"><:cache:cache_vider_cocher_rien:></a>
+		</div>
+	</BOUCLE_services>
+		#BOITE_OUVRIR{'','notice'}
+			<p><:cache:cache_vider_notice_aucun:></p>
+		#BOITE_FERMER
+	<//B_services>
+	</div>
+</div>
+[(#REM) <!-- Gestion des liens tout cocher et tout décocher --> ]
+<script type="text/javascript">
+//<![CDATA[
+	(function($){
+		jQuery(".action-checkbox a").click(function(){
+			var id = $(this).attr('id').split('_');
+			var action = id[0];
+			var service = id[1];
+			jQuery("input.checkbox.checkbox_caches." + service).prop("checked", action === 'tout');
+			return false;
+		});
+	})(jQuery);
+//]]>
+</script>

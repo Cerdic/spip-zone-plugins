@@ -3,4 +3,8 @@
 	<p><:rainette:info_page_configurer:></p>
 #BOITE_FERMER
 
-<INCLURE{fond=prive/squelettes/inclure/inc-navigation-rainette, env} />
+[(#REM) <!-- Menu des services --> ]
+<INCLURE{fond=prive/squelettes/inclure/inc-rainette_navigation, env} />
+
+[(#REM) <!-- Raccourci d'administration --> ]
+<INCLURE{fond=prive/squelettes/inclure/inc-rainette_raccourcis_admin, env} />

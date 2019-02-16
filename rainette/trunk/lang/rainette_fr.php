@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//B
 	'bouton_cocher_aucun' => 'Tout décocher',
 	'bouton_cocher_tout' => 'Tout cocher',
+	'bouton_vider_cache' => 'Vider les caches Rainette',
 
 	// C
 	'coucher_soleil' => 'coucher du soleil',

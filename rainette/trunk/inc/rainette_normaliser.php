@@ -653,7 +653,8 @@ function periodicite_est_compatible($type_modele, $periodicite) {
 
 
 /**
- * Construit le nom du cache en fonction du servide, du lieu, du type de données et de la langue utilisée par le site.
+ * Construit le tableau du cache en fonction du service, du lieu, du type de données, de la langue utilisée par le site
+ * et de l'unité des données.
  *
  * @param string $lieu
  *        Lieu pour lequel on requiert le nom du cache.
@@ -664,139 +665,44 @@ function periodicite_est_compatible($type_modele, $periodicite) {
  *        - `24`, `12`, `6`, `3` ou `1`, pour le mode `previsions`
  *        - `0`, pour les modes `conditions` et `infos`
  * @param array  $configuration_service
- *        Configuration complète du service, statique et utilisateur.
- *
- * @return string
- *        Chemin complet du fichier cache.
- */
-function cache_nommer($lieu, $mode, $periodicite, $configuration_service) {
-
-	// Identification de la langue du resume.
-	$code_langue = langue_determiner($configuration_service);
-
-	// Construction du chemin du fichier cache
-	// Création et/ou détermination du dossier de destination du cache en fonction du service
-	$dossier_cache = sous_repertoire(_DIR_VAR, trim(_RAINETTE_CACHE_NOMDIR, '/'));
-	$dossier_cache = sous_repertoire($dossier_cache, $configuration_service['alias']);
-
-	// Le nom du fichier cache est composé comme suit, chaque élément étant séparé par un underscore :
-	// -- le nom du lieu normalisé (sans espace et dont tous les caractères non alphanumériques sont remplacés par un tiret
-	// -- le nom du mode (infos, conditions ou previsions) accolé à la périodicité du cache pour les prévisions uniquement
-	// -- la langue du résumé si il existe ou rien si aucune traduction n'est fournie par le service
-	$lieu_normalise = lieu_normaliser($lieu);
-	$fichier_cache = $dossier_cache
-					 . str_replace(array(' ', ',', '+', '.', '/'), '-', $lieu_normalise)
-					 . '_' . $mode
-					 . ($periodicite ? strval($periodicite) : '')
-					 . ($code_langue ? '_' . strtolower($code_langue) : '')
-					 . '.txt';
-
-	return $fichier_cache;
-}
-
-
-/**
- * Construit le nom du cache en fonction du servide, du lieu, du type de données et de la langue utilisée par le site.
- *
- * @param string       $service
- *        Alias du service météorologique.
- * @param array|string $caches
- *        Liste des fichiers à supprimer ou vide si tous les fichiers cache doivent être supprimés.
- *        Il est possible de passer un seul fichier comme une chaine.
- *
- * @return boolean
- *        Toujours à `true`.
- */
-function cache_supprimer($service, $caches = array()) {
-
-	include_spip('inc/flock');
-
-	if ($caches) {
-		$fichiers_cache = is_string($caches) ? array($caches) : $caches;
-	} else {
-		$fichiers_cache = glob(_RAINETTE_CACHE_DIR . $service . '/*.txt');
-	}
-
-	if ($fichiers_cache) {
-		foreach ($fichiers_cache as $_fichier) {
-			supprimer_fichier($_fichier);
-		}
-	}
-
-	return true;
-}
-
-
-/**
- * Répertorie les fichiers caches issu de l'utilisation de l'API d'un service donné.
- * La fonction renvoie une description de chaque fichier cache, à savoir, à minima, l'action lancée, le TSN
- * du taxon concerné et le nom du fichier cache.
- *
- * @package SPIP\TAXONOMIE\CACHE
- *
- * @param string $service
- *        Alias en minuscules du service pour lequel on veut lister les caches créés ou chaine vide si on souhaite
- *        tous les caches sans distinction de service.
+ *        Configuration complète du service, statique et utilisateur. Contient l'unité choisie pour les données.
  *
  * @return array
- *        Tableau des descriptions des fichiers cache créés par le ou les services.
+ *        Chemin complet du fichier cache.
  */
-function cache_repertorier($service = '') {
+function cache_normaliser($lieu, $mode, $periodicite, $configuration_service) {
 
-	// Initialisation de la liste des descriptions des caches du service
-	$descriptions_cache = array();
+	// Identification de la langue du resume.
+	$cache = array();
 
-	// On constitue la liste des services requis par l'appel
-	include_spip('rainette_fonctions');
-	$services = rainette_lister_services();
-	if ($service) {
-		if (array_key_exists($service, $services)) {
-			$services = array($service => $services[$service]);
-		} else {
-			$services = array();
-		}
+	// Le cache est stocké dans un sous-dossier au nom du service
+	$cache['sous_dossier'] = $configuration_service['alias'];
+
+	// Composants obligatoires
+	// -- Le nom du lieu normalisé (sans espace et dont tous les caractères non alphanumériques sont remplacés par un tiret)
+	$lieu_normalise = lieu_normaliser($lieu);
+	$cache['lieu'] = str_replace(array(' ', ',', '+', '.', '/'), '-', $lieu_normalise);
+
+	// -- Le nom du mode (infos, conditions ou previsions) accolé à la périodicité du cache pour les prévisions uniquement
+	$cache['donnees'] = $mode . ($periodicite ? strval($periodicite) : '');
+
+	// -- Identification de la langue du resume.
+	$code_langue = langue_determiner($configuration_service);
+	$cache['langage'] = strtolower($code_langue);
+
+	// Composants facultatifs
+	// -- Unité des données si le mode n'est pas infos.
+	if ($mode != 'infos') {
+		$cache['unite'] = $configuration_service['unite'];
 	}
 
-	if ($services) {
-		foreach ($services as $_service => $_titre) {
-			// Récupération des fichiers cache du service.
-			$fichiers_cache = glob(_RAINETTE_CACHE_DIR . $_service . '/*.txt');
-
-			if ($fichiers_cache) {
-				foreach ($fichiers_cache as $_fichier_cache) {
-					// On raz la description pour éviter de garder des éléments du cache précédent et on initialise avec
-					// le nom du fichier qui peut servir d'id, le chemin complet et le service.
-					$description = array();
-					$description['nom_cache'] = basename($_fichier_cache, '.txt');
-					$description['fichier_cache'] = $_fichier_cache;
-
-					// On extrait le service qui sert toujours d'index principal du tableau
-					$description['service'] = $_service;
-					$description['titre_service'] = $_titre;
-
-					// On décompose le nom pour récupérer l'action et le TSN correspondant ainsi que la langue.
-					// Le nom du fichier est composé d'éléments séparés par un underscore. La structure est toujours
-					// composée dans l'ordre du service, de l'action et du TSN et peut être complétée par la langue.
-					$elements = explode('_', $description['nom_cache']);
-					$description['lieu'] = $elements[0];
-					$description['modele'] = $elements[1];
-					$description['langue'] = $elements[2];
-
-					// On structure le tableau suivant que l'on demande un service ou tous.
-					if ($service) {
-						$descriptions_cache['service'] = $_service;
-						$descriptions_cache['titre_service'] = $_titre;
-						$descriptions_cache['caches'][] = $description;
-					} else {
-						$descriptions_cache[$_service]['titre_service'] = $_titre;
-						$descriptions_cache[$_service]['caches'][] = $description;
-					}
-				}
-			}
-		}
+	// La durée de conservation par défaut est positionné pour le mode infos. Pour les autres modes il faut
+	// la positionner spécifiquement car chaque service a sa propre récurrence.
+	if ($mode != 'infos') {
+		$cache['conservation'] = $configuration_service['periode_maj'];
 	}
 
-	return $descriptions_cache;
+	return $cache;
 }
 
 
