@@ -21,7 +21,7 @@
 	<pipeline nom="post_edition" inclure="taxonomie_pipelines.php" />
 	<pipeline nom="ieconfig" inclure="taxonomie_ieconfig.php" />
 
-	<necessite nom="cache" compatibilite="[0.2.2;]" />
+	<necessite nom="cache" compatibilite="[0.2.3;]" />
 	<necessite nom="saisies" compatibilite="[3.12.7;[" />
 	<utilise nom="convertisseur" compatibilite="[0.5.0;]" />
 
