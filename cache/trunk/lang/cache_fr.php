@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 	'cache_vider_titre_form' => 'Caches du plugin @plugin@',
-	'cache_vider_titre_page' => 'Cache Factory - Vider les caches',
+	'cache_vider_titre_page' => 'Cache Factory',
 	'cache_vider_menu' => 'Vider les caches des plugins',
 	'cache_vider_label_choix' => 'Choisir les caches à supprimer',
 	'cache_vider_notice_aucun' => 'Aucun cache n\'a encore été créé par le plugin.',

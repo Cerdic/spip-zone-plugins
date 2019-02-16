@@ -1,5 +1,5 @@
 [(#AUTORISER{configurer}|sinon_interdire_acces)]
-<h1 class="grostitre"><:cache:cache_vider_titre_page:></h1>
+<h1 class="grostitre"><:cache:cache_vider_titre_page:>&nbsp;-&nbsp;<:cache:cache_vider_menu:></h1>
 #SET{plugins, #ARRAY}
 #SET{config_cache, #CONFIG{cache}}
 [(#GET{config_cache}|oui) #SET{plugins, #GET{config_cache}|unserialize|array_keys}]

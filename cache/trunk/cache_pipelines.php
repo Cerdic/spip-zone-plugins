@@ -40,7 +40,9 @@ function cache_affiche_milieu($flux) {
 				// -- on reconfigure chaque plugin
 				include_spip('cache/cache');
 				foreach ($plugins as $_plugin) {
-					cache_cache_configurer($_plugin);
+					if (defined('_DIR_PLUGIN_' . strtoupper($_plugin))) {
+						cache_cache_configurer($_plugin);
+					}
 				}
 			}
 		}
