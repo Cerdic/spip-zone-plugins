@@ -1,0 +1,65 @@
+/**
+ * Compilation de la grille Gridle
+ *
+ * Documentation : https://github.com/Coffeekraken/gridle/tree/master/doc
+ */
+
+/**
+ * Import des mixins utiles
+ */
+@import 'mixins';
+
+/**
+ * Import de la grille version flex
+ */
+@import 'node_modules/coffeekraken-gridle/flex';
+
+/**
+ * Paramètres généraux de la grille
+ */
+$spacing: 2em;
+$grid-settings: (
+  context :       12,
+  gutter-width :  $spacing,
+  gutter-height : 0,
+  gutter-left :   $spacing/2,
+  gutter-right :  $spacing/2,
+  gutter-top :    0,
+  gutter-bottom : 0,
+  direction :     ltr,
+  //states-classes: false
+);
+@include g-setup( $grid-settings );
+
+/**
+ * Définition des breakpoints en mobile first
+ */
+@include g-register-state(tablet, (
+  min-width : em(480)
+));
+@include g-register-state(desktop, (
+  min-width : em(960)
+));
+@include g-register-state(large, (
+  min-width : em(1200),
+));
+
+/**
+ * Génération des classes
+ */
+@include g-classes();
+
+/**
+ * Compléments maison
+ */
+[class*="container"] {
+  @include g-container();
+  margin-left: auto;
+  margin-right: auto;
+}
+.container {
+  max-width: em(960);
+  &_fluid {
+    max-width: 100%;
+  }
+}

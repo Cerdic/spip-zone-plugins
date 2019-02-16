@@ -1,0 +1,24 @@
+{
+  "name": "gridle_spip",
+  "version": "1.0.0",
+  "description": "Grille SCSS Gridle pour SPIP",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mukt",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "coffeekraken-gridle": "latest",
+    "gulp-autoprefixer": "latest",
+    "gulp-clean": "latest",
+    "gulp-clean-css": "latest",
+    "gulp-minify": "latest",
+    "gulp-postcss": "latest",
+    "gulp-sass": "latest",
+    "gulp-rename": "latest",
+    "gulp-strip-css-comments": "latest",
+    "gulp-cssbeautify": "latest"
+  }
+}

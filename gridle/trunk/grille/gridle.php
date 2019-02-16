@@ -4,18 +4,18 @@
  *
  * @note
  * Ne pas utiliser ces fonctions directement, faire appel à l'API
- * @example
- * charger_fonction('decrire_grille', 'grille/base');
  *
  * @plugin    Grille Gridle
- * @copyright 2018
+ * @copyright 2019
  * @author    Mukt
  * @licence   GNU/GPL
  * @package   SPIP\Gridle\Fonctions
  */
 
 // Sécurité
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Description de la grille : nom, breakpoints etc.
@@ -30,7 +30,7 @@ function grille_gridle_decrire_grille_dist() {
 		'description'   => _T('gridle:grid_description'),
 		'logo'          => 'gridle-32.png',
 		'documentation' => 'https://github.com/Coffeekraken/gridle/',
-		'demo'          => 'http://gridle.org/demo/demo.html',
+		'demo'          => 'http://gridle.org/demo/demo-flex.html',
 		'mobile_first'  => true,
 		'nb_colonnes'   => 12,
 		'css_public'    => 'css/gridle.min.css',

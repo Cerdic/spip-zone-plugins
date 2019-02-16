@@ -1,7 +1,7 @@
 <paquet
 	prefix="gridle"
 	categorie="maintenance"
-	version="0.1.0"
+	version="0.1.1"
 	etat="dev"
 	compatibilite="[3.1.0;3.2.*]"
 	logo="gridle-32.png"
@@ -9,7 +9,7 @@
 	<nom>NoiZetier : grille CSS Gridle</nom>
 
 	<auteur lien="https://www.mukt.fr">Mukt</auteur>
-	<copyright>2018</copyright>
+	<copyright>2019</copyright>
 	<licence>GPL v3</licence>
 
 	<utilise nom="noizetier_layout" compatibilite="[0.1.0;]" />
