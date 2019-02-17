@@ -34,13 +34,11 @@ function taa_pre_insertion($flux) {
 	if ($flux['args']['table'] == 'spip_articles') {
 		if ($lang = _request('lang_dest')) {
 			$flux['data']['lang'] = $lang;
-			$flux['data']['langue_choisie'] = 'oui';
 		}
 		elseif (test_plugin_actif('tradrub') && $id_rubrique = _request('id_rubrique') && $id_rubrique > 0) {
 			$id_rubrique = _request('id_parent') ? _request('id_parent') : _request('id_rubrique');
 			$lang = sql_getfetsel('lang', 'spip_rubriques', 'id_rubrique=' . $id_rubrique);
 			$flux['data']['lang'] = $lang;
-			$flux['data']['langue_choisie'] = 'non';
 		}
 	}
 	return $flux;
