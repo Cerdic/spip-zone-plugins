@@ -89,7 +89,6 @@ function taa_pre_edition($flux) {
 	// Si tradrub actif, on suppose le  système de secteur par langue.
 	// L'article doit donc avoir la mème langue que la rubrique parente.
 	if ($table == 'spip_articles' and test_plugin_actif('tradrub')) {
-		spip_log($flux, 'teste');
 		$rubrique = sql_fetsel('id_rubrique,lang', $table, 'id_article=' . $flux['args']['id_objet']);
 		if ($lang = sql_getfetsel(
 				'lang',
