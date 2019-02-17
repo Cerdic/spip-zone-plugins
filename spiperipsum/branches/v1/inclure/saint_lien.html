@@ -1,0 +1,7 @@
+[(#REM)<!-- 
+	Afficher:
+		- le nom du saint avec un lien vers sa vie
+		- pour le jour requis
+		- dans la langue du contexte courant
+ -->]
+[<a[ href="(#SPIPERIPSUM{#ENV{langue}, #ENV{jour}, saint, url})"]>(#SPIPERIPSUM{#ENV{langue}, #ENV{jour}, saint, titre}|trim)</a>]
