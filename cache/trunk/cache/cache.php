@@ -264,13 +264,17 @@ function cache_cache_completer($plugin, $cache, $fichier_cache, $configuration) 
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array  $options
+ *        Tableau d'options qui peut être fourni par un plugin utilisateur uniquement si celui-ci fait appel
+ *        au formulaire. La page cache_vider de Cache Factory n'utilise pas ce paramètre.
+ *        Le tableau est passé à la fonction de service de chargement du formulaire uniquement.
  * @param array  $configuration
  *        Configuration complète des caches du plugin utilisateur lue à partir de la meta de stockage.
  *
  * @return array
  *         Description du cache complétée par un ensemble de données propres au plugin.
  */
-function cache_cache_vider_charger($plugin, $configuration) {
+function cache_cache_vider_charger($plugin, $options, $configuration) {
 
 	// Stocker le préfixe et le nom du plugin de façon systématique.
 	$valeurs = array('_prefixe' => $plugin);
@@ -280,7 +284,7 @@ function cache_cache_vider_charger($plugin, $configuration) {
 	// Le plugin utilisateur peut fournir un service propre pour construire le tableau des valeurs du formulaire.
 	if ($charger = cache_chercher_service($plugin, 'cache_vider_charger')) {
 		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
-		$valeurs_plugin = $charger($plugin, $configuration);
+		$valeurs_plugin = $charger($plugin, $options, $configuration);
 		if ($valeurs_plugin) {
 			$valeurs = array_merge($valeurs, $valeurs_plugin);
 		}
