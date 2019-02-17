@@ -30,9 +30,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'options' => 'اصلاح گزينه‌هاي زبان ',
 
-	// R
-	'rang' => 'رتبه',
-
 	// T
 	'titre_plugin' => 'ترجمه‌ي متفاوت متقالات',
 	'traductions' => 'ترجمه‌ها',

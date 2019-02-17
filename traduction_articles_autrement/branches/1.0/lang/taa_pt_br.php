@@ -32,9 +32,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'options' => 'Alterar as opções de idioma',
 
-	// R
-	'rang' => 'Classificar',
-
 	// T
 	'titre_plugin' => 'Tradução das matérias diferentemente',
 	'traductions' => 'Traduções',

@@ -34,13 +34,11 @@ function taa_pre_insertion($flux) {
 	if ($flux['args']['table'] == 'spip_articles') {
 		if ($lang = _request('lang_dest')) {
 			$flux['data']['lang'] = $lang;
-			$flux['data']['langue_choisie'] = 'oui';
 		}
-		elseif (test_plugin_actif('tradrub') && $id_rubrique = _request('id_rubrique') && $id_rubrique > 0) {
+		elseif (test_plugin_actif('tradrub')) {
 			$id_rubrique = _request('id_parent') ? _request('id_parent') : _request('id_rubrique');
 			$lang = sql_getfetsel('lang', 'spip_rubriques', 'id_rubrique=' . $id_rubrique);
 			$flux['data']['lang'] = $lang;
-			$flux['data']['langue_choisie'] = 'non';
 		}
 	}
 	return $flux;
@@ -68,6 +66,36 @@ function taa_recuperer_fond($flux) {
 	if ($flux['args']['fond'] == 'prive/objets/liste/articles' and _request('exec') != 'article' and !lire_config('taa/liste_compacte_desactive')) {
 
 		$flux['texte'] = recuperer_fond('prive/objets/liste/articles_compacte', $flux['args']['contexte']);
+	}
+
+	return $flux;
+}
+
+/**
+ * Agit lors de l’édition d’un élément éditorial, lorsque l’utilisateur édite les champs ou change le statut de l’objet.
+ * Il est appelé juste avant l’enregistrement des données.
+ * On peut s’en servir pour contrôler ou modif
+ *
+ * @pipeline pre_edition
+ *
+ * @param array $flux
+ *   Les données du pipeline
+ *
+ * @return array
+ *   Les donées du pipeleine.
+ */
+function taa_pre_edition($flux) {
+	$table = $flux['args']['table'];
+	// Si tradrub actif, on suppose le  système de secteur par langue.
+	// L'article doit donc avoir la mème langue que la rubrique parente.
+	if ($table == 'spip_articles' and test_plugin_actif('tradrub')) {
+		$rubrique = sql_fetsel('id_rubrique,lang', $table, 'id_article=' . $flux['args']['id_objet']);
+		if ($lang = sql_getfetsel(
+				'lang',
+				'spip_rubriques',
+				'id_rubrique=' . $rubrique['id_rubrique']) and $lang != $rubrique['lang']) {
+			$flux['data']['lang'] = $lang;
+		}
 	}
 
 	return $flux;
