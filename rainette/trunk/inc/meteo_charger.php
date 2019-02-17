@@ -105,8 +105,10 @@ function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 		// et traiter les cas d'erreurs du plugin ou du service.
 		include_spip('inc/rainette_requeter');
 		$erreur = array(
-			'type' => '', 'service' => array(
-				'code' => '', 'message' => ''
+			'type' => '',
+			'service' => array(
+				'code' => '',
+				'message' => ''
 			)
 		);
 		if (!requete_autorisee($configuration['offres']['limites'], $service)) {
