@@ -1,30 +1,93 @@
 <?php
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-if (!defined('_SPIPERIPSUM_EVANGELIZO_LANGUES'))
+if (!defined('_SPIPERIPSUM_EVANGELIZO_LANGUES')) {
 	define('_SPIPERIPSUM_EVANGELIZO_LANGUES', 'FR:PT:IT:NL:AM:DE:SP:TRF:TRA:PL:GR:AR:MAA:BYA:ARM');
+}
 
-if (!defined('_SPIPERIPSUM_EVANGELIZO_URL_BASE_REQUETE'))
+if (!defined('_SPIPERIPSUM_EVANGELIZO_URL_BASE_REQUETE')) {
 	define('_SPIPERIPSUM_EVANGELIZO_URL_BASE_REQUETE', 'http://feed.evangelizo.org/v2/reader.php?');
+}
 
 
 // ------------------------------------- API DU SERVICE ----------------------------------------- //
 
 /**
  * Charger le fichier des lectures et du saint du jour j.
- * - si le fichier existe on retourne directement son nom complet
- * - sinon on le cree dans le cache du plugin
+ * - si le fichier existe on retourne directement son contenu complet
+ * - sinon on le cree dans le cache du plugin avant de retourner le contenu
  *
  * @param $langue
  * @param $jour
  *
  * @return string
  */
-function charger_lectures($langue, $jour) {
+function evangelizo_charger($code_langue, $date) {
 
-	include_spip('inc/charsets');
+	// Initialisation du tableau de sortie.
+	$tableau = array();
 
-	$date = ($jour == _SPIPERIPSUM_JOUR_DEFAUT) ? date('Y-m-d') : $jour;
+	// Fonctionnement 1 : il existe un serveur SPIP pour Spiper Ipsum qui se subsitue au site evangelizo
+	// et renvoie en une requête toutes les lectures pour les demandes des différents sites SPIP.
+	// -- On exclut le site courant si on est sur le endpoint centralisé.
+	// -- Pour définir un tel serveur centralisé : define('_SPIPERIPSUM_EVANGILE_ENDPOINT','http://domaine.tld/evangile.api/');
+	if (defined('_SPIPERIPSUM_EVANGILE_ENDPOINT')
+	and strpos(_SPIPERIPSUM_EVANGILE_ENDPOINT, $GLOBALS['meta']['adresse_site']) === false) {
+		// Construction de l'url du serveur centralisé.
+		$url = _SPIPERIPSUM_EVANGILE_ENDPOINT . "${code_langue}/${date}";
+
+		// Acquisition des données spécifiées par l'url
+		$requeter = charger_fonction('taxonomie_requeter', 'inc');
+		$tableau = $requeter($url);
+	}
+
+	// Fonctionnement 2 : il n'existe pas de serveur centralisé ou il n'a pas encore les lectures demandées en stock.
+	if (!$tableau or !empty($tableau['erreur'])) {
+		$tableau = array();
+		// Url de base de tous les flux
+		$url_base = _SPIPERIPSUM_EVANGELIZO_URL_BASE_REQUETE
+			. 'lang=' . $code_langue
+			. '&date=' . date('Ymd', strtotime($date));
+
+		// A partir de la v2 du service seul le charset utf-8 est utilisé
+		$charset = 'utf-8';
+		$lettrine = ($code_langue == 'AR' or $code_langue == 'ARM') ? false : true;
+
+		// traitement des différentes versions de la date
+		$tableau['date'] = flux2date($url_base, $charset, $date);
+
+		// Traitement de l'evangile
+		$tableau['evangile'] = flux2lecture(_SPIPERIPSUM_LECTURE_EVANGILE, $url_base, $charset, $lettrine);
+
+		// Traitement de la premiere lecture
+		$tableau['premiere'] = flux2lecture(_SPIPERIPSUM_LECTURE_PREMIERE, $url_base, $charset, $lettrine);
+
+		// Traitement de la seconde lecture - uniquement le dimanche
+		if (date2jour_semaine($date) == 0) {
+			$tableau['seconde'] = flux2lecture(_SPIPERIPSUM_LECTURE_SECONDE, $url_base, $charset, $lettrine);
+		}
+
+		// Traitement du psaume
+		$tableau['psaume'] = flux2lecture(_SPIPERIPSUM_LECTURE_PSAUME, $url_base, $charset, $lettrine);
+
+		// Traitement du commentaire
+		$tableau['commentaire'] = flux2commentaire($url_base, $charset);
+
+		// Traitement du saint du jour
+		$tableau['saint'] = flux2saint($url_base, $charset);
+
+		// Traitement de la fête du jour
+		$tableau['fete'] = flux2fete($url_base, $charset);
+	}
+
+	return $tableau;
+}
+
+function evangelizo_coder_langue($langue) {
+
+	// Langue des lectures
 	// Si la langue choisie est spécifiée directement comme un code du service alors on l'utilise
 	// directement, sinon c'est qu'on a choisi un code de langue SPIP qu'il faut convertir en
 	// code de langue du service.
@@ -32,71 +95,9 @@ function charger_lectures($langue, $jour) {
 	$code_langue = in_array(strtoupper($langue), explode(':', _SPIPERIPSUM_EVANGELIZO_LANGUES))
 		? strtoupper($langue)
 		: langue2code($langue);
-	// A partir de la v2 du service seul le charset utf-8 est utilisé
-	$charset = 'utf-8';
-	$lettrine = ($code_langue == 'AR' OR $code_langue == 'ARM') ? false : true;
 
-	// Construction du chemin du cache
-	$dir = sous_repertoire(_DIR_CACHE,"spiperipsum");
-	$dir = sous_repertoire($dir,substr(md5($code_langue),0,1));
-	$cache = $dir . $code_langue . "_" . $date . ".txt";
-
-	if (!file_exists($cache) OR _SPIPERIPSUM_FORCER_CHARGEMENT) {
-		include_spip("inc/distant");
-		$tableau = array();
-		// recuperer via endpoint centralise si defini et si c'est pas le site courant ! :)
-		// define('_SPIPERIPSUM_EVANGILE_ENDPOINT','http://example.org/evangile.api/');
-		if (defined('_SPIPERIPSUM_EVANGILE_ENDPOINT')
-		AND strpos(_SPIPERIPSUM_EVANGILE_ENDPOINT,$GLOBALS['meta']['adresse_site'])===false) {
-			$url = _SPIPERIPSUM_EVANGILE_ENDPOINT . "$langue/$date";
-			$page = recuperer_page($url);
-			include_spip("inc/json");
-			if ($page
-			AND ($page_decodee = json_decode($page, true))) {
-				$tableau = $page_decodee;
-			}
-		}
-
-		// sinon ou si echec, aller chercher chez evangelizo en 16 requetes...
-		if (!$tableau) {
-			$tableau = array();
-			// Url de base de tous les flux
-			$url_base = _SPIPERIPSUM_EVANGELIZO_URL_BASE_REQUETE
-				. 'lang=' . $code_langue
-				. '&date=' . date('Ymd', strtotime($date));
-
-			// traitement des différentes versions de la date
-			$tableau['date'] = flux2date($url_base, $charset, $date);
-
-			// Traitement de l'evangile
-			$tableau['evangile'] = flux2lecture(_SPIPERIPSUM_LECTURE_EVANGILE, $url_base, $charset, $lettrine);
-
-			// Traitement de la premiere lecture
-			$tableau['premiere'] = flux2lecture(_SPIPERIPSUM_LECTURE_PREMIERE, $url_base, $charset, $lettrine);
-
-			// Traitement de la seconde lecture - uniquement le dimanche
-			if (date2jour_semaine($date) == 0) {
-				$tableau['seconde'] = flux2lecture(_SPIPERIPSUM_LECTURE_SECONDE, $url_base, $charset, $lettrine);
-			}
-
-			// Traitement du psaume
-			$tableau['psaume'] = flux2lecture(_SPIPERIPSUM_LECTURE_PSAUME, $url_base, $charset, $lettrine);
-
-			// Traitement du commentaire
-			$tableau['commentaire'] = flux2commentaire($url_base, $charset);
-
-			// Traitement du saint du jour
-			$tableau['saint'] = flux2saint($url_base, $charset);
-
-			// Traitement de la fête du jour
-			$tableau['fete'] = flux2fete($url_base, $charset);
-		}
-
- 		ecrire_fichier($cache, serialize($tableau));
-	}
-	return $cache;
+	return $code_langue;
 }
-
 
 /**
  * @param $url_base
@@ -142,6 +143,7 @@ function flux2saint($url_base, $charset) {
 		// -- nom
 		$balises_a = extraire_balises($page, 'a');
 		if (isset($balises_a[0])) {
+			include_spip('inc/charsets');
 			$titre = preg_replace(',</?a\b.*>,UimsS', '', $balises_a[0]);
 			$tableau['titre'] = page2page_propre(importer_charset($titre, $charset), $charset, false);
 
@@ -196,7 +198,7 @@ function flux2fete($url_base, $charset) {
 	$tableau = array('titre' => '', 'url' => '', 'texte' => '');
 
 	$page = recuperer_page($url_base.'&type=feast');
-	if ($page AND (strpos($page, 'Error : ') === false)) {
+	if ($page and (strpos($page, 'Error : ') === false)) {
 		if ($titre = page2page_propre(importer_charset($page, $charset), $charset, true)) {
 			// Dans ce cas seul le nom de la fête est fourni, l'url est absente.
 			$tableau['titre'] = $titre;
@@ -296,7 +298,7 @@ function flux2element($url, $charset, $no_tag=false) {
 	$element = '';
 
 	$page = recuperer_page($url);
-	if ($page AND (strpos($page, 'Error : ') === false)) {
+	if ($page and (strpos($page, 'Error : ') === false)) {
 		$page = page2page_propre(importer_charset($page, $charset), $charset, $no_tag);
 		$element = $page;
 	}
@@ -315,7 +317,7 @@ function flux2texte($url, $charset, $lettrine=false) {
 	$texte = array('texte' => '', 'copyright' => '', 'credit' => '');
 
 	$page = recuperer_page($url);
-	if ($page AND (strpos($page, 'Error : ') === false)) {
+	if ($page and (strpos($page, 'Error : ') === false)) {
 		$page = page2page_propre(importer_charset($page, $charset), $charset, false);
 		$segments = explode('<br />', $page);
 
@@ -332,11 +334,11 @@ function flux2texte($url, $charset, $lettrine=false) {
 			unset($segments[$index]);
 			$index = $index - 1;
 		}
-		while (!$segments[$index] AND $index>0) {
+		while (!$segments[$index] and $index>0) {
 			unset($segments[$index]);
 			$index = $index - 1;
 		}
-		$page = trim(preg_replace('#</?font\b.*>#UimsS','', implode('<br />', $segments)));
+		$page = trim(preg_replace('#</?font\b.*>#UimsS', '', implode('<br />', $segments)));
 		if ($lettrine) {
 			$lettre = mb_substr($page, 0, 1, $GLOBALS['meta']['charset']);
 			$texte['texte'] = '<span class="lettrine">' . $lettre . '</span>' . mb_substr($page, 1);
@@ -572,5 +574,3 @@ function date2url_date($date) {
 	$url = '&year=' . $infos['year'] . '&month=' . $infos['mon'] .'&day=' . $infos['mday'];
 	return $url;
 }
-
-?>

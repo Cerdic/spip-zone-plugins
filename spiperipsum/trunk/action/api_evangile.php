@@ -1,8 +1,10 @@
 <?php
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
-function action_api_evangile_dist(){
+function action_api_evangile_dist() {
 	$res  = array();
 	$arg = _request('arg');
 	$arg = explode('/',$arg);

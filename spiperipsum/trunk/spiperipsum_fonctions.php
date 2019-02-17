@@ -1,5 +1,7 @@
 <?php
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // -- balises du plugin utilisables dans les squelettes et modeles --
 
@@ -13,8 +15,10 @@ function balise_SPIPERIPSUM($p) {
 	$lecture = isset($lecture) ? str_replace('\'', '"', $lecture) : '""';
 	$info = interprete_argument_balise(4, $p);
 	$info = isset($info) ? str_replace('\'', '"', $info) : '""';
+	$service = interprete_argument_balise(5, $p);
+	$service = isset($service) ? str_replace('\'', '"', $service) : '"evangelizo"';
 
-	$p->code = 'spiperipsum_lire(' . $langue . ', ' . $jour . ', ' . $lecture . ', ' . $info . ')';
+	$p->code = 'spiperipsum_lire(' . $langue . ', ' . $jour . ', ' . $lecture . ', ' . $info . ', ' . $service . ')';
 	$p->interdire_scripts = false;
 
 	return $p;
@@ -22,28 +26,27 @@ function balise_SPIPERIPSUM($p) {
 
 // -- filtres du plugin utilisables dans les squelettes et modeles --
 
-function spiperipsum_afficher($langue, $jour, $lecture, $mode) {
-
-	include_spip('services/evangelizo');
+function spiperipsum_afficher($langue, $jour, $lecture, $mode, $service = 'evangelizo') {
 
 	if (!$jour) $jour = _SPIPERIPSUM_JOUR_DEFAUT;
 	if (!$lecture) $lecture = _SPIPERIPSUM_LECTURE_DEFAUT;
 	if (!$mode) $mode = _SPIPERIPSUM_MODE_DEFAUT;
+	if (!$service) $service = 'evangelizo';
 
-	$nom_fichier = charger_lectures($langue, $jour);
-	lire_fichier($nom_fichier,$tableau);
-	$tableau = unserialize($tableau);
+	// Récupération des lectures pour le service demandé
+	$charger = charger_fonction('spiperipsum_charger', 'inc');
+	$tableau = $charger($langue, $jour, $service);
 
 	$contexte = array();
 
 	if (($lecture == _SPIPERIPSUM_LECTURE_DATE_TITRE)
-	OR ($lecture == _SPIPERIPSUM_LECTURE_DATE_ISO)
-	OR ($lecture == _SPIPERIPSUM_LECTURE_DATE_LITURGIQUE)) {
+	or ($lecture == _SPIPERIPSUM_LECTURE_DATE_ISO)
+	or ($lecture == _SPIPERIPSUM_LECTURE_DATE_LITURGIQUE)) {
 		if (isset($tableau['date'])) {
 			$contexte = $tableau['date'];
 		}
 		$contexte = array_merge($contexte, array('lecture' => $lecture, 'mode' => $mode));
-		$texte = recuperer_fond("modeles/date", $contexte);
+		$texte = recuperer_fond('modeles/date', $contexte);
 	}
 	else {
 		if (isset($tableau[$lecture])) {
@@ -52,23 +55,26 @@ function spiperipsum_afficher($langue, $jour, $lecture, $mode) {
 		$contexte = array_merge($contexte, array('lecture' => $lecture, 'mode' => $mode));
 
 		if ($lecture == _SPIPERIPSUM_LECTURE_SAINT)
-			$texte = recuperer_fond("modeles/saint", $contexte);
-		else if ($lecture == _SPIPERIPSUM_LECTURE_COMMENTAIRE)
-			$texte = recuperer_fond("modeles/commentaire", $contexte);
+			$texte = recuperer_fond('modeles/saint', $contexte);
+		elseif ($lecture == _SPIPERIPSUM_LECTURE_COMMENTAIRE)
+			$texte = recuperer_fond('modeles/commentaire', $contexte);
 		else
-			$texte = recuperer_fond("modeles/lecture", $contexte);
+			$texte = recuperer_fond('modeles/lecture', $contexte);
 	}
 
 return $texte;
 }
 
-function spiperipsum_lire($langue, $jour, $lecture, $info) {
-
-	include_spip('services/evangelizo');
+function spiperipsum_lire($langue, $jour, $lecture, $info, $service = 'evangelizo') {
 
 	if (!$jour) $jour = _SPIPERIPSUM_JOUR_DEFAUT;
 	if (!$lecture) $lecture = _SPIPERIPSUM_LECTURE_DEFAUT;
 	if (!$info) $info = _SPIPERIPSUM_INFO_DEFAUT;
+	if (!$service) $service = 'evangelizo';
+
+	// Récupération des lectures pour le service demandé
+	$charger = charger_fonction('spiperipsum_charger', 'inc');
+	$tableau = $charger($langue, $jour, $service);
 
 	// Pour la date, on peut utiliser au choix
 	// - lecture = date et info = iso, liturgique et titre
@@ -80,11 +86,5 @@ function spiperipsum_lire($langue, $jour, $lecture, $info) {
 		$info = $parties[1];
 	}
 
-	$nom_fichier = charger_lectures($langue, $jour);
-	lire_fichier($nom_fichier, $tableau);
-	$tableau = unserialize($tableau);
-
 	return $tableau[$lecture][$info];
 }
-
-?>
