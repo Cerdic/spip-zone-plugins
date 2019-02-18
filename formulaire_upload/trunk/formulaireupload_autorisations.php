@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // declaration vide pour ce pipeline.
 function formulaireupload_autoriser(){}
@@ -16,4 +18,3 @@ function autoriser_joindredocumentupload_dist($faire, $type, $id, $qui, $opt){
 }
 
 
-?>

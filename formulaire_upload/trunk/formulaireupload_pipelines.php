@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 function formulaireupload_insert_head($flux){
@@ -14,4 +16,3 @@ function formulaireupload_insert_head_css($flux){
 	return $flux;
 }
 
-?>

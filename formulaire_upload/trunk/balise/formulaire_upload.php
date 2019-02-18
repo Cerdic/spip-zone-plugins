@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // Contexte du formulaire
 function balise_FORMULAIRE_UPLOAD ($p) {
@@ -49,4 +51,3 @@ function balise_FORMULAIRE_UPLOAD_TYPE_BOUCLE($p) {
 	return $p;  
 }
 
-?>

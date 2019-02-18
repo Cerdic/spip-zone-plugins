@@ -10,7 +10,7 @@
 	<nom>Formulaire Upload</nom>
 	<auteur lien="http://zzz.rezo.net">Fil</auteur>
 	<auteur>b_b</auteur>
-	<auteur lien='http://www.erational.org'>erational</auteur>
+	<auteur lien='https://www.erational.org'>erational</auteur>
 	<licence>GNU/GPL</licence>
 
 	<pipeline nom="autoriser" inclure="formulaireupload_autorisations.php" />
