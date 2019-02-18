@@ -212,33 +212,38 @@ function rechercher_presence_liens_spammes($liens,$seuil,$table,$champs,$condsta
 		$condstatut .= $desc['date'].">".sql_quote($depuis)." AND ";
 	}
 
-	// ne pas prendre en compte les liens sur le meme domaine que celui du site
-	$allowed = array();
-	$tests = array($GLOBALS['meta']['adresse_site'],url_de_base());
-	foreach ($tests as $t){
-		if ($parse = parse_url($t)
-			AND $parse['host']){
-			$host = explode(".",$parse['host']);
-			while (count($host)>2) array_shift($host);
-			$allowed[] = implode(".",$host);
-		}
-	}
-	if (count($allowed)){
-		$allowed = array_map('preg_quote',$allowed);
-		$allowed = implode("|",$allowed);
-		$allowed = "/($allowed)$/";
-		spip_log("domaines whitelist pour les liens spams : $allowed","nospam");
+	// Ne pas prendre en compte les liens sur les domaines explicitement autorisés
+	// Il ne faut ni http(s):// ni www dedans, juste le NDD (et éventuellement un sous domaine)
+	if (defined('NOSPAM_DOMAINES_AMIS') and NOSPAM_DOMAINES_AMIS) {
+		$amis = explode (',', NOSPAM_DOMAINES_AMIS);
+		$amis = array_filter(array_map('trim', $amis));
 	}
 	else
-		$allowed = "";
+		$amis = array();
 
+	foreach (array($GLOBALS['meta']['adresse_site'],url_de_base()) as $a){
+		$host = parse_url($a, PHP_URL_HOST);
+		if ($host) {
+			$host = explode(".", $host);
+			$amis[] = implode(".",array_slice($host, -2));
+		}
+	}
+
+	if (count($amis)){
+		$amis = array_unique($amis);
+		$amis = array_map('preg_quote', $amis);
+		$amis = '/('.implode("|",$amis).')$/';
+		spip_log("domaines whitelist pour les liens spams : $amis","nospam");
+	}
+	else
+		$amis = "";
 
 	$hosts = array();
 	foreach ($liens as $lien){
 		$url = extraire_attribut($lien,"href");
 		if ($parse = parse_url($url)
 		  AND $parse['host']
-		  AND (!$allowed OR !preg_match($allowed,$parse['host'])))
+		  AND (!$amis OR !preg_match($amis,$parse['host'])))
 			$hosts[] = $parse['host'];
 	}
 
@@ -260,4 +265,3 @@ function rechercher_presence_liens_spammes($liens,$seuil,$table,$champs,$condsta
 	}
 	return false;
 }
-?>
