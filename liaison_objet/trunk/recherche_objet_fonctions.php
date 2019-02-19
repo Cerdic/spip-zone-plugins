@@ -44,7 +44,6 @@ function tableau_recherche_objet($objet, $exclus, $lang = '') {
 		$where = array($champ_titre . ' LIKE ' . sql_quote('%' . _request('term') . '%') . ' OR fichier LIKE' . sql_quote('%' . _request('term') . '%'));
 		$champ_titre = 'titre,fichier';
 	}
-	Pipelines
 	if (isset($tables[$table]['statut'][0]['publie']))
 		$statut = $tables[$table]['statut'][0]['publie'];
 	$exceptions_statut = array(
