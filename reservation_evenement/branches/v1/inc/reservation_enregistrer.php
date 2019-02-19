@@ -8,6 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 function inc_reservation_enregistrer_dist($id = '', $id_article = '', $id_auteur = '', $champs_extras_auteurs = '') {
 	include_spip('inc/config');
 	include_spip('inc/session');
+	include_spip('action/editer_reservation');
 
 	$config = lire_config('reservation_evenement');
 	$statut = $config['statut_defaut'] ? $config['statut_defaut'] : 'rien';
@@ -17,14 +18,18 @@ function inc_reservation_enregistrer_dist($id = '', $id_article = '', $id_auteur
 	}
 
 	// Créer la réservation
-	$action = charger_fonction('editer_objet', 'action');
+	$id_reservation = reservation_inserer();
 
-	// La référence
+
+
+	// Génération de la référence.
 	$fonction_reference = charger_fonction('reservation_reference', 'inc/');
+	$reference = $fonction_reference($id_reservation);
 
-	set_request('statut', $statut);
-	$reference = $fonction_reference($id_auteur);
+	// Ajouter à l'environnement pour l'actualisation par la suite.
 	set_request('reference', $reference);
+	set_request('statut', $statut);
+
 
 	if (_request('enregistrer')) {
 		include_spip('actions/editer_auteur');
@@ -57,6 +62,7 @@ function inc_reservation_enregistrer_dist($id = '', $id_article = '', $id_auteur
 				session_set($value['options']['nom'], _request($value['options']['nom']));
 			}
 		}
+
 		// mettre les valeurs dans la session pour garder les éventuelles modifications
 		session_set('nom', _request('nom'));
 		session_set('email', _request('email'));
@@ -72,10 +78,12 @@ function inc_reservation_enregistrer_dist($id = '', $id_article = '', $id_auteur
 		set_request('email', '');
 	}
 
-	$id_reservation = $action('new', 'reservation');
+	// On actualise la réservation avec les données collectés.
+	$action = charger_fonction('editer_objet', 'action');
+	$reservation = $action($id_reservation, 'reservation');
 
 	// On ajoute l'id à la session
-	$id_reservation = $id_reservation[0];
+
 	if (!_request('id_reservation_source'))
 		session_set('id_reservation', $id_reservation);
 
