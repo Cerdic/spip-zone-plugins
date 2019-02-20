@@ -268,10 +268,9 @@ function lister_tables_objets_edit() {
  */
 function saisies_label($chaine) {
 	$chaine = trim($chaine);
-	if (preg_match("/:>$/", $chaine)) {
-		$chaine = preg_replace("/^&lt;:/", "", $chaine);
-		$chaine = preg_replace("/^<:/", "", $chaine);
-		$chaine = preg_replace("/:>$/", "", $chaine);
+	if (preg_match("/^(&lt;:|<:)/", $chaine)) {
+		$chaine = preg_replace("/^(&lt;:|<:)/", "", $chaine);
+		$chaine = preg_replace("/(:&gt;|:>)$/", "", $chaine);
 		return _T($chaine);
 	}
 
