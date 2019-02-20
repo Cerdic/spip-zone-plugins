@@ -345,6 +345,7 @@ function noisette_encapsuler($plugin, $contenu, $encapsulation, $parametres, $st
 
 	// Détermination du défaut d'encapsulation.
 	if (!isset($defaut_encapsulation[$plugin])) {
+		include_spip('ncore/ncore');
 		$defaut_encapsulation[$plugin] = ncore_noisette_initialiser_encapsulation($plugin);
 	}
 
