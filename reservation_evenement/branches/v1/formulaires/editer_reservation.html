@@ -51,8 +51,10 @@
 				[(#SAISIE{date, date_paiement,
 					label=<:reservation:label_date_paiement:>})]
 
-				[(#SAISIE{input, reference,
-					label=<:reservation:label_reference:>})]
+				[(#ENV{reference}|oui)
+					[(#SAISIE{input, reference,
+						label=<:reservation:label_reference:>})]
+				]
 
 				[(#SAISIE{selection, lang,
 					label=<:reservation:label_lang:>,

@@ -60,11 +60,8 @@ function formulaires_editer_reservation_identifier_dist($id_reservation = 'new',
  */
 function formulaires_editer_reservation_charger_dist($id_reservation = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	$valeurs = formulaires_editer_objet_charger('reservation', $id_reservation, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
-	if (isset($valeurs['langue']))
+	if (isset($valeurs['langue'])) {
 		$valeurs['lang'] = $valeurs['langue'];
-	if (isset($valeurs['reference']) and ! $valeurs['reference']) {
-		$fonction_reference = charger_fonction('reservation_reference', 'inc/');
-		$valeurs['reference'] = $fonction_reference();
 	}
 
 	$valeurs['quantite'] = _request('quantite') ? _request('quantite') : 1;
@@ -112,12 +109,10 @@ function formulaires_editer_reservation_charger_dist($id_reservation = 'new', $r
  */
 function formulaires_editer_reservation_verifier_dist($id_reservation = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	$email = trim(_request('email'));
-	$obligatoire = array(
-		'reference'
-	);
+	$obligatoire = array();
 	$enregistrer_compte = TRUE;
 	if (! _request('id_auteur') and (_request('nom') or $email)) {
-		$obligatoire = Array_merge($obligatoire, array(
+		$obligatoire = array_merge($obligatoire, array(
 			'nom',
 			'email'
 		));
