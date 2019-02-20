@@ -17,18 +17,22 @@ function reservation_inserer($id_parent = null, $set = null) {
 		'data' => $champs
 	));
 
-	$id = sql_insertq($table_sql, $champs);
+	$id_reservation = sql_insertq($table_sql, $champs);
+	// Génération de la référence.
+	$fonction_reference = charger_fonction('reservation_reference', 'inc/');
+	$reference = $fonction_reference($id_reservation);
+	set_request('reference', $reference);
 
-	if ($id) {
+	if ($id_reservation) {
 		pipeline('post_insertion', array(
 			'args' => array(
 				'table' => $table_sql,
-				'id_objet' => $id,
+				'id_objet' => $id_reservation,
 			),
 			'data' => $champs
 		));
 	}
-	return $id;
+	return $id_reservation;
 }
 
 function reservation_instituer($id_reservation, $c, $calcul_rub = true) {

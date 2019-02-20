@@ -5,7 +5,11 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 // Enregistrement d'une réservation
-function inc_reservation_enregistrer_dist($id = '', $id_article = '', $id_auteur = '', $champs_extras_auteurs = '') {
+function inc_reservation_enregistrer_dist(
+	$id = '',
+	$id_article = '',
+	$id_auteur = '',
+	$champs_extras_auteurs = '') {
 	include_spip('inc/config');
 	include_spip('inc/session');
 	include_spip('action/editer_reservation');
@@ -17,17 +21,7 @@ function inc_reservation_enregistrer_dist($id = '', $id_article = '', $id_auteur
 		$statut = $statut_defaut($statut);
 	}
 
-	// Créer la réservation
-	$id_reservation = reservation_inserer();
-
-
-
-	// Génération de la référence.
-	$fonction_reference = charger_fonction('reservation_reference', 'inc/');
-	$reference = $fonction_reference($id_reservation);
-
 	// Ajouter à l'environnement pour l'actualisation par la suite.
-	set_request('reference', $reference);
 	set_request('statut', $statut);
 
 
@@ -80,12 +74,14 @@ function inc_reservation_enregistrer_dist($id = '', $id_article = '', $id_auteur
 
 	// On actualise la réservation avec les données collectés.
 	$action = charger_fonction('editer_objet', 'action');
-	$reservation = $action($id_reservation, 'reservation');
+	$reservation = $action('new', 'reservation');
+	$id_reservation = $reservation[0];
 
 	// On ajoute l'id à la session
 
-	if (!_request('id_reservation_source'))
+	if (!_request('id_reservation_source')) {
 		session_set('id_reservation', $id_reservation);
+	}
 
 	$message = '<div class="intro"><p>' . _T('reservation:reservation_enregistre') . '</p></div>';
 	$message .= '<div class="detail_reservation">';
