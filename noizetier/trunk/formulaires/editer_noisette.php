@@ -31,29 +31,52 @@ function formulaires_editer_noisette_charger_dist($id_noisette, $redirect = '') 
 			// Récupération des informations sur le type de noisette
 			include_spip('inc/ncore_type_noisette');
 			$champs = type_noisette_lire('noizetier', $noisette['type_noisette'], 'parametres');
-			$valeurs['_champs'] = $champs;
+			$valeurs['_champs_noisette'] = $champs;
 
 			// Insérer dans le contexte les valeurs des paramètres spécifiques stockées en BD.
 			// On doit passer par saisies_charger_champs() au cas ou la définition de la noisette a changé
 			// et qu'il y a de nouveaux champs à prendre en compte
 			include_spip('inc/saisies');
 			$parametres = $noisette['parametres'];
-			$valeurs = array_merge($valeurs, saisies_charger_champs($valeurs['_champs']), $parametres);
+			$valeurs = array_merge($valeurs, saisies_charger_champs($valeurs['_champs_noisette']), $parametres);
 
-			// Insérer dans le contexte les valeurs des paramètres généraux stockées en BD.
+			// Insérer dans le contexte les saisies des paramètres d'encapsulation stockées en BD si la noisette
+			// n'est pas un conteneur.
 			// Ces paramètres généraux sont inclus manuellement dans le formulaire.
 			$valeurs['encapsulation'] = $noisette['encapsulation'];
 			$valeurs['css'] = $noisette['css'];
-			// Construction de la liste des valeurs possibles pour le choix de la encapsulation
-			include_spip('ncore/noizetier');
-			$config_encapsulation = noizetier_noisette_initialiser_encapsulation('noizetier')
-				? _T('noizetier:option_noizetier_encapsulation_oui')
-				: _T('noizetier:option_noizetier_encapsulation_non');
-			$valeurs['_encapsulation_options'] = array(
-				'defaut' => _T('noizetier:option_noisette_encapsulation_defaut', array('defaut' => lcfirst($config_encapsulation))),
-				'oui'    => _T('noizetier:option_noisette_encapsulation_oui'),
-				'non'    => _T('noizetier:option_noisette_encapsulation_non')
-			);
+			if ($noisette['est_conteneur'] != 'oui') {
+				// Construction de la liste des valeurs possibles pour le choix de la encapsulation
+				include_spip('ncore/ncore');
+				$config_encapsulation = ncore_noisette_initialiser_encapsulation('noizetier')
+					? _T('noizetier:option_noizetier_encapsulation_oui')
+					: _T('noizetier:option_noizetier_encapsulation_non');
+				$options_encapsulation = array(
+					'defaut' => _T('noizetier:option_noisette_encapsulation_defaut', array('defaut' => lcfirst($config_encapsulation))),
+					'oui'    => _T('noizetier:option_noisette_encapsulation_oui'),
+					'non'    => _T('noizetier:option_noisette_encapsulation_non')
+				);
+				$valeurs['_champs_capsule'] = array(
+					array(
+						'saisie'  => 'radio',
+						'options' => array(
+							'nom'    => 'encapsulation',
+							'label'  => '<:noizetier:label_noisette_encapsulation:>',
+							'datas'  => $options_encapsulation,
+							'defaut' => $valeurs['encapsulation']
+						),
+					),
+					array(
+						'saisie'  => 'input',
+						'options' => array(
+							'nom'    => 'css',
+							'label'  => '<:noizetier:label_noisette_css:>',
+							'explication' => '<:noizetier:explication_noisette_css:>'
+						),
+					),
+				);
+			}
+
 			$valeurs['editable'] = true;
 		}
 	}

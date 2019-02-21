@@ -12,32 +12,19 @@
 		<fieldset>
 			<legend><:noizetier:legende_noisette_parametrage:></legend>
 			[<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
-				(#GENERER_SAISIES{#ENV{_champs}})
+				(#GENERER_SAISIES{#ENV{_champs_noisette}})
 			</[(#VAL{ul}|saisie_balise_structure_formulaire)]>]
 			[(#ENV{_champs}|non)#BOITE_OUVRIR{'','notice'}<:noizetier:formulaire_noisette_sans_parametre:>#BOITE_FERMER]
 		</fieldset>
 
 		[(#REM) Paramètres de configuration généraux à toute noisette (capsule, CSS) sauf
 		        si la noisette est un conteneur pour lequel on interdit de l'englober encore d'un div ]
-		[(#ENV{est_conteneur}|=={non}|oui)
-		<fieldset>
+		[<fieldset>
 			<legend><:noizetier:legende_noisette_inclusion:></legend>
-			<div class="editer-groupe">
-				[(#REM) Choix d'une capsule englobante pour la noisette ]
-				[(#SAISIE{radio, encapsulation,
-					label=<:noizetier:label_noisette_encapsulation:>,
-					datas=#ENV{_encapsulation_options},
-					defaut=#ENV{encapsulation},
-				})]
-
-				[(#REM) CSS spécifiques qui seront insérés dans la capsule englobante si utilisée ]
-				[<div id="css">(#SAISIE{input, css,
-					label=<:noizetier:label_noisette_css:>,
-					explication=<:noizetier:explication_noisette_css:>,
-				})</div>]
-			</div>
-		</fieldset>
-		]
+			<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+				(#GENERER_SAISIES{#ENV{_champs_capsule}})
+			</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+		</fieldset>]
 
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
@@ -49,16 +36,16 @@
 //<![CDATA[
 	jQuery(document).ready(function() {
 		[(#ENV{encapsulation}|=={non}|ou{#ENV{encapsulation}|=={defaut}|et{#CONFIG{noizetier/encapsulation_noisette}|!={on}}}|oui)
-			jQuery('#css').hide();
+			jQuery('.editer_css').hide();
 		]
 		jQuery("input[name='encapsulation']").change(function() {
 			if (jQuery("input[name='encapsulation']:checked").val() == 'non') {
-				jQuery("#css").hide();
+				jQuery(".editer_css").hide();
 			} else if (jQuery("input[name='encapsulation']:checked").val() == 'oui') {
-				jQuery("#css").show();
+				jQuery(".editer_css").show();
 			} else {
-				[(#CONFIG{noizetier/encapsulation_noisette}|=={on}|oui)jQuery("#css").show();]
-				[(#CONFIG{noizetier/encapsulation_noisette}|=={on}|non)jQuery("#css").hide();]
+				[(#CONFIG{noizetier/encapsulation_noisette}|=={on}|oui)jQuery(".editer_css").show();]
+				[(#CONFIG{noizetier/encapsulation_noisette}|=={on}|non)jQuery(".editer_css").hide();]
 			}
 			jQuery(this).blur();
 		});
