@@ -31,77 +31,114 @@ function zengarden_affiche_version_compatible($intervalle){
 }
 
 /**
- * Lister les thèmes
- * 
+ * Lister tous les thèmes (stables)
+ *
  * Les thèmes peuvent être présent dans :
  * - themes/* à la racine (ou autre _DIR_THEMES défini);
  * - squelettes/themes/*;
  * - plugins/*;
  *
- * @param bool $tous
+ * @param bool $tous true pour retourner aussi les thèmes non stables
  * @return array
  */
-function zengarden_liste_themes($tous){
+function zengarden_liste_themes_presents($tous){
 	include_spip('inc/zengarden');
 
 	$themes = array();
 
 	// charger les themes de themes-dist/
-	if (is_dir(_DIR_THEMES_DIST))
+	if (is_dir(_DIR_THEMES_DIST)) {
 		$themes = array_merge($themes, zengarden_charge_themes(_DIR_THEMES_DIST, $tous));
+	}
 
 	// charger les themes de themes/
-	if (is_dir(_DIR_THEMES))
+	if (is_dir(_DIR_THEMES)) {
 		$themes = array_merge($themes, zengarden_charge_themes(_DIR_THEMES, $tous));
+	}
 
 	// ceux de squelettes/themes/
-	if (is_dir($skels=_DIR_RACINE."squelettes/themes/"))
-		$themes = array_merge($themes,zengarden_charge_themes($skels,$tous));
+	if (is_dir($skels=_DIR_RACINE."squelettes/themes/")) {
+		$themes = array_merge($themes, zengarden_charge_themes($skels, $tous));
+	}
 
 	// ceux de chaque  dossier_squelettes/themes/
-	if (strlen($GLOBALS['dossier_squelettes'])){
+	if (strlen($GLOBALS['dossier_squelettes'])) {
 		$s = explode(":",$GLOBALS['dossier_squelettes']);
-		foreach($s as $d){
-			if (_DIR_RACINE AND strncmp($d,_DIR_RACINE,strlen(_DIR_RACINE))!==0)
+		foreach($s as $d) {
+			if (_DIR_RACINE AND strncmp($d,_DIR_RACINE,strlen(_DIR_RACINE)) !== 0) {
 				$d = _DIR_RACINE . $d;
-			if (is_dir($f="$d/themes/") AND $f!=$skels)
-				$themes = array_merge($themes,zengarden_charge_themes($f,$tous));
+			}
+			if (is_dir($f="$d/themes/") AND $f!=$skels) {
+				$themes = array_merge($themes, zengarden_charge_themes($f, $tous));
+			}
 		}
 	}
 
 	// ceux de plugins/
-	$themes = array_merge($themes,zengarden_charge_themes(_DIR_PLUGINS,$tous));
+	$themes = array_merge($themes, zengarden_charge_themes(_DIR_PLUGINS, $tous));
+	return $themes;
+}
 
-	/**
-	 * Recherche spécifique
-	 * Invalider les thèmes incompatibles
-	 * 
-	 * Si le squelette ou un plugin définit la constante _ZENGARDEN_FILTRE_THEMES, 
-	 * on ne prend que les thèmes compatibles
-	 * Sinon, si on a le plugin zpip-dist, on ne liste que les thèmes compatibles avec zpip-dist
-	 * 
-	 * Pour être compatible un thème doit avoir un <utilise...> du squelette en question dans son paquet.xml
-	 */
+/**
+ * Lister les thèmes acceptés avec le jeu de squelettes utilisé
+ * 
+ * @uses zengarden_liste_themes_presents()
+ * @uses zengarden_filtrer_themes_compatibles()
+ *
+ * @param bool $tous true pour retourner aussi les thèmes non stables
+ * @return array
+ */
+function zengarden_liste_themes($tous) {
+	$themes = zengarden_liste_themes_presents($tous);
+	$themes = zengarden_filtrer_themes_compatibles($themes);
+	return $themes;
+}
+
+/**
+ * Recherche spécifique : Invalider les thèmes incompatibles
+ *
+ * Si le squelette ou un plugin définit la constante _ZENGARDEN_FILTRE_THEMES,
+ * on ne prend que les thèmes compatibles
+ * Sinon, si on a le plugin zpip-dist, on ne liste que les thèmes compatibles avec zpip-dist
+ *
+ * Pour être compatible un thème doit avoir un <utilise...> du squelette en question dans son paquet.xml
+ *
+ * @param array $themes
+ * @return array
+ */
+function zengarden_filtrer_themes_compatibles($themes) {
 	$search = "dist";
-	if (defined('_ZENGARDEN_FILTRE_THEMES')) $search=_ZENGARDEN_FILTRE_THEMES;
-	elseif (defined('_DIR_PLUGIN_ZPIP')) $search="zpip";
-	elseif (defined('_DIR_PLUGIN_Z')) $search="z";
-	
-	if ($search){
+	if (defined('_ZENGARDEN_FILTRE_THEMES')) {
+		$search = _ZENGARDEN_FILTRE_THEMES;
+	} elseif (defined('_DIR_PLUGIN_ZPIP')) {
+		$search = "zpip";
+	} elseif (defined('_DIR_PLUGIN_Z')) {
+		$search = "z";
+	}
+	return zengarden_filtrer_themes_compatibles_avec($themes, $search);
+}
+
+/**
+ * Retourne uniquement les thèmes compatibles avec un type de thème indiqué
+ * @param array $themes
+ * @param string $search Type de thème (ex: dist, spipr, zpip, ...)
+ * @return array
+ */
+function zengarden_filtrer_themes_compatibles_avec($themes, $search = "") {
+	if ($search) {
 		foreach ($themes as $k => $theme){
 			$keep = false;
 			foreach ($theme['utilise'] as $u){
-				if (strncasecmp($u['nom'],$search,max(strlen($u['nom']),strlen($search)))==0){
+				if (strncasecmp($u['nom'], $search, max(strlen($u['nom']), strlen($search))) === 0) {
 					$keep = true;
 					continue;
 				}
 			}
-			if (!$keep)
+			if (!$keep) {
 				unset($themes[$k]);
+			}
 		}
 	}
-
-	// et voila
 	return $themes;
 }
 

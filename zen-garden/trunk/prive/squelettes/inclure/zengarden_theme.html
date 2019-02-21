@@ -1,9 +1,11 @@
-#SET{themes,#ENV{tous,''}|zengarden_liste_themes}
-<INCLURE{fond=prive/squelettes/inclure/zengarden_theme_actif,env,themes=#GET{themes}}>
+#SET{themes_presents,#ENV{tous,''}|zengarden_liste_themes_presents}
+#SET{themes_activables,#ENV{tous,''}|zengarden_liste_themes}
+
+<INCLURE{fond=prive/squelettes/inclure/zengarden_theme_actif,env,themes=#GET{themes_presents}}>
 <B_themes>
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste_themes'>
-<BOUCLE_themes(POUR){tableau #GET{themes}}{cle!=#ENV{selection}}{par tri}{pagination 20}>
+<BOUCLE_themes(POUR){tableau #GET{themes_activables}}{cle!=#ENV{selection}}{par tri}{pagination 20}>
 	<li class='theme'>
 		<div class="qTip target_leftMiddle tooltip_rightMiddle">
 		[(#EVAL{_DIR_RACINE}|concat{#CLE,'/',#VALEUR{logo}}
