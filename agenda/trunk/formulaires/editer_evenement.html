@@ -21,13 +21,13 @@
 			</li>
 			<li class='editer editer_date fieldset'><fieldset><legend><:agenda:evenement_date:></legend>
 				<ul>
-					<li class="editer editer_horaire[ (#ENV**{erreurs}|table_valeur{horaire}|oui)erreur]">
+					<li class="editer pleine_largeur editer_horaire[ (#ENV**{erreurs}|table_valeur{horaire}|oui)erreur]">
 						<label for="horaire"><:agenda:evenement_horaire:></label>[
 						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{horaire})</span>
 						]<input type='checkbox' name='horaire' id='horaire' value='non' [(#ENV{horaire}|=={oui}|non)checked='checked']
 							onclick="if (this.checked==false) { $('span.afficher_horaire').show();} else {$('span.afficher_horaire').hide();}" />
 					</li>
-					<li class="editer editer_date_debut_fin[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur][ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur]">
+					<li class="editer pleine_largeur editer_date_debut_fin[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur][ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur]">
 						[
 						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_debut})</span>][
 						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</span>
