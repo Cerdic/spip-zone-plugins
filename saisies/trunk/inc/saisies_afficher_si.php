@@ -30,6 +30,13 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 	$code = '';
 	$code .= "$(function(){\n\tchargement=true;\n";
 	$code .= "\tverifier_saisies_".$id_form." = function(form){\n";
+
+	if (!defined('_SAISIES_AFFICHER_SI_JS_SHOW')) {
+		define ('_SAISIES_AFFICHER_SI_JS_SHOW', 'show(400)');
+	}
+	if (!defined('_SAISIES_AFFICHER_SI_JS_HIDE')) {
+		define ('_SAISIES_AFFICHER_SI_JS_HIDE', 'hide(400)');
+	}
 	foreach ($saisies as $saisie) {
 		// on utilise comme selecteur l'identifiant de saisie en priorite s'il est connu
 		// parce que conteneur_class = 'tableau[nom][option]' ne fonctionne evidement pas
@@ -119,7 +126,7 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 				$sel = ".$class_li";
 			}
 			$code .= "\tif (".$condition.") {\n"
-							 .	"\t\t$(form).find(\"$sel\").show(400);\n";
+							 .	"\t\t$(form).find(\"$sel\")."._SAISIES_AFFICHER_SI_JS_SHOW.";\n";
 			if (html5_permis()) {
 			$pour_html_5 = 	"$sel.obligatoire > input, "// si le afficher_si porte directement sur le input
 							."$sel .obligatoire input, "// si le afficher_si porte sur le fieldset, tous les input dedans sont concernés, quelque soit leur profondeur (ce qui inclut notamment les cas complexe, type radio ou date)
@@ -140,10 +147,10 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 			 				."\t\t.attr(".'"required"'.",false);\n";
 			}
 			$code .= "\t\tif (chargement==true) {\n"
-					."\t\t\t$(form).find(\"$sel\").hide(400).css".'("display","none")'.";\n"
+					."\t\t\t$(form).find(\"$sel\")."._SAISIES_AFFICHER_SI_JS_HIDE.".css".'("display","none")'.";\n"
 					."\t\t}\n"
 					."\t\telse {\n"
-					."\t\t\t$(form).find(\"$sel\").hide(400);\n"
+					."\t\t\t$(form).find(\"$sel\")."._SAISIES_AFFICHER_SI_JS_HIDE.";\n"
 					."\t\t};\n"
 					."\t}\n";
 		}
