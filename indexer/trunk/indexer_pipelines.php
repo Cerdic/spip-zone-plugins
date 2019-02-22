@@ -68,6 +68,12 @@ function indexer_post_edition_lien($flux){
  * @param bool $async pour lancer l'indexation via job_queue et pas immediatement
 */
 function indexer_redindex_objet($objet,$id_objet, $async = true){
+
+	// ne pas lancer des operations inutiles sur un site local qui n'a pas moteur branche
+	if (defined('_INDEXER_OFF') and _INDEXER_OFF) {
+		return 1;
+	}
+
 	include_spip('inc/indexer');
 	// On récupère toutes les sources compatibles avec l'indexation
 	$sources = indexer_sources();
