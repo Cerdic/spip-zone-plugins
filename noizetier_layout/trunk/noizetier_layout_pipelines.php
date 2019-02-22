@@ -62,7 +62,7 @@ function noizetier_layout_formulaire_charger($flux) {
 		foreach ($elements_grille as $element) {
 			// Ajout des saisies
 			$saisies = noizetier_layout_lister_saisies($element, $id_noisette);
-			$flux['data']['_champs'] = array_merge($flux['data']['_champs'], $saisies);
+			$flux['data']['_champs_noisette'] = array_merge($flux['data']['_champs_noisette'], $saisies);
 			// Récupération des valeurs
 			$parametre = 'css_' . $element;
 			$classes_element = $flux['data'][$parametre];
