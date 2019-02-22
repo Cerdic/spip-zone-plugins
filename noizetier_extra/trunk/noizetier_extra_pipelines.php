@@ -40,7 +40,7 @@ function noizetier_extra_formulaire_charger($flux) {
 		);
 
 		// Ajouter les saisies
-		$flux['data']['_champs'] = array_merge($flux['data']['_champs'], $saisies_classes);
+		$flux['data']['_champs_noisette'] = array_merge($flux['data']['_champs_noisette'], $saisies_classes);
 
 		// Ajouter les valeurs au contexte
 		foreach($saisies_classes as $saisie) {

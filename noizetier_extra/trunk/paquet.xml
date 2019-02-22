@@ -1,7 +1,7 @@
 <paquet
 	prefix="noizetier_extra"
 	categorie="maintenance"
-	version="0.1.1"
+	version="0.1.2"
 	etat="experimental"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="noizetier_extra-32.png"
@@ -16,6 +16,6 @@
 	<pipeline nom="formulaire_verifier" inclure="noizetier_extra_pipelines.php" />
 	<pipeline nom="noizetier_lister_saisies_classes" action="" />
 
-	<necessite nom="noizetier" compatibilite="[3.0.74;]" />
-	<necessite nom="ncore" compatibilite="[0.8.3;]" />
+	<necessite nom="noizetier" compatibilite="[3.0.82;]" />
+	<necessite nom="ncore" compatibilite="[0.9.4;]" />
 </paquet>
