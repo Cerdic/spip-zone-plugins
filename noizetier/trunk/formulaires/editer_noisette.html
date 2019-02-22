@@ -14,7 +14,7 @@
 			[<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 				(#GENERER_SAISIES{#ENV{_champs_noisette}})
 			</[(#VAL{ul}|saisie_balise_structure_formulaire)]>]
-			[(#ENV{_champs}|non)#BOITE_OUVRIR{'','notice'}<:noizetier:formulaire_noisette_sans_parametre:>#BOITE_FERMER]
+			[(#ENV{_champs_noisette}|non)#BOITE_OUVRIR{'','notice'}<:noizetier:formulaire_noisette_sans_parametre:>#BOITE_FERMER]
 		</fieldset>
 
 		[(#REM) Paramètres de configuration généraux à toute noisette (capsule, CSS) sauf
