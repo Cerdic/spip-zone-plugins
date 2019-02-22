@@ -24,20 +24,27 @@ function calculer_URL_SECTEUR($id_rubrique) {
 		return $urls_cache[$id_rubrique];
 	}
 
-	// remonter les rubriques jusqu'à trouver une url multidomaine
+	// Remonter les rubriques jusqu'à trouver une URL multidomaine
 	include_spip('inc/config');
-	$url = lire_config('multidomaines/editer_url_' . $id_rubrique);
+	$cfg = lire_config('multidomaines');
 	$id_rubrique_courante = $id_rubrique;
-	while (!$url && $id_rubrique_courante) {
-		$id_parent = sql_getfetsel("id_parent", "spip_rubriques", "id_rubrique=" . intval($id_rubrique_courante));
-		$url = lire_config('multidomaines/editer_url_' . $id_parent);
-		$id_rubrique_courante = $id_parent;
+	// Soit on est déjà dans un secteur
+	if (isset($cfg[$id_rubrique]['url'])) {
+		$url = $cfg[$id_rubrique]['url'];
+	// Soit on remonte jusqu'au secteur
+	} else {
+		while (!$url && $id_rubrique_courante) {
+			$id_parent = sql_getfetsel('id_parent', 'spip_rubriques', 'id_rubrique=' . intval($id_rubrique_courante));
+			$url = isset($cfg[$id_parent]['url']) ? $cfg[$id_parent]['url'] : false;
+			$id_rubrique_courante = $id_parent;
+		}
 	}
 
-	// sinon, url par défaut
+	// sinon, URL par défaut
 	if (empty($url)) {
-		$url = lire_config('multidomaines/editer_url');
+		$url = lire_config('multidomaines/defaut/url');
 	}
+	// Sinon, URL du site
 	if (empty($url)) {
 		$url = lire_config('adresse_site');
 	}

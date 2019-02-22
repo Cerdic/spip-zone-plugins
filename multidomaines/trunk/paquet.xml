@@ -1,12 +1,12 @@
 <paquet 
 	prefix="multidomaines"
 	categorie="maintenance"
-	version="3.1.3"
+	version="3.1.12"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/multidomaines-72.png"
 	documentation="https://contrib.spip.net/?article4182"
-	schema="0.0.2" 
+	schema="0.1.0" 
 >
 	<nom>Multidomaines</nom>
 

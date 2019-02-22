@@ -8,7 +8,7 @@ function balise_URL_PAGE_ABSOLU_dist($p) {
 	} else {
 		$p->code .= ',""';
 	}
-	$p->code              = 'lire_config("multidomaines/editer_url").generer_url_public(' . $p->code . ',false,true)';
+	$p->code              = 'lire_config("multidomaines/defaut/url").generer_url_public(' . $p->code . ',false,true)';
 	$p->interdire_scripts = true;
 
 	return $p;

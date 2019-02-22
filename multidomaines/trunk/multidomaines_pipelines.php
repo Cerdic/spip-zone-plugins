@@ -55,7 +55,7 @@ function multidomaines_pre_liens($texte) {
 				$id_rubrique  = sql_getfetsel("id_rubrique", "spip_articles", "id_article=" . intval($objet_num));
 				$url_multidom = calculer_URL_SECTEUR($id_rubrique);
 				if (!$url_multidom) {
-					$url_multidom = lire_config('multidomaines/editer_url');
+					$url_multidom = lire_config('multidomaines/defaut/url');
 				}
 				$url_spip         = generer_url_entite_absolue($objet_num, 'article');
 				$domaine_spip     = explode('/', $url_spip);

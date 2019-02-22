@@ -18,20 +18,23 @@ if (!defined('_SECTEUR_URL')) {
 }
 
 if (is_array($options)) {
-	foreach ($options as $cle => $valeur) {
-		if (strpos($cle, 'editer_url_') === 0) {
-			if (empty($valeur)) {
-				$valeur = $options['editer_url'];
+	foreach ($options as $id_rubrique => $config) {
+		if ($id_rubrique != 'defaut') {
+			if (!isset($config['url']) or !$config['url']) {
+				$url = $options['defaut']['url'];
 			}
-			list(, , $id_secteur) = explode('_', $cle);
-			$partie_url = parse_url($valeur);
+			else {
+				$url = $config['url'];
+			}
+			
+			$partie_url = parse_url($url);
 			if (!isset($partie_url['port'])) {
 				$partie_url['port'] = $partie_url['scheme'] == 'https' ? 443 : 80;
 			}
 			if ($partie_url['host'] == $_SERVER['HTTP_HOST'] AND $partie_url['port'] == $_SERVER['SERVER_PORT']) {
-				if ($options['squelette_' . $id_secteur]) {
-					$GLOBALS['multidomaine_id_secteur_courant'] = $id_secteur;
-					$GLOBALS['dossier_squelettes'] = trim($GLOBALS['dossier_squelettes'] . ':' . $options['squelette_' . $id_secteur], ':');
+				if (isset($config['squelette']) and $config['squelette']) {
+					$GLOBALS['multidomaine_id_secteur_courant'] = $id_rubrique;
+					$GLOBALS['dossier_squelettes'] = trim($GLOBALS['dossier_squelettes'] . ':' . $config['squelette'], ':');
 					$GLOBALS["multidomaine_site_principal"] = false;
 				}
 			}
@@ -43,7 +46,6 @@ if (is_array($options)) {
 }
 
 function multidomaines_squelettespardefaut_dist() {
-
 	if (function_exists('multidomaines_squelettespardefaut')) {
 		return multidomaines_squelettespardefaut();
 	}
@@ -52,12 +54,12 @@ function multidomaines_squelettespardefaut_dist() {
 
 	if (strpos($_SERVER['HTTP_HOST'], '.') === false) {
 		// ex: localhost
-		$dossiers = ':' . lire_config('multidomaines/squelette') . '/' . $_SERVER['HTTP_HOST'];
+		$dossiers = ':' . lire_config('multidomaines/defaut/squelette') . '/' . $_SERVER['HTTP_HOST'];
 	} else {
 		$parties_domaine = explode('.', $_SERVER['HTTP_HOST']);
 		$extention = array_pop($parties_domaine);
 		do {
-			$base = ':' . lire_config('multidomaines/squelette') . '/' . implode('.', $parties_domaine);
+			$base = ':' . lire_config('multidomaines/defaut/squelette') . '/' . implode('.', $parties_domaine);
 			$dossiers_port .= $base . '.' . $extention . '.' . $_SERVER['SERVER_PORT'];
 			$dossiers_port .= $base . '.' . $_SERVER['SERVER_PORT'];
 			$dossiers .= $base . '.' . $extention;
