@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	Un domaine peut avoir plusieurs dossiers squelettes, il faut les séparer par ":" (ex:squelettes:squelettes/sous-domaine.domaine.com)<br>
 	<br>
 	Identifiant : Nom informatique optionnel pour identifier le secteur : charactères alphanumériques ou «_»',
+	'explication_identifiant' => 'Nom informatique optionnel pour identifier le secteur : charactères alphanumériques ou «_»',
 
 	// I
 	'info_domaine_non' => 'Le domaine « @domaine@ » n\'est pas configuré',
