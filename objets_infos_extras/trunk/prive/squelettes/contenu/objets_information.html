@@ -1,0 +1,68 @@
+[(#AUTORISER{voir,objets_information,#ID_OBJETS_INFORMATION}|sinon_interdire_acces)]
+[(#SET{url_voir,#VAL{objets_information}|objet_info{url_voir}})]
+[(#SET{url_edit,#VAL{objets_information}|objet_info{url_edit}})]
+<BOUCLE_objets_information(OBJETS_INFORMATIONS){id_objets_information}{statut==.*}{si #ENV{exec}|=={#GET{url_voir}}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,objets_information,#ID_OBJETS_INFORMATION})
+		[(#ID_OBJETS_INFORMATION|afficher_qui_edite{objets_information}|non)
+			[(#URL_ECRIRE{#GET{url_edit},id_objets_information=#ID_OBJETS_INFORMATION}|icone_verticale{<:objets_information:icone_modifier_objets_information:>,objets_information,edit,right ajax preload})]
+		]
+		[(#ID_OBJETS_INFORMATION|afficher_qui_edite{objets_information}|oui)
+			[(#URL_ECRIRE{#GET{url_edit},id_objets_information=#ID_OBJETS_INFORMATION}|icone_verticale{#ID_OBJETS_INFORMATION|afficher_qui_edite{objets_information},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{objets_information-24.png}|balise_img{objets_information,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{objets_information,#ID_OBJETS_INFORMATION}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/objets_information,id=#ID_OBJETS_INFORMATION,id_objets_information=#ID_OBJETS_INFORMATION,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,objets_information,#ID_OBJETS_INFORMATION})
+	[(#ID_OBJETS_INFORMATION|afficher_qui_edite{objets_information}|non)
+		[(#URL_ECRIRE{#GET{url_edit},id_objets_information=#ID_OBJETS_INFORMATION}|icone_verticale{<:objets_information:icone_modifier_objets_information:>,objets_information,edit,right ajax preload})]
+	]
+	[(#ID_OBJETS_INFORMATION|afficher_qui_edite{objets_information}|oui)
+		[(#URL_ECRIRE{#GET{url_edit},id_objets_information=#ID_OBJETS_INFORMATION}|icone_verticale{#ID_OBJETS_INFORMATION|afficher_qui_edite{objets_information},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+<div class="nettoyeur"></div>
+<div class="liste">
+	<BOUCLE_objetslies(spip_objets_informations_liens){id_objets_information}{0,1}><h3><:objets_information:titre_objets_lies_objets_information:></h3></BOUCLE_objetslies>
+
+	<BOUCLE_listeobjets(spip_objets_informations_liens){id_objets_information}{fusion objet}{par objet}>
+		#SET{table,#OBJET|table_objet}
+		[(#SET{titre,[#OBJET:info_(#GET{table})_liees_objets_information]})]
+		[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_objets_information}})]
+		<INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_objets_information,ajax,env} />
+	</BOUCLE_listeobjets>
+</div>
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,objets_information,id,#ID_OBJETS_INFORMATION},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+
+#SET{enfants,''}
+[(#VAL{prive/objets/contenu/objets_information-enfants}|trouver_fond|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/objets_information-enfants,id_objets_information,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,objets_information,id_objets_information,#ID_OBJETS_INFORMATION,objet,objets_information,id_objet,#ID_OBJETS_INFORMATION},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_objets_information>
+[(#ENV**{exec}|=={#GET{url_edit}}|?{#INCLURE{fond=prive/squelettes/contenu/#GET{url_edit},redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_objets_information>
