@@ -1,0 +1,33 @@
+[(#SESSION{id_auteur}|non)
+	<div class="login">
+		#SET{url,#URL_PAGE{login}|parametre_url{url,#SELF}}
+		[(#SET{lien,#GET{url}|lien_ou_expose{
+			<:objets_location:connectez_vous:>,
+			'',
+			login_modal,
+			<:lien_connecter:>,
+			nofollow,
+		}})]
+
+		<strong class="explication"><:objets_location:explication_login{lien=#GET{lien}}:></strong>
+	</div>
+	[
+		(#FORMULAIRE_INSCRIPTION{6forum})
+	]
+]
+
+[(#SESSION{id_auteur}|oui)
+<div class="ajax">
+	[(#FORMULAIRE_EDITER_OBJETS_LOCATION{
+		#ENV{id_objets_location},
+		#ENV{location_objet},
+		#ENV{id_location_objet},
+		#ENV{options,#ARRAY{
+			disponibilite_decalage_debut,#ENV{disponibilite_decalage_debut,0},
+			disponibilite_decalage_fin,#ENV{disponibilite_decalage_fin,-1},
+			location_extras_objets,#ENV{location_extras_objets},
+			entite_duree,#ENV{entite_duree,jour},
+		}}
+	})]
+</div>
+]

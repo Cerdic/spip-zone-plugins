@@ -1,0 +1,75 @@
+[(#ENV{location_objet}|et{#ENV{id_location_objet}}|non|ou{#ENV{espace_prive}|oui})
+[(#SAISIE{choisir_objet, location_objet,
+	label=<:objets_location:champ_location_objet_label:>})]
+
+	[(#ENV{location_objet}|oui)
+		#SET{objet, #ENV{location_objet}|objet_type}
+		#SET{objet_saisie, #ENV{location_objet}|replace{spip_,''}}
+		[(#CHEMIN{saisies/#GET{objet_saisie}|concat{.html}}|oui)
+			[(#SAISIE{#GET{objet_saisie}, id_location_objet,
+				label=<:objets_location:champ_id_location_objet_label:>
+			})]
+		]
+
+		[(#CHEMIN{saisies/#GET{objet_saisie}|concat{.html}}|non)
+				[(#SAISIE{input, id_location_objet,
+					label=<:objets_location:champ_id_location_objet_label:>
+			})]
+		]
+	]
+]
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+
+[(#ENV{location_objet}|et{#ENV{id_location_objet}}|oui)
+	[(#PLUGIN{objets_disponibilites}|oui)
+		<INCLURE{fond=formulaires/inc-editer_objets_location_dates,env,ajax=objets_location_dates}/>
+	]
+	[(#PLUGIN{objets_disponibilites}|non)
+		[(#SAISIE{date, date_debut,
+			label=<:dates_outils:champ_date_debut_label:>})]
+		[(#SAISIE{date, date_fin,
+			label=<:dates_outils:champ_date_fin_label:>})]
+	]
+	<INCLURE{fond=formulaires/inc-editer_objets_location_extras,env,ajax=objets_location_extras}/>
+]
+
+
+
+[(#REM) pas utilisé pour le moment
+	[(#SAISIE{selection, jour_debut,
+		label=<:objets_location:champ_jour_debut_label:>})]
+
+	[(#SAISIE{selection, jour_fin,
+		label=<:objets_location:champ_jour_fin_label:>})]
+
+]
+
+<script type="text/javascript">
+	$(function() {
+		$("#champ_location_objet").change(function() {
+			var location_objet = $(this).val();
+			ajaxReload('location_champs_relatives', {
+				args : {
+					location_objet : location_objet,
+				}
+			});
+			ajaxReload('objets_location_extras', {
+				args : {
+					location_objet : location_objet,
+				}
+			});
+		});
+
+		$("#champ_id_location_objet").change(function() {
+			var id_location_objet = $(this).val();
+			var location_objet = $("#champ_location_objet").val();
+			ajaxReload('location_champs_relatives', {
+				args : {
+					id_location_objet : id_location_objet,
+					location_objet : location_objet
+				}
+			});
+		});
+	});
+</script>

@@ -1,0 +1,55 @@
+<paquet
+	prefix="location_objets"
+	categorie="divers"
+	version="1.4.1"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/location_objets-64.png"
+	documentation="https://github.com/abelass/location_objets"
+	schema="1.2.0"
+>
+
+
+	<nom>Location d&#039;objets</nom>
+	<!-- Louer vos objets -->
+
+	<auteur lien='https://websimple.be'>Rainer Müller</auteur>
+
+	<licence>GNU/GPL v3</licence>
+
+	<traduire module="location_objets" reference="fr" gestionnaire="salvatore" />
+	<traduire module="objets_location" reference="fr" gestionnaire="salvatore" />
+	<traduire module="objets_locations_detail" reference="fr" gestionnaire="salvatore" />
+	<traduire module="paquet-location_objets" reference="fr" gestionnaire="salvatore" />
+
+
+	<necessite nom="saisies" compatibilite="[2.4.0;]" />
+	<necessite nom="verifier" compatibilite="[1.8.0;]" />
+	<necessite nom="prix_objets" compatibilite="[2.1.4;]" />
+	<necessite nom="objets_disponibilites" compatibilite="[1.0.0;]" />
+	<necessite nom="facteur" compatibilite="[3.5.2;]" />
+	<necessite nom="dates_outils" compatibilite="[1.0.10;]" />
+	<necessite nom="nospam" compatibilite="[1.5.18;]" />
+
+	<!-- Déclaration de pipelines-->
+	<pipeline nom="location_prix_objet" action='' />
+	<pipeline nom="objets_location_verifier_general" action='' />
+	<pipeline nom="objets_location_verifier_dates" action='' />
+
+	<pipeline nom="autoriser" inclure="location_objets_autorisations.php" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/location_objets.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/location_objets.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/location_objets.php" />
+	<pipeline nom="affiche_auteurs_interventions" inclure="location_objets_pipelines.php" />
+	<pipeline nom="boite_infos" inclure="location_objets_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="location_objets_pipelines.php" />
+	<pipeline nom="notifications_archive" inclure="location_objets_pipelines.php" />
+	<pipeline nom="header_prive" inclure="location_objets_pipelines.php" />
+	<pipeline nom="recuperer_fond" inclure="location_objets_pipelines.php" />
+
+	<menu nom="objets_locations" titre="objets_location:titre_objets_locations" parent="menu_activite" icone="images/objets_location-16.png" action="objets_locations" />
+
+	<chemin path="squelettes" />
+	<chemin path="" />
+</paquet>

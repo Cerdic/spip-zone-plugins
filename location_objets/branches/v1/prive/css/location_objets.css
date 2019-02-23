@@ -1,0 +1,19 @@
+table.location {
+	margin-top: 1em;
+	border: 1px solid #ccc;
+}
+
+table.location thead,  table.location tfoot{
+	border: 1px solid #ccc;
+}
+
+table.location th,
+table.location td {
+	border: 0;
+}
+
+table.location th, table.location tfoot td{
+	background-color: #eee;
+	font-weight: bold;
+	font-style: normal;
+}

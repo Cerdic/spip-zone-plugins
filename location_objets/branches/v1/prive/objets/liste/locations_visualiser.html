@@ -1,0 +1,71 @@
+#SET{extras,#VAL|champs_extras_locations}
+#SET{extras_plat,#ARRAY}
+#SET{champs_extras_auteur,#ARRAY}
+<BOUCLE_extras (DATA){source tableau, #GET{extras}}>
+	#SET{champs_extras_#CLE,#ARRAY}#SET{objet,#CLE}
+	<BOUCLE_extras_objet (DATA){source tableau, #VALEUR}>
+		#SET{champs_extras_#GET{objet},#GET{champs_extras_#GET{objet}}|push{#VALEUR}}
+		#SET{extras_plat,#GET{extras_plat}|push{#VALEUR{options/label}|extraire_multi}}
+	</BOUCLE_extras_objet>
+</BOUCLE_extras>
+<B_locations>
+<h1>[(#GRAND_TOTAL|singulier_ou_pluriel{location_objets:info_1_objet_loue,location_objets:info_nb_objets_loues})]</h1>
+#ANCRE_PAGINATION
+<table>
+	<thead>
+		<tr>
+			<th><:objets_location:champ_reference_label:></th>
+			<th><:ecrire:info_titre:></th>
+			<th><:objets_location:champ_statut_label:></th>
+			<th><:ecrire:texte_date_creation_objet:></th>
+			<th><:objets_location:champ_client_label:></th>
+			<th><:location_objets:notifications_vendeur_email_label:></th>
+			<th><:dates_outils:champ_date_debut_label:></th>
+			<th><:dates_outils:champ_date_fin_label:></th>
+			<th><:objets_locations_detail:champ_duree_label:></th>
+			<th><:objets_locations_detail:champ_prix_unitaire_ht_label:></th>
+			<th><:objets_locations_detail:champ_prix_label:></th>
+			<th><:objets_locations_detail:champ_quantite_label:></th>
+			<BOUCLE_champs_extras (DATA){source tableau,#GET{extras_plat}}>
+				<th>[(#VALEUR|locations_chercher_label{#GET{extras_plat}}|extraire_multi)]</th>
+			</BOUCLE_champs_extras>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_locations(OBJETS_LOCATIONS_DETAILS){objet?}{statut IN #ENV{statut,#ENV{statut2}|explode{-}}}{pagination}>
+		<BOUCLE_location(OBJETS_LOCATIONS){id_objets_location}>
+			#SET{id_auteur,#ID_AUTEUR} #SET{reference,#REFERENCE}
+		</BOUCLE_location>#SET{valeurs_extras_auteur,#ARRAY}
+		<BOUCLE_aut_ext (DATA){source tableau, #GET{champs_extras_auteur}}>
+			#SET{valeurs_extras_auteur,#GET{valeurs_extras_auteur}|push{#ID_AUTEUR|generer_info_entite{auteur,#VALEUR{options/nom}}|sinon{*}}}
+		</BOUCLE_aut_ext>
+		#SET{valeurs_extras_objets_location,#ARRAY}
+		<BOUCLE_objets_locations_ext(DATA){source tableau, #GET{champs_extras_objets_location}}>
+		#SET{valeurs_extras_objets_location,#GET{valeurs_extras_objets_location}|push{#ID_OBJETS_LOCATION|generer_info_entite{objets_location,#VALEUR{options/nom}}|sinon{*}}}
+		</BOUCLE_objets_locations_ext>
+		<tr>
+			<td>#GET{reference}</td>
+			<td>#TITRE</td>
+			<td>[(#VAL{objets_location:texte_statut[_(#STATUT|trim)]}|_T)]</td>
+			<td>#DATE</td>
+			<td>#INFO_NOM{auteur,#GET{id_auteur}}</td>
+			<td>#INFO_EMAIL{auteur,#GET{id_auteur}}</td>
+			<td>#DATE_DEBUT</td>
+			<td>#DATE_FIN</td>
+			<td>#DUREE</td>
+			<td>#PRIX_UNITAIRE_HT</td>
+			<td>#PRIX</td>
+			<td>#QUANTITE</td>
+			<BOUCLE_champs_extras2 (DATA){source tableau,#GET{valeurs_extras_auteur}}>
+			<td>[(#VALEUR)]</td>
+			</BOUCLE_champs_extras2>
+			<BOUCLE_extras_location (DATA){source tableau, #GET{valeurs_extras_objets_location}}>
+			<td>[(#ID_OBJETS_LOCATIOB|generer_info_entite{objets_location,#VALEUR{options/nom}}|sinon{-})]</td>
+			</BOUCLE_extras_location>
+		</tr>
+	</BOUCLE_locations>
+		</tbody>
+	</table>
+	[<p class='pagination'>(#PAGINATION{prive})</p>]
+</B_locations>
+

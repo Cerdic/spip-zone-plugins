@@ -1,0 +1,84 @@
+<BOUCLE_location(OBJETS_LOCATIONS){id_objets_location}{tout}>
+	#SET{entite_duree,#ENTITE_DUREE}
+	[(#REM) Si on trouve une location on prend ça comme base ]
+	#SET{details, #ARRAY} #SET{total,#PRIX*}
+	<B_location_details>
+	<table class="spip location" cellspacing="0">
+		<thead>
+			<tr>
+				<th class="statut"><:objets_location:texte_statut:></th>
+				<th class="description"><:objets_location:texte_designation:></th>
+				<th class="duree" scope="col"><:objets_locations_detail:champ_duree_label:></th>
+				<th class="date_debut" scope="col"><:dates_outils:champ_date_debut_label:></th>
+				<th class="date_fin" scope="col"><:dates_outils:champ_date_fin_label:></th>
+
+				[(#GET{total}|floatval|>{0.00}|oui)
+				<th class="prix_unitaire_ht" scope="col"><:objets_locations_detail:champ_prix_unitaire_ht_label:></th>
+				<th class="prix" scope="col"><:objets_locations_detail:champ_prix_label:></th>
+				]
+				<th class="action" scope="col"><:info_numero_abbreviation:></th>
+			</tr>
+		</thead>
+		<tbody>
+	<BOUCLE_location_details(OBJETS_LOCATIONS_DETAILS){id_objets_location}{par id_objets_locations_detail}{tout}>
+	<tr class="detail [(#VALEUR|table_valeur{quantite}|>{0}|?{avec_quantite,sans_quantite})]">
+		<td class="statut">[(#STATUT|puce_statut{objets_locations_detail,#ID_OBJETS_LOCATIONS_DETAIL})]</td>
+		<td class="description">
+			<a
+				href="[(#ID_OBJETS_LOCATIONS_DETAIL|generer_url_entite{objets_locations_detail})]"
+				title="<:info_numero_abbreviation|attribut_html:> #ID_OBJETS_LOCATIONS_DETAIL">
+				#TITRE
+			</a>
+		</td>
+			<td class="duree">#DUREE[ (#GET{entite_duree}|entite_duree_nom)]</td>
+			<td class="date debut">[(#DATE_DEBUT|affdate_jourcourt)]</td>
+			<td class="date fin">[(#DATE_FIN|affdate_jourcourt)]</td>
+			[(#GET{total}|floatval|>{0.00}|oui)
+			<td class="prix_unitaire_ht">[(#PRIX_UNITAIRE_HT|round{2}|prix_formater)]</td>
+			<td class="montant">[(#PRIX)]</td>
+			]
+			<td class="id">[(#AUTORISER{modifier,objets_locations_detail,#ID_OBJETS_LOCATIONS_DETAIL}|?{
+				<a href="[(#URL_ECRIRE{objets_locations_detail_edit,id_objets_locations_detail=#ID_OBJETS_LOCATIONS_DETAIL})]">
+				#ID_OBJETS_LOCATIONS_DETAIL</a>,
+				#ID_OBJETS_LOCATIONS_DETAIL
+			})]</td>
+	</tr>
+	</BOUCLE_location_details>
+			</tbody>
+			[(#GET{total}|floatval|>{0.00}|oui)
+			<tfoot>
+				<tr class="total_htva">
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td class="descriptif"><:prix:label_total_ht:></td>
+					<td class="montant">#PRIX_HT</td>
+					<td></td>
+				</tr>
+				<tr class="taxe">
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td class="descriptif"><:prix:label_taxes:></td>
+					<td class="montant">[(#PRIX*|moins{#PRIX_HT*}|appliquer_filtre{prix_formater})]</td>
+					<td></td>
+				</tr>
+				<tr class="total_ttc">
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td class="descriptif"><:prix:label_total_ttc:></td>
+					<td class="montant">[(#GET{total}|appliquer_filtre{prix_formater})]</td>
+					<td></td>
+				</tr>
+			</tfoot>
+			]
+	</table>
+	<B_location_details>
+</BOUCLE_location>

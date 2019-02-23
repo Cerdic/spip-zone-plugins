@@ -1,0 +1,23 @@
+#SET{dates,#ARRAY}
+<BOUCLE_disponibilite_dates(OBJETS_LOCATIONS_DETAILS)
+	{id_objets_location!=#ENV{utilisation_id_exclu}}
+	{objet}
+	{id_objet}>
+	[(#DATE_DEBUT|!={#DATE_FIN}|?{
+		#SET{nombre_dates,#DATE_DEBUT|dates_intervalle{
+				#DATE_FIN,
+				#ENV{decalage_debut,0},
+				#ENV{decalage_fin,0},
+				#ENV{horaire},
+				#ENV{format}
+			}
+		}
+		#SET{dates,#GET{dates}|array_merge{#GET{nombre_dates}}}
+		,
+		[(#ENV{horaire}|?{
+			#SET{dates,#GET{dates}|push{#DATE_DEBUT}},
+			#SET{dates,#GET{dates}|push{#DATE_DEBUT|affdate{#ENV{format,Y-m-d H:i:s}}}}
+		})]
+	})]
+</BOUCLE_disponibilite_dates>
+[(#GET{dates}|serialize)]
