@@ -1,0 +1,36 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_objets_locations_detail,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_objets_locations_detail" value="#ENV{id_objets_locations_detail}" />
+		<div class="editer-groupe">
+
+			[(#SAISIE{objets_locations, id_objets_location, obligatoire=oui,
+				label=<:ecrire:info_titre:>})]
+
+
+			[(#SAISIE{input, objet, obligatoire=oui,
+				label=<:objets_locations_detail:champ_objet_label:>})]
+
+			[(#SAISIE{input, id_objet, obligatoire=oui,
+				label=<:objets_locations_detail:champ_id_objet_label:>})]
+
+			[(#SAISIE{input, prix_ht,
+				label=<:objets_locations_detail:champ_prix_ht_label:>})]
+
+			[(#SAISIE{input, taxe,
+				label=<:objets_locations_detail:champ_taxe_label:>})]
+
+			[(#SAISIE{input, reduction,
+				label=<:objets_locations_detail:champ_reduction_label:>})]
+
+		</div>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+	]
+</div>

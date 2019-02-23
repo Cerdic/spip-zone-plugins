@@ -1,0 +1,22 @@
+<BOUCLE_objets_location(OBJETS_LOCATIONS){id_objets_location}{statut?}>
+[<div class="champ contenu_id_auteur[ (#ID_AUTEUR*|>{0}|?{'',vide})]">
+	<label><:ecrire:auteur:> </label>
+	<span dir="#LANG_DIR" class="#EDIT{id_auteur} id_auteur"><a href="#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}">(#INFO_NOM{auteur,#ID_AUTEUR})</a></span>
+</div>]
+
+[<div class="champ contenu_lang[ (#LANG*|>{0}|?{'',vide})]">
+	<label><:objets_location:champ_lang_label:> </label>
+	<span dir="#LANG_DIR" class="#EDIT{jour_debut} jour_debut">(#LANG|traduire_nom_langue)</span>
+</div>]
+
+[<div class="champ contenu_entite_duree[ (#ENTITE_DUREE*|>{0}|?{'',vide})]">
+	<label><:objets_location:champ_entite_duree_label:> </label>
+	<span dir="#LANG_DIR" class="#EDIT{entite_duree} entite_duree">(#ENTITE_DUREE|entite_duree_nom)</span>
+</div>]
+
+[<div class="champ contenu_reference[ (#REFERENCE*|strlen|?{'',vide})]">
+	<label><:objets_location:champ_reference_label:> </label>
+	<span dir="#LANG_DIR" class="#EDIT{reference} reference">(#REFERENCE)</span>
+</div>]
+
+</BOUCLE_objets_location>

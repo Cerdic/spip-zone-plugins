@@ -1,0 +1,16 @@
+#SET{compteur,#ARRAY}
+<BOUCLE_locations(OBJETS_LOCATIONS_DETAILS){objet?}{statut?}>
+	[(#GET{#STATUT}|?{
+		#SET{#STATUT,#GET{#STATUT}|plus{1}},
+		#SET{#STATUT,1}
+	})]
+	#SET{compteur,#GET{compteur}|array_merge{#ARRAY{#STATUT,#GET{#STATUT}}}}
+</BOUCLE_locations>
+	#SET{compteur,#GET{compteur}|array_merge{#ARRAY{total,#TOTAL_BOUCLE}}}
+</B_locations>
+
+[(#ENV{statut}|?{
+	[(#GET{compteur}|table_valeur{#ENV{statut}})],
+	[(#GET{compteur}|json_encode)]
+})]
+

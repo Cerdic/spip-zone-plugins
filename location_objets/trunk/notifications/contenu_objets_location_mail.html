@@ -1,0 +1,55 @@
+#HTTP_HEADER{Content-Type:text/html}
+#INCLURE{fond=emails/inc-haut}
+#SET{config,#CONFIG{location_objets}}
+
+<BOUCLE_locations(OBJETS_LOCATIONS){id_objets_location}{tout}>
+	#SET{statut,#STATUT}
+	#SET{nom_client,#NOM}
+	#SET{extras,#DONNEES_AUTEUR|unserialize}
+	#SET{email,#EMAIL}
+	#SET{date,#DATE}
+	<BOUCLE_contact(AUTEURS){id_auteur=#ID_AUTEUR}{si #ID_AUTEUR|!={0}|oui}{tout}>
+		#SET{nom_client,#NOM}
+		#SET{valeurs_extras,#ARRAY}
+		#SET{email,#EMAIL}
+
+	[(#ENV{qui}|=={client}|oui)
+		<p><:public:bonjour:> #NOM</p>
+		<p>
+			[(#GET{statut}|!={paye}|?
+			{
+				<:objets_location:texte_enregistrement:>,
+				<:location_objets_bank:merci_de_votre_location_paiement{reference=#REFERENCE}:>
+			})]
+		</p>
+	]
+	[(#ENV{qui}|=={client}|non)
+		<p><:objets_location:texte_une_location_de:> #NOM</p>
+	]
+
+		<h3><:objets_location:texte_recapitulatif:></h3>
+
+		<p><:objets_location:champ_reference_label:> #REFERENCE</p>
+		<p><:objets_location:champ_date_location_label:> #GET{date}</p>
+		<p><:objets_location:champ_periode_label:> [(#DATE_DEBUT|dates_affdate_debut_fin{#DATE_FIN,#HORRAIRE,complet})]</p>
+		<p><:ecrire:entree_adresse_email_2:> : #EMAIL</p>
+
+	</BOUCLE_contact>
+
+	<p><:objets_location:texte_details_location:></p>
+	<INCLURE{fond=inclure/location,id_objets_location,env,statut=#GET{statut}}/>
+
+	[(#ENV{qui}|=={client}|oui)
+		<p><:objets_location:texte_cordialement:></p>
+	]
+
+<p>#NOM_SITE_SPIP</p>
+
+<hr />
+<p><a href="#URL_SITE_SPIP">#URL_SITE_SPIP</a></p>
+</BOUCLE_locations>
+[(#ENV{format_envoi}|=={plain}|oui)
+	#FILTRE{supprimer_tags|filtrer_entites|trim}]
+[(#ENV{format_envoi}|=={plain}|non)
+	#FILTRE{filtrer_entites|trim}]
+#INCLURE{fond=emails/inc-bas}

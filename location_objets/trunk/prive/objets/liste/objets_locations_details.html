@@ -1,0 +1,53 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	date_debut,-1,
+	date_fin,-1,
+	id_objets_locations_detail,1,
+	points,-1
+}})]<B_liste_objets_locations_details>
+#ANCRE_PAGINATION
+<div class="liste-objets objets_locations_details">
+<table class="spip liste">
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{objets_locations_detail:info_1_objets_locations_detail,objets_locations_detail:info_nb_objets_locations_details}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="picto" scope="col"></th>
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class="titre" scope="col">[(#TRI{titre,<:ecrire:info_titre:>,ajax})]</th>
+			<th class="duree" scope="col"><:objets_locations_detail:champ_duree_label:></th>
+			<th class="date_debut" scope="col">[(#TRI{date_debut,<:dates_outils:champ_date_debut_label:>,ajax})]</th>
+			<th class="date_fin" scope="col">[(#TRI{date_fin,<:dates_outils:champ_date_fin_label:>,ajax})]</th>
+			<th class="prix_unitaire_ht" scope="col"><:objets_locations_detail:champ_prix_unitaire_ht_label:></th>
+			<th class="prix" scope="col"><:objets_locations_detail:champ_prix_label:></th>
+			<th class="id" scope="col">[(#TRI{id_objets_locations_detail,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_objets_locations_details(OBJETS_LOCATIONS_DETAILS){id_objets_location?}{objet?}{id_objet?}{id_mot?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="picto">[(#CHEMIN_IMAGE{objets_locations_detail-16.png}|balise_img)]</td>
+			<td class="statut">[(#STATUT|puce_statut{objets_locations_detail,#ID_OBJETS_LOCATIONS_DETAIL})]</td>
+			<td class="titre principale">
+				[(#LOGO_OBJETS_LOCATIONS_DETAIL|image_reduire{20,26})]
+				<a href="[(#ID_OBJETS_LOCATIONS_DETAIL|generer_url_entite{objets_locations_detail})]" title="<:info_numero_abbreviation|attribut_html:> #ID_OBJETS_LOCATIONS_DETAIL">
+					[(#RANG). ]#TITRE</a>
+			</td>
+			<td class="duree">#DUREE [ (#INFO_ENTITE_DUREE{objets_location,#ID_OBJETS_LOCATION}|entite_duree_nom)]</td>
+			<td class="date debut">[(#DATE_DEBUT|affdate_jourcourt)]</td>
+			<td class="date fin">[(#DATE_FIN|affdate_jourcourt)]</td>
+			<td class="prix_unitaire_ht">[(#PRIX_UNITAIRE_HT|round{2}|prix_formater)]</td>
+			<td class="prix">#PRIX</td>
+			<td class="id">[(#AUTORISER{modifier,objets_locations_detail,#ID_OBJETS_LOCATIONS_DETAIL}|?{
+				<a href="[(#URL_ECRIRE{objets_locations_detail_edit,id_objets_locations_detail=#ID_OBJETS_LOCATIONS_DETAIL})]">
+				#ID_OBJETS_LOCATIONS_DETAIL</a>,
+				#ID_OBJETS_LOCATIONS_DETAIL
+			})]</td>
+		</tr>
+	</BOUCLE_liste_objets_locations_details>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_objets_locations_details>[
+<div class="liste-objets objets_locations_details caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_objets_locations_details>

@@ -1,0 +1,55 @@
+[(#SAISIE{dates_disponibles, date_debut,	obligatoire=oui,
+	label=<:dates_outils:champ_date_debut_label:>,
+	objet=[(#ENV{location_objet}|objet_type)],
+	id_objet=#ENV{id_location_objet},
+	decalage_debut=#ENV{disponibilite_decalage_debut},
+	decalage_fin=#ENV{disponibilite_decalage_fin,1},
+	date_limite_debut=#ENV{date_limite_debut,#DATE},
+	date_limite_fin=#ENV{date_limite_fin,#DATE},
+	utilisation_squelette=disponibilites/utilisees_objet_location,
+	utilisation_id_exclu=#ENV{id_objets_location}
+})]
+#SET{date_defaut,''}
+#SET{date_limite_debut_defaut,#DATE}
+[(#ENV{date_debut}|oui)
+	[(#SET{date_debut, #ENV{date_debut}|affdate{d-m-Y H:i:s}})]
+	[(#SET{date_defaut,#GET{date_debut}|date_relative_brut{+1 day,d/m/Y}})]
+	#SET{date_limite_debut_defau,#GET{date_defaut}}
+]
+
+[(#SAISIE{dates_disponibles, date_fin,obligatoire=oui,
+	label=<:dates_outils:champ_date_fin_label:>,
+	objet=[(#ENV{location_objet}|objet_type)],
+	id_objet=#ENV{id_location_objet},
+	decalage_debut=#ENV{disponibilite_decalage_debut},
+	decalage_fin=#ENV{disponibilite_decalage_fin,1},
+	date_limite_debut=[(#GET{date_limite_debut_defaut})],
+	date_limite_fin=#ENV{date_limite_fin,#DATE},
+	defaut=#ENV{date_fin,#GET{date_defaut}},
+	utilisation_squelette=disponibilites/utilisees_objet_location,
+	utilisation_id_exclu=#ENV{id_objets_location}
+})]
+
+
+<script type="text/javascript">
+	$(function() {
+
+		$("#champ_date_debut").on('change',function() {
+			var champs =  $(".formulaire_editer_objets_location form").serialize();
+			champs = champs.split('&');
+			var pair = '';
+			var args = {recharge_ajax : true};
+			var champ = '';
+			Object.keys(champs).forEach(function(k, i) {
+				var pair = champs[k].split('=');
+				if (typeof pair[1] !== 'undefined' && pair[1].length > 0) {
+					 args[pair[0]] = pair[1].replace(/%2F/g, '/');
+				}
+			});
+
+		ajaxReload('objets_location_dates', {
+				args : args
+		});
+	});
+	});
+</script>

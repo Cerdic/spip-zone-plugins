@@ -1,0 +1,44 @@
+[(#ID_OBJETS_LOCATION|oui)
+	[(#AUTORISER{modifier,objets_location,#ID_OBJETS_LOCATION}|sinon_interdire_acces)]
+]
+
+
+[(#ID_OBJETS_LOCATION|non)
+	[(#AUTORISER{creer,objets_location}|sinon_interdire_acces)]
+]
+
+#SET{redirect,#ENV{redirect}|sinon{#ID_OBJETS_LOCATION|?{#ID_OBJETS_LOCATION|generer_url_entite{objets_location},#URL_ECRIRE{objets_locations}}}}
+
+
+
+<div class="cadre-formulaire-editer">
+<div class="entete-formulaire">
+	[(#ID_OBJETS_LOCATION|oui)
+	[(#GET{redirect}|icone_verticale{<:icone_retour:>,objets_location,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_OBJETS_LOCATION|?{<:objets_location:icone_modifier_objets_location:>,<:objets_location:icone_creer_objets_location:>})]
+		<h1>(#ENV{titre,#INFO_REFERENCE{objets_location,#ID_OBJETS_LOCATION}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_OBJETS_LOCATION|generer_url_entite{objets_location}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_OBJETS_LOCATION{
+			#ENV{id_objets_location,oui},
+			#ENV{location_objet},
+			#ENV{id_location_objet},
+			#ARRAY{
+				disponibilite_decalage_debut,#ENV{disponibilite_decalage_debut},
+				disponibilite_decalage_fin,#ENV{disponibilite_decalage_fin,1},
+			},
+			#GET{redirect},
+			#ENV{associer_objet}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>

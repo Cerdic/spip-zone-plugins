@@ -1,0 +1,36 @@
+[(#ID_OBJETS_LOCATIONS_DETAIL|oui)
+	[(#AUTORISER{modifier,objets_locations_detail,#ID_OBJETS_LOCATIONS_DETAIL}|sinon_interdire_acces)]
+	[(#SET{id_parent,#INFO_ID_OBJETS_LOCATION{objets_locations_detail,#ID_OBJETS_LOCATIONS_DETAIL}})]
+]
+
+[(#ID_OBJETS_LOCATIONS_DETAIL|non)
+	#SET{id_parent,#ENV{id_objets_location,#ENV{id_parent}}}
+	[(#GET{id_parent}|non|ou{[(#AUTORISER{creerobjetslocationsdetaildans, objets_location, #GET{id_parent}})]}|sinon_interdire_acces)]
+]
+
+#SET{redirect,#ENV{redirect}|sinon{#ID_OBJETS_LOCATIONS_DETAIL|?{#ID_OBJETS_LOCATIONS_DETAIL|generer_url_entite{objets_locations_detail},#GET{id_parent}|?{#GET{id_parent}|generer_url_entite{objets_location},#URL_ECRIRE{objets_locations}}}}}
+
+
+
+<div class="cadre-formulaire-editer">
+<div class="entete-formulaire">
+	[(#ID_OBJETS_LOCATIONS_DETAIL|oui)
+	[(#GET{redirect}|icone_verticale{<:icone_retour:>,objets_locations_detail,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_OBJETS_LOCATIONS_DETAIL|?{<:objets_locations_detail:icone_modifier_objets_locations_detail:>,<:objets_locations_detail:icone_creer_objets_locations_detail:>})]
+		<h1>(#ENV{titre,#INFO_TITRE{objets_locations_detail,#ID_OBJETS_LOCATIONS_DETAIL}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_OBJETS_LOCATIONS_DETAIL|generer_url_entite{objets_locations_detail}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_OBJETS_LOCATIONS_DETAIL{#ENV{id_objets_locations_detail,oui}, #GET{id_parent}, #GET{redirect}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>

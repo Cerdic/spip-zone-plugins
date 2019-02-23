@@ -1,0 +1,96 @@
+#SET{tables_objets_sql,#REM|lister_tables_objets_sql}
+#SET{noms_objets,#ARRAY}
+#SET{noms_statuts,
+	#GET{tables_objets_sql}
+		|table_valeur{spip_objets_locations}
+		|table_valeur{statut_textes_instituer}
+}
+
+#SET{statuts,#GET{noms_statuts}|array_flip}
+<BOUCLE_objets(DATA){source tableau,#GET{tables_objets_sql}}>[(#EDITABLE|oui)
+	#SET{objet,#CLE|objet_type}
+	[(#SET{noms_objets,#GET{noms_objets}|array_merge{#ARRAY{#GET{objet},#TEXTE_OBJETS|_T}}})]
+]</BOUCLE_objets>
+
+
+[(#BOITE_OUVRIR{
+	[(#CHEMIN_IMAGE{location_objets-32.png}|balise_img{'','cadre-icone'})]
+	<h3><:location_objets:titre_page_configurer_location_objets:></h3>,
+	'simple personnel infos'})]
+
+<B_details_objets>
+<div class="liste objets">
+<ul>
+	<li>[(#SELF|parametre_url{objet,''}|lien_ou_expose{
+				<:location_objets:titre_tous:>,
+				#ENV{objet}|non
+			})]
+<BOUCLE_details_objets(OBJETS_LOCATIONS_DETAILS){fusion objet}{par objet}>
+	<li>[(#SELF|parametre_url{objet,#OBJET}|lien_ou_expose{
+				#GET{noms_objets}|table_valeur{#OBJET},
+				#ENV{objet}|=={#OBJET}
+			})]
+	</li>
+</BOUCLE_details_objets>
+</ul>
+</div>
+</B_details_objets>
+#SET{compteur,#INCLURE{fond=inclure/compteur_locations,objet}|json_decode{1}}
+#SET{total_locations,#GET{compteur}|table_valeur{total}}
+<B_statuts>
+	#SET{args,
+		#ARRAY{
+			objet,#ENV{objet},
+			statut2,#GET{statuts}|implode{-}
+		}
+	}
+<div class="liste statuts">
+	<h4><:objets_location:texte_recapitulatif:></h4>
+	<:location_objets:info_nb_objets_loues{nb=#GET{total_locations}}:>
+		<div class="actions">
+			[<a
+				href="[(#URL_ECRIRE{locations_visualiser,[(#VAL{evenements_reservations}|param_low_sec{#GET{args}})]})]"
+				title="<:previsualiser:>"
+				onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{locations_visualiser,[(#VAL{locations_visualiser}|param_low_sec{#GET{args}})]}|parametre_url{var_zajax,contenu})]');return false;}">
+					(#CHEMIN_IMAGE{preview-16.png}|image_reduire{13})
+			</a>]
+			<a href="[(#URL_PAGE{transmettre,[(#VAL{objets_locations}|param_low_sec{#GET{args}, '', 'transmettre'})]}|parametre_url{reponse,oui})]" title="<:spip:bouton_download:>">
+			[(#CHEMIN_IMAGE{telecharger-16.png}|image_reduire{13})]
+
+			</a>
+		</div>
+
+	</div>
+<strong><:ecrire:info_par_statut:></strong>
+
+<ul>
+<BOUCLE_statuts(OBJETS_LOCATIONS_DETAILS){objet?}{fusion statut}>
+	#SET{args,
+		#ARRAY{
+			objet,#ENV{objet},
+			statut,#STATUT,
+			statut2,#GET{statuts}|implode{-}
+		}
+	}
+	<li>[(#GET{compteur}|table_valeur{#STATUT}) ][(#GET{noms_statuts}|table_valeur{#STATUT}|_T)]
+		<div class="actions">
+			[<a
+				href="[(#URL_ECRIRE{locations_visualiser,[(#VAL{evenements_reservations}|param_low_sec{#GET{args}})]})]"
+				title="<:previsualiser:>"
+				onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{locations_visualiser,[(#VAL{locations_visualiser}|param_low_sec{#GET{args}})]}|parametre_url{var_zajax,contenu})]');return false;}">
+					(#CHEMIN_IMAGE{preview-16.png}|image_reduire{13})
+			</a>]
+			<a href="[(#URL_PAGE{transmettre,[(#VAL{objets_locations}|param_low_sec{#GET{args}, '', 'transmettre'})]}|parametre_url{reponse,oui})]" title="<:spip:bouton_download:>">
+			[(#CHEMIN_IMAGE{telecharger-16.png}|image_reduire{13})]
+
+			</a>
+		</div>
+	</li>
+</BOUCLE_statuts>
+</ul>
+</B_statuts>
+<div><:objets_location:info_aucun_objets_location:></div>
+<//B_statuts>
+
+
+#BOITE_FERMER
