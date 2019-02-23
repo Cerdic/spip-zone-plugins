@@ -1,0 +1,74 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi titre,1,
+	date,-1,
+	id_disponibilite_date,1
+}})
+]
+#SET{exclus,#ENV**{exclus,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
+#SET{debut,#ENV{debutdisa,#EVAL{_request("debutdisa");}}}
+<B_liste_disponibilite_dates>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutdisa,#EVAL{_request("debutdisa");}}}
+#SET{afficher_lettres,#TRI|=={'multi titre'}|oui}
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-associer disponibilite_dates">
+<table class="spip liste">
+[<caption><span class="caption"><strong>(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{disponibilite_date:info_1_disponibilite_date,disponibilite_date:info_nb_disponibilite_dates}})</strong>
+<span class="recherche">
+	<label for="recherche-#ENV{id}"><:info_rechercher_02:></label>
+	<input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" />
+	<input type="submit" class="tout_voir" name="tout_voir" value="<:info_tout_afficher:>" />
+</span>
+</span>
+</caption>]
+	<thead>
+		#SET{p,''}
+		<BOUCLE_lettre(DISPONIBILITE_DATES disponibilites_dates_liens){tout}{!id_disponibilite_date IN #GET{exclus}}{id_disponibilite_date_source=0}{where?}{recherche?}
+			{tri #ENV{par,multi titre},#GET{defaut_tri}}{id_disponibilite_date==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#TITRE**|extraire_multi|initiale|unique|oui)
+		[(#SET{p,#GET{p}|concat{
+		#SELF|parametre_url{debutdisa,@#ID_DISPONIBILITE_DATE}|ancre_url{paginationdisa}|afficher_initiale{#TITRE**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		}})]
+		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
+		(#SET{p,
+			#GET{p}|concat{
+				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
+			}
+		})]</B_lettre>
+		[<tr><td colspan="3"><p class="pagination">(#GET{p})</p></td></tr>]
+
+		<tr class="first_row">
+			<th class="titre" scope="col">[(#TRI{multi titre,<:ecrire:info_titre:>,ajax})]</th>
+			<th class="dates" scope="col"><:dates_outils:periode_label:></th>
+			<th class="disponible" scope="col"><:disponibilite_date:champ_disponible_label:></th>
+			<th class="action" scope="col"></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_disponibilite_dates(DISPONIBILITE_DATES){!id_disponibilite_date IN #GET{exclus}}{id_disponibilite_date_source=0}{where?}{recherche?}
+		{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} disa}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TITRE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
+			<td class="titre">[(#LOGO_DISPONIBILITE_DATE|image_reduire{20,20})]<a href="[(#ID_DISPONIBILITE_DATE|generer_url_entite{disponibilite_date})]">#TITRE</a></td>
+			<td class="dates">[(#DATE_DEBUT|dates_affdate_debut_fin{#DATE_FIN,#HORAIRE})]</td>
+		<td class="disponible">[(#DISPONIBLE|?{<:ecrire:item_oui:>,<:ecrire:item_non:>})]</td>
+			<td class="action">
+				<button type="submit" class="button link add" name="ajouter_lien\[disponibilite_date-#ID_DISPONIBILITE_DATE-#OBJET-#ID_OBJET\]" value="+"><:disponibilite_date:ajouter_lien_disponibilite_date:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
+			</td>
+		</tr>
+	</BOUCLE_liste_disponibilite_dates>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_disponibilite_dates>[(#ENV{recherche}|oui)
+<div class="liste-objets liste-objets-associer disponibilite_dates caption-wrap">
+<span class="caption"><strong>[(#VAL{info_recherche_auteur_zero}|_T{#ARRAY{cherche_auteur,#ENV{recherche}}})]</strong>
+<span class="recherche">
+	<label for="recherche-#ENV{id}"><:info_rechercher_02:></label>
+	<input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" />
+	<input type="submit" class="tout_voir" name="tout_voir" value="<:info_tout_afficher:>" />
+</span>
+</span>
+</div>
+]<//B_liste_disponibilite_dates>

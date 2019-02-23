@@ -1,0 +1,22 @@
+<BOUCLE_disponibilite_date(DISPONIBILITE_DATES){id_disponibilite_date}>
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:ecrire:info_titre:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{titre} titre">(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_disponible[ (#DISPONIBLE*|strlen|?{'',vide})]">
+	<label><:disponibilite_date:champ_disponible_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{disponible} disponible">(#DISPONIBLE|=={1}|?{<:item_oui:>,<:item_non:>})</span>
+</div>]
+
+[<div class="champ contenu_date_debut[ (#DATE_DEBUT*|!={0000-00-00 00:00:00}|?{'',vide})]">
+	<label><:dates_outils:champ_date_debut_label:></label>
+	<span dir="#LANG_DIR" class="#EDIT{date_debut} date_debut">(#DATE_DEBUT|=={0000-00-00 00:00:00}|?{'',[(#DATE_DEBUT|affdate)]})</span>
+</div>]
+
+[<div class="champ contenu_date_fin[ (#DATE_FIN*|!={0000-00-00 00:00:00}|?{'',vide})]">
+	<label><:dates_outils:champ_date_fin_label:></label>
+	<span dir="#LANG_DIR" class="#EDIT{date_fin} date_fin">(#DATE_FIN|=={0000-00-00 00:00:00}|?{'',[(#DATE_FIN|affdate)]})</span>
+</div>]
+
+</BOUCLE_disponibilite_date>

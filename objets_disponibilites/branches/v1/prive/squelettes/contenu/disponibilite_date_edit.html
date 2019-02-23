@@ -1,0 +1,35 @@
+[(#ID_DISPONIBILITE_DATE|oui)
+	[(#AUTORISER{modifier,disponibilite_date,#ID_DISPONIBILITE_DATE}|sinon_interdire_acces)]
+]
+
+
+[(#ID_DISPONIBILITE_DATE|non)
+	[(#AUTORISER{creer,disponibilite_date}|sinon_interdire_acces)]
+]
+
+#SET{redirect,#ENV{redirect}|sinon{#ID_DISPONIBILITE_DATE|?{#ID_DISPONIBILITE_DATE|generer_url_entite{disponibilite_date},#URL_ECRIRE{disponibilite_dates}}}}
+
+
+
+<div class="cadre-formulaire-editer">
+<div class="entete-formulaire">
+	[(#ID_DISPONIBILITE_DATE|oui)
+	[(#GET{redirect}|icone_verticale{<:icone_retour:>,disponibilite_date,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_DISPONIBILITE_DATE|?{<:disponibilite_date:icone_modifier_disponibilite_date:>,<:disponibilite_date:icone_creer_disponibilite_date:>})]
+		<h1>(#ENV{titre,#INFO_TITRE{disponibilite_date,#ID_DISPONIBILITE_DATE}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_DISPONIBILITE_DATE|generer_url_entite{disponibilite_date}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_DISPONIBILITE_DATE{#ENV{id_disponibilite_date,oui}, #GET{redirect}, #ENV{associer_objet}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>
