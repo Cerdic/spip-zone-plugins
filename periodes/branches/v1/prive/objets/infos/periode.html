@@ -1,0 +1,16 @@
+<BOUCLE_periode(PERIODES){id_periode=#ENV{id}}>
+<div class="infos">
+[(#SET{texte_objet,<:periode:titre_periode:>})]
+<div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_PERIODE</p></div>
+
+	<div class='nb_elements'><!--nb_elements--></div>
+
+	[(#AUTORISER{supprimer, periode, #ID_PERIODE}|oui)
+		[(#BOUTON_ACTION{
+			[(#CHEMIN_IMAGE{periode-del-24.png}|balise_img{<:periode:supprimer_periode:>}|concat{' ',#VAL{<:periode:supprimer_periode:>}|wrap{<b>}}|trim)],
+			#URL_ACTION_AUTEUR{supprimer_periode, #ID_PERIODE, #URL_ECRIRE{periodes}},
+			icone s24 horizontale danger periode-del-24, <:periode:confirmer_supprimer_periode:>})]
+	]
+
+</div>
+</BOUCLE_periode>

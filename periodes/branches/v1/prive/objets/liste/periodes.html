@@ -1,0 +1,56 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	points,-1
+}})]<B_liste_periodes>
+#ANCRE_PAGINATION
+<div class="liste-objets periodes">
+<table class="spip liste">
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{periode:info_1_periode,periode:info_nb_periodes}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="picto" scope="col"></th>
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class="titre" scope="col">[(#TRI{titre,<:ecrire:info_titre:>,ajax})]</th>
+			<th class="dates" scope="col"><:dates_outils:periode_label:></th>
+			<th class="criteres" scope="col"><:po_periode:champ_criteres_label:></th>
+			<th class="id" scope="col">[(#TRI{id_po_periode,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_periodes(PERIODES){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="picto">[(#CHEMIN_IMAGE{po_periode-16.png}|balise_img)]</td>
+			<td class="statut">[(#STATUT|puce_statut{periode,#ID_PERIODE})]</td>
+			<td class="titre principale">[(#LOGO_PERIODE|image_reduire{20,26})]<a href="[(#ID_PERIODE|generer_url_entite{periode})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PERIODE">[(#RANG). ]#TITRE</a></td>
+			<td class="dates">
+				[(#TYPE|=={date}|oui)
+					[(#DATE_COMPLETE|=={non}|?{
+					[(#DATE_DEBUT_JOUR|sinon{*})]/[(#DATE_DEBUT_MOIS|sinon{*})]/[(#DATE_DEBUT_ANNEE|sinon{*})] -
+					[(#DATE_FIN_JOUR|sinon{*})]/[(#DATE_FIN_MOIS|sinon{*})]/[(#DATE_FIN_ANNEE|sinon{*})]
+					,
+					[(#DATE_DEBUT|dates_affdate_debut_fin{#DATE_FIN,#HORAIRE})]
+				})]
+				]
+
+				[(#TYPE|=={jour_semaine}|oui)
+					[(#JOUR_DEBUT|strlen|oui)
+						#SET{jour_debut, #JOUR_DEBUT|plus{1}}
+						#SET{jour_fin, #JOUR_FIN|plus{1}}
+						[(#VAL{spip:date_jour_#GET{jour_debut}}|_T)][ <:dates_outils:date_au:> (#JOUR_FIN|strlen|oui)[ (#VAL{spip:date_jour_#GET{jour_fin}}|_T)]]
+					]
+				]
+			</td>
+			<td class="criteres">[(#VAL{periode:titre_choix_#CRITERES}|_T)]</td>
+			<td class="id">[(#AUTORISER{modifier,periode,#ID_PERIODE}|?{
+				<a href="[(#URL_ECRIRE{periode_edit,id_periode=#ID_PERIODE})]">#ID_PERIODE</a>,
+				#ID_PERIODE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_periodes>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_periodes>[
+<div class="liste-objets periodes caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_periodes>

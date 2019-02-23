@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/periodes, env, ajax, sinon=<:periode:info_aucun_periode:>}>
+
+[(#AUTORISER{creer,periode})
+	[(#URL_ECRIRE{periode_edit,new=oui}|icone_verticale{<:periode:icone_creer_periode:>,periode,new,right})]
+]

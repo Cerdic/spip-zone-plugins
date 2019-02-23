@@ -1,0 +1,41 @@
+.fieldset_date_debut_selection .editer-groupe,
+.fieldset_date_fin_selection .editer-groupe{
+	display: flex;
+	flex-wrap: nowrap;
+}
+
+.formulaire_spip .editer.editer_date_debut_jour,
+.formulaire_spip .editer.editer_date_fin_jour {
+	padding-right: 0;
+}
+
+.formulaire_spip .editer.editer_date_debut_mois,
+.formulaire_spip .editer.editer_date_debut_annee,
+.formulaire_spip .editer.editer_date_fin_mois,
+.formulaire_spip .editer.editer_date_fin_annee {
+	padding-right: 0;
+	padding-left: 0;
+}
+
+.formulaire_spip .editer.editer_date_debut_jour label,
+.formulaire_spip .editer.editer_date_debut_mois label,
+.formulaire_spip .editer.editer_date_debut_annee label,
+.formulaire_spip .editer.editer_date_fin_jour label,
+.formulaire_spip .editer.editer_date_fin_mois label,
+.formulaire_spip .editer.editer_date_fin_annee label {
+	float: none;
+	margin-left: 0;
+	display: block;
+}
+
+#champ_date_debut_jour,
+#champ_date_debut_mois,
+#champ_date_fin_jour,
+#champ_date_fin_mois {
+	width: auto;
+}
+
+#champ_date_debut_annee,
+#champ_date_fin_annee {
+	width: 100px;
+}
