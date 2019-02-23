@@ -1,0 +1,14 @@
+<B_objets_informations>
+	#ANCRE_PAGINATION
+	<h2 class="h2">[(#ENV{titre,<:objets_information:titre_objets_informations:>})]</h2>
+	<ul class="liste-items">
+		<BOUCLE_objets_informations(OBJETS_INFORMATIONS objets_informations_liens)
+			{objet}
+			{id_objet}
+			{!par num titre, titre}
+			{pagination #ENV{nb,5}}>
+		<li class="item">#INCLURE{fond=inclure/resume/objets_information,id_objets_information}</li>
+		</BOUCLE_objets_informations>
+	</ul>
+	[<div class="pagination">(#PAGINATION)</div>]
+</B_objets_informations>

@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+<h1><:objets_information:titre_objets_informations:></h1>
+<INCLURE{fond=prive/objets/liste/objets_informations, env, ajax, sinon=<:objets_information:info_aucun_objets_information:>}>
+
+[(#AUTORISER{creer,objets_information})
+	[(#URL_ECRIRE{objets_information_edit,new=oui}|icone_verticale{<:objets_information:icone_creer_objets_information:>,objets_information,new,right})]
+]
