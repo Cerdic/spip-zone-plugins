@@ -1,0 +1,35 @@
+[(#ID_ESPACE|oui)
+	[(#AUTORISER{modifier,espace,#ID_ESPACE}|sinon_interdire_acces)]
+]
+
+
+[(#ID_ESPACE|non)
+	[(#AUTORISER{creer,espace}|sinon_interdire_acces)]
+]
+
+#SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#ID_ESPACE}|?{#ENV{lier_trad,#ID_ESPACE}|generer_url_entite{espace},#URL_ECRIRE{espaces}}}}
+
+
+
+<div class="cadre-formulaire-editer">
+<div class="entete-formulaire">
+	[(#ID_ESPACE|oui)
+	[(#GET{redirect}|icone_verticale{<:icone_retour:>,espace,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_ESPACE|?{<:espace:icone_modifier_espace:>,<:espace:icone_creer_espace:>})]
+		<h1>(#ENV{titre,#INFO_TITRE{espace,#ID_ESPACE}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_ESPACE|generer_url_entite{espace}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_ESPACE{#ENV{id_espace,oui}, #GET{redirect}, #ENV{associer_objet}, #ENV{lier_trad}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>

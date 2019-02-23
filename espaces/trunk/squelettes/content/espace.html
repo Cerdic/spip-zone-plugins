@@ -1,0 +1,45 @@
+<BOUCLE_content(ESPACES){id_espace}{tout}>
+	#SET{id_espace_or,#ID_ESPACE}
+	[(#ID_TRAD|>{0}|oui)#SET{id_espace_or,#ID_TRAD}]
+<section>
+
+	<header class="cartouche">
+		[(#LOGO_ESPACE|image_reduire{200,200})]
+		<h1 class="#EDIT{titre}">#TITRE</h1>
+	</header>
+
+	<div class="main">
+		[<div class="#EDIT{texte} chapo">(#TEXTE|adaptive_images)</div>]
+		[<div class="contenu_mesure">
+			<label><:espace:champ_mesure_label:> : </label>
+			<span dir="#LANG_DIR" class="#EDIT{mesure} mesure">(#MESURE)</span>
+		</div>
+
+		[<div class="contenu_unite">
+			<label><:espace:champ_unite_label:> : </label>
+			<span dir="#LANG_DIR" class="#EDIT{unite} unite">(#UNITE)</span>
+		</div>]
+		]
+	</div>
+
+
+	<aside>
+		[(#REM) Les infos extras]
+		[(#CHEMIN{liste/objets_informations.html}|oui)
+		<INCLURE{fond=liste/objets_informations,objet=immeuble,id_objet=#GET{id_espace_or},env} />
+		]
+		[(#PLUGIN{location_objets}|oui)
+			<p>
+				<a class="btn btn-primary btn-large" href="[(#URL_PAGE{location_espace}|parametre_url{id_espace,#GET{id_espace_or}})]">
+					<:objets_location:titre_objets_location:>
+				</a>
+			</p>
+		]
+	</aside>
+
+	<footer>
+		[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+	</footer>
+
+</section>
+</BOUCLE_content>

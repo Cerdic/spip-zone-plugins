@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+<h1><:espaces:espaces_titre:></h1>
+<INCLURE{fond=prive/objets/liste/espaces, env, ajax, sinon=<:espace:info_aucun_espace:>}>
+
+[(#AUTORISER{creer,espace})
+	[(#URL_ECRIRE{espace_edit,new=oui}|icone_verticale{<:espace:icone_creer_espace:>,espace,new,right})]
+]

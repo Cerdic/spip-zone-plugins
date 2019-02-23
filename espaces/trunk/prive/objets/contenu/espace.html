@@ -1,0 +1,27 @@
+<BOUCLE_espace(ESPACES){id_espace}{statut?}>
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:ecrire:info_titre:></label>
+	<span dir="#LANG_DIR" class="#EDIT{titre} titre">(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<label><:ecrire:info_descriptif:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{descriptif} descriptif">(#DESCRIPTIF)</span>
+</div>]
+
+[<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+	<label><:ecrire:info_texte:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{texte} descriptif">(#TEXTE)</span>
+</div>]
+
+[<div class="champ contenu_mesure[ (#MESURE*|strlen|?{'',vide})]">
+	<label><:espace:champ_mesure_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{mesure} mesure">(#MESURE)</span>
+</div>]
+
+[<div class="champ contenu_unite[ (#UNITE*|strlen|?{'',vide})]">
+	<label><:espace:champ_unite_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{unite} unite">(#UNITE)</span>
+</div>]
+
+</BOUCLE_espace>
