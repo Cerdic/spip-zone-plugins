@@ -1,0 +1,86 @@
+<BOUCLE_periode(PERIODES){id_periode}>
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:ecrire:info_titre:></label>
+	<span dir="#LANG_DIR" class="#EDIT{titre} titre">(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<label><:ecrire:info_descriptif:></label>
+	<span dir="#LANG_DIR" class="#EDIT{descriptif} descriptif">(#DESCRIPTIF)</span>
+</div>]
+
+<div class="champ contenu_type[ (#TYPE*|strlen|?{'',vide})]">
+	<label><:periode:champ_type_label:></label>
+	<span dir="#LANG_DIR" class="#EDIT{type} type">[(#VAL{periode:type_#TYPE}|_T)]</span>
+</div>
+
+<div class="champ criteres[ (#CRITERES*|strlen|?{'',vide})]">
+	<label><:periode:champ_criteres_label:></label>
+	<span dir="#LANG_DIR" class="#EDIT{criteres} criteres">[(#VAL{periode:choix_#CRITERES|concat{_label}}|_T)]</span>
+</div>
+
+[(#DATE_COMPLETE|=={oui}|oui)
+[<div class="champ contenu_operateur[ (#OPERATEUR*|!={0000-00-00 00:00:00}|?{'',vide})]">
+	<label><:periode:champ_operateur_label:></label>
+	<span dir="#LANG_DIR" class="#EDIT{operateur} operateur">(#OPERATEUR)</span>
+</div>]
+
+[<div class="champ contenu_date_debut[ (#DATE_DEBUT*|!={0000-00-00 00:00:00}|?{'',vide})]">
+	<label><:dates_outils:champ_date_debut_label:></label>
+	<span dir="#LANG_DIR" class="#EDIT{date_debut} date_debut">(#DATE_DEBUT|=={0000-00-00 00:00:00}|?{'',[(#DATE_DEBUT|affdate)]})</span>
+</div>]
+
+[<div class="champ contenu_operateur_2[ (#OPERATEUR_2*|!={0000-00-00 00:00:00}|?{'',vide})]">
+	<label><:periode:champ_operateur_label:></label>
+	<span dir="#LANG_DIR" class="#EDIT{operateur_2} operateur_2">(#OPERATEUR_2)</span>
+</div>]
+
+[<div class="champ contenu_date_fin[ (#DATE_FIN*|!={0000-00-00 00:00:00}|?{'',vide})]">
+	<label><:dates_outils:champ_date_fin_label:></label>
+	<span dir="#LANG_DIR" class="#EDIT{date_fin} date_fin">(#DATE_FIN|=={0000-00-00 00:00:00}|?{'',[(#DATE_FIN|affdate)]})</span>
+</div>]
+]
+[(#DATE_COMPLETE|=={non}|oui)
+	<div class="champ contenu_date_debut">
+		<label><:dates_outils:champ_date_debut_label:></label>
+		<span dir="#LANG_DIR" class="#EDIT{date_debut_jour} date_debut_jour">[(#DATE_DEBUT_JOUR|sinon{*})]</span>/
+		<span dir="#LANG_DIR" class="#EDIT{date_debut_mois} date_debut_mois">[(#DATE_DEBUT_MOIS|sinon{*})]</span>/
+		<span dir="#LANG_DIR" class="#EDIT{date_debut_annee} date_debut_annee">[(#DATE_DEBUT_ANNEE|sinon{*})]</span>
+	</div>
+	<div class="champ contenu_date_fin">
+		<label><:dates_outils:champ_date_fin_label:></label>
+		<span dir="#LANG_DIR" class="#EDIT{date_fin_jour} date_fin_jour">[(#DATE_FIN_JOUR|sinon{*})]</span>/
+		<span dir="#LANG_DIR" class="#EDIT{date_fin_mois} date_fin_mois">[(#DATE_FIN_MOIS|sinon{*})]</span>/
+		<span dir="#LANG_DIR" class="#EDIT{date_fin_annee} date_fin_annee">[(#DATE_FIN_ANNEE|sinon{*})]</span>
+	</div>
+]
+
+[(#TYPE|=={jour_semaine}|oui)
+<div class="champ contenu_jour_debut[ (#JOUR_DEBUT*|strlen|?{'',vide})]">
+	<label><:periode:champ_jour_debut_label:></label>
+	#SET{jour, #JOUR_DEBUT|plus{1}}
+	<span dir="#LANG_DIR" class="#EDIT{jour_debut} jour_debut">[(#VAL{spip:date_jour_#GET{jour}}|_T)]</span>
+</div>
+
+<div class="champ contenu_jour_fin[ (#JOUR_FIN*|strlen|?{'',vide})]">
+	#SET{jour, #JOUR_FIN|plus{1}}
+	<label><:periode:champ_jour_fin_label:></label>
+	<span dir="#LANG_DIR" class="#EDIT{jour_fin} jour_fin">[(#VAL{spip:date_jour_#GET{jour}}|_T)]</span>
+</div>
+]
+
+
+
+[(#TYPE|=={jour_nombre}|oui)
+[<div class="champ contenu_operateur[ (#OPERATEUR*|!={0000-00-00 00:00:00}|?{'',vide})]">
+	<label><:periode:champ_operateur_label:></label>
+	<span dir="#LANG_DIR" class="#EDIT{operateur} operateur">(#OPERATEUR|=={0000-00-00 00:00:00}|?{'',[(#OPERATEUR|affdate)]})</span>
+</div>]
+
+[<div class="champ contenu_jour_nombre[ (#JOUR_NOMBRE*|strlen|?{'',vide})]">
+	<label><:periode:champ_jour_nombre_label:></label>
+	<span dir="#LANG_DIR" class="#EDIT{jour_nombre} jour_nombre">(#JOUR_NOMBRE)</span>
+</div>]
+]
+
+</BOUCLE_periode>
