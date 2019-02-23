@@ -1,0 +1,9 @@
+<BOUCLE_immeuble_head(IMMEUBLES) {id_immeuble}>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION{150}|textebrut|attribut_html)" />]
+[<link rel="canonical" href="(#URL_IMMEUBLE|url_absolue)" />]
+[(#REM) Lien vers le flux RSS de la immeuble ]
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_immeuble:>" href="[(#URL_PAGE{backend}|parametre_url{id_immeuble,#ID_IMMEUBLE})]" />
+</BOUCLE_immeuble_head>
+[<link rel="icon" type="image/x-icon" href="(#CHEMIN{favicon.ico}|url_absolue_si)" />
+[<link rel="shortcut icon" type="image/x-icon" href="(#CHEMIN{favicon.ico}|url_absolue_si)" />]]

@@ -1,0 +1,36 @@
+<BOUCLE_content(IMMEUBLES){id_immeuble}>
+	#SET{id_immeuble_or,#ID_IMMEUBLE}
+	[(#ID_TRAD|>{0}|oui)#SET{id_immeuble_or,#ID_TRAD}]
+<section>
+	<header class="cartouche">
+		[(#LOGO_IMMEUBLE|image_reduire{200,200})]
+		<h1 class="#EDIT{titre}">#TITRE</h1>
+	</header>
+
+	<div class="main">
+		[<div class="#EDIT{texte} chapo">(#TEXTE|adaptive_images)</div>]
+	</div>
+
+	<aside>
+		[(#REM) Les infos extras]
+		[(#CHEMIN{liste/objets_informations.html}|oui)
+			<INCLURE{fond=liste/objets_informations,objet=immeuble,id_objet=#GET{id_immeuble_or},env} />
+		]
+		[(#PLUGIN{location_objets}|oui)
+			<p>
+				<a
+					class="btn btn-primary btn-large"
+					href="[(#URL_PAGE{location_immeuble}|parametre_url{id_immeuble,#GET{id_immeuble_or}})]"
+				>
+					<:objets_location:titre_objets_location:>
+				</a>
+			</p>
+		]
+	</aside>
+
+	<footer>
+		[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+	</footer>
+
+</section>
+</BOUCLE_content>
