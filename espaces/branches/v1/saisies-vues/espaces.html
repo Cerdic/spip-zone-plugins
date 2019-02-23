@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_espaces_selectionnes>
+	<ul>
+	<BOUCLE_espaces_selectionnes(ESPACES){id_espace IN #GET*{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+		<li class="choix">#TITRE (#ID_ESPACE)</li>
+	</BOUCLE_espaces_selectionnes>
+	</ul>
+	</B_espaces_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_espaces_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_espace_selectionne(ESPACES){id_espace=#ENV{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+	  	<p>#TITRE (#ID_ESPACE)</p>
+	</BOUCLE_espace_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_espace_selectionne>
+<//B_test_multiple>
