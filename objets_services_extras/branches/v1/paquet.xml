@@ -1,0 +1,37 @@
+<paquet
+	prefix="objets_services_extras"
+	categorie="divers"
+	version="1.0.2"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/objets_services_extras-64.png"
+	documentation="https://github.com/abelass/objets_services_extras"
+	schema="1.0.1"
+>
+
+	<nom>Services extras pour objets</nom>
+	<!-- Des services extras pour vos objets -->
+
+	<auteur lien='https://websimple.be'>Rainer Müller</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<traduire module="objets_service" reference="fr" gestionnaire="salvatore" />
+	<traduire module="objets_services_extras" reference="fr" gestionnaire="salvatore" />
+	<traduire module="paquet-objets_services_extras" reference="fr" gestionnaire="salvatore" />
+
+
+
+	<necessite nom="saisies" compatibilite="[2.4.0;]" />
+
+
+	<pipeline nom="autoriser" inclure="objets_services_extras_autorisations.php" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/objets_services_extras.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/objets_services_extras.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/objets_services_extras.php" />
+	<pipeline nom="affiche_milieu" inclure="objets_services_extras_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="objets_services_extras_pipelines.php" />
+
+	<menu nom="objets_services" titre="objets_service:titre_objets_services" parent="menu_edition" icone="images/objets_service-16.png" action="objets_services" />
+</paquet>
