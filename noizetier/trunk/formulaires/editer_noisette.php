@@ -47,34 +47,7 @@ function formulaires_editer_noisette_charger_dist($id_noisette, $redirect = '') 
 			$valeurs['css'] = $noisette['css'];
 			if ($noisette['est_conteneur'] != 'oui') {
 				// Construction de la liste des valeurs possibles pour le choix de la encapsulation
-				include_spip('ncore/ncore');
-				$config_encapsulation = ncore_noisette_initialiser_encapsulation('noizetier')
-					? _T('noizetier:option_noizetier_encapsulation_oui')
-					: _T('noizetier:option_noizetier_encapsulation_non');
-				$options_encapsulation = array(
-					'defaut' => _T('noizetier:option_noisette_encapsulation_defaut', array('defaut' => lcfirst($config_encapsulation))),
-					'oui'    => _T('noizetier:option_noisette_encapsulation_oui'),
-					'non'    => _T('noizetier:option_noisette_encapsulation_non')
-				);
-				$valeurs['_champs_capsule'] = array(
-					array(
-						'saisie'  => 'radio',
-						'options' => array(
-							'nom'    => 'encapsulation',
-							'label'  => '<:noizetier:label_noisette_encapsulation:>',
-							'datas'  => $options_encapsulation,
-							'defaut' => $valeurs['encapsulation']
-						),
-					),
-					array(
-						'saisie'  => 'input',
-						'options' => array(
-							'nom'    => 'css',
-							'label'  => '<:noizetier:label_noisette_css:>',
-							'explication' => '<:noizetier:explication_noisette_css:>'
-						),
-					),
-				);
+				$valeurs['_champs_capsule'] = noizetier_saisies_encapsulation($valeurs['encapsulation']);
 			}
 
 			$valeurs['editable'] = true;
@@ -96,16 +69,19 @@ function formulaires_editer_noisette_verifier_dist($id_noisette, $redirect = '')
 		 _request('type_noisette'),
 		 'parametres',
 		 false);
+
+	// La noisette n'est pas un conteneur on ajoute aussi les paramètres de la capsule pour vérification.
+	if (_request('est_conteneur') != 'oui') {
+		// Construction de la liste des valeurs possibles pour le choix de la encapsulation
+		$saisies_capsule = noizetier_saisies_encapsulation(_request('encapsulation'));
+
+		// On rajoute ces paramètres à ceux de la noisette.
+		$champs = array_merge($champs, $saisies_capsule);
+	}
+
 	if ($champs) {
 		include_spip('inc/saisies');
 		$erreurs = saisies_verifier($champs, false);
-	}
-
-	// On vérifie la syntaxe des attributs class d'une balise HTML
-	if (($css = _request('css'))
-		and	($verifier = charger_fonction('verifier', 'inc/'))
-		and ($erreur_css = $verifier($css, 'attribut_class'))) {
-			$erreurs['css'] = $erreur_css;
 	}
 
 	return $erreurs;
@@ -172,4 +148,45 @@ function formulaires_editer_noisette_traiter_dist($id_noisette, $redirect = '') 
 	}
 
 	return $retour;
+}
+
+
+function noizetier_saisies_encapsulation($encapsulation) {
+
+	// Construction de la liste des valeurs possibles pour le choix de l'encapsulation
+	include_spip('ncore/ncore');
+	$config_encapsulation = ncore_noisette_initialiser_encapsulation('noizetier')
+		? _T('noizetier:option_noizetier_encapsulation_oui')
+		: _T('noizetier:option_noizetier_encapsulation_non');
+	$options_encapsulation = array(
+		'defaut' => _T('noizetier:option_noisette_encapsulation_defaut', array('defaut' => lcfirst($config_encapsulation))),
+		'oui'    => _T('noizetier:option_noisette_encapsulation_oui'),
+		'non'    => _T('noizetier:option_noisette_encapsulation_non')
+	);
+
+	// Construction des saisies pour les paramètres de base d'une capsule (encapsulation, css).
+	$saisies = array(
+		array(
+			'saisie'  => 'radio',
+			'options' => array(
+				'nom'    => 'encapsulation',
+				'label'  => '<:noizetier:label_noisette_encapsulation:>',
+				'datas'  => $options_encapsulation,
+				'defaut' => $encapsulation
+			),
+		),
+		array(
+			'saisie'  => 'input',
+			'options' => array(
+				'nom'    => 'css',
+				'label'  => '<:noizetier:label_noisette_css:>',
+				'explication' => '<:noizetier:explication_noisette_css:>'
+			),
+			'verifier' => array (
+				'type' => 'attribut_class'
+			),
+		),
+	);
+
+	return $saisies;
 }
