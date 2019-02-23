@@ -1,0 +1,46 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	date,-1,
+	id_immeuble,1,
+	points,-1
+}})]<B_liste_immeubles>
+#ANCRE_PAGINATION
+<div class="liste-objets immeubles">
+<table class="spip liste">
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{immeuble:info_1_immeuble,immeuble:info_nb_immeubles}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="picto" scope="col"></th>
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class="titre" scope="col">[(#TRI{titre,<:ecrire:info_titre:>,ajax})]</th>
+			<th class="date" scope="col">[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class="id" scope="col">[(#TRI{id_immeuble,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_immeubles(IMMEUBLES){id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="picto">[(#CHEMIN_IMAGE{immeuble-16.png}|balise_img)]</td>
+			<td class="statut">[(#STATUT|puce_statut{immeuble,#ID_IMMEUBLE})]</td> 
+			<td class="titre principale">[(#LOGO_IMMEUBLE|image_reduire{20,26})]
+				<a 
+					href="[(#ID_IMMEUBLE|generer_url_entite{immeuble})]" 
+					title="<:info_numero_abbreviation|attribut_html:> #ID_IMMEUBLE"
+					[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]>
+						[(#RANG). ]#TITRE
+				</a>
+			</td>
+			<td class="date secondaire">[(#DATE|affdate_jourcourt)]</td> 
+			<td class="id">[(#AUTORISER{modifier,immeuble,#ID_IMMEUBLE}|?{
+				<a href="[(#URL_ECRIRE{immeuble_edit,id_immeuble=#ID_IMMEUBLE})]">#ID_IMMEUBLE</a>,
+				#ID_IMMEUBLE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_immeubles>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_immeubles>[
+<div class="liste-objets immeubles caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_immeubles>
