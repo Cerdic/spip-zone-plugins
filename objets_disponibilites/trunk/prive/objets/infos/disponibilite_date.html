@@ -1,0 +1,16 @@
+<BOUCLE_disponibilite_date(DISPONIBILITE_DATES){id_disponibilite_date=#ENV{id}}>
+<div class="infos">
+[(#SET{texte_objet,<:disponibilite_date:titre_disponibilite_date:>})]
+<div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_DISPONIBILITE_DATE</p></div>
+
+	<div class='nb_elements'><!--nb_elements--></div>
+
+	[(#AUTORISER{supprimer, disponibilite_date, #ID_DISPONIBILITE_DATE}|oui)
+		[(#BOUTON_ACTION{
+			[(#CHEMIN_IMAGE{disponibilite_date-del-24.png}|balise_img{<:disponibilite_date:supprimer_disponibilite_date:>}|concat{' ',#VAL{<:disponibilite_date:supprimer_disponibilite_date:>}|wrap{<b>}}|trim)],
+			#URL_ACTION_AUTEUR{supprimer_disponibilite_date, #ID_DISPONIBILITE_DATE, #URL_ECRIRE{disponibilite_dates}},
+			icone s24 horizontale danger disponibilite_date-del-24, <:disponibilite_date:confirmer_supprimer_disponibilite_date:>})]
+	]
+
+</div>
+</BOUCLE_disponibilite_date>

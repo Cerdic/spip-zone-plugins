@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_disponibilite_dates_selectionnes>
+	<ul>
+	<BOUCLE_disponibilite_dates_selectionnes(DISPONIBILITE_DATES){id_disponibilite_date IN #GET*{valeur}}
+		{par num titre, titre}{tout}>
+		<li class="choix">#TITRE (#ID_DISPONIBILITE_DATE)</li>
+	</BOUCLE_disponibilite_dates_selectionnes>
+	</ul>
+	</B_disponibilite_dates_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_disponibilite_dates_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_disponibilite_date_selectionne(DISPONIBILITE_DATES){id_disponibilite_date=#ENV{valeur}}
+		{par num titre, titre}{tout}>
+	  	<p>#TITRE (#ID_DISPONIBILITE_DATE)</p>
+	</BOUCLE_disponibilite_date_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_disponibilite_date_selectionne>
+<//B_test_multiple>

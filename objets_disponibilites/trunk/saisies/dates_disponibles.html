@@ -1,0 +1,146 @@
+[(#REM)
+
+	Action :
+		- Les dates disponibles pour un objet données.
+
+	Parametres :
+		- date_limite_debut : a partir de quand les dates sont affichées.
+		- date_limite_fin : limite de dates à afficher
+		- utilisation_squelette : le squelette qui calcule les dates disponibles
+		- utilisation_id_exclu: identifiant à exlusre dans le calcul des disponibilités,
+			typiquement celui de l'objet su le quel se calcul les dsiponibilitées
+
+
+	Exemple d'appel :
+	[(#INCLURE{
+		incluredates_disponibles,
+		nom=date_fin,
+		label=<:dates_outils:champ_date_fin_label:>,
+		objet=[(#ENV{location_objet}|objet_type)],
+		id_objet=#ENV{id_location_objet},
+		decalage_debut=#ENV{decalage_debut},
+		decalage_fin=#ENV{decalage_fin,1},
+		date_limite_debut=#ENV{date_limite_debut},
+		defaut=#ENV{date_debut},
+		utilisation_squelette=disponibilites/utilisees_objet_location.html,
+		utilisation_id_exclu=#ENV{id_objets_location}
+	})]
+]
+#SET{valeur,''}
+[(#ENV*{valeur}|oui)
+	#SET{valeur,#ENV{valeur}}
+]
+
+[(#ENV{multiple}|oui)
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+]
+
+#SET{date_actuelle,#ENV{date}}
+
+
+#SET{date_defaut,#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#GET{date_actuelle}}}}}
+[(#ENV{horaire}|non)
+	#SET{date_defaut,#GET{date_defaut}|formater_date{horaire_zero,d/m/Y H:i:s}}
+	[(#GET{valeur}|oui)
+		#SET{valeur,#GET{valeur}|formater_date{horaire_zero,d/m/Y}}
+	]
+]
+
+[(#ENV{multiple}|oui)
+	#SET{date_actuelle,#ARRAY{#GET{date_actuelle}}
+]
+
+#SET{date_limite_debut,#ENV{date_limite_debut,#GET{date_actuelle}}}
+#SET{date_limite_fin,#ENV{date_limite_fin,#GET{date_actuelle}|date_relative_brut{+1 year, d-m-Y}}}
+
+#SET{contexte,#ARRAY{
+		date_limite_debut,#GET{date_limite_debut},
+		date_limite_fin,#GET{date_limite_fin},
+		format,d-m-Y,
+	}
+}
+
+#SET{dates, #GET{contexte}|dates_disponibles{#ENV**}}
+
+[(#GET{valeur}|oui)
+	#SET{dates,#GET{dates}|push{#GET{valeur}}
+]
+
+#SET{dates,#GET{dates}|do_trie_dates}
+#SET{date_min,#DATE|affdate{d/m/Y}}
+<BOUCLE_min(DATA){source tableau, #GET{dates}}{0,1}>
+	#SET{date_min,(#VALEUR|replace{'-','/'})}
+</BOUCLE_min>
+
+[(#INCLURE{
+	fond=saisies/input,
+	autocomplete=off,
+	min=#GET{date_min},
+	class=[(#ENV{class}) ]date,
+	placeholder=dd/mm/yyyy,
+	valeur=#GET{valeur},
+	env})]
+
+
+<script type="text/javascript">
+	var datesDisponibles = [(#GET{dates}|json_encode)];
+	function disponible(date) {
+		var jour = date.getDate();
+		if (jour < 10) {
+			jour = '0' + jour;
+		}
+		var mois = date.getMonth() + 1;
+		if (mois < 10) {
+			mois = '0' + mois;
+		}
+
+		dmy = jour  + "-" + mois + "-" + date.getFullYear();
+
+		if	($.inArray(dmy, datesDisponibles) !== -1) {
+			return [true, "","Available"];
+
+		} else {
+
+			return [false,"","unAvailable"];
+		}
+	}
+	$(document).ready(function() {
+		$('#champ_#ENV{nom}').datepicker({
+			buttonText: '<:afficher_calendrier|texte_script:>',
+			buttonImage: '#CHEMIN_IMAGE{calendrier-16.png}',
+			buttonImageOnly: true,
+			closeText: '<:bouton_fermer|texte_script:>',
+			prevText: '<:precedent|texte_script:>',
+			nextText: '<:suivant|texte_script:>',
+			currentText: '<:date_aujourdhui|texte_script:>',
+			closeText: '<:bouton_fermer|texte_script:>',
+			monthNames: [
+				'<:date_mois_1|texte_script:>','<:date_mois_2|texte_script:>','<:date_mois_3|texte_script:>','<:date_mois_4|texte_script:>','<:date_mois_5|texte_script:>','<:date_mois_6|texte_script:>',
+				'<:date_mois_7|texte_script:>','<:date_mois_8|texte_script:>','<:date_mois_9|texte_script:>','<:date_mois_10|texte_script:>','<:date_mois_11|texte_script:>','<:date_mois_12|texte_script:>'],
+			monthNamesShort: [
+				'<:date_mois_1_abbr|texte_script:>','<:date_mois_2_abbr|texte_script:>','<:date_mois_3_abbr|texte_script:>','<:date_mois_4_abbr|texte_script:>','<:date_mois_5_abbr|texte_script:>','<:date_mois_6_abbr|texte_script:>',
+				'<:date_mois_7_abbr|texte_script:>','<:date_mois_8_abbr|texte_script:>','<:date_mois_9_abbr|texte_script:>','<:date_mois_10_abbr|texte_script:>','<:date_mois_11_abbr|texte_script:>','<:date_mois_12_abbr|texte_script:>'],
+			dayNames: [
+				'<:date_jour_1|texte_script:>','<:date_jour_2|texte_script:>','<:date_jour_3|texte_script:>','<:date_jour_4|texte_script:>',
+				'<:date_jour_5|texte_script:>','<:date_jour_6|texte_script:>','<:date_jour_7|texte_script:>'],
+			dayNamesShort: [
+				'<:date_jour_1_abbr|texte_script:>','<:date_jour_2_abbr|texte_script:>','<:date_jour_3_abbr|texte_script:>','<:date_jour_4_abbr|texte_script:>',
+				'<:date_jour_5_abbr|texte_script:>','<:date_jour_6_abbr|texte_script:>','<:date_jour_7_abbr|texte_script:>'],
+			dayNamesMin: [
+				'<:date_jour_1_initiale|texte_script:>','<:date_jour_2_initiale|texte_script:>','<:date_jour_3_initiale|texte_script:>','<:date_jour_4_initiale|texte_script:>',
+				'<:date_jour_5_initiale|texte_script:>','<:date_jour_6_initiale|texte_script:>','<:date_jour_7_initiale|texte_script:>'],
+			dateFormat: 'dd/mm/yy',
+			defaultDate: [(#ENV{valeur,#GET{date_min}}|affdate{d/m/Y})],
+			minDate: [(#ENV{valeur,#GET{date_min}}|affdate{d/m/Y})],
+			gotoCurrent: true,
+			beforeShowDay: disponible,
+			changeMonth: true,
+			changeYear: true,
+			showOtherMonths: true,
+			selectOtherMonths: true,
+			firstDay: 1,
+			yearRange: "c-60:c+40"
+			});
+	});
+</script>
+

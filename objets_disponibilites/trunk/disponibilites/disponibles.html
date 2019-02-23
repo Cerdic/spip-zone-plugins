@@ -1,0 +1,38 @@
+#SET{dates,#ARRAY}
+<BOUCLE_disponibilite_dates(DISPONIBILITE_DATES disponibilite_dates_liens)
+	{agendafull date_debut,
+		date_fin,
+		periode,
+		#ENV{date_limite_debut}|affdate{Y},
+		#ENV{date_limite_debut}|affdate{m},
+		#ENV{date_limite_debut}|affdate{d},
+		#ENV{date_limite_fin}|affdate{Y},
+		#ENV{date_limite_fin}|affdate{m},
+		#ENV{date_limite_fin}|affdate{d}
+	}
+		{id_disponibilite_date?}
+		{objet?}
+		{id_objet?}
+		{disponible=1}
+		{recherche?}
+		{tout}
+		{par num titre, titre}>
+			[(#DATE_DEBUT|!={#DATE_FIN}|?{
+				#SET{nombre_dates,#ENV{date_limite_debut}|dates_intervalle{
+						#DATE_FIN,
+						#ENV{decalage_debut,0},
+						#ENV{decalage_fin,0},
+						#ENV{horaire},#ENV{format}
+					}
+				}
+				#SET{dates,#GET{dates}|array_merge{#GET{nombre_dates}}}
+				,
+				[(#DATE_DEBUT|>={#ENV{date_limite_debut}}|oui)
+					[(#ENV{horaire}|?{
+						#SET{dates,#GET{dates}|push{#DATE_DEBUT}},
+						#SET{dates,#GET{dates}|push{#DATE_DEBUT|formater_date{horaire_zero,#ENV{format,Y-m-d H:i:s}}}}
+					})]
+				]
+			})]
+</BOUCLE_disponibilite_dates>
+[(#GET{dates}|serialize)]
