@@ -1,7 +1,7 @@
 <paquet
 	prefix="prix_objets_periodes"
 	categorie="divers"
-	version="1.1.1"
+	version="1.1.2"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/prix_objets_periodes-64.png"
@@ -22,10 +22,10 @@
 	<traduire module="paquet-prix_objets_periodes" reference="fr" gestionnaire="salvatore" />
 
 
-	<necessite nom="saisies" compatibilite="[2.4.0;]" />
-	<necessite nom="prix_objets" compatibilite="[2.2.0;]" />
-	<necessite nom="dates_outils" compatibilite="[1.0.4;]" />
-	<necessite nom="periodes" compatibilite="[1.1.1;]" />
+	<necessite nom="saisies" compatibilite="[3.14.0;]" />
+	<necessite nom="prix_objets" compatibilite="[2.3.2;]" />
+	<necessite nom="dates_outils" compatibilite="[1.0.10;]" />
+	<necessite nom="periodes" compatibilite="[1.1.2;]" />
 
 	<pipeline nom="prix_objets_extensions" inclure="prix_objets_periodes_pipelines.php" />
 
