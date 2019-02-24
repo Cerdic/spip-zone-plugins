@@ -1,7 +1,7 @@
 <paquet
 	prefix="periodes"
 	categorie="outil"
-	version="1.1.1"
+	version="1.1.2"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/periodes-64.png"
@@ -21,8 +21,8 @@
 	<traduire module="paquet-periodes" reference="fr" gestionnaire="salvatore" />
 
 
-	<necessite nom="saisies" compatibilite="[2.28.0;]" />
-	<necessite nom="dates_outils" compatibilite="[1.0.9;]" />
+	<necessite nom="saisies" compatibilite="[3.14.0;]" />
+	<necessite nom="dates_outils" compatibilite="[1.0.10;]" />
 
 	<pipeline nom="autoriser" inclure="periodes_autorisations.php" />
 
