@@ -1,7 +1,7 @@
 <paquet
 	prefix="objets_infos_extras"
 	categorie="divers"
-	version="1.0.3"
+	version="1.0.4"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/objets_infos_extras-64.png"
@@ -20,7 +20,7 @@
 	<traduire module="objets_infos_extras" reference="fr" gestionnaire="salvatore" />
 	<traduire module="paquet-objets_infos_extras" reference="fr" gestionnaire="salvatore" />
 
-	<necessite nom="saisies" compatibilite="[2.4.0;]" />
+	<necessite nom="saisies" compatibilite="[3.14.0;]" />
 
 
 	<pipeline nom="autoriser" inclure="objets_infos_extras_autorisations.php" />
