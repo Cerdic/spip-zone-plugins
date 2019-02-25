@@ -1,7 +1,7 @@
 <plugin>
 	<prefix>mll</prefix>
 	<categorie>navigation</categorie>
-	<version>1.4.1</version>
+	<version>1.5.0</version>
 	<etat>stable</etat>
 	<icon>img_pack/world_link-32.png</icon>
 	<lien>https://contrib.spip.net/Menu-de-langues-sous-forme-de-liens</lien>

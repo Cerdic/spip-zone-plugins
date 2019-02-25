@@ -21,7 +21,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_format_liste' => 'Format de la liste des langues',
 	'label_format_liste_bloc' => 'Un bloc séparé par des espaces (ou séparateur configuré)',
 	'label_format_liste_liste' => 'Une liste à puces',
-	'label_langue_courante_invisible' => 'Masquer la langue courant',
+	'label_langue_courante_invisible' => 'Masquer la langue courante',
 	'label_langues_invisibles' => 'Langues invisibles du menu',
+	'label_redirection' => 'Lorsqu’aucune traduction n’est trouvée',
+	'label_redirection_accueil' => 'Rediriger vers l’accueil de la langue choisie (si secteurs de langue) ou l’accueil principal',
+	'label_redirection_self' => 'Rester sur la page en cours',
 	'label_separateur' => 'Séparateur des langues'
 );

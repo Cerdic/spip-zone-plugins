@@ -8,7 +8,7 @@
 <form method="post" action="#ENV{action}"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<ul class="editer-groupe">
-		<li class="editer editer_mll_langues_invisibles[ (#ENV**{erreurs}|table_valeur{langues_invisibles}|oui)erreur]">
+		<li class="editer editer_langues_invisibles[ (#ENV**{erreurs}|table_valeur{langues_invisibles}|oui)erreur]">
 			<label for="langues_invisibles"><:mll:label_langues_invisibles:></label>
 			<p class="explication"><:mll:explication_langues_invisibles:></p>
 			<select name="langues_invisibles[]" id="langues_invisibles" multiple="oui">
@@ -17,11 +17,22 @@
 				</BOUCLE_langues>
 			</select>
 		</li>
-		<li class="editer editer_mll_langue_courante_invisible">
+		<li class="editer editer_langue_courante_invisible">
 			<label for="langue_courante_invisible"><:mll:label_langue_courante_invisible:></label>
 			<input type="checkbox" name="langue_courante_invisible"[ checked="(#ENV{langue_courant_invisible}|oui)checked"] />
 		</li>
-		<li class="editer editer_mll_langues_supprimer[ (#ENV**{erreurs}|table_valeur{format}|oui)erreur]">
+		<li class="editer editer_redirection[ (#ENV**{erreurs}|table_valeur{format}|oui)erreur]">
+			<label for="format"><:mll:label_redirection:></label>
+			<div class="choix">
+				<input type="radio" name="redirection" id="redirection_self" value="" [(#ENV{redirection,''}|=={''}|?{' ',''})checked]/> 
+				<label for="redirection_self"><:mll:label_redirection_self:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="redirection" id="redirection_accueil" value="accueil" [(#ENV{redirection,''}|=={'accueil'}|?{' ',''})checked]/> 
+				<label for="redirection_accueil"><:mll:label_redirection_accueil:></label>
+			</div>
+		</li>
+		<li class="editer editer_format[ (#ENV**{erreurs}|table_valeur{format}|oui)erreur]">
 			<label for="format"><:mll:label_format:></label>
 			<div class="choix">
 				<input type="radio" name="format" id="abrege" value="abrege" [(#ENV{format,abrege}|=={'abrege'}|?{' ',''})checked]/> 
@@ -32,7 +43,7 @@
 				<label for="complet"><:mll:label_format_complet:></label>
 			</div>
 		</li>
-		<li class="editer editer_mll_langues_supprimer[ (#ENV**{erreurs}|table_valeur{formatliste}|oui)erreur]">
+		<li class="editer editer_formatliste[ (#ENV**{erreurs}|table_valeur{formatliste}|oui)erreur]">
 			<label for="formatliste"><:mll:label_format_liste:></label>
 			<div class="choix">
 				<input type="radio" name="formatliste" id="bloc" value="bloc" [(#ENV{formatliste,bloc}|=={'bloc'}|?{' ',''})checked]/> 
@@ -43,7 +54,7 @@
 				<label for="liste"><:mll:label_format_liste_liste:></label>
 			</div>
 		</li>
-		<li class="editer editer_mll_separateur[ (#ENV**{erreurs}|table_valeur{licence_defaut}|oui)erreur]">
+		<li class="editer editer_separateur[ (#ENV**{erreurs}|table_valeur{licence_defaut}|oui)erreur]">
 			<label for="seprateur"><:mll:label_separateur:></label>
 			<p class="explication"><:mll:explication_separateur:></p>
 			<input type="texte" name="separateur" id="separateur" class="text" value="#ENV{separateur}" />
