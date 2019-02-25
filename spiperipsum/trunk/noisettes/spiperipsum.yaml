@@ -1,6 +1,6 @@
 nom: '<:spiperipsum:type_noisette_spiperipsum_titre:>'
 description: '<:spiperipsum:type_noisette_spiperipsum_description:>'
-icon: 'spiperipsum-64.png'
+icon: 'spiperipsum-24.png'
 contexte: 'aucun'
 ajax: 'non'
 parametres:

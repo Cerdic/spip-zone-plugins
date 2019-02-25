@@ -1,6 +1,4 @@
-[(#REM) Prévisualisation de la noisette des conditions météorologiques d'un lieu donné ]
-#SET{url_config, ''}
-[(#PLUGIN{RAINETTE}|oui)
-	#SET{url_config, #URL_ECRIRE{configurer_rainette, service=#ENV{service}}}
-]
-[[<a href="(#GET{url_config})">](#ENV{service}|rainette_afficher_service)[(#GET{url_config}|oui)</a>]][ - (#ENV{lieu}|typo)<br />]
+[(#REM) Prévisualisation de la noisette des lectures d'évangile ]
+#SET{titre_service, #VAL{spiperipsum:service_}|concat{#ENV{service}}|concat{_titre}|_T}
+#SET{titre_lecture, #VAL{spiperipsum:lecture_}|concat{#ENV{lecture}}|concat{_titre}|_T}
+<:spiperipsum:type_noisette_spiperipsum_preview{lecture=#GET{titre_lecture}, service=#GET{titre_service}}:><br />

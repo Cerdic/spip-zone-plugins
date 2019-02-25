@@ -135,7 +135,7 @@ function spiperipsum_lister_lectures($mode = 'tableau') {
 	if (!isset($lectures[$mode])) {
 		$liste = array();
 		foreach (explode(':', _SPIPERIPSUM_LECTURE_LISTE) as $_lecture) {
-			$liste[$lecture] = _T("spiperipsum:lecture_${_lecture}_titre");
+			$liste[$_lecture] = _T("spiperipsum:lecture_${_lecture}_titre");
 		}
 
 		// Par défaut la liste est fournie comme un tableau.
