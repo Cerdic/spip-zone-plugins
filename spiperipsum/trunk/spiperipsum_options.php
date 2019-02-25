@@ -49,6 +49,21 @@ if (!defined('_SPIPERIPSUM_LECTURE_DATE_LITURGIQUE')) {
 if (!defined('_SPIPERIPSUM_LECTURE_DEFAUT')) {
 	define('_SPIPERIPSUM_LECTURE_DEFAUT', 'evangile');
 }
+// -- Liste des lectures
+if (!defined('_SPIPERIPSUM_LECTURE_LISTE')) {
+	define('_SPIPERIPSUM_LECTURE_LISTE', 
+		_SPIPERIPSUM_LECTURE_EVANGILE . ':' .
+		_SPIPERIPSUM_LECTURE_PREMIERE . ':' .
+		_SPIPERIPSUM_LECTURE_SECONDE . ':' .
+		_SPIPERIPSUM_LECTURE_PSAUME . ':' .
+		_SPIPERIPSUM_LECTURE_COMMENTAIRE . ':' .
+		_SPIPERIPSUM_LECTURE_SAINT . ':' .
+//		_SPIPERIPSUM_LECTURE_FETE . ':' .
+		_SPIPERIPSUM_LECTURE_DATE . ':' .
+		_SPIPERIPSUM_LECTURE_DATE_ISO . ':' .
+		_SPIPERIPSUM_LECTURE_DATE_LITURGIQUE
+	);
+}
 
 // Valeurs de l'argument mode d'appel du modele (depuis article ou page zpip)
 if (!defined('_SPIPERIPSUM_MODE_ARTICLE')) {

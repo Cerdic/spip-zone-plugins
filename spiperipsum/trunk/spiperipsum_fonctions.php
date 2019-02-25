@@ -88,3 +88,60 @@ function spiperipsum_lire($langue, $jour, $lecture, $info, $service = 'evangeliz
 
 	return $tableau[$lecture][$info];
 }
+
+
+/**
+ * @param string $mode
+ *
+ * @return array|string
+ */
+function spiperipsum_lister_services($mode = 'tableau') {
+
+	static $services = array();
+
+	if (!isset($service[$mode])) {
+		// On lit les fichiers php dans répertoire services/ du plugin sachant ce répertoire
+		// contient exclusivement les api de chaque service dans un fichier unique appelé
+		// alias_du_service.php
+		$liste = array();
+		if ($fichiers_api = glob(_DIR_PLUGIN_SPIPERIPSUM . '/services/*.php')) {
+			foreach ($fichiers_api as $_fichier) {
+				// On détermine l'alias du service
+				$service = strtolower(basename($_fichier, '.php'));
+
+				// On en déduit son nom.
+				$liste[$service] = _T("spiperipsum:service_${service}_titre");
+			}
+		}
+
+		// Par défaut la liste est fournie comme un tableau.
+		// Si le mode demandé est 'liste' on renvoie une chaîne énumérée des alias de service séparée par des virgules.
+		$services[$mode] = ($mode == 'tableau') ? $liste : implode(',', array_keys($liste));
+	}
+
+	return $services[$mode];
+}
+
+
+/**
+ * @param string $mode
+ *
+ * @return array|string
+ */
+function spiperipsum_lister_lectures($mode = 'tableau') {
+
+	static $lectures = array();
+
+	if (!isset($lectures[$mode])) {
+		$liste = array();
+		foreach (explode(':', _SPIPERIPSUM_LECTURE_LISTE) as $_lecture) {
+			$liste[$lecture] = _T("spiperipsum:lecture_${_lecture}_titre");
+		}
+
+		// Par défaut la liste est fournie comme un tableau.
+		// Si le mode demandé est 'liste' on renvoie une chaîne énumérée des alias de service séparée par des virgules.
+		$lectures[$mode] = ($mode == 'tableau') ? $liste : implode(',', array_keys($liste));
+	}
+
+	return $lectures[$mode];
+}

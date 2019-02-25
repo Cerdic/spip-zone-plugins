@@ -1,0 +1,12 @@
+[(#REM) Liste des services d'évangile supportés par Spiper Ipsum
+  Parametres :
+  - class : classe(s) css ajoutes au select
+  - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+  - cacher_option_intro : pas de premier option vide  (defaut:"")
+]
+<select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] >
+[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
+<BOUCLE_services_evangile(DATA) {source table, #VAL{tableau}|spiperipsum_lister_services}{par cle}>
+	[<option value="#CLE"[(#CLE|=={#ENV{valeur,#ENV{defaut, evangelizo}}}|oui) selected="selected"]>(#VALEUR)</option>]
+</BOUCLE_services_evangile>
+</select>

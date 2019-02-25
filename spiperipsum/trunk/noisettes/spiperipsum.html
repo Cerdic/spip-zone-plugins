@@ -1,0 +1,11 @@
+[(#REM)<!-- SPIPERIPSUM
+
+	Afficher la lecture demandee pour le jour courant, dans le mode page (h2) dans la langue du site.
+	
+	@param string lecture
+	       Identifiant de la lecture au sens large à afficher (evangile, premiere, seconde, psaume...)
+	@param string service
+           Identifiant du service. Pour l'instant seul evangelizo (par défaut) est disponible.
+ -->]
+[(#LANG|spiperipsum_afficher{aujourdhui, #ENV{lecture}, h2, #ENV{service, evangelizo}})]
+<br class="clear" />
