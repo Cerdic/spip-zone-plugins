@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/prive_fluide_remix-64.png"
-	documentation=""
+	documentation="https://contrib.spip.net/5112"
 >
 
 	<nom>Espace privé plus large</nom>
