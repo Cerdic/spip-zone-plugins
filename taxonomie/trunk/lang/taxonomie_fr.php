@@ -86,7 +86,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'import_pages_explicites_labelcase' => 'Remplacer les blocs exclus des pages explicites du site par ceux du fichier d’import',
 
 	'info_boite_taxonomie_configuration' => 'Cette page permet de configurer les paramètres de base du plugin comme la liste des langues utilisables pour nommer ou décrire les taxons.',
-	'info_boite_taxonomie_caches' => 'Cette page permet de vider tout ou partie des caches issus de l\'appel des API des divers services utilisés par Taxonomie.',
 	'info_boite_regnes' => 'Cette page permet de charger, mettre à jour ou vider les taxons du règne au genre (rangs principaux, secondaires et intercalaires) importés à partir des rapports hiérarchiques extraits de la base ITIS. Ces taxons peuvent être rechargés sans danger pour les autres taxons et pour les modifications éventuellement effectuées.',
 	'info_boite_taxons' => 'Cette page permet de consulter la liste des taxons dont le rang est strictement supérieur au rang espèce. Ces taxons sont tous créés automatiquement même si ils peuvent être modifiés manuellement après coup.',
 	'info_boite_especes' => 'Cette page permet de consulter la liste des espèces et des taxons de rang inférieur créés par les utilisateurs.',
