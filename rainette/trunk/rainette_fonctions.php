@@ -303,6 +303,7 @@ function rainette_lister_services($mode = 'tableau') {
 		// On lit les fichiers php dans répertoire services/ du plugin sachant ce répertoire
 		// contient exclusivement les api de chaque service dans un fichier unique appelé
 		// alias_du_service.php
+		$liste = array();
 		if ($fichiers_api = glob(_DIR_PLUGIN_RAINETTE . '/services/*.php')) {
 			foreach ($fichiers_api as $_fichier) {
 				// On détermine l'alias du service
