@@ -14,9 +14,10 @@
 
 <div class="lecture date">
 	[(#ENV{mode}|=={#EVAL{_SPIPERIPSUM_MODE_ARTICLE}}|oui)
-		[<h2 class="h2 date">(#GET{date_affichee}|ucfirst)</h3>]
+		[<h3 class="h3 date">(#GET{date_affichee}|ucfirst)</h3>]
 	]
 	[(#ENV{mode}|=={#EVAL{_SPIPERIPSUM_MODE_PAGE}}|oui)
-		[(#GET{date_affichee}|ucfirst)]
+		[<h2 class="h2 date">(#GET{date_affichee}|ucfirst)</h2>]
 	]
 </div>
+[(#ENV**|unserialize|bel_env)]
