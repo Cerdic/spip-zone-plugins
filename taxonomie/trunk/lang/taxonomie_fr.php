@@ -94,7 +94,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	Une fois le taxon proposé validé, l\'espèce est créée dans la base de données taxonomique et la page d\'édition de l\'espèce est affichée.',
 	'info_element_existe' => 'non vide',
 	'info_etape' => 'Etape @etape@ / @etapes@',
-	'info_indicateur_hybride' => 'Ce taxon est un hydribe',
+	'info_indicateur_hybride' => 'Ce taxon est un hybride',
 	'info_regne_charge' => 'déjà chargé',
 	'info_regne_compteur_taxons' => '@nb@ taxons chargés du règne au genre à partir du fichier «&nbsp;@fichier@&nbsp;»',
 	'info_regne_compteur_traductions' => '@nb@ noms communs en [@langue@]',
