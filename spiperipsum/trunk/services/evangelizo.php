@@ -12,7 +12,9 @@ if (!defined('_SPIPERIPSUM_EVANGELIZO_URL_BASE_REQUETE')) {
 }
 
 
+// ---------------------------------------------------------------------------------------------- //
 // ------------------------------------- API DU SERVICE ----------------------------------------- //
+// ---------------------------------------------------------------------------------------------- //
 
 /**
  * Charger le fichier des lectures et du saint du jour j.
@@ -87,7 +89,7 @@ function evangelizo_charger($code_langue, $date) {
 
 function evangelizo_coder_langue($langue) {
 
-	// Langue des lectures
+	// Langue des lectures :
 	// Si la langue choisie est spécifiée directement comme un code du service alors on l'utilise
 	// directement, sinon c'est qu'on a choisi un code de langue SPIP qu'il faut convertir en
 	// code de langue du service.
@@ -98,6 +100,11 @@ function evangelizo_coder_langue($langue) {
 
 	return $code_langue;
 }
+
+
+// ---------------------------------------------------------------------------------------------- //
+// ----------------------------------- FONCTIONS INTERNES --------------------------------------- //
+// ---------------------------------------------------------------------------------------------- //
 
 /**
  * @param $url_base
@@ -514,63 +521,4 @@ function lecture2code($lecture) {
 function date2jour_semaine($date) {
 	$infos = getdate(strtotime($date));
 	return $infos['wday'];
-}
-
-
-// --------------------------------- FONCTIONS DEPRECIEES ------------------------------------- //
-
-/**
- * Identifier en fonction du code de langue du service le charset utilisé par les textes fournis.
- *
- * @deprecated	la V2 du service evangelizo fournit tous les textes en UTF-8
- *
- * @param string	$code_langue
- * 		Le code de langue du service parmis FR, PT, IT, NL, AM, DE, SP, TRF, TRA, PL, GR, AR, MAA, BYA, ARM
- *
- * @return string
- * 		Le charset utilisé parmi iso-8859-1, iso-8859-2, iso-8859-7, windows-1256 et utf-8
- */
-function code2charset($code_langue) {
-
-	switch(strtoupper($code_langue))
-	{
-		case 'FR':
-		case 'PT':
-		case 'IT':
-		case 'NL':
-		case 'AM':
-		case 'DE':
-		case 'SP':
-		case 'TRF':
-		case 'TRA':
-			$charset = 'iso-8859-1'; break;
-		case 'PL':
-			$charset = 'iso-8859-2'; break;
-		case 'GR':
-			$charset = 'iso-8859-7'; break;
-		case 'AR':
-		case 'MAA':
-		case 'BYA':
-			$charset = 'windows-1256'; break;
-		case 'ARM':
-			$charset = 'utf-8'; break;
-		default:
-			$charset = 'iso-8859-1'; break;
-	}
-	return $charset;
-}
-
-/**
- * Convertir la date Y-m-d en url avec l'annee, le mois et le jour
- *
- * @deprecated	la V2 du service utilise une date sous la forme YYYYMMDD
- *
- * @param $date
- *
- * @return string
- */
-function date2url_date($date) {
-	$infos = getdate(strtotime($date));
-	$url = '&year=' . $infos['year'] . '&month=' . $infos['mon'] .'&day=' . $infos['mday'];
-	return $url;
 }
