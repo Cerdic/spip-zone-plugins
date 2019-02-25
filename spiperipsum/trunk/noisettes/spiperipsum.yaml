@@ -12,6 +12,16 @@ parametres:
       defaut: 'evangile'
       cacher_option_intro: 'oui'
   -
+    saisie: 'selection'
+    options:
+      nom: 'mode'
+      label: '<:noizetier:label_niveau_titre:>'
+      defaut: 'h2'
+      cacher_option_intro: 'oui'
+      datas:
+        page: 'h2'
+        article: 'h3'
+  -
     saisie: 'service_evangile'
     options:
       nom: 'service'
