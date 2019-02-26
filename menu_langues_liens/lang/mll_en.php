@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_format_liste' => 'Languages list display format',
 	'label_format_liste_bloc' => 'A block divided by spaces',
 	'label_format_liste_liste' => 'A bulleted list',
-	'label_langue_courante_invisible' => 'Hide the current language',
+	'label_langue_courante_invisible' => 'Hide the current language', # MODIF
 	'label_langues_invisibles' => 'Invisible languages in the​​ menu',
 	'label_separateur' => 'Language divider'
 );

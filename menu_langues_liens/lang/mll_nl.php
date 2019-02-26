@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_format_liste' => 'Formaat van de taallijst',
 	'label_format_liste_bloc' => 'Een blok gescheiden door spaties (of een ander scheidingsteken)',
 	'label_format_liste_liste' => 'Puntsgewijze lijst',
-	'label_langue_courante_invisible' => 'Verberg de huidige taal',
+	'label_langue_courante_invisible' => 'Verberg de huidige taal', # MODIF
 	'label_langues_invisibles' => 'Talen die niet in het menu zichtbaar zijn',
 	'label_separateur' => 'Scheiding van de talen'
 );
