@@ -189,7 +189,7 @@ function noizetier_layout_contextualiser_classes($element, $classes_element, $id
 function noizetier_layout_creer_classe_media($classe, $media) {
 
 	$classe_media = $classe;
-	if ($creer_classe_media = charger_fonction('creer_classe_media', 'grille/'._NOIZETIER_GRILLE)) {
+	if ($creer_classe_media = charger_fonction('creer_classe_media', 'grille/'._NOIZETIER_GRILLE, true)) {
 		$classe_media = $creer_classe_media($classe, $media);
 	}
 
