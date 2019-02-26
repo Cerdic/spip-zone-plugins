@@ -31,7 +31,6 @@
 [(#ENV{multiple}|oui) #SET{valeur,#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}} ]
 [(#ENV{multiple}|non) #SET{valeur,#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}} ]
 
-#SET{profondeur,1}
 <BOUCLE_multiples(GROUPES_MOTS){id_groupe}{unseul!=oui}{si #ENV{multiple}|oui}{si #ENV{forcer_select}|non}>
 	[(#REM) defaut peut être une chaine (plusieurs valeurs ou pas) qu'on sait décomposer ]
 	#SET{defaut, #ENV{defaut}|saisies_chaine2tableau}
@@ -55,14 +54,11 @@
 		<input type="checkbox" name="#ENV{nom}[]" class="checkbox" id="#GET{id}"[ (#GET{checked})checked="checked"] value="#ID_MOT"[ (#ENV*{attributs})] />
 		<label for="#GET{id}"[(#GET{checked})class="on"]>#TITRE</label>
 	</div>
-	#SET{profondeur,#GET{profondeur}|plus{1}}
 	<BOUCLE_check_recursif(BOUCLE_check_enfants) />
-	#SET{profondeur,#GET{profondeur}|moins{1}}
 	</BOUCLE_check_enfants>
 	</BOUCLE_checkmots>
 </BOUCLE_multiples>
 
-#SET{profondeur,1}	
 <select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"]>
 	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
 		<option value="">[(#ENV{option_intro})]</option>]
@@ -77,9 +73,7 @@
 			<option value="#ID_MOT"[(#ID_MOT|in_array{#GET{valeur}}|oui) selected="selected"][ (#ID_MOT|in_array{#GET{exclus}}|oui) disabled="disabled"]>[(#PROFONDEUR|mostar_tabulation)]#TITRE</option>]
 			[(#ENV{multiple}|non)
 			<option value="#ID_MOT"[(#ID_MOT|=={#GET{valeur}}|oui) selected="selected"][ (#ID_MOT|in_array{#GET{exclus}}|oui) disabled="disabled"]>[(#PROFONDEUR|mostar_tabulation)]#TITRE</option>]
-			#SET{profondeur,#GET{profondeur}|plus{1}}
 			<BOUCLE_recursif(BOUCLE_enfants) />
-			#SET{profondeur,#GET{profondeur}|moins{1}}
 		</BOUCLE_enfants>
 	</BOUCLE_mots>
 </select>
