@@ -2,7 +2,10 @@
 
 // pas la peine d'init les constantes dans un autre contexte qu'en post
 // ca economise
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+if (
+	isset($_SERVER['REQUEST_METHOD'])
+	and $_SERVER['REQUEST_METHOD'] === 'POST'
+) {
 	include_spip("inc/config");
 
 	// Limiter la longueur des messages
