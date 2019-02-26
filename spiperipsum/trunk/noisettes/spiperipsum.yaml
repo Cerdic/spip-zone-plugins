@@ -15,7 +15,7 @@ parametres:
     saisie: 'selection'
     options:
       nom: 'mode'
-      label: '<:noizetier:label_niveau_titre:>'
+      label: '<:spiperipsum:niveau_titre_label:>'
       defaut: 'h2'
       cacher_option_intro: 'oui'
       datas:

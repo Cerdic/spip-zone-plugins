@@ -7,5 +7,10 @@
 	@param string service
            Identifiant du service. Pour l'instant seul evangelizo (par défaut) est disponible.
  -->]
-[(#LANG|spiperipsum_afficher{aujourdhui, #ENV{lecture}, #ENV{mode}, #ENV{service, evangelizo}})]
+[(#MODELE{spiperipsum,
+	langue=#LANG,
+	jour=aujourdhui,
+	mode=#ENV{mode},
+	lecture=#ENV{lecture},
+	service=#ENV{service, evangelizo}})]
 <br class="clear" />

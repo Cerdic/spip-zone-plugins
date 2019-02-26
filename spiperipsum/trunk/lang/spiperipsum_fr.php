@@ -22,6 +22,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lecture_date_iso_titre' => 'Date au format ISO',
 	'lecture_date_liturgique_titre' => 'Date liturgique',
 
+	// N
+	'niveau_titre_label' => 'Niveau de titre',
+
 	// S
 	'saint_quotidien' => 'Saint du jour',
 	'service_evangelizo_titre' => 'Evangelizo, l\'évangile au quotidien',
