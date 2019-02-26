@@ -22,21 +22,35 @@
 	</BOUCLE_LeGroupe>
 	<input type="hidden" name="choixmot" value="1" />
 	<//B_PlusieursGroupes>
-	<B_MotsDuGroupe>
+	<BOUCLE_AfficherSiGroupe(CONDITION){si #ENV{le_groupe,#GET{legroupe}}}>
 	<select id="recherchemot" name="mots[]" class="searchfield" onchange="if ((this.value != '')[ && (this.value != (#ENV{id_mot}))]) {$('#formulaire_recherche_par_mot').submit();}">
 		<option value="">[(#GET{legroupe}|?{<:mots:titre_mots_tous:>,<:public:mots_clefs_meme_groupe:>})]</option>
-		<BOUCLE_MotsDuGroupe(MOTS){id_groupe=#ENV{le_groupe,#GET{legroupe}}}{par titre}{id_mot !IN #ENV{mots, #ARRAY{}}}>
-		#SET{avecunmotdeplus, #ARRAY{}}
-		[(#SET{avecunmotdeplus,[(#ENV{mots, #ARRAY{}}|push{#ID_MOT})]})]
+	<BOUCLE_PluginsMotsArborescentsGroupe(CONDITION){si #PLUGIN{motsar}}>
+		<BOUCLE_MotsDuGroupeArboRacine(MOTS){racine}{par num titre, multi titre}{id_groupe=#ENV{le_groupe,#GET{legroupe}}}>
+			#SET{avecunmotdeplus, #ARRAY}
+			[(#SET{avecunmotdeplus,[(#ENV{mots, #ARRAY}|push{#ID_MOT})]})]
+			<INCLURE{fond=formulaires/recherche_par_mots_compteur, mots=#GET{avecunmotdeplus}, id_mot=#ID_MOT, titre=(#VAL{&gt; }|str_repeat{#PROFONDEUR})(#TITRE|supprimer_tags),tout=oui}>
+			<BOUCLE_MotsDuGroupeArbo(MOTS){id_parent}{par num titre, multi titre}>
+				#SET{avecunmotdeplus, #ARRAY}
+				[(#SET{avecunmotdeplus,[(#ENV{mots, #ARRAY}|push{#ID_MOT})]})]
+				<INCLURE{fond=formulaires/recherche_par_mots_compteur, mots=#GET{avecunmotdeplus}, id_mot=#ID_MOT, titre=(#VAL{&gt; }|str_repeat{#PROFONDEUR})(#TITRE|supprimer_tags),tout=oui}>
+			<BOUCLE_recursif(BOUCLE_MotsDuGroupeArbo) />
+			</BOUCLE_MotsDuGroupeArbo>
+		</BOUCLE_MotsDuGroupeArboRacine>
+	</BOUCLE_PluginsMotsArborescentsGroupe>
+		<BOUCLE_MotsDuGroupe(MOTS){id_groupe=#ENV{le_groupe,#GET{legroupe}}}{par num titre, multi titre}{id_mot !IN #ENV{mots, #ARRAY{}}}>
+		#SET{avecunmotdeplus, #ARRAY}
+		[(#SET{avecunmotdeplus,[(#ENV{mots, #ARRAY}|push{#ID_MOT})]})]
 		<INCLURE{fond=formulaires/recherche_par_mots_compteur, mots=#GET{avecunmotdeplus}, id_mot=#_MotsDuGroupe:ID_MOT, titre=(#_MotsDuGroupe:TITRE|supprimer_tags)}>
 		</BOUCLE_MotsDuGroupe>
+	<//B_PluginsMotsArborescentsGroupe>
 	</select>
-	</B_MotsDuGroupe>
+	</BOUCLE_AfficherSiGroupe>
 	<noscript><div style="display:inline;"><input type="submit" id="sendsearchmc" class="okfield form_submit" value="<:pass_ok:>" /></div></noscript>
 </div>
 </form>
 <B_Tags>
 <div id="postDetailInfos" class="clearfix">
-<BOUCLE_Tags(MOTS){id_mot IN #ENV{mots}}{par titre}{" "}>[(#SET{lesautresmots,[(#ENV{mots}|critere_mots_enleve_mot_de_liste{#ID_MOT})]})]<a href="[(#ENV{action}|parametre_url{mots,#GET{lesautresmots}})]"title="<:mots:info_supprimer_mot|ucfirst|attribut_html:> ([(#TITRE|ucfirst|textebrut|attribut_html)])" class="tags">[(#TITRE|ucfirst)]</a></BOUCLE_Tags>
+<BOUCLE_Tags(MOTS){id_mot IN #ENV{mots}}{par num titre, multi titre}{" "}>[(#SET{lesautresmots,[(#ENV{mots}|critere_mots_enleve_mot_de_liste{#ID_MOT})]})]<a href="[(#ENV{action}|parametre_url{mots,#GET{lesautresmots}})]"title="<:mots:info_supprimer_mot|ucfirst|attribut_html:> ([(#TITRE|ucfirst|textebrut|attribut_html)])" class="tags">[(#TITRE|ucfirst)]</a></BOUCLE_Tags>
 </div><!-- #postDetailInfos -->
 </B_Tags>
