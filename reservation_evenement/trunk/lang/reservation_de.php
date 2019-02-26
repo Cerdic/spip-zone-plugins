@@ -18,10 +18,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'complet' => 'Komplett',
+	'cron_fieldset' => 'Automatisches Schliessen',
 
 	// D
 	'designation' => 'Beschreibung',
 	'details_reservation' => 'Anmeldungs Item:',
+	'duree_vie_label' => 'Lebensdauer:',
 
 	// E
 	'erreur_email_utilise' => 'Diese Email Adresse wird bereits benützt, melden Sie sich an oder benutzen Sie eine andere Adresse',
@@ -31,6 +33,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     <div><strong>"@statuts@"</strong></div> löst das Senden eines Benachrichtigungsmails aus!',
 	'explication_envoi_separe_detail' => 'Die Statusveränderung zu <div><strong>"@statuts@"</strong></div> lösst das Senden einer Benachrichtigungsmail aus!',
 	'explication_login' => '<a rel="nofollow" class="login_modal" href="@url@" title="@titre_login@">Melden Sie sich an</a> wenn sie bereits auf dieser Site registriert sind.',
+
+	// F
+	'formulaire_public' => 'Öffentliches Formular',
 
 	// I
 	'icone_cacher' => 'Ausblenden',
@@ -49,6 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'inscrire' => 'Registrieren',
 
 	// L
+	'label_action_cloture' => 'Automatische Schliessung:',
 	'label_client' => 'Kunde :',
 	'label_date' => 'Datum:',
 	'label_date_paiement' => 'Bezahlungsdatum:',
@@ -121,7 +127,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'sujet_une_reservation_accepte' => 'Bestätigung einer Anmeldung auf @nom@',
 	'sujet_une_reservation_accepte_part' => 'Buchung auf @nom@ teilweise bestätigt',
+	'sujet_une_reservation_cloture' => 'Veranstaltung auf @nom@ abgeschlossen ',
 	'sujet_votre_reservation_accepte' => '@nom@ : Bestätigung Ihrer Anmeldung',
+	'sujet_votre_reservation_cloture' => '@nom@ : Abschluss einer Veranstaltung',
 
 	// T
 	'texte_changer_statut_reservation' => 'Diese Anmeldung ist:',
@@ -130,6 +138,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_accepte_part' => 'teilweise akzeptiert',
 	'texte_statut_attente' => 'in Warteliste',
 	'texte_statut_attente_paiement' => 'in Erwartung der Zahlung',
+	'texte_statut_cloture' => 'abgeschlossen',
 	'texte_statut_encours' => 'laufend',
 	'texte_statut_poubelle' => 'im Abfalleimer',
 	'texte_statut_refuse' => 'abgelehnt',
@@ -137,6 +146,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_envoi_separe' => 'Modus "Einzeln Verschicken" aktiviert',
 	'titre_reservation' => 'Anmeldung',
 	'titre_reservations' => 'Anmeldungen',
+	'total' => 'Total',
 
 	// U
 	'une_reservation_de' => 'Eine Anmeldung von : ',
