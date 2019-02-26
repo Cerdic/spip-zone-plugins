@@ -1,7 +1,8 @@
 /*  Code de Cedric Morin permettant de deplacer le formulaire
 	forum afin de le placer en dessous du message auquel on repond */
 
-;(function( $ ) {jQuery.fn.add_reply_to = function(id_thread){
+;(function( $ ) {
+	jQuery.fn.add_reply_to = function(id_thread){
 		var me = jQuery(this).parents('li.comment-li').eq(0);
 		if (me.find('#formulaire_forum').length==0){
 			jQuery('#formulaire_forum').closest('.ariaformprop').siblings('p.comment-reply').show();
