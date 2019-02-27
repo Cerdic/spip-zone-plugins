@@ -98,6 +98,9 @@ function formidable_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.12.0'] = array(
 		array('formidable_migrer_config')
 	);
+	$maj['0.15.0'] = array(
+		array('formidable_effacer_traitement_enregistrer_sans_option')
+	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -322,6 +325,26 @@ function formidable_migrer_resume_reponse() {
 
 }
 
+
+/**
+ * https://zone.spip.net/trac/spip-zone/changeset/111847/ avait créer des traitements enregistrer sans options
+ * C'était un bug
+ * Cela ne devrait pas exister
+ * En outre, cela créait des enregistrements indus
+ * On annule ces traitements enregistrer vide
+**/
+function formidable_effacer_traitement_enregistrer_sans_option() {
+	include_spip('inc/sql');
+	$res = sql_select('id_formulaire,traitements','spip_formulaires');
+	while ($row = sql_fetch($res)) {
+		$traitements = unserialize($row['traitements']);
+		if ($traitements['enregistrement'] === array()) {
+			unset($traitements['enregistrement']);
+		}
+		$traitements = serialize($traitements);
+		sql_updateq('spip_formulaires',array('traitements'=>$traitements),'id_formulaire='.$row['id_formulaire']);
+	}
+}
 
 /**
  * Migre la config depuis formidable/analyse vers formidable
