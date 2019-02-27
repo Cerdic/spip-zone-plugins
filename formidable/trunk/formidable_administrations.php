@@ -203,13 +203,16 @@ function formidable_migrer_reglage_champ_unique() {
 
 	while ($row = sql_fetch($res)) {
 		$traitements = unserialize($row['traitements']);
-		if (!isset($traitements['enregistrement'])) {
-			$traitements['enregistrement'] = array();
-		}
 		if ($row['unicite'] != '') {
+			if (!isset($traitements['enregistrement'])) {
+				$traitements['enregistrement'] = array();
+			}
 			$traitements['enregistrement']['unicite'] = $row['unicite'];
 		}
 		if ($row['message_erreur_unicite'] != '') {
+			if (!isset($traitements['enregistrement'])) {
+				$traitements['enregistrement'] = array();
+			}
 			$traitements['enregistrement']['message_erreur_unicite'] = $row['message_erreur_unicite'];
 		}
 		$traitements = serialize($traitements);
