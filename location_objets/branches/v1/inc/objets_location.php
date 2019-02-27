@@ -119,7 +119,10 @@ return $erreurs;
 }
 
 function objets_location_verifier_dates($erreurs) {
+	include_spip('public/assembler');
 	$champs_dates = ['date_debut', 'date_fin'];
+
+	$contexte = calculer_contexte();
 
 	// Vérifier si on a une date correcte.
 	$verifier = charger_fonction('verifier', 'inc');
@@ -147,21 +150,18 @@ function objets_location_verifier_dates($erreurs) {
 		strtotime($date_debut) > strtotime($date_fin)) {
 		$erreurs['date_fin'] = _T('objets_location:erreur_date_fin_anterieur_date_debut');
 	}
-	elseif ($erreur = $verifier(
+	elseif ($args = array_merge([
+			'objet' => objet_type(_request('location_objet')),
+			'id_objet' => _request('id_location_objet'),
+			'utilisation_id_exclu' => _request('id_objets_location'),
+		], calculer_contexte()) AND
+			$erreur = $verifier(
 				array(
 					'date_debut' => $date_debut,
 					'date_fin' => $date_fin
 				),
 				'dates_diponibles',
-				array(
-					'objet' => objet_type(_request('location_objet')),
-					'id_objet' => _request('id_location_objet'),
-					'debut' => 0,
-					'fin' => 0,
-					'utilisation_squelette' => 'disponibilites/utilisees_objet_location',
-					'utilisation_id_exclu' => _request('id_objets_location'),
-					'format' => $format,
-				)
+				$args
 			)
 		) {
 		$erreurs['date_fin'] = $erreur;

@@ -1,13 +1,13 @@
 #SET{dates,#ARRAY}
 <BOUCLE_disponibilite_dates(OBJETS_LOCATIONS_DETAILS)
-	{id_objets_location!=#ENV{utilisation_id_exclu}}
+	{id_objets_location!=#ENV{id_objets_location}}
 	{objet}
 	{id_objet}>
 	[(#DATE_DEBUT|!={#DATE_FIN}|?{
 		#SET{nombre_dates,#DATE_DEBUT|dates_intervalle{
 				#DATE_FIN,
-				#ENV{decalage_debut,0},
-				#ENV{decalage_fin,0},
+				#ENV{utilise_decalage_debut},
+				#ENV{utilise_decalage_fin},
 				#ENV{horaire},
 				#ENV{format}
 			}
