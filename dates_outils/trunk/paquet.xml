@@ -16,7 +16,6 @@
 	<licence>GNU/GPL v3</licence>
 
 	<traduire module="dates_outils" reference="fr" gestionnaire="salvatore" />
-	<traduire module="paquet-dates_outils" reference="fr" gestionnaire="salvatore" />
 
 
 	<utilise nom="agenda" compatibilite="[3.14.11;]" />
