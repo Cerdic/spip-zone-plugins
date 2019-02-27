@@ -1,4 +1,10 @@
 <traduction module="paquet-reservation_evenement" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/reservation_evenement/trunk/lang/" reference="fr">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-reservation_evenement?lang_cible=en" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Rainer Müller" lien="https://trad.spip.net/auteur/rainer-muller" />
+	</langue>
+	<langue code="es" url="https://trad.spip.net/tradlang_module/paquet-reservation_evenement?lang_cible=es" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Rainer Müller" lien="https://trad.spip.net/auteur/rainer-muller" />
+	</langue>
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-reservation_evenement?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/paquet-reservation_evenement?lang_cible=pt_br" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
