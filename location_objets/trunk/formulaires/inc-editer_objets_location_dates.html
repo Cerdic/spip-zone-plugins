@@ -1,13 +1,17 @@
+
 [(#SAISIE{dates_disponibles, date_debut,	obligatoire=oui,
 	label=<:dates_outils:champ_date_debut_label:>,
 	objet=[(#ENV{location_objet}|objet_type)],
 	id_objet=#ENV{id_location_objet},
-	decalage_debut=#ENV{disponibilite_decalage_debut},
-	decalage_fin=#ENV{disponibilite_decalage_fin,1},
+	indisponible_decalage_debut=#ENV{indisponible_decalage_debut},
+	indisponible_decalage_fin=#ENV{indisponible_decalage_fin},
+	disponible_decalage_debut=#ENV{disponible_decalage_debut},
+	disponible_decalage_fin=#ENV{disponible_decalage_fin},
+	utilise_decalage_debut=#ENV{utilise_decalage_debut},
+	utilise_decalage_fin=#ENV{utilise_decalage_fin},
+	utilisation_squelette=disponibilites/utilisees_objet_location,
 	date_limite_debut=#ENV{date_limite_debut,#DATE},
 	date_limite_fin=#ENV{date_limite_fin,#DATE},
-	utilisation_squelette=disponibilites/utilisees_objet_location,
-	utilisation_id_exclu=#ENV{id_objets_location}
 })]
 #SET{date_defaut,''}
 #SET{date_limite_debut_defaut,#DATE}
@@ -21,8 +25,12 @@
 	label=<:dates_outils:champ_date_fin_label:>,
 	objet=[(#ENV{location_objet}|objet_type)],
 	id_objet=#ENV{id_location_objet},
-	decalage_debut=#ENV{disponibilite_decalage_debut},
-	decalage_fin=#ENV{disponibilite_decalage_fin,1},
+	indisponible_decalage_debut=#ENV{indisponible_decalage_debut},
+	indisponible_decalage_fin=#ENV{indisponible_decalage_fin},
+	disponible_decalage_debut=#ENV{disponible_decalage_debut},
+	disponible_decalage_fin=#ENV{disponible_decalage_fin},
+	utilise_decalage_debut=#ENV{utilise_decalage_debut},
+	utilise_decalage_fin=#ENV{utilise_decalage_fin},
 	date_limite_debut=[(#GET{date_limite_debut_defaut})],
 	date_limite_fin=#ENV{date_limite_fin,#DATE},
 	defaut=#ENV{date_fin,#GET{date_defaut}},
@@ -43,7 +51,7 @@
 			Object.keys(champs).forEach(function(k, i) {
 				var pair = champs[k].split('=');
 				if (typeof pair[1] !== 'undefined' && pair[1].length > 0) {
-					 args[pair[0]] = pair[1].replace(/%2F/g, '/');
+					args[pair[0]] = pair[1].replace(/%2F/g, '/');
 				}
 			});
 

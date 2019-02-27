@@ -216,7 +216,7 @@ function formulaires_editer_objets_location_charger_dist(
 		$objets_extras = sql_allfetsel('objet,id_objet',
 			'spip_objets_locations_details',
 			'id_objets_locations_detail_source!=0 AND id_objets_location=' . $id_objets_location)) {
-			foreach($objets_extras as $objet_extras) {
+			foreach($objets_extras AS $objet_extras) {
 				$valeurs['extras_' . $objet_extras['objet']][] = $objet_extras['id_objet'];
 			}
 
@@ -226,6 +226,22 @@ function formulaires_editer_objets_location_charger_dist(
 		if (!isset($valeurs[$index]) OR
 			(isset($valeurs[$index]) AND empty($valeurs[$index]))) {
 			$valeurs[$index] = trim($valeur);
+		}
+	}
+
+	// Quelques valeurs par défaut.
+	$valeurs_defaut = [
+		'indisponible_decalage_debut' => 1,
+		'indisponible_decalage_fin' => -1,
+		'disponible_decalage_debut' => 1,
+		'disponible_decalage_fin' => -1,
+		'utilise_decalage_debut' => 1,
+		'utilise_decalage_fin' => -1,
+		'utilisation_squelette' => 'disponibilites/utilisees_objet_location',
+	];
+	foreach ($valeurs_defaut AS $variable => $valeur) {
+		if (!isset($valeurs[$variable]) OR (isset($valeurs[$variable]) AND empty($valeurs[$variable])) ) {
+			$valeurs[$variable] = $valeur;
 		}
 	}
 
