@@ -1,12 +1,12 @@
 <paquet
 	prefix="archive"
 	categorie="date"
-	version="1.4.3"
+	version="1.4.4"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/archive-32.png"
 	schema="0.3.0"
-	documentation="https://contrib.spip.net/Le-Plugin-Archive"
+	documentation="https://contrib.spip.net/1575"
 >
 
 	<nom>Archive</nom>
