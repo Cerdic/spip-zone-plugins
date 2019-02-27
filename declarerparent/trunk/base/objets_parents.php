@@ -8,6 +8,146 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('base/objets');
 
 /**
+ * Cherche le contenu parent d'un contenu précis
+ * 
+ * @api
+ * @param $objet
+ * 		Type de l'objet dont on cherche le parent
+ * @param $id_objet
+ * 		Identifiant de l'objet dont on cherche le parent
+ * @return
+ * 	Retourne un tableau avec la clé "objet" et la clé "id_objet" décrivant le parent trouvé, ou false sinon
+ * 
+ */
+function objet_trouver_parent($objet, $id_objet) {
+	$parent = false;
+	
+	// Si on trouve une ou des méthodes de parent
+	if ($parent_methodes = type_objet_info_parent($objet)) {
+		include_spip('base/abstract_sql');
+		$table = table_objet_sql($objet);
+		$cle_objet = id_table_objet($objet);
+		$id_objet = intval($id_objet);
+
+		// Les méthode qui sont un simple tableau sont forcées en tableau de tableau,
+		// pour pouvoir les parcourir comme les conditions
+		if (count($parent_methodes) == count($parent_methodes, COUNT_RECURSIVE)) {
+			$parent_methodes = array($parent_methodes);
+		}
+		// On teste chacun méthode dans l'ordre, et dès qu'on a trouvé un parent on s'arrête
+		foreach ($parent_methodes as $parent_methode) {
+			$where = array("$cle_objet = $id_objet");
+			
+			if (isset($parent_methode['condition'])) {
+				$where[] = $parent_methode['condition'];
+			}
+			
+			$select = array();
+			if (isset($parent_methode['champ'])) {
+				$select[] = $parent_methode['champ'];
+			}
+			if (isset($parent_methode['champ_type'])) {
+				$select[] = $parent_methode['champ_type'];
+			}
+			
+			// On lance la requête
+			if ($ligne = sql_fetsel($select, $table, $where)) {
+				
+				// Si le type est fixe
+				if (isset($parent_methode['type'])) {
+					return array(
+						'objet' => $parent_methode['type'],
+						'id_objet' => intval($ligne[$parent_methode['champ']])
+					);
+				}
+				elseif (isset($parent_methode['champ_type'])) {
+					return array(
+						'objet' => $ligne[$parent_methode['champ_type']],
+						'id_objet' => intval($ligne[$parent_methode['champ']])
+					);
+				}
+			}
+		}
+	}
+	
+	// On passe par un pipeline avant de retourner
+	$parent = pipeline(
+		'objet_trouver_parent',
+		array(
+			'args' => array(
+				'objet' => $objet,
+				'id_objet' => $id_objet,
+			),
+			'data' => $parent,
+		)
+	);
+	
+	return $parent;
+}
+
+/**
+ * Cherche tous les contenus enfants d'un contenu précis
+ * 
+ * @api
+ * @param $objet
+ * 		Type de l'objet dont on cherche les enfants
+ * @param $id_objet
+ * 		Identifiant de l'objet dont on cherche les enfants
+ * @return
+ * 	Retourne un tableau de tableaux, avec comme clés les types des objets, et dans chacun un tableau des identifiants trouvés
+ * 
+ */
+function objet_trouver_enfants($objet, $id_objet) {
+	$enfants = array();
+	
+	// Si on trouve des types d'enfants et leurs méthodes
+	if ($enfants_methodes = type_objet_info_enfants($objet)) {
+		include_spip('base/abstract_sql');
+		$id_objet = intval($id_objet);
+		
+		// On parcourt tous les types d'enfants trouvés
+		foreach ($enfants_methodes as $objet_enfant => $methode) {
+			$table_enfant = table_objet_sql($objet_enfant);
+			$cle_objet_enfant = id_table_objet($objet_enfant);
+			
+			$where = array();
+			// L'identifiant du parent
+			if (isset($methode['champ'])) {
+				$where[] = $methode['champ'] . ' = ' . $id_objet;
+			}
+			// Si le parent est variable
+			if (isset($methode['champ_type'])) {
+				$where[] = $methode['champ_type'] . ' = ' . sql_quote($objet);
+			}
+			// S'il y a une condition supplémentaire
+			if (isset($methode['condition'])) {
+				$where[] = $methode['condition'];
+			}
+			
+			// On lance la requête
+			if ($ids = sql_allfetsel($cle_objet_enfant, $table_enfant, $where)) {
+				$ids = array_map('reset', $ids);
+				$enfants[$objet_enfant] = $ids;
+			}
+		}
+	}
+	
+	// On passe par un pipeline avant de retourner
+	$enfants = pipeline(
+		'objet_trouver_enfants',
+		array(
+			'args' => array(
+				'objet' => $objet,
+				'id_objet' => $id_objet,
+			),
+			'data' => $enfants,
+		)
+	);
+	
+	return $enfants;
+}
+
+/**
  * Donne les informations de parenté directe d'un type d'objet si on en trouve
  * 
  * @param $objet
@@ -97,142 +237,4 @@ function type_objet_info_enfants($objet) {
 	}
 	
 	return $enfants[$objet];
-}
-
-/**
- * Cherche le contenu parent d'un contenu précis
- * 
- * @param $objet
- * 		Type de l'objet dont on cherche le parent
- * @param $id_objet
- * 		Identifiant de l'objet dont on cherche le parent
- * @return
- * 	Retourne un tableau avec la clé "objet" et la clé "id_objet" décrivant le parent trouvé, ou false sinon
- * 
- */
-function objet_trouver_parent($objet, $id_objet) {
-	$parent = false;
-	
-	// Si on trouve une ou des méthodes de parent
-	if ($parent_methodes = type_objet_info_parent($objet)) {
-		include_spip('base/abstract_sql');
-		$table = table_objet_sql($objet);
-		$cle_objet = id_table_objet($objet);
-		$id_objet = intval($id_objet);
-
-		// Les méthode qui sont un simple tableau sont forcées en tableau de tableau,
-		// pour pouvoir les parcourir comme les conditions
-		if (count($parent_methodes) == count($parent_methodes, COUNT_RECURSIVE)) {
-			$parent_methodes = array($parent_methodes);
-		}
-		// On teste chacun méthode dans l'ordre, et dès qu'on a trouvé un parent on s'arrête
-		foreach ($parent_methodes as $parent_methode) {
-			$where = array("$cle_objet = $id_objet");
-			
-			if (isset($parent_methode['condition'])) {
-				$where[] = $parent_methode['condition'];
-			}
-			
-			$select = array();
-			if (isset($parent_methode['champ'])) {
-				$select[] = $parent_methode['champ'];
-			}
-			if (isset($parent_methode['champ_type'])) {
-				$select[] = $parent_methode['champ_type'];
-			}
-			
-			// On lance la requête
-			if ($ligne = sql_fetsel($select, $table, $where)) {
-				
-				// Si le type est fixe
-				if (isset($parent_methode['type'])) {
-					return array(
-						'objet' => $parent_methode['type'],
-						'id_objet' => intval($ligne[$parent_methode['champ']])
-					);
-				}
-				elseif (isset($parent_methode['champ_type'])) {
-					return array(
-						'objet' => $ligne[$parent_methode['champ_type']],
-						'id_objet' => intval($ligne[$parent_methode['champ']])
-					);
-				}
-			}
-		}
-	}
-	
-	// On passe par un pipeline avant de retourner
-	$parent = pipeline(
-		'objet_trouver_parent',
-		array(
-			'args' => array(
-				'objet' => $objet,
-				'id_objet' => $id_objet,
-			),
-			'data' => $parent,
-		)
-	);
-	
-	return $parent;
-}
-
-/**
- * Cherche tous les contenus enfants d'un contenu précis
- * 
- * @param $objet
- * 		Type de l'objet dont on cherche les enfants
- * @param $id_objet
- * 		Identifiant de l'objet dont on cherche les enfants
- * @return
- * 	Retourne un tableau de tableaux, avec comme clés les types des objets, et dans chacun un tableau des identifiants trouvés
- * 
- */
-function objet_trouver_enfants($objet, $id_objet) {
-	$enfants = array();
-	
-	// Si on trouve des types d'enfants et leurs méthodes
-	if ($enfants_methodes = type_objet_info_enfants($objet)) {
-		include_spip('base/abstract_sql');
-		$id_objet = intval($id_objet);
-		
-		// On parcourt tous les types d'enfants trouvés
-		foreach ($enfants_methodes as $objet_enfant => $methode) {
-			$table_enfant = table_objet_sql($objet_enfant);
-			$cle_objet_enfant = id_table_objet($objet_enfant);
-			
-			$where = array();
-			// L'identifiant du parent
-			if (isset($methode['champ'])) {
-				$where[] = $methode['champ'] . ' = ' . $id_objet;
-			}
-			// Si le parent est variable
-			if (isset($methode['champ_type'])) {
-				$where[] = $methode['champ_type'] . ' = ' . sql_quote($objet);
-			}
-			// S'il y a une condition supplémentaire
-			if (isset($methode['condition'])) {
-				$where[] = $methode['condition'];
-			}
-			
-			// On lance la requête
-			if ($ids = sql_allfetsel($cle_objet_enfant, $table_enfant, $where)) {
-				$ids = array_map('reset', $ids);
-				$enfants[$objet_enfant] = $ids;
-			}
-		}
-	}
-	
-	// On passe par un pipeline avant de retourner
-	$enfants = pipeline(
-		'objet_trouver_enfants',
-		array(
-			'args' => array(
-				'objet' => $objet,
-				'id_objet' => $id_objet,
-			),
-			'data' => $enfants,
-		)
-	);
-	
-	return $enfants;
 }
