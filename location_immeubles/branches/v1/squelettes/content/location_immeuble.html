@@ -5,9 +5,7 @@
 	options=#ARRAY{
 		location_extras_objets=spip_objets_services,
 		location_titre=<:objets_location:titre_objets_location:> <:immeuble:titre_immeuble:>,
-		disponibilite_decalage_debut,#ENV{disponibilite_decalage_debut,0},
-		disponibilite_decalage_fin,#ENV{disponibilite_decalage_fin,-1},
-		entite_duree,#ENV{entite_duree,nuit},
+		#ARRAY{entite_duree,#ENV{entite_duree,nuit}},
 	}
 } />
 
