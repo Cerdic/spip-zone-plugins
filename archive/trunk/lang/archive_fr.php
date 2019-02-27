@@ -13,7 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'choix_rubrique' => 'Choix de la rubrique à utiliser :',
-
+	'configurer_archive' => 'Configurer le plugin Archive',
+	
 	// D
 	'doc_complete' => 'Documentation compléte',
 

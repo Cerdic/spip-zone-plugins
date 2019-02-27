@@ -10,5 +10,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'archive_description' => 'Ce plugin ajoute le statut "archive" aux objets.',
 	'archive_nom' => 'Archive',
-	'archive_slogan' => 'Add status "archive" to objects'
+	'archive_slogan' => 'Un statut "archive" pour objets editoriaux (articles)'
 );
