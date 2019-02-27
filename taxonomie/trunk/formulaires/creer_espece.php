@@ -304,9 +304,15 @@ function formulaires_creer_espece_verifier_2() {
 		set_request('_espece', $espece);
 
 		// On récupère la hiérarchie complète du taxon à partir de la base ITIS.
-		// Comme la hiérarchie intègre aussi le taxon concerné on le supprime (dernière position).
 		$ascendants = itis_get_information('hierarchyfull', $espece['tsn']);
-		unset($ascendants[count($ascendants) - 1]);
+		// Comme la hiérarchie intègre aussi le taxon concerné et les descendants on les supprime. Il y a donc a
+		// minima toujours une suppression celle du taxon concerné.
+		$index = count($ascendants);
+		do {
+			$index = $index - 1;
+			$est_espece = $ascendants[$index]['tsn'] == $tsn;
+			unset($ascendants[$index]);
+		} while (!$est_espece);
 
 		// On classe la liste des ascendants du plus proche au plus éloigné.
 		include_spip('inc/taxonomie');
