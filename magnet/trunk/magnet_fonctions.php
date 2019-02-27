@@ -208,7 +208,7 @@ function magnet_html_boutons_admin($objet, $id_objet, $class="", $pile=''){
 
 	if (!$done){
 		$done = true;
-		$css_file = find_in_path("css/magnet-admin.css");
+		$css_file = direction_css(find_in_path("css/magnet-admin.css"));
 		$css = spip_file_get_contents($css_file);
 		$css = urls_absolues_css($css,$css_file);
 		$boutons .= "<style>$css</style>";
