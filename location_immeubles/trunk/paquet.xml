@@ -1,7 +1,7 @@
 <paquet
 	prefix="location_immeubles"
 	categorie="divers"
-	version="1.0.9"
+	version="1.0.10"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/location_immeubles-64.png"
@@ -18,7 +18,7 @@
 
 	<traduire module="location_immeubles" reference="fr" gestionnaire="salvatore" />
 
-	<necessite nom="location_objets" compatibilite="[1.4.2;]" />
+	<necessite nom="location_objets" compatibilite="[1.4.3;]" />
 	<necessite nom="objets_infos_extras" compatibilite="[1.0.4;]" />
 	<necessite nom="objets_services_extras" compatibilite="[1.0.3;]" />
 	<necessite nom="immeubles" compatibilite="[1.0.7;]" />
