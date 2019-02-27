@@ -15,7 +15,7 @@ include_spip('base/objets');
  * 		Type de l'objet dont on cherche le parent
  * @param $id_objet
  * 		Identifiant de l'objet dont on cherche le parent
- * @return
+ * @return array|false
  * 	Retourne un tableau avec la clé "objet" et la clé "id_objet" décrivant le parent trouvé, ou false sinon
  * 
  */
@@ -24,16 +24,13 @@ function objet_trouver_parent($objet, $id_objet) {
 	
 	// Si on trouve une ou des méthodes de parent
 	if ($parent_methodes = type_objet_info_parent($objet)) {
+
 		include_spip('base/abstract_sql');
 		$table = table_objet_sql($objet);
 		$cle_objet = id_table_objet($objet);
 		$id_objet = intval($id_objet);
 
-		// Les méthode qui sont un simple tableau sont forcées en tableau de tableau,
-		// pour pouvoir les parcourir comme les conditions
-		if (count($parent_methodes) == count($parent_methodes, COUNT_RECURSIVE)) {
-			$parent_methodes = array($parent_methodes);
-		}
+
 		// On teste chacun méthode dans l'ordre, et dès qu'on a trouvé un parent on s'arrête
 		foreach ($parent_methodes as $parent_methode) {
 			$where = array("$cle_objet = $id_objet");
@@ -49,21 +46,21 @@ function objet_trouver_parent($objet, $id_objet) {
 			if (isset($parent_methode['champ_type'])) {
 				$select[] = $parent_methode['champ_type'];
 			}
-			
+
 			// On lance la requête
 			if ($ligne = sql_fetsel($select, $table, $where)) {
 				
 				// Si le type est fixe
 				if (isset($parent_methode['type'])) {
 					return array(
-						'objet' => $parent_methode['type'],
-						'id_objet' => intval($ligne[$parent_methode['champ']])
+						'objet' 	=> $parent_methode['type'],
+						'id_objet'	=> intval($ligne[$parent_methode['champ']]),
 					);
 				}
 				elseif (isset($parent_methode['champ_type'])) {
 					return array(
-						'objet' => $ligne[$parent_methode['champ_type']],
-						'id_objet' => intval($ligne[$parent_methode['champ']])
+						'objet' 	 => $ligne[$parent_methode['champ_type']],
+						'id_objet' 	 => intval($ligne[$parent_methode['champ']]),
 					);
 				}
 			}
@@ -153,7 +150,7 @@ function objet_trouver_enfants($objet, $id_objet) {
  * @param $objet
  * 		Type de l'objet dont on cherche les informations de parent
  * @return array
- * 		Retourne un tableau contenant les informations de type et de champ pour trouver le parent ou false sinon
+ * 		Retourne un tableau de tableau contenant les informations de type et de champ pour trouver le parent ou false sinon
  * 
  */
 function type_objet_info_parent($objet) {
@@ -167,8 +164,12 @@ function type_objet_info_parent($objet) {
 		// Si on trouve bien la description de cet objet
 		if ($infos = lister_tables_objets_sql($table)) {
 			// S'il y a une description explicite de parent, c'est prioritaire
-			if (isset($infos['parent'])) {
-				$parents[$objet] = $infos['parent'];
+			if (isset($infos['parent']) and is_array($infos['parent'])) {
+				if (count($infos['parent']) === count($infos['parent'], COUNT_RECURSIVE)) {
+					$parents[$objet] = array($infos['parent']);
+				} else {
+					$parents[$objet] = $infos['parent'];
+				}
 			}
 			// Sinon on cherche des cas courants connus magiquement, à commencer par id_rubrique
 			elseif (isset($infos['field']['id_rubrique'])) {
@@ -212,11 +213,6 @@ function type_objet_info_enfants($objet) {
 			
 			// On ne va pas refaire les tests des différents cas, on réutilise
 			if ($parent_methodes = type_objet_info_parent($objet_enfant)) {
-				// Les méthode qui sont un simple tableau sont forcées en tableau de tableau,
-				// pour pouvoir les parcourir comme les conditions
-				if (count($parent_methodes) == count($parent_methodes, COUNT_RECURSIVE)) {
-					$parent_methodes = array($parent_methodes);
-				}
 				// On parcourt les différents cas possible, si certains peuvent concerner l'objet demandé
 				foreach ($parent_methodes as $parent_methode) {
 					// Si la méthode qu'on teste n'exclut pas le parent demandé
@@ -231,7 +227,6 @@ function type_objet_info_enfants($objet) {
 						}
 					}
 				}
-				
 			}
 		}
 	}
