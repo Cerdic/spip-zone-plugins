@@ -1,7 +1,7 @@
 <paquet
 	prefix="dates_outils"
 	categorie="outil"
-	version="1.0.10"
+	version="1.0.11"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/dates_outils-64.png"

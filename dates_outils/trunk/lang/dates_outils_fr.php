@@ -8,31 +8,31 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'champ_annee_label' => 'Année :',
-	'champ_date_label' => 'Date :',
-	'champ_date_debut_label' => 'Date début :',
-	'champ_date_fin_label' => 'Date fin :',
+	'champ_annee_label' => 'Year:',
+	'champ_date_label' => 'Date:',
+	'champ_date_debut_label' => 'from:',
+	'champ_date_fin_label' => 'to:',
 
 	// D
-	'date_au' => 'au',
-	'date_du' => 'du',
-	'dates_outils_titre' => 'Dates outils',
+	'date_au' => 'on',
+	'date_du' => 'from',
+	'dates_outils_titre' => 'Date tools',
 
 	// I
-	'info_date_debut' => 'date début',
-	'info_date_fin' => 'date fin',
+	'info_date_debut' => 'from',
+	'info_date_fin' => 'to',
 
 	// J
-	'champ_jour_label' => 'Jour :',
+	'champ_jour_label' => 'Day:',
 
 	// M
-	'champ_mois_label' => 'Mois :',
+	'champ_mois_label' => 'Month:',
 
 	// N
-	'nuits' => 'nuits',
+	'nuits' => 'nights',
 
 	// P
-	'periode_label' => 'Période :',
+	'periode_label' => 'Periode:',
 
 
 );
