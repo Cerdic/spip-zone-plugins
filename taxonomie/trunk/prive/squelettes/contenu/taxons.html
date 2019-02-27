@@ -28,12 +28,15 @@
 #FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 <div class="nettoyeur"></div>
 
+#SET{classe, ''}
+[(#ENV{regne}|oui) #SET{classe, enfants}]
 <INCLURE{fond=prive/objets/liste/taxons,
 	nb=#GET{nb},
 	par=nom_scientifique,
 	info_1=#GET{titre_1},
 	info_nb=#GET{titre_n},
 	sinon=#GET{titre_0},
+	classe=#GET{classe},
 	env, ajax} />
 
 [(#ENV{espece}|=={oui}|oui)
