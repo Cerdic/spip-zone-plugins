@@ -1,0 +1,41 @@
+<paquet
+	prefix="location_objets_bank"
+	categorie="divers"
+	version="1.1.2"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/location_objets_bank-64.png"
+	documentation="https://github.com/abelass/location_objets_bank"
+	schema="1.0.2"
+>
+
+	<nom>Location d’objets - paiements</nom>
+	<!-- Faites payer vos locations -->
+
+	<auteur lien='https://websimple.be'>Rainer Müller</auteur>
+
+	<licence>GNU/GPL v3</licence>
+
+	<traduire module="location_objets_bank" reference="fr" gestionnaire="salvatore" />
+
+	<necessite nom="location_objets" compatibilite="[1.4.3;]" />
+	<necessite nom="bank" compatibilite="[3.6.2;]" />
+	<necessite nom="prix_objets" compatibilite="[2.1.4;]" />
+
+	<!-- Déclaration de pipelines -->
+	<pipeline nom="paiement_location_donnees" action='' />
+
+	<!-- Appel de pipelines -->
+
+	<pipeline nom="formulaire_charger" inclure="location_objets_bank_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="location_objets_bank_pipelines.php" />
+	<pipeline nom="recuperer_fond" inclure="location_objets_bank_pipelines.php" />
+	<pipeline nom="bank_traiter_reglement" inclure="location_objets_bank_pipelines.php" />
+	<pipeline nom="trig_bank_reglement_en_attente" inclure="location_objets_bank_pipelines.php" />
+	<pipeline nom="affiche_enfants" inclure="location_objets_bank_pipelines.php" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/location_objets_bank.php" />
+
+	<chemin path="squelettes" />
+	<chemin path="" />
+</paquet>

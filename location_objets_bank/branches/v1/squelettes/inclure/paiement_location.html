@@ -1,0 +1,58 @@
+<BOUCLE_location(OBJETS_LOCATIONS){id_objets_location}{tout}>
+	#SET{total,#PRIX*}
+	#SET{prix_ht,#PRIX_HT*}
+	#SET{montant_paye,#MONTANT_PAYE}
+	[(#MONTANT_PAYE|>{0.00}|oui)
+		#SET{total,#GET{total}|moins{#MONTANT_PAYE}}
+		#SET{prix_ht,#GET{total}}
+	]
+
+	#SET{options,#ARRAY{
+			montant_ht,#GET{prix_ht},
+			id_auteur,#ID_AUTEUR,
+			id_objets_location,#ID_OBJETS_LOCATION,
+			tracking_id,#REFERENCE,
+			champs,#ARRAY{
+				id_objets_location,#ID_OBJETS_LOCATION
+			},
+		}
+	}
+</BOUCLE_location>
+
+#SET{donnees, #PIPELINE{
+		paiement_location_donnees,
+		#ARRAY{
+			args,#ARRAY{
+				id_objets_location,#ID_OBJETS_LOCATION,
+				tableau, #ENV{tableau},
+				montant_paye,#GET{montant_paye}
+			},
+			data,#ARRAY{
+							montant, #GET{total},
+							options, #GET{options}
+						}
+		}
+	}
+}
+
+[(#GET{donnees}|table_valeur{options}|table_valeur{acompte}|oui)
+	[(#SET{donnees,#GET{donnees}|lob_calculer_prix_acompte})]
+
+	#SET{texte_acompte,
+		#VAL{location_objets_bank:paiement_acompte}
+			|_T{#ARRAY{acompte,#GET{donnees}|table_valeur{montant}|appliquer_filtre{prix_formater}}}}
+]
+
+[(#REM) Retourne un tableau des données pour l'enregistrement de la transaction]
+[(#ENV{tableau}|oui)
+	[(#GET{donnees}|serialize)]
+]
+
+[(#REM) Affiche le formulaire Paiement de Bank]
+[(#ENV{tableau}|non)
+	[<p class="acompte">(#GET{texte_acompte})</p>]
+	[(#FORMULAIRE_PAYER_ACTE{
+		#GET{donnees}|table_valeur{montant},
+		#GET{donnees}|table_valeur{options}}
+	)]
+]
