@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/archive-32.png"
 	schema="0.3.0"
-	documentation="https://contrib.spip.net/Plugin-Archive"
+	documentation="https://contrib.spip.net/Le-Plugin-Archive"
 >
 
 	<nom>Archive</nom>
