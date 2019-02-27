@@ -235,8 +235,14 @@ class ConvertisseurImporter extends Command {
 						else
 							$up = sql_updateq('spip_rubriques', array('statut' => 'publie'), "id_rubrique=$id_rubrique");
 						
+						$hierarchie_rub = sql_allfetsel("id_secteur,id_parent","spip_rubriques","id_rubrique=$id_rubrique");
+						
+						if($hierarchie_rub[0]["id_secteur"] == 0){
+							die("Erreur de création de rubrique $id_rubrique : id_secteur=0");
+						}
+						
 						if($up)
-							$progress->setMessage(" Rubrique $hierarchie => $id_rubrique ", 'inforub');
+							$progress->setMessage(" Rubrique $hierarchie => $id_rubrique (" . $hierarchie_rub[0]["id_secteur"] ." > " . $hierarchie_rub[0]["id_parent"] .") ", 'inforub');
 						
 						$progress->setMessage("", 'docs');
 						$progress->setMessage("", 'mot');
