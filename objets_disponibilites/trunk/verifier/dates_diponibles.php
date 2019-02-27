@@ -16,24 +16,34 @@ function verifier_dates_diponibles_dist($valeur, $options=array()){
 	if ($date_debut and $date_fin and $objet and $id_objet) {
 		$horaire = isset($options['horaire']) ? $options['horaire'] : FALSE;
 		$format = isset($options['format']) ? $options['format'] : ($horaire ? 'd-m-Y H:i:s' : 'd-m-Y');
-		$utilisation_squelette = isset($options['utilisation_squelette']) ? $options['utilisation_squelette'] : FALSE;
-		$utilisation_id_exclu = isset($options['utilisation_id_exclu']) ? $options['utilisation_id_exclu'] : FALSE;
 
-		$decalage_debut = isset($options['decalage_debut']) ?  $options['decalage_debut'] : 0;
-		$decalage_fin = isset($options['decalage_fin']) ?  $options['decalage_fin'] : 0;
-		$intervalle = dates_intervalle($date_debut, $date_fin, 1, -1, $horaire, $format);
+		$valeurs_defaut = [
+			'indisponible_decalage_debut' => -1,
+			'indisponible_decalage_fin' => -1,
+			'disponible_decalage_debut' => 1,
+			'disponible_decalage_fin' => -1,
+			'utilise_decalage_debut' => 1,
+			'utilise_decalage_fin' => 1,
+			'utilisation_squelette' => 'disponibilites/utilisees_' . $objet,
 
-		$disponible = dates_disponibles(
-			array(
-					'objet' => $objet ,
-					'id_objet' => $id_objet,
-					'decalage_debut' => 0,
-					'decalage_fin' => 0,
-					'date_limite_debut' => $date_debut,
-					'date_limite_fin' => $date_fin,
-					'utilisation_squelette' => $utilisation_squelette,
-					'utilisation_id_exclu' => $utilisation_id_exclu,
-					'format' => $format,
+		];
+
+		$valeurs = [];
+		foreach ($valeurs_defaut AS $variable => $valeur_defaut) {
+			$valeurs[$variable] = isset($options[$variable]) ? $options[$variable] : $valeur_defaut;
+		}
+
+		$intervalle = dates_intervalle($date_debut, $date_fin, 0, -1, $horaire, $format);
+
+		$disponible = dates_disponibles(array_merge(
+					$valeurs,
+					[
+						'objet' => $objet ,
+						'id_objet' => $id_objet,
+						'date_limite_debut' => $date_debut,
+						'date_limite_fin' => $date_fin,
+						'format' => $format,
+					]
 				)
 			);
 

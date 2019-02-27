@@ -20,8 +20,8 @@
 			[(#DATE_DEBUT|!={#DATE_FIN}|?{
 				#SET{nombre_dates,#ENV{date_limite_debut}|dates_intervalle{
 						#DATE_FIN,
-						#ENV{decalage_debut,0},
-						#ENV{decalage_fin,0},
+						#ENV{disponible_decalage_debut},
+						#ENV{disponible_decalage_fin},
 						#ENV{horaire},#ENV{format}
 					}
 				}
