@@ -1,0 +1,21 @@
+[(#ENV{adjust}|=={oui}|oui)
+<div class='nettoyeur'></div>
+<a href='[(#SELF|parametre_url{adjust,non})]' class='ajax bouton_fermer'>[(#CHEMIN_IMAGE{fermer-16.png}|balise_img)]</a>
+<div class="ajax">
+	<input name="adjust_source" id="adjust_source" value="" placeholder="document 1 id"><br>
+	<br><input name="adjust_ref" id="adjust_ref" value="" placeholder="document 2 id"><br>
+	<br><button class="submit" onclick="go_to_adjust();"><:image_split:ajuster:></button>
+</div>
+<script>
+function go_to_adjust(){
+	var adjust_source = document.getElementById("adjust_source").value;
+	var adjust_ref = document.getElementById("adjust_ref").value;
+	window.location.href='/ecrire/?exec=adjust&id_objet=[(#ID_OBJET)]&objet=[(#OBJET)]&id1='+adjust_source+'&id2='+adjust_ref;
+}	
+</script>
+<div class='nettoyeur'></div>
+]
+[(#ENV{adjust}|=={oui}|non)
+[(#SELF|parametre_url{adjust,oui}|icone{
+	<:image_split:ajuster_split:>,adjust-24.png,#LANG_RIGHT,'',ajax})]
+]

@@ -1,0 +1,64 @@
+<form method="post" enctype="multipart/form-data" action="#ENV{action}">
+
+#ACTION_FORMULAIRE{#ENV{action}}
+
+		<br><br>
+    <:image_split:settings_explanation:>
+    <br><br><hr>
+    <strong><:image_split:orientation:></strong>
+    <br><br>
+    <:image_split:orientation_explanation:>
+    <br><br>
+    <input type="radio" name="orientation" value="horizontal" [(#ENV{deferred}|!={vertical} ? {'checked', ''})]> <:image_split:horizontal:><br>
+    <input type="radio" name="orientation" value="vertical" [(#ENV{deferred}|=={vertical} ? {'checked', ''})]> <:image_split:vertical:><br>
+    <hr>
+    <strong><:image_split:offset:></strong>
+    <br><br>
+    <:image_split:offset_explanation:>
+    <br><br>
+    <label style="width:80px;display:block;float:left;"><:image_split:offset_label:></label>
+    <select name="default_offset_pct">
+    	<option value="0" [(#ENV{default_offset_pct}|=={0}|?{selected})]>0</option>
+    	<option value="0.1" [(#ENV{default_offset_pct}|=={0.1}|?{selected})]>0.1</option>
+    	<option value="0.2" [(#ENV{default_offset_pct}|=={0.2}|?{selected})]>0.2</option>
+    	<option value="0.3" [(#ENV{default_offset_pct}|=={0.3}|?{selected})]>0.3</option>
+    	<option value="0.4" [(#ENV{default_offset_pct}|=={0.4}|?{selected})]>0.4</option>
+    	<option value="0.5" [(#ENV{default_offset_pct}|=={0.5}|?{selected})][(#ENV{default_offset_pct}|non|?{selected})]>0.5</option>
+    	<option value="0.6" [(#ENV{default_offset_pct}|=={0.6}|?{selected})]>0.6</option>	
+    	<option value="0.7" [(#ENV{default_offset_pct}|=={0.7}|?{selected})]>0.7</option>
+    	<option value="0.8" [(#ENV{default_offset_pct}|=={0.8}|?{selected})]>0.8</option>
+    	<option value="0.9" [(#ENV{default_offset_pct}|=={0.9}|?{selected})]>0.9</option>
+    	<option value="1" [(#ENV{default_offset_pct}|=={1}|?{selected})]>1</option>
+    </select>
+    <hr>
+ 		<strong><:image_split:overlay_labels:></strong>
+    <br><br>
+    <:image_split:overlay_labels_explanation:>
+    <br><br>
+    <label style="width:200px;display:block;float:left;"><:image_split:show_overlay:></label>
+    <input type="radio" name="no_overlay" value="false" [(#ENV{no_overlay}|!={true} ? {'checked', ''})]> <:image_split:oui:>
+    <input type="radio" name="no_overlay" value="true" [(#ENV{no_overlay}|=={true} ? {'checked', ''})]> <:image_split:non:><br><br>
+    <label style="width:200px;display:block;float:left;"><:image_split:before_label:></label><input type="text" name="before_label" size="15" value="[(#ENV{before_label}|sinon{Before})]"><br><br>
+    <label style="width:200px;display:block;float:left;"><:image_split:after_label:></label><input type="text" name="after_label" size="15" value="[(#ENV{after_label}|sinon{After})]"><br>
+    <hr>
+    <strong><:image_split:slider_setup:></strong>
+    <br><br>
+    <:image_split:slider_setup_explanation:>
+    <br><br>
+    <label style="width:300px;display:block;float:left;"><:image_split:move_slider_on_hover:></label>
+    <input type="radio" name="move_slider_on_hover" value="true" [(#ENV{move_slider_on_hover}|=={true} ? {'checked', ''})]> <:image_split:oui:>
+    <input type="radio" name="move_slider_on_hover" value="false" [(#ENV{move_slider_on_hover}|!={true} ? {'checked', ''})]> <:image_split:non:><br><br>
+    <label style="width:300px;display:block;float:left;"><:image_split:move_with_handle_only:></label>
+    <input type="radio" name="move_with_handle_only" value="true" [(#ENV{move_with_handle_only}|=={true} ? {'checked', ''})]> <:image_split:oui:>
+    <input type="radio" name="move_with_handle_only" value="false" [(#ENV{move_with_handle_only}|!={true} ? {'checked', ''})]> <:image_split:non:><br><br>
+    <label style="width:300px;display:block;float:left;"><:image_split:click_to_move:></label>
+    <input type="radio" name="click_to_move" value="true" [(#ENV{click_to_move}|=={true} ? {'checked', ''})]> <:image_split:oui:>
+    <input type="radio" name="click_to_move" value="false" [(#ENV{click_to_move}|!={true} ? {'checked', ''})]> <:image_split:non:><br><br>
+    <hr><br>
+
+
+<div>
+    <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+</div>
+
+</form>

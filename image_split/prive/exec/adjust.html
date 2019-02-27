@@ -1,0 +1,157 @@
+<div id="cropperpage">
+	<div class="image_split_back"><a href="/ecrire/?exec=[(#OBJET)]&id_[(#OBJET)]=[(#ID_OBJET)]"><:image_split:back:></a></div>
+	<br><:image_split:tips:>
+	<form class="adjust-form" action="/spip.php" method=POST>
+	  <input type="hidden" name="action" value="adjust">
+	  <input type="hidden" name="objet" value="[(#OBJET)]">
+	  <input type="hidden" name="id_objet" value="[(#ID_OBJET)]">
+	  <input type="hidden" name="id_document" value="[(#ENV{id1})]">
+	  <input type="hidden" name="id_document2" value="[(#ENV{id2})]">
+	  <input type="hidden" name="firstX" id="firstX" placeholder="X" value="" />
+	  <input type="hidden" name="firstY" id="firstY" placeholder="Y" value="" />
+	  <input type="hidden" name="firstWidth" id="firstWidth" placeholder="width" value="" />
+      <input type="hidden" name="firstHeight" id="firstHeight" placeholder="height" value="" />
+      <input type="hidden" name="secondX" id="secondX" placeholder="X" value="" />
+	  <input type="hidden" name="secondY" id="secondY" placeholder="Y" value="" />
+	  <input type="hidden" name="secondWidth" id="secondWidth" placeholder="width" value="" />
+	  <input type="hidden" name="secondHeight" id="secondHeight" placeholder="height" value="" />
+	  <input type="submit" value="<:image_split:crop_it:>" class="submit">
+    </form>
+    <button id="cropbutton1"><:image_split:image:> 1</button>
+    <button id="cropbutton2"><:image_split:image:> 2</button>
+	<div class="croppercontainer" id="croppercontainer">
+	    <div class="firstwrap">
+	        <BOUCLE_img1(DOCUMENTS) {id_document=#ID1}{0,1}>
+	            <img id="firstimage" src="[(#FICHIER)]">
+	        </BOUCLE_img1>
+	    </div>
+	    <div class="secondwrap">
+	        <BOUCLE_img2(DOCUMENTS) {id_document=#ID2}{0,1}>
+	            <img id="secondimage" src="[(#FICHIER)]">
+	        </BOUCLE_img2>
+	    </div>
+	</div>
+</div>
+<script>
+
+window.onload = function(){
+
+    //sets the second background image equal to the width of the first one
+    $(".firstwrap").css({
+        'min-height': ($("#secondimage").height() + 'px')
+    });
+
+    var firstimage = document.getElementById('firstimage');
+    var secondimage = document.getElementById('secondimage');
+    var secondimageWidth = secondimage.clientWidth;
+    var secondimageHeight = secondimage.clientHeight;
+    
+    var dataX = document.getElementById('dataX');
+    var dataY = document.getElementById('dataY');
+    var dataHeight = document.getElementById('dataHeight');
+    var dataWidth = document.getElementById('dataWidth');
+
+    //$('.croppercontainer').css("width", "1000px").css("height", "1000px");
+
+    var cropper = new Cropper(firstimage, {
+        ready: function(event) {
+            cropper.setCropBoxData({
+                height: secondimageHeight,
+                width: secondimageWidth
+            });
+            new ResizeObserver(boxresize).observe(cropper.cropBox);
+						$('.croppercontainer').css("width", secondimageWidth+"px").css("height", secondimageHeight+"px");
+        },
+        crop: function(event) {
+            var imageData = cropper.getData(true);
+            firstX.value = cropper.getData(true).x;
+            firstY.value = cropper.getData(true).y;
+            firstWidth.value = cropper.getData(true).width;
+            firstHeight.value = cropper.getData(true).height;
+
+        },
+        wheelZoomRatio: .02,
+        modal: false,
+        background: true,
+        dragMode: 'move',
+        autoCropArea: 1,
+        responsive: false,
+        restore: false,
+        guides: false,
+        center: false,
+        highlight: false,
+        cropBoxMovable: false,
+        cropBoxResizable: true,
+        toggleDragModeOnDblclick: false,
+    });
+    
+    var cropper2 = new Cropper(secondimage, {
+        ready: function(event) {
+            cropper2.setCropBoxData({
+                height: secondimageHeight,
+                width: secondimageWidth
+            });
+            new ResizeObserver(boxresize).observe(cropper2.cropBox);
+        },
+        crop: function(event) {
+            var imageData2 = cropper2.getData(true);
+            secondX.value = cropper2.getData(true).x;
+            secondY.value = cropper2.getData(true).y;
+            secondWidth.value = cropper2.getData(true).width;
+            secondHeight.value = cropper2.getData(true).height;
+        },
+        wheelZoomRatio: .02,
+        modal: false,
+        background: true,
+        dragMode: 'move',
+        autoCropArea: 1,
+        responsive: false,
+        restore: false,
+        guides: false,
+        center: false,
+        highlight: false,
+        cropBoxMovable: false,
+        cropBoxResizable: true,
+        toggleDragModeOnDblclick: false,
+    });
+
+    function boxresize(e){
+    	// first find out which box got resized, by identifying in which cropper we are. Use the closest() function to identify a parent element that tells which cropper it is
+        //identify cropbox using closest
+        var test = e[0].target.closest(".firstwrap");
+        if (test){
+            cropper2.setCropBoxData({
+            		left: cropper.getCropBoxData().left,
+            		top: cropper.getCropBoxData().top,
+                height: cropper.getCropBoxData().height,
+                width: cropper.getCropBoxData().width
+            });
+        }
+        else {
+            cropper.setCropBoxData({
+                left: cropper2.getCropBoxData().left,
+            		top: cropper2.getCropBoxData().top,
+                height: cropper2.getCropBoxData().height,
+                width: cropper2.getCropBoxData().width
+            });
+
+        }
+    }
+
+    //switches the z-indexes
+    function cropOne(){
+        $('.firstwrap').css('z-index', 5);
+        $('#cropbutton1').css('background-color', '#FFF');  
+        $('#cropbutton2').css('background-color', '#DDD');
+    }
+    function cropTwo(){
+        $('.firstwrap').css('z-index', 0); 
+        $('#cropbutton1').css('background-color', '#DDD');  
+        $('#cropbutton2').css('background-color', '#FFF');
+    }
+    
+    document.getElementById("cropbutton1").addEventListener("click", cropOne);
+    document.getElementById("cropbutton2").addEventListener("click", cropTwo);
+    
+};
+</script>

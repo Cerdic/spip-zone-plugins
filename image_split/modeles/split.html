@@ -1,0 +1,22 @@
+#CACHE{24*3600*365}
+[(#SET{ids,[(#IDS|explode{','})]})]
+<BOUCLE_doc_left(DOCUMENTS){id_document=#GET{ids}|table_valeur{0}}{0,1}>
+	<BOUCLE_doc_right(DOCUMENTS){id_document=#GET{ids}|table_valeur{1}}{0,1}>
+		<div id="split-[(#_doc_left:ID_DOCUMENT)]-[(#_doc_right:ID_DOCUMENT)]" class='twentytwenty-container js-twentytwenty'>
+		  <img src='[(#URL_SITE_SPIP)]/[(#_doc_left:FICHIER)]' alt='left'>
+		  <img src='[(#URL_SITE_SPIP)]/[(#_doc_right:FICHIER)]' alt='right'>
+		</div>
+		<script>
+  		$("#split-[(#_doc_left:ID_DOCUMENT)]-[(#_doc_right:ID_DOCUMENT)]").twentytwenty({
+				default_offset_pct: [(#ENV{default_offset_pct}|sinon{[(#CONFIG{image_split/default_offset_pct}|sinon{0.5})]})],
+				orientation: '[(#ENV{orientation}|sinon{[(#CONFIG{image_split/orientation}|sinon{horizontal})]})]',
+				before_label: '[(#ENV{before_label}|sinon{[(#CONFIG{image_split/before_label}|sinon{Before})]})]',
+				after_label: '[(#ENV{after_label}|sinon{[(#CONFIG{image_split/after_label}|sinon{After})]})]',
+				no_overlay: [(#ENV{no_overlay}|sinon{[(#CONFIG{image_split/no_overlay}|sinon{true})]})],
+				move_slider_on_hover: [(#ENV{move_slider_on_hover}|sinon{[(#CONFIG{image_split/move_slider_on_hover}|sinon{false})]})],
+				move_with_handle_only: [(#ENV{move_with_handle_only}|sinon{[(#CONFIG{image_split/move_with_handle_only}|sinon{false})]})],
+				click_to_move: [(#ENV{click_to_move}|sinon{[(#CONFIG{image_split/click_to_move}|sinon{false})]})]
+  		});
+  	</script>		
+	</BOUCLE_doc_right> 
+</BOUCLE_doc_left> 

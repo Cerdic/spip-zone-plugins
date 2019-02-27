@@ -1,0 +1,20 @@
+<paquet
+	prefix="image_split"
+	categorie="multimedia"
+	version="1.0.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/image_split-64.png"
+	documentation="https://contrib.spip.net/Image-Split"
+>
+	<nom>image_split</nom>
+	<auteur lien='https://zurb.com/playground/twentytwenty'>Zurb Studios</auteur>
+	<auteur>Benoit Aubert</auteur>
+	<auteur>A. Frederick Sansait</auteur>
+	<licence>MIT license</licence>
+
+	<necessite nom="medias" />
+	<pipeline nom="insert_head" inclure="image_split_pipelines.php" />
+	<pipeline nom="header_prive_css" inclure="image_split_pipelines.php" />
+	<pipeline nom="header_prive" inclure="image_split_pipelines.php" />
+</paquet>
