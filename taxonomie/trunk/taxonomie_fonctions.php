@@ -139,3 +139,32 @@ function taxon_afficher_statut($statut, $id_taxon = 0) {
 
 	return $puce;
 }
+
+
+/**
+ * Renvoie la liste des règnes effectivement chargés en base de données.
+ *
+ * @package SPIP\TAXONOMIE\REGNE
+ *
+ * @api
+ * @filtre
+ *
+ * @return array
+ *        Liste des noms scientifiques (en minuscules) des règnes chargés.
+ */
+function regne_repertorier() {
+
+	// Initialisation de la liste.
+	static $regnes = null;
+
+	if ($regnes === null) {
+		include_spip('inc/taxonomie');
+		foreach (regne_lister_defaut() as $_regne) {
+			if (regne_existe($_regne, $meta_regne)) {
+				$regnes[] = $_regne;
+			}
+		}
+	}
+
+	return $regnes;
+}

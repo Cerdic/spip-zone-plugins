@@ -39,7 +39,7 @@ function formulaires_charger_regne_charger() {
 	// Désactiver l'action vider si aucun règne n'est chargé
 	include_spip('inc/taxonomie');
 	$aucun_regne_charge = true;
-	$regnes = regne_lister();
+	$regnes = regne_lister_defaut();
 	foreach ($regnes as $_regne) {
 		$valeurs['_regnes'][$_regne] = '<span class="nom_scientifique_inline">' . $_regne . '</span>, ' . _T("taxonomie:regne_${_regne}");
 		if (regne_existe($_regne, $meta_regne)) {

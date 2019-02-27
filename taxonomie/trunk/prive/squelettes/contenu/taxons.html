@@ -12,14 +12,14 @@
 	#SET{filtres, #ARRAY{statut, prop:publie:poubelle}}
 	#SET{titre_1, taxon:info_1_espece}
 	#SET{titre_n, taxon:info_nb_especes}
-	#SET{titre_0, taxon:info_aucune_espece}
+	[(#SET{titre_0, <:taxon:info_aucune_espece:>})]
 ]
 [(#ENV{espece}|=={oui}|non)
 	#SET{nb, 100}
 	#SET{filtres, #ARRAY{edite, oui:non, importe, oui:non}}
 	#SET{titre_1, taxon:info_1_taxon}
 	#SET{titre_n, taxon:info_nb_taxons}
-	#SET{titre_0, taxon:info_aucun_taxon}
+	[(#SET{titre_0, <:taxon:info_aucun_taxon:>})]
 ]
 <INCLURE{fond=prive/squelettes/inclure/inc-taxonomie_filtres_listes,
 	filtres=#GET{filtres},

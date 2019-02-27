@@ -289,7 +289,7 @@ function autoriser_espece_creer_dist($faire, $type, $id, $qui, $opt) {
 
 	// On vérifie qu'un règne est bien déjà chargé
 	include_spip('inc/taxonomie');
-	$regnes = regne_lister();
+	$regnes = regne_lister_defaut();
 	$regne_existe = false;
 	foreach ($regnes as $_regne) {
 		if (regne_existe($_regne, $meta_regne)) {

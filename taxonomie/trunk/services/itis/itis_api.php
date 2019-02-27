@@ -894,7 +894,7 @@ function itis_review_sha() {
 	$shas = array();
 
 	include_spip('inc/taxonomie');
-	$kingdoms = regne_lister();
+	$kingdoms = regne_lister_defaut();
 
 	foreach ($kingdoms as $_kingdom) {
 		$file = find_in_path('services/itis/' . ucfirst($_kingdom) . '_Genus.txt');

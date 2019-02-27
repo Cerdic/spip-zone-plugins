@@ -6,20 +6,21 @@
 	regne,1,
 	tsn,1,
 	points,-1
-}})]<B_liste_taxons>
+}})]
+[(#ENV{espece}|=={oui}|oui)
+	[(#SET{un, #ENV*{info_1, taxon:info_1_espece}})]
+	[(#SET{nb, #ENV*{info_nb, taxon:info_nb_especes}})]
+	[(#SET{aucun, #ENV*{sinon, <:taxon:info_aucune_espece:>}})]
+]
+[(#ENV{espece}|=={oui}|non)
+	[(#SET{un, #ENV*{info_1, taxon:info_1_taxon}})]
+	[(#SET{nb, #ENV*{info_nb, taxon:info_nb_taxons}})]
+	[(#SET{aucun, #ENV*{sinon, <:taxon:info_aucun_taxon:>}})]
+]
+<B_liste_taxons>
 #ANCRE_PAGINATION
 <div class="liste-objets taxons[ (#ENV{classe})]">
 <table class="spip liste">
-	[(#ENV{espece}|=={oui}|oui)
-		[(#SET{un, #ENV*{info_1, taxon:info_1_espece}})]
-		[(#SET{nb, #ENV*{info_nb, taxon:info_nb_especes}})]
-		[(#SET{aucun, #ENV*{sinon, taxon:info_aucune_espece}})]
-	]
-	[(#ENV{espece}|=={oui}|non)
-		[(#SET{un, #ENV*{info_1, taxon:info_1_taxon}})]
-		[(#SET{nb, #ENV*{info_nb, taxon:info_nb_taxons}})]
-		[(#SET{aucun, #ENV*{sinon, taxon:info_aucun_taxon}})]
-	]
 	[<caption>
 		<strong class="caption">
 			(#ENV*{titre, #GRAND_TOTAL|singulier_ou_pluriel{#GET{un}, #GET{nb}}})
@@ -38,7 +39,15 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_taxons(TAXONS){regne?}{rang_taxon?}{espece?}{statut?}{edite?}{importe?}{where?}{recherche?}{tri #ENV{par,nom_scientifique}, #GET{defaut_tri}}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_taxons(TAXONS)
+		{regne IN #VAL|regne_repertorier}{regne?}
+		{rang_taxon?}
+		{espece?}
+		{statut?}
+		{edite?}{importe?}
+		{where?}
+		{recherche?}
+		{tri #ENV{par,nom_scientifique}, #GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="picto">[(#CHEMIN_IMAGE{taxon-16.png}|balise_img)]</td>
 			<td class="statut">[(#STATUT|taxon_afficher_statut{#ID_TAXON})]</td>

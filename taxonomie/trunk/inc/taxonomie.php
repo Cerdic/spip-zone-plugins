@@ -299,7 +299,7 @@ function regne_existe($regne, &$meta_regne) {
  * @return array
  *        Liste des noms scientifiques en minuscules des règnes supportés.
  */
-function regne_lister() {
+function regne_lister_defaut() {
 
 	return $GLOBALS['_taxonomie']['regnes'];
 }

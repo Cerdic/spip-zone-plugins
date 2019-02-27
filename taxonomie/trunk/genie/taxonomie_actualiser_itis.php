@@ -30,7 +30,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function genie_taxonomie_actualiser_itis_dist($last) {
 
 	include_spip('inc/taxonomie');
-	$regnes = regne_lister();
+	$regnes = regne_lister_defaut();
 
 	include_spip('services/itis/itis_api');
 	$shas = itis_review_sha();
