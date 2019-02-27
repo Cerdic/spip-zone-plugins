@@ -1,7 +1,7 @@
 <paquet
 	prefix="objets_disponibilites"
 	categorie="auteur"
-	version="1.1.11"
+	version="1.1.12"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/objets_disponibilites-64.png"
@@ -18,12 +18,10 @@
 
 	<traduire module="disponibilite_date" reference="fr" gestionnaire="salvatore" />
 	<traduire module="objets_disponibilites" reference="fr" gestionnaire="salvatore" />
-	<traduire module="paquet-objets_disponibilites" reference="fr" gestionnaire="salvatore" />
-
 
 	<necessite nom="saisies" compatibilite="[3.14.0;]" />
 	<necessite nom="verifier" compatibilite="[1.8.3;]" />
-	<necessite nom="dates_outils" compatibilite="[1.0.10;]" />
+	<necessite nom="dates_outils" compatibilite="[1.0.11;]" />
 
 	<pipeline nom="autoriser" inclure="objets_disponibilites_autorisations.php" />
 
