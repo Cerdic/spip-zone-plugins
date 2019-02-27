@@ -20,7 +20,6 @@
 	<traduire module="location_objets" reference="fr" gestionnaire="salvatore" />
 	<traduire module="objets_location" reference="fr" gestionnaire="salvatore" />
 	<traduire module="objets_locations_detail" reference="fr" gestionnaire="salvatore" />
-	<traduire module="paquet-location_objets" reference="fr" gestionnaire="salvatore" />
 
 
 	<necessite nom="saisies" compatibilite="[3.14.0;]" />
