@@ -75,14 +75,6 @@
 
 <!-- D -->
 <item>
-<title>Del.icio.us</title>
-<author>delicious</author>
-<link>http://delicious.com/save?url=%u&amp;title=%t&amp;notes=%d</link>
-<description>Agrégateur à la mode. Bookmarks.</description>
-<category>1</category>
-</item>
-
-<item>
 <title>Diaspora*</title>
 <author>diaspora</author>
 <link>http://sharetodiaspora.github.io/?title=%t&amp;url=%u</link>

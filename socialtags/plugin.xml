@@ -2,14 +2,14 @@
 	<nom>Social tags</nom>
 	<auteur>phil</auteur>
 	<icon>prive/themes/spip/images/socialtags-32.png</icon>
-	<version>1.1.1</version>
+	<version>1.2.0</version>
 	<etat>stable</etat>
 	<slogan>
 		<multi>[fr]Activer des boutons de partage de liens sur les r&#233;seaux sociaux.
 		[en]Activate the social link sharing network buttons.</multi>
 	</slogan>
 	<description>
-Le plugin Social Tags permet d'ajouter des ic&#244;nes de partage de liens vers les sites tels que Digg, Facebook, Delicious... En outre, si le plugin Google+1 est actif, il est possible de rajouter le bouton correspondant dans la liste des liens de Social tags. Il propose &#233;galement des noisettes param&#233;trables permettant d'afficher les badges et boites de type "J'aime" de Facebook.
+Le plugin Social Tags permet d'ajouter des ic&#244;nes de partage de liens vers les sites tels que Digg, Facebook... En outre, si le plugin Google+1 est actif, il est possible de rajouter le bouton correspondant dans la liste des liens de Social tags. Il propose &#233;galement des noisettes param&#233;trables permettant d'afficher les badges et boites de type "J'aime" de Facebook.
 	</description>
 	<lien>https://contrib.spip.net/Social-tags</lien>
 	<prefix>socialtags</prefix>

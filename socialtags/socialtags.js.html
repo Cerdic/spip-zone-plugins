@@ -1,4 +1,5 @@
 #HTTP_HEADER{Content-Type: text/javascript}
+[(#SET{popup,'onclick="if (this.href.lastIndexOf(&quot;javascript:&quot;) != 0 ) { window.open(this.href, &quot;_blank&quot;, &quot;screenX=50,left=50,screenY=50,top=50, width=550, height=450,toolbar=no, location=no,resizable=yes, scrollbars=yes&quot;);return false; }"'})]
 // socialtags.js
 
 // 'ajouter un bookmark' ne marche que sous IE
@@ -18,7 +19,7 @@
 		var title = $('title').text() ||'';
 		var description = ($('meta[name=description]').attr('content') || '').substr(0,250);
 		var cano = $('link[rel=canonical]')[0];
-		var url = cano ? cano.href : document.location.href;
+		var url = cano ? cano.href : document.location.href.split("%23")[0].split("#")[0];
 		var ul = $('<ul><\/ul>');
 		var esc = function(x){return encodeURIComponent(x).replace(/\s/g,' ');};
 		var ref = document.referrer.match(/^.*\/\/([^\/]+)\//);
@@ -32,7 +33,7 @@
 			[(#CONFIG{socialtags/ifreferer}|?{"
 			if ($.cookie('social_'+this.a)!=1) return;"})]
 
-			$('<a rel="nofollow"[ (#CONFIG{socialtags/wopen, 'non'}|=={oui}?{ onclick="window.open(this.href, &quot;_blank&quot;, &quot;screenX=50,left=50,screenY=50,top=50, width=550, height=450,toolbar=no, location=no,resizable=yes, scrollbars=yes&quot;);return false;"})]><img class="socialtags-hovers" src="'+ this.i +'" alt="'+this.a+'"\/><\/a>')
+			$('<a rel="nofollow"[ (#CONFIG{socialtags/wopen, 'non'}|=={oui}?{#GET{popup}})]><img class="socialtags-hovers" src="'+ this.i +'" alt="'+this.a+'"\/><\/a>')
 			.attr('href',
 				this.u
 				.replace(/%u/g, esc(url))
