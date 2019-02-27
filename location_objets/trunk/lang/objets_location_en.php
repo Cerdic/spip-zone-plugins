@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'champ_client_label' => 'Client:',
-	'champ_date_location_label' => 'Bookintg date:',
+	'champ_date_location_label' => 'Booking date:',
 	'champ_entite_duree_label' => 'Booking type:',
 	'champ_id_location_objet_label' => 'L\'objet loué : ',
 	'champ_jour_debut_label' => 'Start day:',
@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'retirer_tous_liens_objets_locations_locations' => 'Retirer toutes les locations',
 
 	// S
-	'sujet_une_location_sur' => 'Une location sur @nom@',
+	'sujet_une_location_sur' => 'One booking on @nom@',
 	'sujet_une_location_accepte' => 'Booking confirmed on @nom@',
 	'sujet_une_location_partiel' => 'Booking partially confirmed on  @nom@',
 	'sujet_une_location_paye' => 'Booking paid on @nom@',
@@ -67,11 +67,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_creer_associer_objets_location' => 'Créer et associer une location',
 	'texte_definir_comme_traduction_objets_location' => 'Cette location est une traduction de la location numéro :',
 	'texte_designation' => 'Designation',
-	'texte_details_location' => 'Détails de la location :',
-	'texte_enregistrement' => 'Nous avons bien enregistré votre demande de location.',
+	'texte_details_location' => 'Booking details:',
+	'texte_enregistrement' => 'We have registered your booking request.',
 	'texte_montant' => 'Amount',
 	'texte_recapitulatif' => 'Récapitulatif :',
-	'texte_remerciement' => 'Nous vous remercions.',
+	'texte_remerciement' => 'We thank you.',
 	'texte_statut' => 'Status',
 	'texte_statut_accepte' => 'Accepted',
 	'texte_statut_attente' => 'Waiting for validation',
