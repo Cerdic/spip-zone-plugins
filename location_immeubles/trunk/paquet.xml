@@ -17,7 +17,6 @@
 	<licence>GNU/GPL v3</licence>
 
 	<traduire module="location_immeubles" reference="fr" gestionnaire="salvatore" />
-	<traduire module="paquet-location_immeubles" reference="fr" gestionnaire="salvatore" />
 
 	<necessite nom="location_objets" compatibilite="[1.4.2;]" />
 	<necessite nom="objets_infos_extras" compatibilite="[1.0.4;]" />
