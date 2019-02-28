@@ -94,7 +94,7 @@ function lesscss_compile($style, $contexte = array()){
 	}
 
 	$url_absolue = (!empty($contexte['file'])?protocole_implicite(url_absolue($contexte['file'])):null);
-	if ($parser_options['sourceMap']) {
+	if (!empty($parser_options['sourceMap'])) {
 		if (!empty($contexte['dest'])) {
 			$parser_options['sourceMapWriteTo'] = $contexte['dest'] . '.map';
 			$parser_options['sourceMapURL'] = protocole_implicite(url_absolue($parser_options['sourceMapWriteTo']));
