@@ -68,7 +68,7 @@ function rang_objets_a_exclure() {
  * @param array $objets
  *     liste d'objets
  **/
-function rang_creer_champs ($objets) {
+function rang_creer_champs($objets) {
 	foreach ($objets as $key => $table) {
 		if (!empty($table)) {
 			$champs_table = sql_showtable($table);
@@ -118,7 +118,7 @@ function rang_get_sources() {
 	include_spip('inc/config');
 	// mettre en cache le tableau calculé
 	static $sources;
-	if(is_array($sources)){
+	if (is_array($sources)) {
 		return $sources;
 	}
 	
@@ -139,40 +139,43 @@ function rang_get_sources() {
 		}
 	}
 
-	// tempo : test sur des liaisons
-	$sources[] = 'prive/objets/liste/mots_lies';
-
 	return $sources;
 }
 
 /**
- * Retourne la listes des pages (exec) sur lesquelles activer Rang.
- * - Prendre la liste des objets cochés dans la configuration en considérant que le nom de l'objet et de l'exec sont identiques ;
- * - Ajouter le nom de l'objet parent si il existe ;
- * - Ajouter les cas particuliers historiques ;
- * - Enfin le pipeline rang_declarer_contexte permet d'ajouter un exec spécifique (une page de config, etc.).
+ * Retourne la liste des pages (exec) sur lesquelles activer Rang.
+ *	- Prendre la liste des objets cochés dans la configuration en considérant que le nom de l'objet et de l'exec sont identiques ;
+ *	- Ajouter le nom de l'objet parent si il existe ;
+ *	- Ajouter les cas particuliers historiques ;
+ *	- Enfin le pipeline rang_declarer_contexte permet d'ajouter un exec spécifique (une page de config, etc.).
  *
  * @return array
+ *	la liste des contextes
  */
 function rang_get_contextes() {
 	static $contextes;
-	if(is_array($contextes)){
+	if (is_array($contextes)) {
 		return $contextes;
 	}
-	include_spip('base/objets_parents');
+	
+	include_spip('inc/config');
 	$tables = lire_config('rang/objets');
 	$contextes = array();
 	
 	foreach ($tables as $table) {
 		// le nom de l'objet au pluriel
 		$contextes[] = table_objet($table);
-		// si l'objet a un parent, on ajoute le nom de cet objet
-		$info_parent = type_objet_info_parent(objet_type($table));
-		foreach ($info_parent as $objet) {
-			if (isset($objet['type']) && $objet['type']) {
-				$contextes[] = $objet['type'];
+
+		// si l’objet a un parent declare, on ajoute le nom de cet objet
+		include_spip('base/objets_parents');
+		if ($info_parent = type_objet_info_parent(objet_type($table))) {
+			foreach ($info_parent as $objet) {
+				if (isset($objet['type']) && $objet['type']) {
+					$contextes[] = $objet['type'];
+				}
 			}
 		}
+		
 		// parce que les mots ne font rien comme les autres
 		if ($table == 'spip_mots') {
 			$contextes[] = 'groupe_mots';
@@ -180,17 +183,18 @@ function rang_get_contextes() {
 	}
 	// vérifier si des plugins déclarent des contextes spécifiques
 	$contextes = pipeline('rang_declarer_contexte',$contextes);
+
 	return $contextes;
 }
 
 /**
  * Calculer le rang pour la nouvelle occurence de l’objet
+ *
  * @param string $table
  * @param int $id_objet
  * @return int
  */
  function rang_classer_dernier($table, $id_objet) {
-
  	$objet_type = objet_type($table);
  	include_spip('base/objets_parents');
 
@@ -219,4 +223,3 @@ function rang_get_contextes() {
 function rang_tester_presence_numero($table) {
 	return false;
 }
-
