@@ -16,7 +16,7 @@ include_spip('base/objets');
  * @param $id_objet
  * 		Identifiant de l'objet dont on cherche le parent
  * @return array|false
- * 	Retourne un tableau avec la clé "objet" et la clé "id_objet" décrivant le parent trouvé, ou false sinon
+ * 	Retourne un tableau décrivant le parent trouvé, ou false sinon
  * 
  */
 function objet_trouver_parent($objet, $id_objet) {
@@ -55,12 +55,15 @@ function objet_trouver_parent($objet, $id_objet) {
 					return array(
 						'objet' 	=> $parent_methode['type'],
 						'id_objet'	=> intval($ligne[$parent_methode['champ']]),
+						'champ' 	=> $parent_methode['champ'],
 					);
 				}
 				elseif (isset($parent_methode['champ_type'])) {
 					return array(
 						'objet' 	 => $ligne[$parent_methode['champ_type']],
 						'id_objet' 	 => intval($ligne[$parent_methode['champ']]),
+						'champ' 	 => $parent_methode['champ'],
+						'champ_type' => $parent_methode['champ_type'],
 					);
 				}
 			}
@@ -90,7 +93,7 @@ function objet_trouver_parent($objet, $id_objet) {
  * 		Type de l'objet dont on cherche les enfants
  * @param $id_objet
  * 		Identifiant de l'objet dont on cherche les enfants
- * @return
+ * @return array
  * 	Retourne un tableau de tableaux, avec comme clés les types des objets, et dans chacun un tableau des identifiants trouvés
  * 
  */
@@ -149,7 +152,7 @@ function objet_trouver_enfants($objet, $id_objet) {
  * 
  * @param $objet
  * 		Type de l'objet dont on cherche les informations de parent
- * @return array
+ * @return array|false
  * 		Retourne un tableau de tableau contenant les informations de type et de champ pour trouver le parent ou false sinon
  * 
  */
