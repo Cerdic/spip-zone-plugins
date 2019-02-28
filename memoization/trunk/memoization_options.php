@@ -121,25 +121,14 @@ class MCache {
 
 }
 
-
-if (!defined('_CACHE_KEY') and !isset($GLOBALS['meta']['cache_key'])){
-	include_spip("inc/securiser_action");
-	$key = pack("H*", calculer_cle_action('memoization'));
-	ecrire_meta('cache_key', $key, 'non');
-	// il faut redefinir le namespace car on introduit une cle -> invalidation des caches existants
-	if (isset($GLOBALS['meta']['cache_namespace'])) {
-		unset($GLOBALS['meta']['cache_namespace']);
+if (isset($GLOBALS['meta']['cache_namespace'])) {
+	if (!defined('_CACHE_NAMESPACE')) {
+		define('_CACHE_NAMESPACE', $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].':'.$GLOBALS['meta']['cache_namespace'].':');
+	}
+	if (isset($GLOBALS['meta']['cache_key'])) {
+		define('_CACHE_KEY', $GLOBALS['meta']['cache_key']);
 	}
 }
-if (!isset($GLOBALS['meta']['cache_namespace'])){
-	include_spip('inc/acces');
-	ecrire_meta('cache_namespace', dechex(crc32($_SERVER["DOCUMENT_ROOT"] . $_SERVER["SERVER_SIGNATURE"] . creer_uniqid())), 'non');
-}
-
-if (!defined('_CACHE_NAMESPACE'))
-	define('_CACHE_NAMESPACE', $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].':'.$GLOBALS['meta']['cache_namespace'].':');
-if (!defined('_CACHE_KEY'))
-	define('_CACHE_KEY', $GLOBALS['meta']['cache_key']);
 
 global $Memoization;
 
