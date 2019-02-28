@@ -168,8 +168,10 @@ function rang_get_contextes() {
 		$contextes[] = table_objet($table);
 		// si l'objet a un parent, on ajoute le nom de cet objet
 		$info_parent = type_objet_info_parent(objet_type($table));
-		if (isset($info_parent['type']) && $info_parent['type']) {
-			$contextes[] = $info_parent['type'];
+		foreach ($info_parent as $objet) {
+			if (isset($objet['type']) && $objet['type']) {
+				$contextes[] = $objet['type'];
+			}
 		}
 		// parce que les mots ne font rien comme les autres
 		if ($table == 'spip_mots') {
@@ -193,11 +195,15 @@ function rang_get_contextes() {
  	include_spip('base/objets_parents');
 
 	// si l'objet à un parent…
-	if ($parent = type_objet_info_parent($objet_type)) {
-		$id_table_objet = id_table_objet($table);
-		$parent_champ = $parent['champ'];
-		$id_parent = sql_getfetsel($parent_champ, $table, "$id_table_objet = $id_objet");
-		$rang = sql_getfetsel('max(rang)', $table, "$parent_champ = $id_parent");
+	if ($parent = objet_trouver_parent($objet_type, $id_objet)) {
+		if (isset($parent['champ_type'])) {
+			$where = $parent['champ'].'='.intval($parent['id_objet']) .' and '.$parent['champ_type'].'='.sql_quote($parent['objet']);
+		} else {
+			$where = $parent['champ'].'='.$parent['id_objet'];
+		}
+
+		$rang = sql_getfetsel('max(rang)', $table, $where);
+		
 	} else {
 	// si pas de parent, c'est plus simple
 		$rang = sql_getfetsel('max(rang)', $table);
