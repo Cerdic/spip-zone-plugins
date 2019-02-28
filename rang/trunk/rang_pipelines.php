@@ -113,8 +113,7 @@ function rang_pre_edition($flux) {
 
 	if (isset($rang_max) && !empty($rang_max) && $flux['args']['action'] == 'instituer') {
 
-		$rang_objets  = rtrim(lire_config('rang/rang_objets'), ',');
-		$liste_objets = explode(',', $rang_objets);
+		$liste_objets = lire_config('rang/objets');
 		$table        = $flux['args']['table'];
 
 		if (in_array($table, $liste_objets)) {
