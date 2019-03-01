@@ -24,7 +24,7 @@ function verifier_dates_diponibles_dist($valeur, $options=array()){
 			'disponible_decalage_fin' => -1,
 			'utilise_decalage_debut' => 1,
 			'utilise_decalage_fin' => 1,
-			'utilisation_squelette' => 'disponibilites/utilisees_' . $objet,
+			'utilisation_objet' => '',
 
 		];
 
@@ -33,7 +33,8 @@ function verifier_dates_diponibles_dist($valeur, $options=array()){
 			$valeurs[$variable] = isset($options[$variable]) ? $options[$variable] : $valeur_defaut;
 		}
 
-		$intervalle = dates_intervalle($date_debut, $date_fin, 0, -1, $horaire, $format);
+		$intervalle = dates_intervalle($date_debut, $date_fin, 1, 0, $horaire, $format);
+
 
 		$disponible = dates_disponibles(array_merge(
 					$valeurs,
@@ -43,9 +44,11 @@ function verifier_dates_diponibles_dist($valeur, $options=array()){
 						'date_limite_debut' => $date_debut,
 						'date_limite_fin' => $date_fin,
 						'format' => $format,
+						'verifier' => TRUE,
 					]
 				)
 			);
+
 
 		$difference = array_diff($intervalle, $disponible);
 

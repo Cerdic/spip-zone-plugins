@@ -6,24 +6,31 @@
 	Parametres :
 		- date_limite_debut : a partir de quand les dates sont affichées.
 		- date_limite_fin : limite de dates à afficher
-		- utilisation_squelette : le squelette qui calcule les dates disponibles
-		- utilisation_id_exclu: identifiant à exlusre dans le calcul des disponibilités,
-			typiquement celui de l'objet su le quel se calcul les dsiponibilitées
+		- objet : l'objet poir lequel on veit calculer les disponibilités
+		- id_objet : l'identifiant de l'objet poir lequel on veit calculer les disponibilités
+		-	indisponible_decalage_debut : calcul des indisponibles, le nombre de jour à ajouter au début
+		indisponible_decalage_fin : calcul des indisponibles, le nombre de jour à ajouter à la fin
+		disponible_decalage_debut : calcul des disponibles, le nombre de jour à ajouter au début
+		disponible_decalage_fin : calcul des disponibles, le nombre de jour à ajouter à la fin
+		utilise_decalage_debut : calcul des utilisés, le nombre de jour à ajouter au début
+		utilise_decalage_fin : calcul des utilisés, le nombre de jour à ajouter à la fin
+		utilisation_objet : l'objet à utiliser pour le calcul des dates utilisées,
 
 
 	Exemple d'appel :
-	[(#INCLURE{
-		incluredates_disponibles,
-		nom=date_fin,
-		label=<:dates_outils:champ_date_fin_label:>,
+	[(#SAISIE{dates_disponibles, date_debut,	obligatoire=oui,
+		label=<:dates_outils:champ_date_debut_label:>,
 		objet=[(#ENV{location_objet}|objet_type)],
+		date_limite_debut=#ENV{date_limite_debut,#DATE},
+		date_limite_fin=#ENV{date_limite_fin,#DATE},
 		id_objet=#ENV{id_location_objet},
-		decalage_debut=#ENV{decalage_debut},
-		decalage_fin=#ENV{decalage_fin,1},
-		date_limite_debut=#ENV{date_limite_debut},
-		defaut=#ENV{date_debut},
-		utilisation_squelette=disponibilites/utilisees_objet_location.html,
-		utilisation_id_exclu=#ENV{id_objets_location}
+		indisponible_decalage_debut=#ENV{indisponible_decalage_debut},
+		indisponible_decalage_fin=#ENV{indisponible_decalage_fin},
+		disponible_decalage_debut=#ENV{disponible_decalage_debut},
+		disponible_decalage_fin=#ENV{disponible_decalage_fin},
+		utilise_decalage_debut=#ENV{utilise_decalage_debut},
+		utilise_decalage_fin=#ENV{utilise_decalage_fin},
+		utilisation_objet=#ENV{utilisation_objet},
 	})]
 ]
 #SET{valeur,''}
