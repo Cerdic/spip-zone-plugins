@@ -36,17 +36,21 @@ function dates_disponibles($options, $contexte = array()) {
 		$contexte = unserialize($contexte);
 	}
 	$contexte = array_merge($contexte, $options);
+
 	/*
 	 * Les indisponibles
 	 */
 	// Les dates considérés comme utilisées
-	if (isset($contexte['utilisation_squelette']) and
-		$chemin = $contexte['utilisation_squelette'] and
-		find_in_path($chemin . '.html')) {
-		$dates_utilisees = unserialize(recuperer_fond($chemin, $contexte));
-	}
-	else {
-		$dates_utilisees = array();
+	$dates_utilisees = [];
+	if (isset($contexte['utilisation_objet'])) {
+		$utilisation_objet = $contexte['utilisation_objet'];
+		if ($fonction = charger_fonction($utilisation_objet . '_utilise', 'disponibilites', TRUE)) {
+			$dates_utilisees = $fonction($contexte);;
+		}
+		else {
+			$fonction = charger_fonction('objet_utilise', 'disponibilites');
+			$dates_utilisees = $fonction($utilisation_objet, $contexte);
+		}
 	}
 
 	// Les dates de l'objet encodés comme indisponibles
