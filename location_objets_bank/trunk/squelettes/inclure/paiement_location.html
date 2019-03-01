@@ -6,12 +6,13 @@
 		#SET{total,#GET{total}|moins{#MONTANT_PAYE}}
 		#SET{prix_ht,#GET{total}}
 	]
-
+#SET{titre, #VAL{location_objets_bank:titre_choix_paiement_securise}|_T}
 	#SET{options,#ARRAY{
 			montant_ht,#GET{prix_ht},
 			id_auteur,#ID_AUTEUR,
 			id_objets_location,#ID_OBJETS_LOCATION,
 			tracking_id,#REFERENCE,
+			titre,#GET{titre},
 			champs,#ARRAY{
 				id_objets_location,#ID_OBJETS_LOCATION
 			},
@@ -25,7 +26,7 @@
 			args,#ARRAY{
 				id_objets_location,#ID_OBJETS_LOCATION,
 				tableau, #ENV{tableau},
-				montant_paye,#GET{montant_paye}
+				montant_paye,#GET{montant_paye},
 			},
 			data,#ARRAY{
 							montant, #GET{total},

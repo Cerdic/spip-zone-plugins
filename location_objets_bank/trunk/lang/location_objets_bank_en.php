@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_partiel' => 'Partially paid',
 	'texte_statut_paye' => 'Paid',
 	'titre_choix_paiement' => 'Payment method selection:',
+	'titre_choix_paiement_securise' => 'I choose my secure payment method:',
 	'titre_paiement' => 'Payment',
 	'titre_paiement_location' => 'Payment of the booking',
 	'titre_paiement_vendeur' => 'Payment:',
