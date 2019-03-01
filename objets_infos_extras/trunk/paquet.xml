@@ -18,7 +18,6 @@
 
 	<traduire module="objets_information" reference="fr" gestionnaire="salvatore" />
 	<traduire module="objets_infos_extras" reference="fr" gestionnaire="salvatore" />
-	<traduire module="paquet-objets_infos_extras" reference="fr" gestionnaire="salvatore" />
 
 	<necessite nom="saisies" compatibilite="[3.14.0;]" />
 
