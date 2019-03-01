@@ -46,7 +46,7 @@
 		<tr>
 			<td>#GET{reference}</td>
 			<td>#TITRE</td>
-			<td>[(#VAL{objets_location:texte_statut[_(#STATUT|trim)]}|_T)]</td>
+			<td>[(#VAL{objets_location}|ol_statut_titre{#STATUT})]</td>
 			<td>#DATE</td>
 			<td>#INFO_NOM{auteur,#GET{id_auteur}}</td>
 			<td>#INFO_EMAIL{auteur,#GET{id_auteur}}</td>

@@ -9,7 +9,7 @@
 	disponible_decalage_fin=#ENV{disponible_decalage_fin},
 	utilise_decalage_debut=#ENV{utilise_decalage_debut},
 	utilise_decalage_fin=#ENV{utilise_decalage_fin},
-	utilisation_squelette=disponibilites/utilisees_objet_location,
+	utilisation_objet=#ENV{utilisation_objet},
 	date_limite_debut=#ENV{date_limite_debut,#DATE},
 	date_limite_fin=#ENV{date_limite_fin,#DATE},
 })]
@@ -34,8 +34,7 @@
 	date_limite_debut=[(#GET{date_limite_debut_defaut})],
 	date_limite_fin=#ENV{date_limite_fin,#DATE},
 	defaut=#ENV{date_fin,#GET{date_defaut}},
-	utilisation_squelette=disponibilites/utilisees_objet_location,
-	utilisation_id_exclu=#ENV{id_objets_location}
+	utilisation_objet=#ENV{utilisation_objet},
 })]
 
 

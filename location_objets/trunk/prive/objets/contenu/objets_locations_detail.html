@@ -33,7 +33,7 @@
 
 [<div class="champ contenu_prix_unitaire_ht[ (#PRIX_UNITAIRE_HT*|strlen|?{'',vide})]">
 	<label><:objets_locations_detail:champ_prix_unitaire_ht_label:> </label>
-	<span dir="#LANG_DIR" class="prix_unitaire_ht">(#PRIX_UNITAIRE_HT)</span>
+	<span dir="#LANG_DIR" class="prix_unitaire_ht">(#PRIX_UNITAIRE_HT|appliquer_filtre{prix_formater})</span>
 </div>]
 
 [<div class="champ contenu_prix[ (#PRIX*|strlen|?{'',vide})]">

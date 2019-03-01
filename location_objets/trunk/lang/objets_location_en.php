@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_access_formulaire' => 'Formulaire inaccesible pour des raisons techniques!',
 	'erreur_date_fin_anterieur_date_debut' => 'The end date must be after the start date',
-	'erreur_jours_indisponible' => 'Please choose another end date because the following dates @date@ are not available',
+	'erreur_jours_indisponible' => 'Please choose another end date because the following dates @jours@ are not available',
 	'explication_entite_duree' => 'Définit comment les périodes de location seront affichées.',
 	'explication_login' => '@lien@ if you are already registered on this site.',
 

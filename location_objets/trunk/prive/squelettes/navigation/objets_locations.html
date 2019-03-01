@@ -64,12 +64,11 @@
 <strong><:ecrire:info_par_statut:></strong>
 
 <ul>
-<BOUCLE_statuts(OBJETS_LOCATIONS_DETAILS){objet?}{fusion statut}>
+<BOUCLE_statuts(OBJETS_LOCATIONS_DETAILS){objet?}{fusion statut}{tout}>
 	#SET{args,
 		#ARRAY{
 			objet,#ENV{objet},
 			statut,#STATUT,
-			statut2,#GET{statuts}|implode{-}
 		}
 	}
 	<li>[(#GET{compteur}|table_valeur{#STATUT}) ][(#GET{noms_statuts}|table_valeur{#STATUT}|_T)]
