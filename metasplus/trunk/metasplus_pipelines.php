@@ -89,10 +89,13 @@ function metasplus_affichage_final($flux) {
  **/
 function metasplus_post_edition($flux){
 	if (
-		$flux['args']['table'] === 'spip_documents' and
-		$flux['args']['operation'] === 'supprimer_document' and
-		$flux['args']['action'] === 'supprimer_document' and
-		$flux['args']['id_objet'] == lire_config('metasplus/id_doc_logo')
+		$flux['args']['table'] === 'spip_documents'
+		and isset($flux['args']['operation'])
+		and $flux['args']['operation'] === 'supprimer_document'
+		and isset($flux['args']['action'])
+		and $flux['args']['action'] === 'supprimer_document'
+		and include_spip('inc/config')
+		and $flux['args']['id_objet'] == lire_config('metasplus/id_doc_logo')
 	) {
 		effacer_config('metasplus/id_doc_logo');
 	}
