@@ -50,20 +50,6 @@ function balise_RANG_LISTE_OBJETS($p) {
 }
 
 /**
- * Retourne la listes des objets (nom au pluriel) cochés dans la configuration.
- * 
- * @return array
- */
-function rang_liste_objets() {
-	$tables = lire_config('rang/objets');
-	$objets = array();
-	foreach ($tables as $table) {
-		$objets[] = table_objet($table);
-	}
-	return $objets;
-}
-
-/**
  * Détecte si l'objet a été selectionné dans la configuration du plugin
  *
  * @deprecated dépréciée depuis la version 0.8, utiliser à la place la balise #RANG_LISTE_OBJETS

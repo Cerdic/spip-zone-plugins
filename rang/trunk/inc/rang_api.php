@@ -14,6 +14,23 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
+ * Retourne la listes des objets (nom au pluriel) cochés dans la configuration.
+ * 
+ * @return array
+ */
+function rang_liste_objets() {
+	include_spip('inc/config');
+	$objets = array();
+
+	if ($tables = lire_config('rang/objets')) {
+		foreach ($tables as $table) {
+			$objets[] = table_objet($table);
+		}
+	}	
+	return $objets;
+}
+
+/**
  * Remplir ou ressortir les tables ayant déjà un rang
  * 
  * Au premier appel on fournit la liste complète de toutes les tables d'objets, pour faire la recherche.
@@ -115,7 +132,6 @@ function rang_creer_champs($objets) {
  *     les chemins sources vers les listes où activer Rang
  **/
 function rang_get_sources() {
-	include_spip('inc/config');
 	// mettre en cache le tableau calculé
 	static $sources;
 	if (is_array($sources)) {
@@ -123,11 +139,10 @@ function rang_get_sources() {
 	}
 	
 	$sources = array();
-	$objets = lire_config('rang/objets');
+	$objets = rang_liste_objets();
 
-	foreach ($objets as $value) {
-		$objet = table_objet($value);
-		if (!empty($value)) {
+	foreach ($objets as $objet) {
+		if (!empty($objet)) {
 			$source = 'prive/objets/liste/'.$objet;
 			$sources[] = $source;
 		}
@@ -158,29 +173,30 @@ function rang_get_contextes() {
 		return $contextes;
 	}
 	
-	include_spip('inc/config');
-	$tables = lire_config('rang/objets');
 	$contextes = array();
+
+	$objets = rang_liste_objets();
 	
-	foreach ($tables as $table) {
+	foreach ($objets as $objet) {
 		// le nom de l'objet au pluriel
-		$contextes[] = table_objet($table);
+		$contextes[] = $objet;
 
 		// si l’objet a un parent declare, on ajoute le nom de cet objet
 		include_spip('base/objets_parents');
-		if ($info_parent = type_objet_info_parent(objet_type($table))) {
+		if ($info_parent = type_objet_info_parent(objet_type($objet))) {
 			foreach ($info_parent as $objet) {
 				if (isset($objet['type']) && $objet['type']) {
 					$contextes[] = $objet['type'];
 				}
 			}
 		}
-		
+
 		// parce que les mots ne font rien comme les autres
-		if ($table == 'spip_mots') {
+		if ($objet == 'spip_mots') {
 			$contextes[] = 'groupe_mots';
 		}
 	}
+
 	// vérifier si des plugins déclarent des contextes spécifiques
 	$contextes = pipeline('rang_declarer_contexte',$contextes);
 
