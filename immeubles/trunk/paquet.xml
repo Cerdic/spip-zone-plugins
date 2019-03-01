@@ -18,7 +18,6 @@
 
 	<traduire module="immeuble" reference="fr" gestionnaire="salvatore" />
 	<traduire module="immeubles" reference="fr" gestionnaire="salvatore" />
-	<traduire module="paquet-immeubles" reference="fr" gestionnaire="salvatore" />
 
 	<necessite nom="saisies" compatibilite="[3.14.0;]" />
 
