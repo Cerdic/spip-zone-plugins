@@ -22,7 +22,6 @@
 
 	<traduire module="espace" reference="fr" gestionnaire="salvatore" />
 	<traduire module="espaces" reference="fr" gestionnaire="salvatore" />
-	<traduire module="paquet-espaces" reference="fr" gestionnaire="salvatore" />
 
 	<necessite nom="saisies" compatibilite="[3.14.0;]" />
 
