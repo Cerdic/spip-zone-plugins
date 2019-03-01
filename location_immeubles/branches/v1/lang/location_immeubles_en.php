@@ -8,8 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'champ_personnes_label' => 'Personnes :',
+	'champ_personnes_label' => 'Persons:',
 
 	// L
-	'location_immeubles_titre' => 'Location d\'immeubles',
+	'location_immeubles_titre' => 'Buidling bookings',
 );
