@@ -237,11 +237,12 @@ function formulaires_editer_objets_location_charger_dist(
 		'disponible_decalage_fin' => -1,
 		'utilise_decalage_debut' => 1,
 		'utilise_decalage_fin' => -1,
-		'utilisation_squelette' => 'disponibilites/utilisees_objet_location',
+		'utilisation_objet' => 'objets_locations_detail',
 	];
 	foreach ($valeurs_defaut AS $variable => $valeur) {
 		if (!isset($valeurs[$variable]) OR (isset($valeurs[$variable]) AND empty($valeurs[$variable])) ) {
 			$valeurs[$variable] = $valeur;
+			$valeurs['_hidden'] .= '<input type="hidden" name="' . $variable . '" value="' . $valeur . '"/>';
 		}
 	}
 

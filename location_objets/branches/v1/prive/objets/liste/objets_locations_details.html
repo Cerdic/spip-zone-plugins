@@ -1,6 +1,6 @@
 [(#SET{defaut_tri,#ARRAY{
 	titre,1,
-	date_debut,-1,
+	date_debut,1,
 	date_fin,-1,
 	id_objets_locations_detail,1,
 	points,-1
@@ -23,7 +23,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_objets_locations_details(OBJETS_LOCATIONS_DETAILS){id_objets_location?}{objet?}{id_objet?}{id_mot?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_objets_locations_details(OBJETS_LOCATIONS_DETAILS){id_objets_location?}{objet?}{id_objet?}{id_mot?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{!par date_debut}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="picto">[(#CHEMIN_IMAGE{objets_locations_detail-16.png}|balise_img)]</td>
 			<td class="statut">[(#STATUT|puce_statut{objets_locations_detail,#ID_OBJETS_LOCATIONS_DETAIL})]</td>

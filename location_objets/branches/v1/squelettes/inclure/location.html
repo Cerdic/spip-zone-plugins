@@ -56,7 +56,7 @@
 					<td class="date debut">[(#VALEUR{date_debut}|affdate_jourcourt)]</td>
 					<td class="date fin">[(#VALEUR{date_fin}|affdate_jourcourt)]</td>
 					[(#GET{total}|floatval|>{0.00}|oui)
-					<td class="montant">[(#VALEUR{prix}|appliquer_filtre{prix_formater,[(#VALEUR{prix})]})]</td>
+					<td class="montant">[(#VALEUR{prix}|appliquer_filtre{prix_formater})]</td>
 					]
 					<td class="statut">
 						[(#VAL{objets_location}|ol_statut_titre{#VALEUR{statut}})]
