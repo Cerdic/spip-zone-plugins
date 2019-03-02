@@ -24,8 +24,10 @@ function verifier_dates_diponibles_dist($valeur, $options=array()){
 			'disponible_decalage_fin' => -1,
 			'utilise_decalage_debut' => 1,
 			'utilise_decalage_fin' => 1,
-			'utilisation_objet' => '',
-
+			'utilise_objet' => '',
+			'utilise_statuts' => '',
+			'utilise_where' => '',
+			'utilise_select' => '',
 		];
 
 		$valeurs = [];
