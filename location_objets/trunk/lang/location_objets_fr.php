@@ -21,9 +21,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_date_paiement' => 'Date de paiement :',
-	'label_enregistrement_inscrit' => 'Permettre au visiteur de s’enregistrer lors d’une réservation :',
-	'label_enregistrement_inscrit_obligatoire' => 'Rendre l’enregistrement obligatoire :',
-	'label_enregistrer' => 'Je veux m’enregistrer sur ce site :',
 	'label_statut' => 'Statut :',
 	'label_statut_defaut' => 'Statut par défaut :',
 	'label_statut_loue' => 'Statut loué :',
