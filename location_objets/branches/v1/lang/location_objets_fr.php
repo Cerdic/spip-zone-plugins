@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/location_objets/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -8,14 +8,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'champ_location_extras_objets_label' => 'Activer les objets à utiliser comme service extra :',
-	'cfg_titre_parametrages' => 'Paramètres',
 	'cfg_titre_formulaire' => 'Formulaire',
+	'cfg_titre_parametrages' => 'Paramètres',
+	'champ_location_extras_objets_label' => 'Activer les objets à utiliser comme service extra :',
+
+	// E
+	'explication_statut_loue' => 'Le statut de la location qui détermine si un objet est loué.',
 
 	// I
 	'info_1_objet_loue' => 'Un objet loué',
 	'info_nb_objets_loues' => '@nb@ objets loués.',
-
 
 	// L
 	'label_date_paiement' => 'Date de paiement :',
@@ -24,11 +26,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_enregistrer' => 'Je veux m’enregistrer sur ce site :',
 	'label_statut' => 'Statut :',
 	'label_statut_defaut' => 'Statut par défaut :',
+	'label_statut_loue' => 'Statut loué :',
 	'label_statuts_complet' => 'Le(s) Statut(s) complet(s) :',
 	'location_extras_objets_explication' => 'Ces services seront inclus au formulaire de location, et pourront être sélectionné séparément.',
-	'location_objets_titre' => 'Location d\'objets',
+	'location_objets_titre' => 'Location d’objets',
 
-	// n
+	// N
 	'notifications_activer_explication' => 'Envoyer par mail des notifications de location ?',
 	'notifications_activer_label' => 'Activer',
 	'notifications_cfg_titre' => 'Notifications',
@@ -59,6 +62,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_vendeur_webmaster_label' => 'Choisir un ou plusieurs webmestres :',
 
 	// T
-	'titre_page_configurer_location_objets' => 'Location d\'objets',
-	'titre_tous' => 'Tous',
+	'titre_page_configurer_location_objets' => 'Location d’objets',
+	'titre_tous' => 'Tous'
 );
