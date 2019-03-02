@@ -1,10 +1,11 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de https://trad.spip.net/tradlang_module/objets_location?lang_cible=en
+// ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
-
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -15,17 +16,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_client_label' => 'Client:',
 	'champ_date_location_label' => 'Booking date:',
 	'champ_entite_duree_label' => 'Booking type:',
-	'champ_id_location_objet_label' => 'L\'objet loué : ',
+	'champ_id_location_objet_label' => 'L’objet loué : ',
 	'champ_jour_debut_label' => 'Start day:',
 	'champ_jour_fin_label' => 'End day:',
 	'champ_lang_label' => 'Language:',
-	'champ_location_objet_label' => 'Type d\'objet à louer :',
+	'champ_location_objet_label' => 'Type d’objet à louer :',
 	'champ_periode_label' => 'Periode:',
 	'champ_reference_label' => 'Reference:',
 	'champ_statut_label' => 'Status:',
 	'champ_type_label' => 'Type:',
-	'connectez_vous' => 'Log in',
 	'confirmer_supprimer_objets_location' => 'Confirmez-vous la suppression de cette location ?',
+	'connectez_vous' => 'Log in',
 
 	// E
 	'erreur_access_formulaire' => 'Formulaire inaccesible pour des raisons techniques!',
@@ -50,10 +51,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'retirer_tous_liens_objets_locations_locations' => 'Retirer toutes les locations',
 
 	// S
-	'sujet_une_location_sur' => 'One booking on @nom@',
 	'sujet_une_location_accepte' => 'Booking confirmed on @nom@',
 	'sujet_une_location_partiel' => 'Booking partially confirmed on  @nom@',
 	'sujet_une_location_paye' => 'Booking paid on @nom@',
+	'sujet_une_location_sur' => 'One booking on @nom@',
 	'sujet_votre_location_accepte' => '@nom@ : confirmation of your booking',
 	'sujet_votre_location_partiel' => '@nom@ : partial confirmation of your booking',
 	'sujet_votre_location_paye' => '@nom@ : confirmation of your booking',
@@ -62,8 +63,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_ajouter_objets_location' => 'Ajouter une location',
-	'texte_cordialement' => 'Sincerely',
 	'texte_changer_statut_objets_location' => 'Cette location est :',
+	'texte_cordialement' => 'Sincerely',
 	'texte_creer_associer_objets_location' => 'Créer et associer une location',
 	'texte_definir_comme_traduction_objets_location' => 'Cette location est une traduction de la location numéro :',
 	'texte_designation' => 'Designation',
@@ -83,6 +84,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_objets_lies_objets_location' => 'Liés à cette location',
 	'titre_objets_location' => 'Booking',
 	'titre_objets_locations' => 'Bookings',
-	'titre_objets_locations_rubrique' => 'Locations de la rubrique',
-
+	'titre_objets_locations_rubrique' => 'Locations de la rubrique'
 );
