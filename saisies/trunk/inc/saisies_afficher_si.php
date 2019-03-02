@@ -321,9 +321,9 @@ function saisies_transformer_condition_afficher_si($condition, $env = null) {
 		. "(?:@(?<champ>.+?)@)" // @champ_@
 		. "(" // partie operateur + valeur (optionnelle) : debut
 		. "(?:\s*?)" // espaces éventuels après
-		. "(?<operateur>==|!=|IN|!IN)" // opérateur
+		. "(?<operateur>==|!=|IN|!IN|>=|>|<=|<)" // opérateur
 		. "(?:\s*?)" // espaces éventuels après
-		. "(?<guillemet>\"|')(?<valeur>.*?)(\k<guillemet>)" // valeur
+		. "((?<guillemet>\"|')(?<valeur>.*?)(\k<guillemet>)|(?<valeur_numerique>\d+))" // valeur (string) ou valeur_numérique (int)
 		. ")?"; // partie operateur + valeur (optionnelle) : fin
 	$regexp = "#$regexp#";
 	if (preg_match_all($regexp, $condition, $tests, PREG_SET_ORDER)) {
@@ -331,7 +331,15 @@ function saisies_transformer_condition_afficher_si($condition, $env = null) {
 			$expression = $test[0];
 			$champ = saisies_afficher_si_get_valeur_champ($test['champ'], $env);
 			$operateur = isset($test['operateur']) ? $test['operateur'] : null;
-			$valeur = isset($test['valeur']) ? $test['valeur'] : null;
+
+			if (isset($test['valeur_numerique'])) {
+				$valeur = intval($test['valeur_numerique']);
+			} elseif (isset($test['valeur'])) {
+				$valeur = $test['valeur'];
+			} else {
+				$valeur = null;
+			}
+
 			$test_modifie = saisies_tester_condition_afficher_si($champ, $operateur, $valeur) ? 'true' : 'false';
 			if (isset($test['negation'])) {
 				$test_modifie = $test['negation'].$test_modifie;
@@ -361,7 +369,6 @@ function saisies_tester_condition_afficher_si($champ, $operateur=null, $valeur=n
 	if ($operateur === null and $valeur === null) {
 		return isset($champ) and $champ;
 	}
-
 	// Dans tous les cas, enlever les guillemets qui sont au sein de valeur
 	//Si champ est de type string, tenter d'unserializer
 	$tenter_unserialize = @unserialize($champ);
@@ -391,6 +398,14 @@ function saisies_tester_condition_afficher_si_string($champ, $operateur, $valeur
 		return $champ == $valeur;
 	} elseif ($operateur == "!=") {
 		return $champ != $valeur;
+	} elseif ($operateur == '<') {
+		return $champ < $valeur;
+	} elseif ($operateur == '<=') {
+		return $champ <= $valeur;
+	} elseif ($operateur == '>') {
+		return $champ > $valeur;
+	} elseif ($operateur == '>=') {
+		return $champ >= $valeur;
 	} else {//Si mauvaise operateur -> on annule
 		return false;
 	}

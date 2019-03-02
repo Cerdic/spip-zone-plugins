@@ -30,7 +30,7 @@
 	set_request("d", "d");
 	set_request("tableau_1", array("a", "b", "c"));
 	set_request("tableau_2", array("e", "f", "g"));
-
+	set_request("nombre", "20");
 	//
 	// hop ! on y va
 	//
@@ -112,6 +112,38 @@
 			'champ_uniquement_negation_faux' => array(
 				0 => false,
 				1 => "!@case_1@"
+			),
+			'nombre_superieur_vrai' => array(
+				0 => true,
+				1 => "@nombre@ > 10"
+			),
+			'nombre_superieur_faux' => array(
+				0 => false,
+				1 => "@nombre@ > 100"
+			),
+			'nombre_superieur_egal_vrai' => array(
+				0 => true,
+				1 => "@nombre@ >= 20"
+			),
+			'nombre_superieur_egal_faux' => array(
+				0 => false,
+				1 => "@nombre@ >= 100"
+			),
+			'nombre_inferieur_vrai' => array(
+				0 => true,
+				1 => "@nombre@ < 100"
+			),
+			'nombre_inferieur_faux' => array(
+				0 => false,
+				1 => "@nombre@ < 10"
+			),
+			'nombre_inferieur_egal_vrai' => array(
+				0 => true,
+				1 => "@nombre@ <= 20"
+			),
+			'nombre_inferieur_egal_faux' => array(
+				0 => false,
+				1 => "@nombre@ <= 10"
 			)
 		);
 		return $essais;
