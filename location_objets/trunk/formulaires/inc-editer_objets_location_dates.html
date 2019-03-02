@@ -9,9 +9,10 @@
 	disponible_decalage_fin=#ENV{disponible_decalage_fin},
 	utilise_decalage_debut=#ENV{utilise_decalage_debut},
 	utilise_decalage_fin=#ENV{utilise_decalage_fin},
-	utilisation_objet=#ENV{utilisation_objet},
+	utilise_objet=#ENV{utilise_objet},
 	date_limite_debut=#ENV{date_limite_debut,#DATE},
 	date_limite_fin=#ENV{date_limite_fin,#DATE},
+	utilise_statuts=#ENV{utilise_statuts},
 })]
 #SET{date_defaut,''}
 #SET{date_limite_debut_defaut,#DATE}
@@ -34,7 +35,8 @@
 	date_limite_debut=[(#GET{date_limite_debut_defaut})],
 	date_limite_fin=#ENV{date_limite_fin,#DATE},
 	defaut=#ENV{date_fin,#GET{date_defaut}},
-	utilisation_objet=#ENV{utilisation_objet},
+	utilise_objet=#ENV{utilise_objet},
+	utilise_statuts=#ENV{utilise_statuts},
 })]
 
 
@@ -50,7 +52,7 @@
 			Object.keys(champs).forEach(function(k, i) {
 				var pair = champs[k].split('=');
 				if (typeof pair[1] !== 'undefined' && pair[1].length > 0) {
-					args[pair[0]] = pair[1].replace(/%2F/g, '/');
+					args[pair[0]] = pair[1].replace(/%2F/g, '/').replace(/%2C/g, ',');
 				}
 			});
 

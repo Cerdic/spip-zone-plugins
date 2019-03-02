@@ -134,7 +134,8 @@ function formulaires_editer_objets_location_charger_dist(
 		);
 	}
 	$id_auteur = session_get('id_auteur');
-	$config = lire_config('location_objets');
+	$config = lire_config('location_objets', []);
+	$statut_loue = isset($config['statut_loue']) ? $config['statut_loue'] : '';
 
 	if (empty($valeurs['entite_duree'])) {
 		$valeurs['entite_duree'] = isset($options['entite_duree']) ?
@@ -237,7 +238,8 @@ function formulaires_editer_objets_location_charger_dist(
 		'disponible_decalage_fin' => -1,
 		'utilise_decalage_debut' => 1,
 		'utilise_decalage_fin' => -1,
-		'utilisation_objet' => 'objets_locations_detail',
+		'utilise_objet' => 'objets_locations_detail',
+		'utilise_statuts' => implode(',',$statut_loue),
 	];
 	foreach ($valeurs_defaut AS $variable => $valeur) {
 		if (!isset($valeurs[$variable]) OR (isset($valeurs[$variable]) AND empty($valeurs[$variable])) ) {
