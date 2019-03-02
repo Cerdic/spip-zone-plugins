@@ -23,7 +23,7 @@
 </B_a>
 <B_n>
 <textarea readonly cols="55" rows="30" class="formo" style="width:100%; font-size:90%;" name="texte_formatspip"
-><BOUCLE_n(NEWSLETTERS){id_newsletter=#ENV*{id_newsletter}}{tout}>
+><BOUCLE_n(NEWSLETTERS?){id_newsletter=#ENV*{id_newsletter}}{tout}>
 [#SET{i,#GET{i}|plus{1}}
 ===== <:info_chapeau:> =====
 (#CHAPO*)
