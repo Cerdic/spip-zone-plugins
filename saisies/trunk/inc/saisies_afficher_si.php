@@ -355,7 +355,7 @@ function saisies_tester_condition_afficher_si($champ, $operateur=null, $valeur=n
 	//Et maintenant appeler les sous fonctions qui vont bien
 	if (is_string($champ)) {
 		return saisies_tester_condition_afficher_si_string($champ, $operateur, $valeur);
-	}  elseif (is_array($champ)) {
+	} elseif (is_array($champ)) {
 		return saisies_tester_condition_afficher_si_array($champ, $operateur, $valeur);
 	} else {
 		return false;
