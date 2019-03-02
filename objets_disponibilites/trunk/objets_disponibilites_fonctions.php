@@ -42,14 +42,14 @@ function dates_disponibles($options, $contexte = array()) {
 	 */
 	// Les dates considérés comme utilisées
 	$dates_utilisees = [];
-	if (isset($contexte['utilisation_objet'])) {
-		$utilisation_objet = $contexte['utilisation_objet'];
-		if ($fonction = charger_fonction($utilisation_objet . '_utilise', 'disponibilites', TRUE)) {
+	if (isset($contexte['utilise_objet'])) {
+		$utilise_objet = $contexte['utilise_objet'];
+		if ($fonction = charger_fonction($utilise_objet . '_utilise', 'disponibilites', TRUE)) {
 			$dates_utilisees = $fonction($contexte);;
 		}
 		else {
 			$fonction = charger_fonction('objet_utilise', 'disponibilites');
-			$dates_utilisees = $fonction($utilisation_objet, $contexte);
+			$dates_utilisees = $fonction($utilise_objet, $contexte);
 		}
 	}
 
