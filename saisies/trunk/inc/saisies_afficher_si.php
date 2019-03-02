@@ -347,9 +347,12 @@ function saisies_transformer_condition_afficher_si($condition, $env = null) {
 			$condition = str_replace($expression, $test_modifie, $condition);
 		}
 	} else {
-		spip_log("Afficher_si incorrect : $condition", "saisies"._LOG_CRITIQUE);
-
-		$condition = true;
+		$condition = str_replace(' ', '', $condition);
+		$condition_possible = array("!false", "false", "true", "!true");
+		if (!in_array($condition, $condition_possible)){
+			spip_log("Afficher_si incorrect : $condition", "saisies"._LOG_CRITIQUE);
+			$condition = true;
+		}
 	}
 	return $condition;
 }

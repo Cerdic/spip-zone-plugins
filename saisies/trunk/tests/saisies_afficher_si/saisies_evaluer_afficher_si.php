@@ -144,7 +144,23 @@
 			'nombre_inferieur_egal_faux' => array(
 				0 => false,
 				1 => "@nombre@ <= 10"
-			)
+			),
+			'false' => array(
+				0 => false,
+				1 => 'false'
+			),
+			'true' => array(
+				0 => true,
+				1 => 'true'
+			),
+			'anti_false' => array(
+				0 => true,
+				1 => '!false'
+			),
+			'anti_true' => array(
+				0 => false,
+				1 => '!true'
+			),
 		);
 		return $essais;
 	}
