@@ -7,7 +7,7 @@
  * le 2018-12-20 19:31
  */
 
-	$test = 'saisies_transformer_condition_afficher_si_config';
+	$test = 'saisies_evaluer_afficher_si_config';
 	$remonte = "../";
 	while (!is_dir($remonte."ecrire"))
 		$remonte = "../$remonte";
@@ -15,9 +15,7 @@
 	find_in_path("../plugins/saisies/inc/saisies_afficher_si.php",'',true);
 
 
-	// On va plutot test le resultat des évaluations
 	function condition_eval($condition) {
-		$condition = saisies_transformer_condition_afficher_si_config($condition);
 		return saisies_evaluer_afficher_si($condition);
 	};
 

@@ -222,7 +222,6 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 					$condition = preg_replace('#@plugin:'.$plug.'@#U', 'false', $condition);
 				}
 			}
-			$condition = saisies_transformer_condition_afficher_si_config($condition);
 			// On transforme en une condition PHP valide
 			$ok = saisies_evaluer_afficher_si($condition, $env);
 			if (!$ok) {
@@ -263,6 +262,28 @@ function saisies_set_request_null_recursivement($saisie) {
 	}
 }
 
+/**
+ * Récupère la valeur d'un champ à tester avec afficher_si
+ * Si le champ est de type @config:xx@, alors prend la valeur de la config
+ * sinon en _request() ou en $env["valeurs"]
+ * @param string $champ: le champ
+ * @param null|array $env
+ * @return  la valeur du champ ou de la config
+ **/
+function saisies_afficher_si_get_valeur_champ($champ, $env) {
+	if (preg_match_all("#config:(.*)#", $champ, $matches, PREG_SET_ORDER)) {
+		foreach ($matches as $plugin) {
+			$arobase = $plugin[0];
+			$config_a_tester = str_replace(":", "/", $plugin[1]);
+			$champ = lire_config($config_a_tester);
+		}
+	} elseif (is_null($env)) {
+		$champ = _request($champ);
+	} else {
+		$champ = $env["valeurs"][$champ];
+	}
+	return $champ;
+}
 
 /**
  * Prend un test conditionnel
@@ -308,12 +329,7 @@ function saisies_transformer_condition_afficher_si($condition, $env = null) {
 	if (preg_match_all($regexp, $condition, $tests, PREG_SET_ORDER)) {
 		foreach ($tests as $test) {
 			$expression = $test[0];
-			$champ = $test['champ'];
-			if (is_null($env)) {
-				$champ = _request($champ);
-			} else {
-				$champ = $env["valeurs"][$champ];
-			}
+			$champ = saisies_afficher_si_get_valeur_champ($test['champ'], $env);
 			$operateur = isset($test['operateur']) ? $test['operateur'] : null;
 			$valeur = isset($test['valeur']) ? $test['valeur'] : null;
 			$test_modifie = saisies_tester_condition_afficher_si($champ, $operateur, $valeur) ? 'true' : 'false';
@@ -324,6 +340,7 @@ function saisies_transformer_condition_afficher_si($condition, $env = null) {
 		}
 	} else {
 		spip_log("Afficher_si incorrect : $condition", "saisies"._LOG_CRITIQUE);
+
 		$condition = true;
 	}
 	return $condition;
