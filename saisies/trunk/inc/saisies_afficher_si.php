@@ -213,7 +213,7 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 				$remplissage_uniquement = false;
 			}
 
-			// On gère le cas @plugin:non_plugin@
+			// On gère le cas @plugin:nom_plugin@
 			preg_match_all('#@plugin:(.+)@#U', $condition, $matches);
 			foreach ($matches[1] as $plug) {
 				if (defined('_DIR_PLUGIN_'.strtoupper($plug))) {
