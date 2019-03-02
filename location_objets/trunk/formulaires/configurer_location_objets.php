@@ -53,6 +53,18 @@ function formulaires_configurer_location_objets_saisies_dist() {
 						'defaut' => $config['statut_defaut']
 					]
 				],
+				[
+					'saisie' => 'checkbox',
+					'options' => [
+						'nom' => 'statut_loue',
+						'datas' => $statuts,
+						'defaut' => 'valide',
+						'label' => _T('location_objets:label_statut_loue'),
+						'explication' => _T('location_objets:explication_statut_loue'),
+						'defaut' => $config['statut_loue']
+					]
+				],
+
 				/*array(
 					'saisie' => 'input',
 					'options' => array(

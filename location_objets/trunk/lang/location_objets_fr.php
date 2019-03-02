@@ -12,6 +12,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_parametrages' => 'Paramètres',
 	'champ_location_extras_objets_label' => 'Activer les objets à utiliser comme service extra :',
 
+	// E
+	'explication_statut_loue' => 'Le statut de la location qui détermine si un objet est loué.',
+
 	// I
 	'info_1_objet_loue' => 'Un objet loué',
 	'info_nb_objets_loues' => '@nb@ objets loués.',
@@ -23,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_enregistrer' => 'Je veux m’enregistrer sur ce site :',
 	'label_statut' => 'Statut :',
 	'label_statut_defaut' => 'Statut par défaut :',
+	'label_statut_loue' => 'Statut loué :',
 	'label_statuts_complet' => 'Le(s) Statut(s) complet(s) :',
 	'location_extras_objets_explication' => 'Ces services seront inclus au formulaire de location, et pourront être sélectionné séparément.',
 	'location_objets_titre' => 'Location d’objets',
