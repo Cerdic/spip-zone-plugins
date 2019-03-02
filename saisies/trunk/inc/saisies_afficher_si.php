@@ -333,13 +333,9 @@ function saisies_transformer_condition_afficher_si($condition, $env = null) {
  *	- un tableau
  *	- un tableau sérializé
  * @param string $operateur : l'opérateur:
- *	- IN
- *	- !IN
- *	- ==
- *	- !=
- *	@param string $valeur la valeur à tester pour un IN. Par exemple "23" ou encore "23", "25"
+ * @param string $valeur la valeur à tester pour un IN. Par exemple "23" ou encore "23", "25"
  * @return bool false / true selon la condition
- **/
+**/
 function saisies_tester_condition_afficher_si($champ, $operateur=null, $valeur=null) {
 	// Si operateur null => on test juste qu'un champ est cochée / validé
 	if ($operateur === null and $valeur === null) {
@@ -367,11 +363,7 @@ function saisies_tester_condition_afficher_si($champ, $operateur=null, $valeur=n
  * Teste un condition d'afficher_si lorsqu'il s'agit d'une chaîne
  * @param string champ le champ à tester.
  * @param string $operateur : l'opérateur:
- *	- IN
- *	- !IN
- *	- ==
- *	- !=
- *	@param string $valeur la valeur à tester pour un IN. Par exemple "23" ou encore "23", "25"
+ * @param string $valeur la valeur à tester pour un IN. Par exemple "23" ou encore "23", "25"
  * @return bool false / true selon la condition
 **/
 function saisies_tester_condition_afficher_si_string($champ, $operateur, $valeur) {
@@ -388,10 +380,6 @@ function saisies_tester_condition_afficher_si_string($champ, $operateur, $valeur
  * Teste un condition d'afficher_si lorsqu'il s'agit d'un tableau
  * @param array champ le champ à tester.
  * @param string $operateur : l'opérateur:
- *	- IN
- *	- !IN
- *	- ==
- *	- !=
  * @param string $valeur la valeur à tester pour un IN. Par exemple "23" ou encore "23", "25"
  * @return bool false / true selon la condition
 **/
