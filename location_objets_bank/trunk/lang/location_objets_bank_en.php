@@ -1,5 +1,7 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de https://trad.spip.net/tradlang_module/location_objets_bank?lang_cible=en
+// ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -8,8 +10,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
-	'location_paiement_reference' => 'Payment reference : @reference@',
 	'location_objets_bank_titre' => 'Bookings for objects - payments',
+	'location_paiement_reference' => 'Payment reference : @reference@',
 
 	// M
 	'merci_de_votre_location_paiement' => 'Your booking has been validated <b>@reference@</b>.',
@@ -28,4 +30,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_paiement_vendeur' => 'Payment:',
 	'titre_payer_location' => 'Pay the booking'
 );
-
