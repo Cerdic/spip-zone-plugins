@@ -1,0 +1,26 @@
+<paquet
+	prefix="objets_restrictions_periodes"
+	categorie="divers"
+	version="1.1.2"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/objets_restrictions_periodes-64.png"
+	documentation="https://github.com/abelass/objets_restrictions_periodes"
+>
+
+	<nom>Objets restrictions périodes</nom>
+	<!-- Extension périodes pour le plugin plugin locations_objets_restrictions -->
+
+	<auteur>Rainer Müller</auteur>
+
+	<licence>GNU/GPL v3</licence>
+
+	<necessite nom="saisies" compatibilite="[3.14.0;]" />
+	<necessite nom="periodes" compatibilite="[1.1.1;]" />
+	<necessite nom="locations_objets_restrictions" compatibilite="[1.2.0;]" />
+	<necessite nom="dates_outils" compatibilite="[1.0.11;]" />
+
+
+	<pipeline nom="objets_location_verifier_dates" inclure="objets_restrictions_periodes_pipelines.php" />
+	<pipeline nom="recuperer_fond" inclure="objets_restrictions_periodes_pipelines.php" />
+</paquet>

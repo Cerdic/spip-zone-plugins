@@ -1,0 +1,23 @@
+<script type="text/javascript">
+	$(function() {
+
+		$("#champ_date_fin").on('change',function() {
+			var champs =  $(".formulaire_editer_objets_location form").serialize();
+			champs = champs.split('&');
+			var pair = '';
+			var args = {recharge_ajax : true};
+			var champ = '';
+			Object.keys(champs).forEach(function(k, i) {
+				pair = champs[k].split('=');
+				if (typeof pair[1] !== 'undefined' && pair[1].length > 0) {
+					 args[pair[0]] = pair[1].replace(/%2F/g, '/').replace(/%2C/g, ',');
+				}
+			});
+
+			ajaxReload('objets_location_dates', {
+				args : args
+			});
+		});
+	});
+</script>
+
