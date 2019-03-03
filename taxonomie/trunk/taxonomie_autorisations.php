@@ -288,17 +288,11 @@ function autoriser_espececreer_menu_dist($faire, $type, $id, $qui, $opt){
 function autoriser_espece_creer_dist($faire, $type, $id, $qui, $opt) {
 
 	// On vérifie qu'un règne est bien déjà chargé
-	include_spip('inc/taxonomie');
-	$regnes = regne_lister_defaut();
-	$regne_existe = false;
-	foreach ($regnes as $_regne) {
-		if (regne_existe($_regne, $meta_regne)) {
-			$regne_existe = true;
-		}
-	}
+	include_spip('taxonomie_fonctions');
+	$regnes = regne_repertorier();
 
 	// Il faut aussi être admin ou rédacteur.
-	$autoriser = $regne_existe and autoriser('creer', 'taxon', $id, $qui, $opt);
+	$autoriser = ($regnes and autoriser('creer', 'taxon', $id, $qui, $opt));
 
 	return $autoriser;
 }

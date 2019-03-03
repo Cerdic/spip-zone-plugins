@@ -254,14 +254,8 @@ function taxonomie_ieconfig_exporter() {
 
 	// Les metas de chargement de chaque règne ne sont pas exportées mais on identifie quand même la liste des règnes
 	// insérés dans la base. Les taxons seront ensuite exportés par règne pour permettre un import plus ciblé.
-	include_spip('inc/taxonomie');
-	$export['contenu']['regnes'] = array();
-	$regnes = regne_lister_defaut();
-	foreach ($regnes as $_regne) {
-		if (regne_existe($_regne, $meta_regne)) {
-			$export['contenu']['regnes'][] = $_regne;
-		}
-	}
+	include_spip('taxonomie_fonctions');
+	$export['contenu']['regnes'] = regne_repertorier();
 
 	// Exportation de la table spip_taxons des taxons nécessitant d'être sauvegardés.
 	if ($export['contenu']['regnes']) {
@@ -359,11 +353,6 @@ function taxonomie_importer_taxons($taxons, $action, $taxons_edites = false) {
 	// On boucle sur les taxons édités du règne et on les traite en fonction de l'action choisie.
 	include_spip('action/editer_objet');
 	foreach ($taxons as $_taxon) {
-		// On force le statut à prop pour une espèce.
-		if ($_taxon['espece'] == 'oui') {
-			$_taxon['statut'] = 'prop';
-		}
-
 		// Pour chaque taxon on vérifié si il existe en base et si il est déjà édité.
 		// On récupère en outre l'id pour utiliser l'API objet.
 		$select = array('id_taxon', 'edite');
@@ -377,6 +366,11 @@ function taxonomie_importer_taxons($taxons, $action, $taxons_edites = false) {
 				objet_modifier('taxon', $taxon_base['id_taxon'], $_taxon);
 			}
 		} elseif (!$taxons_edites) {
+			// On force le statut à prop pour une espèce.
+			if ($_taxon['espece'] == 'oui') {
+				$_taxon['statut'] = 'prop';
+			}
+
 			objet_inserer('taxon', null, $_taxon);
 		}
 	}

@@ -150,7 +150,7 @@ function taxon_afficher_statut($statut, $id_taxon = 0) {
  * @filtre
  *
  * @return array
- *        Liste des noms scientifiques (en minuscules) des règnes chargés.
+ *        Liste des noms scientifiques (en minuscules) des règnes chargés ou tableau vide.
  */
 function regne_repertorier() {
 
@@ -159,6 +159,7 @@ function regne_repertorier() {
 
 	if ($regnes === null) {
 		include_spip('inc/taxonomie');
+		$regnes = array();
 		foreach (regne_lister_defaut() as $_regne) {
 			if (regne_existe($_regne, $meta_regne)) {
 				$regnes[] = $_regne;

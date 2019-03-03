@@ -18,8 +18,7 @@ if (!defined('_TAXONOMIE_RECHERCHE_MAX_ESPECES')) {
 /**
  * Chargement des données :
  *
- * @uses regne_lister_defaut()
- * @uses regne_existe()
+ * @uses regne_repertorier()
  *
  * @return array
  * 		Tableau des données à charger par le formulaire dans l'étape 1.
@@ -66,12 +65,10 @@ function formulaires_creer_espece_charger() {
 
 	// Acquérir la liste des règnes déjà chargés. Si un règne n'est pas chargé il n'apparait pas dans la liste
 	// car il ne sera alors pas possible de créer correctement l'espèce avec sa hiérarchie de taxons.
-	include_spip('inc/taxonomie');
-	$regnes = regne_lister_defaut();
+	include_spip('taxonomie_fonctions');
+	$regnes = regne_repertorier();
 	foreach ($regnes as $_regne) {
-		if (regne_existe($_regne, $meta_regne)) {
-			$valeurs['_regnes'][$_regne] = ucfirst(_T("taxonomie:regne_${_regne}"));
-		}
+		$valeurs['_regnes'][$_regne] = ucfirst(_T("taxonomie:regne_${_regne}"));
 	}
 	// On force toujours un règne, le premier de la liste.
 	reset($valeurs['_regnes']);
