@@ -80,5 +80,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_objets_location' => 'Logo de cette location',
 	'titre_objets_lies_objets_location' => 'Liés à cette location',
 	'titre_objets_location' => 'Location',
-	'titre_objets_locations' => 'Locations',
+	'titre_objets_locations' => 'Locations'
 );
