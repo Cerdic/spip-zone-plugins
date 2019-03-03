@@ -230,7 +230,7 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
         or (
             // auteur autorise a modifier son article
             // (sauf si l'article est refuse ou l'auteur mis a la poubelle)
-            $GLOBALS['autorite']['auteur_mod_article']
+            isset($GLOBALS['autorite']['auteur_mod_article']) and $GLOBALS['autorite']['auteur_mod_article']
             and in_array($qui['statut'],
                 array('0minirezo', '1comite', '6forum'))
             and in_array($r['statut'],
@@ -239,7 +239,7 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
         )
         or (
             // un redacteur peut-il modifier un article propose ?
-            $GLOBALS['autorite']['redacteur_mod_article']
+            isset($GLOBALS['autorite']['redacteur_mod_article']) and $GLOBALS['autorite']['redacteur_mod_article']
             and in_array($qui['statut'], array('0minirezo', '1comite'))
             and $r['statut']=='prop'
         )
