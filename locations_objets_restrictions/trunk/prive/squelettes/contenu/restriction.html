@@ -1,0 +1,68 @@
+[(#AUTORISER{voir,restriction,#ID_RESTRICTION}|sinon_interdire_acces)]
+[(#SET{url_voir,#VAL{restriction}|objet_info{url_voir}})]
+[(#SET{url_edit,#VAL{restriction}|objet_info{url_edit}})]
+<BOUCLE_restriction(RESTRICTIONS){id_restriction}{si #ENV{exec}|=={#GET{url_voir}}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,restriction,#ID_RESTRICTION})
+		[(#ID_RESTRICTION|afficher_qui_edite{restriction}|non)
+			[(#URL_ECRIRE{#GET{url_edit},id_restriction=#ID_RESTRICTION}|icone_verticale{<:restriction:icone_modifier_restriction:>,restriction,edit,right ajax preload})]
+		]
+		[(#ID_RESTRICTION|afficher_qui_edite{restriction}|oui)
+			[(#URL_ECRIRE{#GET{url_edit},id_restriction=#ID_RESTRICTION}|icone_verticale{#ID_RESTRICTION|afficher_qui_edite{restriction},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{restriction-24.png}|balise_img{restriction,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{restriction,#ID_RESTRICTION}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/restriction,id=#ID_RESTRICTION,id_restriction=#ID_RESTRICTION,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,restriction,#ID_RESTRICTION})
+	[(#ID_RESTRICTION|afficher_qui_edite{restriction}|non)
+		[(#URL_ECRIRE{#GET{url_edit},id_restriction=#ID_RESTRICTION}|icone_verticale{<:restriction:icone_modifier_restriction:>,restriction,edit,right ajax preload})]
+	]
+	[(#ID_RESTRICTION|afficher_qui_edite{restriction}|oui)
+		[(#URL_ECRIRE{#GET{url_edit},id_restriction=#ID_RESTRICTION}|icone_verticale{#ID_RESTRICTION|afficher_qui_edite{restriction},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+<div class="nettoyeur"></div>
+<div class="liste">
+	<BOUCLE_objetslies(spip_restrictions_liens){id_restriction}{0,1}><h3><:restriction:titre_objets_lies_restriction:></h3></BOUCLE_objetslies>
+
+	<BOUCLE_listeobjets(spip_restrictions_liens){id_restriction}{fusion objet}{par objet}>
+		#SET{table,#OBJET|table_objet}
+		[(#SET{titre,[#OBJET:info_(#GET{table})_liees_restriction]})]
+		[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_restriction}})]
+		<INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_restriction,ajax,env} />
+	</BOUCLE_listeobjets>
+</div>
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,restriction,id,#ID_RESTRICTION},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+
+#SET{enfants,''}
+[(#VAL{prive/objets/contenu/restriction-enfants}|trouver_fond|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/restriction-enfants,id_restriction,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,restriction,id_restriction,#ID_RESTRICTION,objet,restriction,id_objet,#ID_RESTRICTION},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_restriction>
+[(#ENV**{exec}|=={#GET{url_edit}}|?{#INCLURE{fond=prive/squelettes/contenu/#GET{url_edit},redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_restriction>

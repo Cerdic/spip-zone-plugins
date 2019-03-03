@@ -1,0 +1,49 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_restriction,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_restriction" value="#ENV{id_restriction}" />
+		<div class="editer-groupe">
+
+			[(#SAISIE{input, titre, obligatoire=oui,
+				label=<:ecrire:info_titre:>})]
+
+			[(#SAISIE{textarea, descriptif,
+				label=<:ecrire:info_descriptif:>})]
+			#SET{type_saisie,selection}
+			[(#ENV{_types_restriction}|count|<={1}|oui)
+				#SET{type_saisie,hidden}
+			]
+
+
+			[(#SAISIE{#GET{type_saisie}, type_restriction, obligatoire=oui,
+				label=<:restriction:champ_extension_label:>,
+				data=#ENV{_types_restriction}})]
+
+			<script type="text/javascript">
+				$(function() {
+					$("#champ_type_restriction").change(function() {
+						var type_restriction = $(this).val();
+						ajaxReload('restrictions_champs_specifiques', {
+							args : {
+								type_restriction : type_restriction,
+							}
+						});
+					});
+				});
+			</script>
+
+
+			<INCLURE{fond=formulaires/inc-editer_restrictions-champs_specifiques,env,ajax=restrictions_champs_specifiques} />
+
+
+		</div>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+	]
+</div>

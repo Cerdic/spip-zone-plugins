@@ -1,0 +1,16 @@
+<BOUCLE_restriction(RESTRICTIONS){id_restriction=#ENV{id}}>
+<div class="infos">
+[(#SET{texte_objet,<:restriction:titre_restriction:>})]
+<div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_RESTRICTION</p></div>
+
+	<div class='nb_elements'><!--nb_elements--></div>
+
+	[(#AUTORISER{supprimer, restriction, #ID_RESTRICTION}|oui)
+		[(#BOUTON_ACTION{
+			[(#CHEMIN_IMAGE{restriction-del-24.png}|balise_img{<:restriction:supprimer_restriction:>}|concat{' ',#VAL{<:restriction:supprimer_restriction:>}|wrap{<b>}}|trim)],
+			#URL_ACTION_AUTEUR{supprimer_restriction, #ID_RESTRICTION, #URL_ECRIRE{restrictions}},
+			icone s24 horizontale danger restriction-del-24, <:restriction:confirmer_supprimer_restriction:>})]
+	]
+
+</div>
+</BOUCLE_restriction>
