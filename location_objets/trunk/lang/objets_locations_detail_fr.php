@@ -45,5 +45,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_creer_associer_objets_locations_detail' => 'Créer et associer un location detail',
 	'titre_objets_lies_objets_locations_detail' => 'Liés à ce location detail',
 	'titre_objets_locations_detail' => 'Location detail',
-	'titre_objets_locations_details' => 'Location details',
+	'titre_objets_locations_details' => 'Location details'
 );
