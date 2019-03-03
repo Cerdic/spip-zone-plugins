@@ -72,16 +72,15 @@ function taxonomie_post_edition($flux) {
 			// Instituer : on ne peut instituer qu'une espèce dont aucun enfant n'est publié. Il est donc inutile de
 			// considérer ces cas.
 			if ($action == 'instituer') {
-				// On vérifie qu'on institue l'espèce de 'prop' à 'publie'. Si c'est le cas, alors on vérifie
-				// qu'il est aussi nécessaire d'instituer à 'publie' les ascendants de type espèce encore à prop.
 				$statut_nouveau = $flux['data']['statut'];
 				$statut_ancien = $flux['args']['statut_ancien'];
+				// On vérifie qu'on institue l'espèce de 'prop' à 'publie'. Si c'est le cas, alors on vérifie
+				// qu'il est aussi nécessaire d'instituer à 'publie' les ascendants de type espèce encore à prop.
 				if (($statut_ancien == 'prop') and ($statut_nouveau == 'publie')) {
 					// On récupère le TSN et le TSN parent de l'espèce concernée.
-					$from = 'spip_taxons';
 					$select = array('tsn', 'tsn_parent');
 					$where = array("id_taxon=$id");
-					$taxon = sql_fetsel($select, $from, $where);
+					$taxon = sql_fetsel($select, $table, $where);
 
 					// On récupère les ascendants de type espèce de l'espèce concernée si ils existent.
 					include_spip('taxonomie_fonctions');
@@ -93,7 +92,7 @@ function taxonomie_post_edition($flux) {
 							if ($_parent['espece'] == 'oui') {
 								if (($_parent['statut'] <> 'publie')) {
 									$maj = array('statut' => $statut_nouveau, 'edite' => 'oui');
-									sql_updateq($from, $maj, 'id_taxon=' . intval($_parent['id_taxon']));
+									sql_updateq($table, $maj, 'id_taxon=' . intval($_parent['id_taxon']));
 								}
 							} else {
 								// Dès que l'on est sur un taxon non espèce on peut s'arrêter vu que les ascendants sont
