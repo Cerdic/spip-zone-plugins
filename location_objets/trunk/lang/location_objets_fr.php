@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_date_paiement' => 'Date de paiement :',
 	'label_statut' => 'Statut :',
 	'label_statut_defaut' => 'Statut par défaut :',
-	'label_statut_loue' => 'Statut loué :',
+	'label_statut_loue' => 'Statut loué :',
 	'location_extras_objets_explication' => 'Ces services seront inclus au formulaire de location, et pourront être sélectionné séparément.',
 	'location_objets_titre' => 'Location d’objets',
 
