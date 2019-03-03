@@ -1,0 +1,32 @@
+<paquet
+	prefix="locations_objets_restrictions"
+	categorie="divers"
+	version="1.2.0"
+	etat="test"
+	compatibilite="[3.2.3;3.2.*]"
+	logo="prive/themes/spip/images/locations_objets_restrictions-64.png"
+	documentation="https://github.com/abelass/locations_objets_restrictions"
+	schema="1.0.1"
+>
+
+	<nom>Locations d&#039;objets - restrictions</nom>
+	<!-- Imposer des restriction á vos objets louables -->
+
+	<auteur>Rainer</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="location_objets" compatibilite="[1.5.2;]" />
+	<necessite nom="saisies" compatibilite="[3.14.0;]" />
+	<necessite nom="verifier" compatibilite="[1.8.3;]" />
+
+  <!-- Appels des pipelines -->
+	<pipeline nom="autoriser" inclure="locations_objets_restrictions_autorisations.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/locations_objets_restrictions.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/locations_objets_restrictions.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/locations_objets_restrictions.php" />
+	<pipeline nom="affiche_milieu" inclure="locations_objets_restrictions_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="locations_objets_restrictions_pipelines.php" />
+
+	<menu nom="restrictions" titre="restriction:titre_restrictions" parent="menu_edition" icone="images/restriction-16.png" action="restrictions" />
+</paquet>

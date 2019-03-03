@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/restrictions, env, ajax, sinon=<:restriction:info_aucun_restriction:>}>
+
+[(#AUTORISER{creer,restriction})
+	[(#URL_ECRIRE{restriction_edit,new=oui}|icone_verticale{<:restriction:icone_creer_restriction:>,restriction,new,right})]
+]
