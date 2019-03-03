@@ -36,7 +36,10 @@ $GLOBALS['wikipedia_language'] = array(
 	 */
 	'fr' => 'fr',
 	'en' => 'en',
-	'es' => 'es'
+	'es' => 'es',
+	'de' => 'de',
+	'pt' => 'pt',
+	'it' => 'it'
 );
 
 

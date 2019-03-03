@@ -326,8 +326,6 @@ function taxonomie_ieconfig_importer($importation, $contenu_import) {
 	}
 
 	// Les taxons du règne au genre édités.
-	include_spip('action/editer_objet');
-	$from ='spip_taxons';
 	if (!empty($importation['donnees']['edites'])) {
 		foreach ($importation['donnees']['edites'] as $_regne => $_action) {
 			// Importation des taxons édités du fichier d'import selon l'action requise.
@@ -359,6 +357,7 @@ function taxonomie_ieconfig_importer($importation, $contenu_import) {
 function taxonomie_importer_taxons($taxons, $action, $taxons_edites = false) {
 
 	// On boucle sur les taxons édités du règne et on les traite en fonction de l'action choisie.
+	include_spip('action/editer_objet');
 	foreach ($taxons as $_taxon) {
 		// On force le statut à prop pour une espèce.
 		if ($_taxon['espece'] == 'oui') {

@@ -218,8 +218,6 @@ function formulaires_decrire_taxon_traiter($id_taxon, $element) {
 		//   si besoin. On limite la taille du descriptif pour éviter un problème lors de l'update
 		include_spip('inc/taxonomie');
 		$maj[$element] = taxon_merger_traductions($texte_converti, $taxon[$element]);
-		// - l'indicateur d'édition est positionné à oui
-		$maj['edite'] = 'oui';
 		// - la source wikipedia est ajoutée (ou écrasée si elle existe déjà) et on met à jour la liste des champs
 		$maj['sources'] = unserialize($taxon['sources']);
 		if (isset($maj['sources']['wikipedia'])) {
@@ -231,7 +229,8 @@ function formulaires_decrire_taxon_traiter($id_taxon, $element) {
 		}
 		$maj['sources'] = serialize($maj['sources']);
 		// - Mise à jour
-		sql_updateq('spip_taxons', $maj, 'id_taxon=' . intval($id_taxon));
+		include_spip('action/editer_objet');
+		objet_modifier('taxon', intval($id_taxon), $maj);
 
 		// Redirection vers la page d'édition du taxon
 		$retour['redirect'] = parametre_url(generer_url_ecrire('taxon_edit'), 'id_taxon', $id_taxon);
