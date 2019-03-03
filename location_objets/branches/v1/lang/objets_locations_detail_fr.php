@@ -43,11 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_ajouter_objets_locations_detail' => 'Ajouter un location detail',
 	'texte_changer_statut_objets_locations_detail' => 'Ce location detail est :',
 	'texte_creer_associer_objets_locations_detail' => 'Créer et associer un location detail',
-	'texte_definir_comme_traduction_objets_locations_detail' => 'Ce location detail est une traduction du location detail numéro :',
-	'titre_langue_objets_locations_detail' => 'Langue de ce location detail',
-	'titre_logo_objets_locations_detail' => 'Logo de ce location detail',
 	'titre_objets_lies_objets_locations_detail' => 'Liés à ce location detail',
 	'titre_objets_locations_detail' => 'Location detail',
-	'titre_objets_locations_details' => 'Location details',
-	'titre_objets_locations_details_rubrique' => 'Location details de la rubrique'
+	'titre_objets_locations_details' => 'Location details'
 );

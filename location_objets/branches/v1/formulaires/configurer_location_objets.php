@@ -119,7 +119,7 @@ function formulaires_configurer_location_objets_saisies_dist() {
 					'saisie' => 'explication',
 					'options' => [
 						'nom' => 'exp1',
-						'texte' => _T('location_objets:notifications_explication')
+						'texte' => _T('location_objets:notifications_explication', ['statuts' => implode(', ', $statuts_selectionnees)])
 					]
 				],
 				[

@@ -21,13 +21,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_date_paiement' => 'Date de paiement :',
-	'label_enregistrement_inscrit' => 'Permettre au visiteur de s’enregistrer lors d’une réservation :',
-	'label_enregistrement_inscrit_obligatoire' => 'Rendre l’enregistrement obligatoire :',
-	'label_enregistrer' => 'Je veux m’enregistrer sur ce site :',
 	'label_statut' => 'Statut :',
 	'label_statut_defaut' => 'Statut par défaut :',
-	'label_statut_loue' => 'Statut loué :',
-	'label_statuts_complet' => 'Le(s) Statut(s) complet(s) :',
+	'label_statut_loue' => 'Statut loué :',
 	'location_extras_objets_explication' => 'Ces services seront inclus au formulaire de location, et pourront être sélectionné séparément.',
 	'location_objets_titre' => 'Location d’objets',
 
@@ -48,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_expediteur_explication' => 'Choisir l’expéditeur des notifications pour le vendeur et l’acheteur',
 	'notifications_expediteur_label' => 'Expéditeur',
 	'notifications_expediteur_webmaster_label' => 'Choisir un webmestre :',
-	'notifications_explication' => 'Les notifications permettent d’envoyer des emails suite aux changements de statut des locations : Liste d’attente, accepté, refusé, à la poubelle',
+	'notifications_explication' => 'Les notifications permettent d’envoyer des emails suite aux changements de statut des locations : @statuts@',
 	'notifications_parametres' => 'Paramètres des notifications',
 	'notifications_quand_explication' => 'Quel(s) changement(s) de statut déclenche(nt) l’envoi d’une notification ?',
 	'notifications_quand_label' => 'Déclenchement',

@@ -64,7 +64,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_changer_statut_objets_location' => 'Cette location est :',
 	'texte_cordialement' => 'Cordialment',
 	'texte_creer_associer_objets_location' => 'Créer et associer une location',
-	'texte_definir_comme_traduction_objets_location' => 'Cette location est une traduction de la location numéro :',
 	'texte_designation' => 'Désignation',
 	'texte_details_location' => 'Détails de la location :',
 	'texte_enregistrement' => 'Nous avons bien enregistré votre demande de location.',
@@ -81,6 +80,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_objets_location' => 'Logo de cette location',
 	'titre_objets_lies_objets_location' => 'Liés à cette location',
 	'titre_objets_location' => 'Location',
-	'titre_objets_locations' => 'Locations',
-	'titre_objets_locations_rubrique' => 'Locations de la rubrique'
+	'titre_objets_locations' => 'Locations'
 );
