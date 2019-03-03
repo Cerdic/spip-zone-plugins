@@ -250,8 +250,8 @@ function _detecter_langue($texte){
 
 	$lang = false;
 	if (is_array($result_array)) {
-		foreach ($result_array as $r) {
-			if ($lang = reset($r)) {
+		foreach ($result_array as $lang => $score) {
+			if ($lang) {
 				break;
 			}
 		}
