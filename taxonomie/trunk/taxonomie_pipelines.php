@@ -73,7 +73,7 @@ function taxonomie_post_edition($flux) {
 			// considérer ces cas.
 			if ($action == 'instituer') {
 				// On vérifie qu'on institue l'espèce de 'prop' à 'publie'. Si c'est le cas, alors on vérifie
-				// qu'il est aussi nécessaire d'instituer à 'publie' les enfants de type espèce encore à prop.
+				// qu'il est aussi nécessaire d'instituer à 'publie' les ascendants de type espèce encore à prop.
 				$statut_nouveau = $flux['data']['statut'];
 				$statut_ancien = $flux['args']['statut_ancien'];
 				if (($statut_ancien == 'prop') and ($statut_nouveau == 'publie')) {

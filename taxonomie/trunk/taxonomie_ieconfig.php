@@ -193,15 +193,22 @@ function taxonomie_ieconfig($flux) {
 	if (($action == 'import') and isset($flux['args']['config']['taxonomie'])) {
 		// On récupère les demandes d'importation.
 		$importation['configuration'] = _request('taxonomie_import_config');
-		$importation['pages_explicites'] = _request('noizetier_import_pages');
-		$importation['compositions_virtuelles'] = _request('noizetier_import_compositions');
-		$importation['noisettes'] = _request('noizetier_import_noisettes');
+
+		include_spip('taxonomie_fonctions');
+		$importation['donnees'] = array();
+		$regnes = regne_repertorier();
+		foreach ($regnes as $_regne) {
+			if ($valeur = _request("${_regne}_import_edites")) {
+				$importation['donnees']['edites'][$_regne] = $valeur;
+			}
+			if ($valeur = _request("${_regne}_import_especes")) {
+				$importation['donnees']['especes'][$_regne] = $valeur;
+			}
+		}
 
 		// Si au moins l'une est requise on appelle la fonction d'import.
 		if ($importation['configuration']
-		or $importation['pages_explicites']
-		or $importation['compositions_virtuelles']
-		or $importation['noisettes']) {
+		or $importation['donnees']) {
 			if (!taxonomie_ieconfig_importer($importation, $flux['args']['config']['taxonomie'])) {
 				$flux['data'] .= _T('taxonomie:ieconfig_probleme_import_config').'<br />';
 			}
@@ -270,6 +277,7 @@ function taxonomie_ieconfig_exporter() {
 		foreach ($export['contenu']['regnes'] as $_regne) {
 			// Extraction des taxons du règne au genre édités manuellement par les utilisateurs ou créés lors d'un
 			// ajout d'espèce.
+
 			// On sauvegarde les champs éditables uniquement des édités et tous les champs pour les autres.
 			$export[$_regne]['taxons'] = taxon_preserver($_regne);
 			$export['contenu'][$_regne]['taxons']['edites'] = $export[$_regne]['taxons']['edites'] ? 'on' : '';
@@ -315,6 +323,92 @@ function taxonomie_ieconfig_importer($importation, $contenu_import) {
 		// On remplace la configuration actuelle par celle du fichier d'import.
 		include_spip('inc/config');
 		ecrire_config('taxonomie', $contenu_import['configuration']);
+	}
+
+	// Les taxons du règne au genre édités.
+	include_spip('action/editer_objet');
+	$from ='spip_taxons';
+	if (!empty($importation['donnees']['edites'])) {
+		foreach ($importation['donnees']['edites'] as $_regne => $_action) {
+			// Récupération des taxons édités du fichier d'import.
+			$taxons_import = $contenu_import[$_regne]['taxons']['edites'];
+
+			// On boucle sur les taxons édités du règne et on les traite en fonction de l'action choisie.
+			foreach ($taxons_import as $_taxon_import) {
+				// Pour chaque taxon on vérifié si il existe en base et si il est déjà édité. On récupère en outre
+				// l'id pour utiliser l'API objet.
+				$select = array('id_taxon', 'edite');
+				$tsn = $_taxon_import['tsn'];
+				$where = array('tsn=' . intval($tsn));
+				if ($taxon_base = sql_fetsel($select, $from, $where)) {
+					if (($_action == 'fusionner')
+					or (($_action == 'ajouter') and ($taxon_base['edite'] != 'oui'))) {
+						// On modifie le taxon avec l'API qui appellera elle-même les pipelines pre_edition
+						// pour la mise à jour de l'indicateur edite à oui et post_edition pour la modification
+						// du statut qui dans ce cas ne produira rien.
+						objet_modifier('taxon', $taxon_base['id_taxon'], $_taxon_import);
+					}
+				}
+			}
+		}
+	}
+
+	// Les espèces et les éventuels ascendants entre genre et espèce.
+	if (!empty($importation['donnees']['especes'])) {
+		foreach ($importation['donnees']['especes'] as $_regne => $_action) {
+			// On commence par les taxons entre genre et espèce pour être sur que l'institution fonctionne.
+			// Récupération des taxons entre genre et espèce du fichier d'import.
+			$taxons_import = $contenu_import[$_regne]['taxons']['crees'];
+
+			// On boucle sur les taxons et on les traite en fonction de l'action choisie de la même façon
+			// que l'on fera avec les espèces.
+			foreach ($taxons_import as $_taxon_import) {
+				// Pour chaque taxon on vérifié si il existe en base et si il est déjà édité. On récupère en outre
+				// l'id pour utiliser l'API objet.
+				$select = array('id_taxon', 'edite');
+				$tsn = $_taxon_import['tsn'];
+				$where = array('tsn=' . intval($tsn));
+				if ($taxon_base = sql_fetsel($select, $from, $where)) {
+					if (($_taxon_import['edite'] == 'oui')
+					and (($_action == 'fusionner')
+						or (($_action == 'ajouter') and ($taxon_base['edite'] != 'oui')))) {
+						// On modifie l'espèce avec l'API qui appellera elle-même les pipelines pre_edition
+						// pour la mise à jour de l'indicateur edite à oui et post_edition pour la modification
+						// du statut qui dans ce cas ne produira rien.
+						objet_modifier('taxon', $taxon_base['id_taxon'], $_taxon_import);
+					}
+				} else {
+					objet_inserer('taxon', null, $_taxon_import);
+				}
+			}
+
+			// Maintenant que les taxons entre genre et espèce ont été rajoutés on boucle sur les espèces et descendants.
+			// Récupération des espèces et descendants du fichier d'import.
+			$especes_import = $contenu_import[$_regne]['especes'];
+
+			// On boucle sur les taxons édités du règne et on les traite en fonction de l'action choisie.
+			foreach ($especes_import as $_espece_import) {
+				// On force l'espèce au statut prop après modification.
+				$_espece_import['statut'] = 'prop';
+
+				// Pour chaque taxon on vérifié si il existe en base et si il est déjà édité. On récupère en outre
+				// l'id pour utiliser l'API objet.
+				$select = array('id_taxon', 'edite');
+				$tsn = $_espece_import['tsn'];
+				$where = array('tsn=' . intval($tsn));
+				if ($taxon_base = sql_fetsel($select, $from, $where)) {
+					if (($_action == 'fusionner')
+					or (($_action == 'ajouter') and ($taxon_base['edite'] != 'oui'))) {
+						// On modifie l'espèce avec l'API qui appellera elle-même les pipelines pre_edition
+						// pour la mise à jour de l'indicateur edite à oui et post_edition pour la modification
+						// du statut qui dans ce cas ne produira rien.
+						objet_modifier('taxon', $taxon_base['id_taxon'], $_espece_import);
+					}
+				} else {
+					objet_inserer('taxon', null, $_espece_import);
+				}
+			}
+		}
 	}
 
 	// On invalide le cache

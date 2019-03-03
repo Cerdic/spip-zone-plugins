@@ -365,7 +365,7 @@ function formulaires_creer_espece_traiter() {
 		// Récupération de la liste des champs de la table spip_taxons.
 		include_spip('base/objets');
 		$description_table = lister_tables_objets_sql('spip_taxons');
-		$champs['spip_taxons'] = $description_table['field'];
+		$champs = $description_table['field'];
 
 		// On range la liste des taxons de plus haut rang (genre) à celui de plus petit rang et on ajoute le
 		// taxon espèce en fin de liste. La variable _parents est toujours un tableau d'au moins une unité et
@@ -383,17 +383,17 @@ function formulaires_creer_espece_traiter() {
 				// Le genre est le premier parent de la liste ainsi triée et est forcément déjà créé.
   				// Les parents non créés sont donc soit des taxons comme les sous-genres etc, soit un taxon de rang
 				// espèce ou inférieur.
-				// -- On récupère le bloc des informations ITIS du taxon à créer et sa table de destination.
-				$table = 'spip_taxons';
+				// -- On récupère le bloc des informations ITIS du taxon à créer.
 				if (isset($_taxon['deja_cree'])) {
 					// C'est un ascendant de l'espèce
+					include_spip('services/itis/itis_api');
 					$taxon = itis_get_record($_taxon['tsn']);
 				} else {
 					// C'est l'espèce
 					$taxon = $_taxon;
 				}
 				// -- On ne retient que les index correspondant à des champs de la table concernée.
-				$taxon = array_intersect_key($taxon, $champs[$table]);
+				$taxon = array_intersect_key($taxon, $champs);
 
 				// On formate le nom commun en multi.
 				$nom_multi = '';
@@ -422,7 +422,8 @@ function formulaires_creer_espece_traiter() {
 				}
 
 				// Insertion du taxon dans la table idoine.
-				$id_taxon = sql_insertq($table, $taxon);
+				include_spip('action/editer_objet');
+				$id_taxon = objet_inserer('taxon', null, $taxon);
 				if ($id_taxon) {
 					if (!isset($_taxon['deja_cree'])) {
 						$id_espece = $id_taxon;
