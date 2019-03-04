@@ -66,6 +66,8 @@ function lister_roles_logos($objet = null, $role = null, $tous_les_objets = null
 					'objets' => $tous_les_objets,
 				)
 			);
+		} else {
+			$roles_logos = array();
 		}
 		if (lire_config('activer_logos_survol') === 'oui') {
 			$roles_logos['logo_survol'] = array(
