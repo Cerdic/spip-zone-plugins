@@ -59,7 +59,7 @@ function lister_roles_logos($objet = null, $role = null, $tous_les_objets = null
 	$conf_logos = lire_config('logos_roles/roles_logos');
 
 	if (! is_array($conf_logos)) {
-		if (lire_config('activer_logos_survol') === 'oui') {
+		if (lire_config('activer_logos') === 'oui') {
 			$roles_logos = array(
 				'logo' => array(
 					'label' => 'logos_roles:logo',
