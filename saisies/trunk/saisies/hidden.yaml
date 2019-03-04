@@ -25,6 +25,12 @@ options:
       -
         saisie: 'input'
         options:
+          nom: 'conteneur_class'
+          label: '<:saisies:option_conteneur_class_label:>'
+          size: 50
+      -
+        saisie: 'input'
+        options:
           nom: 'defaut'
           label: '<:saisies:option_defaut_label:>'
           size: 50
