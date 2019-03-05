@@ -1,49 +1,49 @@
 <traduction module="saisies" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/saisies/trunk/lang/" reference="fr">
-	<langue code="ca" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=ca" total="195" traduits="85" relire="0" modifs="9" nouveaux="101" pourcent="43.59">
+	<langue code="ca" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=ca" total="196" traduits="85" relire="0" modifs="9" nouveaux="102" pourcent="43.37">
 	</langue>
-	<langue code="de" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=de" total="195" traduits="179" relire="0" modifs="1" nouveaux="15" pourcent="91.79">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=de" total="196" traduits="179" relire="0" modifs="1" nouveaux="16" pourcent="91.33">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
-	<langue code="en" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=en" total="195" traduits="187" relire="0" modifs="0" nouveaux="8" pourcent="95.90">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=en" total="196" traduits="187" relire="0" modifs="0" nouveaux="9" pourcent="95.41">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="jack31" lien="https://trad.spip.net/auteur/jack31" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Paolo" lien="https://trad.spip.net/auteur/paolo" />
 	</langue>
-	<langue code="es" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=es" total="195" traduits="161" relire="4" modifs="2" nouveaux="28" pourcent="82.56">
+	<langue code="es" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=es" total="196" traduits="161" relire="4" modifs="2" nouveaux="29" pourcent="82.14">
 		<traducteur nom="danielquisbert" lien="https://trad.spip.net/auteur/danielquisbert" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
 		<traducteur nom="severo" lien="https://trad.spip.net/auteur/severo" />
 	</langue>
-	<langue code="fa" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=fa" total="195" traduits="107" relire="0" modifs="3" nouveaux="85" pourcent="54.87">
+	<langue code="fa" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=fa" total="196" traduits="107" relire="0" modifs="3" nouveaux="86" pourcent="54.59">
 		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=fr" total="195" traduits="195" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=fr" total="196" traduits="196" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=fr_tu" total="195" traduits="171" relire="0" modifs="1" nouveaux="23" pourcent="87.69">
+	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=fr_tu" total="196" traduits="171" relire="0" modifs="1" nouveaux="24" pourcent="87.24">
 		<traducteur nom="beatnick" lien="https://trad.spip.net/auteur/beatnick" />
 		<traducteur nom="Cerf" lien="https://trad.spip.net/auteur/cerf" />
 		<traducteur nom="RealET" lien="https://trad.spip.net/auteur/realet" />
 	</langue>
-	<langue code="it" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=it" total="195" traduits="139" relire="0" modifs="3" nouveaux="53" pourcent="71.28">
+	<langue code="it" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=it" total="196" traduits="139" relire="0" modifs="3" nouveaux="54" pourcent="70.92">
 	</langue>
-	<langue code="nl" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=nl" total="195" traduits="191" relire="0" modifs="0" nouveaux="4" pourcent="97.95">
+	<langue code="nl" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=nl" total="196" traduits="191" relire="0" modifs="0" nouveaux="5" pourcent="97.45">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="mpossoz" lien="https://trad.spip.net/auteur/mpossoz" />
 	</langue>
-	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=pt_br" total="195" traduits="179" relire="0" modifs="1" nouveaux="15" pourcent="91.79">
+	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=pt_br" total="196" traduits="179" relire="0" modifs="1" nouveaux="16" pourcent="91.33">
 		<traducteur nom="placido" lien="https://trad.spip.net/auteur/placido" />
 		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
-	<langue code="ru" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=ru" total="195" traduits="145" relire="0" modifs="11" nouveaux="39" pourcent="74.36">
+	<langue code="ru" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=ru" total="196" traduits="145" relire="0" modifs="11" nouveaux="40" pourcent="73.98">
 		<traducteur nom="nazar" lien="https://trad.spip.net/auteur/nazar" />
 		<traducteur nom="olly" lien="https://trad.spip.net/auteur/olly" />
 		<traducteur nom="Serge Markitanenko" lien="https://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
-	<langue code="sk" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=sk" total="195" traduits="163" relire="0" modifs="1" nouveaux="31" pourcent="83.59">
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=sk" total="196" traduits="163" relire="0" modifs="1" nouveaux="32" pourcent="83.16">
 		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
