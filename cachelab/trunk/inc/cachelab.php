@@ -4,13 +4,18 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 include_spip('public/cachelab_utils');
 
-//
-// Applique une action sur un cache donné
-//
-// Nécessite Mémoization (toutes méthodes OK).
-//
-// Renvoie un booléen indiquant si l'action a pu être appliquée ou non
-//
+/**
+ *
+ * Applique une action sur un cache donné et renvoie éventuellement une donnée
+ * Nécessite Mémoization (toutes méthodes OK).
+ *
+ * @param $action : del, pass, list, clean, list_html, get, get_html ou user defined
+ * @param $cle : clé du cache ciblé
+ * @param null $data : valeur du cache pour cette clé (pas forcément fourni)
+ * @param string $options
+ * @param null $return : résultat éventuellement fourni, pour les actions list et get
+ * @return bool : indique si l'action a pu être appliquée ou non
+ */
 function cachelab_applique ($action, $cle, $data=null, $options='', &$return=null) {
 global $Memoization;
 	if (!isset($Memoization) or !$Memoization) {
@@ -69,22 +74,20 @@ static $len_prefix;
 	return true;
 }
 
-function cachelab_filtre($action, $conditions=array(), $options=array()) {
-	spip_log ("cachelab_filtre obsolète avec $action, ".print_r($conditions, 1), "OBSOLETE_cachelab");
-	return cachelab_cibler ($action, $conditions, $options);
-}
-
-//
-// cachelab_cibler : 
-// 	applique une action donnée à tous les caches vérifiant certaines conditions
-//
-// uses apcu_cache_info() 
-//	et donc nécessite que Memoization soit activé avec APC ou APCu 
-//
-// renvoie : 
-//	le résultat si c'est une action 'get' ou 'get_...'
-// 	la liste des stats sinon, avec éventuellement la liste des résultats s'ils sont demandés (pour 'list_html'...)
-//
+/**
+ *
+ * Applique une action donnée à tous les caches vérifiant certaines conditions
+ *
+ * @uses apcu_cache_info() et donc nécessite que Memoization soit activé avec APC ou APCu
+ *
+ * @param $action   : l'action à appliquer
+ * @param array $conditions : les conditions définissant la cible
+ * @param array $options    : options de l'action et/ou des conditions
+ * @return array|null
+ *      le résultat si c'est une action 'get' ou 'get_...'
+ *      la liste des stats sinon, avec éventuellement la liste des résultats s'ils sont demandés (pour 'list_html'...)
+ *
+ */
 function cachelab_cibler ($action, $conditions=array(), $options=array()) {
 global $Memoization;
 	if (!isset($Memoization) or !$Memoization or !in_array($Memoization->methode(), array('apc', 'apcu'))) {
@@ -276,6 +279,10 @@ global $Memoization;
 	return $stats;
 }
 
+/**
+ * @param $action
+ * @param array $objets_invalidants
+ */
 function controler_invalideur($action, $objets_invalidants=array()) {
 static $prev_derniere_modif_invalide;
 	switch($action) {
@@ -300,6 +307,15 @@ static $prev_derniere_modif_invalide;
 // qui est un tableau de (clé, valeur)
 // Toutes les valeurs doivent être vérifiées dans l'environnement.
 // 
+/**
+ * @param $action
+ * @param $conditions
+ * @param $options
+ * @param $cle
+ * @param $data
+ * @param $stats
+ * @return bool
+ */
 function cachelab_ciblercache_contexte($action, $conditions, $options, $cle, &$data, &$stats) {
 	if (!isset ($data['contexte'])
 		or !isset($conditions['contexte'])
