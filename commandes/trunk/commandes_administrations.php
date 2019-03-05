@@ -66,7 +66,7 @@ function commandes_upgrade($nom_meta_base_version, $version_cible) {
 	    array('maj_tables', array('spip_commandes_details'))
 	);
 
-	
+
 	$maj['0.3'] = array(
 	     array(
 	     	     'ecrire_config', 'commandes', array('duree_vie' => 3600)
@@ -127,7 +127,7 @@ function commandes_upgrade($nom_meta_base_version, $version_cible) {
 	    array('maj_tables', array('spip_commandes')),
 	    array('sql_alter', 'TABLE spip_commandes_details CHANGE taxe taxe DECIMAL(4,4) NULL DEFAULT NULL')
 	);
-	
+
 	// Corriger les UID bancaires manquant dans les commandes
 	$maj['0.7.4'] = array(
 		array('commandes_maj_0_7_4'),
@@ -152,7 +152,7 @@ function commandes_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.7.9'] = array(
 		array('sql_alter', 'TABLE spip_commandes_details CHANGE prix_unitaire_ht prix_unitaire_ht DECIMAL(20,6) NOT NULL DEFAULT 0'),
 	);
-	
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -162,7 +162,7 @@ function commandes_maj_0_7_4() {
 	// On récupère toutes les commandes qui ont un renouvellement récurent
 	if ($commandes_recurentes = sql_allfetsel('id_commande', 'spip_commandes', 'echeances_type!=""')) {
 		$commandes_recurentes = array_map('reset', $commandes_recurentes);
-		
+
 		foreach ($commandes_recurentes as $id_commande) {
 			$id_commande = intval($id_commande);
 			// On récupère l'UID chez le prestataire
@@ -182,7 +182,7 @@ function commandes_maj_0_7_4() {
  * @return void
  * */
 function commandes_vider_tables($nom_meta_base_version) {
-	sql_drop_table("spip_commandes,spip_commandes_details");
+	sql_drop_table("spip_commandes,spip_commandes_details,spip_commandes_liens");
 
 	# Nettoyer les versionnages et forums
 	sql_delete("spip_versions", sql_in("objet", array('commande')));
