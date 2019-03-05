@@ -1,10 +1,9 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/locations_objets_restrictions/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
-
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -15,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_extension_label' => 'Extention',
 	'champ_id_extension_label' => 'ID extension',
 	'champ_id_restriction_source_label' => 'ID restriction source',
-	'champ_type_restriction_label' => 'Type de restriction :',
+	'champ_type_restriction_label' => 'Type de restriction :',
 	'confirmer_supprimer_restriction' => 'Confirmez-vous la suppression de cette restriction ?',
 
 	// I
@@ -46,5 +45,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_objets_lies_restriction' => 'Liés à cette restriction',
 	'titre_restriction' => 'Restriction',
 	'titre_restrictions' => 'Restrictions',
-	'titre_restrictions_rubrique' => 'Restrictions de la rubrique',
+	'titre_restrictions_rubrique' => 'Restrictions de la rubrique'
 );
