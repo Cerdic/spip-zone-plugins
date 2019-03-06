@@ -1,0 +1,21 @@
+<paquet
+	prefix="rang_auteurs"
+	categorie="edition"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.3.0-dev;3.3.*]"
+	logo="prive/themes/spip/images/rang_auteurs-32.png"
+	documentation=""
+	schema="1.0.0" 
+>
+
+	<nom>Rang sur les auteurs</nom>
+	<!-- De la préséance que diable ! -->
+
+	<auteur>Cerdic</auteur>
+
+	<licence>GNU/GPL</licence>
+
+
+
+</paquet>
