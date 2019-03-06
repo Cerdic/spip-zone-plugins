@@ -209,7 +209,6 @@ function formulaires_formidable_verifier($id, $valeurs = array(), $id_formulaire
 
 		// On supprime de $_FILES les fichiers envoyés qui ne passent pas le test de vérification
 
-		//$infos_plugins = charger_fonction('infos_plugins','plugins');
 		$plugins_actifs = liste_plugin_actifs();
 		if (isset($plugins_actifs['CVTUPLOAD'])) {
 			include_spip('inc/cvtupload');
