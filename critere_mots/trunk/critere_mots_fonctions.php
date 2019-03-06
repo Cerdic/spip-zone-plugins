@@ -116,18 +116,30 @@ function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $s
               $id_mot = $mot;
           else
               $id_mot = sql_getfetsel('id_mot', 'spip_mots', 'titre='.sql_quote($mot));
-          $where[] = 'id_mot='.sql_quote($id_mot).' and objet='.sql_quote($objet_delatable);
+          if (function_exists('calcul_branche_mot_in')) {
+			  $where[] = sql_in('id_mot',calcul_branche_mot_in($id_mot)).' and objet='.sql_quote($objet_delatable);
+		  } else {
+			$where[] = 'id_mot='.sql_quote($id_mot).' and objet='.sql_quote($objet_delatable);
+		  }		  
       }
   }
 	elseif($id_ou_titre == 'id'){
-	   foreach($mots as $mot) {
-	       $where[] = 'id_mot='.sql_quote($mot).' and objet='.sql_quote($objet_delatable);
+	   foreach($mots as $id_mot) {
+          if (function_exists('calcul_branche_mot_in')) {
+			$where[] = sql_in('id_mot',calcul_branche_mot_in($id_mot)).' and objet='.sql_quote($objet_delatable);
+		  } else {
+			$where[] = 'id_mot='.sql_quote($id_mot).' and objet='.sql_quote($objet_delatable);
+		  }
 	   }
 	}
 	elseif($id_ou_titre == 'titre'){
 	   foreach($mots as $mot) {
 	        $id_mot = sql_getfetsel('id_mot', 'spip_mots', 'titre='.sql_quote($mot));
-            $where[] = 'id_mot='.sql_quote($id_mot) .' and objet='.sql_quote($objet_delatable);
+		    if (function_exists('calcul_branche_mot_in')) {
+			  $where[] = sql_in('id_mot',calcul_branche_mot_in($id_mot)).' and objet='.sql_quote($objet_delatable);
+		    } else {
+			  $where[] = 'id_mot='.sql_quote($id_mot).' and objet='.sql_quote($objet_delatable);
+		    }
 	   }
 	}
 	
