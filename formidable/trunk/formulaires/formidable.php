@@ -87,12 +87,9 @@ function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires
 				and _request('formidable_afficher_apres') == 'valeurs'
 				and _request('erreurs') == false
 			) {
-				foreach ($saisies as $k => $saisie) {
-					if (isset($saisie['saisie'])
-						and $saisie['saisie'] == 'hidden'
-					) {
-						unset($saisies[$k]);
-					}
+				$champs_hidden = saisies_lister_avec_type($saisies, 'hidden');
+				foreach ($champs_hidden as $champ => $desc) {
+					$saisies = saisies_supprimer($saisies, $champ);
 				}
 			}
 
