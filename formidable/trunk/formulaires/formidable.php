@@ -81,11 +81,11 @@ function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires
 		if (autoriser('repondre', 'formulaire', $formulaire['id_formulaire'], null, array('formulaire' => $formulaire))) {
 			$saisies = unserialize($formulaire['saisies']);
 			$traitements = unserialize($formulaire['traitements']);
-
 			// Si on est en train de réafficher les valeurs postées,
 			// ne pas afficher les saisies hidden
 			if ($formulaire['apres'] == 'valeurs'
 				and _request('formidable_afficher_apres') == 'valeurs'
+				and _request('erreurs') == false
 			) {
 				foreach ($saisies as $k => $saisie) {
 					if (isset($saisie['saisie'])
@@ -167,7 +167,6 @@ function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires
 		$contexte['cvtupload_precharger_fichiers'] = $precharger;
 	}
 	$contexte['formidable_afficher_apres'] = $formulaire['apres'];
-
 	return $contexte;
 }
 
@@ -255,6 +254,9 @@ function formulaires_formidable_verifier($id, $valeurs = array(), $id_formulaire
 
 		if ($erreurs and !isset($erreurs['message_erreur'])) {
 			$erreurs['message_erreur'] = _T('formidable:erreur_generique');
+		}
+		if ($erreurs) { // Pour savoir au chargement si le formulaire a deja été envoyé avec erreur'
+			set_request('erreurs', true);
 		}
 	}
 	return $erreurs;
