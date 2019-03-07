@@ -18,6 +18,6 @@
 
 	<pipeline nom="header_prive" inclure="rang_auteurs_pipelines.php" />
 
-	<utilise nom="jqueryui" compatibilite="[1.12.0;]" />
+	<utilise nom="jqueryui" compatibilite="[1.12.1;]" />
 
 </paquet>
