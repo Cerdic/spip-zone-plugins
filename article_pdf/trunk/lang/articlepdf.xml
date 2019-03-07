@@ -1,4 +1,4 @@
-<traduction module="articlepdf" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/article_pdf/lang/" reference="fr">
+<traduction module="articlepdf" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/article_pdf/trunk/lang/" reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/articlepdf?lang_cible=de" total="12" traduits="1" relire="0" modifs="0" nouveaux="11" pourcent="8.33">
 	</langue>
 	<langue code="en" url="https://trad.spip.net/tradlang_module/articlepdf?lang_cible=en" total="12" traduits="8" relire="0" modifs="0" nouveaux="4" pourcent="66.67">
