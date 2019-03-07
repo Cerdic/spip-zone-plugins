@@ -1,4 +1,4 @@
-<traduction module="paquet-yaml" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/yaml/lang/" reference="fr">
+<traduction module="paquet-yaml" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/yaml/trunk/lang/" reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-yaml?lang_cible=de" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
