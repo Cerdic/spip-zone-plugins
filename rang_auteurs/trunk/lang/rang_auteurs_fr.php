@@ -6,7 +6,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	// D
+	'deplacer_element' => 'Déplacer cet élément',
 
+	// L
 	'lien_tout_desordonner' => 'Réinitialiser l’ordre',
 	'lien_ordonner' => 'Ordonner les auteurs',
 

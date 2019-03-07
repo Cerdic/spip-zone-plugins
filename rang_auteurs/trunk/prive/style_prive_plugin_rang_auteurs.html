@@ -1,0 +1,16 @@
+
+/* Gestion du drag n drop */
+.liste-objets span.deplacer {
+    display:inline-block;
+    width:24px;
+    height:24px;
+    background:url('#CHEMIN_IMAGE{drag-handle.svg}');
+    background-size:contain;
+    opacity:.35;
+    cursor:grab;
+}
+.liste-objets span.deplacer:hover,
+.liste-objets span.deplacer:focus {
+    opacity:1;
+}
+.deplacer-en-mouvement span.deplacer { cursor:grabbing; }

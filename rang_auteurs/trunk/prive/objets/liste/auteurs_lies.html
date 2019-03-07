@@ -15,12 +15,12 @@
 a mis a jour la valeur avec la page reelle]
 #SET{debut,#ENV{debutautl,#EVAL{_request("debutautl");}}}
 #ANCRE_PAGINATION
-<div class="liste-objets liste-objets-lies auteurs">
+<div class="liste-objets liste-objets-lies auteurs" data-lien="#ENV{objet}/#ENV{id_objet}">
 <table class='spip liste'>
 [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_auteur,info_nb_auteurs}}) #AIDER{artauteurs}</strong></caption>]
 	<thead>
 		<tr class='first_row'>
-			<th></th>
+			<th class='rang'></th>
 			<th class='statut' scope='col'>[(#CHEMIN_IMAGE{auteur-0minirezo-16.png}|balise_img{<:lien_trier_statut|attribut_html:>})]</th>
 			<th class='nom' scope='col' colspan='2'><:info_nom:></th>
 			<th class='email' scope='col'><:email:></th>
@@ -30,15 +30,15 @@ a mis a jour la valeur avec la page reelle]
 	</thead>
 	<tbody>
 	<BOUCLE_liste_aut(AUTEURS){tout}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{id_auteur IN #GET{selection}}{par rang_lien,multi nom}{where?}{statut?}{pagination #ENV{nb,10} autl}{!compteur_articles_filtres #ENV*{filtre_statut_articles,poubelle}}>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_AUTEUR|=={#ENV{id_lien_ajoute}}|oui)append]">
-			#SET{rang,#RANG}#SET{last,#ID_AUTEUR}
-			<td style="padding: 0;">
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_AUTEUR|=={#ENV{id_lien_ajoute}}|oui)append]" data-lien="auteur/#ID_AUTEUR" data-rang="#RANG_LIEN">
+			#SET{rang,#RANG_LIEN}#SET{last,#ID_AUTEUR}
+			<td class='rang' style="padding: 0;">
 				[(#GET{rang}|oui)#SET{ordonne,' '}
 				<button type="submit" name="ordonner_lien\[auteur-#ID_AUTEUR-#ENV{objet}-#ENV{id_objet}\]" value="[(#GET{rang}|moins{1})]" style="padding: 0"
-				>[(#GET{rang}|?{&uarr;,'#'})]</button>]
+				>[(#GET{rang}|>{1}|?{&uarr;,'#'})]</button>]
 			</td>
 			<td class='statut'>[(#STATUT|puce_statut{auteur})]</td>
-			<td class='nom[ (#NOM|non)vide]'[(#LOGO_AUTEUR|non)colspan='2']><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#GET{rang}). ][(#NOM|sinon{<:texte_vide:>})]</a></td>
+			<td class='nom[ (#NOM|non)vide]'[(#LOGO_AUTEUR|non)colspan='2']><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#GET{rang}|?{#GET{rang}}). ][(#NOM|sinon{<:texte_vide:>})]</a></td>
 			[<td class='logo'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]" style="background-image:url\((#LOGO_AUTEUR|image_passe_partout{40,40}|extraire_attribut{src}))"></a></td>]
 			<td class='email'>[<a href='mailto:(#EMAIL)'>[(#EMAIL|couper{30})]</a>]</td>
 			<td class='nombre'>[(#COMPTEUR_ARTICLES|singulier_ou_pluriel{info_1_article,info_nb_articles})][<br /><span>(#PIPELINE{'compter_contributions_auteur',#ARRAY{args,#ARRAY{id_auteur,#ID_AUTEUR},data,#ARRAY{}}}|implode{'<br />'})</span>]</td>
