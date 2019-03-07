@@ -55,7 +55,7 @@ a mis a jour la valeur avec la page reelle]
 <div class="action" style="overflow: hidden">
 [(#GET{ordonne}|oui)
 <button type="submit" class="button link" name="desordonner_liens" value="X" style="float: left"><:rang_auteurs:lien_tout_desordonner:></button>]
-[(#GET{ordonne}|non)
+[(#GET{ordonne}|non|et{#GRAND_TOTAL|>{1}})
 <button type="submit" class="button link" name="ordonner_lien\[auteur-#GET{last}-#ENV{objet}-#ENV{id_objet}\]" value="999999" style="float: left"><:rang_auteurs:lien_ordonner:></button>]
 [(#GRAND_TOTAL|>{3}|oui)<button type="submit" class="button link" name="supprimer_lien\[auteur-*-#OBJET-#ID_OBJET\]" value="X"><:lien_retirer_tous_auteurs:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button>]
 </div>
