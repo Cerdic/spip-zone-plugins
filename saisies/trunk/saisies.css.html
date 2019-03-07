@@ -1,6 +1,6 @@
 #CACHE{3600*100,cache-client}
 [(#REM)<style>]
-#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
 #SET{left,#LANG_DIR|choixsiegal{ltr,left,right}}
@@ -54,3 +54,14 @@
 
 /* avec crayons + formulaire de saisies, éviter un padding à gauche du label */
 .formulaire_crayon .editer-groupe .editer { padding-left:10px; }
+
+/* les étapes */
+.formulaire_spip .etapes__items {
+	list-style: none;
+}
+.formulaire_spip .etapes__item {
+	display: inline-block;
+}
+.formulaire_spip .etapes__item:not(:first-child):before {
+	content: ' → ';
+}

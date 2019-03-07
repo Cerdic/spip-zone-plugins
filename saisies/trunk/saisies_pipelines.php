@@ -119,7 +119,12 @@ function saisies_formulaire_charger($flux) {
 		// On ajoute au contexte les champs à déclarer
 		$contexte = saisies_lister_valeurs_defaut($saisies);
 		$flux['data'] = array_merge($contexte, $flux['data']);
-
+		
+		// On cherche si on gère des étapes
+		if ($etapes = saisies_lister_par_etapes($saisies)) {
+			$flux['data']['_etapes'] = count($etapes);
+		}
+		
 		// On ajoute le tableau complet des saisies
 		$flux['data']['_saisies'] = $saisies;
 	}
@@ -175,15 +180,41 @@ function saisies_formulaire_verifier($flux) {
 	// Il faut que la fonction existe et qu'elle retourne bien un tableau
 	include_spip('inc/saisies');
 	$saisies = saisies_chercher_formulaire($flux['args']['form'], $flux['args']['args']);
-	if ($saisies) {
-		// On ajoute au contexte les champs à déclarer
+	if ($saisies and !saisies_lister_par_etapes($saisies)) {
 		$erreurs = saisies_verifier($saisies);
+		
 		if ($erreurs and !isset($erreurs['message_erreur'])) {
 			$erreurs['message_erreur'] = _T('saisies:erreur_generique');
 		}
 
 		$flux['data'] = array_merge($erreurs, $flux['data']);
+	}
 
+	return $flux;
+}
+
+/**
+ * Ajouter les vérifications déclarées dans la fonction "saisies" du CVT mais pour les étapes
+ *
+ * @see saisies_formulaire_charger()
+ * @uses saisies_verifier()
+ *
+ * @param array $flux
+ *     Liste des erreurs du formulaire
+ * @return array
+ *     iste des erreurs
+ */
+function saisies_formulaire_verifier_etape($flux) {
+	// Il faut que la fonction existe et qu'elle retourne bien un tableau
+	include_spip('inc/saisies');
+	$saisies = saisies_chercher_formulaire($flux['args']['form'], $flux['args']['args']);
+	if ($saisies and $etapes = saisies_lister_par_etapes($saisies)) {
+		// On récupère les sous-saisies de cette étape précise
+		$saisies_etape = $etapes[$flux['args']['etape']]['saisies'];
+		
+		$erreurs = saisies_verifier($saisies_etape);
+
+		$flux['data'] = array_merge($erreurs, $flux['data']);
 	}
 
 	return $flux;

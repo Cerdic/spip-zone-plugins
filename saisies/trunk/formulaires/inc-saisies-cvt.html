@@ -9,8 +9,17 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		
+		[(#ENV{_etape}|oui)
+			#SET{etapes, #ENV{_saisies}|saisies_lister_par_etapes}
+			<INCLURE{fond=formulaires/inc-saisies-cvt-etapes, etapes=#GET{etapes}, env} />
+		]
+		
 		<[(#DIV|sinon{ul})] class="editer-groupe">
-			#GENERER_SAISIES{#ENV{_saisies}}
+			#SET{saisies, #ENV{_saisies}}
+			[(#ENV{_etape}|oui)
+				#SET{saisies, #GET{etapes}|table_valeur{#ENV{_etape}/saisies}}
+			]
+			#GENERER_SAISIES{#GET{saisies}}
 		</[(#DIV|sinon{ul})]>
 		
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
@@ -18,7 +27,14 @@
 		
 		<p class="boutons">
 			<span class="image_loading"></span>
-			<input type="submit" class="submit" value="[(#ENV{_saisies/options/texte_submit, #ENV{saisies_texte_submit, <:bouton_enregistrer:>}})]" />
+			[(#SET{label_valider, #ENV{_saisies/options/texte_submit, #ENV{saisies_texte_submit, <:bouton_enregistrer:>}}})]
+			[(#ENV{_etape}|et{#ENV{_etape}|!={#ENV{_etapes}}})
+				[(#SET{label_valider, #ENV{_saisies/options/etapes_suivant, <:bouton_suivant:>}})]
+			]
+			[(#ENV{_etape}|>{1}|oui)
+				<input type="submit" class="submit" name="_retour_etape_[(#ENV{_etape}|moins{1})]" value="[(#ENV{_saisies/options/etapes_precedent, <:bouton_precedent:>})]" />
+			]
+			<input type="submit" class="submit" value="#GET{label_valider}" />
 		</p>
 	</div></form>
 	]

@@ -175,6 +175,62 @@ function saisies_lister_par_type($contenu) {
 }
 
 /**
+ * Liste les saisies par étapes s'il y en a
+ * 
+ * @param array $saisies
+ * 		Liste des saisies
+ * @return array|bool
+ * 		Retourne un tableau associatif par numéro d'étape avec pour chacune leurs saisies, false si pas d'étapes
+ */
+function saisies_lister_par_etapes($saisies) {
+	$saisies_etapes = false;
+	$etapes = 0;
+	
+	if (isset($saisies['options']['etapes_activer']) and $saisies['options']['etapes_activer']) {
+		// Un premier parcourt pour compter les étapes
+		foreach ($saisies as $cle => $saisie) {
+			if (is_array($saisies) and $saisie['saisie'] == 'fieldset') {
+				$etapes++;
+			}
+		}
+		
+		// Seulement s'il y a au moins deux étapes
+		if ($etapes > 1) {
+			$saisies_etapes = array();
+			$compteur_etape = 0;
+			
+			// On reparcourt pour lister les saisies
+			foreach ($saisies as $cle => $saisie) {
+				// Si c'est un groupe, on ajoute son contenu à l'étape
+				if (isset($saisie['saisie']) and $saisie['saisie'] == 'fieldset') {
+					$compteur_etape++;
+					// S'il y a eu des champs hors groupe avant, on fusionne
+					if (isset($saisies_etapes[$compteur_etape]['saisies'])) {
+						$saisies_precedentes = $saisies_etapes[$compteur_etape]['saisies'];
+						$saisies_etapes[$compteur_etape] = $saisie;
+						$saisies_etapes[$compteur_etape]['saisies'] = array_merge($saisies_precedentes, $saisie['saisies']);
+					}
+					else {
+						$saisies_etapes[$compteur_etape] = $saisie;
+					}
+				}
+				// Sinon si champ externe à un groupe, on l'ajoute à toutes les étapes
+				elseif (isset($saisie['saisie'])) {
+					for ($e=1;$e<=$etapes;$e++) {
+						if (!isset($saisies_etapes[$e]['saisies'])) {
+							$saisies_etapes[$e] = array('saisies'=>array());
+						}
+						array_push($saisies_etapes[$e]['saisies'], $saisie);
+					}
+				}
+			}
+		}
+	}
+	
+	return $saisies_etapes;
+}
+
+/**
  * Prend la description complète du contenu d'un formulaire et retourne
  * une liste des noms des champs du formulaire.
  *
