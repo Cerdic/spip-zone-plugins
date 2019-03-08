@@ -315,5 +315,3 @@ function phraser_xml_boussole($boussole, $serveur='spip') {
 	
 	return $infos;
 }
-
-?>

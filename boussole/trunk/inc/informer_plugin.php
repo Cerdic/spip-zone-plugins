@@ -40,5 +40,3 @@ function inc_informer_plugin_dist($prefixe) {
 
 	return (is_array($infos) ? $infos : array());
 }
-
-?>

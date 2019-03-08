@@ -44,5 +44,3 @@ function action_client_retirer_serveur_dist(){
 		}
 	}
 }
-
-?>

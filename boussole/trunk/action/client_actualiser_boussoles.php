@@ -48,5 +48,3 @@ function action_client_actualiser_boussoles_dist(){
 		boussole_actualiser_boussoles();
 	}
 }
-
-?>

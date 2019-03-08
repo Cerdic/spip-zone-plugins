@@ -255,5 +255,3 @@ function maj05_boussole($url_serveur_spip) {
 
 	spip_log('Maj 0.4 des données du plugin : ' . serialize(lire_config('boussole')),_BOUSSOLE_LOG . _LOG_INFO);
 }
-
-?>

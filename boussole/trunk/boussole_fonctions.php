@@ -262,5 +262,3 @@ function boussole_compter_hebergements() {
 
 	return count($boussoles);
 }
-
-?>

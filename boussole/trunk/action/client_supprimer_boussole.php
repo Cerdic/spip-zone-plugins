@@ -40,5 +40,3 @@ function action_client_supprimer_boussole_dist(){
 		spip_log("ACTION SUPPRIMER BOUSSOLE : alias = ". $alias, _BOUSSOLE_LOG . _LOG_INFO);
 	}
 }
-
-?>

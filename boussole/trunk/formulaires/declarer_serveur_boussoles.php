@@ -63,5 +63,3 @@ function formulaires_declarer_serveur_boussoles_traiter_dist() {
 
 	return $retour;
 }
-
-?>

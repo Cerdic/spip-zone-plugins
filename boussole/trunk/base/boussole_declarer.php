@@ -93,5 +93,3 @@ function boussole_declarer_tables_interfaces($interface) {
 
 	return $interface;
 }
-
-?>

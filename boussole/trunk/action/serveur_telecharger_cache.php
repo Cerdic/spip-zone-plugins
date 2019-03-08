@@ -39,5 +39,3 @@ function action_serveur_telecharger_cache_dist(){
 	exit();
 
 }
-
-?>

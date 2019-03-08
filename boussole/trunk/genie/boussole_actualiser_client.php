@@ -15,5 +15,3 @@ function genie_boussole_actualiser_client_dist($last) {
 
 	return 1;
 }
-
-?>

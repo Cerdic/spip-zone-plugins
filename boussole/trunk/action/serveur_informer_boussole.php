@@ -90,5 +90,3 @@ function action_serveur_informer_boussole_dist(){
 		echo $page;
 	}
 }
-
-?>

@@ -145,5 +145,3 @@ function charger_boussoles() {
 
 	return array($liste, $message);
 }
-
-?>

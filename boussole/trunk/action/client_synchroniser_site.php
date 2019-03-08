@@ -72,5 +72,3 @@ function action_client_synchroniser_site_dist(){
 		}
 	}
 }
-
-?>

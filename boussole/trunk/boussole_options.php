@@ -39,5 +39,3 @@ if (!defined('_BOUSSOLE_NOMTAG_ERREUR'))
 	/**
 	 * Nom de la balise XML définissant une erreur */
 	define('_BOUSSOLE_NOMTAG_ERREUR', 'erreur');
-
-?>

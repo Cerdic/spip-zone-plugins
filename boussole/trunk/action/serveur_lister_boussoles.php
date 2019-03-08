@@ -76,5 +76,3 @@ function action_serveur_lister_boussoles_dist(){
 		echo $page;
 	}
 }
-
-?>

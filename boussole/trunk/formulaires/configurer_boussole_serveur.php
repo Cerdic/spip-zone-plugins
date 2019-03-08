@@ -16,5 +16,3 @@ function formulaires_configurer_boussole_serveur_verifier() {
 	}
 	return $erreurs;
 }
-
-?>

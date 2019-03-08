@@ -56,5 +56,3 @@ function formulaires_declarer_boussole_manuelle_traiter_dist() {
 
 	return $retour;
 }
-
-?>

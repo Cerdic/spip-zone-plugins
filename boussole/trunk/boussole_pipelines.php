@@ -94,5 +94,3 @@ function boussole_post_edition($flux){
 
 	return $flux;
 }
-
-?>

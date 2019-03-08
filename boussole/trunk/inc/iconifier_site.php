@@ -73,5 +73,3 @@ function creer_image_pour_iconifier($url_image) {
 
 	return $image;
 }
-
-?>

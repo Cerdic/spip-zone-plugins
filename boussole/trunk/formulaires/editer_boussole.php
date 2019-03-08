@@ -109,5 +109,3 @@ function formulaires_editer_boussole_traiter($aka_boussole){
 
 	return $retours;
 }
-
-?>

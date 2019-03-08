@@ -51,5 +51,3 @@ function action_serveur_retirer_boussole_dist(){
 		}
 	}
 }
-
-?>

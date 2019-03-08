@@ -8,5 +8,3 @@ function genie_boussole_actualiser_serveur_dist($last) {
 
 	return 1;
 }
-
-?>

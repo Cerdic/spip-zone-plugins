@@ -482,5 +482,3 @@ function inserer_traductions($nom, $slogan, $description, $indentation=0) {
 function indenter($decalage) {
 	return str_repeat("\t", $decalage);
 }
-
-?>

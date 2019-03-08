@@ -20,5 +20,3 @@ function boussole_taches_generales_cron($taches_generales) {
 
 	return $taches_generales;
 }
-
-?>

@@ -33,5 +33,3 @@ function action_serveur_actualiser_caches_dist(){
 		boussole_actualiser_caches();
 	}
 }
-
-?>

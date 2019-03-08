@@ -36,6 +36,3 @@ function inc_decoder_xml_dist($xml){
 
 	return $tableau;
 }
-
-
-?>

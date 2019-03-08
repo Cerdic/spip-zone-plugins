@@ -179,6 +179,3 @@ function trouver_caches(){
 
 	return $caches;
 }
-
-
-?>
