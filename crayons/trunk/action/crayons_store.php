@@ -458,7 +458,7 @@ function crayons_update($id, $colval = array(), $type = '') {
         // l'api sql sait gerer les prefixes contrairement a spip_query.
         // On garde un semblant de compatibilité
         if ( isset($GLOBALS['spip_version_code']) && $GLOBALS['spip_version_code'] >= '1.93' ) {
-            $a = sql_updateq($nom_table , array($col => $val), $where,'',$distant);
+            $a = sql_updateq($nom_table , $colval, $where,'',$distant);
         }
         else {
             $a = spip_query($q = 'UPDATE `' . $nom_table . '` SET ' . $update . ' WHERE ' . $where, $distant);
