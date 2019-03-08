@@ -3,7 +3,7 @@
 [(#SET{dir_squelettes_dist,[(#EVAL{_DIR_SQUELETTES_DIST})]})]
 [(#SET{blocs,[(#VAL|zinit_repertoire_skel_defaut)]})]
 <h1><:zinit:titre_page_zcore_skel:></h1>
-
+[<pre>(#GET{blocs}|print_r{1})</pre>]
 <div class="liste controles zi">
     <table class="table">
         <thead>
@@ -167,23 +167,30 @@
             <caption><strong><:zinit:surcharge_fichiers_dist{repertoire=#GET{dir_squelettes_dist}}:></strong></caption>
             <thead>
             <tr>
-                <th>[(#GET{dir_squelettes_dist})]</th>
-                <th>[(#GET{dir_squelettes})]</th>
-                <th>[(#GET{dir_squelettes}|concat{#GET{blocs/0},'/'})]</th>
+	            <th rowspan="2" style="width:15%;">[(#GET{dir_squelettes_dist})]</th>
+	            <th colspan="[(#GET{blocs}|count|plus{1})]" style="text-align: center; border-bottom: 1px solid white;">[(#GET{dir_squelettes})]</th>
+            </tr>
+            <tr>
+                <th style="width:[(#VAL{85}|div{#GET{blocs}|count|plus{1}})%]; text-align: center; border-left: 1px solid white;">./</th>
+	            <BOUCLE_blocs_head (DATA) {source table, #GET{blocs}} {par cle}>
+		            <th class="#VALEUR" style="width:[(#VAL{85}|div{#GET{blocs}|count|plus{1}})%]; text-align: center; border-left: 1px solid white;">[./(#VALEUR)/]</th>
+	            </BOUCLE_blocs_head>
             </tr>
             </thead>
             <tbody>
-            <BOUCLE_skel_dist (DATA) {source table, #VAL|zinit_check_skel_dist} {par valeur}>
+            <BOUCLE_skel_dist (DATA) {source table, #LISTE{dist.html}|array_merge{#VAL|zinit_check_skel_dist}}>
             <tr>
-                <td>#VALEUR</td>
-                <td>[(#GET{dir_squelettes}|concat{#VALEUR}|is_file|?{
+                <td style="width:15%;">#VALEUR</td>
+                <td style="width:[(#VAL{85}|div{#GET{blocs}|count|plus{1}})%]">[(#GET{dir_squelettes}|concat{#VALEUR}|is_file|?{
                     [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
-                    [(#CHEMIN_IMAGE{uncheck-16.png}|balise_img)]
+                    -
                     })]</td>
-                <td>[(#GET{dir_squelettes}|concat{#GET{blocs/0},'/',#VALEUR}|is_file|?{
-                    [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
-                    [(#CHEMIN_IMAGE{uncheck-16.png}|balise_img)]
-                    })]</td>
+	            <BOUCLE_blocs (DATA) {source table, #GET{blocs}} {par cle}>
+		            <td class="#VALEUR" style="width:[(#VAL{85}|div{#GET{blocs}|count|plus{1}})%]; text-align: center; border-left: 1px solid white;">[(#GET{dir_squelettes}|concat{#VALEUR,'/',#_skel_dist:VALEUR}|is_file|?{
+			            [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
+			            -
+			            })]</td>
+	            </BOUCLE_blocs>
             </tr>
             </BOUCLE_skel_dist>
             </tbody>
