@@ -1,0 +1,17 @@
+[(#ENV{ajouter}|=={oui}|oui)
+<a href='[(#SELF|parametre_url{ajouter,non})]' class='ajax bouton_fermer'>[(#CHEMIN_IMAGE{fermer-16.png}|balise_img)]</a>
+<div class="ajax">
+#SET{path,#EVAL{_DIR_SITE}squelettes/images/}
+#FORMULAIRE_UPLOAD_IMAGE{#GET{path}}
+</div>
+]
+[(#ENV{ajouter}|=={oui}|non)
+   #BOITE_OUVRIR
+<a href='[(#SELF|parametre_url{voir_images,non}|parametre_url{ajouter,non})]' class='ajax bouton_fermer'>[(#CHEMIN_IMAGE{fermer-16.png}|balise_img)]</a>
+<INCLURE{fond=prive/squelettes/inclure/liste_images}>
+ <div class="ajax">
+[(#SELF|parametre_url{ajouter,oui}|parametre_url{page,#ENV{page}}|icone{<:sdc:bouton_ajouter_image:>, #CHEMIN_IMAGE{image-add-32.png}, #LANG_RIGHT, edit, ajax})]
+</div>
+   #BOITE_FERMER
+ ]
+<br class='nettoyeur'/>

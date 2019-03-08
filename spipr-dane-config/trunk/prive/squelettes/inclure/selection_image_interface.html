@@ -1,0 +1,12 @@
+<style>.bouton-hors-cadre{position: absolute;top: -65px;left: 175px;padding-right: 5px;background: whitesmoke;border: 1px solid gray;border-radius: 5px;}</style>
+<div class="pave_selection_image ajax">
+ [(#REM)   	[(#BOITE_OUVRIR{#CHEMIN_IMAGE{image-32}|balise_img{'',cadre-icone}|concat{Images disponibles},'simple',''})] ]
+ [(#ENV{voir_images}|=={oui}|non)
+    <div class="bouton-hors-cadre">   [(#SELF|parametre_url{voir_images,oui}|parametre_url{ajouter,''}|icone_horizontale{<:sdc:voir_les_images_disponibles:>, image-24, edit, ajax})]
+</div>][(#ENV{voir_images}|=={oui}|oui)
+		<div>
+			<INCLURE{fond=prive/squelettes/inclure/selection_image, page=#ENV{page}, env}>
+		</div>
+]	
+    [(#REM)        <br class="nettoyeur"/>]
+</div>

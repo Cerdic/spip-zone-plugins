@@ -1,0 +1,15 @@
+[(#PLUGIN{ieconfig}|oui)[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{ieconfig-24.png}|balise_img{'',cadre-icone})]})]
+	[(#URL_ECRIRE{ieconfig_export}|icone_horizontale{<:sdc:exporter_configuration:>,config-export})]
+	[(#URL_ECRIRE{ieconfig_import}|icone_horizontale{<:sdc:importer_configuration:>,config-import})]
+#BOITE_FERMER
+]
+[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{sdc-24.png}|balise_img{'',cadre-icone})]})]
+<ul class="liste_items">
+	<li class="item">
+		[(#ENV{voir_config}|non)<a href="[(#SELF|parametre_url{voir_config, oui})]" class="ajax"><:sdc:voir_configuration:></a>]
+		[(#ENV{voir_config}|=={oui}|oui)<a href="[(#SELF|parametre_url{voir_config, ''})]" class="ajax"><:sdc:masquer_configuration:></a>]
+    </li>
+</ul>
+[(#ENV{voir_config}|oui)
+<div class="ajax"><INCLURE{fond=prive/squelettes/inclure/afficher_metas_sdc, lisible=on, env, ajax}></div>]
+#BOITE_FERMER

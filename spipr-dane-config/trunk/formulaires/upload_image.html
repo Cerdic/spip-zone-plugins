@@ -1,0 +1,28 @@
+[(#REM)
+  Plugin SPIPr-Dane-Config
+  Squelette #FORMULAIRE_UPLOAD_IMAGE
+  * formulaire d'upload d'images.
+  * Largement pompe de Skeleditor
+  (c) 2019 Dominique Lepaisant
+  Distribue sous licence GPL
+
+][(#SET{id_unique, #EVAL{rand()}})  
+]<div class="formulaire_spip formulaire_upload" id="formulaire_upload_#GET{id_unique}">
+<br class='bugajaxie' />
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[ (#ENV{editable}|oui)
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+        <div id="cssImages" style="margin-bottom:1.2em;">
+            [(#INCLURE{fond=prive/squelettes/inclure/liste_images}{path=#GET{path}}{del=oui}{env}{ajax}{id_unique=#GET{id_unique}})]
+        </div>
+	    <div class="editer editer_file[ (#ENV**{erreurs}|table_valeur{file}|oui)erreur]">
+			<label for="file"><:sdc:label_file:></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{file})</span>]
+			<input type="file" name='file' class='file submit' id='file' value="#ENV{file}" />
+	    </div>
+	  <p class="boutons"><input type='submit' class='submit' value='<:bouton_ajouter:>' /></p>
+	</div></form>
+	]
+</div>

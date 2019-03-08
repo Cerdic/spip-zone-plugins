@@ -1,0 +1,71 @@
+[(#REM)
+  Plugin SPIPr-Dane-Config
+  Squelette #FORMULAIRE_LOGO
+  * formulaire de configuration d'affichage du logo.
+  (c) 2019 Dominique Lepaisant
+  Distribue sous licence GPL3
+
+][(#SET{id_unique, #EVAL{rand()}})  
+]<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[(#ENV{editable})
+<form action="#ENV{action}#formulaire_upload" method="post" enctype="multipart/form-data">
+	#ACTION_FORMULAIRE{#ENV{action}}
+		<h3 class="legend"><:sdc:logo_site:></h3>
+				[(#SAISIE{selection, masquer_logo}
+					{label=<:sdc:masquer_logo:>}
+					{datas=#ARRAY{
+                        oui, Oui,
+                        '', Non}
+                    }
+                    {cacher_option_intro=on}
+					{conteneur_class=long_label}
+				)]
+				[(#SAISIE{selection, position_logo}
+					{label=<:sdc:position_logo:>}
+					{datas=#ARRAY{
+                        '', à gauche,
+                        right, à droite}
+                    }
+					{cacher_option_intro=oui}
+					{conteneur_class=long_label afficher_si_masquer_logo_#GET{id_unique}}
+				)]
+				[(#SAISIE{input, largeur_logo}
+					{label=<:sdc:largeur_logo:>}
+					{conteneur_class=long_label afficher_si_masquer_logo_#GET{id_unique}}
+				)]
+				[(#SAISIE{selection, position_logo_acad}
+					{label=<:sdc:position_logo_acad:>}
+					{datas=#ARRAY{
+                        '', à gauche,
+                        a_droite, à droite}
+                    }
+					{cacher_option_intro=oui}
+					{conteneur_class=long_label}
+				)]
+
+            <p class="boutons">
+			<input type="submit" name="_cfg_save" class="submit save" value="<:bouton_enregistrer:>" />
+			<input type="submit" name="_cfg_delete" class="submit delette" value="<:sdc:bouton_supprimer:>" style="float:left"/>
+		</p>
+</form>]
+</div>
+ <script type="text/javascript">// <![CDATA[
+	$(document).ready(function(){
+        $('#champ_masquer_logo').on('change', function () {
+			if ( $(this).val() != 'oui' ) {
+				$(".afficher_si_masquer_logo_#GET{id_unique}").show()
+			}else {
+				$(".afficher_si_masquer_logo_#GET{id_unique}").hide();
+			}
+		});
+		if ('#ENV{masquer_logo}'!= 'on' ) {
+				$(".afficher_si_masquer_logo_#GET{id_unique}").show();
+		} else {
+				$(".afficher_si_masquer_logo_#GET{id_unique}").hide();
+		}
+
+	});
+ //]]></script>
+ 

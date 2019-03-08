@@ -1,0 +1,42 @@
+[(#REM)
+  Plugin SPIPr-Dane-Config
+  Squelette #FORMULAIRE_COULEURS
+  * formulaire de configuration des 3 couleurs de base
+  (c) 2019 Dominique Lepaisant
+  Distribue sous licence GPL3
+
+]
+[(#SET{titre_ext, #ENV{bloc}|=={defaut}|?{de base, ''}})]
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>
+	]<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+        <h3 class="legend"><:sdc:couleurs{bloc=#GET{titre_ext}}:></h3>
+				[(#SAISIE{input, color1}
+					{label=[(#ENV{bloc}|=={defaut}|?{<:sdc:couleur_base_1:>, <:sdc:couleur:>})]}
+					{defaut=#ENV{color1}}
+					{class=palette}
+					{conteneur_class=long_label}
+				)]
+				[(#ENV{bloc}|=={defaut}|oui)
+				[(#SAISIE{input, color2}
+					{label=<:sdc:couleur_base_2:>}
+					{defaut=#ENV{color2}}
+					{class=palette}
+					{conteneur_class=long_label}
+				)]
+				[(#SAISIE{input, color3}
+					{label=<:sdc:couleur_base_3:>}
+					{defaut=#ENV{color3}}
+					{class=palette}
+					{conteneur_class=long_label}
+				)]
+				]
+		<p class="boutons boutons[-(#ENV{bloc})][-(#ENV{elem})]">
+			<input type="submit" name="enregistrer" class="submit save" value="<:bouton_enregistrer:>" />
+			<input type="submit" name="_cfg_delete" class="submit delette" value="<:sdc:bouton_supprimer:>" style="float:left"/>
+		</p>
+	</div></form>
+</div>

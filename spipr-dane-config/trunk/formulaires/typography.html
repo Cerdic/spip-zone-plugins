@@ -1,0 +1,127 @@
+[(#REM)
+  Plugin SPIPr-Dane-Config
+  Squelette #FORMULAIRE_TYPOGRAPHY
+  * formulaire de configuration des polices de caracteres 
+  * param string : bloc - bloc a configurer (casier)
+ (c) 2019 Dominique Lepaisant
+  Distribue sous licence GPL
+
+]
+#SET{ggfonts, #ARRAY{}}
+<BOUCLE_gg_groups(DATA){source tableau, #ENV{polices}}>
+[(#CLE|=={Autre}|non)#SET{ggfonts,#GET{ggfonts}|array_merge{#VALEUR}}]
+<BOUCLE_gg(DATA){source tableau, #VALEUR}>
+
+</BOUCLE_gg>
+</BOUCLE_gg_groups>
+#SET{ggimport,#GET{ggfonts}|implode{|}}
+#SET{ggimport,#GET{ggimport}|replace{" ", "+"}}
+[(#CONFIG{sdc/defaut/font-family}|in_array{#GET{ggfonts}}|non)#SET{ggimport,#GET{ggimport}|concat{|#CONFIG{sdc/defaut/font-family}}}]
+<link href='https://fonts.googleapis.com/css?family=#GET{ggimport}' rel='stylesheet' type='text/css'>
+<style>
+<BOUCLE_css_groups(DATA){source tableau, #GET{ggfonts}}>
+[.(#CLE|replace{" ","-"}) {font-family: #VALEUR;}
+]</BOUCLE_css_groups>
+</style>
+[(#SET{titre_ext, #ENV{bloc}|=={defaut}|?{de base, du titre du site}})]
+
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+        <h3 class="legend"><:sdc:police{bloc=#GET{titre_ext}}:></h3>
+        
+        [(#ENV{bloc}|=={defaut}|non)
+        [(#SAISIE{input, color}
+            {label=<:sdc:couleur{bloc=du titre}:>}
+            {defaut=#ENV{color}}
+            {class=palette}
+            {conteneur_class=long_label}
+        )]
+        ]
+            
+        [(#SAISIE{explication, font-family-explication}
+            {texte=<:sdc:explication_famille_de_police:> }
+        )]
+        [(#SAISIE{selection, font-family}
+			{label=<:sdc:famille_de_police:>}
+			{defaut=[(#CONFIG{sdc/defaut/font-family}|in_array{#GET{ggfonts}}|?{#ENV{font-family}, perso})]}
+			{class=chosen}
+            {conteneur_class=long_label}
+			{datas=#ENV{polices}}
+                {cacher_option_intro= oui}
+		)]
+
+        [(#SAISIE{explication, font-family-perso-explication}
+            {texte=<:sdc:explication_police_personnelle:> }
+            {conteneur_class= family-perso}
+        )]
+        [(#SAISIE{input, font-family-perso}
+			{label=<:sdc:police_personnelle:>}
+			{defaut=#ENV{font-family-perso}}
+            {conteneur_class= long_label family-perso}
+		)]
+                
+		<div>
+			[<h1 class="gwf" [style="margin-bottom: 5px; font-family: (#CONFIG{sdc/defaut/font-family}|in_array{#GET{ggfonts}}|?{#ENV{font-family}, #ENV{font-family-perso}})"]>(#NOM_SITE_SPIP)</h1>]
+			[<p class="gwf" style="[font-family: (#CONFIG{sdc/defaut/font-family}|in_array{#GET{ggfonts}}|?{#ENV{font-family}, #ENV{font-family-perso}}); ]font-size: 1.5em;">(#NOM_SITE_SPIP|strtolower|ucfirst)</p>]
+        </div>
+        [(#ENV{bloc}|=={defaut}|non)
+        [(#SAISIE{selection, font-size}
+            {label=<:sdc:taille_de_police:>}
+            {conteneur_class= long_label}
+            {datas=#ARRAY{
+                2, 2,
+                2.1, 2.1,
+                2.2, 2.2,
+                2.3, 2.3,
+                2.4, 2.4,
+                2.5, 2.5,
+                2.6, 2.6,
+                2.7, 2.7,
+                2.8, 2.8,
+                2.9, 2.9,
+                3, 3,
+                3.1, 3.1,
+                3.2, 3.2,
+                3.3, 3.3,
+                3.4, 3.4,
+                3.5, 3.5}
+            }
+			{defaut=2.6}
+            {cacher_option_intro= oui}
+        )]
+        [(#SAISIE{explication, font-size-explication}
+            {texte=<:sdc:taille_de_police_explication:> }
+        )]
+        ]
+
+		<p class="boutons boutons[-(#ENV{bloc})][-(#ENV{elem})]">
+			<input type="submit" name="enregistrer" class="submit save" value="<:bouton_enregistrer:>" />
+			<input type="submit" name="_cfg_delete" class="submit delette" value="<:sdc:bouton_supprimer:>" style="float:left"/>
+		</p>
+	</div></form>
+</div>
+<script type="text/javascript">// <![CDATA[
+	$(document).ready(function(){
+		$('#champ_font-family').change(function(){
+			if ($(this).val() == 'perso' ) 
+			{ 
+				$('.family-perso').show() ;
+				$('#champ_font-family-perso').on('change mouseleave mouseover', function(){
+                    console.log($(this).val());
+					$('.gwf').css({'font-family': $(this).val().replace(/\++/g, ' ')} );
+                    var link="<link href='https://fonts.googleapis.com/css?family="+$(this).val()+"' rel='stylesheet' type='text/css'>";
+                    $( "<link href='https://fonts.googleapis.com/css?family="+$(this).val()+"' rel='stylesheet' type='text/css'>" ).insertAfter( $( "style" ) )
+				});
+			}
+			else
+			{
+			$('.gwf').css({'font-family': $(this).val().replace(/\++/g, ' ')} );
+				$('.family-perso').hide();
+			}
+		});
+		$('#champ_font-family').val() == 'perso' ? $('.family-perso').show() : $('.family-perso').hide();
+	});
+ //]]></script>

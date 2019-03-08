@@ -1,0 +1,58 @@
+[(#REM)
+  Plugin SPIPr-Dane-Config
+  Squelette #FORMULAIRE_NAVBAR_INVERSE
+  * formulaire de configuration de la couleur de la barre de nav 
+  (c) 2019 Dominique Lepaisant
+  Distribue sous licence GPL3
+
+]
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<h3 class="legend"><:sdc:couleurs{bloc=de la barre de navigation}:></h3>
+        [(#SET{couleur_choisie, #CONFIG{sdc/navbar/inverser_couleur}|=={color1}|?{#CONFIG{sdc/defaut/color1, #DF0D46}, #CONFIG{sdc/defaut/color2, #455C98}}})]
+        [(#SAISIE{checkbox, inverser_couleur}
+            {label=<div><div style="float:right;width:25px;height:25px;background-color:[(#CONFIG{sdc/defaut/color1, #DF0D46})];"></div>Couleur N°1</div><div style="margin-top: 8px;"><div style="float:right;clear: both;width:25px;height:25px;background-color:[(#CONFIG{sdc/defaut/color2, #455C98})];"></div>Couleur N°2</div><div style="margin-top: 8px;"><div id="couleur_choisie" style="float:right;clear: both;width:25px;height:25px;background-color:[(#GET{couleur_choisie})];"></div>Couleur Choisie</div><br/><:sdc:label_inverser_navbar:>}
+            {defaut=color2}
+             {datas=#ARRAY{
+                on,Oui}}
+           {explication=<:sdc:explication_inverser_navbar:>}
+            {conteneur_class=long_label}
+        )]
+        [(#SAISIE{selection, couleur_liens}
+            {label=<:sdc:label_couleur_liens:>}
+            {defaut=white}
+            {cacher_option_intro=on}
+            {datas=#ARRAY{
+                white,Blanc,
+                black,Noir}
+            }
+            {conteneur_class=long_label}
+        )]
+        [(#SAISIE{checkbox, couleur_liens_hover}
+            {label=<:sdc:label_couleur_liens_hover:>}
+            {defaut=''}
+            {datas=#ARRAY{
+                on,Oui}
+            }
+            {conteneur_class=long_label}
+        )]
+		<p class="boutons">
+			<input type="submit" name="enregistrer" class="submit save" value="<:bouton_enregistrer:>" />
+			<input type="submit" name="_cfg_delete" class="submit delette" value="<:sdc:bouton_supprimer:>" style="float:left"/>
+		</p>
+	</div></form>
+</div>
+<script type="text/javascript">// <![CDATA[
+	$(document).ready(function(){
+        $('input.checkbox_inverser_couleur').on('change', function () {
+            if ($(this).is(':checked'))
+                $('#couleur_choisie').css('background-color', '[(#CONFIG{sdc/defaut/color1, #DF0D46})]');
+            else
+                $('#couleur_choisie').css('background-color', '[(#CONFIG{sdc/defaut/color2, #455C98})]'); 
+                 
+        });
+    });
+ //]]></script>

@@ -1,0 +1,62 @@
+[(#ENV{lisible}|=={on}|oui)
+#SET{lisible, #ARRAY{
+    defaut, "Base",
+    header, "Entête",
+    body, Page,
+    title, "Titre",
+    navbar, "Barre de navigation",
+    color1,"Couleur N°1",
+    color2,"Couleur N°2",
+    screen,"ecran",
+    color3,"Couleur N°3",
+    font-family,"Police",
+    font-size,"Taille de police",
+    layer,"Modèle",
+    background-color,"Couleur d'arrière plan",
+    background-image,"Image d'arrière plan",
+    background-position,"Position de l'image d'arrière plan",
+    background-size,"Taille de l'image d'arrière plan",
+    background-repeat,"Répétition de l'image d'arrière plan",
+    background-attachment,"Défilement de l'image d'arrière plan",
+    largeur_background,"Largeur de l'arrière plan",
+    largeur_logo,"Largeur du logo",
+    inverser_navbar,"Inverser la couleur",
+    position_logo_acad,"Position du logo ac-caen",
+    screen,"Écran",
+    a_droite,"À droite",
+    repeat,"Répétition horizontale et verticale",
+    repeat-x,"Répétition horizontale",
+    repeat-y,"Répétition verticale",
+    no-repeat,"Pas de répétition",
+    scroll,"Défilement",
+    couleur_liens,"Couleur des liens",
+    black,"Noir",
+    white,"Blanc",
+    on,"Oui",
+   }
+}]
+		<div class='onglets_simple clearfix'>
+			<ul>
+				<li>[(#SELF|parametre_url{lisible,on}|lien_ou_expose{<small>Texte</small>,#ENV{lisible}|=={on},ajax})]</li>
+				<li>[(#SELF|parametre_url{lisible,off}|lien_ou_expose{<small>Code</small>,#ENV{lisible}|=={off},ajax})]</li>
+            </ul>
+        </div>
+<B_data>
+<ul  class="liste_items">
+	<BOUCLE_data(DATA){source table, #CONFIG*{sdc/}}>
+	<li class="item" style="border-bottom:2px solid #dddddd"><strong>[(#GET{lisible}|table_valeur{#CLE}|sinon{#CLE})] </strong>
+		<B_ss_data>
+		<ul  class="liste_items">
+		<BOUCLE_ss_data(DATA){source table, #VALEUR}>
+		<li style="border-bottom:1px solid #dddddd;padding-left:10px;"><small><span>[(#GET{lisible}|table_valeur{#CLE}|sinon{#CLE})] : </span><em>[(#GET{lisible}|table_valeur{#VALEUR}|sinon{#VALEUR})] </em></small></li>
+          <BOUCLE_recursive(BOUCLE_ss_data)>
+          </BOUCLE_recursive>
+		</BOUCLE_ss_data>
+		</ul>
+		</B_ss_data>
+	</li>
+	</BOUCLE_data>
+</ul>
+</B_data>
+    <:sdc:configuration_absente:>
+<//B_data>

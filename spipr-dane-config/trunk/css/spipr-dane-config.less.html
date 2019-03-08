@@ -1,0 +1,223 @@
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+// -----------------------------------------------------
+//  Plugin SPIPr-Dane-Config
+//  Squelette spipr-dane-config.less.html
+//  (c) 2019 Dominique Lepaisant
+//  Distribue sous licence GPL3
+// -----------------------------------------------------
+@import "css/variables.less";
+@import "css/mixins.less";
+
+/////////////////////
+// Surcharges de spipr-dane.less
+/////////////////////
+
+//// Header ////
+#header {
+    header h1#logo_site_spip #slogan_site_spip{
+        max-width:800px; // on augmente la largeur max du slogan
+    }
+    #logo-institution{
+       // padding:1em 0 0 1em; // pourquoi ??
+    }
+}
+#nav {
+    .menu-conteneur {
+        .item-fa {
+            font-size: 1.5em;
+            padding: 9px 15px 8px;
+        }
+    }
+}
+//// Listes : bordure au survol ////
+#content, #aside, #extra {
+    .liste{
+        &.liste-simple ul.liste-items li.item {
+            padding: .5em 1em .5em 1.5em;
+        }
+        ul.liste-items,ul.menu-items{
+            li.item{
+                background-image: none;
+                border-left: .6em solid transparent;
+                padding-left: .9em;
+                &:hover{
+                    border-left-color: @color1;
+                    transition: all .5s ease;
+               }
+                h3.h3 {
+                    margin-bottom: 0;
+                    font-size:1.1em;
+                    font-weight:normal;
+                    line-height: 1.7em;
+                    >a{display:block;font-size:1.2em;}
+                }
+            }
+            a:hover{background: none;}
+        }
+        &.videos,&.contacts{
+            .liste-items{
+                .item{
+                    border-left:none;
+                    border-right:none;
+                    transition: none;        
+                    &:hover{
+                        border-left:none;
+                        border-right:none;
+                        transition: none;        
+                    }
+                }
+            }
+        }
+    }
+    div.pagination{
+        .icon-forward,
+        .icon-backward,
+        .icon-fast-backward{
+            background-image:url("img/@{iconWhiteSpritePath}");
+        }
+    }
+}
+
+#aside { 
+    .liste h3.h3 {
+        margin-left: 1em;
+    }
+}
+
+h3.spip{
+    font-family:@sansFontLightFamily; 
+    padding: 0 0.5em 0 .7em;
+    margin: 1em 0 .5em .7em;
+    font-size:1.5em;
+    font-weight: normal;
+    border-bottom: 1px solid darken(@white, 3%);
+}
+
+//// Carousel////
+.carousel .carousel-stop li {font-size: 1.3em;} //reduction de la taille du play/pause
+#carousel .spip_logo.spip_logos {width: 50% !important;} //hummm a verifier
+.carousel .carousel-control {padding:10px 12px 10px 8px;} // decalage vertical de l'icone precedent
+.carousel .carousel-control.right {padding:10px 8px 10px 12px;} // decalage vertical de l'icone suivant
+//// Fin des surcharges ////
+
+//// Navbar menu XL ////
+#nav .menu-xl.dropdown {
+    position: unset;
+}
+#nav .menu-xl.dropdown .dropdown-menu {
+    top: unset;
+    margin-left: 0;
+}
+#nav .menu-xl > ul.dropdown-menu ul .texte_libre {
+    background: #F0F0F0;
+    color: #333;
+}
+#nav .menu-xl > ul.dropdown-menu ul {
+    margin-left: 0;
+}
+
+#nav {
+    .menu-xl{
+        &.dropdown {
+            position: unset;
+            .dropdown-menu {
+                top: unset;
+                margin-left: 0;
+                ul { 
+                    margin-left: 0;
+                    .texte_libre {
+                        background: @grayLighter;
+                        color: darken(@linkColor, 20%);
+                    }
+                }
+            }
+        }
+    }
+}
+
+/////////////////////
+// Recuperation des metas
+/////////////////////
+
+[(#SET{url_image, #EVAL{_DIR_SITE}|replace{sites}})]
+
+//// Body ////
+body {
+[    background-color: (#CONFIG{sdc/body/background-color});
+][(#CONFIG{sdc/body/background-image}|oui)
+     background-image: url("/#GET{url_image}#EVAL{_DIR_SITE}squelettes/images/#CONFIG{sdc/body/background-image}");
+[    background-repeat: (#CONFIG{sdc/body/background-repeat});
+][   background-position: (#CONFIG{sdc/body/background-position});
+][   background-attachment: (#CONFIG{sdc/body/background-attachment});
+][   background-size: (#CONFIG{sdc/body/background-size});
+]]}
+
+//// Header ////
+#header {
+    [(#CONFIG{sdc/header/largeur_background}|oui)
+    .container{]
+    [    background-color: (#CONFIG{sdc/header/background-color});
+    ][(#CONFIG{sdc/header/background-image}|oui)
+         background-image: url("/#GET{url_image}#EVAL{_DIR_SITE}squelettes/images/#CONFIG{sdc/header/background-image}");
+    [    background-repeat: (#CONFIG{sdc/header/background-repeat});
+    ][   background-position: (#CONFIG{sdc/header/background-position});
+    ][   background-attachment: (#CONFIG{sdc/header/background-attachment});
+    ][   background-size: (#CONFIG{sdc/header/background-size});
+    ]]
+    [(#CONFIG{sdc/header/largeur_background}|oui)
+    }]
+    header h1#logo_site_spip {[
+        font-family: '(#CONFIG{sdc/title/font-family})', Arial, Helvetica, sans-serif;][
+        font-size: (#CONFIG{sdc/title/font-size})em;][
+        color: (#CONFIG{sdc/title/color});
+        #slogan_site_spip { color: (#CONFIG{sdc/title/color});}][
+        .spip_logos{ float: (#CONFIG{sdc/header/position_logo});margin:0 0 0 25px;}]
+    }
+}
+
+
+
+//// Barnav ////
+[(#CONFIG{navbar/largeur}|oui)
+   .container-fixed() ;
+    width: 1180px;
+    @media (max-width:1200px){
+        width: 940px;
+    }
+]
+// Adapter la couleur des icones a la couleur des liens
+#nav{
+   .menu-container,
+    .menu-conteneur {
+        .nav .item.item-picto > a{
+            & when (@navbarLinkColor = @black) {
+                background-image: url("/#GET{url_image}plugins/squelette/spipr_dane/css/img/sprite-black.png");
+                & when(@navbarLinkColorHover = @white) {
+                    background-image: url("/#GET{url_image}plugins/squelette/spipr_dane/css/img/sprite.png");
+                }
+            }
+            & when (@navbarLinkColor = @white) {
+                background-image: url("/#GET{url_image}plugins/squelette/spipr_dane/css/img/sprite-white.png");
+                & when(@navbarLinkColorHover = @black) {
+                    background-image: url("/#GET{url_image}plugins/squelette/spipr_dane/css/img/sprite-inverse.png");
+                }
+            }
+        }
+    } 
+
+}
+
+//// Footer ////
+#footer {
+[    background-color: (#CONFIG{sdc/footer/background-color});
+][(#CONFIG{sdc/footer/background-image}|oui)
+     background-image: url("/#GET{url_image}#EVAL{_DIR_SITE}squelettes/images/#CONFIG{sdc/footer/background-image}");
+[    background-repeat: (#CONFIG{sdc/footer/background-repeat});
+][   background-position: (#CONFIG{sdc/footer/background-position});
+][   background-attachment: (#CONFIG{sdc/footer/background-attachment});
+][   background-size: (#CONFIG{sdc/footer/background-size});
+]]
+}

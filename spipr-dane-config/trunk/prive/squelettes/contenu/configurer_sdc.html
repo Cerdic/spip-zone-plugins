@@ -1,0 +1,75 @@
+[(#REM)
+  Plugin SPIPr-Dane-Config
+  Squelette configurer_sdc.html
+  (c) 2019 Dominique Lepaisant
+  Distribue sous licence GPL3
+
+][(#AUTORISER{configurer,_sdc}|sinon_interdire_acces)]
+<div class='cadre-formulaire-editer'>
+	<div class="entete-formulaire">
+		<h1>
+			<:sdc:configurer_sdc:>
+		</h1>
+		<div class='onglets_simple clearfix'>
+			<ul>
+				<li>[(#SELF|parametre_url{bloc,layers}|lien_ou_expose{<:sdc:layers:>,#ENV{bloc,layers}|=={layers},ajax})]</li>
+				<li>[(#SELF|parametre_url{bloc,header}|lien_ou_expose{<:sdc:entete:>,#ENV{bloc,''}|=={header},ajax})]</li>
+				[(#REM)<li>[(#SELF|parametre_url{bloc,title}|lien_ou_expose{<:sdc:titre_site:>,#ENV{bloc,''}|=={title},ajax})]</li>
+				]<li>[(#SELF|parametre_url{bloc,barrenav}|lien_ou_expose{<:sdc:barre_navigation:>,#ENV{bloc,''}|=={barrenav},ajax})]</li>
+				<li>[(#SELF|parametre_url{bloc,body}|lien_ou_expose{<:sdc:page:>,#ENV{bloc,''}|=={body},ajax})]</li>
+                <li>[(#SELF|parametre_url{bloc,footer}|lien_ou_expose{Pied de page,#ENV{bloc,''}|=={footer},ajax})]</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="ajax" style="max-width:750px;margin:0 auto;">
+	[(#SET{bloc, #ENV{bloc,layers}})]
+        [(#GET{bloc}|=={layers}|oui)
+		<div class="ajax">
+			#FORMULAIRE_COULEURS{defaut}
+		</div>
+		<div class="ajax">
+			#FORMULAIRE_TYPOGRAPHY{defaut}
+		</div>
+        [(#PLUGIN{sdn}|oui)
+        <div>
+            <INCLURE{fond=prive/squelettes/inclure/selection_layer_page_interface, page=defaut}>
+        </div>
+		]][(#GET{bloc}|=={body}|oui)
+		<div class="ajax">
+			#FORMULAIRE_BACKGROUND{body}
+		</div>
+		<div class="ajax">
+			<INCLURE{fond=prive/squelettes/inclure/selection_image_interface, ajax}>
+		</div>
+		][(#GET{bloc}|=={header}|oui)
+		<div class="ajax">
+			#FORMULAIRE_BACKGROUND{header}
+		</div>
+		<div class="ajax">
+			<INCLURE{fond=prive/squelettes/inclure/selection_image_interface, ajax}>
+		</div>
+		<div class="ajax">
+			#FORMULAIRE_TYPOGRAPHY{title}
+		</div>
+		<div class="ajax">
+			#FORMULAIRE_LOGO{header}
+		</div>
+		][(#GET{bloc}|=={title}|oui)
+		<div class="ajax">
+			#FORMULAIRE_TYPOGRAPHY{title}
+		</div>
+		][(#GET{bloc}|=={barrenav}|oui)
+		<div class="ajax">
+			#FORMULAIRE_NAVBAR_INVERSE
+		</div>
+		][(#GET{bloc}|=={footer}|oui)
+		<div class="ajax">
+			#FORMULAIRE_BACKGROUND{footer}
+		</div>
+		<div class="ajax">
+ 			<INCLURE{fond=prive/squelettes/inclure/selection_image_interface, ajax}>
+        </div>
+		]
+	</div>
+</div>

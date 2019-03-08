@@ -1,0 +1,111 @@
+[(#REM)
+  Plugin SPIPr-Dane-Config
+  Squelette #FORMULAIRE_BACKGROUND
+  * formulaire de configuration des styles css d'arriere plan des blocs 
+  * param string : bloc - bloc a configurer (casier)
+  (c) 2019 Dominique Lepaisant
+  Distribue sous licence GPL3
+
+][(#SET{bgimg, [(#CONFIG{sdc/[(#ENV{bloc})]/background-image, no})]})
+][(#SET{titre_ext, #ENV{bloc}|=={body}|?{de la page, de l'entête}})]
+[(#SET{id_unique, #EVAL{rand()}})  
+]<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}" class="form[(_#GET{id_unique})]"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+        <h3 class="legend"><:sdc:params_background{bloc=#GET{titre_ext}}:></h3>
+
+        [(#SAISIE{input, background-color}
+            {label=<:sdc:background_couleur:>}
+            {defaut=#ENV{background-color}}
+            {class=palette}
+            {conteneur_class=long_label}
+        )] 
+
+        [(#SAISIE{oui_non, bgimg}
+            {label=<:sdc:background_afficher:>}
+            {conteneur_class=long_label}
+        )]
+                
+        [(#SAISIE{explication, background-image-explication}
+            {texte=<:sdc:background_image_explication:> }
+            {conteneur_class=afficher_si_bgimg_#GET{id_unique}}
+        )]
+        [(#SAISIE{input, background-image}
+            {label=<:sdc:background_image:>}
+            {conteneur_class=long_label afficher_si_bgimg_#GET{id_unique}}
+        )]
+            
+        [(#SAISIE{explication, background-position-explication}
+            {texte=<:sdc:background_position_explication:> }
+            {conteneur_class=afficher_si_bgimg_#GET{id_unique}}
+        )]
+        [(#SAISIE{input, background-position}
+            {label=<:sdc:background_position:>}
+            {defaut=[(#ENV{background-position})]}
+            {conteneur_class=long_label afficher_si_bgimg_#GET{id_unique}}
+        )]
+        [(#SAISIE{selection, background-repeat}
+            {label=<:sdc:background_repetition:>}
+            {defaut=repeat}
+            {datas=#ARRAY{
+				no-repeat, <:sdc:repetition_non:>,
+				repeat-x, <:sdc:repetition_horizontale:>,
+				repeat-y, <:sdc:repetition_verticale:>,
+				repeat, <:sdc:repetition_horizontale_verticale:>}
+            }
+            {conteneur_class=long_label afficher_si_bgimg_#GET{id_unique}}
+        )]
+        [(#SAISIE{checkbox, background-attachment}
+            {label=<:sdc:background_fixer:>}
+            {datas=#ARRAY{
+                fixed, Oui}
+            }
+            {conteneur_class=long_label afficher_si_bgimg_#GET{id_unique}}
+        )]
+        [(#SAISIE{explication, background-size-explication}
+            {texte=<:sdc:background_size_explication:> }
+            {conteneur_class=afficher_si_bgimg_#GET{id_unique}}
+        )]
+        [(#SAISIE{input, background-size}
+            {label=<:sdc:background_size:>}
+            {defaut=[(#ENV{background-size})]}
+            {conteneur_class=long_label afficher_si_bgimg_#GET{id_unique}}
+        )]
+      [(#ENV{bloc}|=={header}|oui)
+        [(#SAISIE{explication, largeur_background-explication}
+            {texte=<:sdc:largeur_background_explication:> }
+        )]
+        [(#SAISIE{selection, largeur_background}
+            {label=<:sdc:largeur_background:>}
+            {defaut=[(#ENV{largeur_background})]}
+            {conteneur_class=long_label}
+            {datas=#ARRAY{
+                page, Largeur de la page,
+                '', Largeur de l'écran}
+            }
+        )]]
+		<p class="boutons">
+			<input type="submit" name="enregistrer" class="submit save" value="<:bouton_enregistrer:>" />
+			<input type="submit" name="_cfg_delete" class="submit delette" value="<:sdc:bouton_supprimer:>" style="float:left"/>
+		</p>
+<script type="text/javascript">// <![CDATA[
+	$(document).ready(function(){
+        $('.editer_bgimg > .choix input').on('change', function () {
+			if ( $(this).attr('value')== 'on' ) {
+				$(".afficher_si_bgimg_#GET{id_unique}").show()
+			}else {
+				$(".afficher_si_bgimg_#GET{id_unique}").hide();
+			}
+		});
+		if ('#ENV{background-image}'!= '' ) {
+				$(".afficher_si_bgimg_#GET{id_unique}").show();
+		} else {
+				$(".afficher_si_bgimg_#GET{id_unique}").hide();
+		}
+
+	});
+//]]></script>
+ 	</div></form>
+</div>
