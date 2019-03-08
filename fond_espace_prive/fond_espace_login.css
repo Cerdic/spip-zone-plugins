@@ -16,7 +16,7 @@ body.page_login  #minipres {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	font-family: verdana, sans;
+	font-family: arial, helvetica, sans;
 	background-color: transparent !important;
 }
 body.page_login  #minipres #var_lang_ecrire {
@@ -27,19 +27,34 @@ body.page_login  #minipres #var_lang_ecrire {
 	background-color: white;
 	background-color: rgba(255, 255, 255, 0.5);
 	font-size: 12px;
+	-webkit-appearance: none;
+}
+body.page_login  #minipres .formulaire_menu_lang {
+	position: absolute;
+	top: 15px;
+	right: 5%;
+	width: 200px;
 }
 body.page_login  #minipres .formulaire_login {
-	width: 400px;
+	width: 90%;
+	max-width: 400px;
 	position: absolute;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	margin-left: 15px;
 }
 body.page_login  #minipres h1, body.page_login  #minipres h3 {
 	display: none;
 }
-body.page_login  #minipres h1, body.page_login  #pass_securise {
+body.page_login .editer_password {
+	position: relative;
+}
+body.page_login  #pass_securise {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+body.page_login  #minipres h1 {
 	margin-left: -1.5em;
 }
 body.page_login  #minipres h1, body.page_login  label {
@@ -72,11 +87,19 @@ body.page_login  #minipres h1, body.page_login #spip_logo_auteur {
 	border-radius: 50%;
 	overflow: hidden;
 }
-body.page_login  #minipres h1, body.page_login p.details {
+body.page_login  #minipres h1 {
 	font-size: 85%;
 	text-align: right;
 	padding-top: 5px;
 	padding-right: 30px;
+}
+body.page_login p.details {
+	font-size: 85%;
+	text-align: right;
+	padding-top: 0.3em;
+}
+body.page_login div.choix {
+	padding-top: 0.7em;
 }
 body.page_login  #minipres h1, body.page_login p.details a {
 	color: white;
@@ -88,16 +111,18 @@ body.page_login  #minipres h1, body.page_login p.details a:hover {
 }
 body.page_login  #minipres h1, body.page_login .boutons {
 	text-align: right;
-	margin-right: 80px;
+	margin-right: 0px;
 }
 body.page_login  #minipres h1, body.page_login .boutons input.submit {
 	font-size: 16px;
 	border: 0px;
 	padding: 7px 15px;
 	background-color: white;
-	background-color: rgba(255, 255, 255, 0.7);
+	background-color: rgba(66, 246, 126, 0.7);
 	transition: 0.2s background-color;
 	border-radius: 4px;
+	color: black;
+	-webkit-appearance: none;
 }
 body.page_login  #minipres h1, body.page_login .boutons input.submit:hover,
 body.page_login  #minipres h1, body.page_login .boutons input.submit:focus {
