@@ -28,7 +28,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * 		champ de saisie, celle-ci sont systématiquement remises à zéro. Le tableau comprend à minima l'index suivant:
  * 		- `_caches`	: (affichage) liste des descriptions des caches rangés par service
  */
-function formulaires_formulaire_charger($plugin, $options = array()) {
+function formulaires_cache_vider_charger($plugin, $options = array()) {
 
 	// Lecture de la configuration des caches du plugin.
 	include_spip('inc/cache');
