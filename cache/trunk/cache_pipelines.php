@@ -32,11 +32,11 @@ function cache_affiche_milieu($flux) {
 			// Recharge la configuration des plugins utilisateur :
 			// -- on lit la meta pour obtenir la liste des plugins
 			include_spip('inc/cache');
-			$configuration = cache_obtenir_configuration();
+			$configuration = configuration_cache_lire();
 			if ($configuration) {
 				$plugins = array_keys($configuration);
 				// -- on supprime la meta
-				cache_effacer_configuration();
+				configuration_cache_effacer();
 				// -- on reconfigure chaque plugin
 				include_spip('cache/cache');
 				foreach ($plugins as $_plugin) {

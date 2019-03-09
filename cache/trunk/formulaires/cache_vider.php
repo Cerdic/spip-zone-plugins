@@ -11,7 +11,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Chargement des données : le formulaire affiche la liste des caches issus de l'utilisation du service et propose
  * le vidage de tout ou partie des fichiers.
  *
- * @uses cache_obtenir_configuration()
+ * @uses configuration_cache_lire()
  * @uses cache_cache_vider_charger()
  *
  * @param string $plugin
@@ -31,7 +31,7 @@ function formulaires_cache_vider_charger($plugin, $options = array()) {
 
 	// Lecture de la configuration des caches du plugin.
 	include_spip('inc/cache');
-	$configuration = cache_obtenir_configuration($plugin);
+	$configuration = configuration_cache_lire($plugin);
 
 	// On appelle le service de chargement des variables qui est soit celui par défaut de Cache Factory
 	// soit celui spécifique au plugin si il existe.

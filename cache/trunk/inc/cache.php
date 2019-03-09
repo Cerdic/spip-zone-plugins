@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @api
  *
- * @uses cache_obtenir_configuration()
+ * @uses configuration_cache_lire()
  * @uses cache_cache_composer()
  *
  * @param string       $plugin
@@ -35,7 +35,7 @@ function cache_ecrire($plugin, $cache, $contenu) {
 	$cache_ecrit = false;
 	
 	// Lecture de la configuration des caches du plugin.
-	$configuration = cache_obtenir_configuration($plugin);
+	$configuration = configuration_cache_lire($plugin);
 
 	// Le cache peut-être fourni soit sous la forme d'un chemin complet soit sous la forme d'un
 	// tableau permettant de calculer le chemin complet. On prend en compte ces deux cas.
@@ -99,7 +99,7 @@ function cache_ecrire($plugin, $cache, $contenu) {
  *
  * @api
  *
- * @uses cache_obtenir_configuration()
+ * @uses configuration_cache_lire()
  * @uses cache_cache_composer()
  *
  * @param string       $plugin
@@ -118,7 +118,7 @@ function cache_lire($plugin, $cache) {
 	$cache_lu = false;
 
 	// Lecture de la configuration des caches du plugin.
-	$configuration = cache_obtenir_configuration($plugin);
+	$configuration = configuration_cache_lire($plugin);
 
 	// Le cache peut-être fourni soit sous la forme d'un chemin complet soit sous la forme d'un
 	// tableau permettant de calculer le chemin complet. On prend en compte ces deux cas.
@@ -165,7 +165,7 @@ function cache_lire($plugin, $cache) {
  *
  * @api
  *
- * @uses cache_obtenir_configuration()
+ * @uses configuration_cache_lire()
  * @uses cache_cache_composer()
  *
  * @param string       $plugin
@@ -181,7 +181,7 @@ function cache_lire($plugin, $cache) {
 function cache_est_valide($plugin, $cache) {
 
 	// Lecture de la configuration des caches du plugin.
-	$configuration = cache_obtenir_configuration($plugin);
+	$configuration = configuration_cache_lire($plugin);
 
 	// Le cache peut-être fourni soit sous la forme d'un chemin complet soit sous la forme d'un
 	// tableau permettant de calculer le chemin complet. On prend en compte ces deux cas.
@@ -225,7 +225,7 @@ function cache_est_valide($plugin, $cache) {
  *
  * @api
  *
- * @uses cache_obtenir_configuration()
+ * @uses configuration_cache_lire()
  * @uses cache_cache_composer()
  *
  * @param string $plugin
@@ -239,7 +239,7 @@ function cache_est_valide($plugin, $cache) {
 function cache_nommer($plugin, $cache) {
 
 	// Lecture de la configuration des caches du plugin.
-	$configuration = cache_obtenir_configuration($plugin);
+	$configuration = configuration_cache_lire($plugin);
 
 	// Le cache est toujours fourni sous la forme d'un tableau permettant de calculer le chemin complet.
 	$fichier_cache = '';
@@ -260,7 +260,7 @@ function cache_nommer($plugin, $cache) {
  *
  * @api
  *
- * @uses cache_obtenir_configuration()
+ * @uses configuration_cache_lire()
  * @uses cache_cache_composer()
  * @uses supprimer_fichier()
  *
@@ -280,7 +280,7 @@ function cache_supprimer($plugin, $cache) {
 	$cache_supprime = false;
 
 	// Lecture de la configuration des caches du plugin.
-	$configuration = cache_obtenir_configuration($plugin);
+	$configuration = configuration_cache_lire($plugin);
 
 	// Le cache peut-être fourni soit sous la forme d'un chemin complet soit sous la forme d'un
 	// tableau permettant de calculer le chemin complet. On prend en compte ces deux cas.
@@ -313,7 +313,7 @@ function cache_supprimer($plugin, $cache) {
  *
  * @api
  *
- * @uses cache_obtenir_configuration()
+ * @uses configuration_cache_lire()
  * @uses cache_cache_composer()
  * @uses cache_cache_decomposer()
  * @uses cache_cache_completer()
@@ -335,7 +335,7 @@ function cache_repertorier($plugin, $filtres = array()) {
 	$caches = array();
 
 	// Lecture de la configuration des caches du plugin.
-	$configuration = cache_obtenir_configuration($plugin);
+	$configuration = configuration_cache_lire($plugin);
 
 	// Rechercher les caches du plugin sans appliquer de filtre si ce n'est sur le sous-dossier éventuellement.
 	// Les autres filtres seront appliqués sur les fichiers récupérés.
@@ -441,7 +441,7 @@ function cache_vider($plugin, $caches) {
  *        Tableau de configuration des caches d'un plugin utilisateur ou tableau vide si aucune configuration n'est encore
  *        enregistrée.
  */
-function cache_obtenir_configuration($plugin = '') {
+function configuration_cache_lire($plugin = '') {
 
 	static $configuration = array();
 
@@ -478,7 +478,7 @@ function cache_obtenir_configuration($plugin = '') {
  * @return bool
  *         True si la suppression s'est bien passée, false sinon.
  */
-function cache_effacer_configuration($plugin = '') {
+function configuration_cache_effacer($plugin = '') {
 
 	// Initialisation de la configuration à retourner
 	include_spip('inc/config');
