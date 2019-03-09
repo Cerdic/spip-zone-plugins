@@ -53,7 +53,6 @@ function cache_cache_configurer($plugin) {
 	// par celles par défaut.
 	$configuration_plugin = array();
 	if ($configurer = cache_chercher_service($plugin, 'cache_configurer')) {
-		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		$configuration_plugin = $configurer($plugin);
 	}
 
@@ -116,7 +115,6 @@ function cache_cache_composer($plugin, $cache, $configuration) {
 	// Le plugin utilisateur peut fournir un service propre pour construire le chemin complet du fichier cache.
 	// Néanmoins, étant donné la généricité du mécanisme offert par le plugin Cache cela devrait être rare.
 	if ($composer = cache_chercher_service($plugin, 'cache_composer')) {
-		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		$fichier_cache = $composer($plugin, $cache, $configuration);
 	} else {
 		// On utilise le mécanisme de nommage standard du plugin Cache.
@@ -190,7 +188,6 @@ function cache_cache_decomposer($plugin, $fichier_cache, $configuration) {
 	// Le plugin utilisateur peut fournir un service propre pour construire le chemin complet du fichier cache.
 	// Néanmoins, étant donné la généricité du mécanisme offert par le plugin Cache cela devrait être rare.
 	if ($decomposer = cache_chercher_service($plugin, 'cache_decomposer')) {
-		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		$cache = $decomposer($plugin, $fichier_cache, $configuration);
 	} else {
 		// On utilise le mécanisme de nommage standard du plugin Cache. De fait, on considère qu'aucun composant
@@ -249,7 +246,6 @@ function cache_cache_completer($plugin, $cache, $fichier_cache, $configuration) 
 	// Le plugin utilisateur peut fournir un service propre pour construire le chemin complet du fichier cache.
 	// Néanmoins, étant donné la généricité du mécanisme offert par le plugin Cache cela devrait être rare.
 	if ($completer = cache_chercher_service($plugin, 'cache_completer')) {
-		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		$cache = $completer($plugin, $cache, $fichier_cache, $configuration);
 	}
 
@@ -288,7 +284,6 @@ function cache_formulaire_charger($plugin, $options, $configuration) {
 
 	// Le plugin utilisateur peut fournir un service propre pour construire le tableau des valeurs du formulaire.
 	if ($charger = cache_chercher_service($plugin, 'formulaire_charger')) {
-		// On passe le plugin appelant à la fonction car cela permet ainsi de mutualiser les services de stockage.
 		$valeurs_plugin = $charger($plugin, $options, $configuration);
 		if ($valeurs_plugin) {
 			$valeurs = array_merge($valeurs, $valeurs_plugin);
@@ -326,7 +321,7 @@ function cache_chercher_service($plugin, $fonction) {
 
 	$fonction_trouvee = '';
 
-	// Eviter la réentrance si on demande explicitement le service du plugin Cache.
+	// Eviter la réentrance si on demande explicitement le service du plugin Cache Factory.
 	if ($plugin != 'cache') {
 		include_spip("cache/${plugin}");
 		$fonction_trouvee = "${plugin}_${fonction}";
