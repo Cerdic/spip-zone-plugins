@@ -52,7 +52,7 @@ function rainette_cache_configurer($plugin) {
  * @return array
  *         Tableau des valeurs spécifique au plugin taxonomie.
  */
-function rainette_cache_vider_charger($plugin, $configuration) {
+function rainette_formulaire_charger($plugin, $configuration) {
 
 	$valeurs = array();
 
