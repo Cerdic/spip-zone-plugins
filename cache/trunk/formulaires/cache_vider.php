@@ -12,7 +12,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * le vidage de tout ou partie des fichiers.
  *
  * @uses configuration_cache_lire()
- * @uses cache_cache_vider_charger()
+ * @uses cache_formulaire_charger()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
@@ -27,7 +27,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 		champ de saisie, celle-ci sont systématiquement remises à zéro. Le tableau comprend à minima l'index suivant:
  * 		- `_caches`	: (affichage) liste des descriptions des caches rangés par service
  */
-function formulaires_cache_vider_charger($plugin, $options = array()) {
+function formulaires_formulaire_charger($plugin, $options = array()) {
 
 	// Lecture de la configuration des caches du plugin.
 	include_spip('inc/cache');
@@ -36,7 +36,7 @@ function formulaires_cache_vider_charger($plugin, $options = array()) {
 	// On appelle le service de chargement des variables qui est soit celui par défaut de Cache Factory
 	// soit celui spécifique au plugin si il existe.
 	include_spip('cache/cache');
-	$valeurs = cache_cache_vider_charger($plugin, $options, $configuration);
+	$valeurs = cache_formulaire_charger($plugin, $options, $configuration);
 
 	return $valeurs;
 }

@@ -314,7 +314,6 @@ function cache_supprimer($plugin, $cache) {
  * @api
  *
  * @uses configuration_cache_lire()
- * @uses cache_cache_composer()
  * @uses cache_cache_decomposer()
  * @uses cache_cache_completer()
  *
