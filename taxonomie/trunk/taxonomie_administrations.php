@@ -22,6 +22,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function taxonomie_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
+	// Créer la configuration par défaut du plugin
 	$config_defaut = configurer_taxonomie();
 
 	$maj['create'] = array(

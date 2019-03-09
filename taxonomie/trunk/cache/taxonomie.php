@@ -92,7 +92,7 @@ function taxonomie_cache_completer($plugin, $cache, $fichier_cache, $configurati
  * @return array
  *         Tableau des valeurs spécifique au plugin taxonomie.
  */
-function taxonomie_cache_vider_charger($plugin, $configuration) {
+function taxonomie_formulaire_charger($plugin, $configuration) {
 
 	$valeurs = array();
 
