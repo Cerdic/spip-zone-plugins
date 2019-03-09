@@ -37,15 +37,15 @@ function cache_cache_configurer($plugin) {
 
 	// Initialisation du tableau de configuration avec les valeurs par défaut du plugin Cache.
 	$configuration_defaut = array(
-		'racine'          => '_DIR_CACHE',
-		'sous_dossier'    => false,
-		'nom_obligatoire' => array('nom'),
-		'nom_facultatif'  => array(),
-		'extension'       => '.txt',
-		'securisation'    => false,
-		'serialisation'   => true,
-		'separateur'      => '_',
-		'conservation'    => 0
+		'racine'          => '_DIR_CACHE', // Emplacement de base du répertoire des caches. Attention c'est la chaine de la constante SPIP
+		'sous_dossier'    => false,        // Indicateur d'utilisation d'un sous-dossier
+		'nom_obligatoire' => array('nom'), // Composants obligatoires ordonnés de gauche à droite.
+		'nom_facultatif'  => array(),      // Composants facultatifs
+		'separateur'      => '_',          // Caractère de séparation des composants du nom '_' ou '-'
+		'extension'       => '.txt',       // Extension du fichier cache (vaut .php si cache sécurisé)
+		'securisation'    => false,        // Indicateur de sécurisation du fichier
+		'serialisation'   => true,         // Indicateur de sérialisation
+		'conservation'    => 0             // Durée de conservation du cache en secondes. 0 pour permanent
 	);
 
 	// Le plugin utilisateur doit fournir un service propre pour la configuration de ses caches.
@@ -234,7 +234,7 @@ function cache_cache_decomposer($plugin, $fichier_cache, $configuration) {
  * @param string $fichier_cache
  *        Fichier cache désigné par son chemin complet.
  * @param array  $configuration
- *        Configuration complète des caches du plugin utlisateur lue à partir de la meta de stockage.
+ *        Configuration complète des caches du plugin utilisateur lue à partir de la meta de stockage.
  *
  * @return array
  *         Description du cache complétée par un ensemble de données propres au plugin.
