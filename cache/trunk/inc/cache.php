@@ -10,12 +10,15 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 
 /**
- * Ecrit un contenu dans un cache spécifié par son identifiant.
+ * Ecrit un contenu donné dans un cache spécifié par son identifiant relatif ou par son chemin complet.
  *
  * @api
  *
  * @uses configuration_cache_lire()
  * @uses cache_cache_composer()
+ * @uses sous_repertoire()
+ * @uses ecrire_fichier()
+ * @uses ecrire_fichier_securise()
  *
  * @param string       $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
@@ -94,13 +97,16 @@ function cache_ecrire($plugin, $cache, $contenu) {
 
 
 /**
- * Lit le cache spécifié par son identifiant et renvoie le contenu sous forme de tableau
- * ou de chaine éventuellement vide.
+ * Lit le cache spécifié par son identifiant relatif ou son chemin complet et renvoie le contenu sous forme
+ * de tableau ou de chaine suivant l’attribut de sérialisation.
+ * En cas d’erreur, la fonction renvoie false.
  *
  * @api
  *
  * @uses configuration_cache_lire()
  * @uses cache_cache_composer()
+ * @uses lire_fichier()
+ * @uses lire_fichier_securise()
  *
  * @param string       $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
@@ -160,8 +166,9 @@ function cache_lire($plugin, $cache) {
 
 
 /**
- * Teste l'existence d'un cache sur le disque et, si il existe, teste ensuite si la date d'expiration
- * du fichier n'est pas dépassée. Si le fichier existe et n'est pas périmé, la fonction renvoie le chemin complet.
+ * Teste l'existence d'un cache sur le disque spécifié par son identifiant relatif ou par son chemin complet et,
+ * si il existe, teste si la date d'expiration du fichier n'est pas dépassée. Si le fichier existe et n'est pas périmé,
+ * la fonction renvoie le chemin complet, sinon elle renvoie une chaine vide.
  *
  * @api
  *
@@ -256,7 +263,7 @@ function cache_nommer($plugin, $cache) {
 
 
 /**
- * Supprime le cache spécifié par son identifiant.
+ * Supprime le cache spécifié par son identifiant relatif ou par son chemin complet.
  *
  * @api
  *
@@ -309,7 +316,10 @@ function cache_supprimer($plugin, $cache) {
 
 
 /**
- * Retourne la description complète des caches d'un plugin filtrés sur une liste de critères.
+ * Retourne la description des caches d'un plugin utilisateur filtrée sur un ensemble de critères. La description
+ * de base fournie par Cache Factory contient les éléments de l’identifiant relatif mais peut-être remplacée ou
+ * complétée par le plugin appelant au travers de services propres.
+ * Les filtres concernent uniquement les éléments de l’identifiant relatif.
  *
  * @api
  *
@@ -396,6 +406,8 @@ function cache_repertorier($plugin, $filtres = array()) {
  *
  * @api
  *
+ * @uses supprimer_fichier()
+ *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
@@ -424,7 +436,8 @@ function cache_vider($plugin, $caches) {
 
 
 /**
- * Lit la configuration standard des caches d'un plugin utilisateur ou de tous les plugins utilisateur.
+ * Lit la configuration standard des caches d'un plugin utilisateur ou de tous les plugins utilisateur
+ * ayant enregistrés une configuration.
  *
  * @api
  *
@@ -462,7 +475,8 @@ function configuration_cache_lire($plugin = '') {
 
 
 /**
- * Efface la configuration standard des caches d'un plugin utilisateur ou de tous les plugins utilisateur.
+ * Efface la configuration standard des caches d'un plugin utilisateur ou de tous les plugins utilisateur
+ * ayant enregistrés une configuration.
  *
  * @api
  *

@@ -166,7 +166,11 @@ function cache_cache_composer($plugin, $cache, $configuration) {
 
 
 /**
- * Décompose le chemin complet du fichier cache en composants déterminé par configuration.
+ * Décompose le chemin complet du fichier cache en éléments constitutifs. Par défaut, le tableau obtenu coïncide
+ * avec l’identifiant relatif du cache. La fonction utilise la configuration générale pour connaitre la structure
+ * du chemin du fichier.
+ *
+ * Cache Factory renvoie uniquement les éléments de l'identifiant relatif.
  *
  * @uses cache_chercher_service()
  *
@@ -216,7 +220,7 @@ function cache_cache_decomposer($plugin, $fichier_cache, $configuration) {
 
 
 /**
- * Complète la description canonique d'un cache.
+ * Complète la description d'un cache issue du service `cache_decomposer()`.
  *
  * Le plugin Cache Factory complète la description canonique avec le nom sans extension et l'extension du fichier.
  *
@@ -260,6 +264,7 @@ function cache_cache_completer($plugin, $cache, $fichier_cache, $configuration) 
  * sont listées par ordre alphabétique sans possibilité de regroupement.
  *
  * @uses cache_chercher_service()
+ * @uses cache_repertorier()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier

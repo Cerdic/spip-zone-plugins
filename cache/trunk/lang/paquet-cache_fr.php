@@ -8,6 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // N
-	'cache_description' => 'Framework de gestion des caches pour plugins. Ce plugin fournit les API et les mécanismes permettant d\'écrire, de lire et de supprimer des caches spécifiques à un plus utilisateur.',
+	'cache_description' => 'Framework de gestion des caches pour plugins. Ce plugin fournit les API et les mécanismes permettant d\'écrire, de lire et de supprimer des caches spécifiques à un plugin utilisateur.',
 	'cache_slogan' => 'La fabrique de caches pour plugins',
 );

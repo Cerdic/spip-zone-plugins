@@ -1,6 +1,9 @@
 <?php
-
-// Sécurité
+/**
+ * Ce fichier contient les cas d'utilisation de certains pipelines par le plugin Cache Factory.
+ *
+ * @package    SPIP\CACHE\PIPELINE
+ */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -14,9 +17,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Au moins, cela permet facilement de recharger une configuration d'un plugin utilisateur qui aurait changée
  * sans être une opération trop récurrente.
  *
+ * @uses configuration_cache_lire()
+ * @uses configuration_cache_effacer()
+ * @uses cache_cache_configurer()
+ *
  * @param $flux
+ *        Tableau des données permettant de caractériser la page concernée et de déclencher le traitement uniquement
+ *        sur la page `admin_plugin`.
  *
  * @return mixed
+ *         Le flux entrant n'est pas modifié.
  */
 function cache_affiche_milieu($flux) {
 

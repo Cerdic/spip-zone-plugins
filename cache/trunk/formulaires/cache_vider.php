@@ -2,10 +2,11 @@
 /**
  * Gestion du formulaire générique de vidage des caches d'un plugin donné utilisant Cache Factory.
  *
- * @package    SPIP\CACHE\API
+ * @package    SPIP\CACHE\UI
  */
-
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Chargement des données : le formulaire affiche la liste des caches issus de l'utilisation du service et propose
@@ -43,7 +44,7 @@ function formulaires_formulaire_charger($plugin, $options = array()) {
 
 
 /**
- * Vérification des saisies : il est indispensable de choisir un cache à supprimer.
+ * Vérification des saisies : il est obligatoire de choisir un cache à supprimer.
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
