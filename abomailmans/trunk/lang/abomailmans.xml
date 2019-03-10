@@ -1,4 +1,7 @@
 <traduction module="abomailmans" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/abomailmans/trunk/lang/" reference="fr">
+	<langue code="ar" url="https://trad.spip.net/tradlang_module/abomailmans?lang_cible=ar" total="100" traduits="100" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
+	</langue>
 	<langue code="de" url="https://trad.spip.net/tradlang_module/abomailmans?lang_cible=de" total="100" traduits="68" relire="0" modifs="6" nouveaux="26" pourcent="68.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 	</langue>
