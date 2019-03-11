@@ -26,11 +26,15 @@
 }
 #nav {
     .menu-conteneur {
-        .item-fa {
+        .item-fa { // inutile ?
             font-size: 1.5em;
             padding: 9px 15px 8px;
         }
     }
+}
+#nav.navbar-inverse .nav > li.item.dropdown > a:hover,
+#nav.navbar-inverse .nav > li.item.dropdown > a:focus {
+    color: @navbarLinkColorHover;
 }
 //// Listes : bordure au survol ////
 #content, #aside, #extra {
@@ -142,13 +146,18 @@ h3.spip{
 // Recuperation des metas
 /////////////////////
 
+// ajuster le chemin des images en fonction d'une mutu ou non
+[(#SET{url_image, #URL_SITE_SPIP/})]
+[(#EVAL{_DIR_SITE}|!={#EVAL{_DIR_RACINE}}|oui)
 [(#SET{url_image, #EVAL{_DIR_SITE}|replace{sites}})]
+[(#SET{url_image, /#GET{url_image}#EVAL{_DIR_SITE}})]
+]
 
 //// Body ////
 body {
 [    background-color: (#CONFIG{sdc/body/background-color});
 ][(#CONFIG{sdc/body/background-image}|oui)
-     background-image: url("/#GET{url_image}#EVAL{_DIR_SITE}squelettes/images/#CONFIG{sdc/body/background-image}");
+     background-image: url("#GET{url_image}squelettes/images/#CONFIG{sdc/body/background-image}");
 [    background-repeat: (#CONFIG{sdc/body/background-repeat});
 ][   background-position: (#CONFIG{sdc/body/background-position});
 ][   background-attachment: (#CONFIG{sdc/body/background-attachment});
@@ -161,7 +170,7 @@ body {
     .container{]
     [    background-color: (#CONFIG{sdc/header/background-color});
     ][(#CONFIG{sdc/header/background-image}|oui)
-         background-image: url("/#GET{url_image}#EVAL{_DIR_SITE}squelettes/images/#CONFIG{sdc/header/background-image}");
+         background-image: url("#GET{url_image}squelettes/images/#CONFIG{sdc/header/background-image}");
     [    background-repeat: (#CONFIG{sdc/header/background-repeat});
     ][   background-position: (#CONFIG{sdc/header/background-position});
     ][   background-attachment: (#CONFIG{sdc/header/background-attachment});
@@ -214,7 +223,7 @@ body {
 #footer {
 [    background-color: (#CONFIG{sdc/footer/background-color});
 ][(#CONFIG{sdc/footer/background-image}|oui)
-     background-image: url("/#GET{url_image}#EVAL{_DIR_SITE}squelettes/images/#CONFIG{sdc/footer/background-image}");
+     background-image: url("#GET{url_image}squelettes/images/#CONFIG{sdc/footer/background-image}");
 [    background-repeat: (#CONFIG{sdc/footer/background-repeat});
 ][   background-position: (#CONFIG{sdc/footer/background-position});
 ][   background-attachment: (#CONFIG{sdc/footer/background-attachment});

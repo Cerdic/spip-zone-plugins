@@ -2,7 +2,7 @@
 /**
   Plugin SPIPr-Dane-Config
   * Fichier #FORMULAIRE_NAVBAR_INVERSE
-  * formulaire de configuration de la couluer de la barre de nav 
+  * formulaire de configuration de la couleur de la barre de nav 
   (c) 2019 Dominique Lepaisant
   Distribue sous licence GPL3
 
@@ -52,8 +52,6 @@ function formulaires_navbar_inverse_traiter_dist() {
 	if (!_request('_cfg_delete')){
         if ( _request('couleur_liens') && _request('couleur_liens') !='' &&  _request('inverser_couleur') && _request('inverser_couleur') !=''){
             // Ecriture de la couleur des liens dans colors.less
-            if(!is_file( $file_less =_DIR_SITE."squelettes/css/colors.less"))
-                $file_less = _DIR_PLUGIN_SPIPR_DANE."/css/colors.less";
             if ($lines = lire_variables_barnav_less("colors")) {
                 foreach ($lines as $line) {
                     if (preg_match("#^(@navbarBackground:)#", $line, $matches))
@@ -97,10 +95,14 @@ function formulaires_navbar_inverse_traiter_dist() {
             //enregistrement de colors.less dans le rep squelettes/css du site
 			file_put_contents(_DIR_SITE."squelettes/css/colors.less", $data);
         }
-		effacer_config('sdc/navbar/inverser_couleur');
+        effacer_config('sdc/navbar/inverser_couleur');
         effacer_config('sdc/navbar/couleur_liens');
         effacer_config('sdc/navbar/couleur_liens_hover');
-		$oks = 'La configuration de la barre de navigation a été réinitialisée'; 
+        set_request('couleur_liens', 'white');
+        set_request('couleur_liens_hover', '');
+        
+        $oks = 'La configuration de la barre de navigation a été réinitialisée';
+        
 		return array('message_ok'=>$oks);
 	}
    

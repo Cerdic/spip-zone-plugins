@@ -32,7 +32,7 @@ function formulaires_couleurs_charger_dist( $bloc ) {
 		'bloc' => $bloc,
 		'color1' => lire_config($meta.$bloc.'/color1', "#DF0D46"), 
 		'color2' => lire_config($meta.$bloc.'/color2', "#455C98"), 
-		'color3' => lire_config($meta.$bloc.'/color3', "#DFDFDF") 
+		'color3' => lire_config($meta.$bloc.'/color3', "#DFDFDF")
 	);
 
 	return $valeurs;
@@ -55,6 +55,7 @@ function formulaires_couleurs_verifier_dist( $bloc ) {
 
 function formulaires_couleurs_traiter_dist( $bloc ) {
 	// Traitement des données reçues du formulaire, 
+    $errs=$errDefaut='';
 	$meta='sdc/';
 	$vals=array('color1'=>'#DF0D46', 'color2'=>'#455C98', 'color3'=>'#DFDFDF');
 
@@ -76,7 +77,7 @@ function formulaires_couleurs_traiter_dist( $bloc ) {
 
         // enregistrement des valeurs dans spip_meta 
 		foreach($vals as $nom => $valeur) {
-			if(  _request($val)!='' ){
+			if(  _request($nom)!='' ){
 				ecrire_config($meta.$bloc.'/'.$nom, _request($nom));
 				if( is_null(lire_config($meta.$bloc.'/'.$nom)) )
 					$errs.= $nom;

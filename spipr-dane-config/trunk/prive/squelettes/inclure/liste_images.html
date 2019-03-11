@@ -4,7 +4,7 @@
     [(#REM)<p class="pagination">#PAGINATION</p>]
     <p class="pagination"> #GRAND_TOTAL[ (#GRAND_TOTAL|singulier_ou_pluriel{sdc:image_disponible, sdc:images_disponibles}) ]</p>
     <BOUCLE_ls2(DATA){source glob, #EVAL{_DIR_SITE}squelettes/images/*.*}{pagination 8}>
-        [(#SET{valeur, #VALEUR|explode{'/',-1}|table_valeur{5}})]
+        [(#SET{valeur, #VALEUR|explode{'/',-1}|end})]
         [<div class="formulaire_spip" style="float:left;margin:6px;width:110px;padding:4px;border:1px solid #ccc;">
             <a href="#VALEUR" class="cboxElement hasbox" title="[(#GET{valeur})]" style="height:65px;display:block;overflow:hidden;">(#VALEUR|image_reduire{100,9999}|alterner{'','','<br/>'})</a>
             <br/>
