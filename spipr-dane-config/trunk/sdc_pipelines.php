@@ -24,7 +24,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * 		Le code html du head complété
  */
 function sdc_header_prive($flux){
-	if ( $flux["args"]["exec"] == 'configurer_sdc') {
+	if ( isset($flux["args"]["exec"]) && $flux["args"]["exec"] == 'configurer_sdc') {
         include_spip('inc/filtres');
         $css=find_in_path('prive/themes/spip/css/prive_perso.css');
         if (function_exists('produire_fond_statique'))
@@ -35,7 +35,7 @@ function sdc_header_prive($flux){
         $flux .= "\n<link rel=\"stylesheet\" href=\"".$css_html."\" type=\"text/css\" />\n";
         $flux .= "\n<link rel=\"stylesheet\" href=\"".$css."\" type=\"text/css\" />\n";
  
-  }  
+	}  
 
 	return $flux;
 }
