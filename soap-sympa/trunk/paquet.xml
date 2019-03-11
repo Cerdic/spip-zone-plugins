@@ -1,9 +1,9 @@
 <paquet
 	prefix="soapsympa"
 	categorie="communication"
-	version="3.0.2"
+	version="3.0.3"
 	etat="stable"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/soapsympa-128.png"
 	schema="0.1.5"
 	documentation="https://contrib.spip.net/Spip-ML-SYMPA"
