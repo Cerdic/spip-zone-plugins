@@ -1,22 +1,23 @@
 <paquet
 	prefix="roles_auteurs"
 	categorie="edition"
-	version="1.0.4"
+	version="2.0.0"
 	etat="experimental"
-	compatibilite="[3.0.0;3.2.*]"
+	compatibilite="[3.3.0-dev;3.3.*]"
 	logo="prive/themes/spip/images/roles_auteurs-64.png"
 	documentation=""
 	schema="1.0.0" 
 >
 
-	<nom>Rôles d&#039;auteurs</nom>
+	<nom>Rôles d’auteurs</nom>
 
 	<auteur lien='http://www.magraine.net/'>Marcillaud Matthieu</auteur>
 	<credit lien="http://www.aha-soft.com/">Aha Soft (logo)</credit>
 
 	<licence>GNU/GPL</licence>
-	
+
 	<necessite nom='roles' compatibilite="[1.0.0;]" />
+	<necessite nom='rang_auteurs' compatibilite="[1.0.0;]" />
 
 	<pipeline nom="declarer_tables_objets_sql"  inclure="base/roles_auteurs.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/roles_auteurs.php" />

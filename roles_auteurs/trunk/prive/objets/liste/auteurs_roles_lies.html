@@ -1,10 +1,3 @@
-[(#SET{defaut_tri,#ARRAY{
-	statut,1,
-	multi nom,1,
-	site,1,
-	compteur_articles,-1
-}})
-]
 #SET{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
 #SET{debut,#ENV{debutautl,#EVAL{_request("debutautl");}}}
 <input type="hidden" name="debutautl" value="#GET{debut}" />
@@ -12,36 +5,28 @@
 [(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
 a mis a jour la valeur avec la page reelle]
 #SET{debut,#ENV{debutautl,#EVAL{_request("debutautl");}}}
-#SET{afficher_lettres,#TRI|=={'multi nom'}|oui}
 #ANCRE_PAGINATION
-<div class="liste-objets liste-objets-lies auteurs">
+<div class="liste-objets liste-objets-lies auteurs" data-lien="#ENV{objet}/#ENV{id_objet}">
 <table class='spip liste'>
 [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_auteur,info_nb_auteurs}}) #AIDER{artauteurs}</strong></caption>]
 	<thead>
-		#SET{p,''}
-		<BOUCLE_lettre(AUTEURS){tout}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{id_auteur IN #GET{selection}}{where?}{statut?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_auteur==#GET{afficher_lettres}|?{'.*','A'}}>[
-		(#NOM**|extraire_multi|initiale|unique|oui)
-		[(#SET{p,#GET{p}|concat{
-		#SELF|parametre_url{debutautl,@#ID_AUTEUR}|ancre_url{paginationautl}|afficher_initiale{#NOM**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
-		}})]
-		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
-		(#SET{p,
-			#GET{p}|concat{
-				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
-			}
-		})]</B_lettre>
-		[<tr><td colspan="5"><p class='pagination'>(#GET{p})</p></td></tr>]
-	
 		<tr class='first_row'>
-			<th class='statut' scope='col'>[(#TRI{statut,#CHEMIN_IMAGE{auteur-0minirezo-16.png}|balise_img{<:lien_trier_statut|attribut_html:>},ajax})]</th>
-			<th class='nom' scope='col'>[(#TRI{multi nom,<:info_nom:>,ajax})]</th>
+			<th class="rang"></th>
+			<th class='statut' scope='col'>[(#CHEMIN_IMAGE{auteur-0minirezo-16.png}|balise_img{<:lien_trier_statut|attribut_html:>})]</th>
+			<th class='nom' scope='col'><:info_nom:></th>
 			<th class='role' scope='col'><:roles:role_titre:></th>
 			<th class='action' scope='col'>&nbsp;</th>
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_aut(AUTEURS){tout}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{id_auteur IN #GET{selection}}{where?}{statut?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} autl}>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_AUTEUR|=={#ENV{id_lien_ajoute}}|oui)append]">
+	<BOUCLE_liste_aut(AUTEURS){tout}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{id_auteur IN #GET{selection}}{par rang_lien,multi nom}{where?}{statut?}{pagination #ENV{nb,10} autl}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_AUTEUR|=={#ENV{id_lien_ajoute}}|oui)append]" data-lien="auteur/#ID_AUTEUR" data-rang="#RANG_LIEN">
+			#SET{rang,#RANG_LIEN}#SET{last,#ID_AUTEUR}
+			<td class='rang' style="padding: 0;">
+				[(#GET{rang}|oui)#SET{ordonne,' '}
+				<button type="submit" name="ordonner_lien\[auteur-#ID_AUTEUR-#ENV{objet}-#ENV{id_objet}\]" value="[(#GET{rang}|moins{1})]" style="padding: 0"
+				>[(#GET{rang}|>{1}|?{&uarr;,'#'})]</button>]
+			</td>
 			<td class='statut'>[(#STATUT|puce_statut{auteur})]</td>
 			<td class='nom[ (#NOM|non)vide]'>[(#LOGO_AUTEUR|image_reduire{20,20})]<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#RANG). ][(#NOM|sinon{<:texte_vide:>})]</a></td>
 			<td class='role'>
@@ -61,7 +46,13 @@ a mis a jour la valeur avec la page reelle]
 	</tbody>
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
-[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien\[auteur-*-#OBJET-#ID_OBJET-*\]" value="X"><:lien_retirer_tous_auteurs:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+<div class="action" style="overflow: hidden">
+[(#GET{ordonne}|oui)
+<button type="submit" class="button link" name="desordonner_liens" value="X" style="float: left"><:rang_auteurs:lien_tout_desordonner:></button>]
+[(#GET{ordonne}|non|et{#GRAND_TOTAL|>{1}})
+<button type="submit" class="button link" name="ordonner_lien\[auteur-#GET{last}-#ENV{objet}-#ENV{id_objet}-*\]" value="999999" style="float: left"><:rang_auteurs:lien_ordonner:></button>]
+[(#GRAND_TOTAL|>{3}|oui)<button type="submit" class="button link" name="supprimer_lien\[auteur-*-#OBJET-#ID_OBJET-*\]" value="X"><:lien_retirer_tous_auteurs:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button>]
+</div>
 </div>
 </B_liste_aut>
 <div class="liste-objets liste-objets-lies auteurs caption-wrap">
