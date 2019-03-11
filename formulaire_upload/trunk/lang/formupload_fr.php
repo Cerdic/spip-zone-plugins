@@ -1,6 +1,11 @@
 <?php
 
-	$GLOBALS[$GLOBALS['idx_lang']] = array(
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
+
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_boite_formupload' => 'Configuration du plugin Formulaire upload',
 	'cfg_descr_formupload' => 'Ce plugin permet d\'avoir un formulaire public associant des documents aux &eacute;l&eacute;ments de SPIP.',
 	'cfg_lbl_files_accepted' => 'Types de fichiers accept&eacute;s',
@@ -38,4 +43,3 @@
 
 );
 
-?>

@@ -6,8 +6,8 @@
 
 
 ]<B_docs>
-	#ANCRE_PAGINATION
-<BOUCLE_docs(DOCUMENTS documents_liens){id_auteur?}{id_article?}{id_breve?}{id_rubrique?}{!par id_document}{tout}{pagination 3}>
+#ANCRE_PAGINATION
+<BOUCLE_docs(DOCUMENTS documents_liens){id_auteur?}{id_article?}{id_breve?}{id_rubrique?}{!par id_document}{tout}{pagination}>
 <div class="fupld[(#COMPTEUR_BOUCLE|=={1}|oui) fupld-first]" id="documents_portfolio">  
 	<div class="spip_doc_logo float#LANG_RIGHT">
 		[(#SET{logo,[(#LOGO_DOCUMENT|#URL_DOCUMENT
@@ -45,8 +45,8 @@
 
 </div>
 </BOUCLE_docs>
-	[<div class="pagination">(#PAGINATION)</div>]
+[<div class="pagination">(#PAGINATION)</div>]
 
-	<p class='boutons'><input class='submit' type="submit" name="mise_a_jour" value="<:bouton_enregistrer:>"/></p>
-	<br />
+<p class='boutons'><input class='submit' type="submit" name="mise_a_jour" value="<:bouton_enregistrer:>"/></p>
+<br />
 </B_docs> 

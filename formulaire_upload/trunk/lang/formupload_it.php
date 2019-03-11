@@ -1,6 +1,11 @@
 <?php
 
-	$GLOBALS[$GLOBALS['idx_lang']] = array(
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
+
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 	'yourfiles' => 'I tuoi file',
 	'choosefiles' => 'Scegliere i file da aggiungere:',
 	'nodocs' => 'Nessun documento nella zona di upload',
@@ -15,5 +20,3 @@
 	'Z' => 'ZZzZZzzz'
 
 );
-
-?>

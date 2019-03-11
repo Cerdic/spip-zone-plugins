@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('_ECRIRE_INC_VERSION')) {
+if (!defined("_ECRIRE_INC_VERSION")) {
 	return;
 }
 
@@ -47,7 +47,7 @@ function formulaires_upload_traiter_dist($objet, $id_objet, $fond_documents){
 	$invalider = false;
 	$type = objet_type($objet);
 	$res['message_ok'] = "";
-	$compteur = 0;
+	$compteur=0;
 
 	// titrer des documents ?
 	if (is_array(_request('ref'))) {
@@ -57,7 +57,7 @@ function formulaires_upload_traiter_dist($objet, $id_objet, $fond_documents){
 			if (formulaireupload_verifier_doc_liaison($ref,$id_objet,$type))
 				sql_updateq('spip_documents', array('titre' => $titre) ,'id_document='.$ref);         
 			}
-		}
+		}     
 	}
 
 	// supprimer des documents ?   
@@ -74,7 +74,7 @@ function formulaires_upload_traiter_dist($objet, $id_objet, $fond_documents){
 			spip_log("supprimer document ($type)".$supprimer, 'upload');
 		} 			
 		}
-	}
+  	}
 	$res['message_ok'] .= _T("formupload:msg_doc_deleted",array("compteur"=>$compteur))."<br />";
 	}
 
@@ -82,7 +82,7 @@ function formulaires_upload_traiter_dist($objet, $id_objet, $fond_documents){
 	include_spip('inc/joindre_document');
 	$files = joindre_trouver_fichier_envoye();
 
-	if (is_array($files)) {
+	if (is_array($files)) {     
 	$compteur = 0; 
 
 	// gestion des quotas ?
@@ -131,8 +131,9 @@ function formulaires_upload_traiter_dist($objet, $id_objet, $fond_documents){
 //  verifier la liaison entre objet et le document
 //  pour eviter toucher d'autres documents que ceux traiter ds le doc
 function formulaireupload_verifier_doc_liaison($id_document, $id_objet, $type) {
-	if (sql_countsel('spip_documents_liens', "id_document=".intval($id_document)." AND id_objet=".intval($id_objet)." AND objet='$type'"))
+	if (sql_countsel('spip_documents_liens', "id_document=".intval($id_document)." AND id_objet=".intval($id_objet)." AND objet='$type'")) {
 		return true;
+	}
 
 	return false;
 }
