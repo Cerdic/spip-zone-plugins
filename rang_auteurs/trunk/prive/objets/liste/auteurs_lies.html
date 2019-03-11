@@ -1,11 +1,3 @@
-[(#SET{defaut_tri,#ARRAY{
-	statut,1,
-	multi nom,1,
-	site,1,
-	compteur_articles,-1
-}})
-]
-
 #SET{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
 #SET{debut,#ENV{debutautl,#EVAL{_request("debutautl");}}}
 <input type="hidden" name="debutautl" value="#GET{debut}" />
