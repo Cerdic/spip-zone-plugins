@@ -9,9 +9,29 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type="submit" class="submit noscroll invisible" name="enregistrer" value="<:bouton_enregistrer:>" />
-
+		
+		[(#ENV{_activer_options_globales}|oui)
+			[(#ENV{erreurs/configurer_globales}|non)
+			<div class="actions">
+				<button type="submit" class="submit" name="configurer_globales" value="oui">
+					<:saisies:construire_configurer_globales_label:>
+				</button>
+			</div>
+			]
+			[(#ENV{erreurs/configurer_globales}|oui)
+			<[(#DIV|sinon{ul})] class="editer-groupe en_configuration">
+				#GENERER_SAISIES{#ENV{erreurs/configurer_globales}}
+				
+				<[(#DIV|sinon{li})] class="boutons">
+					<input type="hidden" name="enregistrer_globales" value="oui" />
+					<button type="submit" class="submit link noscroll" name="enregistrer_globales" value=""><:bouton_annuler:></button>
+					<input type="submit" class="submit noscroll" name="enregistrer" value="<:bouton_valider:>" />
+				</[(#DIV|sinon{li})]>
+			</[(#DIV|sinon{ul})]>
+			]
+		]
+		
 		<[(#DIV|sinon{ul})] class="editer-groupe" id="deplacable">
-
 			<[(#DIV|sinon{li})] id="reinitialiser" class="actions_formulaire">
 				<button type="submit" class="submit" name="reinitialiser" value="oui" onclick="return confirm('<:saisies:construire_reinitialiser_confirmer:>')">
 					<img src="#CHEMIN{images/formulaire-reinitialiser-24.png}" alt="" />
@@ -49,7 +69,6 @@
 				</BOUCLE_saisies_groupes_disponibles>
 			</[(#DIV|sinon{li})]>
 			</B_saisies_groupes_disponibles>
-
 		</[(#DIV|sinon{ul})]>
 
 

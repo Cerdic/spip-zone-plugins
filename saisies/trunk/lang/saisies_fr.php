@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'construire_attention_modifie' => 'Le formulaire ci-dessous est différent du formulaire initial. Vous avez la possibilité de le réinitialiser à son état avant vos modifications.',
 	'construire_attention_supprime' => 'Vos modifications comportent des suppressions de champs. Veuillez confirmer l’enregistrement de cette nouvelle version du formulaire.',
 	'construire_aucun_champs' => 'Il n’y a pour l’instant aucun champ dans ce formulaire.',
+	'construire_configurer_globales_label' => 'Configurer les options globales',
 	'construire_confirmer_supprimer_champ' => 'Voulez-vous vraiment supprimer ce champ ?',
 	'construire_info_nb_champs_masques' => '@nb@ champ(s) masqué(s) le temps de configurer le groupe.',
 	'construire_position_explication' => 'Indiquez devant quel autre champ sera placé celui-ci.',
