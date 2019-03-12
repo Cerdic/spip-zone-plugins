@@ -29,7 +29,7 @@ function formulaires_logo_charger_dist($bloc){
 //
 // Verifier
 // 
-function formulaires_logo_verifier_dist($bloc,$elem){
+function formulaires_logo_verifier_dist($bloc){
 	$erreurs = array();
     if(!is_int(intval(_request('largeur_logo'))))
         $erreurs['largeur_logo']="Vous devez saisir un nombre entier";
@@ -55,14 +55,14 @@ function formulaires_logo_traiter_dist($bloc){
 			else 
 				effacer_config('sdc/'.$bloc.'/'.$champ);
 		}
-        $res['message_ok']= "La configuration des logos a été enregistrée";
+        $res['message_ok']= _T('sdc:params_logos_enregistres');
 	}
     else {
         foreach($vals as $champ => $val) {
             effacer_config('sdc/'.$bloc.'/'.$champ);
             set_request($champ, $val);
         }
-        $res['message_ok']= "La configuration des logos a été supprimée";
+        $res['message_ok']= _T('sdc:params_logos_supprimes');
     }
 	return $res;
 }

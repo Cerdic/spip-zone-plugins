@@ -32,9 +32,9 @@ function formulaires_background_verifier_dist( $bloc ) {
 /*
 	Placer ici les controles sur les champs
 */
-    //$Reg = ("#^[a-zA-Z0-9]{4,6}$#");
-    $Reg = "/^#[0-9]{6}$/";
-
+    if (_request('bgimg') == 'on' && _request('background-image') == '')
+        $erreurs['background-image'] = _T('sdc:background_image_erreur');
+    
     if (_request('background-image') != '') {
         if ( !preg_match("/.(png|gif|jpg|jpeg)$/", _request('background-image'))) 
             $erreurs['background-image'] = _request('background-image')._T('sdc:background_image_erreur_ext');
@@ -64,7 +64,7 @@ function formulaires_background_verifier_dist( $bloc ) {
 
 function formulaires_background_traiter_dist( $bloc ) {
     //Traitement des données reçues du formulaire, 
-    $titre=array('header'=>'Entête', 'body'=>'Page', 'footer'=>'Pied de page');
+    $titre=array('header'=>'de l\'entête', 'body'=>'de la page', 'footer'=>'du pied de page');
     $vals=array('img'=>array('background-image','background-repeat','background-position','background-attachment','background-size',));
     if (!_request('_cfg_delete')){
         if ( _request('background-color')!='' )
@@ -103,17 +103,16 @@ function formulaires_background_traiter_dist( $bloc ) {
             effacer_config('sdc/'.$bloc.'/largeur_background');
             set_request('background-color', '');
         }
-        $oks = 'La configuration des paramétres de l\'arrière plan du bloc "'.$titre[$bloc].'" a été réinitialisée'; 
 
-        return array('message_ok'=>$oks);
+        return array('message_ok'=> _T('sdc:params_background_supprimes', array('bloc'=>$titre[$bloc])));
 	}
    
     // S'il y a des erreurs, elles sont retournées au formulaire
     if($errs)
-        return array('message_erreur'=>'La configuration des paramétres de l\'arrière plan du bloc "'.$titre[$bloc].'" n\'a pas été enregistrée.');
+        return array('message_erreur'=>_T('sdc:params_background_non_enregistres', array('bloc'=>$titre[$bloc])));
   
     // Sinon, le message de confirmation est envoyé
     else 
-        return array('message_ok'=>'La configuration des paramétres de l\'arrière plan du bloc "'.$titre[$bloc].'" a été enregistrée.');
+        return array('message_ok'=> _T('sdc:params_background_enregistres', array('bloc'=>$titre[$bloc])));
 }
 ?>

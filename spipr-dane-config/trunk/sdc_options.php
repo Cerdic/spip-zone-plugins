@@ -15,7 +15,3 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /* est-ce qu'on est dans une mutualisation ? */
 if (!defined('_DIR_SITE')) define('_DIR_SITE', _DIR_RACINE);
-
-/* n'afficher que les pages ayant un page.xml dans le noizetier */
-define('_NOIZETIER_LISTER_PAGES_SANS_XML',false);
-

@@ -101,17 +101,17 @@ function formulaires_navbar_inverse_traiter_dist() {
         set_request('couleur_liens', 'white');
         set_request('couleur_liens_hover', '');
         
-        $oks = 'La configuration de la barre de navigation a été réinitialisée';
+        $oks = _T('sdc:params_barnav_supprimes');
         
 		return array('message_ok'=>$oks);
 	}
    
   // S'il y a des erreurs, elles sont retournées au formulaire
   if( $errs !='' )
-    return array('message_erreur'=>'La configuration de la couleur d\'arrière plan de la barre de navigation n\'a pas été enregistrée.');
+    return array('message_erreur'=>_T('sdc:params_barnav_non_enregistres'));
   
   // Sinon, le message de confirmation est envoyé
   else 
-  	return array('message_ok'=>'La configuration de la couleur d\'arrière plan de la barre de navigation a été enregistrée.');
+  	return array('message_ok'=>_T('sdc:params_barnav_enregistres'));
 }
 ?>
