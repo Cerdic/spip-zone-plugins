@@ -6,7 +6,7 @@
 
 	[(#ENV*{message_erreur}|non)
 	<div class="ajax">
-		#FORMULAIRE_CONSTRUIRE_FORMULAIRE{#ENV{saisie_id}, #ENV{_saisies}}
+		#FORMULAIRE_CONSTRUIRE_FORMULAIRE{#ENV{saisie_id}, #ENV{_saisies}, #ARRAY{options_globales,#ENV{_options_globales}}}
 	</div>
 	]
 

@@ -46,6 +46,46 @@ function formidable_id_formulaire($id) {
 }
 
 /**
+* Déclaration des saisies du formulaire à l'API Saisies.
+*
+* @param int|string $id
+*     Identifiant numerique ou textuel du formulaire formidable
+* @param array $valeurs
+*     Valeurs par défauts passées au contexte du formulaire
+*     Exemple : array('hidden_1' => 3) pour que champ identifie "@hidden_1@" soit prerempli
+* @param int|bool $id_formulaires_reponse
+*     Identifiant d'une réponse pour forcer la reedition de cette reponse spécifique
+*
+* @return array
+*     Tableau des saisies
+**/
+function formulaires_formidable_saisies_dist($id, $valeurs = array(), $id_formulaires_reponse = false) {
+	$saisies = array();
+	
+	if (
+		$id_formulaire = formidable_id_formulaire($id)
+		and $formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . intval($id_formulaire))
+	) {
+		$saisies = unserialize($formulaire['saisies']);
+		
+		// Si on est en train de réafficher les valeurs postées,
+		// ne pas afficher les saisies hidden
+		if (
+			$formulaire['apres'] == 'valeurs'
+			and _request('formidable_afficher_apres') == 'valeurs'
+			and _request('formidable_traiter_ok') == true
+		) {
+			$champs_hidden = saisies_lister_avec_type($saisies, 'hidden');
+			foreach ($champs_hidden as $champ => $desc) {
+				$saisies = saisies_supprimer($saisies, $champ);
+			}
+		}
+	}
+	
+	return $saisies;
+}
+
+/**
 * Chargement du formulaire CVT de Formidable.
 *
 * Genere le formulaire dont l'identifiant (numerique ou texte est indique)
@@ -61,7 +101,7 @@ function formidable_id_formulaire($id) {
 * @return array
 *     Contexte envoyé au squelette HTML du formulaire.
 **/
-function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires_reponse = false) {
+function formulaires_formidable_charger_dist($id, $valeurs = array(), $id_formulaires_reponse = false) {
 	$contexte = array();
 
 	// On peut donner soit un id soit un identifiant
@@ -79,25 +119,9 @@ function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires
 
 		// Est-ce que la personne a le droit de répondre ?
 		if (autoriser('repondre', 'formulaire', $formulaire['id_formulaire'], null, array('formulaire' => $formulaire))) {
-			$saisies = unserialize($formulaire['saisies']);
 			$traitements = unserialize($formulaire['traitements']);
-			// Si on est en train de réafficher les valeurs postées,
-			// ne pas afficher les saisies hidden
-			if ($formulaire['apres'] == 'valeurs'
-				and _request('formidable_afficher_apres') == 'valeurs'
-				and _request('erreurs') == false
-			) {
-				$champs_hidden = saisies_lister_avec_type($saisies, 'hidden');
-				foreach ($champs_hidden as $champ => $desc) {
-					$saisies = saisies_supprimer($saisies, $champ);
-				}
-			}
 
-			// On déclare les champs avec les valeurs par défaut
-			$contexte = array_merge(saisies_lister_valeurs_defaut($saisies), $contexte);
 			$contexte['mechantrobot'] = '';
-			// On ajoute le formulaire complet
-			$contexte['_saisies'] = $saisies;
 
 			$contexte['id'] = $formulaire['id_formulaire'];
 			$contexte['_hidden'] = '<input type="hidden" name="id_formulaire" value="' . $contexte['id'] . '"/>';
@@ -185,80 +209,96 @@ function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires
 * @return array
 *     Tableau des erreurs
 **/
-function formulaires_formidable_verifier($id, $valeurs = array(), $id_formulaires_reponse = false) {
+function formulaires_formidable_verifier_dist($id, $valeurs = array(), $id_formulaires_reponse = false) {
 	$erreurs = array();
-	// On peut donner soit un id soit un identifiant
-	if (!$id_formulaire = formidable_id_formulaire($id)) {
-		$erreurs['message_erreur'] = _T('formidable:erreur_base');
-	} else {
-		// Sale bête !
-		if (_request('mechantrobot')!='') {
-			$erreurs['hahahaha'] = 'hahahaha';
-			return $erreurs;
-		}
-
-		$formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . intval($id_formulaire));
-		$saisies = unserialize($formulaire['saisies']);
-
-		$erreurs_par_fichier = array();
-		$erreurs = saisies_verifier($saisies, true, $erreurs_par_fichier);
-
-		// On supprime de $_FILES les fichiers envoyés qui ne passent pas le test de vérification
-
-		$plugins_actifs = liste_plugin_actifs();
-		if (isset($plugins_actifs['CVTUPLOAD'])) {
-			include_spip('inc/cvtupload');
-			foreach ($erreurs as $champ => $erreur) {
-				if (isset($erreurs_par_fichier[$champ])) {
-					cvtupload_nettoyer_files_selon_erreurs($champ, $erreurs_par_fichier[$champ]);
-				}
-			}
-		}
-		// Si on a pas déjà une erreur sur le champ unicite, on lance une verification
-		$traitements = unserialize($formulaire['traitements']);
-		$unicite = $traitements['enregistrement']['unicite'];
-		$message_erreur_unicite = $traitements['enregistrement']['message_erreur_unicite'];
-		if ($unicite != '') {
-			if (!$erreurs[$unicite]) {
-				$options_enregistrement = isset($traitements['enregistrement']) ? $traitements['enregistrement'] : null;
-				if (!$id_formulaires_reponse) { // si pas de réponse explictement passée au formulaire, on cherche la réponse qui serait édité
-					$id_formulaires_reponse = formidable_trouver_reponse_a_editer($formulaire['id_formulaire'], $id_formulaires_reponse, $options_enregistrement);
-				}
-				if ($id_formulaires_reponse != false) {
-					$unicite_exclure_reponse_courante = ' AND R.id_formulaires_reponse != '.$id_formulaires_reponse;
-				} else {
-					$unicite_exclure_reponse_courante = '';
-				}
-				$reponses = sql_allfetsel(
-					'R.id_formulaire AS id',
-					'spip_formulaires_reponses AS R
-						LEFT JOIN spip_formulaires AS F
-						ON R.id_formulaire=F.id_formulaire
-						LEFT JOIN spip_formulaires_reponses_champs AS C
-						ON R.id_formulaires_reponse=C.id_formulaires_reponse',
-					'R.id_formulaire = ' . $id_formulaire .
-						$unicite_exclure_reponse_courante .
-						' AND C.nom='.sql_quote($unicite).'
-						AND C.valeur='.sql_quote(_request($unicite)).'
-						AND R.statut = "publie"'
-				);
-				if (is_array($reponses) && count($reponses) > 0) {
-					$erreurs[$unicite] = $message_erreur_unicite ?
-						_T($message_erreur_unicite) : _T('formidable:erreur_unicite');
-				}
-			}
-		}
-
-		if ($erreurs and !isset($erreurs['message_erreur'])) {
-			$erreurs['message_erreur'] = _T('formidable:erreur_generique');
-		}
-		if ($erreurs) { // Pour savoir au chargement si le formulaire a deja été envoyé avec erreur'
-			set_request('erreurs', true);
-		}
+	
+	include_spip('inc/saisies');
+	$saisies = saisies_chercher_formulaire('formidable', array($id, $valeurs, $id_formulaires_reponse));
+	
+	// Si on n'est pas dans un formulaire à étape, on lance les vérifications des traitements
+	if ($saisies and !saisies_lister_par_etapes($saisies)) {
+		$erreurs = formulaires_formidable_verifier_traitements($id, $valeurs, $id_formulaires_reponse);
 	}
+	
+	// Sale bête ! Ça on le fait tout le temps
+	if (_request('mechantrobot')!='') {
+		$erreurs['hahahaha'] = 'hahahaha';
+	}
+	
 	return $erreurs;
 }
 
+/**
+* Vérification du formulaire CVT de Formidable mais s'il y a des étapes
+*
+* @param int|string $id
+*     Identifiant numerique ou textuel du formulaire formidable
+* @param array $valeurs
+*     Valeurs par défauts passées au contexte du formulaire
+*     Exemple : array('hidden_1' => 3) pour que champ identifie "@hidden_1@" soit prerempli
+* @param int|bool $id_formulaires_reponse
+*     Identifiant d'une réponse pour forcer la reedition de cette reponse spécifique
+*
+* @return array
+*     Tableau des erreurs
+**/
+function formulaires_formidable_verifier_etape_dist($etape, $id, $valeurs = array(), $id_formulaires_reponse = false) {
+	$erreurs = array();
+	
+	include_spip('inc/saisies');
+	$saisies = saisies_chercher_formulaire('formidable', array($id, $valeurs, $id_formulaires_reponse));
+	
+	// Seulement si on est à la DERNIÈRE étape, on lance les vérifications propres aux traitements
+	if ($saisies and $etapes = saisies_lister_par_etapes($saisies) and $etape==count($etapes)) {
+		$erreurs = formulaires_formidable_verifier_traitements($id, $valeurs, $id_formulaires_reponse);
+	}
+	
+	return $erreurs;
+}
+
+/**
+ * Lancer des vérifications propres aux traitements
+ * 
+ * @param int|string $id
+ *     Identifiant numerique ou textuel du formulaire formidable
+ * @param array $valeurs
+ *     Valeurs par défauts passées au contexte du formulaire
+ *     Exemple : array('hidden_1' => 3) pour que champ identifie "@hidden_1@" soit prerempli
+ * @param int|bool $id_formulaires_reponse
+ *     Identifiant d'une réponse pour forcer la reedition de cette reponse spécifique
+ *
+ * @return array
+ *     Tableau des erreurs
+ */
+function formulaires_formidable_verifier_traitements($id, $valeurs = array(), $id_formulaires_reponse = false) {
+	$erreurs = array();
+	
+	if (
+		$id_formulaire = formidable_id_formulaire($id)
+		and $formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . intval($id_formulaire))
+	) {
+		$traitements = unserialize($formulaire['traitements']);
+		
+		// Pour chaque traitement choisi, on cherche s'il propose une fonction de vérification propre à ses besoins
+		foreach ($traitements as $type_traitement => $options) {
+			if ($verifier_traitement = charger_fonction('verifier', "traiter/$type_traitement", true)) {
+				$erreurs_traitements = $verifier_traitement(
+					array(
+						'formulaire' => $formulaire,
+						'options' => $options,
+						'id_formulaire' => $formulaire['id_formulaire'],
+						'valeurs' => $valeurs,
+						'id_formulaires_reponse' => $id_formulaires_reponse,
+					),
+					$erreurs
+				);
+				$erreurs = array_merge($erreurs, $erreurs_traitements);
+			}
+		}
+	}
+	
+	return $erreurs;
+}
 
 /**
  * Traitement du formulaire CVT de Formidable.
@@ -283,7 +323,7 @@ function formulaires_formidable_verifier($id, $valeurs = array(), $id_formulaire
  * @return array
  *     Tableau des erreurs
  **/
-function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires_reponse = false) {
+function formulaires_formidable_traiter_dist($id, $valeurs = array(), $id_formulaires_reponse = false) {
 	$retours = array();
 
 	// POST Mortem de securite : on log le $_POST pour ne pas le perdre si quelque chose se passe mal
@@ -483,7 +523,12 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 		$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 		$envoyer_mail($GLOBALS['meta']['email_webmaster'], $erreur_sujet, $erreur_texte);
 	}
+	
+	// Pas besoin de ça dans le vrai retour final
 	unset($retours['traitements']);
+	// Drapeau pour dire que tous les traitements sont terminés, afin qu'on le sache dans le charger()
+	set_request('formidable_traiter_ok', true);
+	
 	return $retours;
 }
 

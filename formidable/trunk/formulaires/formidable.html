@@ -9,26 +9,38 @@
 
 	[(#ENV{editable}|oui)
 		[(#ENV{_saisies}|et{#ENV{_saisies}|count}|oui)
-	<form method='post' action='[(#ENV{action}|ancre_url{[formulaire_#ENV{form}-(#ENV{id,nouveau})]})]' enctype='multipart/form-data'><div>
-		[(#REM) declarer les hidden qui declencheront le service du formulaire
-			parametre : url d'action ]
-		#ACTION_FORMULAIRE{#ENV{action}}
-		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
-			#GENERER_SAISIES{#ENV{_saisies}}
-			<[(#VAL{li}|saisie_balise_structure_formulaire)] style="display:none;">
-				<label for="mechantrobot-#ENV{id}"><:antispam_champ_vide:></label>
-				<input type="text" id="mechantrobot-#ENV{id}" name="mechantrobot" value="#ENV{mechantrobot}" />
-			</[(#VAL{li}|saisie_balise_structure_formulaire)]>
-		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+		<form method='post' action='[(#ENV{action}|ancre_url{[formulaire_#ENV{form}-(#ENV{id,nouveau})]})]' enctype='multipart/form-data'><div>
+			[(#REM) declarer les hidden qui declencheront le service du formulaire
+				parametre : url d'action ]
+			#ACTION_FORMULAIRE{#ENV{action}}
+			
+			[(#ENV{_etape}|oui)
+				#SET{etapes, #ENV{_saisies}|saisies_lister_par_etapes}
+				<INCLURE{fond=formulaires/inc-saisies-cvt-etapes, etapes=#GET{etapes}, env} />
+			]
+			
+			<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+				#SET{saisies, #ENV{_saisies}}
+				[(#ENV{_etape}|oui)
+					#SET{saisies, #GET{etapes}|table_valeur{#ENV{_etape}/saisies}}
+				]
+				#GENERER_SAISIES{#GET{saisies}}
+				
+				<[(#VAL{li}|saisie_balise_structure_formulaire)] style="display:none;">
+					<label for="mechantrobot-#ENV{id}"><:antispam_champ_vide:></label>
+					<input type="text" id="mechantrobot-#ENV{id}" name="mechantrobot" value="#ENV{mechantrobot}" />
+				</[(#VAL{li}|saisie_balise_structure_formulaire)]>
+			</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 
-		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
-		<!--extra-->
+			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+			<!--extra-->
 
-		<INCLURE{fond=formulaires/inc-formidable-boutons,id_formulaire=#ENV{id}} />
-	</div></form>
-	]
+			<INCLURE{fond=formulaires/inc-formidable-boutons, id_formulaire=#ENV{id}, env} />
+		</div></form>
+		]
+		
 		[(#ENV{_saisies}|et{#ENV{_saisies}|count}|non)
-			<p class="notice"><:formidable:formulaires_aucun_champ:></p>
+		<p class="notice"><:formidable:formulaires_aucun_champ:></p>
 		]
 	]
 	[(#ENV{editable}|non)

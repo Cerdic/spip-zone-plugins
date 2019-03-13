@@ -29,8 +29,10 @@
 		<p><:formidable:aucun_traitement:></p>
 	<//B_traitements>
 	#BOITE_FERMER
-
-	#FORMULAIRE_FORMIDABLE{#ID_FORMULAIRE}
+	
+	<div class="ajax">
+		#FORMULAIRE_FORMIDABLE{#ID_FORMULAIRE}
+	</div>
 
 	#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,formulaire,id,#ID_FORMULAIRE},data,'<div class="nettoyeur"></div>'}}
 

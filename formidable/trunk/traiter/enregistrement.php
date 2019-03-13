@@ -190,6 +190,44 @@ function traiter_enregistrement_update_dist($id_formulaire, $traitement, $saisie
 	}
 }
 
+function traiter_enregistrement_verifier_dist($args, $erreurs) {
+	$id_formulaire = $args['id_formulaire'];
+	$options = $args['options'];
+	$id_formulaires_reponse = $args['id_formulaires_reponse'];
+	
+	if (($unicite = $options['unicite']) != '' and !$erreurs[$unicite]) {
+		if (!$id_formulaires_reponse) { // si pas de réponse explictement passée au formulaire, on cherche la réponse qui serait édité
+			$id_formulaires_reponse = formidable_trouver_reponse_a_editer($id_formulaire, $id_formulaires_reponse, $options);
+		}
+		
+		if ($id_formulaires_reponse != false) {
+			$unicite_exclure_reponse_courante = ' AND R.id_formulaires_reponse != '.$id_formulaires_reponse;
+		} else {
+			$unicite_exclure_reponse_courante = '';
+		}
+		
+		$reponses = sql_allfetsel(
+			'R.id_formulaire AS id',
+			'spip_formulaires_reponses AS R
+				LEFT JOIN spip_formulaires AS F
+				ON R.id_formulaire=F.id_formulaire
+				LEFT JOIN spip_formulaires_reponses_champs AS C
+				ON R.id_formulaires_reponse=C.id_formulaires_reponse',
+			'R.id_formulaire = ' . $id_formulaire .
+				$unicite_exclure_reponse_courante .
+				' AND C.nom='.sql_quote($unicite).'
+				AND C.valeur='.sql_quote(_request($unicite)).'
+				AND R.statut = "publie"'
+		);
+		if (is_array($reponses) && count($reponses) > 0) {
+			$erreurs[$unicite] = $options['message_erreur_unicite'] ?
+				_T($options['message_erreur_unicite']) : _T('formidable:erreur_unicite');
+		}
+	}
+	
+	return $erreurs;
+}
+
 /**
  * Pour une saisie 'fichiers' particulière,
  * déplace chaque fichier envoyé dans le dossier
