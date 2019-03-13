@@ -276,9 +276,9 @@ function formulaires_formidable_verifier_traitements($id, $valeurs = array(), $i
 	if (
 		$id_formulaire = formidable_id_formulaire($id)
 		and $formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . intval($id_formulaire))
+		and $traitements = unserialize($formulaire['traitements'])
+		and is_array($traitements)
 	) {
-		$traitements = unserialize($formulaire['traitements']);
-		
 		// Pour chaque traitement choisi, on cherche s'il propose une fonction de vérification propre à ses besoins
 		foreach ($traitements as $type_traitement => $options) {
 			if ($verifier_traitement = charger_fonction('verifier', "traiter/$type_traitement", true)) {
