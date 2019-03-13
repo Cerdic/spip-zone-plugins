@@ -41,7 +41,7 @@ function cache_cache_configurer($plugin) {
 		'sous_dossier'    => false,        // Indicateur d'utilisation d'un sous-dossier
 		'nom_obligatoire' => array('nom'), // Composants obligatoires ordonnés de gauche à droite.
 		'nom_facultatif'  => array(),      // Composants facultatifs
-		'separateur'      => '_',          // Caractère de séparation des composants du nom '_' ou '-'
+		'separateur'      => '',           // Caractère de séparation des composants du nom '_' ou '-' ou '' si un seul composant est utilisé
 		'extension'       => '.txt',       // Extension du fichier cache (vaut .php si cache sécurisé)
 		'securisation'    => false,        // Indicateur de sécurisation du fichier
 		'serialisation'   => true,         // Indicateur de sérialisation
@@ -83,6 +83,12 @@ function cache_cache_configurer($plugin) {
 	// Construction du tableau des composants du nom : dans l'ordre on a toujours les composants obligatoires
 	// suivis des composants facultatifs.
 	$configuration['nom'] = array_merge($configuration['nom_obligatoire'], $configuration['nom_facultatif']);
+	
+	// Si le nom ne comporte qu'un seul composant forcer le séparateur à '' pour ne pas interdire d'utiliser les 
+	// caractères '_' ou '-' dans le composant unique.
+	if (count($configuration['nom']) == 1) {
+		$configuration['separateur'] = '';
+	}
 
 	// Enregistrement de la configuration du plugin utilisateur dans la meta prévue.
 	// Si une configuration existe déjà on l'écrase.
@@ -202,8 +208,14 @@ function cache_cache_decomposer($plugin, $fichier_cache, $configuration) {
 
 		// Détermination du nom du cache sans extension et décomposition suivant la configuration du nom.		
 		$nom_cache = basename($fichier_cache, $configuration['extension']);
-		foreach (explode($configuration['separateur'], $nom_cache) as $_cle => $_composant) {
-			$cache[$configuration['nom'][$_cle]] = $_composant;
+		if (count($configuration['nom']) == 1) {
+			// Le nom est composé d'un seul composant : on le renvoie directement.
+			$cache[$configuration['nom'][0]] = $nom_cache;
+		} else {
+			// Le nom est composé de plus d'un composant.
+			foreach (explode($configuration['separateur'], $nom_cache) as $_cle => $_composant) {
+				$cache[$configuration['nom'][$_cle]] = $_composant;
+			}
 		}
 
 		// Identification d'un sous-dossier si il existe.
