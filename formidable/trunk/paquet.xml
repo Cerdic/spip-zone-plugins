@@ -1,7 +1,7 @@
 <paquet
 	prefix="formidable"
 	categorie="communication"
-	version="3.34.11"
+	version="3.35.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/formidable-64.png"
@@ -42,6 +42,7 @@
 	<necessite nom="verifier" compatibilite="[1.6.2;[" />
 	<necessite nom="yaml" compatibilite="[1.5.2;[" />
 	<necessite nom="facteur" compatibilite="[3.6.2;[" />
+	<necessite nom="nospam" compatibilite="[1.6.1;[" />
 
 	<utilise nom="collectionjson" compatibilite="[1.5.0;[" />
 	<utilise nom="cvtupload" compatibilite="[1.11.0;[" />
