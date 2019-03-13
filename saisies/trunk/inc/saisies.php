@@ -308,7 +308,8 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 		array(
 			'args'=>array(
 				'formulaire' => $formulaire,
-				'saisies' => $saisies
+				'saisies' => $saisies,
+				'erreurs_fichiers' => $erreurs_fichiers,
 			),
 			'data' => $erreurs
 		)
