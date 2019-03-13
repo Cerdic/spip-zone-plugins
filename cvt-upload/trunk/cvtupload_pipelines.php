@@ -135,6 +135,24 @@ function cvtupload_formulaire_verifier($flux) {
 }
 
 /**
+ * Nettoyer le FILES s'il y a des erreurs dans les fichiers
+ * 
+ * @param array $flux
+ * @return array
+ */
+function cvtupload_saisies_verifier($flux) {
+	// On supprime de $_FILES les fichiers envoyés qui ne passent pas le test de vérification
+	include_spip('inc/cvtupload');
+	if (isset($flux['args']['erreurs_fichiers']) and is_array($flux['args']['erreurs_fichiers'])) {
+		foreach ($flux['args']['erreurs_fichiers'] as $champ => $erreurs) {
+			cvtupload_nettoyer_files_selon_erreurs($champ, $erreurs);
+		}
+	}
+	
+	return $flux;
+}
+
+/**
  * Injecter le html de presentation du fichier deja uploade avant chaque input file
  * @param array $flux
  * @return array mixed
