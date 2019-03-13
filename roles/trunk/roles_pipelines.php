@@ -34,7 +34,7 @@ function roles_jquery_plugins($flux) {
 **/
 function roles_header_prive_css($flux) {
 
-	$css = find_in_path('css/bootstrap-button-dropdown.css');
+	$css = find_in_path('css/roles-dropdown.css');
 	$flux .= '<link rel="stylesheet" href="'.direction_css($css).'" type="text/css" media="all" />' . "\n";
 
 	return $flux;
@@ -51,7 +51,7 @@ function roles_insert_head_css($flux) {
 
 	$config = lire_config('chosen', array());
 	if (isset($config['active']) and $config['active']=='oui') {
-		$css = sinon(find_in_path('css/bootstrap-button-dropdown_public.css'), find_in_path('css/bootstrap-button-dropdown.css'));
+		$css = sinon(find_in_path('css/roles-dropdown_public.css'), find_in_path('css/roles-dropdown.css'));
 		$flux .= '<link rel="stylesheet" href="'.direction_css($css).'" type="text/css" media="all" />' . "\n";
 	}
 	return $flux;
