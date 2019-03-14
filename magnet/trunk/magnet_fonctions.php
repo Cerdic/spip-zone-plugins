@@ -44,6 +44,7 @@ function critere_magnet_dist($idb, &$boucles, $crit) {
 		else {
 			$boucle->having[] = $w;
 		}
+		$boucle->modificateur['criteres']['magnet'] = true;
 	}
 }
 
@@ -60,6 +61,7 @@ function critere_magnet_pile_dist($idb, &$boucles, $crit) {
 	  AND $crit->param[0][0]->type=="texte"
 		AND ($pile = $crit->param[0][0]->texte)){
 		$boucle->modificateur['magnet_pile'] = $pile;
+		$boucle->modificateur['criteres']['magnet_pile'] = true;
 	}
 }
 
