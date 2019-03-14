@@ -24,6 +24,38 @@ function magnet_actif_sur_objet($type){
 	return false;
 }
 
+
+/**
+ * Recuperer la liste des ids d'un type d'objet
+ * #MAGNET_LISTE_IDS{article}
+ * #MAGNET_LISTE_IDS{article, maselection}
+ *
+ * Peut etre utilisee pour faire {id_article IN #MAGNET_LISTE_IDS{article}}
+ * (alors equivalent a {magnet})
+ *
+ * @param object $p
+ * @return object
+ */
+function balise_MAGNET_LISTE_IDS_dist($p) {
+	$_objet = interprete_argument_balise(1,$p);
+	if (!$_objet) {
+		$err_b_s_a = array('zbug_balise_sans_argument', array('balise' => 'MAGNET_LISTE_IDS'));
+		erreur_squelette($err_b_s_a, $p);
+	}
+	else {
+		$_pile = interprete_argument_balise(2,$p);
+		if (!$_pile) {
+			$_pile = "''";
+		}
+		$p->code = "magnet_liste_ids($_objet, $_pile, '')";
+		var_dump($p->code);
+	}
+
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+
 /**
  * Critere {magnet}
  * {magnet} permet de selectionner uniquement les magnet
@@ -134,7 +166,6 @@ function magnet_pre_boucle($boucle){
 	  AND (!test_espace_prive() OR isset($boucle->modificateur['criteres']['magnet']) OR isset($boucle->modificateur['criteres']['magnet_pile']))){
 		if (magnet_actif_sur_objet($boucle->type_requete)){
 			$pile = (isset($boucle->modificateur['magnet_pile'])?$boucle->modificateur['magnet_pile']:'');
-			$meta_magnet = "magnet_" .($pile?$pile."_":""). $boucle->type_requete;
 			$_id = $boucle->id_table . "." . $boucle->primary;
 			$magnet = true;
 			// si la boucle a un critere id_xxx=yy non conditionnel on ne magnet pas (perf issue)
@@ -149,7 +180,7 @@ function magnet_pre_boucle($boucle){
 				}
 			}
 			if ($magnet){
-				$_list = "implode(',',array_reverse(array_map('intval',explode(',',isset(\$GLOBALS['meta']['$meta_magnet'])?\$GLOBALS['meta']['$meta_magnet']:'0'))))";
+				$_list = "implode(',',array_reverse(magnet_liste_ids('".addslashes($boucle->type_requete)."', '".addslashes($pile)."')))";
 				$boucle->select[] = "FIELD($_id,\".$_list.\") as magnet";
 				if (count($boucle->default_order) AND !count($boucle->order)){
 					while(count($boucle->default_order)){
@@ -245,6 +276,48 @@ function magnet_formulaire_admin($flux){
 }
 
 /**
+ * Nom de la meta qui stocke les id magnets d'un objet et d'une pile
+ * @param string $objet
+ * @param string $pile
+ *   nom de la pile ou sinon pile par defaut
+ * @return string
+ */
+function magnet_nom_meta_pile($objet, $pile = '') {
+	if (!function_exists('table_objet')) {
+		include_spip('base/objets');
+	}
+	$meta_magnet = "magnet_"
+		. ($pile ? $pile . "_" : "" )
+		. table_objet($objet);
+
+	return $meta_magnet;
+}
+
+/**
+ * Lister les ids magnetises d'un objet et d'une pile
+ * @param string $objet
+ * @param string $pile
+ * @param string $defaut
+ *   valeur par defaut de la meta si non definie ou zero
+ * @return array|string
+ */
+function magnet_liste_ids($objet, $pile, $defaut = '0') {
+	$meta_magnet = magnet_nom_meta_pile($objet, $pile);
+	// ne pas renvoyer une liste vide
+	$ids = $defaut;
+	if (isset($GLOBALS['meta'][$meta_magnet]) and $GLOBALS['meta'][$meta_magnet]) {
+		$ids = trim($GLOBALS['meta'][$meta_magnet]);
+	}
+	if (!strlen($ids)) {
+		return array();
+	}
+	$ids = explode(',', $ids);
+	$ids = array_map('trim', $ids);
+	$ids = array_map('intval', $ids);
+	return $ids;
+}
+
+/**
  * Renvoie le rang de l'objet :
  * 1 si arrive en tete de la boucle,
  * 2 ensuite ....
@@ -256,11 +329,10 @@ function magnet_formulaire_admin($flux){
  * @return bool|mixed
  */
 function magnet_rang($objet, $id_objet, $pile=''){
-	$meta_magnet = "magnet_" .($pile?$pile."_":""). table_objet($objet);
-	$magnets = (isset($GLOBALS['meta'][$meta_magnet])?$GLOBALS['meta'][$meta_magnet]:'0');
-	$magnets = explode(',',$magnets);
-	if (!in_array($id_objet, $magnets))
+	$magnets = magnet_liste_ids($objet, $pile, '');
+	if (!in_array($id_objet, $magnets)) {
 		return false;
+	}
 	return array_search($id_objet,$magnets)+1;
 }
 
@@ -271,9 +343,7 @@ function magnet_rang($objet, $id_objet, $pile=''){
  * @return int
  */
 function magnet_count($objet, $pile=''){
-	$meta_magnet = "magnet_" .($pile?$pile."_":""). table_objet($objet);
-	$magnets = (isset($GLOBALS['meta'][$meta_magnet])?$GLOBALS['meta'][$meta_magnet]:'');
-	$magnets = explode(',',$magnets);
+	$magnets = magnet_liste_ids($objet, $pile, '');
 	return count($magnets);
 }
 
