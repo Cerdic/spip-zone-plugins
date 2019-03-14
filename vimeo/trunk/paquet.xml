@@ -1,16 +1,13 @@
 <paquet
 	prefix="vimeo"
 	categorie="multimedia"
-	version="1.0.5"
+	version="1.0.6"
 	etat="test"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/vimeo-64.png"
 	documentation="https://www.lesmoutonssauvages.com/article38"
 	schema="1.0.0"
-	<!--
-		Paquet généré le 2017-10-01 13:16:17
-		(Vous pouvez bien entendu supprimer ces commentaires)
-	-->
+>
 
 	<nom>Vimeo</nom>
 	<!-- Piocher les datas d&#039;une video vimeo et les cacher sur le site. -->
