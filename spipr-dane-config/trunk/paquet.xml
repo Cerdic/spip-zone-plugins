@@ -1,10 +1,11 @@
 <paquet
     prefix="sdc"
     categorie="maintenance"
-    version="0.1.1"
+    version="0.1.2"
     etat="dev"
     compatibilite="[3.0.17;3.2.*]"
     logo="prive/themes/spip/images/sdc-128.png"
+    schema="1.0.0" 
 >
 
     <nom>SPIPr-Dane-Config</nom>
