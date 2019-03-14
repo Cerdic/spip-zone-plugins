@@ -1,15 +1,16 @@
 <paquet
 	prefix="inscriptionconnexion"
 	categorie="auteur"
-	version="1.0.0"
-	etat="dev"
+	version="1.0.1"
+	etat="stable"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="inscriptionconnexion.png"
-	documentation=""
+	documentation="https://contrib.spip.net/5122"
 >
 	<nom>Connexion dès l'inscription</nom>
 
 	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<auteur lien="http://www.mukt.fr">Mukt</auteur>
 	<licence>GPL v3</licence>
 
 	<pipeline nom="formulaire_traiter" inclure="inscriptionconnexion_pipelines.php" />
