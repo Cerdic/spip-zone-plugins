@@ -1,7 +1,7 @@
 <paquet
 	prefix="import_ics"
 	categorie="date"
-	version="4.4.3"
+	version="4.4.4"
 	etat="stable"
 	compatibilite="[3.0.7;3.2.*]"
 	logo="prive/themes/spip/images/import_ics-64.png"

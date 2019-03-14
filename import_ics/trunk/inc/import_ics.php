@@ -205,8 +205,8 @@ function evenement_ical_to_sql($objet_evenement,$decalage){
 		  'date_debut' => $date_debut,
 		  'date_fin' => $date_fin,
 			'titre' => $titre_evt,
-			'descriptif' => $descriptif_array["value"],
-			'lieu' => $lieu,
+			'descriptif' => import_ics_correction_retour_ligne($descriptif_array["value"]),
+			'lieu' => import_ics_correction_retour_ligne($lieu),
 			'adresse' => '',
 			'inscription' => '0',
 			'places' => '0',
@@ -218,4 +218,13 @@ function evenement_ical_to_sql($objet_evenement,$decalage){
 			'last_modified_distant' => $last_modified_distant,
 			'notes' => $url
 		);
+}
+
+/**
+ * Remplace les \n littéral des ICS par des retours lignes.
+ * @param string $texte
+ * @return string
+**/
+function import_ics_correction_retour_ligne($texte) {
+	return str_replace('\n', "\n", $texte);
 }
