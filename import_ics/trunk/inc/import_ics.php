@@ -202,18 +202,20 @@ function evenement_ical_to_sql($objet_evenement,$decalage){
 				$horaire = "oui";
 			}
 		return array(
-		  'date_debut'=>$date_debut,
-		  'date_fin'=>$date_fin,
-			'titre'=>$titre_evt,
-			'descriptif'=>$descriptif_array["value"],
-			'lieu'=>$lieu,'adresse'=>'',
-			'inscription'=>'0',
-			'places'=>'0',
-			'horaire'=>$horaire,
-			'attendee'=>str_replace('MAILTO:', '', $attendee),
-			'id_evenement_source'=>'0',
-			'uid'=>$uid_distante,
-			'sequence'=>$sequence_distante,
-			'last_modified_distant'=>$last_modified_distant,
-			'notes'=>$url);
+		  'date_debut' => $date_debut,
+		  'date_fin' => $date_fin,
+			'titre' => $titre_evt,
+			'descriptif' => $descriptif_array["value"],
+			'lieu' => $lieu,
+			'adresse' => '',
+			'inscription' => '0',
+			'places' => '0',
+			'horaire' => $horaire,
+			'attendee' => str_replace('MAILTO:', '', $attendee),
+			'id_evenement_source' => '0',
+			'uid' => $uid_distante,
+			'sequence' => $sequence_distante,
+			'last_modified_distant' => $last_modified_distant,
+			'notes' => $url
+		);
 }
