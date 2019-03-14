@@ -45,7 +45,7 @@ function formulaires_editer_commandes_detail_saisies($id_commandes_detail='new',
 				'nom' => 'descriptif',
 				'label' => _T('commandes:detail_champ_descriptif_label'),
 				'explication' => _T('commandes:detail_champ_descriptif_explication'),
-				'obligatoire' => 'oui',
+				//'obligatoire' => 'oui', // Rempli automatiquement si vide
 			)
 		),
 		array(
