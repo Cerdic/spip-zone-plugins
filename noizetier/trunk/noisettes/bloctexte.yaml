@@ -25,6 +25,5 @@ parametres:
     options:
       nom: 'texte'
       label: '<:noizetier:label_texte:>'
-      obligatoire: 'oui'
       inserer_barre: 'edition'
       previsualisation: 'oui'
