@@ -1,11 +1,11 @@
 <paquet
 	prefix="cache"
 	categorie="outil"
-	version="0.3.2"
+	version="0.3.3"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="cache_logo-64.png"
-	documentation="https://contrib.spip.net/5121"
+	documentation="https://contrib.spip.net/Cache-Factory"
 >
 	<nom>Cache Factory</nom>
 	<!-- La fabrique de fichiers cache pour plugins -->
