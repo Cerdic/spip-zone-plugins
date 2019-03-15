@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/w3css-64.png"
 	schema="1.0"
-	documentation="//contrib.spip.net/?article4852"
+	documentation="https://contrib.spip.net/article4852"
 >
 	<nom>Framework W3.CSS</nom>
 

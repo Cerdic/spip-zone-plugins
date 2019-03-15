@@ -7,7 +7,7 @@
 	<description>
 Ajout de boutons au porte plume afin de pouvoir ins&#233;rer facilement les caract&egrave;res propres &agrave; la famille des [?langues Gbe] (et plus de langues europ&eacute;ennes) avec n'importe quel clavier.
 	</description>
-	<lien>http://contribs.spip.net/4255</lien>
+	<lien>https://contrib.spip.net/article4255</lien>
 	<prefix>pp_gbe</prefix>
 	<icon>img_pack/pp_gbe.png</icon>
 	<pipeline>
