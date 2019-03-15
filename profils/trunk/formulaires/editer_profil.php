@@ -139,6 +139,7 @@ function formulaires_editer_profil_saisies_dist($id_profil = 'new', $retour = ''
 				'conteneur_class' => 'pleine_largeur',
 				'caption' => _T('profil:champ_config_coordonnees_auteur_caption'),
 				'afficher_si' => '@config[activer_coordonnees_auteur]@ == "on"',
+				'caption_explication' => _T('profil:champ_config_coordonnees_explication'),
 			),
 		);
 	}
