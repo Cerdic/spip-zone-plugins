@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Notes surgissantes</nom>
 	<auteur>baroug & fil</auteur>
-	<version>0.1</version>
+	<version>0.1.1</version>
 	<etat>
 	dev
 	</etat>
@@ -21,7 +21,8 @@
 		<inclure>notessurgissantes_pipelines.php</inclure>
 	</pipeline>
 	<categorie>navigation</categorie>
-	<lien>https://contrib.spip.net</lien>
+
 	<chemin dir='' />
 	<utilise id="textwheel" /><!-- pour les div englobant les notes -->
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 </plugin>

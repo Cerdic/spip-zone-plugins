@@ -1,11 +1,11 @@
 <paquet
 	prefix="propevent"
 	categorie="date"
-	version="0.2.1"
+	version="0.2.2"
 	etat="test"
 	compatibilite="[3.0.13;3.0.*]"
 	logo="propevent.png"
-	documentation="https://contrib.spip.net"
+
 >
 	<nom>Proposer Evenement</nom>
 	<!-- permet d'installer un formulaire pour Proposer un Evenement -->
