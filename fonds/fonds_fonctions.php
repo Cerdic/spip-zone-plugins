@@ -82,7 +82,7 @@ function balise_FOND_BAS_dist($p) {
 	return $p;
 }
 
-if (!function_exists(fonds_largeur_svg)){
+if (!function_exists("fonds_largeur_svg")){
 	function _fonds_taille_svg($file) {
 		global $metas_svg;
 		

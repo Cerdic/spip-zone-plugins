@@ -164,7 +164,7 @@ function formulaires_installer_fonds_traiter_dist($id_article){
 	$credit_bas = _request("credit_bas");
 	$remplir_vertical = _request("remplir_vertical");
 
-
+	if (strlen($fond_couleur) == 3) $fond_couleur = substr($fond_couleur,0,1).substr($fond_couleur,0,1).substr($fond_couleur,1,1).substr($fond_couleur,1,1).substr($fond_couleur,2,1).substr($fond_couleur,2,1);
 
 	
 	sql_updateq("spip_articles",
