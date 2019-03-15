@@ -43,7 +43,7 @@ function formulaires_typography_charger_dist( $bloc ) {
 		'font-family' => $font, 
 		'font-family-perso' => $font == "perso" ? lire_config('sdc/'.$bloc.'/font-family') : '' ,
 		'font-size' => lire_config('sdc/'.$bloc.'/font-size', '2.6'), 
-		'color' => lire_config('sdc/'.$bloc.'/color', lire_config('sdc/defaut/color')), 
+		'color' => lire_config('sdc/'.$bloc.'/color', lire_config('sdc/defaut/color2','#455C98')), 
 	);
 	return $valeurs;
 }
