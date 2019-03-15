@@ -148,6 +148,9 @@ div.en_lignes {
 	top: .3em;
 }
 
+.inner .hd + .bd > *:first-child {
+	padding-top: .3em;
+}
 /*-------------------------------------- 
   bandeau principal  
 ----------------------------------------*/
@@ -262,6 +265,32 @@ a.plus_info,
 /*-------------------------------------- 
   Formulaires
 ----------------------------------------*/
+
+.formulaire_spip {
+	padding: 0;
+}
+.formulaire_spip .editer-groupe, 
+.formulaire_spip .boutons, 
+.formulaire_spip .titrem, 
+.formulaire_spip .legend {
+	margin-left: 0;
+	margin-right: 0;
+}
+.formulaire_spip .fieldset fieldset,
+.formulaire_spip fieldset {
+	margin-left: -10px;
+	margin-right: -10px;
+	margin-top: 1.5em;
+	margin-bottom: 1.5em;
+}
+.formulaire_spip .fieldset fieldset .editer-groupe,
+.formulaire_spip fieldset .editer-groupe {
+	margin-left: 0;
+	margin-right: 0;
+}
+.formulaire_spip  .editer-groupe {
+	padding: 0;
+}
 
 .entete-formulaire > .icone.#ENV{left} {
 	margin-#ENV{right}: 1em;
