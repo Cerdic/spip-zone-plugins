@@ -29,11 +29,11 @@
 		<BOUCLE_MotsDuGroupeArboRacine(MOTS){racine}{par num titre, multi titre}{id_groupe=#ENV{le_groupe,#GET{legroupe}}}>
 			#SET{avecunmotdeplus, #ARRAY}
 			[(#SET{avecunmotdeplus,[(#ENV{mots, #ARRAY}|push{#ID_MOT})]})]
-			<INCLURE{fond=formulaires/recherche_par_mots_compteur, mots=#GET{avecunmotdeplus}, id_mot=#ID_MOT, titre=(#VAL{&gt; }|str_repeat{#PROFONDEUR})(#TITRE|supprimer_tags),tout=oui}>
+			<INCLURE{fond=formulaires/recherche_par_mots_compteur, mots=#GET{avecunmotdeplus}, id_mot=#ID_MOT, titre=(#VAL{&gt; }|str_repeat{#PROFONDEUR})(#TITRE|supprimer_tags)}>
 			<BOUCLE_MotsDuGroupeArbo(MOTS){id_parent}{par num titre, multi titre}>
 				#SET{avecunmotdeplus, #ARRAY}
 				[(#SET{avecunmotdeplus,[(#ENV{mots, #ARRAY}|push{#ID_MOT})]})]
-				<INCLURE{fond=formulaires/recherche_par_mots_compteur, mots=#GET{avecunmotdeplus}, id_mot=#ID_MOT, titre=(#VAL{&gt; }|str_repeat{#PROFONDEUR})(#TITRE|supprimer_tags),tout=oui}>
+				<INCLURE{fond=formulaires/recherche_par_mots_compteur, mots=#GET{avecunmotdeplus}, id_mot=#ID_MOT, titre=(#VAL{&gt; }|str_repeat{#PROFONDEUR})(#TITRE|supprimer_tags)}>
 			<BOUCLE_recursif(BOUCLE_MotsDuGroupeArbo) />
 			</BOUCLE_MotsDuGroupeArbo>
 		</BOUCLE_MotsDuGroupeArboRacine>
