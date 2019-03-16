@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/img/basecss.png"
-	documentation="https://contrib.spip.net/?rubrique214"
+	documentation="https://contrib.spip.net/article3752"
 >	
 
 	<nom>Base CSS</nom>

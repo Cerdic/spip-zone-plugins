@@ -4,7 +4,7 @@
 	<etat>stable</etat>
 	<icon>icon.png</icon>
 	<description>Afficher du texte en blocs &agrave; onglets.</description>
-	<lien>https://contrib.spip.net/?rubrique445</lien>
+	<lien>https://contrib.spip.net/article1548</lien>
 	<auteur>[Pi R->https://contrib.spip.net/?auteur214]</auteur>
 	<prefix>onglets_texte</prefix>
 	<pipeline>

@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/onglets_texte.png"
-	documentation="https://contrib.spip.net/?rubrique445"
+	documentation="https://contrib.spip.net/article1548"
 >
 	<nom>Onglets dans le texte</nom>
 	<auteur lien="https://contrib.spip.net/?auteur214">Pi R</auteur>

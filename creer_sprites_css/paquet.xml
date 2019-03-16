@@ -12,6 +12,6 @@
 	<auteur>ARNO*</auteur>
 	<licence lien="http://www.gnu.org/licenses/gpl-2.0.html">GPL</licence>
 
-	<pipeline nom="recuperer_fond" action="recuperer_fond" />
+	<pipeline nom="recuperer_fond" inclure="creer_sprites_fonctions.php" />
 
 </paquet>
