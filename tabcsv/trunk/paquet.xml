@@ -3,7 +3,7 @@
 	categorie="edition"
 	version="0.1.4"
 	etat="stable"
-	compatibilite="[3.1.0;3.1.*]"
+	compatibilite="[3.1.0;3.2.*]"
 	logo="images/logo_tabcsv.png"
 	documentation="https://contrib.spip.net/4873"
 >
