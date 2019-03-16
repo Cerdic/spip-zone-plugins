@@ -1,7 +1,7 @@
 <paquet
 	prefix="maxigos"
 	categorie="edition"
-	version="0.6.4"
+	version="0.6.5"
 	etat="stable"
 	compatibilite="[3.1.0;3.2.*]"
 	logo="images/logo_maxigos.png"
