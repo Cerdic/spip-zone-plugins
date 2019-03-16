@@ -5,7 +5,7 @@
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
-	<langue code="en" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=en" total="197" traduits="187" relire="0" modifs="0" nouveaux="10" pourcent="94.92">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=en" total="197" traduits="186" relire="0" modifs="1" nouveaux="10" pourcent="94.42">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="jack31" lien="https://trad.spip.net/auteur/jack31" />
@@ -30,7 +30,7 @@
 	</langue>
 	<langue code="it" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=it" total="197" traduits="139" relire="0" modifs="3" nouveaux="55" pourcent="70.56">
 	</langue>
-	<langue code="nl" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=nl" total="197" traduits="191" relire="0" modifs="0" nouveaux="6" pourcent="96.95">
+	<langue code="nl" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=nl" total="197" traduits="190" relire="0" modifs="1" nouveaux="6" pourcent="96.45">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="mpossoz" lien="https://trad.spip.net/auteur/mpossoz" />
 	</langue>
