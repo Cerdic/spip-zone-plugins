@@ -1,7 +1,7 @@
 <paquet
 	prefix="tradlang"
 	categorie="outil"
-	version="2.4.5"
+	version="2.4.6"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/spip_lang.png"
@@ -13,7 +13,7 @@
 	<auteur>Fil</auteur>
 	<auteur>Florent Jugla</auteur>
 	<auteur lien="http://www.kent1.info">kent1</auteur>
-	
+
 	<pipeline nom="declarer_tables_interfaces" inclure="base/tradlang.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/tradlang.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/tradlang.php" />
@@ -32,7 +32,7 @@
 	<utilise nom="fulltext" compatibilite="[0.6.7;[" />
 	<utilise nom="crayons" compatibilite="[1.13.3;[" />
 	<utilise nom="grappes" compatibilite="[1.0.0;[" />
-	
+
 	<menu nom="configurer_tradlang" titre="tradlang:titre_tradlang" parent="menu_configuration" icone="images/spip_lang-16.png" />
 	<menu nom="tradlang_modules" titre="tradlang:titre_tradlang" parent="menu_edition" icone="images/spip_lang-16.png" />
 </paquet>

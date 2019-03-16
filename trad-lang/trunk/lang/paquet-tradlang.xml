@@ -1,4 +1,4 @@
-<traduction module="paquet-tradlang" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/trad-lang/trunk/lang/" reference="fr">
+<traduction module="paquet-tradlang" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.net/spip-zone/_plugins_/trad-lang/trunk/lang/" reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/paquet-tradlang?lang_cible=ar" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-tradlang?lang_cible=de" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
