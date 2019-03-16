@@ -3,7 +3,7 @@
 	categorie="edition"
 	version="0.6.4"
 	etat="stable"
-	compatibilite="[3.1.0;3.1.*]"
+	compatibilite="[3.1.0;3.2.*]"
 	logo="images/logo_maxigos.png"
 	schema="0.1.0"
 	documentation="https://contrib.spip.net/4875"
