@@ -200,7 +200,7 @@ function traiter_enregistrement_verifier_dist($args, $erreurs) {
 		(
 			$etape === null
 			or (
-			 array_key_exists($unicite, saisies_lister_par_nom(array($args['etapes'][$etape])))
+			 array_key_exists($unicite, saisies_lister_par_nom($args['etapes'][$etape]['saisies']))
 			)
 		)
 	) {
