@@ -61,13 +61,13 @@ function formidable_id_formulaire($id) {
 **/
 function formulaires_formidable_saisies_dist($id, $valeurs = array(), $id_formulaires_reponse = false) {
 	$saisies = array();
-	
+
 	if (
 		$id_formulaire = formidable_id_formulaire($id)
 		and $formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . intval($id_formulaire))
 	) {
 		$saisies = unserialize($formulaire['saisies']);
-		
+
 		// Si on est en train de réafficher les valeurs postées,
 		// ne pas afficher les saisies hidden
 		if (
@@ -81,7 +81,7 @@ function formulaires_formidable_saisies_dist($id, $valeurs = array(), $id_formul
 			}
 		}
 	}
-	
+
 	return $saisies;
 }
 
@@ -211,20 +211,20 @@ function formulaires_formidable_charger_dist($id, $valeurs = array(), $id_formul
 **/
 function formulaires_formidable_verifier_dist($id, $valeurs = array(), $id_formulaires_reponse = false) {
 	$erreurs = array();
-	
+
 	include_spip('inc/saisies');
 	$saisies = saisies_chercher_formulaire('formidable', array($id, $valeurs, $id_formulaires_reponse));
-	
+
 	// Si on n'est pas dans un formulaire à étape, on lance les vérifications des traitements
 	if ($saisies and !saisies_lister_par_etapes($saisies)) {
 		$erreurs = formulaires_formidable_verifier_traitements($id, $valeurs, $id_formulaires_reponse);
 	}
-	
+
 	// Sale bête ! Ça on le fait tout le temps
 	if (_request('mechantrobot')!='') {
 		$erreurs['hahahaha'] = 'hahahaha';
 	}
-	
+
 	return $erreurs;
 }
 
@@ -244,21 +244,21 @@ function formulaires_formidable_verifier_dist($id, $valeurs = array(), $id_formu
 **/
 function formulaires_formidable_verifier_etape_dist($etape, $id, $valeurs = array(), $id_formulaires_reponse = false) {
 	$erreurs = array();
-	
+
 	include_spip('inc/saisies');
 	$saisies = saisies_chercher_formulaire('formidable', array($id, $valeurs, $id_formulaires_reponse));
-	
+
 	// Seulement si on est à la DERNIÈRE étape, on lance les vérifications propres aux traitements
 	if ($saisies and $etapes = saisies_lister_par_etapes($saisies) and $etape==count($etapes)) {
 		$erreurs = formulaires_formidable_verifier_traitements($id, $valeurs, $id_formulaires_reponse);
 	}
-	
+
 	return $erreurs;
 }
 
 /**
  * Lancer des vérifications propres aux traitements
- * 
+ *
  * @param int|string $id
  *     Identifiant numerique ou textuel du formulaire formidable
  * @param array $valeurs
@@ -272,7 +272,7 @@ function formulaires_formidable_verifier_etape_dist($etape, $id, $valeurs = arra
  */
 function formulaires_formidable_verifier_traitements($id, $valeurs = array(), $id_formulaires_reponse = false) {
 	$erreurs = array();
-	
+
 	if (
 		$id_formulaire = formidable_id_formulaire($id)
 		and $formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . intval($id_formulaire))
@@ -296,7 +296,7 @@ function formulaires_formidable_verifier_traitements($id, $valeurs = array(), $i
 			}
 		}
 	}
-	
+
 	return $erreurs;
 }
 
@@ -523,12 +523,12 @@ function formulaires_formidable_traiter_dist($id, $valeurs = array(), $id_formul
 		$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 		$envoyer_mail($GLOBALS['meta']['email_webmaster'], $erreur_sujet, $erreur_texte);
 	}
-	
+
 	// Pas besoin de ça dans le vrai retour final
 	unset($retours['traitements']);
 	// Drapeau pour dire que tous les traitements sont terminés, afin qu'on le sache dans le charger()
 	set_request('formidable_traiter_ok', true);
-	
+
 	return $retours;
 }
 
