@@ -194,8 +194,16 @@ function traiter_enregistrement_verifier_dist($args, $erreurs) {
 	$id_formulaire = $args['id_formulaire'];
 	$options = $args['options'];
 	$id_formulaires_reponse = $args['id_formulaires_reponse'];
-
-	if (($unicite = $options['unicite']) != '' and !$erreurs[$unicite]) {
+	$etape = $args['etape'];
+	if (($unicite = $options['unicite']) != '' and !$erreurs[$unicite]
+		and
+		(
+			$etape === null
+			or (
+			 array_key_exists($unicite, saisies_lister_par_nom(array($args['etapes'][$etape])))
+			)
+		)
+	) {
 		if (!$id_formulaires_reponse) { // si pas de réponse explictement passée au formulaire, on cherche la réponse qui serait édité
 			$id_formulaires_reponse = formidable_trouver_reponse_a_editer($id_formulaire, $id_formulaires_reponse, $options);
 		}

@@ -248,9 +248,9 @@ function formulaires_formidable_verifier_etape_dist($etape, $id, $valeurs = arra
 	include_spip('inc/saisies');
 	$saisies = saisies_chercher_formulaire('formidable', array($id, $valeurs, $id_formulaires_reponse));
 
-	// Seulement si on est à la DERNIÈRE étape, on lance les vérifications propres aux traitements
-	if ($saisies and $etapes = saisies_lister_par_etapes($saisies) and $etape==count($etapes)) {
-		$erreurs = formulaires_formidable_verifier_traitements($id, $valeurs, $id_formulaires_reponse);
+	// On lance les vérifications propres aux traitements à chaque étape, pour avoir les messages d'erreurs à chaque étape
+	if ($saisies and $etapes = saisies_lister_par_etapes($saisies)) {
+		$erreurs = formulaires_formidable_verifier_traitements($id, $valeurs, $id_formulaires_reponse, $etapes, $etape);
 	}
 
 	return $erreurs;
@@ -266,11 +266,13 @@ function formulaires_formidable_verifier_etape_dist($etape, $id, $valeurs = arra
  *     Exemple : array('hidden_1' => 3) pour que champ identifie "@hidden_1@" soit prerempli
  * @param int|bool $id_formulaires_reponse
  *     Identifiant d'une réponse pour forcer la reedition de cette reponse spécifique
- *
+ * @param array $etapes
+ *		 Liste des saisies, ordonnées par étape
+ * @param int|null $etape le numéro de l'étape courante
  * @return array
  *     Tableau des erreurs
  */
-function formulaires_formidable_verifier_traitements($id, $valeurs = array(), $id_formulaires_reponse = false) {
+function formulaires_formidable_verifier_traitements($id, $valeurs = array(), $id_formulaires_reponse = false, $etapes = array(), $etape = null) {
 	$erreurs = array();
 
 	if (
@@ -289,6 +291,8 @@ function formulaires_formidable_verifier_traitements($id, $valeurs = array(), $i
 						'id_formulaire' => $formulaire['id_formulaire'],
 						'valeurs' => $valeurs,
 						'id_formulaires_reponse' => $id_formulaires_reponse,
+						'etapes' => $etapes,
+						'etape' => $etape
 					),
 					$erreurs
 				);
