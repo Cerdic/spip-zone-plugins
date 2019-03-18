@@ -9,6 +9,8 @@
  * @package    SPIP\Incarner\Options
  */
 
+require __DIR__ . '/vendor/autoload.php';
+
 $GLOBALS['liste_des_authentifications']['incarner'] = 'incarner';
 
 /* On perd le droit de changer d'auteur comme on veut après 1h sans activité.

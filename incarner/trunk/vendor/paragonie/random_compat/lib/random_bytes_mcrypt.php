@@ -1,22 +1,22 @@
 <?php
 /**
- * Random_* Compatibility Library 
+ * Random_* Compatibility Library
  * for using the new PHP 7 random_* API in PHP 5 projects
- * 
+ *
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 - 2017 Paragon Initiative Enterprises
- * 
+ * Copyright (c) 2015 - 2018 Paragon Initiative Enterprises
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -28,11 +28,10 @@
 
 if (!is_callable('random_bytes')) {
     /**
-     * If the libsodium PHP extension is loaded, we'll use it above any other
-     * solution.
+     * Powered by ext/mcrypt (and thankfully NOT libmcrypt)
      *
-     * libsodium-php project:
-     * @ref https://github.com/jedisct1/libsodium-php
+     * @ref https://bugs.php.net/bug.php?id=55169
+     * @ref https://github.com/php/php-src/blob/c568ffe5171d942161fc8dda066bce844bdef676/ext/mcrypt/mcrypt.c#L1321-L1386
      *
      * @param int $bytes
      *
@@ -43,6 +42,7 @@ if (!is_callable('random_bytes')) {
     function random_bytes($bytes)
     {
         try {
+            /** @var int $bytes */
             $bytes = RandomCompat_intval($bytes);
         } catch (TypeError $ex) {
             throw new TypeError(
@@ -56,30 +56,17 @@ if (!is_callable('random_bytes')) {
             );
         }
 
-        /**
-         * @var string
-         */
-        $buf = '';
-
-        /**
-         * \Sodium\randombytes_buf() doesn't allow more than 2147483647 bytes to be
-         * generated in one invocation.
-         */
-        if ($bytes > 2147483647) {
-            for ($i = 0; $i < $bytes; $i += 1073741824) {
-                $n = ($bytes - $i) > 1073741824
-                    ? 1073741824
-                    : $bytes - $i;
-                $buf .= Sodium::randombytes_buf($n);
-            }
-        } else {
-            $buf .= Sodium::randombytes_buf($bytes);
-        }
-
-        if (is_string($buf)) {
-            if (RandomCompat_strlen($buf) === $bytes) {
-                return $buf;
-            }
+        /** @var string|bool $buf */
+        $buf = @mcrypt_create_iv((int) $bytes, (int) MCRYPT_DEV_URANDOM);
+        if (
+            is_string($buf)
+                &&
+            RandomCompat_strlen($buf) === $bytes
+        ) {
+            /**
+             * Return our random entropy buffer here:
+             */
+            return $buf;
         }
 
         /**
