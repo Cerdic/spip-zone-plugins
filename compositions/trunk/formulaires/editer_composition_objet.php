@@ -9,6 +9,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/compositions');
+include_spip('inc/autoriser');
 /**
  * Chargement des donnees du formulaire
  *
@@ -30,10 +31,10 @@ function formulaires_editer_composition_objet_charger($type,$id){
 	$row = sql_fetsel('composition,composition_lock',$table_objet_sql,"$id_table_objet=".intval($id));
 	$valeurs['composition'] = $row['composition'];
 	$valeurs['composition_lock'] = $row['composition_lock'];
-	
+
 	if ($type=='rubrique')
 		$valeurs['composition_branche_lock'] = sql_getfetsel('composition_branche_lock',$table_objet_sql,"$id_table_objet=".intval($id));
-	
+
 	$valeurs['composition_heritee'] = compositions_heriter($type, $id);
 	$valeurs['verrou_branche'] = compositions_verrou_branche($type, $id);
 	$valeurs['verrou_branche'] = false;
@@ -47,7 +48,7 @@ function formulaires_editer_composition_objet_charger($type,$id){
 			$valeurs['_compositions']
 		);
 	}
-	
+
 	// Si on herite d'une composition
 	// On modifie le tableau des compositions
 	if ($valeurs['composition_heritee'] AND $valeurs['composition_heritee'] != '-') {
@@ -60,7 +61,7 @@ function formulaires_editer_composition_objet_charger($type,$id){
 			$valeurs['_compositions']
 		);
 	}
-	
+
 	$valeurs['_hidden'] = "<input type='hidden' name='$id_table_objet' value='$id' />";
 
 	if (!autoriser('styliser',$type,$id))
@@ -87,7 +88,7 @@ function formulaires_editer_composition_objet_traiter($type,$id){
 
 	if (autoriser('webmestre'))
 		$update['composition_lock'] = _request('composition_lock')?1:0;
-		
+
 	if (autoriser('webmestre') AND $type == 'rubrique')
 		$update['composition_branche_lock'] = _request('composition_branche_lock')?1:0;
 
