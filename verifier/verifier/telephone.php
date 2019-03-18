@@ -19,7 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param string $valeur
  *   La valeur à vérifier.
  * @param array $options
- *   [INUTILISE].
+ *   pays
  * @return string
  *   Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
  */
@@ -34,48 +34,78 @@ function verifier_telephone_dist($valeur, $options = array()) {
 	$tel = preg_replace('#\.|/|-| #i', '', $valeur);
 
 	// Pour les prefixes, on accepte les notations +33 et 0033
-	$prefixe_FR = '/^(\+|00)33/';
-	$prefixe_ES = '/^(\+|00)34/';
-	$prefixe_CH = '/^(\+|00)41/';
-	if (preg_match($prefixe_FR, $tel)) {
-		$options['pays'] = 'FR';
-		$tel = preg_replace($prefixe_FR, '0', $tel);
+	// si on trouve un indicatif de pays, il est prioritaire sur le pays par defaut passe en option
+	$telephone_prefixes_pays = charger_fonction('telephone_prefixes_pays', 'verifier');
+	$prefixes = $telephone_prefixes_pays();
+	if (isset($options['prefixes_pays']) and $options['prefixes_pays']) {
+		$prefixes = $prefixes +  $options['prefixes_pays'];
 	}
-	if (preg_match($prefixe_ES, $tel)) {
-		$options['pays'] = 'ES';
-		$tel = preg_replace($prefixe_ES, '', $tel);
-	}
-	if (preg_match($prefixe_CH, $tel)) {
-		$options['pays'] = 'CH';
-		$tel = preg_replace($prefixe_CH, '0', $tel);
+	foreach ($prefixes as $prefix => $code_pays) {
+		$regexp = '/^(\+|00)'.$prefix.'/';
+		if (preg_match($regexp, $tel)) {
+			$options['pays'] = $code_pays;
+			// on normalise le prefixe, mais on ne le remplace par par zero, car ça n'est valable que pour certains pays et ça casse la verif sur d'autres
+			$tel = preg_replace($regexp, '+'.$prefix, $tel);
+			break;
+		}
 	}
 
-	$pays = isset($options['pays']) ? $options['pays'] : null;
-	switch ($pays) {
-		case 'CH':
-			if (!preg_match('/^0[0-9]{9}$/', $tel)) {
-				return $erreur;
-			}
-			break;
-		case 'ES':
-			if (!preg_match('/^[69][0-9]{8}$/', $tel)) {
-				return $erreur;
-			}
-			break;
-		case 'FR':
-			if (!preg_match('/^0[1-9][0-9]{8}$/', $tel)) {
-				return $erreur;
-			}
-			break;
-		default:
-			// On interdit les 000 etc. mais je pense qu'on peut faire plus malin
-			// On interdit egalement les "numéros" tout en lettres
-			// TODO finaliser les numéros à la con
-			if (intval($tel) == 0) {
-				return $erreur;
-			}
-			break;
+	// si on connait le pays (par option ou par indicatif) et qu'on a une fonction de verification pour ce pays on utilise
+	$pays = (isset($options['pays']) ? strtolower($options['pays']) : null);
+	if ($pays and $verifier_telephone_pays = charger_fonction('telephone_pays_' . $options['pays'], 'verifier', true)) {
+		if ($e = $verifier_telephone_pays($tel, $erreur)) {
+			return $e;
+		}
+		return $ok;
+	}
+
+	// On interdit les 000 etc. mais je pense qu'on peut faire plus malin
+	// On interdit egalement les "numéros" tout en lettres
+	// TODO finaliser les numéros à la con
+	if (intval($tel) == 0) {
+		return $erreur;
 	}
 
 	return $ok;
+}
+
+
+function verifier_telephone_prefixes_pays_dist() {
+
+	$indicatifs = array(
+		'32' => 'be',
+		'33' => 'fr',
+		'34' => 'es',
+		'41' => 'ch',
+	);
+
+	return $indicatifs;
+}
+
+
+function verifier_telephone_pays_ch_dist($tel, $message_erreur_defaut) {
+	if (!preg_match('/^(0|\+41)[0-9]{9}$/', $tel)) {
+		return $message_erreur_defaut;
+	}
+}
+
+function verifier_telephone_pays_es_dist($tel, $message_erreur_defaut) {
+	if (!preg_match('/^(\+34)?[69][0-9]{8}$/', $tel)) {
+		return $message_erreur_defaut;
+	}
+}
+
+function verifier_telephone_pays_fr_dist($tel, $message_erreur_defaut) {
+	if (!preg_match('/^(0|\+33)[1-9][0-9]{8}$/', $tel)) {
+		return $message_erreur_defaut;
+	}
+}
+
+function verifier_telephone_pays_be_dist($tel, $message_erreur_defaut) {
+	// Patterns
+	$pattern = '/^(0|\+32)[0-9]{8}$/';
+	$pattern_mobile = '/^(0|\+32)4(60|[789]\d)[0-9]{6}$/';
+	if (!preg_match($pattern, $tel) and !preg_match($pattern_mobile, $tel)){
+		return $message_erreur_defaut;
+	}
 }
