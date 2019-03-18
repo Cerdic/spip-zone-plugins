@@ -27,6 +27,12 @@ options:
       nom: 'utilisation'
       label: '<:saisies:option_groupe_utilisation:>'
     saisies:
+      - 
+        saisie: 'oui_non'
+        options:
+          nom: 'multiple'
+          label: '<:saisies:option_multiple_label:>'
+          explication: '<:saisies:option_multiple_explication:>'
       -
         saisie: 'textarea'
         options:
