@@ -4,8 +4,6 @@
    l'autorisation 'incarner' */
 function auth_incarner_dist($login, $password, $serveur = '', $phpauth = false) {
 
-	// retrouver le login
-	$login = auth_spip_retrouver_login($login);
 	// login inconnu, n'allons pas plus loin
 	if (!$login) {
 		return array();
