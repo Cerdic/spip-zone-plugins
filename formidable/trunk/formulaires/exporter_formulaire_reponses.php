@@ -13,6 +13,13 @@ function formulaires_exporter_formulaire_reponses_charger($id_formulaire = 0) {
 	$contexte                  = array();
 	$contexte['id_formulaire'] = intval($id_formulaire);
 
+	// Vérifier si le formulaire dispose de champs "fichiers", pour proposer de ne pas les joindre à l'export
+	$saisies = sql_getfetsel('saisies','spip_formulaires','id_formulaire = '.intval($id_formulaire));
+	$saisies_par_type = saisies_lister_par_type(unserialize($saisies), false);
+	if(isset($saisies_par_type['fichiers'])){
+		$contexte['fichiers'] = true;
+	}
+	
 	return $contexte;
 }
 
@@ -36,17 +43,18 @@ function formulaires_exporter_formulaire_reponses_traiter($id_formulaire = 0) {
 	$verifier = charger_fonction('verifier', 'inc/');
 	$verifier(_request('date_debut'), 'date', array('normaliser' => 'datetime'), $date_debut);
 	$verifier(_request('date_fin'), 'date', array('normaliser' => 'datetime'), $date_fin);
+	$ignorer_fichiers = _request('ignorer_fichiers');
 	$cle_ou_valeur = _request('cle_ou_valeur');
 	$chemin = false;
 	$content_type = '';
 
 	if (_request('type_export') == 'csv') {
-		$chemin = exporter_formulaires_reponses($id_formulaire, ',', $statut_reponses, $date_debut, $date_fin, $cle_ou_valeur);
+		$chemin = exporter_formulaires_reponses($id_formulaire, ',', $statut_reponses, $date_debut, $date_fin, $cle_ou_valeur, $ignorer_fichiers);
 		if (pathinfo($chemin, PATHINFO_EXTENSION) === 'csv') {
 			$content_type = "text/comma-separated-values; charset=" . $GLOBALS['meta']['charset'];
 		}
 	} elseif (_request('type_export') == 'xls') {
-		$chemin = exporter_formulaires_reponses($id_formulaire, 'TAB', $statut_reponses, $date_debut, $date_fin, $cle_ou_valeur);
+		$chemin = exporter_formulaires_reponses($id_formulaire, 'TAB', $statut_reponses, $date_debut, $date_fin, $cle_ou_valeur, $ignorer_fichiers);
 		if (pathinfo($chemin, PATHINFO_EXTENSION) === 'xls') {
 			$content_type = "text/comma-separated-values; charset=iso-8859-1";
 		}
@@ -72,9 +80,10 @@ function formulaires_exporter_formulaire_reponses_traiter($id_formulaire = 0) {
  * @param string $date_debut
  * @param string $date_fin
  * @param string $cle_ou_valeur
+ * @param string $ignorer_fichiers
  * @return string|false Chemin du fichier d’export CSV, XLS ou ZIP
  */
-function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_reponses = 'publie', $date_debut = '', $date_fin = '',$cle_ou_valeur = 'valeur') {
+function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_reponses = 'publie', $date_debut = '', $date_fin = '', $cle_ou_valeur = 'valeur', $ignorer_fichiers = '') {
 	$exporter_csv = charger_fonction('exporter_csv', 'inc/', true);
 	if (!$exporter_csv) {
 		return false;
@@ -85,7 +94,7 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 		return false;
 	}
 
-	list($reponses_completes, $saisies_fichiers) = preparer_formulaire_reponses($formulaire, $reponses, $statut_reponses, $cle_ou_valeur);
+	list($reponses_completes, $saisies_fichiers) = preparer_formulaire_reponses($formulaire, $reponses, $statut_reponses, $cle_ou_valeur, $ignorer_fichiers);
 	if (!$reponses_completes) {
 		return false;
 	}
@@ -126,7 +135,7 @@ function obtenir_formulaire_reponses($id_formulaire, $statut_reponses = 'publie'
 }
 
 
-function preparer_formulaire_reponses($formulaire, $reponses, $statut_reponses, $cle_ou_valeur = 'valeur') {
+function preparer_formulaire_reponses($formulaire, $reponses, $statut_reponses, $cle_ou_valeur = 'valeur', $ignorer_fichiers = '') {
 	include_spip('inc/puce_statut');
 	include_spip('inc/saisies');
 	include_spip('facteur_fonctions');
@@ -230,7 +239,7 @@ function preparer_formulaire_reponses($formulaire, $reponses, $statut_reponses, 
 			if ($saisie['saisie'] != 'explication') {
 
 				// Saisie de type fichier ?
-				if ($saisie['saisie'] == 'fichiers') {
+				if (!$ignorer_fichiers && $saisie['saisie'] == 'fichiers') {
 					$_valeurs = $tenter_unserialize($valeurs[$nom]);
 					//tester s'il y a des saisies parmi les fichiers
 					if (is_array($_valeurs) and $_valeurs) {

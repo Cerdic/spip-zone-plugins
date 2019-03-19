@@ -101,6 +101,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exporter_formulaire_date_erreur' => 'La date de début doit être antérieure à la date de fin',
 	'exporter_formulaire_date_fin_label' => 'Jusqu’au (inclus)',
 	'exporter_formulaire_format_label' => 'Format du fichier',
+	'exporter_formulaire_ignorer_fichiers_explication_label' => 'Ce formulaire contient des champs de fichiers, préférez vous ne pas les joindre à l\'export et les télécharger par exemple par FTP ?',
+	'exporter_formulaire_ignorer_fichiers_label' => 'Ne pas joindre les fichiers',
 	'exporter_formulaire_statut_label' => 'Réponses',
 
 	// F

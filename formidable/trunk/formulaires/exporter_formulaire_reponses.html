@@ -32,6 +32,12 @@
 				defaut=valeur
 				}
 			)]
+			[(#ENV{fichiers}|oui)
+			[(#SAISIE{case, ignorer_fichiers,
+					label=<:formidable:exporter_formulaire_ignorer_fichiers_explication_label:>,
+					label_case=<:formidable:exporter_formulaire_ignorer_fichiers_label:>,
+				})]
+			]
 			[(#SAISIE{date, date_debut,
 					label=<:formidable:exporter_formulaire_date_debut_label:>
 				})]
