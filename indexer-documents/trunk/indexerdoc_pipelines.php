@@ -30,8 +30,8 @@ function indexerdoc_indexer_document($flux) {
 		else {
 			// Extraire le contenu si possible
 			if (defined('_DIR_PLUGIN_EXTRAIREDOC')) {
-				include_spip('inc/extraire_document');
-				$extraire = inc_extraire_document($flux['args']['champs']);
+				$extraire_document = charger_fonction('extraire_document', 'inc');
+				$extraire = $extraire_document($flux['args']['champs']);
 			}
 			
 			// Si le document n'avait pas de titre, on met le nom du fichier
@@ -49,7 +49,7 @@ function indexerdoc_indexer_document($flux) {
 	// si on a demandé à indexer le documents dans l'objet lié
 	if (_INDEXERDOC_OBJETS_LIES and $flux['args']['objet'] != 'document') {
 		if (defined('_DIR_PLUGIN_EXTRAIREDOC')) {
-			include_spip('inc/extraire_document');
+			$extraire_document = charger_fonction('extraire_document', 'inc');
 		}
 		$id_objet = $flux['args']['id_objet'];
 		$objet = $flux['args']['objet'];
@@ -63,7 +63,7 @@ function indexerdoc_indexer_document($flux) {
 		foreach ($documents_lies as $document){
 			$id_document = $document['id_document'];
 			$tableau_doc = array('id_document'=>$id_document);
-			$extraire = inc_extraire_document($tableau_doc); // on refait l'extrait plutot que de prendre dans ce qui existe en sphinx, parce qu'on ne sait pas quand le document a été indexé par rapport à l'objet (et en plus la requete sphinx, je sais pas la faire en php)
+			$extraire = $extraire_document($tableau_doc); // on refait l'extrait plutot que de prendre dans ce qui existe en sphinx, parce qu'on ne sait pas quand le document a été indexé par rapport à l'objet (et en plus la requete sphinx, je sais pas la faire en php)
 			$flux['data']->content  .= "\n\n" . $extraire['contenu'];
 		}
 	}
