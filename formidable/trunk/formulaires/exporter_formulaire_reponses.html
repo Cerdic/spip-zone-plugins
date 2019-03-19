@@ -23,6 +23,12 @@
 				datas=#GET{statut},
 				defaut=publie,
 				cacher_option_intro=oui})]
+			[(#SAISIE{date, date_debut,
+					label=<:formidable:exporter_formulaire_date_debut_label:>
+				})]
+			[(#SAISIE{date, date_fin,
+					label=<:formidable:exporter_formulaire_date_fin_label:>
+				})]			
 			[(#SAISIE{radio, cle_ou_valeur,
 				label=<:formidable:exporter_formulaire_cle_ou_valeur_label:>,
 				data=#ARRAY{
@@ -38,12 +44,6 @@
 					label_case=<:formidable:exporter_formulaire_ignorer_fichiers_label:>,
 				})]
 			]
-			[(#SAISIE{date, date_debut,
-					label=<:formidable:exporter_formulaire_date_debut_label:>
-				})]
-			[(#SAISIE{date, date_fin,
-					label=<:formidable:exporter_formulaire_date_fin_label:>
-				})]
 		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
