@@ -5,6 +5,7 @@
 	compatibilite="[3.0.0;3.2.*]"
 	categorie="communication"
 	logo="icons/rspipcm-icon.jpg"
+    documentation="https://contrib.spip.net/4333"
 >
 	<nom>Codeur d'adresses email</nom>
 	<auteur lien="http://sebille.name" mail="robert@sebille.name">Robert Sebille</auteur>
