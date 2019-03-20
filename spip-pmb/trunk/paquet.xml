@@ -1,7 +1,7 @@
 <paquet
 	prefix="pmb"
 	categorie="divers"
-	version="2.0.6"
+	version="2.0.7"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="img/logo-spip-pmb.png"
@@ -23,7 +23,7 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/pmb.php" />
 
 	<!-- squelettes proposes avec le plugin -->
-	<utilise nom="Zpip" compatibilite="[2.0.*;]" />
+	<utilise nom="Zpip" compatibilite="[2.0.0;]" />
 	<!--chargement asynchrone de certaines inclusions -->
 	<utilise nom="inclureajaxload" compatibilite="[1.1.0;]" />
 	<!-- utilisation de fenetres modales pour ajouter des mots cles ou donner des avis DANS PMB -->
