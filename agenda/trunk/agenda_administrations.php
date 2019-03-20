@@ -22,6 +22,7 @@ function agenda_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['create'] = array(
 		array('maj_tables', array('spip_evenements','spip_evenements_participants')),
 		array('sql_alter', 'TABLE spip_rubriques ADD agenda tinyint(1) DEFAULT 0 NOT NULL'),
+		array('ecrire_config','agenda/synchro_statut','1')
 	);
 	$maj['0.11'] = array(
 		array('sql_alter', "TABLE spip_evenements ADD `horaire` ENUM('oui','non') DEFAULT 'oui' NOT NULL AFTER `lieu`"),
@@ -85,7 +86,9 @@ function agenda_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter', 'TABLE spip_evenements_participants ADD id_evenement_participant BIGINT(21) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST'),
 		array('maj_tables', array('spip_evenements_participants')),
 	);
-
+	$maj['0.28.0'] = array(
+		array('ecrire_config','agenda/synchro_statut','1')
+	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

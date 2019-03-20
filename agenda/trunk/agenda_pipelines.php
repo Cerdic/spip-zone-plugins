@@ -153,7 +153,8 @@ function agenda_quete_calendrier_prive($flux) {
 }
 
 /**
- * Synchroniser le statut des evenements lorsqu'on publie/depublie un article
+ * Synchroniser le statut des evenements lorsqu'on publie/depublie un article,
+ * si le plugin est configuré pour (par défaut)
  * @param array $flux
  * @return array
  */
@@ -165,7 +166,8 @@ function agenda_post_edition($flux) {
 		and isset($flux['data']['statut'])
 		and $statut = $flux['data']['statut']
 		and $statut_ancien = $flux['args']['statut_ancien']
-		and $statut != $statut_ancien) {
+		and $statut != $statut_ancien
+		and lire_config('agenda/synchro_statut')) {
 		$set = array();
 		// les evenements principaux, associes a cet article
 		$where = array('id_article='.intval($id_article),'id_evenement_source=0');

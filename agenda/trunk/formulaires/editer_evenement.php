@@ -126,11 +126,13 @@ function formulaires_editer_evenement_traiter_dist($id_evenement = 'new', $id_ar
 	set_request('date_fin', date('Y-m-d H:i:s', $date_fin));
 
 	$res = formulaires_editer_objet_traiter('evenement', $id_evenement, $id_article, 0, $retour, $config_fonc, $row, $hidden);
-	// si c'est une creation dans un article publie, passer l'evenement en publie
+	// si c'est une creation dans un article publie, passer l'evenement en publie, si le plugin est configuré pour
 	// l'article peut être renseigné/modifié par l'utilisateur dans le formulaire. On le retrouve.
 	if (!intval($id_evenement)
 		and $id_article = sql_getfetsel('id_article', 'spip_evenements', 'id_evenement='.$res['id_evenement'])
-		and objet_test_si_publie('article', $id_article)) {
+		and objet_test_si_publie('article', $id_article)
+		and lire_config('agenda/synchro_statut')
+	) {
 		// sera refuse si auteur pas autorise
 		evenement_modifier($res['id_evenement'], array('statut' => 'publie'));
 	}
