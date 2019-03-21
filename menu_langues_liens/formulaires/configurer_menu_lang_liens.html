@@ -21,6 +21,10 @@
 			<label for="langue_courante_invisible"><:mll:label_langue_courante_invisible:></label>
 			<input type="checkbox" name="langue_courante_invisible"[ checked="(#ENV{langue_courant_invisible}|oui)checked"] />
 		</li>
+		<li class="editer editer_langue_site_enpremier">
+			<label for="langue_site_enpremier"><:mll:label_langue_site_enpremier:></label>
+			<input type="checkbox" name="langue_site_enpremier"[ checked="(#ENV{langue_site_enpremier}|oui)checked"] />
+		</li>
 		<li class="editer editer_redirection[ (#ENV**{erreurs}|table_valeur{format}|oui)erreur]">
 			<label for="format"><:mll:label_redirection:></label>
 			<div class="choix">

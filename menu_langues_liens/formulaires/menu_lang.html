@@ -63,7 +63,25 @@
 
 		On liste les langues utilisees dans le site
 		
-	]<BOUCLE_ListeLangues(POUR){tableau #GET{redirections}}{par cle}>#SET{nom_langue,#GET{format}|!={complet}|?{#CLE,#CLE|traduire_nom_langue}}[
+	]<BOUCLE_ListeLanguessite_enpremier(POUR){si #CONFIG{menu_lang_liens/langue_site_enpremier}|oui}{tableau #GET{redirections}}{cle=#CONFIG{langue_site}}>#SET{nom_langue,#GET{format}|!={complet}|?{#CLE,#CLE|traduire_nom_langue}}[
+		(#GET{liste}|=={liste}|oui)<li [(#COMPTEUR_BOUCLE|=={1}|oui)class="first"] [(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)class="last"]>
+		][(#REM)
+			
+			Si la langue n'est pas celle en cours, on fait un lien qui fait 2 actions :
+			- fixer le cookie de langue sur la langue demandee
+			- rediriger sur l'article dans la langue demandee si opportun
+				sinon, revenir sur la page en cours
+			
+			url_absolue pour éviter des problèmes en urls arbo
+		]
+		[[[[(#GET{separateur})](#GET{liste}|=={liste}|non)](#COMPTEUR_BOUCLE|>{1}|oui)][<a href="[(#SELF|parametre_url{action,converser}|parametre_url{var_lang,#CLE}|parametre_url{redirect,#VALEUR|url_absolue})]" rel="alternate" lang="#CLE"[(#GET{format}|=={'abrege'}|oui) title="[(#CLE|traduire_nom_langue|attribut_html)]"] class="langue_#CLE">(#GET{nom_langue})</a>](#CLE|=={#ENV{lang}}|non)][
+		(#REM)
+		
+			Si la langue est celle en cours, afficher celle-ci en gras, sans lien
+
+			][[[[[(#GET{separateur})](#GET{liste}|=={liste}|non)](#COMPTEUR_BOUCLE|>{1}|oui)]<strong class="langue_#CLE" title="[(#CLE|traduire_nom_langue|attribut_html)]">(#GET{nom_langue})</strong>](#CLE|=={#ENV{lang}}|oui|et{#CONFIG{menu_lang_liens/langue_courante_invisible}|non})][
+		(#GET{liste}|=={liste}|oui)</li>
+	]</BOUCLE_ListeLanguessite_enpremier><BOUCLE_ListeLangues(POUR){tableau #GET{redirections}}{par cle}{cle!=#CONFIG{menu_lang_liens/langue_site_enpremier}|?{#CONFIG{langue_site},''}}>#SET{nom_langue,#GET{format}|!={complet}|?{#CLE,#CLE|traduire_nom_langue}}[
 		(#GET{liste}|=={liste}|oui)<li [(#COMPTEUR_BOUCLE|=={1}|oui)class="first"] [(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)class="last"]>
 		][(#REM)
 			
