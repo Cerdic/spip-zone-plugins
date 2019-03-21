@@ -17,10 +17,12 @@ Insertion du modele <articleX|owl>
 @param : lazyLoad : true (false par défaut) : ne charge que les images visibles pour optimiser le chargement.
 @param animateIn - une animation css3 , `fadeOut` est la seul fournie par owl, sinon ajouter animate.css
 @param animateOut - une animation css3 , `fadeOut` est la seul fournie par owl, sinon ajouter animate.css
+@param : largeur : la dimension maxi des images, et donc du diaporama
+@param : left|center|right : alignement
 
 -->]
 [(#REM) <!-- Diaporama -->]
-<div id="#ENV{id-carousel,demo}" class="article_owl owl-carousel owl-theme">
+<div id="#ENV{id-carousel,demo}" class="article_owl owl-carousel owl-theme[ spip_documents_(#ENV{align})]"[ style="max-width:(#ENV{largeur})px"]>
     <BOUCLE_listDocs(DOCUMENTS){id_article?}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{extension==jpg|png|gif}>
     <div class="owl-slide"[ (#ENV{URLhashListener}|=={true}|oui)data-hash="#ENV{id-carousel,demo}#ID_DOCUMENT"]>
         [(#ENV{caption,oui}|=={oui}|oui)
@@ -28,7 +30,7 @@ Insertion du modele <articleX|owl>
             <h3 class="title">(#TITRE)</h3>][
             <p class="hidden-phone">(#DESCRIPTIF|textebrut)</p>]</div>]
             <a href="#FICHIER" class="mediabox"[ rel="diaporama(#ENV{id-carousel,demo})"][ title="(#TITRE|attribut_html|couper{80})"]>
-                <img [(#ENV{lazyLoad}|=={true}|oui)class="owl-lazy" data-]src="[(#FICHIER|image_reduire{650,450}|extraire_attribut{src})]" alt="[(#TITRE|textebrut)]">
+                <img [(#ENV{lazyLoad}|=={true}|oui)class="owl-lazy" data-]src="[(#FICHIER|image_reduire{#ENV{largeur,650},450}|extraire_attribut{src})]" alt="[(#TITRE|textebrut)]">
             </a>
     </div>
     </BOUCLE_listDocs>
