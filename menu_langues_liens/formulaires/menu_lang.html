@@ -59,12 +59,12 @@
 
 [(#REM) Seulement s'il y a au moins deux langues à afficher (dont la courante sera peut-être masquée ensuite) ]
 <BOUCLE_PlusieursLanguesUtilisees(POUR){tableau #GET{redirections}}{1,1}>
-	<[(#GET{liste}|=={liste}|?{ul,div})] id="menu_lang">[(#REM)
+	[<(#GET{liste}|=={liste}|?{ul,[(#GET{liste}|=={bloc}|?{div,''})]}) id="menu_lang">][(#REM)
 
 		On liste les langues utilisees dans le site
 		
 	]<BOUCLE_ListeLanguessite_enpremier(POUR){tableau #GET{redirections}}{cle=#CONFIG{menu_lang_liens/langue_site_enpremier}|?{#CONFIG{langue_site},''}}>#SET{nom_langue,#GET{format}|!={complet}|?{#CLE,#CLE|traduire_nom_langue}}[
-		(#GET{liste}|=={liste}|oui)<li class="first">
+		(#GET{liste}|match{^liste}|oui)<li class="first">
 		][(#REM)
 			
 			Si la langue n'est pas celle en cours, on fait un lien qui fait 2 actions :
@@ -74,15 +74,15 @@
 			
 			url_absolue pour éviter des problèmes en urls arbo
 		]
-		[[[[(#GET{separateur})](#GET{liste}|=={liste}|non)](#COMPTEUR_BOUCLE|>{1}|oui)][<a href="[(#SELF|parametre_url{action,converser}|parametre_url{var_lang,#CLE}|parametre_url{redirect,#VALEUR|url_absolue})]" rel="alternate" lang="#CLE"[(#GET{format}|=={'abrege'}|oui) title="[(#CLE|traduire_nom_langue|attribut_html)]"] class="langue_#CLE">(#GET{nom_langue})</a>](#CLE|=={#ENV{lang}}|non)][
+		[[[[(#GET{separateur})](#GET{liste}|match{^liste}|non)](#COMPTEUR_BOUCLE|>{1}|oui)][<a href="[(#SELF|parametre_url{action,converser}|parametre_url{var_lang,#CLE}|parametre_url{redirect,#VALEUR|url_absolue})]" rel="alternate" lang="#CLE"[(#GET{format}|=={'abrege'}|oui) title="[(#CLE|traduire_nom_langue|attribut_html)]"] class="langue_#CLE">(#GET{nom_langue})</a>](#CLE|=={#ENV{lang}}|non)][
 		(#REM)
 		
 			Si la langue est celle en cours, afficher celle-ci en gras, sans lien
 
-			][[[[[(#GET{separateur})](#GET{liste}|=={liste}|non)](#COMPTEUR_BOUCLE|>{1}|oui)]<strong class="langue_#CLE" title="[(#CLE|traduire_nom_langue|attribut_html)]">(#GET{nom_langue})</strong>](#CLE|=={#ENV{lang}}|oui|et{#CONFIG{menu_lang_liens/langue_courante_invisible}|non})][
-		(#GET{liste}|=={liste}|oui)</li>
+			][[[[[(#GET{separateur})](#GET{liste}|match{^liste}|non)](#COMPTEUR_BOUCLE|>{1}|oui)]<strong class="langue_#CLE" title="[(#CLE|traduire_nom_langue|attribut_html)]">(#GET{nom_langue})</strong>](#CLE|=={#ENV{lang}}|oui|et{#CONFIG{menu_lang_liens/langue_courante_invisible}|non})][
+		(#GET{liste}|match{^liste}|oui)</li>
 	]</BOUCLE_ListeLanguessite_enpremier><BOUCLE_ListeLangues(POUR){tableau #GET{redirections}}{par cle}{cle!=#CONFIG{menu_lang_liens/langue_site_enpremier}|?{#CONFIG{langue_site},''}}>#SET{nom_langue,#GET{format}|!={complet}|?{#CLE,#CLE|traduire_nom_langue}}[
-		(#GET{liste}|=={liste}|oui)<li [(#COMPTEUR_BOUCLE|=={1}|oui)[class="(#CONFIG{menu_lang_liens/langue_site_enpremier}|?{'',first})"]] [(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)class="last"]>
+		(#GET{liste}|match{^liste}|oui)<li [(#COMPTEUR_BOUCLE|=={1}|oui)[class="(#CONFIG{menu_lang_liens/langue_site_enpremier}|?{'',first})"]] [(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)class="last"]>
 		][(#REM)
 			
 			Si la langue n'est pas celle en cours, on fait un lien qui fait 2 actions :
@@ -92,15 +92,15 @@
 			
 			url_absolue pour éviter des problèmes en urls arbo
 		]
-		[[[[(#GET{separateur})](#GET{liste}|=={liste}|non)](#COMPTEUR_BOUCLE|>{1}|oui)][<a href="[(#SELF|parametre_url{action,converser}|parametre_url{var_lang,#CLE}|parametre_url{redirect,#VALEUR|url_absolue})]" rel="alternate" lang="#CLE"[(#GET{format}|=={'abrege'}|oui) title="[(#CLE|traduire_nom_langue|attribut_html)]"] class="langue_#CLE">(#GET{nom_langue})</a>](#CLE|=={#ENV{lang}}|non)][
+		[[[[(#GET{separateur})](#GET{liste}|match{^liste}|non)](#COMPTEUR_BOUCLE|>{1}|oui)][<a href="[(#SELF|parametre_url{action,converser}|parametre_url{var_lang,#CLE}|parametre_url{redirect,#VALEUR|url_absolue})]" rel="alternate" lang="#CLE"[(#GET{format}|=={'abrege'}|oui) title="[(#CLE|traduire_nom_langue|attribut_html)]"] class="langue_#CLE">(#GET{nom_langue})</a>](#CLE|=={#ENV{lang}}|non)][
 		(#REM)
 		
 			Si la langue est celle en cours, afficher celle-ci en gras, sans lien
 
-			][[[[[(#GET{separateur})](#GET{liste}|=={liste}|non)](#COMPTEUR_BOUCLE|>{1}|oui)]<strong class="langue_#CLE" title="[(#CLE|traduire_nom_langue|attribut_html)]">(#GET{nom_langue})</strong>](#CLE|=={#ENV{lang}}|oui|et{#CONFIG{menu_lang_liens/langue_courante_invisible}|non})][
-		(#GET{liste}|=={liste}|oui)</li>
+			][[[[[(#GET{separateur})](#GET{liste}|match{^liste}|non)](#COMPTEUR_BOUCLE|>{1}|oui)]<strong class="langue_#CLE" title="[(#CLE|traduire_nom_langue|attribut_html)]">(#GET{nom_langue})</strong>](#CLE|=={#ENV{lang}}|oui|et{#CONFIG{menu_lang_liens/langue_courante_invisible}|non})][
+		(#GET{liste}|match{^liste}|oui)</li>
 	]</BOUCLE_ListeLangues>
-	</[(#GET{liste}|=={liste}|?{ul,div})]>
+	[</(#GET{liste}|=={liste}|?{ul,[(#GET{liste}|=={bloc}|?{div,''})]})>]
 </BOUCLE_PlusieursLanguesUtilisees>
 
 #FILTRE{trim}
