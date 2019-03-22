@@ -49,6 +49,16 @@ function mailsubscribers_verifier_args_action($action) {
 				$arg = null;
 			}
 		}
+		// cas des urls qui ont ete triplement encodees : il faut encore urldecoder deux fois l'email
+		// %2540 = urlencode(urlencode('@'))
+		if (strpos($email, '%2540') !== false) {
+			$email = urldecode($email);
+		}
+		// cas des urls qui ont ete doublement encodees : il faut encore urldecoder une fois l'email
+		// %40 = urlencode('@')
+		if (strpos($email, '%40') !== false) {
+			$email = urldecode($email);
+		}
 		if ($arg AND $email) {
 			spip_log("mailsubscriber : $email|$arg reconnus malgre la query_string mal formee (verifiez votre service d'envoi de mails) [" . $_SERVER["QUERY_STRING"] . "]", "mailsubscribers" . _LOG_INFO_IMPORTANTE);
 		}
