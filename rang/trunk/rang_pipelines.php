@@ -115,17 +115,15 @@ function rang_pre_edition($flux) {
 
 		$liste_objets = lire_config('rang/objets');
 		$table        = $flux['args']['table'];
+		$id_table_objet = id_table_objet($table);
 
 		if (in_array($table, $liste_objets)) {
 			$id_objet = $flux['args']['id_objet'];
 
-			// cas des objets avec statut
-			if (isset($flux['data']['statut']) && $flux['data']['statut'] == 'publie') {
+			if (isset($flux['data']['statut']) && $flux['data']['statut'] == 'publie') { // cas des objets avec statut
 				$flux['data']['rang'] = rang_classer_dernier($table, $id_objet);
-			}
-			// cas des mots clés
-			if ($table == 'spip_mots') {
-				$flux['data']['rang'] = rang_classer_dernier($table, $id_objet);
+			} elseif ($rang = sql_getfetsel('rang', $table, "$id_table_objet=".intval($id_objet)) == 0) { // cas des objets sans statut, mot-clés par exemple
+					$flux['data']['rang'] = rang_classer_dernier($table, $id_objet);
 			}
 		}
 	}
