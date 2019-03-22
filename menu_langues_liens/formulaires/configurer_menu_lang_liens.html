@@ -59,7 +59,7 @@
 			</div>
 			<div class="choix">
 				<input type="radio" name="formatliste" id="listeincluse" value="listeincluse" [(#ENV{formatliste,bloc}|=={'listeincluse'}|?{' ',''})checked]/> 
-				<label for="liste"><:mll:label_format_liste_liste_incluse:></label>
+				<label for="listeincluse"><:mll:label_format_liste_liste_incluse:></label>
 			</div>
 		</li>
 		<li class="editer editer_separateur[ (#ENV**{erreurs}|table_valeur{licence_defaut}|oui)erreur]">

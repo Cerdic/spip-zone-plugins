@@ -64,7 +64,7 @@
 		On liste les langues utilisees dans le site
 		
 	]<BOUCLE_ListeLanguessite_enpremier(POUR){tableau #GET{redirections}}{cle=#CONFIG{menu_lang_liens/langue_site_enpremier}|?{#CONFIG{langue_site},''}}>#SET{nom_langue,#GET{format}|!={complet}|?{#CLE,#CLE|traduire_nom_langue}}[
-		(#GET{liste}|match{^liste}|oui)<li class="first">
+		(#GET{liste}|match{^liste}|oui)<li class="first menu_lang_item">
 		][(#REM)
 			
 			Si la langue n'est pas celle en cours, on fait un lien qui fait 2 actions :
@@ -82,7 +82,7 @@
 			][[[[[(#GET{separateur})](#GET{liste}|match{^liste}|non)](#COMPTEUR_BOUCLE|>{1}|oui)]<strong class="langue_#CLE" title="[(#CLE|traduire_nom_langue|attribut_html)]">(#GET{nom_langue})</strong>](#CLE|=={#ENV{lang}}|oui|et{#CONFIG{menu_lang_liens/langue_courante_invisible}|non})][
 		(#GET{liste}|match{^liste}|oui)</li>
 	]</BOUCLE_ListeLanguessite_enpremier><BOUCLE_ListeLangues(POUR){tableau #GET{redirections}}{par cle}{cle!=#CONFIG{menu_lang_liens/langue_site_enpremier}|?{#CONFIG{langue_site},''}}>#SET{nom_langue,#GET{format}|!={complet}|?{#CLE,#CLE|traduire_nom_langue}}[
-		(#GET{liste}|match{^liste}|oui)<li [(#COMPTEUR_BOUCLE|=={1}|oui)[class="(#CONFIG{menu_lang_liens/langue_site_enpremier}|?{'',first})"]] [(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)class="last"]>
+		(#GET{liste}|match{^liste}|oui)<li [(#COMPTEUR_BOUCLE|=={1}|oui)[class="(#CONFIG{menu_lang_liens/langue_site_enpremier}|?{'',first menu_lang_item})"]] [(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)class="last menu_lang_item"]>
 		][(#REM)
 			
 			Si la langue n'est pas celle en cours, on fait un lien qui fait 2 actions :
