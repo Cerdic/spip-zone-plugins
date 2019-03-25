@@ -22,8 +22,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return array
  */
 function formulaires_recherche_spip_et_catalogue_charger_dist($lien = '', $class=''){
+	include_spip('formulaires/recherche');
 	$charger = charger_fonction('recherche_charger', 'formulaires');
 	return $charger($lien, $class);
 }
-
-?>

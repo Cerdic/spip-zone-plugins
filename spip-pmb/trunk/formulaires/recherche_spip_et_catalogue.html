@@ -3,20 +3,20 @@
 	[(#ENV{action}|form_hidden)]
 	[<input type="hidden" name="lang" value="(#ENV{lang})" />]
 	<input type="hidden" name="look[]" value="ALL" />
-	
+
 	<fieldset>
-		<ul>
+		<ul class="editer-groupe">
 			<li class='editer editer_look'>
 				<div class='choix'>
-					<input type='radio' name='page' id='PMB' value='[(#URL_PMB_RECHERCHE|parametre_url{page})]' selected='selected' />
+					<input type='radio' name='page' id='PMB' value='[(#URL_PMB_RECHERCHE|parametre_url{page})]' checked='checked' />
 					<label for='PMB' style="display: inline;"><:pmb:recherche_catalogue:></label>
 				</div>
 				<div class='choix'>
 					<input type='radio' name='page' id='SITE' value='recherche' />
 					<label for='SITE' style="display: inline;"><:pmb:recherche_portail_web:></label>
 				</div>
-			</li class='editer'>  
-			<li class="champ-recherche">
+			</li>
+			<li class="editer champ-recherche">
 				<label for="recherche" style="display: none;"><:info_rechercher_02:></label>
 				<input type="text" class="text" size="10" name="recherche" id="recherche" style="border: 1px solid #ccc;"[ value="(#ENV{recherche})"] accesskey="4" />
 				<input type="submit" class="submit" value="Ok" />
