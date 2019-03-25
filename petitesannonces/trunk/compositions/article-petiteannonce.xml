@@ -1,0 +1,5 @@
+<composition>
+	<nom>Petite Annonce</nom>
+	<description>Une petite annonce est un article avec cette composition. Elle est héritée automatiquement si la rubrique est elle-même liée à la composition Petites Annonces.</description>
+	<icon>images/petitesannonces.png</icon>
+</composition>

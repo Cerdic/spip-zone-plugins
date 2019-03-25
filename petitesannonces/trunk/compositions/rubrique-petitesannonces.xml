@@ -1,0 +1,7 @@
+<composition>
+	<nom>Petites Annonces</nom>
+	<description>La rubrique des Petites Annonces est liée à cette composition.</description>
+	<icon>images/petitesannonces.png</icon>
+	<branche type="article" composition="petiteannonce" />
+	<branche type="rubrique" composition="petitesannonces" />
+</composition>

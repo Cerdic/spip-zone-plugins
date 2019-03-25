@@ -1,0 +1,37 @@
+<div class="formulaire_spip formulaire_editer formulaire_editer_article formulaire_editer_article-#ENV{id_article,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE
+		<input type='hidden' name='id_article' value='#ENV{id_article}' />
+
+		<div class="editer-groupe">
+			<div class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+				<label for="titre"><:info_titre:> <small>(<:petitesannonces:obligatoire:>)</small></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
+				]<input type='text' class='text form-control from-control-md' name='titre' id='titre'[ lang='(#LANGUE)'] value="[(#ENV**{titre,''})]"
+				placeholder="<:info_nouvel_article|attribut_html:>" />
+			</div>
+
+			<input type='hidden' id='id_parent' name='id_parent' value='#ENV{id_parent}' />
+			<input type='hidden' id='id_rubrique' name='id_rubrique' value='#ENV{id_parent}' />
+			<input type='hidden' id='statut' name='statut' value='prop' />
+
+			[(#ENV**{config}|table_valeur{articles_texte}|=={non}|?{#ENV**{texte,''},' '}|oui)
+			<div class="mt-2 editer editer_texte obligatoire[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
+				<label for="text_area"><:info_texte:> <small>(<:petitesannonces:obligatoire_au_moins_10_caracteres:>)</small> :</label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>
+				][(#ENV**{_texte_trop_long,''})]
+				<textarea name='texte' id='text_area'[ lang='(#LANGUE)'] rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='25' class='inserer_barre_forum inserer_previsualisation form-control from-control-lg obligatoire'>[(#ENV**{texte})]</textarea>
+			</div>]
+		</div>
+
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

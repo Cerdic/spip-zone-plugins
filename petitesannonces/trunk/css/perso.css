@@ -1,0 +1,15 @@
+
+.petitesannonces { margin:3rem 0; padding:3rem; border:1px solid gray; }
+.mespetitesannonces .liste-items { padding:1rem 0; }
+.mespetitesannonces .item:first-of-type { border-top:1px solid gray; }
+.mespetitesannonces .item { padding:1rem 0; border-bottom:1px solid gray; }
+.mespetitesannonces .item:after { display:block; content:''; clear:both; }
+.mespetitesannonces .submit { float:right; font-size:0.8rem; }
+
+.interrupteur { cursor:pointer; }
+.interrupteur.on { font-weight:700; }
+.accordeon { opacity:0; height:0; overflow:hidden; 
+	transition:opacity 0.5s; -webkit-transition:opacity 0.5s;
+}
+.accordeon.ouvert { opacity:1; height:auto; display:block; }
+
