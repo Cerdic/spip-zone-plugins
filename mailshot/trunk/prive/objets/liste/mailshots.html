@@ -1,8 +1,7 @@
 [(#SET{defaut_tri,#ARRAY{
 	id_mailshot,-1,
 	sujet,1,
-	date,1,
-	points,-1
+	date,-1
 }})]#SET{autoreload,''}<B_mailshot>
 #ANCRE_PAGINATION
 <div class="liste-objets mailshots">
@@ -11,8 +10,8 @@
 	<thead>
 		<tr class='first_row'>
 			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
-			<th class='id_mailshot' scope='col'>[(#TRI{id,<:info_numero_abbreviation:>,ajax})]</th>
-			<th class='sujet' scope='col'>[(#TRI{email,<:mailshot:label_sujet:>,ajax})]</th>
+			<th class='id_mailshot' scope='col'>[(#TRI{id_mailshot,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class='sujet' scope='col'>[(#TRI{sujet,<:mailshot:label_sujet:>,ajax})]</th>
 			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
 			<th class='listes' scope='col'><:mailshot:label_listes:></th>
 			<th class='progress' scope='col'>%</th>
