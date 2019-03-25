@@ -16,6 +16,7 @@
 	<traduire module="taa" reference="fr" gestionnaire="salvatore" />
 
 	<necessite nom="interface_traduction_objets" compatibilite="[1.0.0;[" />
+
 	<utilise nom="rang" compatibilite="[1.0.3;[" />
 
 	<pipeline nom="header_prive" inclure="taa_pipelines.php" />
