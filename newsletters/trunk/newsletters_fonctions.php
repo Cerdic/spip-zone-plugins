@@ -43,6 +43,8 @@ function newsletters_liens_absolus($texte, $base='') {
 		$base = newsletter_url_base();
 	}
 	$base_racine = rtrim(url_absolue(_DIR_RACINE,$base),'/').'/';
+	$protocole_racine = explode('://', $base_racine);
+	$protocole_racine = reset($protocole_racine);
 	$base_racine_https = 'https:'.protocole_implicite($base_racine);
 	if ($base_racine_https===$base_racine){
 		$base_racine_https = '';
@@ -54,6 +56,9 @@ function newsletters_liens_absolus($texte, $base='') {
 			if ($href AND strncmp($href,'#',1)!==0 AND strncmp($href,'@',1)!==0){
 				if ($base_racine_https AND strncmp($href,$base_racine_https,strlen($base_racine_https))==0){
 					$abs = $base_racine . substr($href,strlen($base_racine_https));
+				}
+				elseif(strncmp($href, "//", 2) === 0) {
+					$abs = "$protocole_racine:" . $href;
 				}
 				else {
 					$abs = url_absolue($href, $base);
