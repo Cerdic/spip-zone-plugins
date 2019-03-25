@@ -1,7 +1,7 @@
 <paquet
 	prefix="taa"
 	categorie="edition"
-	version="1.5.0"
+	version="2.0.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="img_pack/Translation-icon_32.png"
@@ -19,7 +19,7 @@
 
 	<pipeline nom="header_prive" inclure="taa_pipelines.php" />
 	<pipeline nom="formulaire_charger" inclure="taa_pipelines.php" />
-	<pipeline nom="recuperer_fond" inclure="taa_pipelines.php" />
+
 	<pipeline nom="pre_insertion" inclure="taa_pipelines.php" />
 	<pipeline nom="pre_edition" inclure="taa_pipelines.php" />
 

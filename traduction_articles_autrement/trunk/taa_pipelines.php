@@ -44,7 +44,7 @@ function taa_pre_insertion($flux) {
 	return $flux;
 }
 
-function taa_recuperer_fond($flux) {
+/*function taa_recuperer_fond($flux) {
 	// Insertion des onglets de langue
 	if ($flux['args']['fond'] == 'prive/squelettes/contenu/article') {
 		include_spip('inc/config');
@@ -69,7 +69,7 @@ function taa_recuperer_fond($flux) {
 	}
 
 	return $flux;
-}
+}*/
 
 /**
  * Agit lors de l’édition d’un élément éditorial, lorsque l’utilisateur édite les champs ou change le statut de l’objet.
