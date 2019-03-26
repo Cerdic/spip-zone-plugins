@@ -17,14 +17,5 @@
 
 	<necessite nom="interface_traduction_objets" compatibilite="[1.0.0;[" />
 
-	<utilise nom="rang" compatibilite="[1.0.3;[" />
 
-	<pipeline nom="header_prive" inclure="taa_pipelines.php" />
-	<pipeline nom="formulaire_charger" inclure="taa_pipelines.php" />
-
-	<pipeline nom="pre_insertion" inclure="taa_pipelines.php" />
-	<pipeline nom="pre_edition" inclure="taa_pipelines.php" />
-
-
-	<menu nom="configurer_taa" titre="taa:titre_plugin" parent="menu_configuration" icone="images/taa-16.png"/>
 </paquet>
