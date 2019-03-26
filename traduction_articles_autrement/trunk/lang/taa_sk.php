@@ -29,9 +29,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'necesite_afficher_objet' => 'Na využívanie tejto funkcie si musíte nainštalovať zásuvný modul',
 
-	// O
-	'options' => 'Upraviť možnosti jazykov',
-
 	// T
 	'titre_plugin' => 'Iný preklad článku',
 	'traductions' => 'Prekl',

@@ -27,9 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'necesite_afficher_objet' => 'اين كاركرد مستلزم نصب پلاگين است',
 
-	// O
-	'options' => 'اصلاح گزينه‌هاي زبان ',
-
 	// T
 	'titre_plugin' => 'ترجمه‌ي متفاوت متقالات',
 	'traductions' => 'ترجمه‌ها',
