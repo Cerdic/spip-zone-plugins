@@ -37,6 +37,12 @@ input#googlefonts_api_key{
 							<option value="at_import"[(#ENV{methode_insert}|=={at_import}|?{'selected="selected"',''})]>@import</option>
 						</select>
 					  </div>
+						[(#REM)<!-- inserer dans l'espace privé -->]
+					  <div class="editer insertion_prive">
+								<label for="insertion_prive"><:webfonts2:label_insertion_prive:></label>
+								<p class="explication"><:webfonts2:explication_insertion_prive:></p>
+								<input class="checkbox" type="checkbox" id="insertion_prive" name="insertion_prive" value="#ENV{insertion_prive,1}"[(#ENV{insertion_prive}|oui) checked="checked"]>
+					  </div>
 				</div>
 			</fieldset>
 			<fieldset>
@@ -64,11 +70,11 @@ input#googlefonts_api_key{
 <h2>Index des polices</h2>
 <p class="explication">
 	Pour ne pas faire une requète a l'api par action sur les pages de gestion des typo, on génère in fichier index qui peut être utilisé ensuite
-	
+
 </p>
 [(#BOUTON_ACTION{'Mettre a jour',#URL_ACTION_AUTEUR{webfonts_index,#ID_AUTEUR},''})]
-						
-					
+
+
 <script>
 function split( val ) {
  return val.split( /,\s*/ );
