@@ -1,7 +1,7 @@
 <B_insertedFonts>
 <div class="font-list">
 <BOUCLE_insertedFonts(DATA){source table, #PIPELINE{fonts_list}}>
-	<h3>[(#VALEUR{family})]</h3>
+	<h3>[(#CLE) -][ (#VALEUR{family})]</h3>
 	#SET{family,#VALEUR{family}
 	<BOUCLE_variants(POUR){tableau #VALEUR{variants}}>
 		<BOUCLE_previewCond(CONDITION){si #ENV{preview}|=={oui}}>
@@ -17,7 +17,7 @@
 		</BOUCLE_previewCond>
 			<h4>#VALEUR</h4>
 		<//B_previewCond>
-	</BOUCLE_variants>	
+	</BOUCLE_variants>
 </BOUCLE_insertedFonts>
 </div>
 </B_insertedFonts>
