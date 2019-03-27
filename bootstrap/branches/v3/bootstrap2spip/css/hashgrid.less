@@ -1,0 +1,86 @@
+/**
+ * HashGrid from http://hashgrid.com/
+ * only visible for webmaster users
+ */
+#grid {
+  .hashgrid (@container-width, @grid-gutter-width, @grid-columns, @line-height-computed) {
+    #bsgrid{
+      /* Dimensions - same width as your grid with gutters */
+      width: @container-width;
+      margin-left: -1 * (@container-width / 2 );
+    }
+
+    /**
+     * Vertical grid lines
+     *
+     * Set the column width taking the borders into consideration,
+     * and use margins to set column gutters.
+     */
+    #bsgrid div.vert{
+			width: percentage((1 / @grid-columns));
+			//border-left:1px solid darkturquoise;
+			//border-right:1px solid darkturquoise;
+			//margin-right: @grid-gutter-width - 1px;
+			position: relative;
+			&:before {
+				display: block;
+				position: absolute;
+				content: "";
+				height: 100%;
+				width: 1px;
+				top:0;
+				left: 0;
+				border-left: 1px solid darkturquoise;
+			}
+			&:after {
+				display: block;
+				position: absolute;
+				content: "";
+				height: 100%;
+				width: 1px;
+				top:0;
+				right: @grid-gutter-width;
+				border-right: 1px solid darkturquoise;
+			}
+    }
+		#bsgrid .vert-container {
+			margin-left: @grid-gutter-width / 2;
+		}
+
+    /**
+     * Horizontal grid lines, defined by your base line height
+     *
+     * Remember, the CSS properties that define the box model:
+     * visible height = height + borders + margins + padding
+     */
+    #bsgrid div.horiz{
+			/* 20px line height */
+			height: @line-height-computed - 1px;
+			border-bottom: 1px dotted darkgray;
+			margin: 0;
+			padding: 0;
+    }
+  }
+}
+
+// Fixed (940px)
+#grid > .hashgrid(@container-md, @grid-gutter-width, @grid-columns, @line-height-computed);
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+  #grid > .hashgrid(@container-sm, @grid-gutter-width, @grid-columns, @line-height-computed);
+}
+@media (min-width: @screen-lg-min) {
+  #grid > .hashgrid(@container-lg, @grid-gutter-width, @grid-columns, @line-height-computed);
+}
+#bsgrid{
+    /* Grid (left-aligned)
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left:0;
+    */
+
+    /* Grid (centered) */
+    position: absolute;
+    top: 0;
+    left: 50%;
+}

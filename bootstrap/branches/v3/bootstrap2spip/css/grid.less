@@ -1,0 +1,97 @@
+@import "bootstrap/css/grid.less";
+@import "css/hashgrid.less";
+
+// support for css/layouts.less that we use to implement layouts as we did in BS2
+@import "css/layouts.less";
+
+// Minimal support for
+// Legacy spanX offsetX from BS2 (deprecated)
+//
+// Used only to generate the correct number of grid classes given
+// any value of `@grid-columns`.
+
+.make-grid-spans() {
+  // Common styles for all sizes of grid columns, widths 1-12
+  .span(@index) { // initial
+    @item: ~".span@{index}";
+    .span((@index + 1), @item);
+  }
+  .span(@index, @list) when (@index =< @grid-columns) { // general; "=<" isn't a typo
+    @item: ~".span@{index}";
+    .span((@index + 1), ~"@{list}, @{item}");
+  }
+  .span(@index, @list) when (@index > @grid-columns) { // terminal
+    @{list} {
+      position: relative;
+      // Prevent columns from collapsing when empty
+      min-height: 1px;
+      // Inner gutter via padding
+      padding-left:  ceil((@grid-gutter-width / 2));
+      padding-right: floor((@grid-gutter-width / 2));
+    }
+  }
+  .span(1); // kickstart it
+}
+
+.float-grid-spans() {
+  .span(@index) { // initial
+    @item: ~".span@{index}";
+    .span((@index + 1), @item);
+  }
+  .span(@index, @list) when (@index =< @grid-columns) { // general
+    @item: ~".span@{index}";
+    .span((@index + 1), ~"@{list}, @{item}");
+  }
+  .span(@index, @list) when (@index > @grid-columns) { // terminal
+    @{list} {
+      float: left;
+    }
+  }
+  .span(1); // kickstart it
+}
+
+.calc-grid-span(@index, @type) when (@type = width) and (@index > 0) {
+  .span@{index} {
+    width: percentage((@index / @grid-columns));
+  }
+}
+.calc-grid-span(@index, @type) when (@type = offset) {
+  .offset@{index} {
+    margin-left: percentage((@index / @grid-columns));
+  }
+}
+
+// Basic looping in LESS
+.loop-grid-spans(@index, @type) when (@index >= 0) {
+  .calc-grid-span(@index, @type);
+  // next iteration
+  .loop-grid-spans((@index - 1), @type);
+}
+
+// Create grid for specific class
+.make-grid-span() {
+  .float-grid-spans();
+  .loop-grid-spans(@grid-columns, width);
+  .loop-grid-spans(@grid-columns, offset);
+}
+
+// row-fluid support : same as row
+.row-fluid {
+  .make-row();
+}
+
+// Columns
+//
+// Common styles for small and large grid columns
+
+.make-grid-spans();
+
+// spanx offsetx : ~ small grid
+//
+// spans, offsets for the small device range, from phones
+// to tablets.
+
+@media (min-width: @screen-sm-min) {
+  .make-grid-span();
+}
+

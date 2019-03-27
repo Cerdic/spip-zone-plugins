@@ -1,0 +1,26 @@
+@import "bootstrap/css/jumbotron.less";
+//
+// Jumbotron
+// --------------------------------------------------
+
+
+.jumbotron {
+  font-size: 1.0em * @jumbotron-font-size / @font-size-base;
+  line-height: @emLineHeight;
+
+	p {
+		font-size: inherit;
+		line-height: @emLineHeight;
+		margin-bottom: @emVertMargin;
+	}
+  h1,.h1 {
+    letter-spacing: -0.015em;
+		.h1;
+		font-size: 1.0em * @jumbotron-heading-font-size / @jumbotron-font-size;
+  }
+  & >:last-child {margin-bottom: 0;}
+}
+
+.hero-unit {
+	.jumbotron;
+}

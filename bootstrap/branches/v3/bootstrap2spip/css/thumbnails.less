@@ -1,0 +1,93 @@
+@import "bootstrap/css/thumbnails.less";
+
+// The Grid
+#thumbgrid {
+
+  .one () {
+    .thumbnails {margin-left: 0;}
+    .thumbnails li {width: auto;float:none;clear: none;margin-left: 0;}
+    .thumbnails li:nth-child(2n-1) {width: auto;float:none;clear: none;margin-left: 0;}
+    .thumbnails li:nth-child(2n) {width: auto;float:none;clear: none;margin-left: 0;}
+  }
+
+  .two (@width, @grid-gutter-width) {
+    .thumbnails {margin-left: 0;}
+    .thumbnails li {width: @width;/*width:calc(50% - (@grid-gutter-width/2));width:-moz-calc(50% - (@grid-gutter-width/2));*/float: left;}
+    .thumbnails li:nth-child(2n-1) {clear: both;float: left;margin-right: 0;margin-left: 0;}
+    .thumbnails li:nth-child(2n) {clear: none;float: right;margin-left: 0;}
+  }
+
+  .three(@width, @grid-gutter-width){
+    .thumbnails {margin-left: 0;}
+    .thumbnails li {width: @width;/*width:calc(33%-(2*@grid-gutter-width/3));width:-moz-calc(33%-(2*@grid-gutter-width/3));*/float: left;}
+    .thumbnails li:nth-child(3n-2) {clear: both;float: left;margin-right: 0;margin-left: 0;}
+    .thumbnails li:nth-child(3n-1) {clear: none;float: left;margin-left: (100% - 3*@width)/2 - 0.1%;/*margin-left:calc(@grid-gutter-width);margin-left:-moz-calc(@grid-gutter-width);*/margin-right: 0;}
+    .thumbnails li:nth-child(3n) {clear: none;float: right;margin-left: 0;}
+  }
+
+  .four(@width, @grid-gutter-width){
+    .thumbnails li {width: @width;/*width:calc(25% - (3*@grid-gutter-width/4));width:-moz-calc(25% - (3*@grid-gutter-width/4));*/float: left;}
+    .thumbnails li:nth-child(4n-3) {clear: both;float: left;margin-right: 0;margin-left: 0;}
+    .thumbnails li:nth-child(4n-2) {clear: none;float: left;margin-left: (100% - 4*@width)/3 - 0.1%;/*margin-left:calc(@grid-gutter-width);margin-left:-moz-calc(@grid-gutter-width);*/margin-right: 0;}
+    .thumbnails li:nth-child(4n-1) {clear: none;float: left;margin-left: (100% - 4*@width)/3 - 0.1%;/*margin-left:calc(@grid-gutter-width);margin-left:-moz-calc(@grid-gutter-width);*/margin-right: 0;}
+    .thumbnails li:nth-child(4n) {clear: none;float: right;margin-left: 0;}
+  }
+
+}
+
+/* mapper avec le plugin album */
+.album {#thumbgrid > .three(31%,@grid-gutter-width)}
+.span3,
+.span4{
+  .album {#thumbgrid > .two(48%,@grid-gutter-width)}
+}
+.span1,
+.span2{
+  .album {#thumbgrid > .one()}
+}
+
+.thumbnails li img {max-width: 93%;}
+.thumbnails .caption {display:block;}
+.thumbnails .caption img {margin-top: -9px;margin-bottom: 9px;}
+.thumbnails figure {margin-bottom:@emVertMargin;}
+.album .thumbnail {text-align: center; min-height: 150+10+2*9+@line-height-computed;}
+// Add a hover state for linked versions only
+.album .thumbnail:hover {
+  border-color: @link-color;
+  .box-shadow(0 1px 4px rgba(0,105,214,.25));
+}
+
+
+@media (min-width: @screen-lg-min) {
+  .span7,
+  .span8,
+  .span9,
+  .span10,
+  .span11,
+  .span12 {
+    .album {#thumbgrid > .four(22%,@grid-gutter-width)}
+  }
+  .span3{
+    .album {#thumbgrid > .two(48%,@grid-gutter-width)}
+  }
+}
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+  .span7 {
+    .album {#thumbgrid > .three(30%,@grid-gutter-width)}
+  }
+  .span5{
+    .album {#thumbgrid > .two(48%,@grid-gutter-width)}
+  }
+  .span3{
+    .album {#thumbgrid > .one()}
+  }
+}
+@media (max-width: @screen-xs-max) {
+  .album {#thumbgrid > .two(48%,@grid-gutter-width)}
+}
+@media (max-width: 450px) {
+  .album {#thumbgrid > .two(48%,@grid-gutter-width)}
+}
+@media (max-width: 380px) {
+  .album {#thumbgrid > .one()}
+}

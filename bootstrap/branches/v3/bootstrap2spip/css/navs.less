@@ -1,0 +1,65 @@
+@import "bootstrap/css/navs.less";
+
+ul.nav,ol.nav {margin-left: 0;}
+
+.nav-pills .nav-header {padding-left: 12px;}
+.texte_libre {&:extend(.nav-header);}
+
+// Nav headers (for dropdowns and lists)
+.nav-header {
+  display: block;
+	padding: @nav-link-padding;
+  padding-top: @padding-base-vertical / 2;
+  padding-bottom: @padding-base-vertical / 2;
+  font-size: 1em * (@font-size-small / @font-size-base);
+  font-weight: bold;
+  line-height: @line-height-computed;
+  color: @gray-light;
+  text-transform: uppercase;
+}
+// Space them out when they follow another list item (link)
+.nav li + .nav-header {
+  margin-top: @emVertMargin/2;
+}
+
+// NAV LIST
+// --------
+
+.nav-list {
+  padding-left : @padding-base-horizontal;
+  padding-right : @padding-base-horizontal;
+  margin-bottom: 0;
+}
+.well .nav-list {
+	margin-left : -@padding-base-horizontal;
+	margin-right : -@padding-base-horizontal;
+	.nav-list {
+		margin-left: 0;
+		margin-right: 0;
+	}
+}
+
+.nav-list > li > a,
+.nav-list .nav-header {
+  margin-left:  -@padding-base-horizontal;
+  margin-right: -@padding-base-horizontal;
+}
+.nav-list > li > a {
+  padding: @nav-link-padding;
+	padding-top: @padding-base-vertical / 2;
+	padding-bottom: @padding-base-vertical / 2;
+}
+.nav-list > .active > a,
+.nav-list > .active > a:hover,
+.nav-list > .active > a:focus {
+  color: @component-active-color;
+  background-color: @component-active-bg;
+}
+.nav-list [class^="icon-"],
+.nav-list [class*=" icon-"] {
+  margin-right: 2px;
+}
+// Dividers (basically an hr) within the dropdown
+.nav-list .divider {
+  .nav-divider(@dropdown-divider-bg);
+}

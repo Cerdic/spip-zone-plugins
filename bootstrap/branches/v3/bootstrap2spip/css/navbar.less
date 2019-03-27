@@ -1,0 +1,24 @@
+@import "bootstrap/css/navbar.less";
+
+.navbar .navbar-inner {
+	.container-fluid;
+}
+.navbar .navbar-inner>.nav:not(.navbar-nav),
+.navbar .navbar-collapse>.nav:not(.navbar-nav) {
+	.navbar-nav;
+}
+
+@media (max-width: @grid-float-breakpoint-max) {
+  .navbar-responsive {
+    position: absolute;
+    top:0;
+    right: 20px;
+    .navbar-inner {
+      background: transparent;
+      .box-shadow(none);
+      border: none;
+      .nav-collapse {background-color: @navbar-default-bg;}
+    }
+    &.navbar-inverse .navbar-inner .nav-collapse {background-color: @navbar-inverse-bg;}
+  }
+}

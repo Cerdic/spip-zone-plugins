@@ -1,0 +1,30 @@
+<paquet
+	prefix="bootstrap3"
+	categorie="outil"
+	version="3.0.10"
+	etat="test"
+	compatibilite="[3.0.2;3.2.*]"
+	logo="img/bootstrap-32.png"
+	documentation="http://spipr.nursit.com/bootstrap"
+>
+
+	<nom>Bootstrap 3</nom>
+
+	<auteur lien='http://www.nursit.com'>Cedric Morin</auteur>
+	<auteur lien='http://www.studiomaiis.net'>Pierre Basson</auteur>
+	<credit lien='http://getbootstrap.com'>twbs/bootstrap v3.3.5</credit>
+	<credit lien='http://hashgrid.com/'>dotjay/hashgrid</credit>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="affichage_final" inclure="bootstrap3_fonctions.php" />
+
+	<necessite nom="lesscss" compatibilite="[1.0.0;1.*.*]" />
+	<necessite nom="jquery" compatibilite="[1.9.1;]" />
+	<procure nom="bootstrap" version="3.3.6" />
+
+	<chemin path="bootstrap" type="public" />
+	<chemin path="bootstrap2spip" type="public" />
+	<chemin path="" />
+
+</paquet>
