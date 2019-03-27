@@ -1,7 +1,7 @@
 <paquet
 	prefix="noizetier"
 	categorie="maintenance"
-	version="3.0.85"
+	version="3.0.86"
 	etat="dev"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/noizetier-32.png"
@@ -44,6 +44,8 @@
 
 	<utilise nom="compositions" compatibilite="[3.5.10;[" />
 	<utilise nom="ieconfig" compatibilite="[1.3.2;[" />
+
+	<lib nom="sticky-kit" lien="https://github.com/leafo/sticky-kit/archive/v1.1.2.zip" />
 
 	<menu nom="noizetier" titre="noizetier:editer_noizetier_titre" parent="menu_squelette" icone="images/noizetier-16.png" action="noizetier_pages" />
 </paquet>
