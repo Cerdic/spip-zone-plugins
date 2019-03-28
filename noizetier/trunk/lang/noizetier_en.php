@@ -66,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 You can choose a new identifier or suffix the reference identifier as follows:
 <i>@composition@<strong>_suffixe</strong></i>',
 	'explication_dupliquer_composition_suffixer' => '.',
-	'explication_glisser_deposer' => 'The types of nuts that can be added to the blocks of the page are listed below.',
+	'explication_glisser_deposer' => 'The types of nuts that can be added to the blocks of the page are listed below.', # MODIF
 	'explication_heritages_composition' => 'The composition being edited is based on the "@type@" content type that has child content types. You can define for each type of child content a composition to apply by default.',
 	'explication_noisette' => 'Nut type « @noisette@ »',
 	'explication_noisette_css' => 'You can add to the wrapping nut tag any additional CSS classes.', # MODIF
@@ -184,10 +184,10 @@ nuts on the following pages:', # MODIF
 	'ne_pas_definir_d_heritage' => 'Do not define inherited composition',
 	'noisette_numero' => 'nut number :',
 	'noisettes_composition' => 'Specific nuts to the composition <i>@composition@</i>:',
-	'noisettes_disponibles' => 'Type of nuts available',
-	'noisettes_page' => 'Nut types specific to the page<i>@type@</i>:',
+	'noisettes_disponibles' => 'Type of nuts available', # MODIF
+	'noisettes_page' => 'Nut types specific to the page<i>@type@</i>:', # MODIF
 	'noisettes_pour' => 'Nuts for:',
-	'noisettes_toutes_pages' => 'Nut types common to all pages:',
+	'noisettes_toutes_pages' => 'Nut types common to all pages:', # MODIF
 	'noizetier' => 'Nuts Manager',
 	'nom_bloc_contenu' => 'Content',
 	'nom_bloc_extra' => 'Extra',
