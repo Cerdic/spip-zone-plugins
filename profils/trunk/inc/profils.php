@@ -389,6 +389,7 @@ function profils_chercher_ids_profil($id_auteur=0, $id_ou_identifiant_profil='')
  * 		Retourne les informations d'un profil, chaque objet SPIP dans une clé (organisation, contact, telephone, etc).
  */
 function profils_recuperer_infos($id_auteur=0, $id_ou_identifiant_profil='') {
+	include_spip('inc/editer');
 	$retour = '';
 	$infos = array();
 	

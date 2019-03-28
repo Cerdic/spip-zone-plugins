@@ -36,6 +36,7 @@ function formulaires_exporter_profils_saisies_dist($id_profil) {
 }
 
 function formulaires_exporter_profils_traiter_dist($id_profil) {
+	refuser_traiter_formulaire_ajax();
 	$retours = array();
 	
 	if ($profil = profils_recuperer_profil($id_profil) and $config = $profil['config']) {
@@ -85,6 +86,69 @@ function formulaires_exporter_profils_traiter_dist($id_profil) {
 							}
 						}
 					}
+				}
+			}
+		}
+		
+		// Si on demande tout, on va charger les données de chaque profil
+		if (!_request('seulement_colonnes')) {
+			// On récupère tous les auteurs de ce profil
+			if ($ids = sql_allfetsel('id_auteur', 'spip_auteurs', 'id_profil = '.$profil['id_profil'])) {
+				$ids = array_map('reset', $ids);
+				
+				foreach ($ids as $id_auteur) {
+					$infos = profils_recuperer_infos($id_auteur, $profil['id_profil']);
+					$ligne = array();
+					
+					// On refait tout comme pour les colonnes
+					foreach (array('auteur', 'organisation', 'contact') as $objet) {
+						// Si c'est autre chose que l'utilisateur, faut le plugin qui va avec et que ce soit activé
+						if ($objet == 'auteur' or (defined('_DIR_PLUGIN_CONTACTS') and $config["activer_$objet"])) {
+							// Pour chaque chaque champ vraiment configuré
+							if ($config[$objet]) {
+								foreach ($config[$objet] as $champ => $config_champ) {
+									// On prend les champs d'édition de profil uniquement
+									if (in_array('edition', $config_champ)) {
+										$ligne[] = $infos[$objet][$champ];
+									}
+								}
+							}
+							
+							// On cherche des coordonnées pour cet objet
+							if (
+								defined('_DIR_PLUGIN_COORDONNEES')
+								and $config["activer_coordonnees_$objet"]
+								and $coordonnees = $config['coordonnees'][$objet]
+							) {
+								// Pour chaque type de coordonnéees (num, email, adresse)
+								foreach ($coordonnees as $coordonnee => $champs) {
+									// Pour chaque champ ajouté
+									foreach ($champs as $cle => $champ) {
+										// Si ce cette coordonnées est configurée pour le form demandé
+										if ($champ['edition']) {
+											// Attention, si pas de type, on transforme ici en ZÉRO
+											if (!$champ['type']) {
+												$champ['type'] = 0;
+											}
+											// On va chercher les saisies de ce type de coordonnées
+											$saisies_coordonnee = profils_chercher_saisies_objet($coordonnee);
+											// On vire le titre libre
+											$saisies_coordonnee = saisies_supprimer($saisies_coordonnee, 'titre');
+											// On cherche uniquement le nom des champs
+											$saisies_noms = saisies_lister_champs($saisies_coordonnee);
+											
+											// On ajoute aux colonnes
+											foreach ($saisies_noms as $nom) {
+												$ligne[] = $infos['coordonnees'][$objet][$coordonnee][$champ['type']][$nom];
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+					
+					$donnees[] = $ligne;
 				}
 			}
 		}
