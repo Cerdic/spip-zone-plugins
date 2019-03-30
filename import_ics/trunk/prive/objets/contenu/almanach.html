@@ -31,6 +31,11 @@
 	<span dir='#LANG_DIR' class='#EDIT{decalage_hiver} decalage'>[ [(#DECALAGE_HIVER|>={0}|?{+})](#DECALAGE_HIVER|singulier_ou_pluriel{almanach:heure,almanach:heures})][(#DECALAGE_HIVER|=={0}|?{<:almanach:pas_de_decalage:>})]</span>
 </div>
 
+[<div class="champ contenu_dtend_inclus[ (#URL*|strlen|?{'',vide})]">
+	<label><strong><:almanach:dtend_inclus:> : </strong></label>
+	<span dir='#LANG_DIR' class='#EDIT{dtend_inclus} url'>(#DTEND_INCLUS)</span>
+</div>]
+
   #INCLURE{fond=prive/objets/liste/evenements_almanach,env,ajax}
 
 

@@ -5,7 +5,7 @@
  *
  * @plugin import_ics pour SPIP
  * @license GPL
- * 
+ *
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -39,7 +39,8 @@ function genie_import_ics_synchro_dist($t){
 					array(
 						'ete' => $r["decalage_ete"],
 						'hiver' => $r["decalage_hiver"]
-					)
+					),
+					$r['dtend_inclus']
 				);
 				spip_log ("Fin de l'import via génie de l'almanach $id_almanach","import_ics"._LOG_INFO);
 			}

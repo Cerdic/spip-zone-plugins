@@ -28,6 +28,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'decalage_ete_explication' => 'Vous pouvez tenter un décalage global des horaires s’ils n’apparaissent pas à la bonne heure, pour des raisons de fuseaux horaires. La valeur choisie correspond au nombre d’heures à ajouter à l’horaire fournie par le site distant. Ce champ concerne les évènements ayant lieu lorsque l’heure d’été est en vigueur.',
 	'decalage_hiver' => 'Décalage pour l’heure d’hiver',
 	'decalage_hiver_explication' => 'Vous pouvez tenter un décalage global des horaires s’ils n’apparaissent pas à la bonne heure, pour des raisons de fuseaux horaires. La valeur choisie correspond au nombre d’heures à ajouter à l’horaire fournie par le site distant. Ce champ concerne les évènements ayant lieu lorsque l’heure d’hiver est en vigueur.',
+	'dtend_inclus' => 'Le flux ICAL considère que la date de fin est incluse dans l\'évènement',
+	'dtend_inclus_explication' => 'La norme ICAL implique normalement que la date de fin (DTEND) ne soit pas incluse dans l\'évènement. Certains flux ne respectent pas cette norme. Cocher cette case si la date de fin des évènements importés est décalée d\'un jour.',
 
 	// E
 	'erreur_synchro' => 'Erreur à la dernière synchronisation',

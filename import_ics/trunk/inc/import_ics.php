@@ -31,7 +31,7 @@ function trouver_evenements_almanach($id_almanach,$champs='uid,id_evenement',$to
 	return $liens;
 }
 
-function importer_almanach($id_almanach,$url,$id_article,$decalage){
+function importer_almanach($id_almanach,$url,$id_article,$decalage,$dtend_inclus=false){
 	// Début de la récupération des évènements
 	//configuration nécessaire à la récupération
 	$config = array("unique_id"=>"","url"=>$url);
@@ -80,7 +80,7 @@ function importer_almanach($id_almanach,$url,$id_article,$decalage){
 					}
 				}
 			else {
-				importer_evenement($comp,$id_almanach,$id_article,$decalage,$statut,$mots);
+				importer_evenement($comp,$id_almanach,$id_article,$decalage,$statut,$mots,$dtend_inclus);
 			};//l'evenement n'est pas dans la bdd, on va l'y mettre
 		}
 		if (_IMPORT_ICS_DEPUBLIER_ANCIENS_EVTS == 'on' or  lire_config("import_ics/depublier_anciens_evts") == 'on'){
@@ -111,9 +111,9 @@ function depublier_ancients_evts($les_uid_local,$les_uid_distant,$id_article){
 /**
 * Importation d'un événement dans la base
 **/
-function importer_evenement($objet_evenement,$id_almanach,$id_article,$decalage,$statut,$mots){
+function importer_evenement($objet_evenement,$id_almanach,$id_article,$decalage,$statut,$mots,$dtend_inclus=false){
 	$champs_sql = array_merge(
-		evenement_ical_to_sql($objet_evenement,$decalage),
+		evenement_ical_to_sql($objet_evenement,$decalage,$dtend_inclus),
 		array(
 				"id_article"=>$id_article,
 				"date_creation"=>date('Y-m-d H:i:s')
@@ -145,7 +145,7 @@ function importer_evenement($objet_evenement,$id_almanach,$id_article,$decalage,
 /*
 ** Récupérer les propriétés d'un evenements de sorte qu'on puisse en faire la requete sql
 */
-function evenement_ical_to_sql($objet_evenement,$decalage){
+function evenement_ical_to_sql($objet_evenement, $decalage, $dtend_inclus=false){
 		#on recupere les infos de l'evenement dans des variables
 		    $attendee = $objet_evenement->getProperty( "attendee" ); #nom de l'attendee
 		    $lieu = $objet_evenement->getProperty("location");#récupération du lieu
@@ -196,7 +196,9 @@ function evenement_ical_to_sql($objet_evenement,$decalage){
 			// Est-ce que l'evt dure toute la journée?
 			if ($end_all_day and $start_all_day){
 				$horaire = "non";
-				$date_fin = "DATE_SUB('$date_fin', INTERVAL 1 DAY)";// Si un évènement dure toute la journée du premie août, le flux ICAL indique pour DTEND le 2 août (cf http://www.faqs.org/rfcs/rfc2445.html). Par contre le plugin agenda lui dit simplement "evenement du 1er aout au 1er aout, sans horaire". D'où le fait qu'on décale $date_fin par rapport aux flux originel.
+				if (!$dtend_inclus) {
+					$date_fin = "DATE_SUB('$date_fin', INTERVAL 1 DAY)";// Si un évènement dure toute la journée du premie août, le flux ICAL indique pour DTEND le 2 août (cf http://www.faqs.org/rfcs/rfc2445.html). Par contre le plugin agenda lui dit simplement "evenement du 1er aout au 1er aout, sans horaire". D'où le fait qu'on décale $date_fin par rapport aux flux originel.
+				}
 			}
 			else{
 				$horaire = "oui";

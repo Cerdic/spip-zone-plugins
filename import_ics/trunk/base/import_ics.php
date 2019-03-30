@@ -47,6 +47,7 @@ function import_ics_declarer_tables_objets_sql($tables) {
 			"id_article"         => "bigint(21) NOT NULL DEFAULT 0",
 			"decalage_ete"       => "tinyint NOT NULL DEFAULT 0",
 			"decalage_hiver"     => "tinyint NOT NULL DEFAULT 0",
+			"dtend_inclus"       => "varchar(10) DEFAULT '0' NOT NULL",
 			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
 			"statut"             => "varchar(20) DEFAULT '0' NOT NULL",
 			"maj"                => "TIMESTAMP",
@@ -59,8 +60,8 @@ function import_ics_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "titre AS titre, '' AS lang",
 		'date' => "date",
-		'champs_editables'  => array('titre', 'url', 'id_article',"decalage_ete","decalage_hiver"),
-		'champs_versionnes' => array('titre', 'url', 'id_article',"decalage_ete","decalage_hiver"),
+		'champs_editables'  => array('titre', 'url', 'id_article',"decalage_ete","decalage_hiver",'dtend_inclus'),
+		'champs_versionnes' => array('titre', 'url', 'id_article',"decalage_ete","decalage_hiver",'dtend_inclus'),
 		'rechercher_champs' => array(),
 		'tables_jointures'  => array('spip_almanachs_liens'),
 		'statut_textes_instituer' => array(

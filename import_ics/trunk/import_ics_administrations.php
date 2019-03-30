@@ -71,6 +71,9 @@ function import_ics_upgrade($nom_meta_base_version, $version_cible) {
 	$maj["1.0.10"] = array(
 		array('sql_alter',"TABLE spip_almanachs ADD derniere_erreur datetime NOT NULL DEFAULT '0000-00-00 00:00:00'"),
 	);
+	$maj["1.0.11"] = array(
+		array('sql_alter',"TABLE spip_almanachs ADD dtend_inclus varchar(10) DEFAULT '0' NOT NULL"),
+	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

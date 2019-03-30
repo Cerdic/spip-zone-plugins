@@ -1,12 +1,12 @@
 <paquet
 	prefix="import_ics"
 	categorie="date"
-	version="4.4.4"
+	version="4.5.0"
 	etat="stable"
 	compatibilite="[3.0.7;3.2.*]"
 	logo="prive/themes/spip/images/import_ics-64.png"
 	documentation="https://contrib.spip.net/4816"
-	schema="1.0.10"
+	schema="1.0.11"
 >
 	<nom>Import_ics</nom>
 
