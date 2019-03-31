@@ -28,3 +28,16 @@ define ('V_FERME_PHP', ' ?' . "'.'>'");
 include_spip('inc/macrosession_utils');
 include_spip('inc/_session');
 include_spip('inc/_autoriser');
+
+if (!function_exists('debug_get_mode')) {
+	/**
+	 * @param string $part : fonctionnalité testée
+	 * @return bool : si l'argument debug est passé et égal à la fonctionnalité testée
+	 * exemple : if (debug_get_mode('facteur')) echo $expediteur;
+	 */
+	function debug_get_mode($part = '')
+	{
+		return isset($_GET['debug'])
+			and (!$part or ($_GET['debug'] == $part));
+	}
+}
