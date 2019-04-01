@@ -1,11 +1,11 @@
 <paquet
 	prefix="webfonts2"
 	categorie="maintenance"
-	version="0.3.0"
+	version="0.3.1"
 	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/webfonts2-64.png"
-	documentation="https://contrib.spip.net/WebFonts-2"
+	documentation="https://contrib.spip.net/article4961"
 >
 	<nom>Webfonts 2</nom>
 
