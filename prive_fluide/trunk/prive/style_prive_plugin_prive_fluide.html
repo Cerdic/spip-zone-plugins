@@ -111,64 +111,27 @@ body.large {
   ===========
 */
 
-.formulaire_spip .editer {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  padding-left: 10px;
-}
-.formulaire_spip .editer > * {
-  flex: 0 1 40rem;
-}
-.formulaire_spip .editer > label {
-  display: block;
-  margin-left: 0;
-  margin-bottom: 0.25em;
-  float: none;
-}
-.formulaire_spip .editer .explication {
-  display: block;
+.formulaire_spip .editer-groupe {
+  max-width: 45rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.formulaire_spip .edition, /* conteneur markitup */
-.formulaire_spip .choix,
-.formulaire_spip textarea,
-.formulaire_spip input,
-.formulaire_spip select,
-.formulaire_spip .editer > label ~ * {
-  max-width: 40rem;
-  box-sizing: border-box;
+.formulaire_spip .editer.fieldset {
+  margin: 1em 0;
 }
 
-/* Grand écran */
-@media (min-width: 1200px) {
-
+/* Petit écran : tout en pleine largeur (pas mobile-first, car sinon ça peut péter des trucs avec les plugins qui stylent les saisies) */
+@media (max-width: 640px) {
   .formulaire_spip .editer {
-    display: block;
-    padding-left: 15vw; /* padding proportionnel à l'écran pour centrer la saisie */
+    padding-left: 10px;
   }
   .formulaire_spip .editer > label {
-    display: inline;
-    float: left;
-    max-width: calc(15vw - 20px);
-    margin-left: calc(-15vw + 10px);
-  }
-  /* Pleine largeur */
-  .formulaire_spip .editer.pleine_largeur {
-    padding-left: 10px;
-    flex-direction: column;
-  }
-  .formulaire_spip .editer.pleine_largeur > label {
-    float: none;
     display: block;
+    width: 100%;
     margin-left: 0;
     margin-bottom: 10px;
-    max-width: 100%;
   }
-  .formulaire_spip .editer.pleine_largeur > label ~ * {
-    max-width: 100%;
-  }
-
 }
 
 /*
