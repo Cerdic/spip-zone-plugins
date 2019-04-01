@@ -28,6 +28,15 @@ https://developers.google.com/fonts/docs/getting_started#specifying_font_familie
 	<form action="#SELF" class="formulaire_spip preview_params">
 		<div class="editer-group">
 			<div class="editer">
+				<label for="specimen">Spécimen</label>
+				<p>
+					[<a class="spip_out" href="(#PIPELINE{fonts_list}|googlefont_url_specimen)" target="_blank">Voir le spécimen</a>]
+				</p>
+			</div>
+
+		</div>
+		<div class="editer-group">
+			<div class="editer">
 					<label for="preview_text">Texte pour la preview</label>
 					<input type="text" id="preview_text" name="preview_text" value='#ENV{preview_text, '<:webfonts2:default_preview_text:>' }'>
 				</div>
@@ -58,12 +67,10 @@ https://developers.google.com/fonts/docs/getting_started#specifying_font_familie
 			var previewTxt = $('#preview_text').val();
 			var previewFontSize = $('#preview_font_size').val();
 			var preview = $('.preview_params #preview');
-			var infos = $('.preview_params #infos');
 			ajaxReload('fonts', {
 				args:{
 					preview_text: previewTxt,
 					preview_font_size: previewFontSize,
-					infos: (infos[0].checked ? 'oui' : 'non'),
 					preview: (preview[0].checked ? 'oui' : 'non')
 				},
 				history:false
