@@ -35,7 +35,7 @@ function odt2spip_obtenir_commande_serveur($command) {
 		return $commands[$command];
 	}
 
-	exec("which $command", $output, $err);
+	@exec("which $command", $output, $err);
 	if (!$err and count($output) and $cmd = trim($output[0])) {
 		spip_log("Commande '$command' trouvée dans $cmd", 'odtspip.' . _LOG_DEBUG);
 		return $commands[$command] = $cmd;
