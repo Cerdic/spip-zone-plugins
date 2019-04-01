@@ -5,7 +5,6 @@
  * Distribue sous licence GPL
  *
  */
-
 function formulaires_configurer_webfonts2_charger_dist(){
 	$valeurs = array(
 		'methode_insert'=> lire_config('webfonts2/methode_insert'),

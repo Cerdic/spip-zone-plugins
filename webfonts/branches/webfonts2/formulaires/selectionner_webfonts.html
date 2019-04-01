@@ -1,8 +1,8 @@
 [(#REM)<!--
 formulaire_selectionner_webfonts
 
-Squelette 
-(c) 2016 
+Squelette
+(c) 2016
 Distribue sous licence GPL
 
 font
@@ -11,8 +11,15 @@ font
 	variants
 
 -->]
+<BOUCLE_apiKey(CONDITION){si  #CONFIG{webfonts2/googlefonts_api_key}|oui }>
+<h2>Index des polices</h2>
+<p class="explication">
+	Re-génère le fichier index qui peut être utilisé ensuite
+</p>
+[(#BOUTON_ACTION{'Mettre a jour',#URL_ACTION_AUTEUR{webfonts_index,#ID_AUTEUR},''})]
+</BOUCLE_apiKey><//B_apiKey>
 <div class="formulaire_spip formulaire_editer formulaire_#FORM">
-    
+
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 <BOUCLE_test(CONDITION){si #ENV{editable}|oui}>
@@ -21,19 +28,19 @@ font
 		[(#REM)<!-- declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action -->]
 		#ACTION_FORMULAIRE{#ENV{action},#FORM}
-        
+
 		<div class="editer-group">
 			<div class="editer">
 				<label for="font_search">Rechercher une typo</label>
 				<input name="font_search" type="text" value="#ENV{font_search}">
 			</div>
         </div>
-        
+
 		<div class="editer-group">
 			[(#REM)<!--
 			Pour le moment on désactive le tri, car il necessite un appel a l'api
 			a chaque validation du form, on utilisera plutot les tri sur la boucle data d'affichage
-			
+
 			<div class="editer">
 				<label for="sort">Trier par</label>
 				<select name="sort" id="sort">
@@ -61,7 +68,7 @@ font
 				<p class="explication">Une valeur en pixel, em, rem</p>
 				<input type="text" name="preview_font_size" id="preview_font_size"
 					   value="#ENV{preview_font_size,16px}"/>
-					
+
 			</div>
 		</div>
         <div class="editer-group">
@@ -83,7 +90,7 @@ font
       </p>
 	</div>
 </form>
-</BOUCLE_test><//B_test>	
+</BOUCLE_test><//B_test>
 </div>
 
 <INCLURE{fond=inclure/google_font_list}{ajax=fonts}{env}/>
@@ -93,7 +100,7 @@ font
 
 jQuery(function($){
 	$('.formulaire_selectionner_webfonts form').on('submit', function(e){
-			
+
 			ajaxReload('fonts', {
 				args:{
 					category: '#ENV{category}',
@@ -104,9 +111,6 @@ jQuery(function($){
 				history:false
 			});
 	});
-	
+
 });
 </script>
-
-
-

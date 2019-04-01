@@ -1,7 +1,7 @@
 <paquet
 	prefix="webfonts2"
 	categorie="maintenance"
-	version="0.2.7"
+	version="0.3.0"
 	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/webfonts2-64.png"
@@ -20,9 +20,6 @@
 	<pipeline nom="ieconfig_metas" inclure="webfonts2_pipelines.php" />
 
 	<pipeline nom="fonts_list" inclure="webfonts2_pipelines.php" />
-
-	<necessite nom="spip" compatibilite="[3.2.0;["/>
-	<necessite nom="php:curl" />
 
 	<necessite nom="spip_bonux" compatibilite="[3.4.4;["/>
 

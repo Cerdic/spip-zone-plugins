@@ -16,17 +16,17 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @param $webfonts {array} font=>variantes
  * @param $subsets  si besoin une liste de subsets pour la forme mais inutile
- * @return $request url de requète 
- * 
+ * @return $request url de requète
+ *
 */
 function googlefont_request($webfonts,$subsets=''){
 	$subset = '&subset=' ;
 	(strlen($subsets)) ? $subset .= $subsets : $subset = '';
 	foreach($webfonts as $font){
 		$variants = implode(',',$font['variants']);
-		$fonts[] = urlencode($font['family']).':'.$variants;	
+		$fonts[] = urlencode($font['family']).':'.$variants;
 	}
-	
+
 	$fonts = implode('|',$fonts);
 
 	$request = "https://fonts.googleapis.com/css?family=$fonts".$subset;
@@ -67,41 +67,51 @@ function balise_FONT_INDEX_dist($p){
 }
 
 function get_font_index(){
-	lire_fichier(_DIR_TMP.'/googlefont_list.json',$respons);
+	if(file_exists(_DIR_TMP.'/googlefont_list.json')){
+		$index = lire_fichier(_DIR_TMP.'/googlefont_list.json',$respons);
+		spip_log("Lecture du fichier tmp/ $index",'webfonts');
+	}else{
+		$index = lire_fichier(_DIR_PLUGIN_WEBFONTS2.'/json/googlefont_list.json',$respons);
+		spip_log("Lecture du fichier fourni / $index",'webfonts');
+	}
 	return json_decode($respons, true);
 }
 
 /**
  * googlefont_api_get
  *
- * retourne l'index [items] complet de la typothèque via l'API  
+ * retourne l'index [items] complet de la typothèque via l'API
  *
 */
 function googlefont_api_get($api_key,$sort=false,$category=false){
 	// Requète en GET sur //https://www.googleapis.com/webfonts/v1/webfonts?key=_GOOGLE_API_KEY
 	$url = 'https://www.googleapis.com/webfonts/v1/webfonts?key='.$api_key;
 	(strlen($sort)) ? $url .= '&sort='.$sort : $sort = false ;
-	(strlen($category)) ? $url .= '&category='.$category : $category = false;	
-		
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-	curl_setopt($ch, CURLOPT_HEADER, false);
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_REFERER, $url);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-	$result = curl_exec($ch);
-	curl_close($ch);
-	$googlefonts = json_decode($result, true);
-	
-	return $googlefonts['items'];
+	(strlen($category)) ? $url .= '&category='.$category : $category = false;
+	if(extension_loaded('curl')){
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+		curl_setopt($ch, CURLOPT_HEADER, false);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_REFERER, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		$result = curl_exec($ch);
+		curl_close($ch);
+		$googlefonts = json_decode($result, true);
+
+		return $googlefonts['items'];
+	}else{
+		spip_log("L'extension Curl doit être installée !",'webfonts');
+		return false;
+	}
 }
 
 
 /*
  * fontface_declaration
  *
- * 
+ *
 @font-face {
     font-family: 'open_sansitalic';
     src: url('OpenSans-Italic-webfont.eot');
@@ -116,25 +126,25 @@ function googlefont_api_get($api_key,$sort=false,$category=false){
 }
 
 @param $font array family|file|weight|style
-@param $formats array extension|format default 
+@param $formats array extension|format default
 
 */
 
-function fontface_declaration($font, $formats = array('.woff'=>'woff','.woff2'=>'woff2','.ttf'=>'truetype')){ 
-	
+function fontface_declaration($font, $formats = array('.woff'=>'woff','.woff2'=>'woff2','.ttf'=>'truetype')){
+
 	$default = array(
 		'family'=>'Dutissimo',
 		'file'=>'squelettes-dist/polices/dutissimo',
 		'weight'=>'400',
 		'style'=>'normal'
-	);	
+	);
 	$font = array_merge($default,$font);
 	$font_files = '';
 	$i = 1;
 	foreach($formats as $extension => $format){
 		$font_files .="url('".$font['file'].$extension."') format('$format')";
-		($i < count($formats)) ? $font_files .=", " : $font_files .=";";	
-		$i++;		
+		($i < count($formats)) ? $font_files .=", " : $font_files .=";";
+		$i++;
 	}
 
 	$declaration = <<<EOT
@@ -155,7 +165,7 @@ EOT;
  */
 
 function font_sets($fonts) {
-	
+
 }
 
 
@@ -166,7 +176,7 @@ function font_stacks(){
 			'Helvetica' => '"Helvetica Neue", "Helvetica", "Arial", sans-serif',
 			'Lucida' => '"Lucida Grande", "Lucida Sans Unicode", "Geneva", "Verdana", sans-serif',
 			'Verdana' => '"Verdana", "Geneva", sans-serif',
-			'System' => '-apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir", "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans", "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu", "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif',	
+			'System' => '-apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir", "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans", "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu", "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif',
 		],
 		'serif'=> [
 			'Garamond' => '"Garamond", "Baskerville", "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif',

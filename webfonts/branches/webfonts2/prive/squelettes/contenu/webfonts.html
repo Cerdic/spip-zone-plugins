@@ -17,15 +17,14 @@ https://developers.google.com/fonts/docs/getting_started#specifying_font_familie
 
 <BOUCLE_test(CONDITION){si #ENV{webfonts2}|=={'googlefonts'}}>
 	[<div class="ajax">(#FORMULAIRE_SELECTIONNER_WEBFONTS)</div>]
-	
 </BOUCLE_test>
 	<div class="ajax">
 		#FORMULAIRE_CONFIGURER_WEBFONTS2
 	</div>
-	
-	
+
+
 	<h2>Liste des webfonts insérées via la pipeline</h2>
-	
+
 	<form action="#SELF" class="formulaire_spip preview_params">
 		<div class="editer-group">
 			<div class="editer">
@@ -37,7 +36,7 @@ https://developers.google.com/fonts/docs/getting_started#specifying_font_familie
 				<p class="explication">Une valeur en pixel, em, rem</p>
 				<input type="text" name="preview_font_size" id="preview_font_size"
 					   value="#ENV{preview_font_size,16px}"/>
-							
+
 			</div>
 		</div>
 		<div class="editer-group">
@@ -78,7 +77,3 @@ https://developers.google.com/fonts/docs/getting_started#specifying_font_familie
 	});
 	</script>
 <//B_test>
-
-
-
-

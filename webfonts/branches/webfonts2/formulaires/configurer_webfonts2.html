@@ -22,12 +22,14 @@ input#googlefonts_api_key{
 			<fieldset>
 				<legend>Configuration</legend>
 				<div class="editer-group">
-					  <div class="editer googlefonts_api_key obligatoire[ (#ENV**{erreurs}|table_valeur{googlefonts_api}|oui)erreur]">
+					  <div class="editer googlefonts_api_key[ (#ENV**{erreurs}|table_valeur{googlefonts_api_key}|oui)erreur]">
 						  <label for="nom"><:webfonts2:label_googlefonts_api:></label>[
-						  <span class='erreur_message'>(#ENV**{erreurs}|table_valeur{googlefonts_api})</span>
+						  <span class='erreur_message'>(#ENV**{erreurs}|table_valeur{googlefonts_api_key})</span>
 						  ]<p class="explication"><:webfonts2:explication_googlefonts_api:></p>
 						  <input type="text" name='googlefonts_api_key' id='googlefonts_api_key' value="#ENV{googlefonts_api_key}" />
 					  </div>
+				</div>
+				<div class="editer-group">
 					  [(#REM)<!-- méthodes d'insertion standard (balise link ) | @import (balise style) -->]
 					  <div class="editer methode_insert">
 						<label for="methode_insert"><:webfonts2:label_methode_insert:></label>
@@ -66,14 +68,6 @@ input#googlefonts_api_key{
 		</div>
 	</form>]
 </div>
-
-<h2>Index des polices</h2>
-<p class="explication">
-	Pour ne pas faire une requète a l'api par action sur les pages de gestion des typo, on génère in fichier index qui peut être utilisé ensuite
-
-</p>
-[(#BOUTON_ACTION{'Mettre a jour',#URL_ACTION_AUTEUR{webfonts_index,#ID_AUTEUR},''})]
-
 
 <script>
 function split( val ) {

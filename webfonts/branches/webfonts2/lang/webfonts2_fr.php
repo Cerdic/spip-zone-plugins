@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 	// E
-	'explication_googlefonts_api'	=> 'N\'est nécessaire que si vous souhaitez utiliser le formulaire de recherche',
+	'explication_googlefonts_api'	=> 'N\'est nécessaire que si vous souhaitez générer ou mettre a jour le fichier index de googleFont founi avec le plugin',
   'explication_insertion_prive' => 'Utiliser les webfonts dans l\'espace privé',
 	// L
 	'label_googlefonts_api'	=> 'Google Font API Key',

@@ -21,6 +21,16 @@ genre COmic Sans + Times
 
 ## Changelogs
 
+v0.3.0
+
+Le plugin fourni un fichier googlefont_list.json, il n'est plus nécessaire d'avoir une googlefont_api_key, pour pouvoir utiliser :
+
+- la recherche dans le catalogie googlefont.
+- les selecteurgenerique webfonts
+
+l'extension php curl n'est plus necessaire que pour la mise a jour de l'index.
+
+
 v0.2.4 :
 
 - [X] améliorer l'interface de selection : formulaire de fltrages des typos, affichage des résultats
