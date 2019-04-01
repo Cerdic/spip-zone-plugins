@@ -19,18 +19,27 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return $request url de requète
  *
 */
-function googlefont_request($webfonts,$subsets=''){
+function googlefont_request($webfonts,$subsets='',$type='css'){
 	$subset = '&subset=' ;
 	(strlen($subsets)) ? $subset .= $subsets : $subset = '';
 	foreach($webfonts as $font){
 		$variants = implode(',',$font['variants']);
 		$fonts[] = urlencode($font['family']).':'.$variants;
 	}
-
 	$fonts = implode('|',$fonts);
 
-	$request = "https://fonts.googleapis.com/css?family=$fonts".$subset;
+	if($type == 'specimen'){
+		$request = "https://fonts.google.com/selection?selection.family=$fonts";
+	}else{
+		$request = "https://fonts.googleapis.com/css?family=$fonts".$subset;
+	}
+
 	return $request;
+}
+// Renvoie l'url du spécimen sur GooogleFont a partir de la liste des fonts et leur variantes
+// @param $webfonts array
+function googlefont_url_specimen($webfonts){
+	return googlefont_request($webfonts,'','specimen');
 }
 
 /**
