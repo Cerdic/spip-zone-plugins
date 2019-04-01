@@ -27,9 +27,9 @@ function formulaires_selectionner_webfonts_charger_dist(){
 function formulaires_selectionner_webfonts_verifier_dist(){
 
 	$erreurs = array();
-	if(!defined('_GOOGLE_API_KEY') || lire_config('webfonts2/googlefonts_api_key') == '' ) {
-		$erreurs['message_erreur'] = "Pas de API KEY definie";
-	}
+	// if(!defined('_GOOGLE_API_KEY') || lire_config('webfonts2/googlefonts_api_key') == '' ) {
+	// 	$erreurs['message_erreur'] = "Pas de API KEY definie";
+	// }
 
 	if (count($erreurs)) {
 		$erreurs['message_erreur'] = "Une erreur est présente dans votre saisie";
@@ -41,10 +41,9 @@ function formulaires_selectionner_webfonts_traiter_dist(){
 
   ($sort = _request('sort')) ? $sort = _request('sort') : $sort = false;
 	($category = _request('category')) ? $category = _request('category') : $category ;
-	$apiKey = lire_config('webfonts2/googlefonts_api_key');
-	if($apiKey != false) {
 
-		$googlefonts = get_font_index();
+
+	if($googlefonts = get_font_index()) {
 
 		if($font_search = _request('font_search')){
 			$result = google_font_search($googlefonts, _request('font_search'));
@@ -52,13 +51,10 @@ function formulaires_selectionner_webfonts_traiter_dist(){
 			$result = $googlefonts;
 		}
 
-
-		$res = array('message_ok'=>_T('config_info_enregistree'),'editable'=>true);
+		$res = array('message_ok'=>_L('Requète ok'),'editable'=>true);
 	}else{
 		$res = array('message_erreur'=>'Pas de API KEY definie');
 	}
-
-
 
 	return $res;
 }
