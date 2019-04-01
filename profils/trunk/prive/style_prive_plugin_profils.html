@@ -1,0 +1,24 @@
+[(#REM)<style>]#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+/* Tableau d'aperçu de la config */
+.profil #wysiwyg .apercu_config {
+	margin-top: 1em;
+}
+.profil #wysiwyg .apercu_config td {
+	vertical-align: middle;
+}
+.profil #wysiwyg .apercu_config tbody .config_objet {
+	text-align: center;
+	vertical-align: middle;
+	background-color: transparent;
+	border: 1px solid #[(#ENV{claire}|couleur_eclaircir)];
+	border-width: 0 0 1px 0;
+}
+.profil #wysiwyg .apercu_config tbody .config_objet .label {
+	display: block;
+}
+.profil #wysiwyg .apercu_config .config_form {
+	text-align: center;
+}

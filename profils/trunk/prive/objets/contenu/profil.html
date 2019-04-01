@@ -9,26 +9,111 @@
 	<span dir="#LANG_DIR" class="#EDIT{identifiant} identifiant">(#IDENTIFIANT)</span>
 </div>]
 
-[(#REM)
-	Aperçu temporaire faute de mieux
-	On affiche le formulaire du profil pour voir les champs qui ont été configurés, en enlevant le bouton de validation.
-]
-<div class="profil__apercu">
-	<span class="h4">Aperçu du formulaire de ce profil :</span>
-#FORMULAIRE_PROFIL{new,#ID_PROFIL}
-</div>
-<style>
-	.profil__apercu .formulaire_profil .boutons {
-		display: none;
-	}
-	.profil__apercu > span {
-		display: block;
-		margin-top: 2em;
-	}
-</style>
-<script>
-	;jQuery(function($) {
-		$('.profil__apercu .formulaire_profil .boutons').remove();
-	});
-</script>
+[(#REM) Aperçu de la configuration ]
+#SET{config,#CHAMP_SQL**{config}|unserialize}
+<table class="apercu_config">
+	<thead>
+		<tr>
+			<th class="config_objet">Objet</th>
+			<th class="config_champ">Champ/objet lié</th>
+			<th class="config_form config_form_inscription">Inscription</th>
+			<th class="config_form config_form_edition">Édition</th>
+			<th class="config_form config_form_obligatoire">Obligatoire</th>
+		</tr>
+	</thead>
+	<tbody>
+		<BOUCLE_config(DATA) {source table, #LISTE{auteur,organisation,contact}}>
+		#SET{objet,        #VALEUR}
+		#SET{champs,       #GET{config/#GET{objet}}}
+		#SET{coordonnees,  #GET{config/coordonnees/#GET{objet}}}
+		#SET{texte_objet,  #GET{objet}|objet_info{texte_objet}|_T}
+		#SET{texte_groupe, #GET{config/activer_groupe_#GET{objet}}}
+		#SET{texte_auteur, #VAL{profil:champ_groupe_auteur_label}|_T}
+
+		[(#REM) Compter le nb de coordonnees pour le rowspan de ses morts ]
+		#SET{nb_coordonnees,0}
+		<BOUCLE_nb_coordonnees(DATA) {source table, #GET{coordonnees}}>
+		#SET{nb_coordonnees,#GET{nb_coordonnees}|plus{#VALEUR|count}}
+		</BOUCLE_nb_coordonnees>
+
+		[(#REM) Les champs de l'objet ]
+		<BOUCLE_champs(DATA) {source table, #GET{champs}}>
+		#SET{champ,#CLE}
+		[(#REM) Récupérer le label du champ ]
+		<BOUCLE_label(DATA) {source table, #GET{objet}|profils_chercher_saisies_objet}>
+		[(#VALEUR{options/nom}|=={#GET{champ}}|oui)
+		#SET{label,#VALEUR{options/label}}
+		]
+		</BOUCLE_label>
+		<tr>
+			[<td class="config_objet" rowspan="[(#TOTAL_BOUCLE|plus{#GET{nb_coordonnees}})]" title="[(#GET{texte_objet}|attribut_html)]">
+				(#GET{objet}|objet_icone{32}|unique)
+				<label class="label">
+					[(#GET{texte_groupe}|sinon{
+						#GET{objet}|=={auteur}|?{#GET{texte_auteur},#GET{texte_objet}}
+					})]
+				</label>
+			</td>]
+			<td class="config_champ">
+				#GET{label}
+			</td>
+			<td class="config_form config_form_inscription">
+				[(#VAL{inscription}|in_array{#VALEUR}|oui)
+				[(#CHEMIN_IMAGE{ok-16}|balise_img)]
+				]
+			</td>
+			<td class="config_form config_form_edition">
+				[(#VAL{edition}|in_array{#VALEUR}|oui)
+				[(#CHEMIN_IMAGE{ok-16}|balise_img)]
+				]
+			</td>
+			<td class="config_form config_form_obligatoire">
+				[(#VAL{obligatoire}|in_array{#VALEUR}|oui)
+				[(#CHEMIN_IMAGE{ok-16}|balise_img)]
+				]
+			</td>
+		</tr>
+		</BOUCLE_champs>
+
+		[(#REM) Coordonnées ]
+		<BOUCLE_coordonnees(DATA) {source table, #GET{coordonnees}}>
+		#SET{texte_objet_coordonnee,#CLE|objet_type|objet_info{texte_objet}|_T}
+		<BOUCLE_coordonnees_type(DATA) {source table, #VALEUR}>
+		#SET{type,#VALEUR{type}|?{#_coordonnees:CLE|objet_type|coordonnees_lister_types_coordonnees{#VALEUR{type}}}}
+		<tr>
+			[(#GET{champs}|non)
+			[<td class="config_objet" rowspan="[(#GET{nb_coordonnees})]" title="[(#GET{texte_objet}|attribut_html)]">
+					(#GET{objet}|objet_icone{32}|unique)
+				<label class="label">
+					[(#GET{texte_groupe}|sinon{
+						#GET{objet}|=={auteur}|?{#GET{texte_auteur},#GET{texte_objet}}
+					})]
+				</label>
+			</td>]
+			]
+			<td class="config_champ" title="[(#GET{texte_objet_coordonnee}|attribut_html)]">
+				⤷ [(#VALEUR{label}|sinon{#GET{texte_objet_coordonnee}})][ <small>\((#GET{type})\)</small>]
+			</td>
+			<td class="config_form config_form_inscription">
+				[(#VALEUR{inscription}|oui)
+				[(#CHEMIN_IMAGE{ok-16}|balise_img)]
+				]
+			</td>
+			<td class="config_form config_form_edition">
+				[(#VALEUR{edition}|oui)
+				[(#CHEMIN_IMAGE{ok-16}|balise_img)]
+				]
+			</td>
+			<td class="config_form config_form_obligatoire">
+				[(#VALEUR{obligatoire}|oui)
+				[(#CHEMIN_IMAGE{ok-16}|balise_img)]
+				]
+			</td>
+		</tr>
+		</BOUCLE_coordonnees_type>
+		</BOUCLE_coordonnees>
+		</BOUCLE_config>
+	</tbody>
+</table>
+
 </BOUCLE_profil>
