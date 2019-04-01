@@ -27,9 +27,6 @@ function formulaires_selectionner_webfonts_charger_dist(){
 function formulaires_selectionner_webfonts_verifier_dist(){
 
 	$erreurs = array();
-	// if(!defined('_GOOGLE_API_KEY') || lire_config('webfonts2/googlefonts_api_key') == '' ) {
-	// 	$erreurs['message_erreur'] = "Pas de API KEY definie";
-	// }
 
 	if (count($erreurs)) {
 		$erreurs['message_erreur'] = "Une erreur est présente dans votre saisie";
