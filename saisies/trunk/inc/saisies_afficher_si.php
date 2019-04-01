@@ -131,6 +131,7 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 			$pour_html_5 = 	"$sel.obligatoire > input, "// si le afficher_si porte directement sur le input
 							."$sel .obligatoire input, "// si le afficher_si porte sur le fieldset, tous les input dedans sont concernés, quelque soit leur profondeur (ce qui inclut notamment les cas complexe, type radio ou date)
 							."$sel.obligatoire > textarea, "// si le afficher_si porte directement sur le textearea
+							."$sel.obligatoire > .edition textarea, "// si le afficher_si porte directement sur le textearea encapsulé dans un markitup
 							."$sel .obligatoire > textarea, "// si le afficher_si porte sur le fiedset
 							."$sel.obligatoire > select, "//si le afficher_si porte directement sur le select
 							."$sel .obligatoire > select, "//si le afficher_si porte sur le fieldset
