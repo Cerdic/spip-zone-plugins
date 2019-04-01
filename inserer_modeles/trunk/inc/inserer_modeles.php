@@ -22,7 +22,10 @@ function inserer_modeles_lister_formulaires_modeles() {
 			foreach ($liste as $formulaire => $chemin) {
 				$yaml_data = yaml_charger_inclusions(yaml_decode_file($chemin));
 				if (is_array($yaml_data)) {
-					$liste_formulaires_modeles[$formulaire] = yaml_charger_inclusions(yaml_decode_file($chemin));
+					$liste_formulaires_modeles[$formulaire] = array(
+						'nom' => $yaml_data['nom'],
+						'icone_barre' => find_in_path('icones_barre/'.$yaml_data['icone_barre'])
+					);
 				}
 			}
 		}

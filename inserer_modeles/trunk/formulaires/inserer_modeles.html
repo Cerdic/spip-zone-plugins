@@ -44,7 +44,7 @@
 		<BOUCLE_choix(POUR){tableau #ENV{_liste_formulaires_modeles}}{par valeur}>
 		<div class="choix modele">
 			<input type="radio" class="radio" name="formulaire_modele" id="#CLE" value="#CLE" style="vertical-align:top;" />
-			<label for="#CLE">[(#CHEMIN{icones_barre/#VALEUR|table_valeur{icone_barre}}|url_absolue|balise_img)&nbsp;][(#VALEUR|table_valeur{nom}|_T_ou_typo)]
+			<label for="#CLE">[(#VALEUR|table_valeur{icone_barre}|balise_img)&nbsp;][(#VALEUR|table_valeur{nom}|_T_ou_typo)]
 		</div>
 		</BOUCLE_choix>
 		</li>
