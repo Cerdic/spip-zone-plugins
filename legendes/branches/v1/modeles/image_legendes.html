@@ -1,0 +1,62 @@
+[(#REM) 
+	Parametres :
+	-* largeur : de l'image... (largeur originale par defaut)
+	-* hauteur : de l'image... (hauteur originale par defaut)
+	-* editable : si "oui" les notes sont editables, si "non" ou vide les notes sont en lecture seule
+	-* class : classe(s) css à ajouter à la div principale du modele
+	-* bouton_ajouter : expression css cible du bouton perso pour ajouter des notes
+	-* extensions : array des extensions autorisées
+	-* fichier : forcer le fichier à utiliser en arrière plan lors de l'édition des légendes
+]
+<BOUCLE_doc(DOCUMENTS){id_document}{tout}{mode==.*}>
+[(#SET{largeur,#ENV{largeur,#LARGEUR}})]
+[(#SET{hauteur,#ENV{hauteur,#HAUTEUR}})]
+<div class="image_legendes[ (#ENV{class})]">
+[(#EXTENSION|in_array{#ENV{extensions,#ARRAY{0,jpg,1,gif,2,png}}}|?{
+	[(#ENV{fichier,#FICHIER}
+			|image_reduire{#GET{largeur},#GET{hauteur}}
+			|inserer_attribut{class,legendes}
+			|inserer_attribut{id,legende_#ID_DOCUMENT}
+			|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})]
+})]
+
+<p id="nb_notes_#ID_DOCUMENT" class="nb_notes">[(#INCLURE{fond=liste_legende,id_document})]</p>
+
+[(#ENV{editable}|?{
+	#SET{editable,#ENV{editable}}
+	,
+	#SET{editable,#AUTORISER{creerdans,legende,#ID_DOCUMENT}|?{oui}}
+})]
+
+[(#GET{editable}|=={oui}|?{
+	#SET{url_get,legendes_get_edit}
+	,
+	#SET{url_get,legendes_get}
+})]
+
+<script type="text/javascript">
+/*<![CDATA[*/ 
+(function($){
+	var init_notes_#ID_DOCUMENT = function() {
+		$("#legende_#ID_DOCUMENT").annotateImage({
+			editable: [(#GET{editable}|=={oui}|?{'true','false'})],
+			getUrl: "[(#URL_PAGE{#GET{url_get}}|parametre_url{id_document,#ID_DOCUMENT,&})]",
+			editUrl: "#URL_PAGE{editer_legende}",
+			listUrl: "[(#URL_PAGE{liste_legende}|parametre_url{id_document,#ID_DOCUMENT,&})]",
+			listtarget: $('#nb_notes_#ID_DOCUMENT'),
+			[addButton: "(#ENV{bouton_ajouter})",
+			]id_document: "#ID_DOCUMENT",
+			echelle: "[(#ENV{fichier,#FICHIER}|image_reduire{#GET{largeur},#GET{hauteur}}|extraire_attribut{width}|div{#ENV{fichier}|largeur|sinon{#LARGEUR}})]",
+			useAjax: true
+		});
+	}
+	$(window).load(function(){
+		var mq = window.matchMedia("(max-width: [(#GET{largeur})]px)");
+		if (!mq.matches)
+			init_notes_#ID_DOCUMENT();
+	});
+})(jQuery);
+/*]]>*/
+</script>
+</div>
+</BOUCLE_doc>

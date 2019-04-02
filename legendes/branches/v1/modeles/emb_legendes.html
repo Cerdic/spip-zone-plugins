@@ -1,0 +1,8 @@
+<BOUCLE_doc(DOCUMENTS){id_document=#ID}{tout}{mode==.*}>
+[(#MEDIA|=={image}|oui)
+<div class="spip_documents spip_documents_center">
+	[(#MODELE{image_legendes,largeur=#ENV{largeur},hauteur=#ENV{hauteur},env})]
+</div>]
+[(#MEDIA|=={image}|non)
+	[(#MODELE{emb,env})]]
+</BOUCLE_doc>

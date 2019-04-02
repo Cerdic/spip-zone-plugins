@@ -1,0 +1,61 @@
+<plugin>
+	<nom>
+		<multi>
+			[fr]L&#233;gendes
+			[en]Captions
+		</multi>
+	</nom>
+	<slogan>
+		<multi>
+			[fr]L&#233;gender ses photos
+			[en]Add captions on photos
+		</multi>
+	</slogan>
+	<auteur>b_b</auteur>
+	<version>1.1.5</version>
+	<version_base>0.1</version_base>
+	<etat>stable</etat>
+	<prefix>legendes</prefix>
+	<categorie>multimedia</categorie>
+	<description>
+		<multi>
+			[fr]Un plugin pour ajouter des l&#233;gendes &#224; ses images comme sur Flickr. Inspir&#233; de [Fotonotes->http://www.fotonotes.net/] et bas&#233; sur le script [jQuery Image Annotation->http://www.flipbit.co.uk/jquery-image-annotation.html].
+			[en]A plugin to add captions on pictures as Flickr. inspired from [Fotonotes->http://www.fotonotes.net/] and based on the script [jQuery Image Annotation->http://www.flipbit.co.uk/jquery-image-annotation.html].
+		</multi>
+	</description>
+	<licence>GNU/GPL</licence>
+	<icon>images/legendes-128.png</icon>
+	<lien>https://contrib.spip.net/Legendes</lien>
+	<fonctions>legendes_fonctions.php</fonctions>
+	<install>legendes_administrations.php</install>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>legendes_autoriser.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/legendes.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/legendes.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>legendes_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>legendes_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>jqueryui_forcer</nom>
+		<inclure>legendes_pipelines.php</inclure>
+	</pipeline>
+
+ 	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
+	<necessite id="saisies" version="[1.42.11;]" />
+	<necessite id="jqueryui" version="[1.8.2;]" />
+
+	<utilise id="cfg" version="[1.14.4;]" />
+</plugin>

@@ -1,0 +1,6 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type: text/plain; charset=#CHARSET}
+<BOUCLE_legendes(LEGENDES){id_document}{tout} />
+[(#TOTAL_BOUCLE|singulier_ou_pluriel{legendes:msg_yaunenote,legendes:msg_yadesnotes})]
+<//B_legendes>
+#FILTRE{trim}

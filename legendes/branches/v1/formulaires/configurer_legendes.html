@@ -1,0 +1,36 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=legendes -->
+<div class="formulaire_spip formulaire_config formulaire_configurer formulaire_#FORM">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#SELF">
+	<div>
+		#ACTION_FORMULAIRE{SELF}
+			<ul>
+				<li class="fieldset">
+					<fieldset>
+					<h3 class="legend"><:legendes:cfg_legend_statuts:></h3>
+					<p class="explication"><:legendes:explications_statuts_general:></p>
+					<ul>
+						[(#SAISIE{statuts_auteurs,statuts_creerdans,
+							cacher_option_intro=oui,
+							label=<:legendes:autoriser_creerdans:>})]
+						[(#SAISIE{statuts_auteurs,statuts_modifier,
+							cacher_option_intro=oui,
+							label=<:legendes:autoriser_modifier:>})]
+						[(#SAISIE{statuts_auteurs,statuts_supprimer,
+							cacher_option_intro=oui,
+							label=<:legendes:autoriser_supprimer:>})]
+					</ul>
+					</fieldset>
+				</li>
+			</ul>
+			<p class="boutons">
+				<input type="submit" value="<:bouton_enregistrer:>" class="submit" />
+			</p>
+	</div>
+</form>
+</div>
