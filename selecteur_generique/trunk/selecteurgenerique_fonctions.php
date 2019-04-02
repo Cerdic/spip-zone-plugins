@@ -9,7 +9,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function selecteurgenerique_verifier_js($flux){
 	include_spip('plugins/installer');
-	
+
 	$prepjs = "";
 	$prepcss = "ui/";
 	include_spip('inc/plugin');
@@ -75,7 +75,8 @@ if(spip_version_compare($GLOBALS['spip_version_branche'],"3.2.0",'<')) {
 		$functions = find_in_path('javascript/selecteur_generique_functions.js');
  		$contenu .= "<script type='text/javascript' src='$functions'></script>";
 	};
-
+	// Compat jquery.ui legacy
+	if(spip_version_compare($GLOBALS['spip_version_branche'],"3.2.0",'<')) {
 	// Styles
 	/**
 	 * ui.core.css
@@ -84,8 +85,7 @@ if(spip_version_compare($GLOBALS['spip_version_branche'],"3.2.0",'<')) {
 		$ui_css = find_in_path('css/'.$prepcss.'core.css');
  		$contenu .= "<link rel='stylesheet' href='$ui_css' type='text/css' media='all' />";
 	}
-// Compat jquery.ui legacy
-if(spip_version_compare($GLOBALS['spip_version_branche'],"3.2.0",'<')) {
+
 	/**
 	 * On intègre la CSS qui va bien également et ses dépendances
 	 */
@@ -110,8 +110,7 @@ if(spip_version_compare($GLOBALS['spip_version_branche'],"3.2.0",'<')) {
 		/**
 		 * ui.theme.css
 		 */
-		if(strpos($flux,''.$prepcss.'theme.css')===FALSE){
-			$theme_css = find_in_path('css/'.$prepcss.'theme.css');
+		if(strpos($flux,''.$prepcss.'theme.css')===FALSE && $theme_css = find_in_path('css/'.$prepcss.'theme.css')){
  			$contenu .= "<link rel='stylesheet' href='$theme_css' type='text/css' media='all' />";
 		}
 
