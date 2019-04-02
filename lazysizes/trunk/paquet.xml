@@ -1,7 +1,7 @@
 <paquet
 	prefix="lazysizes"
 	categorie="outil"
-	version="4.1.4.2"
+	version="4.1.7.0"
 	schema="0.0.1"
 	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"
@@ -19,8 +19,8 @@
 	<pipeline nom="insert_head" action="insert_head_public" inclure="lazysizes_pipelines.php" />
 	<pipeline nom="header_prive" inclure="lazysizes_pipelines.php" />
 	<pipeline nom="ieconfig_metas" inclure="lazysizes_pipelines.php" />
-	<!-- Pour le moment on utilise pas la nouvelle version  -->
-	<necessite nom="htmlpurifier" compatibilite="[4.9.2.0;4.10.0.1]" />
+
+	<necessite nom="htmlpurifier" compatibilite="[5.0.0.0;[" />
 	<utilise nom="medias" compatibilite="[2.10.38;]" />
 
 </paquet>
