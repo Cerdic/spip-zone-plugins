@@ -27,7 +27,7 @@
 	<p> Page de test et exemple des modèles fournis</p>
 
 
-[(#REM)<!-- 
+[(#REM)<!--
 
 HTML5 Picture
 
@@ -39,7 +39,7 @@ Micro-data et seo pour les galleries d'images :
 http://photoswipe.com/documentation/seo.html
 
 
-Markup picture : avec loader.gif et transition sur l'opactité	
+Markup picture : avec loader.gif et transition sur l'opactité
 Necessite l'activation du plugin lazysizes/respimg dans la config
 
 - preserve le ratio la mise en page/layout
@@ -48,7 +48,7 @@ Necessite l'activation du plugin lazysizes/respimg dans la config
 l'attribut alt doit être renseigné due a un bug Chrome :
 
 
-On renseigne la hauteur / largeur de l'image  ainsi que le ratio pour 
+On renseigne la hauteur / largeur de l'image  ainsi que le ratio pour
 préserver le layout le temps du chargement
 
 https://github.com/aFarkas/lazysizes#tip-specifying-image-dimensions-minimizing-reflows-and-avoiding-page-jumps
@@ -56,9 +56,17 @@ https://github.com/aFarkas/lazysizes#tip-specifying-image-dimensions-minimizing-
 http://www.mademyday.de/css-height-equals-width-with-pure-css.html
 
 -->]
-<h2>le modèle <code>picture</code></h2>
-<BOUCLE_listDocs(DOCUMENTS){tout}{0,10}{extension==jpg|png|gif}>
-[(#INCLURE{fond=modeles/picture}{id_document}{class=media}{env})]
-</BOUCLE_listDocs>
+
+[(#CONFIG{lazysizes/custom_media}|array2table)]
+<main role="main" itemscope itemtype="http://schema.org/Article">
+<article class="article" itemprop="mainEntityOfPage">
+	<h2 itemprop="headline">le modèle <code>picture</code></h2>
+	<BOUCLE_listDocs(DOCUMENTS){id_document ?}{tout}{0,10}{extension==jpg|png|gif}>
+	[(#INCLURE{fond=modeles/picture}{id_document}{class=media}{env})]
+	</BOUCLE_listDocs>
+</article>
+
+
+</main>
 </body>
 </html>

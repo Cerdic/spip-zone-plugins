@@ -20,21 +20,21 @@
 </head>
 <body>
 	<h1>Demo LazySize : base</h1>
-[(#REM)<!-- 
+[(#REM)<!--
 
-Markup standard : avec loader.gif et transition sur l'opactité	
+Markup standard : avec loader.gif et transition sur l'opactité
 <img data-src="#FICHIER" width="#LARGEUR" height="#HAUTEUR" class="lazyload" alt="#TITRE">
-	
+
 -->]
 <BOUCLE_listDocs(DOCUMENTS){tout}{0,100}{extension==jpg|png|gif}>
 <div class="media">
-	<img 	src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+	<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
 			data-src="#FICHIER"
 			width="#LARGEUR"
 			height="#HAUTEUR"
 			class="lazyload" alt="[(#TITRE|attribut_html)]"
 			itemprop="image" >
-</div>	
+</div>
 </BOUCLE_listDocs>
 </body>
 </html>
