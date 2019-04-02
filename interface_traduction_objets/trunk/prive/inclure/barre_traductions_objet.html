@@ -1,0 +1,49 @@
+
+	<B_ld>
+		<div class="onglets_traduction rubriques barre_onglet">
+		<ul>
+		<BOUCLE_ld(DATA){source tableau, #ENV{langues_dispos}}>#SET{creer_racine,''}#SET{alert,''}
+		[(#ENV{langues_traduites}|table_valeur{#VALEUR}|=={#ENV{id_trad}}|oui)#SET{ref_#VALEUR,oui}]
+			[(#VALEUR|array_key_exists{#ENV{langues_traduites}}|?{
+				[(#VALEUR|=={#ENV{lang_objet}}|?{
+					<li class="box_onglet"><strong class="on">[(#GET{ref_#VALEUR}|oui)<div class="ref">*<span><:spip:trad_reference:></span></div>][(#VALEUR|traduire_nom_langue)]</strong></li>
+					,
+					<li class="traduit box_onglet">[(#GET{ref_#VALEUR}|oui)<div class="ref">*<span><:spip:trad_reference:></span></div>]<a href="[(#URL_ECRIRE{#ENV{objet}}|parametre_url{#ENV{id_table_objet},#ENV{langues_traduites}|table_valeur{#VALEUR}})]">[(#VALEUR|traduire_nom_langue)]</a></li>
+					})]
+					,
+				#SET{non_traduits,oui}
+				#SET{id_trad,#ENV{id_trad}}
+				[(#ENV{id_parent}|oui)
+					#SET{parent,''}
+					[(#ENV{objet}|=={rubrique}|oui)#SET{parent,1}]
+					[(#SET{donnees_trad,#VALEUR|rubrique_destination_traduction{#ENV{id_parent},#GET{parent}}})]
+					#SET{id_parent_trad,#GET{donnees_trad}|table_valeur{id_parent_trad}}
+					[(#SET{creer_racine, #GET{donnees_trad}|table_valeur{creer_racine}})]
+
+					#SET{objet,#ENV{objet}}
+					[(#GET{creer_racine}|oui)
+						#SET{alert,class="avis_source"}
+						#SET{id_trad,#GET{donnees_trad}|table_valeur{id_trad}}
+						#SET{objet,rubrique}
+						]
+				]
+				[(#VALEUR|=={#ENV{lang_objet}}|?{
+						<li class="non_traduit box_onglet"><strong class="on">[(#VALEUR|traduire_nom_langue)][(#ENV{ref_#VALEUR}|oui)<span><:spip:trad_reference:></span>]</strong></li>
+						,
+						[(#AUTORISER{creerrubriquedans,rubrique,#GET{id_parent_trad}})<li class="non_traduit box_onglet"><a[ (#GET{alert})]  href="[(#URL_ECRIRE{#GET{objet}|concat{_edit}}|parametre_url{new,oui}|parametre_url{id_parent,#GET{id_parent_trad}}|parametre_url{lang_dest,#VALEUR}|parametre_url{lier_trad,#GET{id_trad}}|parametre_url{trad_new,#ENV{trad_new}}|parametre_url{retour,nav})]">[(#VALEUR|traduire_nom_langue)]</a>#SET{objet,rubrique}</li>]
+						})]
+				})]
+		</BOUCLE_ld>
+		</ul>
+			[(#ENV{voir}|non)<a  class="ajax bouton_options" href="[(#SELF|parametre_url{voir,options})]" title="<:interface_traduction_objets:options:>"><img src="#CHEMIN{prive/themes/spip/images/interface_traduction_objets-32.png}"/></a>]
+			[(#ENV{voir}|oui)<a class="ajax bouton_options" href="[(#SELF|parametre_url{voir,''})]" title="<:interface_traduction_objets:fermer:>"><img src="#CHEMIN{prive/themes/spip/images/interface_traduction_objets-32.png}"/></a>]
+
+		</div>
+	</B_ld>
+[(#ENV{voir}|oui)
+<div class="changer [(#ENV{voir}|?{cadre-e,defaut})]">
+	<div class="ajax">
+	#FORMULAIRE_TRADUIRE{#ENV{objet},#ENV{id_objet},#ENV{retour,''}}
+</div>
+</div>]
+<br class="nettoyeur" />
