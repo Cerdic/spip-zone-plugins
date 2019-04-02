@@ -176,7 +176,7 @@ function saisies_lister_par_type($contenu) {
 
 /**
  * Liste les saisies par étapes s'il y en a
- * 
+ *
  * @param array $saisies
  * 		Liste des saisies
  * @return array|bool
@@ -185,7 +185,7 @@ function saisies_lister_par_type($contenu) {
 function saisies_lister_par_etapes($saisies) {
 	$saisies_etapes = false;
 	$etapes = 0;
-	
+
 	if (isset($saisies['options']['etapes_activer']) and $saisies['options']['etapes_activer']) {
 		// Un premier parcourt pour compter les étapes
 		foreach ($saisies as $cle => $saisie) {
@@ -193,12 +193,12 @@ function saisies_lister_par_etapes($saisies) {
 				$etapes++;
 			}
 		}
-		
+
 		// Seulement s'il y a au moins deux étapes
 		if ($etapes > 1) {
 			$saisies_etapes = array();
 			$compteur_etape = 0;
-			
+
 			// On reparcourt pour lister les saisies
 			foreach ($saisies as $cle => $saisie) {
 				// Si c'est un groupe, on ajoute son contenu à l'étape
@@ -226,7 +226,7 @@ function saisies_lister_par_etapes($saisies) {
 			}
 		}
 	}
-	
+
 	return $saisies_etapes;
 }
 
