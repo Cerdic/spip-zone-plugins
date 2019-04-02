@@ -23,7 +23,7 @@
 #image-annotate-edit-form form label { display: none }
 #image-annotate-edit-form form .editer_texte { margin: 0; }
 #image-annotate-edit-form form .boutons { font-size: 85% }
-.image-annotate-edit-area { display: block; margin: 0; padding: 0 0 2px 0; width: 60px; height: 60px; border: 1px solid #999; position: absolute; top: 10px; left: 10px; cursor: move; }
+.image-annotate-edit-area { display: block; margin: 0; width: 60px; height: 60px; border: 1px solid #999; position: absolute; top: 10px; left: 10px; cursor: move; }
 .image-annotate-edit-area .ui-resizable-handle { opacity: 0.8 }
 .image-annotate-edit .ui-resizable { position: inherit }
 .ui-resizable-handle { position: absolute; font-size: .1px; z-index: 99999; display: block; }
