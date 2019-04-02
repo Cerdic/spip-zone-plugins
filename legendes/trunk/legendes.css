@@ -1,5 +1,5 @@
 /* hop */
-.image-annotate-add { background: #fff url(images/new.png) no-repeat 3px 3px; border: solid 1px #ccc !important; color: #000 !important; display: block; font-family: Verdana, Sans-Serif; font-size: 12px; height: 18px; line-height: 18px; padding: 2px 0 2px 24px; margin: 5px 5px 5px 0; width: 110px; text-decoration: none; }
+.image-annotate-add { background: #fff url(images/new.png) no-repeat 3px 3px; border: solid 1px #ccc !important; color: #000 !important; display: block; font-family: Verdana, Sans-Serif; font-size: 12px; line-height: 18px; padding: 2px 0 2px 24px; margin: 5px 5px 5px 0; width: 130px; text-decoration: none; }
 .image-annotate-add:hover { background-color: #eee }
 .image-annotate-canvas { border: solid 1px #ccc; background-position: left top; background-repeat: no-repeat; display: block; margin: 0; position: relative; }
 .image-annotate-view { display: none; position: absolute; left: 0; top: 0; }
@@ -12,15 +12,16 @@
 .image-annotate-note .note-text p { margin: 2px auto }
 .image-annotate-note .note-text .author { font-style: italic; color: #666; }
 .image-annotate-note .actions { display: block; font-size: 80%; }
-.nb_notes { margin-top: 5px }
+.nb_notes { margin-top: 5px; font-family: Verdana, Sans-Serif; font-size: 12px; }
 .image-annotate-edit { display: none; position: absolute; top: 0; left: 0; }
 .image-annotate-edit .loading { background: #333 url(images/loader.gif) center 50% no-repeat }
-#image-annotate-edit-form { position: absolute; width: 300px; background: #fff; border: 1px solid #ddd; margin-top: 5px; padding: 5px; box-shadow: 1px 1px 10px #333; left: 0; top: 0; }
+#image-annotate-edit-form { position: absolute; max-width: 340px; background: #fff; border: 1px solid #ddd; margin-top: 5px; padding: 5px; box-shadow: 1px 1px 10px #333; left: 0; top: 0; }
 #image-annotate-edit-form form { z-index: 999 }
 #image-annotate-edit-form .formulaire_spip,
-#image-annotate-edit-form form fieldset { margin: 0 }
+#image-annotate-edit-form form fieldset { margin: 0; padding: 0; }
 #image-annotate-edit-form form legend,
 #image-annotate-edit-form form label { display: none }
+#image-annotate-edit-form form .editer_texte { margin: 0; }
 #image-annotate-edit-form form .boutons { font-size: 85% }
 .image-annotate-edit-area { display: block; margin: 0; padding: 0 0 2px 0; width: 60px; height: 60px; border: 1px solid #999; position: absolute; top: 10px; left: 10px; cursor: move; }
 .image-annotate-edit-area .ui-resizable-handle { opacity: 0.8 }
