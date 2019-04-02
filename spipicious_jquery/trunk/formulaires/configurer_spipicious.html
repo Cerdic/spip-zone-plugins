@@ -5,7 +5,7 @@
 	<form method="post" action="#ENV{action}">
 		<div>
 			#ACTION_FORMULAIRE{#ENV{action}}
-			<ul>
+			<[(#DIV|sinon{ul})] class="editer-groupe">
 				[(#SAISIE{statuts_auteurs,people,
 					label=<:spipicious:types_utilisateurs:>,
 					multiple=oui})]
@@ -16,7 +16,7 @@
 					label=<:spipicious:nom_groupe_tag:>})]]
 				[(#GRAND_TOTAL|=={1}|oui)[(#SET{un_groupe_mot,oui})]]
 				</B_groupes>
-			</ul>
+			</[(#DIV|sinon{ul})]>
 			[(#GET{un_groupe_mot}|=={oui}|oui)
 			<input type="hidden" name="groupe_mot" value="#GET{id_groupe}" />]
 			<p class="boutons">
