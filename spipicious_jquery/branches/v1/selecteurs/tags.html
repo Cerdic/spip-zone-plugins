@@ -1,0 +1,33 @@
+#HTTP_HEADER{Content-Type: text/plain; charset=#CHARSET}
+#CACHE{0}
+[(#REM)
+
+	Menu de selection d'un mot a partir d'une valeur passee en parametre
+
+	La reponse est en text simple, elle sera exploitee par jquery.autocomplete.js
+
+]
+[(#REM)
+	Eliminer d'abord les mots deja lies a l'article/breve etc.
+	Attention il FAUT passer un de ces 3 id_xxx en parametre
+]
+
+[(#SET{id_groupe,#CONFIG{spipicious/groupe_mot,1}})]
+#SET{total,0}
+#SET{resultats, #LISTE}
+<BOUCLE_s0(MOTS spipicious){spipicious.id_auteur=#SESSION{id_auteur}}{id_objet=#ENV{id_objet}}{objet=#ENV{objet}}{doublons}> </BOUCLE_s0>
+<BOUCLE_s(MOTS){titre LIKE (#ENV{q})%}{id_groupe = #GET{id_groupe}}{0,20}{par titre}{doublons}>
+#SET{resultats, #GET{resultats}|array_merge{#LISTE{#TITRE*|textebrut}}}
+</BOUCLE_s>
+#SET{total,#GET{total}|plus{#COMPTEUR_BOUCLE}}
+</B_s>
+
+<BOUCLE_s1(MOTS){titre LIKE %(#ENV{q})%}{id_groupe = #GET{id_groupe}}{0,20}{par titre}{doublons}>
+#SET{resultats, #GET{resultats}|array_merge{#LISTE{#TITRE*|textebrut}}}
+</BOUCLE_s1>
+#SET{total,#GET{total}|plus{#COMPTEUR_BOUCLE}}
+</B_s1>
+
+[(#GET{resultats}|json_encode)]
+
+#FILTRE{trim}
