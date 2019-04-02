@@ -14,10 +14,10 @@
 	<fieldset>
 		<legend><:legendes:editer_legende:></legend>
 		<div class="editer-groupe">
-			<div class="editer saisie_texte obligatoire[ (#ENV*{erreurs}|table_valeur{texte}|oui)erreur]">
+			<div class="editer editer_texte obligatoire[ (#ENV*{erreurs}|table_valeur{texte}|oui)erreur]">
 				<label for="texte#ENV{id_legende}"><:legendes:texte_legende:></label>
 				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{texte_legende})</span>]
-				<textarea name="texte" id="texte#ENV{id_legende}" class="no_barre" rows="8" cols="60">#ENV{texte}</textarea>
+				<textarea name="texte" id="texte#ENV{id_legende}" class="no_barre" rows="4" cols="60">#ENV{texte}</textarea>
 			</div>
 		</div>
 	</fieldset>
