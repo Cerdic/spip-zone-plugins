@@ -17,26 +17,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Insertion dans le pipeline insert_head (SPIP)
- * 
- * Insertion du code javascript nécessaire dans le head
- * Pour ce faire, on utilise la fonction dédiée dans le plugin sélecteur générique
- * 
- * @param string $flux
- * 		Le contenu de la balise #INSERT_HEAD
- * @return string $flux
- * 		Le contenu de la balise #INSERT_HEAD modifié
- */
-function spipicious_insert_head($flux){
-	include_spip('inc/autoriser');
-	if(autoriser('tagger_spipicious')){
-		include_spip('selecteurgenerique_fonctions');
-		$flux .= selecteurgenerique_verifier_js($flux);
-	}
-	return $flux;
-}
-
-/**
  * Insertion dans le pipeline insert_head_css (SPIP)
  * 
  * Insertion de la CSS nécessaire dans le head
