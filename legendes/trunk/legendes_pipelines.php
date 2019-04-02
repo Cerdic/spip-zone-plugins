@@ -45,7 +45,7 @@ function legendes_post_edition($flux){
 	/**
 	 * A la modification d'une légende, on met à jour le champs maj du document
 	 */
-	if(($flux['args']['action'] == 'modifier') && ($flux['args']['table'] == 'spip_legendes')){
+	if(($flux['args']['action'] == 'modifier') and ($flux['args']['table'] == 'spip_legendes')){
 		$id_document = sql_getfetsel('id_document','spip_legendes','id_legende='.intval($flux['args']['id_objet']));
 		if(intval($id_document)){
 			include_spip('inc/modifier');
