@@ -1,0 +1,18 @@
+<paquet
+	prefix="trad_rub"
+	categorie="edition"
+	version="2.0.0"
+	etat="stable"
+	compatibilite="[3.0.10;3.2.*]"
+	logo="img_pack/Translation-icon_32.png"
+	documentation="https://contrib.spip.net/Traductions-de-rubriques-autrement-3"
+>
+
+	<nom>Traductions de rubriques autrement</nom>
+	<auteur lien="http://websimple.be">Rainer M&#252;ller</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<necessite nom="secteur_langue" compatibilite="[1.0.0;]" />
+	<necessite nom="interface_traduction_objets" compatibilite="[1.0.0;[" />
+
+</paquet>
