@@ -1,6 +1,6 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 function action_supprimer_legende_dist(){
@@ -15,5 +15,3 @@ function action_supprimer_legende_dist(){
 		legendes_action_supprime_legende($id_legende);
 	}
 }
-
-?>

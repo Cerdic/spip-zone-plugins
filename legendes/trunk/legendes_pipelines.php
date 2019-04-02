@@ -1,6 +1,6 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function legendes_insert_head($flux){
 	$flux .='<script src="'._DIR_PLUGIN_LEGENDES.'javascript/jquery.annotate.js" type="text/javascript"></script>';
@@ -59,5 +59,3 @@ function legendes_post_edition($flux){
 	}
 	return $flux;
 }
-
-?>

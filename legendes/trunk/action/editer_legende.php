@@ -6,7 +6,7 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function action_editer_legende_dist(){
 
@@ -146,5 +146,3 @@ function legendes_action_tourner_legende($id_legende,$angle){
 	return $err;
 
 }
-
-?>

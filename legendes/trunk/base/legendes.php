@@ -1,6 +1,6 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function legendes_declarer_tables_interfaces($interface){
 	// 'spip_' dans l'index de $tables_principales
@@ -37,5 +37,3 @@ function legendes_declarer_tables_principales($tables_principales){
 
 	return $tables_principales;
 }
-
-?>
