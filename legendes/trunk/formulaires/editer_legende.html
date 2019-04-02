@@ -1,5 +1,4 @@
 <div class="ajax formulaire_spip formulaire_editer_legende" id="formulaire_editer_legende#ENV{id_legende,nouveau}">
-<br class="bugajaxie" />
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 [(#ENV{editable})
@@ -14,13 +13,13 @@
 	[<input type="hidden" name="id_document" value="(#ENV*{id_document})" />]
 	<fieldset>
 		<legend><:legendes:editer_legende:></legend>
-		<ul class="editer-groupe">
-			<li class="editer saisie_texte obligatoire[ (#ENV*{erreurs}|table_valeur{texte}|oui)erreur]">
+		<div class="editer-groupe">
+			<div class="editer saisie_texte obligatoire[ (#ENV*{erreurs}|table_valeur{texte}|oui)erreur]">
 				<label for="texte#ENV{id_legende}"><:legendes:texte_legende:></label>
 				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{texte_legende})</span>]
 				<textarea name="texte" id="texte#ENV{id_legende}" class="no_barre" rows="8" cols="60">#ENV{texte}</textarea>
-			</li>
-		</ul>
+			</div>
+		</div>
 	</fieldset>
 	<p class="boutons">
 		<input type="submit" class="submit" name="valider" value="<:bouton_enregistrer:>" />[
