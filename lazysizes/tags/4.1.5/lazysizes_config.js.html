@@ -1,0 +1,21 @@
+[(#HTTP_HEADER{Content-Type: text/javascript; charset=#CHARSET})][
+(#REM)<!--
+
+-->][
+(#SET{options, #ENV{options}})]
+window.lazySizesConfig = window.lazySizesConfig || {};[
+window.lazySizesConfig.lazyClass = '(#GET{options/lazy_class})';][
+window.lazySizesConfig.preloadClass = '(#GET{options/preload_class})';][
+window.lazySizesConfig.loadingClass = '(#GET{options/loading_class})';][
+window.lazySizesConfig.srcAttr = '(#GET{options/src_attr})';][
+window.lazySizesConfig.sizesAttr = '(#GET{options/sizes_attr})';][
+window.lazySizesConfig.srcsetAttr = '(#GET{options/srcset_attr})';][
+(#REM)<!--
+//page is optimized for fast onload event
+//lazySizesConfig.loadMode = 1;
+
+//console.log(lazySizesConfig);
+ DEFAULT-->]
+#SET{custom_media, #GET{options/custom_media}}
+window.lazySizesConfig.customMedia = [(#GET{custom_media}|lazysizes_string2array|json_encode)];
+window.lazySizesConfig.init = false;

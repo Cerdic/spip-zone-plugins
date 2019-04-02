@@ -1,0 +1,86 @@
+<div class="formulaire_spip formulaire_configurer formulaire_configurer_lazysizes_options">
+[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+
+	<fieldset>
+		<legend>LazySize Options</legend>
+		<p class="explication">Options de configuration</p>
+		<div class="editer-groupe">
+			<div class="editer editer_css editer_radio">
+				<label for="lazy_class"><:lazysizes:cfg_label_css:></label>
+				<p class="explication"><:lazysizes:cfg_explication_css:></p>
+				<div class="choix">
+					<input type="checkbox" name="css" class="checkbox" value='on' id='cssn'[(#ENV{css}|oui)checked="checked" ]/>
+					<label for='cssn'>
+						<:lazysizes:cfg_label_css:>
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="editer-groupe">
+			<div class="editer editer_lazy_class">
+				<label for="lazy_class">LazyClass</label>
+				<p class="explication">
+					<code>(lazyload !default)</code> Marqueur pour les éléments qui bénéficierons du chargement différé
+				</p>
+				<input type="text" class="text" name="lazy_class" id="lazy_class" value="#ENV{lazy_class}" />
+			</div>
+			<div class="editer editer_preload_class">
+				<label for="preload_class">preloadClass</label>
+				<p class="explication"><code>(lazypreload !default)</code>
+					Marqueur pour les éléments qui bénéficierons du chargement différé sur l'événement onload
+					(chargement de la page)
+				</p>
+				<input type="text" class="text" name="preload_class" id="preload_class" value="#ENV{preload_class}" />
+			</div>
+			<div class="editer editer_loading_class">
+				<label for="loading_class">loading_class</label>
+				<p class="explication">
+					<code>(lazyloading !default)</code>
+					Classe ajouté dès le début du chargement.
+					Peut être utilisée pour signaler la progression.
+				</p>
+				<input type="text" class="text" name="loading_class" id="loading_class" value="#ENV{loading_class}" />
+			</div>
+			<div class="editer editer_src_attr">
+				<label for="src_attr">srcAttr</label>
+				<p class="explication">
+					<code>(data-src !default)</code>
+					Attribut utilisé comme source du fichier.
+				</p>
+				<input type="text" class="text" name="src_attr" id="src_attr" value="#ENV{src_attr}" />
+			</div>
+			<div class="editer editer_sizes_attr">
+				<label for="sizes_attr">sizesAttr</label>
+				<p class="explication">
+					<code>(data-sizes !default)</code>
+					Attribut utilisé pour l'attribut sizes.
+				</p>
+				<input type="text" class="text" name="sizes_attr" id="sizes_attr" value="#ENV{sizes_attr}" />
+			</div>
+			<div class="editer editer_srcset_attr">
+				<label for="srcset_attr">srcsetAttr</label>
+				<p class="explication">
+					<code>(data-srcset !default)</code>
+					Attribut utilisé pour l'attribut srcset.
+				</p>
+				<input type="text" class="text" name="srcset_attr" id="srcset_attr" value="#ENV{srcset_attr}" />
+			</div>
+			<div class="editer editer_custom_media">
+				<label for="custom_media">Custom Media rules</label>
+				<p class="explication">
+					<code>(data-srcset !default)</code>
+					Raccourcis et Media queries pour
+				</p>
+				<textarea class="textarea" name="custom_media" id="custom_media">[(#ENV{custom_media}|trim)]</textarea>
+			</div>
+		</div>
+	</fieldset>
+	<input type="hidden" name="_meta_casier" value="lazysizes/options" />
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+	</p>
+</div></form>
+</div>

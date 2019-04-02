@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>LazySize : Base</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="#CHEMIN{css/lazysizes.css}">
+	#INSERT_HEAD
+<style>
+.media {
+	width: 100%;
+	padding: 1rem 0;
+	clear: both;
+}
+.media img {
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<h1>Demo LazySize : base</h1>
+[(#REM)<!-- 
+
+Markup standard : avec loader.gif et transition sur l'opactité	
+<img data-src="#FICHIER" width="#LARGEUR" height="#HAUTEUR" class="lazyload" alt="#TITRE">
+	
+-->]
+<BOUCLE_listDocs(DOCUMENTS){tout}{0,100}{extension==jpg|png|gif}>
+<div class="media">
+	<img 	src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+			data-src="#FICHIER"
+			width="#LARGEUR"
+			height="#HAUTEUR"
+			class="lazyload" alt="[(#TITRE|attribut_html)]"
+			itemprop="image" >
+</div>	
+</BOUCLE_listDocs>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<paquet
+	prefix="lazysizes"
+	categorie="outil"
+	version="4.1.4.2"
+	schema="0.0.1"
+	etat="dev"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/lazysizes-32.png"
+	documentation="http://afarkas.github.io/lazysizes/"
+>
+	<nom>LazySizes</nom>
+
+	<auteur lien="https://www.mister-graphx.com">Arnaud B. (Mist. GraphX)</auteur>
+	<credit lien="https://github.com/aFarkas/lazysizes">Lazysizes</credit>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="insert_head_css" action="insert_head_css" inclure="lazysizes_pipelines.php" />
+	<pipeline nom="insert_head" action="insert_head_public" inclure="lazysizes_pipelines.php" />
+	<pipeline nom="header_prive" inclure="lazysizes_pipelines.php" />
+	<pipeline nom="ieconfig_metas" inclure="lazysizes_pipelines.php" />
+	<!-- Pour le moment on utilise pas la nouvelle version  -->
+	<necessite nom="htmlpurifier" compatibilite="[4.9.2.0;4.10.0.1]" />
+	<utilise nom="medias" compatibilite="[2.10.38;]" />
+
+</paquet>

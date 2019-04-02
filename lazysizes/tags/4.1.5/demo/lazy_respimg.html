@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>LazySize : Respimg plugin</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="#CHEMIN{css/lazysizes.css}">
+	#INSERT_HEAD
+<style>
+.media {
+	width: 100%;
+	padding: 1rem 0;
+	clear: both;
+}
+.media img,
+.media picture{
+	width: 100%;
+	height: auto;
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+}
+
+</style>
+</head>
+<body>
+	<h1>Demo LazySize : Respimg plugin</h1>
+	<p> Page de test et exemple de markup,
+	pour l'utilisation de lazysizes come polyfill pour des images responsive et la balise picture
+	</p>
+	<ul>
+	   <li><a href="https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/respimg">https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/respimg</a></li>
+	   <li><a href="https://codepen.io/chriscodeweb/pen/XXyVvX">https://codepen.io/chriscodeweb/pen/XXyVvX</a></li>
+	   <li><a href="http://afarkas.github.io/lazysizes/#examples">http://afarkas.github.io/lazysizes/#examples</a></li>
+	</ul>
+
+[(#REM)<!-- 
+
+HTML5 Picture
+
+https://webdesign.tutsplus.com/tutorials/quick-tip-how-to-use-html5-picture-for-responsive-images--cms-21015
+https://html.spec.whatwg.org/multipage/embedded-content.html#embedded-content
+https://html.spec.whatwg.org/multipage/embedded-content.html#attr-source-sizes
+
+Micro-data et seo pour les galleries d'images :
+http://photoswipe.com/documentation/seo.html
+
+
+Markup picture : avec loader.gif et transition sur l'opactité	
+Necessite l'activation du plugin lazysizes/respimg dans la config
+
+- preserve le ratio la mise en page/layout
+- valid W3C html5
+
+l'attribut alt doit être renseigné due a un bug Chrome :
+
+
+On renseigne la hauteur / largeur de l'image  ainsi que le ratio pour 
+préserver le layout le temps du chargement
+
+https://github.com/aFarkas/lazysizes#tip-specifying-image-dimensions-minimizing-reflows-and-avoiding-page-jumps
+
+http://www.mademyday.de/css-height-equals-width-with-pure-css.html
+
+-->]
+<BOUCLE_listDocs(DOCUMENTS){tout}{0,100}{extension==jpg|png|gif}>
+<!-- calcul du padding	#HAUTEUR / #LARGEUR * 100% -->
+<div class="media ratio-box" style="padding-bottom: [(#VAL{#HAUTEUR}|div{#LARGEUR}|mult{100})%]">
+	<picture>
+		<!--[if IE 9]><video style="display: none;"><![endif]-->
+<!--
+- Le gif transparent encodé en base64
+dans l'attribut src/srcset est ajouté pour la validation
+-->
+		<source srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+			data-srcset="[(#FICHIER|image_reduire{1400}|extraire_attribut{src})]"
+			type="#MIME_TYPE"
+			media="(min-width: 960px)">
+		<source srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+			data-srcset="[(#FICHIER|image_reduire{950}|extraire_attribut{src})]"
+			type="#MIME_TYPE"
+		   media="(min-width: 700px)">
+		<source srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+			data-srcset="[(#FICHIER|image_reduire{500}|extraire_attribut{src})]"
+			type="#MIME_TYPE"
+		   media="(min-width: 480px)"/>
+		<source srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+				data-srcset="[(#FICHIER|image_reduire{400}|extraire_attribut{src})]"
+				type="#MIME_TYPE"
+		   />
+		<!--[if IE 9]></video><![endif]-->
+		<img  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+			  data-src="[(#FICHIER|image_reduire{1400}|extraire_attribut{src})]"
+			  alt="Responsive image test"
+			  data-sizes="auto"
+			  width="#LARGEUR"
+			  height="#HAUTEUR"
+			  type="#MIME_TYPE"
+			  class="lazyload">
+    </picture>
+</div>	
+</BOUCLE_listDocs>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>LazySize : BgSet</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="#CHEMIN{css/lazysizes.css}">
+	#INSERT_HEAD
+<style>
+.media {
+	width: 100%;
+	padding: 1rem 0;
+	clear: both;
+}
+.media img {
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+}
+.cover{
+    background-size: cover;
+}
+
+</style>
+</head>
+<body>
+	<h1>Demo LazySize : bgset</h1>
+	<p></p>
+[(#REM)<!--
+
+Documentation
+https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/bgset
+
+@see  - ne pas se fier aux outils de dev de chrome https://github.com/aFarkas/lazysizes/issues/122
+-->]
+<BOUCLE_listDocs(DOCUMENTS){tout}{0,1}{extension==jpg}{id_document ?}>
+<div class="media">
+	[(#SET{cover_small,#FICHIER|image_reduire{350,0}|extraire_attribut{src}|url_absolue})]
+	[(#SET{cover_medium,#FICHIER|image_reduire{800,0}|extraire_attribut{src}|url_absolue})]
+	[(#SET{cover_large,#FICHIER|image_reduire{1200,0}|extraire_attribut{src}|url_absolue})]
+	<div class="box cover ratio-container lazyload"
+				data-sizes="auto"
+				data-bgset="[(#GET{cover_small})]  [--small] | [(#GET{cover_medium})] [--medium] | [(#GET{cover_large})]"></div>
+</div>
+<div class="media">
+	[(#SET{cover_small,#FICHIER|image_reduire{350,0}|extraire_attribut{src}|url_absolue})]
+	[(#SET{cover_medium,#FICHIER|image_reduire{800,0}|extraire_attribut{src}|url_absolue})]
+	[(#SET{cover_large,#FICHIER|image_reduire{1200,0}|extraire_attribut{src}|url_absolue})]
+	<div class="box cover ratio-container lazyload"
+				data-bgset="[(#GET{cover_small})] 320w,[(#GET{cover_medium})] 700w,[(#GET{cover_large})]"></div>
+</div>
+</BOUCLE_listDocs>
+</body>
+</html>

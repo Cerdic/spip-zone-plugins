@@ -1,0 +1,28 @@
+<div class="formulaire_spip formulaire_configurer formulaire_configurer_lazysizes_addons">
+[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<fieldset>
+		<legend>LazySize Addons</legend>
+		<p class="explication">Addons/plugins LazySize</p>
+		<div class="editer-groupe">
+			<div class="editer editer_lazysizes_addons pleine_largeur">
+				[(#SET{list_addons, #VAL|lazysizes_addons })]
+				<BOUCLE_listLazyAddons(DATA){source table, #GET{list_addons}}>
+				<div class="choix">
+					<:lazysizes:explication_{=#CLE}|propre:>
+					<input type='checkbox' class="checkbox" name='#CLE' value='on' id='#CLE'[ (#ENV{#CLE}|oui)checked="checked")] />
+					<label for='#CLE'>#CLE</label>
+				</div>
+				</BOUCLE_listLazyAddons>
+			</div>
+		</div>
+	</fieldset>
+
+	<input type="hidden" name="_meta_casier" value="lazysizes/addons" />
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+	</p>
+</div></form>
+</div>
