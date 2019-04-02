@@ -20,7 +20,7 @@ function lazysizes_addons() {
 		'custommedia' => 'ls.custommedia',
 		// 'fix-io-sizes' => 'fix-ios-sizes',
 		// 'include' => 'ls.include',
-		'noscript' => 'ls.noscript',
+		// 'noscript' => 'ls.noscript',
 		// 'object-fit' => 'ls.object-fit',
 		// 'optimumx' => 'ls.optimumx',
 		'parent-fit' => 'ls.parent-fit',

@@ -11,15 +11,16 @@
 				[(#SET{list_addons, #VAL|lazysizes_addons })]
 				<BOUCLE_listLazyAddons(DATA){source table, #GET{list_addons}}>
 				<div class="choix">
-					<:lazysizes:explication_{=#CLE}|propre:>
 					<input type='checkbox' class="checkbox" name='#CLE' value='on' id='#CLE'[ (#ENV{#CLE}|oui)checked="checked")] />
 					<label for='#CLE'>#CLE</label>
+					<div class="description">
+						<:lazysizes:explication_{=#CLE}|propre:>
+					</div>
 				</div>
 				</BOUCLE_listLazyAddons>
 			</div>
 		</div>
 	</fieldset>
-
 	<input type="hidden" name="_meta_casier" value="lazysizes/addons" />
 	<p class="boutons">
 		<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
