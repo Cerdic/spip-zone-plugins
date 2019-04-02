@@ -37,6 +37,21 @@ function spipicious_insert_head($flux){
 }
 
 /**
+ * Insertion dans le pipeline insert_head_css (SPIP)
+ * 
+ * Insertion de la CSS nécessaire dans le head
+ * 
+ * @param string $flux
+ * 		Le contenu de la balise #INSERT_HEAD_CSS
+ * @return string $flux
+ * 		Le contenu de la balise #INSERT_HEAD_CSS modifié
+ */
+function spipicious_insert_head_css($flux) {
+	$flux .= "\n<link rel='stylesheet' href='".find_in_path("css/spipicious.css")."' type='text/css' />\n";
+	return $flux;
+}
+
+/**
  * Insertion dans le pipeline optimiser_base_disparus (SPIP)
  * 
  * Supprimer les liens spipicious/objet sur les éléments disparus
