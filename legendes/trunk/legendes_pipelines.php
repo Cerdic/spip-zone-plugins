@@ -17,10 +17,6 @@ function legendes_jqueryui_plugins($plugins){
 	return $plugins;
 }
 
-function legendes_jqueryui_forcer($plugins){
-	return legendes_jqueryui_plugins($plugins);
-}
-
 function legendes_post_edition($flux){
 	// si on tourne un document, tourner les legendes associees
 	if($flux['args']['action']=='tourner'){
