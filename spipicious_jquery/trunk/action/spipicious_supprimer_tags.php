@@ -122,4 +122,3 @@ function spipicious_supprimer_tags($remove_tags,$id_auteur,$id_objet,$type,$id_t
 
 	return array($message,$invalider,'');
 }
-?>

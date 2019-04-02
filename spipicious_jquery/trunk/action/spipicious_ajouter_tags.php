@@ -147,4 +147,3 @@ function spipicious_ajouter_tags($tableau_tags=array(),$id_auteur,$id_objet,$typ
 	}
 	return array($message,$invalider,'');
 }
-?>

@@ -106,4 +106,3 @@ function spipicious_post_edition($flux){
 	}
 	return $flux;
 }
-?>

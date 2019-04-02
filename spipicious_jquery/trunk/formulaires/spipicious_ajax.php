@@ -81,4 +81,3 @@ function formulaires_spipicious_ajax_traiter($id_objet,$type,$retour='') {
 	
 	return array('editable'=>true,'message'=>$message);
 }
-?>

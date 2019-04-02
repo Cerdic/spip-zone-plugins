@@ -159,4 +159,3 @@ function spipicious_id_objet_objet_upgrade () {
 		}
 	}
 }
-?>

@@ -42,5 +42,3 @@ function spipicious_autoriser(){}
 function autoriser_tagger_spipicious_dist($faire, $type, $id, $qui, $opt){
 	return  (in_array($qui['statut'],lire_config('spipicious/people',array('0minirezo'))));
 }
-
-?>

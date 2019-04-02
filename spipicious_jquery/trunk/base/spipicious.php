@@ -68,4 +68,3 @@ function spipicious_declarer_tables_principales($tables_principales){
 
 	return $tables_principales;
 }
-?>
