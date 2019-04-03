@@ -2,43 +2,18 @@
 	prefix="interface_traduction_objets"
 	categorie="edition"
 	version="1.0.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/interface_traduction_objets-64.png"
 	documentation="https://github.com/abelass/interface_traduction_objets"
 >
-	<!--
-		Paquet généré le 2019-03-20 15:47:55
-		(Vous pouvez bien entendu supprimer ces commentaires)
-	-->
 
 	<nom>Interface de traduction pour objets</nom>
 	<!-- Rend la traduction de vos objets encore plus simple -->
 
-	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs -->
 	<auteur>Rainer Müller Müller</auteur>
 
 	<licence>GNU/GPL</licence>
-
-	<!--
-		Exemple de commandes
-		* dependances
-		<utilise nom="saisies" compatibilite="[2.28.0;]" />
-		<lib nom="simplehtmldom" lien="http://chemin_vers_archive.zip" />
-		* pipelines
-		<pipeline nom="autoriser" inclure="interface_traduction_objets_autorisations.php" />
-		<pipeline nom="insert_head" inclure="interface_traduction_objets_pipelines.php" />
-		* declarer un pipeline
-		<pipeline nom="mon_pipeline" action="" />
-		* parents de menus de SPIP :
-				menu_accueil (à éviter), menu_edition, menu_publication,
-				menu_activite, menu_squelette, menu_administration, menu_configuration
-		<menu nom="interface_traduction_objets" titre="interface_traduction_objets:interface_traduction_objets_titre" parent="menu_edition"  icone="images/interface_traduction_objets-16.png" />
-		* parents d'onglets... configuration, plugins, statistiques, ...
-		<onglet nom="interface_traduction_objets" titre="interface_traduction_objets:interface_traduction_objets_titre" parent="configuration" icone="images/interface_traduction_objets-24.png" />
-	-->
-
-
 
 	<pipeline nom="recuperer_fond" inclure="interface_traduction_objets_pipelines.php" />
 	<pipeline nom="header_prive" inclure="interface_traduction_objets_pipelines.php" />
