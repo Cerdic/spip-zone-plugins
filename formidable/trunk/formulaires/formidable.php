@@ -585,7 +585,8 @@ function formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_rep
 		return $contexte;
 	}
 	// On prépare des infos si jamais on a des champs fichiers
-	$saisies_fichiers = saisies_lister_avec_type($contexte['_saisies'], 'fichiers');// les saisies de type fichier
+	$saisies = unserialize($contexte['_formidable']['saisies']);
+	$saisies_fichiers = saisies_lister_avec_type($saisies, 'fichiers');// les saisies de type fichier
 	$fichiers = array();
 	$id_formulaire = $contexte['_formidable']['id_formulaire'];
 
