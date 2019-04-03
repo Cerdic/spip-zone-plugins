@@ -13,11 +13,19 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-
+/**
+ * Ajouter des contenus dans la partie <head> des pages de l’espace privé.
+ *
+ * @param array $flux
+ *   Données du pipeline.
+ *
+ * @return
+ *   Données du pipelin.
+ */
 function secteur_langue_header_prive($flux) {
 	$flux .='
 	<script type="text/javascript">
-		$(document).ready( function() {
+		$(document).ready(function() {
 			$(".avis_source").click( function() {
 				javascript:alert("'._T('secteur_langue:avis_rubrique_source').'");
 			});
@@ -38,7 +46,7 @@ function secteur_langue_header_prive($flux) {
  *   Les données du pipeline
  *
  * @return array
- *   Les donées du pipeleine.
+ *   Les données du pipeleine.
  */
 function secteur_langue_pre_edition($flux) {
 	$table = $flux['args']['table'];

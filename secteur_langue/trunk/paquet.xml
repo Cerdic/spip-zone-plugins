@@ -2,7 +2,7 @@
 	prefix="secteur_langue"
 	categorie="navigation"
 	version="1.0.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/secteur_langue-64.png"
 	documentation="https://github.com/abelass/secteur_langue"
@@ -11,12 +11,9 @@
 	<nom>Secteur par langue</nom>
 	<!-- Spip multilingue avec un secteur par langue -->
 
-	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs -->
 	<auteur lien='https://web-simple.eu'>Rainer Müller</auteur>
 
 	<licence>GNU/GPL v3</licence>
-
-
 
 	<necessite nom="tradrub" compatibilite="[3.1.3;[" />
 
