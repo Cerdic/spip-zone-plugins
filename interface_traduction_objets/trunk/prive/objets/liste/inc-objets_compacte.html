@@ -1,5 +1,4 @@
 #SET{picto,#ENV{objet}|objet_icone{16}}
-
 <B_objets>
 #ANCRE_PAGINATION
 <div class="liste-objets [(#ENV{objets})]">
@@ -12,6 +11,12 @@
 			]
 			<th class='picto' scope='col'></th>
 			<th class='titre principale' scope='col'><:info_titre:></th>
+			[(#ENV{champ_auteur}|oui)
+			<th class='auteur' scope='col'><:auteur:></th>
+			]
+			[(#ENV{champ_date}|oui)
+			<th class='date' scope='col'><:date:></th>
+			]
 			<th class='id' scope='col'><:info_numero_abbreviation:></th>
 			<th class='trad'><:interface_traduction_objets:traductions:></th>
 		</tr>
@@ -19,7 +24,7 @@
 	<tbody>
 	<BOUCLE_objets(DATA){source tableau,#ENV{donnees}}{pagination #ENV{nb,10}}>
 		#SET{class, #COMPTEUR_BOUCLE|alterner{row_odd,row_even}}
-		<INCLURE{fond=prive/objets/liste/inc-objets_row,id=#VALEUR{id},class=#GET{class},rang,trads=oui,picto=#GET{picto},env} />
+		<INCLURE{fond=prive/objets/liste/inc-objets_row,id,date,class=#GET{class},picto=#GET{picto},env} />
 	</BOUCLE_objets>
 	[(#REM|changer_typo)]
 	</tbody>

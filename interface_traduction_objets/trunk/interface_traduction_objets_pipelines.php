@@ -139,6 +139,7 @@ function interface_traduction_objets_recuperer_fond($flux) {
 		$contexte['table_objet_sql'] = $table_objet_sql;
 		$contexte['id_table_objet'] = $id_table_objet;
 		$contexte['champs'] = $desc['field'];
+
 		$champ = [$id_table_objet . ' as id'];
 		$from = $table_objet_sql;
 		$where = [];
@@ -146,6 +147,33 @@ function interface_traduction_objets_recuperer_fond($flux) {
 		$left_join = [];
 		$join = '';
 
+		/*
+		* Affichage de champs supplémentaires
+		*/
+
+		$auteur = sql_getfetsel('id_auteur', 'spip_auteurs_liens', 'objet LIKE' . sql_quote($objet));
+
+		if ($auteur) {
+			$contexte['champ_auteur'] = TRUE;
+		}
+
+		// Existence d'un champ date.
+		$champ_date = '';
+		if (isset($desc['date']) and $desc['date']) {
+			$champ_date = $desc['date'];
+		} elseif (isset($desc['field']['date'])) {
+			$champ_date = 'date';
+		}
+		if ($champ_date) {
+			$contexte['champ_date'] = $champ_date;
+			$champ[] = $champ_date . ' as date';
+		}
+
+		/*
+		* Des requêtes conditionnelles dépendant du contexte.
+		*/
+
+		// Page auteur.
 		if (isset($contexte['id_auteur'])) {
 			if (isset($desc['field']['id_auteur'])) {
 				$where[] = 'id_auteur=' . $contexte['id_auteur'];
@@ -156,6 +184,7 @@ function interface_traduction_objets_recuperer_fond($flux) {
 			}
 		}
 
+		// Page mot clé.
 		if (isset($contexte['id_mot'])) {
 			$left_join[] = 'spip_mots_liens';
 			$where[] = 'spip_mots_liens.objet LIKE ' . sql_quote($objet) . ' AND spip_mots_liens.id_mot=' . $contexte['id_mot'];
@@ -169,10 +198,11 @@ function interface_traduction_objets_recuperer_fond($flux) {
 			}
 		}
 
-
+		// Si on est dans une rubrique on prend les objets de la rubrique
 		if (isset($contexte['id_rubrique'])) {
 			$where[] = $table_objet_sql . '.id_rubrique=' . $contexte['id_rubrique'];
 		}
+		// Sinon on prend les objets non traduits et ceux de références si traduit.
 		else {
 			$objets = sql_allfetsel(
 				'id_trad,' . $id_table_objet,
@@ -200,6 +230,7 @@ function interface_traduction_objets_recuperer_fond($flux) {
 			$where[] = $table_objet_sql . '.' .$id_table_objet . ' IN (' . implode(',', $id_objets) . ')';
 		}
 
+		// On passe le résultat de la requête dans le contexte.
 		$contexte['donnees'] = sql_allfetsel($champ, $from . $join, $where, '', id_table_objet($objet) . ' desc');
 
 		$flux['texte'] = recuperer_fond('prive/objets/liste/objets_compacte', $contexte);

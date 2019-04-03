@@ -13,6 +13,7 @@
 					,
 				#SET{non_traduits,oui}
 				#SET{id_trad,#ENV{id_trad}}
+				#SET{objet,#ENV{objet}}
 				[(#ENV{id_parent}|oui)
 					#SET{parent,''}
 					[(#ENV{objet}|=={rubrique}|oui)#SET{parent,1}]
@@ -20,7 +21,6 @@
 					#SET{id_parent_trad,#GET{donnees_trad}|table_valeur{id_parent_trad}}
 					[(#SET{creer_racine, #GET{donnees_trad}|table_valeur{creer_racine}})]
 
-					#SET{objet,#ENV{objet}}
 					[(#GET{creer_racine}|oui)
 						#SET{alert,class="avis_source"}
 						#SET{id_trad,#GET{donnees_trad}|table_valeur{id_trad}}
