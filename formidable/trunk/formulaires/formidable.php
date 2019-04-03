@@ -575,7 +575,7 @@ function formulaires_formidable_fichiers($id, $valeurs = array(), $id_formulaire
  * @param bool $ok
  *     La reponse existe bien ?
  * @return array $contexte
- *     Contexte complète des nouvelles informations
+ *     Contexte complété des nouvelles informations
  *
  **/
 function formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, &$ok) {
