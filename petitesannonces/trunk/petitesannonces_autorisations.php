@@ -7,7 +7,7 @@ if (!defined("_ECRIRE_INC_VERSION")) {return;}
  */
 function petitesannonces_autoriser() { }
 
-// si la fonction suivante est utilisée par un autre plugin, il faut la deplacer dans config/mes_options.php et surcharger ledit plugin
+// placer cette fonction dans config/mes_options.php
 /**
  * Autorisation de créer un article dans une rubrique $id
  *
@@ -21,20 +21,20 @@ function petitesannonces_autoriser() { }
  * @param  array $opt Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
  **/
-function autoriser_rubrique_creerarticledans($faire, $type, $id, $qui, $opt) {
-	if ($type=="rubrique") $table_type="spip_rubriques";
-	
-	//SI composition=petitesannonces
-	$id_rubrique_en_petitesannonces = sql_getfetsel("id_rubrique", $table_type, "id_rubrique=".intval($id)." and composition='petitesannonces'");
-	if (!empty($id_rubrique_en_petitesannonces)){
-		return ($id and autoriser('voir', 'rubrique', $id) and  in_array($qui['statut'], array('0minirezo', '1comite','6forum')));
-	} else { // SINON (cas général)
-		return
-			$id
-			and autoriser('voir', 'rubrique', $id)
-			and autoriser('creer', 'article');
-	}
-}
+// function autoriser_rubrique_creerarticledans($faire, $type, $id, $qui, $opt) {
+// 	if ($type=="rubrique") $table_type="spip_rubriques";
+// 	
+// 	//SI composition=petitesannonces
+// 	$id_rubrique_en_petitesannonces = sql_getfetsel("id_rubrique", $table_type, "id_rubrique=".intval($id)." and composition='petitesannonces'");
+// 	if (!empty($id_rubrique_en_petitesannonces)){
+// 		return ($id and autoriser('voir', 'rubrique', $id) and  in_array($qui['statut'], array('0minirezo', '1comite','6forum')));
+// 	} else { // SINON (cas général)
+// 		return
+// 			$id
+// 			and autoriser('voir', 'rubrique', $id)
+// 			and autoriser('creer', 'article');
+// 	}
+// }
 
 
 /**
