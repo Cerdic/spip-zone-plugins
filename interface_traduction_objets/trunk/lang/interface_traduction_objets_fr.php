@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/interface_traduction_objets/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
-	'info_desactiver_interface_traduction' => 'Désactiver l\'interface de traduction',
+	'info_desactiver_interface_traduction' => 'Désactiver l’interface de traduction',
 	'info_desactiver_liste_compacte' => 'Désactiver les listes compactes',
 	'interface_traduction_objets_titre' => 'Interface de traduction pour objets',
 
