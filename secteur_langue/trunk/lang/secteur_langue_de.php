@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de https://trad.spip.net/tradlang_module/tra?lang_cible=de
+// extrait automatiquement de https://trad.spip.net/tradlang_module/secteur_langue?lang_cible=de
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -10,5 +10,5 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'avis_rubrique_source' => 'Sie müssen zuerst die darunterliegenden Rubriken übersetzen',
+	'avis_rubrique_source' => 'Sie müssen zuerst die darunterliegenden Rubriken übersetzen'
 );
