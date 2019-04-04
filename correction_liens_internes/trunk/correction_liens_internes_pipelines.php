@@ -87,7 +87,6 @@ function correction_liens_internes_correction($texte){
 	if ($domaines = correction_liens_internes_autres_domaines()) {
 		$domaines_origine = $domaines;
 		$domaines = array_unique(array_merge(array(url_de_base()), $domaines));
-		// array_walk($domaines, function(&$v) { $v = preg_quote($v); });
 		array_walk($domaines, create_function('&$v', '$v = preg_quote($v, "#");'));
 		$url_site = '(?:' . join('|',$domaines) . ')';
 	} else {
