@@ -26,6 +26,11 @@ function interface_traduction_objets_recuperer_fond($flux) {
 	$contexte = $flux['args']['contexte'];
 	$fond = $flux['args']['fond'];
 
+	// Enlever le lien traduction dans le formulaire traduire
+	if ($fond == 'formulaires/traduire') {
+		$flux['data']['texte'] = preg_replace('/(<div\sclass="new_trad)([^<]|<.+>.*<\/.+>)+(<\/div>)/i', '', $flux['data']['texte']);
+	}
+
 	//Insertion des onglets de langue
 	if (strpos($fond, 'prive/squelettes/contenu/') !== false AND
 		$objet = _request('exec') AND
@@ -151,8 +156,8 @@ function interface_traduction_objets_recuperer_fond($flux) {
 		* Affichage de champs supplémentaires
 		*/
 
+		// Les auteurs liés s'il y en a en moins un.
 		$auteur = sql_getfetsel('id_auteur', 'spip_auteurs_liens', 'objet LIKE' . sql_quote($objet));
-
 		if ($auteur) {
 			$contexte['champ_auteur'] = TRUE;
 		}
@@ -202,8 +207,11 @@ function interface_traduction_objets_recuperer_fond($flux) {
 		if (isset($contexte['id_rubrique'])) {
 			$where[] = $table_objet_sql . '.id_rubrique=' . $contexte['id_rubrique'];
 		}
-		// Sinon on prend les objets non traduits et ceux de références si traduit.
-		else {
+
+
+		// Si pas dans une rubrique ou secteur_langue pas activé,
+		// on prend les objets non traduits et ceux de références si traduit.
+		if (!isset($contexte['id_rubrique']) OR !test_plugin_actif('secteur_langue')){
 			$objets = sql_allfetsel(
 				'id_trad,' . $id_table_objet,
 				$from . $join,
@@ -215,18 +223,16 @@ function interface_traduction_objets_recuperer_fond($flux) {
 			foreach ($objets AS $row) {
 				$id_trad = $row['id_trad'];
 				$id_objet = $row[$id_table_objet];
-				if ($id_trad > 0) {
+				if ($id_trad > 0 AND $id_trad == $id_objet) {
 					$id_objets[$id_trad] = $id_objet;
 				}
-				else {
+				elseif ($id_trad == 0) {
 					$id_objets[$id_objet] = $id_objet;
 				}
 			}
-
-			if (count($id_objet) == 0) {
+			if (count($id_objets) == 0) {
 				$id_objets = [-1];
 			}
-
 			$where[] = $table_objet_sql . '.' .$id_table_objet . ' IN (' . implode(',', $id_objets) . ')';
 		}
 
@@ -260,6 +266,19 @@ function interface_traduction_objets_formulaire_charger($flux) {
 		}
 		if (isset($flux['data']['lang_dest'])) {
 			$flux['data']['_hidden'] .= '<input type="hidden" name="lang_dest" value="' . $flux['data']['lang_dest'] . '"/>';
+		}
+	}
+
+	if ($form == 'traduire') {
+		// Rendre le changement de langue possible si pas dans rubrique
+		// ou si dans rubrique sans que secteur_langue soit activé
+		if (!isset($flux['data']['id_rubrique']) OR
+			(
+				isset($flux['data']['id_rubrique']) AND !test_plugin_actif('secteur_langue')
+			)
+		) {
+			$flux['data']['editable'] = TRUE;
+			$flux['data']['_langue'] = $flux['data']['langue'];
 		}
 	}
 

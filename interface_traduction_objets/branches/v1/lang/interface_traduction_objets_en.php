@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de https://trad.spip.net/tradlang_module/taa?lang_cible=en
+// extrait automatiquement de https://trad.spip.net/tradlang_module/interface_traduction_objets?lang_cible=en
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -8,9 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
-	// F
-	'fermer' => 'Close',
 
 	// O
 	'options' => 'Modify the language options',
@@ -20,5 +17,4 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// V
 	'voir_traductions' => 'View the details of the translations'
-
 );
