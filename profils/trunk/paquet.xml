@@ -1,7 +1,7 @@
 <paquet
 	prefix="profils"
 	categorie="auteur"
-	version="1.4.2"
+	version="1.4.3"
 	schema="1.0.0"
 	etat="stable"
 	compatibilite="[3.2.0;3.2.*]"

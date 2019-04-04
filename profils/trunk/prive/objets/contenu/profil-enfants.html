@@ -1,3 +1,8 @@
+<a name="comptes_profil"></a>
+[(#FORMULAIRE_RECHERCHE_ECRIRE{#SELF|ancre_url{comptes_profil}})]
+
+<div class="nettoyeur"></div>
+
 <INCLURE{fond=prive/objets/liste/profils_comptes, sinon=<:profil:comptes_aucun:>, env, ajax} />
 
 [(#URL_ECRIRE{auteur_profil_edit,new=oui&id_profil=#ENV{id_profil}}|icone_verticale{<:profil:comptes_creer:>,profil-24,add,right})]
