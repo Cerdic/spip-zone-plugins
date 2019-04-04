@@ -14,7 +14,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function correction_liens_internes_pre_edition($flux){
 	if ($flux['args']['action'] == 'modifier') {
 		foreach ($flux['data'] as $champ => $valeur) {
-			$flux['data'][$champ] = correction_liens_internes_correction($valeur);
+			if ($champ != 'virtuel') {
+				$flux['data'][$champ] = correction_liens_internes_correction($valeur);
+			} else {
+				$flux['data'][$champ] = correction_liens_internes_correction($valeur, false);
+			}
 		}
 	}
 	return $flux;
@@ -74,11 +78,12 @@ function correction_liens_internes_correction_url_public($mauvaise_url, $composa
 /**
  * Parse un texte, à la recherche des liens erronnées, et les corriges
  * @param string $texte
+ * @param bool $raccourci_spip=true si on doit tester la présence du raccourci [->], false si on remplace directement les urls même hors raccourcis SPIP
  * @return string le texte modifié
  **/
-function correction_liens_internes_correction($texte){
+function correction_liens_internes_correction($texte, $raccourci_spip = true){
 	// pas de liens, on s'en va...
-	if (!is_string($texte) || strpos($texte, '->') === false) {
+	if (!is_string($texte) || (strpos($texte, '->') === false && $raccourci_spip )) {
 		return $texte;
 	}
 
@@ -98,7 +103,11 @@ function correction_liens_internes_correction($texte){
 	$match = array();
 	$objet = '';
 	$id_objet = 0;
-	preg_match_all("#\[.*->($url_site.*)\]#U", $texte, $match, PREG_SET_ORDER);
+	if ($raccourci_spip) {
+		preg_match_all("#\[.*->($url_site.*)\]#U", $texte, $match, PREG_SET_ORDER);
+	} else {
+		preg_match_all("#($url_site.*(\s)?)#", $texte, $match, PREG_SET_ORDER);
+	}
 	include_spip("inc/urls");
 
 	foreach($match as $lien) {
