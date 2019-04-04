@@ -1,7 +1,7 @@
 <paquet
 	prefix="espaces"
 	categorie="divers"
-	version="1.0.5"
+	version="1.0.6"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/espaces-64.png"
@@ -13,7 +13,6 @@
 	<nom>Espaces</nom>
 	<!-- Gestion d&#039;espaces -->
 
-	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs -->
 	<auteur lien='https://websimple.be'>Rainer Müller</auteur>
 
 	<credit lien='https://www.flaticon.com'>icônes par www.flaticon.com</credit>
@@ -22,7 +21,6 @@
 
 	<traduire module="espace" reference="fr" gestionnaire="salvatore" />
 	<traduire module="espaces" reference="fr" gestionnaire="salvatore" />
-	<traduire module="paquet-espaces" reference="fr" gestionnaire="salvatore" />
 
 	<necessite nom="saisies" compatibilite="[3.14.0;]" />
 
@@ -31,6 +29,7 @@
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/espaces.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/espaces.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/espaces.php" />
+
 	<pipeline nom="affiche_milieu" inclure="espaces_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="espaces_pipelines.php" />
 
