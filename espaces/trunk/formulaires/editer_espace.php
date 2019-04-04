@@ -70,6 +70,9 @@ function formulaires_editer_espace_identifier_dist($id_espace = 'new', $retour =
 function formulaires_editer_espace_charger_dist($id_espace = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
   $valeurs = formulaires_editer_objet_charger('espace', $id_espace, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
 
+  // Eviter d'associer un auteur.
+  $valeurs['_hidden'] .= '<input type="hidden" name="id_auteur" value="" />';
+
   // Publier directement
   if ($id_espace == 'oui') {
     $valeurs['_hidden'] .= '<input type="hidden" name="statut" value="publie" />';
