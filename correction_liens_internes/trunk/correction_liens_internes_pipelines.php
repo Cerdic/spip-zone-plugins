@@ -82,8 +82,6 @@ function correction_liens_internes_correction($texte){
 		return $texte;
 	}
 
-	// alias historiques
-	static $racc = array('article' => '', 'auteur' => 'aut', 'rubrique' => 'rub', 'breve' => 'br');
 
 	// traiter d'autre domaines ?
 	if ($domaines = correction_liens_internes_autres_domaines()) {
@@ -107,40 +105,55 @@ function correction_liens_internes_correction($texte){
 	foreach($match as $lien) {
 		$mauvais_raccourci = $lien[0];
 		$mauvaise_url = $lien[1];
-		$mauvaise_url_reelle = str_replace($domaines_origine, url_de_base(), $mauvaise_url);
-		$composants_url = parse_url($mauvaise_url_reelle);
-		// Url copiée depuis le privé ou depuis le public?
-		if (strrpos($composants_url['path'],_DIR_RESTREINT_ABS)!=false){
-			list ($objet, $id_objet,$ancre) = correction_liens_internes_correction_url_prive($mauvaise_url,$composants_url);
-		}
-		else{
-			list ($objet, $id_objet,$ancre) = correction_liens_internes_correction_url_public($mauvaise_url_reelle,$composants_url);
-		}
-		if (!$objet && !$id_objet && strpos($mauvaise_url_reelle, str_replace(_DIR_RACINE, '', _DIR_IMG)) != false) {
-			$url_doc = str_replace(array(url_de_base(), str_replace(_DIR_RACINE, '', _DIR_IMG)), '', $mauvaise_url_reelle);
-			$id_objet = sql_getfetsel('id_document', 'spip_documents', 'fichier='.sql_quote($url_doc));
-			$objet = 'document';
-		}
-		if($objet && $id_objet){
-			if(isset($racc[$objet])){
-				$objet = $racc[$objet];
-			}
-			// Exception historique : sites, cf https://core.spip.net/issues/4283
-			if ($objet === 'site') {
-				if (!defined('_CORRECTION_LIENS_INTERNES_LIEN_SITES'))
-					define('_CORRECTION_LIENS_INTERNES_LIEN_SITES', 'site');
-				$objet = _CORRECTION_LIENS_INTERNES_LIEN_SITES;
-			}
-			$bonne_url  = $objet . $id_objet . $ancre;
+		$bonne_url = correction_liens_internes_trouver_bonne_url($mauvaise_url, $domaines_origine);
+		if ($bonne_url) {
 			$bon_raccourci = str_replace($mauvaise_url, $bonne_url, $mauvais_raccourci);
-			$texte = str_replace($mauvais_raccourci, $bon_raccourci, $texte);
-			spip_log(self() . (_request('self')?' / '._request('self'):'')  //pour crayons notamment...
-							. " : $mauvais_raccourci => $bon_raccourci", 'liens_internes.' . _LOG_AVERTISSEMENT);
 		}
+		$texte = str_replace($mauvais_raccourci, $bon_raccourci, $texte);
+		spip_log(self() . (_request('self')?' / '._request('self'):'')  //pour crayons notamment...
+			. " : $mauvais_raccourci => $bon_raccourci", 'liens_internes.' . _LOG_AVERTISSEMENT);
 	}
 	return $texte;
 }
 
+/**
+ * Trouver la bonne url a partir de la mauvaise
+ * @param string $mauvaise_url la mauvaise url
+ * @param array $domaines_origine les domaines
+ * @return string la bonne url
+**/
+function correction_liens_internes_trouver_bonne_url($mauvaise_url, $domaines_origine) {
+	// alias historiques
+	static $racc = array('article' => '', 'auteur' => 'aut', 'rubrique' => 'rub', 'breve' => 'br');
+	$bonne_url = '';
+	$mauvaise_url_reelle = str_replace($domaines_origine, url_de_base(), $mauvaise_url);
+	$composants_url = parse_url($mauvaise_url_reelle);
+	// Url copiée depuis le privé ou depuis le public?
+	if (strrpos($composants_url['path'],_DIR_RESTREINT_ABS)!=false){
+		list ($objet, $id_objet,$ancre) = correction_liens_internes_correction_url_prive($mauvaise_url,$composants_url);
+	}
+	else{
+		list ($objet, $id_objet,$ancre) = correction_liens_internes_correction_url_public($mauvaise_url_reelle,$composants_url);
+	}
+	if (!$objet && !$id_objet && strpos($mauvaise_url_reelle, str_replace(_DIR_RACINE, '', _DIR_IMG)) != false) {
+		$url_doc = str_replace(array(url_de_base(), str_replace(_DIR_RACINE, '', _DIR_IMG)), '', $mauvaise_url_reelle);
+		$id_objet = sql_getfetsel('id_document', 'spip_documents', 'fichier='.sql_quote($url_doc));
+		$objet = 'document';
+	}
+	if($objet && $id_objet){
+		if(isset($racc[$objet])){
+			$objet = $racc[$objet];
+		}
+		// Exception historique : sites, cf https://core.spip.net/issues/4283
+		if ($objet === 'site') {
+			if (!defined('_CORRECTION_LIENS_INTERNES_LIEN_SITES'))
+				define('_CORRECTION_LIENS_INTERNES_LIEN_SITES', 'site');
+			$objet = _CORRECTION_LIENS_INTERNES_LIEN_SITES;
+		}
+		$bonne_url  = $objet . $id_objet . $ancre;
+	}
+	return $bonne_url;
+}
 /**
  * Retourne les domaines qu'on peut gérer, en plus du domaine de la requette http courante
  * @return array
