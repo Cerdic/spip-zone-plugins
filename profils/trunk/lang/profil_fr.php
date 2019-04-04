@@ -79,4 +79,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_profil' => 'Profil',
 	'titre_profils' => 'Profils',
 	'titre_profils_rubrique' => 'Profils de la rubrique',
+	'tri_croissant' => 'Tri croissant',
+	'tri_decroissant' => 'Tri décroissant',
 );

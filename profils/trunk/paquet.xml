@@ -1,8 +1,8 @@
 <paquet
 	prefix="profils"
 	categorie="auteur"
-	version="1.4.1"
-	schema="1.0.0" 
+	version="1.4.2"
+	schema="1.0.0"
 	etat="stable"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="profils.png"
@@ -29,7 +29,6 @@
 	<pipeline nom="formulaire_fond" inclure="profils_pipelines.php" />
 	<pipeline nom="formulaire_verifier" inclure="profils_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="profils_pipelines.php" />
-	<pipeline nom="affiche_enfants" inclure="profils_pipelines.php" />
 	<pipeline nom="afficher_config_objet" inclure="profils_pipelines.php" />
 
 	<menu nom="profils" titre="profil:titre_profils" parent="menu_configuration" icone="images/profil-16.png" action="profils" /> 

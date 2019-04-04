@@ -1,15 +1,36 @@
 [(#SET{defaut_tri,#ARRAY{
-	nom,1,
+	multi nom,1,
 	email,1,
 	id_profil,1,
 	points,-1
 }})]
 <B_liste_comptes>
+#SET{afficher_lettres,#TRI|=={'multi nom'}|oui}
+#SET{debut,#ENV{debut_liste_comptes,#VAL{debut_liste_comptes}|_request}}
 #ANCRE_PAGINATION
 <div class="liste-objets profils">
 <table class="spip liste">
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{profil:info_1_profil,profil:info_nb_profils}})</strong></caption>]
 	<thead>
+		[(#REM) Pagination par lettres ]
+		<BOUCLE_lettre(AUTEURS){id_profil?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_auteur==#GET{afficher_lettres}|?{'.*','A'}}>
+		[(#NOM**|initiale|unique|oui)
+			#SET{p,#GET{p}|concat{#SELF|parametre_url{debut_liste_comptes,@#ID_AUTEUR}|ancre_url{pagination_liste_comptes}|afficher_initiale{#VAL{#NOM**|initiale},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}}}
+		]
+		#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}
+		</BOUCLE_lettre>
+		#SET{p,#GET{p}|concat{#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}}}
+		</B_lettre>
+		<tr>
+			<th colspan="4" class="pagination tri">
+				<p class="sens">
+					[(#SELF|parametre_url{sens_liste_comptes,1}|lien_ou_expose{▲ <:profil:tri_croissant:>,#ENV{sens_liste_comptes,1}|=={1},ajax})]
+					[(#SELF|parametre_url{sens_liste_comptes,-1}|lien_ou_expose{▼ <:profil:tri_decroissant:>,#ENV{sens_liste_comptes,1}|=={-1},ajax})]
+				</p>
+				[<p class="lettres">(#GET{p})</p>]
+			</th>
+		</tr>
+		[(#REM) Options de tri ]
 		<tr class="first_row">
 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
 			<th class="nom" scope="col">[(#TRI{multi nom,<:info_nom:>,ajax})]</th>
@@ -19,7 +40,7 @@
 	</thead>
 	<tbody>
 	<BOUCLE_liste_comptes(AUTEURS){id_profil?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{par nom}{pagination #ENV{nb,10}}>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#NOM**|initiale|=={#ENV{i}}|et{#ENV{i}}|?{on}|unique)]">
 			<td class="statut">[(#STATUT|puce_statut{auteur,#ID_AUTEUR})]</td> 
 			<td class="nom principale">
 				[(#LOGO_AUTEUR|image_reduire{20,26})]
