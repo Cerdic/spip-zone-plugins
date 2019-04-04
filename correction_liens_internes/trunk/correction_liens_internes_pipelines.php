@@ -6,6 +6,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 # Liste de domaines supplémentaires considérés comme locaux :
 # define('CORRECTION_LIENS_INTERNES_AUTRES_DOMAINES', 'http://domaine2.tld/, http://domaine3.tld');
 
+/**
+ * Corrige les liens internes juste avant l'édition d'un texte
+ * @param array $flux l'entrée du pipeline
+ * @return array $flux le flux modifié
+**/
 function correction_liens_internes_pre_edition($flux){
 	if ($flux['args']['action'] == 'modifier') {
 		foreach ($flux['data'] as $champ => $valeur) {
@@ -14,6 +19,13 @@ function correction_liens_internes_pre_edition($flux){
 	}
 	return $flux;
 }
+
+/**
+ * A partir d'une url privée, donne les infos sur l'objet auquel on renvoie
+ * @param string $mauvaise_url l'url privée
+ * @param array $composants_url les composants de l'url, parsée par php
+ * @return array ($objet, $id_objet, $ancre)
+ **/
 function correction_liens_internes_correction_url_prive($mauvaise_url,$composants_url){
 	// Pour le cas où on a copié-collé une URL depuis espace public.
 	if (array_key_exists('fragment',$composants_url)){
@@ -31,6 +43,12 @@ function correction_liens_internes_correction_url_prive($mauvaise_url,$composant
 	return array($objet,$id_objet,$ancre);
 }
 
+/**
+ * A partir d'une url publique, donne les infos sur l'objet auquel on renvoie
+ * @param string $mauvaise_url l'url publique
+ * @param array $composants_url les composants de l'url, parsée par php
+ * @return array ($objet, $id_objet, $ancre)
+ **/
 function correction_liens_internes_correction_url_public($mauvaise_url, $composants_url) {
 	// Pour le cas où on a copié-collé une URL depuis espace public.
 	$ancre = isset($composants_url['fragment']) ? '#' . $composants_url['fragment'] : '';
@@ -52,6 +70,12 @@ function correction_liens_internes_correction_url_public($mauvaise_url, $composa
 	}
 	return array($objet,$id_objet,$ancre);
 }
+
+/**
+ * Parse un texte, à la recherche des liens erronnées, et les corriges
+ * @param string $texte
+ * @return string le texte modifié
+ **/
 function correction_liens_internes_correction($texte){
 	// pas de liens, on s'en va...
 	if (!is_string($texte) || strpos($texte, '->') === false) {
@@ -117,6 +141,10 @@ function correction_liens_internes_correction($texte){
 	return $texte;
 }
 
+/**
+ * Retourne les domaines qu'on peut gérer, en plus du domaine de la requette http courante
+ * @return array
+**/
 function correction_liens_internes_autres_domaines() {
 	// si la constante est définie, prendre en compte les domaines déclarés
 	$autres_domaines = defined('CORRECTION_LIENS_INTERNES_AUTRES_DOMAINES')
