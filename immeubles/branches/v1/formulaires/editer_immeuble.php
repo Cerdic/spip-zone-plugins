@@ -63,6 +63,8 @@ function formulaires_editer_immeuble_identifier_dist($id_immeuble = 'new', $reto
  */
 function formulaires_editer_immeuble_charger_dist($id_immeuble = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	$valeurs = formulaires_editer_objet_charger('immeuble', $id_immeuble, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+
+	$valeurs['_hidden'] .= '<input type="hidden" name="id_auteur" value="" />';
 	return $valeurs;
 }
 

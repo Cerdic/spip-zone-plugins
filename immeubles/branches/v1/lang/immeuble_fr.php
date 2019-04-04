@@ -1,10 +1,9 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/immeubles/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
-
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -44,5 +43,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_immeubles_rubrique' => 'Immeubles de la rubrique',
 	'titre_langue_immeuble' => 'Langue de cet immeuble',
 	'titre_logo_immeuble' => 'Logo de cet immeuble',
-	'titre_objets_lies_immeuble' => 'Liés à cet immeuble',
+	'titre_objets_lies_immeuble' => 'Liés à cet immeuble'
 );
