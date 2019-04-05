@@ -112,6 +112,7 @@ function interface_traduction_objets_recuperer_fond($flux) {
 		$segments = explode('/', $fond) AND
 		$objets = $segments[3] AND
 		$objet = objet_type($objets) AND
+		$exec != $objet AND
 		$table_objet_sql = table_objet_sql($objet) AND
 		$id_table_objet = id_table_objet($objet) AND
 		$tables_spip = lister_tables_spip() AND
@@ -270,7 +271,6 @@ function interface_traduction_objets_formulaire_charger($flux) {
 
 	if ($form == 'traduire') {
 		// Rendre le changement de la langue possible aunsi que le changement de la référence des traductions
-
 		$flux['data']['_langue'] = $flux['data']['langue'];
 		$flux['data']['editable'] = TRUE;
 	}
