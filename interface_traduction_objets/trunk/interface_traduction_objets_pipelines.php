@@ -71,7 +71,6 @@ function interface_traduction_objets_recuperer_fond($flux) {
 		$langues_traduites = [];
 
 		if ($id_trad > 0) {
-			$trad_new = FALSE;
 			$langues_traduites[$lang_objet] = $id_objet;
 			$traductions = sql_allfetsel(
 				'lang,' . $id_table_objet,
@@ -83,7 +82,6 @@ function interface_traduction_objets_recuperer_fond($flux) {
 			}
 		}
 		else {
-			$trad_new = TRUE;
 			$id_trad = $id_objet;
 		}
 
@@ -147,7 +145,6 @@ function interface_traduction_objets_recuperer_fond($flux) {
 			$champ = [$id_table_objet . ' as id'];
 			$from = $table_objet_sql;
 			$where = [];
-			$order = ' order by ' . id_table_objet($objet) . ' desc';
 			$left_join = [];
 			$join = '';
 
@@ -246,6 +243,7 @@ function interface_traduction_objets_recuperer_fond($flux) {
 	return $flux;
 }
 
+
 function interface_traduction_objets_header_prive($flux) {
 	$flux .= '<link rel="stylesheet" href="' . find_in_path('css/interface_traduction_objets_styles.css') . '" type="text/css" media="all" />';
 
@@ -258,9 +256,7 @@ function interface_traduction_objets_formulaire_charger($flux) {
 	$segments = explode('_', $form);
 
 	if ($segments[0] == 'editer' AND
-		_request('new') == 'oui' AND
-		isset($segments[1]) AND
-		$table_objet = table_objet($segments[1])) {
+		_request('new') == 'oui') {
 
 		if (!$flux['data']['lang_dest'] = _request('lang_dest') AND $id_parent = _request('id_parent')) {
 			$flux['data']['lang_dest'] = sql_getfetsel('lang', 'spip_rubriques', 'id_rubrique=' . $id_parent);
