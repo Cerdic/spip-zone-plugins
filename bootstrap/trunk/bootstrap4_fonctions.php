@@ -75,7 +75,7 @@ function filtre_lien_ou_expose_dist($url,$libelle=NULL,$on=false,$class="",$titl
 	return "<$bal $att>$libelle</$bal>";
 }
 
-function bootstrap3_affichage_final($flux){
+function bootstrap4_affichage_final($flux){
 	if (
 		$GLOBALS['html']
 		AND isset($GLOBALS['visiteur_session']['statut'])
