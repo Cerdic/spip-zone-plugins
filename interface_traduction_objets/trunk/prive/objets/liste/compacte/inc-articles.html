@@ -56,7 +56,7 @@
 	<tbody>
 	<BOUCLE_liste_art(ARTICLES){id_article IN #GET{id_articles}}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #GET{tri},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}{!lang_select}>
 		#SET{class,#COMPTEUR_BOUCLE|alterner{row_odd,row_even}}
-		<INCLURE{fond=prive/objets/liste/compacte/inc-articles_row,env,trads=oui,id_article,class=#GET{class},exclus=,rang_actif=#GET{rang_actif}}/>
+		<INCLURE{fond=prive/objets/liste/compacte/inc-articles_row,env,id_article,class=#GET{class},exclus=,rang_actif=#GET{rang_actif}}/>
 	</BOUCLE_liste_art>
 	</tbody>
 </table>

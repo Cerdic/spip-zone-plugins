@@ -48,7 +48,6 @@ function interface_traduction_objets_recuperer_fond($flux) {
 		!in_array($table_objet, $config)
 	) {
 		$langues_dispos = explode(',', $GLOBALS['meta']['langues_multilingue']);
-
 		$select = ['id_trad', 'lang', $id_table_objet];
 
 		$id_parent_table = '';
@@ -66,17 +65,6 @@ function interface_traduction_objets_recuperer_fond($flux) {
 			$select,
 			$table_objet,
 			$id_table_objet . '=' . $contexte[$id_table_objet]);
-
-		$id_trad_parent = '';
-		if ($id_parent_table) {
-			$rubrique_parent = sql_fetsel(
-				'id_trad, id_rubrique',
-				'spip_rubriques',
-				'id_rubrique=' . $donnees_objet[$id_parent_table]);
-
-				$id_trad_parent = $rubrique_parent['id_rubrique'];
-		}
-
 
 		$lang_objet = $donnees_objet['lang'];
 		$id_trad = $donnees_objet['id_trad'];
@@ -112,7 +100,6 @@ function interface_traduction_objets_recuperer_fond($flux) {
 		$contexte['langues_dispos'] = $langues_dispos;
 		$contexte['lang_objet'] = $lang_objet;
 		$contexte['id_trad'] = $id_trad;
-		$contexte['id_trad_parent'] = $id_trad_parent;
 		$contexte['langues_traduites'] = $langues_traduites;
 
 
@@ -139,107 +126,121 @@ function interface_traduction_objets_recuperer_fond($flux) {
 		$config = explode(',' ,$GLOBALS['meta']['desactiver_liste_compacte']) AND
 		!in_array($table_objet_sql, $config)) {
 
-		$contexte['objets'] = $objets;
-		$contexte['objet'] = $objet;
-		$contexte['table_objet_sql'] = $table_objet_sql;
-		$contexte['id_table_objet'] = $id_table_objet;
-		$contexte['champs'] = $desc['field'];
-
-		$champ = [$id_table_objet . ' as id'];
-		$from = $table_objet_sql;
-		$where = [];
-		$order = ' order by ' . id_table_objet($objet) . ' desc';
-		$left_join = [];
-		$join = '';
-
-		/*
-		* Affichage de champs supplémentaires
-		*/
-
-		// Les auteurs liés s'il y en a en moins un.
-		$auteur = sql_getfetsel('id_auteur', 'spip_auteurs_liens', 'objet LIKE' . sql_quote($objet));
-		if ($auteur) {
-			$contexte['champ_auteur'] = TRUE;
+		// Détermine si la liste est de type sections.
+		if (test_plugin_actif('secteur_langue') AND isset($contexte['id_rubrique'])) {
+			$contexte['type'] = 'sections';
 		}
 
-		// Existence d'un champ date.
-		$champ_date = '';
-		if (isset($desc['date']) and $desc['date']) {
-			$champ_date = $desc['date'];
-		} elseif (isset($desc['field']['date'])) {
-			$champ_date = 'date';
+		// S'il existe un squelette compacte pour l'objet on le prend.
+		if (find_in_path('prive/objets/liste/compacte/' . $objets . '.html')) {
+			$liste_compacte = recuperer_fond('prive/objets/liste/compacte/' . $objets, $contexte, ['ajax'=>'oui']);
 		}
-		if ($champ_date) {
-			$contexte['champ_date'] = $champ_date;
-			$champ[] = $champ_date . ' as date';
-		}
+		// Sinon on prend le générique.
+		else {
+			$contexte['objets'] = $objets;
+			$contexte['objet'] = $objet;
+			$contexte['table_objet_sql'] = $table_objet_sql;
+			$contexte['id_table_objet'] = $id_table_objet;
+			$contexte['champs'] = $desc['field'];
+			$contexte['voir'] = _request('voir');
 
-		/*
-		* Des requêtes conditionnelles dépendant du contexte.
-		*/
+			$champ = [$id_table_objet . ' as id'];
+			$from = $table_objet_sql;
+			$where = [];
+			$order = ' order by ' . id_table_objet($objet) . ' desc';
+			$left_join = [];
+			$join = '';
 
-		// Page auteur.
-		if (isset($contexte['id_auteur'])) {
-			if (isset($desc['field']['id_auteur'])) {
-				$where[] = 'id_auteur=' . $contexte['id_auteur'];
+			/*
+			* Affichage de champs supplémentaires
+			*/
+
+			// Les auteurs liés s'il y en a en moins un.
+			$auteur = sql_getfetsel('id_auteur', 'spip_auteurs_liens', 'objet LIKE' . sql_quote($objet));
+			if ($auteur) {
+				$contexte['champ_auteur'] = TRUE;
 			}
-			else {
-				$left_join[] = 'spip_auteurs_liens';
-				$where[] = 'objet LIKE ' . sql_quote($objet) . ' AND id_auteur=' . $contexte['id_auteur'];
+
+			// Existence d'un champ date.
+			$champ_date = '';
+			if (isset($desc['date']) and $desc['date']) {
+				$champ_date = $desc['date'];
+			} elseif (isset($desc['field']['date'])) {
+				$champ_date = 'date';
 			}
-		}
-
-		// Page mot clé.
-		if (isset($contexte['id_mot'])) {
-			$left_join[] = 'spip_mots_liens';
-			$where[] = 'spip_mots_liens.objet LIKE ' . sql_quote($objet) . ' AND spip_mots_liens.id_mot=' . $contexte['id_mot'];
-		}
-
-		$on = '';
-		if (count($left_join) > 0) {
-			foreach ($left_join AS $table_jointure) {
-				$on = ' ON ' . $table_objet_sql . '.' . $id_table_objet . '=' . $table_jointure . '.id_objet';
-				$join .= ' LEFT JOIN ' . $table_jointure . $on;
+			if ($champ_date) {
+				$contexte['champ_date'] = $champ_date;
+				$champ[] = $champ_date . ' as date';
 			}
-		}
 
-		// Si on est dans une rubrique on prend les objets de la rubrique
-		if (isset($contexte['id_rubrique'])) {
-			$where[] = $table_objet_sql . '.id_rubrique=' . $contexte['id_rubrique'];
-		}
+			/*
+			* Des requêtes conditionnelles dépendant du contexte.
+			*/
 
-
-		// Si pas dans une rubrique ou secteur_langue pas activé,
-		// on prend les objets non traduits et ceux de références si traduit.
-		if (!isset($contexte['id_rubrique']) OR !test_plugin_actif('secteur_langue')){
-			$objets = sql_allfetsel(
-				'id_trad,' . $id_table_objet,
-				$from . $join,
-				$where,
-				'',
-				$id_table_objet . ' desc');
-
-			$id_objets = [];
-			foreach ($objets AS $row) {
-				$id_trad = $row['id_trad'];
-				$id_objet = $row[$id_table_objet];
-				if ($id_trad > 0 AND $id_trad == $id_objet) {
-					$id_objets[$id_trad] = $id_objet;
+			// Page auteur.
+			if (isset($contexte['id_auteur'])) {
+				if (isset($desc['field']['id_auteur'])) {
+					$where[] = 'id_auteur=' . $contexte['id_auteur'];
 				}
-				elseif ($id_trad == 0) {
-					$id_objets[$id_objet] = $id_objet;
+				else {
+					$left_join[] = 'spip_auteurs_liens';
+					$where[] = 'objet LIKE ' . sql_quote($objet) . ' AND id_auteur=' . $contexte['id_auteur'];
 				}
 			}
-			if (count($id_objets) == 0) {
-				$id_objets = [-1];
+
+			// Page mot clé.
+			if (isset($contexte['id_mot'])) {
+				$left_join[] = 'spip_mots_liens';
+				$where[] = 'spip_mots_liens.objet LIKE ' . sql_quote($objet) . ' AND spip_mots_liens.id_mot=' . $contexte['id_mot'];
 			}
-			$where[] = $table_objet_sql . '.' .$id_table_objet . ' IN (' . implode(',', $id_objets) . ')';
+
+			$on = '';
+			if (count($left_join) > 0) {
+				foreach ($left_join AS $table_jointure) {
+					$on = ' ON ' . $table_objet_sql . '.' . $id_table_objet . '=' . $table_jointure . '.id_objet';
+					$join .= ' LEFT JOIN ' . $table_jointure . $on;
+				}
+			}
+
+			// Si on est dans une rubrique on prend les objets de la rubrique
+			if (isset($contexte['id_rubrique'])) {
+				$where[] = $table_objet_sql . '.id_rubrique=' . $contexte['id_rubrique'];
+			}
+
+
+			// Si pas dans une rubrique ou secteur_langue pas activé,
+			// on prend les objets non traduits et ceux de références si traduit.
+			if (!isset($contexte['id_rubrique']) OR !test_plugin_actif('secteur_langue')){
+				$objets = sql_allfetsel(
+					'id_trad,' . $id_table_objet,
+					$from . $join,
+					$where,
+					'',
+					$id_table_objet . ' desc');
+
+				$id_objets = [];
+				foreach ($objets AS $row) {
+					$id_trad = $row['id_trad'];
+					$id_objet = $row[$id_table_objet];
+					if ($id_trad > 0 AND $id_trad == $id_objet) {
+						$id_objets[$id_trad] = $id_objet;
+					}
+					elseif ($id_trad == 0) {
+						$id_objets[$id_objet] = $id_objet;
+					}
+				}
+				if (count($id_objets) == 0) {
+					$id_objets = [-1];
+				}
+				$where[] = $table_objet_sql . '.' .$id_table_objet . ' IN (' . implode(',', $id_objets) . ')';
+			}
+
+			// On passe le résultat de la requête dans le contexte.
+			$contexte['donnees'] = sql_allfetsel($champ, $from . $join, $where, '', id_table_objet($objet) . ' desc');
+
+			$liste_compacte = recuperer_fond('prive/objets/liste/objets_compacte', $contexte, ['ajax'=>'oui']);
 		}
-
-		// On passe le résultat de la requête dans le contexte.
-		$contexte['donnees'] = sql_allfetsel($champ, $from . $join, $where, '', id_table_objet($objet) . ' desc');
-
-		$flux['texte'] = recuperer_fond('prive/objets/liste/objets_compacte', $contexte);
+		$flux['texte'] = $liste_compacte;
 	}
 
 	return $flux;
@@ -264,22 +265,18 @@ function interface_traduction_objets_formulaire_charger($flux) {
 		if (!$flux['data']['lang_dest'] = _request('lang_dest') AND $id_parent = _request('id_parent')) {
 			$flux['data']['lang_dest'] = sql_getfetsel('lang', 'spip_rubriques', 'id_rubrique=' . $id_parent);
 		}
+
+			// pour afficher la liste des trad sur la base de l'id_trad en base
 		if (isset($flux['data']['lang_dest'])) {
 			$flux['data']['_hidden'] .= '<input type="hidden" name="lang_dest" value="' . $flux['data']['lang_dest'] . '"/>';
 		}
 	}
 
 	if ($form == 'traduire') {
-		// Rendre le changement de langue possible si pas dans rubrique
-		// ou si dans rubrique sans que secteur_langue soit activé
-		if (!isset($flux['data']['id_rubrique']) OR
-			(
-				isset($flux['data']['id_rubrique']) AND !test_plugin_actif('secteur_langue')
-			)
-		) {
-			$flux['data']['editable'] = TRUE;
-			$flux['data']['_langue'] = $flux['data']['langue'];
-		}
+		// Rendre le changement de la langue possible aunsi que le changement de la référence des traductions
+
+		$flux['data']['_langue'] = $flux['data']['langue'];
+		$flux['data']['editable'] = TRUE;
 	}
 
 

@@ -17,7 +17,7 @@
 				[(#ENV{id_parent}|oui)
 					#SET{parent,''}
 					[(#ENV{objet}|=={rubrique}|oui)#SET{parent,1}]
-					[(#SET{donnees_trad,#VALEUR|rubrique_destination_traduction{#ENV{id_parent},#GET{parent}}})]
+					[(#SET{donnees_trad,#VALEUR|appliquer_filtre{rubrique_destination_traduction, #ENV{id_parent},#GET{parent}}})]
 					#SET{id_parent_trad,#GET{donnees_trad}|table_valeur{id_parent_trad}}
 					[(#SET{creer_racine, #GET{donnees_trad}|table_valeur{creer_racine}})]
 
@@ -36,7 +36,7 @@
 		</BOUCLE_ld>
 		</ul>
 			[(#ENV{voir}|non)<a  class="ajax bouton_options" href="[(#SELF|parametre_url{voir,options})]" title="<:interface_traduction_objets:options:>"><img src="#CHEMIN{prive/themes/spip/images/interface_traduction_objets-32.png}"/></a>]
-			[(#ENV{voir}|oui)<a class="ajax bouton_options" href="[(#SELF|parametre_url{voir,''})]" title="<:interface_traduction_objets:fermer:>"><img src="#CHEMIN{prive/themes/spip/images/interface_traduction_objets-32.png}"/></a>]
+			[(#ENV{voir}|oui)<a class="ajax bouton_options" href="[(#SELF|parametre_url{voir,''})]" title="<:ecrire:bouton_fermer:>"><img src="#CHEMIN{prive/themes/spip/images/interface_traduction_objets-32.png}"/></a>]
 
 		</div>
 	</B_ld>
