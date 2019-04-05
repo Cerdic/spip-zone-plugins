@@ -5,8 +5,22 @@ $em-font-size: $font-size-base; // 1rem
 $em-line-height: 1em * ($line-height-base);
 $rem-vert-margin: 1rem * $line-height-base;
 
+$link-hover-bg: lighten(adjust-hue(mix(lighten($link-color,50%), $gray-200, 25%),-5deg),5%) !default;
+
 $headings-small-color: $text-muted !default;
 
 $indent-x: 1.5 * $grid-gutter-width;
 $indent-x-lg: 2 * $grid-gutter-width;
 $indent-x-sm: 1 * $grid-gutter-width;
+
+$padding-x: 0.75rem;
+$padding-y: 0.375rem;
+
+$padding-x-lg: 1rem;
+$padding-y-lg: 0.625rem;
+
+$padding-x-sm: 0.625rem;
+$padding-y-sm: 0.3125rem;
+
+$padding-x-xs: 0.3125rem;
+$padding-y-xs: 0.0625rem;
