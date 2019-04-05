@@ -1,0 +1,82 @@
+/**
+ * HashGrid from http://hashgrid.com/
+ * only visible for webmaster users
+ */
+
+@mixin make-bsgrid($max-widths: $container-max-widths, $breakpoints: $grid-breakpoints) {
+  @each $breakpoint, $container-max-width in $max-widths {
+    @include media-breakpoint-up($breakpoint, $breakpoints) {
+		/* Dimensions - same width as your grid with gutters */
+		width: $container-max-width;
+		margin-left: -1 * ($container-max-width / 2 );
+    }
+  }
+}
+
+#bsgrid {
+	/* Grid (left-aligned)
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin-left:0;
+	*/
+
+	/* Grid (centered) */
+	position: absolute;
+	top: 0;
+	left: 50%;
+	@include make-bsgrid();
+}
+
+/**
+ * Vertical grid lines
+ *
+ * Set the column width taking the borders into consideration,
+ * and use margins to set column gutters.
+ */
+#bsgrid div.vert{
+	width: percentage((1 / $grid-columns));
+	//border-left:1px solid darkturquoise;
+	//border-right:1px solid darkturquoise;
+	//margin-right: @grid-gutter-width - 1px;
+	position: relative;
+	&:before {
+		display: block;
+		position: absolute;
+		content: "";
+		height: 100%;
+		width: 1px;
+		top:0;
+		left: 0;
+		border-left: 1px solid darkturquoise;
+	}
+	&:after {
+		display: block;
+		position: absolute;
+		content: "";
+		height: 100%;
+		width: 1px;
+		top:0;
+		right: $grid-gutter-width;
+		border-right: 1px solid darkturquoise;
+	}
+}
+
+#bsgrid .vert-container {
+	width: 100% !important;
+	margin-left: $grid-gutter-width / 2;
+}
+
+/**
+ * Horizontal grid lines, defined by your base line height
+ *
+ * Remember, the CSS properties that define the box model:
+ * visible height = height + borders + margins + padding
+ */
+#bsgrid div.horiz{
+	/* $line-height-base */
+	height: 1rem * $line-height-base;
+	border-bottom: 1px dotted darkgray;
+	margin: 0;
+	padding: 0;
+}
