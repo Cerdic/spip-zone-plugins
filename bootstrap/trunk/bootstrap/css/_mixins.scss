@@ -3,45 +3,45 @@
 // Used in conjunction with global variables to enable certain theme features.
 
 // Vendor
-@import "vendor/rfs";
+@import "css/vendor/_rfs";
 
 // Deprecate
-@import "mixins/deprecate";
+@import "css/mixins/_deprecate";
 
 // Utilities
-@import "mixins/breakpoints";
-@import "mixins/hover";
-@import "mixins/image";
-@import "mixins/badge";
-@import "mixins/resize";
-@import "mixins/screen-reader";
-@import "mixins/size";
-@import "mixins/reset-text";
-@import "mixins/text-emphasis";
-@import "mixins/text-hide";
-@import "mixins/text-truncate";
-@import "mixins/visibility";
+@import "css/mixins/_breakpoints";
+@import "css/mixins/_hover";
+@import "css/mixins/_image";
+@import "css/mixins/_badge";
+@import "css/mixins/_resize";
+@import "css/mixins/_screen-reader";
+@import "css/mixins/_size";
+@import "css/mixins/_reset-text";
+@import "css/mixins/_text-emphasis";
+@import "css/mixins/_text-hide";
+@import "css/mixins/_text-truncate";
+@import "css/mixins/_visibility";
 
 // // Components
-@import "mixins/alert";
-@import "mixins/buttons";
-@import "mixins/caret";
-@import "mixins/pagination";
-@import "mixins/lists";
-@import "mixins/list-group";
-@import "mixins/nav-divider";
-@import "mixins/forms";
-@import "mixins/table-row";
+@import "css/mixins/_alert";
+@import "css/mixins/_buttons";
+@import "css/mixins/_caret";
+@import "css/mixins/_pagination";
+@import "css/mixins/_lists";
+@import "css/mixins/_list-group";
+@import "css/mixins/_nav-divider";
+@import "css/mixins/_forms";
+@import "css/mixins/_table-row";
 
 // // Skins
-@import "mixins/background-variant";
-@import "mixins/border-radius";
-@import "mixins/box-shadow";
-@import "mixins/gradients";
-@import "mixins/transition";
+@import "css/mixins/_background-variant";
+@import "css/mixins/_border-radius";
+@import "css/mixins/_box-shadow";
+@import "css/mixins/_gradients";
+@import "css/mixins/_transition";
 
 // // Layout
-@import "mixins/clearfix";
-@import "mixins/grid-framework";
-@import "mixins/grid";
-@import "mixins/float";
+@import "css/mixins/_clearfix";
+@import "css/mixins/_grid-framework";
+@import "css/mixins/_grid";
+@import "css/mixins/_float";
