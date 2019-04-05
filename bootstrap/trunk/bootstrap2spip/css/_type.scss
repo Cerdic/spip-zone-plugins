@@ -190,7 +190,7 @@ cite { font-style: italic; }
 
 
 // Blockquotes
-.blockquote {
+blockquote, .blockquote {
   @include font-size($blockquote-font-size);
   border-left: 1px solid $border-color;
   p,
