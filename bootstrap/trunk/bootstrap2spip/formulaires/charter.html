@@ -17,23 +17,23 @@
 	<form method='post' action='#ENV{action}'><div>
 		[(#REM) déclarer les hidden qui déclencheront le service du formulaire
 		paramêtre : url d'action ]
-		#ACTION_FORMULAIRE{#ENV{action}}
+		#ACTION_FORMULAIRE
 		#SET{fl,charter}
 		<p class="explication">Des explications préliminaires, en début de formulaire</p>
 		<fieldset>
 			<legend><:charter:legend:></legend>
-			<p class="explication">Des explications dans un fieldset</p>
-			<ul class="editer-groupe">
+				<p class="explication">Des explications dans un fieldset</p>
+				<div class="editer-groupe">
 				<!--EX01-->
 				#SET{name,text}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
-				</li>
+				</div>
 				<!--EX02-->
 				#SET{name,select}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<select name="#GET{name}" class="select" id="#GET{name}">
@@ -42,158 +42,158 @@
 						#SET{val,non}
 						<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</option>
 					</select>
-				</li>
+				</div>
 				<!--EX03-->
 				#SET{name,text_obli}#SET{obli,'obligatoire'}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
-				</li>
-			</ul>
+				</div>
+			</div>
 		</fieldset>
 		<fieldset>
 			<legend><:charter:legend:></legend>
-			<ul class="editer-groupe">
+			<div class="editer-groupe">
 				<!--EX04-->
 				#SET{name,text}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]
-					<p class="explication">Des explications au dessus d'un champ de saisie</p>
-					<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
-				</li>
+					<p class="explication" id="#GET{name}_explication">Des explications au dessus d'un champ de saisie</p>
+					<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" aria-describedby="#GET{name}_explication" [(#HTML5|et{#GET{obli}})required='required']/>
+				</div>
 				<!--EX05-->
 				#SET{name,text_obli}#SET{obli,'obligatoire'}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
-					<p class="explication">Des explications après un champ de saisie</p>
-				</li>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" aria-describedby="#GET{name}_explication" [(#HTML5|et{#GET{obli}})required='required']/>
+					<p class="explication" id="#GET{name}_explication">Des explications après un champ de saisie</p>
+				</div>
 				<!--EX06-->
 				#SET{name,textarea}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<textarea name="#GET{name}" id="#GET{name}" class="textarea" rows="2">
 #ENV*{#GET{name},#GET{defaut}}</textarea>
-				</li>
+				</div>
 				<!--EX07-->
 				#SET{name,textarea_pleine_largeur}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<div class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<textarea name="#GET{name}" id="#GET{name}" class="textarea" rows="4">
 #ENV*{#GET{name},#GET{defaut}}</textarea>
-				</li>
+				</div>
 				#SET{name,textarea_pleine_largeur_obli}#SET{obli,'obligatoire'}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<div class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<textarea name="#GET{name}" id="#GET{name}" class="textarea" rows="6">
 #ENV*{#GET{name},#GET{defaut}}</textarea>
-				</li>
+				</div>
 				<!--EX08-->
 				#SET{name,text_long_label}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
-				</li>
+				</div>
 				<!--EX09-->
 				#SET{name,radio}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]
-					<p class="explication">Des explications au-dessus d'un choix</p>
+					<p class="explication" id="#GET{name}_explication">Des explications au-dessus d'un choix</p>
 					#SET{val,oui}
 					<div class="choix">
-						<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+						<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}" aria-describedby="#GET{name}_explication" [(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
 						<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
 					</div>
 					#SET{val,non}
 					<div class="choix">
-						<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+						<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}" aria-describedby="#GET{name}_explication" [(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
 						<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
 					</div>
-				</li>
+				</div>
 				<!--EX09b-->
 				#SET{name,checkbox_ouiounon}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]
-					<p class="explication">Des explications au-dessus d'un choix</p>
+					<p class="explication" id="#GET{name}_explication">Des explications au-dessus d'un choix</p>
 					<div class="choix">
 						#SET{val,non}
 						<input type="hidden" name="#GET{name}" value="#GET{val}" />
 						#SET{val,oui}
-						<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+						<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}" aria-describedby="#GET{name}_explication" [(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
 						<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
 					</div>
-				</li>
+				</div>
 				<!--EX10-->
 				#SET{name,checkbox}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]
 					#SET{val,1}
 					<div class="choix">
-						<input type="checkbox" name="#GET{name}#EVAL{chr(91)}#EVAL{chr(93)}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|in_any{#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+						<input type="checkbox" name="#GET{name}\[\]" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}" aria-describedby="#GET{name}_explication" [(#GET{val}|in_any{#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
 						<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
 					</div>
 					#SET{val,2}
 					<div class="choix">
-						<input type="checkbox" name="#GET{name}#EVAL{chr(91)}#EVAL{chr(93)}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|in_any{#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+						<input type="checkbox" name="#GET{name}\[\]" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}" aria-describedby="#GET{name}_explication" [(#GET{val}|in_any{#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
 						<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
 					</div>
-					<p class="explication">Des explications au-dessous d'un choix</p>
-				</li>
+					<p class="explication" id="#GET{name}_explication">Des explications au-dessous d'un choix</p>
+				</div>
 
 				<!--EX11-->
 				#SET{name,checkbox_long_label}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]
 					#SET{val,1}
 					<div class="choix">
-						<input type="checkbox" name="#GET{name}#EVAL{chr(91)}#EVAL{chr(93)}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|in_any{#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+						<input type="checkbox" name="#GET{name}\[\]" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|in_any{#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
 						<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
 					</div>
 					#SET{val,2}
 					<div class="choix">
-						<input type="checkbox" name="#GET{name}#EVAL{chr(91)}#EVAL{chr(93)}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|in_any{#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+						<input type="checkbox" name="#GET{name}\[\]" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|in_any{#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
 						<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
 					</div>
-				</li>
+				</div>
 
-				<li class="fieldset">
+				<div class="fieldset">
 					<fieldset>
 						<legend><:charter:legend:></legend>
-						<ul class="editer-groupe">
+						<div class="editer-groupe">
 							<!--EX12-->
 							#SET{name,text}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 								<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 								<span class='erreur_message'>(#GET{erreurs})</span>
 								]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
-							</li>
+							</div>
 							<!--EX13--> 
 							#SET{name,text_obli}#SET{obli,'obligatoire'}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 								<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 								<span class='erreur_message'>(#GET{erreurs})</span>
 								]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
-							</li>
-						</ul>
+							</div>
+						</div>
 					</fieldset>
-				</li>
-			</ul>
+				</div>
+			</div>
 		</fieldset>
 	  [(#REM) ajouter les saisies supplémentaires : extra et autre, à cet endroit ]
 	  <!--extra-->
