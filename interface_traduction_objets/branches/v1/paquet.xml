@@ -1,17 +1,17 @@
 <paquet
 	prefix="interface_traduction_objets"
 	categorie="edition"
-	version="1.0.1"
+	version="1.0.2"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/interface_traduction_objets-64.png"
-	documentation="https://github.com/abelass/interface_traduction_objets"
+	documentation="https://contrib.spip.net/Interface-de-traduction-pour-objets"
 >
 
 	<nom>Interface de traduction pour objets</nom>
 	<!-- Rend la traduction de vos objets encore plus simple -->
 
-	<auteur>Rainer Müller Müller</auteur>
+	<auteur>Rainer Müller</auteur>
 
 	<licence>GNU/GPL</licence>
 

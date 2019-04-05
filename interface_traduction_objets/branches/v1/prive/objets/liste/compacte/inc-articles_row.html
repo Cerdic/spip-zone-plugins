@@ -12,11 +12,10 @@
 		<a href="[(#ENV{mode}|=={edition_seule}|?{[(#ID_ARTICLE|generer_url_entite{article})],[(#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE})]})]">#ID_ARTICLE</a>,
 		#ID_ARTICLE
 		})]</td>
-	[(#ENV{trads}|oui)<td class="trad">]
-
+	<td class="trad">
 	<BOUCLE_art_trads(ARTICLES){traduction}{id_mot?}{id_auteur?}{statut IN prepa,publie,prop}{id_article!=#ID_ARTICLE}>
-	[(#ENV{trads}|oui)
-		[(#ENV{voir}|!={#ID_TRAD}|?{
+		[(#SET{voir,[article_(#ID_TRAD)]})]
+		[(#ENV{voir}|!={#GET{voir}}|?{
 			<span>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]&nbsp;[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
 				<a href="[(#ID_ARTICLE|generer_url_entite{article})]" title="#TITRE / <:info_numero_abbreviation:>#ID_ARTICLE">#LANG</a>,
 				#LANG
@@ -24,19 +23,16 @@
 			</span>,
 			&nbsp;
 			})]
-		]
 	</BOUCLE_art_trads>
-	[(#ENV{trads}|oui)
-			<div>
-			[(#ENV{voir}|=={#ID_TRAD}|?{<a class="ajax" href="[(#SELF|parametre_url{voir,''})]" title="<:interface_traduction_objets:fermer:>"><img src="[(#CHEMIN{prive/images/deplierbas.gif})]" alt="replier"/></a>,<a class="ajax" href="[(#SELF|parametre_url{voir,#ID_TRAD})]" title="<:interface_traduction_objets:voir_traductions:>"><img src="[(#CHEMIN{prive/images/deplierhaut.gif})]" alt="deplier"/></a>})]
-			</div>
-	</td>]
+		<div>
+		[(#ENV{voir}|=={#GET{voir}}|?{<a class="ajax" href="[(#SELF|parametre_url{voir,''})]" title="<:interface_traduction_objets:fermer:>"><img src="[(#CHEMIN{prive/images/deplierbas.gif})]" alt="replier"/></a>,<a class="ajax" href="[(#SELF|parametre_url{voir,#GET{voir}})]" title="<:interface_traduction_objets:voir_traductions:>"><img src="[(#CHEMIN{prive/images/deplierhaut.gif})]" alt="deplier"/></a>})]
+		</div>
+	</td>
 	</B_art_trads>
 </BOUCLE_art>
 </tr>
-
-[(#ENV{voir}|=={#GET{id_trad}}|oui)
-	<INCLURE{fond=prive/objets/liste/compacte/inc-articles_trads_detail}{id_trad=#GET{id_trad}}{id_article=#GET{id_article}}{env}/>
+[(#ENV{voir}|=={#GET{voir}}|oui)
+	<INCLURE{fond=prive/objets/liste/compacte/inc-articles_trads_row}{id_trad=#GET{id_trad}}{id_article=#GET{id_article}}{env}/>
 	]
 
 
