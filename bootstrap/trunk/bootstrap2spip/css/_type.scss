@@ -1,0 +1,303 @@
+// stylelint-disable declaration-no-important, selector-list-comma-newline-after
+/*@ import "bootstrap/css/_type";*/
+
+/* --------------------------------------------------------------
+
+   typo.css
+   Base typographique inspiree de squelettes-dist/css/typo.css
+   Merge avec les specificites Bootstrap
+   Annule et remplace la typo native de Bootstrap
+
+   Cf aussi css/scaffolding.less
+   Cf aussi css/code.less
+-------------------------------------------------------------- */
+
+
+/* Titraille / Intertitres */
+h1,.h1,.h1-like,
+h2,.h2,.h2-like,
+h3,.h3,.h3-like,
+h4,.h4,.h4-like,
+h5,.h5,.h5-like,
+h6,.h6,.h6-like {
+  font-family: $headings-font-family;
+  color:$headings-color;
+  display: block;
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  font-weight: $headings-font-weight;
+  text-rendering: optimizelegibility; // Fix the character spacing for headings
+  margin-bottom:$rem-vert-margin;
+  small {
+    font-weight: normal;
+    line-height: 1;
+    color: $headings-small-color;
+    display:inline;
+    display:inline-block; /* evite de le couper si ne tient pas sur la fin de la ligne */
+  }
+}
+hr { height: $hr-border-width;margin: $rem-vert-margin 0;border: 0;background: $hr-border-color; color: $hr-border-color;}
+
+h1,.h1,.h1-like { font-size: $h1-font-size; line-height: $headings-line-height; small { font-size: 0.65em; }}
+.secondary h1,.secondary .h1,.secondary .h1-like,
+h2,.h2,.h2-like { font-size: $h2-font-size; line-height: $line-height-base / ($h2-font-size / $font-size-base); small { font-size: 0.70em; }}
+.secondary h2,.secondary .h2,.secondary .h2-like,
+h3,.h3,.h3-like { font-size: $h3-font-size; line-height: $line-height-base / ($h3-font-size / $font-size-base); small { font-size: 0.80em; }}
+.secondary h3,.secondary .h3,.secondary .h3-like,
+h4,.h4,.h4-like { font-size: $h4-font-size; line-height: $line-height-base / ($h4-font-size / $font-size-base); }
+.secondary h4,.secondary .h4,.secondary .h4-like,
+h5,.h5,.h5-like { font-size: $h5-font-size; line-height: $line-height-base / ($h5-font-size / $font-size-base); font-weight: bold; }
+.secondary h5,.secondary .h5,.secondary .h5-like,
+h6,.h6,.h6-like { font-size: $h6-font-size; line-height: $line-height-base / ($h6-font-size / $font-size-base); font-weight: bold; }
+
+.lead {
+  @include font-size($lead-font-size);
+  font-weight: $lead-font-weight;
+}
+
+// Type display classes
+.display-1 {
+  @include font-size($display1-size);
+  font-weight: $display1-weight;
+  line-height: $display-line-height;
+}
+.display-2 {
+  @include font-size($display2-size);
+  font-weight: $display2-weight;
+  line-height: $display-line-height;
+}
+.display-3 {
+  @include font-size($display3-size);
+  font-weight: $display3-weight;
+  line-height: $display-line-height;
+}
+.display-4 {
+  @include font-size($display4-size);
+  font-weight: $display4-weight;
+  line-height: $display-line-height;
+}
+
+
+
+
+//
+// Emphasis
+//
+
+small,
+.small {
+  @include font-size($small-font-size);
+}
+
+mark,
+.mark {
+  padding: $mark-padding;
+  background-color: $mark-bg;
+}
+
+
+/* Enrichissements typographiques */
+strong, b { font-weight: bold; }
+em, i { font-style: italic; }
+big, .big { font-size: $font-size-lg; }
+
+// Abbreviations and acronyms
+// Added data-* attribute to help out our tooltip plugin, per https://github.com/twitter/bootstrap/issues/5257
+abbr[title], acronym[title], abbr[data-original-title] { border-bottom: .1em dotted $gray-500; cursor: help; }
+abbr.initialism {
+  font-size: 90%;
+  text-transform: uppercase;
+}
+@media print { abbr[title]:after { content: " (" attr(title) ")"; } }
+dfn { font-weight: bold; font-style: italic; }
+del, .del { background-color: #FFDDDD; border-color: #CC0000; color: #CC0000; text-decoration: line-through; }
+ins, .ins { background-color: #DDFFDD; border-color: #00AA00; color: #00AA00; text-decoration: none; }
+sup, sub { font-size: .8em; font-variant: normal; line-height: 0; }
+sup { vertical-align: super; top:-0.25em;}
+.ie sup { vertical-align: text-top; }
+sub { vertical-align: sub; }
+.ie sub { vertical-align: text-bottom; }
+.caps { font-variant: small-caps; }
+img.puce {vertical-align: baseline}
+
+/* Listes */
+ul, ol, li, dl, dt, dd {margin:0;padding:0;}
+ul,ol {margin-left: $indent-x-sm;margin-bottom: $rem-vert-margin;}
+@include media-breakpoint-up(md) {
+  ul,ol { margin-left: $indent-x; }
+}
+@include media-breakpoint-up(lg) {
+  ul,ol { margin-left: $indent-x-lg; }
+}
+ul ul, ol ol, ul ol, ol ul { margin-top: 0; margin-bottom: 0; }
+
+//
+// Lists
+//
+
+.list-unstyled,
+ul.list-unstyled,
+ol.list-unstyled {
+  @include list-unstyled;
+}
+
+// Inline turns list items into inline-block
+.list-inline,
+ul.list-inline,
+ol.list-inline {
+  @include list-unstyled;
+}
+.list-inline-item {
+  display: inline-block;
+
+  &:not(:last-child) {
+    margin-right: $list-inline-padding;
+  }
+}
+
+
+//
+// Misc
+//
+dl dt { font-weight: bold; }
+dl dd {}
+dl dt, dl dd { padding-left: $indent-x-sm; }
+@include media-breakpoint-up(md) {
+  dl dt, dl dd { padding-left: $indent-x; }
+}
+@include media-breakpoint-up(lg) {
+  dl dt, dl dd { padding-left: $indent-x-lg; }
+}
+
+// Builds on `abbr`
+.initialism {
+  @include font-size(90%);
+  text-transform: uppercase;
+}
+
+/* Citations et poesie */
+q { font-style: italic; }
+blockquote { margin:0;padding: 0 $indent-x-sm; }
+@include media-breakpoint-up(md) {
+  blockquote { padding: 0 $indent-x; }
+}
+@include media-breakpoint-up(lg) {
+  blockquote { padding: 0 $indent-x-lg; }
+}
+
+cite { font-style: italic; }
+
+
+// Blockquotes
+.blockquote {
+  @include font-size($blockquote-font-size);
+  border-left: 1px solid $border-color;
+  p,
+  ul,
+  ol {
+      &:last-child {
+          margin-bottom: 0;
+      }
+  }
+}
+
+.blockquote-footer {
+  display: block;
+  @include font-size($blockquote-small-font-size);
+  color: $blockquote-small-color;
+
+  &::before {
+    content: "\2014\00A0"; // em dash, nbsp
+  }
+}
+
+// Addresses
+address { font-style: italic; }
+
+
+/* Paragraphes */
+p, .p, dl, dd, blockquote, address, pre, table, fieldset { margin:0;margin-bottom: $rem-vert-margin; }
+dd+dd {margin-top:-1 * $rem-vert-margin;}
+
+
+/**
+* Print styles from HTML5 Boilerplate
+* Inlined to avoid required HTTP connection: www.phpied.com/delay-loading-your-print-css/
+*/
+
+@media print {
+  blockquote { page-break-inside: avoid; }
+  thead { display: table-header-group; } /* css-discuss.incutio.com/wiki/Printing_Tables */
+  tr, img { page-break-inside: avoid; }
+  @page { margin: 0.5cm; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3 { page-break-after: avoid; }
+}
+
+/**
+* Base typo sur petits ecrans
+* Cf.: http://www.alsacreations.com/astuce/lire/1177
+*/
+
+@include media-breakpoint-down(xs) {
+  /* gestion des mots longs */
+  textarea, table, td, th { word-wrap: break-word; /* cesure forcee */ }
+}
+
+//@media screen and (max-width:640px) and (orientation: landscape) {
+//  body { -webkit-text-size-adjust: 70%; }
+//}
+
+/* end */
+
+/* Complements */
+
+.secondary {
+  h1,.h1,.h1-like,
+  h2,.h2,.h2-like,
+  h3,.h3,.h3-like,
+  h4,.h4,.h4-like,
+  h5,.h5,.h5-like {
+    small {display: block;}
+  }
+}
+
+.jumbotron h1 {word-wrap: break-word;}
+
+.chapo {font-weight: bold;color:lighten($body-color,7%);}
+.spip_surligne { background-color: theme-color-level("info", $alert-bg-level); color: theme-color-level("info", $alert-color-level);}
+#descriptif_site_spip {
+  @extend .lead;
+}
+
+/* Listes SPIP : indentation est par defaut sur ul,ol */
+ul.spip, ol.spip { }
+ul.spip { list-style-type: square; }
+li ul.spip { list-style-type: disc; }
+li li ul.spip { list-style-type: circle; }
+ol.spip { list-style-type: decimal; }
+
+dl.spip dt { clear: both; }
+dl.spip dd {}
+
+/* Paragraphes spip */
+div.spip, ul.spip, ol.spip, .spip_poesie, .spip_documents.spip_documents_center { margin-bottom: $rem-vert-margin; }
+
+/* Citations, poesie */
+blockquote.spip { min-height: 40px; }
+.spip_poesie { border-left: 1px solid $border-color; }
+.spip_poesie div { margin-left: $indent-x-sm; text-indent: -1 * $indent-x-sm; }
+@include media-breakpoint-up(md) {
+  .spip_poesie div { margin-left: $indent-x; text-indent: -1 * $indent-x; }
+}
+@include media-breakpoint-up(lg) {
+  .spip_poesie div { margin-left: $indent-x-lg; text-indent: -1 * $indent-x-lg; }
+}
+
+
+/* Enluminures typo V3 / Cf.: https://contrib.spip.net/3118 */
+sc,.sc { font-variant: small-caps; }
+.caractencadre-spip {}
+.caractencadre2-spip {}
+.texteencadre-spip {}

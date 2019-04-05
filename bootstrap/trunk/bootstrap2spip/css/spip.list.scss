@@ -2,8 +2,7 @@
 /* Sous-navigation et autres menus
 /* ------------------------------------------ */
 
-@import "css/_spip.variables";
-@import "css/_mixins";
+@import "css/bootstrap-start";
 
 /* Listes d'items */
 /*
@@ -29,25 +28,25 @@ Un item est compose de :
 
 $list-border-color : $border-color !default;
 
-.liste {margin-bottom: $em-vert-margin};
-.liste.long {margin-bottom: $em-vert-margin * 2;}
+.liste {margin-bottom: $rem-vert-margin};
+.liste.long {margin-bottom: $rem-vert-margin * 2;}
 
-.liste-items {padding-left: 0; list-style: none; border-top:0;}
+.liste-items {margin-left: 0; list-style: none; border-top:0;}
 //.liste .liste-items {margin-bottom: 0;}
-.liste-items .item {padding:$em-vert-margin / 2 0;clear:both; overflow:hidden;border-top: 1px solid $list-border-color;margin-top: -1px;}
+.liste-items .item {padding:$rem-vert-margin / 2 0;clear:both; overflow:hidden;border-top: 1px solid $list-border-color;margin-top: -1px;}
 .liste-items .item:last-child {border-bottom: 1px solid $list-border-color;}
 .liste-items .item .entry {margin-bottom: 0;}
 .liste-items .item .entry-title:first-child {margin-top: 0;}
 
 .entry {
-  div.spip,p,.p {margin-bottom: $em-vert-margin / 2;}
-  .entry-title {margin-bottom: $em-vert-margin / 2;}
+  div.spip,p,.p {margin-bottom: $rem-vert-margin / 2;}
+  .entry-title {margin-bottom: $rem-vert-margin / 2;}
   .entry-content > :last-child {margin-bottom: 0;}
-  .entry-content {margin-bottom: $em-vert-margin / 2;}
+  .entry-content {margin-bottom: $rem-vert-margin / 2;}
 }
 
 .liste-items .item-header {
-  padding:$em-vert-margin / 2 0;clear:both; overflow:hidden;border-top: 1px solid $list-border-color;margin-top: -1px;
+  padding:$rem-vert-margin / 2 0;clear:both; overflow:hidden;border-top: 1px solid $list-border-color;margin-top: -1px;
   border: 0;
   display: block;
   font-weight: bold;
@@ -57,7 +56,7 @@ $list-border-color : $border-color !default;
 }
 // Space them out when they follow another list item (link)
 .item + .item-header {
-  padding-top: $em-vert-margin / 2;
+  padding-top: $rem-vert-margin / 2;
 }
 
 .liste-items {
@@ -74,7 +73,7 @@ $list-border-color : $border-color !default;
 
 /* Short */
 .short .item, .item.short {
-  padding:$em-vert-margin / 4 0;
+  padding:$rem-vert-margin / 4 0;
   &:first-child:last-child {border:0;}
 }
 
@@ -87,12 +86,12 @@ $list-border-color : $border-color !default;
 
 /* thumb */
 .thumb .item, .item.thumb {
-  //padding:$em-vert-margin / 4 0;
+  //padding:$rem-vert-margin / 4 0;
   &:first-child:last-child {border:0;}
 }
 .thumb {
-  .entry-title {padding-top: 7.5rem + $em-vert-margin;display: block}
-  .spip_logos {display: block;float: left;margin:0;margin-top: -1*(7.5rem + $em-vert-margin);height:120px;width: 100% !important;padding: 0;text-align: center;overflow: hidden}
+  .entry-title {padding-top: 7.5rem + $rem-vert-margin;display: block}
+  .spip_logos {display: block;float: left;margin:0;margin-top: -1*(7.5rem + $rem-vert-margin);height:120px;width: 100% !important;padding: 0;text-align: center;overflow: hidden}
   .spip_logos img {height: 100%!important;width: 100%}
   .entry-content {max-height: 5 * $em-line-height;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;}
 }
@@ -101,8 +100,8 @@ $list-border-color : $border-color !default;
 .with-read-more {
   .entry {position: relative;padding-bottom: $em-line-height;}
   .entry-content {}
-  .postmeta {min-height: $em-line-height;padding:$em-vert-margin / 2 0;padding-left: 2em;padding-bottom: 0;margin-bottom: -$em-line-height;}
-  .read-more {display:block; position: absolute;z-index: 10;bottom:0;left:0;text-align: right;padding:$em-vert-margin / 2 0;padding-left:0;padding-bottom: 0;line-height: $em-line-height;font-size: 1rem;}
+  .postmeta {min-height: $em-line-height;padding:$rem-vert-margin / 2 0;padding-left: 2em;padding-bottom: 0;margin-bottom: -$em-line-height;}
+  .read-more {display:block; position: absolute;z-index: 10;bottom:0;left:0;text-align: right;padding:$rem-vert-margin / 2 0;padding-left:0;padding-bottom: 0;line-height: $em-line-height;font-size: 1rem;}
 }
 .with-publication .entry {.publication {display: block;}}
 .with-publication-inline .entry {.publication {display: inline;padding-left:0.25em;}}
@@ -116,13 +115,13 @@ $list-border-color : $border-color !default;
 .secondary {
 
   .liste-items {
-    .item {padding:$em-vert-margin / 4 0;}
+    .item {padding:$rem-vert-margin / 4 0;}
     .spip_logos {max-width: 2.5 * $em-line-height;}
     .spip_logos img {height: auto !important;}
     .entry-content {max-height: 5 * $em-line-height;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;}
   }
   .short .item, .item.short {
-    padding:$em-vert-margin / 8 0;
+    padding:$rem-vert-margin / 8 0;
   }
 
   .short {

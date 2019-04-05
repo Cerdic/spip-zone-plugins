@@ -1,9 +1,12 @@
 /* Variables et declarations specifiques, en complement de _variables.scss */
 
-@import "css/_functions";
-@import "css/_variables";
-
 // Typo SPIP
-$em-font-size : $font-size-base; // 1rem
-$em-line-height : 1em * ($line-height-base);
-$em-vert-margin : 1rem * $line-height-base;
+$em-font-size: $font-size-base; // 1rem
+$em-line-height: 1em * ($line-height-base);
+$rem-vert-margin: 1rem * $line-height-base;
+
+$headings-small-color: $text-muted !default;
+
+$indent-x: 1.5 * $grid-gutter-width;
+$indent-x-lg: 2 * $grid-gutter-width;
+$indent-x-sm: 1 * $grid-gutter-width;
