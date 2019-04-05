@@ -1,9 +1,11 @@
-@import "bootstrap/css/tables.less";
+@import "bootstrap/css/_tables";
 
 /* Tableaux SPIP */
-table.spip {.table}
-table.spip {.table-striped}
-table.spip {.table-hover}
+table.spip {
+  @extend .table;
+  @extend .table-striped;
+  @extend .table-hover;
+}
 
 table.spip caption {}
 table.spip tr.row_first th {}
