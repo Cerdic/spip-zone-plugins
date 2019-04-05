@@ -1,0 +1,6 @@
+/* Variables et declarations specifiques, en complement de _variables.scss */
+
+// Typo SPIP
+$em-font-size : $font-size-base; // 1rem
+$em-line-height : 1em * ($line-height-base);
+$em-vert-margin : 1rem * $line-height-base;
