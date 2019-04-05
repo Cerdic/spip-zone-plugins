@@ -1,6 +1,6 @@
 
 	<B_ld>
-		<div class="onglets_traduction rubriques barre_onglet">
+		<div class="onglets_traduction[ (#ENV{objet}) ] barre_onglet">
 		<ul>
 		<BOUCLE_ld(DATA){source tableau, #ENV{langues_dispos}}>#SET{creer_racine,''}#SET{alert,''}
 		[(#ENV{langues_traduites}|table_valeur{#VALEUR}|=={#ENV{id_trad}}|oui)#SET{ref_#VALEUR,oui}]
@@ -34,9 +34,19 @@
 						})]
 				})]
 		</BOUCLE_ld>
+			<li class="box_onglet bouton_options[ (#ENV{voir}|oui)on]">
+				[(#ENV{voir}|? {
+					<a class="ajax bouton_options" href="[(#SELF|parametre_url{voir,''})]" title="<:ecrire:bouton_fermer:>">
+						[(#CHEMIN{prive/themes/spip/images/interface_traduction_objets-32.png}|image_reduire{22})]
+					</a>,
+					<a  class="ajax bouton_options" href="[(#SELF|parametre_url{voir,options})]" title="<:interface_traduction_objets:options:>">
+						[(#CHEMIN{prive/themes/spip/images/interface_traduction_objets-32.png}|image_reduire{22})]
+					</a>
+				})]
+
+
+			</li>
 		</ul>
-			[(#ENV{voir}|non)<a  class="ajax bouton_options" href="[(#SELF|parametre_url{voir,options})]" title="<:interface_traduction_objets:options:>"><img src="#CHEMIN{prive/themes/spip/images/interface_traduction_objets-32.png}"/></a>]
-			[(#ENV{voir}|oui)<a class="ajax bouton_options" href="[(#SELF|parametre_url{voir,''})]" title="<:ecrire:bouton_fermer:>"><img src="#CHEMIN{prive/themes/spip/images/interface_traduction_objets-32.png}"/></a>]
 
 		</div>
 	</B_ld>
