@@ -9,11 +9,11 @@
 	padding: 0;
 }
 
-.onglets_traduction.barre_onglet li.box_onglet {
+.onglets_traduction.barre_onglet .box_onglet {
 	float: left;
 }
 
-.onglets_traduction.barre_onglet  ul > li.box_onglet:last-child {
+.onglets_traduction.barre_onglet .box_onglet:last-child {
 	float: none;
 }
 
@@ -38,7 +38,7 @@
 .onglets_traduction.barre_onglet {
 	width: auto
 }
-.onglets_traduction.barre_onglet li {
+.onglets_traduction.barre_onglet .box_onglet{
 	display: inline-table;
 	float: none;
 	vertical-align: middle;
@@ -48,9 +48,7 @@
 .onglets_traduction.barre_onglet a, .onglets_traduction.barre_onglet strong {
 	padding: 5px
 }
-.onglets_traduction.barre_onglet li.bouton_options {
-	border: none;
-}
+
 .onglets_traduction.barre_onglet .bouton_options a {
 	padding: 0px
 }
@@ -63,10 +61,16 @@
 	font-style: italic;
 }
 
-.bouton_options {/* float:right; */
+.barre_onglet ul li.bouton_options.on a {
+		background-color: #eeeeee;
 }
+
+.barre_onglet ul li.bouton_options a {
+		background-color: #ffffff;
+}
+
 .bouton_options img {
-	margin-top: 5px
+	margin-top: 0
 }
 
 .nettoyeur {
