@@ -1,15 +1,31 @@
 @import "bootstrap/css/_code";
 
 code {
-  white-space:inherit
+  white-space:inherit;
 }
 .spip_code {
-  @extend code;
-  white-space:inherit
+  color: $code-color;
+  word-break: break-word;
+
+  // Streamline the style when inside anchors to avoid broken underline and more
+  a > & {
+    color: inherit;
+  }
+  white-space:inherit;
+
+  &>code {
+    border: none;
+    padding: 0;
+    background: none;
+    color:inherit;
+    font-size: 1em
+  }
 }
 
-.spip_code >code {border: none;padding: 0;background: none;color:inherit}
-pre,code,kbd,samp,var,tt,.spip_code,.spip_cadre {font-family: $font-family-monospace; font-size: 1em; }
+pre,code,kbd,samp,var,tt,.spip_code,.spip_cadre {
+  font-family: $font-family-monospace;
+  @include font-size($code-font-size);
+}
 
 pre { margin: $rem-vert-margin 0;
   /* Cf.: http://perishablepress.com/press/2010/06/01/wrapping-content/ */
