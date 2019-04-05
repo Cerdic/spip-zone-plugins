@@ -1,8 +1,10 @@
-@import "bootstrap/css/pagination.less";
+@import "bootstrap/css/pagination";
 
 .pagination>ul {
-	.pagination;
-	margin:0;
+  display: flex;
+  @include list-unstyled();
+  @include border-radius();
+  margin:0;
 }
 
 .pagination .pagination-label {
@@ -14,7 +16,7 @@
   background: transparent;
   text-shadow: none;
   padding: 4px;
-  line-height: @line-height-base;
+  line-height: $em-line-height;
 }
 
 .pagination-mini .pagination-label,
@@ -23,5 +25,5 @@
 /* tri, analogue a pagination mais avec des boutons de tri dedans */
 .tri {
   display: block;
-  margin: @line-height-computed 0;
+  margin: $rem-vert-margin 0;
 }
