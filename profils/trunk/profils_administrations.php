@@ -26,8 +26,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function profils_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
-	$maj['create'] = array(array('maj_tables', array('spip_profils', 'spip_auteurs')));
-
+	$maj['create'] = array(
+		array('maj_tables', array('spip_profils', 'spip_auteurs'))
+	);
+	
+	$maj['1.0.1'] = array(
+		array('sql_updateq', 'spip_auteurs', array('pass' => ' '), array('id_profil>0', 'pass=""'))
+	);
+	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

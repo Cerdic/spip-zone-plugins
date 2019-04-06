@@ -13,6 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+include_spip('inc/autoriser');
 include_spip('base/objets');
 include_spip('inc/actions');
 include_spip('inc/editer');
@@ -53,6 +54,18 @@ function formulaires_profil_identifier_dist($id_auteur = 'new', $id_ou_identifia
 function formulaires_profil_saisies_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '', $forcer_admin=false) {
 	$saisies = profils_chercher_saisies_profil('edition', $id_auteur, $id_ou_identifiant_profil);
 	
+	// Si c'est pour une création et qu'on est admin
+	if (!intval($id_auteur) and autoriser('creer', 'auteur')) {
+		array_unshift($saisies, array(
+			'saisie' => 'case',
+			'options' => array(
+				'nom' => 'envoyer_notification',
+				'label_case' => _T('profil:envoyer_notification_label_case'),
+				'conteneur_class' => 'pleine_largeur',
+			),
+		));
+	}
+	
 	return $saisies;
 }
 
@@ -71,7 +84,6 @@ function formulaires_profil_saisies_dist($id_auteur = 'new', $id_ou_identifiant_
  *     Environnement du formulaire
  */
 function formulaires_profil_charger_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '', $forcer_admin=false) {
-	include_spip('inc/autoriser');
 	$contexte = array();
 	
 	// Non, si pas d'id_auteur, on en crée un nouveau
@@ -238,7 +250,28 @@ function formulaires_profil_traiter_dist($id_auteur = 'new', $id_ou_identifiant_
 				// Sinon on crée juste l'auteur vide, les champs seront ajoutés après
 				else {
 					include_spip('action/editer_objet');
-					$id_auteur = objet_inserer('auteur', null, array('statut' => '6forum'));
+					$id_auteur = objet_inserer('auteur', null, array('statut' => '6forum', 'pass' => ' '));
+					
+					// Si on doit envoyer une notification à la création (et qu'on a un email…)
+					if ($email_principal and _request('envoyer_notification')) {
+						include_spip('action/inscrire_auteur');
+						$cookie = auteur_attribuer_jeton($id_auteur);
+						
+						include_spip('inc/filtres');
+						$notification = recuperer_fond(
+							'notifications/profil_motdepasse',
+							array(
+								'nom' => $nom_principal,
+								'email' => $email_principal,
+								'sendcookie' => url_absolue(
+									generer_url_public('spip_pass', "p=$cookie"),
+									$GLOBALS['meta']['adresse_site'] . '/'
+								)
+							)
+						);
+						include_spip('inc/notifications');
+						notifications_envoyer_mails($email_principal, $notification);
+					}
 				}
 			}
 			
@@ -357,8 +390,8 @@ function formulaires_profil_traiter_dist($id_auteur = 'new', $id_ou_identifiant_
 										$retours_coordonnee = formulaires_editer_objet_traiter(objet_type($coordonnee), $id_coordonnee, 0, 0, $retour, '');
 										$retours = array_merge($retours_coordonnee, $retours);
 									}
-									// Sinon, tous les champs sont vides, on peut la supprimer pour faire du ménage
-									else {
+									// Sinon, tous les champs sont vides, on peut la supprimer pour faire du ménage, si c'est une coordonnée existante
+									elseif ($id_coordonnee = intval($id_coordonnee)) {
 										sql_delete(table_objet_sql($coordonnee), id_table_objet($coordonnee) . '=' . $id_coordonnee);
 										sql_delete(table_objet_sql($coordonnee) . '_liens', id_table_objet($coordonnee) . '=' . $id_coordonnee);
 									}

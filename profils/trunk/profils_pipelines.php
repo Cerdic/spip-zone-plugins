@@ -283,8 +283,8 @@ function profils_formulaire_traiter($flux) {
 										$retours_coordonnee = formulaires_editer_objet_traiter(objet_type($coordonnee), $id_coordonnee, 0, 0, $retour, '');
 										$retours = array_merge($retours_coordonnee, $retours);
 									}
-									// Sinon, tous les champs sont vides, on peut la supprimer pour faire du ménage
-									else {
+									// Sinon, tous les champs sont vides, on peut la supprimer pour faire du ménage, si c'est une coordonnée existante
+									elseif ($id_coordonnee = intval($id_coordonnee)) {
 										sql_delete(table_objet_sql($coordonnee), id_table_objet($coordonnee) . '=' . $id_coordonnee);
 										sql_delete(table_objet_sql($coordonnee) . '_liens', id_table_objet($coordonnee) . '=' . $id_coordonnee);
 									}

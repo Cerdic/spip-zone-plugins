@@ -4,7 +4,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-function inc_importer_csv_profil_dist($id_profil, $profil) {
+function inc_importer_csv_profil_dist($id_profil, $profil, $envoyer_notification) {
 	// À partir de chaque colonne, on va générer les request nécessaires pour lancer le traitement du formulaire
 	$champs_auteur = array();
 	$champs_organisation = array();
@@ -44,6 +44,7 @@ function inc_importer_csv_profil_dist($id_profil, $profil) {
 	set_request('organisation', $champs_organisation);
 	set_request('contact', $champs_contact);
 	set_request('coordonnees', $champs_coordonnees);
+	set_request('envoyer_notification', $envoyer_notification);
 	
 	$traiter = charger_fonction('traiter', 'formulaires/profil');
 	$retours = $traiter('new', $id_profil, '', true); // On force en mode admin pour être sûr, car dans des jobs

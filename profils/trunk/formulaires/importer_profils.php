@@ -25,6 +25,14 @@ function formulaires_importer_profils_saisies_dist($id_profil) {
 				'pleine_largeur' => 'oui',
 			),
 		),
+		array(
+			'saisie' => 'case',
+			'options' => array(
+				'nom' => 'envoyer_notification',
+				'label_case' => _T('profil:envoyer_notification_label_case'),
+				'pleine_largeur' => 'oui',
+			),
+		),
 		'options' => array(
 			'texte_submit' => _T('bouton_upload'),
 			'inserer_debut' => '<h3 class="titrem">'._T('profil:importer_titre').'</h3>'
@@ -41,6 +49,7 @@ function formulaires_importer_profils_traiter_dist($id_profil){
 	
 	$fichier = $_FILES['fichier']['tmp_name'];
 	$importer_csv = charger_fonction('importer_csv', 'inc/');
+	$envoyer_notification = _request('envoyer_notification') ? true : false;
 	
 	// Si on récupère bien un tableau
 	if (is_array($profils = $importer_csv($fichier, true))){
@@ -65,7 +74,7 @@ function formulaires_importer_profils_traiter_dist($id_profil){
 			if (job_queue_add(
 				'importer_csv_profil',
 				'Importer le profil "'.$nom.'"',
-				array($id_profil, $profil),
+				array($id_profil, $profil, $envoyer_notification),
 				'inc/'
 			) > 0){
 				$jobs++;

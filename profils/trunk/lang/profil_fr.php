@@ -50,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_supprimer_profil' => 'Confirmez-vous la suppression de cet profil ?',
 	
 	// E
+	'envoyer_notification_label_case' => 'Envoyer une notification invitant à définir son mot de passe',
 	'erreur_email_obligatoire' => 'Il doit y avoir un email obligatoire dans les champs ou dans les coordonnées.',
 	'errreur_identifiant_existant' => 'Cet identifiant est déjà utilisé',
 	'exporter_champ_seulement_colonnes_label_case' => 'Ne pas exporter les données, seulement les colonnes',
@@ -62,7 +63,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_profil' => 'Aucun profil',
 	'info_nb_profils' => '@nb@ profils',
 	'info_profils_auteur' => 'Les profils de cet auteur',
+	
+	// N
+	'notification_motdepasse_titre' => 'Nouveau compte',
+	'notification_motdepasse_texte' => 'Un nouveau compte vient d’être créé pour vous sur le site
+@nom_site_spip@ (@adresse_site@)
 
+Veuillez vous rendre à l’adresse suivante :
+
+    @sendcookie@
+
+Vous pourrez alors définir un mot de passe
+et vous connecter au site avec votre adresse email @email@.
+
+',
+	
 	// R
 	'retirer_lien_profil' => 'Retirer ce profil',
 	'retirer_tous_liens_profils' => 'Retirer tous les profils',
