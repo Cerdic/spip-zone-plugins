@@ -38,11 +38,12 @@ jQuery(function($) {
 <p class="pagination">#PAGINATION</p>
 <BOUCLE_agenda(DATA){source json, #PRODUIRE{fond=agenda.json, start=0,end=2147483647,_=#REM|time}|url_absolue}{pagination 15}>
     <dl>
+			[(#VALEUR{allDay}|=={true}|?{#SET{end,#VALEUR{end}|agenda_dateplus{-1}},#SET{end,#VALEUR{end}}})]
         [<dt><:agenda:evenement_titre:></dt>
         <dd><a href="#VALEUR{url}">(#VALEUR{title})</a></dd>]
 
         [<dt><:agenda:evenement_date:></dt>
-        <dd>(#VALEUR{start}|Agenda_affdate_debut_fin{#VALEUR{end},#VALEUR{allDay}|=={true}|?{non,oui}})</dd>]
+        <dd>(#VALEUR{start}|Agenda_affdate_debut_fin{#GET{end},#VALEUR{allDay}|=={true}|?{non,oui}})</dd>]
 
         [<dt><:agenda:evenement_descriptif:></dt>
         <dd>(#VALEUR{description})</dd>]

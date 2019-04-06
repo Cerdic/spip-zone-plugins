@@ -2,18 +2,22 @@
 #SET{end,#ENV{end}|strtotime}
 
 #HTTP_HEADER{Content-type:application/json;charset=#CHARSET}
-[<BOUCLE_evenements(EVENEMENTS){', '}{par date_debut}	
+[<BOUCLE_evenements(EVENEMENTS){', '}{par date_debut}
 {agendafull date_debut,date_fin, periode,
 	#VAL{Y}|date{#GET{start}}, #VAL{m}|date{#GET{start}},     #VAL{d}|date{#GET{start}},
 	#VAL{Y}|date{#GET{end}}, #VAL{m}|date{#GET{end}}, #VAL{d}|date{#GET{end}}}
 	>
+	[(#HORAIRE|=={non}|?{
+		#SET{date_fin,#DATE_FIN|agenda_dateplus{24*3600}},
+		#SET{date_fin,#DATE_FIN}
+	})]
 	#SET{tableau,#ARRAY{id,#ID_EVENEMENT,
 		title,(#TITRE|html2unicode|unicode2charset),
 		allDay,(#HORAIRE|=={non}|?{#EVAL{true},#EVAL{false}}),
 		start,#DATE_DEBUT,
-		end,#DATE_FIN,
+		end,#GET{date_fin},
 		url,#URL_ARTICLE,
-		description,(#DESCRIPTIF|html2unicode|unicode2charset), 
+		description,(#DESCRIPTIF|html2unicode|unicode2charset),
 	}}
 
 [(#ENV{couleur}|=={rubrique}|oui)
