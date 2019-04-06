@@ -23,23 +23,24 @@
 	</thead>
 	<tbody>
 		<BOUCLE_config(DATA) {source table, #LISTE{auteur,organisation,contact}}>
-		#SET{objet,        #VALEUR}
-		#SET{champs,       #GET{config/#GET{objet}}}
-		#SET{coordonnees,  #GET{config/coordonnees/#GET{objet}}}
-		#SET{texte_objet,  #GET{objet}|objet_info{texte_objet}|_T}
-		#SET{texte_groupe, #GET{config/activer_groupe_#GET{objet}}}
-		#SET{texte_auteur, #VAL{profil:champ_groupe_auteur_label}|_T}
+		#SET{objet,                    #VALEUR}
+		#SET{config_champs_objet,      #GET{config/#GET{objet}}}
+		#SET{config_coordonnees_objet, #GET{config/coordonnees/#GET{objet}}}
+		#SET{config_label_groupe,      #GET{config/activer_groupe_#GET{objet}}}
+		#SET{texte_objet,              #GET{objet}|objet_info{texte_objet}|_T}
+		#SET{texte_auteur,             #VAL{profil:champ_groupe_auteur_label}|_T}
 
 		[(#REM) Compter le nb de coordonnees pour le rowspan de ses morts ]
 		#SET{nb_coordonnees,0}
-		<BOUCLE_nb_coordonnees(DATA) {source table, #GET{coordonnees}}>
+		<BOUCLE_nb_coordonnees(DATA) {source table, #GET{config_coordonnees_objet}}>
 		#SET{nb_coordonnees,#GET{nb_coordonnees}|plus{#VALEUR|count}}
 		</BOUCLE_nb_coordonnees>
 
 		[(#REM) Les champs de l'objet ]
-		<BOUCLE_champs(DATA) {source table, #GET{champs}}>
+		<BOUCLE_champs(DATA) {source table, #GET{config_champs_objet}}>
 		#SET{champ,#CLE}
 		[(#REM) Récupérer le label du champ ]
+		#SET{label,''}
 		<BOUCLE_label(DATA) {source table, #GET{objet}|profils_chercher_saisies_objet}>
 		[(#VALEUR{options/nom}|=={#GET{champ}}|oui)
 		#SET{label,#VALEUR{options/label}}
@@ -49,7 +50,7 @@
 			[<td class="config_objet" rowspan="[(#TOTAL_BOUCLE|plus{#GET{nb_coordonnees}})]" title="[(#GET{texte_objet}|attribut_html)]">
 				(#GET{objet}|objet_icone{32}|unique)
 				<label class="label">
-					[(#GET{texte_groupe}|sinon{
+					[(#GET{config_label_groupe}|sinon{
 						#GET{objet}|=={auteur}|?{#GET{texte_auteur},#GET{texte_objet}}
 					})]
 				</label>
@@ -76,16 +77,16 @@
 		</BOUCLE_champs>
 
 		[(#REM) Coordonnées ]
-		<BOUCLE_coordonnees(DATA) {source table, #GET{coordonnees}}>
+		<BOUCLE_coordonnees(DATA) {source table, #GET{config_coordonnees_objet}}>
 		#SET{texte_objet_coordonnee,#CLE|objet_type|objet_info{texte_objet}|_T}
 		<BOUCLE_coordonnees_type(DATA) {source table, #VALEUR}>
 		#SET{type,#VALEUR{type}|?{#_coordonnees:CLE|objet_type|coordonnees_lister_types_coordonnees{#VALEUR{type}}}}
 		<tr>
-			[(#GET{champs}|non)
+			[(#GET{config_champs_objet}|non)
 			[<td class="config_objet" rowspan="[(#GET{nb_coordonnees})]" title="[(#GET{texte_objet}|attribut_html)]">
 					(#GET{objet}|objet_icone{32}|unique)
 				<label class="label">
-					[(#GET{texte_groupe}|sinon{
+					[(#GET{config_label_groupe}|sinon{
 						#GET{objet}|=={auteur}|?{#GET{texte_auteur},#GET{texte_objet}}
 					})]
 				</label>

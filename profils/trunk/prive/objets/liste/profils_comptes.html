@@ -44,7 +44,7 @@
 			<td class="statut">[(#STATUT|puce_statut{auteur,#ID_AUTEUR})]</td> 
 			<td class="nom principale">
 				[(#LOGO_AUTEUR|image_reduire{20,26})]
-				<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#RANG). ]#NOM</a>
+				<a href="[(#URL_ECRIRE{profil_compte,id_auteur=#ID_AUTEUR}|parametre_url{id_profil,#ID_PROFIL}|parametre_url{var_zajax,contenu})]" class="mediabox">[(#RANG). ]#NOM</a>
 			</td>
 			<td class=""email">[<a href='mailto:(#EMAIL)'>[(#EMAIL|couper{30})]</a>]</td>
 			<td class="actions">
