@@ -1,7 +1,7 @@
 <paquet
 	prefix="multilingue"
 	categorie="edition"
-	version="2.0.0"
+	version="2.0.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/multilingue-64.png"
@@ -15,7 +15,7 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 
-	<necessite nom="interface_traduction_objets" compatibilite="[1.0.0;]" />
+	<necessite nom="interface_traduction_objets" compatibilite="[1.0.3;]" />
 	<necessite nom="secteur_langue" compatibilite="[1.0.0;[" />
 	<necessite nom="languepreferee" compatibilite="[0.4.7;[" />
 

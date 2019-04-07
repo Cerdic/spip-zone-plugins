@@ -9,20 +9,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'multilingue_description' => 'Met en place un site multilingue avec une langue par secteur.
-	
+
 	Le plugin force l’installation de plusieurs plugin
-	
-	- [Traduction entre rubriques->https://plugins.spip.net/tradrub.html]
+
 	- [Langue préférée par l’internaute ->https://contrib.spip.net/Plugin-Langue-preferee-par-l-internaute]
-	- [Traductions de rubriques autrement->https://contrib.spip.net/Traductions-de-rubriques-autrement-3]
-	- [Traductions d’articles autremen->https://contrib.spip.net/Traductions-d-articles-autrement-3]
-	
-	Sous Spip 2 ou 2.1 il est recommendable d’installer d’abord le plugin [Step->https://contrib.spip.net/STEP-Systeme-de-Telechargements-de-Plugins] avant d’activer ce plugin ce qui forcera également l’installation de tous les plugin nécessaires.
-	
+	- [Interface de traduction pour objets->https://plugins.spip.net/interface_traduction_objets.html]
+	- [Secteur par langue->https://plugins.spip.net/secteur_langue.html]
+
 	Le plugin modifie quelques squelettes (rubriques et articles) et quelques noisettes de bases.
-	
+
 	Une fois installé les plugins nécessaires, il vous suffira de déterminer les langues du site dans "Configuration"->"Mulilinguisme/Gestion des langues, et voilà votre site est multilingue
-	
+
 	',
 	'multilingue_nom' => 'Site multilingue facile',
 	'multilingue_slogan' => 'Créer facilement un site multilingue'
