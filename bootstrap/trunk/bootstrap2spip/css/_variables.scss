@@ -37,7 +37,7 @@ $grays: map-merge(
 $blue:    #007bff !default;
 $indigo:  #6610f2 !default;
 $purple:  #6f42c1 !default;
-$pink:    #e83e8c !default;
+$pink:    #d9398e !default;
 $red:     #900 !default;
 $orange:  #fd7e14 !default;
 $yellow:  #ffc107 !default;
@@ -272,7 +272,7 @@ $embed-responsive-aspect-ratios: join(
 // stylelint-disable value-keyword-case
 $font-family-sans-serif:      "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif !default;
 $font-family-serif:           Georgia, Cambria, "Times New Roman", Times, serif !default;
-$font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", Courier, monospace !default;
 $font-family-base:            $font-family-serif !default;
 
 // stylelint-enable value-keyword-case
