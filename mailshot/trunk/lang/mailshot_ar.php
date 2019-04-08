@@ -16,9 +16,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_aucun_service_configure' => 'لا توجد اية خدمة إرسال معدّة. <a href="@url@">إعداد خدمة</a>',
-	'erreur_envoi_mail_bloque_debug' => 'إرسال البريد مصدود من <tt>_TEST_EMAIL_DEST</tt>', # MODIF
-	'erreur_envoi_mail_force_debug' => 'إرسال بريد مفروض الى @email@ من <tt>_TEST_EMAIL_DEST</tt>', # MODIF
-	'erreur_generation_newsletter' => 'حصل خطأ لدى انتاج النشرة البريدية', # MODIF
+	'erreur_envoi_mail_bloque_debug' => 'إرسال البريد المصدود من <tt>_TEST_EMAIL_DEST</tt>',
+	'erreur_envoi_mail_force_debug' => 'إرسال البريد المفروض الى @email@ من <tt>_TEST_EMAIL_DEST</tt>',
+	'erreur_envoi_newsletter' => 'حدث خطأغير معروف خلال ارسال النشرة.',
+	'erreur_generation_newsletter' => 'حصل خطأ لدى انتاج النشرة البريدية',
 	'explication_boost_send' => 'في هذه الوضعية، يتم إرسال الرسائل في أسرع وقت ممكن. لا توجد أية حدود لوتيرة الإرسال.
 										الإسال السريع غير مستحب لأنه يرفع من احتمال وصم خادم البريد بالخنزرة.',
 	'explication_purger_historique' => 'لكل إرسال بالجملة، يتم حفظ جميع المرسل اليهم في قاعدة البيانات مع معلومات وضعية الإرسال.
@@ -63,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_date_start' => 'تاريخ بدء الإرسال',
 	'label_envoi' => 'إرسال',
 	'label_from' => 'المرسِل',
+	'label_graceful' => 'فقط للمرسل اليهم الذين لم يحصلوا على هذا المحتوى',
 	'label_html' => 'نسخة HTML',
 	'label_listes' => 'اللوائح',
 	'label_mailer_defaut' => 'استخدام خدمة الإرسال نفسها لباقي الرسائل',
@@ -78,6 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_purger_historique_delai' => 'أقدم من',
 	'label_purger_historique_oui' => 'حذف تفاصيل الإرسالات القديمة',
 	'label_rate_limit' => 'حد وتيرة الإرسال',
+	'label_sparkpost_api_endpoint' => 'API Endpoint',
 	'label_sparkpost_api_key' => 'مفتاح Sparkpost',
 	'label_sujet' => 'الموضوع',
 	'label_texte' => 'النسخ النصية',
@@ -98,10 +101,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_pause' => 'متوقف مؤقتاً',
 	'texte_statut_processing' => 'جاري',
 	'titre_envois_archives' => 'الإرسالات المؤرشفة',
+	'titre_envois_destinataires_clic' => 'الرسائل التي نُقرت',
 	'titre_envois_destinataires_fail' => 'الإرسالات التي فشلت',
 	'titre_envois_destinataires_init_encours' => 'لا يوجد اي مرسل اليه مبرمج (جاري التأصيل)',
 	'titre_envois_destinataires_ok' => 'الإرسالات الناجحة',
+	'titre_envois_destinataires_read' => 'الرسائل التي فتحت',
 	'titre_envois_destinataires_sent' => 'الإرسالات الناجحة',
+	'titre_envois_destinataires_spam' => 'رسائل الخنزرة',
 	'titre_envois_destinataires_todo' => 'إراسلات قادمة',
 	'titre_envois_en_cours' => 'إرسالات حالية',
 	'titre_envois_planifies' => 'إرسالات مبرمجة',
