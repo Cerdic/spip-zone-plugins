@@ -485,7 +485,9 @@ function ckeditor_spip2html($texte) {
 	}
 
 	foreach($search as $k => $v)
-		$texte = propre(preg_replace_callback($v, $replace[$k], $texte)) ; // utilisation du filtre 'propre' : conseil de https://contrib.spip.net/RealET,411
+		$texte = preg_replace_callback($v, $replace[$k], $texte);
+		
+	$texte = propre($texte); // utilisation du filtre 'propre' : conseil de https://contrib.spip.net/RealET,411
 
 	$texte = preg_replace("~\[\*\[\*~", "[[", $texte) ; // on déprotège ...
 	if (PROTECTED_SPIP_TAGS) {
