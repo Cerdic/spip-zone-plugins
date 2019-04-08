@@ -1,5 +1,5 @@
 <traduction module="newsletter" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/newsletters/trunk/lang/" reference="fr">
-	<langue code="ar" url="https://trad.spip.net/tradlang_module/newsletter?lang_cible=ar" total="55" traduits="0" relire="0" modifs="55" nouveaux="0" pourcent="0.00">
+	<langue code="ar" url="https://trad.spip.net/tradlang_module/newsletter?lang_cible=ar" total="55" traduits="55" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
 	<langue code="de" url="https://trad.spip.net/tradlang_module/newsletter?lang_cible=de" total="55" traduits="0" relire="0" modifs="55" nouveaux="0" pourcent="0.00">
