@@ -1,0 +1,8 @@
+@import "bootstrap/css/_card";
+
+.well {
+  @extend .card;
+  padding: $card-spacer-x;
+  background-color: $well-bg;
+  margin-bottom: $rem-vert-margin;
+}

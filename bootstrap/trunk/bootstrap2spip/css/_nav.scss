@@ -1,0 +1,71 @@
+@import "bootstrap/css/_nav";
+
+ul.nav,ol.nav {margin-left: 0;}
+
+//.nav-pills .nav-header {padding-left: 12px;}
+//.texte_libre {&:extend(.nav-header);}
+
+// Nav headers (for dropdowns and lists)
+.nav-header {
+  display: block;
+  padding: $nav-link-padding-y $nav-link-padding-x;
+  color: $nav-link-disabled-color;
+  font-size: $font-size-sm;
+  font-weight: bold;
+  line-height: $line-height-base;
+  text-transform: uppercase;
+}
+
+// Space them out when they follow another list item (link)
+.nav-item + .nav-header {
+  margin-top: $rem-vert-margin / 2;
+}
+
+// NAV LIST
+// --------
+.well .nav-list,
+.card-body .nav-list{
+  margin-left: -$card-spacer-x;
+  margin-right: -$card-spacer-x;
+  .nav-list {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.nav-list {
+  flex-direction: column !important;
+  margin-bottom: 0;
+  .nav-link, .nav-header {
+    padding: $nav-link-padding-y / 2 $nav-link-padding-x;
+  }
+  .nav-item > .nav-list {
+    margin-left: $grid-gutter-width;
+  }
+}
+
+
+.nav-list .nav-link,
+.nav-list .nav-header {
+}
+.nav-list > li > a {
+}
+
+.nav-list > .active > .nav-link {
+  color: $component-active-color;
+  background-color: $component-active-bg;
+  @include hover-focus-active {
+    color: $component-active-color;
+    background-color: $component-active-bg;
+  }
+}
+
+.nav-list [class^="icon-"],
+.nav-list [class*=" icon-"] {
+  margin-right: 2px;
+}
+
+// Dividers (basically an hr) within the dropdown
+.nav-list .divider {
+  @include nav-divider($dropdown-divider-bg, $dropdown-divider-margin-y / 2);
+}
