@@ -356,5 +356,11 @@ function fullInitCKEDITOR(editor_ids){
 				SpipEditor2CKEditor(editor_id) ;
 			}
 		}}
+		CKEDITOR.on("currentInstance", function(event)
+		{
+			$('.cke_contents > iframe').each(function(i){
+			  var done = $(this)[0].contentWindow.document.execCommand('enableObjectResizing');
+			});
+		});
 	}
 }
