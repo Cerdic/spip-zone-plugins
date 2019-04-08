@@ -1,0 +1,90 @@
+@import "bootstrap/css/_navbar";
+
+.navbar {
+  padding-top: 0;
+  padding-bottom: 0;
+
+  .nav-link {
+    padding-top: $navbar-padding-y;
+    padding-bottom: $navbar-padding-y;
+  }
+
+  .navbar-collapse {
+    .nav-link {
+      padding-left: $navbar-nav-link-padding-x;
+      padding-right: $navbar-nav-link-padding-x;
+    }
+  }
+}
+
+
+
+// Dark links against a light background
+.navbar-light {
+  .navbar-nav {
+    .nav-link {
+      background-color: $navbar-light-bg;
+
+      @include hover-focus {
+        background-color: $navbar-light-hover-bg;
+      }
+
+      &.disabled {
+        background-color: $navbar-light-disabled-bg;
+      }
+    }
+
+    .show > .nav-link,
+    .active > .nav-link,
+    .nav-link.show,
+    .nav-link.active {
+      background-color: $navbar-light-active-bg;
+    }
+  }
+
+  .navbar-text {
+    background-color: $navbar-light-bg;
+    a {
+      background-color: $navbar-light-active-bg;
+
+      @include hover-focus {
+        background-color: $navbar-light-active-bg;
+      }
+    }
+  }
+}
+
+// White links against a dark background
+.navbar-dark {
+  .navbar-nav {
+    .nav-link {
+      background-color: $navbar-dark-bg;
+
+      @include hover-focus {
+        background-color: $navbar-dark-hover-bg;
+      }
+
+      &.disabled {
+        background-color: $navbar-dark-disabled-bg;
+      }
+    }
+
+    .show > .nav-link,
+    .active > .nav-link,
+    .nav-link.show,
+    .nav-link.active {
+      background-color: $navbar-dark-active-bg;
+    }
+  }
+
+  .navbar-text {
+    background-color: $navbar-dark-bg;
+    a {
+      background-color: $navbar-dark-active-bg;
+
+      @include hover-focus {
+        background-color: $navbar-dark-active-bg;
+      }
+    }
+  }
+}

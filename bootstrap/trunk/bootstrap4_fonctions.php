@@ -15,7 +15,8 @@ if (!defined('_MENUS_EXTRA_CLASS')) define('_MENUS_EXTRA_CLASS','nav');
  * @return string
  */
 function navbar_responsive($nav, $class_collapse = 'nav-collapse-main'){
-	if (strpos($nav,'nav-collapse')!==false) return $nav;
+	static $navbarcount = 1;
+	if (strpos($nav,'navbar-collapse')!==false) return $nav;
 
 	$respnav = '';
 
@@ -26,12 +27,15 @@ function navbar_responsive($nav, $class_collapse = 'nav-collapse-main'){
 		$n++;
 	}
 	if ($ul){
+		$id = "navbar-".substr(md5($navbarcount . ':' . time() .':' . $nav),0,4);
 		$respnav = $nav;
 		$p = strpos($respnav,$ul);
 		$respnav = substr_replace($respnav,
-			'<a class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".' . $class_collapse . '">' .
-				'<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a>' .
-				"\n".'<div class="nav-collapse navbar-collapse ' . $class_collapse . ' collapse">',$p,0);
+			'<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#' . $id . '" aria-controls="'. $id . '" aria-expanded="false" aria-label="Toggle navigation">'
+			. '<span class="navbar-toggler-icon"></span>'
+			. '</button>'
+			. "\n" . '<div class="collapse navbar-collapse ' . $class_collapse . '" id="'.$id.'">',$p,0);
+
 		$l=strlen($respnav);$p=$l-1;
 		while ($n--){
 			$p = strrpos($respnav,"</ul>",$p-$l);

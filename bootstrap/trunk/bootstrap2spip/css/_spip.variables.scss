@@ -26,3 +26,13 @@ $padding-x-xs: 0.3125rem;
 $padding-y-xs: 0.0625rem;
 
 $well-bg: $gray-100 !default;
+
+$navbar-dark-bg:                 transparent !default;
+$navbar-dark-hover-bg:           transparent !default;
+$navbar-dark-active-bg:          $black !default;
+$navbar-dark-disabled-bg:        transparent !default;
+
+$navbar-light-bg:                transparent !default;
+$navbar-light-hover-bg:          transparent !default;
+$navbar-light-active-bg:         $white !default;
+$navbar-light-disabled-bg:       transparent !default;
