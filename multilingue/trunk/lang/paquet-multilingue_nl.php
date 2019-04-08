@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	Zodra de nodige plugins zijn geactiveerd, leg je de talen van de site vast in de configuratie van de site (meertaligheid) en je site is meertalig
 	
-	',
+	', # MODIF
 	'multilingue_nom' => 'Site Multilingue Facile',
 	'multilingue_slogan' => 'Maak eenvoudig een meertalige site'
 );
