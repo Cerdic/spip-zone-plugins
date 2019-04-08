@@ -5,6 +5,12 @@
   @include list-unstyled();
   @include border-radius();
   margin:0;
+  width: 100%;
+  justify-content:center;
+  // page precedent/suivant
+  &.pager {
+    justify-content:space-around;
+  }
 }
 
 .pagination .pagination-label {
@@ -27,3 +33,4 @@
   display: block;
   margin: $rem-vert-margin 0;
 }
+
