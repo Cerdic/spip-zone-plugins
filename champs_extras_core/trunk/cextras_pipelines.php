@@ -154,11 +154,13 @@ function cextras_editer_contenu_objet($flux){
  * @return array      Données du pipeline
 **/ 
 function cextras_pre_edition($flux){
-
 	include_spip('inc/cextras');
 	include_spip('inc/saisies_lister');
-	$table = $flux['args']['table'];
-	if ($saisies = champs_extras_objet( $table )) {
+	if (
+		$flux['args']['action'] == 'modifier'
+		and $table = $flux['args']['table']
+		and $saisies = champs_extras_objet($table)
+	) {
 		// Restreindre les champs postés en fonction des autorisations de les modifier
 		// au cas où un malin voudrait en envoyer plus que le formulaire ne demande
 		$saisies = champs_extras_autorisation('modifier', objet_type($table), $saisies, $flux['args']);
