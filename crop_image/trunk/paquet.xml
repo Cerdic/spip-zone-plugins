@@ -1,7 +1,7 @@
 <paquet
 	prefix="jcrop"
 	categorie="edition"
-	version="1.0.0"
+	version="1.0.1"
 	etat="dev"
 	compatibilite="[3.1.0;3.2.*]"
 	logo="prive/themes/spip/images/jcrop-64.png"
