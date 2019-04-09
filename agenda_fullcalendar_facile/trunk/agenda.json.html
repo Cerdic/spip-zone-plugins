@@ -8,7 +8,7 @@
 	#VAL{Y}|date{#GET{end}}, #VAL{m}|date{#GET{end}}, #VAL{d}|date{#GET{end}}}
 	>
 	[(#HORAIRE|=={non}|?{
-		#SET{date_fin,#DATE_FIN|agenda_dateplus{24*3600}},
+		#SET{date_fin,#DATE_FIN|full_calendar_jplusun},
 		#SET{date_fin,#DATE_FIN}
 	})]
 	#SET{tableau,#ARRAY{id,#ID_EVENEMENT,
