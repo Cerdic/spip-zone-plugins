@@ -1,7 +1,7 @@
 <paquet
 	prefix="codes_postaux"
 	categorie="divers"
-	version="3.1.1"
+	version="3.1.2"
 	etat="stable"
 	compatibilite="[3.1.0;3.2.*]"
 	logo="prive/themes/spip/images/codes_postaux-32.png"
