@@ -1,0 +1,222 @@
+@import "bootstrap/css/_forms";
+
+legend {
+	font-size: $h3-font-size;
+	line-height: $line-height-base / ($h3-font-size / $font-size-base);
+	margin-bottom: $rem-vert-margin / 2;
+	margin-top: $rem-vert-margin / 2;
+	border-bottom: $input-border-width solid $input-border-color;
+}
+
+/* Surcharge RTL */
+.rtl {
+  .form-search .input-append .search-query {
+		border-radius : 0 14px 14px 0;
+  }
+  .form-search .input-append .btn {
+		border-radius : 14px 0 0 14px;
+  }
+  .form-search .input-prepend .search-query {
+		border-radius : 14px 0 0 14px;
+  }
+  .form-search .input-prepend .btn {
+		border-radius : 0 14px 14px 0;
+  }
+}
+
+
+/* Structure generale des formulaires
+----------------------------------------------- */
+$form-padding: $spacer !default;
+$form-padding-sm: $spacer / 2 !default;
+
+.formulaire_spip {
+	clear: both;
+	margin-bottom: $rem-vert-margin;
+	padding: $form-padding;
+	background-color: $form-bg;
+	position: relative;
+}
+.formulaire_spip form {margin-bottom: 0}
+.formulaire_spip .boutons {
+	background-color: $form-bg;
+	border-top: 1px solid $input-group-addon-border-color;
+	@include clearfix(); // Adding clearfix to allow for .pull-right button containers
+	margin: 0 -1 * $form-padding -1 * $form-padding;
+	padding: $form-padding;
+	text-align: right;
+}
+.secondary {
+  .formulaire_spip {padding: $form-padding-sm;}
+  .formulaire_spip .boutons {margin: 0 -1 * $form-padding-sm -1 * $form-padding-sm; padding: $form-padding-sm;}
+}
+
+input.submit, .formulaire_spip button.submit:not(.btn-link) {
+	@extend .btn;
+}
+body {
+	input.submit, .formulaire_spip button.submit:not(.btn-link) {
+		@include button-variant(theme-color("light"), $input-group-addon-border-color);
+	}
+}
+
+
+
+/* Lignes */
+.formulaire_spip .editer-groupe,
+// et compat legacy
+.formulaire_spip >div>ul,
+.formulaire_spip fieldset>ul,
+.formulaire_spip .fieldset>ul,
+.formulaire_spip form>ul,
+.formulaire_spip form>div>ul {margin-left: 0;list-style: none;margin-bottom: $form-group-margin-bottom;}
+
+.formulaire_spip .editer { list-style: none;clear: both; margin: 0 -1 * $form-padding; padding: $rem-vert-margin / 4 $form-padding $rem-vert-margin / 2; }
+
+.formulaire_spip label {font-weight: inherit;margin-bottom: $rem-vert-margin / 4}
+
+/* Explications */
+.formulaire_spip .explication {
+	display: block;
+	color: lighten($body-color, 25%); // lighten the text some for contrast
+	margin:0 0 $rem-vert-margin;
+}
+.formulaire_spip .editer .explication {margin:$rem-vert-margin / 4 0; }
+.formulaire_spip .editer label+.explication {margin-top: -$rem-vert-margin / 4}
+
+/* Champs obligatoires */
+.formulaire_spip .editer.obligatoire {}
+.formulaire_spip .editer.obligatoire label {font-weight: bold;}
+
+/* choix */
+.formulaire_spip input.radio, .formulaire_spip input.checkbox {display:inline-block;}
+.formulaire_spip .choix label {display:inline;font-weight:normal;}
+.formulaire_spip .choix input.radio, .formulaire_spip .choix input.checkbox {
+	width:auto;
+	margin: $form-check-input-margin-y $form-check-input-margin-x;
+	margin-left:0;
+	margin-bottom: 1px;
+}
+
+/* choix de mot dans le form forum notamment */
+.formulaire_spip .choix_mots {
+	display: flex;
+	// TODO FLEX
+	//.make-row();
+}
+.formulaire_spip .choix_mots .saisie_mot {
+	// TODO FLEX
+	flex-grow:1;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	flex-basis:30%;
+	//.make-xs-column(6);
+	//@media (max-width:@screen-xs-min) {
+	//	width: 100%;
+	//	float: none;
+	//}
+}
+.formulaire_spip .choix_mots .saisie_mot:nth-child(2n-1) {clear: both;}
+.formulaire_spip .choix_mots .saisie_mot label {display:inline;font-weight:normal;}
+.formulaire_spip .choix_mots .saisie_mot input.radio,
+.formulaire_spip .choix_mots .saisie_mot input.checkbox {
+	width:auto;
+	margin: $form-check-input-margin-y $form-check-input-margin-x;
+	margin-left:0;
+	margin-bottom: 1px;
+}
+
+
+/* Champs de saisie */
+.formulaire_spip {
+	input.text,input.password,input.email,input.date,
+	textarea,
+	select {
+		@extend .form-control;
+	}
+	textarea {height: auto;}
+
+	.markItUp .markItUpContainer .markItUpHeader {width: 100%;padding-right: 6px;padding-left: 6px;}
+	.markItUp .markItUpContainer .markItUpHeader + textarea {border-top-left-radius: 0;border-top-right-radius: 0;border-top:0;}
+}
+
+
+/* Reponses, previsu et erreurs
+----------------------------------------------- */
+
+/* * Erreurs */
+.editer.erreur {
+	background-color: theme-color-level('danger', $alert-bg-level);
+	input.text,input.password,input.email,input.date,
+	textarea,
+	select {
+    	border-color: theme-color-level('danger', $alert-border-level);
+    	//box-shadow: inset 0 1px 1px rgba(0,0,0,.075); // Redeclare so transitions work
+		&:focus {
+		  border-color: darken(theme-color-level('danger', $alert-border-level), 10%);
+		  //@shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px lighten(@state-danger-text, 20%);
+		  //.box-shadow(@shadow);
+		}
+	}
+}
+.editer .erreur_message { display: block; color: theme-color-level('danger', $alert-color-level); font-weight: bold;}
+.editer .erreur_message label {display: inline;}
+.editer .erreur_message input {margin: 0;}
+
+/* Reponses */
+.reponse_formulaire {
+	@extend .alert;
+}
+.reponse_formulaire_ok {
+	@include alert-variant(theme-color-level('success', $alert-bg-level), theme-color-level('success', $alert-border-level), theme-color-level('success', $alert-color-level));
+}
+.reponse_formulaire_erreur {
+	@include alert-variant(theme-color-level('danger', $alert-bg-level), theme-color-level('danger', $alert-border-level), theme-color-level('danger', $alert-color-level));
+}
+
+/* Variantes et cas particuliers
+----------------------------------------------- */
+
+/* quelques fieldset.info qui ne sont pas des messages d'info */
+.formulaire_spip fieldset.info {
+  background-color: inherit;
+  color: inherit;
+  text-shadow:inherit;
+  border-radius: inherit;
+}
+
+/* Selection des langues */
+.formulaire_menu_lang { margin: 0; padding: 0; background: none; border: 0;}
+.formulaire_menu_lang form select {
+	width: 100%;
+}
+
+/* Formulaires de recherche (site / petitions) */
+.formulaire_recherche,.secondary .formulaire_recherche {
+	padding: 0; background: none; border: 0;
+	input.text {
+		width: 100%;
+	}
+}
+#formulaire_recherche {
+	padding-right: 0;
+}
+
+/* Formulaire de login dans une page */
+.formulaire_login form .editer {clear:left;}
+.formulaire_login form input.text,
+.formulaire_login form input.password {
+	width: 60%;
+	@include media-breakpoint-down(sm) {
+		width: 100%;
+	}
+}
+
+.formulaire_login form .editer_password .details {margin-bottom:0;}
+.formulaire_login #spip_logo_auteur {
+	float:right;
+	@include media-breakpoint-down(sm) {
+		margin-top: -35px;
+	}
+}
+
