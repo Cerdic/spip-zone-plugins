@@ -24,6 +24,6 @@
 	<pipeline nom="jqueryui_plugins" inclure="legendes_pipelines.php" />
 
 	<necessite nom="saisies" compatibilite="[3.14.0;[" />
-	<necessite nom="jqueryui" compatibilite="[1.8.2;[" />
-	<necessite nom="medias" compatibilite="[2.7.27;[" />
+	<necessite nom="jqueryui" compatibilite="[1.12.1;[" />
+	<necessite nom="medias" compatibilite="[2.20.15;[" />
 </paquet>
