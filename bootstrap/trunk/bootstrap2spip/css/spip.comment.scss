@@ -2,9 +2,7 @@
 /* Habillage des forums
 ---------------------------------------------- */
 
-@import "css/variables.less";
-@import "css/spip.variables.less";
-@import "css/mixins.less";
+@import "css/bootstrap-start";
 
 /* * Habillage des forums */
 //.comments { margin-bottom:/*@margin-bottom*/1.5em/*/@*/}
@@ -12,37 +10,40 @@
 /* comments list */
 .comments-items {list-style: none;margin-left: 0;}
 //.comments-items {border-bottom: 1px solid #eee;}
-.comments-items .comments-items {margin-left: @gridColumnWidth+@grid-gutter-width;}
-.comments-items .comments-items .comments-items .comments-items .comments-items {margin-left: @grid-gutter-width;}
+.comments-items .comments-items {
+  margin-left: 3 * $grid-gutter-width;
+}
+.comments-items .comments-items .comments-items .comments-items .comments-items {margin-left: $grid-gutter-width;}
 
 //.comments-items .comment-item {border-top: 1px solid #eee;}
 //.comments-items .comment-item .comment-item {border-top: 0;}
 
-.comment {overflow:hidden;position: relative;padding-bottom: @line-height-computed;}
+.comment {overflow:hidden;position: relative;padding-bottom: $rem-vert-margin;}
 .comment-meta {
   min-height: 20px;
   padding: 19px;
-  background-color: @well-bg;
-  border: 1px solid @well-border;
-	border-radius: @border-radius-base;
-  .box-shadow(inset 0 1px 1px rgba(0,0,0,.05));
+  background-color: $well-bg;
+  border: $card-border-width solid $card-border-color;
+  border-radius: $card-border-radius;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
   border:0;
-  margin-bottom: @line-height-computed / 2;
+  margin-bottom: $rem-vert-margin / 2;
 }
-.comment-meta {padding-left: @gridColumnWidth+2*@grid-gutter-width;position: relative;}
-.comment-meta .spip_logos {position:absolute;left: @grid-gutter-width;}
-.comment-meta .permalink { position: absolute;right: 0;font-size: 2em;color:@gray-light;}
+
+.comment-meta {padding-left: 3 * $grid-gutter-width;position: relative;}
+.comment-meta .spip_logos {position:absolute;left: $grid-gutter-width / 2;}
+.comment-meta .permalink { position: absolute;right: 0;font-size: 2rem;color:$gray-100;}
 
 //.comment-item .comment-item .comment-meta {background : #f4f4f4;}
 .comment-meta .forum-titre {display: block;}
-.comment-content {background: transparent;padding-left: @gridColumnWidth+2*@grid-gutter-width;max-height:60em;overflow:auto;overflow-x:none;}
-.comment-reply { clear: both; text-align: right; margin-bottom:0;margin-top: -@line-height-computed/2;visibility: hidden;}
+.comment-content {background: transparent;padding-left: 3 * $grid-gutter-width;max-height:60em;overflow:auto;overflow-x:none;}
+.comment-reply { clear: both; text-align: right; margin-bottom:0;margin-top: -$rem-vert-margin / 2;visibility: hidden;}
 .comment:hover .comment-reply {visibility: visible;position: relative;}
 /* avec plugin comments */
 .comment-item:hover >.comment-reply {visibility: visible;position: relative;}
 
 /* en thread */
-.comments-thread .comment-item {margin-bottom:@line-height-computed;}
+.comments-thread .comment-item {margin-bottom:$rem-vert-margin;}
 .comments-thread .comment-item .comment-item {margin-bottom:0;}
 .comments-thread .permalink.in-reply-to {bottom:0;}
 
