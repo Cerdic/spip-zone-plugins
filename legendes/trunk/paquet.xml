@@ -1,7 +1,7 @@
 <paquet
 	prefix="legendes"
 	categorie="multimedia"
-	version="2.0.0"
+	version="2.0.1"
 	etat="stable"
 	compatibilite="[3.2.0;3.3.*]"
 	logo="images/legendes-128.png"
