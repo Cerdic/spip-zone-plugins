@@ -1,0 +1,43 @@
+<paquet
+	prefix="notifavancees"
+	categorie="outil"
+	version="0.4.3"
+	etat="test"
+	compatibilite="[2.1.0;3.2.99]"
+	logo="images/notifications-128.png"
+	schema="0.1.0"
+	documentation="https://contrib.spip.net/Notifications-avancees"
+>	
+
+	<nom>Notifications avancées</nom>
+	<!-- Permet une gestion fine des notifications à envoyer avec possibilité de s'inscrire/se désinscrire et de choisir les modes d'envois -->
+
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_principales" inclure="base/notifavancees_tables.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/notifavancees_tables.php" />
+	<pipeline nom="notifications" inclure="notifavancees_pipelines.php" />
+	<pipeline nom="affiche_droite" inclure="notifavancees_pipelines.php" />
+	<pipeline nom="autoriser" inclure="inc/notifications_autoriser.php" />
+
+	<necessite nom="saisies" compatibilite="[1.42.11;[" />
+	<necessite nom="yaml" compatibilite="[1.5.3;[" />
+
+<spip compatibilite="[3.0.0;3.2.99]">	
+
+	<necessite nom="spip_bonux" compatibilite="[3.4.6;[" />
+	<necessite nom="queue" compatibilite="[0.6.6;[" />
+	<necessite nom="facteur" compatibilite="[3.6.2;[" />
+</spip>
+
+
+<spip compatibilite="[2.1.0;2.1.99]">	
+
+	<necessite nom="spip_bonux" compatibilite="[2.2.23;[" />
+	<necessite nom="queue" compatibilite="[0.6.2;[" />
+	<necessite nom="facteur" compatibilite="[1.8.11;[" />
+</spip>
+
+</paquet>
