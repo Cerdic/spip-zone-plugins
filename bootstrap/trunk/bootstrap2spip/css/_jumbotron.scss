@@ -1,0 +1,13 @@
+@import "bootstrap/css/jumbotron";
+//
+// Jumbotron
+// --------------------------------------------------
+
+
+.jumbotron {
+	margin-bottom: 2 * $rem-vert-margin;
+	//font-size: 1.0em * @jumbotron-font-size / @font-size-base;
+	//line-height: @emLineHeight;
+
+	& >:last-child {margin-bottom: 0;}
+}
