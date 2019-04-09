@@ -1,0 +1,19 @@
+@import "bootstrap/css/_buttons";
+
+/* boutons admin forum */
+.boutons.modererforum .submit {
+  @extend .btn;
+  @include button-size($btn-padding-y-sm, $btn-padding-x-sm, $btn-font-size-sm, $btn-line-height-sm, $btn-border-radius-sm);
+  font-size: 0.7rem;
+  line-height: 1.2;
+}
+
+.boutons.modererforum .poubelle .submit {
+  @include button-variant(theme-color("danger"), theme-color("danger"));
+}
+.boutons.modererforum .spam .submit {
+  @include button-variant(theme-color("dark"), theme-color("dark"));
+}
+
+/* boutons d'admin */
+body .spip-admin-bloc, body .spip-admin-float {z-index: $zindex-sticky + 1;}
