@@ -76,7 +76,7 @@ a {
     text-decoration: $link-hover-decoration;
   }
 }
-a[hreflang]:after { content: "\0000a0(" attr(hreflang) ")"; }
+a[hreflang]:after { content: "\0000a0[" attr(hreflang) "] "; color:$text-muted}
 @media print {
   a, a:visited { color: $body-color; text-decoration: underline; }
   .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; } /* Don't show links for images, or javascript/internal links */
@@ -86,7 +86,9 @@ a[hreflang]:after { content: "\0000a0(" attr(hreflang) ")"; }
 a.spip_note { font-weight: bold; } /* liens vers notes de bas de page */
 a.spip_in {} /* liens internes */
 a.spip_mail {}
-a.spip_out {} /* liens sortants */
+a.spip_out:after { content: "\002b08 "; color:$text-muted } /* liens sortants */
+a.spip_out[hreflang]:after { content: "\002b08\0000a0(" attr(hreflang) ") "; color:$text-muted}
+
 a.spip_url {} /* liens url sortants */
 a.spip_glossaire {} /* liens vers encyclopedie */
 @media print {
