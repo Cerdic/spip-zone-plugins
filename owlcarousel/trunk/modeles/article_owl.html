@@ -5,6 +5,7 @@ Insertion du modele <articleX|owl>
 
 @param : id_article
 @param : id-carousel : id unique du carousel
+@param : tri : ordre de tri des documents (rang_lien !defaut)
 @param : caption : oui : Affiche la description de l'image.
 @param : docs : 1,2,3 : selectionne individuellement les documents
 @param : items : 2 : le nombre d'items affiches ensemble
@@ -23,7 +24,7 @@ Insertion du modele <articleX|owl>
 -->]
 [(#REM) <!-- Diaporama -->]
 <div id="#ENV{id-carousel,demo}" class="article_owl owl-carousel owl-theme[ spip_documents_(#ENV{align})]"[ style="max-width:(#ENV{largeur})px"]>
-    <BOUCLE_listDocs(DOCUMENTS){id_article?}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{extension==jpg|png|gif}>
+    <BOUCLE_listDocs(DOCUMENTS){id_article?}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{extension==jpg|png|gif}{par #ENV{tri, rang_lien}}>
     <div class="owl-slide"[ (#ENV{URLhashListener}|=={true}|oui)data-hash="#ENV{id-carousel,demo}#ID_DOCUMENT"]>
         [(#ENV{caption,oui}|=={oui}|oui)
         <div class="caption[ (#ENV{caption_css})]">[
