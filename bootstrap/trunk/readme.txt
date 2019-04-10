@@ -5,7 +5,7 @@ bootstrap2spip/
   contient les adaptations de bootstrap<->spip (dans les deux sens)
   css/ contient des surcharges des fichiers bootstrap : inclusion du fichier original par @import + regles complementaires
   formulaires/ et modeles/ contient des squelettes dont la structure a ete adaptee a BootStrap
-  js/ contient le script de prise en charge de html5 pour IEx
+  js/ contient les js specifiques qu'on ajoute (hashgrid et un petit utilitaire pour les menus deroulants)
 demo/
-  bootstrap.html contient un exemple d'appel des CSS de bootstrap dans une page HTML
-  exemple.scss est un exemple de feuille perso en LESS qui inclue les variables bootstrap pour les prendre en compte
+  TODO bootstrap.html contient un exemple d'appel des CSS de bootstrap dans une page HTML
+  TODO exemple.scss est un exemple de feuille perso en SASS qui inclue les variables bootstrap pour les prendre en compte
