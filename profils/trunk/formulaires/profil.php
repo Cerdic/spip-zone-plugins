@@ -250,7 +250,7 @@ function formulaires_profil_traiter_dist($id_auteur = 'new', $id_ou_identifiant_
 				// Sinon on crée juste l'auteur vide, les champs seront ajoutés après
 				else {
 					include_spip('action/editer_objet');
-					$id_auteur = objet_inserer('auteur', null, array('statut' => '6forum', 'pass' => ' '));
+					$id_auteur = objet_inserer('auteur', null, array('statut' => '6forum', 'login' => $email_principal, 'pass' => ' '));
 					
 					// Si on doit envoyer une notification à la création (et qu'on a un email…)
 					if ($email_principal and _request('envoyer_notification')) {
