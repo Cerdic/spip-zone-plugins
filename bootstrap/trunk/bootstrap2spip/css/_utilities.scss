@@ -14,7 +14,7 @@ hr.clear { visibility: hidden; }
 /* attention : .invisible deja defini par bootstrap comme .hidden ici*/
 .offscreen { position: absolute; left: -999em; height: 1%; } /* not in bootstrap */
 .hidden { visibility: hidden; } /* same as bootstrap native .invisible */
-.none { display: none; } /* same as bootstrap native .hide */
+.none,.hide { display: none; } /* same as bootstrap native .hide */
 
 /*
   .js-hide cache en presence de js
