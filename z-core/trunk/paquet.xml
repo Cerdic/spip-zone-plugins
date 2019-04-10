@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/z-core-32.png"
-	documentation="http://www.yterium.net/108"
+	documentation="https://www.yterium.net/108"
 >
 
 	<nom>Z-core</nom>
@@ -15,6 +15,8 @@
 	<auteur>Cédric Morin</auteur>
 	<auteur lien="http://spip.tetue.net">Tetue</auteur>
 	<auteur>Collectif SPIP</auteur>
+
+	<credit lien='https://danklammer.com/bytesize-icons/'>bytesize-icons</credit>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
