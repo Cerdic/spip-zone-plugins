@@ -130,3 +130,91 @@ if (!defined('_DIR_PLUGIN_ADAPTIVE_IMAGES')) {
 	}
 }
 
+/**
+ * #ICON{search,icon-sm,Rechercher}
+ * @param $p
+ * @return mixed
+ */
+function balise_ICON_dist($p) {
+	$_name = interprete_argument_balise(1, $p);
+	if (!$_name) {
+		$msg = array('zbug_balise_sans_argument', array('balise' => ' ICON'));
+		erreur_squelette($msg, $p);
+	}
+	else {
+		$_class = interprete_argument_balise(2, $p);
+		if (!$_class) {
+			$_class = "''";
+		}
+		$_alt = interprete_argument_balise(3, $p);
+		if (!$_alt) {
+			$_alt = "''";
+		}
+		$p->code = "afficher_icone_svg($_name, $_class, $_alt)";
+	}
+
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+function afficher_icone_svg($name, $class = '', $alt = '') {
+	static $sprite_file;
+	if (is_null($sprite_file)) {
+		if (!defined('_ICON_SPRITE_SVG_FILE')) {
+			define('_ICON_SPRITE_SVG_FILE', "css/bytesize/bytesize-symbols.min.svg");
+		}
+		$sprite_file = timestamp(find_in_path(_ICON_SPRITE_SVG_FILE));
+	}
+	if (!$name) {
+		return $sprite_file;
+	}
+	if ($sprite_file) {
+		$name = preg_replace(",[^\w\-],", "", $name);
+		/*
+			<svg aria-labelledby="my-icon-title" role="img">
+		    <title id="my-icon-title">Texte alternatif</title>
+		    <use xlink:href="bytesize-symbols.min.svg#search"></use>
+	    </svg>
+			<svg aria-hidden="true" role="img">
+		    <use xlink:href="bytesize-symbols.min.svg#search"></use>
+			</svg>
+		 */
+		// width="0" height="0" -> rien ne s'affiche si on a pas la CSS icons.css
+		$svg = "<svg role=\"img\" width=\"0\" height=\"0\"";
+		if ($alt) {
+			$id = "icon-title-" . substr(md5("$name:$alt:$sprite_file"),0,4);
+			$svg .= " aria-labelledby=\"$id\"><title id=\"$id\">" . entites_html($alt)."</title>";
+		}
+		else {
+			$svg .= ">";
+		}
+		$icone_ancre_from_name = chercher_filtre("icone_ancre_from_name");
+		$ancre = $icone_ancre_from_name($name);
+		$svg .= "<use xlink:href=\"$sprite_file#$ancre\"></use>";
+		$svg .= "</svg>";
+
+		if ($class = trim($class)) {
+			$class = preg_replace(",[^\w\s\-],", "", $class);
+		}
+		return "<i class=\"icon" . ($class ? " $class" : "") . "\">$svg</i> ";
+	}
+	return "";
+}
+
+function filtre_icone_ancre_from_name_dist($name) {
+	return "i-$name";
+}
+
+function lister_icones_svg() {
+	$sprite_file = afficher_icone_svg('');
+	if ($sprite_file
+		and $sprite_file = supprimer_timestamp($sprite_file)
+	  and $sprite = file_get_contents($sprite_file)
+	  and preg_match_all(',id="i-([\w\-]+)",', $sprite, $matches, PREG_PATTERN_ORDER)) {
+		$icons = $matches[1];
+		return $icons;
+	}
+	return array();
+}
+
+
