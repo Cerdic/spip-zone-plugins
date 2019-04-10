@@ -188,9 +188,11 @@ body {
 
 /* Formulaires de recherche (site / petitions) */
 .formulaire_recherche,.secondary .formulaire_recherche {
-	padding: 0; background: none; border: 0;
-	input.text {
-		width: 100%;
+	padding: 0;
+	background: none;
+	border: 0;
+	.btn {
+		@include button-variant(theme-color("light"), $input-group-addon-border-color);
 	}
 }
 #formulaire_recherche {
