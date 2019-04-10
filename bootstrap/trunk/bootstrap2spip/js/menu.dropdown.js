@@ -1,3 +1,4 @@
+/* Pas teste avec BS4, a valider */
 jQuery(function(){
 	// detecter les navbar avec deroulant
 	// poser les class qui vont bien
