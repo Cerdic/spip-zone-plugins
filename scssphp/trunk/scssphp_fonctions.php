@@ -21,7 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return string
  */
 function scss_compile($style, $contexte = array()) {
-	require_once 'scssphp/scss.inc.php';
+	include_spip('lib/scssphp/scss.inc');
 
 	// le compilateur Leafo\ScssPhp\Compiler compile le contenu
 	$scss = new Compiler();
