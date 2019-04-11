@@ -6,3 +6,65 @@
   background-color: $well-bg;
   margin-bottom: $rem-vert-margin;
 }
+
+@mixin card-variant($color) {
+  background-color: $card-bg;
+  color: theme-color($color);
+  border-color: theme-color($color);
+  .card-header, .card-footer {
+    background-color: theme-color-level($color, $alert-bg-level);
+    color: theme-color-level($color, $alert-color-level);
+  }
+  &.highlight {
+    background-color: theme-color-level($color, $alert-bg-level);
+    color: theme-color-level($color, $alert-color-level);
+    border-color: theme-color-level($color, $alert-border-level);
+    .card-header, .card-footer {
+      background-color: $card-cap-bg;
+    }
+  }
+}
+
+.card-box {
+  margin-bottom: $rem-vert-margin;
+  .card-header, .card-body, .card-footer {
+    :last-child {
+      margin-bottom: 0;
+    }
+  }
+  &.success, &.info, &.error {
+    padding: 0;
+  }
+
+  @each $color, $value in $theme-colors {
+    &.#{$color},&.card-#{$color} {
+      @include card-variant($color);
+    }
+  }
+
+  &.error {
+    @include card-variant('danger');
+  }
+
+  &.important {
+    @include card-variant('primary');
+  }
+
+  &.notice {
+    @include card-variant('warning');
+  }
+
+  &.note {
+    @include card-variant('secondary');
+  }
+
+  &.inverse {
+    color: $white;
+    border-color: $black;
+    background-color: $gray-700;
+    .card-header, .card-footer {
+      background-color: $gray-900;
+    }
+  }
+
+}

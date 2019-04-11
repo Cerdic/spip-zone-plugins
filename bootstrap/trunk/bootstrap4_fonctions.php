@@ -142,14 +142,14 @@ if (!test_espace_prive()){
  * @return <type>
  */
 function filtre_boite_ouvrir_dist($titre, $class='', $head_class='', $id=""){
-	$class = "panel panel-default $class";
-	$head_class = "panel-heading $head_class";
+	$class = "card card-box $class";
+	$head_class = "card-header $head_class";
 	// dans l'espace prive, titrer en h3 si pas de balise <hn>
 	if (test_espace_prive() AND strlen($titre) AND strpos($titre,'<h')===false)
 		$titre = "<h3>$titre</h3>";
 	return '<div class="'.$class.($id?"\" id=\"$id":"").'">'
 	.($titre?'<div class="'.$head_class.'">'.$titre.'</div>':'')
-	.'<div class="panel-body">';
+	.'<div class="card-body">';
 }
 
 /**
@@ -160,7 +160,7 @@ function filtre_boite_ouvrir_dist($titre, $class='', $head_class='', $id=""){
  * @return <type>
  */
 function filtre_boite_pied_dist($class='act'){
-	$class = "panel-footer $class";
+	$class = "card-footer $class";
 	return 	'</div>'
 	.'<div class="'.$class.'">';
 }
