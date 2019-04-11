@@ -15,9 +15,7 @@
   @include border-radius($badge-border-radius);
   @include transition($badge-transition);
 
-  // changed the @at-root a#{&} to &[href]
-  // due to compiling errors
-  &[href] {
+  @at-root a#{&} {
     @include hover-focus {
       text-decoration: none;
     }
