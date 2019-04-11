@@ -34,6 +34,10 @@ function profils_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_updateq', 'spip_auteurs', array('pass' => ' '), array('id_profil>0', 'pass=""'))
 	);
 	
+	$maj['1.0.2'] = array(
+		array('sql_update', 'spip_auteurs', array('login' => 'md5(email)'), array('id_profil>0', 'login=""', 'email!=""'))
+	);
+	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
