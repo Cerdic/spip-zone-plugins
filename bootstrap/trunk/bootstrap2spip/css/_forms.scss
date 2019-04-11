@@ -200,6 +200,7 @@ body {
 }
 
 /* Formulaire de login dans une page */
+.formulaire_login .editer-groupe {position: relative;}
 .formulaire_login form .editer {clear:left;}
 .formulaire_login form input.text,
 .formulaire_login form input.password {
@@ -211,7 +212,9 @@ body {
 
 .formulaire_login form .editer_password .details {margin-bottom:0;}
 .formulaire_login #spip_logo_auteur {
-	float:right;
+	position: absolute;
+	top:0;
+	right: 0;
 	@include media-breakpoint-down(sm) {
 		margin-top: -35px;
 	}

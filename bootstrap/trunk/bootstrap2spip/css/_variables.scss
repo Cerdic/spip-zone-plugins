@@ -36,10 +36,10 @@ $grays: map-merge(
 
 $blue:    #007bff !default;
 $indigo:  #6610f2 !default;
-$purple:  #6f42c1 !default;
+$purple:  #9f4cc1 !default;
 $pink:    #d9398e !default;
 $red:     #900 !default;
-$orange:  #fd7e14 !default;
+$orange: #f48719 !default;
 $yellow:  #ffc107 !default;
 $green:   #28a745 !default;
 $teal:    #20c997 !default;
@@ -66,7 +66,7 @@ $colors: map-merge(
   $colors
 );
 
-$primary:       $red !default;
+$primary:       $orange !default;
 $secondary:     $gray-600 !default;
 $success:       #5cb85c !default;
 $info:          #5bc0de !default;
@@ -162,7 +162,7 @@ $sizes: map-merge(
 // Settings for the `<body>` element.
 
 $body-bg:                   $white !default;
-$body-color:                $gray-900 !default;
+$body-color:                $gray-700 !default;
 
 
 // Links
