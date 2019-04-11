@@ -300,7 +300,11 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 		}
 	}
 	// Vérifier que les valeurs postées sont acceptables, à savoir par exemple que pour un select, ce soit ce qu'on a proposé.
-	$erreurs = saisies_verifier_valeurs_acceptables($saisies, $erreurs);
+	if (isset($formulaire['options']['verifier_valeurs_acceptables'])
+		and $formulaire['options']['verifier_valeurs_acceptables']
+	) {
+		$erreurs = saisies_verifier_valeurs_acceptables($saisies, $erreurs);
+	}
 
 	// Last but not least, on passe nos résultats à un pipeline
 	$erreurs = pipeline(

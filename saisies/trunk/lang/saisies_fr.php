@@ -227,6 +227,8 @@ Vous trouverez la <a href="https://contrib.spip.net/5080" target="_blank">docume
 
 	// V
 	'vue_sans_reponse' => '<i>Sans réponse</i>',
+	'verifier_valeurs_acceptables_label' => 'Vérifier les valeurs acceptables',
+	'verifier_valeurs_acceptables_explication' => 'Vérifier que la valeurs postées se trouve parmis celle autorisées lors de la définition des champs. Ne pas utilisez cette options si vous remplissez dynamiquement des champs dans vos squelettes ou grâce à javascript.',
 
 	// Z
 	'z' => 'zzz'
