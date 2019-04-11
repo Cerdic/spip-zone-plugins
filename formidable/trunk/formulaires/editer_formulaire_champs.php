@@ -21,7 +21,7 @@ function formulaires_editer_formulaire_champs_charger($id_formulaire) {
 		$contexte['_saisies'] = $saisies;
 		$contexte['id'] = $id_formulaire;
 		$contexte['saisie_id'] = "formidable_$id_formulaire";
-		
+
 		// Les options globales que l'on permet de configurer pour le contexte de Formidables
 		$contexte['_options_globales'] = array(
 			array(
@@ -53,6 +53,14 @@ function formulaires_editer_formulaire_champs_charger($id_formulaire) {
 					'label' => _T('formidable:editer_globales_etapes_precedent_label'),
 				),
 			),
+			array(
+				'saisie' => 'case',
+				'options' => array(
+					'nom' => 'verifier_valeurs_acceptables',
+					'label' => _T('saisies:verifier_valeurs_acceptables_label'),
+					'explication' => _T('saisies:verifier_valeurs_acceptables_explication'),
+				)
+			)
 		);
 	}
 
