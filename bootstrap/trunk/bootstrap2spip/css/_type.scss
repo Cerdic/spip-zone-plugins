@@ -118,7 +118,18 @@ sup { vertical-align: super; top:-0.25em;}
 sub { vertical-align: sub; }
 .ie sub { vertical-align: text-bottom; }
 .caps { font-variant: small-caps; }
-img.puce {vertical-align: baseline}
+
+.spip-puce {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.4em;
+  line-height: 0.7;
+  &:before { content: "\203A";}
+  b { display: none;}
+}
 
 /* Listes */
 ul, ol, li, dl, dt, dd {margin:0;padding:0;}
