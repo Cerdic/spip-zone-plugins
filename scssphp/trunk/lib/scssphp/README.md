@@ -1,4 +1,8 @@
 # scssphp
+
+Forked version for SPIP SCSSPHP plugin : https://github.com/Cerdic/scssphp/tree/version-plugin-spip
+used in https://plugins.spip.net/scssphp
+
 ### <http://leafo.github.io/scssphp>
 
 [![Build](https://travis-ci.org/leafo/scssphp.svg?branch=master)](http://travis-ci.org/leafo/scssphp)
