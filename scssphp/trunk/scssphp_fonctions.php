@@ -10,6 +10,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+
+function scss_cache_dir() {
+	static $cache_dir;
+	if (is_null($cache_dir)) {
+		$cache_dir = sous_repertoire (_DIR_VAR, 'cache-scss');
+		$cache_dir = sous_repertoire($cache_dir, 'compile');
+	}
+	return $cache_dir;
+}
+
 /**
  * Compiler des styles inline SCSS en CSS
  *
@@ -22,9 +32,20 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function scss_compile($style, $contexte = array()) {
 	include_spip('lib/scssphp/scss.inc');
+	spip_timer('scss_compile');
+
+	$import_dirs = _chemin();
+
+	$cache_options = array(
+		'cache_dir' => scss_cache_dir(),
+		// il faut prefixer avec une empreinte du import_dirs qui change le resultat
+		'prefix' => 'scssphp_'. substr(md5(json_encode($import_dirs)),0,4) . '_',
+		// TODO : force_refresh si var_more=css
+		'force_refresh' => false,
+	);
 
 	// le compilateur Leafo\ScssPhp\Compiler compile le contenu
-	$scss = new Compiler();
+	$scss = new Compiler($cache_options);
 
 	// lui transmettre le path qu'il utilise pour les @import
 	$scss->setImportPaths(_chemin());
@@ -74,7 +95,7 @@ function scss_compile($style, $contexte = array()) {
 
 	try {
 		$out = $scss->compile($style, isset($contexte['file']) ? $contexte['file'] : null);
-		return $out;
+		spip_log('scss_compile compile '.(isset($contexte['file'])?$contexte['file']:substr($style,0,100)).' :: '.spip_timer('scss_compile'), 'scssphp');
 	} catch (exception $ex) {
 		// en cas d'erreur, on retourne du vide...
 		spip_log('SCSS Compiler fatal error:'.$ex->getMessage(), 'scss'._LOG_ERREUR);
@@ -93,6 +114,23 @@ function scss_compile($style, $contexte = array()) {
 		);
 		return '';
 	}
+
+	if ($files = $scss->getParsedFiles()
+	  AND count($files)){
+		$files = array_keys($files);
+		$l = strlen(_DIR_RACINE);
+		$lr = strlen(_ROOT_RACINE);
+		foreach($files as $k=>$file){
+			if ($l and strncmp($file,_DIR_RACINE,$l)==0){
+				$files[$k] = substr($file,$l);
+			}
+			if ($lr and strncmp($file,_ROOT_RACINE,$lr)==0){
+				$files[$k] = substr($file,$lr);
+			}
+		}
+		$out = "/*\n#@".implode("\n#@",$files)."\n*"."/\n" . $out;
+	}
+	return $out;
 }
 
 /**
