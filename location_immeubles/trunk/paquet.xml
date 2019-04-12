@@ -1,7 +1,7 @@
 <paquet
 	prefix="location_immeubles"
 	categorie="divers"
-	version="1.0.12"
+	version="1.0.13"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/location_immeubles-64.png"
