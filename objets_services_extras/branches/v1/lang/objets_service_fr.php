@@ -1,10 +1,9 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/objets_services_extras/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
-
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -39,5 +38,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_objets_lies_objets_service' => 'Liés à ce service',
 	'titre_objets_service' => 'Service',
 	'titre_objets_services' => 'Services',
-	'titre_objets_services_rubrique' => 'Services de la rubrique',
+	'titre_objets_services_rubrique' => 'Services de la rubrique'
 );
