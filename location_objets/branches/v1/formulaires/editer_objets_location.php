@@ -135,7 +135,7 @@ function formulaires_editer_objets_location_charger_dist(
 	}
 	$id_auteur = session_get('id_auteur');
 	$config = lire_config('location_objets', []);
-	$statut_loue = isset($config['statut_loue']) ? $config['statut_loue'] : '';
+	$statut_loue = isset($config['statut_loue']) ? $config['statut_loue'] : ['accepte'];
 
 	if (empty($valeurs['entite_duree'])) {
 		$valeurs['entite_duree'] = isset($options['entite_duree']) ?
@@ -222,11 +222,12 @@ function formulaires_editer_objets_location_charger_dist(
 			}
 
 	}
-
-	foreach($options as $index => $valeur) {
-		if (!isset($valeurs[$index]) OR
-			(isset($valeurs[$index]) AND empty($valeurs[$index]))) {
-			$valeurs[$index] = trim($valeur);
+	if ($options AND is_array($options)) {
+		foreach($options as $index => $valeur) {
+			if (!isset($valeurs[$index]) OR
+				(isset($valeurs[$index]) AND empty($valeurs[$index]))) {
+				$valeurs[$index] = trim($valeur);
+			}
 		}
 	}
 
