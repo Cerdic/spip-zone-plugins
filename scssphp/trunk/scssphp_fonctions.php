@@ -73,15 +73,23 @@ function scss_compile($style, $contexte = array()) {
 	}
 
 	try {
-		$out = $scss->compile($style);
+		$out = $scss->compile($style, isset($contexte['file']) ? $contexte['file'] : null);
 		return $out;
 	} catch (exception $ex) {
 		// en cas d'erreur, on retourne du vide...
 		spip_log('SCSS Compiler fatal error:'.$ex->getMessage(), 'scss'._LOG_ERREUR);
+		$display_file = '';
+		if (isset($contexte['file'])) {
+			$display_file = $contexte['file'];
+			if (strpos($ex->getMessage(), '.scss') !== false) {
+				$display_file = basename($display_file);
+			}
+			$display_file= " fichier $display_file";
+		}
 		erreur_squelette(
 			'SCSS : Echec compilation'
-			. (isset($contexte['file']) ? ' fichier '.$contexte['file'] : '')
-			. '<br />'.$ex->getMessage()
+			. $display_file
+			. '<br />' . $ex->getMessage()
 		);
 		return '';
 	}
