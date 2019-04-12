@@ -93,6 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_url_public' => 'Adresse de retour après la connexion',
 	'erreur_aucun_type' => 'Aucun type d’entrée n’a été trouvé.',
 	'erreur_autorisation' => 'Vous n’êtes pas autorisé à modifier les menus.',
+	'erreur_id_objet' => 'Vous devez indiquer le numéro de l‘objet.',
 	'erreur_identifiant_deja' => 'Cet identifiant est déjà utilisé par un menu.',
 	'erreur_identifiant_forme' => 'L’identifiant ne doit contenir que des lettres, des chiffres ou le caractère souligné.',
 	'erreur_menu_inexistant' => 'Le menu demandé numéro @id@ n’existe pas.',
@@ -100,6 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_parametres' => 'Il y a une erreur dans les paramètres de la page',
 	'erreur_type_menu' => 'Vous devez choisir un type de menu',
 	'erreur_type_menu_inexistant' => 'Ce type de menu n’est pas/plus disponible',
+	'erreur_type_objet' => 'Ce type d’objet n‘existe pas.',
 
 	// F
 	'formulaire_ajouter_sous_menu' => 'Créer un sous-menu',

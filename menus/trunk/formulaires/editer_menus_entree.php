@@ -120,6 +120,24 @@ function formulaires_editer_menus_entree_verifier($id_menu, $id_menus_entree = '
 		}
 	}
 
+	// Vérifier certains types de saisies ------------------------------------
+	
+	$parametres_envoyes = _request('parametres');
+	if(isset($parametres_envoyes['type_objet'])) {
+		$objets_types = array_map('objet_type', array_keys(lister_tables_objets_sql()));
+		$objet_envoye = objet_type(strtolower($parametres_envoyes['type_objet']));
+		if(!in_array($objet_envoye, $objets_types)){
+			set_request('type_entree', $type_entree);
+			set_request('infos_'.$type_entree, $infos);
+			$erreurs['parametres']['type_objet'] = _T('menus:erreur_type_objet');
+		}
+	}
+	if(isset($parametres_envoyes['id_objet']) && !intval($parametres_envoyes['id_objet'])) {
+		set_request('type_entree', $type_entree);
+		set_request('infos_'.$type_entree, $infos);
+		$erreurs['parametres']['id_objet'] = _T('menus:erreur_id_objet');
+	}
+	
 	return $erreurs;
 }
 

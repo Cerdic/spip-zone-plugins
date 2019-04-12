@@ -79,6 +79,9 @@ function menus_entree_set($id_menus_entree, $set = null) {
 	}
 
 	$c['parametres'] = is_array($c['parametres']) ? $c['parametres'] : array();
+	if (isset($c['parametres']['type_objet'])) {
+		$c['parametres']['type_objet'] = objet_type(strtolower($c['parametres']['type_objet']));
+	}
 	$c['parametres'] = serialize($c['parametres']);
 
 	include_spip('inc/menus');
