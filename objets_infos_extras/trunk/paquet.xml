@@ -1,7 +1,7 @@
 <paquet
 	prefix="objets_infos_extras"
 	categorie="divers"
-	version="1.0.4"
+	version="1.0.5"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/objets_infos_extras-64.png"
