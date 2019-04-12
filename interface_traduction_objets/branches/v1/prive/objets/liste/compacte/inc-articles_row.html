@@ -1,10 +1,10 @@
-<tr[(#ENV{rang_actif}|oui) data-id_objet="#ID_ARTICLE"] class="#ENV{class}">
+<tr[(#ENV{activer_rang}|oui) data-id_objet="#ID_ARTICLE"] class="#ENV{class}">
 <BOUCLE_art(ARTICLES){id_article}{statut?}>#SET{id_trad,#ID_TRAD}#SET{id_article,#ID_ARTICLE}
-	[(#ENV{rang_actif}|oui)
+	[(#ENV{activer_rangactiver_rang}|oui)
 		[(#ENV{id_rubrique}|et{#VAL{article}|appliquer_filtre{rang_objet_dans_config}}|oui)<td class="picto">[(#CHEMIN_IMAGE{draggable-16.png}|balise_img)]</td>]
 	]
 	<td class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
-	[(#ENV{rang_actif}|oui)<td class='rang'>[(#RANG).]</td>]
+	[(#ENV{activer_rang}|oui)<td class='rang'>[(#RANG).]</td>]
 	<td class='titre principale'>[(#LOGO_ARTICLE||image_reduire{20,26})]<a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
 	<td class='auteur'><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
 	<td class='date'>[(#DATE|affdate_jourcourt)]</td>

@@ -1,7 +1,8 @@
 [(#SET{traductions,[(#INFO_ID_TRAD{#ENV{objet},#ID}|lister_traductions{#ENV{objet}})]})]
 	#SET{lang,#INFO_LANG{#ENV{objet},#ID}}[(#GET{lang}|changer_typo)]
 	#SET{titre,#INFO_TITRE{#ENV{objet},#ID}}
-<tr class="#GET{class}">
+<tr[ class="(#ENV{class})"][ (#ENV{activer_rang}|oui)[data-id_objet="(#ID)"]]>
+	[(#ENV{activer_rang}|oui)<td class="rang">[(#ENV{rang}).]</td>]
 	[(#ENV{champs}|table_valeur{statut}|oui)
 	<td class='statut'>[(#ID|puce_changement_statut{#INFO_STATUT{#ENV{objet},#ID},#ENV{id_rubrique},#ENV{objet}})]</td>
 	]

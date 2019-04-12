@@ -1,11 +1,33 @@
+[(#PLUGIN{rang}|et{#ENV{objet}|appliquer_filtre{rang_objet_dans_config}|et{#ENV{exec}|!={accueil}}}|?{
+	#SET{activer_rang,oui}
+	#SET{tri,rang}
+	#SET{par,rang}
+	[(#SET{defaut_tri,#ARRAY{
+		rang,1,
+		date,#ENV{date_sens,-1},
+		num titre,1,
+		id,
+	}})]
+,
+	#SET{tri,id}
+	#SET{par,id}
+	[(#SET{defaut_tri,#ARRAY{
+		date,#ENV{date_sens,-1},
+		num titre,1
+	}})]
+})]
+#SET{donnees,#ENV**|liste_compacte_requete_objet}
+
 #SET{picto,#ENV{objet}|objet_icone{16}}
 <B_objets>
 #ANCRE_PAGINATION
-<div class="liste-objets [(#ENV{objets})]">
-<table class='spip liste'>
+<div class="liste-objets[ (#ENV{objets})]">
+<table class='spip liste'[ data-objet="(#ENV{objets})"]>
 [<caption><strong class="caption">(#ENV*{titre,[(#GRAND_TOTAL|singulier_ou_pluriel{#ENV{objet}|objet_info{info_1_objet},#ENV{objet}|objet_info{info_nb_objets}})]})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
+			[(#GET{activer_rang}|oui)<th class="rang" scope="col">[(#TRI{rang,<span title="<:rang:lien_trier_rang|attribut_html:>"><:rang:info_rang_abbr:></span>,ajax})]
+			</th>]
 			[(#ENV{champs}|table_valeur{statut}|oui)
 			<th class='statut'><span title="<:afficher_objets:info_statut|attribut_html:>">#</span>
 			]
@@ -22,13 +44,23 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_objets(DATA){source tableau,#ENV{donnees}}{pagination #ENV{nb,10}}>
+	<BOUCLE_objets(DATA){source tableau, #GET{donnees}}{pagination #ENV{nb,10}}{tri #GET{tri},#GET{defaut_tri}}{par #GET{par}}>
 		#SET{class, #COMPTEUR_BOUCLE|alterner{row_odd,row_even}}
-		<INCLURE{fond=prive/objets/liste/inc-objets_compacte_row,id,date,class=#GET{class},picto=#GET{picto},env} />
+		<INCLURE{fond=prive/objets/liste/inc-objets_compacte_row,
+			id,date,
+			class=#GET{class},
+			picto=#GET{picto},
+			activer_rang=#GET{activer_rang},
+			env,
+			rang} />
 	</BOUCLE_objets>
 	[(#REM|changer_typo)]
 	</tbody>
 </table>
+[(#GET{activer_rang}|oui)
+	<INCLURE{fond=prive/squelettes/inclure/rang,objet=#ENV{objets},id_parent=#ID_RUBRIQUE,suffixe_pagination=#ENV{objet}}/>
+
+]
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
 </B_objets>[
