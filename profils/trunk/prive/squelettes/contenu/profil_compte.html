@@ -6,17 +6,17 @@
 <BOUCLE_profil(PROFILS) {id_profil}>
 #SET{config, #CHAMP_SQL**{config}|unserialize}
 #SET{infos,  #ENV{id_auteur}|profils_recuperer_infos{#ID_PROFIL}}
+#SET{objets, #LISTE{auteur}
+	|push{#PLUGIN{contacts}|et{#GET{config/organisation}}|?{organisation}}
+	|push{#PLUGIN{contacts}|et{#GET{config/contact}}|?{contact}}
+	|array_filter
+}
 
 <div class="profil profil_apercu">
 
 	[(#REM)
 		On affiche les champs et coordonnées regroupés par type d'objet principal, selon ceux présents dans la config
 	]
-	#SET{objets, #LISTE{auteur}
-		|push{#GET{config/organisation}|?{organisation}}
-		|push{#GET{config/contact}|?{contact}}
-		|array_filter
-	}
 	<BOUCLE_objets(DATA) {source table, #GET{objets}}>
 	#SET{objet,                    #VALEUR}
 	#SET{cle_objet,                #VALEUR|id_table_objet}
@@ -52,13 +52,13 @@
 		[(#REM)
 			Les coordonnees liées
 		]
-		<BOUCLE_coordonnees_objets(DATA) {source table, #GET{infos/coordonnees/#GET{objet}}}>
+		<BOUCLE_coordonnees_objets(DATA) {source table, #GET{infos/coordonnees/#GET{objet}}} {si #PLUGIN{coordonnees}}>
 		#SET{texte_objet_coordonnee, #CLE|objet_type|objet_info{texte_objet}|_T}
 		#SET{objet_coordonnee,       #CLE|objet_type}
 		#SET{saisies_coordonnee,     #GET{objet_coordonnee}|profils_chercher_saisies_objet}
 		<BOUCLE_coordonnees(DATA) {source table, #VALEUR}>
 		#SET{coordonnee,#VALEUR}
-		#SET{type,#CLE|?{#GET{objet_coordonnee}|coordonnees_lister_types_coordonnees{#CLE}}}
+		#SET{type,#CLE|?{#GET{objet_coordonnee}|appliquer_filtre{coordonnees_lister_types_coordonnees,#CLE}}}
 		#SET{cle,#COMPTEUR_BOUCLE|moins{1}}
 		#SET{config_label,#GET{config_coordonnees_objet/#GET{objet_coordonnee}s/#GET{cle}/label}}
 
