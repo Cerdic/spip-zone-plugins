@@ -13,6 +13,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+include_spip('base/location_immeubles');
+include_spip('inc/cextras');
 
 /**
  * Fonction d'installation et de mise à jour du plugin Location d&#039;immeubles.
@@ -31,8 +33,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return void
 **/
 function location_immeubles_upgrade($nom_meta_base_version, $version_cible) {
-	include_spip('base/location_immeubles');
-	include_spip('inc/cextras');
 	include_spip('inc/config');
 
 	$maj = array();
