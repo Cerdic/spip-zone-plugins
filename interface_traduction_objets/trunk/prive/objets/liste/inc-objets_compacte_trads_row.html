@@ -3,6 +3,7 @@
 	#SET{lang,#INFO_LANG{#ENV{objet},#VALEUR{id}}}[(#GET{lang}|changer_typo)]
 	#SET{titre,#INFO_TITRE{#ENV{objet},#VALEUR{id}}}
 <tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+	[(#ENV{activer_rang}|oui)<td></td>]
 	[(#ENV{champs}|table_valeur{statut}|oui)
 	<td class='statut'>[(#ID|puce_changement_statut{#INFO_STATUT{#ENV{objet},#ID},#ENV{id_rubrique},#ENV{objet}})]</td>
 	]
