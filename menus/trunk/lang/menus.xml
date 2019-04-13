@@ -1,14 +1,14 @@
 <traduction module="menus" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/menus/trunk/lang/" reference="fr">
-	<langue code="ar" url="https://trad.spip.net/tradlang_module/menus?lang_cible=ar" total="174" traduits="76" relire="0" modifs="0" nouveaux="98" pourcent="43.68">
+	<langue code="ar" url="https://trad.spip.net/tradlang_module/menus?lang_cible=ar" total="176" traduits="76" relire="0" modifs="0" nouveaux="100" pourcent="43.18">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
-	<langue code="ca" url="https://trad.spip.net/tradlang_module/menus?lang_cible=ca" total="174" traduits="79" relire="0" modifs="3" nouveaux="92" pourcent="45.40">
+	<langue code="ca" url="https://trad.spip.net/tradlang_module/menus?lang_cible=ca" total="176" traduits="79" relire="0" modifs="3" nouveaux="94" pourcent="44.89">
 	</langue>
-	<langue code="de" url="https://trad.spip.net/tradlang_module/menus?lang_cible=de" total="174" traduits="151" relire="0" modifs="0" nouveaux="23" pourcent="86.78">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/menus?lang_cible=de" total="176" traduits="151" relire="0" modifs="0" nouveaux="25" pourcent="85.80">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
-	<langue code="en" url="https://trad.spip.net/tradlang_module/menus?lang_cible=en" total="174" traduits="174" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/menus?lang_cible=en" total="176" traduits="174" relire="0" modifs="0" nouveaux="2" pourcent="98.86">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="jack31" lien="https://trad.spip.net/auteur/jack31" />
@@ -18,34 +18,34 @@
 		<traducteur nom="RastaPopoulos" lien="" />
 		<traducteur nom="Suske" lien="https://trad.spip.net/auteur/suske" />
 	</langue>
-	<langue code="eo" url="https://trad.spip.net/tradlang_module/menus?lang_cible=eo" total="174" traduits="151" relire="0" modifs="0" nouveaux="23" pourcent="86.78">
+	<langue code="eo" url="https://trad.spip.net/tradlang_module/menus?lang_cible=eo" total="176" traduits="151" relire="0" modifs="0" nouveaux="25" pourcent="85.80">
 		<traducteur nom="gpl" lien="https://trad.spip.net/auteur/gpl" />
 	</langue>
-	<langue code="es" url="https://trad.spip.net/tradlang_module/menus?lang_cible=es" total="174" traduits="143" relire="0" modifs="2" nouveaux="29" pourcent="82.18">
+	<langue code="es" url="https://trad.spip.net/tradlang_module/menus?lang_cible=es" total="176" traduits="143" relire="0" modifs="2" nouveaux="31" pourcent="81.25">
 		<traducteur nom="dani" lien="https://trad.spip.net/auteur/dani" />
 		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
 		<traducteur nom="tin" lien="https://trad.spip.net/auteur/tin" />
 	</langue>
-	<langue code="fa" url="https://trad.spip.net/tradlang_module/menus?lang_cible=fa" total="174" traduits="133" relire="0" modifs="6" nouveaux="35" pourcent="76.44">
+	<langue code="fa" url="https://trad.spip.net/tradlang_module/menus?lang_cible=fa" total="176" traduits="133" relire="0" modifs="6" nouveaux="37" pourcent="75.57">
 		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/menus?lang_cible=fr" total="174" traduits="174" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/menus?lang_cible=fr" total="176" traduits="176" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="it" url="https://trad.spip.net/tradlang_module/menus?lang_cible=it" total="174" traduits="79" relire="0" modifs="3" nouveaux="92" pourcent="45.40">
+	<langue code="it" url="https://trad.spip.net/tradlang_module/menus?lang_cible=it" total="176" traduits="79" relire="0" modifs="3" nouveaux="94" pourcent="44.89">
 	</langue>
-	<langue code="nl" url="https://trad.spip.net/tradlang_module/menus?lang_cible=nl" total="174" traduits="174" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="nl" url="https://trad.spip.net/tradlang_module/menus?lang_cible=nl" total="176" traduits="174" relire="0" modifs="0" nouveaux="2" pourcent="98.86">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="mpossoz" lien="https://trad.spip.net/auteur/mpossoz" />
 		<traducteur nom="Suske" lien="https://trad.spip.net/auteur/suske" />
 	</langue>
-	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/menus?lang_cible=pt_br" total="174" traduits="151" relire="0" modifs="0" nouveaux="23" pourcent="86.78">
+	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/menus?lang_cible=pt_br" total="176" traduits="151" relire="0" modifs="0" nouveaux="25" pourcent="85.80">
 		<traducteur nom="placido" lien="https://trad.spip.net/auteur/placido" />
 		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
-	<langue code="ru" url="https://trad.spip.net/tradlang_module/menus?lang_cible=ru" total="174" traduits="45" relire="0" modifs="1" nouveaux="128" pourcent="25.86">
+	<langue code="ru" url="https://trad.spip.net/tradlang_module/menus?lang_cible=ru" total="176" traduits="45" relire="0" modifs="1" nouveaux="130" pourcent="25.57">
 		<traducteur nom="Serge Markitanenko" lien="https://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
-	<langue code="sk" url="https://trad.spip.net/tradlang_module/menus?lang_cible=sk" total="174" traduits="143" relire="0" modifs="2" nouveaux="29" pourcent="82.18">
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/menus?lang_cible=sk" total="176" traduits="143" relire="0" modifs="2" nouveaux="31" pourcent="81.25">
 		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
