@@ -40,9 +40,13 @@ function scss_compile($style, $contexte = array()) {
 		'cache_dir' => scss_cache_dir(),
 		// il faut prefixer avec une empreinte du import_dirs qui change le resultat
 		'prefix' => 'scssphp_'. substr(md5(json_encode($import_dirs)),0,4) . '_',
-		// TODO : force_refresh si var_more=css
 		'force_refresh' => false,
 	);
+
+	if (defined('_VAR_MODE') and
+		(_request('var_mode') == 'css' or in_array(_VAR_MODE, array('css', 'recalcul'))) ) {
+		$cache_options['force_refresh'] = true;
+	}
 
 	// le compilateur Leafo\ScssPhp\Compiler compile le contenu
 	$scss = new Compiler($cache_options);
@@ -178,18 +182,19 @@ function scss_css($source) {
 		)
 		. '.css';
 
-		// si la feuille compilee est plus recente que la feuille source
-		// l'utiliser sans rien faire, sauf si recalcul explicite
+		# si la feuille compilee est plus recente que la feuille source
+		# l'utiliser sans rien faire, sauf si il y a un var_mode
+		# dans ca cas on passe par la compilation qui utilise un cache et est donc rapide si rien de change
 		$changed = false;
-		if (@filemtime($f) < @filemtime($source)) {
+		if (@filemtime($f) < @filemtime($source)){
 			$changed = true;
 		}
-		if (
-			!$changed
-			and (!($mode=_request('var_mode')) or $mode != 'css')
-		) {
+
+		// si pas change ET pas de var_mode du tout, rien a faire (performance)
+		if (!$changed
+			AND !defined('_VAR_MODE'))
 			return $f;
-		}
+
 		$contenu = false;
 		if (!lire_fichier($source, $contenu)) {
 			return $source;
