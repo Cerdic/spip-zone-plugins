@@ -1,7 +1,7 @@
 <paquet
 	prefix="swiper"
 	categorie="multimedia"
-	version="1.0.4"
+	version="1.1.0"
 	etat="test"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/swiper-64.png"
@@ -11,9 +11,11 @@
 
 	<nom>Swiper</nom>
 	<auteur lien='https://www.lesmoutonssauvages.com'>Charles Stephan</auteur>
+	<credit lien='https://github.com/nolimits4web'>Vladimir Kharlampidi (nolimits4web)</credit>
 
 	<licence>GNU/GPL</licence>
-	<lib nom="Swiper" lien="https://github.com/nolimits4web/Swiper/archive/v4.0.2.zip" />
+	
+
 	<necessite nom="saisies" compatibilite="[2.28.0;]" />
 	<necessite nom="cextras"  compatibilite="[3.11.3;[" />
 
