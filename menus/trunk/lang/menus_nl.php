@@ -95,6 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_url_public' => 'Terugkeeradres na het aanmelden',
 	'erreur_aucun_type' => 'Geen item gevonden.',
 	'erreur_autorisation' => 'Je mag de menus niet aanpassen.',
+	'erreur_id_objet' => 'Je moet het objectnummer aangeven.',
 	'erreur_identifiant_deja' => 'Deze identificatie wordt al voor een menu gebruikt.',
 	'erreur_identifiant_forme' => 'De identificatie mag bestaan uit letters, cijfers en een liggend streepje.',
 	'erreur_menu_inexistant' => 'Het menu met nummer @id@ bestaat niet.',
@@ -102,6 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_parametres' => 'Er is een fout in de paramaters van de bladzijde',
 	'erreur_type_menu' => 'Je moet een type menu kiezen',
 	'erreur_type_menu_inexistant' => 'Dit type menu is niet (meer) beschikbaar',
+	'erreur_type_objet' => 'Dit type object bestaat niet.',
 
 	// F
 	'formulaire_ajouter_sous_menu' => 'Maak een submenu',
