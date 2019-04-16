@@ -40,24 +40,7 @@ function traiter_email_dist($args, $retours) {
 
 	// On récupère les destinataires
 	if ($options['champ_destinataires']) {
-		$destinataires = _request($options['champ_destinataires']);
-		if (!is_array($destinataires)) {
-			if (intval($destinataires)) {
-				$destinataires = array($destinataires);
-			} else {
-				$destinataires = array();
-			}
-		}
-		if (count($destinataires)) {
-			// On récupère les mails des destinataires
-			$destinataires = array_map('intval', $destinataires);
-			$destinataires = sql_allfetsel(
-				'email',
-				'spip_auteurs',
-				sql_in('id_auteur', $destinataires)
-			);
-			$destinataires = array_map('reset', $destinataires);
-		}
+		$destinataires = formidable_traiter_email_champ_destinataires($options['champ_destinataires']);
 	}
 
 	// Conservé pour raison historique, mais mauvaise pratique.
@@ -323,7 +306,40 @@ function traiter_email_dist($args, $retours) {
 	return $retours;
 }
 
-
+/**
+ * Retourne la liste des destinataires mentionnés dans un ou plusieurs champs destinataires (auteur·e·s enregistré·e·s)
+ * @param array|str l'option champ_destinataire
+ * @return array la liste des mails destinataires.
+**/
+function formidable_traiter_email_champ_destinataires($champ) {
+	if (!is_array($champ)) {
+		$champ = array($champ);
+	}
+	//Trouver tout les id destinataires
+	$destinataires = array();
+	foreach ($champ as $c) {
+		$destinataires_c = _request($c);
+		if (!is_array($destinataires_c)) {
+			if (intval($destinataires_c)) {
+				$destinataires_c = array($destinataires_c);
+			} else {
+				$destinataires_c = array();
+			}
+		}
+		$destinataires = array_merge($destinataires, $destinataires_c);
+	}
+	if (count($destinataires)) {
+		// On récupère les mails des destinataires
+		$destinataires = array_map('intval', $destinataires);
+		$destinataires = sql_allfetsel(
+			'email',
+			'spip_auteurs',
+			sql_in('id_auteur', $destinataires)
+		);
+		$destinataires = array_map('reset', $destinataires);
+	}
+	return $destinataires;
+}
 /**
  * Retourne la liste des destinataires sélectionnés en fonction
  * de l'option 'destinataires_selon_champ' du traitement email.

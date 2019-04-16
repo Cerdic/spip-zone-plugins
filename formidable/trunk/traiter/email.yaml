@@ -76,6 +76,7 @@ options:
           label: '<:formidable:traiter_email_option_destinataires_label:>'
           explication: '<:formidable:traiter_email_option_destinataires_explication:>'
           forcer_type: [destinataires,hidden]
+          type_choix: 'checkbox'
           env: true
       -
         saisie: 'input'
