@@ -231,13 +231,13 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 		// Tout type de saisie, sauf fichiers
 		else {
 			$valeur = saisies_request($champ);
+			// Filtrer les tableaux. Ex d'application:
+			// - saisie date/heure qui envoi des input texte en tableau > il faut pas que les champs envoyés soient vides
+			// - saisie destintaire, qui pourrait avoir une première option vide
+			if (is_array($valeur)) {
+				$valeur = array_filter($valeur);
+			}
 		}
-
-		// Pour la saisie "destinataires" il faut filtrer si jamais on a mis un premier choix vide
-		if ($saisie['saisie'] == 'destinataires') {
-			$valeur = array_filter($valeur);
-		}
-
 		// On regarde d'abord si le champ est obligatoire
 		if (
 			$obligatoire
