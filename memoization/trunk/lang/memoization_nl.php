@@ -44,10 +44,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'option_methode_apc' => 'APC',
+	'option_methode_apcu' => 'APCu',
 	'option_methode_defaut' => 'Auto-detectie',
 	'option_methode_eaccelerator' => 'EAccelerator',
 	'option_methode_filecache' => 'Bestanden (filecache)',
 	'option_methode_memcache' => 'Memcache',
+	'option_methode_memcached' => 'Memcached',
 	'option_methode_nocache' => 'Uitgeschakeld (nocache)',
 	'option_methode_redis' => 'Redis',
 	'option_methode_xcache' => 'XCache',
