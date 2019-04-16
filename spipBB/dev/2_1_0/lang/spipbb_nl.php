@@ -260,7 +260,7 @@ Raadpleegt [documentatie over Spip-Contrib->http://contrib.spip.net/SpipBB-le-fo
 
 	// I
 	'icone_ferme' => 'Sluiten',
-	'import_base' => 'Naam van de basis :',
+	'import_base' => 'Naam van de database:',
 	'import_choix_test' => 'Een import van test verwezenlijken (keuze per gebrek) :',
 	'import_choix_test_titre' => 'Import voor test om reëel',
 	'import_erreur_db' => 'Onmogelijk om zich op de basis aan te sluiten @nom_base@',

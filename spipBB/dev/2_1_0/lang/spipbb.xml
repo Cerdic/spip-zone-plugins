@@ -47,6 +47,7 @@
 	<langue code="lb" url="https://trad.spip.net/tradlang_module/spipbb?lang_cible=lb" total="430" traduits="45" relire="0" modifs="6" nouveaux="379" pourcent="10.47">
 	</langue>
 	<langue code="nl" url="https://trad.spip.net/tradlang_module/spipbb?lang_cible=nl" total="430" traduits="420" relire="0" modifs="10" nouveaux="0" pourcent="97.67">
+		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="mpossoz" lien="https://trad.spip.net/auteur/mpossoz" />
 	</langue>
 	<langue code="oc_lnc" url="https://trad.spip.net/tradlang_module/spipbb?lang_cible=oc_lnc" total="430" traduits="45" relire="0" modifs="6" nouveaux="379" pourcent="10.47">
