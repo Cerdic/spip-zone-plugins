@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_articlepardefaut' => 'Standaardartikel (id)',
 	'label_descriptif' => 'Omschrijving',
 	'label_insert_head_css_1' => 'Automatisch de standaardstijlen van de agenda invoegen',
+	'label_synchro_statut_1' => 'De status van evenementen automatisch synchroniseren met die van de artikelen',
 	'label_titre' => 'Paginatitel',
 	'label_url_evenement' => 'Weergave van een evenement',
 	'label_url_evenement_article' => 'op de pagina van het bijbehorende artikel',
