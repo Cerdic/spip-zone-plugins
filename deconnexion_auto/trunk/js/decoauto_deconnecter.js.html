@@ -16,16 +16,18 @@ jQuery(function() {
 		tps_deconnexion = 0;
 	}
 
-	var compteur  = setTimeout(deconnecte_session, tps_deconnexion);
+	if (tps_deconnexion > 0) {
+		var compteur  = setTimeout(deconnecte_session, tps_deconnexion);
 
-	$(document).on('click',function() {
-		clearTimeout(compteur);
-		compteur = setTimeout(deconnecte_session, tps_deconnexion);
-	});
+		$(document).on('click',function() {
+			clearTimeout(compteur);
+			compteur = setTimeout(deconnecte_session, tps_deconnexion);
+		});
 
-	$(document).on('keydown',function() {
-		clearTimeout(compteur);
-		compteur = setTimeout(deconnecte_session, tps_deconnexion);
-	});
+		$(document).on('keydown',function() {
+			clearTimeout(compteur);
+			compteur = setTimeout(deconnecte_session, tps_deconnexion);
+		});
+	}
 
 });
