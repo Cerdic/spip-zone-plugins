@@ -1,0 +1,31 @@
+#HTTP_HEADER{Content-Type: text/javascript; charset=utf-8}
+#HTTP_HEADER{Vary: Accept-Encoding}
+[(#REM)<script>]
+
+
+function deconnecte_session() {
+	window.location.href = "#URL_LOGOUT";
+}
+
+jQuery(function() {
+
+	var tps_deconnexion = "#SESSION{tps_deconnexion}";
+	if (tps_deconnexion) {
+		tps_deconnexion = parseInt(tps_deconnexion) * 1000;
+	} else {
+		tps_deconnexion = 0;
+	}
+
+	var compteur  = setTimeout(deconnecte_session, tps_deconnexion);
+
+	$(document).on('click',function() {
+		clearTimeout(compteur);
+		compteur = setTimeout(deconnecte_session, tps_deconnexion);
+	});
+
+	$(document).on('keydown',function() {
+		clearTimeout(compteur);
+		compteur = setTimeout(deconnecte_session, tps_deconnexion);
+	});
+
+});
