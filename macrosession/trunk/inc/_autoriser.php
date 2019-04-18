@@ -39,26 +39,26 @@ function compile_appel_macro_autoriser ($p) {
 	$id = trim_quote(interprete_argument_balise (3, $p));
 
 	if (!existe_argument_balise(4, $p)) {
-		$id_type = "'id_".substr($type,1);	                // 	TODO : utiliser API spip pour les cas spéciaux
+		$id_type_q = "'".id_table_objet(trim($type, "'"))."'";
 
 		// Gérer la présence de motclés env, boucle, url : désormais obsolète ?
 		switch($id) {
 			case "'env'" :
-				$ret = "autoriser('.\"$autorisation\".', '.\"$type\".', '.\"macrosession_pipe({\$Pile[0][$id_type]})\".')";
+				$ret = "autoriser('.\"$autorisation\".', '.\"$type\".', '.\"macrosession_pipe({\$Pile[0][$id_type_q]})\".')";
 				if (isset($_GET['debug']))
 					echo "Avec 'env' : compile appel autoriser donne <pre>$ret</pre><br>";
 				return $ret;
 
 			case "'boucle'" :
-				$ret = "autoriser('.\"$autorisation\".', '.\"$type\".', '.\"macrosession_pipe({\$Pile[\$SP][$id_type]})\".')";
+				$ret = "autoriser('.\"$autorisation\".', '.\"$type\".', '.\"macrosession_pipe({\$Pile[\$SP][$id_type_q]})\".')";
 				if (isset($_GET['debug']))
 					echo "Avec 'boucle' : compile appel autoriser donne <pre>$ret</pre><br>";
 				return $ret;
 
 			case "'url'" :
 				if (isset($_GET['debug']))
-					echo "Avec 'url' : compile appel autoriser($autorisation, $type, _request($id_type)<br>";
-				$ret = "autoriser('.\"$autorisation\".', '.\"$type\".', '.\"macrosession_pipe(_request($id_type))\".')";
+					echo "Avec 'url' : compile appel autoriser($autorisation, $type, _request($id_type_q)<br>";
+				$ret = "autoriser('.\"$autorisation\".', '.\"$type\".', '.\"macrosession_pipe(_request($id_type_q))\".')";
 				return $ret;
 
 			default :
