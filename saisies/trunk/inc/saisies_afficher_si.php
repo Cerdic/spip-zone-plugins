@@ -129,7 +129,7 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 							 .	"\t\t$(form).find(\"$sel\")."._SAISIES_AFFICHER_SI_JS_SHOW.";\n";
 			if (html5_permis()) {
 			$pour_html_5 = 	"$sel.obligatoire > input,"// si le afficher_si porte directement sur le input
-							."$sel .obligatoire input:not('chekbox'),"// si le afficher_si porte sur le fieldset, tous les input dedans sont concernés, quelque soit leur profondeur (ce qui inclut notamment les cas complexe, type radio ou date). Une exception toutefois : les checbbox multiple, qui ne peuvent avoir de required
+							."$sel .obligatoire input:not('.checkbox'),"// si le afficher_si porte sur le fieldset, tous les input dedans sont concernés, quelque soit leur profondeur (ce qui inclut notamment les cas complexe, type radio ou date). Une exception toutefois : les checbbox multiple, qui ne peuvent avoir de required
 							."$sel.obligatoire > textarea,"// si le afficher_si porte directement sur le textearea
 							."$sel.obligatoire > .edition textarea,"// si le afficher_si porte directement sur le textearea encapsulé dans un markitup
 							."$sel .obligatoire > textarea,"// si le afficher_si porte sur le fiedset
