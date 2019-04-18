@@ -196,13 +196,24 @@ function afficher_icone_svg($name, $class = '', $alt = '') {
 		if ($class = trim($class)) {
 			$class = preg_replace(",[^\w\s\-],", "", $class);
 		}
-		return "<i class=\"icon" . ($class ? " $class" : "") . "\">$svg</i> ";
+		return "<i class=\"icon icon-$name" . ($class ? " $class" : "") . "\">$svg</i> ";
 	}
 	return "";
 }
 
 function filtre_icone_ancre_from_name_dist($name) {
-	return "i-$name";
+	switch ($name) {
+		case "comment":
+			$ancre = 'msg';
+			break;
+		case "ok-circle":
+			$ancre = 'compose';
+			break;
+		default:
+			$ancre = $name;
+			break;
+	}
+	return "i-$ancre";
 }
 
 function lister_icones_svg() {
