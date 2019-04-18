@@ -128,13 +128,13 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 			$code .= "\tif (".$condition.") {\n"
 							 .	"\t\t$(form).find(\"$sel\")."._SAISIES_AFFICHER_SI_JS_SHOW.";\n";
 			if (html5_permis()) {
-			$pour_html_5 = 	"$sel.obligatoire > input, \n"// si le afficher_si porte directement sur le input
-							."$sel .obligatoire input:not('chekbox'), \n"// si le afficher_si porte sur le fieldset, tous les input dedans sont concernés, quelque soit leur profondeur (ce qui inclut notamment les cas complexe, type radio ou date). Une exception toutefois : les checbbox multiple, qui ne peuvent avoir de required
-							."$sel.obligatoire > textarea, \n"// si le afficher_si porte directement sur le textearea
-							."$sel.obligatoire > .edition textarea, \n"// si le afficher_si porte directement sur le textearea encapsulé dans un markitup
-							."$sel .obligatoire > textarea, \n"// si le afficher_si porte sur le fiedset
-							."$sel.obligatoire > select, \n"//si le afficher_si porte directement sur le select
-							."$sel .obligatoire > select, \n"//si le afficher_si porte sur le fieldset
+			$pour_html_5 = 	"$sel.obligatoire > input,"// si le afficher_si porte directement sur le input
+							."$sel .obligatoire input:not('chekbox'),"// si le afficher_si porte sur le fieldset, tous les input dedans sont concernés, quelque soit leur profondeur (ce qui inclut notamment les cas complexe, type radio ou date). Une exception toutefois : les checbbox multiple, qui ne peuvent avoir de required
+							."$sel.obligatoire > textarea,"// si le afficher_si porte directement sur le textearea
+							."$sel.obligatoire > .edition textarea,"// si le afficher_si porte directement sur le textearea encapsulé dans un markitup
+							."$sel .obligatoire > textarea,"// si le afficher_si porte sur le fiedset
+							."$sel.obligatoire > select,"//si le afficher_si porte directement sur le select
+							."$sel .obligatoire > select,"//si le afficher_si porte sur le fieldset
 							."$sel.obligatoire input:radio";//si le afficher_si porte sur un radio
 			$code .=	"\t\t$(form).find("
 							.'"'."$pour_html_5\")".
