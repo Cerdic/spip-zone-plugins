@@ -49,6 +49,15 @@ function verifier_date_dist($valeur, $options = array(), &$valeur_normalisee = n
 			$horaire = true; // on détecte une vérif avec horaire uniquement dans ce cas
 		} else {
 			// Sinon : pas le bon format
+			if (!isset($valeur['date']) or !isset($valeur['heure'])) {
+				$erreur = '';
+				if (!isset($valeur['date'])) {
+					$erreur = _T('verifier:erreur_date_format_date_vide');
+				}
+				if (!isset($valeur['heure'])) {
+					$erreur = $erreur." "._T('verifier:erreur_date_format_heure_vide');
+				}
+			}
 			return $erreur;
 		}
 	}
