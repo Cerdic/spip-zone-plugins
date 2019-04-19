@@ -60,7 +60,6 @@ function verifier_date_dist($valeur, $options = array(), &$valeur_normalisee = n
 
 	// On vérifie la validité du format
 	$format = isset($options['format']) ? $options['format'] : 'jma';
-
 	if ($format=='mja') {
 		if (!preg_match('#^[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}$#', $valeur)) {
 			return $erreur;
@@ -78,7 +77,6 @@ function verifier_date_dist($valeur, $options = array(), &$valeur_normalisee = n
 		}
 		list($jour,$mois,$annee) = explode('-', $valeur);
 	}
-
 	// Validité de la date
 	$erreur = _T('verifier:erreur_date');
 	if (!checkdate($mois, $jour, $annee)) {
@@ -125,7 +123,7 @@ function normaliser_date_datetime_dist($valeur, $options, &$erreur) {
 	if (isset($options['heure'])) {
 		$date .= (' ' . $options['heure'] . ':00');
 	} elseif (isset($options['fin_de_journee'])) {
-		$date .= ' 23:59:59'; 
+		$date .= ' 23:59:59';
 	}
 	else {
 		$date .= ' 00:00:00';
