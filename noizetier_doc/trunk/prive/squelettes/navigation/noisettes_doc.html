@@ -1,9 +1,35 @@
+#SET{noisettes_lister_disponibles,#VAL{noisettes}|noisettes_lister_disponibles}
+#SET{noisettes_type,#ARRAY}
+<BOUCLE_prefix (DATA) {source table, #GET{noisettes_lister_disponibles}|array_keys}>[(#VALEUR|match{-}|oui) #SET{noisettes_type,#GET{noisettes_type}|push{#VALEUR|explode{'-'}|table_valeur{0}|concat{-}}}] </BOUCLE_prefix>
+#SET{noisettes_type,#GET{noisettes_type}|array_unique}
+#SET{exclude_type,#ARRAY}
+
+<B_noisettes_types>
+	<BOUCLE_noisettes_types (DATA) {source table, #GET{noisettes_type}} {si #VAL{_DIR_PLUGIN_YAML}|defined}>[(#SET{infos_page,[(#REM|noizetier_charger_infos_page{#VALEUR|replace{-,''}})]})]
+
+		<B_noisettes_type>
+			[(#BOITE_OUVRIR{[<h3>[(#GET{infos_page/icon}|noizetier_chemin_icone|balise_img) ](#GET{infos_page/nom})</h3>],'simple'})]
+		<div class="navigation">
+			<ul class="liste_items sous_navigation">
+			<BOUCLE_noisettes_type (DATA) {source table, #GET{noisettes_lister_disponibles}} ><BOUCLE_options_item (CONDITION) {si #CLE|match{^#_noisettes_types:VALEUR}}>#SET{exclude_type,#GET{exclude_type}|push{#CLE}}
+				<li class="item"><a href="#[noisette_(#CLE)]" class="bando2_noisette_[(#CLE)]">[(#NOM|saisies_label)] [((#CLE))]</a></li>
+				</BOUCLE_options_item>
+			</BOUCLE_noisettes_type>
+			</ul>
+		</div>
+			[(#BOITE_FERMER)]
+		</B_noisettes_type>
+	</BOUCLE_noisettes_types>
+</B_noisettes_types>
+
 <B_noisettes>
+	[(#BOITE_OUVRIR{<h3>[(#CHEMIN{prive/themes/spip/images/noizetier_doc-24.png}|balise_img)]<:noizetier_doc:noisettes_autres:></h3>,'simple'})]
 	<div class="navigation">
 		<ul class="liste_items sous_navigation">
-			<BOUCLE_noisettes (DATA) {source table, #VAL{noisettes}|noisettes_lister_disponibles} {si #VAL{_DIR_PLUGIN_YAML}|defined}>
-				<li class="item"><a href="#[noisette_(#CLE)]" class="bando2_noisette_[(#CLE)]">[(#NOM|saisies_label)] [((#CLE))]</a></li>
+			<BOUCLE_noisettes (DATA) {source table, #GET{noisettes_lister_disponibles}} {si #VAL{_DIR_PLUGIN_YAML}|defined}>
+				[(#CLE|in_array{#GET{exclude_type}}|non)<li class="item"><a href="#[noisette_(#CLE)]" class="bando2_noisette_[(#CLE)]">[(#NOM|saisies_label)] [((#CLE))]</a></li>]
 			</BOUCLE_noisettes>
 		</ul>
 	</div>
+	#BOITE_FERMER
 </B_noisettes>

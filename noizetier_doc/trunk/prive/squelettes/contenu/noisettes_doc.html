@@ -1,11 +1,42 @@
 <h1 class="grostitre"><:noizetier_doc:titre_page_noisettes_doc:></h1>
 <div class="nettoyeur"></div>
+#SET{noisettes_lister_disponibles,#VAL{noisettes}|noisettes_lister_disponibles}
+#SET{noisettes_type,#ARRAY}
+<BOUCLE_prefix (DATA) {source table, #GET{noisettes_lister_disponibles}|array_keys}>[(#VALEUR|match{-}|oui) #SET{noisettes_type,#GET{noisettes_type}|push{#VALEUR|explode{'-'}|table_valeur{0}|concat{-}}}] </BOUCLE_prefix>
+#SET{noisettes_type,#GET{noisettes_type}|array_unique}
+#SET{exclude_type,#ARRAY}
+<B_noisettes_types>
+	<BOUCLE_noisettes_types (DATA) {source table, #GET{noisettes_type}}>
+		[(#SET{infos_page,[(#REM|noizetier_charger_infos_page{#VALEUR|replace{-,''}})]})]
+		[<h2>[(#GET{infos_page/icon}noizetier_chemin_icone|balise_img) ](#GET{infos_page/nom})</h2>]
+		<B_noisettes_type>
+			<BOUCLE_noisettes_type (DATA) {source table, #GET{noisettes_lister_disponibles}}><B_options_item>#SET{exclude_type,#GET{exclude_type}|push{#CLE}}
+
+				[(#BOITE_OUVRIR{<h3 id="[noisette_(#CLE)]">[(#ICON||sinon{noisette-24.png}|noizetier_chemin_icone|balise_img) ][(#NOM|saisies_label)] [((#CLE))]</h3>, 'simple'})]
+				[<div class="explication">(#DESCRIPTION|saisies_label)</div>]
+				<BOUCLE_options_item (DATA) {source table, #PARAMETRES} {si #CLE|match{^#_noisettes_types:VALEUR}}>
+					<div class="info #VALEUR{saisie}">
+						<h4>[(#VALEUR{options/label}|saisies_label|sinon{-})]</h4>
+						[(#CHEMIN{saisies-doc/[(#VALEUR{saisie})].html}|non)[(#VAL{saisies-doc/[(#VALEUR{saisie})].html}|spip_log{saisies_doc})]]
+						[(#CHEMIN{saisies-doc/[(#VALEUR{saisie})].html}|oui)[(#INCLURE{fond=saisies-doc/#VALEUR{saisie},options=#VALEUR{options},saisies=#VALEUR{saisies}})]]
+					</div>
+				</BOUCLE_options_item>
+				[(#BOITE_FERMER)]
+				</B_options_item>
+			</BOUCLE_noisettes_type>
+		</B_noisettes_type>
+		<:saisies:plugin_yaml_inactif:>
+		<//B_noisettes_type>
+	</BOUCLE_noisettes_types>
+</B_noisettes_types>
 
 <B_noisettes>
-	<BOUCLE_noisettes (DATA) {source table, #VAL{noisettes}|noisettes_lister_disponibles}>
+	<h2>[(#CHEMIN{prive/themes/spip/images/noizetier_doc-24.png}|balise_img)]<:noizetier_doc:noisettes_autres:></h2>
+	<BOUCLE_noisettes (DATA) {source table, #GET{noisettes_lister_disponibles}}>
+		<B_options>
 		[(#BOITE_OUVRIR{<h3 id="[noisette_(#CLE)]">[(#ICON||sinon{noisette-24.png}|noizetier_chemin_icone|balise_img) ][(#NOM|saisies_label)] [((#CLE))]</h3>, 'simple'})]
-		[<p>(#DESCRIPTION|saisies_label)</p>]
-		<BOUCLE_options (DATA) {source table, #PARAMETRES}>
+		[<div class="explication">(#DESCRIPTION|saisies_label)</div>]
+		<BOUCLE_options (DATA) {source table, #PARAMETRES} {si #CLE|in_array{#GET{exclude_type}}|non}>
 			<div class="info #VALEUR{saisie}">
 				<h4>[(#VALEUR{options/label}|saisies_label|sinon{-})]</h4>
 				[(#CHEMIN{saisies-doc/[(#VALEUR{saisie})].html}|non)[(#VAL{saisies-doc/[(#VALEUR{saisie})].html}|spip_log{saisies_doc})]]
@@ -13,6 +44,7 @@
 			</div>
 		</BOUCLE_options>
 		[(#BOITE_FERMER)]
+		</B_options>
 	</BOUCLE_noisettes>
 </B_noisettes>
 <:saisies:plugin_yaml_inactif:>

@@ -8,4 +8,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'bouton_noizetier_doc' => "Documentation des noisettes",
 	'titre_page_noisettes_doc' => "Documentation des noisettes",
+	'noisettes_autres' => 'Autres noisettes',
 );
