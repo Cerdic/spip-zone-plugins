@@ -12,6 +12,13 @@ include_spip('inc/xray_options_default');
 if (!isset($_GET['exec']) or ($_GET['exec']!='xray')) 
 	return;
 
+function autoriser_xray_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
+	return autoriser('webmestre')
+		or (defined ('ID_AUTEUR_AUTORISER_XRAY') 
+			and isset($GLOBALS['visiteur_session']['id_auteur'])
+			and ($GLOBALS['visiteur_session']['id_auteur']==intval(ID_AUTEUR_AUTORISER_XRAY)));
+}
+
 //
 // Le filtre xray_marqueur_invisible met ce qu'il reçoit dans un cache APC 'xray_marqueur_visible'
 // et renvoie une chaine vide pour le html, si bien que ce qui est caché... reste invisible

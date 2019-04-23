@@ -1,7 +1,7 @@
 <paquet
 	prefix="xray"
 	categorie="outil"
-	version="0.22.7"
+	version="0.23.0"
 	etat="test"
 	compatibilite="[2.1.0;3.2.*]"
 	logo="images/xray-32.png"

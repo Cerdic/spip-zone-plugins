@@ -29,8 +29,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 include_spip ('inc/autoriser');
-if (!autoriser('webmestre'))
-	die("Autorisation non accordée : devenez webmestre d'abord.");
+if (!autoriser('xray'))
+	die("Autorisation non accordée : devenez webmestre d'abord ou obtenez un accès.");
 include_spip('inc/filtres');
 include_spip('inc/cachelab');
 
