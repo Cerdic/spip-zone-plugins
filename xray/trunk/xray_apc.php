@@ -212,7 +212,7 @@ function joli_cache($extra) {
 		}, 
 		$print);
 	$print = preg_replace('/^    /m', '', $print);
-	return "<xmp>$print</xmp>";;
+	return "<xmp>$print</xmp>";
 }
 
 function bouton_session($id_session, $url_session) {
@@ -234,7 +234,6 @@ function bouton_objet($objet, $id_objet, $contexte) {
 	{
 		$objet_visible = $objet = $contexte['objet'];
 	};
-global $MY_SELF;
 	return "<a href='/ecrire/?exec=$objet&id_$objet=$id_objet' target='blank' 
 				style='float: right'
 				title=\"" . attribut_html(generer_info_entite($id_objet, $objet, 'titre', 'etoile')) . "\">
@@ -806,11 +805,9 @@ h1.apc div.logo span.logo {
 	padding-right:1.2em;
 	text-align:right;
 	}
-h1.apc div.logo span.name { color:white; font-size:0.7em; padding:0 0.8em 0 2em; }
 h1.apc div.nameinfo { color:white; display:inline; font-size:0.6em; margin-left: 1em; }
 h1.apc div.nameinfo a { color:white; margin-left: 3em; }
 h1.apc div.nameinfo img {margin-bottom: -10px; margin-right : 1em;}
-h1.apc div.copy { color:black; font-size:0.4em; position:absolute; right:1em; }
 hr.apc { display: none; }
 
 ol,menu { margin:1em 0 0 0; padding:0.2em; margin-left:1em;}
@@ -820,28 +817,18 @@ ol.menu a {
 	border:solid rgb(102,102,153) 2px;
 	color:white;
 	font-weight:bold;
-	margin-right:0em;
+	margin-right:0;
 	padding:0.1em 0.5em 0.1em 0.5em;
 	text-decoration:none;
 	margin-left: 5px;
 	}
-ol.menu a.child_active {
-	background:rgb(153,153,204);
-	border:solid rgb(102,102,153) 2px;
-	color:white;
-	font-weight:bold;
-	margin-right:0em;
-	padding:0.1em 0.5em 0.1em 0.5em;
-	text-decoration:none;
-	border-left: solid black 5px;
-	margin-left: 0px;
-	}
+
 ol.menu span.active {
 	background:rgb(153,153,204);
 	border:solid rgb(102,102,153) 2px;
 	color:black;
 	font-weight:bold;
-	margin-right:0em;
+	margin-right:0;
 	padding:0.1em 0.5em 0.1em 0.5em;
 	text-decoration:none;
 	border-left: solid black 5px;
@@ -851,7 +838,7 @@ ol.menu span.inactive {
 	border:solid rgb(182,182,233) 2px;
 	color:white;
 	font-weight:bold;
-	margin-right:0em;
+	margin-right:0;
 	padding:0.1em 0.5em 0.1em 0.5em;
 	text-decoration:none;
 	margin-left: 5px;
@@ -908,7 +895,7 @@ div.div1,div.div2 { margin-bottom:1em; width:35em; }
 div.div3 { position:absolute; left:40em; top:1em; width:580px; }
 //div.div3 { position:absolute; left:37em; top:1em; right:1em; }
 
-div.sorting { margin:1.5em 0em 1.5em 2em }
+div.sorting { margin:1.5em 0 1.5em 2em }
 .center { text-align:center }
 .aright { float: right; }
 .right { text-align:right }
@@ -925,16 +912,6 @@ span.box {
 span.green { background:#60F060; padding:0 0.5em 0 0.5em}
 span.red { background:#D06030; padding:0 0.5em 0 0.5em }
 
-div.authneeded {
-	background:rgb(238,238,238);
-	border:solid rgb(204,204,204) 1px;
-	color:rgb(200,0,0);
-	font-size:1.2em;
-	font-weight:bold;
-	padding:2em;
-	text-align:center;
-	}
-
 input {
 	background:rgb(153,153,204);
 	border:solid rgb(102,102,153) 2px;
@@ -949,7 +926,7 @@ xmp { display: inline }
 .menuzoom {
 	border :  1px solid grey;
 	border-radius: 3px;
-	padding : 0px 5px 0px 5px;
+	padding : 0 5px 0 5px;
 }
 
 //-->
@@ -966,7 +943,7 @@ xmp { display: inline }
 			XRay pour SPIP
 			</a>
 		</div>
-		</a>
+	</h1>
 	<hr class="apc">
 </div>
 
@@ -1476,16 +1453,17 @@ EOB;
 					if ($p = preg_match(XRAY_PATTERN_SESSION_AUTH, $displayed_name, $match) 
 						and $MYREQUEST['SEARCH'] != "/{$match[1]}/i") {
 						$url_session = parametre_url($MY_SELF, 'SEARCH', $match[1]);
+						$url_session = parametre_url($url_session, 'WHERE', '');
 						$boutons_liens .= bouton_session($match[1], $url_session);
 					}
 					if (is_array($data)
 						and isset($data['invalideurs']['session'])) {
 						$p = preg_match(XRAY_PATTERN_TALON, $displayed_name, $match);
-						$url_mm_talon = '';
 						$bouton_mm_talon='[mm talon]';
 						if ($p and $match[1] and ($MYREQUEST['SEARCH']!=$match[1])) {
 							$url_mm_talon = parametre_url($MY_SELF, 'TYPECACHE', 'ALL');
 							$url_mm_talon = parametre_url($url_mm_talon, 'SEARCH', $match[1]);
+							$url_mm_talon = parametre_url($url_mm_talon, 'WHERE', '');
 						}
 						else 
 							$bouton_mm_talon='(! Err get talon !)';
@@ -1654,9 +1632,9 @@ EOB;
 		if ($MYREQUEST['TYPELISTE']=='squelettes') {
 			$i=1;
 			foreach ($liste_squelettes as $radical => $s) {
-				$squel_caches = parametre_url(
-							parametre_url($self_pour_lien, 'SEARCH', $radical),
-							'TYPELISTE', 'caches');
+				$squel_caches = parametre_url($self_pour_lien, 'SEARCH', $radical);
+				$squel_caches =	parametre_url($squel_caches, 'WHERE', '');
+				$squel_caches =	parametre_url($squel_caches, 'TYPELISTE', 'caches');
 				// Les dossiers de squelettes déclarés comme public dans paquet.xml
 				// ne sont pas utilisés par find_in_path dans le privé
 
@@ -1728,12 +1706,12 @@ EOB;
 			
 			for ($j = 2; $j + 1 < count($changelog); $j += 2) {
 				$v = $changelog[$j];
+				list($unused, $ver) = $v;
 				if ($i < 0 && version_compare($apcversion, $ver, '>=')) {
 					break;
 				} else if (!$i--) {
 					break;
 				}
-				list($unused, $ver) = $v;
 				$changes = $changelog[$j + 1];
 				echo "<b><a href=\"http://pecl.php.net/package/APCu/$ver\">" . htmlspecialchars($v, ENT_QUOTES, 'UTF-8') . "</a></b><br><blockquote>";
 				echo nl2br(htmlspecialchars($changes, ENT_QUOTES, 'UTF-8')) . "</blockquote>";
