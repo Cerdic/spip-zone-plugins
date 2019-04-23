@@ -138,8 +138,9 @@ if (!defined('_DIR_PLUGIN_ADAPTIVE_IMAGES')) {
 function balise_ICON_dist($p) {
 	$_name = interprete_argument_balise(1, $p);
 	if (!$_name) {
-		$msg = array('zbug_balise_sans_argument', array('balise' => ' ICON'));
-		erreur_squelette($msg, $p);
+		// compat avec les champs #ICON utilises dans composition et noizetier : pas d'argument = champ sql (ou DATA)
+		$_icon = champ_sql('icon', $p);
+		$p->code = $_icon;
 	}
 	else {
 		$_class = interprete_argument_balise(2, $p);
