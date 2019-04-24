@@ -65,9 +65,5 @@ class Block
     /**
      * @var \Leafo\ScssPhp\Block
      */
-    public $atrootParent;
-    /**
-     * @var array
-     */
-    public $atrootParentSelectors;
+    public $selfParent;
 }

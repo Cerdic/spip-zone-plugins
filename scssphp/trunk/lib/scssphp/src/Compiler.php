@@ -12,17 +12,11 @@
 namespace Leafo\ScssPhp;
 
 use Leafo\ScssPhp\Base\Range;
-use Leafo\ScssPhp\Block;
 use Leafo\ScssPhp\Cache;
-use Leafo\ScssPhp\Colors;
 use Leafo\ScssPhp\Compiler\Environment;
 use Leafo\ScssPhp\Exception\CompilerException;
 use Leafo\ScssPhp\Formatter\OutputBlock;
-use Leafo\ScssPhp\Node;
 use Leafo\ScssPhp\SourceMap\SourceMapGenerator;
-use Leafo\ScssPhp\Type;
-use Leafo\ScssPhp\Parser;
-use Leafo\ScssPhp\Util;
 
 /**
  * The scss compiler and parser.
@@ -148,18 +142,18 @@ class Compiler
 
     protected $cache;
 
-    private $indentLevel;
-    private $commentsSeen;
-    private $extends;
-    private $extendsMap;
-    private $parsedFiles;
-    private $parser;
-    private $sourceIndex;
-    private $sourceLine;
-    private $sourceColumn;
-    private $stderr;
-    private $shouldEvaluate;
-    private $ignoreErrors;
+    protected $indentLevel;
+    protected $commentsSeen;
+    protected $extends;
+    protected $extendsMap;
+    protected $parsedFiles;
+    protected $parser;
+    protected $sourceIndex;
+    protected $sourceLine;
+    protected $sourceColumn;
+    protected $stderr;
+    protected $shouldEvaluate;
+    protected $ignoreErrors;
 
     /**
      * Constructor
@@ -170,11 +164,12 @@ class Compiler
         $this->sourceNames = [];
 
         if ($cache_options) {
-          $this->cache = new Cache($cache_options);
+            $this->cache = new Cache($cache_options);
         }
     }
 
-    public function getCompileOptions() {
+    public function getCompileOptions()
+    {
         $options = array(
             'importPaths' => $this->importPaths,
             'registeredVars' => $this->registeredVars,
@@ -206,7 +201,6 @@ class Compiler
             if (is_array($cache)
                 and isset($cache['dependencies'])
                 and isset($cache['out']) ) {
-
                 // check if any dependency file changed before accepting the cache
                 foreach ($cache['dependencies'] as $file => $mtime) {
                     if (!file_exists($file)
@@ -514,7 +508,12 @@ class Compiler
                     $tempReplacement = $k > 0 ? array_slice($new, $k) : $new;
 
                     for ($l = count($tempReplacement) - 1; $l >= 0; $l--) {
-                        $slice = $tempReplacement[$l];
+                        $slice = [];
+                        foreach ($tempReplacement[$l] as $chunk) {
+                            if (!in_array($chunk, $slice)) {
+                                $slice[] = $chunk;
+                            }
+                        }
                         array_unshift($replacement, $slice);
 
                         if (! $this->isImmediateRelationshipCombinator(end($slice))) {
@@ -841,14 +840,13 @@ class Compiler
             $wrapped->comments     = [];
             $wrapped->parent       = $block;
             $wrapped->children     = $block->children;
+            $wrapped->selfParent   = $block->selfParent;
 
             $block->children = [[Type::T_BLOCK, $wrapped]];
         }
 
         $this->env = $this->filterWithout($envs, $without);
         $newBlock  = $this->spliceTree($envs, $block, $without);
-        if (isset($block->atrootParent))
-            $newBlock[1]->atrootParent = $block->atrootParent;
 
         $saveScope   = $this->scope;
         $this->scope = $this->rootBlock;
@@ -870,7 +868,7 @@ class Compiler
      *
      * @return array
      */
-    private function spliceTree($envs, Block $block, $without)
+    protected function spliceTree($envs, Block $block, $without)
     {
         $newBlock = null;
 
@@ -935,6 +933,7 @@ class Compiler
             $newBlock = $b;
         }
 
+        $newBlock->selfParent   = $block->selfParent;
         $type = isset($newBlock->type) ? $newBlock->type : Type::T_BLOCK;
 
         return [$type, $newBlock];
@@ -947,7 +946,7 @@ class Compiler
      *
      * @return integer
      */
-    private function compileWith($with)
+    protected function compileWith($with)
     {
         static $mapping = [
             'rule'     => self::WITH_RULE,
@@ -998,7 +997,7 @@ class Compiler
      *
      * @return \Leafo\ScssPhp\Compiler\Environment
      */
-    private function filterWithout($envs, $without)
+    protected function filterWithout($envs, $without)
     {
         $filtered = [];
 
@@ -1021,7 +1020,7 @@ class Compiler
      *
      * @return boolean
      */
-    private function isWithout($without, Block $block)
+    protected function isWithout($without, Block $block)
     {
         if ((($without & static::WITH_RULE) && isset($block->selectors)) ||
             (($without & static::WITH_MEDIA) &&
@@ -1136,7 +1135,7 @@ class Compiler
         $this->scope->children[] = $out;
 
         if (count($block->children)) {
-            $out->selectors = $this->multiplySelectors($env);
+            $out->selectors = $this->multiplySelectors($env, $block->selfParent);
 
             $this->compileChildrenNoReturn($block->children, $out);
         }
@@ -1346,9 +1345,6 @@ class Compiler
 
         foreach ($selector as $parts) {
             foreach ($parts as $part) {
-                if (is_array($part)) {
-                    return false;
-                }
                 if (strlen($part) && '%' === $part[0]) {
                     return true;
                 }
@@ -1364,7 +1360,7 @@ class Compiler
      * @param array                                $stms
      * @param \Leafo\ScssPhp\Formatter\OutputBlock $out
      *
-     * @return array
+     * @return array|null
      */
     protected function compileChildren($stms, OutputBlock $out)
     {
@@ -1375,6 +1371,7 @@ class Compiler
                 return $ret;
             }
         }
+        return null;
     }
 
     /**
@@ -1631,9 +1628,7 @@ class Compiler
 
         switch ($child[0]) {
             case Type::T_SCSSPHP_IMPORT_ONCE:
-                list(, $rawPath) = $child;
-
-                $rawPath = $this->reduce($rawPath);
+                $rawPath = $this->reduce($child[1]);
 
                 if (! $this->compileImport($rawPath, $out, true)) {
                     $out->lines[] = '@import ' . $this->compileValue($rawPath) . ';';
@@ -1641,9 +1636,7 @@ class Compiler
                 break;
 
             case Type::T_IMPORT:
-                list(, $rawPath) = $child;
-
-                $rawPath = $this->reduce($rawPath);
+                $rawPath = $this->reduce($child[1]);
 
                 if (! $this->compileImport($rawPath, $out)) {
                     $out->lines[] = '@import ' . $this->compileValue($rawPath) . ';';
@@ -1683,7 +1676,7 @@ class Compiler
                     $isGlobal = in_array('!global', $flags);
 
                     if ($isGlobal) {
-                        $this->set($name[1], $this->reduce($value), false, $this->rootEnv);
+                        $this->set($name[1], $this->reduce($value), false, $this->rootEnv, $value);
                         break;
                     }
 
@@ -1692,7 +1685,7 @@ class Compiler
                         || $result === static::$null);
 
                     if (! $isDefault || $shouldSet) {
-                        $this->set($name[1], $this->reduce($value));
+                        $this->set($name[1], $this->reduce($value), false, null, $value);
                     }
                     break;
                 }
@@ -1701,10 +1694,23 @@ class Compiler
 
                 // handle shorthand syntax: size / line-height
                 if ($compiledName === 'font') {
-                    if ($value[0] === Type::T_EXPRESSION && $value[1] === '/') {
-                        $value = $this->expToString($value);
-                    } elseif ($value[0] === Type::T_LIST) {
-                        foreach ($value[2] as &$item) {
+                    if ($value[0] === Type::T_VARIABLE) {
+                        // if the font value comes from variable, the content is already reduced (which means formulars where already calculated)
+                        // so we need the original unreduced value
+                        $value = $this->get($value[1], true, null, true);
+                    }
+
+                    $fontValue=&$value;
+                    if ($value[0] === Type::T_LIST && $value[1]==',') {
+                        // this is the case if more than one font is given: example: "font: 400 1em/1.3 arial,helvetica"
+                        // we need to handle the first list element
+                        $fontValue=&$value[2][0];
+                    }
+
+                    if ($fontValue[0] === Type::T_EXPRESSION && $fontValue[1] === '/') {
+                        $fontValue = $this->expToString($fontValue);
+                    } elseif ($fontValue[0] === Type::T_LIST) {
+                        foreach ($fontValue[2] as &$item) {
                             if ($item[0] === Type::T_EXPRESSION && $item[1] === '/') {
                                 $item = $this->expToString($item);
                             }
@@ -1747,9 +1753,7 @@ class Compiler
                 break;
 
             case Type::T_EXTEND:
-                list(, $selectors) = $child;
-
-                foreach ($selectors as $sel) {
+                foreach ($child[1] as $sel) {
                     $results = $this->evalSelectors([$sel]);
 
                     foreach ($results as $result) {
@@ -1934,11 +1938,7 @@ class Compiler
                 if (isset($mixin->args)) {
                     $this->applyArguments($mixin->args, $argValues);
                 }
-                foreach ($mixin->children as $stm) {
-                    if ($stm[0] == Type::T_AT_ROOT) {
-                        $stm[1]->atrootParentSelectors = $callingScope->selectors;
-                    }
-                }
+
                 $this->env->marker = 'mixin';
 
                 $this->compileChildrenNoReturn($mixin->children, $out);
@@ -1970,25 +1970,28 @@ class Compiler
             case Type::T_DEBUG:
                 list(, $value) = $child;
 
+                $fname = $this->sourceNames[$this->sourceIndex];
                 $line = $this->sourceLine;
                 $value = $this->compileValue($this->reduce($value, true));
-                fwrite($this->stderr, "Line $line DEBUG: $value\n");
+                fwrite($this->stderr, "File $fname on line $line DEBUG: $value\n");
                 break;
 
             case Type::T_WARN:
                 list(, $value) = $child;
 
+                $fname = $this->sourceNames[$this->sourceIndex];
                 $line = $this->sourceLine;
                 $value = $this->compileValue($this->reduce($value, true));
-                fwrite($this->stderr, "Line $line WARN: $value\n");
+                fwrite($this->stderr, "File $fname on line $line WARN: $value\n");
                 break;
 
             case Type::T_ERROR:
                 list(, $value) = $child;
 
+                $fname = $this->sourceNames[$this->sourceIndex];
                 $line = $this->sourceLine;
                 $value = $this->compileValue($this->reduce($value, true));
-                $this->throwError("Line $line ERROR: $value\n");
+                $this->throwError("File $fname on line $line ERROR: $value\n");
                 break;
 
             case Type::T_CONTROL:
@@ -2064,7 +2067,7 @@ class Compiler
         switch ($value[0]) {
             case Type::T_EXPRESSION:
                 if ($value[1] === '/') {
-                    return $this->shouldEval($value[2], $value[3]);
+                    return $this->shouldEval($value[2]);
                 }
 
                 // fall-thru
@@ -2086,9 +2089,8 @@ class Compiler
      */
     protected function reduce($value, $inExp = false)
     {
-        list($type) = $value;
 
-        switch ($type) {
+        switch ($value[0]) {
             case Type::T_EXPRESSION:
                 list(, $op, $left, $right, $inParens) = $value;
 
@@ -2221,9 +2223,7 @@ class Compiler
                 return [Type::T_STRING, '', [$op, $exp]];
 
             case Type::T_VARIABLE:
-                list(, $name) = $value;
-
-                return $this->reduce($this->get($name));
+                return $this->reduce($this->get($value[1]));
 
             case Type::T_LIST:
                 foreach ($value[2] as &$item) {
@@ -2258,9 +2258,7 @@ class Compiler
                 return $value;
 
             case Type::T_FUNCTION_CALL:
-                list(, $name, $argValues) = $value;
-
-                return $this->fncall($name, $argValues);
+                return $this->fncall($value[1], $value[2]);
 
             default:
                 return $value;
@@ -2275,7 +2273,7 @@ class Compiler
      *
      * @return array|null
      */
-    private function fncall($name, $argValues)
+    protected function fncall($name, $argValues)
     {
         // SCSS @function
         if ($this->callScssFunction($name, $argValues, $returnValue)) {
@@ -2321,9 +2319,8 @@ class Compiler
     public function normalizeValue($value)
     {
         $value = $this->coerceForExpression($this->reduce($value));
-        list($type) = $value;
 
-        switch ($type) {
+        switch ($value[0]) {
             case Type::T_LIST:
                 $value = $this->extractInterpolation($value);
 
@@ -2338,7 +2335,7 @@ class Compiler
                 return $value;
 
             case Type::T_STRING:
-                return [$type, '"', [$this->compileStringContent($value)]];
+                return [$value[0], '"', [$this->compileStringContent($value)]];
 
             case Type::T_NUMBER:
                 return $value->normalize();
@@ -2426,7 +2423,7 @@ class Compiler
      * @param array $left
      * @param array $right
      *
-     * @return array
+     * @return array|null
      */
     protected function opAdd($left, $right)
     {
@@ -2449,6 +2446,7 @@ class Compiler
 
             return $strRight;
         }
+        return null;
     }
 
     /**
@@ -2458,12 +2456,12 @@ class Compiler
      * @param array   $right
      * @param boolean $shouldEval
      *
-     * @return array
+     * @return array|null
      */
     protected function opAnd($left, $right, $shouldEval)
     {
         if (! $shouldEval) {
-            return;
+            return null;
         }
 
         if ($left !== static::$false and $left !== static::$null) {
@@ -2480,12 +2478,12 @@ class Compiler
      * @param array   $right
      * @param boolean $shouldEval
      *
-     * @return array
+     * @return array|null
      */
     protected function opOr($left, $right, $shouldEval)
     {
         if (! $shouldEval) {
-            return;
+            return null;
         }
 
         if ($left !== static::$false and $left !== static::$null) {
@@ -2743,9 +2741,7 @@ class Compiler
     {
         $value = $this->reduce($value);
 
-        list($type) = $value;
-
-        switch ($type) {
+        switch ($value[0]) {
             case Type::T_KEYWORD:
                 return $value[1];
 
@@ -2840,11 +2836,8 @@ class Compiler
                 return $left . $this->compileValue($interpolate) . $right;
 
             case Type::T_INTERPOLATE:
-                // raw parse node
-                list(, $exp) = $value;
-
                 // strip quotes if it's a string
-                $reduced = $this->reduce($exp);
+                $reduced = $this->reduce($value[1]);
 
                 switch ($reduced[0]) {
                     case Type::T_LIST:
@@ -2894,7 +2887,7 @@ class Compiler
                 return 'null';
 
             default:
-                $this->throwError("unknown value type: $type");
+                $this->throwError("unknown value type: $value[0]");
         }
     }
 
@@ -2959,33 +2952,31 @@ class Compiler
      * Find the final set of selectors
      *
      * @param \Leafo\ScssPhp\Compiler\Environment $env
+     * @param Leafo\ScssPhp\Block $selfParent
      *
      * @return array
      */
-    protected function multiplySelectors(Environment $env)
+    protected function multiplySelectors(Environment $env, $selfParent = null)
     {
         $envs            = $this->compactEnv($env);
         $selectors       = [];
         $parentSelectors = [[]];
 
+        $selfParentSelectors = null;
+        if (!is_null($selfParent) and $selfParent->selectors) {
+            $selfParentSelectors = $this->evalSelectors($selfParent->selectors);
+        }
+
         while ($env = array_pop($envs)) {
             if (empty($env->selectors)) {
                 continue;
             }
-            if ($env->block->type == Type::T_AT_ROOT) {
-                break;
-            }
+
             $selectors = [];
-            if (!empty($env->block->parent->atrootParent) && !empty($env->block->parent->atrootParent->selectors)) {
-                $parentSelectors = $env->block->parent->atrootParent->selectors;
-            }
-            if (!empty($env->parent->parent->block->atrootParentSelectors)) {
-                $parentSelectors = $env->parent->parent->block->atrootParentSelectors;
-            }
 
             foreach ($env->selectors as $selector) {
                 foreach ($parentSelectors as $parent) {
-                    $selectors[] = $this->joinSelectors($parent, $selector);
+                    $selectors[] = $this->joinSelectors($parent, $selector, $selfParentSelectors);
                 }
             }
 
@@ -3000,10 +2991,10 @@ class Compiler
      *
      * @param array $parent
      * @param array $child
-     *
+     * @param array $selfParentSelectors
      * @return array
      */
-    protected function joinSelectors($parent, $child)
+    protected function joinSelectors($parent, $child, $selfParentSelectors = null)
     {
         $setSelf = false;
         $out = [];
@@ -3014,15 +3005,17 @@ class Compiler
             foreach ($part as $p) {
                 if ($p === static::$selfSelector) {
                     $setSelf = true;
-
-                    foreach ($parent as $i => $parentPart) {
+                    if (is_null($selfParentSelectors)) {
+                        $selfParentSelectors = $parent;
+                    }
+                    foreach ($selfParentSelectors as $i => $parentPart) {
                         if ($i > 0) {
                             $out[] = $newPart;
                             $newPart = [];
                         }
 
                         foreach ($parentPart as $pp) {
-                            $newPart[] = $pp;
+                            $newPart[] = (is_array($pp) ? implode($pp) : $pp);
                         }
                     }
                 } else {
@@ -3084,7 +3077,7 @@ class Compiler
      *
      * @return array
      */
-    private function compactEnv(Environment $env)
+    protected function compactEnv(Environment $env)
     {
         for ($envs = []; $env; $env = $env->parent) {
             $envs[] = $env;
@@ -3100,7 +3093,7 @@ class Compiler
      *
      * @return \Leafo\ScssPhp\Compiler\Environment
      */
-    private function extractEnv($envs)
+    protected function extractEnv($envs)
     {
         for ($env = null; $e = array_pop($envs);) {
             $e->parent = $env;
@@ -3155,8 +3148,9 @@ class Compiler
      * @param mixed                               $value
      * @param boolean                             $shadow
      * @param \Leafo\ScssPhp\Compiler\Environment $env
+     * @param mixed                               $valueUnreduced
      */
-    protected function set($name, $value, $shadow = false, Environment $env = null)
+    protected function set($name, $value, $shadow = false, Environment $env = null, $valueUnreduced = null)
     {
         $name = $this->normalizeName($name);
 
@@ -3165,9 +3159,9 @@ class Compiler
         }
 
         if ($shadow) {
-            $this->setRaw($name, $value, $env);
+            $this->setRaw($name, $value, $env, $valueUnreduced);
         } else {
-            $this->setExisting($name, $value, $env);
+            $this->setExisting($name, $value, $env, $valueUnreduced);
         }
     }
 
@@ -3177,8 +3171,9 @@ class Compiler
      * @param string                              $name
      * @param mixed                               $value
      * @param \Leafo\ScssPhp\Compiler\Environment $env
+     * @param mixed                               $valueUnreduced
      */
-    protected function setExisting($name, $value, Environment $env)
+    protected function setExisting($name, $value, Environment $env, $valueUnreduced = null)
     {
         $storeEnv = $env;
 
@@ -3203,6 +3198,9 @@ class Compiler
         }
 
         $env->store[$name] = $value;
+        if ($valueUnreduced) {
+            $env->storeUnreduced[$name] = $valueUnreduced;
+        }
     }
 
     /**
@@ -3211,10 +3209,14 @@ class Compiler
      * @param string                              $name
      * @param mixed                               $value
      * @param \Leafo\ScssPhp\Compiler\Environment $env
+     * @param mixed                               $valueUnreduced
      */
-    protected function setRaw($name, $value, Environment $env)
+    protected function setRaw($name, $value, Environment $env, $valueUnreduced = null)
     {
         $env->store[$name] = $value;
+        if ($valueUnreduced) {
+            $env->storeUnreduced[$name] = $valueUnreduced;
+        }
     }
 
     /**
@@ -3225,10 +3227,11 @@ class Compiler
      * @param string                              $name
      * @param boolean                             $shouldThrow
      * @param \Leafo\ScssPhp\Compiler\Environment $env
+     * @param boolean                             $unreduced
      *
-     * @return mixed
+     * @return mixed|null
      */
-    public function get($name, $shouldThrow = true, Environment $env = null)
+    public function get($name, $shouldThrow = true, Environment $env = null, $unreduced = false)
     {
         $normalizedName = $this->normalizeName($name);
         $specialContentKey = static::$namespaces['special'] . 'content';
@@ -3242,6 +3245,9 @@ class Compiler
 
         for (;;) {
             if (array_key_exists($normalizedName, $env->store)) {
+                if ($unreduced && isset($env->storeUnreduced[$normalizedName])) {
+                    return $env->storeUnreduced[$normalizedName];
+                }
                 return $env->store[$normalizedName];
             }
 
@@ -3268,6 +3274,7 @@ class Compiler
         }
 
         // found nothing
+        return null;
     }
 
     /**
@@ -3549,9 +3556,12 @@ class Compiler
             if (is_string($dir)) {
                 // check urls for normal import paths
                 foreach ($urls as $full) {
-                    $full = $dir
-                        . (! empty($dir) && substr($dir, -1) !== '/' ? '/' : '')
-                        . $full;
+                    $separator = (
+                        !empty($dir) &&
+                        substr($dir, -1) !== '/' &&
+                        substr($full, 0, 1) !== '/'
+                    ) ? '/' : '';
+                    $full = $dir . $separator . $full;
 
                     if ($this->fileExists($file = $full . '.scss') ||
                         ($hasExtension && $this->fileExists($file = $full))
@@ -3596,6 +3606,7 @@ class Compiler
     public function setIgnoreErrors($ignoreErrors)
     {
         $this->ignoreErrors = $ignoreErrors;
+        return $this;
     }
 
     /**
@@ -3618,9 +3629,8 @@ class Compiler
         }
 
         $line = $this->sourceLine;
-        $file = $this->sourceNames[$this->sourceIndex];
-
-        $msg = "$msg: line: $line file: $file";
+        $loc = isset($this->sourceNames[$this->sourceIndex]) ? $this->sourceNames[$this->sourceIndex] . " on line $line" : "line: $line";
+        $msg = "$msg: $loc";
 
         throw new CompilerException($msg);
     }
@@ -3934,7 +3944,7 @@ class Compiler
      *
      * @return array|\Leafo\ScssPhp\Node\Number
      */
-    private function coerceValue($value)
+    protected function coerceValue($value)
     {
         if (is_array($value) || $value instanceof \ArrayAccess) {
             return $value;
@@ -4136,7 +4146,7 @@ class Compiler
         $value = $this->coerceMap($value);
 
         if ($value[0] !== Type::T_MAP) {
-            $this->throwError('expecting map');
+            $this->throwError('expecting map, %s received', $value[0]);
         }
 
         return $value;
@@ -4156,7 +4166,7 @@ class Compiler
     public function assertList($value)
     {
         if ($value[0] !== Type::T_LIST) {
-            $this->throwError('expecting list');
+            $this->throwError('expecting list, %s received', $value[0]);
         }
 
         return $value;
@@ -4179,7 +4189,7 @@ class Compiler
             return $color;
         }
 
-        $this->throwError('expecting color');
+        $this->throwError('expecting color, %s received', $value[0]);
     }
 
     /**
@@ -4196,7 +4206,7 @@ class Compiler
     public function assertNumber($value)
     {
         if ($value[0] !== Type::T_NUMBER) {
-            $this->throwError('expecting number');
+            $this->throwError('expecting number, %s received', $value[0]);
         }
 
         return $value[1];
@@ -4273,7 +4283,7 @@ class Compiler
      *
      * @return float
      */
-    private function hueToRGB($m1, $m2, $h)
+    protected function hueToRGB($m1, $m2, $h)
     {
         if ($h < 0) {
             $h += 1;
@@ -4995,7 +5005,7 @@ class Compiler
         if (! isset($list[2][$n])) {
             $this->throwError('Invalid argument for "n"');
 
-            return;
+            return null;
         }
 
         $list[2][$n] = $args[2];
@@ -5233,7 +5243,7 @@ class Compiler
         ) {
             $this->throwError('Invalid argument(s) for "comparable"');
 
-            return;
+            return null;
         }
 
         $number1 = $number1->normalize();
@@ -5413,7 +5423,7 @@ class Compiler
             if ($n < 1) {
                 $this->throwError("limit must be greater than or equal to 1");
 
-                return;
+                return null;
             }
 
             return new Node\Number(mt_rand(1, $n), '');
