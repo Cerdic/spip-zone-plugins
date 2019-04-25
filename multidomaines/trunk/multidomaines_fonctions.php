@@ -54,3 +54,30 @@ function calculer_URL_SECTEUR($id_rubrique) {
 
 	return $urls_cache[$id_rubrique];
 }
+
+function balise_NOM_SITE_MULTIDOMAINE_dist($p) {
+	$id_rubrique = interprete_argument_balise(1, $p);
+	if (strlen(trim($id_rubrique)) == 0) {
+		$id_rubrique = calculer_balise('id_rubrique', $p)->code;
+	}
+	$p->code              = "calculer_nom_site_multidomaine(intval($id_rubrique))";
+	$p->interdire_scripts = false;
+
+	return $p;
+}
+
+function calculer_nom_site_multidomaine($id_rubrique){
+	$nom_site = $GLOBALS['meta']['nom_site'];
+	$cfg = lire_config('multidomaines');
+	foreach ($cfg as $id_rubrique_domaine => $config) {
+		if(is_int($id_rubrique_domaine) && $config['url']){
+			$branche = explode(',',calcul_branche_in($id_rubrique_domaine));
+			if(is_array($branche) && in_array($id_rubrique, $branche) ){
+				$nom_site = sql_getfetsel('titre','spip_rubriques','id_rubrique = '.$id_rubrique_domaine);
+			}
+		}
+	}
+	$nom_site = supprimer_numero(typo($nom_site));
+	
+	return $nom_site;
+}
