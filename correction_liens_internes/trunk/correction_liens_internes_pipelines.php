@@ -119,10 +119,10 @@ function correction_liens_internes_correction($texte, $raccourci_spip = true){
 		$bonne_url = correction_liens_internes_trouver_bonne_url($mauvaise_url, $domaines_origine);
 		if ($bonne_url) {
 			$bon_raccourci = str_replace($mauvaise_url, $bonne_url, $mauvais_raccourci);
-		}
-		$texte = str_replace($mauvais_raccourci, $bon_raccourci, $texte);
-		spip_log(self() . (_request('self')?' / '._request('self'):'')  //pour crayons notamment...
+			$texte = str_replace($mauvais_raccourci, $bon_raccourci, $texte);
+			spip_log(self() . (_request('self')?' / '._request('self'):'')  //pour crayons notamment...
 			. " : $mauvais_raccourci => $bon_raccourci", 'liens_internes.' . _LOG_AVERTISSEMENT);
+		}
 	}
 	return $texte;
 }
