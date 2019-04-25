@@ -104,7 +104,7 @@ function correction_liens_internes_correction($texte, $raccourci_spip = true){
 	$objet = '';
 	$id_objet = 0;
 	if ($raccourci_spip) {
-		preg_match_all("#\[.*->($url_site.*)\]#U", $texte, $match, PREG_SET_ORDER);
+		preg_match_all("#\[.*->\s?($url_site.*)\]#U", $texte, $match, PREG_SET_ORDER);
 	} else {
 		preg_match_all("#($url_site.*(\s)?)#", $texte, $match, PREG_SET_ORDER);
 	}
