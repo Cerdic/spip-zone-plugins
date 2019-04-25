@@ -11,6 +11,8 @@
 
 namespace Leafo\ScssPhp\SourceMap;
 
+use Leafo\ScssPhp\SourceMap\Base64;
+
 /**
  * Base 64 VLQ
  *
