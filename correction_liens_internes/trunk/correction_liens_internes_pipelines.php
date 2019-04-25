@@ -98,6 +98,9 @@ function correction_liens_internes_correction($texte, $raccourci_spip = true){
 		$domaines_origine = array(url_de_base());
 		$url_site = preg_quote(url_de_base());
 	}
+	// http ou https, même combat
+	$url_site = str_replace('https\://', 'https?\://', $url_site);
+	$url_site = str_replace('http\://', 'https?\://', $url_site);
 
 	// on repère les mauvaises URLs
 	$match = array();
