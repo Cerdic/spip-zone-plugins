@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.1.0;3.2.*]"
 	logo="icon/favicon.png"
-
+	documentation="https://contrib.spip.net/Favicon-4740"
 >
 
 	<nom>Favicon</nom>
