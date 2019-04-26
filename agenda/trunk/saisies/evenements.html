@@ -66,21 +66,20 @@
 </BOUCLE_evenements>
 #SET{description,#GET{description}|array_flip}
 #INCLURE{fond=saisies/#ENV{type_choix,radio},data=#GET{description},disable_choix=#GET{disable_choix},env}
-
+<BOUCLE_attente(CONDITION) {si #GET{evenements_liste_attente}|count}>
 [(#SET{id_liste_attente,[(#ENV{id_saisie}|replace{@})]_liste_attente})]
-<input type="hidden" id="#GET{id_liste_attente}" name="#ENV{nom}_liste_attente" />
-	<script type="text/javascript">
-	test_#GET{id_liste_attente} = function() {
-		if ([[(#GET{evenements_liste_attente}|implode{','})]].includes(parseInt($("[name='#ENV{nom}']:checked").val()))) {
-			$('##GET{id_liste_attente}').val('on').trigger('change');
-		} else {
-			$('##GET{id_liste_attente}').val('').trigger('change');
+	<input type="hidden" id="#GET{id_liste_attente}" name="#ENV{nom}_liste_attente" />
+		<script type="text/javascript">
+		test_#GET{id_liste_attente} = function() {
+			if ([[(#GET{evenements_liste_attente}|implode{','})]].includes(parseInt($("[name='#ENV{nom}']:checked").val()))) {
+				$('##GET{id_liste_attente}').val('on').trigger('change');
+			} else {
+				$('##GET{id_liste_attente}').val('').trigger('change');
+			}
 		}
-	}
-	$(function() {
-		test_#GET{id_liste_attente}();
-	});
-	$("[name='#ENV{nom}']").change(function(){test_#GET{id_liste_attente}()});
-	</script>
-
-
+		$(function() {
+			test_#GET{id_liste_attente}();
+		});
+		$("[name='#ENV{nom}']").change(function(){test_#GET{id_liste_attente}()});
+		</script>
+</BOUCLE_attente>
