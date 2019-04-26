@@ -26,6 +26,9 @@
 	<BOUCLE_participants(spip_evenements_participants){id_evenement}{reponse=oui} />#SET{inscrits,#TOTAL_BOUCLE}<//B_participants>
 	#SET{places_dispo,#PLACES|moins{#GET{inscrits}}}
 
+	[(#GET{places_dispo}|<{0}|oui)
+		#SET{places_dispo,0}
+	]
 	[(#ENV{disable_complet}|=={on}|et{#GET{places_dispo}|<{1}}|oui)
 		#SET{disable_choix,#GET{disable_choix}|concat{",",#ID_EVENEMENT}}
 	]
