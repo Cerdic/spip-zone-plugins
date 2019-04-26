@@ -52,6 +52,13 @@ options:
           label_case: '<:saisie_evenements:places_dispo_label_case:>'
           li_class: 'pleine_largeur'
       -
+        saisie: 'case'
+        options:
+          nom: 'liste_attente'
+          label: '<:saisie_evenements:liste_attente_label:>'
+          label_case: '<:saisie_evenements:liste_attente_label_case:>'
+          explication: '<:saisie_evenements:liste_attente_explication:>'
+      -
         saisie: 'radio'
         options:
           nom: 'type_choix'
