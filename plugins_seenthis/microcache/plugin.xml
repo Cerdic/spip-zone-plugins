@@ -1,10 +1,12 @@
 <plugin>
 	<nom>Microcache</nom>
 	<auteur>ARNO* / Fil</auteur>
-	<version>1.1.1</version>
+	<version>1.1.2</version>
 	<etat>stable</etat>
 	<categorie>performance</categorie>
 	<licence>GPL</licence>	
+	<slogan>Caches statiques pour squelette</slogan>
+	<lien>https://contrib.spip.net/Plugin-microcache</lien>
 	<description>
 		Le microcache est un fichier cache totalement statique, de longue durée et dont le nom est facilement accessible.
 	</description>
