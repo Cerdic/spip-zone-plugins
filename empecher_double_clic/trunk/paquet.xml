@@ -4,6 +4,7 @@
 	version="0.1.0"
 	etat="test"
 	compatibilite="[3.2.0;3.2.*]"
+	logo="prive/themes/spip/images/empecher_double_clic-64.png"
 	documentation="https://contrib.spip.net/5143"
 >
 	<nom>Empêcher le double clic sur les formulaires</nom>
