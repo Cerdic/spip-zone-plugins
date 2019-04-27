@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Podcast client</nom>
-	<description>Client de podcast</description>
+	<slogan>Client de podcast</slogan>
 	<auteur>fil@rezo.net</auteur>
 	<licence>&#169; 2005 GNU/GPL</licence>
 	<version>0.1.0</version>
