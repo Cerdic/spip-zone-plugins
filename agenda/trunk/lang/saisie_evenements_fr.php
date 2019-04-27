@@ -40,12 +40,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'inscription_label' => 'Inscription',
 
 	// L
-	'liste_attente' => 'Liste d\'attente',
-	'liste_attente_1' => 'Liste d\'attente (une inscription avant vous sur la liste)',
-	'liste_attente_nb' => 'Liste d\'attente (@nb@ inscriptions avant vous sur la liste)',
-	'liste_attente_label' => 'Gérer la liste d\'attente',
-	'liste_attente_label_case' => 'Indiquer qu\'il y une liste d\'attente',
-	'liste_attente_explication' => 'Si le nombre de place disponible est inférieur à un, indiquer qu\'il y a une liste une liste d\'attente, et, le cas échéant, combien de personnes sont sur liste d\'attente. <br />Par ailleurs, un champ masqué <champ>_liste_attente sera automatiquement mis à \'on\' si une personne sélectionne un évènement en liste d\'attente. Dans le cas d\'utilisation avec Formidable, ce champ ne sera pas posté, mais pourra être utilisé dans des test conditionnels d\'affichage de champ.',
+	'liste_attente' => 'Liste d’attente',
+	'liste_attente_1' => 'Liste d’attente (une inscription avant vous sur la liste)',
+	'liste_attente_explication' => 'Si le nombre de place disponible est inférieur à un, indiquer qu’il y a une liste une liste d’attente, et, le cas échéant, combien de personnes sont sur liste d’attente. <br />Par ailleurs, un champ masqué <champ>_liste_attente sera automatiquement mis à ’on’ si une personne sélectionne un évènement en liste d’attente. Dans le cas d’utilisation avec Formidable, ce champ ne sera pas posté, mais pourra être utilisé dans des test conditionnels d’affichage de champ.',
+	'liste_attente_label' => 'Gérer la liste d’attente',
+	'liste_attente_label_case' => 'Indiquer qu’il y une liste d’attente',
+	'liste_attente_nb' => 'Liste d’attente (@nb@ inscriptions avant vous sur la liste)',
+
 	// M
 	'masquer_heure_label_case' => 'Masquer l’heure',
 
