@@ -1,0 +1,16 @@
+<paquet
+	prefix="empecher_double_clic"
+	categorie="communication"
+	version="0.1.0"
+	etat="test"
+	compatibilite="[3.2.0;3.2.*]"
+	documentation="https://contrib.spip.net/5143"
+>
+	<nom>Empêcher le double clic sur les formulaires</nom>
+
+
+	<auteur>Maïeul</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+</paquet>
