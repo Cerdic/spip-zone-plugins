@@ -71,7 +71,7 @@
 	<input type="hidden" id="#GET{id_liste_attente}" name="#ENV{nom}_liste_attente" />
 		<script type="text/javascript">
 		test_#GET{id_liste_attente} = function() {
-			if ([[(#GET{evenements_liste_attente}|implode{','})]].includes(parseInt($("[name='#ENV{nom}']:checked").val()))) {
+			if ([(#GET{evenements_liste_attente}|evenements_liste_attente_genererer_test_js{#ENV{type_choix,radio},#ENV{nom}})]) {
 				$('##GET{id_liste_attente}').val('on').trigger('change');
 			} else {
 				$('##GET{id_liste_attente}').val('').trigger('change');
@@ -80,6 +80,11 @@
 		$(function() {
 			test_#GET{id_liste_attente}();
 		});
-		$("[name='#ENV{nom}']").change(function(){test_#GET{id_liste_attente}()});
+		[(#ENV{type_choix}|=={checkbox}|oui)
+			$("\[name='#ENV{nom}\[\]'\]").change(function(){test_#GET{id_liste_attente}()});
+		]
+		[(#ENV{type_choix}|=={checkbox}|non)
+			$("\[name='#ENV{nom}'\]").change(function(){test_#GET{id_liste_attente}()});
+		]
 		</script>
 </BOUCLE_attente>
