@@ -9,10 +9,11 @@
 >
 	<nom>Empêcher le double clic sur les formulaires</nom>
 
-
 	<auteur>Maïeul</auteur>
 
+	<credit lien="https://thenounproject.com/coquet_adrien/">Logo Double click par Adrien Coquet / the Noun Project</credit>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	
 	<pipeline nom="formulaire_fond" inclure="empecher_double_clic_pipelines.php" />
 
 </paquet>
