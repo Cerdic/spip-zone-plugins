@@ -1,7 +1,7 @@
 <paquet
 	prefix="panolens"
 	categorie="multimedia"
-	version="1.0.2"
+	version="1.0.3"
 	etat="test"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/panolens-64.png"
