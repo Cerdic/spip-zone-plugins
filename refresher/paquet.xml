@@ -1,12 +1,12 @@
 <paquet
 	prefix="refresher"
 	categorie="outil"
-	version="1.4.1"
+	version="1.4.2"
 	schema="1.0.0"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="img_pack/refresher.png"
-	documentation=""
+	documentation="https://contrib.spip.net/Refresher"
 >	
 	<nom>refresher</nom>
 	<auteur>Benoit Aubert</auteur>
