@@ -1,13 +1,13 @@
 <paquet
 	prefix="storify"
 	categorie="edition"
-	version="0.1.0"
+	version="0.1.1"
 	etat="test"
 	logo="storify-32.png"
-	compatibilite="[3.0.0;3.*.*]"
+	compatibilite="[3.0.0;3.2.*]"
 >
 	<nom>Storify</nom>
-	
+
 	<auteur lien="https://www.nursit.com/">Cédric</auteur>
 	<licence>GNU/GPL</licence>
 
