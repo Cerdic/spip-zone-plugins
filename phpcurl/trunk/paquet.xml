@@ -1,9 +1,9 @@
 <paquet
 	prefix="phpcurl"
 	categorie="outil"
-	version="1.1.1"
+	version="1.1.2"
 	etat="dev"
-	compatibilite="[3.2.0-beta;3.2.*]"
+	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/phpcurl-64.png"
 	documentation=""
 >
@@ -11,7 +11,7 @@
 	<nom>PHP cURL</nom>
 
 	<auteur>Guy Cesaro</auteur>
-	
+
 	<licence>GNU/GPL</licence>
- 	<necessite nom="php:curl" />
+	<necessite nom="php:curl" />
 </paquet>
