@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Typographie MOIS</nom>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<prefix>typo_mois</prefix>
 	<etat>stable</etat>
 	<auteur>Fil</auteur>
@@ -16,5 +16,5 @@ Par exemple, <code>"1er mars"</code> devient <code>"1er&nbsp;mars"</code>.
 	</pipeline>
 	<categorie>edition</categorie>
 	<icon>typo_mois.png</icon>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.2;3.2.99]" />
 </plugin>
