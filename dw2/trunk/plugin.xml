@@ -14,7 +14,7 @@
 	<options>dw2_mesoptions.php</options>
 	<fonctions>dw2_mesfonctions.php</fonctions>
 	<prefix>dw2</prefix>
-	<lien>http://www.koakidi.com/rub_aide_dw2.php</lien>
+	<lien>https://contrib.spip.net/Compteur-de-Telechargement-DW2</lien>
 	<install>base/dw2_upgrade.php</install>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
