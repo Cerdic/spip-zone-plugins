@@ -103,6 +103,8 @@ Vous trouverez la <a href="https://contrib.spip.net/5080" target="_blank">docume
 	'option_erreur_obligatoire_label' => 'Message d’obligation',
 	'option_explication_explication' => 'Si besoin, une courte phrase décrivant l’objet du champ.',
 	'option_explication_label' => 'Explication',
+	'option_forcer_select_label_case' => 'Forcer l\'utilisation d\'un select',
+	'option_forcer_select_explication' => 'Si un groupe de mots est sélectionné, par défaut il s\'agira d\'une saisie radio. Vous pouvez forcer l\'utilisation d\'un select.',
 	'option_groupe_affichage' => 'Affichage',
 	'option_groupe_description' => 'Description',
 	'option_groupe_utilisation' => 'Utilisation',
