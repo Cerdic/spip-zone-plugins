@@ -3,11 +3,11 @@
 	<slogan>Extension LaTeX pour Porte-Plume</slogan>
 	<auteur>MMMX</auteur>
 	<licence>GPL v3</licence>
-	<version>0.3.3</version>
+	<version>0.3.4</version>
 	<etat>dev</etat>
 	<description>Ajoute un bouton au porte-plume permettant le chargemente de boutons pour inserer les raccourci LaTeX.
 	</description>
-	<lien>https://contrib.spip.net/2978</lien>
+	<lien>https://contrib.spip.net/4173</lien>
 	<icon>images/euler128.png</icon>
 	<prefix>pp_latex</prefix>
 	<pipeline>
