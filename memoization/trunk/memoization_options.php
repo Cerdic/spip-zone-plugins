@@ -125,7 +125,7 @@ if (isset($GLOBALS['meta']['cache_namespace'])) {
 	if (!defined('_CACHE_NAMESPACE')) {
 		define('_CACHE_NAMESPACE', $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].':'.$GLOBALS['meta']['cache_namespace'].':');
 	}
-	if (isset($GLOBALS['meta']['cache_key'])) {
+	if (isset($GLOBALS['meta']['cache_key']) and !defined('_CACHE_KEY')) {
 		define('_CACHE_KEY', $GLOBALS['meta']['cache_key']);
 	}
 }

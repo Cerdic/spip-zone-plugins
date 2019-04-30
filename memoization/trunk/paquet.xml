@@ -1,7 +1,7 @@
 <paquet
 	prefix="Memoization"
 	categorie="performance"
-	version="2.1.6"
+	version="2.1.7"
 	schema="20190228"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
