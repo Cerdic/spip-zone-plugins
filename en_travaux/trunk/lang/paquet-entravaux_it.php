@@ -10,5 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'entravaux_description' => 'Consente di visualizzare un messaggio personalizzabile durante una sessione di manutenzione su tutte le pagine del sito pubblico.'
+	'entravaux_description' => 'Consente di visualizzare un messaggio personalizzabile durante una sessione di manutenzione su tutte le pagine del sito pubblico.',
+	'entravaux_nom' => 'In manutenzione',
+	'entravaux_slogan' => 'Indica una fase di manutenzione'
 );
