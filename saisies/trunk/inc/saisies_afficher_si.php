@@ -128,24 +128,12 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 			$code .= "\tif (".$condition.") {\n"
 							 .	"\t\t$(form).find(\"$sel\")."._SAISIES_AFFICHER_SI_JS_SHOW.";\n";
 			if (html5_permis()) {
-			$pour_html_5 = 	"$sel.obligatoire > input,"// si le afficher_si porte directement sur le input
-							."$sel .obligatoire input:not('.checkbox'),"// si le afficher_si porte sur le fieldset, tous les input dedans sont concernés, quelque soit leur profondeur (ce qui inclut notamment les cas complexe, type radio ou date). Une exception toutefois : les checbbox multiple, qui ne peuvent avoir de required
-							."$sel.obligatoire > textarea,"// si le afficher_si porte directement sur le textearea
-							."$sel.obligatoire > .edition textarea,"// si le afficher_si porte directement sur le textearea encapsulé dans un markitup
-							."$sel .obligatoire > textarea,"// si le afficher_si porte sur le fiedset
-							."$sel.obligatoire > select,"//si le afficher_si porte directement sur le select
-							."$sel .obligatoire > select,"//si le afficher_si porte sur le fieldset
-							."$sel.obligatoire input:radio";//si le afficher_si porte sur un radio
-			$code .=	"\t\t$(form).find("
-							.'"'."$pour_html_5\")".
-							".attr(\"required\",true);\n";
+			$code .=	"\t\t$(form).find(\"$sel [data-afficher-si-required]\").attr(\"required\",true).attr(\"data-afficher-si-required\",null);\n";
 			}
 			$code .=	"\t}\n";
 			$code .= "\telse {\n";
 			if (html5_permis()) {
-			 	$code .= "\t\t$(form).find(\n\t\t\t"
-			 				.'"'."$pour_html_5\")\n"
-			 				."\t\t.attr(".'"required"'.",false);\n";
+				$code .= "\t\t$(form).find(\"$sel [required]\").attr(\"required\",false).attr(\"data-afficher-si-required\",true);\n";
 			}
 			$code .= "\t\tif (chargement==true) {\n"
 					."\t\t\t$(form).find(\"$sel\")."._SAISIES_AFFICHER_SI_JS_HIDE.".css".'("display","none")'.";\n"
