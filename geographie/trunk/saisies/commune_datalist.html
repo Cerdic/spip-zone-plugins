@@ -16,7 +16,6 @@
 	[(#SAISIE{commune_datalist, commune,
 		label=<:plugin:info_commune:>})]
 ]
-[(#ENV**|unserialize|var_dump)]
 <input list="commune" name="#ENV{nom}" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"][ (#ENV*{attributs})]
 [value="(#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}})"]
 />
