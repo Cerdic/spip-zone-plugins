@@ -5,6 +5,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 if (!defined('_MENUS_EXTRA_CLASS')) define('_MENUS_EXTRA_CLASS','nav');
 
 /**
+ * |prefixer_css a utiliser dans le squelette head pour prefixer BS4 et etendre sa compatibilite
+ * @param string $css
+ * @return string
+ */
+function filtre_prefixer_css_dist($css) {
+	include_spip('bootstrap2spip/prefixer_css');
+	return prefixer_css($css);
+}
+
+/**
  * Ajouter le markup html pour une navbar responsive
  * [<div class="navbar navbar-inverse navbar-responsive" id="nav">
  * (#INCLURE{fond=inclure/nav,env}|navbar_responsive)
