@@ -1,0 +1,32 @@
+[(#REM)
+
+	Selecteur de communes, sous forme de datalist.
+
+	Parametres :
+	- class : classe(s) css ajoutes au select
+	- option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+	- cacher_option_intro : pas de premier option vide	(defaut:"")
+	- multiple : si quelquechose est passe, le select est multiple, sinon, c'est un select simple
+	- defaut : valeur par defaut si pas présente dans l'environnement
+	- valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+	- size : la taille du sélecteur (seulement si multiple)
+	- par : tri des communes
+	- id_departement : 1 un plusieurs IDs de départements
+	- id_pays : 1 ou plusieurs IDs de pays
+
+	Exemple d'appel :
+	[(#SAISIE{commune, commune,
+		label=<:plugin:info_commune:>})]
+][(#ENV{multiple}|oui)
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+]
+<input list="commune" name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"][ (#ENV*{attributs})]>
+	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
+		<datalist id="commune"opdtion value="">[(#ENV{option_intro})]</option>]
+	<BOUCLE_geo_communes(GEO_COMMUNES){par #ENV{par, nom}, code_postal}{id_commune?}{id_departement?}{id_pays?}{recherche?}{tout}>
+		[(#ENV{multiple}|oui)
+		<option value="#ID_COMMUNE"[(#ID_COMMUNE|in_array{#ENV{valeur_forcee,#GET{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]>#NOM \(#CODE_POSTAL\)</option>]
+		[(#ENV{multiple}|non)
+		<option value="#ID_COMMUNE"[(#ID_COMMUNE|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>#NOM  \(#CODE_POSTAL\)</option>]
+	</BOUCLE_geo_communes>
+</select>

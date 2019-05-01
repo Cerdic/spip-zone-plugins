@@ -1,7 +1,7 @@
 <paquet
 	prefix="geographie"
 	categorie="divers"
-	version="1.0.13"
+	version="1.1.0"
 	schema="1.0.0"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
