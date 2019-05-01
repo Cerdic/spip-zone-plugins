@@ -21,6 +21,6 @@
 />
 		<datalist id="commune">
 	<BOUCLE_geo_communes(GEO_COMMUNES){par #ENV{par, nom}, code_postal}{id_commune?}{id_departement?}{id_pays?}{recherche?}{tout}>
-		<option value="#ID_COMMUNE">#NOM  \(#CODE_POSTAL\)</option>
+		<option value="#ID_COMMUNE">#NOM \(#CODE_POSTAL\)</option>
 	</BOUCLE_geo_communes>
 		</datalist>
