@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_geo_communes_selectionnes>
+	<ul>
+	<BOUCLE_geo_communes_selectionnes(geo_communes){id_commune IN #GET*{valeur}}
+		{par num nom, nom}{tout}>
+		<li class="choix">#NOM (#CODE_POSTAL)</li>
+	</BOUCLE_geo_communes_selectionnes>
+	</ul>
+	</B_geo_communes_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_geo_communes_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_commune_selectionne(geo_communes){id_commune=#ENV{valeur}}
+		{par num nom, nom}{tout}>
+	  	<p>#NOM (#CODE_POSTAL)</p>
+	</BOUCLE_commune_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_commune_selectionne>
+<//B_test_multiple>
