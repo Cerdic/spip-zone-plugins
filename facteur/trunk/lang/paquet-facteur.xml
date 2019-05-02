@@ -15,6 +15,9 @@
 	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/paquet-facteur?lang_cible=fr_tu" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Cerf" lien="https://trad.spip.net/auteur/cerf" />
 	</langue>
+	<langue code="it" url="https://trad.spip.net/tradlang_module/paquet-facteur?lang_cible=it" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Alberto" lien="https://trad.spip.net/auteur/alberto" />
+	</langue>
 	<langue code="ja" url="https://trad.spip.net/tradlang_module/paquet-facteur?lang_cible=ja" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="origenius" lien="https://trad.spip.net/auteur/origenius" />
 	</langue>
