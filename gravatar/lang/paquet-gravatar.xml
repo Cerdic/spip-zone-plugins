@@ -12,6 +12,9 @@
 	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/paquet-gravatar?lang_cible=fr_tu" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Cerf" lien="https://trad.spip.net/auteur/cerf" />
 	</langue>
+	<langue code="it" url="https://trad.spip.net/tradlang_module/paquet-gravatar?lang_cible=it" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Alberto" lien="https://trad.spip.net/auteur/alberto" />
+	</langue>
 	<langue code="sk" url="https://trad.spip.net/tradlang_module/paquet-gravatar?lang_cible=sk" total="2" traduits="1" relire="0" modifs="0" nouveaux="1" pourcent="50.00">
 		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 	</langue>
