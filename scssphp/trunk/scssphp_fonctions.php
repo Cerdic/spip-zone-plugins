@@ -50,6 +50,7 @@ function scss_compile($style, $contexte = array()) {
 
 	// le compilateur Leafo\ScssPhp\Compiler compile le contenu
 	$scss = new Compiler($cache_options);
+	$scss->setFormatter("Leafo\ScssPhp\Formatter\Expanded");
 
 	// lui transmettre le path qu'il utilise pour les @import
 	$scss->setImportPaths(_chemin());
@@ -102,7 +103,7 @@ function scss_compile($style, $contexte = array()) {
 		spip_log('scss_compile compile '.(isset($contexte['file'])?$contexte['file']:substr($style,0,100)).' :: '.spip_timer('scss_compile'), 'scssphp');
 	} catch (exception $ex) {
 		// en cas d'erreur, on retourne du vide...
-		spip_log('SCSS Compiler fatal error:'.$ex->getMessage(), 'scss'._LOG_ERREUR);
+		spip_log('SCSS Compiler fatal error:'.$ex->getMessage(), 'scssphp'._LOG_ERREUR);
 		$display_file = '';
 		if (isset($contexte['file'])) {
 			$display_file = $contexte['file'];
@@ -365,17 +366,17 @@ function scss_select_css($css_file) {
  * @return string
  */
 function scss_find_scss_or_css_in_path($scss_file, $css_file) {
-	$l = find_in_path($scss_file);
+	$s = find_in_path($scss_file);
 	$c = $f = trouver_fond($css_file);
 
 	if (!$c) {
 		$c = find_in_path($css_file);
 	}
 
-	if (!$l) {
+	if (!$s) {
 		return ($f ? produire_fond_statique($css_file, array('format' => 'css')) : $c);
 	} elseif (!$c) {
-		return $l;
+		return $s;
 	}
 
 	// on a un scss et un css en concurence
@@ -386,13 +387,13 @@ function scss_find_scss_or_css_in_path($scss_file, $css_file) {
 		if (strncmp($c, $dir . $css_file, strlen($dir . $css_file)) == 0) {
 			return ($f ? produire_fond_statique($css_file, array('format'=>'css')) : $c);
 		}
-		if ($l == $dir . $scss_file) {
-			return $l;
+		if ($s == $dir . $scss_file) {
+			return $s;
 		}
 	}
 
 	// on ne doit jamais arriver la !
-	spip_log('Resolution chemin scss/css impossible', _LOG_CRITIQUE);
+	spip_log('Resolution chemin scss/css impossible', 'scssphp' . _LOG_CRITIQUE);
 	debug_print_backtrace();
 	die('Erreur fatale, je suis perdu');
 }
