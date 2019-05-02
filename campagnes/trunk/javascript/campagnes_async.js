@@ -46,8 +46,8 @@ function WaterfallOverJQuery(list, iterator, callback) {
 			var largeur_max = encart.data('largeur_max');
 			var hauteur_max = encart.data('hauteur_max');
 			var media = encart.data('media');
-			console.log(id_encart);
-			console.log(id_html);
+			//console.log(id_encart);
+			//console.log(id_html);
 			
 			// On ne charge la campagne que si pas de media query ou si elle valide
 			if (!media || ((mq = window.matchMedia(media)) && mq.matches)) {
@@ -64,11 +64,11 @@ function WaterfallOverJQuery(list, iterator, callback) {
 						encart = $('#'+id_html);
 						// Du coup on récupère quelle pub a été chargée dedans
 						if (id_campagne = encart.data('id_campagne')) {
-							console.log(id_campagne);
+							//console.log(id_campagne);
 							// Et on l'ajoute au tableau global
 							campagnes_ids.push(id_campagne);
 						}
-						console.log(campagnes_ids);
+						//console.log(campagnes_ids);
 						
 						// On lance la suite
 						report();
@@ -80,7 +80,7 @@ function WaterfallOverJQuery(list, iterator, callback) {
 				report();
 			}
 		}, function() {
-			console.log('Finito');
+			console.log('Campagnes : finito');
 		});
 	}
 	
@@ -93,14 +93,22 @@ function WaterfallOverJQuery(list, iterator, callback) {
 	//onAjaxLoad(campagnes_async);
 	
 	// Après un changement de taille
+	// Bug safari : l'event resize est lancé au scroll !
+	// On stocke la taille en amont pour éviter de le lancer sans arrêt
 	var resizeTimer;
+	var windowWidth = $(window).width();
 	$(window).resize(function() {
+		if ($(window).width() != windowWidth) {
+			windowWidth = $(window).width();
 			clearTimeout(resizeTimer);
 			resizeTimer = setTimeout(campagnes_async, 100);
+			//console.log('resize');
+		}
 	});
 	// Après un changement d'orientation
 	$(window).on('orientationchange', function(){
 		clearTimeout(resizeTimer);
 		resizeTimer = setTimeout(campagnes_async, 100);
+		//console.log('orientation change');
 	});
 })(jQuery);
