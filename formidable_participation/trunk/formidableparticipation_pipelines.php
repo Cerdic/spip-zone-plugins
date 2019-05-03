@@ -40,8 +40,8 @@ function formidableparticipation_traiter_formidableparticipation($flux){
 		// si evenement, on insere le participant et ses données
 		// et on laisse le traitement du nombre de places à la charge du webmestre et du squelette evenements
 		if(isset($id_evenement)){
-				//on ne loge pas l'auteur, si l'email sur le même id_evenement existe, mettre à jour
-				if (sql_fetsel('reponse','spip_evenements_participants','id_evenement='.intval($id_evenement)." AND email=".sql_quote($email))){
+				//on ne logue pas l'auteur, si l'email sur le même id_evenement existe, mettre à jour, sauf si on demande explictement de permettre à un même email de s'inscrire plusieurs fois
+				if (sql_fetsel('reponse','spip_evenements_participants','id_evenement='.intval($id_evenement)." AND email=".sql_quote($email)) and !$flux['args']['autoriser_email_multiple']){
 					sql_updateq("spip_evenements_participants",$champs,'id_evenement='.intval($id_evenement).' AND email='.sql_quote($email));
 				}
 				else{

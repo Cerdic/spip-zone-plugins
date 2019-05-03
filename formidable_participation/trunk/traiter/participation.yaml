@@ -53,6 +53,12 @@ options:
           obligatoire: 'oui'
           env: true
       -
+        saisie: 'case'
+        options:
+          nom: 'autoriser_email_multiple'
+          label_case: '<:formidableparticipation:traiter_participation_autoriser_email_multiple_label:>'
+          li_class: 'pleine_largeur'
+      -
         saisie: 'champ'
         options:
           nom: 'champ_nom_participation'

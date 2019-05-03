@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formidableparticipation_titre' => 'Formulaires de participation',
 
 	// T
+	'traiter_participation_autoriser_email_multiple_label' => 'Permettre à une même adresse email de s\'inscrire plusieurs fois',
 	'traiter_participation_champ_choix_participation_explication' => 'Le champ qui propose participation ou non-participation',
 	'traiter_participation_champ_choix_participation_label' => 'Champ de la participation',
 	'traiter_participation_champ_email_label' => 'Champ de l’Email',
