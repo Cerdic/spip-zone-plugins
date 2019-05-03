@@ -29,7 +29,11 @@ function balise_VOIR_REPONSE_dist($p) {
 	}
 	$id_formulaires_reponse = champ_sql('id_formulaires_reponse', $p);
 	$id_formulaire = champ_sql('id_formulaire', $p);
-	$p->code = "calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom, $type_retour, $sans_reponse)";
+	$boucle = $p->boucles;
+	$boucle = current($boucle);
+	$sql_serveur = $boucle->sql_serveur;
+	$sql_serveur = "'$sql_serveur'";
+	$p->code = "calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom, $sql_serveur, $type_retour, $sans_reponse)";
 	return $p;
 }
 
@@ -37,6 +41,7 @@ function balise_VOIR_REPONSE_dist($p) {
  * @param int $id_formulaires_reponse
  * @param int $id_formulaire
  * @param string $nom
+ * @param string $sql_serveur
  * @param string $type_retour
  *   'brut' : valeur brute
  *   'valeur_uniquement' : la valeur seulement
@@ -47,7 +52,7 @@ function balise_VOIR_REPONSE_dist($p) {
  *   texte affiche si aucune valeur en base pour ce champ
  * @return array|string
  */
-function calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom, $type_retour = null, $sans_reponse = null) {
+function calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom, $sql_serveur = '', $type_retour = null, $sans_reponse = null) {
 	static $formulaires_saisies = array();
 	static $reponses_valeurs = array();
 	$tenter_unserialize = charger_fonction('tenter_unserialize', 'filtre/');
@@ -61,9 +66,14 @@ function calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom, $t
 	// Si pas déjà présent, on cherche les valeurs de cette réponse
 	if (!isset($reponses_valeurs[$id_formulaires_reponse])) {
 		if ($champs = sql_allfetsel(
-			'nom,valeur,id_formulaires_reponses_champ',
-			'spip_formulaires_reponses_champs',
-			'id_formulaires_reponse = '.intval($id_formulaires_reponse)
+			'nom,valeur,id_formulaires_reponses_champ',//select
+			'spip_formulaires_reponses_champs',//from
+			'id_formulaires_reponse = '.intval($id_formulaires_reponse),//where
+			'',//groupby
+			'',//orderby
+			'',//limit
+			'',//having
+			$sql_serveur//
 		)) {
 			foreach ($champs as $champ) {
 				$reponses_valeurs[$id_formulaires_reponse][$champ['nom']] = array(
