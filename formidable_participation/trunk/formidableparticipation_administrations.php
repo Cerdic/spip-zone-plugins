@@ -10,6 +10,8 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
+include_spip('inc/cextras');
+include_spip('base/formidableparticipation');
 /**
  * Fonction d'installation et de mise à jour du plugin Formulaires de participation.
  *
@@ -22,9 +24,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function formidableparticipation_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 	$maj['install'] = array();
+	cextras_api_upgrade(formidableparticipation_declarer_champs_extras(), $maj['install']);
 	$maj['1.1.0'] = array(
 		array('formidableparticipation_upgrade_1_1_0')
 	);
+	cextras_api_upgrade(formidableparticipation_declarer_champs_extras(), $maj['1.4.0']);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -64,7 +68,6 @@ function formidableparticipation_upgrade_1_1_0() {
  * @return void
 **/
 function formidableparticipation_vider_tables($nom_meta_base_version) {
-
-
+	cextras_api_vider_tables(formidableparticipation_declarer_champs_extras());
 	effacer_meta($nom_meta_base_version);
 }
