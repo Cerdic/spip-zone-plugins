@@ -53,6 +53,7 @@ function traiter_participation_dist($args, $retours){
 			$choix_participation='non';
 		}
 	}
+	$id_formulaires_reponse = $retours['id_formulaires_reponse'];
 
 	// détermination de l'évènement où s'inscrire
 	if ($options['evenement_type'] == 'fixe') {
@@ -75,7 +76,8 @@ function traiter_participation_dist($args, $retours){
 			'organisme' => $organisme_participation,
 			'id_auteur' => (isset($GLOBALS['visiteur_session']['id_auteur'])?$GLOBALS['visiteur_session']['id_auteur']:0),
 			'parrain' => 'form'.$formulaire['id_formulaire'].':'.$formulaire['identifiant'],
-			'tracking_id' => $retours['id_formulaires_reponse'],
+			'tracking_id' => $id_formulaires_reponse,//Garder pour des raisons historiques, même si apparement jamais servi
+			'id_formulaires_reponse' => $id_formulaires_reponse
 		);
 		// fabrique le pipeline traiter_formidableparticipation.
 		$pipeline = pipeline('traiter_formidableparticipation',array('args'=>$options,'data'=>$pipeline));

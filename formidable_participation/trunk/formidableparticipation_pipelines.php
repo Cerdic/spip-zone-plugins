@@ -25,6 +25,7 @@ function formidableparticipation_traiter_formidableparticipation($flux){
 		$id_auteur = $flux['args']['id_auteur'];
 		$nom = $flux['args']['nom'];
 		$prenom = $flux['args']['prenom'];
+		$id_formulaires_reponse = $flux['args']['id_formulaires_reponse'];
 		if($flux['args']['organisme']) $organisme = '('.$flux['args']['organisme'].')';
 		$nom = "$prenom $nom $organisme";
 
@@ -35,6 +36,7 @@ function formidableparticipation_traiter_formidableparticipation($flux){
 			'reponse'=>$reponse,
 			'id_evenement'=>$id_evenement,
 			'date'=>date('Y-m-d H:i:s'),
+			'id_formulaires_reponse' => $id_formulaires_reponse
 		);
 
 		// si evenement, on insere le participant et ses données
@@ -49,7 +51,7 @@ function formidableparticipation_traiter_formidableparticipation($flux){
 				}
 		}
 
-		spip_log("pipeline evenement $id_evenement pour $email et id_auteur=$id_auteur reponse=$reponse","formidable_participation");
+		spip_log("pipeline evenement $id_evenement pour $email et id_auteur=$id_auteur et id_formulaires_reponse=$id_formulaires_reponse et reponse=$reponse","formidable_participation");
 	}
 
    return $flux;
