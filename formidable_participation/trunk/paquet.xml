@@ -15,6 +15,7 @@
 
 	<licence>GNU/GPL</licence>
 	<pipeline nom="traiter_formidableparticipation" inclure="formidableparticipation_pipelines.php" />
+	<pipeline nom="post_edition" inclure="formidableparticipation_pipelines.php" />
 
 	<necessite nom="formidable" compatibilite="[3.15.0;3.*.*]" />
 	<necessite nom="cextras" compatibilite="[3.11.7;[" />

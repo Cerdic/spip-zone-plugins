@@ -57,4 +57,29 @@ function formidableparticipation_traiter_formidableparticipation($flux){
    return $flux;
 }
 
-?>
+/**
+ * Lorsqu'une réponse est passée en refusée ou poubelle, supprimer l'inscription correspondant.
+ * Réciproquement, lorsqu'une réponse est passée en validée, créer une inscription
+ * @param array $flux
+ * @return array $flux
+ **/
+function formidableparticipation_post_edition($flux) {
+	if (isset($flux['args']['table'])
+		and $flux['args']['table'] == 'spip_formulaires_reponses'
+		and $flux['args']['action'] == 'instituer'
+		and $id_formulaires_reponse = $flux['args']['id_objet']
+		and isset($flux['data']['statut'])
+		and $statut = $flux['data']['statut']
+		and $statut_ancien = $flux['args']['statut_ancien']
+		and $statut != $statut_ancien
+	) {
+		if ($statut == 'publie') {
+			$champs = array('reponse' => 'oui');
+		} else {
+			$champs = array('reponse' => 'non');
+		}
+		sql_updateq("spip_evenements_participants",$champs,'id_formulaires_reponse='.intval($id_formulaires_reponse));
+	}
+	return $flux;
+}
+
