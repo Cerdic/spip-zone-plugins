@@ -11,5 +11,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//  G
 	'geographie_description' => 'Ce plugin installe 4 bases géographiques contenant Pays, Noms et indicatifs des régions, départements et commnunes de France',
 	'geographie_nom' => 'Géographie',
-	'geographie_slogan' => 'Bases géographies de pays, régions, départements et communes',
+	'geographie_slogan' => 'Bases géographiques de pays, régions, départements et communes',
 );
