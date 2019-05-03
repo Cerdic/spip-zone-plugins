@@ -1,17 +1,18 @@
 # Périodes de prix
-Extension pour [prix_objets](https://plugins.spip.net/prix_objets) qui permet de définir un prix par rapport à une période de temps.
+Extension pour [Prix objets](https://plugins.spip.net/prix_objets) qui permet de définir un prix par rapport à une période de temps.
 
 ## Dépendances
-- [saisies](https://plugins.spip.net/saisies.html)
-- [verifier](https://plugins.spip.net/verifier.html)
-- [prix_objets](https://plugins.spip.net/prix_objets)
-- [dates_outils](https://github.com/abelass/dates_outils)
+- [Saisies](https://plugins.spip.net/saisies.html)
+- [Vérifier](https://plugins.spip.net/verifier.html)
+- [Prix objets](https://plugins.spip.net/prix_objets)
+- [Périodes](https://plugins.spip.net/periodes.html)
+- [Dates outils](https://plugins.spip.net/dates_outils.html)
 
 ## Utilisation
 ### Définir une période
-Définissez vos périodes sous Édition/Périodes de prix
+Définissez vos périodes sous Édition/Périodes
 
-Choissiez d'abord le type de période :
+Choisissez d'abord le type de période :
 - Dates
 - Jour de semaine
 
