@@ -23,12 +23,12 @@ include_spip('base/formidableparticipation');
 **/
 function formidableparticipation_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
-	$maj['install'] = array();
-	cextras_api_upgrade(formidableparticipation_declarer_champs_extras(), $maj['install']);
+	$creation_champ = array('sql_alter', 'TABLE spip_evenements_participants ADD column id_formulaires_reponse BIGINT(21)');
+	$maj['install'] = array($creation_champ);
 	$maj['1.1.0'] = array(
 		array('formidableparticipation_upgrade_1_1_0')
 	);
-	cextras_api_upgrade(formidableparticipation_declarer_champs_extras(), $maj['1.4.0']);
+	$maj['1.4.0'] = array($creation_champ);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -68,6 +68,6 @@ function formidableparticipation_upgrade_1_1_0() {
  * @return void
 **/
 function formidableparticipation_vider_tables($nom_meta_base_version) {
-	cextras_api_vider_tables(formidableparticipation_declarer_champs_extras());
+	sql_alter('TABLE spip_evenements_participants DROP column id_formulaires_reponse');
 	effacer_meta($nom_meta_base_version);
 }

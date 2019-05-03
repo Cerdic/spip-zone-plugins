@@ -1,7 +1,7 @@
 <paquet
 	prefix="formidableparticipation"
 	categorie="communication"
-	version="1.2.0"
+	version="1.3.0"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/formidableparticipation-64.png"
@@ -16,9 +16,9 @@
 	<licence>GNU/GPL</licence>
 	<pipeline nom="traiter_formidableparticipation" inclure="formidableparticipation_pipelines.php" />
 	<pipeline nom="post_edition" inclure="formidableparticipation_pipelines.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/formidableparticipation.php" />
 
 	<necessite nom="formidable" compatibilite="[3.15.0;3.*.*]" />
-	<necessite nom="cextras" compatibilite="[3.11.7;[" />
 	<necessite nom="agenda" compatibilite="[3.14.3;[" />
 
 </paquet>
