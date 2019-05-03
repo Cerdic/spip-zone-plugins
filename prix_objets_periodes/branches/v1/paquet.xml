@@ -1,11 +1,11 @@
 <paquet
 	prefix="prix_objets_periodes"
 	categorie="divers"
-	version="1.1.2"
+	version="1.1.3"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/prix_objets_periodes-64.png"
-	documentation="https://github.com/abelass/prix_objets_periodes"
+	documentation="https://contrib.spip.net/Periodes-de-prix"
 	schema="1.1.0"
 >
 
@@ -19,8 +19,6 @@
 
 	<traduire module="prix_objets_periodes" reference="fr" gestionnaire="salvatore" />
 	<traduire module="po_periode" reference="fr" gestionnaire="salvatore" />
-	<traduire module="paquet-prix_objets_periodes" reference="fr" gestionnaire="salvatore" />
-
 
 	<necessite nom="saisies" compatibilite="[3.14.0;]" />
 	<necessite nom="prix_objets" compatibilite="[2.3.2;]" />
