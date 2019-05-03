@@ -6,12 +6,12 @@
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/recherche_sti-24.png"
 	schema="0.5"
-	documentation="http://sti.ac-orleans-tours.fr/spip/"
+	documentation="https://contrib.spip.net/5150"
 >
 
 	<nom>Recherche Multicrit&#232;res 2.0</nom>
 
-	<auteur>Administrateurs site STI academie Orleans Tours</auteur>
+	<auteur>Administrateurs site STI (http://sti.ac-orleans-tours.fr/spip/)</auteur>
 
 	<copyright>2012</copyright>
 	<licence lien="http://www.gnu.org/licenses/lgpl-3.0.html">LGPL 3</licence>
