@@ -169,7 +169,7 @@ function affiche_resume_reponse($id_formulaires_reponse, $id_formulaire = null, 
 
 	$valeurs = array();
 	foreach ($modeles_vars[$modele_resume] as $var) {
-		$valeur = calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $var, 'valeur_uniquement', '');
+		$valeur = calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $var,'', 'valeur_uniquement', '');
 		$valeur = formidable_nettoyer_saisie_vue($valeur);
 		$valeurs["@$var@"] = $valeur;
 	}
