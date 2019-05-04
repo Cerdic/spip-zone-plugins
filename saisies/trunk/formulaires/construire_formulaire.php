@@ -39,7 +39,7 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 	foreach (array_keys($contexte['_saisies_par_nom']) as $nom) {
 		$contexte["saisie_modifiee_$nom"] = array();
 	}
-	
+
 	// La liste des options globales qu'on peut configurer, si elles existent
 	if (isset($options['options_globales']) and is_array($options['options_globales'])) {
 		$contexte['_activer_options_globales'] = true;
@@ -86,7 +86,8 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 	$erreurs = array();
 	// l'une ou l'autre sera presente
 	$configurer_saisie = $enregistrer_saisie = '';
-
+	$configurer_globales = '';
+	$enregistrer_globales = '';
 	// On ne fait rien du tout si on n'est pas dans l'un de ces cas
 	if (
 		!(
@@ -103,12 +104,12 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 	$identifiant = 'constructeur_formulaire_'.$identifiant;
 	// On récupère le formulaire à son état actuel
 	$formulaire_actuel = session_get($identifiant);
-	
+
 	// Gestion de la config globales
 	if ($configurer_globales or $enregistrer_globales) {
 		array_walk_recursive($options['options_globales'], 'construire_formulaire_transformer_nom', 'options_globales[@valeur@]');
 		$erreurs['configurer_globales'] = $options['options_globales'];
-		
+
 		if ($enregistrer_globales) {
 			$vraies_erreurs = saisies_verifier($erreurs['configurer_globales']);
 		}
@@ -291,7 +292,7 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 		}
 		$erreurs['configurer_'.$nom] = $formulaire_config;
 	}
-	
+
 	// S'il y a des vraies erreurs au final
 	if ($enregistrer_globales or $enregistrer_saisie) {
 		if ($vraies_erreurs) {
@@ -383,17 +384,17 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 	if ($supprimer_saisie = _request('supprimer_saisie')) {
 		$formulaire_actuel = saisies_supprimer($formulaire_actuel, $supprimer_saisie);
 	}
-	
+
 	// Si on enregistre la conf globale
 	if (_request('enregistrer_globales')) {
 		$options_globales = _request('options_globales');
 		if (is_array($options_globales)) {
 			spip_desinfecte($options_globales);
 		}
-		
+
 		$formulaire_actuel['options'] = $options_globales;
 	}
-	
+
 	// Si on enregistre la conf d'une saisie
 	if ($nom = _request('enregistrer_saisie')) {
 		// On récupère ce qui a été modifié
