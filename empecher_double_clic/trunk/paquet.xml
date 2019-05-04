@@ -1,7 +1,7 @@
 <paquet
 	prefix="empecher_double_clic"
 	categorie="communication"
-	version="0.1.1"
+	version="0.2.0"
 	etat="test"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/empecher_double_clic-64.png"
@@ -13,7 +13,7 @@
 
 	<credit lien="https://thenounproject.com/coquet_adrien/">Logo Double click par Adrien Coquet / the Noun Project</credit>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
-	
+
 	<pipeline nom="formulaire_fond" inclure="empecher_double_clic_pipelines.php" />
 
 </paquet>
