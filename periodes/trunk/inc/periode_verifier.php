@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 /**
- * Détermine si la date4_debut et la date_fin correspondent à une période
+ * Détermine si la date_debut et la date_fin correspondent à une période
  *
  * @param integer $id_periode
  * @param array $contexte
