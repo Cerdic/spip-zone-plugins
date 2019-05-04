@@ -60,7 +60,15 @@ function calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom, $s
 	// Si pas déjà présent, on cherche les saisies de ce formulaire
 	if (!isset($formulaires_saisies[$id_formulaire])) {
 		$formulaires_saisies[$id_formulaire] = unserialize(
-			sql_getfetsel('saisies', 'spip_formulaires', 'id_formulaire = '.intval($id_formulaire))
+			sql_getfetsel('saisies',//select
+			'spip_formulaires',//from
+			'id_formulaire = '.intval($id_formulaire),//where
+			'',//groupby
+			'',//orderby
+			'',//limit
+			'',//having
+			$sql_serveur
+		)
 		);
 	}
 	// Si pas déjà présent, on cherche les valeurs de cette réponse
