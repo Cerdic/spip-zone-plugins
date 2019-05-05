@@ -1,31 +1,33 @@
 [(#SET{defaut_tri,#ARRAY{
 	titre,1,
         identifiant,1,
-	date,-1, 
+	date,-1,
 	id_grappe,1,
 	points,-1
 }})]<B_liste_grappes>
 #ANCRE_PAGINATION
 <div class="liste-objets grappes">
-<table class='spip liste'>
+<table class="spip liste">
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{grappes:info_1_grappe,grappes:info_nb_grappes}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
-			<th class='picto' scope='col'></th>
-                        <th class="identifiant" scope="col">[(#TRI{identifiant,<:grappes:info_identifiant_grappe:>,ajax})]</th>
-			<th class='titre' scope='col'>[(#TRI{titre,<:grappes:info_nom_grappe:>,ajax})]</th>
-			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
-			<th class='id' scope='col'>[(#TRI{id_grappe,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class="picto" scope="col"></th>
+            <th class="identifiant" scope="col">[(#TRI{identifiant,<:grappes:info_identifiant_grappe:>,ajax})]</th>
+			<th class="titre" scope="col">[(#TRI{titre,<:grappes:info_nom_grappe:>,ajax})]</th>
+			<th class="logo" scope="col"></th>
+			<th class="date" scope="col">[(#TRI{date,<:date:>,ajax})]</th>
+			<th class="id" scope="col">[(#TRI{id_grappe,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
 	<BOUCLE_liste_grappes(GRAPPES){id_admin?}{id_mot?}{auteurs_liens.id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
-		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
-			<td class='picto'>[(#CHEMIN_IMAGE{grappe-16.png}|balise_img)]</td>
-                        <td class="identifiant principale"><a href="[(#ID_GRAPPE|generer_url_entite{grappe})]">#IDENTIFIANT</a></td>
-			<td class='titre principale'>[(#LOGO_GRAPPE|image_reduire{20,26})]<a href="[(#ID_GRAPPE|generer_url_entite{grappe})]">[(#RANG). ]#TITRE</a></td>
-			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
-			<td class='id'>[(#AUTORISER{modifier,grappe,#ID_GRAPPE}|?{
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="picto">[(#CHEMIN_IMAGE{grappe-16.png}|balise_img)]</td>
+			<td class="identifiant principale"><a href="[(#ID_GRAPPE|generer_url_entite{grappe})]">#IDENTIFIANT</a></td>
+			<td class="titre principale"[ (#LOGO_GRAPPE|non)colspan="2"]><a href="[(#ID_GRAPPE|generer_url_entite{grappe})]">[(#RANG). ]#TITRE</a></td>
+			[<td class="logo">(#LOGO_GRAPPE|image_reduire{70,*})</td>]
+			<td class="date secondaire">[(#DATE|affdate_jourcourt)]</td>
+			<td class="id">[(#AUTORISER{modifier,grappe,#ID_GRAPPE}|?{
 				<a href="[(#URL_ECRIRE{grappe_edit,id_grappe=#ID_GRAPPE})]">#ID_GRAPPE</a>,
 				#ID_GRAPPE
 			})]</td>
@@ -33,7 +35,7 @@
 	</BOUCLE_liste_grappes>
 	</tbody>
 </table>
-[<p class='pagination'>(#PAGINATION{prive})</p>]
+[<p class="pagination">(#PAGINATION{prive})</p>]
 </div>
 </B_liste_grappes>
 <div class="liste-objets grappes caption-wrap"><strong class="caption"><:grappes:info_aucune_grappe:></strong></div>

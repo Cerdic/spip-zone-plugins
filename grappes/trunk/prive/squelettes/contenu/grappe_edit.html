@@ -5,7 +5,7 @@
 ]
 #SET{redirect,#ENV{redirect,#ENV{id_grappe}|?{#URL_ECRIRE{grappe,id_grappe=#ID_GRAPPE},#URL_ECRIRE{grappes}}}}
 
-<div class='cadre-formulaire-editer'>
+<div class="cadre-formulaire-editer">
 <div class="entete-formulaire">
 	[(#ID_GRAPPE|oui)
 	[(#GET{redirect}|icone_verticale{[(#VAL{grappe}|objet_info{texte_retour}|_T)],#VAL{grappe}|objet_info{icone_objet},'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]

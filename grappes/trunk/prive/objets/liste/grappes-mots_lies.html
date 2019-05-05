@@ -2,22 +2,44 @@
 <B_liste>
 #ANCRE_PAGINATION
 <div class="liste-objets liste-objets-lies mots">
-<table class='spip liste'>
-	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_mot_cle,info_nb_mots_cles}})</strong></caption>]
-	<tbody>
-	<BOUCLE_liste(MOTS){id_mot IN #GET{selection}}{pagination 10}{recherche ?}{statut?}{tout}>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class='picto'>[(#VAL|puce_statut{mot,#ID_MOT,#ID_GROUPE})]</td>
-			<td class='titre principale'>[(#LOGO_MOT|image_reduire{20,20})]#TITRE</td>
-			<td class='id'><a href="[(#ID_MOT|generer_url_entite{mot})]"><:grappes:voir:></a></td>
-			[(#ENV{editable})
-			<td class='action'>[(#BOUTON_ACTION{<:grappes:delier:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})],#URL_ACTION_AUTEUR{lier_objets,delier/grappe/#ID_GRAPPE/mot/#ID_MOT,#SELF},ajax})]</td>
-		]</tr>
-	</BOUCLE_liste>
-	</tbody>
-</table>
-[<p class="pagination">(#PAGINATION{prive})</p>]
+	<table class="spip liste" id="sort-mots">
+		[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_mot_cle,info_nb_mots_cles}})</strong></caption>]
+		<tbody>
+		<BOUCLE_liste(MOTS spip_grappes_liens){par spip_grappes_liens.rang}{id_mot IN #GET{selection}}{id_grappe ?}{pagination 5}{recherche ?}{statut?}{tout}>
+			<tr id="#ID_MOT" class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<td class="statut">[(#VAL|puce_statut{mot,#ID_MOT,#ID_GROUPE})]</td>
+
+				<td class="titre principale"><a href="[(#ID_MOT|generer_url_entite{mot})]">
+					<BOUCLE_affRang(spip_grappes_liens){objet=mot}{id_objet=#ID_MOT}{id_grappe}>#RANG. </BOUCLE_affRang><strong>#TITRE</strong></a></td>
+				<td class="logo">[(#LOGO_MOT|image_reduire{70,*})]</td>
+				[(#ENV{editable})
+				<td class="action">[(#BOUTON_ACTION{<:grappes:delier:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})],#URL_ACTION_AUTEUR{lier_objets,delier/grappe/#ID_GRAPPE/mot/#ID_MOT,#SELF},ajax})]</td>
+				]
+			</tr>
+		</BOUCLE_liste>
+		</tbody>
+	</table>
+	[<p class="pagination">(#PAGINATION{prive})</p>]
 </div>
 </B_liste>
 <div class="liste-objets liste-objets-lies mots caption-wrap"><strong class="caption"><:mots:info_aucun_mot_cle:></strong></div>
 <//B_liste>
+<script>
+$(function(){
+    $("#sort-mots").sortable({
+        items:"tr",
+        cursor:"move"
+    });
+    $("#sort-mots").disableSelection();
+    $("#sort-mots").bind("sortupdate", function(event, ui){
+        var ordre = $(this).sortable('toArray').toString();
+        var request = $.ajax({
+            type: "POST",
+            url: "?action=trier_objets&id_grappe=#ENV{id_grappe}&objet=mot&sort="+ordre
+        });
+        request.done(function() {
+            $("#sort-mots").ajaxReload(); // Une fois trié on recharge la liste concernée
+        });
+    });
+});
+</script>

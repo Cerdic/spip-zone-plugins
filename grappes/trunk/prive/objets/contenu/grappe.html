@@ -1,25 +1,20 @@
 <BOUCLE_grappe(GRAPPES){id_grappe}>
-
-[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
-	<label><:info_descriptif:></label>
-	<span dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>(#DESCRIPTIF)</span>
+[<div class="liste champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<h3><:info_descriptif:></h3>
+	<p dir="#LANG_DIR" class='#EDIT{descriptif} descriptif'>(#DESCRIPTIF)</p>
 </div>]
-
-<div class="champ contenu_acces[ (#OPTIONS*|strlen|?{'',vide})]">
-	<label><:grappes:label_acces:> : </label>
-	<span dir='#LANG_DIR' class='acces'><BOUCLE_options(DATA){source table, #OPTIONS|unserialize|table_valeur{acces}}{", "}>[(#VALEUR|traduire_statut_auteur)]</BOUCLE_options></span>
+<div class="liste champ contenu_acces[ (#OPTIONS*|strlen|?{'',vide})]">
+	<h3><:grappes:label_acces:> : </h3>
+	<p dir="#LANG_DIR" class="acces"><BOUCLE_options(DATA){source table, #OPTIONS|unserialize|table_valeur{acces}}{", "}>[(#VALEUR|traduire_statut_auteur)]</BOUCLE_options></p>
 </div>
-
-<div class="champ contenu_liaisons[ (#LIAISONS*|strlen|?{'',vide})]">
-	<label><:grappes:label_liaisons:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{liaisons} liaisons'>
+<div class="liste champ contenu_liaisons[ (#LIAISONS*|strlen|?{'',vide})]">
+	<h3><:grappes:label_liaisons:> : </h3>
+	<p dir="#LANG_DIR" class="#EDIT{liaisons} liaisons">
 	<BOUCLE_liaisons(DATA){source table,#LIAISONS|explode{","}}{", "}>[(#VALEUR|objet_info{texte_objets}|_T)]</BOUCLE_liaisons>
-	</span>
+	</p>
 </div>
-
-[<div class="champ contenu_type[ (#TYPE*|strlen|?{'',vide})]">
-	<label><:grappes:label_type:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{type} type'>(#TYPE)</span>
+[<div class="liste champ contenu_type[ (#TYPE*|strlen|?{'',vide})]">
+	<h3><:grappes:label_type:> : </h3>
+	<p dir="#LANG_DIR" class='#EDIT{type} type'>(#TYPE)</p>
 </div>]
-
 </BOUCLE_grappe>

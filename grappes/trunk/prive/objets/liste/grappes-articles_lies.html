@@ -2,22 +2,28 @@
 <B_liste>
 #ANCRE_PAGINATION
 <div class="liste-objets liste-objets-lies articles">
-<table class="spip liste" id="sort-articles">
-        [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_article,info_nb_articles}})</strong></caption>]
-        <tbody>
-	<BOUCLE_liste(ARTICLES spip_grappes_liens){par rang}{id_grappe ?}{pagination 10}{recherche ?}{statut?}{tout}>
-                <tr id="#ID_ARTICLE" class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class='statut'>[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})]</td>
-                        <td><BOUCLE_affRang(spip_grappes_liens){objet=article}{id_objet=#ID_ARTICLE}{id_grappe}>#RANG</BOUCLE_affRang></td>
-			<td class='titre principale'>#TITRE</td>
-			<td class='id'><a href="[(#ID_ARTICLE|generer_url_entite{article})]"><:grappes:voir:></a></td>
-			[(#ENV{editable})
-			<td class='action'>[(#BOUTON_ACTION{<:grappes:delier:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})],#URL_ACTION_AUTEUR{lier_objets,delier/grappe/#ID_GRAPPE/article/#ID_ARTICLE,#SELF},ajax})]</td>
-		]</tr>
-	</BOUCLE_liste>
-	</tbody>
-</table>
-[<p class="pagination">(#PAGINATION{prive})</p>]
+	<table class="spip liste" id="sort-articles">
+		[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_article,info_nb_articles}})</strong></caption>]
+		<tbody>
+		<BOUCLE_liste(ARTICLES spip_grappes_liens){par spip_grappes_liens.rang}{id_article IN #GET{selection}}{id_grappe ?}{pagination 5}{recherche ?}{statut?}{tout}>
+			<tr id="#ID_ARTICLE" class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<td class="statut">[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})]</td>
+				<td class="titre principale"[ (#LOGO_ARTICLE_NORMAL|non)colspan="2"]><a href="[(#ID_ARTICLE|generer_url_entite{article})]"
+					[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
+					title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">
+					<BOUCLE_affRang(spip_grappes_liens){objet=article}{id_objet=#ID_ARTICLE}{id_grappe}>#RANG. </BOUCLE_affRang><strong>#TITRE</strong>
+					[<span class="soustitre">(#SOUSTITRE)</span>]</a></td>
+				[<td class="logo">(#LOGO_ARTICLE|image_reduire{70,*})</td>]
+				<td class='auteur'><div class="inner"><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></div></td>
+				<td class='date secondaire'>[<span title="[(#DATE|heures_minutes)]">(#DATE|affdate_jourcourt)</span>]</td>
+				[(#ENV{editable})
+				<td class="action">[(#BOUTON_ACTION{<:grappes:delier:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})],#URL_ACTION_AUTEUR{lier_objets,delier/grappe/#ID_GRAPPE/article/#ID_ARTICLE,#SELF},ajax})]</td>
+				]
+			</tr>
+		</BOUCLE_liste>
+		</tbody>
+	</table>
+	[<p class="pagination">(#PAGINATION{prive})</p>]
 </div>
 </B_liste>
 <div class="liste-objets liste-objets-lies articles caption-wrap"><strong class="caption"><:info_aucun_article:></strong></div>
@@ -36,8 +42,8 @@ $(function(){
             url: "?action=trier_objets&id_grappe=#ENV{id_grappe}&objet=article&sort="+ordre
         });
         request.done(function() {
-            $('.formulaire_lier_objets').ajaxReload(); // Une fois trié on recharge la liste
-        });        
+            $("#sort-articles").ajaxReload(); // Une fois trié on recharge la liste concernée
+        });
     });
 });
 </script>

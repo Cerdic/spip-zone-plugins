@@ -95,6 +95,8 @@ function grappes_grappes_objets_lies($array) {
 	$array = is_array($array) ? $array : array();
 	$array['articles'] = _T('grappes:item_groupes_association_articles');
 	$array['auteurs'] = _T('grappes:item_groupes_association_auteurs');
+	$array['breves'] = _T('grappes:item_groupes_association_breves');
+	$array['groupes_mots'] = _T('grappes:item_groupes_association_groupes_mots');
 	$array['mots'] = _T('grappes:item_groupes_association_mots');
 	$array['rubriques'] = _T('grappes:item_groupes_association_rubriques');
 	$array['documents'] = _T('grappes:item_groupes_association_documents');

@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'delier_tout' => 'Tout délier',
 
 	// E
-	'export_choix_label' => 'Sélectionnez les grappes a exporter',
+	'export_choix_label' => 'Sélectionnez les grappes à exporter',
 	'export_titre' => 'Exporter les Grappes',
 
 	// F
@@ -46,7 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_changer_identifiant_grappe' => 'Changer l’identifiant de la grappe',
 	'info_changer_nom_grappe' => 'Changer le titre de la grappe',
 	'info_creation_grappes' => 'Créer ou modifier des grappes d’éléments',
-	'info_grappes_association' => 'Quels objets peut on lier à la grappe ?',
+	'info_grappes_association' => 'Quels objets peut-on lier à la grappe ?',
 	'info_grappes_miennes' => 'Mes grappes',
 	'info_grappes_toutes' => 'Toutes les grappes',
 	'info_identifiant_grappe' => 'Identifiant textuel',

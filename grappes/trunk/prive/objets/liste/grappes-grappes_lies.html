@@ -3,21 +3,21 @@
 <B_liste>
 #ANCRE_PAGINATION
 <div class="liste-objets liste-objets-lies grappes">
-<table class='spip liste'>
-	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{grappes:info_1_grappe,grappes:info_nb_grappes}})</strong></caption>]
-	<tbody>
-	<BOUCLE_liste(GRAPPES){id_grappe IN #GET{selection}}{pagination 10}{recherche ?}{statut?}{tout}>
-	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]"> #SET{id_grappe,#ID_GRAPPE}
-		<td class='picto'>[(#CHEMIN_IMAGE{grappe-16.png}|balise_img)]</td>
-		<td class='titre principale'>#TITRE</td>
-		<td class='id'><a href="[(#GET{id_grappe}|generer_url_entite{grappe})]"><:grappes:voir:></a></td>
-		[(#GET{editable})
-		<td class='action'>[(#BOUTON_ACTION{<:grappes:delier:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})],#URL_ACTION_AUTEUR{lier_objets,delier/grappe/#GET{id_grappe}/#ENV{source}/#ENV{id_source},#SELF},ajax})]</td>
-	]</tr>
-	</BOUCLE_liste>
-	</tbody>
-</table>
-[<p class="pagination">(#PAGINATION{prive})</p>]
+	<table class="spip liste">
+		[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{grappes:info_1_grappe,grappes:info_nb_grappes}})</strong></caption>]
+		<tbody>
+		<BOUCLE_liste(GRAPPES){id_grappe IN #GET{selection}}{pagination 10}{recherche ?}{statut?}{tout}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]"> #SET{id_grappe,#ID_GRAPPE}
+				<td class="picto">[(#CHEMIN_IMAGE{grappe-16.png}|balise_img)]</td>
+				<td class="titre principale"><a href="[(#GET{id_grappe}|generer_url_entite{grappe})]">#TITRE</a></td>
+				<td class="logo">[(#LOGO_GRAPPE|image_reduire{70,*})]</td>
+				[(#GET{editable})
+				<td class="action">[(#BOUTON_ACTION{<:grappes:delier:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})],#URL_ACTION_AUTEUR{lier_objets,delier/grappe/#GET{id_grappe}/#ENV{source}/#ENV{id_source},#SELF},ajax})]</td>
+			]</tr>
+		</BOUCLE_liste>
+		</tbody>
+	</table>
+	[<p class="pagination">(#PAGINATION{prive})</p>]
 </div>
 </B_liste>
 <div class="liste-objets liste-objets-lies grappes caption-wrap"><strong class="caption"><:grappes:info_aucune_grappe:></strong></div>

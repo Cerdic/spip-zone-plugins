@@ -2,28 +2,28 @@
 <B_liste>
 #ANCRE_PAGINATION
 <div class="liste-objets liste-objets-lies documents">
-<table class='spip liste' id="sort-documents">
-    [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{medias:un_document,medias:des_documents}})</strong></caption>]
-    <tbody>
-    <BOUCLE_liste(DOCUMENTS spip_grappes_liens){par spip_grappes_liens.rang}{id_document IN #GET{selection}}{pagination 10}{recherche ?}{statut?}{tout}>
-            <tr id="#ID_DOCUMENT" class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-                    <td class='picto'>[(#CHEMIN_IMAGE{document-16.png}|balise_img)]</td>
-                    <td><BOUCLE_affRang(spip_grappes_liens){objet=document}{id_objet=#ID_DOCUMENT}{id_grappe}>#RANG</BOUCLE_affRang></td>
-                    <td class='titre principale'>[(#LOGO_DOCUMENT|image_reduire{20,26})][(#TITRE|sinon{[(#FICHIER|basename)]})]</td>
-                    <td class='id'><a href="[(#ID_DOCUMENT|generer_url_entite{document})]"><:grappes:voir:></a></td>
-            [(#ENV{editable})
-                    <td class='action'>[(#BOUTON_ACTION{<:grappes:delier:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})],#URL_ACTION_AUTEUR{lier_objets,delier/grappe/#ID_GRAPPE/document/#ID_DOCUMENT,#SELF},ajax})]</td>
-            ]</tr>
-    </BOUCLE_liste>
-    </tbody>
-</table>
-[<p class="pagination">(#PAGINATION{prive})</p>]
+	<table class="spip liste" id="sort-documents">
+		[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{medias:un_document,medias:des_documents}})</strong></caption>]
+		<tbody>
+		<BOUCLE_liste(DOCUMENTS spip_grappes_liens){par spip_grappes_liens.rang}{id_document IN #GET{selection}}{id_grappe ?}{pagination 5}{recherche ?}{statut?}{tout}>
+			<tr id="#ID_DOCUMENT" class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<td class="statut">[(#CHEMIN_IMAGE{document-16.png}|balise_img)]</td>
+				<BOUCLE_affRang(spip_grappes_liens){objet=document}{id_objet=#ID_DOCUMENT}{id_grappe}>#SET{valRang,#RANG. }</BOUCLE_affRang>
+				<td class="titre principale"><a href="[(#URL_ECRIRE{document_edit,id_document=#ID_DOCUMENT})]">#GET{valRang}<strong>[(#TITRE|sinon{[(#FICHIER|basename)]})]</strong></a></td>
+				<td class="logo">[(#LOGO_DOCUMENT|image_reduire{70,*})]</td>
+				<td class="extenSion">#EXTENSION</td>
+				[(#ENV{editable})
+				<td class="action">[(#BOUTON_ACTION{<:grappes:delier:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})],#URL_ACTION_AUTEUR{lier_objets,delier/grappe/#ID_GRAPPE/document/#ID_DOCUMENT,#SELF},ajax})]</td>
+				]
+			</tr>
+		</BOUCLE_liste>
+		</tbody>
+	</table>
+	[<p class="pagination">(#PAGINATION{prive})</p>]
 </div>
 </B_liste>
 <div class="liste-objets liste-objets-lies documents caption-wrap"><strong class="caption"><:medias:aucun_document:></strong></div>
 <//B_liste>
-    
-  
 <script>
 $(function() {
     $("#sort-documents").sortable({
@@ -38,8 +38,8 @@ $(function() {
             url: "?action=trier_objets&id_grappe=#ENV{id_grappe}&objet=document&sort="+ordre
         });
         request.done(function() {
-            $('.formulaire_lier_objets').ajaxReload();
-        });        
+            $("#sort-documents").ajaxReload(); // Une fois trié on recharge la liste concernée
+        });
     });
 });
 </script>

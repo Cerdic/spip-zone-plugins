@@ -1,0 +1,9 @@
+#HTTP_HEADER{Content-Type: text/plain; charset=#CHARSET}
+#CACHE{0}
+#SET{resultats, #LISTE}
+<BOUCLE_s(BREVES){statut==.}{titre LIKE %(#ENV{q})%}{0,20}{par multi titre}>
+<BOUCLE_h(HIERARCHIE){statut==.}{n-2,2}>[(#SET{rub,[(#TITRE|couper{12,''}) > ]})]</BOUCLE_h>
+[(#SET{resultats, [(#GET{resultats}|push{[(#ARRAY{label,[(#GET{rub}|textebrut)][(#TITRE|textebrut)],value,[(#TITRE|textebrut)],id,#ID_BREVE})]})]})]
+</BOUCLE_s>
+[(#GET{resultats}|json_encode)]
+#FILTRE{trim}

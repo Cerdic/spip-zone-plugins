@@ -1,6 +1,6 @@
 <h1 class="grostitre"><:grappes:titre_page_grappes:></h1>
 
-<div class='onglets_simple clearfix'>
+<div class="onglets_simple clearfix">
 	<ul>
 		<li>[(#SELF|parametre_url{id_admin,''}|lien_ou_expose{<:grappes:info_grappes_toutes:>,[(#ENV{id_admin,''}|non)],ajax})]</li>
 		<li>[(#SELF|parametre_url{id_admin,#SESSION{id_auteur}}|lien_ou_expose{<:grappes:info_grappes_miennes:>,#ENV{id_admin,''}|=={#SESSION{id_auteur}},ajax})]</li>

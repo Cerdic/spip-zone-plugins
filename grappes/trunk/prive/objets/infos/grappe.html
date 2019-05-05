@@ -1,7 +1,7 @@
 <BOUCLE_doc(GRAPPES){id_grappe=#ENV{id}}>
-<div class='infos'>
-<div class='numero'><:grappes:titre_grappe:> <:numero:><p>#ID_GRAPPE</p></div>
-<p><b><:grappes:info_identifiant_grappe:> :</b> #IDENTIFIANT</p>
+<div class="infos">
+<div class="numero"><:grappes:titre_grappe:> <:numero:><p>#ID_GRAPPE</p></div>
+<p><strong><:grappes:info_identifiant_grappe:> :</strong> #IDENTIFIANT</p>
 [(#AUTORISER{modifier,grappe,#ID_GRAPPE}|oui)
 	[(#URL_ACTION_AUTEUR{supprimer_grappe,-#ID_GRAPPE,#URL_ECRIRE{grappes}}|icone_horizontale{<:grappes:icone_supprimer_grappe:>,grappe,del})]
 	[(#URL_ACTION_AUTEUR{dupliquer_grappe,#ID_GRAPPE,#URL_ECRIRE{grappes}}|icone_horizontale{<:grappes:icone_dupliquer_grappe:>,grappe,add})]

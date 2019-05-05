@@ -1,23 +1,44 @@
 #SET{selection,#ENV{objet}|objet_type|lister_objets_lies{grappe,#ID_GRAPPE,grappe}}
 <B_liste>
 #ANCRE_PAGINATION
-<div class="liste-objets liste-objets-lies syndic">
-<table class='spip liste'>
-	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_site,info_nb_sites}})</strong></caption>]
-	<tbody>
-	<BOUCLE_liste(SITES){id_syndic IN #GET{selection}}{pagination 10}{recherche ?}{statut?}{tout}>
-		<tr class="tr_liste">
-			<td class='statut'>[(#STATUT|puce_statut{site,#ID_SYNDIC,#ID_RUBRIQUE}) ]</td>
-			<td class='nom_site principale'>[(#LOGO_SITE|image_reduire{26,20})]#NOM_SITE</td>
-			<td class='id'><a href="[(#ID_SYNDIC|generer_url_entite{site})]"><:grappes:voir:></a></td>
-			[(#ENV{editable})
-			<td class='action'>[(#BOUTON_ACTION{<:grappes:delier:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})],#URL_ACTION_AUTEUR{lier_objets,delier/grappe/#ID_GRAPPE/syndic/#ID_SYNDIC,#SELF},ajax})]</td>
-		]</tr>
-	</BOUCLE_liste>
-	</tbody>
-</table>
-[<p class="pagination">(#PAGINATION{prive})</p>]
+<div class="liste-objets liste-objets-lies sites syndic">
+	<table class="spip liste" id="sort-sites">
+		[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{sites:info_1_site,sites:info_nb_sites}})</strong></caption>]
+		<tbody>
+		<BOUCLE_liste(SYNDIC spip_grappes_liens){par spip_grappes_liens.rang}{id_syndic IN #GET{selection}}{id_grappe ?}{pagination 5}{recherche ?}{statut?}{tout}>
+			<tr id="#ID_SYNDIC" class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<td class="statut">[(#STATUT|puce_statut{syndic,#ID_SYNDIC,#ID_RUBRIQUE}) ]</td>
+				<td class="titre principale"><a href="[(#ID_SYNDIC|generer_url_entite{syndic})]">
+					<BOUCLE_affRang(spip_grappes_liens){objet=site}{id_objet=#ID_SYNDIC}{id_grappe}>#RANG. </BOUCLE_affRang><strong>#NOM_SITE</strong></a></td>
+				<td class="logo">[(#LOGO_SYNDIC|image_reduire{70,*})]</td>
+				[(#ENV{editable})
+				<td class="action">[(#BOUTON_ACTION{<:grappes:delier:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})],#URL_ACTION_AUTEUR{lier_objets,delier/grappe/#ID_GRAPPE/syndic/#ID_SYNDIC,#SELF},ajax})]</td>
+				]
+			</tr>
+		</BOUCLE_liste>
+		</tbody>
+	</table>
+	[<p class="pagination">(#PAGINATION{prive})</p>]
 </div>
 </B_liste>
-<div class="liste-objets liste-objets-lies syndic caption-wrap"><strong class="caption"><:info_aucun_site:></strong></div>
+<div class="liste-objets liste-objets-lies sites syndic caption-wrap"><strong class="caption"><:sites:info_aucun_site:></strong></div>
 <//B_liste>
+<script>
+$(function(){
+    $("#sort-sites").sortable({
+        items:"tr",
+        cursor:"move"
+    });
+    $("#sort-sites").disableSelection();
+    $("#sort-sites").bind("sortupdate", function(event, ui){
+        var ordre = $(this).sortable('toArray').toString();
+        var request = $.ajax({
+            type: "POST",
+            url: "?action=trier_objets&id_grappe=#ENV{id_grappe}&objet=site&sort="+ordre
+        });
+        request.done(function() {
+            $("#sort-sites").ajaxReload(); // Une fois trié on recharge la liste concernée
+        });
+    });
+});
+</script>

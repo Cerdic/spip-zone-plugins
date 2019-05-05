@@ -1,0 +1,44 @@
+#SET{selection,#ENV{objet}|objet_type|lister_objets_lies{grappe,#ID_GRAPPE,grappe}}
+<B_liste>
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies groupes_mots">
+	<table class="spip liste" id="sort-groupes">
+		[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{mots:info_1_groupe_mots,mots:info_nb_groupe_mots}})</strong></caption>]
+		<tbody>
+		<BOUCLE_liste(GROUPES_MOTS spip_grappes_liens){par spip_grappes_liens.rang}{id_groupe IN #GET{selection}}{pagination 5}{recherche ?}{statut?}{tout}>
+			<tr id="#ID_GROUPE" class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<td class="statut">[(#VAL|puce_statut{groupe_mots,#ID_GROUPE})]</td>
+				<td class="titre principale"><a href="[(#ID_GROUPE|generer_url_entite{groupe_mots})]">
+					<BOUCLE_affRang(spip_grappes_liens){objet=groupe_mots}{id_objet=#ID_GROUPE}{id_grappe}>#RANG. </BOUCLE_affRang><strong>#TITRE</strong></a></td>
+				<td class="logo">[(#LOGO_GROUPE|image_reduire{70,*})]</td>
+				[(#ENV{editable})
+				<td class="action">[(#BOUTON_ACTION{<:grappes:delier:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})],#URL_ACTION_AUTEUR{lier_objets,delier/grappe/#ID_GRAPPE/groupe_mots/#ID_GROUPE,#SELF},ajax})]</td>
+				]
+			</tr>
+		</BOUCLE_liste>
+		</tbody>
+	</table>
+	[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste>
+<div class="liste-objets liste-objets-lies groupes_mots caption-wrap"><strong class="caption"><:mots:info_aucun_groupe_mots:></strong></div>
+<//B_liste>
+<script>
+$(function(){
+    $("#sort-groupes").sortable({
+        items:"tr",
+        cursor:"move"
+    });
+    $("#sort-groupes").disableSelection();
+    $("#sort-groupes").bind("sortupdate", function(event, ui){
+        var ordre = $(this).sortable('toArray').toString();
+        var request = $.ajax({
+            type: "POST",
+            url: "?action=trier_objets&id_grappe=#ENV{id_grappe}&objet=groupe_mots&sort="+ordre
+        });
+        request.done(function() {
+            $("#sort-groupes").ajaxReload(); // Une fois trié on recharge la liste concernée
+        });
+    });
+});
+</script>

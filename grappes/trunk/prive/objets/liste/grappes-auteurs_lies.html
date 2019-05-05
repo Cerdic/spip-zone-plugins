@@ -2,22 +2,23 @@
 <B_liste>
 #ANCRE_PAGINATION
 <div class="liste-objets liste-objets-lies auteurs">
-<table class='spip liste' id="sort-auteurs">
-	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_auteur,info_nb_auteurs}})</strong></caption>]
-	<tbody>
-	<BOUCLE_liste(AUTEURS spip_grappes_liens){par spip_grappes_liens.rang}{id_auteur IN #GET{selection}}{pagination 10}{recherche ?}{statut ?}{tout}>
-		<tr id="#ID_AUTEUR" class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class='statut'>[(#STATUT|puce_statut{auteur})]</td>
-                        <td><BOUCLE_affRang(spip_grappes_liens){objet=auteur}{id_objet=#ID_AUTEUR}{id_grappe}>#RANG</BOUCLE_affRang></td>
-			<td class='nom'>#NOM[ <small>((#LOGIN))</small>]</td>
-			<td class='id'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"><:grappes:voir:></a></td>
-			[(#ENV{editable})
-			<td class='action'>[(#BOUTON_ACTION{<:grappes:delier:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})],#URL_ACTION_AUTEUR{lier_objets,delier/grappe/#ID_GRAPPE/auteur/#ID_AUTEUR,#SELF},ajax})]</td>
-		]</tr>
-	</BOUCLE_liste>
-	</tbody>
-</table>
-[<p class="pagination">(#PAGINATION{prive})</p>]
+	<table class="spip liste" id="sort-auteurs">
+		[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_auteur,info_nb_auteurs}})</strong></caption>]
+		<tbody>
+		<BOUCLE_liste(AUTEURS spip_grappes_liens){par spip_grappes_liens.rang}{id_auteur IN #GET{selection}}{id_grappe ?}{pagination 5}{recherche ?}{statut?}{tout}>
+			<tr id="#ID_AUTEUR" class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<td class="statut">[(#STATUT|puce_statut{auteur})]</td>
+				<td class="titre principale"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">
+					<BOUCLE_affRang(spip_grappes_liens){objet=auteur}{id_objet=#ID_AUTEUR}{id_grappe}>#RANG. </BOUCLE_affRang><strong>#NOM[ <small>((#LOGIN))</small>]</strong></a></td>
+				<td class="logo">[(#LOGO_AUTEUR|image_reduire{70,*})]</td>
+				[(#ENV{editable})
+				<td class="action">[(#BOUTON_ACTION{<:grappes:delier:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})],#URL_ACTION_AUTEUR{lier_objets,delier/grappe/#ID_GRAPPE/auteur/#ID_AUTEUR,#SELF},ajax})]</td>
+				]
+			</tr>
+		</BOUCLE_liste>
+		</tbody>
+	</table>
+	[<p class="pagination">(#PAGINATION{prive})</p>]
 </div>
 </B_liste>
 <div class="liste-objets liste-objets-lies auteurs caption-wrap"><strong class="caption"><:info_aucun_auteur:></strong></div>
@@ -36,8 +37,8 @@ $(function(){
             url: "?action=trier_objets&id_grappe=#ENV{id_grappe}&objet=auteur&sort="+ordre
         });
         request.done(function() {
-            $('.formulaire_lier_objets').ajaxReload();
-        });        
+            $("#sort-auteurs").ajaxReload(); // Une fois trié on recharge la liste concernée
+        });
     });
 });
 </script>
