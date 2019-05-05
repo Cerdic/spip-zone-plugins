@@ -1,11 +1,15 @@
-#SET{selection,#ENV{objet}|objet_type|lister_objets_lies{grappe,#ID_GRAPPE,grappe}}
+#SET{selectiondesordre,#ENV{objet}|objet_type|lister_objets_lies{grappe,#ID_GRAPPE,grappe}}
+#SET{selection, #ARRAY}
+<BOUCLE_RangSelection(GRAPPES_LIENS){id_objet IN #GET{selectiondesordre}}{par rang}>
+[(#SET{selection,#GET{selection}|push{#ID_OBJET}})]
+</BOUCLE_RangSelection>
 <B_liste>
 #ANCRE_PAGINATION
 <div class="liste-objets liste-objets-lies groupes_mots">
 	<table class="spip liste" id="sort-groupes">
 		[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{mots:info_1_groupe_mots,mots:info_nb_groupe_mots}})</strong></caption>]
 		<tbody>
-		<BOUCLE_liste(GROUPES_MOTS spip_grappes_liens){par spip_grappes_liens.rang}{id_groupe IN #GET{selection}}{pagination 5}{recherche ?}{statut?}{tout}>
+		<BOUCLE_liste(GROUPES_MOTS){id_groupe IN #GET{selection}}{pagination 5}{recherche ?}{statut?}{tout}>
 			<tr id="#ID_GROUPE" class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 				<td class="statut">[(#VAL|puce_statut{groupe_mots,#ID_GROUPE})]</td>
 				<td class="titre principale"><a href="[(#ID_GROUPE|generer_url_entite{groupe_mots})]">
