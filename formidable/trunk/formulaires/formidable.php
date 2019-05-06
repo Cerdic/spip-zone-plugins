@@ -532,7 +532,12 @@ function formulaires_formidable_traiter_dist($id, $valeurs = array(), $id_formul
 	unset($retours['traitements']);
 	// Drapeau pour dire que tous les traitements sont terminés, afin qu'on le sache dans le charger()
 	set_request('formidable_traiter_ok', true);
-
+	// ne pas preremplir le nouveau formulaire avec les valeurs postées
+	if ($formulaire['apres'] == 'formulaire') {
+		foreach (saisies_lister_par_nom($saisies) as $nom => $valeur)	{
+			set_request($nom, null);
+		}
+	}
 	return $retours;
 }
 
