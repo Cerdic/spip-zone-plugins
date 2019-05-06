@@ -1,52 +1,71 @@
 [(#REM) 
 
-  Parametres :
-  - class : classe(s) css ajoutes au select
-  - multiple : si quelquechose est passe, le select est multiple, sinon, c'est un select simple (seulement si non multiple)
-  - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
-  - cacher_option_intro : pas de premier option vide  (defaut:"")
-  - id_groupe : groupe des mots clés à afficher
+	Produit soit un select, soit des checkbox.
+
+	Par défaut, c'est un select avec valeur unique.
+	Si on donne un id_groupe configuré pour du multiple, alors c'est un checkbox.
+
+	On peut forcer la saisie select avec le paramètre forcer_select.
+	On peut forcer unqiue/multiple avec le parametre multiple.
+
+	Parametres :
+	- forcer_select : forcer l'utilisation d'un select
+	- multiple : si quelquechose est passe, la saisie est multiple
+	- id_groupe : groupe des mots clés à afficher
                 Note : si ce groupe de mot est configuré pour avoir plusieurs
                 mots possibles, alors une liste de cases à cocher est
                 affichée au lieu du sélecteur habituel.
                 Utiliser `forcer_select=oui` pour éviter ce comportement
                 (par exemple en utilisation avec Chosen)
+	- groupes_exclus : liste d'ids de groupe dont on ne veut pas les mots
+  - class : classe(s) css ajoutes au select
+  - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+  - cacher_option_intro : pas de premier option vide  (defaut:"")
   - defaut : valeur par defaut si pas présente dans l'environnement
   - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
   - size : la taille du sélecteur (seulement si multiple)
-  - groupes_exclus : liste d'ids de groupe dont on ne veut pas les mots
-  
+
   Exemple d'appel :
 	[(#SAISIE{mot, en_region,
 		label=<:plugin:en_region:>})]
 ]
-<BOUCLE_multiples(GROUPES_MOTS){id_groupe}{unseul!=oui}{si #ENV{forcer_select}|non}>
-	[(#REM) defaut peut être une chaine (plusieurs valeurs ou pas) qu'on sait décomposer ]
-	#SET{defaut, #ENV{defaut}|saisies_chaine2tableau}
-	[(#REM) valeur doit être un tableau ! ]
-	#SET{valeur, #ENV{valeur}|saisies_valeur2tableau}
-	[(#REM) valeur doit être un tableau ! ]
-	#SET{valeur_forcee, #ENV{valeur_forcee}|saisies_valeur2tableau}
-	<BOUCLE_checkmots(MOTS){par num titre, titre}{id_groupe}>
-	<div class="choix choix_#ID_MOT[ (#ENV{class})]">[(#SET{id,champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_[(#ID_MOT|concat{'-',#ENV{nom}}|md5)]})]
-		[(#SET{checked,[(#ID_MOT|in_array{#GET{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui)]})]
-		<input type="checkbox" name="#ENV{nom}[]" class="checkbox" id="#GET{id}"[ (#GET{checked})checked="checked"] value="#ID_MOT"[ (#ENV*{attributs})] />
-		<label for="#GET{id}"[(#GET{checked})class="on"]>#TITRE</label>
-	</div>
-	</BOUCLE_checkmots>
-</BOUCLE_multiples>
+[(#REM)
+	Si groupe précis demandé, on affiche les mots à plat
+	Sinon, on regroupe par groupe de mots
+]
+#SET{data,#ARRAY}
+<BOUCLE_data(MOTS)
+	{id_groupe?}
+	{!id_groupe IN #ENV{groupes_exclus}}
+	{par id_groupe, num titre, titre}
+>
+[(#ENV{id_groupe}|intval|oui)
+	#SET{data,#GET{data}|plus{#ARRAY{#ID_MOT,#TITRE}}}
+][(#ENV{id_groupe}|intval|non)
+	#SET{data_groupe,#GET{data/#TYPE}|sinon{#ARRAY}|plus{#ARRAY{#ID_MOT,#TITRE}}}
+	#SET{data,#GET{data}|array_merge{#ARRAY{#TYPE,#GET{data_groupe}}}}
+	]
+</BOUCLE_data>
 
-#SET{groupe,''}
-<select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple"[ size="(#ENV{size})"]][ disabled="(#ENV{disable})"][ (#ENV*{attributs})]>
-[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
-	<option value="">[(#ENV{option_intro})]</option>]
-<BOUCLE_mots(MOTS){par id_groupe, num titre, titre}{id_groupe ?}{!id_groupe IN #ENV{groupes_exclus}}>[(#ENV{id_groupe,''}|non|et{#GET{groupe}|=={#ID_GROUPE}|non}|oui)
-	[(#GET{groupe}|intval|>{0}|oui)</optgroup>]
-	[<optgroup label="(#TYPE|attribut_html)">][(#SET{groupe,#ID_GROUPE})]]
-	[(#ENV{multiple}|non)<option value="#ID_MOT"[(#ID_MOT|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui)selected="selected"]>#TITRE</option>]
-	[(#ENV{multiple}|oui)<option value="#ID_MOT"[(#ID_MOT|in_array{#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}}|oui)selected="selected"]>#TITRE</option>]
-</BOUCLE_mots>
-	[(#ENV{id_groupe,''}|non)
-	</optgroup>]
-</select>
-<//B_multiples>
+[(#REM)
+	Valeurs multiples :
+	- on prend le paramètre 'multiple' en priorité
+	- sinon, vrai par défaut s'il y a un groupe d'indiqué et que sa conf est ok
+]
+#SET{multiple,#ENV{multiple}|is_null|non|?{
+	#ENV{multiple},
+	#ENV{id_groupe}|?{#INFO_UNSEUL{groupemots,#ENV{id_groupe}}|!={oui}}
+}}
+
+[(#REM)
+	Type de saisie :
+	- select si valeur unique ou option 'forcer_select'
+	- checkbox si multiple
+]
+#SET{saisie, #GET{multiple}|?{
+		#ENV{forcer_select}|?{selection_multiple,checkbox},
+		selection}
+}
+
+[(#REM) Inclusion de la saisie choisie ]
+<INCLURE{fond=saisies/#GET{saisie}, data=#GET{data}, env}>
