@@ -45,7 +45,7 @@ function scss_compile($style, $contexte = array()) {
 
 	if (defined('_VAR_MODE') and
 		(_request('var_mode') == 'css' or in_array(_VAR_MODE, array('css', 'recalcul'))) ) {
-		$cache_options['force_refresh'] = true;
+		$cache_options['force_refresh'] = 'once';
 	}
 
 	// le compilateur Leafo\ScssPhp\Compiler compile le contenu

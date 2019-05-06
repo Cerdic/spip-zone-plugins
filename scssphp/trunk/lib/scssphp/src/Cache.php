@@ -14,11 +14,15 @@ namespace Leafo\ScssPhp;
 use Exception;
 
 /**
- * The scss cacher.
+ * The scss cache manager.
  *
- * In summary:
+ * In short:
  *
- * TODO
+ * allow to put in cache/get from fache a generic result from a known operation on a generic dataset,
+ * taking in account options that affects the result
+ *
+ * The cache manager is agnostic about data format and only the operation is expected to be descripted by string
+ *
  */
 
 /**
@@ -38,10 +42,15 @@ class Cache
     // prefix for the storing data
     public static $prefix = 'scssphp_';
 
+    // force a refresh : 'once' for refreshing the first hit on a cache only, true to never use the cache in this hit
     public static $force_refresh = false;
 
     // specifies the number of seconds after which data cached will be seen as 'garbage' and potentially cleaned up
     public static $gc_lifetime = 604800;
+
+
+    // array of already refreshed cache if $force_refresh==='once'
+    protected static $refreshed = [];
 
 
     /**
@@ -75,13 +84,12 @@ class Cache
 
 
     /**
-     * Generic get
-     *    Get the previous computed result of $what, affected by $options
+     * Get the cached result of $operation on $what, which is known as dependant from the content of $options
      *
      * @param string $operation
-     *   parse, compile?
+     *   parse, compile...
      * @param $what
-     *  content key (filename to be treated?)
+     *  content key (filename to be treated for instance)
      * @param array $options
      *  any option that affect the operation result on the content
      * @param int $last_modified
@@ -93,7 +101,7 @@ class Cache
 
         $fileCache = self::$cache_dir . self::cacheName($operation, $what, $options);
 
-        if (! self::$force_refresh
+        if ((! self::$force_refresh || (self::$force_refresh === 'once' && isset(self::$refreshed[$fileCache])))
           and file_exists($fileCache)) {
             $cache_time = filemtime($fileCache);
             if ((is_null($last_modified) or $cache_time > $last_modified)
@@ -109,6 +117,14 @@ class Cache
         return null;
     }
 
+    /**
+     * Put in cache the result of $operation on $what, which is known as dependant from the content of $options
+     *
+     * @param string $operation
+     * @param $what
+     * @param $value
+     * @param array $options
+     */
     public function setCache($operation, $what, $value, $options = array())
     {
         $fileCache = self::$cache_dir . self::cacheName($operation, $what, $options);
@@ -116,9 +132,20 @@ class Cache
         $c = array('value' => $value);
         $c = serialize($c);
         file_put_contents($fileCache, $c);
+
+        if (self::$force_refresh === 'once') {
+            self::$refreshed[$fileCache] = true;
+        }
     }
 
 
+    /**
+     * get the cachename for the caching of $opetation on $what, which is known as dependant from the content of $options
+     * @param string $operation
+     * @param $what
+     * @param array $options
+     * @return string
+     */
     private static function cacheName($operation, $what, $options = array())
     {
 
@@ -138,6 +165,10 @@ class Cache
     }
 
 
+    /**
+     * Check that the cache dir is existing and writeable
+     * @throws Exception
+     */
     public static function checkCacheDir()
     {
 
