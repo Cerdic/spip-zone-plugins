@@ -89,21 +89,6 @@ function filtre_lien_ou_expose_dist($url,$libelle=NULL,$on=false,$class="",$titl
 	return "<$bal $att>$libelle</$bal>";
 }
 
-function bootstrap4_affichage_final($flux){
-	if (
-		$GLOBALS['html']
-		AND isset($GLOBALS['visiteur_session']['statut'])
-		AND $GLOBALS['visiteur_session']['statut']=='0minirezo'
-		AND $GLOBALS['visiteur_session']['webmestre']=='oui'
-		AND strpos($flux,"<!-- insert_head -->")!==false
-		AND $p=stripos($flux,"</body>")
-		AND $f = find_in_path("js/hashgrid.js")
-	){
-		$flux = substr_replace($flux,'<script type="text/javascript" src="'.$f.'"></script>',$p,0);
-	}
-	return $flux;
-}
-
 
 /**
  * Generer un bouton_action

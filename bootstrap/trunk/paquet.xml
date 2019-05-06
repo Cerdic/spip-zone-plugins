@@ -1,7 +1,7 @@
 <paquet
 	prefix="bootstrap4"
 	categorie="outil"
-	version="4.1.0"
+	version="4.1.1"
 	etat="test"
 	compatibilite="[3.2.0;3.3.*]"
 	logo="img/bootstrap-32.png"
@@ -17,7 +17,7 @@
 
 	<licence>GNU/GPL</licence>
 
-	<pipeline nom="affichage_final" inclure="bootstrap4_fonctions.php" />
+	<pipeline nom="affichage_final" />
 
 	<necessite nom="scssphp" compatibilite="[1.5.1;1.*.*]" />
 	<necessite nom="jquery" compatibilite="[3.2.1;]" />
