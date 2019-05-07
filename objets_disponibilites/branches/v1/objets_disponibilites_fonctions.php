@@ -44,6 +44,7 @@ function dates_disponibles($options, $contexte = array()) {
 	$dates_utilisees = [];
 	if (isset($contexte['utilise_objet'])) {
 		$utilise_objet = $contexte['utilise_objet'];
+		// On regarde si on trouve un fonction spécifique pour l'objet
 		if ($fonction = charger_fonction($utilise_objet . '_utilise', 'disponibilites', TRUE)) {
 			$dates_utilisees = $fonction($contexte);;
 		}

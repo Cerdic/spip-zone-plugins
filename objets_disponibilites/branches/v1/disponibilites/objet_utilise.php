@@ -4,6 +4,21 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+/**
+ * Calcul l'utilisation de l'objet
+ *
+ * @param string $utilise_objet
+ *   L'objet pour le quel on calcul la disponibilité.
+ * @param array $contexte
+ *   Les données du contexte.
+ *   les optiosn suivants sont nécessaires:
+ *   - objet
+ *   - id_objet
+ *   - statuts
+ *
+ * @return array
+ *   Les dates utilisées.
+ */
 function disponibilites_objet_utilise_dist($utilise_objet, $contexte) {
 	include_spip('filtres/dates_outils');
 
@@ -38,6 +53,7 @@ function disponibilites_objet_utilise_dist($utilise_objet, $contexte) {
 	$dates = [];
 
 	if ($table = table_objet_sql($utilise_objet)) {
+
 	$utilisation = sql_allfetsel($select, $table , $where);
 
 	foreach($utilisation AS $donnees) {
@@ -47,11 +63,9 @@ function disponibilites_objet_utilise_dist($utilise_objet, $contexte) {
 
 		if (isset($contexte['verifier']) AND $contexte['verifier']) {
 			if (dates_difference($date_debut, $date_fin, 'jour') == 1) {
-				//$contexte['utilise_decalage_debut'] = 0;
 				$contexte['utilise_decalage_fin'] = 0;
 			}
 		}
-
 
 		if ($date_debut != $date_fin) {
 
@@ -66,7 +80,6 @@ function disponibilites_objet_utilise_dist($utilise_objet, $contexte) {
 
 			$dates = array_merge($dates, $intervalle);
 			}
-
 		}
 	}
 	return $dates;

@@ -1,29 +1,33 @@
-# Objets disponibles
-Permet de définir des disponibilités pour les objets
+# Disponibilités objets
+Permet de définir des disponibilités pour vos objets
+
+## Dépendances
+- [Saisies](https://plugins.spip.net/saisies.html)
+- [Vérifier](https://plugins.spip.net/verifier.html)
+- [Dates outils](https://plugins.spip.net/dates_outils.html)
 
 ## Utilisation
+### Configuration
 Dans la configuration du plugin déclarez les objets pour lesquels vous voulez gérer
-des diponibilités.
+des disponibilités.
 
-Vous popuvez alors définir pour ces objets des periodes de disponibilité ou de non
-disponibilités
+### Édition
+Vous pouvez alors définir pour ces objets des périodes de disponibilité ou de non
+disponibilités.
 
+### Squelettes
 Dans l'état actuel, la manière principal d'affichage des dates disponibles est via
-la saisies `dates_disponibles`, vous y trouverez des examples ainsi que toutes les
-variables utilisées.
+les saisies `dates_disponibles` ou `dates_disponibles_select` (regardez dans le dossiers `saisies`), vous y trouverez des exemples ainsi que toutes les variables utilisées.
 
-Il existe également une fonction `dates_disponibles($options, $contexte)` qui utilise
-les mêmes variables que la saisies et retourne un tableau avec les dates disponibles.
+Ces saisies utilisent le filtre `dates_disponibles($options, $contexte)` qui prend
+les mêmes variables que les saisies et retourne un tableau avec les dates disponibles.
 
-## Fonctionnement
-Basiquement on calcules les dates disponibles pour un objet on y déduit les non disponibles
-puis les dates utilisées (par example dans le cadre d'une location avec le plugin
-[Objets Location](https://github.com/abelass/location_objets)
+## Filtre
+Le filtre `dates_disponibles($options, $contexte = array())` calcule les dates disponibles pour un objet, en déduit les non disponibles ainsi que les dates utilisées (par exemple dans le cadre d'une location avec le plugin
+[Objets Location](https://github.com/abelass/location_objets).
 
-toutes les calcules se font dans des squelettes, donc facilement modifiable. Les dates
-disponibles et indisponibles se trouvent dans le dossier disponibilites puis si nécessaire
-on peut déclarer un squelette utilisé pour le calcul des dates utilisées en employant la
-variable `utilisation_squelette` comme dans l'example avec `utilisation_squelette=disponibilites/utilisees_objet_location.html`,
+Les calculs des dates disponibles et non disponibles se font dans des squelettes (voir dossier disponibilites), donc facilement modifiable. Pour les dates utilisées, s'il existe une fonction personnalisé pour l'objet `disponibilites_objetEnQuestion_utilise_dist()` celle-ci sera utilisée, sinon on recourt à la fonction par défaut `disponibilites_objet_utilise_dist()` qui se trouve dans le fichier `disponibilites/objet_utilise.php`.
+
 
 ## to do
 A l'instar de api prix. Faire une balise disponibilité qui calcule la disponiblite d'un objet .
