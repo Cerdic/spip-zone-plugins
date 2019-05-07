@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_titre_label' => 'Titre',
 	'champ_type_label' => 'Type :',
 	'choix_coincide_label' => 'Coïncidence (Période contient au moins une date du contexte)',
-	'choix_exclu_label' => 'Exclues (Période ne contient aucune date du contexte)',
+	'choix_exclu_label' => 'Exclue (Période ne contient aucune date du contexte)',
 	'choix_specifique_label' => 'Choix spécifique',
 	'confirmer_supprimer_periode' => 'Confirmez-vous la suppression de cette période ?',
 
