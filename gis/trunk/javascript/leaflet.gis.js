@@ -373,6 +373,7 @@ L.Map.Gis = L.Map.extend({
 			}
 		}
 		if (map.options.topojson && map.options.topojson.length) {
+			map.topojson = {};
 			for (var i in map.options.topojson) {
 				map.topojson[i] = new L.TOPOJSON(map.options.topojson[i], {async: true});
 				if (map.options.centrer_fichier) {
