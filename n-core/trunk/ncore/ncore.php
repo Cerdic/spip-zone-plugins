@@ -89,7 +89,7 @@ function ncore_type_noisette_stocker($plugin, $types_noisette, $recharger, $stoc
 		} else {
 			// On lit les cache existants et on applique les modifications.
 			$descriptions = cache_lire('ncore', $cache_descriptions);
-			$signatures = cache_lire('ncore', $cache_signatures, $signatures);
+			$signatures = cache_lire('ncore', $cache_signatures);
 
 			// On supprime les noisettes obsolètes
 			if (!empty($types_noisette['a_effacer'])) {
