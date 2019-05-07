@@ -52,8 +52,9 @@ $form-padding-sm: $spacer / 2 !default;
 }
 
 input.submit, .formulaire_spip button.submit:not(.btn-link) {
-	@extend .btn;
+	@extend %btn-base;
 }
+
 body {
 	input.submit, .formulaire_spip button.submit:not(.btn-link) {
 		@include button-variant(theme-color("light"), $input-group-addon-border-color);
