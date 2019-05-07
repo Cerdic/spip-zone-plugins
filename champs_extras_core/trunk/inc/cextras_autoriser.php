@@ -62,23 +62,29 @@ function champs_extras_restrictions($saisie, $action, $table, $id, $qui, $opt) {
 	// peut être par groupe parent.
 
 	// restriction par type d'auteur
-	if (isset($restrictions[$action]['auteur']) and $auteur = $restrictions[$action]['auteur']) {
-		switch ($auteur) {
-			case 'webmestre':
-				if (!autoriser('webmestre')) {
-					return false;
-				}
-				break;
-			case 'admin':
-				if ($qui['statut'] != '0minirezo') {
-					return false;
-				}
-				break;
-			case 'admin_complet':
-				if ($qui['statut'] != '0minirezo' || ($qui['statut'] == '0minirezo' AND $qui['restreint'])){
-					return false;
-				}
-				break;
+	if (isset($restrictions[$action])) {
+		if ($restrictions[$action] === false) {
+			return false;
+		}
+
+		if (isset($restrictions[$action]['auteur']) and $auteur = $restrictions[$action]['auteur']) {
+			switch ($auteur) {
+				case 'webmestre':
+					if (!autoriser('webmestre')) {
+						return false;
+					}
+					break;
+				case 'admin':
+						if ($qui['statut'] != '0minirezo') {
+						return false;
+					}
+					break;
+				case 'admin_complet':
+					if ($qui['statut'] != '0minirezo' || ($qui['statut'] == '0minirezo' AND $qui['restreint'])){
+						return false;
+					}
+					break;
+			}
 		}
 	}
 
