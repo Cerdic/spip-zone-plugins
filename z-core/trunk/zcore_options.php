@@ -131,7 +131,15 @@ if (!defined('_DIR_PLUGIN_ADAPTIVE_IMAGES')) {
 }
 
 /**
+ * utiliser une icone standard du sprite par defaut :
  * #ICON{search,icon-sm,Rechercher}
+ *
+ * utiliser une icone #search definie dans un svg inline de la page
+ * #ICON{#search,icon-sm,Rechercher}
+ *
+ * utiliser une l'icone #search definie dans un svg externe (qui sera resolu via #CHEMIN)
+ * #ICON{img/sprite.svg#search,icon-sm,Rechercher}
+ *
  * @param $p
  * @return mixed
  */
@@ -159,18 +167,13 @@ function balise_ICON_dist($p) {
 }
 
 function afficher_icone_svg($name, $class = '', $alt = '') {
-	static $sprite_file;
-	if (is_null($sprite_file)) {
-		if (!defined('_ICON_SPRITE_SVG_FILE')) {
-			define('_ICON_SPRITE_SVG_FILE', "css/bytesize/bytesize-symbols.min.svg");
-		}
-		$sprite_file = timestamp(find_in_path(_ICON_SPRITE_SVG_FILE));
-	}
+	$icone_href_class_from_name = chercher_filtre("icone_href_class_from_name");
+	list($href, $class_base) = $icone_href_class_from_name($name);
 	if (!$name) {
-		return $sprite_file;
+		return $href;
 	}
-	if ($sprite_file) {
-		$name = preg_replace(",[^\w\-],", "", $name);
+
+	if ($href) {
 		/*
 			<svg aria-labelledby="my-icon-title" role="img">
 		    <title id="my-icon-title">Texte alternatif</title>
@@ -183,26 +186,68 @@ function afficher_icone_svg($name, $class = '', $alt = '') {
 		// width="0" height="0" -> rien ne s'affiche si on a pas la CSS icons.css
 		$svg = "<svg role=\"img\" width=\"0\" height=\"0\"";
 		if ($alt) {
-			$id = "icon-title-" . substr(md5("$name:$alt:$sprite_file"),0,4);
+			$id = "icon-title-" . substr(md5("$name:$alt:$href"),0,4);
 			$svg .= " aria-labelledby=\"$id\"><title id=\"$id\">" . entites_html($alt)."</title>";
 		}
 		else {
 			$svg .= ">";
 		}
-		$icone_ancre_from_name = chercher_filtre("icone_ancre_from_name");
-		$ancre = $icone_ancre_from_name($name);
-		$svg .= "<use xlink:href=\"$sprite_file#$ancre\"></use>";
+		$svg .= "<use xlink:href=\"$href\"></use>";
 		$svg .= "</svg>";
 
+		if ($class_base = trim($class_base)) {
+			$class_base = ' icon-' . $class_base;
+		}
 		if ($class = trim($class)) {
 			$class = preg_replace(",[^\w\s\-],", "", $class);
 		}
-		return "<i class=\"icon icon-$name" . ($class ? " $class" : "") . "\">$svg</i> ";
+		return "<i class=\"icon{$class_base}" . ($class ? " $class" : "") . "\">$svg</i> ";
 	}
 	return "";
 }
 
-function filtre_icone_ancre_from_name_dist($name) {
+function filtre_icone_href_class_from_name_dist($name) {
+	static $sprite_files = array();
+
+	if (strpos($name,'#') !== false or strpos($name,'/') !== false or strpos($name,'.svg') !== false) {
+		// l'ancre est fournie explicitement (sprite inline)
+		// voire le nom du fichier sprite svg
+		list($filename, $anchor) = explode('#', trim($name), 2);
+		// sanitizer l'ancre pour la class
+		$class = preg_replace(",[^\w\-],", "", $anchor);
+
+		if ($filename) {
+			if (!isset($sprite_files[$filename])) {
+				$sprite_files[$filename] = timestamp(find_in_path($filename));
+			}
+			$filename = $sprite_files[$filename];
+			return array($filename . ($anchor ? '#' . $anchor : ''), $class);
+		}
+		else {
+			return array($name, $class);
+		}
+	}
+	else {
+		// c'est le sprite par defaut avec un name qui correspond a l'ancre abregee
+		// et la gestion de quelques historiques de nommage/renommage
+		if (!isset($sprite_files[''])) {
+			if (!defined('_ICON_SPRITE_SVG_FILE')) {
+				define('_ICON_SPRITE_SVG_FILE', "css/bytesize/bytesize-symbols.min.svg");
+			}
+			$sprite_files[''] = timestamp(find_in_path(_ICON_SPRITE_SVG_FILE));
+		}
+		// sanitizer l'ancre pour la class
+		$class = preg_replace(",[^\w\-],", "", $name);
+		if (!$name) {
+			return array($sprite_files[''], $class);
+		}
+		$icone_anchor_from_name = chercher_filtre("icone_anchor_from_name");
+		$anchor = $icone_anchor_from_name($name);
+		return array($sprite_files[''] . '#' . $anchor, $class);
+	}
+}
+
+function filtre_icone_anchor_from_name_dist($name) {
 	switch ($name) {
 		case "comment":
 			$ancre = 'msg';
