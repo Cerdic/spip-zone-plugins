@@ -1,15 +1,15 @@
 <paquet
 	prefix="objets_disponibilites"
 	categorie="auteur"
-	version="1.2.1"
+	version="1.2.2"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/objets_disponibilites-64.png"
-	documentation=""
+	documentation="https://contrib.spip.net/Disponibilites-objets"
 	schema="1.0.1"
 >
 
-	<nom>Disponibilites objets</nom>
+	<nom>Disponibilités objets</nom>
 	<!-- Gère la disponibilité d&#039;un objet -->
 
 	<auteur lien='https://websimple.be'>Rainer Müller</auteur>
