@@ -63,7 +63,6 @@ function charger_url_image_responsive(this_img) {
 		if (dim == 0) {
 		
 		} else {
-		
 				if(dPR && dPR > 1) {
 					// si l'image d'origine n'est pas nettement plus grande que l'image demandée, 
 					// ne pas passer dPR, sinon on récupère image de même taille mais trop compressée
@@ -71,13 +70,18 @@ function charger_url_image_responsive(this_img) {
 					else if (l < 1.5*dim) dPR = false;
 					// forcer à 2
 					else dPR = 2;
-					
+
+					if (image_responsive_retina_hq && dPR) {
+						dim = dim * dPR;
+						dPR = false;
+					}
 				} else {
 					dPR = false;
 				}
 				if (autorisees && autorisees[dim]) {
 					if (dPR < 1.5) url_img = autorisees[dim][1];
 					else url_img = autorisees[dim][2];
+					console.log(url_img);
 				}
 				else {				
 					if (htactif) {

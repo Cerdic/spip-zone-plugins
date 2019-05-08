@@ -38,7 +38,8 @@ function image_responsive_htaccess_actif() {
 
 function image_responsive_insert_head($flux) {
 	$htactif = image_responsive_htaccess_actif();
-	$flux .= "<script>htactif=$htactif;document.createElement('picture');</script>";
+	$flux .= "<script>htactif=$htactif;document.createElement('picture'); var image_responsive_retina_hq = 0;</script>";
+	if (_IMAGE_RESPONSIVE_RETINA_HQ) $flux .= "<script>image_responsive_retina_hq = 1;</script>";
 	$flux .= "
 <script type='text/javascript' src='" . find_in_path("javascript/rAF.js") . "'></script>
 <script type='text/javascript' src='" . find_in_path("javascript/jquery.smartresize.js") . "'></script>
@@ -52,6 +53,8 @@ function image_responsive_insert_head($flux) {
 function image_responsive_header_prive($flux) {
 	$flux .= "\n<link rel='stylesheet' type='text/css' media='all' href='" . find_in_path("image_responsive.css") . "'>\n";
 	$flux .= "<script>htactif=false;document.createElement('picture');</script>";
+	$flux .= "<script>htactif=$htactif;document.createElement('picture'); var image_responsive_retina_hq = 0;</script>";
+	if (_IMAGE_RESPONSIVE_RETINA_HQ) $flux .= "<script>image_responsive_retina_hq = 1;</script>";
 
 	$flux .= "
 <script type='text/javascript' src='" . find_in_path("javascript/rAF.js") . "'></script>
@@ -216,18 +219,26 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 				}
 				if ($vertical && $t > $h) $t = $h;
 				else if (!$vertical && $t > $l) $t = $l;
-
+				if (_IMAGE_RESPONSIVE_RETINA_HQ) {
+					$t2  = $t*2;
+					if ($vertical && $t2 > $h) $t2 = $h;
+					else if (!$vertical && $t2 > $l) $t2 = $l;
+				
+				}
 
 				if (_IMAGE_RESPONSIVE_CALCULER) {
 					$fichiers[$i][1] = retour_image_responsive($source_tmp, "$t$v", 1, 0, "file");
-					$fichiers[$i][2] = retour_image_responsive($source_tmp, "$t$v", 2, 0, "file");
+					if (_IMAGE_RESPONSIVE_RETINA_HQ) $fichiers[$i][2] = retour_image_responsive($source_tmp, "$t2$v", 1, 0, "file");
+					else  $fichiers[$i][2] = retour_image_responsive($source_tmp, "$t$v", 2, 0, "file");
 				} else {
 					if ($htactif) {
 						$fichiers[$i][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v.$1?$timestamp", $source_tmp);
-						$fichiers[$i][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v-2.$1?$timestamp", $source_tmp);
+						if (_IMAGE_RESPONSIVE_RETINA_HQ) $fichiers[$i][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t2$v.$1?$timestamp", $source_tmp);
+						else $fichiers[$i][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v-2.$1?$timestamp", $source_tmp);
 					} else {
 						$fichiers[$i][1] = "index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t$v&amp;$timestamp";
-						$fichiers[$i][2] = "index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t$v&amp;dpr=2&amp;$timestamp";
+						if (_IMAGE_RESPONSIVE_RETINA_HQ) $fichiers[$i][2] = "index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t2$v&amp;$timestamp";
+						else $fichiers[$i][2] = "index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t$v&amp;dpr=2&amp;$timestamp";
 					}
 				}
 
