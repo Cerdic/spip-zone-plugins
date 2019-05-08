@@ -81,7 +81,6 @@ function charger_url_image_responsive(this_img) {
 				if (autorisees && autorisees[dim]) {
 					if (dPR < 1.5) url_img = autorisees[dim][1];
 					else url_img = autorisees[dim][2];
-					console.log(url_img);
 				}
 				else {				
 					if (htactif) {
