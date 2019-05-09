@@ -41,7 +41,7 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 		// on utilise comme selecteur l'identifiant de saisie en priorite s'il est connu
 		// parce que conteneur_class = 'tableau[nom][option]' ne fonctionne evidement pas
 		// lorsque le name est un tableau
-		if (isset($saisie['options']['afficher_si'])) {
+		if (isset($saisie['options']['afficher_si']) && trim($saisie['options']['afficher_si'])) {
 			++$i;
 			// Les [] dans le nom de la saisie sont transformés en _ dans le
 			// nom de la classe, il faut faire pareil
@@ -62,7 +62,7 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 					// nom de la classe, il faut faire pareil
 					$class_li = 'editer_'.$nom_underscore;
 			}
-			$condition = isset($saisie['options']['afficher_si']) ? $saisie['options']['afficher_si'] : '';
+			$condition = trim($saisie['options']['afficher_si']);
 			// retrouver l'identifiant
 			$identifiant = '';
 			if (isset($saisie['identifiant']) and $saisie['identifiant']) {
