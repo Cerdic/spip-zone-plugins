@@ -3,7 +3,7 @@
  * Fonctions du squelette associé
  *
  * @plugin     Réservation Événements
- * @copyright  2013 - 2018
+ * @copyright  2013 - 2019
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Reservation_evenement\Fonctions

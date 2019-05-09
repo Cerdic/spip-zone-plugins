@@ -3,7 +3,7 @@
  * Déclarations relatives à la base de données
  *
  * @plugin     Réservation Événements
- * @copyright  2013 - 2018
+ * @copyright  2013 - 2019
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Promotions\Pipelines
