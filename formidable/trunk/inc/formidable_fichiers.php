@@ -315,7 +315,7 @@ function formidable_deplacer_fichiers_produire_vue_saisie($saisie, $options) {
 	$mon_file = $_FILES[$champ];
 	$i = 0;
 	while ($i < $nb_fichiers_max) {
-		if ($mon_file['error'][$i] == 0) {
+		if ($mon_file['error'][$i] === 0) {
 			// la saisie fichiers est forcément structurée sous la forme d'un tableau,
 			// on peut donc vérifier qu'il n'y a pas d'erreur facilement
 			$description = array(); // tableau pour stocker la description de ce fichier
