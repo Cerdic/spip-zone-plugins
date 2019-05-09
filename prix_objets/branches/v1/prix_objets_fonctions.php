@@ -19,6 +19,7 @@ include_spip('base/abstract_sql');
  * Un tableau des devises dispoibles.
  *
  * @return array
+ *   Les devises disponibles.
  */
 function devises() {
 	$devises = array(
@@ -174,35 +175,54 @@ function traduire_devise($code_devise) {
 	return $trad;
 }
 
+/**
+ * Donne le prix d'un objet avec sa devise.
+ *
+ * @deprecated 2.3.0 Utilisez prix_objet_formate($id_objet, $objet = 'article');
+ * @param integer $id_objet
+ *   L'identifiant de l'objet
+ * @param string $objet
+ *   L'objet
+ *
+ * @return string
+ *   Le prix formaté.
+ */
 function prix_defaut($id_objet, $objet = 'article') {
-	if ($_COOKIE['spip_devise']) {
-		$devise_defaut = $_COOKIE['spip_devise'];
-	}
-	elseif (lire_config('prix_objets/devise_default')) {
-		$devise_defaut = lire_config('prix_objets/devise_default');
-	}
-	else {
-		$devise_defaut = 'EUR';
-	}
-
-	$req = sql_select('code_devise,prix', 'spip_prix_objets', 'id_objet=' . $id_objet . ' AND objet=' . sql_quote($objet));
-	while ($row = sql_fetch($req)) {
-		$prix = $row['prix'] . ' ' . traduire_devise($row['code_devise']);
-		if ($row['code_devise'] == $devise_defaut) {
-			$defaut = $row['prix'] . ' ' . traduire_devise($row['code_devise']);
-		}
-	}
-
-	if ($defaut) {
-		$defaut = $defaut;
-	}
-	else {
-		$defaut = $prix;
-	}
-
-	return $defaut;
+	prix_objet_formate($id_objet, $objet);
 }
 
+/**
+ * Donne le prix d'un objet avec sa devise
+ *
+ * @param integer $id_objet
+ *   L'identifiant de l'objet
+ * @param string $objet
+ *   L'objet
+ *
+ * @return string
+ *   Le prix formaté.
+ */
+function prix_objet_formate($id_objet, $objet = 'article') {
+
+	$req = sql_fetsel('code_devise,prix', 'spip_prix_objets', 'id_objet=' . $id_objet . ' AND objet=' . sql_quote($objet));
+
+	$devise = isset($reg['code_devise']) ? $reg['code_devise'] : '';
+	$prix = filtres_prix_formater($req['prix'], $devise);
+
+	return $prix;
+}
+
+/**
+ * Ajoute la devise à un prix
+ *
+ * @param mixed $prix
+ *   Le prix
+ * @param boolean $traduire
+ *   Afficher le symbole de la devis, défaut true.
+ *
+ * @return string
+ *   Le prix avec la devise
+ */
 function devise_defaut_prix($prix = '', $traduire = true) {
 	if ($_COOKIE['spip_devise']) {
 		$devise_defaut = $_COOKIE['spip_devise'];
@@ -219,44 +239,20 @@ function devise_defaut_prix($prix = '', $traduire = true) {
 	return $devise_defaut;
 }
 
+/**
+ * Donne le prix d'un objet avec sa devise.
+ *
+ * @deprecated 2.3.0 Utilisez prix_objet_formate($id_objet, $objet = 'article');
+ * @param integer $id_objet
+ *   L'identifiant de l'objet
+ * @param string $objet
+ *   L'objet
+ *
+ * @return string
+ *   Le prix formaté.
+ */
 function devise_defaut_objet($id_objet, $objet = 'article') {
-	include_spip('inc/config');
-	$config = lire_config('prix_objets');
-
-	if (!$devise_defaut = $_COOKIE['devise_selectionnee']) {
-		$devise_defaut = $config['devise_default'];
-	}
-	else {
-		$devise_defaut = prix_objets_devise_defaut($config);
-	}
-
-	$req = sql_select('code_devise,prix', 'spip_prix_objets', 'id_objet=' . $id_objet . ' AND objet=' . sql_quote($objet));
-
-	while ($row = sql_fetch($req)) {
-		$prix = $row['prix'] . ' ' . traduire_devise($row['code_devise']);
-		if ($row['code_devise'] == $devise_defaut) {
-			$defaut = $row['code_devise'];
-		}
-	}
-
-	if ($defaut) {
-		$defaut = $defaut;
-	}
-	else {
-		$defaut = $prix;
-	}
-
-	return $defaut;
-}
-
-function traduire_code_devise($code_devise, $id_objet, $objet = 'article', $option = "") {
-	$prix = sql_getfetsel('prix', 'spip_prix_objets', 'id_objet=' . $id_objet . ' AND objet=' . sql_quote($objet) . ' AND code_devise =' . sql_quote($code_devise));
-
-	if ($option == 'prix') {
-		$prix = $prix . ' ' . traduire_devise($code_devise);
-	}
-
-	return $prix;
+	prix_objet_formate($id_objet, $objet);
 }
 
 function rubrique_prix($id = '', $objet = 'article', $sousrubriques = false) {
@@ -320,6 +316,7 @@ function rubriques_enfant($id_parent, $rubriques = array()) {
  *
  * @param string $prix
  * @param string $devise
+ * @param integer $decimals
  * @return string
  */
 function filtres_prix_formater($prix, $devise = '') {
@@ -345,8 +342,12 @@ function filtres_prix_formater($prix, $devise = '') {
 	spip_setcookie('devise_selectionnee', $devise, time() + 3660 * 24 * 365, '/');
 
 	// On détermine la langue du contexte
-	$lang = $GLOBALS['spip_lang'];
-
+	if (isset($_COOKIE['spip_lang'])) {
+		$lang = $_COOKIE['spip_lang'];
+	}
+	else {
+		$lang = lire_config('langue_site');
+	}
 
 	// Si PECL intl est présent on dermine le format de l'affichage de la devise selon la langue du contexte
 	if (function_exists('numfmt_create') and is_float($prix)) {
@@ -399,6 +400,7 @@ function prix_objets_devise_defaut($config = '') {
  * @param string  $type
  *          prix (ttc) ou prix_ht
  * @param array $options
+ *   mode: 'global' ou 'prorata'
  *
  * @return string Le prix applicable.
  */
@@ -469,13 +471,7 @@ function prix_par_objet($objet, $id_objet, $contexte, $type = 'prix_ht', $option
 		// passer l'info sur le prix total dans l'environnement
 		set_request('prix_total', $data_source['prix_total']);
 
-		if (!$extensions = sql_allfetsel(
-			'extension,id_extension,titre',
-			'spip_prix_objets',
-			'id_prix_objet_source=' . $id_prix_objet)) {
-			$extensions = [];
-		}
-
+		$extensions = sql_allfetsel('extension,id_extension,titre', 'spip_prix_objets', 'id_prix_objet_source=' . $id_prix_objet);
 		$prix = $fonction_prix('prix_objet', $id_prix_objet);
 		$count_sextensions = count($extensions);
 
