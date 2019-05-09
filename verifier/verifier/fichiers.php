@@ -19,7 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  * @param array|bool $valeur
  *   Le sous tableau de $_FILES à vérifier, $_FILES['logo'] par exemple
  *   Doit être un champ avec un ou plusieurs upload
- *   Si bool égal à true, cela signifie que le fichier avait déjà été vérifié, et qu'il est inutile de refaire la vérification. 
+ *   Si bool égal à true, cela signifie que le fichier avait déjà été vérifié, et qu'il est inutile de refaire la vérification.
  * @param array $options
  *   Options à vérifier :
  *   - mime au choix 'pas_de_verification', 'image_web','tout_mime','specifique'
@@ -35,14 +35,14 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  *		- autoriser_rotation
  * @param array|string &$erreurs_par_fichier
  *   Si on vérifier un upload multiple, un tableau, passé par référence, qui contient le détail des erreurs fichier de $_FILES['fichier'] par fichier
- *   Si on vérifie un upload unique, une chaîne qui contiendra l'erreur du fichier.  
+ *   Si on vérifie un upload unique, une chaîne qui contiendra l'erreur du fichier.
  * @return string
 **/
 function verifier_fichiers_dist($valeur, $options, &$erreurs_par_fichier) {
 	if (!is_array($valeur['tmp_name'])){//si on reçoit une info de type fichier unique, on bascule comme si on était fichier multiple
 
 		if ($valeur === True) { // Si on n'a rien à vérifier
-			return array();	
+			return array();
 		};
 
 		$old_valeur = $valeur;
@@ -51,7 +51,7 @@ function verifier_fichiers_dist($valeur, $options, &$erreurs_par_fichier) {
 			$valeur[$propriete][0] = $val;
 		}
 	}
-	
+
 	// normalisation de $options
 	if (isset($options['largeur_max']) and !isset($options['dimension_max']['largeur'])) {
 		if (!isset($options['dimension_max'])) {
@@ -87,7 +87,7 @@ function verifier_fichiers_dist($valeur, $options, &$erreurs_par_fichier) {
 			} else {
 					$erreurs_par_fichier[$cle] = "- $erreur";
 			}
-			continue;	
+			continue;
 		}
 		if ($valeur['error'][$cle] == 4) {
 			continue;
@@ -105,7 +105,7 @@ function verifier_fichiers_dist($valeur, $options, &$erreurs_par_fichier) {
 		}
 	}
 	if (!empty($erreurs_par_fichier)){
-		return implode($erreurs_par_fichier,"<br />"); 
+		return implode($erreurs_par_fichier,"<br />");
 	}
 	return '';
 }
@@ -130,7 +130,7 @@ function verifier_fichier_mime($valeur,$cle,$options){
 	// Récuperer les infos mime + extension
 	$mime_type = $valeur['type'][$cle];
 	$extension = pathinfo($valeur['name'][$cle],PATHINFO_EXTENSION);
-	
+
 	// Appliquer les alias de type_mime
 	include_spip('base/typedoc');
 	while (isset($GLOBALS['mime_alias'][$mime_type])) {
@@ -206,7 +206,7 @@ function verifier_fichier_taille($valeur,$cle,$options){
 
 	//Si la taille max est déterminée, on vérifie que le fichier ne dépasse pas cette taille
 	if ($taille_max) {
-		$taille_max = 1024 * $taille_max; // passage de l'expression en kibioctets à une expression en octets 
+		$taille_max = 1024 * $taille_max; // passage de l'expression en kibioctets à une expression en octets
 		if ($taille > $taille_max) {
 			return _T('verifier:erreur_taille_fichier', array(
 				'name'       => $valeur['name'][$cle],
@@ -244,13 +244,13 @@ function verifier_fichier_dimension_max($valeur, $cle, $options) {
 	$largeur_max = (isset($options['dimension_max']['largeur']) ? $options['dimension_max']['largeur'] : (defined('_IMG_MAX_WIDTH') ? _IMG_MAX_WIDTH : 0));
 	$hauteur_max = (isset($options['dimension_max']['hauteur']) ? $options['dimension_max']['hauteur'] : (defined('_IMG_MAX_HEIGHT') ? _IMG_MAX_HEIGHT : 0));
 	$autoriser_rotation = (isset($options['dimension_max']['autoriser_rotation'])) ? $options['dimension_max']['autoriser_rotation'] : false;
-	
+
 	// Et on teste, si on a ce qui est nécessaire pour tester
 	if ($imagesize and ($hauteur_max or $largeur_max)) {
 		if ($autoriser_rotation) { // dans le cas où on autorise une rotation
 			if (
 					($imagesize[0] > $largeur_max or $imagesize[1] > $hauteur_max)
-					and  
+					and
 					($imagesize[1] > $largeur_max or $imagesize[0] > $hauteur_max)
 				)	{
 				return _T('verifier:erreur_dimension_image', array(
