@@ -49,12 +49,14 @@
 
 [(#REM) permettre de donner un identifiant de list specifique en option de la saisie
 ]#SET{list_id,#ENV{list}}
+[(#REM) Détecter si le tableau est séquentiel ou associatif, pour choisir s'il faut prendre la clé en valeur
+]#SET{data_is_sequential,#GET{data}|is_array|?{#GET{data}|array_keys|=={#VAL{0}|range{#GET{data}|count|moins{1}}}}}
 <B_selection>
 [(#SET{list_id,[(#GET{list_id,[champ_(#ENV{nom})_data]})]})]
 <datalist id="#GET{list_id}">
-<BOUCLE_selection(POUR){tableau #GET{data}}
->[	<option value="(#VALEUR|attribut_html)"></option>
-]</BOUCLE_selection>
+<BOUCLE_selection(POUR){tableau #GET{data}} {" "}>
+  [<option value="(#GET{data_is_sequential}|?{#VALEUR,#CLE}|attribut_html)">[(#VALEUR|attribut_html)]</option>]
+</BOUCLE_selection>
 </datalist>
 </B_selection>
 <input type="#GET{type}" name="#ENV{nom}" class="#GET{type}[ (#ENV{class})]" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ list="(#GET{list_id})"][ value="(#ENV{cle_secrete}|?{'',#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}})"][ size="(#ENV{size})"][ maxlength="(#ENV{maxlength})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ placeholder="(#GET{placeholder})"][(#HTML5|oui)[(#ENV{obligatoire}|et{#ENV{obligatoire}|!={non}}|oui) required="required"][ min="(#ENV{min})"][ max="(#ENV{max})"][ step="(#ENV{step})"][(#ENV{autofocus}|et{#ENV{autofocus}|!={non}}|oui) autofocus="autofocus"]][(#GET{val_autocomplete}|find{#ENV{autocomplete}}|oui) autocomplete="#ENV{autocomplete}"][ aria-describedby="(#ENV{describedby})"][ (#ENV*{attributs})] />
