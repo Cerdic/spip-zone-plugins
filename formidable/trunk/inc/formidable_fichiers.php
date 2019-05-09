@@ -225,7 +225,7 @@ function formidable_deplacer_fichier_emplacement_definitif($fichier, $nom, $mime
 		$n++;
 	}
 	if (!$zipper) { // si on ne zippe pas, c'est simple
-		if ($fichier_dest = deplacer_fichier_upload($fichier, $chemin_final, true)) {
+		if ($fichier_dest = deplacer_fichier_upload($fichier, $chemin_final)) {// On se contente de copier le fichier. COmme cela en cas de souci quelconque, c'est conservé au moins dans tmp/cvt_upload. Celui ci a son propre mécanisme de nettoyage.
 			spip_log("Enregistrement du fichier $chemin_final", 'formidable');
 			return $nom;
 		} else {
@@ -256,7 +256,7 @@ function formidable_deplacer_fichier_emplacement_definitif($fichier, $nom, $mime
 			spip_log("Pb lors de l'enregistrement du fichier $fichier", 'formidable'._LOG_ERREUR);
 			return '';
 		} else {
-			spip_unlink($fichier);
+			//spip_unlink($fichier); On efface pas, car cela permet en cas de souci par ailleurs d'avoir au moins le fichier dans tmp/cvt_upload. CVT upload a son propre mécanisme de nettoyage de ce dossier.
 			supprimer_repertoire($tmp_dir);
 			spip_log("Enregistrement du fichier $fichier, automatiquement zippé", 'formidable');
 			return $nom;
