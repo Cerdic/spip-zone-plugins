@@ -129,7 +129,8 @@ function verifier_fichier_mime($valeur,$cle,$options){
 
 	// Récuperer les infos mime + extension
 	$mime_type = $valeur['type'][$cle];
-	$extension = pathinfo($valeur['name'][$cle],PATHINFO_EXTENSION);
+	include_spip('action/ajouter_documents');
+	$extension = corriger_extension(pathinfo($valeur['name'][$cle],PATHINFO_EXTENSION));
 
 	// Appliquer les alias de type_mime
 	include_spip('base/typedoc');
