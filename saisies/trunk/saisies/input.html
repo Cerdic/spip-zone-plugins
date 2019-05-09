@@ -54,7 +54,7 @@
 <B_selection>
 [(#SET{list_id,[(#GET{list_id,[champ_(#ENV{nom})_data]})]})]
 <datalist id="#GET{list_id}">
-<BOUCLE_selection(POUR){tableau #GET{data}} {" "}>
+<BOUCLE_selection(POUR){tableau #GET{data}}>
   [<option value="(#GET{data_is_sequential}|?{#VALEUR,#CLE}|attribut_html)">[(#VALEUR|attribut_html)]</option>]
 </BOUCLE_selection>
 </datalist>
