@@ -109,6 +109,9 @@ function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $deplacer = tr
 	if(!function_exists('deplacer_fichier_upload')){
 		include_spip('inc/documents');
 	}
+	if(!function_exists('corriger_extension')){
+		include_spip('action/ajouter_documents');
+	}
 	$vignette_par_defaut = charger_fonction('vignette', 'inc/');
 	$infos = array();
 	// On commence par nettoyer le dossier
@@ -134,6 +137,12 @@ function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $deplacer = tr
 			and $chemin_aleatoire = tempnam($repertoire, $form.'_')
 		) {
 			$extension = strtolower(pathinfo($fichier['name'][$cle], PATHINFO_EXTENSION));
+
+			// Corriger les équivalences d'extensions
+			$extension_old = $extension;
+			$extension = corriger_extension($extension);
+			$nom = str_replace(".$extension_old", ".$extension", $nom);
+
 			if (in_array($extension, array('png','jpg','gif'))) {
 				$chemin_aleatoire .= ".$extension";
 			}
