@@ -1,9 +1,9 @@
 <paquet
 	prefix="xray"
 	categorie="outil"
-	version="0.23.1"
+	version="0.23.2"
 	etat="test"
-	compatibilite="[2.1.0;3.2.*]"
+	compatibilite="[2.1.0;3.3.*]"
 	logo="images/xray-32.png"
 	documentation="https://contrib.spip.net/4946"
 >
@@ -21,5 +21,5 @@
 	<menu nom="xray" titre="XRay" parent="menu_squelette" icone="images/prive-xray-16.jpg" action="xray" />
 	<necessite nom="memoization"/>
 	<utilise nom="macrosession" />
-	<utilise nom='cachelab'  compatibilite="[0.6.0;["  />
+	<utilise nom='cachelab'  compatibilite="[0.99.0;["  />
 </paquet>

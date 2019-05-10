@@ -16,10 +16,10 @@ include_spip('public/cachelab_utils');
  * @param null $return : résultat éventuellement fourni, pour les actions list et get
  * @return bool : indique si l'action a pu être appliquée ou non
  */
-function cachelab_applique ($action, $cle, $data=null, $options='', &$return=null) {
+function cachelab_appliquer ($action, $cle, $data=null, $options='', &$return=null) {
 global $Memoization;
 	if (!isset($Memoization) or !$Memoization) {
-		spip_log("cachelab_applique ($action, $cle...) : Memoization n'est pas activé", 'cachelab_erreur');
+		spip_log("cachelab_appliquer ($action, $cle...) : Memoization n'est pas activé", 'cachelab_erreur');
 		return false;
 	}
 
@@ -32,7 +32,7 @@ static $len_prefix;
 	case 'del' :
 		$del = $Memoization->del($joliecle);
 		if (!$del) {
-			spip_log ("Échec 'del' $joliecle", 'cachelab');
+			spip_log ("Échec 'del' $joliecle", 'cachelab_erreur');
 			return false;
 		};
 		break;
@@ -63,7 +63,7 @@ static $len_prefix;
 		break;
 
 	default :
-		$f = 'cachelab_applique_'.$action;
+		$f = 'cachelab_appliquer_'.$action;
 		if (function_exists($f))
 			return $f($action, $cle, $data, $options, $return);
 		else {
@@ -80,7 +80,7 @@ static $len_prefix;
  *
  * @uses apcu_cache_info() et donc nécessite que Memoization soit activé avec APC ou APCu
  *
- * @param $action   : l'action à appliquer
+ * @param string $action   : l'action à appliquer
  * @param array $conditions : les conditions définissant la cible
  * @param array $options    : options de l'action et/ou des conditions
  * @return array|null
@@ -135,17 +135,13 @@ global $Memoization;
 	$do_clean = (isset ($options['clean']) ? $options['clean'] : (!defined('CACHELAB_CLEAN') or CACHELAB_CLEAN)); 
 	// pas de listes par défaut
 	$do_lists = ($action == 'list') or (isset ($options['list']) and $options['list']);
-	// pas de chrono par défaut sauf si CACHELAB_CHRONO
-	$do_chrono = (isset ($options['chrono']) ? $options['chrono'] : (defined('CACHELAB_CHRONO') and CACHELAB_CHRONO)); 
-	if ($do_chrono) {
-		include_spip ('lib/microtime.inc');
-		microtime_do ('begin');
-	}
+	include_spip ('lib/microtime.inc');
+	microtime_do ('begin');
 
 	// retours
 	$stats=array();
-	$stats['nb_alien']=$stats['nb_candidats']=$stats['nb_clean']=$stats['nb_no_data']=$stats['nb_not_array']=$stats['nb_cible']=0;
-	$stats['l_no_data'] = $stats['l_not_array'] = $stats['l_cible'] = array();
+	$stats['nb_alien']=$stats['nb_candidats']=$stats['nb_clean']=$stats['nb_cible']=0;
+	$stats['l_cible'] = array();
 
 	// On y va
 	$cache = apcu_cache_info();
@@ -232,15 +228,8 @@ global $Memoization;
 		if ($cle_objet or $plusfunc) {
 			global $Memoization;
 			$data = $Memoization->get(substr($cle, $len_prefix));
-			if (!$data) {
-				$stats['nb_no_data']++;
-				continue;
-			}
-			if (!is_array($data)) {
-				spip_log ("clé=$cle : data n'est pas un tableau : ".print_r($data,1), 'cachelab');
-				$stats['nb_not_array']++;
-				if ($do_lists)
-					$stats['l_not_array'][] = $cle;
+			if (!$data or !is_array($data)) {
+				spip_log ("clé=$cle : data est vide ou n'est pas un tableau : ".print_r($data,1), 'cachelab_erreur');
 				continue;
 			};
 		};
@@ -261,18 +250,25 @@ global $Memoization;
 		if ($do_lists) 
 			$stats['l_cible'][] = $cle;
 
-		cachelab_applique ($action, $cle, $data, $options, $return);
+		cachelab_appliquer ($action, $cle, $data, $options, $return);
 
 		if ($return 
 			and (($action=='get') 
 				or (substr($action,0,4)=='get_')))
-			return $return;
+			return $return; // TODO chrono aussi dans ce cas
 	}
 
-	if ($do_chrono) {
-		$stats['chrono'] = microtime_do ('end', 'ms');
-		spip_log ("cachelab_cibler ($action, session=$session, objet $cle_objet=$id_objet, chemin=$chemin) : {$stats['nb_cible']} caches ciblés (sur {$stats['nb_candidats']}) en {$stats['chrono']} ms", 'cachelab');
-	}
+	$stats['chrono'] = microtime_do ('end', 'ms');
+	$msg = "cachelab_cibler($action) en {$stats['chrono']} ms ({$stats['nb_cible']} caches sur {$stats['nb_candidats']})"
+		."\n".print_r($conditions, 1);
+	if (count($options))
+		$msg .= "\n".print_r($options, 1);
+	if (defined ('LOG_CACHELAB_CHRONO') and LOG_CACHELAB_CHRONO)
+		spip_log ($msg, 'cachelab_chrono.'._LOG_INFO);
+	if (defined ('LOG_CACHELAB_SLOW') and ($stats['chrono']  > LOG_CACHELAB_SLOW))
+		spip_log ($msg, 'cachelab_slow.'._LOG_INFO_IMPORTANTE);
+	if (($action=='del') and defined ('LOG_CACHELAB_TOOMANY_DEL') and ($stats['nb_cible']  > LOG_CACHELAB_TOOMANY_DEL))
+		spip_log ($msg, 'cachelab_toomany_del.'._LOG_INFO_IMPORTANTE);
 
 	if ($return)
 		$stats['val'] = $return;

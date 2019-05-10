@@ -61,7 +61,7 @@ if ($cle_objet and !$id_objet)
 	$cle_objet='';
 
 $conditions = array('session'=>$session, 'chemin'=>$chemin, 'cle_objet'=>$cle_objet, 'id_objet'=>$id_objet, 'contexte'=>$contexte);
-$options = array('chrono'=>true, 'list'=>true, 'methode_chemin'=>$cachelab_methode_chemin);
+$options = array('list'=>true, 'methode_chemin'=>$cachelab_methode_chemin);
 
 echo "<pre>"
 	.preg_replace(
@@ -80,10 +80,6 @@ $stats = cachelab_cibler(
 
 $l_cible = $stats['l_cible'];
 unset($stats['l_cible']);
-$l_not_array = $stats['l_not_array'];
-unset($stats['l_not_array']);
-$l_no_data = $stats['l_no_data'];
-unset($stats['l_no_data']);
 
 echo   "<h3>Bilan du filtrage</h3><br>
 		<br><b>Stats :</b><pre>    ".trim(str_replace('Array', '', print_r($stats, 1)), "() \n")."</pre>";
@@ -93,14 +89,6 @@ function xray_lien_cache ($cle='') {
 	return "<a href ='/ecrire/index.php?exec=xray&SCOPE=A&COUNT=20&TYPECACHE=ALL&ZOOM=TEXTECOURT&EXTRA=&WHERE=&OB=2&S_KEY=H&SORT=D&SEARCH=$joliecle&SH=".md5($cle)."'>
 		$joliecle
 	</a>";
-}
-
-if (count($l_not_array)) {
-	echo "<h3>Erreurs d'accés (pas un tableau)</h3>
-		<ul>";
-	foreach ($l_not_array as $cle)
-		echo "<li>".xray_lien_cache($cle)."</li>";
-	echo "</ul>";
 }
 
 if (count($l_cible)) {
