@@ -111,8 +111,6 @@ global $Memoization;
 		$cle_objet=null;
 	}
 
-	if (isset($conditions['more']))			// obsolète (todo : fix vieux codes appelant)
-		$conditions['plus'] = $conditions['more'];
 	// pour 'contexte' on simule un 'plus' pour donner un exemple d'extension
 	if (isset($conditions['contexte']) and $conditions['contexte'] and !isset($conditions['plus']))
 		$conditions['plus'] = 'contexte';

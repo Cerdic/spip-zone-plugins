@@ -3,8 +3,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('public/cachelab_balises');
 
-// mémo des defines :
-
 // loger tous les temps des ciblages
 if (!defined('LOG_CACHELAB_CHRONO'))
 	define('LOG_CACHELAB_CHRONO', false);
@@ -17,10 +15,7 @@ if (!defined('LOG_CACHELAB_SLOW'))
 if (!defined('LOG_CACHELAB_TOOMANY_DEL'))
 	define('LOG_CACHELAB_TOOMANY_DEL',100);
 
-if (!defined('LOG_BALISECACHE_FILTRES'))
-	define('LOG_BALISECACHE_FILTRES', 'oui');
-
-if (!defined('LOG_BALISECACHE_DUREES_DYNAMIQUES'))
-	define('LOG_BALISECACHE_DUREES_DYNAMIQUES', false);
-
-define ('_CACHELAB_FONCTIONS', true);
+/* Autres constantes utilisées-définies dans inc/cachelab_invalideur :
+ *   LOG_BALISECACHE_FILTRES
+ *   LOG_BALISECACHE_DUREES_DYNAMIQUES
+*/

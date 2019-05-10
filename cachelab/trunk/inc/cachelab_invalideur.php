@@ -9,6 +9,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 include_spip('inc/cachelab_utils');
 
+if (!defined('LOG_BALISECACHE_FILTRES'))
+	define('LOG_BALISECACHE_FILTRES', 'oui');
+
+if (!defined('LOG_BALISECACHE_DUREES_DYNAMIQUES'))
+	define('LOG_BALISECACHE_DUREES_DYNAMIQUES', false);
+
+
 /**
  * Invalider les caches liés à telle condition
  *
