@@ -254,7 +254,7 @@ function twitter_api_call($command, $type = 'get', $params = array(), $options =
 			if (!$res) {
 				return false;
 			}
-			spip_log("twitter_api_call:$command echec connexion, on utilise le cache perime", "twitter" . LOG_INFO_IMPORTANTE);
+			spip_log("twitter_api_call:$command echec connexion, on utilise le cache perime", "twitter" . _LOG_INFO_IMPORTANTE);
 		}
 	}
 
