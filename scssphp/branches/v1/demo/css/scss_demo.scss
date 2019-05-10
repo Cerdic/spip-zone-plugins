@@ -1,0 +1,41 @@
+/*
+Les chemins des scss importes doivent etres defnis depuis la racine du squelette
+ou ajoutes au paquet.xml via la balise chemin en mode public
+
+Utilisation de la balise #CSS :
+
+le fichier etant `css/perso.scss`
+
+```scss   
+    #CSS{css/perso.css}
+```
+le recalcul s'effectue en urtilisant le mode debug : ?var_mode=css
+
+Debug :
+Pour afficher les fichiers sources dans les css generees
+ajouter au fichier mes_options :
+
+```php
+    define('_SCSS_LINE_COMMENTS', true);
+```
+permettant un debugage plus facile avec une extension comme
+https://addons.mozilla.org/fr/firefox/addon/firecompass-for-firebug/
+n'est pas supporte par Chrome, utilisant le format sourcemap
+
+*/
+$blue: #3bbfce;
+$marges: 16px;
+
+.content{ color: $blue; padding: $marges; }
+.border { padding: $marges / 2; margin: $marges / 2; border: 2px $blue solid;}
+
+/* commentaire variable color redefinie */
+
+$color: orange !default;
+@mixin couleurs($color: grey) {
+    background-color: lighten($color, 30%);
+    @content;
+}
+body {
+    @include couleurs { color: $color; };
+}
