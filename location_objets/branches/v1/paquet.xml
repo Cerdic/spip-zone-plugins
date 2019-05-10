@@ -1,11 +1,11 @@
 <paquet
 	prefix="location_objets"
 	categorie="divers"
-	version="1.5.3"
+	version="1.5.4"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/location_objets-64.png"
-	documentation="https://github.com/abelass/location_objets"
+	documentation="https://contrib.spip.net/Location-d-objets"
 	schema="1.2.0"
 >
 
