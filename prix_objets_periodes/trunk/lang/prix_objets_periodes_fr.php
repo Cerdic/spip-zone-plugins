@@ -8,8 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
-	'prix_objets_periodes_titre' => 'Prix objets par périodes',
+	'prix_objets_periodes_titre' => 'Périodes de prix',
 
 	// T
-	'titre_page_configurer_prix_objets_periodes' => 'Paramètres Prix objets par périodes'
+
+	'titre_page_configurer_prix_objets_periodes' => 'Paramètres de périodes de prix',
 );
