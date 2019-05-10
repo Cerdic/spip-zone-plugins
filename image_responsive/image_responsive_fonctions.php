@@ -53,8 +53,9 @@ function image_responsive_insert_head($flux) {
 function image_responsive_header_prive($flux) {
 	$flux .= "\n<link rel='stylesheet' type='text/css' media='all' href='" . find_in_path("image_responsive.css") . "'>\n";
 	$flux .= "<script>htactif=false;document.createElement('picture');</script>";
-	$flux .= "<script>htactif=$htactif;document.createElement('picture'); var image_responsive_retina_hq = 0;</script>";
 	if (_IMAGE_RESPONSIVE_RETINA_HQ) $flux .= "<script>image_responsive_retina_hq = 1;</script>";
+	else 	$flux .= "<script>var image_responsive_retina_hq = 0;</script>";
+
 
 	$flux .= "
 <script type='text/javascript' src='" . find_in_path("javascript/rAF.js") . "'></script>
