@@ -30,15 +30,10 @@ function filtre_definitions_dist($texte) {
 		return $texte;
 	$GLOBALS['dictionnaires_id_texte'] = uniqid();
 	include_spip('inc/dictionnaires');
-	
-	// Ne lire la base qu'une fois pour un hit et non à chaque appele de propre
-	static $definitions = array();
-	static $masques = array();
-	if (count($definitions) === 0) {
-		$definitions = dictionnaires_lister_definitions();
-		foreach ($definitions as $definition){
-			$masques[] = $definition['masque'];
-		}
+	$definitions = dictionnaires_lister_definitions();
+	$masques = array();
+	foreach ($definitions as $definition){
+		$masques[] = $definition['masque'];
 	}
 	
 	// Quelque soit le type de définition
