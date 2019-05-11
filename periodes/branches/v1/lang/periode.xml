@@ -1,4 +1,7 @@
 <traduction module="periode" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/periodes/trunk/lang/" reference="fr">
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/periode?lang_cible=fr" total="46" traduits="46" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/periode?lang_cible=en" total="44" traduits="41" relire="0" modifs="3" nouveaux="0" pourcent="93.18">
+		<traducteur nom="Rainer Müller" lien="https://trad.spip.net/auteur/rainer-muller" />
+	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/periode?lang_cible=fr" total="44" traduits="44" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 </traduction>
