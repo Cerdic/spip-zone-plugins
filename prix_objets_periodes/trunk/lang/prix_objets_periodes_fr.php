@@ -11,6 +11,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'prix_objets_periodes_titre' => 'Périodes de prix',
 
 	// T
-
-	'titre_page_configurer_prix_objets_periodes' => 'Paramètres de périodes de prix',
+	'titre_page_configurer_prix_objets_periodes' => 'Paramètres de périodes de prix'
 );
