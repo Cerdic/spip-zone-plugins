@@ -1,6 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/objets_disponibilites/trunk/lang/
+// extrait automatiquement de https://trad.spip.net/tradlang_module/objets_disponibilites?lang_cible=en
+// ** ne pas modifier le fichier **
+
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -8,7 +10,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
+	'cfg_titre_parametrages' => 'Settings',
 
-	'champ_disponibilites_objets' => 'Enable adding availability on content:',
+	// O
+	'objets_disponibilites_titre' => 'Objects availability ', # MODIF
 
+	// T
+	'titre_page_configurer_objets_disponibilites' => 'Objects availability settings' # MODIF
 );
