@@ -46,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_expediteur_explication' => 'Choose the sender of the notifications for the seller and the buyer',
 	'notifications_expediteur_label' => 'Sender',
 	'notifications_expediteur_webmaster_label' => 'Choose a webmaster',
+	'notifications_explication' => 'Notifications allow you to send emails following changes in status of rentals: @statuts@',
 	'notifications_parametres' => 'Notification settings',
 	'notifications_quand_explication' => 'Which change (s) of status triggers (s) the sending of a notification?',
 	'notifications_quand_label' => 'Trigger',
@@ -56,6 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_vendeur_email_explication' => 'Enter one or more emails separated by commas:',
 	'notifications_vendeur_email_label' => 'Email:',
 	'notifications_vendeur_label' => 'Seller',
+	'notifications_vendeur_webmaster_label' => 'Choose one or more webmasters:',
 
 	// T
 	'titre_page_configurer_location_objets' => 'Objects rental',
