@@ -22,7 +22,7 @@ function formulaires_configurer_objets_disponibilites_saisies_dist() {
 					'saisie' => 'choisir_objets',
 					'options' => array(
 						'nom' => 'objets',
-						'label' => _T('objets_disponibilites:champ_chambres_objets'),
+						'label' => _T('objets_disponibilites:champ_disponibilites_objets'),
 						'defaut' => $config['objets']
 					)
 				),
