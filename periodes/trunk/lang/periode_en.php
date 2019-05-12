@@ -32,12 +32,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Do you confirm the deletion of this period?',
 
 	// E
-	'erreur_dates_non_completes' => '
-Meintest du: Sélectionnez au moins un jour, mois ou année sous "Date_début" ou "Date fin".
-76/5000
-Select at least one day, month, or year under "Beginning day" or "End date".', # MODIF
+	'erreur_dates_non_completes' => 'Select at least one day, month, or year under "Beginning day" or "End date".',
 	'erreur_dates_un_minimum' => 'It takes at least a start or end date.',
-	'explication_date_complete_label' => 'If not, allow to choose day, month and year separately. Use for example to define a period independently of the year', # MODIF
+	'explication_date_complete_label' => 'If not, allow to choose day, month and year separately. Use for example to define a period independently of the year',
 
 	// I
 	'icone_creer_periode' => 'Create a period',
@@ -62,7 +59,7 @@ Remove all periods',
 	'texte_creer_associer_periode' => 'Create and associate a period',
 	'texte_definir_comme_traduction_periode' => 'This period is a translation of the period number:',
 	'titre_choix_coincide' => 'Coincidence',
-	'titre_choix_exclu' => 'Excluded', # MODIF
+	'titre_choix_exclu' => 'Excluded',
 	'titre_langue_periode' => 'Language of this period',
 	'titre_logo_periode' => 'Logo of this period',
 	'titre_objets_lies_periode' => 'Linked to this period',
