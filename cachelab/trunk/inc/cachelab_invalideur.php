@@ -137,7 +137,7 @@ static $var_cache;
 			}
 			$duree = $f($page['contexte'][$arg],$page);
 			if (!is_null($duree)) {
-				if (!defined('LOG_BALISECACHE_DUREES_DYNAMIQUES') or LOG_CACHELAB_DUREES_DYNAMIQUES)
+				if (!defined('LOG_BALISECACHE_DUREES_DYNAMIQUES') or LOG_BALISECACHE_DUREES_DYNAMIQUES)
 					spip_log ("#CACHE $f (arg={$page['contexte'][$arg]}) renvoie : $duree s", 'balisecache_duree_dynamique');
 
 				if ($var_cache)
@@ -163,7 +163,7 @@ static $var_cache;
 	
 	// Exemple : <INCLURE{fond=mes_scores,duree-cache=#GET{duree_sicestmoi_oupas}}/>
 	if (isset($page['contexte']['duree-cache'])) {
-		if (!defined('LOG_BALISECACHE_DUREES_DYNAMIQUES') or LOG_CACHELAB_DUREES_DYNAMIQUES)
+		if (!defined('LOG_BALISECACHE_DUREES_DYNAMIQUES') or LOG_BALISECACHE_DUREES_DYNAMIQUES)
 			spip_log ("Pour $fichier, contexte[duree-cache]={$page['contexte']['duree-cache']}", 'balisecache_duree_dynamique');
 
 		if ($var_cache)
