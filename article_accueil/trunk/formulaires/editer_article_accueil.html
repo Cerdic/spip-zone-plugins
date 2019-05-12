@@ -1,7 +1,7 @@
 <div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_rubrique}" id="formulaire_#FORM-#ENV{id_rubrique}">
 	<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
 	<div class="info_article_accueil">
-	<BOUCLE_article(ARTICLES){id_article=#ID_ARTICLE_ACCUEIL}>
+	<BOUCLE_article(ARTICLES){id_article=#ID_ARTICLE_ACCUEIL}{statut IN 'prop','prepa','publie'}>
 		<:article_accueil:rubrique_article_en_accueil:> <a href="[(#ID_ARTICLE|generer_url_entite{article})]">[(#TITRE|trim|sinon{<:info_sans_titre:>})[ \((#ID_ARTICLE)\)]]</a>
 	</BOUCLE_article>
 	</B_article>
