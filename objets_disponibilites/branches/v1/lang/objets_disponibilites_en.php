@@ -11,10 +11,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_titre_parametrages' => 'Settings',
+	'champ_disponibilites_objets' => 'Enable adding availability on content:',
 
 	// O
-	'objets_disponibilites_titre' => 'Objects availability ', # MODIF
+	'objets_disponibilites_titre' => 'Objects availability ',
 
 	// T
-	'titre_page_configurer_objets_disponibilites' => 'Objects availability settings' # MODIF
+	'titre_page_configurer_objets_disponibilites' => 'Objects availability settings'
 );
