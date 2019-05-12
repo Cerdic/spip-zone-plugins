@@ -714,7 +714,7 @@ function mailsubscribers_synchronise_liste($liste, $abonnes, $options = array())
 		if (isset($abonnes_emails[$unsub['email']])) {
 			unset($abonnes_emails[$unsub['email']]);
 		}
-		elseif (isset($abonnes_emails[$obfusques[$unsub['email']]])) {
+		elseif (isset($obfusques[$unsub['email']]) and isset($abonnes_emails[$obfusques[$unsub['email']]])) {
 			unset($abonnes_emails[$obfusques[$unsub['email']]]);
 		}
 	}
