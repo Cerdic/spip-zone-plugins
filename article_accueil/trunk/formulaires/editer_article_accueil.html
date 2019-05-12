@@ -8,9 +8,19 @@
 	<:article_accueil:aucun_article_accueil:>
 	<//B_article>
 	[(#ENV{editable})
-	<span class="toggle_box_link" style="display:none;">&#91;<a href="#"
-			onclick="var f=jQuery(this).parents('.formulaire_spip').eq(0);f.find('form').show('fast');f.find('p').show('fast');f.find('.toggle_box_link').hide('fast');return false;"
-			><:bouton_changer:></a>&#93;</span>
+	<span class="toggle_box_link" style="display:none;">
+		&#91;
+		<a href="#"
+			onclick="var f=jQuery(this).parents('.formulaire_spip').eq(0);
+				f.find('form').show('fast');
+				f.find('p').show('fast');
+				f.find('.toggle_box_link').hide('fast');
+				return false;"
+			>
+			<:bouton_changer:>
+		</a>
+		&#93;
+	</span>
 	]
 	</div>
 	</BOUCLE_rubrique>
@@ -32,7 +42,11 @@
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
-		<p class='boutons'><span class='image_loading'></span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+		<p class='boutons'>
+			<span class='image_loading'></span>
+			<input type='submit' class='btn submit' name='annuler' value='<:bouton_annuler:>' />
+			<input type="submit" class="btn submit" value="<:bouton_changer:>" />
+		</p>
 	</div></form>]
 </div>
 <script type="text/javascript">// <![CDATA[
