@@ -54,6 +54,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'retirer_tous_liens_livres' => 'Retirer tous les livres',
 	'role_grand_format' => 'Grand format',
 	'role_poche' => 'Poche',
+	'role_couverture' => 'Couverture',
+	'role_4couverture' => '4e de couv',
 
 	// S
 	'supprimer_livre' => 'Supprimer cet livre',
@@ -67,7 +69,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_date_nouvelle_edition_nonaffichee' => 'Ne pas afficher la date de nouvelle publication',
 	'texte_statut_aparaitre' => 'à paraître',
 	'texte_statut_paru' => 'paru',
+	'texte_statut_parus' => 'Parus',
 	'texte_statut_epuise' => 'épuisé',
+	'texte_statut_epuises' => 'Épuisés',
 	'texte_livres_recents' => 'Livres les plus récents',
 	'titre_langue_livre' => 'Langue de ce livre',
 	'titre_livre' => 'Livre',

@@ -1,9 +1,16 @@
 <h1 class="grostitre"><:livre:titre_livres:></h1>
+<div class='onglets_simple clearfix'>
+	<ul>
+		<li class='blabla'>[(#SELF|parametre_url{statut,'prepa'}|lien_ou_expose{<:texte_statut_en_cours_redaction:>, #ENV{statut,prepa}|=={prepa}, ajax})]</li>
+		<li class=''>[(#SELF|parametre_url{statut,'publie'}|lien_ou_expose{<:livre:texte_statut_parus:>, #ENV{statut}|=={publie}, ajax})]</li>
+		<li class=''>[(#SELF|parametre_url{statut,'refuse'}|lien_ou_expose{<:livre:texte_statut_epuises:>, #ENV{statut}|=={refuse}, ajax})]</li>
+	</ul>
+</div>
 
 #FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 <div class="nettoyeur"></div>
 
-<INCLURE{fond=prive/objets/liste/livres, env, ajax, sinon=<:livre:info_aucun_livre:>}>
+<INCLURE{fond=prive/objets/liste/livres, env, ajax, statut=#ENV{statut,publie}, sinon=<:livre:info_aucun_livre:>}>
 
 [(#AUTORISER{creer,livre})
 	[(#URL_ECRIRE{livre_edit,new=oui}|icone_verticale{<:livre:icone_creer_livre:>,livre,new,right})]
