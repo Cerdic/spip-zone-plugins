@@ -1,8 +1,10 @@
-<BOUCLE_rub(RUBRIQUES){id_rubrique}{tout}>
-<select name='id_article_accueil' id='id_article_accueil'>
-<option value='0'><:article_accueil:aucun_article_accueil:></option>
-<BOUCLE_art(ARTICLES){id_rubrique=#ID_RUBRIQUE}{statut IN 'prop','prepa','publie'}>
-<option value='#ID_ARTICLE'[ (#ID_ARTICLE|=={#ID_ARTICLE_ACCUEIL}|oui)selected="selected"]>[(#TITRE|trim|sinon{<:info_sans_titre:>})[ \((#ID_ARTICLE)\)]]</option>
+<div class="choix">
+	<input type="radio" name="id_article_accueil" class="radio" id="article_0" value="0"[ (#ENV{id_article_accueil}|non)checked="checked"]>
+	<label for="article_0"><:article_accueil:aucun_article_accueil:></label>
+</div>
+<BOUCLE_art(ARTICLES){id_rubrique=#ID_RUBRIQUE}{statut IN #ENV{_statuts}}{where}>
+<div class="choix">
+	<input type="radio" name="id_article_accueil" class="radio" id="article_#ID_ARTICLE" value="#ID_ARTICLE"[ (#ID_ARTICLE|=={#ENV{id_article_accueil}}|oui)checked="checked"]>
+	<label for="article_#ID_ARTICLE">[[(#STATUT|puce_statut{article}) ](#TITRE|trim|sinon{<:info_sans_titre:>})[ \((#ID_ARTICLE)\)]]</label>
+</div>
 </BOUCLE_art>
-</select>
-</BOUCLE_rub>

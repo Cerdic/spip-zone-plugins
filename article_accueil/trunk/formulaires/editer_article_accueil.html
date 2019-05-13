@@ -1,53 +1,80 @@
 <div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_rubrique}" id="formulaire_#FORM-#ENV{id_rubrique}">
-	<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
-	<div class="info_article_accueil">
-	<BOUCLE_article(ARTICLES){id_article=#ID_ARTICLE_ACCUEIL}{statut IN 'prop','prepa','publie'}>
-		<:article_accueil:rubrique_article_en_accueil:> <a href="[(#ID_ARTICLE|generer_url_entite{article})]">[(#TITRE|trim|sinon{<:info_sans_titre:>})[ \((#ID_ARTICLE)\)]]</a>
-	</BOUCLE_article>
-	</B_article>
-	<:article_accueil:aucun_article_accueil:>
-	<//B_article>
-	[(#ENV{editable})
-	<span class="toggle_box_link" style="display:none;">
-		&#91;
-		<a href="#"
-			onclick="var f=jQuery(this).parents('.formulaire_spip').eq(0);
-				f.find('form').show('fast');
-				f.find('p').show('fast');
-				f.find('.toggle_box_link').hide('fast');
-				return false;"
-			>
-			<:bouton_changer:>
-		</a>
-		&#93;
-	</span>
-	]
+
+	<div class="article_accueil-entete">
+		<:article_accueil:rubrique_article_en_accueil:>
+		[(#ENV{editable})
+		<span class="toggle_box_link" style="display:none;">
+			&#91;
+			<a href="#"
+				onclick="var f=jQuery(this).parents('.formulaire_spip').eq(0);
+					f.find('form').show('fast');
+					f.find('p').show('fast');
+					f.find('.toggle_box_link').hide('fast');
+					return false;"
+				>
+				<:bouton_changer:>
+			</a>
+			&#93;
+		</span>
+		]
 	</div>
-	</BOUCLE_rubrique>
-	[[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	(#ENV{editable})
-	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
-		[(#REM) declarer les hidden qui declencheront le service du formulaire 
-		parametre : url d'action ]
-		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
-			#SET{erreurs,#ENV**{erreurs}|table_valeur{id_article_accueil}}
-			<li class="editer_id_article_accueil[ (#GET{erreurs}|oui)erreur]">
-				<label for="id_article_accueil"><:article_accueil:label_id_article_accueil:></label>
-					[<span class='erreur_message'>(#GET{erreurs})</span>]
-					[(#PLUGIN{polyhier}|oui) #INCLURE{fond=inclure/inc-selecteur_accueil_poly,id_rubrique} ]
-					[(#PLUGIN{polyhier}|non) #INCLURE{fond=inclure/inc-selecteur_accueil,id_rubrique} ]
-			</li>
-		</ul>
-		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
-		<!--extra-->
-		<p class='boutons'>
-			<span class='image_loading'></span>
-			<input type='submit' class='btn submit' name='annuler' value='<:bouton_annuler:>' />
-			<input type="submit" class="btn submit" value="<:bouton_changer:>" />
-		</p>
-	</div></form>]
+	<div class="article_accueil-titre">
+		<div class="liste-objets article-accueil">
+			<table class='spip liste'>
+				<tbody>
+					<tr class="row_odd">
+		<BOUCLE_article(ARTICLES){id_article=#ENV{id_article_accueil}}{statut IN #ENV{_statuts}}>
+						<td class='statut'>[(#STATUT|puce_statut{article})]</td>
+						<td class='titre principale'>
+							<a href="[(#ID_ARTICLE|generer_url_entite{article})]"
+								[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
+								title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">
+								[(#RANG). ]<strong>[(#TITRE|trim|sinon{<:info_sans_titre:>})]</strong>
+							</a>
+						</td>
+						<td class='id'>#ID_ARTICLE</td>
+		</BOUCLE_article>
+		</B_article>
+						<td class='titre principale'>
+							<:article_accueil:aucun_article_accueil:>
+						</td>
+		<//B_article>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+[(#ENV{editable})
+		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+		<form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
+			[(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<ul class="editer-groupe article_accueil-form">
+				#SET{erreurs,#ENV**{erreurs}|table_valeur{id_article_accueil}}
+				<li class="editer editer_id_article_accueil[ (#GET{erreurs}|oui)erreur]">
+					<label for="id_article_accueil"><:article_accueil:label_id_article_accueil:></label>
+					[<span class="erreur_message">(#GET{erreurs})</span>]
+					#SET{selecteur, inc-selecteur_accueil}
+					[(#PLUGIN{polyhier}|oui) #SET{selecteur, #GET{selecteur}|concat{_poly}}]
+					#INCLURE{fond=inclure/#GET{selecteur},
+						id_rubrique,
+						id_article_accueil,
+						_statuts,
+						where=#ENV**{_where}
+					}
+				</li>
+			</ul>
+			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+			<!--extra-->
+			<p class="boutons">
+				<span class="image_loading"></span>
+				<input type="submit" class="btn submit" name="annuler" value="<:bouton_annuler:>" />
+				<input type="submit" class="btn submit" value="<:bouton_changer:>" />
+			</p>
+		</div></form>
+]
 </div>
 <script type="text/javascript">// <![CDATA[
 	$(document).ready(function(){

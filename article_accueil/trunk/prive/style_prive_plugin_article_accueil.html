@@ -25,12 +25,25 @@
 #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 
-.formulaire_editer_article_accueil .info_article_accueil {
+.formulaire_editer_article_accueil .article_accueil-entete {
 	padding-#GET{left}: 30px;
 	background: url(#CHEMIN_IMAGE{article_accueil-24.png}) no-repeat #GET{left};
 	min-height: 24px;
 	padding-top: 4px;
 	margin-#GET{left}: -8px;
 	margin-#GET{right}: 60px;
-	margin-bottom: 0;
+}
+.formulaire_editer_article_accueil .article_accueil-titre {
+	padding-#GET{left}: 30px;
+	margin-#GET{left}: -8px;
+}
+.formulaire_editer_article_accueil .article_accueil-titre div.liste-objets.article-accueil {
+	margin-top: 0;
+    margin-bottom: 10px;
+    border-top: 0;
+}
+.formulaire_editer_article_accueil .article_accueil-form {
+	padding-#GET{left}: 30px;
+	margin-#GET{left}: -8px;
+	margin-bottom: 10px;
 }
