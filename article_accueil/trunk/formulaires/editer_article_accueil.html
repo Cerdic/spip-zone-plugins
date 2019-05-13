@@ -18,32 +18,11 @@
 		</span>
 		]
 	</div>
-	<div class="article_accueil-titre">
-		<div class="liste-objets article-accueil">
-			<table class='spip liste'>
-				<tbody>
-					<tr class="row_odd">
-		<BOUCLE_article(ARTICLES){id_article=#ENV{id_article_accueil}}{statut IN #ENV{_statuts}}>
-						<td class='statut'>[(#STATUT|puce_statut{article})]</td>
-						<td class='titre principale'>
-							<a href="[(#ID_ARTICLE|generer_url_entite{article})]"
-								[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
-								title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">
-								[(#RANG). ]<strong>[(#TITRE|trim|sinon{<:info_sans_titre:>})]</strong>
-							</a>
-						</td>
-						<td class='id'>#ID_ARTICLE</td>
-		</BOUCLE_article>
-		</B_article>
-						<td class='titre principale'>
-							<:article_accueil:aucun_article_accueil:>
-						</td>
-		<//B_article>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
+	#INCLURE{fond=inclure/inc-article_accueil,
+		id_article_accueil,
+		_statuts,
+		where=#ENV**{_where}
+	}
 
 [(#ENV{editable})
 		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
