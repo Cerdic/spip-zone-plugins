@@ -167,7 +167,7 @@ function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $deplacer = tr
 		}
 	}
 
-	if ($fichier_unique == true) {
+	if (!empty($infos) and $fichier_unique == true) {
 		$infos = $infos[0];
 	}
 	return $infos;
