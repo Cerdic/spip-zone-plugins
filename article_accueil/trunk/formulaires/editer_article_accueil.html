@@ -1,7 +1,7 @@
 <div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_rubrique}" id="formulaire_#FORM-#ENV{id_rubrique}">
 
 	<div class="article_accueil-entete">
-		<:article_accueil:rubrique_article_en_accueil:>
+		[(#ENV*{_titre, <:article_accueil:rubrique_article_en_accueil:>})]
 		[(#ENV{editable})
 		<span class="toggle_box_link" style="display:none;">
 			&#91;

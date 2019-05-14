@@ -21,11 +21,12 @@ function formulaires_editer_article_accueil_charger($id_rubrique) {
 
 	$valeurs = array();
 	
-	// On passe au formulaire l'id de la rubrique, la liste des statuts d'article autorisés
+	// On passe au formulaire l'id de la rubrique, le titre, la liste des statuts d'article autorisés
 	// et une condition where qui est initialisée à '' par défaut.
-	// Ainsi, il est possible à un plugin de modifier la liste des statuts et le where pour
+	// Ainsi, il est possible à un plugin de modifier le titre du bloc, la liste des statuts et le where pour
 	// influer sur le sélecteur d'articles.
 	$valeurs['id_rubrique'] = $id_rubrique;
+	$valeurs['_titre'] = '';
 	$valeurs['_statuts'] = array('prepa', 'prop', 'publie');
 	$valeurs['_where'] = '';
 
