@@ -227,6 +227,8 @@ class ConvertisseurImporter extends Command {
 							}
 						}
 						
+						$hierarchie = preg_replace(",`--\*\*--`,","/", $hierarchie);
+						
 						$id_rubrique = intval($id_parent_rubrique);
 						
 						if($descriptif_rubrique OR $texte_rubrique){
