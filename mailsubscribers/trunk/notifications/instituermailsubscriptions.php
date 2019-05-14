@@ -92,12 +92,13 @@ function notifications_instituermailsubscriptions_dist($quoi, $id_mailsubscriber
 		);
 
 		// precaution : enlever les adresses en "@example.org"
+		if (!is_array($destinataires)) 
+			$destinataires = array($destinataires);
 		foreach ($destinataires as $k => $email) {
 			if (preg_match(",@example.org$,i", $email)) {
 				unset($destinataires[$k]);
 			}
 		}
-
 		if (count($destinataires)) {
 			$envoyer_mail = charger_fonction('envoyer_mail', 'inc'); // pour nettoyer_titre_email
 
