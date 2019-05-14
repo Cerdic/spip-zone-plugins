@@ -12,7 +12,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
- * Crée des liaisons entre les objets et les définitions.
+ * Crée des liaisons entre les objets et les définitions (à faire)
+ * Met à jour le cache des définitions
  *
  * Pour chaque objet édité, regarde si les contenus possèdent des définitions
  * que l'on connaît et dans ce cas crée une liaison entre l'objet et la définition.
