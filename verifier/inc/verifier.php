@@ -36,10 +36,6 @@ function inc_verifier_dist($valeur, $type, $options = null, &$valeur_normalisee 
 	if (is_null($valeur) or (is_string($valeur) and $valeur == '')) {
 		return '';
 	}
-	// Si c'est une date avec horaire c'est un tableau
-	if (is_array($valeur) and isset($valeur['date']) and $valeur['date'] == '') {
-		return '';
-	}
 
 	// On cherche si une fonction correspondant au type existe
 	if ($verifier = charger_fonction($type, 'verifier', true)) {
