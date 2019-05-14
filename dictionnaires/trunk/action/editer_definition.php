@@ -31,11 +31,11 @@ function action_editer_definition_dist($arg=null) {
 
 	// si id_definition n'est pas un nombre, c'est une creation
 	if (!$id_definition = intval($arg)) {
-		$id_definition = insert_definition();
+		$id_definition = definition_inserer();
 	}
 
 	// Enregistre l'envoi dans la BD
-	if ($id_definition > 0) $err = definition_set($id_definition);
+	if ($id_definition > 0) $err = definition_modifier($id_definition);
 
 	return array($id_definition, $err);
 }
@@ -49,7 +49,7 @@ function action_editer_definition_dist($arg=null) {
  * @return int
  *     Identifiant de la nouvelle définition
  */
-function insert_definition($champs=array()) {
+function definition_inserer($champs=array()) {
 	$lang = "";
 	// La langue a la creation : si les liens de traduction sont autorises
 	// dans les definitions, on essaie avec la langue de l'auteur
@@ -110,7 +110,7 @@ function insert_definition($champs=array()) {
  *     Null si aucun champ à modifier,
  *     Chaîne contenant un texte d'erreur sinon.
  */
-function definition_set($id_definition, $set=null, $purger_cache=true) {
+function definition_modifier($id_definition, $set=null, $purger_cache=true) {
 	$err = '';
 
 	include_spip('base/objets');
@@ -139,7 +139,7 @@ function definition_set($id_definition, $set=null, $purger_cache=true) {
 	}
 
 	$c = collecter_requests(array('date', 'statut', 'id_dictionnaire'),array(),$set);
-	$err = instituer_definition($id_definition, $c, $purger_cache);
+	$err = definition_instituer($id_definition, $c, $purger_cache);
 	return $err;
 }
 
@@ -159,7 +159,7 @@ function definition_set($id_definition, $set=null, $purger_cache=true) {
  * @return null|string
  *     Null si aucun champ à modifier, chaîne vide sinon.
  */
-function instituer_definition($id_definition, $c, $purger_cache=true){
+function definition_instituer($id_definition, $c, $purger_cache=true){
 	include_spip('inc/autoriser');
 	include_spip('inc/rubriques');
 	include_spip('inc/modifier');

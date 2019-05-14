@@ -79,10 +79,10 @@ function dictionnaires_migrer_acronymes() {
 		if ($acronymes and is_array($acronymes)){
 			// On commence par créer un dictionnaire pour l'importation
 			include_spip('action/editer_dictionnaire');
-			if ($id_dictionnaire = insert_dictionnaire()){
+			if ($id_dictionnaire = dictionnaire_inserer()){
 				// On lui met des champs par défaut
 				autoriser_exception('modifier', 'dictionnaire', $id_dictionnaire);
-				dictionnaire_set($id_dictionnaire, array(
+				dictionnaire_modifier($id_dictionnaire, array(
 					'titre' => _T('dictionnaire:importer_acronymes_titre'),
 					'statut' => 'actif',
 					'descriptif' => _T('dictionnaire:importer_acronymes_descriptif'),
@@ -108,12 +108,12 @@ function dictionnaires_migrer_acronymes() {
 						
 						// On crée la définition dans la base SANS calculer le cache
 						include_spip('action/editer_definition');
-						if ($id_definition = insert_definition()){
+						if ($id_definition = definition_inserer()){
 							// 0 et pas $id_dictionnaire 
 							// car insert_definition a utilisé les valeurs par défaut
 							autoriser_exception('publierdans', 'dictionnaire', 0);
 							autoriser_exception('modifier', 'definition', $id_definition);
-							definition_set($id_definition, $definition, false);
+							definition_modifier($id_definition, $definition, false);
 							autoriser_exception('modifier', 'definition', $id_definition, false);
 							autoriser_exception('publierdans', 'dictionnaire', 0, false);
 						}

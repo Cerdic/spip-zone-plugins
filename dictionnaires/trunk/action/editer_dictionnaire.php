@@ -31,11 +31,11 @@ function action_editer_dictionnaire_dist($arg=null) {
 
 	// si id_dictionnaire n'est pas un nombre, c'est une creation
 	if (!$id_dictionnaire = intval($arg)) {
-		$id_dictionnaire = insert_dictionnaire();
+		$id_dictionnaire = dictionnaire_inserer();
 	}
 
 	// Enregistre l'envoi dans la BD
-	if ($id_dictionnaire > 0) $err = dictionnaire_set($id_dictionnaire);
+	if ($id_dictionnaire > 0) $err = dictionnaire_modifier($id_dictionnaire);
 
 	return array($id_dictionnaire,$err);
 }
@@ -48,7 +48,7 @@ function action_editer_dictionnaire_dist($arg=null) {
  * @return int
  *     Identifiant du nouveau dictionnaire
  */
-function insert_dictionnaire($champs=array()) {
+function dictionnaire_inserer($champs=array()) {
 	// Envoyer aux plugins avant insertion
 	$champs = pipeline('pre_insertion',
 		array(
@@ -88,7 +88,7 @@ function insert_dictionnaire($champs=array()) {
  *     Null si aucun champ à modifier,
  *     Chaîne contenant un texte d'erreur sinon.
  */
-function dictionnaire_set($id_dictionnaire, $set=null) {
+function dictionnaire_modifier($id_dictionnaire, $set=null) {
 	$err = '';
 
 	include_spip('base/objets');
@@ -115,7 +115,7 @@ function dictionnaire_set($id_dictionnaire, $set=null) {
 	}
 
 	$c = collecter_requests(array('statut'),array(),$set);
-	$err = instituer_dictionnaire($id_dictionnaire, $c);
+	$err = dictionnaire_instituer($id_dictionnaire, $c);
 	return $err;
 }
 
@@ -133,7 +133,7 @@ function dictionnaire_set($id_dictionnaire, $set=null) {
  * @return null|string
  *     Null si aucun champ à modifier, chaîne vide sinon.
  */
-function instituer_dictionnaire($id_dictionnaire, $c){
+function dictionnaire_instituer($id_dictionnaire, $c){
 	include_spip('inc/autoriser');
 	include_spip('base/objets');
 	$desc = lister_tables_objets_sql('spip_dictionnaires');
