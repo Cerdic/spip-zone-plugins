@@ -40,7 +40,7 @@ function exporter_article($f,$dest){
 	
 	$ariane = sql_allfetsel("titre","spip_rubriques","id_rubrique in($ariane)");
 	foreach($ariane as $a)
-		$hierarchie[] = str_replace("/","-",$a['titre']) ; // on ne veut pas de / car creer_rubrique_nommee pourrait se tromper à l'import.
+		$hierarchie[] = str_replace("/","\/",$a['titre']) ; // Echapper les / car creer_rubrique_nommee pourrait se tromper à l'import.
 	
 	$hierarchie = implode("@@", $hierarchie);
 	
@@ -146,7 +146,7 @@ function exporter_article($f,$dest){
 				"auteurs_m" => $auteurs_m,
 				"docs_m" => $docs_m,
 				"nom_fichier" => $nom_fichier,
-		) ;
+		);
 	}
 	else{
 		return false ;
