@@ -15,6 +15,7 @@
 			<th class="reference" scope="col">[(#TRI{reference,<:objets_location:champ_reference_label:>,ajax})]</th>
 			<th class="date_location" scope="col">[(#TRI{date,<:objets_location:champ_date_location_label:>,ajax})]</th>
 			<th class="objet_titre" scope="col"><:objets_location:champ_id_location_objet_label:></th>
+			<th class="auteur" scope="col"><:par_auteur:></th>
 			<th class="id" scope="col">[(#TRI{id_objets_location,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
@@ -42,6 +43,11 @@
 				[(#CHEMIN{prive/inclure/location_lien_paiement.html}|oui)
 					<INCLURE{fond=prive/inclure/location_lien_paiement,id_objets_location,prix=#PRIX*} />
 				]
+			</td>
+			<td class="auteur">
+				<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+				<a href="#URL_ECRIRE{auteur, id_auteur=#ID_AUTEUR}">#NOM</a>[ - <a href="mailto:(#EMAIL)">#EMAIL</a>]
+				</BOUCLE_auteur>
 			</td>
 			<td class="id">[(#AUTORISER{modifier,objets_location,#ID_OBJETS_LOCATION}|?{
 				<a href="[(#URL_ECRIRE{objets_location_edit,id_objets_location=#ID_OBJETS_LOCATION})]">#ID_OBJETS_LOCATION</a>,

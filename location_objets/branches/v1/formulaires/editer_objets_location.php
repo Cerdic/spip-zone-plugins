@@ -257,6 +257,7 @@ function formulaires_editer_objets_location_charger_dist(
 	$valeurs['mode_calcul_prix'] = $mode_calcul_prix;
 	$valeurs['_hidden'] .= '<input type="hidden" name="mode_calcul_prix" value="' . $valeurs['mode_calcul_prix'] . '"/>';
 
+	// Les service extras.
 	if (isset($valeurs['location_extras_objets'])) {
 		$objets_extras = $valeurs['location_extras_objets'];
 		if (!is_array($objets_extras)) {
