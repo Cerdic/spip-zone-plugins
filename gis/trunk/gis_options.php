@@ -17,10 +17,6 @@ $gis_layers = array (
 		'nom' => 'OpenStreetMap',
 		'layer' => 'L.tileLayer.provider("OpenStreetMap")'
 	),
-	'openstreetmap_blackandwhite' => array(
-		'nom' => 'OpenStreetMap Black and White',
-		'layer' => 'L.tileLayer.provider("OpenStreetMap.BlackAndWhite")'
-	),
 	'openstreetmap_de' => array(
 		'nom' => 'OpenStreetMap DE',
 		'layer' => 'L.tileLayer.provider("OpenStreetMap.DE")'
@@ -40,10 +36,6 @@ $gis_layers = array (
 	'openmapsurfer' => array(
 		'nom' => 'OpenMapSurfer',
 		'layer' => 'L.tileLayer.provider("OpenMapSurfer")'
-	),
-	'openmapsurfer_grayscale' => array(
-		'nom' => 'OpenMapSurfer Grayscale',
-		'layer' => 'L.tileLayer.provider("OpenMapSurfer.Grayscale")'
 	),
 	'hydda' => array(
 		'nom' => 'Hydda',
