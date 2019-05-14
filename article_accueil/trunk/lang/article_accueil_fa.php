@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_article_accueil' => 'هيچ مقاله ',
 
 	// L
-	'label_id_article_accueil' => 'مقاله پذيرش',
+	'label_id_article_accueil' => 'مقاله پذيرش', # MODIF
 
 	// R
 	'rubrique_article_en_accueil' => 'مقاله پذيرش :'
