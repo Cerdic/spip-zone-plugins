@@ -10,7 +10,7 @@
 #FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 <div class="nettoyeur"></div>
 
-<INCLURE{fond=prive/objets/liste/livres, env, ajax, statut=#ENV{statut,publie}, sinon=<:livre:info_aucun_livre:>}>
+<INCLURE{fond=prive/objets/liste/livres, env, ajax, statut=#ENV{statut,prepa}, sinon=<:livre:info_aucun_livre:>}>
 
 [(#AUTORISER{creer,livre})
 	[(#URL_ECRIRE{livre_edit,new=oui}|icone_verticale{<:livre:icone_creer_livre:>,livre,new,right})]
