@@ -48,7 +48,7 @@ function dictionnaires_lister_definitions($purger=false){
 	static $definitions_actives;
 	
 	// Si ça contient déjà quelque chose à ce stade, c'est avec le static donc on ne fait rien d'autre
-	if (!$purger and $definitions_actives and is_array($definitions_actives)){
+	if (!$purger and is_array($definitions_actives)){
 		return $definitions_actives;
 	}
 	else{
@@ -59,11 +59,10 @@ function dictionnaires_lister_definitions($purger=false){
 	if (
 		$purger == true
 		or !lire_fichier($fichier_cache, $definitions_actives)
-		or !($definitions_actives = unserialize($definitions_actives))
-		or !is_array($definitions_actives)
+		or !(is_array($definitions_actives = unserialize($definitions_actives)))
 	){
 		$definitions_actives = array();
-		
+
 		// On récupère tous les dictionnaires actifs
 		$dicos_actifs = sql_allfetsel('id_dictionnaire', 'spip_dictionnaires', 'statut = '. sql_quote('actif'));
 		if ($dicos_actifs and is_array($dicos_actifs)){
@@ -140,7 +139,7 @@ function dictionnaires_lister_definitions($purger=false){
 		}
 		
 		// Si on a des définitions à mettre en cache, on les écrit
-		if ($definitions_actives and is_writeable(_DIR_CACHE)){
+		if (is_writeable(_DIR_CACHE)){
 			ecrire_fichier($fichier_cache, serialize($definitions_actives));
 		}
 	}

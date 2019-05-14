@@ -30,6 +30,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return array        Données du pipeline
 **/
 function dictionnaires_post_edition($flux) {
+	if($flux['args']['action'] == 'instituer') {
+		$objet = objet_type($flux['args']['table']);
+		if (($objet === 'dictionnaire') or ($objet === 'definition')) {
+			include_spip('inc/dictionnaires');
+			dictionnaires_lister_definitions(true);
+		}
+	}
+	
 	// TOUT CELA EST A FAIRE
 	return $flux;
 
