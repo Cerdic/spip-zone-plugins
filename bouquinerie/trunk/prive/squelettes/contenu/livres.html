@@ -1,9 +1,9 @@
 <h1 class="grostitre"><:livre:titre_livres:></h1>
 <div class='onglets_simple clearfix'>
 	<ul>
-		<li class='blabla'>[(#SELF|parametre_url{statut,'prepa'}|lien_ou_expose{<:texte_statut_en_cours_redaction:>, #ENV{statut,prepa}|=={prepa}, ajax})]</li>
-		<li class=''>[(#SELF|parametre_url{statut,'publie'}|lien_ou_expose{<:livre:texte_statut_parus:>, #ENV{statut}|=={publie}, ajax})]</li>
-		<li class=''>[(#SELF|parametre_url{statut,'refuse'}|lien_ou_expose{<:livre:texte_statut_epuises:>, #ENV{statut}|=={refuse}, ajax})]</li>
+		<li>[(#SELF|parametre_url{statut,'prepa'}|lien_ou_expose{<:texte_statut_en_cours_redaction:>, #ENV{statut,prepa}|=={prepa}, ajax})]</li>
+		<li>[(#SELF|parametre_url{statut,'publie'}|lien_ou_expose{<:livre:texte_statut_parus:>, #ENV{statut}|=={publie}, ajax})]</li>
+		<li>[(#SELF|parametre_url{statut,'refuse'}|lien_ou_expose{<:livre:texte_statut_epuises:>, #ENV{statut}|=={refuse}, ajax})]</li>
 	</ul>
 </div>
 
