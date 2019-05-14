@@ -10,7 +10,7 @@
 ]
 
 <section id="article#ID_ARTICLE" class="[(#REMPLIR_VERTICAL|=={oui}|oui) remplir_vertical ][(#REMPLIR_VERTICAL|=={img}|oui) proportions_image ][(#FOND_COULEUR|oui)[avec_fond  avec_fond_(#FOND_COULEUR|couleur_extreme|choixsiegal{'ffffff','clair', 'fonce'})]][ (#FOND_BAS|oui)avec_fond_bas][ (#FOND_HAUT|oui)avec_fond_haut]"[ style="background-color:#(#FOND_COULEUR);"]>
-	[<div class="fonds_img_haut">(#IMG_HAUT|image_responsive{0/480/800/1280/1920, #GET{lazy}, 0, (max-width: 480px)/(min-width:481px) and (max-width: 800px)/(min-width:801px) and (max-width:1280px)/, 71%x0/83%x0/0x0/0x0})</div>]
+	[<div class="fonds_img_haut">(#IMG_HAUT|image_responsive{0/480/960/1440/1920, #GET{lazy}, 0, (max-width: 480px)/(min-width:481px) and (max-width: 960px)/(min-width:961px) and (max-width:1440px)/, 71%x0/83%x0/0x0/0x0})</div>]
 	<div class="interieur"[(#REMPLIR_VERTICAL|=={img}|non)[(#IMG_FOND|match{svg}|non)[(#IMG_FOND|background_responsive{0/480/800/1280/1920, #GET{lazy}})]]]>
 		[(#IMG_FOND|match{svg$}|oui)
 			<div class="fonds_svg spip_vivus" data-largeur="[(#IMG_FOND|fonds_largeur_svg)]" data-hauteur="[(#IMG_FOND|fonds_hauteur_svg)]">
@@ -21,7 +21,7 @@
 				</div>
 			</div>		
 		]
-		[<div class="fonds_fond_haut">(#FOND_HAUT|image_responsive{0/480/800/1280/1920, #GET{lazy}, 0, (max-width: 480px)/(min-width:481px) and (max-width: 800px)/(min-width:801px) and (max-width:1280px)/, 71%x0/83%x0/0x0/0x0})</div>]
+		[<div class="fonds_fond_haut">(#FOND_HAUT|image_responsive{0/480/960/1440/1920, #GET{lazy}, 0, (max-width: 480px)/(min-width:481px) and (max-width: 960px)/(min-width:961px) and (max-width:1440px)/, 71%x0/83%x0/0x0/0x0})</div>]
 		[(#IMG_HAUT|sinon{#FOND_HAUT}|oui)
 			[<div class="fonds_credit_haut"><span style="background-color: [(#IMG_HAUT|sinon{#FOND_HAUT}|couleur_extraire{10,19}|couleur_rgba{0.5})];color: [#(#IMG_HAUT|sinon{#FOND_HAUT}|couleur_extraire{10,19}|couleur_extreme|couleur_inverser);]">(#CREDIT_HAUT|propre|ptobr)</span></div>]
 		]
@@ -48,7 +48,7 @@
 		[(#IMG_BAS|sinon{#FOND_BAS}|oui)
 			[<div class="fonds_credit_bas"><span style="background-color: [(#IMG_BAS|sinon{#FOND_BAS}|couleur_extraire{10,1}|couleur_rgba{0.7})];[color: #(#IMG_BAS|couleur_extraire{10,1}|sinon{#FOND_BAS}|couleur_extreme|couleur_inverser);]">(#CREDIT_BAS|propre|ptobr)</span></div>]
 		]
-		[<div class="fonds_fond_bas">(#FOND_BAS|image_responsive{0/480/800/1280/1920, #GET{lazy}, 0, (max-width: 480px)/(min-width:481px) and (max-width: 800px)/(min-width:801px) and (max-width:1280px)/, 71%x0/83%x0/0x0/0x0})</div>]
+		[<div class="fonds_fond_bas">(#FOND_BAS|image_responsive{0/480/960/1440/1920, #GET{lazy}, 0, (max-width: 480px)/(min-width:481px) and (max-width: 960px)/(min-width:961px) and (max-width:1440px)/, 71%x0/83%x0/0x0/0x0})</div>]
 		
 		[(#REMPLIR_VERTICAL|=={img}|oui)
 			[<div class="image_fond">(#IMG_FOND|image_responsive{0/480/740/1024/1920, #GET{lazy}, 0, (max-width: 480px)/(min-width:481px) and (max-width: 740px)/(min-width:741px) and (max-width:1024px)/, 0x0/0x0/83%x0/0x0})</div>]
@@ -56,7 +56,7 @@
 		
 	</div>
 
-	[<div class="fonds_img_bas">(#IMG_BAS|image_responsive{0/480/800/1280/1920, #GET{lazy}, 0, (max-width: 480px)/(min-width:481px) and (max-width: 800px)/(min-width:801px) and (max-width:1280px)/, 71%x0/83%x0/0x0/0x0})</div>]
+	[<div class="fonds_img_bas">(#IMG_BAS|image_responsive{0/480/960/1440/1920, #GET{lazy}, 0, (max-width: 480px)/(min-width:481px) and (max-width: 960px)/(min-width:961px) and (max-width:1440px)/, 71%x0/83%x0/0x0/0x0})</div>]
 </section>
 [(#ENV{numero}|non)
 </article>
