@@ -74,8 +74,9 @@ html, body, .hentry, #skrollr-body, .remplir_vertical,  .remplir_vertical .inter
 	display: block;
 	position: relative;
 }
-.avec_fond div.fonds_fond_haut {
-	top: 0;
+.avec_fond div.fonds_fond_haut img {
+ 	position: absolute;
+ 	bottom: 0;
 }
 .avec_fond div.fonds_fond_bas {
 	bottom: 0;
