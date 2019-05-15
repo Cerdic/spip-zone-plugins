@@ -15,7 +15,7 @@ if (file_exists($cke_adapter)) {
 	// on prépare le terrain pour ckeditor 4.x (les premiers paquetage ne contiennent pas l'adapter jquery
 	define('_CKE_JQUERY', find_in_path('adapters/jquery.js')) ;
 }
-define('_CKE_HTML2SPIP_VERSION', 'html2spip-0.6') ;
+define('_CKE_HTML2SPIP_VERSION', 'html2spip-0.7') ;
 define('_CKE_PATH', dirname(_CKE_JS)) ;
 define('_CKE_LARGE_DEF', 490 ) ;
 define('_CKE_ETROIT_DEF', 460 ) ;

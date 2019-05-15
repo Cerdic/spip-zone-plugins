@@ -402,7 +402,7 @@ function ckeditor_html2spip($texte) {
 		 */
 		$search_regex = sprintf("#<%s[^>]*>#s", PROTECTED_SPIP_TAGS);
 		$texte = preg_replace_callback($search_regex,
-						   ckeditor_wrap_callback,
+						   'ckeditor_wrap_callback',
 						   $texte);
 
 		/*
@@ -428,7 +428,7 @@ function ckeditor_html2spip($texte) {
 		 */
 		$search_regex = '|<script type="ckeditor_wrap">([^>]*)</script>|si';
 		$texte = preg_replace_callback($search_regex,
-							   ckeditor_unwrap_callback,
+							   'ckeditor_unwrap_callback',
 						   $texte);
 	}
 
