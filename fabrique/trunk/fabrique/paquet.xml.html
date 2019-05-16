@@ -17,7 +17,12 @@
 	[<!-- (#ENV{paquet/slogan}) -->]
 [
 	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs -->(#ENV{paquet/exemples}|oui)]
-	<auteur[ lien='(#ENV{paquet/auteur_lien})']>#ENV{paquet/auteur}</auteur>
+	<auteur[ lien='(#ENV{paquet/auteur_lien})']>#ENV{paquet/auteur}</auteur>[
+	<!-- cette balise peut être présente pour indiquer d’autres crédits -->
+	<!-- <credit lien="https://example.com/icon">Logo by @example</credit> -->(#ENV{paquet/exemples}|oui)][(#REM)
+][
+	<credit[ lien="(#ENV{paquet/credits/logo/url})"]>Logo : [(#ENV{paquet/credits/logo/texte}|sinon{[(#ENV{paquet/credits/logo/url}|parse_url|table_valeur{host})]})]</credit>[(#REM)
+](#ENV{paquet/credits/logo/texte}|ou{#ENV{paquet/credits/logo/url}}|oui)]
 
 	<licence>#ENV{paquet/licence}</licence>[(#REM)
 ]<BOUCLE_si_exemples(CONDITION){si #EXEMPLES}>

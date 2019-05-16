@@ -11,15 +11,24 @@
 	[(#SAISIE{input, paquet/nom, label=<:fabrique:label_nom:>, obligatoire=oui})]
 	[(#SAISIE{input, paquet/slogan, label=<:fabrique:label_slogan:>})]
 	[(#SAISIE{textarea, paquet/description, label=<:fabrique:label_description:>, rows=4})]
-	[(#REM) valeur vide pour eviter une notice car sinon, la valeur recue est un tableau ]
-	[(#SAISIE{input, paquet/logo/0, label=<:fabrique:label_logo:>, type=file, valeur=''})]
+	<li class="fieldset">
+		<fieldset>
+			<legend><:fabrique:label_logo:></legend>
+			<div class="editer-groupe">
+				[(#REM) valeur vide pour eviter une notice car sinon, la valeur recue est un tableau ]
+				[(#SAISIE{input, paquet/logo/0, label=<:fabrique:label_logo:>, type=file, valeur=''})]
+				[(#SAISIE{input, paquet/credits/logo/texte, label=<:fabrique:label_credits_logo_texte:>})]
+				[(#SAISIE{input, paquet/credits/logo/url, label=<:fabrique:label_credits_logo_url:>})]
+			</div>
+			[(#ENV{paquet/logo/0/fichier}|oui)
+			<div class='center'>
+				[(#ENV{paquet/logo/0/fichier}|fabrique_miniature_image{128})]
+				<input type='submit' name='f_action\[supprimer_logo\]\[paquet/logo/0\]' class='submit del right action' value='<:fabrique:bouton_supprimer_logo:>' />
+			</div>
+			]
+		</fieldset>
+	</li>
 	</div>
-	[(#ENV{paquet/logo/0/fichier}|oui)
-		<div class='center'>
-		[(#ENV{paquet/logo/0/fichier}|fabrique_miniature_image{128})]
-			<input type='submit' name='f_action\[supprimer_logo\]\[paquet/logo/0\]' class='submit del right action' value='<:fabrique:bouton_supprimer_logo:>' />
-		</div>
-	]
 </div>
 
 <h3><a href="#paquet"><:fabrique:legend_paquet:></a></h3>
