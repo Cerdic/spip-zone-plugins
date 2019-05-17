@@ -1,6 +1,6 @@
 <p class='boutons'>
     <span class='image_loading'></span>
-    [(#SET{label_valider, #ENV*{_saisies/options/texte_submit, #ENV*{saisies_texte_submit, <:bouton_enregistrer:>}}})]
+    [(#SET{label_valider, #ENV*{_saisies/options/texte_submit, #ENV*{saisies_texte_submit, <:bouton_valider:>}}})]
 		[(#ENV{_etape}|et{#ENV{_etape}|!={#ENV{_etapes}}})
 			[(#SET{label_valider, #ENV*{_saisies/options/etapes_suivant, <:bouton_suivant:>}})]
 		]
