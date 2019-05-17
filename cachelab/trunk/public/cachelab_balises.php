@@ -105,22 +105,6 @@ function balise_CACHE($p) {
 			// il peut y avoir déjà eu, ou pas, du code
 			$concat = (trim($code) ? '.' : '');
 
-// ancienne syntaxe obsolète
-			if (strpos($pa, 'duree-')===0) {
-				$methode = substr($pa, 6);
-				$ajout = "'<'.'" . '?php header("X-Spip-Methode-Duree-Cache: '.$methode.'"); ?' . "'.'>'";
-				$code .= $concat.$ajout;
-				spip_log("#CACHE($pa) sur $sourcefile avec méthode de calcul de la durée du cache : $methode", 'cachelab_OBSOLETE');
-			}
-
-			if (strpos($pa, 'filtre-')===0) {
-				$methode = substr($pa, 7);
-				$ajout = "'<'.'" . '?php header("X-Spip-Filtre-Cache: '.$methode.'"); ?' . "'.'>'";
-				$code .= $concat.$ajout;
-				spip_log("#CACHE($pa) sur $sourcefile avec filtre sur le cache complet : $methode", 'cachelab_OBSOLETE');
-			}
-// fin des syntaxes obsolètes
-
 			list ($func, $args) = split_first_arg($pa);
 			switch ($func) {
 			// TODO : également traiter ici les morceaux du core traités plus haut
@@ -286,6 +270,7 @@ function cachelab_filtre_session(&$cache, $totarg) {
 	switch ($func) {
 		case 'assert_echo':
 			$avec_echo = true;
+			// nobreak;
 		case 'assert':
 			switch ($what) {
 				case 'oui_login':

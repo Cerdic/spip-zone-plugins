@@ -214,3 +214,4 @@ static $var_cache;
 			 .'</h6><small>'.$infos.'</small></div>';
 	}
 }
+

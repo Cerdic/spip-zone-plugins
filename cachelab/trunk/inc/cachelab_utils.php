@@ -15,6 +15,15 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 // retour[0] (string) : 1er élément de la liste
 // retour[1] (string ou array selon $string_wanted) : reste de la liste
 //
+/**
+ * @param string $l             liste de termes
+ * @param string $cdr           suite par défaut
+ * @param bool $string_wanted   cdr renvoyé comme chaine ou comme tableau
+ * @return array                renvoie un tableau [ car, cdr ]
+ *      où car est le premier élément de la liste
+ *      et cdr est le reste de la liste, ou le cdr reçu en argument s'il n'y a pas de reste
+ *
+ */
 function split_first_arg($l, $cdr = '', $string_wanted = true) {
 	$l = preg_replace('/\s+/', ' ', trim($l), -1, $n);
 	$lparts = explode(' ', $l);
@@ -39,18 +48,56 @@ function split_first_arg($l, $cdr = '', $string_wanted = true) {
 	return array ($car, $cdr);
 }
 
-function split_f_arg($f, $arg = '') {
-	spip_log("split_f_arg($f, $arg", 'cachelab_OBSOLETE');
-	return split_first_arg($f, $arg);
-}
-
+/**
+ * @param string $chemin
+ * @param string $sep
+ * @return string   remplace les / par des _
+ */
 function slug_chemin($chemin, $sep = '_') {
 	return str_replace('/', $sep, $chemin);
 }
 
 if (!function_exists('plugin_est_actif')) {
+	/**
+	 * @param $prefixe
+	 * @return bool le plugin de ce préfixe est il actif ?
+	 */
 	function plugin_est_actif($prefixe) {
 		$f = chercher_filtre('info_plugin');
 		return $f($prefixe, 'est_actif');
 	}
+}
+
+/**
+ * @param string $cond              signal d'invalidation
+ *       typiquement de la forme : "id='id_document/1234'"
+ * @param string $objet_attendu     objet attendu
+ * @param string &$objet            objet effectivement signalé
+ * @return int|null
+ *
+ *
+ * renvoie l'id_objet ciblé par le signal
+ */
+function decode_invalideur($cond, $objet_attendu = '', &$objet='') {
+	if (!preg_match(',["\']([a-z_]+)[/"\'](.*)[/"\'],', $cond, $r)) {
+		spip_log("Signal non conforme pour decode_signal_invalideur ($cond, $objet_attendu)", 'cachelab_erreur');
+		return null;
+	}
+	// ignorer [0] = match total
+	list (, $objet, $id_objet) = $r;
+	if ($objet_attendu and ($objet!=$objet_attendu)) {
+		spip_log(
+			"cachelab_suivre_invalideur_auteur($cond,) ne reçoit pas un '$objet_attendu' mais un '$objet'",
+			'cachelab_erreur'
+		);
+		return null;
+	};
+	if (!$id_objet) {
+		spip_log(
+			"cachelab_suivre_invalideur_auteur($cond,) reçoit un $objet nul",
+			'cachelab_erreur'
+		);
+		return null;
+	}
+	return $id_objet;
 }
