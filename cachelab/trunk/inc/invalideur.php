@@ -92,9 +92,9 @@ function taille_du_cache() {
 	$time = isset($GLOBALS['meta']['cache_mark']) ? $GLOBALS['meta']['cache_mark'] : 0;
 	for ($i=0; $i < 256; $i++) {
 		$dir = _DIR_CACHE.sprintf('%02s', dechex($i));
-		if (@is_dir($dir) AND is_readable($dir) AND $d = @opendir($dir)) {
+		if (@is_dir($dir) and is_readable($dir) and $d = @opendir($dir)) {
 			while (($f = readdir($d)) !== false) {
-				if (preg_match(',^[[0-9a-f]+\.cache$,S', $f) AND $a = stat("$dir/$f")) {
+				if (preg_match(',^[[0-9a-f]+\.cache$,S', $f) and $a = stat("$dir/$f")) {
 					$n++;
 					if ($a['mtime'] >= $time) {
 						if ($a['blocks'] > 0) {
@@ -134,7 +134,10 @@ function taille_du_cache() {
  *     Nombre de fichiers supprimés
  **/
 function purger_repertoire($dir, $options = array()) {
-	$handle = @opendir($dir);
+	if (!is_dir($dir) or !is_readable($dir)) {
+		return;
+	}
+	$handle = opendir($dir);
 	if (!$handle) {
 		return;
 	}
@@ -157,8 +160,8 @@ function purger_repertoire($dir, $options = array()) {
 		} else {
 			if (is_dir($chemin)) {
 				$opts = $options;
-				if (isset($otpions['limit'])) {
-					$otps['limit'] = $otpions['limit'] - $total;
+				if (isset($options['limit'])) {
+					$opts ['limit'] = $options['limit'] - $total;
 				}
 				$total += purger_repertoire($chemin, $opts);
 				if (isset($options['subdir']) && $options['subdir']) {
@@ -195,9 +198,10 @@ function appliquer_quota_cache() {
 	$dir = sous_repertoire(_DIR_CACHE, $l);
 	list($nombre, $taille) = nombre_de_fichiers_repertoire($dir);
 	$total_cache = $taille * $nombre;
-	if ($total_cache)	// Ajout / core car c'est vide avec la memoization
+	if ($total_cache) {	// Ajout / core car c'est vide avec la memoization
 		spip_log("Taille du CACHE estimee ($l): "
-			. (intval(16 * $total_cache / (1024 * 1024 / 10)) / 10) . " Mo", "invalideur");
+			. (intval(16 * $total_cache / (1024 * 1024 / 10)) / 10) . ' Mo', 'invalideur');
+	}
 
 	// Nombre max de fichiers a supprimer
 	if ($GLOBALS['quota_cache'] > 0
@@ -206,16 +210,17 @@ function appliquer_quota_cache() {
 		$trop = $total_cache - ($GLOBALS['quota_cache'] / 16) * 1024 * 1024;
 		$trop = 3 * intval($trop / $taille);
 		if ($trop > 0) {
-			$n = purger_repertoire($dir,
+			$n = purger_repertoire(
+				$dir,
 				array(
 					'atime' => time() - _AGE_CACHE_ATIME,
 					'limit' => $trop,
 					'subdir' => true // supprimer les vieux sous repertoire de session (avant [15851])
 				)
 			);
-			spip_log("$dir : $n/$trop caches supprimes [taille moyenne $taille]", "invalideur");
+			spip_log("$dir : $n/$trop caches supprimes [taille moyenne $taille]", 'invalideur');
 			$total_cache = intval(max(0, (16 * $total_cache) - $n * $taille) / (1024 * 1024) * 10) / 10;
-			spip_log("cache restant estime : $total_cache Mo, ratio " . $total_cache / $GLOBALS['quota_cache'], "invalideur");
+			spip_log("cache restant estime : $total_cache Mo, ratio " . $total_cache / $GLOBALS['quota_cache'], 'invalideur');
 
 			// redemander la main pour eviter que le cache ne gonfle trop
 			// mais pas si on ne peut pas purger car les fichiers sont trops recents
@@ -224,7 +229,7 @@ function appliquer_quota_cache() {
 				and $n * 50 > $trop
 			) {
 				$encore = true;
-				spip_log("Il faut encore purger", "invalideur");
+				spip_log('Il faut encore purger', 'invalideur');
 			}
 		}
 	}
@@ -241,8 +246,9 @@ function appliquer_quota_cache() {
 function retire_cache($cache) {
 
 	if (preg_match(
-		"|^([0-9a-f]/)?([0-9]+/)?[0-9a-f]+\.cache(\.gz)?$|i",
-		$cache)) {
+		'|^([0-9a-f]/)?([0-9]+/)?[0-9a-f]+\.cache(\.gz)?$|i',
+		$cache
+	)) {
 		// supprimer le fichier (de facon propre)
 		supprimer_fichier(_DIR_CACHE . $cache);
 	} else {
@@ -257,8 +263,9 @@ function retire_cache($cache) {
 ## mais ici elles ne font plus rien
 ##
 
-if  (!defined('LOG_INVALIDATION_CORE'))
-	define ('LOG_INVALIDATION_CORE', false);
+if (!defined('LOG_INVALIDATION_CORE')) {
+	define('LOG_INVALIDATION_CORE', false);
+}
 
 // Supprimer les caches marques "x"
 // A priori dans cette version la fonction ne sera pas appelee, car
@@ -267,11 +274,13 @@ if  (!defined('LOG_INVALIDATION_CORE'))
 function retire_caches($chemin = '') {
 	if (isset($GLOBALS['meta']['invalider_caches'])) {
 		effacer_meta('invalider_caches');
-		if  (LOG_INVALIDATION_CORE)
-			spip_log ("retire_caches($chemin = '') ne devrait pas être appelé car ['meta']['invalider_caches'] devrait être false", "invalideur_core_retire_caches_BUG");
+		if (LOG_INVALIDATION_CORE) {
+			spip_log("retire_caches($chemin = '') ne devrait pas être appelé car ['meta']['invalider_caches'] devrait être false", 'invalideur_core_retire_caches_BUG');
+		}
 	} # concurrence
-	if  (LOG_INVALIDATION_CORE)
-		spip_log ("retire_caches($chemin = '')", "invalideur_core_retire_caches");
+	if (LOG_INVALIDATION_CORE) {
+		spip_log("retire_caches($chemin = '')", 'invalideur_core_retire_caches');
+	}
 }
 
 
@@ -286,18 +295,20 @@ function calcul_invalideurs($corps, $primary, &$boucles, $id_boucle) {
 // invoquee quand on vide tout le cache en bloc (action/purger)
 //
 // http://code.spip.net/@supprime_invalideurs
-function supprime_invalideurs() { 
-	if  (LOG_INVALIDATION_CORE)
-		spip_log ("supprime_invalideurs()", "invalideur_core");
+function supprime_invalideurs() {
+	if (LOG_INVALIDATION_CORE) {
+		spip_log('supprime_invalideurs()', 'invalideur_core');
+	}
 }
 
 // les invalideurs sont en général de la forme "objet/id_objet"
 // http://code.spip.net/@insere_invalideur
-// JAMAIS appelé par le noyau, 
+// JAMAIS appelé par le noyau,
 // ÉTAIT un hook post maj_invalideurs appelé avec $page['invalideurs'] et $fichier
-function insere_invalideur($inval, $fichier) { 
-	if  (LOG_INVALIDATION_CORE)
-		spip_log ("insere_invalideur($inval, $fichier)", "invalideur_core");
+function insere_invalideur($inval, $fichier) {
+	if (LOG_INVALIDATION_CORE) {
+		spip_log("insere_invalideur($inval, $fichier)", 'invalideur_core');
+	}
 }
 
 //
@@ -306,7 +317,8 @@ function insere_invalideur($inval, $fichier) {
 // http://code.spip.net/@applique_invalideur
 // JAMAIS appelé par le noyau
 // ÉTAIT un hook post suivre_invalideur avec la liste calculée des fichiers caches à invalider
-function applique_invalideur($depart) { 
-	if  (LOG_INVALIDATION_CORE)
-		spip_log ("applique_invalideur($depart)", "invalideur_core");
+function applique_invalideur($depart) {
+	if (LOG_INVALIDATION_CORE) {
+		spip_log("applique_invalideur($depart)", 'invalideur_core');
+	}
 }

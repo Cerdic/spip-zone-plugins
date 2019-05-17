@@ -1,14 +1,14 @@
 <paquet
 	prefix="cachelab"
-	categorie="outil"
-	version="0.99.0"
+	categorie="performance"
+	version="0.99.1"
 	etat="dev"
 	compatibilite="[3.0.0;3.3.*]"
 	logo="images/cachelab-32.png"
 	documentation="https://contrib.spip.net/5033"
 >
 	<nom>CacheLab</nom>
-	<!-- Invalidation ciblée et autres actions sur des caches APC filtrés des squelettes SPIP -->
+	<!-- Invalidation ciblée et autres actions sur les caches APC filtrés des squelettes SPIP -->
 	<auteur lien="https://contrib.spip.net/JLuc">JLuc</auteur>
 	<credit lien="https://thenounproject.com/term/lab/1796357/">Icone de Nawicon Studio, Licence Creative Commons</credit>
 

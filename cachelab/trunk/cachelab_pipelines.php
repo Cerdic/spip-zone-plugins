@@ -16,5 +16,5 @@ function cachelab_insert_head_css($flux) {
 .cachelab_blocs small {margin: 2px; padding: 2px; font-size: 60%;}
 .cachelab_assert {background-color: orange}
 </style>\n";
-    return $flux;
+	return $flux;
 }

@@ -9,11 +9,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 include_spip('inc/cachelab_utils');
 
-if (!defined('LOG_BALISECACHE_FILTRES'))
+if (!defined('LOG_BALISECACHE_FILTRES')) {
 	define('LOG_BALISECACHE_FILTRES', 'oui');
+}
 
-if (!defined('LOG_BALISECACHE_DUREES_DYNAMIQUES'))
+if (!defined('LOG_BALISECACHE_DUREES_DYNAMIQUES')) {
 	define('LOG_BALISECACHE_DUREES_DYNAMIQUES', false);
+}
 
 
 /**
@@ -26,7 +28,7 @@ if (!defined('LOG_BALISECACHE_DUREES_DYNAMIQUES'))
  * pour le type d'objet en question (non utilisé cependant) et pour
  * tout le site (sur la meta `derniere_modif`)
  *
- * @global derniere_modif_invalide
+ * @global bool|array derniere_modif_invalide
  *     Par défaut à `true`, la meta `derniere_modif` est systématiquement
  *     calculée dès qu'un invalideur se présente. Cette globale peut
  *     être mise à `false` (aucun changement sur `derniere_modif`) ou
@@ -54,19 +56,19 @@ function suivre_invalideur($cond, $modif = true) {
 			// stocker la date_modif_extra_$extra (ne sert a rien)
 			ecrire_meta('derniere_modif_extra_' . $r[1], time());
 			$f="cachelab_suivre_invalideur_{$r[1]}";
-		}
-		else {
+		} else {
 			// stocker la date_modif_$objet (ne sert a rien)
 			ecrire_meta('derniere_modif_' . $objet, time());
 			$f="cachelab_suivre_invalideur_$objet";
 		}
 
 		if (function_exists($f)) {
-			spip_log ("suivre_invalideur appelle $f($cond,$modif)", "cachelab");
+			spip_log("suivre_invalideur appelle $f($cond,$modif)", 'cachelab');
 			$modif = $f($cond, $modif);	 // $f renvoie la nouvelle valeur de $modif
 			// si l'invalidation a été totalement traitée par $f, ya plus rien à faire
-			if (!$modif)
+			if (!$modif) {
 				return;
+			}
 		}
 	}
 
@@ -77,11 +79,11 @@ function suivre_invalideur($cond, $modif = true) {
 		or ($objet
 			and in_array($objet, $GLOBALS['derniere_modif_invalide']))) {
 		ecrire_meta('derniere_modif', time());
-		include_spip ('inc/cachelab');
-		spip_log ("invalidation totale / signal '$cond' avec objet '$objet'", "suivre_invalideur");
+		include_spip('inc/cachelab');
+		spip_log("invalidation totale / signal '$cond' avec objet '$objet'", 'suivre_invalideur');
+	} else {
+		spip_log("invalidation totale évitée : $cond", 'cachelab_effondrement_evite');
 	}
-	else 
-		spip_log ("invalidation totale évitée : $cond", "cachelab_effondrement_evite");
 }
 
 //
@@ -89,13 +91,13 @@ function suivre_invalideur($cond, $modif = true) {
 // le core indique : "Calcul des pages : noter dans la base les liens d'invalidation"
 //
 // Appelé à la fin de creer_cache
-// $page est le tableau décrivant le cache qui vient d'être calculé 
-// avec les clés suivantes pour ses métadonnées : 
+// $page est le tableau décrivant le cache qui vient d'être calculé
+// avec les clés suivantes pour ses métadonnées :
 // squelette,source,process_ins,invalideurs,entetes,duree,texte,notes,contexte,lastmodified,sig
 // http://code.spip.net/@maj_invalideurs
 //
 // S'il y a une entete X-Spip-Methode-Duree-Cache on récupère la méthode
-// et on appelle la fonction cachelab_calcule_duree_cache_lamethode 
+// et on appelle la fonction cachelab_calcule_duree_cache_lamethode
 // avec en argument la valeur de l'argument dans l'envt ou de date_creation par défaut
 // On corrige alors la durée du cache avec la valeur retournée.
 //
@@ -107,22 +109,24 @@ function suivre_invalideur($cond, $modif = true) {
 // define ('LOG_INVALIDATION_CORE', true);
 function maj_invalideurs($fichier, &$page) {
 global $Memoization;
-// Rq : ici, le texte du cache est non zipé (cf function creer_cache dans memoization), 
+// Rq : ici, le texte du cache est non zipé (cf function creer_cache dans memoization),
 // tandis que la version en cache peut être zipée (avec index 'gz').
-	if  (LOG_INVALIDATION_CORE) {
+	if (LOG_INVALIDATION_CORE) {
 		// Abondamment appelé. À part pour pas noyer les autres
-		spip_log ("maj_invalideurs($fichier, &page)", "invalideur_core_maj_invalideurs");
-		spip_log ("maj_invalideurs($fichier, &page)\n".print_r($page,1), "invalideur_core_maj_invalideurs_details");
+		spip_log("maj_invalideurs($fichier, &page)", 'invalideur_core_maj_invalideurs');
+		spip_log("maj_invalideurs($fichier, &page)\n".print_r($page, 1), 'invalideur_core_maj_invalideurs_details');
 	};
 
 static $var_cache;
 	$infos = $hint_squel = '';
-	if (!isset($var_cache))
+	if (!isset($var_cache)) {
 		$var_cache = _request('var_cache');
-	if ($var_cache=='sessionnement') // on veut le sessionnement seul à l'écran
+	}
+	if ($var_cache=='sessionnement') { // on veut le sessionnement seul à l'écran
 		$hint_squel = ' title="'.attribut_html($page['source']).'" ';
-	else
+	} else {
 		$infos = $page['source'];		// on prépare les infos supplémentaires
+	}
 
 	// Pour le calcul dynamique d'une durée de cache, la fonction user
 	// reçoit la *valeur* de l'une des valeurs de l'environnement (par défaut "date_creation")
@@ -132,16 +136,18 @@ static $var_cache;
 		list ($f, $arg) = split_first_arg($f, 'date_creation');
 		if (function_exists($f)) {
 			if (!isset($page['contexte'][$arg])) {
-				spip_log ("#CACHE avec squelette {$page['source']} et calcul de durée avec $f mais pas de '$arg' dans le contexte ".print_r($page['contexte'],1), "cachelab_erreur");
+				spip_log("#CACHE avec squelette {$page['source']} et calcul de durée avec $f mais pas de '$arg' dans le contexte ".print_r($page['contexte'], 1), 'cachelab_erreur');
 				return;
 			}
-			$duree = $f($page['contexte'][$arg],$page);
+			$duree = $f($page['contexte'][$arg], $page);
 			if (!is_null($duree)) {
-				if (!defined('LOG_BALISECACHE_DUREES_DYNAMIQUES') or LOG_BALISECACHE_DUREES_DYNAMIQUES)
-					spip_log ("#CACHE $f (arg={$page['contexte'][$arg]}) renvoie : $duree s", 'balisecache_duree_dynamique');
+				if (!defined('LOG_BALISECACHE_DUREES_DYNAMIQUES') or LOG_BALISECACHE_DUREES_DYNAMIQUES) {
+					spip_log("#CACHE $f (arg={$page['contexte'][$arg]}) renvoie : $duree s", 'balisecache_duree_dynamique');
+				}
 
-				if ($var_cache)
+				if ($var_cache) {
 					echo "<div class='cachelab_blocs' $hint_squel><h6>Durée dynamique : $duree</h6><small>$infos</small></div>";
+				}
 
 				$page['duree'] = $duree;
 				$page['entetes']['X-Spip-Cache']=$duree;
@@ -156,23 +162,25 @@ static $var_cache;
 				// sur le cache quand la base de donnees est plantée (à tester)"
 				$Memoization->set($fichier, $page, 3600+$duree);
 			}
+		} else {
+			spip_log("#CACHE duree cache : la fonction '$f' n'existe pas (arg='$arg')\n".print_r($page, 1), 'cachelab_erreur');
 		}
-		else 
-			spip_log ("#CACHE duree cache : la fonction '$f' n'existe pas (arg='$arg')\n".print_r($page,1), "cachelab_erreur");
 	}
 	
 	// Exemple : <INCLURE{fond=mes_scores,duree-cache=#GET{duree_sicestmoi_oupas}}/>
 	if (isset($page['contexte']['duree-cache'])) {
-		if (!defined('LOG_BALISECACHE_DUREES_DYNAMIQUES') or LOG_BALISECACHE_DUREES_DYNAMIQUES)
-			spip_log ("Pour $fichier, contexte[duree-cache]={$page['contexte']['duree-cache']}", 'balisecache_duree_dynamique');
+		if (!defined('LOG_BALISECACHE_DUREES_DYNAMIQUES') or LOG_BALISECACHE_DUREES_DYNAMIQUES) {
+			spip_log("Pour $fichier, contexte[duree-cache]={$page['contexte']['duree-cache']}", 'balisecache_duree_dynamique');
+		}
 
-		if ($var_cache)
+		if ($var_cache) {
 			echo "<div class='cachelab_blocs' $hint_squel><h6>Contexte duree-cache : $duree</h6><small>$infos</small></div>";
+		}
 
 		$page['entetes']['X-Spip-Cache']
 		= $page['entetes']['X-Spip-Contexte-Duree-Cache']
-		= $page['duree'] 
-		= $duree 
+		= $page['duree']
+		= $duree
 		= intval($page['contexte']['duree-cache']);
 
 		// (idem : creer_cache appelle maj_invalideurs *aprés* d'avoir écrit le cache)
@@ -187,19 +195,22 @@ static $var_cache;
 		$f = 'cachelab_filtre_'.$page['entetes']['X-Spip-Filtre-Cache'];
 		list ($f, $arg) = split_first_arg($f);
 		if (function_exists($f)) {
-			if (!defined('LOG_BALISECACHE_FILTRES') or LOG_CACHELAB_FILTRES)
-				spip_log ("#CACHE appelle le filtre $f ($arg)", 'balisecache_filtres');
+			if (!defined('LOG_BALISECACHE_FILTRES') or LOG_BALISECACHE_FILTRES) {
+				spip_log("#CACHE appelle le filtre $f ($arg)", 'balisecache_filtres');
+			}
 			$toset = $f($page, $arg);
 			// Le filtre renvoie un booléen qui indique s'il faut mémoizer le cache
-			if ($toset)
+			if ($toset) {
 				$Memoization->set($fichier, $page, $page['entete']['X-Spip-Cache']);
+			}
+		} else {
+			spip_log("#CACHE filtre : la fonction '$f' n'existe pas (arg='$arg')\n".print_r($page, 1), 'cachelab_erreur');
 		}
-		else 
-			spip_log ("#CACHE filtre : la fonction '$f' n'existe pas (arg='$arg')\n".print_r($page,1), "cachelab_erreur");
 	}
 	
-	if ($var_cache)
+	if ($var_cache) {
 		echo '<div class="cachelab_blocs" '.$hint_squel.'><h6>Sessionnement : '
 				.cachelab_etat_sessionnement($page['invalideurs'], 'précis')
 			 .'</h6><small>'.$infos.'</small></div>';
+	}
 }
