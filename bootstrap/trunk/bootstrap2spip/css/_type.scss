@@ -103,7 +103,7 @@ big, .big { font-size: $font-size-lg; }
 
 // Abbreviations and acronyms
 // Added data-* attribute to help out our tooltip plugin, per https://github.com/twitter/bootstrap/issues/5257
-abbr[title], acronym[title], abbr[data-original-title] { border-bottom: .1em dotted $gray-500; cursor: help; }
+abbr[title], acronym[title], abbr[data-original-title] { border-bottom: .1em dotted $gray-500; cursor: help; text-decoration: none; }
 abbr.initialism {
   font-size: 90%;
   text-transform: uppercase;
