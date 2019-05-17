@@ -5,6 +5,13 @@ table.spip {
   @extend .table;
   @extend .table-striped;
   @extend .table-hover;
+  thead {
+    th {
+      color: $table-head-color;
+      background-color: $table-head-bg;
+      border-color: $table-border-color;
+    }
+  }
 }
 
 table.spip caption {}
