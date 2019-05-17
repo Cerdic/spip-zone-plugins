@@ -1,11 +1,16 @@
 [(#REM)
 
-	Saisie permettant de sélectionner une selection éditoriale par son numéro ou optionnellement par son identifiant.
+	Saisie permettant de sélectionner une selection éditoriale
+	par son numéro ou optionnellement par son identifiant.
+
+	La saisie est un select par défaut, ou optionnellement
+	des radios ou des checkbox.
 
 	Paramètres :
-	- utiliser_identifiant : « oui » pour utiliser l'identifiant au lieu du numéro (attention pas fiable)
-	- type_choix : type de saisie utilisée, selection | radio
-	- params de saisies/selection.html et saisies/radio.html
+	- utiliser_identifiant : « oui » pour utiliser l'identifiant comme valeur au lieu du numéro (attention pas fiable)
+	- multiple : « oui » pour permettre de choisir plusieurs valeurs
+	- type_choix : famille de saisie utilisée, selection (défaut) | radio
+	- + params des saisies selection/radio/checkbox
 
 	Exemple d'appel :
 	[(#SAISIE{selections_editoriales,nom,
@@ -21,4 +26,10 @@
 </BOUCLE_data_saisie_selections>
 #SET{data,#GET{data}|array_flip}
 
-<INCLURE{fond=saisies/#ENV{type_choix,selection}, data=#GET{data}, env}>
+#SET{nb,#ENV{multiple}|=={oui}|?{multiple,unique}}
+#SET{types_saisies, #ARRAY{
+	selection, #ARRAY{unique,selection, multiple,selection_multiple},
+	radio, #ARRAY{unique,radio, multiple,checkbox}
+}}
+#SET{type_saisie, #GET{types_saisies/#ENV{type_choix,selection}/#GET{nb}}}
+<INCLURE{fond=saisies/#GET{type_saisie}, data=#GET{data}, env}>
