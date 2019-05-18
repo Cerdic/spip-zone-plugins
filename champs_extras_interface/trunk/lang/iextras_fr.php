@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_monter_title' => 'Monter le champ d’un rang vers le haut',
 	'action_supprimer' => 'supprimer',
 	'action_supprimer_title' => 'Supprimer totalement le champ de la base de données',
+	'afficher_noms' => 'Afficher le nom des champs',
 
 	// B
 	'bouton_importer' => 'Importer',
@@ -100,6 +101,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_des_extras' => 'Liste des champs extras',
 	'liste_des_extras_possibles' => 'Liste des champs présents non gérés',
 	'liste_objets_applicables' => 'Liste des objets éditoriaux',
+	
+	// M
+	'masquer_noms' => 'Masquer le nom des champs',
 
 	// N
 	'nb_element' => '1 élément',

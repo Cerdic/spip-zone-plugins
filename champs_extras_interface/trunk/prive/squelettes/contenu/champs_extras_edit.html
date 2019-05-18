@@ -10,3 +10,22 @@
 </div>
 #FORMULAIRE_EDITER_CHAMPS_EXTRAS{#ENV{objet}, #GET{retour}}
 </div>
+
+[(#REM) utilitaire pour l'affichage des noms des champs ]
+<script type="text/javascript">
+jQuery(function() {
+	jQuery(".formulaire_editer_champs_extras input[name][type!='hidden']," 
+		+ ".formulaire_editer_champs_extras textarea[name],"
+		+ ".formulaire_editer_champs_extras select[name]").each(function() {
+		jQuery(this).after('<span class="affname masque">' + jQuery(this).attr('name') + '</span>');
+	});
+	jQuery(".entete-formulaire").append('<span class="aff_noms" title="<:iextras:afficher_noms:>">[+]</span>'
+		+ '<span class="aff_noms masque" title="<:iextras:masquer_noms:>">[-]</span>');
+	jQuery(".entete-formulaire").on("click", ".aff_noms", function() { jQuery(".aff_noms, .affname").toggleClass("masque"); });
+});
+</script>
+<style type="text/css">
+.aff_noms {color: #DDD; float: right;font-size: 10px;cursor:pointer;}
+.affname {background-color:#f1ff0066;float:right;}
+.masque {display: none;}
+</style>
