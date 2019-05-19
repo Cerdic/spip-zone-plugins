@@ -23,6 +23,12 @@ options:
           label: '<:saisies:option_explication_label:>'
           explication: '<:saisies:option_explication_explication:>'
           size: 50
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'presentation'
+      label: '<:saisie_evenements:option_groupe_presentation:>'
+    saisies:
       -
         saisie: 'radio'
         options:
@@ -46,19 +52,6 @@ options:
           label_case: '<:saisie_evenements:masquer_heure_label_case:>'
           li_class: 'pleine_largeur'
       -
-        saisie: 'case'
-        options:
-          nom: 'places_dispo'
-          label_case: '<:saisie_evenements:places_dispo_label_case:>'
-          li_class: 'pleine_largeur'
-      -
-        saisie: 'case'
-        options:
-          nom: 'liste_attente'
-          label: '<:saisie_evenements:liste_attente_label:>'
-          label_case: '<:saisie_evenements:liste_attente_label_case:>'
-          explication: '<:saisie_evenements:liste_attente_explication:>'
-      -
         saisie: 'radio'
         options:
           nom: 'type_choix'
@@ -68,12 +61,12 @@ options:
             selection:  '<:saisie_evenements:option_type_choix_selection:>'
             checkbox:  '<:saisie_evenements:option_type_choix_checkbox:>'
           defaut: 'radio'
-      -
-        saisie: 'case'
-        options:
-          nom: 'disable_complet'
-          label_case: '<:saisie_evenements:disable_complet_label_case:>'
-          li_class: 'pleine_largeur'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'selection'
+      label: '<:saisie_evenements:option_groupe_selection:>'
+    saisies:
       -
         saisie: 'explication'
         options:
@@ -109,16 +102,6 @@ options:
           nom: 'id_mot'
           label: '<:saisie_evenements:id_mot_label:>'
           explication: '<:saisie_evenements:id_mot_explication:>'
-      -
-        saisie: 'selection'
-        options:
-          nom: 'inscription'
-          label: '<:saisie_evenements:inscription_label:>'
-          explication: '<:saisie_evenements:inscription_explication:>'
-          defaut: ''
-          data:
-            choix0: '<:saisie_evenements:inscription_choix0:>'
-            choix1: '<:saisie_evenements:inscription_choix1:>'
       -
         saisie: 'explication'
         options:
@@ -161,6 +144,41 @@ options:
           explication: '<:saisie_evenements:date_debut_max_mobile_explication:>'
         verifier:
           type: 'entier'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'inscriptions'
+      label: '<:saisie_evenements:option_groupe_inscriptions:>'
+    saisies:
+      -
+        saisie: 'selection'
+        options:
+          nom: 'inscription'
+          label: '<:saisie_evenements:inscription_label:>'
+          explication: '<:saisie_evenements:inscription_explication:>'
+          defaut: ''
+          data:
+            choix0: '<:saisie_evenements:inscription_choix0:>'
+            choix1: '<:saisie_evenements:inscription_choix1:>'
+      -
+        saisie: 'case'
+        options:
+          nom: 'places_dispo'
+          label_case: '<:saisie_evenements:places_dispo_label_case:>'
+          li_class: 'pleine_largeur'
+      -
+        saisie: 'case'
+        options:
+          nom: 'disable_complet'
+          label_case: '<:saisie_evenements:disable_complet_label_case:>'
+          li_class: 'pleine_largeur'
+      -
+        saisie: 'case'
+        options:
+          nom: 'liste_attente'
+          label: '<:saisie_evenements:liste_attente_label:>'
+          label_case: '<:saisie_evenements:liste_attente_label_case:>'
+          explication: '<:saisie_evenements:liste_attente_explication:>'
   -
     saisie: 'fieldset'
     options:
