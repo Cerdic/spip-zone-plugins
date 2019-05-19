@@ -101,7 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_des_extras' => 'Liste des champs extras',
 	'liste_des_extras_possibles' => 'Liste des champs présents non gérés',
 	'liste_objets_applicables' => 'Liste des objets éditoriaux',
-	
+
 	// M
 	'masquer_noms' => 'Masquer le nom des champs',
 
