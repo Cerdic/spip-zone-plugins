@@ -143,7 +143,7 @@ function embed_url($url) {
 			if ($html) $code_ae = "<div class='oembed-container'>$html</div>";
 		}
 		else if (preg_match(",^https?://[^\"\'\`\<\>\@\*\$]*?\.mp4(\?.*)?$,i", $url)) {
-			$html = "<div class='video' style='height:0;position: relative; padding-bottom: 56.25%;'><video controls style='width: 100%'><source src='$url' rel='enclosure'></video></div>";
+			$html = "<div class='video' style='height:0;position: relative; padding-bottom: 56.25%;'><video controls style='max-width: 100%;max-height: 100%'><source src='$url' rel='enclosure'></video></div>";
 			if ($html) $code_ae = "<div class='oembed-container'>$html</div>";
 
 		}
