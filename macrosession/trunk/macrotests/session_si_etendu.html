@@ -1,9 +1,9 @@
 <h1>Test # _SESSION avec _SI, _SINON, _FIN et accés session étendue</h1>
 <ul>
 <li>nom : #_SESSION{nom}</li>
-<li>est abonne (existence remise en question) : #_SESSION{est_abonne}</li>
 <li>nbreste : #_SESSION{nbreste}</li>
 <li>a reçu : #_SESSION{envois_revues_liste}</li>
+<li>Accés espace lecteur : #_AUTORISER_SI{espacelecteur} OUI #_AUTORISER_SINON non #_AUTORISER_FIN</li>
 </ul>
 <h4>SI nbreste</h4>
 #_SESSION_SI{nbreste}
