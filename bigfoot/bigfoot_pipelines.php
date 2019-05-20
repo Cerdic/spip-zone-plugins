@@ -27,7 +27,7 @@ function bigfoot_insert_head($flux){
 (function($) {
 	var bigfoot_init = function() {
 		jQuery.bigfoot({
-			anchorPattern: /(nb\d+(footnote|appendix))/gi,
+			anchorPattern: /(nb\d+(footnote|appendix|-\d+)?)/gi,
 			anchorParentTagname: "span",
 			footnoteParentClass: "spip_note_ref",
 			footnoteTagname: "div"
