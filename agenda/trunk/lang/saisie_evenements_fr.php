@@ -51,6 +51,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'masquer_heure_label_case' => 'Masquer l’heure',
 
 	// O
+	'option_groupe_inscriptions' => 'Gestion des inscriptions',
+	'option_groupe_presentation' => 'Présentation des évènements',
+	'option_groupe_selection' => 'Choix des évènements proposés',
 	'option_type_affichage_date' => 'Uniquement la date de l’événement',
 	'option_type_affichage_label' => 'Libellé',
 	'option_type_affichage_titre' => 'Uniquement le titre de l’événement',
@@ -62,9 +65,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'places_dispo_label_case' => 'Afficher le nombre de places restantes',
-	'option_groupe_presentation' => 'Présentation des évènements',
-	'option_groupe_selection' => 'Choix des évènements proposés',
-	'option_groupe_inscriptions' => 'Gestion des inscriptions',
 
 	// S
 	'saisie_evenements_chronologie_texte' => 'Les critères de date pour les choix des événements sont cumulatifs avec les critères précédents d’association à des objets.',

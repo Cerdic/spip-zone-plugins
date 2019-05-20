@@ -35,17 +35,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'id_mot_label' => 'Keyword',
 	'id_rubrique_explication' => 'Propose the events of the articles in the following sections.',
 	'id_rubrique_label' => 'Section',
-	'inscription_choix0' => 'Registration closed',
-	'inscription_choix1' => 'Registration open',
+	'inscription_choix0' => 'Registration closed', # MODIF
+	'inscription_choix1' => 'Registration open', # MODIF
 	'inscription_explication' => 'Restrict to events whose registration criteria are as follows.',
-	'inscription_label' => 'Registration',
+	'inscription_label' => 'Registration', # MODIF
 
 	// M
 	'masquer_heure_label_case' => 'Hide the time',
 
 	// O
 	'option_type_affichage_date' => 'Only the event date',
-	'option_type_affichage_label' => 'Events presentation',
+	'option_type_affichage_label' => 'Events presentation', # MODIF
 	'option_type_affichage_titre' => 'Only the event title',
 	'option_type_affichage_titre_date' => 'The title and the event date',
 	'option_type_choix_checkbox' => 'Multiple choices (checkbox)',
