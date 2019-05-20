@@ -71,8 +71,8 @@ function zengarden_affichage_final($texte){
 		include_spip('prive/zengarden_theme_fonctions');
 		// on passe le theme selectionne en js pour ne pas polluer le cache du switcher
 		$theme = isset($_COOKIE['spip_zengarden_theme']) ? $_COOKIE['spip_zengarden_theme'] : '';
-		$code = 
-			"<script type='text/javascript'>var theme_selected='$theme'</script>"
+		$code =
+			"<script type='text/javascript'>var theme_selected='".texte_script($theme)."'</script>"
 			. recuperer_fond('inclure/zengarden_switcher');
 		// On rajoute le code du selecteur de squelettes avant la balise </body>
 		$texte=str_replace("</body>",$code."</body>",$texte);
