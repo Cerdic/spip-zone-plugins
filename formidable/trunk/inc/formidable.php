@@ -174,7 +174,7 @@ function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identific
 		$where_variable_php = 'variable_php='.$variable_php_identification;
 	}
 
-	// Comment identifie-t-on? Attention, le choix d'identification indique une PRIORITE, donc cela veut dire que les autres méthodes peuvent venir après
+	// Comment identifie-t-on? Attention, le choix d'identification indique une PRIORITE, donc cela veut dire que les autres méthodes peuvent venir après, sauf dans le cas d'identification explicitement par id_reponse
 	if ($choix_identification == 'cookie' or !$choix_identification) {
 		if ($cookie) {
 			$where = array($where_cookie);
@@ -193,6 +193,8 @@ function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identific
 		} else {
 			$where = array($where_cookie, $where_id_auteur);
 		}
+	} elseif ($choix_identification == 'id_reponse') {//Si le filtrage se fait par réponse, on prend tout (mais normalement on devrait pas aboutir ici si tel est le cas)
+		$where = array("1=1");
 	}
 	$where = array_filter($where);//Supprimer les wheres null
 	$where = implode($where, ' OR ');
