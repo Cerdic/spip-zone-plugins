@@ -187,7 +187,7 @@ function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identific
 		} else {
 			$where = array($where_cookie, $where_variable_php);
 		}
-	} elseif ($choix_identification = 'variable_php') {
+	} elseif ($choix_identification == 'variable_php') {
 		if ($variable_php_identification) {
 			$where = array($where_variable_php);
 		} else {
