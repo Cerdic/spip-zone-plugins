@@ -61,6 +61,7 @@ options:
           datas:
             cookie: '<:formidable:identification_par_cookie:>'
             id_auteur: '<:formidable:identification_par_id_auteur:>'
+            id_reponse: '<:formidable:identification_par_id_reponse:>'
             variable_php: '<:formidable:identification_par_variable_php:>'
           defaut: 'cookie'
       -

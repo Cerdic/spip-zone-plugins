@@ -127,6 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'id_formulaires_reponse' => 'Identifiant de la réponse',
 	'identification_par_cookie' => 'Par cookie (identifiant aléatoire, ne stocke aucune information personnelle)',
 	'identification_par_id_auteur' => 'Par l’identifiant (id_auteur) de la personne authentifiée',
+	'identification_par_id_reponse' => 'Par l\'identifiant (id_formulaire_reponse) de la réponse, passé explicitement lors de l\'appel au formulaire dans un squelette',
 	'identification_par_variable_php' => 'Par une variable de connexion PHP (hashée)',
 	'importer_formulaire' => 'Importer un formulaire',
 	'importer_formulaire_fichier_label' => 'Fichier à importer',

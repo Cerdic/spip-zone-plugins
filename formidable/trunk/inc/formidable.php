@@ -106,7 +106,7 @@ function formidable_generer_nom_cookie($id_formulaire) {
  */
 function formidable_trouver_reponse_a_editer($id_formulaire, $id_formulaires_reponse, $options, $verifier_est_auteur = false) {
 	// Si on passe un identifiant de reponse, on edite cette reponse si elle existe
-	if ($id_formulaires_reponse = intval($id_formulaires_reponse) and $verifier_est_auteur == false) {
+	if ($id_formulaires_reponse = intval($id_formulaires_reponse) and ($verifier_est_auteur == false or $options['identification'] == 'id_reponse')) {
 		return $id_formulaires_reponse;
 	} else {
 		// calcul des paramètres d'anonymisation
