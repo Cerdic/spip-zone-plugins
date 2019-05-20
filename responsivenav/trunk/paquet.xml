@@ -1,7 +1,7 @@
 <paquet
 	prefix="responsivenav"
 	categorie="navigation"
-	version="0.1.10"
+	version="0.1.11"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/responsivenav-32.png"

@@ -23,7 +23,7 @@ function responsivenav_insert_head_css($flux) {
 // on insert le script et on l'appelle
 function responsivenav_insert_head($flux) {
 	$flux .="\n".'<script type="text/javascript" src="'.find_in_path('javascript/responsive-nav.js').'"></script>';
-	$flux .="\n".'<script>/*<![CDATA[*/ ;(function($){ $(function(){ if ($("'.lire_config('responsivenav/selector','#nav').'").length) { var nav = responsiveNav("'.lire_config('responsivenav/selector','#nav').'",{jsClass: "'._RESPONSIVENAV_JSCLASS.'",label: "'.lire_config('responsivenav/label','&#9776; Menu').'",insert: "'.lire_config('responsivenav/insert','before').'"' ;
+	$flux .="\n".'<script>/*<![CDATA[*/ ;jQuery(function(){ $(function(){ if ($("'.lire_config('responsivenav/selector','#nav').'").length) { var nav = responsiveNav("'.lire_config('responsivenav/selector','#nav').'",{jsClass: "'._RESPONSIVENAV_JSCLASS.'",label: "'.lire_config('responsivenav/label','&#9776; Menu').'",insert: "'.lire_config('responsivenav/insert','before').'"' ;
 	if (defined('_RESPONSIVENAV_ANIMATE')) {$flux .= ',animate: '._RESPONSIVENAV_ANIMATE;}
 	if (defined('_RESPONSIVENAV_TRANSITION')) {$flux .= ',transition: '._RESPONSIVENAV_TRANSITION;}
 	if (defined('_RESPONSIVENAV_CUSTOMTOGGLE')) {$flux .= ',customToggle: "'._RESPONSIVENAV_CUSTOMTOGGLE.'"';}
@@ -31,6 +31,6 @@ function responsivenav_insert_head($flux) {
 	if (defined('_RESPONSIVENAV_OPENPOS')) {$flux .= ',openPos: "'._RESPONSIVENAV_OPENPOS.'"';}
 	if (defined('_RESPONSIVENAV_NAVCLASS')) {$flux .= ',navClass: "'._RESPONSIVENAV_NAVCLASS.'"';}
 	if (defined('_RESPONSIVENAV_NAVACTIVECLASS')) {$flux .= ',navActiveClass: "'._RESPONSIVENAV_NAVACTIVECLASS.'"';}
-	$flux .= '}); } }); })(jQuery); /*]]>*/ </script>';
+	$flux .= '}); } }); }); /*]]>*/ </script>';
 	return $flux;
 }
