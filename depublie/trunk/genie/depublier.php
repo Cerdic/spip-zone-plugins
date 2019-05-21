@@ -33,6 +33,9 @@ function genie_depublier_dist($time) {
 				sql_updateq($table, array("statut" => $statut_depublication), "$_id_objet= ".intval($id_objet));
 				//et on supprime l'entrée
 				sql_delete('spip_depublies', 'id_objet='.intval($id_objet).' AND objet='.sql_quote($objet));
+				//et on invalide le cache
+				include_spip('inc/invalideur');
+				suivre_invalideur("id='$objet/$id_objet'");
 			}
 		}
 	}

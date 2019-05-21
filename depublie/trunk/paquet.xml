@@ -1,7 +1,7 @@
 <paquet
 	prefix="depublie"
 	categorie="divers"
-	version="1.2.7"
+	version="1.2.8"
 	etat="stable"
 	compatibilite="[3.1.0;3.2.*]"
 	logo="depublie.png"
