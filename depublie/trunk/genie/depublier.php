@@ -20,7 +20,6 @@ function genie_depublier_dist($time) {
 			$objet= $depublication['objet'];
 			$id_objet= $depublication['id_objet'];
 			$statut_depublication= $depublication['statut'];
-			$date_depublie= $depublication['date_depublie'];
 			spip_log("on veut depublier $objet $id_objet $statut_depublication",'depublication');
 
 			//on cherche la table de l'objet donné
