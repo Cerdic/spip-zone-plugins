@@ -14,7 +14,7 @@
 	class="page-item prev previous[(#ENV{page_courante}|<={1}|oui)disabled]">(#ENV{url}
 	|parametre_url{#ENV{debut},#GET{item}}
 	|ancre_url{#ENV{ancre}}
-	|lien_ou_expose{#ICON{chevron-left,'',&lt;},#ENV{page_courante}|<={1}|?{span.page-link},'page-link lien_pagination',<:zcore:pagination_prev:>,nofollow}
+	|lien_ou_expose{#ICON{chevron-left,'',<:zcore:pagination_prev:>},#ENV{page_courante}|<={1}|?{span.page-link},'page-link lien_pagination',<:zcore:pagination_prev:>,nofollow}
 	|inserer_attribut{rel,prev}
 	)</li>][<li class="page-item"><a
 	href='[(#ENV{url}|parametre_url{#ENV{debut},''}|ancre_url{#ENV{ancre}})]'
@@ -28,7 +28,7 @@
 		|ancre_url{#ENV{ancre}}
 		|lien_ou_expose{#VALEUR,#VALEUR|=={#ENV{page_courante}}|?{span.page-link},page-link lien_pagination,'',nofollow})</li>]</BOUCLE_pages>[<li
 
-	class="tbc disabled"><span class="page-link">...</span></li><li class="page-item"><a
+	class="page-item tbc disabled"><span class="page-link">...</span></li><li class="page-item"><a
 	href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}})]##ENV{ancre}'
 	class='page-link lien_pagination'
 	title='#ENV{nombre_pages}'
@@ -38,7 +38,7 @@
 	class="page-item next[(#ENV{page_courante}|>={#ENV{nombre_pages}}|oui)disabled]">(#ENV{url}
 	|parametre_url{#ENV{debut},#GET{item}}
 	|ancre_url{#ENV{ancre}}
-	|lien_ou_expose{#ICON{chevron-right,'',&gt;},#ENV{page_courante}|>={#ENV{nombre_pages}}|?{span.page-link},'page-link lien_pagination',<:zcore:pagination_next:>,nofollow}
+	|lien_ou_expose{#ICON{chevron-right,'',<:zcore:pagination_next:>},#ENV{page_courante}|>={#ENV{nombre_pages}}|?{span.page-link},'page-link lien_pagination',<:zcore:pagination_next:>,nofollow}
 	|inserer_attribut{rel,next}
 	)</li>]
 	</ul>
