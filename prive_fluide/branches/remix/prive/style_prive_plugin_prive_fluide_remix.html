@@ -193,15 +193,10 @@ h3.titrem,
 	box-shadow: none;
 }
 
-.inner .hd + .bd {
-	padding-top: 0;
+.hd, .bd {
+	padding: 10px;
 }
-.inner .hd + .bd > *:first-child {
-	padding-top: .3em;
-}
-.inner .hd + .bd > *:last-child {
-	padding-bottom: .3em;
-}
+
 
 .liste-items .item:last-child {
 	border-bottom: none;	
@@ -434,8 +429,11 @@ a.plus_info,
 
 /* specificités de certains formulaires */
 
-.formulaire_spip.formulaire_dater {
+.fiche_objet .formulaire_spip.formulaire_dater {
 	background: #f5f5f5;
+	margin-top: 1em;
+	margin-bottom: 1.5em;
+	padding: 5px;
 }
 .formulaire_spip.formulaire_dater label,
 .formulaire_spip.formulaire_dater .affiche {
@@ -445,6 +443,10 @@ a.plus_info,
 }
 .formulaire_spip.formulaire_dater .aide.popin {
 	display: none;
+}
+.formulaire_dater .editer {
+	padding-top: 0;
+	padding-bottom: 0;
 }
 .formulaire_dater .editer > label {
 	margin-top: 0;
@@ -471,15 +473,22 @@ a.plus_info,
 	margin-top: 0;
 }
 
+.lat .formulaire_spip, 
+.lat .formulaire_spip fieldset {
+	padding: 0;
+}
 .lat .formulaire_spip h3.titrem {
 	margin-bottom: 0;
 }
 .lat .formulaire_spip .editer {
 	padding: .34625em 10px;
 }
-.lat .formulaire_spip .editer label {
-	margin-top: 0;
-	margin-bottom: .25em;
+.lat .formulaire_spip .editer-groupe, 
+.lat .formulaire_spip fieldset, 
+.lat .formulaire_spip .boutons, 
+.lat .formulaire_spip .titrem, 
+.lat .formulaire_spip .legend {
+	margin-right: 0;
 	margin-left: 0;
 }
 .lat .formulaire_spip select,
