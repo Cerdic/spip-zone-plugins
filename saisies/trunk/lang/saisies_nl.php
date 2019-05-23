@@ -90,7 +90,7 @@ Je vindt <a href="https://contrib.spip.net/5080" target="_blank">volledige docum
 	'option_cols_label' => 'Breedte',
 	'option_conteneur_class_label' => 'Aanvullende CSS classes op de container',
 	'option_datas_explication' => 'Je moet voor elke rij in het formulier een keuze opgeven in het formaat "key|label of the choice"',
-	'option_datas_grille_explication' => 'Je moet per regel een keuze aangeven in de vorm "sleutel|Label naar keuze" ofwel "sleutel|Label links|Label rechts"',
+	'option_datas_grille_explication' => 'Je moet per regel een keuze aangeven in de vorm "sleutel|Label naar keuze" ofwel "sleutel|Label links|Label rechts"', # MODIF
 	'option_datas_label' => 'Lijst van mogelijke keuzes',
 	'option_datas_sous_groupe_explication' => 'Je moet per regel een keuze aangeven in de vorm van "sleutel|Label" van de keuze. <br />Je kunt het begin van een subgroep aangeven met "*Titel van de subgroep". Om een subgroep af te sluiten kun je een nieuwe beginnen of een regel met uitsluitend "/*" invoegen.',
 	'option_defaut_label' => 'Standaardwaarde',
