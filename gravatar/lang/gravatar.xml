@@ -14,8 +14,9 @@
 	</langue>
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/gravatar?lang_cible=fr" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/gravatar?lang_cible=fr_tu" total="15" traduits="14" relire="0" modifs="0" nouveaux="1" pourcent="93.33">
+	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/gravatar?lang_cible=fr_tu" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Cerf" lien="https://trad.spip.net/auteur/cerf" />
+		<traducteur nom="RealET" lien="https://trad.spip.net/auteur/realet" />
 	</langue>
 	<langue code="it" url="https://trad.spip.net/tradlang_module/gravatar?lang_cible=it" total="15" traduits="13" relire="0" modifs="0" nouveaux="2" pourcent="86.67">
 	</langue>
