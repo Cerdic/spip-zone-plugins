@@ -21,7 +21,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_label_apparence_permalien_compteur' => 'Compteur (1.)',
 	'cfg_label_apparence_permalien_diese' => 'Dièse (#)',
 	'cfg_label_apparence_permalien_picto' => 'Picto',
-	'cfg_label_email_obligatoire' => 'Rendre obligatoire la saisie d’un couriel', # MODIF
+	'cfg_label_email_obligatoire' => 'Rendre obligatoire la saisie d’un courriel',
+	'cfg_label_nom_obligatoire' => 'Rendre obligatoire la saisie d’un nom ou pseudo',
 	'cfg_label_presentation_fil' => 'Présentation du fil de discussion',
 	'cfg_label_presentation_fil_liste' => 'Liste de commentaires (à plat)',
 	'cfg_label_presentation_fil_thread' => 'Enfilade de commentaires (en thread)',
@@ -55,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse_comment_ok' => 'Merci pour ton commentaire !',
 
 	// S
-	'saisie_texte_info' => 'Ce formulaire accepte les raccourcis SPIP <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code> et le code HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Pour créer des paragraphes, laisse simplement des lignes vides.', # MODIF
+	'saisie_texte_info' => 'Ce champ accepte les raccourcis SPIP <code>{{gras}}</code> <code>{italique}</code> <code>-*liste</code> <code>[texte-&gt;url]</code> <code>&lt;quote&gt;</code> <code>&lt;code&gt;</code> et le code HTML <code>&lt;q&gt;</code> <code>&lt;del&gt;</code> <code>&lt;ins&gt;</code>. Pour créer des paragraphes, laisse simplement des lignes vides.',
 	'saisie_texte_legend' => 'Ajoute ton commentaire ici',
 	'submit1' => 'Prévisualiser',
 	'submit2' => 'Confirmer l’envoi',
