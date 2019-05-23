@@ -50,10 +50,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
                     Ce paramètre doit être fixé une fois pour toute à la création des notes.',
 	'info_fonctionnement_note' => 'Fonctionnement de la notation',
 	'info_ip' => 'Pour être le plus facile possible d’utilisation, la note est fixée sur l’adresse IP du votant, ce qui évite deux votes successifs dans la base, avec quelques inconvénients... en particulier si tu gères des votes d’auteurs.<br />
-                Dans ce cas, on fixe la note sur l’identifiant de l’utilisateur (quand celui-ci est enregistré, bien sûr).<br />
-                Si tu veux garantir l’unicité de la note, limite le vote aux <b>seules</b> personnes enregistrées (ci-dessus).', # MODIF
+Dans ce cas, on fixe la note sur l’identifiant de l’utilisateur (quand celui-ci est enregistré, bien sûr).',
+	'info_methode_id' => 'Vérification de l’unicité des votes',
 	'info_modifications' => 'Modifications des notes',
 	'info_ponderation' => 'Le facteur de pondération permet d’accorder plus de valeur aux articles ayant reçu suffisamment de votes. <br /> Entre ci-dessous le nombre de votes au delà duquel tu penses que la note est fiable.',
+	'info_vote_unique_auteur' => 'Si tu veux garantir l’unicité de la note, limites le vote aux <b>seules</b> personnes enregistrées.',
 	'ip' => 'IP',
 	'item_adm' => 'aux administrateurs ',
 	'item_all' => 'à tous ',
@@ -61,6 +62,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_id' => 'un vote par utilisateur ',
 	'item_ide' => 'aux personnes enregistrées ',
 	'item_ip' => 'un vote par IP',
+	'item_methode_id_cookie' => 'Par cookie',
+	'item_methode_id_hash' => 'Par empreinte du navigateur',
+	'item_methode_id_ip' => 'Par adresse IP',
 
 	// J
 	'jaidonnemonavis' => 'J’ai donné mon avis !',
