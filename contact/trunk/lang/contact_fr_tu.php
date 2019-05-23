@@ -95,6 +95,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'madame' => 'Madame',
 	'mademoiselle' => 'Mademoiselle',
+	'message_erreur_robot' => 'Tu es un robot. Méchant robot.',
+	'message_erreur_transmission' => 'Une erreur de transmission s’est produite, merci de renouveler ta demande.',
 	'message_redemander_pass' => 'Ton adresse email "@email@" était déjà enregistrée suite à un message de contact. Pour valider ton compte, demande un <a href="@url_pass@">changement de mot de passe</a> et identifie-toi une première fois.',
 	'modele_label_auteur' => 'Pré-sélectionner un auteur (facultatif) ?',
 	'modele_nom_formulaire' => 'le formulaire de contact avancé',
