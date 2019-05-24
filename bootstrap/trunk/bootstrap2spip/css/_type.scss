@@ -110,8 +110,8 @@ abbr.initialism {
 }
 @media print { abbr[title]:after { content: " (" attr(title) ")"; } }
 dfn { font-weight: bold; font-style: italic; }
-del, .del { background-color: #FFDDDD; border-color: #CC0000; color: #CC0000; text-decoration: line-through; }
-ins, .ins { background-color: #DDFFDD; border-color: #00AA00; color: #00AA00; text-decoration: none; }
+del, .del { background-color: theme-color-level('danger', $alert-bg-level); border-color: theme-color-level('danger', $alert-border-level); color: theme-color-level('danger', $alert-color-level); text-decoration: line-through; }
+ins, .ins { background-color: theme-color-level('success', $alert-bg-level); border-color: theme-color-level('success', $alert-border-level); color: theme-color-level('success', $alert-color-level); text-decoration: none; }
 sup, sub { font-size: .8em; font-variant: normal; line-height: 0; }
 sup { vertical-align: super; top:-0.25em;}
 .ie sup { vertical-align: text-top; }
