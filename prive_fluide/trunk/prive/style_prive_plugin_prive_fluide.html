@@ -111,15 +111,17 @@ body.large {
   ===========
 */
 
-.formulaire_spip .editer-groupe {
-  max-width: 45rem;
+.formulaire_spip .editer-groupe,
+.formulaire_spip fieldset .editer-groupe {
+  max-width: 50em;
   margin-left: auto;
   margin-right: auto;
 }
 
-.formulaire_spip .editer.fieldset {
+.formulaire_spip .fieldset {
   margin: 1em 0;
 }
+
 
 /* Petit écran : tout en pleine largeur (pas mobile-first, car sinon ça peut péter des trucs avec les plugins qui stylent les saisies) */
 @media (max-width: 640px) {
@@ -144,7 +146,7 @@ body.large {
 /* Limiter en largeur pour obtenir ~80 caractères max par ligne */
 #wysiwyg {
   display: block;
-  max-width: 45em;
+  max-width: 50em;
   margin-left: auto;
   margin-right: auto;
 }
