@@ -18,7 +18,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_formulaires(FORMULAIRES){id_formulaire?}{statut?}{compteur_left formulaires_reponses}{tri #ENV{par,compteur_formulaires_reponses},#GET{defaut_tri}}{recherche?}{pagination #ENV{nb,10}}>
+	<BOUCLE_formulaires(FORMULAIRES){objet?}{id_objet?}{id_formulaire?}{statut?}{compteur_left formulaires_reponses}{tri #ENV{par,compteur_formulaires_reponses},#GET{defaut_tri}}{recherche?}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)]">
 			<td class="statut">[(#STATUT|puce_statut{formulaire,#ID_FORMULAIRE})]</td>
 			<td class="titre"><a href="[(#ID_FORMULAIRE|generer_url_entite{formulaire})]">#TITRE</a></td>
