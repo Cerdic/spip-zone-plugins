@@ -78,7 +78,7 @@ if (!function_exists('plugin_est_actif')) {
  *
  * renvoie l'id_objet ciblé par le signal
  */
-function decode_invalideur($cond, $cle_objet_attendue = '', &$objet='') {
+function decoder_invalideur($cond, $cle_objet_attendue = '', &$objet='') {
 	if (!preg_match(',["\']([a-z_]+)[/"\'](.*)[/"\'],', $cond, $r)) {
 		spip_log("Signal non conforme pour decode_signal_invalideur ($cond, $cle_objet_attendue)", 'cachelab_erreur');
 		return null;
@@ -87,14 +87,14 @@ function decode_invalideur($cond, $cle_objet_attendue = '', &$objet='') {
 	list (, $objet, $id_objet) = $r;
 	if ($cle_objet_attendue and ($objet!=$cle_objet_attendue)) {
 		spip_log(
-			"decode_invalideur($cond,) ne reçoit pas un '$cle_objet_attendue' mais un '$objet'",
+			"decoder_invalideur($cond,) ne reçoit pas un '$cle_objet_attendue' mais un '$objet'",
 			'cachelab_erreur'
 		);
 		return null;
 	};
 	if (!$id_objet) {
 		spip_log(
-			"decode_invalideur($cond,) reçoit un $objet nul",
+			"decoder_invalideur($cond,) reçoit un $objet nul",
 			'cachelab_erreur'
 		);
 		return null;
