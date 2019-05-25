@@ -1,7 +1,7 @@
 <paquet
 	prefix="empecher_double_clic"
 	categorie="communication"
-	version="0.2.0"
+	version="0.3.0"
 	etat="test"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/empecher_double_clic-64.png"
