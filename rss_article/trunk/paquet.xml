@@ -1,12 +1,12 @@
 <paquet
 	prefix="rssarticle"
 	categorie="edition"
-	version="1.2.0"
+	version="1.2.1"
 	etat="stable"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/rssarticle-64.png"
 	documentation="https://contrib.spip.net/Flux-RSS-en-articles"
-	schema="1.1.0"
+	schema="1.1.1"
 >
 	<nom>Flux RSS en articles</nom>
 	<auteur lien='https://www.erational.org'>erational</auteur>

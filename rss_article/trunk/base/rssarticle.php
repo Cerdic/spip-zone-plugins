@@ -11,6 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function rssarticle_declarer_tables_auxiliaires($tables_auxiliaires){
 
+	//-- Table articles_syndic ----------------------
 	$spip_rssarticle = array(
 			"id_article"  => "bigint(21) NOT NULL",
 			"id_syndic" 	=> "bigint(21) NOT NULL");
@@ -24,6 +25,7 @@ function rssarticle_declarer_tables_auxiliaires($tables_auxiliaires){
 
 	return $tables_auxiliaires;
 }
+
 
 /**
  * Declarer la table spip_articles_syndic dans les jointures
