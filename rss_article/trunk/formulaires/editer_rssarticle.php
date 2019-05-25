@@ -17,8 +17,9 @@ function formulaires_editer_rssarticle_charger_dist($id_syndic='new', $retour=''
 	$valeurs['id_syndic'] = $id_syndic;
 	$valeurs['editable'] = true;
 	
-	if (!autoriser('modifier', 'syndic', $id_syndic))
+	if (!autoriser('modifier', 'syndic', $id_syndic)) {
 		$valeurs['editable'] = false;
+	}
 
 	return $valeurs;
 }
