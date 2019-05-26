@@ -16,16 +16,31 @@ if (!defined('MOTSAR_SEPARATEUR')) {
 }
 
 /**
- * Ajoute un espace (ou de quoi faire un espace en css) en fonction d'une profondeur donnée
+ * Ajoute un espace (ou de quoi faire un espace en css) en fonction d'une profondeur donnée.
  *
- * @param int $profondeur
- * @return string Code HTML
+ * @param int    $profondeur
+ *        Profondeur du mot. Valuer de entière supérieure ou égale à 0.
+ * @param string $separateur
+ *        Chaine optionelle permettant d'identifier visuellement la profondeur.
+ *
+ * @return string
+ *        Code HTML
 **/
-function mostar_tabulation($profondeur) {
+function mostar_tabulation($profondeur, $separateur='') {
+
+	// Aucune tabulation si la profondeur est nulle.
+	$tabulation = '';
+
 	if ($profondeur) {
-		return "<span class='profondeur_mot'>" . str_repeat(MOTSAR_SEPARATEUR.'&nbsp;', $profondeur) . "</span>";
+		if (!$separateur) {
+			$separateur = MOTSAR_SEPARATEUR;
+		}
+		$tabulation = '<span class="profondeur_mot">'
+			. str_repeat("${separateur}&nbsp;", $profondeur)
+			. "</span>";
 	}
-	return '';
+
+	return $tabulation;
 }
 
 
