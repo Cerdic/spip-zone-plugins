@@ -19,7 +19,7 @@
 
 	<pipeline nom="affichage_final" />
 
-	<necessite nom="scssphp" compatibilite="[1.5.1;1.*.*]" />
+	<necessite nom="scssphp" compatibilite="[1.5.1;2.*.*]" />
 	<necessite nom="jquery" compatibilite="[3.2.1;]" />
 	<procure nom="bootstrap" version="4.3.1" />
 
