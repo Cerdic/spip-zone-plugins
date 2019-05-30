@@ -268,12 +268,14 @@ function motsar_formulaire_fond_avec_querypath($flux) {
 function motsar_pre_insertion($flux) {
 	// lors de la création d'un mot
 	if ($flux['args']['table'] == 'spip_mots') {
-		if ($id_parent = _request('id_parent')) {
-			$id_racine = sql_getfetsel('id_mot_racine', 'spip_mots', 'id_mot=' . sql_quote($id_parent));
+		if (($id_parent = _request('id_parent'))
+		or (isset($flux['data']['id_parent']) and ($id_parent = $flux['data']['id_parent']))) {
+			$parent = sql_fetsel('id_mot_racine, profondeur', 'spip_mots', 'id_mot=' . sql_quote($id_parent));
 			// si et seulement si le parent demandé existe
-			if ($id_racine) {
+			if ($parent) {
 				$flux['data']['id_parent'] = $id_parent;
-				$flux['data']['id_mot_racine'] = $id_racine;
+				$flux['data']['id_mot_racine'] = $parent['id_mot_racine'];
+				$flux['data']['profondeur'] = $parent['profondeur'] + 1;
 			}
 		}
 	}
