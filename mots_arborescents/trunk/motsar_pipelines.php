@@ -251,13 +251,13 @@ function motsar_formulaire_fond_avec_querypath($flux) {
 
 
 /**
- * Insère des modifications juste avant la création d'un mot
- * 
+ * Insère des modifications juste avant la création d'un mot.
+ *
  * Lors de la création d'un mot :
- * - Ajoute l'id_mot_racine et l'id_parent
+ * - Ajoute l'id_mot_racine, la profondeur et l'id_parent.
  *
  * Lors de la création d'un groupe de mot :
- * - Ajoute l'option mots_arborescents
+ * - Ajoute l'option mots_arborescents.
  *
  * @pipeline pre_insertion
  * @param array $flux
@@ -266,8 +266,12 @@ function motsar_formulaire_fond_avec_querypath($flux) {
  *     Données du pipeline complétées
 **/
 function motsar_pre_insertion($flux) {
-	// lors de la création d'un mot
+
+	// Lors de la création d'un mot
 	if ($flux['args']['table'] == 'spip_mots') {
+		// On teste l'id_parent qui est soit :
+		// - posté car le pipeline est appelé via le formulaire d'édition
+		// - passé dans le flux car le pipeline est appelé via la fonction mot_inserer sans passer par le formulaire.
 		if (($id_parent = _request('id_parent'))
 		or (isset($flux['data']['id_parent']) and ($id_parent = $flux['data']['id_parent']))) {
 			$parent = sql_fetsel('id_mot_racine, profondeur', 'spip_mots', 'id_mot=' . sql_quote($id_parent));
@@ -279,9 +283,12 @@ function motsar_pre_insertion($flux) {
 			}
 		}
 	}
-	// lors de la création d'un groupe de mot
+
+	// Lors de la création d'un groupe de mot
 	if ($flux['args']['table'] == 'spip_groupes_mots') {
-		if ($mots_arborescents = _request('mots_arborescents')) {
+		// On teste l'option mots arborescents soit dans les variables postées soit dans le flux.
+		if (($mots_arborescents = _request('mots_arborescents'))
+		or (isset($flux['data']['mots_arborescents']) and ($mots_arborescents = $flux['data']['mots_arborescents']))) {
 			$flux['data']['mots_arborescents'] = $mots_arborescents;
 		}
 	}
