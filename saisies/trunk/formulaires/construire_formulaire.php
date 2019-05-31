@@ -52,7 +52,11 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 	}
 
 	// La liste des saisies
-	$saisies_disponibles = saisies_lister_disponibles();
+	if (isset($options['uniquement_sql']) and $options['uniquement_sql']) {
+		$saisies_disponibles = saisies_lister_disponibles_sql();
+	} else {
+		$saisies_disponibles = saisies_lister_disponibles();
+	}
 	$contexte['_saisies_disponibles'] = $saisies_disponibles;
 
 	// La liste des groupes de saisies
@@ -133,7 +137,11 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 		}
 
 		// La liste des saisies
-		$saisies_disponibles = saisies_lister_disponibles();
+		if (isset($options['uniquement_sql']) and $options['uniquement_sql']) {
+			$saisies_disponibles = saisies_lister_disponibles_sql();
+		} else {
+			$saisies_disponibles = saisies_lister_disponibles();
+		}
 
 		$saisie = $saisies_actuelles[$nom_ou_id];
 		$formulaire_config = $saisies_disponibles[$saisie['saisie']]['options'];
@@ -311,7 +319,11 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 function formulaires_construire_formulaire_traiter($identifiant, $formulaire_initial = array(), $options = array()) {
 	include_spip('inc/saisies');
 	$retours = array();
-	$saisies_disponibles = saisies_lister_disponibles();
+	if (isset($options['uniquement_sql']) and $options['uniquement_sql']) {
+		$saisies_disponibles = saisies_lister_disponibles_sql();
+	} else {
+		$saisies_disponibles = saisies_lister_disponibles();
+	}
 
 	// On ajoute un préfixe devant l'identifiant
 	$identifiant = 'constructeur_formulaire_'.$identifiant;

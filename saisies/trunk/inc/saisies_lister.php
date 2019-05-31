@@ -452,7 +452,6 @@ function saisies_groupes_lister_disponibles($saisies_repertoire = 'saisies') {
 function saisies_lister_disponibles_sql($saisies_repertoire = 'saisies') {
 	$saisies = array();
 	$saisies_disponibles = saisies_lister_disponibles($saisies_repertoire);
-
 	foreach ($saisies_disponibles as $type => $saisie) {
 		if (isset($saisie['defaut']['options']['sql']) and $saisie['defaut']['options']['sql']) {
 			$saisies[$type] = $saisie;
