@@ -14,7 +14,7 @@
 [(#REM) utilitaire pour l'affichage des noms des champs ]
 <script type="text/javascript">
 jQuery(function() {
-	jQuery(".formulaire_editer_champs_extras input[name][type!='hidden']," 
+	jQuery(".formulaire_editer_champs_extras input[name][type!='hidden'],"
 		+ ".formulaire_editer_champs_extras textarea[name],"
 		+ ".formulaire_editer_champs_extras select[name]").each(function() {
 		jQuery(this).after('<span class="affname none">' + jQuery(this).attr('name') + '</span>');

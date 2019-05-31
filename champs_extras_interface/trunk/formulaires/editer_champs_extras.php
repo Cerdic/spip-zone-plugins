@@ -54,7 +54,7 @@ function formulaires_editer_champs_extras_traiter_dist($objet, $redirect=''){
 		$anciennes = array_intersect_key($anciennes, $diff['modifiees']);
 		champs_extras_modifier($table, $diff['modifiees'], $anciennes);
 	}
-	# champs_extras_modifier($table, # modifiees nouvelles, # modifiees anciennes);	
+	# champs_extras_modifier($table, # modifiees nouvelles, # modifiees anciennes);
 
 
 	ecrire_meta("champs_extras_" . $table, serialize($nouvelles_saisies));
