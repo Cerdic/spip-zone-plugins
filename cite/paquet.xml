@@ -1,7 +1,7 @@
 <paquet
 	prefix="cite"
 	categorie="edition"
-	version="0.6.1"
+	version="0.6.2"
 	etat="stable"
 	compatibilite="[2.1.0;3.2.*]"
 	logo="prive/themes/spip/images/cite-32.png"
@@ -13,7 +13,7 @@
 
 	<auteur lien="https://contrib.spip.net/Joseph">Joseph</auteur>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
-	
+
 	<utilise nom="verifier" compatibilite="[0.1.8;[" />
 	<utilise nom="saisies" compatibilite="[1.25.4;]" />
 </paquet>
