@@ -8,7 +8,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return array $flux le flux modifié
 **/
 function normalisation_unicode_pre_edition($flux){
-	if ($flux['args']['action'] == 'modifier') {
+	if ($flux['args']['action'] == 'modifier' and function_exists('normalizer_normalize')) {
 		foreach ($flux['data'] as $champ => $valeur) {
 			$flux['data'][$champ] = normalizer_normalize ($valeur, Normalizer::FORM_C);
 		}
