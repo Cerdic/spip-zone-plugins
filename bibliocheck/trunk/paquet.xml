@@ -1,9 +1,9 @@
 <paquet
 	prefix="bibliocheck"
 	categorie="edition"
-	version="1.2.1"
+	version="1.2.3"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/bibliocheck-32.png"
 	schema="0.1.0"
 	documentation="https://contrib.spip.net/4310"
