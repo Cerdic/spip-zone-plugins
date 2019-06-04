@@ -1,5 +1,7 @@
 <?php
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 function aeres_ieconfig_metas($table){
 	$table['aeres']['titre'] = 'Bibliographie AERES';
@@ -8,4 +10,3 @@ function aeres_ieconfig_metas($table){
 	return $table;
 }
 
-?>

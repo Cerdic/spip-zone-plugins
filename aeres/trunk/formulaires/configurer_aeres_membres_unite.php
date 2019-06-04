@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 function formulaires_configurer_aeres_membres_unite_charger_dist(){
 	if (isset($GLOBALS['meta']['aeres']))
@@ -47,16 +49,17 @@ function formulaires_configurer_aeres_membres_unite_traiter_dist(){
 // Source: http://www.memorandom.fr/php/trier-la-colonne-dun-tableau-sans-prendre-en-compte-la-casse-et-les-accents/
 
 function aeres_sans_accent($chaine) {
-        if (version_compare(PHP_VERSION, '5.2.3', '>='))
-            $str = htmlentities($chaine, ENT_NOQUOTES, "UTF-8", false);
-        else
-            $str = htmlentities($chaine, ENT_NOQUOTES, "UTF-8");
+	if (version_compare(PHP_VERSION, '5.2.3', '>=')) {
+		$str = htmlentities($chaine, ENT_NOQUOTES, "UTF-8", false);
+	} else {
+		$str = htmlentities($chaine, ENT_NOQUOTES, "UTF-8");
+	}
  
-        // NB : On ne peut pas utiliser strtr qui fonctionne mal avec utf8.
-        $str = preg_replace('#\&([A-za-z])(?:acute|cedil|circ|grave|ring|tilde|uml)\;#', '\1', $str);
+	// NB : On ne peut pas utiliser strtr qui fonctionne mal avec utf8.
+	$str = preg_replace('#\&([A-za-z])(?:acute|cedil|circ|grave|ring|tilde|uml)\;#', '\1', $str);
  
-        return $str;
-	};
+	return $str;
+};
 
 function aeres_tri_alpha($data) {
 	//On supprime les accents
@@ -68,4 +71,3 @@ function aeres_tri_alpha($data) {
 	return $data;
 }
 
-?>

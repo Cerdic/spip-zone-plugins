@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 function aeres_affiche_milieu($flux) {
 	$exec = $flux['args']['exec'];
@@ -144,4 +146,3 @@ function autoriser_aeresstat_voir_dist($faire, $type, $id, $qui, $opt){
 }
 
 
-?>

@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 function formulaires_configurer_aeres_charger_dist(){
 	if (isset($GLOBALS['meta']['aeres']))
@@ -63,4 +65,3 @@ function formulaires_configurer_aeres_traiter_dist(){
 	return array('message_ok'=>_T('config_info_enregistree'));
 }
 
-?>

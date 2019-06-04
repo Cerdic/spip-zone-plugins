@@ -1,12 +1,12 @@
 <paquet
 	prefix="aeres"
 	categorie="edition"
-	version="2.2.1"
+	version="2.2.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/aeres-48.png"
 	documentation="https://contrib.spip.net/Bibliographie-AERES-2-0"
->
+>	
 
 	<nom>Bibliographie AERES</nom>
 	<!-- Générer une bibliographie au format AERES à partir de ZotSpip -->
@@ -20,6 +20,6 @@
 	<pipeline nom="affiche_droite" inclure="aeres_pipelines.php" />
 	<pipeline nom="autoriser" inclure="aeres_pipelines.php" />
 
-	<necessite nom="zotspip" compatibilite="[2.0.*;]" />
-	<necessite nom="bibliocheck" compatibilite="[1.0.*;]" />
+	<necessite nom="zotspip" />
+	<necessite nom="bibliocheck" />
 </paquet>
