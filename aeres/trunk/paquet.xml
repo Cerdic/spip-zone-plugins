@@ -1,9 +1,9 @@
 <paquet
 	prefix="aeres"
 	categorie="edition"
-	version="2.2.3"
+	version="2.2.4"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.2.*]"
 	logo="images/aeres-48.png"
 	documentation="https://contrib.spip.net/Bibliographie-AERES-2-0"
 >	
@@ -20,6 +20,6 @@
 	<pipeline nom="affiche_droite" inclure="aeres_pipelines.php" />
 	<pipeline nom="autoriser" inclure="aeres_pipelines.php" />
 
-	<necessite nom="zotspip" compatibilite="[2.0.*;]" />
-	<necessite nom="bibliocheck" compatibilite="[1.0.*;]" />
+	<necessite nom="zotspip" compatibilite="[2.0.0;]" />
+	<necessite nom="bibliocheck" compatibilite="[1.0.0;]" />
 </paquet>
