@@ -1,7 +1,7 @@
 <paquet
 	prefix="aeres"
 	categorie="edition"
-	version="2.2.2"
+	version="2.2.3"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/aeres-48.png"
@@ -20,6 +20,6 @@
 	<pipeline nom="affiche_droite" inclure="aeres_pipelines.php" />
 	<pipeline nom="autoriser" inclure="aeres_pipelines.php" />
 
-	<necessite nom="zotspip" />
-	<necessite nom="bibliocheck" />
+	<necessite nom="zotspip" compatibilite="[2.0.*;]" />
+	<necessite nom="bibliocheck" compatibilite="[1.0.*;]" />
 </paquet>
