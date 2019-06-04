@@ -1,7 +1,8 @@
 <?php
 
-// Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 include_spip('inc/meta');
 
@@ -31,4 +32,3 @@ function bibliocheck_vider_tables($nom_meta_version_base){
 	effacer_meta('bibliocheck');
 }
 
-?>

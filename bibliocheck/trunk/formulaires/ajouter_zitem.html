@@ -20,6 +20,7 @@
 			]
 		</div>
 		<ul>
+		[(#REM) Désactivé car non fonctionnel
 			[(#SAISIE{textarea, texte,
 				label=<:tickets:champ_description:>,
 				class=inserer_barre_forum,
@@ -27,14 +28,13 @@
 			[(#SAISIE{input, exemple,
 				label=<:bibliocheck:champ_lien:>,
 				explication=<:bibliocheck:explication_lien:>})]
-			[(#REM) Désactivé car non fonctionnel
 			<li class="fieldset"><fieldset>
 				<legend>Saisir les détails de la référence</legend>
 				<ul>
 				#INCLURE{fond=inclure/inc-form_item_zotero,env}
 				</ul>
 			</fieldset></li>
-			]
+			
 			[(#CONFIG{tickets/general/joindre_fichiers}|=={on}|et{#PLUGIN{medias}}|oui)
 				[(#SAISIE{input, ajouter_document,
 					type=file,
@@ -50,6 +50,7 @@
 		</ul>
 		<!--extra-->
 		<p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+		]
 	</div></form>]
 </div>
 <script type="text/javascript">// <![CDATA[

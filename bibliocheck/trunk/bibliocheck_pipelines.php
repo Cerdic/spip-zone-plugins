@@ -1,5 +1,9 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
+
 function bibliocheck_affiche_milieu($flux) {
 	$exec = $flux['args']['exec'];
 	if ($exec=='configurer_zotspip' && autoriser('webmestre'))
@@ -78,4 +82,3 @@ function autoriser_biblio_verifier_dist($faire, $type, $id, $qui, $opt){
 	return $autorise;
 }
 
-?>

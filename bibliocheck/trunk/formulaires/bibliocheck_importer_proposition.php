@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 function formulaires_bibliocheck_importer_proposition_charger_dist($id_ticket){
 	$contexte = array('id_ticket'=>$id_ticket);
@@ -44,4 +46,3 @@ function formulaires_bibliocheck_importer_proposition_traiter_dist($id_ticket){
 	return $message;
 }
 
-?>

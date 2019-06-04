@@ -1,7 +1,7 @@
 <?php
-
-// Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 function bibliocheck_declarer_tables_interfaces($interface){
 	
@@ -22,4 +22,4 @@ function bibliocheck_declarer_tables_principales($tables_principales){
 
 
 
-?>
+

@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 include_spip('formulaires/editer_ticket');
 
@@ -109,4 +111,3 @@ function formulaires_ajouter_zitem_traiter_dist($auteur,$retour=NULL,$retourjava
 	return $message;
 }
 
-?>
