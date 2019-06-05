@@ -39,7 +39,7 @@ function commandes_upgrade($nom_meta_base_version, $version_cible) {
 	$id_webmestre = commandes_id_premier_webmestre();
 
 	$config = array_merge(array(
-	    'duree_vie' => '1',
+	    'duree_vie' => '',
 	    'activer' => '',
 	    'quand' => array_keys(commandes_lister_statuts()),
 	    'expediteur' => 'webmaster',

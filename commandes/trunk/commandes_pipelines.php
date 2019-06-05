@@ -38,21 +38,23 @@ function commandes_insert_head_css($flux){
  */
 function commandes_optimiser_base_disparus($flux){
 	include_spip('inc/config');
-	// On cherche la date depuis quand on a le droit d'avoir fait la commande (par défaut 1h)
-	$depuis = date('Y-m-d H:i:s', time() - 3600*intval(lire_config('commandes/duree_vie', 1)));
-	// On récupère les commandes trop vieilles
-	$commandes = sql_allfetsel(
-		'id_commande',
-		'spip_commandes',
-		'statut = '.sql_quote('encours').' and date<'.sql_quote($depuis)
-	);
+	if (is_numeric($duree_vie = lire_config('commandes/duree_vie'))) {
+		// On cherche la date depuis quand on a le droit d'avoir fait la commande
+		$depuis = date('Y-m-d H:i:s', time() - 3600*intval($duree_vie));
+		// On récupère les commandes trop vieilles
+		$commandes = sql_allfetsel(
+			'id_commande',
+			'spip_commandes',
+			'statut = '.sql_quote('encours').' and date<'.sql_quote($depuis)
+		);
 
-	// S'il y a bien des commandes à supprimer
-	if ($commandes) {
-		$commandes = array_map('reset', $commandes);
-		include_spip('inc/commandes');
-		commandes_supprimer($commandes);
-		$flux['data'] += count($commandes);
+		// S'il y a bien des commandes à supprimer
+		if ($commandes) {
+			$commandes = array_map('reset', $commandes);
+			include_spip('inc/commandes');
+			commandes_supprimer($commandes);
+			$flux['data'] += count($commandes);
+		}
 	}
 
 	return $flux;
