@@ -4,7 +4,7 @@
  * Distribue sous licence MIT
  *
  */
-use Leafo\ScssPhp\Compiler;
+use ScssPhp\ScssPhp\Compiler;
 
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -48,9 +48,9 @@ function scss_compile($style, $contexte = array()) {
 		$cache_options['force_refresh'] = 'once';
 	}
 
-	// le compilateur Leafo\ScssPhp\Compiler compile le contenu
+	// le compilateur ScssPhp\ScssPhp\Compiler compile le contenu
 	$scss = new Compiler($cache_options);
-	$scss->setFormatter("Leafo\ScssPhp\Formatter\Expanded");
+	$scss->setFormatter("ScssPhp\ScssPhp\Formatter\Expanded");
 
 	// lui transmettre le path qu'il utilise pour les @import
 	$scss->setImportPaths(_chemin());
