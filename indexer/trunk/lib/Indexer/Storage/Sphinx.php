@@ -90,6 +90,7 @@ class Sphinx implements StorageInterface {
 	public function reformatDocument(Document $document) {
 		// Indexation specifique des champs de date sous forme de nombres
 		// dans properties.ymd -- https://contrib.spip.net/Indexer-date-32bits
+		date_default_timezone_set('UTC');
 		$dateu = strtotime($document->date);
 		if ($dateu) {
 			// recalculer dateu pour les dates floues: 2000-00-00 => 2000-01-01
