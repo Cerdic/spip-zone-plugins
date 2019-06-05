@@ -1,7 +1,7 @@
 <paquet
 	prefix="aeres"
 	categorie="edition"
-	version="2.3.0"
+	version="2.3.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/aeres-48.png"
@@ -9,7 +9,7 @@
 >	
 
 	<nom>Bibliographie HCERES (anciennement AERES)</nom>
-	<!-- Générer une bibliographie au format AERES à partir de ZotSpip -->
+	<!-- Générer une bibliographie au format HCERES à partir de ZotSpip -->
 
 	<auteur lien="https://contrib.spip.net/Joseph">Joseph Larmarange</auteur>
 

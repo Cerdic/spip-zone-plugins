@@ -3,7 +3,7 @@
 #SET{fin,#ENV{fin,#CONFIG{aeres/fin}}}
 [(#REM) Fil d'Ariane ]
 [(#ENV{masquer_fil}|non)
-	<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{biblioaeres}">Bibliographie AERES</a> &gt; <strong class="on">Vérifier la bibliographie</strong></p>
+	<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{biblioaeres}">Bibliographie HCERES</a> &gt; <strong class="on">Vérifier la bibliographie</strong></p>
 ]
 
 <h1 class="h1">[(#ENV{auteur,Tous les auteurs})] ([(#GET{debut})]-[(#GET{fin})])</h1>
@@ -71,7 +71,7 @@
 
 <B_cpb>
 <h2 class="h2">COMMUNICATIONS INDÉTERMINÉES</h2>
-<div class="bibliocheck_info_erreur">Les références ci-dessous ne précisent pas s'il s'agit d'une communication orale ou d'un poster. Cette information doit être renseignée dans le champs <em>Éditeur</em>, qui doit commencer par <code>communication orale</code> ou <code>poster</code> (en minuscules).<br />Il est possible de préciser un numéro de communication à la suite, par exemple <code>poster n°123456</code>.<br />Veuillez indiquer les corrections à effectuer sur ces référénces. En l'absence de précisions, elles ne seront pas intégrées à la bibliographie AERES.</div>
+<div class="bibliocheck_info_erreur">Les références ci-dessous ne précisent pas s'il s'agit d'une communication orale ou d'un poster. Cette information doit être renseignée dans le champs <em>Éditeur</em>, qui doit commencer par <code>communication orale</code> ou <code>poster</code> (en minuscules).<br />Il est possible de préciser un numéro de communication à la suite, par exemple <code>poster n°123456</code>.<br />Veuillez indiquer les corrections à effectuer sur ces référénces. En l'absence de précisions, elles ne seront pas intégrées à la bibliographie HCERES.</div>
 <div class="liste bibliocheck">
 <BOUCLE_cpb(ZITEMS){auteur?}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type_ref=conferencePaper}{role=author}{!editeur LIKE poster%}{!editeur LIKE communication orale%}{publication=''}>
 [<h3 class="h3">(#ANNEE|unique{cpb})</h3>]
@@ -177,7 +177,7 @@
 
 <B_thpb>
 <h2 class="h2">THÈSES INDÉTERMINÉES et autres mémoires</h2>
-<div class="bibliocheck_info_erreur">Les références ci-dessous ne précisent pas s'il s'agit d'une HDR ou d'une thèse. Il peut éventuellement s'agir d'autres types de mémoire (master...), ces derniers n'étant pas pris en compte pour la bibliographie AERES. Le type de mémoire doit commencer par <code>habilitation à diriger des recherches</code> ou <code>thèse</code> (en minuscules, attention aux fautes de frappe et aux accents).<br />Il est possible de préciser la discipline à la suite, par exemple <code>thèse de démographie</code>.<br />Veuillez indiquer les corrections à effectuer sur ces référénces. En l'absence de précisions, elles ne seront pas intégrées à la bibliographie AERES.</div>
+<div class="bibliocheck_info_erreur">Les références ci-dessous ne précisent pas s'il s'agit d'une HDR ou d'une thèse. Il peut éventuellement s'agir d'autres types de mémoire (master...), ces derniers n'étant pas pris en compte pour la bibliographie HCERES. Le type de mémoire doit commencer par <code>habilitation à diriger des recherches</code> ou <code>thèse</code> (en minuscules, attention aux fautes de frappe et aux accents).<br />Il est possible de préciser la discipline à la suite, par exemple <code>thèse de démographie</code>.<br />Veuillez indiquer les corrections à effectuer sur ces référénces. En l'absence de précisions, elles ne seront pas intégrées à la bibliographie HCERES.</div>
 <div class="liste bibliocheck">
 <BOUCLE_thpb(ZITEMS){auteur?}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type_ref=thesis}{role=author}{!type_doc LIKE habilitation à diriger des recherches%}{!type_doc LIKE thèse%}>
 [<h3 class="h3">(#ANNEE|unique{thpb})</h3>]
@@ -221,8 +221,8 @@
 </B_anneepb>
 
 <B_autres>
-<h2 class="h2">Autres références (hors AERES)</h2>
-<div class="bibliocheck_info_erreur">Autres références présentes dans la base de données. Ces dernières ne seront pas intégrées à la bibliographie AERES.</div>
+<h2 class="h2">Autres références (hors HCERES)</h2>
+<div class="bibliocheck_info_erreur">Autres références présentes dans la base de données. Ces dernières ne seront pas intégrées à la bibliographie HCERES.</div>
 <div class="liste bibliocheck">
 <BOUCLE_autres(ZITEMS){auteur?}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{!id_zitem IN #GET{refs}}{!type_ref IN attachment,note}>
 [<h3 class="h3">(#ANNEE|unique{autres})</h3>]

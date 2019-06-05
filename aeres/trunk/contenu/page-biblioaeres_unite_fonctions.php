@@ -3,7 +3,7 @@ if (!defined("_ECRIRE_INC_VERSION")) {
 	return;
 }
 
-// Cette balise renvoie le tableau des membres definis dans la config du plugin AERES
+// Cette balise renvoie le tableau des membres definis dans la config du plugin HCERES
 function balise_AERES_MEMBRES_dist($p) {
 		$p->code = "aeres_lister_membres()";
 	return $p;

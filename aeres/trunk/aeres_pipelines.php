@@ -14,7 +14,7 @@ function aeres_affiche_milieu($flux) {
 function aeres_affiche_droite($flux) {
 	$exec = $flux['args']['exec'];
 	if ($exec=='ticket')
-		$flux['data'] .= '<h3>Correspondances<br />Zotero / AERES</h3><p style="text-align:right;"><a href="./?exec=infos_aeres" class="mediabox">Tableau détaillé</a></p>'.recuperer_fond('inclure/correspondances_zotero_aeres');
+		$flux['data'] .= '<h3>Correspondances<br />Zotero / HCERES</h3><p style="text-align:right;"><a href="./?exec=infos_aeres" class="mediabox">Tableau détaillé</a></p>'.recuperer_fond('inclure/correspondances_zotero_aeres');
 	return $flux;
 }
 
