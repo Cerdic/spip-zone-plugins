@@ -1,0 +1,99 @@
+[(#REM)
+
+	Résumé d'un compte de profil
+
+	Paramètres :
+		**obligatoire
+		*conseillé
+
+		- **id_profil
+		- **id_auteur
+
+]
+<BOUCLE_profil(PROFILS) {id_profil} {si #ENV{id_auteur}}>
+#SET{config, #CHAMP_SQL**{config}|unserialize}
+#SET{infos,  #ENV{id_auteur}|profils_recuperer_infos{#ID_PROFIL}}
+#SET{objets, #LISTE{auteur}
+	|push{#PLUGIN{contacts}|et{#GET{config/organisation}}|?{organisation}}
+	|push{#PLUGIN{contacts}|et{#GET{config/contact}}|?{contact}}
+	|array_filter
+}
+
+<div class="profil profil_preview">
+
+	[(#REM)
+		On affiche les champs et coordonnées regroupés par type d'objet principal, selon ceux présents dans la config
+	]
+	<BOUCLE_objets(DATA) {source table, #GET{objets}}>
+	#SET{objet,                    #VALEUR}
+	#SET{cle_objet,                #VALEUR|id_table_objet}
+	#SET{id_objet,                 #GET{infos/#GET{objet}/#GET{cle_objet}}}
+	#SET{texte_objet,              #GET{objet}|objet_info{texte_objet}|_T}
+	#SET{config_champs_objet,      #GET{config/#GET{objet}}}
+	#SET{config_coordonnees_objet, #GET{config/coordonnees/#GET{objet}}}
+	#SET{saisies_objet,            #GET{objet}|profils_chercher_saisies_objet}
+	#SET{config_label_groupe,      #GET{config/activer_groupe_#GET{objet}}}
+
+	[(#REM)
+		Les champs de l'objet
+		On récupère les saisies pour avoir les labels et on filtre selon les champs configurés
+	]
+	<BOUCLE_champs(DATA) {source table, #GET{saisies_objet}} {si #GET{config_champs_objet}|is_array}>
+	#SET{champ,#VALEUR{options/nom}}
+	[(#GET{champ}|in_array{#GET{config_champs_objet}|array_keys}|oui)
+	#SET{valeur,#GET{infos/#GET{objet}/#GET{champ}}|textebrut}
+	#SET{label,#VALEUR{options/label}}
+	[<div class="profil__item[ profil__item_(#GET{champ}|attribut_html)]">
+		[<span class="profil__label">(#GET{label}) : </span>]
+		<span class="profil__value">(#GET{valeur})</span>
+	</div>]
+	]
+	</BOUCLE_champs>
+
+	[(#REM)
+		Les coordonnees liées
+	]
+	<BOUCLE_coordonnees_objets(DATA) {source table, #GET{infos/coordonnees/#GET{objet}}} {si #PLUGIN{coordonnees}}>
+	#SET{texte_objet_coordonnee, #CLE|objet_type|objet_info{texte_objet}|_T}
+	#SET{objet_coordonnee,       #CLE|objet_type}
+	#SET{saisies_coordonnee,     #GET{objet_coordonnee}|profils_chercher_saisies_objet}
+	<BOUCLE_coordonnees(DATA) {source table, #VALEUR}>
+	#SET{coordonnee,#VALEUR}
+	#SET{type,#CLE|?{#GET{objet_coordonnee}|appliquer_filtre{coordonnees_lister_types_coordonnees,#CLE}}}
+	#SET{cle,#COMPTEUR_BOUCLE|moins{1}}
+	#SET{config_label,#GET{config_coordonnees_objet/#GET{objet_coordonnee}s/#GET{cle}/label}}
+
+	<B_champs_adresse>
+	<div class="profil__item profil__item_address">
+		<span class="profil__label">[(#GET{config_label}|sinon{#GET{texte_objet_coordonnee}})][ <small>\((#GET{type})\)</small>] :</span>
+	</div>
+	<BOUCLE_champs_adresse(DATA)
+		{source table, #GET{saisies_coordonnee}}
+		{si #GET{objet_coordonnee}|=={adresse}}
+	>
+	#SET{valeur,#GET{coordonnee/#VALEUR{options/nom}}}
+	[<div class="profil__item[ profil__item_(#VALEUR{options/nom}|attribut_html)]">
+		<span class="profil__label">#VALEUR{options/label} : </span>
+		<span class="profil__value">(#GET{valeur})</span>
+	</div>]
+	</BOUCLE_champs_adresse>
+	</B_champs_adresse>
+
+	<BOUCLE_champs_email_numero(DATA) {source table, #VALEUR}
+		{cle IN numero,email}
+	>
+	#SET{valeur,#VALEUR}
+	[<div class="profil__item[ profil__item_(#CLE|attribut_html)]">
+		<span class="profil__label">[(#GET{config_label}|sinon{#GET{texte_objet_coordonnee}})][ <small>\((#GET{type})\)</small>] :</span>
+		<span class="profil__value">(#GET{valeur})</span>
+	</div>]
+	</BOUCLE_champs_email_numero>
+	<//B_champs_adresse>
+
+	</BOUCLE_coordonnees>
+	</BOUCLE_coordonnees_objets>
+
+	</BOUCLE_objets>
+
+</div>
+</BOUCLE_profil>
