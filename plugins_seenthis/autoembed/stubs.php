@@ -72,6 +72,15 @@ $AutoEmbed_stubs = array(
     'embed-height' => '270',
     'iframe-player' => 'https://www.dailymotion.com/embed/video/$2',
   ),
+ array(
+    'title' => 'PeerTube DataGueule',
+    'website' => 'https://peertube.datagueule.tv/',
+    'url-match' => 'http://peertube\.datagueule\.tv/videos/watch/(.*)',
+    'embed-width' => '480',
+    'embed-height' => '270',
+    'image-src' => 'https://peertube.datagueule.tv/static/previews/$2.jpg',
+    'iframe-player' => 'https://peertube.datagueule.tv/videos/embed/$2',
+  ),
   array(
     'title' => 'Google Video',
     'website' => 'http://video.google.com',
