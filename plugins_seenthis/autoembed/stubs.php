@@ -1155,7 +1155,7 @@ $AutoEmbed_stubs = array(
     'embed-height' => '433',
   ),
   array(
-    'title' => 'TagTélé',
+    'title' => 'TagTÃ©lÃ©',
     'website' => 'http://www.tagtele.com',
     'url-match' => 'http://www\.tagtele\.com/(?:v/|videos/voir/)([0-9]{1,12})',
     'embed-src' => 'http://www.tagtele.com/v/$2',
@@ -1187,7 +1187,7 @@ $AutoEmbed_stubs = array(
    array(
     'title' => 'PDF file',
     'website' => '',
-    'url-match' => '//.*/(.*\.(xls|xlsx|ppt|pptx|pages|ai|psd|tiff|dxf|eps|ps))$', // pdf|doc|docx dŽsactivŽs
+    'url-match' => '//.*/(.*\.(xls|xlsx|ppt|pptx|pages|ai|psd|tiff|dxf|eps|ps))$', // pdf|doc|docx dÃ©sactivÃ©s
     'embed-width' => '480',
     'embed-height' => '400',
     'iframe-player' => 'http://docs.google.com/gview?url=$2&amp;embedded=true',
