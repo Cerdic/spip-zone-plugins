@@ -16,7 +16,7 @@ label=<:agenda:info_evenement:>,class=chosen})]
 	</BOUCLE_prix_article>
 <//B_prix_evenement>
 [(#PLUGIN{prix_objets}|oui)
-	[(#PLUGIN{declinaisons}|oui)
+	[(#PLUGIN{declinaisons}|et{#GET{id_objet}}|oui)
 		[(#SAISIE{prix_objets,
 			id_prix_objet,
 			obligatoire=oui,
