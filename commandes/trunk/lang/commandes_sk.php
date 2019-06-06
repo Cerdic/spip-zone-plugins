@@ -159,7 +159,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'parametres_cfg_titre' => 'Parametre',
-	'parametres_duree_vie_explication' => 'Zadajte čas platnosti objednávky v tomto štádiu spracovania (v hodinách):',
+	'parametres_duree_vie_explication' => 'Zadajte čas platnosti objednávky v tomto štádiu spracovania (v hodinách):', # MODIF
 	'parametres_duree_vie_label' => 'Čas platnosti',
 	'passer_la_commande' => 'Zadať objednávku',
 

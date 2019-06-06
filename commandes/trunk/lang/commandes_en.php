@@ -189,7 +189,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'parametres_cfg_titre' => 'Parameters',
-	'parametres_duree_vie_explication' => 'Enter the lifetime of a command with the current status (in seconds)',
+	'parametres_duree_vie_explication' => 'Enter the lifetime of a command with the current status (in seconds)', # MODIF
 	'parametres_duree_vie_label' => 'Lifetime',
 	'passer_la_commande' => 'Checkout',
 

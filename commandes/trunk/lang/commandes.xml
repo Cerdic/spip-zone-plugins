@@ -1,5 +1,5 @@
 <traduction module="commandes" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/commandes/trunk/lang/" reference="fr">
-	<langue code="en" url="https://trad.spip.net/tradlang_module/commandes?lang_cible=en" total="205" traduits="196" relire="0" modifs="1" nouveaux="8" pourcent="95.61">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/commandes?lang_cible=en" total="205" traduits="195" relire="0" modifs="2" nouveaux="8" pourcent="95.12">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Cyril MARION" lien="https://trad.spip.net/auteur/cyril-marion" />
 		<traducteur nom="EScott" lien="https://trad.spip.net/auteur/escott" />
@@ -14,7 +14,7 @@
 	</langue>
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/commandes?lang_cible=fr" total="205" traduits="205" relire="0" modifs="1" nouveaux="-1" pourcent="100.00">
 	</langue>
-	<langue code="sk" url="https://trad.spip.net/tradlang_module/commandes?lang_cible=sk" total="205" traduits="164" relire="0" modifs="1" nouveaux="40" pourcent="80.00">
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/commandes?lang_cible=sk" total="205" traduits="163" relire="0" modifs="2" nouveaux="40" pourcent="79.51">
 		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
