@@ -30,6 +30,10 @@ include_spip('inc/profils');
  *     ID SQL ou identifiant textuel du profil voulu
  * @param string $retour
  * 		URL de redirection une fois terminé
+ * @param array $options
+ *     Tableau d'options
+ *     - forcer_admin
+ *     - texte_submit
  * @return string
  *     Hash du formulaire
  */
@@ -48,6 +52,10 @@ function formulaires_profil_identifier_dist($id_auteur = 'new', $id_ou_identifia
  *     ID SQL ou identifiant textuel du profil voulu
  * @param string $retour
  * 		URL de redirection une fois terminé
+ * @param array $options
+ *     Tableau d'options
+ *     - forcer_admin
+ *     - texte_submit
  * @return array
  *     Tableau des saisies
  */
@@ -66,6 +74,16 @@ function formulaires_profil_saisies_dist($id_auteur = 'new', $id_ou_identifiant_
 		));
 	}
 	
+	// Si on demande un texte différent pour le bouton
+	if (isset($options['texte_submit'])) {
+		$saisies_options = array(
+			'options' => array(
+				'texte_submit' => $options['texte_submit']
+			)
+		);
+		$saisies = array_merge_recursive($saisies, $saisies_options);
+	}
+
 	return $saisies;
 }
 
@@ -80,6 +98,10 @@ function formulaires_profil_saisies_dist($id_auteur = 'new', $id_ou_identifiant_
  *     ID SQL ou identifiant textuel du profil voulu
  * @param string $retour
  * 		URL de redirection une fois terminé
+ * @param array $options
+ *     Tableau d'options
+ *     - forcer_admin
+ *     - texte_submit
  * @return array
  *     Environnement du formulaire
  */
@@ -118,7 +140,7 @@ function formulaires_profil_charger_dist($id_auteur = 'new', $id_ou_identifiant_
 	
 	// On remplit le contexte avec ces informations (et un préfixe pour le contact)
 	$contexte = array_merge($contexte, $infos);
-	
+
 	return $contexte;
 }
 
@@ -135,6 +157,10 @@ function formulaires_profil_charger_dist($id_auteur = 'new', $id_ou_identifiant_
  *     ID SQL ou identifiant textuel du profil voulu
  * @param string $retour
  * 		URL de redirection une fois terminé
+ * @param array $options
+ *     Tableau d'options
+ *     - forcer_admin
+ *     - texte_submit
  * @return array
  *     Tableau des erreurs
  */
@@ -157,6 +183,10 @@ function formulaires_profil_verifier_dist($id_auteur = 'new', $id_ou_identifiant
  *     ID SQL ou identifiant textuel du profil voulu
  * @param string $retour
  * 		URL de redirection une fois terminé
+ * @param array $options
+ *     Tableau d'options
+ *     - forcer_admin
+ *     - texte_submit
  * @return array
  *     Retours des traitements
  */
