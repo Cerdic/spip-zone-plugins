@@ -1,0 +1,14 @@
+<paquet
+	prefix="accelerer_job"
+	categorie="performance"
+	version="0.1.0"
+	etat="test"
+	compatibilite="[3.0.0;3.3.*]"
+	logo="images/job_vite_32.png"
+	documentation="https://contrib.spip.net/5164"
+>
+	<nom>Accélérer Jobs</nom>
+	<!-- Forcer l'exécution immédiate d'un certain nombre de jobs arrivé à échéance -->
+	<auteur lien="https://contrib.spip.net/JLuc">JLuc</auteur>
+	<credit lien="https://thenounproject.com/vitaliyplut/uploads/?i=148595">Icone d'après vitaliyplut, Licence Creative Commons</credit>
+</paquet>
