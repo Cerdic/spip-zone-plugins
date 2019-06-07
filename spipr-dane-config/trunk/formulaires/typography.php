@@ -25,23 +25,29 @@ include_spip('inc/yaml');
 function formulaires_typography_charger_dist( $bloc ) {
 	// 
 	$meta = 'sdc/';
-    $font = lire_config('sdc/'.$bloc.'/font-family', 'Open Sans');
+
+    if ( !$font = lire_config('sdc/'.$bloc.'/font-family') ) {
+        $font = 'Open Sans';
+    }
     // tableau des polices google
     // import depuis le fichier gg_fonts.yaml
     $polices=yaml_decode_file(find_in_path('yaml/gg_fonts.yaml'));
+    $listeFonts=array();
     
     foreach($polices as $famille){
-        if( in_array( lire_config('sdc/'.$bloc.'/font-family'), $famille ) && $font == "")
-            $font=lire_config('sdc/'.$bloc.'/font-family');
+        $listeFonts=array_merge($listeFonts, $famille);
     }
-    
-    if ( $font == "") $font="perso";
+    if( !in_array( $font, $listeFonts ) ){
+        $fontFamilyPerso=$font;
+        $font='perso';
+    }
+
 	// on charge les saisies et les champs qui nécessitent un accès par les fonctions
 	$valeurs = array(
 		'bloc' => $bloc,
         'polices' => yaml_decode_file(find_in_path('yaml/gg_fonts.yaml')),
 		'font-family' => $font, 
-		'font-family-perso' => $font == "perso" ? lire_config('sdc/'.$bloc.'/font-family') : '' ,
+		'font-family-perso' => $fontFamilyPerso,
 		'font-size' => lire_config('sdc/'.$bloc.'/font-size', '2.6'), 
 		'color' => lire_config('sdc/'.$bloc.'/color', lire_config('sdc/defaut/color2','#455C98')), 
 	);
@@ -84,7 +90,7 @@ function formulaires_typography_traiter_dist( $bloc ) {
         if ($lines =  lire_variables_typo_less()) {
             foreach ($lines as $line_num => $line) {
                 if (_request("font-family")) {
-                    if (preg_match("/^@sansFontFamily:/", $line, $matches) &&  $bloc != "title")
+                    if (preg_match("/^@sansFontFamily:/", $line, $matches) &&  $bloc != "title" &&  $bloc != "h2")
                         $data .= $matches[0]." \t"."'"._request("font-family")."',Arial,Helvetica,sans-serif;\n";
                     else if (preg_match("/^(@import|\/\/@import)/", $line, $matches)) {
                         $importFonts = preg_replace('/\s/', '+', trim(_request("font-family"))); 
@@ -93,6 +99,25 @@ function formulaires_typography_traiter_dist( $bloc ) {
                         else if ( $bloc == "title" && lire_config($meta.'defaut/font-family'))
                             $importFonts .= '|'.preg_replace('/\s/', '+', trim(lire_config($meta.'defaut/font-family'))); 
                             
+                        if ( $bloc != "title"  &&  $bloc != "h2" ){
+                            if ( lire_config($meta.'title/font-family'))
+                                $importFonts .= '|'.preg_replace('/\s/', '+', trim(lire_config($meta.'title/font-family'))); 
+                            if ( lire_config($meta.'h2/font-family'))
+                                $importFonts .= '|'.preg_replace('/\s/', '+', trim(lire_config($meta.'h2/font-family'))); 
+                        }
+                        else if ( $bloc == "title"){
+                            if ( lire_config($meta.'defaut/font-family'))
+                                $importFonts .= '|'.preg_replace('/\s/', '+', trim(lire_config($meta.'defaut/font-family'))); 
+                            if ( lire_config($meta.'h2/font-family') && !preg_match("/".lire_config($meta.'h2/font-family')."/", $line))
+                                $importFonts .= '|'.preg_replace('/\s/', '+', trim(lire_config($meta.'h2/font-family'))); 
+                        }
+                        else if ( $bloc == "h2"){
+                            if ( lire_config($meta.'defaut/font-family'))
+                                $importFonts .= '|'.preg_replace('/\s/', '+', trim(lire_config($meta.'defaut/font-family'))); 
+                            if ( lire_config($meta.'title/font-family') && !preg_match("/".lire_config($meta.'title/font-family')."/", $line))
+                                $importFonts .= '|'.preg_replace('/\s/', '+', trim(lire_config($meta.'title/font-family'))); 
+                        }
+
                         if (_request("font-family") == "Open Sans")
                             //$data .= "//@import url('https://fonts.googleapis.com/css?family=".$importFonts."');\n" ;
                             $data .= $line;
@@ -110,6 +135,7 @@ function formulaires_typography_traiter_dist( $bloc ) {
         
 
 		foreach($vals as $val) {
+            if ($bloc == 'h2') $bloc='body/h2';
 			if (  _request($val)!='' ) {
 				ecrire_config($meta.$bloc.'/'.$val, _request($val));
 				if(is_null(lire_config($meta.$bloc.'/'.$val)))
@@ -151,7 +177,8 @@ function formulaires_typography_traiter_dist( $bloc ) {
         file_put_contents(_DIR_SITE."squelettes/css/typography.less", $data);
       
         foreach($vals as $val) {
-            effacer_config($meta.$bloc.'/'.$val);
+            if($bloc=='h2')effacer_config($meta.'body/h2/'.$val);
+            else effacer_config($meta.$bloc.'/'.$val);
         }
         set_request('font-family', 'Open Sans');
         if ( $bloc == "title"){

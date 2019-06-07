@@ -1,35 +1,33 @@
-<div id="content_1" class="content" style="overflow-y:auto;">
+<div id="content_1" class="content liste-images">
+#SET{monchoix, #CONFIG{sdc/#ENV{bloc}/background-image}}
     <B_ls2>
     #ANCRE_PAGINATION
-    [(#REM)<p class="pagination">#PAGINATION</p>]
     <p class="pagination"> #GRAND_TOTAL[ (#GRAND_TOTAL|singulier_ou_pluriel{sdc:image_disponible, sdc:images_disponibles}) ]</p>
     <BOUCLE_ls2(DATA){source glob, #EVAL{_DIR_SITE}squelettes/images/*.*}{pagination 8}>
         [(#SET{valeur, #VALEUR|explode{'/',-1}|end})]
-        [<div class="formulaire_spip" style="float:left;margin:6px;width:110px;padding:4px;border:1px solid #ccc;">
-            <a href="#VALEUR" class="cboxElement hasbox" title="[(#GET{valeur})]" style="height:65px;display:block;overflow:hidden;">(#VALEUR|image_reduire{100,9999}|alterner{'','','<br/>'})</a>
+        [<div class="formulaire_spip ">
+            <a href="#VALEUR" class="cboxElement hasbox box-image" title="[(#GET{valeur})]">(#VALEUR|image_reduire{100,9999})</a>
             <br/>
-            [(#REM)[<span style="font-size:.8em;overflow:none;display:block;">(#GET{valeur})</span>]
-            ]
-            <button  class="choisir submit" [(#REM)] onclick ="jQuery('#champ_background-image').attr('value', '#GET{valeur}');jQuery('.afficher_si_bgimg_selected_#ENV{id_unique}').show();jQuery('.choisir span').html('Choisir');jQuery('.choisir img').attr('src', '#CHEMIN{images/valide25.png}');jQuery(this).find('img').attr('src', '[(#CHEMIN{images/valide-ok-24.png})]');jQuery(this).find('span').html('Mon choix');jQuery('.choisir').removeAttr('style');jQuery(this).attr('style', 'background-color: powderblue');return false;" [ (#ENV{background-image}|=={#GET{valeur}}|oui)  style="background-color: powderblue;"]>
-            [(#ENV{background-image}|=={#GET{valeur}}|?{
+            <button  class="choisir submit[ (#GET{monchoix}|=={#GET{valeur}}|oui)monchoix]" onclick ="jQuery('#champ_background-image').attr('value', '#GET{valeur}');jQuery('.afficher_si_bgimg_selected_#ENV{id_unique}').show();jQuery('.choisir').removeClass('monchoix');jQuery('.choisir span').html('Choisir');jQuery('.choisir img').attr('src', '#CHEMIN{images/valide25.png}');jQuery(this).find('img').attr('src', '[(#CHEMIN{images/valide-ok-24.png})]');jQuery(this).find('span').html('Mon choix');jQuery(this).addClass('monchoix');return false;">
+            [(#GET{monchoix}|=={#GET{valeur}}|?{
                 [ (#CHEMIN{images/valide-ok-24.png}|image_reduire{16}|inserer_attribut{'style', 'vertical-align:middle'}) ]
-                <span style="background-color: powderblue;">Mon choix</span>
+                <span class="monchoix">Mon choix</span>
             , 
                 [ (#CHEMIN{images/valide25.png}|image_reduire{16}|inserer_attribut{'style', 'vertical-align:middle'}) ]
-                <span>Choisir</span> 
+                <span class="choix">Choisir</span> 
             })]
             </button>
         [(#ENV{del}|oui)
-            <label style="float:right;display:block;margin:0;width:auto;" for="todelete[_(#COMPTEUR_BOUCLE)]">
+            <label class="todelete" for="todelete[_(#COMPTEUR_BOUCLE)]">
                 <input type="checkbox" name="todelete\[\]" id="todelete[_(#COMPTEUR_BOUCLE)]" value="[(#GET{valeur})]" style="vertical-align:text-bottom" />
                 [(#CHEMIN{prive/themes/spip/images/supprimer-24.png}|image_reduire{12}|inserer_attribut{title, Supprimer})]
             </label>]
         </div>] 
     </BOUCLE_ls2>
-    <p class="subDel" style="clear:both;text-align:right;display:none;">
-        <input type="submit" value="supprimer" class="submit delete" name="img_delete" />
+    <p class="subDel">
+        <input type="submit" value="Supprimer" class="submit delete" name="img_delete" />
     </p>
-    [<p class="pagination" style="clear:both;">(#PAGINATION)</p>]
+    [<div class="pagination">(#PAGINATION)</div>]
     </B_ls2>
         <:sdc:aucune_image_disponible:>
     <//B_ls2>

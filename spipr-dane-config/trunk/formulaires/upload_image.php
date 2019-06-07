@@ -12,18 +12,19 @@
  * @param string $fichier
  * @return array
  */
-function formulaires_upload_image_charger_dist($path_base){
+function formulaires_upload_image_charger_dist($path_base,$bloc){
 
 	$valeurs = array(
 		'file'=>'',
 		'path_base'=>$path_base,
+        'bloc' =>$bloc,
 		'editable'=>true
 	);
 
 	return $valeurs;
 }
 
-function formulaires_upload_image_verifier_dist($path_base){
+function formulaires_upload_image_verifier_dist($path_base,$bloc){
     if (!is_dir($path_base)) {
         if (!mkdir(_DIR_SITE."squelettes/images/", 0755, true)) {
             $erreurs['file'] ='Echec lors de la création des répertoires '._DIR_SITE."squelettes/images/";
@@ -37,7 +38,7 @@ function formulaires_upload_image_verifier_dist($path_base){
 	return $erreurs;
 }
 
-function formulaires_upload_image_traiter_dist($path_base){
+function formulaires_upload_image_traiter_dist($path_base,$bloc){
 	if (!_request('img_delete')) {
 		$files = sdc_check_upload($path_base);
 		$ok = true;

@@ -46,7 +46,7 @@
         )]
         [(#SAISIE{selection, font-family}
 			{label=<:sdc:famille_de_police:>}
-			{defaut=[(#CONFIG{sdc/defaut/font-family}|in_array{#GET{ggfonts}}|?{#ENV{font-family}, perso})]}
+			{defaut='Open Sans'}
 			{class=chosen}
             {conteneur_class=long_label}
 			{datas=#ENV{polices}}
@@ -55,12 +55,12 @@
 
         [(#SAISIE{explication, font-family-perso-explication}
             {texte=<:sdc:explication_police_personnelle:> }
-            {conteneur_class= family-perso}
+            {conteneur_class=family-perso}
         )]
         [(#SAISIE{input, font-family-perso}
 			{label=<:sdc:police_personnelle:>}
 			{defaut=#ENV{font-family-perso}}
-            {conteneur_class= long_label family-perso}
+            {conteneur_class=long_label family-perso}
 		)]
                 
 		<div>

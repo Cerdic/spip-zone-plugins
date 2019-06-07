@@ -1,0 +1,18 @@
+
+/**
+ * Feuille de style de l'espace prive pour Spipr-Dane Config
+*/
+
+/* formulaires */
+.formulaire_spip fieldset {
+	margin-top: 0;
+}
+.pave_selection_image #content_1 {overflow-y:auto;}
+.pave_selection_image .liste-images > .formulaire_spip {float:left;margin:6px;width:110px;padding:4px;border:1px solid #ccc;}
+.pave_selection_image .liste-images > .formulaire_spip label.todelete {float:right;display:block;margin:0;width:auto;}
+.pave_selection_image .liste-images > .formulaire_spip a.box-image {height:65px;display:block;overflow:hidden;}
+.pave_selection_image .liste-images > .formulaire_spip .choisir {margin-top: 1em;}
+.pave_selection_image .liste-images > .formulaire_spip .choisir.monchoix {background-color: deepskyblue;}
+
+.pave_selection_image .liste-images > p.subDel {clear:both;text-align:right;display:none;}
+.pave_selection_image .liste-images > .pagination {clear:both;}

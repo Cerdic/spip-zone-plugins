@@ -54,13 +54,13 @@
  <script type="text/javascript">// <![CDATA[
 	$(document).ready(function(){
         $('#champ_masquer_logo').on('change', function () {
-			if ( $(this).val() != 'oui' ) {
+			if ( $(this).val() == 'oui' ) {
 				$(".afficher_si_masquer_logo_#GET{id_unique}").show()
 			}else {
 				$(".afficher_si_masquer_logo_#GET{id_unique}").hide();
 			}
 		});
-		if ('#ENV{masquer_logo}'!= 'on' ) {
+		if ('#ENV{masquer_logo}'!= 'oui' ) {
 				$(".afficher_si_masquer_logo_#GET{id_unique}").show();
 		} else {
 				$(".afficher_si_masquer_logo_#GET{id_unique}").hide();

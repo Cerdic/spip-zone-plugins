@@ -23,19 +23,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return string $flux
  * 		Le code html du head complété
  */
-function sdc_header_prive($flux){
-	if ( isset($flux["args"]["exec"]) && $flux["args"]["exec"] == 'configurer_sdc') {
-        include_spip('inc/filtres');
-        $css=find_in_path('prive/themes/spip/css/prive_perso.css');
-        if (function_exists('produire_fond_statique'))
-            $css_html = produire_fond_statique(find_in_path('prive/themes/spip/css/style_prive_sdc.css'));
-        else
-             $css_html = generer_url_public('prive/themes/spip/css/style_prive_sdc.css');
-
-        $flux .= "\n<link rel=\"stylesheet\" href=\"".$css_html."\" type=\"text/css\" />\n";
-        $flux .= "\n<link rel=\"stylesheet\" href=\"".$css."\" type=\"text/css\" />\n";
- 
-	}  
-
+function sdc_header_prive($flux) {
+	$css = find_in_path('prive/themes/spip/css/prive_sdc.css');
+    $flux .= "\n<link rel='stylesheet' name='$f' href='$css' type='text/css' />\n";
 	return $flux;
 }
