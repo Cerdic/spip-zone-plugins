@@ -33,7 +33,7 @@ include_spip('inc/profils');
  * @return string
  *     Hash du formulaire
  */
-function formulaires_profil_identifier_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '', $forcer_admin=false) {
+function formulaires_profil_identifier_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '', $options=array()) {
 	return serialize(array(intval($id_auteur)));
 }
 
@@ -51,7 +51,7 @@ function formulaires_profil_identifier_dist($id_auteur = 'new', $id_ou_identifia
  * @return array
  *     Tableau des saisies
  */
-function formulaires_profil_saisies_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '', $forcer_admin=false) {
+function formulaires_profil_saisies_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '', $options=array()) {
 	$saisies = profils_chercher_saisies_profil('edition', $id_auteur, $id_ou_identifiant_profil);
 	
 	// Si c'est pour une création et qu'on est admin
@@ -83,7 +83,7 @@ function formulaires_profil_saisies_dist($id_auteur = 'new', $id_ou_identifiant_
  * @return array
  *     Environnement du formulaire
  */
-function formulaires_profil_charger_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '', $forcer_admin=false) {
+function formulaires_profil_charger_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '', $options=array()) {
 	$contexte = array();
 	
 	// Non, si pas d'id_auteur, on en crée un nouveau
@@ -138,7 +138,7 @@ function formulaires_profil_charger_dist($id_auteur = 'new', $id_ou_identifiant_
  * @return array
  *     Tableau des erreurs
  */
-function formulaires_profil_verifier_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '', $forcer_admin=false) {
+function formulaires_profil_verifier_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '', $options=array()) {
 	$erreurs = array();
 	
 	return $erreurs;
@@ -160,7 +160,7 @@ function formulaires_profil_verifier_dist($id_auteur = 'new', $id_ou_identifiant
  * @return array
  *     Retours des traitements
  */
-function formulaires_profil_traiter_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '', $forcer_admin=false) {
+function formulaires_profil_traiter_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '', $options=array()) {
 	if ($retour) {
 		refuser_traiter_formulaire_ajax();
 	}
@@ -171,6 +171,12 @@ function formulaires_profil_traiter_dist($id_auteur = 'new', $id_ou_identifiant_
 	$champs_coordonnees = _request('coordonnees');
 	$email_principal = '';
 	$nom_principal = '';
+	if ($options and !is_array($options)) {
+		$forcer_admin = true;
+	}
+	elseif (isset($options['forcer_admin'])) {
+		$forcer_admin = $options['forcer_admin'];
+	}
 	
 	// Récupérer les objets liés au profil utilisateur
 	extract(profils_chercher_ids_profil($id_auteur, $id_ou_identifiant_profil));
