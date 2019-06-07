@@ -28,11 +28,28 @@ body {
 ][   background-size: (#CONFIG{sdc/body/background-size});
 ]]}
 
+/* background des elements de la page article si image d'arriere-plan*/
+[(#CONFIG{sdc/body/background-image}|oui)
+.page_article, .page.evenement {
+    article{
+        background: #fefefe;
+        padding: 0 1em 0.1em 2em;
+    }
+    @media(max-width:978px){
+        article{padding:0 .3em 0.01em .5em;}
+    }
+    #aside{
+        .postmeta{background: #fafafa;}
+    }
+}]
+.liste h2.h2 {[
+        font-family: '(#CONFIG{sdc/body/h2/font-family})', Arial, Helvetica, sans-serif;]}
 //// Header ////
 #header {
     [(#CONFIG{sdc/header/largeur_background}|oui)
+    background-color: transparent;
     .container{]
-    [    background-color: (#CONFIG{sdc/header/background-color});
+    [    background-color: (#CONFIG{sdc/header/background-color,transparent});
     ][(#CONFIG{sdc/header/background-image}|oui)
          background-image: url("[(#CHEMIN{images/#CONFIG{sdc/header/background-image}}|url_absolue)]");
     [    background-repeat: (#CONFIG{sdc/header/background-repeat});
@@ -45,32 +62,13 @@ body {
     header h1#logo_site_spip {[
         font-family: '(#CONFIG{sdc/title/font-family})', Arial, Helvetica, sans-serif;][
         font-size: (#CONFIG{sdc/title/font-size})em;][
-        color: (#CONFIG{sdc/title/color});
-        #slogan_site_spip { color: (#CONFIG{sdc/title/color});}][
+        color: (#CONFIG{sdc/title/color});]
+        #slogan_site_spip {[
+            color: (#CONFIG{sdc/title/color});][
+            (#CONFIG{sdc/header/position_logo_acad}|oui)max-width: 100%;margin-right:3em;]
+        }[
         .spip_logos{ float: (#CONFIG{sdc/header/position_logo});margin:0 0 0 25px;}]
     }
-}
-
-// Adapter la couleur des icones a la couleur des liens
-#nav{
-   .menu-container,
-    .menu-conteneur {
-        .nav .item.item-picto > a{
-            & when (@navbarLinkColor = @black) {
-                background-image: url("[(#CHEMIN{css/img/sprite-black.png}|url_absolue)]");
-                & when(@navbarLinkColorHover = @white) {
-                    background-image: url("[(#CHEMIN{css/img/sprite.png}|url_absolue)]");
-                }
-            }
-            & when (@navbarLinkColor = @white) {
-                background-image: url("[(#CHEMIN{css/img/sprite-white.png}|url_absolue)]");
-                & when(@navbarLinkColorHover = @black) {
-                    background-image: url("[(#CHEMIN{css/img/sprite-inverse.png}|url_absolue)]");
-                }
-            }
-        }
-    } 
-
 }
 
 //// Footer ////
