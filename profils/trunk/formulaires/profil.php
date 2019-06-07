@@ -314,6 +314,13 @@ function formulaires_profil_traiter_dist($id_auteur = 'new', $id_ou_identifiant_
 			// Pour une création, on assigne le profil principal
 			set_request('id_profil', $profil['id_profil']);
 		}
+		// S'il y avait déjà un id_auteur autre que la création, on vérifie s'il avait déjà un profil principal
+		// sinon celui là le sera
+		else {
+			if (!$id_profil_principal = intval(sql_getfetsel('id_profil', 'spip_auteurs', 'id_auteur = '.$id_auteur))) {
+				set_request('id_profil', $profil['id_profil']);
+			}
+		}
 		
 		// Si on a un auteur, on modifie déjà l'auteur existant
 		if ($id_auteur > 0) {

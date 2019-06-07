@@ -186,6 +186,9 @@ function profils_formulaire_traiter($flux) {
 			// Récupérer les objets liés au profil utilisateur
 			extract(profils_chercher_ids_profil($id_auteur, $profil['id_profil']));
 			
+			// Pour une création, on assigne le profil principal
+			set_request('id_profil', $profil['id_profil']);
+			
 			// On met en request racine les champs trouvés pour l'auteur
 			profils_traiter_peupler_request('inscription', $champs_auteur, $config['auteur']);
 			// S'il y a un email principal, on l'ajoute
