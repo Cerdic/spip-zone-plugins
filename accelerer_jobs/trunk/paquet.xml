@@ -1,5 +1,5 @@
 <paquet
-	prefix="accelerer_job"
+	prefix="accelerer_jobs"
 	categorie="performance"
 	version="0.1.0"
 	etat="test"

@@ -1,0 +1,4 @@
+#CACHE{0}
+<BOUCLE_jobs(jobs){par date}{fonction LIKE %#FONCTION%}> </BOUCLE_jobs>
+[(#BOUTON_ACTION{Accélérer #TOTAL_BOUCLE|concat{&nbsp;#ENV{desc,#FONCTION}},#URL_ACTION_AUTEUR{accelerer_jobs,#FONCTION/#ENV{nb_jobs,5},#SELF}})]
+</B_jobs>
