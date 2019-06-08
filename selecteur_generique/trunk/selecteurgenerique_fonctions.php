@@ -17,8 +17,10 @@ function selecteurgenerique_verifier_js($flux){
 
 if(spip_version_compare($GLOBALS['spip_version_branche'],"3.2.0",'<')) {
 
+	if(spip_version_compare($GLOBALS['spip_version_branche'],"3.0.*",'<=')) {
 		$prepjs = "jquery.ui.";
 		$prepcss = "jquery.ui.";
+	}
 		/**
 		 * On a besoin de '.$prepjs.'autocomplete.js et de ses dépendances
 		 */
@@ -75,8 +77,9 @@ if(spip_version_compare($GLOBALS['spip_version_branche'],"3.2.0",'<')) {
 		$functions = find_in_path('javascript/selecteur_generique_functions.js');
  		$contenu .= "<script type='text/javascript' src='$functions'></script>";
 	};
-	// Compat jquery.ui legacy
-	if(spip_version_compare($GLOBALS['spip_version_branche'],"3.2.0",'<')) {
+
+// Compat jquery.ui legacy
+if(spip_version_compare($GLOBALS['spip_version_branche'],"3.2.0",'<')) {
 	// Styles
 	/**
 	 * ui.core.css
@@ -107,6 +110,7 @@ if(spip_version_compare($GLOBALS['spip_version_branche'],"3.2.0",'<')) {
 		}
 	}
 }// Fin Compat
+
 		/**
 		 * ui.theme.css
 		 */
