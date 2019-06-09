@@ -9,7 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-
 /**
  * Traite les erreurs directement détectées par le serveur HTTP abstrait uniquement.
  * Celles-ci sont mises au format de l'API SVP et fournies au client systématiquement en JSON.
@@ -29,11 +28,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function http_svp_erreur_dist($code, $requete, $reponse) {
 
-	include_spip('inc/svpapi_reponse');
-
 	// Construction du contenu de la réponse:
 	// Comme l'erreur est détectée par le serveur HTTP abstrait, le contenu n'est pas initialisé.
 	// Il faut donc l'initialiser selon la structure imposée par l'API.
+	include_spip('inc/svpapi_reponse');
 	$contenu = reponse_initialiser_contenu($requete);
 
 	// Description de l'erreur : pour les messages, on utilise ceux du plugin serveur HTTP abstrait.
@@ -42,16 +40,8 @@ function http_svp_erreur_dist($code, $requete, $reponse) {
 	$contenu['erreur']['title'] = _T('http:erreur_' . $contenu['erreur']['status'] . '_titre');
 	$contenu['erreur']['detail'] = _T('http:erreur_' . $contenu['erreur']['status'] . '_message');
 
-	// Détermination du format de la réponse. Etant donné que l'on traite déjà une erreur, on ne se préoccupe pas
-	// pas d'une éventuelle erreur sur le format, on utilisera dans ce cas le JSON.
-	$format_reponse = 'json';
-	if (requete_verifier_format($contenu['requete']['format_contenu'], $erreur)) {
-		// On positionne le format de sortie car on sait que celui demandé est valide
-		$format_reponse = $contenu['requete']['format_contenu'];
-	}
-
 	// Finaliser la réponse selon le format demandé.
-	$reponse = reponse_construire($reponse, $contenu, $format_reponse);
+	$reponse = reponse_construire($reponse, $contenu);
 
 	return $reponse;
 }
@@ -60,9 +50,11 @@ function http_svp_erreur_dist($code, $requete, $reponse) {
 /**
  * Fait un GET sur une collection de plugins ou de dépôts.
  * La requête est du type `/svp/plugins` ou `/svp/depots` et renvoie les objets plugin contenus dans la base du serveur
- * (hors les plugins installés) ou les objets dépôt hébergés par le serveur.
- * Il est possible de filtrer la collection des plugins par catégorie et par compatibilité SPIP
- * `/svp/plugins&compatible_spip=2.1&categorie=outil`.
+ * (hors les plugins installés) ou les objets dépôt hébergés par le serveur. Il est possible de filtrer la collection
+ * des plugins par catégorie et par compatibilité SPIP `/svp/plugins&compatible_spip=2.1&categorie=outil`.
+ *
+ * Il est possible pour des plugins de rajouter des collections en utilisant le pipeline `declarer_collections_svp`
+ * et en fournissant les fonctions de service associées.
  *
  * @api
  *
@@ -79,44 +71,43 @@ function http_svp_erreur_dist($code, $requete, $reponse) {
  */
 function http_svp_get_collection_dist($requete, $reponse) {
 
-	include_spip('inc/svpapi_requete');
+	// Initialisation du format de sortie du contenu de la réponse, du bloc d'erreur et de la collection.
 	include_spip('inc/svpapi_reponse');
-
-	// Initialisation du format de sortie du contenu de la réponse, du bloc d'erreur et du format de sortie en JSON
 	$contenu = reponse_initialiser_contenu($requete);
 	$erreur = array();
-	$format_reponse = 'json';
+	$collection = '';
 
 	// Vérification du mode SVP du serveur : celui-ci ne doit pas être en mode runtime pour
-	// renvoyer des données complètes
+	// renvoyer des données complètes.
+	include_spip('inc/svpapi_requete');
 	if (requete_verifier_serveur($erreur)) {
-		// Vérification du format demandé pour le contenu
-		if (requete_verifier_format($contenu['requete']['format_contenu'], $erreur)) {
-			// On positionne cette fois le format du contenu car on sait que celui demandé est valide
-			$format_reponse = $contenu['requete']['format_contenu'];
-			// Vérification du nom de la collection
-			if (requete_verifier_collection($contenu['requete']['collection'], $erreur)) {
-				// On vérifie les critères de filtre additionnels si la requête en contient
-				$where = array();
-				if (requete_verifier_criteres($contenu['requete']['criteres'], $erreur)) {
-					// Si il y a des critères additionnels on complète le where en conséquence
-					if ($contenu['requete']['criteres']) {
-						foreach ($contenu['requete']['criteres'] as $_critere => $_valeur) {
-							if ($_critere == 'compatible_spip') {
-								$f_critere = charger_fonction('where_compatible_spip', 'inc');
-								$where[] = $f_critere($_valeur, 'spip_plugins', '>');
-							} else {
-								$where[] = "spip_plugins.${_critere}=" . sql_quote($_valeur);
-							}
-						}
-					}
+		// Récupération de la liste des collections disponibles.
+		$collections = requete_declarer_collections();
 
-					// Récupération de la collection spécifiée en fonction des critères appliqués
-					$collectionner = 'reponse_collectionner_' . $contenu['requete']['collection'];
-					$donnees = $collectionner($where);
+		// Vérification du nom de la collection.
+		$collection = $contenu['requete']['collection'];
+		if (requete_verifier_collection($collection, $collections, $erreur)) {
+			// La collection étant correcte on extrait sa configuration.
+			$configuration = $collections[$collection];
 
-					$contenu['donnees'] = $donnees;
+			// Vérification des filtres, si demandés.
+			if (requete_verifier_filtres($contenu['requete']['filtres'], $configuration, $erreur)) {
+				// Détermination de la fonction de service permettant de récupérer la collection spécifiée
+				// filtrée sur les critères éventuellement fournis.
+				// -- la fonction de service est contenue dans un fichier du répertoire svpapi/.
+				$module = $configuration['module'];
+				include_spip("svpapi/${module}");
+				$collectionner = "${collection}_collectionner";
+				if (!function_exists($collectionner)) {
+					$erreur = array(
+						'status'  => 400,
+						'type'    => 'fonction_nok',
+						'element' => 'collection',
+						'valeur'  => $collectionner
+					);
 				}
+				// -- on construit le contenu de la collection.
+				$contenu['donnees'] = $collectionner($contenu['requete']['filtres']);
 			}
 		}
 	}
@@ -125,11 +116,11 @@ function http_svp_get_collection_dist($requete, $reponse) {
 	// vérification, le titre et le détail de l'erreur.
 	if ($erreur) {
 		$contenu['erreur'] = array_merge($contenu['erreur'], $erreur);
-		$contenu['erreur'] = reponse_expliquer_erreur($contenu['erreur']);
+		$contenu['erreur'] = reponse_expliquer_erreur($contenu['erreur'], $collection);
 	}
 
 	// Construction de la réponse finale
-	$reponse = reponse_construire($reponse, $contenu, $format_reponse);
+	$reponse = reponse_construire($reponse, $contenu);
 
 	return $reponse;
 }
@@ -138,6 +129,8 @@ function http_svp_get_collection_dist($requete, $reponse) {
 /**
  * Fait un GET sur une ressource de type plugin identifiée par son préfixe.
  * La requête est du type `/svp/plugins/prefixe` et renvoie l'objet plugin et les objets paquets associés.
+ *
+ * Il est possible de rajouter des ressources en utilisant le pipeline `declarer_ressources_svp`.
  *
  * @api
  *
@@ -154,78 +147,43 @@ function http_svp_get_collection_dist($requete, $reponse) {
  */
 function http_svp_get_ressource_dist($requete, $reponse) {
 
-	include_spip('inc/svpapi_requete');
-	include_spip('inc/svpapi_reponse');
-
 	// Initialisation du format de sortie du contenu de la réponse, du bloc d'erreur et du format de sortie en JSON
+	include_spip('inc/svpapi_reponse');
 	$contenu = reponse_initialiser_contenu($requete);
 	$erreur = array();
-	$format_reponse = 'json';
+	$collection = '';
 
 	// Vérification du mode SVP du serveur : celui-ci ne doit pas être en mode runtime pour
-	// renvoyer des données complètes
+	// renvoyer des données complètes.
+	include_spip('inc/svpapi_requete');
 	if (requete_verifier_serveur($erreur)) {
-		// Vérification du format demandé pour le contenu
-		if (requete_verifier_format($contenu['requete']['format_contenu'], $erreur)) {
-			// On positionne le format du contenu qui sera utilisé car on sait que celui demandé est valide
-			$format_reponse = $contenu['requete']['format_contenu'];
-			// Vérification du nom de la collection
-			if (requete_verifier_ressource($contenu['requete']['collection'], $erreur)) {
-				// Vérification du préfixe de la ressource
-				if (requete_verifier_prefixe($contenu['requete']['ressource'], $erreur)) {
-					$prefixe = strtoupper($contenu['requete']['ressource']);
-					$donnees = array();
-					// On recherche d'abord le plugin par son préfixe dans la table spip_plugins en vérifiant que
-					// c'est bien un plugin fourni pas un dépôt et pas un plugin installé sur le serveur uniquement
-					$from = array('spip_plugins', 'spip_depots_plugins AS dp');
-					$select = array('*');
-					$where = array(
-						'prefixe=' . sql_quote($prefixe),
-						'dp.id_depot>0',
-						'dp.id_plugin=spip_plugins.id_plugin'
-					);
-					$group_by = array('spip_plugins.id_plugin');
-					$plugin = sql_fetsel($select, $from, $where, $group_by);
-					if ($plugin) {
-						// On refactore le tableau de sortie du fetsel en supprimant les colonnes id_depot et id_plugin qui ne
-						// sont d'aucune utilité pour le service.
-						unset($plugin['id_plugin']);
-						unset($plugin['id_depot']);
-						$donnees['plugin'] = normaliser_champs('plugin', $plugin);
+		// Récupération de la liste des collections disponibles.
+		$collections = requete_declarer_collections();
 
-						// On recherche maintenant les paquets du plugin
-						$from = array('spip_paquets');
-						$select = array('*');
-						$where = array(
-							'prefixe=' . sql_quote($prefixe),
-							'id_depot>0'
-						);
-						$paquets = sql_allfetsel($select, $from, $where);
-						$donnees['paquets'] = array();
-						if ($paquets) {
-							// On refactore le tableau de sortie du allfetsel en un tableau associatif indexé par archives zip.
-							$champs_inutiles = array(
-								'id_paquet', 'id_plugin', 'id_depot',
-								'actif', 'installe', 'recent', 'maj_version', 'superieur', 'obsolete', 'attente', 'constante', 'signature'
-							);
-							foreach ($paquets as $_paquet) {
-								foreach ($champs_inutiles as $_champ) {
-									unset($_paquet[$_champ]);
-								}
-								$donnees['paquets'][$_paquet['nom_archive']] = normaliser_champs('paquet', $_paquet);
-							}
-						}
-					} else {
-						// On renvoie une erreur 404 pour indiquer que le plugin n'existe pas
-						$erreur = array(
-							'status'  => 404,
-							'type'    => 'plugin_nok',
-							'element' => 'plugin',
-							'valeur'  => $contenu['requete']['ressource']
-						);
-					}
-					$contenu['donnees'] = $donnees;
+		// Vérification du nom de la collection.
+		$collection = $contenu['requete']['collection'];
+		if (requete_verifier_collection($collection, $collections, $erreur)) {
+			// La collection étant correcte on extrait sa configuration.
+			$configuration = $collections[$collection];
+
+			// Vérification de la ressource
+			$ressource = $contenu['requete']['ressource'];
+			if (requete_verifier_ressource($ressource, $configuration, $erreur)) {
+				// Détermination de la fonction de service permettant de récupérer la ressource spécifiée.
+				// -- la fonction de service est contenue dans un fichier du répertoire svpapi/.
+				$module = $configuration['module'];
+				include_spip("svpapi/${module}");
+				$ressourcer = "${collection}_ressourcer";
+				if (!function_exists($ressourcer)) {
+					$erreur = array(
+						'status'  => 400,
+						'type'    => 'fonction_nok',
+						'element' => 'ressource',
+						'valeur'  => $ressourcer
+					);
 				}
+				// -- on construit le contenu de la collection.
+				$contenu['donnees'] = $ressourcer($ressource);
 			}
 		}
 	}
@@ -234,11 +192,11 @@ function http_svp_get_ressource_dist($requete, $reponse) {
 	// vérification, le titre et le détail de l'erreur.
 	if ($erreur) {
 		$contenu['erreur'] = array_merge($contenu['erreur'], $erreur);
-		$contenu['erreur'] = reponse_expliquer_erreur($contenu['erreur']);
+		$contenu['erreur'] = reponse_expliquer_erreur($contenu['erreur'], $collection);
 	}
 
 	// Construction de la réponse finale
-	$reponse = reponse_construire($reponse, $contenu, $format_reponse);
+	$reponse = reponse_construire($reponse, $contenu);
 
 	return $reponse;
 }

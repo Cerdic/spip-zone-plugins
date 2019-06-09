@@ -9,6 +9,36 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+/**
+ * Déclare les collections accessibles via HTTP GET.
+ * Par défaut, le plugin propose les collections `plugins` et `depots`.
+ *
+ * @pipeline declarer_collections_svp
+ *
+ * @return array
+ * 		   Description des collections.
+**/
+function requete_declarer_collections() {
+
+	// Les index désignent les collections, le tableau associé contient les filtres admissibles.
+	// -- Par défaut, svpapi fournit deux collections, plugins et depots.
+	$collections = array(
+		'plugins' => array(
+			'module'    => 'svpapi',
+			'filtres'   => array('categorie', 'compatible_spip'),
+			'ressource' => 'prefixe'
+		),
+		'depots'  => array(
+			'module'    => 'svpapi',
+			'filtres'   => array('type')
+		)
+	);
+
+	$collections = pipeline('declarer_collections_svp', $collections);
+
+	return $collections;
+}
+
 
 /**
  * Détermine si le serveur est capable de répondre aux requêtes SVP.
@@ -25,11 +55,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *        - `element` : type d'objet sur lequel porte l'erreur, soit `serveur`
  *        - `valeur`  : la valeur du mode runtime
  *
- * @return boolean
+ * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
 function requete_verifier_serveur(&$erreur) {
-	$valide = true;
+
+	// Initialise le retour à true par défaut.
+	$est_valide = true;
 
 	include_spip('inc/svp_phraser');
 	if (_SVP_MODE_RUNTIME) {
@@ -39,44 +71,10 @@ function requete_verifier_serveur(&$erreur) {
 			'element' => 'runtime',
 			'valeur'  => _SVP_MODE_RUNTIME
 		);
-		$valide = false;
+		$est_valide = false;
 	}
 
-	return $valide;
-}
-
-
-/**
- * Détermine si la valeur du format de sortie est valide.
- * Seul le format JSON est accepté.
- *
- * @param string $valeur
- *        La valeur du format de sortie
- * @param &array    $erreur
- *        Tableau initialisé avec les index identifiant l'erreur ou vide si pas d'erreur.
- *        Les index mis à jour sont:
- *        - `status`  : le code de l'erreur HTTP, soit 400
- *        - `type`    : chaine identifiant l'erreur plus précisément, soit format_nok
- *        - `element` : type d'objet sur lequel porte l'erreur, soit format
- *        - `valeur`  : la valeur du format
- *
- * @return boolean
- *        `true` si la valeur est valide, `false` sinon.
- */
-function requete_verifier_format($valeur, &$erreur) {
-	$valide = true;
-
-	if (!in_array($valeur, array('json'))) {
-		$erreur = array(
-			'status'  => 400,
-			'type'    => 'format_nok',
-			'element' => 'format',
-			'valeur'  => $valeur
-		);
-		$valide = false;
-	}
-
-	return $valide;
+	return $est_valide;
 }
 
 
@@ -84,8 +82,10 @@ function requete_verifier_format($valeur, &$erreur) {
  * Détermine si la collection demandée est valide.
  * Le service ne fournit que les collections plugins (`plugins`) et dépôts (`depots`).
  *
- * @param string $valeur
+ * @param string $collection
  *        La valeur de la collection demandée
+ * @param array  $collections
+ *        Configuration des collections disponibles.
  * @param &array    $erreur
  *        Tableau initialisé avec les index identifiant l'erreur ou vide si pas d'erreur.
  *        Les index mis à jour sont:
@@ -94,23 +94,95 @@ function requete_verifier_format($valeur, &$erreur) {
  *        - `element` : type d'objet sur lequel porte l'erreur, soit collection
  *        - `valeur`  : la valeur de la collection
  *
- * @return boolean
+ * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
-function requete_verifier_collection($valeur, &$erreur) {
-	$valide = true;
+function requete_verifier_collection($collection, $collections, &$erreur) {
 
-	if (!in_array($valeur, array('plugins', 'depots'))) {
+	// Initialise le retour à true par défaut.
+	$est_valide = true;
+
+	// Vérification de la disponibilité de la collection demandée.
+	if (!in_array($collection, array_keys($collections))) {
 		$erreur = array(
 			'status'  => 400,
 			'type'    => 'collection_nok',
 			'element' => 'collection',
-			'valeur'  => $valeur
+			'valeur'  => $collection,
+			'extra'   => implode(', ', array_keys($collections))
 		);
-		$valide = false;
+		$est_valide = false;
 	}
 
-	return $valide;
+	return $est_valide;
+}
+
+
+/**
+ * Détermine si la valeur de chaque critère de filtre d'une collection est valide.
+ * Si plusieurs critères sont fournis, la fonction s'interromp dès qu'elle trouve un
+ * critère non admis ou dont la valeur est invalide.
+ *
+ * @param array  $filtres
+ *        Tableau associatif des critères de filtre (couple nom du critère, valeur du critère)
+ * @param array  $configuration
+ *        Configuration de la collection concernée. L'index `filtres` contient la liste des critères admissibles
+ *        et l'index `module` contient le nom du fichier des fonctions de service.
+ * @param &array $erreur
+ *        Tableau initialisé avec les index identifiant l'erreur ou vide si pas d'erreur.
+ *        Les index mis à jour sont:
+ *        - `status`  : le code de l'erreur HTTP, soit 400
+ *        - `type`    : chaine identifiant l'erreur plus précisément, soit critere_nok
+ *        - `element` : nom du critère en erreur
+ *        - `valeur`  : valeur du critère
+ *
+ * @return bool
+ *        `true` si la valeur est valide, `false` sinon.
+ */
+function requete_verifier_filtres($filtres, $configuration, &$erreur) {
+
+	$est_valide = true;
+	$erreur = array();
+
+	if ($filtres) {
+		// On arrête dès qu'une erreur est trouvée et on la reporte.
+		foreach ($filtres as $_critere => $_valeur) {
+			$extra = '';
+			// On vérifie si le critère est admis.
+			if (!in_array($_critere, $configuration['filtres'])) {
+				$erreur = array(
+					'status'  => 400,
+					'type'    => 'critere_nom_nok',
+					'element' => 'critere',
+					'valeur'  => $_critere,
+					'extra'   => implode(', ', $configuration['filtres'])
+				);
+				$est_valide = false;
+				break;
+			} else {
+				// On vérifie si la valeur du critère est valide :
+				// -- le critère est vérifié par une fonction spécifique. Si elle n'existe pas le critère est
+				//    réputé valide.
+				$module = $configuration['module'];
+				include_spip("svpapi/${module}");
+				$verifier = "critere_${_critere}_verifier";
+				if (function_exists($verifier)
+				and !$verifier($_valeur, $extra)) {
+					$erreur = array(
+						'status'  => 400,
+						'type'    => 'critere_valeur_nok',
+						'element' => $_critere,
+						'valeur'  => $_valeur,
+						'extra'   => $extra
+					);
+					$est_valide = false;
+					break;
+				}
+			}
+		}
+	}
+
+	return $est_valide;
 }
 
 
@@ -118,8 +190,11 @@ function requete_verifier_collection($valeur, &$erreur) {
  * Détermine si le type de ressource demandée est valide.
  * Le service ne fournit que des ressources de type plugin (`plugins`).
  *
- * @param string $valeur
- *        La valeur de la collection demandée
+ * @param string $ressource
+ *        La valeur de la ressource demandée. La ressource appartient à une collection.
+ * @param array  $configuration
+ *        Configuration de la collection de la ressource. L'index `ressource` identifie le champ attendu pour désigner
+ *        la ressource et l'index `module` contient le nom du fichier des fonctions de service.
  * @param &array    $erreur
  *        Tableau initialisé avec les index identifiant l'erreur ou vide si pas d'erreur.
  *        Les index mis à jour sont:
@@ -128,150 +203,43 @@ function requete_verifier_collection($valeur, &$erreur) {
  *        - `element` : type d'objet sur lequel porte l'erreur, soit ressource
  *        - `valeur`  : la valeur de la ressource
  *
- * @return boolean
+ * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
-function requete_verifier_ressource($valeur, &$erreur) {
-	$valide = true;
+function requete_verifier_ressource($ressource, $configuration, &$erreur) {
 
-	if (!in_array($valeur, array('plugins'))) {
+	// Initialise le retour à true par défaut.
+	$est_valide = true;
+
+	// Vérification de la disponibilité de l'accès à une ressource pour la collection concernée
+	if (empty($configuration['ressource'])) {
 		$erreur = array(
 			'status'  => 400,
 			'type'    => 'ressource_nok',
 			'element' => 'ressource',
-			'valeur'  => $valeur
+			'valeur'  => $ressource,
+			'extra'   => 'plugins'
 		);
-		$valide = false;
-	}
-
-	return $valide;
-}
-
-
-/**
- * Détermine si la valeur du préfixe de plugin est valide.
- * La fonction compare uniquement la structure de la chaine passée qui doit être cohérente avec
- * celui d'un nom de variable.
- *
- * @param string $valeur
- *        La valeur du préfixe
- * @param &array    $erreur
- *        Tableau initialisé avec les index identifiant l'erreur ou vide si pas d'erreur.
- *        Les index mis à jour sont:
- *        - `status`  : le code de l'erreur HTTP, soit 400
- *        - `type`    : chaine identifiant l'erreur plus précisément, soit prefixe_nok
- *        - `element` : type d'objet sur lequel porte l'erreur, soit prefixe
- *        - `valeur`  : la valeur du préfixe
- *
- * @return boolean
- *        `true` si la valeur est valide, `false` sinon.
- */
-function requete_verifier_prefixe($valeur, &$erreur) {
-	$valide = true;
-
-	if (!preg_match('#^(\w){2,}$#', strtolower($valeur))) {
-		$erreur = array(
-			'status'  => 400,
-			'type'    => 'prefixe_nok',
-			'element' => 'prefixe',
-			'valeur'  => $valeur
-		);
-		$valide = false;
-	}
-
-	return $valide;
-}
-
-
-/**
- * Détermine si la valeur de chaque critère de filtre d'une collection est valide.
- * Si plusieurs critères sont fournis, la fonction s'interromp dès qu'elle trouve un
- * critère invalide.
- *
- * @uses verifier_critere_categorie()
- * @uses verifier_critere_compatible_spip()
- *
- * @param array $criteres
- *        Tableau associatif des critères (couple nom du critère, valeur du critère)
- * @param &array    $erreur
- *        Tableau initialisé avec les index identifiant l'erreur ou vide si pas d'erreur.
- *        Les index mis à jour sont:
- *        - `status`  : le code de l'erreur HTTP, soit 400
- *        - `type`    : chaine identifiant l'erreur plus précisément, soit critere_nok
- *        - `element` : nom du critère en erreur
- *        - `valeur`  : valeur du critère
- *
- * @return boolean
- *        `true` si la valeur est valide, `false` sinon.
- */
-function requete_verifier_criteres($criteres, &$erreur) {
-
-	$valide = true;
-	$erreur = array();
-
-	if ($criteres) {
-		// On vérifie pour chaque critère :
-		// -- si le critère est valide
-		// -- si la valeur du critère est valide
-		// On arrête dès qu'une erreur est trouvée et on la reporte
-		foreach ($criteres as $_critere => $_valeur) {
-			$verifier = "verifier_critere_${_critere}";
-			if (!$verifier($_valeur)) {
-				$erreur = array(
-					'status'  => 400,
-					'type'    => 'critere_nok',
-					'element' => $_critere,
-					'valeur'  => $_valeur
-				);
-				$valide = false;
-				break;
-			}
+		$est_valide = false;
+	} else {
+		// Vérification de la validité de la ressource demandée.
+		// -- la ressource est vérifiée par une fonction spécifique. Si elle n'existe pas la ressource est
+		//    réputée valide.
+		$module = $configuration['module'];
+		include_spip("svpapi/${module}");
+		$verifier = "ressource_{$configuration['ressource']}_verifier";
+		if (function_exists($verifier)
+		and !$verifier($ressource)) {
+			$erreur = array(
+				'status'  => 400,
+				'type'    => 'ressource_valeur_nok',
+				'element' => 'ressource',
+				'valeur'  => $ressource,
+				'extra'   => $configuration['ressource']
+			);
+			$est_valide = false;
 		}
 	}
 
-	return $valide;
-}
-
-
-/**
- * Détermine si la valeur de la catégorie est valide.
- * La fonction récupère dans le plugin SVP la liste des catégories autorisées.
- *
- * @param string $valeur
- *        La valeur du critère catégorie
- *
- * @return boolean
- *        `true` si la valeur est valide, `false` sinon.
- */
-function verifier_critere_categorie($valeur) {
-	$valide = true;
-
-	include_spip('inc/svp_phraser');
-	if (!in_array($valeur, $GLOBALS['categories_plugin'])) {
-		$valide = false;
-	}
-
-	return $valide;
-}
-
-
-/**
- * Détermine si la valeur du critère compatibilité SPIP est valide.
- * La fonction compare uniquement la structure de la chaine passée qui doit être cohérente avec
- * un numéro de version ou de branche.
- *
- * @param string $valeur
- *        La valeur du critère compatibilite SPIP
- *
- * @return boolean
- *        `true` si la valeur est valide, `false` sinon.
- */
-function verifier_critere_compatible_spip($valeur) {
-	$valide = true;
-
-	if (!preg_match('#^(\d+)(\.\d+){0,2}$#', $valeur)) {
-		$valide = false;
-	}
-
-	return $valide;
+	return $est_valide;
 }
