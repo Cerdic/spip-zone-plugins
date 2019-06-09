@@ -24,13 +24,21 @@ function requete_declarer_collections() {
 	// -- Par défaut, svpapi fournit deux collections, plugins et depots.
 	$collections = array(
 		'plugins' => array(
+			'ressource' => 'prefixe',
 			'module'    => 'svpapi',
-			'filtres'   => array('categorie', 'compatible_spip'),
-			'ressource' => 'prefixe'
+			'filtres'   => array(
+				array(
+					'critere' => 'compatible_spip'
+				),
+			)
 		),
 		'depots'  => array(
-			'module'    => 'svpapi',
-			'filtres'   => array('type')
+			'module'  => 'svpapi',
+			'filtres' => array(
+				array(
+					'nom' => 'type'
+				)
+			)
 		)
 	);
 
@@ -125,6 +133,8 @@ function requete_verifier_collection($collection, $collections, &$erreur) {
  *
  * @param array  $filtres
  *        Tableau associatif des critères de filtre (couple nom du critère, valeur du critère)
+ * @param string $collection
+ *        La collection concernée.
  * @param array  $configuration
  *        Configuration de la collection concernée. L'index `filtres` contient la liste des critères admissibles
  *        et l'index `module` contient le nom du fichier des fonctions de service.
@@ -139,7 +149,7 @@ function requete_verifier_collection($collection, $collections, &$erreur) {
  * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
-function requete_verifier_filtres($filtres, $configuration, &$erreur) {
+function requete_verifier_filtres($filtres, $collection, $configuration, &$erreur) {
 
 	$est_valide = true;
 	$erreur = array();
@@ -149,23 +159,26 @@ function requete_verifier_filtres($filtres, $configuration, &$erreur) {
 		foreach ($filtres as $_critere => $_valeur) {
 			$extra = '';
 			// On vérifie si le critère est admis.
-			if (!in_array($_critere, $configuration['filtres'])) {
+			$criteres = array_column($configuration['filtres'], null, 'critere');
+			if (!in_array($_critere, array_keys($criteres))) {
 				$erreur = array(
 					'status'  => 400,
 					'type'    => 'critere_nom_nok',
 					'element' => 'critere',
 					'valeur'  => $_critere,
-					'extra'   => implode(', ', $configuration['filtres'])
+					'extra'   => implode(', ', array_keys($criteres))
 				);
 				$est_valide = false;
 				break;
 			} else {
 				// On vérifie si la valeur du critère est valide :
-				// -- le critère est vérifié par une fonction spécifique. Si elle n'existe pas le critère est
-				//    réputé valide.
-				$module = $configuration['module'];
+				// -- le critère est vérifié par une fonction spécifique qui est soit liée au critère soit globale à
+				//    la fonction. Si cette fonction n'existe pas le critère est réputé valide.
+				$module = !empty($configuration['filtres'][$_critere]['module'])
+					? $configuration['filtres'][$_critere]['module']
+					: $configuration['module'];
 				include_spip("svpapi/${module}");
-				$verifier = "critere_${_critere}_verifier";
+				$verifier = "${collection}_verifier_critere_${_critere}";
 				if (function_exists($verifier)
 				and !$verifier($_valeur, $extra)) {
 					$erreur = array(
@@ -192,6 +205,8 @@ function requete_verifier_filtres($filtres, $configuration, &$erreur) {
  *
  * @param string $ressource
  *        La valeur de la ressource demandée. La ressource appartient à une collection.
+ * @param string $collection
+ *        La collection concernée.
  * @param array  $configuration
  *        Configuration de la collection de la ressource. L'index `ressource` identifie le champ attendu pour désigner
  *        la ressource et l'index `module` contient le nom du fichier des fonctions de service.
@@ -206,7 +221,7 @@ function requete_verifier_filtres($filtres, $configuration, &$erreur) {
  * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
-function requete_verifier_ressource($ressource, $configuration, &$erreur) {
+function requete_verifier_ressource($ressource, $collection, $configuration, &$erreur) {
 
 	// Initialise le retour à true par défaut.
 	$est_valide = true;
@@ -227,7 +242,7 @@ function requete_verifier_ressource($ressource, $configuration, &$erreur) {
 		//    réputée valide.
 		$module = $configuration['module'];
 		include_spip("svpapi/${module}");
-		$verifier = "ressource_{$configuration['ressource']}_verifier";
+		$verifier = "${collection}_verifier_ressource_{$configuration['ressource']}";
 		if (function_exists($verifier)
 		and !$verifier($ressource)) {
 			$erreur = array(

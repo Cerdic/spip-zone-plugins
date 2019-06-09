@@ -145,7 +145,7 @@ function plugins_ressourcer($prefixe) {
  * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
-function critere_categorie_verifier($valeur, &$extra) {
+function plugins_verifier_critere_categorie($valeur, &$extra) {
 	$valide = true;
 
 	include_spip('inc/svp_phraser');
@@ -169,7 +169,7 @@ function critere_categorie_verifier($valeur, &$extra) {
  * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
-function critere_compatible_spip_verifier($valeur, &$extra) {
+function plugins_verifier_critere_compatible_spip($valeur, &$extra) {
 	$valide = true;
 
 	if (!preg_match('#^((?:\d+)(?:\.\d+){0,2})(?:,(\d+\.\d+)){0,}$#', $valeur)) {
@@ -192,7 +192,7 @@ function critere_compatible_spip_verifier($valeur, &$extra) {
  * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
-function ressource_prefixe_verifier($valeur) {
+function plugins_verifier_ressource_prefixe($valeur) {
 	$est_valide = true;
 
 	if (!preg_match('#^(\w){2,}$#', strtolower($valeur))) {

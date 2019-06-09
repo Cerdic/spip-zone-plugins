@@ -91,7 +91,7 @@ function http_svp_get_collection_dist($requete, $reponse) {
 			$configuration = $collections[$collection];
 
 			// Vérification des filtres, si demandés.
-			if (requete_verifier_filtres($contenu['requete']['filtres'], $configuration, $erreur)) {
+			if (requete_verifier_filtres($contenu['requete']['filtres'], $collection, $configuration, $erreur)) {
 				// Détermination de la fonction de service permettant de récupérer la collection spécifiée
 				// filtrée sur les critères éventuellement fournis.
 				// -- la fonction de service est contenue dans un fichier du répertoire svpapi/.
@@ -168,7 +168,7 @@ function http_svp_get_ressource_dist($requete, $reponse) {
 
 			// Vérification de la ressource
 			$ressource = $contenu['requete']['ressource'];
-			if (requete_verifier_ressource($ressource, $configuration, $erreur)) {
+			if (requete_verifier_ressource($ressource, $collection, $configuration, $erreur)) {
 				// Détermination de la fonction de service permettant de récupérer la ressource spécifiée.
 				// -- la fonction de service est contenue dans un fichier du répertoire svpapi/.
 				$module = $configuration['module'];
