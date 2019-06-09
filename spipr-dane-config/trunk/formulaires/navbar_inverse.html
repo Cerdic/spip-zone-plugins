@@ -14,7 +14,7 @@
 		<h3 class="legend"><:sdc:couleurs{bloc=de la barre de navigation}:></h3>
         [(#SET{couleur_choisie, #CONFIG{sdc/navbar/inverser_couleur}|=={color1}|?{#CONFIG{sdc/defaut/color1, #DF0D46}, #CONFIG{sdc/defaut/color2, #455C98}}})]
         [(#SAISIE{checkbox, inverser_couleur}
-            {label=<div><div style="float:right;width:25px;height:25px;background-color:[(#CONFIG{sdc/defaut/color1, #DF0D46})];"></div>Couleur N°1</div><div style="margin-top: 8px;"><div style="float:right;clear: both;width:25px;height:25px;background-color:[(#CONFIG{sdc/defaut/color2, #455C98})];"></div>Couleur N°2</div><div style="margin-top: 8px;"><div id="couleur_choisie" style="float:right;clear: both;width:25px;height:25px;background-color:[(#GET{couleur_choisie})];"></div>Couleur Choisie</div><br/><:sdc:label_inverser_navbar:>}
+            {label=<span class="couleur-barnav"><span style="background-color:[(#CONFIG{sdc/defaut/color1, #DF0D46})];"></span>Couleur N°1</span><span class="couleur-barnav"><span style="background-color:[(#CONFIG{sdc/defaut/color2, #455C98})];"></span>Couleur N°2</span><span class="couleur-barnav"><span id="couleur_choisie" style="background-color:[(#GET{couleur_choisie})];"></span>Couleur Choisie</span><br/><:sdc:label_inverser_navbar:>}
             {defaut=color2}
              {datas=#ARRAY{
                 on,Oui}}
@@ -39,9 +39,10 @@
             }
             {conteneur_class=long_label}
         )]
+        ]
 		<p class="boutons">
 			<input type="submit" name="enregistrer" class="submit save" value="<:bouton_enregistrer:>" />
-			<input type="submit" name="_cfg_delete" class="submit delette" value="<:sdc:bouton_supprimer:>" style="float:left"/>
+			<input type="submit" name="_cfg_delete" class="submit delete" value="<:sdc:bouton_supprimer:>"/>
 		</p>
 	</div></form>
 </div>

@@ -14,7 +14,7 @@
 	[ (#ENV{editable}|oui)
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-        <div id="cssImages" style="margin-bottom:1.2em;">
+        <div id="cssImages">
             [(#INCLURE{fond=prive/squelettes/inclure/liste_images}{path=#GET{path}}{bloc=#ENV{bloc}}{del=oui}{env}{ajax}{id_unique=#GET{id_unique}})]
         </div>
 	    <div class="editer editer_file[ (#ENV**{erreurs}|table_valeur{file}|oui)erreur]">

@@ -7,7 +7,7 @@
   Distribue sous licence GPL3
 
 ][(#SET{bgimg, [(#CONFIG{sdc/[(#ENV{bloc})]/background-image, no})]})
-][(#SET{titre_ext, #ENV{bloc}|=={body}|?{de la page, de l'entête}})]
+][(#SET{titre_ext, #ENV{bloc}|=={body}|?{de la page, #ENV{bloc}|=={header}|?{de l'entête, du pied de page}}})]
 [(#SET{id_unique, #EVAL{rand()}})  
 ]<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
@@ -88,7 +88,7 @@
         )]]
 		<p class="boutons">
 			<input type="submit" name="enregistrer" class="submit save" value="<:bouton_enregistrer:>" />
-			<input type="submit" name="_cfg_delete" class="submit delette" value="<:sdc:bouton_supprimer:>" style="float:left"/>
+			<input type="submit" name="_cfg_delete" class="submit delete" value="<:sdc:bouton_supprimer:>"/>
 		</p>
 <script type="text/javascript">// <![CDATA[
 	$(document).ready(function(){

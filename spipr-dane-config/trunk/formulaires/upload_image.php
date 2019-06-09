@@ -6,14 +6,20 @@
   (c) 2019 Dominique Lepaisant
   Distribue sous licence GPL
 */
+
+// securite
+if (!defined("_ECRIRE_INC_VERSION")) {
+    return;
+}
+
 /**
  * Chargement du formulaire
  * @param string $path_base
+ * @param string $bloc
  * @param string $fichier
  * @return array
  */
 function formulaires_upload_image_charger_dist($path_base,$bloc){
-
 	$valeurs = array(
 		'file'=>'',
 		'path_base'=>$path_base,
@@ -24,17 +30,19 @@ function formulaires_upload_image_charger_dist($path_base,$bloc){
 	return $valeurs;
 }
 
-function formulaires_upload_image_verifier_dist($path_base,$bloc){
+function formulaires_upload_image_verifier_dist($path_base,$bloc) {
     if (!is_dir($path_base)) {
         if (!mkdir(_DIR_SITE."squelettes/images/", 0755, true)) {
-            $erreurs['file'] ='Echec lors de la création des répertoires '._DIR_SITE."squelettes/images/";
+            $erreurs['file'] = _T('sdc:erreur_creer_dir_images', array('dir'=>_DIR_SITE));
         }
     }
     $files = sdc_check_upload($path_base);
-    foreach($files as $file){
-       if ( !preg_match("#.(png|jpg|jpeg|gif)$#",$file['name'] ))
-        $erreurs["file"] = "Format interdit";
+    foreach ($files as $file) {
+        if ( !preg_match("#.(png|jpg|jpeg|gif)$#",$file['name'])) {
+            $erreurs["file"] = _T('sdc:erreur_format');
+        }
     }
+    
 	return $erreurs;
 }
 
@@ -42,16 +50,18 @@ function formulaires_upload_image_traiter_dist($path_base,$bloc){
 	if (!_request('img_delete')) {
 		$files = sdc_check_upload($path_base);
 		$ok = true;
-		foreach($files as $file){
+		foreach ($files as $file) {
             $fileName = sdc_suppr_accents($file['name']);
-			if (!move_uploaded_file($file['tmp_name'], $path_base.$fileName))
-				$ok = false;
+			if (!move_uploaded_file($file['tmp_name'], $path_base.$fileName)) {
+                $ok = false;
+            }
 		}
 		if ($ok){
 			$res['message_ok'] = "L'image à bien été téléversée";
 		}
-		else
-			$res['message_erreur'] = 'Erreur de téleversement';
+		else {
+            $res['message_erreur'] = 'Erreur de téleversement';
+        }
 	}
 	else {
 		// supprimer des images 
@@ -66,6 +76,7 @@ function formulaires_upload_image_traiter_dist($path_base,$bloc){
 			$res['message_ok'] .= _T("sdc:msg_image_supprimee",array("compteur"=>$compteur))." : ".$img_deleted;
 		}
 	}
+    
 	return $res;
 }
 
@@ -74,10 +85,10 @@ function sdc_check_upload($path_base){
 	$files = array();
 	$erreurs = array();
 
-	if (is_array($post)){
+	if (is_array($post)) {
 		foreach ($post as $file) {
 			//UPLOAD_ERR_NO_FILE
-			if (!($file['error'] == 4)){
+			if (!($file['error'] == 4)) {
 				$files[]=$file;
 			}
 		}
@@ -110,4 +121,3 @@ function sdc_suppr_accents($str, $encoding='utf-8')
  
     return $str;
 }
-?>

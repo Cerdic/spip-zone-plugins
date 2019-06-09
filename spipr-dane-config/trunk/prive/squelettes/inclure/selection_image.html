@@ -1,6 +1,6 @@
 [(#ENV{ajouter}|=={oui}|oui)
 <a href='[(#SELF|parametre_url{ajouter,non})]' class='ajax bouton_fermer'>[(#CHEMIN_IMAGE{fermer-16.png}|balise_img)]</a>
-<div class="ajax">#ENV{bloc,pas de bloc}
+<div class="ajax">
 #SET{path,#EVAL{_DIR_SITE}squelettes/images/}
 #FORMULAIRE_UPLOAD_IMAGE{#GET{path}, #ENV{bloc}}
 </div>

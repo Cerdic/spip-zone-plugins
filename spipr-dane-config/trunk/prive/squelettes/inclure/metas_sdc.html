@@ -1,0 +1,28 @@
+<div class='onglets_simple clearfix'>
+    <ul>
+        <li>[(#SELF|parametre_url{lisible,on}|lien_ou_expose{<small>Texte</small>,#ENV{lisible}|=={on},ajax})]</li>
+        <li>[(#SELF|parametre_url{lisible,off}|lien_ou_expose{<small>Code</small>,#ENV{lisible}|=={off},ajax})]</li>
+    </ul>
+</div>
+#SET{patterns, #ARRAY{top, bottom, left, right, center}}
+#SET{replacements, #ARRAY{'en haut', 'en bas', 'à gauche', 'à droite', 'au centre'}}
+<B_data>
+<ul  class="liste_items metas">
+	<BOUCLE_data(DATA){source table, #CONFIG*{sdc/}}>
+	<li class="item"><strong>[(#ENV{lisible}|=={on}|?{[(#VAL{sdc:metas_#CLE}|_T{'',#ARRAY{'force',''}}|)], #CLE})] </strong>
+		<B_ss_data>
+		<ul  class="liste_items">
+		<BOUCLE_ss_data(DATA){source table, #VALEUR}>
+            <li>
+                <small><span>[(#ENV{lisible}|=={on}|?{[(#VAL{sdc:metas_#CLE}|_T{'',#ARRAY{'force',''}})], #CLE})] : </span><em>#VALEUR</em></small>
+            </li>
+        <BOUCLE_recursive(BOUCLE_ss_data)></BOUCLE_recursive>
+		</BOUCLE_ss_data>
+		</ul>
+		</B_ss_data>
+	</li>
+	</BOUCLE_data>
+</ul>
+</B_data>
+    <:sdc:configuration_absente:>
+<//B_data>

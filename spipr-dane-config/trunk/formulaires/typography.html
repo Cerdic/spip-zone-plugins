@@ -46,7 +46,7 @@
         )]
         [(#SAISIE{selection, font-family}
 			{label=<:sdc:famille_de_police:>}
-			{defaut='Open Sans'}
+			{defaut=''}
 			{class=chosen}
             {conteneur_class=long_label}
 			{datas=#ENV{polices}}
@@ -64,8 +64,8 @@
 		)]
                 
 		<div>
-			[<h1 class="gwf" [style="margin-bottom: 5px; font-family: (#CONFIG{sdc/defaut/font-family}|in_array{#GET{ggfonts}}|?{#ENV{font-family}, #ENV{font-family-perso}})"]>(#NOM_SITE_SPIP)</h1>]
-			[<p class="gwf" style="[font-family: (#CONFIG{sdc/defaut/font-family}|in_array{#GET{ggfonts}}|?{#ENV{font-family}, #ENV{font-family-perso}}); ]font-size: 1.5em;">(#NOM_SITE_SPIP|strtolower|ucfirst)</p>]
+			[<h1 class="gwf" [style="font-family: (#CONFIG{sdc/defaut/font-family}|in_array{#GET{ggfonts}}|?{#ENV{font-family}, #ENV{font-family-perso}})"]>(#NOM_SITE_SPIP)</h1>]
+			[<p class="gwf" style="[font-family: (#CONFIG{sdc/defaut/font-family}|in_array{#GET{ggfonts}}|?{#ENV{font-family}, #ENV{font-family-perso}}); ]">(#NOM_SITE_SPIP|strtolower|ucfirst)</p>]
         </div>
         [(#ENV{bloc}|=={defaut}|non)
         [(#SAISIE{selection, font-size}
@@ -99,7 +99,7 @@
 
 		<p class="boutons boutons[-(#ENV{bloc})][-(#ENV{elem})]">
 			<input type="submit" name="enregistrer" class="submit save" value="<:bouton_enregistrer:>" />
-			<input type="submit" name="_cfg_delete" class="submit delette" value="<:sdc:bouton_supprimer:>" style="float:left"/>
+			<input type="submit" name="_cfg_delete" class="submit delete" value="<:sdc:bouton_supprimer:>"/>
 		</p>
 	</div></form>
 </div>
@@ -109,7 +109,7 @@
 			if ($(this).val() == 'perso' ) 
 			{ 
 				$('.family-perso').show() ;
-				$('#champ_font-family-perso').on('change mouseleave mouseover', function(){
+				$('#champ_font-family-perso').on('input change mouseleave mouseover mouseout', function(){
                     console.log($(this).val());
 					$('.gwf').css({'font-family': $(this).val().replace(/\++/g, ' ')} );
                     var link="<link href='https://fonts.googleapis.com/css?family="+$(this).val()+"' rel='stylesheet' type='text/css'>";

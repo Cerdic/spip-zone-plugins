@@ -4,9 +4,13 @@
 */
 
 /* formulaires */
-.formulaire_spip fieldset {
-	margin-top: 0;
-}
+.formulaire_spip fieldset {margin-top: 0;}
+.formulaire_spip .submit.delete {float: left;}
+.formulaire_spip .couleur-barnav {display: block;margin-top: 8px;}
+.formulaire_spip .couleur-barnav:first-child {margin-top: 0;}
+.formulaire_spip .couleur-barnav > span {float: right;width: 25px;height: 25px;}
+.formulaire_spip h1.gwf {margin-bottom:5px;}
+.formulaire_spip p.gwf {font-size: 1.5em;}
 .pave_selection_image #content_1 {overflow-y:auto;}
 .pave_selection_image .liste-images > .formulaire_spip {float:left;margin:6px;width:110px;padding:4px;border:1px solid #ccc;}
 .pave_selection_image .liste-images > .formulaire_spip label.todelete {float:right;display:block;margin:0;width:auto;}
@@ -16,3 +20,8 @@
 
 .pave_selection_image .liste-images > p.subDel {clear:both;text-align:right;display:none;}
 .pave_selection_image .liste-images > .pagination {clear:both;}
+.pave_selection_image > .bouton-hors-cadre {position: absolute;top: -65px;left: 175px;padding-right: 5px;background: whitesmoke;border: 1px solid gray;border-radius: 5px;}
+
+.liste_items.metas li.item {border-bottom: 2px solid #ddd;}
+.liste_items.metas li.item li{border-bottom:1px solid #dddddd;padding-left:10px;}
+#cssImages {margin-bottom:1.2em;}

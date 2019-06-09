@@ -8,13 +8,16 @@
 
 */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+// securite
+if (!defined("_ECRIRE_INC_VERSION")) {
+    return;
+}
 include_spip('inc/config');
 
 //
 // Charger
 // 
-function formulaires_logo_charger_dist($bloc){
+function formulaires_logo_charger_dist($bloc) {
 	// definition des valeurs de base du formulaire
 	$valeurs = array(
 		'bloc'=>$bloc,
@@ -29,10 +32,11 @@ function formulaires_logo_charger_dist($bloc){
 //
 // Verifier
 // 
-function formulaires_logo_verifier_dist($bloc){
+function formulaires_logo_verifier_dist($bloc) {
 	$erreurs = array();
-    if(!is_int(intval(_request('largeur_logo'))))
-        $erreurs['largeur_logo']="Vous devez saisir un nombre entier";
+    if (!is_int(intval(_request('largeur_logo')))) {
+        $erreurs['largeur_logo'] = _T('sdc:erreur_nombre_entier');
+    }
     
 	return $erreurs;
 }
@@ -40,20 +44,21 @@ function formulaires_logo_verifier_dist($bloc){
 //
 // Traiter
 // 
-function formulaires_logo_traiter_dist($bloc){
+function formulaires_logo_traiter_dist($bloc) {
 	$res = array('editable'=>' ', 'message_ok'=>'', 'message_erreur'=>'');
-	$vals=array('masquer_logo'=>'','position_logo'=>'','largeur_logo'=>'300','position_logo_acad'=>'');
+	$vals = array('masquer_logo'=>'','position_logo'=>'','largeur_logo'=>'300','position_logo_acad'=>'');
 
-	if (!_request('_cfg_delete') ){
-		foreach($vals as $champ => $val) {
-			if (_request($champ)!=''){
+	if (!_request('_cfg_delete')) {
+		foreach ($vals as $champ => $val) {
+			if (_request($champ)!='') {
 				ecrire_config('sdc/'.$bloc.'/'.$champ, _request($champ));
-				if(is_null(lire_config('sdc/'.$bloc.'/'.$champ)))
-					$res['message_erreur'].=   $champ.' = '._request($champ).'<br/>';
-
+				if (is_null(lire_config('sdc/'.$bloc.'/'.$champ))) {
+                    $res['message_erreur'] .= _T('sdc:erreur_ecriture_champ', array('champ'=>$champ));
+                }
             }
-			else 
-				effacer_config('sdc/'.$bloc.'/'.$champ);
+			else {
+                effacer_config('sdc/'.$bloc.'/'.$champ);
+            }
 		}
         $res['message_ok']= _T('sdc:params_logos_enregistres');
 	}
@@ -66,5 +71,3 @@ function formulaires_logo_traiter_dist($bloc){
     }
 	return $res;
 }
-
-?>
