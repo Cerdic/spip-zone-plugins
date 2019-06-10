@@ -57,6 +57,9 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 	} else {
 		$saisies_disponibles = saisies_lister_disponibles();
 	}
+	if (isset($options['saisies_exclues']) and  is_array($options['saisies_exclues'])) {
+		$saisies_disponibles = array_diff_key($saisies_disponibles, array_flip($options['saisies_exclues']));
+	}
 	$contexte['_saisies_disponibles'] = $saisies_disponibles;
 
 	// La liste des groupes de saisies
@@ -141,6 +144,9 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 			$saisies_disponibles = saisies_lister_disponibles_sql();
 		} else {
 			$saisies_disponibles = saisies_lister_disponibles();
+		}
+		if (isset($options['saisies_exclues']) and  is_array($options['saisies_exclues'])) {
+			$saisies_disponibles = array_diff_key($saisies_disponibles, array_flip($options['saisies_exclues']));
 		}
 
 		$saisie = $saisies_actuelles[$nom_ou_id];
@@ -323,6 +329,9 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 		$saisies_disponibles = saisies_lister_disponibles_sql();
 	} else {
 		$saisies_disponibles = saisies_lister_disponibles();
+	}
+	if (isset($options['saisies_exclues']) and  is_array($options['saisies_exclues'])) {
+		$saisies_disponibles = array_diff_key($saisies_disponibles, array_flip($options['saisies_exclues']));
 	}
 
 	// On ajoute un préfixe devant l'identifiant
