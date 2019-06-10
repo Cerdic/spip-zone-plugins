@@ -174,8 +174,8 @@ function requete_verifier_filtres($filtres, $collection, $configuration, &$erreu
 				// On vérifie si la valeur du critère est valide :
 				// -- le critère est vérifié par une fonction spécifique qui est soit liée au critère soit globale à
 				//    la fonction. Si cette fonction n'existe pas le critère est réputé valide.
-				$module = !empty($configuration['filtres'][$_critere]['module'])
-					? $configuration['filtres'][$_critere]['module']
+				$module = !empty($criteres[$_critere]['module'])
+					? $criteres[$_critere]['module']
 					: $configuration['module'];
 				include_spip("svpapi/${module}");
 				$verifier = "${collection}_verifier_critere_${_critere}";
