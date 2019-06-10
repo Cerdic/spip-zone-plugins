@@ -228,12 +228,21 @@ function requete_verifier_ressource($ressource, $collection, $configuration, &$e
 
 	// Vérification de la disponibilité de l'accès à une ressource pour la collection concernée
 	if (empty($configuration['ressource'])) {
+		// Récupération de la liste des collections disponibles pour lister celles avec ressources dans le message.
+		$declarer = charger_fonction('declarer_collections_svp', 'inc');
+		$collections = $declarer();
+		$ressources = array();
+		foreach ($collections as $_collection => $_config) {
+			if (!empty($_config['ressource'])) {
+				$ressources[] = $_collection;
+			}
+		}
 		$erreur = array(
 			'status'  => 400,
 			'type'    => 'ressource_nok',
 			'element' => 'ressource',
 			'valeur'  => $ressource,
-			'extra'   => 'plugins'
+			'extra'   => implode(', ', $ressources)
 		);
 		$est_valide = false;
 	} else {
