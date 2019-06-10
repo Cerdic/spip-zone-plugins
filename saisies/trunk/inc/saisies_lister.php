@@ -386,7 +386,7 @@ function saisies_comparer_par_identifiant($saisies_anciennes, $saisies_nouvelles
 
 /**
  * Liste toutes les saisies configurables (ayant une description).
- *
+ * @param string $saisies_repertoire le répertoire où trouver les saisies
  * @return array Un tableau listant des saisies et leurs options
  */
 function saisies_lister_disponibles($saisies_repertoire = 'saisies') {
