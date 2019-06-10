@@ -247,7 +247,7 @@ function requete_verifier_ressource($ressource, $collection, $configuration, &$e
 		and !$verifier($ressource)) {
 			$erreur = array(
 				'status'  => 400,
-				'type'    => 'ressource_valeur_nok',
+				'type'    => "ressource_{$configuration['ressource']}_nok",
 				'element' => 'ressource',
 				'valeur'  => $ressource,
 				'extra'   => $configuration['ressource']
