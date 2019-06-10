@@ -119,12 +119,6 @@ function reponse_expliquer_erreur($erreur, $collection) {
  */
 function reponse_construire($reponse, $contenu) {
 
-	// Si pas d'erreur et que la collection est vide on renvoie le code idoine.
-	if (($contenu['erreur']['status'] == 200)
-	and empty($contenu['donnees'])) {
-		$contenu['erreur']['status'] = 204;
-	}
-
 	// Charset UTF-8 et statut de l'erreur.
 	$reponse->setCharset('utf-8');
 	$reponse->setStatusCode($contenu['erreur']['status']);
