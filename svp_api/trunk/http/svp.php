@@ -31,7 +31,7 @@ function http_svp_erreur_dist($code, $requete, $reponse) {
 	// Construction du contenu de la réponse:
 	// Comme l'erreur est détectée par le serveur HTTP abstrait, le contenu n'est pas initialisé.
 	// Il faut donc l'initialiser selon la structure imposée par l'API.
-	include_spip('inc/svpapi_reponse');
+	include_spip('inc/repondre_svp');
 	$contenu = reponse_initialiser_contenu($requete);
 
 	// Description de l'erreur : pour les messages, on utilise ceux du plugin serveur HTTP abstrait.
@@ -51,10 +51,10 @@ function http_svp_erreur_dist($code, $requete, $reponse) {
  * Fait un GET sur une collection de plugins ou de dépôts.
  * La requête est du type `/svp/plugins` ou `/svp/depots` et renvoie les objets plugin contenus dans la base du serveur
  * (hors les plugins installés) ou les objets dépôt hébergés par le serveur. Il est possible de filtrer la collection
- * des plugins par catégorie et par compatibilité SPIP `/svp/plugins&compatible_spip=2.1&categorie=outil`.
+ * des plugins par compatibilité SPIP `/svp/plugins&compatible_spip=2.1`.
  *
- * Il est possible pour des plugins de rajouter des collections en utilisant le pipeline `declarer_collections_svp`
- * et en fournissant les fonctions de service associées.
+ * Il est possible pour des plugins de modifier ou de  rajouter des collections en utilisant le pipeline
+ * `declarer_collections_svp` et en fournissant les fonctions de service associées.
  *
  * @api
  *
@@ -72,17 +72,18 @@ function http_svp_erreur_dist($code, $requete, $reponse) {
 function http_svp_get_collection_dist($requete, $reponse) {
 
 	// Initialisation du format de sortie du contenu de la réponse, du bloc d'erreur et de la collection.
-	include_spip('inc/svpapi_reponse');
+	include_spip('inc/repondre_svp');
 	$contenu = reponse_initialiser_contenu($requete);
 	$erreur = array();
 	$collection = '';
 
 	// Vérification du mode SVP du serveur : celui-ci ne doit pas être en mode runtime pour
 	// renvoyer des données complètes.
-	include_spip('inc/svpapi_requete');
+	include_spip('inc/verifier_requete_svp');
 	if (requete_verifier_serveur($erreur)) {
 		// Récupération de la liste des collections disponibles.
-		$collections = requete_declarer_collections();
+		$declarer = charger_fonction('declarer_collections_svp', 'inc');
+		$collections = $declarer();
 
 		// Vérification du nom de la collection.
 		$collection = $contenu['requete']['collection'];
@@ -142,17 +143,18 @@ function http_svp_get_collection_dist($requete, $reponse) {
 function http_svp_get_ressource_dist($requete, $reponse) {
 
 	// Initialisation du format de sortie du contenu de la réponse, du bloc d'erreur et du format de sortie en JSON
-	include_spip('inc/svpapi_reponse');
+	include_spip('inc/repondre_svp');
 	$contenu = reponse_initialiser_contenu($requete);
 	$erreur = array();
 	$collection = '';
 
 	// Vérification du mode SVP du serveur : celui-ci ne doit pas être en mode runtime pour
 	// renvoyer des données complètes.
-	include_spip('inc/svpapi_requete');
+	include_spip('inc/verifier_requete_svp');
 	if (requete_verifier_serveur($erreur)) {
 		// Récupération de la liste des collections disponibles.
-		$collections = requete_declarer_collections();
+		$declarer = charger_fonction('declarer_collections_svp', 'inc');
+		$collections = $declarer();
 
 		// Vérification du nom de la collection.
 		$collection = $contenu['requete']['collection'];
