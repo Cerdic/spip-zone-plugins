@@ -94,18 +94,12 @@ function http_svp_get_collection_dist($requete, $reponse) {
 			if (requete_verifier_filtres($contenu['requete']['filtres'], $collection, $configuration, $erreur)) {
 				// Détermination de la fonction de service permettant de récupérer la collection spécifiée
 				// filtrée sur les critères éventuellement fournis.
-				// -- la fonction de service est contenue dans un fichier du répertoire svpapi/.
+				// -- la fonction de service est contenue dans un fichier du répertoire svpapi/ et est supposée
+				//    être toujours présente.
 				$module = $configuration['module'];
 				include_spip("svpapi/${module}");
 				$collectionner = "${collection}_collectionner";
-				if (!function_exists($collectionner)) {
-					$erreur = array(
-						'status'  => 400,
-						'type'    => 'fonction_nok',
-						'element' => 'collection',
-						'valeur'  => $collectionner
-					);
-				}
+
 				// -- on construit le contenu de la collection.
 				$contenu['donnees'] = $collectionner($contenu['requete']['filtres']);
 			}
@@ -170,18 +164,12 @@ function http_svp_get_ressource_dist($requete, $reponse) {
 			$ressource = $contenu['requete']['ressource'];
 			if (requete_verifier_ressource($ressource, $collection, $configuration, $erreur)) {
 				// Détermination de la fonction de service permettant de récupérer la ressource spécifiée.
-				// -- la fonction de service est contenue dans un fichier du répertoire svpapi/.
+				// -- la fonction de service est contenue dans un fichier du répertoire svpapi/ et est supposée
+				//    être toujours présente.
 				$module = $configuration['module'];
 				include_spip("svpapi/${module}");
 				$ressourcer = "${collection}_ressourcer";
-				if (!function_exists($ressourcer)) {
-					$erreur = array(
-						'status'  => 400,
-						'type'    => 'fonction_nok',
-						'element' => 'ressource',
-						'valeur'  => $ressourcer
-					);
-				}
+
 				// -- on construit le contenu de la collection.
 				$contenu['donnees'] = $ressourcer($ressource);
 			}
