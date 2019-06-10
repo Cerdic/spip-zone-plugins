@@ -40,7 +40,7 @@ function inc_declarer_collections_svp_dist() {
 				'module'  => 'svpapi',
 				'filtres' => array(
 					array(
-						'nom' => 'type'
+						'critere' => 'type'
 					)
 				)
 			)

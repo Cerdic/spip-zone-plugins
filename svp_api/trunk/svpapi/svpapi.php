@@ -126,30 +126,6 @@ function plugins_ressourcer($prefixe) {
 
 
 /**
- * Détermine si la valeur de la catégorie est valide.
- * La fonction récupère dans le plugin SVP la liste des catégories autorisées.
- *
- * @param string $valeur
- *        La valeur du critère catégorie
- *
- * @return bool
- *        `true` si la valeur est valide, `false` sinon.
- */
-function plugins_verifier_critere_categorie($valeur, &$extra) {
-
-	$est_valide = true;
-
-	include_spip('inc/svp_phraser');
-	if (!in_array($valeur, $GLOBALS['categories_plugin'])) {
-		$est_valide = false;
-		$extra = implode(', ', $GLOBALS['categories_plugin']);
-	}
-
-	return $est_valide;
-}
-
-
-/**
  * Détermine si la valeur du critère compatibilité SPIP est valide.
  * La fonction compare uniquement la structure de la chaine passée qui doit être cohérente avec
  * un numéro de version ou de branche.
