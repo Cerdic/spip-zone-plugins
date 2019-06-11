@@ -47,3 +47,7 @@
 	margin-top: 3px;
 	margin-left: 10px;
 }
+
+.csl-entry {
+	word-break: break-all;
+}
