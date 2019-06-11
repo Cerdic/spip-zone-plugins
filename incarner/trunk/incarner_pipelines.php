@@ -37,7 +37,7 @@ function incarner_boite_infos($flux) {
 					'login=' . $login . '&redirect=' . $url_self
 				);
 
-				$flux['data'] .= '<span class="icone horizontale">';
+				$flux['data'] .= '<span class="icone horizontale lien_incarner">';
 				$flux['data'] .= '<a href="' . $url_action . '">';
 				$flux['data'] .= '<img src="' . find_in_path('images/logo_incarner_24.png') . '" width="24" height="24" /><b>';
 				$flux['data'] .= _T('incarner:incarner_login', array('login' => $login));
