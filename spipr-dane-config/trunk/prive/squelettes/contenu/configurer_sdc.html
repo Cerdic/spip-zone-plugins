@@ -31,11 +31,11 @@
 		<div class="ajax">
 			#FORMULAIRE_TYPOGRAPHY{defaut}
 		</div>
-        [(#PLUGIN{sdn}|oui)
+        [(#REM)[(#PLUGIN{sdn}|oui)
         <div>
             <INCLURE{fond=prive/squelettes/inclure/selection_layer_page_interface, page=defaut}>
         </div>
-		]][(#GET{bloc}|=={body}|oui)
+		]]][(#GET{bloc}|=={body}|oui)
 		<div class="ajax">
 			#FORMULAIRE_BACKGROUND{body}
 		</div>
