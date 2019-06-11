@@ -381,12 +381,16 @@ function profils_chercher_ids_profil($id_auteur=0, $id_ou_identifiant_profil='')
 }
 
 /**
- * Récupérer les informations complètes d'un profil
+ * Récupérer les informations complètes d'un compte de profil
+ *
+ * Renvoie un tableau multidimensionnel avec l'ensemble des valeurs
+ * chargées par les formulaires d'édition des objets du profil,
+ * chaque objet dans une clé (organisation, contact, etc.)
  *
  * @param int $id_auteur=0
  * 		Identifiant d'un auteur précis, sinon visiteur en cours
  * @return array
- * 		Retourne les informations d'un profil, chaque objet SPIP dans une clé (organisation, contact, telephone, etc).
+ * 		Informations d'un profil, chaque objet SPIP dans une clé (organisation, contact, telephone, etc).
  */
 function profils_recuperer_infos($id_auteur=0, $id_ou_identifiant_profil='') {
 	include_spip('inc/editer');
@@ -426,6 +430,84 @@ function profils_recuperer_infos($id_auteur=0, $id_ou_identifiant_profil='') {
 	}
 	
 	return $infos;
+}
+
+/**
+ * Récupérer les informations résumées d'un compte de profil
+ *
+ * Renvoie un tableau simple avec toutes les valeurs du profil,
+ * les champs configurés pour l'édition uniquement.
+ *
+ * @uses profils_recuperer_profil()
+ * @uses profils_recuperer_infos()
+ *
+ * @param int $id_auteur=0
+ * 		Identifiant d'un auteur précis, sinon visiteur en cours
+ * @return array
+ * 		Informations d'un profil sous forme de tableau associatif
+ */
+function profils_recuperer_infos_simples($id_auteur=0, $id_ou_identifiant_profil='') {
+	$ligne = array();
+
+	if (
+		$infos = profils_recuperer_infos($id_auteur, $id_ou_identifiant_profil)
+		and $profil = profils_recuperer_profil($id_ou_identifiant_profil)
+		and $config = $profil['config']
+	) {
+		$ligne = array();
+
+		// Les objets dans un ordre précis
+		foreach (array('auteur', 'organisation', 'contact') as $objet) {
+			// Si c'est autre chose que l'utilisateur, faut le plugin qui va avec et que ce soit activé
+			if ($objet == 'auteur' or (defined('_DIR_PLUGIN_CONTACTS') and $config["activer_$objet"])) {
+				// Pour chaque chaque champ vraiment configuré
+				if ($config[$objet]) {
+					foreach ($config[$objet] as $champ => $config_champ) {
+						// On prend les champs d'édition de profil uniquement
+						if (in_array('edition', $config_champ)) {
+							$cle = $objet.'_'.$champ;;
+							$ligne[$cle] = $infos[$objet][$champ];
+						}
+					}
+				}
+				
+				// On cherche des coordonnées pour cet objet
+				if (
+					defined('_DIR_PLUGIN_COORDONNEES')
+					and $config["activer_coordonnees_$objet"]
+					and $coordonnees = $config['coordonnees'][$objet]
+				) {
+					// Pour chaque type de coordonnéees (num, email, adresse)
+					foreach ($coordonnees as $coordonnee => $champs) {
+						// Pour chaque champ ajouté
+						foreach ($champs as $cle => $champ) {
+							// Si ce cette coordonnées est configurée pour le form demandé
+							if ($champ['edition']) {
+								// Attention, si pas de type, on transforme ici en ZÉRO
+								if (!$champ['type']) {
+									$champ['type'] = 0;
+								}
+								// On va chercher les saisies de ce type de coordonnées
+								$saisies_coordonnee = profils_chercher_saisies_objet($coordonnee);
+								// On vire le titre libre
+								$saisies_coordonnee = saisies_supprimer($saisies_coordonnee, 'titre');
+								// On cherche uniquement le nom des champs
+								$saisies_noms = saisies_lister_champs($saisies_coordonnee);
+								
+								// On ajoute aux colonnes
+								foreach ($saisies_noms as $nom) {
+									$cle = $objet.'_'.$coordonnee.'_'.$champ['type'].'_'.$nom;
+									$ligne[$cle] = $infos['coordonnees'][$objet][$coordonnee][$champ['type']][$nom];
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return $ligne;
 }
 
 function profils_traiter_peupler_request($form, $champs_objet, $config_objet) {
