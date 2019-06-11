@@ -12,7 +12,7 @@
 	<!-- Des infobulles pour les notes de bas de page -->
 
 	<auteur>b_b</auteur>
-	<credit lien="https://github.com/goblindegook/littlefoot">Chris Sauve & Luís Rodrigues</credit>
+	<credit lien="https://github.com/goblindegook/littlefoot">Chris Sauve / Luís Rodrigues</credit>
 	<licence>MIT</licence>
 
 	<pipeline nom="insert_head" inclure="bigfoot_pipelines.php" />
