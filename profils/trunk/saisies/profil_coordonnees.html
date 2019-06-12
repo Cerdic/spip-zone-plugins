@@ -17,7 +17,7 @@
 		<tr>
 			<th colspan="5">[(#VALEUR|table_objet_sql|objet_info{texte_objets}|_T)]</th>
 		</tr>
-		<BOUCLE_deja_la (DATA) {source table, #VAL{0}|range{#ENV{valeur/#VALEUR}|count}}>
+		<BOUCLE_deja_la (DATA) {source table, #VAL{0}|range{#ENV{valeur/#VALEUR,#LISTE}|count}}>
 		<tr>
 			<td>
 				<select name="#ENV{nom}[#_coordonnees:VALEUR][#VALEUR][type]">
