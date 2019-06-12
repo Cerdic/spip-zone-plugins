@@ -5,6 +5,10 @@
 	#SET{forme,''}
 }
 )]
+[(#REM)Compatibilité plugins page, penser les branches -1)]
+[(#PLUGIN{pages}|et{#ENV{branche}|non}|oui)
+	[(#VAL{"-1,0"}|setenv{branche})]
+]
 #SET{evenements_liste_attente,#LISTE}
 <BOUCLE_evenements(EVENEMENTS)
 	{par date_debut}
