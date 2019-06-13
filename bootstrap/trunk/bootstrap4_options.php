@@ -13,9 +13,18 @@ function bootstrap4_affichage_final($flux){
 		AND $GLOBALS['visiteur_session']['webmestre']=='oui'
 		AND strpos($flux,"<!-- insert_head -->")!==false
 		AND $p=stripos($flux,"</body>")
-		AND $f = find_in_path("js/hashgrid.js")
-	){
-		$flux = substr_replace($flux,'<script type="text/javascript" src="'.$f.'"></script>',$p,0);
+	) {
+		if ($f = find_in_path("js/hashgrid.js")){
+			$flux = substr_replace($flux,'<script type="text/javascript" src="'.$f.'"></script>',$p,0);
+		}
+		if ((_VAR_MODE === 'debug' || _request('var_profile'))
+			AND $p=stripos($flux,"</head>")){
+			$file_css = direction_css(scss_select_css('css/spip.admin.css'));
+			$css = file_get_contents($file_css);
+			$css = "<style type='text/css'>$css</style>";
+			$flux = substr_replace($flux,$css,$p,0);
+		}
+
 	}
 	return $flux;
 }
