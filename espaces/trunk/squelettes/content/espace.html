@@ -28,13 +28,6 @@
 		[(#CHEMIN{liste/objets_informations.html}|oui)
 		<INCLURE{fond=liste/objets_informations,objet=immeuble,id_objet=#GET{id_espace_or},env} />
 		]
-		[(#PLUGIN{location_objets}|oui)
-			<p>
-				<a class="btn btn-primary btn-large" href="[(#URL_PAGE{location_espace}|parametre_url{id_espace,#GET{id_espace_or}})]">
-					<:objets_location:titre_objets_location:>
-				</a>
-			</p>
-		]
 	</aside>
 
 	<footer>
