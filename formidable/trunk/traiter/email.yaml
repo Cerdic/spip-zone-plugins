@@ -159,6 +159,14 @@ options:
           explication: '<:formidable:traiter_email_option_sujet_explication:>'
           afficher_si: '@traitements[email][activer_accuse]@!=""'
       -
+        saisie: 'textarea'
+        options:
+          nom: 'texte_accuse'
+          label: '<:formidable:traiter_email_option_texte_accuse_label:>'
+          explication: '<:formidable:traiter_email_option_texte_accuse_explication:>'
+          afficher_si: '@traitements[email][activer_accuse]@!=""'
+          rows: 4          
+      -
         saisie: 'input'
         options:
           nom: 'courriel_envoyeur_accuse'
@@ -172,3 +180,4 @@ options:
           label: '<:formidable:traiter_email_option_nom_envoyeur_accuse_label:>'
           explication: '<:formidable:traiter_email_option_nom_envoyeur_accuse_explication:>'
           afficher_si: '@traitements[email][activer_accuse]@!=""'
+

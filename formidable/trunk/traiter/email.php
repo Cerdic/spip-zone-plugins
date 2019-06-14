@@ -227,7 +227,7 @@ function traiter_email_dist($args, $retours) {
 				'id_formulaires_reponse' => isset($retours['id_formulaires_reponse']) ? $retours['id_formulaires_reponse'] : '',
 				'titre' => _T_ou_typo($formulaire['titre']),
 				'message_retour' => formidable_raccourcis_arobases_2_valeurs_champs(
-					$formulaire['message_retour'],
+					$options['texte_accuse'] ? $options['texte_accuse'] : $formulaire['message_retour'],
 					$saisies,
 					false,
 					''),
