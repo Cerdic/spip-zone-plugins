@@ -21,12 +21,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @param array $filtres
  *      Tableau des critères de filtrage additionnels à appliquer au select.
+ * @param array $configuration
+ *      Configuration de la collection plugins utile pour savoir quelle fonction appeler pour construire chaque filtre.
  *
  * @return array
  *      Tableau des plugins dont l'index est le préfixe du plugin.
  *      Les champs de type id ou maj ne sont pas renvoyés.
  */
-function plugins_collectionner($filtres) {
+function plugins_collectionner($filtres, $configuration) {
 
 	// Initialisation de la collection
 	$plugins = array();
@@ -43,14 +45,27 @@ function plugins_collectionner($filtres) {
 
 	// -- Initialisation du where avec les conditions sur la table des dépots.
 	$where = array('spip_depots_plugins.id_depot>0', 'spip_depots_plugins.id_plugin=spip_plugins.id_plugin');
-	// -- Si il y a des critères additionnels on complète le where en conséquence.
+	// -- Si il y a des critères additionnels on complète le where en conséquence en fonction de la configuration.
 	if ($filtres) {
+		// Extraire la configuration des critères
+		$criteres = array_column($configuration['filtres'], null, 'critere');
 		foreach ($filtres as $_critere => $_valeur) {
 			if ($_critere == 'compatible_spip') {
 				$filtrer = charger_fonction('where_compatible_spip', 'inc');
 				$where[] = $filtrer($_valeur, 'spip_plugins', '>');
 			} else {
-				$where[] = "spip_plugins.${_critere}=" . sql_quote($_valeur);
+				// On regarde si il y une fonction particulière permettant le calcul du critère ou si celui-ci
+				// est calculé de façon standard.
+				$module = !empty($criteres[$_critere]['module'])
+					? $criteres[$_critere]['module']
+					: $configuration['module'];
+				include_spip("svpapi/${module}");
+				$construire = "plugins_construire_critere_${_critere}";
+				if (function_exists($construire)) {
+					$where[] = $construire($_valeur);
+				} else {
+					$where[] = "spip_plugins.${_critere}=" . sql_quote($_valeur);
+				}
 			}
 		}
 	}
@@ -230,12 +245,14 @@ function plugins_lire_description($prefixe) {
  *
  * @param array $filtres
  *      Tableau des critères additionnels à appliquer au select (non utilisé).
+ * @param array $configuration
+ *      Configuration de la collection dépôts utile pour savoir quelle fonction appeler pour construire chaque filtre.
  *
  * @return array
  *      Tableau des dépôts.
  *      Les champs de type id ou maj ne sont pas renvoyés.
  */
-function depots_collectionner($filtres) {
+function depots_collectionner($filtres, $configuration) {
 
 	// Récupérer la liste des dépôts (filtrée ou pas).
 	include_spip('base/objets');
@@ -249,8 +266,21 @@ function depots_collectionner($filtres) {
 	$where = array();
 	// -- Si il y a des critères additionnels on complète le where en conséquence.
 	if ($filtres) {
+		// Extraire la configuration des critères
+		$criteres = array_column($configuration['filtres'], null, 'critere');
 		foreach ($filtres as $_critere => $_valeur) {
-			$where[] = "${_critere}=" . sql_quote($_valeur);
+			// On regarde si il y une fonction particulière permettant le calcul du critère ou si celui-ci
+			// est calculé de façon standard.
+			$module = !empty($criteres[$_critere]['module'])
+				? $criteres[$_critere]['module']
+				: $configuration['module'];
+			include_spip("svpapi/${module}");
+			$construire = "depots_construire_critere_${_critere}";
+			if (function_exists($construire)) {
+				$where[] = $construire($_valeur);
+			} else {
+				$where[] = "spip_plugins.${_critere}=" . sql_quote($_valeur);
+			}
 		}
 	}
 

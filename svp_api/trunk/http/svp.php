@@ -102,7 +102,7 @@ function http_svp_get_collection_dist($requete, $reponse) {
 				$collectionner = "${collection}_collectionner";
 
 				// -- on construit le contenu de la collection.
-				$contenu['donnees'] = $collectionner($contenu['requete']['filtres']);
+				$contenu['donnees'] = $collectionner($contenu['requete']['filtres'], $configuration);
 			}
 		}
 	}
