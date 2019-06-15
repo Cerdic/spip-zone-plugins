@@ -20,7 +20,7 @@ function action_api_http_dist(){
 	$requete = Request::createFromGlobals();
 	// On crée déjà la réponse, mais totalement vide, qui sera modifiée et remplie au fil du temps
 	$reponse = new Response();
-	
+
 	// On passe dans un pipeline avant toute vraie requête à SPIP
 	list($requete, $reponse) = pipeline(
 		'http_pre_requete',
@@ -36,7 +36,10 @@ function action_api_http_dist(){
 		// http.api/atom
 		// http.api/atom/patates
 		// http.api/atom/patates/1234
-		list($format, $collection, $ressource) = explode('/', $arg);
+		$informations = explode('/', $arg);
+		$format = isset($informations[0]) ? $informations[0] : '';
+		$collection = isset($informations[1]) ? $informations[1] : '';
+		$ressource = isset($informations[2]) ? $informations[2] : '';
 		define('_SET_HTML_BASE', true);
 		
 		// Si le format n'a pas le bon format, on arrête
