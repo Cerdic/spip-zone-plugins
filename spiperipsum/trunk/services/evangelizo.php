@@ -41,7 +41,7 @@ function evangelizo_charger($code_langue, $date) {
 		$url = _SPIPERIPSUM_EVANGILE_ENDPOINT . "${code_langue}/${date}";
 
 		// Acquisition des données spécifiées par l'url
-		$requeter = charger_fonction('taxonomie_requeter', 'inc');
+		$requeter = charger_fonction('spiperipsum_requeter', 'inc');
 		$tableau = $requeter($url);
 	}
 
