@@ -49,6 +49,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_option_nom_unique' => 'Deze naam wordt al door een ander veld gebruikt. Het moet binnen het formulier een unieke naam hebben.',
 	'erreur_valeur_inacceptable' => 'Ingevoerde waarde is onacceptabel.',
 
+	// F
+	'fichier_erreur_explication_renvoi' => 'Je kunt een nieuw bestand versturen, of het formulier als zodanig. Het oude bestand wordt niet bewaard.',
+
 	// I
 	'info_configurer_saisies' => 'Testbladzijde voor invoer',
 
@@ -90,7 +93,7 @@ Je vindt <a href="https://contrib.spip.net/5080" target="_blank">volledige docum
 	'option_cols_label' => 'Breedte',
 	'option_conteneur_class_label' => 'Aanvullende CSS classes op de container',
 	'option_datas_explication' => 'Je moet voor elke rij in het formulier een keuze opgeven in het formaat "key|label of the choice"',
-	'option_datas_grille_explication' => 'Je moet per regel een keuze aangeven in de vorm "sleutel|Label naar keuze" ofwel "sleutel|Label links|Label rechts"', # MODIF
+	'option_datas_grille_explication' => 'Je moet per regel een keuze aangeven in de vorm "sleutel|Label naar keuze" ofwel "sleutel|Label links|Label rechts"',
 	'option_datas_label' => 'Lijst van mogelijke keuzes',
 	'option_datas_sous_groupe_explication' => 'Je moet per regel een keuze aangeven in de vorm van "sleutel|Label" van de keuze. <br />Je kunt het begin van een subgroep aangeven met "*Titel van de subgroep". Om een subgroep af te sluiten kun je een nieuwe beginnen of een regel met uitsluitend "/*" invoegen.',
 	'option_defaut_label' => 'Standaardwaarde',
@@ -104,6 +107,8 @@ Je vindt <a href="https://contrib.spip.net/5080" target="_blank">volledige docum
 	'option_erreur_obligatoire_label' => 'Bericht verplicht veld',
 	'option_explication_explication' => 'Indien nodig, een korte omschrijving van het betroffen veld.',
 	'option_explication_label' => 'Uitleg',
+	'option_forcer_select_explication' => 'Wanneer een groep trefwoorden is gekozen, wordt standaard een radio-knop toegepast. Je kunt het gebruik van een select forceren.',
+	'option_forcer_select_label_case' => 'Forceer het gebruik van een select',
 	'option_groupe_affichage' => 'Weergave',
 	'option_groupe_description' => 'Omschrijving',
 	'option_groupe_utilisation' => 'Gebruik',
