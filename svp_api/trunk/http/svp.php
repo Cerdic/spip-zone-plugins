@@ -103,6 +103,18 @@ function http_svp_get_collection_dist($requete, $reponse) {
 
 				// -- on construit le contenu de la collection.
 				$contenu['donnees'] = $collectionner($contenu['requete']['filtres'], $configuration);
+
+				// -- on complète éventuellement le contenu de la collection.
+				if ($contenu['donnees']) {
+					$flux = array(
+						'args' => array(
+							'collection'    => $collection,
+							'configuration' => $configuration
+						),
+						'data' => $contenu['donnees']
+					);
+					$contenu['donnees'] = pipeline('completer_collection_svp', $flux);
+				}
 			}
 		}
 	}
@@ -174,6 +186,18 @@ function http_svp_get_ressource_dist($requete, $reponse) {
 
 				// -- on construit le contenu de la collection.
 				$contenu['donnees'] = $ressourcer($ressource);
+
+				// -- on complète éventuellement le contenu de la collection.
+				if ($contenu['donnees']) {
+					$flux = array(
+						'args' => array(
+							'collection'    => $collection,
+							'configuration' => $configuration,
+							'ressource'     => $ressource
+						),
+						'data' => $contenu['donnees']);
+					$contenu['donnees'] = pipeline('completer_ressource_svp', $flux);
+				}
 			}
 		}
 	}
