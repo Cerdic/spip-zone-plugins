@@ -3,7 +3,7 @@
  * Ce fichier contient l'ensemble des constantes et fonctions de construction du contenu des réponses aux
  * requête à l'API SVP.
  *
- * @package SPIP\SVPAPI\REPONSE
+ * @package SPIP\SVPAPI\PLUGIN
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -80,7 +80,7 @@ if (!defined('_SVPAPI_CHAMPS_LISTE_PAQUET')) {
  * @return array
  * 		Tableau des champs de l'objet `plugin` ou `paquet` normalisés.
  */
-function inc_normaliser_champs_dist($type_objet, $objet) {
+function plugin_normaliser_champs($type_objet, $objet) {
 
 	$objet_normalise = $objet;
 
@@ -118,4 +118,49 @@ function inc_normaliser_champs_dist($type_objet, $objet) {
 	}
 
 	return $objet_normalise;
+}
+
+
+/**
+ * Retourne la description complète d'un objet plugin identifié par son préfixe.
+ *
+ * @param $prefixe
+ *        La valeur du préfixe du plugin.
+ *
+ * @return array
+ *         La description brute du plugin sans les id.
+ */
+function plugin_lire($prefixe) {
+
+	// Initialisation du tableau de sortie
+	static $plugins = array();
+
+	// On passe le préfixe en majuscules pour être cohérent avec le stockage en base.
+	$prefixe = strtoupper($prefixe);
+
+	if (!isset($plugins[$prefixe])) {
+		// --Initialisation de la jointure entre plugins et dépôts.
+		$from = array('spip_plugins', 'spip_depots_plugins');
+		$group_by = array('spip_plugins.id_plugin');
+
+		// -- Tous le champs sauf id_plugin et id_depot.
+		$description_table = lister_tables_objets_sql('spip_plugins');
+		$select = array_keys($description_table['field']);
+		$select = array_diff($select, array('id_depot', 'id_plugin'));
+
+		// -- Préfixe, jointure et conditions sur la table des dépots.
+		$where = array(
+			'spip_plugins.prefixe=' . sql_quote($prefixe),
+			'spip_depots_plugins.id_depot>0',
+			'spip_depots_plugins.id_plugin=spip_plugins.id_plugin'
+		);
+
+		// Acquisition du plugin.
+		$plugins[$prefixe] = array();
+		if ($plugin = sql_fetsel($select, $from, $where, $group_by)) {
+			$plugins[$prefixe] = $plugin;
+		}
+	}
+
+	return $plugins[$prefixe];
 }

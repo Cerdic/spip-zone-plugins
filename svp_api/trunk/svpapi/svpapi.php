@@ -17,7 +17,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Chaque objet plugin est présenté comme un tableau dont tous les champs sont accessibles comme un
  * type PHP simple, entier, chaine ou tableau.
  *
- * @uses normaliser_champs()
+ * @uses plugin_normaliser_champs()
  *
  * @param array $filtres
  *      Tableau des critères de filtrage additionnels à appliquer au select.
@@ -76,9 +76,9 @@ function plugins_collectionner($filtres, $configuration) {
 	// On transforme les champs multi en tableau associatif indexé par la langue et on désérialise les
 	// champs sérialisés.
 	if ($collection) {
-		$normaliser = charger_fonction('normaliser_champs', 'inc');
+		include_spip('inc/svpapi_plugin');
 		foreach ($collection as $_plugin) {
-			$plugins[$_plugin['prefixe']] = $normaliser('plugin', $_plugin);
+			$plugins[$_plugin['prefixe']] = plugin_normaliser_champs('plugin', $_plugin);
 		}
 	}
 
@@ -101,12 +101,12 @@ function plugins_ressourcer($prefixe) {
 	$ressource = array();
 
 	// On recherche d'abord le plugin par son préfixe dans la table spip_plugins.
+	include_spip('inc/svpapi_plugin');
 	// -- Acquisition du plugin (on est sur qu'il est en base).
 	$prefixe = strtoupper($prefixe);
-	$plugin = plugins_lire_description($prefixe);
+	$plugin = plugin_lire($prefixe);
 	// -- Normalisation des champs.
-	$normaliser = charger_fonction('normaliser_champs', 'inc');
-	$ressource['plugin'] = $normaliser('plugin', $plugin);
+	$ressource['plugin'] = plugin_normaliser_champs('plugin', $plugin);
 
 	// On recherche maintenant les paquets du plugin.
 	$from = array('spip_paquets');
@@ -132,7 +132,7 @@ function plugins_ressourcer($prefixe) {
 	if ($paquets) {
 		// On refactore en un tableau associatif indexé par archives zip.
 		foreach ($paquets as $_paquet) {
-			$ressource['paquets'][$_paquet['nom_archive']] = $normaliser('paquet', $_paquet);
+			$ressource['paquets'][$_paquet['nom_archive']] = plugin_normaliser_champs('paquet', $_paquet);
 		}
 	}
 
@@ -169,73 +169,29 @@ function plugins_verifier_critere_compatible_spip($valeur, &$extra) {
  * La fonction compare uniquement la structure de la chaine passée qui doit être cohérente avec
  * celui d'un nom de variable.
  *
- * @param string $valeur
+ * @param string $prefixe
  *        La valeur du préfixe
  *
  * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
-function plugins_verifier_ressource_prefixe($valeur) {
+function plugins_verifier_ressource_prefixe($prefixe) {
 
 	$est_valide = true;
 
 	// On teste en premier si le préfixe est syntaxiquement correct pour éviter un accès SQL dans ce cas.
-	if (!preg_match('#^(\w){2,}$#', strtolower($valeur))) {
+	if (!preg_match('#^(\w){2,}$#', strtolower($prefixe))) {
 		$est_valide = false;
 	} else {
 		// On vérifie ensuite si la ressource est bien un plugin fourni par un dépôt
 		// et pas un plugin installé sur le serveur uniquement.
-		if (!plugins_lire_description($valeur)) {
+		include_spip('inc/svpapi_plugin');
+		if (!plugin_lire($prefixe)) {
 			$est_valide = false;
 		}
 	}
 
 	return $est_valide;
-}
-
-
-/**
- * Retourne la description complète d'un objet plugin identifié par son préfixe.
- *
- * @param $prefixe
- *        La valeur du préfixe du plugin.
- *
- * @return array
- *         La description brute du plugin sans les id.
- */
-function plugins_lire_description($prefixe) {
-
-	// Initialisation du tableau de sortie
-	static $plugins = array();
-
-	// On passe le préfixe en majuscules pour être cohérent avec le stockage en base.
-	$prefixe = strtoupper($prefixe);
-
-	if (!isset($plugins[$prefixe])) {
-		// --Initialisation de la jointure entre plugins et dépôts.
-		$from = array('spip_plugins', 'spip_depots_plugins');
-		$group_by = array('spip_plugins.id_plugin');
-
-		// -- Tous le champs sauf id_plugin et id_depot.
-		$description_table = lister_tables_objets_sql('spip_plugins');
-		$select = array_keys($description_table['field']);
-		$select = array_diff($select, array('id_depot', 'id_plugin'));
-
-		// -- Préfixe, jointure et conditions sur la table des dépots.
-		$where = array(
-			'spip_plugins.prefixe=' . sql_quote($prefixe),
-			'spip_depots_plugins.id_depot>0',
-			'spip_depots_plugins.id_plugin=spip_plugins.id_plugin'
-		);
-
-		// Acquisition du plugin.
-		$plugins[$prefixe] = array();
-		if ($plugin = sql_fetsel($select, $from, $where, $group_by)) {
-			$plugins[$prefixe] = $plugin;
-		}
-	}
-
-	return $plugins[$prefixe];
 }
 
 
