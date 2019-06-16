@@ -15,8 +15,8 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 
 	<pipeline nom="declarer_collections_svp" action="" />
-	<pipeline nom="completer_collection_svp" action="" />
-	<pipeline nom="completer_ressource_svp" action="" />
+	<pipeline nom="post_collection_svp" action="" />
+	<pipeline nom="post_ressource_svp" action="" />
 
 	<necessite nom="svp" compatibilite="[0.78.11;[" />
 	<necessite nom="http" compatibilite="[1.2.0;]" />

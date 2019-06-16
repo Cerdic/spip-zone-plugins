@@ -113,7 +113,7 @@ function http_svp_get_collection_dist($requete, $reponse) {
 						),
 						'data' => $contenu['donnees']
 					);
-					$contenu['donnees'] = pipeline('completer_collection_svp', $flux);
+					$contenu['donnees'] = pipeline('post_collection_svp', $flux);
 				}
 			}
 		}
@@ -196,7 +196,7 @@ function http_svp_get_ressource_dist($requete, $reponse) {
 							'ressource'     => $ressource
 						),
 						'data' => $contenu['donnees']);
-					$contenu['donnees'] = pipeline('completer_ressource_svp', $flux);
+					$contenu['donnees'] = pipeline('post_ressource_svp', $flux);
 				}
 			}
 		}
