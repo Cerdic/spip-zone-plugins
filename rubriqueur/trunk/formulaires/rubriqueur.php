@@ -9,6 +9,7 @@ define('_RUBRIQUEUR_DEUX_POINTS_SUBSTITUT', '%%DEUXPOINTS%%');
 function formulaires_rubriqueur_charger_dist() {
 
 	$langues_utilisees = liste_options_langues('var_lang');
+	$langues = array();
 	foreach ($langues_utilisees as $langue) {
 		$langues[$langue] = spip_ucfirst(html_entity_decode($GLOBALS['codes_langues'][$langue]));
 	}
