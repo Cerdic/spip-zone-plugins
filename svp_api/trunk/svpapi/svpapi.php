@@ -9,6 +9,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 
+// -----------------------------------------------------------------------
+// ----------------------------- PLUGINS ---------------------------------
+// -----------------------------------------------------------------------
+
 /**
  * Récupère la liste des plugins de la table spip_plugins éventuellement filtrés par les critères
  * additionnels positionnés dans la requête.
@@ -194,6 +198,10 @@ function plugins_verifier_ressource_prefixe($prefixe) {
 	return $est_valide;
 }
 
+
+// -----------------------------------------------------------------------
+// ----------------------------- DEPOTS ----------------------------------
+// -----------------------------------------------------------------------
 
 /**
  * Récupère la liste des dépôts hébergés par le serveur.
