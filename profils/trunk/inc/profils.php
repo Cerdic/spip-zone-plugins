@@ -28,8 +28,9 @@ include_spip('action/editer_liens');
 function profils_selectionner_profil($id_ou_identifiant_profil='', $id_auteur=0) {
 	$id_auteur = intval($id_auteur);
 	
-	// S'il y a un utilisateur et qu'il a déjà un profil sélectionné, c'est prioritaire !
-	if ($id_auteur > 0 and $id_profil = sql_getfetsel('id_profil', 'spip_auteurs', 'id_auteur = '.intval($id_auteur))) {
+	// S'il y a un utilisateur et qu'il a déjà un profil sélectionné
+	// c'est prioritaire au profil par défaut donc si pas d'autre profil demandé explicitement
+	if (!$id_ou_identifiant_profil and $id_auteur > 0 and $id_profil = sql_getfetsel('id_profil', 'spip_auteurs', 'id_auteur = '.$id_auteur)) {
 		$id_ou_identifiant_profil = $id_profil;
 	}
 	
