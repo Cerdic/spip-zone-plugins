@@ -94,7 +94,7 @@ Tu trouveras la <a href="https://contrib.spip.net/5080" target="_blank">document
 	'option_cols_label' => 'Largeur',
 	'option_conteneur_class_label' => 'Classes CSS supplémentaires sur le conteneur',
 	'option_datas_explication' => 'Tu dois indiquer un choix par ligne sous la forme "cle|Label du choix"',
-	'option_datas_grille_explication' => 'Tu dois indiquer un choix par ligne sous la forme "cle|Label du choix" ou bien "cle|Label à gauche|Label à droite"', # MODIF
+	'option_datas_grille_explication' => 'Tu dois indiquer un choix par ligne sous la forme "cle|Label du choix" ou bien "cle|Label à gauche|Label à droite"',
 	'option_datas_label' => 'Liste des choix possibles',
 	'option_datas_sous_groupe_explication' => 'Tu dois indiquez un choix par ligne sous la forme "cle|Label" du choix. <br />Tu peux indiquer le début d’un sous-groupe sous la forme "*Titre du sous-groupe". Pour finir un sous-groupe tu peux en entamez un autre, ou bien mettre une ligne contenant unique "/*".',
 	'option_defaut_label' => 'Valeur par défaut',
