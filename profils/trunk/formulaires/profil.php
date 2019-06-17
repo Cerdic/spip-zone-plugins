@@ -25,7 +25,7 @@ include_spip('inc/profils');
  * Identifier le formulaire en faisant abstraction des paramètres qui ne représentent pas l'objet edité
  *
  * @param int|string $id_auteur
- *     Identifiant du compte utilistateur. 'new' pour une création.
+ *     Identifiant du compte utilisateur. 'new' pour une création.
  * @param int|string $id_ou_identifiant_profil
  *     ID SQL ou identifiant textuel du profil voulu
  * @param string $retour
@@ -47,7 +47,7 @@ function formulaires_profil_identifier_dist($id_auteur = 'new', $id_ou_identifia
  * Déclarer les saisies utilisées pour générer le formulaire.
  *
  * @param int|string $id_auteur
- *     Identifiant du compte utilistateur. 'new' pour une création.
+ *     Identifiant du compte utilisateur. 'new' pour une création.
  * @param int|string $id_ou_identifiant_profil
  *     ID SQL ou identifiant textuel du profil voulu
  * @param string $retour
@@ -93,7 +93,7 @@ function formulaires_profil_saisies_dist($id_auteur = 'new', $id_ou_identifiant_
  * Déclarer les champs postés et y intégrer les valeurs par défaut
  *
  * @param int|string $id_auteur
- *     Identifiant du compte utilistateur. 'new' pour une création.
+ *     Identifiant du compte utilisateur. 'new' pour une création.
  * @param int|string $id_ou_identifiant_profil
  *     ID SQL ou identifiant textuel du profil voulu
  * @param string $retour
@@ -152,7 +152,7 @@ function formulaires_profil_charger_dist($id_auteur = 'new', $id_ou_identifiant_
  * @uses formulaires_editer_objet_verifier()
  *
  * @param int|string $id_auteur
- *     Identifiant du compte utilistateur. 'new' pour une création.
+ *     Identifiant du compte utilisateur. 'new' pour une création.
  * @param int|string $id_ou_identifiant_profil
  *     ID SQL ou identifiant textuel du profil voulu
  * @param string $retour
@@ -178,7 +178,7 @@ function formulaires_profil_verifier_dist($id_auteur = 'new', $id_ou_identifiant
  * @uses formulaires_editer_objet_traiter()
  *
  * @param int|string $id_auteur
- *     Identifiant du compte utilistateur. 'new' pour une création.
+ *     Identifiant du compte utilisateur. 'new' pour une création.
  * @param int|string $id_ou_identifiant_profil
  *     ID SQL ou identifiant textuel du profil voulu
  * @param string $retour
