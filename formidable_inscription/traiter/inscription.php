@@ -3,7 +3,7 @@
  * Traitement inscription à la saisie d'un formulaire
  *
  * @plugin     Formulaires d'inscription
- * @copyright  2018
+ * @copyright  2014-2019
  * @author     Anne-lise Martenot
  * @licence    GNU/GPL
  * @package    SPIP\Formidableinscription\traiter\inscription
@@ -15,10 +15,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 
 function traiter_inscription_dist($args, $retours){
+	
 	$formulaire = $args['formulaire'];
 	$options = $args['options'];
 	$saisies = unserialize($formulaire['saisies']);
-	$traitements = unserialize($formulaire['traitements']);
 
 	// saisies dans le formulaire
 	if ($options['champ_choix_inscription']){
@@ -73,7 +73,7 @@ function traiter_inscription_dist($args, $retours){
 	);
 	
 	// fabrique le pipeline traiter_formidableinscription.
-	$pipeline = pipeline('traiter_formidableinscription',array('args'=>$options,'data'=>$pipeline));
+	pipeline('traiter_formidableinscription',array('args'=>$options));
 
 	spip_log("$choix_inscription pour $email_inscription","formidable_inscription");
 	
