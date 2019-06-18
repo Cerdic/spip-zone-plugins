@@ -4,7 +4,6 @@
 	id_objets_information,1
 }})
 ]
-[(#GET{selection}|serialize)]
 #SET{debut,#ENV{debutobjl,#EVAL{_request("debutobjl");}}}
 <B_liste_objets_informations>
 [(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
