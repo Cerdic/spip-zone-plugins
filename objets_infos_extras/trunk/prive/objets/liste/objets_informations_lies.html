@@ -4,7 +4,7 @@
 	id_objets_information,1
 }})
 ]
-#SET{selection,#ENV**{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
+[(#GET{selection}|serialize)]
 #SET{debut,#ENV{debutobjl,#EVAL{_request("debutobjl");}}}
 <B_liste_objets_informations>
 [(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
@@ -17,8 +17,10 @@ a mis a jour la valeur avec la page reelle]
 [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{objets_information:info_1_objets_information,objets_information:info_nb_objets_informations}})</strong></caption>]
 	<thead>
 		#SET{p,''}
-		<BOUCLE_lettre(OBJETS_INFORMATIONS){tout}{id_objets_information IN #GET{selection}}{where?}{statut?}
-			{tri #ENV{par,multi titre},#GET{defaut_tri}}{id_objets_information==#GET{afficher_lettres}|?{'.*','A'}}>[
+		<BOUCLE_lettre(OBJETS_INFORMATIONS){tout}{where?}{statut?}
+			{tri #ENV{par,multi titre},#GET{defaut_tri}}{id_objets_information==#GET{afficher_lettres}|?{'.*','A'}}
+			{objet=#ENV{objet}}
+			{id_objet=#ENV{id_objet}}>[
 		(#TITRE**|extraire_multi|initiale|unique|oui)
 		[(#SET{p,#GET{p}|concat{
 		#SELF|parametre_url{debutobjl,@#ID_OBJETS_INFORMATION}|ancre_url{paginationobjl}|afficher_initiale{#TITRE**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
@@ -39,8 +41,11 @@ a mis a jour la valeur avec la page reelle]
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_objets_informations(OBJETS_INFORMATIONS objets_informations_liens){id_objets_information IN #GET{selection}}{statut?}
-		{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} objl}>
+	<BOUCLE_liste_objets_informations(OBJETS_INFORMATIONS objets_informations_liens)
+		{statut?}
+		{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} objl}
+		{objet=#ENV{objet}}
+		{id_objet=#ENV{id_objet}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TITRE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_OBJETS_INFORMATION|=={#ENV{id_lien_ajoute}}|oui)append]">
 			<td class="statut">[(#STATUT|puce_statut{objets_information})]</td>
 			<td class="titre">[(#LOGO_OBJETS_INFORMATION|image_reduire{20,20})]<a href="[(#ID_OBJETS_INFORMATION|generer_url_entite{objets_information})]">#TITRE</a></td>
