@@ -16,6 +16,12 @@
 		[(#CHEMIN{liste/objets_informations.html}|oui)
 			<INCLURE{fond=liste/objets_informations,objet=immeuble,id_objet=#GET{id_immeuble_or},env} />
 		]
+		<B_espaces>
+		<BOUCLE_espaces(ESPACES ?){id_immeuble}>
+			<INCLURE{fond=inclure/resume/espace,id_espace} />
+		</BOUCLE_espaces>
+		</B_espaces>
+		<//B_espaces>
 	</aside>
 
 	<footer>
