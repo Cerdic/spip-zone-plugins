@@ -170,6 +170,7 @@
 
 ul.portfolio_ligne {
 	margin-bottom: 2em;
+	list-style: none;
 }
 .spip_documents_ligne {
 	margin: 0;
