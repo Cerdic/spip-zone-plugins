@@ -10,7 +10,7 @@
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
-  return;
+	return;
 }
 
 include_spip('inc/actions');
@@ -39,7 +39,7 @@ include_spip('inc/editer');
  *     Hash du formulaire
  */
 function formulaires_editer_espace_identifier_dist($id_espace = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
-  return serialize(array(intval($id_espace), $associer_objet));
+	return serialize(array(intval($id_espace), $associer_objet));
 }
 
 /**
@@ -68,17 +68,17 @@ function formulaires_editer_espace_identifier_dist($id_espace = 'new', $retour =
  *     Environnement du formulaire
  */
 function formulaires_editer_espace_charger_dist($id_espace = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
-  $valeurs = formulaires_editer_objet_charger('espace', $id_espace, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+	$valeurs = formulaires_editer_objet_charger('espace', $id_espace, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
 
-  // Eviter d'associer un auteur.
-  $valeurs['_hidden'] .= '<input type="hidden" name="id_auteur" value="" />';
+	// Eviter d'associer un auteur.
+	$valeurs['_hidden'] .= '<input type="hidden" name="id_auteur" value="" />';
 
-  // Publier directement
-  if ($id_espace == 'oui') {
-    $valeurs['_hidden'] .= '<input type="hidden" name="statut" value="publie" />';
-  }
+	// Publier directement
+	if ($id_espace == 'oui') {
+		$valeurs['_hidden'] .= '<input type="hidden" name="statut" value="publie" />';
+	}
 
-  return $valeurs;
+	return $valeurs;
 }
 
 /**
@@ -107,11 +107,11 @@ function formulaires_editer_espace_charger_dist($id_espace = 'new', $retour = ''
  *     Tableau des erreurs
  */
 function formulaires_editer_espace_verifier_dist($id_espace = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
-  $erreurs = array();
+	$erreurs = array();
 
-  $erreurs = formulaires_editer_objet_verifier('espace', $id_espace, array('titre'));
+	$erreurs = formulaires_editer_objet_verifier('espace', $id_espace, array('titre'));
 
-  return $erreurs;
+	return $erreurs;
 }
 
 /**
@@ -140,22 +140,22 @@ function formulaires_editer_espace_verifier_dist($id_espace = 'new', $retour = '
  *     Retours des traitements
  */
 function formulaires_editer_espace_traiter_dist($id_espace = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
-  $retours = formulaires_editer_objet_traiter('espace', $id_espace, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+	$retours = formulaires_editer_objet_traiter('espace', $id_espace, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
 
-  // Un lien a prendre en compte ?
-  if ($associer_objet and $id_espace = $retours['id_espace']) {
-    list($objet, $id_objet) = explode('|', $associer_objet);
+	// Un lien a prendre en compte ?
+	if ($associer_objet and $id_espace = $retours['id_espace']) {
+		list($objet, $id_objet) = explode('|', $associer_objet);
 
-    if ($objet and $id_objet and autoriser('modifier', $objet, $id_objet)) {
-      include_spip('action/editer_liens');
+		if ($objet and $id_objet and autoriser('modifier', $objet, $id_objet)) {
+			include_spip('action/editer_liens');
 
-      objet_associer(array('espace' => $id_espace), array($objet => $id_objet));
+			objet_associer(array('espace' => $id_espace), array($objet => $id_objet));
 
-      if (isset($retours['redirect'])) {
-        $retours['redirect'] = parametre_url($retours['redirect'], 'id_lien_ajoute', $id_espace, '&');
-      }
-    }
-  }
+			if (isset($retours['redirect'])) {
+				$retours['redirect'] = parametre_url($retours['redirect'], 'id_lien_ajoute', $id_espace, '&');
+			}
+		}
+	}
 
-  return $retours;
+	return $retours;
 }
