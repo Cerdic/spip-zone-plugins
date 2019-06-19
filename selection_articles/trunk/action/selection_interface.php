@@ -9,7 +9,7 @@ function action_selection_interface() {
 
 
 	// Bouton REMONTER
-	if ($_GET["remonter_ordre"] > 0) {
+	if (_request("remonter_ordre") > 0) {
 	
 		$remonter = _request("remonter_ordre");
 		$result = sql_select("*", "spip_pb_selection", "id_rubrique=$id_rubrique", "", "ordre");
@@ -33,7 +33,7 @@ function action_selection_interface() {
 	}
 
 
-	if ($_GET["descendre_ordre"] > 0) {
+	if (_request("descendre_ordre") > 0) {
 		$descendre = _request("descendre_ordre");
 
 		if (!autoriser('modifier','rubrique', $id_rubrique)) die ("Interdit");
@@ -59,7 +59,7 @@ function action_selection_interface() {
 	
 	}
 
-	if ($_GET["ajouter_selection"] > 0) {
+	if (_request("ajouter_selection") > 0) {
 		$ajouter = _request("ajouter_selection");
 
 		if (!autoriser('modifier','rubrique', $id_rubrique)) die ("Interdit");
@@ -90,7 +90,7 @@ function action_selection_interface() {
 	
 	}
 
-	if ($_GET["supprimer_ordre"] > 0) {
+	if (_request("supprimer_ordre") > 0) {
 		$supprimer = _request("supprimer_ordre");
 		
 		if (!autoriser('modifier','rubrique', $id_rubrique)) die ("Interdit");
@@ -100,8 +100,8 @@ function action_selection_interface() {
 		suivre_invalideur("id='id_rubrique/$id_rubrique'");
 	}
 
-	if ($_GET["nouvel_ordre"]) {
-		$nouvel_ordre = explode(",", $_GET["nouvel_ordre"]);
+	if (_request("nouvel_ordre")) {
+		$nouvel_ordre = explode(",", _request("nouvel_ordre"));
 		if (count($nouvel_ordre) > 0) {
 			sql_delete("spip_pb_selection", "id_rubrique=$id_rubrique");
 			$ordre = 0;
