@@ -9,7 +9,6 @@ if (!function_exists('centre_image_x')) {
 	function centre_image_y($img) { return 0.5; }
 }
 
-
 // Fabrique une image avec couche alpha
 // en fonction du détourage de l'image
 function image_detourer_alpha($im) {

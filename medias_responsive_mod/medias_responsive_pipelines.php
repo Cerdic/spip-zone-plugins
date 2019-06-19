@@ -4,10 +4,15 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+// On déclare les nouveaux modèles de documents pour qu'ils soient prix en compte avec le critère {vu}
+function medias_responsive_mod_declarer_tables_objets_sql($tables) {
+	$tables['spip_documents']['modeles'][] = 'ligne';
+	$tables['spip_documents']['modeles'][] = 'slide';
+	return $tables;
+}
+
 function medias_responsive_mod_insert_head_css($flux) {
 	$flux = "\n<link rel='stylesheet' type='text/css' media='all' href='".direction_css(find_in_path("css/medias_responsive.css"))."'>\n".$flux;
-
-
 	return $flux;
 }
 
