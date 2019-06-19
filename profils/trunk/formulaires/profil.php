@@ -38,7 +38,7 @@ include_spip('inc/profils');
  *     Hash du formulaire
  */
 function formulaires_profil_identifier_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '', $options=array()) {
-	return serialize(array(intval($id_auteur)));
+	return serialize(array(intval($id_auteur), $id_ou_identifiant_profil, $retour, $options));
 }
 
 /**
