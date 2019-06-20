@@ -1,0 +1,11 @@
+[(#REM)
+	Afficher le formulaire de choix de material_icone sur un objet
+][(#REM)
+	Utilise :
+		formulaires/material_icone.html
+	Inclus dans :
+		colonne gauche espace privé pour les objets sélectionnés dans la configuration du plugin : cf materialicons_pipelines.php
+][(#AUTORISER{modifier,#ENV{objet},#ENV{id_objet}})
+[<div class="ajax">
+(#FORMULAIRE_MATERIAL_ICONE{#ENV{objet},#ENV{id_objet},#ENV{style},#ENV{categorie},#ENV{icone},#ENV{svg}})
+</div>]]

@@ -1,0 +1,7 @@
+[(#SET{svg,[(#CHEMIN{images/#ENV{style}/#ENV{categorie}/#ENV{icone}.svg})]})][(#SET{id,[(#EVAL{8}|uniqid)]})]
+<style type="text/css">#icone[(#GET{id}) ]path {[ fill:(#ENV{couleur});] }</style>
+<span class="material_icone spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})]"
+	id="icone#GET{id}"
+	style="[width:(#ENV{largeur}); ][height:(#ENV{hauteur}); ][float:(#ENV{align}|match{left|right});]">
+[(#GET{svg}|file_get_contents|svg_retirer_xml)]
+</span>

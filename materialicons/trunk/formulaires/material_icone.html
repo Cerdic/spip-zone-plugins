@@ -1,0 +1,93 @@
+[(#REM)
+
+	Formulaire de choix de material_icone sur un objet
+
+	Action (CVT) :
+		formulaires/material_icone.php
+
+	Inclus dans :
+		inclure/material_icone.html avec les paramètres :
+			#ENV{objet},#ENV{id_objet},#ENV{material_icone}
+
+]<div class="formulaire_spip formulaire_config formulaire_#FORM">
+	<h3 class="titrem">[(#CHEMIN{img_pack/material_icone-24.png}|balise_img{'',cadre-icone})]ICÔNE (Material Icons)</h3>
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+		
+	[(#ICONE|oui)
+	<div class="materialicons_actuelle" style="padding:0.5em;text-align:center;">[(#SET{cheminsvg,[(#CHEMIN{images/#STYLE/#CATEGORIE/#ICONE.svg})]})]</i>
+		[(#GET{cheminsvg}|file_get_contents)]
+	</div>]
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
+	<form method="post" action="#ENV{action}">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		[<input type='hidden' name='objet' value='(#ENV{objet})' />]
+		[<input type='hidden' name='id_objet' value='(#ENV{id_objet})' />]
+
+		<[(#DIV|sinon{ul})] class="editer-groupe">
+
+			<[(#DIV|sinon{li})] class="editer editer_style[(#ENV**{erreurs}|table_valeur{style}|oui)erreur]">
+				<label for="style"><:materialicons:choisir_un_style:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{style})</span>
+				]<select name="style" id="style" style="width:100%;">
+					<option></option>
+					<BOUCLE_styles(DATA){source csv, #CHEMIN{inclure/styles.csv}}>
+					[<option class="materialicons"[(#STYLE|=={#VALEUR{0}}|oui) selected="selected"] value="#VALEUR{0}">(#VALEUR{0})</option>]
+					</BOUCLE_styles>
+				</select>
+			</[(#DIV|sinon{li})]>
+
+			<[(#DIV|sinon{li})] class="editer editer_categorie[(#ENV**{erreurs}|table_valeur{categorie}|oui)erreur]">
+				<label for="categorie"><:materialicons:choisir_une_categorie:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{categorie})</span>
+				]<select name="categorie" id="categorie" style="width:100%;">
+					<option></option>
+					<BOUCLE_categories(DATA){source csv, #CHEMIN{inclure/categories.csv}}>
+					[<option class="materialicons"[(#CATEGORIE|=={#VALEUR{0}}|oui) selected="selected" #SET{cat,#VALEUR{0}}] value="#VALEUR{0}">(#VALEUR{0})</option>]
+					</BOUCLE_categories>
+				</select>
+			</[(#DIV|sinon{li})]>
+
+			<[(#DIV|sinon{li})] class="editer editer_icone[(#ENV**{erreurs}|table_valeur{icone}|oui)erreur]">
+				<label for="icone"><:materialicons:choisir_une_nouvelle_icone:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{icone})</span>
+				]<select name="icone" id="icone" style="width:100%;">
+					<option></option>
+					<BOUCLE_icones(DATA){source csv, #CHEMIN{inclure/icones_(#GET{cat}).csv}}>
+					[<option class="materialicons"[(#ICONE|=={#VALEUR{0}}|oui) selected="selected"] value="#VALEUR{0}">(#VALEUR{0})</option>]
+					</BOUCLE_icones>
+				</select>
+			</[(#DIV|sinon{li})]>
+
+		</[(#DIV|sinon{ul})]>
+
+		<div class="boutons clearfix">
+			<input type="submit" class="submit" value="<:bouton_enregistrer|attribut_html:>" style="float:right;" />
+		</div>
+	</form>
+	</BOUCLE_editable>
+		[<p class="clearfix">
+			<label><:material_icone:icone_actuelle:></label>
+			<div class="material_icone_actuelle" style="padding:0.5em;text-align:center;"><i class="material-icons" style="font-size:54px;">(#ICONE)</i></div>
+		</p>]
+	<//B_editable>
+</div> 
+
+<style type="text/css">.materialicons_actuelle svg { width:80px; height:auto; }</style>
+
+<script>
+jQuery(function($){
+//	au clic de la categorie on prend sa data-valeur pour forcer le champ select avec
+	$('#categorie option').on('click', function(){
+		var valeur = $(this).attr('value');
+		$('#categorie').val(valeur);
+		$('#icone').val('');
+		$(this).submit();
+	});
+// 	$('#icone option').on('click', function(){
+// 		var valeur = $(this).attr('value');
+// 		$('#icone').val(valeur).submit();
+// 	});
+});
+</script>
