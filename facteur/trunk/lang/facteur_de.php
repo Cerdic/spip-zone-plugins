@@ -59,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_username' => 'Benutzername:',
 
 	// L
-	'label_facteur_forcer_from' => 'Diese Versandadresse anzeigen wenn  die Domain im Feld <tt>From</tt> nicht identisch ist',
+	'label_facteur_forcer_from' => 'Diese Versandadresse verwenden wenn  die Domain im Feld <tt>From</tt> nicht identisch ist',
 
 	// M
 	'message_identite_email' => 'Die Konfiguration des Plugins Postbote (facteur) überschreibt diese Adresse für den Mailversand.',
