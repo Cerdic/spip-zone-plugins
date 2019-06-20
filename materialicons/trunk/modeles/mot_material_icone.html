@@ -1,0 +1,12 @@
+<BOUCLE_svg(spip_materialicons_liens){objet=mot}{id_objet=#ID_MOT}>
+[(#SET{svg,[(#CHEMIN{images/#STYLE/#CATEGORIE/#ICONE.svg})]})][(#SET{id,[(#EVAL{8}|uniqid)]})]
+<style type="text/css">
+[#icone[(#GET{id}) ]path { fill:(#ENV{couleur}); }]
+[#icone[(#GET{id}) ]path#🔹-Secondary-Color { fill:(#ENV{couleur2}); }]
+</style>
+<span class="material_icone spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})]" 
+	id="icone#GET{id}"
+	style="[width:(#ENV{largeur}); ][height:(#ENV{hauteur}); ][float:(#ENV{align}|match{left|right});]">
+[(#GET{svg}|file_get_contents|svg_retirer_xml)]
+</span>
+</BOUCLE_svg>
