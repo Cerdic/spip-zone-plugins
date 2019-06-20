@@ -49,7 +49,11 @@ function saisies_date_jour_mois_annee_changer_date(me, datetime) {
 	while(annee.length < 4) {annee = '0' + annee;}
 	
 	if (datetime == 'oui') {
-		date = annee + '-' + mois + '-' + jour + date.substring(10);
+		heure = date.substring(10);
+		if (!heure || !(heure.length == 9)) {
+			heure = ' 00:00:00';
+		}
+		date = annee + '-' + mois + '-' + jour + heure;
 	}
 	else {
 		date = annee + '-' + mois + '-' + jour;
