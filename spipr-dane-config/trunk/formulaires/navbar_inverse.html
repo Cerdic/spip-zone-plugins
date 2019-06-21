@@ -16,9 +16,9 @@
         [(#SAISIE{checkbox, inverser_couleur}
             {label=<span class="couleur-barnav"><span style="background-color:[(#CONFIG{sdc/defaut/color1, #DF0D46})];"></span>Couleur N°1</span><span class="couleur-barnav"><span style="background-color:[(#CONFIG{sdc/defaut/color2, #455C98})];"></span>Couleur N°2</span><span class="couleur-barnav"><span id="couleur_choisie" style="background-color:[(#GET{couleur_choisie})];"></span>Couleur Choisie</span><br/><:sdc:label_inverser_navbar:>}
             {defaut=color2}
-             {datas=#ARRAY{
+            {datas=#ARRAY{
                 on,Oui}}
-           {explication=<:sdc:explication_inverser_navbar:>}
+            {explication=<:sdc:explication_inverser_navbar:>}
             {conteneur_class=long_label}
         )]
         [(#SAISIE{selection, couleur_liens}
@@ -39,7 +39,18 @@
             }
             {conteneur_class=long_label}
         )]
+        [(#PLUGIN{sdn}|oui)
+        [(#SAISIE{checkbox, navbar_scrolltofixed}
+            {label=<:sdc:label_navbar_scrolltofixed:>}
+            {defaut=''}
+            {explication=<:sdc:explication_navbar_scrolltofixed:>}
+            {datas=#ARRAY{
+                on,Oui}
+            }
+            {conteneur_class=long_label}
+        )]
         ]
+        
 		<p class="boutons">
 			<input type="submit" name="enregistrer" class="submit save" value="<:bouton_enregistrer:>" />
 			<input type="submit" name="_cfg_delete" class="submit delete" value="<:sdc:bouton_supprimer:>"/>

@@ -66,6 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_famille_de_police' => 'Les familles de police sont issues de <a href="https://www.google.com/fonts/" title="https://www.google.com/fonts/">Google Web Fonts</a>. Si vous s&#233;l&#233;ctionnez "Personnelle" dans la liste d&#233;roulante, vous pourez alors choisir une autre police que celles propos&#233;es',
 	'explication_inverser_navbar' => 'Par d&#233;faut, l\'arri&#232;re-plan de la barre de barre de navigation utilise la couleur de base N°2, vous pouvez choisir d\'inverser en choisissant la couleur de base N°1',
 	'explication_navbar_responsive' => 'Sur petits &#233;crans, le bouton "Menu" est affich&#233; sous l\'ent&#234;te. Vous pouvez choisir d\'afficher ce bouton en haut de l\'&#233;cran.',
+	'explication_navbar_scrolltofixed' => 'Sur grands &#233;crans, fixe la barre de menu en haut de page lors du d&#233;filement de la page afin qu\'elle reste visible.',
 	'explication_police_personnelle' => 'Choisissez une police sur le site <a href="https://www.google.com/fonts/" title="https://www.google.com/fonts/">Google Web Fonts</a>. Copiez le nom de la police choisie et collez le dans le champ ci-dessous',
     'exporter_configuration' => 'Exporter la configuration',
 
@@ -89,6 +90,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_couleur_liens_hover' => 'Inverser la couleur des liens au survol',
 	'label_file' => 'T&#233;l&#233;verser une image',
 	'label_navbar_responsive' => 'Afficher le bouton "Menu" en haut de l\'&#233;cran',
+	'label_navbar_scrolltofixed' => 'Fixer la barre de navigation en haut de l\'&#233;cran lors du d&#233;filement de la page',
 	'largeur_logo' => 'Largeur du logo',
 	'largeur_page' => 'Largeur de la page',
 	'largeur_background' => 'Largeur de l\'arri&#232;re plan',
