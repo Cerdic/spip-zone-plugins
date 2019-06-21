@@ -43,14 +43,18 @@
 
 	/* lance Chosen sur les .chosen */
 	spip_chosen = function() {
-		var selecteur = ((typeof(selecteur_chosen) != 'undefined') && selecteur_chosen.length) ? selecteur_chosen+',' : '',
+		var
+			selecteur = ((typeof(selecteur_chosen) != 'undefined') && selecteur_chosen.length) ? selecteur_chosen+',' : '',
 			elts = $(selecteur +" select.chosen").not('.formulaire_instituer select.statut'),
-			options = (typeof(options_chosen) == 'object') ? $.extend(options_chosen, ((typeof(langue_chosen) == 'object') ? langue_chosen : {})) : ((typeof(langue_chosen) == 'object') ? langue_chosen : {}),
-			extended_options = (typeof(chosen_create_option) == 'object') ? chosen_create_option : {};
-		$.extend(extended_options, options);
+			options = { width: '100%' }, // Options de bases
+			options_plus = (typeof(options_chosen) == 'object') ? options_chosen : {}, // Options supplémentaires possibles
+			options_langue = (typeof(langue_chosen) == 'object') ? langue_chosen : {}, // Chaînes de langue cf. pipeline
+			options_create = (typeof(chosen_create_option) == 'object') ? chosen_create_option : {}; // ??? cf. pipeline
+		$.extend(options, options_plus, options_langue);
+		$.extend(options_create, options);
 		elts.not(".chosen-create-option,.chosen-allow_single_deselect").chosen(options);
 		elts.filter(".chosen-allow_single_deselect").chosen($.extend({allow_single_deselect: true}, options));
-		elts.filter(".chosen-create-option").chosen(extended_options);
+		elts.filter(".chosen-create-option").chosen(options_create);
 		spip_chosen_title();
 		spip_chosen_visible();
 		spip_chosen_table_width();
@@ -58,4 +62,5 @@
 
 	spip_chosen();
 	onAjaxLoad(spip_chosen);
+
 });
