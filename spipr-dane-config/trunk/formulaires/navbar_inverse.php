@@ -32,7 +32,7 @@ function formulaires_navbar_inverse_charger_dist() {
     	'inverser_couleur' => lire_config('sdc/navbar/inverser_couleur') == 'color1' ? 'on': '',
         'couleur_liens' => lire_config('sdc/navbar/couleur_liens', 'white'),
         'couleur_liens_hover' => lire_config('sdc/navbar/couleur_liens_hover'),
-        'scrolltofixed' => lire_config('sdc/navbar/scrolltofixed')
+        'scrolltofixed' => array(lire_config('sdc/navbar/scrolltofixed'))
     );
     
     return $valeurs;
@@ -90,7 +90,7 @@ function formulaires_navbar_inverse_traiter_dist() {
             ecrire_config('sdc/navbar/couleur_liens', _request('couleur_liens'));
             ecrire_config('sdc/navbar/couleur_liens_hover', _request('couleur_liens_hover'));
             ecrire_config('sdc/navbar/inverser_couleur', _request('inverser_couleur'));
-            ecrire_config('sdc/navbar/scrolltofixed', _request('navbar_scrolltofixed'));
+            ecrire_config('sdc/navbar/scrolltofixed', _request('navbar_scrolltofixed')[0]);
         }
         if ($inverser_couleur) {
             set_request("inverser_couleur", $inverser_couleur);
