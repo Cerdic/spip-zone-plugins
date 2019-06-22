@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'Socicon';
-  src:  url('fonts/Socicon.eot?orx2yt');
-  src:  url('fonts/Socicon.eot?orx2yt#iefix') format('embedded-opentype'),
-    url('fonts/Socicon.woff2?orx2yt') format('woff2'),
-    url('fonts/Socicon.ttf?orx2yt') format('truetype'),
-    url('fonts/Socicon.woff?orx2yt') format('woff'),
-    url('fonts/Socicon.svg?orx2yt#Socicon') format('svg');
+  src:  url('fonts/Socicon.eot?87visu');
+  src:  url('fonts/Socicon.eot?87visu#iefix') format('embedded-opentype'),
+    url('fonts/Socicon.woff2?87visu') format('woff2'),
+    url('fonts/Socicon.ttf?87visu') format('truetype'),
+    url('fonts/Socicon.woff?87visu') format('woff'),
+    url('fonts/Socicon.svg?87visu#Socicon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -25,6 +25,126 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.socicon-eitaa:before {
+  content: "\e97c";
+}
+.socicon-soroush:before {
+  content: "\e97d";
+}
+.socicon-bale:before {
+  content: "\e97e";
+}
+.socicon-zazzle:before {
+  content: "\e97b";
+}
+.socicon-society6:before {
+  content: "\e97a";
+}
+.socicon-redbubble:before {
+  content: "\e979";
+}
+.socicon-avvo:before {
+  content: "\e978";
+}
+.socicon-stitcher:before {
+  content: "\e977";
+}
+.socicon-googlehangouts:before {
+  content: "\e974";
+}
+.socicon-dlive:before {
+  content: "\e975";
+}
+.socicon-vsco:before {
+  content: "\e976";
+}
+.socicon-flipboard:before {
+  content: "\e973";
+}
+.socicon-ubuntu:before {
+  content: "\e958";
+}
+.socicon-artstation:before {
+  content: "\e959";
+}
+.socicon-invision:before {
+  content: "\e95a";
+}
+.socicon-torial:before {
+  content: "\e95b";
+}
+.socicon-collectorz:before {
+  content: "\e95c";
+}
+.socicon-seenthis:before {
+  content: "\e95d";
+}
+.socicon-googleplaymusic:before {
+  content: "\e95e";
+}
+.socicon-debian:before {
+  content: "\e95f";
+}
+.socicon-filmfreeway:before {
+  content: "\e960";
+}
+.socicon-gnome:before {
+  content: "\e961";
+}
+.socicon-itchio:before {
+  content: "\e962";
+}
+.socicon-jamendo:before {
+  content: "\e963";
+}
+.socicon-mix:before {
+  content: "\e964";
+}
+.socicon-sharepoint:before {
+  content: "\e965";
+}
+.socicon-tinder:before {
+  content: "\e966";
+}
+.socicon-windguru:before {
+  content: "\e967";
+}
+.socicon-cdbaby:before {
+  content: "\e968";
+}
+.socicon-elementaryos:before {
+  content: "\e969";
+}
+.socicon-stage32:before {
+  content: "\e96a";
+}
+.socicon-tiktok:before {
+  content: "\e96b";
+}
+.socicon-gitter:before {
+  content: "\e96c";
+}
+.socicon-letterboxd:before {
+  content: "\e96d";
+}
+.socicon-threema:before {
+  content: "\e96e";
+}
+.socicon-splice:before {
+  content: "\e96f";
+}
+.socicon-metapop:before {
+  content: "\e970";
+}
+.socicon-naver:before {
+  content: "\e971";
+}
+.socicon-remote:before {
+  content: "\e972";
+}
+.socicon-internet:before {
+  content: "\e957";
+}
 .socicon-moddb:before {
   content: "\e94b";
 }
