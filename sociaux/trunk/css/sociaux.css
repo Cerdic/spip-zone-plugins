@@ -5,7 +5,7 @@
 .sociaux a:focus, .sociaux a:hover, .sociaux a:active {background-color:transparent;}
 .sociaux a.external:after { content: none; }
 .sociaux .name { display:none;}
-.sociaux .socicon { font-size:1.4em;padding:.5em .5em .3em;border-radius:1em;color:#fff;background:#000;}
+.sociaux .socicon { font-size:1.4em;padding:.5em;border-radius:1em;color:#fff;background:#000;}
 .sociaux .socicon:hover {background:#000;}
 
 .sociaux .facebook .socicon		{background:#3E5B98;}
