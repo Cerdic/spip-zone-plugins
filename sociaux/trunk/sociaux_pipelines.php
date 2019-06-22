@@ -33,6 +33,8 @@ function sociaux_sociaux_lister($flux) {
 	 *
 	 */
 	if (isset($flux['data'])) {
+		$flux['data']['mail'] = 'E-mail';
+		$flux['data']['rss'] = 'RSS';
 		$flux['data']['facebook'] = 'Facebook';
 		$flux['data']['twitter'] = 'Twitter';
 		$flux['data']['instagram'] = 'Instagram';
@@ -40,8 +42,6 @@ function sociaux_sociaux_lister($flux) {
 		$flux['data']['pinterest'] = 'Pinterest';
 		$flux['data']['linkedin'] = 'Linkedin';
 		$flux['data']['youtube'] = 'Youtube';
-		$flux['data']['rss'] = 'RSS';
-		$flux['data']['mail'] = 'E-mail';
 		$flux['data']['tripadvisor'] = 'TripAdvisor';
 		$flux['data']['vimeo'] = 'Vimeo';
 		$flux['data']['flickr'] = 'Flickr';
