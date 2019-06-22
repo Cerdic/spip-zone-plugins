@@ -29,14 +29,13 @@ function sociaux_insert_head_css($head) {
 function sociaux_sociaux_lister($flux) {
 	/**
 	 * On reprend les éléments initiaux de la v1 du plugin :
-	 * facebook, twitter, instagram, google-plus, blogger, pinterest, linkedin, youtube, rss, email, tripadvisor, vimeo, flickr
+	 * facebook, twitter, instagram, blogger, pinterest, linkedin, youtube, rss, email, tripadvisor, vimeo, flickr
 	 *
 	 */
 	if (isset($flux['data'])) {
 		$flux['data']['facebook'] = 'Facebook';
 		$flux['data']['twitter'] = 'Twitter';
 		$flux['data']['instagram'] = 'Instagram';
-		$flux['data']['googleplus'] = 'Google Plus';
 		$flux['data']['blogger'] = 'Blogger';
 		$flux['data']['pinterest'] = 'Pinterest';
 		$flux['data']['linkedin'] = 'Linkedin';
