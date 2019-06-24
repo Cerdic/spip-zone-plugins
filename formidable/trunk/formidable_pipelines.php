@@ -51,10 +51,14 @@ function formidable_trouve_liens($texte) {
 				);
 			} elseif ($r[2] == 'formulaire|formidable') {
 				$args = ltrim($r[4], '|');
-				$args = explode('=', $args);
-				$args = $args[1];
-				$args = explode('|', $args);
-				$args = trim(reset($args));
+				if(strpos($args,'=')!==false) {
+					$args = explode('=', $args);
+					$args = $args[1];
+				}
+				if(strpos($args,'|')!==false) {
+					$args = explode('|', $args);
+					$args = trim(reset($args));
+				}
 				if (is_numeric($args)) {
 					$id_formulaire = intval($args);
 				} else {
