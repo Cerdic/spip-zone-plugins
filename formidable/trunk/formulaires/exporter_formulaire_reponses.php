@@ -54,7 +54,7 @@ function formulaires_exporter_formulaire_reponses_traiter($id_formulaire = 0) {
 			$content_type = "text/comma-separated-values; charset=" . $GLOBALS['meta']['charset'];
 		}
 	} elseif (_request('type_export') == 'xls') {
-		$chemin = exporter_formulaires_reponses($id_formulaire, 'TAB', $statut_reponses, $date_debut, $date_fin, $cle_ou_valeur, $ignorer_fichiers);
+		$chemin = exporter_formulaires_reponses($id_formulaire, ';', $statut_reponses, $date_debut, $date_fin, $cle_ou_valeur, $ignorer_fichiers);
 		if (pathinfo($chemin, PATHINFO_EXTENSION) === 'xls') {
 			$content_type = "text/comma-separated-values; charset=iso-8859-1";
 		}
