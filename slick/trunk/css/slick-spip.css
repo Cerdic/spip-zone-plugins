@@ -1,3 +1,5 @@
 .slick-prev, .slick-next { z-index:999; text-shadow: 0 0 1px #b5b5b5; }
 .slick-prev { left:10px; }
 .slick-next { right:10px; }
+.slick-dots { margin: 0!important; }
+.slick-slide img { padding:0!important; }
