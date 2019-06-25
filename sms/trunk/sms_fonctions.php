@@ -115,6 +115,17 @@ function octopush($sms_text,$sms_recipients,$arg) {
 	$sms->set_request_keys('TRS');
 	$xml = $sms->send();
 	$xml = simplexml_load_string($xml);
+	// Enregistrement pour suivi
+	foreach ($destinataire as $tel) {
+		$set = array(
+			'telephone' => md5($tel),
+			'date'      => date("Y-m-d H:i:s"),
+			'message'   => $xml,
+			'nbr_sms'   => '',
+			'type_sms'  => $sms_type
+		);
+		sql_insertq('spip_sms_logs',$set);
+	}
 	return $xml;
 }
 
