@@ -34,8 +34,8 @@ N'utilise pas la configuration générale du plugin, mais les paramètres suivan
 <div id="#ENV{id-carousel,demo}">
 	<BOUCLE_listDocs(DOCUMENTS){id_article?}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{extension==jpg|png|gif}{vu=non}>
 	<div>[
-		(#ENV{agrandir}|oui)<a href="#FICHIER" class="mediabox"[ rel="diaporama(#ENV{id-carousel,demo})"]>]
-		<img src="[(#FICHIER|image_reduire{960,*}|extraire_attribut{src})]" alt="[(#TITRE|textebrut)]">
+		(#ENV{agrandir}|oui)<a href="#FICHIER" class="mediabox"[ rel="diaporama(#ENV{id-carousel,demo})"][ title="(#TITRE|textebrut|attribut_html)"]>]
+		<img src="[(#FICHIER|image_reduire{960,*}|extraire_attribut{src})]" alt="[(#TITRE|textebrut|attribut_html)]">
 		[(#ENV{agrandir}|oui)</a>]
 	</div>
 	</BOUCLE_listDocs>
