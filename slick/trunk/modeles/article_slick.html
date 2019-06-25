@@ -19,11 +19,14 @@ N'utilise pas la configuration générale du plugin, mais les paramètres suivan
 @param : autoplay : false ou true - démarage automatique
 @param : autoplaySpeed : 300 - temps d'exposition d'une diapositive en mode démarrage automatique
 @param : fade : false ou true - effet de transition fondu
-@param : couleurNav - red, black, green... ou un code héxadécimal de couleur - couleur des navigation (flèches et points)
-@param : agrandir=oui - pour avoir un lien sur les images et les agrandir (Mediabox activé)
+@param : couleurNav : red, black, green... ou un code héxadécimal de couleur - couleur des navigation (flèches et points)
+@param : agrandir : oui - pour avoir un lien sur les images et les agrandir (Mediabox activé)
+@param : afftitre : oui - pour afficher le titre de l’image (défaut  non)
+@param : agrandir : oui - pour afficher le descriptif de l’image (défaut  non)
+@param : largeur : 1000 - largeur de l'image en px dans le diaporama (défaut 960)
 
--->]
-[(#ENV{slidePadding}|ou{#ENV{couleurNav}}|?{' '})<style type="text/css">
+-->][(#SET{largeur,#ENV{largeur,960}})
+][(#ENV{slidePadding}|ou{#ENV{couleurNav}}|?{' '})<style type="text/css">
 [.slick-slide > * {
     padding: (#ENV{slidePadding});
     display: block;
@@ -35,7 +38,7 @@ N'utilise pas la configuration générale du plugin, mais les paramètres suivan
 	<BOUCLE_listDocs(DOCUMENTS){id_article?}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{extension==jpg|png|gif}{vu=non}>
 	<div>[
 		(#ENV{agrandir}|oui)<a href="#FICHIER" class="mediabox"[ rel="diaporama(#ENV{id-carousel,demo})"][ title="(#TITRE|textebrut|attribut_html)"]>]
-		<img src="[(#FICHIER|image_reduire{960,*}|extraire_attribut{src})]" alt="[(#TITRE|textebrut|attribut_html)]">
+		<img src="[(#FICHIER|image_reduire{#GET{largeur},*}|extraire_attribut{src})]" alt="[(#TITRE|textebrut|attribut_html)]">
 		[(#ENV{afftitre}|oui)<div class="slick-titre">#TITRE</div>]
 		[(#ENV{affdesc}|oui)[<div class="slick-descriptif">(#DESCRIPTIF|ptobr)</div>]]
 		[(#ENV{agrandir}|oui)</a>]
