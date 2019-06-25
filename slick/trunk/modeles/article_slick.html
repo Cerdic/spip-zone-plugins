@@ -36,6 +36,8 @@ N'utilise pas la configuration générale du plugin, mais les paramètres suivan
 	<div>[
 		(#ENV{agrandir}|oui)<a href="#FICHIER" class="mediabox"[ rel="diaporama(#ENV{id-carousel,demo})"][ title="(#TITRE|textebrut|attribut_html)"]>]
 		<img src="[(#FICHIER|image_reduire{960,*}|extraire_attribut{src})]" alt="[(#TITRE|textebrut|attribut_html)]">
+		[(#ENV{afftitre}|oui)<div class="slick-titre">#TITRE</div>]
+		[(#ENV{affdesc}|oui)[<div class="slick-descriptif">(#DESCRIPTIF|ptobr)</div>]]
 		[(#ENV{agrandir}|oui)</a>]
 	</div>
 	</BOUCLE_listDocs>

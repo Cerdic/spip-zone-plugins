@@ -3,3 +3,6 @@
 .slick-next { right:10px; }
 .slick-dots { margin: 0!important; }
 .slick-slide img { padding:0!important; }
+.slick-titre, .slick-descriptif { color: #eee; background: #333; }
+.slick-titre { font-weight: bold; padding: 0.5em 1rem; }
+.slick-descriptif { padding: 0.25em 1rem; font-size: 90%; }
