@@ -1,8 +1,8 @@
 <plugin>
 	<nom>Intertitres hi&#233;rarchis&#233;s et table des mati&#232;res</nom>
 	<slogan>G&#233;n&#233;rer automatiquement une table des mati&#232;res</slogan>
-	<version>0.9.14</version>
-	<prefix>IntertitresTdm</prefix>
+	<version>0.9.15</version>
+	<prefix>intertitrestdm</prefix>
 	<etat>test</etat>
 	<auteur>Mortimer, Chtitux, Beurt pour la mise en plugin, Paladin pour les ancres nomm&#233;es</auteur>
 	<description>
@@ -11,24 +11,24 @@
 	<icon>itdm-64.png</icon>
 	<licence>GNU/GPL v2</licence>
 	<lien>https://contrib.spip.net/Des-intertitres-hierarchises-et-des-outils-pour-les</lien>
-	<options>intertitres_tdm_options.php</options>
+	<options>intertitrestdm_options.php</options>
 	<pipeline>
 		<nom>header_prive</nom>
-		<inclure>intertitres_tdm_pipelines.php</inclure>
+		<inclure>intertitrestdm_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>insert_head</nom>
-		<inclure>intertitres_tdm_pipelines.php</inclure>
+		<inclure>intertitrestdm_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>pre_propre</nom>
-		<inclure>intertitres_tdm_pipelines.php</inclure>
+		<inclure>intertitrestdm_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>post_propre</nom>
-		<inclure>intertitres_tdm_pipelines.php</inclure>
+		<inclure>intertitrestdm_pipelines.php</inclure>
 	</pipeline>
-	<fonctions>intertitres_tdm_fonctions.php</fonctions>
+	<fonctions>intertitrestdm_fonctions.php</fonctions>
 	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[1.9.0;3.2.99]" />
 </plugin>

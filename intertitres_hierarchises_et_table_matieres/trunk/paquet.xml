@@ -1,12 +1,12 @@
 <paquet
-	prefix="IntertitresTdm"
+	prefix="intertitrestdm"
 	categorie="edition"
-	version="0.9.14"
+	version="0.9.15"
 	etat="test"
 	compatibilite="[1.9.0;3.2.*]"
 	logo="itdm-64.png"
 	documentation="https://contrib.spip.net/Des-intertitres-hierarchises-et-des-outils-pour-les"
->	
+>
 
 	<nom>Intertitres hiérarchisés et table des matières</nom>
 	<!-- Générer automatiquement une table des matières -->
@@ -15,11 +15,12 @@
 	<auteur>Chtitux</auteur>
 	<auteur>Beurt pour la mise en plugin</auteur>
 	<auteur>Paladin pour les ancres nommées</auteur>
+	<credit>Bertrand Boutillier</credit>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-2.0.html">GPL 2</licence>
 
-	<pipeline nom="header_prive" inclure="intertitres_tdm_pipelines.php" />
-	<pipeline nom="insert_head" inclure="intertitres_tdm_pipelines.php" />
-	<pipeline nom="pre_propre" inclure="intertitres_tdm_pipelines.php" />
-	<pipeline nom="post_propre" inclure="intertitres_tdm_pipelines.php" />
+	<pipeline nom="header_prive" inclure="intertitrestdm_pipelines.php" />
+	<pipeline nom="insert_head" inclure="intertitrestdm_pipelines.php" />
+	<pipeline nom="pre_propre" inclure="intertitrestdm_pipelines.php" />
+	<pipeline nom="post_propre" inclure="intertitrestdm_pipelines.php" />
 </paquet>
