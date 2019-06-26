@@ -150,8 +150,10 @@ function action_adapt_img_dist(){
   <pre>$AdaptiveImages->defaultBkpts = array(160,320,480,640,960,1440);</pre>
 * Allow progressive rendering og PNG and GIF even without JS :
   <pre>$AdaptiveImages->nojsPngGifProgressiveRendering = true;</pre>
+* Max width for the JPG lowsrc fallback image (thumbnail preview)
+  <pre>$AdaptiveImages->maxWidthFallbackVersion = 160;</pre>
 * JPG compression quality for JPG lowsrc
-  <pre>$AdaptiveImages->lowsrcJpgQuality = 10;</pre>
+  <pre>$AdaptiveImages->lowsrcJpgQuality = 40;</pre>
 * JPG compression quality for 1x JPG images
   <pre>$AdaptiveImages->x10JpgQuality = 75;</pre>
 * JPG compression quality for 1.5x JPG images
@@ -166,5 +168,5 @@ function action_adapt_img_dist(){
 
 This library is already available through plugins in:
 
-* SPIP CMS <https://contrib.spip.net/Adaptive-Images-4458> [See the implementation](https://zone.spip.org/trac/spip-zone/browser/_plugins_/adaptive_images/trunk/adaptive_images_options.php)
+* SPIP CMS <http://contrib.spip.net/Adaptive-Images-4458> [See the implementation](http://zone.spip.org/trac/spip-zone/browser/_plugins_/adaptive_images/trunk/adaptive_images_options.php)
 * DotClear blog engine <http://plugins.dotaddict.org/dc2/details/adaptiveImages>

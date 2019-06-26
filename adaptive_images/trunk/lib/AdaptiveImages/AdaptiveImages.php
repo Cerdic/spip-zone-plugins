@@ -2,8 +2,8 @@
 /**
  * AdaptiveImages
  *
- * @version    1.7.2
- * @copyright  2013
+ * @version    1.9.0
+ * @copyright  2013-2019
  * @author     Nursit
  * @licence    GNU/GPL3
  * @source     https://github.com/nursit/AdaptiveImages
@@ -34,7 +34,7 @@ class AdaptiveImages {
 	 * JPG compression quality for JPG lowsrc
 	 * @var int
 	 */
-	protected $lowsrcJpgQuality = 10;
+	protected $lowsrcJpgQuality = 40;
 
 	/**
 	 * JPG compression quality for 1x JPG images
@@ -88,7 +88,7 @@ class AdaptiveImages {
 	 * Maximum width for fallback when maxWidth1x is very large
 	 * @var int
 	 */
-	protected $maxWidthFallbackVersion = 640;
+	protected $maxWidthFallbackVersion = 160;
 
 	/**
 	 * Set to true to generate adapted image only at first request from users
@@ -315,8 +315,8 @@ class AdaptiveImages {
 			}
 
 			// Common styles for all adaptive images during loading
-			$ins = "<style type='text/css'>"."img.adapt-img,.lazy img.adapt-img{opacity:0.70;max-width:100%;height:auto;}"
-			.".adapt-img-wrapper,.adapt-img-wrapper:after{display:inline-block;max-width:100%;position:relative;-webkit-background-size:100% auto;background-size:100% auto;background-repeat:no-repeat;line-height:1px;}"
+			$ins = "<style type='text/css'>"."img.adapt-img,.lazy img.adapt-img{opacity:0.70;filter:blur(5px);max-width:100%;height:auto;}"
+			.".adapt-img-wrapper,.adapt-img-wrapper:after{display:inline-block;max-width:100%;position:relative;-webkit-background-size:100% auto;;-webkit-background-size:cover;background-size:cover;background-repeat:no-repeat;line-height:1px;overflow:hidden}"
 			."html body .adapt-img-wrapper.lazy,html.lazy body .adapt-img-wrapper,html body .adapt-img-wrapper.lazy:after,html.lazy body .adapt-img-wrapper:after{background-image:none}"
 			.".adapt-img-wrapper:after{position:absolute;top:0;left:0;right:0;bottom:0;content:\"\"}"
 			."@media print{html .adapt-img-wrapper{background:none}html .adapt-img-wrapper img {opacity:1}html .adapt-img-wrapper:after{display:none}}"
@@ -327,7 +327,7 @@ class AdaptiveImages {
 			$length = strlen($html)+strlen($ins_style)+2000; // ~2000 bytes for CSS and minified JS we add here
 			// minified version of AdaptiveImages.js (using http://closure-compiler.appspot.com/home)
 			$ins .= "<script type='text/javascript'>/*<![CDATA[*/var adaptImgDocLength=$length;adaptImgAsyncStyles=\"$async_style\";adaptImgLazy=".($this->lazyload?"true":"false").";".<<<JS
-function adaptImgFix(d){var e=window.getComputedStyle(d.parentNode).backgroundImage.replace(/\W?\)$/,"").replace(/^url\(\W?|/,"");d.src=e&&"none"!=e?e:d.src} (function(){function d(a){var b=document.documentElement;b.className=b.className+" "+a}function e(a){var b=window.onload;window.onload="function"!=typeof window.onload?a:function(){b&&b();a()}}adaptImgLazy&&d("lazy");/android 2[.]/i.test(navigator.userAgent.toLowerCase())&&d("android2");var c=!1;if("undefined"!==typeof window.performance)c=window.performance.timing,c=(c=~~(adaptImgDocLength/(c.responseEnd-c.connectStart)))&&50>c;else{var f=navigator.connection||navigator.mozConnection||navigator.webkitConnection; "undefined"!==typeof f&&(c=3==f.type||4==f.type||/^[23]g$/.test(f.type))}c&&d("aislow");var h=function(){var a=document.createElement("style");a.type="text/css";a.innerHTML=adaptImgAsyncStyles;var b=document.getElementsByTagName("style")[0];b.parentNode.insertBefore(a,b);window.matchMedia||window.onbeforeprint||g()};"undefined"!==typeof jQuery?jQuery(function(){jQuery(window).load(h)}):e(h);var g=function(){for(var a=document.getElementsByClassName("adapt-img"),b=0;b<a.length;b++)adaptImgFix(a[b])}; window.matchMedia&&window.matchMedia("print").addListener(function(a){g()});"undefined"!==typeof window.onbeforeprint&&(window.onbeforeprint=g)})();
+function adaptImgFix(d){var e=window.getComputedStyle(d.parentNode).backgroundImage.replace(/\W?\)$/,"").replace(/^url\(\W?|/,"");d.src=e&&"none"!=e?e:d.src}(function(){function d(a){var b=document.documentElement;b.className=b.className+" "+a}function e(a){var b=window.onload;window.onload="function"!=typeof window.onload?a:function(){b&&b();a()}}document.createElement("picture");adaptImgLazy&&d("lazy");/android 2[.]/i.test(navigator.userAgent.toLowerCase())&&d("android2");var c=!1;if("undefined"!==typeof window.performance)c=window.performance.timing,c=(c=~~(adaptImgDocLength/(c.responseEnd-c.connectStart)))&&50>c;else{var f=navigator.connection||navigator.mozConnection||navigator.webkitConnection;"undefined"!==typeof f&&(c=3==f.type||4==f.type||/^[23]g$/.test(f.type))}c&&d("aislow");var h=function(){var a=document.createElement("style");a.type="text/css";a.innerHTML=adaptImgAsyncStyles;var b=document.getElementsByTagName("style")[0];b.parentNode.insertBefore(a,b);window.matchMedia||window.onbeforeprint||g()};"undefined"!==typeof jQuery?jQuery(function(){jQuery(window).load(h)}):e(h);var g=function(){for(var a=document.getElementsByClassName("adapt-img"),b=0;b<a.length;b++)adaptImgFix(a[b])};window.matchMedia&&window.matchMedia("print").addListener(function(a){g()});"undefined"!==typeof window.onbeforeprint&&(window.onbeforeprint=g)})();
 JS;
 			$ins .= "/*]]>*/</script>\n";
 			// alternative noscript if no js (to de-activate progressive rendering on PNG and GIF)
@@ -448,11 +448,13 @@ JS;
 	 *   extension
 	 * @param bool $force
 	 *   true to force immediate image building if not existing or if too old
+	 * @param int $quality
+	 *   to set an output image quality outside the predefined preset
 	 * @return string
 	 *   name of image file
 	 * @throws Exception
 	 */
-	protected function processBkptImage($src, $wkpt, $wx, $x, $extension, $force=false){
+	protected function processBkptImage($src, $wkpt, $wx, $x, $extension, $force=false, $quality=null){
 		$dir_dest = $this->destDirectory."$wkpt/$x/";
 		$dest = $dir_dest . $this->adaptedSrcToURL($src);
 
@@ -469,16 +471,18 @@ JS;
 		if (!$force)
 			return $dest;
 
-		switch($x){
-			case '10x':
-				$quality = $this->x10JpgQuality;
-				break;
-			case '15x':
-				$quality = $this->x15JpgQuality;
-				break;
-			case '20x':
-				$quality = $this->x20JpgQuality;
-				break;
+		if (is_null($quality)){
+			switch ($x) {
+				case '10x':
+					$quality = $this->x10JpgQuality;
+					break;
+				case '15x':
+					$quality = $this->x15JpgQuality;
+					break;
+				case '20x':
+					$quality = $this->x20JpgQuality;
+					break;
+			}
 		}
 
 		$i = $this->imgSharpResize($src,$dest,$wx,10000,$quality);
@@ -642,6 +646,36 @@ JS;
 			$wfallback = $w;
 		}
 
+		$process_fallback = true;
+		if ($wfallback > $this->maxWidthFallbackVersion) {
+
+			$bigger_mistake = $h;
+			$best_width = $this->maxWidthFallbackVersion;
+			// optimise this $wfallback to avoid a too big rounding mistake in the height thumbnail resizing
+			foreach ([1,1.25,1.333,1.5,1.666,1.75,2] as $x) {
+				$wfallback = round($x * $this->maxWidthFallbackVersion);
+				list($fw,$fh) = $this->computeImageSize($w, $h, $wfallback,10000);
+				$mistake = abs(($h - ($fh * $w / $fw)) * $maxWidth1x / $w);
+				if ($mistake < $bigger_mistake) {
+					$best_width = $wfallback;
+					$bigger_mistake = $mistake;
+					// if less than 1px of rounding mistake, let's take this size
+					if ($mistake < 1) {
+						break;
+					}
+				}
+			}
+			$wfallback = $best_width;
+
+
+			$q = $this->lowsrcQualityOptimize($wfallback, $this->lowsrcJpgQuality, $w, $h, $maxWidth1x);
+			$fallback = $this->processBkptImage($is_mobile ? $srcMobile : $src, $wfallback, $wfallback, '10x', $extension, true, $q);
+			// if it's already a jpg nothing more to do here, otherwise double compress produce artefacts
+			if ($extension === 'jpg') {
+				$process_fallback = false;
+			}
+		}
+
 
 		// if $this->onDemandImages == true image has not been built yet
 		// in this case ask for immediate generation
@@ -650,13 +684,17 @@ JS;
 			$this->processBkptImageFromPath($fallback, $mime);
 		}
 
-		// $this->lowsrcJpgQuality give a base quality for a 450kpx image size
-		// quality is varying around this value (+/- 50%) depending of image pixel size
-		// in order to limit the weight of fallback (empirical rule)
-		$q = round($this->lowsrcJpgQuality-((min($maxWidth1x, $wfallback)*$h/$w*min($maxWidth1x, $wfallback))/75000-6));
-		$q = min($q, round($this->lowsrcJpgQuality)*1.5);
-		$q = max($q, round($this->lowsrcJpgQuality)*0.5);
-		$images["fallback"] = $this->img2JPG($fallback, $this->destDirectory."fallback/", $this->lowsrcJpgBgColor, $q);
+		if ($process_fallback) {
+			$q = $this->lowsrcQualityOptimize($wfallback, $this->lowsrcJpgQuality, $w, $h, $maxWidth1x);
+			$images["fallback"] = $this->img2JPG($fallback, $this->destDirectory."fallback/", $this->lowsrcJpgBgColor, $q);
+		}
+		else {
+			$infos = $this->readSourceImage($fallback, $this->destDirectory."fallback/", 'jpg');
+			//if ($infos['creer']) {
+				@copy($fallback, $infos["fichier_dest"]);
+			//}
+			$images["fallback"] =  $infos["fichier_dest"];
+		}
 
 		// limit $src image width to $maxWidth1x for old IE
 		$src = $this->processBkptImage($src,$maxWidth1x,$maxWidth1x,'10x',$extension,true);
@@ -669,6 +707,25 @@ JS;
 		return $this->imgAdaptiveMarkup($img, $images, $w, $h, $extension, $maxWidth1x);
 	}
 
+	/**
+	 * Compute an "optimal" jpg quality for the fallback image
+	 * @param $width_fallback
+	 * @param $lowsrcBaseQuality
+	 * @param $width
+	 * @param $height
+	 * @param $maxWidth1x
+	 * @return float|mixed
+	 */
+	function lowsrcQualityOptimize($width_fallback, $lowsrcBaseQuality, $width, $height, $maxWidth1x){
+		// $this->lowsrcJpgQuality give a base quality for a 450kpx image size
+		// quality is varying around this value (+/- 50%) depending of image pixel size
+		// in order to limit the weight of fallback (empirical rule)
+		$q = round($lowsrcBaseQuality-((min($maxWidth1x, $width_fallback)*$height/$width*min($maxWidth1x, $width_fallback))/75000-6));
+		$q = min($q, round($this->lowsrcJpgQuality)*1.5);
+		$q = max($q, round($this->lowsrcJpgQuality)*0.5);
+
+		return $q;
+	}
 
 	/**
 	 * Build html markup with CSS rules in <style> tag
@@ -767,7 +824,7 @@ JS;
 		// $img = setTagAttribute($img,"onkeydown","adaptImgFix(this)"); // useful ?
 
 		// markup can be adjusted in hook, depending on style and class
-		$markup = "<span class=\"adapt-img-wrapper $cid $extension\">$img</span>";
+		$markup = "<picture class=\"adapt-img-wrapper $cid $extension\">$img</picture>";
 		$markup = $this->imgMarkupHook($markup,$originalClass,$originalStyle);
 
 		$out .= "<!--[if !IE]><!-->$markup\n<style>".$style."</style><!--<![endif]-->";
@@ -826,7 +883,7 @@ JS;
 	/**
 	 * Find and get attribute value in an HTML tag
 	 * Regexp from function extraire_attribut() in
-	 * https://core.spip.net/projects/spip/repository/entry/spip/ecrire/inc/filtres.php#L2013
+	 * http://core.spip.org/projects/spip/repository/entry/spip/ecrire/inc/filtres.php#L2013
 	 * @param $tag
 	 *   html tag
 	 * @param $attribute
@@ -1106,7 +1163,7 @@ JS;
 
 	/**
 	 * Resize without bluring, and save image with needed quality if JPG image
-	 * @author : Arno* from https://zone.spip.org/trac/spip-zone/browser/_plugins_/image_responsive/action/image_responsive.php
+	 * @author : Arno* from http://zone.spip.org/trac/spip-zone/browser/_plugins_/image_responsive/action/image_responsive.php
 	 *
 	 * @param string $source
 	 * @param string $dest
@@ -1222,7 +1279,7 @@ JS;
 	}
 
 	/**
-	 * @author : Arno* from https://zone.spip.org/trac/spip-zone/browser/_plugins_/image_responsive/action/image_responsive.php
+	 * @author : Arno* from http://zone.spip.org/trac/spip-zone/browser/_plugins_/image_responsive/action/image_responsive.php
 	 *
 	 * @param int $intOrig
 	 * @param int $intFinal
@@ -1345,12 +1402,12 @@ JS;
 			return array($srcWidth,$srcHeight);
 		}
 		else if ($ratioWidth < $ratioHeight) {
-			$destWidth = intval(ceil($srcWidth/$ratioHeight));
+			$destWidth = intval(round($srcWidth/$ratioHeight));
 			$destHeight = $maxHeight;
 		}
 		else {
 			$destWidth = $maxWidth;
-			$destHeight = intval(ceil($srcHeight/$ratioWidth));
+			$destHeight = intval(round($srcHeight/$ratioWidth));
 		}
 		return array ($destWidth, $destHeight);
 	}
@@ -1379,7 +1436,7 @@ JS;
 				break;
 			case "jpg":
 			case "jpeg":
-				$ret = imagejpeg($img,$tmp,$quality);
+				$ret = imagejpeg($img,$tmp,min($quality,100));
 				break;
 		}
 		if(file_exists($tmp)){

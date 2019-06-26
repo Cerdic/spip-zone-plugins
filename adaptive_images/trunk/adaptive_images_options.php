@@ -71,6 +71,11 @@ if ($settings){
 	if (isset($settings['max_width_mobile_version']) AND $v=intval($settings['max_width_mobile_version']))
 		$AdaptiveImages->maxWidthMobileVersion = $v;
 
+	// fine tuning : on genere une miniature toute petite en ameliorant un peu la qualite de sortie,
+	// ce qui donne une taille beaucoup plus reduite
+	$AdaptiveImages->maxWidthFallbackVersion = $AdaptiveImages->maxWidthMobileVersion / 4;
+	$AdaptiveImages->lowsrcJpgQuality = min($AdaptiveImages->lowsrcJpgQuality + 30, 90);
+
 	// on ne traite pas les images de largeur inferieure a min_width_1x px
 	if (isset($settings['min_width_1x']) AND $v=intval($settings['min_width_1x']))
 		$AdaptiveImages->minWidth1x = $v;
