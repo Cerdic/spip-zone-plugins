@@ -38,7 +38,7 @@ function formulaires_upload_image_verifier_dist($path_base,$bloc) {
     }
     $files = sdc_check_upload($path_base);
     foreach ($files as $file) {
-        if ( !preg_match("#.(png|jpg|jpeg|gif)$#",$file['name'])) {
+        if ( !preg_match("#.(png|jpg|jpeg|gif)$#i",$file['name'])) {
             $erreurs["file"] = _T('sdc:erreur_format');
         }
     }
