@@ -160,7 +160,21 @@ function adaptive_images($texte,$max_width_1x=null){
 		}
 	}
 	$AdaptiveImages = SPIPAdaptiveImages::getInstance();
-	return $AdaptiveImages->adaptHTMLPart($texte, $max_width_1x, $bkpt);
+	$res = $AdaptiveImages->adaptHTMLPart($texte, $max_width_1x, $bkpt);
+
+	// injecter la class filtre_inactif sur les balises img pour ne pas repasser un filtre image dessus
+	$imgs = extraire_balises($res, 'img');
+	foreach ($imgs as $img) {
+		$class = extraire_attribut($img, "class");
+		if (strpos($class, 'filtre_inactif') !== false) {
+			$class = str_replace('adapt-img', 'no_image_filtrer filtre_inactif adapt-img', $class);
+			$img2 = inserer_attribut($img, 'class', $class);
+			if (strlen($img2) !== strlen($img)) {
+				$res = str_replace($img, $img2, $res);
+			}
+		}
+	}
+	return $res;
 }
 
 /**
