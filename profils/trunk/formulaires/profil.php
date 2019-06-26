@@ -61,9 +61,10 @@ function formulaires_profil_identifier_dist($id_auteur = 'new', $id_ou_identifia
  */
 function formulaires_profil_saisies_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '', $options=array()) {
 	$saisies = profils_chercher_saisies_profil('edition', $id_auteur, $id_ou_identifiant_profil);
+	$options['id_ou_identifiant_profil'] = $id_ou_identifiant_profil;
 	
 	// Si c'est pour une création et qu'on est admin
-	if (!intval($id_auteur) and autoriser('creer', 'auteur')) {
+	if (!intval($id_auteur) and autoriser('creer', 'auteur', 0, null, $options)) {
 		array_unshift($saisies, array(
 			'saisie' => 'case',
 			'options' => array(
@@ -108,24 +109,19 @@ function formulaires_profil_saisies_dist($id_auteur = 'new', $id_ou_identifiant_
 function formulaires_profil_charger_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '', $options=array()) {
 	$contexte = array();
 	
-	// Non, si pas d'id_auteur, on en crée un nouveau
-	//~ // Si pas d'id_auteur on prend celui connecté actuellement
-	//~ if (!intval($id_auteur)) {
-		//~ $id_auteur = session_get('id_auteur');
-	//~ }
-	
 	// On vérifie que l'auteur existe et qu'on a le droit de le modifier
 	$id_auteur = intval($id_auteur);
+	$options['id_ou_identifiant_profil'] = $id_ou_identifiant_profil;
 	if (
 		// Si demande de création mais pas le droit
-		(!$id_auteur and !autoriser('creer', 'auteur'))
+		(!$id_auteur and !autoriser('creer', 'auteur', 0, null, $options))
 		or
 		(
 			// Ou s'il y a un id_auteur mais qu'il n'existe pas ou pas le droit de le modifier
 			$id_auteur
 			and (
 				!$auteur = sql_fetsel('id_auteur,nom,email', 'spip_auteurs', 'id_auteur = '.$id_auteur)
-				or (!($id_auteur == session_get('id_auteur')) and !autoriser('modifier', 'auteur', $id_auteur))
+				or (!($id_auteur == session_get('id_auteur')) and !autoriser('modifier', 'auteur', $id_auteur, null, $options))
 			)
 		)
 	) {
