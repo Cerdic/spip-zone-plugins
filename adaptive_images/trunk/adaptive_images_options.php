@@ -140,19 +140,16 @@ function action_adapt_img_dist(){
 	exit;
 }
 
-
-/** Filtre  ***********************************************************************************************************/
-
 /**
- * Rendre les images d'un texte adaptatives, en permettant de preciser la largeur maxi a afficher en 1x
- * [(#TEXTE|adaptive_images{1024})]
- * ou passer la liste des breakpoints (le dernier est la largeur maxi 1x)
- * [(#TEXTE|adaptive_images{160/320/480/640/1024})]
- * @param string $texte
- * @param null|int $max_width_1x
- * @return mixed
+ * Fonction de base pour les filtres, ne pas utiliser directement
+ * @protected
+ *
+ * @param $texte
+ * @param $max_width_1x
+ * @param bool $background_only
+ * @return mixed|string
  */
-function adaptive_images($texte,$max_width_1x=null){
+function adaptive_images_base($texte, $max_width_1x, $background_only = false){
 	$bkpt = null;
 	// plusieurs valeurs separees par un / : ce sont les breakpoints, max_width_1x est la derniere valeur
 	if (strpos($max_width_1x,"/")!==false){
@@ -165,7 +162,7 @@ function adaptive_images($texte,$max_width_1x=null){
 		}
 	}
 	$AdaptiveImages = SPIPAdaptiveImages::getInstance();
-	$res = $AdaptiveImages->adaptHTMLPart($texte, $max_width_1x, $bkpt);
+	$res = $AdaptiveImages->adaptHTMLPart($texte, $max_width_1x, $bkpt, $background_only);
 
 	// injecter la class filtre_inactif sur les balises img pour ne pas repasser un filtre image dessus
 	$imgs = extraire_balises($res, 'img');
@@ -182,14 +179,40 @@ function adaptive_images($texte,$max_width_1x=null){
 	return $res;
 }
 
+/** Filtres  ***********************************************************************************************************/
+
+
+/**
+ * Rendre les images d'un texte adaptatives, en permettant de preciser la largeur maxi a afficher en 1x
+ * [(#TEXTE|adaptive_images{1024})]
+ * ou passer la liste des breakpoints (le dernier est la largeur maxi 1x)
+ * [(#TEXTE|adaptive_images{160/320/480/640/1024})]
+ * @param string $texte
+ * @param null|int $max_width_1x
+ * @return mixed
+ */
+function adaptive_images($texte, $max_width_1x=null){
+	return adaptive_images_base($texte, $max_width_1x);
+}
+
+/**
+ * Rendre les images d'un texte adaptatives mais en background sur des span seulement (pas de balise <img>)
+ * @param string $texte
+ * @param null|int $max_width_1x
+ * @return mixed
+ */
+function adaptive_images_background($texte, $max_width_1x=null){
+	return adaptive_images_base($texte, $max_width_1x, true);
+}
+
 /**
  * nommage alternatif
  * @param $texte
  * @param int $max_width_1x
  * @return mixed
  */
-function adaptative_images($texte,$max_width_1x=null){
-	return adaptive_images($texte,$max_width_1x);
+function adaptative_images($texte, $max_width_1x=null){
+	return adaptive_images($texte, $max_width_1x);
 }
 
 /** Pipelines  ********************************************************************************************************/
