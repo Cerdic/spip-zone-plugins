@@ -274,7 +274,7 @@ global $Memoization;
 	}
 
 	$stats['chrono'] = microtime_do('end', 'ms');
-	$msg = "cachelab_cibler($action) en {$stats['chrono']}ms ({$stats['nb_cible']} caches sur {$stats['nb_candidats']})"
+	$msg = "cachelab_cibler($action) en {$stats['chrono']} ({$stats['nb_cible']} caches sur {$stats['nb_candidats']})"
 		."\n".print_r($conditions, 1);
 	if (count($options)) {
 		$msg .= "\n".print_r($options, 1);
