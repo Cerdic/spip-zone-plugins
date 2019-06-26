@@ -120,7 +120,7 @@ function octopush($sms_text,$sms_recipients,$arg) {
 		$set = array(
 			'telephone' => md5($tel),
 			'date'      => date("Y-m-d H:i:s"),
-			'message'   => $xml,
+			'message'   => $xml->error_code,
 			'nbr_sms'   => '',
 			'type_sms'  => $sms_type
 		);
