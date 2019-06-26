@@ -150,7 +150,7 @@ function formulaires_editer_materialicon_traiter_dist($id_materialicon = 'new', 
 	$style = _request('style');
 	$categorie = _request('categorie');
 	$nom = _request('nom');
-	$svg = file_get_contents("https://zone.spip.net/trac/spip-zone/export/115796/spip-zone/_plugins_/materialicons/images/". $style ."/". $categorie ."/". $nom .".svg");
+	$svg = file_get_contents("https://zone.spip.net/trac/spip-zone/export/115797/spip-zone/_plugins_/materialicons/images/". $style ."/". $categorie ."/". $nom .".svg");
 	sql_updateq('spip_materialicons', array('svg' => $svg), "id_materialicon=".intval($id_materialicon));
 	
 	return $retours;
