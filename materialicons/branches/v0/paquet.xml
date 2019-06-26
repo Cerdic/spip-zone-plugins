@@ -1,0 +1,25 @@
+<paquet
+	prefix="materialicons"
+	categorie="outil"
+	version="0.1.0"
+	schema="0.2.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="img/materialicons-32.png"
+	documentation="#"
+>
+	<nom>Material Icons</nom>
+	<!-- utiliser les icones de Material Icons en rédaction -->
+	
+	<auteur>chankalan</auteur>
+	<credit lien="https://icons.pixsellz.io/">Material Icons by Pixsellz</credit>
+	
+	<licence lien="https://www.gnu.org/licenses/gpl-3.0.html">GPL 3 pour le squelette SPIP</licence>
+	<licence lien="https://www.apache.org/licenses/LICENSE-2.0.html">Apache2 pour les icônes</licence>
+	
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/materialicons.php" />
+	<pipeline nom="affiche_gauche" inclure="materialicons_pipelines.php" />
+	<pipeline nom="header_prive" inclure="materialicons_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="materialicons_pipelines.php" />
+	
+</paquet>

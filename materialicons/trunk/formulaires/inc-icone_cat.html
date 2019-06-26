@@ -1,0 +1,10 @@
+<div class="editer editer_nom[(#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
+	<label for="nom"><:materialicons:choisir_une_nouvelle_nom:></label>[
+	<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</span>
+	]<select name="nom" id="nom" style="width:100%;">
+		<option></option>
+		<BOUCLE_noms(DATA){source csv, #CHEMIN{inclure/icones_(#ENV{cat}).csv}}>
+		[(#ENV{cat}|oui)[<option class="materialicons"[(#NOM|=={#VALEUR{0}}|oui) selected="selected" #SET{ico,#VALEUR{0}}] value="#VALEUR{0}">(#VALEUR{0})</option>]]
+		</BOUCLE_noms>
+	</select>
+</div>

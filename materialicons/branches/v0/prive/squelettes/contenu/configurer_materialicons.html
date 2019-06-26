@@ -1,0 +1,12 @@
+[(#REM)
+	Création de la page de configuration du plugin materialicons
+][(#REM)
+	Utilise :
+		formulaires/configurer_materialicons.html
+]
+[(#AUTORISER{configurer,materialicons}|oui)
+	<h1><:materialicons:configurer_materialicons:></h1>
+	<div class="ajax">
+		#FORMULAIRE_CONFIGURER_MATERIALICONS
+	</div>
+]

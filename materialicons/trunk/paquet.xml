@@ -1,25 +1,39 @@
 <paquet
 	prefix="materialicons"
-	categorie="outil"
-	version="0.1.0"
-	schema="0.2.0"
+	categorie="multimedia"
+	version="1.1.1"
 	etat="dev"
-	compatibilite="[3.0.0;3.2.*]"
-	logo="img/materialicons-32.png"
-	documentation="#"
+	compatibilite="[3.2.4;3.2.*]"
+	logo="prive/themes/spip/images/materialicons-64.png"
+	documentation=""
+	schema="1.0.1" 
 >
-	<nom>Material Icons</nom>
-	<!-- utiliser les icones de Material Icons en rédaction -->
+	<!--
+		Paquet généré le 2019-06-26 18:42:28
+		(Vous pouvez bien entendu supprimer ces commentaires) 
+	-->
+
+	<nom>Material Icônes</nom>
 	
+
+	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs --> 
 	<auteur>chankalan</auteur>
-	<credit lien="https://icons.pixsellz.io/">Material Icons by Pixsellz</credit>
-	
-	<licence lien="https://www.gnu.org/licenses/gpl-3.0.html">GPL 3 pour le squelette SPIP</licence>
-	<licence lien="https://www.apache.org/licenses/LICENSE-2.0.html">Apache2 pour les icônes</licence>
-	
-	<pipeline nom="declarer_tables_auxiliaires" inclure="base/materialicons.php" />
-	<pipeline nom="affiche_gauche" inclure="materialicons_pipelines.php" />
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="saisies" compatibilite="[2.4.0;]" /> 
+
+	<pipeline nom="autoriser" inclure="materialicons_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/materialicons.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/materialicons.php" /> 
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/materialicons.php" /> 
+	<pipeline nom="affiche_milieu" inclure="materialicons_pipelines.php" /> 
+	<pipeline nom="optimiser_base_disparus" inclure="materialicons_pipelines.php" /> 
 	<pipeline nom="header_prive" inclure="materialicons_pipelines.php" />
 	<pipeline nom="insert_head_css" inclure="materialicons_pipelines.php" />
-	
+
+	<menu nom="materialicons" titre="materialicon:titre_materialicons" parent="menu_edition" icone="images/materialicon-16.png" action="materialicons" /> 
+	<menu nom="materialicon_creer" titre="materialicon:icone_creer_materialicon" parent="outils_rapides" icone="images/materialicon-new-16.png" action="materialicon_edit" parametres="new=oui" /> 
+
 </paquet>

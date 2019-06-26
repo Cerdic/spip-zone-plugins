@@ -1,0 +1,34 @@
+[(#SET{defaut_tri,#ARRAY{
+	nom,1,
+	id_materialicon,1,
+	points,-1
+}})]<B_liste_materialicons>
+#ANCRE_PAGINATION
+<div class="liste-objets materialicons">
+<table class="spip liste">
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{materialicon:info_1_materialicon,materialicon:info_nb_materialicons}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="picto" scope="col"></th>
+			<th class="nom" scope="col">[(#TRI{nom,<:materialicon:champ_nom_label:>,ajax})]</th>
+			<th class="id" scope="col">[(#TRI{id_materialicon,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_materialicons(MATERIALICONS){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num nom},#GET{defaut_tri}}{par nom}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="picto">[(#CHEMIN_IMAGE{materialicon-16.png}|balise_img)]</td>
+			<td class="nom principale">[(#LOGO_MATERIALICON|image_reduire{20,26})]<a href="[(#ID_MATERIALICON|generer_url_entite{materialicon})]" title="<:info_numero_abbreviation|attribut_html:> #ID_MATERIALICON">[(#RANG). ]#NOM</a></td>
+			<td class="id">[(#AUTORISER{modifier,materialicon,#ID_MATERIALICON}|?{
+				<a href="[(#URL_ECRIRE{materialicon_edit,id_materialicon=#ID_MATERIALICON})]">#ID_MATERIALICON</a>,
+				#ID_MATERIALICON
+			})]</td>
+		</tr>
+	</BOUCLE_liste_materialicons>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_materialicons>[
+<div class="liste-objets materialicons caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_materialicons>

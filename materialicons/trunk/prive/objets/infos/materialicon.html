@@ -1,0 +1,16 @@
+<BOUCLE_materialicon(MATERIALICONS){id_materialicon=#ENV{id}}>
+<div class="infos">
+[(#SET{texte_objet,<:materialicon:titre_materialicon:>})]
+<div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_MATERIALICON</p></div>
+
+	<div class='nb_elements'><!--nb_elements--></div>
+
+	[(#AUTORISER{supprimer, materialicon, #ID_MATERIALICON}|oui)
+		[(#BOUTON_ACTION{
+			[(#CHEMIN_IMAGE{materialicon-del-24.png}|balise_img{<:materialicon:supprimer_materialicon:>}|concat{' ',#VAL{<:materialicon:supprimer_materialicon:>}|wrap{<b>}}|trim)],
+			#URL_ACTION_AUTEUR{supprimer_materialicon, #ID_MATERIALICON, #URL_ECRIRE{materialicons}},
+			icone s24 horizontale danger materialicon-del-24, <:materialicon:confirmer_supprimer_materialicon:>})]
+	]
+
+</div>
+</BOUCLE_materialicon>

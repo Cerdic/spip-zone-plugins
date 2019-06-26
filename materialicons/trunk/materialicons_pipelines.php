@@ -1,39 +1,82 @@
 <?php
-if (!defined("_ECRIRE_INC_VERSION")) return;
+/**
+ * Utilisations de pipelines par Material Icônes
+ *
+ * @plugin     Material Icônes
+ * @copyright  2019
+ * @author     chankalan
+ * @licence    GNU/GPL
+ * @package    SPIP\Materialicons\Pipelines
+ */
 
-// afficher a gauche dans edition de rubrique et article (ou plus si defini dans config) un formulaire pour materialicons
-function materialicons_affiche_gauche($flux){
-
-	$e = trouver_objet_exec($flux['args']['exec']);
-	$table_objet_sql = $e['table_objet_sql'];
-	$objets_config = lire_config('materialicons/objets',array());
-	if (
-		in_array($table_objet_sql,$objets_config) // si configuration objets ok
-		AND $e !== false // page d'un objet éditorial
-		AND $e['edition'] === false // pas en mode édition
-		AND $id_objet=$flux['args'][$e['id_table_objet']]
-	){
-		$objet = $e['type'];
-		$row = sql_fetsel("style,categorie,icone", "spip_materialicons_liens", "objet=".sql_quote($objet)." AND id_objet=".intval($id_objet));
-		$style = $row['style'];
-		$categorie = $row['categorie'];
-		$icone = $row['icone'];
-		$svg = '';
-		if (isset($icone) AND $icone != '') {
-			$svg = file_get_contents( _DIR_PLUGIN_MATERIALICONS ."images/". $style ."/". $categorie ."/". $icone .".svg");
-		}
-		$contexte = array('objet' => $objet, 'id_objet' => $id_objet, 'style' => $style, 'categorie' => $categorie, 'icone' => $icone, 'svg' => $svg);
-		$flux["data"] .= recuperer_fond("inclure/material_icone", $contexte);
-	}
-	return $flux;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
 }
 
+
+
+// quelques styles pour commencer, en prive et en public
 function materialicons_header_prive($flux){
     $flux .= '<link rel="stylesheet" href="'. _DIR_PLUGIN_MATERIALICONS .'css/materialicons.css" type="text/css" media="all" />';
     return $flux;
 }
-
 function materialicons_insert_head_css($flux){
     $flux .= '<link rel="stylesheet" href="'. _DIR_PLUGIN_MATERIALICONS .'css/materialicons.css" type="text/css" media="all" />';
     return $flux;
+}
+
+
+
+/**
+ * Ajout de contenu sur certaines pages,
+ * notamment des formulaires de liaisons entre objets
+ *
+ * @pipeline affiche_milieu
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function materialicons_affiche_milieu($flux) {
+	$texte = '';
+	$e = trouver_objet_exec($flux['args']['exec']);
+
+
+
+	// materialicons sur les articles, auteurs, rubriques
+	if (!$e['edition'] and in_array($e['type'], array('article', 'auteur', 'rubrique'))) {
+		$texte .= recuperer_fond('prive/objets/editer/liens', array(
+			'table_source' => 'materialicons',
+			'objet' => $e['type'],
+			'id_objet' => $flux['args'][$e['id_table_objet']]
+		));
+	}
+
+	if ($texte) {
+		if ($p = strpos($flux['data'], '<!--affiche_milieu-->')) {
+			$flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
+		} else {
+			$flux['data'] .= $texte;
+		}
+	}
+
+	return $flux;
+}
+
+
+
+
+/**
+ * Optimiser la base de données
+ *
+ * Supprime les liens orphelins de l'objet vers quelqu'un et de quelqu'un vers l'objet.
+ *
+ * @pipeline optimiser_base_disparus
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function materialicons_optimiser_base_disparus($flux) {
+
+	include_spip('action/editer_liens');
+	$flux['data'] += objet_optimiser_liens(array('materialicon'=>'*'), '*');
+
+	return $flux;
 }

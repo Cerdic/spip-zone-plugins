@@ -1,0 +1,36 @@
+[(#ID_MATERIALICON|oui)
+	[(#AUTORISER{modifier,materialicon,#ID_MATERIALICON}|sinon_interdire_acces)]
+	[(#SET{id_parent,#INFO_{materialicon,#ID_MATERIALICON}})]
+]
+
+
+[(#ID_MATERIALICON|non)
+	[(#AUTORISER{creer,materialicon}|sinon_interdire_acces)]
+]
+
+#SET{redirect,#ENV{redirect}|sinon{#ID_MATERIALICON|?{#ID_MATERIALICON|generer_url_entite{materialicon},#URL_ECRIRE{materialicons}}}}
+
+
+
+<div class="cadre-formulaire-editer">
+<div class="entete-formulaire">
+	[(#ID_MATERIALICON|oui)
+	[(#GET{redirect}|icone_verticale{<:icone_retour:>,materialicon,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_MATERIALICON|?{<:materialicon:icone_modifier_materialicon:>,<:materialicon:icone_creer_materialicon:>})]
+		<h1>(#ENV{titre,#INFO_NOM{materialicon,#ID_MATERIALICON}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_MATERIALICON|generer_url_entite{materialicon}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_MATERIALICON{#ENV{id_materialicon,oui}, #GET{redirect}, #ENV{associer_objet}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>

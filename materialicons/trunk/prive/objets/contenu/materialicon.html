@@ -1,0 +1,22 @@
+<BOUCLE_materialicon(MATERIALICONS){id_materialicon}>
+[<div class="champ contenu_style[ (#STYLE*|strlen|?{'',vide})]">
+	<div class="label"><:materialicon:champ_style_label:> : </div>
+	<span dir="#LANG_DIR" class="#EDIT{style} style">(#STYLE)</span>
+</div>]
+
+[<div class="champ contenu_categorie[ (#CATEGORIE*|strlen|?{'',vide})]">
+	<div class="label"><:materialicon:champ_categorie_label:> : </div>
+	<span dir="#LANG_DIR" class="#EDIT{categorie} categorie">(#CATEGORIE)</span>
+</div>]
+
+[<div class="champ contenu_nom[ (#NOM*|strlen|?{'',vide})]">
+	<div class="label"><:materialicon:champ_nom_label:> : </div>
+	<span dir="#LANG_DIR" class="#EDIT{nom} nom">(#NOM)</span>
+</div>]
+
+[<div class="champ contenu_svg[ (#SVG*|strlen|?{'',vide})]">
+	<div class="label"><:materialicon:champ_svg_label:> : </div>
+	<span dir="#LANG_DIR" class="#EDIT{svg} svg"><span class="materialicons">(#SVG|svg_retirer_xml)</span></span>
+</div>]
+
+</BOUCLE_materialicon>

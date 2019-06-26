@@ -1,0 +1,62 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_materialicon,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE
+		<input type="hidden" name="id_materialicon" value="#ENV{id_materialicon}" />
+		<div class="editer-groupe">
+				
+			<div class="editer editer_style[(#ENV**{erreurs}|table_valeur{style}|oui)erreur]">
+				<label for="style"><:materialicons:choisir_un_style:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{style})</span>
+				]<select name="style" id="style" style="width:100%;">
+					<option></option>
+					<BOUCLE_styles(DATA){source csv, #CHEMIN{inclure/styles.csv}}>
+					[<option class="materialicons"[(#STYLE|=={#VALEUR{0}}|oui) selected="selected" #SET{sty,#VALEUR{0}}] value="#VALEUR{0}">(#VALEUR{0})</option>]
+					</BOUCLE_styles>
+				</select>
+			</div>
+
+			<div class="editer editer_categorie[(#ENV**{erreurs}|table_valeur{categorie}|oui)erreur]">
+				<label for="categorie"><:materialicons:choisir_une_categorie:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{categorie})</span>
+				]<select name="categorie" id="categorie" style="width:100%;">
+					<option></option>
+					<BOUCLE_categories(DATA){source csv, #CHEMIN{inclure/categories.csv}}>
+					[<option class="materialicons"[(#CATEGORIE|=={#VALEUR{0}}|oui) selected="selected" #SET{cat,#VALEUR{0}}] value="#VALEUR{0}">(#VALEUR{0})</option>]
+					</BOUCLE_categories>
+				</select>
+			</div>
+			
+			<INCLURE{fond=formulaires/inc-icone_cat,env,ajax=icone_cat,cat=#GET{cat}} />
+			
+			[(#SET{cheminsvg,https://zone.spip.net/trac/spip-zone/export/115786/spip-zone/_plugins_/materialicons/trunk/images/#GET{sty}/#GET{cat}/#NOM.svg})]
+			<div class="editer editer_svg[(#ENV**{erreurs}|table_valeur{svg}|oui)erreur]">
+				<label for="svg"><:materialicons:code_svg:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{svg})</span>
+				]<textarea name="svg">[(#GET{cheminsvg}|file_get_contents|svg_retirer_xml)]</textarea>
+			</div>
+			
+		</div>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+	</BOUCLE_editable>
+</div>
+
+<script>
+jQuery(function($){
+//	au clic de la categorie on prend sa valeur pour forcer le champ select suivant avec
+	$('#categorie option').on('click', function(){
+		var valeur = $(this).attr('value');
+		ajaxReload('icone_cat', {
+			args:{cat:valeur}
+		});
+// 		alert(valeur);
+// 		$(this).submit();
+	});
+});
+</script>
