@@ -116,7 +116,7 @@ function octopush($sms_text,$sms_recipients,$arg) {
 	$xml = $sms->send();
 	$xml = simplexml_load_string($xml);
 	// Enregistrement pour suivi
-	foreach ($destinataire as $tel) {
+	foreach ($sms_recipients as $tel) {
 		$set = array(
 			'telephone' => md5($tel),
 			'date'      => date("Y-m-d H:i:s"),
