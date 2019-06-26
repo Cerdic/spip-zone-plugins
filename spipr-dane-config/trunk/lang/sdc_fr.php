@@ -124,6 +124,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'metas_defaut' => 'Base',
     'metas_font-family' => 'Police',
     'metas_font-size' => 'Taille de police',
+    'metas_font-weight' => 'Graisse de police',
     'metas_header' => 'Ent&#234;te',
     'metas_inverser_navbar' => 'Inverser la couleur',
     'metas_largeur_background' => 'Largeur de l\'arri&#232;re plan',

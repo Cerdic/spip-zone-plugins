@@ -26,10 +26,10 @@
 [(#SET{titre_ext, #ENV{bloc}|=={defaut}|?{de base, du titre du site}})]
 
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM">
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	<form method="post" action="#ENV{action}"><div>
-		#ACTION_FORMULAIRE{#ENV{action}}
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    <form method="post" action="#ENV{action}"><div>
+        #ACTION_FORMULAIRE{#ENV{action}}
         <h3 class="legend"><:sdc:police{bloc=#GET{titre_ext}}:></h3>
         
         [(#ENV{bloc}|=={defaut}|non)
@@ -45,27 +45,35 @@
             {texte=<:sdc:explication_famille_de_police:> }
         )]
         [(#SAISIE{selection, font-family}
-			{label=<:sdc:famille_de_police:>}
-			{defaut=''}
-			{class=chosen}
+            {label=<:sdc:famille_de_police:>}
+            {defaut=''}
+            {class=chosen}
             {conteneur_class=long_label}
-			{datas=#ENV{polices}}
-                {cacher_option_intro= oui}
-		)]
+            {datas=#ENV{polices}}
+            {cacher_option_intro= oui}
+        )]
 
         [(#SAISIE{explication, font-family-perso-explication}
             {texte=<:sdc:explication_police_personnelle:> }
             {conteneur_class=family-perso}
         )]
         [(#SAISIE{input, font-family-perso}
-			{label=<:sdc:police_personnelle:>}
-			{defaut=#ENV{font-family-perso}}
+            {label=<:sdc:police_personnelle:>}
+            {defaut=#ENV{font-family-perso}}
             {conteneur_class=long_label family-perso}
-		)]
+        )]
                 
-		<div>
-			[<h1 class="gwf" [style="font-family: (#CONFIG{sdc/defaut/font-family}|in_array{#GET{ggfonts}}|?{#ENV{font-family}, #ENV{font-family-perso}})"]>(#NOM_SITE_SPIP)</h1>]
-			[<p class="gwf" style="[font-family: (#CONFIG{sdc/defaut/font-family}|in_array{#GET{ggfonts}}|?{#ENV{font-family}, #ENV{font-family-perso}}); ]">(#NOM_SITE_SPIP|strtolower|ucfirst)</p>]
+        <div>
+            [(#REM)DEBUG
+            #CONFIG{sdc/#ENV{bloc,defaut}/font-weight,normal}<br/>
+            #CONFIG{sdc/#ENV{bloc,defaut}/font-family,Open Sans}<br>
+            #ENV{font-family}<br/>
+            #ENV{font-family-perso}<br/>
+            #SET{font-family, #ENV{font-family}|=={perso}|?{#ENV{font-family-perso},#ENV{font-family}}}
+            #GET{font-family}
+            ]
+            <h1 class="gwf" style="font-family: #GET{font-family};font-weight: #CONFIG{sdc/#ENV{bloc,defaut}/font-weight,normal};">[(#NOM_SITE_SPIP)]</h1>
+            [<p class="gwf" style="font-family: #GET{font-family}; ">(#NOM_SITE_SPIP|strtolower|ucfirst)</p>]
         </div>
         [(#ENV{bloc}|=={defaut}|non)
         [(#SAISIE{selection, font-size}
@@ -89,7 +97,7 @@
                 3.4, 3.4,
                 3.5, 3.5}
             }
-			{defaut=2.6}
+            {defaut=2.6}
             {cacher_option_intro= oui}
         )]
         [(#SAISIE{explication, font-size-explication}
@@ -97,31 +105,57 @@
         )]
         ]
 
-		<p class="boutons boutons[-(#ENV{bloc})][-(#ENV{elem})]">
-			<input type="submit" name="enregistrer" class="submit save" value="<:bouton_enregistrer:>" />
-			<input type="submit" name="_cfg_delete" class="submit delete" value="<:sdc:bouton_supprimer:>"/>
-		</p>
-	</div></form>
+        <p class="boutons boutons[-(#ENV{bloc})][-(#ENV{elem})]">
+            <input type="submit" name="enregistrer" class="submit save" value="<:bouton_enregistrer:>" />
+            <input type="submit" name="_cfg_delete" class="submit delete" value="<:sdc:bouton_supprimer:>"/>
+        </p>
+    </div></form>
 </div>
 <script type="text/javascript">// <![CDATA[
-	$(document).ready(function(){
-		$('#champ_font-family').change(function(){
-			if ($(this).val() == 'perso' ) 
-			{ 
-				$('.family-perso').show() ;
-				$('#champ_font-family-perso').on('input change mouseleave mouseover mouseout', function(){
-                    console.log($(this).val());
-					$('.gwf').css({'font-family': $(this).val().replace(/\++/g, ' ')} );
-                    var link="<link href='https://fonts.googleapis.com/css?family="+$(this).val()+"' rel='stylesheet' type='text/css'>";
-                    $( "<link href='https://fonts.googleapis.com/css?family="+$(this).val()+"' rel='stylesheet' type='text/css'>" ).insertAfter( $( "style" ) )
-				});
-			}
-			else
-			{
-			$('.gwf').css({'font-family': $(this).val().replace(/\++/g, ' ')} );
-				$('.family-perso').hide();
-			}
-		});
-		$('#champ_font-family').val() == 'perso' ? $('.family-perso').show() : $('.family-perso').hide();
-	});
+    $(document).ready(function(){
+        
+        function fontFamilyPersoChange() {
+            $('#champ_font-family-perso').on('input change', function(){
+                var fontFamilyPerso = $(this).val();
+                var fontFamily = fontFamilyPerso;
+                if ( fontFamilyPerso.match(/:/g)) {
+                    var font = fontFamilyPerso.split(":");
+                    fontFamily = font[0];
+                    var fontWeight = font[1];
+                }
+                console.log(fontFamily+" "+fontWeight);
+                var $fontWeight = "#CONFIG{'sdc/#ENV{bloc,defaut}/font-weight,normal'});]";
+                $('.gwf').css({'font-family': fontFamily.replace(/\++/g, ' ')} );
+                var link = "<link id='ffperso' href='https://fonts.googleapis.com/css?family="+$(this).val()+"' rel='stylesheet' type='text/css'>";
+                $('#ffperso').remove();
+                $(link).insertBefore($("style"));
+            });
+        }
+        
+        if ($('#champ_font-family').val() == 'perso') {
+            $('.family-perso').show();
+            fontFamilyPersoChange();
+            var link = "<link id='ffperso' href='https://fonts.googleapis.com/css?family=#CONFIG{sdc/#ENV{bloc,defaut}/font-family}:#CONFIG{sdc/#ENV{bloc,defaut}/font-weight}' rel='stylesheet' type='text/css'>";
+                $(link).insertBefore($("style"));
+            $('.gwf').css({'font-family':$('#champ_font-family-perso').val().replace(/\++/g, ' ')} );
+            $('h1.gwf').css({'font-weight': "#CONFIG{sdc/#ENV{bloc,defaut}/font-weight}", 'font-family':"#CONFIG{sdc/#ENV{bloc,defaut}/font-family}"} );
+        }
+        else {
+            $('.family-perso').hide();
+        }
+        
+        $('#champ_font-family').change(function(){
+            var fontFamily = $(this).val();
+            if (fontFamily == 'perso' ) 
+            { 
+                $('.family-perso').show() ;
+                fontFamilyPersoChange();
+            }
+            else
+            {
+                $('.gwf').css({'font-family': fontFamily.replace(/\++/g, ' ')} );
+                $('.family-perso').hide();
+            }
+        });        
+    });
  //]]></script>
