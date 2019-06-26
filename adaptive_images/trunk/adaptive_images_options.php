@@ -164,15 +164,17 @@ function adaptive_images_base($texte, $max_width_1x, $background_only = false){
 	$AdaptiveImages = SPIPAdaptiveImages::getInstance();
 	$res = $AdaptiveImages->adaptHTMLPart($texte, $max_width_1x, $bkpt, $background_only);
 
-	// injecter la class filtre_inactif sur les balises img pour ne pas repasser un filtre image dessus
-	$imgs = extraire_balises($res, 'img');
-	foreach ($imgs as $img) {
-		$class = extraire_attribut($img, "class");
-		if (strpos($class, 'filtre_inactif') !== false) {
-			$class = str_replace('adapt-img', 'no_image_filtrer filtre_inactif adapt-img', $class);
-			$img2 = inserer_attribut($img, 'class', $class);
-			if (strlen($img2) !== strlen($img)) {
-				$res = str_replace($img, $img2, $res);
+	if (!$background_only) {
+		// injecter la class filtre_inactif sur les balises img pour ne pas repasser un filtre image dessus
+		$imgs = extraire_balises($res, 'img');
+		foreach ($imgs as $img) {
+			$class = extraire_attribut($img, "class");
+			if (strpos($class, 'filtre_inactif') !== false) {
+				$class = str_replace('adapt-img', 'no_image_filtrer filtre_inactif adapt-img', $class);
+				$img2 = inserer_attribut($img, 'class', $class);
+				if (strlen($img2) !== strlen($img)) {
+					$res = str_replace($img, $img2, $res);
+				}
 			}
 		}
 	}
@@ -199,10 +201,28 @@ function adaptive_images($texte, $max_width_1x=null){
  * Rendre les images d'un texte adaptatives mais en background sur des span seulement (pas de balise <img>)
  * @param string $texte
  * @param null|int $max_width_1x
+ * @param string $class
  * @return mixed
  */
-function adaptive_images_background($texte, $max_width_1x=null){
-	return adaptive_images_base($texte, $max_width_1x, true);
+function adaptive_images_background($texte, $max_width_1x=null, $class = ''){
+	$res = adaptive_images_base($texte, !empty($max_width_1x) ? $max_width_1x : null, true);
+	if ($class) {
+		// injecter la class sur les balises span.adapt-img-background
+		$spans = extraire_balises($res, 'span');
+		foreach ($spans as $span) {
+			if (strpos($span,'adapt-img-background') !== false) {
+				$span = explode('>', $span, 2);
+				$s = $span[0] . '>';
+				$c = extraire_attribut($s, "class");
+				if (strpos($c, 'adapt-img-background') !== false) {
+					$c = rtrim($c) . ' '. $class;
+					$s2 = inserer_attribut($s, 'class', $c);
+					$res = str_replace($s, $s2, $res);
+				}
+			}
+		}
+	}
+	return $res;
 }
 
 /**
