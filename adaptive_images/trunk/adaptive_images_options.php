@@ -3,7 +3,7 @@
  * Options du plugin Adaptive Images
  *
  * @plugin     Adaptive Images
- * @copyright  2013
+ * @copyright  2013-2019
  * @author     Cedric
  * @licence    GNU/GPL
  * @package    SPIP\Adaptive_Images\Options
@@ -102,6 +102,8 @@ if ($settings){
 	if (isset($settings['lazy_load']) AND $settings['lazy_load'])
 		$AdaptiveImages->lazyload = true;
 
+	// Experimental : generer des thumbnails svg a base de gradients (mais resultat assez bof)
+	//$AdaptiveImages->thumbnailGeneratorCallback = "adaptive_images_preview_gradients";
 }
 
 
@@ -179,6 +181,16 @@ function adaptive_images_base($texte, $max_width_1x, $background_only = false){
 		}
 	}
 	return $res;
+}
+
+function adaptive_images_preview_gradients($image, $options) {
+	$gradients = charger_fonction("image_gradients", "preview");
+	//spip_timer('gradients');
+	if ($thumbnail = $gradients($image, $options)) {
+		//var_dump($thumbnail,filesize($thumbnail),spip_timer('gradients'));
+		return array($thumbnail, 'gradients');
+	}
+	return false;
 }
 
 /** Filtres  ***********************************************************************************************************/
