@@ -49,9 +49,6 @@ if ($settings){
 	// couleur de background pour les images lowsrc
 	if (isset($settings['lowsrc_jpg_bg_color']) AND $settings['lowsrc_jpg_bg_color'])
 		$AdaptiveImages->lowsrcJpgBgColor = $settings['lowsrc_jpg_bg_color'];
-	// qualite des images lowsrc
-	if (isset($settings['lowsrc_jpg_quality']) AND $q=intval($settings['lowsrc_jpg_quality']))
-		$AdaptiveImages->lowsrcJpgQuality= $q;
 	// qualite de compression JPG pour les images 1x
 	if (isset($settings['10x_jpg_quality']) AND $q=intval($settings['10x_jpg_quality']))
 		$AdaptiveImages->x10JpgQuality = $q;
@@ -71,10 +68,20 @@ if ($settings){
 	if (isset($settings['max_width_mobile_version']) AND $v=intval($settings['max_width_mobile_version']))
 		$AdaptiveImages->maxWidthMobileVersion = $v;
 
-	// fine tuning : on genere une miniature toute petite en ameliorant un peu la qualite de sortie,
-	// ce qui donne une taille beaucoup plus reduite
-	$AdaptiveImages->maxWidthFallbackVersion = $AdaptiveImages->maxWidthMobileVersion / 4;
-	$AdaptiveImages->lowsrcJpgQuality = min($AdaptiveImages->lowsrcJpgQuality + 30, 90);
+
+	// qualite des images lowsrc
+	if (isset($settings['lowsrc_jpg_quality']) AND $q=intval($settings['lowsrc_jpg_quality']))
+		$AdaptiveImages->lowsrcJpgQuality= $q;
+	if (isset($settings['lowsrc_width']) AND $v=intval($settings['lowsrc_width'])){
+		$AdaptiveImages->lowsrcWidth = $v;
+	}
+	else {
+		// fine tuning automatique si pas de config (up depuis une version existante) :
+		// on genere une miniature toute petite en ameliorant un peu la qualite de sortie,
+		// ce qui donne une taille beaucoup plus reduite
+		$AdaptiveImages->lowsrcWidth = 128;
+		$AdaptiveImages->lowsrcJpgQuality = min($AdaptiveImages->lowsrcJpgQuality + 30, 90);
+	}
 
 	// on ne traite pas les images de largeur inferieure a min_width_1x px
 	if (isset($settings['min_width_1x']) AND $v=intval($settings['min_width_1x']))

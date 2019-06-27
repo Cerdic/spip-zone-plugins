@@ -7,7 +7,7 @@
 	<form method="post" action="#SELF"><div>
 		#ACTION_FORMULAIRE
 		#SET{fl,adaptive_images}
-		<ul>
+		<ul class="editer-groupe">
 			#SET{name,lowsrc_jpg_bg_color}#SET{obli,''}#SET{defaut,'#ffffff'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
@@ -74,13 +74,7 @@
 				<fieldset>
 					<legend><:adaptive_images:legend_compression_jpg:></legend>
 					<p class="explication"><:adaptive_images:explication_compression_jpg:></p>
-					<ul>
-						#SET{name,lowsrc_jpg_quality}#SET{obli,''}#SET{defaut,'10'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-						<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-							<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
-							<span class='erreur_message'>(#GET{erreurs})</span>
-							]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
-						</li>
+					<ul class="editer-groupe">
 						#SET{name,10x_jpg_quality}#SET{obli,''}#SET{defaut,'75'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 						<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 							<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
@@ -94,6 +88,27 @@
 							]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 						</li>
 						#SET{name,20x_jpg_quality}#SET{obli,''}#SET{defaut,'45'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+
+			<li class="fieldset">
+				<fieldset>
+					<legend><:adaptive_images:legend_miniature_basse_def:></legend>
+					<p class="explication"><:adaptive_images:explication_miniature_basse_def:></p>
+					<ul class="editer-groupe">
+						#SET{name,lowsrc_width}#SET{obli,''}#SET{defaut,'128'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+						</li>
+						#SET{name,lowsrc_jpg_quality}#SET{obli,''}#SET{defaut,'40'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 						<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 							<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 							<span class='erreur_message'>(#GET{erreurs})</span>

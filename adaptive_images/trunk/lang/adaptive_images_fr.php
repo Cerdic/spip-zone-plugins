@@ -28,8 +28,12 @@ L\'image doit faire au moins @width_hr@px de large.</small>',
 	'explication_on_demand_production' => 'En activant ce réglage, chaque variante d\'une image sera fabriquée la première fois qu\'un visiteur en a besoin.
 Evite de générer toutes les images d\'un coup ce qui peut produire des erreurs sur les pages avec beaucoup d\'images.',
 	'legend_compression_jpg' => 'Compression JPG',
+	'legend_miniature_basse_def' => 'Génération de l\'aperçu basse définition',
 	'explication_compression_jpg' => 'Indiquez la qualité des images produites : de 0 (compression maximale, poids minimum) à 100 (pas de compression, poids maximum).',
-	'label_lowsrc_jpg_quality' => 'Image basse définition',
+	'explication_miniature_basse_def' => 'L\'image d\'aperçu basse définition est envoyée dans le html de la page, pour proposer un aperçu (flouté) pendant que les vrais images chargent. Elle doit donc être aussi légère que possible.<br />
+ Un bon compromis de reglage est : Largeur 128px/Qualité 40.',
+	'label_lowsrc_width' => 'Largeur de l\'aperçu (px)',
+	'label_lowsrc_jpg_quality' => 'Qualité de l\'aperçu',
 	'label_10x_jpg_quality' => 'Image 1x',
 	'label_15x_jpg_quality' => 'Image 1.5x',
 	'label_20x_jpg_quality' => 'Image 2x',
