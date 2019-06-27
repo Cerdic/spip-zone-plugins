@@ -110,6 +110,7 @@ function noizetier_layout_lister_saisies($element = null, $id_noisette = 0) {
 							'nom' => 'grille_'.$item,
 							'label' => _T('noizetier_layout:grid_'.$item.'_legend'),
 							'pliable' => 'oui',
+							'plie' => 'oui',
 						),
 						'saisies' => $saisies_grille[$item],
 					),
