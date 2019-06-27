@@ -111,6 +111,8 @@ if ($settings){
 
 	// Experimental : generer des thumbnails svg a base de gradients (mais resultat assez bof)
 	//$AdaptiveImages->thumbnailGeneratorCallback = "adaptive_images_preview_gradients";
+	// Experimental : generer des thumbnails svg a base de Potrace
+	//$AdaptiveImages->thumbnailGeneratorCallback = "adaptive_images_preview_potrace";
 }
 
 
@@ -197,6 +199,17 @@ function adaptive_images_preview_gradients($image, $options) {
 		//var_dump($thumbnail,filesize($thumbnail),spip_timer('gradients'));
 		return array($thumbnail, 'gradients');
 	}
+	return false;
+}
+
+function adaptive_images_preview_potrace($image, $options) {
+	$gradients = charger_fonction("image_potrace", "preview");
+	//spip_timer('potrace');
+	if ($thumbnail = $gradients($image, $options)) {
+		//var_dump($thumbnail,filesize($thumbnail),spip_timer('potrace'));
+		return array($thumbnail, 'potrace');
+	}
+	//spip_timer('potrace');
 	return false;
 }
 
