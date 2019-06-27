@@ -275,6 +275,10 @@ function cextras_formulaire_verifier($flux){
 		// restreindre les vérifications aux saisies enregistrables
 		$saisies = champs_extras_saisies_lister_avec_sql($saisies);
 
+		// ne pas traiter les saisies obligatoires masquées par afficher_si
+		include_spip('inc/saisies_afficher_si');
+		$saisies = saisies_verifier_afficher_si($saisies);
+
 		foreach ($saisies as $saisie) {
 			$nom = $saisie['options']['nom'];
 			$normaliser = null;
