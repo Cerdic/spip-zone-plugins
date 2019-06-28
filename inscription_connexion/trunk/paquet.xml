@@ -1,7 +1,7 @@
 <paquet
 	prefix="inscriptionconnexion"
 	categorie="auteur"
-	version="1.0.1"
+	version="1.0.2"
 	etat="stable"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="inscriptionconnexion.png"
