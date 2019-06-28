@@ -109,6 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'redacteur' => 'rédacteur',
 	'redacteur_lire_stats' => '<strong>Rédacteur voit stats</strong> : les rédacteurs peuvent visualiser les statistiques.',
 	'redacteur_modifie_article' => '<strong>Rédacteur modifie proposés</strong> : chaque rédacteur peut modifier un article proposé à la publication, même s’il n’en est pas auteur.',
+	'redacteurs_voir_auteurs' => '<strong>Rédacteur voit auteurs</strong> : les rédacteurs peuvent <strong>voir la liste des auteurs avec leurs mails</strong> et la page des autres auteurs dans l’espace privé ?',
 	'refus_1' => '<p>Seuls les webmestres du site',
 	'refus_2' => 'sont autorisés à modifier ces paramètres.</p>
 <p>Pour en savoir plus, voir <a href="https://contrib.spip.net/Autorite">la documentation</a>.</p>',

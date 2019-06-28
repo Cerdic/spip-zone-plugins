@@ -476,6 +476,37 @@ if (
 	}
 }
 
+if (!function_exists ('autoriser_auteurs_voir')) {
+	// semble pas testée par spip mais on s'en sert pour les autres
+	function autoriser_auteurs_voir ($faire, $type, $id, $qui, $opt) {
+		if (isset($GLOBALS['autorite']['redacteurs_voir_auteurs'])
+		        and $GLOBALS['autorite']['redacteurs_voir_auteurs']) {
+			echo 'val='.$GLOBALS['autorite']['redacteurs_voir_auteurs'].'!<br/>';
+			return in_array ($qui['statut'], array('0minirezo', '1comite'));
+		} else
+			return ($qui['statut'] == '0minirezo');
+	}
+} else {
+	$autorite_erreurs[] = 'autoriser_auteurs_voir';
+}
+
+if (!function_exists ('autoriser_auteurs_menu')) {
+	// présenter ou non l'entrée "auteurs" dans le menu
+	function autoriser_auteurs_menu ($faire, $type, $id, $qui, $opt) {
+		return autoriser_auteurs_voir ($faire, $type, $id, $qui, $opt);
+	}
+} else {
+	$autorite_erreurs[] = 'autoriser_auteurs_voir';
+}
+if (!function_exists ('autoriser_auteur_voir')) {
+	// Accès aux fiches d'infos persos des auteurs
+	function autoriser_auteur_voir($faire, $type, $id, $qui, $opt) {
+		return ($qui['id_auteur'] == $id)
+			or autoriser_auteurs_voir ($faire, $type, $id, $qui, $opt);
+	}
+} else {
+	$autorite_erreurs[] = 'autoriser_auteurs_voir';
+}
 
 // Autoriser a modifier un groupe de mots $id
 // y compris en ajoutant/modifiant les mots lui appartenant
@@ -743,6 +774,7 @@ if (
 		$autorite_erreurs[] = 'autoriser_ecrire';
 	}
 }
+
 
 if ($autorite_erreurs) {
 	$GLOBALS['autorite_erreurs'] = $autorite_erreurs;

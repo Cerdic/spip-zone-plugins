@@ -43,6 +43,15 @@
 						<label for="#GET{name}"><:autorite:redacteur_lire_stats:></label>
 					</div>
 				</li>
+				#SET{name,redacteurs_voir_auteurs}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<div class="choix">
+						[
+						<span class='erreur_message'>(#GET{erreurs})</span>
+						]<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
+						<label for="#GET{name}"><:autorite:redacteurs_voir_auteurs:></label>
+					</div>
+				</li>
 				#SET{name,redacteurs_ecrire}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<div class="choix">
