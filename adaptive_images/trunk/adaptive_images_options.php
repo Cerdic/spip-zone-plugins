@@ -213,6 +213,17 @@ function adaptive_images_preview_potrace($image, $options) {
 	return false;
 }
 
+function adaptive_images_preview_geometrize($image, $options) {
+	$geometrize = charger_fonction("image_geometrize", "preview");
+	//spip_timer('potrace');
+	if ($thumbnail = $geometrize($image, $options)) {
+		//var_dump($thumbnail,filesize($thumbnail),spip_timer('potrace'));
+		return array($thumbnail, 'potrace');
+	}
+	//spip_timer('potrace');
+	return false;
+}
+
 /** Filtres  ***********************************************************************************************************/
 
 
