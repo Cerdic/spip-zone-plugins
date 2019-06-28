@@ -30,8 +30,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function action_accelerer_jobs_async_dist($args=null) {
 	if (is_null ($args)) {
 		$securiser_action = charger_fonction ('securiser_action', 'inc');
-		list ($function, $nb) = explode ('/', $securiser_action());
+		$args = $securiser_action();
 	}
+	list ($function, $nb) = explode ('/', $args);
 
 	// Si fsockopen est possible, on lance le cron via un socket
 	// en asynchrone

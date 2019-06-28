@@ -27,8 +27,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function action_accelerer_jobs_dist($args=null) {
 	if (is_null ($args)) {
 		$securiser_action = charger_fonction ('securiser_action', 'inc');
-		list ($function, $nb) = explode ('/', $securiser_action());
+		$args = $securiser_action();
 	}
+	list ($function, $nb) = explode ('/', $args);
 	spip_log("### (function, nb) = ($function, $nb)", 'accelerer_job');
 	if (!$function or !is_string($function)) {
 		spip_log("manque fonction dans action_accelerer_job_dis t: nb=$nb", 'accelerer_job');
