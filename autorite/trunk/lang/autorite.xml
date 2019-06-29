@@ -1,43 +1,43 @@
 <traduction module="autorite" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/autorite/trunk/lang/" reference="fr">
-	<langue code="ar" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=ar" total="80" traduits="80" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="ar" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=ar" total="81" traduits="80" relire="0" modifs="0" nouveaux="1" pourcent="98.77">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="de" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=de" total="80" traduits="80" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=de" total="81" traduits="80" relire="0" modifs="0" nouveaux="1" pourcent="98.77">
 		<traducteur nom="Julia14" lien="https://trad.spip.net/auteur/julia14" />
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 		<traducteur nom="Nils T." lien="https://trad.spip.net/auteur/nils-t" />
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
-	<langue code="en" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=en" total="80" traduits="80" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=en" total="81" traduits="80" relire="0" modifs="0" nouveaux="1" pourcent="98.77">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=es" total="80" traduits="77" relire="0" modifs="3" nouveaux="0" pourcent="96.25">
+	<langue code="es" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=es" total="81" traduits="77" relire="0" modifs="3" nouveaux="1" pourcent="95.06">
 		<traducteur nom="dani" lien="https://trad.spip.net/auteur/dani" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 		<traducteur nom="marydeli" lien="https://trad.spip.net/auteur/marydeli" />
 		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
 		<traducteur nom="severo" lien="https://trad.spip.net/auteur/severo" />
 	</langue>
-	<langue code="fa" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=fa" total="80" traduits="74" relire="0" modifs="4" nouveaux="2" pourcent="92.50">
+	<langue code="fa" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=fa" total="81" traduits="74" relire="0" modifs="4" nouveaux="3" pourcent="91.36">
 		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=fr" total="80" traduits="80" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=fr" total="81" traduits="81" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="it" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=it" total="80" traduits="54" relire="23" modifs="3" nouveaux="0" pourcent="67.50">
+	<langue code="it" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=it" total="81" traduits="54" relire="23" modifs="3" nouveaux="1" pourcent="66.67">
 		<traducteur nom="Julia14" lien="https://trad.spip.net/auteur/julia14" />
 		<traducteur nom="marydeli" lien="https://trad.spip.net/auteur/marydeli" />
 	</langue>
-	<langue code="nl" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=nl" total="80" traduits="80" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="nl" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=nl" total="81" traduits="80" relire="0" modifs="0" nouveaux="1" pourcent="98.77">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
-	<langue code="oc_ni_mis" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=oc_ni_mis" total="80" traduits="77" relire="0" modifs="3" nouveaux="0" pourcent="96.25">
+	<langue code="oc_ni_mis" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=oc_ni_mis" total="81" traduits="77" relire="0" modifs="3" nouveaux="1" pourcent="95.06">
 		<traducteur nom="sylvain" lien="https://trad.spip.net/auteur/sylvain" />
 	</langue>
-	<langue code="sk" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=sk" total="80" traduits="77" relire="0" modifs="3" nouveaux="0" pourcent="96.25">
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=sk" total="81" traduits="77" relire="0" modifs="3" nouveaux="1" pourcent="95.06">
 		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
