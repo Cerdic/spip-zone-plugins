@@ -167,6 +167,12 @@ options:
           afficher_si: '@traitements[email][activer_accuse]@!=""'
           rows: 4          
       -
+        saisie: 'case'
+        options:
+          nom: 'masquer_valeurs_accuse'
+          label_case: '<:formidable:traiter_email_option_masquer_valeurs_accuse_label_case:>'
+          afficher_si: '@traitements[email][activer_accuse]@!=""'          
+      -
         saisie: 'input'
         options:
           nom: 'courriel_envoyeur_accuse'

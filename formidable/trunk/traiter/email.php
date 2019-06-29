@@ -232,8 +232,8 @@ function traiter_email_dist($args, $retours) {
 					false,
 					''),
 				'traitements' => $traitements,
-				'saisies' => $saisies,
-				'valeurs' => $valeurs
+				'saisies' => $options['masquer_valeurs_accuse'] ? '' : $saisies,
+				'valeurs' => $options['masquer_valeurs_accuse'] ? '' : $valeurs
 			);
 			$parametres_accuse = pipeline('formidable_parametres_accuse',
 				array(
