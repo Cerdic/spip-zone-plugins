@@ -32,7 +32,8 @@ function inc_declarer_collections_svp_dist() {
 				'module'    => 'svpapi',
 				'filtres'   => array(
 					array(
-						'critere' => 'compatible_spip'
+						'critere'         => 'compatible_spip',
+						'est_obligatoire' => false
 					),
 				)
 			),
@@ -40,7 +41,8 @@ function inc_declarer_collections_svp_dist() {
 				'module'  => 'svpapi',
 				'filtres' => array(
 					array(
-						'critere' => 'type'
+						'critere'         => 'type',
+						'est_obligatoire' => false
 					)
 				)
 			)

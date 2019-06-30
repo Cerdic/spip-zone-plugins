@@ -116,7 +116,23 @@ function requete_verifier_filtres($filtres, $collection, $configuration, &$erreu
 	$est_valide = true;
 	$erreur = array();
 
-	if ($filtres) {
+	// 1- Vérification de l'absence de critère obligatoire.
+	foreach ($configuration['filtres'] as $_filtre) {
+		if (!empty($_filtre['est_obligatoire'])
+		and (!isset($filtres[$_filtre['critere']]))) {
+			$erreur = array(
+				'status'  => 400,
+				'type'    => 'critere_obligatoire_nok',
+				'element' => 'critere',
+				'valeur'  => $_filtre['critere']
+			);
+			$est_valide = false;
+			break;
+		}
+	}
+
+	// 2- Véfification des critères fournis
+	if ($est_valide and $filtres) {
 		// On arrête dès qu'une erreur est trouvée et on la reporte.
 		foreach ($filtres as $_critere => $_valeur) {
 			$extra = '';
