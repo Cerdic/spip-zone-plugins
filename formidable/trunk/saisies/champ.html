@@ -25,4 +25,5 @@
 	#SET{data,#GET{data}|array_merge{#GET{saisie}}}
 	</BOUCLE_parcours>
 
-#INCLURE{fond=saisies/#ENV{type_choix,selection},data=#GET{data},env,cacher_option_intro='oui',defaut=''}
+	[(#SET{data,#GET{data}|array_filter})]
+	<INCLURE{fond=saisies/#ENV{type_choix,selection},data=#GET{data},env,option_intro=<:formidable:traitements_champ_aucun:>,defaut=''}>
