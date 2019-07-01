@@ -14,6 +14,7 @@
 	<BOUCLE_enfants(POUR){tableau #VALEUR|table_valeur{'saisies'}}>
 		#SET{enfant,#ARRAY{#VALEUR|table_valeur{options}|table_valeur{nom},#VALEUR|table_valeur{options}|table_valeur{label}}}
 		#SET{enfants,#GET{enfants}|array_merge{#GET{enfant}}}
+		<BOUCLE_petits_enfants(BOUCLE_enfants) />
 	</BOUCLE_enfants>
 	#SET{saisie,#ARRAY{#VALEUR|table_valeur{options}|table_valeur{label},#GET{enfants}}
 	</B_enfants>
