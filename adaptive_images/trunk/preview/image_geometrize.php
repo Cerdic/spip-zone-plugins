@@ -27,11 +27,12 @@ function preview_image_geometrize_dist($img, $options) {
 	$width_thumb = 128;
 	$geometrize_options = [
 		"shapeTypes" => [geometrize_shape_ShapeTypes::$TRIANGLE],
-		"alpha" => 255,
-		"candidateShapesPerStep" => 50,
-		"shapeMutationsPerStep" => 50, // 100
-		"steps" => 20,
+		"alpha" => 255, // beaucoup plus rapide qu'avec une transparence
+		"candidateShapesPerStep" => 150,
+		"shapeMutationsPerStep" => 100,
+		"steps" => 75, // budget pour une taille acceptable de miniature (~4ko en texte, 2ko en Base 64+Gzip)
 	];
+	$time_budget = 5; // secondes par iteration
 
 	$cache = _image_valeurs_trans($img, "svg-thumb-geometrize-$width_thumb-".json_encode($geometrize_options), "svg");
 	if (!$cache) {
@@ -41,32 +42,46 @@ function preview_image_geometrize_dist($img, $options) {
 	$fichier = $cache["fichier"];
 	$dest = $cache["fichier_dest"];
 
-	if (true or $cache["creer"]) {
+	if ($cache["creer"]) {
 		if (!@file_exists($fichier)) {
 			return false;
 		}
-		$thumb = image_reduire($img,$width_thumb);
-		$source = extraire_attribut($thumb, 'src');
 
-		// TODO : bitmap from $source
-		list($w, $h) = getimagesize($source);
-	  $image = imagecreatefromstring(file_get_contents($source));
-		$bitmap = new geometrize_bitmap_Bitmap();
-		$bitmap->width = $w;
-		$bitmap->height = $h;
+		$runner = false;
+		$shapes = new _hx_array();
+		$couleur_bg = _image_couleur_moyenne($fichier);
+		//$couleur_bg = couleur_extraire($fichier);
 
-		for ($x=0;$x<$w;$x++){
-			for ($y=0;$y<$h;$y++) {
-				// get a color
-				$color_index = imagecolorat($image, $x, $y);
-				// make it human readable
-				$c = imagecolorsforindex($image, $color_index);
-				$bitmap->setPixel($x, $y, _couleur_to_geometrize($c));
+		if (file_exists("$dest.runner")) {
+			lire_fichier("$dest.runner", $r);
+			if ($r = unserialize($r)) {
+				list($runner,$shapes) = $r;
+				$w = $runner->model->width;
+				$h = $runner->model->height;
 			}
+			unset($r);
 		}
 
-		$couleur_bg = _image_couleur_moyenne($fichier);
-		$runner = new geometrize_runner_ImageRunner($bitmap, _couleur_to_geometrize($couleur_bg));
+		if (! $runner) {
+			$thumb = image_reduire($img,$width_thumb);
+			$source = extraire_attribut($thumb, 'src');
+			list($w, $h) = getimagesize($source);
+		  $image = imagecreatefromstring(file_get_contents($source));
+			$bitmap = new geometrize_bitmap_Bitmap();
+			$bitmap->width = $w;
+			$bitmap->height = $h;
+
+			for ($x=0;$x<$w;$x++){
+				for ($y=0;$y<$h;$y++) {
+					// get a color
+					$color_index = imagecolorat($image, $x, $y);
+					// make it human readable
+					$c = imagecolorsforindex($image, $color_index);
+					$bitmap->setPixel($x, $y, _couleur_to_geometrize($c));
+				}
+			}
+			$runner = new geometrize_runner_ImageRunner($bitmap, _couleur_to_geometrize($couleur_bg));
+		}
 
 		$hx_options = new _hx_array();
 		$hx_options->shapeTypes = new _hx_array($geometrize_options['shapeTypes']);
@@ -75,19 +90,21 @@ function preview_image_geometrize_dist($img, $options) {
 		$hx_options->shapeMutationsPerStep = $geometrize_options['shapeMutationsPerStep'];
 		$hx_options->steps = $geometrize_options['steps'];
 		//var_dump($hx_options);
-		$res = [];
-		$shapes = new _hx_array();
+
+		$start_time = time();
 		spip_timer('runner');
-		for ($i = 0; $i < $geometrize_options['steps'];$i++) {
+		for ($i = $shapes->length; $i < $geometrize_options['steps'];$i++) {
 			$r = $runner->step($hx_options);
 			$shapes->push($r->get(0));
+			if (time()>$start_time + $time_budget) {
+				break;
+			}
 		}
-		var_dump(spip_timer('runner'));
+		$time_compute = spip_timer('runner');
 
 		//var_dump($r,'<hr/>',$shapes);
 
 
-		// TODO : export to SVG
 		$svg_image = trim(geometrize_exporter_SvgExporter::export($shapes, $w, $h));
 
 		$svg_image = explode('>', $svg_image, 2);
@@ -96,10 +113,10 @@ function preview_image_geometrize_dist($img, $options) {
 		}
 
 		$t = $svg_image[0] . '>';
-		$w = extraire_attribut($t, "width");
-		$h = extraire_attribut($t, "height");
+		$w = extraire_attribut($t, "width") - 1;
+		$h = extraire_attribut($t, "height") - 1;
 
-		$svg_image[0] = "<svg viewBox=\"0 0 $w $h\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"100%\" height=\"100%\" fill=\"#$couleur_bg\"/>";
+		$svg_image[0] = "<svg viewBox=\"0 0 $w $h\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"$w\" height=\"$h\" fill=\"#$couleur_bg\"/>";
 
 		// optimize the size :
 		$svg_image[1] = str_replace(' fill-opacity="1"/>','/>', $svg_image[1]);
@@ -110,9 +127,23 @@ function preview_image_geometrize_dist($img, $options) {
 		//$svg_image[1] = str_replace("black", "#".$couleur_dark, $svg_image[1]);
 		$svg_image = $svg_image[0] . $svg_image[1];
 
-		var_dump(strlen($svg_image));
+		#		var_dump(entites_html($svg_image));
+		#var_dump(strlen($svg_image),strlen(base64_encode($svg_image)),strlen(gzdeflate(base64_encode($svg_image))));
+
 
 		ecrire_fichier($dest, $svg_image);
+		$nsteps = $shapes->length;
+		if ($shapes->length < $geometrize_options['steps']) {
+			@touch($dest,1); // on antidate l'image pour revenir ici au prochain affichage
+			ecrire_fichier("$dest.runner", serialize([$runner,$shapes]));
+			spip_log("PROGRESS: $fichier t=$time_compute Steps:$nsteps length:".strlen($svg_image),'ai_geometrize');
+			//var_dump("STEPS:" . $nsteps);
+		}
+		else {
+			@unlink("$dest.runner");
+			//var_dump("FINISHED:" . $shapes->length);
+			spip_log("FINISHED: $fichier t=$time_compute Steps:$nsteps length:".strlen($svg_image),'ai_geometrize');
+		}
 	}
 
 	if (!@file_exists($dest)) {

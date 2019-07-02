@@ -113,6 +113,8 @@ if ($settings){
 	//$AdaptiveImages->thumbnailGeneratorCallback = "adaptive_images_preview_gradients";
 	// Experimental : generer des thumbnails svg a base de Potrace
 	//$AdaptiveImages->thumbnailGeneratorCallback = "adaptive_images_preview_potrace";
+	// Experimental : generer des thumbnails svg a base de Geometrize PHP
+	//$AdaptiveImages->thumbnailGeneratorCallback = "adaptive_images_preview_geometrize";
 }
 
 
