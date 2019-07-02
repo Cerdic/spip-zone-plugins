@@ -41,24 +41,28 @@ function verifier_date_dist($valeur, $options = array(), &$valeur_normalisee = n
 
 	// Si c'est un tableau
 	if (is_array($valeur)) {
-		// S'il y a les bonnes infos on les garde aux bons endroits
-		if (isset($valeur['date']) and is_string($valeur['date'])
-			and isset($valeur['heure']) and is_string($valeur['heure'])) {
-			$options['heure'] = $valeur['heure']; // l'heure pour la fonction de normalisation
+		// S'il y a l'heure sans la date principale, c'est directement erreur
+		if (!isset($valeur['date']) and isset($valeur['heure'])) {
+			return _T('verifier:erreur_date_format_date_vide');
+		}
+		// S'il y a au moins la date ok
+		elseif (isset($valeur['date']) and is_string($valeur['date'])) {
 			$valeur = $valeur['date']; // valeur principale pour la date
 			$horaire = true; // on détecte une vérif avec horaire uniquement dans ce cas
-		} else {
-			// Sinon : pas le bon format
-			if (!isset($valeur['date']) or !isset($valeur['heure'])) {
-				$erreur = '';
-				if (!isset($valeur['date'])) {
-					$erreur = _T('verifier:erreur_date_format_date_vide');
-				}
-				if (!isset($valeur['heure'])) {
-					$erreur = $erreur." "._T('verifier:erreur_date_format_heure_vide');
-				}
+			
+			// Si on trouve une heure donnée
+			if (isset($valeur['heure']) and is_string($valeur['heure'])) {
+				$options['heure'] = $valeur['heure']; // l'heure pour la fonction de normalisation
 			}
-			return $erreur;
+			// Sinon on met l'heure à minuit
+			else {
+				$options['heure'] = '00:00';
+			}
+		}
+		// Sinon c'est une date vide, et on a tout à fait le droit !
+		// (sinon on aurait mis "obligatoire", et c'est pris en compte par Saisies avant)
+		else {
+			$valeur = null;
 		}
 	}
 
