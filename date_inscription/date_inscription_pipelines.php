@@ -25,7 +25,9 @@ function date_inscription_afficher_contenu_objet($flux){
 		AND $date_inscription = sql_getfetsel('date_inscription','spip_auteurs','id_auteur='.intval($id_auteur))
 	){
 		$date_inscription = ($date_inscription == '0000-00-00 00:00:00') ? _T('date_inscription:non_renseignee') : affdate($date_inscription);
-		$flux['data'] .= "<div>" . propre(_T('date_inscription:date_inscription') . " : " . $date_inscription) ."</div>";
+		$flux['data'] .= "<div class='champ afficher afficher_date_inscription'>"
+			. "<strong class='label'>" . _T('date_inscription:date_inscription') . " : </strong>"
+			. "<div class='valeur'>" . propre($date_inscription) . "</div></div>";
 	}
 	return $flux;
 }
