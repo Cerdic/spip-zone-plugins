@@ -221,9 +221,8 @@ ul.portfolio_ligne li .fond {
 .label_ligne {
 	display: none;
 	padding-top: 5px;
+	cursor: pointer;
 }
-
-
 .portfolio_slide_radio {
 	display: none;
 }
