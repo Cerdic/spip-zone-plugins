@@ -7,12 +7,12 @@
 
 <form method="post" action="#ENV{action}"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
-	<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
-		<[(#VAL{li}|saisie_balise_structure_formulaire)] class="rechercher_adresse editer editer_map_config">
+	<[(#DIV|sinon{ul})] class="editer-groupe">
+		<[(#DIV|sinon{li})] class="rechercher_adresse editer editer_map_config">
 			<label for="champ_map_config_geocoder"><:gis:label_rechercher_address:></label>
 			<input type="text" class="text" name="champ_map_config_geocoder" id="champ_map_config_geocoder" value="" />
 			<a id="map_config_rechercher_geocodage"><:info_rechercher:></a>
-		</[(#VAL{li}|saisie_balise_structure_formulaire)]>
+		</[(#DIV|sinon{li})]>
 		[(#SAISIE{input,lat,
 			label=<:gis:lat:>,
 			defaut=0,
@@ -108,7 +108,7 @@
 				'Control.MiniMap.js','Control.MiniMap.js',
 				'leaflet.markercluster-src.js','leaflet.markercluster-src.js'
 			}})]
-	</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+	</[(#DIV|sinon{ul})]>
 
 
 	<p class="boutons">
