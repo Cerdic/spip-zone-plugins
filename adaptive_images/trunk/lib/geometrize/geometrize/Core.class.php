@@ -21,7 +21,7 @@ class geometrize_Core {
 		$totalBlue = 0;
 		$count = 0;
 		$f = 65535 / $alpha;
-		$a = Std::int($f);
+		$a = intval($f);
 		{
 			$_g = 0;
 			while($_g < $lines->length) {
@@ -50,7 +50,7 @@ class geometrize_Core {
 		if($count === 0) {
 			return 0;
 		}
-		$value = Std::int($totalRed / $count) >> 8;
+		$value = intval($totalRed / $count) >> 8;
 		if(!true) {
 			throw new HException("FAIL: min <= max");
 		}
@@ -64,7 +64,7 @@ class geometrize_Core {
 				$r = $value;
 			}
 		}
-		$value1 = Std::int($totalGreen / $count) >> 8;
+		$value1 = intval($totalGreen / $count) >> 8;
 		if(!true) {
 			throw new HException("FAIL: min <= max");
 		}
@@ -78,7 +78,7 @@ class geometrize_Core {
 				$g = $value1;
 			}
 		}
-		$value2 = Std::int($totalBlue / $count) >> 8;
+		$value2 = intval($totalBlue / $count) >> 8;
 		if(!true) {
 			throw new HException("FAIL: min <= max");
 		}
@@ -147,12 +147,15 @@ class geometrize_Core {
 		return ($tmp << 24) + ($tmp1 << 16) + ($tmp2 << 8) + $tmp3;
 	}
 	static function differenceFull($first, $second) {
+		/*
 		if(!($first !== null)) {
 			throw new HException("FAIL: first != null");
 		}
 		if(!($second !== null)) {
 			throw new HException("FAIL: second != null");
 		}
+		*/
+		/*
 		{
 			$actual = $first->width;
 			$expected = $second->width;
@@ -167,38 +170,35 @@ class geometrize_Core {
 				throw new HException("FAIL: values are not equal (expected: " . _hx_string_rec($expected1, "") . ", actual: " . _hx_string_rec($actual1, "") . ")");
 			}
 		}
+		*/
 		$total = 0;
 		$width = $first->width;
 		$height = $first->height;
-		{
-			$_g1 = 0;
-			$_g = $height;
-			while($_g1 < $_g) {
-				$_g1 = $_g1 + 1;
-				$y = $_g1 - 1;
-				{
-					$_g3 = 0;
-					$_g2 = $width;
-					while($_g3 < $_g2) {
-						$_g3 = $_g3 + 1;
-						$x = $_g3 - 1;
-						$f = $first->data[$first->width * $y + $x];
-						$s = $second->data[$second->width * $y + $x];
-						$dr = ($f >> 24 & 255) - ($s >> 24 & 255);
-						$dg = ($f >> 16 & 255) - ($s >> 16 & 255);
-						$db = ($f >> 8 & 255) - ($s >> 8 & 255);
-						$da = ($f & 255) - ($s & 255);
-						$total = $total + ($dr * $dr + $dg * $dg + $db * $db + $da * $da);
-						unset($x,$s,$f,$dr,$dg,$db,$da);
-					}
-					unset($_g3,$_g2);
-				}
-				unset($y);
+		for($y=0;$y<$height;$y++) {
+			$o = $first->width * $y;
+			for ($x=0;$x<$width;$x++) {
+				$f = $first->data[$o + $x];
+				$s = $second->data[$o + $x];
+				$dr = ($f >> 24 & 255) - ($s >> 24 & 255);
+				if ($dr<0) $dr*=-1;
+				$dg = ($f >> 16 & 255) - ($s >> 16 & 255);
+				if ($dg<0) $dg*=-1;
+				$db = ($f >> 8 & 255) - ($s >> 8 & 255);
+				if ($db<0) $db*=-1;
+				$da = ($f & 255) - ($s & 255);
+				if ($da<0) $da*=-1;
+				$total = $total + ($dr + $dg + $db + $da );
 			}
 		}
-		return Math::sqrt($total / ($width * $height * 4.0)) / 255;
+		return $total / ($width * $height * 4.0) / 255;
 	}
 	static function differencePartial($target, $before, $after, $score, $lines) {
+
+		if (!isset($before->errorCache)) {
+			$before->errorCache = [];
+		}
+
+		/*
 		if(!($target !== null)) {
 			throw new HException("FAIL: target != null");
 		}
@@ -210,44 +210,48 @@ class geometrize_Core {
 		}
 		if(!($lines !== null)) {
 			throw new HException("FAIL: lines != null");
-		}
+		}*/
 		$width = $target->width;
 		$height = $target->height;
-		$rgbaCount = $width * $height * 4;
-		$total = Math::pow($score * 255, 2) * $rgbaCount;
-		{
-			$_g = 0;
-			while($_g < $lines->length) {
-				$line = $lines[$_g];
-				$_g = $_g + 1;
-				$y = $line->y;
-				{
-					$_g2 = $line->x1;
-					$_g1 = $line->x2 + 1;
-					while($_g2 < $_g1) {
-						$_g2 = $_g2 + 1;
-						$x = $_g2 - 1;
-						$t = $target->data[$target->width * $y + $x];
-						$b = $before->data[$before->width * $y + $x];
-						$a = $after->data[$after->width * $y + $x];
-						$dtbr = ($t >> 24 & 255) - ($b >> 24 & 255);
-						$dtbg = ($t >> 16 & 255) - ($b >> 16 & 255);
-						$dtbb = ($t >> 8 & 255) - ($b >> 8 & 255);
-						$dtba = ($t & 255) - ($b & 255);
-						$dtar = ($t >> 24 & 255) - ($a >> 24 & 255);
-						$dtag = ($t >> 16 & 255) - ($a >> 16 & 255);
-						$dtab = ($t >> 8 & 255) - ($a >> 8 & 255);
-						$dtaa = ($t & 255) - ($a & 255);
-						$total = $total - ($dtbr * $dtbr + $dtbg * $dtbg + $dtbb * $dtbb + $dtba * $dtba);
-						$total = $total + ($dtar * $dtar + $dtag * $dtag + $dtab * $dtab + $dtaa * $dtaa);
-						unset($x,$t,$dtbr,$dtbg,$dtbb,$dtba,$dtar,$dtag,$dtab,$dtaa,$b,$a);
-					}
-					unset($_g2,$_g1);
+		$rgbaCount = $width * $height * 4 * 255;
+		$total = $score * $rgbaCount;
+		$_g = 0;
+		while($_g < $lines->length) {
+			$line = &$lines[$_g];
+			$_g = $_g + 1;
+			$_g1 = $line->x2 + 1;
+			$o1 = $target->width * $line->y;
+			$o2 = $before->width * $line->y;
+			$o3 = $after->width * $line->y;
+			for($x=$line->x1;$x<$_g1;$x++) {
+				$t = $target->data[$o1 + $x];
+				$a = $after->data[$o3 + $x];
+				if (!isset($before->errorCache[$o2 + $x])) {
+					$b = $before->data[$o2 + $x];
+					$dtbr = ($t >> 24 & 255) - ($b >> 24 & 255);
+					if ($dtbr<0) $dtbr*=-1;
+					$dtbg = ($t >> 16 & 255) - ($b >> 16 & 255);
+					if ($dtbg<0) $dtbg*=-1;
+					$dtbb = ($t >> 8 & 255) - ($b >> 8 & 255);
+					if ($dtbb<0) $dtbb*=-1;
+					$dtba = ($t & 255) - ($b & 255);
+					if ($dtba<0) $dtba*=-1;
+					$before->errorCache[$o2 + $x] = $dtbr + $dtbg + $dtbb + $dtba;
 				}
-				unset($y,$line);
+
+				$dtar = ($t >> 24 & 255) - ($a >> 24 & 255);
+				if ($dtar<0) $dtar*=-1;
+				$dtag = ($t >> 16 & 255) - ($a >> 16 & 255);
+				if ($dtag<0) $dtag*=-1;
+				$dtab = ($t >> 8 & 255) - ($a >> 8 & 255);
+				if ($dtab<0) $dtab*=-1;
+				$dtaa = ($t & 255) - ($a & 255);
+				if ($dtaa<0) $dtaa*=-1;
+				$total = $total - $before->errorCache[$o2 + $x];
+				$total = $total + ($dtar + $dtag + $dtab + $dtaa );
 			}
 		}
-		return Math::sqrt($total / $rgbaCount) / 255;
+		return $total / $rgbaCount;
 	}
 	static function bestRandomState($shapes, $alpha, $n, $target, $current, $buffer, $lastScore) {
 		$bestEnergy = 0;
@@ -306,7 +310,7 @@ class geometrize_Core {
 		}
 		return $bestState;
 	}
-	static function energy($shape, $alpha, $target, $current, $buffer, $score) {
+	static function energy(&$shape, $alpha, $target, $current, $buffer, $score) {
 		if(!($shape !== null)) {
 			throw new HException("FAIL: shape != null");
 		}
@@ -320,8 +324,14 @@ class geometrize_Core {
 			throw new HException("FAIL: buffer != null");
 		}
 		$lines = $shape->rasterize();
-		$color = geometrize_Core::computeColor($target, $current, $lines, $alpha);
-		geometrize_rasterizer_Rasterizer::copyLines($buffer, $current, $lines);
+		if (!isset($shape->color)) {
+			$shape->color = geometrize_Core::computeColor($target, $current, $lines, $alpha);
+		}
+		$color = $shape->color;
+		// useful only if opacity!=1
+		if ($color && 255 !== 255) {
+			geometrize_rasterizer_Rasterizer::copyLines($buffer, $current, $lines);
+		}
 		geometrize_rasterizer_Rasterizer::drawLines($buffer, $color, $lines);
 		return geometrize_Core::differencePartial($target, $current, $buffer, $score, $lines);
 	}
