@@ -7,7 +7,7 @@
 <form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
+		<[(#DIV|sinon{ul})] class="editer-groupe">
 		[(#CONFIG{emballe_medias/fichiers/gerer_types}|=={on}|oui)
 			[(#SAISIE{case,gerer_modifs_types,
 				label=<:emballe_medias:label_gerer_modifs_types:>,
@@ -26,7 +26,7 @@
 					video,<:emballe_medias:type_video:>,
 					texte,<:emballe_medias:type_texte:>}})]
 		]
-		</ul>
+		</[(#DIV|sinon{ul})]>
 		<input type="hidden" name="_meta_casier" value="emballe_medias/types" />
 		<p class="boutons">
 			<input type="submit" class="submit" value="<:bouton_valider:>" />

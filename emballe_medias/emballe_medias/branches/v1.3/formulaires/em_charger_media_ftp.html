@@ -18,8 +18,8 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		[(#ENV{proposer_ftp,''}|oui)
 			<div class='joindre_mode#GET{domid}' id='joindre_ftp#GET{domid}'>
-				[<ul>
-					<li class='editer_cheminftp[ (#ENV**{erreurs}|table_valeur{cheminftp}|oui)erreur]'>
+				[<[(#DIV|sinon{ul})] class="editer-groupe">
+					<[(#DIV|sinon{li})] class='editer_cheminftp[ (#ENV**{erreurs}|table_valeur{cheminftp}|oui)erreur]'>
 						<label for='cheminftp#GET{domid}'>[(#VAL{info_selectionner_fichier}|_T{#ARRAY{upload,#ENV*{_dir_upload_ftp}}})]</label>[
 						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{cheminftp})</span>
 						]<select name='cheminftp' id='cheminftp#GET{domid}' size='1'>
@@ -31,8 +31,8 @@
 							<label for="em_charger_supprimer"><:emballe_medias:label_em_charger_supprimer:></label>
 						</div>
 						[(#ENV**{erreurs}|table_valeur{erreur_em_charger_forcer}|oui)<p class="boutons"><input class='submit' type="submit" name="em_charger_forcer" value="<:emballe_medias:bouton_forcer:>"/></p>]
-					</li>
-				</ul>][(#ENV{_dir_upload_ftp}|et{#ENV{_options_upload_ftp}|non}|oui)
+					</[(#DIV|sinon{li})]>
+				</[(#DIV|sinon{ul})]>][(#ENV{_dir_upload_ftp}|et{#ENV{_options_upload_ftp}|non}|oui)
 				<div class="infos">
 				[(#VAL{info_installer_ftp}|_T{#ARRAY{upload,#ENV*{_dir_upload_ftp}}})] #AIDER{ins_upload}
 				</div>][(#ENV*{_options_upload_ftp}|oui)

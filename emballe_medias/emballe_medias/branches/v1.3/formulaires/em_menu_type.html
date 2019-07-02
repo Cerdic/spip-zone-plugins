@@ -1,20 +1,20 @@
 <div class="formulaire_spip formulaire_em_menu_type" id="formulaire_em_menu_type">
 <form method="post" action="#ENV{url}"><div>
 	[(#ENV{url}|form_hidden)]
-	<ul>
-		<li class="fieldset">
+	<[(#DIV|sinon{ul})] class="editer-groupe">
+		<[(#DIV|sinon{li})] class="fieldset">
 			<fieldset>
-				<h3 class="legend">[(#ENV{em_type}|?{<:emballe_medias:label_changer_type:>,<:emballe_medias:label_choisir_type:>})]</h3>
-				<ul>
-					<li>
+				<legend>[(#ENV{em_type}|?{<:emballe_medias:label_changer_type:>,<:emballe_medias:label_choisir_type:>})]<legend>
+				<[(#DIV|sinon{ul})] class="editer-groupe">
+					<[(#DIV|sinon{li})] class="editer editer_type">
 						<select name="#ENV{nom}" id="#ENV{nom}">
 							<INCLURE{fond=prive/listes/em_changer_type_liste}{env}>
 						</select>
-					</li>
-				</ul>
+					</[(#DIV|sinon{li})]>
+				</[(#DIV|sinon{ul})]>
 			</fieldset>
-		</li>
-	</ul>
+		</[(#DIV|sinon{li})]>
+	</[(#DIV|sinon{ul})]>
 	<noscript>
 		<p class="boutons">
 			<input type="submit" class="submit" value="<:bouton_valider:>" />

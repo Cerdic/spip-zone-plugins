@@ -14,8 +14,8 @@
 	<form method='post' action='#SELF' enctype='multipart/form-data' [(#GET{message_confirmation}|oui) onsubmit="return confirm('<:diogene:message_confirm_poubelle:>')"]><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<BOUCLE_documents_en_cours(DOCUMENTS){id_document}{tous}>
-		<ul class="editer-groupe">
-			<li class="fieldset" id="formulaire_supprimer_document_#ID_DOCUMENT">
+		<[(#DIV|sinon{ul})] class="editer-groupe">
+			<[(#DIV|sinon{li})] class="fieldset" id="formulaire_supprimer_document_#ID_DOCUMENT">
 			[(#FICHIER|get_spip_doc|file_exists|oui)
 				[(#MIME_TYPE|match{video/}|ou{[(#EXTENSION|match{mp4})]}|oui)#SET{em_type,video}]
 				[(#MIME_TYPE|match{audio/}|oui)#SET{em_type,audio}]
@@ -24,16 +24,16 @@
 				#SET{nb,#ENV{compteur}}
 				<fieldset>
 					<legend>[(#ENV{compteur}|oui)<:emballe_medias:previsu_document_nb{nb=#GET{nb}}:>][(#ENV{compteur}|non)<:emballe_medias:previsu_document:>]</legend>
-					<ul class="editer-groupe">
-						<li class="previsu_document #GET{type}">
+					<[(#DIV|sinon{ul})] class="editer-groupe">
+						<[(#DIV|sinon{li})] class="previsu_document #GET{type}">
 							[(#CHEMIN{prive/inc-previsu_doc_#GET{em_type}_#EXTENSION.html}|oui)
 							<INCLURE{fond=prive/inc-previsu_doc_#GET{em_type}_#EXTENSION,em_type=#GET{em_type},id_document,id_objet,objet,compteur,total,ajax}>
 							]
 							[(#CHEMIN{prive/inc-previsu_doc_#GET{em_type}_#EXTENSION.html}|non)
 							<INCLURE{fond=prive/inc-previsu_doc_#GET{em_type},em_type=#GET{em_type},id_document,id_objet,objet,compteur,total,ajax}>
 							]
-						</li>
-					</ul>
+						</[(#DIV|sinon{li})]>
+					</[(#DIV|sinon{ul})]>
 				</fieldset>
 			]
 			[(#FICHIER|get_spip_doc|file_exists|non)#SET{fichier,#FICHIER|basename}
@@ -91,8 +91,8 @@
 					</div>
 				]
 			]
-			</li>
-		</ul>
+			</[(#DIV|sinon{li})]>
+		</[(#DIV|sinon{ul})]>
 		</BOUCLE_documents_en_cours>
 		[(#ENV{editable}|oui)
 		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_bouton})</p>]

@@ -7,7 +7,7 @@
 <form method="post" action="#ENV{action}" autocomplete="off">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
+		<[(#DIV|sinon{ul})] class="editer-groupe">
 			[(#SAISIE{case,gerer_types,
 				label=<:emballe_medias:label_gerer_types:>,
 				label_case=<:emballe_medias:label_case_gerer_types:>,
@@ -19,7 +19,7 @@
 				label=<:emballe_medias:label_chercher_article:>,
 				explication=<:emballe_medias:explication_chercher_article:>})]
 
-			<li class="editer editer_fichiers">
+			<[(#DIV|sinon{li})] class="editer editer_fichiers">
 				#SET{extensions,#ARRAY}
 				#SET{extensions_images,#LISTE{xcf}}
 				<label><:emballe_medias:extensions_autorisees:></label>
@@ -85,7 +85,7 @@
 				</select>
 				<p><a href="#" class="select_all"><:emballe_medias:select_all:></a> <a href="#" class="unselect_all"><:emballe_medias:unselect_all:></a></p>
 				</B_texte>
-			</li>
+			</[(#DIV|sinon{li})]>
 
 			[(#SAISIE{input,file_size_limit,
 				size=4,
@@ -136,7 +136,7 @@
 				datas=#ARRAY{
 					prepa,<:emballe_medias:statut_prepa:>,
 					poubelle,<:emballe_medias:statut_poubelle:>}})] 
-		</ul>
+		</[(#DIV|sinon{ul})]>
 		<input type="hidden" name="_meta_casier" value="emballe_medias/fichiers" />
 		<p class="boutons">
 			<input type="submit" class="submit" value="<:bouton_valider:>" />

@@ -7,7 +7,7 @@
 <form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
+		<[(#DIV|sinon{ul})] class="editer-groupe">
 			[(#SET{explication_readonly,<span class="champ_readonly"><:emballe_medias:explication_config_readonly:></span>})]
 			#SET{previsu_largeur_readonly,#VAL{_EM_PREVISU_LARGEUR}|defined|?{'oui',''}}
 			#SET{previsu_hauteur_readonly,#VAL{_EM_PREVISU_HAUTEUR}|defined|?{'oui',''}}
@@ -24,7 +24,7 @@
 				class=[(#GET{previsu_hauteur_readonly}|?{readonly,''})],
 				valeur_forcee=[(#GET{previsu_hauteur_readonly}|?{#EVAL{_EM_PREVISU_HAUTEUR},''})],
 				defaut=425})]
-		</ul>
+		</[(#DIV|sinon{ul})]>
 		<input type="hidden" name="_meta_casier" value="emballe_medias/styles" />
 		<p class="boutons">
 			<input type="submit" class="submit" value="<:bouton_valider:>" />

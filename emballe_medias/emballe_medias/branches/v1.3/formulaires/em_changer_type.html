@@ -6,20 +6,20 @@
 	[(#ENV{editable}|oui)
 	<form method='post' action='#ENV{action}'>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
-			<li class="fieldset">
+		<[(#DIV|sinon{ul})] class="editer-groupe">
+			<[(#DIV|sinon{li})] class="fieldset">
 				<fieldset>
 					<legend><:emballe_medias:changer_type_article:></legend>
-					<ul>
-						<li class="editer_type">
+					<[(#DIV|sinon{ul})] class="editer-groupe">
+						<[(#DIV|sinon{li})] class="editer_type">
 							<select class="text" name="type">
 								<INCLURE{fond=prive/listes/em_changer_type_liste}{env}>
 							</select>
-						</li>
-					</ul>
+						</[(#DIV|sinon{li})]>
+					</[(#DIV|sinon{ul})]>
 				</fieldset>
-			</li>
-		</ul>
+			</[(#DIV|sinon{li})]>
+		</[(#DIV|sinon{ul})]>
 		<p class="boutons">
 			<input type="submit" class="submit" name="valider" value="<:bouton_enregistrer:>" />
 		</p>
