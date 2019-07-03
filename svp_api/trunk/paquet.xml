@@ -18,6 +18,6 @@
 	<pipeline nom="post_collection_svp" action="" />
 	<pipeline nom="post_ressource_svp" action="" />
 
-	<necessite nom="svp" compatibilite="[0.78.11;[" />
+	<necessite nom="svp" compatibilite="[2.0.1;[" />
 	<necessite nom="http" compatibilite="[1.2.0;]" />
 </paquet>

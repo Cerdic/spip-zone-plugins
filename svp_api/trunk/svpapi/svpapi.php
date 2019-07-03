@@ -105,11 +105,12 @@ function plugins_ressourcer($prefixe) {
 	$ressource = array();
 
 	// On recherche d'abord le plugin par son préfixe dans la table spip_plugins.
-	include_spip('inc/svpapi_plugin');
-	// -- Acquisition du plugin (on est sur qu'il est en base).
-	$prefixe = strtoupper($prefixe);
+	// -- Acquisition du plugin (on est sur qu'il est en base) et suppression de l'id qui est inutile.
+	include_spip('inc/svp_plugin');
 	$plugin = plugin_lire($prefixe);
+	unset($plugin['id_plugin']);
 	// -- Normalisation des champs.
+	include_spip('inc/svpapi_plugin');
 	$ressource['plugin'] = plugin_normaliser_champs('plugin', $plugin);
 
 	// On recherche maintenant les paquets du plugin.
@@ -189,7 +190,7 @@ function plugins_verifier_ressource_prefixe($prefixe) {
 	} else {
 		// On vérifie ensuite si la ressource est bien un plugin fourni par un dépôt
 		// et pas un plugin installé sur le serveur uniquement.
-		include_spip('inc/svpapi_plugin');
+		include_spip('inc/svp_plugin');
 		if (!plugin_lire($prefixe)) {
 			$est_valide = false;
 		}
