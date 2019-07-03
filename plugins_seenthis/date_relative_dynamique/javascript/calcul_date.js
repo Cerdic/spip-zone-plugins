@@ -68,7 +68,7 @@ $(function() {
 
 	function afficher_dates() {
 		trouveElementDate();
-		var date_now = Math.floor((new Date()).getTime() / 1000) + Math.floor($.cookie('dateoffset'));
+		var date_now = Math.floor((new Date()).getTime() / 1000) + Math.floor((typeof Cookies === "function") ? Cookies.get('dateoffset') : $.cookie('dateoffset'));
 
 		// on teste si la langue a changé
 		var changeDateTitle = false;
@@ -141,7 +141,7 @@ $(function() {
 		}
 	});
 
-	if ($.cookie('dateoffset') == null) {
+	if (((typeof Cookies === "function") ? Cookies.get('dateoffset') : $.cookie('dateoffset')) == null) {
 		var date_now = Math.floor((new Date()).getTime() / 1000);
 		$.ajax({
 			type: "POST",
@@ -151,10 +151,9 @@ $(function() {
 			},
 			complete: function(data) {
 				var date_sql = Math.floor(data.responseText);
-				if (date_sql > 1200000000) // sanity check sur la reponse
-					$.cookie('dateoffset', date_sql - date_now, {
-					path: "/"
-				});
+				if (date_sql > 1200000000) { // sanity check sur la reponse
+					(typeof Cookies === "function") ? Cookies.set('dateoffset', date_sql - date_now, { path: "/" }) : $.cookie('dateoffset', date_sql - date_now, { path: "/" });
+				}
 			}
 		});
 	}
