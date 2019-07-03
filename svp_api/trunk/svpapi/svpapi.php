@@ -152,6 +152,8 @@ function plugins_ressourcer($prefixe) {
  *
  * @param string $valeur
  *        La valeur du critère compatibilite SPIP
+ * @param string $extra
+ *        Message complémentaire à renvoyer dans la réponse en cas d'erreur.
  *
  * @return bool
  *        `true` si la valeur est valide, `false` sinon.
