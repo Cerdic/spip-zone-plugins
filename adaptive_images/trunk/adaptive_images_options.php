@@ -217,12 +217,12 @@ function adaptive_images_preview_potrace($image, $options) {
 
 function adaptive_images_preview_geometrize($image, $options) {
 	$geometrize = charger_fonction("image_geometrize", "preview");
-	//spip_timer('potrace');
+	//spip_timer('geometrize');
 	if ($thumbnail = $geometrize($image, $options)) {
-		//var_dump($thumbnail,filesize($thumbnail),spip_timer('potrace'));
-		return array($thumbnail, 'potrace');
+		//var_dump($thumbnail,filesize($thumbnail),spip_timer('geometrize'));
+		return array($thumbnail, 'geometrize');
 	}
-	//spip_timer('potrace');
+	//spip_timer('geometrize');
 	return false;
 }
 
@@ -247,11 +247,12 @@ function adaptive_images($texte, $max_width_1x=null){
  * @param string $texte
  * @param null|int $max_width_1x
  * @param string $class
+ * @param string $bgcolor
  * @return mixed
  */
-function adaptive_images_background($texte, $max_width_1x=null, $class = ''){
+function adaptive_images_background($texte, $max_width_1x=null, $class = '', $bgcolor=''){
 	$res = adaptive_images_base($texte, !empty($max_width_1x) ? $max_width_1x : null, true);
-	if ($class) {
+	if ($class or $bgcolor) {
 		// injecter la class sur les balises span.adapt-img-background
 		$spans = extraire_balises($res, 'span');
 		foreach ($spans as $span) {
@@ -260,9 +261,22 @@ function adaptive_images_background($texte, $max_width_1x=null, $class = ''){
 				$s = $span[0] . '>';
 				$c = extraire_attribut($s, "class");
 				if (strpos($c, 'adapt-img-background') !== false) {
-					$c = rtrim($c) . ' '. $class;
-					$s2 = inserer_attribut($s, 'class', $c);
-					$res = str_replace($s, $s2, $res);
+					$s2 = $s;
+					if ($class) {
+						$c = rtrim($c) . ' '. $class;
+						$s2 = inserer_attribut($s2, 'class', $c);
+					}
+					if ($bgcolor) {
+						$style = trim(extraire_attribut($s2, "style"));
+						if ($style) {
+							$style = rtrim($style, ';') . ';';
+						}
+						$style .= "background-color:$bgcolor";
+						$s2 = inserer_attribut($s2, 'style', $style);
+					}
+					if ($s2 !== $s) {
+						$res = str_replace($s, $s2, $res);
+					}
 				}
 			}
 		}
