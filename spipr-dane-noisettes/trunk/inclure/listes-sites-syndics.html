@@ -1,0 +1,12 @@
+<B_syndic>
+#ANCRE_PAGINATION
+    [(#ENV{masquer_h2}|non)<h2 class="h2">[(#ENV{masquer_titre}|non)[(#ENV{titre,<:spipr_dane:nouveau_web:>})] ][(#ENV{masquer_picto}|non)<span class="picto"><i class="fa fa-#ENV{picto,globe} "></i></span>]</h2>]
+<ul class="liste-items">
+	<BOUCLE_syndic(SYNDIC_ARTICLES){age<180}{id_rubrique ?}{par date}{inverse}{pagination #ENV{nb,5}}>
+	<li class="item dir_#LANG">[<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr><span class="sep"> &ndash; </span>]<a href="#URL_ARTICLE"[ title="(#NOM_SITE|attribut_html|couper{80})"] class="spip_out">#TITRE</a>
+        [(#ENV{afficher_site}|oui)[<div class="right"><strong>(#NOM_SITE|attribut_html|couper{80})</strong></div>]]
+    </li>
+	</BOUCLE_syndic>
+</ul>
+[<div class="pagination">(#PAGINATION)</div>]
+</B_syndic>

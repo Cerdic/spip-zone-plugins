@@ -1,0 +1,41 @@
+<BOUCLE_noisettes(NOISETTES){type=article}{bloc=aside}{0,1}>
+</BOUCLE_noisettes>
+<BOUCLE_aside(ARTICLES){id_article}>
+<div class="postmeta"><div class="liste">
+	<h2 class="h2"><:spipr_dane:publie_le:></h2>
+	<p class="center">
+		<time datetime="[(#DATE|date_iso)]" ><i class="icon-calendar"></i> [(#DATE|nom_jour) ][(#DATE|affdate)]</time>
+		[<small>(<:spipr_dane:modifie_le:> (#DATE_MODIF|affdate))</small>]
+	</p>
+	[<h2 class="h2"><:spipr_dane:auteurs:></h2>
+	<p class="authors center">(#LESAUTEURS)</p>]
+	<B_tags>
+	<h2 class="h2"><:spipr_dane:tags:></h2>
+	<span class="tags">
+		<ul class="inline center">
+			<BOUCLE_tags(MOTS){id_article}>
+			<li><a class="label" href="#URL_MOT"><i class="icon-tag icon-white"></i> #TITRE</a></li>
+			</BOUCLE_tags>
+		</ul>
+	</span>
+	</B_tags>
+</div></div>
+</BOUCLE_aside>
+#SET{layer, #CONFIG{sdn/#ENV{type-page,defaut}/layer,content-aside_-extra-a}}
+#SET{layers_exclus, #ARRAY{0,content_aside_extra, 1,content-aside_extra-a, 2,content-aside_extra-b, 3,aside-content_extra-a, 4,aside-content_extra-b}}
+<BOUCLE_extra2_article(ARTICLES){id_article}>
+	[(#REM) Articles dans la meme rubrique ]
+	<B_articles_rubrique>
+	#ANCRE_PAGINATION
+	<div class="liste articles">
+		<h2 class="h2"><a href="#URL_RUBRIQUE"><:spipr_dane:meme_rubrique:></a></h2>
+		<ul class="liste-items">
+			<BOUCLE_articles_rubrique(ARTICLES){id_rubrique}{exclus}{par date}{inverse} {pagination 10}{si #GET{layer}|in_array{#GET{layers_exclus}}}>
+			<li class="item"><a href="#URL_ARTICLE"[ class="(#EXPOSE)"][(#VIRTUEL|oui) class="spip_out"]>#TITRE</a></li>
+			</BOUCLE_articles_rubrique>
+		</ul>
+	[<div class="pagination">(#PAGINATION)</div>]
+	</div>
+	</B_articles_rubrique>
+</BOUCLE_extra2_article>
+<//B_noisettes>

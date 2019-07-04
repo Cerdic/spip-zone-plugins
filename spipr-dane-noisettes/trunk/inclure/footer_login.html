@@ -1,0 +1,14 @@
+	<ul class="liste-items right">
+	<?php if (isset($GLOBALS['visiteur_session']['id_auteur']) AND $GLOBALS['visiteur_session']['id_auteur']) {?>
+		<li class="item"><a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a></li><?php if (include_spip('inc/autoriser') AND autoriser('ecrire')){ ?>
+		<li class="item"><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>
+	<?php }
+	}
+	else { ?>
+		<li class="item">
+			<a href="[(#URL_PAGE{login}|parametre_url{url,#SELF|parametre_url{url,''}})]" rel="nofollow" class='login_modal'><:lien_connecter:></a>
+			[<a href="[(#URL_PAGE{login}|parametre_url{url,#SELF|parametre_url{url,''}}|parametre_url{cicas,oui})]" rel="nofollow">(#CHEMIN{cicas.gif}|balise_img{<:cicas:>})</a>]
+		</li>
+	<?php } ?>
+	</ul>
+</

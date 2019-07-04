@@ -1,0 +1,13 @@
+[(#REM) Breves du secteur ]
+<B_breves>
+<div class="liste long breves">
+#ANCRE_PAGINATION
+[(#ENV{masquer_titre}|non)<h2 class="h2">[(#ENV{titre,<:breves:breves:>})][(#ENV{masquer_picto}|non)<span class="picto"><i class="fa fa-#ENV{picto,check} "></i></span>]</h2>]
+<ul class="liste-items">
+    <BOUCLE_breves(BREVES){id_secteur?}{!par date}{pagination #ENV{nb,5}}>
+    <li class="item dir_#LANG">#INCLURE{fond=inclure/resume/breve,id_breve,env}</li>
+    </BOUCLE_breves>
+</ul>
+[<div class="pagination">(#PAGINATION)</div>]
+</div>
+</B_breves>

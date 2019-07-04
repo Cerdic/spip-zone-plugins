@@ -1,0 +1,8 @@
+nom: '<:noisettes:article_ecrire_auteur:>'
+description: '<:noisettes:description_article_ecrire_auteur:>'
+icon: 'ecrire-auteur-24.png'
+ajax: 'non'
+contexte:
+  - 'id_article'
+  - 'id_rubrique'
+  - 'id_auteur'

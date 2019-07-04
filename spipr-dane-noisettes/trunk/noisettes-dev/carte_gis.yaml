@@ -1,0 +1,193 @@
+nom: '<:noisettes:nom_carte_gis:>'
+description: '<:noisettes:description_carte_gis:>'
+icon: 'gis-24.png'
+necessite:
+  - 'gis'
+parametres:
+  -
+    saisie: 'checkbox'
+    options:
+      nom: 'masquer_titre'
+      label: '<:noisettes:label_masquer_titre:>'
+      datas:
+        on: 'Oui'
+      defaut: ''
+      conteneur_class: 'long_label'
+  -
+    saisie: 'input'
+    options:
+      nom: 'titre'
+      label: '<:noisettes:label_titre:>'
+      defaut: '<:noisettes:carte_gis:>'
+      afficher_si: '@masquer_titre@ !IN "on"'
+      conteneur_class: 'long_label'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'fieldset_picto'
+      label: ''
+      afficher_si: '@masquer_titre@  !IN "on"'
+    saisies:
+      -
+        saisie: 'checkbox'
+        options:
+          nom: 'masquer_picto'
+          label: '<:noisettes:label_masquer_picto:>'
+          datas:
+            on: 'Oui'
+          defaut: ''
+          conteneur_class: 'long_label'
+      -
+        saisie: 'input'
+        options:
+          nom: 'picto'
+          label: '<:noisettes:label_picto:>'
+          explication: '<:noisettes:texte_explication_picto:>'
+          defaut: 'map-'
+          conteneur_class: 'long_label'
+          afficher_si: '@masquer_picto@  !IN "on"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'lat'
+      label: '<:noisettes:label_gis_lat:>'
+      defaut: ''
+      conteneur_class: 'long_label'
+    verifier:
+      type: 'decimal'
+      options:
+        min: 1
+  -
+    saisie: 'input'
+    options:
+      nom: 'lon'
+      label: '<:noisettes:label_gis_lon:>'
+      defaut: ''
+      conteneur_class: 'long_label'
+    verifier:
+      type: 'decimal'
+      options:
+        min: 1
+  -
+    saisie: 'input'
+    options:
+      nom: 'zoom'
+      label: '<:noisettes:label_gis_zoom:>'
+      defaut: 8
+      conteneur_class: 'long_label'
+    verifier:
+      type: 'entier'
+      options:
+        min: 1
+  -
+    saisie: 'input'
+    options:
+      nom: 'maxZoom'
+      label: '<:noisettes:label_gis_maxzoom:>'
+      defaut: 13
+      conteneur_class: 'long_label'
+    verifier:
+      type: 'entier'
+      options:
+        min: 1
+  -
+    saisie: 'input'
+    options:
+      nom: 'width'
+      label: '<:noisettes:label_gis_width:>'
+      defaut: '100%'
+      conteneur_class: 'long_label'
+  -
+    saisie: 'input'
+    options:
+      nom: 'height'
+      label: '<:noisettes:label_gis_height:>'
+      defaut: '400px'
+      conteneur_class: 'long_label'
+  -
+    saisie: 'checkbox'
+    options:
+      nom: 'scale'
+      label: '<:noisettes:label_gis_scale:>'
+      datas:
+        oui: 'Oui'
+      defaut: 'oui'
+      conteneur_class: 'long_label'
+  -
+    saisie: 'checkbox'
+    options:
+      nom: 'zoom_molette'
+      label: '<:noisettes:label_gis_zoom_molette:>'
+      datas:
+        non: 'Oui'
+      defaut: ''
+      conteneur_class: 'long_label'
+  -
+    saisie: 'checkbox'
+    options:
+      nom: 'fullscreen'
+      label: '<:noisettes:label_gis_zoom_fullscreen:>'
+      datas:
+        oui: 'Oui'
+      defaut: ''
+      conteneur_class: 'long_label'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'objet'
+      label: '<:noisettes:label_gis_objet:>'
+      defaut: 'nombre'
+      cacher_option_intro: 'oui'
+      datas:
+        article: 'Article'
+        auteur: 'Auteur'
+        rubrique: 'Rubrique'
+      conteneur_class: 'long_label'
+      obligatoire: 'oui'
+  -
+    saisie: 'input'
+    options:
+      nom: 'id_objet'
+      label: '<:noisettes:label_gis_id_objet:>'
+      defaut: ''
+      conteneur_class: 'long_label'
+      obligatoire: 'oui'
+    verifier:
+      type: 'entier'
+      options:
+        min: 1
+  -
+    saisie: 'input'
+    options:
+      nom: 'objets'
+      label: '<:noisettes:label_gis_objets:>'
+      defaut: ''
+      conteneur_class: 'long_label'
+      
+  -
+    saisie: 'checkbox'
+    options:
+      nom: 'cluster'
+      label: '<:noisettes:label_gis_cluster:>'
+      datas:
+        on: 'Oui'
+      defaut: ''
+      conteneur_class: 'long_label'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'si_cluster'
+      label: 'Regroupement des points'
+      afficher_si: '@cluster@  IN "on"'
+    saisies:
+      -
+        saisie: 'input'
+        options:
+          nom: 'clusterMaxZoom'
+          label: 'Regroupe les points jusque à ce zoom, mais pas au delà'
+          defaut: 11
+          conteneur_class: 'long_label'
+        verifier:
+          type: 'entier'
+          options:
+            min: 1

@@ -1,0 +1,15 @@
+[(#REM) Affiche un plan de la rubrique ]
+<B_sous_rubriques>
+#SET{avec_rubriques,1}
+#SET{masquer_h2, #ENV{masquer_titre}|et{#ENV{masquer_picto}}|oui|?{on,''}}
+<div class="liste rubriques offset clear">
+    [(#GET{masquer_h2}|non)<h2 class="h2">[(#ENV{masquer_titre}|non)[(#ENV{titre,<:sous_rubriques:>})]][(#ENV{masquer_picto}|non)<span class="picto"><i class="fa fa-#ENV{picto,sitemap} "></i></span>]</h2>]
+    <ul class="liste-items">
+        <BOUCLE_sous_rubriques(RUBRIQUES) {id_parent=#ID_RUBRIQUE} {par num titre, titre}>
+        <li class="item" >
+            <a href="#URL_RUBRIQUE">[(#TITRE)]</a>
+        </li>
+        </BOUCLE_sous_rubriques>
+    </ul>
+</div>
+</B_sous_rubriques>

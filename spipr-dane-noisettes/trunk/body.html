@@ -1,0 +1,81 @@
+[(#REM)
+ Plugin SPIPr-Dane-Config
+  Squelette body.html
+  (c) 2019 Dominique Lepaisant, Johan Pustoch
+  Distribue sous licence GPL3
+
+]#SET{compo, #ENV{type-page}}
+#SET{pages_exclues, #ARRAY{0,recherche}}[
+(#ENV{composition}|oui) #SET{compo, #ENV{type-page}|concat{-#ENV{composition}}}
+][(#CONFIG{sdn/#GET{compo}/layer}|non)#SET{compo,defaut}
+]#SET{layer, #CONFIG{sdn/#GET{compo,defaut}/layer, content-aside_-extra-a}}
+[(#ENV{type-page}|in_array{#GET{pages_exclues}}|oui)#SET{layer, content-aside_-extra-a}]
+[(#REM) modele 1
+][(#GET{layer}|=={content_aside_extra}|oui)#SET{span_content, span12}#SET{span_aside, span12}#SET{span_extra, span12}
+][(#REM) modele 2
+][(#GET{layer}|=={content-aside_extra-a}|oui)#SET{span_content, span8}#SET{span_aside, span4}#SET{span_extra, span12}
+][(#REM) modele 3
+][(#GET{layer}|=={content-aside_extra-b}|oui)#SET{span_content, span9}#SET{span_aside, span3}#SET{span_extra, span12}
+][(#REM) modele 4
+][(#GET{layer}|=={aside-content_extra-a}|oui)#SET{span_content, span8 right}#SET{span_aside, span4}#SET{span_extra, span12}
+][(#REM) modele 5
+][(#GET{layer}|=={aside-content_extra-b}|oui)#SET{span_content, span9 right}#SET{span_aside, span3}#SET{span_extra, span12}
+][(#REM) modele 6
+][(#GET{layer}|=={content-aside_-extra-a}|oui)#SET{span_content, span8}#SET{span_aside, span4}#SET{span_extra, span4 right}
+][(#REM) modele 7
+][(#GET{layer}|=={content-aside_-extra-b}|oui)#SET{span_content, span9}#SET{span_aside, span3}#SET{span_extra, span3 right}
+][(#REM) modele 8
+][(#GET{layer}|=={aside_-extra-content-a}|oui)#SET{span_content, span8 right}#SET{span_aside, span4}#SET{span_extra, span4}
+][(#REM) modele 9
+][(#GET{layer}|=={aside_-extra-content-b}|oui)#SET{span_content, span9 right}#SET{span_aside, span3}#SET{span_extra, span3}
+][(#REM) modele 10
+][(#GET{layer}|=={aside-content-extra}|oui)#SET{span_content, span6 right}#SET{span_aside, span3}#SET{span_extra, span3}
+][(#REM) modele 11
+][(#GET{layer}|=={content-aside-extra}|oui)#SET{span_content, span6}#SET{span_aside, span3}#SET{span_extra, span3}
+][(#REM) modele 12
+][(#GET{layer}|=={aside-extra-content}|oui)#SET{span_content, span6 right}#SET{span_aside, span3}#SET{span_extra, span3}]
+<body class="[(#GET{layer, content-aside_-extra-a})] page[ secteur-(#ID_SECTEUR)][ rubrique-(#ID_RUBRIQUE)] [(#ENV{type-page})]">
+[(#REM)#GET{layer}]
+	<div class="page[ page-(#GET{layer, content-aside_-extra-a})][ secteur-(#ID_SECTEUR)][ rubrique-(#ID_RUBRIQUE)]">
+		<div class="header" id="header">
+			<div class="container">
+				<INCLURE{fond=header/#ENV{type-page},env} />
+			</div>
+		</div>
+		[<div class="navbar navbar-inverse[ (#CONFIG{sdc/navbar/navbar_responsive}|oui)navbar-responsive]" id="nav">
+			(#INCLURE{fond=inclure/nav,env}|navbar_responsive)
+		</div>]
+		<div class="container container-main">
+			<div class="row">
+[(#GET{layer}|=={aside-content-extra}|oui)
+				<div class="span9 content-aside"><div class="row">
+]				<div class="content[ (#GET{span_content})]" id="content">
+					<INCLURE{fond=breadcrumb/#ENV{type-page},type-page=#ENV{type-page},env} />
+					<div class="row-fluid">
+					<INCLURE{fond=content/#ENV{type-page},env} />
+					</div>
+				</div>
+				<div class="aside secondary col[ (#GET{span_aside}) ]" id="aside">
+					<INCLURE{fond=aside/#ENV{type-page},env} />
+				</div>
+[(#GET{layer}|=={aside-content-extra}|oui)
+                    </div></div>
+][(#GET{layer}|=={aside-content_extra-a}|ou{#GET{layer}|=={aside-content_extra-b}}|ou{#GET{layer}|=={content-aside_extra-a}}|ou{#GET{layer}|=={content-aside_extra-b}}|oui)
+			</div>
+			<div class="row">
+]				<div class="extra secondary col[ (#GET{span_extra}) ]" id="extra">
+					<INCLURE{fond=extra/#ENV{type-page},env} />
+				</div>
+			</div>
+		</div>
+        <div class="container-footer">
+            [(#PLUGIN{menus}|oui)[<div class="container navbar-footer" id="nav-footer">
+                (#INCLURE{fond=inclure/menu, env, identifiant=pied})
+            </div>]
+ 			]<div class="footer" id="footer">
+                <!--noisettes-->
+				<INCLURE{fond=footer/#ENV{type-page},env} />
+			</div>
+		</div>
+	</div>
+</body>

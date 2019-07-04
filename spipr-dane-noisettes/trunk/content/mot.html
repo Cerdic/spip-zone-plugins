@@ -1,0 +1,86 @@
+[(#REM) Calcul du nombre de colonnes]
+<BOUCLE_test_articles(ARTICLES) {id_mot} {0,1}> #SET{mot_article, 1} </BOUCLE_test_articles>
+<BOUCLE_test_rubriques(RUBRIQUES) {id_mot} {0,1}> #SET{mot_rubriques, 1} </BOUCLE_test_rubriques>
+<BOUCLE_test_breves(BREVES) {id_mot} {0,1}> #SET{mot_breves, 1} </BOUCLE_test_breves>
+<BOUCLE_test_sites(SITES) {id_mot} {0,1}> #SET{mot_sites, 1} </BOUCLE_test_sites>
+#SET{span, #EVAL{#GET{mot_article}|plus{#GET{mot_rubriques}}|plus{#GET{mot_breves}}|plus{#GET{mot_sites}}}}
+[(#GET{span}|=={1}|oui)#SET{span,12}]
+[(#GET{span}|=={2}|oui)#SET{span,6}]
+[(#GET{span}|=={3}|oui)#SET{span,4}]
+[(#GET{span}|=={4}|oui)#SET{span,3}]
+
+<BOUCLE_content(MOTS) {id_mot} {doublons}>
+<section>
+
+  <header class="cartouche">
+      <h1 class="#EDIT{titre}">[(#LOGO_MOT|image_reduire)]#TITRE</h1>
+  </header>
+
+	<div class="main">
+		[<div class="#EDIT{texte} chapo">(#TEXTE|adaptive_images)</div>]
+	</div>
+
+	<aside>
+		[(#REM) Articles lies au mot-cle ]
+		<B_articles>
+		<div class="liste articles span#GET{span}">
+			#ANCRE_PAGINATION
+			<h2 class="h2"><:articles:></h2>
+			<ul class="liste-items">
+				<BOUCLE_articles(ARTICLES) {id_mot} {par popularite}{inverse} {pagination 50}>
+				<li class="item">
+				<a href="#URL_ARTICLE">#TITRE</a>
+				<div class="small">[<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr>]</div></li>
+				</BOUCLE_articles>
+			</ul>
+			[<div class="pagination">(#PAGINATION)</div>]
+		</div>
+		</B_articles>
+
+		[(#REM) Breves liees au mot-cle ]
+		<B_breves>
+		<div class="liste breves span#GET{span}">
+			<h2 class="h2"><:breves:breves:></h2>
+			<ul class="liste-items">
+				<BOUCLE_breves(BREVES) {id_mot} {par titre} {pagination 50}>
+				<li class="item">
+					<a href="#URL_BREVE">#TITRE</a>
+					<div class="small">[<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr>]</div></li>
+				</li>
+				</BOUCLE_breves>
+			</ul>
+			[<div class="pagination">(#PAGINATION)</div>]
+		</div>
+		</B_breves>
+
+		[(#REM) Rubriques liees au mot-cle ]
+		<B_rubriques>
+		<div class="liste rubriques span#GET{span}">
+			<h2 class="h2"><:rubriques:></h2>
+			<ul class="liste-items inline">
+				<BOUCLE_rubriques(RUBRIQUES) {id_mot} {par titre} {pagination 50}>
+				<li class="item"><a href="#URL_RUBRIQUE">#TITRE</a></li>
+				</BOUCLE_rubriques>
+			</ul>
+			[<div class="pagination">(#PAGINATION)</div>]
+		</div>
+		</B_rubriques>
+
+		[(#REM) Sites web lies au mot-cle ]
+		<B_sites>
+		<div class="liste sites span#GET{span}">
+			<h2 class="h2"><:sites_web:></h2>
+			<ul class="liste-items">
+				<BOUCLE_sites(SITES) {id_mot} {par nom_site} {pagination 50}>
+				<li class="item"><a href="#URL_SITE" class="spip_out">#NOM_SITE</a></li>
+				</BOUCLE_sites>
+			</ul>
+			[<div class="pagination">(#PAGINATION)</div>]
+		</div>
+		</B_sites>
+	</aside>
+	[<footer>
+		<div class="notes"><hr />(#NOTES)</div>
+	</footer>]
+</section>
+</BOUCLE_content>

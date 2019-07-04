@@ -1,0 +1,18 @@
+[(#REM) Sites de la rubrique 
+** variables **
+- url: url vers laquelle pointe le lien
+- masquer_logo
+- largeur_logo: largeur du logo
+- hauteur_logo: hauteur du logo
+- nb: pas de la pagination
+- liste_span: Affichage en colonne
+- span: nombre de colonnes
+]
+#SET{rubriques_exclues,#ENV{rubriques_exclues}|explode{','}}
+#SET{span, #ENV{liste_span}|?{#ENV{span}, ''}}
+#SET{masquer_h2, #ENV{masquer_titre}|et{#ENV{masquer_picto}}|oui|?{on,''}}
+<INCLURE{fond=inclure/conteneur_ouvrir, env}/>
+<div class="liste sites clear">
+    <INCLURE{fond=liste/sites-resume, span=#GET{span}, masquer_h2=#GET{masquer_h2}, rubriques_exclues=#GET{rubriques_exclues}, env,nb_syndic=5,ajax}>
+</div>
+<INCLURE{fond=inclure/conteneur_fermer, env}/>

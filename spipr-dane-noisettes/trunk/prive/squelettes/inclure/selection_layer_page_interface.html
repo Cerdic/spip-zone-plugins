@@ -1,0 +1,8 @@
+<div class="pave_selection_layer" [ (#ENV{exec}|=={noizetier_page}|oui)style="padding-top: 35px;"]>
+    [(#SET{titre, #ENV{page}|=={defaut}|?{<:sdn:modele_defaut:>, Modèle de la page #ENV{page}}})]
+	[(#BOITE_OUVRIR{#GET{titre},'simple fiche_objet',''})]
+		<div>[(#ENV|unserialize|foreach)]
+		      <INCLURE{fond=prive/squelettes/inclure/selection_layer_page, page=#ENV{page}, env, ajax}>
+		</div>
+	#BOITE_FERMER
+</div>

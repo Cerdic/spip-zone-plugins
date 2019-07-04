@@ -1,0 +1,50 @@
+nom: '<:noisettes:liste_videos:>'
+description: '<:noisettes:description_liste_videos:>'
+icon: 'video-24.png'
+parametres:
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'masquer_titre'
+      label: '<:noisettes:label_masquer_titre:>'
+      defaut: ''
+      conteneur_class: 'long_label'
+  -
+    saisie: 'input'
+    options:
+      nom: 'titre'
+      label: '<:noisettes:label_titre:>'
+      defaut: 'Vidéo'
+      afficher_si: '@masquer_titre@ != "on"'
+      conteneur_class: 'long_label'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'masquer_picto'
+      label: '<:noisettes:label_masquer_picto:>'
+      defaut: ''
+      conteneur_class: 'long_label'
+  -
+    saisie: 'input'
+    options:
+      nom: 'picto'
+      label: '<:noisettes:label_picto:>'
+      explication: '<:noisettes:explication_picto:>'
+      defaut: 'video-camera'
+      afficher_si: '@masquer_picto@ != "on"'
+      conteneur_class: 'long_label'
+  -
+    saisie: 'input'
+    options:
+      nom: 'nb'
+      label: '<:noisettes:label_pagination_articles:>'
+      defaut: 1
+      conteneur_class: 'long_label'
+  -
+    saisie: 'input'
+    options:
+      nom: 'titre_mot'
+      label: '<:noisettes:label_titre_mot:>'
+      explication: '<:noisettes:explication_titre_mot_video:>'
+      defaut: 'Vidéo à la une'
+      conteneur_class: 'long_label'

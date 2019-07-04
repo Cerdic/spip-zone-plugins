@@ -1,0 +1,40 @@
+#SET{modeles, #ARRAY{
+	content_aside_extra, 1,
+    content-aside_extra-a, 2,
+    content-aside_extra-b, 3,
+    aside-content_extra-a, 4,
+    aside-content_extra-b, 5,
+    content-aside_-extra-a, 6,
+    content-aside_-extra-b, 7,
+    aside_-extra-content-a, 8,
+    aside_-extra-content-b, 9,
+    aside-content-extra, 10,
+    content-aside-extra, 11,
+    aside-extra-content, 12 }
+}
+[(#ENV{ajouter}|=={oui}|oui)
+<div class='nettoyeur'></div>
+<a href='[(#SELF|parametre_url{ajouter,non})]' class='ajax bouton_fermer'>[(#CHEMIN_IMAGE{fermer-16.png}|balise_img)]</a>
+<div class="ajax">
+#FORMULAIRE_LAYER_PAGE{#ENV{page}, ""}
+</div>
+<div class='nettoyeur'></div>
+]
+[(#ENV{ajouter}|=={oui}|non)
+[(#SELF|parametre_url{ajouter,oui}|parametre_url{page,#ENV{page}}|icone{<:sdn:bouton_modifier_layer:>, layer-32, #LANG_RIGHT, edit, ajax})]
+<div class="info">
+#SET{layer, #CONFIG{sdn/#ENV{page}/layer, #CONFIG{sdn/defaut/layer, content-aside_-extra-a}}}
+#SET{modele, #GET{modeles}|table_valeur{#GET{layer}}}
+[(#ENV{page}|=={defaut}|?{
+    <p> Le modèle par défaut est le modèle
+    ,
+    <p> La page <strong>#ENV{page}</strong> utilise le modèle 
+    })]
+    <strong>[N°(#GET{modeles}|table_valeur{#GET{layer}})]</strong> 
+    [(#CONFIG{sdn/#ENV{page}/layer}|ou{#ENV{page}|=={defaut}}|non) - modèle par défaut ] 
+    <br/><small>([(#GET{layer})])</small></p>
+<div>
+<img src="#CHEMIN{prive/themes/spip/images/layers-sdn/layer-#GET{modele}.png}" title="[(#GET{layer})]" alt="[(#VAL{sdn:layer_#GET{layer}}|_T)]" style="width:120px;margin-left:20px; float:left;margin-right: 10px;" /><div><p>[(#VAL{sdn:layer_#GET{layer}}|_T)]</p></div>
+</div>
+</div>
+]

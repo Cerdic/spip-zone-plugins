@@ -1,0 +1,14 @@
+[(#AUTORISER{configurer, sdn}|oui)
+	#BOITE_OUVRIR{'','raccourcis'}
+		[(#URL_ECRIRE{noizetier_pages}
+			|icone_horizontale{<:noizetier:editer_noizetier_titre:>, 'noizetier-24', '', #LANG_LEFT})]
+
+		[(#PLUGIN{ieconfig}|oui)
+			[(#URL_ECRIRE{ieconfig_export}
+				|icone_horizontale{<:ieconfig:titre_export:>, config-export})]
+			[(#URL_ECRIRE{ieconfig_import}
+				|icone_horizontale{<:ieconfig:titre_import:>, config-import})]
+		]
+     #BOITE_FERMER
+]
+                

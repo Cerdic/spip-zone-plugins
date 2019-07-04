@@ -1,0 +1,46 @@
+<BOUCLE_content(RUBRIQUES){id_rubrique}>
+<B_noisettes>
+<BOUCLE_noisettes(NOISETTES){type=rubrique}{bloc=content}{0,1}>
+</BOUCLE_noisettes>
+</B_noisettes>
+    <section>
+
+	<header class="cartouche">
+		[(#LOGO_RUBRIQUE|image_reduire{200,200})]
+		<h1 class="#EDIT{titre}">#TITRE</h1>
+	</header>
+
+	<div class="main clear">
+		[<div class="#EDIT{texte} chapo">(#TEXTE|adaptive_images)</div>]
+
+        [(#REM) carousel ]
+        <INCLURE{fond=inclure/selection-carousel,id_rubrique,nb=5,span=span12}>
+		
+		#SET{avec_articles,0}
+		
+		[(#REM) Articles du secteur ]
+		<div class="liste articles offset clear">
+			<INCLURE{fond=liste/articles-resume,env,nb=10,coupe=180,ajax,titre=<:spipr_dane:articles_rubrique:>, branche=#ID_RUBRIQUE} />
+		</div>
+		
+	</div>
+
+	<aside class="clear">
+		[(#REM) Gestion du portfolio et des documents ]
+		[(#INCLURE{fond=inclure/documents,id_rubrique})]
+
+		[(#REM) Sites de la rubrique ]
+		<div class="liste sites clear">
+			<INCLURE{fond=liste/sites-resume,nb=12,env,largeur_logo=180,hauteur_logo=120,titre=<:spipr_dane:sur_web:>,ajax}>
+		</div>
+
+	</aside>
+
+	<footer>
+		[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+		[<p class="publication"><time pubdate="pubdate" datetime="[(#DATE|date_iso)]"><:dernier_ajout:> : (#DATE|affdate_jourcourt).</time></p>]
+	</footer>
+
+</section>
+<//B_noisettes>
+</BOUCLE_content>

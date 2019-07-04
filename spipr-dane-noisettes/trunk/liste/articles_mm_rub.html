@@ -1,0 +1,12 @@
+	<B_articles_rubrique>
+	[(#ENV{pagination}|oui)#ANCRE_PAGINATION]
+	<div class="liste articles">
+		[(#ENV{masquer_titre}|non)<h2 class="h2"><a href="#URL_RUBRIQUE">[(#ENV{titre,<:spipr_dane:meme_rubrique:>}) ]<i class="fa fa-files-o"></i></a></h2>]
+		<ul class="liste-items">
+			<BOUCLE_articles_rubrique(ARTICLES){id_rubrique}{exclus}{!par date}{par num titre}{pagination #ENV{pagination,10000}}>
+			<li class="item"><a href="#URL_ARTICLE"[ class="(#EXPOSE)"][(#VIRTUEL|oui) class="spip_out"]>#TITRE</a></li>
+			</BOUCLE_articles_rubrique>
+		</ul>
+	[(#ENV{pagination}|oui)[<div class="pagination">(#PAGINATION)</div>]]
+	</div>
+	</B_articles_rubrique>

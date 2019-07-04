@@ -1,0 +1,29 @@
+<paquet
+	prefix="sdn"
+	categorie="maintenance"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.2.3;3.2.*]"
+	logo="prive/themes/spip/images/sdn-64.png"
+	documentation="https://pole-web.etab.ac-caen.fr/"
+	schema="0.1.0" 
+>
+	<!--
+		Paquet généré le 2019-02-17 11:52
+	-->
+
+	<nom>SPIPr-Dane-Noisettes</nom>
+	<!-- Des noisettes pour SPIPr-Dane -->
+
+	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs --> 
+	<auteur>Dominique Lepaisant</auteur>
+
+	<licence>GNU/GPL</licence>
+
+    <necessite nom="spipr_dane" compatibilite="[1.0.0;[" />
+    <necessite nom="noizetier" compatibilite="[3.0.0;[" />
+
+	<pipeline nom="autoriser" inclure="sdn_autorisations.php" /> 
+    <pipeline nom="affiche_milieu" inclure="sdn_pipelines.php" />
+
+</paquet>

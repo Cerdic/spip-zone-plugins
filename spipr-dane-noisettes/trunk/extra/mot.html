@@ -1,0 +1,17 @@
+#SET{layers_exclus, #ARRAY{0,content_aside_extra, 1,content-aside_extra-a, 2,content-aside_extra-b, 3,aside-content_extra-a, 4,aside-content_extra-b}}
+[(#CONFIG{sdn/defaut/layer}|in_array{#GET{layers_exclus}}|non) #SET{afficher, oui}]
+<BOUCLE_principale(MOTS) {id_mot} {doublons} {si #GET{afficher}}>
+	[(#REM) Menu de navigation mots-cles : les autres mots cles du meme groupe ]
+  <B_mots_freres>
+  <div class="liste mots">
+      #ANCRE_PAGINATION
+      <h2 class="h2">#TYPE</h2>
+      <ul class="liste-items">
+          <BOUCLE_mots_freres(MOTS) {type} {par titre} {pagination 20}>
+          <li class="item"><a href="#URL_MOT"[ class="(#EXPOSE)"]>#TITRE</a></li>
+          </BOUCLE_mots_freres>
+      </ul>
+      [<div class="pagination">(#PAGINATION)</div>]
+  </div>
+  </B_mots_freres>
+</BOUCLE_principale>

@@ -1,0 +1,69 @@
+[(#REM)
+  Plugin SPIPr-Dane-Config
+  Squelette #FORMULAIRE_LAYER_PAGE
+  * formulaire de configuration du modele de page 
+  * param string : bloc - nom de la page a configurer 
+  (c) 2019 Dominique Lepaisant
+  Distribue sous licence GPL3
+
+][(#SET{id_unique,#EVAL{'rand();'}})]
+
+#SET{layer, #CONFIG{sdn/#ENV{compo}/layer}|?{#CONFIG{sdn/#ENV{compo}/layer}, #CONFIG{sdn/defaut/layer, content-aside_-extra}}}
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}" class="form[_(#GET{id_unique})]"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+        <h3 class="legend"><:sdn:choisir_modele:></h3>
+        <div class="editer_layer">
+            <ul class="ul_#GET{id_unique}">
+                <BOUCLE_ls2(POUR){tableau #ENV{modeles}}>
+                <li style="width:30%;padding-left:5px;padding-bottom:10px;float:left;clear:[(#COMPTEUR_BOUCLE|=={4}|ou{#COMPTEUR_BOUCLE|=={7}}|?{both,none});]">
+                    <div style="float:left;" class="divimg[ (#ENV{nbcols}|=={2_cols_gauche}|oui) active]">
+                        <label for="#CLE" class="thumb" style="margin-left:0">
+                        <img src="#CHEMIN{prive/themes/spip/images/layers-sdn/layer-#VALEUR.png}" title="[(#VAL{sdn:layer_#CLE}|_T)]" alt="[(#VAL{sdn:layer_#CLE}|_T)]" style="width:120px;margin-left:20px" /></label>
+                        <p class="explication" style="clear:both;">
+                        <input type="radio" name="layer" id="#CLE" value="#CLE" [ (#GET{layer}|=={#CLE}|oui)checked="checked" disabled="disabled"]/>
+                        <label for="#CLE">[Modèle N°(#VALEUR)]</label></p>
+                    </div>
+                </li>
+                </BOUCLE_ls2>
+            </ul>
+        </div>
+        [(#SAISIE{checkbox, largeur_content}
+            {label=<:sdc:background_fixer:>}
+            {datas=#ARRAY{
+                large, Oui}
+            }
+            {conteneur_class=long_label afficher_si_layer_#GET{id_unique}}
+        )]
+
+		<p class="boutons">
+			<input type="submit" name="enregistrer" class="submit save" value="<:bouton_enregistrer:>" />
+			<input type="submit" name="_cfg_delete" class="submit delette" value="<:sdn:bouton_supprimer:>" style="float:left"/>
+		</p>
+	</div></form>
+</div>
+<script type="text/javascript">// <![CDATA[
+	$(document).ready(function(){
+        $('.divimg > p input').on('change', function () {
+			if ( $(this).attr('value') == 'content-aside_extra' 
+               || $(this).attr('value') == 'aside-content_extra' 
+               || $(this).attr('value') == 'content-aside_-extra' 
+               || $(this).attr('value') == 'aside_-extra-content' ) {
+				$(".afficher_si_layer_#GET{id_unique}").show()
+			}else {
+				$(".afficher_si_layer_#GET{id_unique}").hide();
+			}
+		});
+        if ( '#ENV{layer}' == 'content-aside_extra' 
+            || '#ENV{layer}' == 'aside-content_extra' 
+            || '#ENV{layer}' == 'content-aside_-extra' 
+            || '#ENV{layer}' == 'aside_-extra-content' ) {
+				$(".afficher_si_layer_#GET{id_unique}").show();
+		} else {
+				$(".afficher_si_layer_#GET{id_unique}").hide();
+		}
+
+	});
+//]]></script>

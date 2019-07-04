@@ -1,0 +1,105 @@
+nom: '<:noisettes:nom_carousel:>'
+description: '<:noisettes:description_carousel:>'
+icon: 'carousel-24.png'
+ajax: 'non'
+parametres:
+  -
+    saisie: 'explication'
+    options:
+      nom: 'explication_carousel'
+      texte: '<:noisettes:explication_carousel:>'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'masquer_titre'
+      label: '<:noisettes:label_masquer_titre:>'
+      defaut: ''
+      conteneur_class: 'long_label'
+  -
+    saisie: 'input'
+    options:
+      nom: 'titre'
+      label: '<:noisettes:label_titre:>'
+      defaut: 'À la une'
+      afficher_si: '@masquer_titre@ != "on"'
+      conteneur_class: 'long_label'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'masquer_picto'
+      label: '<:noisettes:label_masquer_picto:>'
+      defaut: ''
+      conteneur_class: 'long_label'
+  -
+    saisie: 'input'
+    options:
+      nom: 'picto'
+      label: '<:noisettes:label_picto:>'
+      explication: '<:noisettes:explication_picto:>'
+      defaut: 'star'
+      afficher_si: '@masquer_picto@ != "on"'
+      conteneur_class: 'long_label'
+  -
+    saisie: 'input'
+    options:
+      nom: 'nb'
+      label: '<:noisettes:label_nb_diapos:>'
+      defaut: ''
+      conteneur_class: 'long_label'
+    verifier:
+      type: 'entier'
+      options:
+        min: 2
+        max: 10
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'image_passe_partout'
+      label: '<:noisettes:label_image_passe_partout:>'
+      explication: '<:noisettes:explication_image_passe_partout:>'
+      defaut: ''
+      conteneur_class: 'long_label'
+  -
+    saisie: 'input'
+    options:
+      nom: 'largeur_image_carousel'
+      label: '<:noisettes:label_largeur_image_carousel:>'
+      defaut: '400'
+      conteneur_class: 'long_label'
+    verifier:
+      type: 'entier'
+  -
+    saisie: 'input'
+    options:
+      nom: 'hauteur_image_carousel'
+      label: '<:noisettes:label_hauteur_image_carousel:>'
+      defaut: '250'
+      conteneur_class: 'long_label'
+    verifier:
+      type: 'entier'
+  -
+    saisie: 'input'
+    options:
+      nom: 'coupe'
+      label: '<:noisettes:label_coupe_texte:>'
+      defaut: '160'
+      conteneur_class: 'long_label'
+    verifier:
+      type: 'entier'
+  -
+    saisie: 'input'
+    options:
+      nom: 'couleur'
+      label: '<:noisettes:label_couleur_bg:>'
+      defaut: ''
+      # #e0e2e4
+      class: 'palette''
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'fieldset_conf_avancee'
+      label: '<:sdn:label_conf_avancee_noisettes:>'
+      explication: '<:sdn:explication_conf_avancee_noisettes:>'
+      afficher_si: '@config:sdn:conf_avancee@  == "on"'
+    saisies:
+      - 'inclure:inclure/yaml/conf_avancee.yaml'

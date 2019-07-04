@@ -1,0 +1,8 @@
+<BOUCLE_noisettes(NOISETTES){type=rubrique}{bloc=aside}{0,1}>
+</BOUCLE_noisettes>
+[(#REM) Breves du secteur ]
+    <INCLURE{fond=liste/breves-resume,env,titre=<:spipr_dane:les_breves:>,nb=6,largeur_logo=100,hauteur_logo=90,ajax} />
+
+[(#REM) sous-rubriques ]
+    <INCLURE{fond=liste/rubriques-resume, env}/>
+<//B_noisettes>

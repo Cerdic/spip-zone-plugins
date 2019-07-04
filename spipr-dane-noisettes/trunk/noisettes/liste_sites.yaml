@@ -1,0 +1,153 @@
+nom: '<:noisettes:liste_sites:>'
+description: '<:noisettes:description_liste_syndics:>'
+icon: 'liste-sites-24.png'
+ajax: 'non'
+parametres:
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'masquer_titre'
+      label: '<:noisettes:label_masquer_titre:>'
+      defaut: ''
+      conteneur_class: 'long_label'
+  -
+    saisie: 'input'
+    options:
+      nom: 'titre'
+      label: '<:noisettes:label_titre:>'
+      defaut: 'Sur le web'
+      afficher_si: '@masquer_titre@ != "on"'
+      conteneur_class: 'long_label'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'masquer_nombre'
+      label: '<:noisettes:label_masquer_nombre_sites:>'
+      defaut: ''
+      conteneur_class: 'long_label'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'masquer_picto'
+      label: '<:noisettes:label_masquer_picto:>'
+      defaut: ''
+      conteneur_class: 'long_label'
+  -
+    saisie: 'input'
+    options:
+      nom: 'picto'
+      label: '<:noisettes:label_picto:>'
+      explication: '<:noisettes:explication_picto:>'
+      defaut: 'globe'
+      afficher_si: '@masquer_picto@ != "on"'
+      conteneur_class: 'long_label'
+  -
+    saisie: 'input'
+    options:
+      nom: 'rubriques_exclues'
+      label: '<:noisettes:label_rubriques_exclues:>'
+      explication: '<:noisettes:explication_rubriques_exclues_sites:>'
+      defaut: ''
+      conteneur_class: 'long_label'
+  -
+    saisie: 'input'
+    options:
+      nom: 'nb'
+      label: '<:noisettes:label_nb_sites:>'
+      defaut: 10
+      conteneur_class: 'long_label'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'liste_simple'
+      label: '<:noisettes:label_liste_simple:>'
+      defaut: ''
+      conteneur_class: 'long_label'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'masquer_logo'
+      label: '<:noisettes:label_masquer_logo:>'
+      defaut: ''
+      conteneur_class: 'long_label'
+  -
+    saisie: 'input'
+    options:
+      nom: 'largeur_logo'
+      label: '<:noisettes:label_largeur_logo:>'
+      defaut: '150'
+      afficher_si: '@masquer_logo@  != "on"'
+      conteneur_class: 'long_label'
+    verifier:
+      type: 'entier'
+  -
+    saisie: 'input'
+    options:
+      nom: 'hauteur_logo'
+      label: '<:noisettes:label_hauteur_logo:>'
+      defaut: '150'
+      afficher_si: '@masquer_logo@ != "on"'
+      conteneur_class: 'long_label'
+    verifier:
+      type: 'entier'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'masquer_nom_site'
+      label: '<:noisettes:label_masquer_nom_site:>'
+      defaut: ''
+      afficher_si: '@liste_simple@ != "on"'
+      conteneur_class: 'long_label'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'masquer_intro'
+      label: '<:noisettes:label_masquer_descriptif:>'
+      defaut: ''
+      afficher_si: '@liste_simple@ != "on"'
+      conteneur_class: 'long_label'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'afficher_syndics'
+      label: '<:noisettes:label_afficher_syndics:>'
+      defaut: ''
+      afficher_si: '@liste_simple@ != "on"'
+      conteneur_class: 'long_label'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'fieldset_span'
+      label: '<:noisettes:label_fieldset_span:>'
+      afficher_si: '@liste_simple@ != "on"'
+    saisies:
+      -
+        saisie: 'oui_non'
+        options:
+          nom: 'liste_span'
+          label: '<:noisettes:label_liste_span:>'
+          explication: '<:noisettes:explication_liste_span:>'
+          defaut: ''
+          conteneur_class: 'long_label'
+      -
+        saisie: 'selection'
+        options:
+          nom: 'span'
+          label: '<:noisettes:label_span:>'
+          datas:
+            span6: '2 colonnes'
+            span4: '3 colonnes'
+            span3: '4 colonnes'
+          defaut: 'span4'
+          cacher_option_intro: 'oui'
+          conteneur_class: 'long_label'
+          afficher_si: '@liste_span@  == "on"'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'fieldset_conf_avancee'
+      label: '<:sdn:label_conf_avancee_noisettes:>'
+      explication: '<:noisettes:explication_conf_avancee_noisettes:>'
+      afficher_si: '@config:sdn:conf_avancee@  == "on"'
+    saisies:
+      - 'inclure:inclure/yaml/conf_avancee.yaml'

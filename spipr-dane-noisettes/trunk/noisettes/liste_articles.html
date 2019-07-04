@@ -1,0 +1,14 @@
+[(#REM)#SET{articles_exclus,#ENV{articles_exclus}|picker_selected{article}}
+#SET{rubriques_exclues,#ENV{rubriques_exclues}|picker_selected{rubrique}}
+]
+#SET{articles_exclus,#ENV{articles_exclus}|explode{','}}
+#SET{rubriques_exclues,#ENV{rubriques_exclues}|explode{','}}
+#SET{span, #ENV{liste_span}|?{#ENV{span}, ''}}
+#SET{masquer_h2, #ENV{masquer_titre}|et{#ENV{masquer_picto}}|oui|?{on,''}}
+
+<INCLURE{fond=inclure/conteneur_ouvrir, env}/>
+<div class="liste articles [(#ENV{liste_span}|non) long ]clear offset">
+    <INCLURE{fond=liste/articles-resume,env, span=#GET{span}, articles_exclus=#GET{articles_exclus}, rubriques_exclues=#GET{rubriques_exclues}, masquer_h2=#GET{masquer_h2}, ajax}>
+</div>
+<INCLURE{fond=inclure/conteneur_fermer, env}/>
+   

@@ -1,0 +1,10 @@
+<B_sites>
+	#ANCRE_PAGINATION
+    [(#ENV{masquer_h2}|non)<h2 class="h2">[(#ENV{masquer_titre}|non)[(#ENV{titre,<:spipr_dane:sites:>}) ][(#ENV{masquer_nombre}|non)<small>&#40;#GRAND_TOTAL&#41;</small>] ][(#ENV{masquer_picto}|non)<span class="picto"><i class="fa fa-#ENV{picto,globe} "></i></span>]</h2>]
+	<ul class="liste-items[ (#ENV{liste_span}|oui) liste-span][ (#ENV{liste_simple}|oui) liste-simple]">
+		<BOUCLE_sites(SITES){id_rubrique?}{par nom_site}{!par num nom_site}{id_rubrique !IN #ENV{rubriques_exclues,#ARRAY}}{pagination #ENV{nb,20}} >
+		<li class="item[ (#ENV{span})]">#INCLURE{fond=inclure/resume/site,id_syndic,env,nb=#ENV{nb,5}}</li>
+		</BOUCLE_sites>
+	</ul>
+	[<div class="pagination">(#PAGINATION)</div>]
+</B_sites>

@@ -1,0 +1,28 @@
+[(#REM)
+
+  Squelette Presentation resumee d'un syndic dans une liste
+  Distribue sous licence GPL
+
+]
+<BOUCLE_resume_syndic(SYNDIC) {id_syndic} {statut?}>
+[(#ENV{liste_simple}|non)<article class="entry site">
+	<strong class="h3-like entry-title">
+        ]<a href="#ENV{url,#URL_SITE}" rel="bookmark" class="spip_out" title="<:spipr_dane:lien_externe:>">
+            [(#ENV{liste_simple}|oui)<span class="logo-site" style="width:[(#ENV{largeur_logo,80})px;]">]
+            [(#ENV{masquer_logo}|non)[(#LOGO_SYNDIC
+            |image_reduire{#ENV{largeur_logo,150},#ENV{hauteur_logo,150}}
+            |image_recadre{#ENV{largeur_logo,150},#ENV{hauteur_logo,150},#ENV{align, center}, #ENV{couleur,transparent}}|responsive_logo)]]
+        [(#ENV{liste_simple}|oui)</span>]
+        [(#ENV{masquer_nom_site}|non)#NOM_SITE]<span
+		class="read-more hide"><i class="fa fa-angle-double-right" title="<:zcore:lire_la_suite|attribut_html:><:zcore:lire_la_suite_de|attribut_html:> &laquo;[(#TITRE|attribut_html)]&raquo;"></i></span></a>
+    [(#ENV{liste_simple}|non)</strong>]
+	[(#ENV{masquer_intro}|non)[<div class="#EDIT{descriptif} introduction entry-content">(#DESCRIPTIF)</div>]]
+	<B_syndic>
+	<ul class="liste-items">
+		<BOUCLE_syndic(SYNDIC_ARTICLES) {si #ENV{afficher_syndics}}{age<180}{id_syndic}{!par date}{0,#ENV{nb_syndic,3}}>
+		<li class="item">[<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr><span class="sep"> &ndash; </span>]<a href="#URL_ARTICLE"[ title="(#NOM_SITE|attribut_html|couper{80})"] class="spip_out">#TITRE</a></li>
+		</BOUCLE_syndic>
+	</ul>
+	</B_syndic>
+[(#ENV{liste_simple}|non)</article>]
+</BOUCLE_resume_syndic>

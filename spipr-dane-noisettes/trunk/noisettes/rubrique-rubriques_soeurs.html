@@ -1,0 +1,15 @@
+<BOUCLE_parent(RUBRIQUES){id_rubrique}>#SET{id_parent, #ID_PARENT}</BOUCLE_parent>
+<B_sous_rubriques>
+#SET{id_en_cours, #ENV{masquer_rubrique_en_cours}|?{-1, #ID_RUBRIQUE}}
+	#SET{masquer_h2, #ENV{masquer_titre}|et{#ENV{masquer_picto}}|oui|?{on,''}}
+<div class="liste rubriques offset clear">
+    [(#GET{masquer_h2}|non)<h2 class="h2">[(#ENV{masquer_titre}|non)[(#ENV{titre,<:spipr_dane:meme_rubrique:>})]][(#ENV{masquer_picto}|non)<span class="picto"><i class="fa fa-#ENV{picto,folder-open-o} "></i></span>]</h2>]
+    <ul class="liste-items">
+        <BOUCLE_sous_rubriques(RUBRIQUES) {id_parent=#GET{id_parent}} {id_rubrique!=#GET{id_en_cours}} {par num titre, titre}>
+        <li class="item" >
+            <a href="#URL_RUBRIQUE">[(#TITRE)]</a>
+        </li>
+        </BOUCLE_sous_rubriques>
+    </ul>
+</div>
+</B_sous_rubriques>

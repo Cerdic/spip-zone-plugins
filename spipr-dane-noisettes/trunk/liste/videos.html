@@ -1,0 +1,15 @@
+<B_articles_video>
+<div class="liste videos">
+#ANCRE_PAGINATION
+<h2 class="h2"><:spipr_dane:video:> <span class="picto"><i class="fa fa-video-camera"></i></span></h2>
+<ul class="liste-items">
+    <BOUCLE_articles_video(ARTICLES){mots.titre=Vidéo à la une}{id_secteur ?}{!par date}{pagination #ENV{nb,1}}>
+        <li class="item">
+            <h3 class="#EDIT{titre}" ><a href="#URL_ARTICLE">#TITRE</a></h3>
+            [<div class="#EDIT{chapo} introduction entry-content">(#CHAPO)</div>]
+        </li>
+    </BOUCLE_articles_video>
+</ul>
+[<div class="pagination">(#PAGINATION)</div>]
+</div>
+</B_articles_video>

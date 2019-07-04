@@ -1,0 +1,39 @@
+<BOUCLE_content(ARTICLES){id_article}>
+<BOUCLE_noisettes(NOISETTES){type=article}{bloc=content}{0,1}>
+</BOUCLE_noisettes>
+<article>
+	<header class="cartouche">
+		[(#LOGO_ARTICLE|image_reduire{200,200})]
+		[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
+		<h1><span class="#EDIT{titre}">#TITRE</span>[
+			<small class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</small>
+		]</h1>
+	</header>
+
+	<div class="main">
+		[<div class="#EDIT{chapo} chapo surlignable">(#CHAPO|adaptive_images)</div>]
+		[<div class="#EDIT{texte} texte surlignable">(#TEXTE|adaptive_images)</div>]
+
+		[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+	</div>
+
+	<footer>
+		[<div class="#EDIT{ps} ps surlignable"><h2><:info_ps:></h2>(#PS|adaptive_images)</div>]
+		[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+	</footer>
+
+	<aside>
+		[(#REM) Gestion du portfolio et des documents ]
+		[(#INCLURE{fond=inclure/documents,id_article})]
+		
+		[(#PLUGIN{agenda}|oui)<INCLURE{fond=inclure/agenda-evenements-article,env} />]
+		
+		[(#REM) Forum de l'article
+		NB : pour desactiver les forums de l'article, supprimez simplement la ligne ci-dessous ]
+		<INCLURE{fond=inclure/forum,id_article,repondre_url=(#PARAMETRES_FORUM|url_reponse_forum),repondre_titre=<:spipr_dane:repondre_article:>} />
+
+	</aside>
+
+</article>
+<//B_noisettes>
+</BOUCLE_content>

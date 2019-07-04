@@ -1,0 +1,50 @@
+nom: '<:noisettes:liste_rubriques_soeurs:>'
+description: '<:noisettes:description_liste_sous_rubriques:>'
+icon: 'liste-rubriques-soeurs-24.png'
+ajax: 'non'
+contexte:
+  - 'id_rubrique'
+  - 'rubrique'
+  - 'id_parent'
+parametres:
+  -
+    saisie: 'checkbox'
+    options:
+      nom: 'masquer_titre'
+      label: '<:noisettes:label_masquer_titre:>'
+      datas:
+        on: 'Oui'
+      defaut: ''
+      conteneur_class: 'long_label'
+  -
+    saisie: 'input'
+    options:
+      nom: 'titre'
+      label: '<:noisettes:label_titre:>'
+      defaut: 'Dans la même rubrique'
+      afficher_si: '@masquer_titre@ !IN "on"'
+      conteneur_class: 'long_label'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'masquer_picto'
+      label: '<:noisettes:label_masquer_picto:>'
+      defaut: ''
+      conteneur_class: 'long_label'
+  -
+    saisie: 'input'
+    options:
+      nom: 'picto'
+      label: '<:noisettes:label_picto:>'
+      explication: '<:noisettes:explication_picto:>'
+      defaut: 'folder-open-o'
+      afficher_si: '@masquer_picto@ != "on"'
+      conteneur_class: 'long_label'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'masquer_rubrique_en_cours'
+      label: '<:noisettes:label_masquer_rubrique_en_cours:>'
+      defaut: ''
+      conteneur_class: 'long_label'
+  -

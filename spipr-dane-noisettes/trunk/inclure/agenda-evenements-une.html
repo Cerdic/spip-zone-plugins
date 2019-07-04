@@ -1,0 +1,21 @@
+[(#REM) Ne pas afficher l'annee de depart, elle est dans le h2)]
+[(#GET{date_debut}|annee|unique{annee}|non)]
+[(#REM)
+ENV{date_debut}=#ENV{date_debut}<br/>
+GET{affichage_debut}=#GET{affichage_debut}<br/>
+GET{date_debut}=#GET{date_debut}<br/>
+GET{affichage_duree}=#GET{affichage_duree}<br/>
+GET{date_fin}=#GET{date_fin}<br/>
+]<B_ev>
+	#ANCRE_PAGINATION
+    [(#ENV{masquer_h2}|non)<h2 class="h2 center">[(#ENV{masquer_titre}|non)[(#ENV{titre,<:agenda:agenda:>})] ][(#ENV{masquer_picto}|non)<a href="#URL_PAGE{agenda}" title="<:agenda:agenda:>"><span class="picto"><i class="fa fa-#ENV{picto,calendar}"></i></span></a>]</h2>]
+	<ul class="liste-items">
+	<BOUCLE_ev(EVENEMENTS){par date_debut}{!evenement_passe}{age_fin>=-180}{pagination #ENV{nb,5}}>
+		<li class="item[(#DATE_FIN|agenda_date_passee)fini]">
+			#INCLURE{fond=inclure/resume/evenement,afficher_carte=non,id_evenement, env}
+		</li>
+	</BOUCLE_ev>
+	</ul>
+	[<div class="pagination">(#PAGINATION)</div>]
+	<p class="center small bt clear"><a href="#URL_PAGE{agenda}"><:spipr_dane:agenda_complet:></a></p>
+</B_ev>

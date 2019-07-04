@@ -1,0 +1,5 @@
+<div>[(#ENV{masquer_titre}|non)[<strong>(#ENV{titre})</strong>]][(#ENV{masquer_picto}|non)[ <i class="fa fa-(#ENV{picto,bars})"></i>]]</div>
+<BOUCLE_menu(MENUS){identifiant=#ENV{identifiant}}>
+	<p><small><:menus:formulaire_identifiant:>&nbsp;:&nbsp;<a href="#URL_ECRIRE{menus_editer,id_menu=#ID_MENU}">#IDENTIFIANT</a>
+	[<br />(#TITRE)]</small></p>
+</BOUCLE_menu>

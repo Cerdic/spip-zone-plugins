@@ -1,0 +1,48 @@
+#SET{mon_tableau,#ARRAY}
+#SET{largeur_image,#ENV{largeur_image_carousel,400}}
+#SET{hauteur_image,#ENV{hauteur_image_carousel,250}}
+[(#ID_RUBRIQUE|>{0}|oui)#SET{id_rubrique,#ID_RUBRIQUE}]
+[(#ID_RUBRIQUE|>{0}|non)#SET{id_rubrique,0}]
+#SET{masquer_h2, #ENV{masquer_titre}|et{#ENV{masquer_picto}}|oui|?{on,''}}
+<INCLURE{fond=inclure/conteneur_ouvrir, env}/>
+<B_articles_selection>
+    <div class="liste selection">
+    [(#ENV{masquer_h2}|non)<h2 class="h2">[(#ENV{masquer_titre}|non)[(#ENV{titre,<:spipr_dane:a_la_une:>})]][(#ENV{masquer_picto}|non)<span class="picto"><i class="fa fa-#ENV{picto,star} "></i></span>]</h2>]
+<div id="carousel" class="carousel slide" style="height:#ENV{hauteur_image_carousel}px;background-color:#ENV{couleur, #e0e2e4}">
+	<div class="carousel-inner">
+		<BOUCLE_articles_selection(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=#GET{id_rubrique}}{0,#ENV{nb,3}}>
+		<div class="item[ (#COMPTEUR_BOUCLE|=={1}|?{'active',''})] hentry dir_#LANG" >
+			<article class="entry hentry"[ style="height:(#ENV{hauteur_image_carousel})px"]>
+				<strong class="h3-like entry-title">
+					<a href="#URL_ARTICLE" rel="bookmark">
+                        [(#ENV{image_passe_partout}|?{
+                        [(#LOGO_ARTICLE|image_passe_partout{#GET{largeur_image},#GET{hauteur_image}}|image_recadre{[(#GET{largeur_image}|plus{-1})],[(#GET{hauteur_image}|plus{-1})],center center,#ENV{couleur,transparent}}|responsive_logo|sinon{#INCLURE{fond=inclure/article-resume-image, id_article=#ID_ARTICLE, largeur_image=#GET{largeur_image}, hauteur_image=#GET{hauteur_image}, align="center center", couleur=#ENV{couleur},image_passe_partout=#ENV{image_passe_partout}}{env}})]
+                        ,
+                        [(#LOGO_ARTICLE|image_reduire{#GET{largeur_image},#GET{hauteur_image}}|image_recadre{[(#GET{largeur_image}|plus{-1})],[(#GET{hauteur_image}|plus{-1})],center center,#ENV{couleur,transparent}}|responsive_logo|sinon{#INCLURE{fond=inclure/article-resume-image, id_article=#ID_ARTICLE, largeur_image=#GET{largeur_image}, hauteur_image=#GET{hauteur_image}, align="center center", couleur=#ENV{couleur}}{env}})]
+                        })]
+                    <span class="titre">#TITRE</span>
+                    </a>
+				</strong>
+				[<div class="introduction #EDIT{introduction}">(#INTRODUCTION|couper{#ENV{coupe,160}})</div>]
+				<br class="clear"/>
+			</article>
+		</div>#SET{mon_tableau, #GET{mon_tableau}|push{#COMPTEUR_BOUCLE}}
+		</BOUCLE_articles_selection>
+	</div>	
+	<B_combien>
+	<ul class="carousel-stop">
+		<li id="carousel-pause-cancel" title="<:spipr_dane:pause_carousel_cancel:>" ><span class="picto"><i class="fa fa-play"></i></span></li>
+		<li id="carousel-pause" title="<:spipr_dane:pause_carousel:>"><span class="picto"><i class="fa fa-pause"></i></span></li>
+	</ul>
+	<ol class="carousel-indicators">
+		<BOUCLE_combien(DATA){si #GET{mon_tableau}|table_valeur{1}}{source tableau,#GET{mon_tableau}}>
+		<li data-target="#carousel" data-slide-to="[(#COMPTEUR_BOUCLE|moins{1})]" [class="(#COMPTEUR_BOUCLE|=={1}|?{'active',''})"] ><span class="picto"><i class="fa fa-circle"></i></span></li>
+		</BOUCLE_combien>
+	</ol>
+	<a class="left carousel-control" href="#carousel" data-slide="prev"><span class="picto"><i class="fa fa-chevron-left"></i></span></a>
+	<a class="right carousel-control" href="#carousel" data-slide="next"><span class="picto"><i class="fa fa-chevron-right"></i></span></a>
+	</B_combien>
+</div><!-- /.carousel -->
+    </div>
+</B_articles_selection>
+<INCLURE{fond=inclure/conteneur_fermer, env}/>

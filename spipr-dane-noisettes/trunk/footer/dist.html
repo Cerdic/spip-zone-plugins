@@ -1,0 +1,18 @@
+
+<div class="container ">
+	<p class="colophon">
+		<BOUCLE_annee(ARTICLES){par date}{tous}{0,1}>[(#DATE|annee|!={#VAL{Y}|date}|oui)[(#DATE|annee)]]</BOUCLE_annee>-</B_annee>[(#DATE|annee)] - #NOM_SITE_SPIP
+	</p>[
+(#SET{contact, #URL_AUTEUR{#CONFIG{eva_mentions/idwebmaster,1}}})
+]<B_pages><BOUCLE_pages(ARTICLES){id_rubrique=-1}>[
+(#PAGE|=={contact}|oui)#SET{contact,#URL_ARTICLE{#ID_ARTICLE}}][
+(#PLUGIN{contact}|oui)#SET{contact,#URL_PAGE{contact}}
+]</BOUCLE_pages></B_pages>[(#PLUGIN{contact}|oui)#SET{contact,#URL_PAGE{contact}}]<//B_pages>
+	<ul class="liste-items center">
+		<li class="item"><a rel="contents" href="#URL_PAGE{plan}"><:plan_site:></a></li>
+		<li class="item"><a href="#URL_PAGE{mentions}" ><:spipr_dane:mentions:></a></li>
+		<li class="item"><a href="#GET{contact}"><:spipr_dane:contact:></a></li>
+		<li class="item"><a href="#URL_PAGE{backend}"><:spipr_dane:flux_rss:></a></li>
+	</ul>
+    <INCLURE{fond=inclure/footer_login, env}/>
+</div>

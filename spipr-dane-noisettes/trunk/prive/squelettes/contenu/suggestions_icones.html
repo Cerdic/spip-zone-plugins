@@ -1,0 +1,11 @@
+<B_suggestions_icones>
+<div class="formulaire_editer_page"><div id="suggestions_icones" style="display: block;">
+    <p><strong><:noizetier:suggestions:></strong></p>
+    <BOUCLE_suggestions_icones(DATA){source table, #ICONE_NOIZETIER_LISTE{24}}{par cle}>
+        <div class="suggestion_icone">
+            [(#CHEMIN_IMAGE{#CLE}|balise_img)<br />]
+            #CLE
+        </div>
+    </BOUCLE_suggestions_icones>
+</div></div>
+</B_suggestions_icones>

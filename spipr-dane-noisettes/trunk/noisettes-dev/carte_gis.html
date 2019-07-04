@@ -1,0 +1,7 @@
+#SET{zoom_molette,#ENV{zoom_molette}|table_valeur{0}}
+#SET{fullscreen,#ENV{fullscreen}|table_valeur{0}}
+#SET{scale,#ENV{scale}|table_valeur{0}}
+<div class="liste">
+[(#ENV{masquer_titre}|non)<h2 class="h2">[(#ENV{titre,<:noisettes:carte_gis:>})][(#ENV{masquer_picto}|non)<span class="picto"><i class="fa fa-#ENV{picto,map-marker} "></i></span>]</h2>]
+[(#INCLURE{fond=modeles/carte_gis,zoom=#ENV{zoom,8},maxZoom=#ENV{maxZoom,''},scale=#GET{scale,oui},centrer_auto=#ENV{centrer_auto,oui},width=#ENV{width,100%},height=#ENV{height,400px},zoom_molette=#GET{zoom_molette,''},objet=#ENV{objet,''},objets=#ENV{objets,''},id_objet=#ENV{id_objet,''}})]
+</div>

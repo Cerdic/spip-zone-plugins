@@ -1,0 +1,15 @@
+<BOUCLE_noisettes(NOISETTES){type=sommaire}{bloc=aside}{0,1}>
+</BOUCLE_noisettes>
+[(#REM) Videos]
+	<INCLURE{fond=liste/videos,nb=1,env,ajax} />
+[(#REM)
+#SET{layers_exclus, #ARRAY{0,content_aside_extra, 1,content-aside_extra-a, 2,content-aside_extra-b, 3,aside-content_extra-a, 4,aside-content_extra-b}}
+[(#CONFIG{sdn/defaut/layer}|in_array{#GET{layers_exclus}}|oui)]
+][
+(#REM) Liste breves]
+	<INCLURE{fond=liste/breves-resume,env,titre=<:spipr_dane:les_breves:>,nb=5,largeur_logo=150,hauteur_logo=100,ajax} />
+
+[(#PLUGIN{agenda}|oui)<div class="liste long evenements clear "><INCLURE{fond=inclure/agenda-evenements-une,nb=3,env,ajax} /></div>]
+
+<div class="liste tweets"><INCLURE{fond=inclure/tweets} /></div>
+<//B_noisettes>

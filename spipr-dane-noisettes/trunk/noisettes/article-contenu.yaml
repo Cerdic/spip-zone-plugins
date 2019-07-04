@@ -1,0 +1,45 @@
+nom: '<:noisettes:article_contenu:>'
+description: '<:noisettes:description_article_contenu:>'
+icon: 'article_contenu-24.png'
+ajax: 'non'
+contexte:
+  - 'id_article'
+  - 'id_rubrique'
+parametres:
+#  -
+#    saisie: 'oui_non'
+#    options:
+#      nom: 'afficher_surtitre'
+#      label: '<:noisettes:label_afficher_surtitre:>'
+#      defaut: ''
+#      afficher_si: '@config:articles_surtitre@ == "oui"'
+#  -
+#    saisie: 'oui_non'
+#    options:
+#      nom: 'afficher_soustitre'
+#      label: '<:noisettes:label_afficher_soustitre:>'
+#      defaut: ''
+#      afficher_si: '@config:articles_soustitre@ == "oui"'
+#  -
+#    saisie: 'oui_non'
+#    options:
+#      nom: 'afficher_ps'
+#      label: '<:noisettes:label_afficher_ps:>'
+#      defaut: ''
+#      afficher_si: '@config:articles_ps@ == "oui"'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'afficher_descriptif'
+      label: '<:noisettes:label_afficher_descriptif:>'
+      defaut: ''
+      afficher_si: '@config:articles_soustitre@ == "oui"'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'fieldset_conf_avancee'
+      label: '<:sdn:label_conf_avancee_noisettes:>'
+      explication: '<:noisettes:explication_conf_avancee_noisettes:>'
+      afficher_si: '@config:sdn:conf_avancee@  == "on"'
+    saisies:
+      - 'inclure:inclure/yaml/conf_avancee.yaml'

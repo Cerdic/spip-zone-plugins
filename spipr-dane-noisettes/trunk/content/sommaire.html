@@ -1,0 +1,28 @@
+<B_noisettes>
+<BOUCLE_noisettes(NOISETTES){type=sommaire}{bloc=content}{0,1}>
+</BOUCLE_noisettes>
+</B_noisettes>
+<section>
+	<header class="cartouche hide">
+		<h1>#NOM_SITE_SPIP</h1>
+	</header>
+
+	<div class="main">
+		<div class="liste selection ">
+			<INCLURE{fond=inclure/selection-carousel,nb=3,span=12}>
+		</div>
+			
+		<div class="liste articles span12">
+			<INCLURE{fond=liste/articles-resume,env,titre=<:spipr_dane:derniers_articles:>,nb=5,hauteur_logo=150,coupe=100,ajax}>
+		</div>
+		[(#REM)
+		<div class="liste sites syndic_articles span4">
+			<INCLURE{fond=inclure/listes-sites-syndics,nb=10,env,ajax}>
+		</div>
+		[(#PLUGIN{agenda}|oui)<div class="liste long evenements clear "><INCLURE{fond=inclure/agenda-evenements-une,env,ajax} /></div>]
+		]
+
+	</div>
+
+</section>
+<//B_noisettes>

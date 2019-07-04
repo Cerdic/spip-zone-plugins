@@ -1,0 +1,12 @@
+[(#REM)
+Surcharge du plugin Menus
+noisettes/menus.html
+]
+#SET{masquer_h2, #ENV{masquer_titre}|et{#ENV{masquer_picto}}|oui|?{on,''}}
+<BOUCLE_menu(MENUS){identifiant=#ENV{identifiant}}>
+	<div class="menu liste">
+        [(#GET{masquer_h2}|non)<h2 class="h2">[(#ENV{masquer_titre}|non)#ENV{titre,#TITRE|typo}][(#ENV{masquer_picto}|non)<span class="picto"><i class="fa fa-#ENV{picto,list-ul } "></i></span>]</h2>]
+        [(#REM)[(#ENV{masquer_titre}|non)[<h2 class="h2">(#TITRE|typo)</h2>]]]
+		#INCLURE{fond=inclure/menu, env, identifiant=#IDENTIFIANT}
+	</div>
+</BOUCLE_menu>

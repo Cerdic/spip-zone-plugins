@@ -1,0 +1,10 @@
+nom: '<:noisettes:socialtags:>'
+icon: 'socialtags-24.png'
+ajax: 'non'
+necessite: 'socialtags'
+parametres:
+  -
+    saisie: 'explication'
+    options:
+      nom: 'explication_socialtags'
+      texte: '<:noisettes:explication_socialtags:>'

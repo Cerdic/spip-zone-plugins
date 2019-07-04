@@ -1,0 +1,37 @@
+[(#REM)
+
+  Squelette Presentation resumee d'un article dans une liste
+  Distribue sous licence GPL
+
+]
+#SET{strong, #ENV{afficher_liste_simple}|?{span class="entry-title", strong class="h3-like entry-title"}}
+#SET{_strong, #ENV{afficher_liste_simple}|?{span, strong}}
+<BOUCLE_articles(ARTICLES) {id_article} {statut?}>
+<article class="entry article hentry[ (#ENV{image_zoom_hover}|oui)image-zoom-hover]">
+	<#GET{strong}>
+		<a href="#URL_ARTICLE" rel="bookmark"[(#VIRTUEL|oui) class="spip_out"]>
+			[(#ENV{masquer_logo}|non)[(#ENV{image_passe_partout}|?{
+            [(#LOGO_ARTICLE
+            |image_passe_partout{#ENV{largeur_logo,150},#ENV{hauteur_logo,150}}
+            |image_recadre{#ENV{largeur_logo,150},#ENV{hauteur_logo,150},#ENV{align, center}, #ENV{couleur,transparent}}|responsive_logo
+            |sinon{#INCLURE{fond=inclure/article-resume-image, id_article=#ID_ARTICLE, largeur_image=#ENV{largeur_logo}, hauteur_image=#ENV{hauteur_logo}, image_passe_partout=#ENV{image_passe_partout}}})]            
+            ,
+            [(#LOGO_ARTICLE
+            |image_reduire{#ENV{largeur_logo,150},#ENV{hauteur_logo,150}}
+            |image_recadre{#ENV{largeur_logo,150},#ENV{hauteur_logo,150},#ENV{align, center}, #ENV{couleur,transparent}}|responsive_logo
+            |sinon{#INCLURE{fond=inclure/article-resume-image, id_article=#ID_ARTICLE, largeur_image=#ENV{largeur_logo}, hauteur_image=#ENV{hauteur_logo}, image_passe_partout=#ENV{image_passe_partout}}})]
+            })]]
+			[<span class="titre">(#TITRE)</span>]
+		</a>
+	</#GET{_strong}>
+    [(#ENV{afficher_liste_simple}|non)
+	[(#ENV{masquer_date}|non)<p class="publication">[<time datetime="[(#DATE|date_iso)]"><i class="fa fa-calendar"></i> (#DATE|affdate_jourcourt)</time>]</p>]
+	[(#ENV{masquer_intro}|non)[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION{#ENV{coupe,300}})</div>]]
+	]<B_tags>
+	<div class="postmeta tags">
+		<ul class="inline"><BOUCLE_tags(MOTS){si #ENV{afficher_tags}|et{#ENV{afficher_liste_simple}|non}}{id_article}><li><span class="label"[ title="(#TEXTE|attribut_html)"] data-toggle="tooltip"><i class="fa fa-tag "></i> #TITRE</span></li></BOUCLE_tags></ul>
+	</div>
+	</B_tags>
+	[(#SI_PAGE{rubrique}|et{#ENV{afficher_liste_simple}}|non|et{#ENV{afficher_parent}|oui})<div class="txt-right"><strong><i class="fa fa-folder-o"></i>[ (#INFO_TITRE{rubrique,#ID_SECTEUR})]</strong></div>]
+</article>
+</BOUCLE_articles>
