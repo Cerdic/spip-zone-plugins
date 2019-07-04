@@ -28,6 +28,16 @@ if ($z = _request('var_zajax') AND !preg_match(",[^\w-],", $z)) {
 if (!isset($GLOBALS['spip_pipeline']['recuperer_fond'])) $GLOBALS['spip_pipeline']['recuperer_fond'] = '';
 $GLOBALS['spip_pipeline']['recuperer_fond'] .= '||zcore_recuperer_fond';
 
+if (
+	defined('_SPIPR_AUTH_DEMO')?
+		_SPIPR_AUTH_DEMO
+		:
+		(isset($GLOBALS['visiteur_session']['statut'])
+    AND $GLOBALS['visiteur_session']['statut']=='0minirezo'
+    AND $GLOBALS['visiteur_session']['webmestre']=='oui')
+	)
+	_chemin(_DIR_PLUGIN_ZCORE."demo/");
+
 /**
  * Passe un chemin en URL absolue uniquement si non vide
  * utilise pour l'insertion d'URL conditionnee a l'existence d'un fichier (favicon.ico par exemple)
@@ -106,7 +116,7 @@ function responsive_logo($logo) {
 
 	$ratio = round($h * 100 / $w, 2);
 
-	return "<span class='$class' style=\"width:{$w}px;\"><span class=\"img\" style=\"display:block;position:relative;height:0;width:100%;padding-bottom:{$ratio}%;overflow:hidden;background:url($src) no-repeat center;background-size:100%;\"$hover> </span></span>";
+	return "<span class='logo-img-wrapper $class' style=\"width:{$w}px;\"><span class=\"img\" style=\"display:block;position:relative;height:0;width:100%;padding-bottom:{$ratio}%;overflow:hidden;background:url($src) no-repeat center;background-size:100%;\"$hover> </span></span>";
 }
 
 /**
