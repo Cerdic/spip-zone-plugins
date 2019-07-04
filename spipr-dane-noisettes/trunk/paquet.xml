@@ -20,10 +20,10 @@
 
 	<licence>GNU/GPL</licence>
 
-    <necessite nom="spipr_dane" compatibilite="[1.0.0;[" />
-    <necessite nom="noizetier" compatibilite="[3.0.0;[" />
+	<necessite nom="spipr_dane" compatibilite="[1.0.0;[" />
+	<necessite nom="noizetier" compatibilite="[3.0.0;[" />
 
 	<pipeline nom="autoriser" inclure="sdn_autorisations.php" /> 
-    <pipeline nom="affiche_milieu" inclure="sdn_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="sdn_pipelines.php" />
 
 </paquet>
