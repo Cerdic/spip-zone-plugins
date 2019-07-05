@@ -8,7 +8,7 @@
 <plugin>
 	<prefix>langotests</prefix>
 	<categorie>outil</categorie>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<etat>dev</etat>
 	<necessite id="SPIP" version="[3.0.0;3.2.99]" />
 	<icon>langotests-64.png</icon>
