@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// E
 	'envoyer_notification_label_case' => 'Envoyer une notification invitant à définir son mot de passe',
-	'erreur_email_obligatoire' => 'Il doit y avoir un email obligatoire dans les champs ou dans les coordonnées.',
+	'erreur_email_obligatoire' => 'Vous devez configurer un email obligatoire dans les champs ou dans les coordonnées.',
 	'errreur_identifiant_existant' => 'Cet identifiant est déjà utilisé',
 	'exporter_champ_seulement_colonnes_label_case' => 'Ne pas exporter les données, seulement les colonnes',
 	'exporter_titre' => 'Exportation',
