@@ -122,8 +122,8 @@ function formulaires_editer_profil_saisies_dist($id_profil = 'new', $retour = ''
 			),
 		),
 	);
-	// Coordoonnées pour l'auteur si plugin idoine
-	if (defined('_DIR_PLUGIN_COORDONNEES')) {
+	// Coordoonnées pour l'auteur si plugin idoine ET que c'est configuré pour cet objet
+	if (defined('_DIR_PLUGIN_COORDONNEES') and in_array('spip_auteurs', lire_config('coordonnees/objets', array()))) {
 		$groupe_auteur['saisies'][] = array(
 			'saisie' => 'case',
 			'options' => array(
@@ -191,8 +191,8 @@ function formulaires_editer_profil_saisies_dist($id_profil = 'new', $retour = ''
 				'afficher_si' => '@config[activer_organisation]@ == "on"',
 			),
 		);
-		// Coordoonnées pour l'organisation si plugin idoine
-		if (defined('_DIR_PLUGIN_COORDONNEES')) {
+		// Coordoonnées pour l'organisation si plugin idoine ET configuré
+		if (defined('_DIR_PLUGIN_COORDONNEES')  and in_array('spip_organisations', lire_config('coordonnees/objets', array()))) {
 			$groupe_organisation['saisies'][] = array(
 				'saisie' => 'case',
 				'options' => array(
@@ -267,8 +267,8 @@ function formulaires_editer_profil_saisies_dist($id_profil = 'new', $retour = ''
 				'afficher_si' => '@config[activer_contact]@ == "on"',
 			),
 		);
-		// Coordoonnées pour le contact si plugin idoine
-		if (defined('_DIR_PLUGIN_COORDONNEES')) {
+		// Coordoonnées pour le contact si plugin idoine ET configuré
+		if (defined('_DIR_PLUGIN_COORDONNEES')  and in_array('spip_contacts', lire_config('coordonnees/objets', array()))) {
 			$groupe_contact['saisies'][] = array(
 				'saisie' => 'case',
 				'options' => array(
