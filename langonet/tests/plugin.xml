@@ -10,7 +10,7 @@
 	<categorie>outil</categorie>
 	<version>0.1.0</version>
 	<etat>dev</etat>
-	<necessite id="SPIP" version="[3.0.0;3.0.99]" />
+	<necessite id="SPIP" version="[3.0.0;3.2.99]" />
 	<icon>langotests-64.png</icon>
 
 	<nom>Base de tests de LangOnet</nom>
