@@ -148,6 +148,8 @@ function saisies_styliser($flux) {
 	if (
 		// Si on cherche un squelette de formulaire
 		strncmp($flux['args']['fond'], 'formulaires/', 12) == 0
+		// Et que ce n'est pas une inclusion (on teste ça pour l'instant mais c'est pas très générique)
+		and strpos($flux['args']['fond'], 'inc-', 12) === false
 		// Et qu'il y a des saisies dans le contexte
 		and isset($flux['args']['contexte']['_saisies'])
 		// Et que le fichier choisi est vide ou n'existe pas
