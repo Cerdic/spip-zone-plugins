@@ -1,11 +1,5 @@
 [(#REM) <!-- Navigation dans les operations de langonet --> ]
-#SET{operations,
-	#ARRAY{
-		verifications, #LISTE{verifier_item, verifier_l, verifier_doublon},
-		recherches, #LISTE{rechercher_item, rechercher_texte, lister},
-		traductions, #LISTE{generer, editer, traduire}
-	}
-}
+#SET{operations, #REM|langonet_lister_operations}
 <BOUCLE_menus(DATA){source table, #GET{operations}}>
 [<h3 style="margin-top: 2.0775em;">(#VAL{langonet:menu_}|concat{#CLE}|_T|unique)</h3>]
 <ul class="liste-items sous_navigation">

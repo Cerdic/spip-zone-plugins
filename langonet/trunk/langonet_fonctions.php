@@ -286,3 +286,25 @@ function lister_dossiers_plugins($racine_arborescence=null) {
 	}
 	return $dossiers;
 }
+
+
+function langonet_lister_operations() {
+
+	// Initialisation en static pour les performances
+	static $operations = array();
+
+	if (!$operations) {
+		// Les index désignent les groupes de fonctions, le tableau associé contient noms des opérations
+		// telles qu'utilisés dans l'URL de la page de Langonet.
+		$operations = array(
+			'verifications' => array('verifier_item', 'verifier_l', 'verifier_doublon'),
+			'recherches'    => array('rechercher_item', 'rechercher_texte', 'lister'),
+			'traductions'   => array('generer', 'editer', 'traduire')
+		);
+
+		// On complète par des collections fournies par d'autres plugin
+		$operations = pipeline('declarer_operations_langonet', $operations);
+	}
+
+	return $operations;
+}
