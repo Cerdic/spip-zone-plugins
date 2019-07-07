@@ -34,7 +34,7 @@ if (!defined('_LANGONET_ITEM_HTML_FILTRE_PLURIEL_2')) {
 }
 // Fonction _T
 if (!defined('_LANGONET_ITEM_HTML_FILTRE_T')) {
-	define('_LANGONET_ITEM_HTML_FILTRE_T', "%#[A-Z_0-9]+{(?:([a-z0-9_-]+):)?([a-z0-9_]+)}((?:\|\w+(?:{[^.]*})?)*)\|_T%Usm");
+	define('_LANGONET_ITEM_HTML_FILTRE_T', "%#[A-Z_0-9]+{(?:([a-z0-9_-]+):)?([a-z0-9_]+)}((?:\s*\|\w+(?:{[^.]*})?)*)\s*\|_T%Usm");
 }
 
 // Items de langue dans les fichiers YAML
