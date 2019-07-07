@@ -37,9 +37,7 @@ function formulaires_langonet_debusquer_charger() {
 
 function formulaires_langonet_debusquer_traiter() {
 
-	$fichier = _request('fichier_test');
-	$regexp = constant(_request('regexp'));
-
+	// Initialisation du tableau de sortie du phrasage.
 	$utilises = array(
 		'raccourcis'  => array(),
 		'modules'     => array(),
@@ -50,11 +48,18 @@ function formulaires_langonet_debusquer_traiter() {
 		'debug'       => array()
 	);
 
+	// Récupération du fichier choisi et lecture.
+	$fichier = _request('fichier_test');
 	if ($contenu = file_get_contents($fichier)) {
 		// On stocke aussi le fichier à scanner sous forme d'un tableau de lignes afin de rechercher
 		// les numéros de ligne et de colonne des occurrences
-		include_spip('inc/verifier_items');
 		$lignes = file($fichier);
+
+		// Récupération de la regexp à appliquer
+		include_spip('inc/verifier_items');
+		$regexp = constant(_request('regexp'));
+
+		// Recherche du pattern sur chaque ligne : tous les matches.
 		if (preg_match_all($regexp, $contenu, $matches, PREG_OFFSET_CAPTURE)) {
 			foreach ($matches[0] as $_cle => $_expression) {
 				$occurrence[0] = $_expression[0];
@@ -71,7 +76,7 @@ function formulaires_langonet_debusquer_traiter() {
 	}
 
 	$retour['message_ok']['resume'] = _T('langonet:message_ok_debug');
-	$retour['message_ok']['resultats'] = var_export($utilises['debug']);
+	$retour['message_ok']['resultats'] = $utilises['debug'];
 	$retour['editable'] = true;
 
 	return $retour;

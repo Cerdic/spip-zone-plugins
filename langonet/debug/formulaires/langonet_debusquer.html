@@ -48,8 +48,9 @@
 
 [(#REM) <!-- Affichage des resultats --> ]
 <B_resultats>
+	<h3>D&eacute;tections : #TOTAL_BOUCLE</h3>
 <BOUCLE_resultats(DATA) {source table, #ENV*{message_ok/resultats}}>
-
+	[(#VALEUR|bel_env)]
 </BOUCLE_resultats>
 
 </B_resultats>
