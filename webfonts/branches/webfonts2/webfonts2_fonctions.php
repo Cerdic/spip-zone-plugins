@@ -21,20 +21,22 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 */
 function googlefont_request($webfonts,$subsets='',$type='css'){
 	$subset = '&subset=' ;
-	(strlen($subsets)) ? $subset .= $subsets : $subset = '';
-	foreach($webfonts as $font){
-		$variants = implode(',',$font['variants']);
-		$fonts[] = urlencode($font['family']).':'.$variants;
-	}
-	$fonts = implode('|',$fonts);
+    if(is_array($webfonts) && count($webfonts > 0)){
+    	(strlen($subsets)) ? $subset .= $subsets : $subset = '';
+    	foreach($webfonts as $font){
+    		$variants = implode(',',$font['variants']);
+    		$fonts[] = urlencode($font['family']).':'.$variants;
+    	}
+        $fonts = implode('|',$fonts);
+    	if($type == 'specimen'){
+    		$request = "https://fonts.google.com/selection?selection.family=$fonts";
+    	}else{
+    		$request = "https://fonts.googleapis.com/css?family=$fonts".$subset."&display=swap";
+    	}
 
-	if($type == 'specimen'){
-		$request = "https://fonts.google.com/selection?selection.family=$fonts";
-	}else{
-		$request = "https://fonts.googleapis.com/css?family=$fonts".$subset;
-	}
-
-	return $request;
+	    return htmlentities($request);
+    }
+    return false;
 }
 // Renvoie l'url du spécimen sur GooogleFont a partir de la liste des fonts et leur variantes
 // @param $webfonts array

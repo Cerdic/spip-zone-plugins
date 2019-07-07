@@ -25,6 +25,7 @@
 
 	<utilise nom="selecteurgenerique" compatibilite="[1.1.0;]" />
 	<utilise nom="scssphp" compatibilite="[1.4.9;["/>
+    <utilise nom="lazysizes" compatibilite="[4.1.7.0;["/>
 
 	<menu nom="webfonts" titre="webfonts2:titre" parent="menu_squelette" icone="images/webfonts2-16.png" action="webfonts" />
 </paquet>
