@@ -12,9 +12,9 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
 	xmlns:atom="http://www.w3.org/2005/Atom"
 >
-[(#PLUGIN{breves}|et{#CONFIG{activer_breves}|=={oui}}|et{#CONFIG{rssconfig_breves/activer}|!={non}}|et{#CONFIG{rssconfig_breves/flux,breves}|!={articles}}|oui)
+[(#PLUGIN{simplecal}|et{#CONFIG{rssconfig_evenements/activer}|!={non}}|et{#CONFIG{rssconfig_evenements/flux,evenements}|!={articles}}|oui)
 <channel[ xml:lang="(#LANG)"]>
-	<title>[(#NOM_SITE_SPIP|textebrut|texte_backend)]</title>
+	<title>[(#NOM_SITE_SPIP|textebrut|texte_backend)]       #DATE-[(#DATE|affdate{'Ymd'})]-[(#DATE_DEBUT|affdate{'Ymd'})]-#DATE_JOUR_MOINS{5}-[(#DATE_JOUR_MOINS{10}|affdate{'Ymd'})]</title>
 	<link>#URL_SITE_SPIP/</link>
 	[<description>(#DESCRIPTIF_SITE_SPIP|supprimer_tags|texte_backend)</description>]
 	<language>#LANG</language>
@@ -32,11 +32,11 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 
 [(#REM) Si la saisie des rubriques a ete faites avec le selecteur, on utilise le filtre picker_selected
 			sinon, on explode la chaine saisie ]
-#SET{rubriques_a_inclure,#CONFIG{rssconfig_breves/rubriques_a_inclure}|picker_selected{rubrique}}
-[(#GET{rubriques_a_inclure}|count|=={0}|et{#GET{rubriques_a_inclure}|is_array|non}|oui) #SET{rubriques_a_inclure,#CONFIG{rssconfig_breves/rubriques_a_inclure}|explode{','}}]
+#SET{rubriques_a_inclure,#CONFIG{rssconfig_evenements/rubriques_a_inclure}|picker_selected{rubrique}}
+[(#GET{rubriques_a_inclure}|count|=={0}|et{#GET{rubriques_a_inclure}|is_array|non}|oui) #SET{rubriques_a_inclure,#CONFIG{rssconfig_evenements/rubriques_a_inclure}|explode{','}}]
 
 #SET{id_rubrique,#ENV{id_rubrique,#GET{rubriques_a_inclure}}}
-<INCLURE{fond=inclure/rss-liste-items-breves}{env}{id_rubrique=#GET{id_rubrique}}>
+<INCLURE{fond=inclure/rss-liste-items-evenements}{env}{id_rubrique=#GET{id_rubrique}}>
 
 </channel>
 

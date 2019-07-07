@@ -1,0 +1,17 @@
+
+
+<BOUCLE_recents(EVENEMENTS) {lang ?}{branche ?}{id_mot ?}  {par date_debut}{inverse}{0,#CONFIG{rssconfig_evenements/nb_art,20}}{unique}>
+<INCLURE{fond=inclure/rss-item-evenement}{id_evenement}>
+</BOUCLE_recents>
+
+[(#REM)
+Intégration dans le flux rss des evenements debutant dans 5 toujours
+TODO : à rendre configurable , avec rssconfig_evenements/age_art par exemple)
+rem : balise DATE_JOUR_PLUS fournie par simplecal
+<!--BOUCLE_tres_recents(EVENEMENTS){lang ?}{branche ?}{id_mot ?} {par date_debut}{inverse}{age<#CONFIG{rssconfig_evenements/age_art,0}}{unique}>
+<INCLURE{fond=inclure/rss-item-evenement}{id_evenement}>
+/BOUCLE_tres_recents-->
+]
+<BOUCLE_recentsb(EVENEMENTS) {lang ?}{branche ?}{id_mot ?} {where date_debut <= (#DATE_JOUR_PLUS{5}|affdate{'Ymd'})}  {par date_debut}{inverse}{unique}>
+<INCLURE{fond=inclure/rss-item-evenement}{id_evenement}>
+</BOUCLE_recentsb>

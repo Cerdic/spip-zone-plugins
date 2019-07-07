@@ -7,17 +7,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'configurer_rssconfig' => 'Configurer les flux RSS',
-	
+
 	// E
 	'explication_activation' => 'Par défaut, SPIP propose un flux rss des derniers articles publiés. Vous pouvez ici désactiver la production de ce flux (un fichier vide sera néanmoins proposé; si vous utilisez le plugin zvide, le lien ne sera pas inclu dans l\'entête des pages html).',
 	'explication_activation_breves' => 'Par défaut, SPIP propose un flux RSS des dernières brèves publiées via le lien <code>spip.php?page=backend-breves</code>. Vous pouvez ici désactiver ce flux, décider de fusionner le flux des brèves avec celui des articles ou bien conserver deux flux séparés.',
+	'explication_activation_evenements' => 'Par défaut, SPIP propose un flux RSS des derniers événements publiés via le lien <code>spip.php?page=backend-evenements</code>. Vous pouvez ici désactiver ce flux, décider de fusionner le flux des événements avec celui des articles ou bien conserver deux flux séparés.',
 	'explication_activation_sites' => 'Par défaut, SPIP propose un flux RSS des derniers sites publiés via le lien <code>spip.php?page=backend-sites</code>. Vous pouvez ici désactiver ce flux, décider de fusionner le flux des sites avec celui des articles ou bien conserver deux flux séparés.',
 	'explication_age_art' => 'Indiquez un nombre de jours. Les items ayant un âge inférieur à ce critère seront inclus dans le flux. Mettez 0 pour ne pas utiliser ce critère.',
 	'explication_age_modif' => 'Inclure également les items plus anciens mais modifiés récemment ? Indiquez l\'âge de la modification en jours, 0 si vous ne souhaitez pas inclure les items modifiés récemment.',
 	'explication_articles_a_inclure' => 'Par défaut, SPIP inclut dans le flux les 10 derniers articles publiés ainsi que les articles publiés il y a moins de trois jours. Vous pouvez modifier ci-dessous ces deux critères.',
 	'explication_breves_a_inclure' => 'Par défaut, SPIP inclut dans le flux les 20 dernières brèves publiées ainsi que les articles publiés il y a moins de trois jours. Vous pouvez modifier ci-dessous ces deux critères.',
+	'explication_evenements_a_inclure' => 'Par défaut, SPIP inclut dans le flux les 20 derniers événements publiés ainsi que les articles publiés il y a moins de trois jours. Vous pouvez modifier ci-dessous ces deux critères.',
 	'explication_creator' => 'Auteur(s) de l\'article affichés dans le flux RSS.',
 	'explication_creator_breves' => 'Auteur de la brève affiché dans le flux RSS.',
+	'explication_creator_evenements' => 'Auteur de l\'événement affiché dans le flux RSS.',
 	'explication_creator_sites' => 'Auteur du site affiché dans le flux RSS.',
 	'explication_diffuser_documents' => 'Diffuser dans le flux l\'URL des documents joints ?',
 	'explication_diffuser_mots' => 'Diffuser les mots-clés comme tags RSS ?',
@@ -28,7 +31,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_rubriques_a_inclure_selecteur' => 'Sélectionner les rubriques à inclure (les sous-rubriques seront automatiquement rajoutées). Ne rien choisir pour que toutes les rubriques soient traitées.',
 	'explication_sites_a_inclure' => 'Par défaut, SPIP inclut dans le flux les 20 derniers sites publiés ainsi que les sites publiés il y a moins de trois jours. Vous pouvez modifier ci-dessous ces deux critères.',
 	'explication_syndication_integrale' => 'Diffuser le texte en intégralité ? (Si non, seul un résumé sera diffusé.)',
-	
+	'explication_syndication_integrale_evenements' => 'Diffuser le texte en intégralité ? (Si non, seuls 50 caractères seront diffusés.)',
+
 	// L
 	'label_activation' => 'Activation',
 	'label_activer' => 'Activer ?',
@@ -36,12 +40,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_age_modif' => 'Modifiés récemment',
 	'label_articles_a_inclure' => 'Articles à inclure',
 	'label_breves_a_inclure' => 'Brèves à inclure',
+	'label_evenements_a_inclure' => 'Evénements à inclure',
 	'label_sites_a_inclure' => 'Sites à inclure',
 	'label_choix_creator_aucun' => 'Aucun',
 	'label_choix_creator_auteurs' => 'Auteurs de l\'article dans SPIP',
 	'label_choix_creator_nom_site_spip' => 'Nom du site SPIP',
 	'label_choix_flux_articles' => 'Fusionner avec les articles (<code>spip.php?page=backend</code>)',
 	'label_choix_flux_breves' => 'Flux indépendant (<code>spip.php?page=backend-breves</code>)',
+	'label_choix_flux_evenements' => 'Flux indépendant (<code>spip.php?page=backend-evenements</code>)',
 	'label_choix_flux_deux' => 'Les deux (flux indépendant + fusion avec les articles)',
 	'label_choix_flux_sites' => 'Flux indépendant (<code>spip.php?page=backend-sites</code>)',
 	'label_creator' => 'Auteur(s)',
@@ -53,11 +59,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_nb_art' => 'Critère de nombre',
 	'label_options_articles' => 'Options des articles',
 	'label_options_breves' => 'Options des brèves',
+	'label_options_evenements' => 'Options des événements',
 	'label_options_sites' => 'Options des sites',
 	'label_rubriques' => 'Rubriques',
 	'label_rubriques_a_inclure' => 'Rubriques à inclure',
 	'label_syndication_integrale' => 'Syndication intégrale',
-	
+
 	// R
 	'rssconfig' => 'Flux RSS',
 

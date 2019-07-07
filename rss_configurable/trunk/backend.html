@@ -3,7 +3,7 @@
 	qui permettent aux visiteurs de suivre l'actualité
 	de votre site depuis un lecteur de news.
 
-	Cette page génère un code XML/RSS adapté 
+	Cette page génère un code XML/RSS adapté
 
 ][(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml
 version="1.0"[ encoding="(#CHARSET)"]?>
@@ -15,9 +15,10 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 [(#SET{flux_articles,#CONFIG{rssconfig/activer}|!={non}|oui})]
 [(#SET{flux_breves,#PLUGIN{breves}|et{#CONFIG{activer_breves}|=={oui}}|et{#CONFIG{rssconfig_breves/activer}|!={non}}|et{#CONFIG{rssconfig_breves/flux,breves}|!={breves}}|oui})]
 [(#SET{flux_sites,#PLUGIN{sites}|et{#CONFIG{activer_sites}|=={oui}}|et{#CONFIG{rssconfig_sites/activer}|!={non}}|et{#CONFIG{rssconfig_sites/flux,sites}|!={sites}}|oui})]
+[(#SET{flux_evenements,#PLUGIN{simplecal}|et{#CONFIG{rssconfig_evenements/activer}|!={non}}|et{#CONFIG{rssconfig_evenements/flux,evenements}|!={evenements}}|oui})]
 
 <channel[ xml:lang="(#LANG)"]>
-	<title>[(#NOM_SITE_SPIP|textebrut|texte_backend)]-#GET{flux_sites}-#GET{flux_breves}-#GET{flux_articles}</title>
+	<title>[(#NOM_SITE_SPIP|textebrut|texte_backend)]-#GET{flux_evenements}-#GET{flux_sites}-#GET{flux_breves}-#GET{flux_articles}</title>
 	<link>#URL_SITE_SPIP/</link>
 	[<description>(#DESCRIPTIF_SITE_SPIP|supprimer_tags|texte_backend)</description>]
 	<language>#LANG</language>
@@ -31,7 +32,7 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 		[<width>(#LOGO_SITE_SPIP||image_reduire{144,400}|extraire_attribut{width})</width>]
 	</image>
 ]
-[(#REM) tableau qui pour stocker les items ramenes par les boucles 
+[(#REM) tableau qui pour stocker les items ramenes par les boucles
         cle = art ou bre ou sit + id (ex : art124 pour article avec id_article1234)
 		valeur = date
 ]
@@ -91,8 +92,24 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 </BOUCLE_tres_recentss>
 
 
+[(#REM) Si la saisie des rubriques a ete faites avec le selecteur, on utilise le filtre picker_selected
+			sinon, on explode la chaine saisie ]
+#SET{rubriques_a_inclure_evenements,#CONFIG{rssconfig_evenements/rubriques_a_inclure}|picker_selected{rubrique}}
+[(#GET{rubriques_a_inclure_evenements}|count|=={0}|et{#GET{rubriques_a_inclure_evenements}|is_array|non}|oui) #SET{rubriques_a_inclure_evenements,#CONFIG{rssconfig_evenements/rubriques_a_inclure}|explode{','}}]
+#SET{id_rubrique,#ENV{id_rubrique,#GET{rubriques_a_inclure_evenements}}}
 
-[(#REM) tri du tableau sur la date (champ valeur) 
+[(#REM)
+Intégration dans le flux rss des evenements debutant dans 5 toujours
+TODO : à rendre configurable , avec rssconfig_evenements/age_art par exemple)
+rem : balise DATE_JOUR_PLUS fournie par simplecal
+]
+<BOUCLE_recentse(EVENEMENTS)  {si #GET{flux_evenements}|==oui} {lang ?}{branche #GET{id_rubrique,?}} {id_mot ?} {where date_debut <= (#DATE_JOUR_PLUS{5}|affdate{'Ymd'})} {par date}{inverse}{0,#CONFIG{rssconfig_evenements/nb_art,20}}{unique}>
+[(#SET{elements,#GET{elements}|array_merge{#ARRAY{evt#ID_EVENEMENT,#DATE}}})]
+</BOUCLE_recentse>
+
+
+
+[(#REM) tri du tableau sur la date (champ valeur)
         et pour chaque item ecriture rss selon le type ]
 <BOUCLE_lesflux(DATA) {source table, #GET{elements} } {par valeur} {inverse}>
 #SET{type,(#CLE|couper{3})}
@@ -100,6 +117,7 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 [(#GET{type}|=={art}|oui)<INCLURE{fond=inclure/rss-item}{id_article=#GET{id}}>]
 [(#GET{type}|=={bre}|oui)<INCLURE{fond=inclure/rss-item-breve}{id_breve=#GET{id}}>]
 [(#GET{type}|=={sit}|oui)<INCLURE{fond=inclure/rss-item-site}{id_syndic=#GET{id}}>]
+[(#GET{type}|=={evt}|oui)<INCLURE{fond=inclure/rss-item-evenement}{id_evenement=#GET{id}}>]
 </BOUCLE_lesflux>
 
 </channel>

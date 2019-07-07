@@ -1,7 +1,7 @@
 <paquet
 	prefix="rssconfig"
 	categorie="communication"
-	version="2.0.6"
+	version="2.0.7"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/rssconfig-32.png"
@@ -20,6 +20,7 @@
 
 	<utilise nom="Z" compatibilite="[1.0.0;]" />
 	<utilise nom="Zdist" compatibilite="[1.0.0;]" />
+	<utilise nom="simplecal" compatibilite="[2.2.13;[" />
 
 	<menu nom="rssconfig" titre="rssconfig:rssconfig" parent="bando_squelette" icone="images/rssconfig-16.png" action="configurer_rssconfig" />
 </paquet>

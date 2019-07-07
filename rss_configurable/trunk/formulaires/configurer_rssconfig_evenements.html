@@ -1,0 +1,139 @@
+<div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul class="editer-groupe">
+			<li class="fieldset">
+				<fieldset>
+					<legend><:rssconfig:label_activation:></legend>
+					<p class="explication"><:rssconfig:explication_activation_evenements:></p>
+					<ul class="editer-groupe">
+						<li class="editer editer_activer[ (#ENV**{erreurs}|table_valeur{activer}|oui)erreur]">
+							<label><:rssconfig:label_activer:></label>
+							<div class="choix">
+								<input type="radio" name="activer" class="radio" id="activer_on" value="oui" [(#ENV{activer,oui}|=={oui}|oui) checked="checked"] onchange="if (jQuery(this).prop('checked')) jQuery('.opt_evenements').show('fast');" />
+								<label for='activer_on'><:item_oui:></label>
+							</div>
+							<div class="choix">
+								<input type="radio" name="activer" class="radio" id="activer_off" value="non" [(#ENV{activer,oui}|=={non}|oui) checked="checked"] onchange="if (jQuery(this).prop('checked')) jQuery('.opt_evenements').hide('fast');" />
+								<label for='activer_off'><:item_non:></label>
+							</div>
+						</li>
+						<li class="editer editer_flux[ (#ENV**{erreurs}|table_valeur{flux}|oui)erreur] opt_evenements">
+							<label for='flux'><:rssconfig:label_flux:></label>
+							<select name="flux" id="flux">
+								<option value="evenements"[(#ENV{flux,evenements}|=={aucun}|oui)selected="selected"]><:rssconfig:label_choix_flux_evenements:></option>
+								<option value="articles"[(#ENV{flux}|=={articles}|oui)selected="selected"]><:rssconfig:label_choix_flux_articles:></option>
+								<option value="deux"[(#ENV{flux}|=={deux}|oui)selected="selected"]><:rssconfig:label_choix_flux_deux:></option>
+							</select>
+						</li>
+					</ul>
+					[(#ENV{activer,oui}|=={non}|oui)<script type="text/javascript">//<!\[CDATA\[
+						jQuery(document).ready(function(){ jQuery('.opt_evenements').hide('fast'); });
+					//\]\]></script>]
+				</fieldset>
+			</li>
+			<li class="fieldset opt_evenements">
+				<fieldset>
+					<legend><:rssconfig:label_evenements_a_inclure:></legend>
+					<p class="explication"><:rssconfig:explication_evenements_a_inclure:></p>
+					<ul class="editer-groupe">
+						<li class="editer editer_nb_art[ (#ENV**{erreurs}|table_valeur{nb_art}|oui)erreur]">
+							<label for='nb_art'><:rssconfig:label_nb_art:></label>
+							<p class="explication"><:rssconfig:explication_nb_art:></p>
+							<input type="text" name="nb_art" class="text" id="nb_art" value="#ENV*{nb_art,20}" />
+						</li>
+						[(#REM) TODO rendre parametrable anticipation integration dans flux selon date debut
+						<li class="editer editer_age_art[ (#ENV**{erreurs}|table_valeur{age_art}|oui)erreur]">
+							<label for='age_art'><:rssconfig:label_age_art:></label>
+							<p class="explication"><:rssconfig:explication_age_art:></p>
+							<input type="text" name="age_art" class="text" id="age_art" value="#ENV*{age_art,0}" />
+						</li>
+						]
+					</ul>
+				</fieldset>
+			</li>
+			<li class="fieldset opt_evenements">
+				<fieldset>
+					<legend><:rssconfig:label_options_evenements:></legend>
+					<ul class="editer-groupe">
+						<li class="editer editer_creator[ (#ENV**{erreurs}|table_valeur{creator}|oui)erreur]">
+							<label for='creator'><:rssconfig:label_creator:></label>
+							<p class="explication"><:rssconfig:explication_creator_evenements:></p>
+							<select name="creator" id="creator">
+								<option value="aucun"[(#ENV{creator}|=={aucun}|oui)selected="selected"]><:rssconfig:label_choix_creator_aucun:></option>
+								<option value="nom_site_spip"[(#ENV{creator}|=={nom_site_spip}|oui)selected="selected"]><:rssconfig:label_choix_creator_nom_site_spip:></option>
+							</select>
+						</li>
+						<li class="editer editer_syndication_integrale[ (#ENV**{erreurs}|table_valeur{syndication_integrale}|oui)erreur]">
+							<label><:rssconfig:label_syndication_integrale:></label>
+							<p class="explication"><:rssconfig:explication_syndication_integrale_evenements:></p>
+							<div class="choix">
+								<input type="radio" name="syndication_integrale" class="radio" id="syndication_integrale_on" value="oui" [(#ENV{syndication_integrale,#CONFIG{syndication_integrale}}|=={oui}|oui) checked="checked"] />
+								<label for='syndication_integrale_on'><:item_oui:></label>
+							</div>
+							<div class="choix">
+								<input type="radio" name="syndication_integrale" class="radio" id="syndication_integrale_off" value="non" [(#ENV{syndication_integrale,#CONFIG{syndication_integrale}}|=={non}|oui) checked="checked"] />
+								<label for='syndication_integrale_off'><:item_non:></label>
+							</div>
+						</li>
+						<li class="editer editer_diffuser_rubrique[ (#ENV**{erreurs}|table_valeur{diffuser_rubrique}|oui)erreur]">
+							<label><:rssconfig:label_diffuser_rubrique:></label>
+							<p class="explication"><:rssconfig:explication_diffuser_rubrique:></p>
+							<div class="choix">
+								<input type="radio" name="diffuser_rubrique" class="radio" id="diffuser_rubrique_on" value="oui" [(#ENV{diffuser_rubrique,oui}|=={oui}|oui) checked="checked"] />
+								<label for='diffuser_rubrique_on'><:item_oui:></label>
+							</div>
+							<div class="choix">
+								<input type="radio" name="diffuser_rubrique" class="radio" id="diffuser_rubrique_off" value="non" [(#ENV{diffuser_rubrique,oui}|=={non}|oui) checked="checked"] />
+								<label for='diffuser_rubrique_off'><:item_non:></label>
+							</div>
+						</li>
+						<li class="editer editer_diffuser_mots[ (#ENV**{erreurs}|table_valeur{diffuser_mots}|oui)erreur]">
+							<label><:rssconfig:label_diffuser_mots:></label>
+							<p class="explication"><:rssconfig:explication_diffuser_mots:></p>
+							<div class="choix">
+								<input type="radio" name="diffuser_mots" class="radio" id="diffuser_mots_on" value="oui" [(#ENV{diffuser_mots,oui}|=={oui}|oui) checked="checked"] />
+								<label for='diffuser_mots_on'><:item_oui:></label>
+							</div>
+							<div class="choix">
+								<input type="radio" name="diffuser_mots" class="radio" id="diffuser_mots_off" value="non" [(#ENV{diffuser_mots,oui}|=={non}|oui) checked="checked"] />
+								<label for='diffuser_mots_off'><:item_non:></label>
+							</div>
+						</li>
+						<li class="editer editer_diffuser_documents[ (#ENV**{erreurs}|table_valeur{diffuser_documents}|oui)erreur]">
+							<label><:rssconfig:label_diffuser_documents:></label>
+							<p class="explication"><:rssconfig:explication_diffuser_documents:></p>
+							<div class="choix">
+								<input type="radio" name="diffuser_documents" class="radio" id="diffuser_documents_on" value="oui" [(#ENV{diffuser_documents,oui}|=={oui}|oui) checked="checked"] />
+								<label for='diffuser_documents_on'><:item_oui:></label>
+							</div>
+							<div class="choix">
+								<input type="radio" name="diffuser_documents" class="radio" id="diffuser_documents_off" value="non" [(#ENV{diffuser_documents,oui}|=={non}|oui) checked="checked"] />
+								<label for='diffuser_documents_off'><:item_non:></label>
+							</div>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			<li class="fieldset opt_evenements">
+				<fieldset>
+					<legend><:rssconfig:label_rubriques:></legend>
+					<p class="explication"><:rssconfig:explication_rubriques:></p>
+					<ul class="editer-groupe">
+						<li class="editer editer_rubriques[ (#ENV**{erreurs}|table_valeur{rubriques_a_inclure}|oui)erreur]">
+							<label for='rubriques_a_inclure'><:rssconfig:label_rubriques_a_inclure:></label>
+							<p class="explication"><:rssconfig:explication_rubriques_a_inclure_selecteur:></p>
+							<input type="hidden" name="rubriques_a_inclure[]" value=""> [(#REM) Entrée vide pour que SPIP détecte le champs ]
+							<INCLURE{fond=formulaires/selecteur/rubriques}{selected=#ENV*{rubriques_a_inclure}}{name=rubriques_a_inclure}>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
+	</div></form>
+</div>

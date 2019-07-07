@@ -38,6 +38,7 @@ function rssconfig_vider_tables($nom_meta_base_version)
 {
 	effacer_meta('rssconfig');
 	effacer_meta('rssconfig_breves');
+	effacer_meta('rssconfig_evenements');
 	effacer_meta('rssconfig_sites');
 	effacer_meta($nom_meta_base_version);
 }

@@ -1,6 +1,7 @@
 [(#AUTORISER{configurer,rssconfig}|sinon_interdire_acces)]
 <h1 class="grostitre"><:rssconfig:configurer_rssconfig:></h1>
 
+
 <h2><:articles:></h2>
 <div class="ajax">
 	#FORMULAIRE_CONFIGURER_RSSCONFIG
@@ -16,3 +17,10 @@
 	#FORMULAIRE_CONFIGURER_RSSCONFIG_SITES
 </div>
 <div class="nettoyeur"></div>]
+[(#PLUGIN{simplecal}|oui)
+<h2><:simplecal:html_title:></h2>
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_RSSCONFIG_EVENEMENTS
+</div>
+<div class="nettoyeur"></div>
+]
