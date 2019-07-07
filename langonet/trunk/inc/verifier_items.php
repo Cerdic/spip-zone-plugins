@@ -1,81 +1,96 @@
 <?php
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // Items de langue dans les fichiers PHP
 // déclaration d'items dans base/module.php
-if (!defined('_LANGONET_ITEM_PHP_OBJET'))
-	define("_LANGONET_ITEM_PHP_OBJET", '%=>\s*[\'"](?:([a-z0-9_]+):)([^\/ \']*)[\'"]%Sm');
+if (!defined('_LANGONET_ITEM_PHP_OBJET')) {
+	define('_LANGONET_ITEM_PHP_OBJET', '%=>\s*[\'"](?:([a-z0-9_]+):)([^\/ \']*)[\'"]%Sm');
+}
 // Fontions PHP _T ou _U avec apostrophe
-if (!defined('_LANGONET_ITEM_PHP_TRADA'))
-	define("_LANGONET_ITEM_PHP_TRADA", '%_[TU]\s*[(]\s*\'(?:([a-z0-9_]+):)?([^\']*)\'\s*([^.,)]*[^)]*)%Sm');
+if (!defined('_LANGONET_ITEM_PHP_TRADA')) {
+	define('_LANGONET_ITEM_PHP_TRADA', '%_[TU]\s*[(]\s*\'(?:([a-z0-9_]+):)?([^\']*)\'\s*([^.,)]*[^)]*)%Sm');
+}
 // Fontions PHP _T ou _U avec guillemet
-if (!defined('_LANGONET_ITEM_PHP_TRADG'))
-	define("_LANGONET_ITEM_PHP_TRADG", '%_[TU]\s*[(]\s*"(?:([a-z0-9_]+):)?([^"]*)"\s*([^.,)]*[^)]*)%Sm');
+if (!defined('_LANGONET_ITEM_PHP_TRADG')) {
+	define('_LANGONET_ITEM_PHP_TRADG', '%_[TU]\s*[(]\s*"(?:([a-z0-9_]+):)?([^"]*)"\s*([^.,)]*[^)]*)%Sm');
+}
 
 // Items de langue dans les fichiers HTML
 
 // balise <:module:raccourci:> et toutes les formes admises avec paramètres et filtres
-if (!defined('_LANGONET_ITEM_HTML_BALISE'))
-	define("_LANGONET_ITEM_HTML_BALISE", "%<:(?:([a-z0-9_-]+):)?((?:[^:<>|{]+(?:<[^>]*>)?)*)([^:>]*):>%sm");
+if (!defined('_LANGONET_ITEM_HTML_BALISE')) {
+	define('_LANGONET_ITEM_HTML_BALISE', '%<:(?:([a-z0-9_-]+):)?((?:[^:<>|{]+(?:<[^>]*>)?)*)([^:>]*):>%sm');
+}
 // Fonction |singulier_ou_pluriel{arg1, arg2, nb} pour chaque argument. Le nb est indispensable pour la détection de
 // l'arg2
-if (!defined('_LANGONET_ITEM_HTML_FILTRE_PLURIEL_1'))
-	define("_LANGONET_ITEM_HTML_FILTRE_PLURIEL_1", "%\|singulier_ou_pluriel{(?:[\s]*(?:(?:#[A-Z_0-9]+{)*)(?:([a-z0-9_-]+):)?([a-z0-9_]+))([^,]*),%sm");
-if (!defined('_LANGONET_ITEM_HTML_FILTRE_PLURIEL_2'))
-	define("_LANGONET_ITEM_HTML_FILTRE_PLURIEL_2", "%\|singulier_ou_pluriel{[^,]*,(?:[\s]*(?:(?:#[A-Z_0-9]+{)*)(?:([a-z0-9_-]+):)?([a-z0-9_]+))([^,]*),%sm");
+if (!defined('_LANGONET_ITEM_HTML_FILTRE_PLURIEL_1')) {
+	define('_LANGONET_ITEM_HTML_FILTRE_PLURIEL_1', "%\|singulier_ou_pluriel{(?:[\s]*(?:(?:#[A-Z_0-9]+{)*)(?:([a-z0-9_-]+):)?([a-z0-9_]+))([^,]*),%sm");
+}
+if (!defined('_LANGONET_ITEM_HTML_FILTRE_PLURIEL_2')) {
+	define('_LANGONET_ITEM_HTML_FILTRE_PLURIEL_2', "%\|singulier_ou_pluriel{[^,]*,(?:[\s]*(?:(?:#[A-Z_0-9]+{)*)(?:([a-z0-9_-]+):)?([a-z0-9_]+))([^,]*),%sm");
+}
 // Fonction _T
-if (!defined('_LANGONET_ITEM_HTML_FILTRE_T'))
-	define("_LANGONET_ITEM_HTML_FILTRE_T", "%#[A-Z_0-9]+{(?:([a-z0-9_-]+):)?([a-z0-9_]+)}((?:\|\w+(?:{[^.]*})?)*)\|_T%Usm");
+if (!defined('_LANGONET_ITEM_HTML_FILTRE_T')) {
+	define('_LANGONET_ITEM_HTML_FILTRE_T', "%#[A-Z_0-9]+{(?:([a-z0-9_-]+):)?([a-z0-9_]+)}((?:\|\w+(?:{[^.]*})?)*)\|_T%Usm");
+}
 
 // Items de langue dans les fichiers YAML
-if (!defined('_LANGONET_ITEM_YAML'))
-	define("_LANGONET_ITEM_YAML", ",<:(?:([a-z0-9_-]+):)?([a-z0-9_]+):>,sm");
+if (!defined('_LANGONET_ITEM_YAML')) {
+	define('_LANGONET_ITEM_YAML', ',<:(?:([a-z0-9_-]+):)?([a-z0-9_]+):>,sm');
+}
 
 // Items de langue dans les fichiers XML
 // -- pour plugin.xml
-if (!defined('_LANGONET_ITEM_PLUGINXML'))
-	define("_LANGONET_ITEM_PLUGINXML", ",<titre>\s*(?:([a-z0-9_-]+):)?([a-z0-9_]+)\s*</titre>,ism");
+if (!defined('_LANGONET_ITEM_PLUGINXML')) {
+	define('_LANGONET_ITEM_PLUGINXML', ",<titre>\s*(?:([a-z0-9_-]+):)?([a-z0-9_]+)\s*</titre>,ism");
+}
 // -- pour paquet.xml
-if (!defined('_LANGONET_ITEM_PAQUETXML'))
-	define("_LANGONET_ITEM_PAQUETXML", ",titre=['\"](?:([a-z0-9_-]+):)?([a-z0-9_]+)['\"],ism");
+if (!defined('_LANGONET_ITEM_PAQUETXML')) {
+	define('_LANGONET_ITEM_PAQUETXML', ",titre=['\"](?:([a-z0-9_-]+):)?([a-z0-9_]+)['\"],ism");
+}
 // -- pour les autres fichiers XML
 // TODO : comment faire marcher le fait que le tag est le même (contenu) et que les quotes aussi (attribut)
 // TODO : comment faire aussi pour ne pas capturer ces portions
-if (!defined('_LANGONET_ITEM_XML_CONTENU'))
-	define("_LANGONET_ITEM_XML_CONTENU", ",<\w+>\s*(?:<:)*(?:([a-z0-9_-]+):)([a-z0-9_]+)(?::>)*\s*</\w+>,ism");
-if (!defined('_LANGONET_ITEM_XML_ATTRIBUT'))
-	define("_LANGONET_ITEM_XML_ATTRIBUT", ",\w+=['\"](?:([a-z0-9_-]+):)([a-z0-9_]+)['\"],ism");
+if (!defined('_LANGONET_ITEM_XML_CONTENU')) {
+	define('_LANGONET_ITEM_XML_CONTENU', ",<\w+>\s*(?:<:)*(?:([a-z0-9_-]+):)([a-z0-9_]+)(?::>)*\s*</\w+>,ism");
+}
+if (!defined('_LANGONET_ITEM_XML_ATTRIBUT')) {
+	define('_LANGONET_ITEM_XML_ATTRIBUT', ",\w+=['\"](?:([a-z0-9_-]+):)([a-z0-9_]+)['\"],ism");
+}
 
 $GLOBALS['langonet_regexp'] = array(
 	'paquet.xml' => array(_LANGONET_ITEM_PAQUETXML),
 	'plugin.xml' => array(_LANGONET_ITEM_PLUGINXML),
-	'xml' => array(
-				_LANGONET_ITEM_XML_CONTENU,
-				_LANGONET_ITEM_XML_ATTRIBUT
+	'xml'        => array(
+		_LANGONET_ITEM_XML_CONTENU,
+		_LANGONET_ITEM_XML_ATTRIBUT
 	),
 	'yaml' => array(_LANGONET_ITEM_YAML),
 	'html' => array(
-				_LANGONET_ITEM_HTML_BALISE,
-				_LANGONET_ITEM_HTML_FILTRE_PLURIEL_1,
-				_LANGONET_ITEM_HTML_FILTRE_PLURIEL_2,
-				_LANGONET_ITEM_HTML_FILTRE_T
+		_LANGONET_ITEM_HTML_BALISE,
+		_LANGONET_ITEM_HTML_FILTRE_PLURIEL_1,
+		_LANGONET_ITEM_HTML_FILTRE_PLURIEL_2,
+		_LANGONET_ITEM_HTML_FILTRE_T
 	),
 	'php' => array(
-				_LANGONET_ITEM_PHP_OBJET,
-				_LANGONET_ITEM_PHP_TRADA,
-				_LANGONET_ITEM_PHP_TRADG
+		_LANGONET_ITEM_PHP_OBJET,
+		_LANGONET_ITEM_PHP_TRADA,
+		_LANGONET_ITEM_PHP_TRADG
 	)
 );
 
 /**
- * Verification des items de langue non définis ou obsolètes
+ * Verification des items de langue non définis ou obsolètes.
  *
- * @param string 	$module		prefixe du fichier de langue
- * @param string 	$langue		index du nom de langue
- * @param string 	$ou_langue		chemin vers le fichier de langue à vérifier
- * @param array		$ou_fichiers	tableau des racines d'arborescence à vérifier
- * @param string 	$verification	type de verification à effectuer
+ * @param string $module       prefixe du fichier de langue
+ * @param string $langue       index du nom de langue
+ * @param string $ou_langue    chemin vers le fichier de langue à vérifier
+ * @param array  $ou_fichiers  tableau des racines d'arborescence à vérifier
+ * @param string $verification type de verification à effectuer
+ *
  * @return array
  */
 function inc_verifier_items($module, $langue, $ou_langue, $ou_fichiers, $verification) {
@@ -85,10 +100,11 @@ function inc_verifier_items($module, $langue, $ou_langue, $ou_fichiers, $verific
 	// - les ultimes sous-repertoires charsets/ , lang/ , req/ sont ignorés.
 	// - seuls les fichiers php, html, xml ou yaml sont considérés.
 	$fichiers = array();
-	foreach($ou_fichiers as $_arborescence) {
+	foreach ($ou_fichiers as $_arborescence) {
 		$fichiers = array_merge(
-						$fichiers,
-						preg_files(_DIR_RACINE.$_arborescence, '(?<!/charsets|/lang|/req)(/[^/]*\.(xml|yaml|html|php))$'));
+			$fichiers,
+			preg_files(_DIR_RACINE . $_arborescence, '(?<!/charsets|/lang|/req)(/[^/]*\.(xml|yaml|html|php))$')
+		);
 	}
 
 	// On collecte l'ensemble des occurrences d'utilisation d'items de langue dans la liste des fichiers
@@ -112,8 +128,7 @@ function inc_verifier_items($module, $langue, $ou_langue, $ou_fichiers, $verific
 		// Autrement dit les fichiers francais du repertoire lang/ sont la reference
 		$fichiers_langue = preg_files(_DIR_RACINE, '/lang/[^/]+_fr\.php$');
 		$resultats = reperer_items_non_definis($utilises, $module, $traductions, $fichiers_langue);
-	}
-	elseif ($traductions) {
+	} elseif ($traductions) {
 		$resultats = reperer_items_non_utilises($utilises, $module, $traductions);
 	}
 
@@ -125,24 +140,24 @@ function inc_verifier_items($module, $langue, $ou_langue, $ou_fichiers, $verific
 	return $resultats;
 }
 
-
 /**
  * Cherche l'ensemble des occurrences d'utilisation d'items de langue dans la liste des fichiers fournie.
  * Cette recherche se fait ligne par ligne, ce qui ne permet pas de trouver les items sur plusieurs lignes.
  *
  * @param $fichiers
+ *
  * @return array
  */
 function collecter_occurrences($fichiers) {
 
 	$utilises = array(
-					'raccourcis' => array(),
-					'modules' => array(),
-					'items' => array(),
-					'occurrences' => array(),
-					'suffixes' => array(),
-					'variables' => array(),
-					'debug' => array()
+		'raccourcis'  => array(),
+		'modules'     => array(),
+		'items'       => array(),
+		'occurrences' => array(),
+		'suffixes'    => array(),
+		'variables'   => array(),
+		'debug'       => array()
 	);
 
 	foreach ($fichiers as $_fichier) {
@@ -168,9 +183,8 @@ function collecter_occurrences($fichiers) {
 						}
 					}
 				}
-			}
-			else {
-				spip_log("Ce type de fichier n'est pas scanné : $type_fichier ($_fichier)", "langonet");
+			} else {
+				spip_log("Ce type de fichier n'est pas scanné : ${type_fichier} (${_fichier})", 'langonet');
 			}
 		}
 	}
@@ -178,32 +192,33 @@ function collecter_occurrences($fichiers) {
 	return $utilises;
 }
 
-
 /**
  * Identifie le type de fichier dans lequel chercher les occurrences d'utilisation d'items
  * de langue.
  *
- * @param string	$fichier
- * 		Chemin complet du fichier à scanner
+ * @param string $fichier
+ *                        Chemin complet du fichier à scanner
  *
  * @return string
- * 		Extension du fichier parmi 'xml', 'yaml', 'html' et 'php' ou le nom du fichier de description
- * 		du plugin 'paquet.xml' ou 'plugin.xml'.
+ *                Extension du fichier parmi 'xml', 'yaml', 'html' et 'php' ou le nom du fichier de description
+ *                du plugin 'paquet.xml' ou 'plugin.xml'.
  */
 function identifier_type_fichier($fichier) {
+
 	// On initialise le type avec l'extension du fichier
 	$informations = pathinfo($fichier);
 	$type = strtolower($informations['extension']);
 
 	// Pour les fichiers XML on précise si le fichier est un paquet.xml ou un plugin.xml
-	if ($type == 'xml')
+	if ($type == 'xml') {
 		if (($informations['basename'] == 'paquet.xml')
-		OR ($informations['basename'] == 'plugin.xml'))
+		or ($informations['basename'] == 'plugin.xml')) {
 			$type = strtolower($informations['basename']);
+		}
+	}
 
 	return $type;
 }
-
 
 function rechercher_ligne($offset, $lignes) {
 
@@ -219,7 +234,7 @@ function rechercher_ligne($offset, $lignes) {
 			$ligne = $_ligne;
 			$no_ligne = $_no_ligne;
 			// il faut déterminer la colonne
-			$no_colonne = $longueur_ligne - ($somme_ligne-$offset);
+			$no_colonne = $longueur_ligne - ($somme_ligne - $offset);
 			break;
 		}
 	}
@@ -231,36 +246,36 @@ function rechercher_ligne($offset, $lignes) {
  * Memorise selon une structure prédéfinie chaque occurrence d'utilisation d'un item.
  * Cette fonction analyse au passage si l'item est dynamique ou pas (_T avec $ ou concatenation).
  *
- * @param array		$utilisations
- * 		Tableau des occurrences d'utilisation des items de langues construit à chaque appel
- * 		de la fonction.
- * @param array		$occurrence
- * 		Tableau définissant l'occurrence d'utilisation en cours de mémorisation. Une occurrence
- * 		est composée des index :
+ * @param array $utilisations
+ *                            Tableau des occurrences d'utilisation des items de langues construit à chaque appel
+ *                            de la fonction.
+ * @param array $occurrence
+ *                            Tableau définissant l'occurrence d'utilisation en cours de mémorisation. Une occurrence
+ *                            est composée des index :
  *
  * 		- 0 : le texte de l'expression matchant le pattern
  * 		- 1 : le module de langue (peut être vide)
  * 		- 2 : le raccourci de l'item de langue tel que détecté
  * 		- 3 : suite du texte du raccourci (dénote une occurrence partiellement ou totalement variable)
  * 		- 4 : numéro de colonne de l'occurrence
- *
- * @param string 	$fichier
- * 		Fichier dont est issu l'occurrence en cours de mémorisation.
- * @param string 	$no_ligne
- * 		Numéro de ligne à laquelle l'occurrence en cours de mémorisation a été trouvée.
- * @param string	$ligne
- * 		Ligne complète dans laquelle l'occurence en cours de mémorisation a été trouvée.
- * @param string	$regexp
- *      Expression régulière utilisée pour trouver l'occurrence d'utilisation en cours de
- * 		mémorisation.
+ * @param string $fichier
+ *                         Fichier dont est issu l'occurrence en cours de mémorisation.
+ * @param string $no_ligne
+ *                         Numéro de ligne à laquelle l'occurrence en cours de mémorisation a été trouvée.
+ * @param string $ligne
+ *                         Ligne complète dans laquelle l'occurence en cours de mémorisation a été trouvée.
+ * @param string $regexp
+ *                         Expression régulière utilisée pour trouver l'occurrence d'utilisation en cours de
+ *                         mémorisation.
  *
  * @return array
- * 		Le tableau des occurrences mis à jour avec l'occurrence passée en argument
+ *               Le tableau des occurrences mis à jour avec l'occurrence passée en argument
  */
 function memoriser_occurrence($utilisations, $occurrence, $fichier, $no_ligne, $ligne, $regexp) {
+
 	include_spip('inc/outiller');
 
-	list(, $module, $raccourci_regexp, $suite,) = $occurrence;
+	list(, $module, $raccourci_regexp, $suite) = $occurrence;
 	$suite = trim($suite);
 
 	$raccourci_partiellement_variable = false;
@@ -277,12 +292,11 @@ function memoriser_occurrence($utilisations, $occurrence, $fichier, $no_ligne, $
 		}
 		// Nettoyage de la variable $raccourci_regexp
 		if ($raccourci_regexp
-		AND preg_match('#^([a-z0-9_]*)(.*)$#im', $raccourci_regexp, $matches)) {
+		and preg_match('#^([a-z0-9_]*)(.*)$#im', $raccourci_regexp, $matches)) {
 			if (!$matches[1]) {
 				$raccourci_totalement_variable = true;
 				$raccourci_regexp = $matches[2];
-			}
-			elseif ($matches[2]) {
+			} elseif ($matches[2]) {
 				$raccourci_partiellement_variable = true;
 				$raccourci_regexp = $matches[1];
 				$suite = $matches[2];
@@ -292,7 +306,7 @@ function memoriser_occurrence($utilisations, $occurrence, $fichier, $no_ligne, $
 
 	// Rechercher si l'occurrence trouvée est dynamique (existence d'un suffixe ou pas)
 	// -- on commence par traiter le cas ou le raccourci est vide car détecté comme une suite
-	if ($suite AND !$raccourci_regexp) {
+	if ($suite and !$raccourci_regexp) {
 		// Cas de la nouvelle écriture variable du raccourci <:xxx:{=#ENV{yyy}}:> ou d'une variable PHP
 		// -- on rétablit le raccourci à partir de la suite qui n'en est pas une.
 		$raccourci_regexp = $suite;
@@ -301,13 +315,13 @@ function memoriser_occurrence($utilisations, $occurrence, $fichier, $no_ligne, $
 	}
 	// -- on continue en détectant les suites qui sont de vrais suffixes d'un raccourci incomplet
 	if ($suite
-	AND !$raccourci_partiellement_variable
-	AND (($regexp == _LANGONET_ITEM_HTML_FILTRE_T)
-		OR ($regexp == _LANGONET_ITEM_HTML_FILTRE_PLURIEL_1)
-		OR ($regexp == _LANGONET_ITEM_HTML_FILTRE_PLURIEL_2)
-		OR in_array($regexp, $GLOBALS['langonet_regexp']['php']))	) {
-			// Cas HTML ou PHP dynamique
-			$raccourci_partiellement_variable = true;
+	and !$raccourci_partiellement_variable
+	and (($regexp == _LANGONET_ITEM_HTML_FILTRE_T)
+		or ($regexp == _LANGONET_ITEM_HTML_FILTRE_PLURIEL_1)
+		or ($regexp == _LANGONET_ITEM_HTML_FILTRE_PLURIEL_2)
+		or in_array($regexp, $GLOBALS['langonet_regexp']['php']))) {
+		// Cas HTML ou PHP dynamique
+		$raccourci_partiellement_variable = true;
 	}
 
 	if ($raccourci_totalement_variable) {
@@ -316,16 +330,16 @@ function memoriser_occurrence($utilisations, $occurrence, $fichier, $no_ligne, $
 	}
 
 	// TODO : vérifier si avec les traitements précédents extraire_argument est encore nécessaire
-	list($raccourci, ) = extraire_arguments($raccourci_regexp);
-	list($raccourci_unique, ) = calculer_raccourci_unique($raccourci_regexp, $utilisations['raccourcis']);
+	list($raccourci) = extraire_arguments($raccourci_regexp);
+	list($raccourci_unique) = calculer_raccourci_unique($raccourci_regexp, $utilisations['raccourcis']);
 	// TODO : si un raccourci est identique dans deux modules différents on va écraser l'index existant
 
 	$occurrence[] = $ligne;
 
-	$item = ($module ? "$module:$raccourci_unique" : $raccourci_unique);
+	$item = ($module ? "${module}:${raccourci_unique}" : $raccourci_unique);
 	$utilisations['raccourcis'][$item] = $raccourci;
 	$utilisations['modules'][$item] = $module;
-	$utilisations['items'][$item] = ($module ? "$module:$raccourci" : $raccourci);
+	$utilisations['items'][$item] = ($module ? "${module}:${raccourci}" : $raccourci);
 	$utilisations['occurrences'][$item][$fichier][$no_ligne][] = $occurrence;
 	$utilisations['suffixes'][$item] = $raccourci_partiellement_variable;
 	$utilisations['variables'][$item] = $raccourci_totalement_variable;
@@ -338,62 +352,63 @@ function memoriser_occurrence($utilisations, $occurrence, $fichier, $no_ligne, $
 }
 
 /**
- * Gérer les arguments
+ * Gérer les arguments.
  *
  * La RegExp utilisee ci-dessous est defini dans phraser_html ainsi:
  * define('NOM_DE_BOUCLE', "[0-9]+|[-_][-_.a-zA-Z0-9]*");
  * define('NOM_DE_CHAMP', "#((" . NOM_DE_BOUCLE . "):)?(([A-F]*[G-Z_][A-Z_0-9]*)|[A-Z_]+)(\*{0,2})");
- * 
- * @param string	$raccourci_regexp
+ *
+ * @param string $raccourci_regexp
+ *
  * @return array
  */
 function extraire_arguments($raccourci_regexp) {
+
 	include_spip('public/phraser_html');
-	$arguments = '';
+	$arguments = array();
 	if (preg_match_all('/' . NOM_DE_CHAMP . '/S', $raccourci_regexp, $matches, PREG_SET_ORDER)) {
-		foreach($matches as $_match) {
+		foreach ($matches as $_match) {
 			$nom = strtolower($_match[4]);
-			$raccourci_regexp = str_replace($_match[0], "@$nom@", $raccourci_regexp);
-			$arguments[]= "$nom=" . $_match[0];
+			$raccourci_regexp = str_replace($_match[0], "@${nom}@", $raccourci_regexp);
+			$arguments[] = "${nom}=" . $_match[0];
 		}
-		$arguments = '{' . join(',',$arguments) . '}';
+		$arguments = '{' . join(',', $arguments) . '}';
 	}
 
 	return array($raccourci_regexp, $arguments);
 }
 
-
 /**
  * Détection des items de langue obsolètes d'un module.
  * Cette fonction renvoie un tableau composé des items obsolètes et des items potentiellement obsolètes.
  *
- * @param array		$utilisations
- * 		Tableau des occurrences d'utilisation d'items de langue dans le code de l'arborescence choisie.
- * @param string	$module
- * 		Nom du module de langue en cours de vérification.
- * @param array		$items_module
- * 		Liste des items de langues contenus dans le module de langue en cours de vérification. L'index est
- * 		le raccourci, la valeur la traduction brute.
+ * @param array  $utilisations
+ *                             Tableau des occurrences d'utilisation d'items de langue dans le code de l'arborescence choisie.
+ * @param string $module
+ *                             Nom du module de langue en cours de vérification.
+ * @param array  $items_module
+ *                             Liste des items de langues contenus dans le module de langue en cours de vérification. L'index est
+ *                             le raccourci, la valeur la traduction brute.
  *
  * @return array
- * 		Tableau des items obsolètes ou potentiellement obsolètes. Ce tableau associatif possède une structure
- * 		à deux index :
+ *               Tableau des items obsolètes ou potentiellement obsolètes. Ce tableau associatif possède une structure
+ *               à deux index :
  *
  * 		- 'occurrences_non' : liste des items obsolètes;
  * 		- 'occurrences_non_mais' : liste des items a priori obsolètes pour le module vérifié mais utilisés avec un autre module;
  * 		- 'occurrences_peut-etre' : liste des items potentiellement obsolètes (contexte d'utilisation dynamique).
  */
 function reperer_items_non_utilises($utilisations, $module, $items_module) {
-	$item_non = $item_non_mais = $item_peut_etre = array();
 
 	// On boucle sur la liste des items de langue ($items_module) du module en cours de vérification ($module).
 	// On teste chaque item pour trouver une utilisation
+	$item_non = $item_non_mais = $item_peut_etre = array();
 	foreach ($items_module as $_raccourci => $_traduction) {
 		// Il faut absolument tester l'item complet soit module:raccourci car sinon
 		// on pourrait accepter comme ok un raccourci identique utilisé avec un autre module.
 		// Pour cela la valeur de chaque index des sous-tableaux $utilisations est l'item complet
 		// (module:raccourci).
-		$item = "$module:$_raccourci";
+		$item = "${module}:${_raccourci}";
 		$index_variable = '';
 		if (!in_array($item, $utilisations['items'])) {
 			// L'item est soit
@@ -402,7 +417,7 @@ function reperer_items_non_utilises($utilisations, $module, $items_module) {
 			// 3- utilise dans un contexte variable
 
 			// On cherche si l'item est détectable dans un contexte variable
-			foreach($utilisations['raccourcis'] as $_cle => $_valeur) {
+			foreach ($utilisations['raccourcis'] as $_cle => $_valeur) {
 				if ($utilisations['suffixes'][$_cle]) {
 					if (substr($_raccourci, 0, strlen($_valeur)) == $_valeur) {
 						$index_variable = $_cle;
@@ -446,31 +461,26 @@ function reperer_items_non_utilises($utilisations, $module, $items_module) {
 	}
 
 	return array(
-			'occurrences_non' => $item_non,
-			'occurrences_non_mais' => $item_non_mais,
-			'occurrences_peut_etre' => $item_peut_etre,
-			);
+		'occurrences_non'       => $item_non,
+		'occurrences_non_mais'  => $item_non_mais,
+		'occurrences_peut_etre' => $item_peut_etre,
+	);
 }
-
 
 /**
  * Détection des items de langue utilises mais apparamment non definis.
  * Cette fonction renvoie un tableau composé des items manquants et des items potentiellement manquants.
  *
- * @param array		$utilisations
- * 		Tableau des occurrences d'utilisation d'items de langue dans le code de l'arborescence choisie.
- * @param string	$module
- * 		Nom du module de langue en cours de vérification.
- * @param array		$items_module
- * 		Liste des items de langues contenus dans le module de langue en cours de vérification. L'index est
- * 		le raccourci, la valeur la traduction brute.
- * @param array 	$fichiers_langue
- * 		Liste des fichiers de langue 'fr' présent sur site et dans lesquels il est possible de trouver
- * 		certains items de langue.
+ * @param array  $utilisations    Tableau des occurrences d'utilisation d'items de langue dans le code de l'arborescence choisie.
+ * @param string $module          Nom du module de langue en cours de vérification.
+ * @param array  $items_module    Liste des items de langues contenus dans le module de langue en cours de vérification. L'index est
+ *                                le raccourci, la valeur la traduction brute.
+ * @param array  $fichiers_langue Liste des fichiers de langue 'fr' présent sur site et dans lesquels il est possible de trouver
+ *                                certains items de langue.
  *
  * @return array
  */
-function reperer_items_non_definis($utilisations, $module, $items_module=array(), $fichiers_langue=array()) {
+function reperer_items_non_definis($utilisations, $module, $items_module = array(), $fichiers_langue = array()) {
 
 	// Constitution du tableau de tous les items de langue fr disponibles sur le site et stockage de la liste
 	// des modules scannés
@@ -493,7 +503,7 @@ function reperer_items_non_definis($utilisations, $module, $items_module=array()
 		$module_utilise = $utilisations['modules'][$_cle];
 		// Il faut absolument tester l'item complet soit module:raccourci car sinon
 		// on pourrait vérifier un raccourci identique d'un autre module.
-		if (!isset($items_module[$_raccourci]) OR ($module_utilise != $module)) {
+		if (!isset($items_module[$_raccourci]) or ($module_utilise != $module)) {
 			$complement[$_raccourci] = array();
 			if (!$utilisations['suffixes'][$_cle]) {
 				// L'item est explicite, il n'est ni totalement variable ni suffixé par une partie variable
@@ -511,17 +521,19 @@ function reperer_items_non_definis($utilisations, $module, $items_module=array()
 					// On vérifie si le raccourci appartient au module utilisé par l'occurrence en cours.
 					$module_utilise_verifiable = false;
 					$raccourci_dans_module_utilise = false;
-					if ($module_utilise != "" && in_array($module_utilise, $modules_tous_lang)) {
+					if ($module_utilise != '' && in_array($module_utilise, $modules_tous_lang)) {
 						$module_utilise_verifiable = true;
 						if (array_key_exists($_raccourci, $tous_lang)) {
 							foreach ($tous_lang[$_raccourci] as $_item_tous_lang) {
 								// $_item_tous_lang[1] contient toujours le nom du module exact à savoir
 								// pour le core spip, public ou ecrire
-								if (!$_item_tous_lang[1]) continue;
+								if (!$_item_tous_lang[1]) {
+									continue;
+								}
 								$raccourci_dans_module_utilise =
 									$module_utilise ?
 									($_item_tous_lang[1] == $module_utilise) :
-									(($_item_tous_lang[1]=='spip') OR ($_item_tous_lang[1]=='ecrire') OR ($_item_tous_lang[1]=='public'));
+									(($_item_tous_lang[1] == 'spip') or ($_item_tous_lang[1] == 'ecrire') or ($_item_tous_lang[1] == 'public'));
 								if ($raccourci_dans_module_utilise) {
 									break;
 								}
@@ -552,42 +564,29 @@ function reperer_items_non_definis($utilisations, $module, $items_module=array()
 							$item_oui_mais[$_raccourci] = $utilisations['occurrences'][$_cle];
 						} else {
 							$item_ok = false;
-							if($module_utilise == ""){
-								/**
-								 * Cas 3.5
-								 * On vérifie si le raccourci est dans un module de spip par défaut (spip, public, ecrire, local) 
-								 * mais pas dans le module en cours de vérification, il y a de grande chance que ce soit ok mais on le notifie
-								 */
+							if ($module_utilise == '') {
+								// Cas 3.5
+								// On vérifie si le raccourci est dans un module de spip par défaut (spip, public, ecrire, local)
+								// mais pas dans le module en cours de vérification, il y a de grande chance que ce soit ok mais on le notifie
 								$modules_vides = array('local','public','spip','ecrire'); // Les modules par défaut de SPIP
 								if (array_key_exists($_raccourci, $tous_lang)) {
 									foreach ($tous_lang[$_raccourci] as $_item_tous_lang) {
 										// $_item_tous_lang[1] contient toujours le nom du module exact à savoir
 										// pour le core spip, public ou ecrire
-										if (!$_item_tous_lang[1]) continue;
-										if(in_array($_item_tous_lang[1],$modules_vides)){
+										if (!$_item_tous_lang[1]) {
+											continue;
+										}
+										if (in_array($_item_tous_lang[1], $modules_vides)) {
 											$item_oui_mais[$_raccourci] = $utilisations['occurrences'][$_cle];
 											$item_ok = true;
 										}
 									}
 								}
 							}
-							if(!$item_ok){
+							if (!$item_ok) {
 								// Cas 4 : le raccourci n'est ni dans le module en cours de vérification, ni dans le
 								// module de l'occurrence de vérification. Il est donc non défini mais on ne sait pas
 								// si cela concerne le module en cours ou pas.
-	
-								// Si pas normalise, c'est une auto-definition
-								// Si l'index est deja pris pour un autre texte
-								// (48 caracteres initiaux communs)
-								// forcer un suffixe md5
-								// TODO : a priori ce code devrait être obsolete
-								$md5 = $_raccourci;
-								if (!preg_match(',^\w+$,', $_raccourci)) {
-									if (isset($tous_lang[$_raccourci])
-									AND !preg_match("%^\s*'$_raccourci',?\s*$%", $tous_lang[$_cle][0][2])) {
-										$md5 .= '_' . md5($_raccourci);
-									}
-								}
 								$item_non_mais[$_raccourci] = $utilisations['occurrences'][$_cle];
 								$complement[$_raccourci][0] = _T('langonet:complement_definis_non_mais_cas4', $options);
 								$complement[$_raccourci][1] = $module_utilise_verifiable ? '' : _T('langonet:complement_definis_non_mais_cas4_1', $options);
@@ -607,7 +606,7 @@ function reperer_items_non_definis($utilisations, $module, $items_module=array()
 					// => on cherche un item du module en cours de vérification qui pourrait en approcher
 					//    (commence par le raccourci).
 					$item_approchant = '';
-					foreach($items_module as $_item => $_traduction) {
+					foreach ($items_module as $_item => $_traduction) {
 						if (substr($_item, 0, strlen($_raccourci)) == $_raccourci) {
 							$item_approchant = $_item;
 						}
@@ -624,11 +623,10 @@ function reperer_items_non_definis($utilisations, $module, $items_module=array()
 	}
 
 	return array(
-			'occurrences_non' => $item_non,
-			'occurrences_non_mais' => $item_non_mais,
-			'occurrences_oui_mais' => $item_oui_mais,
-			'occurrences_peut_etre' => $item_peut_etre,
-			'complements' => $complement,
-			);
+		'occurrences_non'       => $item_non,
+		'occurrences_non_mais'  => $item_non_mais,
+		'occurrences_oui_mais'  => $item_oui_mais,
+		'occurrences_peut_etre' => $item_peut_etre,
+		'complements'           => $complement,
+	);
 }
-

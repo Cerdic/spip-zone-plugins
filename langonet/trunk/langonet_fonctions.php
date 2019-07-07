@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 if (!defined('_LANGONET_DOSSIERS_EXCLUS')) {
 	/**
@@ -14,21 +16,23 @@ if (!defined('_LANGONET_DOSSIERS_EXCLUS')) {
 	 * - plugins ou auto (pour plugins/auto uniquement)
 	 * - plugins_dist
 	 * - plugins_suppl
-	 * - squelettes
+	 * - squelettes.
 	 */
 	define('_LANGONET_DOSSIERS_EXCLUS', '');
 }
 
 /**
- * Creation de la liste des fichiers de langue generes
+ * Creation de la liste des fichiers de langue generes.
+ *
+ * @param mixed $operation
  *
  * @return array
  */
-function langonet_lister_fichiers_lang($operation='generation') {
+function langonet_lister_fichiers_lang($operation = 'generation') {
 
 	// On cherche le dernier fichier de log de chaque fichier de langue
 	$liste_tous = array();
-	$sous_dir = (!$operation OR ($operation == 'generation')) ? 'generation/': "verification/${operation}/";
+	$sous_dir = (!$operation or ($operation == 'generation')) ? 'generation/' : "verification/${operation}/";
 	$langues = preg_files(_DIR_TMP . "langonet/${sous_dir}", '[^/]*_[\w{2,3}]*.php$');
 	foreach ($langues as $_fichier) {
 		$liste_tous[basename($_fichier, '.php')] = $_fichier;
@@ -37,17 +41,16 @@ function langonet_lister_fichiers_lang($operation='generation') {
 	return $liste_tous;
 }
 
-
 /**
- * Bulle d'information des liens de telechargement
+ * Bulle d'information des liens de telechargement.
  *
  * @param string $fichier
  * @param string $type
  * @param string $action
+ *
  * @return string
  */
-
-function langonet_creer_bulle_fichier($fichier, $type='lang', $action='telecharger') {
+function langonet_creer_bulle_fichier($fichier, $type = 'lang', $action = 'telecharger') {
 
 	// Date du fichier formatee
 	$date = affdate_heure(date('Y-m-d H:i:s', filemtime($fichier)));
@@ -58,34 +61,44 @@ function langonet_creer_bulle_fichier($fichier, $type='lang', $action='telecharg
 }
 
 /**
- * Creation du select des fichiers de langue
+ * Creation du select des fichiers de langue.
  *
  * @param string $sel_l
+ * @param mixed  $exclure_paquet
+ *
  * @return array
  */
-function langonet_creer_select_langues($sel_l='0', $exclure_paquet=true) {
+function langonet_creer_select_langues($sel_l = '0', $exclure_paquet = true) {
+
 	$retour = creer_selects($sel_l, array(), $exclure_paquet);
+
 	return $retour['fichiers'];
 }
 
 /**
- * Creation du select des arborescences a scanner
+ * Creation du select des arborescences a scanner.
  *
  * @param string $sel_d
+ * @param mixed  $multiple
+ *
  * @return array
  */
-function langonet_creer_select_dossiers($sel_d=array(), $multiple=true) {
-	if (is_string($sel_d)) $sel_d = array($sel_d);
+function langonet_creer_select_dossiers($sel_d = array(), $multiple = true) {
+
+	if (is_string($sel_d)) {
+		$sel_d = array($sel_d);
+	}
 	$retour = creer_selects('0', $sel_d, true, $multiple);
+
 	return $retour['dossiers'];
 }
 
+function langonet_cadrer_expression($expression, $colonne, $ligne, $fichier, $cadre = 4) {
 
-function langonet_cadrer_expression($expression, $colonne, $ligne, $fichier, $cadre=4) {
 	$affiche = '';
 
 	if ($ligne) {
-		$debut = max($colonne-$cadre, 0);
+		$debut = max($colonne - $cadre, 0);
 		// il faut calculer la taille exacte du préfixe : $colonne-$debut
 		$affiche = substr($ligne, $debut, $colonne - $debut + strlen($expression) + $cadre);
 
@@ -93,7 +106,7 @@ function langonet_cadrer_expression($expression, $colonne, $ligne, $fichier, $ca
 		// avant sans retourner d'erreur. Il faut donc calculer l'index final
 		$index_fin = $debut + strlen($affiche);
 
-		$coloriser = NULL;
+		$coloriser = null;
 		include_spip('public/parametrer'); // inclure les fichiers fonctions
 		$coloriser = chercher_filtre('coloration_code_color');
 
@@ -102,9 +115,8 @@ function langonet_cadrer_expression($expression, $colonne, $ligne, $fichier, $ca
 			// C'est la fonction de coloration qui s'occupe des entites html
 			$infos = pathinfo($fichier);
 			$extension = ($infos['extension'] == 'html') ? 'html4strict' : $infos['extension'];
-			$affiche = $coloriser($affiche,  $extension, 'code', 'span');
-		}
-		else {
+			$affiche = $coloriser($affiche, $extension, 'code', 'span');
+		} else {
 			$affiche = '<code>' . htmlspecialchars($affiche) . '</code>';
 		}
 
@@ -113,35 +125,35 @@ function langonet_cadrer_expression($expression, $colonne, $ligne, $fichier, $ca
 		// ne soient traduits en entité html. Par contre la détection du besoin de suspension s'est
 		// faite avant sur la chaine native.
 		$suspension = '&#8230;';
-		$affiche = ($debut > 0 ? $suspension : '') . trim($affiche) . ($index_fin < strlen($ligne)-1 ? $suspension : '');
+		$affiche = ($debut > 0 ? $suspension : '') . trim($affiche) . ($index_fin < strlen($ligne) - 1 ? $suspension : '');
 	}
 
 	return $affiche;
 }
 
-
-
-
 /**
  * Creation d'un tableau des selects:
  * - des fichiers de langue
- * - des arborescences a scanner
+ * - des arborescences a scanner.
  *
- * @param string $sel_l option du select des langues
- * @param array $sel_d option(s) du select des repertoires
+ * @param string $sel_l          option du select des langues
+ * @param array  $sel_d          option(s) du select des repertoires
+ * @param mixed  $exclure_paquet
+ * @param mixed  $multiple
+ *
  * @return array
  */
-function creer_selects($sel_l='0',$sel_d=array(), $exclure_paquet=true, $multiple=true) {
-	include_spip('inc/outiller');
+function creer_selects($sel_l = '0', $sel_d = array(), $exclure_paquet = true, $multiple = true) {
 
 	// On récupère la liste des dossiers exclus du scan.
+	include_spip('inc/outiller');
 	$rep_exclus = explode(':', _LANGONET_DOSSIERS_EXCLUS);
 
 	// Recuperation des repertoires des plugins par défaut
-	if(in_array('auto', $rep_exclus)){
+	if (in_array('auto', $rep_exclus)) {
 		$rep_plugins = lister_dossiers_plugins();
 		foreach ($rep_plugins as $key => $rep_plugin) {
-			$rep_plugins[$key] = str_replace('auto/','',$rep_plugin);
+			$rep_plugins[$key] = str_replace('auto/', '', $rep_plugin);
 		}
 		$rep_auto = lister_dossiers_plugins(_DIR_PLUGINS_AUTO);
 		$rep_plugins = array_diff_assoc($rep_plugins, $rep_auto);
@@ -164,9 +176,10 @@ function creer_selects($sel_l='0',$sel_d=array(), $exclure_paquet=true, $multipl
 		? (strlen($GLOBALS['dossier_squelettes']) ? explode(':', $GLOBALS['dossier_squelettes']) : array('squelettes'))
 		: array();
 	if ($perso) {
-		foreach($perso as $_rep) {
-			if (is_dir(_DIR_RACINE . $_rep))
+		foreach ($perso as $_rep) {
+			if (is_dir(_DIR_RACINE . $_rep)) {
 				$rep_perso[] = $_rep;
+			}
 		}
 	}
 	// Recuperation des repertoires SPIP
@@ -184,15 +197,14 @@ function creer_selects($sel_l='0',$sel_d=array(), $exclure_paquet=true, $multipl
 
 	// construction des <select>
 	// -- les fichiers de langue
-	$sel_lang = '<select name="fichier_langue" id="fichier_langue" style="margin-bottom:1em;">'."\n";
+	$sel_lang = '<select name="fichier_langue" id="fichier_langue" style="margin-bottom:1em;">' . "\n";
 	$sel_lang .= '<option value="0"';
 	$sel_lang .= ($sel_l == '0') ? ' selected="selected">' : '>';
 	$sel_lang .= _T('langonet:option_aucun_fichier') . '</option>' . "\n";
 	// -- les racines des arborescences a scanner
 	if ($multiple) {
 		$sel_dossier = '<select name="dossier_scan[]" id="dossier_scan" multiple="multiple">' . "\n";
-	}
-	else {
+	} else {
 		$sel_dossier = '<select name="dossier_scan" id="dossier_scan">' . "\n";
 		$sel_dossier .= '<option value="0"';
 		$sel_dossier .= (count($sel_d) == 0) ? ' selected="selected">' : '>';
@@ -209,16 +221,13 @@ function creer_selects($sel_l='0',$sel_d=array(), $exclure_paquet=true, $multipl
 		if (in_array($_rep, $rep_plugins)) {
 			$reel_dir = _DIR_PLUGINS . $_rep;
 			$ou_fichier = str_replace('../', '', $reel_dir) . '/';
-		}
-		else if (in_array($_rep, $rep_extensions)) {
+		} elseif (in_array($_rep, $rep_extensions)) {
 			$reel_dir = _DIR_PLUGINS_DIST . $_rep;
 			$ou_fichier = str_replace('../', '', $reel_dir) . '/';
-		}
-		else if (in_array($_rep, $rep_suppl)) {
+		} elseif (in_array($_rep, $rep_suppl)) {
 			$reel_dir = _DIR_PLUGINS_SUPPL . $_rep;
 			$ou_fichier = str_replace('../', '', $reel_dir) . '/';
-		}
-		else {
+		} else {
 			$reel_dir = _DIR_RACINE . $_rep;
 			$ou_fichier = $_rep . '/';
 		}
@@ -230,13 +239,13 @@ function creer_selects($sel_l='0',$sel_d=array(), $exclure_paquet=true, $multipl
 			$opt_lang = '';
 			foreach ($fic_lang = preg_files($reel_dir . '/lang/', _LANGONET_PATTERN_FICHIERS_LANG, 250, false) as $le_module) {
 				preg_match_all(_LANGONET_PATTERN_CODE_LANGUE, str_replace('.php', '', $le_module), $matches);
-				$module = str_replace($matches[0][0].'.php', '', $le_module);
+				$module = str_replace($matches[0][0] . '.php', '', $le_module);
 				$module = str_replace($reel_dir . '/lang/', '', $module);
 				if (!$exclure_paquet
-				OR ($exclure_paquet	AND (strtolower(substr($module, 0, 7)) != 'paquet-'))) {
+				or ($exclure_paquet and (strtolower(substr($module, 0, 7)) != 'paquet-'))) {
 					$langue = ltrim($matches[0][0], '_');
 					$ou_langue = str_replace('../', '', $reel_dir) . '/lang/';
-					$value = $_rep.':'.$module.':'.$langue.':'.$ou_langue;
+					$value = $_rep . ':' . $module . ':' . $langue . ':' . $ou_langue;
 					$opt_lang .= '<option value="' . $value;
 					$opt_lang .= ($value == $sel_l) ? '" selected="selected">' : '">';
 					$opt_lang .= str_replace('.php', '', str_replace($reel_dir . '/lang/', '', $le_module)) . '</option>' . "\n";
@@ -249,7 +258,7 @@ function creer_selects($sel_l='0',$sel_d=array(), $exclure_paquet=true, $multipl
 			}
 		}
 		$sel_dossier .= '<option value="' . $ou_fichier;
-		$sel_dossier .= (in_array($ou_fichier,$sel_d)) ? '" selected="selected">' : '">';
+		$sel_dossier .= (in_array($ou_fichier, $sel_d)) ? '" selected="selected">' : '">';
 		$sel_dossier .= str_replace('../', '', $reel_dir) . '/</option>' . "\n";
 	}
 
@@ -259,34 +268,36 @@ function creer_selects($sel_l='0',$sel_d=array(), $exclure_paquet=true, $multipl
 	return $retour = array('fichiers' => $sel_lang, 'dossiers' => $sel_dossier);
 }
 
-
 /**
  * Lister tous les plugins contenus dans une arborescence donnée.
  *
  * @param string $racine_arborescence
+ *
  * @return array
  */
 // $rep_base  => le repertoire de depart de l'arboresence a scanner
-function lister_dossiers_plugins($racine_arborescence=null) {
-	include_spip('inc/plugin');
+function lister_dossiers_plugins($racine_arborescence = null) {
+
 	// liste_plugin_files() integre les repertoires supplementaires de plugins
 	// dans le cadre de la mutualisation
+	include_spip('inc/plugin');
 	$liste_dossiers = liste_plugin_files($racine_arborescence);
-	if (is_null($racine_arborescence))
+	if (is_null($racine_arborescence)) {
 		$racine_arborescence = _DIR_PLUGINS;
+	}
 	$dossiers = array();
 	foreach ($liste_dossiers as $_dossier) {
 		$chemin = $racine_arborescence . $_dossier;
 		$dossiers[] = $_dossier;
 		if ($liste_sous_dossiers = glob($chemin . '/*/lang', GLOB_ONLYDIR)) {
 			for ($i = 0; $i < count($liste_sous_dossiers); $i++) {
-    			$dossiers[] = str_replace($racine_arborescence, '', str_replace('/lang', '', $liste_sous_dossiers[$i]));
+				$dossiers[] = str_replace($racine_arborescence, '', str_replace('/lang', '', $liste_sous_dossiers[$i]));
 			}
 		}
 	}
+
 	return $dossiers;
 }
-
 
 function langonet_lister_operations() {
 
@@ -302,7 +313,7 @@ function langonet_lister_operations() {
 			'traductions'   => array('generer', 'editer', 'traduire')
 		);
 
-		// On complète par des collections fournies par d'autres plugin
+		// On complète par des collections fournies par d'autres plugins
 		$operations = pipeline('declarer_operations_langonet', $operations);
 	}
 
