@@ -1,9 +1,9 @@
 <?php
-
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function formulaires_langonet_debusquer_charger() {
-	$valeurs = array();
 
 	$fichiers_test = preg_files(
 		_DIR_PLUGIN_LANGOTESTS,
@@ -35,15 +35,8 @@ function formulaires_langonet_debusquer_charger() {
 	return $valeurs;
 }
 
-function formulaires_langonet_debusquer_verifier() {
-	$erreurs = array();
-
-	return $erreurs;
-}
-
 function formulaires_langonet_debusquer_traiter() {
 
-	include_spip('inc/verifier_items');
 	$fichier = _request('fichier_test');
 	$regexp = constant(_request('regexp'));
 
@@ -60,6 +53,7 @@ function formulaires_langonet_debusquer_traiter() {
 	if ($contenu = file_get_contents($fichier)) {
 		// On stocke aussi le fichier à scanner sous forme d'un tableau de lignes afin de rechercher
 		// les numéros de ligne et de colonne des occurrences
+		include_spip('inc/verifier_items');
 		$lignes = file($fichier);
 		if (preg_match_all($regexp, $contenu, $matches, PREG_OFFSET_CAPTURE)) {
 			foreach ($matches[0] as $_cle => $_expression) {
