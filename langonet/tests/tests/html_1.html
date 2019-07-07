@@ -1,9 +1,5 @@
 <!-- Dans ce fichier :
-	- cas d'utilisation repérés,6 H1, 2 H2 et 4 H3
-		- 1 item défini dans verification
-		- 1 item défini dans langonet
-		- 1 item non défini dans verification
-		- 1 item non défini dans langonet
+	- cas d'utilisation repérés,6 H1, 4 H2
 -->
 <B_verification>
 <div>
@@ -11,7 +7,8 @@
 		<caption>
 			<strong class="caption">
 				[(#CHEMIN_IMAGE{warning-24.png}|balise_img{'',cadre-icone})]
-				<!-- DETECTION IMPOSSIBLE POUR L'INSTANT !!!  -->
+				<!-- H2 / module : verification / item : enfin_detecte_1_1 / repéré / non defini -->
+				<!-- H2 / module : verification / item : enfin_detecte_1_n / repéré / non defini -->
 				[(#ENV{total}|singulier_ou_pluriel{
 									verification:non_detecte_1_1,
 									verification:non_detecte_1_n,
@@ -34,22 +31,7 @@
 				<td><:langonet:titre_page{param1=valeur1, param2=valeur2}|ucfirst:></td>
 				<!-- H1 / module : verification / item : impossible à déterminer car entièrement variable
 				     / repéré mais pas mémorisé car inutile on ne peut pas s'en servir / --  -->
-				<td><:verification:{=#ENV{item},param=valeur}:> </td>
-			</tr>
-			<tr class="row_even">
-				<!-- H3 / module : verification / item : defini_html_2 / repéré / défini  -->
-				<td>[(#VAL{verification:defini_html_2}|_T)]</td>
-				<!-- H3 / module : vide (public) / item : voir_en_ligne partiellement identifié / repéré / défini  -->
-				<td>[(#VAL{voir_en_}|concat{#ENV{numero, defaut}}|_T)]</td>
-				<!-- H3 / module : verification / item : indefini_html_partiel_?? partiellement identifié / repéré / indéfini  -->
-				<td>[(#VAL{verification:indefini_html_partiel_}|concat{#ELEMENT}|concat{_}|concat{#ENV{numero, defaut}}|_T)]</td>
-				<!-- H3 / module : verification / item : defini_html_partiel_?? partiellement identifié / repéré / défini  -->
-				<td>[(#VAL{verification:defini_html_partiel_}|ajouter_numero|_T)]</td>
-
-				<!-- H3 / module : verification / item : defini_html_partiel_?? partiellement identifié / non repéré / indéfini  -->
-				<td>[(#VAL{verification:non_detecte_2}
-						|ajouter_numero|_T)]
-				</td>
+				<td><:verification:{=#ENV{item},param=valeur}:></td>
 			</tr>
 </BOUCLE_verification>
 		</tbody>

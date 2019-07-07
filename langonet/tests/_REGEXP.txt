@@ -107,7 +107,7 @@ Les utilisations avec ou sans module sont détectées.
 		%\|singulier_ou_pluriel{[^,]*,(?:[\s]*(?:([a-z0-9_-]+):)?([a-z0-9_]+))[^}]*}%s
 
 	- cas H3	: l'item est utilisé au travers de l'appel au filtre |_T ce qui nécessite l'utilisation de la
-				  balise #VAL, à savoir,
+				  balise #VAL ou autre, à savoir,
 				  #VAL{module:raccourci_item}|_T
 				  où module peut-être vide
 				  Mais parfois il peut y avoir une complexité additionnelle car le #VAL ne contient qu'une partie

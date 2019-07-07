@@ -8,13 +8,13 @@
 <paquet
 	prefix="langotests"
 	categorie="outil"
-	version="0.1.1"
+	version="0.1.2"
 	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="langotests-64.png"
->
+>	
 
-	<nom>Base de tests de LangOnet</nom>
+	<nom>LangOnet - Base de tests</nom>
 
 	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
 	<auteur>denisb</auteur>
@@ -29,7 +29,7 @@
 	<!-- X1 / module : verification / item : indefini_paquet_1 / repéré / indéfini  -->
 	<onglet nom="onglet_2" titre="verification:indefini_paquet_1" parent="langonet" action="action_2" />
 	<!-- X1 / module : vide (public) / item : voir_en_ligne / repéré / défini  -->
-	<menu nom="menu_1" titre="voir_en_ligne" parent="bando_administration" icone="menu1-16.png" action="action_3" />
+<!--	<menu nom="menu_1" titre="voir_en_ligne" parent="bando_administration" icone="menu1-16.png" action="action_3" />-->
 	<!-- X1 / module : langonet / item : indefini_paquet_2 / repéré / indéfini  -->
-	<menu nom="menu_2" titre="langonet:indefini_paquet_2" parent="bando_administration" icone="menu2-16.png" action="action_4" />
+<!--	<menu nom="menu_2" titre="langonet:indefini_paquet_2" parent="bando_administration" icone="menu2-16.png" action="action_4" />-->
 </paquet>

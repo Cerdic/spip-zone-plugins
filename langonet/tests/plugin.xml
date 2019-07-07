@@ -8,12 +8,12 @@
 <plugin>
 	<prefix>langotests</prefix>
 	<categorie>outil</categorie>
-	<version>0.1.1</version>
+	<version>0.120</version>
 	<etat>dev</etat>
 	<necessite id="SPIP" version="[3.0.0;3.2.99]" />
 	<icon>langotests-64.png</icon>
 
-	<nom>Base de tests de LangOnet</nom>
+	<nom>LangOnet - Base de tests</nom>
 	<slogan>Tester les op&#233;rations de LangOnet</slogan>
 	<description>
 Ce plugin permet d'ex&#233;cuter des tests de non-r&#233;gressions sur les op&#233;rations de v&#233;rification et de recherche.
