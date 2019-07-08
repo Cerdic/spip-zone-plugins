@@ -17,18 +17,16 @@ function webfonts2_ieconfig_metas($table){
 }
 
 /**
- * Lister les polices configurées
+ * Ajout des polices configurées a la pipeline fonts_list
  *
- * ex   Open Sans:regular, Open Sans:800, Open Sans:300,
- *
+ * chaine retournée par le selecteurgenerique :   Open Sans:regular, Open Sans:800, Open Sans:300,
+ * 
 */
-function webfonts2_fonts_list(){
+function webfonts2_fonts_list($fonts){
 	$webfonts = lire_config('webfonts2/webfonts');
-    $fonts = array();
 	if(strlen($webfonts)){
 		// enlever la dernière virgule
 		$webfonts = explode(',',rtrim($webfonts,', '));
-
 		foreach($webfonts as $font){
 			$set =  explode(':',$font);
             $slug = strtolower(str_replace(' ','_',trim($set[0])));
@@ -36,7 +34,6 @@ function webfonts2_fonts_list(){
             $fonts[$slug]['variants'][] = $set[1];
 		}
 	}
-
 	return $fonts;
 }
 
