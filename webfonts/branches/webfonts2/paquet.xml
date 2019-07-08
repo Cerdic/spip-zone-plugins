@@ -1,7 +1,7 @@
 <paquet
 	prefix="webfonts2"
 	categorie="maintenance"
-	version="0.3.1"
+	version="0.3.2"
 	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/webfonts2-64.png"
@@ -15,13 +15,13 @@
 	<licence>GNU/GPL</licence>
 
 	<pipeline nom="autoriser" inclure="webfonts2_autorisations.php" />
-	<pipeline nom="insert_head_css" inclure="webfonts2_pipelines.php" />
+	<pipeline nom="affichage_final" inclure="webfonts2_pipelines.php" />
 	<pipeline nom="header_prive" inclure="webfonts2_pipelines.php" />
 	<pipeline nom="ieconfig_metas" inclure="webfonts2_pipelines.php" />
 
 	<pipeline nom="fonts_list" inclure="webfonts2_pipelines.php" />
 
-	<necessite nom="spip_bonux" compatibilite="[3.4.4;["/>
+    <necessite nom="spip_bonux" compatibilite="[3.4.4;["/>
 
 	<utilise nom="selecteurgenerique" compatibilite="[1.1.0;]" />
 	<utilise nom="scssphp" compatibilite="[1.4.9;["/>

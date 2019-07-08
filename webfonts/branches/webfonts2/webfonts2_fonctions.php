@@ -14,9 +14,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * prepare l'url sans passer par l'api , utilisé pour l'insertion dans le head
  *
- * @param $webfonts {array} font=>variantes
- * @param $subsets  si besoin une liste de subsets pour la forme mais inutile
- * @return $request url de requète
+ * @param array $webfonts font=>variantes
+ * @param string $subsets  si besoin une liste de subsets pour la forme mais inutile
+ * @param string $type type de requète par defaut css ou specimen
+ * @return string $request url de requète
  *
 */
 function googlefont_request($webfonts,$subsets='',$type='css'){
@@ -49,8 +50,8 @@ function googlefont_url_specimen($webfonts){
 /**
  * google_font_search
  *
- * $fonts la liste des fonts [items] récupérées via l'index
- * $search le motif de recherche sur item/family
+ * @param array $fonts la liste des fonts [items] récupérées via l'index
+ * @param string $search le motif de recherche sur item/family
 */
 function google_font_search($fonts, $search){
 	$res = array();

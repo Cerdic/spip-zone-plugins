@@ -17,18 +17,23 @@ function webfonts2_ieconfig_metas($table){
 }
 
 /**
- * Insertion dans la pipeline des polices configurées
+ * Lister les polices configurées
+ *
+ * ex   Open Sans:regular, Open Sans:800, Open Sans:300,
  *
 */
-function webfonts2_fonts_list($fonts){
+function webfonts2_fonts_list(){
 	$webfonts = lire_config('webfonts2/webfonts');
+    $fonts = array();
 	if(strlen($webfonts)){
 		// enlever la dernière virgule
 		$webfonts = explode(',',rtrim($webfonts,', '));
 
 		foreach($webfonts as $font){
 			$set =  explode(':',$font);
-			$fonts[] = ['family'=> trim($set[0]),'variants'=> [ $set[1] ]];
+            $slug = strtolower(str_replace(' ','_',trim($set[0])));
+			$fonts[$slug]['family'] = trim($set[0]);
+            $fonts[$slug]['variants'][] = $set[1];
 		}
 	}
 
@@ -56,9 +61,14 @@ function webfonts2_header_prive($flux){
     return $flux;
 }
  /**
-  * webfonts_insert_head_css
+  * webfonts_affichage_final
+  *
+  * place la délaration/appel des webfont avant les autres styles
+  *
+  * @param string $flux pipeline affichage final
+  * @return string html
  */
-function webfonts2_insert_head_css($flux){
+function webfonts2_affichage_final($flux){
 	return webfonts2_insertion_css($flux);
 }
 

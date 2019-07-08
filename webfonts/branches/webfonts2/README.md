@@ -5,8 +5,10 @@ https://contrib.spip.net/WebFonts-2
 
 
 ## ToDo
-- [ ] On passe par insert_head_css donc l'insertion n'es placée en tete que des links inssérés par insert_head, il faudrait passé par affichage_final et se placer vraiment en premier.
+
+
 - [ ] Quand on valide le formulaire de config, recharger la liste des fonts présentes dans la pipeline.
+- [ ] pas de désinstallation des metas
 - [ ] La API key n'est pas prise en compte si elle est définie depuis la config
 - [ ] vérifier que l'on inssère bien une seul fois la font:variant demandée
 entre les polices ajoutées via la config et celles inssérées depuis un plugin
@@ -21,6 +23,11 @@ genre COmic Sans + Times
 
 
 ## Changelogs
+
+0.3.2
+
+- utiliser affichage_final pour être sur de passer avant les `<link`
+- pour les fonts ajoutées par le formulaire, l'index dans le table est le nom de famille (open_sans) slug
 
 0.3.1
 
