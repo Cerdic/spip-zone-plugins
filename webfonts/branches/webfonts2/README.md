@@ -24,6 +24,10 @@ genre COmic Sans + Times
 
 ## Changelogs
 
+0.3.3
+
+bugfix : ne pas couper le flux de la pipeline lors de l'insertion des typos ajoutées en config. Sur un skel/plugin utilisant la pipeline cela rendait l'installation impossible.
+
 0.3.2
 
 - utiliser affichage_final pour être sur de passer avant les `<link`

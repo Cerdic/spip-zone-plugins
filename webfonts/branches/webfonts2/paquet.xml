@@ -1,7 +1,7 @@
 <paquet
 	prefix="webfonts2"
 	categorie="maintenance"
-	version="0.3.2"
+	version="0.3.3"
 	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/webfonts2-64.png"
@@ -23,7 +23,7 @@
 
     <necessite nom="spip_bonux" compatibilite="[3.4.4;["/>
 
-	<utilise nom="selecteurgenerique" compatibilite="[1.1.0;]" />
+    <utilise nom="selecteurgenerique" compatibilite="[1.1.0;[" />
 	<utilise nom="scssphp" compatibilite="[1.4.9;["/>
     <utilise nom="lazysizes" compatibilite="[4.1.7.0;["/>
 
