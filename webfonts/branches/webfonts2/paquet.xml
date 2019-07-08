@@ -21,11 +21,11 @@
 
 	<pipeline nom="fonts_list" inclure="webfonts2_pipelines.php" />
 
-    <necessite nom="spip_bonux" compatibilite="[3.4.4;["/>
+	<necessite nom="spip_bonux" compatibilite="[3.4.4;["/>
 
 	<utilise nom="selecteurgenerique" compatibilite="[1.1.0;[" />
 	<utilise nom="scssphp" compatibilite="[1.4.9;["/>
-    <utilise nom="lazysizes" compatibilite="[4.1.7.0;["/>
+	<utilise nom="lazysizes" compatibilite="[4.1.7.0;["/>
 
 	<menu nom="webfonts" titre="webfonts2:titre" parent="menu_squelette" icone="images/webfonts2-16.png" action="webfonts" />
 </paquet>
