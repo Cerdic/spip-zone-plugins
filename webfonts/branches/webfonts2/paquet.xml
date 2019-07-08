@@ -23,7 +23,7 @@
 
     <necessite nom="spip_bonux" compatibilite="[3.4.4;["/>
 
-    <utilise nom="selecteurgenerique" compatibilite="[1.1.0;[" />
+	<utilise nom="selecteurgenerique" compatibilite="[1.1.0;[" />
 	<utilise nom="scssphp" compatibilite="[1.4.9;["/>
     <utilise nom="lazysizes" compatibilite="[4.1.7.0;["/>
 
