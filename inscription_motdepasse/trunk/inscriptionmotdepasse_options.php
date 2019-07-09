@@ -4,7 +4,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // Inhiber la notification par défaut, pour changer le mot de passe nous-mêmes avant de générer le squelette
-function envoyer_inscription($desc, $nom, $statut, $options){
+function envoyer_inscription($desc, $nom, $mode, $options){
 	include_spip('action/editer_auteur');
 	
 	// Récupérer l'email, pour retrouver l'identifiant de l'utilisateur
