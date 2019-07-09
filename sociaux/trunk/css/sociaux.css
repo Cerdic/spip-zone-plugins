@@ -3,7 +3,7 @@
 .sociaux li {display:inline-block;margin:0 0.2em 0.4em 0;}
 .sociaux a {text-decoration:none;}
 .sociaux a:focus, .sociaux a:hover, .sociaux a:active {background-color:transparent;}
-.sociaux a.external:after { content: none; }
+.sociaux a.spip_out::after, .sociaux a.external::after { content: none; }
 .sociaux .name { display:none;}
 .sociaux .socicon { font-size:1.4em;padding:.5em;border-radius:1em;color:#fff;background:#000;}
 
