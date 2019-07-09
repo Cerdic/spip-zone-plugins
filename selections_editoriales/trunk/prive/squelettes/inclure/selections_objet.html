@@ -1,5 +1,5 @@
-#SET{self,#SELF|parametre_url{ajouter|id_selection|id_selection_contenu|editer_contenu|editer_contenu_logo,'',&}|ancre_url{selections}}
-<div id='selections' class='selections'>
+#SET{self,#SELF|parametre_url{ajouter|id_selection|id_selections_contenu|editer_contenu|editer_contenu_logo,'',&}|ancre_url{selections}}
+<div id="selections" class="selections">
 
 	[(#REM) Liste des sélections liées, éditables sur place ]
 	<INCLURE{fond=prive/objets/liste/selections_lies_editables,
@@ -12,7 +12,7 @@
 
 	[(#REM) Formulaire d'ajout ]
 	[(#AUTORISER{associerselections, #OBJET, #ID_OBJET}|et{#AUTORISER{creer, selection}}|oui)
-	<div class="selections_ajouter">
+	<div class="selections_ajouter" id="selections_ajouter">
 		[(#ENV{ajouter}|=={selection}|non)
 			[(#GET{self}|parametre_url{ajouter,selection}|ancre_url{selections_ajouter}
 				|icone_verticale{<:selection:texte_ajouter_selection:>,selection,add,ajax right, #LANG_RIGHT})]

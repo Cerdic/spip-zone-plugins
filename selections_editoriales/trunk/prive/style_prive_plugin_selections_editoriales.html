@@ -83,6 +83,9 @@ body.selections_contenu #wysiwyg .champ.contenu_texte div.span.texte {
 .liste-items.selections_contenus .item:last-child {
     border-bottom: 0;
 }
+.liste-items.selections_contenus .item__logo {
+    margin-right: 1em;
+}
 .liste-items.selections_contenus .item__body {
     display: flex;
 }
@@ -90,8 +93,15 @@ body.selections_contenu #wysiwyg .champ.contenu_texte div.span.texte {
     flex: 1 1 auto;
 }
 .liste-items.selections_contenus .item__actions {
-    flex: 0 1 5em;
-    align-self: center;
+    flex: 0 1 auto;
+    text-align: #ENV{right};
+}
+.liste-items.selections_contenus .item__actions .delete,
+.liste-items.selections_contenus .item__actions .edit {
+    display: block;
+}
+.liste-items.selections_contenus .item__actions .move {
+    margin: 0.5em 0;
 }
 .liste-items.selections_contenus .icone.horizontale.center {
     display: table; /* pour s'auto centrer */

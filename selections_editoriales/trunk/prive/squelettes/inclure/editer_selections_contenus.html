@@ -30,7 +30,11 @@
 
 			<div class="item__body">
 				[(#CONFIG{activer_logos}|=={oui}|oui)
-					[<a class="ajax item__logo" title="<:info_telecharger_nouveau_logo|trim{:}:>" href="[(#GET{self}|parametre_url{editer_contenu_logo,#ENV{editer_contenu_logo}|=={#ID_SELECTIONS_CONTENU}|?{'',#ID_SELECTIONS_CONTENU}})]">(#LOGO_SELECTIONS_CONTENU|sinon{#CHEMIN{prive/images/rayures-gris.gif}}|image_reduire{60,60}|inserer_attribut{alt,<:info_telecharger_nouveau_logo|trim{:}:>}|inserer_attribut{class,spip_documents_left})</a>]
+					#SET{editer_logo,#ENV{editer_contenu_logo}|=={#ID_SELECTIONS_CONTENU}}
+					[<a class="ajax item__logo" title="<:info_telecharger_nouveau_logo|trim{:}:>" href="[(#GET{self}|parametre_url{editer_contenu_logo,#ENV{editer_contenu_logo}|=={#ID_SELECTIONS_CONTENU}|?{'',#ID_SELECTIONS_CONTENU}})]">
+						(#LOGO_SELECTIONS_CONTENU|sinon{#CHEMIN{prive/images/rayures-gris.gif}}|image_reduire{60,60}|inserer_attribut{alt,<:info_telecharger_nouveau_logo|trim{:}:>}|inserer_attribut{class,logo})
+						<br>[(#GET{editer_logo}|?{<:bouton_fermer:>,<:bouton_modifier:>})]
+					</a>]
 				]
 				<div class="item__content">
 					<h4 class="titrem"><span class="#EDIT{titre}"[ title="(#OBJET|objet_info{texte_objet}|_T|attribut_html) #ID_OBJET"]>[(#URL|lien_ou_expose{#TITRE,#URL|non})]</span></h4>
@@ -39,23 +43,22 @@
 				</div>
 				[(#ENV{editer_contenu,non}|=={non}|oui)
 				<div class="item__actions actions">
-					[(#AUTORISER{supprimer,selections_contenu,#ID_SELECTIONS_CONTENU}|oui)
-						[(#BOUTON_ACTION{<:lien_supprimer:>, #URL_ACTION_AUTEUR{supprimer_selections_contenu,#ID_SELECTIONS_CONTENU,#GET{self}}, link ajax todo})]
-					]
-
 					[(#AUTORISER{modifier,selections_contenu,#ID_SELECTIONS_CONTENU}|oui)
-						<a class="ajax" href="[(#GET{self}|parametre_url{editer_contenu,#ID_SELECTIONS_CONTENU})]"><:bouton_modifier:></a>
+						<a class="ajax edit" href="[(#GET{self}|parametre_url{editer_contenu,#ID_SELECTIONS_CONTENU})]"><:bouton_modifier:></a>
 						[(#BOUTON_ACTION{
 							[(#CHEMIN_IMAGE{rang_haut-16.png}|balise_img{<:selections_contenu:deplacer_avant:>})],
 							#URL_ACTION_AUTEUR{deplacer_selections_contenu, #ID_SELECTIONS_CONTENU-haut, #GET{self}},
-							ajax link
+							ajax link move move_up
 						})]
 						[(#BOUTON_ACTION{
 							[(#CHEMIN_IMAGE{rang_bas-16.png}|balise_img{<:selections_contenu:deplacer_apres:>})],
 							#URL_ACTION_AUTEUR{deplacer_selections_contenu, #ID_SELECTIONS_CONTENU-bas, #GET{self}},
-							ajax link
+							ajax link move move_down
 						})]
-						[(#CHEMIN_IMAGE{rang_deplacer-16.png}|balise_img{<:selections_contenu:deplacer:>, deplacer})]
+						[(#CHEMIN_IMAGE{rang_deplacer-16.png}|balise_img{<:selections_contenu:deplacer:>, move})]
+					]
+					[(#AUTORISER{supprimer,selections_contenu,#ID_SELECTIONS_CONTENU}|oui)
+						[(#BOUTON_ACTION{<:lien_supprimer:>, #URL_ACTION_AUTEUR{supprimer_selections_contenu,#ID_SELECTIONS_CONTENU,#GET{self}}, delete link ajax todo})]
 					]
 				</div>
 				]
