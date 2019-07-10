@@ -5,7 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-function action_ajouter_selection_objet_dist($arg) {
+function action_ajouter_selection_objet_dist($arg=null) {
 
 	// Récupérer les paramètres dans le POST ou le GET si besoin
 	if (is_null($arg)) {

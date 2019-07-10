@@ -1,3 +1,8 @@
+[(#REM)
+
+	Gestion des sélections liées à un contenu
+
+]
 #SET{self,#SELF|parametre_url{ajouter|id_selection|id_selections_contenu|editer_contenu|editer_contenu_logo,'',&}|ancre_url{selections}}
 <div id="selections" class="selections">
 
@@ -10,26 +15,43 @@
 		env}
 	>
 
-	[(#REM) Formulaire d'ajout ]
+	[(#REM) Ajouter des sélections ]
 	[(#AUTORISER{associerselections, #OBJET, #ID_OBJET}|et{#AUTORISER{creer, selection}}|oui)
 	<div class="selections_ajouter" id="selections_ajouter">
-		[(#ENV{ajouter}|=={selection}|non)
-			[(#GET{self}|parametre_url{ajouter,selection}|ancre_url{selections_ajouter}
-				|icone_verticale{<:selection:texte_ajouter_selection:>,selection,add,ajax right, #LANG_RIGHT})]
-			<div class="nettoyeur"></div>
+
+		[(#REM) Soit un bouton de création rapide ]
+		[(#CONFIG{selections_editoriales/reutilisation}|non)
+			[(#BOUTON_ACTION{
+				[(#CHEMIN_IMAGE{add-24}|balise_img|inserer_attribut{style,background-image:url\(#VAL{selection}|objet_icone{24}|extraire_attribut{src}\)})]
+				<b><:selection:texte_ajouter_selection:></b>,
+				#URL_ACTION_AUTEUR{ajouter_selection_objet,#OBJET-#ID_OBJET,#GET{self}},
+				ajax icone add selection-24 s24 #LANG_RIGHT,
+				'',
+				<:selection:texte_creer_associer_selection:>
+			})]
 		]
-		[(#ENV{ajouter}|=={selection}|oui)
-			<div class="ajax">
-				#FORMULAIRE_AJOUTER_SELECTION{
-					#ENV{objet},
-					#ENV{id_objet},
-					#ARRAY{
-						url_fermer,#GET*{self},
-						ajaxreload,selections_liees,
+
+		[(#REM) Soit le formulaire d'ajout qui permet en plus de réutiliser des sélections existantes ]
+		[(#CONFIG{selections_editoriales/reutilisation}|oui)
+			[(#ENV{ajouter}|=={selection}|non)
+				[(#GET{self}|parametre_url{ajouter,selection}|ancre_url{selections_ajouter}
+					|icone_verticale{<:selection:texte_ajouter_selection:>,selection,add,ajax right, #LANG_RIGHT})]
+				<div class="nettoyeur"></div>
+			]
+			[(#ENV{ajouter}|=={selection}|oui)
+				<div class="ajax">
+					#FORMULAIRE_AJOUTER_SELECTION{
+						#ENV{objet},
+						#ENV{id_objet},
+						#ARRAY{
+							url_fermer,#GET*{self},
+							ajaxreload,selections_liees,
+						}
 					}
-				}
-			</div>
+				</div>
+			]
 		]
+
 	</div>
 	]
 
