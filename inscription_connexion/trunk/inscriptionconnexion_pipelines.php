@@ -16,7 +16,7 @@ function inscriptionconnexion_formulaire_verifier($flux){
 	if (
 		$flux['args']['form'] == 'inscription'
 		and $email = _request('mail_inscription')
-		and $auteur = sql_fetsel('*', 'spip_auteurs', 'email = '.sql_quote($email))
+		and $id_auteur = sql_getfetsel('id_auteur', 'spip_auteurs', 'email = '.sql_quote($email))
 	){
 		$flux['message_erreur'] = _T('inscriptionconnexion:erreur_compte_existant');
 	}
