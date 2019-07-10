@@ -1,7 +1,7 @@
 <paquet
 	prefix="inscriptionconnexion"
 	categorie="auteur"
-	version="1.0.2"
+	version="1.1.0"
 	etat="stable"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="inscriptionconnexion.png"
@@ -12,6 +12,10 @@
 	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
 	<auteur lien="http://www.mukt.fr">Mukt</auteur>
 	<licence>GPL v3</licence>
+	
+	<!-- Passer après Profils pour être sûr d'avoir le bon mail_inscription -->
+	<utilise nom="profils" />
 
+	<pipeline nom="formulaire_verifier" inclure="inscriptionconnexion_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="inscriptionconnexion_pipelines.php" />
 </paquet>
