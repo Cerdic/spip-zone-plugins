@@ -9,8 +9,7 @@ class geometrize_rasterizer_Rasterizer {
 
 		// easy case: opacity=1, just a copy of the color $c, much faster
 		if ($c & 255===255){
-			for ($_g = 0; $_g<$lines->length; $_g++){
-				$line = &$lines[$_g];
+			foreach ($lines as &$line) {
 				$_g1 = $line->x2+1;
 				$o = $image->width*$line->y;
 				for ($x = $line->x1; $x<$_g1; $x++){
@@ -35,151 +34,142 @@ class geometrize_rasterizer_Rasterizer {
 			$sb = intval($sb/255);
 			$sa = $c & 255;
 			$sa = $sa | $sa << 8;
-			{
-				$_g = 0;
-				while ($_g<$lines->length){
-					$line = $lines[$_g];
-					$_g = $_g+1;
-					$y = $line->y;
-					$ma = 65535;
-					$m = 65535;
-					$as = ($m-$sa*($ma/$m))*257;
-					$a = intval($as);
-					{
-						$_g2 = $line->x1;
-						$_g1 = $line->x2+1;
-						while ($_g2<$_g1){
-							$_g2 = $_g2+1;
-							$x = $_g2-1;
-							$d = $image->data[$image->width*$y+$x];
-							$dr = $d >> 24 & 255;
-							$dg = $d >> 16 & 255;
-							$db = $d >> 8 & 255;
-							$da = $d & 255;
-							$int = $dr*$a+$sr*$ma;
-							$r = null;
-							if ($int<0){
-								$r = 4294967296.0+$int;
-							} else {
-								$r = $int+0.0;
-							}
-							$int1 = $m;
-							$r1 = null;
-							if ($int1<0){
-								$r1 = 4294967296.0+$int1;
-							} else {
-								$r1 = $int1+0.0;
-							}
-							$r2 = intval($r/$r1) >> 8;
-							$int2 = $dg*$a+$sg*$ma;
-							$g = null;
-							if ($int2<0){
-								$g = 4294967296.0+$int2;
-							} else {
-								$g = $int2+0.0;
-							}
-							$int3 = $m;
-							$g1 = null;
-							if ($int3<0){
-								$g1 = 4294967296.0+$int3;
-							} else {
-								$g1 = $int3+0.0;
-							}
-							$g2 = intval($g/$g1) >> 8;
-							$int4 = $db*$a+$sb*$ma;
-							$b = null;
-							if ($int4<0){
-								$b = 4294967296.0+$int4;
-							} else {
-								$b = $int4+0.0;
-							}
-							$int5 = $m;
-							$b1 = null;
-							if ($int5<0){
-								$b1 = 4294967296.0+$int5;
-							} else {
-								$b1 = $int5+0.0;
-							}
-							$b2 = intval($b/$b1) >> 8;
-							$int6 = $da*$a+$sa*$ma;
-							$a1 = null;
-							if ($int6<0){
-								$a1 = 4294967296.0+$int6;
-							} else {
-								$a1 = $int6+0.0;
-							}
-							$int7 = $m;
-							$a2 = null;
-							if ($int7<0){
-								$a2 = 4294967296.0+$int7;
-							} else {
-								$a2 = $int7+0.0;
-							}
-							$a3 = intval($a1/$a2) >> 8;
-							{
-								if (!true){
-									throw new HException("FAIL: min <= max");
-								}
-								$color = null;
-								if ($r2<0){
-									$color = 0;
-								} else {
-									if ($r2>255){
-										$color = 255;
-									} else {
-										$color = $r2;
-									}
-								}
-								if (!true){
-									throw new HException("FAIL: min <= max");
-								}
-								$color1 = null;
-								if ($g2<0){
-									$color1 = 0;
-								} else {
-									if ($g2>255){
-										$color1 = 255;
-									} else {
-										$color1 = $g2;
-									}
-								}
-								if (!true){
-									throw new HException("FAIL: min <= max");
-								}
-								$color2 = null;
-								if ($b2<0){
-									$color2 = 0;
-								} else {
-									if ($b2>255){
-										$color2 = 255;
-									} else {
-										$color2 = $b2;
-									}
-								}
-								if (!true){
-									throw new HException("FAIL: min <= max");
-								}
-								$color3 = null;
-								if ($a3<0){
-									$color3 = 0;
-								} else {
-									if ($a3>255){
-										$color3 = 255;
-									} else {
-										$color3 = $a3;
-									}
-								}
-								$image->data[$image->width*$y+$x] = ($color << 24)+($color1 << 16)+($color2 << 8)+$color3;
-								if (isset($image->errorCache) && isset($image->errorCache[$image->width*$y+$x])){
-									unset($image->errorCache[$image->width*$y+$x]);
-								}
-								unset($color3, $color2, $color1, $color);
-							}
-							unset($x, $r2, $r1, $r, $int7, $int6, $int5, $int4, $int3, $int2, $int1, $int, $g2, $g1, $g, $dr, $dg, $db, $da, $d, $b2, $b1, $b, $a3, $a2, $a1);
-						}
-						unset($_g2, $_g1);
+
+			foreach ($lines as &$line) {
+				$y = $line->y;
+				$ma = 65535;
+				$m = 65535;
+				$as = ($m-$sa*($ma/$m))*257;
+				$a = intval($as);
+
+				$_g2 = $line->x1;
+				$_g1 = $line->x2+1;
+				while ($_g2<$_g1){
+					$_g2 = $_g2+1;
+					$x = $_g2-1;
+					$d = $image->data[$image->width*$y+$x];
+					$dr = $d >> 24 & 255;
+					$dg = $d >> 16 & 255;
+					$db = $d >> 8 & 255;
+					$da = $d & 255;
+					$int = $dr*$a+$sr*$ma;
+					$r = null;
+					if ($int<0){
+						$r = 4294967296.0+$int;
+					} else {
+						$r = $int+0.0;
 					}
-					unset($y, $ma, $m, $line, $as, $a);
+					$int1 = $m;
+					$r1 = null;
+					if ($int1<0){
+						$r1 = 4294967296.0+$int1;
+					} else {
+						$r1 = $int1+0.0;
+					}
+					$r2 = intval($r/$r1) >> 8;
+					$int2 = $dg*$a+$sg*$ma;
+					$g = null;
+					if ($int2<0){
+						$g = 4294967296.0+$int2;
+					} else {
+						$g = $int2+0.0;
+					}
+					$int3 = $m;
+					$g1 = null;
+					if ($int3<0){
+						$g1 = 4294967296.0+$int3;
+					} else {
+						$g1 = $int3+0.0;
+					}
+					$g2 = intval($g/$g1) >> 8;
+					$int4 = $db*$a+$sb*$ma;
+					$b = null;
+					if ($int4<0){
+						$b = 4294967296.0+$int4;
+					} else {
+						$b = $int4+0.0;
+					}
+					$int5 = $m;
+					$b1 = null;
+					if ($int5<0){
+						$b1 = 4294967296.0+$int5;
+					} else {
+						$b1 = $int5+0.0;
+					}
+					$b2 = intval($b/$b1) >> 8;
+					$int6 = $da*$a+$sa*$ma;
+					$a1 = null;
+					if ($int6<0){
+						$a1 = 4294967296.0+$int6;
+					} else {
+						$a1 = $int6+0.0;
+					}
+					$int7 = $m;
+					$a2 = null;
+					if ($int7<0){
+						$a2 = 4294967296.0+$int7;
+					} else {
+						$a2 = $int7+0.0;
+					}
+					$a3 = intval($a1/$a2) >> 8;
+					{
+						if (!true){
+							throw new HException("FAIL: min <= max");
+						}
+						$color = null;
+						if ($r2<0){
+							$color = 0;
+						} else {
+							if ($r2>255){
+								$color = 255;
+							} else {
+								$color = $r2;
+							}
+						}
+						if (!true){
+							throw new HException("FAIL: min <= max");
+						}
+						$color1 = null;
+						if ($g2<0){
+							$color1 = 0;
+						} else {
+							if ($g2>255){
+								$color1 = 255;
+							} else {
+								$color1 = $g2;
+							}
+						}
+						if (!true){
+							throw new HException("FAIL: min <= max");
+						}
+						$color2 = null;
+						if ($b2<0){
+							$color2 = 0;
+						} else {
+							if ($b2>255){
+								$color2 = 255;
+							} else {
+								$color2 = $b2;
+							}
+						}
+						if (!true){
+							throw new HException("FAIL: min <= max");
+						}
+						$color3 = null;
+						if ($a3<0){
+							$color3 = 0;
+						} else {
+							if ($a3>255){
+								$color3 = 255;
+							} else {
+								$color3 = $a3;
+							}
+						}
+						$image->data[$image->width*$y+$x] = ($color << 24)+($color1 << 16)+($color2 << 8)+$color3;
+						if (isset($image->errorCache) && isset($image->errorCache[$image->width*$y+$x])){
+							unset($image->errorCache[$image->width*$y+$x]);
+						}
+					}
 				}
 			}
 		}
@@ -196,8 +186,7 @@ class geometrize_rasterizer_Rasterizer {
 			throw new HException("FAIL: lines != null");
 		}
 
-		for ($_g = 0; $_g<$lines->length; $_g++){
-			$line = &$lines[$_g];
+		foreach ($lines as &$line) {
 			$_g1 = $line->x2+1;
 			$o1 = $source->width*$line->y;
 			$o2 = $destination->width*$line->y;
@@ -207,6 +196,13 @@ class geometrize_rasterizer_Rasterizer {
 		}
 	}
 
+	/**
+	 * @param int $x1
+	 * @param int $y1
+	 * @param int $x2
+	 * @param int $y2
+	 * @return array
+	 */
 	static function bresenham($x1, $y1, $x2, $y2){
 		$dx = $x2-$x1;
 		$ix = null;
@@ -250,8 +246,8 @@ class geometrize_rasterizer_Rasterizer {
 			$dy1 = $dy;
 		}
 		$dy = $dy1 << 1;
-		$points = (new _hx_array(array()));
-		$points->push(_hx_anonymous(array("x" => $x1, "y" => $y1)));
+		$points = [];
+		$points[] = ["x" => $x1, "y" => $y1];
 		if ($dx>=$dy){
 			$error = $dy-($dx >> 1);
 			while ($x1!==$x2){
@@ -271,7 +267,7 @@ class geometrize_rasterizer_Rasterizer {
 				}
 				$error = $error+$dy;
 				$x1 = $x1+$ix2;
-				$points->push(_hx_anonymous(array("x" => $x1, "y" => $y1)));
+				$points[] = ["x" => $x1, "y" => $y1];
 				unset($tmp);
 			}
 		} else {
@@ -293,52 +289,75 @@ class geometrize_rasterizer_Rasterizer {
 				}
 				$error1 = $error1+$dx;
 				$y1 = $y1+$iy2;
-				$points->push(_hx_anonymous(array("x" => $x1, "y" => $y1)));
+				$points[] = ["x" => $x1, "y" => $y1];
 				unset($tmp1);
 			}
 		}
 		return $points;
 	}
 
-	static function scanlinesForPolygon($points){
-		$lines = (new _hx_array(array()));
-		$edges = (new _hx_array(array()));
-		{
-			$_g1 = 0;
-			$_g = $points->length;
-			while ($_g1<$_g){
-				$_g1 = $_g1+1;
-				$i = $_g1-1;
-				$p1 = $points[$i];
-				$p2 = null;
-				if ($i===$points->length-1){
-					$p2 = $points[0];
-				} else {
-					$p2 = $points[$i+1];
-				}
-				$p1p2 = geometrize_rasterizer_Rasterizer::bresenham($p1->x, $p1->y, $p2->x, $p2->y);
-				$edges = $edges->concat($p1p2);
-				unset($p2, $p1p2, $p1, $i);
-			}
+	/**
+	 * @param array $points
+	 * @param int $xBound
+	 * @param int $yBound
+	 * @return array
+	 */
+	static function scanlinesForPolygon($points, $xBound, $yBound){
+		return geometrize_rasterizer_Rasterizer::scanlinesForPath($points, $xBound, $yBound, true);
+	}
+
+	/**
+	 * @param array $points
+	 * @param int $xBound
+	 * @param int $yBound
+	 * @param bool $isClosed
+	 * @return array
+	 */
+	static function scanlinesForPath($points, $xBound, $yBound, $isClosed = false){
+		$lines = [];
+		$edges = [];
+
+		if ($isClosed) {
+			$prevPoint = end($points);
 		}
+		else {
+			$prevPoint = array_shift($points);
+		}
+
 		$yToXs = [];
-		for ($_g2 = 0; $_g2<$edges->length; $_g2++){
-			$point = $edges[$_g2];
-			if (!isset($yToXs[$point->y])){
-				$yToXs[$point->y] = [];
+
+		foreach ($points as $point) {
+			$rasterizedLine = geometrize_rasterizer_Rasterizer::bresenham($prevPoint['x'], $prevPoint['y'], $point['x'], $point['y']);
+
+			foreach ($rasterizedLine as $p) {
+				if (!isset($yToXs[$p['y']])){
+					$yToXs[$p['y']] = [];
+				}
+				$yToXs[$p['y']][] = $p['x'];
 			}
-			$yToXs[$point->y][] = $point->x;
+
+			$prevPoint = $point;
 		}
-		ksort($yToXs);
+
+		// not super useful
+		// ksort($yToXs);
+
 		foreach ($yToXs as $y => $xs){
-			$minx = min($xs);
-			$maxx = max($xs);
-			$lines->push(new geometrize_rasterizer_Scanline($y, $minx, $maxx));
+			if ($y>=0 and $y<$yBound){
+				$minx = min($xs);
+				$maxx = max($xs);
+				if ($minx<$xBound and $maxx>=0){
+					$lines[] = new geometrize_rasterizer_Scanline($y, max($minx, 0), min($maxx, $xBound-1));
+				}
+			}
 		}
 
 		return $lines;
 	}
 
+	/**
+	 * @return string
+	 */
 	function __toString(){
 		return 'geometrize.rasterizer.Rasterizer';
 	}

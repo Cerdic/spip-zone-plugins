@@ -8,61 +8,58 @@ class geometrize_shape_Line implements geometrize_shape_Shape {
 	public $y2;
 	public $xBound;
 	public $yBound;
+	public $color;
 
 	public function __construct($xBound, $yBound){
-		if (!php_Boot::$skip_constructor){
-			$this->x1 = mt_rand(0, $xBound-1);
-			$this->y1 = mt_rand(0, $yBound-1);
-			$value = $this->x1;
-			$value1 = $value+mt_rand(1, 32);
-			if (!(0<=$xBound)){
-				throw new HException("FAIL: min <= max");
-			}
-			$tmp = null;
-			if ($value1<0){
-				$tmp = 0;
-			} else {
-				if ($value1>$xBound){
-					$tmp = $xBound;
-				} else {
-					$tmp = $value1;
-				}
-			}
-			$this->x2 = $tmp;
-			$value2 = $this->y1;
-			$value3 = $value2+mt_rand(1, 32);
-			if (!(0<=$yBound)){
-				throw new HException("FAIL: min <= max");
-			}
-			$tmp1 = null;
-			if ($value3<0){
-				$tmp1 = 0;
-			} else {
-				if ($value3>$yBound){
-					$tmp1 = $yBound;
-				} else {
-					$tmp1 = $value3;
-				}
-			}
-			$this->y2 = $tmp1;
-			$this->xBound = $xBound;
-			$this->yBound = $yBound;
+		$this->x1 = mt_rand(0, $xBound-1);
+		$this->y1 = mt_rand(0, $yBound-1);
+		$value = $this->x1;
+		$value1 = $value+mt_rand(1, 32);
+		if (!(0<=$xBound)){
+			throw new HException("FAIL: min <= max");
 		}
+		$tmp = null;
+		if ($value1<0){
+			$tmp = 0;
+		} else {
+			if ($value1>$xBound){
+				$tmp = $xBound;
+			} else {
+				$tmp = $value1;
+			}
+		}
+		$this->x2 = $tmp;
+		$value2 = $this->y1;
+		$value3 = $value2+mt_rand(1, 32);
+		if (!(0<=$yBound)){
+			throw new HException("FAIL: min <= max");
+		}
+		$tmp1 = null;
+		if ($value3<0){
+			$tmp1 = 0;
+		} else {
+			if ($value3>$yBound){
+				$tmp1 = $yBound;
+			} else {
+				$tmp1 = $value3;
+			}
+		}
+		$this->y2 = $tmp1;
+		$this->xBound = $xBound;
+		$this->yBound = $yBound;
 	}
 
+	/**
+	 * @return array
+	 * @throws HException
+	 */
 	public function rasterize(){
-		$lines = (new _hx_array(array()));
-		$points = geometrize_rasterizer_Rasterizer::bresenham($this->x1, $this->y1, $this->x2, $this->y2);
-		{
-			$_g = 0;
-			while ($_g<$points->length){
-				$point = $points[$_g];
-				$_g = $_g+1;
-				$lines->push(new geometrize_rasterizer_Scanline($point->y, $point->x, $point->x));
-				unset($point);
-			}
-		}
-		return geometrize_rasterizer_Scanline::trim($lines, $this->xBound, $this->yBound);
+		$points = [
+			['x' => $this->x1, 'y' => $this->y1],
+			['x' => $this->x2, 'y' => $this->y2]
+		];
+
+		return geometrize_rasterizer_Rasterizer::scanlinesForPath($points, $this->xBound, $this->yBound);
 	}
 
 	public function mutate(){
@@ -176,22 +173,32 @@ class geometrize_shape_Line implements geometrize_shape_Shape {
 		$line->y1 = $this->y1;
 		$line->x2 = $this->x2;
 		$line->y2 = $this->y2;
-		if (isset($this->color)){
-			$line->color = $this->color;
-		}
+		$line->color = $this->color;
+
 		return $line;
 	}
 
 	public function getType(){
-		return 6;
+		return geometrize_shape_ShapeTypes::T_LINE;
 	}
 
+	/**
+	 * @return array
+	 */
 	public function getRawShapeData(){
-		return (new _hx_array(array($this->x1, $this->y1, $this->x2, $this->y2)));
+		return [
+			$this->x1,
+			$this->y1,
+			$this->x2,
+			$this->y2
+		];
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getSvgShapeData(){
-		return "<line x1=\"" . _hx_string_rec($this->x1, "") . "\" y1=\"" . _hx_string_rec($this->y1, "") . "\" x2=\"" . _hx_string_rec($this->x2, "") . "\" y2=\"" . _hx_string_rec($this->y2, "") . "\" " . _hx_string_or_null(geometrize_exporter_SvgExporter::$SVG_STYLE_HOOK) . " />";
+		return "<line x1=\"" . $this->x1 . "\" y1=\"" . $this->y1 . "\" x2=\"" . $this->x2 . "\" y2=\"" . $this->y2 . "\" " . geometrize_exporter_SvgExporter::$SVG_STYLE_HOOK . " />";
 	}
 
 	public function __call($m, $a){

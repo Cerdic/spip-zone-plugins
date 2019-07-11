@@ -8,20 +8,19 @@ class geometrize_shape_Ellipse implements geometrize_shape_Shape {
 	public $ry;
 	public $xBound;
 	public $yBound;
+	public $color;
 
 	public function __construct($xBound, $yBound){
-		if (!php_Boot::$skip_constructor){
-			$this->x = mt_rand(0, $xBound-1);
-			$this->y = mt_rand(0, $yBound-1);
-			$this->rx = mt_rand(1, 32);
-			$this->ry = mt_rand(1, 32);
-			$this->xBound = $xBound;
-			$this->yBound = $yBound;
-		}
+		$this->x = mt_rand(0, $xBound-1);
+		$this->y = mt_rand(0, $yBound-1);
+		$this->rx = mt_rand(1, 32);
+		$this->ry = mt_rand(1, 32);
+		$this->xBound = $xBound;
+		$this->yBound = $yBound;
 	}
 
 	public function rasterize(){
-		$lines = (new _hx_array(array()));
+		$lines = [];
 		$aspect = $this->rx/$this->ry;
 		$w = $this->xBound;
 		$h = $this->yBound;
@@ -68,7 +67,7 @@ class geometrize_shape_Ellipse implements geometrize_shape_Shape {
 					$tmp2 = false;
 				}
 				if ($tmp2){
-					$lines->push(new geometrize_rasterizer_Scanline($y1, $x1, $x2));
+					$lines[] = new geometrize_rasterizer_Scanline($y1, $x1, $x2);
 				}
 				$tmp3 = null;
 				$tmp4 = null;
@@ -83,7 +82,7 @@ class geometrize_shape_Ellipse implements geometrize_shape_Shape {
 					$tmp3 = false;
 				}
 				if ($tmp3){
-					$lines->push(new geometrize_rasterizer_Scanline($y2, $x1, $x2));
+					$lines[] = (new geometrize_rasterizer_Scanline($y2, $x1, $x2));
 				}
 				unset($y2, $y1, $x2, $x1, $tmp4, $tmp3, $tmp2, $tmp1, $tmp, $s, $dy);
 			}
@@ -206,22 +205,29 @@ class geometrize_shape_Ellipse implements geometrize_shape_Shape {
 		$ellipse->y = $this->y;
 		$ellipse->rx = $this->rx;
 		$ellipse->ry = $this->ry;
-		if (isset($this->color)){
-			$ellipse->color = $this->color;
-		}
+		$ellipse->color = $this->color;
+
 		return $ellipse;
 	}
 
 	public function getType(){
-		return 3;
+		return geometrize_shape_ShapeTypes::T_ELLIPSE;
 	}
 
+	/**
+	 * @return array
+	 */
 	public function getRawShapeData(){
-		return (new _hx_array(array($this->x, $this->y, $this->rx, $this->ry)));
+		return [
+			$this->x,
+			$this->y,
+			$this->rx,
+			$this->ry
+		];
 	}
 
 	public function getSvgShapeData(){
-		return "<ellipse cx=\"" . _hx_string_rec($this->x, "") . "\" cy=\"" . _hx_string_rec($this->y, "") . "\" rx=\"" . _hx_string_rec($this->rx, "") . "\" ry=\"" . _hx_string_rec($this->ry, "") . "\" " . _hx_string_or_null(geometrize_exporter_SvgExporter::$SVG_STYLE_HOOK) . " />";
+		return "<ellipse cx=\"" . $this->x . "\" cy=\"" . $this->y . "\" rx=\"" . $this->rx . "\" ry=\"" . $this->ry . "\" " . geometrize_exporter_SvgExporter::$SVG_STYLE_HOOK . " />";
 	}
 
 	public function __call($m, $a){

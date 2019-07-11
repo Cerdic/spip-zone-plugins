@@ -9,44 +9,41 @@ class geometrize_shape_RotatedEllipse implements geometrize_shape_Shape {
 	public $angle;
 	public $xBound;
 	public $yBound;
+	public $color;
 
 	public function __construct($xBound, $yBound){
-		if (!php_Boot::$skip_constructor){
-			$this->x = mt_rand(0, $xBound-1);
-			$this->y = mt_rand(0, $yBound-1);
-			$this->rx = mt_rand(1, 32);
-			$this->ry = mt_rand(1, 32);
-			$this->angle = mt_rand(0, 359);
-			$this->xBound = $xBound;
-			$this->yBound = $yBound;
-		}
+		$this->x = mt_rand(0, $xBound-1);
+		$this->y = mt_rand(0, $yBound-1);
+		$this->rx = mt_rand(1, 32);
+		$this->ry = mt_rand(1, 32);
+		$this->angle = mt_rand(0, 359);
+		$this->xBound = $xBound;
+		$this->yBound = $yBound;
 	}
 
 	public function rasterize(){
 		$pointCount = 20;
-		$points = (new _hx_array(array()));
+		$points = [];
 		$rads = $this->angle*(M_PI/180.0);
 		$c = cos($rads);
 		$s = sin($rads);
-		{
-			$_g1 = 0;
-			$_g = $pointCount;
-			while ($_g1<$_g){
-				$_g1 = $_g1+1;
-				$i = $_g1-1;
-				$rot = 360.0/$pointCount*$i*(M_PI/180.0);
-				$crx = $this->rx;
-				$crx1 = $crx*cos($rot);
-				$cry = $this->ry;
-				$cry1 = $cry*sin($rot);
-				$tx = intval($crx1*$c-$cry1*$s+$this->x);
-				$ty = intval($crx1*$s+$cry1*$c+$this->y);
-				$points->push(_hx_anonymous(array("x" => $tx, "y" => $ty)));
-				unset($ty, $tx, $rot, $i, $cry1, $cry, $crx1, $crx);
-			}
+
+		$_g1 = 0;
+		$_g = $pointCount;
+		while ($_g1<$_g){
+			$_g1 = $_g1+1;
+			$i = $_g1-1;
+			$rot = 360.0/$pointCount*$i*(M_PI/180.0);
+			$crx = $this->rx;
+			$crx1 = $crx*cos($rot);
+			$cry = $this->ry;
+			$cry1 = $cry*sin($rot);
+			$tx = intval($crx1*$c-$cry1*$s+$this->x);
+			$ty = intval($crx1*$s+$cry1*$c+$this->y);
+			$points[] = ["x" => $tx, "y" => $ty];
 		}
-		$tmp = geometrize_rasterizer_Rasterizer::scanlinesForPolygon($points);
-		return geometrize_rasterizer_Scanline::trim($tmp, $this->xBound, $this->yBound);
+
+		return geometrize_rasterizer_Rasterizer::scanlinesForPolygon($points, $this->xBound, $this->yBound);
 	}
 
 	public function mutate(){
@@ -188,24 +185,35 @@ class geometrize_shape_RotatedEllipse implements geometrize_shape_Shape {
 		$ellipse->rx = $this->rx;
 		$ellipse->ry = $this->ry;
 		$ellipse->angle = $this->angle;
-		if (isset($this->color)){
-			$ellipse->color = $this->color;
-		}
+		$ellipse->color = $this->color;
+
 		return $ellipse;
 	}
 
 	public function getType(){
-		return 4;
+		return geometrize_shape_ShapeTypes::T_ROTATED_ELLIPSE;
 	}
 
+	/**
+	 * @return array
+	 */
 	public function getRawShapeData(){
-		return (new _hx_array(array($this->x, $this->y, $this->rx, $this->ry, $this->angle)));
+		return [
+			$this->x,
+			$this->y,
+			$this->rx,
+			$this->ry,
+			$this->angle
+		];
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getSvgShapeData(){
-		$s = "<g transform=\"translate(" . _hx_string_rec($this->x, "") . " " . _hx_string_rec($this->y, "") . ") rotate(" . _hx_string_rec($this->angle, "") . ") scale(" . _hx_string_rec($this->rx, "") . " " . _hx_string_rec($this->ry, "") . ")\">";
-		$s = _hx_string_or_null($s) . _hx_string_or_null(("<ellipse cx=\"" . _hx_string_rec(0, "") . "\" cy=\"" . _hx_string_rec(0, "") . "\" rx=\"" . _hx_string_rec(1, "") . "\" ry=\"" . _hx_string_rec(1, "") . "\" " . _hx_string_or_null(geometrize_exporter_SvgExporter::$SVG_STYLE_HOOK) . " />"));
-		$s = _hx_string_or_null($s) . "</g>";
+		$s = "<g transform=\"translate(" . $this->x . " " . $this->y . ") rotate(" . $this->angle . ") scale(" . $this->rx . " " . $this->ry . ")\">";
+		$s .= "<ellipse cx=\"" . 0 . "\" cy=\"" . 0 . "\" rx=\"" . 1 . "\" ry=\"" . 1 . "\" " . geometrize_exporter_SvgExporter::$SVG_STYLE_HOOK . " />";
+		$s .= "</g>";
 		return $s;
 	}
 

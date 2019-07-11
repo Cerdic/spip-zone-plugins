@@ -5,14 +5,11 @@ class geometrize_runner_ImageRunner {
 	public $model;
 
 	public function __construct($inputImage, $backgroundColor){
-		if (!php_Boot::$skip_constructor){
-			$this->model = null;
-			$this->model = new geometrize_Model($inputImage, $backgroundColor);
-		}
+		$this->model = new geometrize_Model($inputImage, $backgroundColor);
 	}
 
 	public function step($options){
-		return $this->model->step($options->shapeTypes, $options->alpha, $options->candidateShapesPerStep, $options->shapeMutationsPerStep);
+		return $this->model->step($options['shapeTypes'], $options['alpha'], $options['candidateShapesPerStep'], $options['shapeMutationsPerStep']);
 	}
 
 	public function getImageData(){

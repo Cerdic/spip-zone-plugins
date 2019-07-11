@@ -31,7 +31,7 @@ function preview_image_geometrize_dist($img, $options){
 
 	// dimension de la miniature a vectoriser
 	$geometrize_options = [
-		"shapeTypes" => [geometrize_shape_ShapeTypes::$TRIANGLE],
+		"shapeTypes" => [geometrize_shape_ShapeTypes::T_TRIANGLE],
 		"alpha" => 255, // beaucoup plus rapide qu'avec une transparence
 		"candidateShapesPerStep" => 150,
 		"shapeMutationsPerStep" => 100,
@@ -57,13 +57,14 @@ function preview_image_geometrize_dist($img, $options){
 	$fichier = $cache["fichier"];
 	$dest = $cache["fichier_dest"];
 
-	if ($cache["creer"]){
+	if (true or $cache["creer"]){
 		if (!@file_exists($fichier)){
 			return false;
 		}
 
+		$runnerVersion = 2;
 		$runner = false;
-		$results = new _hx_array();
+		$results = [];
 		$couleur_bg = _image_couleur_moyenne($fichier);
 		//$couleur_bg = couleur_extraire($fichier);
 		$width_thumb = array_keys($resize_strategy);
@@ -71,7 +72,9 @@ function preview_image_geometrize_dist($img, $options){
 
 		if (file_exists("$dest.runner")){
 			lire_fichier("$dest.runner", $r);
-			if ($r = unserialize($r)){
+			if ($r = unserialize($r)
+				and $version = array_shift($r)
+				and $version === $runnerVersion){
 				list($runner, $results) = $r;
 				$w = $runner->model->width;
 				$h = $runner->model->height;
@@ -91,18 +94,11 @@ function preview_image_geometrize_dist($img, $options){
 			$h = $runner->model->height;
 		}
 
-		$hx_options = new _hx_array();
-		$hx_options->shapeTypes = new _hx_array($geometrize_options['shapeTypes']);
-		$hx_options->alpha = $geometrize_options['alpha'];
-		$hx_options->candidateShapesPerStep = $geometrize_options['candidateShapesPerStep'];
-		$hx_options->shapeMutationsPerStep = $geometrize_options['shapeMutationsPerStep'];
-		$hx_options->steps = $geometrize_options['steps'];
-
 		//var_dump("WIDTHUMB $width_thumb");
 
 		$start_time = time();
 		spip_timer('runner');
-		for ($i = $results->length; $i<$geometrize_options['steps']; $i++){
+		for ($i = count($results); $i<$geometrize_options['steps']; $i++){
 
 			// faut-il passer a une taille de vignette superieure ?
 			if ($i>$resize_strategy[$width_thumb]){
@@ -123,8 +119,8 @@ function preview_image_geometrize_dist($img, $options){
 				}
 			}
 
-			$r = $runner->step($hx_options);
-			$results->push($r->get(0));
+			$r = $runner->step($geometrize_options);
+			$results = array_merge($results,$r);
 			if (time()>$start_time+$time_budget){
 				break;
 			}
@@ -132,7 +128,6 @@ function preview_image_geometrize_dist($img, $options){
 		$time_compute = spip_timer('runner');
 
 		//var_dump($r,'<hr/>',$results);
-
 
 		$svg_image = trim(geometrize_exporter_SvgExporter::export($results, $w, $h));
 
@@ -161,10 +156,10 @@ function preview_image_geometrize_dist($img, $options){
 
 
 		ecrire_fichier($dest, $svg_image);
-		$nsteps = $results->length;
-		if ($results->length<$geometrize_options['steps']){
+		$nsteps = count($results);
+		if ($nsteps<$geometrize_options['steps']){
 			@touch($dest, 1); // on antidate l'image pour revenir ici au prochain affichage
-			ecrire_fichier("$dest.runner", serialize([$runner, $results]));
+			ecrire_fichier("$dest.runner", serialize([$runnerVersion, $runner, $results]));
 			spip_log("PROGRESS: $fichier t=$time_compute Steps:$nsteps length:" . strlen($svg_image), 'ai_geometrize');
 			//var_dump("STEPS:" . $nsteps);
 		} else {
@@ -184,29 +179,17 @@ function preview_image_geometrize_dist($img, $options){
 function _init_geometrize_runner($img, $width_thumb, $couleur_bg, $results = null){
 	$thumb = image_reduire($img, $width_thumb);
 	$source = extraire_attribut($thumb, 'src');
-	list($w, $h) = getimagesize($source);
-	$image = imagecreatefromstring(file_get_contents($source));
-	$bitmap = new geometrize_bitmap_Bitmap();
-	$bitmap->width = $w;
-	$bitmap->height = $h;
-
-	for ($x = 0; $x<$w; $x++){
-		for ($y = 0; $y<$h; $y++){
-			// get a color
-			$color_index = imagecolorat($image, $x, $y);
-			// make it human readable
-			$c = imagecolorsforindex($image, $color_index);
-			$bitmap->setPixel($x, $y, _couleur_to_geometrize($c));
-		}
-	}
+	$bitmap = geometrize_bitmap_Bitmap::createFromImageFile($source);
 	$runner = new geometrize_runner_ImageRunner($bitmap, _couleur_to_geometrize($couleur_bg));
 
-	$new_results = new _hx_array();
+	$new_results = [];
 	if ($results){
-		for ($i = 0; $i<$results->length; $i++){
-			$alpha = $results[$i]->shape->color & 255;
-			$results[$i]->shape->rescale($w, $h); // rescale on new bounds
-			$new_results->push($runner->model->addShape($results[$i]->shape, $alpha));
+		$w = $bitmap->width;
+		$h = $bitmap->height;
+		foreach ($results as $result) {
+			$alpha = $result['shape']->color & 255;
+			$result['shape']->rescale($w, $h); // rescale on new bounds
+			$new_results[] = $runner->model->addShape($result['shape'], $alpha);
 		}
 	}
 	return [$runner, $new_results];

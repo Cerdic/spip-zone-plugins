@@ -10,85 +10,60 @@ class geometrize_shape_QuadraticBezier implements geometrize_shape_Shape {
 	public $y2;
 	public $xBound;
 	public $yBound;
+	public $color;
 
 	public function __construct($xBound, $yBound){
-		if (!php_Boot::$skip_constructor){
-			$upper = $xBound-1;
-			if (!(0<=$upper)){
-				throw new HException("FAIL: lower <= upper");
-			}
-			$this->x1 = mt_rand(0, $upper);
-			$upper1 = $yBound-1;
-			if (!(0<=$upper1)){
-				throw new HException("FAIL: lower <= upper");
-			}
-			$this->y1 = mt_rand(0, $upper1);
-			$upper2 = $xBound-1;
-			if (!(0<=$upper2)){
-				throw new HException("FAIL: lower <= upper");
-			}
-			$this->cx = mt_rand(0, $upper2);
-			$upper3 = $yBound-1;
-			if (!(0<=$upper3)){
-				throw new HException("FAIL: lower <= upper");
-			}
-			$this->cy = mt_rand(0, $upper3);
-			$upper4 = $xBound-1;
-			if (!(0<=$upper4)){
-				throw new HException("FAIL: lower <= upper");
-			}
-			$this->x2 = mt_rand(0, $upper4);
-			$upper5 = $yBound-1;
-			if (!(0<=$upper5)){
-				throw new HException("FAIL: lower <= upper");
-			}
-			$this->y2 = mt_rand(0, $upper5);
-			$this->xBound = $xBound;
-			$this->yBound = $yBound;
+		$upper = $xBound-1;
+		if (!(0<=$upper)){
+			throw new HException("FAIL: lower <= upper");
 		}
+		$this->x1 = mt_rand(0, $upper);
+		$upper1 = $yBound-1;
+		if (!(0<=$upper1)){
+			throw new HException("FAIL: lower <= upper");
+		}
+		$this->y1 = mt_rand(0, $upper1);
+		$upper2 = $xBound-1;
+		if (!(0<=$upper2)){
+			throw new HException("FAIL: lower <= upper");
+		}
+		$this->cx = mt_rand(0, $upper2);
+		$upper3 = $yBound-1;
+		if (!(0<=$upper3)){
+			throw new HException("FAIL: lower <= upper");
+		}
+		$this->cy = mt_rand(0, $upper3);
+		$upper4 = $xBound-1;
+		if (!(0<=$upper4)){
+			throw new HException("FAIL: lower <= upper");
+		}
+		$this->x2 = mt_rand(0, $upper4);
+		$upper5 = $yBound-1;
+		if (!(0<=$upper5)){
+			throw new HException("FAIL: lower <= upper");
+		}
+		$this->y2 = mt_rand(0, $upper5);
+		$this->xBound = $xBound;
+		$this->yBound = $yBound;
 	}
 
 	public function rasterize(){
-		$lines = (new _hx_array(array()));
-		$points = (new _hx_array(array()));
+		$points = [];
 		$pointCount = 20;
-		{
-			$_g1 = 0;
-			$_g = $pointCount-1;
-			while ($_g1<$_g){
-				$_g1 = $_g1+1;
-				$i = $_g1-1;
-				$t = $i/$pointCount;
-				$tp = 1-$t;
-				$x = intval($tp*($tp*$this->x1+$t*$this->cx)+$t*($tp*$this->cx+$t*$this->x2));
-				$y = intval($tp*($tp*$this->y1+$t*$this->cy)+$t*($tp*$this->cy+$t*$this->y2));
-				$points->push(_hx_anonymous(array("x" => $x, "y" => $y)));
-				unset($y, $x, $tp, $t, $i);
-			}
+
+		$_g1 = 0;
+		$_g = $pointCount-1;
+		while ($_g1<$_g){
+			$_g1 = $_g1+1;
+			$i = $_g1-1;
+			$t = $i/$pointCount;
+			$tp = 1-$t;
+			$x = intval($tp*($tp*$this->x1+$t*$this->cx)+$t*($tp*$this->cx+$t*$this->x2));
+			$y = intval($tp*($tp*$this->y1+$t*$this->cy)+$t*($tp*$this->cy+$t*$this->y2));
+			$points[] = ["x" => $x, "y" => $y];
 		}
-		{
-			$_g11 = 0;
-			$_g2 = $points->length-1;
-			while ($_g11<$_g2){
-				$_g11 = $_g11+1;
-				$i1 = $_g11-1;
-				$p0 = $points[$i1];
-				$p1 = $points[$i1+1];
-				$pts = geometrize_rasterizer_Rasterizer::bresenham($p0->x, $p0->y, $p1->x, $p1->y);
-				{
-					$_g21 = 0;
-					while ($_g21<$pts->length){
-						$point = $pts[$_g21];
-						$_g21 = $_g21+1;
-						$lines->push(new geometrize_rasterizer_Scanline($point->y, $point->x, $point->x));
-						unset($point);
-					}
-					unset($_g21);
-				}
-				unset($pts, $p1, $p0, $i1);
-			}
-		}
-		return geometrize_rasterizer_Scanline::trim($lines, $this->xBound, $this->yBound);
+
+		return geometrize_rasterizer_Rasterizer::scanlinesForPath($points, $this->xBound, $this->yBound);
 	}
 
 	public function mutate(){
@@ -253,22 +228,34 @@ class geometrize_shape_QuadraticBezier implements geometrize_shape_Shape {
 		$bezier->y1 = $this->y1;
 		$bezier->x2 = $this->x2;
 		$bezier->y2 = $this->y2;
-		if (isset($this->color)){
-			$bezier->color = $this->color;
-		}
+		$bezier->color = $this->color;
+
 		return $bezier;
 	}
 
 	public function getType(){
-		return 7;
+		return geometrize_shape_ShapeTypes::T_QUADRATIC_BEZIER;
 	}
 
+	/**
+	 * @return array
+	 */
 	public function getRawShapeData(){
-		return (new _hx_array(array($this->x1, $this->y1, $this->cx, $this->cy, $this->x2, $this->y2)));
+		return [
+			$this->x1,
+			$this->y1,
+			$this->cx,
+			$this->cy,
+			$this->x2,
+			$this->y2
+		];
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getSvgShapeData(){
-		return "<path d=\"M" . _hx_string_rec($this->x1, "") . " " . _hx_string_rec($this->y1, "") . " Q " . _hx_string_rec($this->cx, "") . " " . _hx_string_rec($this->cy, "") . " " . _hx_string_rec($this->x2, "") . " " . _hx_string_rec($this->y2, "") . "\" " . _hx_string_or_null(geometrize_exporter_SvgExporter::$SVG_STYLE_HOOK) . " />";
+		return "<path d=\"M" . $this->x1 . " " . $this->y1 . " Q " . $this->cx . " " . $this->cy . " " . $this->x2 . " " . $this->y2 . "\" " . geometrize_exporter_SvgExporter::$SVG_STYLE_HOOK . " />";
 	}
 
 	public function __call($m, $a){
