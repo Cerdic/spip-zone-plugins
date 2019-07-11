@@ -535,6 +535,7 @@ function formidable_generer_url_action_recuperer_fichier_email($saisie, $fichier
 	$action = 'formidable_recuperer_fichier_par_email';
 	$hash = _action_auteur("$action-$arg", '', $pass, 'alea_ephemere');
 	$url = generer_url_action($action, "arg=$arg&hash=$hash", true, true);
+	spip_log("Pour la $saisie et le fichier $fichier avec les options ".print_r($options,true)." le arg est $arg et le  hash $hash. Du coup l'url est $url", "formidable"._LOG_DEBUG);
 	return $url;
 }
 

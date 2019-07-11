@@ -17,6 +17,8 @@ function action_formidable_recuperer_fichier_par_email() {
 	include_spip('inc/securiser_action');
 	$action = 'formidable_recuperer_fichier_par_email';
 	$pass = secret_du_site();
+	spip_log("Action :  le arg est $arg et le hash $hash.", "formidable"._LOG_DEBUG);
+	spip_log("Du coup le resultat de action_auteur est ". _action_auteur("$action-$arg", '', $pass, 'alea_ephemere'), "formidable"._LOG_DEBUG);
 	if ($hash==_action_auteur("$action-$arg", '', $pass, 'alea_ephemere')
 		or $hash==_action_auteur("$action-$arg", '', $pass, 'alea_ephemere_ancien')) {
 		$arg = unserialize($arg);
