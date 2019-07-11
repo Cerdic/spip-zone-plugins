@@ -57,7 +57,7 @@ function preview_image_geometrize_dist($img, $options){
 	$fichier = $cache["fichier"];
 	$dest = $cache["fichier_dest"];
 
-	if (true or $cache["creer"]){
+	if ($cache["creer"]){
 		if (!@file_exists($fichier)){
 			return false;
 		}
