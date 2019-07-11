@@ -1,8 +1,0 @@
-#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
-<div class="nettoyeur"></div>
-
-<INCLURE{fond=prive/objets/liste/materialicons, env, ajax, sinon=<:materialicon:info_aucun_materialicon:>}>
-
-[(#AUTORISER{creer,materialicon})
-	[(#URL_ECRIRE{materialicon_edit,new=oui}|icone_verticale{<:materialicon:icone_creer_materialicon:>,materialicon,new,right})]
-]
