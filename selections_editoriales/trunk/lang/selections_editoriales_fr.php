@@ -9,8 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'configurer_objets_label' => 'Activer l’ajout de sélections sur les contenus :',
-	'configurer_reutilisation_label_case' => 'Permettre de réutiliser des sélections liées',
 	'configurer_reutilisation_explication' => 'Si cette option est activée, lors de l’ajout de sélections à des contenus, l’interface permettra d’associer des sélections existantes.',
+	'configurer_reutilisation_label_case' => 'Permettre de réutiliser des sélections liées',
 
 	// I
 	'info_aucune_utilisation' => 'Cette sélection n’est liée à aucun objet.',
