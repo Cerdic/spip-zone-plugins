@@ -109,12 +109,14 @@ if ($settings){
 	if (isset($settings['lazy_load']) AND $settings['lazy_load'])
 		$AdaptiveImages->lazyload = true;
 
-	// Experimental : generer des thumbnails svg a base de gradients (mais resultat assez bof)
-	//$AdaptiveImages->thumbnailGeneratorCallback = "adaptive_images_preview_gradients";
-	// Experimental : generer des thumbnails svg a base de Potrace
-	//$AdaptiveImages->thumbnailGeneratorCallback = "adaptive_images_preview_potrace";
-	// Experimental : generer des thumbnails svg a base de Geometrize PHP
-	$AdaptiveImages->thumbnailGeneratorCallback = "adaptive_images_preview_geometrize";
+	if (isset($settings['thumbnail_method'])
+		and function_exists($f = "adaptive_images_preview_" . $settings['thumbnail_method'])) {
+		$AdaptiveImages->thumbnailGeneratorCallback = $f;
+	}
+
+	if (isset($settings['thumbnail_debug']) and intval($settings['thumbnail_debug'])) {
+		define('_ADAPTIVE_IMAGES_DEBUG_PREVIEW', true);
+	}
 }
 
 
@@ -196,9 +198,9 @@ function adaptive_images_base($texte, $max_width_1x, $background_only = false){
 
 function adaptive_images_preview_gradients($image, $options) {
 	$gradients = charger_fonction("image_gradients", "preview");
-	//spip_timer('gradients');
+	spip_timer($m = 'GRADIENTS');
 	if ($thumbnail = $gradients($image, $options)) {
-		//var_dump($thumbnail,filesize($thumbnail),spip_timer('gradients'));
+		spip_log("$m: $thumbnail t=".spip_timer($m)." length:" . filesize($thumbnail), 'ai_preview' . _LOG_DEBUG);
 		return array($thumbnail, 'gradients');
 	}
 	return false;
@@ -206,9 +208,9 @@ function adaptive_images_preview_gradients($image, $options) {
 
 function adaptive_images_preview_potrace($image, $options) {
 	$gradients = charger_fonction("image_potrace", "preview");
-	//spip_timer('potrace');
+	spip_timer($m = 'POTRACE');
 	if ($thumbnail = $gradients($image, $options)) {
-		//var_dump($thumbnail,filesize($thumbnail),spip_timer('potrace'));
+		spip_log("$m: $thumbnail t=".spip_timer($m)." length:" . filesize($thumbnail), 'ai_preview' . _LOG_DEBUG);
 		return array($thumbnail, 'potrace');
 	}
 	//spip_timer('potrace');
@@ -217,9 +219,9 @@ function adaptive_images_preview_potrace($image, $options) {
 
 function adaptive_images_preview_geometrize($image, $options) {
 	$geometrize = charger_fonction("image_geometrize", "preview");
-	//spip_timer('geometrize');
+	spip_timer($m = 'GEOMETRIZE');
 	if ($thumbnail = $geometrize($image, $options)) {
-		//var_dump($thumbnail,filesize($thumbnail),spip_timer('geometrize'));
+		spip_log("$m: $thumbnail t=".spip_timer($m)." length:" . filesize($thumbnail), 'ai_preview' . _LOG_DEBUG);
 		return array($thumbnail, 'geometrize');
 	}
 	//spip_timer('geometrize');
@@ -386,7 +388,9 @@ function adaptive_images_insert_head($texte){
 		if ($js = find_in_path("javascript/adaptive.lazyload.js"))
 			$texte .= "<script type='text/javascript' src='$js'></script>\n";
 	}
+	if (defined('_ADAPTIVE_IMAGES_DEBUG_PREVIEW') and _ADAPTIVE_IMAGES_DEBUG_PREVIEW) {
+		$texte .= "<style type='text/css'>.adapt-img:hover {opacity: 1 !important;}</style>";
+	}
+
 	return $texte;
 }
-
-?>

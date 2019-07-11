@@ -50,18 +50,49 @@ class geometrize_exporter_SvgExporter {
 		}
 	}
 
+	static public function exportPolygon($points) {
+		return geometrize_exporter_SvgExporter::exportLines($points, true);
+	}
+
 	/**
 	 * @param array $points
 	 *   each element is a ['x'=>int, 'y'=>int] array
+	 * @param bool $closed
 	 * @return string
 	 */
-	static public function exportPolygon($points) {
-		$s1 = "<polygon points=\"";
+	static public function exportLines($points, $closed = false) {
+		$s1 = "<path d=\"M";
 
+		$point = array_shift($points);
+		$s1 .= $point['x'] . "," . $point['y'];
+
+		$prevPoint = $point;
 		foreach ($points as $point) {
-			$s1 .= $point['x'] . " " . $point['y'] . " ";
+			// find the shortest command to draw a line to this new point
+			$dx = $point['x']-$prevPoint['x'];
+			$dy = $point['y']-$prevPoint['y'];
+			if ($dx === 0) {
+				$pa = "V".$point['y'];
+				$pr = "v".$dy;
+			} elseif ($dy === 0) {
+				$pa = "H".$point['x'];
+				$pr = "h".$dx;
+			}
+			else {
+				$pa = "L" . $point['x'] . "," . $point['y'];
+				$pr = "l" . $dx . ',' . $dy;
+			}
+			if (strlen($pr)<strlen($pa)) {
+				$s1 .= $pr;
+			}
+			else {
+				$s1 .= $pa;
+			}
+			$prevPoint = $point;
 		}
-		$s1 = rtrim($s1);
+		if ($closed) {
+			$s1 .= "z";
+		}
 		$s1 .= "\" " . geometrize_exporter_SvgExporter::$SVG_STYLE_HOOK . "/>";
 		return $s1;
 	}
@@ -97,8 +128,11 @@ class geometrize_exporter_SvgExporter {
 		$style = "";
 		switch ($shape->getType()) {
 			case geometrize_shape_ShapeTypes::T_LINE:
+				$style = geometrize_exporter_SvgExporter::strokeForColor($shape->color);
+				$style .= geometrize_exporter_SvgExporter::strokeOpacityForAlpha($shape->color & 255);
+				break;
 			case geometrize_shape_ShapeTypes::T_QUADRATIC_BEZIER:
-				$style = geometrize_exporter_SvgExporter::strokeForColor($shape->color) . " stroke-width=\"1\" fill=\"none\" ";
+				$style = geometrize_exporter_SvgExporter::strokeForColor($shape->color) . " fill=\"none\" ";
 				$style .= geometrize_exporter_SvgExporter::strokeOpacityForAlpha($shape->color & 255);
 				break;
 			default:

@@ -31,13 +31,20 @@ function preview_image_geometrize_dist($img, $options){
 
 	// dimension de la miniature a vectoriser
 	$geometrize_options = [
+		// toutes ces shapes sont viables : rapides a calculer et compact a l'export SVG
+		// "shapeTypes" => [geometrize_shape_ShapeTypes::T_TRIANGLE,geometrize_shape_ShapeTypes::T_RECTANGLE,geometrize_shape_ShapeTypes::T_LINE],
+		// mais c'est plus joli avec juste des triangles :)
 		"shapeTypes" => [geometrize_shape_ShapeTypes::T_TRIANGLE],
 		"alpha" => 255, // beaucoup plus rapide qu'avec une transparence
-		"candidateShapesPerStep" => 150,
-		"shapeMutationsPerStep" => 100,
-		"steps" => 75, // budget pour une taille acceptable de miniature (~4ko en texte, 2ko en Base 64+Gzip)
+		"candidateShapesPerStep" => 100,
+		"shapeMutationsPerStep" => 75,
+		"steps" => 85, // budget pour une taille acceptable de miniature (~4ko en texte, 2ko en Base 64+Gzip)
 	];
-	$time_budget = 5; // secondes par iteration
+	if (defined('_ADAPTIVE_IMAGES_GEOMETRIZE_SHAPES')) {
+		$geometrize_options['shapeTypes'] = explode(',', _ADAPTIVE_IMAGES_GEOMETRIZE_SHAPES);
+	}
+
+	$time_budget = 5; // temps maxi en secondes par iteration
 
 	// le premieres iterations sont sur une petite miniature
 	// et plus on veut de details plus on augmente la taille de l'image de travail
@@ -144,8 +151,13 @@ function preview_image_geometrize_dist($img, $options){
 
 		// optimize the size :
 		$svg_image[1] = str_replace(' fill-opacity="1"/>', '/>', $svg_image[1]);
+		$svg_image[1] = str_replace(' />', '/>', $svg_image[1]);
 		$svg_image[1] = preg_replace_callback("/rgb\((\d+),(\d+),(\d+)\)/ims", "svg_color_hexa", $svg_image[1]);
+
+		#$svg_image[1] = preg_replace(',fill="(#[0-9a-f]+)",Uims', 'fill=\\1', $svg_image[1]);
+
 		$svg_image[1] = str_replace(">\n", ">", $svg_image[1]);
+		$svg_image[1] = trim($svg_image[1]);
 
 
 		//$svg_image[1] = str_replace("black", "#".$couleur_dark, $svg_image[1]);

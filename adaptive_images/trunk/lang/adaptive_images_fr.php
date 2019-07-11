@@ -28,15 +28,30 @@ L\'image doit faire au moins @width_hr@px de large.</small>',
 	'explication_on_demand_production' => 'En activant ce réglage, chaque variante d\'une image sera fabriquée la première fois qu\'un visiteur en a besoin.
 Evite de générer toutes les images d\'un coup ce qui peut produire des erreurs sur les pages avec beaucoup d\'images.',
 	'legend_compression_jpg' => 'Compression JPG',
-	'legend_miniature_basse_def' => 'Génération de l\'aperçu basse définition',
-	'explication_compression_jpg' => 'Indiquez la qualité des images produites : de 0 (compression maximale, poids minimum) à 100 (pas de compression, poids maximum).',
-	'explication_miniature_basse_def' => 'L\'image d\'aperçu basse définition est envoyée dans le html de la page, pour proposer un aperçu (flouté) pendant que les vrais images chargent. Elle doit donc être aussi légère que possible.<br />
- Un bon compromis de reglage est : Largeur 128px/Qualité 40.',
-	'label_lowsrc_width' => 'Largeur de l\'aperçu (px)',
-	'label_lowsrc_jpg_quality' => 'Qualité de l\'aperçu',
 	'label_10x_jpg_quality' => 'Image 1x',
 	'label_15x_jpg_quality' => 'Image 1.5x',
 	'label_20x_jpg_quality' => 'Image 2x',
+
+
+	'legend_miniature_preview' => 'Génération de l\'image d\'aperçu',
+
+	'explication_compression_jpg' => 'Indiquez la qualité des images produites : de 0 (compression maximale, poids minimum) à 100 (pas de compression, poids maximum).',
+
+	'explication_thumbnail_method' => 'L\'image d\'aperçu est envoyée dans le html de la page, pour proposer un aperçu visuel pendant que les vrais images chargent. Elle doit donc être aussi légère que possible',
+
+	'label_thumbnail_method' => 'Méthode de génération de l\'aperçu',
+	'label_thumbnail_method_gradients' => 'Fond dégradé horizontal+vertical',
+
+	'label_thumbnail_method_lowsrc' => 'Image basse définition floutée',
+	'explication_miniature_basse_def' => 'Un bon compromis de reglage est : Largeur 128px/Qualité 40.',
+	'label_lowsrc_width' => 'Largeur de l\'aperçu (px)',
+	'label_lowsrc_jpg_quality' => 'Qualité de l\'aperçu',
+
+	'label_thumbnail_method_potrace' => 'Tracé d\'un contour issu de l\'image',
+	'label_thumbnail_method_geometrize' => 'Géométrization de l\'image <i>(nécessite de la puissance de calcul)</i>',
+
+	'label_thumbnail_debug_1' => '<i>Activer le debug (les aperçus apparaissent au survol de l\'image)</i>',
+
 );
 
 ?>
