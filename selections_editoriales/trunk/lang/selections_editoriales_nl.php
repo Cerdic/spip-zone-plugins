@@ -11,6 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'configurer_objets_label' => 'Activeer het kunnen toevoegen van redactionele selecties bij de volgende objecten:',
+	'configurer_reutilisation_explication' => 'Wanneer deze optie wordt geactiveerd, kunnen bij het toevoegen van selecties aan inhoud bestaande selecties worden gekoppeld.',
+	'configurer_reutilisation_label_case' => 'Hergebruik van gekoppelde selecties toestaan',
 
 	// I
 	'info_aucune_utilisation' => 'Deze selectie is aan geen enkel object gekoppeld.',
