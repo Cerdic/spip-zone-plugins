@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_monter_title' => 'Verplaats het veld één positie omhoog',
 	'action_supprimer' => 'verwijderen',
 	'action_supprimer_title' => 'Verwijder dit veld volledig van de database',
+	'afficher_noms' => 'Veldnamen weergeven',
 
 	// B
 	'bouton_importer' => 'Importeren',
@@ -101,6 +102,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_des_extras' => 'Lijst van extra velden',
 	'liste_des_extras_possibles' => 'Lijst van onbeheerde velden',
 	'liste_objets_applicables' => 'Lijst van editoriale objecten',
+
+	// M
+	'masquer_noms' => 'Veldnamen verbergen',
 
 	// N
 	'nb_element' => '1 element',
