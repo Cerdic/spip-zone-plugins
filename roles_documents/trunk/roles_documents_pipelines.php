@@ -162,11 +162,11 @@ function roles_documents_post_edition($flux) {
 
 
 /**
- * Empêcher les logos de sortir dans les boucles DOCUMENTS standards.
+ * Empêcher les logos de sortir dans les boucles DOCUMENTS lorsqu'il y a une jointure sur la table de liens (et donc des rôles actifs).
  *
  * C'est nécessaire pour la rétro-compatibilité avec les squelettes existants.
  * Pour voir les logos dans les boucles DOCUMENTS, il faut utiliser
- * explicitement le critère {tout} ou {role=logo}
+ * explicitement le critère {tout} ou {role=logo} ou {role?}
  *
  * @pipeline pre_boucle
  * @param  array $boucle Données du pipeline
@@ -176,6 +176,17 @@ function roles_documents_pre_boucle($boucle) {
 
 	// Boucle DOCUMENTS
 	if ($boucle->type_requete === 'documents') {
+
+		// Vérifier s'il y a une jointure sur la table de liens
+		$jointure_documents = false;
+		if ($boucle->join) {
+			foreach($boucle->join as $join) {
+				if (array_search(sql_quote('documents'), $join) !== false) {
+					$jointure_documents = true;
+					break;
+				}
+			}
+		}
 
 		// Vérifier la présence du critère {role}
 		// [FIXME] vérifier sa valeur (=logo)
@@ -210,7 +221,8 @@ function roles_documents_pre_boucle($boucle) {
 
 		// Go go go
 		if (
-			!$utilise_critere_logo
+			$jointure_documents
+			and !$utilise_critere_logo
 			and (empty($boucle->modificateur['tout']) or $boucle->modificateur['tout'] === false)
 			and !$bypass
 		) {
