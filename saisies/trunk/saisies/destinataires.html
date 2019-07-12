@@ -2,7 +2,7 @@
 #SET{choix_destinataires, #ENV*{choix_destinataires,#ARRAY}}
 #SET{erreurs,#ENV**{erreurs/#ENV{nom}}}
 <BOUCLE_choix(CONDITION){si #GET{choix_destinataires}|count|<{2}|ou{#GET{type_choix}|=={tous}}}>
-<[(#ENV{saisies_base_conteneur,#DIV|sinon{li}})] class="editer editer_[(#ENV{nom})][ (#ENV{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#ENV{conteneur_class,#ENV{li_class}})][ saisie_(#ENV{type_saisie})]" [(#ENV{tout_afficher}|!={oui}|?{style="display:none;"})][ data-id="(#ENV{id_saisie})"]>
+<[(#ENV{saisies_base_conteneur,#DIV|sinon{li}})] class="editer editer_[(#ENV{nom})][ (#ENV{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#ENV{conteneur_class,#ENV{li_class}})][ (#ENV{type_saisie}|saisie_type2classe)]" [(#ENV{tout_afficher}|!={oui}|?{style="display:none;"})][ data-id="(#ENV{id_saisie})"]>
 	#ENV*{inserer_debut}
 	[<label for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]">(#ENV*{label})[<span class='obligatoire'>(#ENV{obligatoire}|oui)[(#ENV*{info_obligatoire}|is_null|?{<:info_obligatoire_02:>,#ENV*{info_obligatoire}})]</span>]</label>]
 	[<span class='erreur_message'>(#GET{erreurs})</span>]
@@ -31,7 +31,7 @@
 </BOUCLE_choix>
 
 [(#SET{valeur,[(#ENV*{valeur}|is_array|?{#ENV*{valeur},[(#ENV*{valeur}|explode{','})]})]})]
-<[(#ENV{saisies_base_conteneur,#DIV|sinon{li}})] class="editer editer_[(#ENV{nom})][ (#ENV{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#ENV{conteneur_class,#ENV{li_class}})][ saisie_(#ENV{type_saisie})]">
+<[(#ENV{saisies_base_conteneur,#DIV|sinon{li}})] class="editer editer_[(#ENV{nom})][ (#ENV{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#ENV{conteneur_class,#ENV{li_class}})][ (#ENV{type_saisie}|saisie_type2classe)]">
 
 	#ENV*{inserer_debut}
 	[<label[(#GET{type_choix}|=={un}|ou{#GET{type_choix}|=={un_radio}}|oui)for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"]>(#ENV*{label})[<span class='obligatoire'>(#ENV{obligatoire}|oui)[(#ENV*{info_obligatoire}|is_null|?{<:info_obligatoire_02:>,#ENV*{info_obligatoire}})]</span>]</label>]

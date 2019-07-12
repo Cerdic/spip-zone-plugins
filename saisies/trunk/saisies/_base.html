@@ -44,9 +44,8 @@
     [(#SET{nom_slash, #ENV{nom}|replace{\[\\[\\]\]+?, '/'}|rtrim{/}})]
 		#SET{erreurs,#ENV**{erreurs/#GET{nom_slash}}}
 		#SET{erreurs,#GET{erreurs,#ENV**{erreurs/#ENV{nom}}}}
-		#SET{conteneur_class,#ENV{type_saisie}|substr{0,9}|=={selecteur}|?{selecteur_item,''}}
 		<!--!inserer_saisie_editer-->
-		<[(#ENV{saisies_base_conteneur,#DIV|sinon{li}})] class="editer editer_[(#ENV{nom}|saisie_nom2classe)][ (#GET{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#GET{conteneur_class})][ (#ENV{conteneur_class,#ENV{li_class}})][ saisie_(#ENV{type_saisie})]"[ data-id="(#ENV{id_saisie})"][ data-afficher_si="(#ENV{afficher_si})"]>
+		<[(#ENV{saisies_base_conteneur,#DIV|sinon{li}})] class="editer editer_[(#ENV{nom}|saisie_nom2classe)][ (#GET{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#ENV{conteneur_class,#ENV{li_class}})][ (#ENV{type_saisie}|saisie_type2classe)]"[ data-id="(#ENV{id_saisie})"][ data-afficher_si="(#ENV{afficher_si})"]>
 			#ENV*{inserer_debut}
 			[<label[(#ENV{type_saisie}|match{oui_non|radio|checkbox|fichiers}|non) for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"][ class="(#ENV{label_class})"]>(#ENV*{label})[<span class='obligatoire'>(#GET{obligatoire}|oui)[(#ENV*{info_obligatoire}|trim|sinon{<:info_obligatoire_02:>})]</span>]</label>]
 			[<span class='erreur_message'>(#GET{erreurs})</span>]

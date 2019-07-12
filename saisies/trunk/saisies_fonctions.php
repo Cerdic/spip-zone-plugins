@@ -121,6 +121,25 @@ function saisie_nom2classe($nom) {
 }
 
 /**
+ * Ajouter une ou des classes sur la saisie en fonction du type
+ * @param $type_saisie
+ * @return string
+ */
+function saisie_type2classe($type_saisie) {
+	static $compteur = 0;
+	$class = "saisie_{$type_saisie}";
+	if (strpos($type_saisie, 'selecteur') === 0) {
+		$class .= " selecteur_item";
+	}
+	if (!in_array($type_saisie, ['hidden','fieldset'])) {
+		$class .= ($compteur & 1) ? " editer_even" : " editer_odd";
+		$compteur = 1 - $compteur;
+	}
+	$class = trim($class);
+	return $class;
+}
+
+/**
  * Passer un nom en une valeur compatible avec un `name` de formulaire
  *
  * - toto => toto,
