@@ -1,0 +1,46 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_svg,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE
+		<input type="hidden" name="id_svg" value="#ENV{id_svg}" />
+		<div class="editer-groupe">
+
+			[(#SAISIE{input, titre, obligatoire=oui,
+				label=<:svg:champ_titre_label:>})]
+
+			
+			<div class="editer editer_fichier[(#ENV**{erreurs}|table_valeur{fichier}|oui)erreur]">
+				<label for="fichier"><:svgbase:choisir_un_fichier:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier})</span>
+				]<select name="fichier" id="fichier" style="width:100%;">
+					<option></option>
+					<BOUCLE_fichier1(DATA){source ls, #CHEMIN{tmp}/upload/svg/*.svg}{par basename}>
+						[<option class="svg" value="#FILE">(#FILE)</option>]
+					</BOUCLE_fichier1>
+					<BOUCLE_dossier(DATA){source ls, #CHEMIN{tmp}/upload/svg/*/}{par basename}>
+						<optgroup label="#BASENAME">
+						<BOUCLE_fichier(DATA){source ls, #FILE/*.svg}{par basename}>
+							[<option class="svg" value="#FILE">(#FILE)</option>]
+						</BOUCLE_fichier>
+						</optgroup>
+					</BOUCLE_dossier>
+					<option>Aucun dossier ou fichier dans /tmp/upload/svg</option>
+					<//B_fichier>
+				</select>
+				<BOUCLE_fichiers(DATA){source ls, #CHEMIN{IMG}/*/}{par basename}>[(#VAL{Y-m-d H:i:s}|date{#MTIME})] - [(#FILE)] <br></BOUCLE_fichiers>
+			</div>
+			
+			
+			[(#SAISIE{textarea, svg,
+				label=<:svg:champ_svg_label:>})]
+
+		</div>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+	</BOUCLE_editable>
+</div>

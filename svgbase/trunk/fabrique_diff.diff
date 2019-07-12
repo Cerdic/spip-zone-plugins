@@ -1,0 +1,264 @@
+Only in ../plugins/fabrique_auto/.backup/svgbase/action: supprimer_materialicon.php
+Only in ../plugins/fabrique_auto/svgbase/action: supprimer_svg.php
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_svgbase.php ../plugins/fabrique_auto/.backup/svgbase/base/svgbase.php ../plugins/fabrique_auto/svgbase/base/svgbase.php
+46c46
+< 		'type' => 'materialicon',
+---
+> 		'type' => 'svg',
+48c48
+< 		'table_objet_surnoms' => array('materialicon'), // table_objet('materialicon') => 'svg'
+---
+> 		'table_objet_surnoms' => array('svg'), // table_objet('svg') => 'svg'
+50c50
+< 			'id_materialicon'    => 'bigint(21) NOT NULL',
+---
+> 			'id_svg'             => 'bigint(21) NOT NULL',
+57c57
+< 			'PRIMARY KEY'        => 'id_materialicon',
+---
+> 			'PRIMARY KEY'        => 'id_svg',
+86c86
+< 			'id_materialicon'    => 'bigint(21) DEFAULT "0" NOT NULL',
+---
+> 			'id_svg'             => 'bigint(21) DEFAULT "0" NOT NULL',
+92,93c92,93
+< 			'PRIMARY KEY'        => 'id_materialicon,id_objet,objet',
+< 			'KEY id_materialicon' => 'id_materialicon',
+---
+> 			'PRIMARY KEY'        => 'id_svg,id_objet,objet',
+> 			'KEY id_svg'         => 'id_svg',
+Only in ../plugins/fabrique_auto/.backup/svgbase/formulaires: editer_materialicon.html
+Only in ../plugins/fabrique_auto/.backup/svgbase/formulaires: editer_materialicon.php
+Only in ../plugins/fabrique_auto/svgbase/formulaires: editer_svg.html
+Only in ../plugins/fabrique_auto/svgbase/formulaires: editer_svg.php
+Only in ../plugins/fabrique_auto/.backup/svgbase/lang: materialicon_fr.php
+Only in ../plugins/fabrique_auto/svgbase/lang: svg_fr.php
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_svgbase.php ../plugins/fabrique_auto/.backup/svgbase/paquet.xml ../plugins/fabrique_auto/svgbase/paquet.xml
+12c12
+< 		Paquet généré le 2019-07-12 10:02:20
+---
+> 		Paquet généré le 2019-07-12 10:07:37
+54,55c54,55
+< 	<menu nom="svg" titre="materialicon:titre_svg" parent="menu_edition" icone="images/materialicon-16.png" action="svg" />
+< 	<menu nom="materialicon_creer" titre="materialicon:icone_creer_materialicon" parent="outils_rapides" icone="images/materialicon-new-16.png" action="materialicon_edit" parametres="new=oui" />
+---
+> 	<menu nom="svg" titre="svg:titre_svg" parent="menu_edition" icone="images/svg-16.png" action="svg" />
+> 	<menu nom="svg_creer" titre="svg:icone_creer_svg" parent="outils_rapides" icone="images/svg-new-16.png" action="svg_edit" parametres="new=oui" />
+Only in ../plugins/fabrique_auto/.backup/svgbase/prive/objets/contenu: materialicon.html
+Only in ../plugins/fabrique_auto/svgbase/prive/objets/contenu: svg.html
+Only in ../plugins/fabrique_auto/.backup/svgbase/prive/objets/infos: materialicon.html
+Only in ../plugins/fabrique_auto/svgbase/prive/objets/infos: svg.html
+Only in ../plugins/fabrique_auto/.backup/svgbase/prive/objets/liste: objets_lies_materialicon.html
+Only in ../plugins/fabrique_auto/svgbase/prive/objets/liste: objets_lies_svg.html
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_svgbase.php ../plugins/fabrique_auto/.backup/svgbase/prive/objets/liste/svg.html ../plugins/fabrique_auto/svgbase/prive/objets/liste/svg.html
+3c3
+< 	id_materialicon,1,
+---
+> 	id_svg,1,
+9c9
+< 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{materialicon:info_1_materialicon,materialicon:info_nb_svg}})</strong></caption>]
+---
+> 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{svg:info_1_svg,svg:info_nb_svg}})</strong></caption>]
+13,14c13,14
+< 			<th class="titre" scope="col">[(#TRI{titre,<:materialicon:champ_titre_label:>,ajax})]</th>
+< 			<th class="id" scope="col">[(#TRI{id_materialicon,<:info_numero_abbreviation:>,ajax})]</th>
+---
+> 			<th class="titre" scope="col">[(#TRI{titre,<:svg:champ_titre_label:>,ajax})]</th>
+> 			<th class="id" scope="col">[(#TRI{id_svg,<:info_numero_abbreviation:>,ajax})]</th>
+20,24c20,24
+< 			<td class="picto">[(#CHEMIN_IMAGE{materialicon-16.png}|balise_img)]</td>
+< 			<td class="titre principale">[(#LOGO_MATERIALICON|image_reduire{20,26})]<a href="[(#ID_MATERIALICON|generer_url_entite{materialicon})]" title="<:info_numero_abbreviation|attribut_html:> #ID_MATERIALICON">[(#RANG). ]#TITRE</a></td>
+< 			<td class="id">[(#AUTORISER{modifier,materialicon,#ID_MATERIALICON}|?{
+< 				<a href="[(#URL_ECRIRE{materialicon_edit,id_materialicon=#ID_MATERIALICON})]">#ID_MATERIALICON</a>,
+< 				#ID_MATERIALICON
+---
+> 			<td class="picto">[(#CHEMIN_IMAGE{svg-16.png}|balise_img)]</td>
+> 			<td class="titre principale">[(#LOGO_SVG|image_reduire{20,26})]<a href="[(#ID_SVG|generer_url_entite{svg})]" title="<:info_numero_abbreviation|attribut_html:> #ID_SVG">[(#RANG). ]#TITRE</a></td>
+> 			<td class="id">[(#AUTORISER{modifier,svg,#ID_SVG}|?{
+> 				<a href="[(#URL_ECRIRE{svg_edit,id_svg=#ID_SVG})]">#ID_SVG</a>,
+> 				#ID_SVG
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_svgbase.php ../plugins/fabrique_auto/.backup/svgbase/prive/objets/liste/svg_associer.html ../plugins/fabrique_auto/svgbase/prive/objets/liste/svg_associer.html
+3c3
+< 	id_materialicon,1
+---
+> 	id_svg,1
+16c16
+< [<caption><span class="caption"><strong>(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{materialicon:info_1_materialicon,materialicon:info_nb_svg}})</strong>
+---
+> [<caption><span class="caption"><strong>(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{svg:info_1_svg,svg:info_nb_svg}})</strong>
+26,27c26,27
+< 		<BOUCLE_lettre(SVG){tout}{!id_materialicon IN #GET{exclus}}{where?}{recherche?}
+< 			{tri #ENV{par,multi titre},#GET{defaut_tri}}{id_materialicon==#GET{afficher_lettres}|?{'.*','A'}}>[
+---
+> 		<BOUCLE_lettre(SVG){tout}{!id_svg IN #GET{exclus}}{where?}{recherche?}
+> 			{tri #ENV{par,multi titre},#GET{defaut_tri}}{id_svg==#GET{afficher_lettres}|?{'.*','A'}}>[
+30c30
+< 		#SELF|parametre_url{debutsvga,@#ID_MATERIALICON}|ancre_url{paginationsvga}|afficher_initiale{#TITRE**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+---
+> 		#SELF|parametre_url{debutsvga,@#ID_SVG}|ancre_url{paginationsvga}|afficher_initiale{#TITRE**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+41c41
+< 			<th class="titre" scope="col">[(#TRI{multi titre,<:materialicon:champ_titre_label:>,ajax})]</th>
+---
+> 			<th class="titre" scope="col">[(#TRI{multi titre,<:svg:champ_titre_label:>,ajax})]</th>
+46c46
+< 	<BOUCLE_liste_svg(SVG){!id_materialicon IN #GET{exclus}}{where?}{recherche?}
+---
+> 	<BOUCLE_liste_svg(SVG){!id_svg IN #GET{exclus}}{where?}{recherche?}
+49c49
+< 			<td class="titre">[(#LOGO_MATERIALICON|image_reduire{20,20})]<a href="[(#ID_MATERIALICON|generer_url_entite{materialicon})]">#TITRE</a></td>
+---
+> 			<td class="titre">[(#LOGO_SVG|image_reduire{20,20})]<a href="[(#ID_SVG|generer_url_entite{svg})]">#TITRE</a></td>
+51c51
+< 				<button type="submit" class="button link add" name="ajouter_lien\[materialicon-#ID_MATERIALICON-#OBJET-#ID_OBJET\]" value="+"><:materialicon:ajouter_lien_materialicon:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
+---
+> 				<button type="submit" class="button link add" name="ajouter_lien\[svg-#ID_SVG-#OBJET-#ID_OBJET\]" value="+"><:svg:ajouter_lien_svg:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_svgbase.php ../plugins/fabrique_auto/.backup/svgbase/prive/objets/liste/svg_lies.html ../plugins/fabrique_auto/svgbase/prive/objets/liste/svg_lies.html
+3c3
+< 	id_materialicon,1
+---
+> 	id_svg,1
+16c16
+< [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{materialicon:info_1_materialicon,materialicon:info_nb_svg}})</strong></caption>]
+---
+> [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{svg:info_1_svg,svg:info_nb_svg}})</strong></caption>]
+19,20c19,20
+< 		<BOUCLE_lettre(SVG){tout}{id_materialicon IN #GET{selection}}{where?}
+< 			{tri #ENV{par,multi titre},#GET{defaut_tri}}{id_materialicon==#GET{afficher_lettres}|?{'.*','A'}}>[
+---
+> 		<BOUCLE_lettre(SVG){tout}{id_svg IN #GET{selection}}{where?}
+> 			{tri #ENV{par,multi titre},#GET{defaut_tri}}{id_svg==#GET{afficher_lettres}|?{'.*','A'}}>[
+23c23
+< 		#SELF|parametre_url{debutsvgl,@#ID_MATERIALICON}|ancre_url{paginationsvgl}|afficher_initiale{#TITRE**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+---
+> 		#SELF|parametre_url{debutsvgl,@#ID_SVG}|ancre_url{paginationsvgl}|afficher_initiale{#TITRE**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+34c34
+< 			<th class="titre" scope="col">[(#TRI{multi titre,<:materialicon:champ_titre_label:>,ajax})]</th>
+---
+> 			<th class="titre" scope="col">[(#TRI{multi titre,<:svg:champ_titre_label:>,ajax})]</th>
+39c39
+< 	<BOUCLE_liste_svg(SVG){id_materialicon IN #GET{selection}}
+---
+> 	<BOUCLE_liste_svg(SVG){id_svg IN #GET{selection}}
+41,42c41,42
+< 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TITRE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_MATERIALICON|=={#ENV{id_lien_ajoute}}|oui)append]">
+< 			<td class="titre">[(#LOGO_MATERIALICON|image_reduire{20,20})]<a href="[(#ID_MATERIALICON|generer_url_entite{materialicon})]">#TITRE</a></td>
+---
+> 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TITRE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_SVG|=={#ENV{id_lien_ajoute}}|oui)append]">
+> 			<td class="titre">[(#LOGO_SVG|image_reduire{20,20})]<a href="[(#ID_SVG|generer_url_entite{svg})]">#TITRE</a></td>
+46c46
+< 					<button type="submit" class="button link delete" name="supprimer_lien\[materialicon-#ID_MATERIALICON-#OBJET-#ID_OBJET\]" value="X"><:materialicon:retirer_lien_materialicon:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+---
+> 					<button type="submit" class="button link delete" name="supprimer_lien\[svg-#ID_SVG-#OBJET-#ID_OBJET\]" value="X"><:svg:retirer_lien_svg:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+54c54
+< [(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien\[materialicon-*-#OBJET-#ID_OBJET\]" value="X"><:materialicon:retirer_tous_liens_svg:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+---
+> [(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien\[svg-*-#OBJET-#ID_OBJET\]" value="X"><:svg:retirer_tous_liens_svg:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+58c58
+< 	<strong class="caption">[(#ENV*{titre,<:materialicon:info_aucun_materialicon:>})]</strong>
+---
+> 	<strong class="caption">[(#ENV*{titre,<:svg:info_aucun_svg:>})]</strong>
+Only in ../plugins/fabrique_auto/.backup/svgbase/prive/squelettes/contenu: materialicon.html
+Only in ../plugins/fabrique_auto/.backup/svgbase/prive/squelettes/contenu: materialicon_edit.html
+Only in ../plugins/fabrique_auto/svgbase/prive/squelettes/contenu: svg.html
+Only in ../plugins/fabrique_auto/svgbase/prive/squelettes/contenu: svg_edit.html
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_svgbase.php ../plugins/fabrique_auto/.backup/svgbase/saisies/svg.html ../plugins/fabrique_auto/svgbase/saisies/svg.html
+7c7
+< 	<BOUCLE_svg(SVG){id_materialicon?}{recherche?}{tout}{par num titre, titre}>
+---
+> 	<BOUCLE_svg(SVG){id_svg?}{recherche?}{tout}{par num titre, titre}>
+9c9
+< 		<option value="#ID_MATERIALICON"[(#ID_MATERIALICON|in_array{#ENV{valeur_forcee,#GET{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]>#TITRE</option>]
+---
+> 		<option value="#ID_SVG"[(#ID_SVG|in_array{#ENV{valeur_forcee,#GET{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]>#TITRE</option>]
+11c11
+< 		<option value="#ID_MATERIALICON"[(#ID_MATERIALICON|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>#TITRE</option>]
+---
+> 		<option value="#ID_SVG"[(#ID_SVG|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>#TITRE</option>]
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_svgbase.php ../plugins/fabrique_auto/.backup/svgbase/saisies-vues/svg.html ../plugins/fabrique_auto/svgbase/saisies-vues/svg.html
+5c5
+< 	<BOUCLE_svg_selectionnes(SVG){id_materialicon IN #GET*{valeur}}
+---
+> 	<BOUCLE_svg_selectionnes(SVG){id_svg IN #GET*{valeur}}
+7c7
+< 		<li class="choix">#TITRE (#ID_MATERIALICON)</li>
+---
+> 		<li class="choix">#TITRE (#ID_SVG)</li>
+14c14
+< 	<BOUCLE_materialicon_selectionne(SVG){id_materialicon=#ENV{valeur}}
+---
+> 	<BOUCLE_svg_selectionne(SVG){id_svg=#ENV{valeur}}
+16,17c16,17
+< 	  	<p>#TITRE (#ID_MATERIALICON)</p>
+< 	</BOUCLE_materialicon_selectionne>
+---
+> 	  	<p>#TITRE (#ID_SVG)</p>
+> 	</BOUCLE_svg_selectionne>
+19c19
+< 	<//B_materialicon_selectionne>
+---
+> 	<//B_svg_selectionne>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_svgbase.php ../plugins/fabrique_auto/.backup/svgbase/svgbase_administrations.php ../plugins/fabrique_auto/svgbase/svgbase_administrations.php
+83,85c83,85
+< 	sql_delete('spip_documents_liens', sql_in('objet', array('materialicon')));
+< 	sql_delete('spip_mots_liens', sql_in('objet', array('materialicon')));
+< 	sql_delete('spip_auteurs_liens', sql_in('objet', array('materialicon')));
+---
+> 	sql_delete('spip_documents_liens', sql_in('objet', array('svg')));
+> 	sql_delete('spip_mots_liens', sql_in('objet', array('svg')));
+> 	sql_delete('spip_auteurs_liens', sql_in('objet', array('svg')));
+87,89c87,89
+< 	sql_delete('spip_versions', sql_in('objet', array('materialicon')));
+< 	sql_delete('spip_versions_fragments', sql_in('objet', array('materialicon')));
+< 	sql_delete('spip_forum', sql_in('objet', array('materialicon')));
+---
+> 	sql_delete('spip_versions', sql_in('objet', array('svg')));
+> 	sql_delete('spip_versions_fragments', sql_in('objet', array('svg')));
+> 	sql_delete('spip_forum', sql_in('objet', array('svg')));
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_svgbase.php ../plugins/fabrique_auto/.backup/svgbase/svgbase_autorisations.php ../plugins/fabrique_auto/svgbase/svgbase_autorisations.php
+61c61
+<  * Autorisation de voir le bouton d'accès rapide de création (materialicon)
+---
+>  * Autorisation de voir le bouton d'accès rapide de création (svg)
+70,71c70,71
+< function autoriser_materialiconcreer_menu_dist($faire, $type, $id, $qui, $opt) {
+< 	return autoriser('creer', 'materialicon', '', $qui, $opt);
+---
+> function autoriser_svgcreer_menu_dist($faire, $type, $id, $qui, $opt) {
+> 	return autoriser('creer', 'svg', '', $qui, $opt);
+75c75
+<  * Autorisation de créer (materialicon)
+---
+>  * Autorisation de créer (svg)
+84c84
+< function autoriser_materialicon_creer_dist($faire, $type, $id, $qui, $opt) {
+---
+> function autoriser_svg_creer_dist($faire, $type, $id, $qui, $opt) {
+89c89
+<  * Autorisation de voir (materialicon)
+---
+>  * Autorisation de voir (svg)
+98c98
+< function autoriser_materialicon_voir_dist($faire, $type, $id, $qui, $opt) {
+---
+> function autoriser_svg_voir_dist($faire, $type, $id, $qui, $opt) {
+103c103
+<  * Autorisation de modifier (materialicon)
+---
+>  * Autorisation de modifier (svg)
+112c112
+< function autoriser_materialicon_modifier_dist($faire, $type, $id, $qui, $opt) {
+---
+> function autoriser_svg_modifier_dist($faire, $type, $id, $qui, $opt) {
+117c117
+<  * Autorisation de supprimer (materialicon)
+---
+>  * Autorisation de supprimer (svg)
+126c126
+< function autoriser_materialicon_supprimer_dist($faire, $type, $id, $qui, $opt) {
+---
+> function autoriser_svg_supprimer_dist($faire, $type, $id, $qui, $opt) {
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_svgbase.php ../plugins/fabrique_auto/.backup/svgbase/svgbase_pipelines.php ../plugins/fabrique_auto/svgbase/svgbase_pipelines.php
+74c74
+< 	$flux['data'] += objet_optimiser_liens(array('materialicon'=>'*'), '*');
+---
+> 	$flux['data'] += objet_optimiser_liens(array('svg'=>'*'), '*');

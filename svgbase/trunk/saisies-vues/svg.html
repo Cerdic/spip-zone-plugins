@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_svg_selectionnes>
+	<ul>
+	<BOUCLE_svg_selectionnes(SVG){id_svg IN #GET*{valeur}}
+		{par num titre, titre}{tout}>
+		<li class="choix">#TITRE (#ID_SVG)</li>
+	</BOUCLE_svg_selectionnes>
+	</ul>
+	</B_svg_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_svg_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_svg_selectionne(SVG){id_svg=#ENV{valeur}}
+		{par num titre, titre}{tout}>
+	  	<p>#TITRE (#ID_SVG)</p>
+	</BOUCLE_svg_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_svg_selectionne>
+<//B_test_multiple>

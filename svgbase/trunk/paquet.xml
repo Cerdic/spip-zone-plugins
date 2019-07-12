@@ -1,0 +1,56 @@
+<paquet
+	prefix="svgbase"
+	categorie="multimedia"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.2.4;3.2.*]"
+	logo="prive/themes/spip/images/svgbase-64.png"
+	documentation=""
+	schema="0.1.0" 
+>
+	<!--
+		Paquet généré le 2019-07-12 10:07:37
+		(Vous pouvez bien entendu supprimer ces commentaires) 
+	-->
+
+	<nom>SVG en base de données</nom>
+	
+
+	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs --> 
+	<auteur>chankalan</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<!--
+		Exemple de commandes
+		* dependances
+		<necessite nom="saisies" compatibilite="[2.4.0;]" />
+		<utilise nom="saisies" compatibilite="[2.4.0;]" />
+		<lib nom="simplehtmldom" lien="http://chemin_vers_archive.zip" />
+		* pipelines
+		<pipeline nom="autoriser" inclure="svgbase_autorisations.php" />
+		<pipeline nom="insert_head" inclure="svgbase_pipelines.php" />
+		* declarer un pipeline 
+		<pipeline nom="mon_pipeline" action="" />
+		* parents de menus de SPIP :
+				menu_accueil (à éviter), menu_edition, menu_publication,
+				menu_activite, menu_squelette, menu_administration, menu_configuration 
+		<menu nom="svgbase" titre="svgbase:svgbase_titre" parent="menu_edition"  icone="images/svgbase-16.png" />
+		* parents d'onglets... configuration, plugins, statistiques, ... 
+		<onglet nom="svgbase" titre="svgbase:svgbase_titre" parent="configuration" icone="images/svgbase-24.png" />
+	-->
+
+	<necessite nom="saisies" compatibilite="[2.4.0;]" /> 
+
+
+	<pipeline nom="autoriser" inclure="svgbase_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/svgbase.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/svgbase.php" /> 
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/svgbase.php" /> 
+	<pipeline nom="affiche_milieu" inclure="svgbase_pipelines.php" /> 
+	<pipeline nom="optimiser_base_disparus" inclure="svgbase_pipelines.php" /> 
+
+	<menu nom="svg" titre="svg:titre_svg" parent="menu_edition" icone="images/svg-16.png" action="svg_tout" /> 
+	<menu nom="svg_creer" titre="svg:icone_creer_svg" parent="outils_rapides" icone="images/svg-new-16.png" action="svg_edit" parametres="new=oui" /> 
+</paquet>

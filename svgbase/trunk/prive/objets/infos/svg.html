@@ -1,0 +1,16 @@
+<BOUCLE_svg(SVG){id_svg=#ENV{id}}>
+<div class="infos">
+[(#SET{texte_objet,<:svg:titre_svg:>})]
+<div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_SVG</p></div>
+
+	<div class='nb_elements'><!--nb_elements--></div>
+
+	[(#AUTORISER{supprimer, svg, #ID_SVG}|oui)
+		[(#BOUTON_ACTION{
+			[(#CHEMIN_IMAGE{svg-del-24.png}|balise_img{<:svg:supprimer_svg:>}|concat{' ',#VAL{<:svg:supprimer_svg:>}|wrap{<b>}}|trim)],
+			#URL_ACTION_AUTEUR{supprimer_svg, #ID_SVG, #URL_ECRIRE{svg}},
+			icone s24 horizontale danger svg-del-24, <:svg:confirmer_supprimer_svg:>})]
+	]
+
+</div>
+</BOUCLE_svg>
