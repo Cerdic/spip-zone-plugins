@@ -111,6 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'redacteur' => 'redacteur',
 	'redacteur_lire_stats' => '<strong>Redacteur ziet stats</strong>: de redacteurs kunnen de statistieken bekijken.',
 	'redacteur_modifie_article' => '<strong>Redacteur past voorgesteld aan</strong>: elke redacteur kan een ter publicaite voorgesteld artikel aanpassen, zelfs wanneer hij niet de auteur is.',
+	'redacteurs_voir_auteurs' => '<strong>Redacteur ziet auteurs</strong>: redacteurs kunnen <strong>de lijst van auteurs met hun e-mailadres</strong> zien en de pagina van andere auteurs in het privé gedeelte?',
 	'refus_1' => '<p>Alleen de webmasters van de site',
 	'refus_2' => 'mogen deze parameters aanpassen.</p>
 <p>Lees voor meer informatie <a href="https://contrib.spip.net/Autorite">de documentatie</a>.</p>',
