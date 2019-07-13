@@ -102,6 +102,8 @@ function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $s
 			return '0=1';
 	}
 
+  if (!defined('_CRITERE_MOTS_ARBO_BRANCHE'))
+	  define('_CRITERE_MOTS_ARBO_BRANCHE', false);
 
   $_table = table_objet($table);
   $objet_delatable=objet_type($_table);
@@ -116,7 +118,7 @@ function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $s
               $id_mot = $mot;
           else
               $id_mot = sql_getfetsel('id_mot', 'spip_mots', 'titre='.sql_quote($mot));
-          if (function_exists('calcul_branche_mot_in')) {
+          if (function_exists('calcul_branche_mot_in') AND _CRITERE_MOTS_ARBO_BRANCHE) {
 			  $where[] = sql_in('id_mot',calcul_branche_mot_in($id_mot)).' and objet='.sql_quote($objet_delatable);
 		  } else {
 			$where[] = 'id_mot='.sql_quote($id_mot).' and objet='.sql_quote($objet_delatable);
@@ -125,7 +127,7 @@ function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $s
   }
 	elseif($id_ou_titre == 'id'){
 	   foreach($mots as $id_mot) {
-          if (function_exists('calcul_branche_mot_in')) {
+          if (function_exists('calcul_branche_mot_in') AND _CRITERE_MOTS_ARBO_BRANCHE) {
 			$where[] = sql_in('id_mot',calcul_branche_mot_in($id_mot)).' and objet='.sql_quote($objet_delatable);
 		  } else {
 			$where[] = 'id_mot='.sql_quote($id_mot).' and objet='.sql_quote($objet_delatable);
@@ -135,7 +137,7 @@ function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $s
 	elseif($id_ou_titre == 'titre'){
 	   foreach($mots as $mot) {
 	        $id_mot = sql_getfetsel('id_mot', 'spip_mots', 'titre='.sql_quote($mot));
-		    if (function_exists('calcul_branche_mot_in')) {
+		    if (function_exists('calcul_branche_mot_in') AND _CRITERE_MOTS_ARBO_BRANCHE) {
 			  $where[] = sql_in('id_mot',calcul_branche_mot_in($id_mot)).' and objet='.sql_quote($objet_delatable);
 		    } else {
 			  $where[] = 'id_mot='.sql_quote($id_mot).' and objet='.sql_quote($objet_delatable);
