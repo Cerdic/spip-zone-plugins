@@ -13,8 +13,9 @@
 	</langue>
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/corbeille?lang_cible=fr" total="23" traduits="23" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/corbeille?lang_cible=fr_tu" total="23" traduits="20" relire="0" modifs="3" nouveaux="0" pourcent="86.96">
+	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/corbeille?lang_cible=fr_tu" total="23" traduits="23" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Cerf" lien="https://trad.spip.net/auteur/cerf" />
+		<traducteur nom="RealET" lien="https://trad.spip.net/auteur/realet" />
 	</langue>
 	<langue code="it" url="https://trad.spip.net/tradlang_module/corbeille?lang_cible=it" total="23" traduits="3" relire="0" modifs="1" nouveaux="19" pourcent="13.04">
 	</langue>

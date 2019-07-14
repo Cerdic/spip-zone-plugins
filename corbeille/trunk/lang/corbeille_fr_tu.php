@@ -26,8 +26,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'effacer' => 'Effacer la sélection',
 	'effacer_tout' => 'Tout effacer',
-	'element_supprime' => '@ids@ a été supprimé de la corbeille', # MODIF
-	'elements_supprimes' => '@ids@ ont été supprimés de la corbeille', # MODIF
+	'element_supprime' => '@objet@ @ids@ a été supprimé de la corbeille',
+	'elements_supprimes' => '@objet@ @ids@ ont été supprimés de la corbeille',
 
 	// F
 	'forums_prives_corbeille_tous' => '@nb@ messages de forums privés dans la corbeille',
@@ -46,5 +46,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sites_corbeille_un' => '1 site dans la corbeille',
 
 	// V
-	'voir_detail' => 'voir les détails' # MODIF
+	'voir_detail' => 'Voir les détails'
 );
