@@ -13,8 +13,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_desc' => '<strong>Palette</strong> permet d’ajouter automatiquement
   un sélecteur de couleurs à un champ input,
   simplement en lui donnant la classe CSS « palette »',
-	'config_exemple' => 'Exemple :', # MODIF
-	'config_lien_doc' => '<a href="http://contrib.spip.net/Palette" class="spip_out">Cf. documentation</a>', # MODIF
+	'config_exemple' => 'Exemples d’appel de la palette',
+	'config_exemple_code_source' => 'Code source des exemples',
+	'config_exemple_couleur' => 'Couleur normale',
+	'config_exemple_couleur_alpha' => 'Couleur avec transparence',
+	'config_exemples_couleurs_vides' => 'Sans valeur par défaut sur le champ',
+	'config_lien_doc' => '<a href="https://contrib.spip.net/Palette" class="spip_out">Cf. documentation</a>',
+	'config_titre' => 'Configurer le sélecteur de couleurs Palette.',
 
 	// F
 	'fermer' => 'Fermer la palette',
