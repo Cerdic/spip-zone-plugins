@@ -7,7 +7,8 @@
 	</langue>
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/secteur_langue?lang_cible=fr" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/secteur_langue?lang_cible=fr_tu" total="2" traduits="1" relire="0" modifs="0" nouveaux="1" pourcent="50.00">
+	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/secteur_langue?lang_cible=fr_tu" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="RealET" lien="https://trad.spip.net/auteur/realet" />
 	</langue>
 	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/secteur_langue?lang_cible=pt_br" total="2" traduits="1" relire="0" modifs="0" nouveaux="1" pourcent="50.00">
 	</langue>

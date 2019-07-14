@@ -10,5 +10,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'avis_rubrique_source' => 'Tu dois d’abord traduire toutes les rubrique parentes'
+	'avis_rubrique_source' => 'Tu dois d’abord traduire toutes les rubrique parentes',
+
+	// S
+	'secteur_langue_titre' => 'Secteur par langue'
 );
