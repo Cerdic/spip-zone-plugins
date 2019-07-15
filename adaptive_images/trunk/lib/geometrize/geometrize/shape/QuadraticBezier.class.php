@@ -54,7 +54,7 @@ class geometrize_shape_QuadraticBezier implements geometrize_shape_Shape {
 	 */
 	protected $lines = null;
 
-	public function __construct($xBound, $yBound){
+	public function __construct($xBound, $yBound, $sizeFactor=1.0){
 		$this->x1 = mt_rand(0, $xBound-1);
 		$this->y1 = mt_rand(0, $yBound-1);
 
@@ -136,24 +136,9 @@ class geometrize_shape_QuadraticBezier implements geometrize_shape_Shape {
 		$this->x2 = intval(round($this->x2*$xScale));
 		$this->y2 = intval(round($this->y2*$yScale));
 
-		if ($this->lines) {
-			foreach ($this->lines as &$line) {
-				$line->rescale($xScale, $yScale);
-			}
-		}
+		// need to rasterize again
+		$this->lines = null;
 	}
-
-	public function hclone(){
-		return clone $this;
-	}
-
-	public function __clone() {
-		if ($this->lines) {
-			foreach ($this->lines as $k=>&$line) {
-				$this->lines[$k] = clone $line;
-			}
-		}
-  }
 
 
 	public function getType(){

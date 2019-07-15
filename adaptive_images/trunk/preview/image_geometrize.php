@@ -36,7 +36,7 @@ function preview_image_geometrize_dist($img, $options){
 		// mais c'est plus joli avec juste des triangles :)
 		"shapeTypes" => [geometrize_shape_ShapeTypes::T_TRIANGLE],
 		"alpha" => 255, // beaucoup plus rapide qu'avec une transparence
-		"candidateShapesPerStep" => 100,
+		"candidateShapesPerStep" => 200,
 		"shapeMutationsPerStep" => 75,
 		"steps" => 85, // budget pour une taille acceptable de miniature (~4ko en texte, 2ko en Base 64+Gzip)
 	];
@@ -64,12 +64,11 @@ function preview_image_geometrize_dist($img, $options){
 	$fichier = $cache["fichier"];
 	$dest = $cache["fichier_dest"];
 
-	if ($cache["creer"]){
+	if (true or $cache["creer"]){
 		if (!@file_exists($fichier)){
 			return false;
 		}
 
-		$runnerVersion = 2;
 		$runner = false;
 		$results = [];
 		$couleur_bg = _image_couleur_moyenne($fichier);
@@ -81,10 +80,10 @@ function preview_image_geometrize_dist($img, $options){
 			lire_fichier("$dest.runner", $r);
 			if ($r = unserialize($r)
 				and $version = array_shift($r)
-				and $version === $runnerVersion){
+				and $version === geometrize_runner_ImageRunner::Version){
 				list($runner, $results) = $r;
-				$w = $runner->model->width;
-				$h = $runner->model->height;
+				$w = $runner->getModel()->getWidth();
+				$h = $runner->getModel()->getHeight();
 
 				foreach ($resize_strategy as $wt => $n){
 					if ($wt<=$w){
@@ -97,8 +96,8 @@ function preview_image_geometrize_dist($img, $options){
 
 		if (!$runner){
 			list($runner, $results) = _init_geometrize_runner($img, $width_thumb, $couleur_bg);
-			$w = $runner->model->width;
-			$h = $runner->model->height;
+			$w = $runner->getModel()->getWidth();
+			$h = $runner->getModel()->getHeight();
 		}
 
 		//var_dump("WIDTHUMB $width_thumb");
@@ -118,11 +117,11 @@ function preview_image_geometrize_dist($img, $options){
 				}
 
 				//var_dump("NEW WIDTHUMB $width_thumb");
-				if ($width_thumb>$runner->model->width){
+				if ($width_thumb>$runner->getModel()->getWidth()){
 					// reinit le modele et resizer les shapes au passage
 					list($runner, $results) = _init_geometrize_runner($img, $width_thumb, $couleur_bg, $results);
-					$w = $runner->model->width;
-					$h = $runner->model->height;
+					$w = $runner->getModel()->getWidth();
+					$h = $runner->getModel()->getHeight();
 				}
 			}
 
@@ -133,7 +132,16 @@ function preview_image_geometrize_dist($img, $options){
 			}
 		}
 		$time_compute = spip_timer('runner');
+		$last = end($results);
+		$approx = 100.0 - round($last['score'] * 100,2);
 
+		// DEBUG
+		#$png_file = substr($dest, 0, -4) . ".png";
+		#if ($runner->getModel()->getCurrent()->exportToImageFile($png_file, 'png')) {
+		#	echo("<img src='$png_file' style='width:1200px;height: auto'/>");
+		#}
+		#$last = end($results);
+		#var_dump(100.0 - round($last['score'] * 100,2));
 		//var_dump($r,'<hr/>',$results);
 
 		$svg_image = trim(geometrize_exporter_SvgExporter::export($results, $w, $h));
@@ -171,13 +179,13 @@ function preview_image_geometrize_dist($img, $options){
 		$nsteps = count($results);
 		if ($nsteps<$geometrize_options['steps']){
 			@touch($dest, 1); // on antidate l'image pour revenir ici au prochain affichage
-			ecrire_fichier("$dest.runner", serialize([$runnerVersion, $runner, $results]));
-			spip_log("PROGRESS: $fichier t=$time_compute Steps:$nsteps length:" . strlen($svg_image), 'ai_geometrize');
+			ecrire_fichier("$dest.runner", serialize([geometrize_runner_ImageRunner::Version, $runner, $results]));
+			spip_log("PROGRESS: $fichier t=$time_compute Steps:$nsteps approx:$approx% length:" . strlen($svg_image), 'ai_geometrize');
 			//var_dump("STEPS:" . $nsteps);
 		} else {
 			@unlink("$dest.runner");
 			//var_dump("FINISHED:" . $results->length);
-			spip_log("FINISHED: $fichier t=$time_compute Steps:$nsteps length:" . strlen($svg_image), 'ai_geometrize');
+			spip_log("FINISHED: $fichier t=$time_compute Steps:$nsteps approx:$approx% length:" . strlen($svg_image), 'ai_geometrize');
 		}
 	}
 
@@ -201,7 +209,7 @@ function _init_geometrize_runner($img, $width_thumb, $couleur_bg, $results = nul
 		foreach ($results as $result) {
 			$alpha = $result['shape']->color & 255;
 			$result['shape']->rescale($w, $h); // rescale on new bounds
-			$new_results[] = $runner->model->addShape($result['shape'], $alpha);
+			$new_results[] = $runner->getModel()->addShape($result['shape'], $alpha);
 		}
 	}
 	return [$runner, $new_results];

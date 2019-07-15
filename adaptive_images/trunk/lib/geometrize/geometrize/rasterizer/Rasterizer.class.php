@@ -10,12 +10,12 @@ class geometrize_rasterizer_Rasterizer {
 		// easy case: opacity=1, just a copy of the color $c, much faster
 		if ($c & 255===255){
 			foreach ($lines as &$line) {
-				$_g1 = $line->x2+1;
-				$o = $image->width*$line->y;
-				for ($x = $line->x1; $x<$_g1; $x++){
-					$image->data[$o+$x] = $c;
-					if (isset($image->errorCache) && isset($image->errorCache[$o+$x])){
-						unset($image->errorCache[$o+$x]);
+				$_g1 = $line['x2']+1;
+				$y = $line['y'];
+				for ($x = $line['x1']; $x<$_g1; $x++){
+					$image->data[$y][$x] = $c;
+					if (isset($image->errorCache[$y][$x])){
+						unset($image->errorCache[$y][$x]);
 					}
 				}
 			}
@@ -36,18 +36,18 @@ class geometrize_rasterizer_Rasterizer {
 			$sa = $sa | $sa << 8;
 
 			foreach ($lines as &$line) {
-				$y = $line->y;
+				$y = $line['y'];
 				$ma = 65535;
 				$m = 65535;
 				$as = ($m-$sa*($ma/$m))*257;
 				$a = intval($as);
 
-				$_g2 = $line->x1;
-				$_g1 = $line->x2+1;
+				$_g2 = $line['x1'];
+				$_g1 = $line['x2']+1;
 				while ($_g2<$_g1){
 					$_g2 = $_g2+1;
 					$x = $_g2-1;
-					$d = $image->data[$image->width*$y+$x];
+					$d = $image->data[$y][$x];
 					$dr = $d >> 24 & 255;
 					$dg = $d >> 16 & 255;
 					$db = $d >> 8 & 255;
@@ -165,9 +165,9 @@ class geometrize_rasterizer_Rasterizer {
 								$color3 = $a3;
 							}
 						}
-						$image->data[$image->width*$y+$x] = ($color << 24)+($color1 << 16)+($color2 << 8)+$color3;
-						if (isset($image->errorCache) && isset($image->errorCache[$image->width*$y+$x])){
-							unset($image->errorCache[$image->width*$y+$x]);
+						$image->data[$y][$x] = ($color << 24)+($color1 << 16)+($color2 << 8)+$color3;
+						if (isset($image->errorCache[$y][$x])){
+							unset($image->errorCache[$y][$x]);
 						}
 					}
 				}
@@ -187,11 +187,10 @@ class geometrize_rasterizer_Rasterizer {
 		}
 
 		foreach ($lines as &$line) {
-			$_g1 = $line->x2+1;
-			$o1 = $source->width*$line->y;
-			$o2 = $destination->width*$line->y;
-			for ($x = $line->x1; $x<$_g1; $x++){
-				$destination->data[$o2+$x] = $source->data[$o1+$x];
+			$y = $line['y'];
+			$_g1 = $line['x2']+1;
+			for ($x = $line['x1']; $x<$_g1; $x++){
+				$destination->data[$y][$x] = $source->data[$y][$x];
 			}
 		}
 	}
@@ -201,96 +200,62 @@ class geometrize_rasterizer_Rasterizer {
 	 * @param int $y1
 	 * @param int $x2
 	 * @param int $y2
+	 * @param &array
 	 * @return array
 	 */
-	static function bresenham($x1, $y1, $x2, $y2){
+	static function bresenham($x1, $y1, $x2, $y2, &$points){
 		$dx = $x2-$x1;
-		$ix = null;
-		if ($dx>0){
-			$ix = 1;
-		} else {
-			$ix = 0;
-		}
-		$ix1 = null;
+		$ix1 = ($dx>0 ? 1 : 0);
+		$ix2 = ($dx<0 ? 1 : 0);
+		$ix = $ix1-$ix2;
+
 		if ($dx<0){
-			$ix1 = 1;
-		} else {
-			$ix1 = 0;
+			$dx *= -1;
 		}
-		$ix2 = $ix-$ix1;
-		$dx1 = null;
-		if ($dx<0){
-			$dx1 = -$dx;
-		} else {
-			$dx1 = $dx;
-		}
-		$dx = $dx1 << 1;
+		$dx = $dx << 1;
+
 		$dy = $y2-$y1;
-		$iy = null;
-		if ($dy>0){
-			$iy = 1;
-		} else {
-			$iy = 0;
-		}
-		$iy1 = null;
+		$iy1 = ($dy>0 ? 1 : 0);
+		$iy2 = ($dy<0 ? 1 : 0);
+		$iy = $iy1-$iy2;
+
 		if ($dy<0){
-			$iy1 = 1;
-		} else {
-			$iy1 = 0;
+			$dy *= -1;
 		}
-		$iy2 = $iy-$iy1;
-		$dy1 = null;
-		if ($dy<0){
-			$dy1 = -$dy;
-		} else {
-			$dy1 = $dy;
+		$dy = $dy << 1;
+
+
+		if (!isset($points[$y1])) {
+			$points[$y1] = [];
 		}
-		$dy = $dy1 << 1;
-		$points = [];
-		$points[] = ["x" => $x1, "y" => $y1];
+		$points[$y1][] = $x1;
 		if ($dx>=$dy){
 			$error = $dy-($dx >> 1);
 			while ($x1!==$x2){
-				$tmp = null;
-				if ($error>=0){
-					if ($error===0){
-						$tmp = $ix2>0;
-					} else {
-						$tmp = true;
+				if ($error>0 or ($error===0 and $ix>0)){
+					$error -= $dx;
+					$y1 += $iy;
+					if (!isset($points[$y1])) {
+						$points[$y1] = [];
 					}
-				} else {
-					$tmp = false;
 				}
-				if ($tmp){
-					$error = $error-$dx;
-					$y1 = $y1+$iy2;
-				}
-				$error = $error+$dy;
-				$x1 = $x1+$ix2;
-				$points[] = ["x" => $x1, "y" => $y1];
-				unset($tmp);
+				$error += $dy;
+				$x1 += $ix;
+				$points[$y1][] = $x1;
 			}
 		} else {
-			$error1 = $dx-($dy >> 1);
+			$error = $dx-($dy >> 1);
 			while ($y1!==$y2){
-				$tmp1 = null;
-				if ($error1>=0){
-					if ($error1===0){
-						$tmp1 = $iy2>0;
-					} else {
-						$tmp1 = true;
-					}
-				} else {
-					$tmp1 = false;
+				if ($error>0 or ($error===0 and $iy>0)){
+					$error -= $dy;
+					$x1 += $ix;
 				}
-				if ($tmp1){
-					$error1 = $error1-$dy;
-					$x1 = $x1+$ix2;
+				$error += $dx;
+				$y1 += $iy;
+				if (!isset($points[$y1])) {
+					$points[$y1] = [];
 				}
-				$error1 = $error1+$dx;
-				$y1 = $y1+$iy2;
-				$points[] = ["x" => $x1, "y" => $y1];
-				unset($tmp1);
+				$points[$y1][] = $x1;
 			}
 		}
 		return $points;
@@ -315,7 +280,6 @@ class geometrize_rasterizer_Rasterizer {
 	 */
 	static function scanlinesForPath($points, $xBound, $yBound, $isClosed = false){
 		$lines = [];
-		$edges = [];
 
 		if ($isClosed) {
 			$prevPoint = end($points);
@@ -324,30 +288,22 @@ class geometrize_rasterizer_Rasterizer {
 			$prevPoint = array_shift($points);
 		}
 
-		$yToXs = [];
+		$YXpoints = [];
 
 		foreach ($points as $point) {
-			$rasterizedLine = geometrize_rasterizer_Rasterizer::bresenham($prevPoint['x'], $prevPoint['y'], $point['x'], $point['y']);
-
-			foreach ($rasterizedLine as $p) {
-				if (!isset($yToXs[$p['y']])){
-					$yToXs[$p['y']] = [];
-				}
-				$yToXs[$p['y']][] = $p['x'];
-			}
-
+			geometrize_rasterizer_Rasterizer::bresenham($prevPoint['x'], $prevPoint['y'], $point['x'], $point['y'], $YXpoints);
 			$prevPoint = $point;
 		}
 
 		// not super useful
-		// ksort($yToXs);
+		// ksort($YXpoints);
 
-		foreach ($yToXs as $y => $xs){
+		foreach ($YXpoints as $y => $xs){
 			if ($y>=0 and $y<$yBound){
 				$minx = min($xs);
 				$maxx = max($xs);
 				if ($minx<$xBound and $maxx>=0){
-					$lines[] = new geometrize_rasterizer_Scanline($y, max($minx, 0), min($maxx, $xBound-1));
+					$lines[] = ['y' => $y, 'x1'=>max($minx, 0), 'x2' =>min($maxx, $xBound-1)];
 				}
 			}
 		}
