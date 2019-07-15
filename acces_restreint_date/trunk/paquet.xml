@@ -1,7 +1,7 @@
 <paquet
 	prefix="accesrestreintdate"
 	categorie="auteur"
-	version="1.0.1"
+	version="1.0.2"
 	schema="1.0.0"
 	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"

@@ -23,7 +23,7 @@ function formulaires_acces_restreint_date_charger_dist($objet, $id_objet, $retou
 
 function formulaires_acces_restreint_date_verifier_dist($objet, $id_objet, $retour=''){
 	$erreurs = array();
-	
+
 	if (!$supprimer = _request('supprimer')){
 		if (!in_array(_request('quand'), array('avant', 'apres'))){
 			$erreurs['quand'] = _T('info_obligatoire');
