@@ -114,7 +114,7 @@ function formidable_trouver_reponse_a_editer($id_formulaire, $id_formulaires_rep
 		$reponses = formidable_verifier_reponse_formulaire(
 			$id_formulaire,
 			$options['identification'],
-			$options['variable_php']
+			isset($options['variable_php']) ? $options['variable_php'] : ''
 		);
 
 		//A-t-on demandé de vérifier que l'auteur soit bien celui de la réponse?
