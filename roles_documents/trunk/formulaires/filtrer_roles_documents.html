@@ -1,0 +1,48 @@
+[(#REM)
+
+	Formulaire de filtrage des rôles de documents
+
+]
+<div class="formulaire_spip formulaire_#FORM">
+
+	[<div class="reponse_formulaire reponse_formulaire_ok none">(#ENV**{message_ok})</div>]
+	[<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</div>]
+
+  <BOUCLE_editable(CONDITION) {si #ENV{editable}}>
+	<form action="#ENV{action}" method="post"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<div class="editer-groupe">
+      <div class="editer editer_role">
+          <label for="roles_documents"><:roles:role_titre:></label>
+          <select id="roles_documents" name="role" class="">
+            <option value=""[ (#ENV{role}|non)selected="selected"]>Tous</option>
+            <BOUCLE_roles_documents(DATA) {source table, #ENV{roles}}>
+            <option value="#VALEUR"[ (#VALEUR|=={#ENV{role}}|oui)selected="selected"]>[(#VALEUR|role{document})]</option>
+            </BOUCLE_roles_documents>
+          </select>
+        </div>
+    </div>
+
+    [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class="boutons"><input type='submit' class='btn submit' value='<:bouton_valider:>' /></p>
+	</div></form>
+
+  <script type="text/javascript">
+    ;jQuery(function($) {
+      $('.formulaire_filtrer_roles_documents .boutons').hide();
+      $('#roles_documents').on('change', function() {
+        var role = $(this).val();
+        options = {
+          args: {
+            role: role
+          }
+        }
+        //$('.formulaire_filtrer_roles_documents form').submit();
+        $(this).ajaxReload(options); // recharge le bloc ajax conteneur
+      });
+    });
+  </script>
+  </BOUCLE_editable>
+</div>

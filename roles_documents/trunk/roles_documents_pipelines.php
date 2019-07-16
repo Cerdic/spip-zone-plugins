@@ -313,8 +313,9 @@ function roles_documents_formulaire_traiter($flux) {
 /**
  * Modifier le résultat du calcul d’un squelette donné.
  *
- * Formulaire d'ajout de document : ajout du sélecteur de rôle, et rendre les identifiants uniques pour éviter un pb de JS quand le form est présent plusieurs fois sur la page.
- *
+ * - Formulaire d'ajout de document : ajout du sélecteur de rôle, et rendre les identifiants uniques pour éviter un pb de JS quand le form est présent plusieurs fois sur la page.
+ * - Mediathèque : ajout du filtrage par rôle
+ * 
  * @pipeline recuperer_fond
  *
  * @param  array $flux Données du pipeline
@@ -363,6 +364,17 @@ function roles_documents_recuperer_fond($flux) {
 			$flux['data']['texte'] = str_replace($domid, $uniqid, $flux['data']['texte']);
 		}
 
+	}
+
+	// Médiathèque
+	if ($flux['args']['fond'] == 'prive/squelettes/inclure/mediatheque-navigation') {
+
+		$fond_roles = recuperer_fond('prive/squelettes/inclure/mediatheque-navigation-roles', $flux['args']['contexte']);
+		// On s'insère après le dernier <ul> de la barre d'onglets secondaires
+		// Sans parseur, c'est la galère
+		$cherche = "#<ul\s+class=[\"']sanstitre[\"']>\s*(?:<li[^>]*>(?!.*<li>).*?</li>\s*)+\s*</ul>#i";
+		$remplace = "$0$fond_roles";
+		$flux['data']['texte'] = preg_replace($cherche, $remplace, $flux['data']['texte']);
 	}
 
 	return $flux;

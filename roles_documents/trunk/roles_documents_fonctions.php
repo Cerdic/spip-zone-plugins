@@ -115,6 +115,31 @@ function roles_documents_presents_sur_objet($objet, $id_objet, $id_document = 0,
 }
 
 /**
+ * Lister tous les rôles de documents déclarés, tous objets confondus
+ * 
+ * @return array
+ */
+function roles_documents_presents() {
+
+	static $roles_documents = null;
+	if (is_array($roles_documents)) {
+		return $roles_documents;
+	}
+
+	$roles_documents = array();
+	if (
+		$roles_presents = roles_presents('document')
+	) {
+		foreach($roles_presents['roles'] as $objet) {
+			$roles_documents = array_merge($roles_documents, $objet['choix']);
+		}
+		$roles_documents = array_unique($roles_documents);
+	}
+
+	return $roles_documents;
+}
+
+/**
  * Surcharge du critère `logo`
  *
  * Tout comme le critère {logo} par défaut, on permet de sélectionner tous les
