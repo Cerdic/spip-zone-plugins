@@ -29,7 +29,7 @@ function lienscontenus_generer_url($type_objet, $id_objet)
 function lienscontenus_generer_url_document($id_objet)
 {
 	include_spip('base/abstract_sql');
-	$res = sql_getfetsel("id_objet, objet", "spip_documents_liens", "id_document="._q($id_objet));
+	$res = sql_select("id_objet, objet", "spip_documents_liens", "id_document="._q($id_objet));
 	if (sql_count($res) == 1) {
 		$row = sql_fetch($res);
 		return lienscontenus_generer_url($row['objet'], intval($row['id_objet']));
