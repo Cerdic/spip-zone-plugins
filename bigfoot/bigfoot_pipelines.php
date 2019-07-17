@@ -26,6 +26,9 @@ function bigfoot_insert_head($flux){
 <script type="text/javascript">/* <![CDATA[ */
 (function($) {
 	var bigfoot_init = function() {
+		if (jQuery('div.notes').is(':hidden')) {
+			return true; // pas a faire ou deja fait.
+		}
 		littlefoot.default({
 			anchorPattern: /(nb\d+(-\d+)?(footnote|appendix))/gi,
 			anchorParentSelector: "span",
