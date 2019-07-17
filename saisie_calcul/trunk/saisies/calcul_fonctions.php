@@ -12,6 +12,7 @@ function saisie_calcul_2_js($expr) {
 	$expr = saisie_calcul_securiser($expr);
 	$expr = preg_replace("#@(.*)@#U", "$('#champ_$1').val()", $expr);
 	$expr = str_replace(",",".",$expr);// virgule -> point
+	$expr = str_replace("ROUND","Math.round",$expr);
 	return $expr;
 }
 
@@ -23,6 +24,7 @@ function saisie_calcul_2_js($expr) {
  * - parenthèses
  * - point, virgule
  * - nombre
+ * - ROUND (pour l'arrondi)
  * @param string $expr
  * @return string $expr soit l'expression, soit rien si jamais cela ne respect pas les règles
 **/
@@ -36,6 +38,7 @@ function saisie_calcul_securiser($expr) {
 		."-|"
 		."\.|"
 		."\,|"
+		."ROUND|"
 		.")#";
 	$arobase = "#@.*@#U";
 	$valable = preg_replace($hors_arobase,'',$expr);
