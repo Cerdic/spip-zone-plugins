@@ -64,7 +64,6 @@ function balise_MENU_LANG_dyn($objet,$id_objet,$id_table_objet) {
 // bref, a integrer dans le core ? :p
 function balise_LANG_TYPE_BOUCLE($p) {
 	$type = $p->boucles[$p->id_boucle]->id_table;
-	$p->code = $type ? $type : "balise_hors_boucle";
+	$p->code = $type ? $type : "'balise_hors_boucle'";
 	return $p;
 }
-?>

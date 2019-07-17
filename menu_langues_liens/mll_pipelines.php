@@ -8,5 +8,3 @@ function mll_insert_head_css($flux){
 
 	return $flux;
 }
-
-?>
