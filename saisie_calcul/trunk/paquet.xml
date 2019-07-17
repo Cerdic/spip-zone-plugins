@@ -9,6 +9,6 @@
 	<auteur>Maïeul</auteur>
 	<licence>GNU/GPL</licence>
 
-
+	<pipeline nom="formulaire_fond" inclure="saisie_calcul_pipelines.php" />
 	<necessite nom="saisies" compatibilite="[3.22.0;]" />
 </paquet>

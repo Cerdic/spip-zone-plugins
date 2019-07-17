@@ -5,6 +5,5 @@
   - type : type de l'input (defaut: text)
   - class : classe(s) css ajoutes a l'input
 ]
-
-<input type="hidden" data-calcul="[(#ENV{calcul}|saisie_calcul_2_js)]" />
-<INCLURE{fond=saisies/input,env,readonly=on} />
+[(#SET{attributs,data-calcul="[(#ENV{calcul}|saisie_calcul_2_js)]"})]
+<INCLURE{fond=saisies/input,env,readonly=on,attributs=#GET{attributs}} />
