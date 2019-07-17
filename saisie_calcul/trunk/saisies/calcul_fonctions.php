@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 **/
 function saisie_calcul_2_js($expr) {
 	$expr = saisie_calcul_securiser($expr);
-	$expr = preg_replace("#@(.*)@#U", "$('#champ_$1').val()", $expr);
+	$expr = preg_replace("#@(.*)@#U", "parseFloat($('#champ_$1').val())", $expr);
 	$expr = str_replace(",",".",$expr);// virgule -> point
 	$expr = str_replace("ROUND","Math.round",$expr);
 	return $expr;
