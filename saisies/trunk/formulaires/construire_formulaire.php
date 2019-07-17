@@ -18,6 +18,9 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 		$formulaire_initial = array();
 	}
 
+	// On s'assure que toutes les saisies ont un identifiant (en cas de bug lors de la création, par ex.)
+	$formulaire_initial = saisies_identifier($formulaire_initial);
+
 	// On initialise la session si elle est vide
 	if (is_null($formulaire_actuel = session_get($identifiant))) {
 		session_set($identifiant, $formulaire_initial);
