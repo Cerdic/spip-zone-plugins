@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function saisie_calcul_formulaire_fond($flux) {
 	static $flag;
 	if (!$flag and stripos($flux['data'], 'saisie_calcul')!==false) {
-		$flux['data'] .= "<script type='text/javascript' src='".find_in_path('js/saisie_calcul.js')."'></script>";
+		$flux['data'] = "<script type='text/javascript' src='".find_in_path('js/saisie_calcul.js')."'></script>".$flux['data'];
 		$flag = true;
 	}
 	return $flux;
