@@ -29,7 +29,7 @@ function saisie_calcul_2_js($expr) {
 function saisie_calcul_securiser($expr) {
 	$hors_arobase = "#("
 		."\d|"
-		."\(\)|"
+		."\(|\)|"
 		."\+|"
 		."\*|"
 		."\/|"
