@@ -126,7 +126,7 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 				$sel = ".$class_li";
 			}
 			$code .= "\tif (".$condition.") {\n"
-							 .	"\t\t$(form).find(\"$sel\")."._SAISIES_AFFICHER_SI_JS_SHOW.";\n";
+							 .	"\t\t$(form).find(\"$sel\")."._SAISIES_AFFICHER_SI_JS_SHOW.".addClass('afficher_si_visible').removeClass('afficher_si_masque');\n";
 			if (html5_permis()) {
 			$code .=	"\t\t$(form).find(\"$sel [data-afficher-si-required]\").attr(\"required\",true).attr(\"data-afficher-si-required\",null);\n";
 			}
@@ -136,10 +136,10 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 				$code .= "\t\t$(form).find(\"$sel [required]\").attr(\"required\",false).attr(\"data-afficher-si-required\",true);\n";
 			}
 			$code .= "\t\tif (chargement==true) {\n"
-					."\t\t\t$(form).find(\"$sel\")."._SAISIES_AFFICHER_SI_JS_HIDE.".css".'("display","none")'.";\n"
+					."\t\t\t$(form).find(\"$sel\")."._SAISIES_AFFICHER_SI_JS_HIDE.".addClass('afficher_si_masque').removeClass('afficher_si_visible').css".'("display","none")'.";\n"
 					."\t\t}\n"
 					."\t\telse {\n"
-					."\t\t\t$(form).find(\"$sel\")."._SAISIES_AFFICHER_SI_JS_HIDE.";\n"
+					."\t\t\t$(form).find(\"$sel\")."._SAISIES_AFFICHER_SI_JS_HIDE.".addClass('afficher_si_masque').removeClass('afficher_si_visible');\n"
 					."\t\t};\n"
 					."\t}\n";
 		}
