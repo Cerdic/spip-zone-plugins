@@ -1,9 +1,9 @@
 <paquet
 	prefix="lim"
 	categorie="maintenance"
-	version="2.0.3"
+	version="2.0.4"
 	etat="stable"
-	compatibilite="[3.2.0;3.2.*]"
+	compatibilite="[3.2.0;3.3.*]"
 	logo="prive/themes/spip/images/lim-64.png"
 	documentation="https://contrib.spip.net/LIM"
 	schema="1.1.0" 
