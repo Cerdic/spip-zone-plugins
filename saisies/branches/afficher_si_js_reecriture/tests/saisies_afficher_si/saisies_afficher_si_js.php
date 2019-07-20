@@ -26,7 +26,7 @@
 	//
 	// hop ! on y va
 	//
-	$err = tester_fun($f, essais_saisies_evaluer_afficher_si());
+	$err = tester_fun($f, essais_saisies_afficher_si_js());
 	effacer_config('tests_saisies_config');
 
 	// si le tableau $err est pas vide ca va pas
@@ -38,7 +38,7 @@
 
 	// On va tester essentiellement sur des set_request, le cas $env étant normalement identique
 
-	function essais_saisies_evaluer_afficher_si(){
+	function essais_saisies_afficher_si_js(){
 		$essais = array (
 			'input_egalite' => array(
 				0 => '$form().find(\'[name=input_1]\').val() == \'toto\'',
