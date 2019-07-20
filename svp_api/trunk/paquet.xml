@@ -1,7 +1,7 @@
 <paquet
 	prefix="svpapi"
 	categorie="outil"
-	version="0.5.4"
+	version="0.5.5"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="svpapi_logo-64.png"
@@ -18,6 +18,6 @@
 	<pipeline nom="post_collection_svp" action="" />
 	<pipeline nom="post_ressource_svp" action="" />
 
-	<necessite nom="svp" compatibilite="[2.0.1;[" />
+	<necessite nom="svp" compatibilite="[2.0.7;[" />
 	<necessite nom="http" compatibilite="[1.2.0;]" />
 </paquet>
