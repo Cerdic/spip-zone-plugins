@@ -26,7 +26,7 @@
 
 	// les saisies à passer
 	$saisies_form = array();
-	foreach (array('radio_1','checkbox_1','input_1') as $saisie) {
+	foreach (array('case_1','radio_1','checkbox_1','input_1') as $saisie) {
 			$saisies_form[] = array(
 				'saisie' => str_replace('_1', '', $saisie),
 				'options' => array('nom' => $saisie)
@@ -121,6 +121,11 @@
 			'radio_inegal' => array(
 				0 => '$(form).find("[name=\'radio_1\']:checked").val() != \'toto\')',
 				1 => '@radio_1@ != \'toto\'',
+				2 => $saisies_form
+			),
+			'case' => array(
+				0 => '$(form).find(".checkbox[name=\'case_1\']").is(\':checked\') ? $(form).find(\'.checkbox[name=\'case_1\']\').val() : \'\'',
+				1 => '@case_1@',
 				2 => $saisies_form
 			),
 			'false' => array(
