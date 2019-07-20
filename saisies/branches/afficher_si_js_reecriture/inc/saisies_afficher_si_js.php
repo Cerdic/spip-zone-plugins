@@ -15,6 +15,33 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('inc/saisies_afficher_si_commun');
 
 /**
+ * Transforme une condition afficher_si en condition js
+ * @param string $condition
+ * @return string
+**/
+function saisies_afficher_si_js($condition) {
+	if ($tests = saisies_parser_condition_afficher_si($condition)) {
+		foreach ($tests as $test) {
+			$expression = $test[0];
+			$negation = isset($test['negation']) ? $test['negation'] : '' ;
+			$champ = isset($test['champ']) ? $test['champ'] : '' ;
+			$operateur = isset($test['operateur']) ? $test['operateur'] : '' ;
+			$guillemet = isset($test['guillemet']) ? $test['guillemet'] : '' ;
+			$valeur = isset($test['valeur']) ? $test['valeur'] : '' ;
+			$plugin = saisies_afficher_si_evaluer_plugin($champ);
+			if ($plugin !== '') {
+				$condition = str_replace($expression, $plugin ? 'true' : 'false', $condition);
+			} elseif (stripos($champ, 'config') !== false) {
+				$config = saisies_afficher_si_get_valeur_config($champ);
+				$test_modifie = eval('return '.saisies_tester_condition_afficher_si($config, $operateur, $valeur, $negation).';') ? 'true' : 'false';
+				$condition = str_replace($expression, $test_modifie, $condition);
+			}
+		}
+	}
+	return $condition;
+}
+
+/**
  * Génère, à partir d'un tableau de saisie le code javascript ajouté à la fin de #GENERER_SAISIES
  * pour produire un affichage conditionnel des saisies ayant une option afficher_si
  *
@@ -70,16 +97,6 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 			if (isset($saisie['identifiant']) and $saisie['identifiant']) {
 				$identifiant = $saisie['identifiant'];
 			}
-			// On gère le cas @plugin:non_plugin@
-			preg_match_all('#@plugin:(.+)@#U', $condition, $matches);
-			foreach ($matches[1] as $plug) {
-				if (defined('_DIR_PLUGIN_'.strtoupper($plug))) {
-					$condition = preg_replace('#@plugin:'.$plug.'@#U', 'true', $condition);
-				} else {
-					$condition = preg_replace('#@plugin:'.$plug.'@#U', 'false', $condition);
-				}
-			}
-			$condition = saisies_transformer_condition_afficher_si_config($condition);
 			// On transforme en une condition valide
 			preg_match_all('#@(.+)@#U', $condition, $matches);
 			foreach ($matches[1] as $nom) {
