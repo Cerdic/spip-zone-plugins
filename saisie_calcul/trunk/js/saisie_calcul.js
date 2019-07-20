@@ -8,7 +8,11 @@ $(function(){
 function actualiser_calculs() {
 	$("form .saisie_calcul input[data-calcul]").each(function(){
 		var expr = $(this).attr("data-calcul");
+		avant = $(this).val();
 		var resultat = eval(expr);
-		$(this).val(resultat);
+		if (avant != resultat) {
+			$(this).val(resultat);
+			$(this).trigger('change');
+		}
 	})
 }
