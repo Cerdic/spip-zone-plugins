@@ -109,7 +109,7 @@ function saisies_afficher_si_js_case($champ, $operateur, $valeur, $guillemet, $n
  * @param string $negation
 **/
 function saisies_afficher_si_js_radio($champ, $operateur, $valeur, $guillemet, $negation) {
-	return "$negation$(form).find(\"[name='$champ']:checked\").val() $operateur $guillemet$valeur$guillemet)";
+	return "$negation$(form).find(\"[name='$champ']:checked\").val() $operateur $guillemet$valeur$guillemet";
 }
 
 /**

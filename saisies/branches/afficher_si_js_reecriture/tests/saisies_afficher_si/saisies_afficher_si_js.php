@@ -114,12 +114,12 @@
 				2 => $saisies_form
 			),
 			'radio_egal' => array(
-				0 => '$(form).find(&quot;[name=\'radio_1\']:checked&quot;).val() == \'toto\')',
+				0 => '$(form).find(&quot;[name=\'radio_1\']:checked&quot;).val() == \'toto\'',
 				1 => '@radio_1@ == \'toto\'',
 				2 => $saisies_form
 			),
 			'radio_inegal' => array(
-				0 => '$(form).find(&quot;[name=\'radio_1\']:checked&quot;).val() != \'toto\')',
+				0 => '$(form).find(&quot;[name=\'radio_1\']:checked&quot;).val() != \'toto\'',
 				1 => '@radio_1@ != \'toto\'',
 				2 => $saisies_form
 			),
