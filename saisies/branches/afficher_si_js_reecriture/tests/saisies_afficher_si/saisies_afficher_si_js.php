@@ -54,7 +54,7 @@
 				2 => $saisies_form
 			),
 			'input_egalite_double_quote' => array(
-				0 => '$(form).find(\'[name=input_1]\').val() == \"toto\"',
+				0 => '$(form).find(\'[name=input_1]\').val() == &quot;toto&quot;',
 				1 => '@input_1@ == "toto"',
 				2 => $saisies_form
 			),
@@ -114,17 +114,17 @@
 				2 => $saisies_form
 			),
 			'radio_egal' => array(
-				0 => '$(form).find("[name=\'radio_1\']:checked").val() == \'toto\')',
+				0 => '$(form).find(&quot;[name=\'radio_1\']:checked&quot;).val() == \'toto\')',
 				1 => '@radio_1@ == \'toto\'',
 				2 => $saisies_form
 			),
 			'radio_inegal' => array(
-				0 => '$(form).find("[name=\'radio_1\']:checked").val() != \'toto\')',
+				0 => '$(form).find(&quot;[name=\'radio_1\']:checked&quot;).val() != \'toto\')',
 				1 => '@radio_1@ != \'toto\'',
 				2 => $saisies_form
 			),
 			'case' => array(
-				0 => '$(form).find(".checkbox[name=\'case_1\']").is(\':checked\') ? $(form).find(\'.checkbox[name=\'case_1\']\').val() : \'\'',
+				0 => '$(form).find(&quot;.checkbox[name=\'case_1\']&quot;).is(\':checked\') ? $(form).find(&quot;.checkbox[name=\'case_1\']&quot;).val() : \'\'',
 				1 => '@case_1@',
 				2 => $saisies_form
 			),

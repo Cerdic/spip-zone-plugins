@@ -44,7 +44,7 @@ function saisies_afficher_si_js($condition, $saisies_form = array()) {
 			}
 		}
 	}
-	return $condition;
+	return str_replace('"', "&quot;", $condition);
 }
 
 /**
@@ -74,9 +74,6 @@ function saisies_afficher_si_js_champ($champ, $operateur, $valeur, $valeur_numer
 		$valeur = $valeur_numerique;
 	}
 	// Guillemets : si double, les échapper
-	if ($guillemet == '"') {
-		$guillemet = '\"';
-	}
 
 	// cas case
 	if ($saisie == 'case') {// case
@@ -100,7 +97,7 @@ function saisies_afficher_si_js_champ($champ, $operateur, $valeur, $valeur_numer
  * @param string $negation
 **/
 function saisies_afficher_si_js_case($champ, $operateur, $valeur, $guillemet, $negation) {
-	return "$negation$(form).find(\".checkbox[name='$champ']\").is(':checked') ? $(form).find('.checkbox[name='$champ']').val() : ''";
+	return "$negation$(form).find(\".checkbox[name='$champ']\").is(':checked') ? $(form).find(\".checkbox[name='$champ']\").val() : ''";
 }
 
 /**

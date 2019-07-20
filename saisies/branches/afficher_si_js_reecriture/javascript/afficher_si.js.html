@@ -1,0 +1,29 @@
+$(function(){
+	form = $('form');
+	afficher_si = $('form [data-afficher_si]').each(function(){
+		verifier_afficher_si(form, $(this), true);
+		}
+	);
+	$('texteara, input, select').change(function(){
+			name = $(this).attr('name');
+			$(`[data-afficher_si*='${name}']`).each(function(){
+				verifier_afficher_si(form, $(this));
+			})
+		}
+	)
+	}
+)
+[(#REM) #EVAL et pas #CONST pour compatibilité SPIP <3.2]
+function verifier_afficher_si(form, saisie, chargement=false) {
+	var condition = saisie.attr('data-afficher_si');
+	condition = eval(condition);
+	if (condition) {
+		saisie.[(#EVAL{_SAISIES_AFFICHER_SI_JS_SHOW})];
+	} else {
+		if (chargement) {
+			saisie.[(#EVAL{_SAISIES_AFFICHER_SI_JS_HIDE})].css('display','none');
+		} else {
+			saisie.[(#EVAL{_SAISIES_AFFICHER_SI_JS_HIDE})];
+		}
+	}
+}
