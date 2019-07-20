@@ -58,11 +58,6 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 			preg_match_all('#@(.+)@#U', $condition, $matches);
 			foreach ($matches[1] as $nom) {
 				switch ($saisies[$nom]['saisie']) {
-					case 'radio':
-					case 'oui_non':
-					case 'true_false':
-						$condition = preg_replace('#@'.preg_quote($nom).'@#U', '$(form).find("[name=\''.$nom.'\']:checked").val()', $condition);
-						break;
 					case 'case':
 						$condition = preg_replace('#@'.preg_quote($nom).'@#U', '($(form).find(".checkbox[name=\''.$nom.'\']").is(":checked") ? $(form).find(".checkbox[name=\''.$nom.'\']").val() : "")', $condition);
 						break;

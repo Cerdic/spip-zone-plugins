@@ -69,7 +69,6 @@ function saisies_afficher_si_js_champ($champ, $operateur, $valeur, $valeur_numer
 		return saisies_afficher_si_js_checkbox($champ, $operateur, $valeur, $negation);
 	}
 
-	// Cas standard
 	// Cas d'une valeur numérique : pour le test js, cela ne change rien, on la passe comme valeur
 	if ($valeur_numerique and !$valeur) {
 		$valeur = $valeur_numerique;
@@ -78,9 +77,26 @@ function saisies_afficher_si_js_champ($champ, $operateur, $valeur, $valeur_numer
 	if ($guillemet == '"') {
 		$guillemet = '\"';
 	}
+
+	// cas radio
+	if ($saisie == 'radio' or $saisie == 'oui_non' or $saisie == 'true_false') {// radio et assimilés
+		return saisies_afficher_si_js_radio($champ, $operateur, $valeur, $guillemet, $negation);
+	}
+	// sinon cas par défaut
 	return "$negation\$(form).find('[name=$champ]').val() $operateur $guillemet$valeur$guillemet";
 }
 
+/**
+ * Génère les tests js pour les cas de radio
+ * @param string $champ
+ * @param string $operateur
+ * @param string $valeur
+ * @param string $guillemet
+ * @param string $negation
+**/
+function saisies_afficher_si_js_radio($champ, $operateur, $valeur, $guillemet, $negation) {
+	return "$negation$(form).find(\"[name='$champ']:checked\").val() $operateur $guillemet$valeur$guillemet)";
+}
 
 /**
  * Génère les tests js pour les cas de checkbox
