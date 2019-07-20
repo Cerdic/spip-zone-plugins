@@ -28,3 +28,20 @@ function saisies_parser_condition_afficher_si($condition) {
 	preg_match_all($regexp, $condition, $tests, PREG_SET_ORDER);
 	return $tests;
 }
+
+/**
+ * Retourne le résultat de l'évaluation d'un plugin actif
+ * @param string $champ (sans les @@)
+ * @return bool '' ('' si jamais on ne teste pas un plugin)
+**/
+function saisies_afficher_si_evaluer_plugin($champ) {
+	if (preg_match_all('#plugin:(.*)#', $champ, $matches, PREG_SET_ORDER)) {
+		foreach ($matches as $plugin) {
+			$plugin_a_tester = $plugin[1];
+			$actif = test_plugin_actif($plugin_a_tester);
+		}
+	}	else {
+		$actif = '';
+	}
+	return $actif;
+}

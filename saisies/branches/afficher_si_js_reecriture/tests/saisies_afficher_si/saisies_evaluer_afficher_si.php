@@ -185,6 +185,14 @@
 				0 => true,
 				1 => '@config:tests_saisies_config:sous:c@==\'c\' || @config:tests_saisies_config:sous:b@==\'c\'',
 			),
+			'plugin_actif' => array(
+				0 =>  true,
+				1 => '@plugin:saisies@'
+			),
+			'plugin_inactif' => array(
+				0 => false,
+				1 => '@plugin:tartempion_de_test@' // en espérant que personne ne nomme un plugin tartempion_de_test
+			),
 		);
 		return $essais;
 	}
