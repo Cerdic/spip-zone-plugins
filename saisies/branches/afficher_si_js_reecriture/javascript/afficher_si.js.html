@@ -1,18 +1,19 @@
 $(function(){
-	form = $('form');
-	afficher_si = $('form [data-afficher_si]').each(function(){
-		verifier_afficher_si(form, $(this), true);
-		}
-	);
-	$('texteara, input, select').change(function(){
-			name = $(this).attr('name');
-			$(`[data-afficher_si*='${name}']`).each(function(){
-				verifier_afficher_si(form, $(this));
-			})
-		}
-	)
-	}
-)
+	$('form').each(function(){
+		afficher_si = $(this).find('[data-afficher_si]').each(function(){
+			form = $(this).parents('form');
+			verifier_afficher_si(form, $(this), true);
+			}
+		);
+		$(this).find('texteara, input, select').change(function(){
+				form = $(this).parents('form');
+				name = $(this).attr('name');
+				form.find(`[data-afficher_si*='${name}']`).each(function(){
+					verifier_afficher_si(form, $(this));
+				})
+		})
+	})
+})
 [(#REM) EVAL et pas CONST pour compatibilité SPIP <3.2]
 function verifier_afficher_si(form, saisie, chargement=false) {
 	var condition = saisie.attr('data-afficher_si');
