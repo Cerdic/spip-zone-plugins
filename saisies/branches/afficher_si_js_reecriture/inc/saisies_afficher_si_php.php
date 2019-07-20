@@ -138,7 +138,7 @@ function saisies_transformer_condition_afficher_si($condition, $env = null) {
 			$expression = $test[0];
 			$champ = saisies_afficher_si_get_valeur_champ($test['champ'], $env);
 			$operateur = isset($test['operateur']) ? $test['operateur'] : null;
-
+			$negation = isset($test['negation']) ? $test['negation'] : '';
 			if (isset($test['valeur_numerique'])) {
 				$valeur = intval($test['valeur_numerique']);
 			} elseif (isset($test['valeur'])) {
@@ -147,10 +147,7 @@ function saisies_transformer_condition_afficher_si($condition, $env = null) {
 				$valeur = null;
 			}
 
-			$test_modifie = saisies_tester_condition_afficher_si($champ, $operateur, $valeur) ? 'true' : 'false';
-			if (isset($test['negation'])) {
-				$test_modifie = $test['negation'].$test_modifie;
-			}
+			$test_modifie = saisies_tester_condition_afficher_si($champ, $operateur, $valeur, $negation) ? 'true' : 'false';
 			$condition = str_replace($expression, $test_modifie, $condition);
 		}
 	} else {
@@ -172,12 +169,18 @@ function saisies_transformer_condition_afficher_si($condition, $env = null) {
  *	- un tableau sérializé
  * @param string $operateur : l'opérateur:
  * @param string $valeur la valeur à tester pour un IN. Par exemple "23" ou encore "23", "25"
+ * @param string $negation y-a-t-il un négation avant le test ? '!' si oui
  * @return bool false / true selon la condition
 **/
-function saisies_tester_condition_afficher_si($champ, $operateur=null, $valeur=null) {
+function saisies_tester_condition_afficher_si($champ, $operateur=null, $valeur=null, $negation = '') {
 	// Si operateur null => on test juste qu'un champ est cochée / validé
 	if ($operateur === null and $valeur === null) {
-		return isset($champ) and $champ;
+		if ($negation) {
+			return !(isset($champ) and $champ);
+		}
+		else {
+			return isset($champ) and $champ;
+		}
 	}
 	// Dans tous les cas, enlever les guillemets qui sont au sein de valeur
 	//Si champ est de type string, tenter d'unserializer
@@ -188,11 +191,16 @@ function saisies_tester_condition_afficher_si($champ, $operateur=null, $valeur=n
 
 	//Et maintenant appeler les sous fonctions qui vont bien
 	if (is_string($champ)) {
-		return saisies_tester_condition_afficher_si_string($champ, $operateur, $valeur);
+		$retour = saisies_tester_condition_afficher_si_string($champ, $operateur, $valeur);
 	} elseif (is_array($champ)) {
-		return saisies_tester_condition_afficher_si_array($champ, $operateur, $valeur);
+		$retour = saisies_tester_condition_afficher_si_array($champ, $operateur, $valeur);
 	} else {
-		return false;
+		$retour = false;
+	}
+	if ($negation) {
+		return !$retour;
+	} else {
+		return $retour;
 	}
 }
 
