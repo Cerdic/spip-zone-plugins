@@ -131,7 +131,7 @@ function saisie_type2classe($type_saisie) {
 	if (strpos($type_saisie, 'selecteur') === 0) {
 		$class .= " selecteur_item";
 	}
-	if (!in_array($type_saisie, ['hidden','fieldset'])) {
+	if (!in_array($type_saisie, array('hidden','fieldset'))) {
 		$class .= ($compteur & 1) ? " editer_even" : " editer_odd";
 		$compteur = 1 - $compteur;
 	}
