@@ -27,8 +27,9 @@ function saisies_afficher_si_js($condition) {
 			$champ = isset($test['champ']) ? $test['champ'] : '' ;
 			$operateur = isset($test['operateur']) ? $test['operateur'] : '' ;
 			$guillemet = isset($test['guillemet']) ? $test['guillemet'] : '' ;
+			$negation = isset($test['negation']) ? $test['negation'] : '';
 			$valeur = isset($test['valeur']) ? $test['valeur'] : '' ;
-			$plugin = saisies_afficher_si_evaluer_plugin($champ);
+			$plugin = saisies_afficher_si_evaluer_plugin($champ, $negation);
 			if ($plugin !== '') {
 				$condition = str_replace($expression, $plugin ? 'true' : 'false', $condition);
 			} elseif (stripos($champ, 'config') !== false) {
