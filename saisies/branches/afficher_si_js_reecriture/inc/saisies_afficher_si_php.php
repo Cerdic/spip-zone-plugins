@@ -127,24 +127,6 @@ function saisies_afficher_si_get_valeur_champ($champ, $env) {
 	return $champ;
 }
 
-/**
- * Prend un test conditionnel
- * cherche dedans les test @config:xxx@
- * remplace par la valeur de la config
- * @param string condition;
- * @return string condition;
-**/
-function saisies_transformer_condition_afficher_si_config($condition) {
-	include_spip("inc/config");
-	preg_match_all('#@config:(.*)@#U', $condition, $matches, PREG_SET_ORDER);
-	foreach ($matches as $plugin) {
-		$arobase = $plugin[0];
-		$config_a_tester = str_replace(":", "/", $plugin[1]);
-		$config = lire_config($config_a_tester);
-		$condition = str_replace($arobase, '"'.$config.'"', $condition);
-	}
-	return $condition;
-}
 
 /**
  * Prend un test conditionnel,
