@@ -49,32 +49,32 @@
 	function essais_saisies_afficher_si_js($saisies_form){
 		$essais = array (
 			'input_egalite' => array(
-				0 => '$form().find(\'[name=input_1]\').val() == \'toto\'',
+				0 => '$(form).find(\'[name=input_1]\').val() == \'toto\'',
 				1 => '@input_1@ == \'toto\'',
 				2 => $saisies_form
 			),
 			'input_egalite_double_quote' => array(
-				0 => '$form().find(\'[name=input_1]\').val() == \"toto\"',
+				0 => '$(form).find(\'[name=input_1]\').val() == \"toto\"',
 				1 => '@input_1@ == "toto"',
 				2 => $saisies_form
 			),
 			'input_egalite_nb' => array(
-				0 => '$form().find(\'[name=input_1]\').val() == 23',
+				0 => '$(form).find(\'[name=input_1]\').val() == 23',
 				1 => '@input_1@ == 23',
 				2 => $saisies_form
 			),
 			'input_inegalite' => array(
-				0 => '$form().find(\'[name=input_1]\').val() != \'toto\'',
+				0 => '$(form).find(\'[name=input_1]\').val() != \'toto\'',
 				1 => '@input_1@ != \'toto\'',
 				2 => $saisies_form
 			),
 			'input_egalite_nie' => array(
-				0 => '!$form().find(\'[name=input_1]\').val() == \'toto\'',
+				0 => '!$(form).find(\'[name=input_1]\').val() == \'toto\'',
 				1 => '!@input_1@ == \'toto\'',
 				2 => $saisies_form
 			),
 			'input_inegalite_nie' => array(
-				0 => '!$form().find(\'[name=input_1]\').val() != \'toto\'',
+				0 => '!$(form).find(\'[name=input_1]\').val() != \'toto\'',
 				1 => '!@input_1@ != \'toto\'',
 				2 => $saisies_form
 			),
