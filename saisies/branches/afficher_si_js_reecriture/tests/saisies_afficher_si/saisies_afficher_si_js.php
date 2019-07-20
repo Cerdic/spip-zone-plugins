@@ -114,19 +114,19 @@
 				2 => $saisies_form
 			),
 			'false' => array(
-				0 => false,
+				0 => 'false',
 				1 => 'false'
 			),
 			'true' => array(
-				0 => true,
+				0 => 'true',
 				1 => 'true'
 			),
 			'anti_false' => array(
-				0 => true,
+				0 => '!false',
 				1 => '!false'
 			),
 			'anti_true' => array(
-				0 => false,
+				0 => '!true',
 				1 => '!true'
 			),
 			'premier_niveau' => array(
