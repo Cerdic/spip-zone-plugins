@@ -5,7 +5,7 @@
 [(#EVAL{debut_cadre_enfonce("", true, "", "Lire aussi...")})]
 
 	<B_reference>
-	<div class='cadre cadre-liste'><table width='100%' cellpadding='2' cellspacing='0' border='0'>
+	<div class='cadre cadre-liste liste-objets' style="margin: 0 -10px;"><table width='100%' cellpadding='2' cellspacing='0' border='0'>
 	<BOUCLE_reference(ARTICLES){id_article=#ID_LIRE}{id_lire > 0}{statut==prop|prepa|publie|refuse|poubelle}>
 		<BOUCLE_aff_ligne(ARTICLES){id_article}{statut==prop|prepa|publie|refuse|poubelle}>
 		<tr class='tr_liste'>
@@ -23,11 +23,12 @@
 				<BOUCLE_test_encours(ARTICLES){id_article}{id_article=#ENV{id_article}}{statut==prop|prepa|publie|refuse|poubelle}>
 					#TITRE
 				</BOUCLE_test_encours>
-					<a href="?exec=articles&id_article=#ID_ARTICLE">#TITRE</a>
+					<a href="?exec=article&id_article=#ID_ARTICLE">#TITRE</a>
 				<//B_test_encours>
 				[(#EVAL{#ID_ARTICLE==#ID_LIRE}|?{"</b>",""})]
 			</td>
-			<td class="arial1">[(#DATE|affdate)]</td>
+			<td style="padding:0">[(#LOGO_ARTICLE_NORMAL|image_reduire{70,50}|inserer_attribut{style,"display:block"})]</td>
+			<td class="secondaire">[(#DATE|affdate)]</td>
 			<td class="arial1"><b>N°#ID_ARTICLE</b></td>
 			<td>
 				<BOUCLE_test_ref2(ARTICLES){id_article}{id_article!=#ID_LIRE}{statut==prop|prepa|publie|refuse|poubelle}>
