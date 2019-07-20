@@ -1,7 +1,7 @@
 <?php
 
 
-function lire_aussi_interface($flux="") {
+function lire_aussi_affiche_milieu($flux="") {
 		$exec = $flux["args"]["exec"];
 		$id_rubrique = $flux["args"]["id_rubrique"];
 		$id_article = $flux["args"]["id_article"];

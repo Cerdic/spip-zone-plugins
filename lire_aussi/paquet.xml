@@ -1,0 +1,24 @@
+<paquet
+	prefix="lire_aussi"
+	categorie="navigation"
+	version="1.2.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="imgs/icone_lireaussi.gif"
+	schema="1.1"
+>	
+
+	<nom>Lire aussi</nom>
+	<!-- Grouper des articles, afin de proposer ponctuellement des articles en "lire aussi..." -->
+
+	<auteur>ARNO*</auteur>
+
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/lire_aussi.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/lire_aussi.php" />
+	<pipeline nom="affiche_milieu" inclure="lire_aussi.php" />
+	<chemin path="imgs" />
+	<chemin path="" />
+</paquet>
