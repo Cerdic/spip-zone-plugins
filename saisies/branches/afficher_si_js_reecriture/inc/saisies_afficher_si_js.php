@@ -13,13 +13,15 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 include_spip('inc/saisies_afficher_si_commun');
-
+include_spip('inc/saisies_lister');
 /**
  * Transforme une condition afficher_si en condition js
  * @param string $condition
+ * @param array $saisies_form les saisies du même formulaire. Nécessaire pour savoir quel type de test js on met.
  * @return string
 **/
-function saisies_afficher_si_js($condition) {
+function saisies_afficher_si_js($condition, $saisies_form = array()) {
+	$saisies_form = saisies_lister_par_nom($saisies_form);
 	if ($tests = saisies_parser_condition_afficher_si($condition)) {
 		foreach ($tests as $test) {
 			$expression = $test[0];
@@ -38,7 +40,7 @@ function saisies_afficher_si_js($condition) {
 				$test_modifie = eval('return '.saisies_tester_condition_afficher_si($config, $operateur, $valeur, $negation).';') ? 'true' : 'false';
 				$condition = str_replace($expression, $test_modifie, $condition);
 			} else { // et maintenant, on rentre dans le vif du sujet : les champs. On délégue cela à une autre fonction
-				$condition = str_replace($expression, saisies_afficher_si_js_champ($champ, $operateur, $valeur, $valeur_numerique, $guillemet, $negation), $condition);
+				$condition = str_replace($expression, saisies_afficher_si_js_champ($champ, $operateur, $valeur, $valeur_numerique, $guillemet, $negation, $saisies_form), $condition);
 			}
 		}
 	}
@@ -54,9 +56,20 @@ function saisies_afficher_si_js($condition) {
  * @param string $valeur
  * @param string $guillemet
  * @param string $negation
+ * @param string $saisies_form listée par nom
  * @return string condition_js
 **/
-function saisies_afficher_si_js_champ($champ, $operateur, $valeur, $valeur_numerique, $guillemet, $negation) {
+function saisies_afficher_si_js_champ($champ, $operateur, $valeur, $valeur_numerique, $guillemet, $negation, $saisies_form) {
+	if (!isset($saisies_form[$champ])) {//La saisie conditionnante n'existe pas pour ce formulaire > on laisse tomber
+		return '';
+	}
+	$saisie = $saisies_form[$champ]['saisie'];
+
+	if ($saisie == 'checkbox') {
+		return saisies_afficher_si_js_checkbox($champ, $operateur, $valeur, $negation);
+	}
+
+	// Cas standard
 	// Cas d'une valeur numérique : pour le test js, cela ne change rien, on la passe comme valeur
 	if ($valeur_numerique and !$valeur) {
 		$valeur = $valeur_numerique;
@@ -65,34 +78,24 @@ function saisies_afficher_si_js_champ($champ, $operateur, $valeur, $valeur_numer
 	if ($guillemet == '"') {
 		$guillemet = '\"';
 	}
-	// Cas de chekbox => convertir les conditions en test IN (compatibilité historique)
-	if (stripos($champ, 'checkbox') !== false) {
-		if ($operateur == '==') {
-			$operateur = 'IN';
-		} elseif ($operateur == '!=') {
-			$operateur = '!IN';
-		}
-	}
-	if ($operateur) {
-		if ($operateur != 'IN' and $operateur != '!IN') {
-			return "$negation\$form().find('[name=$champ]').val() $operateur $guillemet$valeur$guillemet";
-		} else {
-			// cas des checkbox (au sens saisie @checkbox_xx@) => operateur IN ou !IN
-			return saisies_afficher_si_js_IN($champ, $operateur, $valeur, $negation);
-		}
-	}
+	return "$negation\$form().find('[name=$champ]').val() $operateur $guillemet$valeur$guillemet";
 }
 
 
 /**
- * Génère les tests js pour le cas où on a l'operateur IN ou !IN
- * c'est-à-dire, en pratique, pour les checkboxes
+ * Génère les tests js pour les cas de checkbox
  * @param string $champ
  * @param string $operateur
  * @param string $valeur
  * @param string $negation
 **/
-function saisies_afficher_si_js_IN($champ, $operateur, $valeur, $negation) {
+function saisies_afficher_si_js_checkbox($champ, $operateur, $valeur, $negation) {
+	// Convertir les conditions en test IN (compatibilité historique)
+	if ($operateur == '==') {
+		$operateur = 'IN';
+	} elseif ($operateur == '!=') {
+		$operateur = '!IN';
+	}
 	// La négation de l'opérateur remonte globalement
 	if ($operateur == '!IN' and $negation) {
 		$negation = '';

@@ -23,10 +23,18 @@
 	// Préparer les pseudo config
 	include_spip("inc/config");
 	ecrire_config("tests_saisies_config", array("a" => "a", "sous" => array("b" => "b", "c" => "c")));
-	//
+
+	// les saisies à passer
+	$saisies_form = array();
+	foreach (array('checkbox_1','input_1') as $saisie) {
+			$saisies_form[] = array(
+				'saisie' => str_replace('_1', '', $saisie),
+				'options' => array('nom' => $saisie)
+			);
+	}
 	// hop ! on y va
 	//
-	$err = tester_fun($f, essais_saisies_afficher_si_js());
+	$err = tester_fun($f, essais_saisies_afficher_si_js($saisies_form));
 	effacer_config('tests_saisies_config');
 
 	// si le tableau $err est pas vide ca va pas
@@ -38,59 +46,72 @@
 
 	// On va tester essentiellement sur des set_request, le cas $env étant normalement identique
 
-	function essais_saisies_afficher_si_js(){
+	function essais_saisies_afficher_si_js($saisies_form){
 		$essais = array (
 			'input_egalite' => array(
 				0 => '$form().find(\'[name=input_1]\').val() == \'toto\'',
-				1 => '@input_1@ == \'toto\''
+				1 => '@input_1@ == \'toto\'',
+				2 => $saisies_form
 			),
 			'input_egalite_double_quote' => array(
 				0 => '$form().find(\'[name=input_1]\').val() == \"toto\"',
-				1 => '@input_1@ == "toto"'
+				1 => '@input_1@ == "toto"',
+				2 => $saisies_form
 			),
 			'input_egalite_nb' => array(
 				0 => '$form().find(\'[name=input_1]\').val() == 23',
-				1 => '@input_1@ == 23'
+				1 => '@input_1@ == 23',
+				2 => $saisies_form
 			),
 			'input_inegalite' => array(
 				0 => '$form().find(\'[name=input_1]\').val() != \'toto\'',
-				1 => '@input_1@ != \'toto\''
+				1 => '@input_1@ != \'toto\'',
+				2 => $saisies_form
 			),
 			'input_egalite_nie' => array(
 				0 => '!$form().find(\'[name=input_1]\').val() == \'toto\'',
-				1 => '!@input_1@ == \'toto\''
+				1 => '!@input_1@ == \'toto\'',
+				2 => $saisies_form
 			),
 			'input_inegalite_nie' => array(
 				0 => '!$form().find(\'[name=input_1]\').val() != \'toto\'',
-				1 => '!@input_1@ != \'toto\''
+				1 => '!@input_1@ != \'toto\'',
+				2 => $saisies_form
 			),
 			'checkbox_egalite' => array(
 				0 => '($(form).find(checkbox[name=checkbox_1[]][value=\'toto\']).is(\':checked\'))',
-				1 => '@checkbox_1@ == \'toto\''
+				1 => '@checkbox_1@ == \'toto\'',
+				2 => $saisies_form
 			),
 			'checkbox_inegalite' => array(
 				0 => '!($(form).find(checkbox[name=checkbox_1[]][value=\'toto\']).is(\':checked\'))',
-				1 => '@checkbox_1@ != \'toto\''
+				1 => '@checkbox_1@ != \'toto\'',
+				2 => $saisies_form
 			),
 			'checkbox_IN' => array(
 				0 => '($(form).find(checkbox[name=checkbox_1[]][value=\'toto\']).is(\':checked\'))',
-				1 => '@checkbox_1@ IN \'toto\''
+				1 => '@checkbox_1@ IN \'toto\'',
+				2 => $saisies_form
 			),
 			'checkbox_NOT_IN' => array(
 				0 => '!($(form).find(checkbox[name=checkbox_1[]][value=\'toto\']).is(\':checked\'))',
-				1 => '@checkbox_1@ !IN \'toto\''
+				1 => '@checkbox_1@ !IN \'toto\'',
+				2 => $saisies_form
 			),
 			'checkbox_IN_nie' => array(
 				0 => '!($(form).find(checkbox[name=checkbox_1[]][value=\'toto\']).is(\':checked\'))',
-				1 => '@checkbox_1@ !IN \'toto\''
+				1 => '@checkbox_1@ !IN \'toto\'',
+				2 => $saisies_form
 			),
 			'checkbox_NOT_IN_nie' => array(//cas sans doute rare, mais sait-on jamais
 				0 => '($(form).find(checkbox[name=checkbox_1[]][value=\'toto\']).is(\':checked\'))',
-				1 => '!@checkbox_1@ !IN \'toto\''
+				1 => '!@checkbox_1@ !IN \'toto\'',
+				2 => $saisies_form
 			),
 			'checkbox_IN_MULTIPLE' => array(
 				0 => '($(form).find(checkbox[name=checkbox_1[]][value=\'toto\']).is(\':checked\') || $(form).find(checkbox[name=checkbox_1[]][value=\'tata\']).is(\':checked\'))',
-				1 => '@checkbox_1@ IN \'toto,tata\''
+				1 => '@checkbox_1@ IN \'toto,tata\'',
+				2 => $saisies_form
 			),
 			'false' => array(
 				0 => false,
