@@ -21,7 +21,7 @@ include_spip('inc/saisies_manipuler');
 include_spip('inc/saisies_afficher');
 
 // Les outils pour l'affichage conditionnelle des saisies
-include_spip('inc/saisies_afficher_si');
+include_spip('inc/saisies_afficher_si_php');
 
 /**
  * Cherche la description des saisies d'un formulaire CVT dont on donne le nom
