@@ -105,14 +105,12 @@ function saisies_set_request_null_recursivement($saisie) {
  **/
 function saisies_afficher_si_get_valeur_champ($champ, $env) {
 	$plugin = saisies_afficher_si_evaluer_plugin($champ);
+	$config = saisies_afficher_si_get_valeur_config($champ);
 	if ($plugin !== '') {
 		$champ = $plugin;
-	} elseif (preg_match_all("#config:(.*)#", $champ, $matches, PREG_SET_ORDER)) {
-		foreach ($matches as $config) {
-			$config_a_tester = str_replace(":", "/", $config[1]);
-			$champ = lire_config($config_a_tester);
-		}
-	}  elseif (is_null($env)) {
+	} elseif ($config) {
+		$champ = $config;
+	} elseif (is_null($env)) {
 		$champ = _request($champ);
 	} else {
 		$champ = $env["valeurs"][$champ];
