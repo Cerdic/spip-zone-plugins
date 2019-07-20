@@ -84,7 +84,7 @@ function saisies_afficher_si_js_champ($champ, $operateur, $valeur, $valeur_numer
 		return saisies_afficher_si_js_radio($champ, $operateur, $valeur, $guillemet, $negation);
 	}
 	// sinon cas par défaut
-	return "$negation\$(form).find('[name=$champ]').val() $operateur $guillemet$valeur$guillemet";
+	return "$negation\$(form).find('[name=\"$champ\"]').val() $operateur $guillemet$valeur$guillemet";
 }
 
 
