@@ -79,37 +79,37 @@
 				2 => $saisies_form
 			),
 			'checkbox_egalite' => array(
-				0 => '($(form).find(checkbox[name=checkbox_1[]][value=\'toto\']).is(\':checked\'))',
+				0 => '($(form).find(\'[name=&quot;checkbox_1[]&quot;][value=&quot;toto&quot;]\').is(\':checked\'))',
 				1 => '@checkbox_1@ == \'toto\'',
 				2 => $saisies_form
 			),
 			'checkbox_inegalite' => array(
-				0 => '!($(form).find(checkbox[name=checkbox_1[]][value=\'toto\']).is(\':checked\'))',
+				0 => '!($(form).find(\'[name=&quot;checkbox_1[]&quot;][value=&quot;toto&quot;]\').is(\':checked\'))',
 				1 => '@checkbox_1@ != \'toto\'',
 				2 => $saisies_form
 			),
 			'checkbox_IN' => array(
-				0 => '($(form).find(checkbox[name=checkbox_1[]][value=\'toto\']).is(\':checked\'))',
+				0 => '($(form).find(\'[name=&quot;checkbox_1[]&quot;][value=&quot;toto&quot;]\').is(\':checked\'))',
 				1 => '@checkbox_1@ IN \'toto\'',
 				2 => $saisies_form
 			),
 			'checkbox_NOT_IN' => array(
-				0 => '!($(form).find(checkbox[name=checkbox_1[]][value=\'toto\']).is(\':checked\'))',
+				0 => '!($(form).find(\'[name=&quot;checkbox_1[]&quot;][value=&quot;toto&quot;]\').is(\':checked\'))',
 				1 => '@checkbox_1@ !IN \'toto\'',
 				2 => $saisies_form
 			),
 			'checkbox_IN_nie' => array(
-				0 => '!($(form).find(checkbox[name=checkbox_1[]][value=\'toto\']).is(\':checked\'))',
+				0 => '!($(form).find(\'[name=&quot;checkbox_1[]&quot;][value=&quot;toto&quot;]\').is(\':checked\'))',
 				1 => '@checkbox_1@ !IN \'toto\'',
 				2 => $saisies_form
 			),
 			'checkbox_NOT_IN_nie' => array(//cas sans doute rare, mais sait-on jamais
-				0 => '($(form).find(checkbox[name=checkbox_1[]][value=\'toto\']).is(\':checked\'))',
+				0 => '($(form).find(\'[name=&quot;checkbox_1[]&quot;][value=&quot;toto&quot;]\').is(\':checked\'))',
 				1 => '!@checkbox_1@ !IN \'toto\'',
 				2 => $saisies_form
 			),
 			'checkbox_IN_MULTIPLE' => array(
-				0 => '($(form).find(checkbox[name=checkbox_1[]][value=\'toto\']).is(\':checked\') || $(form).find(checkbox[name=checkbox_1[]][value=\'tata\']).is(\':checked\'))',
+				0 => '($(form).find(\'[name=&quot;checkbox_1[]&quot;][value=&quot;toto&quot;]\').is(\':checked\') || $(form).find(\'[name=&quot;checkbox_1[]&quot;][value=&quot;tata&quot;]\').is(\':checked\'))',
 				1 => '@checkbox_1@ IN \'toto,tata\'',
 				2 => $saisies_form
 			),
