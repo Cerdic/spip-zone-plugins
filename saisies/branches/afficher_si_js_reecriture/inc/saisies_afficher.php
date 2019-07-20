@@ -116,7 +116,7 @@ function saisies_generer_html($champ, $env = array()) {
 	}
 
 	// S'il y a le détail des saisies du même formulaire, on le passe en contexte. Utiliser pour générer correctement les afficher_si
-	$contexte['_saisies'] = isset($env['saisies']) ? $env['saisies'] : $array();
+	$contexte['_saisies'] = isset($env['saisies']) ? $env['saisies'] : array();
 
 	// Peut-être des transformations à faire sur les options textuelles
 	$options = isset($champ['options']) ? $champ['options'] : array();
