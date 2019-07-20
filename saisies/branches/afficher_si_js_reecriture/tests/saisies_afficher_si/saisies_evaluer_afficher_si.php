@@ -173,6 +173,14 @@
 				0 => false,
 				1 => '@config:tests_saisies_config:sous:b@==\'c\'',
 			),
+			'premier_niveau_nie' => array(
+				0 => false,
+				1 => '!@config:tests_saisies_config:a@==\'a\'',
+			),
+			'second_niveau_nie' => array(
+				0 => true,
+				1 => '!@config:tests_saisies_config:sous:b@==\'c\'',
+			),
 			'second_niveau_bis' => array(
 				0 => true,
 				1 => '@config:tests_saisies_config:sous:c@==\'c\'',
