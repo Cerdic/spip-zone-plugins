@@ -103,7 +103,7 @@ Intégration dans le flux rss des evenements debutant dans 5 toujours
 TODO : à rendre configurable , avec rssconfig_evenements/age_art par exemple)
 rem : balise DATE_JOUR_PLUS fournie par simplecal
 ]
-<BOUCLE_recentse(EVENEMENTS)  {si #GET{flux_evenements}|==oui} {lang ?}{branche #GET{id_rubrique,?}} {id_mot ?} {where date_debut <= (#DATE_JOUR_PLUS{5}|affdate{'Ymd'})} {par date}{inverse}{0,#CONFIG{rssconfig_evenements/nb_art,20}}{unique}>
+<BOUCLE_recentse(EVENEMENTS)  {si #GET{flux_evenements}|==oui} {lang ?}{branche #GET{id_rubrique,?}} {id_mot ?} {where date_debut <= (#DATE_JOUR_PLUS{5}|affdate{'Ymd'})} {par date_debut}{inverse}{0,#CONFIG{rssconfig_evenements/nb_art,20}}{unique}>
 [(#SET{elements,#GET{elements}|array_merge{#ARRAY{evt#ID_EVENEMENT,#DATE}}})]
 </BOUCLE_recentse>
 
