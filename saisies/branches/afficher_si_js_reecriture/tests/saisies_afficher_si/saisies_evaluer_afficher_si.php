@@ -209,6 +209,10 @@
 				0 => true,
 				1 => '!@plugin:tartempion_de_test@' // en espérant que personne ne nomme un plugin tartempion_de_test
 			),
+			'hack' => array(
+				0 => true,
+				1 => "spip_log('s') || @input_1@=='s')"
+			)
 		);
 		return $essais;
 	}
