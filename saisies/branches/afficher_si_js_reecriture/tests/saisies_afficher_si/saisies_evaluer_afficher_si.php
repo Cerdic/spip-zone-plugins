@@ -31,7 +31,7 @@
 	set_request("tableau_1", array("a", "b", "c"));
 	set_request("tableau_2", array("e", "f", "g"));
 	set_request("nombre", "20");
-
+	set_request('cascade', array('a'=>'a'));
 	include_spip("inc/config");
 	ecrire_config("tests_saisies_config", array("a" => "a", "sous" => array("b" => "b", "c" => "c")));
 	//
@@ -212,6 +212,10 @@
 			'hack' => array(
 				0 => true,
 				1 => "spip_log('s') || @input_1@=='s')"
+			),
+			'cascade' => array(
+				0 => true,
+				1 => '@cascade[a]@ == \'a\''
 			)
 		);
 		return $essais;

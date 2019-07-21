@@ -111,7 +111,17 @@ function saisies_afficher_si_get_valeur_champ($champ, $env) {
 	} elseif ($config) {
 		$champ = $config;
 	} elseif (is_null($env)) {
-		$champ = _request($champ);
+		// Si le nom du champ est un tableau indexé, il faut parser !
+		if (preg_match('/([\w]+)((\[[\w]+\])+)/', $champ, $separe)) {
+			$champ= _request($separe[1]);
+			preg_match_all('/\[([\w]+)\]/', $separe[2], $index);
+			// On va chercher au fond du tableau
+			foreach ($index[1] as $cle) {
+				$champ = $champ[$cle];
+			}
+		} else {
+			$champ = _request($champ);
+		}
 	} else {
 		$champ = $env["valeurs"][$champ];
 	}
