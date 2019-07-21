@@ -17,11 +17,10 @@ options:
           explication: '<:saisies:option_label_explication:>'
           size: 50
       -
-        saisie: 'input'
+        saisie: 'textarea'
         options:
           nom: 'calcul'
           label: '<:saisie_calcul:option_calcul_label:>'
-          size: 50
       -
         saisie: 'input'
         options:
