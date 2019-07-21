@@ -13,6 +13,8 @@ function saisie_calcul_2_js($expr) {
 	$expr = preg_replace("#@(.*)@#U", "Number($('.afficher_si_visible #champ_$1').val()||0)", $expr);
 	$expr = str_replace(",",".",$expr);// virgule -> point
 	$expr = str_replace("ROUND","Math.round",$expr);
+	$expr = str_replace("\n",'',$expr);
+	$expr = str_replace("\r",'',$expr);
 	return $expr;
 }
 
