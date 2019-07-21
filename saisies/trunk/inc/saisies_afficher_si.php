@@ -316,6 +316,10 @@ function saisies_transformer_condition_afficher_si($condition, $env = null) {
 		. ")?"; // partie operateur + valeur (optionnelle) : fin
 	$regexp = "#$regexp#";
 	if (preg_match_all($regexp, $condition, $tests, PREG_SET_ORDER)) {
+		if (!saisies_afficher_si_secure($condition, $tests)) {
+			spip_log("Afficher_si incorrect. $condition non sécurisée", "saisies"._LOG_CRITIQUE);
+			return '';
+		}
 		foreach ($tests as $test) {
 			$expression = $test[0];
 			$champ = saisies_afficher_si_get_valeur_champ($test['champ'], $env);
@@ -346,6 +350,28 @@ function saisies_transformer_condition_afficher_si($condition, $env = null) {
 	return $condition;
 }
 
+
+/** Vérifie qu'une condition est sécurisée
+ * IE : ne permet pas d'executer n'importe quel code arbitraire.
+ * @param string $condition
+ * @param array $tests tableau des tests parsés
+ * @return bool true si secure / false sinon
+**/
+function saisies_afficher_si_secure($condition, $tests) {
+	$hors_test = array('||','&&','!','(',')');
+	foreach ($tests as $test) {
+		$condition = str_replace($test[0], '', $condition);
+	}
+	foreach ($hors_test as $hors) {
+		$condition = str_replace($hors, '', $condition);
+	}
+	$condition = trim($condition);
+	if ($condition) {// il reste quelque chose > c'est le mal
+		return false;
+	} else {
+		return true;
+	}
+}
 /**
  * Teste une condition d'afficher_si
  * @param string|array champ le champ à tester. Cela peut être :
@@ -431,6 +457,10 @@ function saisies_tester_condition_afficher_si_array($champ, $operateur, $valeur)
 **/
 function saisies_evaluer_afficher_si($condition, $env = null) {
 	$condition = saisies_transformer_condition_afficher_si($condition, $env);
-	eval('$ok = '.$condition.';');
+	if ($condition) {
+		eval('$ok = '.$condition.';');
+	} else {
+		$ok = true;
+	}
 	return $ok;
 }

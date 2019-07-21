@@ -161,6 +161,10 @@
 				0 => false,
 				1 => '!true'
 			),
+			'hack' => array(
+				0 => true,
+				1 => "spip_log('s') || @input_1@=='s')"
+			)
 		);
 		return $essais;
 	}
