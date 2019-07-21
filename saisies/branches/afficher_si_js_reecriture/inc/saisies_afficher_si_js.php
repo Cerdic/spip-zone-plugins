@@ -61,6 +61,7 @@ function saisies_afficher_si_js($condition, $saisies_form = array()) {
 **/
 function saisies_afficher_si_js_champ($champ, $operateur, $valeur, $valeur_numerique, $guillemet, $negation, $saisies_form) {
 	if (!isset($saisies_form[$champ])) {//La saisie conditionnante n'existe pas pour ce formulaire > on laisse tomber
+		spip_log("Afficher_si incorrect. Champ $champ inexistant", "saisies"._LOG_CRITIQUE);
 		return '';
 	}
 	$saisie = $saisies_form[$champ]['saisie'];
