@@ -23,6 +23,10 @@ include_spip('inc/saisies_lister');
 function saisies_afficher_si_js($condition, $saisies_form = array()) {
 	$saisies_form = saisies_lister_par_nom($saisies_form);
 	if ($tests = saisies_parser_condition_afficher_si($condition)) {
+		if (!saisies_afficher_si_secure($condition, $tests)) {
+			spip_log("Afficher_si incorrect. $condition non sécurisée", "saisies"._LOG_CRITIQUE);
+			return '';
+		}
 		foreach ($tests as $test) {
 			$expression = $test[0];
 			$negation = isset($test['negation']) ? $test['negation'] : '' ;
@@ -42,6 +46,13 @@ function saisies_afficher_si_js($condition, $saisies_form = array()) {
 			} else { // et maintenant, on rentre dans le vif du sujet : les champs. On délégue cela à une autre fonction
 				$condition = str_replace($expression, saisies_afficher_si_js_champ($champ, $operateur, $valeur, $valeur_numerique, $guillemet, $negation, $saisies_form), $condition);
 			}
+		}
+	} else {
+		$condition = str_replace(' ', '', $condition);
+		$condition_possible = array("!false", "false", "true", "!true");
+		if (!in_array($condition, $condition_possible)){
+			spip_log("Afficher_si incorrect : $condition", "saisies"._LOG_CRITIQUE);
+			return '';
 		}
 	}
 	return str_replace('"', "&quot;", $condition);
