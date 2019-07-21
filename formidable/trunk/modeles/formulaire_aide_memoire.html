@@ -12,10 +12,18 @@
 	[(#VALEUR{saisie}|=={explication}|non)
 		[(#SET{label, [(#VALEUR|table_valeur{options}|table_valeur{label})]})]
 		[(#SET{label_case, [(#VALEUR|table_valeur{options}|table_valeur{label_case})]})]
+		[(#SET{data, [(#VALEUR|table_valeur{options}|table_valeur{data})]})]
+		[(#SET{datas, [(#VALEUR|table_valeur{options}|table_valeur{datas})]})]
 	]
 	<dl>
 		<dt>@#CLE@</dt>
 		[<dd>(#GET{label}|sinon{#GET{label_case}})</dd>]
+		[<dl style="margin-left:1em">
+			<dd>
+			<dt><:saisies:option_datas_label:></dt>
+			<dd>(#GET{data}|sinon{#GET{datas}|propre})</dd>
+			</dd>
+		</dl>]
 	</dl>
 	</BOUCLE_champs>
 </BOUCLE_formulaire>
