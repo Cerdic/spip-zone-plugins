@@ -48,10 +48,8 @@ function saisies_afficher_si_js($condition, $saisies_form = array()) {
 			}
 		}
 	} else {
-		$condition = str_replace(' ', '', $condition);
-		$condition_possible = array("!false", "false", "true", "!true");
-		if (!in_array($condition, $condition_possible)){
-			spip_log("Afficher_si incorrect : $condition", "saisies"._LOG_CRITIQUE);
+		if (!saisies_afficher_si_secure($condition)) {
+			spip_log("Afficher_si incorrect. $condition non sécurisée", "saisies"._LOG_CRITIQUE);
 			return '';
 		}
 	}
