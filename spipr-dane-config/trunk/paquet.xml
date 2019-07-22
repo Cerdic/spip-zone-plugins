@@ -1,29 +1,29 @@
 <paquet
-    prefix="sdc"
-    categorie="maintenance"
-    version="0.1.7"
-    etat="dev"
-    compatibilite="[3.0.17;3.2.*]"
-    logo="prive/themes/spip/images/sdc-128.png"
-    schema="1.0.0" 
+	prefix="sdc"
+	categorie="maintenance"
+	version="0.1.7"
+	etat="dev"
+	compatibilite="[3.0.17;3.2.*]"
+	logo="prive/themes/spip/images/sdc-128.png"
+	schema="1.0.0" 
 >
 
-    <nom>SPIPr-Dane-Config</nom>
-    <!-- Personnaliser les couleurs, polices de caractère et arrière-plans de SPIPr-Dane-->
-    
-    <auteur>Dominique Lepaisant</auteur>
+	<nom>SPIPr-Dane-Config</nom>
+	<!-- Personnaliser les couleurs, polices de caractère et arrière-plans de SPIPr-Dane-->
 
-    <necessite nom="spipr_dane" compatibilite="[1.0.0;[" />
-    <necessite nom="palette" compatibilite="[4.0.0;[" />
-    <necessite nom="saisies" compatibilite="[3.12.0;[" />
-    <necessite nom="yaml" compatibilite="[2.0.10;[" />
-    
-    <utilise nom="compositions" compatibilite="[3.7.0;[" />
-    <utilise nom="menus" compatibilite="[1.7.0;[" />
+	<auteur>Dominique Lepaisant</auteur>
 
-    <pipeline nom="header_prive" inclure="sdc_pipelines.php" />
-    <pipeline nom="ieconfig_metas" inclure="sdc_ieconfig_metas.php" />	
+	<necessite nom="spipr_dane" compatibilite="[1.0.0;[" />
+	<necessite nom="palette" compatibilite="[4.0.0;[" />
+	<necessite nom="saisies" compatibilite="[3.12.0;[" />
+	<necessite nom="yaml" compatibilite="[2.0.10;[" />
 
-    <menu nom="sdc" titre="sdc:configurer_sdc" parent="menu_squelette" icone="images/sdc-18.png" action="configurer_sdc" />
+	<utilise nom="compositions" compatibilite="[3.7.0;[" />
+	<utilise nom="menus" compatibilite="[1.7.0;[" />
+
+	<pipeline nom="header_prive" inclure="sdc_pipelines.php" />
+	<pipeline nom="ieconfig_metas" inclure="sdc_ieconfig_metas.php" />	
+
+	<menu nom="sdc" titre="sdc:configurer_sdc" parent="menu_squelette" icone="images/sdc-18.png" action="configurer_sdc" />
 
 </paquet>
