@@ -19,7 +19,7 @@
 	<traduire module="objets_service" reference="fr" gestionnaire="salvatore" />
 	<traduire module="objets_services_extras" reference="fr" gestionnaire="salvatore" />
 
-	<necessite nom="saisies" compatibilite="[3.14.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 
 	<pipeline nom="autoriser" inclure="objets_services_extras_autorisations.php" />
 

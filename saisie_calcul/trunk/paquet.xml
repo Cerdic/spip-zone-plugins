@@ -11,5 +11,5 @@
 	<licence>GNU/GPL</licence>
 
 	<pipeline nom="formulaire_fond" inclure="saisie_calcul_pipelines.php" />
-	<necessite nom="saisies" compatibilite="[3.23.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 </paquet>

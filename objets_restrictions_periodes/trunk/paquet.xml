@@ -15,7 +15,7 @@
 
 	<licence>GNU/GPL v3</licence>
 
-	<necessite nom="saisies" compatibilite="[3.14.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="periodes" compatibilite="[1.1.1;]" />
 	<necessite nom="locations_objets_restrictions" compatibilite="[1.2.0;]" />
 	<necessite nom="dates_outils" compatibilite="[1.0.11;]" />

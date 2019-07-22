@@ -17,7 +17,7 @@
 	<licence>GNU/GPL</licence>
 
 	<necessite nom="location_objets" compatibilite="[1.5.2;]" />
-	<necessite nom="saisies" compatibilite="[3.14.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="verifier" compatibilite="[1.8.3;]" />
 
 	<!-- Appels des pipelines -->

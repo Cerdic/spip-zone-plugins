@@ -19,7 +19,7 @@
 	<traduire module="periodes" reference="fr" gestionnaire="salvatore" />
 	<traduire module="periode" reference="fr" gestionnaire="salvatore" />
 
-	<necessite nom="saisies" compatibilite="[3.14.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="dates_outils" compatibilite="[1.0.10;]" />
 
 	<pipeline nom="autoriser" inclure="periodes_autorisations.php" />

@@ -19,7 +19,7 @@
 	<traduire module="disponibilite_date" reference="fr" gestionnaire="salvatore" />
 	<traduire module="objets_disponibilites" reference="fr" gestionnaire="salvatore" />
 
-	<necessite nom="saisies" compatibilite="[3.14.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="verifier" compatibilite="[1.8.3;]" />
 	<necessite nom="dates_outils" compatibilite="[1.0.11;]" />
 

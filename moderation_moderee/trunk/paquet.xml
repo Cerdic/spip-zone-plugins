@@ -19,5 +19,5 @@
 
 	<menu nom="configurer_moderation" titre="moderation:titre" parent="menu_configuration" icone="images/moderation-16.png" />
 	<necessite nom="forum" />
-	<necessite nom="saisies" compatibilite="[3.11.1;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 </paquet>

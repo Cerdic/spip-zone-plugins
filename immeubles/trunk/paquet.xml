@@ -19,7 +19,7 @@
 	<traduire module="immeuble" reference="fr" gestionnaire="salvatore" />
 	<traduire module="immeubles" reference="fr" gestionnaire="salvatore" />
 
-	<necessite nom="saisies" compatibilite="[3.14.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 
 	<pipeline nom="autoriser" inclure="immeubles_autorisations.php" />
 

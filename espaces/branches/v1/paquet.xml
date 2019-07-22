@@ -22,7 +22,7 @@
 	<traduire module="espace" reference="fr" gestionnaire="salvatore" />
 	<traduire module="espaces" reference="fr" gestionnaire="salvatore" />
 
-	<necessite nom="saisies" compatibilite="[3.14.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 
 	<pipeline nom="autoriser" inclure="espaces_autorisations.php" />
 

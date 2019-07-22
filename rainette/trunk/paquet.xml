@@ -25,7 +25,7 @@
 	<pipeline nom="post_chargement_meteo" action="" />
 
 	<necessite nom="cache" compatibilite="[0.3.0;]" />
-	<necessite nom="saisies" compatibilite="[3.12.7;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 	<necessite nom="php" compatibilite="[5.3.0;[" />
 
 	<menu nom="rainette" titre="rainette:titre_menu" parent="menu_squelette" icone="images/rainette-16.png" action="configurer_rainette" />

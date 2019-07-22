@@ -22,7 +22,7 @@
 	<pipeline nom="saisies_construire_formulaire_config" inclure="inc/iextras.php" />
 
 	<necessite nom="cextras" compatibilite="[3.5.2;]" />
-	<necessite nom="saisies" compatibilite="[3.21.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="verifier" compatibilite="[1.0.5;]" />
 	<necessite nom="yaml" compatibilite="[1.5.2;]" />
 

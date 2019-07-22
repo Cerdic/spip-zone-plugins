@@ -30,7 +30,7 @@
 	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="zotspip_pipelines.php" />
 	<pipeline nom="post_boucle" inclure="zotspip_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[3.11.1;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 
 	<menu nom="zotspip" titre="zotspip:zotspip" parent="bando_configuration" icone="images/zotspip-16.png" action="configurer_zotspip" />
 	<menu nom="zitems" titre="zotspip:items_zotero" parent="bando_edition" icone="images/zotspip-16.png" action="zitems" />

@@ -22,7 +22,7 @@
 	<pipeline nom="ieconfig" inclure="taxonomie_ieconfig.php" />
 
 	<necessite nom="cache" compatibilite="[0.3.0;]" />
-	<necessite nom="saisies" compatibilite="[3.12.7;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 	<utilise nom="convertisseur" compatibilite="[0.5.0;]" />
 
 	<genie nom="actualiser_itis" periode="86400" />

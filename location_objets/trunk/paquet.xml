@@ -22,7 +22,7 @@
 	<traduire module="objets_locations_detail" reference="fr" gestionnaire="salvatore" />
 
 
-	<necessite nom="saisies" compatibilite="[3.14.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="verifier" compatibilite="[1.8.3;]" />
 	<necessite nom="prix_objets" compatibilite="[2.3.2;]" />
 	<necessite nom="objets_disponibilites" compatibilite="[1.2.1;]" />

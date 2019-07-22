@@ -24,7 +24,7 @@
 	<pipeline nom="affiche_milieu" inclure="chats_pipelines.php" />
 
 	<!-- facilitons les champs de formulaires -->
-	<necessite nom="saisies" compatibilite="[3.11.1;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 
 	<menu nom="chats" titre="chat:titre_chats" parent="menu_edition" icone="images/chat-16.png" />
 	<menu nom="chat_creer" titre="chat:icone_creer_chat" parent="outils_rapides" icone="images/chat-new-16.png" action="chat_edit" parametres="new=oui" />

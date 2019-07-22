@@ -20,7 +20,7 @@
 	<traduire module="prix_objets_periodes" reference="fr" gestionnaire="salvatore" />
 	<traduire module="po_periode" reference="fr" gestionnaire="salvatore" />
 
-	<necessite nom="saisies" compatibilite="[3.14.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="prix_objets" compatibilite="[2.3.2;]" />
 	<necessite nom="dates_outils" compatibilite="[1.0.10;]" />
 	<necessite nom="periodes" compatibilite="[1.1.2;]" />
