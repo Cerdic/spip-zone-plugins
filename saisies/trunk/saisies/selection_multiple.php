@@ -28,7 +28,7 @@ function selection_multiple_valeurs_acceptables($valeur, $description) {
 			$valeur = array();
 		}
 	}
-	$data = saisies_trouver_data($description);
+	$data = saisies_aplatir_tableau(saisies_trouver_data($description, true));
 	if (isset($valeur['choix_alternatif']) and isset($description['options']['choix_alternatif']) and $description['options']['choix_alternatif'] == 'on') {
 		unset ($valeur['choix_alternatif']);
 	}
