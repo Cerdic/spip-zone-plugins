@@ -25,8 +25,8 @@
 	<!--
 		Exemple de commandes
 		* dependances
-		<necessite nom="saisies" compatibilite="[2.28.0;]" />
-		<utilise nom="saisies" compatibilite="[2.28.0;]" />
+		<necessite nom="saisies" compatibilite="[3.23.2;]" />
+		<utilise nom="saisies" compatibilite="[3.23.2;]" />
 		<lib nom="simplehtmldom" lien="http://chemin_vers_archive.zip" />
 		* pipelines
 		<pipeline nom="autoriser" inclure="#ENV{paquet/prefixe}_autorisations.php" />
@@ -42,7 +42,7 @@
 	-->
 </BOUCLE_si_exemples>[
 (#ENV*{paquet/inserer/paquet}|fabrique_tabulations{1})][
-	<necessite nom="saisies" compatibilite="\[2.28.0;\]" />(#OBJETS|count|oui)[
+	<necessite nom="saisies" compatibilite="\[3.23.2;\]" />(#OBJETS|count|oui)[
 	<necessite nom="roles"   compatibilite="\[1.8.0;\]" />(#OBJETS|objets_options_presentes{#LISTE{table_liens,roles}}|oui)]
 ][	<necessite nom="verifier" compatibilite="\[1.0.6;\]" />(#OBJETS|objets_saisie_presente{date}|oui)]
 [

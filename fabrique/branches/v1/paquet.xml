@@ -1,7 +1,7 @@
 <paquet
 	prefix="fabrique"
 	categorie="outil"
-	version="1.20.11"
+	version="1.20.12"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/fabrique-64.png"
@@ -14,7 +14,7 @@
 	<auteur>Matthieu Marcillaud</auteur>
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[1.42.11;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 
 	<utilise nom="skeleditor" compatibilite="[2.7.1;]" />
 	<utilise nom="coloration_code" compatibilite="[0.6.0;]" />
