@@ -15,7 +15,7 @@
 	<licence>GNU/GPL</licence>
 	<necessite nom="facteur" compatibilite="[3.6.2;]" />
 	<necessite nom="reservation_evenement" compatibilite="[1.29.0;]" />
-	<necessite nom="saisies" compatibilite="[2.28.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 
 	<pipeline nom="autoriser" inclure="reservation_communication_autorisations.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/reservation_communication.php" />

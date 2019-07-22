@@ -19,7 +19,7 @@
 	<necessite nom="produits" compatibilite="[1.1.5;]" />
 	<necessite nom="commandes" compatibilite="[1.7.3;]" />
 	<necessite nom="cextras" compatibilite="[3.7.1;]" />
-	<necessite nom="saisies" compatibilite="[2.28.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="verifier" compatibilite="[1.0.9;]" />
 	
 	<pipeline nom="autoriser" inclure="amappca_autorisations.php" />

@@ -20,7 +20,7 @@
 	<traduire gestionnaire="salvatore" module="paypal" reference="fr" />
 
 	<necessite nom="spip_bonux" compatibilite="[3.0.7;]" />
-	<necessite nom="saisies" compatibilite="[2.28.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<utilise nom="verifier" compatibilite="[0.1.11;]" />
 
 	<pipeline nom="autoriser" inclure="inc/paypal_autoriser.php" /> <!-- autorisations -->

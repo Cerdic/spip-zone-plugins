@@ -21,7 +21,7 @@
 	<pipeline nom="porte_plume_barre_pre_charger" inclure="inserer_modeles_pipelines.php" />
 	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="inserer_modeles_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[2.28.0;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 	<necessite nom="verifier" compatibilite="[0.1.10;[" />
 	<necessite nom="yaml" compatibilite="[1.5.1;[" />
 

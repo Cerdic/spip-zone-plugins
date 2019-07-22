@@ -14,7 +14,7 @@
 	<auteur lien='https://www.mukt.fr'>Mukt</auteur>
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[2.28.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="spip_bonux" compatibilite="[3.4.6;]" />
 	<utilise nom="contacts" compatibilite="[4.0.0;]" />
 	<utilise nom="coordonnees" compatibilite="[2.3.28;]" />

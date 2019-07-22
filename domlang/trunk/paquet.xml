@@ -17,7 +17,7 @@
 
 	<pipeline nom="affiche_milieu" inclure="domlang_fonctions.php" />
 
-	<necessite nom="saisies" compatibilite="[2.28.0;[" /><!-- Juste pour la config. Si qqn·e a le temps de la passer en pur html, le faire ! -->
+	<necessite nom="saisies" compatibilite="[3.23.2;[" /><!-- Juste pour la config. Si qqn·e a le temps de la passer en pur html, le faire ! -->
 	<necessite nom="php" compatibilite="[5.4.0;[" />
 
 	<utilise nom="urls" />

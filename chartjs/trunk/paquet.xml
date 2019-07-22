@@ -12,7 +12,7 @@
 	<auteur lien="http://www.erational.org">erational (mise en plugin)</auteur>
 	<licence>MIT license</licence>
 
-	<necessite nom="saisies" compatibilite="[2.28.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 
 	<lib nom="chartjs" lien="https://github.com/chartjs/Chart.js/releases/download/v2.6.0/Chart.js.zip" />
 

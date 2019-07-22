@@ -13,7 +13,7 @@
 	<auteur>Rainer Müller</auteur>
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[2.28.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="reservation_evenement" compatibilite="[1.27.0;]" />
 	<necessite nom="bank" compatibilite="[3.5.9;]" />
 	<necessite nom="prix" compatibilite="[0.1.15;]" />

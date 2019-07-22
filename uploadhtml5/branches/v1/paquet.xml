@@ -17,7 +17,7 @@
 
 	<traduire module="uploadhtml5" reference="fr" gestionnaire="salvatore" />
 
-	<necessite nom="saisies" compatibilite="[2.28.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="spip_bonux" compatibilite="[3.2.0;]" />
 
 	<pipeline nom="jquery_plugins" inclure="uploadhtml5_pipelines.php" />

@@ -15,5 +15,5 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 
 	<necessite nom="spip_bonux" compatibilite="[3.2.0;]" />
-	<necessite nom="saisies" compatibilite="[2.28.0;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 </paquet>

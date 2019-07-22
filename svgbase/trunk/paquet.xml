@@ -24,8 +24,8 @@
 	<!--
 		Exemple de commandes
 		* dependances
-		<necessite nom="saisies" compatibilite="[2.4.0;]" />
-		<utilise nom="saisies" compatibilite="[2.4.0;]" />
+		<necessite nom="saisies" compatibilite="[3.23.2;]" />
+		<utilise nom="saisies" compatibilite="[3.23.2;]" />
 		<lib nom="simplehtmldom" lien="http://chemin_vers_archive.zip" />
 		* pipelines
 		<pipeline nom="autoriser" inclure="svgbase_autorisations.php" />
@@ -40,7 +40,7 @@
 		<onglet nom="svgbase" titre="svgbase:svgbase_titre" parent="configuration" icone="images/svgbase-24.png" />
 	-->
 
-	<necessite nom="saisies" compatibilite="[2.4.0;]" /> 
+	<necessite nom="saisies" compatibilite="[3.23.2;]" /> 
 
 
 	<pipeline nom="autoriser" inclure="svgbase_autorisations.php" /> 

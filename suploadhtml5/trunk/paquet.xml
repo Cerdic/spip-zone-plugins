@@ -15,7 +15,7 @@
 
 	<licence>GNU/GPL</licence>
 	<necessite nom="uploadhtml5" compatibilite="[1.6.0;]" />
-	<necessite nom="saisies" compatibilite="[2.28.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 
 	<pipeline nom="autoriser" inclure="suploadhtml5_autorisations.php" />
 

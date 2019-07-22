@@ -14,6 +14,6 @@
 
 	<licence>GNU/GPL</licence>
 	<necessite nom="memoization" compatibilite="[1.7.0;]" />
-	<necessite nom="saisies" compatibilite="[2.8.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="php" compatibilite="[5.4.0;]" /><!-- + php:curl -->
 </paquet>

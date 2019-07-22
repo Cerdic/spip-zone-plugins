@@ -27,7 +27,7 @@
 	<utilise nom="livraison" compatibilite="[2.6.0;["/>
 
 	<necessite nom="produits" compatibilite="[1.1.25;["/>
-	<necessite nom="saisies" compatibilite="[2.28.0;["/>
+	<necessite nom="saisies" compatibilite="[3.23.2;["/>
 
 	<menu nom="gerer_stocks" titre="stocks:gerer_stocks_titre" parent="menu_edition" icone="images/stocks-16.png" />
 </paquet>

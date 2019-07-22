@@ -2,7 +2,7 @@
 	<nom>Notifications avancées</nom>
 	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.4.3</version>
+	<version>0.4.4</version>
 	<version_base>0.1.0</version_base>
 	<etat>test</etat>
 	<description>Permet une gestion fine des notifications à envoyer avec possibilité de s'inscrire/se désinscrire et de choisir les modes d'envois.</description>
@@ -48,7 +48,7 @@
 	<nom>Notifications avancées</nom>
 	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.4.3</version>
+	<version>0.4.4</version>
 	<version_base>0.1.0</version_base>
 	<etat>test</etat>
 	<description>Permet une gestion fine des notifications à envoyer avec possibilité de s'inscrire/se désinscrire et de choisir les modes d'envois.</description>
@@ -85,7 +85,7 @@
 
 	<necessite id="spip_bonux" version="[3.4.6;]" />
 	<necessite id="queue" version="[0.6.6;]" />
-	<necessite id="saisies" version="[1.42.11;]" />
+	<necessite id="saisies" version="[3.23.2;]" />
 	<necessite id="yaml" version="[1.5.3;]" />
 	<necessite id="facteur" version="[3.6.2;]"/>
 </plugin>

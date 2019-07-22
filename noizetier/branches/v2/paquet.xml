@@ -38,7 +38,7 @@
 	<pipeline nom="formulaire_fond" inclure="noizetier_pipelines.php" />
 
 	<necessite nom="yaml" compatibilite="[1.5.2;[" />
-	<necessite nom="saisies" compatibilite="[2.28.0;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 	<necessite nom="verifier" compatibilite="[1.0.5;[" />
 
 	<utilise nom="compositions" compatibilite="[3.3.0;[" />

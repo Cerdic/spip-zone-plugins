@@ -22,7 +22,7 @@
 	<necessite nom="agenda" compatibilite="[3.16.0;[" />
 	<necessite nom="icalendar" compatibilite="[0.4.4;[" />
 	<necessite nom="cextras" compatibilite="[3.0.5;[" />
-	<necessite nom="saisies" compatibilite="[2.28.0;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 	<necessite nom="verifier" compatibilite="[1.1.0;[" />
 
 	<utilise nom="corbeille" compatibilite="[3.1.1;[" />

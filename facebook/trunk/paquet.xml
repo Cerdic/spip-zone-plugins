@@ -24,7 +24,7 @@
 	<pipeline nom="autoriser" inclure="facebook_autorisations.php" />
 	<pipeline nom="affiche_gauche" inclure="facebook_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[2.28.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="connecteur" compatibilite="[1.0.0;]" />
 
 	<menu nom="facebook_poster" titre="facebook:facebook_titre" parent="menu_publication" icone="images/facebook-16.png" />

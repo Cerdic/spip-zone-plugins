@@ -3,7 +3,7 @@
 	<slogan>Module de paiement pour Formidable</slogan>
 	<auteur>Arnault Pachot, Emmanuel Nurit</auteur>
 	<licence>GPL v3</licence>
-	<version>0.4.5</version>
+	<version>0.4.6</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
 	<description>Champs additionnels de paiement en ligne pour le plugin Formidable
@@ -40,7 +40,7 @@ _ Exemples sur le site de [l'Association Point-C&oelig;ur->http://france.pointsc
 	<slogan>Module de paiement pour Formidable</slogan>
 	<auteur>Arnault Pachot, Emmanuel Nurit</auteur>
 	<licence>GPL v3</licence>
-	<version>0.4.5</version>
+	<version>0.4.6</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
 	<description>Champs additionnels de paiement en ligne pour le plugin Formidable
@@ -64,7 +64,7 @@ _ Exemples sur le site de [l'Association Point-C&oelig;ur->http://france.pointsc
 	</pipeline>
 
 	<necessite id="spip_bonux" version="[3.4.6;]" />
-	<necessite id="saisies" version="[2.28.0;]" />
+	<necessite id="saisies" version="[3.23.2;]" />
 	<necessite id="verifier" version="[1.7.1;]" />
 	<necessite id="yaml" version="[1.5.3;]" />
 	<necessite id="facteur" version="[3.6.2;]" />

@@ -18,7 +18,7 @@
 	<auteur lien='https://www.ldd.fr'>Les Développements Durables</auteur>
 
 	<licence>GNU/GPL</licence>
-	<necessite nom="saisies" compatibilite="[2.28.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<lib nom="sticky-kit" lien="https://github.com/leafo/sticky-kit/archive/v1.1.2.zip" />
 
 	<pipeline nom="autoriser" inclure="chapitres_autorisations.php" />

@@ -47,7 +47,7 @@
 	<pipeline nom="openid_inscrire_redirect" inclure="inscription3_pipelines.php" />
 	<pipeline nom="post_edition" inclure="inscription3_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[2.28.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="cextras" compatibilite="[3.4.1;]" />
 	<necessite nom="verifier" compatibilite="[1.0.6;]" />
 

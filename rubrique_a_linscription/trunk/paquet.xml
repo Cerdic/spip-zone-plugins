@@ -21,7 +21,7 @@
 
 	<menu nom="configurer_rubrique_a_linscription" titre="rubrique_a_linscription:rubrique_a_linscription" parent="bando_configuration" icone="images/rubrique_a_linscription-12.png" action="configurer_rubrique_a_linscription" />
 
-	<necessite nom="saisies" compatibilite="[2.28.0;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 	<necessite nom="duplicator" compatibilite="[1.5.9;[" />
 
 </paquet>

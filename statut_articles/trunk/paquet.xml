@@ -15,7 +15,7 @@
 
 	<pipeline nom="autoriser" inclure="statut_articles_autorisations.php" />
 
-	<necessite nom="saisies" compatibilite="[2.28.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<menu nom="changer_statut_articles" titre="statut_articles:menu_changer_statuts" parent="menu_publication" icone="images/statut_articles-16.png" action="changer_statut_articles" />
 
 </paquet>

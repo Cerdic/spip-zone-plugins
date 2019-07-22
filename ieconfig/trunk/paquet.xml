@@ -22,7 +22,7 @@
 	<pipeline nom="ieconfig_metas" inclure="ieconfig_pipelines.php" />
 	<pipeline nom="ieconfig" inclure="ieconfig_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[2.28.0;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 	<necessite nom="verifier" compatibilite="[1.0.0;[" />
 	<necessite nom="yaml" compatibilite="[1.5.3;[" />
 

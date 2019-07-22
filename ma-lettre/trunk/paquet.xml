@@ -14,7 +14,7 @@
 	<auteur lien="http://www.erational.org">erational</auteur>
 	<licence>GPL v3</licence>
 
-	<necessite nom="saisies" compatibilite="[2.28.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/malettre.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/malettre.php" />

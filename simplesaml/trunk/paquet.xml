@@ -21,6 +21,6 @@
 	<pipeline nom="preparer_composer_json" inclure="simplesaml_pipelines.php" />
 	<pipeline nom="trig_auth_trace" inclure="simplesaml_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[2.28.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="composer" compatibilite="[1.0.0;1.*.*]" />
 </paquet>

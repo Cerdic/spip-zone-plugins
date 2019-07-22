@@ -16,7 +16,7 @@
 	<licence>GNU/GPL</licence>
 	
 
-	<necessite nom="saisies" compatibilite="[2.28.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="cextras"  compatibilite="[3.11.3;[" />
 
 	<pipeline nom="autoriser" inclure="swiper_autorisations.php" />

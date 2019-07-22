@@ -12,7 +12,7 @@
 	<auteur lien='http://websimple.be/'>Rainer Müller</auteur>
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[2.28.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="pays" compatibilite="[3.0.11;]" />
 	<necessite nom="continents" compatibilite="[1.0.2;]" />
 	<necessite nom="cextras" compatibilite="[3.7.1;]" />

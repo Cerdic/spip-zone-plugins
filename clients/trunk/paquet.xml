@@ -17,7 +17,7 @@
 
 	<pipeline nom="header_prive" inclure="clients_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[2.28.0;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 	<necessite nom="contacts" compatibilite="[3.1.1;[" />
 	<necessite nom="coordonnees" compatibilite="[2.3.11;[" />
 

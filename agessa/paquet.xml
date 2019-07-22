@@ -16,6 +16,6 @@
 
 	<menu nom="agessa" titre="agessa:titre_agessa" parent="menu_edition" icone="images/agessa-16.png" action="agessa" />
 
-	<necessite nom="saisies" compatibilite="[2.28.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="fpdf" compatibilite="[1.0.0;]" /> 
 </paquet>

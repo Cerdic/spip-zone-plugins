@@ -14,7 +14,7 @@
 
 	<licence>GNU/GPL v3</licence>
 	<necessite nom="mesfavoris" compatibilite="[2.5.2;]" />
-	<necessite nom="saisies" compatibilite="[2.28.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 
 	<pipeline nom="autoriser" inclure="mesfavoris_collections_autorisations.php" /> 
 
