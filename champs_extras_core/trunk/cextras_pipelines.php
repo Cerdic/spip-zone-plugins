@@ -314,10 +314,14 @@ function cextras_verifier_saisie($saisie, $valeur, &$normaliser = null, $depuis_
 	}
 
 	// verifier obligatoire
+	// si la verification porte sur un entier, on teste la longueur de la chaîne afin de laisser passer la valeur 0
 	if (
 		isset($saisie['options']['obligatoire'])
-		and $saisie['options']['obligatoire']
-		and !$valeur
+		and $saisie['options']['obligatoire'] and (
+			(!isset($saisie['verifier']) and !$valeur)
+			or ((isset($saisie['verifier']['type']) and !$saisie['verifier']['type'] == 'entier') and !$valeur)
+			or ((isset($saisie['verifier']['type']) and $saisie['verifier']['type'] == 'entier') and !strlen($valeur))
+		)
 	) {
 		return _T('info_obligatoire');
 	}
