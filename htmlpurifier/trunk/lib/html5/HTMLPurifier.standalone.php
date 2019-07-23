@@ -39,7 +39,8 @@
  */
 
 /*
-    HTML Purifier 5.0.0 - Standards Compliant HTML Filtering
+    HTML Purifier 4.11.0 - Standards Compliant HTML Filtering
+    Copyright (C) 2006-2008 Edward Z. Yang
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -77,12 +78,12 @@ class HTMLPurifier
      * Version of HTML Purifier.
      * @type string
      */
-    public $version = '5.0.0';
+    public $version = '4.11.0';
 
     /**
      * Constant with version of HTML Purifier.
      */
-    const VERSION = '5.0.0';
+    const VERSION = '4.11.0';
 
     /**
      * Global configuration object.
@@ -259,12 +260,16 @@ class HTMLPurifier
     public function purifyArray($array_of_html, $config = null)
     {
         $context_array = array();
-        foreach ($array_of_html as $key => $html) {
-            $array_of_html[$key] = $this->purify($html, $config);
+        foreach($array_of_html as $key=>$value){
+            if (is_array($value)) {
+                $array[$key] = $this->purifyArray($value, $config);
+            } else {
+                $array[$key] = $this->purify($value, $config);
+            }
             $context_array[$key] = $this->context;
         }
         $this->context = $context_array;
-        return $array_of_html;
+        return $array;
     }
 
     /**
@@ -766,9 +771,7 @@ class HTMLPurifier_AttrTypes
         // pseudo-types, must be instantiated via shorthand
         $this->info['Enum']    = new HTMLPurifier_AttrDef_Enum();
         $this->info['Bool']    = new HTMLPurifier_AttrDef_HTML_Bool();
-        $this->info['Float']   = new HTMLPurifier_AttrDef_Float();
 
-        
         $this->info['CDATA']    = new HTMLPurifier_AttrDef_Text();
         $this->info['ID']       = new HTMLPurifier_AttrDef_HTML_ID();
         $this->info['Length']   = new HTMLPurifier_AttrDef_HTML_Length();
@@ -944,12 +947,6 @@ class HTMLPurifier_AttrValidator
                     $config,
                     $context
                 );
-            } elseif ( in_array(substr($attr_key,0,5), array("data-", "aria-")) ) {
-                $result = $defs[substr($attr_key,0,5)]->validate(
-                    $value,
-                    $config,
-                    $context
-                );                    
             } else {
                 // system never heard of the attribute? DELETE!
                 $result = false;
@@ -1425,15 +1422,25 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
             array(
                 new HTMLPurifier_AttrDef_CSS_Length('0'),
                 new HTMLPurifier_AttrDef_CSS_Percentage(true),
-                new HTMLPurifier_AttrDef_Enum(array('auto'))
+                new HTMLPurifier_AttrDef_Enum(array('auto', 'initial', 'inherit'))
+            )
+        );
+        $trusted_min_wh = new HTMLPurifier_AttrDef_CSS_Composite(
+            array(
+                new HTMLPurifier_AttrDef_CSS_Length('0'),
+                new HTMLPurifier_AttrDef_CSS_Percentage(true),
+                new HTMLPurifier_AttrDef_Enum(array('initial', 'inherit'))
+            )
+        );
+        $trusted_max_wh = new HTMLPurifier_AttrDef_CSS_Composite(
+            array(
+                new HTMLPurifier_AttrDef_CSS_Length('0'),
+                new HTMLPurifier_AttrDef_CSS_Percentage(true),
+                new HTMLPurifier_AttrDef_Enum(array('none', 'initial', 'inherit'))
             )
         );
         $max = $config->get('CSS.MaxImgLength');
 
-        $this->info['min-width'] =
-        $this->info['max-width'] =
-        $this->info['min-height'] =
-        $this->info['max-height'] =
         $this->info['width'] =
         $this->info['height'] =
             $max === null ?
@@ -1449,6 +1456,38 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
                     ),
                     // For everyone else:
                     $trusted_wh
+                );
+        $this->info['min-width'] =
+        $this->info['min-height'] =
+            $max === null ?
+                $trusted_min_wh :
+                new HTMLPurifier_AttrDef_Switch(
+                    'img',
+                    // For img tags:
+                    new HTMLPurifier_AttrDef_CSS_Composite(
+                        array(
+                            new HTMLPurifier_AttrDef_CSS_Length('0', $max),
+                            new HTMLPurifier_AttrDef_Enum(array('initial', 'inherit'))
+                        )
+                    ),
+                    // For everyone else:
+                    $trusted_min_wh
+                );
+        $this->info['max-width'] =
+        $this->info['max-height'] =
+            $max === null ?
+                $trusted_max_wh :
+                new HTMLPurifier_AttrDef_Switch(
+                    'img',
+                    // For img tags:
+                    new HTMLPurifier_AttrDef_CSS_Composite(
+                        array(
+                            new HTMLPurifier_AttrDef_CSS_Length('0', $max),
+                            new HTMLPurifier_AttrDef_Enum(array('none', 'initial', 'inherit'))
+                        )
+                    ),
+                    // For everyone else:
+                    $trusted_max_wh
                 );
 
         $this->info['text-decoration'] = new HTMLPurifier_AttrDef_CSS_TextDecoration();
@@ -1771,7 +1810,7 @@ class HTMLPurifier_Config
      * HTML Purifier's version
      * @type string
      */
-    public $version = '5.0.0';
+    public $version = '4.11.0';
 
     /**
      * Whether or not to automatically finalize
@@ -2640,7 +2679,7 @@ class HTMLPurifier_Config
             // zip(tail(trace), trace) -- but PHP is not Haskell har har
             for ($i = 0, $c = count($trace); $i < $c - 1; $i++) {
                 // XXX this is not correct on some versions of HTML Purifier
-                if ($trace[$i + 1]['class'] === 'HTMLPurifier_Config') {
+                if (isset($trace[$i + 1]['class']) && $trace[$i + 1]['class'] === 'HTMLPurifier_Config') {
                     continue;
                 }
                 $frame = $trace[$i];
@@ -2771,7 +2810,7 @@ class HTMLPurifier_ConfigSchema
      * @param string $key Name of directive
      * @param mixed $default Default value of directive
      * @param string $type Allowed type of the directive. See
-     *      HTMLPurifier_DirectiveDef::$type for allowed values
+     *      HTMLPurifier_VarParser::$types for allowed values
      * @param bool $allow_null Whether or not to allow null values
      */
     public function add($key, $default, $type, $allow_null)
@@ -3550,7 +3589,17 @@ class HTMLPurifier_DoctypeRegistry
         if (!empty($doctype)) {
             return $doctype;
         }
-        $doctype="html";
+        // backwards-compatibility
+        if ($config->get('HTML.XHTML')) {
+            $doctype = 'XHTML 1.0';
+        } else {
+            $doctype = 'HTML 4.01';
+        }
+        if ($config->get('HTML.Strict')) {
+            $doctype .= ' Strict';
+        } else {
+            $doctype .= ' Transitional';
+        }
         return $doctype;
     }
 }
@@ -4561,7 +4610,7 @@ class HTMLPurifier_EntityParser
         $entity = $matches[0];
         $hex_part = @$matches[1];
         $dec_part = @$matches[2];
-        $named_part = empty($matches[3]) ? @$matches[4] : $matches[3];
+        $named_part = empty($matches[3]) ? (empty($matches[4]) ? "" : $matches[4]) : $matches[3];
         if ($hex_part !== NULL && $hex_part !== "") {
             return HTMLPurifier_Encoder::unichr(hexdec($hex_part));
         } elseif ($dec_part !== NULL && $dec_part !== "") {
@@ -6265,11 +6314,8 @@ class HTMLPurifier_HTMLModuleManager
         // setup basic modules
         $common = array(
             'CommonAttributes', 'Text', 'Hypertext', 'List',
-            'Presentation', 'Edits', 'Bdo', 'Tables', 'Image',
+            'Presentation', 'Edit', 'Bdo', 'Tables', 'Image',
             'StyleAttribute',
-            // HTML5
-            'Address', 'Audio', 'Figure', 'Hgroup', 'Interactive', 'Picture', 'Progress', 'Sections', 'Source', 'Time', 'Track', 'Video',
-            
             // Unsafe:
             'Scripting', 'Object', 'Forms',
             // Sorta legacy, but present in strict:
@@ -6281,14 +6327,57 @@ class HTMLPurifier_HTMLModuleManager
 
         // setup basic doctypes
         $this->doctypes->register(
-            'html', // HTML5
+            'HTML 4.01 Transitional',
             false,
             array_merge($common, $transitional, $non_xml),
             array('Tidy_Transitional', 'Tidy_Proprietary'),
-            array()
+            array(),
+            '-//W3C//DTD HTML 4.01 Transitional//EN',
+            'http://www.w3.org/TR/html4/loose.dtd'
         );
 
-   
+        $this->doctypes->register(
+            'HTML 4.01 Strict',
+            false,
+            array_merge($common, $non_xml),
+            array('Tidy_Strict', 'Tidy_Proprietary', 'Tidy_Name'),
+            array(),
+            '-//W3C//DTD HTML 4.01//EN',
+            'http://www.w3.org/TR/html4/strict.dtd'
+        );
+
+        $this->doctypes->register(
+            'XHTML 1.0 Transitional',
+            true,
+            array_merge($common, $transitional, $xml, $non_xml),
+            array('Tidy_Transitional', 'Tidy_XHTML', 'Tidy_Proprietary', 'Tidy_Name'),
+            array(),
+            '-//W3C//DTD XHTML 1.0 Transitional//EN',
+            'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'
+        );
+
+        $this->doctypes->register(
+            'XHTML 1.0 Strict',
+            true,
+            array_merge($common, $xml, $non_xml),
+            array('Tidy_Strict', 'Tidy_XHTML', 'Tidy_Strict', 'Tidy_Proprietary', 'Tidy_Name'),
+            array(),
+            '-//W3C//DTD XHTML 1.0 Strict//EN',
+            'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'
+        );
+
+        $this->doctypes->register(
+            'XHTML 1.1',
+            true,
+            // Iframe is a real XHTML 1.1 module, despite being
+            // "transitional"!
+            array_merge($common, $xml, array('Ruby', 'Iframe')),
+            array('Tidy_Strict', 'Tidy_XHTML', 'Tidy_Proprietary', 'Tidy_Strict', 'Tidy_Name'), // Tidy_XHTML1_1
+            array(),
+            '-//W3C//DTD XHTML 1.1//EN',
+            'http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'
+        );
+
     }
 
     /**
@@ -9848,34 +9937,34 @@ class HTMLPurifier_UnitConverter
 class HTMLPurifier_VarParser
 {
 
-    const STRING = 1;
+    const C_STRING = 1;
     const ISTRING = 2;
     const TEXT = 3;
     const ITEXT = 4;
-    const INT = 5;
-    const FLOAT = 6;
-    const BOOL = 7;
+    const C_INT = 5;
+    const C_FLOAT = 6;
+    const C_BOOL = 7;
     const LOOKUP = 8;
     const ALIST = 9;
     const HASH = 10;
-    const MIXED = 11;
+    const C_MIXED = 11;
 
     /**
      * Lookup table of allowed types. Mainly for backwards compatibility, but
      * also convenient for transforming string type names to the integer constants.
      */
     public static $types = array(
-        'string' => self::STRING,
+        'string' => self::C_STRING,
         'istring' => self::ISTRING,
         'text' => self::TEXT,
         'itext' => self::ITEXT,
-        'int' => self::INT,
-        'float' => self::FLOAT,
-        'bool' => self::BOOL,
+        'int' => self::C_INT,
+        'float' => self::C_FLOAT,
+        'bool' => self::C_BOOL,
         'lookup' => self::LOOKUP,
         'list' => self::ALIST,
         'hash' => self::HASH,
-        'mixed' => self::MIXED
+        'mixed' => self::C_MIXED
     );
 
     /**
@@ -9883,7 +9972,7 @@ class HTMLPurifier_VarParser
      * allowed value lists.
      */
     public static $stringTypes = array(
-        self::STRING => true,
+        self::C_STRING => true,
         self::ISTRING => true,
         self::TEXT => true,
         self::ITEXT => true,
@@ -9915,7 +10004,7 @@ class HTMLPurifier_VarParser
         // These are basic checks, to make sure nothing horribly wrong
         // happened in our implementations.
         switch ($type) {
-            case (self::STRING):
+            case (self::C_STRING):
             case (self::ISTRING):
             case (self::TEXT):
             case (self::ITEXT):
@@ -9926,17 +10015,17 @@ class HTMLPurifier_VarParser
                     $var = strtolower($var);
                 }
                 return $var;
-            case (self::INT):
+            case (self::C_INT):
                 if (!is_int($var)) {
                     break;
                 }
                 return $var;
-            case (self::FLOAT):
+            case (self::C_FLOAT):
                 if (!is_float($var)) {
                     break;
                 }
                 return $var;
-            case (self::BOOL):
+            case (self::C_BOOL):
                 if (!is_bool($var)) {
                     break;
                 }
@@ -9960,7 +10049,7 @@ class HTMLPurifier_VarParser
                     }
                 }
                 return $var;
-            case (self::MIXED):
+            case (self::C_MIXED):
                 return $var;
             default:
                 $this->errorInconsistent(get_class($this), $type);
@@ -16610,39 +16699,74 @@ class HTMLPurifier_HTMLModule_CommonAttributes extends HTMLPurifier_HTMLModule
         'Core' => array(
             0 => array('Style'),
             // 'xml:space' => false,
-            'contenteditable' => 'Bool',
-            'draggable' => 'Bool',
-            'hidden' => 'Bool',
-
             'class' => 'Class',
             'id' => 'ID',
             'title' => 'CDATA',
-            'accesskey' => 'Character',            
-//             'tabindex' => 'Number', // BUG : with it textarea disappear.. 
-            
-            // https://www.w3.org/TR/html5/single-page.html#biblio-wai-aria-11
-            'role' => 'Enum#alert,alertdialog,application,article,banner,button,cell,checkbox,columnheader,combobox,complementary,contentinfo,definition,dialog,directory,document,feed,figure,form,grid,gridcell,group,heading,img,link,list,listbox,listitem,log,main,marquee,math,menubar,navigation,none,note,option,presentation,progressbar,radio,radiogroup,region,row,rowgroup,rowheader,scrollbar,search,searchbox,separator,slider,spinbutton,status,switch,tab,table,tablist,tabpanel,term,textbox,timer,toolbar,tooltip,tree,treegrid,treeitem',
-            'aria-' => 'CDATA',
-            
-            // https://www.w3.org/TR/microdata/
-            'itemid' => 'ID',
-            'itemprop' => 'CDATA',            
-            'itemscope' => 'Bool#itemscope',            
-            'itemtype' => 'URI',            
-            
-            // https://www.w3.org/TR/html5/single-page.html#attr-data-*
-            'data-' => 'CDATA',
         ),
         'Lang' => array(),
         'I18N' => array(
             0 => array('Lang'), // proprietary, for xml:lang/lang
-            'spellcheck' => 'Enum#yes,no',
-            'translate' => 'Enum#yes,no',            
         ),
         'Common' => array(
             0 => array('Core', 'I18N')
         )
     );
+}
+
+
+
+
+
+/**
+ * XHTML 1.1 Edit Module, defines editing-related elements. Text Extension
+ * Module.
+ */
+class HTMLPurifier_HTMLModule_Edit extends HTMLPurifier_HTMLModule
+{
+
+    /**
+     * @type string
+     */
+    public $name = 'Edit';
+
+    /**
+     * @param HTMLPurifier_Config $config
+     */
+    public function setup($config)
+    {
+        $contents = 'Chameleon: #PCDATA | Inline ! #PCDATA | Flow';
+        $attr = array(
+            'cite' => 'URI',
+            // 'datetime' => 'Datetime', // not implemented
+        );
+        $this->addElement('del', 'Inline', $contents, 'Common', $attr);
+        $this->addElement('ins', 'Inline', $contents, 'Common', $attr);
+    }
+
+    // HTML 4.01 specifies that ins/del must not contain block
+    // elements when used in an inline context, chameleon is
+    // a complicated workaround to acheive this effect
+
+    // Inline context ! Block context (exclamation mark is
+    // separator, see getChildDef for parsing)
+
+    /**
+     * @type bool
+     */
+    public $defines_child_def = true;
+
+    /**
+     * @param HTMLPurifier_ElementDef $def
+     * @return HTMLPurifier_ChildDef_Chameleon
+     */
+    public function getChildDef($def)
+    {
+        if ($def->content_model_type != 'chameleon') {
+            return false;
+        }
+        $value = explode('!', $def->content_model);
+        return new HTMLPurifier_ChildDef_Chameleon($value[0], $value[1]);
+    }
 }
 
 
@@ -16746,7 +16870,6 @@ class HTMLPurifier_HTMLModule_Forms extends HTMLPurifier_HTMLModule
                 'method' => 'Enum#get,post',
                 // really ContentType, but these two are the only ones used today
                 'enctype' => 'Enum#application/x-www-form-urlencoded,multipart/form-data',
-                'novalidate' => 'Bool#novalidate',
             )
         );
         $form->excludes = array('form' => true);
@@ -16757,38 +16880,18 @@ class HTMLPurifier_HTMLModule_Forms extends HTMLPurifier_HTMLModule
             'Empty',
             'Common',
             array(
-                'autofocus' => 'Bool#autofocus',
-                'autocomplete' => 'Text',
-                'form' => 'ID',   
-                'list' => 'ID',
-                'height' => 'Number',
-                'width' => 'Number',
-                'min' => 'Text',
-                'max' => 'Text',
-                'multiple' => 'Bool#multiple',
-                'placeholder' => 'Text',
-                'pattern' => 'CDATA',
-                'required' => 'Bool#required',
-                'step' => 'Number',
-                'dirname' => 'CDATA',
-                
-                'formaction' => 'URI',
-                'formenctype' => 'Enum#application/x-www-form-urlencoded,multipart/form-data',
-                'formmethod' => 'Enum#get,post',
-                'formnovalidate' => 'Bool#novalidate',
-                'formtarget' => 'Enum#_blank,_self',
-                
                 'accept' => 'ContentTypes',
+                'accesskey' => 'Character',
                 'alt' => 'Text',
                 'checked' => 'Bool#checked',
                 'disabled' => 'Bool#disabled',
                 'maxlength' => 'Number',
-                'minlength' => 'Number',                
                 'name' => 'CDATA',
                 'readonly' => 'Bool#readonly',
                 'size' => 'Number',
                 'src' => 'URI#embedded',
-                'type' => 'Enum#text,password,checkbox,button,radio,submit,reset,file,hidden,image,tel,search,url,email,date,time,number,range,color',
+                'tabindex' => 'Number',
+                'type' => 'Enum#text,password,checkbox,button,radio,submit,reset,file,hidden,image',
                 'value' => 'CDATA',
             )
         );
@@ -16800,14 +16903,11 @@ class HTMLPurifier_HTMLModule_Forms extends HTMLPurifier_HTMLModule
             'Required: optgroup | option',
             'Common',
             array(
-                'autofocus' => 'Bool#autofocus',
-                'form' => 'ID',
-                'required' => 'Bool#required',
-
                 'disabled' => 'Bool#disabled',
                 'multiple' => 'Bool#multiple',
                 'name' => 'CDATA',
                 'size' => 'Number',
+                'tabindex' => 'Number',
             )
         );
 
@@ -16833,22 +16933,13 @@ class HTMLPurifier_HTMLModule_Forms extends HTMLPurifier_HTMLModule
             'Optional: #PCDATA',
             'Common',
             array(
-                'autofocus' => 'Bool#autofocus',
-                
-//                 'maxlength' => 'Number', // BUG : with it textarea disappear..
-//                 'minlength' => 'Number', // BUG : with it textarea disappear..
-                'wrap' => 'Enum#hard,soft',
-                
-                'placeholder' => 'Text',
-                'form' => 'ID',
-
+                'accesskey' => 'Character',
                 'cols*' => 'Number',
                 'disabled' => 'Bool#disabled',
                 'name' => 'CDATA',
                 'readonly' => 'Bool#readonly',
                 'rows*' => 'Number',
-                'required' => 'Bool#required',
-                
+                'tabindex' => 'Number',
             )
         );
         $textarea->attr_transform_pre[] = new HTMLPurifier_AttrTransform_Textarea();
@@ -16859,17 +16950,10 @@ class HTMLPurifier_HTMLModule_Forms extends HTMLPurifier_HTMLModule
             'Optional: #PCDATA | Heading | List | Block | Inline',
             'Common',
             array(
-                'autofocus' => 'Bool#autofocus',
-                'form' => 'ID',
-
-                'formaction' => 'URI',
-                'formenctype' => 'Enum#application/x-www-form-urlencoded,multipart/form-data',
-                'formmethod' => 'Enum#get,post',
-                'formnovalidate' => 'Bool#novalidate',
-                'formtarget' => 'Enum#_blank,_self',                
-                
+                'accesskey' => 'Character',
                 'disabled' => 'Bool#disabled',
                 'name' => 'CDATA',
+                'tabindex' => 'Number',
                 'type' => 'Enum#button,submit,reset',
                 'value' => 'CDATA',
             )
@@ -16894,17 +16978,7 @@ class HTMLPurifier_HTMLModule_Forms extends HTMLPurifier_HTMLModule
         // indicating it yet.
 
         // This is HIGHLY user-unfriendly; we need a custom child-def for this
-        $this->addElement(
-            'fieldset',
-            'Form',
-            'Custom: (#WS?,legend,(Flow|#PCDATA)*)',
-            'Common',
-            array(
-                'form' => 'ID',
-                'disabled' => 'Bool#disabled',
-                
-            )
-        );
+        $this->addElement('fieldset', 'Form', 'Custom: (#WS?,legend,(Flow|#PCDATA)*)', 'Common');
 
         $label = $this->addElement(
             'label',
@@ -16912,8 +16986,8 @@ class HTMLPurifier_HTMLModule_Forms extends HTMLPurifier_HTMLModule
             'Optional: #PCDATA | Inline',
             'Common',
             array(
-                'form' => 'ID',            
-                'for' => 'ID', // IDREF not implemented, allow ID
+                'accesskey' => 'Character',
+                // 'for' => 'IDREF', // IDREF not implemented, cannot allow
             )
         );
         $label->excludes = array('label' => true);
@@ -16924,6 +16998,7 @@ class HTMLPurifier_HTMLModule_Forms extends HTMLPurifier_HTMLModule
             'Optional: #PCDATA | Inline',
             'Common',
             array(
+                'accesskey' => 'Character',
             )
         );
 
@@ -16973,7 +17048,7 @@ class HTMLPurifier_HTMLModule_Hgroup extends HTMLPurifier_HTMLModule
 
 
 /**
- * HTML 5 Hypertext Module, defines hypertext links. Core Module.
+ * XHTML 1.1 Hypertext Module, defines hypertext links. Core Module.
  */
 class HTMLPurifier_HTMLModule_Hypertext extends HTMLPurifier_HTMLModule
 {
@@ -16994,14 +17069,14 @@ class HTMLPurifier_HTMLModule_Hypertext extends HTMLPurifier_HTMLModule
             'Inline',
             'Common',
             array(
-                'download' => 'Text',
+                // 'accesskey' => 'Character',
                 // 'charset' => 'Charset',
                 'href' => 'URI',
-                'hreflang' => 'LanguageCode',
+                // 'hreflang' => 'LanguageCode',
                 'rel' => new HTMLPurifier_AttrDef_HTML_LinkTypes('rel'),
                 'rev' => new HTMLPurifier_AttrDef_HTML_LinkTypes('rev'),
-                'target'   => new HTMLPurifier_AttrDef_HTML_FrameTarget(),                
-                'type' => 'ContentType',
+                // 'tabindex' => 'Number',
+                // 'type' => 'ContentType',
             )
         );
         $a->formatting = true;
@@ -17014,7 +17089,7 @@ class HTMLPurifier_HTMLModule_Hypertext extends HTMLPurifier_HTMLModule
 
 
 /**
- * HTML 5 Iframe Module provides inline frames.
+ * XHTML 1.1 Iframe Module provides inline frames.
  *
  * @note This module is not considered safe unless an Iframe
  * whitelisting mechanism is specified.  Currently, the only
@@ -17047,7 +17122,6 @@ class HTMLPurifier_HTMLModule_Iframe extends HTMLPurifier_HTMLModule
             'Flow',
             'Common',
             array(
-                'allowfullscreen', 'Bool',
                 'src' => 'URI#embedded',
                 'width' => 'Length',
                 'height' => 'Length',
@@ -17057,7 +17131,6 @@ class HTMLPurifier_HTMLModule_Iframe extends HTMLPurifier_HTMLModule
                 'longdesc' => 'URI',
                 'marginheight' => 'Pixels',
                 'marginwidth' => 'Pixels',
-                'sandbox' => 'Bool#sandbox',
             )
         );
     }
@@ -17068,7 +17141,7 @@ class HTMLPurifier_HTMLModule_Iframe extends HTMLPurifier_HTMLModule
 
 
 /**
- * HTML 5 Image Module provides basic image embedding.
+ * XHTML 1.1 Image Module provides basic image embedding.
  * @note There is specialized code for removing empty images in
  *       HTMLPurifier_Strategy_RemoveForeignElements
  */
@@ -17099,8 +17172,6 @@ class HTMLPurifier_HTMLModule_Image extends HTMLPurifier_HTMLModule
                 'width' => 'Pixels#' . $max,
                 'longdesc' => 'URI',
                 'src*' => new HTMLPurifier_AttrDef_URI(true), // embedded
-                'srcset' => 'Text',
-                'sizes' => 'Text',            
             )
         );
         if ($max === null || $config->get('HTML.Trusted')) {
@@ -17366,15 +17437,7 @@ class HTMLPurifier_HTMLModule_List extends HTMLPurifier_HTMLModule
      */
     public function setup($config)
     {
-        $ol = $this->addElement(
-            'ol',
-            'List',
-             new HTMLPurifier_ChildDef_List(),
-            'Common',
-            array(
-                'reversed', 'Bool#reversed',    
-            )
-        );                
+        $ol = $this->addElement('ol', 'List', new HTMLPurifier_ChildDef_List(), 'Common');
         $ul = $this->addElement('ul', 'List', new HTMLPurifier_ChildDef_List(), 'Common');
         // XXX The wrap attribute is handled by MakeWellFormed.  This is all
         // quite unsatisfactory, because we generated this
@@ -17510,8 +17573,7 @@ class HTMLPurifier_HTMLModule_Object extends HTMLPurifier_HTMLModule
                 'standby' => 'Text',
                 'tabindex' => 'Number',
                 'type' => 'ContentType',
-                'width' => 'Length',
-                'typemustmatch' => 'Bool#typemustmatch',
+                'width' => 'Length'
             )
         );
 
@@ -17699,16 +17761,16 @@ class HTMLPurifier_HTMLModule_Ruby extends HTMLPurifier_HTMLModule
         $this->addElement(
             'ruby',
             'Inline',
-            'Custom: ((rb | Inline | #PCDATA)*, (rt | (rp, rt, rp) | rtc))+',
+            'Custom: ((rb, (rt | (rp, rt, rp))) | (rbc, rtc, rtc?))',
             'Common'
         );
-        $this->addElement('rtc', false, 'Custom: (rt | rp | Inline | #PCDATA)*', 'Common');
-        $this->addElement('rb', false, 'Custom: (Inline | #PCDATA)*', 'Common');
-        $this->addElement('rt', false, 'Custom: (Inline | #PCDATA)*', 'Common');
-        $this->addElement('rp', false, 'Custom: (Inline | #PCDATA)*', 'Common');
-
-        // <ruby> elements can be nested as children of <rtc>, <rb>, <rt> and <rp>
-        // https://www.w3.org/TR/2014/NOTE-html-ruby-extensions-20140204/#changes-compared-to-the-current-ruby-model
+        $this->addElement('rbc', false, 'Required: rb', 'Common');
+        $this->addElement('rtc', false, 'Required: rt', 'Common');
+        $rb = $this->addElement('rb', false, 'Inline', 'Common');
+        $rb->excludes = array('ruby' => true);
+        $rt = $this->addElement('rt', false, 'Inline', 'Common', array('rbspan' => 'Number'));
+        $rt->excludes = array('ruby' => true);
+        $this->addElement('rp', false, 'Optional: #PCDATA', 'Common');
     }
 }
 
@@ -17843,13 +17905,13 @@ class HTMLPurifier_HTMLModule_SafeScripting extends HTMLPurifier_HTMLModule
         $script = $this->addElement(
             'script',
             'Inline',
-            'Empty',
+            'Optional:', // Not `Empty` to not allow to autoclose the <script /> tag @see https://www.w3.org/TR/html4/interact/scripts.html
             null,
             array(
                 // While technically not required by the spec, we're forcing
                 // it to this value.
                 'type' => 'Enum#text/javascript',
-                'src*' => new HTMLPurifier_AttrDef_Enum(array_keys($allowed))
+                'src*' => new HTMLPurifier_AttrDef_Enum(array_keys($allowed), /*case sensitive*/ true)
             )
         );
         $script->attr_transform_pre[] =
@@ -18249,15 +18311,7 @@ class HTMLPurifier_HTMLModule_Text extends HTMLPurifier_HTMLModule
         $this->addElement('q', 'Inline', 'Inline', 'Common', array('cite' => 'URI'));
         $this->addElement('samp', 'Inline', 'Inline', 'Common');
         $this->addElement('var', 'Inline', 'Inline', 'Common');
-        
-        // http://developers.whatwg.org/text-level-semantics.html
-        $this->addElement('s', 'Inline', 'Inline', 'Common');
-        $this->addElement('sub', 'Inline', 'Inline', 'Common');
-        $this->addElement('sup', 'Inline', 'Inline', 'Common');
-        $this->addElement('mark', 'Inline', 'Inline', 'Common');
-        $this->addElement('wbr', 'Inline', 'Empty', 'Core');
-        
-        
+
         $em = $this->addElement('em', 'Inline', 'Inline', 'Common');
         $em->formatting = true;
 
@@ -19918,8 +19972,13 @@ class HTMLPurifier_Lexer_DOMLex extends HTMLPurifier_Lexer
         $doc = new DOMDocument();
         $doc->encoding = 'UTF-8'; // theoretically, the above has this covered
 
+        $options = 0;
+        if ($config->get('Core.AllowParseManyTags') && defined('LIBXML_PARSEHUGE')) {
+            $options |= LIBXML_PARSEHUGE;
+        }
+
         set_error_handler(array($this, 'muteErrorHandler'));
-        $doc->loadHTML($html);
+        $doc->loadHTML($html, $options);
         restore_error_handler();
 
         $body = $doc->getElementsByTagName('html')->item(0)-> // <html>
@@ -23362,23 +23421,23 @@ class HTMLPurifier_VarParser_Flexible extends HTMLPurifier_VarParser
             // Note: if code "breaks" from the switch, it triggers a generic
             // exception to be thrown. Specific errors can be specifically
             // done here.
-            case self::MIXED:
+            case self::C_MIXED:
             case self::ISTRING:
-            case self::STRING:
+            case self::C_STRING:
             case self::TEXT:
             case self::ITEXT:
                 return $var;
-            case self::INT:
+            case self::C_INT:
                 if (is_string($var) && ctype_digit($var)) {
                     $var = (int)$var;
                 }
                 return $var;
-            case self::FLOAT:
+            case self::C_FLOAT:
                 if ((is_string($var) && is_numeric($var)) || is_int($var)) {
                     $var = (float)$var;
                 }
                 return $var;
-            case self::BOOL:
+            case self::C_BOOL:
                 if (is_int($var) && ($var === 0 || $var === 1)) {
                     $var = (bool)$var;
                 } elseif (is_string($var)) {
