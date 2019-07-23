@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/saisies/trunk/lang/
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/saisie_calcul/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
-	'saisie_calcul_description' => 'Une saisie dont la valeur est le résultat d\'un calcul depuis d\'autres saisies',
+	'saisie_calcul_description' => 'Une saisie dont la valeur est le résultat d’un calcul depuis d’autres saisies',
 	'saisie_calcul_nom' => 'Saisie de calcul',
-	'saisies_slogan' => 'Une saisie pour les calculer toutes !'
+	'saisies_slogan' => 'Une saisie pour les calculer toutes !'
 );
