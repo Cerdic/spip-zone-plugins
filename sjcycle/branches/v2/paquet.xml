@@ -22,7 +22,7 @@
 	<pipeline nom="ieconfig_metas" inclure="sjcycle_ieconfig_metas.php" />
 	<pipeline nom="autoriser" inclure="inc/sjcycle_autoriser.php" />
 
-	<necessite nom="saisies" compatibilite="[1.42.11;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 	<necessite nom="YAML" compatibilite="[1.5.1;[" />
 
 	<utilise nom="aveline" compatibilite="[2.0.0;[" />

@@ -20,7 +20,7 @@
 
 	<lib nom="phpQuery" lien="https://code.google.com/p/phpquery/downloads/detail?name=phpQuery-0.9.5.386.zip" />
 
-	<necessite nom="saisies" compatibilite="[1.42.11;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 
 	<pipeline nom="affichage_final" inclure="menu_evitement_pipelines.php" />
 	<pipeline nom="insert_head_css" inclure="menu_evitement_pipelines.php" />

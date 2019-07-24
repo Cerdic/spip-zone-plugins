@@ -19,6 +19,6 @@
 	<pipeline nom="insert_head"     inclure="autocompletion_pipelines.php" />
 	<pipeline nom="header_prive"    inclure="autocompletion_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[1.42.11;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 
 </paquet>

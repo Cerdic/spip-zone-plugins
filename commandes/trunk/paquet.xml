@@ -19,7 +19,7 @@
 
 	<traduire module="commandes" reference="fr" gestionnaire="salvatore" />
 
-	<necessite nom="saisies" compatibilite="[1.42.11;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="prix" compatibilite="[0.1.4;]" />
 	<utilise nom="coordonnees" compatibilite="[2.2.2;]" />
 	<utilise nom="notifavancees" compatibilite="[0.3.1;]" />

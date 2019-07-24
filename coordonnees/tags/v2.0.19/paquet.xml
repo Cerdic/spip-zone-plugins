@@ -28,7 +28,7 @@
 	<!-- &#201;l&#233;ments d'interface -->
 	<pipeline nom="affiche_milieu" inclure="coordonnees_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[1.42.11;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="pays" compatibilite="[1.0.5;]" />
 
 </paquet>

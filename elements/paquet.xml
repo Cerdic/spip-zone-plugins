@@ -19,7 +19,7 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/elements.php" /> 
 	<pipeline nom="afficher_fiche_objet" inclure="elements_pipelines.php" /> 
 
-	<necessite nom="saisies" compatibilite="[1.42.11;["/>
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 	<necessite nom="verifier" compatibilite="[0.1.16;[" />
 	<necessite nom="yaml" compatibilite="[1.5.2;[" />
 

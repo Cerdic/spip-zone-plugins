@@ -17,7 +17,7 @@
 	<pipeline nom="autoriser" inclure="info_spip_autorisations.php" />
 	<pipeline nom="affiche_gauche" inclure="info_spip_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[1.42.11;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="spip_bonux" compatibilite="[3.0.0;]" />
 
 	<menu nom="configurer_info_spip" parent="menu_configuration" icone="images/info_spip-16.png" action="configurer_info_spip" titre="info_spip:titre_configurer_info_spip" />

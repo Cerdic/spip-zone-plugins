@@ -26,7 +26,7 @@
 
 	<menu nom="spipimmo" titre="spipimmo:spipimmo" parent="menu_edition" icone="images/spipimmo-24.png" />
 
-	<necessite nom="saisies" compatibilite="[1.42.11;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 	<necessite nom="verifier" compatibilite="[1.0.0;[" />
 	<utilise nom="pays" compatibilite="[2.1.1;]" />
 </paquet>

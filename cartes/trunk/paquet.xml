@@ -13,7 +13,7 @@
 	<auteur lien='http://www.kent1.info'>kent1</auteur>
 
 	<licence>GNU/GPL</licence>
-	<necessite nom="saisies" compatibilite="[1.42.11;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="gis" compatibilite="[4.36.2;]" />
 	<necessite nom="gisgeom" compatibilite="[1.9.1;]" />
 	<necessite nom="roles_gis" compatibilite="[1.0.0;]" />

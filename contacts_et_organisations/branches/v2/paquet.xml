@@ -30,7 +30,7 @@
 	<pipeline nom="autoriser" inclure="contacts_autoriser.php" />
 	<pipeline nom="ieconfig_metas" inclure="contacts_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[1.42.11;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 	<necessite nom="medias" compatibilite="[2.7.27;[" />
 	<necessite nom="editer_liens_simples" compatibilite="[1.0.0;[" />
 	<necessite nom="spip_bonux" compatibilite="[3.1.0;[" />

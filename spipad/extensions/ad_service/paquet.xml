@@ -17,7 +17,7 @@
 	<auteur lien='http://montpel-libre.fr/'>Collectif SPIP - Montpellier</auteur>
 
 	<licence>GNU/GPL</licence>
-	<necessite nom="saisies" compatibilite="[1.42.11;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="spipad" compatibilite="[1.0.1;]" />
 
 	<pipeline nom="autoriser" inclure="ad_service_autorisations.php" /> 

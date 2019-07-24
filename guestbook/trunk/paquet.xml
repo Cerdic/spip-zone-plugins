@@ -20,7 +20,7 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[1.42.11;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 	<utilise nom="nospam" compatibilite="[1.0.0;[" />
 
 	<pipeline nom="autoriser" inclure="guestbook_autorisations.php" /> 

@@ -28,7 +28,7 @@
 	<necessite nom="agenda" compatibilite="[3.11.2;[" />
 	<necessite nom="cextras" compatibilite="[3.2.3;[" />
 	<necessite nom="facteur" compatibilite="[3.6.2;[" />
-	<necessite nom="saisies" compatibilite="[1.42.11;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 	<necessite nom="spip_bonux" compatibilite="[3.0.4;[" />
 	<necessite nom="verifier" compatibilite="[1.0.1;[" />
 

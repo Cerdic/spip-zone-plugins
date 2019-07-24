@@ -18,5 +18,5 @@
 	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="pp_codes_pipelines.php" />
 
 	<necessite nom="porte_plume" compatibilite="[1.11.5;]" />
-	<necessite nom="saisies" compatibilite="[1.42.11;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 </paquet>

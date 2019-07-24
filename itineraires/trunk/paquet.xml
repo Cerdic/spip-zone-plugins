@@ -13,7 +13,7 @@
 	<auteur lien='http://www.ldd.fr'>Les Développements Durables</auteur>
 
 	<licence>GNU/GPL v3</licence>
-	<necessite nom="saisies" compatibilite="[1.42.11;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="verifier" compatibilite="[1.0.3;]" />
 	<necessite nom="yaml" compatibilite="[1.5.1;]" /> 
 	<utilise nom="gis" compatibilite="[4.32.5;]" /> 

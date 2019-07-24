@@ -28,7 +28,7 @@
 	<pipeline nom="jqueryui_plugins" inclure="cog_pipeline.php" />
 
 	<necessite nom="spip_bonux" compatibilite="[3.0.5;[" />
-	<necessite nom="saisies"  compatibilite="[1.42.11;]" /> 
+	<necessite nom="saisies" compatibilite="[3.23.2;]" /> 
 
 	<lib nom="PHPExcel" lien="https://github.com/PHPOffice/PHPExcel/archive/master.zip" />
 

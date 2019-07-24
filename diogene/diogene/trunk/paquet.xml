@@ -42,7 +42,7 @@
 	<pipeline nom="ajouter_menus" inclure="diogene_pipelines.php" />
 	<pipeline nom="jqueryui_plugins" inclure="diogene_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[1.42.11;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 	<necessite nom="images" compatibilite="[1.1.1;[" />
 	<necessite nom="mediabox" compatibilite="[0.8.1;[" />
 	<!-- Pour le fichier inc/date_gestion.php -->

@@ -17,7 +17,7 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[1.42.11;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 	<necessite nom="medias" compatibilite="[2.7.27;[" />
 
 

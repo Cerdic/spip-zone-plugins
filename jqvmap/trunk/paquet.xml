@@ -18,7 +18,7 @@
 	<credit lien="https://www.iconfinder.com/icons/379367/vector_icon#size=128">Webalys</credit>
 	<credit lien="https://www.iconfinder.com/icons/379552/application_map_icon#size=128">Webalys</credit>
 
-	<necessite nom="saisies"  compatibilite="[2.28.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 
 	<pipeline nom="autoriser" inclure="jqvmap_autorisations.php" />
 

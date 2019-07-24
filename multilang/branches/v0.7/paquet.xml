@@ -27,7 +27,7 @@
 	<pipeline nom="multilang_objets_supplementaires" action="" />
 
 	<menu nom="configurer_multilangue" titre="multilang:configuration_multilang" parent="menu_configuration" icone="images/multilang-16.png" />
-	<necessite nom="saisies" compatibilite="[1.42.11;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 
 	<utilise nom="crayons" />
 </paquet>
