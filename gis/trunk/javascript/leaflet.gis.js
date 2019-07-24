@@ -200,6 +200,26 @@ L.Map.Gis = L.Map.extend({
 		}
 	},
 
+	// Center and zoom or just pan to bounds/point
+	centerAndZoom: function (centerOrBounds, panonly=false) {
+		var map = this;
+		var options = map.options;
+		var bounds = new L.LatLngBounds();
+		bounds.extend(centerOrBounds);
+		// avoid infinite zoom if bounds focus on a point
+		if (bounds._northEast.lat == bounds._northEast.lng && bounds._southWest.lat == bounds._southWest.lng) {
+			options.maxZoom = options.zoom;
+			if (panonly) {
+				options.maxZoom = map._zoom;
+			}
+			bounds._northEast.lat += 0.1;
+			bounds._northEast.lng += 0.1;
+			bounds._southWest.lat -= 0.1;
+			bounds._southWest.lng -= 0.1;
+		}
+		map.fitBounds(bounds, options);
+	},
+
 	// API parseGeoJson
 	parseGeoJson: function (data) {
 		var map = this;
@@ -237,10 +257,7 @@ L.Map.Gis = L.Map.extend({
 			this.parseGeoJsonFeatures(autres);
 
 			if (map.options.autocenterandzoom) {
-				if (data.features.length > 1)
-					map.fitBounds(map.markerCluster.getBounds());
-				else
-					map.setView(map.markerCluster.getBounds().getCenter(), map.options.zoom);
+				this.centerAndZoom(map.markerCluster.getBounds());
 			}
 			if (map.options.openId) {
 				gis_focus_marker(map.options.openId,map.options.mapId);
@@ -276,10 +293,7 @@ L.Map.Gis = L.Map.extend({
 			}).addData(data).addTo(map);
 
 			if (map.options.autocenterandzoom) {
-				if (data.features.length == 1 && data.features[0].geometry.type == 'Point')
-					map.setView(geojson.getBounds().getCenter(), map.options.zoom);
-				else
-					map.fitBounds(geojson.getBounds());
+				this.centerAndZoom(geojson.getBounds());
 			}
 			if (map.options.openId)
 				gis_focus_marker(map.options.openId,map.options.mapId);

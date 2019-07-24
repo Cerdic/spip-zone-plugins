@@ -15,7 +15,7 @@ function gis_focus_marker (id, map) {
 				break;
 			}
 		} else if (((carte._layers[i].feature) && (carte._layers[i].feature.id == id)) || (carte._layers[i].id && carte._layers[i].id == id)) {
-			carte.panTo(carte._layers[i].getLatLng());
+			carte.centerAndZoom(carte._layers[i].getLatLng(), true);
 			carte._layers[i].openPopup();
 			break;
 		}
