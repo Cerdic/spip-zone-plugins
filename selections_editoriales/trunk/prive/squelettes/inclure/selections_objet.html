@@ -21,9 +21,10 @@
 
 		[(#REM) Soit un bouton de création rapide ]
 		[(#CONFIG{selections_editoriales/reutilisation}|non)
+			#SET{icone-objet,#VAL{selection}|objet_icone{24}|extraire_attribut{src}}
+			#SET{icone-add,#CHEMIN_IMAGE{add-24}|balise_img|inserer_attribut{style,#VAL{background-image:url\(}|concat{#GET{icone-objet},\)}}}
 			[(#BOUTON_ACTION{
-				[(#CHEMIN_IMAGE{add-24}|balise_img|inserer_attribut{style,background-image:url\(#VAL{selection}|objet_icone{24}|extraire_attribut{src}\)})]
-				<b><:selection:texte_ajouter_selection:></b>,
+				#GET{icone-add} <b><:selection:texte_ajouter_selection:></b>,
 				#URL_ACTION_AUTEUR{ajouter_selection_objet,#OBJET-#ID_OBJET,#GET{self}},
 				ajax icone add selection-24 s24 #LANG_RIGHT,
 				'',
