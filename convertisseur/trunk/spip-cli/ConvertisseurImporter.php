@@ -35,7 +35,7 @@ class ConvertisseurImporter extends Command {
 				'dest',
 				'd',
 				InputOption::VALUE_OPTIONAL,
-				'id_rubrique de la rubrique où importer la hierarchie de rurbriques et les articles défini dans les fichiers txt (en général l\'id_secteur ou on veut importer)',
+				'id_rubrique de la rubrique où importer la hierarchie de rubriques et les articles défini dans les fichiers txt (en général l\'id_secteur ou on veut importer)',
 				'0'
 			)
 			->addOption(
@@ -78,11 +78,6 @@ class ConvertisseurImporter extends Command {
 		// Répertoire source
 		if(!is_dir($source)){
 			$output->writeln("<error>Préciser le répertoire avec les fichiers à importer. spip import -s repertoire </error>\n");
-			exit ;
-		}
-		
-		if($id_parent == 0){
-			$output->writeln("<error>Préciser dans quelle rubrique importer les articles. spip import -d `id_rubrique` </error>\n");
 			exit ;
 		}
 		
