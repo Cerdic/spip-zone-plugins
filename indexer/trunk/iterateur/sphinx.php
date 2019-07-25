@@ -418,6 +418,7 @@ class IterateurSPHINX implements Iterator {
 			return false;
 		}
 		$match = implode(' ',$match);
+		$match = str_replace("?", " ", $match); // un "?" peut tuer la recherche
 		$this->queryApi
 			->select('WEIGHT() AS score')
 			->match( $match );
