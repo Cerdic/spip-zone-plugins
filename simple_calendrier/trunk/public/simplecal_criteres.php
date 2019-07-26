@@ -14,6 +14,56 @@ if (!defined("_ECRIRE_INC_VERSION")) {
 }
 
 /**
+ * {en_cours}
+ * {en_cours #ENV{date}}
+ *
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
+ */
+function critere_en_cours_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	$id_table = $boucle->id_table;
+
+	$_dateref = time_calculer_date_reference($idb, $boucles, $crit);
+	$_date_debut = "$id_table.date_debut";
+	$_date_fin = "$id_table.date_fin";
+
+	// si on ne sait pas si les heures comptent, on utilise toute la journee.
+	// sinon, on s'appuie sur le champ 'horaire=oui'
+	// pour savoir si les dates utilisent les heures ou pas.
+	$where_jour_sans_heure =
+		array("'AND'",
+			array("'<='", "'$_date_debut'", "sql_quote(date('Y-m-d 23:59:59', strtotime($_dateref)))"),
+			array("'>='", "'$_date_fin'", "sql_quote(date('Y-m-d 00:00:00', strtotime($_dateref)))")
+		);
+
+	if (array_key_exists('horaire', $boucle->show['field'])) {
+		$where =
+			array("'OR'",
+				array("'AND'",
+					array("'='", "'horaire'", "sql_quote('oui')"),
+					array("'AND'",
+						array("'<='", "'$_date_debut'", "sql_quote($_dateref)"),
+						array("'>='", "'$_date_fin'", "sql_quote($_dateref)")
+					)
+				),
+				array("'AND'",
+					array("'!='", "'horaire'", "sql_quote('oui')"),
+					$where_jour_sans_heure
+				)
+			);
+	} else {
+		$where = $where_jour_sans_heure;
+	}
+
+	if ($crit->not) {
+		$where = array("'NOT'",$where);
+	}
+	$boucle->where[] = $where;
+}
+
+/**
  * Critere {a_venir} 
  *
  * @param unknown_type $idb

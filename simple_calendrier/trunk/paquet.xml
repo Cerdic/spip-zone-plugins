@@ -1,9 +1,9 @@
 <paquet
 	prefix="simplecal"
 	categorie="date"
-	version="2.2.12"
+	version="2.3.0"
 	etat="stable"
-	compatibilite="[3.0.0;3.2.*]"
+	compatibilite="[3.0.0;3.3.*]"
 	logo="prive/themes/spip/images/evenement-32.png"
 	schema="2.1.5"
 	documentation="https://contrib.spip.net/Simple-Calendrier-v2"
