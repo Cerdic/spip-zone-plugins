@@ -138,6 +138,10 @@ function lim_objets_a_exclure() {
 		$key = array_search('spip_documents', $exclus);
 		unset($exclus[$key]);
 	}
+
+	// donner aux plugins la possibilité de gérer les exclusions (ajouter, supprimer une exclusion)
+	$exclus = pipeline('lim_declare_exclus', $exclus);
+
 	return $exclus;
 }
 
