@@ -9,7 +9,7 @@
 			<div class="clearfix"></div>
 
 			<B_auteurs>
-				<BOUCLE_auteurs (auteurs_liens) {id_objet=#ID_PROJETS_CADRE} {objet='projets_cadre' } {par role}>
+				<BOUCLE_auteurs (auteurs_liens) {id_objet=#ID_PROJETS_CADRE} {objet='projets_cadre'} {par role}>
 					<div class="champ">
 						<div class="label visible">[(#ROLE|role{auteurs}|sinon{[(#VAL{auteur}|objet_info{texte_objet}|_T)]})]</div>
 						<div class="span" dir="#LANG_DIR"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#INFO_TITRE{auteur,#ID_AUTEUR})]</a></div>

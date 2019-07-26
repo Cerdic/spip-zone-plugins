@@ -30,4 +30,3 @@ function recuperer_releases_spip_dist() {
 
 	return $releases;
 }
-
