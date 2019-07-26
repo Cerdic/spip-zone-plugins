@@ -103,6 +103,39 @@ function critere_a_venir_dist($idb, &$boucles, $crit) {
 	$boucle->where[] = $where;
 }
 
+function critere_evenement_passe($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	$id_table = $boucle->id_table;
+
+	$_dateref = time_calculer_date_reference($idb, $boucles, $crit);
+	$_date = "$id_table.date_fin";
+	$op = $crit->not ? '>=' : '<';
+
+	// si on ne sait pas si les heures comptent, on utilise toute la journee.
+	// sinon, on s'appuie sur le champ 'horaire=oui'
+	// pour savoir si les dates utilisent les heures ou pas.
+	$where_passe_sans_heure =
+		array("'$op'", "'$_date'", "sql_quote(date('Y-m-d 00:00:00', strtotime($_dateref)))");
+
+	if (array_key_exists('horaire', $boucle->show['field'])) {
+		$where =
+			array("'OR'",
+				array("'AND'",
+					array("'='", "'horaire'", "sql_quote('oui')"),
+					array("'$op'","'$_date'","sql_quote($_dateref)")
+				),
+				array("'AND'",
+					array("'!='", "'horaire'", "sql_quote('oui')"),
+					$where_passe_sans_heure
+				)
+			);
+	} else {
+		$where = $where_passe_sans_heure;
+	}
+
+	$boucle->where[] = $where;
+}
+
 /**
  * Critere {du_mois} 
  *
