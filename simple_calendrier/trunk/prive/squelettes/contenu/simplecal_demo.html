@@ -75,3 +75,34 @@
 <//B_evtd>
 #BOITE_FERMER
 
+#BOITE_OUVRIR{'',simple}
+<h2><:simplecal:demo_les_evenements_critere:> {en_cours}</h2>
+<B_evte>
+	<ul>
+		<BOUCLE_evte(EVENEMENTS) {en_cours} {par date_debut} {0,10}>
+		<li>
+			[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN})] : #TITRE [- <strong>(#LIEU)</strong>]
+			#LOGO
+		</li>
+		</BOUCLE_evte>
+	</ul>
+</B_evte>
+<:simplecal:demo_aucun:>
+<//B_evte>
+#BOITE_FERMER
+
+#BOITE_OUVRIR{'',simple}
+<h2><:simplecal:demo_les_evenements_critere:> {evenement_passe}</h2>
+<B_evtf>
+	<ul>
+		<BOUCLE_evtf(EVENEMENTS) {evenement_passe} {par date_debut} {0,10}>
+		<li>
+			[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN})] : #TITRE [- <strong>(#LIEU)</strong>]
+			#LOGO
+		</li>
+		</BOUCLE_evtf>
+	</ul>
+</B_evtf>
+<:simplecal:demo_aucun:>
+<//B_evtf>
+#BOITE_FERMER
