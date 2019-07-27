@@ -152,14 +152,20 @@ function critere_du_mois_dist($idb, &$boucles, $crit) {
 	$date_dernier = date('Y-m-31'); // meme pas faux (pour la comparaison) ...
 	
 	$c = array("'OR'",
-		array("'AND'",
-			array("'>='", "'$table.date_debut'", "sql_quote(date('Y-m-01'))"),
-			array("'<='", "'$table.date_debut'", "sql_quote(date('Y-m-31'))")
-		),
-		array("'AND'",
-			array("'>='", "'$table.date_fin'", "sql_quote(date('Y-m-01'))"),
-			array("'<='", "'$table.date_fin'", "sql_quote(date('Y-m-31'))")
-		)
+            array("'OR'",
+                    array("'AND'",
+                        array("'>='", "'$table.date_debut'", "sql_quote(date('Y-m-01'))"),
+                        array("'<='", "'$table.date_debut'", "sql_quote(date('Y-m-31'))")
+                    ),
+                    array("'AND'",
+                        array("'>='", "'$table.date_fin'", "sql_quote(date('Y-m-01'))"),
+                        array("'<='", "'$table.date_fin'", "sql_quote(date('Y-m-31'))")
+                    )
+                ),
+            array("'AND'",
+                        array("'<='", "'$table.date_debut'", "sql_quote(date('Y-m-01'))"),
+                        array("'>='", "'$table.date_fin'", "sql_quote(date('Y-m-31'))")
+                    )
 	);
 	
 	// Inversion de la condition ?
