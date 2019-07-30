@@ -41,7 +41,7 @@ function action_a2a_lier_article_dist($id_article_cible, $id_article_source, $ty
 		and 
 		sql_countsel('spip_articles_lies', array(
 		'id_article=' . sql_quote($id_article_source),
-		'id_article_lie=' . sql_quote($id_article_cible),'type_Liaison='.sql_quote($type_liaison)))
+		'id_article_lie=' . sql_quote($id_article_cible),'type_liaison='.sql_quote($type_liaison)))
 		))
 		){
 			
@@ -65,7 +65,7 @@ function action_a2a_lier_article_dist($id_article_cible, $id_article_source, $ty
 		and 
 		sql_countsel('spip_articles_lies', array(
 		'id_article=' . sql_quote($id_article_cible),
-		'id_article_lie=' . sql_quote($id_article_source),'type_Liaison='.sql_quote($type_liaison))))
+		'id_article_lie=' . sql_quote($id_article_source),'type_liaison='.sql_quote($type_liaison))))
 		))
 		){
 			//on recupere le rang le plus haut pour definir celui de l'article a lier
