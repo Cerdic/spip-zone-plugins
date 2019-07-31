@@ -21,8 +21,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @return bool
  */
-function coupon_utilisable($id_coupon, $id_commande = null) {
-	if(!$id_commande) {
+function coupon_utilisable($id_coupon, $id_commande = null, $test_session = true) {
+	if(!$id_commande && $test_session) {
 		$id_commande = intval(session_get('id_commande'));
 	}
 	
