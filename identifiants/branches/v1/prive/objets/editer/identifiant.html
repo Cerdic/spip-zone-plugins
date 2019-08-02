@@ -1,0 +1,12 @@
+[(#REM)
+
+	Saisie d'un identifiant sur le formulaire d'un objet.
+	Inclus via le pipeline editer_contenu_objet.
+
+]
+<div class="editer editer_identifiant[ (#ENV**{erreurs/identifiant}|oui)erreur]">
+	<label for="identifiant"><:identifiant:champ_identifiant_label:></label>[
+	<span class='erreur_message'>(#ENV**{erreurs/identifiant})</span>
+	]<p class="explication"><:identifiant:champ_identifiant_explication:></p>
+	<input class="text" name="identifiant" id="identifiant" value="#ENV{identifiant}" lang="#LANG" type="text">
+</div>
