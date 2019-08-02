@@ -54,6 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_fillopacity' => 'Opacité du remplissage de 0 à 1 (valeur par défaut : 0.2)',
 	'explication_import' => 'Importer un fichier au format GPX ou KML.',
 	'explication_layer_forcee' => 'La couche est imposée par un autre plugin ou un squelette.',
+	'explication_layers' => '<b>@couches@</b> couche(s) actuellement enregistrée(s) dans la configuration.',
 	'explication_maptype_force' => 'Le fond cartographique est imposé par un autre plugin ou squelette.',
 	'explication_opacity' => 'Opacité du trait de 0 à 1 (valeur par défaut : 0.5)',
 	'explication_plugins_desactives' => 'Attention, certaines fonctionnalités fournies par ces plugins ne seront plus opérationnelles.',
