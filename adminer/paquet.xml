@@ -1,0 +1,18 @@
+<paquet
+	prefix="adminer"
+	categorie="outil"
+	version="4.3.1.4"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="adminer-64.png"
+	documentation="https://contrib.spip.net/Adminer"
+>
+	<nom>Adminer</nom>
+	<!-- Utiliser Adminer pour explorer la base SPIP -->
+	
+	<auteur>Jakub Vrana ( https://www.vrana.cz ), mis en plugin par Fil</auteur>
+	<licence>GNU/GPL</licence>
+
+	<menu nom="adminer" titre="Adminer" parent="menu_administration"  icone="images/adminer-16.png" />
+	
+</paquet>
