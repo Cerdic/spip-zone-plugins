@@ -128,7 +128,7 @@ function image_potrace($img, $options=[]) {
 		ecrire_fichier($dest, $svg_image);
 	}
 
-	if (!@file_exists($dest)) {
+	if (!@file_exists($cache["fichier_dest"])) {
 		return false;
 	}
 

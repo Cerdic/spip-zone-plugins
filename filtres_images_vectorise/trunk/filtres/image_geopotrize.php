@@ -92,7 +92,7 @@ function image_geopotrize($img, $nb_shapes = 'auto', $opacite_trace = 0.75, $geo
 		ecrire_fichier($dest, $svg_image);
 	}
 
-	if (!@file_exists($dest)) {
+	if (!@file_exists($cache["fichier_dest"])) {
 		return false;
 	}
 
