@@ -1,9 +1,12 @@
 <traduction module="secteur_langue" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/secteur_langue/trunk/lang/" reference="fr">
-	<langue code="de" url="https://trad.spip.net/tradlang_module/secteur_langue?lang_cible=de" total="2" traduits="1" relire="0" modifs="0" nouveaux="1" pourcent="50.00">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/secteur_langue?lang_cible=de" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Rainer Müller" lien="https://trad.spip.net/auteur/rainer-muller" />
 	</langue>
-	<langue code="en" url="https://trad.spip.net/tradlang_module/secteur_langue?lang_cible=en" total="2" traduits="1" relire="0" modifs="0" nouveaux="1" pourcent="50.00">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/secteur_langue?lang_cible=en" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Rainer Müller" lien="https://trad.spip.net/auteur/rainer-muller" />
 	</langue>
-	<langue code="es" url="https://trad.spip.net/tradlang_module/secteur_langue?lang_cible=es" total="2" traduits="1" relire="0" modifs="0" nouveaux="1" pourcent="50.00">
+	<langue code="es" url="https://trad.spip.net/tradlang_module/secteur_langue?lang_cible=es" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Rainer Müller" lien="https://trad.spip.net/auteur/rainer-muller" />
 	</langue>
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/secteur_langue?lang_cible=fr" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
