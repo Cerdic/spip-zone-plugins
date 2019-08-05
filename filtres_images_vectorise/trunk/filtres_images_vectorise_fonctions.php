@@ -13,6 +13,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 if(is_array($GLOBALS['spip_matrice'])){
+	$GLOBALS['spip_matrice']['image_filtrer_couleur'] = 'filtres/image_filtrer_couleur.php';
 	$GLOBALS['spip_matrice']['image_geometrize'] = 'filtres/image_geometrize.php';
 	$GLOBALS['spip_matrice']['image_potrace'] = 'filtres/image_potrace.php';
 	$GLOBALS['spip_matrice']['image_geopotrize'] = 'filtres/image_geopotrize.php';
