@@ -20,12 +20,14 @@
  * @param array $potraceOptions
  * @return string
  */
-function image_geopotrize($img, $nb_shapes = 'auto', $opacite_trace = 0.75, $mix_mode='soft-light', $geometrizeOptions = [], $potraceOptions=[]) {
+function image_geopotrize($img, $nb_shapes = 'auto', $opacite_trace = 0.66, $mix_mode='multiply', $geometrizeOptions = [], $potraceOptions=[]) {
 
 	if (!in_array($mix_mode, ['color', 'color-burn', 'color-dodge', 'darken', 'difference', 'exclusion', 'hard-ligt', 'hue', 'lighten', 'luminosity', 'multiply', 'normal', 'overlay', 'rever', 'saturation', 'screen', 'soft-light'])) {
 		$mix_mode = 'soft-light';
 	}
-	$cache = _image_valeurs_trans($img, "image_geopotrize-".json_encode([$nb_shapes, $opacite_trace, $mix_mode, $geometrizeOptions, $potraceOptions]), "svg");
+	$fonction = "image_geopotrize";
+	$args = func_get_args();
+	$cache = _image_valeurs_trans($img, "image_geopotrize-".json_encode([$nb_shapes, $opacite_trace, $mix_mode, $geometrizeOptions, $potraceOptions]), "svg", [$fonction, $args]);
 	if (!$cache) {
 		return false;
 	}
@@ -83,12 +85,14 @@ function image_geopotrize($img, $nb_shapes = 'auto', $opacite_trace = 0.75, $mix
 
 
 		// on genere ensuite un trace PotRace plus fin, sans background
-		$potraceOptions['rounding'] = "width=$width_geo";
-		$potraceOptions['bgcolor'] = 'transparent';
+		if (!isset($potraceOptions['bgcolor'])) {
+			$potraceOptions['bgcolor'] = 'transparent';
+		}
+		if (!isset($potraceOptions['colors'])){
+			$potraceOptions['colors'] = '8';
+		}
 
-		$thumbnail = filtrer('image_reduire', $img, 512);
-		$thumbnail_renf = filtrer('image_renforcement', $thumbnail);
-		$img_svg_pot = image_potrace($thumbnail_renf, $potraceOptions);
+		$img_svg_pot = image_potrace($img, $potraceOptions);
 		$file_svg_pot = supprimer_timestamp(extraire_attribut($img_svg_pot, 'src'));
 		$svg_pot = file_get_contents($file_svg_pot);
 
@@ -96,12 +100,21 @@ function image_geopotrize($img, $nb_shapes = 'auto', $opacite_trace = 0.75, $mix
 		if (strpos($svg_pot[0], "<" . "?xml")===0){
 			$svg_pot = explode('>', trim($svg_pot[1]), 2);
 		}
+		$viewboxP = extraire_attribut($svg_pot[0] . '>', 'viewBox');
+		$viewboxP = explode(' ', $viewboxP);
+		$width_pot = $viewboxP[2];
+		$scale = $width_geo / $width_pot;
 
 		// et on superpose
+		if ($potraceOptions['bgcolor'] != 'transparent') {
+			$potrace = explode("fill=", $svg_pot[1], 2);
+			$svg_pot[1] = $potrace[0] . "opacity=\"0.5\" fill=" . $potrace[1];
+		}
 		$opacity = max(min(floatval($opacite_trace),1),0);
-		$svg_pot[1] = str_replace("fill=", 'opacity="'.$opacity.'" style="mix-blend-mode: '.$mix_mode.'" fill=', $svg_pot[1]);
+		$svg_pot[1] = '<g transform="scale('.$scale.')" opacity="'.$opacity.'" style="mix-blend-mode: '.$mix_mode.'">'
+		 . str_replace('</svg>', '</g></svg>', $svg_pot[1]);
 
-		$svg_geo[1] = str_replace('</svg>', $svg_pot[1], $svg_geo[1]);
+		$svg_geo[1] = "<g>" . str_replace('</svg>', "</g>" . $svg_pot[1], $svg_geo[1]);
 
 		$svg_image = $svg_geo[0] . '>' . $svg_geo[1];
 
