@@ -20,9 +20,12 @@
  * @param array $potraceOptions
  * @return string
  */
-function image_geopotrize($img, $nb_shapes = 'auto', $opacite_trace = 0.75, $geometrizeOptions = [], $potraceOptions=[]) {
+function image_geopotrize($img, $nb_shapes = 'auto', $opacite_trace = 0.75, $mix_mode='soft-light', $geometrizeOptions = [], $potraceOptions=[]) {
 
-	$cache = _image_valeurs_trans($img, "image_vectorise-".json_encode([$nb_shapes, $opacite_trace, $geometrizeOptions, $potraceOptions]), "svg");
+	if (!in_array($mix_mode, ['color', 'color-burn', 'color-dodge', 'darken', 'difference', 'exclusion', 'hard-ligt', 'hue', 'lighten', 'luminosity', 'multiply', 'normal', 'overlay', 'rever', 'saturation', 'screen', 'soft-light'])) {
+		$mix_mode = 'soft-light';
+	}
+	$cache = _image_valeurs_trans($img, "image_geopotrize-".json_encode([$nb_shapes, $opacite_trace, $mix_mode, $geometrizeOptions, $potraceOptions]), "svg");
 	if (!$cache) {
 		return false;
 	}
@@ -36,6 +39,12 @@ function image_geopotrize($img, $nb_shapes = 'auto', $opacite_trace = 0.75, $geo
 		include_spip('filtres/image_geometrize');
 		include_spip('filtres/image_potrace');
 
+		$time_out = $_SERVER['REQUEST_TIME']+25;
+		if (time()>$time_out) {
+			return $img;
+		}
+
+		$coeff_size=1;
 		if ($nb_shapes === 'auto' or !intval($nb_shapes)) {
 			$coeff_quality = 0.4; // par rapport a la qualite auto de geometrize on applique un x0.2 = 20% pour le auto ici
 
@@ -44,13 +53,21 @@ function image_geopotrize($img, $nb_shapes = 'auto', $opacite_trace = 0.75, $geo
 			$auto = min($auto, $max_shapes);
 			if (strpos($nb_shapes, 'x') === 0 and is_numeric($coeff = substr($nb_shapes,1))) {
 				$auto = round($auto * $coeff);
+				if ($coeff>1) {
+					$coeff_size = $coeff;
+				}
 			}
 			$nb_shapes = $auto;
 		}
 
 		// on commence par un background geometrize sans trop de details
-		$thumbnail = filtrer('image_reduire', $img, 128);
+		$thumbnail = filtrer('image_reduire', $img, round($coeff_size * 128));
 		$img_svg_geo = image_geometrize($thumbnail, $nb_shapes, $geometrizeOptions);
+
+		if (time()>$time_out) {
+			return $img;
+		}
+
 		$file_svg_geo = supprimer_timestamp(extraire_attribut($img_svg_geo, 'src'));
 		$svg_geo = file_get_contents($file_svg_geo);
 
@@ -70,8 +87,8 @@ function image_geopotrize($img, $nb_shapes = 'auto', $opacite_trace = 0.75, $geo
 		$potraceOptions['bgcolor'] = 'transparent';
 
 		$thumbnail = filtrer('image_reduire', $img, 512);
-		$thumbnail = filtrer('image_renforcement', $thumbnail);
-		$img_svg_pot = image_potrace($thumbnail, $potraceOptions);
+		$thumbnail_renf = filtrer('image_renforcement', $thumbnail);
+		$img_svg_pot = image_potrace($thumbnail_renf, $potraceOptions);
 		$file_svg_pot = supprimer_timestamp(extraire_attribut($img_svg_pot, 'src'));
 		$svg_pot = file_get_contents($file_svg_pot);
 
@@ -82,7 +99,7 @@ function image_geopotrize($img, $nb_shapes = 'auto', $opacite_trace = 0.75, $geo
 
 		// et on superpose
 		$opacity = max(min(floatval($opacite_trace),1),0);
-		$svg_pot[1] = str_replace("fill=", 'opacity="'.$opacity.'" style="mix-blend-mode: multiply" fill=', $svg_pot[1]);
+		$svg_pot[1] = str_replace("fill=", 'opacity="'.$opacity.'" style="mix-blend-mode: '.$mix_mode.'" fill=', $svg_pot[1]);
 
 		$svg_geo[1] = str_replace('</svg>', $svg_pot[1], $svg_geo[1]);
 

@@ -62,6 +62,7 @@ function image_potrace($img, $options=[]) {
 		}
 
 		$thumb = image_reduire($img,$width_thumb);
+		$width_thumb = largeur($img);
 		$source = extraire_attribut($thumb, 'src');
 
 		if ($potconfig['bgcolor'] === 'auto' or $potconfig['color'] === 'auto') {

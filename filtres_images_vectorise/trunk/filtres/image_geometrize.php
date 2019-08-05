@@ -61,6 +61,14 @@ function image_geometrize($img, $nb_shapes='auto', $options = []){
 		include_spip('filtres/images_lib');
 		include_spip('lib/geometrize/geometrize.init');
 
+		// temps maxi en secondes par iteration
+		// si on a pas fini on renvoie une image incomplete et on finira au calcul suivant
+		$time_budget = 20;
+		$time_out = $_SERVER['REQUEST_TIME']+25;
+		if (time()>$time_out) {
+			return $img;
+		}
+
 		if ($nb_shapes === 'auto' or !intval($nb_shapes)) {
 			$auto = round(sqrt($cache['largeur'] * $cache['hauteur']) / 2);
 			$max_shapes = (isset($options['maxShapes']) ? $options['maxShapes'] : 1200);
@@ -107,10 +115,6 @@ function image_geometrize($img, $nb_shapes='auto', $options = []){
 			}
 		}
 
-		// temps maxi en secondes par iteration
-		// si on a pas fini on renvoie une image incomplete et on finira au calcul suivant
-		$time_budget = 20;
-
 		// le premieres iterations sont sur une petite miniature
 		// et plus on veut de details plus on augmente la taille de l'image de travail
 		// les sizes sont tricky pour avoir un x rescale = 2 = (129 - 1) / (65 - 1) car on rescale de 0 à 64px -> 0 à 128px
@@ -155,6 +159,12 @@ function image_geometrize($img, $nb_shapes='auto', $options = []){
 			$runner = _init_geometrize_runner($img, $width_thumb, $couleur_bg);
 		}
 
+		// ne pas commencer le calcul si c'est trop tard
+		if (time()>$time_out) {
+			return $img;
+		}
+
+
 		$start_time = time();
 		spip_timer('runner');
 		for ($i = $runner->getNbSteps(); $i<$geometrize_options['steps']; $i++){
@@ -178,7 +188,7 @@ function image_geometrize($img, $nb_shapes='auto', $options = []){
 
 			$runner->steps($geometrize_options, 1);
 
-			if (time()>$start_time+$time_budget){
+			if (time()>$start_time+$time_budget or time()>$time_out){
 				break;
 			}
 		}
