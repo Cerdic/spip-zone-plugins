@@ -234,6 +234,22 @@ function ressource_meta($res) {
 			$meta['embed'] .=  sinon($meta['embed'], $src) . "</iframe>";
 		}
 
+		// recuperer un observablehq
+		else if (preg_match("/^https?\:\/\/observablehq\.com\/((@\w+|d)\/.*)/i", $src, $regs)) {
+			$cells = "";
+			foreach(preg_split("/[,\s]+/", $meta["cells"]) as $cell) {
+				if ($cell)
+					$cells .= inserer_attribut('<div class="override-height"></div>', 'data-cell', $cell);
+			}
+			$cells = '<div class="loading">loading...</div>' . $cells;
+			$script = inserer_attribut(inserer_attribut('<script></script>',
+				"data-notebook", $regs[1]),
+				"src", find_in_path("js/observable-press.js"));
+			$meta['embed'] = '<div class=observablehq>' . $cells . $script . '</div>';
+			$meta['embed'] = inserer_attribut($meta['embed'], 'style', $meta['style']);
+			if ($meta['class']) $meta['embed'] = inserer_attribut($meta['embed'], 'class', $meta['class']);
+		}
+
 
 		$meta = pipeline('ressource_meta',
 			array(
