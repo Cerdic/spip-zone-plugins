@@ -3,7 +3,7 @@
  * Importer en masse des références de projets
  *
  * @plugin     InfoSites
- * @copyright  2017-2018
+ * @copyright  2017-2019
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP/InfoSites/Formulaire

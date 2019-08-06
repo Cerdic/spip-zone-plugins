@@ -4,7 +4,7 @@
  * Aller récupérer toutes les releases de logiciel des sites de projets
  *
  * @plugin     Info Sites
- * @copyright  2014-2016
+ * @copyright  2014-2019
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\Info_Sites\RecupererSpip
