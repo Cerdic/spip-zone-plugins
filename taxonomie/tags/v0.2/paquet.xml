@@ -19,7 +19,7 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/taxonomie_declarations.php" />
 	<pipeline nom="pre_edition" inclure="taxonomie_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="saisies" compatibilite="[1.42.11;]" />
 	<utilise nom="convertisseur" compatibilite="[0.5.0;]" />
 
 	<genie nom="actualiser_itis" periode="86400" />

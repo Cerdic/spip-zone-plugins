@@ -15,7 +15,7 @@
 	<auteur lien="http://www.teddypayet.com/">Teddy Payet</auteur>
 
 	<licence>GNU/GPL</licence>
-	<necessite nom="saisies" compatibilite="[3.23.2;]" /> 
+	<necessite nom="saisies" compatibilite="[1.42.11;]" /> 
     <necessite nom="factures" compatibilite="[1.0.14;]" />
 
 	<pipeline nom="autoriser" inclure="reglements_autorisations.php" /> 

@@ -14,7 +14,7 @@
 	<credit lien="http://www.beaumont63.fr">Mairie de Beaumont (Puy-de-Dôme)</credit>
 	<licence>GNU/GPL v3</licence>
 
-	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="saisies" compatibilite="[1.42.11;]" />
 	<utilise nom="selecteurgenerique" compatibilite="[1.1.0;]" />
 	<utilise nom="roles_documents" />
 

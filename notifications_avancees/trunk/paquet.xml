@@ -22,7 +22,7 @@
 	<pipeline nom="affiche_droite" inclure="notifavancees_pipelines.php" />
 	<pipeline nom="autoriser" inclure="inc/notifications_autoriser.php" />
 
-	<necessite nom="saisies" compatibilite="[3.23.2;[" />
+	<necessite nom="saisies" compatibilite="[1.42.11;[" />
 	<necessite nom="yaml" compatibilite="[1.5.3;[" />
 
 <spip compatibilite="[3.0.0;3.2.99]">	

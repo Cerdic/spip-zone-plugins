@@ -13,7 +13,7 @@
 	<auteur>Teddy Payet</auteur>
 
 	<licence>GNU/GPL</licence>
-	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="saisies" compatibilite="[1.42.11;]" />
 
 	<pipeline nom="autoriser" inclure="partenaires_autorisations.php" />
 

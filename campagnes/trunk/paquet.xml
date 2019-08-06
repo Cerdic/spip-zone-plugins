@@ -19,7 +19,7 @@
 	<auteur lien='http://www.latribunedelart.fr'>La tribune de l'art</auteur>
 
 	<licence>GNU/GPL</licence>
-	<necessite nom="saisies" compatibilite="[3.23.2;]" /> 
+	<necessite nom="saisies" compatibilite="[1.42.11;]" /> 
 	<necessite nom="yaml" compatibilite="[1.5.0;]" /> 
 	<necessite nom="verifier" compatibilite="[0.1.18;]" /> 
 	<necessite nom="spip_bonux" compatibilite="[3.0.3;]" /> 

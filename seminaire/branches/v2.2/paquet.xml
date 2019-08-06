@@ -17,7 +17,7 @@
 	<necessite nom="agenda" compatibilite="[3.5.1;]" />
 	<necessite nom="cextras" compatibilite="[3.0.5;[" />
 	<necessite nom="mots" compatibilite="[2.4.6;]" />
-	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="saisies" compatibilite="[1.42.11;]" />
 	<utilise nom="revisions" compatibilite="[1.6.7;]" />
 	<utilise nom="Zcore" compatibilite="[2.0.0;]" />
 

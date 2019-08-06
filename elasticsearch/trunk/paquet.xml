@@ -16,10 +16,10 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[3.23.2;]" />
-	<necessite nom="phpcurl" compatibilite="[1.0.0;]" />
+	<necessite nom="saisies"  compatibilite="[2.28.0;]" />
+	<necessite nom="phpcurl"  compatibilite="[1.0.0;]" />
 
-	<utilise nom="extrairedoc" compatibilite="[1.2.2;]" />
+	<utilise nom="extrairedoc"  compatibilite="[1.2.2;]" />
 
 	<pipeline nom="post_edition" inclure="elasticsearch_pipelines.php" />
 	<pipeline nom="post_edition_lien" inclure="elasticsearch_pipelines.php" />

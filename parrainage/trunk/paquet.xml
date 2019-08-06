@@ -30,7 +30,7 @@
 	<pipeline nom="intranet_pages_ok" inclure="parrainage_pipelines.php" />
 
 	<necessite nom="facteur" compatibilite="[3.6.2;[" />
-	<necessite nom="saisies" compatibilite="[3.23.2;[" />
+	<necessite nom="saisies" compatibilite="[1.42.11;[" />
 
 	<utilise nom="importateur_contacts" />
 

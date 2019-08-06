@@ -36,7 +36,7 @@
 	<pipeline nom="insert_head_css" inclure="contacts_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="contacts_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[3.23.2;[" />
+	<necessite nom="saisies" compatibilite="[1.15.3;[" />
 	<necessite nom="medias" compatibilite="[2.7.27;[" />
 	<necessite nom="spip_bonux" compatibilite="[3.1.0;[" />
 

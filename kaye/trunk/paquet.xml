@@ -16,7 +16,7 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="saisies" compatibilite="[1.42.11;]" />
 	<necessite nom="verifier" compatibilite="[0.1.16;]" />
 	<necessite nom="jqueryui" compatibilite="[1.8.20;]" />
 
