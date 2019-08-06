@@ -20,6 +20,6 @@
 	<pipeline nom="diogene_objets" inclure="diogene_gerer_auteurs_pipelines.php" />
 
 	<necessite nom="diogene" compatibilite="[1.9.0;[" />
-	<necessite nom="saisies" compatibilite="[3.23.2;[" />
+	<necessite nom="saisies" compatibilite="[1.42.11;[" />
 	<utilise nom="chosen" />
 </paquet>
