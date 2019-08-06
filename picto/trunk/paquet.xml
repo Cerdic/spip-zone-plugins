@@ -1,8 +1,8 @@
 <paquet
 	prefix="picto"
 	categorie="edition"
-	version="1.0.2"
-	etat="test"
+	version="1.0.3"
+	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/picto-48.jpg"
 	documentation="https://contrib.spip.net/Picto-avec-FontAwesome"

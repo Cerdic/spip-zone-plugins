@@ -12,6 +12,7 @@ parametres:
     options:
       nom: 'nom'
       label: 'Nom du picto (voir le site de FontAwesome)'
+      explication: '<a href="https://fontawesome.com/v4.7.0/icons/" class="spip_out" target="_blonk" rel="noopener noreferrer">Liste des pictos disponibles</a>'
       defaut: ''     
   -
     saisie: 'selection'
