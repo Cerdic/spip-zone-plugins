@@ -4,7 +4,7 @@
  * Récupérer la liste des numéros de releases de Drupal
  *
  * @plugin     Info Sites
- * @copyright  2014-2016
+ * @copyright  2014-2019
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\Info_Sites\Recuperer\ReleasesDrupal
@@ -16,8 +16,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 function recuperer_releases_drupal_dist() {
 	// url page des releases = 'https://www.drupal.org/project/drupal/releases';
-	$releases = recuperer_fond('recuperer/releases_drupal');
-	$releases = explode(";", $releases);
+	// url de download de releases = 'https://ftp.drupal.org/files/projects/';
+	$releases_drupal = file_get_contents('https://ftp.drupal.org/files/projects/');
+	$releases = array();
+	if (!empty($releases_drupal)) {
+		preg_match_all("/href=\"drupal-([0-9].*)\.zip\"/", $releases_drupal, $releases);
+	}
+	$releases = $releases[1];
 	$releases = array_filter($releases);
 	$releases = array_unique($releases);
 	natsort($releases);
@@ -29,6 +34,8 @@ function recuperer_releases_drupal_dist() {
 			unset($releases[$index]);
 		}
 	}
+	natsort($releases);
+	spip_log(print_r($releases, true), 'info_sites');
 	$releases = array_values($releases);
 
 	return $releases;

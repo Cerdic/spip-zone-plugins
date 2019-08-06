@@ -246,6 +246,7 @@ function info_sites_lister_logiciels_sites() {
 	include_spip('base/abstract_sql');
 	$logiciels_nom = array();
 	$logiciels_base = sql_allfetsel("DISTINCT(logiciel_nom)", 'spip_projets_sites');
+	spip_log(print_r($logiciels_base, true), 'info_sites');
 
 	if (is_array($logiciels_base) and count($logiciels_base) > 0) {
 		foreach ($logiciels_base as $site) {
@@ -650,6 +651,10 @@ function releases($logiciel = 'spip') {
  * @return bool|mixed
  */
 function last_release($logiciel = 'spip') {
+	$logiciel = strtolower($logiciel);
+	if (strlen(trim($logiciel)) === 0 or empty($logiciel)) {
+		return false;
+	}
 	if ($releases = releases($logiciel) and $releases != false and is_array($releases)) {
 
 		return end($releases);
