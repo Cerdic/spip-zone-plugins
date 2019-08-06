@@ -20,7 +20,7 @@
 	<pipeline nom="autoriser" inclure="inc/jquerymasonry_autoriser.php" />
 	<pipeline nom="ieconfig_metas" inclure="jquerymasonry_ieconfig_metas.php" />
 
-	<necessite nom="saisies" compatibilite="[3.23.2;[" />
+	<necessite nom="saisies" compatibilite="[1.42.11;[" />
 	<necessite nom="yaml" compatibilite="[1.5.2;[" />
 
 	<menu nom="jquerymasonry" titre="jquerymasonry:titre_menu" parent="bando_squelette" icone="images/jquerymasonry-16.png" action="configurer_jquerymasonry" />

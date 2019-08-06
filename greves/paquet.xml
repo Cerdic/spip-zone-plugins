@@ -21,7 +21,7 @@
 	<pipeline nom="autoriser" inclure="greves_autorisations.php" />
 	<pipeline nom="styliser" inclure="greves_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[3.23.2;]"/>
+	<necessite nom="saisies" compatibilite="[1.42.11;]"/>
 
 	<utilise nom="Z" compatibilite="[1.0.0;]"/>
 

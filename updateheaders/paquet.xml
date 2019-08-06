@@ -30,5 +30,5 @@
 		nom="header_prive"
 		inclure="updateheaders_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="saisies" compatibilite="[1.42.11;]" />
 </paquet>

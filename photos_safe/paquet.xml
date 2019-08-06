@@ -17,7 +17,7 @@
 	<credit lien="http://rebellyon.info">Rebellyon.info</credit>
 
 	<!-- facilitons les champs de formulaires -->
-	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="saisies" compatibilite="[1.42.11;]" />
 
 	<pipeline nom="post_edition" inclure="photosafe_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="photosafe_pipelines.php" />

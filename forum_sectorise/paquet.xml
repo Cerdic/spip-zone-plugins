@@ -22,7 +22,7 @@
 	<pipeline nom="ieconfig_metas" inclure="forumsectorise_ieconfig_metas.php" />
 	<pipeline nom="afficher_config_objet" inclure="forumsectorise_pipelines.php" />
 	
-	<necessite nom="saisies" compatibilite="[3.23.2;[" />
+	<necessite nom="saisies" compatibilite="[1.42.11;[" />
 	<necessite nom="forum" compatibilite="[1.8.43;[" />
 
 	<menu nom="forumsectorise" titre="forumsectorise:titre_menu" parent="bando_configuration" icone="images/forumsectorise-16.png" action="configurer_forumsectorise" />

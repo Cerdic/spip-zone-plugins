@@ -17,7 +17,7 @@
 	<auteur lien='http://dorch.fr'>David Dorchies</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
-	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="saisies" compatibilite="[1.42.11;]" />
 	<necessite nom="coloration_code" compatibilite="[0.6.6;]" />
 
 	<pipeline nom="autoriser" inclure="requeteursql_autorisations.php" />
