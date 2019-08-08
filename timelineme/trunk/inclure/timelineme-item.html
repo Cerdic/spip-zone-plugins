@@ -1,10 +1,11 @@
 <BOUCLE_items(ARTICLES){id_article}>
 {
 	type: 'smallItem'[,
-	label: '(#TITRE|html2unicode)'][,
-	picto: '<img src="(#LOGO_ARTICLE|image_reduire{40,40}|extraire_attribut{src})" alt="#TITRE" />'][,
-	shortContent: '(#CHAPO|attribut_html)'][,
-	fullContent: '(#TEXTE|attribut_html)',
+	label: '(#TITRE|html2unicode)'][(#PLUGIN{centre_image}|oui)[,
+	picto: '<img src="(#LOGO_ARTICLE_RUBRIQUE|image_recadre{40:40, -, focus}|image_reduire{40,40}|extraire_attribut{src})" alt="#TITRE" />']][(#PLUGIN{centre_image}|non)[,
+	picto: '<img src="(#LOGO_ARTICLE_RUBRIQUE|image_passe_partout{40,40}|image_recadre{40,40,center}|extraire_attribut{src})" alt="#TITRE" />']][,
+	shortContent: "(#CHAPO|sinon{#DESCRIPTIF}|attribut_html)"][,
+	fullContent: "(#TEXTE|attribut_html)",
 	showMore: '<:timelineme:voir_plus:>',
 	showLess: '<:timelineme:voir_moins:>']
 },
