@@ -16,7 +16,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_parametrages' => 'Paramétrages',
 	'champ_cfg_objets_label' => 'Objets',
 	'champ_cfg_objets_explication' => 'Choix des types d\'objets sur lesquels l\'ajout d\'un identifiant est possible.',
+	'champ_id_objet_label' => 'N°',
 	'champ_identifiant_label' => 'Identifiant',
+	'champ_objet_label' => 'Objet',
+	'champ_titre_label' => 'Titre',
 	'champ_identifiant_explication' => 'Identifiant unique pour cet objet. Il s\'agit d\'un nom informatique : caractères alphanumériques ou «_».',
 
 	// E
@@ -26,7 +29,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_champ_identifiant_taille' => '@nb_max@ caractères au maximum (actuellement @nb@)',
 
 	// I
+	'info_1_identifiant' => 'Un identifiant',
 	'info_aucun_identifiant' => 'Aucun identifiant',
+	'info_nb_identifiants' => '@nb@ identifiants',
 	'identifiants_titre' => 'Identifiants',
 	'info_identifiants_objets_exclus' => 'Les objets suivants ont déjà un champ «identifiant» et ne sont donc pas affichés',
 	'info_identifiants_objets_manquants' => 'Les squelettes actuels du site suggèrent d\'activer les objets suivants',

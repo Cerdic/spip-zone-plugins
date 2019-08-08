@@ -1,0 +1,35 @@
+[(#AUTORISER{voir,identifiant}|sinon_interdire_acces)]
+[(#SET{defaut_tri,#ARRAY{
+	identifiant,1,
+	objet,1,
+	id_objet,1,
+}})]
+<B_liste_identifiants>
+#ANCRE_PAGINATION
+<div class="liste-objets identifiants">
+<table class="spip liste">
+	[<caption><strong class="caption">[(#CHEMIN_IMAGE{identifiants-24.png}|balise_img|inserer_attribut{class,icone--horizontale})](#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{identifiant:info_1_identifiants,identifiant:info_nb_identifiants}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="titre" scope="col">[(#TRI{identifiant,<:identifiant:champ_identifiant_label:/>,ajax})]</th>
+			<th class="titre" scope="col">[(#TRI{objet,<:identifiant:champ_objet_label:/>,ajax})]</th>
+			<th class="titre" scope="col">[(#TRI{id_objet,<:identifiant:champ_id_objet_label:/>,ajax})]</th>
+			<th class="titre" scope="col"><:identifiant:champ_titre_label:/></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_identifiants(IDENTIFIANTS){tri #ENV{par,identifiant},#GET{defaut_tri}}{par identifiant}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="">#CHAMP_SQL{identifiant}</td>
+			<td class="">#OBJET</td>
+			<td class="">#ID_OBJET</td>
+			<td class=""><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[(#INFO_TITRE{#OBJET,#ID_OBJET})]</a></td>
+		</tr>
+	</BOUCLE_liste_identifiants>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_identifiants>
+[<div class="liste-objets identifiants caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>]
+<//B_liste_identifiants>
