@@ -14,5 +14,4 @@
 
 	<necessite nom="secteur_langue" compatibilite="[1.0.0;]" />
 	<necessite nom="interface_traduction_objets" compatibilite="[1.0.0;[" />
-
 </paquet>
