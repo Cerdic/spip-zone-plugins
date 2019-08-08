@@ -32,7 +32,7 @@ function identifiants_autoriser() {
  * @param  array  $opts  Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
  */
-function autoriser_identifiants_voir_dist($faire, $type, $id, $qui, $opts) {
+function autoriser_identifiant_voir_dist($faire, $type, $id, $qui, $opts) {
 	$autoriser = autoriser('webmestre', '', '', $qui);
 	return $autoriser;
 }
@@ -50,7 +50,7 @@ function autoriser_identifiants_voir_dist($faire, $type, $id, $qui, $opts) {
  * @param  array  $opts  Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
  */
-function autoriser_identifiants_modifier_dist($faire, $type, $id, $qui, $opts) {
+function autoriser_identifiant_modifier_dist($faire, $type, $id, $qui, $opts) {
 	$autoriser = autoriser('webmestre', '', '', $qui);
 	return $autoriser;
 }

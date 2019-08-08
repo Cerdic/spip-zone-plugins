@@ -35,7 +35,7 @@ function identifiants_editer_contenu_objet($flux) {
 		$objet = $flux['args']['type']
 		and $table_objet_sql = table_objet_sql($objet)
 		and in_array($table_objet_sql, $objets)
-		and autoriser('modifier', 'identifiants')
+		and autoriser('modifier', 'identifiant')
 	) {
 
 		// récupérer le squelette de la saisie
@@ -91,7 +91,7 @@ function identifiants_boite_infos($flux) {
 		and $id_objet = intval($flux['args']['id'])
 		and $table_objet_sql = table_objet_sql($objet)
 		and in_array($table_objet_sql, $objets)
-		and autoriser('voir', 'identifiants')
+		and autoriser('voir', 'identifiant')
 	) {
 
 		// récupérer la valeur de l'identifiant
@@ -140,7 +140,7 @@ function identifiants_formulaire_charger($flux) {
 		and $objet = $matches[1]
 		and $table_objet_sql = table_objet_sql($objet)
 		and in_array($table_objet_sql, $objets)
-		and autoriser('modifier', 'identifiants')
+		and autoriser('modifier', 'identifiant')
 	) {
 
 		// on suppose que id_objet est le 1er paramètre du formulaire
@@ -183,7 +183,7 @@ function identifiants_formulaire_verifier($flux) {
 		and $id_objet = $flux['args']['args'][0] // on suppose que l'id est le 1er paramètre
 		and $table_objet_sql = table_objet_sql($objet)
 		and in_array($table_objet_sql, $objets)
-		and autoriser('modifier', 'identifiants')
+		and autoriser('modifier', 'identifiant')
 	) {
 
 		if ($identifiant = _request('identifiant')) {
@@ -256,7 +256,7 @@ function identifiants_formulaire_traiter($flux) {
 		and $id_objet = intval($flux['args']['args'][0]) // on suppose que c'est le 1er paramètre
 		and $table_objet_sql = table_objet_sql($objet)
 		and in_array($table_objet_sql, $objets)
-		and autoriser('modifier', 'identifiants')
+		and autoriser('modifier', 'identifiant')
 	) {
 		if (!function_exists('maj_identifiant_objet')) {
 			include_spip('identifiants_fonctions');
@@ -292,7 +292,7 @@ function identifiants_post_insertion($flux) {
 		and $objet = objet_type($table_objet)
 		and $id_objet = $flux['args']['id_objet']
 		and in_array($table_objet, $objets)
-		and autoriser('modifier', 'identifiants')
+		and autoriser('modifier', 'identifiant')
 	) {
 		if (!function_exists('maj_identifiant_objet')) {
 			include_spip('identifiants_fonctions');
@@ -344,7 +344,7 @@ function identifiants_affiche_gauche($flux) {
 		and isset($flux['args'][$id_table_objet])
 		and $id_objet = intval($flux['args'][$id_table_objet])
 		and !sql_countsel('spip_identifiants', array('objet = '.sql_quote($objet), 'id_objet = '.intval($id_objet)))
-		and autoriser('voir', 'identifiants')
+		and autoriser('voir', 'identifiant')
 		and !empty($identifiants_utiles[$objet])
 	) {
 
