@@ -162,12 +162,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'noisette_description' => 'Insère un menu défini avec le plugin Menus.',
+	'noisette_explication_class_menu' => 'Classe ajoutée directement sur le menu, en plus de la classe configurée dans les options du menu.',
 	'noisette_label_afficher_titre_menu' => 'Afficher le titre du menu ?',
+	'noisette_label_class_conteneur' => 'Classe CSS du conteneur',
+	'noisette_label_class_menu' => 'Classe CSS du menu',
 	'noisette_label_identifiant' => 'Menu à afficher :',
 	'noisette_nom_noisette' => 'Menu',
-	'noisette_label_class_menu' => 'Classe CSS du menu',
-	'noisette_explication_class_menu' => 'Classe ajoutée directement sur le menu, en plus de la classe configurée dans les options du menu.',
-	'noisette_label_class_conteneur' => 'Classe CSS du conteneur',
 	'nom_menu_accueil' => 'Accueil',
 	'nom_menu_articles_rubrique' => 'Articles d’une rubrique',
 	'nom_menu_deconnecter' => 'Se déconnecter',
