@@ -6,7 +6,7 @@
 	points,-1
 }})
 ]
-#SET{activer_rang, #ENV{id_rubrique}|et{#VAL{articles}|in_array{#RANG_LISTE_OBJETS}} }
+#SET{activer_rang, #ENV{id_rubrique}|et{#VAL{articles}|in_array{#RANG_LISTE_OBJETS}}|et{#AUTORISER{publierdans,rubrique,#ENV{id_rubrique}}} }
 [(#GET{activer_rang}|oui) [(#VAL{rang}|setenv{par})] #SET{tri,rang}]
 <B_liste_art>
 #ANCRE_PAGINATION
