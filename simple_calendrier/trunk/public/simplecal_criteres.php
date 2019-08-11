@@ -261,17 +261,24 @@ function critere_simplecalperiode_dist($idb, &$boucles, $crit) {
     
     //    date_debut comprise dans la periode
     // OU date_fin   comprise dans la periode
+    // OU date_debut avant début période et date_fin après fin période
     $c = array("'OR'",
-        array("'AND'",
-            array("'>='", "'DATE_FORMAT($date_debut, \'%Y%m%d\')'", ("$pdeb")),
-            array("'<='", "'DATE_FORMAT($date_debut, \'%Y%m%d\')'", ("$pfin"))
+        array("'OR'",
+            array("'AND'",
+                array("'>='", "'DATE_FORMAT($date_debut, \'%Y%m%d\')'", ("$pdeb")),
+                array("'<='", "'DATE_FORMAT($date_debut, \'%Y%m%d\')'", ("$pfin"))
+            ),
+            array("'AND'",
+                array("'>='", "'DATE_FORMAT($date_fin, \'%Y%m%d\')'", ("$pdeb")),
+                array("'<='", "'DATE_FORMAT($date_fin, \'%Y%m%d\')'", ("$pfin"))
+            )
         ),
         array("'AND'",
-            array("'>='", "'DATE_FORMAT($date_fin, \'%Y%m%d\')'", ("$pdeb")),
-            array("'<='", "'DATE_FORMAT($date_fin, \'%Y%m%d\')'", ("$pfin"))
+            array("'<='", "'DATE_FORMAT($date_debut, \'%Y%m%d\')'", ("$pdeb")),
+            array("'>='", "'DATE_FORMAT($date_fin, \'%Y%m%d\')'", ("$pfin"))
         )
     );
-    
+
    
     // Inversion de la condition ?
     $c = ($not ? array("'NOT'", $c) : $c);
