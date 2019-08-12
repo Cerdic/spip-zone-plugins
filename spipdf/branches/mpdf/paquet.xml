@@ -1,0 +1,16 @@
+<paquet
+	prefix="spipdf"
+	categorie="edition"
+	version="1.2.4"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="spipdf.png"
+	documentation="https://contrib.spip.net/3719"
+>
+	<nom>SpiPDF</nom>
+
+	<auteur lien="http://www.grafactory.net" mail="yvestanSANSPAM@gmail.com">Yves Tannier</auteur>
+	<licence lien="http://www.gnu.org/licenses/lgpl.html">LGPL</licence>
+
+	<pipeline nom="affichage_final" inclure="spipdf_fonctions.php" />
+</paquet>
