@@ -4,9 +4,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function couleur_objet_affiche_droite($flux){
 
+	include_spip('inc/config');
+	$objets_config = lire_config('couleur_objet/objets',array());
+
 	$e     = trouver_objet_exec($flux['args']['exec']);
 	$table_objet_sql = $e['table_objet_sql'];
-	$objets_config = lire_config('couleur_objet/objets',array());
+
 	if (
 		in_array($table_objet_sql,$objets_config) // si configuration objets ok
 		AND $e !== false // page d'un objet éditorial

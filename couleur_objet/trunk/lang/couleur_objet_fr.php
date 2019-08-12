@@ -13,7 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer' => 'Supprimer',
 	
 	// C
-	'choisir_une_nouvelle_couleur' => 'Choisir une nouvelle couleur :',
+	'couleur_titre_form' => 'couleur',
+	'choisir_une_nouvelle_couleur' => 'Choisir une couleur :',
 	'configurer_couleur_objet' => 'Configurer "Couleur d\'objet"',
 	'couleur_actuelle' => 'La couleur actuelle :',
 	

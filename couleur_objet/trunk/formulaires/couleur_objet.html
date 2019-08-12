@@ -14,7 +14,10 @@
 		c'est pourquoi value=#FFFFFF
 
 ]<div class="formulaire_spip formulaire_config formulaire_#FORM">
-	<h3 class="titrem">[(#CHEMIN{img_pack/couleur_objet-24.png}|balise_img{'',cadre-icone})]Couleur</h3>
+	<h3 class="titrem">
+		[(#CHEMIN{img_pack/couleur_objet-24.png}|balise_img{'',cadre-icone})]
+		<:couleur_objet:couleur_titre_form|strtoupper:>
+	</h3>
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	
