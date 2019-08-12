@@ -31,13 +31,18 @@ function indexer_lister_jointures($objet) {
 	include_spip('base/objets');
 	
 	$jointures = array();
-	$jointures_declarees = array_keys(objet_info($objet, 'rechercher_jointures'));
 	
-	// On ne garde que celles qui ont une fonction "indexer" dédiée
-	foreach ($jointures_declarees as $jointure) {
-		$table = table_objet($jointure); // article => articles
-		if (charger_fonction('jointure_'.$table, 'indexer', true)) {
-			$jointures[] = $table;
+	if (
+		$jointures_declarees = objet_info($objet, 'rechercher_jointures')
+		and is_array($jointures_declarees)
+		and $jointures_declarees = array_keys($jointures_declarees)
+	) {
+		// On ne garde que celles qui ont une fonction "indexer" dédiée
+		foreach ($jointures_declarees as $jointure) {
+			$table = table_objet($jointure); // article => articles
+			if (charger_fonction('jointure_'.$table, 'indexer', true)) {
+				$jointures[] = $table;
+			}
 		}
 	}
 	
