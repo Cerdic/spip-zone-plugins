@@ -41,5 +41,3 @@ function notation_critique($p){
 	$p = preg_replace('/\[-\]/', '<img src="'.find_in_path('img_pack/notation-moins.gif').'"> ', $p);
 	return $p;
 }
-
-?>

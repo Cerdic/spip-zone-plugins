@@ -405,4 +405,3 @@ function facteur_mail_html2text($html){
 	// Faire des lignes de 75 caracteres maximum
 	return trim(wordwrap($texte));
 }
-?>

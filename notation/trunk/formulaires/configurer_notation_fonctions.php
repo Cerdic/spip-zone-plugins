@@ -47,4 +47,3 @@ function cfg_config_notation_ponderation_post_traiter(&$cfg){
 	}
 
 }
-?>

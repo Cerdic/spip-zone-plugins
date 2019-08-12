@@ -132,6 +132,3 @@ function creer_sprites_recuperer_fond ($flux) {
 	return creer_sprites($flux);
 
 }
-
-
-?>
