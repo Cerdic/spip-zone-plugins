@@ -47,7 +47,6 @@ function verifier_date_dist($valeur, $options = array(), &$valeur_normalisee = n
 		}
 		// S'il y a au moins la date ok
 		elseif (isset($valeur['date']) and is_string($valeur['date'])) {
-			$valeur = $valeur['date']; // valeur principale pour la date
 			$horaire = true; // on détecte une vérif avec horaire uniquement dans ce cas
 			
 			// Si on trouve une heure donnée
@@ -58,6 +57,8 @@ function verifier_date_dist($valeur, $options = array(), &$valeur_normalisee = n
 			else {
 				$options['heure'] = '00:00';
 			}
+			
+			$valeur = $valeur['date']; // valeur principale pour la date
 		}
 		// Sinon c'est une date vide, et on a tout à fait le droit !
 		// (sinon on aurait mis "obligatoire", et c'est pris en compte par Saisies avant)
