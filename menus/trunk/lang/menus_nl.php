@@ -164,7 +164,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'noisette_description' => 'Voeg een menu van plugin Menus toe.',
+	'noisette_explication_class_menu' => 'Class die direct aan het menu wordt toegevoegd, in aanvulling op die in de opties van het menu.',
 	'noisette_label_afficher_titre_menu' => 'De titel van het menu tonen?',
+	'noisette_label_class_conteneur' => 'CSS class van de container',
+	'noisette_label_class_menu' => 'CSS class van het menu',
 	'noisette_label_identifiant' => 'Te tonen menu:',
 	'noisette_nom_noisette' => 'Menu',
 	'nom_menu_accueil' => 'Begin',
