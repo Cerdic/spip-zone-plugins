@@ -318,11 +318,9 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 							if (_IMAGE_WEBP) {
 								$sources .= "<source srcset='$set_webp' type='image/webp'>";
 								$sources .= "<source srcset='$set' type='$mime'>";
+							} else {
+								$srcset[] = $set;
 							}
-
-							//$sources .= "<source srcset='$set'>";
-							//$set = find_in_path("rien.gif");
-							$srcset[] = $set;
 						}
 
 
