@@ -1,3 +1,21 @@
+function _image_responsive_test_webp_reel (){
+	// Méthode synchrone - mais Firefox ne détecte pas correctement (tant pis pour l'instant…)
+    var elem = document.createElement('canvas');
+
+    if (!!(elem.getContext && elem.getContext('2d'))) {
+        // was able or not to get WebP representation
+        return elem.toDataURL('image/webp').indexOf('data:image/webp') == 0;
+    }
+
+    // very old browser like IE 8, canvas not supported
+    return false;
+}
+var _image_responsive_test_webp_val = "init";
+function _image_responsive_test_webp (){
+	if (_image_responsive_test_webp_val == "init") _image_responsive_test_webp_val = _image_responsive_test_webp_reel();
+	return _image_responsive_test_webp_val;
+}
+
 function charger_url_image_responsive(this_img) {
 	var dPR = window.devicePixelRatio;
 		var src = this_img.attr("data-src");
@@ -20,6 +38,7 @@ function charger_url_image_responsive(this_img) {
 		var numdim = [];
 		if (tailles) {
 			var w_max = 0;
+			var taille_max = 0;
 			var t = $.parseJSON(tailles.replace(/\\"/g, '"'));
 			var changer_w = 1;
 			
@@ -33,6 +52,7 @@ function charger_url_image_responsive(this_img) {
 				if (changer_w == 1) w_max = value;
 				if (value >= dim) changer_w = 0;
 				//numdim[w_max] = i;
+				if (value >= taille_max) taille_max = value;
 
 			});			
 			 //console.log ("Wmax: "+w_max);
@@ -46,7 +66,10 @@ function charger_url_image_responsive(this_img) {
 		if (autorisees) {
 			autorisees = $.parseJSON(autorisees.replace(/\\"/g, '"'));		
 		}
-
+		var autorisees_webp = this_img.attr("data-autorisees_webp");					
+		if (autorisees_webp) {
+			if (_image_responsive_test_webp()) autorisees = $.parseJSON(autorisees_webp.replace(/\\"/g, '"'));		
+		}
 
 		// Si l'image est trop petite, c'est pas la peine de demander trop grand…
 		if (vertical && parseInt(dim) > parseInt(h)) {
@@ -73,6 +96,8 @@ function charger_url_image_responsive(this_img) {
 
 					if (image_responsive_retina_hq && dPR) {
 						dim = dim * dPR;
+						if (taille_max > 0 & dim > taille_max) dim = taille_max;
+
 						dPR = false;
 					}
 				} else {
@@ -85,11 +110,13 @@ function charger_url_image_responsive(this_img) {
 				else {				
 					if (htactif) {
 						racine = src.substr(0, src.length-4);
+						console.log(racine);
 						terminaison = src.substr(src.length-3, 3);
 						var url_img = racine+"-resp"+dim;
 						if (vertical) url_img = url_img + "v";
 						if (dPR) url_img = url_img + "-"+dPR;
 						url_img = url_img + "."+terminaison;
+						if (_image_responsive_test_webp()) url_img = url_img + ".webp";
 					} else {
 						var url_img = "index.php?action=image_responsive&img="+src+"&taille="+dim;
 						if (vertical) url_img = url_img + "v";

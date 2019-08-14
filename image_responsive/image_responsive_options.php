@@ -6,6 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 
 if (!defined("_IMAGE_RESPONSIVE_CALCULER")) define("_IMAGE_RESPONSIVE_CALCULER", false);
+if (!defined("_IMAGE_WEBP")) define("_IMAGE_WEBP", false);
 if (!defined("_SPIP_LIER_RESSOURCES")) define("_SPIP_LIER_RESSOURCES", false);
 if (!defined("_IMAGE_RESPONSIVE_RETINA_HQ")) define("_IMAGE_RESPONSIVE_RETINA_HQ", true);
 
@@ -19,7 +20,7 @@ function _findSharp($intOrig, $intFinal) {
 }
 
 
-function image_reduire_net($source, $taille = 0, $taille_y=0, $dpr=0) {
+function image_reduire_net($source, $taille = 0, $taille_y=0, $dpr=0, $forcer_format="auto") {
 	// ordre de preference des formats graphiques pour creer les vignettes
 	// le premier format disponible, selon la methode demandee, est utilise
 
@@ -163,14 +164,21 @@ function image_reduire_net($source, $taille = 0, $taille_y=0, $dpr=0) {
 
 				imageconvolution($destImage, $arrMatrix, $divisor, 0);
 			}
+			
+			
 			// Sauvegarde de l'image destination
 			$valeurs['fichier_dest'] = $vignette = "$destination.$destFormat";
 			$valeurs['format_dest'] = $format = $destFormat;
 			
-			if ($dpr > 1.5) $qualite = 40;
-			else $qualite=_IMG_GD_QUALITE;
-			_image_gd_output($destImage,$valeurs, $qualite);
-
+			if ($forcer_format == "webp") {
+				$valeurs['fichier_dest'] = $vignette = "$destination.$destFormat.webp";
+				imagewebp ($destImage, $vignette);
+			} else {
+				if ($dpr > 1.5) $qualite = 40;
+				else $qualite=_IMG_GD_QUALITE;
+				_image_gd_output($destImage,$valeurs, $qualite);
+			}
+			
 			if ($srcImage)
 				ImageDestroy($srcImage);
 			ImageDestroy($destImage);
@@ -204,7 +212,7 @@ function image_reduire_net($source, $taille = 0, $taille_y=0, $dpr=0) {
 
 
 
-function retour_image_responsive($img, $taille, $dpr, $xsendfile, $retour="http"){
+function retour_image_responsive($img, $taille, $dpr, $xsendfile, $retour="http", $format="auto"){
 	if (!preg_match(',\.(gif|jpe?g|png)$,i', $img)
 	OR !preg_match(',^\d+v?$,', $taille)
 	OR !preg_match(',^[\d\.]*$,', $dpr)
@@ -238,6 +246,7 @@ function retour_image_responsive($img, $taille, $dpr, $xsendfile, $retour="http"
 		else $dpr = false;
 		
 		$dest = $base.$dest.".".$terminaison;
+		if ($format == "webp") $dest .= ".webp";
 
 		if (file_exists($dest)) {
 			if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && 
@@ -261,9 +270,9 @@ function retour_image_responsive($img, $taille, $dpr, $xsendfile, $retour="http"
 			// et on fait donc les tests sans déclencher la cavalerie
 			spip_log("fabrication de l'image responsive $dest","image_responsive");
 			if ($v) {	
-				$img_new = image_reduire_net ($img, 0, $taille, $dpr);
+				$img_new = image_reduire_net ($img, 0, $taille, $dpr, $format);
 			} else {
-				$img_new = image_reduire_net ($img, $taille, 0, $dpr);
+				$img_new = image_reduire_net ($img, $taille, 0, $dpr, $format);
 			}
 			$img_new = extraire_attribut($img_new, "src");
 			

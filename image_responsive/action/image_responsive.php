@@ -9,10 +9,12 @@ function action_image_responsive() {
 	$taille = _request("taille");
 	$dpr = _request("dpr");
 	$xsendfile = _request("xsendfile");
+	$format = _request("format");
+	if (!$format) $format = "auto";
 
 	// Gérer le plugin mutualisation
 	#if (defined('_DIR_SITE'))
 	#	$img = _DIR_SITE.$img;
 
-	return retour_image_responsive($img, $taille, $dpr, $xsendfile, "http");
+	return retour_image_responsive($img, $taille, $dpr, $xsendfile, "http", $format);
 }
