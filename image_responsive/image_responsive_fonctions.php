@@ -267,8 +267,18 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 			if (count($tailles) == 1 && $lazy != 1) { // Pas de srcset sur les images lazy
 				$t = $tailles[0];
 				if ($t != 0 ) {
+						if (_IMAGE_WEBP) {
+							$set = $fichiers[$i][1] . " 1x";
+							$set .= "," . $fichiers[$i][2] . " 2x";
+							$set_webp = $fichiers_webp[$i][1] . " 1x";
+							$setset_webp .= "," . $fichiers_webp[$i][2] . " 2x";
+							$sources .= "<source srcset='$set_webp' type='image/webp'>";
+							$sources .= "<source srcset='$set' type='$mime'>";
+							
+						} else {
 						$srcset[] = $fichiers[1][1] . " 1x";
 						$srcset[] = $fichiers[1][2] . " 2x";
+						}
 
 				}
 			}
