@@ -276,8 +276,8 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 							$sources .= "<source srcset='$set' type='$mime'>";
 							
 						} else {
-						$srcset[] = $fichiers[1][1] . " 1x";
-						$srcset[] = $fichiers[1][2] . " 2x";
+							$srcset[] = $fichiers[1][1] . " 1x";
+							$srcset[] = $fichiers[1][2] . " 2x";
 						}
 
 				}
@@ -677,13 +677,25 @@ function background_responsive($src, $taille = 120, $lazy = 0, $align = "") {
 				if (_IMAGE_RESPONSIVE_CALCULER) {
 					$fichiers[$t_italien]["i"][1] = retour_image_responsive($s_italien, "$t_italien", 1, 0, "file");
 					$fichiers[$t_italien]["i"][2] = retour_image_responsive($s_italien, "$t_italien", 2, 0, "file");
+					if (_IMAGE_WEBP) {
+						$fichiers_webp[$t_italien]["i"][1] = retour_image_responsive($s_italien, "$t_italien", 1, 0, "file", "webp");
+						$fichiers_webp[$t_italien]["i"][2] = retour_image_responsive($s_italien, "$t_italien", 2, 0, "file", "webp");
+					}
 				} else {
 					if ($htactif) {
 						$fichiers[$t_italien]["i"][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_italien.$1", $s_italien) . "?$mtime";
 						$fichiers[$t_italien]["i"][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_italien-2.$1", $s_italien) . "?$mtime";
+						if (_IMAGE_WEBP) {
+							$fichiers_webp[$t_italien]["i"][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_italien.$1.webp", $s_italien) . "?$mtime";
+							$fichiers_webp[$t_italien]["i"][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_italien-2.$1.webp", $s_italien) . "?$mtime";
+						}
 					} else {
 						$fichiers[$t_italien]["i"][1] = "index.php?action=image_responsive&amp;img=$s_italien&amp;taille=$t_italien&mtime=$mtime";
 						$fichiers[$t_italien]["i"][2] = "index.php?action=image_responsive&amp;img=$s_italien&amp;taille=$t_italien&amp;dpr=2&mtime=$mtime";
+						if (_IMAGE_WEBP) {
+							$fichiers_webp[$t_italien]["i"][1] = "index.php?action=image_responsive&amp;img=$s_italien&amp;taille=$t_italien&amp;format=web&mtime=$mtime";
+							$fichiers_webp[$t_italien]["i"][2] = "index.php?action=image_responsive&amp;img=$s_italien&amp;taille=$t_italien&amp;dpr=2&amp;format=web&mtime=$mtime";
+						}
 					}
 				}
 
@@ -691,13 +703,25 @@ function background_responsive($src, $taille = 120, $lazy = 0, $align = "") {
 				if (_IMAGE_RESPONSIVE_CALCULER) {
 					$fichiers[$t_portrait]["p"][1] = retour_image_responsive($s_portrait, "$t_portrait", 1, 0, "file");
 					$fichiers[$t_portrait]["p"][2] = retour_image_responsive($s_portrait, "$t_portrait", 2, 0, "file");
+					if (_IMAGE_WEBP) {
+						$fichiers_webp[$t_italien]["p"][1] = retour_image_responsive($s_italien, "$t_portrait", 1, 0, "file", "webp");
+						$fichiers_webp[$t_italien]["p"][2] = retour_image_responsive($s_italien, "$t_portrait", 2, 0, "file", "webp");
+					}
 				} else {
 					if ($htactif) {
 						$fichiers[$t_portrait]["p"][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_portrait.$1", $s_portrait) . "?$mtime";
 						$fichiers[$t_portrait]["p"][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_portrait-2.$1", $s_portrait) . "?$mtime";
+						if (_IMAGE_WEBP) {
+							$fichiers_webp[$t_italien]["p"][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_portrait.$1.webp", $s_italien) . "?$mtime";
+							$fichiers_webp[$t_italien]["p"][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_portrait-2.$1.webp", $s_italien) . "?$mtime";
+						}
 					} else {
 						$fichiers[$t_portrait]["p"][1] = "index.php?action=image_responsive&amp;img=$s_portrait&amp;taille=$t_portrait&mtime=$mtime";
 						$fichiers[$t_portrait]["p"][2] = "index.php?action=image_responsive&amp;img=$s_portrait&amp;taille=$t_portrait&amp;dpr=2&mtime=$mtime";
+						if (_IMAGE_WEBP) {
+							$fichiers_webp[$t_italien]["p"][1] = "index.php?action=image_responsive&amp;img=$s_portrait&amp;taille=$t_portrait&amp;format=web&mtime=$mtime";
+							$fichiers_webp[$t_italien]["p"][2] = "index.php?action=image_responsive&amp;img=$s_portrait&amp;taille=$t_portrait&amp;dpr=2&amp;format=web&mtime=$mtime";
+						}
 					}
 				}
 
@@ -705,6 +729,9 @@ function background_responsive($src, $taille = 120, $lazy = 0, $align = "") {
 
 			$ins .= " data-tailles='" . addslashes(json_encode($tailles)) . "'";
 			$ins .= " data-autorisees='" . addslashes(json_encode($fichiers)) . "'";
+			if (_IMAGE_WEBP) {
+				$ins .= " data-autorisees_webp='" . addslashes(json_encode($fichiers_webp)) . "'";
+			}
 
 			if (_SPIP_LIER_RESSOURCES && $fichiers) {
 				foreach ($fichiers as $f) {

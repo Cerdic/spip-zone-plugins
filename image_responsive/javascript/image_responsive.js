@@ -206,8 +206,12 @@ function charger_url_background_responsive(this_img) {
 			if (autorisees) {
 				autorisees = $.parseJSON(autorisees.replace(/\\"/g, '"'));		
 			}
-		
+			var autorisees_webp = this_img.attr("data-autorisees_webp");					
+			if (autorisees_webp) {
+				if (_image_responsive_test_webp()) autorisees = $.parseJSON(autorisees_webp.replace(/\\"/g, '"'));		
+			}
 			dim = Math.round(dim);
+			
 								
 			if (autorisees && autorisees[dim][mode]) {
 				if (dPR < 1.5) url_img = autorisees[dim][mode][1];
