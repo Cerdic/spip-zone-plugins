@@ -3,7 +3,7 @@
  * Créer une fiche de projet à partir d'une référence
  *
  * @plugin     InfoSites
- * @copyright  2017-2018
+ * @copyright  2017-2019
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP/Infosites/Action

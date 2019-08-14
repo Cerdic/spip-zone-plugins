@@ -3,7 +3,7 @@
  * Gestion du formulaire d'édition rapide d'un contact
  *
  * @plugin  InfoSites
- * @license GPL (c) 2016-2017
+ * @license GPL (c) 2016-2019
  * @author  Teddy Payet
  *
  * @package SPIP\InfoSites\Formulaires

@@ -11,7 +11,7 @@
 						[<div class="type">(#TYPE|coordonnees_lister_types_numeros)</div>]
 					</div>
 					<div class='span'>
-						[<div class="#EDIT{numero} numero">(#NUMERO)</div>]
+						[<div class="#EDIT{numero} numero text-nowrap">(#NUMERO)</div>]
 						[(#AUTORISER{modifier,numero,#ID_NUMERO}|et{#ENV{boutons_actions}}|oui)
 						<div class='action'>
 							<a onclick="ajaxReload('coordonnees', {args:{coordonnee:'numero', id_coordonnee:'[(#ID_NUMERO)]'}});" href="#coordonnees" title="<:coordonnees:modifier_numero:>">

@@ -3,7 +3,7 @@
  * Rechercher par les webservices les plugins à mettre à jour sur les sites
  *
  * @plugin     Info Sites
- * @copyright  2014-2016
+ * @copyright  2014-2019
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\Info_Sites\Genie

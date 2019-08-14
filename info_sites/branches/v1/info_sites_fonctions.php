@@ -5,7 +5,7 @@
  *
  * @plugin     Info Sites
  *
- * @copyright  2014-2016
+ * @copyright  2014-2019
  * @author     Teddy Payet
  * @licence    GNU/GPL
  */
@@ -17,7 +17,8 @@ include_spip('inc/filtres_ecrire');
 
 /**
  * Lister des tables de liens des différents objets de SPIP
- * On récupère toutes les tables auxiliaires référencées et on ne garde que les tables ayant un champ `objet`. Ce qui présuppose dans SPIP que la table est de type 'liens' entre objets.
+ * On récupère toutes les tables auxiliaires référencées et on ne garde que les tables ayant un champ `objet`. Ce qui
+ * présuppose dans SPIP que la table est de type 'liens' entre objets.
  *
  * @example array('spip_auteurs_liens', 'spip_mots_liens')
  * @see     lister_tables_auxiliaires()
@@ -58,7 +59,7 @@ if (!function_exists('lister_tables_objets')) {
 			foreach ($tables_principales as $table) {
 				$liste_objets[] = table_objet($table);
 			}
-			natsort($liste_objets);
+			$liste_objets = info_sites_nettoyer_tableau($liste_objets);
 
 			return $liste_objets;
 		}
@@ -231,7 +232,6 @@ function sites_projets_maj_plugins() {
 			}
 		}
 	}
-	echo _DIR_TMP;
 
 	return $liste_plugins;
 }
@@ -246,6 +246,7 @@ function info_sites_lister_logiciels_sites() {
 	include_spip('base/abstract_sql');
 	$logiciels_nom = array();
 	$logiciels_base = sql_allfetsel("DISTINCT(logiciel_nom)", 'spip_projets_sites');
+	spip_log(print_r($logiciels_base, true), 'info_sites');
 
 	if (is_array($logiciels_base) and count($logiciels_base) > 0) {
 		foreach ($logiciels_base as $site) {
@@ -255,6 +256,73 @@ function info_sites_lister_logiciels_sites() {
 	$logiciels_nom = info_sites_nettoyer_tableau($logiciels_nom);
 
 	return $logiciels_nom;
+}
+
+function info_sites_lister_plugins_logiciels_sites($nom = 'spip', $organisation = '') {
+	if (empty($nom) or strlen($nom) == 0) {
+		$nom = 'spip';
+	}
+	include_spip('base/abstract_sql');
+	$liste_plugins = array();
+	$where = '';
+	if (!empty($organisation) and !is_array($organisation)) {
+		$_ids = info_sites_lister_sites_organisations($organisation, 'array');
+
+		// Si on a des $_ids, on prépare le WHERE
+		if (is_array($_ids) and count($_ids) > 0) {
+			$where .= " AND id_projets_site IN (" . join(', ', $_ids) . ")";
+		}
+	}
+	$liste_projets_sites = sql_allfetsel('logiciel_plugins, id_projets_site', 'spip_projets_sites', "logiciel_nom ='" . $nom . "' AND logiciel_plugins!=''" . $where);
+	if (is_array($liste_projets_sites) and count($liste_projets_sites) > 0) {
+		foreach ($liste_projets_sites as $liste) {
+			$liste = formater_tableau($liste['logiciel_plugins'], 'plugins');
+			foreach ($liste as $info) {
+				if (isset($info['titre'])) {
+					$liste_plugins[$info['prefixe']] = trim($info['titre']);
+				}
+			}
+		}
+	}
+	ksort($liste_plugins);
+
+	return $liste_plugins;
+}
+
+/**
+ * Récupérer la liste des id des sites de projets d'une organisation
+ *
+ * @param int|string $organisation
+ * @param string     $format
+ *
+ * @return array|string
+ */
+function info_sites_lister_sites_organisations($organisation, $format = 'string') {
+	include_spip('base/abstract_sql');
+	$_ids = array();
+	if (is_numeric($organisation) and intval($organisation) > 0) {
+		$_ids_base = sql_allfetsel('id_projets_site', 'spip_projets_sites', "id_projets_site IN (SELECT DISTINCT(id_projets_site) FROM spip_projets_sites_liens WHERE objet='projet' AND id_objet IN (SELECT DISTINCT(id_projet) FROM spip_projets_liens WHERE objet='organisation' AND id_objet=$organisation))");
+	} elseif (!empty($organisation) and is_string($organisation) and strlen($organisation) > 0) {
+		$_ids_base = sql_allfetsel('id_projets_site', 'spip_projets_sites', "id_projets_site IN (SELECT DISTINCT(id_projets_site) FROM spip_projets_sites_liens WHERE objet='projet' AND id_objet IN (SELECT DISTINCT(id_projet) FROM spip_projets_liens WHERE objet='organisation' AND id_objet IN (SELECT id_organisation FROM spip_organisations WHERE nom='$organisation')))");
+
+	}  elseif (!empty($organisation) and is_array($organisation)) {
+		$_ids_base = sql_allfetsel('id_projets_site', 'spip_projets_sites', "id_projets_site IN (SELECT DISTINCT(id_projets_site) FROM spip_projets_sites_liens WHERE objet='projet' AND id_objet IN (SELECT DISTINCT(id_projet) FROM spip_projets_liens WHERE objet='organisation' AND id_objet IN (" . join(',', $organisation) .')))');
+
+	} else {
+		$_ids_base = sql_allfetsel('id_projets_site', 'spip_projets_sites');
+	}
+	// On traite les id qui ont été remonté par les requêtes précédentes
+	if (is_array($_ids_base) and count($_ids_base) > 0) {
+		foreach ($_ids_base as $_id_base) {
+			$_ids[] = $_id_base['id_projets_site'];
+		}
+	}
+
+	if ($format === 'string') {
+		$_ids = join(',', $_ids);
+	}
+
+	return $_ids;
 }
 
 function info_sites_lister_logiciels_projet($id_projet, $class = '') {
@@ -458,6 +526,7 @@ function info_sites_nettoyer_tableau($tableau = array()) {
 	if (count($tableau) > 0) {
 		$tableau = array_unique($tableau); // Pas de doublons
 		$tableau = array_filter($tableau); // On enlève les valeurs vides
+		natsort($tableau); // Classer par ordre alphabétique
 		$tableau = array_values($tableau); // On réindexe le tableau pour éviter des surprises
 	}
 
@@ -582,6 +651,10 @@ function releases($logiciel = 'spip') {
  * @return bool|mixed
  */
 function last_release($logiciel = 'spip') {
+	$logiciel = strtolower($logiciel);
+	if (strlen(trim($logiciel)) === 0 or empty($logiciel)) {
+		return false;
+	}
 	if ($releases = releases($logiciel) and $releases != false and is_array($releases)) {
 
 		return end($releases);
@@ -672,9 +745,7 @@ function info_sites_lister_projets($champ = 'nom') {
 			$results[] = trim($projet[$champ]);
 		}
 	}
-	$results = array_unique($results);
-	$results = array_filter($results);
-	natsort($results);
+	$results = info_sites_nettoyer_tableau($results);
 
 	return $results;
 
@@ -704,10 +775,31 @@ function info_sites_lister_organisations($champ = 'nom') {
 			$results[] = trim($organisation[$champ]);
 		}
 	}
-	$results = array_unique($results);
-	$results = array_filter($results);
-	natsort($results);
+	$results = info_sites_nettoyer_tableau($results);
 
 	return $results;
 
+}
+
+
+function formater_tableau_plugins($tableau) {
+	$liste = array();
+
+	if (empty($tableau)) {
+		return array();
+	}
+	$tableau = formater_tableau($tableau, 'plugins');
+
+	foreach ($tableau as $index => $plugin) {
+		if (isset($plugin['prefixe'])) {
+			$liste[$plugin['prefixe']] = array(
+				'version' => $plugin['version'],
+				'version_base' => $plugin['version_base'],
+				'titre' => $plugin['titre'],
+				'statut' => $plugin['statut'],
+			);
+		}
+	}
+
+	return $liste;
 }

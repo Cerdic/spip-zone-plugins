@@ -3,7 +3,7 @@
  * Définit les autorisations du plugin Info Sites
  *
  * @plugin     Info Sites
- * @copyright  2014-2016
+ * @copyright  2014-2019
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\Info_Sites\Autorisations

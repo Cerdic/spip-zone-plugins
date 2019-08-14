@@ -9,7 +9,7 @@
 	<div class="clearfix"></div>]
 	<BOUCLE_projets (PROJETS projets_sites_liens) {tout} {id_projets_site} {projets.versioning_path!=""} {projets.versioning_type!=""} {projets_sites_liens.objet="projet"}>
 		<h2><a href="#URL_PROJET">[(#NOM)]</a></h2>
-[(#SET{inclure, [(#VAL{'diagnostic/'}|concat{[(#_projets_site:LOGICIEL_NOM|info_sites_nom_machine)],'/maj',[_(#VERSIONING_TYPE|info_sites_nom_machine)]})]})]
+[(#SET{inclure, [(#VAL{'diagnostic/'}|concat{[(#_projets_site:LOGICIEL_NOM|info_sites_nom_machine)],'/maj',[_(#ENV{versioning_type,#VERSIONING_TYPE}|info_sites_nom_machine)]})]})]
 [(#CHEMIN{[(#GET{inclure}).html]}|?{
 	[(#INCLURE{fond=[(#GET{inclure})], id_projets_site, env})],
 	<:info_sites:diagnostic_logiciel_absent:>
