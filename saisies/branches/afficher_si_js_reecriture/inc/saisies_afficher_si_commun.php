@@ -173,3 +173,33 @@ function saisies_afficher_si_secure($condition, $tests=array()) {
 		return true;
 	}
 }
+
+/** Vérifie qu'une condition respecte la syntaxe formelle
+	* @param string $condition
+	* @return bool
+**/
+function saisies_afficher_si_verifier_syntaxe($condition) {
+	$tests = saisies_parser_condition_afficher_si($condition);
+	if ($tests and saisies_afficher_si_secure($condition, $tests)) {//Si cela passe la sécurité, faisons des tests complémentaires
+
+		// parenthèses équilibrées
+		if (substr_count($condition,'(') != substr_count($condition,')')) {
+			return false;
+		}
+
+
+		// pas de && ou de || qui traine sans rien à gauche ni à droite
+		$condition = " $condition ";
+		$condition_pour_sous_test = str_replace('||','$', $condition);
+		$condition_pour_sous_test = str_replace('&&','$', $condition_pour_sous_test);
+		$liste_sous_tests = explode('$', $condition_pour_sous_test);
+		$liste_sous_tests = array_map('trim', $liste_sous_tests);
+		if ($liste_sous_tests != array_filter($liste_sous_tests)) {
+			return false;
+		}
+
+		return true;
+	}
+	return false;
+
+}
