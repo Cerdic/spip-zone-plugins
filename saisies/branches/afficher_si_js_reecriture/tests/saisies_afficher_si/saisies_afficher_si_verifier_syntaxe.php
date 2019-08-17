@@ -92,7 +92,20 @@
 				0 => false,
 				1 => "(@a@ == 'a'"
 			),
+			'false' =>
+			array (
+				0 => true,
+				1 => "false"
+			),
+			'true' =>
+			array (
+				0 => true,
+				1 => "true"
+			),
 		);
+		foreach ($essais as $nom=>$param) {
+			$essais[$nom][2] = saisies_parser_condition_afficher_si($param[1]);
+		}
 		return $essais;
 	}
 

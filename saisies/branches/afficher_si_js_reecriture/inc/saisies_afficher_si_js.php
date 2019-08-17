@@ -23,8 +23,8 @@ include_spip('inc/saisies_lister');
 function saisies_afficher_si_js($condition, $saisies_form = array()) {
 	$saisies_form = saisies_lister_par_nom($saisies_form);
 	if ($tests = saisies_parser_condition_afficher_si($condition)) {
-		if (!saisies_afficher_si_secure($condition, $tests)) {
-			spip_log("Afficher_si incorrect. $condition non sécurisée", "saisies"._LOG_CRITIQUE);
+		if (!saisies_afficher_si_verifier_syntaxe($condition, $tests)) {
+			spip_log("Afficher_si incorrect. $condition syntaxe incorrecte", "saisies"._LOG_CRITIQUE);
 			return '';
 		}
 		foreach ($tests as $test) {
@@ -34,6 +34,7 @@ function saisies_afficher_si_js($condition, $saisies_form = array()) {
 			$operateur = isset($test['operateur']) ? $test['operateur'] : '' ;
 			$guillemet = isset($test['guillemet']) ? $test['guillemet'] : '' ;
 			$negation = isset($test['negation']) ? $test['negation'] : '';
+			$booleen = isset($test['booleen']) ? $test['booleen'] : '';
 			$valeur = isset($test['valeur']) ? $test['valeur'] : '' ;
 			$valeur_numerique = isset($test['valeur_numerique']) ? $test['valeur_numerique'] : '' ;
 			$plugin = saisies_afficher_si_evaluer_plugin($champ, $negation);
@@ -43,13 +44,15 @@ function saisies_afficher_si_js($condition, $saisies_form = array()) {
 				$config = saisies_afficher_si_get_valeur_config($champ);
 				$test_modifie = eval('return '.saisies_tester_condition_afficher_si($config, $operateur, $valeur, $negation).';') ? 'true' : 'false';
 				$condition = str_replace($expression, $test_modifie, $condition);
+			} elseif ($booleen)  {
+				$condition = $condition;
 			} else { // et maintenant, on rentre dans le vif du sujet : les champs. On délégue cela à une autre fonction
 				$condition = str_replace($expression, saisies_afficher_si_js_champ($champ, $operateur, $valeur, $valeur_numerique, $guillemet, $negation, $saisies_form), $condition);
 			}
 		}
 	} else {
-		if (!saisies_afficher_si_secure($condition)) {
-			spip_log("Afficher_si incorrect. $condition non sécurisée", "saisies"._LOG_CRITIQUE);
+		if (!saisies_afficher_si_verifier_syntaxe($condition)) {
+			spip_log("Afficher_si incorrect. $condition syntaxe incorrecte", "saisies"._LOG_CRITIQUE);
 			return '';
 		}
 	}
