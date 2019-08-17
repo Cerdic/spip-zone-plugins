@@ -1,6 +1,6 @@
 <?php
 /**
- * Test unitaire de la fonction saisies_verifier_afficher_si
+ * Test unitaire de la fonction saisies_evaluer_afficher_si
  * du fichier ../plugins/saisies/inc/saisies_afficher_si_php.php
  *
  * genere automatiquement par TestBuilder
