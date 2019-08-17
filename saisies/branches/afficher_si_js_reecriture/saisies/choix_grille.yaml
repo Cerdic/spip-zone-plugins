@@ -27,7 +27,7 @@ options:
       nom: 'utilisation'
       label: '<:saisies:option_groupe_utilisation:>'
     saisies:
-      - 
+      -
         saisie: 'oui_non'
         options:
           nom: 'multiple'

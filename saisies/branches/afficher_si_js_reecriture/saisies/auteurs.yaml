@@ -86,7 +86,7 @@ options:
         saisie: 'oui_non'
         options:
           nom: 'option_statut'
-          label: '<:saisies:option_option_statut_label:>'      
+          label: '<:saisies:option_option_statut_label:>'
       -
         saisie: 'input'
         options:
