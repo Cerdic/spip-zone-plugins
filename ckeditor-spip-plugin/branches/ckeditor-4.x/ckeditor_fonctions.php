@@ -279,7 +279,7 @@ function ckeditor_preparescript($config) {
 			$cke_cfg= array() ;
 			$removePlugins = array() ;
 			$allPlugins = array('about', 'blockquote', 'div', 'docprops', 'find', 'flash', 'horizontalrule', 'iframe', 'image', 'indent', 'justify', 'link', 'list', 'maximize', 'newpage', 'pagebreak', 'pastefromword', 'pastetext', 'placeholder', 'preview', 'print', 'removeformat', 'save', 'selection', 'showblocks', 'smiley', 'sourcearea', 'specialchar', 'table', 'templates', 'uicolor', 'undo', 'wsc', 'colorbutton','scayt','basicstyles','forms') ;
-			$requiredPlugins = array('clipboard','basicstyles','list','link','about') ; // requis par la barre d'outils basique
+			$requiredPlugins = array('clipboard','basicstyles','list','link','about','indent','table') ; // requis par la barre d'outils basique
 
 			foreach($_COOKIE as $cookie => $value) { // fix pb avec la langue du dictionnaire
 				if (preg_match('~^scayt_~', $cookie)) {
