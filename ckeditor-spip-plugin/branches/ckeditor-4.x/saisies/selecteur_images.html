@@ -1,0 +1,17 @@
+	[(#SET{valeur,#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}})]
+	[(#SET{width,#ENV{largeur,100}})]
+	[(#SET{height,#ENV{hauteur,70}})]
+	[(#SET{nombre,#ENV{nombre,3}})]
+	<input type="hidden" id="champ_#ENV{nom}" name="#ENV{nom}" value="#GET{valeur}" />
+	<div style="height:#EVAL{#GET{height}*#GET{nombre}}px;width:#EVAL{#GET{width}+16}px;overflow:auto;padding:0;float:right;";>
+		<div style="width:#GET{width}px;height:#EVAL{#GET{height}*#GET{nombre}}px;margin:0;padding:0;">
+			<BOUCLE_ls(DATA){source ls, #CHEMIN{#ENV{repertoire}}/*}>
+			<img onclick="$('#champ_#ENV{nom}_image').attr('src',$(this).attr('src')); $('#champ_#ENV{nom}').val($(this).attr('src'));"[ class="(#ENV{img_class})"] style="height:#GET{height}px;width:#GET{width}px;" src="#CHEMIN{#ENV{repertoire}}/#VALEUR{basename}" />
+			</BOUCLE_ls>
+		</div>
+	</div>
+	<img id="champ_#ENV{nom}_image" style="display:block;margin-top:[(#EVAL{#GET{height}*#GET{nombre}/4-#GET{height}/4})]px;height:#GET{height}px;width:#GET{width}px;overflow:hidden;padding:2px;border:2px solid #844;margin-left:auto;margin-right:auto;"[ src="(#GET{valeur})"] />
+	[<div style="padding-left:130px;margin-top:[(#EVAL{#GET{height}*#GET{nombre}/4-#GET{height}/4})]px;">
+		(#ENV*{commentaire}|html_entity_decode{0,UTF-8}|propre)
+	</div>]
+	<span style="clear:both;"></span>

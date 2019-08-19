@@ -1,0 +1,29 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: application/json[; charset=(#CHARSET)]})]
+<BOUCLE_si(CONDITION){si #SESSION{statut}|<{2}}>
+#SET{rubs, #ARRAY}
+<BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre}>#SET{item, #ARRAY}
+	#SET{item, #GET{item}|push{#TITRE|strip_tags|couper{30}|json_encode}}
+	#SET{item, #GET{item}|push{#URL_PAGE{rubrique}|parametre_url{id_rubrique,#ID_RUBRIQUE}|json_encode}}
+	#SET{item, #GET{item}|push{#ID_RUBRIQUE}}
+	#SET{item, #GET{item}|push{0}}
+	#SET{rubs, #GET{rubs}|push{#GET{item}|serialize}}
+<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent=#ID_RUBRIQUE} {par num titre, titre}>#SET{cpt,#GET{cpt}|plus{1}}
+	#SET{item, #ARRAY}
+	#SET{item, #GET{item}|push{#TITRE|strip_tags|couper{30}|json_encode}}
+	#SET{item, #GET{item}|push{#URL_PAGE{rubrique}|parametre_url{id_rubrique,#ID_RUBRIQUE}|json_encode}}
+	#SET{item, #GET{item}|push{#ID_RUBRIQUE}}
+	#SET{item, #GET{item}|push{#GET{cpt}}}
+	#SET{rubs, #GET{rubs}|push{#GET{item}|serialize}}
+<BOUCLE_re(BOUCLE_sous_rubriques)></BOUCLE_re>#SET{cpt,#GET{cpt}|moins{1}}</BOUCLE_sous_rubriques></BOUCLE_rubriques>
+</B_rubriques>
+[<BOUCLE_pour(POUR){tableau #GET{rubs}}>
+	{
+		#SET{item, #VALEUR|unserialize}
+		"titre" : [(#GET{item}|table_valeur{0})],
+		"url" : [(#GET{item}|table_valeur{1})],
+		"id" : "[(#GET{item}|table_valeur{2})]",
+		"level" : "[(#GET{item}|table_valeur{3})]"
+	}[(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{',',''})]
+</BOUCLE_pour>]
+</BOUCLE_si>

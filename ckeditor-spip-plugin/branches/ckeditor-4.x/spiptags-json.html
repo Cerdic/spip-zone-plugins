@@ -1,0 +1,38 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: application/json[; charset=(#CHARSET)]})]
+<BOUCLE_si(CONDITION){si #SESSION{statut}|<{2}}>
+[<BOUCLE_tags(POUR){tableau #CONFIG{'ckeditor/tags'}}>
+#SET{modele,#CLE|replace{xx$}}
+#SET{type_modele, #VALEUR|table_valeur{type}}
+#SET{type_num, #VALEUR|table_valeur{nombre}}
+#SET{intitule, #VALEUR|table_valeur{intitule}}
+#SET{info, #VALEUR|table_valeur{info}}
+#SET{param_noms, #VALEUR|table_valeur{noms}}
+#SET{param_valeurs, #VALEUR|table_valeur{valeurs}}
+#SET{param_ids, #VALEUR|table_valeur{ids}}
+#SET{fermante, #VALEUR|table_valeur{fermante}}
+#SET{syntaxe, #VALEUR|table_valeur{syntaxe}}
+#SET{echappe_car, #VALEUR|table_valeur{echappe_car}}
+	[
+		[(#CLE|json_encode)],
+		[(#GET{intitule}|json_encode)],
+		[(#GET{info}|json_encode)],
+		{<BOUCLE_params(POUR){tableau #GET{param_noms}}>
+			#SET{infoparam,#GET{param_ids}|table_valeur{#CLE}}
+		#SET{delim,#GET{infoparam}|?{'|',''}}
+		#SET{val,#VALEUR|concat{#GET{delim},#GET{infoparam}}}
+		[(#GET{val}|json_encode)]:[
+		<BOUCLE_si2(CONDITION){si #GET{param_valeurs}|table_valeur{#CLE}|strlen|!={0}}>
+			<BOUCLE_valeurs(POUR){tableau #EVAL{'"~\s*;;\s*~"'}|preg_split{#GET{param_valeurs}|table_valeur{#CLE}}}>
+			[(#VALEUR|json_encode)][(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{',',''})]</BOUCLE_valeurs>
+		</BOUCLE_si2></B_si2><//B_si2>
+			][(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{',',''})]</BOUCLE_params>
+		}, 
+		[(#GET{type_num}|json_encode)],
+		[(#GET{type_modele}|json_encode)],
+		[(#GET{fermante}|?{'1','0'}|json_encode)],
+		[(#GET{syntaxe}|json_encode)],
+		[(#GET{echappe_car}|json_encode)]
+	][(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{',',''})]</BOUCLE_tags>
+]
+</BOUCLE_si>

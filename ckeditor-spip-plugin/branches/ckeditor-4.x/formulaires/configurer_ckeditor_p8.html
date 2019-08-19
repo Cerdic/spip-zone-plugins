@@ -1,0 +1,48 @@
+#CACHE{0}
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:ckeditor:ckeditor_p8_titre:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+		#ACTION_FORMULAIRE{#ENV{action}}
+[
+		<ul>
+			(#GENERER_SAISIES{#ENV{saisies_cke_page8_2}})
+		</ul>
+		<p class="boutons"><span class="image_loading">&nbsp;</span>
+			<input type="submit" name="_cke_nouveau_parametre" value="<:ckeditor:nouveau_parametre:>" />
+			<input type="submit" name="_cfg_cancel" value="<:ckeditor:retour:>" />
+			<input type="submit" name="_cke_valide_modele" value="<:ckeditor:ok:>" />
+		</p>
+		<script language="javascript" type="text/javascript">
+			$('li.saisie_fieldset').each(function(index){
+				var li = $(this) ;
+				if ($(this).attr('class').match(/\bfieldset_options_parametre_/)) {
+					var btn_del_param = '<button onclick="return false;" title="<:ckeditor:supprime_ce_parametre:>">X</button>' ;
+					$(this).find('h3.legend').prepend(' '+btn_del_param);
+					$(this).find('button').click(function(){
+						if (confirm('<:ckeditor:supprimer_ce_parametre:>')) {
+							li.find('input, textarea').attr('disabled','disabled') ; // les éléments 'disabled' ne sont pas soumis, et donc sont détruits par 'ecrire_config'
+							li.css('display','none');
+						}
+					}) ;
+				}
+			}) ;
+		</script>
+]
+[
+		<ul>
+			(#GENERER_SAISIES{#ENV{saisies_cke_page8_1}})
+		</ul>
+		<p class="boutons"><span class="image_loading">&nbsp;</span>
+			<input type="submit" name="_cke_edite_modele" value="<:ckeditor:edite_modele:>" />
+			<input type="submit" name="_cke_supprime_modele" onclick="javascript:return confirm('<:ckeditor:supprimer_ce_modele:>');" value="<:ckeditor:supprime_modele:>"/>
+			<input type="submit" name="_cke_nouveau_modele" onclick="javascript:var modele=prompt('<:ckeditor:nom_du_nouveau_modele:>');if (modele){$('#champ_nouveau_modele').val(modele);return true;}else{return false;}" value="<:ckeditor:nouveau_modele:>" />
+		</p>
+]
+
+	</form>
+</div>

@@ -1,0 +1,7 @@
+div.modele-spip { 
+	white-space: pre ;
+	font-family: monospace ;
+}
+form.formulaire_crayon {
+	max-width:999999px;
+}
