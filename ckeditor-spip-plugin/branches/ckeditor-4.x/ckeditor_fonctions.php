@@ -598,6 +598,9 @@ function ckeditor_preparescript($config) {
 			if ($cke_cfg['forcePasteAsPlainText'] && ! in_array('pastefromword', $removePlugins)) {
 				$removePlugins[] = 'pastefromword';
 			}
+			if (ckeditor_lire_config('devtools', _CKE_DEVTOOLS_DEF) !='on') {
+				$removePlugins[] = 'devtools';
+			}
 			$cke_cfg['removePlugins'] = join(',',$removePlugins) ;
 			if(ckeditor_lire_config('conversion', _CKE_CONVERSION_DEF)=='aucune')
 				$cke_cfg['fullPage'] = true ;

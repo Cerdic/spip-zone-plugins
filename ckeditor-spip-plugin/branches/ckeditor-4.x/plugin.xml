@@ -100,7 +100,7 @@
 	<necessite id="YAML" version="[1.5.1;]" />
 	<utilise id="iterateurs" version="[0.2.4;]" />
 	<utilise id="crayons" version="[1.9.4;]" />
-	<necessite id="lib:ckeditor" src="https://download.cksource.com/CKEditor/CKEditor/CKEditor%204.12.1/ckeditor_4.12.1_full.zip" />
+	<necessite id="lib:ckeditor" src="https://ckeditor.com/cke4/online-builder/releases/minified/4.12.1/moono-lisa/4.12.1/ckeditor_4.12.1_79cc3eb3d163.zip" />
 	<utilise id="lib:kcfinder" src="https://github.com/sunhater/kcfinder/archive/3.12.zip"/>
 	<utilise id="couteau_suisse" version="[1.8.0.0;]" />
 	<install>inc/ckeditor_install.php</install>
