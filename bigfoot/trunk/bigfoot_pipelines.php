@@ -22,7 +22,7 @@ function bigfoot_insert_head_css($flux){
  */
 function bigfoot_insert_head($flux){
 	$flux .="\n".'<script type="text/javascript" src="'. find_in_path('javascript/littlefoot.js') .'"></script>';
-	$voir_note = _T('bigfoot:voir_note');
+	$voir_note = attribut_html(_T('bigfoot:voir_note'));
 	$flux .= <<<EOH
 <script type="text/javascript">/* <![CDATA[ */
 (function($) {
