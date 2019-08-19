@@ -104,4 +104,6 @@
 	<utilise id="lib:kcfinder" src="https://github.com/sunhater/kcfinder/archive/3.12.zip"/>
 	<utilise id="couteau_suisse" version="[1.8.0.0;]" />
 	<install>inc/ckeditor_install.php</install>
+	<chemin dir="./" />
+	<chemin dir="./squelettes/spip-2.x/prive" type="prive" />
 </plugin>
