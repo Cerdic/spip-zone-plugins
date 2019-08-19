@@ -587,7 +587,7 @@ function ckeditor_preparescript($config) {
 			$cke_cfg['skin'] = ckeditor_lire_config('skin', _CKE_SKIN_DEF) ;
 			$cke_cfg['enterMode'] = $ENTERMODE[ckeditor_lire_config('entermode', _CKE_ENTERMODE_DEF)] ;
 			$cke_cfg['shiftEnterMode'] = $ENTERMODE[ckeditor_lire_config('shiftentermode', _CKE_SHIFTENTERMODE_DEF)] ;
-			$cke_cfg['stylesCombo_stylesSet'] = "spip-styles:".url_absolue(_DIR_RACINE.'spip.php?page=spip-styles') ;
+			$cke_cfg['stylesCombo_stylesSet'] = "spip-styles:".url_absolue(_DIR_RACINE.'spip.php?page=spip-styles.js') ;
 			$cke_cfg['removeDialogTabs'] = 'link:advanced' ;
 			$cke_cfg['fontSize_sizes'] = ckeditor_lire_config('fontsizes', _CKE_FONTSIZES_DEF) ;
 			$cke_cfg['dialog_startupFocusTab'] = true ;
