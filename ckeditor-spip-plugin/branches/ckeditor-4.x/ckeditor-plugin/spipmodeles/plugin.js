@@ -54,7 +54,7 @@ CKEDITOR.plugins.add('spipmodeles',
 
                panel:
                {
-                  css: [config.contentsCss, CKEDITOR.getUrl(editor.skinPath + 'editor.css')],
+                  css: [ CKEDITOR.skin.getPath( 'editor' ) ].concat( config.contentsCss ),
                   voiceLabel: lang.voiceLabel
                },
 
