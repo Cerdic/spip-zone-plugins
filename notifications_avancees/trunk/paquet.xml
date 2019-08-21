@@ -1,7 +1,7 @@
 <paquet
 	prefix="notifavancees"
 	categorie="outil"
-	version="0.4.3"
+	version="0.4.4"
 	etat="test"
 	compatibilite="[2.1.0;3.2.99]"
 	logo="images/notifications-128.png"
