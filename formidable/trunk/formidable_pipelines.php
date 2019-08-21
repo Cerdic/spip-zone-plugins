@@ -208,7 +208,7 @@ function formidable_optimiser_base_disparus($flux) {
 	$res2 = sql_select(
 		'id_formulaires_reponse AS id, id_formulaire AS form',
 		'spip_formulaires_reponses',
-		sql_in('statut', array('refuse', 'poubelle'))
+		'statut='.sql_quote('poubelle')
 	);	//Copie pour la suppression des fichiers des réponses, c'est idiot de pas pouvoir faire une seule requete
 	// On génère la suppression
 	$flux['data'] += optimiser_sansref('spip_formulaires_reponses', 'id_formulaires_reponse', $res);
