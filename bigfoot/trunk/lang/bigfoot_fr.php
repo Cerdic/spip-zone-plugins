@@ -1,8 +1,12 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-if (!defined('_ECRIRE_INC_VERSION')) return;
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/bigfoot/trunk/lang/
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	"voir_note" => 'Voir la note',
+	// V
+	'voir_note' => 'Voir la note'
 );
