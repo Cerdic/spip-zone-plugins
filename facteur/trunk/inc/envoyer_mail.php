@@ -8,6 +8,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+if (!defined('_LOG_FACTEUR')) {
+	define('_LOG_FACTEUR',_LOG_INFO);
+}
+
 include_spip('classes/facteur');
 // inclure le fichier natif de SPIP, pour les fonctions annexes
 include_once _DIR_RESTREINT."inc/envoyer_mail.php";
@@ -294,8 +298,8 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 		$trace .= "\nSubject: $sujet";
 	}
 	$trace .= ($destinataire ? "\nDestinataire: " . implode(', ', $destinataire): '');
-	spip_log("mail via facteur\n$trace",'mail');
-	spip_log("mail\n$backtrace\n$trace",'facteur');
+	spip_log("mail via facteur\n$trace",'mail'._LOG_FACTEUR);
+	spip_log("mail\n$backtrace\n$trace",'facteur'._LOG_FACTEUR);
 	$retour = $facteur->Send();
 
 	if (!$retour){
