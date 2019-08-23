@@ -1,10 +1,10 @@
 <paquet
 	prefix="picto"
 	categorie="edition"
-	version="1.0.3"
+	version="1.1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
-	logo="images/picto-48.jpg"
+	logo="prive/themes/spip/images/picto-64.jpg"
 	documentation="https://contrib.spip.net/Picto-avec-FontAwesome"
 >
 	<nom>Picto avec FontAwesome</nom>
@@ -12,5 +12,7 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 	<pipeline nom="insert_head_css" inclure="picto_pipelines.php" />
 	<pipeline nom="header_prive" inclure="picto_pipelines.php" />
-	
+
+	<menu nom="picto" parent="menu_squelette" icone="images/picto-16.jpg" action="picto" titre="picto:titre_page_picto" />
+
 </paquet>

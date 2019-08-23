@@ -91,3 +91,31 @@ function filtre_aligner_picto($input) {
 
 	return '';
 }
+
+/**
+ * Lister le nom des classes mis à disposition par la librairie FontAwesome.
+ *
+ * @return array
+ */
+function lister_picto() {
+	$style_picto = find_in_path('fontAwesome/css/font-awesome.min.css');
+	$style_picto = file_get_contents($style_picto);
+	$list = array();
+
+	preg_match_all("/\.fa-([[:alpha:]]+-?[[:alpha:]]+?):before/", $style_picto, $picto);
+	if (isset($picto[1]) and is_array($picto[1]) and count($picto[1])) {
+		natsort($picto[1]);
+		$list = array_merge($list, $picto[1]);
+	}
+	preg_match_all("/,\.fa-([[:alpha:]]+-?[[:alpha:]]+?):before/", $style_picto, $picto);
+	if (isset($picto[1]) and is_array($picto[1]) and count($picto[1])) {
+		natsort($picto[1]);
+		$list = array_diff($list, $picto[1]);
+		foreach ($picto[1] as $index => $alias) {
+			$list[] = $alias . " <em>(alias)</em>";
+		}
+	}
+	natsort($list);
+
+	return $list;
+}

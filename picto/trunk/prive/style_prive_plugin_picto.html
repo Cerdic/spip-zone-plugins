@@ -1,0 +1,129 @@
+[(#REM)<style>/*
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+*/]#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+/*
+Valeurs par defaut :
+#SET{claire,##ENV{couleur_claire,edf3fe}} [claire: (#GET{claire});]
+#SET{foncee,##ENV{couleur_foncee,3874b0}} [foncee: (#GET{foncee});]
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}} [left: (#GET{left});]
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}} [right: (#GET{right});]
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}} [rtl: (#GET{rtl});]
+#SET{dir,#ENV{ltr}|choixsiegal{left,ltr,rtl}} [dir: (#GET{dir});]
+
+#SET{font-size,#ENV{font-size,0.8125em}} [font-size: (#GET{font-size});]
+#SET{line-height,#ENV{line-height,1.385em}} [line-height: (#GET{line-height});]
+#SET{margin-bottom,#ENV{margin-bottom,#GET{line-height}}} [margin-bottom: (#GET{margin-bottom});]
+#SET{text-indent,#ENV{text-indent,50px}} [text-indent: (#GET{text-indent});]
+#SET{font-family,#ENV*{font-family,'Helvetica, Arial, sans-serif'}} [font-family: (#GET{font-family});]
+#SET{background-color,#ENV{background-color,#F8F7F3}} [background-color : (#GET{background-color});]
+#SET{color,#ENV{color,#000000}} [color: (#GET{color});]
+#SET{color_success,#c6d880}
+#SET{color_notice,#ffd83f}
+#SET{color_warning,#df454f}
+#SET{color_info,#c5e41c}
+*/
+body.picto #contenu .fontawesome-icon-list {
+	display: flex;
+	flex-wrap: wrap;
+}
+body.picto #contenu .fontawesome-icon-list .item {
+	display: table-cell;
+	width: 33%;
+	background-color: white;
+	/*height: 2rem;*/
+	float: left;
+	clear: none;
+	margin: 0.25em 0;
+	border-radius: 0.25rem;
+}
+@media (max-width: 975px) {
+	body.picto #contenu .fontawesome-icon-list .item {
+		width: 50%;
+	}
+}
+
+body.picto #contenu .fontawesome-icon-list .item .icon {
+	width: 2rem;
+	padding: 0.25rem 1rem;
+	float: left;
+	height: 2rem;
+	font-size: 1rem;
+	line-height: 1rem;
+	text-align: center;
+}
+body.picto #contenu .fontawesome-icon-list .item:hover {
+	background-color: [(#GET{foncee})];
+	color: [#(#GET{foncee}|couleur_extreme)];
+}
+body.picto #contenu .fontawesome-icon-list .item:hover .icon {
+	font-size: 2rem;
+}
+body.picto #contenu .fontawesome-icon-list .item .name {
+	width: 75%;
+	padding: 0.5rem 1rem;
+}
+
+body.picto #contenu #search {
+	position: relative;
+	font-size: 18px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin: -20px auto 0;
+}
+body.picto #contenu .form-control {
+	display: block;
+	width: 88%;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+	-webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+body.picto #contenu #search #search-input, #search .hint {
+	padding-left: 43px;
+	padding-right: 43px;
+	border-radius: 23px;
+}
+body.picto #contenu .input-lg {
+	padding: 10px 16px;
+	font-size: 18px;
+	line-height: 1.3333333;
+	border-radius: 6px;
+}
+body.picto #contenu label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+body.picto #search label {
+    position: absolute;
+    left: 17px;
+    top: 31px;
+}
+
+body.picto #contenu #search #search-clear {
+	text-decoration: none;
+	position: absolute;
+	right: 18px;
+	top: 34px;
+	color: #b3b3b3;
+}

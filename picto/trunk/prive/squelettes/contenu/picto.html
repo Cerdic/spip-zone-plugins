@@ -1,0 +1,50 @@
+[(#AUTORISER{configurer,_picto}|sinon_interdire_acces)]
+
+<h1 class="grostitre"><:picto:titre_page_picto:></h1>
+
+<section id="search">
+	<label for="search-input"><i class="fa fa-search" aria-hidden="true"></i><span class="sr-only">Search icons</span></label>
+	<input id="search-input" class="form-control input-lg" placeholder="Search icons" autocomplete="off" spellcheck="false" autocorrect="off" tabindex="1">
+	<a id="search-clear" href="#" class="fa fa-times-circle hide" aria-hidden="true"><span class="sr-only">Clear search</span></a>
+</section>
+
+<B_picto>
+	<div class="row fontawesome-icon-list">
+<BOUCLE_picto (DATA){source tableau,#REM|lister_picto}>
+	<div class="item fa-hover bloc-fa-[(#VALEUR|textebrut|attribut_html)]">
+		<div class="icon"><i class="fa fa-[(#VALEUR|textebrut|attribut_html)]"></i></div>
+		<div class="name">#VALEUR</div>
+	</div>
+</BOUCLE_picto>
+	</div>
+</B_picto>
+
+<script type="text/javascript">
+  jQuery(document).ready(function(){
+    $.expr[":"].contains_ci = $.expr.createPseudo(function(arg) {
+      return function( elem ) {
+        return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+      };
+    });
+
+    /**
+     * Detect a click in the "Search" button or enter from keyboard
+     */
+    $('#search-input').on('click keyup', function(event) {
+      // Prevent the original click for not reloading the whole page
+      event.preventDefault();
+
+      // Get value from search input
+      var searchInputValue = $('#search-input').val();
+
+      // Search the list and if it matches display it, else hide it
+      $('.fontawesome-icon-list .item').hide().find('.name:contains_ci(' + searchInputValue + ')').parents('.item').show();
+    });
+    $('#search-clear').on('click', function(){
+      event.preventDefault();
+      $('.fontawesome-icon-list .item').show();
+      $('#search-input').val('');
+    });
+
+  });
+</script>

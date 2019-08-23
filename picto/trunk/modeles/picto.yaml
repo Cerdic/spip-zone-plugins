@@ -1,5 +1,5 @@
 nom: 'un Pictogramme FontAwesome'
-logo: 'images/picto-48.jpg'
+logo: 'prive/themes/spip/images/picto-48.jpg'
 icone_barre: 'picto.png'
 parametres:
   -
@@ -13,7 +13,7 @@ parametres:
       nom: 'nom'
       label: 'Nom du picto (voir le site de FontAwesome)'
       explication: '<a href="https://fontawesome.com/v4.7.0/icons/" class="spip_out" target="_blonk" rel="noopener noreferrer">Liste des pictos disponibles</a>'
-      defaut: ''     
+      defaut: ''
   -
     saisie: 'selection'
     options:
