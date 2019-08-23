@@ -70,6 +70,21 @@ function formulaires_editer_chapitre_identifier_dist($id_chapitre = 'new', $obje
  *     Environnement du formulaire
  */
 function formulaires_editer_chapitre_saisies_dist($id_chapitre = 'new', $objet='', $id_objet=0, $id_parent=0, $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+	// S'il n'y a pas l'objet racine, il faut le trouver
+	if (!$objet or !$id_objet) {
+		// S'il y a un chapitre précis, normalement c'est renseigné
+		if (
+			(
+				$id_source = intval($id_chapitre)
+				or $id_source = intval($id_parent)
+			)
+			and $chapitre = sql_fetsel('objet, id_objet', 'spip_chapitres', 'id_chapitre = '.$id_source)
+		) {
+			$objet = $chapitre['objet'];
+			$id_objet = intval($chapitre['id_objet']);
+		}
+	}
+	
 	$saisies = array(
 		array(
 			'saisie' => 'hidden',
@@ -91,6 +106,9 @@ function formulaires_editer_chapitre_saisies_dist($id_chapitre = 'new', $objet='
 				'nom' => 'id_parent',
 				'label' => _T('chapitre:champ_id_parent_label'),
 				'recursif' => 'oui',
+				'objet' => $objet,
+				'id_objet' => $id_objet,
+				'id_parent' => 0,
 				'exclus' => $id_chapitre,
 			),
 		),

@@ -1,7 +1,7 @@
 <paquet
 	prefix="chapitres"
 	categorie="edition"
-	version="1.0.29"
+	version="1.0.30"
 	etat="dev"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/chapitres-64.png"
