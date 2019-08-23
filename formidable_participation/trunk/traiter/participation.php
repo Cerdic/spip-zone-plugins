@@ -62,6 +62,15 @@ function traiter_participation_dist($args, $retours){
 		$id_evenement = _request($options['champ_evenement_participation']);
 	}
 
+	// Nombre total d'inscription
+	if (isset($options['plusieurs_fois']) and $options['plusieurs_fois']) {
+		$nb_inscriptions = 0;
+		foreach ($options['champ_nb_inscriptions'] as $champ) {
+			$nb_inscriptions = $nb_inscriptions + _request($champ);
+		}
+	} else {
+		$nb_inscriptions = 1;
+	}
 	if (!is_array($id_evenement)) {
 		$id_evenement = array($id_evenement);
 	}
@@ -74,6 +83,7 @@ function traiter_participation_dist($args, $retours){
 			'nom' => $nom_participation,
 			'prenom' => $prenom_participation,
 			'organisme' => $organisme_participation,
+			'nb_inscriptions' => $nb_inscriptions,
 			'id_auteur' => (isset($GLOBALS['visiteur_session']['id_auteur'])?$GLOBALS['visiteur_session']['id_auteur']:0),
 			'parrain' => 'form'.$formulaire['id_formulaire'].':'.$formulaire['identifiant'],
 			'tracking_id' => $id_formulaires_reponse,//Garder pour des raisons historiques, même si apparement jamais servi

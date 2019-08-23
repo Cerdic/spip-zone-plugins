@@ -76,6 +76,22 @@ options:
           nom: 'champ_organisme_participation'
           label: '<:formidableparticipation:traiter_participation_option_champ_organisme_label:>'
           env: true
+      -
+        saisie: 'case'
+        options:
+          nom: 'plusieurs_fois'
+          label_case: '<:formidableparticipation:traiter_participation_option_plusieurs_fois_label:>'
+          li_class: 'pleine_largeur'
+      -
+        saisie: 'champ'
+        options:
+          nom: 'champ_nb_inscriptions'
+          label: '<:formidableparticipation:traiter_participation_option_champ_nb_inscriptions_label:>'
+          explication: '<:formidableparticipation:traiter_participation_option_champ_nb_inscriptions_explication:>'
+          env: true
+          obligatoire: 'on'
+          type_choix: 'checkbox'
+          afficher_si: '@traitements[participation][plusieurs_fois]@=="on"'
   -
     saisie: 'fieldset'
     options:

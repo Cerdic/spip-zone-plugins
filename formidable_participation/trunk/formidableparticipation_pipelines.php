@@ -25,6 +25,7 @@ function formidableparticipation_traiter_formidableparticipation($flux){
 		$id_auteur = $flux['args']['id_auteur'];
 		$nom = $flux['args']['nom'];
 		$prenom = $flux['args']['prenom'];
+		$nb_inscriptions = $flux['args']['nb_inscriptions'];
 		$id_formulaires_reponse = $flux['args']['id_formulaires_reponse'];
 		if($flux['args']['organisme']) $organisme = '('.$flux['args']['organisme'].')';
 		$nom = "$prenom $nom $organisme";
@@ -42,16 +43,20 @@ function formidableparticipation_traiter_formidableparticipation($flux){
 		// si evenement, on insere le participant et ses données
 		// et on laisse le traitement du nombre de places à la charge du webmestre et du squelette evenements
 		if(isset($id_evenement)){
-				//on ne logue pas l'auteur, si l'email sur le même id_evenement existe, mettre à jour, sauf si on demande explictement de permettre à un même email de s'inscrire plusieurs fois
-				if (sql_fetsel('reponse','spip_evenements_participants','id_evenement='.intval($id_evenement)." AND email=".sql_quote($email)) and !$flux['args']['autoriser_email_multiple']){
-					sql_updateq("spip_evenements_participants",$champs,'id_evenement='.intval($id_evenement).' AND email='.sql_quote($email));
-				}
-				else{
-					sql_insertq("spip_evenements_participants", $champs);
+				$i = 0;
+				while ($i < $nb_inscriptions) {
+					$i++;
+					//on ne logue pas l'auteur, si l'email sur le même id_evenement existe, mettre à jour, sauf si on demande explictement de permettre à un même email de s'inscrire plusieurs fois
+					if (sql_fetsel('reponse','spip_evenements_participants','id_evenement='.intval($id_evenement)." AND email=".sql_quote($email)) and !$flux['args']['autoriser_email_multiple']){
+						sql_updateq("spip_evenements_participants",$champs,'id_evenement='.intval($id_evenement).' AND email='.sql_quote($email));
+					}
+					else{
+						sql_insertq("spip_evenements_participants", $champs);
+					}
 				}
 		}
 
-		spip_log("pipeline evenement $id_evenement pour $email et id_auteur=$id_auteur et id_formulaires_reponse=$id_formulaires_reponse et reponse=$reponse","formidable_participation");
+		spip_log("pipeline evenement $id_evenement pour $email et id_auteur=$id_auteur et id_formulaires_reponse=$id_formulaires_reponse et reponse=$reponse ($nb_inscriptions fois)","formidable_participation");
 	}
 
    return $flux;
