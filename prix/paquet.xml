@@ -1,7 +1,7 @@
 <paquet
 	prefix="prix"
 	categorie="outil"
-	version="0.1.16"
+	version="0.1.17"
 	etat="dev"
 	compatibilite="[2.1.8;3.2.*]"
 	logo="prive/themes/spip/images/prix-64.png"
