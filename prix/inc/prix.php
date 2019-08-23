@@ -27,7 +27,7 @@ function inc_prix_ht_dist($type_objet, $id_objet, $arrondi = 2, $serveur = ''){
 			$prix_ht = $fonction_ht($id_objet, $ligne);
 		}
 		// S'il n'y a pas de fonction, regardons s'il existe des champs normalisés, ce qui évite d'écrire une fonction pour rien
-		elseif (isset($ligne['prix_ht']))
+		elseif (!empty($ligne['prix_ht'])) 
 			$prix_ht = $ligne['prix_ht'];
 		elseif ($ligne['prix'])
 			$prix_ht = $ligne['prix'];
