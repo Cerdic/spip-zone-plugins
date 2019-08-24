@@ -31,11 +31,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_participation_id_evenement_participation' => 'id_evenement',
 	'traiter_participation_id_evenement_participation_explication' => 'Permet de lier les réponses à un évènement',
 	'traiter_participation_necessite_explication' => 'Pour la prise en charge de la participation, il est nécessaire d’enregistrer les résultats dans la base de données.',
+	'traiter_participation_option_champ_nb_inscriptions_explication' => 'Le nombre d’inscription correspondra au total des champs cochés.',
+	'traiter_participation_option_champ_nb_inscriptions_label' => 'Champ indiquant le nombre d’inscriptions',
 	'traiter_participation_option_champ_nom_label' => 'Champ du Nom',
 	'traiter_participation_option_champ_organisme_label' => 'Champ de l’Organisme',
 	'traiter_participation_option_champ_prenom_label' => 'Champ du Prénom',
-	'traiter_participation_option_plusieurs_fois_label' => 'Inscrire plusieurs fois la personne à l\'évènement (inscription de groupe)',
-	'traiter_participation_option_champ_nb_inscriptions_label' => 'Champ indiquant le nombre d\'inscriptions',
-	'traiter_participation_option_champ_nb_inscriptions_explication' => 'Le nombre d\'inscription correspondra au total des champs cochés.',
+	'traiter_participation_option_plusieurs_fois_label' => 'Inscrire plusieurs fois la personne à l’évènement (inscription de groupe)',
 	'traiter_participation_titre' => 'Participation à un évènement'
 );
