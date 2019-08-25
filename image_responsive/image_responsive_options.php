@@ -173,6 +173,10 @@ function image_reduire_net($source, $taille = 0, $taille_y=0, $dpr=0, $forcer_fo
 			if ($forcer_format == "webp") {
 				$valeurs['fichier_dest'] = $vignette = "$destination.$destFormat.webp";
 				imagewebp ($destImage, $vignette);
+				if (filesize($vignette) % 2 == 1) {	
+  				  file_put_contents($vignette, "\0", FILE_APPEND);
+				}
+
 			} else {
 				if ($dpr > 1.5) $qualite = 40;
 				else $qualite=_IMG_GD_QUALITE;
@@ -181,7 +185,7 @@ function image_reduire_net($source, $taille = 0, $taille_y=0, $dpr=0, $forcer_fo
 			
 			if ($srcImage)
 				ImageDestroy($srcImage);
-			ImageDestroy($destImage);
+				ImageDestroy($destImage);
 		}
 	}
 	$size = @getimagesize($vignette);
