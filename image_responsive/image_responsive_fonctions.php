@@ -233,7 +233,7 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 					if (_IMAGE_RESPONSIVE_RETINA_HQ) $fichiers[$i][2] = retour_image_responsive($source_tmp, "$t2$v", 1, 0, "file");
 					else  $fichiers[$i][2] = retour_image_responsive($source_tmp, "$t$v", 2, 0, "file");
 					
-					if (_IMAGE_WEBP) {
+					if (_IMAGE_WEBP && $mime!="image/png") {
 						$fichiers_webp[$i][1] = retour_image_responsive($source_tmp, "$t$v", 1, 0, "file", "webp");
 						if (_IMAGE_RESPONSIVE_RETINA_HQ) $fichiers_webp[$i][2] = retour_image_responsive($source_tmp, "$t2$v", 1, 0, "file", "webp");
 						else  $fichiers_webp[$i][2] = retour_image_responsive($source_tmp, "$t$v", 2, 0, "file", "webp");
@@ -244,7 +244,7 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 						if (_IMAGE_RESPONSIVE_RETINA_HQ) $fichiers[$i][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t2$v.$1?$timestamp", $source_tmp);
 						else $fichiers[$i][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v-2.$1?$timestamp", $source_tmp);
 
-						if (_IMAGE_WEBP) {
+						if (_IMAGE_WEBP && $mime!="image/png") {
 							$fichiers_webp[$i][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v.$1.webp?$timestamp", $source_tmp);
 							if (_IMAGE_RESPONSIVE_RETINA_HQ) $fichiers_webp[$i][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t2$v.$1.webp?$timestamp", $source_tmp);
 							else $fichiers_webp[$i][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v-2.$1.webp?$timestamp", $source_tmp);
@@ -254,7 +254,7 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 						if (_IMAGE_RESPONSIVE_RETINA_HQ) $fichiers[$i][2] = "index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t2$v&amp;$timestamp";
 						else $fichiers[$i][2] = "index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t$v&amp;dpr=2&amp;$timestamp";
 
-						if (_IMAGE_WEBP) {
+						if (_IMAGE_WEBP && $mime!="image/png") {
 							$fichiers_webp[$i][1] = "index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t$v&amp;format=webp&amp;$timestamp&";
 							if (_IMAGE_RESPONSIVE_RETINA_HQ) $fichiers_webp[$i][2] = "index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t2$v&amp;format=webp&amp;$timestamp";
 							else $fichiers_webp[$i][2] = "index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t$v&amp;dpr=2&amp;format=webp&amp;$timestamp";
@@ -267,7 +267,7 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 			if (count($tailles) == 1 && $lazy != 1) { // Pas de srcset sur les images lazy
 				$t = $tailles[0];
 				if ($t != 0 ) {
-						if (_IMAGE_WEBP) {
+						if (_IMAGE_WEBP && $mime!="image/png") {
 							$set = $fichiers[$i][1] . " 1x";
 							$set .= "," . $fichiers[$i][2] . " 2x";
 							$set_webp = $fichiers_webp[$i][1] . " 1x";
@@ -299,7 +299,7 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 						$source_tmp = $source;
 						$set = $fichiers[$i][1] . " 1x";
 						$set .= "," . $fichiers[$i][2] . " 2x";
-						if (_IMAGE_WEBP) {
+						if (_IMAGE_WEBP && $mime!="image/png") {
 							$set_webp = $fichiers_webp[$i][1] . " 1x";
 							$setset_webp .= "," . $fichiers_webp[$i][2] . " 2x";
 						}
@@ -307,7 +307,7 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 						if (strlen($m) > 0) {
 							$insm = " media='$m'";
 
-							if (_IMAGE_WEBP) {
+							if (_IMAGE_WEBP && $mime!="image/png") {
 								$sources .= "<source$insm srcset='$set_webp' type='image/webp'>";
 							}
 							$sources .= "<source$insm srcset='$set' type='$mime'>";
@@ -315,7 +315,7 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 							
 							
 						} else {
-							if (_IMAGE_WEBP) {
+							if (_IMAGE_WEBP && $mime!="image/png") {
 								$sources .= "<source srcset='$set_webp' type='image/webp'>";
 								$sources .= "<source srcset='$set' type='$mime'>";
 							} else {
@@ -337,7 +337,7 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 
 						$autorisees[$t][1] = $fichiers[$i][1];
 						$autorisees[$t][2] = $fichiers[$i][2];
-						if (_IMAGE_WEBP) {
+						if (_IMAGE_WEBP && $mime!="image/png") {
 							$autorisees_webp[$t][1] = $fichiers_webp[$i][1];
 							$autorisees_webp[$t][2] = $fichiers_webp[$i][2];
 						}
@@ -353,7 +353,7 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 		if ($autorisees) {
 			$autorisees = json_encode($autorisees);
 			$img = inserer_attribut($img, "data-autorisees", $autorisees);
-			if (_IMAGE_WEBP) {
+			if (_IMAGE_WEBP && $mime!="image/png") {
 				$autorisees_webp = json_encode($autorisees_webp);
 				$img = inserer_attribut($img, "data-autorisees_webp", $autorisees_webp);
 			}
@@ -675,7 +675,7 @@ function background_responsive($src, $taille = 120, $lazy = 0, $align = "") {
 				if (_IMAGE_RESPONSIVE_CALCULER) {
 					$fichiers[$t_italien]["i"][1] = retour_image_responsive($s_italien, "$t_italien", 1, 0, "file");
 					$fichiers[$t_italien]["i"][2] = retour_image_responsive($s_italien, "$t_italien", 2, 0, "file");
-					if (_IMAGE_WEBP) {
+					if (_IMAGE_WEBP && $mime!="image/png") {
 						$fichiers_webp[$t_italien]["i"][1] = retour_image_responsive($s_italien, "$t_italien", 1, 0, "file", "webp");
 						$fichiers_webp[$t_italien]["i"][2] = retour_image_responsive($s_italien, "$t_italien", 2, 0, "file", "webp");
 					}
@@ -683,14 +683,14 @@ function background_responsive($src, $taille = 120, $lazy = 0, $align = "") {
 					if ($htactif) {
 						$fichiers[$t_italien]["i"][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_italien.$1", $s_italien) . "?$mtime";
 						$fichiers[$t_italien]["i"][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_italien-2.$1", $s_italien) . "?$mtime";
-						if (_IMAGE_WEBP) {
+						if (_IMAGE_WEBP && $mime!="image/png") {
 							$fichiers_webp[$t_italien]["i"][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_italien.$1.webp", $s_italien) . "?$mtime";
 							$fichiers_webp[$t_italien]["i"][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_italien-2.$1.webp", $s_italien) . "?$mtime";
 						}
 					} else {
 						$fichiers[$t_italien]["i"][1] = "index.php?action=image_responsive&amp;img=$s_italien&amp;taille=$t_italien&mtime=$mtime";
 						$fichiers[$t_italien]["i"][2] = "index.php?action=image_responsive&amp;img=$s_italien&amp;taille=$t_italien&amp;dpr=2&mtime=$mtime";
-						if (_IMAGE_WEBP) {
+						if (_IMAGE_WEBP && $mime!="image/png") {
 							$fichiers_webp[$t_italien]["i"][1] = "index.php?action=image_responsive&amp;img=$s_italien&amp;taille=$t_italien&amp;format=web&mtime=$mtime";
 							$fichiers_webp[$t_italien]["i"][2] = "index.php?action=image_responsive&amp;img=$s_italien&amp;taille=$t_italien&amp;dpr=2&amp;format=web&mtime=$mtime";
 						}
@@ -701,7 +701,7 @@ function background_responsive($src, $taille = 120, $lazy = 0, $align = "") {
 				if (_IMAGE_RESPONSIVE_CALCULER) {
 					$fichiers[$t_portrait]["p"][1] = retour_image_responsive($s_portrait, "$t_portrait", 1, 0, "file");
 					$fichiers[$t_portrait]["p"][2] = retour_image_responsive($s_portrait, "$t_portrait", 2, 0, "file");
-					if (_IMAGE_WEBP) {
+					if (_IMAGE_WEBP && $mime!="image/png") {
 						$fichiers_webp[$t_italien]["p"][1] = retour_image_responsive($s_italien, "$t_portrait", 1, 0, "file", "webp");
 						$fichiers_webp[$t_italien]["p"][2] = retour_image_responsive($s_italien, "$t_portrait", 2, 0, "file", "webp");
 					}
@@ -709,14 +709,14 @@ function background_responsive($src, $taille = 120, $lazy = 0, $align = "") {
 					if ($htactif) {
 						$fichiers[$t_portrait]["p"][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_portrait.$1", $s_portrait) . "?$mtime";
 						$fichiers[$t_portrait]["p"][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_portrait-2.$1", $s_portrait) . "?$mtime";
-						if (_IMAGE_WEBP) {
+						if (_IMAGE_WEBP && $mime!="image/png") {
 							$fichiers_webp[$t_italien]["p"][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_portrait.$1.webp", $s_italien) . "?$mtime";
 							$fichiers_webp[$t_italien]["p"][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_portrait-2.$1.webp", $s_italien) . "?$mtime";
 						}
 					} else {
 						$fichiers[$t_portrait]["p"][1] = "index.php?action=image_responsive&amp;img=$s_portrait&amp;taille=$t_portrait&mtime=$mtime";
 						$fichiers[$t_portrait]["p"][2] = "index.php?action=image_responsive&amp;img=$s_portrait&amp;taille=$t_portrait&amp;dpr=2&mtime=$mtime";
-						if (_IMAGE_WEBP) {
+						if (_IMAGE_WEBP && $mime!="image/png") {
 							$fichiers_webp[$t_italien]["p"][1] = "index.php?action=image_responsive&amp;img=$s_portrait&amp;taille=$t_portrait&amp;format=web&mtime=$mtime";
 							$fichiers_webp[$t_italien]["p"][2] = "index.php?action=image_responsive&amp;img=$s_portrait&amp;taille=$t_portrait&amp;dpr=2&amp;format=web&mtime=$mtime";
 						}
@@ -727,7 +727,7 @@ function background_responsive($src, $taille = 120, $lazy = 0, $align = "") {
 
 			$ins .= " data-tailles='" . addslashes(json_encode($tailles)) . "'";
 			$ins .= " data-autorisees='" . addslashes(json_encode($fichiers)) . "'";
-			if (_IMAGE_WEBP) {
+			if (_IMAGE_WEBP && $mime!="image/png") {
 				$ins .= " data-autorisees_webp='" . addslashes(json_encode($fichiers_webp)) . "'";
 			}
 

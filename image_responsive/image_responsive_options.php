@@ -172,6 +172,11 @@ function image_reduire_net($source, $taille = 0, $taille_y=0, $dpr=0, $forcer_fo
 			
 			if ($forcer_format == "webp") {
 				$valeurs['fichier_dest'] = $vignette = "$destination.$destFormat.webp";
+				if ($destFormat == "png") { 
+					// Conserver la transparence 
+					@imagealphablending($destImage, false); 
+					@imagesavealpha($destImage,true); 
+				}
 				imagewebp ($destImage, $vignette);
 				if (filesize($vignette) % 2 == 1) {	
   				  file_put_contents($vignette, "\0", FILE_APPEND);
