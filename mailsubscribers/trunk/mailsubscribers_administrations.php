@@ -51,9 +51,43 @@ function mailsubscribers_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter','TABLE spip_mailsubscribinglists DROP anonyme'),
 		array('maj_tables', array('spip_mailsubscribinglists')),
 	);
+	$maj['1.1.4'] = array(
+		array('mailsubscribers_clean_subscriptions'),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
+}
+
+
+/**
+ * Nettoyer les inscriptions incoherentes (statut global vs statuts inscriptions)
+ */
+function mailsubscribers_clean_subscriptions() {
+	// on utilise le critere su.statut=refuse qui est plus rapide que email like '%@example.org'
+	$old_sub = sql_allfetsel('su.id_mailsubscriber,su.email', 'spip_mailsubscribers AS su JOIN spip_mailsubscriptions as si on su.id_mailsubscriber=si.id_mailsubscriber','su.statut=' . sql_quote('refuse') . ' AND si.id_segment=0 AND si.statut=' . sql_quote('valide'), 'su.id_mailsubscriber','','0,100');
+	while ($old_sub) {
+		$unsubscribe = charger_fonction('unsubscribe', 'newsletter');
+		foreach ($old_sub as $sub) {
+			// si mail obfusque, on desinscrit de tout
+			if (mailsubscribers_test_email_obfusque($sub['email'])) {
+				$unsubscribe($sub['email'], array('notify' => false));
+				spip_log('mailsubscribers_clean_subscriptions: unsubscribe '.$sub['id_mailsubscriber'], 'mailsubscribers');
+			}
+			// sinon on retablit le statut=valide sur le mailsubscriber
+			else {
+				sql_updateq('spip_mailsubscribers', array('statut' => 'valide'), 'id_mailsubscriber='.intval($sub['id_mailsubscriber']));
+				spip_log('mailsubscribers_clean_subscriptions: revalide '.$sub['id_mailsubscriber'], 'mailsubscribers');
+			}
+			if (time() >= _TIME_OUT) {
+				return;
+			}
+		}
+		$old_sub = sql_allfetsel('su.id_mailsubscriber,su.email', 'spip_mailsubscribers AS su JOIN spip_mailsubscriptions as si on su.id_mailsubscriber=si.id_mailsubscriber','su.statut=' . sql_quote('refuse') . ' AND si.id_segment=0 AND si.statut=' . sql_quote('valide'), 'su.id_mailsubscriber','','0,100');
+		if (time() >= _TIME_OUT) {
+			return;
+		}
+	}
 }
 
 /**

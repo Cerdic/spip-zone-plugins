@@ -214,6 +214,23 @@ function mailsubscribers_optimiser_base_disparus($flux) {
 	$n += optimiser_sansref('spip_mailsubscriptions', 'id_mailsubscribinglist', $res);
 
 
+	# reliquat d'inscriptions incoherentes
+	// on utilise le critere su.statut=refuse qui est plus rapide que email like '%@example.org'
+	$old_sub = sql_allfetsel('su.id_mailsubscriber,su.email', 'spip_mailsubscribers AS su JOIN spip_mailsubscriptions as si on su.id_mailsubscriber=si.id_mailsubscriber','su.statut=' . sql_quote('refuse') . ' AND si.id_segment=0 AND si.statut=' . sql_quote('valide'), 'su.id_mailsubscriber','','0,50');
+	if ($old_sub) {
+		$unsubscribe = charger_fonction('unsubscribe', 'newsletter');
+		foreach ($old_sub as $sub) {
+			// si mail obfusque, on desinscrit de tout
+			if (mailsubscribers_test_email_obfusque($sub['email'])) {
+				$unsubscribe($sub['email'], array('notify' => false));
+			}
+			// sinon on retablit le statut=valide sur le mailsubscriber
+			else {
+				sql_updateq('spip_mailsubscribers', array('statut' => 'valide'), 'id_mailsubscriber='.intval($sub['id_mailsubscriber']));
+			}
+		}
+	}
+
 	return $flux;
 
 }
