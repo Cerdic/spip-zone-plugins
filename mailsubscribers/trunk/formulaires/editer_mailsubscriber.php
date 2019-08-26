@@ -122,7 +122,7 @@ function formulaires_editer_mailsubscriber_traiter_dist(
 	// recuperer l'id cree eventuellement
 	if ($id_mailsubscriber = $res['id_mailsubscriber']) {
 		$email = sql_getfetsel('email', 'spip_mailsubscribers', 'id_mailsubscriber=' . intval($id_mailsubscriber));
-		if (!mailsubscribers_test_email_obfusque($email)) {
+		if (!mailsubscribers_test_email_obfusque($email) or !_request('listes')) {
 			$editer_email_subscription_traiter = charger_fonction('traiter', 'formulaires/editer_email_subscription');
 			$editer_email_subscription_traiter($email);
 		}

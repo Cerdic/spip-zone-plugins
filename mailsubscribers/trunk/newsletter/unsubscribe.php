@@ -34,6 +34,9 @@ function newsletter_unsubscribe_dist($email, $options = array()) {
 
 	// chercher si un tel email est deja en base
 	$row = sql_fetsel('*', 'spip_mailsubscribers', 'email=' . sql_quote($email));
+	if (!$row) {
+		$row = sql_fetsel("*", 'spip_mailsubscribers', "email=" . sql_quote(mailsubscribers_obfusquer_email($email)));
+	}
 	if ($row) {
 
 		$set = array();

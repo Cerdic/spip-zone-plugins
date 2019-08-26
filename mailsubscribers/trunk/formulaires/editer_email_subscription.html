@@ -1,7 +1,7 @@
 <div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_mailsubscriber,nouveau}'>
 	<h3 class="titrem"><:mailsubscriber:info_email_inscriptions{email=#ENV{_email}}:>
 	[(#ENV{_id_mailsubscriber}|oui)
-		<a href="[(#ENV{_id_mailsubscriber}|generer_url_entite{mailsubscriber})]" class="pull-right">Voir le détail</a>
+		<a href="[(#ENV{_id_mailsubscriber}|generer_url_entite{mailsubscriber}|parametre_url{email,#ENV{_email}})]" class="pull-right">Voir le détail</a>
 	]
 	</h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
