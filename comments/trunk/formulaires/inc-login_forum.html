@@ -26,11 +26,12 @@
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{session_email})</span>
 			]<input type="[(#HTML5|?{email,text})]" class="text email" name="session_email" id="session_email" value="[(#SESSION**{email}|sinon{#SESSION**{session_email}}|entites_html)]" size="40" />
 		</li>
+		[(#ENV{url_site}|!={http://}|oui)#SET{url_site,#ENV{url_site}]
 [(#CONFIG{forums_urlref}|!={non}|?{
 		<li class='editer saisie_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]'>
 				<label for="url_site"><:comments:label_url:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_site})</span>
-				]<input type="[(#HTML5|?{url,text})]" class="text url" name="url_site" id="url_site" style="text-align: left;" dir="ltr" size="40" value="[(#ENV{url_site})]" />
+				]<input type="[(#HTML5|?{url,text})]" class="text url" name="url_site" id="url_site" style="text-align: left;" dir="ltr" size="40" [(#HTML5|oui) [placeholder="(#ENV{url_site})"][ value="(#GET{url_site})"]][(#HTML5|non)value="#ENV{url_site}"]/>
 		</li>
 })]
 	</ul>

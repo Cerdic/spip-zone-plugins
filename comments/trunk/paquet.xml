@@ -1,7 +1,7 @@
 <paquet
 	prefix="comments"
 	categorie="communication"
-	version="3.4.12"
+	version="3.4.13"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/comment-32.png"
@@ -25,7 +25,7 @@
 
 	<utilise nom='Zpip' compatibilite="[2.0.7-dev;]" />
 	<utilise nom='Z' compatibilite="[1.7.14;]" />
-    
+
 	<pipeline nom="autoriser" inclure="comments_fonctions.php" />
 	<pipeline nom="insert_head_css" inclure="comments_fonctions.php" />
 	<pipeline nom="formulaire_charger" inclure="comments_fonctions.php" />
