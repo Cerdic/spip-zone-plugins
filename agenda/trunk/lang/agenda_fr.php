@@ -124,6 +124,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mois_suivant' => 'mois suivant',
 
 	// N
+	'notification_propose_detail' => 'L’événement "@titre@" est proposé à la publication depuis',
+	'notification_propose_sujet' => '[@nom_site_spip@] Proposé : @titre@',
+	'notification_propose_titre' => 'Événement proposé',
+	'notification_publie_detail' => 'L’événement "@titre@" vient d’être publié par @connect_nom@.',
+	'notification_publie_sujet' => '[@nom_site_spip@] PUBLIE: @titre@',
+	'notification_publie_titre' => 'Événement publié',
 	'nb_repetitions' => '@nb@ répétitions',
 
 	// P

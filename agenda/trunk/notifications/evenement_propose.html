@@ -1,0 +1,17 @@
+<BOUCLE_event(EVENEMENTS){id_evenement}{statut?}{tout}>
+<title>[(#VAL{agenda:notification_propose_sujet}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP,titre,#TITRE}}|nettoyer_titre_email)]</title>
+
+<body>
+<div class="header">
+<h1><:agenda:notification_propose_titre|trim|trim{-}:></h1>
+<p>
+[(#SET{titre,[<a href="[(#ID_EVENEMENT|generer_url_entite{evenement,'','',0})]"><strong>(#TITRE)</strong></a>]})]
+[(#VAL{agenda:notification_propose_detail}|_T{#ARRAY{titre,#GET{titre}}})][ (#VAL{date_fmt_nomjour_date}|_T{[(#ARRAY{'nomjour',[(#DATE|nom_jour)],'date',[(#DATE|affdate)]})]}).]
+</p>
+<hr />
+</div>
+
+<INCLURE{fond=notifications/inc-evenement,id_evenement} />
+</body>
+</BOUCLE_event>
+#FILTRE{facteur_email_wrap_to_html}
