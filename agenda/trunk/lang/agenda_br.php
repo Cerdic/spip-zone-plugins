@@ -114,6 +114,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nb_repetitions' => '@nb@ pleustradennoù',
+	'notification_propose_titre' => 'Degouezh kinniget',
+	'notification_publie_titre' => 'Degouezh embannet',
 
 	// P
 	'participation_prise_en_compte' => 'Enrollet eo bet ho perzh',

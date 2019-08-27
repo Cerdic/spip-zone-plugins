@@ -125,6 +125,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nb_repetitions' => '@nb@ opakovaní',
+	'notification_propose_titre' => 'Navrhovaná udalosť',
+	'notification_publie_titre' => 'Uverejnená udalosť',
 
 	// P
 	'participation_incertaine_prise_en_compte' => 'Vaša prípadná účasť bola zaznamenaná',

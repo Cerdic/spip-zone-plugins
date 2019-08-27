@@ -125,6 +125,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nb_repetitions' => '@nb@ Wiederholungen',
+	'notification_propose_titre' => 'Event vorgeschlagen',
+	'notification_publie_titre' => 'Event veröffentlicht',
 
 	// P
 	'participation_incertaine_prise_en_compte' => 'Ihre vorläufige Anmeldung wurde gespeichert',

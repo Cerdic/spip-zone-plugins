@@ -101,6 +101,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nb_repetitions' => '@nb@ تكرار',
+	'notification_propose_titre' => 'حدث مقترح',
+	'notification_publie_titre' => 'حدث منشور',
 
 	// P
 	'participation_incertaine_prise_en_compte' => 'تم تسجيل مشاركتك المحتملة',
