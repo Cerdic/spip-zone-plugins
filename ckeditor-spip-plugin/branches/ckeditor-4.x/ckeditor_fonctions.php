@@ -602,9 +602,7 @@ function ckeditor_preparescript($config) {
 				$removePlugins[] = 'devtools';
 			}
 			$cke_cfg['removePlugins'] = join(',',$removePlugins) ;
-			if(ckeditor_lire_config('conversion', _CKE_CONVERSION_DEF)=='aucune')
-				$cke_cfg['fullPage'] = true ;
-
+			$cke_cfg['fullPage'] = false;
 	}
 
 	$ckeditor_config_post = charger_fonction('ckeditor_config_post','');
