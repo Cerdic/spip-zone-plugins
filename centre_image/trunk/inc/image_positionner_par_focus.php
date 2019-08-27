@@ -67,8 +67,9 @@ function inc_image_positionner_par_focus_dist($img, $largeur, $hauteur, $type = 
 		$h_dest = $l_img*$r;
 	}
 
-	$dx = centre_image_x($img);
-	$dy = centre_image_y($img);
+	$res = centre_image($img);
+	$dx = $res['x'];
+	$dy = $res['y'];
 
 	if ($r_img > $r) {
 		$h_dest = round(($l_img * $r) / $zoom);

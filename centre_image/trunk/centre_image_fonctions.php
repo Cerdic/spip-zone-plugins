@@ -158,7 +158,7 @@ function centre_image_densite($fichier) {
 **/
 function centre_image_x($fichier) {
 	$res = centre_image($fichier);
-	return $res["x"];
+	return $res['x'];
 }
 
 /**
@@ -172,7 +172,7 @@ function centre_image_x($fichier) {
 **/
 function centre_image_y($fichier) {
 	$res = centre_image($fichier);
-	return $res["y"];
+	return $res['y'];
 }
 
 
