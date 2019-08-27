@@ -6,6 +6,7 @@
  * Twitter handle: jeykeu
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * forked from https://github.com/duozersk/mep-feature-playlist
+ * adapted for MEJS 4.2.7
  */
 
 (function($) {
@@ -22,7 +23,7 @@
     buildloop: function(player, controls, layers, media) {
       var t = this;
 
-      var loop = $('<div class="mejs-button mejs-loop-button ' + ((player.options.loop) ? 'mejs-loop-on' : 'mejs-loop-off') + '">' +
+      var loop = $('<div class="mejs__button mejs__loop-button ' + ((player.options.loop) ? t.options.classPrefix + 'loop-on' : t.options.classPrefix + 'loop-off') + '">' +
         '<button type="button" aria-controls="' + player.id + '" title="' + player.options.loopText + '"></button>' +
         '</div>')
         // append it to the toolbar
@@ -32,16 +33,16 @@
           player.options.loop = !player.options.loop;
           $(media).trigger('mep-looptoggle', [player.options.loop]);
           if (player.options.loop) {
-            loop.removeClass('mejs-loop-off').addClass('mejs-loop-on');
+            loop.removeClass(t.options.classPrefix + 'loop-off').addClass(t.options.classPrefix + 'loop-on');
             //media.setAttribute('loop', 'loop');
           }
           else {
-            loop.removeClass('mejs-loop-on').addClass('mejs-loop-off');
+            loop.removeClass(t.options.classPrefix + 'loop-on').addClass(t.options.classPrefix + 'loop-off');
             //media.removeAttribute('loop');
           }
         });
 
-      t.loopToggle = t.controls.find('.mejs-loop-button');
+      t.loopToggle = $(t.controls).find('.' + t.options.classPrefix + 'loop-button');
     },
     loopToggleClick: function() {
       var t = this;
@@ -51,7 +52,7 @@
     buildshuffle: function(player, controls, layers, media) {
       var t = this;
 
-      var shuffle = $('<div class="mejs-button mejs-shuffle-button ' + ((player.options.shuffle) ? 'mejs-shuffle-on' : 'mejs-shuffle-off') + '">' +
+      var shuffle = $('<div class="mejs__button mejs__shuffle-button ' + ((player.options.shuffle) ? t.options.classPrefix + 'shuffle-on' : t.options.classPrefix + 'shuffle-off') + '">' +
         '<button type="button" aria-controls="' + player.id + '" title="' + player.options.shuffleText + '"></button>' +
         '</div>')
         // append it to the toolbar
@@ -61,14 +62,14 @@
           player.options.shuffle = !player.options.shuffle;
           $(media).trigger('mep-shuffletoggle', [player.options.shuffle]);
           if (player.options.shuffle) {
-            shuffle.removeClass('mejs-shuffle-off').addClass('mejs-shuffle-on');
+            shuffle.removeClass(t.options.classPrefix + 'shuffle-off').addClass(t.options.classPrefix + 'shuffle-on');
           }
           else {
-            shuffle.removeClass('mejs-shuffle-on').addClass('mejs-shuffle-off');
+            shuffle.removeClass(t.options.classPrefix + 'shuffle-on').addClass(t.options.classPrefix + 'shuffle-off');
           }
         });
 
-      t.shuffleToggle = t.controls.find('.mejs-shuffle-button');
+      t.shuffleToggle = $(t.controls).find('.' + t.options.classPrefix + 'shuffle-button');
     },
     shuffleToggleClick: function() {
       var t = this;
@@ -78,7 +79,7 @@
     buildprevtrack: function(player, controls, layers, media) {
       var t = this;
 
-      var prevTrack = $('<div class="mejs-button mejs-prevtrack-button mejs-prevtrack">' +
+      var prevTrack = $('<div class="mejs__button mejs__prevtrack-button mejs__prevtrack">' +
         '<button type="button" aria-controls="' + player.id + '" title="' + player.options.prevText + '"></button>' +
         '</div>')
         .appendTo(controls)
@@ -87,7 +88,7 @@
           player.playPrevTrack();
         });
 
-      t.prevTrack = t.controls.find('.mejs-prevtrack-button');
+      t.prevTrack = $(t.controls).find('.' + t.options.classPrefix + 'prevtrack-button');
     },
     prevTrackClick: function() {
       var t = this;
@@ -97,7 +98,7 @@
     buildnexttrack: function(player, controls, layers, media) {
       var t = this;
 
-      var nextTrack = $('<div class="mejs-button mejs-nexttrack-button mejs-nexttrack">' +
+      var nextTrack = $('<div class="mejs__button mejs__nexttrack-button mejs__nexttrack">' +
         '<button type="button" aria-controls="' + player.id + '" title="' + player.options.nextText + '"></button>' +
         '</div>')
         .appendTo(controls)
@@ -106,7 +107,7 @@
           player.playNextTrack();
         });
 
-      t.nextTrack = t.controls.find('.mejs-nexttrack-button');
+      t.nextTrack = $(t.controls).find('.' + t.options.classPrefix + 'nexttrack-button');
     },
     nextTrackClick: function() {
       var t = this;
@@ -117,7 +118,7 @@
       var t = this;
 	    player.options.playlist = $(player.options.playlistSelector).is(':visible');
 
-      var playlistToggle = $('<div class="mejs-button mejs-playlist-button ' + ((player.options.playlist) ? 'mejs-hide-playlist' : 'mejs-show-playlist') + '">' +
+      var playlistToggle = $('<div class="mejs__button mejs__playlist-button ' + ((player.options.playlist) ? t.options.classPrefix + 'hide-playlist' : t.options.classPrefix + 'show-playlist') + '">' +
         '<button type="button" aria-controls="' + player.id + '" title="' + player.options.playlistText + '"></button>' +
         '</div>')
         .appendTo(controls)
@@ -126,15 +127,15 @@
           $(media).trigger('mep-playlisttoggle', [player.options.playlist]);
           if (player.options.playlist) {
             $(player.options.playlistSelector).show('fast');
-            playlistToggle.removeClass('mejs-show-playlist').addClass('mejs-hide-playlist');
+            playlistToggle.removeClass(t.options.classPrefix + 'show-playlist').addClass(t.options.classPrefix + 'hide-playlist');
           }
           else {
 	          $(player.options.playlistSelector).hide('fast');
-            playlistToggle.removeClass('mejs-hide-playlist').addClass('mejs-show-playlist');
+            playlistToggle.removeClass(t.options.classPrefix + 'hide-playlist').addClass(t.options.classPrefix + 'show-playlist');
           }
         });
 
-      t.playlistToggle = t.controls.find('.mejs-playlist-button');
+      t.playlistToggle = $(t.controls).find('.' + t.options.classPrefix + 'playlist-button');
     },
     playlistToggleClick: function() {
       var t = this;
@@ -163,7 +164,7 @@
 		      me.attr('title',getTrackName(me.attr('data-url')));
 	      }
 		    me.attr('data-index',index);
-		    $('<div class="mejs-controls"><div class="mejs-button mejs-playpause-button mejs-play" >' +
+		    $('<div class="mejs__controls"><div class="mejs__button mejs__playpause-button mejs__play" >' +
 							'<button type="button" aria-controls="' + t.id + '" title="' + t.options.playpauseText + '" aria-label="' + t.options.playpauseText + '"></button>' +
 						'</div></div>')
           .prependTo(me)
@@ -179,11 +180,11 @@
 							if (media.paused) {
 								media.play();
 								track.addClass('playing').removeClass('paused');
-								$('.mejs-play',this).addClass('mejs-pause').removeClass('mejs-play');
+								$('.' + t.options.classPrefix + 'play',this).addClass(t.options.classPrefix + 'pause').removeClass(t.options.classPrefix + 'play');
 							} else {
 								media.pause();
 								track.addClass('paused').removeClass('playing');
-								$('.mejs-pause',this).addClass('mejs-play').removeClass('mejs-pause');
+								$('.' + t.options.classPrefix + 'pause',this).addClass(t.options.classPrefix + 'play').removeClass(t.options.classPrefix + 'pause');
 							}
 				    }
 				    $(this).find('button').focus();
@@ -201,10 +202,10 @@
 	      t.playNextTrack();
       }, false);
 	    media.addEventListener('play',function(e) {
-		    t.playlist_tracks.filter('.current').find('.mejs-play').addClass('mejs-pause').removeClass('mejs-play');
+		    t.playlist_tracks.filter('.current').find('.' + t.options.classPrefix + 'play').addClass(t.options.classPrefix + 'pause').removeClass(t.options.classPrefix + 'play');
       }, false);
       media.addEventListener('pause',function(e) {
-	      t.playlist_tracks.filter('.current').find('.mejs-pause').addClass('mejs-play').removeClass('mejs-pause');
+	      t.playlist_tracks.filter('.current').find('.' + t.options.classPrefix + 'pause').addClass(t.options.classPrefix + 'play').removeClass(t.options.classPrefix + 'pause');
       }, false);
 
 	    // add key features for prev/next track
@@ -281,8 +282,8 @@
       t.load();
       setTimeout(function(){t.media.play();},10);
       track.addClass('current playing').siblings().removeClass('current').removeClass('playing').removeClass('paused');
-	    t.playlist_tracks.find('.mejs-pause').addClass('mejs-play').removeClass('mejs-pause');
-	    $('.mejs-play',track).addClass('mejs-pause').removeClass('mejs-play');
+	    t.playlist_tracks.find('.' + t.options.classPrefix + 'pause').addClass(t.options.classPrefix + 'play').removeClass(t.options.classPrefix + 'pause');
+	    $('.' + t.options.classPrefix + 'play',track).addClass(t.options.classPrefix + 'pause').removeClass(t.options.classPrefix + 'play');
 
     },
     playTrackURL: function(url) {

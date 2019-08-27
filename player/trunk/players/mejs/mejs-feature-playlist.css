@@ -6,73 +6,84 @@
 */
 
 /* Start: Show/Hide Playlist*/
-.mejs-controls .mejs-show-playlist button {
-  background: transparent url(controls-playlist.png) no-repeat;
-  background-position: -16px -16px;
+.mejs__controls .mejs__show-playlist button {
+  background: transparent url(controls-playlist.svg) no-repeat;
+  background-position: -200px 0;
 }
-.mejs-controls .mejs-hide-playlist button {
-  background: transparent url(controls-playlist.png) no-repeat;
-  background-position: -16px 0;
+.mejs__controls .mejs__hide-playlist button {
+  background: transparent url(controls-playlist.svg) no-repeat;
+  background-position: -180px 0;
 }
 /* End: Show/Hide Playlist */
 
 /* Start: Previous */
-.mejs-controls .mejs-prevtrack button {
-  background: transparent url(controls-playlist.png) no-repeat;
-  background-position: 0 -16px;
+.mejs__controls .mejs__prevtrack button {
+  background: transparent url(controls-playlist.svg) no-repeat;
+	background-position: -20px 0;
 }
 /* End: Previous */
 
 /* Start: Next */
-.mejs-controls .mejs-nexttrack button {
-  background: transparent url(controls-playlist.png) no-repeat;
+.mejs__controls .mejs__nexttrack button {
+  background: transparent url(controls-playlist.svg) no-repeat;
+	background-position: 0px 0;
 }
 /* End: Next */
 
-/* Start: Shuffle */
-.mejs-controls .mejs-shuffle-on button {
-  background: transparent url(controls-playlist.png) no-repeat;
-  background-position: -32px 0;
+/* Start: Loop */
+.mejs__controls .mejs__loop-button button {
+	background: transparent url(controls-playlist.svg) no-repeat;
+  background-position: -120px 0;
 }
-.mejs-controls .mejs-shuffle-off button {
-  background: transparent url(controls-playlist.png) no-repeat;
-  background-position: -32px -16px;
+.mejs__controls .mejs__loop-button.mejs__loop-off button {
+  background-position: -160px 0;
+}
+/* End: Loop */
+
+/* Start: Shuffle */
+.mejs__controls .mejs__shuffle-on button {
+  background: transparent url(controls-playlist.svg) no-repeat;
+	background-position: -100px 0;
+}
+.mejs__controls .mejs__shuffle-off button {
+  background: transparent url(controls-playlist.svg) no-repeat;
+	background-position: -140px 0;
 }
 /* End: Shuffle */
 
 /*Start: Playlist*/
-dd.mejs-playlist {
+dd.mejs__playlist {
 	margin: 0;
 	text-align: left;
 	padding: 10px;
 	background: #ddd;
 }
-.mejs-playlist ul {
+.mejs__playlist ul {
 	margin:0;
 }
-.mejs-playlist .track,
-.mejs-playlist .short.track {
+.mejs__playlist .track,
+.mejs__playlist .short.track {
 	cursor: pointer;
 	position: relative;
 	padding-left: 26px;
 }
-.mejs-playlist .track .entry {
+.mejs__playlist .track .entry {
 	display: block;padding-left: 34px;
 }
-.mejs-playlist .track .publication {display: none}
-.mejs-playlist .track .entry-content {display: block;margin-bottom: 0}
-.mejs-playlist .track .entry-content :last-child {margin-bottom: 0}
+.mejs__playlist .track .publication {display: none}
+.mejs__playlist .track .entry-content {display: block;margin-bottom: 0}
+.mejs__playlist .track .entry-content :last-child {margin-bottom: 0}
 
-.mejs-playlist .track:hover {
+.mejs__playlist .track:hover {
   background: #eee;
 }
-.mejs-playlist .track.current {
+.mejs__playlist .track.current {
 	background: #fff;
 }
-.mejs-playlist .track.current .entry-title {
+.mejs__playlist .track.current .entry-title {
   font-weight: bold;
 }
-.track .mejs-button {
+.track .mejs__button {
 	float:left;
 	margin-right: 10px;
 	width: 24px;
@@ -80,10 +91,10 @@ dd.mejs-playlist {
 	position: relative;
 	z-index: 2;
 }
-.track .mejs-button button {
+.track .mejs__button button {
 	margin: 4px;
 }
-.track .mejs-button button:before {
+.track .mejs__button button:before {
 	content:"";
 	display: block;
 	position: absolute;
@@ -95,19 +106,19 @@ dd.mejs-playlist {
 	height: 24px;
 	z-index: -1;
 }
-.track:hover .mejs-button button:before,
-.track .mejs-button button:focus:before {
+.track:hover .mejs__button button:before,
+.track .mejs__button button:focus:before {
 	background: #333;
 }
 
-.current .mejs-button button:before,
-.current .mejs-button button:focus:before {
+.current .mejs__button button:before,
+.current .mejs__button button:focus:before {
 	background: #000;
 }
-.track .mejs-button.mejs-play button {
+.track .mejs__button.mejs__play button {
 	margin-left:5px;
 }
-.track .mejs-button.mejs-play button:before {
+.track .mejs__button.mejs__play button:before {
 	left:-5px;
 }
 
