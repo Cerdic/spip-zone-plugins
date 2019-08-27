@@ -123,23 +123,25 @@ function skeleditor_extraire_css($texte){
 }
 
 function skeleditor_trouver_source($src){
-	// enlever un timestamp eventuel derriere un nom de fichier statique
-	$source_file = preg_replace(",[.]css[?].+$,", '.css', $src);
-	// est-ce un fichier scss cssifié
-	if (preg_match("/-cssify-[\w\d]*.css/s", $source_file)){
-		$scss_file = preg_replace(",local/cache-scss/([a-z0-9\-\_]*)-cssify-[\w\d]*.css,s", '${1}.scss', $source_file);
+	$source_file = explode('?', $src);
+	$source_file = reset($source_file);
 
-		$paths = creer_chemin();
-		foreach ($paths as $path){
-			if ($path!=''){
-				$dir_iterator = new RecursiveDirectoryIterator($path);
-				$iterator = new RecursiveIteratorIterator($dir_iterator,
-					RecursiveIteratorIterator::SELF_FIRST);
-				foreach ($iterator as $splFile){
-					if ($splFile->getBaseName()==$scss_file){
-						return $splFile->getPathName();
-					}
+	// est-ce un fichier (less|scss) cssifié
+	// dans ce cas on l'ouvre et on lit les premieres lignes qui contiennent la reference aux fichiers compiles
+	if (strpos($source_file, "-cssify-")
+	  and preg_match("#/cache-(less|scss)/.*-cssify-[\w\d-]*.css#s", $source_file)){
+		$start = file_get_contents($source_file, false, null, 0, 2048);
+		if (strpos($start, '#@') !== false) {
+			$start = explode('#@', $start);
+			array_shift($start);
+			$file = reset($start);
+			$file = explode("\n", $file);
+			$file = reset($file);
+			if (file_exists($file)) {
+				if (strpos($file, _ROOT_RACINE) === 0) {
+					$file = substr($file, strlen(_ROOT_RACINE));
 				}
+				return $file;
 			}
 		}
 	}
