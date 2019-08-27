@@ -1,7 +1,7 @@
 <paquet
 	prefix="lesscss"
 	categorie="outil"
-	version="1.4.2"
+	version="1.4.3"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="img/lesscss-32.png"

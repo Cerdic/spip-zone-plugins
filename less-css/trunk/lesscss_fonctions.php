@@ -148,8 +148,12 @@ function lesscss_compile($style, $contexte = array()){
 		);
 	}
 
-	if ($files = Less_Parser::AllParsedFiles()
-	  AND count($files)){
+	// si on a rien parse parce que fichier en cache, indiquer au moins le fichier source concerne dans l'en-tete
+	$files = Less_Parser::AllParsedFiles();
+	if (!$files and !empty($contexte['file'])) {
+		$files = [$contexte['file']];
+	}
+	if ($files AND count($files)){
 
 		$l = strlen(_DIR_RACINE);
 		foreach($files as $k=>$file){
