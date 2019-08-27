@@ -120,8 +120,13 @@ function scss_compile($style, $contexte = array()) {
 		return '';
 	}
 
-	if ($files = $scss->getParsedFiles()
-	  AND count($files)){
+	// si on a rien parse parce que fichier en cache, indiquer au moins le fichier source concerne dans l'en-tete
+	$files = $scss->getParsedFiles();
+	if (!$files and !empty($contexte['file'])) {
+		$files = [$contexte['file']];
+	}
+
+	if ($files and count($files)){
 		$files = array_keys($files);
 		$l = strlen(_DIR_RACINE);
 		$lr = strlen(_ROOT_RACINE);
