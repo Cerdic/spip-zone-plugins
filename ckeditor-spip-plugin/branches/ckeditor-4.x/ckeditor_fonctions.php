@@ -602,6 +602,8 @@ function ckeditor_preparescript($config) {
 				$removePlugins[] = 'devtools';
 			}
 			$cke_cfg['removePlugins'] = join(',',$removePlugins) ;
+			//https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_config.html#cfg-allowedContent
+			$cke_cfg['allowedContent'] = true; //Disable HTML cleanup
 			$cke_cfg['fullPage'] = false;
 	}
 
