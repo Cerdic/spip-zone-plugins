@@ -126,7 +126,7 @@ function SpipEditor2CKEditor(editor_id) {
     var EdConfig = {}; jQuery.extend(EdConfig, CKEDITOR.ckConfig);
     EdConfig.toolbar = 'Spip' + stack[editor_id].tb;
     try {
-        jQuery(editor_id).ckeditor(function () {
+        editor = jQuery(editor_id).ckeditor(function () {
             HideSpipUI(editor_id);
             stack[editor_id].n = '#' + this.container.getId();
             stack[editor_id].editor = this.name;
@@ -161,7 +161,47 @@ function SpipEditor2CKEditor(editor_id) {
             this.on('dataReady', function (e) {
                 this.resize(CKEDITOR.ckConfig.minwidth, CKEDITOR.ckConfig.height);
             });
-        }, EdConfig);
+        }, EdConfig).editor;
+
+        if (!sansConversion) {
+            /*
+                Note : La conversion SPIP se fait sur le HTML final.
+                Par conséquent cela se passe à l'étape 16 des état de l'événement. Autrement il s'agit d'un fragment ckeditor (cf documentation)
+            */
+            //https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_editor.html#event-toDataFormat
+            editor.on('toDataFormat', function (evt) {
+                evt.data.dataValue = jQuery.ajax({
+                    url: CKEDITOR.spipurl + '?page=ckspip_convert',
+                    data: {
+                        text_area: evt.data.dataValue.replace(/<span\s+data-scayt[^>]*>\s*(.*?)\s*<\/span>/g, '$1'),
+                        cvt: 'html2spip',
+                        fix: evt.data.fixForBody
+                    },
+                    global: false,
+                    type: 'POST',
+                    dataType: 'text',
+                    async: false
+                }
+                ).responseText;
+            }, null, null, 16);
+
+            //https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_editor.html#event-toHtml
+            editor.on('toHtml', function (evt) {
+                evt.data.dataValue = jQuery.ajax({
+                    url: CKEDITOR.spipurl + '?page=ckspip_convert',
+                    data: {
+                        text_area: evt.data.dataValue.replace(/<span\s+data-scayt[^>]*>\s*(.*?)\s*<\/span>/g, '$1'),
+                        cvt: 'spip2html',
+                        fix: evt.data.fixForBody
+                    },
+                    global: false,
+                    type: 'POST',
+                    dataType: 'text',
+                    async: false
+                }
+                ).responseText;
+            }, null, null, 16);
+        }
     } catch (E) { /* rien */ }
 }
 
