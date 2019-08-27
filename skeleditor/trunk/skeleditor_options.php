@@ -123,27 +123,27 @@ function skeleditor_extraire_css($texte){
 }
 
 function skeleditor_trouver_source($src){
-		// enlever un timestamp eventuel derriere un nom de fichier statique
-		$source_file = preg_replace(",[.]css[?].+$,",'.css',$src);
-		// est-ce un fichier scss cssifié
-		if(preg_match("/-cssify-[\w\d]*.css/s",$source_file)){
-			$scss_file = preg_replace(",local/cache-scss/([a-z0-9\-\_]*)-cssify-[\w\d]*.css,s",'${1}.scss', $source_file);
+	// enlever un timestamp eventuel derriere un nom de fichier statique
+	$source_file = preg_replace(",[.]css[?].+$,", '.css', $src);
+	// est-ce un fichier scss cssifié
+	if (preg_match("/-cssify-[\w\d]*.css/s", $source_file)){
+		$scss_file = preg_replace(",local/cache-scss/([a-z0-9\-\_]*)-cssify-[\w\d]*.css,s", '${1}.scss', $source_file);
 
-			$paths = creer_chemin();
-			foreach ($paths as $path) {
-				if($path !='') {
-					$dir_iterator = new RecursiveDirectoryIterator($path);
-					$iterator = new RecursiveIteratorIterator($dir_iterator,
-															RecursiveIteratorIterator::SELF_FIRST);
-					foreach ($iterator as $splFile) {
-							if ($splFile->getBaseName() == $scss_file) {
-									return $splFile->getPathName();
-							}
+		$paths = creer_chemin();
+		foreach ($paths as $path){
+			if ($path!=''){
+				$dir_iterator = new RecursiveDirectoryIterator($path);
+				$iterator = new RecursiveIteratorIterator($dir_iterator,
+					RecursiveIteratorIterator::SELF_FIRST);
+				foreach ($iterator as $splFile){
+					if ($splFile->getBaseName()==$scss_file){
+						return $splFile->getPathName();
 					}
 				}
 			}
 		}
-		return $source_file;
+	}
+	return $source_file;
 }
 
 
