@@ -1,7 +1,7 @@
 <tr[(#ENV{activer_rang}|oui) data-id_objet="#ID_ARTICLE"] class="#ENV{class}">
 <BOUCLE_art(ARTICLES){id_article}{statut?}>#SET{id_trad,#ID_TRAD}#SET{id_article,#ID_ARTICLE}
-	[(#ENV{activer_rangactiver_rang}|oui)
-		[(#ENV{id_rubrique}|et{#VAL{article}|appliquer_filtre{rang_objet_dans_config}}|oui)<td class="picto">[(#CHEMIN_IMAGE{draggable-16.png}|balise_img)]</td>]
+	[(#ENV{activer_rang}|oui)
+		[(#ENV{id_rubrique}|oui)<td class="picto">[(#CHEMIN_IMAGE{draggable-16.png}|balise_img)]</td>]
 	]
 	<td class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
 	[(#ENV{activer_rang}|oui)<td class='rang'>[(#RANG).]</td>]
