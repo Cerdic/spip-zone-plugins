@@ -3,33 +3,6 @@
 var ckeDataProcessor;
 
 var sansConversion = [(#CONFIG{ ckeditor/ conversion}|=={ 'aucune' }|? { true, false})];
-if (sansConversion) {
-    spipDataProcessor = {
-        toDataFormat: function (html, fixForBody) {
-            if (fixForBody) {
-                return ckeDataProcessor.toDataFormat(html, fixForBody).replace(/<head[^>]*>(.|\r|\n)*<\/head>/, '').replace(/[\r\n\s]*<body[^>]*>[\r\n\s]*/, '').replace(/[\r\n\s]*<\/body>[\r\n\s]*/, '');
-            } else {
-                return ckeDataProcessor.toDataFormat(html, fixForBody);
-            }
-        },
-        toHtml: function (data, fixForBody) {
-            if (fixForBody) {
-                return '<html><head><title></title></head><body>' + ckeDataProcessor.toHtml(data.replace(/<html>/, '').replace(/<\/html>/, ''), fixForBody) + '</body></html>';
-            } else {
-                return ckeDataProcessor.toHtml(data, fixForBody);
-            }
-        }
-    };
-} else {
-    spipDataProcessor = {
-        toDataFormat: function (html, fixForBody) {
-            return jQuery.ajax({ url: CKEDITOR.spipurl + '?page=ckspip_convert', data: { text_area: html.replace(/<span\s+data-scayt[^>]*>\s*(.*?)\s*<\/span>/g, '$1'), cvt: 'html2spip', fix: fixForBody }, global: false, type: 'POST', dataType: 'text', async: false }).responseText;
-        },
-        toHtml: function (data, fixForBody) {
-            return jQuery.ajax({ url: CKEDITOR.spipurl + '?page=ckspip_convert', data: { text_area: data.replace(/<span\s+data-scayt[^>]*>\s*(.*?)\s*<\/span>/g, '$1'), cvt: 'spip2html', fix: fixForBody }, global: false, type: 'POST', dataType: 'text', async: false }).responseText;
-        }
-    };
-}
 
 function htmldecode(s) {
     return jQuery('<div/>').html(s).text();
@@ -312,9 +285,6 @@ function fullInitCKEDITOR(editor_ids) {
     jQuery("input[type=submit]").click(on_submit_destroy_cke);
     if (!CKEDITOR.fullInitDone) {
         CKEDITOR.fullInitDone = true;
-        CKEDITOR.ckConfig.on = {
-            'pluginsLoaded': function (ev) { ckeDataProcessor = ev.editor.dataProcessor; ev.editor.dataProcessor = spipDataProcessor; }
-        };
         CKEDITOR.on('dialogDefinition', function (ev) {
             var dialogName = ev.data.name,
                 dialogDefinition = ev.data.definition;
