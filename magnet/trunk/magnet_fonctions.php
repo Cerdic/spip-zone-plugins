@@ -122,10 +122,11 @@ function balise_BOUTONS_ADMIN_MAGNET_dist($p) {
 	if (($_pile = interprete_argument_balise(1,$p))===NULL)
 		$_pile = "''";
 	else {
-		$_pile_arg = ",".addslashes($_pile);
+		$_pile_arg = ",\''.addslashes(".$_pile.").'\'";
 	}
 
-	if ($table = $p->type_requete){
+	$b = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
+	if ($table = $p->boucles[$b]->type_requete){
 		$type = objet_type($table);
 		$_id = champ_sql(id_table_objet($type), $p);
 		$_objet = "'$type'";
@@ -163,6 +164,7 @@ function balise_BOUTONS_ADMIN_MAGNET_dist($p) {
  */
 function magnet_pre_boucle($boucle){
 	if (!isset($boucle->modificateur['ignore_magnet'])
+	  AND !defined('_IGNORE_MAGNET')
 	  AND (!test_espace_prive() OR isset($boucle->modificateur['criteres']['magnet']) OR isset($boucle->modificateur['criteres']['magnet_pile']))){
 		if (magnet_actif_sur_objet($boucle->type_requete)){
 			$pile = (isset($boucle->modificateur['magnet_pile'])?$boucle->modificateur['magnet_pile']:'');
@@ -194,7 +196,6 @@ function magnet_pre_boucle($boucle){
 	return $boucle;
 }
 
-
 /**
  * Generer le HTML des boutons d'admin magnet
  *
@@ -210,6 +211,7 @@ function magnet_html_boutons_admin($objet, $id_objet, $class="", $pile=''){
 		include_spip('inc/actions');
 	if (!function_exists('bouton_action'))
 		include_spip('inc/filtres');
+	$bouton_action = chercher_filtre("bouton_action");
 
 	$pile_arg = ($pile?"-$pile":"");
 	$magnet_rang = magnet_rang($objet, $id_objet, $pile);
@@ -219,20 +221,20 @@ function magnet_html_boutons_admin($objet, $id_objet, $class="", $pile=''){
 	if ($magnet_rang) {
 		$bclass .= "magnetized";
 		$label = "<i></i>($magnet_rang) <span>"._T('magnet:label_demagnetize')."</span>";
-		$boutons = bouton_action($label,$ur_action,$bclass);
+		$boutons = $bouton_action($label,$ur_action,$bclass);
 		if ($magnet_rang>1){
 			$ur_action = generer_action_auteur("magnetize",$objet."-".$id_objet."-"."up".$pile_arg,self());
-			$boutons = bouton_action($balise_img(_DIR_PLUGIN_MAGNET."img/magnet-up-24.png","monter"),$ur_action, $class ." magnet-up",'',_T('magnet:label_up')) . $boutons;
+			$boutons = $bouton_action($balise_img(_DIR_PLUGIN_MAGNET."img/magnet-up-24.png","monter"),$ur_action, $class ." magnet-up",'',_T('magnet:label_up')) . $boutons;
 		}
-		if ($magnet_rang<magnet_count($objet)){
+		if ($magnet_rang<magnet_count($objet, $pile)){
 			$ur_action = generer_action_auteur("magnetize",$objet."-".$id_objet."-"."down".$pile_arg,self());
-			$boutons = bouton_action($balise_img(_DIR_PLUGIN_MAGNET."img/magnet-down-24.png","descendre"),$ur_action, $class ." magnet-down",'',_T('magnet:label_down')) . $boutons;
+			$boutons = $bouton_action($balise_img(_DIR_PLUGIN_MAGNET."img/magnet-down-24.png","descendre"),$ur_action, $class ." magnet-down",'',_T('magnet:label_down')) . $boutons;
 		}
 	}
 	else {
 		$bclass .= "demagnetized";
 		$label = "<i></i><span>"._T('magnet:label_magnetize')."</span>";
-		$boutons = bouton_action($label,$ur_action,$bclass);
+		$boutons = $bouton_action($label,$ur_action,$bclass);
 	}
 
 	if ($pile){
