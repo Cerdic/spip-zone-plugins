@@ -239,7 +239,7 @@ class ConvertisseurImporter extends Command {
 						}
 						
 						if($up)
-							$progress->setMessage(" Rubrique $hierarchie => $id_rubrique (" . $hierarchie_rub[0]["id_secteur"] ." > " . $hierarchie_rub[0]["id_parent"] .") ", 'inforub');
+							$progress->setMessage(" Rubrique $hierarchie => (" . $hierarchie_rub[0]["id_secteur"] ." > " . $hierarchie_rub[0]["id_parent"] ." > ) $id_rubrique ", 'inforub');
 						
 						$progress->setMessage("", 'docs');
 						$progress->setMessage("", 'mot');
@@ -435,9 +435,19 @@ class ConvertisseurImporter extends Command {
 							if(preg_match(_RACCOURCI_LIEN, $texte) and $conserver_id_article == "")
 								passthru("echo '$id_article	$id_source' >> liens_a_corriger.txt");
 							
+							$progress->setMessage("ajout de l'art $id_article", 'article');
+							
+							// on réindexe immédiatement avec avec le plugin indexer (Sphinx) le cas échéant.
+							$progress->setMessage("", 'index');
+							include_spip("indexer_pipelines");
+							if (function_exists("indexer_redindex_objet")) {
+								indexer_redindex_objet('article', $id_article, false);
+								$progress->setMessage(" + indexation de $id_article", 'index');
+							}
+							
 							// Si tout s'est bien passé, on avance la barre
 							$progress->setMessage($f, 'filename');
-							$progress->setFormat("<fg=white;bg=blue>%message%</>\n" . "<fg=white;bg=red>%inforub% %auteur% %mot%</>\n" . '%current%/%max% [%bar%] %percent:3s%% %elapsed:6s%/%estimated:-6s% %memory:6s%' . "\n  %filename%\n%docs%\n\n");
+							$progress->setFormat("<fg=white;bg=blue>%message% %article% %index%</>\n" . "<fg=white;bg=red>%inforub% %auteur% %mot%</>\n" . '%current%/%max% [%bar%] %percent:3s%% %elapsed:6s%/%estimated:-6s% %memory:6s%' . "\n  %filename%\n%docs%\n\n");
 							$progress->advance();
 							
 						}else{
