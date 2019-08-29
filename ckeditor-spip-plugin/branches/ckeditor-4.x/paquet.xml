@@ -8,7 +8,7 @@
 	documentation="https://contrib.spip.net/CKeditor-3-0"
 	schema="1.0.1"
 >
-	<nom>ckeditor-spip3-plugin</nom>
+	<nom>CKEditor 4</nom>
 
 	<auteur mail="fredlefred@gmail.com">Fr&#233;d&#233;ric Bonnaud</auteur>
 	<auteur mail="superyms@gmail.com">Mehdi Cherifi (Superyms)</auteur>
