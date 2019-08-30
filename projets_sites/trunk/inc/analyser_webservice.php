@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  * @param string $url
  *          URL du webservice
  *
- * @return array $valeurs
+ * @return array|bool $valeurs
  */
 function inc_analyser_webservice_dist($url, $login = '', $password = '') {
 	include_spip('iterateur/data');

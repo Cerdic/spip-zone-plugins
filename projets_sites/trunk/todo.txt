@@ -1,5 +1,1 @@
 - Ajouter un import "massif" par fichier csv
-
-Interaction avec le plugin info_spip (fichier xml -> ?page=info_spip&cle=xxxxxxxxx) :
-- Sur la page de site (dans le privé), avoir un bouton pour un diagnostic "iso" avec le site en ligne
-- Ajouter un cron pour mise à jour des infos

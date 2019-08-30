@@ -1,7 +1,7 @@
 <paquet
 	prefix="projets_sites"
 	categorie="divers"
-	version="1.9.0"
+	version="1.10.0"
 	etat="stable"
 	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/projets_sites-64.png"
