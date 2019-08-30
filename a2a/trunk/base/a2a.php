@@ -21,7 +21,7 @@ function a2a_declarer_tables_auxiliaires($tables_auxiliaires){
 		"rang" => "bigint(21) NOT NULL DEFAULT '0'",
 		"type_liaison" => "varchar(25) DEFAULT ''",
 	);
-	
+
 	$spip_articles_lies_key = array(
 		"PRIMARY KEY" => "id_article, id_article_lie, type_liaison"
 	);
@@ -30,14 +30,14 @@ function a2a_declarer_tables_auxiliaires($tables_auxiliaires){
 		"id_article" => "id_article",
 		"id_article_lie" => "id_article_lie"
 	);
-	
+
 	$tables_auxiliaires['spip_articles_lies'] =
 		array(
 			'field' => &$spip_articles_lies,
 			'key' => &$spip_articles_lies_key,
 			'join' => &$spip_articles_lies_join
 		);
-		
+
 	return $tables_auxiliaires;
 }
 
