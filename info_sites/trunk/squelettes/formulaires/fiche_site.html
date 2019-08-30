@@ -40,7 +40,7 @@
 						</li>
 
 						<li class="editer editer_projet_parent">
-							<label for="choix_projet_parent"><:projet:label_id_projet_parent:></label>
+							<label for="choix_projet_parent"><:projet:champ_id_projet_parent_label:></label>
 							<input list="projets_parent" type="text" id="choix_projet_parent" name="projet_parent" value="[(#ENV{projet_parent})]" />
 							<B_projets_parent>
 							<datalist id="projets_parent">
@@ -67,7 +67,7 @@
 
 					[(#SAISIE{input, webservice,
 						label=<:projets_site:webservice_label:>,
-						explication=<:projets_site:webservice_explication:>})]
+						explication=<:projets_site:champ_webservice_explication::>})]
 
 					</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 				</fieldset>

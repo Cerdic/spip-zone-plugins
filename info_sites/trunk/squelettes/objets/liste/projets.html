@@ -14,11 +14,11 @@
 			[<caption id="liste_objets_projets[_(#REM|uniqid)]" class="legend"><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{projet:info_1_projet,projet:info_nb_projets}})</strong></caption>]
 			<thead>
 			<tr class='first_row'>
-				<th class='nom' scope='col'>[(#TRI{nom,<:projet:label_nom:>,ajax})]</th>
-				<th class='statut' scope='col'>[(#TRI{statut,<:projet:label_statut:>,ajax})]</th>
+				<th class='nom' scope='col'>[(#TRI{nom,<:projet:champ_nom_label:>,ajax})]</th>
+				<th class='statut' scope='col'>[(#TRI{statut,<:projet:champ_statut_label:>,ajax})]</th>
 				[(#ENV{id_auteur}|oui)<th class="roles_auteur"><:roles:roles_titre:></th>]
-				<th class='url_site' scope='col'>[(#TRI{url_site,<:projet:label_url_site:>,ajax})]</th>
-				<th class='date' scope='col'>[(#TRI{date_debut,<:projet:label_date_debut:>,ajax})]</th>
+				<th class='url_site' scope='col'>[(#TRI{url_site,<:projet:champ_url_site_label:>,ajax})]</th>
+				<th class='date' scope='col'>[(#TRI{date_debut,<:projet:champ_date_debut_label:>,ajax})]</th>
 			</tr>
 			</thead>
 			<tbody>

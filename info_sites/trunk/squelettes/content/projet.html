@@ -9,12 +9,12 @@
 
 <div id="wysiwyg">
 	<div class="champ contenu_statut[ (#STATUT*|strlen|?{'',vide})]">
-		<div class="label visible"><:projet:label_statut:>&nbsp;: </div>
+		<div class="label visible"><:projet:champ_statut_label:>&nbsp;: </div>
 		<div dir='#LANG_DIR' class='span statut'>[(#CHEMIN{prive/themes/spip/images/[(#VAL{projet}|objet_info{statut_images}|table_valeur{#STATUT**})]}|balise_img{[(#VAL{'projet:texte_statut_'}|concat{#STATUT**}|_T)]}) ][(#VAL{'projet:texte_statut_'}|concat{#STATUT**}|_T)]</div>
 	</div>
 
 	[<div class="champ contenu_date_publication[ (#DATE_PUBLICATION*|strlen|?{'',vide})]">
-		<div class="label visible"><:projet:label_date_publication:>&nbsp;: </div>
+		<div class="label visible"><:projet:champ_date_publication_label:>&nbsp;: </div>
 		<div dir='#LANG_DIR' class='span #EDIT{date_publication} date_publication'>(#DATE_PUBLICATION|affdate)</div>
 	</div>]
 

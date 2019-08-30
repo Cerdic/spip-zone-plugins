@@ -2,7 +2,7 @@
 	<table class="spip liste table table-striped table-bordered" id="projets_dashboard_projets_sites">
 		<thead>
 			<tr class="first_row">
-				<th class="nom" scope="col"><:projet:label_nom:></th>
+				<th class="nom" scope="col"><:projet:champ_nom_label:></th>
 				<th class="organisations" scope="col"><:contacts:organisations:></th>
 				<BOUCLE_types_sites_header (DATA) {source table, #VAL{'objet'}|sp_lister_type_sites} {!par cle}>
 				<th class="type_site [(#CLE)]" scope="col">[(#VALEUR)]</th>
@@ -11,7 +11,7 @@
 		</thead>
 		<tfoot>
 			<tr class="first_row">
-				<th class="nom" scope="col"><:projet:label_nom:></th>
+				<th class="nom" scope="col"><:projet:champ_nom_label:></th>
 				<th class="organisations" scope="col"><:contacts:organisations:></th>
 				<BOUCLE_types_sites_footer (DATA) {source table, #VAL{'objet'}|sp_lister_type_sites} {!par cle}>
 				<th class="type_site [(#CLE)]" scope="col">[(#VALEUR)]</th>
