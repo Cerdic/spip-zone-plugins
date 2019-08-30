@@ -1,7 +1,7 @@
-[(#REM) 
+[(#REM)
 
   ### /!\ boucle POUR (spip Bonux) ###
-	
+
   Parametres :
   - ** data : tableau de donnees
                liste simple : cle=>valeur
@@ -12,7 +12,7 @@
   - defaut : valeur par defaut si pas présente dans l'environnement
   - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
   - disable_choix : liste de valeurs à désactiver, séparées par des virgules
-	
+
   Exemples d'appels
   pour une liste simple :
 	[(#SAISIE{selection,produits,
@@ -30,7 +30,7 @@
 				cle2,valeur2},
 			cle2,#ARRAY{
 				cle1,valeur1,
-				cle2,valeur2}}})] 
+				cle2,valeur2}}})]
 ]
 
 [(#REM) data peut être une chaine qu'on sait décomposer ]
@@ -43,6 +43,7 @@
 [(#ENV{disable_choix}|strlen|oui) #SET{disabled, #ENV{disable_choix}|explode{','}}]
 
 <select [(#HTML5|oui)[(#ENV{obligatoire}|et{#ENV{obligatoire}|!={non}}|oui) required="required"]] name="#ENV{nom}" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ size="(#ENV{size})"][ (#ENV*{attributs})]>
+
 [(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
 <BOUCLE_selection(POUR){tableau #GET{data}}>
 	<B_cond>
