@@ -56,32 +56,13 @@ function action_a2a_lier_article_dist($id_article_cible, $id_article_source, $ty
 			'type_liaison' => $type_liaison,
 		));
 	}
-	if(
-		($type == 'both') && !sql_countsel('spip_articles_lies', array(
-			'id_article=' . sql_quote($id_article_cible),
-			'id_article_lie=' . sql_quote($id_article_source)))
-			or
-			(($type == 'both') and !((lire_config('a2a/types_differents')
-			and
-			sql_countsel('spip_articles_lies', array(
-				'id_article=' . sql_quote($id_article_cible),
-				'id_article_lie=' . sql_quote($id_article_source),'type_liaison='.sql_quote($type_liaison))))
-			))
-	){
-		//on recupere le rang le plus haut pour definir celui de l'article a lier
-		$rang = sql_getfetsel('MAX(rang)', 'spip_articles_lies', 'id_article='. sql_quote($id_article_cible));
-
-		//on ajoute le lien vers l'article
-		sql_insertq('spip_articles_lies', array(
-			'id_article' => $id_article_cible,
-			'id_article_lie' => $id_article_source,
-			'rang' => ++$rang,
-			'type_liaison' => $type_liaison,
-		));
+	if ($type == 'both') {//Lier dans l'autre sens, si demandé
+		action_a2a_lier_article_dist($id_article_source, $id_article_cible, $type_liaison);
+	} else {
+		//invalider les caches
+		include_spip('inc/invalideur');
+		suivre_invalideur("id='id_article/$id_article_source'");
 	}
-	// invalider les caches
-	include_spip('inc/invalideur');
-	suivre_invalideur("id='id_article/$id_article_source'");
 	return true;
 }
 
