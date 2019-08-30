@@ -27,7 +27,7 @@ function action_a2a_lier_article_dist($id_article_cible, $id_article_source, $ty
 	include_spip('inc/config');
 	//on verifie que cet article n'est pas deja lie
 	if (
-
+		// Si on autorise pas les type différents, vérifier qu'il n'y pas deja de liaisons, quelque soit le type
 		!((!lire_config('a2a/types_differents')
 		and
 		sql_countsel('spip_articles_lies', array(
@@ -35,14 +35,12 @@ function action_a2a_lier_article_dist($id_article_cible, $id_article_source, $ty
 			'id_article_lie=' . sql_quote($id_article_cible)))
 		))
 
-		or
-
-		!((lire_config('a2a/types_differents')
 		and
-		sql_countsel('spip_articles_lies', array(
+		// Dans tous les cas, vérifier qu'il n'y a pas une liaison de ce type, pour ne pas avoir d'entrée dupliquée (notamment sqlite, qui les gère pas automatiquement ce genre de contrainte)
+		(!sql_countsel('spip_articles_lies', array(
 			'id_article=' . sql_quote($id_article_source),
 			'id_article_lie=' . sql_quote($id_article_cible),'type_liaison='.sql_quote($type_liaison)))
-		))
+		)
 	){
 
 		//on recupere le rang le plus haut pour definir celui de l'article a lier
