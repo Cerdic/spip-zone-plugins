@@ -37,6 +37,18 @@ options:
           nom: 'defaut'
           label: '<:saisies:option_defaut_label:>'
           size: 50
+      -
+        saisie: 'input'
+        options:
+          nom: 'option_intro'
+          label: '<:saisies:option_option_intro_label:>'
+          size: 50
+      -
+        saisie: 'case'
+        options:
+          nom: 'cacher_option_intro'
+          label_case: '<:saisies:option_cacher_option_intro_label:>'
+          li_class: 'pleine_largeur'
   -
     saisie: 'fieldset'
     options:
@@ -80,17 +92,6 @@ options:
           nom: 'afficher_si_remplissage_uniquement'
           label: '<:saisies:option_afficher_si_remplissage_uniquement_label:>'
           explication: '<:saisies:option_afficher_si_remplissage_uniquement_explication:>'
-      -
-        saisie: 'input'
-        options:
-          nom: 'option_intro'
-          label: '<:saisies:option_option_intro_label:>'
-          size: 50
-      -
-        saisie: 'case'
-        options:
-          nom: 'cacher_option_intro'
-          label_case: '<:saisies:option_cacher_option_intro_label:>'
       -
         saisie: 'input'
         options:
