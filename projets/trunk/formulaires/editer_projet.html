@@ -9,66 +9,66 @@
 		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 
 			[(#SAISIE{projets, id_projet_parent,
-				label=<:projet:label_id_projet_parent:>,
-				explication=<:projet:explication_id_projet_parent:>,
+				label=<:projet:champ_id_projet_parent_label:>,
+				explication=<:projet:champ_id_projet_parent_explication:>,
 				recursif=oui,id_projet=#ID_PROJET,exclu=#ID_PROJET})]
 
 			[(#SAISIE{input, nom, obligatoire=oui,
-				label=<:projet:label_nom:>})]
+				label=<:projet:champ_nom_label:>})]
 
 			[(#SAISIE{input, url_site,
-				label=<:projet:label_url_site:>,
-				explication=<:projet:explication_url_site:> })]
+				label=<:projet:champ_url_site_label:>,
+				explication=<:projet:champ_url_site_explication:> })]
 
 			[(#SAISIE{projets_cadres, id_projets_cadre,
-				label=<:projet:label_id_projets_cadre:>,
-				explication=<:projet:explication_id_projets_cadre:> })]
+				label=<:projet:champ_id_projets_cadre_label:>,
+				explication=<:projet:champ_id_projets_cadre_explication:> })]
 
 			[(#SAISIE{date, date_debut,
-				label=<:projet:label_date_debut:>,
-				explication=<:projet:explication_date_debut:> })]
+				label=<:projet:champ_date_debut_label:>,
+				explication=<:projet:champ_date_debut_explication:> })]
 
 			[(#SAISIE{date, date_livraison_prevue,
-				label=<:projet:label_date_livraison_prevue:>,
-				explication=<:projet:explication_date_livraison_prevue:> })]
+				label=<:projet:champ_date_livraison_prevue_label:>,
+				explication=<:projet:champ_date_livraison_prevue_explication:> })]
 
 			[(#SAISIE{date, date_livraison,
-				label=<:projet:label_date_livraison:>,
-				explication=<:projet:explication_date_livraison:> })]
+				label=<:projet:champ_date_livraison_label:>,
+				explication=<:projet:champ_date_livraison_explication:> })]
 
 			[(#SAISIE{input, nb_heures_estimees,
-				label=<:projet:label_nb_heures_estimees:>,
-				explication=<:projet:explication_nb_heures_estimees:> })]
+				label=<:projet:champ_nb_heures_estimees_label:>,
+				explication=<:projet:champ_nb_heures_estimees_explication:> })]
 
 			[(#SAISIE{input, nb_heures_reel,
-				label=<:projet:label_nb_heures_reelles:>,
-				explication=<:projet:explication_nb_heures_reelles:> })]
+				label=<:projet:champ_nb_heures_reelles_label:>,
+				explication=<:projet:champ_nb_heures_reelles_explication:> })]
 
 			[(#SAISIE{oui_non, actif,
 				defaut=oui,
 				valeur_oui=oui,
 				valeur_non=non,
-				label=<:projet:label_actif:>,
-				explication=<:projet:explication_actif:> })]
+				label=<:projet:champ_actif_label:>,
+				explication=<:projet:champ_actif_explication:> })]
 
 			[(#SAISIE{textarea, objectif,
-				label=<:projet:label_objectif:> <em class="aide">[(#AIDER{raccourcis})]</em>,
-				explication=<:projet:explication_objectif:> ,
+				label=<:projet:champ_objectif_label:> <em class="aide">[(#AIDER{raccourcis})]</em>,
+				explication=<:projet:champ_objectif_explication:> ,
 				li_class=haut, class=inserer_barre_edition, rows=4})]
 
 			[(#SAISIE{textarea, enjeux,
-				label=<:projet:label_enjeux:> <em class="aide">[(#AIDER{raccourcis})]</em>,
-				explication=<:projet:explication_enjeux:> ,
+				label=<:projet:champ_enjeux_label:> <em class="aide">[(#AIDER{raccourcis})]</em>,
+				explication=<:projet:champ_enjeux_explication:> ,
 				li_class=haut, class=inserer_barre_edition, rows=4})]
 
 			[(#SAISIE{textarea, methode,
-				label=<:projet:label_methode:> <em class="aide">[(#AIDER{raccourcis})]</em>,
-				explication=<:projet:explication_methode:> ,
+				label=<:projet:champ_methode_label:> <em class="aide">[(#AIDER{raccourcis})]</em>,
+				explication=<:projet:champ_methode_explication:> ,
 				li_class=haut, class=inserer_barre_edition, rows=4})]
 
 			[(#SAISIE{textarea, descriptif,
-				label=<:projet:label_descriptif:> <em class="aide">[(#AIDER{raccourcis})]</em>,
-				explication=<:projet:explication_descriptif:> ,
+				label=<:projet:champ_descriptif_label:> <em class="aide">[(#AIDER{raccourcis})]</em>,
+				explication=<:projet:champ_descriptif_explication:> ,
 				li_class=haut, class=inserer_barre_edition, rows=4})]
 
 		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>

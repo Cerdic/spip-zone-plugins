@@ -7,13 +7,13 @@
 [(#LOGO_PROJET||image_reduire{200,200})]
 <h1 class="h1 #EDIT{nom}">#NOM [ &ndash; &#91;(#ID_PROJET)&#93;]</h1>
     <p class="info-publi">
-        [<strong><:projet:label_date_debut:> : </strong><br/>
+        [<strong><:projet:champ_date_debut_label:> : </strong><br/>
         <abbr class="published" title="[(#DATE_DEBUT|date_iso)]">(#DATE_DEBUT|nom_jour|ucfirst) [(#DATE_DEBUT|affdate)]</abbr> ][<br />
-        <strong><:projet:label_date_livraison_prevue:> : </strong><br/>
+        <strong><:projet:champ_date_livraison_prevue_label:> : </strong><br/>
         <abbr class="published" title="[(#DATE_LIVRAISON_PREVUE|date_iso)]">(#DATE_LIVRAISON_PREVUE|nom_jour|ucfirst) [(#DATE_LIVRAISON_PREVUE|affdate)]</abbr> ][<br/>
-        <strong><:projet:label_date_livraison:> : </strong><br/>
+        <strong><:projet:champ_date_livraison_label:> : </strong><br/>
         <abbr class="published" title="[(#DATE_LIVRAISON|date_iso)]">(#DATE_LIVRAISON|nom_jour|ucfirst) [(#DATE_LIVRAISON|affdate)]</abbr> ][<br/>
-        <strong><:projet:label_nb_heures_estimees:> : </strong><br/>
+        <strong><:projet:champ_nb_heures_estimees_label:> : </strong><br/>
         <span class="published">(#NB_HEURES_ESTIMEES)&nbsp;</span> ]
 
     </p>
@@ -23,17 +23,17 @@
 </div>
 
 <div class="surlignable">
-    [<h4 class="invisible hide"><:projet:label_objectif:></h4>
+    [<h4 class="invisible hide"><:projet:champ_objectif_label:></h4>
     <div class="#EDIT{objectif} objectif">(#OBJECTIF|image_reduire{500,0})</div>]
-    [<h4 class="invisible hide"><:projet:label_enjeux:></h4>
+    [<h4 class="invisible hide"><:projet:champ_enjeux_label:></h4>
     <div class="#EDIT{enjeux} enjeux">(#ENJEUX|image_reduire{500,0})</div>]
-    [<h4 class="invisible hide"><:projet:label_methode:></h4>
+    [<h4 class="invisible hide"><:projet:champ_methode_label:></h4>
     <div class="#EDIT{methode} methode">(#METHODE|image_reduire{500,0})</div>]
-    [<h4 class="invisible hide"><:projet:label_descriptif:></h4>
+    [<h4 class="invisible hide"><:projet:champ_descriptif_label:></h4>
     <div class="#EDIT{descriptif} descriptif">(#DESCRIPTIF|image_reduire{500,0})</div>]
 </div>
 
-[<p class="#EDIT{hyperlien} hyperlien"><:projet:label_url_site:> : <a href="(#URL_SITE)" class="spip_out">[(#URL_SITE|couper{80})]</a></p>]
+[<p class="#EDIT{hyperlien} hyperlien"><:projet:champ_url_site_label:> : <a href="(#URL_SITE)" class="spip_out">[(#URL_SITE|couper{80})]</a></p>]
 
 
 [(#REM) Gestion du portfolio et des documents ]
