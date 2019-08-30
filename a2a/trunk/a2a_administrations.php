@@ -24,6 +24,11 @@ function a2a_upgrade($nom_meta_base_version,$version_cible){
 	);
 
 	$maj['0.12.0'] = array(array('a2a_maj_0120'));
+
+	$maj['0.13.0'] = array(
+		array('sql_updateq',"spip_articles_lies",array('type_liaison'=>''),"type_liaison is null"),
+		array('sql_alter','TABLE spip_articles_lies CHANGE type_liaison type_liaison varchar(255) not null default "" ')
+	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
