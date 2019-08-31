@@ -18,9 +18,12 @@
 		#SET{enfants,#GET{enfants}|array_merge{#GET{enfant}}}
 		<BOUCLE_petits_enfants(BOUCLE_enfants) />
 	</BOUCLE_enfants>
-	#SET{saisie,#ARRAY{#GET{nom},#GET{enfants}}}
+	[(#GET{label}|=={#GET{nom}}|non)
+	#SET{label,#GET{label}#VAL{' '}\(#GET{nom}\)}
+	]
+	#SET{saisie,#ARRAY{#GET{label},#GET{enfants}}}
 	</B_enfants>
-	#SET{saisie,#ARRAY{#GET{nom},#GET{label}}}
+	#SET{saisie,#ARRAY{#GET{label},#GET{label}}}
 	<//B_enfants>
 	#SET{data,#GET{data}|array_merge{#GET{saisie}}}
 	</BOUCLE_parcours>
