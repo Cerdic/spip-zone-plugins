@@ -26,7 +26,7 @@
 	<!-- <pipeline nom="post_edition" inclure="dictionnaires_pipelines.php" /> -->
 	<pipeline nom="post_propre" inclure="dictionnaires_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[1.42.11;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 
 	<utilise nom="inserer_modeles" compatibilite="[1.2.11;[" />
 

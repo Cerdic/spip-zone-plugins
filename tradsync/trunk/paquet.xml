@@ -16,7 +16,7 @@
 
 	<pipeline nom="autoriser" inclure="tradsync_autorisations.php" />
 
-	<necessite nom="saisies" compatibilite="[1.42.11;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 	<necessite nom="tradrub" compatibilite="[2.0.0;[" />
 
 	<!-- pour #SET_PUSH , {compteur} et #COMPTEUR -->

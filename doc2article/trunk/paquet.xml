@@ -21,7 +21,7 @@
 	<pipeline nom="doc2article_preparer_article" />
 
 	<necessite nom="crud" compatibilite="[0.4.0;[" />
-	<necessite nom="saisies" compatibilite="[1.42.11;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 
 	<menu nom="doc2article" titre="doc2article:icone_doc2article" parent="bando_publication" icone="images/doc2article-16.png" />
 </paquet>

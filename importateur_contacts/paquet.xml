@@ -18,5 +18,5 @@
 
 	<pipeline nom="importateur_contacts_moteurs" inclure="importateur_contacts_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[1.42.11;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 </paquet>

@@ -14,7 +14,7 @@
 	<auteur>cy_altern</auteur>
 
 	<licence>GNU/GPL</licence>
-	<necessite nom="saisies" compatibilite="[1.42.11;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="timepicker" compatibilite="[1.4.3;]" />
 	<!--<necessite nom="palette" compatibilite="[3.0.0;]" />-->
 

@@ -27,7 +27,7 @@
 
 	<lib nom="jquery.table-filter-master" lien="https://github.com/hail2u/jquery.table-filter/archive/master.zip" />
 
-	<necessite nom="saisies" compatibilite="[1.42.11;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 	<necessite nom="cextras" compatibilite="[2.0.0;[" />
 	<necessite nom="crayons" compatibilite="[1.0.0;[" />
 	<necessite nom="metas" compatibilite="[1.4.0;[" />

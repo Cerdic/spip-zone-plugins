@@ -17,8 +17,8 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies"  compatibilite="[1.42.11;[" />
-	<necessite nom="medias"  compatibilite="[2.20.15;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
+	<necessite nom="medias" compatibilite="[2.20.15;[" />
 	<necessite nom="php" compatibilite="[5.5.0;[" />
 
 	<!-- Donner aux plugins la possibilité de gérer quels objets peuvent rentrer dans la gestion des contenus par rubrique -->

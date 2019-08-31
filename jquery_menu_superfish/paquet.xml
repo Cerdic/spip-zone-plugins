@@ -21,7 +21,7 @@
 	<pipeline nom="autoriser" inclure="inc/jquerysuperfish_autoriser.php" />
 	<pipeline nom="ieconfig_metas" inclure="jquerysuperfish_ieconfig_metas.php" />
 
-	<necessite nom="saisies" compatibilite="[1.42.11;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 	<necessite nom="YAML" compatibilite="[1.5.2;[" />
 
 	<menu nom="jquerysuperfish" titre="jquerysuperfish:titre_menu" parent="bando_squelette" icone="images/jquerysuperfish-16.png" action="configurer_jquerysuperfish" />

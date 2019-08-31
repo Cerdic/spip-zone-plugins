@@ -17,6 +17,6 @@
 
 	<necessite nom="pages" compatibilite="[1.0.0;1.*.*]" />
 	<necessite nom="polyhier" compatibilite="[2.0.1;3.*.*]" />
-	<necessite nom="saisies" compatibilite="[1.42.11;]" />
+	<necessite nom="saisies" compatibilite="[3.42.11;]" />
 
 </paquet>

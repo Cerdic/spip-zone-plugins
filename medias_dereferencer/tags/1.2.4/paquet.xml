@@ -14,7 +14,7 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="saisies" compatibilite="[2.28.0;]" />
 
 	<pipeline nom="autoriser" inclure="medias_dereferencer_autorisations.php" />
 	<pipeline nom="taches_generales_cron" inclure="medias_dereferencer_pipelines.php" />

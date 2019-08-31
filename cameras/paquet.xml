@@ -42,7 +42,7 @@
 	<pipeline nom="insert_head" inclure="cameras_pipelines.php" />
 
 	<!-- facilitons les champs de formulaires -->
-	<necessite nom="saisies" compatibilite="[1.42.11;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 
 	<menu nom="cameras" titre="camera:titre_cameras" parent="menu_edition" icone="images/camera-16.png" />
 	<menu nom="configurer_cameras" titre="camera:cfg_titre_menu_camera" parent="menu_configuration" icone="images/camera-16.png" />

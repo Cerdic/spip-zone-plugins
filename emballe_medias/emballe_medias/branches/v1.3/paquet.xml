@@ -36,7 +36,7 @@
 	<pipeline nom="post_edition" inclure="emballe_medias_pipelines.php" />
 	<pipeline nom="autoriser" inclure="emballe_medias_autoriser.php" />
 
-	<necessite nom="saisies" compatibilite="[3.23.2;[" />
+	<necessite nom="saisies" compatibilite="[2.28.0;[" />
 	<necessite nom="medias" compatibilite="[2.7.30;[" />
 	<necessite nom="diogene" compatibilite="[1.9.3;[" />
 	<necessite nom="swfupload" compatibilite="[1.1.2;[" />

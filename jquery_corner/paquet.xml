@@ -20,7 +20,7 @@
 	<pipeline nom="autoriser" inclure="inc/jquerycorner_autoriser.php" />
 	<pipeline nom="ieconfig_metas" inclure="jquerycorner_ieconfig_metas.php" />
 
-	<necessite nom="saisies" compatibilite="[1.42.11;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 
 	<menu nom="jquerycorner" titre="jquerycorner:titre_menu" parent="bando_squelette" icone="images/jquerycorner-16.png" action="configurer_jquerycorner" />
 </paquet>

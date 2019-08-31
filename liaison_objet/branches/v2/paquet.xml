@@ -12,7 +12,7 @@
 	<nom>Liaison d'objets</nom>
 	<auteur lien='https://websimple.be'>Rainer Müller</auteur>
 	<licence>GNU/GPL</licence>
-	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="saisies" compatibilite="[2.28.0;]" />
 
 	<pipeline nom="autoriser" inclure="liaison_objet_autorisations.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/liaison_objet.php" />

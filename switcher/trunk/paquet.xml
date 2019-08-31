@@ -18,7 +18,7 @@
 	<pipeline nom="affichage_final" inclure="switcher_fonctions.php" />
 	<pipeline nom="insert_head_css" inclure="head.php" />
 
-	<necessite nom="saisies" compatibilite="[1.42.11;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 
 	<menu nom="configurer_switcher" titre="switcher:menu" parent="menu_squelette" icone="" />
 </paquet>

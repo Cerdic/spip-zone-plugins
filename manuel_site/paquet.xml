@@ -24,7 +24,7 @@
 	<pipeline nom="autoriser" inclure="inc/manuelsite_autoriser.php" />
 	<pipeline nom="ieconfig_metas" inclure="manuelsite_ieconfig_metas.php" />
 
-	<necessite nom="saisies" compatibilite="[1.42.11;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 	<necessite nom="yaml" compatibilite="[1.5.3;[" />
 
 	<utilise nom="palette" compatibilite="[1.2.2;[" />

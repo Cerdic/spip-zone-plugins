@@ -30,7 +30,7 @@
 	<necessite nom="projets_sites" compatibilite="[1.7.8;]"/>
 	<necessite nom="roles_auteurs" compatibilite="[1.0.0;]"/>
 	<necessite nom="rss_commits" compatibilite="[0.6.8;]"/>
-	<necessite nom="saisies" compatibilite="[3.23.2;]"/>
+	<necessite nom="saisies" compatibilite="[2.28.0;]"/>
 	<necessite nom="selecteurgenerique" compatibilite="[1.1.7;]"/>
 	<necessite nom="Zcore" compatibilite="[2.4.3;]"/>
 

@@ -17,7 +17,7 @@
 	<auteur lien='www.maieul.net'>Maïeul Rouquette d&#039;après Artego</auteur>
 
 	<licence>GNU/GPL</licence>
-	<necessite nom="saisies" compatibilite="[1.42.11;]" /> 
+	<necessite nom="saisies" compatibilite="[3.23.2;]" /> 
 
 	<pipeline nom="autoriser" inclure="sondages_autorisations.php" /> 
 
