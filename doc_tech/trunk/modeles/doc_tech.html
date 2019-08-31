@@ -4,7 +4,7 @@
 	<B_info_table>
 	<table>
 		<BOUCLE_info_table (DATA) {source table, #GET{tables_infos}} {cle='field'}>
-			<caption id="[(#_tables:GET{spip_table}|attribut_html)]">#_tables:GET{spip_table}</caption>
+			<caption id="[(#_tables:GET{spip_table}|attribut_html)]">[(#_tables:GET{spip_table}|objet_type|objet_info{texte_objets}|_T)] [((#_tables:GET{spip_table}))]</caption>
 		<thead>
 			<th><:doc_tech:nom_du_champ:></th>
 			<th><:doc_tech:definition_mysql:></th>
@@ -17,11 +17,11 @@
 				<tr id="[(#_tables:GET{spip_table}|attribut_html)_][(#CLE|attribut_html)]">
 					<td><strong>#CLE</strong></td>
 					<td><em>#VALEUR</em></td>
-					<td>[(#VAL{#_tables:VALEUR}|concat{':champ_',#CLE,'_label'}|_T)]</td>
+					<td>[(#_tables:VALEUR|doc_tech_chaine_langue{#CLE,label}|sinon{-})]</td>
 					<td>[<strong><:doc_tech:aide_a_la_saisie:></strong><br/>
-(#VAL{#_tables:VALEUR}|concat{':champ_',#CLE,'_explication'}|_T)<br/>]
+(#_tables:VALEUR|doc_tech_chaine_langue{#CLE,explication}|sinon{-})<br/>]
 [<strong><:doc_tech:documentation:></strong><br/>
-(#VAL{#_tables:VALEUR}|concat{':champ_',#CLE,'_documentation'}|_T)]</td>
+(#_tables:VALEUR|doc_tech_chaine_langue{#CLE,documentation}|sinon{-})]</td>
 				</tr>
 				</BOUCLE_label>
 			</tbody>

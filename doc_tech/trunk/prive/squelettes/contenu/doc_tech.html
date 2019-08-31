@@ -16,7 +16,7 @@
 			<label for="champ_objets"><:doc_tech:label_vos_objets:></label>
 			<select name="objets" id="champ_objets">
 				<BOUCLE_objets (DATA) {source table, #REM|doc_tech_lister_objet}>
-					<option value="#VALEUR"[(#ENV{objets}|=={#VALEUR}|oui) selected="selected"]>#VALEUR</option>
+					<option value="#VALEUR"[(#ENV{objets}|=={#VALEUR}|oui) selected="selected"]>[(#VALEUR|objet_info{texte_objets}|_T)]</option>
 				</BOUCLE_objets>
 			</select>
 		</li>
