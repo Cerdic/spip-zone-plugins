@@ -51,7 +51,6 @@ function saisies_lister_par_identifiant($contenu, $avec_conteneur = true) {
  */
 function saisies_lister_par_nom($contenu, $avec_conteneur = true) {
 	$saisies = array();
-
 	if (is_array($contenu)) {
 		foreach ($contenu as $ligne) {
 			if (is_array($ligne)) {
@@ -122,10 +121,11 @@ function saisies_lister_avec_sql($saisies, $tri = 'nom') {
  * @param array  $saisies liste de saisies
  * @param string|array $type    Type de la saisie, ou tableau de types
  * @param string $tri     tri par défaut des résultats (s'ils ne sont pas deja triés) ('nom')
+ * @param bool avec_conteneur faut-il conserver l'arbo?
  *
  * @return liste de ces saisies triees par nom
  */
-function saisies_lister_avec_type($saisies, $type, $tri = 'nom') {
+function saisies_lister_avec_type($saisies, $type, $tri = 'nom', $avec_conteneur = false) {
 	if (!is_array($type)) {
 		$type = array($type);
 	}
@@ -133,13 +133,16 @@ function saisies_lister_avec_type($saisies, $type, $tri = 'nom') {
 
 	// tri par nom si ce n'est pas le cas
 	$s = array_keys($saisies);
-	if (is_int(array_shift($s))) {
+	if (is_int(array_shift($s)) and $tri and !$avec_conteneur) {
 		$trier = 'saisies_lister_par_'.$tri;
 		$saisies = $trier($saisies);
 	}
 
 	foreach ($saisies as $nom_ou_id => $saisie) {
 		if (in_array($saisie['saisie'], $type)) {
+			if ($avec_conteneur and isset($saisie['saisies'])) {
+				$saisie['saisies'] = saisies_lister_avec_type($saisie['saisies'], $type, $tri, $avec_conteneur);
+			}
 			$saisies_type[$nom_ou_id] = $saisie;
 		}
 	}
