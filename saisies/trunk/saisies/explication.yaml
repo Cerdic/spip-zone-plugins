@@ -13,11 +13,21 @@ options:
         saisie: 'textarea'
         options:
           nom: 'texte'
-          label: '<:saisies:saisie_explication_titre:>'
+          label: '<:saisies:saisie_explication_texte_label:>'
           explication: '<:saisies:saisie_explication_explication:>'
           class: 'inserer_barre_edition'
           cols: 40
           rows: 5
+      -
+        saisie: 'input'
+        options:
+          nom: 'titre'
+          label: '<:saisies:saisie_explication_titre_label:>'
+      -
+        saisie: 'case'
+        options:
+          nom: 'masquer'
+          label: '<:saisies:saisie_explication_masquer_label:>'
   -
     saisie: 'fieldset'
     options:
