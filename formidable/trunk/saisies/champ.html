@@ -7,7 +7,7 @@
 		#SET{tab,#ENV{formulaire}}
 	]
 	[(#ENV{forcer_type}|oui)
-		[(#SET{tab,[(#ENV{formulaire}|saisies_lister_avec_type{#ENV{forcer_type}})]})]
+	[(#SET{tab,[(#ENV{formulaire}|saisies_lister_avec_type{#ENV{forcer_type}|array_merge{#LISTE{fieldset}},'',true})]})]
 	]
 	<BOUCLE_parcours(POUR){tableau #GET{tab}}>
 	#SET{nom,#VALEUR|table_valeur{options}|table_valeur{nom}}
@@ -23,7 +23,10 @@
 	]
 	#SET{saisie,#ARRAY{#GET{label},#GET{enfants}}}
 	</B_enfants>
-	#SET{saisie,#ARRAY{#GET{label},#GET{label}}}
+	#SET{saisie,#ARRAY}
+	[(#VALEUR{saisie}|!={fieldset}|ou{#ENV{forcer_type}|non}|oui)
+		#SET{saisie,#ARRAY{#GET{label},#GET{label}}}
+	]
 	<//B_enfants>
 	#SET{data,#GET{data}|array_merge{#GET{saisie}}}
 	</BOUCLE_parcours>
