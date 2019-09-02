@@ -198,7 +198,7 @@ Vous trouverez la <a href="https://contrib.spip.net/5080" target="_blank">docume
 	'saisie_email_explication' => 'Permet d’avoir un champ de type email en HTML5.',
 	'saisie_email_titre' => 'Adresse email',
 	'saisie_explication_explication' => 'Un texte explicatif général.',
-	'saisie_explication_masquer_label' => 'Ajouter un bouton afficher/masque l’explication',
+	'saisie_explication_masquer_label' => 'Ajouter un bouton afficher/masquer l’explication',
 	'saisie_explication_texte_label' => 'Texte de l’explication',
 	'saisie_explication_titre' => 'Explication',
 	'saisie_explication_titre_label' => 'Titre de l’explication',
