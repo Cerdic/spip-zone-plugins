@@ -7,6 +7,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// A
+	'afficher' => 'Afficher',
+
 	// B
 	'bouton_parcourir_docs_article' => 'Parcourir l’article',
 	'bouton_parcourir_docs_breve' => 'Parcourir la brève',
@@ -57,6 +60,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_annee' => 'Année',
 	'label_jour' => 'Jour',
 	'label_mois' => 'Mois',
+
+	// M
+	'masquer' => 'Masquer',
 
 	// O
 	'option_aff_art_interface_explication' => 'Afficher uniquement les articles de la langue de l’utilisateur',
@@ -192,10 +198,10 @@ Vous trouverez la <a href="https://contrib.spip.net/5080" target="_blank">docume
 	'saisie_email_explication' => 'Permet d’avoir un champ de type email en HTML5.',
 	'saisie_email_titre' => 'Adresse email',
 	'saisie_explication_explication' => 'Un texte explicatif général.',
-	'saisie_explication_masquer_label' => 'Ajouter un bouton afficher/masque l\'explication',
+	'saisie_explication_masquer_label' => 'Ajouter un bouton afficher/masque l’explication',
+	'saisie_explication_texte_label' => 'Texte de l’explication',
 	'saisie_explication_titre' => 'Explication',
-	'saisie_explication_titre_label' => 'Titre de l\'explication',
-	'saisie_explication_texte_label' => 'Texte de l\'explication',
+	'saisie_explication_titre_label' => 'Titre de l’explication',
 	'saisie_fieldset_explication' => 'Un cadre qui pourra englober plusieurs champs.',
 	'saisie_fieldset_titre' => 'Groupe de champs',
 	'saisie_file_explication' => 'Envoi d’un fichier',
@@ -239,7 +245,5 @@ Vous trouverez la <a href="https://contrib.spip.net/5080" target="_blank">docume
 	'vue_sans_reponse' => '<i>Sans réponse</i>',
 
 	// Z
-	'z' => 'zzz',
-	'masquer' => 'Masquer',
-	'afficher' => 'Afficher'
+	'z' => 'zzz'
 );
