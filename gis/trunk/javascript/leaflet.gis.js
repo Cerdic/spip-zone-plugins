@@ -207,7 +207,7 @@ L.Map.Gis = L.Map.extend({
 		var bounds = new L.LatLngBounds();
 		bounds.extend(centerOrBounds);
 		// avoid infinite zoom if bounds focus on a point
-		if (bounds._northEast.lat == bounds._northEast.lng && bounds._southWest.lat == bounds._southWest.lng) {
+		if (bounds._northEast.lat == bounds._southWest.lat && bounds._northEast.lng == bounds._southWest.lng) {
 			options.maxZoom = options.zoom;
 			if (panonly) {
 				options.maxZoom = map._zoom;
