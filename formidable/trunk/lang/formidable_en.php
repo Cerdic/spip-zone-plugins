@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'activer_pages_explication' => 'By default, public pages of the forms are not allowed',
-	'activer_pages_label' => 'Allow creation of public pages for the forms.', # MODIF
+	'activer_pages_label' => 'Activate creation of public pages for the forms.',
 	'admin_reponses_auteur' => 'Allow forms author to modify the answers',
 	'admin_reponses_auteur_explication' => 'Only administrators can normally modify the answers filled in a form (to the bin, published, proposed to evaluation). This option allows the author of a form to modify the status (with the risk to alterate potentiall statistics)
 ',
@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'analyse_exclure_champs_explication' => 'Insert the name of the fields to exclude, separated by <code>|</code>. Do not insert <code>@</code>.
 
 ',
-	'analyse_exclure_champs_label' => 'Fields to exclude', # MODIF
+	'analyse_exclure_champs_label' => 'Fields to be excluded from the analysis',
 	'analyse_exporter' => 'Export analysis',
 	'analyse_longueur_moyenne' => 'Average number in words length',
 	'analyse_nb_reponses_total' => '@nb@ people responded to this form.',
@@ -62,6 +62,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_css' => 'CSS Classes ',
 	'editer_descriptif' => 'Description',
 	'editer_descriptif_explication' => 'An explanation of the form for the private area.',
+	'editer_globales_etapes_activer_explication' => 'When this option is active, each group of first-level fields is transformed into a form step',
+	'editer_globales_etapes_activer_label_case' => 'Activate multi-step management',
+	'editer_globales_texte_submit_label' => 'Text of the validation button',
 	'editer_identifiant' => 'Login',
 	'editer_identifiant_explication' => 'Give a single textual identifier that allows you to call the form more easily. The identifier can only contain digits, Latin letters not accented and the character "_"',
 	'editer_menu_auteurs' => 'Configure authors',
@@ -77,7 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_redirige_url' => 'Forwarding address after validation',
 	'editer_redirige_url_explication' => 'Leave blank if you want to stay on the same page',
 	'editer_titre' => 'Title',
-	'editer_unicite_explication' => 'Save the form only if a field is unique', # MODIF
+	'editer_unicite_explication' => 'Save the form only if the value of a specific field is unique among all the saved responses.',
 	'editer_unicite_label' => 'Verify that this field is unique',
 	'erreur_autorisation' => 'You do not have the right to edit the website forms',
 	'erreur_base' => 'An error occurred as the data was being saved.',
@@ -101,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exporter_formulaire_date_erreur' => 'The start date must be before the end date',
 	'exporter_formulaire_date_fin_label' => 'Until (included)',
 	'exporter_formulaire_format_label' => 'File format',
+	'exporter_formulaire_ignorer_fichiers_label' => 'Do not attach files',
 	'exporter_formulaire_statut_label' => 'Answers',
 
 	// F
@@ -123,7 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'id_formulaires_reponse' => 'Answer identifier',
-	'identification_par_cookie' => 'By cookie', # MODIF
+	'identification_par_cookie' => 'By cookie (random identifier, does not store any personal information) ',
 	'identification_par_id_auteur' => 'By login (id_auteur) of the authenticated person',
 	'importer_formulaire' => 'Import a form',
 	'importer_formulaire_fichier_label' => 'File to import',
@@ -253,7 +257,9 @@ Indicate the field, its value, and the concerned email(s) (separated by a comma)
 	'traiter_email_option_envoyeur_nom_label' => 'Name of sender',
 	'traiter_email_option_exclure_champs_email_explication' => 'If you do not want certain fields to appear in sent emails (for example hidden fields), just define them here, separated by a comma.',
 	'traiter_email_option_exclure_champs_email_label' => 'Fields to exclude from the message content',
+	'traiter_email_option_masquer_champs_vide_label_case' => 'Hide empty fields',
 	'traiter_email_option_masquer_liens_label_case' => 'Hide administration links in the email.',
+	'traiter_email_option_masquer_valeurs_accuse_label_case' => 'Do not send the response values in the acknowledgement of receipt',
 	'traiter_email_option_nom_envoyeur_accuse_explication' => 'Specify the name of the sender used to send the acknowledgment. If you do not put anything, it will be the name of the site.',
 	'traiter_email_option_nom_envoyeur_accuse_label' => 'Name of the sender of the acknowledgment',
 	'traiter_email_option_pj_explication' => 'If the documents posted weigh less than _FORMIDABLE_TAILLE_MAX_FICHIERS_EMAIL Mio (constant modifiable by the webmaster).',
@@ -263,7 +269,8 @@ Indicate the field, its value, and the concerned email(s) (separated by a comma)
 	'traiter_email_option_sujet_label' => 'Message subject',
 	'traiter_email_option_sujet_valeurs_brutes_label' => 'Raw values',
 	'traiter_email_option_sujet_valeurs_brutes_label_case' => 'The email is for a robot and not for a human. In the subject of the message, put the raw values (understandable by robots) fields and not the interpreted values (comprehensible by humans).',
-	'traiter_email_option_vrai_envoyeur_explication' => 'Some SMTP servers do not allow to use arbitrary email for the "From" field. For this reason Formidable inserts the default email sender in the "Reply-To". Tick here to insert the email in the "From" field.', # MODIF
+	'traiter_email_option_texte_accuse_label' => 'Text of the acknowledgement of receipt',
+	'traiter_email_option_vrai_envoyeur_explication' => 'Some SMTP servers do not allow to use arbitrary email for the "From" field. For this reason Formidable inserts by default the sender’s email in the "Reply-To" field, and uses the webmaster’s email in the "From" field. Check here to insert the email in the "From" field. ',
 	'traiter_email_option_vrai_envoyeur_label' => 'Insert email of the sender in the "From" field',
 	'traiter_email_page' => '<a href="@url@">From this page</a>.',
 	'traiter_email_sujet' => '@nom@ has written to you.',
@@ -273,17 +280,21 @@ Indicate the field, its value, and the concerned email(s) (separated by a comma)
 	'traiter_email_url_enregistrement' => 'You can manage all the answers <a href="@url@">on this page</a>.',
 	'traiter_email_url_enregistrement_precis' => 'You can see this answer <a href="@url@"> on this page</a>.',
 	'traiter_enregistrement_description' => 'Save the form results in the database',
+	'traiter_enregistrement_divers' => 'Miscellaneous',
+	'traiter_enregistrement_donnees_personelles' => 'Personal data',
 	'traiter_enregistrement_erreur_base' => 'An error occurred while writing to the database',
 	'traiter_enregistrement_erreur_deja_repondu' => 'You have already filled in this form.',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'The answer to edit can not be found.',
+	'traiter_enregistrement_identification_reponses' => 'Identification of responses',
 	'traiter_enregistrement_message_ok' => 'Thanks. Your answers have been correctly saved.',
-	'traiter_enregistrement_option_anonymiser_label' => 'Anonymize form', # MODIF
+	'traiter_enregistrement_option_anonymiser_label' => 'Do not keep the ID of the connected person.',
 	'traiter_enregistrement_option_auteur' => 'Link authors to the forms',
 	'traiter_enregistrement_option_auteur_explication' => 'Bind one or more authors to a form. If activated, this option prevents anyone except the author(s) to access form’s configuration or results.',
 	'traiter_enregistrement_option_effacement_delai_label' => 'Number of days before deletion',
 	'traiter_enregistrement_option_effacement_label' => 'Regularly clear  the oldest results',
-	'traiter_enregistrement_option_identification_explication' => 'If the answers can be changed, which method is used first to know the answer to modify ?', # MODIF
-	'traiter_enregistrement_option_identification_label' => 'Identification', # MODIF
+	'traiter_enregistrement_option_identification_explication' => 'Which process should be used first to find out the answer previously provided by the user? ',
+	'traiter_enregistrement_option_identification_label' => 'Identification method ',
+	'traiter_enregistrement_option_identification_variable_php_label' => 'PHP variable',
 	'traiter_enregistrement_option_invalider_explication' => 'If the responses to this form are used publicly, you can refresh the cache when a new answer is sent.',
 	'traiter_enregistrement_option_invalider_label' => 'Refresh the cache',
 	'traiter_enregistrement_option_ip_label' => 'Record IPs (hidden after a period of retention)',
