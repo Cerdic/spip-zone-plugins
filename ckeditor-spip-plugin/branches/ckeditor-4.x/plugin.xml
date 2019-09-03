@@ -1,8 +1,8 @@
 <plugin>
 	<nom><multi>[fr]CKEditor pour SPIP[en]CKEditor for SPIP[ar]CKEDITOR &#1604; SPIP</multi></nom>
 	<auteur>Auteurs : [Fr&#233;d&#233;ric Bonnaud->mailto:fred@lea-linux.org], [Mehdi Cherifi (Superyms)->mailto:superyms@gmail.com], [Emmanuel Dreyfus->mailto:manu@netbsd.org]</auteur>
-	<version>1.0.0</version>
-	<version_base>1.0.1</version_base>
+	<version>1.0.2</version>
+	<version_base>1.0.2</version_base>
 	<etat>stable</etat>
 	<description>
 		<h3>
@@ -101,7 +101,7 @@
 	<necessite id="YAML" version="[1.5.1;]" />
 	<utilise id="iterateurs" version="[0.2.4;]" />
 	<utilise id="crayons" version="[1.9.4;]" />
-	<necessite id="lib:ckeditor" src="https://ckeditor.com/cke4/online-builder/releases/minified/4.12.1/moono-lisa/4.12.1/ckeditor_4.12.1_79cc3eb3d163.zip" />
+	<necessite id="lib:ckeditor" src="https://contrib.spip.net/IMG/zip/lib_ckeditor_4.12.1_fulldev.zip" />
 	<utilise id="lib:kcfinder" src="https://github.com/sunhater/kcfinder/archive/3.12.zip"/>
 	<utilise id="couteau_suisse" version="[1.8.0.0;]" />
 	<install>inc/ckeditor_install.php</install>

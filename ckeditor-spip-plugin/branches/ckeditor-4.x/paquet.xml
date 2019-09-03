@@ -1,12 +1,12 @@
 <paquet
 	prefix="ckeditor"
 	categorie="edition"
-	version="1.0.1"
+	version="1.0.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/ckspip-logo.png"
 	documentation="https://contrib.spip.net/CKeditor-3-0"
-	schema="1.0.1"
+	schema="1.0.2"
 >
 	<nom>CKEditor 4</nom>
 
@@ -38,6 +38,6 @@
 	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="yaml" compatibilite="[1.5.1;]" />
 
-	<lib nom='ckeditor' lien='https://ckeditor.com/cke4/online-builder/releases/minified/4.12.1/moono-lisa/4.12.1/ckeditor_4.12.1_79cc3eb3d163.zip' />
+	<lib nom='ckeditor' lien='https://contrib.spip.net/IMG/zip/lib_ckeditor_4.12.1_fulldev.zip' />
 
 </paquet>
