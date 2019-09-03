@@ -2,9 +2,10 @@
 	<langue code="de" url="https://trad.spip.net/tradlang_module/intranet?lang_cible=de" total="14" traduits="12" relire="0" modifs="0" nouveaux="2" pourcent="85.71">
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
-	<langue code="en" url="https://trad.spip.net/tradlang_module/intranet?lang_cible=en" total="14" traduits="9" relire="0" modifs="0" nouveaux="5" pourcent="64.29">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/intranet?lang_cible=en" total="14" traduits="12" relire="0" modifs="0" nouveaux="2" pourcent="85.71">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Gilles" lien="https://trad.spip.net/auteur/gilles" />
+		<traducteur nom="jack31" lien="https://trad.spip.net/auteur/jack31" />
 	</langue>
 	<langue code="es" url="https://trad.spip.net/tradlang_module/intranet?lang_cible=es" total="14" traduits="7" relire="0" modifs="0" nouveaux="7" pourcent="50.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />

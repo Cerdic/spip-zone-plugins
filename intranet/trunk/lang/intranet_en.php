@@ -22,7 +22,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_intranet_texte' => 'This site is accessible only to those who are logged in.',
 
 	// L
+	'label_intranet_ouverts' => 'Allow to remove editorial objects one by one from the intranet',
 	'label_message' => 'Customizing the message',
 	'label_pages_intranet' => 'Accessible pages',
-	'label_plageip' => 'IP range'
+	'label_plageip' => 'IP range',
+
+	// M
+	'message_intranet_remettre' => 'Put back in the intranet',
+	'message_intranet_sortir' => 'Exit the intranet'
 );
