@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_debut_min_fixe_label' => 'Minimum start date',
 	'date_debut_min_mobile_explication' => 'Only suggest events that start from <i>x</i> days. For events that start tomorrow or later, put 1. for events that start yesterday or later, put -1.',
 	'date_debut_min_mobile_label' => 'Minimum start date (mobile)',
+	'disable_complet_label_case' => 'Prevent from choosing events where registrations are full ',
 
 	// I
 	'id_article_explication' => 'Suggest the events of the following articles.',
@@ -35,22 +36,36 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'id_mot_label' => 'Keyword',
 	'id_rubrique_explication' => 'Propose the events of the articles in the following sections.',
 	'id_rubrique_label' => 'Section',
-	'inscription_choix0' => 'Registration closed', # MODIF
-	'inscription_choix1' => 'Registration open', # MODIF
+	'inscription_choix0' => 'Registrations closed',
+	'inscription_choix1' => 'Registrations open',
 	'inscription_explication' => 'Restrict to events whose registration criteria are as follows.',
-	'inscription_label' => 'Registration', # MODIF
+	'inscription_label' => 'Opening of registrations',
+
+	// L
+	'liste_attente' => ' 	Liste d’attente',
+	'liste_attente_1' => 'Waiting list (one entry before you on the list)',
+	'liste_attente_label' => 'Manage the waiting list',
+	'liste_attente_label_case' => 'Indicate that there is a waiting list',
+	'liste_attente_nb' => 'Waiting list (@nb@ entries before you on the list)',
 
 	// M
 	'masquer_heure_label_case' => 'Hide the time',
 
 	// O
+	'option_groupe_inscriptions' => 'Registration management',
+	'option_groupe_presentation' => 'Presentation of events',
+	'option_groupe_selection' => 'Choice of events offered',
 	'option_type_affichage_date' => 'Only the event date',
-	'option_type_affichage_label' => 'Events presentation', # MODIF
+	'option_type_affichage_label' => 'Denomination',
 	'option_type_affichage_titre' => 'Only the event title',
 	'option_type_affichage_titre_date' => 'The title and the event date',
 	'option_type_choix_checkbox' => 'Multiple choices (checkbox)',
 	'option_type_choix_label' => 'Type of choice',
 	'option_type_choix_radio' => 'Single choice (radio buttons)',
+	'option_type_choix_selection' => 'Single choice (drop-down list)',
+
+	// P
+	'places_dispo_label_case' => 'Display the number of remaining places',
 
 	// S
 	'saisie_evenements_chronologie_texte' => 'The date criteria for the choice of events are cumulative with the previous criterias for association with objects.',
