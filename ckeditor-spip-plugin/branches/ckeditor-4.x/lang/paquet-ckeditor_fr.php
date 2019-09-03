@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'ckeditor_description' => 'Utiliser l\'éditeur CKeditor avec SPIP3',
-	'ckeditor_nom' => 'ckeditor-spip3-plugin',
+	'ckeditor_nom' => 'CKEditor 4',
 	'ckeditor_slogan' => 'CKeditor pour SPIP3',
 
 );
