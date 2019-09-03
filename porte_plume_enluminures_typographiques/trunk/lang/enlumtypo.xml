@@ -1,8 +1,9 @@
 <traduction module="enlumtypo" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/porte_plume_enluminures_typographiques/trunk/lang/" reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/enlumtypo?lang_cible=ar" total="28" traduits="26" relire="0" modifs="0" nouveaux="2" pourcent="92.86">
 	</langue>
-	<langue code="en" url="https://trad.spip.net/tradlang_module/enlumtypo?lang_cible=en" total="28" traduits="27" relire="0" modifs="0" nouveaux="1" pourcent="96.43">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/enlumtypo?lang_cible=en" total="28" traduits="28" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
+		<traducteur nom="jack31" lien="https://trad.spip.net/auteur/jack31" />
 	</langue>
 	<langue code="es" url="https://trad.spip.net/tradlang_module/enlumtypo?lang_cible=es" total="28" traduits="14" relire="0" modifs="0" nouveaux="14" pourcent="50.00">
 	</langue>
