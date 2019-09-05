@@ -10,10 +10,10 @@ function zippeur_declarer_tables_principales($table){
 			'delai_suppression'=>"INT",
 			'fichiers'=>"INT"
 			),
-			
+
 		'key'=> array('PRIMARY KEY'=>'id_zip')
-		
-		);	
+
+		);
 	return $table;
 }
 
@@ -21,7 +21,7 @@ function zippeur_taches_generales_cron($taches){
   if (!defined('_ZIPPEUR_EFFACER_ZIP')){
 		define ('_ZIPPEUR_EFFACER_ZIP',2*3600);
 	}
-	$taches['zippeur_effacer_zip'] = _ZIPPEUR_EFFACER_ZIP;	
+	$taches['zippeur_effacer_zip'] = _ZIPPEUR_EFFACER_ZIP;
 	return $taches;
 }
 function zippeur_pre_liens($txt){
@@ -34,7 +34,7 @@ function zippeur_pre_liens($txt){
         $id_objet   = $lien[3];
         $texte      = $lien[1]!=''?$lien[1] : generer_info_entite($id_objet,$objet,'titre',true) .' - '. _T('zippeur:ensemble_fichier');
         $nom_zip    = $objet."_".$id_objet;
-        
+
         // constuire la liste des fichiers
         $fichiers   = array();
         $sql        = sql_select('maj,fichier','spip_documents INNER JOIN spip_documents_liens as L1',"spip_documents.statut='publie' AND L1.id_objet='$id_objet' AND L1.objet='$objet'",'','spip_documents.maj DESC');
@@ -51,8 +51,8 @@ function zippeur_pre_liens($txt){
         // constuitre le lien
         $replace    = "<a href='$url_zip' type='application/zip' class='spip_in zippeur' title='$texte (". taille_en_octets(filesize($url_zip)).")'>$texte</a>";
         $txt      = str_replace($lien[0],$replace,$txt);
-        
-    
+
+
     }
     return $txt;
 }

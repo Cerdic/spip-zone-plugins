@@ -26,11 +26,11 @@ function zippeur_upgrade($nom_meta_base_version,$version_cible){
                 	ecrire_meta($nom_meta_base_version,$current_version="0.5");
                 }
                 ecrire_metas();
-				
-				
+
+
         }
-	 
-		
+
+
 }
 
 function zippeur_vider_tables($nom_meta_version_base){
@@ -40,7 +40,7 @@ function zippeur_vider_tables($nom_meta_version_base){
 	foreach($fichiers as $f){
 		supprimer_fichier($f);
 	}
-	
+
 	sql_drop_table("spip_zippeur");
 	effacer_meta($nom_meta_version_base);
 }

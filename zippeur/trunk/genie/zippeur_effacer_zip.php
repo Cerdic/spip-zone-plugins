@@ -1,7 +1,7 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 function genie_zippeur_effacer_zip_dist($t){
-	// recherche dans la bdd 
+	// recherche dans la bdd
 	define (_ZIPPEUR_MAX_EFFACER_ZIP,1);
 	$info = sql_select("id_zip,nom",'spip_zippeur','date_zip +INTERVAL delai_suppression SECOND < NOW() AND delai_suppression > 0','0,'._ZIPPEUR_MAX_EFFACER_ZIP); 
 	while ($ligne = sql_fetch($info) ){
