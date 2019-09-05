@@ -17,7 +17,7 @@ function zippeur_chemin_dossier_local(){
 }
 
 include_spip('inc/zippeur_dynamique');
-function zippeur_dynamique($dossier,$date, $cmd,$dynamiques=array(),$statiques=array(),$sanspath=array(),$delai=0){
+function zippeur_dynamique($dossier,$date, $cmd,$dynamiques=array(),$statiques=array(),$sanspath=array(),$delai=0, $extension='zip'){
 	if ($date == '') {
 		$date = date("Y-m-d H:i:s",time());
 	}
@@ -74,10 +74,10 @@ function zippeur_dynamique($dossier,$date, $cmd,$dynamiques=array(),$statiques=a
 			 }
 		}
 	}
-	return zippeur(array($chemin),$date,$cmd,$dossier,zippeur_chemin_dossier_local().$dossier,$delai);
+	return zippeur(array($chemin),$date,$cmd,$dossier,zippeur_chemin_dossier_local().$dossier,$delai,$extension);
 }
 
-function zippeur($array,$date='',$cmd='',$nom='',$plat='oui',$delai='0'){
+function zippeur($array,$date='',$cmd='',$nom='',$plat='oui',$delai='0',$extension='zip'){
 	if ($date == '') {
 		$date = date("Y-m-d H:i:s",time());
 	}
@@ -85,7 +85,7 @@ function zippeur($array,$date='',$cmd='',$nom='',$plat='oui',$delai='0'){
 	$nom == '' ? $nom = md5(serialize($array)) : $nom = $nom;
 	$cmd =='' ? $cmd = lire_config('zippeur/zippeur_cmd'):$cmd=$cmd;
 
-	$chemin = zippeur_chemin_dossier_local().'cache-zip/'.$nom.".zip" ;
+	$chemin = zippeur_chemin_dossier_local().'cache-zip/'.$nom."$extension" ;
 	include_spip('inc/flock');
 	$enbase = sql_fetsel('id_zip,fichiers,date_modif','spip_zippeur',"`nom`='$nom'");
 	/* On vérifie si le zip existe*/
