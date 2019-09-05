@@ -16,4 +16,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zippeur_description' => 'Il est parfois utile, notamment quand un article comprend beaucoup de documents joints, de proposer l’ensemble des documents sous forme de zip. Ce plugin permet à SPIP de générer une archive zip à partir d’une liste de documents.',
 	'zippeur_slogan' => 'Zippez facilement vos fichiers',
 );
-?>

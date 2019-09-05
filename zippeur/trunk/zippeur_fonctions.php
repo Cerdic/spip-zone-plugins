@@ -8,7 +8,7 @@ function zippeur_chemin_dossier_local(){
 		static $chemin = '';
 		if (defined('_DIR_SITE')) {
 			$chemin = _DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES;
-			}
+		}
 		else{
 			$chemin = _DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES;
 		}
@@ -42,36 +42,36 @@ function zippeur_dynamique($dossier,$date, $cmd,$dynamiques=array(),$statiques=a
 			}
 
 			if (is_dir(find_in_path($stat[0])))
-			  zippeur_copier_dossier($stat[0],$dossier.'/'.$stat[1]);
+				zippeur_copier_dossier($stat[0],$dossier.'/'.$stat[1]);
 			else
-			  zippeur_copier_fichier($stat[0],$dossier.'/'.$stat[1]);
+				zippeur_copier_fichier($stat[0],$dossier.'/'.$stat[1]);
 		}
 	}
 	// Et ceux où la notion de chemin ne s'applique pas
 	if (is_array($sanspath)) {
 		foreach ($sanspath as $sp){
-		   defined('_DIR_SITE') ? $base = _DIR_SITE: $base = _DIR_RACINE;
-			 if (stripos($sp[0],'http://') === 0 or stripos($sp[0],'https://')) {		   // On peut passer une url
-			 		include_spip('inc/distant');
-					$url = str_replace('&amp;','&',$sp[0]);
-					if ($sp[1]){
+			defined('_DIR_SITE') ? $base = _DIR_SITE: $base = _DIR_RACINE;
+			if (stripos($sp[0],'http://') === 0 or stripos($sp[0],'https://')) {		   // On peut passer une url
+				include_spip('inc/distant');
+				$url = str_replace('&amp;','&',$sp[0]);
+				if ($sp[1]){
 
-						$chemin_fichier_recup = zippeur_chemin_dossier_local().$dossier.'/'.$sp[1];
-						zippeur_creer_arbo($dossier.'/'.$sp[1],'oui');
-						copie_locale($url,'force',$chemin_fichier_recup);
-					}
+					$chemin_fichier_recup = zippeur_chemin_dossier_local().$dossier.'/'.$sp[1];
+					zippeur_creer_arbo($dossier.'/'.$sp[1],'oui');
+					copie_locale($url,'force',$chemin_fichier_recup);
+				}
 
-			 }
-			 else {// pas url ?
-				 if (stripos($sp[0],$base) === false){//vérifier que la personne n'a pas passé le chemin complet avant de modifier $sp[0]
+			}
+			else {// pas url ?
+				if (stripos($sp[0],$base) === false){//vérifier que la personne n'a pas passé le chemin complet avant de modifier $sp[0]
 					$sp[0] = $base.$sp[0];
-				 }
-			   $p = $sp[0];
-			   if ($sp[1]==''){			// si le 2 argument est vide, alors pas de souci, on prend le chemin tel quel
+				}
+				$p = $sp[0];
+				if ($sp[1]==''){			// si le 2 argument est vide, alors pas de souci, on prend le chemin tel quel
 					$sp[1] = $sp[0];
-			   }
-			   zippeur_copier_fichier($p, $dossier.'/'.$sp[1],false);
-			 }
+				}
+				zippeur_copier_fichier($p, $dossier.'/'.$sp[1],false);
+			}
 		}
 	}
 	return zippeur(array($chemin),$date,$cmd,$dossier,zippeur_chemin_dossier_local().$dossier,$delai,$extension);
@@ -102,7 +102,7 @@ function zippeur($array,$date='',$cmd='',$nom='',$plat='oui',$delai='0',$extensi
 			}
 		}
 	}
-;
+	;
 
 	return $chemin;
 }
@@ -128,9 +128,9 @@ function zippeur_zipper($chemin,$array,$cmd,$plat){
 		else
 			$erreur = $zip->add($array,PCLZIP_OPT_REMOVE_PATH, $plat);
 		if ($erreur == 0){
-				spip_log("$chemin".$zip->errorInfo(true),"zippeur_erreur"._LOG_ERREUR);
+			spip_log("$chemin".$zip->errorInfo(true),"zippeur_erreur"._LOG_ERREUR);
 
-			}
+		}
 		$fichiers  =count($array) ;
 	}elseif($cmd=='7zip')
 	{
@@ -139,17 +139,17 @@ function zippeur_zipper($chemin,$array,$cmd,$plat){
 				$fichier_liste .= ' ../'.$fichier;
 			}else{
 				$fichier_liste .= ' '.$fichier;
-				}
-				$fichiers++;
+			}
+			$fichiers++;
 		}
-			passthru("7za a -tzip ".$chemin." ".$fichier_liste." -mx5 >/dev/null",$result);
-			if($result!=0)
-			{
-				spip_log($fichier_liste." -- code d'erreur 7z: ".$result,"zippeur_erreur"._LOG_ERREUR);
-			}
-			else{
-				//$fichiers++;
-			}
+		passthru("7za a -tzip ".$chemin." ".$fichier_liste." -mx5 >/dev/null",$result);
+		if($result!=0)
+		{
+			spip_log($fichier_liste." -- code d'erreur 7z: ".$result,"zippeur_erreur"._LOG_ERREUR);
+		}
+		else{
+			//$fichiers++;
+		}
 	}elseif($cmd=='zip')
 	{
 		foreach ($array as $fichier){
@@ -157,17 +157,17 @@ function zippeur_zipper($chemin,$array,$cmd,$plat){
 				$fichier_liste .= ' ../'.$fichier;
 			}else{
 				$fichier_liste .= ' '.$fichier;
-				}
-				$fichiers++;
+			}
+			$fichiers++;
 		}
-			passthru("zip -jq9 ".$chemin." ".$fichier_liste." >/dev/null",$result);
-			if($result!=0)
-			{
-				spip_log($fichier_liste." -- code d'erreur zip: ".$result,"zippeur_erreur"._LOG_ERREUR);
-			}
-			else{
-				//$fichiers++;
-			}
+		passthru("zip -jq9 ".$chemin." ".$fichier_liste." >/dev/null",$result);
+		if($result!=0)
+		{
+			spip_log($fichier_liste." -- code d'erreur zip: ".$result,"zippeur_erreur"._LOG_ERREUR);
+		}
+		else{
+			//$fichiers++;
+		}
 	}
 	if ($fichiers !=count($array)){
 		spip_log("$chemin : $fichiers fichiers présents mais ".count($array)." prévus",'zippeur_erreur'._LOG_ERREUR);

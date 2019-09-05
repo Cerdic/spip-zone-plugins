@@ -10,7 +10,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"supprimer" => "Supprimer",
 	"ok" => "OK",
 	"zippeur" => "Zippeur"
-	
+
 );
 
-?>

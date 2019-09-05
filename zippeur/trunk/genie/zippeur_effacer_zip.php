@@ -15,4 +15,3 @@ function genie_zippeur_effacer_zip_dist($t){
 	}
 	return 0;
 }
-?>
