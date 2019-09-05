@@ -1,11 +1,11 @@
 <paquet
 	prefix="zippeur"
 	categorie="multimedia"
-	version="5.1.0"
+	version="5.1.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/zip.png"
-	schema="0.5"
+	schema="0.9"
 	documentation="https://contrib.spip.net/Zippeur"
 >
 

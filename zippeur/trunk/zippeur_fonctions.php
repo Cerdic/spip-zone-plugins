@@ -87,18 +87,18 @@ function zippeur($array,$date='',$cmd='',$nom='',$plat='oui',$delai='0',$extensi
 
 	$chemin = zippeur_chemin_dossier_local().'cache-zip/'.$nom."$extension" ;
 	include_spip('inc/flock');
-	$enbase = sql_fetsel('id_zip,fichiers,date_modif','spip_zippeur',"`nom`='$nom'");
+	$enbase = sql_fetsel('id_zip,fichiers,date_modif','spip_zippeur',"`nom`='$nom' and `extension`=$extension");
 	/* On vérifie si le zip existe*/
 	if (count(preg_files($chemin))==0 or!$enbase['id_zip'] or $enbase['date_modif']!=$date or count($array)!=$enbase['fichiers'] or (defined('_NO_CACHE') and _NO_CACHE!=0 and !defined('_NO_CACHE_SAUF_ZIPPEUR'))){
 
 		if(zippeur_zipper($chemin,$array,$cmd,$plat))
 		{
-			spip_log("Zippage de $nom.zip avec cmd=$cmd","zippeur");
+			spip_log("Zippage de $nom.$extension avec cmd=$cmd","zippeur");
 			if ($enbase['id_zip']){
 				sql_updateq("spip_zippeur",array("delai_suppression"=>$delai,"date_modif"=>$date,'date_zip'=>date('Y-m-d H-i-s'),'fichiers'=>count($array)),"id_zip=".$enbase['id_zip']);
 			}
 			else{
-				sql_insertq("spip_zippeur",array("delai_suppression"=>$delai,"nom"=>$nom,"date_modif"=>$date,'date_zip'=>date('Y-m-d H-i-s'),'fichiers'=>count($array)));
+				sql_insertq("spip_zippeur",array("delai_suppression"=>$delai,"nom"=>$nom,'extension' => $extension,"date_modif"=>$date,'date_zip'=>date('Y-m-d H-i-s'),'fichiers'=>count($array)));
 			}
 		}
 	}

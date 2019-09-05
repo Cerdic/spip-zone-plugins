@@ -1,5 +1,6 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/sql');
 function zippeur_upgrade($nom_meta_base_version,$version_cible){
 	 $current_version = 0.0;
 	 if ( (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
@@ -25,6 +26,14 @@ function zippeur_upgrade($nom_meta_base_version,$version_cible){
                		maj_tables('spip_zippeur');
                 	ecrire_meta($nom_meta_base_version,$current_version="0.5");
                 }
+                if (version_compare($current_version,"0.8","<")){
+               		maj_tables('spip_zippeur');
+                	ecrire_meta($nom_meta_base_version,$current_version="0.8");
+								}
+                if (version_compare($current_version,"0.9","<")){
+               		sql_updateq('spip_zippeur',array('extension' => 'zip'));
+                	ecrire_meta($nom_meta_base_version,$current_version="0.9");
+								}
                 ecrire_metas();
 
 

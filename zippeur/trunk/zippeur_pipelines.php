@@ -5,6 +5,7 @@ function zippeur_declarer_tables_principales($table){
 		'field'=>array(
 			'id_zip'		=> "INT",
 			'nom'			=> "text",
+			'extension' => 'TINYTEXT',
 			'date_modif'	=> "datetime",
 			'date_zip'		=> "datetime",
 			'delai_suppression'=>"INT",
