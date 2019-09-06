@@ -115,7 +115,6 @@ function saisies_set_request_null_recursivement($saisie) {
 function saisies_afficher_si_get_valeur_champ($champ, $env) {
 	if (preg_match_all("#config:(.*)#", $champ, $matches, PREG_SET_ORDER)) {
 		foreach ($matches as $config) {
-			$arobase = $config[0];
 			$config_a_tester = str_replace(":", "/", $config[1]);
 			$champ = lire_config($config_a_tester);
 		}
