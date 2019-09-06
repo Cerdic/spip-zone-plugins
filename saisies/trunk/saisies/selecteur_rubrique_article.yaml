@@ -84,6 +84,8 @@ options:
           label: '<:saisies:option_afficher_si_label:>'
           explication: '<:saisies:option_afficher_si_explication:>'
           rows: 5
+        verifier:
+          type: 'afficher_si'
       -
         saisie: 'case'
         options:
