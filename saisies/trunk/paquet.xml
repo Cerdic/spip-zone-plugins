@@ -1,8 +1,8 @@
 <paquet
 	prefix="saisies"
 	categorie="outil"
-	version="3.24.0"
-	etat="dev"
+	version="3.26.0"
+	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/logo_saisie_48.png"
 	documentation="https://contrib.spip.net/Saisies"
