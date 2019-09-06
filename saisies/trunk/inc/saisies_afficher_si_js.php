@@ -149,5 +149,5 @@ function saisies_afficher_si_js_checkbox($champ, $operateur, $valeur, $negation)
  * @return string
 **/
 function saisies_afficher_si_js_IN_individuel($valeur, $champ) {
-	return "$(form).find(checkbox[name=$champ".'[]'."][value='$valeur']).is(':checked')";
+	return "$(form).find('[name=\"$champ".'[]"'."][value=\"$valeur\"]').is(':checked')";
 }
