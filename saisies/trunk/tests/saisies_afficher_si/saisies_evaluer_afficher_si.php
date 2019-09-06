@@ -31,10 +31,14 @@
 	set_request("tableau_1", array("a", "b", "c"));
 	set_request("tableau_2", array("e", "f", "g"));
 	set_request("nombre", "20");
+
+	include_spip("inc/config");
+	ecrire_config("tests_saisies_config", array("a" => "a", "sous" => array("b" => "b", "c" => "c")));
 	//
 	// hop ! on y va
 	//
 	$err = tester_fun($f, essais_saisies_evaluer_afficher_si());
+	effacer_config('tests_saisies_config');
 
 	// si le tableau $err est pas vide ca va pas
 	if ($err) {
@@ -164,7 +168,27 @@
 			'hack' => array(
 				0 => true,
 				1 => "spip_log('s') || @input_1@=='s')"
-			)
+			),
+			'premier_niveau' => array(
+				0 => true,
+				1 => '@config:tests_saisies_config:a@==\'a\'',
+			),
+			'second_niveau' => array(
+				0 => false,
+				1 => '@config:tests_saisies_config:sous:b@==\'c\'',
+			),
+			'second_niveau_bis' => array(
+				0 => true,
+				1 => '@config:tests_saisies_config:sous:c@==\'c\'',
+			),
+			'second_niveau_et' => array(
+				0 => false,
+				1 => '@config:tests_saisies_config:sous:c@==\'c\' && @config:tests_saisies_config:sous:b@==\'c\'',
+			),
+			'second_niveau_ou' => array(
+				0 => true,
+				1 => '@config:tests_saisies_config:sous:c@==\'c\' || @config:tests_saisies_config:sous:b@==\'c\'',
+			),
 		);
 		return $essais;
 	}
