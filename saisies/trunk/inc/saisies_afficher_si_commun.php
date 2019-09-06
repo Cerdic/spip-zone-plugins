@@ -45,3 +45,16 @@ function saisies_afficher_si_evaluer_plugin($champ) {
 	}
 	return $actif;
 }
+/**
+ * Retourne la valeur d'une config, si nécessaire
+ * @param string $champ le "champ" a tester : config:xxx ou un vrai champ
+ * @return string
+**/
+function saisies_afficher_si_get_valeur_config($champ) {
+	$valeur = '';
+	if (preg_match("#config:(.*)#", $champ, $config)) {
+		$config_a_tester = str_replace(":", "/", $config[1]);
+		$valeur = lire_config($config_a_tester);
+	}
+	return $valeur;
+}
