@@ -78,12 +78,29 @@ function saisies_afficher_si_js_champ($champ, $operateur, $valeur, $valeur_numer
 		$guillemet = '\"';
 	}
 
+	// cas case
+	if ($saisie == 'case') {// case
+		return saisies_afficher_si_js_case($champ, $operateur, $valeur, $guillemet, $negation);
+	}
 	// cas radio
 	if ($saisie == 'radio' or $saisie == 'oui_non' or $saisie == 'true_false') {// radio et assimilés
 		return saisies_afficher_si_js_radio($champ, $operateur, $valeur, $guillemet, $negation);
 	}
 	// sinon cas par défaut
 	return "$negation\$(form).find('[name=$champ]').val() $operateur $guillemet$valeur$guillemet";
+}
+
+
+/**
+ * Génère les tests js pour les cas de case
+ * @param string $champ
+ * @param string $operateur
+ * @param string $valeur
+ * @param string $guillemet
+ * @param string $negation
+**/
+function saisies_afficher_si_js_case($champ, $operateur, $valeur, $guillemet, $negation) {
+	return "$negation$(form).find(\".checkbox[name='$champ']\").is(':checked') ? $(form).find('.checkbox[name='$champ']').val() : ''";
 }
 
 /**
