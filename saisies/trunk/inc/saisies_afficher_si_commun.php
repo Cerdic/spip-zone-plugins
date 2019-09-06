@@ -151,3 +151,25 @@ function saisies_afficher_si_get_valeur_config($champ) {
 	}
 	return $valeur;
 }
+
+/** Vérifie qu'une condition est sécurisée
+ * IE : ne permet pas d'executer n'importe quel code arbitraire.
+ * @param string $condition
+ * @param array $tests tableau des tests parsés
+ * @return bool true si secure / false sinon
+ **/
+function saisies_afficher_si_secure($condition, $tests) {
+	$hors_test = array('||','&&','!','(',')');
+	foreach ($tests as $test) {
+		$condition = str_replace($test[0], '', $condition);
+	}
+	foreach ($hors_test as $hors) {
+		$condition = str_replace($hors, '', $condition);
+	}
+	$condition = trim($condition);
+	if ($condition) {// il reste quelque chose > c'est le mal
+		return false;
+	} else {
+		return true;
+	}
+}

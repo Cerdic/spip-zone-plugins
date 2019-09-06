@@ -132,6 +132,10 @@ function saisies_afficher_si_get_valeur_champ($champ, $env) {
 **/
 function saisies_transformer_condition_afficher_si($condition, $env = null) {
 	if ($tests = saisies_parser_condition_afficher_si($condition)) {
+		if (!saisies_afficher_si_secure($condition, $tests)) {
+			spip_log("Afficher_si incorrect. $condition non sécurisée", "saisies"._LOG_CRITIQUE);
+			return '';
+		}
 		foreach ($tests as $test) {
 			$expression = $test[0];
 			$champ = saisies_afficher_si_get_valeur_champ($test['champ'], $env);
