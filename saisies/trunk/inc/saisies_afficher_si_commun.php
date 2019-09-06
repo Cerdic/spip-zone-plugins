@@ -158,8 +158,8 @@ function saisies_afficher_si_get_valeur_config($champ) {
  * @param array $tests tableau des tests parsés
  * @return bool true si secure / false sinon
  **/
-function saisies_afficher_si_secure($condition, $tests) {
-	$hors_test = array('||','&&','!','(',')');
+function saisies_afficher_si_secure($condition, $tests=array()) {
+	$hors_test = array('||','&&','!','(',')','true','false');
 	foreach ($tests as $test) {
 		$condition = str_replace($test[0], '', $condition);
 	}

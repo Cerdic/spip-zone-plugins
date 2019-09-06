@@ -153,11 +153,9 @@ function saisies_transformer_condition_afficher_si($condition, $env = null) {
 			$condition = str_replace($expression, $test_modifie, $condition);
 		}
 	} else {
-		$condition = str_replace(' ', '', $condition);
-		$condition_possible = array("!false", "false", "true", "!true");
-		if (!in_array($condition, $condition_possible)){
-			spip_log("Afficher_si incorrect : $condition", "saisies"._LOG_CRITIQUE);
-			$condition = true;
+		if (!saisies_afficher_si_secure($condition, $tests)) {
+			spip_log("Afficher_si incorrect. $condition non sécurisée", "saisies"._LOG_CRITIQUE);
+			return '';
 		}
 	}
 	return $condition;
