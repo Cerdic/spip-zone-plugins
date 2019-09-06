@@ -128,6 +128,14 @@
 				1 => '@case_1@',
 				2 => $saisies_form
 			),
+			'hack' => array(
+				0 => '',
+				1 => 'alert("maman")'
+			),
+			'hack_bis' => array(
+				0 => '',
+				1 => 'alert("maman") || @input_1@ == "2"'
+			),
 			'false' => array(
 				0 => 'false',
 				1 => 'false'
