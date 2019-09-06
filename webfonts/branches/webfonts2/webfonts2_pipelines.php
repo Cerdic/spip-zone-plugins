@@ -20,7 +20,7 @@ function webfonts2_ieconfig_metas($table){
  * Ajout des polices configurées a la pipeline fonts_list
  *
  * chaine retournée par le selecteurgenerique :   Open Sans:regular, Open Sans:800, Open Sans:300,
- * 
+ *
 */
 function webfonts2_fonts_list($fonts){
 	$webfonts = lire_config('webfonts2/webfonts');
@@ -58,14 +58,14 @@ function webfonts2_header_prive($flux){
     return $flux;
 }
  /**
-  * webfonts_affichage_final
+  * webfonts_insert_head_css
   *
   * place la délaration/appel des webfont avant les autres styles
   *
-  * @param string $flux pipeline affichage final
+  * @param string $flux pipeline insert_head_css
   * @return string html
  */
-function webfonts2_affichage_final($flux){
+function webfonts2_insert_head_css($flux){
 	return webfonts2_insertion_css($flux);
 }
 
@@ -78,11 +78,12 @@ function webfonts2_insertion_css($flux){
 			(defined('_FONTS_SUBSETS')) ? $subsets = _FONTS_SUBSETS : $subsets='' ;
 			$font_request = googlefont_request($webfonts,$subsets);
 			if (strlen($font_request)) {
-				$methode = lire_config('webfonts2');
+                $code = '';
+				$methode = lire_config('webfonts2/methode_insert');
 				if($methode == 'at_import'){
-					$code = "<style>@import url('$font_request');</style>";
+					$code = "<style>@import url('$font_request');</style>\n";
 				}else{
-					$code = '<link rel="stylesheet" type="text/css" href="'.$font_request.'" id="webfonts" />';
+					$code = "<link rel=\"stylesheet\" type=\"text/css\" href=\"$font_request\" id=\"webfonts\" />\n";
 				}
 				// le placer avant les autres CSS du flux
 				if (($p = strpos($flux,"<link"))!==false)
