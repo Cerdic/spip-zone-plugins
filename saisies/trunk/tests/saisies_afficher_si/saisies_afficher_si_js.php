@@ -26,7 +26,7 @@
 
 	// les saisies à passer
 	$saisies_form = array();
-	foreach (array('checkbox_1','input_1') as $saisie) {
+	foreach (array('radio_1','checkbox_1','input_1') as $saisie) {
 			$saisies_form[] = array(
 				'saisie' => str_replace('_1', '', $saisie),
 				'options' => array('nom' => $saisie)
@@ -111,6 +111,16 @@
 			'checkbox_IN_MULTIPLE' => array(
 				0 => '($(form).find(checkbox[name=checkbox_1[]][value=\'toto\']).is(\':checked\') || $(form).find(checkbox[name=checkbox_1[]][value=\'tata\']).is(\':checked\'))',
 				1 => '@checkbox_1@ IN \'toto,tata\'',
+				2 => $saisies_form
+			),
+			'radio_egal' => array(
+				0 => '$(form).find("[name=\'radio_1\']:checked").val() == \'toto\')',
+				1 => '@radio_1@ == \'toto\'',
+				2 => $saisies_form
+			),
+			'radio_inegal' => array(
+				0 => '$(form).find("[name=\'radio_1\']:checked").val() != \'toto\')',
+				1 => '@radio_1@ != \'toto\'',
 				2 => $saisies_form
 			),
 			'false' => array(
