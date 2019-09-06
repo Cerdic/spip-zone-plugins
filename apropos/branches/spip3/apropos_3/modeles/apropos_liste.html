@@ -75,9 +75,11 @@
 	</div>
 	[<span class='apropos-nom'>(#NOM|extraire_multi)],</span> 
 	<span class='apropos-version'>[version #VERSION SVN \[(#CONSTANTE|constant|concat{#SRC_ARCHIVE/}|version_svn_courante|abs|sinon{''})\],] #ETAT.</span>
-	
 	<div class='apropos-description'>
 		[(#DESCRIPTION|extraire_multi|propre|couper{280})]
+	</div>
+	<div class='apropos-description'>
+		[<a href="#LIEN_DOC" class="spip_out" rel="external" alt="<:apropos:la_documentation:>" title="<:apropos:la_documentation:> (#NOM|extraire_multi)">Voir la documentation</a>]
 	</div>
 	<span class='apropos-auteur'>
 		[<:public:par_auteur:> (#AUTEUR*|svp_afficher_credits)]</span>
