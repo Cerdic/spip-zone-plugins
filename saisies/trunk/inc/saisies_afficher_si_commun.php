@@ -32,13 +32,18 @@ function saisies_parser_condition_afficher_si($condition) {
 /**
  * Retourne le résultat de l'évaluation d'un plugin actif
  * @param string $champ (sans les @@)
+ * @param string $negation ! si on doit nier
  * @return bool '' ('' si jamais on ne teste pas un plugin)
 **/
-function saisies_afficher_si_evaluer_plugin($champ) {
+function saisies_afficher_si_evaluer_plugin($champ, $negation = '') {
 	if (preg_match_all('#plugin:(.*)#', $champ, $matches, PREG_SET_ORDER)) {
 		foreach ($matches as $plugin) {
 			$plugin_a_tester = $plugin[1];
-			$actif = test_plugin_actif($plugin_a_tester);
+			if ($negation) {
+				$actif = !test_plugin_actif($plugin_a_tester);
+			} else {
+				$actif = test_plugin_actif($plugin_a_tester);
+			}
 		}
 	}	else {
 		$actif = '';

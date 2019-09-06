@@ -197,6 +197,14 @@
 				0 => false,
 				1 => '@plugin:tartempion_de_test@' // en espérant que personne ne nomme un plugin tartempion_de_test
 			),
+			'plugin_actif_nie' => array(
+				0 =>  false,
+				1 => '!@plugin:saisies@'
+			),
+			'plugin_inactif_nie' => array(
+				0 => true,
+				1 => '!@plugin:tartempion_de_test@' // en espérant que personne ne nomme un plugin tartempion_de_test
+			),
 		);
 		return $essais;
 	}
