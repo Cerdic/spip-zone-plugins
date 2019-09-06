@@ -40,103 +40,57 @@
 
 	function essais_saisies_evaluer_afficher_si(){
 		$essais = array (
-			'simple_egalite' =>
-			array (
-				0 => true,
-				1 => "@a@ == 'a'"
+			'input_egalite' => array(
+				0 => '$form().find(\'[name=input_1]\').val() == \'toto\'',
+				1 => '@input_1@ == \'toto\''
 			),
-			'simple_inegalite' =>
-			array (
-				0 => false,
-				1 => "@a@ == 'b'"
+			'input_egalite_double_quote' => array(
+				0 => '$form().find(\'[name=input_1]\').val() == \"toto\"',
+				1 => '@input_1@ == "toto"'
 			),
-			'double_egalite' =>
-			array (
-				0 => true,
-				1 => "@a@ == 'a' && @b@ == 'b'"
+			'input_egalite_nb' => array(
+				0 => '$form().find(\'[name=input_1]\').val() == 23',
+				1 => '@input_1@ == 23'
 			),
-			'double_egalite_fausse' =>
-			array (
-				0 => false,
-				1 => "@a@ == 'a' && @b@ == 'c'"
+			'input_inegalite' => array(
+				0 => '$form().find(\'[name=input_1]\').val() != \'toto\'',
+				1 => '@input_1@ != \'toto\''
 			),
-			'egalite_alternative' =>
-			array (
-				0 => true,
-				1 => "@a@ == 'a' || @b@ == 'c'"
+			'input_egalite_nie' => array(
+				0 => '!$form().find(\'[name=input_1]\').val() == \'toto\'',
+				1 => '!@input_1@ == \'toto\''
 			),
-			'egalite_alternative_fausse' =>
-			array (
-				0 => false,
-				1 => "@a@ == 'b' || @b@ == 'c'"
+			'input_inegalite_nie' => array(
+				0 => '!$form().find(\'[name=input_1]\').val() != \'toto\'',
+				1 => '!@input_1@ != \'toto\''
 			),
-			'presence_tableau_alternative' =>
-			array (
-				0 => true,
-				1 => "@tableau_1@ IN 'b' || @tableau_2@ == 'c'"
+			'checkbox_egalite' => array(
+				0 => '($(form).find(checkbox[name=checkbox_1[]][value=\'toto\']).is(\':checked\'))',
+				1 => '@checkbox_1@ == \'toto\''
 			),
-			'presence_tableau_cumulative' =>
-			array (
-				0 => false,
-				1 => "@tableau_1@ IN 'b' && @tableau_2@ == 'c'"
+			'checkbox_inegalite' => array(
+				0 => '!($(form).find(checkbox[name=checkbox_1[]][value=\'toto\']).is(\':checked\'))',
+				1 => '@checkbox_1@ != \'toto\''
 			),
-			'absence_tableau_cumulative' =>
-			array (
-				0 => false,
-				1 => "@tableau_1@ !IN 'b' && @tableau_2@ !IN 'c'"
+			'checkbox_IN' => array(
+				0 => '($(form).find(checkbox[name=checkbox_1[]][value=\'toto\']).is(\':checked\'))',
+				1 => '@checkbox_1@ IN \'toto\''
 			),
-			'absence_tableau_alternative' =>
-			array (
-				0 => true,
-				1 => "@tableau_1@ !IN 'b' || @tableau_2@ !IN 'c'"
+			'checkbox_NOT_IN' => array(
+				0 => '!($(form).find(checkbox[name=checkbox_1[]][value=\'toto\']).is(\':checked\'))',
+				1 => '@checkbox_1@ !IN \'toto\''
 			),
-			'champ_uniquement' => array(
-				0 => true,
-				1 => "@case_1@"
+			'checkbox_IN_nie' => array(
+				0 => '!($(form).find(checkbox[name=checkbox_1[]][value=\'toto\']).is(\':checked\'))',
+				1 => '@checkbox_1@ !IN \'toto\''
 			),
-			'champ_uniquement_faux' => array(
-				0 => false,
-				1 => "@case_2@"
+			'checkbox_NOT_IN_nie' => array(//cas sans doute rare, mais sait-on jamais
+				0 => '($(form).find(checkbox[name=checkbox_1[]][value=\'toto\']).is(\':checked\'))',
+				1 => '!@checkbox_1@ !IN \'toto\''
 			),
-			'champ_uniquement_negation' => array(
-				0 => true,
-				1 => "!@case_2@"
-			),
-			'champ_uniquement_negation_faux' => array(
-				0 => false,
-				1 => "!@case_1@"
-			),
-			'nombre_superieur_vrai' => array(
-				0 => true,
-				1 => "@nombre@ > 10"
-			),
-			'nombre_superieur_faux' => array(
-				0 => false,
-				1 => "@nombre@ > 100"
-			),
-			'nombre_superieur_egal_vrai' => array(
-				0 => true,
-				1 => "@nombre@ >= 20"
-			),
-			'nombre_superieur_egal_faux' => array(
-				0 => false,
-				1 => "@nombre@ >= 100"
-			),
-			'nombre_inferieur_vrai' => array(
-				0 => true,
-				1 => "@nombre@ < 100"
-			),
-			'nombre_inferieur_faux' => array(
-				0 => false,
-				1 => "@nombre@ < 10"
-			),
-			'nombre_inferieur_egal_vrai' => array(
-				0 => true,
-				1 => "@nombre@ <= 20"
-			),
-			'nombre_inferieur_egal_faux' => array(
-				0 => false,
-				1 => "@nombre@ <= 10"
+			'checkbox_IN_MULTIPLE' => array(
+				0 => '($(form).find(checkbox[name=checkbox_1[]][value=\'toto\']).is(\':checked\') || $(form).find(checkbox[name=checkbox_1[]][value=\'tata\']).is(\':checked\'))',
+				1 => '@checkbox_1@ IN \'toto,tata\''
 			),
 			'false' => array(
 				0 => false,
