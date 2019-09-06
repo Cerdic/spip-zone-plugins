@@ -55,15 +55,6 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 				$remplissage_uniquement = false;
 			}
 
-			// On gère le cas @plugin:nom_plugin@
-			preg_match_all('#@plugin:(.+)@#U', $condition, $matches);
-			foreach ($matches[1] as $plug) {
-				if (defined('_DIR_PLUGIN_'.strtoupper($plug))) {
-					$condition = preg_replace('#@plugin:'.$plug.'@#U', 'true', $condition);
-				} else {
-					$condition = preg_replace('#@plugin:'.$plug.'@#U', 'false', $condition);
-				}
-			}
 			// On transforme en une condition PHP valide
 			$ok = saisies_evaluer_afficher_si($condition, $env);
 			if (!$ok) {
@@ -113,12 +104,15 @@ function saisies_set_request_null_recursivement($saisie) {
  * @return  la valeur du champ ou de la config
  **/
 function saisies_afficher_si_get_valeur_champ($champ, $env) {
-	if (preg_match_all("#config:(.*)#", $champ, $matches, PREG_SET_ORDER)) {
+	$plugin = saisies_afficher_si_evaluer_plugin($champ);
+	if ($plugin !== '') {
+		$champ = $plugin;
+	} elseif (preg_match_all("#config:(.*)#", $champ, $matches, PREG_SET_ORDER)) {
 		foreach ($matches as $config) {
 			$config_a_tester = str_replace(":", "/", $config[1]);
 			$champ = lire_config($config_a_tester);
 		}
-	} elseif (is_null($env)) {
+	}  elseif (is_null($env)) {
 		$champ = _request($champ);
 	} else {
 		$champ = $env["valeurs"][$champ];
