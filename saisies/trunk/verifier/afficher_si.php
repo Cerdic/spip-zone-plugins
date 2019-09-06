@@ -22,7 +22,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function verifier_afficher_si_dist($valeur) {
 	include_spip('inc/saisies_afficher_si_commun');
 	$erreur = _T('saisies:erreur_syntaxe_afficher_si');
-	if (!saisies_afficher_si_verifier_syntaxe($valeur)) {
+	$tests = saisies_parser_condition_afficher_si($valeur);
+	if (!saisies_afficher_si_verifier_syntaxe($valeur, $tests)) {
 		return $erreur;
 	} else {
 		return '';

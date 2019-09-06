@@ -23,7 +23,8 @@ function saisies_parser_condition_afficher_si($condition) {
 		. "(?<operateur>==|!=|IN|!IN|>=|>|<=|<)" // opérateur
 		. "(?:\s*?)" // espaces éventuels après
 		. "((?<guillemet>\"|')(?<valeur>.*?)(\k<guillemet>)|(?<valeur_numerique>\d+))" // valeur (string) ou valeur_numérique (int)
-		. ")?"; // partie operateur + valeur (optionnelle) : fin
+		. ")?" // partie operateur + valeur (optionnelle) : fin
+		. '|(?<booleen>false|true)';//accepter false/true brut
 	$regexp = "#$regexp#";
 	preg_match_all($regexp, $condition, $tests, PREG_SET_ORDER);
 	return $tests;
@@ -159,6 +160,7 @@ function saisies_afficher_si_get_valeur_config($champ) {
  * @return bool true si secure / false sinon
  **/
 function saisies_afficher_si_secure($condition, $tests=array()) {
+	$condition_original = $condition;
 	$hors_test = array('||','&&','!','(',')','true','false');
 	foreach ($tests as $test) {
 		$condition = str_replace($test[0], '', $condition);
@@ -168,6 +170,7 @@ function saisies_afficher_si_secure($condition, $tests=array()) {
 	}
 	$condition = trim($condition);
 	if ($condition) {// il reste quelque chose > c'est le mal
+		spip_log("Afficher_si incorrect. $condition_original non sécurisée", "saisies"._LOG_CRITIQUE);
 		return false;
 	} else {
 		return true;
@@ -175,19 +178,16 @@ function saisies_afficher_si_secure($condition, $tests=array()) {
 }
 
 /** Vérifie qu'une condition respecte la syntaxe formelle
-	* @param string $condition
-	* @return bool
+ * @param string $condition
+ * @param array $tests liste des tests simples
+* @return bool
 **/
-function saisies_afficher_si_verifier_syntaxe($condition) {
-	$tests = saisies_parser_condition_afficher_si($condition);
+function saisies_afficher_si_verifier_syntaxe($condition, $tests=array()) {
 	if ($tests and saisies_afficher_si_secure($condition, $tests)) {//Si cela passe la sécurité, faisons des tests complémentaires
-
 		// parenthèses équilibrées
 		if (substr_count($condition,'(') != substr_count($condition,')')) {
 			return false;
 		}
-
-
 		// pas de && ou de || qui traine sans rien à gauche ni à droite
 		$condition = " $condition ";
 		$condition_pour_sous_test = str_replace('||','$', $condition);
