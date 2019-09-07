@@ -48,8 +48,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_generique' => 'Il y a des erreurs dans les champs ci-dessous, veuillez vérifier vos saisies',
 	'erreur_option_nom_unique' => 'Ce nom est déjà utilisé par un autre champ et il doit être unique dans ce formulaire.',
-	'erreur_valeur_inacceptable' => 'Valeur postée non acceptable.',
 	'erreur_syntaxe_afficher_si' => 'Syntaxe incorrecte du test',
+	'erreur_valeur_inacceptable' => 'Valeur postée non acceptable.',
 
 	// F
 	'fichier_erreur_explication_renvoi' => 'Vous pouvez renvoyer un nouveau fichier, ou bien soumettre le formulaire tel quel, l’ancien fichier n’est pas conservé.',
