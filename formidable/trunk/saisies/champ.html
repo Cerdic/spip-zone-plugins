@@ -25,7 +25,7 @@
 	</B_enfants>
 	#SET{saisie,#ARRAY}
 	[(#VALEUR{saisie}|!={fieldset}|ou{#ENV{forcer_type}|non}|oui)
-		#SET{saisie,#ARRAY{#GET{label},#GET{label}}}
+		#SET{saisie,#ARRAY{#GET{nom},#GET{label}}}
 	]
 	<//B_enfants>
 	#SET{data,#GET{data}|array_merge{#GET{saisie}}}
