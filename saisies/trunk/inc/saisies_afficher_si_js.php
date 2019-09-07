@@ -21,6 +21,7 @@ include_spip('inc/saisies_lister');
  * @return string
 **/
 function saisies_afficher_si_js($condition, $saisies_form = array()) {
+	$saisies_form = pipeline('saisies_afficher_si_js_saisies_form', $saisies_form);
 	$saisies_form = saisies_lister_par_nom($saisies_form);
 	if ($tests = saisies_parser_condition_afficher_si($condition)) {
 		if (!saisies_afficher_si_verifier_syntaxe($condition, $tests)) {
