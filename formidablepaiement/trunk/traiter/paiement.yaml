@@ -56,49 +56,49 @@ options:
     options:
       label: '<:formidablepaiement:traiter_paiement_dsp2_fieldset_legend:>'
       env: true
-      saisies:
-        -
-          saisie: 'explication'
-          options:
-            nom: 'explication_dsp2'
-            texte: '<:formidablepaiement:traiter_paiement_dsp2_explication:>'
-            env: true
-        -
-          saisie: 'champ'
-          options:
-            nom: 'champ_nom'
-            label: '<:formidablepaiement:traiter_paiement_option_champ_nom:>'
-            env: true
-        -
-          saisie: 'champ'
-          options:
-            nom: 'champ_prenom'
-            label: '<:formidablepaiement:traiter_paiement_option_champ_prenom:>'
-            env: true
-        -
-          saisie: 'champ'
-          options:
-            nom: 'champ_adresse'
-            label: '<:formidablepaiement:traiter_paiement_option_champ_adresse:>'
-            env: true
-        -
-          saisie: 'champ'
-          options:
-            nom: 'champ_code_postal'
-            label: '<:formidablepaiement:traiter_paiement_option_champ_code_postal:>'
-            env: true
-        -
-          saisie: 'champ'
-          options:
-            nom: 'champ_ville'
-            label: '<:formidablepaiement:traiter_paiement_option_champ_ville:>'
-            env: true
-        -
-          saisie: 'champ'
-          options:
-            nom: 'champ_pays'
-            label: '<:formidablepaiement:traiter_paiement_option_champ_pays:>'
-            env: true
+    saisies:
+      -
+        saisie: 'explication'
+        options:
+          nom: 'explication_dsp2'
+          texte: '<:formidablepaiement:traiter_paiement_dsp2_explication:>'
+          env: true
+      -
+        saisie: 'champ'
+        options:
+          nom: 'champ_nom'
+          label: '<:formidablepaiement:traiter_paiement_option_champ_nom:>'
+          env: true
+      -
+        saisie: 'champ'
+        options:
+          nom: 'champ_prenom'
+          label: '<:formidablepaiement:traiter_paiement_option_champ_prenom:>'
+          env: true
+      -
+        saisie: 'champ'
+        options:
+          nom: 'champ_adresse'
+          label: '<:formidablepaiement:traiter_paiement_option_champ_adresse:>'
+          env: true
+      -
+        saisie: 'champ'
+        options:
+          nom: 'champ_code_postal'
+          label: '<:formidablepaiement:traiter_paiement_option_champ_code_postal:>'
+          env: true
+      -
+        saisie: 'champ'
+        options:
+          nom: 'champ_ville'
+          label: '<:formidablepaiement:traiter_paiement_option_champ_ville:>'
+          env: true
+      -
+        saisie: 'champ'
+        options:
+          nom: 'champ_pays'
+          label: '<:formidablepaiement:traiter_paiement_option_champ_pays:>'
+          env: true
   -
     saisie: 'textarea'
     options:
