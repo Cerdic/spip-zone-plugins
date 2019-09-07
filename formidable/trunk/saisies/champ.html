@@ -1,6 +1,6 @@
-[(#ENV{type_choix}|=={checkbox}|?{
-	#SET{data,#ARRAY},
-	#SET{data,#ARRAY{'',#VAL{formidable:traitements_champ_aucun}|_T}}
+[(#ENV{type_choix}|=={radio}|?{
+	#SET{data,#ARRAY{'',#VAL{formidable:traitements_champ_aucun}|_T}},
+	#SET{data,#ARRAY}
 })]
 
 	[(#ENV{forcer_type}|non)
