@@ -336,3 +336,35 @@ function agenda_saisie_est_tabulaire($flux) {
 	}
 	return $flux;
 }
+
+
+/**
+ * Si on a une saisie de type événement, ajoute, si nécessaire, au tableau de déclaration de saisies la saisie _liste_attente correspondante.
+ * Utile pour les afficher_si
+ * @param $flux les saisies
+ * @return $flux les saisies modifier
+**/
+function agenda_saisies_afficher_si_js_saisies_form($flux) {
+
+	//Ne pas refaire 36 fois le calcul
+	static $old;
+	static $new;
+	if ($old == $flux) {
+		return $new;
+	}
+	$old = $flux;
+	include_spip('inc/saisies');
+	$saisies_par_type = saisies_lister_par_type($flux);
+	if (isset($saisies_par_type['evenements'])) {
+		foreach ($saisies_par_type['evenements'] as $saisie => $description) {
+			$saisie_inserer = array(
+				'saisie' => 'evenements_liste_attente',
+				'options' => array('nom'=>$saisie.'_liste_attente')
+			);
+			$flux = saisies_inserer($flux, $saisie_inserer);
+		}
+	}
+	$new = $flux;
+	return $flux;
+}
+

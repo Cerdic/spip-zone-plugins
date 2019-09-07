@@ -1,7 +1,7 @@
 <paquet
 	prefix="agenda"
 	categorie="date"
-	version="3.32.0"
+	version="3.32.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/evenement-32.png"
@@ -43,12 +43,12 @@
 	<pipeline nom="revisions_chercher_label" inclure="agenda_pipelines.php" />
 	<pipeline nom="propres_creer_chaine_url" inclure="agenda_pipelines.php" />
 	<pipeline nom="saisie_est_tabulaire" inclure="agenda_pipelines.php" />
-
+	<pipeline nom="saisies_afficher_si_js_saisies_form" inclure="agenda_pipelines.php" />
 
 	<utilise nom="Fulltext" compatibilite="[1.0.0;[" />
 	<utilise nom="mots" compatibilite="[2.4.6;[" />
 	<utilise nom="corbeille" compatibilite="[3.1.1;[" />
-	<utilise nom="saisies" compatibilite="[3.13.0;[" />
+	<utilise nom="saisies" compatibilite="[3.27.0;[" />
 	<utilise nom="verifier" compatibilite="[1.7.1;[" />
 	<utilise nom="urls" compatibilite="[1.4.12;[" />
 	<utilise nom="pages" compatibilite="[1.3.10;[" />
