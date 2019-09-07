@@ -110,7 +110,9 @@ function traiter_email_dist($args, $retours) {
 		if ($options['champ_nom']) {
 			$nom_envoyeur = formidable_raccourcis_arobases_2_valeurs_champs(
 				$options['champ_nom'],
-				$saisies
+				$saisies,
+				false,
+				''
 			);
 		}
 		if (!isset($nom_envoyeur) or !$nom_envoyeur) {
@@ -122,7 +124,8 @@ function traiter_email_dist($args, $retours) {
 			$sujet = formidable_raccourcis_arobases_2_valeurs_champs(
 				$options['champ_sujet'],
 				$saisies,
-				$options['champ_sujet_valeurs_brutes']
+				$options['champ_sujet_valeurs_brutes'],
+				''
 			);
 		}
 		if (!isset($sujet) or !$sujet) {
@@ -203,7 +206,9 @@ function traiter_email_dist($args, $retours) {
 			if ($options['sujet_accuse']) {
 				$sujet_accuse = formidable_raccourcis_arobases_2_valeurs_champs(
 					$options['sujet_accuse'],
-					$saisies
+					$saisies,
+					false,
+					''
 				);
 			}
 			if (!isset($sujet_accuse) or !$sujet_accuse) {
