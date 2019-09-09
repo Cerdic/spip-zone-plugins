@@ -74,6 +74,10 @@ function saisies_tester_condition_afficher_si($champ, $operateur=null, $valeur=n
 			return isset($champ) and $champ;
 		}
 	}
+
+	if (is_null($champ)) {
+		$champ = '';
+	}
 	// Dans tous les cas, enlever les guillemets qui sont au sein de valeur
 	//Si champ est de type string, tenter d'unserializer
 	$tenter_unserialize = @unserialize($champ);
