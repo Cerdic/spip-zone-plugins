@@ -9,6 +9,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// A
+	'afficher' => 'Display',
+
 	// B
 	'bouton_parcourir_docs_article' => 'Browse through the article',
 	'bouton_parcourir_docs_breve' => 'Browse through the news item',
@@ -28,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'construire_attention_modifie' => 'The form below is different from the initial form. You can reset it to the state before the changes.',
 	'construire_attention_supprime' => 'Your changes include deletions of fields. Please confirm the registration of the new version of the form.',
 	'construire_aucun_champs' => 'There is currently no field in this form.',
+	'construire_configurer_globales_label' => 'Configure global options',
 	'construire_confirmer_supprimer_champ' => 'Do you really want to delete this field?',
 	'construire_info_nb_champs_masques' => '@nb@ hidden field(s) the time to set up the group.',
 	'construire_position_explication' => 'Specify before which other field this one should be placed.',
@@ -39,10 +43,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'construire_verifications_aucune' => 'None',
 	'construire_verifications_label' => 'Type of verification to be performed',
 
+	// D
+	'data_cols_label' => 'Possible answers (in column)',
+	'data_rows_label' => 'Questions ( on line)',
+
 	// E
 	'erreur_generique' => 'There are errors in the fields below, please check your inputs',
 	'erreur_option_nom_unique' => 'This name is already used by another field and it must be unique in this form.',
+	'erreur_syntaxe_afficher_si' => 'Incorrect test syntax',
 	'erreur_valeur_inacceptable' => 'Entered value cannot be accepted.',
+
+	// F
+	'fichier_erreur_explication_renvoi' => 'You can send a new file again, or submit the form as is, the old file is not kept.',
 
 	// I
 	'info_configurer_saisies' => 'Test page for Entries',
@@ -51,6 +63,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_annee' => 'Year',
 	'label_jour' => 'Day',
 	'label_mois' => 'Month',
+
+	// M
+	'masquer' => 'Hide',
 
 	// O
 	'option_aff_art_interface_explication' => 'Display only the articles in the user’s language',
@@ -61,7 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_rub_interface_label' => 'Multilingual display',
 	'option_afficher_si_explication' => 'Specify the conditions to display the field based on the value of the other fields. The identifier of the other fields has to be entered between <code>@</code>. <br />Example <code>@selection_1@=="Toto"</code> conditions the display of the field only when field <code>selection_1</code> has a value of <code>Toto</code>.<br />
 It is possible to use Boolean operators <code> || </code> (or) and <code> && </code> (and).<br/>
-You will find <a href="https://contrib.spip.net/5080" target="_blank">full documentation of the syntax on spip-contrib</a>.', # MODIF
+You will find <a href="https://contrib.spip.net/5080" target="_blank">full documentation of the syntax on spip-contrib</a>.',
 	'option_afficher_si_label' => 'Conditional display',
 	'option_afficher_si_remplissage_uniquement_explication' => 'By checking this box, the conditional display will only apply when filling in the form, not when displaying the results.',
 	'option_afficher_si_remplissage_uniquement_label' => 'Only when filling the form',
@@ -74,6 +89,8 @@ You will find <a href="https://contrib.spip.net/5080" target="_blank">full docum
 	'option_autocomplete_off' => 'Disable',
 	'option_autocomplete_on' => 'Enable',
 	'option_cacher_option_intro_label' => 'Hide the first empty choice',
+	'option_case_valeur_non_explication' => 'Posted value if the checkbox is not selected. Attention, this is a technical value and not a displayed value.',
+	'option_case_valeur_oui_explication' => 'Posted value if the checkbox is selected. Attention, this is a technical value and not a displayed value.',
 	'option_choix_alternatif_label' => 'Allow to propose an alternative choice',
 	'option_choix_alternatif_label_defaut' => 'Other choice',
 	'option_choix_alternatif_label_label' => 'Label for this alternative choice',
@@ -82,7 +99,9 @@ You will find <a href="https://contrib.spip.net/5080" target="_blank">full docum
 	'option_class_label' => 'Additional CSS Classes',
 	'option_cols_explication' => 'Field width in characters. This option is not always applied/used because the CSS styles of your site may override it.',
 	'option_cols_label' => 'Width',
+	'option_conteneur_class_label' => 'Additional CSS classes on the container',
 	'option_datas_explication' => 'You need to specify a choice for each row in the form of "key|label of the choice"',
+	'option_datas_grille_explication' => 'You must indicate one choice per line in the form "key|choice label" or "key|left label|right label"',
 	'option_datas_label' => 'List of the available choices',
 	'option_datas_sous_groupe_explication' => 'You can indicate a choice by line using the format "key|Label" of the choice. <br />You can indicate the start of a subgroup using the format "*Title of the subgroup". To end a subgroup you can start another one, or put a line containing "/*".',
 	'option_defaut_label' => 'Default value',
@@ -96,6 +115,8 @@ You will find <a href="https://contrib.spip.net/5080" target="_blank">full docum
 	'option_erreur_obligatoire_label' => 'Obligation message',
 	'option_explication_explication' => 'If necessary, a short sentence describing the subject field.',
 	'option_explication_label' => 'Explanation',
+	'option_forcer_select_explication' => 'If a group of words is selected, by default it will be a radio entry. You can force the use of a select.',
+	'option_forcer_select_label_case' => 'Force the use of a select',
 	'option_groupe_affichage' => 'Display',
 	'option_groupe_description' => 'Description',
 	'option_groupe_utilisation' => 'Usage',
@@ -132,6 +153,8 @@ You will find <a href="https://contrib.spip.net/5080" target="_blank">full docum
 	'option_option_destinataire_intro_label' => 'Label of first choice empty (in list format)',
 	'option_option_intro_label' => 'Label for the first empty choice',
 	'option_option_statut_label' => 'Show the status',
+	'option_oui_non_valeur_non_explication' => 'Posted value if no is selected.',
+	'option_oui_non_valeur_oui_explication' => 'Posted value if yes is selected.',
 	'option_placeholder_label' => 'Placeholder',
 	'option_pliable_label' => 'Expandable',
 	'option_pliable_label_case' => 'The group of fields can be expanded or shrunk.',
@@ -169,6 +192,8 @@ You will find <a href="https://contrib.spip.net/5080" target="_blank">full docum
 	'saisie_case_titre' => 'Single check box',
 	'saisie_checkbox_explication' => 'Used to select several options using check boxes.',
 	'saisie_checkbox_titre' => 'Check boxes',
+	'saisie_choix_grille_explication' => 'Allows a series of multiple-choice questions to be asked in a standardized manner and in a grid format',
+	'saisie_choix_grille_titre' => 'Question grid',
 	'saisie_date_explication' => 'Used to enter a date using a calendar tool',
 	'saisie_date_titre' => 'Date',
 	'saisie_destinataires_explication' => 'Used to select one or more recipients from among the pre-selected authors.',
@@ -176,7 +201,10 @@ You will find <a href="https://contrib.spip.net/5080" target="_blank">full docum
 	'saisie_email_explication' => 'Allows to have an email type field in HTML5.',
 	'saisie_email_titre' => 'E-mail adress',
 	'saisie_explication_explication' => 'A general explanatory description.',
+	'saisie_explication_masquer_label' => 'Add a show/hide explanation button',
+	'saisie_explication_texte_label' => 'Text of the explanation',
 	'saisie_explication_titre' => 'Explanation',
+	'saisie_explication_titre_label' => 'Title of the explanation',
 	'saisie_fieldset_explication' => 'A frame which may include several fields.',
 	'saisie_fieldset_titre' => 'Fieldset',
 	'saisie_file_explication' => 'Send a file',
@@ -215,6 +243,8 @@ You will find <a href="https://contrib.spip.net/5080" target="_blank">full docum
 	'tout_selectionner' => '(Un)select all',
 
 	// V
+	'verifier_valeurs_acceptables_explication' => 'Check that the posted value is among those allowed when defining fields. Do not use this option if you dynamically fill fields in your templates or fill them with javascript.',
+	'verifier_valeurs_acceptables_label' => 'Check the acceptable values',
 	'vue_sans_reponse' => '<i>(no data entered)</i>',
 
 	// Z
