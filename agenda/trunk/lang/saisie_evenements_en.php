@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'liste_attente' => ' 	Liste d’attente',
 	'liste_attente_1' => 'Waiting list (one entry before you on the list)',
-	'liste_attente_explication' => 'If the number of available places is less than one, indicate that there is a list, and if so, how many people are on the waiting list. <br />In addition, a hidden field <champ>_liste_attente will automatically be set to "on" if a person selects an event from the waiting list. In the case of use with Formidable, this field will not be posted, but can be used in conditional field display tests.Si le nombre de place disponible est inférieur à un, indiquer qu’il y a une liste, et, le cas échéant, combien de personnes sont sur liste d’attente. <br />Par ailleurs, un champ masqué <champ>_liste_attente sera automatiquement mis à ’on’ si une personne sélectionne un évènement en liste d’attente. Dans le cas d’utilisation avec Formidable, ce champ ne sera pas posté, mais pourra être utilisé dans des test conditionnels d’affichage de champ.',
+	'liste_attente_explication' => 'If the number of available places is less than one, indicate that there is a list, and if so, how many people are on the waiting list. <br />In addition, a hidden field <champ>_liste_attente will automatically be set to "on" if a person selects an event from the waiting list. In the case of use with Formidable, this field will not be posted, but can be used in conditional field display tests.',
 	'liste_attente_label' => 'Manage the waiting list',
 	'liste_attente_label_case' => 'Indicate that there is a waiting list',
 	'liste_attente_nb' => 'Waiting list (@nb@ entries before you on the list)',
