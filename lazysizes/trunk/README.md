@@ -7,6 +7,9 @@
 
 **@todo**
 
+- [ ] Ne pas charger la lib si le navigateur supporte le lazyloading natif
+https://web.dev/native-lazy-loading, soit via le plugin fourni par la lib lazysize, soit via js…
+- [ ] Charger lazysize avant jquery, sans être compressé avec les autres scripts chargés par la pipeline (minimiser le reflow). 
 - [ ] Inclure les addons lazysizes,config depuis un squelette/plugin
 - [ ] finir de traduire la doc
 - [ ] Chaines de langue, et docs/aide des addons
