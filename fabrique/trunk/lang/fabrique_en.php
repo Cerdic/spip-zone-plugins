@@ -14,18 +14,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aide_creation_peupler_table' => 'Support for the creation of a table settlement
 ',
 	'aide_creation_squelette_fabrique' => 'Support to the creation of skeletons Fabrique',
-	'autorisation_administrateur' => 'To be at least full administrator 
-', # MODIF
-	'autorisation_administrateur_restreint' => 'To be at least restricted administrator
-', # MODIF
+	'autorisation_administrateur' => '≥ full administrator 
+',
+	'autorisation_administrateur_restreint' => '≥ restricted administrator
+',
+	'autorisation_auteur_objet' => '≥ Author of the object',
 	'autorisation_defaut' => 'By default  (@defaut@)',
 	'autorisation_jamais' => 'Never',
-	'autorisation_redacteur' => 'To be at least editor', # MODIF
+	'autorisation_redacteur' => '≥ Editor',
 	'autorisation_toujours' => 'Always',
-	'autorisation_webmestre' => 'To be webmaster', # MODIF
-	'avertissement_champs' => 'Do not insert here the primary key (@id_objet@),
-		
-nor any special fields (id_rubrique, lang, etc.) proposed in the next section.', # MODIF
+	'autorisation_webmestre' => 'Webmaster',
+	'avertissement_champs' => 'Do not insert the primary key (@id_objet@) here,
+nor any of the special fields (id_rubric, language, etc.) proposed in the "Special Fields" section or in the " Linkage " sections. ',
 
 	// B
 	'bouton_ajouter_champ' => 'Add a field',
@@ -190,7 +190,7 @@ you must complete certain information below.',
 	// I
 	'image_supprimee' => 'The image has been removed',
 	'insertion_code_explication' => 'This section allows you to insert code in parts provided by la Fabrique. Be careful though that this code is still valid!
-	', # MODIF
+	',
 
 	// L
 	'label_auteur' => 'Author Name',
@@ -213,7 +213,7 @@ you must complete certain information below.',
 	'label_champ_langues' => 'Language administration',
 	'label_champ_langues_explication' => 'Add fields to manage the languages of the object (lang and langue_choisie) and translations (id_trad)?',
 	'label_champ_plan_rubrique' => 'List the object in the sitemap?',
-	'label_champ_rubriques' => 'id_rubrique', # MODIF
+	'label_champ_rubriques' => 'This object is a direct child of a section?',
 	'label_champ_rubriques_explication' => 'Enables to allocate this item to a section',
 	'label_champ_statut' => 'Field <strong>statut</strong>',
 	'label_champ_statut_explication' => 'Allows the use of publication status (proposed to publication, published, trash ...)',
