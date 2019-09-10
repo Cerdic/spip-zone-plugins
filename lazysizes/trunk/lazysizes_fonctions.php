@@ -145,7 +145,6 @@ function filtre_unlazy_dist($flux){
  * @param $fichier
  * @return string
  */
-
 function titrer_document($fichier) {
 	$titre = substr($fichier, 0, strrpos($fichier, '.')); // Enlever l'extension du nom du fichier
 	$titre = preg_replace(',[[:punct:][:space:]]+,u', ' ', $titre);
