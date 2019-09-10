@@ -1,4 +1,4 @@
-<BOUCLE_document (DOCUMENTS) {id_document} {mode?} {tout}>
+<BOUCLE_document (DOCUMENTS) {id_document ?} {mode?} {tout}>
 [(#REM)
 <!--
 	Modele pour <img>
@@ -8,22 +8,22 @@
 
 	Si un lien est passe #ENV{lien} on ajoute le a href
 	ou on truque le #URL_DOCUMENT
-	
+
 	Si une code de langue est passe #ENV{langue} ex: <img12|langue=en>
 	on ajoute l'attribut lang la balise img et eventuellement sur la balise a
-	
-	Dans le cas mode "image ou vignette", le contenu de l'attribut 
-	alt et title se construit selon le schema suivant : 
-	- prend la valeur de alt passe en environnement par le biais 
+
+	Dans le cas mode "image ou vignette", le contenu de l'attribut
+	alt et title se construit selon le schema suivant :
+	- prend la valeur de alt passe en environnement par le biais
 	d'un parametre sur la balise ex: <img12|alt=xxx>
 	- sinon on prend le titre
 	- sinon si #ENV{lien} est passe on prend #ENV{lien} ou Document si lien vers #URL_DOCUMENT
 	- sinon alt vide
-	
-	Dans le cas mode "document", le contenu de l'attribut 
-	alt et title se construit selon le même schema a ceci pres
+
+	Dans le cas mode "document", le contenu de l'attribut
+	alt et title se construit selon le mï¿½me schema a ceci pres
 	qu'on ajoute #TYPE_DOCUMENT - #TAILLE
-	sauf si #ENV{lien} est passe	
+	sauf si #ENV{lien} est passe
 -->
 ]
 [(#SET{
@@ -45,7 +45,7 @@ image complete ?
 ][(#REM)<!--
 
 sinon logo document + lien + alt + title etc
-pas de lazyloading sur les logos 
+pas de lazyloading sur les logos
 -->
 ][(#GET{image}|non)
 	[(#SET{fichier,[(#LOGO_DOCUMENT|extraire_attribut{src})]})]
