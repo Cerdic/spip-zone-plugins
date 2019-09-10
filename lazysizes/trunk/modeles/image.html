@@ -1,34 +1,35 @@
-<BOUCLE_tous (DOCUMENTS types_documents) {id_document=#ID} {tout}>[
+<BOUCLE_tous (DOCUMENTS types_documents) {id_document=#ID} {tout}>[(#REM)<!--
 
-(#REM) Cas <imageXX> : equivalent a <imgXX> pour une image en mode image
-
-][(#INCLUS|=={image}|et{#ENV{emb,''}|non}|oui)
+	Cas <imageXX> : equivalent a <imgXX> pour une image en mode image
+-->]
+[(#SET{alt,#ENV{alt, #TITRE|attribut_html}})]
+[(#SET{transparent,[(#CHEMIN{rien.gif}|embarque_fichier)]})]
+[(#SET{url,#ENV{lien}})]
+[(#INCLUS|=={image}|et{#ENV{emb,''}|non}|oui)
 <span class='spip_document_#ID_DOCUMENT spip_documents[ (#ENV{align})][ (#ENV{class})] spip_lien_ok'[
 	 style='float:(#ENV{align}|match{left|right});']>[
-	<a href="(#ENV{lien})"[
+	<a href="(#GET{url})"[
 		class="(#ENV{lien_class})"]>]<img src='#URL_DOCUMENT'[
 		width="(#LARGEUR|?{#LARGEUR})"][
 		height="(#HAUTEUR|?{#HAUTEUR})"][
-		title="(#TITRE|attribut_html)"]
-		alt="[(#TITRE|attribut_html)]">[(#ENV{lien}|?{</a>})]</span>
-][
+		title="(#TITRE|attribut_html)"][
+		alt="(#GET{alt})"]>[(#GET{url}|?{</a>})]</span>
+][<!--
 
 (#REM) Cas <embXX> : on est appele ici avec emb=' ' : on veut la legende
 equivalent a un <docXX> pour une image en mode image
 
-][(#INCLUS|=={image}|et{#ENV{emb,''}|oui}|oui)
-#SET{fichier,#URL_DOCUMENT}
-#SET{width,#LARGEUR}
-#SET{height,#HAUTEUR}
-#SET{url,#ENV{lien}}
-<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{align})][ (#ENV{class})] spip_lien_ok'[
-	style='float:(#ENV{align}|match{left|right});[width:(#GET{width}|max{120})]px;'][
+ -->][(#INCLUS|=={image}|et{#ENV{emb,''}|oui}|oui)
+#SET{fichier, #LOGO_DOCUMENT|extraire_attribut{src} }
+#SET{width, #LOGO_DOCUMENT|extraire_attribut{width} }
+#SET{height, #LOGO_DOCUMENT|extraire_attribut{height} }
+<figure class="spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{align})][ (#ENV{class})] spip_lien_ok"[
+	style='float:(#ENV{align}|match{left|right});[width:(#GET{width}|max{120})px;]'][
 	(#TITRE|ou{#DESCRIPTIF}|ou{#CREDITS}|oui)role="group"]>
 	[<a href="(#GET{url})"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|attribut_html)]'[ type="(#ENV{lien}|?{#ENV{lien_mime},#MIME_TYPE})"]>]
-	<noscript><img src='#GET{fichier}' [ width="(#GET{width})"][ height="(#GET{height})"] alt="[(#TITRE|texte_backend)]"[ title="(#TITRE|texte_backend)"] itemprop="image" /></noscript>
-	<img data-src='#GET{fichier}' class="lazyload" alt='' width='#GET{width}' height='#GET{height}'>[(#GET{url}|?{</a>})][
-	(#TITRE|ou{#DESCRIPTIF}|ou{#CREDITS}|oui)
-	<INCLURE{fond=modeles/inc_figcaption,titre=#TITRE,descriptif=#DESCRIPTIF,credits=#CREDITS,width=#GET{width}}>]
+	<noscript><img src='#GET{fichier}' [ width="(#GET{width})"][ height="(#GET{height})"] alt="#GET{alt}"[ title="(#TITRE|texte_backend)"] itemprop="image" /></noscript>
+	<img src="#GET{transparent}" class="lazyload"[ data-src="(#GET{fichier})"][ alt="(#GET{alt})"][ width="(#GET{width})"][ height="(#GET{height})"]  itemprop="image" >[(#GET{url}|?{</a>})]
+	<INCLURE{fond=modeles/inc_figcaption}{titre=#TITRE}{descriptif=#DESCRIPTIF}{credits=#CREDITS}{width=#GET{width}} />
 </figure>
 ][
 
@@ -39,7 +40,7 @@ pourquoi embed le svg si on ne fait pas de fallback -->
 <figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{align})]'[
 style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})'][
 (#TITRE|ou{#DESCRIPTIF}|ou{#CREDITS}|oui)role="group"]>
-	<object data='#URL_DOCUMENT' 
+	<object data='#URL_DOCUMENT'
 		type='#MIME_TYPE'[
 		width='(#ENV{largeur}?{'', #LARGEUR})'][
 		height='(#ENV{hauteur}?{'', #HAUTEUR})']
