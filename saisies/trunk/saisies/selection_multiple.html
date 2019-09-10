@@ -1,7 +1,7 @@
-[(#REM) 
+[(#REM)
 
   ### /!\ boucle POUR (spip Bonux) ###
-	
+
   Parametres :
 	- ** data : tableau de donnees
                liste simple : cle=>valeur
@@ -11,14 +11,14 @@
   - class : classe(s) css ajoutes au select
   - defaut : valeur par defaut si pas présente dans l'environnement
   - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
-  
+
   Exemple d'appel :
 	[(#SAISIE{selection_multiple,produits,
 		label=<:plugin:info_produits:>,
 		data=#ARRAY{
 			cle1,valeur1,
 			cle2,valeur2,
-			cle3,valeur3}})] 
+			cle3,valeur3}})]
 ]
 
 [(#REM) data peut être une chaine qu'on sait décomposer ]
@@ -37,11 +37,11 @@
 	<B_cond>
 	<optgroup label="#CLE">
 	<BOUCLE_cond(CONDITION){si #VALEUR|is_array}><BOUCLE_optgroup(POUR){tableau #VALEUR}>
-		<option value="#CLE" [(#CLE|in_any{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui) selected="selected"][(#CLE|in_any{#GET{disabled}}|oui) disabled="disabled"]>#VALEUR</option>
+		<option value="#CLE" [(#CLE|in_any{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui) selected="selected"][(#CLE|in_any{#GET{disabled}}|oui) disabled="disabled"]>[(#VALEUR|extraire_idiome)]</option>
 	</BOUCLE_optgroup></BOUCLE_cond>
 	</optgroup>
 	</B_cond>
-	<option value="#CLE" [(#CLE|in_any{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui) selected="selected"][(#CLE|in_any{#GET{disabled}}|oui) disabled="disabled"]>#VALEUR</option>
+	<option value="#CLE" [(#CLE|in_any{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui) selected="selected"][(#CLE|in_any{#GET{disabled}}|oui) disabled="disabled"]>[(#VALEUR|extraire_idiome)]</option>
 	<//B_cond>
 </BOUCLE_selection>
 </select>

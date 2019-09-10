@@ -47,7 +47,7 @@
 		<tr>
 			<td></td>
 			<BOUCLE_colonnes_entete (DATA) {source table,#GET{data_cols}}>
-			<th scope="col">#VALEUR</th>
+			[<th scope="col">(#VALEUR|extraire_idiome)</th>]
 			</BOUCLE_colonnes_entete>
 			<td></td>
 		</tr>
@@ -58,7 +58,7 @@
 		<B_colonnes>
 		<tr>
 			#SET{libelles, #VALEUR|explode{'|'}}
-			<th scope="row">[(#GET{libelles}|table_valeur{0})]</th>
+			<th scope="row">[(#GET{libelles}|table_valeur{0}|extraire_idiome)]</th>
 			<BOUCLE_colonnes (DATA) {source table,#GET{data_cols}}>
 			<td>
 				#SET{type, radio}

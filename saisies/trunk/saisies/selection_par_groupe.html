@@ -1,7 +1,7 @@
-[(#REM) 
+[(#REM)
 
   ### /!\ boucle POUR (spip Bonux) ###
-	
+
   Parametres :
   - ** data : tableau de donnees groupe=>array(cle=>valeur)
   - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
@@ -9,7 +9,7 @@
   - class : classe(s) css ajoutes au select
   - defaut : valeur par defaut si pas présente dans l'environnement
   - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
-  
+
   Exemple d'appel :
 	[(#SAISIE{selection_par_groupe,produits,
 		label=<:plugin:info_produits:>,
@@ -21,14 +21,14 @@
 			groupe 2,#ARRAY{
 				cle4,valeur1,
 				cle5,valeur2,
-				cle6,valeur3}}})] 
+				cle6,valeur3}}})]
 ]
 <select name="#ENV{nom}" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ (#ENV*{attributs})]>
 [(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
 <BOUCLE_groupes(POUR){tableau #ENV*{data, #ENV*{datas}}}>
 	<optgroup label="[(#CLE|attribut_html)]">
 		<BOUCLE_selection(POUR){tableau #VALEUR}>
-			<option value="#CLE" [(#CLE|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>#VALEUR</option>
+			<option value="#CLE" [(#CLE|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>[(#VALEUR|extraire_idiome)]</option>
 		</BOUCLE_selection>
 	</optgroup>
 </BOUCLE_groupes>

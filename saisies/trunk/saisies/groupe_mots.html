@@ -1,4 +1,4 @@
-[(#REM) 
+[(#REM)
 
   Parametres :
   - class : classe(s) css ajoutes au select
@@ -18,7 +18,7 @@
 	[(#SAISIE{groupe_mots,groupes,
 		label=<:plugin:secteur_region:>,
 		multiple=oui,
-		table_liaison=articles})] 
+		table_liaison=articles})]
 ]
 <select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"][ (#ENV*{attributs})]>
 	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)

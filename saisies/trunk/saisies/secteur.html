@@ -1,4 +1,4 @@
-[(#REM) 
+[(#REM)
 
   Parametres :
   - class : classe(s) css ajoutes au select
@@ -11,11 +11,11 @@
   - defaut : valeur par defaut si pas présente dans l'environnement
   - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
   - size : la taille du sélecteur (seulement si multiple)
-	 
+
   Exemple d'appel :
 	[(#SAISIE{secteur,secteur_region,
 		label=<:plugin:secteur_region:>,
-		multiple=oui})] 
+		multiple=oui})]
 ]
 <select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple"[ size="(#ENV{size})"]][ disabled="(#ENV{disable})"][ (#ENV*{attributs})]>
 	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)

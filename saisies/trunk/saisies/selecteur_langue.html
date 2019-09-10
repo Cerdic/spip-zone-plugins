@@ -1,13 +1,13 @@
-[(#REM) 
-	
+[(#REM)
+
   Parametres :
   - class : classe(s) css ajoutes au select
   - defaut : valeur par defaut si pas présente dans l'environnement
   - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
-  
+
   Exemple d'appel :
 	[(#SAISIE{selecteur_langue,lang,
-		label=<:plugin:info_langue:>})] 
+		label=<:plugin:info_langue:>})]
 ]
 [(#SET{valeur,[(#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,''}}})]})]
 [(#SET{langues,[(#VAL{changer_lang}|liste_options_langues{#GET{valeur}})]})]

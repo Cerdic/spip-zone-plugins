@@ -24,7 +24,7 @@
 <div class="choix[ (#ENV{class})]">
 	[(#ENV{disable}|non)<input type="hidden" name="#ENV{nom}" value="#ENV{valeur_non,''}" />]
 	<input type="checkbox" name="#ENV{nom}" class="checkbox" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[(#GET{valeur}|=={#ENV{valeur_oui,on}}|oui) checked="checked"] value="#ENV{valeur_oui,on}" [ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ aria-describedby="(#ENV{describedby})"][ (#ENV*{attributs})][(#HTML5|et{#ENV{obligatoire}}|et{ #ENV{obligatoire}|!={non} }|oui) required="required"]/>
-	[<label for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[(#GET{valeur}|=={#ENV{valeur_oui,on}}|oui)class="on"]>(#ENV*{label_case})</label>]
+	[<label for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[(#GET{valeur}|=={#ENV{valeur_oui,on}}|oui)class="on"]>(#ENV*{label_case}|extraire_idiome)</label>]
 	[(#ENV{disable_avec_post}|et{#ENV{disable_avec_post}|!={non}}|oui)
 		<input type="hidden" name="#ENV{nom}" value="#GET{valeur}" />
 	]

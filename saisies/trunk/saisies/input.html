@@ -55,8 +55,8 @@
 [(#SET{list_id,[(#GET{list_id,[champ_(#ENV{nom})_data]})]})]
 <datalist id="#GET{list_id}">
 <BOUCLE_selection(POUR){tableau #GET{data}}>
-  [<option value="(#GET{data_is_sequential}|?{#VALEUR,#CLE}|attribut_html)">[(#VALEUR|attribut_html)]</option>]
+  [<option value="(#GET{data_is_sequential}|?{#VALEUR,#CLE}|attribut_html)">[(#VALEUR|extraire_idiome|attribut_html)]</option>]
 </BOUCLE_selection>
 </datalist>
 </B_selection>
-<input type="#GET{type}" name="#ENV{nom}" class="#GET{type}[ (#ENV{class})]" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ list="(#GET{list_id})"][ value="(#ENV{cle_secrete}|?{'',#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}})"][ size="(#ENV{size})"][ maxlength="(#ENV{maxlength})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ placeholder="(#GET{placeholder})"][(#HTML5|oui)[(#ENV{obligatoire}|et{#ENV{obligatoire}|!={non}}|oui) required="required"][ min="(#ENV{min})"][ max="(#ENV{max})"][ step="(#ENV{step})"][(#ENV{autofocus}|et{#ENV{autofocus}|!={non}}|oui) autofocus="autofocus"]][(#GET{val_autocomplete}|find{#ENV{autocomplete}}|oui) autocomplete="#ENV{autocomplete}"][ aria-describedby="(#ENV{describedby})"][ (#ENV*{attributs})] />
+<input type="#GET{type}" name="#ENV{nom}" class="#GET{type}[ (#ENV{class})]" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ list="(#GET{list_id})"][ value="(#ENV{cle_secrete}|?{'',#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|extraire_idiome)"][ size="(#ENV{size})"][ maxlength="(#ENV{maxlength})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ placeholder="(#GET{placeholder})"][(#HTML5|oui)[(#ENV{obligatoire}|et{#ENV{obligatoire}|!={non}}|oui) required="required"][ min="(#ENV{min})"][ max="(#ENV{max})"][ step="(#ENV{step})"][(#ENV{autofocus}|et{#ENV{autofocus}|!={non}}|oui) autofocus="autofocus"]][(#GET{val_autocomplete}|find{#ENV{autocomplete}}|oui) autocomplete="#ENV{autocomplete}"][ aria-describedby="(#ENV{describedby})"][ (#ENV*{attributs})] />
