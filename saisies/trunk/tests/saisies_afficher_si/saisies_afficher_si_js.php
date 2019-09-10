@@ -40,6 +40,55 @@
 			'label_case' => _T('profil:champ_config_activer_organisation_label_case'),
 		),
 	);
+
+	$groupe_contact = array(
+			'saisie' => 'fieldset',
+			'options' => array(
+				'nom' => 'groupe_contact',
+				'label' => _T('profil:champ_groupe_contact_label'),
+			),
+			'saisies' => array(),
+	);
+	$groupe_contact['saisies'][] = array(
+			'saisie' => 'case',
+			'options' => array(
+				'nom' => 'config[activer_contact]',
+				'conteneur_class' => 'pleine_largeur',
+				'label_case' => _T('profil:champ_config_activer_contact_label_case'),
+			),
+		);
+
+	$groupe_contact['saisies'][] = array(
+		'saisie' => 'choix_grille',
+		'options' => array(
+			'nom' => 'config[contact]',
+			'caption' => _T('profil:champ_config_contact_caption'),
+			'conteneur_class' => 'pleine_largeur',
+			'multiple' => 'oui',
+			'afficher_si' => '@config[activer_contact]@ == "on"',
+		),
+	);
+	// Coordoonnées pour le contact si plugin idoine ET configuré
+	$groupe_contact['saisies'][] = array(
+		'saisie' => 'case',
+		'options' => array(
+			'nom' => 'config[activer_coordonnees_contact]',
+			'label_case' => _T('profil:champ_config_activer_coordonnees_contact_label_case'),
+			'conteneur_class' => 'pleine_largeur',
+			'afficher_si' => '@config[activer_contact]@ == "on"',
+		),
+	);
+	$groupe_contact['saisies'][] = array(
+		'saisie' => 'profil_coordonnees',
+		'options' => array(
+			'nom' => 'config[coordonnees][contact]',
+			'conteneur_class' => 'pleine_largeur',
+			'caption' => _T('profil:champ_config_coordonnees_contact_caption'),
+			'afficher_si' => '@config[activer_contact]@ == "on" && @config[activer_coordonnees_contact]@ == "on"',
+			'caption_explication' => _T('profil:champ_config_coordonnees_explication'),
+		),
+	);
+	$saisies_form[] = $groupe_contact;
 	// hop ! on y va
 	//
 	$err = tester_fun($f, essais_saisies_afficher_si_js($saisies_form));
@@ -122,7 +171,7 @@
 				2 => $saisies_form
 			),
 			'sous_champ+config' => array(
-				'0' => '$(form).find(&quot;.checkbox[name=\'config[activer_organisation]\']&quot;).is(\':checked\') ? $(form).find(&quot;.checkbox[name=\'config[activer_organisation]\']&quot;).val() : \'\'',
+				'0' => '($(form).find(&quot;.checkbox[name=\'config[activer_organisation]\']&quot;).is(\':checked\') ? $(form).find(&quot;.checkbox[name=\'config[activer_organisation]\']&quot;).val() : \'\') == &quot;on&quot;',
 				'1' => '@config[activer_organisation]@ == "on"',
 				'2' => $saisies_form
 			),
@@ -140,6 +189,16 @@
 				0 => '$(form).find(&quot;.checkbox[name=\'case_1\']&quot;).is(\':checked\') ? $(form).find(&quot;.checkbox[name=\'case_1\']&quot;).val() : \'\'',
 				1 => '@case_1@',
 				2 => $saisies_form
+			),
+			'case_on' => array(
+					'0' => '($(form).find(&quot;.checkbox[name=\'case_1\']&quot;).is(\':checked\') ? $(form).find(&quot;.checkbox[name=\'case_1\']&quot;).val() : \'\') == &quot;on&quot;',
+					'1' => '@case_1@== "on"',
+					'2' => $saisies_form
+			),
+			'plusieurs_case_on' => array(
+					'0' => '($(form).find(&quot;.checkbox[name=\'config[activer_contact]\']&quot;).is(\':checked\') ? $(form).find(&quot;.checkbox[name=\'config[activer_contact]\']&quot;).val() : \'\') == &quot;on&quot; && ($(form).find(&quot;.checkbox[name=\'config[activer_coordonnees_contact]\']&quot;).is(\':checked\') ? $(form).find(&quot;.checkbox[name=\'config[activer_coordonnees_contact]\']&quot;).val() : \'\') == &quot;on&quot;',
+					'1' => '@config[activer_contact]@ == "on" && @config[activer_coordonnees_contact]@ == "on"',
+					'2' => $saisies_form
 			),
 			'hack' => array(
 				0 => '',
