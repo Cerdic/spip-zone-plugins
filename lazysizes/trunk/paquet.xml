@@ -1,12 +1,12 @@
 <paquet
 	prefix="lazysizes"
 	categorie="outil"
-	version="4.1.7.0"
+	version="4.1.7.1"
 	schema="0.0.1"
 	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/lazysizes-32.png"
-	documentation="http://afarkas.github.io/lazysizes/"
+	documentation="https://contrib.spip.net/Lazysizes"
 >
 	<nom>LazySizes</nom>
 
