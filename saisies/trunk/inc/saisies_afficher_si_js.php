@@ -41,7 +41,7 @@ function saisies_afficher_si_js($condition, $saisies_form = array()) {
 			$plugin = saisies_afficher_si_evaluer_plugin($champ, $negation);
 			if ($plugin !== '') {
 				$condition = str_replace($expression, $plugin ? 'true' : 'false', $condition);
-			} elseif (stripos($champ, 'config') !== false) {
+			} elseif (stripos($champ, 'config:') !== false) {
 				$config = saisies_afficher_si_get_valeur_config($champ);
 				$test_modifie = eval('return '.saisies_tester_condition_afficher_si($config, $operateur, $valeur, $negation).';') ? 'true' : 'false';
 				$condition = str_replace($expression, $test_modifie, $condition);

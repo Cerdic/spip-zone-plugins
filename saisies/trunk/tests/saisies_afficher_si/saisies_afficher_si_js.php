@@ -32,6 +32,14 @@
 				'options' => array('nom' => $saisie)
 			);
 	}
+	$saisies_form[] = array(
+		'saisie' => 'case',
+		'options' => array(
+			'nom' => 'config[activer_organisation]',
+			'conteneur_class' => 'pleine_largeur',
+			'label_case' => _T('profil:champ_config_activer_organisation_label_case'),
+		),
+	);
 	// hop ! on y va
 	//
 	$err = tester_fun($f, essais_saisies_afficher_si_js($saisies_form));
@@ -112,6 +120,11 @@
 				0 => '($(form).find(\'[name=&quot;checkbox_1[]&quot;][value=&quot;toto&quot;]\').is(\':checked\') || $(form).find(\'[name=&quot;checkbox_1[]&quot;][value=&quot;tata&quot;]\').is(\':checked\'))',
 				1 => '@checkbox_1@ IN \'toto,tata\'',
 				2 => $saisies_form
+			),
+			'sous_champ+config' => array(
+				'0' => '$(form).find(&quot;.checkbox[name=\'config[activer_organisation]\']&quot;).is(\':checked\') ? $(form).find(&quot;.checkbox[name=\'config[activer_organisation]\']&quot;).val() : \'\'',
+				'1' => '@config[activer_organisation]@ == "on"',
+				'2' => $saisies_form
 			),
 			'radio_egal' => array(
 				0 => '$(form).find(&quot;[name=\'radio_1\']:checked&quot;).val() == \'toto\'',
