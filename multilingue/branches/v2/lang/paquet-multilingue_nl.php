@@ -14,12 +14,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	Deze plugin forceert de installatie van meerdere plugins
 	
-	- [Traduction entre rubriques->https://plugins.spip.net/tradrub.html]
 	- [Langue préférée par l’internaute ->https://contrib.spip.net/Plugin-Langue-preferee-par-l-internaute]
-	- [Traductions de rubriques autrement->https://contrib.spip.net/Traductions-de-rubriques-autrement-3]
-	- [Traductions d’articles autremen->https://contrib.spip.net/Traductions-d-articles-autrement-3]
-	
-	In Spip 2 of 2.1 wordt aanbevolen om eerst de plugin [Step->https://contrib.spip.net/STEP-Systeme-de-Telechargements-de-Plugins] te installeren voordat deze plugin wordt geactiveerd. Deze zal oo kde nodige plugins installeren.
+	- [Interface de traduction pour objets->https://plugins.spip.net/interface_traduction_objets.html]
+	- [Secteur par langue->https://plugins.spip.net/secteur_langue.html]
 	
 	De plugin past enkele skeletten aan (van rubrieken en artikelen) alsmede enkele basisonderdelen.
 	
