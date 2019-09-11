@@ -20,7 +20,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_gis(GIS){id_gis ?}{id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{id_mot ?}{id_auteur ?}{id_syndic ?}{where?}{recherche?}{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_gis(GIS){id_gis ?}{objet ?}{id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{id_mot ?}{id_auteur ?}{id_syndic ?}{pays ?}{code_pays ?}{region ?}{code_postal ?}{ville ?}{where?}{recherche?}{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][(#ID_GIS|=={#ENV{id_lien_ajoute}}|oui)append]">
 			<td class='#EDIT{titre} titre principale'>[(#LOGO_GIS|image_reduire{20,20})]<a href="[(#ID_GIS|generer_url_entite{gis})]"
 				title="<:gis:texte_voir_gis:>">[(#TITRE|sinon{<:ecrire:info_sans_titre:>})]</a></td>
