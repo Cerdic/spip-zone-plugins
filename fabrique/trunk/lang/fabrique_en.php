@@ -16,14 +16,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aide_creation_squelette_fabrique' => 'Support to the creation of skeletons Fabrique',
 	'autorisation_administrateur' => '≥ full administrator 
 ',
+	'autorisation_administrateur_explication' => 'Be at least a full administrator.',
 	'autorisation_administrateur_restreint' => '≥ restricted administrator
 ',
+	'autorisation_administrateur_restreint_explication' => 'Be at least a restricted administrator (regardless of the section).',
+	'autorisation_administrateur_restreint_objet' => '≥ Restricted administrator + section',
+	'autorisation_administrateur_restreint_objet_explication' => 'Be at least a restricted administrator of the section (requires a field id_rubrique).',
 	'autorisation_auteur_objet' => '≥ Author of the object',
+	'autorisation_auteur_objet_explication' => 'Be the author of the object or at least a full administrator (or restricted if the object has the id_rubric field).',
+	'autorisation_auteur_objet_statut' => '≥ Author of the object unless published',
+	'autorisation_auteur_objet_statut_explication' => 'Be the author of the object unless the object is published
+(requires status management) or at least a full administrator (or restricted if the object has the id_rubrique field).',
 	'autorisation_defaut' => 'By default  (@defaut@)',
 	'autorisation_jamais' => 'Never',
+	'autorisation_jamais_explication' => 'Always return no!',
 	'autorisation_redacteur' => '≥ Editor',
+	'autorisation_redacteur_explication' => 'Be at least an editor (whether or not you are the author of the object).',
 	'autorisation_toujours' => 'Always',
+	'autorisation_toujours_explication' => 'Always return yes!',
 	'autorisation_webmestre' => 'Webmaster',
+	'autorisation_webmestre_explication' => 'Be webmaster on the site.',
 	'avertissement_champs' => 'Do not insert the primary key (@id_objet@) here,
 nor any of the special fields (id_rubric, language, etc.) proposed in the "Special Fields" section or in the " Linkage " sections. ',
 
@@ -124,6 +136,8 @@ functional and sustainable plugins!
 	'chaine_titre_objet_feminin' => '@mtype@',
 	'chaine_titre_objets' => '@mobjets@',
 	'chaine_titre_objets_feminin' => '@mobjets@',
+	'chaine_titre_objets_lies_objet' => 'Linked to this @type@',
+	'chaine_titre_objets_lies_objet_feminin' => 'Linked to this @type@',
 	'chaine_titre_objets_rubrique' => '@mobjets@ of this section',
 	'chaine_titre_objets_rubrique_feminin' => '@mobjets@ of this section',
 	'champ_ajoute' => 'A field was added',
@@ -146,7 +160,7 @@ functional and sustainable plugins!
 	'echappement_inclure' => '&lt;INCLURE',
 	'echappement_parentheses' => '( )',
 	'echappement_php' => '&lt; ?php',
-	'echappement_tag_boucle' => '&lt; from loop', # RELIRE
+	'echappement_tag_boucle' => '&lt; of loop',
 	'erreur_chargement_fichier' => 'The uploaded file could not be understood. The restoration is not done.',
 	'erreur_copie_sauvegarde' => 'The backup of @dir@ could not be performed. By precaution the plugin has not been regenerated.
 		The probable cause is the lack of sufficient rights on this source directory on the server.',
@@ -193,6 +207,10 @@ you must complete certain information below.',
 	',
 
 	// L
+	'label_afficher_liens' => 'Display the different liaisons on the view of your object?',
+	'label_afficher_liens_explication' => 'You can list the objects (selected above) that are linked to your object in the view of your object.
+Note: it is possible that these lists do not work perfectly, displaying all the objects, instead of only those related to yours;
+you will then have to overload the list file used (prive/objets/liste/xxx.html) to add an additional criterion `{xxx_liens.id_xxx ?}`.',
 	'label_auteur' => 'Author Name',
 	'label_auteur_lien' => 'URL to the author',
 	'label_auteurs_liens' => 'Liase authors?',
@@ -245,6 +263,8 @@ automatically on all prefixed field id_ and the primary key of an editorial obje
 	'label_colonne_sql' => 'SQL Column',
 	'label_colonne_sql_explication' => 'A field name for SQL. Example "post_scriptum"',
 	'label_compatibilite' => 'Compatibility',
+	'label_credits_logo_texte' => 'Logo Credits',
+	'label_credits_logo_url' => 'URL for credits',
 	'label_definition_sql' => 'SQL Definition',
 	'label_description' => 'Description',
 	'label_documentation_url' => 'Documentation (url)',
@@ -263,7 +283,7 @@ automatically on all prefixed field id_ and the primary key of an editorial obje
 	'label_fichier_sauvegarde_ordinateur' => 'On your computer',
 	'label_fichier_sauvegarde_serveur' => 'On the server',
 	'label_fichiers' => 'Files',
-	'label_fichiers_echafaudes' => 'scaffolded files', # RELIRE
+	'label_fichiers_echafaudes' => 'Scaffolded files',
 	'label_fichiers_explicites' => 'specific files',
 	'label_formulaire_configuration' => 'configuration form?',
 	'label_formulaire_configuration_titre' => 'Title of the configuration page',
@@ -276,6 +296,11 @@ automatically on all prefixed field id_ and the primary key of an editorial obje
 	'label_inserer_administrations_maj' => 'Complete <code>$maj</code> in the function <code>upgrade()</code>',
 	'label_inserer_base_tables_fin' => 'At the end of the file to insert new functions',
 	'label_inserer_paquet' => 'At dependencies level',
+	'label_liaison_directe' => 'This object is a direct child of another object?',
+	'label_liaison_directe_explication' => 'Allows you to assign this object to another parent object.
+This object will integrate in its table the primary key of the parent object selected here.
+These objects will be listed on the parent object’s master record.
+An entry must exist for the parent object thus selected.',
 	'label_libelle' => 'Wording',
 	'label_libelle_champ_explication' => 'A field name for humans.
  Example « Post-Scriptum »',
@@ -336,6 +361,11 @@ By default the same name as the source table.',
 	'label_vue_liens' => 'Allow to capture the links on these objects?',
 	'label_vue_liens_explication' => 'Add an edit form of links on objects:',
 	'legend_autorisations' => 'Authorizations',
+	'legend_autorisations_explication' => 'Allows you to define for certain actions on the editorial object,
+such as its modification, the authorization tests that will be performed. They may depend on
+the status of the author, the section where the object belongs (if it has the id_rubrique field),
+or the status of the object itself (if it is already published or not).
+The authorization of <code>creer</code> does not have all the options.',
 	'legend_chaines_langues' => 'language chains',
 	'legend_champs' => 'Fields',
 	'legend_champs_speciaux' => 'Special fields',
@@ -352,7 +382,10 @@ By default the same name as the source table.',
 	'legend_insertion_code' => 'Code insertion',
 	'legend_installation' => 'Installation',
 	'legend_langues_et_traductions' => 'Langs and translations',
+	'legend_liaison_directe_autre_objet' => 'On another editorial object',
 	'legend_liaisons_auteurs_liens' => 'spip_auteurs_liens',
+	'legend_liaisons_directes' => 'Direct links',
+	'legend_liaisons_indirectes' => 'Indirect links',
 	'legend_liaisons_objet_liens' => 'spip_@objet@_liens',
 	'legend_logo' => 'Logos',
 	'legend_logo_specifiques' => 'Specific Logos',
