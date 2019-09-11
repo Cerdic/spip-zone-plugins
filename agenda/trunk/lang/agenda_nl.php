@@ -127,7 +127,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nb_repetitions' => '@nb@ herhalingen',
+	'notification_propose_detail' => 'Evenement "@titre@" wordt ter publicatie voorgesteld sinds',
+	'notification_propose_sujet' => '[@nom_site_spip@] Voorgesteld: @titre@',
 	'notification_propose_titre' => 'Voorgesteld evenement',
+	'notification_publie_detail' => 'Evenement "@titre@" wordt gepubliceerd door @connect_nom@.',
+	'notification_publie_sujet' => '[@nom_site_spip@] GEPUBLICEERD: @titre@',
 	'notification_publie_titre' => 'Gepubliceerd evenement',
 
 	// P
