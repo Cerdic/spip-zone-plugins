@@ -9,6 +9,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// A
+	'afficher' => 'Tonen',
+
 	// B
 	'bouton_parcourir_docs_article' => 'Blader door het artikel',
 	'bouton_parcourir_docs_breve' => 'Blader door de nieuwsflits',
@@ -47,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_generique' => 'Er zitten fouten in onderstaande velden. Controleer je invoer',
 	'erreur_option_nom_unique' => 'Deze naam wordt al door een ander veld gebruikt. Het moet binnen het formulier een unieke naam hebben.',
+	'erreur_syntaxe_afficher_si' => 'Onjuiste syntaxis van de test',
 	'erreur_valeur_inacceptable' => 'Ingevoerde waarde is onacceptabel.',
 
 	// F
@@ -59,6 +63,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_annee' => 'Jaar',
 	'label_jour' => 'Dag',
 	'label_mois' => 'Maand',
+
+	// M
+	'masquer' => 'Verbergen',
 
 	// O
 	'option_aff_art_interface_explication' => 'Toon uitsluitend artikelen in de gebruikerstaal',
@@ -193,7 +200,10 @@ Je vindt <a href="https://contrib.spip.net/5080" target="_blank">volledige docum
 	'saisie_email_explication' => 'Laat een veld van het type email toe in HTML5.',
 	'saisie_email_titre' => 'Email-adres',
 	'saisie_explication_explication' => 'Een algemene omschrijving.',
+	'saisie_explication_masquer_label' => 'Een knop toevoegen om de uitleg te tonen/verbergen',
+	'saisie_explication_texte_label' => 'Tekst van de uitleg',
 	'saisie_explication_titre' => 'Uitleg',
+	'saisie_explication_titre_label' => 'Titel van de uitleg',
 	'saisie_fieldset_explication' => 'Een kader dat meerdere velden kan bevatten.',
 	'saisie_fieldset_titre' => 'Fieldset',
 	'saisie_file_explication' => 'Zend een bestand',
