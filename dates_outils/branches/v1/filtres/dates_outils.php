@@ -130,8 +130,6 @@ function do_compare($a, $b) {
  *   La différence
  */
 function dates_difference($date_debut, $date_fin, $type) {
-	/*$fin = strtotime(date('Y-m-d', strtotime($date_fin_contexte)));
-	$debut = strtotime(date('Y-m-d', strtotime($date_debut_contexte)));*/
 	$debut = new DateTime($date_debut);
 	$fin = new DateTime($date_fin);
 	$difference_dates = $fin->diff($debut);
