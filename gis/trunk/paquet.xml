@@ -1,7 +1,7 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="4.47.6"
+	version="4.47.7"
 	schema="2.1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
@@ -31,7 +31,7 @@
 	<traduire module="paquet-gis" reference="fr" gestionnaire="salvatore" />
 
 	<utilise nom="selecteurgenerique" compatibilite="[0.8.6;]" />
-	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="saisies" compatibilite="[3.26.0;]" />
 
 	<pipeline
 		nom="gis_modele_parametres_autorises"
