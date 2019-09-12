@@ -6,7 +6,7 @@
 	compatibilite="[2.0.9;3.2.*]"
 	logo="images/ckspip-logo.png"
 	documentation="https://contrib.spip.net/CKeditor-3-0"
-	schema="1.0.0" 
+	schema="1.0.0"
 >
 	<nom>ckeditor-spip3-plugin</nom>
 
@@ -30,7 +30,7 @@
 	<onglet nom="configurer_ckeditor_p7" titre="ckeditor:ckeditor_p7" parent="configurer_ckeditor"  icone="images/cke24-plugins.png" />
 	<onglet nom="configurer_ckeditor_p8" titre="ckeditor:ckeditor_p8" parent="configurer_ckeditor"  icone="images/cke24-spipmodeles.png" />
 
-	<pipeline nom="autoriser" inclure="ckeditor_autorisations.php" /> 
+	<pipeline nom="autoriser" inclure="ckeditor_autorisations.php" />
 	<pipeline nom="insert_head" inclure="ckeditor_fonctions.php" />
 	<pipeline nom="header_prive" inclure="ckeditor_fonctions.php" />
 	<pipeline nom="saisies_autonomes" inclure="ckeditor_fonctions.php" />
