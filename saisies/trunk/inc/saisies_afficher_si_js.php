@@ -116,7 +116,7 @@ function saisies_afficher_si_js_case($champ, $operateur, $valeur, $guillemet, $n
 	if ($valeur  and $operateur) {
 		return "$negation($(form).find(\".checkbox[name='$champ']\").is(':checked') ? $(form).find(\".checkbox[name='$champ']\").val() : '') $operateur $guillemet$valeur$guillemet";
 	} else {
-		return "$negation$(form).find(\".checkbox[name='$champ']\").is(':checked') ? $(form).find(\".checkbox[name='$champ']\").val() : ''";
+		return "$negation($(form).find(\".checkbox[name='$champ']\").is(':checked') ? $(form).find(\".checkbox[name='$champ']\").val() : '')";
 	}
 }
 

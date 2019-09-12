@@ -186,7 +186,7 @@
 				2 => $saisies_form
 			),
 			'case' => array(
-				0 => '$(form).find(&quot;.checkbox[name=\'case_1\']&quot;).is(\':checked\') ? $(form).find(&quot;.checkbox[name=\'case_1\']&quot;).val() : \'\'',
+				0 => '($(form).find(&quot;.checkbox[name=\'case_1\']&quot;).is(\':checked\') ? $(form).find(&quot;.checkbox[name=\'case_1\']&quot;).val() : \'\')',
 				1 => '@case_1@',
 				2 => $saisies_form
 			),
