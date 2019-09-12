@@ -76,31 +76,31 @@ function spip_bonux_affichage_final($flux) {
  * @return unknown_type Retourne la valeur éventuellement modifiée.
  */
 if (!function_exists('_T_ou_typo')) {
-function _T_ou_typo($valeur, $mode_typo = 'toujours') {
+	function _T_ou_typo($valeur, $mode_typo = 'toujours') {
 
-	// Si la valeur est bien une chaine (et pas non plus un entier déguisé)
-	if (is_string($valeur) and !intval($valeur)) {
-		// Si la chaine est du type <:truc:> on passe à _T()
-		if (preg_match('/^\<:(.*?):\>$/', $valeur, $match)) {
-			$valeur = _T($match[1]);
-		} else {
-			// Sinon on la passe a typo()
-			if (!in_array($mode_typo, array('toujours', 'multi', 'jamais'))) {
-				$mode_typo = 'toujours';
+		// Si la valeur est bien une chaine (et pas non plus un entier déguisé)
+		if (is_string($valeur) and !intval($valeur)) {
+			// Si la chaine est du type <:truc:> on passe à _T()
+			if (preg_match('/^\<:(.*?):\>$/', $valeur, $match)) {
+				$valeur = _T($match[1]);
+			} else {
+				// Sinon on la passe a typo()
+				if (!in_array($mode_typo, array('toujours', 'multi', 'jamais'))) {
+					$mode_typo = 'toujours';
+				}
+				if ($mode_typo == 'toujours' or ($mode_typo == 'multi' and strpos($valeur, '<multi>') !== false)) {
+					include_spip('inc/texte');
+					$valeur = typo($valeur);
+				}
 			}
-			if ($mode_typo == 'toujours' or ($mode_typo == 'multi' and strpos($valeur, '<multi>') !== false)) {
-				include_spip('inc/texte');
-				$valeur = typo($valeur);
+		} elseif (is_array($valeur)) {
+			// Si c'est un tableau, on reapplique la fonction récursivement
+			foreach ($valeur as $cle => $valeur2) {
+				$valeur[$cle] = _T_ou_typo($valeur2, $mode_typo);
 			}
 		}
-	} elseif (is_array($valeur)) {
-		// Si c'est un tableau, on reapplique la fonction récursivement
-		foreach ($valeur as $cle => $valeur2) {
-			$valeur[$cle] = _T_ou_typo($valeur2, $mode_typo);
-		}
+		return $valeur;
 	}
-	return $valeur;
-}
 }
 
 /**
