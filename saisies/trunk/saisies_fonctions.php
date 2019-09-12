@@ -12,6 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 include_spip('inc/saisies');
 include_spip('balise/saisie');
+include_spip('inc/saisies_afficher_si_js');
 // picker_selected (spip 3)
 include_spip('formulaires/selecteur/generique_fonctions');
 
