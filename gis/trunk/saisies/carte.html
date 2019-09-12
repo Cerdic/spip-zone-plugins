@@ -30,7 +30,7 @@
 	#SET{init_ne_lon,#ENV{ne_lon,#GET{lon}|plus{10}}}
 ]
 
-<[(#DIV|sinon{li})] class="pleine_largeur editer editer_[(#ENV{nom})][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]"[ data-id="(#ENV{id_saisie})"]>
+<[(#DIV|sinon{li})] class="pleine_largeur editer editer_[(#ENV{nom})][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]"[ data-id="(#ENV{id_saisie})"][ data-afficher_si="(#ENV*{afficher_si}|saisies_afficher_si_js{#ENV{_saisies}})"] >
 #ENV*{inserer_debut}
 <div id="map_[(#ENV{nom})]" name="formMap" class="formMap" style="width: #ENV{largeur,100%}; height: #ENV{hauteur,350px}"></div>
 <script type="text/javascript">
