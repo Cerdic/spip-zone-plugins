@@ -1,7 +1,7 @@
 <paquet
 	prefix="ckeditor"
 	categorie="edition"
-	version="1.0.2"
+	version="1.0.3"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/ckspip-logo.png"
@@ -35,7 +35,7 @@
 	<pipeline nom="header_prive" inclure="ckeditor_fonctions.php" />
 	<pipeline nom="saisies_autonomes" inclure="ckeditor_fonctions.php" />
 
-	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="saisies" compatibilite="[3.27.7;]" />
 	<necessite nom="yaml" compatibilite="[1.5.1;]" />
 
 	<lib nom='ckeditor' lien='https://contrib.spip.net/IMG/zip/lib_ckeditor_4.12.1_fulldev.zip' />
