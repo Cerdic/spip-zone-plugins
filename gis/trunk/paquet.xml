@@ -1,7 +1,7 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="4.47.8"
+	version="4.47.9"
 	schema="2.1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
@@ -90,6 +90,10 @@
 	/>
 	<pipeline
 		nom="formulaire_traiter"
+		inclure="gis_pipelines.php"
+	/>
+	<pipeline
+		nom="libeller_logo"
 		inclure="gis_pipelines.php"
 	/>
 	<menu nom="gis_tous" titre="gis:icone_gis_tous" parent="menu_edition" icone="images/gis-16.png" />

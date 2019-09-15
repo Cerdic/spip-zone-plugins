@@ -353,3 +353,13 @@ function gis_formulaire_traiter($flux) {
 	}
 	return $flux;
 }
+
+/**
+ * Definir le libelle pour les logos GIS dans l'espace prive
+ * @param array $logo_libelles
+ * @return mixed
+ */
+function gis_libeller_logo($logo_libelles) {
+	$logo_libelles['id_gis'] = _T('gis:libelle_logo_gis');
+	return $logo_libelles;
+}
