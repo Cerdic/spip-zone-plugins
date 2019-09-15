@@ -514,7 +514,7 @@ function formidable_tableau_valeurs_saisies($saisies, $sans_reponse = true) {
 	if ($sans_reponse === true) {
 		$sans_reponse =  _T('saisies:sans_reponse');
 	}
-	include_spip('inc/saisies_afficher_si');
+	include_spip('inc/saisies_afficher_si_php');
 	$saisies_apres_afficher_si = saisies_verifier_afficher_si($saisies);
 	$saisies_fichiers = saisies_lister_avec_type($saisies, 'fichiers');
 	$saisies_par_nom = saisies_lister_par_nom($saisies);
