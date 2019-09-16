@@ -32,8 +32,8 @@
 					<div class="choix links_window_new">
 						<input type="radio" class="radio" name="window" id="window_new" [(#ENV{window}|=={on}|?{'checked="checked"'})] value="on" />
 						<label for="window_new">Forcer l'ouverture de certains liens dans une nouvelle fen&ecirc;tre (d&eacute;conseill&eacute;)</label>
+						<p class="explication">Attention&nbsp;: ce comportement met certains internautes en difficult&eacute;.</p>
 					</div>
-					<p class="explication">Attention&nbsp;: ce comportement met certains internautes en difficult&eacute;.</p>
 				</div>
 				<div class="suite">
 					<div class="editer-groupe">
@@ -41,12 +41,12 @@
 							<div class="choix links_external[ (#ENV**{erreurs}|table_valeur{external}|oui)erreur]">[
 								<span class='erreur'>(#ENV**{erreurs}|table_valeur{external})</span>]
 								<input type="checkbox" class="checkbox" name="external" id="external"[ (#ENV{external}|=={on}|?{'checked="checked"'})] value="on" />
-								<label for="external">liens externes</label>
+								<label for="external">Forcer pour les liens externes</label>
 							</div>
 							<div class="choix links_download[ (#ENV**{erreurs}|table_valeur{download}|oui)erreur]">[
 								<span class='erreur'>(#ENV**{erreurs}|table_valeur{download})</span>]
 								<input type="checkbox" class="checkbox" name="download" id="download"[ (#ENV{download}|=={on}|?{'checked="checked"'})] value="on" />
-								<label for="download">certains documents&nbsp;:</label>
+								<label for="download">Forcer pour certains documents&nbsp;:</label>
 							</div>
 						</div>
 						<div class="suite">
