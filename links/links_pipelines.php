@@ -30,7 +30,7 @@ function links_insert_head_css($flux) {
 			// sur autre.example.org : www.example.org est external
 			// sur un site mono-domaine ca ne change rien :)
 			// ca marche parce que le cache change quand le HTTP_HOST change (donc quand le domaine change)
-			$js .= 'var links_site = \'' . url_de_base() . '\';';
+			$js .= 'var links_site = \'' . protocole_implicite(url_de_base()) . '\';';
 		}
 		//Ouverture d'une nouvelle fenetre sur les documents (extensions a preciser)
 		if(($links['download'] == 'on')&&($links['doc_list'])){

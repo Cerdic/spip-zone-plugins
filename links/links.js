@@ -5,8 +5,10 @@ function targetLinks() {
 	var where;
 	where="_blank";
 
-	jQuery("area[href*='://']").add("a[href*='://']").filter(":not([href^='"+links_site+"']):not([href^='javascript:']):not([href^='mailto:'])")
-	  .attr('target',where)
+	jQuery("area[href*='://']").add("a[href*='://']")
+		.filter(":not([href^='http:"+links_site+"']):not([href^='https:"+links_site+"']):not([href^='javascript:']):not([href^='mailto:'])")
+		.filter(":not([target='"+where+"'])")
+		.attr('target',where)
 		.attr('rel','external noopener noreferrer')
 		.addClass('external')
 		.each(function(){
