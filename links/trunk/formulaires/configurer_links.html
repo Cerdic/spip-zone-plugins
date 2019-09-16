@@ -6,8 +6,8 @@
 		<fieldset>
 			<h3 class="legend">Apparence</h3>
 			<p class="explication">Pour voir, affichez la page de test <a href="#URL_SITE_SPIP/?page=demo/links">?page=demo/links</a> ou mieux, ins&eacute;rez le mod&egrave;le <code>&lt;charte|links&gt;</code> dans un de vos articles. Pour toute personnalisation, compl&eacute;tez en CSS, dans votre feuille de style.</p>
-			<ul class="editer-groupe">
-				<li class="editer pleine_largeur editer_style[ (#ENV**{erreurs}|table_valeur{style}|oui)erreur]">[
+			<div class="editer-groupe">
+				<div class="editer pleine_largeur editer_style[ (#ENV**{erreurs}|table_valeur{style}|oui)erreur]">[
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{style})</span>
 					]<div class="choix choix_style">
 						<input type="radio" class="radio" name="style" id="style_yes"[ (#ENV{style}|=={on}|?{'checked="checked"'})] value="on" />
@@ -17,13 +17,13 @@
 						<input type="radio" class="radio" name="style" id="style_no"[ (#ENV{style}|!={on}|?{'checked="checked"'})] value="off"/>
 						<label for="style_no">Aucun style</label>
 					</div>
-				</li>
-			</ul>
+				</div>
+			</div>
 		</fieldset>
 		<fieldset>
 			<h3 class="legend">Comportement</h3>
-			<ul class="editer-groupe">
-				<li class="editer pleine_largeur editer_window[ (#ENV**{erreurs}|table_valeur{window}|oui)erreur]">[
+			<div class="editer-groupe">
+				<div class="editer pleine_largeur editer_window[ (#ENV**{erreurs}|table_valeur{window}|oui)erreur]">[
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{window})</span>]
 					<div class="choix links_window_same">
 						<input type="radio" class="radio" name="window" id="window_same"[ (#ENV{window}|!={on}|?{'checked="checked"'})] value="off" />
@@ -34,10 +34,10 @@
 						<label for="window_new">Forcer l'ouverture de certains liens dans une nouvelle fen&ecirc;tre (d&eacute;conseill&eacute;)</label>
 					</div>
 					<p class="explication">Attention&nbsp;: ce comportement met certains internautes en difficult&eacute;.</p>
-				</li>
-				<li class="suite">
-					<ul class="editer-groupe">
-						<li class="pleine_largeur"[(#SPIP_VERSION|intval|=={2}|oui)style='padding-left:0;']>
+				</div>
+				<div class="suite">
+					<div class="editer-groupe">
+						<div class="pleine_largeur"[(#SPIP_VERSION|intval|=={2}|oui)style='padding-left:0;']>
 							<div class="choix links_external[ (#ENV**{erreurs}|table_valeur{external}|oui)erreur]">[
 								<span class='erreur'>(#ENV**{erreurs}|table_valeur{external})</span>]
 								<input type="checkbox" class="checkbox" name="external" id="external"[ (#ENV{external}|=={on}|?{'checked="checked"'})] value="on" />
@@ -48,19 +48,19 @@
 								<input type="checkbox" class="checkbox" name="download" id="download"[ (#ENV{download}|=={on}|?{'checked="checked"'})] value="on" />
 								<label for="download">certains documents&nbsp;:</label>
 							</div>
-						</li>
-						<li class="suite">
-							<ul class="editer-groupe">
-								<li class="editer pleine_largeur links_doc_list[ (#ENV**{erreurs}|table_valeur{doc_list}|oui)erreur]"[(#SPIP_VERSION|intval|=={2}|oui)style='padding-left:0;padding-right: 0;']>
+						</div>
+						<div class="suite">
+							<div class="editer-groupe">
+								<div class="editer pleine_largeur links_doc_list[ (#ENV**{erreurs}|table_valeur{doc_list}|oui)erreur]"[(#SPIP_VERSION|intval|=={2}|oui)style='padding-left:0;padding-right: 0;']>
 									<label for="doc_list"[(#SPIP_VERSION|intval|=={2}|oui)style='padding-left:0;margin-left: 0; float: none; width:100%;']>Indiquer les extensions, s&eacute;par&eacute;es d'une virgule (exemple : .pdf,.doc,.xls,.ppt,.odt)</label>[
 									<span class='erreur'>(#ENV**{erreurs}|table_valeur{doc_list})</span>
 									]<input type="text" class="text" name="doc_list" id="doc_list" value="[(#ENV{doc_list})]" />
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-			</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</fieldset>
 		<p class="boutons">
 			<input type="submit" name="enregistrer" class="submit" value="<:bouton_enregistrer:>" />
@@ -68,7 +68,5 @@
 	</div></form>
 </div>
 <style>
-	li.suite {
-		margin-left: 50px;
-	}
+	div.suite {margin-left: 50px;}
 </style>
