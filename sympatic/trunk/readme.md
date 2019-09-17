@@ -1,2 +1,2 @@
 # Sympatic
-Gestion des abonnements à des listes [sympa](https://www.sympa.org/) depuis SPIP.
+Le but de Sympatic est de gérer les abonnements des auteurs du site à des listes [SYMPA](https://www.sympa.org/). Sympatic ne fait que synchroniser la liste des abonnés de chaque liste SYMPA (le plugin ne va pas créer les listes sur le serveur de listes). Techniquement, le plugin utilise les mails de commandes adressés au robot des listes pour synchroniser les abonnés.
