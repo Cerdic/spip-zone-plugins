@@ -100,6 +100,7 @@ function bouq_declarer_tables_objets_sql($tables) {
 		'tables_jointures'  => array(),
 		'statut_textes_instituer' => array(
 			'prepa'    => 'texte_statut_en_cours_redaction',
+			'prop'     => 'livre:texte_statut_aparaitre',
 			'publie'   => 'livre:texte_statut_paru',
 			'refuse'   => 'livre:texte_statut_epuise',
 			'poubelle' => 'texte_statut_poubelle',
@@ -184,6 +185,24 @@ function bouq_declarer_tables_objets_sql($tables) {
 		),
 
 	);
+
+	// Gestion des rôles de documents (si activé)
+	if (test_plugin_actif('roles_documents')) {
+		$nouveaux_roles_livres = array(
+			'couverture'  => 'livre:role_couverture',
+			'4couverture'  => 'livre:role_4couverture'
+		);
+
+		array_merge_recursive($tables, 'spip_documents', array(
+			'roles_titres' => $nouveaux_roles_livres,
+			'roles_objets' => array(
+				'livres' => array(
+					'choix' => array_keys($nouveaux_roles_livres),
+					'defaut' => 'couverture'
+				)
+			)
+		));
+	}
 
 	return $tables;
 }

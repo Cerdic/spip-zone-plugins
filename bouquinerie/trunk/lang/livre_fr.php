@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_livre' => 'Aucun livre',
 	'info_livres_auteur' => 'Les livres de cet auteur',
 	'info_nb_livres' => '@nb@ livres',
-	'info_livres_proposes' => 'Livres proposés',
+	'info_livres_proposes' => 'Livres à paraître',
 
 	// R
 	'retirer_lien_livre' => 'Retirer ce livre',
