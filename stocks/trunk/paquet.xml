@@ -1,7 +1,7 @@
 <paquet
 	prefix="stocks"
 	categorie="divers"
-	version="0.2.6"
+	version="0.2.7"
 	etat="dev"
 	compatibilite="[3.0.1;3.2.*]"
 	logo="prive/themes/spip/images/stocks-32.png"
@@ -16,6 +16,9 @@
 	<!--  Déclarer la structure des tables et ajouter un statut épuisé aux produits -->
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/stocks.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/stocks.php" />
+    <!-- Gérer les autorisations -->
+    <pipeline nom="autoriser" inclure="stocks_autorisations.php" />
+
 	<!--  Ajouter la gestion du stock sur la vue et sur produit_edit -->
 	<pipeline nom="formulaire_charger" inclure="stocks_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="stocks_pipelines.php" />
@@ -26,7 +29,7 @@
 	<utilise nom="commandes" compatibilite="[1.15.3;["/>
 	<utilise nom="livraison" compatibilite="[2.6.0;["/>
 
-	<necessite nom="produits" compatibilite="[1.1.25;["/>
+	<necessite nom="produits" compatibilite="[1.2.10;["/>
 	<necessite nom="saisies" compatibilite="[3.23.2;["/>
 
 	<menu nom="gerer_stocks" titre="stocks:gerer_stocks_titre" parent="menu_edition" icone="images/stocks-16.png" />
