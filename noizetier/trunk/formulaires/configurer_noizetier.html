@@ -43,6 +43,12 @@
 				label=<:noizetier:configurer_objets_noisettes_label:>,
 				explication=<:noizetier:configurer_objets_noisettes_explication:>,
 				exclus=#ENV{_objets_exclus}})]
+
+			[(#REM) Permettre de masquer certains types de noisettes lors de l'ajout ]
+			[(#SAISIE{types_noisettes, types_noisettes_masques,
+				label=<:noizetier:configurer_types_noisettes_masques_label:>,
+				explication=<:noizetier:configurer_types_noisettes_masques_explication:>,
+				defaut=#CONFIG{noizetier/types_noisettes_masques}})]
 		</div>
 
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>

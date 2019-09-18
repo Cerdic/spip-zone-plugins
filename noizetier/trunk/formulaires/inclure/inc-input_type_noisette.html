@@ -3,6 +3,7 @@
 		[(#SET{id, #VAL{noisettes_}|uniqid})]
 		<input type="#ENV{input_type}" class="#ENV{input_type}" name="[(#ENV{input_type}|=={radio}|?{type_noisette, type_noisette\[\]})]" value="#ENV{type_noisette}" id="#GET{id}" />
 		<label for="#GET{id}">
+			[(#CHEMIN_IMAGE{#ENV{icon}}|balise_img)]
 			[(#ENV{nom})]
 			[<i>\((#ENV{type_noisette})\)</i>]
 		</label>

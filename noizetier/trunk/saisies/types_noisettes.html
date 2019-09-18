@@ -1,0 +1,40 @@
+[(#REM)
+
+	Saisie : types de noisettes
+
+	Par défaut, il s'agit de la saisie checkbox (choix multiples).
+	On peut aussi avoir des radios (choix unique) ou un select (choix unique ou multiple).
+
+	Paramètres :
+		- fond_saisie : checkbox (défaut) | radio | selection | selection_multiple
+		- composition : pour restreindre à une compo
+		- type : pour restreindre à une page (attention, faux ami : pas un type de noisette)
+		- actif : oui | non
+		+ params des saisies afférentes.
+
+]
+#SET{defaut_tri,#ARRAY{
+	type_noisette,1,
+	conteneur,-1,
+	nom, 1,
+	actif,1,
+	plugin,1,
+}}
+#SET{fond_saisie,	#ENV{fond_saisie,checkbox}}
+#SET{data,#ARRAY}
+<BOUCLE_types_noisettes(TYPES_NOISETTES)
+	{actif?}
+	{composition?}
+	{type?}
+	{plugin=noizetier}
+	{tri #ENV{par,conteneur},#GET{defaut_tri}}
+	{par type_noisette}
+>
+#SET{data,#GET{data}|array_merge{#ARRAY{
+	#TYPE_NOISETTE,
+	#CHEMIN_IMAGE{#ICON}|balise_img|concat{' ',#NOM|_T}
+}}}
+</BOUCLE_types_noisettes>
+
+<INCLURE{fond=saisies/#GET{fond_saisie}, data=#GET{data}, env}>
+</B_types_nosiettes>

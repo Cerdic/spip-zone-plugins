@@ -34,6 +34,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_objets_noisettes_label' => 'Autoriser la personnalisation par contenu sur :',
 	'configurer_profondeur_max_label' => 'Profondeur d’imbrication',
 	'configurer_titre' => 'Configurer le plugin noiZetier',
+	'configurer_types_noisettes_masques_label' => 'Masquer des types de noisettes',
+	'configurer_types_noisettes_masques_explication' => 'Cochez les types de noisettes que vous souhaitez <strong>masquer</strong> lors de l’ajout d’une noisette.',
 	'copie_de' => 'Copie de @source@',
 
 	// D
