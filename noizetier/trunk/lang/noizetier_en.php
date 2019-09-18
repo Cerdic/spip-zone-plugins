@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bloc_sans_noisette' => 'Add nuts using the button "add a nut" or by dragging and dropping the desired nut type on this position.
 ',
-	'bouton_configurer_noisettes_objet' => 'Configurer pour ce contenu', # MODIF
+	'bouton_configurer_noisettes_objet' => 'Configure for this content',
 	'bulle_activer_composition' => 'Enable compositions on the content type "@type@"',
 	'bulle_configurer_objet_noisettes' => 'Configure nuts specific to this content',
 	'bulle_configurer_page_noisettes' => 'Configure the nuts of the page',
@@ -29,11 +29,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'choisir_noisette' => 'Choose the nut you want to add:',
 	'compositions_non_installe' => '<b>Plugin Compositions:</b> this plugin isn’t installed on your site. It’s not necessary to the correct working of the nuts. However, when it’s activated, you can create compositions directly inside your Nuts Manager.',
+	'configurer_ajax_noisette_label' => 'Inclusion Ajax',
 	'configurer_balise_noisette_label' => 'Wrapping',
 	'configurer_objets_noisettes_explication' => 'On these types of content, it will be allowed to customize the nuts <strong>content by content</strong>.',
 	'configurer_objets_noisettes_label' => 'Allow customization by content on:',
 	'configurer_profondeur_max_label' => 'Imbrication depth',
-	'configurer_titre' => 'NoiZetier configuration', # MODIF
+	'configurer_titre' => 'Plugin noiZetier configuration',
 	'copie_de' => 'Copy of @source@',
 
 	// D
@@ -66,12 +67,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 You can choose a new identifier or suffix the reference identifier as follows:
 <i>@composition@<strong>_suffixe</strong></i>',
 	'explication_dupliquer_composition_suffixer' => '.',
-	'explication_glisser_deposer' => 'The types of nuts that can be added to the blocks of the page are listed below.', # MODIF
+	'explication_glisser_deposer' => 'You can add them by drag-and-drop.',
 	'explication_heritages_composition' => 'The composition being edited is based on the "@type@" content type that has child content types. You can define for each type of child content a composition to apply by default.',
 	'explication_noisette' => 'Nut type « @noisette@ »',
-	'explication_noisette_css' => 'You can add to the wrapping nut tag any additional CSS classes.', # MODIF
-	'explication_noizetier_balise' => 'The default mode of inclusion in a wrapping tag can be modified individually for each nut (parameterization).', # MODIF
-	'explication_noizetier_profondeur_max' => 'You can nest container-type nuts. Choose the number of nesting levels you want.', # MODIF
+	'explication_noisette_css' => 'You can add any additional CSS classes to the capsule containing the nut.',
+	'explication_noizetier_balise' => 'The default encapsulation mode can be changed unitarily for each nut (setting).',
+	'explication_noizetier_profondeur_max' => 'Nuts can be nested by means of container-type nuts. You can define a maximum number of nesting levels. ',
 	'explication_objet' => 'Type of content "@type@"',
 	'explication_page' => 'Autonomous page not linked to a content type',
 	'explication_page_objet' => 'Page linked to the content type "@type@"',
@@ -92,9 +93,10 @@ You can choose a new identifier or suffix the reference identifier as follows:
 	'formulaire_deplacer_bas' => 'Move down',
 	'formulaire_deplacer_haut' => 'Move up',
 	'formulaire_description' => 'Description',
-	'formulaire_description_blocs_exclus' => 'You can choose to exclude some blocks from the nut configuration.', # MODIF
+	'formulaire_description_blocs_exclus' => 'You can choose to exclude certain blocks from the nut configuration. Blocks containing nuts cannot be excluded, it is necessary to empty them beforehand. ',
 	'formulaire_description_explication' => 'You can use the usual SPIP shortcuts, especially the &lt;multi&gt; tag.',
 	'formulaire_description_peuplement' => 'You can automatically populate the new virtual composition with the nuts on the source page.',
+	'formulaire_dupliquer_noisette' => 'Duplicate this nut ',
 	'formulaire_dupliquer_page' => 'Duplicate this composition',
 	'formulaire_dupliquer_page_entete' => 'Duplicate a page',
 	'formulaire_dupliquer_page_titre' => 'Duplicate the page « @page@ »',
@@ -104,9 +106,9 @@ You can choose a new identifier or suffix the reference identifier as follows:
 	'formulaire_icon' => 'Icon',
 	'formulaire_icon_explication' => 'You can enter the relative path to an icon (for example : <i>images/list-item-contenus.png</i>).',
 	'formulaire_identifiant_deja_pris' => 'This identifier already exists!',
+	'formulaire_import_contenu_compositions_virtuelles' => 'Virtual compositions ',
 	'formulaire_liste_compos_config' => 'This configuration file defines the following Nuts Manager compositions:',
-	'formulaire_liste_pages_config' => 'This configuration file defines
-nuts on the following pages:', # MODIF
+	'formulaire_liste_pages_config' => 'The following pages and explicit compositions as well as the following objects are associated with nuts:@liste@',
 	'formulaire_modifier_composition' => 'Edit this composition',
 	'formulaire_modifier_composition_heritages' => 'Inherited compositions',
 	'formulaire_modifier_noisette' => 'Edit this nut',
@@ -130,8 +132,8 @@ nuts on the following pages:', # MODIF
 	// I
 	'icone_introuvable' => 'Icon not found!',
 	'ieconfig_ne_pas_importer' => 'Do not import',
-	'ieconfig_noizetier_export_explication' => 'Will export the configuration of the nuts and compositions of the Nuts Manager.', # MODIF
-	'ieconfig_noizetier_export_option' => 'Included in the export?', # MODIF
+	'ieconfig_noizetier_export_explication' => 'Exports plugin configuration and production data related to virtual compositions and nuts.',
+	'ieconfig_noizetier_export_option' => 'Include the data of the NoiZetier in the export? ',
 	'ieconfig_non_installe' => '<b>Configuration Import/Export Plugin:</b> this plugin isn’t installed on your site. It is not necessarry to the correct working of the Nuts Manager. However, when it’s activated, you can  export and import some nuts configurations into the Nuts Manager.',
 	'ieconfig_probleme_import_config' => 'A problem occured while importing the Nuts Manager configuration.',
 	'info_1_noisette_ajoutee' => '1 nut has been added',
@@ -145,17 +147,17 @@ nuts on the following pages:', # MODIF
 	// L
 	'label_afficher_titre_noisette' => 'Display a title of nut?',
 	'label_code' => 'Spip code:',
-	'label_copie_noisette_balise' => 'Copy the wrapping tag indicator.', # MODIF
-	'label_copie_noisette_css' => 'Copy any styles associated to the wrapping tag.
-', # MODIF
+	'label_copie_noisette_balise' => 'Copy the encapsulation indicator. ',
+	'label_copie_noisette_css' => 'Copy the possible styles associated with the wrapping capsule. 
+',
 	'label_copie_noisette_parametres' => 'Copy the configuration settings of the source nut.',
 	'label_description_code' => 'Description:',
 	'label_identifiant' => 'identifier:',
 	'label_niveau_titre' => 'Title level:',
 	'label_noisette_css' => 'CSS classes',
 	'label_noisette_encapsulation' => 'Wrapping',
-	'label_noizetier_ajax' => 'By default, include each nut in AJAX', # MODIF
-	'label_noizetier_balise' => 'By default, include each nut in a tag', # MODIF
+	'label_noizetier_ajax' => 'By default, include each nut in Ajax',
+	'label_noizetier_balise' => 'By default, include each nut in a capsule (HTML markup) ',
 	'label_texte' => 'Text:',
 	'label_texte_introductif' => 'Introduction text (optional):',
 	'label_titre' => 'Title:',
@@ -166,7 +168,7 @@ nuts on the following pages:', # MODIF
 	'legende_noisette_inclusion' => 'Inclusion parameters',
 	'legende_noisette_parametrage' => 'Configuration parameters',
 	'liste_icones' => 'Icons list',
-	'liste_objets' => 'Contents with a nut configuration', # MODIF
+	'liste_objets' => 'Contents with nuts in them ',
 	'liste_objets_configures' => 'List of objects',
 	'liste_pages' => 'List of the pages',
 	'liste_pages_objet_non' => 'Autonomous pages',
@@ -184,10 +186,10 @@ nuts on the following pages:', # MODIF
 	'ne_pas_definir_d_heritage' => 'Do not define inherited composition',
 	'noisette_numero' => 'nut number :',
 	'noisettes_composition' => 'Specific nuts to the composition <i>@composition@</i>:',
-	'noisettes_disponibles' => 'Type of nuts available', # MODIF
-	'noisettes_page' => 'Nut types specific to the page<i>@type@</i>:', # MODIF
+	'noisettes_disponibles' => 'Type of nuts available',
+	'noisettes_page' => 'Specific to the page<i>@type@</i>:',
 	'noisettes_pour' => 'Nuts for:',
-	'noisettes_toutes_pages' => 'Nut types common to all pages:', # MODIF
+	'noisettes_toutes_pages' => 'Common to all pages: ',
 	'noizetier' => 'Nuts Manager',
 	'nom_bloc_contenu' => 'Content',
 	'nom_bloc_extra' => 'Extra',
