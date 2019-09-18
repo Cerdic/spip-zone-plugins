@@ -95,6 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_url_public' => 'Returning address after login',
 	'erreur_aucun_type' => 'No item type was found.',
 	'erreur_autorisation' => 'You are not allowed to modify menus.',
+	'erreur_id_objet' => 'You must indicate the object number.',
 	'erreur_identifiant_deja' => 'This identifier is already used by another menu.',
 	'erreur_identifiant_forme' => 'Identifier must contain only letters, digits or underscores.',
 	'erreur_menu_inexistant' => 'Menu ID @id@ doesn’t exist.',
@@ -102,6 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_parametres' => 'There is an error in the page’s parameters',
 	'erreur_type_menu' => 'You have to choose a menu type',
 	'erreur_type_menu_inexistant' => 'This kind of menu is not / no longer available',
+	'erreur_type_objet' => 'This type of object does not exist.',
 
 	// F
 	'formulaire_ajouter_sous_menu' => 'Create a sub-level menu',
@@ -162,7 +164,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'noisette_description' => 'Insert a menu defined with the Menus plugin.',
+	'noisette_explication_class_menu' => 'Class added directly to the menu, in addition to the class configured in the menu options.',
 	'noisette_label_afficher_titre_menu' => 'Display menu title?',
+	'noisette_label_class_conteneur' => 'CSS class of the container',
+	'noisette_label_class_menu' => 'CSS class of the menu',
 	'noisette_label_identifiant' => 'Menu to display:',
 	'noisette_nom_noisette' => 'Menu',
 	'nom_menu_accueil' => 'Home Page',
