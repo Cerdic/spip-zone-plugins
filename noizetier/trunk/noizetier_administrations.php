@@ -203,46 +203,58 @@ function maj_060($config_defaut) {
 		$compositions_060 = array();
 		foreach ($compositions as $_type => $_compositions) {
 			foreach ($_compositions as $_composition => $_description) {
-				// Type et composition (ne sont jamais vides)
-				$_description['type'] = $_type;
-				$_description['composition'] = $_composition;
-				// Construction de l'identifiant de la page
-				$_description['page'] = "${_type}-${_composition}";
+				// Initialisation par défaut de la composition virtuelle sachant que le type et la composition ne sont
+				// jamais vides.
+				$page = "${_type}-${_composition}";
+				$description = array(
+					'page'           => $page,
+					'type'           => $_type,
+					'composition'    => $_composition,
+					'nom'            => $page,
+					'description'    => '',
+					'icon'           => 'composition-24.png',
+					'blocs_exclus'   => array(),
+					'necessite'      => array(),
+					'est_active'     => 'oui',
+					'branche'        => array(),
+					'est_virtuelle'  => 'oui',
+					'est_page_objet' => 'non',
+					'signature'      => '',
+				);
 				// Nom par défaut si non précisé (identifiant de la page)
-				if (empty($_description['nom'])) {
-					$_description['nom'] = $_description['page'];
+				if (!empty($_description['nom'])) {
+					$description['nom'] = $_description['nom'];
 				}
 				// Icone par défaut si non précisé
-				if (empty($_description['icon'])) {
-					$_description['icon'] = 'composition-24.png';
-				}
+				if (!empty($_description['icon'])) {
+					$description['icon'] = $_description['icon'];
+				} else
 				// Traitement des necessite pour identifier l'activité de la page
-				$_description['est_active'] = 'oui';
 				if (!empty($_description['necessite'])) {
 					foreach ($_description['necessite'] as $_plugin_necessite) {
 						if (!defined('_DIR_PLUGIN_' . strtoupper($_plugin_necessite))) {
-							$_description['est_active'] = 'non';
+							$description['est_active'] = 'non';
 							break;
 						}
 					}
 				}
 				// Blocs, necessite et branche: des tableaux à sérialiser
-				$_description['blocs_exclus'] = isset($_description['blocs_exclus'])
+				$description['blocs_exclus'] = isset($_description['blocs_exclus'])
 					? serialize($_description['blocs_exclus'])
 					: serialize(array());
-				$_description['necessite'] = isset($_description['necessite'])
+				$description['necessite'] = isset($_description['necessite'])
 					? serialize($_description['necessite'])
 					: serialize(array());
-				$_description['branche'] = isset($_description['branche'])
+				$description['branche'] = isset($_description['branche'])
 					? serialize($_description['branche'])
 					: serialize(array());
 				// Indicateur de type d'objet
 				include_spip('base/objets');
 				$tables_objets = array_keys(lister_tables_objets_sql());
-				$_description['est_page_objet'] = in_array(table_objet_sql($_type), $tables_objets) ? 'oui' : 'non';
-				// Indicateur de composition virtuelle
-				$description['est_virtuelle'] = 'oui';
-				$compositions_060[] = $_description;
+				if (in_array(table_objet_sql($_type), $tables_objets)) {
+					$description['est_page_objet'] =  'oui';
+				}
+				$compositions_060[] = $description;
 			}
 		}
 		if ($compositions_060) {
