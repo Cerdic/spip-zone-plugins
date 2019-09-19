@@ -9,7 +9,7 @@
 <div class="onglets_simple second clearfix">
 	<ul class="blocs">
 <BOUCLE_blocs(DATA){source table, #ENV{blocs}}>
-		#SET{nb_noisettes, #GET{blocs_decompte/#VALEUR}|sinon{0}}
+		#SET{nb_noisettes, #GET{blocs_decompte/#CLE}|sinon{0}}
 		[<li>
 			(#SELF
 				|parametre_url{bloc, #VALEUR}
