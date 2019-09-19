@@ -10,7 +10,7 @@
 ]
 #SET{ancres,#ENV{chapitres}|=={editables}|?{oui,''}}
 
-<B_liste_chapitres>
+<B_chapitres_racine>
 [(#BOITE_OUVRIR{<:chapitre:titre_plan:>, 'simple chapitres-plan'})]
 
 <p class='pliage'>
@@ -23,7 +23,7 @@
 
 	<ul class="menu-items">
 
-		<BOUCLE_liste_chapitres (CHAPITRES)
+		<BOUCLE_chapitres_racine (CHAPITRES)
 			{id_parent = 0}
 			{objet?}
 			{id_objet?}
@@ -41,13 +41,15 @@
 			#chapitre#ID_CHAPITRE,
 			#ID_CHAPITRE|generer_url_entite{chapitre}
 		}}
+		#SET{numero,#COMPTEUR_BOUCLE}
+		#SET{numero_parent,#GET{numero}}
 		<li class="item[ (#EXPOSE{expose})]">
 
-			[(#GET{lien}|lien_ou_expose{#TITRE,#EXPOSE,#GET{ancre}|?{lien-ancre,lien}})]
+			[(#GET{lien}|lien_ou_expose{<span class="numero">#GET{numero}</span> #TITRE,#EXPOSE,#GET{ancre}|?{lien-ancre,lien}})]
 
-			<B_liste_chapitres_enfants>
+			<B_chapitres_enfants>
 			<ul class="menu-items">
-				<BOUCLE_liste_chapitres_enfants (CHAPITRES)
+				<BOUCLE_chapitres_enfants (CHAPITRES)
 					{id_parent = #ID_CHAPITRE}
 					{objet?}
 					{id_objet?}
@@ -65,21 +67,24 @@
 					#chapitre#ID_CHAPITRE,
 					#ID_CHAPITRE|generer_url_entite{chapitre}
 				}}
+				#SET{numero,#GET{numero_parent}|concat{.#COMPTEUR_BOUCLE}}
+				#SET{numero_parent,#GET{numero}}
 
 				<li class="item[ (#EXPOSE{expose})]">
 
-					[(#GET{lien}|lien_ou_expose{#TITRE,#EXPOSE,#GET{ancre}|?{lien-ancre,lien}})]
+					[(#GET{lien}|lien_ou_expose{<span class="numero">#GET{numero}</span> #TITRE,#EXPOSE,#GET{ancre}|?{lien-ancre,lien}})]
 
-					<BOUCLE_liste_chapitres_petits_enfants (BOUCLE_liste_chapitres_enfants) />
+					<BOUCLE_chapitres_petits_enfants (BOUCLE_chapitres_enfants) />
+					#SET{numero_parent,#GET{numero_parent}|substr{0,#GET{numero_parent}|strrpos{.}}}
 
 				</li>
 
-				</BOUCLE_liste_chapitres_enfants>
+				</BOUCLE_chapitres_enfants>
 			</ul>
-			</B_liste_chapitres_enfants>
+			</B_chapitres_enfants>
 
 		</li>
-		</BOUCLE_liste_chapitres>
+		</BOUCLE_chapitres_racine>
 
 	</ul>
 
@@ -91,4 +96,4 @@
 [<script src="(#CHEMIN{prive/javascript/chapitres_plan.js}|compacte{js}|timestamp)"></script>]
 
 #BOITE_FERMER
-</B_liste_chapitres>
+</B_chapitres_racine>

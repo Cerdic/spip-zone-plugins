@@ -22,7 +22,7 @@
 }}
 <div class="chapitres_editables">
 
-	<BOUCLE_liste_chapitres (CHAPITRES)
+	<BOUCLE_chapitres_racines (CHAPITRES)
 		{id_parent?}
 		{objet?}
 		{id_objet?}
@@ -53,7 +53,7 @@
 		/>
 
 		#SET{profondeur, 1}
-		<BOUCLE_liste_chapitres_enfants (CHAPITRES)
+		<BOUCLE_chapitres_enfants (CHAPITRES)
 			{id_parent=#ID_CHAPITRE}
 			{objet}
 			{id_objet}
@@ -83,16 +83,16 @@
 			/>
 
 			#SET{profondeur,#GET{profondeur}|plus{1}}
-			<BOUCLE_liste_chapitres_petits_enfants (BOUCLE_liste_chapitres_enfants) />
+			<BOUCLE_chapitres_petits_enfants (BOUCLE_chapitres_enfants) />
 			#SET{profondeur,#GET{profondeur}|moins{1}}
-			#SET{numero_parent,#GET{numero_parent}|substr{0,-2}}
+			#SET{numero_parent,#GET{numero_parent}|substr{0,#GET{numero_parent}|strrpos{.}}}
 
 		</section>
-		</BOUCLE_liste_chapitres_enfants>
+		</BOUCLE_chapitres_enfants>
 
 	</section>
 	#BOITE_FERMER
-	</BOUCLE_liste_chapitres>
+	</BOUCLE_chapitres_racines>
 
 	[(#REM) Ajout de chapitre à la racine ]
 	<INCLURE{fond=prive/squelettes/inclure/chapitre_editable,
@@ -103,11 +103,11 @@
 		profondeur=0,
 		ajax}
 	/>
-	</B_liste_chapitres>
+	</B_chapitres_racines>
 
 	[<div class="liste-objets chapitres caption-wrap">
 		<strong class="caption">(#ENV*{sinon,<:chapitre_info_aucun_chapitre:>})</strong>
 	</div>
-	]<//B_liste_chapitres>
+	]<//B_chapitres_racines>
 
 </div>
