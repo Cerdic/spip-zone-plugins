@@ -114,6 +114,10 @@ function maj_060($config_defaut) {
 	maj_tables(array('spip_noizetier_pages', 'spip_types_noisettes'));
 
 	// Modification de la table spip_noisettes
+	// -- Changement du nom du champ 'rang' en 'rang_noisette'
+	sql_alter("TABLE spip_noisettes CHANGE rang rang_noisette smallint DEFAULT 1 NOT NULL");
+	// -- Changement du nom du champ 'noisette' en 'type_noisette' et de sa taille
+	sql_alter("TABLE spip_noisettes CHANGE noisette type_noisette varchar(255) DEFAULT '' NOT NULL");
 	// -- Ajout de la colonne 'encapsulation' qui indique pour chaque noisette si le noiZetier doit l'inclure dans une capsule
 	//    englobante ou pas. Le champ prend les valeurs 'on', '' ou 'defaut' qui indique qu'il faut prendre
 	//    en compte la valeur configurée par défaut (configuration du noizetier).
@@ -125,13 +129,9 @@ function maj_060($config_defaut) {
 	sql_alter("TABLE spip_noisettes ADD plugin varchar(30) DEFAULT '' NOT NULL AFTER id_noisette");
 	sql_alter("TABLE spip_noisettes ADD id_conteneur varchar(255) DEFAULT '' NOT NULL AFTER plugin");
 	sql_alter("TABLE spip_noisettes ADD conteneur text DEFAULT '' NOT NULL AFTER id_conteneur");
-	// -- Changement du nom du champ 'noisette' en 'type_noisette' et de sa taille
-	sql_alter("TABLE spip_noisettes CHANGE noisette type_noisette varchar(255) DEFAULT '' NOT NULL");
 	sql_alter("TABLE spip_noisettes ADD est_conteneur varchar(3) DEFAULT 'non' NOT NULL AFTER type_noisette");
 	sql_alter("TABLE spip_noisettes ADD encapsulation varchar(6) DEFAULT 'defaut' NOT NULL AFTER parametres");
 	sql_alter("TABLE spip_noisettes ADD profondeur smallint DEFAULT 0 NOT NULL AFTER css");
-	// -- Changement du nom du champ 'rang' en 'rang_noisette'
-	sql_alter("TABLE spip_noisettes CHANGE rang rang_noisette smallint DEFAULT 1 NOT NULL");
 	// -- Suppression des index pour des colonnes dont on va modifier la taille ou le type
 	sql_alter("TABLE spip_noisettes DROP INDEX type");
 	sql_alter("TABLE spip_noisettes DROP INDEX composition");
