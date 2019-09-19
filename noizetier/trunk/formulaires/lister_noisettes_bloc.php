@@ -26,7 +26,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return array
  * 		Tableau des champs postés pour l'affichage du formulaire.
  */
-function formulaires_lister_noisettes_bloc_charger_dist($page_ou_objet, $bloc) {
+function formulaires_lister_noisettes_bloc_charger_dist($page_ou_objet, $bloc, $infos_bloc) {
 
 	// Si on est en présence d'une page au sens SPIP, il faut convertir l'identifiant en tableau.
 	// Sinon, on est en présence d'un objet précis connu par son type et son id fourni dans un
@@ -35,11 +35,12 @@ function formulaires_lister_noisettes_bloc_charger_dist($page_ou_objet, $bloc) {
 
 	// Ajout du bloc recevant les noisettes
 	$valeurs['bloc'] = $bloc;
+	$valeurs['infos_bloc'] = $infos_bloc;
 
 	// Ajout de l'identifiant du conteneur qui servira à la boucle des noisettes
 	include_spip('inc/noizetier_conteneur');
 	$valeurs['id_conteneur'] = conteneur_noizetier_composer($page_ou_objet, $bloc);
-	
+
 	return $valeurs;
 }
 
@@ -56,7 +57,7 @@ function formulaires_lister_noisettes_bloc_charger_dist($page_ou_objet, $bloc) {
  * @return array
  * 		Tableau des champs postés pour l'affichage du formulaire.
  */
-function formulaires_lister_noisettes_bloc_traiter_dist($page_ou_objet, $bloc) {
+function formulaires_lister_noisettes_bloc_traiter_dist($page_ou_objet, $bloc, $infos_bloc) {
 
 	$retour = array();
 

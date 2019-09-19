@@ -10,12 +10,13 @@
 	<ul class="blocs">
 <BOUCLE_blocs(DATA){source table, #ENV{blocs}}>
 		#SET{nb_noisettes, #GET{blocs_decompte/#CLE}|sinon{0}}
+		#SET{nom,#BLOC_Z_INFOS{#CLE, nom}|sinon{#VALEUR{nom}}}
 		[<li>
 			(#SELF
-				|parametre_url{bloc, #VALEUR}
+				|parametre_url{bloc, #CLE}
 				|lien_ou_expose{
-					#BLOC_Z_INFOS{#VALEUR, nom}&nbsp;\(#GET{nb_noisettes}\),
-					#VALEUR|=={#ENV{bloc_affiche}}})
+					#GET{nom}&nbsp;\(#GET{nb_noisettes}\),
+					#CLE|=={#ENV{bloc_affiche}}})
 		</li>]
 </BOUCLE_blocs>
 	</ul>
