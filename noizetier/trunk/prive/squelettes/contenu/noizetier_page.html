@@ -43,7 +43,7 @@
 
 	[(#REM) <!-- Liste configurable des noisettes du bloc affiché --> ]
 	<div class="ajax">
-		#FORMULAIRE_LISTER_NOISETTES_BLOC{#ENV{page, #ARRAY{objet, #OBJET, id_objet, #ID_OBJET}}, #GET{bloc_affiche}, #GET{blocs/#GET{bloc_affiche}}}
+		#FORMULAIRE_LISTER_NOISETTES_BLOC{#ENV{page, #ARRAY{objet, #OBJET, id_objet, #ID_OBJET}}, #GET{bloc_affiche}}
 	</div>
 
 	[(#CONST{_AJAX}|oui)
