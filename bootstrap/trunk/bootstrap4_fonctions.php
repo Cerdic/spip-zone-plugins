@@ -10,8 +10,9 @@ if (!defined('_MENUS_EXTRA_CLASS')) define('_MENUS_EXTRA_CLASS','nav');
  * @return string
  */
 function filtre_prefixer_css_dist($css) {
+	$css = supprimer_timestamp($css);
 	include_spip('bootstrap2spip/prefixer_css');
-	return prefixer_css($css);
+	return timestamp(prefixer_css($css));
 }
 
 /**
