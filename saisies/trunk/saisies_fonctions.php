@@ -313,3 +313,31 @@ function saisies_masquer_cle_secrete($cle) {
 	$cle = $court.str_repeat("*",$a_masquer);
 	return $cle;
 }
+
+/**
+ * Les liens ouvrants, c'est mal en général.
+ * Sauf dans un cas particulier : dans les explications dans un formulaire.
+ * En effet, si le lien n'est pas ouvrant, la personne en train de remplir un formulaire
+ * a) lis une explication
+ * b) clique sur le lien pour savoir comment remplir son formulaire
+ * c) est redirigée directement vers une page
+ * d) perd du coup ce qu'elle avait commencé remplir.
+ * Par conséquent, en terme d'accessibilité, il vaut mieux POUR LES EXPLICATIONS DE FORMULAIRE
+ * avoir des liens systématiquement ouvrant,
+ * et ce que le lien pointe en interne ou en externe (ce qui distingue du filtre |liens_ouvrants).
+ * D'où un filtre saisies_liens_ouvrants
+ * @param string $texte
+ * @return string $texte
+**/
+function saisies_liens_ouvrants($texte) {
+	if (preg_match_all(",(<a\s+[^>]*https?://[^>]*\b[^>]+>),imsS",
+		$texte, $liens, PREG_PATTERN_ORDER)) {
+		foreach ($liens[0] as $a) {
+			$rel = 'noopener noreferrer ' . extraire_attribut($a, 'rel');
+			$ablank = inserer_attribut($a, 'rel', $rel);
+			$ablank = inserer_attribut($ablank, 'target', '_blank');
+			$texte = str_replace($a, $ablank, $texte);
+		}
+	}
+	return $texte;
+}

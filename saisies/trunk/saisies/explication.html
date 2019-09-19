@@ -2,7 +2,7 @@
 	#ENV*{inserer_debut}
 	<div class="explication">
 		[<strong class="explication_titre">(#ENV*{titre}|extraire_idiome)</strong>]
-		[<div class="explication_texte">(#ENV*{texte}|propre)</div>]
+		[<div class="explication_texte">(#ENV*{texte}|propre|saisies_liens_ouvrants)</div>]
 	</div>
 	#ENV*{inserer_fin}
 </[(#ENV{saisies_base_conteneur,#DIV|sinon{li}})]>
