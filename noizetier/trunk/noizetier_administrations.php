@@ -114,24 +114,23 @@ function maj_060($config_defaut) {
 	maj_tables(array('spip_noizetier_pages', 'spip_types_noisettes'));
 
 	// Modification de la table spip_noisettes
+	// -- Changement du nom du champ 'noisette' en 'type_noisette' et de sa taille
+	sql_alter("TABLE spip_noisettes CHANGE noisette type_noisette varchar(255) DEFAULT '' NOT NULL");
+	// -- Changement du nom du champ 'rang' en 'rang_noisette'
+	sql_alter("TABLE spip_noisettes CHANGE rang rang_noisette smallint DEFAULT 1 NOT NULL");
+	// -- Ajout de la colonne 'plugin' qui vaut 'noizetier' pour ce plugin.
+	sql_alter("TABLE spip_noisettes ADD plugin varchar(30) DEFAULT '' NOT NULL AFTER id_noisette");
+	// -- Ajouts des colonnes relatives au conteneur : 'id_conteneur', 'conteneur' et 'est_conteneur'.
+	sql_alter("TABLE spip_noisettes ADD id_conteneur varchar(255) DEFAULT '' NOT NULL AFTER plugin");
+	sql_alter("TABLE spip_noisettes ADD conteneur text DEFAULT '' NOT NULL AFTER id_conteneur");
+	sql_alter("TABLE spip_noisettes ADD est_conteneur varchar(3) DEFAULT 'non' NOT NULL AFTER type_noisette");
 	// -- Ajout de la colonne 'encapsulation' qui indique pour chaque noisette si le noiZetier doit l'inclure dans une capsule
 	//    englobante ou pas. Le champ prend les valeurs 'on', '' ou 'defaut' qui indique qu'il faut prendre
 	//    en compte la valeur configurée par défaut (configuration du noizetier).
-	// -- Ajout de la colonne 'plugin' qui vaut 'noizetier' pour ce plugin.
-	// -- Ajout de la colonne 'id_conteneur'.
-	// -- Ajout de la colonne 'est_conteneur' toujours à la valeur 'non' car il n'existe pas de noisette de ce type
+	sql_alter("TABLE spip_noisettes ADD encapsulation varchar(6) DEFAULT 'defaut' NOT NULL AFTER parametres");
 	// -- Ajout de la colonne 'profondeur' à la valeur par défaut 0
 	//    dans les versions précédentes du plugin.
-	sql_alter("TABLE spip_noisettes ADD plugin varchar(30) DEFAULT '' NOT NULL AFTER id_noisette");
-	sql_alter("TABLE spip_noisettes ADD id_conteneur varchar(255) DEFAULT '' NOT NULL AFTER plugin");
-	sql_alter("TABLE spip_noisettes ADD conteneur text DEFAULT '' NOT NULL AFTER id_conteneur");
-	// -- Changement du nom du champ 'noisette' en 'type_noisette' et de sa taille
-	sql_alter("TABLE spip_noisettes CHANGE noisette type_noisette varchar(255) DEFAULT '' NOT NULL");
-	sql_alter("TABLE spip_noisettes ADD est_conteneur varchar(3) DEFAULT 'non' NOT NULL AFTER type_noisette");
-	sql_alter("TABLE spip_noisettes ADD encapsulation varchar(6) DEFAULT 'defaut' NOT NULL AFTER parametres");
 	sql_alter("TABLE spip_noisettes ADD profondeur smallint DEFAULT 0 NOT NULL AFTER css");
-	// -- Changement du nom du champ 'rang' en 'rang_noisette'
-	sql_alter("TABLE spip_noisettes CHANGE rang rang_noisette smallint DEFAULT 1 NOT NULL");
 	// -- Suppression des index pour des colonnes dont on va modifier la taille ou le type
 	sql_alter("TABLE spip_noisettes DROP INDEX type");
 	sql_alter("TABLE spip_noisettes DROP INDEX composition");
@@ -152,6 +151,8 @@ function maj_060($config_defaut) {
 	sql_alter("TABLE spip_noisettes ADD INDEX rang_noisette (rang_noisette)");
 	// -- Remplissage de la nouvelle colonne plugin avec la valeur 'noizetier'
 	//    et des colonnes id_conteneur et conteneur à partir des autres colonnes existantes.
+	//    La colonne est_conteneur est déjà initialisée à 'non' et cela suffit car en v2 il n'existe pas de
+	//    noisette conteneur.
 	$select = array('id_noisette', 'type', 'composition', 'objet', 'id_objet', 'bloc');
 	$from = 'spip_noisettes';
 	$noisettes = sql_allfetsel($select, $from);
