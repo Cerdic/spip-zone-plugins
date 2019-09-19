@@ -46,7 +46,7 @@ function noizetier_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.4.0'] = array(
 		array('maj_tables',array('spip_noisettes')),
 	);
-	
+
 	$maj['0.5.0'] = array(
 		array('maj_tables',array('spip_noisettes')),
 		array('sql_alter', 'TABLE spip_noisettes ADD INDEX (type(255))'),
@@ -125,13 +125,13 @@ function maj_060($config_defaut) {
 	sql_alter("TABLE spip_noisettes ADD plugin varchar(30) DEFAULT '' NOT NULL AFTER id_noisette");
 	sql_alter("TABLE spip_noisettes ADD id_conteneur varchar(255) DEFAULT '' NOT NULL AFTER plugin");
 	sql_alter("TABLE spip_noisettes ADD conteneur text DEFAULT '' NOT NULL AFTER id_conteneur");
+	// -- Changement du nom du champ 'noisette' en 'type_noisette' et de sa taille
+	sql_alter("TABLE spip_noisettes CHANGE noisette type_noisette varchar(255) DEFAULT '' NOT NULL");
 	sql_alter("TABLE spip_noisettes ADD est_conteneur varchar(3) DEFAULT 'non' NOT NULL AFTER type_noisette");
 	sql_alter("TABLE spip_noisettes ADD encapsulation varchar(6) DEFAULT 'defaut' NOT NULL AFTER parametres");
 	sql_alter("TABLE spip_noisettes ADD profondeur smallint DEFAULT 0 NOT NULL AFTER css");
 	// -- Changement du nom du champ 'rang' en 'rang_noisette'
 	sql_alter("TABLE spip_noisettes CHANGE rang rang_noisette smallint DEFAULT 1 NOT NULL");
-	// -- Changement du nom du champ 'noisette' en 'type_noisette' et de sa taille
-	sql_alter("TABLE spip_noisettes CHANGE noisette type_noisette varchar(255) DEFAULT '' NOT NULL");
 	// -- Suppression des index pour des colonnes dont on va modifier la taille ou le type
 	sql_alter("TABLE spip_noisettes DROP INDEX type");
 	sql_alter("TABLE spip_noisettes DROP INDEX composition");
