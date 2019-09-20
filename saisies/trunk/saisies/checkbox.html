@@ -64,7 +64,7 @@
 			<input type="hidden" name="#ENV{nom}\[\]" value="#CLE" />
 			]
 		]
-		<label for="#GET{id}"[(#CLE|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui)class="on"][(#ENV{attribut_title}|oui) title="#CLE"]>[(#VALEUR|extraire_idiome)]</label>
+		<label for="#GET{id}"[(#CLE|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui)class="on"][(#ENV{attribut_title}|oui) title="#CLE"]>#VALEUR</label>
 	</div>
 	</BOUCLE_checkbox_groupes>
 </div>
