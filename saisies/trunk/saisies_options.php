@@ -10,7 +10,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
-
+include_spip('plugins/installer');
 if (!function_exists('_T_ou_typo')) {
 	/**
 	 * une fonction qui regarde si $texte est une chaine de langue
@@ -26,24 +26,42 @@ if (!function_exists('_T_ou_typo')) {
 	 *     Retourne la valeur éventuellement modifiée.
 	 */
 	function _T_ou_typo($valeur, $mode_typo = 'toujours') {
+		if (!in_array($mode_typo, array('toujours', 'multi', 'jamais'))) {
+			$mode_typo = 'toujours';
+		}
+
 		// Si la valeur est bien une chaine (et pas non plus un entier déguisé)
 		if (is_string($valeur) and !intval($valeur)) {
-			// Si la chaine est du type <:truc:> on passe à _T()
-			if (preg_match('/^\<:(.*?):\>$/', $valeur, $match)) {
-				$valeur = _T($match[1]);
-			} else {
-				// Sinon on la passe a typo()
-				if (!in_array($mode_typo, array('toujours', 'multi', 'jamais'))) {
-					$mode_typo = 'toujours';
-				}
-
-				if ($mode_typo == 'toujours' or ($mode_typo == 'multi' and strpos($valeur, '<multi>') !== false)) {
+			// Si on a dépassé 3.2, on peut uniquement utilser typo() car ça extrait les <:chaine:>
+			if (spip_version_compare(spip_version(), '3.2', '>=')) {
+				if (
+					$mode_typo == 'toujours'
+					or (
+						$mode_typo == 'multi'
+						and include_spip('inc/filtres')
+						and (preg_match(_EXTRAIRE_IDIOME, $valeur) or strpos($valeur, '<multi>') !== false)
+					)
+				) {
 					include_spip('inc/texte');
 					$valeur = typo($valeur);
 				}
 			}
-		} elseif (is_array($valeur)) {
-			// Si c'est un tableau, on reapplique la fonction récursivement
+			// Si on est avant 3.2, on fait comme avant
+			else {
+				// Si la chaine est du type <:truc:> on passe à _T()
+				if (preg_match('/^\<:(.*?):\>$/', $valeur, $match)) {
+					$valeur = _T($match[1]);
+				} else {
+					// Sinon on la passe a typo()
+					if ($mode_typo == 'toujours' or ($mode_typo == 'multi' and strpos($valeur, '<multi>') !== false)) {
+						include_spip('inc/texte');
+						$valeur = typo($valeur);
+					}
+				}
+			}
+		}
+		// Si c'est un tableau, on réapplique la fonction récursivement
+		elseif (is_array($valeur)) {
 			foreach ($valeur as $cle => $valeur2) {
 				$valeur[$cle] = _T_ou_typo($valeur2, $mode_typo);
 			}

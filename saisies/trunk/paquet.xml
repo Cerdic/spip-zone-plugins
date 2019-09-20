@@ -1,7 +1,7 @@
 <paquet
 	prefix="saisies"
 	categorie="outil"
-	version="3.28.1"
+	version="3.28.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/logo_saisie_48.png"
@@ -34,6 +34,6 @@
 	<menu nom="saisies_doc" titre="saisies:titre_page_saisies_doc" parent="menu_developpement"  icone="images/saisies-16.png" />
 
 	<utilise nom="verifier" compatibilite="[1.6.0;]" />
-	<utilise nom="spip_bonux" compatibilite="[3.0.0;]" />
+	<utilise nom="spip_bonux" compatibilite="[3.5.0;]" />
 	<utilise nom="yaml" compatibilite="[1.5.0;]" />
 </paquet>
