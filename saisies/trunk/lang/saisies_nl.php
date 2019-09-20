@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_rub_interface_explication' => 'Toon alleen rubrieken in de gebruikerstaal',
 	'option_aff_rub_interface_label' => 'Meertalige display',
 	'option_afficher_si_explication' => 'Geef de voorwaarde op voor het vertonen van het veld in functie van de waarde van andere velden. De identificatie van de andere velden moet tussen <code>@</code> worden geplaatst. <br />Bijvoorbeeld <code>@selection_1@=="Toto"</code> geeft de voorwaarde aan dat het veld moet worden getoond wanneer veld <code>selection_1</code> de waarde <code>Toto</code> heeft.<br/>Je kunt daarbij de booleaanse operators <code>||</code> (of) en <code>&&</code> (en) gebruiken.<br />
-Je vindt <a href="https://contrib.spip.net/5080" target="_blank">volledige documentatie van de syntax op spip-contrib</a>.',
+Je vindt <a href="https://contrib.spip.net/5080" target="_blank">volledige documentatie van de syntax op spip-contrib</a>.', # MODIF
 	'option_afficher_si_label' => 'Tonen onder voorwaarde',
 	'option_afficher_si_remplissage_uniquement_explication' => 'Door het aanvinken van dit vakje wordt de voorwaardelijke weergave alleen toegepast bij het invullen van het formulier en niet bij het weergeven van de resultaten.',
 	'option_afficher_si_remplissage_uniquement_label' => 'Alleen bij het invullen van het formulier',
