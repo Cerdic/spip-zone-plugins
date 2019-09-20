@@ -222,14 +222,18 @@ function maj_060($config_defaut) {
 					'est_page_objet' => 'non',
 					'signature'      => '',
 				);
-				// Nom par défaut si non précisé (identifiant de la page)
+				// Mise à jour du nom si défini
 				if (!empty($_description['nom'])) {
 					$description['nom'] = $_description['nom'];
 				}
-				// Icone par défaut si non précisé
+				// Mise à jour de la description si définie
+				if (!empty($_description['description'])) {
+					$description['description'] = $_description['description'];
+				}
+				// Mise à jour de l'icone si défini
 				if (!empty($_description['icon'])) {
 					$description['icon'] = $_description['icon'];
-				} else
+				}
 				// Traitement des necessite pour identifier l'activité de la page
 				if (!empty($_description['necessite'])) {
 					foreach ($_description['necessite'] as $_plugin_necessite) {
