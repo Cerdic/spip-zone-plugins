@@ -1,8 +1,8 @@
 <paquet
 	prefix="noizetier"
 	categorie="maintenance"
-	version="3.0.97"
-	etat="test"
+	version="3.0.98"
+	etat="dev"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/noizetier-32.png"
 	schema="0.6.0"
