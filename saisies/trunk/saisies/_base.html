@@ -49,7 +49,7 @@
 			#ENV*{inserer_debut}
 			[<label[(#ENV{type_saisie}|match{oui_non|radio|checkbox|fichiers}|non) for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"][ class="(#ENV{label_class})"]>(#ENV*{label}|extraire_idiome)[<span class='obligatoire'>(#GET{obligatoire}|oui)[(#ENV*{info_obligatoire}|trim|sinon{<:info_obligatoire_02:>})]</span>]</label>]
 			[<span class='erreur_message'>(#GET{erreurs})</span>]
-			[<p class="explication" id="[explication_(#ENV{nom}|saisie_nom2name)]">(#ENV*{explication}|extraire_idiome|saisies_liens_ouvrants)</p>]
+			[<p class="explication" id="[explication_(#ENV{nom}|saisie_nom2name)]">(#ENV*{explication}|extraire_idiome)</p>]
 			[<em class='attention'>(#ENV*{attention})</em>]
 			[(#INCLURE{fond=saisies/#ENV{type_saisie},env,nom=[(#ENV{nom}|saisie_nom2name)], disable=#GET{disable},readonly=#GET{readonly},describedby=[(#ENV*{explication}|?{[explication_(#ENV{nom}|saisie_nom2name)]})]})]
 			[(#ENV{disable_avec_post}|et{#ENV{disable_avec_post}|!={non}}|et{#ENV{type_saisie}|in_array{#LISTE{case,checkbox}}|non}|oui)<input type='hidden' name='[(#ENV{nom}|saisie_nom2name)]' value="#ENV{valeur,#ENV{defaut}}" />]
