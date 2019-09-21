@@ -76,7 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_rub_interface_label' => 'Multilingual display',
 	'option_afficher_si_explication' => 'Specify the conditions to display the field based on the value of the other fields. The identifier of the other fields has to be entered between <code>@</code>. <br />Example <code>@selection_1@=="Toto"</code> conditions the display of the field only when field <code>selection_1</code> has a value of <code>Toto</code>.<br />
 It is possible to use Boolean operators <code> || </code> (or) and <code> && </code> (and).<br/>
-You will find <a href="https://contrib.spip.net/5080" target="_blank">full documentation of the syntax on spip-contrib</a>.',
+You will find <a href="https://contrib.spip.net/5080" target="_blank">full documentation of the syntax on spip-contrib</a>.', # MODIF
 	'option_afficher_si_label' => 'Conditional display',
 	'option_afficher_si_remplissage_uniquement_explication' => 'By checking this box, the conditional display will only apply when filling in the form, not when displaying the results.',
 	'option_afficher_si_remplissage_uniquement_label' => 'Only when filling the form',
