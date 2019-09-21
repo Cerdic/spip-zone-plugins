@@ -244,6 +244,7 @@ function maj_060($config_defaut) {
 					}
 				}
 				// Blocs, necessite et branche: des tableaux à sérialiser
+				// TODO : est-il possible d'avoir ces données dans une composition virtuelle v2 ?
 				$description['blocs_exclus'] = isset($_description['blocs_exclus'])
 					? serialize($_description['blocs_exclus'])
 					: serialize(array());

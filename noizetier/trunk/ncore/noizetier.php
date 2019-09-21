@@ -621,8 +621,14 @@ function noizetier_conteneur_verifier($plugin, $conteneur) {
 				and isset($conteneur['objet'], $conteneur['id_objet'])
 				and $conteneur['objet']
 				and intval($conteneur['id_objet']))) {
-				// Le conteneur coincide avec un squelette de bloc générique ou d'un objet donné.
-				$conteneur_verifie = $conteneur;
+				// On verifie que le bloc est valide : il correspond à l'index 0.
+				$squelette = explode('/', $conteneur['squelette']);
+				include_spip('inc/noizetier_bloc');
+				if (($squelette[0])
+				and in_array($squelette[0], bloc_z_lister_defaut())) {
+					// Le conteneur coincide avec un bloc valide d'un squelette générique ou d'un objet donné.
+					$conteneur_verifie = $conteneur;
+				}
 			}
 		}
 	}

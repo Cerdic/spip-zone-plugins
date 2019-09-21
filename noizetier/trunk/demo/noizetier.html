@@ -8,6 +8,26 @@
 	include_spip('demo/noizetier');
 ?>
 
+	#SET{page, article}
+	#SET{bloc, content}
+	[(#CONTENEUR_NOIZETIER_IDENTIFIER{#GET{page}, #GET{bloc}}|sinon{erreur})]
+	<br />
+
+	#SET{objet, #ARRAY{objet, article, id_objet, 12}}
+	#SET{bloc, content}
+	[(#CONTENEUR_NOIZETIER_IDENTIFIER{#GET{objet}, #GET{bloc}}|sinon{erreur})]
+	<br />
+
+	#SET{objet, #ARRAY{objet, article, id_objet, 12}}
+	#SET{bloc, ''}
+	[(#CONTENEUR_NOIZETIER_IDENTIFIER{#GET{objet}, #GET{bloc}}|sinon{erreur})]
+	<br />
+
+	#SET{objet, #ARRAY{objet, article}}
+	#SET{bloc, content}
+	[(#CONTENEUR_NOIZETIER_IDENTIFIER{#GET{objet}, #GET{bloc}}|sinon{erreur})]
+	<br />
+
 	#SET{valeur, ''}
 	<p>{composition}</p>
 	<B_pages_1>

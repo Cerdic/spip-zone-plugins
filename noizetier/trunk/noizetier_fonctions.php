@@ -22,6 +22,56 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 // ------------------------- API CONTENEURS : COMPLEMENT --------------------------
 // --------------------------------------------------------------------------------
 
+/**
+ * Compile la balise `#CONTENEUR_NOIZETIER_IDENTIFIER` qui fournit l'id du conteneur désigné par ses éléments
+ * canoniques propres au noiZetier. La balise est une encapsulation de la fonction `conteneur_noizetier_composer`
+ * mais ne permet de calculer l'id d'un conteneur noisette car ce cas n'est pas utilisable dans un HTML. Elle est
+ * à utiliser de préférence à celle fournie par N-Core (`#CONTENEUR_IDENTIFIER`)
+ *
+ * La signature de la balise est : `#CONTENEUR_NOIZETIER_IDENTIFIER{page_ou_objet, bloc}`.
+ *
+ * @param Champ $p
+ *        Pile au niveau de la balise.
+ *
+ * @return Champ
+ *         Pile complétée par le code à générer.
+ *@package SPIP\NOIZETIER\CONTENEUR\BALISE
+ * @balise
+ *
+ * @example
+ *     ```
+ *     #CONTENEUR_NOIZETIER_IDENTIFIER{article, content}, renvoie l'id du conteneur représentant le bloc content/article
+ *     #CONTENEUR_NOIZETIER_IDENTIFIER{array(objet => article, id_article => 12), content}, renvoie l'id du conteneur
+ *     représentant le bloc content de l'objet article12
+ *     ```
+ *
+ */
+function balise_CONTENEUR_NOIZETIER_IDENTIFIER_dist($p) {
+
+	$page_ou_objet = interprete_argument_balise(1, $p);
+	$page_ou_objet = str_replace('\'', '"', $page_ou_objet);
+
+	$bloc = interprete_argument_balise(2, $p);
+	$bloc = str_replace('\'', '"', $bloc);
+
+	$p->code = "calculer_id_conteneur($page_ou_objet, $bloc)";
+
+	return $p;
+}
+
+/**
+ * @internal
+ *
+ * @param string $bloc
+ * @param string $information
+ *
+ * @return array|string
+ */
+function calculer_id_conteneur($page_ou_objet, $bloc) {
+
+	include_spip('inc/noizetier_conteneur');
+	return conteneur_noizetier_composer($page_ou_objet, $bloc);
+}
 
 // -------------------------------------------------------------------
 // --------------------------- API ICONES ----------------------------
@@ -98,6 +148,7 @@ function calculer_liste_icones($taille = 24) {
  *         Pile complétée par le code à générer.
  **/
 function balise_BLOC_Z_INFOS_dist($p) {
+
 	$bloc = interprete_argument_balise(1, $p);
 	$bloc = str_replace('\'', '"', $bloc);
 	$information = interprete_argument_balise(2, $p);
