@@ -187,22 +187,22 @@ function bouq_declarer_tables_objets_sql($tables) {
 	);
 
 	// Gestion des rôles de documents (si activé)
-	if (test_plugin_actif('roles_documents')) {
-		$nouveaux_roles_livres = array(
-			'couverture'  => 'livre:role_couverture',
-			'4couverture'  => 'livre:role_4couverture'
-		);
+	// if (test_plugin_actif('roles_documents')) {
+	// 	$nouveaux_roles_livres = array(
+	// 		'couverture'  => 'livre:role_couverture',
+	// 		'4couverture'  => 'livre:role_4couverture'
+	// 	);
 
-		array_merge_recursive($tables, 'spip_documents', array(
-			'roles_titres' => $nouveaux_roles_livres,
-			'roles_objets' => array(
-				'livres' => array(
-					'choix' => array_keys($nouveaux_roles_livres),
-					'defaut' => 'couverture'
-				)
-			)
-		));
-	}
+	// 	array_merge_recursive($tables, 'spip_documents', array(
+	// 		'roles_titres' => $nouveaux_roles_livres,
+	// 		'roles_objets' => array(
+	// 			'livres' => array(
+	// 				'choix' => array_keys($nouveaux_roles_livres),
+	// 				'defaut' => 'couverture'
+	// 			)
+	// 		)
+	// 	));
+	// }
 
 	return $tables;
 }
