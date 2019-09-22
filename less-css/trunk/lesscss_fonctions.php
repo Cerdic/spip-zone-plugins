@@ -151,7 +151,7 @@ function lesscss_compile($style, $contexte = array()){
 	// si on a rien parse parce que fichier en cache, indiquer au moins le fichier source concerne dans l'en-tete
 	$files = Less_Parser::AllParsedFiles();
 	if (!$files and !empty($contexte['file'])) {
-		$files = [$contexte['file']];
+		$files = array($contexte['file']);
 	}
 	if ($files AND count($files)){
 
@@ -311,7 +311,7 @@ function lesscss_cssify_head($head){
 		$s2 = inserer_attribut($s,"href","$cssfile?$m");
 		$head = str_replace($s, $s2, $head);
 	}
-	
+
 	return $head;
 }
 
