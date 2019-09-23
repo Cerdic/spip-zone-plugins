@@ -89,10 +89,9 @@ function critere_magnet_dist($idb, &$boucles, $crit) {
  */
 function critere_magnet_pile_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
-	if (isset($crit->param[0][0])
-	  AND $crit->param[0][0]->type=="texte"
-		AND ($pile = $crit->param[0][0]->texte)){
-		$boucle->modificateur['magnet_pile'] = $pile;
+	if (isset($crit->param[0]) and
+			$_pile = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent)) {
+		$boucle->modificateur['magnet_pile'] = $_pile;
 		$boucle->modificateur['criteres']['magnet_pile'] = true;
 	}
 }
@@ -119,10 +118,13 @@ function critere_ignore_magnet_dist($idb, &$boucles, $crit) {
  */
 function balise_BOUTONS_ADMIN_MAGNET_dist($p) {
 	$_pile_arg = '';
-	if (($_pile = interprete_argument_balise(1,$p))===NULL)
+	if (($_pile = interprete_argument_balise(1,$p))===NULL){
 		$_pile = "''";
-	else {
+	} else {
 		$_pile_arg = ",\''.addslashes(".$_pile.").'\'";
+		if (($_label = interprete_argument_balise(2,$p))!==NULL) {
+			$_pile_arg .= ",\''.addslashes(".$_label.").'\'";
+		}
 	}
 
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
@@ -167,7 +169,7 @@ function magnet_pre_boucle($boucle){
 	  AND !defined('_IGNORE_MAGNET')
 	  AND (!test_espace_prive() OR isset($boucle->modificateur['criteres']['magnet']) OR isset($boucle->modificateur['criteres']['magnet_pile']))){
 		if (magnet_actif_sur_objet($boucle->type_requete)){
-			$pile = (isset($boucle->modificateur['magnet_pile'])?$boucle->modificateur['magnet_pile']:'');
+			$_pile = (isset($boucle->modificateur['magnet_pile'])?$boucle->modificateur['magnet_pile']:"''");
 			$_id = $boucle->id_table . "." . $boucle->primary;
 			$magnet = true;
 			// si la boucle a un critere id_xxx=yy non conditionnel on ne magnet pas (perf issue)
@@ -182,7 +184,7 @@ function magnet_pre_boucle($boucle){
 				}
 			}
 			if ($magnet){
-				$_list = "implode(',',array_reverse(magnet_liste_ids('".addslashes($boucle->type_requete)."', '".addslashes($pile)."')))";
+				$_list = "implode(',',array_reverse(magnet_liste_ids('".addslashes($boucle->type_requete)."', $_pile)))";
 				$boucle->select[] = "FIELD($_id,\".$_list.\") as magnet";
 				if (count($boucle->default_order) AND !count($boucle->order)){
 					while(count($boucle->default_order)){
@@ -203,9 +205,10 @@ function magnet_pre_boucle($boucle){
  * @param $id_objet
  * @param string $class
  * @param string $pile
+ * @param string $libelle
  * @return string
  */
-function magnet_html_boutons_admin($objet, $id_objet, $class="", $pile=''){
+function magnet_html_boutons_admin($objet, $id_objet, $class="", $pile='', $libelle=''){
 	static $done = false;
 	if (!function_exists('generer_action_auteur'))
 		include_spip('inc/actions');
@@ -237,8 +240,8 @@ function magnet_html_boutons_admin($objet, $id_objet, $class="", $pile=''){
 		$boutons = $bouton_action($label,$ur_action,$bclass);
 	}
 
-	if ($pile){
-		$boutons = "<strong>"._T("magnets_pile:".strtolower($pile))."</strong> " . $boutons;
+	if ($pile or $libelle){
+		$boutons = "<strong>".($libelle ? $libelle : _T("magnets_pile:".strtolower($pile)))."</strong> " . $boutons;
 	}
 
 	if (!$done){
