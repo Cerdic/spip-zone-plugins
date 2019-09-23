@@ -106,7 +106,7 @@ function formulaires_etendre_noisette_traiter_dist($noisette, $page_noisette, $b
 	foreach ($pages as $_page) {
 		// Définir le conteneur de la noisette, à savoir, le squelette du bloc de la page concernée.
 		$conteneur['squelette'] = "${bloc}/${_page}";
-		if (!noisette_dupliquer('noizetier', $noisette['id_noisette'], $conteneur, $parametres)) {
+		if (!noisette_dupliquer('noizetier', $noisette['id_noisette'], $conteneur, 0, $parametres)) {
 			$erreurs[] = $_page;
 		}
 	}
