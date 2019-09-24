@@ -64,7 +64,6 @@ function spip_bonux_affichage_final($flux) {
 	return $flux;
 }
 
-
 if (!function_exists('_T_ou_typo')) {
 	/**
 	 * une fonction qui regarde si $texte est une chaine de langue
@@ -85,35 +84,27 @@ if (!function_exists('_T_ou_typo')) {
 		}
 
 		// Si la valeur est bien une chaine (et pas non plus un entier déguisé)
-		if (is_string($valeur) and !intval($valeur)) {
-			// Si on a dépassé 3.2, on peut uniquement utilser typo() car ça extrait les <:chaine:>
+		if (is_string($valeur) and !is_numeric($valeur)) {
+			// Si on est en >=3.2, on peut extraire les <:chaine:>
 			$version = explode('.',$GLOBALS['spip_version_branche']);
-			if ($version[0] > 3 or ($version[1] >= 2 and $version[0] == 3)) {
+			$extraction_chaines = (($version[0] > 3 or $version[1] >= 2) ? true : false);
+			// Si la chaine est du type <:truc:> on passe à _T()
+			if (strpos($valeur, '<:') !== false
+			  and preg_match('/^\<:([^>]*?):\>$/', $valeur, $match)) {
+				$valeur = _T($match[1]);
+			} else {
+				// Sinon on la passe a typo() si c'est pertinent
 				if (
-					$mode_typo == 'toujours'
-					or (
-						$mode_typo == 'multi'
-						and include_spip('inc/filtres')
-						and (preg_match(_EXTRAIRE_IDIOME, $valeur) or strpos($valeur, '<multi>') !== false)
-					)
+					$mode_typo === 'toujours'
+					or ($mode_typo === 'multi' and strpos($valeur, '<multi>') !== false)
+					or ($extraction_chaines
+					  and $mode_typo === 'multi'
+					  and strpos($valeur, '<:') !== false
+					  and include_spip('inc/filtres')
+					  and preg_match(_EXTRAIRE_IDIOME, $valeur))
 				) {
 					include_spip('inc/texte');
 					$valeur = typo($valeur);
-				} elseif ($mode_typo == 'jamais' and preg_match('/^\<:(.*?):\>$/', $valeur, $match)) {
-					$valeur = _T($match[1]);
-				}
-			}
-			// Si on est avant 3.2, on fait comme avant
-			else {
-				// Si la chaine est du type <:truc:> on passe à _T()
-				if (preg_match('/^\<:(.*?):\>$/', $valeur, $match)) {
-					$valeur = _T($match[1]);
-				} else {
-					// Sinon on la passe a typo()
-					if ($mode_typo == 'toujours' or ($mode_typo == 'multi' and strpos($valeur, '<multi>') !== false)) {
-						include_spip('inc/texte');
-						$valeur = typo($valeur);
-					}
 				}
 			}
 		}
