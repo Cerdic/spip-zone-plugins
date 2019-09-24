@@ -65,7 +65,6 @@ function spip_bonux_affichage_final($flux) {
 }
 
 
-include_spip('plugins/installer');
 if (!function_exists('_T_ou_typo')) {
 	/**
 	 * une fonction qui regarde si $texte est une chaine de langue
@@ -88,7 +87,8 @@ if (!function_exists('_T_ou_typo')) {
 		// Si la valeur est bien une chaine (et pas non plus un entier déguisé)
 		if (is_string($valeur) and !intval($valeur)) {
 			// Si on a dépassé 3.2, on peut uniquement utilser typo() car ça extrait les <:chaine:>
-			if (spip_version_compare(spip_version(), '3.2', '>=')) {
+			$version = explode('.',$GLOBALS['spip_version_branche']);
+			if ($version[0] > 3 or ($version[1] >= 2 and $version[0] == 3)) {
 				if (
 					$mode_typo == 'toujours'
 					or (
