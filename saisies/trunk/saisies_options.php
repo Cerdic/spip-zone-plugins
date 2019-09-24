@@ -45,6 +45,8 @@ if (!function_exists('_T_ou_typo')) {
 				) {
 					include_spip('inc/texte');
 					$valeur = typo($valeur);
+				} elseif ($mode_typo == 'jamais' and preg_match('/^\<:(.*?):\>$/', $valeur, $match) {
+					$valeur = _T($match[1]);
 				}
 			}
 			// Si on est avant 3.2, on fait comme avant
