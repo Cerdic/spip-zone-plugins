@@ -18,7 +18,7 @@
 		<li>[(#GET{url_propre}|lien_ou_expose{[(#CHEMIN_IMAGE{toggle_expand-16}|balise_img) ]<:statistiques:onglet_referers_tous:>,[(#GET{objet}|non)]})]</li>
 		<BOUCLE_menu_objets(DATA){source table, #CONFIG{activer_statistiques_objets,#ARRAY}|unserialize|array_filter}>
 		[(#SET{objet_menu,#VALEUR|objet_type})]
-		<li>[(#GET{url_propre}|parametre_url{objet,#GET{objet_menu}}|lien_ou_expose{[(#GET{objet_menu}|objet_icone{16}) ][(#GET{objet_menu}|objet_info{texte_objets}|_T)],#GET{objet_menu}|=={#GET{objet}}})]</li>
+		<li>[(#GET{url_propre}|parametre_url{objet,#GET{objet_menu}}|parametre_url{jour,''}|lien_ou_expose{[(#GET{objet_menu}|objet_icone{16}) ][(#GET{objet_menu}|objet_info{texte_objets}|_T)],#GET{objet_menu}|=={#GET{objet}}})]</li>
 		</BOUCLE_menu_objets>
 	</ul>
 </div>
