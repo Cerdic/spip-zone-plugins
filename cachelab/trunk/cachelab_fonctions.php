@@ -12,7 +12,7 @@ if (!defined('LOG_CACHELAB_CHRONO')) {
 
 // Seuil minimal des temps de ciblage à loger dans cachelab_slow (en ms)
 if (!defined('LOG_CACHELAB_SLOW')) {
-	define('LOG_CACHELAB_SLOW', 70);
+	define('LOG_CACHELAB_SLOW', 300);
 }
 
 // Seuil minimal du nombre de caches invalidés en un seul ciblage pour le loger dans cachelab_toomany_del
