@@ -101,7 +101,7 @@ function classement_populaires($type, $serveur = '') {
 		'',
 		$serveur
 	);
-	$classement[$type] = array_map('reset', $classement[$type]);
+	$classement[$type] = array_column($classement[$type], $id_table_objet);
 
 	return $classement[$type];
 }
