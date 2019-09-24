@@ -30,48 +30,15 @@ function statsobjets_upgrade($nom_meta_base_version, $version_cible) {
 
 	$maj = array();
 
-	// Ajout de 2 tables pour prendre en compte les statistiques des objets éditoriaux
-	// Ajout des colonnes popularite, visites et referers sur tous les objets
+	// Ajout de 2 tables pour prendre en compte les statistiques des objets éditoriaux.
+	// Ajout des colonnes popularite, visites et referers sur tous les objets.
 	$maj['create'] = array(
 		array('maj_tables', array('spip_visites_objets', 'spip_referers_objets')),
-		array('statsobjets_check_upgrade'),
+		array('statsobjets_maj_create'),
 	);
-	// Si les stats sont activées, on prend en compte les articles
-	if (lire_config('activer_statistiques') == 'oui'){
-		$maj['create'][] = array('ecrire_config', 'activer_statistiques_objets', array('spip_articles'));
-	}
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
-
-}
-
-
-/**
- * Une fonction pour vérifier que les champs nécessaires sont bien sur tous les objets,
- * appelée lorsqu'on enregistre la configuration
- * (cas d'un nouvel objet ajouté apres l'install du plugin)
- *
- * @return void
- */
-function statsobjets_check_upgrade(){
-
-	include_spip('base/objets');
-
-	$tables_objets = array_keys(lister_tables_objets_sql());
-	$trouver_table = charger_fonction('trouver_table','base');
-	foreach($tables_objets as $table){
-		$desc = $trouver_table($table);
-		if (!isset($desc['field']['popularite'])){
-			sql_alter("TABLE $table ADD popularite DOUBLE DEFAULT '0' NOT NULL");
-		}
-		if (!isset($desc['field']['visites'])) {
-			sql_alter("TABLE $table ADD visites integer DEFAULT '0' NOT NULL");
-		}
-		if (!isset($desc['field']['referers'])) {
-			sql_alter("TABLE $table ADD referers integer DEFAULT '0' NOT NULL");
-		}
-	}
 
 }
 
@@ -105,4 +72,48 @@ function statsobjets_vider_tables($nom_meta_base_version) {
 
 	effacer_meta('activer_statistiques_objets');
 	effacer_meta($nom_meta_base_version);
+}
+
+
+/**
+ * Fonction privée pour l'installation
+ * @return void
+ */
+function statsobjets_maj_create() {
+	// Si les stats sont activées, on prend en compte les articles
+	include_spip('inc/config');
+	if (lire_config('activer_statistiques') == 'oui') {
+		ecrire_config('activer_statistiques_objets', array('spip_articles'));
+	}
+	// vérifier la présence des champs sur toutes les tables
+	statsobjets_check_upgrade();
+}
+
+
+/**
+ * Vérifier que les champs nécessaires sont présents sur tous les objets : popularite, visites, referers
+ * Fonction appelée également lorsqu'on enregistre la configuration
+ * (cas d'un nouvel objet ajouté apres l'install du plugin)
+ *
+ * @return void
+ */
+function statsobjets_check_upgrade() {
+
+	include_spip('base/objets');
+
+	$tables_objets = array_keys(lister_tables_objets_sql());
+	$trouver_table = charger_fonction('trouver_table','base');
+	foreach($tables_objets as $table){
+		$desc = $trouver_table($table);
+		if (!isset($desc['field']['popularite'])){
+			sql_alter("TABLE $table ADD popularite DOUBLE DEFAULT '0' NOT NULL");
+		}
+		if (!isset($desc['field']['visites'])) {
+			sql_alter("TABLE $table ADD visites integer DEFAULT '0' NOT NULL");
+		}
+		if (!isset($desc['field']['referers'])) {
+			sql_alter("TABLE $table ADD referers integer DEFAULT '0' NOT NULL");
+		}
+	}
+
 }

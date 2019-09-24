@@ -1,9 +1,9 @@
-#SET{name,objets}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+#SET{name,objets}
+#SET{erreurs,#ENV**{erreurs/#GET{name}}}
 #SET{div,#REM|spip_version|floatval|>={3.1}|?{div,li}}
-<[(#GET{div}) ]class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+<[(#GET{div}) ]class="editer configurer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	<span class="explication"><:statistiques:cfg_champ_objets_explication:></span>
-	<label><:statistiques:cfg_champ_objets_label:></label>[
-	<span class='erreur_message'>(#GET{erreurs})</span>
-	]
-	#INCLURE{fond=formulaires/inc-choisir-objets,name=#GET{name},selected=#ENV**{#GET{name}}}
+	<label><:statistiques:cfg_champ_objets_label:></label>
+	[<span class='erreur_message'>(#GET{erreurs})</span>]
+	<INCLURE{fond=formulaires/inc-choisir-objets, name=#GET{name}, selected=#ENV**{#GET{name}}}>
 </[(#GET{div})]>
