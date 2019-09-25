@@ -3,7 +3,7 @@
 	categorie="edition"
 	version="1.3.5"
 	etat="test"
-	compatibilite="[2.1.0;3.2.99]"
+	compatibilite="[2.1.0;3.2.*]"
 	logo="precode.png"
 	documentation="https://contrib.spip.net/?article4983"
 >	
