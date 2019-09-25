@@ -1,0 +1,20 @@
+<paquet
+	prefix="typo_guillemets"
+	categorie="edition"
+	version="1.5.6"
+	etat="stable"
+	compatibilite="[1.9.0;3.2.99]"
+	logo="icon/typo_guillemets.png"
+	documentation="https://contrib.spip.net/article1592.html"
+>	
+
+	<nom>Guillemets typographiques</nom>
+	<!-- Correction automatique des guillemets, selon la langue -->
+
+	<auteur lien="https://contrib.spip.net/auteur7639.html">Vincent Ramos</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="post_typo" action="remplacements" inclure="typo_guillemets_fonctions.php" />
+	<pipeline nom="insert_head_css" inclure="typo_guillemets_fonctions.php" />
+</paquet>
