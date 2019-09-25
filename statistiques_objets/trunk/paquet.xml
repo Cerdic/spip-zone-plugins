@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/statsobjets.png"
-	documentation=""
+	documentation="https://contrib.spip.net/5189"
 	schema="1.0.0"
 >
 	<nom>Statistiques des objets éditoriaux</nom>
