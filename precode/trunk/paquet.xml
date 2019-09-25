@@ -1,0 +1,23 @@
+<paquet
+	prefix="precode"
+	categorie="edition"
+	version="1.3.5"
+	etat="test"
+	compatibilite="[2.1.0;3.2.99]"
+	logo="precode.png"
+	documentation="https://contrib.spip.net/?article4983"
+>	
+
+	<nom>Pre &amp; Code</nom>
+	<!-- Affichez proprement du code dans SPIP -->
+
+	<auteur lien="http://spip.tetue.net">tetue</auteur>
+
+	<copyright>2017</copyright>
+
+	<pipeline nom="insert_head" inclure="precode_pipelines.php" />
+	<pipeline nom="header_prive" inclure="precode_pipelines.php" />
+
+	<utilise nom="tinytypo" compatibilite="];[" />
+	<utilise nom="coloration_code" compatibilite="[0.6.7;[" />
+</paquet>
