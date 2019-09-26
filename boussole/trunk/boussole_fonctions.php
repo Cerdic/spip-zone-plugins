@@ -175,7 +175,7 @@ function boussole_traduire($boussole, $champ, $objet='') {
 function boussole_lister_caches() {
 	$caches = array();
 
-	include_spip('inc/cache');
+	include_spip('inc/boussole_cache');
 	$fichiers_cache = trouver_caches();
 	if ($fichiers_cache) {
 		include_spip('inc/config');

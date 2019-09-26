@@ -1,7 +1,7 @@
 <paquet
 	prefix="boussole"
 	categorie="navigation"
-	version="2.7.4"
+	version="2.7.5"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="boussole_logo-64.png"

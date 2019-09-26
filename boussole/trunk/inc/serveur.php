@@ -38,7 +38,7 @@ if (!defined('_BOUSSOLE_OBJET_SITE'))
 function boussole_actualiser_caches() {
 
 	// Suppression de tous les caches (.xml et .sha) afin de ne pas conserver des boussoles qui ne sont plus disponibles
-	include_spip('inc/cache');
+	include_spip('inc/boussole_cache');
 	supprimer_caches();
 
 	// Acquisition de la liste des boussoles disponibles sur le serveur.
@@ -120,7 +120,7 @@ function boussole_cacher_liste($boussoles) {
 		$cache = '';
 		foreach($boussoles as $_alias => $_infos) {
 			// Construire le nom du fichier cache de la boussole et vérifier qu'il existe
-			include_spip('inc/cache');
+			include_spip('inc/boussole_cache');
 			$fichier_cache = cache_boussole_existe($_alias);
 			if ($fichier_cache) {
 				// Extraction des seules informations de la boussole pour créer le cache (pas de groupe ni site)
@@ -154,7 +154,7 @@ function boussole_cacher_liste($boussoles) {
 			$cache = str_replace(_BOUSSOLE_PATTERN_SHA, $sha, $cache);
 
 			// Ecriture du cache et de son sha256
-			include_spip('inc/cache');
+			include_spip('inc/boussole_cache');
 			ecrire_cache_liste($cache);
 
 			$retour = true;
@@ -309,7 +309,7 @@ function xml_to_cache($fichier_xml, $alias_boussole, $prefixe_plugin='') {
 			$cache = str_replace(_BOUSSOLE_PATTERN_SHA, $sha, $cache);
 
 			// Ecriture du cache et de son sha256
-			include_spip('inc/cache');
+			include_spip('inc/boussole_cache');
 			ecrire_cache_boussole($cache, $alias_boussole);
 
 			$retour = true;

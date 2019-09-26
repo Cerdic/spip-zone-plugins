@@ -57,7 +57,7 @@ function action_serveur_lister_boussoles_dist(){
 		// Si erreur, on renvoie un id sous forme d'une balise erreur
 		if ($boussoles) {
 			// Construire le nom du fichier cache de la liste des boussoles et vérifier qu'il existe
-			include_spip('inc/cache');
+			include_spip('inc/boussole_cache');
 			$fichier_cache = cache_liste_existe();
 			if (!$fichier_cache) {
 				$erreur = 'cache_liste_indisponible';

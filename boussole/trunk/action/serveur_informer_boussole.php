@@ -60,7 +60,7 @@ function action_serveur_informer_boussole_dist(){
 				if (array_key_exists($alias_boussole, $boussoles)) {
 					// Construire le nom du fichier cache de la boussole et vérifier qu'il existe
 					// Si la boussole n'est pas encoe en cache on retourne une erreur
-					include_spip('inc/cache');
+					include_spip('inc/boussole_cache');
 					$fichier_cache = cache_boussole_existe($alias_boussole);
 					if (!$fichier_cache) {
 						$erreur = 'cache_boussole_indisponible';
