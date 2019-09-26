@@ -44,8 +44,12 @@
 			</[(#DIV|sinon{li})]>
 		</[(#DIV|sinon{ul})]>
 		
-		<fieldset>
+		<fieldset class="rubriques">
 			<legend><:accesrestreint:rubriques_zones_acces:></legend>
+			<div class="filtrer">
+				<label for="filtrer_rubriques"><:accesrestreint:label_filtrer_rubriques:> :</label>
+				<input type="input" id="filtrer_rubriques" placeholder="<:accesrestreint:placeholder_filtrer_rubriques|attribut_html:>">
+			</div>
 			[(#INCLURE{fond=formulaires/inc-select_rubriques}{rubriques=#ENV{rubriques}})]
 		</fieldset>
 
@@ -55,3 +59,45 @@
 	</div></form>
 	]
 </div>
+
+<script type="text/javascript">
+	/*<![CDATA[*/
+		(function($){
+
+			var tous_les_elements = $('.formulaire_editer_zone ul.hierarchie li');
+			console.log(tous_les_elements);
+
+			// on filtre les plugins
+			$('input#filtrer_rubriques').keyup(function(){
+				var that = this;
+				jQuery('.formulaire_editer_zone .rubriques > legend').attr('data-filtrer',$(this).val());
+				var elements_trouves = tous_les_elements.filter(function(i, li){
+					var listItemText = $(li).text().toUpperCase()
+					searchText       = that.value.toUpperCase();
+					return ~listItemText.indexOf(searchText);
+				});
+				tous_les_elements.hide();
+				elements_trouves.show();
+			});
+
+			onAjaxLoad(refiltrer);
+
+			// Au rechargement de la page et lors du chargement du descriptif d'un plugin
+			// on recupere l'éventuel filtre et on l'applique si présent
+			function refiltrer(){
+				if (jQuery('.formulaire_editer_zone .rubriques > legend').attr('data-filtrer')) {
+					var elements_trouves = tous_les_elements.filter(function(i, li){
+						var listItemText = $(li).text().toUpperCase()
+						var searchText = jQuery('.formulaire_editer_zone .rubriques > legend').attr('data-filtrer');
+						jQuery('input#filtrer_rubriques').val(searchText);
+						return ~listItemText.indexOf(searchText.toUpperCase());
+					});
+					tous_les_elements.hide();
+					elements_trouves.show();
+				}
+			}
+
+		})(jQuery);
+
+	/*]]>*/
+</script>

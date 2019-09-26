@@ -60,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_creer_htaccess_oui' => 'interdire la lecture',
 	'label_droits_acces' => 'Droits d’accès',
 	'label_titre_zone' => 'Titre',
+	'label_filtrer_rubriques' => 'Filtrer',
 
 	// M
 	'modifier_zone' => 'Modifier la zone',
@@ -69,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'par_titre' => 'Par titre',
 	'privee' => 'Privée',
 	'publique' => 'Publique',
+	'placeholder_filtrer_rubriques' => 'Titre d’une rubrique',
 
 	// R
 	'rubrique' => '@nb@ rubrique',
