@@ -218,6 +218,7 @@ L.Map.Gis = L.Map.extend({
 			bounds._southWest.lng -= 0.1;
 		}
 		map.fitBounds(bounds, options);
+		delete map.options.maxZoom;
 	},
 
 	// API parseGeoJson
