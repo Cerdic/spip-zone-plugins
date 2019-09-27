@@ -6,6 +6,7 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
+
 		<input type="hidden" name="id_zone" value="#ENV{id_zone}" />
 		<[(#DIV|sinon{ul})] class="editer-groupe">
 			<[(#DIV|sinon{li})] class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
@@ -14,8 +15,8 @@
 					]<input type="text" class="text" name="titre" id="titre" value="#ENV{titre}" />
 			</[(#DIV|sinon{li})]>
 		</[(#DIV|sinon{ul})]>
-			
-		<fieldset>
+
+		<fieldset class="droits">
 			<legend><:accesrestreint:label_droits_acces:></legend>
 			<[(#DIV|sinon{ul})] class="editer-groupe">
 				[(#ENV{id_zone}|intval|non|et{#AUTORISER{modifier,zone}})
@@ -43,7 +44,7 @@
 				]<textarea name="descriptif" rows="5" id="descriptif">[(#ENV{descriptif})]</textarea>
 			</[(#DIV|sinon{li})]>
 		</[(#DIV|sinon{ul})]>
-		
+
 		<fieldset class="rubriques">
 			<legend><:accesrestreint:rubriques_zones_acces:></legend>
 			<div class="filtrer">
