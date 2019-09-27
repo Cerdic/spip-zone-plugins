@@ -66,7 +66,7 @@ function convertir_quark_xml($c) {
 				$image = extraire_balise($box_content, "CONTENT");
 				//var_dump($image);
 				$src = textebrut($image) ;
-				$src = array_pop(explode(":", $src));
+				$src = array_pop(explode("/", $src));
 
 				$paragraphes = extraire_balises($box_content, "PARAGRAPH") ;
 
