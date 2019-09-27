@@ -177,7 +177,8 @@ global $Memoization;
 			if ($do_clean) {
 				$del=$Memoization->del(substr($cle, $len_prefix));
 				if (!$del) {
-					spip_log("Echec du clean du cache $cle (création : {$d['creation_time']}, invalidation : $meta_derniere_modif)", 'cachelab_erreur');
+					// Se produit parfois en salve de 10 à 50 logs simultanés (mm t, mm pid)
+					spip_log("Echec du clean du cache $cle par Memoization (création : {$d['creation_time']}, invalidation : $meta_derniere_modif)", 'cachelab_erreur');
 				}
 				$stats['nb_clean']++;
 			};
