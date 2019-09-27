@@ -59,8 +59,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_creer_htaccess_non' => 'autoriser la lecture',
 	'label_creer_htaccess_oui' => 'interdire la lecture',
 	'label_droits_acces' => 'Droits d’accès',
-	'label_titre_zone' => 'Titre',
 	'label_filtrer_rubriques' => 'Filtrer',
+	'label_titre_zone' => 'Titre',
 
 	// M
 	'modifier_zone' => 'Modifier la zone',
@@ -68,9 +68,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'page_zones_acces' => 'Accès Restreint',
 	'par_titre' => 'Par titre',
+	'placeholder_filtrer_rubriques' => 'Titre d’une rubrique',
 	'privee' => 'Privée',
 	'publique' => 'Publique',
-	'placeholder_filtrer_rubriques' => 'Titre d’une rubrique',
 
 	// R
 	'rubrique' => '@nb@ rubrique',
