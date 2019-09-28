@@ -6,10 +6,10 @@
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
-// taille du contexte max affiché avant et après chaque extrait trouvé
 /**
- *  Si c'est défini à 0, seule le titre de chaque résultat est affiché
- *  Sinon chaque occurence est listée
+ * Taille du contexte max affiché avant et après chaque extrait trouvé
+ * Si c'est défini à 0, seul le titre de chaque résultat est affiché
+ * Sinon chaque occurence est listée
  *  et la valeur indique le nombre de caractère qui doit être présentés de chaque côté de chaque occurence
  */
 defined('RECHREMP_CONTEXTE_NB_CHARS') or define('RECHREMP_CONTEXTE_NB_CHARS', 20);
