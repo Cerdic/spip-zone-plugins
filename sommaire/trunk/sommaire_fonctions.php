@@ -126,18 +126,54 @@ function sommaire_declarer_tables_interfaces($interfaces) {
 	return $interfaces;
 }
 
+/**
+ * Transforme les raccourcis SPIP, liens et modèles d'un texte en code HTML
+ *
+ * Extrait le sommaire et ses éventuels paramètres
+ * avant d'appeler propre() puis sommaire_post_propre().
+ *
+ * @uses propre()
+ * @uses sommaire_post_propre()
+ *
+ * @param string $texte
+ * @param string|null $connect
+ * @param array $env
+ * @return string
+ */
 function sommaire_propre($texte, $connect, $env) {
-	// on cherche les balises <sommaire>, mais aussi <sommaireN|arg=x|arg=y> et [sommaire]
-	$has_sommaire = preg_match('/[<\[]sommaire(\d+)?(?:\|.*)*[>\]]/', $texte);
-	// le niveau maximal peut être passé en paramètre de la balise <sommaire|niveau_max=N>
-	$niveau_max = (preg_match('/[<\[]sommaire.*niveau_max=(\d).*[>\]]/', $texte, $m)) ? $m[1] : '';
+
+	// Repérer et analyser la balise <sommaire> en amont de propre().
+	// Ce modèle n'est pas traité comme les autres : on extrait les éventuels paramètres
+	// puis on remplace la balise par un simple marqueur <!--inserer_sommaire-->.
+	// Perf : d'abord sans regex pour les formes simples, puis en regex si paramètres.
+	$has_sommaire = false;
+	$niveau_max = '';
+	$marqueur = '<!--inserer_sommaire-->';
+	if (
+		$p = strpos($texte, '<sommaire>')
+		or $p = strpos($texte, '[sommaire]')
+	) {
+		$has_sommaire = true;
+		$texte = substr_replace($texte, $marqueur, $p, strlen('<sommaire>'));
+	} elseif (
+		$pattern = '/<sommaire(?P<id>\d+)?(?P<parametres>(?:\|[^>]+)*)>/i'
+		and preg_match($pattern, $texte, $matches)
+	) {
+		$has_sommaire = true;
+		$texte = preg_replace($pattern, $marqueur, $texte);
+		// On récupère le niveau maximal éventuel passé en paramètre
+		$niveau_max = (preg_match('/niveau_max=(\d+)/i', $matches['parametres'], $m)) ? $m[1] : '';
+	}
 
 	$texte = propre($texte, $connect, $env);
 
-	if (!isset($GLOBALS['meta']['sommaire_automatique'])
+	if (
+		!isset($GLOBALS['meta']['sommaire_automatique'])
 		or $GLOBALS['meta']['sommaire_automatique'] == 'on'
-		or ($GLOBALS['meta']['sommaire_automatique'] == 'ondemand' and
-		$has_sommaire)
+		or (
+			$GLOBALS['meta']['sommaire_automatique'] == 'ondemand'
+			and $has_sommaire
+		)
 	) {
 		$texte = sommaire_post_propre($texte, true, false, $niveau_max);
 	}
@@ -203,6 +239,18 @@ function sommaire_filtre_texte_echappe($texte, $filtre, $balises = '', $args = n
 	return echappe_retour($texte, 'FILTRETEXTECHAPPE');
 }
 
+/**
+ * Insère le sommaire dans un texte
+ *
+ * @uses sommaire_recenser()
+ * @uses sommaire_filtrer_niveaux()
+ *
+ * @param string $texte
+ * @param boolean $ajoute
+ * @param boolean $sommaire_seul
+ * @param int|string $niveau_max
+ * @return string
+ */
 function sommaire_filtre($texte, $ajoute = true, $sommaire_seul = false, $niveau_max = '') {
 	$sommaire = sommaire_recenser($texte);
 
@@ -214,38 +262,59 @@ function sommaire_filtre($texte, $ajoute = true, $sommaire_seul = false, $niveau
 	$sommaire = sommaire_filtrer_niveaux($sommaire, $niveau_max);
 
 	if ($ajoute or $sommaire_seul) {
-		// on cherche les balises <sommaire>, mais aussi <sommaireN|arg=x|arg=y> et [sommaire]
-		$pattern = '/[<\[]sommaire(\d+)?(?:\|.*)*[>\]]/';
 		$sommaire = recuperer_fond('modeles/sommaire', array('sommaire' => $sommaire, 'niveau_max' => $niveau_max));
 		$sommaire = "<!--sommaire-->$sommaire<!--/sommaire-->";
 		if ($sommaire_seul) {
 			return $sommaire;
 		}
-		if (preg_match($pattern, $texte)) {
-			$texte = preg_replace($pattern, $sommaire, $texte);
+		// On insère le sommaire au niveau du marqueur <!--inserer_sommaire-->
+		// Sinon on le place au début du texte
+		if ($p = strpos($texte, '<p><!--inserer_sommaire--></p>')) {
+			$texte = substr_replace($texte, $sommaire, $p, strlen('<p><!--inserer_sommaire--></p>'));
+		} elseif ($p = strpos($texte, '<!--inserer_sommaire-->')) {
+			$texte = substr_replace($texte, $sommaire, $p, strlen('<!--inserer_sommaire-->'));
 		} else {
 			$texte = $sommaire . $texte;
 		}
-		/*if ($p = strpos($texte,"<sommaire>") OR $p = strpos($texte,"[sommaire]")){
-			$texte = substr_replace($texte,$sommaire,$p,strlen("<sommaire>"));
-		}*/
 	}
 
 	return $texte;
 }
 
+/**
+ * Undocumented function
+ *
+ * @uses sommaire_filtre_texte_echappe
+ * @uses sommaire_filtre
+ *
+ * @param string $texte
+ * @param boolean $ajoute
+ * @param boolean $sommaire_seul
+ * @param int|string $niveau_max
+ * @return string
+ */
 function sommaire_post_propre($texte, $ajoute = true, $sommaire_seul = false, $niveau_max = '') {
 
 	if (strpos($texte, '<h') !== false) {
-		$texte = sommaire_filtre_texte_echappe($texte, 'sommaire_filtre', 'html|code|cadre|frame|script|acronym|cite', array($ajoute,$sommaire_seul,$niveau_max));
+		$texte = sommaire_filtre_texte_echappe(
+			$texte,
+			'sommaire_filtre',
+			'html|code|cadre|frame|script|acronym|cite',
+			array($ajoute, $sommaire_seul, $niveau_max)
+		);
 	} elseif ($sommaire_seul) {
 		return '';
 	}
 	return $texte;
 }
 
-// renvoie le sommaire d'une page d'article
-// $page=false reinitialise le compteur interne des ancres
+/**
+ * Renvoie le sommaire d'une page d'article
+ * $page=false reinitialise le compteur interne des ancres
+ *
+ * @param string $texte
+ * @return string
+ */
 function sommaire_recenser(&$texte) {
 	$sommaire = array();
 	$ancres_vues = array();
