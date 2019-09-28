@@ -6,6 +6,13 @@
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
+// taille du contexte max affiché avant et après chaque extrait trouvé
+/**
+ *  Si c'est défini à 0, seule le titre de chaque résultat est affiché
+ *  Sinon chaque occurence est listée
+ *  et la valeur indique le nombre de caractère qui doit être présentés de chaque côté de chaque occurence
+ */
+defined('RECHREMP_CONTEXTE_NB_CHARS') or define('RECHREMP_CONTEXTE_NB_CHARS', 20);
 
 function formulaires_rechercher_remplacer_charger_dist() {
 	$valeurs = array(
@@ -52,6 +59,19 @@ function formulaires_rechercher_remplacer_traiter_dist() {
 	return $res;
 }
 
+/**
+ * @param string $search        chaine recherchée
+ * @param string $replace       chaine remplaçant, si définie
+ * @param bool $do_replace      veut on remplacer ?
+ * @param array|string $check_replace
+ *                  1er appel : chaine vide ou non vide selon qu'on veut remplacer ou pas
+ *                  2eme appel dans le cas où on veut remplacer, pour confirmer dans quelles tables on veut remplacer :
+ *                      tableau de booléens dont l'index est une table à vérifier ou non
+ *                      exemple : Array ([dummy] => yes, [spip_forum] => on)
+ * @return array|string
+ *                  La liste des résultats de recherche, groupés par table
+ *                  avec des checkbox pour chaque table afin de confirmer le remplacement ou non
+ */
 function rechremp_search_and_replace($search, $replace = null, $do_replace = false, $check_replace = null) {
 	include_spip('base/objets');
 	$tables_exclues = array('spip_messages','spip_depots','spip_paquets','spip_plugins');
@@ -69,7 +89,7 @@ function rechremp_search_and_replace($search, $replace = null, $do_replace = fal
 				$champs = $desc['champs_versionnes'];
 			}
 
-			// trouver les champs de la vrai table
+			// trouver les champs de la vraie table
 			$desc = $trouver_table($table);
 			// pas touche au champ extra serialize
 			$champs = array_diff($champs, $champs_exclus);
@@ -112,10 +132,23 @@ function rechremp_search_and_replace($search, $replace = null, $do_replace = fal
 	return $out;
 }
 
+/**
+ * @param $table            table dans laquelle la recherche se fait
+ * @param $champs           les champs textes déclarés pour cette table
+ * @param $search           la recherche
+ * @param null $replace     la chaine qui remplace
+ * @param bool $do_replace  faut il remplacer ?
+ * @return string           liste présentant les résultats de la recherche
+ */
 function rechremp_search_and_replace_table($table, $champs, $search, $replace = null, $do_replace = false) {
 	if (!count($champs) or !$search) {
 		return '';
 	}
+
+	$len = intval(RECHREMP_CONTEXTE_NB_CHARS);
+	$len_moins_un = max($len-1, 0);
+	$pattern = "/(^.{0,$len_moins_un}|.{".$len.'})'.preg_quote($search, '/')."(.{0,$len_moins_un}$|.{".$len.'})/s';
+	// Par exemple : "/(^.{0,9}|.{10})ma recherche(.{0,9}$|.{10})/s"
 
 	include_spip('action/editer_objet');
 	include_spip('inc/filtres');
@@ -126,20 +159,28 @@ function rechremp_search_and_replace_table($table, $champs, $search, $replace = 
 	$select = "$primary,".implode(',', $champs);
 
 	$nb_occurences = 0;
-	$founds = array();
+	$contextes = $founds = array();
 	$res = sql_select($select, $table);
 
 	while ($row = sql_fetch($res)) {
 		$set = array();
 		foreach ($champs as $c) {
 			$nb = 0;
+
 			$v = str_replace($search, $replace, $row[$c], $nb);
+			// si on a confirmé un remplacement, $v est le résultat du remplacement
+			// sinon c'est $nb seulement qui nous intéresse ($v est inutilisable car $replace est vide)
+
 			if ($nb) {
 				$set[$c] = $v;
 				if (!isset($founds[$row[$primary]])) {
 					$founds[$row[$primary]] = 0;
 				}
 				$founds[$row[$primary]] += $nb;
+				if (RECHREMP_CONTEXTE_NB_CHARS) {
+					preg_match_all($pattern, $row[$c], $matches, PREG_SET_ORDER);
+					$contextes[$row[$primary]] = $matches;      // cool raoul
+				}
 				$nb_occurences += $nb;
 			}
 		}
@@ -170,7 +211,19 @@ function rechremp_search_and_replace_table($table, $champs, $search, $replace = 
 	foreach ($founds as $id_objet => $nb) {
 		$l = singulier_ou_pluriel($nb, 'rechremp:1_occurence_dans', 'rechremp:nb_occurences_dans');
 		$l .= ' <a href="'.generer_url_entite($id_objet, $objet).'">'.generer_info_entite($id_objet, $objet, RECHREMP_INFO_RESULTAT_A_GENERER).'</a>';
-		$out .= "<li>$l</li>\n";
+		$out .= "<li>$l";
+		if (RECHREMP_CONTEXTE_NB_CHARS) {
+			$out .= "<ul class='rechremp_liste_contextes'>";
+			foreach($contextes[$id_objet] as $occurences) {
+				$out .= "<li>
+							<span class='rechremp_contexte'>".htmlentities($occurences[1]).'</span>'
+							.htmlentities($search)
+							."<span class='rechremp_contexte'>".htmlentities($occurences[2]).'</span>
+						</li>';
+			}
+			$out .= "</ul>";
+		}
+		$out .= "</li>\n";
 	}
 
 	$out .= '</ul>';

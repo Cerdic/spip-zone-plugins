@@ -7,7 +7,7 @@
 	<description>Rechercher les occurences d'un texte et les remplacer par un autre texte, dans les champs de type texte des objets SPIP.
 	</description>
 	<etat>stable</etat>
-	<version>0.2.2</version>
+	<version>0.2.3</version>
 	<prefix>rechremp</prefix>
 	<icon>images/rechremp-32.png</icon>
 	<bouton id='rechremp' parent='bando_edition'> 

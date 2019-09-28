@@ -2,15 +2,15 @@
 
 include_spip('inc/utils');
 
-// texte figurant par défaut dans la zone de saisie 
+// texte figurant par dï¿½faut dans la zone de saisie 
 define("TXT_A_RECHERCHER", "votre recherche");
 
-// taille du contexte max affiché avant et après chaque extrait trouvé
-define("CONTEXTE_NB_CHARS", 10);
+// taille du contexte max affichï¿½ avant et aprï¿½s chaque extrait trouvï¿½
+define("CONTEXTE_NB_CHARS", 20);
 
 function remplace_txt($entite, $id, $champs, $txt_search, $remplace, $remplace_par="") {
-	$n=intval(CONTEXTE_NB_CHARS);
-	$m=max($n-1,0);
+	$len = intval(CONTEXTE_NB_CHARS);
+	$len_moins_un = max($len-1,0);
 
 	$nom_table = "spip_".$entite;
 	if($entite=="article" || $entite=="rubrique" || $entite=="auteur")
@@ -23,7 +23,7 @@ function remplace_txt($entite, $id, $champs, $txt_search, $remplace, $remplace_p
 		$select .= ', '.$nom_champ;
 	}
 
-	$pattern = "/(^.{0,$m}|.{".$n.'})'.preg_quote($txt_search, '/')."(.{0,$m}$|.{".$n.'})/m';
+	$pattern = "/(^.{0,$len_moins_un}|.{".$len.'})'.preg_quote($txt_search, '/')."(.{0,$len_moins_un}$|.{".$len.'})/s';
 
 	if($resultats = sql_select($select, $nom_table)) {
 		while($res = sql_fetch($resultats)) {
@@ -34,7 +34,7 @@ function remplace_txt($entite, $id, $champs, $txt_search, $remplace, $remplace_p
 			foreach ($champs as $i => $nom_champ) {
 				$nb = 0;
 				
-				if ($m and preg_match_all($pattern, $res[$nom_champ], $matches))
+				if ($len_moins_un and preg_match_all($pattern, $res[$nom_champ], $matches))
 					$details .= '..'.implode ('...', $matches[0]).'.. ';
 				$nouvelles_valeurs[$nom_champ] = str_replace($txt_search, $remplace_par, $res[$nom_champ], $nb);
 				if($nb>0) 
@@ -46,10 +46,10 @@ function remplace_txt($entite, $id, $champs, $txt_search, $remplace, $remplace_p
 				if ($entite =='forum')
 					$url = str_replace ('debut_id_forum', 'id_forum', $url);
 				$retour .= "Texte trouv&eacute; dans <a href='$url'>$entite ".$res[$id]."</a> ({$res['titre']})<br>";
-				// Mise à jour d'un champ de la table
+				// Mise ï¿½ jour d'un champ de la table
 				if($remplace) 
 					sql_updateq($nom_table, $nouvelles_valeurs, $id."=".intval($res[$id]));
-				elseif ($m) 
+				elseif ($len_moins_un)
 					$retour .= "<small style='margin-left: 2em'><small>".htmlspecialchars($details)."</small></small><br>";
 			}
 		}
