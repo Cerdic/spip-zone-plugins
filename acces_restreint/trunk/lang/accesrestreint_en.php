@@ -61,6 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_creer_htaccess_non' => 'allow read',
 	'label_creer_htaccess_oui' => 'forbid the reading',
 	'label_droits_acces' => 'Access rights',
+	'label_filtrer_rubriques' => 'Filter',
 	'label_titre_zone' => 'Title',
 
 	// M
@@ -69,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'page_zones_acces' => 'Restricted Access',
 	'par_titre' => 'By title',
+	'placeholder_filtrer_rubriques' => 'Title of a section',
 	'privee' => 'Private',
 	'publique' => 'Public',
 
