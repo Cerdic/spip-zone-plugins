@@ -9,6 +9,7 @@ include_spip('inc/ncore_type_noisette');
 include_spip('inc/ncore_noisette');
 include_spip('ncore/ncore');
 include_spip('ncore/noizetier');
+include_spip('inc/noizetier_page');
 
 $contexte = array('objet' => 'auteur', 'id' => 12);
 
@@ -16,6 +17,27 @@ foreach (array('noizetier') as $_plugin) {
 	var_dump("PLUGIN : $_plugin");
 
 	$timestamp_debut = microtime(true);
+
+	$page = 'article-ddu';
+	$retour = page_noizetier_lire($page);
+	var_dump('lecture page article-ddu', $retour);
+
+	$page = 'article-ddu';
+	$retour = page_noizetier_lire($page, 'nom');
+	var_dump('lecture nom page article-ddu', $retour);
+
+	$page = 'article-ddu';
+	$retour = page_noizetier_lire($page, 'blocs');
+	var_dump('lecture blocs page article-ddu', $retour);
+
+	$page = 'article-ddu';
+	$retour = page_noizetier_lire($page, array('nom'));
+	var_dump('lecture array nom page article-ddu', $retour);
+
+	$page = 'article-ddu';
+	$retour = page_noizetier_lire($page, array('nom', 'blocs'));
+	var_dump('lecture array nom et blocs page article-ddu', $retour);
+
 
 //	$conteneur = array('squelette' => 'content/article');
 //	$retour = noizetier_noisette_lister($_plugin, $conteneur, '', $cle = 'rang_noisette');

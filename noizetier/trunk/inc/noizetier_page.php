@@ -191,8 +191,9 @@ function page_noizetier_charger($recharger = false) {
  *
  * @param string	$page
  * 		Identifiant de la page ou de la composition.
- * @param string  $information
- *        Information spécifique à retourner ou vide pour retourner toute la description.
+ * @param array|string $informations
+ *      Liste des champs à renvoyer. Si vide la fonction renvoie tous les champs. Il est possible de demander
+ *      un seul champ sous la forme d'une chaine et pas de tableau.
  * @param boolean	$traiter_typo
  *      Indique si les données textuelles doivent être retournées brutes ou si elles doivent être traitées
  *      en utilisant la fonction typo.
@@ -203,11 +204,18 @@ function page_noizetier_charger($recharger = false) {
  *        de type tableau sont systématiquement désérialisés et si demandé, les champs textuels peuvent être
  *        traités avec la fonction typo().
  */
-function page_noizetier_lire($page, $information = '', $traiter_typo = false) {
+function page_noizetier_lire($page, $informations = array(), $traiter_typo = false) {
 
 	static $description_page = array();
 
-	if (!isset($description_page[$traiter_typo][$page])) {
+	// On vérifie si la page demandée n'est pas déjà stockée : si oui, la description sera utilisée
+	if (isset($description_page[$traiter_typo][$page])) {
+		$description = $description_page[$traiter_typo][$page];
+	} else {
+		$description = array();
+	}
+
+	if (!$description) {
 		// Chargement de toute la configuration de la page en base de données.
 		$description = sql_fetsel('*', 'spip_noizetier_pages', array('page=' . sql_quote($page)));
 
@@ -237,17 +245,28 @@ function page_noizetier_lire($page, $information = '', $traiter_typo = false) {
 		}
 	}
 
-	if ($information) {
-		if (isset($description_page[$traiter_typo][$page][$information])) {
-			$page_lue = $description_page[$traiter_typo][$page][$information];
-		} else {
-			$page_lue = '';
+	// On ne retourne maintenant que les champs demandés.
+	if ($description and $informations) {
+		// Extraction des seules informations demandées.
+		// -- si on demande une information unique on renvoie la valeur simple, sinon on renvoie un tableau.
+		// -- si une information n'est pas un champ valide elle n'est pas renvoyée sans renvoyer d'erreur.
+		if (is_array($informations)) {
+			if (count($informations) == 1) {
+				// Tableau d'une seule information : on revient à une chaine unique.
+				$informations = array_shift($informations);
+			} else {
+				// Tableau des informations valides
+				$description = array_intersect_key($description, array_flip($informations));
+			}
 		}
-	} else {
-		$page_lue = $description_page[$traiter_typo][$page];
+
+		if (is_string($informations)) {
+			// Valeur unique demandée.
+			$description = isset($description[$informations]) ? $description[$informations] : '';
+		}
 	}
 
-	return $page_lue;
+	return $description;
 }
 
 /**

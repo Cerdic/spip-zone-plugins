@@ -160,10 +160,11 @@ function noizetier_compositions_lister_disponibles($flux) {
 	// Récupération des compositions virtuelles du noiZetier afin de les injecter dans le pipeline
 	// étant donné qu'elles ne peuvent pas être détectées par Compositions car sans XML
 	// -- filtre sur l'indicateur est_virtuelle qui n'est à oui que pour les compositions
+	// -- filtre sur l'indicateur est_page_objet à oui car on ne considère que les compositions virtuelles sur objet
 	// -- filtre sur le type de contenu ou pas suivant l'appel
 	include_spip('inc/noizetier_page');
 	$informations = array('type', 'composition', 'nom', 'description', 'icon', 'branche');
-	$filtres = array('est_virtuelle' => 'oui');
+	$filtres = array('est_virtuelle' => 'oui', 'est_page_objet' => 'oui');
 	if ($type) {
 		$filtres['type'] = $type;
 	}
@@ -192,32 +193,33 @@ function noizetier_compositions_lister_disponibles($flux) {
 }
 
 /**
- * Pipeline styliser pour les compositions du noizetier de type page si celles-ci sont activées.
+ * Pipeline styliser pour les compositions virtuelles du noizetier.
  *
  * @param array $flux
  *
  * @return array
  */
- // TODO : revoir l'utilité de ce code qui est mort à priori car on a toujours une page source pour une composition
-//function noizetier_styliser($flux) {
-//	if (defined('_NOIZETIER_COMPOSITIONS_TYPE_PAGE') and _NOIZETIER_COMPOSITIONS_TYPE_PAGE) {
-//		$squelette = $flux['data'];
-//		$fond = $flux['args']['fond'];
-//		$ext = $flux['args']['ext'];
-//
-//		// Si on n'a pas trouvé de squelette
-//		if (!$squelette) {
-//			$noizetier_compositions = (isset($GLOBALS['meta']['noizetier_compositions'])) ? unserialize($GLOBALS['meta']['noizetier_compositions']) : array();
-//			// On vérifie qu'on n'a pas demandé une composition du noizetier de type page et qu'on appele ?page=type
-//			if (isset($noizetier_compositions['page'][$fond])) {
-//				$flux['data'] = substr(find_in_path("page.$ext"), 0, -strlen(".$ext"));
-//				$flux['args']['composition'] = $fond;
-//			}
-//		}
-//	}
-//
-//	return $flux;
-//}
+function noizetier_styliser($flux) {
+/*
+	// Initialisation du squelette, du fond et de l'extension.
+	$squelette = $flux['data'];
+	$fond = $flux['args']['fond'];
+	$ext = $flux['args']['ext'];
+
+	// Si le squelette est vide, il est probable que l'on soit en présence d'une composition virtuelle.
+	if (!$squelette) {
+		include_spip('inc/noizetier_page');
+	    if ($page = page_noizetier_lire($fond, array('est_virtuelle', 'est_page_objet'))
+	    and ($page['est_virtuelle'] == 'oui')
+	    and ($page['est_page_objet'] == 'oui')) {
+			// Composition virtuelle du noiZetier basée sur une page autonome.
+			$flux['data'] = substr(find_in_path("page.$ext"), 0, -strlen(".$ext"));
+			$flux['args']['composition'] = $fond;
+	    }
+	}
+*/
+	return $flux;
+}
 
 /**
  * Pipeline jqueryui_forcer pour demander au plugin l'insertion des scripts pour .sortable().
