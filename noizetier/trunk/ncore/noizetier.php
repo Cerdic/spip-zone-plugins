@@ -745,7 +745,7 @@ function noizetier_conteneur_destocker($plugin, $conteneur) {
 	if ($id_conteneur) {
 		// Suppression de toutes les noisettes du conteneur.
 		$where = array('id_conteneur=' . sql_quote($id_conteneur), 'plugin=' . sql_quote($plugin));
-		if (sql_delete('spip_noisettes', $where)) {
+		if (sql_delete('spip_noisettes', $where) !== false) {
 			$retour = true;
 		}
 	}
