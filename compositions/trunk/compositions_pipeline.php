@@ -106,7 +106,6 @@ function compositions_affiche_milieu($flux){
 					OR ($type == 'rubrique' AND (!isset($config['tout_verrouiller']) OR $config['tout_verrouiller'] != 'oui'))
 				  )
 				) {
-				$ids = 'formulaire_editer_composition_objet-' . "$type-$id";
 				$texte = recuperer_fond(
 					'prive/editer/compositions',
 					array(
