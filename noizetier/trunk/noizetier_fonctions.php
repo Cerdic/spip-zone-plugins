@@ -129,17 +129,17 @@ function calculer_liste_icones($taille = 24) {
 // -------------------------------------------------------------------
 
 /**
- * Compile la balise `#BLOC_Z_INFOS` qui fournit un champ ou tous les champs descriptifs d'un bloc Z
+ * Compile la balise `#BLOC_NOIZETIER_INFOS` qui fournit un champ ou tous les champs descriptifs d'un bloc Z
  * donné. Ces champs sont lus dans le fichier YAML du bloc si il existe.
- * La signature de la balise est : `#BLOC_Z_INFOS{bloc, information}`.
+ * La signature de la balise est : `#BLOC_NOIZETIER_INFOS{bloc, information}`.
  *
  * @package SPIP\NOIZETIER\BLOC\BALISE
  * @balise
  *
  * @example
  *     ```
- *     #BLOC_Z_INFOS{content}, renvoie tous les champs descriptifs du bloc content
- *     #BLOC_Z_INFOS{content, nom}, renvoie le titre du bloc content
+ *     #BLOC_NOIZETIER_INFOS{content}, renvoie tous les champs descriptifs du bloc content
+ *     #BLOC_NOIZETIER_INFOS{content, nom}, renvoie le titre du bloc content
  *     ```
  * @param Champ $p
  *        Pile au niveau de la balise.
@@ -147,7 +147,7 @@ function calculer_liste_icones($taille = 24) {
  * @return Champ
  *         Pile complétée par le code à générer.
  **/
-function balise_BLOC_Z_INFOS_dist($p) {
+function balise_BLOC_NOIZETIER_INFOS_dist($p) {
 
 	$bloc = interprete_argument_balise(1, $p);
 	$bloc = str_replace('\'', '"', $bloc);
@@ -169,7 +169,7 @@ function balise_BLOC_Z_INFOS_dist($p) {
 function calculer_infos_bloc($bloc = '', $information = '') {
 
 	include_spip('inc/noizetier_bloc');
-	return bloc_z_lire($bloc, $information);
+	return bloc_noizetier_lire($bloc, $information);
 }
 
 

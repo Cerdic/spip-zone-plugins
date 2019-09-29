@@ -24,7 +24,7 @@ function page_noizetier_charger($recharger = false) {
 
 	// Initialiser les blocs par défaut
 	include_spip('inc/noizetier_bloc');
-	$options['blocs_defaut'] = bloc_z_lister_defaut();
+	$options['blocs_defaut'] = bloc_noizetier_lister_defaut();
 
 	// Choisir le bon répertoire des pages
 	$options['repertoire_pages'] = page_noizetier_initialiser_dossier();
@@ -378,7 +378,7 @@ function page_noizetier_lister_blocs($page, $blocs_exclus = array()) {
 
 	// Initialisation des blocs avec la liste des blocs par défaut
 	include_spip('inc/noizetier_bloc');
-	$blocs = bloc_z_lister_defaut();
+	$blocs = bloc_noizetier_lister_defaut();
 
 	// Si la liste des blocs exclus n'a pas été passé en argument on les cherche dans la configuration
 	// de la page
@@ -536,7 +536,7 @@ function page_noizetier_compter_noisettes($page) {
  * @internal
  *
  * @uses page_noizetier_initialiser_dossier()
- * @uses bloc_z_lister_defaut()
+ * @uses bloc_noizetier_lister_defaut()
  *
  * @param       $page
  * @param array $options
@@ -556,7 +556,7 @@ function phraser_fichier_descriptif_page($page, $options = array()) {
 	// Initialiser les blocs par défaut
 	if (empty($options['blocs_defaut'])) {
 		include_spip('inc/noizetier_bloc');
-		$options['blocs_defaut'] = bloc_z_lister_defaut();
+		$options['blocs_defaut'] = bloc_noizetier_lister_defaut();
 	}
 
 	// Initialiser le contexte de chargement

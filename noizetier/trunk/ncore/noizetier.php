@@ -625,7 +625,7 @@ function noizetier_conteneur_verifier($plugin, $conteneur) {
 				$squelette = explode('/', $conteneur['squelette']);
 				include_spip('inc/noizetier_bloc');
 				if (($squelette[0])
-				and in_array($squelette[0], bloc_z_lister_defaut())) {
+				and in_array($squelette[0], bloc_noizetier_lister_defaut())) {
 					// Le conteneur coincide avec un bloc valide d'un squelette générique ou d'un objet donné.
 					$conteneur_verifie = $conteneur;
 				}

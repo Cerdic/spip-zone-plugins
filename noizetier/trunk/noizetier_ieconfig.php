@@ -327,7 +327,7 @@ function noizetier_ieconfig_importer($importation, $contenu_import) {
 	// On récupère la liste des blocs par défaut des pages du site pour filtrer des blocs non autorisés
 	// provenant éventuellement de l'import. Cette liste sert pour les pages explicites et les compositions virtuelles.
 	include_spip('inc/noizetier_bloc');
-	$blocs_defaut = bloc_z_lister_defaut();
+	$blocs_defaut = bloc_noizetier_lister_defaut();
 
 	// La configuration
 	if ($importation['configuration']) {

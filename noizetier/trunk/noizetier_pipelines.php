@@ -200,7 +200,6 @@ function noizetier_compositions_lister_disponibles($flux) {
  * @return array
  */
 function noizetier_styliser($flux) {
-/*
 	// Initialisation du squelette, du fond et de l'extension.
 	$squelette = $flux['data'];
 	$fond = $flux['args']['fond'];
@@ -209,15 +208,17 @@ function noizetier_styliser($flux) {
 	// Si le squelette est vide, il est probable que l'on soit en présence d'une composition virtuelle.
 	if (!$squelette) {
 		include_spip('inc/noizetier_page');
-	    if ($page = page_noizetier_lire($fond, array('est_virtuelle', 'est_page_objet'))
+	    if ($page = page_noizetier_lire($fond)
 	    and ($page['est_virtuelle'] == 'oui')
-	    and ($page['est_page_objet'] == 'oui')) {
+	    and ($page['est_page_objet'] == 'non')) {
 			// Composition virtuelle du noiZetier basée sur une page autonome.
-			$flux['data'] = substr(find_in_path("page.$ext"), 0, -strlen(".$ext"));
-			$flux['args']['composition'] = $fond;
+//			$flux['data'] = substr(find_in_path($page['type'] . ".$ext"), 0, -strlen(".$ext"));
+//			$flux['args']['contexte']['composition'] = $page['composition'];
+//			$flux['args']['contexte']['type-page'] = $page['type'];
+//			$flux['args']['composition'] = $fond;
 	    }
 	}
-*/
+
 	return $flux;
 }
 

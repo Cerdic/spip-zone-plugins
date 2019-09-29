@@ -98,9 +98,9 @@ function formulaires_editer_page_charger_dist($edition, $page, $redirect = '') {
 		// -- pour une duplication ou une création de composition, à la liste des blocs exclus de la source.
 		// Ainsi cette liste est toujours l'inverse de l'index [blocs] de l'argument $description_page.
 		include_spip('inc/noizetier_bloc');
-		$blocs = bloc_z_lister_defaut();
+		$blocs = bloc_noizetier_lister_defaut();
 		foreach ($blocs as $_bloc) {
-			$valeurs['_blocs'][$_bloc] = bloc_z_lire($_bloc, 'nom');
+			$valeurs['_blocs'][$_bloc] = bloc_noizetier_lire($_bloc, 'nom');
 			if (!in_array($_bloc, $description_page['blocs'])) {
 				$valeurs['_blocs_defaut'][] = $_bloc;
 			}
