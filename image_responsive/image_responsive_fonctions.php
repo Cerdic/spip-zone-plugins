@@ -94,10 +94,18 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 	$htactif = (bool)image_responsive_htaccess_actif();
 	$source = extraire_attribut($img, "src");
 	$source = preg_replace(",\?[0-9]*$,", "", $source);
+	
+	
 	if (file_exists($source)) {
 		$l = largeur($source);
 		$h = hauteur($source);
-		$mime = mime_content_type($source);
+
+		// mime_content_type ne fonctionn pas sur certaines versions de PHP…
+		// $mime = mime_content_type($source);
+		if (preg_match("png$", $source)) $mime = "image/png";
+		else if (preg_match("gif$", $source)) $mime = "image/gif";
+		$mime = "image/jpeg";
+		
 		$timestamp = filemtime($source);
 
 		$img = vider_attribut($img, "width");
