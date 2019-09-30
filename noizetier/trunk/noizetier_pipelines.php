@@ -323,26 +323,15 @@ function noizetier_affiche_milieu($flux) {
 			and autoriser('configurerpage', 'noizetier', 0, '', array('page' => $flux['args']['exec']))
 		) {
 
-			// Page d'un objet
+			// Page d'un objet : bloc de config des noisettes
 			$cle_objet = $objet_exec['id_table_objet'];
 			$objet     = $objet_exec['type'];
 			$id_objet  = $flux['args'][$cle_objet];
-
-			// Identifier la page et la composition
-			$composition = '';
-			if (test_plugin_actif('compositions')) {
-				include_spip('inc/compositions');
-				$composition = compositions_determiner($objet, $id_objet);
-			};
-			$page = $composition ? "$objet-$composition" : $objet;
-
 			$contexte = array(
 				'objet'       => $objet,
 				'id_objet'    => $id_objet,
-				'page'        => $page,
-				'composition' => $composition,
 			);
-			if ($texte = recuperer_fond('prive/squelettes/inclure/inc-noisettes_objet', $contexte)) {
+			if ($texte = recuperer_fond('prive/squelettes/inclure/inc-noisettes_objet', $contexte, array('ajax' => true))) {
 				if ($pos = strpos($flux['data'],'<!--affiche_milieu-->')) {
 					$flux['data'] = substr_replace($flux['data'], $texte, $pos, 0);
 				} else {
@@ -355,7 +344,6 @@ function noizetier_affiche_milieu($flux) {
 
 	return $flux;
 }
-
 
 
 /**
@@ -453,5 +441,26 @@ function noizetier_insert_head($flux) {
 	// au cas ou il n'est pas implemente
 	$flux .= noizetier_insert_head_css($flux);
 
+	return $flux;
+}
+
+/**
+ * Modifier le tableau retourné par la fonction traiter ou effectuer des traitements supplémentaires.
+ *
+ * - Édition de la composition d'un objet : recharger le bloc des noisettes en ajax
+ */
+function noizetier_formulaire_traiter($flux) {
+	if (
+		$flux['args']['form'] == 'editer_composition_objet'
+		and isset($flux['data']['message_ok'])
+		and !isset($flux['data']['message_erreur'])
+	) {
+		$js = '<script>' .
+			';jQuery(function($) {' .
+				'$(".noisettes-cfg").ajaxReload();' .
+			'});' .
+			'</script>';
+		$flux['message_ok'] .= $js;
+	}
 	return $flux;
 }

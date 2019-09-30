@@ -10,15 +10,20 @@
 
 	- objet       : Type d'objet
 	- id_objet    : N° de l'objet
-	- page        : Identifiant de la page pour le noizetier
-	                Dans ce cas précis : objet-composition
-	- composition : Composition éventuelle de l'objet
 
 ]
-[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{noisettes-16}|balise_img)] <:noizetier:texte_noisettes:>,noisettes-cfg})]
+[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{noisettes-16}|balise_img)] <:noizetier:texte_noisettes:>, noisettes-cfg})]
 
 [(#REM) Autorisation de configurer les noisettes pour cet objet précis ]
 #SET{autoriser_objet,#AUTORISER{configurerpage,noizetier,0,'',#ARRAY{objet,#ENV{objet},id_objet,#ENV{id_objet}}}}
+
+[(#REM) Identifier la composition ]
+[(#PLUGIN{compositions}|oui)
+	#SET{composition,#ENV{objet}|appliquer_filtre{compositions_determiner,#ENV{id_objet}}}
+]
+
+[(#REM) Identifier la page ]
+#SET{page, #GET{composition}|?{#ENV{objet}|concat{'-',#GET{composition}},#ENV{objet}}}
 
 [(#REM) Compter les noisettes de cet objet précis ]
 <BOUCLE_nb_noisettes_objet(NOISETTES)
@@ -32,7 +37,7 @@
 <BOUCLE_nb_noisettes_page(NOISETTES)
 	{plugin = noizetier}
 	{type = #ENV{objet}}
-	{composition}
+	{composition = #GET{composition}}
 />#SET{nb_noisettes_page,#TOTAL_BOUCLE}<//B_nb_noisettes_page>
 
 [(#REM) Identifier les noisettes utilisées : celles de la page ou celle de l'objet ]
@@ -47,9 +52,9 @@
 #SET{exposer,#GET{afficher_objet}|et{#GET{afficher_page}}}
 
 [(#GET{afficher_page}|oui)
-#SET{url_page,#URL_ECRIRE{noizetier_page}|parametre_url{page,#ENV{page}}}
+#SET{url_page,#URL_ECRIRE{noizetier_page}|parametre_url{page,#GET{page}}}
 #SET{texte_objets,#ENV{objet}|objet_info{texte_objets}|_T|strtolower}
-#SET{label_noisettes_page,#ENV{composition}|?{
+#SET{label_noisettes_page,#GET{composition}|?{
 	#GET{nb_noisettes_page}|?{
 		#GET{nb_noisettes_page}|singulier_ou_pluriel{noizetier:info_1_noisette_composition,noizetier:info_nb_noisettes_composition},
 		#VAL{#VAL{noizetier:info_0_noisette_composition}|_T}
@@ -63,7 +68,7 @@
 <a
 	class="noisettes-cfg__lien noisettes-cfg__lien_page"
 	href="[(#GET{url_page})]"
-	title="[(#ENV{composition}|?{<:noizetier:bulle_configurer_composition_noisettes:>,<:noizetier:bulle_configurer_page_noisettes:>}|attribut_html)]"
+	title="[(#GET{composition}|?{<:noizetier:bulle_configurer_composition_noisettes:>,<:noizetier:bulle_configurer_page_noisettes:>}|attribut_html)]"
 >
 #GET{label_noisettes_page}
 </a>
