@@ -1,7 +1,7 @@
 <paquet
 	prefix="noizetier"
 	categorie="maintenance"
-	version="3.0.105"
+	version="3.0.106"
 	etat="dev"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/noizetier-32.png"
@@ -23,21 +23,20 @@
 	<pipeline nom="declarer_tables_principales" inclure="base/noizetier_tables.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/noizetier_tables.php" />
 	<pipeline nom="autoriser" inclure="noizetier_autorisations.php" />
-	<pipeline nom="recuperer_fond" inclure="noizetier_pipelines.php" />
-	<pipeline nom="compositions_lister_disponibles" inclure="noizetier_pipelines.php" />
+	<pipeline nom="insert_head" action="insert_head_css" inclure="noizetier_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="noizetier_pipelines.php" />
 	<pipeline nom="jqueryui_plugins" inclure="noizetier_pipelines.php" action="jqueryui_forcer" />
-	<pipeline nom="noizetier_lister_pages" inclure="noizetier_pipelines.php" />
-	<pipeline nom="noizetier_blocs_defaut" inclure="noizetier_pipelines.php" />
+	<pipeline nom="recuperer_fond" inclure="noizetier_pipelines.php" />
+	<pipeline nom="pre_boucle" inclure="noizetier_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="noizetier_pipelines.php" />
 	<pipeline nom="formulaire_admin" inclure="noizetier_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="noizetier_pipelines.php" />
+	<pipeline nom="compositions_lister_disponibles" inclure="noizetier_pipelines.php" />
 	<pipeline nom="compagnon_messages" inclure="noizetier_pipelines.php" />
-	<pipeline nom="pre_boucle" inclure="noizetier_pipelines.php" />
 	<pipeline nom="ieconfig" inclure="noizetier_ieconfig.php" />
 	<pipeline nom="noizetier_config_export" inclure="noizetier_pipelines.php" />
 	<pipeline nom="noizetier_config_import" inclure="noizetier_pipelines.php" />
-	<pipeline nom="insert_head_css" inclure="noizetier_pipelines.php" />
-	<pipeline nom="insert_head" action="insert_head_css" inclure="noizetier_pipelines.php" />
-	<pipeline nom="formulaire_traiter" inclure="noizetier_pipelines.php" />
+	<pipeline nom="noizetier_blocs_defaut" inclure="noizetier_pipelines.php" />
 
 	<necessite nom="ncore" compatibilite="[0.9.1;[" />
 	<necessite nom="saisies" compatibilite="[3.23.2;[" />
