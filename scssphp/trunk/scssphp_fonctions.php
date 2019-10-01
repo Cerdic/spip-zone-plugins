@@ -37,15 +37,15 @@ function scss_compile($style, $contexte = array()) {
 	$import_dirs = _chemin();
 
 	$cache_options = array(
-		'cache_dir' => scss_cache_dir(),
+		'cacheDir' => scss_cache_dir(),
 		// il faut prefixer avec une empreinte du import_dirs qui change le resultat
 		'prefix' => 'scssphp_'. substr(md5(json_encode($import_dirs)),0,4) . '_',
-		'force_refresh' => false,
+		'forceRefresh' => false,
 	);
 
 	if (defined('_VAR_MODE') and
 		(_request('var_mode') == 'css' or in_array(_VAR_MODE, array('css', 'recalcul'))) ) {
-		$cache_options['force_refresh'] = 'once';
+		$cache_options['forceRefresh'] = 'once';
 	}
 
 	// le compilateur ScssPhp\ScssPhp\Compiler compile le contenu
@@ -123,7 +123,7 @@ function scss_compile($style, $contexte = array()) {
 	// si on a rien parse parce que fichier en cache, indiquer au moins le fichier source concerne dans l'en-tete
 	$files = $scss->getParsedFiles();
 	if (!$files and !empty($contexte['file'])) {
-		$files = [$contexte['file']];
+		$files = [$contexte['file'] => true];
 	}
 
 	if ($files and count($files)){

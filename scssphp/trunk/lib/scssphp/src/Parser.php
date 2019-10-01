@@ -218,8 +218,8 @@ class Parser
      *
      * @api
      *
-     * @param string $buffer
-     * @param string $out
+     * @param string       $buffer
+     * @param string|array $out
      *
      * @return boolean
      */
@@ -245,8 +245,8 @@ class Parser
      *
      * @api
      *
-     * @param string $buffer
-     * @param string $out
+     * @param string       $buffer
+     * @param string|array $out
      *
      * @return boolean
      */
@@ -272,10 +272,10 @@ class Parser
      *
      * @api
      *
-     * @param string $buffer
-     * @param string $out
+     * @param string       $buffer
+     * @param string|array $out
      *
-     * @return array
+     * @return boolean
      */
     public function parseMediaQueryList($buffer, &$out)
     {
@@ -286,7 +286,6 @@ class Parser
         $this->buffer          = (string) $buffer;
 
         $this->saveEncoding();
-
 
         $isMediaQuery = $this->mediaQueryList($out);
 
@@ -729,7 +728,7 @@ class Parser
 
             if ($this->eatWhiteDefault) {
                 $this->whitespace();
-                $this->append(null); // collect comments at the begining if needed
+                $this->append(null); // collect comments at the beginning if needed
             }
 
             return true;
@@ -843,7 +842,7 @@ class Parser
 
         $this->env = $b;
 
-        // collect comments at the begining of a block if needed
+        // collect comments at the beginning of a block if needed
         if ($this->eatWhiteDefault) {
             $this->whitespace();
 
@@ -1075,6 +1074,7 @@ class Parser
             if (isset($m[1]) && empty($this->commentsSeen[$this->count])) {
                 // comment that are kept in the output CSS
                 $comment = [];
+                $startCommentCount = $this->count;
                 $endCommentCount = $this->count + strlen($m[1]);
 
                 // find interpolations in comment
@@ -1096,7 +1096,7 @@ class Parser
                             $out[3] = '';
                         }
 
-                        $comment[] = $out;
+                        $comment[] = [Type::T_COMMENT, substr($this->buffer, $p, $this->count - $p), $out];
                     } else {
                         $comment[] = substr($this->buffer, $this->count, 2);
 
@@ -1114,10 +1114,11 @@ class Parser
                     $this->appendComment([Type::T_COMMENT, $c]);
                 } else {
                     $comment[] = $c;
-                    $this->appendComment([Type::T_COMMENT, [Type::T_STRING, '', $comment]]);
+                    $staticComment = substr($this->buffer, $startCommentCount, $endCommentCount - $startCommentCount);
+                    $this->appendComment([Type::T_COMMENT, $staticComment, [Type::T_STRING, '', $comment]]);
                 }
 
-                $this->commentsSeen[$this->count] = true;
+                $this->commentsSeen[$startCommentCount] = true;
                 $this->count = $endCommentCount;
             } else {
                 // comment that are ignored and not kept in the output css
@@ -1138,8 +1139,21 @@ class Parser
     protected function appendComment($comment)
     {
         if (! $this->discardComments) {
-            if ($comment[0] === Type::T_COMMENT && is_string($comment[1])) {
-                $comment[1] = substr(preg_replace(['/^\s+/m', '/^(.)/m'], ['', ' \1'], $comment[1]), 1);
+            if ($comment[0] === Type::T_COMMENT) {
+                if (is_string($comment[1])) {
+                    $comment[1] = substr(preg_replace(['/^\s+/m', '/^(.)/m'], ['', ' \1'], $comment[1]), 1);
+                }
+                if (isset($comment[2]) and is_array($comment[2]) and $comment[2][0] === Type::T_STRING) {
+                    foreach ($comment[2][2] as $k => $v) {
+                        if (is_string($v)) {
+                            $p = strpos($v, "\n");
+                            if ($p !== false) {
+                                $comment[2][2][$k] = substr($v, 0, $p + 1)
+                                    . preg_replace(['/^\s+/m', '/^(.)/m'], ['', ' \1'], substr($v, $p+1));
+                            }
+                        }
+                    }
+                }
             }
 
             $this->env->comments[] = $comment;
@@ -1155,7 +1169,7 @@ class Parser
     protected function append($statement, $pos = null)
     {
         if (! is_null($statement)) {
-            if ($pos !== null) {
+            if (! is_null($pos)) {
                 list($line, $column) = $this->getSourcePosition($pos);
 
                 $statement[static::SOURCE_LINE]   = $line;
@@ -2325,8 +2339,8 @@ class Parser
     /**
      * Parser interpolation
      *
-     * @param array   $out
-     * @param boolean $lookWhite save information about whitespace before and after
+     * @param string|array $out
+     * @param boolean      $lookWhite save information about whitespace before and after
      *
      * @return boolean
      */
@@ -2431,7 +2445,8 @@ class Parser
     /**
      * Parse comma separated selector list
      *
-     * @param array $out
+     * @param array   $out
+     * @param boolean $subSelector
      *
      * @return boolean
      */
@@ -2466,7 +2481,8 @@ class Parser
     /**
      * Parse whitespace separated selector list
      *
-     * @param array $out
+     * @param array   $out
+     * @param boolean $subSelector
      *
      * @return boolean
      */
@@ -2518,7 +2534,8 @@ class Parser
      *     div[yes=no]#something.hello.world:nth-child(-2n+1)%placeholder
      * }}
      *
-     * @param array $out
+     * @param array   $out
+     * @param boolean $subSelector
      *
      * @return boolean
      */
@@ -2795,7 +2812,7 @@ class Parser
     /**
      * Parse a placeholder
      *
-     * @param string $placeholder
+     * @param string|array $placeholder
      *
      * @return boolean
      */
@@ -2938,6 +2955,8 @@ class Parser
             $validChars = $allowNewline ? '.' : "[^\n]";
         }
 
+        $m = null;
+
         if (! $this->match('(' . $validChars . '*?)' . $this->pregQuote($what), $m, ! $until)) {
             return false;
         }
@@ -3037,9 +3056,10 @@ class Parser
             return;
         }
 
-        $iniDirective = 'mbstring' . '.func_overload'; // deprecated in PHP 7.2
+        // deprecated in PHP 7.2
+        $iniDirective = 'mbstring.func_overload';
 
-        if (ini_get($iniDirective) & 2) {
+        if (extension_loaded('mbstring') && ini_get($iniDirective) & 2) {
             $this->encoding = mb_internal_encoding();
 
             mb_internal_encoding('iso-8859-1');
@@ -3051,7 +3071,7 @@ class Parser
      */
     private function restoreEncoding()
     {
-        if ($this->encoding) {
+        if (extension_loaded('mbstring') && $this->encoding) {
             mb_internal_encoding($this->encoding);
         }
     }
