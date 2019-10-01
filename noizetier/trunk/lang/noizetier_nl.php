@@ -36,6 +36,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_objets_noisettes_label' => 'Aanpassing op inhoud toestaan voor:',
 	'configurer_profondeur_max_label' => 'Diepte',
 	'configurer_titre' => 'NoiZetier configureren',
+	'configurer_types_noisettes_masques_explication' => 'Kruis de type nootjes aan die je <strong>niet</strong> wilt voorstellen bij het toevoegen van een nootje.',
+	'configurer_types_noisettes_masques_label' => 'Voorgestelde types',
 	'copie_de' => 'Kopie van @source@',
 
 	// D
@@ -142,7 +144,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ieconfig_non_installe' => '<b>Plugin Import/Export van configuraties:</b> deze plugin is niet op de site geïnstalleerd. Dat is niet noodzakelijk, maar wanneer deze is geäctiveerd, kun je eenvoudig nootjes in- en uitvoeren.',
 	'ieconfig_probleme_import_config' => 'Er is een probleem opgetreden bij het importeren van de configuratie.',
 	'import_compositions_virtuelles_ajouter' => 'Virtuele composities van het importbestand toevoegen. De op de site beschikbare virtuele composities worden niet aangepast.',
-	'import_compositions_virtuelles_avertissement1' => 'Er bestaan geen virtuele composities op de site. Je kunt alleen die van het importbestand importeren.', # MODIF
+	'import_compositions_virtuelles_avertissement1' => 'Er bestaan geen virtuele composities op de site. Je kunt alleen die van het importbestand importeren.',
 	'import_compositions_virtuelles_avertissement2' => 'In het importbestand is geen enkele virtuele compositie beschikbaar. Importeren is dus niet mogelijk.',
 	'import_compositions_virtuelles_explication' => 'Er bestaan virtuele composities op de site en in het importbestand.',
 	'import_compositions_virtuelles_fusionner' => 'De virtuele composities uit het importbestand toevoegen en de virtuele composties varevangen die op de site maar ook in het importbestand bestaan.',
