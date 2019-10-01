@@ -283,7 +283,7 @@ function calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$url_docume
 	$a .= $l['class'] ? ' class="'.$l['class'].'"' : '';
 	$a .= $l['titre'] ? ' title="'.attribut_html(typo($l['titre'])).'"' : '';
 	$a .= ($l['lang'] && $l['lang']!=$lang) ? ' hreflang="'.$l['lang'].'"' : ''; // Seulement si hreflang diffère de la langue en cours
-	if(empty($l['mime'])) $a .= ' type="'.$l['mime'].'"';
+	if(!empty($l['mime'])) $a .= ' type="'.$l['mime'].'"';
 	$a .= '>';
 	return $a.$objet.'</a>';
 }
