@@ -89,7 +89,8 @@ function metasplus_affichage_final($flux) {
  **/
 function metasplus_post_edition($flux){
 	if (
-		$flux['args']['table'] === 'spip_documents'
+		isset($flux['args']['table'])
+		and $flux['args']['table'] === 'spip_documents'
 		and isset($flux['args']['operation'])
 		and $flux['args']['operation'] === 'supprimer_document'
 		and isset($flux['args']['action'])
