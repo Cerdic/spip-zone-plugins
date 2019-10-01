@@ -124,7 +124,6 @@ function autoriser_noizetier_configurerpage_dist($faire, $type, $id, $qui, $opti
  * Autorisation d'activation des compositions sur un type d'objet. Permet de lancer l'action depuis le noiZetier
  * sans passer par la configuration du plugin Compositions.
  * Il faut :
- * - que le plugin compositions soit activé
  * - être autorisé à configurer le noiZetier
  * - que la page source existe et ne soit pas une composition
  * - que le plugin Compositions soit bien activé
@@ -225,10 +224,7 @@ function autoriser_noizetier_supprimercomposition_dist($faire, $type, $id, $qui,
 /**
  * Autorisation de modification certains paramètres d'une page (page=noizetier_page_edit). Suivant que la page est
  * une page explicite ou une composition virtuelle la liste des paramètres éditables varie.
- * Il faut :
- * - que .
- * - et être autorisé à créer une composition virtuelle du noiZetier à partir d'une page source qui
- *   coincide avec le type de la composition virtuelle.
+ * Il faut être autorisé à configurer la page.
  *
  * @param $faire
  * @param $type
