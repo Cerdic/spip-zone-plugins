@@ -18,6 +18,9 @@ Exemple avec un tunnel de commande composé de 3 étapes :
 2. Saisie des informations du compte
 3. Paiement
 
+On suppose qu'il y a 3 squelettes différents : commander.html, commander_compte.html et commander_payer.html.
+Il pourrait tout aussi bien n'y avoir qu'un seul squelette qui affiche les étapes selon un paramètre dans l'URL.
+
 ### 1. Choix de l'offre d'abonnement
 
 Il suffit d'inclure le formulaire fournit par le plugin en indiquant une redirection vers l'étape suivante.
@@ -48,8 +51,8 @@ Cela pourrait ressembler à ça :
 <h2>J'ai déjà un compte :</h2> 
 #FORMULAIRE_LOGIN{#SELF}
 
-<h2>M'inscrire :</h2> 
-#FORMULAIRE_INSCRIPTION{#URL_PAGE{commander_payer}}
+<h2>Créer un nouveau compte :</h2> 
+#FORMULAIRE_INSCRIPTION{6forum, new, #URL_PAGE{commander_payer}}
 ]
 
 ```
@@ -62,5 +65,13 @@ Voilà, la commande a été créée automatiquement à la suite de l'étape 2 : 
 Ne reste qu'à appeler le formulaire de paiement avec [Bank](https://plugins.spip.net/Bank) par exemple :
 
 ```
-#FORMULAIRE_PAYER_ACTE{...}
+<BOUCLE_payer(COMMANDES) {id_auteur = #SESSION{id_auteur}} {statut=encours} {0,1} {!par date}>
+#FORMULAIRE_PAYER_ACTE{#PRIX*,
+        #ARRAY{
+            montant_ht, #PRIX_HT*,
+            id_auteur, #ID_AUTEUR,
+            id_commande, #ID_COMMANDE
+        }
+}
+</BOUCLE_payer>
 ```
