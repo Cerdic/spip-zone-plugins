@@ -86,7 +86,7 @@ function saisies_afficher_si_js_champ($champ, $operateur, $valeur, $valeur_numer
 	}
 
 	// Cas d'une valeur numérique : pour le test js, cela ne change rien, on la passe comme valeur
-	if ($valeur_numerique and !$valeur) {
+	if (strlen($valeur_numerique) and !$valeur) {
 		$valeur = $valeur_numerique;
 	}
 	// Guillemets : si double, les échapper

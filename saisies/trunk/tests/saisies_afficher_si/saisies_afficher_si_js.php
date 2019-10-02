@@ -120,6 +120,11 @@
 				1 => '@input_1@ == 23',
 				2 => $saisies_form
 			),
+			'input_inegalite_zero' => array(
+				0 => '$(form).find(\'[name=&quot;input_1&quot;]\').val() > 0',
+				1 => '@input_1@ > 0',
+				2 => $saisies_form
+			),
 			'input_inegalite' => array(
 				0 => '$(form).find(\'[name=&quot;input_1&quot;]\').val() != \'toto\'',
 				1 => '@input_1@ != \'toto\'',
