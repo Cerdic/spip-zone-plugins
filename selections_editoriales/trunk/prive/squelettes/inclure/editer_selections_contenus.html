@@ -55,7 +55,7 @@
 							#URL_ACTION_AUTEUR{deplacer_selections_contenu, #ID_SELECTIONS_CONTENU-bas, #GET{self}},
 							ajax link move move_down
 						})]
-						[(#CHEMIN_IMAGE{rang_deplacer-16.png}|balise_img{<:selections_contenu:deplacer:>, move})]
+						[(#CHEMIN_IMAGE{rang_deplacer-16.png}|balise_img{<:selections_contenu:deplacer:>, move move_sort})]
 					]
 					[(#AUTORISER{supprimer,selections_contenu,#ID_SELECTIONS_CONTENU}|oui)
 						[(#BOUTON_ACTION{<:lien_supprimer:>, #URL_ACTION_AUTEUR{supprimer_selections_contenu,#ID_SELECTIONS_CONTENU,#GET{self}}, delete link ajax todo})]
@@ -137,7 +137,7 @@
 	$(function(){
 		$('#editer_selections_contenus-#ID_SELECTION').sortable({
 			items : '.item',
-			handle : '.deplacer',
+			handle : '.move_sort',
 			cursor : 'move',
 			axis : 'y'
 		});
