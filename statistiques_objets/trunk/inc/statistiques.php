@@ -79,7 +79,7 @@ function classement_populaires($type, $serveur = '') {
 	}
 	include_spip('inc/objets'); // au cas-où
 	$table_objet_sql = table_objet_sql($type, $serveur);
-	$id_table_objet = id_table_objet($type, $serveur);
+	$cle_objet = id_table_objet($type, $serveur);
 	$trouver_table = charger_fonction('trouver_table','base');
 	$desc = $trouver_table($table_objet_sql);
 	$champ_statut = isset($desc['statut']['champ']) ? $desc['statut']['champ'] : '';
@@ -92,7 +92,7 @@ function classement_populaires($type, $serveur = '') {
 		$where[] = $champ_statut.'='.sql_quote($statut_publie);
 	}
 	$classement[$type] = sql_allfetsel(
-		$id_table_objet,
+		$cle_objet,
 		$table_objet_sql,
 		$where,
 		'',
@@ -101,7 +101,7 @@ function classement_populaires($type, $serveur = '') {
 		'',
 		$serveur
 	);
-	$classement[$type] = array_column($classement[$type], $id_table_objet);
+	$classement[$type] = array_column($classement[$type], $cle_objet);
 
 	return $classement[$type];
 }
@@ -125,9 +125,11 @@ function identifier_objet_contexte($contexte = array()) {
 
 	// fallback si autre page, ou pas d'objet trouvé
 	$objet_contexte = false;
+	$page = false;
 
 	// fallback contexte
-	if (!$contexte
+	if (
+		!$contexte
 		and isset($GLOBALS['contexte'])
 	) {
 		$contexte = $GLOBALS['contexte'];
@@ -143,48 +145,55 @@ function identifier_objet_contexte($contexte = array()) {
 	// Cas 1 : le contexte indique la page courante.
 	// =============================================
 	// Si on trouve également la clé `id_{objet}`, alors c'est la page d'un objet éditorial.
-	if (isset($page)
+	if (
+		$page
 		and $objet = objet_type($page)
-		and $id_table_objet = id_table_objet($objet)
-		and isset($contexte[$id_table_objet])
-		and $id_objet = $contexte[$id_table_objet]
+		and $cle_objet = id_table_objet($objet)
+		and isset($contexte[$cle_objet])
+		and $id_objet = $contexte[$cle_objet]
 	) {
-		$objet_contexte = array('objet' => $objet, 'id_objet' => $id_objet);
+		$objet_contexte = array(
+			'objet'    => $objet,
+			'id_objet' => $id_objet)
+		;
 	}
 
 	// Cas 2 : pas de chance, le contexte n'indique pas la page courante.
 	// ==================================================================
 	// On se base sur les clés `id_{objet}` trouvées dans le contexte.
-	// s'il y a 1 clé, ou 2 clés dont 1 id_rubrique, on peut en déduire `id_{objet}`.
+	// s'il y a 1 clé, ou 2 clés dont 1 est id_rubrique, on peut en déduire `id_{objet}`.
 	// Dans les autres cas, on est coincés !
-	if (!isset($page)) {
+	elseif (!$page) {
 
 		// récupérer les clés `id_{objet}`, et identifier celle de l'objet si on peut.
-		$ids_tables_objets = preg_grep('/^id_.*/', array_keys($contexte));
-		$nb_ids = count($ids_tables_objets);
-		// 1 clé : c'est celle de l'objet
-		if ($nb_ids === 1) {
-			$id_table_objet = $ids_tables_objets[0];
+		$cle_objet = false;
+		$cles_objets = array_values(preg_grep('/^id_/', array_keys($contexte)));
+		$nb_cles = count($cles_objets);
+		// 1 seule clé : c'est celle de l'objet
+		if ($nb_cles === 1) {
+			$cle_objet = $cles_objets[0];
 		}
 		// 2 clés : si l'une d'elle est `id_rubrique`, l'autre est celle de l'objet
-		if ($nb_ids === 2
-			and in_array('id_rubrique', $ids_tables_objets)
+		elseif (
+			$nb_cles === 2
+			and in_array('id_rubrique', $cles_objets)
 		) {
-			$k_id_rubrique  = array_search('id_rubrique', $ids_tables_objets);
-			$k_ids          = array_keys($ids_tables_objets);
-			unset($k_ids[$k_id_rubrique]);
-			$k_ids          = array_values($k_ids); //raz des clés
-			$k_id_objet     = $k_ids[0];
-			$id_table_objet = $ids_tables_objets[$k_id_objet];
+			$k = array_search('id_rubrique', $cles_objets);
+			unset($cles_objets[$k]);
+			$cle_objet = array_values($cles_objets)[0];
 		}
 
 		// On a identifié un `id_{objet}` : on peut en déduire l'objet
-		if (isset($id_table_objet)
-			and isset($contexte[$id_table_objet])
+		if (
+			$cle_objet
+			and isset($contexte[$cle_objet])
 		) {
-			$objet          = objet_type($id_table_objet);
-			$id_objet       = $contexte[$id_table_objet];
-			$objet_contexte = array('objet' => $objet, 'id_objet' => $id_objet);
+			$objet          = objet_type($cle_objet);
+			$id_objet       = $contexte[$cle_objet];
+			$objet_contexte = array(
+				'objet'    => $objet,
+				'id_objet' => $id_objet,
+			);
 		}
 
 	}

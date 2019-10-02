@@ -9,7 +9,6 @@
  * @copyright 2016
  * @author    tcharlss
  * @licence   GNU/GPL
- * @package   SPIP\Statistiques_objets\Administrations
  */
 
 /**
