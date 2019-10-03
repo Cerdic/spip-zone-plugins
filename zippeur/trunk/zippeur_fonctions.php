@@ -85,7 +85,7 @@ function zippeur($array,$date='',$cmd='',$nom='',$plat='oui',$delai='0',$extensi
 	$nom == '' ? $nom = md5(serialize($array)) : $nom = $nom;
 	$cmd =='' ? $cmd = lire_config('zippeur/zippeur_cmd'):$cmd=$cmd;
 
-	$chemin = zippeur_chemin_dossier_local().'cache-zip/'.$nom."$extension" ;
+	$chemin = zippeur_chemin_dossier_local().'cache-zip/'.$nom.'.'.$extension;
 	include_spip('inc/flock');
 	$enbase = sql_fetsel('id_zip,fichiers,date_modif','spip_zippeur',"`nom`='$nom' and `extension`='$extension'");
 	/* On vérifie si le zip existe*/
