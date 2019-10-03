@@ -12,6 +12,12 @@ parametres:
   -
     saisie: 'oui_non'
     options:
+      nom: 'afficher_logo'
+      label: '<:noisettes:label_afficher_logo:>'
+      defaut: ''
+  -
+    saisie: 'oui_non'
+    options:
       nom: 'masquer_date'
       label: '<:noisettes:label_masquer_date:>'
       defaut: ''

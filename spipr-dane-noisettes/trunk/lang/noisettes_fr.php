@@ -1,6 +1,6 @@
 <?php
 /**
-  Plugin SPIPr-Dane-Config
+  SPIPr-Dane-Noisettes
   Fichier noisettes_fr.php
   (c) 2019 Dominique Lepaisant
   Distribue sous licence GPL3
@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'carte_gis'=>'Carte',
  
 'date' => 'Date',
+'description_calendrier_mini' => 'Affiche un mini-calendrier mensuel navigable avec un lien pointant vers une page au choix en filtrant les résultats sur le jour en question.',
 'description_carousel'=>'Bannière animée d\'images et de textes.',
 'description_liste_articles'=>'Liste d\'articles d\'une rubrique particulère ou non.',
 'description_liste_articles_meme_rubrique'=>'Liste des articles dans la même rubrique.',
@@ -50,10 +51,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'explication_socialtags'=>'Les réseaux sociaux à afficher sont à sélectionner dans la page de configuration du plugin "<a href="./?exec=configurer_socialtags" title="Configurer Socialtags">Socialtags</a>"',
 'explication_titre_mot_video'=>'/!\ Pour afficher une ou plusieurs vidéos, il faut que celles-ci soient insérées dans le chapo d\'un article et que cet article soit associé à un mot clé (par défaut "Vidéo à la une"). /!\ ',
 'explication_tri'=>'Vous pouvez choisir de trier les articles par date (du plus récent au plus ancien),<br/>par titre (ordre alphabétique) ou par numéro de titre si vous utilisez la numérotation des articles.',
+'explication_url_minical' => 'Page sur laquelle arrive le visiteur lorsqu\'il clique sur une date du mini-calendrier. Assurez-vous que cette page contient une noisette listant les mêmes objets que ceux du mini-calendrier.',
 
 'facebook_page'=>'Page facebook',
 'label_afficher_descriptif'=>'Afficher le descriptif',
 'label_afficher_liste_simple'=>'Afficher une liste simple',
+'label_afficher_logo'=>'Afficher le logo',
 'label_afficher_nom_site'=>'Afficher le nom du site',
 'label_afficher_parent'=>'Afficher la rubrique parent',
 /*'label_afficher_portfolio_documents'=>'Choisir l\'affichage (portfolio d\'images et/ou documents)',
@@ -113,6 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_sdn_conteneur_class'=>'Classes css du conteneur',
 'label_sites_partenaires'=>'Identifiants des sites des partenaires',
 'label_titre'=>'Titre',
+'label_url_minical' => 'Page de destination du mini-calendrier',
 'label_utiliser_sdn_conteneur'=>'Encadrer la noisette d\'un conteneur',
 'label_titre_mot'=>'Titre du mot-clé',
 'label_tri'=>'Trier par :',
@@ -150,6 +154,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'menu' => 'Menu',
 
+'nom_calendrier_mini' => 'Mini-calendrier des évènements',
 'nuage' => 'Nuage de mots-clé',
 'num_titre' => 'Numero de titre',
 

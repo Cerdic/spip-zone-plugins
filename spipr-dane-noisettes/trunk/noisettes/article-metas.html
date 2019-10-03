@@ -1,5 +1,6 @@
 <BOUCLE_aside(ARTICLES){id_article}>
 <div class="postmeta"><div class="liste">
+	[(#ENV{afficher_logo}|oui)[(#LOGO_ARTICLE|image_recadre{1:1,-,focus})]]
 	[(#ENV{masquer_date}|non)<h2 class="h2"><:spipr_dane:publie_le:></h2>
 	<p class="center">
 		<time datetime="[(#DATE|date_iso)]" ><i class="icon-calendar"></i> [(#DATE|nom_jour) ][(#DATE|affdate)]</time>

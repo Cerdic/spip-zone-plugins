@@ -6,13 +6,6 @@ contexte:
   - 'identifiant'
 parametres:
   -
-    saisie: 'menu'
-    options:
-      nom: 'identifiant'
-      label: '<:menus:noisette_label_identifiant:>'
-      cacher_option_intro: 'oui'
-      conteneur_class: 'long_label'
-  -
     saisie: 'oui_non'
     options:
       nom: 'masquer_titre'
@@ -51,4 +44,4 @@ parametres:
       explication: '<:sdn:explication_conf_avancee_noisettes:>'
       afficher_si: '@config:sdn:conf_avancee@  == "on"'
     saisies:
-  - 'inclure:inclure/yaml/conf_avancee.yaml'
+      - 'inclure:inclure/yaml/conf_avancee.yaml'
