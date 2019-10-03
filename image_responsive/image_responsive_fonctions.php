@@ -102,8 +102,8 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 
 		// mime_content_type ne fonctionn pas sur certaines versions de PHP…
 		// $mime = mime_content_type($source);
-		if (preg_match("png$", $source)) $mime = "image/png";
-		else if (preg_match("gif$", $source)) $mime = "image/gif";
+		if (preg_match("/png$/", $source)) $mime = "image/png";
+		else if (preg_match("/gif$/", $source)) $mime = "image/gif";
 		$mime = "image/jpeg";
 		
 		$timestamp = filemtime($source);

@@ -1,7 +1,7 @@
 <paquet
 	prefix="image_responsive"
 	categorie="multimedia"
-	version="7.7.9"
+	version="7.7.10"
 	etat="stable"
 	logo="prive/themes/spip/images/image_responsive.png"
 	compatibilite="[3.0.0;3.2.*]"
