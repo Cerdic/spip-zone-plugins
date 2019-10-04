@@ -26,3 +26,7 @@
 .leaflet-oldie .leaflet-control-minimap { border: 1px solid #999; }
 .leaflet-oldie .leaflet-control-minimap a { background-color: #fff; }
 .leaflet-oldie .leaflet-control-minimap a.minimized { filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2); }
+
+/* Fix to prevent tinytypo from over styling links */
+.leaflet-bar a:focus,
+.leaflet-bar a:active { background-color: #f4f4f4 !important; outline: none; color: inherit !important; border-color: inherit !important; }
