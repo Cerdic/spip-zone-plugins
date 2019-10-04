@@ -32,7 +32,7 @@ function messagerie_insert_head($texte){
 
 
 function messagerie_jquery_plugins($scripts){
-    $scripts[] = find_in_path('javascript/jquery.autocompleter.js');
+    $scripts[] = 'javascript/jquery.autocompleter.js';
     return $scripts;
 }
 

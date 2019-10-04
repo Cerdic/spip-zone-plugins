@@ -1,9 +1,9 @@
 <paquet
 	prefix="messagerie"
 	categorie="communication"
-	version="3.1.8"
+	version="3.1.9"
 	etat="test"
-	compatibilite="[3.0.0;3.2.*]"
+	compatibilite="[3.0.0;3.3.*]"
 	logo="habillage/messagerie-32.png"
 	schema="1.0.0"
 	documentation="https://contrib.spip.net/Messagerie-entre-membres"
