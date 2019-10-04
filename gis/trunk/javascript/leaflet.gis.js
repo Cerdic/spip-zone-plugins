@@ -185,7 +185,7 @@ L.Map.Gis = L.Map.extend({
 					popupContent = popupContent + feature.properties['description_'+langue];
 					description_ok = true;
 				}
-			} else if(feature.properties.title) {
+			} else if (feature.properties.title) {
 				tooltipContent = feature.properties.title;
 				popupContent = '<strong class="title">' + feature.properties.title + '</strong>';
 			}
@@ -201,11 +201,12 @@ L.Map.Gis = L.Map.extend({
 	},
 
 	// Center and zoom or just pan to bounds/point
-	centerAndZoom: function (centerOrBounds, panonly=false) {
+	centerAndZoom: function (centerOrBounds, panonly) {
 		var map = this;
 		var options = map.options;
 		var bounds = new L.LatLngBounds();
 		bounds.extend(centerOrBounds);
+		panonly = panonly === undefined ? false : panonly;
 		// avoid infinite zoom if bounds focus on a point
 		if (bounds._northEast.lat == bounds._southWest.lat && bounds._northEast.lng == bounds._southWest.lng) {
 			options.maxZoom = options.zoom;
@@ -266,7 +267,7 @@ L.Map.Gis = L.Map.extend({
 		}
 	},
 
-	parseGeoJsonFeatures: function(data) {
+	parseGeoJsonFeatures: function (data) {
 		var map = this;
 		if (data.features && data.features.length > 0) {
 			var geojson = L.geoJson('', {
@@ -284,7 +285,7 @@ L.Map.Gis = L.Map.extend({
 					// Déclarer le contenu de la popup s'il y en a
 					map.setGeoJsonFeaturePopup(feature, layer);
 				},
-				pointToLayer: function(feature, latlng) {
+				pointToLayer: function (feature, latlng) {
 					var alt = 'Marker';
 					if (feature.properties.title) {
 						alt = feature.properties.title;
