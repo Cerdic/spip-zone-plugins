@@ -7,8 +7,7 @@
       - #extra
 
   On fait du mobile-first : pas de colonne à la base, puis on en met 2 ou 3 selon la largeur.
-  On met du float comme en 40 pour les vieux navigateurs, 
-  et du CSS grid pour les nouveaux.
+  On met du float comme en 40 pour les vieux navigateurs, et du CSS grid pour les nouveaux.
 
 */]#CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css;charset=utf-8}
@@ -109,13 +108,25 @@ body.large {
   ===========
   Formulaires
   ===========
+  Saisies centrées, largeur limitée pour avoir ~80 caractèrs max par ligne.
 */
 
 .formulaire_spip .editer-groupe,
 .formulaire_spip fieldset .editer-groupe {
-  max-width: 50em;
+  max-width: calc(50em + 14vw);
   margin-left: auto;
   margin-right: auto;
+}
+
+.formulaire_spip .editer,
+.formulaire_spip .editer.gauche {
+  padding-left: 13vw;
+}
+
+.formulaire_spip .editer label,
+.formulaire_spip .editer.gauche label {
+  width: 13vw;
+  margin-left: -13vw;
 }
 
 .formulaire_spip .fieldset {
@@ -167,6 +178,6 @@ body.large {
   font-style: normal;
 }
 body {
-  font-size: calc(0.8em + 0.133vw); /* mobile => 14px, 1920px => 15px */
+  font-size: calc(0.8em + 0.175vw); /* mobile => 14px, 1920px => 16px */
   font-family: "Lato", sans-serif;
 }
