@@ -93,8 +93,8 @@ function formidablepaiement_bank_dsp2_renseigner_facturation($flux){
 
 	// si c'est une transaction associee a un form
 	if ($id_transaction = $flux['args']['id_transaction']
-	  AND preg_match(",form\d+:,",$flux['args']['avant']['parrain'])
-	  AND $id_formulaires_reponse = $flux['args']['avant']['tracking_id']){
+	  AND preg_match(",form\d+:,",$flux['args']['parrain'])
+	  AND $id_formulaires_reponse = $flux['args']['tracking_id']){
 
 		$reponse = sql_fetsel('*','spip_formulaires_reponses','id_formulaires_reponse='.intval($id_formulaires_reponse));
 		$formulaire = sql_fetsel('*','spip_formulaires','id_formulaire='.intval($reponse['id_formulaire']));
