@@ -129,6 +129,10 @@ function creer_sprites_remplacer_date($regs) {
 }
 
 function creer_sprites_recuperer_fond ($flux) {
+	if (isset($flux['args']['fond'])
+		and ($flux['args']['fond'] == 'modeles/logo'
+			or ($flux['args']['fond'] == 'modeles/lesauteurs'))) {
+		return $flux;
+	}
 	return creer_sprites($flux);
-
 }

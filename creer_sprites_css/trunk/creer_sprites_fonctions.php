@@ -124,7 +124,7 @@ static $date_fichier=array(); // AJOUT JLUC
 
 function creer_sprites_recuperer_fond ($flux) {
 	if (isset($flux['args']['fond'])
-		and ($flux['args']['fond'] == "modeles/logo"
+		and ($flux['args']['fond'] == 'modeles/logo'
 			or ($flux['args']['fond'] == 'modeles/lesauteurs'))) {
 		return $flux;
 	}
