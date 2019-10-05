@@ -194,3 +194,42 @@ function stocks_post_edition($flux){
 
 	return $flux;
 }
+
+
+/**
+ * stocks_remplir_panier
+ *
+ * utilise la pipeline remplir_panier pour tester si la quantité d'objet ajouté
+ * est dispo en stock, et met a jour les liens du panier en cours
+ * avec le stock max disponible si besoin
+ *
+ */
+function stocks_remplir_panier($flux){
+	$id_panier = $flux['args']['id_panier'];
+	$objet = $flux['args']['objet'];
+	$id_objet = $flux['args']['id_objet'];
+	// recuperer la quantite de l'objet présent dans le panier en cours
+	$quantite_encours = sql_getfetsel(
+		'quantite',
+		'spip_paniers_liens',
+		array(
+			'id_panier = '.intval($id_panier),
+			'objet = '.sql_quote($objet),
+			'id_objet = '.intval($id_objet)
+		)
+	);
+	// recuperer le stock dispo pour ce produit
+	include_spip('inc/stocks');
+	$stock_max = get_quantite($objet, $id_objet);
+	// mettre a jour le panier en cours avec le stock max disponible
+	// si la quantité demandé est supérieure
+	if($quantite_encours > $stock_max){
+		sql_updateq(
+			'spip_paniers_liens',
+			array('quantite' => $stock_max),
+			'id_panier = ' . intval($id_panier) . ' and objet = ' . sql_quote($objet) . ' and id_objet = ' . intval($id_objet)
+		);
+	}
+
+	return $flux;
+}

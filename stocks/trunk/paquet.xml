@@ -26,7 +26,11 @@
 	<!-- Au passage d'une commande au statut payé
 				décrémenter le stock  -->
 	<pipeline nom="post_edition" inclure="stocks_pipelines.php" />
+    <!-- Tester le stock lors d'un ajout au panier -->
+    <pipeline nom="remplir_panier" inclure="stocks_pipelines.php" />
+
 	<utilise nom="commandes" compatibilite="[1.15.3;["/>
+	<utilise nom="panier" compatibilite="[1.4.0;["/>
 	<utilise nom="livraison" compatibilite="[2.6.0;["/>
 
 	<necessite nom="produits" compatibilite="[1.2.10;["/>

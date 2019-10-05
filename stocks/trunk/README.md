@@ -8,8 +8,15 @@ https://zone.spip.org/trac/spip-zone/browser/_plugins_/stocks/trunk
 
 ## Todo
 
-- [?] mettre en place une config pour gérer ou non le changement de statut du produit
-- [] saisie gerer_quantite utilisable dans le panier par exemple
+@todo -  mettre en place une config pour gérer ou non le changement de statut du produit ?
+
+@todo - saisie gerer_quantite utilisable dans le panier par exemple
+
+@todo - Quand il n'y a pas de stock créés a l'instalation la page de gestion des stock est vide, prévoir un message explicatif
+
+@todo - Gestion js/ajaxreload Sur la vue d'un produit
+- le formulaire de gestion du stock affiche 'créer le stock' il faut recharger la page pour que l'id_stock affiche le bon message.
+- lors de la suppression du stock le ajax reload ne fonctionne pas
 
 ## Améliorations à prévoir
 
@@ -18,7 +25,17 @@ le statut passe a payé.
 
 il faudrait tester sur la table spip panier lien les produits encours de commande, pour ne pas proposer dans la saisie quantité plus que de stock disponible.
 
+
+
 ## Changelogs
+
+0.2.8
+
+- utilisation de la pipeline `remplir_panier` pour tester le stock disponible lors de l'ajout au panier.
+
+0.2.7
+
+ajout des autorisations sur les stocks.seul un webmestre ou rédacteur peuvent voir ou éditer un stock
 
 v0.2.5
 
@@ -32,7 +49,7 @@ Supprimer un stock
 En test
 - Ajout aux utilise le plugin livraison
 - Ajout d'une colonne dans le listing des stocks "Livraison" qui affiche si le produit est immatériel ou livrable
-- dans le cas d'un produit livrable, et si le plugin livraison est installé, on affiche le/s modes de livraison "forcés" si il en a d'associés au produit, sinon on signal que les rêgles de livraison classique qui s'applique.
+- dans le cas d'un produit livrable, et si le plugin livraison est installé, on affiche le/s modes de livraison "forcés" si il en a d'associés au produit, sinon on signale que les rêgles de livraison classique s'applique.
 
 
 v0.2.4
