@@ -47,12 +47,8 @@ function stocks_upgrade($nom_meta_base_version, $version_cible) {
  * @return void
 **/
 function stocks_vider_tables($nom_meta_base_version) {
-
-	include_spip('base/objets');
-
 	// tables
 	sql_drop_table('spip_stocks');
 	//Metas
-	effacer_meta('stocks');
 	effacer_meta($nom_meta_base_version);
 }
