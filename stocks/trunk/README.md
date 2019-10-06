@@ -14,9 +14,6 @@ https://zone.spip.org/trac/spip-zone/browser/_plugins_/stocks/trunk
 
 @todo - Quand il n'y a pas de stock créés a l'instalation la page de gestion des stock est vide, prévoir un message explicatif
 
-@todo - Gestion js/ajaxreload Sur la vue d'un produit
-- le formulaire de gestion du stock affiche 'créer le stock' il faut recharger la page pour que l'id_stock affiche le bon message.
-- lors de la suppression du stock le ajax reload ne fonctionne pas
 
 ## Améliorations à prévoir
 
@@ -28,6 +25,15 @@ il faudrait tester sur la table spip panier lien les produits encours de command
 
 
 ## Changelogs
+
+0.2.9
+
+Gestion js/ajaxreload Sur la vue d'un produit
+- le formulaire de gestion du stock affiche 'créer le stock' il faut recharger la page pour que l'id_stock affiche le bon message.
+- lors de la suppression du stock le ajax reload ne fonctionne pas
+
+suppression de pipeline plus utiliser d'affichage sur la fiche objet + doc 
+
 
 0.2.8
 
