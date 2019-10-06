@@ -8,10 +8,14 @@ Gérez votre stock
 <script>
 jQuery(function($){
   $('form[name="formulaire_gerer_stock"]').on('submit',function(){
-    ajaxReload('gestion_stock', {
-      args:{objet:'produit',id_objet:#ID_PRODUIT}
-    });
+      $(this).ajaxReload('gestion_stock', {
+          args:{objet:'produit',id_objet:#ID_PRODUIT}
+      });
   });
-
+  $('form.btn_supprimer_stock').on('submit',function(){
+    $(this).ajaxReload('gestion_stock',{
+        args:{objet:'produit',id_objet: #ID_PRODUIT}
+      });
+  });
 });
 </script>

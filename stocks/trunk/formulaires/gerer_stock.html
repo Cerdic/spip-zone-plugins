@@ -9,9 +9,8 @@
 [(#ENV{editable})
 [(#ENV{id_stock}|oui)
   [(#BOUTON_ACTION{Supprimer le stock,
-     #URL_ACTION_AUTEUR{supprimer_stock,#ENV{id_stock}}})]
+     #URL_ACTION_AUTEUR{supprimer_stock,#ENV{id_stock}},'ajax btn_supprimer_stock'})]
 ]
-
 <form name="formulaire_#FORM" action="#ENV{action}" method="post">
 <div>
 	#ACTION_FORMULAIRE{#ENV{action}}
