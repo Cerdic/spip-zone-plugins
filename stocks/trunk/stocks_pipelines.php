@@ -4,7 +4,14 @@
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
-
+/**
+ * pipeline formulaire_charger
+ *
+ * ajoute au formulaire d'edition d'un produit
+ * les saisies necessaire a l'edition du stock/quantité
+ *
+ *
+ */
 function stocks_formulaire_charger($flux) {
 	$form = $flux['args']['form'];
 
@@ -46,39 +53,12 @@ function stocks_formulaire_traiter($flux) {
 		$id_produit = $flux['data']['id_produit'];
 		$quantite = intval(_request('quantite_produit'));
 
-		//spip_log("$id_produit",'stocks');
 		set_quantite('produit', $id_produit, $quantite);
 	}
 
 	return $flux;
 }
 
-/*
- * function stocks_afficher_fiche_objet
- * @param $flux
- */
-function stocks_afficher_fiche_objet($flux) {
-
-	if ($flux['args']['type'] == 'produit') {
-		$objet = $flux['args']['type'];
-		$id_objet = intval($flux['args']['id']);
-
-		$texte = recuperer_fond(
-			'prive/squelettes/inclure/stock_fiche_objet',
-			array(
-			'objet'=>$objet,
-			'id_objet'=>$id_objet
-			)
-		);
-
-		if ($p = strpos($flux['data'], '<!--afficher_fiche_objet-->')) {
-			$flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
-		} else {
-			$flux['data'] .= $texte;
-		}
-	}
-	return $flux;
-}
 /**
  * Pipeline stocks_affiche_milieu
  *
