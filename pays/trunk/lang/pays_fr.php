@@ -15,6 +15,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_pays' => 'Aucun pays',
 	'info_1_pays' => 'Un pays',
 	'info_nb_pays' => '@nb@ pays',
+	'info_gauche_numero_pays' => 'Pays NUMÉRO :',
+	'info_pays_utilise_par' => 'Pays lié à :',
 
 	// L
 	'label_code' => 'Code ISO3166-1 Alpha 2',
@@ -32,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'retirer_lien_pays' => 'Retirer ce pays',
+	'retirer_lien_objet' => 'Retirer cette association',
 	'retirer_tous_liens_pays' => 'Retirer tous les pays',
 
 	// T

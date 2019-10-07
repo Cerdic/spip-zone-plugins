@@ -1,0 +1,15 @@
+<BOUCLE_pays_info(PAYS){id_pays=#ENV{id}}{tout}>
+<div class='infos'>
+	<div class='numero'>
+		<:pays:info_gauche_numero_pays:>
+		<p>#ID_PAYS</p>
+	</div>
+
+	[(#REM) Bouton voir en ligne
+	][(#VAL{redirect}
+		|generer_url_action{type=pays&id=#ID_PAYS}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,pays})]
+
+</div>
+</BOUCLE_pays_info>
