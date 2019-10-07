@@ -32,7 +32,7 @@ function action_trier_items_dist() {
 	include_spip('base/objets_parents');
 
 	$tab		= _request('trier');
-	$page 		= _request('debut_liste');
+	$page 		= intval(_request('debut_liste'));
 	$objet		= _request('objet');
 	$id_parent	= _request('id_parent');
 
@@ -44,13 +44,13 @@ function action_trier_items_dist() {
 		$parent_champ = $parent['champ'];
 	}
 
-	spip_log("objet : ".$objet."\n id_parent : ".$id_parent."\nparent : ".$parent_champ, 'rang.' . _LOG_DEBUG);
+	spip_log("\nobjet : ".$objet."\nid_parent : ".$id_parent."\nparent : ".$parent_champ."\ntrier".print_r($tab,1), 'rang.' . _LOG_DEBUG);
 
 	// reclassement !
 	foreach ($tab as $key => $value) {
 		$rang	= $page + $key + 1; // le classement commence à 1, pas à 0
 		$id		= intval($value);
-		if ($id_parent == 'rien') {
+		if (!$id_parent || $id_parent == 'rien') {
 			$where = "$id_objet=$id";
 		}
 		else {
@@ -61,6 +61,6 @@ function action_trier_items_dist() {
 	}
 
 	include_spip('inc/invalideur');
-	suivre_invalideur("rang");
+	suivre_invalideur($objet.'/*');
 
 }
