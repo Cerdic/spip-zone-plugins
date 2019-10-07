@@ -1,12 +1,5 @@
 <?php
 
-/***************************************************************************\
- * Plugin Duplicator pour Spip 3.0
- * Licence GPL (c) 2010-2014 - Apsulis
- * Duplication de rubriques et d'articles
- *
-\***************************************************************************/
-
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }

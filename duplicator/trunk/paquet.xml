@@ -1,15 +1,15 @@
 <paquet
 	prefix="duplicator"
 	categorie="edition"
-	version="2.0.4"
+	version="2.0.5"
 	schema="1.0.0"
 	etat="test"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/duplicator.png"
-	documentation="https://contrib.spip.net/?article3354"
+	documentation="https://contrib.spip.net/3354"
 >
 	<nom>Duplicator</nom>
-	<!-- Dupliquer une rubrique et son contenu -->
+	<!-- Dupliquer simplement les objets éditoriaux -->
 
 	<auteur lien="http://demo.apsulis.com">Apsulis</auteur>
 	<auteur lien="http://poivron-robotique.fr">Keuronde</auteur>
