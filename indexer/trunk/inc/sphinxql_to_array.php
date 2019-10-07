@@ -15,6 +15,9 @@ function inc_sphinxql_to_array_dist($u, $debut=''){
 	$sphinx = \Sphinx\SphinxQL\SphinxQLSingleton::getInstance(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT);
 
 	$all = $sphinx->allfetsel($u);
+	if ($all === false) {
+		return [];
+	}
 	$total = intval($all['query']['meta']['total']);
 
 	// pagination : rajouter $debut elements vides
