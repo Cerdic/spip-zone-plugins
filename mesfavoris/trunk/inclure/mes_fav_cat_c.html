@@ -1,0 +1,64 @@
+[(#REM)
+
+  Squelette inclure/mesfavoris
+  Distribue sous licence GPL
+  
+  Affiche les favoris d'un auteur particulier
+  Version pour Crayons (non test&eacute;)
+  
+  Param&egrave;tres possibles :
+  -* id_auteur int : l'identifiant num&eacute;rique de l'auteur
+  -* pagination int : le nombre d'items par pagination
+  -* titre string : le titre du bloc
+  -* class string : une classe sp&eacute;cifique pour le bloc
+  -* bouton_suppression string : si &eacute;gal &agrave; non, on n'affiche pas le bouton de suppression
+  -* bouton_ajout string : si &eacute;gal &agrave; oui, on affiche le formulaire de favoris (un bouton d'ajout et donc de suppression en somme)
+  -* type_pagination string : le type de pagination souhait&eacute;e sinon celle par d&eacute;faut de SPIP
+  -* sinon string : le texte &agrave; afficher dans le cas ou la liste est vide (par d&eacute;faut aucun)
+  -* categorie string : le type de favori &agrave; afficher
+]
+<B_selections>
+	<div id="mesfavoris_objets_[(#ENV{id_auteur})]" class="liste selection favoris[ (#ENV{categorie})][ (#ENV{class})]">
+		<h2>[(#ENV{titre,<:mesfavoris:mes_favoris:>})]</h2>
+		[<p class="pagination">(#PAGINATION)</p>]
+		<table class="spip liste-items">
+			<caption class="caption">[(#GRAND_TOTAL|singulier_ou_pluriel{mesfavoris:info_1_favori,mesfavoris:info_nb_favoris})]</caption>
+			<thead>
+				<tr class="first_row item">
+					<th scope="col"><:mesfavoris:ce_favori:></th>
+					<th scope="col"><:mesfavoris:ajoute_le:></th>
+					<th scope="col"><:mesfavoris:dans_categorie:></th>
+				</tr>
+			</thead>
+			<tbody>
+			<BOUCLE_selections(FAVORIS){!par maj}{id_auteur}{categorie ?}{pagination #ENV{pagination,10}}>
+				<tr class="item favori [(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+					<td>
+						<a href="#INFO_URL{#OBJET,#ID_OBJET}">#INFO_TITRE{#OBJET,#ID_OBJET}</a>
+					</td>
+					<td>
+						[<abbr class="date" title="#MAJ">(#MAJ|affdate_court)</abbr>]
+						[(#ENV{bouton_suppression,oui}|=={non}|non)
+							[(#AUTORISER{modifier,favori,#ID_FAVORI}|oui)
+								[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{<:mesfavoris:remove:>,'action del'})],
+								#URL_ACTION_AUTEUR{supprimer_favori,#ID_FAVORI,#SELF},
+								'button action ajax', '', <:mesfavoris:remove:> }
+								)]
+							]
+						]
+						[(#ENV{bouton_ajout,non}|=={oui}|oui)
+							[(#FORMULAIRE_FAVORI{#OBJET,#ID_OBJET})]
+						]
+					</td>
+					<td>
+						[<a href="[(#SELF|parametre_url{categorie,#CATEGORIE})]"><span class="#EDIT{categorie}">(#CATEGORIE)</span></a>]
+					</td>
+				</tr>
+			</BOUCLE_selections>
+			</tbody>
+		</table>
+		[<p class="pagination">(#PAGINATION{#ENV{type_pagination,''}})</p>]
+	</div>
+</B_selections>[
+<div id="mesfavoris_objets_[(#ENV{id_auteur})]" class="liste favoris[ (#ENV{class})]"><p>(#ENV*{sinon,''})</p></div>
+]<//B_selections>
