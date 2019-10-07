@@ -10,13 +10,17 @@
 		<BOUCLE_email(EMAILS){id_email}>
 		<td class='titre principale'>
 			<div>
-				[<a href="[(#INFO_URL{email,#ID_EMAIL})]" title="<:info_numero_abbreviation:> #ID_NUMERO">
-					<span class="#EDIT{titre} titre">(#TITRE)</span>
-				</a>]
+				<a href="[(#INFO_URL{email,#ID_EMAIL})]" title="<:info_numero_abbreviation:> #ID_NUMERO">
+				[(#TYPE|logo_type_email) ][(#TYPE|coordonnees_lister_types_emails)]
+				</a>
 			</div>
-			<div>[(#TYPE|logo_type_email) ][(#TYPE|coordonnees_lister_types_emails)]</div>
 		</td>
 		<td>
+			[<div>
+				<a href="[(#INFO_URL{email,#ID_EMAIL})]" title="<:info_numero_abbreviation:> #ID_NUMERO">
+					<span class="#EDIT{titre} titre">(#TITRE)</span>
+				</a>
+			</div>]
 			<div>[(#TYPE|match{x400}|non)<a href="mailto:#EMAIL">]
 			[<span class="#EDIT{email} email">(#EMAIL)</span>]
 			[(#TYPE|match{x400}|non)</a>]</div>
