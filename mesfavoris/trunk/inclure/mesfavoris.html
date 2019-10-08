@@ -17,7 +17,7 @@
   -* categorie string : le type de favori à afficher
 ]
 <B_selections>
-	<div id="mesfavoris_objets_[(#ENV{id_auteur})]" class="liste selection favoris[ (#ENV{categorie})][ (#ENV{class})]">
+	<div id="selection" class="liste selection favoris[ (#ENV{categorie})][ (#ENV{class})]">
 		<h2>[(#ENV{titre,<:mesfavoris:mes_favoris:>})]</h2>
 		[<p class="pagination">(#PAGINATION)</p>]
 		<ul class="liste-items">
@@ -34,5 +34,5 @@
 		[<p class="pagination">(#PAGINATION{#ENV{type_pagination,''}})</p>]
 	</div>
 </B_selections>[
-<div id="mesfavoris_objets_[(#ENV{id_auteur})]" class="liste favoris[ (#ENV{class})]"><p>(#ENV*{sinon,''})</p></div>
+<div id="selection" class="liste favoris[ (#ENV{class})]"><p>(#ENV*{sinon,''})</p></div>
 ]<//B_selections>

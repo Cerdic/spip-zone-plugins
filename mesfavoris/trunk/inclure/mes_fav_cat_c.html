@@ -4,18 +4,18 @@
   Distribue sous licence GPL
   
   Affiche les favoris d'un auteur particulier
-  Version pour Crayons (non test&eacute;)
+  Version pour Crayons (non testé)
   
-  Param&egrave;tres possibles :
-  -* id_auteur int : l'identifiant num&eacute;rique de l'auteur
+  Paramètres possibles :
+  -* id_auteur int : l'identifiant numérique de l'auteur
   -* pagination int : le nombre d'items par pagination
   -* titre string : le titre du bloc
-  -* class string : une classe sp&eacute;cifique pour le bloc
-  -* bouton_suppression string : si &eacute;gal &agrave; non, on n'affiche pas le bouton de suppression
-  -* bouton_ajout string : si &eacute;gal &agrave; oui, on affiche le formulaire de favoris (un bouton d'ajout et donc de suppression en somme)
-  -* type_pagination string : le type de pagination souhait&eacute;e sinon celle par d&eacute;faut de SPIP
-  -* sinon string : le texte &agrave; afficher dans le cas ou la liste est vide (par d&eacute;faut aucun)
-  -* categorie string : le type de favori &agrave; afficher
+  -* class string : une classe spécifique pour le bloc
+  -* bouton_suppression string : si égal à non, on n'affiche pas le bouton de suppression
+  -* bouton_ajout string : si égal à oui, on affiche le formulaire de favoris (un bouton d'ajout et donc de suppression en somme)
+  -* type_pagination string : le type de pagination souhaitée sinon celle par défaut de SPIP
+  -* sinon string : le texte à afficher dans le cas ou la liste est vide (par défaut aucun)
+  -* categorie string : le type de favori à afficher
 ]
 <B_selections>
 	<div id="mesfavoris_objets_[(#ENV{id_auteur})]" class="liste selection favoris[ (#ENV{categorie})][ (#ENV{class})]">
@@ -32,7 +32,7 @@
 			</thead>
 			<tbody>
 			<BOUCLE_selections(FAVORIS){!par maj}{id_auteur}{categorie ?}{pagination #ENV{pagination,10}}>
-				<tr class="item favori [(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<tr class="item favori [row_(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 					<td>
 						<a href="#INFO_URL{#OBJET,#ID_OBJET}">#INFO_TITRE{#OBJET,#ID_OBJET}</a>
 					</td>
