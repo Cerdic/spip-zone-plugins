@@ -1,6 +1,6 @@
 <?php
 
-// S&eacute;curit&eacute;
+// Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
@@ -12,15 +12,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *     ```
  *
  * @param $arg string
- *     arguments s&eacute;par&eacute;s par un charact&egrave;re non alphanum&eacute;rique
+ *     arguments séparés par un charactère non alphanumérique
  *
  *     - id_pays : identifiant de l'pays
- *     - objet : type d'objet &agrave; dissocier
- *     - id_objet : identifiant de l'objet &agrave; dissocier
+ *     - objet : type d'objet à dissocier
+ *     - id_objet : identifiant de l'objet à dissocier
  */
 function action_dissocier_pays_dist($arg = null) {
 
-	// Si $arg n'est pas donn&eacute; directement, le r&eacute;cup&eacute;rer via _POST ou _GET
+	// Si $arg n'est pas donné directement, le récupérer via _POST ou _GET
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
