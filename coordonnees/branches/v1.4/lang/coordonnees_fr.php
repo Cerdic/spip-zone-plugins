@@ -72,9 +72,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// types (RFC2426) http://microformats.org/wiki/hcard-fr#adr_tel_email_types
 	// traductions  http://www.alsacreations.com/tuto/lire/1223-microformats-composes.html#hcard
 	'titre_coordonnees'             => 'Coordonnées',
-	'type_adr_dom'                  => 'R&eacute;sidentielle',
+	'type_adr_dom'                  => 'Résidentielle',
 	'type_adr_home'                 => 'Personnelle',
-	'type_adr_intl'                 => '&Eacute;trang&egrave;re',
+	'type_adr_intl'                 => 'Étrangère',
 	'type_adr_parcel'               => 'Parcelle',
 	'type_adr_postal'               => 'Postale (en poste restante)',
 	'type_adr_pref'                 => 'Principale',
