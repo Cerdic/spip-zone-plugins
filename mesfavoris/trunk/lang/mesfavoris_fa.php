@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'add' => 'افزودن',
 	'add_to' => 'افزودن به گزينه‌هاي من',
-	'ajoute_le' => 'افزوده به',
+	'ajoute_le' => 'افزوده به', # MODIF
 
 	// C
 	'configurer' => 'پيكربندي',

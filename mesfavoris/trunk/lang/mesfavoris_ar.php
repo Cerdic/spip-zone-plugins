@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'add' => 'إضافة',
 	'add_to' => 'إضافة إلى قائمة المفضلات',
-	'ajoute_le' => 'أضيف في',
+	'ajoute_le' => 'أضيف في', # MODIF
 
 	// C
 	'configurer' => 'إعداد',

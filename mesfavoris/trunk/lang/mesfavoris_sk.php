@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'add' => 'Pridať',
 	'add_to' => 'Pridať do môjho výberu',
-	'ajoute_le' => 'Pridané',
+	'ajoute_le' => 'Pridané', # MODIF
 
 	// C
 	'configurer' => 'Nastaviť',
