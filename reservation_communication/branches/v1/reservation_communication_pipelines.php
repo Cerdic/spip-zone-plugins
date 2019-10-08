@@ -3,7 +3,7 @@
  * Utilisations de pipelines par Réservation Comunications
  *
  * @plugin     Réservation Comunications
- * @copyright  2015-2018
+ * @copyright  2015-2019
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Reservation_communication\Pipelines
@@ -127,6 +127,22 @@ function reservation_communication_reservation_evenement_objets_navigation($flux
 			'label' => _T('reservation_communication:titre_reservation_communications'),
 			'objets' => array('reservation_communications', 'reservation_communications')
 	);
+
+	return $flux;
+}
+
+/**
+ * Optimiser la base de données
+ *
+ * Supprime les objets à la poubelle.
+ *
+ * @pipeline optimiser_base_disparus
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function reservation_communication_optimiser_base_disparus($flux) {
+
+	sql_delete('spip_reservation_communications', "statut='poubelle' AND maj < " . $flux['args']['date']);
 
 	return $flux;
 }

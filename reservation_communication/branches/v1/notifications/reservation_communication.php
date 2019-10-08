@@ -3,7 +3,7 @@
  * Envoi des communications
  *
  * @plugin     Réservation Comunications
- * @copyright  2015-2018
+ * @copyright  2015-2019
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Reservation_communication\Notifications
