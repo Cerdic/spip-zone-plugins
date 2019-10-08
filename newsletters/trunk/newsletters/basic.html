@@ -119,7 +119,8 @@
 									<td class="headerContent"
 									    style="border-collapse: collapse;color: #202020;font-family: Arial;font-size: 34px;font-weight: bold;line-height: 100%;padding: 0;text-align: center;vertical-align: middle;">
 										<!-- // Begin Module: Standard Header Image \\ -->
-										[(#LOGO_NEWSLETTER|sinon{#LOGO_SITE_SPIP}|image_passe_partout{600,250}|image_recadre{600,250,center,transparent}|image_aplatir{jpg,#ffffff,75}
+										#SET{logo,#LOGO_NEWSLETTER|sinon{#LOGO_SITE_SPIP}}
+										[(#GET{logo}|image_passe_partout{600,250}|image_recadre{600,250,center,transparent}|image_aplatir{[(#GET{logo}|newsletter_image_extension_aplatir_format)],#ffffff,75}
 										  |inserer_attribut{alt,[(#LOGO_NEWSLETTER_NORMAL|non)#NOM_SITE_SPIP]}
 										  |inserer_attribut{border,'0'}
 										  |inserer_attribut{style,'margin: 0;padding: 0;width: 100%;border: 0;height: auto;line-height: 100%;outline: none;font-size:28px;text-decoration: none;'}
@@ -222,7 +223,8 @@
 													<div
 														style="color: #707070;font-family: Arial;font-size: 14px;line-height: 125%;text-align: right;">
 														[(#LOGO_NEWSLETTER_NORMAL|oui)
-															[(#LOGO_SITE_SPIP|image_reduire{190,95}|image_aplatir{jpg,#ffffff,75}
+															#SET{logo,#LOGO_SITE_SPIP}
+															[(#GET{logo}|image_reduire{190,95}|image_aplatir{[(#GET{logo}|newsletter_image_extension_aplatir_format)],#ffffff,75}
 															  |inserer_attribut{alt,''}
 															  |inserer_attribut{border,'0'}
 															  |inserer_attribut{style,'margin: 0;padding: 0;max-width: 100%;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;'}

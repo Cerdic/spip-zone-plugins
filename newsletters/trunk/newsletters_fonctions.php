@@ -296,4 +296,28 @@ function newsletter_afficher_recurrence_debut($ics){
 	return $date_debut;
 }
 
-?>
+
+/**
+ * Determiner le format optimal pour aplatir une image
+ * On essaie de garder png si source en png/gif et resultat pas trop gros
+ * pour une meilleure qualite
+ * @param string $img_source
+ * @param int $png_limit_size
+ * @return string
+ */
+function newsletter_image_extension_aplatir_format($img_source, $png_limit_size=51200) {
+	$extension = 'jpg';
+	if (strpos($img_source, '<') !== false) {
+		$img_source = extraire_attribut($img_source, 'src');
+	}
+	$img_source = supprimer_timestamp($img_source);
+	$parts = explode('.', $img_source);
+
+	// on conserve gif et png en png, si pas trop gros
+	if (in_array(end($parts), array('gif', 'png'))) {
+		if (file_exists($img_source) && filesize($img_source) < $png_limit_size) {
+			return 'png';
+		}
+	}
+	return $extension;
+}
