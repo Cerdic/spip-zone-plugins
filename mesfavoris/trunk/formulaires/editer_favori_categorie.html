@@ -1,29 +1,14 @@
-<div class="formulaire_spip formulaire_editer formulaire_editer_favori_catogorie ajax">
-<BOUCLE_autorise(CONDITION){si #ENV{editable}|oui}>
+<div class="formulaire_spip formulaire_editer formulaire_#FORM ajax">
+[(#ENV{editable}|oui)
 	<form action="#ENV{action}" method="post">
 		#ACTION_FORMULAIRE{#ENV{action}}
 		[<div class="formulaire_ok">(#ENV**{message_ok})</div>]
 		[<p class="formulaire_erreur">(#ENV{message_erreur})</p>]
 		<div>
-			<B_categories>
-			[(#REM) Ouch... Marche pas comme il faudrait :
-				Malgre le critere doublons, le datalist est helas
-				duplique dans chaque div ! En soit ce n'est point
-				genant (car identiques) mais ca ne fait pas propre
-				et ca rend la page nom valide du fait de la non
-				unicite du parametre id dans la page ]
-			<datalist id="mesfavoris_categories_#ENV{id_auteur}">
-			<BOUCLE_categories(FAVORIS){id_auteur}{doublons 
-				categories_#ENV{id_auteur}}{categorie!=''}{fusion
-				categorie}{par categorie}>
-				<option value="[(#CATEGORIE|attribut_html)]">#CATEGORIE</option>
-			</BOUCLE_categories>
-			</datalist>
-			</B_categories>
-			<input type="text" size="10" name="categorie" 
+			<input type="text" size="9" name="categorie" 
 				value="#ENV{categorie}" class="text editer editer_categorie"
 				list="mesfavoris_categories_#ENV{id_auteur}"
-				autocomplete="on" />
+				autocomplete="on" maxlength="25" />
 			<button type='submit' class="submit editer_favori"
 				value="<:mesfavoris:change_to|attribut_html:>" 
 				title="<:mesfavoris:change_to|attribut_html:>"
@@ -35,5 +20,5 @@
 			</button>
 		</div>
 	</form>
-</BOUCLE_autorise>
+]
 </div>

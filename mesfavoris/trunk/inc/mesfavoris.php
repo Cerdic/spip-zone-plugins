@@ -67,7 +67,7 @@ function mesfavoris_ajouter($id_objet, $objet, $id_auteur, $categorie='') {
 		and $id_objet = intval($id_objet)
 		and preg_match(",^\w+$,",$objet)
 	) {
-		if (!mesfavoris_trouver($id_objet, $objet, $id_auteur, $categorie)) {
+		if ( !mesfavoris_trouver($id_objet, $objet, $id_auteur) ) {
 			$id_favori = sql_insertq(
 				'spip_favoris',
 				array(
@@ -105,7 +105,7 @@ function mesfavoris_trouver($id_objet, $objet, $id_auteur, $categorie='') {
 				'id_auteur = ' . $id_auteur,
 				'id_objet = ' . $id_objet,
 				'objet = ' . sql_quote($objet),
-				'categorie = ' . sql_quote($categorie),
+				//'categorie = ' . sql_quote($categorie), // ne pas inclure la categorie, sinon le bouton d'ajout ne voit pas que ca existe...
 			)
 		);
 	}
@@ -133,20 +133,14 @@ function mesfavoris_categoriser($id_objet, $objet, $id_auteur, $categorie) {
 		and $id_objet = intval($id_objet)
 		and preg_match(",^\w+$,", $objet)
 	) {
-		$row = sql_fetsel(
-			'id_favori',
-			'spip_favoris',
-			"id_auteur=$id_auteur AND id_objet=$id_objet AND objet=". sql_quote($objet)
-		);
+		$row = mesfavoris_trouver($id_objet, $objet, $id_auteur) ;
 		$id_favori = intval($row['id_favori']);
-#		return "$id_favori = $categorie";
 		if ( sql_updateq(
 			'spip_favoris',
 			array(
 				'categorie' => $categorie,
 			),
 			"id_favori=$id_favori"
-#			"id_auteur=$id_auteur AND id_objet=$id_objet AND objet=". sql_quote($objet)
 		) ) {
 			include_spip('inc/invalideur');
 			suivre_invalideur("favori/$objet/$id_objet");

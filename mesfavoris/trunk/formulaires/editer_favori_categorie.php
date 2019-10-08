@@ -32,7 +32,6 @@ function formulaires_editer_favori_categorie_charger_dist($objet='', $id_objet=0
 	);
 	$contexte = array(
 		'editable'     => $id_auteur?true:false,
-		'_deja_favori' => true,
 		'_objet'       => $objet,
 		'_id_objet'    => $id_objet,
 		'id_auteur'    => $id_auteur,
@@ -49,13 +48,13 @@ function formulaires_editer_favori_categorie_charger_dist($objet='', $id_objet=0
 /**
  * Traitement/enregistrement du formulaire
  * 
- * @param  string $objet     
- * @param  int $id_objet  
- * @param  string $categorie 
- * @return array            
+ * @param  string $objet
+ * @param  int $id_objet
+ * @param  string $categorie
+ * @return array
  */
 function formulaires_editer_favori_categorie_traiter_dist($objet='', $id_objet=0, $categorie='') {
-	$res = array('message_ok'=> ' Check passed ');
+	$res = array();
 	if ( $id_auteur = intval($GLOBALS['visiteur_session']['id_auteur']) ) {
 		include_spip('inc/mesfavoris');
 		if ( !is_null(_request('categoriser')) ) {
@@ -69,7 +68,7 @@ function formulaires_editer_favori_categorie_traiter_dist($objet='', $id_objet=0
 				// la balise ENV** pour preserver le script !
 				$res['message_ok'] .= '<script type="text/javascript"> ' ;
 				$res['message_ok'] .= ' ;jQuery(function($){ ' ;
-				$res['message_ok'] .= '   $("#mesfavoris_objets_' .
+				$res['message_ok'] .= '   $("#mesfavoris_selection_' .
 					$id_auteur . '").ajaxReload(); ' ;
 				$res['message_ok'] .= ' }) ' ;
 				$res['message_ok'] .= '</script> ' ;
@@ -78,8 +77,6 @@ function formulaires_editer_favori_categorie_traiter_dist($objet='', $id_objet=0
 				$res['message_erreur'] = ' Oops, something went wrong ' ;
 			}
 		}
-
 	}
-
 	return $res;
 }

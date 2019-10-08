@@ -36,7 +36,7 @@ function formulaires_favori_charger_dist($objet, $id_objet, $categorie='') {
 	}
 	else {
 		include_spip('inc/mesfavoris');
-		$favori = mesfavoris_trouver($id_objet, $objet, $GLOBALS['visiteur_session']['id_auteur'], $categorie);
+		$favori = mesfavoris_trouver($id_objet, $objet, $GLOBALS['visiteur_session']['id_auteur']);
 		
 		if ($favori) {
 			$contexte['_deja_favori'] = true;
