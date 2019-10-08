@@ -4,7 +4,7 @@
  * Fichier gérant l'installation et désinstallation du plugin Réservation Comunications
  *
  * @plugin     Réservation Comunications
- * @copyright  2015-2018
+ * @copyright  2015-2019
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Reservation_communication\Action
