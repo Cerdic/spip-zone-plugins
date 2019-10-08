@@ -67,6 +67,9 @@ body {
         #slogan_site_spip {[
             color: (#CONFIG{sdc/title/color});][
             (#CONFIG{sdc/header/position_logo_acad}|oui)max-width: 100%;margin-right:3em;]
+        }
+        #nom_site_spip,#slogan_site_spip {[
+            (#CONFIG{sdc/header/position_logo_acad}|et{#CONFIG{sdc/header/position_logo}|ou{#CONFIG{sdc/header/masquer_logo}|ou{#LOGO_SITE_SPIP|non}}})margin-left:2em;]
         }[
         .spip_logos{ float: (#CONFIG{sdc/header/position_logo});margin:0 0 0 25px;}]
     }
