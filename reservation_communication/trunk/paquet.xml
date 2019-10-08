@@ -1,7 +1,7 @@
 <paquet
 	prefix="reservation_communication"
 	categorie="communication"
-	version="1.1.4"
+	version="1.1.5"
 	etat="stable"
 	compatibilite="[3.0.17;3.2.*]"
 	logo="prive/themes/spip/images/reservation_communication-64.png"
@@ -27,6 +27,7 @@
 	<pipeline nom="reservation_compteur_action" inclure="reservation_communication_pipelines.php" />
 	<pipeline nom="notifications_archive" inclure="reservation_communication_pipelines.php" />
 	<pipeline nom="reservation_evenement_objets_navigation" inclure="reservation_communication_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="reservation_communication_pipelines.php" />
 
 	<menu nom="reservation_communications" titre="reservation_communication:titre_reservation_communications" parent="menu_activite" icone="images/reservation_communication-16.png" action="reservation_communications" />
 </paquet>
