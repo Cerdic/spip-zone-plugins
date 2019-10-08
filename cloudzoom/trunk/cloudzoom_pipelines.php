@@ -27,7 +27,7 @@ function cloudzoom_insert_head_css($flux){
  * @return string
  */
 function cloudzoom_insert_head($flux){
-	$js = timestamp(find_in_path('js/cloud-zoom.1.0.2.min.js'));
+	$js = timestamp(find_in_path('js/cloud-zoom.1.0.3.min.js'));
 	$flux .= "<script type='text/javascript' src='$js'></script>\n";
 
 	return $flux;

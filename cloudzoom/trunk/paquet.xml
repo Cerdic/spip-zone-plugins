@@ -1,7 +1,7 @@
 <paquet
 	prefix="cloudzoom"
 	categorie="multimedia"
-	version="3.0.0"
+	version="3.0.1"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/cloudzoom-32.png"
