@@ -8,26 +8,28 @@ if (!defined('_ECRIRE_INC_VERSION')){
  * Lister les smileys disponibles, et pour chaque les raccourcis ascii usuels
  * @return array
  */
-function frimousses_liste_smileys(){
+function frimousses_liste_smileys($hexa=null){
 
-	/*Listes des images a associer aux smileys*/
-
+	/*
+	 * Listes des hexa emoji a associer aux smileys
+	 * http://www.unicode.org/emoji/charts/full-emoji-list.html
+	 */
 	$les_smileys = Array
 	(
-		'smiley-lol-16.png' => Array
+		'1F604' => Array
 		(
 			':-))',
 			':-D',
 			':))'
 		)
 	,
-		'smiley-kiss-16.png' => Array
+		'1F617' => Array
 		(
 			':-)*',
 			':-*'
 		)
 	,
-		'smiley-16.png' => Array
+		'1F642' => Array
 		(
 			':-)',
 			':O)',
@@ -35,61 +37,61 @@ function frimousses_liste_smileys(){
 			':0)'
 		)
 	,
-		'smiley-angel-16.png' => Array
+		'1F607' => Array
 		(
 			'o:)',
 			'O:)',
 			'0:)'
 		)
 	,
-		'smiley-eek-16.png' => Array
+		'1F633' => Array
 		(
 			'%-)',
 			'8-)'
 		)
 	,
-		'smiley-wink-16.png' => Array
+		'1F609' => Array
 		(
 			';-)'
 		)
 	,
-		'smiley-sad-16.png' => Array
+		'1F641' => Array
 		(
 			':-((',
 			':-('
 		)
 	,
-		'smiley-yell-16.png' => Array
+		'1F621' => Array
 		(
 			':-O',
 			':-0'
 		)
 	,
-		'smiley-neutral-16.png' => Array
+		'1F610' => Array
 		(
 			':-|',
 			'|-)'
 		)
 	,
-		'smiley-confuse-16.png' => Array
+		'1F615' => Array
 		(
 			':-/'
 		)
 	,
-		'smiley-razz-16.png' => Array
+		'1F61B' => Array
 		(
 			':-p',
 			':-P'
 		)
 	,
-		'smiley-cry-16.png' => Array
+		'1F622' => Array
 		(
 			':\'-(',
 			':\'(',
 			':~('
 		)
 	,
-		'smiley-red-16.png' => Array
+		'1F60A' => Array
 		(
 			':-...',
 			':...',
@@ -99,41 +101,39 @@ function frimousses_liste_smileys(){
 			':.'
 		)
 	,
-		'smiley-zipper-16.png' => Array
+		'1F910' => Array
 		(
 			':-x'
 		)
 	,
-		'smiley-cool-16.png' => Array
+		'1F60E' => Array
 		(
 			'B-)'
 		)
 	,
-		'smiley-sleep-16.png' => Array
+		'1F634' => Array
 		(
 			':-@'
 		)
 	,
-		'smiley-money-16.png' => Array
+		'1F911' => Array
 		(
 			':-$'
 		)
 	,
-		'smiley-roll-16.png' => Array
+		'1F644' => Array
 		(
 			':-!'
 		)
 
 	);
 
+	if($hexa) {
+		return (isset($les_smileys[$hexa]) ? $les_smileys[$hexa] : null);
+	}
+
 	return $les_smileys;
 }
-
-//
-//
-//
-//
-// http://www.spip-contrib.net/Smileys-III-Un-point-d-entree-pour
 
 /**
  * Filtre SMILEYS - 19 Dec. 2004
@@ -151,10 +151,9 @@ function frimousses_pre_typo($chaine){
 	static $replace1 = null;
 	static $replace2 = null;
 	if (!$replace1 OR !$replace2){
-		foreach (frimousses_liste_smileys() as $file => $smileys){
-			$alt = _T('smileys:' . $smileys[0]);
-			$alt = attribut_html($alt);
-			$r = "<img src=\"" . find_in_path('frimousses/' . $file) . '" width="16" height="16" alt="' . $alt . '" title="' . $alt . '" class="smiley" />';
+		foreach (frimousses_liste_smileys() as $hexa => $smileys){
+			$title = _T('smileys:' . $smileys[0]);
+			$r = frimousse_affiche_smiley($hexa, $title);
 			// 4 regexp simples qui accrochent sur le premier char
 			// sont plus rapides qu'une regexp complexe qui oblige a des retour en arriere
 			foreach ($smileys as $index => $smiley){
@@ -185,17 +184,53 @@ function balise_SMILEY_DISPO($p){
 	$p->code = '"<ul class=\"listes-items smileys\">';
 	$frimousses = frimousses_liste_smileys();
 
-	foreach ($frimousses as $file => $smiley){
-		$alt = _T('smileys:' . $smiley[0]);
-		$alt = attribut_html($alt);
-		$smiley = "<span class=\\\"smiley_nom_variante\\\">" . implode("</span> <span class=\\\"smiley_nom_variante\\\">", $smiley) . "</span>";
-		$p->code .= "<li class=\\\"item smiley\\\"><span class=\\\"smiley_nom\\\">$smiley</span> <img  class=\\\"smiley_image\\\" src=\\\"" . find_in_path("frimousses/$file") . "\\\" width=\\\"16\\\" height=\\\"16\\\" alt=\\\"$alt\\\" title=\\\"$alt\\\"/> <span class=\\\"smiley_alt\\\" />$alt</span></li>\n";
+	foreach ($frimousses as $hexa => $smileys){
+		$title = _T('smileys:' . $smileys[0]);
+		$smileys = "<span class=\\\"smiley_nom_variante\\\">" . implode("</span> <span class=\\\"smiley_nom_variante\\\">", $smileys) . "</span>";
+		$p->code .= "<li class=\\\"item smiley\\\"><span class=\\\"smiley_nom\\\">$hexa $smileys</span> " . str_replace('"',"\\\"", frimousse_affiche_smiley($hexa, $title)) . " <span class=\\\"smiley_alt\\\" />$title</span></li>\n";
 	}
 	$p->code .= '</ul>"';
 	$p->type = 'html';
 
 	return $p;
 }
+
+/**
+ * Genere le code html d'un smiley a partir de son hexa et title
+ * @param $hexa
+ * @param null|string $title
+ * @return string
+ */
+function frimousse_affiche_smiley($hexa, $title=null) {
+
+	if (is_null($title)) {
+		$title = '';
+		if ($smileys = frimousses_liste_smileys($hexa)) {
+			$title = $smileys[0];
+		}
+	}
+
+	$title = attribut_html($title);
+	return '<b class="smiley" title="' . $title . '" class="smiley">'.frimousses_hexaToString($hexa).'</b>';
+}
+
+/**
+ * Converti le code hexa de l'emoji en chaine utf8/utf16
+ * @param string $hexa
+ * @return string
+ */
+function frimousses_hexaToString($hexa) {
+	//return eval("\\u"."{".$hexa."}");
+	$em = hexdec($hexa);
+	if ($em>0x10000){
+		$first = (($em-0x10000) >> 10)+0xD800;
+		$second = (($em-0x10000)%0x400)+0xDC00;
+		return json_decode('"' . sprintf("\\u%X\\u%X", $first, $second) . '"');
+	} else {
+		return json_decode('"' . sprintf("\\u%X", $em) . '"');
+	}
+}
+
 
 /**
  * Pipeline pre_charger du porteplume
@@ -207,7 +242,7 @@ function frimousses_porte_plume_barre_pre_charger($barres){
 	$frimousses = frimousses_liste_smileys();
 	$outil_frimousses = array();
 	$compteur = 0;
-	foreach ($frimousses as $file => $smiley){
+	foreach ($frimousses as $hexa => $smiley){
 		$outil_frimousses[] = array(
 			"id" => "barre_frimousse$compteur",
 			"name" => _T('smileys:' . $smiley[0]) . ' ' . implode(' ', $smiley),
@@ -221,11 +256,6 @@ function frimousses_porte_plume_barre_pre_charger($barres){
 	// On rajoute les boutons aussi bien pour l'édition du contenu que pour les forums
 	foreach (array('edition', 'forum') as $nom){
 		$barre = &$barres[$nom];
-
-		$module_barre = "barre_outils";
-		if (intval($GLOBALS['spip_version_branche'])>2){
-			$module_barre = "barreoutils";
-		}
 
 		$smiley_par_defaut = ':-)';
 		$barre->ajouterApres('grpCaracteres', array(
@@ -249,8 +279,8 @@ function frimousses_porte_plume_lien_classe_vers_icone($flux){
 	$outils_frimousses["outil_frimousses"] = array(find_in_path('img/frimousses-16.png'), '0');
 
 	$frimousses = array_keys(frimousses_liste_smileys());
-	foreach ($frimousses as $compteur => $file){
-		$outils_frimousses["outil_frimousses$compteur"] = array(find_in_path('frimousses/' . $file), '0');
+	foreach ($frimousses as $compteur => $hexa){
+		$outils_frimousses["outil_frimousses$compteur"] = array(find_in_path('frimousses/emoji-' . $hexa . '.png'), '0;background-size:contain;');
 	}
 
 	return array_merge($flux, $outils_frimousses);

@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	':-x'=> 'mute',
 	'B-)'=> 'sunglasses',
 	':-@'=> 'sleeping',
-	':$'=> 'money',
+	':-$'=> 'money',
 	':-!'=> 'thinking',
 	'|-)'=> 'neutral',
 );
