@@ -246,7 +246,7 @@ function frimousses_porte_plume_barre_pre_charger($barres){
  * @return array
  */
 function frimousses_porte_plume_lien_classe_vers_icone($flux){
-	$outils_frimousses["outil_frimousses"] = array(find_in_path('frimousses/smiley-16.png'), '0');
+	$outils_frimousses["outil_frimousses"] = array(find_in_path('img/frimousses-16.png'), '0');
 
 	$frimousses = array_keys(frimousses_liste_smileys());
 	foreach ($frimousses as $compteur => $file){
