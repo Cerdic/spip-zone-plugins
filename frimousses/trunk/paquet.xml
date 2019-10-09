@@ -1,0 +1,24 @@
+<paquet
+	prefix="frimousses"
+	categorie="edition"
+	version="2.0.0"
+	etat="dev"
+	compatibilite="[3.1.0;3.3.*]"
+	logo="frimousse-logo-32.png"
+	documentation="http://contrib.spip.net/Smileys-III-Un-point-d-entree-pour"
+>	
+
+	<nom>Frimousses</nom>
+	<!-- Mettre des smileys dans le texte -->
+
+	<auteur>Pierre Andrews (Mortimer)</auteur>
+	<auteur>Bionet</auteur>
+	<auteur>RealET</auteur>
+
+	<pipeline nom="pre_typo" />
+	<pipeline nom="porte_plume_barre_pre_charger" inclure="frimousses_pipelines.php" />
+	<pipeline nom="porte_plume_barre_charger" inclure="frimousses_pipelines.php" />
+	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="frimousses_pipelines.php" />
+
+	<utilise nom="porte_plume" />
+</paquet>

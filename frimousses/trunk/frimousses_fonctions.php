@@ -1,8 +1,6 @@
 <?php
-if (!isset($GLOBALS['spip_version_branche']) OR intval($GLOBALS['spip_version_branche'])<2){
-	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-	define('_DIR_PLUGIN_FRIMOUSSES',(_DIR_PLUGINS.end($p)).'/');
-}
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function frimousses_liste_smileys() {
   
