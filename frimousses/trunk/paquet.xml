@@ -16,9 +16,9 @@
 	<auteur>RealET</auteur>
 
 	<pipeline nom="pre_typo" />
-	<pipeline nom="porte_plume_barre_pre_charger" inclure="frimousses_pipelines.php" />
-	<pipeline nom="porte_plume_barre_charger" inclure="frimousses_pipelines.php" />
-	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="frimousses_pipelines.php" />
+	<pipeline nom="porte_plume_barre_pre_charger" inclure="frimousses_fonctions.php" />
+	<pipeline nom="porte_plume_barre_charger" inclure="frimousses_fonctions.php" />
+	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="frimousses_fonctions.php" />
 
 	<utilise nom="porte_plume" />
 </paquet>
