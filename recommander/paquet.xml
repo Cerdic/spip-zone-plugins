@@ -12,4 +12,5 @@
 	<!-- Fonction recommander un article à un ami -->
 
 	<auteur mail="mailto:fil@rezo.net">fil@rezo.net</auteur>
+	<necessite nom="nospam" compatibilite="[1.0.0;]" />
 </paquet>
