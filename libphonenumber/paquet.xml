@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.2.4;3.2.*]"
 	logo="prive/themes/spip/images/libphonenumber-64.png"
-	documentation="https://contrib.spip.net/xxx"
+	documentation="https://contrib.spip.net/5195"
 	schema="1.0.0" 
 >
 
