@@ -1,6 +1,6 @@
 <?php
 /**
- * vérification des numéros internationaux
+ * Démo du formulaire CVT de vérification des numéros internationaux
  * 
  * @plugin     libphonenumber for SPIP
  * @copyright  2019

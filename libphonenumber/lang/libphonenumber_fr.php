@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	//E
 	'entrer_un_numero' => 'Entrez un numéro de téléphone pour le vérifier',
+	'erreur_internationalisation' => 'Erreur dans l\'internationalisation du numéro', 
 	'explication_pays'=> '<small><i>Le pays est nécessaire pour internationaliser le numéro de téléphone</i></small>',
 	
 	//F
@@ -22,5 +23,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	//V
 	'verifier_ce_telephone' => 'Vérifier ce téléphone',
+	
 	
 	);

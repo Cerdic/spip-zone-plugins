@@ -7,13 +7,23 @@
  * @author     Anne-lise Martenot
  * @licence    GNU/GPL
  * (c) 2019 - Distribue sous licence GNU/GPL
- *
-**/
+ */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+/**
+ * Filtre pour renvoyer les erreurs d'un numéro de tel à l'international
+ *
+ * @filtre
+ * @api
+ * @see verifier()
+ * @param string $telephone
+ * @param string $pays (FR,CH …)
+ * @example [(#ENV{phone}|is_phone_ok{#ENV{pays}})]
+ * @return string
+ */
 function is_phone_ok($telephone,$pays){
 	$newtelephone = '';
 	$verifier = charger_fonction('verifier', 'inc');
