@@ -1,0 +1,25 @@
+<paquet
+	prefix="libphonenumber"
+	categorie="outil"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.2.4;3.2.*]"
+	logo="prive/themes/spip/images/libphonenumber-64.png"
+	documentation="https://contrib.spip.net/xxx"
+	schema="1.0.0" 
+>
+
+	<nom>libphonenumber pour SPIP</nom>
+	
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	
+	<!-- Vérifier le numéro de téléphone international dans un formulaire -->
+
+	<auteur lien='https://elastick.net'>Anne-lise Martenot</auteur>
+
+	<!-- placer la librairie dans le repertoire lib/libphonenumber (à créer) à la racine du site -->
+	
+	<lib nom="libphonenumber" lien="https://github.com/giggsey/libphonenumber-for-php/archive/master.zip" />
+	<necessite nom="pays" compatibilite="[3.2.0;]" />
+	
+</paquet>

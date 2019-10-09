@@ -1,0 +1,6 @@
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+#CACHE{0}
+
+[<span style="color:green">(#ENV{phone}|is_phone_ok{#ENV{pays}}|strlen|=={0}|oui) Validé !</span>]
+
+[(#ENV{phone}|is_phone_ok{#ENV{pays}})]

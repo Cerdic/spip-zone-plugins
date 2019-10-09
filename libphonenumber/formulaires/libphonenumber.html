@@ -1,0 +1,54 @@
+[(#REM)
+/*
+ * libphonenumber
+ * formulaire de test pour la vérification des numéros internationaux
+ * 
+ * @plugin     libphonenumber for SPIP
+ * @copyright  2019
+ * @author     Anne-lise Martenot
+ * @licence    GNU/GPL
+ * (c) 2019 - Distribue sous licence GNU/GPL
+ *
+ */
+]<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+<div>
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+</div>
+
+
+[(#ENV{editable}|oui)
+<form method="post" action="#ENV{action}" class="lien_cree">
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<div>
+		
+		[(#SAISIE{pays,pays,code_pays=oui,label=<:libphonenumber:label_pays:>, explication=<:libphonenumber:explication_pays:>,defaut=FR,obligatoire=oui})]
+		
+		[(#REM) <!--  écriture avec saisie
+			[(#SAISIE{input, telephone, obligatoire=oui, label=<:libphonenumber:label_telephone:>, placeholder=+33 7 16 08 12 54, required })]
+		-->
+		]
+		#SET{name,telephone}#SET{erreur,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		<div class="editer_#GET{name}[ (#GET{erreur}|oui)erreur]">
+			<label><:libphonenumber:label_telephone:> *</label>
+			<span id="verifone" class='erreur_message'>[(#GET{erreur})]</span>
+			<input type="text" id="champ_telephone" class="unefois text" name="#GET{name}" value="#ENV*{#GET{name}}" placeholder="+33 7 16 08 12 54" required="required" />
+		</div>
+		
+		[(#SAISIE{case,force_telephone,label=<:libphonenumber:forcer_telephone:>,label_case=<:libphonenumber:forcer_telephone_case:>})]
+		
+	</div>
+	
+	<div class="boutons">
+	<p>
+		[(#SET{text_submit,<:libphonenumber:verifier_ce_telephone:>})]
+		<input type="submit" name="enregistrer" class="submit" value="#GET{text_submit}" />
+	</p>
+	</div>
+	
+	
+</form>
+]
+
+</div>
