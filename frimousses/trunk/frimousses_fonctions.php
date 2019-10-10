@@ -276,11 +276,20 @@ function frimousses_porte_plume_barre_pre_charger($barres){
  * @return array
  */
 function frimousses_porte_plume_lien_classe_vers_icone($flux){
-	$outils_frimousses["outil_frimousses"] = array(find_in_path('img/frimousses-16.png'), '0');
+	$fimousse_img= find_in_path('img/frimousses-72.png');
+	$svg = find_in_path("img/frimousses.svg");
+	$svg = file_get_contents($svg);
+	$svg = base64_encode($svg);
+	$outils_frimousses["outil_frimousses"] = array($fimousse_img, "0;background-image:url('data:image/svg+xml;base64,{$svg}');background-size:contain;margin:-1px;width:18px!important;height:18px!important;");
 
 	$frimousses = array_keys(frimousses_liste_smileys());
 	foreach ($frimousses as $compteur => $hexa){
-		$outils_frimousses["outil_frimousses$compteur"] = array(find_in_path('frimousses/emoji-' . $hexa . '.png'), '0;background-size:contain;');
+		$svg = find_in_path("frimousses/".strtolower($hexa).".svg");
+		if ($svg) {
+			$svg = file_get_contents($svg);
+			$svg = base64_encode($svg);
+			$outils_frimousses["outil_frimousses$compteur"] = array($fimousse_img, "0;background-image:url('data:image/svg+xml;base64,{$svg}');background-size:contain;margin:-4px;width:20px!important;height:20px!important;");
+		}
 	}
 
 	return array_merge($flux, $outils_frimousses);
