@@ -121,17 +121,12 @@ function formulaires_editer_formulaire_champs_traiter($id_formulaire) {
 		));
 
 		// On envoie les nouvelles dans la table dans la table
-		$ok = sql_updateq(
-			'spip_formulaires',
-			array(
-				'saisies' => serialize($saisies_nouvelles)
-			),
-			'id_formulaire = '.$id_formulaire
-		);
-
+		include_spip('action/editer_objet');
+		$err = objet_modifier('formulaire', $id_formulaire, array('saisies' => serialize($saisies_nouvelles)));
+		
 		// Si c'est bon on appelle d'éventuelles fonctions d'update des traitements
 		// puis on renvoie vers la config des traitements
-		if ($ok) {
+		if (!$err) {
 			// On va chercher les traitements
 			$traitements = unserialize(sql_getfetsel(
 				'traitements',

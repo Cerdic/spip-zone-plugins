@@ -122,16 +122,11 @@ function formulaires_editer_formulaire_traitements_traiter($id_formulaire) {
 		$retours['message_erreur'] = $erreur_creation_dossier;
 	}
 	// Et on l'enregistre tel quel
-	$ok = sql_updateq(
-		'spip_formulaires',
-		array(
-			'traitements' => serialize($traitements)
-		),
-		'id_formulaire = '.$id_formulaire
-	);
+	include_spip('action/editer_objet');
+	$err = objet_modifier('formulaire', $id_formulaire, array('traitements' => serialize($traitements)));
 
 	// On va sur la page de visualisation quand c'est fini
-	if ($ok) {
+	if (!$err) {
 		$retours['redirect'] = parametre_url(generer_url_ecrire('formulaire'), 'id_formulaire', $id_formulaire);
 	} else {
 		$retours['editable'] = true;
