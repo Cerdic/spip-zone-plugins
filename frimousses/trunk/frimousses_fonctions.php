@@ -95,8 +95,8 @@ function frimousses_liste_smileys($hexa=null){
 		(
 			':-...',
 			':...',
-			':-…',
-			':…',
+			':-Â…',
+			':Â…',
 			':-&hellip;',
 			':&hellip;',
 			':-..',
@@ -257,7 +257,7 @@ function frimousses_porte_plume_barre_pre_charger($barres){
 		$compteur++;
 	}
 
-	// On rajoute les boutons aussi bien pour l'édition du contenu que pour les forums
+	// On rajoute les boutons aussi bien pour l'Ã©dition du contenu que pour les forums
 	foreach (array('edition', 'forum') as $nom){
 		$barre = &$barres[$nom];
 

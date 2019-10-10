@@ -1,11 +1,11 @@
 <paquet
 	prefix="frimousses"
 	categorie="edition"
-	version="2.0.2"
+	version="2.0.3"
 	etat="test"
 	compatibilite="[3.1.0;3.3.*]"
 	logo="img/frimousses-72.png"
-	documentation="http://contrib.spip.net/Smileys-III-Un-point-d-entree-pour"
+	documentation="https://contrib.spip.net/5196"
 >	
 
 	<nom>Frimousses</nom>
