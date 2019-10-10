@@ -12,12 +12,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'add' => 'Toevoegen',
 	'add_to' => 'Mijn selectie toevoegen',
-	'ajoute_le' => 'Toegevoegd op', # MODIF
+	'ajoute_le' => 'Aangepast op',
 
 	// C
+	'ce_favori' => 'Favoriet',
+	'change_to' => 'Aanpassen',
 	'configurer' => 'Configureren',
 
+	// D
+	'dans_categorie' => 'in de categorie',
+
 	// I
+	'info_1_favori' => '1 favoriet',
+	'info_aucune_categorie' => 'Geen enkele categorie bepaald',
+	'info_categorie_filtre' => 'Filteren',
+	'info_categories_tous' => 'Alle categorieen',
+	'info_nb_favoris' => '@nb@ favorieten',
 	'info_nombre_favoris_objet' => ' @nb@ keer aan favorieten toegevoegd.', # Pas utile dans le plugin lui-même mais peut l'être dans les squelettes
 
 	// L
@@ -30,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'mes_favoris' => 'Mijn favorieten',
+	'mon_favori' => 'Mijn favoriet',
 
 	// R
 	'remove' => 'Intrekken',
@@ -37,7 +48,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'ses_favoris' => 'Haar/zijn favorieten',
+	'son_favori' => 'Zijn/haar favoriet',
 
 	// V
-	'vos_favoris' => 'Uw favorieten' # Utile pour modifier le titre de l'inclusion
+	'vos_favoris' => 'Uw favorieten', # Utile pour modifier le titre de l'inclusion
+	'votre_favori' => 'Jouw favoriet'
 );
