@@ -95,6 +95,10 @@ function frimousses_liste_smileys($hexa=null){
 		(
 			':-...',
 			':...',
+			':-…',
+			':…',
+			':-&hellip;',
+			':&hellip;',
 			':-..',
 			':..',
 			':-.',
