@@ -20,12 +20,14 @@
 		.bodyContent {padding:30px;border-bottom:10px solid #GET{siteColor};}
 		.bodyContent div {color: #222222;font-family: Verdana, Geneva, sans-serif;line-height: 150%;text-align: left;}
 		.bodyContent div a:link, .bodyContent div a:visited {color: #336699;font-weight: normal;text-decoration: underline;}
-		.bodyContent img {display: inline;margin-bottom: 10px;}
+		.bodyContent img {display: inline;margin-bottom: 10px;max-width: 600px}
 		.bodyContent img.puce {display: inline;margin-bottom: 0;}
+		.bodyContent .spip_documents {max-width: 600px;}
+		.bodyContent .spip_documents img {max-width: 100%;}
 		hr { height: 1px; margin: 1.5em 0; border: 0; background: #222222; color: #222222; }
 		.spip_code, .spip_cadre {color: #606060;font-family: Courier,"Courier New",monospace;font-size: 1em;word-wrap:break-word;max-width: 100%;overflow: auto;}
 		.coloration_code ol {list-style: none;}
-		.spip_logos {float: right;margin-left: 10px;}
+		.spip_logo,.spip_logos {float: right;margin-left: 10px;}
 		.text {word-wrap:break-word;}
 		.header,.footer {padding: 20px 40px;margin-left: -40px;margin-right: -40px;}
 		.text > .header:first-child {margin-top: -40px;}
@@ -36,6 +38,8 @@
 			html,body {width: 100% !important;}
 			body, .backgroundTable {background-color: #ffffff !important;}
 			.bodyContent {padding:0 0 10px !important;border-top:0;border-bottom:0;}
+			.bodyContent img {max-width: 100%;}
+			.bodyContent .spip_documents {max-width: 100%;}
 			#templateHead {display: none}
 			#templateContainer {width: 100% !important;border: 0 !important;margin-top: 0}
 			#templateBody {width: 100% !important;}
@@ -48,6 +52,8 @@
 			html,body {width: 320px !important;}
 			body, .backgroundTable {background-color: #ffffff !important;}
 			.bodyContent {padding: 0 0 10px !important;border-top:0;border-bottom:0;}
+			.bodyContent img {max-width: 320px;}
+			.bodyContent .spip_documents {max-width: 320px;}
 			#templateContainer {width: 320px !important;border: 0 !important;margin-top: 0;}
 			#templateBody {width: 320px !important;}
 			.padding {padding-left:0 !important;padding-right:0 !important;}
