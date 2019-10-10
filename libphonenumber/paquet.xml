@@ -1,7 +1,7 @@
 <paquet
 	prefix="libphonenumber"
 	categorie="outil"
-	version="1.0.0"
+	version="1.0.1"
 	etat="dev"
 	compatibilite="[3.2.4;3.2.*]"
 	logo="prive/themes/spip/images/libphonenumber-64.png"
@@ -21,5 +21,6 @@
 	
 	<lib nom="libphonenumber" lien="https://github.com/giggsey/libphonenumber-for-php/archive/master.zip" />
 	<necessite nom="pays" compatibilite="[3.2.0;]" />
+	<necessite nom="verifier" compatibilite="[1.9.5;]" />
 	
 </paquet>
