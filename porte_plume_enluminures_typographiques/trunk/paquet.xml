@@ -1,7 +1,7 @@
 <paquet
 	prefix="typoenluminee"
 	categorie="edition"
-	version="3.5.13"
+	version="3.5.14"
 	etat="stable"
 	compatibilite="[2.0.3;3.2.*]"
 	logo="prive/themes/spip/images/typoenluminee-32.png"
@@ -34,4 +34,6 @@
 	<menu nom="configurer_typoenluminee" titre="enlumtypo:configuration_typoenluminee" parent="menu_squelette" icone="images/typoenluminee-16.png" />
 
 	<necessite nom="porte_plume" compatibilite="[1.7.2;[" />
+	
+	<utilise nom="frimousses" />
 </paquet>

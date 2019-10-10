@@ -4,7 +4,7 @@
 	<auteur>[Jacques->https://contrib.spip.net/_Jacques-PYRAT_], &#224; partir des raccourcis mis en place par [Fran&#231;ois->https://contrib.spip.net/_Francois-Schreuer_]</auteur>
 	<licence>&#169; 2007 GNU/GPL</licence>
 	<lien>https://contrib.spip.net/Enluminures-typographiques-V3-pour-SPIP-2-avec</lien>
-	<version>3.5.13</version>
+	<version>3.5.14</version>
 	<version_base>0.1.0</version_base>
 	<install>base/typoenluminee_upgrade.php</install>
 	<etat>stable</etat>
@@ -74,4 +74,6 @@
 	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[2.0.3;3.2.99]" />
 	<necessite id="porte_plume" version="[1.7.2;]" />
+	
+	<utilise id="frimousses" />
 </plugin>
