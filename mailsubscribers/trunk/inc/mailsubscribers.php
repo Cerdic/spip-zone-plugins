@@ -145,6 +145,10 @@ function mailsubscribers_obfusquer_email($email, $force = false) {
     if (!$force and defined('_MAILSUBSCRIBERS_GARDER_EMAILENCLAIR') ) {
 	    return $email;
     }
+    // on ne double pas l'obfusquation
+    if (strpos($email, "@example.org") !== false) {
+    	return $email;
+    }
 
     return md5($email) . "@example.org";
 }

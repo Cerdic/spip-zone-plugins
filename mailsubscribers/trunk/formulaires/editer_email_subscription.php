@@ -33,9 +33,9 @@ function formulaires_editer_email_subscription_charger_dist($email) {
 
 	$subscriber = charger_fonction('subscriber', 'newsletter');
 	$infos = $subscriber($email);
+
 	if ($infos and isset($infos['subscriptions'])) {
-		$valeurs['_id_mailsubscriber'] = sql_getfetsel('id_mailsubscriber', 'spip_mailsubscribers',
-			'email=' . sql_quote($email) . " OR email=" . sql_quote(mailsubscribers_obfusquer_email($email)));
+		$valeurs['_id_mailsubscriber'] = parametre_url($infos['url_admin'], 'id_mailsubscriber');
 		foreach ($infos['subscriptions'] as $sub) {
 			if ($sub['status'] !== 'off') {
 				$valeurs['listes'][] = $sub['id'];

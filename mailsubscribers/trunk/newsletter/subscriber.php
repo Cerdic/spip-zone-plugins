@@ -34,8 +34,14 @@ include_spip('mailsubscribers_fonctions');
 function newsletter_subscriber_dist($email, $options = array()) {
 
 	// chercher si un tel email est deja en base
-	$infos = sql_fetsel("email,nom,'' as listes,lang,'' as status,jeton,id_mailsubscriber", 'spip_mailsubscribers',
-		'email=' . sql_quote($email) . " OR email=" . sql_quote(mailsubscribers_obfusquer_email($email)));
+	// on utilise sql_allfetsel car normalement on a 0 ou 1 resultat, sauf en cas de doublon email+obfusque -> 2 resultats
+	$infos_all = sql_allfetsel("email,nom,'' as listes,lang,'' as status,jeton,id_mailsubscriber", 'spip_mailsubscribers',
+		'statut!=\'poubelle\' AND (email=' . sql_quote($email) . " OR email=" . sql_quote(mailsubscribers_obfusquer_email($email)).')');
+	$infos = ($infos_all ? reset($infos_all) : false);
+	if (count($infos_all) > 1) {
+		$mailsubscribers_fusionner_doublons = charger_fonction('mailsubscribers_fusionner_doublons', 'action');
+		$infos = $mailsubscribers_fusionner_doublons($email, $infos_all);
+	}
 	if ($infos) {
 		$id_mailsubscriber = $infos['id_mailsubscriber'];
 		$infos = mailsubscribers_informe_subscriber($infos);
