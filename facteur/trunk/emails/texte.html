@@ -18,12 +18,14 @@
 		#templateHeader {background-color: #FFFFFF;border-bottom: 0;}
 		#templateContainer, .bodyContent {background-color: #FFFFFF;margin-top: 40px;}
 		.bodyContent {padding:30px;border-bottom:10px solid #GET{siteColor};}
+		.bodyContent .text {max-width: 540px;}
 		.bodyContent div {color: #222222;font-family: Verdana, Geneva, sans-serif;line-height: 150%;text-align: left;}
 		.bodyContent div a:link, .bodyContent div a:visited {color: #336699;font-weight: normal;text-decoration: underline;}
-		.bodyContent img {display: inline;margin-bottom: 10px;max-width: 600px}
+		.bodyContent img {display: inline;margin-bottom: 10px;max-width: 100%;}
 		.bodyContent img.puce {display: inline;margin-bottom: 0;}
-		.bodyContent .spip_documents {max-width: 600px;}
+		.bodyContent .spip_documents {max-width: 100%;}
 		.bodyContent .spip_documents img {max-width: 100%;}
+		.bodyContent .spip_documents_center {margin-left: auto;margin-right: auto;}
 		hr { height: 1px; margin: 1.5em 0; border: 0; background: #222222; color: #222222; }
 		.spip_code, .spip_cadre {color: #606060;font-family: Courier,"Courier New",monospace;font-size: 1em;word-wrap:break-word;max-width: 100%;overflow: auto;}
 		.coloration_code ol {list-style: none;}
@@ -37,9 +39,8 @@
 		@media only screen and (max-width: 600px) {
 			html,body {width: 100% !important;}
 			body, .backgroundTable {background-color: #ffffff !important;}
+			table,tbody,td,tr {display:block;max-width:100%;}
 			.bodyContent {padding:0 0 10px !important;border-top:0;border-bottom:0;}
-			.bodyContent img {max-width: 100%;}
-			.bodyContent .spip_documents {max-width: 100%;}
 			#templateHead {display: none}
 			#templateContainer {width: 100% !important;border: 0 !important;margin-top: 0}
 			#templateBody {width: 100% !important;}
@@ -47,17 +48,6 @@
 			.text {color: #101010 !important;}
 			.header,.footer {padding: 10px;margin-left: -10px;margin-right: -10px;}
 			.text > .header:first-child {margin-top: -10px;}
-		}
-		@media only screen and (max-device-width: 480px) {
-			html,body {width: 320px !important;}
-			body, .backgroundTable {background-color: #ffffff !important;}
-			.bodyContent {padding: 0 0 10px !important;border-top:0;border-bottom:0;}
-			.bodyContent img {max-width: 320px;}
-			.bodyContent .spip_documents {max-width: 320px;}
-			#templateContainer {width: 320px !important;border: 0 !important;margin-top: 0;}
-			#templateBody {width: 320px !important;}
-			.padding {padding-left:0 !important;padding-right:0 !important;}
-			.text {color: #101010 !important;}
 		}
 	</style>
 </head>
