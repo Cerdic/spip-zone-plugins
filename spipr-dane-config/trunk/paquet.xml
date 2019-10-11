@@ -1,7 +1,7 @@
 <paquet
 	prefix="sdc"
 	categorie="maintenance"
-	version="0.1.8"
+	version="0.1.9"
 	etat="dev"
 	compatibilite="[3.0.17;3.2.*]"
 	logo="prive/themes/spip/images/sdc-128.png"
@@ -13,7 +13,7 @@
 
 	<auteur>Dominique Lepaisant</auteur>
 
-	<necessite nom="spipr_dane" compatibilite="[1.0.0;[" />
+	<necessite nom="spipr_dane" compatibilite="[1.0.5;[" />
 	<necessite nom="palette" compatibilite="[4.0.0;[" />
 	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 	<necessite nom="yaml" compatibilite="[2.0.10;[" />
