@@ -1,7 +1,7 @@
 <paquet
 	prefix="sdn"
 	categorie="maintenance"
-	version="0.1.0"
+	version="0.1.1"
 	etat="dev"
 	compatibilite="[3.2.3;3.2.*]"
 	logo="prive/themes/spip/images/sdn-64.png"
@@ -20,7 +20,7 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="spipr_dane" compatibilite="[1.0.0;[" />
+	<necessite nom="spipr_dane" compatibilite="[1.0.5;[" />
 	<necessite nom="noizetier" compatibilite="[3.0.0;[" />
 
 	<pipeline nom="autoriser" inclure="sdn_autorisations.php" /> 
