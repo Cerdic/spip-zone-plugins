@@ -60,13 +60,13 @@
 				</tr>
 			</thead>
 			<tbody>
-			<BOUCLE_selections(FAVORIS){!par maj}{id_auteur}{categorie ?}{pagination #ENV{pagination,10}}>
+			<BOUCLE_selections(FAVORIS){!par date_ajout}{id_auteur}{categorie ?}{pagination #ENV{pagination,10}}>
 				<tr class="item favori [row_(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 					<td>
 						<a href="#INFO_URL{#OBJET,#ID_OBJET}">#INFO_TITRE{#OBJET,#ID_OBJET}</a>
 					</td>
 					<td>
-						[<abbr class="date" title="#MAJ">(#MAJ|affdate_court)</abbr>]
+						[<abbr class="date" title="#DATE_AJOUT">(#DATE_AJOUT|affdate_court)</abbr>]
 						[(#ENV{bouton_suppression,oui}|=={non}|non)
 							[(#AUTORISER{modifier,favori,#ID_FAVORI}|oui)
 								[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{<:mesfavoris:remove:>,'action del'})],

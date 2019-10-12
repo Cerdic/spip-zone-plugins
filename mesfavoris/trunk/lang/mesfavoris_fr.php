@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'add' => 'Ajouter',
 	'add_to' => 'Ajouter à ma sélection',
-	'ajoute_le' => 'Modifié le',
+	'ajoute_le' => 'Ajouté le',
 
 	// C
 	'ce_favori' => 'Favori',
@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'mes_favoris' => 'Mes favoris',
 	'mon_favori' => 'Mon favori',
+	'modifie_le' => 'Modifié le',
 
 	// R
 	'remove' => 'Retirer',

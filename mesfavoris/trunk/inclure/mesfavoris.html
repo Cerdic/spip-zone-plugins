@@ -17,14 +17,14 @@
   -* categorie string : le type de favori à afficher
 ]
 <B_selections>
-	<div id="selection" class="liste selection favoris[ (#ENV{categorie})][ (#ENV{class})]">
+	<div id="mesfavoris_objets_[(#ENV{id_auteur})]" class="liste selection favoris[ (#ENV{categorie})][ (#ENV{class})]">
 		<h2>[(#ENV{titre,<:mesfavoris:mes_favoris:>})]</h2>
 		[<p class="pagination">(#PAGINATION)</p>]
 		<ul class="liste-items">
-			<BOUCLE_selections(FAVORIS){!par maj}{id_auteur}{categorie ?}{pagination #ENV{pagination,10}}>
+			<BOUCLE_selections(FAVORIS){!par date_ajout}{id_auteur}{categorie ?}{pagination #ENV{pagination,10}}>
 				<li class="item">
 					<a href="#INFO_URL{#OBJET,#ID_OBJET}">#INFO_TITRE{#OBJET,#ID_OBJET}</a>
-					<span class="date"><span class="sep"> - </span>[<:mesfavoris:ajoute_le:> (#MAJ|affdate_court)] [<:mesfavoris:dans_categorie:> (#CATEGORIE)]</span>
+					<span class="date"><span class="sep"> - </span>[<:mesfavoris:ajoute_le:> (#DATE_AJOUT|affdate_court)] [<:mesfavoris:dans_categorie:> (#CATEGORIE)]</span>
 					[(#ENV{bouton_suppression,oui}|=={non}|non)
 					[(#AUTORISER{modifier,favori,#ID_FAVORI}|oui)[(#BOUTON_ACTION{<:mesfavoris:remove:>,#URL_ACTION_AUTEUR{supprimer_favori,#ID_FAVORI,#SELF},ajax})]]]
 					[(#ENV{bouton_ajout,non}|=={oui}|oui)[(#FORMULAIRE_FAVORI{#OBJET,#ID_OBJET})]]
@@ -34,5 +34,5 @@
 		[<p class="pagination">(#PAGINATION{#ENV{type_pagination,''}})</p>]
 	</div>
 </B_selections>[
-<div id="selection" class="liste favoris[ (#ENV{class})]"><p>(#ENV*{sinon,''})</p></div>
+<div id="mesfavoris_objets_[(#ENV{id_auteur})]" class="liste favoris[ (#ENV{class})]"><p>(#ENV*{sinon,''})</p></div>
 ]<//B_selections>

@@ -39,18 +39,19 @@ function mesfavoris_declarer_tables_interfaces($interface) {
  */
 function mesfavoris_declarer_tables_principales($tables_principales) {
 	$spip_favoris = array(
-		"id_favori" => "bigint(21) NOT NULL",
-		"id_auteur" => "bigint DEFAULT '0' NOT NULL",
-		"id_objet"  => "bigint(21) DEFAULT '0' NOT NULL",
-		"objet"     => "VARCHAR (25) DEFAULT '' NOT NULL",
-		"categorie" => "VARCHAR (25) DEFAULT '' NOT NULL",
-		"maj"       => "TIMESTAMP"
+		"id_favori" => "BIGINT NOT NULL",
+		"id_auteur" => "BIGINT DEFAULT '0' NOT NULL",
+		"id_objet"  => "BIGINT DEFAULT '0' NOT NULL",
+		"objet"     => "VARCHAR(25) DEFAULT '' NOT NULL",
+		"categorie" => "VARCHAR(99) DEFAULT '' NOT NULL",
+		"date_ajout" => "DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL", // MySQL>=5.6.5 ; SQLite: not NOW()
+		"maj"       => "TIMESTAMP",
 	);
 
 	$spip_favoris_key = array(
 		"PRIMARY KEY"       => "id_favori",
 		"KEY auteur_objet"  => "id_auteur,id_objet,objet",
-		"KEY id_auteur"     => "id_auteur",
+		"KEY id_auteur"     => "id_auteur", // un peu inutile vu qu'il y a l'index auteur_objet
 		"KEY id_objet"      => "id_objet",
 		"KEY objet"         => "objet",
 		"KEY categorie"     => "categorie",
