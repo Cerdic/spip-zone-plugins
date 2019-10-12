@@ -1,0 +1,280 @@
+/**********************************************************
+ * notencart styles - typo (prive/public)
+ **********************************************************/
+
+div.notencart, div.notes, .notencart {
+	margin: 2em auto;
+	max-width: 80%;
+	min-height: 40px;
+	border-collapse: collapse;
+	padding: 0.8em 1.1em;
+	background-position: 20px 50%;
+	background-repeat: no-repeat;
+	-moz-border-radius: 20px;
+	-khtml-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	border-radius: 20px;
+	color: black;
+	overflow: hidden;
+}
+
+div.note_avertissement, div.note_avert,
+div.note_warning, div.note_warn,
+div.warning, div.warn,
+.warning {
+	border: 1px solid #d99;
+	background-color: #fdd;
+	color: black;
+}
+div.note_avertissement:before, div.note_avert:before,
+div.note_warning:before, div.note_warn:before,
+div.warning:before, div.warn:before,
+.warning:before {
+	content: " \01f6d1  ";
+	content: " \01f6ab  ";
+	width: max-content;
+	vertical-align: middle;
+	display: block;
+}
+
+div.note_importante, div.note_attention, div.note_prudence, div.note_attn,
+div.note_important, div.note_careful, div.note_caution, div.note_beware,
+div.important, div.careful, div.caution, div.beware,
+.caution {
+	border: 1px solid #ff0;
+	background-color: #ffd;
+	color: black;
+}
+div.note_importante:before, div.note_attention:before, div.note_prudence:before, div.note_attn:before,
+div.note_important:before, div.note_careful:before, div.note_caution:before, div.note_beware:before,
+div.important:before, div.careful:before, div.caution:before, div.beware:before,
+.caution:before {
+	content: " \0026a0  ";
+	width: max-content;
+	vertical-align: middle;
+	display: block;
+}
+
+div.note_alerte, div.note_erreur, div.note_fatale, div.note_critique, div.note_sirene, div.note_bloquante,
+div.note_alert, div.note_error, div.note_fatal, div.note_critical, div.note_siren,
+div.note_danger, div.alert, div.critical,
+.alert {
+	border: 1px solid #f00;
+	background-color: white;
+	color: red;
+}
+div.note_alerte:before, div.note_erreur:before, div.note_fatale:before, div.note_critique:before, div.note_sirene:before, div.note_bloquante:before,
+div.note_alert:before, div.note_error:before, div.note_fatal:before, div.note_critical:before, div.note_siren:before,
+div.note_danger:before, div.alert:before, div.critical:before,
+.alert:before {
+	content: " \01f6a8  ";
+	width: max-content;
+	vertical-align: middle;
+	display: block;
+}
+
+div.note_information, div.note_info, div.note_inf, div.note_simple,
+div.information,
+.information {
+	border: 1px solid #99d;
+	background-color: #eef;
+	color: black;
+}
+div.note_information:before, div.note_info:before, div.note_inf:before, div.note_simple:before,
+div.information:before,
+.information:before {
+	content: " \0024d8  ";
+	width: max-content;
+	vertical-align: middle;
+	display: block;
+}
+
+div.note_classique, div.note_classic,
+div.note_notice, div.note_standard, div.note_postit,
+.notice, div.memo, div.postit,
+.postit {
+	border: 1px solid #99d;
+	background-color: #ccf;
+	color: black;
+}
+div.note_classique:before, div.note_classic:before,
+div.note_notice:before, div.note_standard:before, div.note_postit:before,
+.notice:before, div.memo:before, div.postit:before,
+.postit {
+	content: " \01f4cc  ";
+	width: max-content;
+	vertical-align: middle;
+	display: block;
+}
+
+div.note_idee, div.note_astuce, div.note_truc,
+div.note_idea, div.note_tip, div.note_eureka,
+div.idea, div.tip, div.eureka,
+.tip {
+	border: 1px solid #999;
+	background-color: #dfd;
+	color: black;
+}
+div.note_idee, div.note_astuce:before, div.note_truc:before,
+div.note_idea, div.note_tip:before, div.note_eureka:before,
+div.idea:before, div.tip:before, div.eureka:before,
+.tip:before {
+	content: " \01f4a1  ";
+	width: max-content;
+	vertical-align: middle;
+	display: block;
+}
+
+div.note_indice, div.note_tuyeau, div.note_loupe,
+div.note_hint, div.note_clue, div.note_search,
+div.note_detective, div.note_zoom,
+.hint {
+	border: 1px solid #999;
+	background-color: #cec;
+	color: black;
+}
+div.note_indice:before, div.note_tuyeau:before, div.note_loupe:before,
+div.note_hint:before, div.note_clue:before, div.note_search:before,
+div.note_detective:before, div.note_zoom:before,
+.hint:before {
+	content: " \01f3a9  ";
+	width: max-content;
+	vertical-align: middle;
+	display: block;
+}
+div.note_indice:after, div.note_loupe:after,
+div.note_hint:after, div.note_clue:after, div.note_search:after,
+div.note_detective:after, div.note_zoom:after,
+.hint:after {
+	content: "  \01f453 ";
+}
+
+div.note_revelation, div.note_secret,
+div.note_reveal, div.note_spoiler,
+div.note_spoil,
+.spoil {
+	border: 1px solid #777;
+	background-color: #eee;
+	color: #eee;
+}
+div.note_revelation:before, div.note_secret:before,
+div.note_reveal:before, div.note_spoiler:before,
+div.note_spoil:before,
+.spoil:before {
+	content: " \003299  ";
+	width: max-content;
+	vertical-align: middle;
+	display: block;
+}
+div.note_revelation:after, div.note_secret:after,
+div.note_reveal:after, div.note_spoiler:after,
+div.note_spoil:after,
+.spoil:after {
+	content: "  \01f64a ";
+}
+div.note_revelation:active, div.note_secret:active,
+div.note_reveal:active, div.note_spoiler:active,
+div.note_spoil:active,
+.spoil:active {
+	color: #000;
+}
+
+div.note_oui, div.note_bon, div.note_correcte, div.note_faire,
+div.note_yes, div.note_good, div.note_correct, div.note_do,
+div.note_top, div.note_ok, div.note_doit {
+	border: 1px solid #000;
+	background-color: inherit;
+	color: black;
+}
+div.note_oui:before, div.note_bon:before, div.note_correcte:before, div.note_faire:before,
+div.note_yes:before, div.note_good:before, div.note_correct:before, div.note_do:before,
+div.note_top:before, div.note_ok:before, div.note_doit:before {
+	content: " \01f44d  ";
+	width: max-content;
+	vertical-align: middle;
+	display: block;
+}
+
+div.note_non, div.note_mal, div.note_eviter, div.note_jamais, div.note_nepas,
+div.note_not, div.note_bad, div.note_avoid, div.note_never, div.note_dont,
+div.note_top, div.note_ko {
+	border: 1px solid #000;
+	background-color: inherit;
+	color: black;
+}
+div.note_non:before, div.note_mal:before, div.note_eviter:before, div.note_jamais:before, div.note_nepas:before,
+div.note_not:before, div.note_bad:before, div.note_avoid:before, div.note_never:before, div.note_dont:before,
+div.note_flop:before, div.note_ko:before {
+	content: " \01f44e  ";
+	width: max-content;
+	vertical-align: middle;
+	display: block;
+}
+
+div.note_preuve, div.note_cqfd, 
+div.note_proof, div.note_qed,
+div.note_demonstration, div.note_demo {
+	border: 1px solid #000;
+	background-color: inherit;
+	color: black;
+}
+div.note_preuve:before, div.note_cqfd:before, 
+div.note_proof:before, div.note_qed:before,
+div.note_demonstration:before, div.note_demo:before {
+	content: " \01f17f  ";
+	width: max-content;
+	vertical-align: middle;
+	display: block;
+}
+div.note_preuve:after, div.note_cqfd:after, 
+div.note_proof:after, div.note_qed:after,
+div.note_demonstration:after, div.note_demo:after {
+	content: "  \00220e ";
+}
+
+
+/**********************************************************
+ * notencart styles - Porte-Plume
+ **********************************************************/
+
+.notencarts {
+	background-color: transparent;
+	color: white;
+}
+
+.notencart_warning {
+	background-color: red;
+	color: black;
+}
+
+.notencart_important {
+	background-color: orange;
+	color: black;
+}
+
+.notencart_information {
+	background-color: yellow;
+	color: black;
+}
+
+.notencart_notice {
+	background-color: blue;
+	color: black;
+}
+
+.notencart_hint {
+	background-color: gray;
+	color: yellow;
+}
+
+.notencart_tip {
+	background-color: gray;
+	color: blue;
+}
+
+.notencart_spoil {
+	background-color: gray;
+	color: cyan;
+}
+
+

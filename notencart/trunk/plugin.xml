@@ -1,0 +1,40 @@
+<plugin>
+	<nom>Notes encadr&#233;es</nom>
+	<slogan>Ajouter des notes encadr&#233;es dans le texte</slogan>
+	<auteur>[gilcot->https://contrib.spip.net/gilcot]</auteur>
+	<licence>GPL v3</licence>
+	<version>0.1.0</version>
+	<etat>test</etat>
+	<description>Ajoute des notes encadr&#233;es dans le texte,
+		en utilisant le raccourci <code><note_XXX>mon paragraphe</note></code>,
+		avec <code>XXX</code> ayant pour valeurs <code>alert</code> ou
+		<code>info</code> par exemple.</description>
+	<categorie>edition</categorie>
+	<prefix>notencart</prefix>
+	<icon>notencart.png</icon>
+	<lien>https://contrib.spip.net/?article5191</lien>
+	<pipeline>
+		<nom>pre_typo</nom>
+		<inclure>notencart_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>notencart_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>notencart_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>porte_plume_barre_pre_charger</nom>
+		<inclure>notencart_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>porte_plume_lien_classe_vers_icone</nom>
+		<inclure>notencart_pipelines.php</inclure>
+	</pipeline>
+	<categorie>edition</categorie>
+	<utilise id="porte_plume" />
+	<utilise id="tw" compatibilite="[0.3.1;0.99.99["  />
+	<necessite id="SPIP" version="[2.0.0;3.2.99]" />
+</plugin>
