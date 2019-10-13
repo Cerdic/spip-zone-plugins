@@ -48,7 +48,7 @@ function isocode_declarer_tables_principales($tables_principales) {
 		'type'        => "char(1) DEFAULT '' NOT NULL",      // A(ncient), C(onstructed), E(xtinct), H(istorical), L(iving), S(pecial)
 		'ref_name'    => "varchar(150) DEFAULT '' NOT NULL", // Reference language name
 		'comment'     => 'varchar(150)',                     // Comment relating to one or more of the columns
-		'maj'         => 'timestamp'
+		'maj'         => 'timestamp DEFAULT current_timestamp ON UPDATE current_timestamp'
 	);
 
 	$table_codes_key = array(
@@ -64,7 +64,7 @@ function isocode_declarer_tables_principales($tables_principales) {
 		'code_639_3'    => "char(3) DEFAULT '' NOT NULL",     // The three-letter 639-3 identifier
 		'print_name'    => "varchar(75) DEFAULT '' NOT NULL", // One of the names associated with this identifier
 		'inverted_name' => "varchar(75) DEFAULT '' NOT NULL", // The inverted form of this Print_Name form
-		'maj'           => 'timestamp'
+		'maj'           => 'timestamp DEFAULT current_timestamp ON UPDATE current_timestamp'
 	);
 
 	$table_names_key = array(
@@ -80,7 +80,7 @@ function isocode_declarer_tables_principales($tables_principales) {
 		'macro_639_3' => "char(3) DEFAULT '' NOT NULL",       // The identifier for a macrolanguage
 		'code_639_3'  => "char(3) DEFAULT '' NOT NULL",       // The identifier for an individual language that is a member of the macrolanguage
 		'status'      => "char(1) DEFAULT '' NOT NULL",       // A (active) or R (retired) indicating the status of the individual code element
-		'maj'         => 'timestamp'
+		'maj'         => 'timestamp DEFAULT current_timestamp ON UPDATE current_timestamp'
 	);
 
 	$table_macros_key = array(
@@ -99,7 +99,7 @@ function isocode_declarer_tables_principales($tables_principales) {
 		'change_to'      => 'char(3)',                          // in the cases of C, D, and M, the identifier to which all instances of this Id should be changed
 		'ret_remedy'     => 'varchar(300)',                     // The instructions for updating an instance of the retired (split) identifier
 		'effective_date' => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // The date the retirement became effective
-		'maj'            => 'timestamp'
+		'maj'            => 'timestamp DEFAULT current_timestamp ON UPDATE current_timestamp'
 	);
 
 	$table_rets_key = array(
@@ -121,7 +121,7 @@ function isocode_declarer_tables_principales($tables_principales) {
 		'code_set'   => "varchar(32) DEFAULT '' NOT NULL",  // Any combinaison of 639-5 and 639-2 separed by comma
 		'hierarchy'  => "varchar(32) DEFAULT '' NOT NULL",  // List of 639-5 identifiers separated by comma
 		'parent'     => "char(3) DEFAULT '' NOT NULL",      // The parent three-letter 639-5 identifier
-		'maj'        => 'timestamp'
+		'maj'        => 'timestamp DEFAULT current_timestamp ON UPDATE current_timestamp'
 	);
 
 	$table_families_key = array(
@@ -140,7 +140,7 @@ function isocode_declarer_tables_principales($tables_principales) {
 		'code_num'   => "char(3) DEFAULT '' NOT NULL",                     // Numeric identifier
 		'alias_en'   => "varchar(32) DEFAULT '' NOT NULL",                 // Unicode alias showing how ISO 15924 code relate to script names defined in Unicode.
 		'date_ref'   => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // The reference date to follow changes
-		'maj'        => 'timestamp'
+		'maj'        => 'timestamp DEFAULT current_timestamp ON UPDATE current_timestamp'
 	);
 
 	$table_scripts_key = array(
@@ -153,24 +153,27 @@ function isocode_declarer_tables_principales($tables_principales) {
 	// -------------------------------------------------------------------------------------
 	// Table des indicatifs des pays ISO-3166 et autres informations : spip_iso3166countries
 	$table_countries = array(
-		'code_alpha2'    => "char(2) DEFAULT '' NOT NULL",       // The two-letter identifier
-		'code_alpha3'    => "char(3) DEFAULT '' NOT NULL",       // The three-letter identifier
-		'code_num'       => "char(3) DEFAULT '' NOT NULL",       // Numeric identifier
-		'label_en'       => "varchar(255) DEFAULT '' NOT NULL",  // English name
-		'label_fr'       => "varchar(255) DEFAULT '' NOT NULL",  // french name
-		'capital'        => "varchar(255) DEFAULT '' NOT NULL",  // Capital name
-		'area'           => "int DEFAULT 0 NOT NULL",            // Area in squared km
-		'population'     => "int DEFAULT 0 NOT NULL",            // Inhabitants count
-		'code_continent' => "char(2) DEFAULT '' NOT NULL",       // Continent code alpha2
-		'tld'            => "char(3) DEFAULT '' NOT NULL",       // Tld - Top-Level Domain
-		'code_4217_3'    => "char(3) DEFAULT '' NOT NULL",       // Currency code ISO-4217
-		'currency_en'    => "varchar(255) DEFAULT '' NOT NULL",  // Currency English name
-		'phone_id'       => "varchar(16) DEFAULT '' NOT NULL",   // Phone id
-		'maj'            => 'timestamp'
+		'code_alpha2'     => "char(2) DEFAULT '' NOT NULL",       // The two-letter identifier
+		'code_alpha3'     => "char(3) DEFAULT '' NOT NULL",       // The three-letter identifier
+		'code_num'        => "char(3) DEFAULT '' NOT NULL",       // Numeric identifier
+		'label_en'        => "varchar(255) DEFAULT '' NOT NULL",  // English name
+		'label_fr'        => "varchar(255) DEFAULT '' NOT NULL",  // french name
+		'capital'         => "varchar(255) DEFAULT '' NOT NULL",  // Capital name
+		'area'            => "int DEFAULT 0 NOT NULL",            // Area in squared km
+		'population'      => "int DEFAULT 0 NOT NULL",            // Inhabitants count
+		'code_continent'  => "char(2) DEFAULT '' NOT NULL",       // Continent code alpha2
+		'code_num_region' => "char(3) DEFAULT '' NOT NULL",       // Parent region numeric code (ISO 3166)
+		'tld'             => "char(3) DEFAULT '' NOT NULL",       // Tld - Top-Level Domain
+		'code_4217_3'     => "char(3) DEFAULT '' NOT NULL",       // Currency code ISO-4217
+		'currency_en'     => "varchar(255) DEFAULT '' NOT NULL",  // Currency English name
+		'phone_id'        => "varchar(16) DEFAULT '' NOT NULL",   // Phone id
+		'maj'             => 'timestamp DEFAULT current_timestamp ON UPDATE current_timestamp'
 	);
 
 	$table_countries_key = array(
-		'PRIMARY KEY' => 'code_alpha2'
+		'PRIMARY KEY'     => 'code_alpha2',
+		'KEY code_alpha3' => 'code_alpha3',
+		'KEY code_num'    => 'code_num',
 	);
 
 	$tables_principales['spip_iso3166countries'] =
@@ -185,7 +188,7 @@ function isocode_declarer_tables_principales($tables_principales) {
 		'label_fr'    => "varchar(255) DEFAULT '' NOT NULL",  // french name
 		'symbol'      => "char(8) DEFAULT '' NOT NULL",       // Currency symbol
 		'minor_units' => "int DEFAULT 0 NOT NULL",            // Minor units
-		'maj'         => 'timestamp'
+		'maj'         => 'timestamp DEFAULT current_timestamp ON UPDATE current_timestamp'
 	);
 
 	$table_currencies_key = array(
@@ -209,7 +212,7 @@ function isocode_declarer_tables_principales($tables_principales) {
 		'preferred_tag'  => "char(3) DEFAULT '' NOT NULL",     // Preferred tag to be used instead the current subtag
 		'prefix'         => "char(3) DEFAULT '' NOT NULL",     // Prefix to be used thos the subtag except is a preferred tag exists
 		'comments'       => "text DEFAULT '' NOT NULL",        // Comments on subtag
-		'maj'            => 'timestamp'
+		'maj'            => 'timestamp DEFAULT current_timestamp ON UPDATE current_timestamp'
 	);
 
 	$table_subtags_key = array(
@@ -218,6 +221,39 @@ function isocode_declarer_tables_principales($tables_principales) {
 
 	$tables_principales['spip_iana5646subtags'] =
 		array('field' => &$table_subtags, 'key' => &$table_subtags_key);
+
+	// -------------------------------------------------------------------------------------
+	// Table des indicatifs des continents GeoIP : spip_geoipcontinents
+	$table_continents = array(
+		'code'     => "char(2) DEFAULT '' NOT NULL",       // The two-letter identifier
+		'label_en' => "varchar(255) DEFAULT '' NOT NULL",  // English name
+		'label_fr' => "varchar(255) DEFAULT '' NOT NULL",  // french name
+		'maj'      => 'timestamp DEFAULT current_timestamp ON UPDATE current_timestamp'
+	);
+
+	$table_continents_key = array(
+		'PRIMARY KEY' => 'code'
+	);
+
+	$tables_principales['spip_geoipcontinents'] =
+		array('field' => &$table_continents, 'key' => &$table_continents_key);
+
+	// -------------------------------------------------------------------------------------
+	// Table des indicatifs des régions du monde (arborescence) : spip_m49regions
+	$table_regions = array(
+		'code_num' => "char(3) DEFAULT '' NOT NULL",       // The three-letter numeric identifier
+		'parent'   => "char(3) DEFAULT '' NOT NULL",       // The three-letter numeric identifier of parent
+		'label_en' => "varchar(255) DEFAULT '' NOT NULL",  // English name
+		'label_fr' => "varchar(255) DEFAULT '' NOT NULL",  // french name
+		'maj'      => 'timestamp DEFAULT current_timestamp ON UPDATE current_timestamp'
+	);
+
+	$table_regions_key = array(
+		'PRIMARY KEY' => 'code_num'
+	);
+
+	$tables_principales['spip_m49regions'] =
+		array('field' => &$table_regions, 'key' => &$table_regions_key);
 
 	return $tables_principales;
 }
@@ -248,6 +284,8 @@ function isocode_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['iso3166countries'] = 'iso3166countries';
 	$interfaces['table_des_tables']['iso4217currencies'] = 'iso4217currencies';
 	$interfaces['table_des_tables']['iana5646subtags'] = 'iana5646subtags';
+	$interfaces['table_des_tables']['geoipcontinents'] = 'geoipcontinents';
+	$interfaces['table_des_tables']['m49regions'] = 'm49regions';
 
 	// Les traitements
 

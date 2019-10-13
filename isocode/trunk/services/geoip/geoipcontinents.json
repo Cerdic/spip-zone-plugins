@@ -1,0 +1,37 @@
+[
+	{
+		"Code": "AF",
+		"en": "Africa",
+		"fr": "Afrique"
+	},
+	{
+		"Code": "NA",
+		"en": "North America",
+		"fr": "Amérique du nord"
+	},
+	{
+		"Code": "OC",
+		"en": "Oceania",
+		"fr": "Océanie"
+	},
+	{
+		"Code": "AN",
+		"en": "Antarctica",
+		"fr": "Antarctique"
+	},
+	{
+		"Code": "AS",
+		"en": "Asia",
+		"fr": "Asie"
+	},
+	{
+		"Code": "EU",
+		"en": "Europe",
+		"fr": "Europe"
+	},
+	{
+		"Code": "SA",
+		"en": "South America",
+		"fr": "Amérique du sud"
+	}
+]

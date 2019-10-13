@@ -270,6 +270,10 @@ function extraire_contenu_source($service, $table, $config) {
 				if (table_valeur($arbre, $config['base'], '')) {
 					$contenu = table_valeur($arbre, $config['base'], '');
 				}
+			} elseif ($config['populating'] == 'file_json') {
+				include_spip('inc/flock');
+				lire_fichier($fichier, $json);
+				$contenu = json_decode($json, true);
 			}
 		}
 	}
@@ -294,7 +298,7 @@ function extraire_element($contenu, $titres, $config) {
 		$valeurs = explode($config['delimiter'], trim($contenu, "\r\n"));
 		// On construit un tableau associatif [nom colonne] => valeur colonne
 		foreach ($titres as $_cle => $_titre) {
-			$element[$_titre] = trim($valeurs[$_cle]);
+			$element[$_titre] = isset($valeurs[$_cle]) ? trim($valeurs[$_cle]) : '';
 		}
 	} elseif ($config['populating'] == 'page_text') {
 		// Chaque couple (nom donnée, valeur donnée) est identifiée par une REGEXP configurée
@@ -303,7 +307,7 @@ function extraire_element($contenu, $titres, $config) {
 			// valeurs correspondantes.
 			// Il faut donc reconstruire un tableau associatif [nom] => valeur
 			foreach ($matches[1] as $_cle => $_titre) {
-				$element[trim($_titre)] = $matches[2][trim($_cle)];
+				$element[trim($_titre)] = isset($matches[2][trim($_cle)]) ? $matches[2][trim($_cle)] : '';
 			}
 		}
 	} else {
