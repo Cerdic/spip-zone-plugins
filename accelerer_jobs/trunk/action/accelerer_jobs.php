@@ -22,6 +22,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 /**
  * Executer une sélection de jobs immédiatement, sélectionnés par leur 'fonction'
  *
+ * @param string $args  parm de l'action
  * @return void
  */
 function action_accelerer_jobs_dist($args=null) {
