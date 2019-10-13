@@ -38,8 +38,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'mes_favoris' => 'Mes favoris',
-	'mon_favori' => 'Mon favori',
 	'modifie_le' => 'Modifié le',
+	'mon_favori' => 'Mon favori',
 
 	// R
 	'remove' => 'Retirer',
