@@ -1,6 +1,5 @@
 English name;French name;Alpha-2;Alpha-3;Numeric
 Afghanistan;Afghanistan (l');AF;AFG;004
-Åland Islands;Åland(les Îles);AX;ALA;248
 Albania;Albanie (l');AL;ALB;008
 Algeria;Algérie (l');DZ;DZA;012
 American Samoa;Samoa américaines (les);AS;ASM;016
@@ -31,7 +30,7 @@ Bosnia and Herzegovina;Bosnie-Herzégovine (la);BA;BIH;070
 Botswana;Botswana (le);BW;BWA;072
 Bouvet Island;Bouvet (l'Île);BV;BVT;074
 Brazil;Brésil (le);BR;BRA;076
-British Indian Ocean Territory (the);Indien (le Territoire britannique de l'océan);IO;IOT;086
+British Indian Ocean Territory (the);Indien (le Territoire britannique de l'océan);IO;IOT;086
 Brunei Darussalam;Brunéi Darussalam (le);BN;BRN;096
 Bulgaria;Bulgarie (la);BG;BGR;100
 Burkina Faso;Burkina Faso (le);BF;BFA;854
@@ -40,29 +39,29 @@ Cabo Verde;Cabo Verde;CV;CPV;132
 Cambodia;Cambodge (le);KH;KHM;116
 Cameroon;Cameroun (le);CM;CMR;120
 Canada;Canada (le);CA;CAN;124
-Cayman Islands (the);Caïmans (les Îles);KY;CYM;136
+Cayman Islands (the);Caïmans (les Îles);KY;CYM;136
 Central African Republic (the);République centrafricaine (la);CF;CAF;140
 Chad;Tchad (le);TD;TCD;148
 Chile;Chili (le);CL;CHL;152
 China;Chine (la);CN;CHN;156
 Christmas Island;Christmas (l'Île);CX;CXR;162
-Cocos (Keeling) Islands (the);Cocos (les Îles)/ Keeling (les Îles);CC;CCK;166
+Cocos (Keeling) Islands (the);Cocos (les Îles)/ Keeling (les Îles);CC;CCK;166
 Colombia;Colombie (la);CO;COL;170
 Comoros (the);Comores (les);KM;COM;174
 Congo (the Democratic Republic of the);Congo (la République démocratique du);CD;COD;180
 Congo (the);Congo (le);CG;COG;178
 Cook Islands (the);Cook (les Îles);CK;COK;184
 Costa Rica;Costa Rica (le);CR;CRI;188
-Côte d'Ivoire;Côte d'Ivoire (la);CI;CIV;384
 Croatia;Croatie (la);HR;HRV;191
 Cuba;Cuba;CU;CUB;192
 Curaçao;Curaçao;CW;CUW;531
 Cyprus;Chypre;CY;CYP;196
 Czechia;Tchéquie (la);CZ;CZE;203
+Côte d'Ivoire;Côte d'Ivoire (la);CI;CIV;384
 Denmark;Danemark (le);DK;DNK;208
 Djibouti;Djibouti;DJ;DJI;262
 Dominica;Dominique (la);DM;DMA;212
-Dominican Republic (the);dominicaine (la République);DO;DOM;214
+Dominican Republic (the);dominicaine (la République);DO;DOM;214
 Ecuador;Équateur (l');EC;ECU;218
 Egypt;Égypte (l');EG;EGY;818
 El Salvador;El Salvador;SV;SLV;222
@@ -76,7 +75,7 @@ Faroe Islands (the);Féroé (les Îles);FO;FRO;234
 Fiji;Fidji (les);FJ;FJI;242
 Finland;Finlande (la);FI;FIN;246
 France;France (la);FR;FRA;250
-French Guiana;Guyane française (la );GF;GUF;254
+French Guiana;Guyane française (la );GF;GUF;254
 French Polynesia;Polynésie française (la);PF;PYF;258
 French Southern Territories (the);Terres australes françaises (les);TF;ATF;260
 Gabon;Gabon (le);GA;GAB;266
@@ -117,11 +116,11 @@ Jordan;Jordanie (la);JO;JOR;400
 Kazakhstan;Kazakhstan (le);KZ;KAZ;398
 Kenya;Kenya (le);KE;KEN;404
 Kiribati;Kiribati;KI;KIR;296
-Korea (the Democratic People's Republic of);Corée (la République populaire démocratique de);KP;PRK;408
+Korea (the Democratic People's Republic of);Corée (la République populaire démocratique de);KP;PRK;408
 Korea (the Republic of);Corée (la République de);KR;KOR;410
 Kuwait;Koweït (le);KW;KWT;414
 Kyrgyzstan;Kirghizistan (le);KG;KGZ;417
-Lao People's Democratic Republic (the);Lao, République démocratique populaire;LA;LAO;418
+Lao People's Democratic Republic (the);Lao (la République démocratique populaire);LA;LAO;418
 Latvia;Lettonie (la);LV;LVA;428
 Lebanon;Liban (le);LB;LBN;422
 Lesotho;Lesotho (le);LS;LSO;426
@@ -131,21 +130,20 @@ Liechtenstein;Liechtenstein (le);LI;LIE;438
 Lithuania;Lituanie (la);LT;LTU;440
 Luxembourg;Luxembourg (le);LU;LUX;442
 Macao;Macao;MO;MAC;446
-Macedonia (the former Yugoslav Republic of);Macédoine (l'ex‑République yougoslave de);MK;MKD;807
 Madagascar;Madagascar;MG;MDG;450
 Malawi;Malawi (le);MW;MWI;454
 Malaysia;Malaisie (la);MY;MYS;458
 Maldives;Maldives (les);MV;MDV;462
 Mali;Mali (le);ML;MLI;466
 Malta;Malte;MT;MLT;470
-Marshall Islands (the);Marshall (Îles);MH;MHL;584
+Marshall Islands (the);Marshall (les Îles);MH;MHL;584
 Martinique;Martinique (la);MQ;MTQ;474
 Mauritania;Mauritanie (la);MR;MRT;478
 Mauritius;Maurice;MU;MUS;480
 Mayotte;Mayotte;YT;MYT;175
 Mexico;Mexique (le);MX;MEX;484
 Micronesia (Federated States of);Micronésie (États fédérés de);FM;FSM;583
-Moldova (the Republic of);Moldova, République de;MD;MDA;498
+Moldova (the Republic of);Moldova (la République de);MD;MDA;498
 Monaco;Monaco;MC;MCO;492
 Mongolia;Mongolie (la);MN;MNG;496
 Montenegro;Monténégro (le);ME;MNE;499
@@ -164,6 +162,7 @@ Niger (the);Niger (le);NE;NER;562
 Nigeria;Nigéria (le);NG;NGA;566
 Niue;Niue;NU;NIU;570
 Norfolk Island;Norfolk (l'Île);NF;NFK;574
+North Macedonia;Macédoine du Nord (la);MK;MKD;807
 Northern Mariana Islands (the);Mariannes du Nord (les Îles);MP;MNP;580
 Norway;Norvège (la);NO;NOR;578
 Oman;Oman;OM;OMN;512
@@ -180,10 +179,10 @@ Poland;Pologne (la);PL;POL;616
 Portugal;Portugal (le);PT;PRT;620
 Puerto Rico;Porto Rico;PR;PRI;630
 Qatar;Qatar (le);QA;QAT;634
-Réunion;Réunion (La);RE;REU;638
 Romania;Roumanie (la);RO;ROU;642
 Russian Federation (the);Russie (la Fédération de);RU;RUS;643
 Rwanda;Rwanda (le);RW;RWA;646
+Réunion;Réunion (La);RE;REU;638
 Saint Barthélemy;Saint-Barthélemy;BL;BLM;652
 Saint Helena, Ascension and Tristan da Cunha;Sainte-Hélène, Ascension et Tristan da Cunha;SH;SHN;654
 Saint Kitts and Nevis;Saint-Kitts-et-Nevis;KN;KNA;659
@@ -203,7 +202,7 @@ Singapore;Singapour;SG;SGP;702
 Sint Maarten (Dutch part);Saint-Martin (partie néerlandaise);SX;SXM;534
 Slovakia;Slovaquie (la);SK;SVK;703
 Slovenia;Slovénie (la);SI;SVN;705
-Solomon Islands;Salomon (Îles);SB;SLB;090
+Solomon Islands;Salomon (les Îles);SB;SLB;090
 Somalia;Somalie (la);SO;SOM;706
 South Africa;Afrique du Sud (l');ZA;ZAF;710
 South Georgia and the South Sandwich Islands;Géorgie du Sud-et-les Îles Sandwich du Sud (la);GS;SGS;239
@@ -215,10 +214,10 @@ Suriname;Suriname (le);SR;SUR;740
 Svalbard and Jan Mayen;Svalbard et l'Île Jan Mayen (le);SJ;SJM;744
 Sweden;Suède (la);SE;SWE;752
 Switzerland;Suisse (la);CH;CHE;756
-Syrian Arab Republic;République arabe syrienne (la);SY;SYR;760
+Syrian Arab Republic (the);République arabe syrienne (la);SY;SYR;760
 Taiwan (Province of China);Taïwan (Province de Chine);TW;TWN;158
 Tajikistan;Tadjikistan (le);TJ;TJK;762
-Tanzania, United Republic of;Tanzanie, République-Unie de;TZ;TZA;834
+Tanzania, the United Republic of;Tanzanie (la République-Unie de);TZ;TZA;834
 Thailand;Thaïlande (la);TH;THA;764
 Timor-Leste;Timor-Leste (le);TL;TLS;626
 Togo;Togo (le);TG;TGO;768
@@ -241,10 +240,11 @@ Uzbekistan;Ouzbékistan (l');UZ;UZB;860
 Vanuatu;Vanuatu (le);VU;VUT;548
 Venezuela (Bolivarian Republic of);Venezuela (République bolivarienne du);VE;VEN;862
 Viet Nam;Viet Nam (le);VN;VNM;704
-Virgin Islands (British);Vierges britanniques (les Îles);VG;VGB;092
+Virgin Islands (British);Vierges britanniques (les Îles);VG;VGB;092
 Virgin Islands (U.S.);Vierges des États-Unis (les Îles);VI;VIR;850
 Wallis and Futuna;Wallis-et-Futuna;WF;WLF;876
 Western Sahara*;Sahara occidental (le)*;EH;ESH;732
 Yemen;Yémen (le);YE;YEM;887
 Zambia;Zambie (la);ZM;ZMB;894
 Zimbabwe;Zimbabwe (le);ZW;ZWE;716
+Åland Islands;Åland(les Îles);AX;ALA;248
