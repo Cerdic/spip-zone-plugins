@@ -149,7 +149,7 @@ global $Memoization;
 
 	// On y va
 	$cache = apcu_cache_info();
-	$meta_derniere_modif = lire_meta('derniere_modif');
+	$meta_derniere_modif = $GLOBALS['meta']['derniere_modif'];
 	$len_prefix = strlen(_CACHE_NAMESPACE);
 
 	foreach ($cache['cache_list'] as $i => $d) {
@@ -201,19 +201,19 @@ global $Memoization;
 			case 'tout':
 			case 'chemin':
 				$partie_cle = $cle;
-					break;
+				break;
 			case 'fichier':
 				$parties = explode('/', $cle);
 				$partie_cle = array_pop($parties);
-					break;
+				break;
 			case 'dossier':
 				$parties = explode('/', $cle);
 				$parties = array_pop($parties);
 				$partie_cle = array_pop($parties);
-					break;
+				break;
 			default:
 				spip_log("Option partie_chemin incorrecte : '$partie_chemin'", 'cachelab_erreur');
-					return null;
+				return null;
 			}
 			// mémo php : « continue resumes execution just before the closing curly bracket ( } ),
 			// and break resumes execution just after the closing curly bracket. »
@@ -224,42 +224,42 @@ global $Memoization;
 						break 2;	// trouvé : sort du foreach et du switch et poursuit le test des autres conditions
 					}
 				}
-					continue 2;	 // échec : passe à la $cle suivante
+				continue 2;	 // échec : passe à la $cle suivante
 			case 'regexp':
 				if ($chemin and ($danslechemin = preg_match(",$chemin,i", $partie_cle))) {
 					break;	// trouvé : poursuit le test des autres conditions
 				}
-					continue 2;	// échec : passe à la clé suivante
+				continue 2;	// échec : passe à la clé suivante
 			default:
 				spip_log("Méthode '$methode_chemin' pas prévue pour le filtrage par le chemin", 'cachelab_erreur');
-					return null;
+				return null;
 			};
 		}
 
 		// pour les filtres suivants on a besoin du contenu du cache
 		if ($cle_objet or $plusfunc) {
 			global $Memoization;
-			$data = $Memoization->get(substr($cle, $len_prefix));
-			if (!$data or !is_array($data)) {
-				spip_log("clé=$cle : data est vide ou n'est pas un tableau : ".print_r($data, 1), 'cachelab_erreur');
+			$data = $Memoization->get(substr ($cle, $len_prefix));
+			if (!$data or !is_array ($data)) {
+				spip_log ("clé=$cle : data est vide ou n'est pas un tableau : " . print_r ($data, 1), 'cachelab_erreur');
 				continue;
 			};
-		};
 
-		// 3eme filtre : par une valeur dans l'environnement
-		if ($cle_objet
-			and (!isset($data['contexte'][$cle_objet])
-				or ($data['contexte'][$cle_objet]!=$id_objet))) {
-			continue;
+			// 3eme filtre : par une valeur dans l'environnement
+			if ($cle_objet
+				and (!isset($data['contexte'][$cle_objet])
+					or ($data['contexte'][$cle_objet] != $id_objet))) {
+				continue;
+			}
+
+			// 4eme filtre : par une extension
+			if ($plusfunc
+				and !$plusfunc($action, $conditions, $options, $cle, $data, $stats)) {
+				continue;
+			}
 		}
 
-		// 4eme filtre : par une extension
-		if ($plusfunc
-			and !$plusfunc($action, $conditions, $options, $cle, $data, $stats)) {
-			continue;
-		}
-
-		// restent les cibles
+		// restent les cibles atteintes
 		$stats['nb_cible']++;
 		if ($do_lists) {
 			$stats['l_cible'][] = $cle;
@@ -311,10 +311,10 @@ static $prev_derniere_modif_invalide;
 		if (is_array($objets_invalidants)) {
 			$GLOBALS['derniere_modif_invalide'] = $objets_invalidants;
 		}
-			break;
+		break;
 	case 'go':
 		$GLOBALS['derniere_modif_invalide'] = $prev_derniere_modif_invalide;
-			break;
+		break;
 	}
 }
 
