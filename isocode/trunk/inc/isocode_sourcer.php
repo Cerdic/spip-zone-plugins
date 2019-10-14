@@ -73,6 +73,7 @@ function lire_source($service, $table) {
 			foreach ($contenu as $_contenu) {
 				// Pour chaque élément on récupère un tableau associatif [titre colonne] = valeur colonne.
 				$element = extraire_element($_contenu, $titres, $config);
+
 				// Création de chaque enregistrement de la table
 				$enregistrement = $enregistrement_defaut;
 				$cle_primaire_existe = false;
@@ -98,6 +99,7 @@ function lire_source($service, $table) {
 						spip_log("Le champ <${_titre}> n'existe pas dans la configuration de la table ${table}", 'isocode' . _LOG_INFO);
 					}
 				}
+
 				// On ajoute l'élément que si la clé primaire a bien été trouvée et si la valeur de cette clé
 				// n'est pas en doublon avec un élément déjà enregistré.
 				if ($cle_primaire_existe) {
@@ -107,10 +109,29 @@ function lire_source($service, $table) {
 					if (!in_array($cle_primaire, $liste_cles_primaires)) {
 						// On rajoute cette clé dans la liste
 						$liste_cles_primaires[] = $cle_primaire;
-						// Si besoin on appelle une fonction pour chaque enregistrement afin de le compléter
+
+						// Si la table possède un nom multilangue, on le calcule à partir des champs du type label_xx
+						// où xx est le code de langue utilisé par SPIP (a priori toujours un alpha2).
+						if (!empty($config['label_field'])) {
+							$label = '';
+							foreach ($enregistrement as $_champ => $_valeur) {
+								if ($_valeur
+								and (substr($_champ, 0, 6) == 'label_')
+								and ($langue = str_replace('label_', '', $_champ))) {
+									$label .= "[${langue}]${_valeur}";
+								}
+							}
+							if ($label) {
+								$enregistrement['label'] = "<multi>${label}</multi>";
+							}
+						}
+
+						// Si besoin on appelle une fonction pour chaque enregistrement afin de le compléter.
 						if (function_exists($completer_enregistrement)) {
 							$enregistrement = $completer_enregistrement($enregistrement, $config);
 						}
+
+						// Ajout de l'enregistrement finalisé dans la liste.
 						$enregistrements[] = $enregistrement;
 					} else {
 						spip_log("L'élément de clé primaire <${cle_primaire}> de la table <${table}> est en doublon", 'isocode' . _LOG_ERREUR);
@@ -119,7 +140,8 @@ function lire_source($service, $table) {
 					spip_log("L'élément <" . var_export($_contenu, true) . "> de la table <${table}> n'a pas de clé primaire", 'isocode' . _LOG_ERREUR);
 				}
 			}
-			// Si besoin on appelle une fonction pour toute la table
+
+			// Si besoin on appelle une fonction de complétude pour toute la table.
 			if (function_exists($completer_table)) {
 				$enregistrements = $completer_table($enregistrements, $config);
 			}

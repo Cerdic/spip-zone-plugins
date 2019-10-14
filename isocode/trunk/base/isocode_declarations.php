@@ -116,6 +116,7 @@ function isocode_declarer_tables_principales($tables_principales) {
 		'uri'        => "varchar(150) DEFAULT '' NOT NULL", // Description page
 		'label_en'   => "text DEFAULT '' NOT NULL",         // English label for the family
 		'label_fr'   => "text DEFAULT '' NOT NULL",         // French label for the family
+		'label'      => "text DEFAULT '' NOT NULL",         // Multiple langages label for the family
 		'code_639_1' => 'char(2)',                          // Equivalent 639-1 identifier, if there is one
 		'scope'      => "char(1) DEFAULT '' NOT NULL",      // C(ollective) always
 		'code_set'   => "varchar(32) DEFAULT '' NOT NULL",  // Any combinaison of 639-5 and 639-2 separed by comma
@@ -137,6 +138,7 @@ function isocode_declarer_tables_principales($tables_principales) {
 		'code_15924' => "char(4) DEFAULT '' NOT NULL",                     // The four-letter identifier
 		'label_en'   => "varchar(255) DEFAULT '' NOT NULL",                // English script name
 		'label_fr'   => "varchar(255) DEFAULT '' NOT NULL",                // french script name
+		'label'      => "text DEFAULT '' NOT NULL",                        // Multiple langages label
 		'code_num'   => "char(3) DEFAULT '' NOT NULL",                     // Numeric identifier
 		'alias_en'   => "varchar(32) DEFAULT '' NOT NULL",                 // Unicode alias showing how ISO 15924 code relate to script names defined in Unicode.
 		'date_ref'   => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // The reference date to follow changes
@@ -158,6 +160,7 @@ function isocode_declarer_tables_principales($tables_principales) {
 		'code_num'        => "char(3) DEFAULT '' NOT NULL",       // Numeric identifier
 		'label_en'        => "varchar(255) DEFAULT '' NOT NULL",  // English name
 		'label_fr'        => "varchar(255) DEFAULT '' NOT NULL",  // french name
+		'label'           => "text DEFAULT '' NOT NULL",          // Multiple langages label
 		'capital'         => "varchar(255) DEFAULT '' NOT NULL",  // Capital name
 		'area'            => "int DEFAULT 0 NOT NULL",            // Area in squared km
 		'population'      => "int DEFAULT 0 NOT NULL",            // Inhabitants count
@@ -186,6 +189,7 @@ function isocode_declarer_tables_principales($tables_principales) {
 		'code_num'    => "char(3) DEFAULT '' NOT NULL",       // Numeric identifier
 		'label_en'    => "varchar(255) DEFAULT '' NOT NULL",  // English name
 		'label_fr'    => "varchar(255) DEFAULT '' NOT NULL",  // french name
+		'label'       => "text DEFAULT '' NOT NULL",          // Multiple langages label
 		'symbol'      => "char(8) DEFAULT '' NOT NULL",       // Currency symbol
 		'minor_units' => "int DEFAULT 0 NOT NULL",            // Minor units
 		'maj'         => 'timestamp DEFAULT current_timestamp ON UPDATE current_timestamp'
@@ -228,6 +232,7 @@ function isocode_declarer_tables_principales($tables_principales) {
 		'code'     => "char(2) DEFAULT '' NOT NULL",       // The two-letter identifier
 		'label_en' => "varchar(255) DEFAULT '' NOT NULL",  // English name
 		'label_fr' => "varchar(255) DEFAULT '' NOT NULL",  // french name
+		'label'    => "text DEFAULT '' NOT NULL",          // Multiple langages label
 		'maj'      => 'timestamp DEFAULT current_timestamp ON UPDATE current_timestamp'
 	);
 
@@ -245,6 +250,7 @@ function isocode_declarer_tables_principales($tables_principales) {
 		'parent'   => "char(3) DEFAULT '' NOT NULL",       // The three-letter numeric identifier of parent
 		'label_en' => "varchar(255) DEFAULT '' NOT NULL",  // English name
 		'label_fr' => "varchar(255) DEFAULT '' NOT NULL",  // french name
+		'label'    => "text DEFAULT '' NOT NULL",          // Multiple langages label
 		'maj'      => 'timestamp DEFAULT current_timestamp ON UPDATE current_timestamp'
 	);
 

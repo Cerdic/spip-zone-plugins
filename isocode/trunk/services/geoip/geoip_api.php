@@ -16,6 +16,7 @@ $GLOBALS['isocode']['geoip']['tables'] = array(
 			'fr'   => 'label_fr',
 			'en'   => 'label_en',
 		),
+		'label_field'  => true,
 		'populating'   => 'file_json',
 		'extension'    => '.json',
 	)

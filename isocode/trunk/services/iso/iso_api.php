@@ -118,6 +118,7 @@ $GLOBALS['isocode']['iso']['tables'] = array(
 				'parent'    => 'parent'			// Colonne est calculée à partir de la hiérarchie
 			)
 		),
+		'label_field'  => true,
 		'populating'   => 'file_csv',
 		'delimiter'    => "\t",
 		'extension'    => '.tab'
@@ -131,6 +132,7 @@ $GLOBALS['isocode']['iso']['tables'] = array(
 			'PVA'          => 'alias_en',
 			'Date'         => 'date_ref',
 		),
+		'label_field'  => true,
 		'populating'   => 'file_csv',
 		'delimiter'    => ';',
 		'extension'    => '.txt'
@@ -158,6 +160,7 @@ $GLOBALS['isocode']['iso']['tables'] = array(
 				'parent'         => 'code_num_region',
 			)
 		),
+		'label_field'  => true,
 		'populating'   => 'file_csv',
 		'delimiter'    => ';',
 		'extension'    => '.txt'
@@ -175,6 +178,7 @@ $GLOBALS['isocode']['iso']['tables'] = array(
 				'Devise'        => 'label_fr',
 			)
 		),
+		'label_field'  => true,
 		'populating'   => 'file_xml',
 		'extension'    => '.xml',
 		'base'         => 'CcyTbl/CcyNtry'      // clé à laquelle débute la liste des éléments

@@ -17,6 +17,7 @@ $GLOBALS['isocode']['m49']['tables'] = array(
 			'code_num' => 'code_num',
 			'parent'   => 'parent'
 		),
+		'label_field'  => true,
 		'populating'   => 'file_csv',
 		'delimiter'    => ';',
 		'extension'    => '.txt',
