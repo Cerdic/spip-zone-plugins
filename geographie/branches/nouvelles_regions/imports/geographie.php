@@ -13,7 +13,7 @@ function imports_geographie_dist() {
 
 	// importer les regions/dept/communes francaise
 	$id_pays = 70;
-	$fichiers = preg_files(_DIR_PLUGIN_GEOGRAPHIE . "imports/regions/", '[.]txt$');
+	$fichiers = preg_files(_DIR_PLUGIN_GEOGRAPHIE2016 . "imports/regions/", '[.]txt$');
 	sort($fichiers);
 	foreach ($fichiers as $fichier) {
 		lire_fichier($fichier, $table);

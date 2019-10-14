@@ -7,10 +7,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function imports_arrondissements_dist() {
 	include_spip('inc/charset');
 	$tab_arrond = array();
-	$fichier = preg_files(_DIR_PLUGIN_GEOGRAPHIE . "/imports/", 'arrondissements[.]txt$');
+	$fichier = preg_files(_DIR_PLUGIN_GEOGRAPHIE2016 . "/imports/", 'arrondissements[.]txt$');
 	//echo count( $fichier),' trouvé, ',$fichier[0];
 	lire_fichier($fichier[0], $arronds);    //echo $arronds;
-	
+
 	if (($arronds = unserialize($arronds))) {
 		$liCpt = 0;
 

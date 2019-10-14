@@ -17,51 +17,17 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function geographie2016_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
-	// Installation du plugin
+	// Installation du plugin, deux cas possibles : on importe à neuf, ou bien on reprend l'ancien plugins geographie
 	$maj['create'] = array(
-		array('creer_base'),
-		array('geographie_upgrade_importer_geographie'), // importation de presque toute la géo sauf arrondissements
-		array('geographie_upgrade_importer_arrondissements'), // importation des arrondissements
+		array('creer_base')
 	);
-
-	// On refait la base des pays
-	$maj['0.2.0'] = array(
-		array('sql_drop_table', 'spip_geo_pays'),
-		array('maj_tables', 'spip_geo_pays'),
-		array('geographie_upgrade_importer_pays'),
-	);
-
-	// On ajoute les arrondissements
-	$maj['0.3.0'] = array(
-		array('maj_tables', 'spip_geo_arrondissements'),
-		array('geographie_upgrade_importer_arrondissements'),
-	);
-
-	// On refait encore les pays
-	$maj['0.4.0'] = array(
-		array('sql_drop_table', 'spip_geo_pays'),
-		array('maj_tables', 'spip_geo_pays'),
-		array('geographie_upgrade_importer_pays'),
-	);
-
-	// Coquille dans la description de midi-pyrénnées
-	$maj['0.4.2'] = array(
-		array('sql_delete', 'spip_geo_departements', 'nom=' . sql_quote('09')),
-	);
-
-	// Toutes les tables de liens
-	$maj['1.0.0'] = array(
-		array(
-			'maj_tables',
-			array(
-				'spip_geo_pays_liens',
-				'spip_geo_regions_liens',
-				'spip_geo_departements_liens',
-				'spip_geo_arrondissements_liens',
-				'spip_geo_communes_liens',
-			),
-		),
-	);
+	// Cas 1 : il y avait le plugin. Dans ce cas là, on considère simplement qu'il n'existe plus
+	if (lire_config('geographie_base_version')) {
+		effacer_config('geographie_base_version');
+	} else {//Cas 2 : le plugin n'existe pas encore, dans ce cas on considère qu'il faut créer les tables
+		$maj['create'][] = array('geographie_upgrade_importer_geographie'); // importation de presque toute la géo sauf arrondissements
+		$maj['create'][] = array('geographie_upgrade_importer_arrondissements'); // importation des arrondissements
+	}
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
