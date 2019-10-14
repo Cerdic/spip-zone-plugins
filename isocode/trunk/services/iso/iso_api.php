@@ -165,6 +165,22 @@ $GLOBALS['isocode']['iso']['tables'] = array(
 		'delimiter'    => ';',
 		'extension'    => '.txt'
 	),
+	'iso3166subdivisions' => array(
+		'basic_fields' => array(
+			'Ccy'        => 'code_3166_2',
+			'CcyNbr'     => 'country',
+			'CcyNm'      => 'type',
+			'CcyMnrUnts' => 'parent',
+		),
+		'addon_fields' => array(
+			'insee'    => array(
+				'parent'         => 'code_specific',
+			)
+		),
+		'populating'   => 'file_csv',
+		'delimiter'    => ';',
+		'extension'    => '.txt',
+	),
 	'iso4217currencies' => array(
 		'basic_fields' => array(
 			'Ccy'        => 'code_4217_3',
