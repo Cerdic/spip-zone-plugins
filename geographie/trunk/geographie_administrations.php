@@ -62,6 +62,9 @@ function geographie_upgrade($nom_meta_base_version, $version_cible) {
 			),
 		),
 	);
+	$maj['1.3.0'] = array(
+		array('sql_updateq','spip_geo_regions',array('nom'=>'Centre-Val de Loire'),"nom=".sql_quote('Centre'))
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
