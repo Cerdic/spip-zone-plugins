@@ -8,7 +8,7 @@
 	<form method="post" action="#ENV{action}">
 		<div>
 			#ACTION_FORMULAIRE{#ENV{action}}
-			<ul class="editer-groupe">
+			<div class="editer-groupe">
 				[(#SAISIE{radio, action_table,
 					explication=<:isocode:explication_action_table:>,
 					label=<:isocode:label_action_table:>,
@@ -16,15 +16,13 @@
 					defaut=#ENV{_action_defaut},
 					disable=#ENV{_actions_disable},
 					obligatoire=oui,
-					info_obligatoire=''
 				})]
 				[(#SAISIE{checkbox, tables,
 					label=<:isocode:label_tables:>,
 					datas=#ENV{_tables},
 					obligatoire=oui,
-					info_obligatoire=''
 				})]
-			</ul>
+			</div>
 
 			<p class="boutons">
 				<span class="image_loading">&nbsp;</span>
