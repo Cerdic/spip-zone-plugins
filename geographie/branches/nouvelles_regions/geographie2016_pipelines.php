@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return array
  *     Données du pipeline
  */
-function geographie_afficher_complement_objet($flux) {
+function geographie2016_afficher_complement_objet($flux) {
 	include_spip('inc/config');
 	$table_sql = table_objet_sql($flux['args']['type']);
 

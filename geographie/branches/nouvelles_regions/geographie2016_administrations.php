@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @return void
  **/
-function geographie_upgrade($nom_meta_base_version, $version_cible) {
+function geographie2016_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
 	// Installation du plugin
@@ -92,7 +92,7 @@ function geographie_upgrade_importer_pays() {
  *
  * @return void
  **/
-function geographie_vider_tables($nom_meta_base_version) {
+function geographie2016_vider_tables($nom_meta_base_version) {
 	sql_drop_table('spip_geo_pays');
 	sql_drop_table('spip_geo_regions');
 	sql_drop_table('spip_geo_departements');

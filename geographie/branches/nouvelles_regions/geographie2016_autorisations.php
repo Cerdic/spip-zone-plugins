@@ -18,7 +18,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @pipeline autoriser
  */
-function geographie_autoriser() {
+function geographie2016_autoriser() {
 }
 
 // -----------------

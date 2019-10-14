@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return array
  *     Déclarations d'interface pour le compilateur
  */
-function geographie_declarer_tables_interfaces($interface) {
+function geographie2016_declarer_tables_interfaces($interface) {
 	$interface['table_des_tables']['geo_pays'] = 'geo_pays';
 	$interface['table_des_tables']['geo_regions'] = 'geo_regions';
 	$interface['table_des_tables']['geo_departements'] = 'geo_departements';
@@ -36,7 +36,7 @@ function geographie_declarer_tables_interfaces($interface) {
  * @return array
  *     Description complétée des tables
  */
-function geographie_declarer_tables_objets_sql($tables) {
+function geographie2016_declarer_tables_objets_sql($tables) {
 	$tables['spip_geo_pays'] = array(
 		'type' => 'geo_pays',
 		'principale' => 'oui',
@@ -167,7 +167,7 @@ function geographie_declarer_tables_objets_sql($tables) {
  * @return array
  *     Description complétée des tables
  */
-function geographie_declarer_tables_auxiliaires($tables) {
+function geographie2016_declarer_tables_auxiliaires($tables) {
 	$tables['spip_geo_pays_liens'] = array(
 		'field' => array(
 			'id_pays' => 'bigint(21) DEFAULT "0" NOT NULL',
@@ -236,7 +236,7 @@ function geographie_declarer_tables_auxiliaires($tables) {
 	return $tables;
 }
 
-function geographie_lister_tables_noexport($liste) {
+function geographie2016_lister_tables_noexport($liste) {
 	$liste[] = 'spip_geo_communes';
 	$liste[] = 'spip_geo_arrondissements';
 	$liste[] = 'spip_geo_departements';
