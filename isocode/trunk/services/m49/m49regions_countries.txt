@@ -1,0 +1,281 @@
+label_en;label_fr;code_num;parent
+World;Monde;001
+Africa;Afrique;002;001
+Northern Africa;Afrique septentrionale;015;002
+Algeria;Algérie;012;015
+Egypt;Égypte;818;015
+Libya;Libye;434;015
+Morocco;Maroc;504;015
+Sudan;Soudan;729;015
+Tunisia;Tunisie;788;015
+Western Sahara;Sahara occidental;732;015
+Sub-Saharan Africa;Afrique subsaharienne;202;002
+Eastern Africa;Afrique orientale;014;202
+British Indian Ocean Territory;Territoire britannique de l'océan Indien;086;014
+Burundi;Burundi;108;014
+Comoros;Comores;174;014
+Djibouti;Djibouti;262;014
+Eritrea;Érythrée;232;014
+Ethiopia;Éthiopie;231;014
+French Southern Territories;Terres australes françaises;260;014
+Kenya;Kenya;404;014
+Madagascar;Madagascar;450;014
+Malawi;Malawi;454;014
+Mauritius;Maurice;480;014
+Mayotte;Mayotte;175;014
+Mozambique;Mozambique;508;014
+Réunion;Réunion;638;014
+Rwanda;Rwanda;646;014
+Seychelles;Seychelles;690;014
+Somalia;Somalie;706;014
+South Sudan;Soudan du Sud;728;014
+Uganda;Ouganda;800;014
+United Republic of Tanzania;République-Unie de Tanzanie;834;014
+Zambia;Zambie;894;014
+Zimbabwe;Zimbabwe;716;014
+Middle Africa;Afrique centrale;017;202
+Angola;Angola;024;017
+Cameroon;Cameroun;120;017
+Central African Republic;République centrafricaine;140;017
+Chad;Tchad;148;017
+Congo;Congo;178;017
+Democratic Republic of the Congo;République démocratique du Congo;180;017
+Equatorial Guinea;Guinée équatoriale;226;017
+Gabon;Gabon;266;017
+Sao Tome and Principe;Sao Tomé-et-Principe;678;017
+Southern Africa;Afrique australe;018;202
+Botswana;Botswana;072;018
+Eswatini;Eswatini;748;018
+Lesotho;Lesotho;426;018
+Namibia;Namibie;516;018
+South Africa;Afrique du Sud;710;018
+Western Africa;Afrique occidentale;011;202
+Benin;Bénin;204;011
+Burkina Faso;Burkina Faso;854;011
+Cabo Verde;Cabo Verde;132;011
+Côte d’Ivoire;Côte d’Ivoire;384;011
+Gambia;Gambie;270;011
+Ghana;Ghana;288;011
+Guinea;Guinée;324;011
+Guinea-Bissau;Guinée-Bissau;624;011
+Liberia;Libéria;430;011
+Mali;Mali;466;011
+Mauritania;Mauritanie;478;011
+Niger;Niger;562;011
+Nigeria;Nigéria;566;011
+Saint Helena;Sainte-Hélène;654;011
+Senegal;Sénégal;686;011
+Sierra Leone;Sierra Leone;694;011
+Togo;Togo;768;011
+Americas;Amériques;019;001
+Latin America and the Caribbean;Amérique latine et Caraïbes;419;019
+Caribbean;Caraïbes;029;419
+Anguilla;Anguilla;660;029
+Antigua and Barbuda;Antigua-et-Barbuda;028;029
+Aruba;Aruba;533;029
+Bahamas;Bahamas;044;029
+Barbados;Barbade;052;029
+Bonaire, Sint Eustatius and Saba;Bonaire, Saint-Eustache et Saba;535;029
+British Virgin Islands;Îles Vierges britanniques;092;029
+Cayman Islands;Îles Caïmanes;136;029
+Cuba;Cuba;192;029
+Curaçao;Curaçao;531;029
+Dominica;Dominique;212;029
+Dominican Republic;République dominicaine;214;029
+Grenada;Grenade;308;029
+Guadeloupe;Guadeloupe;312;029
+Haiti;Haïti;332;029
+Jamaica;Jamaïque;388;029
+Martinique;Martinique;474;029
+Montserrat;Montserrat;500;029
+Puerto Rico;Porto Rico;630;029
+Saint Barthélemy;Saint-Barthélemy;652;029
+Saint Kitts and Nevis;Saint-Kitts-et-Nevis;659;029
+Saint Lucia;Sainte-Lucie;662;029
+Saint Martin (French Part);Saint-Martin (partie française);663;029
+Saint Vincent and the Grenadines;Saint-Vincent-et-les Grenadines;670;029
+Sint Maarten (Dutch part);Saint-Martin (partie néerlandaise);534;029
+Trinidad and Tobago;Trinité-et-Tobago;780;029
+Turks and Caicos Islands;Îles Turques-et-Caïques;796;029
+United States Virgin Islands;Îles Vierges américaines;850;029
+Central America;Amérique centrale;013;419
+Belize;Belize;084;013
+Costa Rica;Costa Rica;188;013
+El Salvador;El Salvador;222;013
+Guatemala;Guatemala;320;013
+Honduras;Honduras;340;013
+Mexico;Mexique;484;013
+Nicaragua;Nicaragua;558;013
+Panama;Panama;591;013
+South America;Amérique du Sud;005;419
+Argentina;Argentine;032;005
+Bolivia (Plurinational State of);Bolivie (État plurinational de);068;005
+Bouvet Island;Île Bouvet;074;005
+Brazil;Brésil;076;005
+Chile;Chili;152;005
+Colombia;Colombie;170;005
+Ecuador;Équateur;218;005
+Falkland Islands (Malvinas);Îles Falkland (Malvinas);238;005
+French Guiana;Guyane française;254;005
+Guyana;Guyana;328;005
+Paraguay;Paraguay;600;005
+Peru;Pérou;604;005
+South Georgia and the South Sandwich Islands;Géorgie du Sud-et-les Îles Sandwich du Sud;239;005
+Suriname;Suriname;740;005
+Uruguay;Uruguay;858;005
+Venezuela (Bolivarian Republic of);Venezuela (République bolivarienne du);862;005
+Northern America;Amérique septentrionale;021;019
+Bermuda;Bermudes;060;021
+Canada;Canada;124;021
+Greenland;Groenland;304;021
+Saint Pierre and Miquelon;Saint-Pierre-et-Miquelon;666;021
+United States of America;États-Unis d’Amérique;840;021
+Antarctica;Antarctique;010;001
+Asia;Asie;142;001
+Central Asia;Asie centrale;143;142
+Kazakhstan;Kazakhstan;398;143
+Kyrgyzstan;Kirghizistan;417;143
+Tajikistan;Tadjikistan;762;143
+Turkmenistan;Turkménistan;795;143
+Uzbekistan;Ouzbékistan;860;143
+Eastern Asia;Asie orientale;030;142
+China;Chine;156;030
+China, Hong Kong Special Administrative Region;Chine, région administrative spéciale de Hong Kong;344;030
+China, Macao Special Administrative Region;Chine, région administrative spéciale de Macao;446;030
+Democratic People's Republic of Korea;République populaire démocratique de Corée;408;030
+Japan;Japon;392;030
+Mongolia;Mongolie;496;030
+Republic of Korea;République de Corée;410;030
+South-eastern Asia;Asie du Sud-Est;035;142
+Brunei Darussalam;Brunéi Darussalam;096;035
+Cambodia;Cambodge;116;035
+Indonesia;Indonésie;360;035
+Lao People's Democratic Republic;République démocratique populaire lao;418;035
+Malaysia;Malaisie;458;035
+Myanmar;Myanmar;104;035
+Philippines;Philippines;608;035
+Singapore;Singapour;702;035
+Thailand;Thaïlande;764;035
+Timor-Leste;Timor-Leste;626;035
+Viet Nam;Viet Nam;704;035
+Southern Asia;Asie méridionale;034;142
+Afghanistan;Afghanistan;004;034
+Bangladesh;Bangladesh;050;034
+Bhutan;Bhoutan;064;034
+India;Inde;356;034
+Iran (Islamic Republic of);Iran (République islamique d’);364;034
+Maldives;Maldives;462;034
+Nepal;Népal;524;034
+Pakistan;Pakistan;586;034
+Sri Lanka;Sri Lanka;144;034
+Western Asia;Asie occidentale;145;142
+Armenia;Arménie;051;145
+Azerbaijan;Azerbaïdjan;031;145
+Bahrain;Bahreïn;048;145
+Cyprus;Chypre;196;145
+Georgia;Géorgie;268;145
+Iraq;Iraq;368;145
+Israel;Israël;376;145
+Jordan;Jordanie;400;145
+Kuwait;Koweït;414;145
+Lebanon;Liban;422;145
+Oman;Oman;512;145
+Qatar;Qatar;634;145
+Saudi Arabia;Arabie saoudite;682;145
+State of Palestine;État de Palestine;275;145
+Syrian Arab Republic;République arabe syrienne;760;145
+Turkey;Turquie;792;145
+United Arab Emirates;Émirats arabes unis;784;145
+Yemen;Yémen;887;145
+Europe;Europe;150;001
+Eastern Europe;Europe orientale;151;150
+Belarus;Bélarus;112;151
+Bulgaria;Bulgarie;100;151
+Czechia;Tchéquie;203;151
+Hungary;Hongrie;348;151
+Poland;Pologne;616;151
+Republic of Moldova;République de Moldova;498;151
+Romania;Roumanie;642;151
+Russian Federation;Fédération de Russie;643;151
+Slovakia;Slovaquie;703;151
+Ukraine;Ukraine;804;151
+Northern Europe;Europe septentrionale;154;150
+Åland Islands;Îles d’Åland;248;154
+Denmark;Danemark;208;154
+Estonia;Estonie;233;154
+Faroe Islands;Îles Féroé;234;154
+Finland;Finlande;246;154
+Iceland;Islande;352;154
+Ireland;Irlande;372;154
+Isle of Man;Île de Man;833;154
+Latvia;Lettonie;428;154
+Lithuania;Lituanie;440;154
+Norway;Norvège;578;154
+Svalbard and Jan Mayen Islands;Îles Svalbard-et-Jan Mayen;744;154
+Sweden;Suède;752;154
+United Kingdom of Great Britain and Northern Ireland;Royaume-Uni de Grande-Bretagne et d’Irlande du Nord;826;154
+Channel Islands;Îles Anglo-Normandes;830;154
+Guernsey;Guernesey;831;830
+Jersey;Jersey;832;830
+Sark;Sercq;680;830
+Southern Europe;Europe méridionale;039;150
+Albania;Albanie;008;039
+Andorra;Andorre;020;039
+Bosnia and Herzegovina;Bosnie-Herzégovine;070;039
+Croatia;Croatie;191;039
+Gibraltar;Gibraltar;292;039
+Greece;Grèce;300;039
+Holy See;Saint-Siège;336;039
+Italy;Italie;380;039
+Malta;Malte;470;039
+Montenegro;Monténégro;499;039
+North Macedonia;Macédoine du Nord;807;039
+Portugal;Portugal;620;039
+San Marino;Saint-Marin;674;039
+Serbia;Serbie;688;039
+Slovenia;Slovénie;705;039
+Spain;Espagne;724;039
+Western Europe;Europe occidentale;155;150
+Austria;Autriche;040;155
+Belgium;Belgique;056;155
+France;France;250;155
+Germany;Allemagne;276;155
+Liechtenstein;Liechtenstein;438;155
+Luxembourg;Luxembourg;442;155
+Monaco;Monaco;492;155
+Netherlands;Pays-Bas;528;155
+Switzerland;Suisse;756;155
+Oceania;Océanie;009;001
+Australia and New Zealand;Australie et Nouvelle-Zélande;053;009
+Australia;Australie;036;053
+Christmas Island;Île Christmas;162;053
+Cocos (Keeling) Islands;Îles des Cocos (Keeling);166;053
+Heard Island and McDonald Islands;Île Heard-et-Îles MacDonald;334;053
+New Zealand;Nouvelle-Zélande;554;053
+Norfolk Island;Île Norfolk;574;053
+Melanesia;Mélanésie;054;009
+Fiji;Fidji;242;054
+New Caledonia;Nouvelle-Calédonie;540;054
+Papua New Guinea;Papouasie-Nouvelle-Guinée;598;054
+Solomon Islands;Îles Salomon;090;054
+Vanuatu;Vanuatu;548;054
+Micronesia;Micronésie;057;009
+Guam;Guam;316;057
+Kiribati;Kiribati;296;057
+Marshall Islands;Îles Marshall;584;057
+Micronesia (Federated States of);Micronésie (États fédérés de);583;057
+Nauru;Nauru;520;057
+Northern Mariana Islands;Îles Mariannes du Nord;580;057
+Palau;Palaos;585;057
+United States Minor Outlying Islands;Îles mineures éloignées des États-Unis;581;057
+Polynesia;Polynésie;061;009
+American Samoa;Samoa américaines;016;061
+Cook Islands;Îles Cook;184;061
+French Polynesia;Polynésie française;258;061
+Niue;Nioué;570;061
+Pitcairn;Pitcairn;612;061
+Samoa;Samoa;882;061
+Tokelau;Tokélaou;772;061
+Tonga;Tonga;776;061
+Tuvalu;Tuvalu;798;061
+Wallis and Futuna Islands;Îles Wallis-et-Futuna;876;061

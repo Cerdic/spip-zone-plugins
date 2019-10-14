@@ -33,6 +33,13 @@ if (!defined('_ISOCODE_GEONAMES_INFORMATIONS_PAYS')) {
 	 */
 	define('_ISOCODE_GEONAMES_INFORMATIONS_PAYS', 'services/iso/iso3166countries-geonames-info.txt');
 }
+if (!defined('_ISOCODE_M49_REGION_PAYS')) {
+	/**
+	 * Chemin du fichier des régions-pays M49 contenant la région de rattachement des pays.
+	 * Complément à la table iso639countries.
+	 */
+	define('_ISOCODE_M49_REGION_PAYS', 'services/m49/m49regions_countries.txt');
+}
 if (!defined('_ISOCODE_IOTA_ISO4217_SYMBOL')) {
 	/**
 	 * URL de base pour charger la page du tableau des devises ISO-4217 sur le site
@@ -146,6 +153,9 @@ $GLOBALS['isocode']['iso']['tables'] = array(
 				'CurrencyCode'   => 'code_4217_3',
 				'CurrencyName'   => 'currency_en',
 				'Phone'          => 'phone_id',
+			),
+			'm49'      => array(
+				'parent'         => 'code_num_region',
 			)
 		),
 		'populating'   => 'file_csv',
@@ -301,21 +311,23 @@ function iso639families_completer_table($enregistrements, $config) {
 
 function iso3166countries_completer_table($enregistrements, $config) {
 
-	// Initialisation des champs additionnels
-	$enregistrements_geo = array();
-	$config_champs_geo = $config['addon_fields']['geonames'];
+	// Inclusion de l'API.
 	include_spip('inc/isocode_sourcer');
-	$enregistrement_geo_defaut = initialiser_enregistrement('iso3166countries', $config_champs_geo);
 
 	// Lecture du fichier CSV geonames-countryInfo.txt pour récupérer les informations additionnelles.
 	// Le délimiteur est une tabulation.
+	// -- Initialisation des champs additionnels
+	$enregistrements_geo = array();
+	$config_champs_geo = $config['addon_fields']['geonames'];
+	$enregistrement_geo_defaut = initialiser_enregistrement('iso3166countries', $config_champs_geo);
+
+	// -- Lecture du fichier
 	$fichier = find_in_path(_ISOCODE_GEONAMES_INFORMATIONS_PAYS);
 	$separateur = "\t";
 	$lignes = file($fichier);
 	if ($lignes) {
 		$titres = array();
 		$index_code_pays = null;
-		include_spip('inc/isocode_sourcer');
 		foreach ($lignes as $_numero => $_ligne) {
 			$valeurs = explode($separateur, trim($_ligne, "\r\n"));
 			if ($_numero == 0) {
@@ -341,12 +353,63 @@ function iso3166countries_completer_table($enregistrements, $config) {
 		}
 	}
 
-	// On complète maintenant le tableau des enregistrements avec la colonne additionnelle hierarchy et la colonne
-	// dérivée parent qui ne contient que le code alpha-3 de la famille parente si elle existe.
+	// Lecture du fichier CSV m49regions_countries.txt pour récupérer le lien entre les pays et leur région de
+	// rattachement (indicatif M49).
+	// Le délimiteur est un point-virgule.
+	// -- Initialisation des champs additionnels
+	$enregistrements_m49 = array();
+	$config_champs_m49 = $config['addon_fields']['m49'];
+	$enregistrement_m49_defaut = initialiser_enregistrement('iso3166countries', $config_champs_m49);
+
+	// -- Lecture du fichier
+	$fichier = find_in_path(_ISOCODE_M49_REGION_PAYS);
+	$separateur = ';';
+	$lignes = file($fichier);
+	if ($lignes) {
+		$titres = array();
+		$index_code_pays = null;
+		foreach ($lignes as $_numero => $_ligne) {
+			$valeurs = explode($separateur, trim($_ligne, "\r\n"));
+			if ($_numero == 0) {
+				// Stockage des noms de colonnes car la première ligne contient toujours le header et de
+				// l'index correspondant au code ISO-3166 numérique du pays qui se nomme 'code_num' dans le fichier CSV.
+				$titres = $valeurs;
+				$index_code_pays = array_search('code_num', $titres);
+			} else {
+				// On extrait de chaque ligne la région de rattachement du pays ainsi que le code numérique du pays
+				// qui servira d'index du tableau constitué.
+				// On ne sélectionne que les colonnes correspondant à des champs additionnels.
+				$enregistrement_m49 = $enregistrement_m49_defaut;
+				foreach ($titres as $_cle => $_titre) {
+					$titre = trim($_titre);
+					if (isset($config_champs_m49[$titre]) and !empty($valeurs[$_cle])) {
+						$enregistrement_m49[$config_champs_m49[$titre]] = trim($valeurs[$_cle]);
+					}
+				}
+				if (isset($valeurs[$index_code_pays])) {
+					$enregistrements_m49[$valeurs[$index_code_pays]] = $enregistrement_m49;
+				}
+			}
+		}
+	}
+
+	// On complète maintenant le tableau des enregistrements avec les informations glanées dans le fichier geonames
+	// et dans celui du M49.
 	foreach ($enregistrements as $_cle => $_enregistrement) {
+		// Les informations Geonames
 		$code = $_enregistrement['code_alpha2'];
 		if (isset($enregistrements_geo[$code])) {
 			$enregistrements[$_cle] = array_merge($enregistrements[$_cle], $enregistrements_geo[$code]);
+		} else {
+			$enregistrements[$_cle] = array_merge($enregistrements[$_cle], $enregistrement_geo_defaut);
+		}
+
+		// La région M49
+		$code = $_enregistrement['code_num'];
+		if (isset($enregistrements_m49[$code])) {
+			$enregistrements[$_cle] = array_merge($enregistrements[$_cle], $enregistrements_m49[$code]);
+		} else {
+			$enregistrements[$_cle] = array_merge($enregistrements[$_cle], $enregistrement_m49_defaut);
 		}
 	}
 
