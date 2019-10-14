@@ -261,6 +261,26 @@ function isocode_declarer_tables_principales($tables_principales) {
 	$tables_principales['spip_m49regions'] =
 		array('field' => &$table_regions, 'key' => &$table_regions_key);
 
+	// -------------------------------------------------------------------------------------
+	// Table des subdivisions géographiques des pays suivant la norme ISO 3166-2 : spip_iso3166subdivisions
+	$table_subdivisions = array(
+		'code_3166_2'   => "varchar(6) DEFAULT '' NOT NULL",    // ISO 3166-2 Subdivision identifier XX-YYY
+		'code_specific' => "char(2) DEFAULT '' NOT NULL",       // Specific Subdivision identifier by country (i.e. INSEE)
+		'country'       => "char(2) DEFAULT '' NOT NULL",       // The two-letter identifier (ISO 3166 alpha2)
+		'type'          => "varchar(32) DEFAULT '' NOT NULL",   // Specific type by country in english (department, land...)
+		'parent'        => "varchar(6) DEFAULT '' NOT NULL",    // The ISO 3166-2 identifier of parent
+		'label'         => "text DEFAULT '' NOT NULL",          // Multilangage name
+		'maj'           => 'timestamp DEFAULT current_timestamp ON UPDATE current_timestamp'
+	);
+
+	$table_subdivisions_key = array(
+		'PRIMARY KEY'       => 'code_3166_2',
+		'KEY code_specific' => 'code_specific'
+	);
+
+	$tables_principales['spip_iso3166subdivisions'] =
+		array('field' => &$table_subdivisions, 'key' => &$table_subdivisions_key);
+
 	return $tables_principales;
 }
 
@@ -288,6 +308,7 @@ function isocode_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['iso639families'] = 'iso639families';
 	$interfaces['table_des_tables']['iso15924scripts'] = 'iso15924scripts';
 	$interfaces['table_des_tables']['iso3166countries'] = 'iso3166countries';
+	$interfaces['table_des_tables']['iso3166subdivisions'] = 'iso3166subdivisions';
 	$interfaces['table_des_tables']['iso4217currencies'] = 'iso4217currencies';
 	$interfaces['table_des_tables']['iana5646subtags'] = 'iana5646subtags';
 	$interfaces['table_des_tables']['geoipcontinents'] = 'geoipcontinents';
