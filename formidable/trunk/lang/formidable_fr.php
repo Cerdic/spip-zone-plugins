@@ -198,6 +198,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponses_liste' => 'Liste des réponses',
 	'reponses_liste_prop' => 'Réponses en attente de validation',
 	'reponses_liste_publie' => 'Toutes les réponses validées',
+	'reponses_page_accueil' => 'Afficher les réponses sur la page d\'accueil de l\'espace privé',
 	'reponses_nb' => '@nb@ réponses',
 	'reponses_supprimer' => 'Supprimer toutes les réponses',
 	'reponses_supprimer_confirmation' => 'Êtes-vous sûr de vouloir supprimer toutes les réponses à ce formulaire ?',

@@ -136,8 +136,11 @@ function formidable_affiche_droite($flux) {
 
 /**
  * Afficher l'édition des liens sur les objets configurés
+ * + les dernières réponses sur la page d'accueil (si configurée)
  **/
 function formidable_affiche_milieu($flux) {
+
+	//Afficher l'édition des liens sur les objets configurés
 	include_spip('inc/config');
 	$texte = '';
 	$e = trouver_objet_exec($flux['args']['exec']);
@@ -158,6 +161,11 @@ function formidable_affiche_milieu($flux) {
 		}
 	}
 
+	if (in_array($flux['args']['exec'], array('accueil', 'suivi_edito'))
+		and lire_config('formidable/reponses_page_accueil')
+	) {
+		$flux['data'] .= recuperer_fond('prive/objets/liste/formulaires_reponses', $contexte, array('ajax' => true));
+	}
 	return $flux;
 }
 
