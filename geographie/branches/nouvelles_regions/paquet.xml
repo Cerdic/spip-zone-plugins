@@ -1,0 +1,23 @@
+<paquet
+	prefix="geographie"
+	categorie="divers"
+	version="1.2.0"
+	schema="1.0.0"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/geographie-32.png"
+	documentation="https://contrib.spip.net/Geographie"
+>
+	<nom>Geographie</nom>
+
+	<auteur lien="http://www.yterium.net">Cedric Morin</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/geographie.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/geographie.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/geographie.php" />
+	<pipeline nom="autoriser" inclure="geographie_autorisations.php" />
+	<pipeline nom="lister_tables_noexport" inclure="base/geographie.php" />
+	<pipeline nom="afficher_complement_objet" inclure="geographie_pipelines.php" />
+</paquet>
