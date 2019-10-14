@@ -11,8 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function saisie_calcul_2_js($expr) {
 	$expr = saisie_calcul_securiser($expr);
 	$expr = preg_replace("#@(.*)@#U", "Number($('.editer:not(.afficher_si_masque) [name=&quot;$1&quot;]').val()||0)", $expr);
-	$expr = str_replace(",",".",$expr);// virgule -> point
-	$expr = str_replace("ROUND","Math.round",$expr);
+	$expr = str_replace("ROUND","calcul_arrondi",$expr);
 	$expr = str_replace("\n",'',$expr);
 	$expr = str_replace("\r",'',$expr);
 	return $expr;
@@ -27,7 +26,6 @@ function saisie_calcul_2_js($expr) {
 function saisie_calcul_2_php($expr) {
 	$expr = saisie_calcul_securiser($expr);
 	$expr = preg_replace("#@(.*)@#U", 'floatval(_request(\'$1\'))', $expr);
-	$expr = str_replace(",",".",$expr);// virgule -> point
 	$expr = str_replace("ROUND","saisie_calcul_arrondi",$expr);
 	return $expr;
 }
@@ -36,11 +34,11 @@ function saisie_calcul_2_php($expr) {
  * @param int $valeur
  * @param int
 **/
-function saisie_calcul_arrondi($valeur) {
+function saisie_calcul_arrondi($valeur, $precision = 0) {
 	if ($valeur > 0) {
-		return round($valeur, 0, PHP_ROUND_HALF_UP);
+		return round($valeur, $precision, PHP_ROUND_HALF_UP);
 	} else {
-		return round($valeur, 0, PHP_ROUND_HALF_DOWN);
+		return round($valeur, $precision, PHP_ROUND_HALF_DOWN);
 	}
 }
 
