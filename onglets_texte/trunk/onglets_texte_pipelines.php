@@ -23,13 +23,9 @@ function onglets_texte_insert_head_css($flux) {
 }
 
 function onglets_texte_porte_plume_barre_pre_charger($barres){
-	$barre_edition = &$barres['edition'];
-
-	$module_barre = "barre_outils";
-	if (intval($GLOBALS['spip_version_branche'])>2)
-	$module_barre = "barreoutils";
+	$barre = &$barres['edition'];
 					
-	$barre_edition->ajouterApres('barre_cadre', array(
+	$barre->ajouterAvant('guillemets', array(
 		"id"          => 'onglets_texte',
 		"name"        => 'Insérer un système d\'onglets',
 		"className"   => "outil_onglets",
@@ -42,6 +38,6 @@ function onglets_texte_porte_plume_barre_pre_charger($barres){
 
 function onglets_texte_porte_plume_lien_classe_vers_icone($flux){
 	return array_merge($flux, array(
-		'outil_onglets' => array('onglets.png','0'),
+		'outil_onglets' => 'onglets.png',
 	));
 }
