@@ -61,10 +61,10 @@ function noizetier_layout_formulaire_charger($flux) {
 
 		foreach ($elements_grille as $element) {
 
-			// Ajout des saisies
+			// Ajout des saisies dans un fieldset affichage
 			$saisies = noizetier_layout_lister_saisies($element, $id_noisette);
 			$fieldset_affichage = false;
-			foreach($flux['data']['_champs_noisette'] as $k => $saisie) {
+			foreach ($flux['data']['_champs_noisette'] as $k => $saisie) {
 				if (
 					$saisie['saisie'] === 'fieldset'
 					and $saisie['options']['nom'] === 'affichage'
@@ -75,7 +75,16 @@ function noizetier_layout_formulaire_charger($flux) {
 				}
 			}
 			if (!$fieldset_affichage) {
-				$flux['data']['_champs_noisette'] = array_merge($flux['data']['_champs_noisette'], $saisies);
+				$flux['data']['_champs_noisette'][] = array(
+					'saisie' => 'fieldset',
+					'options' => array(
+						'nom' => 'affichage',
+						'label' => _T('noizetier:label_saisies_affichage'),
+						'pliable' => 'oui',
+						'plie' => '',
+					),
+					'saisies' => $saisies,
+				);
 			}
 
 			// Récupération des valeurs

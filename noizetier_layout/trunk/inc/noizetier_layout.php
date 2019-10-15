@@ -31,7 +31,7 @@ function noizetier_layout_decrire_grille($info = null) {
 	static $grille;
 	if ($grille and isset($grille[$info])) {
 		return $grille[$info];
-	} else if ($grille) {
+	} elseif ($grille) {
 		return $grille;
 	}
 
@@ -79,7 +79,7 @@ function noizetier_layout_lister_saisies($element = null, $id_noisette = 0) {
 	static $saisies;
 	if ($saisies and isset($saisies[$id_noisette][$element])) {
 		return $saisies[$id_noisette][$element];
-	} else if ($saisies[$id_noisette]) {
+	} elseif ($saisies[$id_noisette]) {
 		return $saisies[$id_noisette];
 	}
 
@@ -101,7 +101,7 @@ function noizetier_layout_lister_saisies($element = null, $id_noisette = 0) {
 			)
 		);
 		// On encapsule le tout dans des fieldsets
-		foreach(array('container', 'row', 'column') as $item) {
+		foreach (array('container', 'row', 'column') as $item) {
 			if (isset($saisies_grille[$item])) {
 				$saisies[$id_noisette][$item] = array(
 					array(
@@ -147,7 +147,7 @@ function noizetier_layout_contextualiser_classes($element, $classes_element, $id
 	$classes_element = array_filter(explode(' ', $classes_element));
 	$saisies_par_nom = saisies_lister_par_nom($saisies);
 
-	foreach($saisies_par_nom as $champ => $saisie) {
+	foreach ($saisies_par_nom as $champ => $saisie) {
 		if (
 			isset($saisie['grille'])
 			and $saisie['saisie'] != 'fieldset'
@@ -241,7 +241,7 @@ function noizetier_layout_identifier_element_grille($id_noisette) {
 	}
 
 	// Noisette enfante d'une noisette « conteneur_row » = column
-	else if ($type_noisette_parente == 'conteneur_row') {
+	elseif ($type_noisette_parente == 'conteneur_row') {
 		$elements[] = 'column';
 	}
 
@@ -260,7 +260,7 @@ function noizetier_layout_identifier_element_grille($id_noisette) {
  * @return array
  *     Liste des classes
  */
-function noizetier_layout_extraire_classes_saisies_grille($saisies){
+function noizetier_layout_extraire_classes_saisies_grille($saisies) {
 
 	include_spip('inc/saisies');
 	$classes = array();
@@ -272,13 +272,13 @@ function noizetier_layout_extraire_classes_saisies_grille($saisies){
 	}
 	// On met tout à plat et on parse
 	$saisies = saisies_lister_par_nom($saisies);
-	foreach($saisies as $champ => $saisie) {
+	foreach ($saisies as $champ => $saisie) {
 		if ($saisie['saisie'] != 'fieldset') {
 			// Soit l'info est dans grille/data
 			if (!empty($saisie['grille']['data'])) {
 				$classes = array_merge($classes, $saisie['grille']['data']);
 			// Soit dans options/data (radios, checkbox, etc.)
-			} else if (!empty($saisie['options']['data'])) {
+			} elseif (!empty($saisie['options']['data'])) {
 				$classes = array_merge($classes, array_keys($saisie['options']['data']));
 			}
 		}
