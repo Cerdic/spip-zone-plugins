@@ -18,9 +18,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Liste complétée des js chargés
 **/
 function roles_jquery_plugins($flux) {
-
-	$config = lire_config('chosen/active', false);
-	if (test_espace_prive() || $config =='oui') {
+	$config = false;
+	if (test_plugin_actif('select2')) {
+		$config = lire_config('select2/active', false);
+	} elseif (test_plugin_actif('chosen')) {
+		$config = lire_config('chosen/active', false);
+	}
+	if (test_espace_prive() || ($config === 'oui')) {
 		$flux[] = 'javascript/bootstrap-dropdown.js';
 	}
 	return $flux;
@@ -49,8 +53,13 @@ function roles_header_prive_css($flux) {
 **/
 function roles_insert_head_css($flux) {
 
-	$config = lire_config('chosen', array());
-	if (isset($config['active']) and $config['active']=='oui') {
+	$config = false;
+	if (test_plugin_actif('select2')) {
+		$config = lire_config('select2/active', false);
+	} elseif (test_plugin_actif('chosen')) {
+		$config = lire_config('chosen/active', false);
+	}
+	if ($config === 'oui') {
 		$css = sinon(find_in_path('css/roles-dropdown_public.css'), find_in_path('css/roles-dropdown.css'));
 		$flux .= '<link rel="stylesheet" href="'.direction_css($css).'" type="text/css" media="all" />' . "\n";
 	}
