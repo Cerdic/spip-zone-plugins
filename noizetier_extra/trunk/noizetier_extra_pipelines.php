@@ -33,8 +33,7 @@ function noizetier_extra_formulaire_charger($flux) {
 		and is_array($saisies_classes = noizetier_lister_saisies_classes($type_noisette))
 	) {
 
-		// Ajouter les saisies.
-		// En priorité dans un fieldset 'affichage' à la racine, sinon à la fin.
+		// Ajouter les saisies dans un fieldset 'affichage'.
 		$fieldset_affichage = false;
 		foreach ($flux['data']['_champs_noisette'] as $k => $saisie) {
 			if (
@@ -42,12 +41,21 @@ function noizetier_extra_formulaire_charger($flux) {
 				and $saisie['options']['nom'] === 'affichage'
 			) {
 				$fieldset_affichage = true;
-				$flux['data']['_champs_noisette'][$k]['saisies'] = array_merge_recursive($flux['data']['_champs_noisette'][$k]['saisies'], $saisies_classes);
+				$flux['data']['_champs_noisette'][$k]['saisies'] = array_merge($flux['data']['_champs_noisette'][$k]['saisies'], $saisies_classes);
 				break;
 			}
 		}
 		if (!$fieldset_affichage) {
-			$flux['data']['_champs_noisette'] = array_merge_recursive($flux['data']['_champs_noisette'], $saisies_classes);
+			$flux['data']['_champs_noisette'][] = array(
+				'saisie' => 'fieldset',
+				'options' => array(
+					'nom' => 'affichage',
+					'label' => _T('noizetier:label_saisies_affichage'),
+					'pliable' => 'oui',
+					'plie' => '',
+				),
+				'saisies' => $saisies_classes,
+			);
 		}
 
 		// Récupérer les classes attribuées
