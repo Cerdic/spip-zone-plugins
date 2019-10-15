@@ -167,18 +167,23 @@ $GLOBALS['isocode']['iso']['tables'] = array(
 	),
 	'iso3166subdivisions' => array(
 		'basic_fields' => array(
-			'Ccy'        => 'code_3166_2',
-			'CcyNbr'     => 'country',
-			'CcyNm'      => 'type',
-			'CcyMnrUnts' => 'parent',
+			'3166-2 code'          => 'code_3166_2',
+			'Country'              => 'country',
+			'Subdivision category' => 'type',
+			'Parent subdivision'   => 'parent',
+			'Language code'        => 'language',
+			'Subdivision name'     => 'label',
+		),
+		'unused_fields' => array(
+			'language'        => '',
 		),
 		'addon_fields' => array(
 			'insee'    => array(
-				'parent'         => 'code_specific',
+				'ccnr'         => 'code_specific',
 			)
 		),
 		'populating'   => 'file_csv',
-		'delimiter'    => ';',
+		'delimiter'    => "\t",
 		'extension'    => '.txt',
 	),
 	'iso4217currencies' => array(
@@ -436,6 +441,38 @@ function iso3166countries_completer_table($enregistrements, $config) {
 	return $enregistrements;
 }
 
+
+function iso3166subdivisions_completer_enregistrement($enregistrement, $config) {
+
+	// La finalisation de l'enregistrement consiste à élaborer la version multilangue du champ label
+	// en considérant le champ language qui contient le codet alpha2 de la langue.
+	// Cette fonction est appelée pour le premier enregistrement ayant la clé primaire concernée, les autres
+	// enregistrements avec cette même clé sont traités dans la fonction fusionner_enregistrement().
+	// De fait, le champ label ne contient que le texte sans multi.
+	$enregistrement['label'] = "<multi>[{$enregistrement['language']}]"
+		. $enregistrement['label']
+		.'</multi>';
+
+	// On supprime maintenant le champ language qui ne sert plus à rien
+	unset($enregistrement['language']);
+
+	return $enregistrement;
+}
+
+
+function iso3166subdivisions_fusionner_enregistrement($enregistrements, $index_enregistrement, $enregistrement, $config) {
+
+	// Cette fonction est appelée alors qu'il existe au moins un premier enregistrement ayant la clé primaire concernée.
+	// De fait, il suffit de compléter le champ label avec la traduction dans la langue de l'enregistrement coourant.
+	$label = $enregistrements[$index_enregistrement]['label'];
+	$enregistrements[$index_enregistrement]['label'] = '<multi>'
+		. extraire_balise($label, 'multi')
+		. "[{$enregistrement['language']}]"
+		. $enregistrement['label']
+		. '</multi>';
+
+	return $enregistrements;
+}
 
 function iso4217currencies_completer_table($enregistrements, $config) {
 

@@ -1,0 +1,616 @@
+Subdivision category	3166-2 code	Subdivision name	Language code	Country	Parent subdivision
+metropolitan_department	FR-01	Ain	fr	FR	FR-ARA
+metropolitan_department	FR-02	Aisne	fr	FR	FR-HDF
+metropolitan_department	FR-03	Allier	fr	FR	FR-ARA
+metropolitan_department	FR-06	Alpes-Maritimes	fr	FR	FR-PAC
+metropolitan_department	FR-04	Alpes-de-Haute-Provence	fr	FR	FR-PAC
+metropolitan_department	FR-08	Ardennes	fr	FR	FR-GES
+metropolitan_department	FR-07	Ardèche	fr	FR	FR-ARA
+metropolitan_department	FR-09	Ariège	fr	FR	FR-OCC
+metropolitan_department	FR-10	Aube	fr	FR	FR-GES
+metropolitan_department	FR-11	Aude	fr	FR	FR-OCC
+metropolitan_region	FR-ARA	Auvergne-Rhône-Alpes	fr	FR	
+metropolitan_department	FR-12	Aveyron	fr	FR	FR-OCC
+metropolitan_department	FR-67	Bas-Rhin	fr	FR	FR-GES
+metropolitan_department	FR-13	Bouches-du-Rhône	fr	FR	FR-PAC
+metropolitan_region	FR-BFC	Bourgogne-Franche-Comté	fr	FR	
+metropolitan_region	FR-BRE	Bretagne	fr	FR	
+metropolitan_department	FR-14	Calvados	fr	FR	FR-NOR
+metropolitan_department	FR-15	Cantal	fr	FR	FR-ARA
+metropolitan_region	FR-CVL	Centre-Val de Loire	fr	FR	
+metropolitan_department	FR-16	Charente	fr	FR	FR-NAQ
+metropolitan_department	FR-17	Charente-Maritime	fr	FR	FR-NAQ
+metropolitan_department	FR-18	Cher	fr	FR	FR-CVL
+dependency	FR-CP	Clipperton	fr	FR	
+metropolitan_department	FR-19	Corrèze	fr	FR	FR-NAQ
+collectivity	FR-COR	Corse	fr	FR	
+metropolitan_department	FR-2A	Corse-du-Sud	fr	FR	FR-COR
+metropolitan_department	FR-23	Creuse	fr	FR	FR-NAQ
+metropolitan_department	FR-21	Côte-d'Or	fr	FR	FR-BFC
+metropolitan_department	FR-22	Côtes-d'Armor	fr	FR	FR-BRE
+metropolitan_department	FR-79	Deux-Sèvres	fr	FR	FR-NAQ
+metropolitan_department	FR-24	Dordogne	fr	FR	FR-NAQ
+metropolitan_department	FR-25	Doubs	fr	FR	FR-BFC
+metropolitan_department	FR-26	Drôme	fr	FR	FR-ARA
+metropolitan_department	FR-91	Essonne	fr	FR	FR-IDF
+metropolitan_department	FR-27	Eure	fr	FR	FR-NOR
+metropolitan_department	FR-28	Eure-et-Loir	fr	FR	FR-CVL
+metropolitan_department	FR-29	Finistère	fr	FR	FR-BRE
+metropolitan_department	FR-30	Gard	fr	FR	FR-OCC
+metropolitan_department	FR-32	Gers	fr	FR	FR-OCC
+metropolitan_department	FR-33	Gironde	fr	FR	FR-NAQ
+metropolitan_region	FR-GES	Grand-Est	fr	FR	
+overseas_region	FR-GUA	Guadeloupe	fr	FR	
+overseas_department	FR-GP	Guadeloupe (see also separate country code entry under GP)	fr	FR	FR-GUA
+overseas_territorial_collectivity	FR-GF	Guyane (française) (see also separate country code entry under GF)	fr	FR	
+metropolitan_department	FR-68	Haut-Rhin	fr	FR	FR-GES
+metropolitan_department	FR-2B	Haute-Corse	fr	FR	FR-COR
+metropolitan_department	FR-31	Haute-Garonne	fr	FR	FR-OCC
+metropolitan_department	FR-43	Haute-Loire	fr	FR	FR-ARA
+metropolitan_department	FR-52	Haute-Marne	fr	FR	FR-GES
+metropolitan_department	FR-74	Haute-Savoie	fr	FR	FR-ARA
+metropolitan_department	FR-70	Haute-Saône	fr	FR	FR-BFC
+metropolitan_department	FR-87	Haute-Vienne	fr	FR	FR-NAQ
+metropolitan_department	FR-05	Hautes-Alpes	fr	FR	FR-PAC
+metropolitan_department	FR-65	Hautes-Pyrénées	fr	FR	FR-OCC
+metropolitan_region	FR-HDF	Hauts-de-France	fr	FR	
+metropolitan_department	FR-92	Hauts-de-Seine	fr	FR	FR-IDF
+metropolitan_department	FR-34	Hérault	fr	FR	FR-OCC
+metropolitan_department	FR-35	Ille-et-Vilaine	fr	FR	FR-BRE
+metropolitan_department	FR-36	Indre	fr	FR	FR-CVL
+metropolitan_department	FR-37	Indre-et-Loire	fr	FR	FR-CVL
+metropolitan_department	FR-38	Isère	fr	FR	FR-ARA
+metropolitan_department	FR-39	Jura	fr	FR	FR-BFC
+overseas_region	FR-LRE	La Réunion	fr	FR	
+overseas_department	FR-RE	La Réunion (see also separate country code entry under RE)	fr	FR	FR-LRE
+metropolitan_department	FR-40	Landes	fr	FR	FR-NAQ
+metropolitan_department	FR-41	Loir-et-Cher	fr	FR	FR-CVL
+metropolitan_department	FR-42	Loire	fr	FR	FR-ARA
+metropolitan_department	FR-44	Loire-Atlantique	fr	FR	FR-PDL
+metropolitan_department	FR-45	Loiret	fr	FR	FR-CVL
+metropolitan_department	FR-46	Lot	fr	FR	FR-OCC
+metropolitan_department	FR-47	Lot-et-Garonne	fr	FR	FR-NAQ
+metropolitan_department	FR-48	Lozère	fr	FR	FR-OCC
+metropolitan_department	FR-49	Maine-et-Loire	fr	FR	FR-PDL
+metropolitan_department	FR-50	Manche	fr	FR	FR-NOR
+metropolitan_department	FR-51	Marne	fr	FR	FR-GES
+overseas_territorial_collectivity	FR-MQ	Martinique (see also separate country code entry under MQ)	fr	FR	
+metropolitan_department	FR-53	Mayenne	fr	FR	FR-PDL
+overseas_region	FR-MAY	Mayotte	fr	FR	
+overseas_department	FR-YT	Mayotte (see also separate country code entry under YT)	fr	FR	FR-MAY
+metropolitan_department	FR-54	Meurthe-et-Moselle	fr	FR	FR-GES
+metropolitan_department	FR-55	Meuse	fr	FR	FR-GES
+metropolitan_department	FR-56	Morbihan	fr	FR	FR-BRE
+metropolitan_department	FR-57	Moselle	fr	FR	FR-GES
+metropolitan_department	FR-58	Nièvre	fr	FR	FR-BFC
+metropolitan_department	FR-59	Nord	fr	FR	FR-HDF
+metropolitan_region	FR-NOR	Normandie	fr	FR	
+metropolitan_region	FR-NAQ	Nouvelle-Aquitaine	fr	FR	
+overseas_territorial_collectivity	FR-NC	Nouvelle-Calédonie (see also separate country code entry under NC)	fr	FR	
+metropolitan_region	FR-OCC	Occitanie	fr	FR	
+metropolitan_department	FR-60	Oise	fr	FR	FR-HDF
+metropolitan_department	FR-61	Orne	fr	FR	FR-NOR
+metropolitan_department	FR-75	Paris	fr	FR	FR-IDF
+metropolitan_department	FR-62	Pas-de-Calais	fr	FR	FR-HDF
+metropolitan_region	FR-PDL	Pays-de-la-Loire	fr	FR	
+overseas_territorial_collectivity	FR-PF	Polynésie française (see also separate country code entry under PF)	fr	FR	
+metropolitan_region	FR-PAC	Provence-Alpes-Côte-d’Azur	fr	FR	
+metropolitan_department	FR-63	Puy-de-Dôme	fr	FR	FR-ARA
+metropolitan_department	FR-64	Pyrénées-Atlantiques	fr	FR	FR-NAQ
+metropolitan_department	FR-66	Pyrénées-Orientales	fr	FR	FR-OCC
+metropolitan_department	FR-69	Rhône	fr	FR	FR-ARA
+overseas_territorial_collectivity	FR-BL	Saint-Barthélemy (see also separate country code entry under BL)	fr	FR	
+overseas_territorial_collectivity	FR-MF	Saint-Martin (see also separate country code entry under MF)	fr	FR	
+overseas_territorial_collectivity	FR-PM	Saint-Pierre-et-Miquelon (see also separate country code entry under PM)	fr	FR	
+metropolitan_department	FR-72	Sarthe	fr	FR	FR-PDL
+metropolitan_department	FR-73	Savoie	fr	FR	FR-ARA
+metropolitan_department	FR-71	Saône-et-Loire	fr	FR	FR-BFC
+metropolitan_department	FR-76	Seine-Maritime	fr	FR	FR-NOR
+metropolitan_department	FR-93	Seine-Saint-Denis	fr	FR	FR-IDF
+metropolitan_department	FR-77	Seine-et-Marne	fr	FR	FR-IDF
+metropolitan_department	FR-80	Somme	fr	FR	FR-HDF
+metropolitan_department	FR-81	Tarn	fr	FR	FR-OCC
+metropolitan_department	FR-82	Tarn-et-Garonne	fr	FR	FR-OCC
+overseas_territorial_collectivity	FR-TF	Terres australes françaises (see also separate country code entry under TF)	fr	FR	
+metropolitan_department	FR-90	Territoire de Belfort	fr	FR	FR-BFC
+metropolitan_department	FR-95	Val-d'Oise	fr	FR	FR-IDF
+metropolitan_department	FR-94	Val-de-Marne	fr	FR	FR-IDF
+metropolitan_department	FR-83	Var	fr	FR	FR-PAC
+metropolitan_department	FR-84	Vaucluse	fr	FR	FR-PAC
+metropolitan_department	FR-85	Vendée	fr	FR	FR-PDL
+metropolitan_department	FR-86	Vienne	fr	FR	FR-NAQ
+metropolitan_department	FR-88	Vosges	fr	FR	FR-GES
+overseas_territorial_collectivity	FR-WF	Wallis-et-Futuna (see also separate country code entry under WF)	fr	FR	
+metropolitan_department	FR-89	Yonne	fr	FR	FR-BFC
+metropolitan_department	FR-78	Yvelines	fr	FR	FR-IDF
+metropolitan_region	FR-IDF	Île-de-France	fr	FR	
+province	ES-C	A Coruña [La Coruña]	gl	ES	ES-GA
+province	ES-A	Alacant	ca	ES	ES-VC
+province	ES-AB	Albacete	es	ES	ES-CM
+province	ES-A	Alicante	es	ES	ES-VC
+province	ES-AL	Almería	es	ES	ES-AN
+autonomous_community	ES-AN	Andalucía	es	ES	
+province	ES-VI	Araba	eu	ES	ES-PV
+autonomous_community	ES-AR	Aragón	es	ES	
+province	ES-O	Asturias	es	ES	ES-AS
+autonomous_community	ES-AS	Asturias, Principado de	es	ES	
+province	ES-BA	Badajoz	es	ES	ES-EX
+province	ES-PM	Balears [Baleares]	ca	ES	ES-IB
+province	ES-B	Barcelona [Barcelona]	es	ES	ES-CT
+province	ES-BI	Bizkaia	eu	ES	ES-PV
+province	ES-BU	Burgos	es	ES	ES-CL
+autonomous_community	ES-CN	Canarias	es	ES	
+autonomous_community	ES-CB	Cantabria	es	ES	
+province	ES-S	Cantabria	es	ES	ES-CB
+province	ES-CS	Castelló	ca	ES	ES-VC
+province	ES-CS	Castellón	es	ES	ES-VC
+autonomous_community	ES-CL	Castilla y León	es	ES	
+autonomous_community	ES-CM	Castilla-La Mancha	es	ES	
+autonomous_community	ES-CT	Catalunya [Cataluña]	ca	ES	
+autonomous_city_in_North_Africa	ES-CE	Ceuta	es	ES	
+province	ES-CR	Ciudad Real	es	ES	ES-CM
+province	ES-CU	Cuenca	es	ES	ES-CM
+province	ES-CC	Cáceres	es	ES	ES-EX
+province	ES-CA	Cádiz	es	ES	ES-AN
+province	ES-CO	Córdoba	es	ES	ES-AN
+autonomous_community	ES-PV	Euskal Herria	eu	ES	
+autonomous_community	ES-EX	Extremadura	es	ES	
+autonomous_community	ES-GA	Galicia [Galicia]	gl	ES	
+province	ES-SS	Gipuzkoa	eu	ES	ES-PV
+province	ES-GI	Girona [Gerona]	ca	ES	ES-CT
+province	ES-GR	Granada	es	ES	ES-AN
+province	ES-GU	Guadalajara	es	ES	ES-CM
+province	ES-H	Huelva	es	ES	ES-AN
+province	ES-HU	Huesca	es	ES	ES-AR
+autonomous_community	ES-IB	Illes Balears [Islas Baleares]	ca	ES	
+province	ES-J	Jaén	es	ES	ES-AN
+autonomous_community	ES-RI	La Rioja	es	ES	
+province	ES-LO	La Rioja	es	ES	ES-RI
+province	ES-GC	Las Palmas	es	ES	ES-CN
+province	ES-LE	León	es	ES	ES-CL
+province	ES-L	Lleida [Lérida]	ca	ES	ES-CT
+province	ES-LU	Lugo [Lugo]	gl	ES	ES-GA
+province	ES-M	Madrid	es	ES	ES-MD
+autonomous_community	ES-MD	Madrid, Comunidad de	es	ES	
+autonomous_city_in_North_Africa	ES-ML	Melilla	es	ES	
+province	ES-MU	Murcia	es	ES	ES-MC
+autonomous_community	ES-MC	Murcia, Región de	es	ES	
+province	ES-MA	Málaga	es	ES	ES-AN
+province	ES-NA	Nafarroa	eu	ES	ES-NC
+autonomous_community	ES-NC	Nafarroako Foru Komunitatea	eu	ES	
+province	ES-NA	Navarra	es	ES	ES-NC
+autonomous_community	ES-NC	Navarra, Comunidad Foral de	es	ES	
+province	ES-OR	Ourense [Orense]	gl	ES	ES-GA
+province	ES-P	Palencia	es	ES	ES-CL
+autonomous_community	ES-PV	País Vasco	es	ES	
+province	ES-PO	Pontevedra [Pontevedra]	gl	ES	ES-GA
+province	ES-SA	Salamanca	es	ES	ES-CL
+province	ES-TF	Santa Cruz de Tenerife	es	ES	ES-CN
+province	ES-SG	Segovia	es	ES	ES-CL
+province	ES-SE	Sevilla	es	ES	ES-AN
+province	ES-SO	Soria	es	ES	ES-CL
+province	ES-T	Tarragona [Tarragona]	ca	ES	ES-CT
+province	ES-TE	Teruel	es	ES	ES-AR
+province	ES-TO	Toledo	es	ES	ES-CM
+province	ES-V	Valencia	es	ES	ES-VC
+autonomous_community	ES-VC	Valenciana, Comunidad	es	ES	
+autonomous_community	ES-VC	Valenciana, Comunitat	ca	ES	
+province	ES-VA	Valladolid	es	ES	ES-CL
+province	ES-V	València	ca	ES	ES-VC
+province	ES-ZA	Zamora	es	ES	ES-CL
+province	ES-Z	Zaragoza	es	ES	ES-AR
+province	ES-VI	Álava	es	ES	ES-PV
+province	ES-AV	Ávila	es	ES	ES-CL
+Land	DE-BW	Baden-Württemberg	de	DE	
+Land	DE-BY	Bayern	de	DE	
+Land	DE-BE	Berlin	de	DE	
+Land	DE-BB	Brandenburg	de	DE	
+Land	DE-HB	Bremen	de	DE	
+Land	DE-HH	Hamburg	de	DE	
+Land	DE-HE	Hessen	de	DE	
+Land	DE-MV	Mecklenburg-Vorpommern	de	DE	
+Land	DE-NI	Niedersachsen	de	DE	
+Land	DE-NW	Nordrhein-Westfalen	de	DE	
+Land	DE-RP	Rheinland-Pfalz	de	DE	
+Land	DE-SL	Saarland	de	DE	
+Land	DE-SN	Sachsen	de	DE	
+Land	DE-ST	Sachsen-Anhalt	de	DE	
+Land	DE-SH	Schleswig-Holstein	de	DE	
+Land	DE-TH	Thüringen	de	DE	
+council_area	GB-ABE	Aberdeen City	en	GB	GB-SCT
+council_area	GB-ABD	Aberdeenshire	en	GB	GB-SCT
+council_area	GB-ANS	Angus	en	GB	GB-SCT
+district	GB-ANN	Antrim and Newtownabbey	en	GB	GB-NIR
+district	GB-AND	Ards and North Down	en	GB	GB-NIR
+council_area	GB-AGB	Argyll and Bute	en	GB	GB-SCT
+district	GB-ABC	Armagh, Banbridge and Craigavon	en	GB	GB-NIR
+London_borough	GB-BDG	Barking and Dagenham	en	GB	GB-ENG
+London_borough	GB-BNE	Barnet	en	GB	GB-ENG
+metropolitan_district	GB-BNS	Barnsley	en	GB	GB-ENG
+unitary_authority	GB-BAS	Bath and North East Somerset	en	GB	GB-ENG
+unitary_authority	GB-BDF	Bedford	en	GB	GB-ENG
+district	GB-BFS	Belfast	en	GB	GB-NIR
+London_borough	GB-BEX	Bexley	en	GB	GB-ENG
+metropolitan_district	GB-BIR	Birmingham	en	GB	GB-ENG
+unitary_authority	GB-BBD	Blackburn with Darwen	en	GB	GB-ENG
+unitary_authority	GB-BPL	Blackpool	en	GB	GB-ENG
+unitary_authority	GB-BGW	Blaenau Gwent	en	GB	GB-WLS
+metropolitan_district	GB-BOL	Bolton	en	GB	GB-ENG
+unitary_authority	GB-BMH	Bournemouth	en	GB	GB-ENG
+unitary_authority	GB-BRC	Bracknell Forest	en	GB	GB-ENG
+metropolitan_district	GB-BRD	Bradford	en	GB	GB-ENG
+London_borough	GB-BEN	Brent	en	GB	GB-ENG
+unitary_authority	GB-BGE	Bridgend [Pen-y-bont ar Ogwr GB-POG]	en	GB	GB-WLS
+unitary_authority	GB-BNH	Brighton and Hove	en	GB	GB-ENG
+unitary_authority	GB-BST	Bristol, City of	en	GB	GB-ENG
+London_borough	GB-BRY	Bromley	en	GB	GB-ENG
+two_tier_county	GB-BKM	Buckinghamshire	en	GB	GB-ENG
+metropolitan_district	GB-BUR	Bury	en	GB	GB-ENG
+unitary_authority	GB-CAY	Caerphilly [Caerffili GB-CAF]	en	GB	GB-WLS
+metropolitan_district	GB-CLD	Calderdale	en	GB	GB-ENG
+two_tier_county	GB-CAM	Cambridgeshire	en	GB	GB-ENG
+London_borough	GB-CMD	Camden	en	GB	GB-ENG
+unitary_authority	GB-CRF	Cardiff [Caerdydd GB-CRD]	en	GB	GB-WLS
+unitary_authority	GB-CMN	Carmarthenshire [Sir Gaerfyrddin GB-GFY]	en	GB	GB-WLS
+district	GB-CCG	Causeway Coast and Glens	en	GB	GB-NIR
+unitary_authority	GB-CBF	Central Bedfordshire	en	GB	GB-ENG
+unitary_authority	GB-CGN	Ceredigion [Sir Ceredigion]	en	GB	GB-WLS
+unitary_authority	GB-CHE	Cheshire East	en	GB	GB-ENG
+unitary_authority	GB-CHW	Cheshire West and Chester	en	GB	GB-ENG
+council_area	GB-CLK	Clackmannanshire	en	GB	GB-SCT
+unitary_authority	GB-CWY	Conwy	en	GB	GB-WLS
+unitary_authority	GB-CON	Cornwall	en	GB	GB-ENG
+metropolitan_district	GB-COV	Coventry	en	GB	GB-ENG
+London_borough	GB-CRY	Croydon	en	GB	GB-ENG
+two_tier_county	GB-CMA	Cumbria	en	GB	GB-ENG
+unitary_authority	GB-DAL	Darlington	en	GB	GB-ENG
+unitary_authority	GB-DEN	Denbighshire [Sir Ddinbych GB-DDB]	en	GB	GB-WLS
+unitary_authority	GB-DER	Derby	en	GB	GB-ENG
+two_tier_county	GB-DBY	Derbyshire	en	GB	GB-ENG
+district	GB-DRS	Derry and Strabane	en	GB	GB-NIR
+two_tier_county	GB-DEV	Devon	en	GB	GB-ENG
+metropolitan_district	GB-DNC	Doncaster	en	GB	GB-ENG
+two_tier_county	GB-DOR	Dorset	en	GB	GB-ENG
+metropolitan_district	GB-DUD	Dudley	en	GB	GB-ENG
+council_area	GB-DGY	Dumfries and Galloway	en	GB	GB-SCT
+council_area	GB-DND	Dundee City	en	GB	GB-SCT
+unitary_authority	GB-DUR	Durham County	en	GB	GB-ENG
+London_borough	GB-EAL	Ealing	en	GB	GB-ENG
+council_area	GB-EAY	East Ayrshire	en	GB	GB-SCT
+council_area	GB-EDU	East Dunbartonshire	en	GB	GB-SCT
+council_area	GB-ELN	East Lothian	en	GB	GB-SCT
+council_area	GB-ERW	East Renfrewshire	en	GB	GB-SCT
+unitary_authority	GB-ERY	East Riding of Yorkshire	en	GB	GB-ENG
+two_tier_county	GB-ESX	East Sussex	en	GB	GB-ENG
+council_area	GB-EDH	Edinburgh, City of	en	GB	GB-SCT
+council_area	GB-ELS	Eilean Siar	en	GB	GB-SCT
+London_borough	GB-ENF	Enfield	en	GB	GB-ENG
+country	GB-ENG	England	en	GB	
+nation	GB-EAW	England and Wales	en	GB	
+two_tier_county	GB-ESS	Essex	en	GB	GB-ENG
+council_area	GB-FAL	Falkirk	en	GB	GB-SCT
+district	GB-FMO	Fermanagh and Omagh	en	GB	GB-NIR
+council_area	GB-FIF	Fife	en	GB	GB-SCT
+unitary_authority	GB-FLN	Flintshire [Sir y Fflint GB-FFL]	en	GB	GB-WLS
+metropolitan_district	GB-GAT	Gateshead	en	GB	GB-ENG
+council_area	GB-GLG	Glasgow City	en	GB	GB-SCT
+two_tier_county	GB-GLS	Gloucestershire	en	GB	GB-ENG
+nation	GB-GBN	Great Britain	en	GB	
+London_borough	GB-GRE	Greenwich	en	GB	GB-ENG
+unitary_authority	GB-GWN	Gwynedd	en	GB	GB-WLS
+London_borough	GB-HCK	Hackney	en	GB	GB-ENG
+unitary_authority	GB-HAL	Halton	en	GB	GB-ENG
+London_borough	GB-HMF	Hammersmith and Fulham	en	GB	GB-ENG
+two_tier_county	GB-HAM	Hampshire	en	GB	GB-ENG
+London_borough	GB-HRY	Haringey	en	GB	GB-ENG
+London_borough	GB-HRW	Harrow	en	GB	GB-ENG
+unitary_authority	GB-HPL	Hartlepool	en	GB	GB-ENG
+London_borough	GB-HAV	Havering	en	GB	GB-ENG
+unitary_authority	GB-HEF	Herefordshire	en	GB	GB-ENG
+two_tier_county	GB-HRT	Hertfordshire	en	GB	GB-ENG
+council_area	GB-HLD	Highland	en	GB	GB-SCT
+London_borough	GB-HIL	Hillingdon	en	GB	GB-ENG
+London_borough	GB-HNS	Hounslow	en	GB	GB-ENG
+council_area	GB-IVC	Inverclyde	en	GB	GB-SCT
+unitary_authority	GB-AGY	Isle of Anglesey [Sir Ynys Môn GB-YNM]	en	GB	GB-WLS
+unitary_authority	GB-IOW	Isle of Wight	en	GB	GB-ENG
+unitary_authority	GB-IOS	Isles of Scilly	en	GB	GB-ENG
+London_borough	GB-ISL	Islington	en	GB	GB-ENG
+London_borough	GB-KEC	Kensington and Chelsea	en	GB	GB-ENG
+two_tier_county	GB-KEN	Kent	en	GB	GB-ENG
+unitary_authority	GB-KHL	Kingston upon Hull	en	GB	GB-ENG
+London_borough	GB-KTT	Kingston upon Thames	en	GB	GB-ENG
+metropolitan_district	GB-KIR	Kirklees	en	GB	GB-ENG
+metropolitan_district	GB-KWL	Knowsley	en	GB	GB-ENG
+London_borough	GB-LBH	Lambeth	en	GB	GB-ENG
+two_tier_county	GB-LAN	Lancashire	en	GB	GB-ENG
+metropolitan_district	GB-LDS	Leeds	en	GB	GB-ENG
+unitary_authority	GB-LCE	Leicester	en	GB	GB-ENG
+two_tier_county	GB-LEC	Leicestershire	en	GB	GB-ENG
+London_borough	GB-LEW	Lewisham	en	GB	GB-ENG
+two_tier_county	GB-LIN	Lincolnshire	en	GB	GB-ENG
+district	GB-LBC	Lisburn and Castlereagh	en	GB	GB-NIR
+metropolitan_district	GB-LIV	Liverpool	en	GB	GB-ENG
+city_corporation	GB-LND	London, City of	en	GB	GB-ENG
+unitary_authority	GB-LUT	Luton	en	GB	GB-ENG
+metropolitan_district	GB-MAN	Manchester	en	GB	GB-ENG
+unitary_authority	GB-MDW	Medway	en	GB	GB-ENG
+unitary_authority	GB-MTY	Merthyr Tydfil [Merthyr Tudful GB-MTU]	en	GB	GB-WLS
+London_borough	GB-MRT	Merton	en	GB	GB-ENG
+district	GB-MUL	Mid Ulster	en	GB	GB-NIR
+district	GB-MEA	Mid and East Antrim	en	GB	GB-NIR
+unitary_authority	GB-MDB	Middlesbrough	en	GB	GB-ENG
+council_area	GB-MLN	Midlothian	en	GB	GB-SCT
+unitary_authority	GB-MIK	Milton Keynes	en	GB	GB-ENG
+unitary_authority	GB-MON	Monmouthshire [Sir Fynwy GB-FYN]	en	GB	GB-WLS
+council_area	GB-MRY	Moray	en	GB	GB-SCT
+unitary_authority	GB-NTL	Neath Port Talbot [Castell-nedd Port Talbot GB-CTL]	en	GB	GB-WLS
+metropolitan_district	GB-NET	Newcastle upon Tyne	en	GB	GB-ENG
+London_borough	GB-NWM	Newham	en	GB	GB-ENG
+unitary_authority	GB-NWP	Newport [Casnewydd GB-CNW]	en	GB	GB-WLS
+district	GB-NMD	Newry, Mourne and Down	en	GB	GB-NIR
+two_tier_county	GB-NFK	Norfolk	en	GB	GB-ENG
+council_area	GB-NAY	North Ayrshire	en	GB	GB-SCT
+unitary_authority	GB-NEL	North East Lincolnshire	en	GB	GB-ENG
+council_area	GB-NLK	North Lanarkshire	en	GB	GB-SCT
+unitary_authority	GB-NLN	North Lincolnshire	en	GB	GB-ENG
+unitary_authority	GB-NSM	North Somerset	en	GB	GB-ENG
+metropolitan_district	GB-NTY	North Tyneside	en	GB	GB-ENG
+two_tier_county	GB-NYK	North Yorkshire	en	GB	GB-ENG
+two_tier_county	GB-NTH	Northamptonshire	en	GB	GB-ENG
+province	GB-NIR	Northern Ireland	en	GB	
+unitary_authority	GB-NBL	Northumberland	en	GB	GB-ENG
+unitary_authority	GB-NGM	Nottingham	en	GB	GB-ENG
+two_tier_county	GB-NTT	Nottinghamshire	en	GB	GB-ENG
+metropolitan_district	GB-OLD	Oldham	en	GB	GB-ENG
+council_area	GB-ORK	Orkney Islands	en	GB	GB-SCT
+two_tier_county	GB-OXF	Oxfordshire	en	GB	GB-ENG
+unitary_authority	GB-PEM	Pembrokeshire [Sir Benfro GB-BNF]	en	GB	GB-WLS
+council_area	GB-PKN	Perth and Kinross	en	GB	GB-SCT
+unitary_authority	GB-PTE	Peterborough	en	GB	GB-ENG
+unitary_authority	GB-PLY	Plymouth	en	GB	GB-ENG
+unitary_authority	GB-POL	Poole	en	GB	GB-ENG
+unitary_authority	GB-POR	Portsmouth	en	GB	GB-ENG
+unitary_authority	GB-POW	Powys	en	GB	GB-WLS
+unitary_authority	GB-RDG	Reading	en	GB	GB-ENG
+London_borough	GB-RDB	Redbridge	en	GB	GB-ENG
+unitary_authority	GB-RCC	Redcar and Cleveland	en	GB	GB-ENG
+council_area	GB-RFW	Renfrewshire	en	GB	GB-SCT
+unitary_authority	GB-RCT	Rhondda, Cynon, Taff [Rhondda, Cynon,Taf]	en	GB	GB-WLS
+London_borough	GB-RIC	Richmond upon Thames	en	GB	GB-ENG
+metropolitan_district	GB-RCH	Rochdale	en	GB	GB-ENG
+metropolitan_district	GB-ROT	Rotherham	en	GB	GB-ENG
+unitary_authority	GB-RUT	Rutland	en	GB	GB-ENG
+metropolitan_district	GB-SLF	Salford	en	GB	GB-ENG
+metropolitan_district	GB-SAW	Sandwell	en	GB	GB-ENG
+country	GB-SCT	Scotland	en	GB	
+council_area	GB-SCB	Scottish Borders, The	en	GB	GB-SCT
+metropolitan_district	GB-SFT	Sefton	en	GB	GB-ENG
+metropolitan_district	GB-SHF	Sheffield	en	GB	GB-ENG
+council_area	GB-ZET	Shetland Islands	en	GB	GB-SCT
+unitary_authority	GB-SHR	Shropshire	en	GB	GB-ENG
+unitary_authority	GB-SLG	Slough	en	GB	GB-ENG
+metropolitan_district	GB-SOL	Solihull	en	GB	GB-ENG
+two_tier_county	GB-SOM	Somerset	en	GB	GB-ENG
+council_area	GB-SAY	South Ayrshire	en	GB	GB-SCT
+unitary_authority	GB-SGC	South Gloucestershire	en	GB	GB-ENG
+council_area	GB-SLK	South Lanarkshire	en	GB	GB-SCT
+metropolitan_district	GB-STY	South Tyneside	en	GB	GB-ENG
+unitary_authority	GB-STH	Southampton	en	GB	GB-ENG
+unitary_authority	GB-SOS	Southend-on-Sea	en	GB	GB-ENG
+London_borough	GB-SWK	Southwark	en	GB	GB-ENG
+metropolitan_district	GB-SHN	St. Helens	en	GB	GB-ENG
+two_tier_county	GB-STS	Staffordshire	en	GB	GB-ENG
+council_area	GB-STG	Stirling	en	GB	GB-SCT
+metropolitan_district	GB-SKP	Stockport	en	GB	GB-ENG
+unitary_authority	GB-STT	Stockton-on-Tees	en	GB	GB-ENG
+unitary_authority	GB-STE	Stoke-on-Trent	en	GB	GB-ENG
+two_tier_county	GB-SFK	Suffolk	en	GB	GB-ENG
+metropolitan_district	GB-SND	Sunderland	en	GB	GB-ENG
+two_tier_county	GB-SRY	Surrey	en	GB	GB-ENG
+London_borough	GB-STN	Sutton	en	GB	GB-ENG
+unitary_authority	GB-SWA	Swansea [Abertawe GB-ATA]	en	GB	GB-WLS
+unitary_authority	GB-SWD	Swindon	en	GB	GB-ENG
+metropolitan_district	GB-TAM	Tameside	en	GB	GB-ENG
+unitary_authority	GB-TFW	Telford and Wrekin	en	GB	GB-ENG
+unitary_authority	GB-THR	Thurrock	en	GB	GB-ENG
+unitary_authority	GB-TOB	Torbay	en	GB	GB-ENG
+unitary_authority	GB-TOF	Torfaen [Tor-faen]	en	GB	GB-WLS
+London_borough	GB-TWH	Tower Hamlets	en	GB	GB-ENG
+metropolitan_district	GB-TRF	Trafford	en	GB	GB-ENG
+nation	GB-UKM	United Kingdom	en	GB	
+unitary_authority	GB-VGL	Vale of Glamorgan, The [Bro Morgannwg GB-BMG]	en	GB	GB-WLS
+metropolitan_district	GB-WKF	Wakefield	en	GB	GB-ENG
+country	GB-WLS	Wales [Cymru GB-CYM]	en	GB	
+metropolitan_district	GB-WLL	Walsall	en	GB	GB-ENG
+London_borough	GB-WFT	Waltham Forest	en	GB	GB-ENG
+London_borough	GB-WND	Wandsworth	en	GB	GB-ENG
+unitary_authority	GB-WRT	Warrington	en	GB	GB-ENG
+two_tier_county	GB-WAR	Warwickshire	en	GB	GB-ENG
+unitary_authority	GB-WBK	West Berkshire	en	GB	GB-ENG
+council_area	GB-WDU	West Dunbartonshire	en	GB	GB-SCT
+council_area	GB-WLN	West Lothian	en	GB	GB-SCT
+two_tier_county	GB-WSX	West Sussex	en	GB	GB-ENG
+London_borough	GB-WSM	Westminster	en	GB	GB-ENG
+metropolitan_district	GB-WGN	Wigan	en	GB	GB-ENG
+unitary_authority	GB-WIL	Wiltshire	en	GB	GB-ENG
+unitary_authority	GB-WNM	Windsor and Maidenhead	en	GB	GB-ENG
+metropolitan_district	GB-WRL	Wirral	en	GB	GB-ENG
+unitary_authority	GB-WOK	Wokingham	en	GB	GB-ENG
+metropolitan_district	GB-WLV	Wolverhampton	en	GB	GB-ENG
+two_tier_county	GB-WOR	Worcestershire	en	GB	GB-ENG
+unitary_authority	GB-WRX	Wrexham [Wrecsam GB-WRC]	en	GB	GB-WLS
+unitary_authority	GB-YOR	York	en	GB	GB-ENG
+region	IT-65	Abruzzo	it	IT	
+free_communal_consortia	IT-AG	Agrigento	it	IT	IT-82
+province	IT-AL	Alessandria	it	IT	IT-21
+province	IT-AN	Ancona	it	IT	IT-57
+province	IT-AO	Aosta	it	IT	IT-23
+province	IT-AO	Aoste	fr	IT	IT-23
+province	IT-AR	Arezzo	it	IT	IT-52
+province	IT-AP	Ascoli Piceno	it	IT	IT-57
+province	IT-AT	Asti	it	IT	IT-21
+province	IT-AV	Avellino	it	IT	IT-72
+metropolitan_city	IT-BA	Bari	it	IT	IT-75
+province	IT-BT	Barletta-Andria-Trani	it	IT	IT-75
+region	IT-77	Basilicata	it	IT	
+province	IT-BL	Belluno	it	IT	IT-34
+province	IT-BN	Benevento	it	IT	IT-72
+province	IT-BG	Bergamo	it	IT	IT-25
+province	IT-BI	Biella	it	IT	IT-21
+metropolitan_city	IT-BO	Bologna	it	IT	IT-45
+province	IT-BZ	Bolzano	it	IT	IT-32
+province	IT-BZ	Bozen	de	IT	IT-32
+province	IT-BS	Brescia	it	IT	IT-25
+province	IT-BR	Brindisi	it	IT	IT-75
+metropolitan_city	IT-CA	Cagliari	it	IT	IT-88
+region	IT-78	Calabria	it	IT	
+free_communal_consortia	IT-CL	Caltanissetta	it	IT	IT-82
+region	IT-72	Campania	it	IT	
+province	IT-CB	Campobasso	it	IT	IT-67
+province	IT-CE	Caserta	it	IT	IT-72
+metropolitan_city	IT-CT	Catania	it	IT	IT-82
+province	IT-CZ	Catanzaro	it	IT	IT-78
+province	IT-CH	Chieti	it	IT	IT-65
+province	IT-CO	Como	it	IT	IT-25
+province	IT-CS	Cosenza	it	IT	IT-78
+province	IT-CR	Cremona	it	IT	IT-25
+province	IT-KR	Crotone	it	IT	IT-78
+province	IT-CN	Cuneo	it	IT	IT-21
+region	IT-45	Emilia-Romagna	it	IT	
+free_communal_consortia	IT-EN	Enna	it	IT	IT-82
+province	IT-FM	Fermo	it	IT	IT-57
+province	IT-FE	Ferrara	it	IT	IT-45
+metropolitan_city	IT-FI	Firenze	it	IT	IT-52
+province	IT-FG	Foggia	it	IT	IT-75
+province	IT-FC	Forlì-Cesena	it	IT	IT-45
+region	IT-36	Friuli-Venezia Giulia	it	IT	
+province	IT-FR	Frosinone	it	IT	IT-62
+metropolitan_city	IT-GE	Genova	it	IT	IT-42
+province	IT-GR	Grosseto	it	IT	IT-52
+province	IT-IM	Imperia	it	IT	IT-42
+province	IT-IS	Isernia	it	IT	IT-67
+province	IT-AQ	L'Aquila	it	IT	IT-65
+province	IT-SP	La Spezia	it	IT	IT-42
+province	IT-LT	Latina	it	IT	IT-62
+region	IT-62	Lazio	it	IT	
+province	IT-LE	Lecce	it	IT	IT-75
+province	IT-LC	Lecco	it	IT	IT-25
+region	IT-42	Liguria	it	IT	
+province	IT-LI	Livorno	it	IT	IT-52
+province	IT-LO	Lodi	it	IT	IT-25
+region	IT-25	Lombardia	it	IT	
+province	IT-LU	Lucca	it	IT	IT-52
+province	IT-MC	Macerata	it	IT	IT-57
+province	IT-MN	Mantova	it	IT	IT-25
+region	IT-57	Marche	it	IT	
+province	IT-MS	Massa-Carrara	it	IT	IT-52
+province	IT-MT	Matera	it	IT	IT-77
+metropolitan_city	IT-ME	Messina	it	IT	IT-82
+metropolitan_city	IT-MI	Milano	it	IT	IT-25
+province	IT-MO	Modena	it	IT	IT-45
+region	IT-67	Molise	it	IT	
+province	IT-MB	Monza e Brianza	it	IT	IT-25
+metropolitan_city	IT-NA	Napoli	it	IT	IT-72
+province	IT-NO	Novara	it	IT	IT-21
+province	IT-NU	Nuoro	it	IT	IT-88
+province	IT-OR	Oristano	it	IT	IT-88
+province	IT-PD	Padova	it	IT	IT-34
+metropolitan_city	IT-PA	Palermo	it	IT	IT-82
+province	IT-PR	Parma	it	IT	IT-45
+province	IT-PV	Pavia	it	IT	IT-25
+province	IT-PG	Perugia	it	IT	IT-55
+province	IT-PU	Pesaro e Urbino	it	IT	IT-57
+province	IT-PE	Pescara	it	IT	IT-65
+province	IT-PC	Piacenza	it	IT	IT-45
+region	IT-21	Piemonte	it	IT	
+province	IT-PI	Pisa	it	IT	IT-52
+province	IT-PT	Pistoia	it	IT	IT-52
+province	IT-PZ	Potenza	it	IT	IT-77
+province	IT-PO	Prato	it	IT	IT-52
+region	IT-75	Puglia	it	IT	
+free_communal_consortia	IT-RG	Ragusa	it	IT	IT-82
+province	IT-RA	Ravenna	it	IT	IT-45
+metropolitan_city	IT-RC	Reggio Calabria	it	IT	IT-78
+province	IT-RE	Reggio Emilia	it	IT	IT-45
+province	IT-RI	Rieti	it	IT	IT-62
+province	IT-RN	Rimini	it	IT	IT-45
+metropolitan_city	IT-RM	Roma	it	IT	IT-62
+province	IT-RO	Rovigo	it	IT	IT-34
+province	IT-SA	Salerno	it	IT	IT-72
+region	IT-88	Sardegna	it	IT	
+province	IT-SS	Sassari	it	IT	IT-88
+province	IT-SV	Savona	it	IT	IT-42
+region	IT-82	Sicilia	it	IT	
+province	IT-SI	Siena	it	IT	IT-52
+free_communal_consortia	IT-SR	Siracusa	it	IT	IT-82
+province	IT-SO	Sondrio	it	IT	IT-25
+province	IT-SD	Sud Sardegna	it	IT	IT-88
+province	IT-TA	Taranto	it	IT	IT-75
+province	IT-TE	Teramo	it	IT	IT-65
+province	IT-TR	Terni	it	IT	IT-55
+metropolitan_city	IT-TO	Torino	it	IT	IT-21
+region	IT-52	Toscana	it	IT	
+free_communal_consortia	IT-TP	Trapani	it	IT	IT-82
+region	IT-32	Trentino-Alto Adige	it	IT	
+region	IT-32	Trentino-Südtirol	de	IT	
+province	IT-TN	Trento	it	IT	IT-32
+province	IT-TV	Treviso	it	IT	IT-34
+region	IT-55	Umbria	it	IT	
+region	IT-23	Val d'Aoste	fr	IT	
+region	IT-23	Valle d'Aosta	it	IT	
+province	IT-VA	Varese	it	IT	IT-25
+region	IT-34	Veneto	it	IT	
+metropolitan_city	IT-VE	Venezia	it	IT	IT-34
+province	IT-VB	Verbano-Cusio-Ossola	it	IT	IT-21
+province	IT-VC	Vercelli	it	IT	IT-21
+province	IT-VR	Verona	it	IT	IT-34
+province	IT-VV	Vibo Valentia	it	IT	IT-78
+province	IT-VI	Vicenza	it	IT	IT-34
+province	IT-VT	Viterbo	it	IT	IT-62
+canton	CH-AG	Aargau	de	CH	
+canton	CH-AR	Appenzell Ausserrhoden	de	CH	
+canton	CH-AI	Appenzell Innerrhoden	de	CH	
+canton	CH-BL	Basel-Landschaft	de	CH	
+canton	CH-BS	Basel-Stadt	de	CH	
+canton	CH-BE	Bern	de	CH	
+canton	CH-BE	Berne	fr	CH	
+canton	CH-FR	Freiburg	de	CH	
+canton	CH-FR	Fribourg	fr	CH	
+canton	CH-GE	Genève	fr	CH	
+canton	CH-GL	Glarus	de	CH	
+canton	CH-GR	Graubünden	de	CH	
+canton	CH-GR	Grigioni	it	CH	
+canton	CH-GR	Grischun	rm	CH	
+canton	CH-GR	Grisons	fr	CH	
+canton	CH-JU	Jura	fr	CH	
+canton	CH-LU	Luzern	de	CH	
+canton	CH-NE	Neuchâtel	fr	CH	
+canton	CH-NW	Nidwalden	de	CH	
+canton	CH-OW	Obwalden	de	CH	
+canton	CH-SG	Sankt Gallen	de	CH	
+canton	CH-SH	Schaffhausen	de	CH	
+canton	CH-SZ	Schwyz	de	CH	
+canton	CH-SO	Solothurn	de	CH	
+canton	CH-TG	Thurgau	de	CH	
+canton	CH-TI	Ticino	it	CH	
+canton	CH-UR	Uri	de	CH	
+canton	CH-VS	Valais	fr	CH	
+canton	CH-VD	Vaud	fr	CH	
+canton	CH-VS	Wallis	de	CH	
+canton	CH-ZG	Zug	de	CH	
+canton	CH-ZH	Zürich	de	CH	
+province	BE-VAN	Antwerpen	nl		BE-VLG
+province	BE-WBR	Brabant wallon	fr		BE-WAL
+region	BE-BRU	Brussels Hoofdstedelijk Gewest	nl		
+region	BE-BRU	Bruxelles-Capitale, Région de	fr		
+province	BE-WHT	Hainaut	fr		BE-WAL
+province	BE-VLI	Limburg	nl		BE-VLG
+province	BE-WLG	Liège	fr		BE-WAL
+province	BE-WLX	Luxembourg	fr		BE-WAL
+province	BE-WNA	Namur	fr		BE-WAL
+province	BE-VOV	Oost-Vlaanderen	nl		BE-VLG
+region	BE-VLG	Vlaams Gewest	nl		
+province	BE-VBR	Vlaams-Brabant	nl		BE-VLG
+province	BE-VWV	West-Vlaanderen	nl		BE-VLG
+region	BE-WAL	wallonne, Région	fr		

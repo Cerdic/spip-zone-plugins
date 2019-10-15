@@ -44,6 +44,7 @@ function lire_source($service, $table) {
 	// Initialisations
 	$enregistrements = array();
 	$completer_enregistrement = "${table}_completer_enregistrement";
+	$fusionner_enregistrement = "${table}_fusionner_enregistrement";
 	$completer_table = "${table}_completer_table";
 	$source_identique = true;
 
@@ -60,7 +61,8 @@ function lire_source($service, $table) {
 	// Initialisation d'un élément de la table par défaut (uniquement les champs de base).
 	// Cela permet de s'assurer que chaque élément du tableau de sortie aura la même structure
 	// quelque soit les données lues dans la source.
-	$enregistrement_defaut = initialiser_enregistrement($table, $config['basic_fields']);
+	$config_unused = isset($config['unused_fields']) ? $config['unused_fields'] : array();
+	$enregistrement_defaut = initialiser_enregistrement($table, $config['basic_fields'], $config_unused);
 
 	// Récupération du contenu du fichier ou de la page HTML source et du sha associé. Pour les fichiers CSV
 	// on renvoie aussi la liste des titres des colonnes qui existe toujours.
@@ -106,7 +108,8 @@ function lire_source($service, $table) {
 					// On tri la clé primaire et on la transforme en chaine pour la tester et la stocker
 					ksort($cle_primaire);
 					$cle_primaire = implode(',', $cle_primaire);
-					if (!in_array($cle_primaire, $liste_cles_primaires)) {
+					$index_enregistrement = array_search($cle_primaire, $liste_cles_primaires);
+					if ($index_enregistrement === false) {
 						// On rajoute cette clé dans la liste
 						$liste_cles_primaires[] = $cle_primaire;
 
@@ -133,6 +136,13 @@ function lire_source($service, $table) {
 
 						// Ajout de l'enregistrement finalisé dans la liste.
 						$enregistrements[] = $enregistrement;
+					} elseif (function_exists($fusionner_enregistrement)) {
+						$enregistrements = $fusionner_enregistrement(
+							$enregistrements,
+							$index_enregistrement,
+							$enregistrement,
+							$config
+						);
 					} else {
 						spip_log("L'élément de clé primaire <${cle_primaire}> de la table <${table}> est en doublon", 'isocode' . _LOG_ERREUR);
 					}
@@ -177,13 +187,13 @@ function obtenir_cle_primaire($table) {
  *
  * @param string $table
  *      Nom de la table concernée par la lecture sans le préfixe `spip_`.
- * @param array  $config_champs
+ * @param array  $config_source
  *      Configuration de la correspondance entre le nom de la donnée dans la source
  *      et celui du champ dans la table.
  *
  * @return array
  */
-function initialiser_enregistrement($table, $config_champs) {
+function initialiser_enregistrement($table, $config_source, $config_unused = array()) {
 
 	$enregistrement = array();
 
@@ -193,7 +203,7 @@ function initialiser_enregistrement($table, $config_champs) {
 	$regexp_default = '/DEFAULT\s+\'(.*)\'/i';
 
 	if (!empty($description['field'])) {
-		foreach ($config_champs as $_champ) {
+		foreach ($config_source as $_champ) {
 			if (isset($description['field'][$_champ])) {
 				// On normalise la description du champ en supprimant les espaces inutiles
 				$description['field'][$_champ] = preg_replace('/\s2,/', ' ', $description['field'][$_champ]);
@@ -226,6 +236,10 @@ function initialiser_enregistrement($table, $config_champs) {
 					spip_log("La description du champ <${_champ}> de la table <${table}> est mal formée", 'isocode' . _LOG_ERREUR);
 					break;
 				}
+			} elseif (isset($config_unused[$_champ])) {
+				// Le champ appartient à la source mais n'est pas stocké en base. On l'initialise avec la valeur fournie
+				// par la configuration.
+				$enregistrement[$_champ] = $config_unused[$_champ];
 			} else {
 				// On a un problème de configuration: on le trace et on arrête la boucle.
 				// La table ne sera pas mise à jour.
