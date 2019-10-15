@@ -194,7 +194,7 @@ function roles_documents_pre_boucle($boucle) {
 		foreach ($boucle->criteres as $critere) {
 			if ($critere->type === 'critere') {
 				if (
-					(isset($critere->param[0][0]) and $critere->param[0][0]->texte === 'role')
+					(isset($critere->param[0][0]->texte) and $critere->param[0][0]->texte === 'role')
 					or ($critere->op === 'role')
 				) {
 					$utilise_critere_logo = true;

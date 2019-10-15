@@ -127,7 +127,8 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 			// On ajuste les rôles attribués (en faisant correspondre avec les rôles principaux)
 			if (isset($roles_principaux[$k])) {
 				array_push($roles_logos['attribues'], $roles_principaux[$k]);
-				unset($roles_logos['attribuables'], $roles_principaux[$k]);
+				unset($roles_principaux[$k]);
+				$roles_logos['attribuables'] = [];
 			}
 		}
 	}

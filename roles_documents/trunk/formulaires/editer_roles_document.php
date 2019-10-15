@@ -147,7 +147,8 @@ function formulaires_editer_roles_document_traiter_dist($id_document, $objet, $i
 function retrouver_action_role_document($action) {
 
 	$role = false;
-	$action = array_shift(array_flip($action));
+	$action = array_flip($action);
+	$action = array_shift($action);
 	if (is_array($arguments = explode('-', $action))
 		and count($arguments) === 5
 	) {
