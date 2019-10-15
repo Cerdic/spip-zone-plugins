@@ -1,7 +1,7 @@
 <paquet
 	prefix="isocode"
 	categorie="outil"
-	version="0.1.7"
+	version="0.2.0"
 	etat="dev"
 	compatibilite="[3.1.0;3.2.*]"
 	logo="isocode_logo-64.png"

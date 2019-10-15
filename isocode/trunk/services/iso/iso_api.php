@@ -184,7 +184,7 @@ $GLOBALS['isocode']['iso']['tables'] = array(
 		),
 		'populating'   => 'file_csv',
 		'delimiter'    => "\t",
-		'extension'    => '.txt',
+		'extension'    => '.tsv',
 	),
 	'iso4217currencies' => array(
 		'basic_fields' => array(
@@ -466,7 +466,7 @@ function iso3166subdivisions_fusionner_enregistrement($enregistrements, $index_e
 	// De fait, il suffit de compléter le champ label avec la traduction dans la langue de l'enregistrement coourant.
 	$label = $enregistrements[$index_enregistrement]['label'];
 	$enregistrements[$index_enregistrement]['label'] = '<multi>'
-		. extraire_balise($label, 'multi')
+		. str_replace(array('<multi>', '</multi>'), '', $label)
 		. "[{$enregistrement['language']}]"
 		. $enregistrement['label']
 		. '</multi>';

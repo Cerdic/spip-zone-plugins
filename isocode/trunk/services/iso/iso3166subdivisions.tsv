@@ -5,15 +5,15 @@ metropolitan_department	FR-03	Allier	fr	FR	FR-ARA
 metropolitan_department	FR-06	Alpes-Maritimes	fr	FR	FR-PAC
 metropolitan_department	FR-04	Alpes-de-Haute-Provence	fr	FR	FR-PAC
 metropolitan_department	FR-08	Ardennes	fr	FR	FR-GES
-metropolitan_department	FR-07	ArdËche	fr	FR	FR-ARA
-metropolitan_department	FR-09	AriËge	fr	FR	FR-OCC
+metropolitan_department	FR-07	Ard√®che	fr	FR	FR-ARA
+metropolitan_department	FR-09	Ari√®ge	fr	FR	FR-OCC
 metropolitan_department	FR-10	Aube	fr	FR	FR-GES
 metropolitan_department	FR-11	Aude	fr	FR	FR-OCC
-metropolitan_region	FR-ARA	Auvergne-RhÙne-Alpes	fr	FR	
+metropolitan_region	FR-ARA	Auvergne-Rh√¥ne-Alpes	fr	FR	
 metropolitan_department	FR-12	Aveyron	fr	FR	FR-OCC
 metropolitan_department	FR-67	Bas-Rhin	fr	FR	FR-GES
-metropolitan_department	FR-13	Bouches-du-RhÙne	fr	FR	FR-PAC
-metropolitan_region	FR-BFC	Bourgogne-Franche-ComtÈ	fr	FR	
+metropolitan_department	FR-13	Bouches-du-Rh√¥ne	fr	FR	FR-PAC
+metropolitan_region	FR-BFC	Bourgogne-Franche-Comt√©	fr	FR	
 metropolitan_region	FR-BRE	Bretagne	fr	FR	
 metropolitan_department	FR-14	Calvados	fr	FR	FR-NOR
 metropolitan_department	FR-15	Cantal	fr	FR	FR-ARA
@@ -22,47 +22,47 @@ metropolitan_department	FR-16	Charente	fr	FR	FR-NAQ
 metropolitan_department	FR-17	Charente-Maritime	fr	FR	FR-NAQ
 metropolitan_department	FR-18	Cher	fr	FR	FR-CVL
 dependency	FR-CP	Clipperton	fr	FR	
-metropolitan_department	FR-19	CorrËze	fr	FR	FR-NAQ
+metropolitan_department	FR-19	Corr√®ze	fr	FR	FR-NAQ
 collectivity	FR-COR	Corse	fr	FR	
 metropolitan_department	FR-2A	Corse-du-Sud	fr	FR	FR-COR
 metropolitan_department	FR-23	Creuse	fr	FR	FR-NAQ
-metropolitan_department	FR-21	CÙte-d'Or	fr	FR	FR-BFC
-metropolitan_department	FR-22	CÙtes-d'Armor	fr	FR	FR-BRE
-metropolitan_department	FR-79	Deux-SËvres	fr	FR	FR-NAQ
+metropolitan_department	FR-21	C√¥te-d'Or	fr	FR	FR-BFC
+metropolitan_department	FR-22	C√¥tes-d'Armor	fr	FR	FR-BRE
+metropolitan_department	FR-79	Deux-S√®vres	fr	FR	FR-NAQ
 metropolitan_department	FR-24	Dordogne	fr	FR	FR-NAQ
 metropolitan_department	FR-25	Doubs	fr	FR	FR-BFC
-metropolitan_department	FR-26	DrÙme	fr	FR	FR-ARA
+metropolitan_department	FR-26	Dr√¥me	fr	FR	FR-ARA
 metropolitan_department	FR-91	Essonne	fr	FR	FR-IDF
 metropolitan_department	FR-27	Eure	fr	FR	FR-NOR
 metropolitan_department	FR-28	Eure-et-Loir	fr	FR	FR-CVL
-metropolitan_department	FR-29	FinistËre	fr	FR	FR-BRE
+metropolitan_department	FR-29	Finist√®re	fr	FR	FR-BRE
 metropolitan_department	FR-30	Gard	fr	FR	FR-OCC
 metropolitan_department	FR-32	Gers	fr	FR	FR-OCC
 metropolitan_department	FR-33	Gironde	fr	FR	FR-NAQ
 metropolitan_region	FR-GES	Grand-Est	fr	FR	
 overseas_region	FR-GUA	Guadeloupe	fr	FR	
 overseas_department	FR-GP	Guadeloupe (see also separate country code entry under GP)	fr	FR	FR-GUA
-overseas_territorial_collectivity	FR-GF	Guyane (franÁaise) (see also separate country code entry under GF)	fr	FR	
+overseas_territorial_collectivity	FR-GF	Guyane (fran√ßaise) (see also separate country code entry under GF)	fr	FR	
 metropolitan_department	FR-68	Haut-Rhin	fr	FR	FR-GES
 metropolitan_department	FR-2B	Haute-Corse	fr	FR	FR-COR
 metropolitan_department	FR-31	Haute-Garonne	fr	FR	FR-OCC
 metropolitan_department	FR-43	Haute-Loire	fr	FR	FR-ARA
 metropolitan_department	FR-52	Haute-Marne	fr	FR	FR-GES
 metropolitan_department	FR-74	Haute-Savoie	fr	FR	FR-ARA
-metropolitan_department	FR-70	Haute-SaÙne	fr	FR	FR-BFC
+metropolitan_department	FR-70	Haute-Sa√¥ne	fr	FR	FR-BFC
 metropolitan_department	FR-87	Haute-Vienne	fr	FR	FR-NAQ
 metropolitan_department	FR-05	Hautes-Alpes	fr	FR	FR-PAC
-metropolitan_department	FR-65	Hautes-PyrÈnÈes	fr	FR	FR-OCC
+metropolitan_department	FR-65	Hautes-Pyr√©n√©es	fr	FR	FR-OCC
 metropolitan_region	FR-HDF	Hauts-de-France	fr	FR	
 metropolitan_department	FR-92	Hauts-de-Seine	fr	FR	FR-IDF
-metropolitan_department	FR-34	HÈrault	fr	FR	FR-OCC
+metropolitan_department	FR-34	H√©rault	fr	FR	FR-OCC
 metropolitan_department	FR-35	Ille-et-Vilaine	fr	FR	FR-BRE
 metropolitan_department	FR-36	Indre	fr	FR	FR-CVL
 metropolitan_department	FR-37	Indre-et-Loire	fr	FR	FR-CVL
-metropolitan_department	FR-38	IsËre	fr	FR	FR-ARA
+metropolitan_department	FR-38	Is√®re	fr	FR	FR-ARA
 metropolitan_department	FR-39	Jura	fr	FR	FR-BFC
-overseas_region	FR-LRE	La RÈunion	fr	FR	
-overseas_department	FR-RE	La RÈunion (see also separate country code entry under RE)	fr	FR	FR-LRE
+overseas_region	FR-LRE	La R√©union	fr	FR	
+overseas_department	FR-RE	La R√©union (see also separate country code entry under RE)	fr	FR	FR-LRE
 metropolitan_department	FR-40	Landes	fr	FR	FR-NAQ
 metropolitan_department	FR-41	Loir-et-Cher	fr	FR	FR-CVL
 metropolitan_department	FR-42	Loire	fr	FR	FR-ARA
@@ -70,7 +70,7 @@ metropolitan_department	FR-44	Loire-Atlantique	fr	FR	FR-PDL
 metropolitan_department	FR-45	Loiret	fr	FR	FR-CVL
 metropolitan_department	FR-46	Lot	fr	FR	FR-OCC
 metropolitan_department	FR-47	Lot-et-Garonne	fr	FR	FR-NAQ
-metropolitan_department	FR-48	LozËre	fr	FR	FR-OCC
+metropolitan_department	FR-48	Loz√®re	fr	FR	FR-OCC
 metropolitan_department	FR-49	Maine-et-Loire	fr	FR	FR-PDL
 metropolitan_department	FR-50	Manche	fr	FR	FR-NOR
 metropolitan_department	FR-51	Marne	fr	FR	FR-GES
@@ -82,56 +82,56 @@ metropolitan_department	FR-54	Meurthe-et-Moselle	fr	FR	FR-GES
 metropolitan_department	FR-55	Meuse	fr	FR	FR-GES
 metropolitan_department	FR-56	Morbihan	fr	FR	FR-BRE
 metropolitan_department	FR-57	Moselle	fr	FR	FR-GES
-metropolitan_department	FR-58	NiËvre	fr	FR	FR-BFC
+metropolitan_department	FR-58	Ni√®vre	fr	FR	FR-BFC
 metropolitan_department	FR-59	Nord	fr	FR	FR-HDF
 metropolitan_region	FR-NOR	Normandie	fr	FR	
 metropolitan_region	FR-NAQ	Nouvelle-Aquitaine	fr	FR	
-overseas_territorial_collectivity	FR-NC	Nouvelle-CalÈdonie (see also separate country code entry under NC)	fr	FR	
+overseas_territorial_collectivity	FR-NC	Nouvelle-Cal√©donie (see also separate country code entry under NC)	fr	FR	
 metropolitan_region	FR-OCC	Occitanie	fr	FR	
 metropolitan_department	FR-60	Oise	fr	FR	FR-HDF
 metropolitan_department	FR-61	Orne	fr	FR	FR-NOR
 metropolitan_department	FR-75	Paris	fr	FR	FR-IDF
 metropolitan_department	FR-62	Pas-de-Calais	fr	FR	FR-HDF
 metropolitan_region	FR-PDL	Pays-de-la-Loire	fr	FR	
-overseas_territorial_collectivity	FR-PF	PolynÈsie franÁaise (see also separate country code entry under PF)	fr	FR	
-metropolitan_region	FR-PAC	Provence-Alpes-CÙte-díAzur	fr	FR	
-metropolitan_department	FR-63	Puy-de-DÙme	fr	FR	FR-ARA
-metropolitan_department	FR-64	PyrÈnÈes-Atlantiques	fr	FR	FR-NAQ
-metropolitan_department	FR-66	PyrÈnÈes-Orientales	fr	FR	FR-OCC
-metropolitan_department	FR-69	RhÙne	fr	FR	FR-ARA
-overseas_territorial_collectivity	FR-BL	Saint-BarthÈlemy (see also separate country code entry under BL)	fr	FR	
+overseas_territorial_collectivity	FR-PF	Polyn√©sie fran√ßaise (see also separate country code entry under PF)	fr	FR	
+metropolitan_region	FR-PAC	Provence-Alpes-C√¥te-d‚ÄôAzur	fr	FR	
+metropolitan_department	FR-63	Puy-de-D√¥me	fr	FR	FR-ARA
+metropolitan_department	FR-64	Pyr√©n√©es-Atlantiques	fr	FR	FR-NAQ
+metropolitan_department	FR-66	Pyr√©n√©es-Orientales	fr	FR	FR-OCC
+metropolitan_department	FR-69	Rh√¥ne	fr	FR	FR-ARA
+overseas_territorial_collectivity	FR-BL	Saint-Barth√©lemy (see also separate country code entry under BL)	fr	FR	
 overseas_territorial_collectivity	FR-MF	Saint-Martin (see also separate country code entry under MF)	fr	FR	
 overseas_territorial_collectivity	FR-PM	Saint-Pierre-et-Miquelon (see also separate country code entry under PM)	fr	FR	
 metropolitan_department	FR-72	Sarthe	fr	FR	FR-PDL
 metropolitan_department	FR-73	Savoie	fr	FR	FR-ARA
-metropolitan_department	FR-71	SaÙne-et-Loire	fr	FR	FR-BFC
+metropolitan_department	FR-71	Sa√¥ne-et-Loire	fr	FR	FR-BFC
 metropolitan_department	FR-76	Seine-Maritime	fr	FR	FR-NOR
 metropolitan_department	FR-93	Seine-Saint-Denis	fr	FR	FR-IDF
 metropolitan_department	FR-77	Seine-et-Marne	fr	FR	FR-IDF
 metropolitan_department	FR-80	Somme	fr	FR	FR-HDF
 metropolitan_department	FR-81	Tarn	fr	FR	FR-OCC
 metropolitan_department	FR-82	Tarn-et-Garonne	fr	FR	FR-OCC
-overseas_territorial_collectivity	FR-TF	Terres australes franÁaises (see also separate country code entry under TF)	fr	FR	
+overseas_territorial_collectivity	FR-TF	Terres australes fran√ßaises (see also separate country code entry under TF)	fr	FR	
 metropolitan_department	FR-90	Territoire de Belfort	fr	FR	FR-BFC
 metropolitan_department	FR-95	Val-d'Oise	fr	FR	FR-IDF
 metropolitan_department	FR-94	Val-de-Marne	fr	FR	FR-IDF
 metropolitan_department	FR-83	Var	fr	FR	FR-PAC
 metropolitan_department	FR-84	Vaucluse	fr	FR	FR-PAC
-metropolitan_department	FR-85	VendÈe	fr	FR	FR-PDL
+metropolitan_department	FR-85	Vend√©e	fr	FR	FR-PDL
 metropolitan_department	FR-86	Vienne	fr	FR	FR-NAQ
 metropolitan_department	FR-88	Vosges	fr	FR	FR-GES
 overseas_territorial_collectivity	FR-WF	Wallis-et-Futuna (see also separate country code entry under WF)	fr	FR	
 metropolitan_department	FR-89	Yonne	fr	FR	FR-BFC
 metropolitan_department	FR-78	Yvelines	fr	FR	FR-IDF
-metropolitan_region	FR-IDF	Œle-de-France	fr	FR	
-province	ES-C	A CoruÒa [La CoruÒa]	gl	ES	ES-GA
+metropolitan_region	FR-IDF	√éle-de-France	fr	FR	
+province	ES-C	A Coru√±a [La Coru√±a]	gl	ES	ES-GA
 province	ES-A	Alacant	ca	ES	ES-VC
 province	ES-AB	Albacete	es	ES	ES-CM
 province	ES-A	Alicante	es	ES	ES-VC
-province	ES-AL	AlmerÌa	es	ES	ES-AN
-autonomous_community	ES-AN	AndalucÌa	es	ES	
+province	ES-AL	Almer√≠a	es	ES	ES-AN
+autonomous_community	ES-AN	Andaluc√≠a	es	ES	
 province	ES-VI	Araba	eu	ES	ES-PV
-autonomous_community	ES-AR	AragÛn	es	ES	
+autonomous_community	ES-AR	Arag√≥n	es	ES	
 province	ES-O	Asturias	es	ES	ES-AS
 autonomous_community	ES-AS	Asturias, Principado de	es	ES	
 province	ES-BA	Badajoz	es	ES	ES-EX
@@ -142,17 +142,17 @@ province	ES-BU	Burgos	es	ES	ES-CL
 autonomous_community	ES-CN	Canarias	es	ES	
 autonomous_community	ES-CB	Cantabria	es	ES	
 province	ES-S	Cantabria	es	ES	ES-CB
-province	ES-CS	CastellÛ	ca	ES	ES-VC
-province	ES-CS	CastellÛn	es	ES	ES-VC
-autonomous_community	ES-CL	Castilla y LeÛn	es	ES	
+province	ES-CS	Castell√≥	ca	ES	ES-VC
+province	ES-CS	Castell√≥n	es	ES	ES-VC
+autonomous_community	ES-CL	Castilla y Le√≥n	es	ES	
 autonomous_community	ES-CM	Castilla-La Mancha	es	ES	
-autonomous_community	ES-CT	Catalunya [CataluÒa]	ca	ES	
+autonomous_community	ES-CT	Catalunya [Catalu√±a]	ca	ES	
 autonomous_city_in_North_Africa	ES-CE	Ceuta	es	ES	
 province	ES-CR	Ciudad Real	es	ES	ES-CM
 province	ES-CU	Cuenca	es	ES	ES-CM
-province	ES-CC	C·ceres	es	ES	ES-EX
-province	ES-CA	C·diz	es	ES	ES-AN
-province	ES-CO	CÛrdoba	es	ES	ES-AN
+province	ES-CC	C√°ceres	es	ES	ES-EX
+province	ES-CA	C√°diz	es	ES	ES-AN
+province	ES-CO	C√≥rdoba	es	ES	ES-AN
 autonomous_community	ES-PV	Euskal Herria	eu	ES	
 autonomous_community	ES-EX	Extremadura	es	ES	
 autonomous_community	ES-GA	Galicia [Galicia]	gl	ES	
@@ -163,26 +163,26 @@ province	ES-GU	Guadalajara	es	ES	ES-CM
 province	ES-H	Huelva	es	ES	ES-AN
 province	ES-HU	Huesca	es	ES	ES-AR
 autonomous_community	ES-IB	Illes Balears [Islas Baleares]	ca	ES	
-province	ES-J	JaÈn	es	ES	ES-AN
+province	ES-J	Ja√©n	es	ES	ES-AN
 autonomous_community	ES-RI	La Rioja	es	ES	
 province	ES-LO	La Rioja	es	ES	ES-RI
 province	ES-GC	Las Palmas	es	ES	ES-CN
-province	ES-LE	LeÛn	es	ES	ES-CL
-province	ES-L	Lleida [LÈrida]	ca	ES	ES-CT
+province	ES-LE	Le√≥n	es	ES	ES-CL
+province	ES-L	Lleida [L√©rida]	ca	ES	ES-CT
 province	ES-LU	Lugo [Lugo]	gl	ES	ES-GA
 province	ES-M	Madrid	es	ES	ES-MD
 autonomous_community	ES-MD	Madrid, Comunidad de	es	ES	
 autonomous_city_in_North_Africa	ES-ML	Melilla	es	ES	
 province	ES-MU	Murcia	es	ES	ES-MC
-autonomous_community	ES-MC	Murcia, RegiÛn de	es	ES	
-province	ES-MA	M·laga	es	ES	ES-AN
+autonomous_community	ES-MC	Murcia, Regi√≥n de	es	ES	
+province	ES-MA	M√°laga	es	ES	ES-AN
 province	ES-NA	Nafarroa	eu	ES	ES-NC
 autonomous_community	ES-NC	Nafarroako Foru Komunitatea	eu	ES	
 province	ES-NA	Navarra	es	ES	ES-NC
 autonomous_community	ES-NC	Navarra, Comunidad Foral de	es	ES	
 province	ES-OR	Ourense [Orense]	gl	ES	ES-GA
 province	ES-P	Palencia	es	ES	ES-CL
-autonomous_community	ES-PV	PaÌs Vasco	es	ES	
+autonomous_community	ES-PV	Pa√≠s Vasco	es	ES	
 province	ES-PO	Pontevedra [Pontevedra]	gl	ES	ES-GA
 province	ES-SA	Salamanca	es	ES	ES-CL
 province	ES-TF	Santa Cruz de Tenerife	es	ES	ES-CN
@@ -196,12 +196,12 @@ province	ES-V	Valencia	es	ES	ES-VC
 autonomous_community	ES-VC	Valenciana, Comunidad	es	ES	
 autonomous_community	ES-VC	Valenciana, Comunitat	ca	ES	
 province	ES-VA	Valladolid	es	ES	ES-CL
-province	ES-V	ValËncia	ca	ES	ES-VC
+province	ES-V	Val√®ncia	ca	ES	ES-VC
 province	ES-ZA	Zamora	es	ES	ES-CL
 province	ES-Z	Zaragoza	es	ES	ES-AR
-province	ES-VI	¡lava	es	ES	ES-PV
-province	ES-AV	¡vila	es	ES	ES-CL
-Land	DE-BW	Baden-W¸rttemberg	de	DE	
+province	ES-VI	√Ålava	es	ES	ES-PV
+province	ES-AV	√Åvila	es	ES	ES-CL
+Land	DE-BW	Baden-W√ºrttemberg	de	DE	
 Land	DE-BY	Bayern	de	DE	
 Land	DE-BE	Berlin	de	DE	
 Land	DE-BB	Brandenburg	de	DE	
@@ -216,7 +216,7 @@ Land	DE-SL	Saarland	de	DE
 Land	DE-SN	Sachsen	de	DE	
 Land	DE-ST	Sachsen-Anhalt	de	DE	
 Land	DE-SH	Schleswig-Holstein	de	DE	
-Land	DE-TH	Th¸ringen	de	DE	
+Land	DE-TH	Th√ºringen	de	DE	
 council_area	GB-ABE	Aberdeen City	en	GB	GB-SCT
 council_area	GB-ABD	Aberdeenshire	en	GB	GB-SCT
 council_area	GB-ANS	Angus	en	GB	GB-SCT
@@ -312,7 +312,7 @@ council_area	GB-HLD	Highland	en	GB	GB-SCT
 London_borough	GB-HIL	Hillingdon	en	GB	GB-ENG
 London_borough	GB-HNS	Hounslow	en	GB	GB-ENG
 council_area	GB-IVC	Inverclyde	en	GB	GB-SCT
-unitary_authority	GB-AGY	Isle of Anglesey [Sir Ynys MÙn GB-YNM]	en	GB	GB-WLS
+unitary_authority	GB-AGY	Isle of Anglesey [Sir Ynys M√¥n GB-YNM]	en	GB	GB-WLS
 unitary_authority	GB-IOW	Isle of Wight	en	GB	GB-ENG
 unitary_authority	GB-IOS	Isles of Scilly	en	GB	GB-ENG
 London_borough	GB-ISL	Islington	en	GB	GB-ENG
@@ -483,7 +483,7 @@ province	IT-FM	Fermo	it	IT	IT-57
 province	IT-FE	Ferrara	it	IT	IT-45
 metropolitan_city	IT-FI	Firenze	it	IT	IT-52
 province	IT-FG	Foggia	it	IT	IT-75
-province	IT-FC	ForlÏ-Cesena	it	IT	IT-45
+province	IT-FC	Forl√¨-Cesena	it	IT	IT-45
 region	IT-36	Friuli-Venezia Giulia	it	IT	
 province	IT-FR	Frosinone	it	IT	IT-62
 metropolitan_city	IT-GE	Genova	it	IT	IT-42
@@ -553,7 +553,7 @@ metropolitan_city	IT-TO	Torino	it	IT	IT-21
 region	IT-52	Toscana	it	IT	
 free_communal_consortia	IT-TP	Trapani	it	IT	IT-82
 region	IT-32	Trentino-Alto Adige	it	IT	
-region	IT-32	Trentino-S¸dtirol	de	IT	
+region	IT-32	Trentino-S√ºdtirol	de	IT	
 province	IT-TN	Trento	it	IT	IT-32
 province	IT-TV	Treviso	it	IT	IT-34
 region	IT-55	Umbria	it	IT	
@@ -577,15 +577,15 @@ canton	CH-BE	Bern	de	CH
 canton	CH-BE	Berne	fr	CH	
 canton	CH-FR	Freiburg	de	CH	
 canton	CH-FR	Fribourg	fr	CH	
-canton	CH-GE	GenËve	fr	CH	
+canton	CH-GE	Gen√®ve	fr	CH	
 canton	CH-GL	Glarus	de	CH	
-canton	CH-GR	Graub¸nden	de	CH	
+canton	CH-GR	Graub√ºnden	de	CH	
 canton	CH-GR	Grigioni	it	CH	
 canton	CH-GR	Grischun	rm	CH	
 canton	CH-GR	Grisons	fr	CH	
 canton	CH-JU	Jura	fr	CH	
 canton	CH-LU	Luzern	de	CH	
-canton	CH-NE	Neuch‚tel	fr	CH	
+canton	CH-NE	Neuch√¢tel	fr	CH	
 canton	CH-NW	Nidwalden	de	CH	
 canton	CH-OW	Obwalden	de	CH	
 canton	CH-SG	Sankt Gallen	de	CH	
@@ -599,18 +599,18 @@ canton	CH-VS	Valais	fr	CH
 canton	CH-VD	Vaud	fr	CH	
 canton	CH-VS	Wallis	de	CH	
 canton	CH-ZG	Zug	de	CH	
-canton	CH-ZH	Z¸rich	de	CH	
-province	BE-VAN	Antwerpen	nl		BE-VLG
-province	BE-WBR	Brabant wallon	fr		BE-WAL
-region	BE-BRU	Brussels Hoofdstedelijk Gewest	nl		
-region	BE-BRU	Bruxelles-Capitale, RÈgion de	fr		
-province	BE-WHT	Hainaut	fr		BE-WAL
-province	BE-VLI	Limburg	nl		BE-VLG
-province	BE-WLG	LiËge	fr		BE-WAL
-province	BE-WLX	Luxembourg	fr		BE-WAL
-province	BE-WNA	Namur	fr		BE-WAL
-province	BE-VOV	Oost-Vlaanderen	nl		BE-VLG
-region	BE-VLG	Vlaams Gewest	nl		
-province	BE-VBR	Vlaams-Brabant	nl		BE-VLG
-province	BE-VWV	West-Vlaanderen	nl		BE-VLG
-region	BE-WAL	wallonne, RÈgion	fr		
+canton	CH-ZH	Z√ºrich	de	CH	
+province	BE-VAN	Antwerpen	nl	BE	BE-VLG
+province	BE-WBR	Brabant wallon	fr	BE	BE-WAL
+region	BE-BRU	Brussels Hoofdstedelijk Gewest	nl	BE	
+region	BE-BRU	Bruxelles-Capitale, R√©gion de	fr	BE	
+province	BE-WHT	Hainaut	fr	BE	BE-WAL
+province	BE-VLI	Limburg	nl	BE	BE-VLG
+province	BE-WLG	Li√®ge	fr	BE	BE-WAL
+province	BE-WLX	Luxembourg	fr	BE	BE-WAL
+province	BE-WNA	Namur	fr	BE	BE-WAL
+province	BE-VOV	Oost-Vlaanderen	nl	BE	BE-VLG
+region	BE-VLG	Vlaams Gewest	nl	BE	
+province	BE-VBR	Vlaams-Brabant	nl	BE	BE-VLG
+province	BE-VWV	West-Vlaanderen	nl	BE	BE-VLG
+region	BE-WAL	wallonne, R√©gion	fr	BE	

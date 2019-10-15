@@ -30,11 +30,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_table_geoipcontinents'   => 'table des codes GeoIP des continents',
 	'label_table_iana5646subtags'   => 'table reproduisant le registre IANA des sous-étiquettes de langues (RFC 5646)',
 	'label_table_iso15924scripts'   => 'table des indicatifs d\'écritures (ISO 15924)',
-	'label_table_iso3166countries'  => 'table des indicatifs des pays (ISO-3166)',
+	'label_table_iso3166countries'  => 'table des indicatifs des pays (ISO 3166)',
+	'label_table_iso3166subdivisions'  => 'table des indicatifs des subdivisions des pays (ISO 3166-2)',
 	'label_table_m49regions'        => 'table des indicatifs des régions du monde selon l\'ONU (UN M.49)',
-	'label_table_iso4217currencies' => 'table des devises (ISO-4217)',
-	'label_table_iso639codes'       => 'table principale des codes de langue (ISO-639-1,2 et 3)',
-	'label_table_iso639families'    => 'table des familles et groupes de langues (ISO-639-5)',
+	'label_table_iso4217currencies' => 'table des devises (ISO 4217)',
+	'label_table_iso639codes'       => 'table principale des codes de langue (ISO 639-1,2 et 3)',
+	'label_table_iso639families'    => 'table des familles et groupes de langues (ISO 639-5)',
 	'label_table_iso639macros'      => 'table des macrolangues',
 	'label_table_iso639names'       => 'table des noms de langues',
 	'label_table_iso639retirements' => 'table des langues supprimées',
@@ -50,6 +51,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_form_gerer_table'        => 'Vider ou charger des tables',
-	'titre_liste_tables'            => 'Liste des tables de codes ISO chargées en base de données',
-	'titre_page'                    => 'Gestion des tables de codes ISO',
+	'titre_liste_tables'            => 'Liste des nomenclatures officielles chargées en base de données',
+	'titre_page'                    => 'Gestion des nomenclatures',
 );
