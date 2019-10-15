@@ -19,6 +19,7 @@ include_spip('inc/charsets');
  * Based on an example by ramdac at ramdac dot org
  * Returns a multi-dimensional array from a CSV file optionally using the
  * first row as a header to create the underlying data as associative arrays.
+ *
  * @param string $file Filepath including filename
  * @param bool $head Use first row as header.
  * @param string $delim Specify a delimiter other than a comma.
@@ -67,9 +68,6 @@ function importer_csv_importcharset($texte, $definir_charset_source = false) {
  */
 function importer_csv_nettoie_key($key) {
 	return translitteration($key);
-	/*$accents=array('�','�','�','�','�',"�","�","'");
-	$accents_rep=array('e','e','e','a','u',"o","c","_");
-	return str_replace($accents,$accents_rep,$key);*/
 }
 
 /**
@@ -101,9 +99,9 @@ function inc_importer_csv_dist($file, $head = false, $delim = ',', $enclos = '"'
 				$header_type = array();
 				foreach ($header as $heading) {
 					if (!isset($header_type[$heading])) {
-						$header_type[$heading] = 'scalar';
+						$header_type[$heading] = "scalar";
 					} else {
-						$header_type[$heading] = 'array';
+						$header_type[$heading] = "array";
 					}
 				}
 			}
@@ -113,25 +111,26 @@ function inc_importer_csv_dist($file, $head = false, $delim = ',', $enclos = '"'
 			if ($head and isset($header)) {
 				$row = array();
 				foreach ($header as $key => $heading) {
-					if ($header_type[$heading] == 'array') {
+					if ($header_type[$heading] == "array") {
 						if (!isset($row[$heading])) {
 							$row[$heading] = array();
 						}
 						if (isset($data[$key]) and strlen($data[$key])) {
-							$row[$heading][]= $data[$key];
+							$row[$heading][] = $data[$key];
 						}
 					} else {
-						$row[$heading]=(isset($data[$key])) ? $data[$key] : '';
+						$row[$heading] = (isset($data[$key])) ? $data[$key] : '';
 					}
 				}
-				$return[]=$row;
+				$return[] = $row;
 			} else {
-				$return[]=$data;
+				$return[] = $data;
 			}
 		}
 		if ($charset_source) {
 			importer_csv_importcharset('', true);
 		}
 	}
+
 	return $return;
 }

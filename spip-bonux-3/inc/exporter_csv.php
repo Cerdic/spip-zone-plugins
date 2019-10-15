@@ -22,6 +22,7 @@ include_spip('inc/texte');
 /**
  * Exporter un champ pour un export CSV : pas de retour a la ligne,
  * et echapper les guillements par des doubles guillemets
+ *
  * @param string $champ
  * @return string
  */
@@ -31,17 +32,23 @@ function exporter_csv_champ($champ) {
 	#$champ = str_replace("\n", ", ", $champ);
 	$champ = preg_replace(',[\s]+,ms', ' ', $champ);
 	$champ = str_replace('"', '""', $champ);
-	return '"'.$champ.'"';
+
+	return '"' . $champ . '"';
 }
 
 /**
  * Exporter une ligne complete au format CSV, avec delimiteur fourni
+ *
+ * @uses exporter_csv_champ()
+ *
  * @param array $ligne
  * @param string $delim
+ * @param string|null $importer_charset
+ *     Si défini exporte dans le charset indiqué
  * @return string
  */
 function exporter_csv_ligne($ligne, $delim = ',', $importer_charset = null) {
-	$output = join($delim, array_map('exporter_csv_champ', $ligne))."\r\n";
+	$output = join($delim, array_map('exporter_csv_champ', $ligne)) . "\r\n";
 	if ($importer_charset) {
 		$output = str_replace('’', '\'', $output);
 		$output = unicode2charset(html2unicode(charset2unicode($output)), $importer_charset);
@@ -49,8 +56,28 @@ function exporter_csv_ligne($ligne, $delim = ',', $importer_charset = null) {
 	return $output;
 }
 
-
-function inc_exporter_csv_dist($titre, $resource, $delim = ',', $entetes = null, $envoyer = true) {
+/**
+ * Exporte une ressource sous forme de fichier CSV
+ *
+ * La ressource peut etre un tableau ou une resource SQL issue d'une requete
+ * L'extension est choisie en fonction du delimiteur :
+ * - si on utilise ',' c'est un vrai csv avec extension csv
+ * - si on utilise ';' ou tabulation c'est pour E*cel, et on exporte en iso-truc, avec une extension .xls
+ *
+ * @uses exporter_csv_ligne()
+ *
+ * @param string $titre
+ *   titre utilise pour nommer le fichier
+ * @param array|resource $resource
+ * @param string $delim
+ *   delimiteur
+ * @param array $entetes
+ *   tableau d'en-tetes pour nommer les colonnes (genere la premiere ligne)
+ * @param bool $envoyer
+ *   pour envoyer le fichier exporte (permet le telechargement)
+ * @return string
+ */
+function inc_exporter_csv_dist($titre, $resource, $delim = ', ', $entetes = null, $envoyer = true) {
 
 	$filename = preg_replace(',[^-_\w]+,', '_', translitteration(textebrut(typo($titre))));
 
@@ -88,13 +115,14 @@ function inc_exporter_csv_dist($titre, $resource, $delim = ',', $entetes = null,
 		$length += fwrite($fp, $output);
 	}
 	fclose($fp);
+
 	if ($envoyer) {
 		ob_start();
-		Header("Content-Type: text/comma-separated-values; charset=$charset");
-		Header("Content-Disposition: attachment; filename=$filename");
+		header("Content-Type: text/comma-separated-values; charset=$charset");
+		header("Content-Disposition: attachment; filename=$filename");
 		//non supporte
-		//Header("Content-Type: text/plain; charset=$charset");
-		Header("Content-Length: $length");
+		//header("Content-Type: text/plain; charset=$charset");
+		header("Content-Length: $length");
 		ob_clean();
 		flush();
 		readfile($fichier);
