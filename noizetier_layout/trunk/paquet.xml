@@ -13,10 +13,10 @@
 	<copyright>2019</copyright>
 	<licence>GPL v3</licence>
 
-	<pipeline nom="formulaire_fond" inclure="noizetier_layout_pipelines.php" />
 	<pipeline nom="formulaire_charger" inclure="noizetier_layout_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="noizetier_layout_pipelines.php" />
-	<pipeline nom="header_prive" inclure="noizetier_layout_pipelines.php" />
+	<!-- <pipeline nom="formulaire_fond" inclure="noizetier_layout_pipelines.php" /> -->
+	<!-- <pipeline nom="header_prive" inclure="noizetier_layout_pipelines.php" /> -->
 	<pipeline nom="insert_head" inclure="noizetier_layout_pipelines.php" />
 	<pipeline nom="noizetier_layout_decrire_grille" action="" />
 	<pipeline nom="noizetier_layout_saisies_grille" action="" />
