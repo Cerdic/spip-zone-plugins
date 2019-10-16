@@ -30,15 +30,19 @@ function action_accelerer_jobs_dist($args=null) {
 		$securiser_action = charger_fonction ('securiser_action', 'inc');
 		$args = $securiser_action();
 	}
-	list ($function, $nb) = explode ('/', $args);
-	spip_log("### (function, nb) = ($function, $nb)", 'accelerer_job');
+	if (strpos($args, '/') !== false) {
+		list ($function, $nb) = explode('/', $args);
+		$nb=intval($nb);
+	}
+	else {
+		$function = $args;
+		$nb = 5;
+	}
 	if (!$function or !is_string($function)) {
-		spip_log("manque fonction dans action_accelerer_job_dis t: nb=$nb", 'accelerer_job');
+		spip_log("manque fonction dans action_accelerer_job_dis t: nb=$nb", 'erreur_accelerer_job'._LOG_ERREUR);
+		return;
 	}
-	if (!intval($nb)) {
-		spip_log("manque nb dans action_accelerer_job_dist($function, $nb)", 'accelerer_job');
-	}
-	$nb=intval($nb);
+	spip_log("### (function, nb) = ($function, $nb)", 'accelerer_job');
 
 	include_spip('inc/queue');
 	include_spip('inc/genie');
