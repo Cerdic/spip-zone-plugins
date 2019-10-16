@@ -1,23 +1,34 @@
 [(#REM)
 
-	Noisette de type conteneur lambda.
+	Noisette conteneur
 
-	Surcharge : ajout de la possibilité d'avoir un .container + classes column
+	Surcharge du noizetier :
+	Permet de faire du colonnage, et peut optionnellement avoir un .container
+	Si la noisette est aussi une colonne (enfant directe d'une autre noisette conteneur),
+	On l'encapsule dans un div à part (sinon problème de gouttière inhérent aux grilles qui reposent sur des marges négatives).
 
-	- Markup :
+	Markups possibles :
+
+	- Markup sans .container :
+	.noisette.row
+
+	- Markup avec .container :
 	.noisette
 		.container
+			.row
 
 ]
-#SET{balise,        #ENV{conteneur_balise}|sinon{div}}
-#SET{css,           #ENV{conteneur_css}}
-#SET{css_container, #ENV{css_container}}
-[<(#GET{balise}) class="noisette[ noisette_(#ENV{type_noisette})][ (#GET{css})][ (#ENV{css_column})]">]
-[(#GET{css_container}|oui)
-	<div class="[(#GET{css_container})]">
-]
-		<!--noisettes-->
-[(#GET{css_container}|oui)
-	</div>
-]
-[</(#GET{balise})>]
+#SET{balise, #ENV{conteneur_balise}|sinon{div}}
+[<div class="(#ENV{css_grid_column}|attribut_html)">]
+	<[(#GET{balise})] class="noisette[ noisette_(#ENV{type_noisette}|attribut_html)][ (#ENV{conteneur_css}|attribut_html)][ (#ENV{css_grid_container}|non)[(#ENV{css_grid_row}|attribut_html)]]">
+	[(#ENV{css_grid_container}|oui)
+		<div class="[(#ENV{css_grid_container}|attribut_html)]">
+			<div class="[(#ENV{css_grid_row}|attribut_html)]">
+	]
+				<!--noisettes-->
+	[(#ENV{css_grid_container}|oui)
+			</div>
+		</div>
+	]
+	</[(#GET{balise})]>
+[(#ENV{css_grid_column}|oui)</div>]
