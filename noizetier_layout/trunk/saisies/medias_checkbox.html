@@ -1,16 +1,13 @@
 [(#REM)
 
-	Saisie radio
+	Saisie checkbox Gibolinisée
 
 	De base, renvoie un valeur unique.
 	Avec l'option medias, renvoie un tableau.
 
 	Différences avec la saisie normale :
-	- radios affichées en inline
-	- affichage possible par médias
-	- option slider
-	- dans le data, les valeurs peuvent être des tableaux avec label, image, explication.
-	- possibilité d'exposer certaines valeurs
+	- Possibilité d'avoir une ligne pour chaque média de la grille
+	- Possibilité d'exposer certaines valeurs
 
 	Paramètres :
 		**obligatoire
@@ -22,45 +19,38 @@
 		- obligatoire : « oui »
 			S'il y a plusieurs médias et que la grille est mobile-first,
 			seul le 1er est obligatoire.
-		- slider : « oui » pour afficher sous forme de slider
-		- taille_img : dimension des images dans les labels
+		- largeur_image : dimension des images dans les labels
 		- exposer : tableau de valeurs à exposer
 
 ]
 #SET{valeur, #ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}
 #SET{grille, #REM|noizetier_layout_decrire_grille}
 #SET{medias, #ENV{medias}|=={oui}|?{#GET{grille/medias},#ARRAY{'',''}}}
-#SET{slider, #ENV{slider}|=={oui}}
 
 <BOUCLE_medias(DATA){source table, #GET{medias}}>
 #SET{media, #CLE}
-#SET{name,  #ENV{nom}|concat{#ENV{medias}|?{\[#GET{media}\]}}}
+#SET{name,  #ENV{nom}|concat{\[\],#ENV{medias}|?{\[#GET{media}\]}}}
 <B_radio>
 <div class="gridedit[ gridedit_(#GET{media}|attribut_html)][ (#ENV{class}|attribut_html)]">
 
 	[<div class="gridedit__item gridedit__item_media">
-		[<img src="(#CHEMIN{#VALEUR{img}})" width="32" heigh="32" alt="">]
+		[(#VALEUR{image}|oui)[(#CHEMIN{#VALEUR{image}}|image_reduire{24,24})]]
 		<label>(#VALEUR{label})</label>
 	</div>]
 
-	[(#GET{slider}|oui)
-	<div class="gridedit__item gridedit__item_slider radioslider">
-	]
 	<BOUCLE_radio(POUR){tableau #ENV*{data}}>
 	#SET{value,    #CLE|noizetier_layout_creer_classe_media{#GET{media}}}
 	#SET{checked,  #GET{valeur}|is_array|?{
 		#GET{value}|in_any{#GET{valeur}},
 		#GET{value}|=={#GET{valeur}}
-	}}
+  }}
 	#SET{id,       #VAL{champ_}|concat{#ENV{id,#ENV{nom}},_,#GET{media},_,#COMPTEUR_BOUCLE}|saisie_nom2classe}
 	#SET{required, #ENV{obligatoire}|=={oui}|et{#GET{grille/mobile_first}|?{#_medias:COMPTEUR_BOUCLE|=={1},oui}}}
 	#SET{disabled, #ENV{disable}|sinon{#GET{required}|et{#CLE|non}}}
 	#SET{exposer, #GET{value}|in_any{#ENV{exposer}}}
-	[(#GET{slider}|non)
 	<div class="gridedit__item gridedit__item_radio[ (#GET{exposer}|oui)gridedit__item_exposer]">
-	]
 		<input
-			type="radio"
+			type="checkbox"
 			name="#GET{name}"
 			value="#GET{value}"
 			class="radio"
@@ -72,16 +62,10 @@
 			[aria-describedby="(#ENV{describedby})"]
 		/>
 		<label for="#GET{id}" class="[(#GET{checked}|oui)on][ (#GET{required}|oui)obligatoire]">
-			[(#VALEUR{img}|oui)[<img src="(#CHEMIN{#VALEUR{img}})" width="#ENV{taille_img,50}">]]
-			[(#VALEUR{label}|sinon{#VALEUR})]
+			[(#VALEUR)]
 		</label>
-	[(#GET{slider}|non)
 	</div>
-	]
 	</BOUCLE_radio>
-	[(#GET{slider}|oui)
-	</div>
-	]
 </div>
 </B_radio>
 </BOUCLE_medias>

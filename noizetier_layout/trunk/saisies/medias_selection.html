@@ -1,9 +1,9 @@
 [(#REM)
 
-	Saisie radio
+	Saisie selection Gibolinisée
 
 	Différences avec la saisie normale :
-	- radios affichées en inline
+	- Possibilité d'avoir une ligne pour chaque média de la grille
 
 	Paramètres :
 		**obligatoire
@@ -21,7 +21,6 @@
 #SET{valeur, #ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}
 #SET{grille, #REM|noizetier_layout_decrire_grille}
 #SET{medias, #ENV{medias}|=={oui}|?{#GET{grille/medias},#ARRAY{'',''}}}
-#SET{slider, #ENV{slider}|=={oui}}
 
 <BOUCLE_medias(DATA){source table, #GET{medias}}>
 #SET{media,    #CLE}
@@ -33,7 +32,7 @@
 <div class="gridedit[ gridedit_(#GET{media}|attribut_html)][ (#ENV{class}|attribut_html)]">
 
 	[<div class="gridedit__item gridedit__item_media">
-		[<img src="(#CHEMIN{#VALEUR{img}})" width="32" heigh="32" alt="">]
+		[(#VALEUR{image}|oui)[(#CHEMIN{#VALEUR{image}}|image_reduire{24,24})]]
 		<label>(#VALEUR{label})</label>
 	</div>]
 
@@ -41,7 +40,7 @@
 		<select
 			type="select"
 			name="#GET{name}"
-			class="select"
+			class="select #ENV{class}"
 			id="#GET{id}"
 			[(#GET{required}|oui)required="required"]
 			[(#GET{disabled}|oui)disabled="disabled"]
@@ -50,7 +49,7 @@
 			[size="(#ENV{size})"]
 			[(#ENV*{attributs})]
 		>
-			[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]]
+			[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
 			<BOUCLE_selection(POUR){tableau #ENV*{data}}>
 			#SET{value,    #CLE|noizetier_layout_creer_classe_media{#GET{media}}}
 			#SET{selected, #GET{value}|in_any{#GET{valeur}}}
@@ -59,7 +58,7 @@
 				value="#GET{value}"
 				[(#GET{selected}|oui)selected="selected"]
 				[(#GET{disabled}|oui)disabled="disabled"]
-			/>#VALEUR</option>
+			>#VALEUR</option>
 			</BOUCLE_selection>
 		</select>
 	</div>
