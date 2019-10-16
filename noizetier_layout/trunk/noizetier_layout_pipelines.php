@@ -59,36 +59,51 @@ function noizetier_layout_formulaire_charger($flux) {
 
 		include_spip('inc/saisies');
 
+		// Nb : la noisette peut-être plusieurs éléments de la grille à a fois.
+		// On ajoute aussi les saisies communes à tous les éléments.
+		$elements_grille[] = '*';
 		foreach ($elements_grille as $element) {
 
-			// Ajout des saisies dans un fieldset affichage
+			// Ajout des saisies
 			$saisies = noizetier_layout_lister_saisies($element, $id_noisette);
-			$fieldset_affichage = false;
-			foreach ($flux['data']['_champs_noisette'] as $k => $saisie) {
-				if (
-					$saisie['saisie'] === 'fieldset'
-					and $saisie['options']['nom'] === 'affichage'
-				) {
-					$fieldset_affichage = true;
-					$flux['data']['_champs_noisette'][$k]['saisies'] = array_merge($flux['data']['_champs_noisette'][$k]['saisies'], $saisies);
+			$type_noisette = $flux['data']['type_noisette'];
+			switch ($type_noisette) {
+				// Pour certaines noisette, directement à la racine
+				case 'conteneur':
+					$flux['data']['_champs_noisette'] = array_merge($flux['data']['_champs_noisette'], $saisies);
 					break;
-				}
-			}
-			if (!$fieldset_affichage) {
-				$flux['data']['_champs_noisette'][] = array(
-					'saisie' => 'fieldset',
-					'options' => array(
-						'nom' => 'affichage',
-						'label' => _T('noizetier:label_saisies_affichage'),
-						'pliable' => 'oui',
-						'plie' => '',
-					),
-					'saisies' => $saisies,
-				);
+				// Pour les autres dans un fieldset « Affichage »
+				default:
+					// Soit il y en a déjà un
+					$fieldset_affichage = false;
+					foreach ($flux['data']['_champs_noisette'] as $k => $saisie) {
+						if (
+							$saisie['saisie'] === 'fieldset'
+							and $saisie['options']['nom'] === 'affichage'
+						) {
+							$fieldset_affichage = true;
+							$flux['data']['_champs_noisette'][$k]['saisies'] = array_merge($flux['data']['_champs_noisette'][$k]['saisies'], $saisies);
+							break;
+						}
+					}
+					// Soit on ajoute le fieldset nous-même
+					if (!$fieldset_affichage) {
+						$flux['data']['_champs_noisette'][] = array(
+							'saisie' => 'fieldset',
+							'options' => array(
+								'nom' => 'affichage',
+								'label' => _T('noizetier_layout:grid_affichage_label'),
+								'pliable' => 'oui',
+								'plie' => '',
+							),
+							'saisies' => $saisies,
+						);
+					}
+					break;
 			}
 
 			// Récupération des valeurs
-			$parametre = 'css_' . $element;
+			$parametre       = 'css_grid_' . $element;
 			$classes_element = $flux['data'][$parametre];
 			if ($contexte = noizetier_layout_contextualiser_classes($element, $classes_element, $id_noisette)) {
 				$flux['data'] = array_merge($flux['data'], $contexte);
@@ -104,8 +119,8 @@ function noizetier_layout_formulaire_charger($flux) {
 /**
  * Complète les traitements d’un formulaire CVT
  *
- * => Édition de noisette :
- * - container : enregistrer le paramètre
+ * => Édition de noisette : enregistrer les paramètres propres à la grille.
+ * Ils sont stockés dans les clés css_grid_container, css_grid_column, css_grid_row et css_grid_*.
  *
  * @param array $flux
  * @return array
@@ -127,15 +142,19 @@ function noizetier_layout_formulaire_traiter($flux) {
 		$grille     = noizetier_layout_decrire_grille();
 
 		// Préparer les paramètres
+		// Nb : la noisette peut-être plusieurs éléments de la grille à a fois.
+		// On ajoute aussi les saisies communes à tous les éléments.
+		$elements_grille[] = '*';
 		foreach ($elements_grille as $element) {
 			$saisies         = noizetier_layout_lister_saisies($element, $id_noisette);
 			$saisies_par_nom = saisies_lister_par_nom($saisies);
-			$parametre       = 'css_' . $element;
-			$classe_base     = $grille['classes_base'][$element];
+			$parametre       = 'css_grid_' . $element;
+			// $classe_base     = $grille['classes_base'][$element];
 			$classes_element = array();
 			// Récupérer les valeurs postées
-			foreach($saisies_par_nom as $champ => $saisie) {
+			foreach ($saisies_par_nom as $champ => $saisie) {
 				// Toutes les saisies ne sont pas forcément pertinentes
+				// Les saisies de grille CSS sont identifées avec une clé 'grille' en plus de 'options'
 				if (
 					isset($saisie['grille'])
 					and $saisie['saisie'] != 'fieldset'
@@ -151,12 +170,15 @@ function noizetier_layout_formulaire_traiter($flux) {
 				}
 			}
 			// S'assurer de la présence des classes de base (.row, .column...)
-			if (!in_array($classe_base, $classes_element)) {
+			/*if (!in_array($classe_base, $classes_element)) {
 				array_unshift($classes_element, $classe_base);
-			}
+			}*/
 			$classes_element = implode(' ', $classes_element);
 			$parametres[$parametre] = $classes_element;
 		}
+
+		// var_dump($parametres);
+		// die('Debug');
 
 		// Mettre à jour la noisette
 		noisette_parametrer(
@@ -205,7 +227,7 @@ function noizetier_layout_header_prive($flux) {
 /**
  * Ajoute des choses dans le head du site public
  *
- * => Feuille de style de la grille
+ * => Feuille de style de la grille si option activée
  *
  * @param string $flux
  * @return string
@@ -220,9 +242,7 @@ function noizetier_layout_insert_head($flux) {
 		and is_string($css = noizetier_layout_decrire_grille('css_public'))
 		and $css = find_in_path($css)
 	) {
-
 		$flux .= "\n<!--Plugin noiZetier : agencements-->\n<link rel='stylesheet' href='$css' type='text/css' media='all' />\n";
-
 	}
 
 	return $flux;

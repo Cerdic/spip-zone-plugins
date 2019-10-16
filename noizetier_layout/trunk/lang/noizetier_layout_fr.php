@@ -28,9 +28,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_conteneur_row_description' => 'Bloc permettant d\'afficher les noisettes enfantes sous forme de colonnes.',
 
 	// G
+	'grid_affichage_label' => 'Affichage',
 	'grid_container_legend' => 'Layout : largeur de la section',
 	'grid_container_label' => 'Largeur',
-	'grid_container_explication' => 'Largeur maximale de cette section (ajoute des marges latérales).',
+	'grid_container_explication' => 'Largeur maximale de cette section.',
 	'grid_row_legend' => 'Layout : conteneur de colonnes',
 	'grid_row_label' => 'Ligne',
 	'grid_row_explication' => 'Agencement des noisettes enfantes sous forme de colonnes.',

@@ -100,21 +100,34 @@ function noizetier_layout_lister_saisies($element = null, $id_noisette = 0) {
 				'data' => $saisies_grille,
 			)
 		);
-		// On encapsule le tout dans des fieldsets
-		foreach (array('container', 'row', 'column') as $item) {
+		// On ajoute les saisies
+		foreach (array('container', 'row', 'column', '*') as $item) {
 			if (isset($saisies_grille[$item])) {
-				$saisies[$id_noisette][$item] = array(
-					array(
-						'saisie' => 'fieldset',
-						'options' => array(
-							'nom' => 'grille_'.$item,
-							'label' => _T('noizetier_layout:grid_'.$item.'_legend'),
-							'pliable' => 'oui',
-							'plie' => 'oui',
-						),
-						'saisies' => $saisies_grille[$item],
-					),
-				);
+				switch ($item) {
+					// Celles directement à la racine
+					// (pour l'instant, toutes)
+					case 'container':
+					case 'row':
+					case 'column':
+					case '*':
+						$saisies[$id_noisette][$item] = $saisies_grille[$item];
+						break;
+					// Les autres dans un fieldset
+					default:
+						$saisies[$id_noisette][$item] = array(
+							array(
+								'saisie' => 'fieldset',
+								'options' => array(
+									'nom' => 'grille_'.$item,
+									'label' => _T('noizetier_layout:grid_'.$item.'_legend'),
+									'pliable' => 'oui',
+									// 'plie' => 'oui',
+								),
+								'saisies' => $saisies_grille[$item],
+							),
+						);
+						break;
+				}
 			}
 		}
 		// Retourner tout ou partie
@@ -204,7 +217,7 @@ function noizetier_layout_creer_classe_media($classe, $media) {
  *
  * - Si la noisette est à la racine ou dans un conteneur lambda : container
  * - Si c'est une ligne : row
- * - Si elle est dans un ligne : column
+ * - Si elle est dans une ligne : column
  *
  * @note
  * Par commodité, une noisette peut à la fois être container + row/column
@@ -224,10 +237,9 @@ function noizetier_layout_identifier_element_grille($id_noisette) {
 	$dans_conteneur = (strpos($id_conteneur, 'noisette') !== false);
 	list($type_noisette_parente, $noisette_parente, $id_noisette_parente) = explode('|', $id_conteneur); // pas de fonction dans l'API pour avoir ces infos
 
-	// Toutes les noisettes ont une option container.
-	// C.a.d qu'elles ne sont jamais directement un container elles-mêmes,
-	// mais elles peuvent en avoir un à l'intérieur.
-	// Cependant pour simplifier, on n'active l'option que pour celles à la racine et celles dans un conteneur lambda (mais ça pourrait changer).
+	// Toutes les noisettes peuvent techniquement avoir un .container en enfant direct.
+	// Cependant pour simplifier, on n'active l'option que pour celles à la racine
+	// et celles dans un conteneur lambda (mais ça pourrait changer).
 	if (
 		$a_la_racine
 		or $type_noisette_parente == 'conteneur'
@@ -235,15 +247,17 @@ function noizetier_layout_identifier_element_grille($id_noisette) {
 		$elements[] = 'container';
 	}
 
-	// Noisette « conteneur_row » = row
-	if ($type_noisette == 'conteneur_row') {
+	// Noisette « conteneur » = row
+	if ($type_noisette == 'conteneur') {
 		$elements[] = 'row';
 	}
 
 	// Noisette enfante d'une noisette « conteneur_row » = column
-	elseif ($type_noisette_parente == 'conteneur_row') {
+	if ($type_noisette_parente == 'conteneur') {
 		$elements[] = 'column';
 	}
+
+	// var_dump($id_noisette, $elements);
 
 	return $elements;
 }

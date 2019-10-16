@@ -17,6 +17,7 @@
   display: flex;
   flex-flow: row nowrap;
   box-sizing: border-box;
+  margin: 0.5em 0;
 }
 .gridedit__item {
   display: flex;
@@ -55,7 +56,10 @@
 .gridedit__item:not(.radioslider) label {
   width: auto !important;
 }
-.gridedit__item label img {
+.gridedit__item label img,
+.gridedit__item label svg {
+  max-width: 50px;
+  height: auto;
   margin-bottom: 0.5em;
 }
 
