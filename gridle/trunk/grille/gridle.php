@@ -38,8 +38,8 @@ function grille_gridle_decrire_grille_dist() {
 		'js'            => array('css/gridle.min.js'),
 		'medias' => array(
 			'' => array(
-				'label'       => _T('gridle:grid_media_base'),
-				'img'         => 'images/grid-media-all.svg',
+				'label'       => _T('gridle:grid_media_mobile'),
+				'image'       => 'images/grid-media-mobile.svg',
 				'breakpoints' => array(
 					'min' => '',
 					'max' => '',
@@ -47,7 +47,7 @@ function grille_gridle_decrire_grille_dist() {
 			),
 			'tablet' => array(
 				'label'       => _T('gridle:grid_media_tablet'),
-				'img'         => 'images/grid-media-tablet.svg',
+				'image'       => 'images/grid-media-tablet.svg',
 				'breakpoints' => array(
 					'min' => '480px',
 					'max' => '',
@@ -55,7 +55,7 @@ function grille_gridle_decrire_grille_dist() {
 			),
 			'desktop' => array(
 				'label'       => _T('gridle:grid_media_desktop'),
-				'img'         => 'images/grid-media-desktop.svg',
+				'image'       => 'images/grid-media-desktop.svg',
 				'breakpoints' => array(
 					'min' => '768px',
 					'max' => '',
@@ -64,18 +64,18 @@ function grille_gridle_decrire_grille_dist() {
 			/*
 			'large' => array(
 				'label'       => _T('gridle:grid_media_large'),
-				'img'         => 'images/grid-media-large.svg',
+				'image'       => 'images/grid-media-large.svg',
 				'breakpoints' => array(
 					'min' => '1440px',
 					'max' => '',
 				),
 			),*/
 		),
-		'classes_base' => array(
-			'container' => '',
-			'row'       => 'row',
-			'column'    => 'gr-12',
-		),
+		// 'classes_base' => array(
+		// 	'container' => '',
+		// 	'row'       => 'row',
+		// 	'column'    => 'gr-12',
+		// ),
 	);
 
 	return $grille;
@@ -83,7 +83,11 @@ function grille_gridle_decrire_grille_dist() {
 
 
 /**
- * Liste des saisies relatives à la grille
+ * Liste des saisies relatives à la grille.
+ *
+ * @note
+ * Passer id_noisette en paramètre permet de connaître son ordre
+ * et donc de définir certaines saisies en fonction.
  *
  * @param int $id_noisette
  *     N° d'une noisette (optionnel)
@@ -96,34 +100,27 @@ function grille_gridle_decrire_grille_dist() {
 function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 
 	include_spip('inc/noizetier_layout');
+	include_spip('inc/filtres');
 	$saisies     = array();
 	$nb_colonnes = intval(noizetier_layout_decrire_grille('nb_colonnes'));
 	$medias      = array_keys(noizetier_layout_decrire_grille('medias'));
 
+	// =========
 	// CONTAINER
+	// =========
 	$saisies['container'] = array(
 		array(
-			'saisie' => 'grid_radio',
+			'saisie' => 'medias_radio',
 			'options' => array(
 				'nom' => 'grille_container',
 				'label' => _T('noizetier_layout:grid_container_label'),
-				//'explication' => _T('noizetier_layout:grid_container_explication'),
-				// 'li_class' => 'choix_inline',
+				'explication' => _T('noizetier_layout:grid_container_explication'),
 				'defaut' => '',
 				'cacher_option_intro' => 'oui',
 				'data' => array(
-					''                => array(
-						'label' => _T('gridle:grid_null'),
-						'img' => 'images/grid-null.svg',
-					),
-					'container'       => array(
-						'label' => _T('gridle:grid_container'),
-						'img' => 'images/grid-container.svg',
-					),
-					'container_fluid' => array(
-						'label' => _T('gridle:grid_container_fluid'),
-						'img' => 'images/grid-container-fluid.svg',
-					),
+					''                => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-null.svg'), '" />', _T('gridle:grid_null')),
+					'container'       => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-container.svg'), '" />', _T('gridle:grid_container')),
+					'container_fluid' => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-container-fluid.svg'), '" />', _T('gridle:grid_container_fluid')),
 				),
 			),
 			'grille' => array(
@@ -132,42 +129,37 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 		),
 	);
 
+	// ===
 	// ROW
+	// ===
 	$saisies['row'] = array(
+		// Indiquer que c'est une ligne
+		array(
+			'saisie' => 'hidden',
+			'options' => array(
+				'nom'    => 'row',
+				'defaut' => 'row',
+			),
+			'grille' => array(
+				'multiple' => false,
+			),
+		),
 		// Alignement horizontal
 		array(
-			'saisie' => 'grid_radio',
+			'saisie' => 'medias_radio',
 			'options' => array(
-				'nom'      => 'gridle_align_horizontal',
-				'label'    => _T('gridle:grid_align_horizontal_label'),
-				// 'li_class' => 'choix_inline',
-				'defaut'   => '',
+				'nom'         => 'gridle_align_horizontal',
+				'label'       => _T('gridle:grid_align_horizontal_label'),
+				'explication' => _T('gridle:grid_align_horizontal_explication'),
+				'defaut'      => '',
 				'cacher_option_intro' => 'oui',
 				'data' => array(
-					'' => array(
-						'label' => _T('gridle:grid_null'),
-						'img'   => 'images/grid-null.svg',
-					),
-					'row-align-left' => array(
-						'label' => _T('gridle:grid_align_left'),
-						'img'   => 'images/grid-align-left.svg',
-					),
-					'row-align-center'  => array(
-						'label' => _T('gridle:grid_align_center'),
-						'img'   => 'images/grid-align-center.svg',
-					),
-					'row-align-right'   => array(
-						'label' => _T('gridle:grid_align_right'),
-						'img'   => 'images/grid-align-right.svg'
-					),
-					'row-align-between' => array(
-						'label' => _T('gridle:grid_align_between'),
-						'img'   => 'images/grid-align-between.svg'
-					),
-					'row-align-around'  => array(
-						'label' => _T('gridle:grid_align_around'),
-						'img'   => 'images/grid-align-around.svg'
-					),
+					''                  => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-null.svg'), '" />', _T('gridle:grid_null')),
+					'row-align-left'    => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-align-left.svg'), '" />', _T('gridle:grid_align_left')),
+					'row-align-center'  => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-align-center.svg'), '" />', _T('gridle:grid_align_center')),
+					'row-align-right'   => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-align-right.svg'), '" />', _T('gridle:grid_align_right')),
+					'row-align-between' => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-align-between.svg'), '" />', _T('gridle:grid_align_between')),
+					'row-align-around'  => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-align-around.svg'), '" />', _T('gridle:grid_align_around')),
 				),
 			),
 			'grille' => array(
@@ -176,30 +168,18 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 		),
 		// Alignement vertical
 		array(
-			'saisie' => 'grid_radio',
+			'saisie' => 'medias_radio',
 			'options' => array(
-				'nom'      => 'gridle_align_vertical',
-				'label'    => _T('gridle:grid_align_vertical_label'),
-				// 'li_class' => 'choix_inline',
-				'defaut'   => '',
+				'nom'         => 'gridle_align_vertical',
+				'label'       => _T('gridle:grid_align_vertical_label'),
+				'explication' => _T('gridle:grid_align_vertical_explication'),
+				'defaut'      => '',
 				'cacher_option_intro' => 'oui',
 				'data' => array(
-					'' => array(
-						'label' => _T('gridle:grid_null'),
-						'img'   => 'images/grid-null.svg',
-					),
-					'row-align-top' => array(
-						'label' => _T('gridle:grid_align_top'),
-						'img'   => 'images/grid-align-top.svg',
-					),
-					'row-align-middle' => array(
-						'label' => _T('gridle:grid_align_middle'),
-						'img'   => 'images/grid-align-middle.svg',
-					),
-					'row-align-bottom' => array(
-						'label' => _T('gridle:grid_align_bottom'),
-						'img'   => 'images/grid-align-bottom.svg',
-					),
+					''                 => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-null.svg'), '" />', _T('gridle:grid_null')),
+					'row-align-top'    => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-align-top.svg'), '" />', _T('gridle:grid_align_top')),
+					'row-align-middle' => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-align-middle.svg'), '" />', _T('gridle:grid_align_middle')),
+					'row-align-bottom' => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-align-bottom.svg'), '" />', _T('gridle:grid_align_bottom')),
 				),
 			),
 			'grille' => array(
@@ -240,7 +220,9 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 		),
 	);
 
+	// ======
 	// COLUMN
+	// ======
 	// Construire certains datas en fonction des médias et du nombre de colonnes
 	$data_grille  = array(); // Liste complète des classes (avec @media)
 	$data_saisies = array(); // Liste réduite
@@ -252,13 +234,14 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 		'prefix' => 'prefix',
 		'suffix' => 'suffix',
 	);
-	foreach($colonnables as $champ => $classe) {
-		// D'abord des valeurs nulles
+	foreach ($colonnables as $champ => $classe) {
+		// D'abord des valeurs nulles si besoin
+		/*
 		switch ($champ) {
 			default:
 				$data_saisies[$champ][''] = _T('gridle:grid_null');
 				break;
-		}
+		}*/
 		// Ensuite d'autres valeurs éventuelles
 		switch ($champ) {
 			case 'column':
@@ -271,7 +254,7 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 			default:
 				for ($i=1; $i<=$nb_colonnes; $i++) {
 					$data_saisies[$champ][$classe.'-'.$i] = $i;
-					foreach($medias as $media) {
+					foreach ($medias as $media) {
 						$data_grille[$champ][] = $classe.'-'.$i.($media?'@'.$media:'');
 					}
 				}
@@ -282,12 +265,12 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 	if (
 		intval($id_noisette)
 		and $noisette = sql_fetsel('rang_noisette,id_conteneur', 'spip_noisettes', 'id_noisette='.intval($id_noisette))
+		and (intval($nb_noisettes_conteneur = sql_countsel('spip_noisettes', 'id_conteneur='.sql_quote($noisette['id_conteneur']))) > 1)
 	) {
-		$nb_noisettes_conteneur = sql_countsel('spip_noisettes', 'id_conteneur='.sql_quote($noisette['id_conteneur']));
 		for ($i=1; $i<=$nb_noisettes_conteneur; $i++) {
 			$data_saisies['order'][''] = _T('gridle:grid_null');
 			$data_saisies['order']['order-'.$i] = $i;
-			foreach($medias as $media) {
+			foreach ($medias as $media) {
 				$value = 'order-'.$i.($media?'@'.$media:'');
 				$data_grille['order'][] = $value;
 				if ($i == $noisette['rang_noisette']) {
@@ -300,15 +283,16 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 	$saisies['column'] = array(
 		// Largeur
 		array(
-			'saisie' => 'grid_radio',
+			'saisie' => 'medias_selection',
 			'options' => array(
 				'nom'         => 'gridle_column',
 				'label'       => _T('gridle:grid_column_label'),
+				'explication' => _T('gridle:grid_column_explication'),
 				'defaut'      => 'gr-12',
 				'medias'      => 'oui',
 				'obligatoire' => 'oui',
-				'li_class'    => 'pleine_largeur',
-				'slider'      => 'oui',
+				// 'conteneur_class' => 'pleine_largeur',
+				// 'slider'      => 'oui',
 				'data'        => $data_saisies['column'],
 			),
 			'grille' => array(
@@ -316,42 +300,33 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 				'data'     => $data_grille['column'],
 			),
 		),
-		// Décalage
 		/*
+		// Choix du type de décalage
 		array(
-			'saisie' => 'grid_offset',
+			'saisie' => 'radio',
 			'options' => array(
-				'nom'      => 'gridle_offfset',
-				'label'    => _T('gridle:grid_offset_label'),
-				'li_class' => 'pleine_largeur',
-			),
-		),
-		*/
-		/*
-		// Choix du décalage
-		array(
-			'saisie' => 'selection',
-			'options' => array(
-				'nom'        => 'gridle_offset',
-				'label'      => _T('gridle:grid_offset_label'),
-				'data' => array(
-					'push'   => _T('gridle:grid_push_label'),
-					'pull'   => _T('gridle:grid_pull_label'),
+				'nom'   => 'gridle_offset',
+				'label' => _T('gridle:grid_offset_label'),
+				'conteneur_class' => 'choix-inline sobre',
+				'data'  => array(
+					''       => _T('gridle:grid_null'),
 					'prefix' => _T('gridle:grid_prefix_label'),
 					'suffix' => _T('gridle:grid_suffix_label'),
+					'push'   => _T('gridle:grid_push_label'),
+					'pull'   => _T('gridle:grid_pull_label'),
 				),
 			),
 		),
 		// Décalage en avant absolu
 		array(
-			'saisie' => 'grid_radio',
+			'saisie' => 'medias_selection',
 			'options' => array(
 				'nom'         => 'gridle_push',
 				'label'       => _T('gridle:grid_push_label'),
 				'defaut'      => '',
 				'medias'      => 'oui',
-				'li_class'    => 'pleine_largeur',
-				'slider'      => 'oui',
+				// 'conteneur_class' => 'pleine_largeur',
+				// 'slider'      => 'oui',
 				'data'        => $data_saisies['push'],
 				'afficher_si' => '@gridle_offset@ == "push"'
 			),
@@ -362,14 +337,14 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 		),
 		// Décalage en arrière absolu
 		array(
-			'saisie' => 'grid_radio',
+			'saisie' => 'medias_selection',
 			'options' => array(
 				'nom'         => 'gridle_pull',
 				'label'       => _T('gridle:grid_pull_label'),
 				'defaut'      => '',
 				'medias'      => 'oui',
-				'li_class'    => 'pleine_largeur',
-				'slider'      => 'oui',
+				// 'conteneur_class' => 'pleine_largeur',
+				// 'slider'      => 'oui',
 				'data'        => $data_saisies['pull'],
 				'afficher_si' => '@gridle_offset@ == "pull"'
 			),
@@ -381,14 +356,14 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 		),
 		// Décalage en avant relatif
 		array(
-			'saisie' => 'grid_radio',
+			'saisie' => 'medias_selection',
 			'options' => array(
 				'nom'         => 'gridle_prefix',
 				'label'       => _T('gridle:grid_prefix_label'),
 				'defaut'      => '',
 				'medias'      => 'oui',
-				'li_class'    => 'pleine_largeur',
-				'slider'      => 'oui',
+				// 'conteneur_class' => 'pleine_largeur',
+				// 'slider'      => 'oui',
 				'data'        => $data_saisies['prefix'],
 				'afficher_si' => '@gridle_offset@ == "prefix"'
 			),
@@ -400,14 +375,14 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 		),
 		// Décalage en arrière relatif
 		array(
-			'saisie' => 'grid_radio',
+			'saisie' => 'medias_selection',
 			'options' => array(
 				'nom'         => 'gridle_suffix',
 				'label'       => _T('gridle:grid_suffix_label'),
 				'defaut'      => '',
 				'medias'      => 'oui',
-				'li_class'    => 'pleine_largeur',
-				'slider'      => 'oui',
+				// 'conteneur_class' => 'pleine_largeur',
+				// 'slider'      => 'oui',
 				'data'        => $data_saisies['suffix'],
 				'afficher_si' => '@gridle_offset@ == "suffix"'
 			),
@@ -419,22 +394,24 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 		),
 		*/
 		// Ordre
-		array(
-			'saisie' => 'grid_radio',
-			'options' => array(
-				'nom'         => 'gridle_order',
-				'label'       => _T('gridle:grid_order_label'),
-				// 'explication' => _T('gridle:grid_order_explication'),
-				'medias'      => 'oui',
-				//'defaut'      => 'order-'.$noisette['rang_noisette'],
-				'data'        => $data_saisies['order'],
-				'exposer'     => $data_exposer['order'],
-			),
-			'grille' => array(
-				'multiple' => true,
-				'data'     => $data_grille['order'],
-			),
-		),
+		$data_saisies['order'] ?
+			array(
+				'saisie' => 'medias_radio',
+				'options' => array(
+					'nom'         => 'gridle_order',
+					'label'       => _T('gridle:grid_order_label'),
+					'explication' => _T('gridle:grid_order_explication'),
+					'medias'      => 'oui',
+					//'defaut'      => 'order-'.$noisette['rang_noisette'],
+					'data'        => $data_saisies['order'],
+					'exposer'     => $data_exposer['order'],
+				),
+				'grille' => array(
+					'multiple' => true,
+					'data'     => $data_grille['order'],
+				),
+			)
+			: array(),
 		/*
 		// Centrer
 		array(
@@ -452,18 +429,27 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 		*/
 	);
 
+	// ========
 	// COMMUNES
+	// ========
 	$saisies['*'] = array(
 		// Visibilité
-		/*
 		array(
-			'saisie' => 'grid_visibility',
+			'saisie' => 'medias_radio',
 			'options' => array(
-				'nom' => 'grid_visibiity',
+				'nom' => 'grid_visibility',
 				'label' => _T('gridle:grid_visibility_label'),
+				'medias' => true,
+				'data' => array(
+					''        => _T('gridle:grid_null'),
+					'hidden'  => _T('gridle:grid_visibility_hidden'),
+					'visible' => _T('gridle:grid_visibility_visible'),
+				),
+			),
+			'grille' => array(
+				'multiple' => false,
 			),
 		),
-		*/
 	);
 
 	return $saisies;

@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'grid_align_horizontal_label_case' => 'Centrer horizontalement',
 	// Largeur
 	'grid_column_label' => 'Largeur',
-	'grid_column_explication' => 'Définit la largeur de cette colonne.',
+	'grid_column_explication' => 'Largeur de cette colonne.',
 	'grid_column_grow' => 'Max.',
 	'grid_column_grow_explication' => 'S\'aggrandit autant que nécessaire.',
 	'grid_column_adapt' => 'Min.',
