@@ -21,7 +21,6 @@
 #SET{valeur, #ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}
 #SET{grille, #REM|noizetier_layout_decrire_grille}
 #SET{medias, #ENV{medias}|=={oui}|?{#GET{grille/medias},#ARRAY{'',''}}}
-
 <BOUCLE_medias(DATA){source table, #GET{medias}}>
 #SET{media,    #CLE}
 #SET{name,     #ENV{nom}|concat{\[,#GET{media},\]}}
@@ -52,7 +51,10 @@
 			[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
 			<BOUCLE_selection(POUR){tableau #ENV*{data}}>
 			#SET{value,    #CLE|noizetier_layout_creer_classe_media{#GET{media}}}
-			#SET{selected, #GET{value}|in_any{#GET{valeur}}}
+			#SET{selected, #GET{value}|is_array|?{
+				#GET{value}|in_any{#GET{valeur}},
+				#GET{value}|=={#GET{valeur}}
+			}}
 			#SET{disabled, ''}
 			<option
 				value="#GET{value}"
