@@ -221,6 +221,9 @@ L.Map.Gis = L.Map.extend({
 		}
 		map.fitBounds(bounds, options);
 		map.options.maxZoom = maxZoomOriginal;
+		if (options.zoom) {
+			map.setZoom(options.zoom);
+		}
 	},
 
 	// API parseGeoJson
