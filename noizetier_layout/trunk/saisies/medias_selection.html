@@ -4,6 +4,7 @@
 
 	Différences avec la saisie normale :
 	- Possibilité d'avoir une ligne pour chaque média de la grille
+	- La valeur est un tableau si l'option `medias` est active
 
 	Paramètres :
 		**obligatoire
@@ -23,7 +24,7 @@
 #SET{medias, #ENV{medias}|=={oui}|?{#GET{grille/medias},#ARRAY{'',''}}}
 <BOUCLE_medias(DATA){source table, #GET{medias}}>
 #SET{media,    #CLE}
-#SET{name,     #ENV{nom}|concat{\[,#GET{media},\]}}
+#SET{name,     #ENV{nom}|concat{#ENV{medias}|?{\[#GET{media}\]}}}
 #SET{id,       #VAL{champ_}|concat{#ENV{id,#ENV{nom}},_,#GET{media}}|saisie_nom2classe}
 #SET{required, #ENV{obligatoire}|=={oui}|et{#GET{grille/mobile_first}|?{#COMPTEUR_BOUCLE|=={1},oui}}}
 #SET{disable_choix, #ENV{disable_choix}|explode{','}}
@@ -51,8 +52,8 @@
 			[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
 			<BOUCLE_selection(POUR){tableau #ENV*{data}}>
 			#SET{value,    #CLE|noizetier_layout_creer_classe_media{#GET{media}}}
-			#SET{selected, #GET{value}|is_array|?{
-				#GET{value}|in_any{#GET{valeur}},
+			#SET{selected, #GET{valeur}|is_array|?{
+				#GET{value}|in_array{#GET{valeur}},
 				#GET{value}|=={#GET{valeur}}
 			}}
 			#SET{disabled, ''}

@@ -2,13 +2,11 @@
 
 	Saisie radio Gibolinisée
 
-	De base, renvoie un valeur unique.
-	Avec l'option medias, renvoie un tableau.
-
 	Différences avec la saisie normale :
 	- Possibilité d'avoir une ligne pour chaque média de la grille
 	- Possibilité d'exposer certaines valeurs
 	- Possibilité d'activer un slider
+	- La valeur est un tableau si l'option `medias` est active
 
 	Paramètres :
 		**obligatoire
@@ -47,7 +45,7 @@
 	<BOUCLE_radio(POUR){tableau #ENV*{data}}>
 	#SET{value,    #CLE|noizetier_layout_creer_classe_media{#GET{media}}}
 	#SET{checked,  #GET{valeur}|is_array|?{
-		#GET{value}|in_any{#GET{valeur}},
+		#GET{value}|in_array{#GET{valeur}},
 		#GET{value}|=={#GET{valeur}}
 	}}
 	#SET{id,       #VAL{champ_}|concat{#ENV{id,#ENV{nom}},_,#GET{media},_,#COMPTEUR_BOUCLE}|saisie_nom2classe}
