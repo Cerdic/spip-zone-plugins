@@ -26,8 +26,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function grille_gridle_decrire_grille_dist() {
 
 	$grille = array(
-		'nom'           => _T('gridle:grid_nom'),
-		'description'   => _T('gridle:grid_description'),
+		'nom'           => _T('gridle:gridle_nom'),
+		'description'   => _T('gridle:gridle_description'),
 		'logo'          => 'gridle-32.png',
 		'documentation' => 'https://github.com/Coffeekraken/gridle/',
 		'demo'          => 'http://gridle.org/demo/demo-flex.html',
@@ -38,7 +38,7 @@ function grille_gridle_decrire_grille_dist() {
 		'js'            => array('css/gridle.min.js'),
 		'medias' => array(
 			'' => array(
-				'label'       => _T('gridle:grid_media_mobile'),
+				'label'       => _T('noizetier_layout:champ_media_mobile'),
 				'image'       => 'images/grid-media-mobile.svg',
 				'breakpoints' => array(
 					'min' => '',
@@ -46,7 +46,7 @@ function grille_gridle_decrire_grille_dist() {
 				),
 			),
 			'tablet' => array(
-				'label'       => _T('gridle:grid_media_tablet'),
+				'label'       => _T('noizetier_layout:champ_media_tablet'),
 				'image'       => 'images/grid-media-tablet.svg',
 				'breakpoints' => array(
 					'min' => '480px',
@@ -54,7 +54,7 @@ function grille_gridle_decrire_grille_dist() {
 				),
 			),
 			'desktop' => array(
-				'label'       => _T('gridle:grid_media_desktop'),
+				'label'       => _T('noizetier_layout:champ_media_desktop'),
 				'image'       => 'images/grid-media-desktop.svg',
 				'breakpoints' => array(
 					'min' => '768px',
@@ -63,7 +63,7 @@ function grille_gridle_decrire_grille_dist() {
 			),
 			/*
 			'large' => array(
-				'label'       => _T('gridle:grid_media_large'),
+				'label'       => _T('noizetier_layout:champ_media_large'),
 				'image'       => 'images/grid-media-large.svg',
 				'breakpoints' => array(
 					'min' => '1440px',
@@ -113,14 +113,14 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 			'saisie' => 'medias_radio',
 			'options' => array(
 				'nom' => 'grille_container',
-				'label' => _T('noizetier_layout:grid_container_label'),
-				'explication' => _T('noizetier_layout:grid_container_explication'),
+				'label' => _T('noizetier_layout:champ_container_label'),
+				'explication' => _T('noizetier_layout:champ_container_explication'),
 				'defaut' => '',
 				'cacher_option_intro' => 'oui',
 				'data' => array(
-					''                => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-null.svg'), '" />', _T('gridle:grid_null')),
-					'container'       => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-container.svg'), '" />', _T('gridle:grid_container')),
-					'container_fluid' => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-container-fluid.svg'), '" />', _T('gridle:grid_container_fluid')),
+					''                => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-null.svg'), '" />', _T('noizetier_layout:champ_valeur_null')),
+					'container'       => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-container.svg'), '" />', _T('noizetier_layout:champ_container')),
+					'container_fluid' => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-container-fluid.svg'), '" />', _T('noizetier_layout:champ_container_fluid')),
 				),
 			),
 			'grille' => array(
@@ -133,7 +133,7 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 	// ROW
 	// ===
 	$saisies['row'] = array(
-		// Indiquer que c'est une ligne
+		// Toujours indiquer que c'est une ligne
 		array(
 			'saisie' => 'hidden',
 			'options' => array(
@@ -149,17 +149,17 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 			'saisie' => 'medias_radio',
 			'options' => array(
 				'nom'         => 'gridle_align_horizontal',
-				'label'       => _T('gridle:grid_align_horizontal_label'),
-				'explication' => _T('gridle:grid_align_horizontal_explication'),
+				'label'       => _T('noizetier_layout:champ_align_horizontal_label'),
+				'explication' => _T('noizetier_layout:champ_align_horizontal_row_explication'),
 				'defaut'      => '',
-				'cacher_option_intro' => 'oui',
+				// 'cacher_option_intro' => 'oui',
 				'data' => array(
-					''                  => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-null.svg'), '" />', _T('gridle:grid_null')),
-					'row-align-left'    => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-align-left.svg'), '" />', _T('gridle:grid_align_left')),
-					'row-align-center'  => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-align-center.svg'), '" />', _T('gridle:grid_align_center')),
-					'row-align-right'   => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-align-right.svg'), '" />', _T('gridle:grid_align_right')),
-					'row-align-between' => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-align-between.svg'), '" />', _T('gridle:grid_align_between')),
-					'row-align-around'  => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-align-around.svg'), '" />', _T('gridle:grid_align_around')),
+					''                  => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-null.svg'), '" />', _T('noizetier_layout:champ_valeur_null')),
+					'row-align-left'    => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-align-left.svg'), '" />', _T('noizetier_layout:champ_align_left')),
+					'row-align-center'  => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-align-center.svg'), '" />', _T('noizetier_layout:champ_align_center')),
+					'row-align-right'   => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-align-right.svg'), '" />', _T('noizetier_layout:champ_align_right')),
+					'row-align-between' => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-align-between.svg'), '" />', _T('noizetier_layout:champ_align_between')),
+					'row-align-around'  => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-align-around.svg'), '" />', _T('noizetier_layout:champ_align_around')),
 				),
 			),
 			'grille' => array(
@@ -171,15 +171,15 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 			'saisie' => 'medias_radio',
 			'options' => array(
 				'nom'         => 'gridle_align_vertical',
-				'label'       => _T('gridle:grid_align_vertical_label'),
-				'explication' => _T('gridle:grid_align_vertical_explication'),
+				'label'       => _T('noizetier_layout:champ_align_vertical_label'),
+				'explication' => _T('noizetier_layout:champ_align_vertical_row_explication'),
 				'defaut'      => '',
-				'cacher_option_intro' => 'oui',
+				// 'cacher_option_intro' => 'oui',
 				'data' => array(
-					''                 => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-null.svg'), '" />', _T('gridle:grid_null')),
-					'row-align-top'    => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-align-top.svg'), '" />', _T('gridle:grid_align_top')),
-					'row-align-middle' => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-align-middle.svg'), '" />', _T('gridle:grid_align_middle')),
-					'row-align-bottom' => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-align-bottom.svg'), '" />', _T('gridle:grid_align_bottom')),
+					''                 => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-null.svg'), '" />', _T('noizetier_layout:champ_valeur_null')),
+					'row-align-top'    => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-align-top.svg'), '" />', _T('noizetier_layout:champ_align_top')),
+					'row-align-middle' => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-align-middle.svg'), '" />', _T('noizetier_layout:champ_align_middle')),
+					'row-align-bottom' => concat('<img alt="" width="50" height="50" src="'.find_in_path('images/grid-align-bottom.svg'), '" />', _T('noizetier_layout:champ_align_bottom')),
 				),
 			),
 			'grille' => array(
@@ -191,8 +191,8 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 			'saisie' => 'case',
 			'options' => array(
 				'nom'        => 'gridle_no_gutter',
-				'label'      => _T('gridle:grid_no_gutter_label'),
-				'label_case' => _T('gridle:grid_no_gutter_label_case'),
+				'label'      => _T('noizetier_layout:champ_gutter_label'),
+				'label_case' => _T('noizetier_layout:champ_gutterless_label_case'),
 				'valeur_oui' => 'row-no-gutter',
 			),
 			'grille' => array(
@@ -207,8 +207,8 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 			'saisie' => 'case',
 			'options' => array(
 				'nom'        => 'gridle_reverse',
-				'label'      => _T('gridle:grid_reverse_label'),
-				'label_case' => _T('gridle:grid_reverse_label_case'),
+				'label'      => _T('noizetier_layout:champ_direction_label'),
+				'label_case' => _T('noizetier_layout:champ_direction_reverse_label_case'),
 				'valeur_oui' => 'row-reverse',
 			),
 			'grille' => array(
@@ -239,14 +239,14 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 		/*
 		switch ($champ) {
 			default:
-				$data_saisies[$champ][''] = _T('gridle:grid_null');
+				$data_saisies[$champ][''] = _T('noizetier_layout:champ_valeur_null');
 				break;
 		}*/
 		// Ensuite d'autres valeurs éventuelles
 		switch ($champ) {
 			case 'column':
-				$data_saisies[$champ]['gr-adapt'] = _T('gridle:grid_column_adapt');
-				$data_saisies[$champ]['gr-grow'] = _T('gridle:grid_column_grow');
+				$data_saisies[$champ]['gr-adapt'] = _T('noizetier_layout:champ_width_shrink');
+				$data_saisies[$champ]['gr-grow'] = _T('noizetier_layout:champ_width_grow');
 				break;
 		}
 		// Puis les valeurs selon les colonnes/médias
@@ -268,7 +268,7 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 		and (intval($nb_noisettes_conteneur = sql_countsel('spip_noisettes', 'id_conteneur='.sql_quote($noisette['id_conteneur']))) > 1)
 	) {
 		for ($i=1; $i<=$nb_noisettes_conteneur; $i++) {
-			$data_saisies['order'][''] = _T('gridle:grid_null');
+			$data_saisies['order'][''] = _T('noizetier_layout:champ_valeur_null');
 			$data_saisies['order']['order-'.$i] = $i;
 			foreach ($medias as $media) {
 				$value = 'order-'.$i.($media?'@'.$media:'');
@@ -286,8 +286,8 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 			'saisie' => 'medias_selection',
 			'options' => array(
 				'nom'         => 'gridle_column',
-				'label'       => _T('gridle:grid_column_label'),
-				'explication' => _T('gridle:grid_column_explication'),
+				'label'       => _T('noizetier_layout:champ_width_label'),
+				'explication' => _T('noizetier_layout:champ_width_explication'),
 				'defaut'      => 'gr-12',
 				'medias'      => 'oui',
 				'obligatoire' => 'oui',
@@ -303,17 +303,16 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 		/*
 		// Choix du type de décalage
 		array(
-			'saisie' => 'radio',
+			'saisie' => 'selection',
 			'options' => array(
 				'nom'   => 'gridle_offset',
-				'label' => _T('gridle:grid_offset_label'),
-				'conteneur_class' => 'choix-inline sobre',
+				'label' => _T('noizetier_layout:champ_offset_label'),
 				'data'  => array(
-					''       => _T('gridle:grid_null'),
-					'prefix' => _T('gridle:grid_prefix_label'),
-					'suffix' => _T('gridle:grid_suffix_label'),
-					'push'   => _T('gridle:grid_push_label'),
-					'pull'   => _T('gridle:grid_pull_label'),
+					// ''       => _T('noizetier_layout:champ_valeur_null'),
+					'prefix' => _T('noizetier_layout:champ_offset_push_label'),
+					'suffix' => _T('noizetier_layout:champ_offset_pull_label'),
+					'push'   => _T('noizetier_layout:champ_offset_push_absolute_label'),
+					'pull'   => _T('noizetier_layout:champ_offset_pull_absolute_label'),
 				),
 			),
 		),
@@ -322,7 +321,8 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 			'saisie' => 'medias_selection',
 			'options' => array(
 				'nom'         => 'gridle_push',
-				'label'       => _T('gridle:grid_push_label'),
+				'label'       => _T('noizetier_layout:champ_offset_push_absolute_label'),
+				'explication' => _T('noizetier_layout:champ_offset_push_absolute_explication'),
 				'defaut'      => '',
 				'medias'      => 'oui',
 				// 'conteneur_class' => 'pleine_largeur',
@@ -340,7 +340,8 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 			'saisie' => 'medias_selection',
 			'options' => array(
 				'nom'         => 'gridle_pull',
-				'label'       => _T('gridle:grid_pull_label'),
+				'label'       => _T('noizetier_layout:champ_offset_pull_absolute_label'),
+				'explication' => _T('noizetier_layout:champ_offset_pull_absolute_explication'),
 				'defaut'      => '',
 				'medias'      => 'oui',
 				// 'conteneur_class' => 'pleine_largeur',
@@ -359,7 +360,8 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 			'saisie' => 'medias_selection',
 			'options' => array(
 				'nom'         => 'gridle_prefix',
-				'label'       => _T('gridle:grid_prefix_label'),
+				'label'       => _T('noizetier_layout:champ_offset_push_label'),
+				'explication' => _T('noizetier_layout:champ_offset_push_explication'),
 				'defaut'      => '',
 				'medias'      => 'oui',
 				// 'conteneur_class' => 'pleine_largeur',
@@ -378,7 +380,8 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 			'saisie' => 'medias_selection',
 			'options' => array(
 				'nom'         => 'gridle_suffix',
-				'label'       => _T('gridle:grid_suffix_label'),
+				'label'       => _T('noizetier_layout:champ_offset_pull_label'),
+				'explication' => _T('noizetier_layout:champ_offset_pull_explication'),
 				'defaut'      => '',
 				'medias'      => 'oui',
 				// 'conteneur_class' => 'pleine_largeur',
@@ -399,8 +402,8 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 				'saisie' => 'medias_radio',
 				'options' => array(
 					'nom'         => 'gridle_order',
-					'label'       => _T('gridle:grid_order_label'),
-					'explication' => _T('gridle:grid_order_explication'),
+					'label'       => _T('noizetier_layout:champ_order_label'),
+					'explication' => _T('noizetier_layout:champ_order_explication').' '._T('noizetier_layout:champ_order_explication_expose'),
 					'medias'      => 'oui',
 					//'defaut'      => 'order-'.$noisette['rang_noisette'],
 					'data'        => $data_saisies['order'],
@@ -429,21 +432,21 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
 		*/
 	);
 
-	// ========
-	// COMMUNES
-	// ========
+	// ====
+	// TOUT
+	// ====
 	$saisies['*'] = array(
 		// Visibilité
 		array(
 			'saisie' => 'medias_radio',
 			'options' => array(
 				'nom' => 'grid_visibility',
-				'label' => _T('gridle:grid_visibility_label'),
+				'label' => _T('noizetier_layout:champ_visibility_label'),
 				'medias' => true,
 				'data' => array(
-					''        => _T('gridle:grid_null'),
-					'hidden'  => _T('gridle:grid_visibility_hidden'),
-					'visible' => _T('gridle:grid_visibility_visible'),
+					''        => _T('noizetier_layout:champ_valeur_null'),
+					'hidden'  => _T('noizetier_layout:champ_visibility_hidden'),
+					'visible' => _T('noizetier_layout:champ_visibility_visible'),
 				),
 			),
 			'grille' => array(
