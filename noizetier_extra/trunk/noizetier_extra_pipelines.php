@@ -82,7 +82,7 @@ function noizetier_extra_formulaire_charger($flux) {
 				}
 			}
 
-			// Saisie à valeur simple ou multiple ?
+			// Saisie à valeur unique ou multiple ?
 			// On prend l'option explicite, sinon on compte le nombre.
 			// Nb : pas 100% fiable :(
 			if (!$valeur = _request($champ)) {
@@ -120,55 +120,64 @@ function noizetier_extra_formulaire_verifier($flux) {
 
 	if (
 		$flux['args']['form'] == 'editer_noisette'
+		and !$flux['data'] // pas d'erreur
 		and $id_noisette = $flux['args']['args'][0]
 		and $type_noisette = _request('type_noisette')
 		and include_spip('inc/noizetier_extra')
 		and is_array($saisies_classes = noizetier_lister_saisies_classes($type_noisette))
 	) {
 
-		// Récupérer les classes attribuées
-		$classes_noisette = trim(_request('conteneur_css').' '. _request('css'));
-		$classes_noisette = explode(' ', $classes_noisette);
-		$classes_noisette = array_filter($classes_noisette);
+		// Vérifier d'abord les erreurs des saisies extras
+		// (le noizetier ne vérifie que celles déclarées dans le yaml).
+		include_spip('inc/saisies');
+		if (!$erreurs = saisies_verifier($saisies_classes)) {
 
-		// Gibolinage des classes : on ajoute les valeurs postées
-		// dans les saisies de classe au champ contenant les classes.
-		foreach ($saisies_classes as $saisie) {
-			$type_saisie = $saisie['saisie'];
-			$champ = $saisie['options']['nom'];
+			// Récupérer les classes attribuées
+			$classes_noisette = trim(_request('conteneur_css').' '. _request('css'));
+			$classes_noisette = explode(' ', $classes_noisette);
+			$classes_noisette = array_filter($classes_noisette);
 
-			// Nettoyage : on retire d'abord toutes les classes qui font partie
-			// des valeurs acceptables de la saisie.
-			$classes_champ = array();
-			if (include_spip("saisies/$type_saisie")) {
-				$verifier_valeurs_acceptables = $type_saisie.'_valeurs_acceptables';
-				if (function_exists($verifier_valeurs_acceptables)) {
-					foreach ($classes_noisette as $classe) {
-						if ($verifier_valeurs_acceptables($classe, $saisie)) {
-							$classes_champ[] = $classe;
+			// On met à jour la liste des classes attribuées
+			// en fonction des valeurs postées dans les saisies extras.
+			foreach ($saisies_classes as $saisie) {
+				$type_saisie = $saisie['saisie'];
+				$champ = $saisie['options']['nom'];
+
+				// D'abord on nettoie en retirant toutes les valeurs possibles de la saisie.
+				$classes_champ = array();
+				if (include_spip("saisies/$type_saisie")) {
+					$verifier_valeurs_acceptables = $type_saisie.'_valeurs_acceptables';
+					if (function_exists($verifier_valeurs_acceptables)) {
+						foreach ($classes_noisette as $classe) {
+							if ($verifier_valeurs_acceptables($classe, $saisie)) {
+								$classes_champ[] = $classe;
+							}
 						}
 					}
 				}
-			}
-			$classes_noisette = array_diff($classes_noisette, $classes_champ);
+				$classes_noisette = array_diff($classes_noisette, $classes_champ);
 
-			// Puis on ajoute la valeur postée
-			if (!is_null($valeur = _request($champ))) {
-				if (is_array($valeur)) {
-					$classes_noisette = array_merge($classes_noisette, $valeur);
-				} else {
-					$classes_noisette[] = $valeur;
+				// Puis on ajoute la valeur postée
+				if (!is_null($valeur = _request($champ))) {
+					if (is_array($valeur)) {
+						$classes_noisette = array_merge($classes_noisette, $valeur);
+					} else {
+						$classes_noisette[] = $valeur;
+					}
 				}
 			}
+
+			// On met à jour le champ contenant les classes.
+			$classes_noisette = implode(' ', array_unique($classes_noisette));
+			set_request('css', $classes_noisette);
+			set_request('conteneur_css', $classes_noisette);
+
+		} else {
+			$flux = $erreurs;
 		}
 
-		// Mise à jour du champ
-		$classes_noisette = implode(' ', array_unique($classes_noisette));
-		set_request('css', $classes_noisette);
-		set_request('conteneur_css', $classes_noisette);
-
-		// var_dump($classes_noisette);
-		// $flux['message_erreur'] = 'Stop : debug';
+		//var_dump($classes_noisette);
+		// $flux['message_erreur'] = 'Debug noizetier_extra';
 	}
 
 	return $flux;

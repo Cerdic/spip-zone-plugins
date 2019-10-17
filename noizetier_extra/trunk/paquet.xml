@@ -1,7 +1,7 @@
 <paquet
 	prefix="noizetier_extra"
 	categorie="maintenance"
-	version="0.1.5"
+	version="0.1.6"
 	etat="experimental"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="noizetier_extra-32.png"
