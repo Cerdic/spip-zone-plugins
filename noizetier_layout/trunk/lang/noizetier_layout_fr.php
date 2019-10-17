@@ -82,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_media_desktop_large_up' => 'Bureaux larges et +',
 	//
 	'champ_container_label' => 'Largeur interne',
-	'champ_container_explication' => 'Limiter la largeur du <strong>contenu</strong> de la noisette, sans changer sa largeur propre.',
+	'champ_container_explication' => 'Limiter la largeur du <strong>contenu</strong> de la noisette.',
 	'champ_container_edito' => 'Largeur adaptée à du texte',
 	'champ_container' => 'Largeur moyenne',
 	'champ_container_small' => 'Largeur petite',
