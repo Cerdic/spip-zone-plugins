@@ -92,7 +92,7 @@ function noizetier_layout_formulaire_charger($flux) {
 							'saisie' => 'fieldset',
 							'options' => array(
 								'nom' => 'affichage',
-								'label' => _T('noizetier_layout:grid_affichage_label'),
+								'label' => _T('noizetier_layout:champ_fieldset_affichage_label'),
 								'pliable' => 'oui',
 								'plie' => '',
 							),
