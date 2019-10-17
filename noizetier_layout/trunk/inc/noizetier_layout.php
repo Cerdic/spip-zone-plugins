@@ -229,6 +229,7 @@ function noizetier_layout_creer_classe_media($classe, $media) {
  */
 function noizetier_layout_identifier_element_grille($id_noisette) {
 
+	include_spip('inc/config');
 	$elements       = array();
 	$noisette       = sql_fetsel('type_noisette,id_conteneur', 'spip_noisettes', 'id_noisette='.intval($id_noisette));
 	$type_noisette  = $noisette['type_noisette'];
@@ -236,13 +237,17 @@ function noizetier_layout_identifier_element_grille($id_noisette) {
 	$a_la_racine    = (strpos($id_conteneur, '/') !== false);
 	$dans_conteneur = (strpos($id_conteneur, 'noisette') !== false);
 	list($type_noisette_parente, $noisette_parente, $id_noisette_parente) = explode('|', $id_conteneur); // pas de fonction dans l'API pour avoir ces infos
+	$activer_container = lire_config('noizetier_layout/activer_container');
 
 	// Toutes les noisettes peuvent techniquement avoir un .container en enfant direct.
 	// Cependant pour simplifier, on n'active l'option que pour celles à la racine
-	// et celles dans un conteneur lambda (mais ça pourrait changer).
+	// ou enfants directs d'une noisette conteneur.
 	if (
-		$a_la_racine
-		or $type_noisette_parente == 'conteneur'
+		$activer_container
+		and (
+			$a_la_racine
+			or $type_noisette_parente == 'conteneur'
+		)
 	) {
 		$elements[] = 'container';
 	}
