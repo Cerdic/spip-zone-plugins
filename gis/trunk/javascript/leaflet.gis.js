@@ -204,6 +204,7 @@ L.Map.Gis = L.Map.extend({
 	centerAndZoom: function (centerOrBounds, panonly) {
 		var map = this;
 		var options = map.options;
+		var maxZoomOriginal = options.maxZoom;
 		var bounds = new L.LatLngBounds();
 		bounds.extend(centerOrBounds);
 		panonly = panonly === undefined ? false : panonly;
@@ -219,7 +220,7 @@ L.Map.Gis = L.Map.extend({
 			bounds._southWest.lng -= 0.1;
 		}
 		map.fitBounds(bounds, options);
-		delete map.options.maxZoom;
+		map.options.maxZoom = maxZoomOriginal;
 	},
 
 	// API parseGeoJson
