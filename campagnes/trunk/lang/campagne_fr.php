@@ -49,7 +49,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_campagnes_publies' => '@nb@ publicités publiées',
 	'info_nb_campagnes_non_publies' => '@nb@ publicités non publiées',
 	'info_campagnes_auteur' => 'Les publicités de cet auteur',
-
+	
+	// P
+	'purger_statistiques_bouton' => 'Purger',
+	'purger_statistiques_message_ok' => 'Toutes les statistiques ont été effacées !',
+	'purger_statistiques_message_ok_date' => 'Statistiques effacées @debut_fin@.',
+	'purger_statistiques_titre' => 'Purger les statistiques',
+	
 	// R
 	'retirer_lien_campagne' => 'Retirer cette publicité',
 	'retirer_tous_liens_campagnes' => 'Retirer toutes les publicités',

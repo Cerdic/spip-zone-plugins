@@ -31,3 +31,19 @@ function campagnes_affichage_final($flux) {
 	
 	return $flux;
 }
+
+/**
+ * Ajouter la purge des statistiques
+ *
+ * @pipeline affiche_gauche
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function campagnes_affiche_gauche($flux) {
+	if ($flux['args']['exec'] == 'encarts') {
+		$purger = recuperer_fond('prive/squelettes/inclure/purger_statistiques_campagnes', array());
+		$flux['data'] .= $purger;
+	}
+	
+	return $flux;
+}
