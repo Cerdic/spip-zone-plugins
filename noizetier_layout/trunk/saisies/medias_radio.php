@@ -1,10 +1,9 @@
 <?php
-
 /**
  * Fonctions spécifiques à une saisie
  *
  * @package SPIP\Saisies\checkbox
-**/
+ */
 
 
 // Sécurité
@@ -21,7 +20,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return bool true si valeur ok, false sinon,
  */
 function medias_radio_valeurs_acceptables($valeur, $description) {
-	include_spip('saisies/selection');
-	return selection_valeurs_acceptables($valeur, $description);
+	include_spip('saisies/medias_selection');
+	return medias_selection_valeurs_acceptables($valeur, $description);
 }
-
