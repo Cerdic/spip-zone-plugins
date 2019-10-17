@@ -21,8 +21,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_cfg_inclure_css_public_label_case' => 'Charger la feuille de style sur le site public',
 	'champ_cfg_inclure_css_public_explication' => 'Décochez cette option si votre thème inclus d’office la feuille de style correspondant à la grille CSS utilisée.',
 	'champ_cfg_activer_container_label' => 'Conteneurs internes.',
-	'champ_cfg_activer_container_label_case' => 'Gérer des conteneurs internes aux noisettes.',
-	'champ_cfg_activer_container_explication' => 'Chaque noisette peut optionnellement avoir un conteneur interne limité en largeur. Cette option n’est utile que si le bloc où elle se trouve n’est pas déjà limité en largeur par le thème CSS.',
+	'champ_cfg_activer_container_label_case' => 'Activer la gestion des conteneurs internes.',
+	'champ_cfg_activer_container_explication' => 'Chaque noisette peut optionnellement avoir un conteneur interne en vue de limiter la largeur de son contenu. Cette option n’est utile que si le bloc où elle se trouve n’est pas déjà limité en largeur par le thème CSS.',
 	//
 	'champ_fieldset_affichage_label' => 'Affichage',
 	'champ_fieldset_container_label' => 'Largeur interne',
