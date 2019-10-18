@@ -242,7 +242,7 @@ function rechercher_presence_liens_spammes($liens,$seuil,$table,$champs,$condsta
 	foreach ($liens as $lien){
 		$url = extraire_attribut($lien,"href");
 		if ($parse = parse_url($url)
-		  AND $parse['host']
+		  AND !empty($parse['host'])
 		  AND (!$amis OR !preg_match($amis,$parse['host'])))
 			$hosts[] = $parse['host'];
 	}
