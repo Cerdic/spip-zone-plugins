@@ -107,7 +107,7 @@ function embed_url($url) {
 			}
 		}
 		else if (preg_match("/^https?\:\/\/(www\.)?soundcloud\.com/i", $url)) {
-			$oembed = "http://soundcloud.com/oembed?format=json&url=".$url;
+			$oembed = "https://soundcloud.com/oembed?format=json&url=".$url;
 			$json = join("",file($oembed));
 			$json = json_decode($json);
 			$html = $json->{'html'};
