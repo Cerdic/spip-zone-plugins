@@ -235,16 +235,15 @@ function noizetier_layout_identifier_element_grille($id_noisette) {
 	$type_noisette  = $noisette['type_noisette'];
 	$id_conteneur   = $noisette['id_conteneur'];
 	$profondeur     = $noisette['profondeur'];
-	// $a_la_racine    = (strpos($id_conteneur, '/') !== false);
 	$dans_conteneur = (strpos($id_conteneur, 'noisette') !== false);
 	list($type_noisette_parente, $noisette_parente, $id_noisette_parente) = explode('|', $id_conteneur); // pas de fonction dans l'API pour avoir ces infos
 	$activer_container = lire_config('noizetier_layout/activer_container');
 
 	// Toutes les noisettes peuvent techniquement avoir un .container.
-	// Cependant pour simplifier, on n'active l'option que pour celles à une profondeur de 1 au max.
+	// Pour simplifier, on n'active l'option que pour celles à la racine.
 	if (
 		$activer_container
-		and $profondeur <= 1
+		and $profondeur < 1
 	) {
 		$elements[] = 'container';
 	}
