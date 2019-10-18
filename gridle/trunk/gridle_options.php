@@ -6,6 +6,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 // Déclarer la grille
-if (!defined('_NOIZETIER_GRILLE')) {
-	define('_NOIZETIER_GRILLE', 'gridle');
+if (!defined('_NOIZETIER_GRILLE_CSS')) {
+	define('_NOIZETIER_GRILLE_CSS', 'gridle');
 }

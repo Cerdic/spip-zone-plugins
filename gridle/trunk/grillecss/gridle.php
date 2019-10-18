@@ -23,7 +23,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return array
  *     Tableau associatif
  */
-function grille_gridle_decrire_grille_dist() {
+function grillecss_gridle_decrire_grille_dist() {
 
 	$grille = array(
 		'nom'           => _T('gridle:gridle_nom'),
@@ -97,7 +97,7 @@ function grille_gridle_decrire_grille_dist() {
  *     row       => [saisies]
  *     column    => [saisies]
  */
-function grille_gridle_lister_saisies_dist($id_noisette = 0) {
+function grillecss_gridle_lister_saisies_dist($id_noisette = 0) {
 
 	include_spip('inc/noizetier_layout');
 	include_spip('inc/filtres');
@@ -471,7 +471,7 @@ function grille_gridle_lister_saisies_dist($id_noisette = 0) {
  * @return string
  *     La classe modifiée
  */
-function grille_gridle_creer_classe_media_dist($classe, $media) {
+function grillecss_gridle_creer_classe_media_dist($classe, $media) {
 
 	$classe_media = $classe;
 	if ($classe and $media) {
