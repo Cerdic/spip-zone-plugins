@@ -19,16 +19,22 @@
 
 ]
 #SET{balise, #ENV{conteneur_balise}|sinon{div}}
-[<div class="(#ENV{css_grid_column}|attribut_html)">]
-	<[(#GET{balise})] class="noisette[ noisette_(#ENV{type_noisette}|attribut_html)][ (#ENV{conteneur_css}|attribut_html)][ (#ENV{css_grid_container}|non)[(#ENV{css_grid_row}|attribut_html)]]">
-	[(#ENV{css_grid_container}|oui)
-		<div class="[(#ENV{css_grid_container}|attribut_html)]">
-			<div class="[(#ENV{css_grid_row}|attribut_html)]">
+#SET{grille, #REM|noizetier_layout_grille|?{#ARRAY{
+	container, #ENV{css_grid_container},
+	row,       #ENV{css_grid_row},
+	column,    #ENV{css_grid_column},
+	*,         #ENV{css_grid_*},
+}}}
+[<div class="(#GET{grille/column}|attribut_html)">]
+	<[(#GET{balise})] class="noisette[ noisette_(#ENV{type_noisette}|attribut_html)][ (#ENV{conteneur_css}|attribut_html)][ (#GET{grille/container}|non)[(#GET{grille/row}|attribut_html)]]">
+	[(#GET{grille/container}|oui)
+		<div class="[(#GET{grille/container}|attribut_html)]">
+			<div class="[(#GET{grille/row}|attribut_html)]">
 	]
 				<!--noisettes-->
-	[(#ENV{css_grid_container}|oui)
+	[(#GET{grille/container}|oui)
 			</div>
 		</div>
 	]
 	</[(#GET{balise})]>
-[(#ENV{css_grid_column}|oui)</div>]
+[(#GET{grille/column}|oui)</div>]

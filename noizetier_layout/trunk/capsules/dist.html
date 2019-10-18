@@ -17,9 +17,15 @@
 ]
 <BOUCLE_noisette_englober(NOISETTES) {id_noisette}>
 #SET{params, #PARAMETRES}
-<div class="noisette noisette_#TYPE_NOISETTE[ (#CHAMP_SQL{css})][ (#GET{params/css_grid_column}|attribut_html)][ (#GET{params/css_grid_*}|attribut_html)]">
-	[<div class="(#GET{params/css_grid_container}|attribut_html)">]
+#SET{grille, #REM|noizetier_layout_grille|?{#ARRAY{
+	container, #GET{params/css_grid_container},
+	row,       #GET{params/css_grid_row},
+	column,    #GET{params/css_grid_column},
+	*,         #GET{params/css_grid_*},
+}}}
+<div class="noisette noisette_#TYPE_NOISETTE[ (#CHAMP_SQL{css})][ (#GET{grille/column}|attribut_html)][ (#GET{grille/*}|attribut_html)]">
+	[<div class="(#GET{grille/container}|attribut_html)">]
 		<!--noisettes-->
-	[(#GET{params/css_grid_container}|oui)</div>]
+	[(#GET{grille/container}|oui)</div>]
 </div>
 </BOUCLE_noisette_englober>
