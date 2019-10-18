@@ -25,19 +25,19 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function noizetier_layout_grille() {
 
-	static $grille;
-	if (!is_null($grille)) {
-		return $grille;
+	static $grille_css;
+	if (!is_null($grille_css)) {
+		return $grille_css;
 	}
 
 	// Todo : vérifier aussi la présence des fonctions nécessaires ?
-	if (defined('_NOIZETIER_GRILLE')) {
-		$grille = _NOIZETIER_GRILLE;
+	if (defined('_NOIZETIER_GRILLE_CSS')) {
+		$grille_css = _NOIZETIER_GRILLE_CSS;
 	} else {
-		$grille = false;
+		$grille_css = false;
 	}
 
-	return $grille;
+	return $grille_css;
 }
 
 

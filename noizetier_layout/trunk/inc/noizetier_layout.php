@@ -28,34 +28,34 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function noizetier_layout_decrire_grille($info = null) {
 
 	// Ne pas faire plusieurs fois le travail
-	static $grille;
-	if ($grille and isset($grille[$info])) {
-		return $grille[$info];
-	} elseif ($grille) {
-		return $grille;
+	static $description_grille;
+	if ($description_grille and isset($description_grille[$info])) {
+		return $description_grille[$info];
+	} elseif ($description_grille) {
+		return $description_grille;
 	}
 
-	$grille = $retour = array();
+	$description_grille = $retour = array();
 	if (
-		noizetier_layout_grille()
-		and $decrire_grille = charger_fonction('decrire_grille', 'grille/'._NOIZETIER_GRILLE)
+		$grille = noizetier_layout_grille()
+		and $decrire_grille = charger_fonction('decrire_grille', 'grillecss/'.$grille, true)
 	) {
-		$grille = $decrire_grille();
+		$description_grille = $decrire_grille();
 		// Un coup pour les plugins
-		$grille = pipeline(
+		$description_grille = pipeline(
 			'noizetier_layout_decrire_grille',
 			array(
 				'args' => array(
-					'grille' => _NOIZETIER_GRILLE,
+					'grille' => $nom_grille,
 				),
-				'data' => $grille,
+				'data' => $description_grille,
 			)
 		);
 		// Retourner tout ou partie
-		if ($info and isset($grille[$info])) {
-			$retour = $grille[$info];
+		if ($info and isset($description_grille[$info])) {
+			$retour = $description_grille[$info];
 		} else {
-			$retour = $grille;
+			$retour = $description_grille;
 		}
 	}
 
@@ -85,8 +85,8 @@ function noizetier_layout_lister_saisies($element = null, $id_noisette = 0) {
 
 	$saisies = $retour = array();
 	if (
-		noizetier_layout_grille()
-		and $lister_saisies = charger_fonction('lister_saisies', 'grille/'._NOIZETIER_GRILLE)
+		$grille = noizetier_layout_grille()
+		and $lister_saisies = charger_fonction('lister_saisies', 'grillecss/'.$grille, true)
 	) {
 		$saisies_grille = $lister_saisies($id_noisette);
 		// Un coup pour les plugins
@@ -94,7 +94,7 @@ function noizetier_layout_lister_saisies($element = null, $id_noisette = 0) {
 			'noizetier_layout_lister_saisies_grille',
 			array(
 				'args' => array(
-					'grille'      => _NOIZETIER_GRILLE,
+					'grille'      => $nom_grille,
 					'id_noisette' => $id_noisette,
 				),
 				'data' => $saisies_grille,
@@ -203,7 +203,8 @@ function noizetier_layout_contextualiser_classes($element, $classes_element, $id
 function noizetier_layout_creer_classe_media($classe, $media) {
 
 	$classe_media = $classe;
-	if ($creer_classe_media = charger_fonction('creer_classe_media', 'grille/'._NOIZETIER_GRILLE, true)) {
+	$grille = noizetier_layout_grille();
+	if ($creer_classe_media = charger_fonction('creer_classe_media', 'grillecss/'.$grille, true)) {
 		$classe_media = $creer_classe_media($classe, $media);
 	}
 
