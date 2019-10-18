@@ -12,7 +12,7 @@ Des blocs conteneurs constituent des « lignes ».
 Dans ces lignes, chaque bloc enfant est une « colonne » qui peut s'étendre sur une N colonnes virtuelles.
 Leur largeur peut être définie pour chaque breakpoint.
 
-![Grille CSS](images/doc/grid.svg)
+![Grille CSS](images/doc/grid.png)
 
 ## Utilisation
 
