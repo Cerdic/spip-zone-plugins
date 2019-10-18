@@ -32,7 +32,7 @@ function xray_marqueur_invisible($t) {
 
 defined ('_CACHE_KEY') or define('_CACHE_KEY', '');
 if (_CACHE_KEY) 
-	die ("XRay ne fonctionne pas encore avec des caches cryptés. Ajoutez &nbsp; <code> define('_CACHE_KEY', ''); </code> &nbsp; dans votre mes_options.php");
+	die ("key='"._CACHE_KEY."'. XRay ne fonctionne pas encore avec des caches cryptés. Ajoutez &nbsp; <code> define('_CACHE_KEY', ''); </code> &nbsp; dans votre mes_options.php");
 
 
 global $Memoization;
