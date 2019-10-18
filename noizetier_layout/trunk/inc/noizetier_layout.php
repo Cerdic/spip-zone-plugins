@@ -231,23 +231,20 @@ function noizetier_layout_identifier_element_grille($id_noisette) {
 
 	include_spip('inc/config');
 	$elements       = array();
-	$noisette       = sql_fetsel('type_noisette,id_conteneur', 'spip_noisettes', 'id_noisette='.intval($id_noisette));
+	$noisette       = sql_fetsel('type_noisette,id_conteneur,profondeur', 'spip_noisettes', 'id_noisette='.intval($id_noisette));
 	$type_noisette  = $noisette['type_noisette'];
 	$id_conteneur   = $noisette['id_conteneur'];
-	$a_la_racine    = (strpos($id_conteneur, '/') !== false);
+	$profondeur     = $noisette['profondeur'];
+	// $a_la_racine    = (strpos($id_conteneur, '/') !== false);
 	$dans_conteneur = (strpos($id_conteneur, 'noisette') !== false);
 	list($type_noisette_parente, $noisette_parente, $id_noisette_parente) = explode('|', $id_conteneur); // pas de fonction dans l'API pour avoir ces infos
 	$activer_container = lire_config('noizetier_layout/activer_container');
 
-	// Toutes les noisettes peuvent techniquement avoir un .container en enfant direct.
-	// Cependant pour simplifier, on n'active l'option que pour celles à la racine
-	// ou enfants directs d'une noisette conteneur.
+	// Toutes les noisettes peuvent techniquement avoir un .container.
+	// Cependant pour simplifier, on n'active l'option que pour celles à une profondeur de 1 au max.
 	if (
 		$activer_container
-		and (
-			$a_la_racine
-			or $type_noisette_parente == 'conteneur'
-		)
+		and $profondeur <= 1
 	) {
 		$elements[] = 'container';
 	}
@@ -257,7 +254,7 @@ function noizetier_layout_identifier_element_grille($id_noisette) {
 		$elements[] = 'row';
 	}
 
-	// Noisette enfante d'une noisette « conteneur_row » = column
+	// Noisette enfante d'une noisette « conteneur » = column
 	if ($type_noisette_parente == 'conteneur') {
 		$elements[] = 'column';
 	}
