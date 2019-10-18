@@ -27,7 +27,7 @@ function sprite ($img, $nom) {
 	$alt = extraire_attribut($img, "alt");
 	$class = extraire_attribut($img, "class");
 	$fichier = sous_repertoire(_DIR_VAR, 'cache-sprites').$nom;
-	//$fichier .= "?m=spiprempdate[$fichier]";
+	$fichier .= "?m=spiprempdate[$fichier]";
 	
 	$date_src = @filemtime($src);
 	if ($date_src > $GLOBALS["sprites"]["$nom"]["date"]) $GLOBALS["sprites"]["$nom"]["date"] = $date_src;
