@@ -59,7 +59,16 @@ function noizetier_layout_formulaire_charger($flux) {
 
 		include_spip('inc/saisies');
 
-		// Nb : la noisette peut-être plusieurs éléments de la grille à a fois.
+		// Des fois que...
+		if (
+			!isset($flux['data']['_champs_noisette'])
+			or !is_array($flux['data']['_champs_noisette'])
+		) {
+			$flux['data']['_champs_noisette'] = array();
+		}
+
+		// Ajout des saisies pour tous les types d'éléments de la grille
+		// auxquels correspond la noisette (il peut y en avoir plusieurs à a fois).
 		// On ajoute aussi les saisies communes à tous les éléments.
 		$elements_grille[] = '*';
 		foreach ($elements_grille as $element) {
