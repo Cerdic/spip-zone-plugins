@@ -43,7 +43,7 @@ function noizetier_layout_decrire_grille($info = null) {
 		$grille = $decrire_grille();
 		// Un coup pour les plugins
 		$grille = pipeline(
-			'noizetier_decrire_grille',
+			'noizetier_layout_decrire_grille',
 			array(
 				'args' => array(
 					'grille' => _NOIZETIER_GRILLE,
@@ -91,7 +91,7 @@ function noizetier_layout_lister_saisies($element = null, $id_noisette = 0) {
 		$saisies_grille = $lister_saisies($id_noisette);
 		// Un coup pour les plugins
 		$saisies_grille = pipeline(
-			'noizetier_lister_saisies_grille',
+			'noizetier_layout_lister_saisies_grille',
 			array(
 				'args' => array(
 					'grille'      => _NOIZETIER_GRILLE,
