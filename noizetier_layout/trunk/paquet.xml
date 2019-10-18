@@ -1,8 +1,8 @@
 <paquet
 	prefix="noizetier_layout"
 	categorie="maintenance"
-	version="0.1.10"
-	schema="0.1.0"
+	version="0.1.11"
+	schema="0.2.0"
 	etat="dev"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="noizetier_layout-32.png"
