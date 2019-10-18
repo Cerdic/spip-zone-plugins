@@ -60,10 +60,7 @@ function noizetier_layout_formulaire_charger($flux) {
 		include_spip('inc/saisies');
 
 		// Des fois que...
-		if (
-			!isset($flux['data']['_champs_noisette'])
-			or !is_array($flux['data']['_champs_noisette'])
-		) {
+		if (empty($flux['data']['_champs_noisette'])) {
 			$flux['data']['_champs_noisette'] = array();
 		}
 
