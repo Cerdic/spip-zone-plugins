@@ -1,7 +1,7 @@
 <paquet
 	prefix="creer_sprites"
 	categorie="multimedia"
-	version="1.4.1"
+	version="1.4.2"
 	etat="dev"
 	compatibilite="[3.2.0;3.3.*]"
 	documentation="http://www.paris-beyrouth.org/tutoriaux-spip/article/plugin-creer-sprites-css"	
@@ -12,6 +12,5 @@
 	<auteur>ARNO*</auteur>
 	<licence lien="http://www.gnu.org/licenses/gpl-2.0.html">GPL</licence>
 
-	<pipeline nom="recuperer_fond" inclure="creer_sprites_fonctions.php" />
-
+	<pipeline nom="affichage_final" inclure="creer_sprites_fonctions.php" />
 </paquet>
