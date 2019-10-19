@@ -22,8 +22,9 @@ function sprite($img, $nom) {
 			return;
 		}
 	}
+	if (   !isset ($GLOBALS['sprites'][$nom]['fichiers'])
+		or !in_array($src, $GLOBALS['sprites'][$nom]['fichiers'])) {
 
-	if (!in_array($src, $GLOBALS['sprites'][$nom]['fichiers'])) {
 		$GLOBALS['sprites'][$nom]['fichiers'][] = $src;
 
 		$largeur = largeur($img);
