@@ -90,7 +90,7 @@ function creer_sprites($flux) {
  * Peut aussi être appelé par un #FILTRE si on veut forcer au niveau d'un squelette
  */
 function filtre_creer_sprites($page) {
-	if (!count($GLOBALS['sprites'])) {
+	if (empty($GLOBALS['sprites'])) {
 		return $page;
 	}
 	$sprites = $GLOBALS['sprites'];
