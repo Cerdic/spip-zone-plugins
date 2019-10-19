@@ -23,30 +23,34 @@ function sprite($img, $nom) {
 		}
 	}
 
-	$GLOBALS['sprites'][$nom]['fichiers'][] = $src;
-	
-	$largeur = largeur($img);
-	$hauteur = hauteur($img);
-	if ($largeur > $GLOBALS['sprites'][$nom]['largeur']) {
-		$GLOBALS['sprites'][$nom]['largeur'] = $largeur;
+	if (!in_array($src, $GLOBALS['sprites'][$nom]['fichiers'])) {
+		$GLOBALS['sprites'][$nom]['fichiers'][] = $src;
+
+		$largeur = largeur($img);
+		$hauteur = hauteur($img);
+		if ($largeur > $GLOBALS['sprites'][$nom]['largeur']) {
+			$GLOBALS['sprites'][$nom]['largeur'] = $largeur;
+		}
+		$hauteur_old = max(0, $GLOBALS['sprites'][$nom]['hauteur']);
+		$GLOBALS['sprites'][$nom]['hauteur'] += $hauteur;
+
+		$alt = extraire_attribut($img, 'alt');
+		$class = extraire_attribut($img, 'class');
+		$fichier = sous_repertoire(_DIR_VAR, 'cache-sprites') . $nom;
+
+		// On pose un marqueur pour le timestamp du futur fichier sprite
+		// qui garantira le raffraîchissement de l'affichage en cas de mise à jour du sprite
+		$fichier .= "?m=spiprempdate[$fichier]";
+
+		$date_src = @filemtime($src);
+		if ($date_src > $GLOBALS['sprites'][$nom]['date']) {
+			$GLOBALS['sprites'][$nom]['date'] = $date_src;
+		}
+
+		$GLOBALS['sprites'][$nom]['tags'][$src] = "<img src='" . find_in_path('rien.gif') . "' width='" . $largeur . "px' height='" . $hauteur . "px' style='width: " . $largeur . 'px; height: ' . $hauteur . "px; background: url($fichier) 0px -" . $hauteur_old . "px;' alt='$alt' class='$class' />";
 	}
-	$hauteur_old = max(0, $GLOBALS['sprites'][$nom]['hauteur']);
-	$GLOBALS['sprites'][$nom]['hauteur'] += $hauteur;
 
-	$alt = extraire_attribut($img, 'alt');
-	$class = extraire_attribut($img, 'class');
-	$fichier = sous_repertoire(_DIR_VAR, 'cache-sprites').$nom;
-
-	// On pose un marqueur pour le timestamp du futur fichier sprite
-	// qui garantira le raffraîchissement de l'affichage en cas de mise à jour du sprite
-	$fichier .= "?m=spiprempdate[$fichier]";
-	
-	$date_src = @filemtime($src);
-	if ($date_src > $GLOBALS['sprites'][$nom]['date']) {
-		$GLOBALS['sprites'][$nom]['date'] = $date_src;
-	}
-
-	return "<img src='".find_in_path('rien.gif')."' width='".$largeur."px' height='".$hauteur."px' style='width: ".$largeur.'px; height: '.$hauteur."px; background: url($fichier) 0px -".$hauteur_old."px;' alt='$alt' class='$class' />";
+	return $GLOBALS['sprites'][$nom]['tags'][$src];
 }
 
 /**

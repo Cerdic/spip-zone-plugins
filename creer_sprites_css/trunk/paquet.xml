@@ -1,7 +1,7 @@
 <paquet
 	prefix="creer_sprites"
 	categorie="multimedia"
-	version="2.0.0"
+	version="2.1.0"
 	etat="test"
 	compatibilite="[3.2.0;3.3.*]"
 	documentation="http://www.paris-beyrouth.org/tutoriaux-spip/article/plugin-creer-sprites-css"	
