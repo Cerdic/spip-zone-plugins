@@ -1,8 +1,8 @@
 <paquet
 	prefix="creer_sprites"
 	categorie="multimedia"
-	version="1.4.2"
-	etat="dev"
+	version="2.0.0"
+	etat="test"
 	compatibilite="[3.2.0;3.3.*]"
 	documentation="http://www.paris-beyrouth.org/tutoriaux-spip/article/plugin-creer-sprites-css"	
 >
@@ -10,6 +10,7 @@
 	<nom>Cr&#233;er sprites CSS</nom>
 
 	<auteur>ARNO*</auteur>
+	<auteur>JLuc</auteur>
 	<licence lien="http://www.gnu.org/licenses/gpl-2.0.html">GPL</licence>
 
 	<pipeline nom="affichage_final" inclure="creer_sprites_fonctions.php" />

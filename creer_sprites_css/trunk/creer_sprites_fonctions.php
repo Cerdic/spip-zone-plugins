@@ -4,8 +4,8 @@ $GLOBALS['sprites'] = false;
 
 
 /**
- * @param $img                  image à intégrer au sprite
- * @param $nom                  nom du fichier sprite
+ * @param $img string           image à intégrer au sprite
+ * @param $nom string           nom du fichier sprite
  * @return string|void          source de la balise <img> dont le src est vide
  *                              et dont le background du style fait référence au sprite, avec le bon offset
  *                              et un marqueur pour le timestamp
@@ -77,74 +77,77 @@ function creer_sprites($flux) {
  * @param string $page
  * @return string           la page modifiée
  *
- * Crée les fichiers sprites à partir de toutes les informations collectées
+ * Crée les fichiers sprites à partir des informations collectées par les appels de |sprite
  * et remplace les marqueurs de datage par le timestamp du fichier sprite
  *
- * Appelé par défaut le pipeline affichage_final
+ * @used-by     creer_sprites_affichage_final
+ * Appelé via le pipeline affichage_final
  * Peut aussi être appelé par un #FILTRE si on veut forcer au niveau d'un squelette
  */
 function filtre_creer_sprites($page) {
-	if ($sprites = $GLOBALS['sprites']) {
-		foreach ($sprites as $key => $sprite) {
-			$fichier_sprite = sous_repertoire(_DIR_VAR, 'cache-sprites').$key;
-			$nom_fichier_sprite = substr($fichier_sprite, 0, strlen($fichier_sprite) - 4);
+	if (!count($GLOBALS['sprites'])) {
+		return $page;
+	}
+	$sprites = $GLOBALS['sprites'];
 
-			$date_max = $sprite['date'];
-			$date_src = @filemtime($fichier_sprite);
-			$largeur = $sprite['largeur'];
-			$hauteur = $sprite['hauteur'];
+	foreach ($sprites as $key => $sprite) {
+		$fichier_sprite = sous_repertoire(_DIR_VAR, 'cache-sprites').$key;
+		$nom_fichier_sprite = substr($fichier_sprite, 0, strlen($fichier_sprite) - 4);
 
-			$creer = false;
+		$date_max = $sprite['date'];
+		$date_src = @filemtime($fichier_sprite);
+		$largeur = $sprite['largeur'];
+		$hauteur = $sprite['hauteur'];
 
-			// On recalcule le sprite si l'un des fichiers qui le compose est plus récent que le sprite
-			if ($date_src < $date_max) {
-				$creer = true;
+		$creer = false;
+
+		// On recalcule le sprite si l'un des fichiers qui le compose est plus récent que le sprite
+		if ($date_src < $date_max) {
+			$creer = true;
+		}
+		if ($largeur != largeur($fichier_sprite) || $hauteur != hauteur($fichier_sprite)) {
+			$creer = true;
+		}
+
+		if (!empty($_GET['var_mode'])
+			and in_array($_GET['var_mode'], array('recalcul', 'debug'))) {
+			$creer = true;
+		}
+
+		if ($creer) {
+			include_spip('inc/filtres_images');
+
+			$im = imagecreatetruecolor($largeur, $hauteur);
+			imagepalettetotruecolor($im);
+			@imagealphablending($im, false);
+			@imagesavealpha($im, true);
+			$color_t = imagecolorallocatealpha($im, 0, 0, 0, 127);
+			imagefill($im, 0, 0, $color_t);
+
+			$y_total = 0;
+			foreach ($sprite['fichiers'] as $img) {
+				$f = 'imagecreatefrom'.str_replace('jpg', 'jpeg', creer_sprites_terminaison_fichier_image($img));
+				$im_tmp = $f($img);
+				@imagepalettetotruecolor($im_tmp);
+
+				$x = imagesx($im_tmp);
+				$y = imagesy($im_tmp);
+
+				@ImageCopy($im, $im_tmp, 0, $y_total, 0, 0, $x, $y);
+				$y_total += $y;
 			}
-			if ($largeur != largeur($fichier_sprite) || $hauteur != hauteur($fichier_sprite)) {
-				$creer = true;
+
+			_image_imagepng($im, "$nom_fichier_sprite.png");
+
+			$ext = creer_sprites_terminaison_fichier_image($fichier_sprite);
+			if ($ext != 'png') {
+				$new = extraire_attribut(image_aplatir("$nom_fichier_sprite.png", $ext, 'ffffff'), 'src');
+				copy($new, $fichier_sprite);
 			}
-
-			if (!empty($_GET['var_mode'])
-				and in_array($_GET['var_mode'], array('recalcul', 'debug'))) {
-				$creer = true;
-			}
-
-			if ($creer) {
-				include_spip('inc/filtres_images');
-
-				$im = imagecreatetruecolor($largeur, $hauteur);
-				imagepalettetotruecolor($im);
-				@imagealphablending($im, false);
-				@imagesavealpha($im, true);
-				$color_t = imagecolorallocatealpha($im, 0, 0, 0, 127);
-				imagefill($im, 0, 0, $color_t);
-
-				$y_total = 0;
-				foreach ($sprite['fichiers'] as $img) {
-					$f = 'imagecreatefrom'.str_replace('jpg', 'jpeg', creer_sprites_terminaison_fichier_image($img));
-					$im_tmp = $f($img);
-					@imagepalettetotruecolor($im_tmp);
-
-					$x = imagesx($im_tmp);
-					$y = imagesy($im_tmp);
-
-					@ImageCopy($im, $im_tmp, 0, $y_total, 0, 0, $x, $y);
-					$y_total += $y;
-				}
-
-				_image_imagepng($im, "$nom_fichier_sprite.png");
-
-				$ext = creer_sprites_terminaison_fichier_image($fichier_sprite);
-				if ($ext != 'png') {
-					$new = extraire_attribut(image_aplatir("$nom_fichier_sprite.png", $ext, 'ffffff'), 'src');
-					$ok = copy($new, $fichier_sprite);
-				}
-				imagedestroy($im);
-				imagedestroy($im_tmp);
-			}
+			imagedestroy($im);
+			imagedestroy($im_tmp);
 		}
 	}
-
 	// Mettre les dates des fichiers en variable de chaque appel
 	$page = preg_replace_callback(',spiprempdate\[([^\]]*)\],', 'creer_sprites_remplacer_date', $page);
 
@@ -173,6 +176,7 @@ static $date_fichier=array();
  * @return string
  *
  * Pipeline pour calculer les sprites et les timestamp
+ * @uses filtre_creer_sprites
  */
 function creer_sprites_affichage_final($page) {
 	return filtre_creer_sprites($page);
