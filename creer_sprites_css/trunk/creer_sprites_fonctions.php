@@ -168,7 +168,7 @@ function filtre_creer_sprites($page) {
 function creer_sprites_remplacer_date($regs) {
 static $date_fichier=array();
 	$fichier = $regs[1];
-	if ($date_fichier[$fichier] > 0) {
+	if (isset($date_fichier[$fichier])) {
 		return $date_fichier[$fichier];
 	} else {
 		$date_fichier[$fichier] = @filemtime($fichier);
