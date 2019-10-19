@@ -1,0 +1,14 @@
+#SET{stats,#ARRAY}
+<BOUCLE_reponses(POUR){tableau #ENV{valeurs}}>
+	<BOUCLE_choix(POUR){tableau #VALEUR}>
+	#SET{stats,#GET{stats}|array_merge{#ARRAY{choix-#VALEUR, #GET{stats}|table_valeur{choix-#VALEUR}|sinon{0}|plus{1}}}}
+	--#CLE=>#VALEUR--
+	</BOUCLE_choix>
+</BOUCLE_reponses>
+
+<tr class="tr_liste">
+<BOUCLE_pays(PAYS){id_pays in #ENV**{valeurs}}>
+	<td class="choix">#NOM - #VALEUR</td>
+	<td class="stat">[(#GET{stats}|table_valeur{choix-#CLE}|sinon{0})]</td>
+</BOUCLE_pays>
+</tr>
