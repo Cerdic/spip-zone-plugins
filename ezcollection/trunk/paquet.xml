@@ -1,0 +1,22 @@
+<paquet
+	prefix="ezcollection"
+	categorie="outil"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="ezcollection_logo-64.png"
+>
+
+	<nom>REST Factory</nom>
+	<!-- Simplifier la mise en place d'une API REST -->
+
+	<auteur lien="http://blog.smellup.net/">Eric Lupinacci</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+
+	<pipeline nom="liste_ezcollection" action="" />
+	<pipeline nom="post_ezcollection" action="" />
+	<pipeline nom="post_ezressource" action="" />
+
+	<necessite nom="http" compatibilite="[1.2.0;]" />
+</paquet>
