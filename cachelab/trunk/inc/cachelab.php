@@ -287,7 +287,12 @@ global $Memoization;
 		spip_log($msg, 'cachelab_slow.'._LOG_INFO_IMPORTANTE);
 	}
 	if (($action=='del') and defined('LOG_CACHELAB_TOOMANY_DEL') and ($stats['nb_cible']  > LOG_CACHELAB_TOOMANY_DEL)) {
-		spip_log($msg, 'cachelab_toomany_del.'._LOG_INFO_IMPORTANTE);
+		if (function_exists ('debug_log')) {
+			debug_log ($msg, 'cachelab_toomany_del', true);
+		}
+		else {
+			spip_log($msg, 'cachelab_toomany_del.'._LOG_INFO_IMPORTANTE);
+		}
 	}
 
 	if ($return) {
