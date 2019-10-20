@@ -17,7 +17,9 @@
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/isocode_declarations.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/isocode_declarations.php" />
+	<pipeline nom="liste_ezcollection" inclure="isocode_pipelines.php" />
 
+	<necessite nom="ezcollection" compatibilite="[0.1.0;]" />
 	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 
 	<menu nom="isocode" titre="isocode:bouton_isocode" parent="menu_developpement" icone="images/isocode-16.png" action="isocode" />

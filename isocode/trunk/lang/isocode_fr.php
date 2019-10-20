@@ -6,7 +6,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 	// B
 	'bouton_isocode'                => 'Codes ISO',
 
@@ -19,27 +18,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_table_chargee'            => 'chargée',
 
 	// L
-	'label_action_charger_table'    => 'Charger une table',
-	'label_action_table'            => 'Action à exécuter',
-	'label_action_decharger_table'  => 'Vider une table',
-	'label_colonne_actualisation'   => 'Actualisé le',
-	'label_colonne_libelle'         => 'Description',
-	'label_colonne_service'         => 'Service',
-	'label_colonne_statistiques'    => 'Enregistrements',
-	'label_colonne_table'           => 'Table',
-	'label_table_geoipcontinents'   => 'table des codes GeoIP des continents',
-	'label_table_iana5646subtags'   => 'table reproduisant le registre IANA des sous-étiquettes de langues (RFC 5646)',
-	'label_table_iso15924scripts'   => 'table des indicatifs d\'écritures (ISO 15924)',
-	'label_table_iso3166countries'  => 'table des indicatifs des pays (ISO 3166)',
+	'label_action_charger_table'       => 'Charger une table',
+	'label_action_table'               => 'Action à exécuter',
+	'label_action_decharger_table'     => 'Vider une table',
+	'label_colonne_actualisation'      => 'Actualisé le',
+	'label_colonne_libelle'            => 'Description',
+	'label_colonne_service'            => 'Service',
+	'label_colonne_statistiques'       => 'Enregistrements',
+	'label_colonne_table'              => 'Table',
+	'label_table_geoipcontinents'      => 'table des codes GeoIP des continents',
+	'label_table_iana5646subtags'      => 'table reproduisant le registre IANA des sous-étiquettes de langues (RFC 5646)',
+	'label_table_iso15924scripts'      => 'table des indicatifs d\'écritures (ISO 15924)',
+	'label_table_iso3166countries'     => 'table des indicatifs des pays (ISO 3166)',
 	'label_table_iso3166subdivisions'  => 'table des indicatifs des subdivisions des pays (ISO 3166-2)',
-	'label_table_m49regions'        => 'table des indicatifs des régions du monde selon l\'ONU (UN M.49)',
-	'label_table_iso4217currencies' => 'table des devises (ISO 4217)',
-	'label_table_iso639codes'       => 'table principale des codes de langue (ISO 639-1,2 et 3)',
-	'label_table_iso639families'    => 'table des familles et groupes de langues (ISO 639-5)',
-	'label_table_iso639macros'      => 'table des macrolangues',
-	'label_table_iso639names'       => 'table des noms de langues',
-	'label_table_iso639retirements' => 'table des langues supprimées',
-	'label_tables'                  => 'Tables sur lesquelles appliquer l\'action',
+	'label_table_m49regions'           => 'table des indicatifs des régions du monde selon l\'ONU (UN M.49)',
+	'label_table_iso4217currencies'    => 'table des devises (ISO 4217)',
+	'label_table_iso639codes'          => 'table principale des codes de langue (ISO 639-1,2 et 3)',
+	'label_table_iso639families'       => 'table des familles et groupes de langues (ISO 639-5)',
+	'label_table_iso639macros'         => 'table des macrolangues',
+	'label_table_iso639names'          => 'table des noms de langues',
+	'label_table_iso639retirements'    => 'table des langues supprimées',
+	'label_tables'                     => 'Tables sur lesquelles appliquer l\'action',
 
 	// N
 	'notice_charger_table'          => 'Aucune mise à jour n\'est nécessaire sur la ou les tables « @tables@ ».',
