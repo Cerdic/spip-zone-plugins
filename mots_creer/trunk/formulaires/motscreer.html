@@ -11,11 +11,31 @@
 		<[(#DIV|sinon{ul})] class="editer-groupe">
 			#ACTION_FORMULAIRE{#ENV{action}}
 			[(#SAISIE{groupe_mots, id_groupe, label=<:motscreer:groupe:>, obligatoire=oui})]
-			[(#SAISIE{textarea, mots, obligatoire=oui, label=<:motscreer:mots:>, explication=<:motscreer:mots_explications:>})]
+			[(#SAISIE{textarea, mots, obligatoire=oui, label=<:motscreer:mots:>, explication=#VAL{motscreer}|concat{':',#ENV{mots_explications}}|_T})]
 		</[(#DIV|sinon{ul})]>
 
+		#SET{intitule_bouton,#EVAL{_T('motscreer:bouton_creer')}}
+		[(#ENV{necessite_confirmation}|oui)
+			#SET{intitule_bouton,#EVAL{_T('previsualiser')}}
+			<a name="confirmation"></a>
+	
+			[
+			#SET{intitule_bouton,#EVAL{_T('motscreer:bouton_creer')}}
+			<[(#DIV|sinon{li})] class="editer motscreer_previsu">
+				(#ENV**{erreurs}|table_valeur{previsu}|propre)
+			</[(#DIV|sinon{li})]>
+			[(#SAISIE{oui_non, confirmer, label=<:motscreer:confirmer_import:>})]
+			]
+	
+			[
+			<[(#DIV|sinon{li})] class="editer">
+				(#ENV**{erreurs}|table_valeur{erreur_analyse}|propre)
+			</[(#DIV|sinon{li})]>
+			]
+		]
+		
 		<p class="boutons">
-			<span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:motscreer:bouton_creer:>"/>
+			<span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="#GET{intitule_bouton}"/>
 		</p>
 	</form>
 	]

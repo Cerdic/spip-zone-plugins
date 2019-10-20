@@ -17,7 +17,9 @@
 	<menu nom="motscreer" titre="motscreer:motscreer_titre" parent="menu_edition" icone="images/motscreer-16.png" action="motscreer" />
 
 	<pipeline nom="autoriser" inclure="motscreer_autorisations.php"/>
-
+	<pipeline nom="header_prive" inclure="motscreer_pipelines.php"/>
+	
 	<necessite nom="saisies" compatibilite="[3.23.2;[" />
+	<utilise nom="motsar"/>
 
 </paquet>
