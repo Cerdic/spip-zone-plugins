@@ -20,6 +20,6 @@
 	<pipeline nom="post_ressource_svp" action="" />
 
 	<necessite nom="svp" compatibilite="[2.0.7;[" />
-	<necessite nom="ezcollection" compatibilite="[0.1.0;]" />
+	<necessite nom="ezrest" compatibilite="[0.1.0;]" />
 	<necessite nom="http" compatibilite="[1.2.0;]" />
 </paquet>
