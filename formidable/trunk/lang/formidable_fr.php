@@ -264,6 +264,7 @@ Cette option n’est conservée que pour compatibilité ascendante. Elle n’app
 	'traiter_email_option_masquer_champs_vide_label_case' => 'Masquer les champs vides',
 	'traiter_email_option_masquer_liens_label_case' => 'Masquer les liens d’administration dans le courriel.',
 	'traiter_email_option_masquer_valeurs_accuse_label_case' => 'Ne pas envoyer les valeurs de la réponse dans l’accusé de réception',
+	'traiter_email_option_modification_reponse_label_case' => 'Ne pas envoyer d\'email en cas de modification d\'une réponse déjà enregistrée.',
 	'traiter_email_option_nom_envoyeur_accuse_explication' => 'Précisez le nom de l’expéditeur utilisé pour envoyer l’accusé de réception. Si vous ne mettez rien, ce sera le nom du site..',
 	'traiter_email_option_nom_envoyeur_accuse_label' => 'Nom de l’expéditeur de l’accusé de réception',
 	'traiter_email_option_pj_explication' => 'Si les documents postés pèsent moins de _FORMIDABLE_TAILLE_MAX_FICHIERS_EMAIL Mio (constante modifiable par le·la webmestre).',

@@ -8,6 +8,13 @@ include_spip('inc/utils');
 include_spip('inc/formidable_fichiers');
 
 function traiter_email_dist($args, $retours) {
+
+	// Vérifier si on doit envoyer en cas de modification de réponses
+	if ($retours['modification_reponse'] == true and isset($args['options']['modification_reponse'])) {
+		$retours['traitements']['email'] = true;
+		return $retours;
+	}
+
 	include_spip('inc/texte');
 	if (!isset($retours['fichiers'])) {
 		$retours['fichiers'] = array();

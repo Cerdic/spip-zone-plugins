@@ -3,6 +3,12 @@ titre: '<:formidable:traiter_email_titre:>'
 description: '<:formidable:traiter_email_description:>'
 options:
   -
+    saisie: 'case'
+    options:
+      nom: 'modification_reponse'
+      label_case: '<:formidable:traiter_email_option_modification_reponse_label_case:>'
+      li_class: 'pleine_largeur'
+  -
     saisie: 'fieldset'
     options:
       nom: 'sujet'
@@ -165,13 +171,13 @@ options:
           label: '<:formidable:traiter_email_option_texte_accuse_label:>'
           explication: '<:formidable:traiter_email_option_texte_accuse_explication:>'
           afficher_si: '@traitements[email][activer_accuse]@!=""'
-          rows: 4          
+          rows: 4
       -
         saisie: 'case'
         options:
           nom: 'masquer_valeurs_accuse'
           label_case: '<:formidable:traiter_email_option_masquer_valeurs_accuse_label_case:>'
-          afficher_si: '@traitements[email][activer_accuse]@!=""'          
+          afficher_si: '@traitements[email][activer_accuse]@!=""'
       -
         saisie: 'input'
         options:
