@@ -129,7 +129,7 @@ function autoriser_formulaires_menu_dist($faire, $type, $id, $qui, $opt) {
 
 
 /**
- * Autorisation de répondre à un formidable formidable
+ * Autorisation de répondre à un formulaire formidable
  *
  * On peut répondre à un formulaire si :
  * - c'est un formulaire classique
@@ -239,7 +239,7 @@ function autoriser_formulairesreponse_voir_dist($faire, $type, $id, $qui, $opt) 
  * Autorisation de modifier une réponse d'un formulaire formidable
  *
  * suivant la config, un administrateur ou l'auteur du formulaire peuvent
- * voir les résultats
+ * modifier les résultats
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
