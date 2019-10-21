@@ -1,10 +1,10 @@
 <?php
 /**
- * Le fichier contient l'ensemble des constantes et fonctions implémentant l'API REST eZcollection qui
+ * Le fichier contient l'ensemble des constantes et fonctions implémentant l'API REST ezREST qui
  * permet de définir une couche applicative standard pour développer des API REST selon le modèle imposé par
  * le serveur HTTP abstrait.
  *
- * @package SPIP\EZCOLLECTION\HTTP
+ * @package SPIP\EZREST\HTTP
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Traite les erreurs directement détectées par le serveur HTTP abstrait uniquement.
- * Celles-ci sont mises au format de l'API REST eZcollection et fournies au client systématiquement en JSON.
+ * Celles-ci sont mises au format de l'API REST ezREST et fournies au client systématiquement en JSON.
  *
  * @api
  *
@@ -27,13 +27,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return Symfony\Component\HttpFoundation\Response
  *      Retourne l'objet réponse dont le contenu est mis à jour avec les éléments du bloc d'erreur.
  */
-function http_ezcollection_erreur_dist($code, $requete, $reponse) {
+function http_ezrest_erreur_dist($code, $requete, $reponse) {
 
 	// Construction du contenu de la réponse:
 	// Comme l'erreur est détectée par le serveur HTTP abstrait, le contenu n'est pas initialisé.
 	// Il faut donc l'initialiser selon la structure imposée par l'API.
-	include_spip('ezcollection/ezcollection');
-	$contenu = reponse_ezcollection_initialiser_contenu($requete);
+	include_spip('ezrest/ezrest');
+	$contenu = reponse_ezrest_initialiser_contenu($requete);
 
 	// Description de l'erreur : pour les messages, on utilise ceux du plugin serveur HTTP abstrait.
 	$contenu['erreur']['status'] = $code;
@@ -42,17 +42,17 @@ function http_ezcollection_erreur_dist($code, $requete, $reponse) {
 	$contenu['erreur']['detail'] = _T('http:erreur_' . $contenu['erreur']['status'] . '_message');
 
 	// Finaliser la réponse selon le format demandé.
-	$reponse = reponse_ezcollection_construire($reponse, $contenu);
+	$reponse = reponse_ezrest_construire($reponse, $contenu);
 
 	return $reponse;
 }
 
 
 /**
- * Fait un GET sur une collection gérée par l'API eZcollection.
- * La requête est du type `/ezcollection/xxx` et renvoie les objets associées contenus
+ * Fait un GET sur une collection gérée par l'API ezREST.
+ * La requête est du type `/ezrest/xxx` et renvoie les objets associées contenus
  * dans la base du serveur.
- * Il est possible de filtrer la collection et de compléter la colelction en utilisant le pipeline `post_ezcollection`.
+ * Il est possible de filtrer la collection et de compléter la colelction en utilisant le pipeline `post_ezrest`.
  *
  * @param Symfony\Component\HttpFoundation\Request  $requete
  *      Objet matérialisant la requête faite au serveur SVP.
@@ -67,39 +67,39 @@ function http_ezcollection_erreur_dist($code, $requete, $reponse) {
  *@api
  *
  */
-function http_ezcollection_get_collection_dist($requete, $reponse) {
+function http_ezrest_get_collection_dist($requete, $reponse) {
 
 	// Initialisation du format de sortie du contenu de la réponse, du bloc d'erreur et de la collection.
-	include_spip('ezcollection/ezcollection');
-	$contenu = reponse_ezcollection_initialiser_contenu($requete);
+	include_spip('ezrest/ezrest');
+	$contenu = reponse_ezrest_initialiser_contenu($requete);
 	$erreur = array();
 
 	// Récupération de la liste des collections disponibles.
-	$declarer = charger_fonction('ezcollection_declarer', 'inc');
+	$declarer = charger_fonction('ezrest_declarer_collections', 'inc');
 	$collections = $declarer();
 
 	// Vérification du nom de la collection.
 	$collection = $contenu['requete']['collection'];
-	if (requete_ezcollection_verifier_collection($collection, $collections, $plugin, $erreur)) {
+	if (requete_ezrest_verifier_collection($collection, $collections, $plugin, $erreur)) {
 		// La collection étant correcte on extrait sa configuration.
 		$configuration = $collections[$collection];
 
 		// On complète l'initialisation du contenu de la réponse avec des informations sur le plugin utilisateur.
 		// -- Par défaut, le schéma et la version mais le plugin utilisateur peut compléter ces informations.
-		$contenu = reponse_ezcollection_informer_plugin($contenu, $plugin);
+		$contenu = reponse_ezrest_informer_plugin($contenu, $plugin);
 
 		// On utilise son préfixe pour appeler une fonction spécifique au plugin pour vérifier si le contexte
 		// permet l'utilisation de l'API.
-		if (requete_ezcollection_verifier_contexte($plugin, $erreur)) {
+		if (requete_ezrest_verifier_contexte($plugin, $erreur)) {
 			// Le contexte autorise l'utilisation de l'API.
 			// -> Vérification des filtres éventuels.
-			if (requete_ezcollection_verifier_filtres($contenu['requete']['filtres'], $collection, $configuration, $erreur)) {
+			if (requete_ezrest_verifier_filtres($contenu['requete']['filtres'], $collection, $configuration, $erreur)) {
 				// Détermination de la fonction de service permettant de récupérer la collection spécifiée
 				// filtrée sur les critères éventuellement fournis.
-				// -- la fonction de service est contenue dans un fichier du répertoire ezcollection/ et est supposée
+				// -- la fonction de service est contenue dans un fichier du répertoire ezrest/ et est supposée
 				//    être toujours présente.
 				$module = $configuration['module'];
-				include_spip("ezcollection/${module}");
+				include_spip("ezrest/${module}");
 				$collectionner = "${collection}_collectionner";
 
 				// -- on construit le contenu de la collection.
@@ -115,7 +115,7 @@ function http_ezcollection_get_collection_dist($requete, $reponse) {
 						),
 						'data' => $contenu['donnees']
 					);
-					$contenu['donnees'] = pipeline('post_ezcollection', $flux);
+					$contenu['donnees'] = pipeline('post_ezrest', $flux);
 				}
 			}
 		}
@@ -125,19 +125,19 @@ function http_ezcollection_get_collection_dist($requete, $reponse) {
 	// vérification, le titre et le détail de l'erreur.
 	if ($erreur) {
 		$contenu['erreur'] = array_merge($contenu['erreur'], $erreur);
-		$contenu['erreur'] = reponse_ezcollection_expliquer_erreur($contenu['erreur'], $collection);
+		$contenu['erreur'] = reponse_ezrest_expliquer_erreur($contenu['erreur'], $collection);
 	}
 
 	// Construction de la réponse finale
-	$reponse = reponse_ezcollection_construire($reponse, $contenu);
+	$reponse = reponse_ezrest_construire($reponse, $contenu);
 
 	return $reponse;
 }
 
 
 /**
- * Fait un GET sur une ressource d'une collection gérée par l'API eZcollection.
- * La requête est du type `/ezcollection/xxx` et renvoie l'objet de la base désigné.
+ * Fait un GET sur une ressource d'une collection gérée par l'API ezREST.
+ * La requête est du type `/ezrest/xxx` et renvoie l'objet de la base désigné.
  *
  * Il est possible de rajouter des informations en utilisant le pipeline `post_ezressource`.
  *
@@ -154,39 +154,39 @@ function http_ezcollection_get_collection_dist($requete, $reponse) {
  *      La fonction peut lever une erreur sur l'état du serveur, le format de sortie, le type de ressouce et
  *      sur l'existence de la ressource demandée.
  */
-function http_ezcollection_get_ressource_dist($requete, $reponse) {
+function http_ezrest_get_ressource_dist($requete, $reponse) {
 
 	// Initialisation du format de sortie du contenu de la réponse, du bloc d'erreur et du format de sortie en JSON
-	include_spip('ezcollection/ezcollection');
-	$contenu = reponse_ezcollection_initialiser_contenu($requete);
+	include_spip('ezrest/ezrest');
+	$contenu = reponse_ezrest_initialiser_contenu($requete);
 	$erreur = array();
 
 	// Récupération de la liste des collections disponibles.
-	$declarer = charger_fonction('ezcollection_declarer', 'inc');
+	$declarer = charger_fonction('ezrest_declarer_collections', 'inc');
 	$collections = $declarer();
 
 	// Vérification du nom de la collection.
 	$collection = $contenu['requete']['collection'];
-	if (requete_ezcollection_verifier_collection($collection, $collections, $plugin, $erreur)) {
+	if (requete_ezrest_verifier_collection($collection, $collections, $plugin, $erreur)) {
 		// La collection étant correcte on extrait sa configuration.
 		$configuration = $collections[$collection];
 
 		// On complète l'initialisation du contenu de la réponse avec des informations sur le plugin utilisateur.
 		// -- Par défaut, le schéma et la version mais le plugin utilisateur peut compléter ces informations.
-		$contenu = reponse_ezcollection_informer_plugin($contenu, $plugin);
+		$contenu = reponse_ezrest_informer_plugin($contenu, $plugin);
 
 		// On utilise son préfixe pour appeler une fonction spécifique au plugin pour vérifier si le contexte
 		// permet l'utilisation de l'API.
-		if (requete_ezcollection_verifier_contexte($plugin, $erreur)) {
+		if (requete_ezrest_verifier_contexte($plugin, $erreur)) {
 			// Le contexte autorise l'utilisation de l'API.
 			// Vérification de la ressource
 			$ressource = $contenu['requete']['ressource'];
-			if (requete_ezcollection_verifier_ressource($ressource, $collection, $configuration, $erreur)) {
+			if (requete_ezrest_verifier_ressource($ressource, $collection, $configuration, $erreur)) {
 				// Détermination de la fonction de service permettant de récupérer la ressource spécifiée.
 				// -- la fonction de service est contenue dans un fichier du répertoire svpapi/ et est supposée
 				//    être toujours présente.
 				$module = $configuration['module'];
-				include_spip("ezcollection/${module}");
+				include_spip("ezrest/${module}");
 				$ressourcer = "${collection}_ressourcer";
 
 				// -- on construit le contenu de la collection.
@@ -212,11 +212,11 @@ function http_ezcollection_get_ressource_dist($requete, $reponse) {
 	// vérification, le titre et le détail de l'erreur.
 	if ($erreur) {
 		$contenu['erreur'] = array_merge($contenu['erreur'], $erreur);
-		$contenu['erreur'] = reponse_ezcollection_expliquer_erreur($contenu['erreur'], $collection);
+		$contenu['erreur'] = reponse_ezrest_expliquer_erreur($contenu['erreur'], $collection);
 	}
 
 	// Construction de la réponse finale
-	$reponse = reponse_ezcollection_construire($reponse, $contenu);
+	$reponse = reponse_ezrest_construire($reponse, $contenu);
 
 	return $reponse;
 }

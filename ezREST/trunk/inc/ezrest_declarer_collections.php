@@ -1,9 +1,9 @@
 <?php
 /**
- * Ce fichier contient la fonction de déclaration des configurations de collections de l'api `ezcollection`.
- * Elle appelle le pipeline `liste_ezcollection` pour les plugins qui le souhaitent.
+ * Ce fichier contient la fonction de déclaration des configurations de collections de l'api `ezrest`.
+ * Elle appelle le pipeline `liste_ezrest` pour les plugins qui le souhaitent.
  *
- * @package SPIP\EZCOLLECTION\COLLECTION
+ * @package SPIP\EZREST\COLLECTION
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -13,11 +13,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Déclare les collections accessibles via HTTP GET.
  * Par défaut, le plugin ne propose aucune collection.
  *
- * @pipeline liste_ezcollection
+ * @pipeline liste_ezrest
  *
  * @return array Description des collections.
 **/
-function inc_ezcollection_declarer_dist() {
+function inc_ezrest_declarer_collections_dist() {
 
 	// Initialisation en static pour les performances du tableau de toutes les collections
 	static $collections = array();

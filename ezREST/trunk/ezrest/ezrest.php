@@ -3,7 +3,7 @@
  * Ce fichier contient l'ensemble des constantes et fonctions de construction du contenu des réponses aux
  * requête à l'API SVP.
  *
- * @package SPIP\EZCOLLECTION\SERVICE
+ * @package SPIP\EZREST\SERVICE
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -18,12 +18,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *      Objet requête fourni par le plugin Serveur HTTP abstrait.
  *
  * @return array
- *      Le contenu d'une réponse de l'API `ezcollection` est un tableau associatif à 3 entrées:
+ *      Le contenu d'une réponse de l'API `ezrest` est un tableau associatif à 3 entrées:
  *      - `requete` : sous-tableau des éléments de la requête
  *      - `erreur`  : sous-tableau des éléments descriptifs d'une erreur (status 200 par défaut)
  *      - `donnees` : le tableau des objets demandés fonction de la requête (vide)
  */
-function reponse_ezcollection_initialiser_contenu($requete) {
+function reponse_ezrest_initialiser_contenu($requete) {
 
 	// Stockage des éléments de la requête
 	// -- La méthode
@@ -45,8 +45,8 @@ function reponse_ezcollection_initialiser_contenu($requete) {
 	$erreur['type'] = 'ok';
 	$erreur['element'] = '';
 	$erreur['valeur'] = '';
-	$erreur['title'] = _T('ezcollection:erreur_200_ok_titre');
-	$erreur['detail'] = _T('ezcollection:erreur_200_ok_message');
+	$erreur['title'] = _T('ezrest:erreur_200_ok_titre');
+	$erreur['detail'] = _T('ezrest:erreur_200_ok_message');
 
 	// On intitialise le contenu avec les informations collectées.
 	// A noter que le format de sortie est initialisé par défaut à json indépendamment de la demande, ce qui permettra
@@ -67,7 +67,7 @@ function reponse_ezcollection_initialiser_contenu($requete) {
  *
  * @return array
  */
-function reponse_ezcollection_informer_plugin($contenu, $plugin) {
+function reponse_ezrest_informer_plugin($contenu, $plugin) {
 
 	// On met à jour les informations sur le plugin utilisateur maintenant qu'il est connu.
 	// -- Récupération du schéma de données et de la version du plugin.
@@ -100,7 +100,7 @@ function reponse_ezcollection_informer_plugin($contenu, $plugin) {
  * @return array
  * 		Tableau de l'erreur complété avec le titre (index `title`) et le descriptif (index `detail`).
  */
-function reponse_ezcollection_expliquer_erreur($erreur, $collection) {
+function reponse_ezrest_expliquer_erreur($erreur, $collection) {
 
 	// Calcul des paramètres qui seront passés à la fonction de traduction.
 	// -- on passe toujours la collection qui est vide uniquement pour l'erreur de serveur.
@@ -116,7 +116,7 @@ function reponse_ezcollection_expliquer_erreur($erreur, $collection) {
 	}
 
 	// Traduction du libellé de l'erreur et du message complémentaire.
-	$prefixe = 'ezcollection:erreur_' . $erreur['status'] . '_' . $erreur['type'];
+	$prefixe = 'ezrest:erreur_' . $erreur['status'] . '_' . $erreur['type'];
 	$erreur['title'] = _T("${prefixe}_titre", $parametres);
 	$erreur['detail'] = _T("${prefixe}_message", $parametres);
 
@@ -136,7 +136,7 @@ function reponse_ezcollection_expliquer_erreur($erreur, $collection) {
  * @return Symfony\Component\HttpFoundation\Response $reponse
  *      Retourne l'objet réponse dont le contenu et certains attributs du header sont mis à jour.
  */
-function reponse_ezcollection_construire($reponse, $contenu) {
+function reponse_ezrest_construire($reponse, $contenu) {
 
 	// Charset UTF-8 et statut de l'erreur.
 	$reponse->setCharset('utf-8');
@@ -168,13 +168,13 @@ function reponse_ezcollection_construire($reponse, $contenu) {
  * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
-function requete_ezcollection_verifier_contexte($plugin, &$erreur) {
+function requete_ezrest_verifier_contexte($plugin, &$erreur) {
 
 	// Initialise le retour à true par défaut.
 	$est_valide = true;
 
 	// Apple d'un service spéficique au plugin fournisseur pour vérifier si le contexte permet l'utilisation de l'API.
-	if ($verifier = service_ezcollection_chercher($plugin, 'verifier_contexte')) {
+	if ($verifier = service_ezrest_chercher($plugin, 'verifier_contexte')) {
 		$est_valide = $verifier($erreur);
 	}
 
@@ -201,7 +201,7 @@ function requete_ezcollection_verifier_contexte($plugin, &$erreur) {
  * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
-function requete_ezcollection_verifier_collection($collection, $collections, &$plugin, &$erreur) {
+function requete_ezrest_verifier_collection($collection, $collections, &$plugin, &$erreur) {
 
 	// Initialise le retour à false par défaut.
 	$est_valide = false;
@@ -256,7 +256,7 @@ function requete_ezcollection_verifier_collection($collection, $collections, &$p
  * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
-function requete_ezcollection_verifier_filtres($filtres, $collection, $configuration, &$erreur) {
+function requete_ezrest_verifier_filtres($filtres, $collection, $configuration, &$erreur) {
 
 	$est_valide = true;
 	$erreur = array();
@@ -300,7 +300,7 @@ function requete_ezcollection_verifier_filtres($filtres, $collection, $configura
 				$module = !empty($criteres[$_critere]['module'])
 					? $criteres[$_critere]['module']
 					: $configuration['module'];
-				include_spip("ezcollection/${module}");
+				include_spip("ezrest/${module}");
 				$verifier = "${collection}_verifier_critere_${_critere}";
 				if (function_exists($verifier)
 				and !$verifier($_valeur, $extra)) {
@@ -344,7 +344,7 @@ function requete_ezcollection_verifier_filtres($filtres, $collection, $configura
  * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
-function requete_ezcollection_verifier_ressource($ressource, $collection, $configuration, &$erreur) {
+function requete_ezrest_verifier_ressource($ressource, $collection, $configuration, &$erreur) {
 
 	// Initialise le retour à true par défaut.
 	$est_valide = true;
@@ -411,9 +411,9 @@ function requete_ezcollection_verifier_ressource($ressource, $collection, $confi
  * @return string
  *        Nom complet de la fonction si trouvée ou chaine vide sinon.
  */
-function service_ezcollection_chercher($plugin, $fonction) {
+function service_ezrest_chercher($plugin, $fonction) {
 
-	include_spip("ezcollection/${plugin}");
+	include_spip("ezrest/${plugin}");
 	$fonction_trouvee = "${plugin}_${fonction}";
 	if (!function_exists($fonction_trouvee)) {
 		$fonction_trouvee = '';

@@ -1,10 +1,10 @@
 <paquet
-	prefix="ezcollection"
+	prefix="ezrest"
 	categorie="outil"
 	version="0.1.0"
 	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"
-	logo="ezcollection_logo-64.png"
+	logo="ezrest_logo-64.png"
 >
 
 	<nom>REST Factory</nom>
