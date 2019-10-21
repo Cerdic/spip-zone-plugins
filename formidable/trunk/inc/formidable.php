@@ -33,6 +33,16 @@ function traitements_lister_disponibles() {
 		}
 	}
 
+	$traitements = pipeline(
+		'formidable_traitements',
+		array(
+			'args' => array(
+				'id_formulaire' => $id_formulaire,
+				'identifiant' => $formulaire['identifiant']
+			),
+			'data' => $traitements
+		)
+	);
 	return $traitements;
 }
 
