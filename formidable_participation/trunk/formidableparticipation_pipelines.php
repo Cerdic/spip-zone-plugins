@@ -46,7 +46,7 @@ function formidableparticipation_traiter_formidableparticipation($flux){
 				$i = 0;
 				while ($i < $nb_inscriptions) {
 					$i++;
-					//on ne logue pas l'auteur, si l'email sur le même id_evenement existe, mettre à jour, sauf si on demande explictement de permettre à un même email de s'inscrire plusieurs fois
+					//On ne logue pas l'auteur. Si l'email sur le même id_evenement existe, mettre à jour, sauf si on demande explictement de permettre à un même email de s'inscrire plusieurs fois
 					if (sql_fetsel('reponse','spip_evenements_participants','id_evenement='.intval($id_evenement)." AND email=".sql_quote($email)) and !$flux['args']['autoriser_email_multiple']){
 						sql_updateq("spip_evenements_participants",$champs,'id_evenement='.intval($id_evenement).' AND email='.sql_quote($email));
 					}
