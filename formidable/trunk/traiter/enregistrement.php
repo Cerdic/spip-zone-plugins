@@ -74,6 +74,7 @@ function traiter_enregistrement_dist($args, $retours) {
 			// Expiration dans 30 jours
 			spip_setcookie($nom_cookie, $_COOKIE[$nom_cookie] = $cookie, time() + 30 * 24 * 3600);
 		}
+		$retours['modification_reponse'] = false;// signaler aux traitements qu'il s'agit d'une nouvelle réponse
 	} else { // si c'est une modif de réponse existante
 		// simple mise à jour du champ maj de la table spip_formulaires_reponses
 		sql_updateq(
@@ -83,6 +84,7 @@ function traiter_enregistrement_dist($args, $retours) {
 		);
 		//effacer les fichiers existant
 		formidable_effacer_fichiers_reponse($id_formulaire, $id_formulaires_reponse);
+		$retours['modification_reponse'] = true;// signaler aux traitements qui viendraient après qu'il s'agit d'une modif
 	}
 
 	// Si l'id n'a pas été créé correctement alors erreur
