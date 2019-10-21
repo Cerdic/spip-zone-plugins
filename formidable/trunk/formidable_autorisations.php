@@ -61,7 +61,6 @@ function formidable_auteur_admin_reponse($qui) {
 	$auteurs = lire_config('formidable/auteur');
 	$is_admin = (isset($qui['statut']) and $qui['statut'] == '0minirezo');
 	$retour = ($is_admin or (($auteurs == 'on') and ($admin_reponses_auteur == 'on')));
-
 	return $retour;
 }
 

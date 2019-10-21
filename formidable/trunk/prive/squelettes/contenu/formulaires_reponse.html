@@ -1,10 +1,11 @@
 <BOUCLE_formulaires_reponse(FORMULAIRES_REPONSES){tout}{id_formulaires_reponse}>
 <BOUCLE_autoriser(CONDITION){si #AUTORISER{voir, formulairesreponse, #ID_FORMULAIRE}}>
 [(#BOITE_OUVRIR{
+	[(#AUTORISER{modifier,formulairesreponse,#ID_FORMULAIRES_REPONSE})
+			[(#URL_ECRIRE{formulaires_reponse_edit,id_formulaires_reponse=#ID_FORMULAIRES_REPONSE}|icone_verticale{<:formidable:icone_modifier_formulaires_reponse:>,formulaires_reponse,edit,right})]
+		]
 	<h1><:formulaires_reponse:formulaires_reponse_numero{nb=#ID_FORMULAIRES_REPONSE}:></h1>
 ,simple fiche_objet})]
-
-
 <!--affiche_milieu-->
 
 <div id="wysiwyg">

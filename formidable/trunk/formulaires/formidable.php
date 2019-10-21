@@ -97,11 +97,11 @@ function formulaires_formidable_saisies_dist($id, $valeurs = array(), $id_formul
 *     Exemple : array('hidden_1' => 3) pour que champ identifie "@hidden_1@" soit prerempli
 * @param int|bool $id_formulaires_reponse
 *     Identifiant d'une réponse pour forcer la reedition de cette reponse spécifique
-*
+* @param bool|str Url de redirection qui prend éventuellement la main
 * @return array
 *     Contexte envoyé au squelette HTML du formulaire.
 **/
-function formulaires_formidable_charger_dist($id, $valeurs = array(), $id_formulaires_reponse = false) {
+function formulaires_formidable_charger_dist($id, $valeurs = array(), $id_formulaires_reponse = false, $url_redirect = false) {
 	$contexte = array();
 
 	// On peut donner soit un id soit un identifiant
@@ -205,11 +205,11 @@ function formulaires_formidable_charger_dist($id, $valeurs = array(), $id_formul
 *     Exemple : array('hidden_1' => 3) pour que champ identifie "@hidden_1@" soit prerempli
 * @param int|bool $id_formulaires_reponse
 *     Identifiant d'une réponse pour forcer la reedition de cette reponse spécifique
-*
+* @param bool|str Url de redirection qui prend éventuellement la main
 * @return array
 *     Tableau des erreurs
 **/
-function formulaires_formidable_verifier_dist($id, $valeurs = array(), $id_formulaires_reponse = false) {
+function formulaires_formidable_verifier_dist($id, $valeurs = array(), $id_formulaires_reponse = false, $url_redirect = false) {
 	$erreurs = array();
 
 	include_spip('inc/saisies');
@@ -323,11 +323,11 @@ function formulaires_formidable_verifier_traitements($id, $valeurs = array(), $i
  *     Exemple : array('hidden_1' => 3) pour que champ identifie "@hidden_1@" soit prerempli
  * @param int|bool $id_formulaires_reponse
  *     Identifiant d'une réponse pour forcer la reedition de cette reponse spécifique
- *
+ * @param bool|str Url de redirection qui prend éventuellement la main
  * @return array
  *     Tableau des erreurs
  **/
-function formulaires_formidable_traiter_dist($id, $valeurs = array(), $id_formulaires_reponse = false) {
+function formulaires_formidable_traiter_dist($id, $valeurs = array(), $id_formulaires_reponse = false, $url_redirect = false) {
 	$retours = array();
 
 	// POST Mortem de securite : on log le $_POST pour ne pas le perdre si quelque chose se passe mal
@@ -359,7 +359,9 @@ function formulaires_formidable_traiter_dist($id, $valeurs = array(), $id_formul
 	$retours['id_formulaire'] = $id_formulaire;
 
 	// Si on a une redirection valide
-	if (($formulaire['apres'] == 'redirige') and ($formulaire['url_redirect'] != '')) {
+	if ($url_redirect) {
+		$retours['redirect'] = $url_redirect;
+	} elseif (($formulaire['apres'] == 'redirige') and ($formulaire['url_redirect'] != '')) {
 		refuser_traiter_formulaire_ajax();
 		// traiter les raccourcis artX, brX
 		include_spip('inc/lien');
@@ -373,6 +375,7 @@ function formulaires_formidable_traiter_dist($id, $valeurs = array(), $id_formul
 		$retours['redirect'] = $url_redirect;
 	}
 
+	var_dump($retours['redirect']);
 	// les traitements deja faits se notent ici
 	// pour etre sur de ne pas etre appeles 2 fois
 	// ainsi si un traitement A a besoin d'un traitement B,
