@@ -2,7 +2,7 @@
 /**
  * Ce fichier contient l'ensemble des fonctions de service spécifiques à une ou plusieurs collections.
  *
- * @package SPIP\SVPAPI\SERVICE
+ * @package SPIP\ISOCODE\EZCOLLECTION\SERVICE
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 
 // -----------------------------------------------------------------------
-// ----------------------------- PLUGINS ---------------------------------
+// -------------------------- COLLECTION PAYS ----------------------------
 // -----------------------------------------------------------------------
 
 /**
@@ -35,9 +35,9 @@ function pays_collectionner($filtres, $configuration) {
 	// Initialisation de la collection
 	$pays = array();
 
-	// Récupérer la liste des plugins (filtrée ou pas).
-	// -- Les plugins appartiennent forcément à un dépot logique installés sur le serveur. Les plugins
-	//    installés directement sur le serveur, donc hors dépôt sont exclus.
+	// Récupérer la liste des pays (filtrée ou pas).
+	// Si la liste est filtrée par continent ou région, on renvoie aussi les informations sur ce continent ou
+	// cette région.
 	$from = array('spip_iso3166countries');
 	// -- Tous le champs sauf les labels par langue et la date de mise à jour.
 	$description_table = sql_showtable('spip_iso3166countries');
@@ -64,10 +64,18 @@ function pays_collectionner($filtres, $configuration) {
 			} else {
 				$where[] = "spip_iso3166countries.${champ}=" . sql_quote($_valeur);
 			}
+
+			// Renvoyer les informations sur la région ou le continent.
+			if ($_critere == 'continent') {
+				$pays['continent'] = sql_fetsel('*', 'spip_geoipcontinents', 'code=' . sql_quote($_valeur));
+			}
+			if ($_critere == 'region') {
+				$pays['region'] = sql_fetsel('*', 'spip_m49regions', 'code_num=' . sql_quote($_valeur));
+			}
 		}
 	}
 
-	$pays = sql_allfetsel($select, $from, $where);
+	$pays['pays'] = sql_allfetsel($select, $from, $where);
 
 	return $pays;
 }
