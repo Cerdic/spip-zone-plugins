@@ -8,7 +8,7 @@ $(function(){
 		$(this).find('texteara, input, select').change(function(){
 				form = $(this).parents('form');
 				name = $(this).attr('name');
-				form.find('[data-afficher_si*='+name+']').each(function(){
+				form.find('[data-afficher_si*=\''+name+'\']').each(function(){
 					verifier_afficher_si(form, $(this));
 				})
 		})
