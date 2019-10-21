@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 
 /**
- * Déclare les collections accessibles via HTTP GET.
+ * Déclare les collections accessibles via l'API ezREST.
  * Par défaut, le plugin propose une liste de collections.
  *
  * @pipeline liste_ezcollection
