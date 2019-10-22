@@ -17,7 +17,7 @@ include_spip('inc/lim_api');
 include_spip('inc/config');
 
 /**
- * gestion forums public et pétitions : supprime ou non le bloc en fonction de la demande 
+ * gestion forums public et pétitions : supprime ou non le bloc en fonction de la demande
  *
  * @param array $flux
  * @return array $flux
@@ -68,9 +68,9 @@ function lim_formulaire_charger($flux) {
 		$tableau_conf_lim_objet	= lire_config("lim_rubriques/$objet");
 		$nbre_rubriques = sql_countsel('spip_rubriques');
 		$nbre_rubriques_autorisees = $nbre_rubriques - count($tableau_conf_lim_objet);
-		
+
 		if (isset($tableau_conf_lim_objet)) {
-			
+
 			// Cas #0 : voir TODO's
 			// if ($nbre_rubriques_autorisees == 0) {
 			// 	debug('Cas #0');
@@ -96,7 +96,7 @@ function lim_formulaire_charger($flux) {
 }
 
 /**
- * Gestion des contenus par rubrique : 
+ * Gestion des contenus par rubrique :
  * Impossible de CREER ou DEPLACER un objet dans une rubrique interdite par la configuration choisie dans exec=configurer_lim_rubriques
  * exception : possibilité de modifier un objet si celui-ci est maintenant dans une rubrique où il est interdit de créer ce type d'objet.
  *
@@ -109,7 +109,7 @@ function lim_formulaire_verifier($flux) {
 	if (strncmp($flux['args']['form'], 'editer_', 7) !== 0 OR is_null(lire_config('lim_objets'))) {
 		return $flux;
 	}
-	
+
 	$objet = substr($flux['args']['form'], 7); // 'editer_objet' devient 'objet'
 	$nom_table	= table_objet_sql($objet);
 	$tableau_tables_lim	= explode(',', lire_config('lim_objets'));
@@ -117,11 +117,11 @@ function lim_formulaire_verifier($flux) {
 	if (in_array($nom_table, $tableau_tables_lim)) {
 		include_spip('inc/autoriser');
 		$faire = 'creer'.$objet.'dans';
-		
-		$id_objet = $flux['args']['args'][0];
-		if (is_numeric($id_objet)) { 	// c'est donc une modification, 
 
-			// récupérer l'id_rubrique actuel de l'objet 
+		$id_objet = $flux['args']['args'][0];
+		if (is_numeric($id_objet)) { 	// c'est donc une modification,
+
+			// récupérer l'id_rubrique actuel de l'objet
 			// note : dans l'idéal, il faudrait utiliser le plugin déclarer parent ici
 			$where = id_table_objet($objet).'='.$id_objet;
 			$trouver_table = charger_fonction('trouver_table', 'base');
@@ -150,7 +150,7 @@ function lim_formulaire_verifier($flux) {
 /**
  * Gestion de la desactivation de l'affichage de certain champs dans le formulaire Editer Auteur
  * Inserer le JS qui gére l'affichage ou non des champs dans certains formulaires historiques
- * juste le formulaire Auteur 
+ * juste le formulaire Auteur
  *
  * @param array $flux
  * @return array
