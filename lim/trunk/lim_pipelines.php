@@ -43,41 +43,55 @@ function lim_afficher_config_objet($flux) {
 }
 
 /**
- * Gestion des contenus par rubrique : si pour un objet A la conf dans LIM ne laisse qu'un seule rubrique dans laquelle cet objet peut être éditer, rediriger l'enregistrement vers cette rubrique en renvoyant l'id_parent
- * ce traitement est rendu nécessaire par 
- * -> l'action de la fonction inc/lim_api.php -> inc_chercher_rubrique qui supprime l'affichage du sélecteur de rubrique si une seule rubrique
- * -> le cas 2 (voir ci-dessous)
+ * Gestion des contenus par rubrique
+ * Lors de la création d'un objet éditorial, être sûr de renvoyer la bonne valeur de "id_parent".
  *
- * cas 1 : le rédacteur créer une nouvelle instance de l'objet depuis la bonne rubrique : on a l'id_parent depuis le flux
- * cas 2 : le rédacteur créer une instance depuis la barre d'outils rapides, ou via la page exec=objets. On n'a pas l'id_parent. 
- * Il faut le calculer pour enregistrer l'instance dans une rubrique gérée par LIM
- *  a/ via LIM l'objet ne peut être associé qu'à une seule rubrique. On renvoi l'id de cette rubrique
- *  b/ via LIM l'objet peut être associé à plusieurs rubriques : pas de traitement. Le sélecteur de rubrique est affiché.
+ * Cas #1 : objet géré par la restriction par rubrique de LIM
+ * 	->	#1.1 Si une seule rubrique définie : on récupère la valeur de l'id_rubrique dans la conf.
+ * 	->	#1.2 Sinon forcer la valeur vide pour 'id_parent'. Dans ce cas, le premier choix du selecteur de rubrique est vide, et si l'utilisateur ne choisit pas de rubrique il aura un retour en erreur sur un champ obligatoire (sauf dans le cas d'une rubrique qui se retrouvera à la racine).
+ *
+ * Cas #2 : objet non géré par la restriction par rubrique de LIM.
+ * -> même traitement que pour le cas #1.2
  *
  * @param array $flux
  * @return array $flux
- *     le flux data complété par un input hidden 'id_parent' avec la bonne valeur
+ *     le flux data complété par une valeur de id_parent
 **/
 function lim_formulaire_charger($flux) {
-	// si ce n'est pas un formulaire d'édition d'un objet ou si la restriction par rubrique n'a pas été activée, on sort.
-	if (strncmp($flux['args']['form'], 'editer_', 7) !== 0 OR is_null(lire_config('lim_objets'))) {
-		return $flux;
+	if (
+		strncmp($flux['args']['form'], 'editer_', 7) == 0 // c'est bien un formulaire d'edition d'objet
+		and !is_numeric($flux['args']['args']['0']) // c'est bien une création d'objet (pas une modif ou autre)
+	) {
+		$objet = substr($flux['args']['form'], 7); // 'editer_article' -> 'article'
+		$nom_table	= table_objet_sql($objet); // article -> spip_articles
+
+		$tableau_conf_lim_objet	= lire_config("lim_rubriques/$objet");
+		$nbre_rubriques = sql_countsel('spip_rubriques');
+		$nbre_rubriques_autorisees = $nbre_rubriques - count($tableau_conf_lim_objet);
+		
+		if (isset($tableau_conf_lim_objet)) {
+			
+			// Cas #0 : voir TODO's
+			// if ($nbre_rubriques_autorisees == 0) {
+			// 	debug('Cas #0');
+			// 	$id_parent = '0';
+			// }
+
+			if ($nbre_rubriques_autorisees == 1) { // Cas #1.1
+				$tab_rubrique_choisie = lim_publierdansrubriques($objet);
+				$id_parent = implode($tab_rubrique_choisie);
+			}
+
+			if ($nbre_rubriques_autorisees >= 2) { // Cas #1.2
+				$id_parent = '';
+			}
+		} else { // Cas #2
+			$id_parent = '';
+		}
+
+		$flux['data']['id_parent'] = $id_parent;
 	}
 
-	$objet = substr($flux['args']['form'], 7); // 'editer_objet' devient 'objet'
-	$nom_table	= table_objet_sql($objet);
-	$tableau_tables_lim	= explode(',', lire_config('lim_objets'));
-	
-	if (in_array($nom_table, $tableau_tables_lim)) {
-		$tab_rubriques_choisies = lim_publierdansrubriques($objet);
-		if (count($tab_rubriques_choisies) == 1) {
-			$id_parent = $flux['data']['id_parent'];
-			if (empty($id_parent)) {
-				$id_parent = implode($tab_rubriques_choisies);
-			}
-			$flux['data']['_hidden'] = "<input type='hidden' name='id_parent' value='$id_parent'>";
-		}
-	}
 	return $flux;
 }
 
