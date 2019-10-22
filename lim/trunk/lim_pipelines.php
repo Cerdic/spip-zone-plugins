@@ -88,8 +88,11 @@ function lim_formulaire_charger($flux) {
 		} else { // Cas #2
 			$id_parent = '';
 		}
-
-		$flux['data']['id_parent'] = $id_parent;
+		if ($id_parent) {
+			$flux['data']['id_parent'] = $id_parent;
+		} else {
+			unset($flux['data']['id_parent']);
+		}
 	}
 
 	return $flux;
