@@ -234,44 +234,46 @@ function reservations_multiples_formulaire_traiter($flux) {
 					!_request('gratuit')) {
 				include_spip('inc/config');
 				$config_reservation_evenement = lire_config('reservation_evenement');
-				$preceder_formulaire = lire_config('reservation_bank/preceder_formulaire');
-				$id_transaction = rb_inserer_transaction($id_reservation);
-				$quand = isset($config['quand']) ? $config['quand'] : array();
+				if (isset($config_reservation_evenement['activer'])) {
+					$preceder_formulaire = lire_config('reservation_bank/preceder_formulaire');
+					$id_transaction = rb_inserer_transaction($id_reservation);
+					$quand = isset($config['quand']) ? $config['quand'] : array();
 
-				$row = sql_fetsel('statut,date,id_auteur,email,lang,donnees_auteur', 'spip_reservations', 'id_reservation=' . intval($id_reservation));
-				$statut = $row['statut'];
+					$row = sql_fetsel('statut,date,id_auteur,email,lang,donnees_auteur', 'spip_reservations', 'id_reservation=' . intval($id_reservation));
+					$statut = $row['statut'];
 
-				//Déterminer la langue pour les notifications
-				$lang = isset($row['lang']) ? $row['lang'] : lire_config('langue_site');
-				lang_select($lang);
+					//Déterminer la langue pour les notifications
+					$lang = isset($row['lang']) ? $row['lang'] : lire_config('langue_site');
+					lang_select($lang);
 
-				// Determiner l'expediteur
-				$options = array(
-				'statut' => $statut,
-				'lang' => $lang
-				);
-				if ($config_reservation_evenement['expediteur'] != "facteur") {
-					$options['expediteur'] = $config_reservation_evenement['expediteur_' . $config_reservation_evenement['expediteur']];
-				}
-
-
-				// Envoyer au vendeur et au client
-				if ($config_reservation_evenement['client'] && !in_array($statut, $quand)) {
-					if (intval($row['id_auteur']) AND $row['id_auteur'] > 0) {
-						$options['email'] = sql_getfetsel('email', 'spip_auteurs', 'id_auteur=' . $row['id_auteur']);
-					}
-					else {
-						$options['email'] = $row['email'];
+					// Determiner l'expediteur
+					$options = array(
+					'statut' => $statut,
+					'lang' => $lang
+					);
+					if ($config_reservation_evenement['expediteur'] != "facteur") {
+						$options['expediteur'] = $config_reservation_evenement['expediteur_' . $config_reservation_evenement['expediteur']];
 					}
 
-					$notifications('reservation_client', $id_reservation, $options);
 
-					$lien_paiement = recuperer_fond('inclure/lien_payer', array('id_transaction'=> $id_transaction));
-					if ($preceder_formulaire) {
-						$message = $lien_paiement . $message;
-					}
-					else {
-						$message .= $lien_paiement;
+					// Envoyer au vendeur et au client
+					if ($config_reservation_evenement['client'] && !in_array($statut, $quand)) {
+						if (intval($row['id_auteur']) AND $row['id_auteur'] > 0) {
+							$options['email'] = sql_getfetsel('email', 'spip_auteurs', 'id_auteur=' . $row['id_auteur']);
+						}
+						else {
+							$options['email'] = $row['email'];
+						}
+
+						$notifications('reservation_client', $id_reservation, $options);
+
+						$lien_paiement = recuperer_fond('inclure/lien_payer', array('id_transaction'=> $id_transaction));
+						if ($preceder_formulaire) {
+							$message = $lien_paiement . $message;
+						}
+						else {
+							$message .= $lien_paiement;
+						}
 					}
 				}
 			}
