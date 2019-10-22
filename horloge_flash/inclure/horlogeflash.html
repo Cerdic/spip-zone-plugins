@@ -1,6 +1,8 @@
 #CACHE{0}
 [(#SET{flashparams,[(#ENV{timezone}|horlogeflash)]})]
 <div class="horlogeflash">
+[<div class="horlogeville">(#ENV{ville})</div>]
+[<div class="horlogeampm">(#ENV{timezone}|horlogeflash{1})</div>]
 #SET{uid,#EVAL{uniqid()}}
 <div id="clock_#GET{uid}" class="jclockgmt" ></div>
 	<script>
@@ -8,7 +10,7 @@
 		jQuery("#clock_#GET{uid}").jClocksGMT({"title":"#ENV{ville}",
 			"offset":"[(#ENV{timezone}|horlogeflash{0,1})]",
 			"dst":true,
-			"digital":true,
+			"digital":false,
 			"analog":true,
 			"timeformat":"HH:mm",
 			"date":false,
