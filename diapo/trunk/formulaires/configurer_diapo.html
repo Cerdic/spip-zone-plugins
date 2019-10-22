@@ -1,0 +1,76 @@
+	<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}">
+	<div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+
+
+	<ul>
+<!-- temps de pause -->
+	<li class="editer [ (#GET{erreurs}|oui)erreur]">
+		<label><:diapo:temps_pause:></label>
+		#SET{name,temps_pause}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			[<span class='erreur_message'>(#GET{erreurs})</span>
+			]<span class="choix">
+				<input type="texte" style="width:50px" name="#GET{name}" id="#GET{name}"
+				value="[(#ENV{#GET{name}}|?{#ENV{#GET{name}},5000})]"  /> ms (<:diapo:temps_pause_explication:>)
+			</span>
+	</li>
+<!-- taille grande image -->
+	<li class="editer [ (#GET{erreurs}|oui)erreur]">
+		<label><:diapo:taille_diapo_grand:></label>
+		#SET{name,taille_diapo_grand}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			[<span class='erreur_message'>(#GET{erreurs})</span>
+			]<span class="choix">
+				<input type="texte" style="width:50px" name="#GET{name}" id="#GET{name}"
+				value="[(#ENV{#GET{name}}|?{#ENV{#GET{name}},500})]"  /> px (<:diapo:taille_diapo_grand_explication:>)
+			</span>
+	</li>
+<!-- taille petite image -->
+	<li class="editer [ (#GET{erreurs}|oui)erreur]">
+		<label><:diapo:taille_diapo_petit:></label>
+		#SET{name,taille_diapo_petit}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			[<span class='erreur_message'>(#GET{erreurs})</span>
+			]<span class="choix">
+				<input type="texte" style="width:50px" name="#GET{name}" id="#GET{name}"
+				value="[(#ENV{#GET{name}}|?{#ENV{#GET{name}},300})]"  /> px (<:diapo:taille_diapo_petit_explication:>)
+			</span>
+	</li>
+<!-- nombre vignettes -->
+	<li class="editer [ (#GET{erreurs}|oui)erreur]">
+		<label><:diapo:nombre_vignettes:></label>
+		#SET{name,nombre_vignettes}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			[<span class='erreur_message'>(#GET{erreurs})</span>
+			]<span class="choix">
+				<input type="texte" style="width:50px" name="#GET{name}" id="#GET{name}"
+				value="[(#ENV{#GET{name}}|?{#ENV{#GET{name}},15})]"  /> (<:diapo:nombre_vignettes_explication:>)
+			</span>
+	</li>
+<!-- taille vignettes -->
+	<li class="editer [ (#GET{erreurs}|oui)erreur]">
+		<label><:diapo:taille_vignettes:></label>
+		#SET{name,taille_vignettes}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			[<span class='erreur_message'>(#GET{erreurs})</span>
+			]<span class="choix">
+				<input type="texte" style="width:50px" name="#GET{name}" id="#GET{name}"
+				value="[(#ENV{#GET{name}}|?{#ENV{#GET{name}},60})]"  /> px (<:diapo:taille_vignettes_explication:>)
+			</span>
+	</li>
+	</ul>
+
+
+
+<!-------------------------------------------------------------------------------->
+<!-- Stockage des donnees  ------------------------------------------------------->
+<!-------------------------------------------------------------------------------->
+
+    <input type="hidden" name="_meta_casier" value="diapo/config" />
+    <br /><br />
+	<p class="boutons"><span class='image_loading'>&nbsp;</span>
+  <input type="submit" name="enregistrer" class="submit" value="<:bouton_valider:>" />
+	</p>
+  </div>
+    </form>
+    </div>
