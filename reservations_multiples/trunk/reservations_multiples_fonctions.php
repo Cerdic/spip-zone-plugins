@@ -3,7 +3,7 @@
  * Utilisations de pipelines par Réservations multiples
  *
  * @plugin     Réservations multiples
- * @copyright  2014-2018
+ * @copyright  2014-2019
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Reservations_multiples\Pipelines
