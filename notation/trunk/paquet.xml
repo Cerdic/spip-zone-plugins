@@ -1,7 +1,7 @@
 <paquet
 	prefix="notation"
 	categorie="communication"
-	version="2.4.4"
+	version="2.4.5"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/notation-32.png"

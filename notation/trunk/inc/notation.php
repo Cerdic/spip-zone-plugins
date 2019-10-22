@@ -89,7 +89,8 @@ function notation_identifier_visiteur($set_cookie = false) {
 
 	// Identification du client
 	$qui['hash'] = substr(md5(
-		$qui['ip'] . $_SERVER['HTTP_USER_AGENT']
+		$qui['ip']
+		. (isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '')
 		. (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : '')
 		. (isset($_SERVER['HTTP_ACCEPT_ENCODING']) ? $_SERVER['HTTP_ACCEPT_ENCODING'] : '')
 	), 0,10);
