@@ -1,0 +1,16 @@
+<paquet
+	prefix="diapo"
+	categorie="multimedia"
+	version="2.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	documentation="https://contrib.spip.net/Plugin-Diapo"
+>
+	<nom>Diapo</nom>
+
+	<auteur>bill</auteur>
+
+	<pipeline nom="insert_head" inclure="diapo_pipelines.php" />
+	<pipeline nom="header_prive" inclure="diapo_pipelines.php" />
+
+</paquet>
