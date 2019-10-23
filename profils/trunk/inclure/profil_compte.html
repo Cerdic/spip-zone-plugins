@@ -39,19 +39,8 @@
 		On récupère les saisies pour avoir les labels et on filtre selon les champs configurés
 	]
 	<BOUCLE_champs(DATA) {source table, #GET{saisies_objet}} {si #GET{config_champs_objet}|is_array}>
-	#SET{champ,#VALEUR{options/nom}}
-	[(#GET{champ}|in_array{#GET{config_champs_objet}|array_keys}|oui)
-	#SET{valeur,#GET{infos/#GET{objet}/#GET{champ}}|textebrut}
-	#SET{label,#VALEUR{options/label}}
-	[(#REM) Si champ extra à choix multiples, récupérer chaîne de langue ]
-	[(#PLUGIN{cextras}|oui)
-	#SET{valeur_data,#GET{objet}|calculer_balise_CHAMP_EXTRA{#GET{champ}}|table_valeur{data/#GET{valeur}}}
-	#SET{valeur,#GET{valeur_data,#GET{valeur}}}
-	]
-	[<div class="profil__item[ profil__item_(#GET{champ}|attribut_html)]">
-		[<span class="profil__label">(#GET{label}) : </span>]
-		<span class="profil__value">(#GET{valeur})</span>
-	</div>]
+	[(#VALEUR{options/nom}|in_array{#GET{config_champs_objet}|array_keys}|oui)
+	[(#VALEUR|saisies_generer_vue{#GET{infos/#GET{objet}}})]
 	]
 	</BOUCLE_champs>
 
