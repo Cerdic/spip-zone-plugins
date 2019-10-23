@@ -37,7 +37,9 @@ function traiter_enregistrement_dist($args, $retours) {
 
 	// On regarde si c'est une modif d'une réponse existante
 	$id_formulaires_reponse = $args['id_formulaires_reponse'];
-	$id_formulaires_reponse = formidable_trouver_reponse_a_editer($id_formulaire, $id_formulaires_reponse, $options, true);
+	if (!$args['forcer_modif']) {//si on dit lors de l'appel du formulaire qu'on doit modifier dans tous les cas, inutile de chercher si on peut modifier
+		$id_formulaires_reponse = formidable_trouver_reponse_a_editer($id_formulaire, $id_formulaires_reponse, $options, true);
+	}
 
 	// Si la moderation est a posteriori ou que la personne est un boss, on publie direct
 	if ($options['moderation'] == 'posteriori'

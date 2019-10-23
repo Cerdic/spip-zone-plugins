@@ -101,7 +101,7 @@ function formulaires_formidable_saisies_dist($id, $valeurs = array(), $id_formul
 * @return array
 *     Contexte envoyé au squelette HTML du formulaire.
 **/
-function formulaires_formidable_charger_dist($id, $valeurs = array(), $id_formulaires_reponse = false, $url_redirect = false) {
+function formulaires_formidable_charger_dist($id, $valeurs = array(), $id_formulaires_reponse = false, $url_redirect = false, $forcer_modif = false) {
 	$contexte = array();
 
 	// On peut donner soit un id soit un identifiant
@@ -206,10 +206,11 @@ function formulaires_formidable_charger_dist($id, $valeurs = array(), $id_formul
 * @param int|bool $id_formulaires_reponse
 *     Identifiant d'une réponse pour forcer la reedition de cette reponse spécifique
 * @param bool|str $url_redirect Url de redirection qui prend éventuellement la main
+* @param bool $forcer_modif permet de forcer la modif d'une réponse existante, même si le formulaire n'est pas configuré pour (cas de modif des réponses depuis l'espace privé)
 * @return array
 *     Tableau des erreurs
 **/
-function formulaires_formidable_verifier_dist($id, $valeurs = array(), $id_formulaires_reponse = false, $url_redirect = false) {
+function formulaires_formidable_verifier_dist($id, $valeurs = array(), $id_formulaires_reponse = false, $url_redirect = false, $forcer_modif = false) {
 	$erreurs = array();
 
 	include_spip('inc/saisies');
@@ -324,10 +325,11 @@ function formulaires_formidable_verifier_traitements($id, $valeurs = array(), $i
  * @param int|bool $id_formulaires_reponse
  *     Identifiant d'une réponse pour forcer la reedition de cette reponse spécifique
  * @param bool|str $url_redirect Url de redirection qui prend éventuellement la main
+ * @param bool $forcer_modif permet de forcer la modif d'une réponse existante, même si le formulaire n'est pas configuré pour (cas de modif des réponses depuis l'espace privé)
  * @return array
  *     Tableau des erreurs
  **/
-function formulaires_formidable_traiter_dist($id, $valeurs = array(), $id_formulaires_reponse = false, $url_redirect = false) {
+function formulaires_formidable_traiter_dist($id, $valeurs = array(), $id_formulaires_reponse = false, $url_redirect = false, $forcer_modif = false) {
 	$retours = array();
 
 	// POST Mortem de securite : on log le $_POST pour ne pas le perdre si quelque chose se passe mal
@@ -398,6 +400,7 @@ function formulaires_formidable_traiter_dist($id, $valeurs = array(), $id_formul
 								'id_formulaire' => $id_formulaire,
 								'valeurs' => $valeurs,
 								'id_formulaires_reponse' => $id_formulaires_reponse,
+								'forcer_modif' => $forcer_modif
 							),
 							$retours
 						);
