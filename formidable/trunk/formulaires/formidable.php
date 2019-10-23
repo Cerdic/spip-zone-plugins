@@ -375,7 +375,6 @@ function formulaires_formidable_traiter_dist($id, $valeurs = array(), $id_formul
 		$retours['redirect'] = $url_redirect;
 	}
 
-	var_dump($retours['redirect']);
 	// les traitements deja faits se notent ici
 	// pour etre sur de ne pas etre appeles 2 fois
 	// ainsi si un traitement A a besoin d'un traitement B,
