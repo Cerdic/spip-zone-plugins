@@ -97,7 +97,7 @@ function formulaires_formidable_saisies_dist($id, $valeurs = array(), $id_formul
 *     Exemple : array('hidden_1' => 3) pour que champ identifie "@hidden_1@" soit prerempli
 * @param int|bool $id_formulaires_reponse
 *     Identifiant d'une réponse pour forcer la reedition de cette reponse spécifique
-* @param bool|str Url de redirection qui prend éventuellement la main
+* @param bool|str $url_redirect Url de redirection qui prend éventuellement la main
 * @return array
 *     Contexte envoyé au squelette HTML du formulaire.
 **/
@@ -205,7 +205,7 @@ function formulaires_formidable_charger_dist($id, $valeurs = array(), $id_formul
 *     Exemple : array('hidden_1' => 3) pour que champ identifie "@hidden_1@" soit prerempli
 * @param int|bool $id_formulaires_reponse
 *     Identifiant d'une réponse pour forcer la reedition de cette reponse spécifique
-* @param bool|str Url de redirection qui prend éventuellement la main
+* @param bool|str $url_redirect Url de redirection qui prend éventuellement la main
 * @return array
 *     Tableau des erreurs
 **/
@@ -323,7 +323,7 @@ function formulaires_formidable_verifier_traitements($id, $valeurs = array(), $i
  *     Exemple : array('hidden_1' => 3) pour que champ identifie "@hidden_1@" soit prerempli
  * @param int|bool $id_formulaires_reponse
  *     Identifiant d'une réponse pour forcer la reedition de cette reponse spécifique
- * @param bool|str Url de redirection qui prend éventuellement la main
+ * @param bool|str $url_redirect Url de redirection qui prend éventuellement la main
  * @return array
  *     Tableau des erreurs
  **/
