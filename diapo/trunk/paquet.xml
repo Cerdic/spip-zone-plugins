@@ -8,7 +8,8 @@
 >
 	<nom>Diapo</nom>
 
-	<auteur>bill</auteur>
+	<auteur>bill, Jean-Christophe Villeneuve</auteur>
+	<credit lien="http://www.elastick.net">Anne-lise Martenot</credit>
 
 	<pipeline nom="insert_head" inclure="diapo_pipelines.php" />
 	<pipeline nom="header_prive" inclure="diapo_pipelines.php" />
