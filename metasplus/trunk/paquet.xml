@@ -1,7 +1,7 @@
 <paquet
 	prefix="metasplus"
 	categorie="divers"
-	version="2.2.4"
+	version="2.2.5"
 	schema="1.0.0"
 	etat="stable"
 	compatibilite="[3.1.0;3.2.*]"
