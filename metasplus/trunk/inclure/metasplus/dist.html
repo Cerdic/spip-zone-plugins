@@ -155,7 +155,7 @@
 ]
 #SET{og-type_auto,    website}
 #SET{dc-type_auto,    Text}
-#SET{titre_auto,      #ENV{type-page,sommaire}|=={sommaire}|?{#NOM_SITE_SPIP|concat{" - ",#SLOGAN_SITE_SPIP}|supprimer_tags|textebrut}}}
+#SET{titre_auto,      #ENV{type-page,sommaire}|=={sommaire}|?{#NOM_SITE_SPIP|concat{" - ",#SLOGAN_SITE_SPIP}}}
 #SET{desc_auto,       #ENV{type-page,sommaire}|=={sommaire}|?{#DESCRIPTIF_SITE_SPIP}}
 #SET{url_auto,        #ENV{type-page,sommaire}|=={sommaire}|?{#URL_SITE_SPIP,#URL_PAGE{#ENV{type-page}}}}
 #SET{date_auto,       #DATE}
