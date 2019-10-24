@@ -52,7 +52,7 @@ function http_ezrest_erreur_dist($code, $requete, $reponse) {
  * Fait un GET sur une collection gérée par l'API ezREST.
  * La requête est du type `/ezrest/xxx` et renvoie les objets associées contenus
  * dans la base du serveur.
- * Il est possible de filtrer la collection et de compléter la colelction en utilisant le pipeline `post_ezrest`.
+ * Il est possible de filtrer la collection et de compléter la colelction en utilisant le pipeline `post_ezcollection`.
  *
  * @param Symfony\Component\HttpFoundation\Request  $requete
  *      Objet matérialisant la requête faite au serveur SVP.
@@ -115,7 +115,7 @@ function http_ezrest_get_collection_dist($requete, $reponse) {
 						),
 						'data' => $contenu['donnees']
 					);
-					$contenu['donnees'] = pipeline('post_ezrest', $flux);
+					$contenu['donnees'] = pipeline('post_ezcollection', $flux);
 				}
 			}
 		}
