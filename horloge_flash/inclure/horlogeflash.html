@@ -2,7 +2,7 @@
 [(#SET{flashparams,[(#ENV{timezone}|horlogeflash)]})]
 <div class="horlogeflash">
 [<div class="horlogeville">(#ENV{ville})</div>]
-[<div class="horlogeampm">(#ENV{timezone}|horlogeflash{1})</div>]
+[<!--<div class="horlogeampm">(#ENV{timezone}|horlogeflash{1})</div>-->]
 #SET{uid,#EVAL{uniqid()}}
 <div id="clock_#GET{uid}" class="jclockgmt" ></div>
 	<script>
@@ -10,7 +10,7 @@
 		jQuery("#clock_#GET{uid}").jClocksGMT({"title":"#ENV{ville}",
 			"offset":"[(#ENV{timezone}|horlogeflash{0,1})]",
 			"dst":true,
-			"digital":false,
+			"digital":true,
 			"analog":true,
 			"timeformat":"HH:mm",
 			"date":false,
@@ -18,7 +18,7 @@
 			"angleSec":0,
 			"angleMin":0,
 			"angleHour":0,
-			"skin":"4",
+			"skin":"7",
 			"imgpath":"[(#CHEMIN{jClocksGMT/images/jcgmt-4-clock_face.png}|replace{images/jcgmt\-4\-clock_face\.png,})]"
 		});
 	});
