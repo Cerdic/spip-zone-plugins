@@ -115,6 +115,18 @@ function agenda_optimiser_base_disparus($flux) {
 	// Evenements a la poubelle
 	sql_delete('spip_evenements', "statut='poubelle' AND maj < ".$flux['args']['date']);
 
+	// Effacer les inscriptions à des evenement inexistants
+
+	$res = sql_select(
+		'DISTINCT evenements_participants.id_evenement',
+		'spip_evenements_participants AS evenements_participants LEFT JOIN spip_evenements AS evenements ON evenements_participants.id_evenement=evenements.id_evenement',
+		'evenements.id_evenement IS NULL'
+	);
+	while ($row = sql_fetch($res)) {
+		var_dump($row);
+		sql_delete('spip_evenements_participants','id_evenement='.$row['id_evenement']);
+	}
+
 	include_spip('action/editer_liens');
 	// optimiser les liens de tous les mots vers des objets effaces
 	// et depuis des mots effaces
