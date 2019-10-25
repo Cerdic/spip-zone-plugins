@@ -14,7 +14,7 @@ function nospam_hash_env() {
 	$ip = explode('.',$GLOBALS['ip']);
 	array_pop($ip);
 	$ip = implode('.',$ip).".xxx";
-	$res = md5($ip. $_SERVER['HTTP_USER_AGENT']);
+	$res = md5($ip. (isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : ''));
 	#spip_log("jeton $res pour ".$ip. $_SERVER['HTTP_USER_AGENT'],"jetons");
 	return $res;
 }
