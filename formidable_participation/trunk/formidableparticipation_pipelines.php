@@ -66,7 +66,7 @@ function formidableparticipation_traiter_formidableparticipation($flux){
 }
 
 /**
- * Lorsqu'une réponse est passée en refusée ou poubelle, supprimer l'inscription correspondant.
+ * Lorsqu'une réponse est passée en refusée ou poubelle, changer le statut de l'inscription correspondant.
  * Réciproquement, lorsqu'une réponse est passée en validée, créer une inscription
  * @param array $flux
  * @return array $flux
