@@ -1,5 +1,5 @@
 #BOITE_OUVRIR
-<BOUCLE_evt(EVENEMENTS){id_evenement}>
+<BOUCLE_evt(EVENEMENTS){id_evenement}{tout}>
 <h1 class="grostitre"><:agenda:liste_inscrits:></h1>
 <h2 class="#EDIT{titre}">#TITRE</h2>
 <div dir='#LANG_DIR' class='dates'>[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#HORAIRE})]</div>
@@ -11,4 +11,4 @@
 <h2><:agenda:aucun_evenement:></h2>
 <//B_evt>
 #BOITE_FERMER
- 
+
