@@ -55,6 +55,13 @@ function traiter_participation_dist($args, $retours){
 	}
 	$id_formulaires_reponse = $retours['id_formulaires_reponse'];
 
+
+	// Si la réponse n'est pas publié (modération a priori), alors la réponse est non, en attendant une éventuelle future publication
+	$statut_reponse = sql_getfetsel('statut', 'spip_formulaires_reponses', "id_formulaires_reponse=$id_formulaires_reponse");
+	if ($statut_reponse != 'publie') {
+		$choix_participation = 'non';
+	}
+
 	// détermination de l'évènement où s'inscrire
 	if ($options['evenement_type'] == 'fixe') {
 		$id_evenement = $options['id_evenement_participation'];
