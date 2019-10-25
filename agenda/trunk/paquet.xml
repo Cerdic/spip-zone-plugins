@@ -1,7 +1,7 @@
 <paquet
 	prefix="agenda"
 	categorie="date"
-	version="3.32.2"
+	version="3.33.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/evenement-32.png"
@@ -54,6 +54,7 @@
 	<utilise nom="pages" compatibilite="[1.3.10;[" />
 
 	<necessite nom="calendriermini" compatibilite="[2.3.7;[" />
+	<genie nom="effacer_evenements_passes" periode="86400" />
 
 	<menu nom="evenements" titre="agenda:evenements" parent="menu_edition" icone="images/evenement-16.png" />
 	<menu nom="evenement_creer" titre="agenda:creer_evenement" parent="outils_rapides" action="evenement_edit" icone="images/evenement-new-16.png" />

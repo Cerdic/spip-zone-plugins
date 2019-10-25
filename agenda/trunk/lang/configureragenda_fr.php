@@ -7,6 +7,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	'label_effacer_evenements_passes' => 'Effacer automatiquement les évènement passés',
+	'explication_effacer_evenements_passes' => 'Mettre le nombre de jour après lequel un évènement passés est automatiquement effacés (0 ou nombre négatif pour désactiver)',
 	// L
 	'label_affichage_debut' => 'Début de la liste',
 	'label_affichage_debut_date_jour' => 'Date du jour',
@@ -27,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_url_evenement_article' => 'sur la page de l’article associé',
 	'label_url_evenement_evenement' => 'sur une page dédiée pour chaque événement',
 	'legend_presentation_agenda' => 'Présentation de l’agenda',
+	'legend_nettoyage_agenda' => 'Nettoyage régulier de l\'agenda',
 
 	// T
 	'titre_configuration' => 'Affichage de l’Agenda'
