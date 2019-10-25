@@ -6,14 +6,18 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function nospam_hash_env() {
 	static $res ='';
-	if ($res) return $res;
-	$ip = explode('.',$GLOBALS['ip']);
+	if ($res) {
+		return $res;
+	}
+	$ip = explode('.', $GLOBALS['ip']);
 	array_pop($ip);
-	$ip = implode('.',$ip).".xxx";
+	$ip = implode('.', $ip).'.xxx';
 	$res = md5($ip. (isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : ''));
 	#spip_log("jeton $res pour ".$ip. $_SERVER['HTTP_USER_AGENT'],"jetons");
 	return $res;
@@ -30,12 +34,12 @@ function nospam_hash_env() {
  * @return string
  *   cle calculee
  */
-function creer_jeton($form, $qui=NULL) {
+function creer_jeton($form, $qui = null) {
 	$time = date('Y-m-d-H');
-	if (is_null($qui)){
-		if (isset($GLOBALS['visiteur_session']['id_auteur']) AND intval($GLOBALS['visiteur_session']['id_auteur']))
-			$qui = ":".$GLOBALS['visiteur_session']['id_auteur'].":".$GLOBALS['visiteur_session']['nom'];
-		elseif (!defined('_IS_BOT') OR !_IS_BOT) { // pas de jeton pour les bots qui n'ont rien d'interessant a poster
+	if (is_null($qui)) {
+		if (isset($GLOBALS['visiteur_session']['id_auteur']) and intval($GLOBALS['visiteur_session']['id_auteur'])) {
+			$qui = ':'.$GLOBALS['visiteur_session']['id_auteur'].':'.$GLOBALS['visiteur_session']['nom'];
+		} elseif (!defined('_IS_BOT') or !_IS_BOT) { // pas de jeton pour les bots qui n'ont rien d'interessant a poster
 			$qui = nospam_hash_env();
 		}
 	}
@@ -55,21 +59,21 @@ function creer_jeton($form, $qui=NULL) {
  *   identifiant du visiteur a qui est attribue le jeton
  * @return bool cle correcte ?
  */
-function verifier_jeton($jeton, $form, $qui=NULL) {
+function verifier_jeton($jeton, $form, $qui = null) {
 	$time = time();
-	$time_old = date('Y-m-d-H',$time-3600);
-	$time = date('Y-m-d-H',$time);
+	$time_old = date('Y-m-d-H', $time-3600);
+	$time = date('Y-m-d-H', $time);
 
-	if (is_null($qui)){
-		if (isset($GLOBALS['visiteur_session']['id_auteur']) AND intval($GLOBALS['visiteur_session']['id_auteur']))
-			$qui = ":".$GLOBALS['visiteur_session']['id_auteur'].":".$GLOBALS['visiteur_session']['nom'];
-		else {
+	if (is_null($qui)) {
+		if (isset($GLOBALS['visiteur_session']['id_auteur']) and intval($GLOBALS['visiteur_session']['id_auteur'])) {
+			$qui = ':'.$GLOBALS['visiteur_session']['id_auteur'].':'.$GLOBALS['visiteur_session']['nom'];
+		} else {
 			$qui = nospam_hash_env();
 		}
 	}
 	
-	$ok = (verifier_cle_action("jeton$form$time$qui",$jeton)
-			or verifier_cle_action("jeton$form$time_old$qui",$jeton));
+	$ok = (verifier_cle_action("jeton$form$time$qui", $jeton)
+			or verifier_cle_action("jeton$form$time_old$qui", $jeton));
 	#if (!$ok)
 	#	spip_log("Erreur form:$form qui:$qui agent:".$_SERVER['HTTP_USER_AGENT']." ip:".$GLOBALS['ip'],'fauxjeton');
 	return $ok;
@@ -78,7 +82,7 @@ function verifier_jeton($jeton, $form, $qui=NULL) {
 
 /**
  * Compte le nombre de caracteres d'une chaine,
- * mais en supprimant tous les liens 
+ * mais en supprimant tous les liens
  * (qu'ils soient ou non ecrits en raccourcis SPIP)
  * ainsi que tous les espaces en trop
  *
@@ -89,18 +93,20 @@ function verifier_jeton($jeton, $form, $qui=NULL) {
  * @return int
  *   compte du texte nettoye
  */
-function compter_caracteres_utiles($texte, $propre=true) {
+function compter_caracteres_utiles($texte, $propre = true) {
 	include_spip('inc/charsets');
-	if ($propre) $texte = propre($texte);
+	if ($propre) {
+		$texte = propre($texte);
+	}
 	$u = $GLOBALS['meta']['pcre_u'];
 	// regarder si il y a du contenu en dehors des liens !
 	$texte = PtoBR($texte);
-	$texte = preg_replace(",<a.*</a>,{$u}Uims",'',$texte);
+	$texte = preg_replace(",<a.*</a>,{$u}Uims", '', $texte);
 	// \W matche tous les caracteres non ascii apres 0x80
 	// et vide donc les chaines constitues de caracteres unicodes uniquement
 	// on remplace par un match qui elimine uniquement
 	// les non \w  et les non unicodes
-	$texte = trim(preg_replace(",[^\w\x80-\xFF]+,ims",' ',$texte));
+	$texte = trim(preg_replace(",[^\w\x80-\xFF]+,ims", ' ', $texte));
 
 	// on utilise spip_strlen pour compter la longueur correcte
 	// pour les chaines unicodes
@@ -123,25 +129,28 @@ function analyser_spams($texte) {
 		'contenu_cache' => false, // du contenu est caché en CSS ?
 	);
 
-	if (!$texte) return $infos;
+	if (!$texte) {
+		return $infos;
+	}
 
 	// on travaille d'abord sur le texte 'brut' tel que saisi par
 	// l'utilisateur pour ne pas avoir les class= et style= que spip ajoute
 	// sur les raccourcis.
 	
 	// on ne tient pas compte des blocs <code> et <cadre> ni de leurs contenus
-	include_spip("inc/texte_mini");
-	if (!function_exists('echappe_html')) // SPIP 2.x
-		include_spip("inc/texte");
+	include_spip('inc/texte_mini');
+	if (!function_exists('echappe_html')) { // SPIP 2.x
+		include_spip('inc/texte');
+	}
 	$texte_humain = echappe_html($texte);
 	// on repère dans ce qui reste la présence de style= ou class= qui peuvent
 	// servir à masquer du contenu
 	// les spammeurs utilisent le laxisme des navigateurs pour envoyer aussi style =
 	// soyons donc mefiant
 	// (mais en enlevant le base64 !)
-	$texte_humain = str_replace('class="base64"','',$texte_humain);
-	$hidden = ",(<(img|object)|\s(?:style|class)\s*=[^>]+>),UimsS";
-	if (preg_match($hidden,$texte_humain)) {
+	$texte_humain = str_replace('class="base64"', '', $texte_humain);
+	$hidden = ',(<(img|object)|\s(?:style|class)\s*=[^>]+>),UimsS';
+	if (preg_match($hidden, $texte_humain)) {
 		// suspicion de spam
 		$infos['contenu_cache'] = true;
 	}
@@ -153,7 +162,7 @@ function analyser_spams($texte) {
 	$infos['caracteres_utiles'] = compter_caracteres_utiles($texte, false);
 
 	// nombre de liens
-	$liens = array_filter(extraire_balises($texte,'a'),'pas_lien_ancre');
+	$liens = array_filter(extraire_balises($texte, 'a'), 'pas_lien_ancre');
 	$infos['nombre_liens'] = count($liens);
 	$infos['liens'] = $liens;
 
@@ -174,11 +183,10 @@ function analyser_spams($texte) {
  * Cette analyse concerne principalement des statistiques sur les liens
  *
  * @param string $texte lien
- * @return boolean : true -> 
+ * @return boolean : true ->
  */
-function pas_lien_ancre($texte){
-	return substr(extraire_attribut($texte,'href'),0,1) == '#' ? false : true;
-		
+function pas_lien_ancre($texte) {
+	return substr(extraire_attribut($texte, 'href'), 0, 1) == '#' ? false : true;
 }
 
 /**
@@ -196,55 +204,58 @@ function pas_lien_ancre($texte){
  *   condition sur le statut='spam' pour ne regarder que les enregistrement en statut spam
  * @return bool
  */
-function rechercher_presence_liens_spammes($liens,$seuil,$table,$champs,$condstatut=null){
-	include_spip("inc/filtres");
+function rechercher_presence_liens_spammes($liens, $seuil, $table, $champs, $condstatut = null) {
+	include_spip('inc/filtres');
 
-	if (is_null($condstatut))
-		$condstatut = "statut=".sql_quote('spam');
-	if ($condstatut)
+	if (is_null($condstatut)) {
+		$condstatut = 'statut='.sql_quote('spam');
+	}
+	if ($condstatut) {
 		$condstatut = "$condstatut AND ";
+	}
 
 	// limiter la recherche au mois precedent
-	$trouver_table = charger_fonction("trouver_table","base");
+	$trouver_table = charger_fonction('trouver_table', 'base');
 	if ($desc = $trouver_table($table)
-	  AND isset($desc['date'])){
-		$depuis = date('Y-m-d H:i:s',strtotime("-1 month"));
-		$condstatut .= $desc['date'].">".sql_quote($depuis)." AND ";
+		and isset($desc['date'])) {
+		$depuis = date('Y-m-d H:i:s', strtotime('-1 month'));
+		$condstatut .= $desc['date'].'>'.sql_quote($depuis).' AND ';
 	}
 
 	// Ne pas prendre en compte les liens sur les domaines explicitement autorisés
 	// Il ne faut ni http(s):// ni www dedans, juste le NDD (et éventuellement un sous domaine)
 	if (defined('NOSPAM_DOMAINES_AMIS') and NOSPAM_DOMAINES_AMIS) {
-		$amis = explode (',', NOSPAM_DOMAINES_AMIS);
+		$amis = explode(',', NOSPAM_DOMAINES_AMIS);
 		$amis = array_filter(array_map('trim', $amis));
-	}
-	else
+	} else {
 		$amis = array();
+	}
 
-	foreach (array($GLOBALS['meta']['adresse_site'],url_de_base()) as $a){
+	foreach (array($GLOBALS['meta']['adresse_site'],url_de_base()) as $a) {
 		$host = parse_url($a, PHP_URL_HOST);
 		if ($host) {
-			$host = explode(".", $host);
-			$amis[] = implode(".",array_slice($host, -2));
+			$host = explode('.', $host);
+			$amis[] = implode('.', array_slice($host, -2));
 		}
 	}
 
-	if (count($amis)){
+	if (count($amis)) {
 		$amis = array_unique($amis);
 		$amis = array_map('preg_quote', $amis);
-		$amis = '/('.implode("|",$amis).')$/';
-		spip_log("domaines whitelist pour les liens spams : $amis","nospam");
+		$amis = '/('.implode('|', $amis).')$/';
+		spip_log("domaines whitelist pour les liens spams : $amis", 'nospam');
+	} else {
+		$amis = '';
 	}
-	else
-		$amis = "";
 
 	$hosts = array();
-	foreach ($liens as $lien){
-		$url = extraire_attribut($lien,"href");
+	foreach ($liens as $lien) {
+		$url = extraire_attribut($lien, 'href');
 		if ($parse = parse_url($url)
-		  AND !empty($parse['host'])
-		  AND (!$amis OR !preg_match($amis,$parse['host'])))
+		  and !empty($parse['host'])
+		  and (!$amis or !preg_match($amis, $parse['host']))) {
 			$hosts[] = $parse['host'];
+		}
 	}
 
 	$hosts = array_unique($hosts);
@@ -252,14 +263,14 @@ function rechercher_presence_liens_spammes($liens,$seuil,$table,$champs,$condsta
 
 	// pour chaque host figurant dans un lien, regarder si on a pas deja eu des spams avec ce meme host
 	// auquel cas on refuse poliment le message
-	foreach($hosts as $h){
-		$like = " LIKE ".sql_quote("%$h%");
-		$where = $condstatut . "(".implode("$like OR ",$champs)."$like)";
-		if (($n=sql_countsel($table,$where))>=$seuil){
+	foreach ($hosts as $h) {
+		$like = ' LIKE '.sql_quote("%$h%");
+		$where = $condstatut . '('.implode("$like OR ", $champs)."$like)";
+		if (($n=sql_countsel($table, $where))>=$seuil) {
 			// loger les 10 premiers messages concernes pour aider le webmestre
-			$all = sql_allfetsel(id_table_objet($table),$table,$where,'','','0,10');
-			$all = array_map('reset',$all);
-			spip_log("$n liens trouves $like dans table $table (".implode(",",$all).") [champs ".implode(',',$champs)."]","nospam");
+			$all = sql_allfetsel(id_table_objet($table), $table, $where, '', '', '0,10');
+			$all = array_map('reset', $all);
+			spip_log("$n liens trouves $like dans table $table (".implode(',', $all).') [champs '.implode(',', $champs).']', 'nospam');
 			return $h;
 		}
 	}
