@@ -30,13 +30,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
-function svpapi_verifier_contexte(&$erreur) {
+function svpapi_requete_verifier_contexte(&$erreur) {
 
 	// Initialise le retour à true par défaut.
 	$est_valide = true;
 
 	include_spip('inc/svp_phraser');
-	if (_SVP_MODE_RUNTIME) {
+	include_spip('inc/config');
+	$mode = lire_config("svp/mode_runtime", 'non');
+	if (_SVP_MODE_RUNTIME
+	or (!_SVP_MODE_RUNTIME and ($mode == 'oui'))) {
 		$erreur = array(
 			'status'  => 501,
 			'type'    => 'serveur_nok',
@@ -47,6 +50,28 @@ function svpapi_verifier_contexte(&$erreur) {
 	}
 
 	return $est_valide;
+}
+
+/**
+ * Compléte le bloc d'information du plugin en supprimant le schéma du plugin SVP API qui n'existe pas par celui
+ * su plugin SVP sur lequel s'appuie SVP API.
+ *
+ * @param array $contenu Le contenu de la réponse dans son état après initialisation.
+ *
+ * @return array Le contenu de la réponse avec l'index `schema` supprimé et remplacé par l'index `schema_svp`.
+ */
+function svpapi_reponse_informer_plugin($contenu) {
+
+	// On met à jour les informations sur le plugin utilisateur maintenant qu'il est connu.
+	// -- Récupération du schéma de données et de la version du plugin.
+	include_spip('inc/filtres');
+	$informer = charger_filtre('info_plugin');
+	$schema = $informer('svp', 'schema', true);
+
+	unset($contenu['plugin']['schema']);
+	$contenu['plugin']['schema_svp'] = $schema;
+
+	return $contenu;
 }
 
 
