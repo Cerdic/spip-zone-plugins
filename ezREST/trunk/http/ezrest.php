@@ -33,7 +33,7 @@ function http_ezrest_erreur_dist($code, $requete, $reponse) {
 	// Comme l'erreur est détectée par le serveur HTTP abstrait, le contenu n'est pas initialisé.
 	// Il faut donc l'initialiser selon la structure imposée par l'API.
 	include_spip('ezrest/ezrest');
-	$contenu = reponse_ezrest_initialiser_contenu($requete);
+	$contenu = ezrest_reponse_initialiser_contenu($requete);
 
 	// Description de l'erreur : pour les messages, on utilise ceux du plugin serveur HTTP abstrait.
 	$contenu['erreur']['status'] = $code;
@@ -42,7 +42,7 @@ function http_ezrest_erreur_dist($code, $requete, $reponse) {
 	$contenu['erreur']['detail'] = _T('http:erreur_' . $contenu['erreur']['status'] . '_message');
 
 	// Finaliser la réponse selon le format demandé.
-	$reponse = reponse_ezrest_construire($reponse, $contenu);
+	$reponse = ezrest_reponse_construire($reponse, $contenu);
 
 	return $reponse;
 }
@@ -69,9 +69,11 @@ function http_ezrest_erreur_dist($code, $requete, $reponse) {
  */
 function http_ezrest_get_collection_dist($requete, $reponse) {
 
-	// Initialisation du format de sortie du contenu de la réponse, du bloc d'erreur et de la collection.
+	// Initialisation du format de sortie du contenu de la réponse, du bloc d'erreur et du plugin utilisateur qui
+	// n'est pas encore connu à ce stade.
 	include_spip('ezrest/ezrest');
-	$contenu = reponse_ezrest_initialiser_contenu($requete);
+	$contenu = ezrest_reponse_initialiser_contenu($requete);
+	$plugin = '';
 	$erreur = array();
 
 	// Récupération de la liste des collections disponibles.
@@ -80,27 +82,25 @@ function http_ezrest_get_collection_dist($requete, $reponse) {
 
 	// Vérification du nom de la collection.
 	$collection = $contenu['requete']['collection'];
-	if (requete_ezrest_verifier_collection($collection, $collections, $plugin, $erreur)) {
+	if (ezrest_requete_verifier_collection($collection, $collections, $plugin, $erreur)) {
 		// La collection étant correcte on extrait sa configuration.
 		$configuration = $collections[$collection];
 
 		// On complète l'initialisation du contenu de la réponse avec des informations sur le plugin utilisateur.
 		// -- Par défaut, le schéma et la version mais le plugin utilisateur peut compléter ces informations.
-		$contenu = reponse_ezrest_informer_plugin($contenu, $plugin);
+		$contenu = ezrest_reponse_informer_plugin($plugin, $contenu);
 
 		// On utilise son préfixe pour appeler une fonction spécifique au plugin pour vérifier si le contexte
 		// permet l'utilisation de l'API.
-		if (requete_ezrest_verifier_contexte($plugin, $erreur)) {
+		if (ezrest_requete_verifier_contexte($plugin, $erreur)) {
 			// Le contexte autorise l'utilisation de l'API.
 			// -> Vérification des filtres éventuels.
-			if (requete_ezrest_verifier_filtres($contenu['requete']['filtres'], $collection, $configuration, $erreur)) {
+			if (ezrest_requete_verifier_filtres($plugin, $contenu['requete']['filtres'], $collection, $configuration, $erreur)) {
 				// Détermination de la fonction de service permettant de récupérer la collection spécifiée
 				// filtrée sur les critères éventuellement fournis.
-				// -- la fonction de service est contenue dans un fichier du répertoire ezrest/ et est supposée
+				// -- la fonction de service est contenue dans le fichier 'ezrest/${plugin}.php' et est supposée
 				//    être toujours présente.
-				$module = $configuration['module'];
-				include_spip("ezrest/${module}");
-				$collectionner = "${collection}_collectionner";
+				$collectionner = ezrest_service_chercher($plugin, 'collectionner', $collection);
 
 				// -- on construit le contenu de la collection.
 				$contenu['donnees'] = $collectionner($contenu['requete']['filtres'], $configuration);
@@ -110,8 +110,8 @@ function http_ezrest_get_collection_dist($requete, $reponse) {
 					$flux = array(
 						'args' => array(
 							'plugin'        => $plugin,
-							'collection'    => $collection,
-							'configuration' => $configuration
+							'configuration' => $configuration,
+							'collection'    => $collection
 						),
 						'data' => $contenu['donnees']
 					);
@@ -125,11 +125,11 @@ function http_ezrest_get_collection_dist($requete, $reponse) {
 	// vérification, le titre et le détail de l'erreur.
 	if ($erreur) {
 		$contenu['erreur'] = array_merge($contenu['erreur'], $erreur);
-		$contenu['erreur'] = reponse_ezrest_expliquer_erreur($contenu['erreur'], $collection);
+		$contenu['erreur'] = ezrest_reponse_expliquer_erreur($plugin, $contenu['erreur'], $collection);
 	}
 
 	// Construction de la réponse finale
-	$reponse = reponse_ezrest_construire($reponse, $contenu);
+	$reponse = ezrest_reponse_construire($reponse, $contenu);
 
 	return $reponse;
 }
@@ -158,7 +158,7 @@ function http_ezrest_get_ressource_dist($requete, $reponse) {
 
 	// Initialisation du format de sortie du contenu de la réponse, du bloc d'erreur et du format de sortie en JSON
 	include_spip('ezrest/ezrest');
-	$contenu = reponse_ezrest_initialiser_contenu($requete);
+	$contenu = ezrest_reponse_initialiser_contenu($requete);
 	$erreur = array();
 
 	// Récupération de la liste des collections disponibles.
@@ -167,27 +167,25 @@ function http_ezrest_get_ressource_dist($requete, $reponse) {
 
 	// Vérification du nom de la collection.
 	$collection = $contenu['requete']['collection'];
-	if (requete_ezrest_verifier_collection($collection, $collections, $plugin, $erreur)) {
+	if (ezrest_requete_verifier_collection($collection, $collections, $plugin, $erreur)) {
 		// La collection étant correcte on extrait sa configuration.
 		$configuration = $collections[$collection];
 
 		// On complète l'initialisation du contenu de la réponse avec des informations sur le plugin utilisateur.
 		// -- Par défaut, le schéma et la version mais le plugin utilisateur peut compléter ces informations.
-		$contenu = reponse_ezrest_informer_plugin($contenu, $plugin);
+		$contenu = ezrest_reponse_informer_plugin($plugin, $contenu);
 
 		// On utilise son préfixe pour appeler une fonction spécifique au plugin pour vérifier si le contexte
 		// permet l'utilisation de l'API.
-		if (requete_ezrest_verifier_contexte($plugin, $erreur)) {
+		if (ezrest_requete_verifier_contexte($plugin, $erreur)) {
 			// Le contexte autorise l'utilisation de l'API.
 			// Vérification de la ressource
 			$ressource = $contenu['requete']['ressource'];
-			if (requete_ezrest_verifier_ressource($ressource, $collection, $configuration, $erreur)) {
+			if (ezrest_requete_verifier_ressource($plugin, $ressource, $collection, $configuration, $erreur)) {
 				// Détermination de la fonction de service permettant de récupérer la ressource spécifiée.
 				// -- la fonction de service est contenue dans un fichier du répertoire svpapi/ et est supposée
 				//    être toujours présente.
-				$module = $configuration['module'];
-				include_spip("ezrest/${module}");
-				$ressourcer = "${collection}_ressourcer";
+				$ressourcer = ezrest_service_chercher($plugin, 'ressourcer', $collection);
 
 				// -- on construit le contenu de la collection.
 				$contenu['donnees'] = $ressourcer($ressource);
@@ -197,8 +195,8 @@ function http_ezrest_get_ressource_dist($requete, $reponse) {
 					$flux = array(
 						'args' => array(
 							'plugin'        => $plugin,
-							'collection'    => $collection,
 							'configuration' => $configuration,
+							'collection'    => $collection,
 							'ressource'     => $ressource
 						),
 						'data' => $contenu['donnees']);
@@ -212,11 +210,11 @@ function http_ezrest_get_ressource_dist($requete, $reponse) {
 	// vérification, le titre et le détail de l'erreur.
 	if ($erreur) {
 		$contenu['erreur'] = array_merge($contenu['erreur'], $erreur);
-		$contenu['erreur'] = reponse_ezrest_expliquer_erreur($contenu['erreur'], $collection);
+		$contenu['erreur'] = ezrest_reponse_expliquer_erreur($plugin, $contenu['erreur'], $collection);
 	}
 
 	// Construction de la réponse finale
-	$reponse = reponse_ezrest_construire($reponse, $contenu);
+	$reponse = ezrest_reponse_construire($reponse, $contenu);
 
 	return $reponse;
 }
