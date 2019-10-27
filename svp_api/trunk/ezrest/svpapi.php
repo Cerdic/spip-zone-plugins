@@ -21,16 +21,15 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @param &array    $erreur
  *        Tableau initialisé avec les index identifiant l'erreur ou vide si pas d'erreur.
- *        Les index mis à jour sont:
- *        - `status`  : le code de l'erreur HTTP, soit 501
- *        - `type`    : chaine identifiant l'erreur plus précisément, soit `serveur_nok`
+ *        Les index mis à jour sont uniquement les suivants car les autres sont initialisés par l'appelant :
+ *        - `type`    : identifiant de l'erreur 501, soit `runtime_nok`
  *        - `element` : type d'objet sur lequel porte l'erreur, soit `serveur`
  *        - `valeur`  : la valeur du mode runtime
  *
  * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
-function svpapi_requete_verifier_contexte(&$erreur) {
+function svpapi_api_verifier_contexte(&$erreur) {
 
 	// Initialise le retour à true par défaut.
 	$est_valide = true;
@@ -40,12 +39,10 @@ function svpapi_requete_verifier_contexte(&$erreur) {
 	$mode = lire_config("svp/mode_runtime", 'non');
 	if (_SVP_MODE_RUNTIME
 	or (!_SVP_MODE_RUNTIME and ($mode == 'oui'))) {
-		$erreur = array(
-			'status'  => 501,
-			'type'    => 'serveur_nok',
-			'element' => 'runtime',
-			'valeur'  => _SVP_MODE_RUNTIME
-		);
+		$erreur['type'] = 'runtime_nok';
+		$erreur['element'] = 'svp_mode_runtime';
+		$erreur['valeur'] = _SVP_MODE_RUNTIME;
+
 		$est_valide = false;
 	}
 
@@ -68,8 +65,7 @@ function svpapi_reponse_informer_plugin($contenu) {
 	$informer = charger_filtre('info_plugin');
 	$schema = $informer('svp', 'schema', true);
 
-	unset($contenu['plugin']['schema']);
-	$contenu['plugin']['schema_svp'] = $schema;
+	$contenu['fournisseur']['schema'] = "${schema} (SVP)";
 
 	return $contenu;
 }
@@ -224,13 +220,13 @@ function plugins_ressourcer($prefixe) {
  * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
-function plugins_verifier_critere_compatible_spip($valeur, &$extra) {
+function plugins_verifier_critere_compatible_spip($valeur, &$erreur) {
 
 	$est_valide = true;
 
 	if (!preg_match('#^((?:\d+)(?:\.\d+){0,2})(?:,(\d+\.\d+)){0,}$#', $valeur)) {
 		$est_valide = false;
-		$extra = _T('svpapi:extra_critere_compatible_spip');
+		$erreur['type'] = 'critere_compatible_spip_nok';
 	}
 
 	return $est_valide;
