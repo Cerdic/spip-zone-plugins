@@ -1,13 +1,60 @@
 <?php
 /**
- * Ce fichier contient l'ensemble des constantes et fonctions de construction du contenu des réponses aux
- * requête à l'API SVP.
+ * Ce fichier contient l'ensemble des services de gestion des requêtes, des réponses et de traitement
+ * des données des collections et des ressources.
+ * Certains de ces services peuvent être personnalisés par l'appel d'un service spécifique du plugin utilisateur.
  *
  * @package SPIP\EZREST\SERVICE
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
+
+
+// -----------------------------------------------------------------------
+// --------------- SERVICES DE GESTION DU CONTEXTE SERVEUR ---------------
+// -----------------------------------------------------------------------
+
+/**
+ * Détermine si le serveur est capable de répondre aux requêtes.
+ * Par défaut, l'API ezREST ne fait aucune vérification. C'est donc au plugin utilisateur de fournir
+ * un service spécifique si une vérification globale doit être effectuée afin d'assurer le fonctionnement de
+ * l'API.
+ *
+ * Si une erreur est détectée, le plugin utilisateur ne renvoie le type, l'élément et la valeur qui provoque l'erreur
+ * sachant que c'est le service par défaut qui positionne le code.
+ *
+ * @param string $plugin Préfixe du plugin utilisateur de ezrest et donc fournisseur de la collection.
+ * @param &array $erreur Tableau initialisé avec les index identifiant l'erreur ou vide si pas d'erreur.
+ *
+ * @return bool
+ *        `true` si la valeur est valide, `false` sinon.
+ */
+function ezrest_api_verifier_contexte($plugin, &$erreur) {
+
+	// Initialise le retour à true par défaut.
+	$est_valide = true;
+
+	// Appel d'un service spéficique au plugin fournisseur pour vérifier si le contexte permet l'utilisation de l'API.
+	if ($verifier = ezrest_service_chercher($plugin, 'api_verifier_contexte')) {
+		// On initialise l'erreur avec son code 501 et son module, le plugin utilisateur.
+		// Par contre, le type est passé à vide parce que c'est au plugin de choisir son identifiant d'erreur 501.
+		$erreur = ezrest_erreur_initialiser($plugin, 501, '');
+		$est_valide = $verifier($erreur);
+	}
+
+	// S'assurer que le bloc d'erreur est vide si aucune erreur n'a été détectée.
+	if ($est_valide) {
+		$erreur = array();
+	}
+
+	return $est_valide;
+}
+
+
+// -----------------------------------------------------------------------
+// ------------------ SERVICES DE GESTION DES REPONSES -------------------
+// -----------------------------------------------------------------------
 
 /**
  * Initialise le contenu d'une réponse qui se présente comme un tableau associatif.
@@ -43,12 +90,8 @@ function ezrest_reponse_initialiser_contenu($requete) {
 	$demande['format_contenu'] = 'json';
 
 	// Initialisation du bloc d'erreur à ok par défaut
-	$erreur['status'] = 200;
-	$erreur['type'] = 'ok';
-	$erreur['element'] = '';
-	$erreur['valeur'] = '';
-	$erreur['title'] = _T('ezrest:erreur_200_ok_titre');
-	$erreur['detail'] = _T('ezrest:erreur_200_ok_message');
+	$erreur = ezrest_erreur_initialiser('ezrest', 200, 'ok');
+	$erreur = ezrest_reponse_expliquer_erreur('ezrest', $erreur, '');
 
 	// On intitialise le contenu avec les informations collectées.
 	// A noter que le format de sortie est initialisé par défaut à json indépendamment de la demande, ce qui permettra
@@ -61,7 +104,6 @@ function ezrest_reponse_initialiser_contenu($requete) {
 
 	return $contenu;
 }
-
 
 /**
  * Complète l'initialisation du contenu d'une réponse avec des informations sur le plugin utilisateur.
@@ -78,23 +120,27 @@ function ezrest_reponse_initialiser_contenu($requete) {
 function ezrest_reponse_informer_plugin($plugin, $contenu) {
 
 	// On met à jour les informations sur le plugin utilisateur maintenant qu'il est connu.
-	// -- Récupération du schéma de données et de la version du plugin.
-	include_spip('inc/config');
-	$schema = lire_config("${plugin}_base_version", null);
+	// -- A minima on enregistre le préfixe et la version du plugin.
 	include_spip('inc/filtres');
 	$informer = charger_filtre('info_plugin');
 	$version = $informer($plugin, 'version', true);
 
 	$contenu = array_merge(
 		array(
-			'plugin' => array(
-				'prefixe' => $plugin,
-				'schema'  => $schema,
+			'fournisseur' => array(
+				'plugin'  => strtoupper($plugin),
 				'version' => $version,
 			)
 		),
 		$contenu
 	);
+
+	// -- On ajoute le schéma de données du plugin si il existe.
+	include_spip('inc/config');
+	$schema = lire_config("${plugin}_base_version", null);
+	if (!is_null($schema)) {
+		$contenu['fournisseur']['schema'] = $schema;
+	}
 
 	// Appel d'un service spécifique au plugin utilisateur pour compléter l'initialisation si besoin.
 	if ($completer = ezrest_service_chercher($plugin, 'reponse_informer_plugin')) {
@@ -115,25 +161,28 @@ function ezrest_reponse_informer_plugin($plugin, $contenu) {
  * @return array
  *        Tableau de l'erreur complété avec le titre (index `title`) et le descriptif (index `detail`).
  */
-function ezrest_reponse_expliquer_erreur($plugin, $erreur, $collection) {
+function ezrest_reponse_expliquer_erreur($plugin, $erreur, $collection = '') {
 
 	// Calcul des paramètres qui seront passés à la fonction de traduction.
-	// -- on passe toujours la collection qui est vide uniquement pour l'erreur de serveur.
+	// -- on passe toujours la collection qui est vide uniquement pour l'erreur de serveur et l'extra qui peut aussi
+	//    être vide parfois.
 	$parametres = array(
 		'element'    => $erreur['element'],
 		'valeur'     => $erreur['valeur'],
-		'collection' => $collection
+		'collection' => $collection,
+		'extra'      => $erreur['extra']
 	);
-	// -- on complète avec une chaine extra si elle existe que l'on supprime ensuite comme index de la réponse.
-	if (isset($erreur['extra'])) {
-		$parametres['extra'] = $erreur['extra'];
-		unset($erreur['extra']);
-	}
+	// -- inutile de conserver l'extra dans le bloc d'erreur
+	unset($erreur['extra']);
 
-	// Traduction du libellé de l'erreur et du message complémentaire.
-	$prefixe = 'ezrest:erreur_' . $erreur['status'] . '_' . $erreur['type'];
-	$erreur['title'] = _T("${prefixe}_titre", $parametres);
-	$erreur['detail'] = _T("${prefixe}_message", $parametres);
+	// Traduction du libellé de l'erreur.
+	$item = $erreur['module']['titre'] . ':erreur_' . $erreur['status'] . '_' . $erreur['type'] . '_titre';
+	$erreur['titre'] = _T($item, $parametres);
+	// Traduction du message complémentaire.
+	$item = $erreur['module']['detail'] . ':erreur_' . $erreur['status'] . '_' . $erreur['type'] . '_message';
+	$erreur['detail'] = _T($item, $parametres);
+	// -- inutile de conserver l'information sur les modules fournissant les items de langue.
+//	unset($erreur['module']);
 
 	// Appel d'un service spécifique au plugin utilisateur pour compléter le bloc d'erreur si besoin.
 	if ($expliquer = ezrest_service_chercher($plugin, 'reponse_expliquer_erreur')) {
@@ -172,39 +221,9 @@ function ezrest_reponse_construire($reponse, $contenu) {
 }
 
 
-/**
- * Détermine si le serveur est capable de répondre aux requêtes SVP.
- * Pour cela on vérifie si le serveur est en mode run-time ou pas.
- * On considère qu'un serveur en mode run-time n'est pas valide pour
- * traiter les requêtes car la liste des plugins et des paquets n'est
- * pas complète.
- *
- * @param string $plugin Préfixe du plugin utilisateur de ezrest et donc fournisseur de la collection.
- * @param &array    $erreur
- *        Tableau initialisé avec les index identifiant l'erreur ou vide si pas d'erreur.
- *        Les index mis à jour sont:
- *        - `status`  : le code de l'erreur HTTP, soit 501
- *        - `type`    : chaine identifiant l'erreur plus précisément, soit `serveur_nok`
- *        - `element` : type d'objet sur lequel porte l'erreur, soit `serveur`
- *        - `valeur`  : la valeur du mode runtime
- *
- * @return bool
- *        `true` si la valeur est valide, `false` sinon.
- */
-function ezrest_requete_verifier_contexte($plugin, &$erreur) {
-
-	// Initialise le retour à true par défaut.
-	$est_valide = true;
-	$erreur = array();
-
-	// Appel d'un service spéficique au plugin fournisseur pour vérifier si le contexte permet l'utilisation de l'API.
-	if ($verifier = ezrest_service_chercher($plugin, 'requete_verifier_contexte')) {
-		$est_valide = $verifier($erreur);
-	}
-
-	return $est_valide;
-}
-
+// -----------------------------------------------------------------------
+// ------------------ SERVICES DE GESTION DES REQUETES -------------------
+// -----------------------------------------------------------------------
 
 /**
  * Détermine si la collection demandée est valide. Par défaut, REST Factory vérifie que la collection est bien
@@ -232,11 +251,10 @@ function ezrest_requete_verifier_collection($collection, $collections, &$plugin,
 
 	// Initialise le retour à false par défaut.
 	$est_valide = false;
-	$erreur = array();
 
 	// Vérification de la disponibilité de la collection demandée.
 	foreach ($collections as $_collection => $_configuration) {
-		if ($collection==$_collection) {
+		if ($collection == $_collection) {
 			// la collection est déclarée, on renvoie le plugin fournisseur et aucune erreur.
 			$est_valide = true;
 			$plugin = $_configuration['module'];
@@ -246,18 +264,31 @@ function ezrest_requete_verifier_collection($collection, $collections, &$plugin,
 
 	// La collection n'est pas déclarée, on renvoie une erreur et pas de plugin.
 	if (!$est_valide) {
-		$erreur = array(
-			'status'  => 400,
-			'type'    => 'collection_nok',
-			'element' => 'collection',
-			'valeur'  => $collection,
-			'extra'   => implode(', ', array_keys($collections))
+		$erreur = ezrest_erreur_initialiser(
+			'ezrest',
+			400,
+			'collection_indisponible',
+			'collection',
+			$collection,
+			implode(', ', array_keys($collections))
 		);
 	} else {
 		// Appel d'un service spécifique au plugin utilisateur pour compléter la vérification si besoin.
-		if ($verifier = ezrest_service_chercher($plugin, 'requete_verifier_collection')) {
+		if ($verifier = ezrest_service_chercher($plugin, 'verifier', $collection)) {
+			$erreur = ezrest_erreur_initialiser(
+				$plugin,
+				400,
+				'collection_nok',
+				'collection',
+				$collection
+			);
 			$est_valide = $verifier($erreur);
 		}
+	}
+
+	// S'assurer que le bloc d'erreur est vide si aucune erreur n'a été détectée.
+	if ($est_valide) {
+		$erreur = array();
 	}
 
 	return $est_valide;
@@ -290,18 +321,19 @@ function ezrest_requete_verifier_collection($collection, $collections, &$plugin,
  */
 function ezrest_requete_verifier_filtres($plugin, $filtres, $collection, $configuration, &$erreur) {
 
+	// Initialise le retour à true par défaut.
 	$est_valide = true;
-	$erreur = array();
 
 	// 1- Vérification de l'absence de critère obligatoire.
 	foreach ($configuration['filtres'] as $_filtre) {
 		if (!empty($_filtre['est_obligatoire'])
 		and (!isset($filtres[$_filtre['critere']]))) {
-			$erreur = array(
-				'status'  => 400,
-				'type'    => 'critere_obligatoire_nok',
-				'element' => 'critere',
-				'valeur'  => $_filtre['critere']
+			$erreur = ezrest_erreur_initialiser(
+				'ezrest',
+				400,
+				'critere_obligatoire_nok',
+				'critere',
+				$_filtre['critere']
 			);
 			$est_valide = false;
 			break;
@@ -316,12 +348,13 @@ function ezrest_requete_verifier_filtres($plugin, $filtres, $collection, $config
 			// On vérifie si le critère est admis.
 			$criteres = array_column($configuration['filtres'], null, 'critere');
 			if (!in_array($_critere, array_keys($criteres))) {
-				$erreur = array(
-					'status'  => 400,
-					'type'    => 'critere_nom_nok',
-					'element' => 'critere',
-					'valeur'  => $_critere,
-					'extra'   => implode(', ', array_keys($criteres))
+				$erreur = ezrest_erreur_initialiser(
+					'ezrest',
+					400,
+					'critere_nom_nok',
+					'critere',
+					$_critere,
+					implode(', ', array_keys($criteres))
 				);
 				$est_valide = false;
 				break;
@@ -332,20 +365,26 @@ function ezrest_requete_verifier_filtres($plugin, $filtres, $collection, $config
 				$module = !empty($criteres[$_critere]['module'])
 					? $criteres[$_critere]['module']
 					: $plugin;
-				if (($verifier = ezrest_service_chercher($module, 'verifier_critere', $collection, $_critere))
-				and !$verifier($_valeur, $extra)) {
-					$erreur = array(
-						'status'  => 400,
-						'type'    => 'critere_valeur_nok',
-						'element' => $_critere,
-						'valeur'  => $_valeur,
-						'extra'   => $extra
+				if ($verifier = ezrest_service_chercher($module, 'verifier_critere', $collection, $_critere)) {
+					$erreur = ezrest_erreur_initialiser(
+						$module,
+						400,
+						'',
+						$_critere,
+						$_valeur
 					);
-					$est_valide = false;
-					break;
+					if (!$verifier($_valeur, $erreur)) {
+						$est_valide = false;
+						break;
+					}
 				}
 			}
 		}
+	}
+
+	// S'assurer que le bloc d'erreur est vide si aucune erreur n'a été détectée.
+	if ($est_valide) {
+		$erreur = array();
 	}
 
 	return $est_valide;
@@ -379,12 +418,11 @@ function ezrest_requete_verifier_ressource($plugin, $ressource, $collection, $co
 
 	// Initialise le retour à true par défaut.
 	$est_valide = true;
-	$erreur = array();
 
 	// Vérification de la disponibilité de l'accès à une ressource pour la collection concernée
 	if (empty($configuration['ressource'])) {
 		// Récupération de la liste des collections disponibles pour lister celles avec ressources dans le message.
-		$declarer = charger_fonction('declarer_collections_svp', 'inc');
+		$declarer = charger_fonction('ezrest_declarer_collections', 'inc');
 		$collections = $declarer();
 		$ressources = array();
 		foreach ($collections as $_collection => $_config) {
@@ -392,32 +430,142 @@ function ezrest_requete_verifier_ressource($plugin, $ressource, $collection, $co
 				$ressources[] = $_collection;
 			}
 		}
-		$erreur = array(
-			'status'  => 400,
-			'type'    => 'ressource_nok',
-			'element' => 'ressource',
-			'valeur'  => $ressource,
-			'extra'   => implode(', ', $ressources)
+		$erreur = ezrest_erreur_initialiser(
+			'ezrest',
+			400,
+			'ressource_indisponible',
+			'ressource',
+			$ressource,
+			implode(', ', $ressources)
 		);
 		$est_valide = false;
 	} else {
 		// Vérification de la validité de la ressource demandée.
 		// -- la ressource est vérifiée par une fonction spécifique. Si elle n'existe pas la ressource est
 		//    réputée valide.
-		if (($verifier = ezrest_service_chercher($plugin, 'verifier_ressource', $collection, $configuration['ressource']))
-		and !$verifier($ressource)) {
-			$erreur = array(
-				'status'  => 400,
-				'type'    => "ressource_{$configuration['ressource']}_nok",
-				'element' => 'ressource',
-				'valeur'  => $ressource,
-				'extra'   => $configuration['ressource']
+		if ($verifier = ezrest_service_chercher($plugin, 'verifier_ressource', $collection, $configuration['ressource'])) {
+			$erreur = ezrest_erreur_initialiser(
+				$plugin,
+				400,
+				'ressource_nok',
+				'ressource',
+				$ressource,
+				$configuration['ressource']
 			);
-			$est_valide = false;
+			if (!$verifier($ressource, $erreur)) {
+				$est_valide = false;
+			}
 		}
 	}
 
+	// S'assurer que le bloc d'erreur est vide si aucune erreur n'a été détectée.
+	if ($est_valide) {
+		$erreur = array();
+	}
+
 	return $est_valide;
+}
+
+
+// -----------------------------------------------------------------------
+// ------------------ SERVICES DE GESTION DES DONNEES --------------------
+// -----------------------------------------------------------------------
+
+/**
+ * @param $plugin
+ *
+ * @return array
+ */
+function ezrest_indexer($collections) {
+
+	// Initialisation des données de la collection à retourner
+	$contenu = array();
+
+	// On contruit la liste des collections disponibles en présentant leur configuration d'une façon la plus
+	// explicite pour les utilisateurs. Les collections sont présentées sous chaque plugin fournisseur.
+	foreach ($collections as $_collection => $_configuration) {
+		// Détermination du plugin fournisseur
+		$plugin = $_configuration['module'];
+
+		// Si c'est la première fois qu'on rencontre le plugin alors on stocke quelques informations sur le plugin.
+		if (!isset($contenu[$plugin])) {
+			include_spip('inc/filtres');
+			$informer = charger_filtre('info_plugin');
+			$version = $informer($plugin, 'version', true);
+			$nom = $informer($plugin, 'nom', true);
+
+			$contenu[$plugin]['fournisseur'] = array(
+				'nom'  => extraire_multi($nom),
+				'version' => $version,
+			);
+		}
+
+		// On initialise le contenu de la collection sous l'index du plugin
+		$contenu[$plugin]['collections'][$_collection] = array();
+
+		// -- Informer sur la possibilité de demander une ressource
+		$contenu[$plugin]['collections'][$_collection]['ressource'] = isset($_configuration['ressource'])
+			? _T('ezrest:collection_ressource_oui', array('ressource' => $_configuration['ressource']))
+			: _T('ezrest:collection_ressource_non');
+
+		// -- Informer sur les filtres autorisés
+		if ($_configuration['filtres']) {
+			foreach ($_configuration['filtres'] as $_filtre) {
+				$obligatoire = empty($_filtre['est_obligatoire'])
+					? _T('ezrest:collection_filtre_facultatif')
+					: _T('ezrest:collection_filtre_obligatoire');
+				$fournisseur = empty($_filtre['module'])
+					? ''
+					: ', ' . _T('ezrest:collection_filtre_fournisseur', array('module' => strtoupper($_filtre['module'])));
+				$contenu[$plugin]['collections'][$_collection]['filtres'][$_filtre['critere']] = $obligatoire . $fournisseur;
+			}
+		}
+	}
+
+	return $contenu;
+}
+
+/**
+ * @param $plugin
+ * @param $collection
+ * @param $filtres
+ * @param $configuration
+ *
+ * @return array
+ */
+function ezrest_collectionner($plugin, $collection, $filtres, $configuration) {
+
+	// Initialisation des données de la collection à retourner
+	$contenu = array();
+
+	// Détermination de la fonction de service permettant de récupérer la collection spécifiée
+	// filtrée sur les critères éventuellement fournis.
+	if ($collectionner = ezrest_service_chercher($plugin, 'collectionner', $collection)) {
+		$contenu = $collectionner($filtres, $configuration);
+	}
+
+	return $contenu;
+}
+
+/**
+ * @param $plugin
+ * @param $collection
+ * @param $ressource
+ *
+ * @return array
+ */
+function ezrest_ressourcer($plugin, $collection, $ressource) {
+
+	// Initialisation des données de la collection à retourner
+	$contenu = array();
+
+	// Détermination de la fonction de service permettant de récupérer la collection spécifiée
+	// filtrée sur les critères éventuellement fournis.
+	if ($ressourcer = ezrest_service_chercher($plugin, 'ressourcer', $collection)) {
+		$contenu = $ressourcer($ressource);
+	}
+
+	return $contenu;
 }
 
 
@@ -446,13 +594,49 @@ function ezrest_requete_verifier_ressource($plugin, $ressource, $collection, $co
  */
 function ezrest_service_chercher($plugin, $fonction, $prefixe = '', $suffixe = '') {
 
-	include_spip("ezrest/${plugin}");
-	$fonction_trouvee = $prefixe
-		? ($suffixe ? "${prefixe}_${fonction}_${suffixe}" : "${prefixe}_${fonction}")
-		: "${plugin}_${fonction}";
-	if (!function_exists($fonction_trouvee)) {
-		$fonction_trouvee = '';
+	$fonction_trouvee = '';
+
+	// Eviter la réentrance si on demande explicitement le plugin ezrest.
+	if ($plugin != 'ezrest') {
+		include_spip("ezrest/${plugin}");
+		$fonction_trouvee = $prefixe ? ($suffixe ? "${prefixe}_${fonction}_${suffixe}" : "${prefixe}_${fonction}") : "${plugin}_${fonction}";
+		if (!function_exists($fonction_trouvee)) {
+			$fonction_trouvee = '';
+		}
 	}
 
 	return $fonction_trouvee;
+}
+
+/**
+ * Initilise le bloc d'erreur complet.
+ *
+ * @internal
+ *
+ * @param string $plugin  Préfixe du plugin utilisateur de ezrest.
+ * @param int    $code    Code d'erreur standard d'une requête HTTP
+ * @param string $type    Identifiant unique de l'erreur
+ * @param string $element Elément sur lequel porte l'erreur
+ * @param string $valeur  Valeur de l'élément en erreur
+ *
+ * @return array
+ *        Bloc d'erreur complet initialisé avec le code, le plugin et le type.
+ */
+function ezrest_erreur_initialiser($plugin, $code, $type, $element = '', $valeur = '', $extra = '') {
+
+	// On initialise tous les index d'un bloc d'erreur
+	$erreur['status'] = $code;
+	$erreur['type'] = $type;
+	$erreur['element'] = $element;
+	$erreur['valeur'] = $valeur;
+	$erreur['extra'] = $extra;
+	$erreur['titre'] = '';
+	$erreur['detail'] = '';
+
+	// Si le type est précisé c'est que son item de langue est fourni par ezREST.
+	// Sinon, c'est que son item de langue est fourni par le plugin passé en paramètre.
+	$erreur['module']['titre'] = $type ? 'ezrest' : $plugin;
+	$erreur['module']['detail'] = $plugin;
+
+	return $erreur;
 }
