@@ -128,4 +128,3 @@ function pays_verifier_critere_continent($continent) {
 
 	return $est_valide;
 }
-
