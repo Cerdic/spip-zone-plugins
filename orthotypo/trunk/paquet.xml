@@ -1,9 +1,9 @@
 <paquet
 	prefix="orthotypo"
 	categorie="edition"
-	version="1.4.8"
+	version="1.5.0"
 	etat="stable"
-	compatibilite="[3.0.0;3.2.*]"
+	compatibilite="[3.0.0;3.3.*]"
 	logo="prive/themes/spip/images/orthotypo-32.png"
 	documentation="https://contrib.spip.net/Ortho-typographie"
 >

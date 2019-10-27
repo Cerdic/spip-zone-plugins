@@ -100,13 +100,34 @@ function orthotypo_filtre_texte_echappe($texte, $filtre, $balises='', $args=NULL
 	}
 	// retour du texte simplement protege
 	if ($filtre===false) return $texte;
-	// transformation par $fonction
-	if (!$args)
-		$texte = $filtre($texte);
-	else {
-		array_unshift($args,$texte);
-		$texte = call_user_func_array($filtre, $args);
+
+	// transformation par $fonction : on split le texte pour ne pas filtrer les <balises ...> ou </balises> html elle meme
+	if (strpos($texte, "<") !== false
+	  and $parts = preg_split(",(</?\w+>|<\w+\s[^>]*>),Uims",$texte, -1, PREG_SPLIT_DELIM_CAPTURE)) {
+		for ($i=0;$i<count($parts);$i+=2) {
+			if ($parts[$i] !== "") {
+				if (!$args) {
+					$parts[$i] = $filtre($parts[$i]);
+				}
+				else {
+					array_unshift($args, $parts[$i]);
+					$parts[$i] = call_user_func_array($filtre, $args);
+					array_shift($args);
+				}
+			}
+		}
+		$texte = implode($parts);
 	}
+	else {
+		if (!$args){
+			$texte = $filtre($texte);
+		}
+		else {
+			array_unshift($args,$texte);
+			$texte = call_user_func_array($filtre, $args);
+		}
+	}
+
 
 	// deprotection des balises
 	return echappe_retour($texte, 'FILTRETEXTECHAPPE');
@@ -387,9 +408,6 @@ function orthotypo_exposants_post_typo($texte){
 		$lang = $GLOBALS['spip_lang'];
 	}
 	if(function_exists($fonction = 'orthotypo_exposants_'.lang_typo($lang))){
-		// prudence : on protege les balises <a> et <img>
-		if (strpos($texte, '<')!==false)
-			$texte = preg_replace_callback('/(<(a|img)\s[^>]+>)/Uims', 'orthotypo_exposants_echappe_balises_callback', $texte);
 		$texte = orthotypo_filtre_texte_echappe($texte,$fonction,'html|code|cadre|frame|script|acronym|cite');
 		return echappe_retour($texte, 'EXPO');
 	}
