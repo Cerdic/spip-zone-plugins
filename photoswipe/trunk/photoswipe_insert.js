@@ -169,7 +169,19 @@ function photoshow_gallery(items, index, galerie) {
 
     // Initializes and opens PhotoSwipe
     gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
-    gallery.init();
+    // Handle images with unkown size ref https://github.com/dimsemenov/PhotoSwipe/issues/796#issuecomment-269765635
+	gallery.listen('gettingData', function (index, item) {
+		if (item.w < 1 || item.h < 1) {
+			var img = new Image();
+			img.onload = function () {
+				item.w = this.width;
+				item.h = this.height;
+				gallery.updateSize(true);
+			};
+			img.src = item.src;
+		}
+	});
+	gallery.init();
 }
 
 

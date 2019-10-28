@@ -10,7 +10,7 @@
 			[fr]Mis en plugin pour SPIP par [Fil->http://zzz.rezo.net], avec Baroug
 		</multi>
 	</auteur>
-	<version>0.4.0</version>
+	<version>0.5.0</version>
 	<icon>photoswipe-128.png</icon>
 	<etat>stable</etat>
 	<description>Une lightbox simple et élégante</description>
