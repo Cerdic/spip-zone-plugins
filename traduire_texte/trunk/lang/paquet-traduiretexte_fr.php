@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
-	'traduiretexte_description' => 'Traduction automatique de contenus avec les API Google Translate ou BING
+	'traduiretexte_description' => 'Traduction automatique de contenus avec les API BING, Google Translate ou Yandex
 	
 	Nécessite une clé d’identification API.',
 	'traduiretexte_nom' => 'Traduire texte',
