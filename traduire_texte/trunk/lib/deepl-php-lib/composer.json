@@ -1,0 +1,34 @@
+{
+    "name": "babymarkt/deepl-php-lib",
+    "description": "Simple PHP Library for DeepL API",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Arkadius Jonczek",
+            "email": "jonczek@babymarkt.de"
+        }
+    ],
+    "require": {
+        "php": ">=5.3"
+    },
+    "require-dev": {
+        "php": ">=5.3",
+        "phpunit/phpunit": "^4.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "BabyMarkt\\DeepL\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "BabyMarkt\\DeepL\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": [
+          "vendor/bin/phpunit"
+        ]
+    }
+}
