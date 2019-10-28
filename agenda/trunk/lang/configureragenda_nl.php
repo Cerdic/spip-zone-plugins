@@ -9,6 +9,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// E
+	'explication_effacer_evenements_passes' => 'Vermeld het aantal dagen waarna een verlopen evenement automatisch moet worden gewist (0 of een negatief getal om dit tegen te gaan)',
+
 	// L
 	'label_affichage_debut' => 'Begin van de lijst',
 	'label_affichage_debut_date_jour' => 'Huidige datum',
@@ -22,12 +25,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_affichage_duree' => 'De evenementen opsommen op',
 	'label_articlepardefaut' => 'Standaardartikel (id)',
 	'label_descriptif' => 'Omschrijving',
+	'label_effacer_evenements_passes' => 'Automatisch voorbije evenementen wissen',
 	'label_insert_head_css_1' => 'Automatisch de standaardstijlen van de agenda invoegen',
 	'label_synchro_statut_1' => 'De status van evenementen automatisch synchroniseren met die van de artikelen',
 	'label_titre' => 'Paginatitel',
 	'label_url_evenement' => 'Weergave van een evenement',
 	'label_url_evenement_article' => 'op de pagina van het bijbehorende artikel',
 	'label_url_evenement_evenement' => 'op een eigen pagina voor ieder evenement',
+	'legend_nettoyage_agenda' => 'Regelmatige opschoning van de agenda',
 	'legend_presentation_agenda' => 'Presentatie van de agenda',
 
 	// T
