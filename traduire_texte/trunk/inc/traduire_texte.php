@@ -194,20 +194,30 @@ function TT_traducteur() {
 	static $traducteur = null;
 	if (is_null($traducteur)) {
 		include_spip('inc/config');
-		if (defined('_YANDEX_APIKEY')) {
-			$traducteur = new TT_Traducteur_Yandex(_YANDEX_APIKEY);
-		} elseif (defined('_BING_APIKEY')) {
-			$traducteur = new TT_Traducteur_Bing(_BING_APIKEY, 10000);
-		} elseif (defined('_GOOGLETRANSLATE_APIKEY')) {
-			$traducteur = new TT_Traducteur_GGTranslate(_GOOGLETRANSLATE_APIKEY);
-		} elseif (defined('_TRANSLATESHELL_CMD')) {
+
+		$traducteur = false;
+
+		$traducteurs_dispo = [
+			'bing' => '_BING_APIKEY',
+			'google' => '_GOOGLETRANSLATE_APIKEY',
+			'yandex' => '_YANDEX_APIKEY',
+		];
+		$classes = [
+			'bing' => 'TT_Traducteur_Bing',
+			'google' => 'TT_Traducteur_GGTranslate',
+			'yandex' => 'TT_Traducteur_Yandex',
+		];
+
+		foreach ($traducteurs_dispo as $traducteur_dispo => $nom_constante) {
+			if ((defined($nom_constante) and $key = constant($nom_constante))
+				or $key = lire_config('traduiretexte/cle_' . $traducteur_dispo)) {
+				$class = $classes[$traducteur_dispo];
+				$traducteur = new $class($key);
+			}
+		}
+
+		if (!$traducteur and defined('_TRANSLATESHELL_CMD')) {
 			$traducteur = new TT_Traducteur_Shell();
-		} elseif ($k = lire_config('traduiretexte/cle_bing')) {
-			$traducteur = new TT_Traducteur_Bing($k);
-		} elseif ($k = lire_config('traduiretexte/cle_google')) {
-			$traducteur = new TT_Traducteur_GGTranslate($k);
-		} else {
-			$traducteur = false;
 		}
 	}
 	return $traducteur;
