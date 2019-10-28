@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_hash' => 'Hash',
 	'label_traduction' => 'Traduction',
 	'label_langue_source' => 'Langue source',
-	'label_langue_traduction' => 'Langue de traduction',
+	'label_langue_traduction' => 'Traduire vers',
 	'langue' => 'Langue',
 
 	// T

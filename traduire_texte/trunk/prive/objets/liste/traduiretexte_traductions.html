@@ -15,9 +15,9 @@
 			<BOUCLE_traductions(spip_traductions)
 				{hash?}{langue?}
 				{texte == #ENV{recherche,.*}}
-				{pagination #ENV{nb,10}}>
+				{pagination #ENV{nb,50}}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-				<td class='hash principale'><abbr title="#HASH">[(#HASH|substr{0,6})]</abbr></td>
+				<td class='hash principale'><abbr title="#HASH">[(#HASH|substr{0,7})]</abbr></td>
 				<td class='langue secondaire'>#LANGUE</td>
 				<td class='texte secondaire'>[(#TEXTE|couper{200})]</td>
 				<td class='action'>
