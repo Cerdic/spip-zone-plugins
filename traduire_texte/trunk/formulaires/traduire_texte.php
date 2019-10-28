@@ -54,10 +54,17 @@ function formulaires_traduire_texte_traiter_dist() {
 	$langue_source = _request('langue_source');
 	$langue_traduction = _request('langue_traduction');
 
-	$trad = traduire($source, $langue_traduction, $langue_source);
-
-	if (!$trad) {
-		$res['message_erreur'] = 'Une erreur est survenue pour calculer la traduction';
+	try {
+		$trad = traduire($source, $langue_traduction, $langue_source, ['throw' => true]);
+		if (!$trad) {
+			$res['message_erreur'] = 'Une erreur inconnue est survenue pendant le calcul de la traduction';
+			return $res;
+		}
+	}
+	catch (Exception $e) {
+		$res['message_erreur'] = 'Une erreur est survenue pour calculer la traduction :'
+			. '<br />'
+			. $e->getMessage();
 		return $res;
 	}
 

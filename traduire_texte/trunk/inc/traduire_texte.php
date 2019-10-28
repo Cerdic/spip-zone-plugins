@@ -18,17 +18,34 @@ abstract class TT_Traducteur {
 		$this->apikey = $apikey;
 	}
 
-	public function traduire($texte, $destLang = 'fr', $srcLang = 'en'){
+	/**
+	 * @param $texte
+	 * @param string $destLang
+	 * @param string $srcLang
+	 * @param bool $throw
+	 * @return string
+	 * @throws Exception
+	 */
+	public function traduire($texte, $destLang = 'fr', $srcLang = 'en', $throw = false){
 		if (strlen(trim($texte))==0){
 			return '';
 		}
 		$len = mb_strlen($texte);
 		$extrait = mb_substr($texte, 0, 40);
-		spip_log('Trad:' . $this->type . ' ' . $len . 'c. : ' . $extrait . ($len>40 ? '...' : ''), 'translate');
-		return $this->_traduire($texte, $destLang, $srcLang);
+		spip_log('Trad:' . $this->type . ' ' . $len . 'c. : ' . $extrait . ($len>40 ? '...' : ''), 'translate' . _LOG_DEBUG);
+		$erreur = false;
+		$res = $this->_traduire($texte, $destLang, $srcLang, $erreur);
+		if ($erreur) {
+			spip_log($erreur, 'translate' . _LOG_ERREUR);
+			if ($throw) {
+				throw new \Exception($erreur);
+			}
+		}
+
+		return $res;
 	}
 
-	abstract protected function _traduire($texte, $destLang, $srcLang);
+	abstract protected function _traduire($texte, $destLang, $srcLang, &$erreur);
 }
 
 /**
@@ -38,7 +55,7 @@ class TT_Traducteur_Bing extends TT_Traducteur {
 	public $type = 'bing';
 	public $maxlen = 10000;
 
-	protected function _traduire($texte, $destLang, $srcLang){
+	protected function _traduire($texte, $destLang, $srcLang, &$erreur){
 		// Bon sang, si tu n'utilises pas .NET, ce truc est documenté par les corbeaux
 		// attaquer le machin en SOAP (la méthode HTTP ne convient que pour des textes très courts (GET, pas POST)
 		try {
@@ -51,7 +68,7 @@ class TT_Traducteur_Bing extends TT_Traducteur {
 			);
 			$translation = $client->translate($params);
 		} catch (Exception $e) {
-			spip_log($e->getMessage(), 'translate');
+			$erreur = $e->getMessage();
 			return false;
 		}
 
@@ -66,7 +83,7 @@ class TT_Traducteur_GGTranslate extends TT_Traducteur {
 	public $type = 'google';
 	public $maxlen = 4500;
 
-	protected function _traduire($texte, $destLang = 'fr', $srcLang = 'en'){
+	protected function _traduire($texte, $destLang = 'fr', $srcLang = 'en', &$erreur){
 		$destLang = urlencode($destLang);
 		$srcLang = urlencode($srcLang);
 
@@ -90,7 +107,8 @@ class TT_Traducteur_GGTranslate extends TT_Traducteur {
 		$json = json_decode($body, true);
 
 		if (isset($json["error"])){
-			spip_log($json, 'translate');
+			spip_log($json, 'translate' . _LOG_DEBUG);
+			$erreur = "Erreur " . $json["error"]['code'] . ": " . $json["error"]['message'];
 			return false;
 		}
 
@@ -105,7 +123,7 @@ class TT_Traducteur_Yandex extends TT_Traducteur {
 	public $type = 'yandex';
 	public $maxlen = 10000;
 
-	protected function _traduire($texte, $destLang = 'fr', $srcLang){
+	protected function _traduire($texte, $destLang = 'fr', $srcLang, &$erreur){
 		$destLang = urlencode($destLang);
 		//yandex peut deviner la langue source
 		if (isset($srcLang)){
@@ -133,7 +151,8 @@ class TT_Traducteur_Yandex extends TT_Traducteur {
 		$json = json_decode($body, true);
 
 		if (isset($json['code']) && $json['code']>200){
-			spip_log($json, 'translate');
+			spip_log($json, 'translate' . _LOG_DEBUG);
+			$erreur = "Erreur " . $json['code'] . ": " . $json['message'];
 			return false;
 		}
 
@@ -146,11 +165,12 @@ class TT_Traducteur_Shell extends TT_Traducteur {
 	public $type = 'shell';
 	public $maxlen = 1000;
 
-	public function _traduire($texte, $destLang = 'fr', $srcLang = 'en'){
+	public function _traduire($texte, $destLang = 'fr', $srcLang = 'en', &$erreur){
 		if (!defined('_TRANSLATESHELL_CMD')){
-			spip_log('chemin de Translate shell non défini', 'translate.' . _LOG_ERREUR);
+			$erreur = "chemin de Translate shell non défini";
 			return false;
 		}
+
 		return $this->translate_line($texte, $destLang);
 
 		/*
@@ -347,10 +367,13 @@ function traduire_texte($texte, $destLang = 'fr', $srcLang = 'en'){
  * @param string $destLang
  * @param string $srcLang
  * @param array $options {
- * @return string|false|array
- * @var bool $raw
+ *   @var bool $raw
  *         Retourne un tableau des couples [ hash => [source, trad, new(bool)] ]
+ *   @var bool $throw
+ *         Lancer une exception en cas d'erreur
  * }
+ * @return string|false|array
+ * @throws Exception
  */
 function traduire($texte, $destLang = 'fr', $srcLang = 'en', $options = array()){
 	if (strlen(trim($texte))==0){
@@ -380,12 +403,14 @@ function traduire($texte, $destLang = 'fr', $srcLang = 'en', $options = array())
 		}
 	}
 
+	$throw = ((isset($options['throw']) and $options['throw']) ? true : false);
+
 	$todo = array_filter($traductions, 'is_null');
 	$inserts = array();
 	$fail = false;
 	foreach ($todo as $hash => $dummy){
 		$paragraphe = $hashes[$hash];
-		$trad = $traducteur->traduire($paragraphe, $destLang, $srcLang);
+		$trad = $traducteur->traduire($paragraphe, $destLang, $srcLang, $throw);
 		if ($trad !== false){
 			$traductions[$hash] = $trad;
 			$inserts[] = array(
