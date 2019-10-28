@@ -21,13 +21,6 @@
 					label=<:traduiretexte:label_langue_traduction:>,
 					conteneur_class=pleine_largeur})]
 
-				[(#ENV{traduction}|oui)
-					[(#SAISIE{textarea, traduction,
-						label=<:traduiretexte:label_traduction:>,
-						conteneur_class=pleine_largeur,
-						rows=4,
-						disable=1})]
-				]
 			</div>
 
 			<p class="boutons">
@@ -35,4 +28,14 @@
 			</p>
 		</div>
 	</form>
+	[
+	<div class="editer-groupe">
+		<div class="editer pleine_largeur">
+			<label><:traduiretexte:label_traduction:></label>
+			<textarea rows="4" readonly="readonly">(#ENV{traduction})
+</textarea>
+		</div>
+	</div>
+	]
+
 </div>
