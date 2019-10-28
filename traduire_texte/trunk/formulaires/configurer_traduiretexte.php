@@ -38,5 +38,11 @@ function formulaires_configurer_traduiretexte_traiter_dist() {
 }
 
 function traduiretexte_obscurify_cle_api($cle) {
-	return str_pad(substr($cle, 0, 4), strlen($cle) - 4, '*') . substr($cle, -4);
+	$secret = str_pad(substr($cle, 0, 4), strlen($cle) - 4, '*') . substr($cle, -4);
+	for($i=0;$i<strlen($cle);$i++) {
+		if ($cle[$i] === '-') {
+			$secret[$i] = '-';
+		}
+	}
+	return $secret;
 }

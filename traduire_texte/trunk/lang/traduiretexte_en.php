@@ -28,8 +28,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_traductions' => '@nb@ translations',
 
 	// L
-	'label_cle_google' => 'API key for <b>Google Translate</b>',
 	'label_cle_bing' => 'API key for <b>Bing</b>',
+	'label_cle_deepl' => 'API key for <b>DeepL</b>',
+	'label_cle_google' => 'API key for <b>Google Translate</b>',
 	'label_cle_yandex' => 'API Key for <b>Yandex</b>',
 	'label_texte_source' => 'Source text',
 	'label_hash' => 'Hash',
