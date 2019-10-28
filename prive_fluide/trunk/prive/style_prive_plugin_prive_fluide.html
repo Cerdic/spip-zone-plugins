@@ -20,6 +20,12 @@
   Placement et dimensions des blocs principaux
 */
 
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
 /* Containers en pleine largeur */
 body,
 body.large {
@@ -114,6 +120,13 @@ body.large {
 .formulaire_spip .editer-groupe,
 .formulaire_spip fieldset .editer-groupe {
   max-width: calc(45em + 18vw);
+  margin-left: auto;
+  margin-right: auto;
+}
+.formulaire_spip > p,
+.formulaire_spip fieldset > p,
+.formulaire_spip fieldset .reponse_formulaire {
+  max-width: 45em;
   margin-left: auto;
   margin-right: auto;
 }
