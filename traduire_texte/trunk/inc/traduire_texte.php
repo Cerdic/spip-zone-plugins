@@ -132,7 +132,7 @@ class TT_Traducteur_Yandex extends TT_Traducteur {
 		//{"code":200,"lang":"fr-en","text":["hello"]}
 		$json = json_decode($body, true);
 
-		if (isset($result['code']) && $result['code']>200){
+		if (isset($json['code']) && $json['code']>200){
 			spip_log($json, 'translate');
 			return false;
 		}
@@ -382,10 +382,11 @@ function traduire($texte, $destLang = 'fr', $srcLang = 'en', $options = array())
 
 	$todo = array_filter($traductions, 'is_null');
 	$inserts = array();
+	$fail = false;
 	foreach ($todo as $hash => $dummy){
 		$paragraphe = $hashes[$hash];
 		$trad = $traducteur->traduire($paragraphe, $destLang, $srcLang);
-		if ($trad){
+		if ($trad !== false){
 			$traductions[$hash] = $trad;
 			$inserts[] = array(
 				"hash" => $hash,
@@ -394,10 +395,16 @@ function traduire($texte, $destLang = 'fr', $srcLang = 'en', $options = array())
 			);
 		} else {
 			spip_log('[' . $destLang . "] ECHEC $paragraphe", 'translate');
+			$fail = true;
+			break;
 		}
 	}
 	if ($inserts){
 		sql_insertq_multi("spip_traductions", $inserts);
+	}
+
+	if ($fail) {
+		return "";
 	}
 
 	// retour brut
