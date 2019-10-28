@@ -77,6 +77,29 @@ class TT_Traducteur_Bing extends TT_Traducteur {
 }
 
 /**
+ * Traduire avec DeepL
+ */
+class TT_Traducteur_DeepL extends TT_Traducteur {
+	public $type = 'deepl';
+	public $maxlen = 29000; // The request size should not exceed 30kbytes
+	protected $apiVersion = 2;
+
+	protected function _traduire($texte, $destLang, $srcLang, &$erreur){
+
+		include_spip('lib/deepl-php-lib/autoload');
+		try {
+			$deepl   = new BabyMarkt\DeepL\DeepL($this->apikey, $this->apiVersion);
+			$traduction = $deepl->translate($texte, $srcLang, $destLang);
+		} catch (Exception $e) {
+			$erreur = $e->getMessage();
+			return false;
+		}
+
+		return $traduction;
+	}
+}
+
+/**
  * Traduire avec Google Translate
  */
 class TT_Traducteur_GGTranslate extends TT_Traducteur {

@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_pas_de_langue_source' => 'Choisissez une langue source',
 	'erreur_pas_de_langue_cible' => 'Choisissez dans quelle langue traduire',
 	'erreur_langues_identiques' => 'Choisissez une langue différente de la langue source',
+	'erreur_aucun_traducteur_disponible' => 'Aucun traducteur disponible n\'est configuré',
 
 	// I
 	'info_aucune_traduction' => 'Aucune traduction',

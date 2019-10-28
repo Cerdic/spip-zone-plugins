@@ -13,11 +13,13 @@ function TT_traducteur(){
 
 		$traducteurs_dispo = [
 			'bing' => '_BING_APIKEY',
+			'deepl' => '_DEEPL_APIKEY',
 			'google' => '_GOOGLETRANSLATE_APIKEY',
 			'yandex' => '_YANDEX_APIKEY',
 		];
 		$classes = [
 			'bing' => 'TT_Traducteur_Bing',
+			'deepl' => 'TT_Traducteur_DeepL',
 			'google' => 'TT_Traducteur_GGTranslate',
 			'yandex' => 'TT_Traducteur_Yandex',
 		];
@@ -177,9 +179,13 @@ function traduire($texte, $destLang = 'fr', $srcLang = 'en', $options = array())
 	if (strlen(trim($texte))==0){
 		return '';
 	}
+	$throw = ((isset($options['throw']) and $options['throw']) ? true : false);
 
 	$traducteur = TT_traducteur();
 	if (!$traducteur){
+		if ($throw) {
+			throw new \Exception(_T('traduiretexte:erreur_aucun_traducteur_disponible'));
+		}
 		return false;
 	}
 
@@ -200,8 +206,6 @@ function traduire($texte, $destLang = 'fr', $srcLang = 'en', $options = array())
 			$traductions[$hash] = $trad;
 		}
 	}
-
-	$throw = ((isset($options['throw']) and $options['throw']) ? true : false);
 
 	$todo = array_filter($traductions, 'is_null');
 	$inserts = array();
