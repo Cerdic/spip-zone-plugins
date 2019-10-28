@@ -108,7 +108,7 @@ class TT_Traducteur_GGTranslate extends TT_Traducteur {
 
 		if (isset($json["error"])){
 			spip_log($json, 'translate' . _LOG_DEBUG);
-			$erreur = "Erreur " . $json["error"]['code'] . ": " . $json["error"]['message'];
+			$erreur = _T('traduiretexte:erreur') . " " . $json["error"]['code'] . ": " . $json["error"]['message'];
 			return false;
 		}
 
@@ -152,7 +152,7 @@ class TT_Traducteur_Yandex extends TT_Traducteur {
 
 		if (isset($json['code']) && $json['code']>200){
 			spip_log($json, 'translate' . _LOG_DEBUG);
-			$erreur = "Erreur " . $json['code'] . ": " . $json['message'];
+			$erreur = _T('traduiretexte:erreur') . " " . $json['code'] . ": " . $json['message'];
 			return false;
 		}
 

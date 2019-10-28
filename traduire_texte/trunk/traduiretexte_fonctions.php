@@ -2,11 +2,11 @@
 /**
  * Fichier de fonctions de traduiretexte
  *
- * @plugin     Translate Yandex
+ * @plugin     Traduire Texte
  * @copyright  2018
  * @author     Anne-lise Martenot
  * @licence    GNU/GPL
- * @package    SPIP\Translate_yandex\Fonctions
+ * @package    SPIP\Traduire_texte\Fonctions
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {

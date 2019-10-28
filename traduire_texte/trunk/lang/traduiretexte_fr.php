@@ -13,6 +13,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_parametrages' => 'Paramétrage du plugin',
 	'configuration_traduire_texte' => 'Configurer Traduire texte',
 
+	// E
+	'erreur' => 'Erreur',
+	'erreur_inconnue_traduire' => 'Une erreur inconnue est survenue pendant le calcul de la traduction',
+	'erreur_traduire' => 'Une erreur est survenue pour calculer la traduction :',
+	'erreur_pas_de_texte' => 'Aucun texte à traduire',
+	'erreur_pas_de_langue_source' => 'Choisissez une langue source',
+	'erreur_pas_de_langue_cible' => 'Choisissez dans quelle langue traduire',
+	'erreur_langues_identiques' => 'Choisissez une langue différente de la langue source',
+
 	// I
 	'info_aucune_traduction' => 'Aucune traduction',
 	'info_1_traduction' => 'Une traduction',
@@ -28,6 +37,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_langue_source' => 'Langue source',
 	'label_langue_traduction' => 'Traduire vers',
 	'langue' => 'Langue',
+
+	// S
+	'succes_traduction' => 'Traduction effectuée',
 
 	// T
 	'tester_traduire_texte' => 'Tester traduire texte',
