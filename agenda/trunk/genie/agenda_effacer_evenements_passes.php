@@ -12,7 +12,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function genie_agenda_effacer_evenements_passes($t) {
 	// Est-ce qu'il faut effacer des choses
 	$config = intval(lire_config('agenda/effacer_evenements_passes'));
-	spip_log($config, 'agenda'._LOG_INFO_IMPORTANTE);
 	if ($config < 1) {
 		return '';
 	}
