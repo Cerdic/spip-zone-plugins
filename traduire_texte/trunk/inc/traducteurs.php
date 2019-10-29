@@ -29,9 +29,10 @@ abstract class TT_Traducteur {
 	 * @throws Exception
 	 */
 	public function traduire($texte, $destLang = 'fr', $srcLang = 'en', $throw = false){
+		$log = 'Trad:' . $this->type;
 		if (is_array($texte)) {
-			// si le traducteur ne sait pas faire, on itere sur le tableau
-			if (!$this->isArrayCapable) {
+			// si le traducteur ne sait pas faire ou que ca ne sera pas plus rapide, on itere sur le tableau
+			if (!$this->isArrayCapable or count($texte) == 1) {
 				$ress = [];
 				$erreur = false;
 				foreach ($texte as $k=>$t) {
@@ -47,9 +48,9 @@ abstract class TT_Traducteur {
 			}
 
 			$c = count($texte);
+			$log .= " array($c)";
 			$len = array_sum(array_map('mb_strlen', $texte));
 			$extrait = mb_substr(reset($texte), 0, 40);
-			spip_log('Trad:' . $this->type . " array($c)" . $len . 'c. : ' . $extrait . ($len>40 ? '...' : ''), 'translate' . _LOG_DEBUG);
 		}
 		else {
 			if (strlen(trim($texte))==0){
@@ -57,8 +58,9 @@ abstract class TT_Traducteur {
 			}
 			$len = mb_strlen($texte);
 			$extrait = mb_substr($texte, 0, 40);
-			spip_log('Trad:' . $this->type . ' ' . $len . 'c. : ' . $extrait . ($len>40 ? '...' : ''), 'translate' . _LOG_DEBUG);
 		}
+		spip_log($log . ' ' . $len . 'c. : ' . $extrait . ($len>40 ? '...' : ''), 'translate' . _LOG_DEBUG);
+
 		$erreur = false;
 		$res = $this->_traduire($texte, $destLang, $srcLang, $erreur);
 		if ($erreur) {
@@ -109,7 +111,7 @@ class TT_Traducteur_Bing extends TT_Traducteur {
 class TT_Traducteur_DeepL extends TT_Traducteur {
 	public $type = 'deepl';
 	public $maxlen = 29000; // The request size should not exceed 30kbytes
-	public $isArrayCapable = false;
+	public $isArrayCapable = true;
 	protected $apiVersion = 2;
 
 	protected function _traduire($texte, $destLang, $srcLang, &$erreur){
@@ -118,10 +120,21 @@ class TT_Traducteur_DeepL extends TT_Traducteur {
 		try {
 			$deepl   = new BabyMarkt\DeepL\DeepL($this->apikey, $this->apiVersion);
 			$tagHandling = [];
-			if (strpos($texte, "</") !== false and preg_match(",</\w+>,ms", $texte)) {
-				$tagHandling = ['xml'];
+			foreach (is_array($texte)?$texte:[$texte] as $t) {
+				if (strpos($t, "</") !== false and preg_match(",</\w+>,ms", $t)) {
+					$tagHandling = ['xml'];
+					break;
+				}
 			}
 			$traduction = $deepl->translate($texte, $srcLang, $destLang, $tagHandling);
+			if (is_array($texte)) {
+				if (count($texte) == 1 and is_string($traduction)) {
+					$traduction = array_combine(array_keys($texte), [$traduction]);
+				}
+				else {
+					$traduction = array_combine(array_keys($texte), array_column($traduction, 'text'));
+				}
+			}
 		} catch (Exception $e) {
 			$erreur = $e->getMessage();
 			return false;
