@@ -63,7 +63,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_profil' => 'Aucun profil',
 	'info_nb_profils' => '@nb@ profils',
 	'info_profils_auteur' => 'Les profils de cet auteur',
-
+	'info_nb_profils_comptes' => 'Comptes de ce profil',
+	'info_1_profil_compte' => 'Un compte de ce profil',
+	'info_nb_profil_comptes' => '@nb@ comptes de ce profil',
+	
 	// N
 	'notification_motdepasse_texte' => 'Un nouveau compte vient d’être créé pour vous sur le site
 @nom_site_spip@ (@adresse_site@)

@@ -11,6 +11,7 @@
 		<tr class="first_row">
 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
 			<th class="titre" scope="col">[(#TRI{titre,<:profil:champ_titre_label:>,ajax})]</th>
+			<th class="compteur"><:profil:info_nb_profils_comptes:></th>
 			<th class="id" scope="col">[(#TRI{id_profil,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
@@ -19,6 +20,7 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="statut">[(#STATUT|puce_statut{profil,#ID_PROFIL})]</td> 
 			<td class="titre principale">[(#LOGO_PROFIL|image_reduire{20,26})]<a href="[(#ID_PROFIL|generer_url_entite{profil})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PROFIL">[(#RANG). ]#TITRE</a></td>
+			<td class="compteur secondaire"><BOUCLE_nb_profils(AUTEURS) {id_profil} />[(#TOTAL_BOUCLE)]<//B_nb_profils></td>
 			<td class="id">[(#AUTORISER{modifier,profil,#ID_PROFIL}|?{
 				<a href="[(#URL_ECRIRE{profil_edit,id_profil=#ID_PROFIL})]">#ID_PROFIL</a>,
 				#ID_PROFIL
