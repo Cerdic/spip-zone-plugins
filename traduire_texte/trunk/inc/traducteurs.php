@@ -30,6 +30,7 @@ abstract class TT_Traducteur {
 	 */
 	public function traduire($texte, $destLang = 'fr', $srcLang = 'en', $throw = false){
 		$log = 'Trad:' . $this->type;
+		$todo = [];
 		if (is_array($texte)) {
 			// si le traducteur ne sait pas faire ou que ca ne sera pas plus rapide, on itere sur le tableau
 			if (!$this->isArrayCapable or count($texte) == 1) {
@@ -47,9 +48,14 @@ abstract class TT_Traducteur {
 				return $ress;
 			}
 
+			$len = array_sum(array_map('mb_strlen', $texte));
+			while ($len > $this->maxlen and count($texte) > 1) {
+				$t = array_pop($texte);
+				$len -= mb_strlen($t);
+				array_unshift($todo, $t);
+			}
 			$c = count($texte);
 			$log .= " array($c)";
-			$len = array_sum(array_map('mb_strlen', $texte));
 			$extrait = mb_substr(reset($texte), 0, 40);
 		}
 		else {
@@ -67,6 +73,13 @@ abstract class TT_Traducteur {
 			spip_log($erreur, 'translate' . _LOG_ERREUR);
 			if ($throw) {
 				throw new \Exception($erreur);
+			}
+		}
+
+		if ($todo) {
+			$todo = $this->traduire($todo, $destLang, $srcLang, $throw);
+			while (count($todo)) {
+				$res[] = array_shift($todo);
 			}
 		}
 
