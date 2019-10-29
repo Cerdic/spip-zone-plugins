@@ -14,3 +14,15 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 include_spip('inc/traduire_texte');
+
+/**
+ * Tester si le traducteur est disponible (ie configure) ou non
+ * @return bool
+ */
+function traduire_texte_disponible() {
+	$traducteur = TT_traducteur();
+	if (!$traducteur){
+		return false;
+	}
+	return true;
+}
