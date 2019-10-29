@@ -89,7 +89,11 @@ class TT_Traducteur_DeepL extends TT_Traducteur {
 		include_spip('lib/deepl-php-lib/autoload');
 		try {
 			$deepl   = new BabyMarkt\DeepL\DeepL($this->apikey, $this->apiVersion);
-			$traduction = $deepl->translate($texte, $srcLang, $destLang);
+			$tagHandling = [];
+			if (strpos($texte, "</") !== false and preg_match(",</\w+>,ms", $texte)) {
+				$tagHandling = ['xml'];
+			}
+			$traduction = $deepl->translate($texte, $srcLang, $destLang, $tagHandling);
 		} catch (Exception $e) {
 			$erreur = $e->getMessage();
 			return false;
