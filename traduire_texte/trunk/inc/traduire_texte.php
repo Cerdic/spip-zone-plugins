@@ -68,52 +68,50 @@ function TT_decouper_texte($texte, $maxlen = 0, $html = true){
 	}
 
 	$prep = html2unicode($texte);
-	$options = $html ? (PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE) : PREG_SPLIT_NO_EMPTY;
-	$prep = preg_split(",(<p\b[^>]*>),i", $prep, -1, $options);
+	$prep = preg_split(",(<p\b[^>]*>),i", $prep, -1, PREG_SPLIT_DELIM_CAPTURE);
+	// 0, 2, 4, 6... : le texte
+	// 1, 3, 5, 7... : les separateurs <p..>
 
-	$last = ''; // remettre les <p> en début de ligne.
-	foreach ($prep as $line){
-		if ($html){
-			if (preg_match(",^<p\b[^>]*>$,i", $line)){
-				$last .= $line;
-				continue;
-			} else {
-				$line = $last . $line;
-				$last = '';
+	for ($i=0;$i<count($prep);$i+=2) {
+		// remettre le <p...> en debut de ligne si besoin
+		$line = (($html and $i>0) ? $prep[$i-1] : '') . $prep[$i];
+		if (strlen($line)) {
+			if (!$html){
+				$line = preg_replace(",<[^>]*>,i", " ", $line);
 			}
-		} else {
-			$line = preg_replace(",<[^>]*>,i", " ", $line);
-		}
 
-		if ($maxlen){
-			// max line = XXX chars
-			$a = array();
-			while (mb_strlen($line)>$maxlen){
-				$len = intval($maxlen*0.6); // 60% de la longueur
-				$debut = mb_substr($line, 0, $len);
-				$suite = mb_substr($line, $len);
-				$point = mb_strpos($suite, '.');
+			if ($maxlen){
+				$a = array();
+				// max line = XXX chars
+				while (mb_strlen($line)>$maxlen){
+					$len = intval($maxlen*0.6); // 60% de la longueur
+					$debut = mb_substr($line, 0, $len);
+					$suite = mb_substr($line, $len);
+					$point = mb_strpos($suite, '.');
 
-				// chercher une fin de phrase pas trop loin
-				// ou a defaut, une virgule ; au pire un espace
-				if ($point===false){
-					$point = mb_strpos(preg_replace('/[,;?:!]/', ' ', $suite), ' ');
+					// chercher une fin de phrase pas trop loin
+					// ou a defaut, une virgule ; au pire un espace
+					if ($point===false){
+						$point = mb_strpos(preg_replace('/[,;?:!]/', ' ', $suite), ' ');
+					}
+					if ($point===false){
+						$point = mb_strpos($suite, ' ');
+					}
+					if ($point===false){
+						$point = 0;
+					}
+					$a[] = trim($debut . mb_substr($suite, 0, 1+$point));
+					$line = mb_substr($line, $len+1+$point);
 				}
-				if ($point===false){
-					$point = mb_strpos($suite, ' ');
+				foreach ($a as $l){
+					$liste[md5($l)] = $l;
 				}
-				if ($point===false){
-					$point = 0;
-				}
-				$a[] = trim($debut . mb_substr($suite, 0, 1+$point));
-				$line = mb_substr($line, $len+1+$point);
 			}
-		}
-		$a[] = trim($line);
+			$line = trim($line);
+			$liste[md5($line)] = $line;
 
-		foreach ($a as $l){
-			$liste[md5($l)] = $l;
 		}
+
 	}
 
 	return $liste;
