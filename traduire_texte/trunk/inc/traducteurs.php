@@ -9,6 +9,8 @@ abstract class TT_Traducteur {
 	public $apikey;
 	/** @var int Maximum de caractères traitables en un coup */
 	public $maxlen;
+	/** @var bool Est-ce que le traducteur peut traiter un tableau de textes ou non ? */
+	public $isArrayCapable;
 
 	/**
 	 * TT_Traducteur constructor.
@@ -19,20 +21,44 @@ abstract class TT_Traducteur {
 	}
 
 	/**
-	 * @param $texte
+	 * @param string|string[] $texte
 	 * @param string $destLang
 	 * @param string $srcLang
 	 * @param bool $throw
-	 * @return string
+	 * @return string|array
 	 * @throws Exception
 	 */
 	public function traduire($texte, $destLang = 'fr', $srcLang = 'en', $throw = false){
-		if (strlen(trim($texte))==0){
-			return '';
+		if (is_array($texte)) {
+			// si le traducteur ne sait pas faire, on itere sur le tableau
+			if (!$this->isArrayCapable) {
+				$ress = [];
+				$erreur = false;
+				foreach ($texte as $k=>$t) {
+					if (!$erreur){
+						$res = $this->traduire($t, $destLang, $srcLang, $throw);
+						if ($res === false) {
+							$erreur = true;
+						}
+					}
+					$ress[$k] = $res;
+				}
+				return $ress;
+			}
+
+			$c = count($texte);
+			$len = array_sum(array_map('mb_strlen', $texte));
+			$extrait = mb_substr(reset($texte), 0, 40);
+			spip_log('Trad:' . $this->type . " array($c)" . $len . 'c. : ' . $extrait . ($len>40 ? '...' : ''), 'translate' . _LOG_DEBUG);
 		}
-		$len = mb_strlen($texte);
-		$extrait = mb_substr($texte, 0, 40);
-		spip_log('Trad:' . $this->type . ' ' . $len . 'c. : ' . $extrait . ($len>40 ? '...' : ''), 'translate' . _LOG_DEBUG);
+		else {
+			if (strlen(trim($texte))==0){
+				return '';
+			}
+			$len = mb_strlen($texte);
+			$extrait = mb_substr($texte, 0, 40);
+			spip_log('Trad:' . $this->type . ' ' . $len . 'c. : ' . $extrait . ($len>40 ? '...' : ''), 'translate' . _LOG_DEBUG);
+		}
 		$erreur = false;
 		$res = $this->_traduire($texte, $destLang, $srcLang, $erreur);
 		if ($erreur) {
@@ -54,6 +80,7 @@ abstract class TT_Traducteur {
 class TT_Traducteur_Bing extends TT_Traducteur {
 	public $type = 'bing';
 	public $maxlen = 10000;
+	public $isArrayCapable = false;
 
 	protected function _traduire($texte, $destLang, $srcLang, &$erreur){
 		// Bon sang, si tu n'utilises pas .NET, ce truc est documenté par les corbeaux
@@ -82,6 +109,7 @@ class TT_Traducteur_Bing extends TT_Traducteur {
 class TT_Traducteur_DeepL extends TT_Traducteur {
 	public $type = 'deepl';
 	public $maxlen = 29000; // The request size should not exceed 30kbytes
+	public $isArrayCapable = false;
 	protected $apiVersion = 2;
 
 	protected function _traduire($texte, $destLang, $srcLang, &$erreur){
@@ -109,6 +137,7 @@ class TT_Traducteur_DeepL extends TT_Traducteur {
 class TT_Traducteur_GGTranslate extends TT_Traducteur {
 	public $type = 'google';
 	public $maxlen = 4500;
+	public $isArrayCapable = false;
 
 	protected function _traduire($texte, $destLang = 'fr', $srcLang = 'en', &$erreur){
 		$destLang = urlencode($destLang);
@@ -149,6 +178,7 @@ class TT_Traducteur_GGTranslate extends TT_Traducteur {
 class TT_Traducteur_Yandex extends TT_Traducteur {
 	public $type = 'yandex';
 	public $maxlen = 10000;
+	public $isArrayCapable = false;
 
 	protected function _traduire($texte, $destLang = 'fr', $srcLang, &$erreur){
 		$destLang = urlencode($destLang);
@@ -191,6 +221,7 @@ class TT_Traducteur_Yandex extends TT_Traducteur {
 class TT_Traducteur_Shell extends TT_Traducteur {
 	public $type = 'shell';
 	public $maxlen = 1000;
+	public $isArrayCapable = false;
 
 	public function _traduire($texte, $destLang = 'fr', $srcLang = 'en', &$erreur){
 		if (!defined('_TRANSLATESHELL_CMD')){
