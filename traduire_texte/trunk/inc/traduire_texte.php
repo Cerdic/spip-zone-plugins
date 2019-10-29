@@ -205,17 +205,25 @@ function traduire($texte, $destLang = 'fr', $srcLang = 'en', $options = array())
 
 	$inserts = array();
 	$fail = false;
+	// on passe en deux fois pour envoyer tous les morceaux a traduire en un coup
+	// certains traducteurs etant capables de traiter un tableau de texte
+	$todo = [];
 	foreach ($parts as $k=>$part){
 		$hash = $part['hash'];
-		if (!isset($deja_traduits[$hash])) {
-			$paragraphe = $part['texte'];
-			$trad = $traducteur->traduire($paragraphe, $destLang, $srcLang, $throw);
-			if ($trad === false) {
-				spip_log('[' . $destLang . "] ECHEC $paragraphe", 'translate' . _LOG_ERREUR);
-				$fail = true;
-				break;
-			}
-			else {
+		if (!isset($deja_traduits[$hash])){
+			$todo[$hash] = $part['texte'];
+		}
+	}
+
+	if ($todo) {
+		$trads = $traducteur->traduire($todo, $destLang, $srcLang, $throw);
+		if (count($trads) !== count($todo)) {
+			spip_log('[' . $destLang . "] ECHEC traduction tableau : " . count($trads) ." vs ". count($todo)." attendus", 'translate' . _LOG_ERREUR);
+			return "";
+		}
+		$trads = array_combine(array_keys($todo), array_values($trads));
+		foreach ($trads as $hash => $trad) {
+			if ($trad !== false) {
 				$deja_traduits[$hash] = $trad;
 				$inserts[] = array(
 					"hash" => $hash,
@@ -223,20 +231,34 @@ function traduire($texte, $destLang = 'fr', $srcLang = 'en', $options = array())
 					"langue" => $destLang
 				);
 			}
+			else {
+				$fail = true;
+			}
+		}
+		unset($todo);
+		unset($trads);
+
+		// fail ou pas, on mets en cache les traductions faites
+		if ($inserts){
+			sql_insertq_multi("spip_traductions", $inserts);
+		}
+
+		if ($fail) {
+			return "";
+		}
+	}
+
+	foreach ($parts as $k=>$part){
+		$hash = $part['hash'];
+		if (!isset($deja_traduits[$hash])) {
+			// NE devrait jamais arriver !
+			return "";
 		}
 		// il faut garder les texte source si on demande un retour brut
 		$parts[$k]['trad'] = $deja_traduits[$hash];
 	}
 	unset($deja_traduits);
 
-	// fail ou pas, on mets en cache les traductions faites
-	if ($inserts){
-		sql_insertq_multi("spip_traductions", $inserts);
-	}
-
-	if ($fail) {
-		return "";
-	}
 
 	// retour brut
 	if (!empty($options['raw'])){
