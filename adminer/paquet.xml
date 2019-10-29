@@ -1,7 +1,7 @@
 <paquet
 	prefix="adminer"
 	categorie="outil"
-	version="4.7.2.0"
+	version="4.7.4.0"
 	etat="stable"
 	compatibilite="[2.0.0;3.2.*]"
 	logo="adminer-64.png"
