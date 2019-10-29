@@ -57,7 +57,7 @@ function TT_traducteur(){
  * @param bool $html
  *     True pour conserver les balises HTML ; false pour les enlever.
  * @return array
- *     Couples [hash => paragraphe]
+ *     Couples [[hash => '..',  'texte' => 'paragraphe'],...]
  */
 function TT_decouper_texte($texte, $maxlen = 0, $html = true){
 	$liste = array();
@@ -73,8 +73,10 @@ function TT_decouper_texte($texte, $maxlen = 0, $html = true){
 	// 1, 3, 5, 7... : les separateurs <p..>
 
 	for ($i=0;$i<count($prep);$i+=2) {
+
 		// remettre le <p...> en debut de ligne si besoin
 		$line = (($html and $i>0) ? $prep[$i-1] : '') . $prep[$i];
+
 		if (strlen($line)) {
 			if (!$html){
 				$line = preg_replace(",<[^>]*>,i", " ", $line);
@@ -104,14 +106,13 @@ function TT_decouper_texte($texte, $maxlen = 0, $html = true){
 					$line = mb_substr($line, $len+1+$point);
 				}
 				foreach ($a as $l){
-					$liste[md5($l)] = $l;
+					$liste[] = array('hash' => md5($l), 'texte' => $l);
 				}
 			}
+
 			$line = trim($line);
-			$liste[md5($line)] = $line;
-
+			$liste[] = array('hash' => md5($line), 'texte' => $line);
 		}
-
 	}
 
 	return $liste;
@@ -166,7 +167,7 @@ function traduire_texte($texte, $destLang = 'fr', $srcLang = 'en'){
  * @param string $srcLang
  * @param array $options {
  *   @var bool $raw
- *         Retourne un tableau des couples [ hash => [source, trad, new(bool)] ]
+ *         Retourne un tableau des blocs [ [hash, source, trad, new(bool)],... ]
  *   @var bool $throw
  *         Lancer une exception en cas d'erreur
  * }
@@ -187,43 +188,48 @@ function traduire($texte, $destLang = 'fr', $srcLang = 'en', $options = array())
 		return false;
 	}
 
-	$hashes = TT_decouper_texte($texte, $traducteur->maxlen, true);
-	$traductions = array_fill_keys(array_keys($hashes), null);
+	$parts = TT_decouper_texte($texte, $traducteur->maxlen, true);
+
 	$deja_traduits = sql_allfetsel(
 		array('hash', 'texte'),
 		"spip_traductions",
 		array(
-			sql_in('hash', array_keys($hashes)),
+			sql_in('hash', array_column($parts, 'hash')),
 			'langue = ' . sql_quote($destLang),
 		)
 	);
 
 	if ($deja_traduits){
 		$deja_traduits = array_column($deja_traduits, 'texte', 'hash');
-		foreach ($deja_traduits as $hash => $trad){
-			$traductions[$hash] = $trad;
-		}
 	}
 
-	$todo = array_filter($traductions, 'is_null');
 	$inserts = array();
 	$fail = false;
-	foreach ($todo as $hash => $dummy){
-		$paragraphe = $hashes[$hash];
-		$trad = $traducteur->traduire($paragraphe, $destLang, $srcLang, $throw);
-		if ($trad !== false){
-			$traductions[$hash] = $trad;
-			$inserts[] = array(
-				"hash" => $hash,
-				"texte" => $trad,
-				"langue" => $destLang
-			);
-		} else {
-			spip_log('[' . $destLang . "] ECHEC $paragraphe", 'translate');
-			$fail = true;
-			break;
+	foreach ($parts as $k=>$part){
+		$hash = $part['hash'];
+		if (!isset($deja_traduits[$hash])) {
+			$paragraphe = $part['texte'];
+			$trad = $traducteur->traduire($paragraphe, $destLang, $srcLang, $throw);
+			if ($trad === false) {
+				spip_log('[' . $destLang . "] ECHEC $paragraphe", 'translate' . _LOG_ERREUR);
+				$fail = true;
+				break;
+			}
+			else {
+				$deja_traduits[$hash] = $trad;
+				$inserts[] = array(
+					"hash" => $hash,
+					"texte" => $trad,
+					"langue" => $destLang
+				);
+			}
 		}
+		// il faut garder les texte source si on demande un retour brut
+		$parts[$k]['trad'] = $deja_traduits[$hash];
 	}
+	unset($deja_traduits);
+
+	// fail ou pas, on mets en cache les traductions faites
 	if ($inserts){
 		sql_insertq_multi("spip_traductions", $inserts);
 	}
@@ -234,16 +240,22 @@ function traduire($texte, $destLang = 'fr', $srcLang = 'en', $options = array())
 
 	// retour brut
 	if (!empty($options['raw'])){
+		$new_hashes = array_column($inserts, 'hash');
 		$res = array();
-		foreach ($hashes as $hash => $paragraphe){
-			$res[$hash] = array(
-				'source' => $paragraphe,
-				'trad' => $traductions[$hash],
-				'new' => array_key_exists($hash, $todo)
+		while(count($parts)) {
+			$part = array_shift($parts);
+			$res[] = array(
+				'hash' => $part['hash'],
+				'source' => $part['texte'],
+				'trad' => $part['trad'],
+				'new' => in_array($part['hash'], $new_hashes),
 			);
 		}
 		return $res;
 	}
+
+	$traductions = array_column($parts, 'trad');
+	unset($parts);
 
 	$traductions = implode(" ", $traductions);
 	$ltr = lang_dir($destLang, 'ltr', 'rtl');
