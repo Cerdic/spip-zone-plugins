@@ -6,7 +6,6 @@
 #SET{artUID,#UID}
 [<p class="pagination">(#PAGINATION)</p>]
 <div id="galleria#GET{artUID}">
-  {tri #ENV{par,multi nom},#GET{defaut_tri}}
 <BOUCLE_galleria (DOCUMENTS){id_article=#ENV{id}}{extension==jpg|gif|png} {pagination #ENV{pagesize,30}} {mode=#ENV{mode,image}} {tri #ENV{tri,num titre},#GET{defaut_tri}}{par titre}{inverse #ENV{senstri,0}}>
   #SET{image,#FICHIER|balise_img}
   [(#ENV{largeurvignette,0}|ou{#ENV{hauteurvignette,0}}|oui)
