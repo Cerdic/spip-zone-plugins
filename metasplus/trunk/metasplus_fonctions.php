@@ -25,7 +25,7 @@
  *     Tableau associatif :
  *     [type-page] le type de la page
  *     [objet]     le type de l'objet le cas échéant
- *     [id_objet]  son identifiant
+ *     [id_objet]  numéro de l'objet
  *     [id_patate] idem, mais avec le nom de sa clé primaire
  *     [erreur]    'true' si page en erreur
  */
@@ -38,7 +38,8 @@ function metasplus_identifier_contexte($url) {
 	$res['erreur']    = isset($decodage[1]['erreur']) ? true : false;
 
 	// 1) Si la page est identifiée et pas en erreur, on regarde s'il s'agit d'un objet
-	if ($res['type-page']
+	if (
+		$res['type-page']
 		and !$res['erreur']
 	) {
 		include_spip('base/objets');
@@ -62,22 +63,42 @@ function metasplus_identifier_contexte($url) {
 /**
  * Sélectionner le squelette des métadonnées pour un type de page
  *
- * Règle :
- * On va chercher dans le dossier inclure/metasplus le squelette
- * de la variante spécifique au type de page s'il existe,
- * sinon le squelette générique dist.html qui génère automatiquement les métas.
+ * On cherche dans l'ordre :
+ *
+ * - 1) inclure/metaplus/<type-page>-<composition>.html
+ * - 2) inclure/metaplus/<type-page>.html
+ * - 3) inclure/metaplus/dist.html
  *
  * @param array $contexte
  *     Contexte de la page, avec le type de page, le type d'objet etc.
  * @return string
  *     Le fond
  */
-function metasplus_selectionner_fond($type_page) {
+function metasplus_selectionner_fond($contexte) {
 
-	$fond_defaut   = 'inclure/metasplus/dist';
-	$fond_variante = 'inclure/metasplus/' . $type_page;
-	if (find_in_path($fond_variante.'.html')) {
-		$fond = $fond_variante;
+	include_spip('inc/utils');
+
+	$fond             = '';
+	$type_page        = !empty($contexte['type-page']) ? $contexte['type-page'] : '';
+	$objet            = !empty($contexte['objet']) ? $contexte['objet'] : '';
+	$id_objet         = !empty($contexte['id_objet']) ? $contexte['id_objet'] : '';
+	$racine           = 'inclure/metasplus/';
+	$fond_defaut      = $racine . 'dist';
+	$fond_page        = $racine . $type_page;
+
+	if (
+		test_plugin_actif('compositions')
+		and $objet
+		and $id_objet
+		and $composition = compositions_determiner($objet, $id_objet)
+	) {
+		$fond_composition = $fond_page . '-' . $composition;
+	}
+
+	if ($composition and find_in_path($fond_composition.'.html')) {
+		$fond = $fond_composition;
+	} elseif (find_in_path($fond_page.'.html')) {
+		$fond = $fond_page;
 	} elseif (find_in_path($fond_defaut.'.html')) {
 		$fond = $fond_defaut;
 	}

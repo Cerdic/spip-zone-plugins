@@ -64,10 +64,11 @@ function metasplus_affichage_final($flux) {
 
 		// Trouver le squelette à utiliser
 		include_spip('metasplus_fonctions');
-		$fond = metasplus_selectionner_fond($contexte['type-page']);
+		$fond = metasplus_selectionner_fond($contexte);
 
 		// Si le squelette n'est pas vide, on ajoute son contenu à la fin du head
-		if ($fond
+		if (
+			$fond
 			and $metas = recuperer_fond($fond, $contexte)
 		) {
 			$metas = "<!-- Plugin Métas + -->\n$metas\n";
@@ -81,13 +82,13 @@ function metasplus_affichage_final($flux) {
 
 /**
  * pipeline post_edition pour supprimer la meta metasplus/id_doc_logo
- * quand on supprime l'image dans le formualire de configuration
+ * quand on supprime l'image dans le formulaire de configuration
  *
  * @param $flux
  * @return $flux
  * @author tofulm
- **/
-function metasplus_post_edition($flux){
+ */
+function metasplus_post_edition($flux) {
 	if (
 		isset($flux['args']['table'])
 		and $flux['args']['table'] === 'spip_documents'
@@ -113,10 +114,11 @@ function metasplus_post_edition($flux){
  * @param $flux
  * @return $flux
  * @author tofulm
- **/
-function metasplus_boite_infos($flux){
+ */
+function metasplus_boite_infos($flux) {
 
-	if ($objet = $flux['args']['type']
+	if (
+		$objet = $flux['args']['type']
 		and $id_objet = $flux['args']['id']
 		and autoriser('previsualiser_metasplus', $objet, $id_objet)
 	) {

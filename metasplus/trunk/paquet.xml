@@ -1,7 +1,7 @@
 <paquet
 	prefix="metasplus"
 	categorie="divers"
-	version="2.2.6"
+	version="2.3.0"
 	schema="1.0.0"
 	etat="stable"
 	compatibilite="[3.1.0;3.2.*]"
@@ -9,7 +9,7 @@
 	documentation="https://contrib.spip.net/4969"
 >
 
-	<nom>Metas +</nom>
+	<nom>Métas +</nom>
 	<!-- Métadonnées pour booster vos articles -->
 
 	<auteur lien="http://spip.tetue.net">tetue</auteur>

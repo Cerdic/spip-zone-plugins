@@ -11,14 +11,15 @@
 		- **id_patate : id de l'objet
 
 ]
-#SET{id_table_objet,#ENV{objet}|id_table_objet}
-#SET{fond, #ENV{page}|metasplus_selectionner_fond}
-#SET{texte_objet,#ENV{objet}|objet_info{texte_objet}|_T}
-#SET{redirect,#ENV{id_objet}|generer_url_entite{#ENV{objet}}}
+#SET{cle_objet,   #ENV{objet}|id_table_objet}
+#SET{contexte,    #ARRAY{type-page,#ENV{page},objet,#ENV{objet},id_objet,#ENV{id_objet}}}
+#SET{fond,        #GET{contexte}|metasplus_selectionner_fond}
+#SET{texte_objet, #ENV{objet}|objet_info{texte_objet}|_T}
+#SET{redirect,    #ENV{id_objet}|generer_url_entite{#ENV{objet}}}
 
 <h1 class="grostitre"><:metasplus:titre_previsu:></h1>
 
-<p class="notice">Dans cette prévisualisation, les URLs pointent vers le privé, mais rassurez-vous, dans les pages publiques elles sont correctes.</p>
+<p class="notice">Dans cette prévisualisation, les URLs pointent vers le privé, mais rassurez-vous, elles sont correctes dans les pages publiques.</p>
 
 #BOITE_OUVRIR{'',info}
 [(#GET{redirect}|icone_verticale{[(#ENV{objet}|objet_info{texte_retour}|_T)],#ENV{objet}|objet_info{icone_objet},'',right retour metasplus})]
@@ -32,14 +33,14 @@
 </dl>
 #BOITE_FERMER
 
-#BOITE_OUVRIR
+#BOITE_OUVRIR{'',simple metasplus}
 [(#PLUGIN{coloration_code}|non)<pre><code>]
 [(#GET{fond}|recuperer_fond{
 	#ARRAY{
 		type-page,#ENV{page},
 		objet,#ENV{objet},
 		id_objet,#ENV{id_objet},
-		#GET{id_table_objet},#ENV{id_objet},
+		#GET{cle_objet},#ENV{id_objet},
 	}}
 	|appliquer_filtre{
 		#PLUGIN{coloration_code}|?{coloration_code_color,htmlentities},
@@ -52,4 +53,5 @@
 
 <style>
 	code.html {display:block;overflow-x:auto}
+	.box.simple.metasplus{overflow-x:auto}
 </style>
