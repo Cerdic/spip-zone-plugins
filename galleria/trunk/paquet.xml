@@ -1,7 +1,7 @@
 <paquet
 	prefix="galleria"
 	categorie="multimedia"
-	version="2.1.0"
+	version="2.1.1"
 	etat="stable"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="galleria.png"
