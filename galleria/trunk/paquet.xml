@@ -1,7 +1,7 @@
 <paquet
 	prefix="galleria"
 	categorie="multimedia"
-	version="2.0.2"
+	version="2.1.0"
 	etat="stable"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="galleria.png"
@@ -10,6 +10,10 @@
 	<nom>Galleria plugin pour SPIP</nom>
 	<auteur>LUU-THO Th&#224;nh</auteur>
 
+	<credit lien='https://galleria.io/'>Galleria v1.6.1</credit>
+
 	<pipeline nom="insert_head" inclure="galleria_pipelines.php" />
 	<pipeline nom="header_prive" inclure="galleria_pipelines.php" action="insert_head" />
+
+	<procure nom="galleria" version="1.6.1" />
 </paquet>
