@@ -1,5 +1,5 @@
 <traduction module="profil" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/profils/trunk/lang/" reference="fr">
-	<langue code="en" url="https://trad.spip.net/tradlang_module/profil?lang_cible=en" total="69" traduits="46" relire="0" modifs="0" nouveaux="23" pourcent="66.67">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/profil?lang_cible=en" total="69" traduits="68" relire="1" modifs="0" nouveaux="0" pourcent="98.55">
 		<traducteur nom="tcharlss" lien="https://trad.spip.net/auteur/drbouvierleduc" />
 	</langue>
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/profil?lang_cible=fr" total="69" traduits="69" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
