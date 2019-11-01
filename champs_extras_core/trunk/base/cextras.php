@@ -18,11 +18,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Elle déclare aussi, en fonction des options choisies pour les champs
  * - la recherche dans le champs, avec une certaine pondération,
  * - le versionnage de champ
- * 
+ *
  * @note
  *     Ne pas utiliser dans le code de cette fonction
  *     table_objet() qui ferait une réentrance et des calculs faux.
- * 
+ *
  * @pipeline declarer_tables_objets_sql
  * @param array $tables
  *     Description des tables
@@ -33,17 +33,17 @@ function cextras_declarer_tables_objets_sql($tables){
 
 	include_spip('inc/cextras');
 	include_spip('public/interfaces');
-	
+
 	// recuperer les champs crees par les plugins
 	// array($table => array(Liste de saisies))
 	include_spip('inc/saisies');
-	
+
 	// si saisies a ete supprime par ftp, on sort tranquilou sans tuer SPIP.
 	// champs extras sera ensuite desactive par admin plugins.
 	if (!function_exists('saisies_lister_avec_sql')) {
 		return $tables;
 	}
-	
+
 	$saisies_tables = pipeline('declarer_champs_extras', array());
 	foreach ($saisies_tables as $table => $saisies) {
 		if (isset($tables[$table])) {
@@ -79,8 +79,9 @@ function cextras_declarer_tables_objets_sql($tables){
 				// option de versionnage ?
 				if (isset($saisie['options']['versionner']) and $saisie['options']['versionner']) {
 					// on l'ajoute dans la liste des champs versionnables
-					if (isset($tables[$table]['champs_versionnes'])
-					  and !in_array($nom, $tables[$table]['champs_versionnes'])) {
+					if (!isset($tables[$table]['champs_versionnes'])) {
+						$tables[$table]['champs_versionnes'] = array($nom);
+					} elseif (!in_array($nom, $tables[$table]['champs_versionnes'])) {
 						$tables[$table]['champs_versionnes'][] = $nom;
 					}
 				}
