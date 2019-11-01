@@ -1,16 +1,16 @@
 <paquet
 	prefix="prive_fluide"
 	categorie="edition"
-	version="1.0.6"
+	version="1.0.7"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
-	logo="prive/themes/spip/images/prive_fluide-64.png"
+	logo="prive/themes/spip/images/prive_fluide-128.png"
 	documentation="https://contrib.spip.net/5112"
 >
 	<nom>Espace privé fluide</nom>
 	<!-- Ce plugin fait en sorte que l'espace privé de SPIP occupe toute la largeur disponible. -->
 
-	<auteur lien="http://www.bravecassine.com">tcharlss</auteur>
+	<auteur lien="https://www.bravecassine.com">tcharlss</auteur>
 
 	<licence>GNU/GPL</licence>
 
