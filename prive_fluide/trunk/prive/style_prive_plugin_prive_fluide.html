@@ -12,6 +12,7 @@
 */]#CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css;charset=utf-8}
 #HTTP_HEADER{Vary: Accept-Encoding}
+#SET{largeur_texte,42em}
 
 /*
   ======
@@ -108,19 +109,19 @@ body.large {
   ===========
   Formulaires
   ===========
-  Saisies centrées, largeur limitée pour avoir ~80 caractèrs max par ligne.
+  Saisies centrées, largeur limitée pour avoir ~75 caractèrs max par ligne.
 */
 
 .formulaire_spip .editer-groupe,
 .formulaire_spip fieldset .editer-groupe {
-  max-width: calc(45em + 18vw);
+  max-width: calc([(#GET{largeur_texte})] + 18vw);
   margin-left: auto;
   margin-right: auto;
 }
 .formulaire_spip > p,
 .formulaire_spip fieldset > p,
 .formulaire_spip fieldset .reponse_formulaire {
-  max-width: 45em;
+  max-width: [(#GET{largeur_texte})];
   margin-left: auto;
   margin-right: auto;
 }
@@ -138,6 +139,10 @@ body.large {
 
 .formulaire_spip .fieldset {
   margin: 1em 0;
+}
+
+.formulaire_spip .explication {
+  font-size: 1em;
 }
 
 
@@ -162,30 +167,48 @@ body.large {
   Des petits ajustements divers
 */
 
-/* Limiter en largeur pour obtenir ~80 caractères max par ligne */
+/* Limiter en largeur pour obtenir ~75 caractères max par ligne */
 #wysiwyg {
   display: block;
-  max-width: 50em;
+  max-width: [(#GET{largeur_texte})];
   margin-left: auto;
   margin-right: auto;
 }
 
 /* Polices */
 @font-face {
-  font-family: 'Lato';
-  src: url('#CHEMIN{prive/themes/spip/webfonts/lato-regular-webfont.woff2}') format('woff2'),
-  url('#CHEMIN{webfonts/lato-regular-webfont.woff}') format('woff');
+  font-family: 'Source Sans Pro';
+  src: url('#CHEMIN{prive/themes/spip/fonts/SourceSansPro-Regular.woff2}') format('woff2'),
+  url('#CHEMIN{webfonts/SourceSansPro-Regular.woff}') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Lato';
-  src: url('#CHEMIN{prive/themes/spip/webfonts/lato-bold-webfont.woff2}') format('woff2'),
-  url('#CHEMIN{webfonts/lato-regular-webfont.woff}') format('woff');
+  font-family: 'Source Sans Pro';
+  src: url('#CHEMIN{prive/themes/spip/fonts/SourceSansPro-Bold.woff2}') format('woff2'),
+  url('#CHEMIN{webfonts/SourceSansPro-Bold.woff}') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Source Serif Pro';
+  src: url('#CHEMIN{prive/themes/spip/fonts/SourceSerifPro-Regular.woff2}') format('woff2'),
+  url('#CHEMIN{webfonts/SourceSerifPro-Regular.woff}') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Source Serif Pro';
+  src: url('#CHEMIN{prive/themes/spip/fonts/SourceSerifPro-Bold.woff2}') format('woff2'),
+  url('#CHEMIN{webfonts/SourceSerifPro-Bold.woff}') format('woff');
   font-weight: bold;
   font-style: normal;
 }
 body {
-  font-size: calc(0.8em + 0.175vw); /* mobile => 14px, 1920px => 16px */
-  font-family: "Lato", sans-serif;
+  font-size: calc(0.8em + 0.175vw); /* mobile => 16px, 1920px => 18px */
+  font-family: "Source Sans Pro", sans-serif;
+}
+#wysiwyg .champ,
+.preview {
+  font-family: "Source Serif Pro", serif;
 }
