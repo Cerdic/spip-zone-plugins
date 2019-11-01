@@ -32,8 +32,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_mise_en_ligne_unique' => 'Kies het bestand...',
 
 	// M
-	'message_file_size_limit' => 'De maximale grootte van een bestand is @taille@ MB',
-	'message_queue_limit_max' => 'Het maximum aantal bestanden in de wachtrij is@nb@.',
+	'message_file_size_limit' => 'De maximale grootte van een bestand is @taille@ Mb',
+	'message_queue_limit_max' => 'Het maximum aantal bestanden in de wachtrij is @nb@.',
 	'message_types_fichiers_autorises' => 'De toegelaten extensies zijn: @types@',
 
 	// T
