@@ -182,7 +182,7 @@ function ezrest_reponse_expliquer_erreur($plugin, $erreur, $collection = '') {
 	$item = $erreur['module']['detail'] . ':erreur_' . $erreur['status'] . '_' . $erreur['type'] . '_message';
 	$erreur['detail'] = _T($item, $parametres);
 	// -- inutile de conserver l'information sur les modules fournissant les items de langue.
-//	unset($erreur['module']);
+	unset($erreur['module']);
 
 	// Appel d'un service spécifique au plugin utilisateur pour compléter le bloc d'erreur si besoin.
 	if ($expliquer = ezrest_service_chercher($plugin, 'reponse_expliquer_erreur')) {
@@ -247,7 +247,7 @@ function ezrest_reponse_construire($reponse, $contenu) {
  * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
-function ezrest_requete_verifier_collection($collection, $collections, &$plugin, &$erreur) {
+function ezrest_collection_verifier($collection, $collections, &$plugin, &$erreur) {
 
 	// Initialise le retour à false par défaut.
 	$est_valide = false;
@@ -319,7 +319,7 @@ function ezrest_requete_verifier_collection($collection, $collections, &$plugin,
  * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
-function ezrest_requete_verifier_filtres($plugin, $filtres, $collection, $configuration, &$erreur) {
+function ezrest_collection_verifier_filtre($plugin, $filtres, $collection, $configuration, &$erreur) {
 
 	// Initialise le retour à true par défaut.
 	$est_valide = true;
@@ -365,7 +365,7 @@ function ezrest_requete_verifier_filtres($plugin, $filtres, $collection, $config
 				$module = !empty($criteres[$_critere]['module'])
 					? $criteres[$_critere]['module']
 					: $plugin;
-				if ($verifier = ezrest_service_chercher($module, 'verifier_critere', $collection, $_critere)) {
+				if ($verifier = ezrest_service_chercher($module, 'verifier_filtre', $collection, $_critere)) {
 					$erreur = ezrest_erreur_initialiser(
 						$module,
 						400,
@@ -414,7 +414,7 @@ function ezrest_requete_verifier_filtres($plugin, $filtres, $collection, $config
  * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
-function ezrest_requete_verifier_ressource($plugin, $ressource, $collection, $configuration, &$erreur) {
+function ezrest_collection_verifier_ressource($plugin, $ressource, $collection, $configuration, &$erreur) {
 
 	// Initialise le retour à true par défaut.
 	$est_valide = true;

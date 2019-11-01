@@ -85,7 +85,7 @@ function http_ezrest_get_index_dist($requete, $reponse) {
 
 /**
  * Fait un GET sur une collection gérée par l'API ezREST.
- * La requête est du type `/ezrest/xxx` et renvoie les objets associées contenus
+ * La requête est du type `/ezrest/ccc` et renvoie les objets associées contenus
  * dans la base du serveur.
  * Il est possible de filtrer la collection et de compléter la colelction en utilisant le pipeline `post_ezcollection`.
  *
@@ -117,7 +117,7 @@ function http_ezrest_get_collection_dist($requete, $reponse) {
 
 	// Vérification du nom de la collection.
 	$collection = $contenu['requete']['collection'];
-	if (ezrest_requete_verifier_collection($collection, $collections, $plugin, $erreur)) {
+	if (ezrest_collection_verifier($collection, $collections, $plugin, $erreur)) {
 		// La collection étant correcte on extrait sa configuration.
 		$configuration = $collections[$collection];
 
@@ -130,7 +130,7 @@ function http_ezrest_get_collection_dist($requete, $reponse) {
 		if (ezrest_api_verifier_contexte($plugin, $erreur)) {
 			// Le contexte autorise l'utilisation de l'API.
 			// -> Vérification des filtres éventuels.
-			if (ezrest_requete_verifier_filtres($plugin, $contenu['requete']['filtres'], $collection, $configuration, $erreur)) {
+			if (ezrest_collection_verifier_filtre($plugin, $contenu['requete']['filtres'], $collection, $configuration, $erreur)) {
 				// -- on construit le contenu de la collection.
 				$contenu['donnees'] = ezrest_collectionner(
 					$plugin,
@@ -171,7 +171,7 @@ function http_ezrest_get_collection_dist($requete, $reponse) {
 
 /**
  * Fait un GET sur une ressource d'une collection gérée par l'API ezREST.
- * La requête est du type `/ezrest/xxx` et renvoie l'objet de la base désigné.
+ * La requête est du type `/ezrest/ccc/rrr` et renvoie l'objet de la base désigné.
  *
  * Il est possible de rajouter des informations en utilisant le pipeline `post_ezressource`.
  *
@@ -201,7 +201,7 @@ function http_ezrest_get_ressource_dist($requete, $reponse) {
 
 	// Vérification du nom de la collection.
 	$collection = $contenu['requete']['collection'];
-	if (ezrest_requete_verifier_collection($collection, $collections, $plugin, $erreur)) {
+	if (ezrest_collection_verifier($collection, $collections, $plugin, $erreur)) {
 		// La collection étant correcte on extrait sa configuration.
 		$configuration = $collections[$collection];
 
@@ -215,7 +215,7 @@ function http_ezrest_get_ressource_dist($requete, $reponse) {
 			// Le contexte autorise l'utilisation de l'API.
 			// Vérification de la ressource
 			$ressource = $contenu['requete']['ressource'];
-			if (ezrest_requete_verifier_ressource($plugin, $ressource, $collection, $configuration, $erreur)) {
+			if (ezrest_collection_verifier_ressource($plugin, $ressource, $collection, $configuration, $erreur)) {
 				// -- on construit le contenu de la collection.
 				$contenu['donnees'] = ezrest_ressourcer(
 					$plugin,

@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'collection_filtre_fournisseur'                    => 'ajouté par le plugin « @module@ »',
 
 	// E
-	'erreur_200_ok_message'                            => 'Vous pouvez consulter la ressource ou la collection demandée dans l\'index « donnees ».',
+	'erreur_200_ok_message'                            => 'Les données collectées sont consultables à l\'index « donnees ».',
 	'erreur_200_ok_titre'                              => 'La requête a été traitée avec succès',
 	'erreur_400_collection_indisponible_message'       => 'L\'API permet l\'utilisation des collections suivantes : @extra@.',
 	'erreur_400_collection_indisponible_titre'         => 'La collection « @valeur@ » n\'est pas fournie par l\'API',
