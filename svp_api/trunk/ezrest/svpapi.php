@@ -220,7 +220,7 @@ function plugins_ressourcer($prefixe) {
  * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
-function plugins_verifier_critere_compatible_spip($valeur, &$erreur) {
+function plugins_verifier_filtre_compatible_spip($valeur, &$erreur) {
 
 	$est_valide = true;
 
