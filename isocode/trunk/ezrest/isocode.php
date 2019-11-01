@@ -93,7 +93,7 @@ function pays_collectionner($filtres, $configuration) {
  * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
-function pays_verifier_critere_region($region, &$extra) {
+function pays_verifier_filtre_region($region, &$extra) {
 
 	$est_valide = true;
 
@@ -117,7 +117,7 @@ function pays_verifier_critere_region($region, &$extra) {
  * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
-function pays_verifier_critere_continent($continent) {
+function pays_verifier_filtre_continent($continent) {
 
 	$est_valide = true;
 
