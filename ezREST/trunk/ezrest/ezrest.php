@@ -447,7 +447,7 @@ function ezrest_collection_verifier_ressource($plugin, $ressource, $collection, 
 			$erreur = ezrest_erreur_initialiser(
 				$plugin,
 				400,
-				'ressource_nok',
+				'',
 				'ressource',
 				$ressource,
 				$configuration['ressource']
