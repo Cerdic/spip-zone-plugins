@@ -492,7 +492,7 @@ function formidable_scramble($login, $id_form) {
  * @param array &$valeurs_libelles un tableau clé/valeur listant les valeurs libéllées que prenne les @. Passage par référence
  * @return string la chaîne transformée
  */
-function formidable_raccourcis_arobases_2_valeurs_champs($chaine, $saisies, $brut=false, $sans_reponse = true, $source = 'request', $id_formulaires_reponse = 0, $id_formulaire = 0, &$valeurs = array(), &$valeurs_libellees = array()) {
+function formidable_raccourcis_arobases_2_valeurs_champs($chaine, $saisies, $brut = false, $sans_reponse = true, $source = 'request', $id_formulaires_reponse = 0, $id_formulaire = 0, &$valeurs = array(), &$valeurs_libellees = array()) {
 	if ($source == 'request') {
 		list($valeurs, $valeurs_libellees) = formidable_tableau_valeurs_saisies($saisies, $sans_reponse);
 	}
