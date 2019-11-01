@@ -133,7 +133,7 @@ function calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom, $s
  */
 function affiche_resume_reponse($id_formulaires_reponse, $id_formulaire = null, $modele_resume = null) {
 	static $modeles_resume = array();
-	static $modeles_vars = array();
+	static $saisies;
 
 	if (is_null($id_formulaire)) {
 		$id_formulaire = sql_getfetsel(
@@ -142,14 +142,13 @@ function affiche_resume_reponse($id_formulaires_reponse, $id_formulaire = null, 
 			'id_formulaires_reponse='.intval($id_formulaires_reponse)
 		);
 	}
+
 	if (is_null($modele_resume) and !isset($modeles_resume[$id_formulaire])) {
-		$traitements_formulaire = unserialize(sql_getfetsel(
-			'traitements',
-			'spip_formulaires',
-			'id_formulaire='.intval($id_formulaire)
-		));
-		if (isset($traitements_formulaire['enregistrement']['resume_reponse'])) {
-			$modeles_resume[$id_formulaire] = $traitements_formulaire['enregistrement']['resume_reponse'];
+		$row = sql_fetsel('saisies, traitements', 'spip_formulaires', 'id_formulaire='.intval($id_formulaire));
+		$saisies = unserialize($row['saisies']);
+		$traitements = unserialize($row['traitements']);
+		if (isset($traitements['enregistrement']['resume_reponse'])) {
+			$modeles_resume[$id_formulaire] = $traitements['enregistrement']['resume_reponse'];
 		} else {
 			$modeles_resume[$id_formulaire] = '';
 		}
@@ -162,17 +161,15 @@ function affiche_resume_reponse($id_formulaires_reponse, $id_formulaire = null, 
 		return '';
 	}
 
-	if (!isset($modeles_vars[$modele_resume])) {
-		preg_match_all(',@(.*)@,Uims', $modele_resume, $matches);
-		$modeles_vars[$modele_resume] = $matches[1];
+	$valeurs = array();
+	$chaine = formidable_raccourcis_arobases_2_valeurs_champs($modele_resume, $saisies, false, '', $source = 'base', $id_formulaires_reponse, $id_formulaire, $valeurs, $valeurs_libellees);
+
+	// Pour compatibilité historique : remplacer les clés dans $valeurs_libellees pour mettre un arobase autour
+	foreach ($valeurs_libellees as $cle => $val) {
+		unset($valeurs_libellees[$cle]);
+		$valeurs_libellees["@$cle@"] = $val;
 	}
 
-	$valeurs = array();
-	foreach ($modeles_vars[$modele_resume] as $var) {
-		$valeur = calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $var,'', 'valeur_uniquement', '');
-		$valeur = formidable_nettoyer_saisie_vue($valeur);
-		$valeurs["@$var@"] = $valeur;
-	}
 	return pipeline(
 		'formidable_affiche_resume_reponse',
 		array(
@@ -180,9 +177,9 @@ function affiche_resume_reponse($id_formulaires_reponse, $id_formulaire = null, 
 				'id_formulaire' => $id_formulaire,
 				'id_formulaires_reponse' => $id_formulaires_reponse,
 				'modele_resume' => $modele_resume,
-				'valeurs' => $valeurs,
+				'valeurs' => $valeurs_libellees,
 			),
-			'data' => str_replace(array_keys($valeurs), array_values($valeurs), $modele_resume),
+			'data' => $chaine,
 		)
 	);
 }

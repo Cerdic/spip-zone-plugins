@@ -485,10 +485,24 @@ function formidable_scramble($login, $id_form) {
  * @param array $saisies la liste des saisies du formulaire
  * @param bool|string $brut=false, pour indiquer si on veut utiliser les valeurs brutes;
  * @param string|bool $sans_reponse chaine à afficher si pas de réponse. Si true, prend la chaîne par défaut
+ * @param string $source 'request' pour prendre dans _request(); 'base' pour prendre dans une réponse enregistrée en base
+ * @param int|string $id_formulaires_reponse le cas échéant le numéro de réponse en base
+ * @param int|string $id_formulaire le cas échéant le numéro du formulaire en base
+ * @param array &$valeurs un tableau clé/valeur listant les valeurs que prenne les @. Passage par référence
+ * @param array &$valeurs_libelles un tableau clé/valeur listant les valeurs libéllées que prenne les @. Passage par référence
  * @return string la chaîne transformée
  */
-function formidable_raccourcis_arobases_2_valeurs_champs($chaine, $saisies, $brut=false, $sans_reponse = true) {
-	list($valeurs,$valeurs_libellees) = formidable_tableau_valeurs_saisies($saisies, $sans_reponse);
+function formidable_raccourcis_arobases_2_valeurs_champs($chaine, $saisies, $brut=false, $sans_reponse = true, $source = 'request', $id_formulaires_reponse = 0, $id_formulaire = 0, &$valeurs = array(), &$valeurs_libellees = array()) {
+	if ($source == 'request') {
+		list($valeurs, $valeurs_libellees) = formidable_tableau_valeurs_saisies($saisies, $sans_reponse);
+	}
+	elseif ($source == 'base' and $id_formulaires_reponse and $id_formulaire) {
+		$saisies = saisies_lister_par_nom($saisies);
+		foreach ($saisies as $nom => $saisie) {
+			$valeurs[$nom] = formidable_nettoyer_saisie_vue(calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom,'', 'brut', $sans_reponse));
+			$valeurs_libellees[$nom] =  formidable_nettoyer_saisie_vue(calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom,'', 'valeur_uniquement', $sans_reponse));
+		}
+	}
 	$a_remplacer = array();
 	if (preg_match_all('/@[\w]+@/', $chaine, $a_remplacer)) {
 		$a_remplacer = $a_remplacer[0];
