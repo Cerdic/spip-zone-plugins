@@ -47,7 +47,9 @@ Peut être combiné avec bgset.
 	[Documentation->https://github.com/aFarkas/lazysizes/blob/gh-pages/plugins/parent-fit/]',
 	'explication_print'=>'',
 	'explication_progressive'=>'',
-	'explication_respimg'=>'',
+	'explication_respimg'=>'{{Resp Img polyfill}}
+  Polyfill pour la prise en charge dans les navigateurs du chargement d\'images suivant la taille de l\'écran. Peut être utilisé conjointement avec <code>bgset</code> et <code>custom-media</code>
+  [Documentation->https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/respimg]',
 	'explication_rias'=>'',
 	'explication_static-gecko-picture'=>'',
 	'explication_twitter'=>'',

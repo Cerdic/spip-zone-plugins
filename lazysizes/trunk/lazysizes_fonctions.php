@@ -26,7 +26,7 @@ function lazysizes_addons() {
 		'parent-fit' => 'ls.parent-fit',
 		// 'print' => 'ls.print',
 		// 'progressive' => 'ls.progressive',
-		// 'respimg' => 'ls.respimg',
+		'respimg' => 'ls.respimg',
 		// 'rias' => 'ls.rias',
 		// 'static-gecko-picture' => 'ls.static-gecko-picture',
 		// 'twitter' => 'ls.twitter',
