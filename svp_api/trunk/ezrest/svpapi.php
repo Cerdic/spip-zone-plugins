@@ -125,7 +125,7 @@ function plugins_collectionner($filtres, $configuration) {
 				$module = !empty($criteres[$_critere]['module'])
 					? $criteres[$_critere]['module']
 					: $configuration['module'];
-				include_spip("svpapi/${module}");
+				include_spip("ezrest/${module}");
 				$construire = "plugins_construire_critere_${_critere}";
 				if (function_exists($construire)) {
 					$where[] = $construire($_valeur);
@@ -244,19 +244,21 @@ function plugins_verifier_filtre_compatible_spip($valeur, &$erreur) {
  * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
-function plugins_verifier_ressource_prefixe($prefixe) {
+function plugins_verifier_ressource_prefixe($prefixe, &$erreur) {
 
 	$est_valide = true;
 
 	// On teste en premier si le préfixe est syntaxiquement correct pour éviter un accès SQL dans ce cas.
-	if (!preg_match('#^(\w){2,}$#', strtolower($prefixe))) {
+	if (intval($prefixe) or !preg_match('#^(\w){2,}$#', strtolower($prefixe))) {
 		$est_valide = false;
+		$erreur['type'] = 'prefixe_malforme';
 	} else {
 		// On vérifie ensuite si la ressource est bien un plugin fourni par un dépôt
 		// et pas un plugin installé sur le serveur uniquement.
 		include_spip('inc/svp_plugin');
 		if (!plugin_lire($prefixe)) {
 			$est_valide = false;
+			$erreur['type'] = 'prefixe_nok';
 		}
 	}
 
@@ -303,12 +305,12 @@ function depots_collectionner($filtres, $configuration) {
 			$module = !empty($criteres[$_critere]['module'])
 				? $criteres[$_critere]['module']
 				: $configuration['module'];
-			include_spip("svpapi/${module}");
+			include_spip("ezrest/${module}");
 			$construire = "depots_construire_critere_${_critere}";
 			if (function_exists($construire)) {
 				$where[] = $construire($_valeur);
 			} else {
-				$where[] = "spip_plugins.${_critere}=" . sql_quote($_valeur);
+				$where[] = "spip_depots.${_critere}=" . sql_quote($_valeur);
 			}
 		}
 	}
