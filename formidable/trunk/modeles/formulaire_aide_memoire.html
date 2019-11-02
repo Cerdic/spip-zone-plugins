@@ -11,8 +11,8 @@
 	[(#VALEUR{saisie}|=={explication}|non)
 		[(#SET{label, [(#VALEUR|table_valeur{options}|table_valeur{label})]})]
 		[(#SET{label_case, [(#VALEUR|table_valeur{options}|table_valeur{label_case})]})]
-		[(#SET{data, [(#VALEUR|table_valeur{options}|table_valeur{data})]})]
-		[(#SET{datas, [(#VALEUR|table_valeur{options}|table_valeur{datas})]})]
+		[(#SET{data, [(#VALEUR|table_valeur{options}|table_valeur{data}|saisies_tableau2chaine)]})]
+		[(#SET{datas, [(#VALEUR|table_valeur{options}|table_valeur{datas}|saisies_tableau2chaine)]})]
 		[(#SET{nom, [(#VALEUR{nom})]})]
 	]
 	[(#VALEUR{saisie}|=={fieldset}|oui)
