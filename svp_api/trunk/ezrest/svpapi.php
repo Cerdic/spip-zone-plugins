@@ -85,6 +85,8 @@ function svpapi_reponse_informer_plugin($contenu) {
  *
  * @uses plugin_normaliser_champs()
  *
+ * @param array $conditions
+ *      Tableau des conditions SQL à appliquer au select et correspondant aux filtres passés dans la requête.
  * @param array $filtres
  *      Tableau des critères de filtrage additionnels à appliquer au select.
  * @param array $configuration
