@@ -24,7 +24,7 @@ function saisies_header_prive($flux) {
 	$flux .= "\n<link rel='stylesheet' href='$css' type='text/css' media='all' />\n";
 	$css_constructeur = find_in_path('css/formulaires_constructeur.css');
 	$flux .= "\n<link rel='stylesheet' href='$css_constructeur' type='text/css' />\n";
-	
+
 	return $flux;
 }
 
@@ -52,7 +52,7 @@ function saisies_affichage_final($flux) {
 
 		//si on a une saisie de type date, on va charger les css de jquery_ui
 		if (
-			(!defined('_JQUERYUI_CSS_NON') or !boolval(_JQUERYUI_CSS_NON)) 
+			(!defined('_JQUERYUI_CSS_NON') or !boolval(_JQUERYUI_CSS_NON))
 			and strpos($flux, 'saisie_date') !==false
 		) {
 			include_spip('jqueryui_pipelines');
@@ -90,7 +90,7 @@ function saisies_affichage_final($flux) {
 		$ins_js = "\n<script type='text/javascript' src='$js'></script>\n";
 		$flux = substr_replace($flux, $ins_js, $pos_head, 0);
 	}
-	
+
 	return $flux;
 }
 
@@ -119,12 +119,12 @@ function saisies_formulaire_charger($flux) {
 		// On ajoute au contexte les champs à déclarer
 		$contexte = saisies_lister_valeurs_defaut($saisies);
 		$flux['data'] = array_merge($contexte, $flux['data']);
-		
+
 		// On cherche si on gère des étapes
 		if ($etapes = saisies_lister_par_etapes($saisies)) {
 			$flux['data']['_etapes'] = count($etapes);
 		}
-		
+
 		// On ajoute le tableau complet des saisies
 		$flux['data']['_saisies'] = $saisies;
 	}
@@ -184,7 +184,7 @@ function saisies_formulaire_verifier($flux) {
 	$saisies = saisies_chercher_formulaire($flux['args']['form'], $flux['args']['args']);
 	if ($saisies and !saisies_lister_par_etapes($saisies)) {
 		$erreurs = saisies_verifier($saisies);
-		
+
 		if ($erreurs and !isset($erreurs['message_erreur'])) {
 			$erreurs['message_erreur'] = _T('saisies:erreur_generique');
 		}
@@ -213,7 +213,7 @@ function saisies_formulaire_verifier_etape($flux) {
 	if ($saisies and $etapes = saisies_lister_par_etapes($saisies)) {
 		// On récupère les sous-saisies de cette étape précise
 		$saisies_etape = $etapes[$flux['args']['etape']]['saisies'];
-		
+
 		$erreurs = saisies_verifier($saisies_etape);
 
 		$flux['data'] = array_merge($erreurs, $flux['data']);
