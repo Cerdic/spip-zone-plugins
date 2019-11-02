@@ -82,9 +82,11 @@ function metasplus_selectionner_fond($contexte) {
 	$type_page        = !empty($contexte['type-page']) ? $contexte['type-page'] : '';
 	$objet            = !empty($contexte['objet']) ? $contexte['objet'] : '';
 	$id_objet         = !empty($contexte['id_objet']) ? $contexte['id_objet'] : '';
+	$composition      = '';
 	$racine           = 'inclure/metasplus/';
 	$fond_defaut      = $racine . 'dist';
 	$fond_page        = $racine . $type_page;
+	$fond_composition = '';
 
 	if (
 		test_plugin_actif('compositions')
