@@ -35,7 +35,7 @@ function traitements_lister_disponibles() {
 
 	$traitements = pipeline(
 		'formidable_traitements',
-		array('data' => $traitements)
+		array('data' => $traitements, 'args' => array())
 	);
 	return $traitements;
 }
