@@ -540,7 +540,7 @@ function ezrest_conditionner($plugin, $collection, $filtres, $configuration) {
 
 	// Détermination de la fonction de service permettant de récupérer la collection spécifiée
 	// filtrée sur les critères éventuellement fournis.
-	if ($filtres) {
+	if (empty($configuration['sans_condition']) and $filtres) {
 		include_spip('base/objets');
 		// Extraire la configuration des critères
 		$criteres = array_column($configuration['filtres'], null, 'critere');
