@@ -188,6 +188,9 @@ function saisies_formulaire_verifier($flux) {
 		if ($erreurs and !isset($erreurs['message_erreur'])) {
 			$erreurs['message_erreur'] = _T('saisies:erreur_generique');
 		}
+		if (!is_array($flux['data'])) {
+			$flux['data'] = array();
+		}
 
 		$flux['data'] = array_merge($erreurs, $flux['data']);
 	}
