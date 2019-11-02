@@ -133,7 +133,7 @@ function calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom, $s
  */
 function affiche_resume_reponse($id_formulaires_reponse, $id_formulaire = null, $modele_resume = null) {
 	static $modeles_resume = array();
-	static $saisies;
+	static $saisies_form = array();
 
 	if (is_null($id_formulaire)) {
 		$id_formulaire = sql_getfetsel(
@@ -146,6 +146,7 @@ function affiche_resume_reponse($id_formulaires_reponse, $id_formulaire = null, 
 	if (is_null($modele_resume) and !isset($modeles_resume[$id_formulaire])) {
 		$row = sql_fetsel('saisies, traitements', 'spip_formulaires', 'id_formulaire='.intval($id_formulaire));
 		$saisies = unserialize($row['saisies']);
+		$saisies_form[$id_formulaire] = $saisies;
 		$traitements = unserialize($row['traitements']);
 		if (isset($traitements['enregistrement']['resume_reponse'])) {
 			$modeles_resume[$id_formulaire] = $traitements['enregistrement']['resume_reponse'];
@@ -155,6 +156,7 @@ function affiche_resume_reponse($id_formulaires_reponse, $id_formulaire = null, 
 	}
 	if (is_null($modele_resume)) {
 		$modele_resume = $modeles_resume[$id_formulaire];
+		$saisies = $saisies_form[$id_formulaire];
 	}
 
 	if (!$modele_resume) {
