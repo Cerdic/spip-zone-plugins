@@ -130,12 +130,24 @@ function http_ezrest_get_collection_dist($requete, $reponse) {
 		if (ezrest_api_verifier_contexte($plugin, $erreur)) {
 			// Le contexte autorise l'utilisation de l'API.
 			// -> Vérification des filtres éventuels.
-			if (ezrest_collection_verifier_filtre($plugin, $contenu['requete']['filtres'], $collection, $configuration, $erreur)) {
-				// -- on construit le contenu de la collection.
+			$filtres = $contenu['requete']['filtres'];
+			if (ezrest_collection_verifier_filtre($plugin, $filtres, $collection, $configuration, $erreur)) {
+				// -- on construit le tableau des conditions SQL déduites des filtres.
+				$conditions = ezrest_conditionner(
+					$plugin,
+					$collection,
+					$filtres,
+					$configuration
+				);
+
+				// -- on construit le contenu de la collection en fournissant le tableau des conditions SQL mais
+				//    aussi celui des filtres car il est possible que le plugin utilisateur en ait besoin pour rajouter
+				//    des éléments dans le contenu.
 				$contenu['donnees'] = ezrest_collectionner(
 					$plugin,
 					$collection,
-					$contenu['requete']['filtres'],
+					$conditions,
+					$filtres,
 					$configuration
 				);
 
@@ -144,8 +156,9 @@ function http_ezrest_get_collection_dist($requete, $reponse) {
 					$flux = array(
 						'args' => array(
 							'plugin'        => $plugin,
-							'configuration' => $configuration,
-							'collection'    => $collection
+							'collection'    => $collection,
+							'filtres'       => $filtres,
+							'configuration' => $configuration
 						),
 						'data' => $contenu['donnees']
 					);

@@ -533,7 +533,60 @@ function ezrest_indexer($collections) {
  *
  * @return array
  */
-function ezrest_collectionner($plugin, $collection, $filtres, $configuration) {
+function ezrest_conditionner($plugin, $collection, $filtres, $configuration) {
+
+	// Initialisation des données de la collection à retourner
+	$conditions = array();
+
+	// Détermination de la fonction de service permettant de récupérer la collection spécifiée
+	// filtrée sur les critères éventuellement fournis.
+	if ($filtres) {
+		include_spip('base/objets');
+		// Extraire la configuration des critères
+		$criteres = array_column($configuration['filtres'], null, 'critere');
+		foreach ($filtres as $_critere => $_valeur) {
+			// On regarde si il y une fonction particulière permettant le calcul du critère ou si celui-ci
+			// est calculé de façon standard.
+			$module = !empty($criteres[$_critere]['module'])
+				? $criteres[$_critere]['module']
+				: $plugin;
+			if ($conditionner = ezrest_service_chercher($module, 'conditionner', $collection, $_critere)) {
+				// La condition est élaborée par une fonction spécifique du plugin utilisateur.
+				$conditions[] = $conditionner($_valeur);
+			} else {
+				// La condition est calculée par REST Factory à partir de la configuration du filtre.
+				// -- si l'index 'table' est présent dans la configuration alors on l'utilise pour préfixer le critère
+				// -- sinon on utilise le nom de la collection si elle correspond à un type
+				// -- sinon on ne préfixe pas le critère
+				$type_objet = !empty($criteres[$_critere]['table'])
+					? $criteres[$_critere]['table']
+					: $collection;
+				$table = table_objet_sql($type_objet);
+				$champ_sql = ($table == $type_objet)
+					? $_critere
+					: "${table}.${_critere}";
+				// -- détermination de la fonction à appliquer à la valeur en fonction de son type (défaut string).
+				$fonction = (empty($criteres[$_critere]['type']) or ($criteres[$_critere]['type'] == 'string'))
+					? 'sql_quote'
+					: 'intval';
+				$conditions[] = "${champ_sql}=" . $fonction($_valeur);
+			}
+		}
+	}
+
+	return $conditions;
+}
+
+/**
+ * @param $plugin
+ * @param $collection
+ * @param $conditions
+ * @param $filtres
+ * @param $configuration
+ *
+ * @return array
+ */
+function ezrest_collectionner($plugin, $collection, $conditions, $filtres, $configuration) {
 
 	// Initialisation des données de la collection à retourner
 	$contenu = array();
@@ -541,7 +594,7 @@ function ezrest_collectionner($plugin, $collection, $filtres, $configuration) {
 	// Détermination de la fonction de service permettant de récupérer la collection spécifiée
 	// filtrée sur les critères éventuellement fournis.
 	if ($collectionner = ezrest_service_chercher($plugin, 'collectionner', $collection)) {
-		$contenu = $collectionner($filtres, $configuration);
+		$contenu = $collectionner($conditions, $filtres, $configuration);
 	}
 
 	return $contenu;
