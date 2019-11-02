@@ -493,8 +493,8 @@ function formidable_raccourcis_arobases_2_valeurs_champs($chaine, $saisies, $bru
 	elseif ($source == 'base' and $id_formulaires_reponse and $id_formulaire) {
 		$saisies = saisies_lister_par_nom($saisies);
 		foreach ($saisies as $nom => $saisie) {
-			$valeurs[$nom] = formidable_nettoyer_saisie_vue(calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom,'', 'brut', $sans_reponse));
-			$valeurs_libellees[$nom] =  formidable_nettoyer_saisie_vue(calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom,'', 'valeur_uniquement', $sans_reponse));
+			$valeurs[$nom] = formidable_nettoyer_saisie_vue(calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom, '', 'brut', $sans_reponse));
+			$valeurs_libellees[$nom] =  formidable_nettoyer_saisie_vue(calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom, '', 'valeur_uniquement', $sans_reponse));
 		}
 	}
 	$a_remplacer = array();
