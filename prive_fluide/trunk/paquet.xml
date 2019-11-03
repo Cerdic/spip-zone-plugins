@@ -1,7 +1,7 @@
 <paquet
 	prefix="prive_fluide"
 	categorie="edition"
-	version="1.0.8"
+	version="1.0.9"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/prive_fluide-128.png"
