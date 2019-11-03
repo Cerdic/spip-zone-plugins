@@ -558,21 +558,22 @@ function ezrest_conditionner($plugin, $collection, $filtres, $configuration) {
 			} else {
 				// La condition est calculée par REST Factory à partir de la configuration du filtre.
 				// -- détermination du nom du champ servant de critère
-				$nom_champ = $criteres[$_critere]['champ_nom']
+				$nom_champ = !empty($criteres[$_critere]['champ_nom'])
 					? $criteres[$_critere]['champ_nom']
 					: $_critere;
 
-				// -- détermination du préfixe du champ :
-				//    - si l'index 'table' est présent dans la configuration alors on l'utilise pour préfixer le critère
-				//    - sinon on utilise le nom de la collection si elle correspond à un type
-				//    - sinon on ne préfixe pas le critère
-				$type_objet = !empty($criteres[$_critere]['champ_table'])
-					? $criteres[$_critere]['champ_table']
-					: $collection;
+				// -- détermination de la table à ajouter en préfixe du champ :
+				//    - si l'index 'champ_table' n'est pas précisé on utilise le nom de la collection : si elle
+				//      correspond à une table on l'utilise en préfixe sinon on ne préfixe pas.
+				//    - si l'index 'champ_table' est précisé : si il est vide, on ne préfixe pas, sinon on l'utilise
+				//      pour trouver la table et l'utiliser en préfixe.
+				$type_objet = !isset($criteres[$_critere]['champ_table'])
+					? $collection
+					: $criteres[$_critere]['champ_table'];
 				$table = table_objet_sql($type_objet);
-				$champ_sql = ($table == $type_objet)
-					? $nom_champ
-					: "${table}.${nom_champ}";
+				$champ_sql = ($type_objet and ($table != $type_objet))
+					? "${table}.${nom_champ}"
+					: $nom_champ;
 
 				// -- détermination de la fonction à appliquer à la valeur en fonction de son type (défaut string).
 				$fonction = (empty($criteres[$_critere]['champ_type']) or ($criteres[$_critere]['champ_type'] == 'string'))
