@@ -20,7 +20,7 @@ function ieconfig_selections_editoriales(&$flux, $action){
 				'saisie' => 'fieldset',
 				'options' => array(
 					'nom' => 'selections_editoriales_export',
-					'label' => '<:fragments_core:selections_editoriales_export_titre:>',
+					'label' => '<:ieconfigplus:selections_editoriales_export_titre:>',
 					'icone' => 'selection-16.png'
 				),
 				'saisies' => array(
@@ -28,7 +28,7 @@ function ieconfig_selections_editoriales(&$flux, $action){
 						'saisie' => 'selection_selections_editoriales_multiple',
 						'options' => array(
 							'nom' => 'selections_editoriales_a_exporter',
-							'label' => '<:fragments_core:selections_editoriales_choix_export:>',
+							'label' => '<:ieconfigplus:selections_editoriales_choix_export:>',
 							'cacher_option_intro' => 'oui'
 						)
 					)
@@ -75,7 +75,7 @@ function ieconfig_selections_editoriales(&$flux, $action){
 				'saisie' => 'fieldset',
 				'options' => array(
 					'nom' => 'selections_editoriales_import',
-					'label' => '<:fragments_core:selections_editoriales_import_titre:>',
+					'label' => '<:ieconfigplus:selections_editoriales_import_titre:>',
 					'icone' => 'selection-16.png'
 				),
 				'saisies' => array(
@@ -83,7 +83,7 @@ function ieconfig_selections_editoriales(&$flux, $action){
 						'saisie' => 'explication',
 						'options' => array(
 							'nom' => 'selections_editoriales_import_explication',
-							'texte' => '<:fragments_core:selections_editoriales_choix_import:>'
+							'texte' => '<:ieconfigplus:selections_editoriales_choix_import:>'
 						)
 					)
 				)
@@ -97,11 +97,11 @@ function ieconfig_selections_editoriales(&$flux, $action){
 						'nom' => 'selections_editoriales_importer_'.$selection,
 						'label' => $selection.(isset($selection_datas['titre']) ? ' ('.typo($selection_datas['titre']).')' : ''),
 						'cacher_option_intro' => 'oui',
-						'attention' => '<:fragments_core:ieconfig_attention_meme_identifiant:>',
+						'attention' => '<:ieconfigplus:ieconfig_attention_meme_identifiant:>',
 						'datas' => array(
-							'non' => '<:fragments_core:ieconfig_ne_pas_importer:>',
-							'renommer' => '<:fragments_core:ieconfig_renommer:>',
-							'remplacer' => '<:fragments_core:ieconfig_remplacer:>'
+							'non' => '<:ieconfigplus:ieconfig_ne_pas_importer:>',
+							'renommer' => '<:ieconfigplus:ieconfig_renommer:>',
+							'remplacer' => '<:ieconfigplus:ieconfig_remplacer:>'
 						)
 					)
 				);
@@ -113,8 +113,8 @@ function ieconfig_selections_editoriales(&$flux, $action){
 						'label' => $selection.(isset($selection_datas['titre']) ? ' ('.typo($selection_datas['titre']).')' : ''),
 						'cacher_option_intro' => 'oui',
 						'datas' => array(
-							'non' => '<:fragments_core:ieconfig_ne_pas_importer:>',
-							'importer' => '<:fragments_core:ieconfig_importer:>'
+							'non' => '<:ieconfigplus:ieconfig_ne_pas_importer:>',
+							'importer' => '<:ieconfigplus:ieconfig_importer:>'
 						)
 					)
 				);

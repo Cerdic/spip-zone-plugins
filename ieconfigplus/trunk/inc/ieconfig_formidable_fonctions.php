@@ -19,7 +19,7 @@ function ieconfig_formidable(&$flux, $action){
 				'saisie' => 'fieldset',
 				'options' => array(
 					'nom' => 'formidable_export',
-					'label' => '<:fragments_core:formidable_export_titre:>',
+					'label' => '<:ieconfigplus:formidable_export_titre:>',
 					'icone' => 'formulaire-16.png'
 				),
 				'saisies' => array(
@@ -27,7 +27,7 @@ function ieconfig_formidable(&$flux, $action){
 						'saisie' => 'formulaire_formidable_multiple',
 						'options' => array(
 							'nom' => 'formidable_a_exporter',
-							'label' => '<:fragments_core:formidable_choix_export:>',
+							'label' => '<:ieconfigplus:formidable_choix_export:>',
 							'cacher_option_intro' => 'oui'
 						)
 					)

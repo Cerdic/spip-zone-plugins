@@ -22,7 +22,7 @@ function ieconfig_pages(&$flux, $action){
 				'saisie' => 'fieldset',
 				'options' => array(
 					'nom' => 'pages_export',
-					'label' => '<:fragments_core:pages_export_titre:>',
+					'label' => '<:ieconfigplus:pages_export_titre:>',
 					'icone' => 'pages-16.png'
 				),
 				'saisies' => array(
@@ -30,7 +30,7 @@ function ieconfig_pages(&$flux, $action){
 						'saisie' => 'selection_pages_multiple',
 						'options' => array(
 							'nom' => 'pages_a_exporter',
-							'label' => '<:fragments_core:pages_choix_export:>',
+							'label' => '<:ieconfigplus:pages_choix_export:>',
 							'cacher_option_intro' => 'oui'
 						)
 					)
@@ -71,7 +71,7 @@ function ieconfig_pages(&$flux, $action){
 				'saisie' => 'fieldset',
 				'options' => array(
 					'nom' => 'pages_import',
-					'label' => '<:fragments_core:pages_import_titre:>',
+					'label' => '<:ieconfigplus:pages_import_titre:>',
 					'icone' => 'pages-16.png'
 				),
 				'saisies' => array(
@@ -79,7 +79,7 @@ function ieconfig_pages(&$flux, $action){
 						'saisie' => 'explication',
 						'options' => array(
 							'nom' => 'pages_import_explication',
-							'texte' => '<:fragments_core:pages_choix_import:>'
+							'texte' => '<:ieconfigplus:pages_choix_import:>'
 						)
 					)
 				)
@@ -93,11 +93,11 @@ function ieconfig_pages(&$flux, $action){
 						'nom' => 'page_importer_'.$page,
 						'label' => $page.(isset($page_unique['titre']) ? ' ('.typo($page_unique['titre']).')' : ''),
 						'cacher_option_intro' => 'oui',
-						'attention' => '<:fragments_core:ieconfig_attention_meme_identifiant:>',
+						'attention' => '<:ieconfigplus:ieconfig_attention_meme_identifiant:>',
 						'datas' => array(
-							'non' => '<:fragments_core:ieconfig_ne_pas_importer:>',
-							'renommer' => '<:fragments_core:ieconfig_renommer:>',
-							'remplacer' => '<:fragments_core:ieconfig_remplacer:>'
+							'non' => '<:ieconfigplus:ieconfig_ne_pas_importer:>',
+							'renommer' => '<:ieconfigplus:ieconfig_renommer:>',
+							'remplacer' => '<:ieconfigplus:ieconfig_remplacer:>'
 						)
 					)
 				);
@@ -109,8 +109,8 @@ function ieconfig_pages(&$flux, $action){
 						'label' => $page.(isset($page_unique['titre']) ? ' ('.typo($page_unique['titre']).')' : ''),
 						'cacher_option_intro' => 'oui',
 						'datas' => array(
-							'non' => '<:fragments_core:ieconfig_ne_pas_importer:>',
-							'importer' => '<:fragments_core:ieconfig_importer:>'
+							'non' => '<:ieconfigplus:ieconfig_ne_pas_importer:>',
+							'importer' => '<:ieconfigplus:ieconfig_importer:>'
 						)
 					)
 				);

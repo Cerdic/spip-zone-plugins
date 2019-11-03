@@ -24,7 +24,7 @@ function ieconfig_mots(&$flux, $action){
 				'saisie' => 'fieldset',
 				'options' => array(
 					'nom' => 'groupe_mots_export',
-					'label' => '<:fragments_core:mots_export_titre:>',
+					'label' => '<:ieconfigplus:mots_export_titre:>',
 					'icone' => 'mot-16.png'
 				),
 				'saisies' => array(
@@ -32,7 +32,7 @@ function ieconfig_mots(&$flux, $action){
 						'saisie' => 'selection_groupes_mots_multiple',
 						'options' => array(
 							'nom' => 'groupe_mots_a_exporter',
-							'label' => '<:fragments_core:mots_choix_export:>',
+							'label' => '<:ieconfigplus:mots_choix_export:>',
 							'cacher_option_intro' => 'oui'
 						)
 					)
@@ -69,7 +69,7 @@ function ieconfig_mots(&$flux, $action){
 				'saisie' => 'fieldset',
 				'options' => array(
 					'nom' => 'groupe_mots_import',
-					'label' => '<:fragments_core:mots_import_titre:>',
+					'label' => '<:ieconfigplus:mots_import_titre:>',
 					'icone' => 'mot-16.png'
 				),
 				'saisies' => array(
@@ -77,7 +77,7 @@ function ieconfig_mots(&$flux, $action){
 						'saisie' => 'explication',
 						'options' => array(
 							'nom' => 'groupe_mots_import_explication',
-							'texte' => '<:fragments_core:mots_choix_import:>'
+							'texte' => '<:ieconfigplus:mots_choix_import:>'
 						)
 					)
 				)
@@ -91,11 +91,11 @@ function ieconfig_mots(&$flux, $action){
 						'nom' => 'groupe_importer_'.$id_groupe,
 						'label' => $id_groupe.(isset($groupe['titre']) ? ' ('.typo($groupe['titre']).')' : ''),
 						'cacher_option_intro' => 'oui',
-						'attention' => '<:fragments_core:ieconfig_attention_meme_identifiant:>',
+						'attention' => '<:ieconfigplus:ieconfig_attention_meme_identifiant:>',
 						'datas' => array(
-							'non' => '<:fragments_core:ieconfig_ne_pas_importer:>',
-							'renommer' => '<:fragments_core:ieconfig_renommer:>',
-							'remplacer' => '<:fragments_core:ieconfig_remplacer:>'
+							'non' => '<:ieconfigplus:ieconfig_ne_pas_importer:>',
+							'renommer' => '<:ieconfigplus:ieconfig_renommer:>',
+							'remplacer' => '<:ieconfigplus:ieconfig_remplacer:>'
 						)
 					)
 				);
@@ -107,8 +107,8 @@ function ieconfig_mots(&$flux, $action){
 						'label' => $id_groupe.(isset($groupe['titre']) ? ' ('.typo($groupe['titre']).')' : ''),
 						'cacher_option_intro' => 'oui',
 						'datas' => array(
-							'non' => '<:fragments_core:ieconfig_ne_pas_importer:>',
-							'importer' => '<:fragments_core:ieconfig_importer:>'
+							'non' => '<:ieconfigplus:ieconfig_ne_pas_importer:>',
+							'importer' => '<:ieconfigplus:ieconfig_importer:>'
 						)
 					)
 				);

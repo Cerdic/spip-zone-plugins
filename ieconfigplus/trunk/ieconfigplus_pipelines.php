@@ -75,6 +75,12 @@ function ieconfigplus_ieconfig_metas($table){
       $table['bank']['metas_serialize'] = 'bank,bank_*';
   }
 
+  if(test_plugin_actif('mailsubscribers')){
+      $table['mailsubscribers']['titre'] = 'Mailsubscribers';
+      $table['mailsubscribers']['icone'] = 'prive/themes/spip/images/mailsubscriber-16.png';
+      $table['mailsubscribers']['metas_serialize'] = 'mailsubscribers,mailsubscribers_*';
+  }
+
   return $table;
 }
 
