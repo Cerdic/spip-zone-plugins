@@ -23,5 +23,5 @@
 	<pipeline nom="porte_plume_barre_charger" inclure="frimousses_fonctions.php" />
 	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="frimousses_fonctions.php" />
 
-	<utilise nom="porte_plume" />
+	<utilise nom="porte_plume" compatibilite="[1.15.11;]" />
 </paquet>
