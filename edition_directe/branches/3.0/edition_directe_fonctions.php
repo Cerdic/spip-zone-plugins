@@ -63,15 +63,7 @@ function lister_objets($prefs) {
 	include_spip('base/objets');
 
 	// Lister les objets éditables auf ceux qui sont désactivé par l'utilisateur
-<<<<<<< HEAD
-	$liste_objets=lister_tables_objets_sql();
-	$objets=array();
-	foreach($liste_objets AS $o=>$valeur){
-		if($valeur['editable'] AND $valeur['page'] AND $prefs['edition_directe'][$valeur['page']]!='inactive')$objets[]=$valeur['page'];
-	}
-	return $objets;
-}
-=======
+
 	$liste_objets = lister_tables_objets_sql();
 	$objets = array();
 	foreach ($liste_objets as $valeur) {
@@ -80,4 +72,3 @@ function lister_objets($prefs) {
 	}
 	return $objets;
 }
->>>>>>> master
