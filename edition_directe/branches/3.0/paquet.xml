@@ -1,7 +1,7 @@
 <paquet
 	prefix="edition_directe"
 	categorie="edition"
-	version="3.3.1"
+	version="3.3.2"
 	etat="stable"
 	compatibilite="[3.0.17;3.2.*]"
 	logo="img/logo_aed_edit_128.png"
@@ -20,8 +20,8 @@
 	<pipeline nom="recuperer_fond" inclure="edition_directe_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="edition_directe_pipelines.php" />
 	<pipeline nom="edition_directe_controle" action="" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 
-	<necessite nom="saisies" compatibilite="[2.28.0;[" />
 	<utilise nom="medias" compatibilite="[2.7.59;[" />
 	<menu nom="configurer_edition_directe" titre="edir:titre_plugin" parent="menu_configuration" icone="images/edir-16.png"/>
 

@@ -1,26 +1,36 @@
 <?php
+/**
+ * Utilisations de pipelines par Edition_directe
+ *
+ * @plugin     Edition_directe
+ * @copyright  2011 - 2019
+ * @author     Rainer Müller
+ * @licence    GNU/GPL
+ * @package    SPIP\Edition_directe\Pipelines
+ */
+
 
 // styles
 function edition_directe_header_prive($flux) {
 	$flux .= '<link rel="stylesheet" href="' . find_in_path('css/edition_directe_styles.css') . '" type="text/css" media="all" />';
-	
+
 	return $flux;
 }
 
 // Ajouter le formulaire upload
 function edition_directe_affiche_gauche($flux) {
 	include_spip('edition_directe_fonctions');
-	
+
 	$objets_edition_directe = objets_edition_directe();
 	if ($en_cours = trouver_objet_exec($flux['args']['exec']) and $type = $en_cours['type'] and in_array($type, $objets_edition_directe) and $id_table_objet = $en_cours['id_table_objet'] and ($id = intval($flux['args'][$id_table_objet]) or $id = 0 - $GLOBALS['visiteur_session']['id_auteur']) and autoriser('joindredocument', $type, $id)) {
-		
+
 		if ($id > 0)
 			$flux['data'] .= recuperer_fond('prive/objets/editer/colonne_document', array (
 				'objet' => $type,
-				'id_objet' => $id 
+				'id_objet' => $id
 			));
 	}
-	
+
 	return $flux;
 }
 
@@ -30,28 +40,28 @@ function edition_directe_recuperer_fond($flux) {
 	include_spip('inc/autoriser');
 	$fond = $flux['args']['fond'];
 	$contexte = isset($flux['args']['contexte']) ? $flux['args']['contexte'] : array ();
-	$objet = _request('exec');
 	$texte = $flux['data']['texte'];
-	$contexte['objet'] = $objet;
-	$id = 'id_' . $objet;
-	$exec = _request('exec');
-	if ($contexte['exec'] == 'site')
-		$id = 'id_syndic';
-	$contexte['id_objet'] = $contexte[$id];
-	
+
 	// Seulement dans l'espace priv&eacute;
-	if ($exec and autoriser('modifier', $objet, $contexte['id_objet'])) {
+	if (test_espace_prive() and
+		$exec =_request('exec') and
+		$objet_exec = trouver_objet_exec($exec) and
+		$objet = $objet_exec['type'] and
+		$id = $objet_exec['id_table_objet'] and
+		$contexte['objet'] = $objet and
+		$contexte['id_objet'] = $contexte[$id] and
+		autoriser('modifier', $objet, $contexte['id_objet'])) {
 		// On cherche les objets actifs pour l'édition directe
 		$objets = objets_edition_directe();
-		
+
 		// Les objets éditables déclarés
 		$objets_dispos = lister_objets(array ());
-		
+
 		// Insertion du formulaire d'édition
 		if (in_array($objet, $objets)) {
 			if ($fond == 'prive/squelettes/contenu/' . $objet) {
 				$edition = recuperer_fond('prive/echafaudage/contenu/objet_edit_directe', $contexte, array (
-					'ajax' => true 
+					'ajax' => true
 				));
 				$icone = '
 					<span class="icone_edition_directe icone active">
@@ -96,7 +106,7 @@ function edition_directe_recuperer_fond($flux) {
 			$flux['data']['texte'] = preg_replace($patterns, $replacements, $texte, 1);
 		}
 	}
-	
+
 	return $flux;
 }
 
@@ -105,7 +115,7 @@ function edition_directe_formulaire_traiter($flux) {
 	$objets = objets_edition_directe();
 	$form = $flux['args']['form'];
 	$objet = str_replace('editer_', '', $form);
-	
+
 	if (in_array($objet, $objets) and ! $_REQUEST['redirect'] and _request('exec')) {
 		if ($objet == 'site') {
 			$id_objet = $flux['data']['id_syndic'];
@@ -114,7 +124,6 @@ function edition_directe_formulaire_traiter($flux) {
 		elseif ($id_objet = $flux['data']['id_' . $objet])
 			$flux['data']['redirect'] = generer_url_ecrire($objet, 'id_' . $objet . '=' . $id_objet);
 	}
-	
+
 	return $flux;
 }
-?>
