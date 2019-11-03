@@ -1,7 +1,7 @@
 <paquet
 	prefix="diapo"
 	categorie="multimedia"
-	version="2.0"
+	version="2.0.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	documentation="https://contrib.spip.net/Plugin-Diapo"
