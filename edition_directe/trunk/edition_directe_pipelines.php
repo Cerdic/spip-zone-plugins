@@ -40,17 +40,17 @@ function edition_directe_recuperer_fond($flux) {
 	include_spip('inc/autoriser');
 	$fond = $flux['args']['fond'];
 	$contexte = isset($flux['args']['contexte']) ? $flux['args']['contexte'] : array ();
-	$objet = _request('exec');
 	$texte = $flux['data']['texte'];
-	$contexte['objet'] = $objet;
-	$id = 'id_' . $objet;
-	$exec = _request('exec');
-	if ($contexte['exec'] == 'site')
-		$id = 'id_syndic';
-	$contexte['id_objet'] = $contexte[$id];
 
 	// Seulement dans l'espace priv&eacute;
-	if ($exec and autoriser('modifier', $objet, $contexte['id_objet'])) {
+	if (test_espace_prive() and
+		$exec =_request('exec') and
+		$objet_exec = trouver_objet_exec($exec) and
+		$objet = $objet_exec['type'] and
+		$id = $objet_exec['id_table_objet'] and
+		$contexte['objet'] = $objet and
+		$contexte['id_objet'] = $contexte[$id] and
+		autoriser('modifier', $objet, $contexte['id_objet'])) {
 		// On cherche les objets actifs pour l'édition directe
 		$objets = objets_edition_directe();
 
