@@ -552,23 +552,34 @@ function ezrest_conditionner($plugin, $collection, $filtres, $configuration) {
 				: $plugin;
 			if ($conditionner = ezrest_service_chercher($module, 'conditionner', $collection, $_critere)) {
 				// La condition est élaborée par une fonction spécifique du plugin utilisateur.
+				// Il est donc inutile de fournir autre chose que la valeur à la fonction spécifique car tout le
+				// contexte est déjà connu du plugin utilisateur.
 				$conditions[] = $conditionner($_valeur);
 			} else {
 				// La condition est calculée par REST Factory à partir de la configuration du filtre.
-				// -- si l'index 'table' est présent dans la configuration alors on l'utilise pour préfixer le critère
-				// -- sinon on utilise le nom de la collection si elle correspond à un type
-				// -- sinon on ne préfixe pas le critère
-				$type_objet = !empty($criteres[$_critere]['table'])
-					? $criteres[$_critere]['table']
+				// -- détermination du nom du champ servant de critère
+				$nom_champ = $criteres[$_critere]['champ_nom']
+					? $criteres[$_critere]['champ_nom']
+					: $_critere;
+
+				// -- détermination du préfixe du champ :
+				//    - si l'index 'table' est présent dans la configuration alors on l'utilise pour préfixer le critère
+				//    - sinon on utilise le nom de la collection si elle correspond à un type
+				//    - sinon on ne préfixe pas le critère
+				$type_objet = !empty($criteres[$_critere]['champ_table'])
+					? $criteres[$_critere]['champ_table']
 					: $collection;
 				$table = table_objet_sql($type_objet);
 				$champ_sql = ($table == $type_objet)
-					? $_critere
-					: "${table}.${_critere}";
+					? $nom_champ
+					: "${table}.${nom_champ}";
+
 				// -- détermination de la fonction à appliquer à la valeur en fonction de son type (défaut string).
-				$fonction = (empty($criteres[$_critere]['type']) or ($criteres[$_critere]['type'] == 'string'))
+				$fonction = (empty($criteres[$_critere]['champ_type']) or ($criteres[$_critere]['champ_type'] == 'string'))
 					? 'sql_quote'
 					: 'intval';
+
+				// Construction de la condition et ajout en queue du tableau.
 				$conditions[] = "${champ_sql}=" . $fonction($_valeur);
 			}
 		}

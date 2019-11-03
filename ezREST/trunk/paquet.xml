@@ -1,7 +1,7 @@
 <paquet
 	prefix="ezrest"
 	categorie="outil"
-	version="0.2.1"
+	version="0.2.2"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="ezrest_logo-64.png"
