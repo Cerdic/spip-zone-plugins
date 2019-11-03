@@ -30,7 +30,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *      Tableau des plugins dont l'index est le préfixe du plugin.
  *      Les champs de type id ou maj ne sont pas renvoyés.
  */
-function pays_collectionner($filtres, $configuration) {
+function pays_collectionner($conditions, $filtres, $configuration) {
 
 	// Initialisation de la collection
 	$pays = array();
@@ -47,32 +47,8 @@ function pays_collectionner($filtres, $configuration) {
 	// -- Initialisation du where avec les conditions sur la table des dépots.
 	$where = array();
 	// -- Si il y a des critères additionnels on complète le where en conséquence en fonction de la configuration.
-	if ($filtres) {
-		// Extraire la configuration des critères
-		$criteres = array_column($configuration['filtres'], null, 'critere');
-		foreach ($filtres as $_critere => $_valeur) {
-			// On regarde si il y une fonction particulière permettant le calcul du critère ou si celui-ci
-			// est calculé de façon standard.
-			$module = !empty($criteres[$_critere]['module'])
-				? $criteres[$_critere]['module']
-				: $configuration['module'];
-			include_spip("isocode/${module}");
-			$construire = "pays_construire_critere_${_critere}";
-			$champ = !empty($criteres[$_critere]['champ_table']) ? $criteres[$_critere]['champ_table'] : $_critere;
-			if (function_exists($construire)) {
-				$where[] = $construire($champ, $_valeur);
-			} else {
-				$where[] = "spip_iso3166countries.${champ}=" . sql_quote($_valeur);
-			}
-
-			// Renvoyer les informations sur la région ou le continent.
-			if ($_critere == 'continent') {
-				$pays['continent'] = sql_fetsel('*', 'spip_geoipcontinents', 'code=' . sql_quote($_valeur));
-			}
-			if ($_critere == 'region') {
-				$pays['region'] = sql_fetsel('*', 'spip_m49regions', 'code_num=' . sql_quote($_valeur));
-			}
-		}
+	if ($conditions) {
+		$where = array_merge($where, $conditions);
 	}
 
 	$pays['pays'] = sql_allfetsel($select, $from, $where);
@@ -93,13 +69,13 @@ function pays_collectionner($filtres, $configuration) {
  * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
-function pays_verifier_filtre_region($region, &$extra) {
+function pays_verifier_filtre_region($region, &$erreur) {
 
 	$est_valide = true;
 
 	if (!preg_match('#^[0-9]{3}$#', $region)) {
 		$est_valide = false;
-		$extra = _T('isocode:extra_critere_region');
+		$erreur['extra'] = _T('isocode:extra_critere_region');
 	}
 
 	return $est_valide;
@@ -117,13 +93,13 @@ function pays_verifier_filtre_region($region, &$extra) {
  * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
-function pays_verifier_filtre_continent($continent) {
+function pays_verifier_filtre_continent($continent, &$erreur) {
 
 	$est_valide = true;
 
 	if (!preg_match('#^[A-Z]{2}$#', $continent)) {
 		$est_valide = false;
-		$extra = _T('isocode:extra_critere_continent');
+		$erreur['extra'] = _T('isocode:extra_critere_continent');
 	}
 
 	return $est_valide;

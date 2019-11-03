@@ -44,13 +44,15 @@ function isocode_liste_ezcollection($collections) {
 		'filtres'   => array(
 			array(
 				'critere'         => 'region',
-				'champ_table'     => 'code_num_region',
-				'est_obligatoire' => false
+				'est_obligatoire' => false,
+				'champ_nom'       => 'code_num_region',
+				'champ_table'     => 'iso3166countries'
 			),
 			array(
 				'critere'         => 'continent',
-				'champ_table'     => 'code_continent',
-				'est_obligatoire' => false
+				'est_obligatoire' => false,
+				'champ_nom'       => 'code_continent',
+				'champ_table'     => 'iso3166countries'
 			),
 		)
 	);
@@ -61,8 +63,8 @@ function isocode_liste_ezcollection($collections) {
 	);
 
 	$collections['continents'] = array(
-			'module'  => 'isocode',
-			'filtres' => array()
+		'module'  => 'isocode',
+		'filtres' => array()
 	);
 
 	return $collections;
