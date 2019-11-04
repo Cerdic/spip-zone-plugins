@@ -124,7 +124,7 @@ Vous trouverez la <a href="https://contrib.spip.net/5080" target="_blank">docume
 	'option_horaire_label' => 'Horaire',
 	'option_horaire_label_case' => 'Permettre de saisir aussi l’horaire',
 	'option_id_groupe_label' => 'Groupe de mots',
-	'option_info_obligatoire_explication' => 'Vous pouvez modifier l’indication d’obligation par défaut : <i>[Obligatoire]</i>.',
+	'option_info_obligatoire_explication' => 'Vous pouvez modifier l’indication d’obligation par défaut : <i>[Obligatoire]</i>. Pour garder l\'information par défaut, ne rien mettre. Pour ne rien afficher, mettre un texte composé uniquement d\'espace.',
 	'option_info_obligatoire_label' => 'Indication d’obligation',
 	'option_inserer_barre_choix_edition' => 'barre d’édition complète',
 	'option_inserer_barre_choix_forum' => 'barre des forums',
