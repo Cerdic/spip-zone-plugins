@@ -35,12 +35,6 @@ options:
          label: '<:saisies:option_attention_label:>'
          explication: '<:saisies:option_attention_explication:>'
          size: 50
-     -
-       saisie: 'input'
-       options:
-         nom: 'info_obligatoire'
-         label: '<:saisies:option_info_obligatoire_label:>'
-         explication: '<:saisies:option_info_obligatoire_explication:>'
  -
    saisie: 'fieldset'
    options:
@@ -52,6 +46,12 @@ options:
        options:
          nom: 'obligatoire'
          label: '<:saisies:option_obligatoire_label:>'
+     -
+       saisie: 'input'
+       options:
+         nom: 'info_obligatoire'
+         label: '<:saisies:option_info_obligatoire_label:>'
+         explication: '<:saisies:option_info_obligatoire_explication:>'
 defaut:
  options:
    label: '<:saisies:saisie_selecteur_document_titre:>'

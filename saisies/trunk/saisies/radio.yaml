@@ -101,12 +101,6 @@ options:
           nom: 'conteneur_class'
           label: '<:saisies:option_conteneur_class_label:>'
           size: 50
-      -
-        saisie: 'input'
-        options:
-          nom: 'info_obligatoire'
-          label: '<:saisies:option_info_obligatoire_label:>'
-          explication: '<:saisies:option_info_obligatoire_explication:>'
   -
     saisie: 'fieldset'
     options:
@@ -118,6 +112,12 @@ options:
         options:
           nom: 'obligatoire'
           label: '<:saisies:option_obligatoire_label:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'info_obligatoire'
+          label: '<:saisies:option_info_obligatoire_label:>'
+          explication: '<:saisies:option_info_obligatoire_explication:>'
       -
         saisie: 'input'
         options:

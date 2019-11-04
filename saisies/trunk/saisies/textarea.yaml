@@ -90,12 +90,6 @@ options:
       -
         saisie: 'input'
         options:
-          nom: 'info_obligatoire'
-          label: '<:saisies:option_info_obligatoire_label:>'
-          explication: '<:saisies:option_info_obligatoire_explication:>'
-      -
-        saisie: 'input'
-        options:
           nom: 'class'
           label: '<:saisies:option_class_label:>'
           size: 50
@@ -153,6 +147,12 @@ options:
           nom: 'longueur_max'
           label: '<:saisies:option_maxlength_label:>'
           explication: '<:saisies:option_maxlength_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'info_obligatoire'
+          label: '<:saisies:option_info_obligatoire_label:>'
+          explication: '<:saisies:option_info_obligatoire_explication:>'
       -
         saisie: 'oui_non'
         options:
