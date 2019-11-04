@@ -3,10 +3,10 @@
 	categorie="edition"
 	version="1.5.6"
 	etat="stable"
-	compatibilite="[1.9.0;3.2.99]"
+	compatibilite="[1.9.0;3.2.*]"
 	logo="icon/typo_guillemets.png"
 	documentation="https://contrib.spip.net/article1592.html"
->	
+>
 
 	<nom>Guillemets typographiques</nom>
 	<!-- Correction automatique des guillemets, selon la langue -->
