@@ -110,7 +110,7 @@ Vous trouverez la <a href="https://contrib.spip.net/5080" target="_blank">docume
 	'option_disable_explication' => 'Le champ ne peut plus obtenir le focus.',
 	'option_disable_label' => 'Désactiver le champ',
 	'option_erreur_obligatoire_explication' => 'Vous pouvez personnaliser le message d’erreur affiché pour indiquer l’obligation (sinon laisser vide).',
-	'option_erreur_obligatoire_label' => 'Message d’obligation',
+	'option_erreur_obligatoire_label' => 'Message d\'erreur pour l\'obligation',
 	'option_explication_explication' => 'Si besoin, une courte phrase décrivant l’objet du champ.',
 	'option_explication_label' => 'Explication',
 	'option_forcer_select_explication' => 'Si un groupe de mots est sélectionné, par défaut il s’agira d’une saisie radio. Vous pouvez forcer l’utilisation d’un select.',
