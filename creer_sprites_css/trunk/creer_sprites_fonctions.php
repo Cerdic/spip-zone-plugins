@@ -95,6 +95,10 @@ function filtre_creer_sprites($page) {
 	}
 	$sprites = $GLOBALS['sprites'];
 
+	if (!is_array($sprites)) {
+		debug_log("sprites n'est pas un array ".print_r($sprites,1), "assert_sprites");
+		return $page;
+	}
 	foreach ($sprites as $key => $sprite) {
 		$fichier_sprite = sous_repertoire(_DIR_VAR, 'cache-sprites').$key;
 		$nom_fichier_sprite = substr($fichier_sprite, 0, strlen($fichier_sprite) - 4);
@@ -146,8 +150,13 @@ function filtre_creer_sprites($page) {
 
 			$ext = creer_sprites_terminaison_fichier_image($fichier_sprite);
 			if ($ext != 'png') {
-				$new = extraire_attribut(image_aplatir("$nom_fichier_sprite.png", $ext, 'ffffff'), 'src');
-				copy($new, $fichier_sprite);
+				if ($new = extraire_attribut(image_aplatir("$nom_fichier_sprite.png", $ext, 'ffffff'), 'src')) {
+					copy($new, $fichier_sprite);    // copy ($source , $dest)
+				}
+				else {
+					spip_log("Echec extraire_attribut(image_aplatir($nom_fichier_sprite.png, $ext, 'ffffff'), 'src')) pour $fichier_sprite",
+						'erreur_creer_sprite_css');
+				}
 			}
 			imagedestroy($im);
 			imagedestroy($im_tmp);
