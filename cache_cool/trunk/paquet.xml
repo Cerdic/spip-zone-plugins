@@ -1,7 +1,7 @@
 <paquet
 	prefix="cache_cool"
 	categorie="performance"
-	version="1.0.0"
+	version="1.0.1"
 	etat="stable"
 	compatibilite="[3.1.0;3.3.*]"
 	logo="images/cache_cool-128.png"
@@ -13,5 +13,5 @@
 
 	<auteur lien="http://www.yterium.net">Cedric</auteur>
 
-	<necessite nom="queue" compatibilite="[0.2.1;[" />
+	<necessite nom="queue" compatibilite="[0.6.6;[" />
 </paquet>
