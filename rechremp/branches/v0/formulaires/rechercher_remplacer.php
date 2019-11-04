@@ -2,10 +2,10 @@
 
 include_spip('inc/utils');
 
-// texte figurant par d�faut dans la zone de saisie 
+// texte figurant par défaut dans la zone de saisie 
 define("TXT_A_RECHERCHER", "votre recherche");
 
-// taille du contexte max affich� avant et apr�s chaque extrait trouv�
+// taille du contexte max affiché avant et après chaque extrait trouvé
 define("CONTEXTE_NB_CHARS", 20);
 
 function remplace_txt($entite, $id, $champs, $txt_search, $remplace, $remplace_par="") {
@@ -46,7 +46,7 @@ function remplace_txt($entite, $id, $champs, $txt_search, $remplace, $remplace_p
 				if ($entite =='forum')
 					$url = str_replace ('debut_id_forum', 'id_forum', $url);
 				$retour .= "Texte trouv&eacute; dans <a href='$url'>$entite ".$res[$id]."</a> ({$res['titre']})<br>";
-				// Mise � jour d'un champ de la table
+				// Mise à jour d'un champ de la table
 				if($remplace) 
 					sql_updateq($nom_table, $nouvelles_valeurs, $id."=".intval($res[$id]));
 				elseif ($len_moins_un)
