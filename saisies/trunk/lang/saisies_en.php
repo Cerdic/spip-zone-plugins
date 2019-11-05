@@ -112,7 +112,7 @@ You will find <a href="https://contrib.spip.net/5080" target="_blank">full docum
 	'option_disable_explication' => 'The field can not get the focus.',
 	'option_disable_label' => 'Disable the field',
 	'option_erreur_obligatoire_explication' => 'You can customize the error message displayed to show an obligation (otherwise leave blank).',
-	'option_erreur_obligatoire_label' => 'Obligation message',
+	'option_erreur_obligatoire_label' => 'Obligation message', # MODIF
 	'option_explication_explication' => 'If necessary, a short sentence describing the subject field.',
 	'option_explication_label' => 'Explanation',
 	'option_forcer_select_explication' => 'If a group of words is selected, by default it will be a radio entry. You can force the use of a select.',
@@ -126,7 +126,7 @@ You will find <a href="https://contrib.spip.net/5080" target="_blank">full docum
 	'option_horaire_label' => 'Schedule',
 	'option_horaire_label_case' => 'Allow to fill in the time',
 	'option_id_groupe_label' => 'Keyword group',
-	'option_info_obligatoire_explication' => 'You can modify the default indication of obligation: <i>[Obligatoire]</i>.',
+	'option_info_obligatoire_explication' => 'You can modify the default indication of obligation: <i>[Obligatoire]</i>.', # MODIF
 	'option_info_obligatoire_label' => 'Indication of obligation',
 	'option_inserer_barre_choix_edition' => 'complete editing toolbar',
 	'option_inserer_barre_choix_forum' => 'forums toolbar',

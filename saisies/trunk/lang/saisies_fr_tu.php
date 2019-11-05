@@ -112,7 +112,7 @@ Tu trouveras la <a href="https://contrib.spip.net/5080" target="_blank">document
 	'option_disable_explication' => 'Le champ ne peut plus obtenir le focus.',
 	'option_disable_label' => 'Désactiver le champ',
 	'option_erreur_obligatoire_explication' => 'Tu peux personnaliser le message d’erreur affiché pour indiquer l’obligation (sinon laisser vide).',
-	'option_erreur_obligatoire_label' => 'Message d’obligation',
+	'option_erreur_obligatoire_label' => 'Message d’obligation', # MODIF
 	'option_explication_explication' => 'Si besoin, une courte phrase décrivant l’objet du champ.',
 	'option_explication_label' => 'Explication',
 	'option_forcer_select_explication' => 'Si un groupe de mots est sélectionné, par défaut il s’agira d’une saisie radio. Tu peux forcer l’utilisation d’un select.',
@@ -126,7 +126,7 @@ Tu trouveras la <a href="https://contrib.spip.net/5080" target="_blank">document
 	'option_horaire_label' => 'Horaire',
 	'option_horaire_label_case' => 'Permettre de saisie aussi l’horaire',
 	'option_id_groupe_label' => 'Groupe de mots',
-	'option_info_obligatoire_explication' => 'Tu peux modifier l’indication d’obligation par défaut : <i>[Obligatoire]</i>.',
+	'option_info_obligatoire_explication' => 'Tu peux modifier l’indication d’obligation par défaut : <i>[Obligatoire]</i>.', # MODIF
 	'option_info_obligatoire_label' => 'Indication d’obligation',
 	'option_inserer_barre_choix_edition' => 'barre d’édition complète',
 	'option_inserer_barre_choix_forum' => 'barre des forums',

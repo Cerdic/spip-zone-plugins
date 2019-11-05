@@ -91,7 +91,7 @@ Você pode indicar o início de um subgrupo, no formato "*Título do subgrupo". 
 	'option_disable_explication' => 'O campo não pode mais obter foco.',
 	'option_disable_label' => 'Desativar o campo',
 	'option_erreur_obligatoire_explication' => 'Você pode personalizar a mensagem de erro exibida para indicar a obrigatoriedade (se não, deixe em branco).',
-	'option_erreur_obligatoire_label' => 'Mensagem de obrigatoriedade',
+	'option_erreur_obligatoire_label' => 'Mensagem de obrigatoriedade', # MODIF
 	'option_explication_explication' => 'Se necessário, uma frase curta descrevendo o objeto do campo.',
 	'option_explication_label' => 'Explicação',
 	'option_groupe_affichage' => 'Exibição',
@@ -103,7 +103,7 @@ Você pode indicar o início de um subgrupo, no formato "*Título do subgrupo". 
 	'option_horaire_label' => 'Horário',
 	'option_horaire_label_case' => 'Permitir informar também o horário',
 	'option_id_groupe_label' => 'Grupo de palavras',
-	'option_info_obligatoire_explication' => 'Você pode alterar o valor padrão da indicação de obrigatoriedade: <i>[Obrigatório]</i>.',
+	'option_info_obligatoire_explication' => 'Você pode alterar o valor padrão da indicação de obrigatoriedade: <i>[Obrigatório]</i>.', # MODIF
 	'option_info_obligatoire_label' => 'Indicação de obrigatoriedade',
 	'option_inserer_barre_choix_edition' => 'barra de formatação completa',
 	'option_inserer_barre_choix_forum' => 'barra dos fóruns',
