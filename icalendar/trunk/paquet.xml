@@ -1,20 +1,17 @@
 <paquet
 	prefix="icalendar"
 	categorie="date"
-	version="0.5.0"
+	version="0.5.1"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="icalendar.png"
 	documentation="https://contrib.spip.net/Plugin-iCalendar"
 >	
-
 	<nom>iCalendar</nom>
 	<!-- Faire des boucles iCalendar (format ics) -->
 
 	<auteur>Fil</auteur>
 
-	<copyright>2010-2011</copyright>
-
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
-	<utilise nom="http" compatibilite="[1.0.0;1.*.*]" />
+	<utilise nom="http" compatibilite="[1.2.10;]" />
 </paquet>
