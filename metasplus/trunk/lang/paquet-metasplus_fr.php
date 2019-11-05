@@ -1,7 +1,6 @@
 <?php
-
-// Ceci est un fichier langue de SPIP -- This is a SPIP language file
-
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/metasplus/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -9,6 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
-	'metasplus_description' => 'Améliorez l\'indexation de vos articles dans les moteurs et leur affichage sur les réseaux sociaux grâce aux métadonnées Dublin Core, Open Graph et Twitter Card.',
-	'metasplus_slogan' => 'Métadonnées pour Open Graph, Duclin Core et Twitter',
+	'metasplus_description' => 'Améliorez l’indexation de vos articles dans les moteurs et leur affichage sur les réseaux sociaux grâce aux métadonnées Dublin Core, Open Graph et Twitter Card.',
+	'metasplus_slogan' => 'Métadonnées pour Open Graph, Duclin Core et Twitter'
 );
