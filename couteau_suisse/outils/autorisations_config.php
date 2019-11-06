@@ -21,6 +21,9 @@ add_outil(array(
 	'version-min' => '1.9300',
 	'code:spip_options' => '%%autorisations_debug%%',
 	'code:options' => '%%autorisations_alias%%
+function autoriser_visiteur($faire,$type,$id,$qui,$opt) {
+	return in_array($qui["statut"], array("6forum", "0minirezo", "1comite"));
+}
 function autoriser_redacteur($faire,$type,$id,$qui,$opt) {
 	return in_array($qui["statut"], array("0minirezo", "1comite"));
 }
@@ -54,6 +57,16 @@ add_variables( array(
 
 }
 
+
+// renvoie array($faire, $type, $id)
+function autorisations_cs_parse($a) {
+	$a = explode(' ', trim(preg_replace(',\s+,',' ',preg_replace(',[^a-z0-9]+,i',' ',$a))), 3);
+	if(!$a[0] || is_integer($a[0])) return array(-1);
+	if(intval($a[2])) return array($a[0], $a[1], intval($a[2]));
+	if(intval($a[1])) return array('', $a[0], intval($a[1]));
+	return array($a[0], $a[1], 0);
+}
+
 function autorisations_installe_dist() {
 cs_log("autorisations_installe_dist()");
 	if(!function_exists('_autorisations_LISTE')) return NULL;
@@ -64,9 +77,9 @@ cs_log("autorisations_installe_dist()");
 	foreach($alias as $_a) {
 		list($a,) = explode('//', $_a, 2);
 		if (preg_match('/^\s*(?:(\d+)\s*:)?(.*?)=\s*(?:(\d+)\s*:)?(.*?)$/', $a, $regs)) {
-			$qui = intval($regs[1]); list($faire, $type, $id) = autorisations_parse($regs[2]);
-			$qui2 = intval($regs[3]); list($faire2, $type2, $id2) = autorisations_parse($regs[4]);
-			if($faire===-1 || $faire2===-1 || ($faire==$faire2 && $type==$type2 && $id==$id2 && $qui=$qui2)) { 
+			$qui = intval($regs[1]); list($faire, $type, $id) = autorisations_cs_parse($regs[2]);
+			$qui2 = intval($regs[3]); list($faire2, $type2, $id2) = autorisations_cs_parse($regs[4]);
+			if($faire===-1 || $faire2===-1 || ($faire==$faire2 && $type==$type2 && $id==$id2 && $qui==$qui2)) { 
 				$erreurs .= "// #ERREUR : .$_a\n"; continue;
 			}
 			$if = $qui?"\$qui['id_auteur']==$qui":'';

@@ -11,15 +11,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 # Fichier de configuration pris en compte par config_outils.php et specialement dedie a la configuration des autorisations SPIP
 # -----------------------------------------------------------------------------------------------------------------------------
 
-// renvoie array($faire, $type, $id)
-function autorisations_parse($a) {
-	$a = explode(' ', trim(preg_replace(',\s+,',' ',preg_replace(',[^a-z0-9]+,i',' ',$a))), 3);
-	if(!$a[0] || is_integer($a[0])) return array(-1);
-	if(intval($a[2])) return array($a[0], $a[1], intval($a[2]));
-	if(intval($a[1])) return array('', $a[0], intval($a[1]));
-	return array($a[0], $a[1], 0);
-}
-
 function autorisations_action_rapide($actif) {
 	$res = $obj = $faire = array();
 	// les objets existants (SPIP>=3)
