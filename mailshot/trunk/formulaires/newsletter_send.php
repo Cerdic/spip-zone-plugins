@@ -13,6 +13,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function formulaires_newsletter_send_charger_dist($id_newsletter,$mode_test=false){
 
+	if (!autoriser('voir', 'mailshot', $id_newsletter))
+		return false;
+	
 	$valeurs = array(
 		'email_test' => $GLOBALS['visiteur_session']['email'],
 		'liste' => '',
@@ -30,7 +33,7 @@ function formulaires_newsletter_send_charger_dist($id_newsletter,$mode_test=fals
 	}
 
 	if (!$mode_test){
-		$lists = charger_fonction('lists','newsletter');
+		$lists = charger_fonction('lists', 'newsletter');
 		$valeurs['_listes_dispo'] = $lists();
 	}
 
@@ -38,7 +41,7 @@ function formulaires_newsletter_send_charger_dist($id_newsletter,$mode_test=fals
 }
 
 function mailshot_list_subscribers($list){
-	$subscribers = charger_fonction('subscribers','newsletter');
+	$subscribers = charger_fonction('subscribers', 'newsletter');
 	return $subscribers(array($list),array('count'=>true));
 }
 
@@ -139,4 +142,3 @@ function formulaires_newsletter_send_traiter_dist($id_newsletter,$mode_test=fals
 
 	return $res;
 }
-

@@ -13,6 +13,16 @@ function mailshot_autoriser(){}
 
 function autoriser_mailshot_iconifier_dist() {return false;}
 
+/*
+// TODO ?
+function autoriser_mailshot_voir_dist($faire,$quoi,$id,$qui){
+	// OK tout le monde ?
+	return true;
+	// Seulement les administrateurs ?
+	return autoriser('configurer',$quoi,$id,$qui);
+}
+*/
+
 function autoriser_mailshot_archiver_dist($faire,$quoi,$id,$qui){
 	if ($qui['statut']=='0minirezo'
 	  AND !$qui['restreint']
