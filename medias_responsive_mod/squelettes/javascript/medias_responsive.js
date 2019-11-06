@@ -12,7 +12,6 @@ function calculer_spip_documents() {
 		else t.width(width);
 		
 		if ( t.hasClass("spip_documents_right") || t.hasClass("spip_documents_left") ) {	
-			console.log(width+" - " + parent);
 			if (width > 0.6*parent) t.addClass("spip_documents_center_forcer").css("width", "auto");
 			else t.removeClass("spip_documents_center_forcer").css("width", width+"px");
 			
