@@ -54,45 +54,6 @@ function lim_verifier_presence_petitions() {
 }
 
 /**
- * si LIM est activé pour un objet et si une seule rubrique est activée, ne pas afficher le sélecteur de rubrique
- * surcharge de inc/chercher_rubrique.php
- * @return string
- *     Code HTML du sélecteur
- */
-function inc_chercher_rubrique($id_rubrique, $type, $restreint, $idem = 0, $do = 'aff') {
-	include_spip('inc/chercher_rubrique');
-	if (sql_countsel('spip_rubriques') < 1) {
-		return '';
-	}
-	/* surcharge */
-	$rubriques_restreintes = lire_config("lim_rubriques/$type");
-	if (!is_null($rubriques_restreintes)) {
-		$nbre_rubriques_total		= sql_countsel('spip_rubriques');
-		$nbre_rubriques_desactives	= count($rubriques_restreintes);
-
-		if ($nbre_rubriques_total - $nbre_rubriques_desactives <= 1) {
-			return '';
-		}
-	}
-	// note : du coup, plus de input name='id_parent' ! Un traitement via le pipeline "editer_contenu_objet" s'occupe de palier à ce problème.
-	/* fin surcharge */
-		
-
-	// Mode sans Ajax :
-	// - soit parce que le cookie ajax n'est pas la
-	// - soit parce qu'il y a peu de rubriques
-	if (_SPIP_AJAX < 1
-		or $type == 'breve'
-		or sql_countsel('spip_rubriques') < _SPIP_SELECT_RUBRIQUES
-	) {
-		return selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem);
-	} else {
-		return selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem, $do);
-	}
-
-}
-
-/**
  * Vérifier si il existe déjà des objets dans la rubrique
  * on renvoi un tableau avec le type et la table_objet
  * @param int $id_rubrique

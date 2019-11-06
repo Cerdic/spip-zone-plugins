@@ -51,7 +51,7 @@ function lim_afficher_config_objet($flux) {
  * 	->	#1.2 Sinon forcer la valeur vide pour 'id_parent'. Dans ce cas, le premier choix du selecteur de rubrique est vide, et si l'utilisateur ne choisit pas de rubrique il aura un retour en erreur sur un champ obligatoire (sauf dans le cas d'une rubrique qui se retrouvera à la racine).
  *
  * Cas #2 : objet non géré par la restriction par rubrique de LIM.
- * -> même traitement que pour le cas #1.2
+ * -> Vérifier que l'objet a comme parent une rubrique et si oui, même traitement que pour le cas #1.2
  *
  * @param array $flux
  * @return array $flux
@@ -64,12 +64,12 @@ function lim_formulaire_charger($flux) {
 	) {
 		$objet = substr($flux['args']['form'], 7); // 'editer_article' -> 'article'
 		$nom_table	= table_objet_sql($objet); // article -> spip_articles
-
 		$tableau_conf_lim_objet	= lire_config("lim_rubriques/$objet");
-		$nbre_rubriques = sql_countsel('spip_rubriques');
-		$nbre_rubriques_autorisees = $nbre_rubriques - count($tableau_conf_lim_objet);
+		
 
 		if (isset($tableau_conf_lim_objet)) {
+			$nbre_rubriques = sql_countsel('spip_rubriques');
+			$nbre_rubriques_autorisees = $nbre_rubriques - count($tableau_conf_lim_objet);
 
 			// Cas #0 : voir TODO's
 			// if ($nbre_rubriques_autorisees == 0) {
@@ -86,12 +86,16 @@ function lim_formulaire_charger($flux) {
 				$id_parent = '';
 			}
 		} else { // Cas #2
-			$id_parent = '';
+			// ici dans l'idéal, il faudrait utiliser l'API du plugin  Declarer_parent
+			$trouver_table = charger_fonction('trouver_table', 'base');
+			$desc = $trouver_table($nom_table);
+			if (isset($desc['field']['id_rubrique'])) {
+				$id_parent = '';
+			}
 		}
-		if ($id_parent) {
+
+		if (isset($id_parent)) {
 			$flux['data']['id_parent'] = $id_parent;
-		} else {
-			unset($flux['data']['id_parent']);
 		}
 	}
 
