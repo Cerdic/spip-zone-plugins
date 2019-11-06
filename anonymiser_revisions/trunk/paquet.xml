@@ -1,0 +1,17 @@
+<paquet
+	prefix="anonymiser_revisions"
+	categorie="maintenance"
+	version="0.1.0"
+	etat="stable"
+	compatibilite="[3.2.0;3.2.*]"
+>
+	<nom>Anonymisation des révisions</nom>
+	<!-- Générateur de formulaires -->
+
+	<auteur>Maïeul (depuis code communauté SPIP)</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<necessite nom="revisions" compatibilite="[1.9.4;[" />
+	<genie nom="anonymiser" periode="86400" />
+</paquet>
