@@ -5,6 +5,6 @@ CALSCALE:GREGORIAN
 PRODID:-//SPIP/Plugin #PLUGIN{AGENDA,nom}//NONSGML v1.0//FR
 X-WR-CALNAME;VALUE=TEXT:[(#NOM_SITE_SPIP|filtrer_ical)] -- Agenda[
 X-WR-CALDESC:(#DESCRIPTIF_SITE_SPIP|supprimer_tags|filtrer_ical)]
-X-WR-RELCALID:[(#URL_SITE_SPIP|filtrer_ical)]
-<INCLURE{fond=http/ical/inc-event,id_evenement} />
-END:VCALENDAR
+X-WR-RELCALID:[(#URL_SITE_SPIP|filtrer_ical)][
+(#INCLURE{fond=http/ical/inc-event,id_evenement})
+]END:VCALENDAR
