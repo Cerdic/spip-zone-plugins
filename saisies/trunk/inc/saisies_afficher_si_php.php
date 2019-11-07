@@ -36,14 +36,7 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 	if (!is_array($saisies)) {
 		return array();
 	}
-	// Economiser un peu de calcul, notamment pour formidable
-	static $precedent_saisies = array();
-	static $precedent_env = array();
-	if ($precedent_saisies == $saisies and $precedent_env == $env) {
-		return $saisies;
-	}
-	$precedent_saisies = $saisies;
-	$precedent_env = $env;
+
 	foreach ($saisies as $cle => $saisie) {
 		if (isset($saisie['options']['afficher_si'])) {
 			$condition = $saisie['options']['afficher_si'];
