@@ -1,19 +1,18 @@
 <paquet
 	prefix="prive_fluide_remix"
 	categorie="edition"
-	version="1.0.19"
+	version="1.0.20"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/prive_fluide_remix-64.png"
-	documentation="https://contrib.spip.net/5112"
 >
 
 	<nom>Espace privé plus large</nom>
 	<!--Adaptation du plugin prive_fluie de Tcharlss en largeur fixe-->
-	
+
 	<auteur>tcharlss, redimensionnement de l'espace privé</auteur>
 	<auteur>nicod_, remix typo, formulaires et autres</auteur>
 
 	<licence>GNU/GPL</licence>
-	
+
 </paquet>
