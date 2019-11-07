@@ -217,7 +217,9 @@ function cache_est_valide($plugin, $cache) {
 			// -- un délai de conservation est configuré pour les caches du plugin utilisateur mais il possible
 			//    de préciser un délai spécifique à un cache donné (index 'conservation' dans l'id du cache).
 			// -- si le délai est à 0 cela correspond à un cache dont la durée de vie est infinie.
-			$conservation = isset($cache['conservation']) ? $cache['conservation'] : $configuration['conservation'];
+			$conservation = is_array($cache) and isset($cache['conservation'])
+				? $cache['conservation']
+				: $configuration['conservation'];
 			if (($conservation > 0)
 			and (!filemtime($fichier_cache) or (time() - filemtime($fichier_cache) > $conservation))) {
 				$fichier_cache = '';
