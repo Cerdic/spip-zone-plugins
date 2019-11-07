@@ -19,9 +19,11 @@ function courtcircuit_url_redirection($id_rubrique) {
 			)
 		);
 		include_spip('public/styliser');
+		// SPIP 3+ avec sytliser par rubrique en plugin (si il est actif)
 		if(function_exists('squelettes_par_rubrique_styliser_par_rubrique'))
 			$flux = squelettes_par_rubrique_styliser_par_rubrique($flux);
-		else {
+		// SPIP 2.1 ?
+		elseif (function_exists('styliser_par_rubrique')) {
 			$flux = styliser_par_rubrique($flux);
 		}
 		if ($flux['data'] != $squelette_rubrique)

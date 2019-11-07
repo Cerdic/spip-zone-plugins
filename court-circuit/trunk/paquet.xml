@@ -1,7 +1,7 @@
 <paquet
 	prefix="courtcircuit"
 	categorie="outil"
-	version="2.5.1"
+	version="2.5.2"
 	etat="stable"
 	compatibilite="[2.1.0;3.2.*]"
 	logo="icon/courtcircuit-128.png"
