@@ -81,6 +81,7 @@ options:
         options:
           nom: 'afficher_si_remplissage_uniquement'
           label: '<:saisies:option_afficher_si_remplissage_uniquement_label:>'
+          label_case: '<:saisies:option_afficher_si_remplissage_uniquement_label_case:>'
           explication: '<:saisies:option_afficher_si_remplissage_uniquement_explication:>'
       -
         saisie: 'input'

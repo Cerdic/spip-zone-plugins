@@ -78,6 +78,7 @@ Vous trouverez la <a href="https://contrib.spip.net/5080" target="_blank">docume
 	'option_afficher_si_label' => 'Affichage conditionnel',
 	'option_afficher_si_remplissage_uniquement_explication' => 'En cochant cette case, l’affichage conditionnel s’appliquera uniquement lors du remplissage du formulaire, pas lors de l’affichage des résultats.',
 	'option_afficher_si_remplissage_uniquement_label' => 'Uniquement lors du remplissage',
+	'option_afficher_si_remplissage_uniquement_label_case' => 'Masquer les saisies uniquement lors du remplissage',
 	'option_attention_explication' => 'Un message plus important que l’explication.',
 	'option_attention_label' => 'Avertissement',
 	'option_attribut_title_label' => 'Mettre un attribut title dans le label, contenant la valeur du champ. À utiliser avec modération.',
