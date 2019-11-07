@@ -1,0 +1,8 @@
+--- # callback pour <colonne> !spip.yaml
+
+colonne:
+  # raccourci <colonne>
+  match: ['<colonne>', '</colonne>']
+  replace: ['<div class="spip_colonne">', '</div>']
+  if_str: '<colonne>'
+  type: str

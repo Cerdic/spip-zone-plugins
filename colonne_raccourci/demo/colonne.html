@@ -1,0 +1,52 @@
+<html>
+<head>
+	<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+	<title>Test colonnes</title>
+	[<meta name="description" content="(#INTRODUCTION{150}|attribut_html)" />]
+	[<link rel="canonical" href="(#URL_ARTICLE|url_absolue)" />]
+	[(#REM) Chargement de JQuery etc ]
+	#INSERT_HEAD
+	[(#REM) Chargement de la feuille de compilation scss, grille de 12 ]
+	[<link rel="stylesheet" href="(#CSS{css/spip_colonne.css})" type="text/css" />]
+	[(#REM) Chargement du javascript ajoutant les class aux colonnes ]
+	[<script src="(#CHEMIN{javascript/spip_colonne.js})" type="text/javascript"></script>]
+		
+	[(#REM) style scss propre à cette page, sans interaction avec les scripts ci-dessus]
+	<style type="text/css">
+	 .contain{width:80%; margin:1em auto;}
+	 .contain h1{font-size:160%; font-weight:bold; margin:1em 0;}
+	 .contain h2{font-size:140%; font-weight:bold; margin:1em 0;}
+	 .contain p{margin:1em 0;}
+	 .spip_colonne{border:1px solid orange}
+	</style>
+</head>
+
+<body>
+<div class="contain">
+	<h1>TEST colonnes</h1>
+	<p>
+	modifiez le texte d'un article en ajoutant des colonnes (voir exemple ci-dessous)<br>
+	puis inscrivez son id_article dans l'URL <a href="[(#SELF|parametre_url{id_article,163})]">[(#SELF|parametre_url{id_article,163})]</a><br>
+	</p>
+<div>
+<textarea readonly="readonly" cols="60" rows="7" dir="ltr">
+&lt;colonne&gt;colonne 1&lt;/colonne&gt;
+&lt;colonne&gt;colonne 2&lt;/colonne&gt;
+&lt;colonne&gt;colonne 3&lt;/colonne&gt;
+
+du texte en paragraphe
+
+&lt;colonne&gt;&lt;img5&gt; image colonne A&lt;/colonne&gt;
+&lt;colonne&gt;&lt;img6&gt; image colonne B&lt;/colonne&gt;</textarea>
+</div>
+
+<BOUCLE_principale(ARTICLES){id_article}>
+	
+			<h2>#TITRE</h2>
+			<div class="#EDIT_TEXTE">#TEXTE</a>
+			
+</BOUCLE_principale>
+
+	</div>
+</body>
+</html>
