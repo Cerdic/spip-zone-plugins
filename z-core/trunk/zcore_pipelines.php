@@ -70,7 +70,7 @@ function zcore_styliser($flux) {
  *
  * @return array
  */
-function zcore_recuperer_fond($flux) {
+function zcore_recuperer_fond_detecter_404($flux) {
 	static $empty_count = 0, $is_404 = false;
 	static $z_blocs_404, $z_blocs_404_nlength, $z_blocs_404_ncount;
 

@@ -28,6 +28,13 @@ if ($z = _request('var_zajax') AND !preg_match(",[^\w-],", $z)) {
 if (!isset($GLOBALS['spip_pipeline']['recuperer_fond'])) $GLOBALS['spip_pipeline']['recuperer_fond'] = '';
 $GLOBALS['spip_pipeline']['recuperer_fond'] .= '||zcore_recuperer_fond';
 
+function zcore_recuperer_fond($flux) {
+	if (!function_exists('zcore_recuperer_fond_detecter_404')) {
+		include_spip('zcore_pipelines');
+	}
+	return zcore_recuperer_fond_detecter_404($flux);
+}
+
 if (
 	defined('_SPIPR_AUTH_DEMO')?
 		_SPIPR_AUTH_DEMO
