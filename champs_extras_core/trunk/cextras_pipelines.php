@@ -166,7 +166,7 @@ function cextras_pre_edition($flux){
 		$saisies = champs_extras_autorisation('modifier', objet_type($table), $saisies, $flux['args']);
 		$saisies = champs_extras_saisies_lister_avec_sql($saisies);
 
-		// ne pas traiter les saisies obligatoires masquées par afficher_si
+		// ne pas enregister les saisies masquées par afficher_si
 		include_spip('inc/saisies_afficher_si');
 		$saisies = saisies_verifier_afficher_si($saisies);
 
