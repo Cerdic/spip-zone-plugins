@@ -129,11 +129,11 @@ function cache_lire($plugin, $cache) {
 	// Le cache peut-être fourni soit sous la forme d'un chemin complet soit sous la forme d'un
 	// tableau permettant de calculer le chemin complet. On prend en compte ces deux cas.
 	$fichier_cache = '';
+	include_spip('cache/cache');
 	if (is_array($cache)) {
 		// Détermination du chemin du cache :
 		// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
 		//   de la configuration du nom pour le plugin.
-		include_spip('cache/cache');
 		$fichier_cache = cache_cache_composer($plugin, $cache, $configuration);
 	} elseif (is_string($cache)) {
 		// Le chemin complet du fichier cache est fourni. Aucune vérification ne peut être faite
@@ -157,6 +157,9 @@ function cache_lire($plugin, $cache) {
 				$cache_lu = unserialize($contenu_cache);
 			} else {
 				$cache_lu = $contenu_cache;
+				if ($configuration['decodage']) {
+					$cache_lu = cache_cache_decoder($plugin, $cache_lu, $configuration);
+				}
 			}
 		}
 	}

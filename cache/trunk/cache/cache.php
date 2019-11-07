@@ -45,6 +45,7 @@ function cache_cache_configurer($plugin) {
 		'extension'       => '.txt',       // Extension du fichier cache (vaut .php si cache sécurisé)
 		'securisation'    => false,        // Indicateur de sécurisation du fichier
 		'serialisation'   => true,         // Indicateur de sérialisation
+		'decodage'        => true,         // Permet d'appliquer une fonction de décodage à la lecture qui dépend de l'extension
 		'conservation'    => 0             // Durée de conservation du cache en secondes. 0 pour permanent
 	);
 
@@ -62,6 +63,21 @@ function cache_cache_configurer($plugin) {
 	// On vérifie que la durée de conservation du cache est bien un entier supérieur ou égal à 0.
 	// La durée est exprimée en secondes.
 	$configuration['conservation'] = abs(intval($configuration['conservation']));
+
+	// On vérifie que la sérialisation et le décodage sont cohérents:
+	// - si une sérialisation est demandée, alors le décodage n'est pas possible.
+	if ($configuration['securisation']) {
+		$configuration['decodage'] = false;
+	}
+
+	// On vérifie que le décodage est valide et cohérent avec l'extension:
+	// - on ne peut décoder que des extensions json, xml et yaml.
+	if ($configuration['decodage']) {
+		if ((($configuration['extension'] == 'yaml') or ($configuration['extension'] == 'yml'))
+		and (!defined('_DIR_PLUGIN_YAML'))) {
+			$configuration['decodage'] = false;
+		}
+	}
 
 	// On vérifie l'indicateur de sécurisation : si le cache doit être sécurisé alors son extension
 	// doit absolument être .php. Si ce n'est pas le cas on la force.
@@ -262,6 +278,63 @@ function cache_cache_completer($plugin, $cache, $fichier_cache, $configuration) 
 	}
 
 	return $cache;
+}
+
+
+/**
+ * Décode le contenu du fichier cache en fonction de l'extension.
+ *
+ * Le plugin Cache Factory utilise des fonctions standard de PHP, SPIP ou du plugin YAML. Un plugin appelant peut
+ * proposer une fonction spécifique de décodage
+ *
+ * @uses cache_chercher_service()
+ *
+ * @param string $plugin
+ *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param string $contenu
+ *        Contenu du fichier cache au format chaine.
+ * @param array  $configuration
+ *        Configuration complète des caches du plugin utilisateur lue à partir de la meta de stockage.
+ *
+ * @return array
+ *         Contenu du cache décodé si la fonction idoine a été appliqué ou tel que fourni en entrée sinon.
+ */
+function cache_cache_decoder($plugin, $contenu, $configuration) {
+
+	// Cache Factory décode le contenu du fichier cache en fonction de l'extension (json, yaml, yml ou xml).
+	$encodage = ltrim($configuration['extension'], '.');
+
+	// Le plugin utilisateur peut fournir un service propre pour décoder le contenu du cache.
+	// Néanmoins, étant donné la généricité du mécanisme offert par le plugin Cache cela devrait être rare.
+	if ($decoder = cache_chercher_service($plugin, "cache_decoder_${encodage}")) {
+		$contenu = $decoder($plugin, $contenu);
+	} else {
+		// Utilisation des fonctions génériques de Cache Factory
+		switch ($encodage) {
+			case 'json':
+				// On utilise la fonction PHP native
+				$contenu = json_decode($contenu, true);
+				break;
+			case 'yaml':
+			case 'yml':
+				// On utilise la fonction du plugin YAML si il est actif (un jour on l'aura dans SPIP...)
+				if (!defined('_DIR_PLUGIN_YAML')) {
+					include_spip('inc/yaml');
+					$contenu = yaml_decode($contenu);
+				}
+				break;
+			case 'xml':
+				// On utilise la fonction historique de SPIP sachant qu'il en existe d'autre. Pour changer il suffit
+				// d'utiliser une fonction spécifique du plugin appelant.
+				include_spip('inc/xml');
+				$contenu = spip_xml_parse($contenu, true);
+				break;
+			default:
+		}
+	}
+
+	return $contenu;
 }
 
 
