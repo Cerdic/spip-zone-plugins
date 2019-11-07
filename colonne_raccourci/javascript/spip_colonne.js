@@ -47,11 +47,11 @@ $(document).ready(function(){
 					if(count == 2 ){
 						$(this).children('.spip_colonne').addClass('col-6 col-12-small');
 					} else if (count == 3 ){
-						$(this).children('.spip_colonne').addClass('col-4 col-12-small');
+						$(this).children('.spip_colonne').addClass('col-4 col-12-medium');
 					} else if (count == 4 ){
-						$(this).children('.spip_colonne').addClass('col-3 col-12-small');
+						$(this).children('.spip_colonne').addClass('col-3 col-12-medium');
 					} else if (count >= 5 ){
-						$(this).children('.spip_colonne').addClass('col-2 col-12-small');
+						$(this).children('.spip_colonne').addClass('col-2 col-12-medium');
 					}
 		});
 				
