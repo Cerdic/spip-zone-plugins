@@ -69,9 +69,8 @@
             #CONFIG{sdc/#ENV{bloc,defaut}/font-family,Open Sans}<br>
             #ENV{font-family}<br/>
             #ENV{font-family-perso}<br/>
-            #SET{font-family, #ENV{font-family}|=={perso}|?{#ENV{font-family-perso},#ENV{font-family}}}
             #GET{font-family}
-            ]
+            ]#SET{font-family, #ENV{font-family}|=={perso}|?{#ENV{font-family-perso},#ENV{font-family}}}
             <h1 class="gwf" style="font-family: #GET{font-family};font-weight: #CONFIG{sdc/#ENV{bloc,defaut}/font-weight,normal};">[(#NOM_SITE_SPIP)]</h1>
             [<p class="gwf" style="font-family: #GET{font-family}; ">(#NOM_SITE_SPIP|strtolower|ucfirst)</p>]
         </div>

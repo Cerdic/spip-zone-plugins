@@ -1,7 +1,7 @@
 <paquet
 	prefix="sdc"
 	categorie="maintenance"
-	version="0.1.9"
+	version="0.1.10"
 	etat="dev"
 	compatibilite="[3.0.17;3.2.*]"
 	logo="prive/themes/spip/images/sdc-128.png"
