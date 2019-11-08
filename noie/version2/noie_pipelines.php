@@ -1,7 +1,7 @@
 <?php
 
 # inserer la campagne dans la page
-function noie_affichage_final(&$page) {
+function noie_affichage_final($page) {
 	// ne pas se fatiguer si pas HTML ou pas IE
 	if (!($GLOBALS['html']
 	AND ((strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'msie')
