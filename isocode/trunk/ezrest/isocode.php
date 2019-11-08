@@ -75,7 +75,7 @@ function pays_verifier_filtre_region($region, &$erreur) {
 
 	if (!preg_match('#^[0-9]{3}$#', $region)) {
 		$est_valide = false;
-		$erreur['extra'] = _T('isocode:extra_critere_region');
+		$erreur['type'] = 'region_nok';
 	}
 
 	return $est_valide;
@@ -99,7 +99,7 @@ function pays_verifier_filtre_continent($continent, &$erreur) {
 
 	if (!preg_match('#^[A-Z]{2}$#', $continent)) {
 		$est_valide = false;
-		$erreur['extra'] = _T('isocode:extra_critere_continent');
+		$erreur['type'] = 'continent_nok';
 	}
 
 	return $est_valide;

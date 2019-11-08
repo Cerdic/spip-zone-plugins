@@ -30,6 +30,10 @@ function isocode_liste_ezcollection($collections) {
 	$collections['subdivisions'] = array(
 		'ressource' => 'prefixe',
 		'module'    => 'isocode',
+		'cache'     => array(
+			'type'  => 'ezrest',
+			'duree' => 3600 * 24 * 30
+		),
 		'filtres'   => array(
 			array(
 				'critere'         => 'pays',
@@ -41,6 +45,10 @@ function isocode_liste_ezcollection($collections) {
 	$collections['pays'] = array(
 		'ressource' => 'code_alpha2',
 		'module'    => 'isocode',
+		'cache'     => array(
+			'type'  => 'ezrest',
+			'duree' => 3600 * 24 * 30
+		),
 		'filtres'   => array(
 			array(
 				'critere'         => 'region',
@@ -59,11 +67,19 @@ function isocode_liste_ezcollection($collections) {
 
 	$collections['regions'] = array(
 		'module'  => 'isocode',
+		'cache'     => array(
+			'type'  => 'ezrest',
+			'duree' => 3600 * 24 * 30
+		),
 		'filtres' => array()
 	);
 
 	$collections['continents'] = array(
 		'module'  => 'isocode',
+		'cache'     => array(
+			'type'  => 'ezrest',
+			'duree' => 3600 * 24 * 30
+		),
 		'filtres' => array()
 	);
 

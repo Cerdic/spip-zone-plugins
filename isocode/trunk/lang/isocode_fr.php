@@ -10,12 +10,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_isocode'                => 'Codes ISO',
 
 	// E
-	'erreur_charger_table'          => 'Une erreur s\'est produite lors du chargement de la ou des tables « @tables@ ».',
-	'erreur_decharger_table'        => 'Une erreur s\'est produite lors du vidage de la ou des tables « @tables@ ».',
-	'explication_action_table'      => 'Si la table est déjà chargée en base de données elle sera vidée avant le chargement.',
+	'erreur_400_region_nok_titre'      => 'La région d\'identifiant « @valeur@ » est invalide',
+	'erreur_400_region_nok_message'    => 'La région doit être désignée par son identifiant UN M49 (3 chiffres)',
+	'erreur_400_continent_nok_titre'   => 'Le continent d\'identifiant « @valeur@ » est invalide',
+	'erreur_400_continent_nok_message' => 'Le continent doit être désignée par son identifiant GeoIP (2 lettres)',
+	'erreur_charger_table'             => 'Une erreur s\'est produite lors du chargement de la ou des tables « @tables@ ».',
+	'erreur_decharger_table'           => 'Une erreur s\'est produite lors du vidage de la ou des tables « @tables@ ».',
+	'explication_action_table'         => 'Si la table est déjà chargée en base de données elle sera vidée avant le chargement.',
 
 	// I
-	'info_table_chargee'            => 'chargée',
+	'info_table_chargee'               => 'chargée',
 
 	// L
 	'label_action_charger_table'       => 'Charger une table',
