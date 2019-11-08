@@ -27,9 +27,15 @@ function svpapi_liste_ezcollection($collections) {
 	}
 
 	// Les index désignent les collections, le tableau associé contient les filtres admissibles.
+	// -- on cale la durée des caches sur la récurrence de mise à jour du référentiel des plugins.
+	include_spip('genie/svp_taches_generales_cron');
 	$collections['plugins'] = array(
-		'ressource' => 'prefixe',
 		'module'    => 'svpapi',
+		'ressource' => 'prefixe',
+		'cache'     => array(
+			'type'  => 'ezrest',
+			'duree' => 3600 * _SVP_PERIODE_ACTUALISATION_DEPOTS
+		),
 		'filtres'   => array(
 			array(
 				'critere'         => 'compatible_spip',
@@ -40,6 +46,10 @@ function svpapi_liste_ezcollection($collections) {
 
 	$collections['depots'] = array(
 		'module'  => 'svpapi',
+		'cache'     => array(
+			'type'  => 'ezrest',
+			'duree' => 3600 * _SVP_PERIODE_ACTUALISATION_DEPOTS
+		),
 		'filtres' => array(
 			array(
 				'critere'         => 'type',
