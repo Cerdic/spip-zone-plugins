@@ -73,8 +73,20 @@ function http_ezrest_get_index_dist($requete, $reponse) {
 	$declarer = charger_fonction('ezrest_declarer_collections', 'inc');
 	$collections = $declarer();
 
-	// On construit l'index des collections disponibles.
-	$contenu['donnees'] = ezrest_indexer($collections);
+	// Identification du cache pour l'index.
+	$cache = ezrest_cache_identifier('', 'index');
+
+	include_spip('inc/cache');
+	if ($fichier_cache = cache_est_valide('ezrest', $cache))	{
+		// Lecture des données du fichier cache valide et peuplement de l'index données
+		$contenu['donnees'] = cache_lire('ezrest', $fichier_cache);
+	} else {
+		// On construit l'index des collections disponibles.
+		$contenu['donnees'] = ezrest_indexer($collections);
+
+		// Mise en cache de l'index
+		cache_ecrire('ezrest', $cache, json_encode($contenu['donnees']));
+	}
 
 	// Construction de la réponse finale
 	$reponse = ezrest_reponse_construire($reponse, $contenu);
@@ -132,24 +144,53 @@ function http_ezrest_get_collection_dist($requete, $reponse) {
 			// -> Vérification des filtres éventuels.
 			$filtres = $contenu['requete']['filtres'];
 			if (ezrest_collection_verifier_filtre($plugin, $filtres, $collection, $configuration, $erreur)) {
-				// -- on construit le tableau des conditions SQL déduites des filtres.
-				$conditions = ezrest_conditionner(
-					$plugin,
-					$collection,
-					$filtres,
-					$configuration
-				);
+				// On identifie la méthode récupération des données configurée pour cette collection :
+				// - soit c'est une fonction php et alors on gère un cache propre au plugin REST Factory (ezrest).
+				//   C'est la valeur par défaut.
+				// - soit c'est un squelette et on utilise les caches SPIP (spip).
+				$methode_cache = !empty($configuration['cache']['type'])
+					? $configuration['cache']['type']
+					: 'ezrest';
+				if ($methode_cache == 'ezrest') {
+					// Identification du cache
+					$cache = ezrest_cache_identifier(
+						$plugin,
+						'collection',
+						$collection,
+						$filtres,
+						$configuration
+					);
 
-				// -- on construit le contenu de la collection en fournissant le tableau des conditions SQL mais
-				//    aussi celui des filtres car il est possible que le plugin utilisateur en ait besoin pour rajouter
-				//    des éléments dans le contenu.
-				$contenu['donnees'] = ezrest_collectionner(
-					$plugin,
-					$collection,
-					$conditions,
-					$filtres,
-					$configuration
-				);
+					include_spip('inc/cache');
+					if ($fichier_cache = cache_est_valide('ezrest', $cache))	{
+						// Lecture des données du fichier cache valide et peuplement de l'index données
+						$contenu['donnees'] = cache_lire('ezrest', $fichier_cache);
+					} else {
+						// -- on construit le tableau des conditions SQL déduites des filtres.
+						$conditions = ezrest_conditionner(
+							$plugin,
+							$collection,
+							$filtres,
+							$configuration
+						);
+
+						// -- on construit le contenu de la collection en fournissant le tableau des conditions SQL mais
+						//    aussi celui des filtres car il est possible que le plugin utilisateur en ait besoin pour rajouter
+						//    des éléments dans le contenu.
+						$contenu['donnees'] = ezrest_collectionner(
+							$plugin,
+							$collection,
+							$conditions,
+							$filtres,
+							$configuration
+						);
+
+						// Mise à jour du cache
+						cache_ecrire('ezrest', $cache, json_encode($contenu['donnees']));
+					}
+				} else {
+					// On utilise le squelette fourni par le plugin utilisateur
+				}
 
 				// -- on complète éventuellement le contenu de la collection.
 				if ($contenu['donnees']) {
@@ -229,12 +270,37 @@ function http_ezrest_get_ressource_dist($requete, $reponse) {
 			// Vérification de la ressource
 			$ressource = $contenu['requete']['ressource'];
 			if (ezrest_collection_verifier_ressource($plugin, $ressource, $collection, $configuration, $erreur)) {
-				// -- on construit le contenu de la collection.
-				$contenu['donnees'] = ezrest_ressourcer(
-					$plugin,
-					$collection,
-					$ressource
-				);
+				// On identifie la méthode récupération des données configurée pour cette collection :
+				// - soit c'est une fonction php et alors on gère un cache propre au plugin REST Factory (ezrest). Choix
+				//   par défaut.
+				// - soit c'est une squelette et on utilise les caches SPIP (spip).
+				$methode_cache = !empty($configuration['cache']['type'])
+					? $configuration['cache']['type']
+					: 'ezrest';
+				if ($methode_cache == 'ezrest') {
+					// Identification du cache
+					$cache = ezrest_cache_identifier(
+						$plugin,
+						'ressource',
+						$collection,
+						$ressource,
+						$configuration
+					);
+
+					include_spip('inc/cache');
+					if ($fichier_cache = cache_est_valide('ezrest', $cache))	{
+						// Lecture des données du fichier cache valide et peuplement de l'index données
+						$contenu['donnees'] = cache_lire('ezrest', $fichier_cache);
+					} else {
+						// -- on construit le contenu de la collection.
+						$contenu['donnees'] = ezrest_ressourcer($plugin, $collection, $ressource);
+
+						// Mise à jour du cache
+						cache_ecrire('ezrest', $cache, json_encode($contenu['donnees']));
+					}
+				} else {
+					// On utilise le squelette fourni par le plugin utilisateur
+				}
 
 				// -- on complète éventuellement le contenu de la collection.
 				if ($contenu['donnees']) {

@@ -24,11 +24,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function ezrest_cache_configurer($plugin) {
 
 	// Initialisation du tableau de configuration avec les valeurs par défaut du plugin Cache.
+	// -- Pas de cache pour l'index des collections
 	$configuration = array(
 		'racine'          => '_DIR_VAR',
 		'sous_dossier'    => true,
-		'nom_obligatoire' => array('requete'),
-		'nom_facultatif'  => array('hash'),
+		'nom_obligatoire' => array('type_requete'),
+		'nom_facultatif'  => array('collection', 'hash'),
 		'extension'       => '.json',
 		'securisation'    => false,
 		'serialisation'   => false,

@@ -525,6 +525,53 @@ function ezrest_indexer($collections) {
 	return $contenu;
 }
 
+
+/**
+ * @param string $plugin
+ * @param string $type_requete
+ * @param string $collection
+ * @param mixed  $complement
+ * @param array  $configuration
+ *
+ * @return array
+ */
+function ezrest_cache_identifier($plugin, $type_requete, $collection = '', $complement = '', $configuration = array()) {
+
+	// Initialisation du tableau d'identification du cache
+	$cache = array();
+
+	// Mise à jour du sous-dossier en fonction du plugin et du type de requete
+	$cache['sous_dossier'] = ($type_requete != 'index') ? $plugin : $type_requete;
+
+	// Elements du nom du cache
+	// -- le type de requête est toujours le préfixe du nom :
+	$cache['type_requete'] = $type_requete;
+	// -- Si le cache n'est pas celui de l'index on complète le nom avec la collection et un hash sur le complément
+	//    qui est soit l'identifiant d'une ressource soit un tableau des filtres.
+	if ($type_requete != 'index') {
+		$cache['collection'] = $collection;
+		if (is_string($complement)) {
+			$cache['hash'] = $complement;
+		} elseif (is_int($complement)) {
+			$cache['hash'] = strval($complement);
+		} elseif (is_array($complement)) {
+			$hash = '';
+			foreach ($complement as $_critere => $_valeur) {
+				$hash .= "${_critere}${_valeur}";
+			}
+			$cache['hash'] = md5($hash);
+		}
+	}
+
+	// Durée de conservation du cache : si précisée pour la collection on l'utilise sinon on utilise la valeur
+	// par défaut des caches REST Factory (1 jour).
+	if (isset($configuration['cache']['duree'])) {
+		$cache['conservation'] = $configuration['cache']['duree'];
+	}
+
+	return $cache;
+}
+
 /**
  * @param $plugin
  * @param $collection
