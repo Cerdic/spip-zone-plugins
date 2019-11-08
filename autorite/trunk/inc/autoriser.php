@@ -157,6 +157,8 @@ if (isset($GLOBALS['autorite']['espace_wiki_motsclef'])) {
 	if (!function_exists('autorisation_wiki_motsclef_visiteur')) {
 		function autorisation_wiki_motsclef_visiteur($qui, $id_article) {
 
+			$array_mot = [];
+
 			//determine les mots clef affectés à l'article
 			if (intval($GLOBALS['spip_version_branche'])<3)
 			  $s = spip_query("SELECT id_mot FROM spip_mots_articles WHERE id_article=".$id_article);
@@ -169,7 +171,7 @@ if (isset($GLOBALS['autorite']['espace_wiki_motsclef'])) {
 			}
 
 			//aucun mot clef d'affecter à  l'article, rien Ã  faire
-			if (is_null($array_mot))
+			if (!$array_mot)
 				return false;
 
 			//vérification que l'article possède un mot clef correspondant au staut du visiteur
