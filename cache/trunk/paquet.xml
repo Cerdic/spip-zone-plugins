@@ -1,7 +1,7 @@
 <paquet
 	prefix="cache"
 	categorie="outil"
-	version="0.4.2"
+	version="0.4.3"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="cache_logo-64.png"

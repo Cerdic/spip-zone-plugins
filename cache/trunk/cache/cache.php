@@ -163,7 +163,14 @@ function cache_cache_composer($plugin, $cache, $configuration) {
 		if ($dir_cache) {
 			foreach ($configuration['nom'] as $_composant) {
 				if (isset($cache[$_composant])) {
-					$nom_cache .= ($nom_cache ? $configuration['separateur'] : '') . $cache[$_composant];
+					if (!$nom_cache) {
+						// Il y a forcément un composant non vide en premier.
+						$nom_cache .= $cache[$_composant];
+					} elseif ($cache[$_composant]
+						or (!$cache[$_composant] and in_array($_composant, $configuration['nom_obligatoire']))) {
+						// Le composant est à ajouter : non vide ou vide mais obligatoire (cas bizarre!)
+						$nom_cache .= $configuration['separateur'] . $cache[$_composant];
+					}
 				}
 			}
 		}
