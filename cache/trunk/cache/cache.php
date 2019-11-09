@@ -45,7 +45,7 @@ function cache_cache_configurer($plugin) {
 		'extension'       => '.txt',       // Extension du fichier cache (vaut .php si cache sécurisé)
 		'securisation'    => false,        // Indicateur de sécurisation du fichier
 		'serialisation'   => true,         // Indicateur de sérialisation
-		'decodage'        => true,         // Permet d'appliquer une fonction de décodage à la lecture qui dépend de l'extension
+		'decodage'        => false,        // Permet d'appliquer une fonction de décodage à la lecture qui dépend de l'extension
 		'conservation'    => 0             // Durée de conservation du cache en secondes. 0 pour permanent
 	);
 
