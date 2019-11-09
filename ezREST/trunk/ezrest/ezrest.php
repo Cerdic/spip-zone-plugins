@@ -559,11 +559,11 @@ function ezrest_cache_identifier($plugin, $type_requete, $collection = 'collecti
 			$cache['complement'] = strval($complement);
 		} elseif (is_array($complement)) {
 			// Filtres d'une collection
-			$hash = '';
+			$filtres = '';
 			foreach ($complement as $_critere => $_valeur) {
-				$hash .= "${_critere}_${_valeur}__";
+				$filtres .= "${_critere}_${_valeur}__";
 			}
-			$cache['complement'] = rtrim($hash, '__');
+			$cache['complement'] = rtrim($filtres, '__');
 		}
 	}
 

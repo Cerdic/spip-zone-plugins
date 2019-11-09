@@ -77,7 +77,7 @@ function ezrest_formulaire_charger($plugin, $configuration) {
 				if ($_type == 'ressource') {
 					$caches[$_cle]['ressource'] = $_cache['complement'];
 				} else {
-					// On traite le hash pour un affichage plus clair
+					// On traite le complément des filtres pour un affichage plus clair
 					$caches[$_cle]['filtre'] = !empty($_cache['complement'])
 						? str_replace(array('__', '_'), array(' | ', '='), $_cache['complement'])
 						: '';
