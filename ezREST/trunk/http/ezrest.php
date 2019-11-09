@@ -74,7 +74,7 @@ function http_ezrest_get_index_dist($requete, $reponse) {
 	$collections = $declarer();
 
 	// Identification du cache pour l'index.
-	$cache = ezrest_cache_identifier('', 'index');
+	$cache = ezrest_cache_identifier('ezrest', 'index');
 
 	include_spip('inc/cache');
 	if ($fichier_cache = cache_est_valide('ezrest', $cache))	{

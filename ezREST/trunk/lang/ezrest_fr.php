@@ -25,4 +25,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_400_critere_obligatoire_nok_titre'         => 'Le critère « @valeur@ » est obligatoire',
 	'erreur_400_ressource_indisponible_message'        => 'L\'API ne fournit des ressources que pour les collections suivantes : @extra@.',
 	'erreur_400_ressource_indisponible_titre'          => 'La collection « @collection@ » n\'autorise pas l\'accès à une ressource',
+
+	// T
+	'type_requete_index_titre'                         => 'Index des collections',
+	'type_requete_collection_titre'                    => 'Collections',
+	'type_requete_ressource_titre'                     => 'Ressources',
 );

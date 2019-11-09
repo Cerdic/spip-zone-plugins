@@ -535,31 +535,35 @@ function ezrest_indexer($collections) {
  *
  * @return array
  */
-function ezrest_cache_identifier($plugin, $type_requete, $collection = '', $complement = '', $configuration = array()) {
+function ezrest_cache_identifier($plugin, $type_requete, $collection = 'collections', $complement = '', $configuration = array()) {
 
 	// Initialisation du tableau d'identification du cache
 	$cache = array();
 
 	// Mise à jour du sous-dossier en fonction du plugin et du type de requete
-	$cache['sous_dossier'] = ($type_requete != 'index') ? $plugin : $type_requete;
+	$cache['sous_dossier'] = $plugin;
 
 	// Elements du nom du cache
-	// -- le type de requête est toujours le préfixe du nom :
+	// -- le type de requête est toujours le préfixe du nom et la collection est mise à 'collections' si le
+	//    type de requête est l'index.
 	$cache['type_requete'] = $type_requete;
-	// -- Si le cache n'est pas celui de l'index on complète le nom avec la collection et un hash sur le complément
-	//    qui est soit l'identifiant d'une ressource soit un tableau des filtres.
+	$cache['collection'] = $collection;
+	// -- Si le cache n'est pas celui de l'index on complète le nom avec soit l'identifiant d'une ressource
+	//    soit un représentation des filtres.
 	if ($type_requete != 'index') {
-		$cache['collection'] = $collection;
 		if (is_string($complement)) {
-			$cache['hash'] = $complement;
+			// Identifiant de ressource au format chaine
+			$cache['complement'] = $complement;
 		} elseif (is_int($complement)) {
-			$cache['hash'] = strval($complement);
+			// Identifiant de ressource au format entier
+			$cache['complement'] = strval($complement);
 		} elseif (is_array($complement)) {
+			// Filtres d'une collection
 			$hash = '';
 			foreach ($complement as $_critere => $_valeur) {
-				$hash .= "${_critere}${_valeur}";
+				$hash .= "${_critere}_${_valeur}__";
 			}
-			$cache['hash'] = md5($hash);
+			$cache['complement'] = rtrim($hash, '__');
 		}
 	}
 
