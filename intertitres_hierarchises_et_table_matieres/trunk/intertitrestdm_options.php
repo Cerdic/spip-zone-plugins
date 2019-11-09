@@ -54,7 +54,7 @@ if (!defined('_ANCHOR_LEN_MAX')) {
 	define('_ANCHOR_LEN_MAX', 35);
 }
 
-function IntertitresTdm_table_des_matieres($texte, $tableseule = false, $url_article = '') {
+function IntertitresTdm_table_des_matieres($texte, $tableseule=false, $url_article='') {
 	static $pass = 0;
 	$pass++;
 
@@ -84,26 +84,24 @@ function IntertitresTdm_table_des_matieres($texte, $tableseule = false, $url_art
 	}
 
 	// on cherche les noms de section commençant par des * et #
-	$my_debut_intertitre=trim($GLOBALS['debut_intertitre']); //astuce des trim trouvée là : https://contrib.spip.net/Generation-automatique-de#forum383092
-	$my_fin_intertitre=trim($GLOBALS['fin_intertitre']);
+	// astuce des trim trouvée là : https://contrib.spip.net/Generation-automatique-de#forum383092
+	$my_debut_intertitre = trim($GLOBALS['debut_intertitre']);
+	$my_fin_intertitre = trim($GLOBALS['fin_intertitre']);
 
 	// pour que les différents niveaux d'intertitres soient gérés quand on repasse sur le texte dans le cadre d'un filtre avec tableseule
 	if ($tableseule) {
-		$my_debut_intertitre=trim("\n<h([3-9]) class=\"spip\">");
-		$my_fin_intertitre=trim("</h[3-9]>\n");
+		$my_debut_intertitre = trim("\n<h([3-9]) class=\"spip\">");
+		$my_fin_intertitre = trim("</h[3-9]>\n");
 	}
 
 	// on cherche les noms de section commençant par des * et #
 	$count = preg_match_all(
 		// préserver les liens éventuels présents dans le titre
-		// A vérifier le $ref qui semblait s'en servir ?
+		// À vérifier le $ref qui semblait s'en servir ?
 		//"(($my_debut_intertitre([\\*#]*)(.*?)(<(.*?)>)?$my_fin_intertitre))",
 		"(($my_debut_intertitre([\\*#]*)(.*?)$my_fin_intertitre))",
-		$texte,
-		$matches
+		$texte, $matches
 	);
-
-	$table = '';
 
 	//initialisation du compteur
 	$cnt[0] = 0;
@@ -127,7 +125,7 @@ function IntertitresTdm_table_des_matieres($texte, $tableseule = false, $url_art
 
 		// quand tableseule, le niveau est "recréé" à partir du nombre du headline (ex <h4> donne niveau 2)
 		if ($tableseule) {
-			$level=str_repeat('*', $matches[2][$j]-2);
+			$level = str_repeat('*', $matches[2][$j]-2);
 		}
 
 		// pour tenir compte des {{{ }}} sans * ou # et donc qu'un name
@@ -146,7 +144,7 @@ function IntertitresTdm_table_des_matieres($texte, $tableseule = false, $url_art
 
 		// Si tableseule alors on vire les <a id=''></a> des titres
 		if ($tableseule) {
-			$titre=preg_replace("/(<a id=')(.*?)('><\/a>)/", '', $titre);
+			$titre = preg_replace("#(<a id=')(.*?)('></a>)#", '', $titre);
 		}
 		if (isset($matches[5+$ajout])) {
 			$ref = $matches[5+$ajout][$j];
@@ -155,24 +153,24 @@ function IntertitresTdm_table_des_matieres($texte, $tableseule = false, $url_art
 		// si tableseule alors le $ref correspond au contenu du <a id=''></a>... Je sais pas si ça marche: pas testé ! :o)
 		if ($tableseule) {
 			preg_match(
-				"/(<a id=')(.*?)(' id=')(.*?)('><\/a>)/",
+				"#(<a id=')(.*?)(' id=')(.*?)('></a>)#",
 				$matches[3+$ajout][$j],
 				$tsmatches
 			);
 			$ref=$tsmatches[2];
 		}
-		//spip_log('ref: '.$ref,'itdm');
+		#spip_log('ref: '.$ref, 'itdm');
 
 		if (strlen($level) == 1) {
-			//on est au niveau de base
-			//on réinitialise les compteurs
+			// on est au niveau de base
+			// on réinitialise les compteurs
 			$cnt = array_slice($cnt, 0, 1);
 
-			//on génère le titre et le numéros
+			// on génère le titre et le numéros
 			$numeros = ++$cnt[0];
 
 			// on teste si le level contient des # pour savoir si l'on affiche les
-			//numéros avec le titre ou non (#->numéros affichés)
+			// numéros avec le titre ou non (#->numéros affichés)
 			if (preg_match('/#+/', $level)) {
 				$titre = $numeros.'- '.$titre;
 			}
@@ -187,25 +185,25 @@ function IntertitresTdm_table_des_matieres($texte, $tableseule = false, $url_art
 			// On réinitialise les niveaux inférieurs:
 			$cnt = array_slice($cnt, 0, $i+1);
 
-			//on génère le titre
-			//on teste si le level contient des # pour savoir si l'on affiche les
-			//numéros avec le titre ou non (#->numéros affichés)
+			// on génère le titre
+			// on teste si le level contient des # pour savoir si l'on affiche les
+			// numéros avec le titre ou non (#->numéros affichés)
 			if (preg_match('/#+/', $level)) {
 				$titre = $numeros.'- '.$titre;
 			}
 		}
 
-		//gestion de la liste dans la table
+		// gestion de la liste dans la table
 		if ($lastlevel < strlen($level)) {
-			//on ouvre une sous liste
+			// on ouvre une sous liste
 			$table .= "<ul>\n";
 		}
 
 		if ($lastlevel > strlen($level)) {
-			//on doit fermer les derniers niveaux
+			// on doit fermer les derniers niveaux
 			for ($i=0; $i < ($lastlevel - strlen($level)); $i++) {
 				if ($i+1 == $lastlevel) {
-					$table .= "\n</div></ins>";	// derniere fermeture
+					$table .= "\n</div>"; // derniere fermeture
 				} else {
 					$table .= "</li>\n</ul>";
 				}
@@ -213,38 +211,35 @@ function IntertitresTdm_table_des_matieres($texte, $tableseule = false, $url_art
 		}
 
 		if ($lastlevel >= strlen($level)) {
-			//on doit fermer l'item précédent
+			// on doit fermer l'item précédent
 			if ($cnt[0] > 1 || strlen($level) > 1) {
 				$table .= "</li>\n";
 			}
 		}
 
-		//on se rappelle du raccourcis
+		// on se rappelle du raccourcis
 		if (isset($ref)) {
 			$cite[$ref] = $numeros;
 		}
-		//$table .= "<li><a href=\"$url_article#a$numeros\" title=\"Aller directement &agrave; &laquo;&nbsp;".attribut_html($titre)."&nbsp;&raquo;\">$titre</a>";
 		$table .= "<li><a href=\"$url_article#$ancre\" title=\""
 			. _T('itdm:aller_directement_a_', array('titre'=>attribut_html($titre)))
 			. "\">$titre_lien</a>"
 			;
 
-		//on mémorise le niveau de ce titre
+		// on mémorise le niveau de ce titre
 		$lastlevel = strlen($level);
 
-		//on génère la balise avec le bon style pour le niveau
-		//et on ajoute $level_base à $lastlevel pour avoir des <hx> qui commencent à <h{$level_base}>
+		// on génère la balise avec le bon style pour le niveau
+		// et on ajoute $level_base à $lastlevel pour avoir des <hx> qui commencent à <h{$level_base}>
 		$mdebut_intertitre = str_replace('%num%', $lastlevel+$level_base, $css_debut_intertitre);
 		$mfin_intertitre = str_replace('%num%', $lastlevel+$level_base, $css_fin_intertitre);
 
-		/**
-		 * Remplacer la première occurence.
-		 * Permet d'avoir plusieurs inter-titres au contenu identique.
-		 */
+		// Remplacer la première occurence.
+		// Permet d'avoir plusieurs inter-titres au contenu identique.
 		$search = str_replace("'", '\'', $matches[0][$j]);
 
 		if ($ancre && $search && (($pos = strpos($texte, $search)) !== false)) {
-			//spip_log ('search: '.$search.' pos: '.$pos,'itdm');
+			#spip_log ('search: '.$search.' pos: '.$pos,'itdm');
 
 			$len_search = strlen($search);
 			$s = substr($texte, 0, $pos);
@@ -261,12 +256,12 @@ function IntertitresTdm_table_des_matieres($texte, $tableseule = false, $url_art
 		}
 	}
 
-	//on finit la table
+	// on finit la table
 	for ($i=0; $i < $lastlevel; $i++) {
 		$table .= "</li>\n</ul>";
 	}
 
-	//on remplace les raccourcis par les numéros des sections.
+	// on remplace les raccourcis par les numéros des sections.
 	foreach ($cite as $ref => $num) {
 		$texte = str_replace("<$ref>", "<a href=\"$url_article#$num\">$num</a>", $texte);
 	}
@@ -274,14 +269,15 @@ function IntertitresTdm_table_des_matieres($texte, $tableseule = false, $url_art
 	// ajout d'un div plus propre !
 	$table .="\n</div>";
 
-	//on place la table des matières dans le texte
-	//si y'a rien, ben on envoie rien !
+	// on place la table des matières dans le texte
+	// si y'a rien, ben on envoie rien !
 	if ($cnt[0]==0) {
 		$table = '';
 	}
 
-	// Comme la TDM est désormais affichée de manière externe aux articles, si un auteur met #TABLEMATIERES dans son article, celà crée un lien vers la TDM externe, d'où un remplacement de:
-	//$texte = str_replace('#TABLEMATIERES',$table,$texte); par:
+	// Comme la TDM est désormais affichée de manière externe aux articles, si on met #TABLEMATIERES 
+	// dans son article, celà crée un lien vers la TDM externe, d'où un remplacement de:
+	// $texte = str_replace('#TABLEMATIERES',$table,$texte); par:
 	$texte = str_replace('#TABLEMATIERES', '<a href="#table_des_matieres" id="table_des_matieres_renvoi" title="'._T('itdm:title_lien_table_matieres').'">'._T('itdm:titre_table_matieres').'</a>', $texte);
 
 	// si tableseule on ne renvoit que la table, sinon, on renvoie tout
@@ -306,28 +302,21 @@ function IntertitresTdm_composer_ancre($titre, $pass, $pos) {
 	static $ancres_locales = array();
 	$ancre = '';
 
-	/**
-	 * Si l'ancre a déjà été calculée dans
-	 * un précedant passage, renvoyer le résultat
-	 */
+	// Si l'ancre a déjà été calculée dans
+	// un précedant passage, renvoyer le résultat
 	if (isset($ancres_locales[$pos])) {
 		$ancre = $ancres_locales[$pos];
 		return ($ancre);
 	}
 
-	/**
-	 * Si une ancre est déjà présente, la conserver.
-	 * Nota: il y a deux façons de forcer une ancre :
-	 * 1/ ajout de <a id="ancre" name="ancre"></a>
-	 * 2/ ajout de <monancre> , dans ce cas interprété
-	 *    par le compilo SPIP
-	 * Dans les deux cas, il faut placer cet ajout
-	 *    dans l'inter-titre. Par exemple :
-	 *    {{{Mon inter-titre <monancre>}}}
-	 */
+	// Si une ancre est déjà présente, la conserver.
+	// Nota: il y a deux façons de forcer une ancre :
+	// 1/ ajout de <a id="ancre" name="ancre"></a>
+	// 2/ ajout de <monancre> , dans ce cas interprété par le compilo SPIP
+	// Dans les deux cas, il faut placer cet ajout dans l'inter-titre.
+	// Par exemple : {{{Mon inter-titre <monancre>}}}
 	if (($ii = strpos($titre, '<a id=')) !== false) {
 		$ancre = substr($titre, $ii + 6);
-		// ' ou " ?
 		$cc = substr($ancre, 0, 1);
 		$ancre = substr($ancre, 1);
 		$ii = strpos($ancre, $cc);
@@ -335,49 +324,39 @@ function IntertitresTdm_composer_ancre($titre, $pass, $pos) {
 	}
 
 	if (!strlen($ancre)) {
-		/**
-		 * Traduire le titre en ascii 7 bits
-		 */
+		// Traduire le titre en ascii 7 bits
 		$titre = preg_replace('{([^[:alnum:]]+)}', ' ', translitteration(trim(strip_tags($titre))));
 
-		/**
-		 * Calculer l'ancre à partir du titre
-		 */
+		// Calculer l'ancre à partir du titre
 		foreach (explode(' ', $titre) as $mot) {
-			/** Ne pas traiter les mots trop courts
-			*/
+			// Ne pas traiter les mots trop courts
 			if (strlen($mot) <= 2) {
 				continue;
 			}
-			/**
-			 * Sinon, rajouter à la suite de l'ancre
-			 */
+			// Sinon, rajouter à la suite de l'ancre
 			$ancre .= $mot.'-';
-			/**
-			 * Dans la limite acceptable
-			 */
+			// Dans la limite acceptable
 			if (strlen($ancre) >= _ANCHOR_LEN_MAX) {
 				break;
 			}
 		}
 		$ancre = rtrim($ancre, '-');
 
-		/**
-		 * Si inter-titre vide (c'est possible ?) baptiser 'ancre'
-		 */
+		// Si inter-titre vide (c'est possible ?) baptiser 'ancre'
 		if (!strlen($ancre)) {
 			$ancre = 'ancre';
 		}
 
-		// Les ancres sont case-insensitives
-		// Autant tout passer en bdc
+		// Les ancres devraient etre case-insensitives
+		// Autant tout passer en bas de casse
 		$ancre = strtolower($ancre);
 	}
 
-	$ancre_calcule = $ancre.($pos ? '-'.$pos : '');
+	//$ancre_calcule = $ancre.($pos ? '-'.$pos : '');
+	$ancre_calcule = $ancre.'-'.$pos;
 	$ancres_locales[$pos] = $ancre_calcule;
 
-	return ($ancre_calcule);
+	return $ancre_calcule;
 }
 
 /**
@@ -387,17 +366,17 @@ function IntertitresTdm_composer_ancre($titre, $pass, $pos) {
  * @return string $str
  */
 function intertitre_tdm_preserver_tags_typo($str) {
-	// passe 1: on echappe les tags autorisés: i, strong, sub, sup
-	$pattern = "(i|strong|sub|sup|\/i|\/strong|\/sub|\/sup)";
-	$str = preg_replace('/<'.$pattern.'/', "ßß$1" , $str);
-	$str = preg_replace('/'.$pattern.'>/', "$1γγ", $str);
+	// passe 1: on echappe les tags autorisés: i, em, strong, sub, sup
+	$pattern = "(i|em|strong|sub|sup|/i|/em|/strong|/sub|/sup)";
+	$str = preg_replace('#<'.$pattern.'#', "ßß$1" , $str);
+	$str = preg_replace('#'.$pattern.'>#', "$1γγ", $str);
 
 	// on vire les autres tags
 	$str = trim(strip_tags($str));
 
 	// on retablit les tags echappés
-	$str = preg_replace('/ßß'.$pattern.'/', "<$1", $str);
-	$str = preg_replace('/'.$pattern.'γγ/', "$1>", $str);
+	$str = preg_replace('#ßß'.$pattern.'#', "<$1", $str);
+	$str = preg_replace('#'.$pattern.'γγ#', "$1>", $str);
 
 	return $str;
 }

@@ -31,8 +31,10 @@ function extrait_titres($texte) {
 	return $sortie;
 }
 
-function extrait_emphaseforte($texte) {
-	$texte=preg_replace('/(\{\{\{)(.*?)(\}\}\})/', '', $texte);
+function extrait_emphaseforte($texte, $guillemets='fr') {
+	// protection des tites
+	$texte = preg_replace('/(\{\{\{)(.*?)(\}\}\})/', '', $texte);
+	// c'est parti
 	preg_match_all('/\{\{(.*?)\}\}/', $texte, $matches);
 	$key = key($matches[1]);
 	$val = current($matches[1]);
@@ -42,8 +44,10 @@ function extrait_emphaseforte($texte) {
 	return $sortie;
 }
 
-function extrait_emphase($texte) {
-	$texte=preg_replace('/(\{\{)(.*?)(\}\})/', '', $texte);
+function extrait_emphase($texte, $guillemets='fr') {
+	// protection des titres et emphases fortes
+	$texte = preg_replace('/(\{\{)(.*?)(\}\})/', '', $texte);
+	// c'est parti
 	preg_match_all('/\{(.*?)\}/', $texte, $matches);
 	$key = key($matches[1]);
 	$val = current($matches[1]);
@@ -54,11 +58,13 @@ function extrait_emphase($texte) {
 }
 
 function extrait_liens($texte) {
-	//protection de ce qui est code
+	// protection des codes
 	$texte = preg_replace('/(<code>)(.*?)(<\/code>)/', '', $texte);
-	//protection des ancres
+	// protection des ancres
 	$texte = preg_replace('/(\[.*?\<-])/', '', $texte);
+	// protection des notes
 	$texte = preg_replace('/(\[\[)(.*?)(\]\])/', '', $texte);
+	// c'est parti
 	preg_match_all('/(\[.*?\])/', $texte, $matches);
 	$key = key($matches[1]);
 	$val = current($matches[1]);
@@ -68,22 +74,54 @@ function extrait_liens($texte) {
 	return $sortie;
 }
 
-function extrait_un_titre($texte, $ancre) {
-	preg_match("/<h(\d) class=\"spip\"><a id='a$ancre' name='a$ancre'><\/a>(.*?)<\/h\\1>/", $texte, $matches);
-	$titre = textebrut($matches[2]);
-	return $titre;
+/*
+ * pour le 3ieme intertitre produit par ce balisage SPIP : {{{** foo bar }}}
+ * le plugin seul produit la ligne HTML suivante : 
+ *  <h4 class="spip"><a id="foo-bar-2" name="foo-bar-2"></a><a id="a2.1" name="a2.1"> foo bar </h4>
+ * tandis qu'en presence du plugin Sommaire Automatique on a ce HTML (en une ligne et non deux) : 
+ *  <h4 class="spip" id="foo-bar"><a id="foo-bar-2" name="foo-bar-2"></a><a id="a2.1" name="a2.1"> foo bar
+ *  <a class="sommaire-back sommaire-back-6" href="#s-foo-bar" title="Retour au sommaire"></a></h4>
+ */
+function extrait_un_titre($texte, $ancre='   #  ? ! ') {
+	spip_log('titre goo', 'itdm');
+	if ( preg_match("#<h(\d) class=\"spip\".+<a id=\"a$ancre\" name=\"a$ancre\"></a>(.*?)</h\\1>#",
+		$texte, $matches) ) {
+		spip_log('titre id: a'.$ancre, 'itdm');
+		return textebrut($matches[2]);
+	}
+	preg_match("#<h(\d) class=\"spip\".+id=\".*$ancre.*\".*>(.*?)</h\\1>#",
+		$texte, $matches);
+	spip_log('titre id: '.$ancre, 'itdm');
+	return textebrut($matches[2]);
 }
 
-function extrait_de_texte($texte, $debut = 0, $taille = 20) {
+function extrait_de_texte($texte, $debut=0, $taille=20) {
 	$mots = explode(' ', textebrut($texte));
 	$extrait = implode(' ', array_slice($mots, $debut, $taille));
 	return $extrait;
 }
 
-function extrait_partie($texte, $ancre, $debut = 0, $taille) {
-	preg_match("/<h(\d) class=\"spip\"><a id='a$ancre' name='a$ancre'><\/a>.*?<\/h\\1>(.*?)<h\\1 class=\"spip\">/s", $texte, $matches);
-	$partie = $matches[2];
-	if (!$taille) {
+/*
+ * pour le 3ieme intertitre produit par ce balisage SPIP : {{{## foo bar }}}
+ * le plugin seul produit la ligne HTML suivante : 
+ *  <h4 class="spip"><a id="foo-bar-2" name="foo-bar-2"></a><a id="a2.1" name="a2.1"> 1.2- foo bar </h4>
+ * tandis qu'en presence du plugin Sommaire Automatique on a ce HTML (en une ligne et non deux) : 
+ *  <h4 class="spip" id="t1-2-foo-bar"><a id="foo-bar-2" name="foo-bar-2"></a><a id="a2.1" name="a2.1"> 1.2- foo bar
+ *  <a class="sommaire-back sommaire-back-6" href="#s-t1-2-foo-bar" title="Retour au sommaire"></a></h4>
+ */
+function extrait_partie($texte, $ancre='   #  ? ! ', $debut=0, $taille='') {
+	spip_log('partie goo', 'itdm');
+	if ( preg_match('#<h(\d) class="spip".+<a id="a' . $ancre . '" name="a' . $ancre . 
+		'"></a>.*</h\\1>(.*?)<h\\1 class="spip".*>#s', $texte, $matches) ) {
+		spip_log('partie id: a'.$ancre, 'itdm');
+		$partie = $matches[2];
+	} else {
+		preg_match('#<h(\d) class="spip".+id=".*' . $ancre .
+			'.*".+</h\\1>(.*?)<h\\1 class="spip".*>#s', $texte, $matches);
+		spip_log('partie id: '.$ancre, 'itdm');
+		$partie = $matches[2];
+	}
+	if ( !$taille ) {
 		$taille = str_word_count($partie);
 	}
 	$extrait = extrait_de_texte($partie, $debut, $taille);
@@ -91,10 +129,10 @@ function extrait_partie($texte, $ancre, $debut = 0, $taille) {
 }
 
 function nettoie_des_modeles($texte) {
-	//retire les modeles du plugin pour éviter les plantages circulaires
-	$texte=preg_replace('/<(extrait|extrait_partie|renvoi|table_des_matieres)(.*?)>/', '', $texte);
-	//retire les notes du texte, pour éviter les doublons de notes !
-	$texte=preg_replace('/(\[\[)(.*?)(\]\])/', '', $texte);
+	// retire les modeles du plugin pour éviter les plantages circulaires
+	$texte = preg_replace('/<(extrait|extrait_partie|renvoi|table_des_matieres)(.*?)>/', '', $texte);
+	// retire les notes du texte, pour éviter les doublons de notes !
+	$texte = preg_replace('/(\[\[)(.*?)(\]\])/', '', $texte);
 	return $texte;
 }
 
