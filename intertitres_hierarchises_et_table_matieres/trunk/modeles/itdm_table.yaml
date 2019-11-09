@@ -1,0 +1,21 @@
+---
+nom: '<:itdm:inserer_table:>'
+logo: 'itdm-64.png'
+icone_barre: 'text_list_bullets.png'
+parametres:
+  - saisie: 'hidden'
+    options:
+      nom: 'modele'
+      defaut: 'table_des_matieres'
+  - saisie: 'input'
+    options:
+      nom: 'id_modele'
+      defaut: ''
+      env: 'non'
+      recursif: 'oui'
+      obligatoire: 'oui'
+      label: '<:itdm:label_article:>'
+    verifier:
+      type: 'id_objet'
+      options:
+        nom: 'article'
