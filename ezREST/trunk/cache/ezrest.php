@@ -79,7 +79,7 @@ function ezrest_formulaire_charger($plugin, $configuration) {
 				} else {
 					// On traite le complément des filtres pour un affichage plus clair
 					$caches[$_cle]['filtre'] = !empty($_cache['complement'])
-						? str_replace(array('__', '_'), array(' | ', '='), $_cache['complement'])
+						? str_replace(array('_p_', '_e_', '_s_'), array(' | ', '=', '/'), $_cache['complement'])
 						: '';
 				}
 			}

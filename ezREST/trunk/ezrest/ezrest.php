@@ -561,9 +561,10 @@ function ezrest_cache_identifier($plugin, $type_requete, $collection = 'collecti
 			// Filtres d'une collection
 			$filtres = '';
 			foreach ($complement as $_critere => $_valeur) {
-				$filtres .= "${_critere}_${_valeur}__";
+				$valeur = str_replace('/', '_s_', $_valeur);
+				$filtres .= "${_critere}_e_${valeur}_p_";
 			}
-			$cache['complement'] = rtrim($filtres, '__');
+			$cache['complement'] = rtrim($filtres, '_p_');
 		}
 	}
 
