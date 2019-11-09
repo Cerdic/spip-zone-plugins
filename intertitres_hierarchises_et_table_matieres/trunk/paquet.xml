@@ -1,7 +1,7 @@
 <paquet
 	prefix="intertitrestdm"
 	categorie="edition"
-	version="0.9.15"
+	version="0.9.16"
 	etat="test"
 	compatibilite="[1.9.0;3.2.*]"
 	logo="itdm-64.png"
@@ -9,7 +9,6 @@
 >
 
 	<nom>Intertitres hiérarchisés et table des matières</nom>
-	<!-- Générer automatiquement une table des matières -->
 
 	<auteur>Mortimer</auteur>
 	<auteur>Chtitux</auteur>
