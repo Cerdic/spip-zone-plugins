@@ -3,16 +3,16 @@
 	Affiche un extrait du texte d'un article
 
 ]
-<BOUCLE_Article(ARTICLES){id_article=#ENV{id}}{statut==.}>
+<BOUCLE_Article(ARTICLES){id_article=#ENV{id}}{tous}>
 	[(#SET{extrait,
 		[(#TEXTE*|nettoie_des_modeles|propre
 			|extrait_de_texte{#ENV{debut,0},#ENV{taille,20}})]
 		})]
 </BOUCLE_Article>
 #SET{quote,"<quote>"}
-[(#ENV{debut}|?{#SET{quote,"<quote>(...) "}})]
+[(#ENV{debut}|?{#SET{quote,"<quote>(&hellip;) "}})]
 [(#REM) L'extrait est encadré par des quotes
 ]
 [(#GET{quote}
-	|concat{#GET{extrait},"(...)</quote>"}
+	|concat{#GET{extrait},"(&hellip;)</quote>"}
 	|propre)]

@@ -3,7 +3,7 @@
 	Affiche un renvoi vers une ancre de l'article passé en id
 
 ]
-<BOUCLE_Article(ARTICLES){id_article=#ENV{id}}{statut==.}>
+<BOUCLE_Article(ARTICLES){id_article=#ENV{id}}{tous}>
 	[(#SET{intertitre,
 		[(#TEXTE*|nettoie_des_modeles|propre
 			|extrait_un_titre{#ENV{partie}})]
@@ -23,5 +23,5 @@
 [(#REM) Le renvoi est rédigé
 ]
 [(#GET{crochet}
-	|concat{[(#GET{intertitre}|trim)],[|(#GET{extrait})(...)],"->",#ENV{id},"#",#ENV{partie},"]"}
+	|concat{[(#GET{intertitre}|trim)],[|(#GET{extrait})(&hellip;)],"->",#ENV{id},"#",#ENV{partie},"]"}
 	|propre)]
