@@ -22,7 +22,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * Le plugin Cache Factory propose une configuration par défaut des caches.
  *
- * @uses cache_chercher_service()
+ * @uses cache_service_chercher()
  * @uses lire_config()
  * @uses ecrire_config()
  *
@@ -53,7 +53,7 @@ function cache_cache_configurer($plugin) {
 	// Cette configuration peut-être partielle, dans ce cas les données manquantes sont complétées
 	// par celles par défaut.
 	$configuration_plugin = array();
-	if ($configurer = cache_chercher_service($plugin, 'cache_configurer')) {
+	if ($configurer = cache_service_chercher($plugin, 'cache_configurer')) {
 		$configuration_plugin = $configurer($plugin);
 	}
 
@@ -120,7 +120,7 @@ function cache_cache_configurer($plugin) {
 /**
  * Construit le chemin complet du fichier cache.
  *
- * @uses cache_chercher_service()
+ * @uses cache_service_chercher()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
@@ -136,7 +136,7 @@ function cache_cache_composer($plugin, $cache, $configuration) {
 
 	// Le plugin utilisateur peut fournir un service propre pour construire le chemin complet du fichier cache.
 	// Néanmoins, étant donné la généricité du mécanisme offert par le plugin Cache cela devrait être rare.
-	if ($composer = cache_chercher_service($plugin, 'cache_composer')) {
+	if ($composer = cache_service_chercher($plugin, 'cache_composer')) {
 		$fichier_cache = $composer($plugin, $cache, $configuration);
 	} else {
 		// On utilise le mécanisme de nommage standard du plugin Cache.
@@ -148,7 +148,7 @@ function cache_cache_composer($plugin, $cache, $configuration) {
 		$dir_cache = constant($configuration['racine']) . $configuration['dossier_plugin'];
 		if ($configuration['sous_dossier']) {
 			if (!empty($cache['sous_dossier'])) {
-				// Si le cache nécessite un sous-dossier, appelé service dans l'identifiant du cache.
+				// Si le cache nécessite un sous-dossier, appelé sous_dossier dans l'identifiant du cache.
 				$dir_cache .= rtrim($cache['sous_dossier'], '/') . '/';
 			} else {
 				// C'est une erreur, le sous-dossier n'a pas été fourni alors qu'il est requis.
@@ -192,7 +192,7 @@ function cache_cache_composer($plugin, $cache, $configuration) {
  *
  * Cache Factory renvoie uniquement les éléments de l'identifiant relatif.
  *
- * @uses cache_chercher_service()
+ * @uses cache_service_chercher()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
@@ -209,7 +209,7 @@ function cache_cache_decomposer($plugin, $fichier_cache, $configuration) {
 
 	// Le plugin utilisateur peut fournir un service propre pour construire le chemin complet du fichier cache.
 	// Néanmoins, étant donné la généricité du mécanisme offert par le plugin Cache cela devrait être rare.
-	if ($decomposer = cache_chercher_service($plugin, 'cache_decomposer')) {
+	if ($decomposer = cache_service_chercher($plugin, 'cache_decomposer')) {
 		$cache = $decomposer($plugin, $fichier_cache, $configuration);
 	} else {
 		// On utilise le mécanisme de nommage standard du plugin Cache. De fait, on considère qu'aucun composant
@@ -249,7 +249,7 @@ function cache_cache_decomposer($plugin, $fichier_cache, $configuration) {
  *
  * Le plugin Cache Factory complète la description canonique avec le nom sans extension et l'extension du fichier.
  *
- * @uses cache_chercher_service()
+ * @uses cache_service_chercher()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
@@ -273,7 +273,7 @@ function cache_cache_completer($plugin, $cache, $fichier_cache, $configuration) 
 
 	// Le plugin utilisateur peut fournir un service propre pour construire le chemin complet du fichier cache.
 	// Néanmoins, étant donné la généricité du mécanisme offert par le plugin Cache cela devrait être rare.
-	if ($completer = cache_chercher_service($plugin, 'cache_completer')) {
+	if ($completer = cache_service_chercher($plugin, 'cache_completer')) {
 		$cache = $completer($plugin, $cache, $fichier_cache, $configuration);
 	}
 
@@ -287,7 +287,7 @@ function cache_cache_completer($plugin, $cache, $fichier_cache, $configuration) 
  * Le plugin Cache Factory utilise des fonctions standard de PHP, SPIP ou du plugin YAML. Un plugin appelant peut
  * proposer une fonction spécifique de décodage
  *
- * @uses cache_chercher_service()
+ * @uses cache_service_chercher()
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
@@ -307,7 +307,7 @@ function cache_cache_decoder($plugin, $contenu, $configuration) {
 
 	// Le plugin utilisateur peut fournir un service propre pour décoder le contenu du cache.
 	// Néanmoins, étant donné la généricité du mécanisme offert par le plugin Cache cela devrait être rare.
-	if ($decoder = cache_chercher_service($plugin, "cache_decoder_${encodage}")) {
+	if ($decoder = cache_service_chercher($plugin, "cache_decoder_${encodage}")) {
 		$contenu = $decoder($plugin, $contenu);
 	} else {
 		// Utilisation des fonctions génériques de Cache Factory
@@ -344,7 +344,7 @@ function cache_cache_decoder($plugin, $contenu, $configuration) {
  * Le plugin Cache Factory propose une version simplifié du formulaire où tous les fichiers caches
  * sont listées par ordre alphabétique sans possibilité de regroupement.
  *
- * @uses cache_chercher_service()
+ * @uses cache_service_chercher()
  * @uses cache_repertorier()
  *
  * @param string $plugin
@@ -368,7 +368,7 @@ function cache_formulaire_charger($plugin, $options, $configuration) {
 	$valeurs['_nom_plugin'] = $informer($plugin, 'nom', true);
 
 	// Le plugin utilisateur peut fournir un service propre pour construire le tableau des valeurs du formulaire.
-	if ($charger = cache_chercher_service($plugin, 'formulaire_charger')) {
+	if ($charger = cache_service_chercher($plugin, 'formulaire_charger')) {
 		$valeurs_plugin = $charger($plugin, $options, $configuration);
 		if ($valeurs_plugin) {
 			$valeurs = array_merge($valeurs, $valeurs_plugin);
@@ -402,7 +402,7 @@ function cache_formulaire_charger($plugin, $options, $configuration) {
  * @return string
  *        Nom complet de la fonction si trouvée ou chaine vide sinon.
  */
-function cache_chercher_service($plugin, $fonction) {
+function cache_service_chercher($plugin, $fonction) {
 
 	$fonction_trouvee = '';
 
