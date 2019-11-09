@@ -1,7 +1,7 @@
 [(#SET{iteration,#ENV{iteration,1}})]
 [(#SET{separateur,[(#ENV{separateur}|concat{&nbsp;&rsaquo;&nbsp;})]})]
 <BOUCLE_rubriques(RUBRIQUES){id_parent}{tout}>
-	<optgroup label="#GET{separateur}#TITRE">
+	<optgroup label="#GET{separateur}[(#TITRE|supprimer_tags|attribut_html)]">
 		<BOUCLE_articles_originaux(ARTICLES){id_rubrique}{origine_traduction}>
 		[(#ENV{multiple}|oui)
 		<option value="#ID_ARTICLE"[(#ID_ARTICLE|in_array{#ENV{valeur,#ENV{defaut,#ARRAY}}}|oui) selected="selected"]>#GET{separateur}#TITRE</option>]

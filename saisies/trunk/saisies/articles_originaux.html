@@ -35,7 +35,7 @@ Par défaut ne liste que ceux des rubriques à la racine (secteurs)
 		<option value="#ID_ARTICLE"[(#ID_ARTICLE|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>#TITRE</option>]
 	</BOUCLE_articles_page>
 	<BOUCLE_secteurs(RUBRIQUES){id_parent = #ENV{id_rubrique,0}}{par num titre, titre}{tout}>
-	<optgroup label="#TITRE">
+	<optgroup label="[(#TITRE|supprimer_tags|attribut_html)]">
 		<B_articles_originaux>
 		<BOUCLE_articles_originaux(ARTICLES){id_rubrique}{origine_traduction}>
 		[(#ENV{multiple}|oui)
@@ -46,6 +46,6 @@ Par défaut ne liste que ceux des rubriques à la racine (secteurs)
 		</B_articles_originaux>
 		[(#ENV{recursif}|oui)
 		<INCLURE{fond=prive/listes/articles_originaux_recursifs,valeur=#ENV{valeur_forcee,#ENV{valeur}},id_rubrique,multiple} />]
-	</optgroup>		
+	</optgroup>
 	</BOUCLE_secteurs>
 </select>
