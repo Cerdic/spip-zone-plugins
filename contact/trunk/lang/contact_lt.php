@@ -18,7 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'champ_adresse' => 'Adresas',
 	'champ_civi_explication' => 'Mandagumo kreipinio lauko nustatymai',
-	'champ_civi_mademoiselle_ok' => 'Pasiūlyti pasirinkimą « Panelė » mandagumo kreipinio lauke',
 	'champ_civilite' => 'Mandagumo kreipinys',
 	'champ_code_postal' => 'Pašto kodas',
 	'champ_etat' => 'Valstybė',

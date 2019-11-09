@@ -18,7 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'champ_adresse' => 'Adresa',
 	'champ_civi_explication' => 'Podrobné nastavenia poľa Oslovenie', # NEW
-	'champ_civi_mademoiselle_ok' => 'V poli oslovenie ponúkať možnosť "slečna"', # NEW
 	'champ_civilite' => 'Oslovenie',
 	'champ_code_postal' => 'PSČ',
 	'champ_etat' => 'Štát',

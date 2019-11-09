@@ -18,7 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'champ_adresse' => 'Postanschrift',
 	'champ_civi_explication' => 'Erweiterte Einstellungen Familienstand',
-	'champ_civi_mademoiselle_ok' => 'Die Auswahl "Fräulein" als Familienstand aktivieren',
 	'champ_civilite' => 'Anrede',
 	'champ_code_postal' => 'Postleitzahl',
 	'champ_etat' => 'Staat',

@@ -18,7 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'champ_adresse' => 'Address',
 	'champ_civi_explication' => 'Advanced settings for the title field',
-	'champ_civi_mademoiselle_ok' => 'Include an option for "Miss" in the title field',
 	'champ_civilite' => 'Civility',
 	'champ_code_postal' => 'Zip Code',
 	'champ_etat' => 'State',

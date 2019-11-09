@@ -18,7 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'champ_adresse' => 'العنوان',
 	'champ_civi_explication' => 'الإعدادات المتقدمة لحقل الصفة',
-	'champ_civi_mademoiselle_ok' => 'اقتراح خيار «آنسة» في حقل الصفة',
 	'champ_civilite' => 'الصفة',
 	'champ_code_postal' => 'الرمز البريدي',
 	'champ_etat' => 'الولاية',

@@ -18,7 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'champ_adresse' => 'Adres',
 	'champ_civi_explication' => 'Gevorderde instellingen van het veld aanhef',
-	'champ_civi_mademoiselle_ok' => 'Stel de keuze « Mejuffrouw » voor in het veld aanhef',
 	'champ_civilite' => 'Aanhef',
 	'champ_code_postal' => 'Postcode',
 	'champ_etat' => 'Staat',

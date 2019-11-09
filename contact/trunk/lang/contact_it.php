@@ -18,7 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'champ_adresse' => 'Indirizzo',
 	'champ_civi_explication' => ' Regolazione avanzata del campo stato civile',
-	'champ_civi_mademoiselle_ok' => 'Proporre una scelta « Signorina » nel campo stato civile',
 	'champ_civilite' => 'Stato Civile',
 	'champ_code_postal' => 'Codice postale',
 	'champ_etat' => 'Stato',
