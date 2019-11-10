@@ -21,23 +21,30 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
 */
 function googlefont_request($webfonts,$subsets='',$type='css'){
-	$subset = '&subset=' ;
+		$subset = '&subset=' ;
     if(is_array($webfonts) && count($webfonts) > 0 ){
+      $fonts = array();
     	(strlen($subsets)) ? $subset .= $subsets : $subset = '';
     	foreach($webfonts as $font){
-    		$variants = implode(',',$font['variants']);
-    		$fonts[] = urlencode($font['family']).':'.$variants;
-    	}
-        if(isset($fonts)){
-            $fonts = implode('|',$fonts);
-        	if($type == 'specimen'){
-        		$request = "https://fonts.google.com/selection?selection.family=$fonts";
-        	}else{
-        		$request = "https://fonts.googleapis.com/css?family=$fonts".$subset."&display=swap";
-        	}
+				$family = $font['family'];
+				$variants = $font['variants'] ;
+				(array_key_exists($family,$fonts)) ? array_merge($fonts[$family],$variants) : $fonts[$family] = $variants;
+			}
+      if(isset($fonts)){
+				$typeset = array();
+				foreach ($fonts as $family => $variants) {
+					$variants = implode(',',$variants);
+					$typeset[] = $family.':'.$variants;
+				}
+        $fonts = implode('|',$typeset);
+      	if($type == 'specimen'){
+      		$request = "https://fonts.google.com/selection?selection.family=$fonts";
+      	}else{
+      		$request = "https://fonts.googleapis.com/css?family=$fonts".$subset."&display=swap";
+      	}
 
-	        return htmlentities($request);
-        }
+        return htmlentities($request);
+      }
     }
     return false;
 }
@@ -67,10 +74,7 @@ function google_font_search($fonts, $search){
 // via la pipeline fonts_list
 
 function lister_webfonts(){
-	$fonts = pipeline('fonts_list',array(
-		'args'=>array(),
-		'data'=>$fonts
-	));
+	$fonts = pipeline('fonts_list',array());
 	return $fonts;
 }
 

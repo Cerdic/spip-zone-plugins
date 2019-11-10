@@ -23,6 +23,10 @@ genre COmic Sans + Times
 
 ## Changelogs
 
+0.3.6
+
+bugfix: grouper les fonts par famille dans la requète
+
 
 0.3.5
 

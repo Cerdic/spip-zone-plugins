@@ -1,7 +1,7 @@
 <paquet
 	prefix="webfonts2"
 	categorie="maintenance"
-	version="0.3.5"
+	version="0.3.6"
 	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/webfonts2-64.png"

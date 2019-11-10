@@ -19,12 +19,13 @@ function webfonts2_ieconfig_metas($table){
 /**
  * Ajout des polices configurées a la pipeline fonts_list
  *
- * chaine retournée par le selecteurgenerique :   Open Sans:regular, Open Sans:800, Open Sans:300,
+ * chaine retournée par le selecteurgenerique :
+ * 	Open Sans:regular, Open Sans:800, Open Sans:300,
  *
 */
 function webfonts2_fonts_list($fonts){
 	// si la pipeline n'est pas appelé avant initialiser
-	(is_array($fonts)) ? $fonts : $fonts = array() ;
+	(is_array($fonts)) ? $fonts = $fonts : $fonts = array() ;
 	$webfonts = lire_config('webfonts2/webfonts');
 	if(strlen($webfonts) AND $webfonts = explode(',',rtrim($webfonts,', ')) ){
 		foreach($webfonts as $font){
