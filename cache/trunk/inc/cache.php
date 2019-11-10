@@ -43,6 +43,7 @@ function cache_ecrire($plugin, $cache, $contenu) {
 	// Le cache peut-être fourni soit sous la forme d'un chemin complet soit sous la forme d'un
 	// tableau permettant de calculer le chemin complet. On prend en compte ces deux cas.
 	$fichier_cache = '';
+	include_spip('cache/cache');
 	if (is_array($cache)) {
 		// Vérification de la conformité entre la configuration et le sous-dossier du cache.
 		if (!$configuration['sous_dossier']
@@ -50,13 +51,13 @@ function cache_ecrire($plugin, $cache, $contenu) {
 			// Détermination du chemin du cache si pas d'erreur sur le sous-dossier :
 			// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
 			//   de la configuration du nom pour le plugin.
-			include_spip('cache/cache');
 			$fichier_cache = cache_cache_composer($plugin, $cache, $configuration);
 		}
 	} elseif (is_string($cache)) {
 		// Le chemin complet du fichier cache est fourni. Aucune vérification ne peut être faite
 		// il faut donc que l'appelant ait utilisé l'API pour calculer le fichier au préalable.
 		$fichier_cache = $cache;
+		$cache = cache_cache_decomposer($plugin, $fichier_cache, $configuration);
 	}
 	
 	if ($fichier_cache) {
@@ -90,6 +91,21 @@ function cache_ecrire($plugin, $cache, $contenu) {
 			$ecrire = 'ecrire_fichier_securise';
 		}
 		$cache_ecrit = $ecrire($fichier_cache, $contenu_cache);
+
+		// Appel d'un pipeline post opération sur le cache (écriture, suppression).
+		// Ce pipeline peut être utilisé pour loger le cache dans une liste par exemple.
+		if ($cache_ecrit) {
+			$flux = array(
+				'args' => array(
+					'plugin'        => $plugin,
+					'fonction'      => 'ecrire',
+					'fichier_cache' => $fichier_cache,
+					'cache'         => $cache,
+					'configuration' => $configuration
+				),
+			);
+			pipeline('post_cache', $flux);
+		}
 	}
 	
 	return $cache_ecrit;
@@ -297,23 +313,37 @@ function cache_supprimer($plugin, $cache) {
 	// Le cache peut-être fourni soit sous la forme d'un chemin complet soit sous la forme d'un
 	// tableau permettant de calculer le chemin complet. On prend en compte ces deux cas.
 	$fichier_cache = '';
+	include_spip('cache/cache');
 	if (is_array($cache)) {
 		// Détermination du chemin du cache :
 		// - le nom sans extension est construit à partir des éléments fournis sur le conteneur et
 		//   de la configuration du nom pour le plugin.
-		include_spip('cache/cache');
 		$fichier_cache = cache_cache_composer($plugin, $cache, $configuration);
 	} elseif (is_string($cache)) {
 		// Le chemin complet du fichier cache est fourni. Aucune vérification ne peut être faite
 		// il faut donc que l'appelant ait utilisé l'API cache_existe() pour calculer le fichier au préalable.
 		$fichier_cache = $cache;
+		$cache = cache_cache_decomposer($plugin, $fichier_cache, $configuration);
 	}
 
 	// Détermination du nom du cache en fonction du plugin appelant et du type
 	if ($fichier_cache) {
-		// Lecture du fichier cache sécurisé ou pas suivant la configuration.
+		// Suppression du fichier.
 		include_spip('inc/flock');
 		$cache_supprime = supprimer_fichier($fichier_cache);
+
+		// Appel d'un pipeline post opération sur le cache (écriture, suppression).
+		// Ce pipeline peut être utilisé pour déloger le cache dans une liste par exemple.
+		$flux = array(
+			'args' => array(
+				'plugin'        => $plugin,
+				'fonction'      => 'supprimer',
+				'fichier_cache' => $fichier_cache,
+				'cache'         => $cache,
+				'configuration' => $configuration
+			),
+		);
+		pipeline('post_cache', $flux);
 	}
 
 	return $cache_supprime;
@@ -428,10 +458,30 @@ function cache_vider($plugin, $caches) {
 	$cache_vide = false;
 
 	if ($caches) {
+		// Si un seul cache on le transforme en un tableau
 		$fichiers_cache = is_string($caches) ? array($caches) : $caches;
+
+		// Lecture de la configuration des caches du plugin.
+		$configuration = configuration_cache_lire($plugin);
+
+		// Suppression des caches
+		include_spip('cache/cache');
 		include_spip('inc/flock');
 		foreach ($fichiers_cache as $_fichier) {
 			supprimer_fichier($_fichier);
+
+			// Appel d'un pipeline post opération sur le cache (écriture, suppression).
+			// Ce pipeline peut être utilisé pour déloger le cache dans une liste par exemple.
+			$flux = array(
+				'args' => array(
+					'plugin'        => $plugin,
+					'fonction'      => 'supprimer',
+					'fichier_cache' => $_fichier,
+					'cache'         => cache_cache_decomposer($plugin, $_fichier, $configuration),
+					'configuration' => $configuration
+				),
+			);
+			pipeline('post_cache', $flux);
 		}
 		$cache_vide = true;
 	}

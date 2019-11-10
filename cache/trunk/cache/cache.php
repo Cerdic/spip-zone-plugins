@@ -204,7 +204,7 @@ function cache_cache_composer($plugin, $cache, $configuration) {
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param array  $fichier_cache
+ * @param string $fichier_cache
  *        Le chemin complet du fichier à phraser.
  * @param array  $configuration
  *        Configuration complète des caches du plugin utlisateur lue à partir de la meta de stockage.

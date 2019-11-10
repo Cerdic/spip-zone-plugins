@@ -1,7 +1,7 @@
 <paquet
 	prefix="cache"
 	categorie="outil"
-	version="0.4.4"
+	version="0.5.0"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="cache_logo-64.png"
@@ -13,6 +13,7 @@
 	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
+	<pipeline nom="post_cache" action="" />
 	<pipeline nom="affiche_milieu" inclure="cache_pipelines.php" />
 
 	<menu nom="cache" titre="cache:cache_vider_titre_page" parent="menu_administration" icone="images/cache-del-16.png" action="cache_vider" />
