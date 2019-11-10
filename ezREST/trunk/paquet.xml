@@ -1,7 +1,7 @@
 <paquet
 	prefix="ezrest"
 	categorie="outil"
-	version="0.3.1"
+	version="0.4.0"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="ezrest_logo-64.png"
@@ -18,7 +18,8 @@
 	<pipeline nom="liste_ezcollection" action="" />
 	<pipeline nom="post_ezcollection" action="" />
 	<pipeline nom="post_ezressource" action="" />
+	<pipeline nom="post_cache" inclure="ezrest_pipelines.php" />
 
 	<necessite nom="http" compatibilite="[1.2.0;]" />
-	<necessite nom="cache" compatibilite="[0.4.0;]" />
+	<necessite nom="cache" compatibilite="[0.5.0;]" />
 </paquet>

@@ -27,7 +27,7 @@ function inc_ezrest_declarer_collections_dist() {
 		// Un configuration est un tableau au format suivant :
 		//
 
-		// Le plugin REST Factory ne fournit auciune collection par défaut. Il convient à chaque plugin utilisateur
+		// Le plugin REST Factory ne fournit aucune collection par défaut. Il convient à chaque plugin utilisateur
 		// de fournir ses configurations.
 		$collections = pipeline('liste_ezcollection', $collections);
 	}

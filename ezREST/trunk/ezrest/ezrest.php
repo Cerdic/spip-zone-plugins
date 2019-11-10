@@ -527,6 +527,48 @@ function ezrest_indexer($collections) {
 
 
 /**
+ * @param $plugin
+ * @param $collection
+ * @param $filtres
+ * @param $configuration
+ *
+ * @return array
+ */
+function ezrest_contextualiser($plugin, $collection, $complement, $configuration) {
+
+	// Initialisation minimale du contexte : le préfixe du plugin est passé sous le terme plugin_prefixe
+	// pour éviter une collision avec des balises #PREFIXE ou #PLUGIN.
+	$contexte = array(
+		'plugin_prefixe' => $plugin,
+		'collection'     => $collection,
+		'configuration'  => $configuration
+	);
+
+	// Détermination de la fonction de service permettant de récupérer la collection spécifiée
+	// filtrée sur les critères éventuellement fournis.
+	if ($complement) {
+		if (is_array($complement)) {
+			// On est en présence d'une collection avec des filtres :
+			// -- extraire la configuration des critères pour construire le contexte induit par les filtres
+			$criteres = array_column($configuration['filtres'], null, 'critere');
+			foreach ($complement as $_critere => $_valeur) {
+				$nom_champ = !empty($criteres[$_critere]['champ_nom'])
+					? $criteres[$_critere]['champ_nom']
+					: $_critere;
+				$contexte[$nom_champ] = $_valeur;
+			}
+		} else {
+			// On est en présence d'une ressource :
+			// -- on rajoute le champ de la ressource valorisé dans le contexte pour limiter la boucle à cet élément
+			$contexte[$configuration['ressource']] = $complement;
+		}
+	}
+
+	return $contexte;
+}
+
+
+/**
  * @param string $plugin
  * @param string $type_requete
  * @param string $collection
@@ -548,23 +590,31 @@ function ezrest_cache_identifier($plugin, $type_requete, $collection = 'collecti
 	//    type de requête est l'index.
 	$cache['type_requete'] = $type_requete;
 	$cache['collection'] = $collection;
+
 	// -- Si le cache n'est pas celui de l'index on complète le nom avec soit l'identifiant d'une ressource
 	//    soit un représentation des filtres.
-	if ($type_requete != 'index') {
-		if (is_string($complement)) {
-			// Identifiant de ressource au format chaine
-			$cache['complement'] = $complement;
-		} elseif (is_int($complement)) {
-			// Identifiant de ressource au format entier
-			$cache['complement'] = strval($complement);
-		} elseif (is_array($complement)) {
-			// Filtres d'une collection
-			$filtres = '';
-			foreach ($complement as $_critere => $_valeur) {
-				$valeur = str_replace('/', '_s_', $_valeur);
-				$filtres .= "${_critere}_e_${valeur}_p_";
+	//    On hash toujours la ressource et les filtres de façon à ne jamais avoir un problème de nom de fichier.
+	//    De fait, on loge aussi toujours la ressource ou les filtres source.
+	if (($type_requete != 'index') and $complement) {
+		if ($type_requete == 'ressource') {
+			if (is_string($complement)) {
+				// Identifiant de ressource au format chaine
+				$cache['ressource'] = $complement;
+			} elseif (is_int($complement)) {
+				// Identifiant de ressource au format entier
+				$cache['ressource'] = strval($complement);
 			}
-			$cache['complement'] = rtrim($filtres, '_p_');
+			$cache['complement'] = md5($cache['ressource']);
+		} elseif (($type_requete == 'collection') and is_array($complement)) {
+			// Liste de filtres : on concatène les critères et les valeurs et on crypte la chaine obtenue.
+			$hash = '';
+			foreach ($complement as $_critere => $_valeur) {
+				$hash .= "${_critere}${_valeur}";
+			}
+			// On ajoute le composant complément et aussi les filtres source de façon à pouvoir les loger
+			// dans l'index des caches.
+			$cache['complement'] = md5($hash);
+			$cache['filtres'] = $complement;
 		}
 	}
 
@@ -576,6 +626,7 @@ function ezrest_cache_identifier($plugin, $type_requete, $collection = 'collecti
 
 	return $cache;
 }
+
 
 /**
  * @param $plugin
@@ -684,7 +735,6 @@ function ezrest_ressourcer($plugin, $collection, $ressource) {
 
 	return $contenu;
 }
-
 
 // -----------------------------------------------------------------------
 // -------------------- UTILITAIRE PROPRE AU PLUGIN ----------------------

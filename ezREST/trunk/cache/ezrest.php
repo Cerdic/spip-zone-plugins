@@ -51,13 +51,17 @@ function ezrest_cache_configurer($plugin) {
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array  $options
+ *        Tableau d'options qui peut être fourni par un plugin utilisateur uniquement si celui-ci fait appel
+ *        au formulaire. La page cache_vider de Cache Factory n'utilise pas ce paramètre.
+ *        Le tableau est passé à la fonction de service de chargement du formulaire uniquement.
  * @param array  $configuration
  *        Configuration complète des caches du plugin utilisateur lue à partir de la meta de stockage.
  *
  * @return array
  *         Tableau des valeurs spécifique au plugin taxonomie.
  */
-function ezrest_formulaire_charger($plugin, $configuration) {
+function ezrest_formulaire_charger($plugin, $options, $configuration) {
 
 	$valeurs = array();
 
@@ -66,21 +70,41 @@ function ezrest_formulaire_charger($plugin, $configuration) {
 
 	// On récupère les caches et leur description pour donner un maximum d'explication sur le contenu.
 	include_spip('inc/cache');
+	include_spip('inc/flock');
 	foreach ($types_requete as $_type) {
 		// On récupère les caches du service
-		$filtres = array('type_requete' => $_type);
-		$caches = cache_repertorier('ezrest', $filtres);
+		$caches = cache_repertorier('ezrest', array('type_requete' => $_type));
 
-		// Présentation des filtres pour les collections
+		// Présentation des filtres pour les collections ou de la ressource.
 		if ($_type != 'index') {
 			foreach ($caches as $_cle => $_cache) {
+				// On traite le complément de la ressource ou des filtres de la collection pour un affichage précis.
+				// -- lecture de l'index
+				$fichier_index = constant($configuration['racine']) . $configuration['dossier_plugin'] . 'index.txt';
+				lire_fichier($fichier_index, $contenu_index);
+				$index = $contenu_index ? unserialize($contenu_index) : array();
+
+				// -- détermination du fichier cache
+				$fichier_cache = basename(dirname($_cle)) . '/' . basename($_cle);
+
+				// -- fournir le nom exact de la ressource ou des filtres
 				if ($_type == 'ressource') {
-					$caches[$_cle]['ressource'] = $_cache['complement'];
+					$caches[$_cle]['ressource'] = isset($index[$fichier_cache]['ressource'])
+						? $index[$fichier_cache]['ressource']
+						: $_cache['complement'];
 				} else {
-					// On traite le complément des filtres pour un affichage plus clair
-					$caches[$_cle]['filtre'] = !empty($_cache['complement'])
-						? str_replace(array('_p_', '_e_', '_s_'), array(' | ', '=', '/'), $_cache['complement'])
-						: '';
+					if (isset($index[$fichier_cache]['filtres'])) {
+						$filtres = '';
+						foreach ($index[$fichier_cache]['filtres'] as $_critere => $_valeur) {
+							if ($filtres) {
+								$filtres .= ' | ';
+							}
+							$filtres .= "${_critere}=${_valeur}";
+						}
+						$caches[$_cle]['filtre'] = $filtres
+							? $filtres
+							: $_cache['complement'];
+					}
 				}
 			}
 		}

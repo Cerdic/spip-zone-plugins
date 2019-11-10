@@ -164,9 +164,13 @@ function http_ezrest_get_collection_dist($requete, $reponse) {
 					include_spip('inc/cache');
 					if ($fichier_cache = cache_est_valide('ezrest', $cache))	{
 						// Lecture des données du fichier cache valide et peuplement de l'index données
+						spip_timer('cache_ezrest');
 						$contenu['donnees'] = cache_lire('ezrest', $fichier_cache);
+						$duree = spip_timer('cache_ezrest');
+						spip_log("Cache ezREST lecture : collection <${collection}> - durée de traitement ${duree} millisecondes", 'ezrest' . _LOG_DEBUG);
 					} else {
 						// -- on construit le tableau des conditions SQL déduites des filtres.
+						spip_timer('cache_ezrest');
 						$conditions = ezrest_conditionner(
 							$plugin,
 							$collection,
@@ -185,11 +189,29 @@ function http_ezrest_get_collection_dist($requete, $reponse) {
 							$configuration
 						);
 
-						// Mise à jour du cache
+						// Mise à jour du cache et log des informations pour la présentation dans le formulaire de
+						// vidage
 						cache_ecrire('ezrest', $cache, json_encode($contenu['donnees']));
+						$duree = spip_timer('cache_ezrest');
+						spip_log("Cache ezREST avec écriture : collection <${collection}> - durée de traitement ${duree} millisecondes", 'ezrest' . _LOG_DEBUG);
 					}
 				} else {
-					// On utilise le squelette fourni par le plugin utilisateur
+					// On utilise le squelette fourni par le plugin utilisateur.
+					// -- En premier lieu on définit le contexte du squelette
+					spip_timer('cache_spip');
+					$contexte = ezrest_contextualiser(
+						$plugin,
+						$collection,
+						$filtres,
+						$configuration
+					);
+
+					// -- Récupération des données au travers de la compilation du fond spécifique pour la collection.
+					$donnees = recuperer_fond("ezrest/json/${plugin}_${collection}", $contexte);
+					// -- On décode le JSON obtenu de façon à l'intégrer dans le tableau global de la réponse.
+					$contenu['donnees'] = json_decode($donnees, true);
+					$duree = spip_timer('cache_spip');
+					spip_log("Cache SPIP : collection <${collection}> - durée de traitement ${duree} millisecondes", 'ezrest' . _LOG_DEBUG);
 				}
 
 				// -- on complète éventuellement le contenu de la collection.
@@ -290,16 +312,37 @@ function http_ezrest_get_ressource_dist($requete, $reponse) {
 					include_spip('inc/cache');
 					if ($fichier_cache = cache_est_valide('ezrest', $cache))	{
 						// Lecture des données du fichier cache valide et peuplement de l'index données
+						spip_timer('cache_ezrest');
 						$contenu['donnees'] = cache_lire('ezrest', $fichier_cache);
+						$duree = spip_timer('cache_ezrest');
+						spip_log("Cache ezREST lecture : collection <${collection}> / ressource <${ressource}> - durée de traitement ${duree} millisecondes", 'ezrest' . _LOG_DEBUG);
 					} else {
 						// -- on construit le contenu de la collection.
+						spip_timer('cache_ezrest');
 						$contenu['donnees'] = ezrest_ressourcer($plugin, $collection, $ressource);
 
 						// Mise à jour du cache
 						cache_ecrire('ezrest', $cache, json_encode($contenu['donnees']));
+						$duree = spip_timer('cache_ezrest');
+						spip_log("Cache ezREST avec écriture : collection <${collection}> / ressource <${ressource}> - durée de traitement ${duree} millisecondes", 'ezrest' . _LOG_DEBUG);
 					}
 				} else {
-					// On utilise le squelette fourni par le plugin utilisateur
+					// On utilise le squelette fourni par le plugin utilisateur pour la collection.
+					// -- En premier lieu on définit le contexte du squelette
+					spip_timer('cache_spip');
+					$contexte = ezrest_contextualiser(
+						$plugin,
+						$collection,
+						$ressource,
+						$configuration
+					);
+
+					// -- Récupération des données au travers de la compilation du fond spécifique pour la collection.
+					$donnees = recuperer_fond("ezrest/json/${plugin}_${collection}", $contexte);
+					// -- On décode le JSON obtenu de façon à l'intégrer dans le tableau global de la réponse.
+					$contenu['donnees'] = json_decode($donnees, true);
+					$duree = spip_timer('cache_spip');
+					spip_log("Cache SPIP : collection <${collection}> / ressource <${ressource}> - durée de traitement ${duree} millisecondes", 'ezrest' . _LOG_DEBUG);
 				}
 
 				// -- on complète éventuellement le contenu de la collection.
