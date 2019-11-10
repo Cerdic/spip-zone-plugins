@@ -3,7 +3,6 @@
 La documentation est cours de rédaction sur le wiki de spip-contrib :
 https://contrib.spip.net/WebFonts-2
 
-
 ## ToDo
 
 
@@ -23,6 +22,15 @@ genre COmic Sans + Times
 
 
 ## Changelogs
+
+
+0.3.5
+
+bugfix : notice php, si la pipeline n'était pas alimenté, les polices ajoutés par la config provoquaient un warning.
+
+0.3.4
+
+passer par insert_head_css , affichage final n'était pas utile et plante les crayons sur certains sites
 
 0.3.3
 

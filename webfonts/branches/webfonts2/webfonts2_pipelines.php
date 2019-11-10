@@ -23,17 +23,19 @@ function webfonts2_ieconfig_metas($table){
  *
 */
 function webfonts2_fonts_list($fonts){
+	// si la pipeline n'est pas appelé avant initialiser
+	(is_array($fonts)) ? $fonts : $fonts = array() ;
 	$webfonts = lire_config('webfonts2/webfonts');
-	if(strlen($webfonts)){
-		// enlever la dernière virgule
-		$webfonts = explode(',',rtrim($webfonts,', '));
+	if(strlen($webfonts) AND $webfonts = explode(',',rtrim($webfonts,', ')) ){
 		foreach($webfonts as $font){
-			$set =  explode(':',$font);
-            $slug = strtolower(str_replace(' ','_',trim($set[0])));
-			$fonts[$slug]['family'] = trim($set[0]);
-            $fonts[$slug]['variants'][] = $set[1];
+      if($set =  explode(':',$font)){
+        $slug = strtolower(str_replace(' ','_',trim($set[0])));
+        $fonts[$slug]['family'] = trim($set[0]);
+        $fonts[$slug]['variants'][] = $set[1];
+      }
 		}
 	}
+
 	return $fonts;
 }
 
