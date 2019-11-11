@@ -28,7 +28,6 @@ function isocode_liste_ezcollection($collections) {
 
 	// Les index désignent les collections, le tableau associé contient les filtres admissibles.
 	$collections['subdivisions'] = array(
-		'ressource' => 'prefixe',
 		'module'    => 'isocode',
 		'cache'     => array(
 			'type'  => 'ezrest',
@@ -39,14 +38,14 @@ function isocode_liste_ezcollection($collections) {
 				'critere'         => 'pays',
 				'est_obligatoire' => false
 			),
-		)
+		),
+		'ressource' => 'prefixe'
 	);
 
 	$collections['pays'] = array(
-		'ressource' => 'code_alpha2',
 		'module'    => 'isocode',
 		'cache'     => array(
-			'type'  => 'ezrest',
+			'type'  => 'spip',
 			'duree' => 3600 * 24 * 30
 		),
 		'filtres'   => array(
@@ -62,7 +61,8 @@ function isocode_liste_ezcollection($collections) {
 				'champ_nom'       => 'code_continent',
 				'champ_table'     => 'iso3166countries'
 			),
-		)
+		),
+		'ressource' => 'code_alpha2'
 	);
 
 	$collections['regions'] = array(

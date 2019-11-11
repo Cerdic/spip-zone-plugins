@@ -7,7 +7,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
-	'bouton_isocode'                => 'Codes ISO',
+	'bouton_isocode'                => 'Nomenclatures officielles',
 
 	// E
 	'erreur_400_region_nok_titre'      => 'La région d\'identifiant « @valeur@ » est invalide',
