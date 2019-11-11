@@ -29,25 +29,6 @@ function nospam_lister_formulaires() {
  * @param array $flux
  * @return array
  */
-function nospam_recuperer_fond($flux) {
-	// determiner le nom du formulaire
-	$fond = strval($flux['args']['fond']);
-	if (false !== $pos = strpos($fond, 'formulaires/')) {
-		$form = substr($fond, $pos + 12);
-		if (in_array($form, nospam_lister_formulaires())) {
-			// on ajoute le champ 'nobot' si pas present dans le formulaire
-			nospam_inserer_nobot($flux['data']['texte']);
-		}
-	}
-	return $flux;
-}
-
-/**
- * Ajouter le champ de formulaire 'nobot' au besoin
- *
- * @param array $flux
- * @return array
- */
 function nospam_formulaire_fond($flux) {
 	// determiner le nom du formulaire
 	$form = $flux['args']['form'];
