@@ -34,7 +34,7 @@ function nospam_formulaire_fond($flux) {
 	$form = $flux['args']['form'];
 	if (in_array($form, nospam_lister_formulaires())) {
 		// on ajoute le champ 'nobot' si pas present dans le formulaire
-		nospam_inserer_nobot($flux['data']);
+		nospam_inserer_nobot($flux['data'], $flux['args']['contexte']);
 	}
 	return $flux;
 }
@@ -43,8 +43,9 @@ function nospam_formulaire_fond($flux) {
  * Inserer un champ nobot au hasard dans le form
  * et crypter tous les name
  * @param string $texte
+ * @param array $args
  */
-function nospam_inserer_nobot(&$texte) {
+function nospam_inserer_nobot(&$texte, $args) {
 	if ((false === strpos($texte, 'name="email_nobot"'))
 		AND (false !== $pos = strpos($texte, '</form>'))
 	) {
@@ -60,80 +61,11 @@ function nospam_inserer_nobot(&$texte) {
 			$texte = str_replace('</form>', $nobot . '</form>', $texte);
 		}
 	}
-	if (_SPAM_ENCRYPT_NAME) {
-		// recuperer toutes les balises input, textarea, select
-		$balises = array_merge(extraire_balises($texte, 'input'));
-		foreach ($balises as $k => $b) {
-			if (in_array(extraire_attribut($b, "type"), array("hidden", "file")))
-				unset($balises[$k]);
-		}
-		$balises = array_merge($balises,
-			extraire_balises($texte, 'textarea'),
-			extraire_balises($texte, 'select'));
-
-		$key = "";
-		if (preg_match(",<input type='hidden' name='_jeton' value='([^>]*)' />,Uims", $texte, $m))
-			$key = $m[1];
-
-		foreach ($balises as $k => $b) {
-			if ($name = extraire_attribut($b, "name")
-				AND strncmp($name, "session_", 8) !== 0) {
-				// cas des truc[chose] : on ne brouille que truc
-				$crypted_name = explode("[", $name);
-				$crypted_name[0] = nospam_name_encode($crypted_name[0], $key);
-				$crypted_name = implode("[", $crypted_name);
-				$b_e = inserer_attribut($b, "name", $crypted_name);
-				$texte = str_replace($b, $b_e, $texte);
-			}
-		}
+	if (_SPAM_ENCRYPT_NAME
+		or (isset($args['_nospam_encrypt']) and $args['_nospam_encrypt'])) {
+		include_spip('inc/nospam_encrypt');
+		$texte = nospam_encrypt_form_names($texte, $args['_nospam_encrypt'] === 'all' ? false : true);
 	}
-}
-
-function nospam_name_encode($name, $key = "") {
-	static $private_key = array();
-	static $encoded = array();
-	if (isset($encoded[$key][$name]))
-		return $encoded[$key][$name];
-	if (!$name) return $name;
-	if (!isset($private_key[$key])) {
-		$private_key[$key] = nospam_private_key($key);
-		if (!function_exists('_xor'))
-			include_spip("inc/filtres");
-	}
-	$cname = _xor("xx_$name", $key);
-	$cname = base64_encode($cname);
-	$cname = "x_" . rtrim(strtr(base64_encode($cname), '+/', '-_'), '=');
-	return $encoded[$key][$name] = $cname;
-}
-
-function nospam_name_decode($name, $key = "") {
-	static $private_key = array();
-	static $decoded = array();
-	if (isset($decoded[$key][$name]))
-		return $decoded[$key][$name];
-	if (!$name) return $name;
-	if (strncmp($name, "x_", 2) !== 0) return $name;
-	if (!isset($private_key[$key])) {
-		$private_key[$key] = nospam_private_key($key);
-		if (!function_exists('_xor'))
-			include_spip("inc/filtres");
-	}
-	$cname = substr($name, 2);
-	$cname = base64_decode(str_pad(strtr($cname, '-_', '+/'), strlen($cname) % 4, '=', STR_PAD_RIGHT));
-	$cname = base64_decode($cname);
-	$cname = _xor($cname, $key);
-	if (strncmp($cname, "xx_", 3) !== 0) return $name;
-	return $decoded[$key][$name] = substr($cname, 3);
-}
-
-function nospam_private_key($key) {
-	$private_key = $key . __FILE__;
-	if (function_exists('sha1'))
-		$private_key = sha1($private_key);
-	else
-		$private_key = md5($private_key);
-	$private_key = pack("H*", $private_key);
-	return $private_key;
 }
 
 
@@ -155,36 +87,12 @@ function nospam_formulaire_charger($flux) {
 			$flux['data']['_hidden'] = "";
 		}
 		$flux['data']['_hidden'] .= "<input type='hidden' name='_jeton' value='$jeton' />";
+		//$flux['data']['_jeton'] = $jeton;
 
-		if (_SPAM_ENCRYPT_NAME) {
-			$flux['data']['_hidden'] .= "<input type='hidden' name='_encrypt' value='1' />";
-			// recuperer les autosave encryptes si possible
-			if (is_array($flux['data'])
-				AND isset($flux['data']['_autosave_id'])
-				AND $cle_autosave = $flux['data']['_autosave_id']
-				AND include_spip("inc/cvt_autosave")
-				AND function_exists("autosave_clean_value")) {
-
-				$je_suis_poste = $flux['args']['je_suis_poste'];
-
-				$cle_autosave = serialize($cle_autosave);
-				$cle_autosave = $form . "_" . md5($cle_autosave);
-
-				// si on a un backup en session et qu'on est au premier chargement, non poste
-				// on restitue les donnees
-				if (isset($GLOBALS['visiteur_session']['session_autosave_' . $cle_autosave])
-					AND !$je_suis_poste) {
-					parse_str($GLOBALS['visiteur_session']['session_autosave_' . $cle_autosave], $vars);
-					if (isset($vars['_jeton'])
-						AND $key = $vars['_jeton']) {
-						foreach ($vars as $name => $val) {
-							if (($dname = nospam_name_decode($name, $key)) !== $name
-								AND isset($flux['data'][$dname]))
-								$flux['data'][$dname] = (is_string($val) ? autosave_clean_value($val) : array_map('autosave_clean_value', $val));
-						}
-					}
-				}
-			}
+		if (_SPAM_ENCRYPT_NAME
+			or (isset($flux['data']['_nospam_encrypt']) and $flux['data']['_nospam_encrypt'])) {
+			include_spip('inc/nospam_encrypt');
+			$flux['data'] = nospam_encrypt_check_valeurs($flux['data'], $flux['args']);
 		}
 	}
 	return $flux;
@@ -197,27 +105,24 @@ function nospam_formulaire_charger($flux) {
  * @return array
  */
 function nospam_formulaire_verifier($flux) {
-	static $deja = false;
 	$form = $flux['args']['form'];
 	if (in_array($form, nospam_lister_formulaires())) {
 		include_spip("inc/nospam");
-		$jeton = _request('_jeton');
+
+		$erreur = '';
 		// y a-t-il des names encryptes a decrypter ?
 		// si oui on les decrypte puis on relance la verif complete
 		// attention, du coup verifier() est appele 2 fois dans ce cas (peut poser probleme ?)
-		// donc on repasse ici une deuxieme fois, et il ne faut pas relancer le decryptage
-		if (_request('_encrypt') AND !$deja) {
-			$deja = true;
-			$re_verifier = false;
-			foreach ($_POST as $k => $v) {
-				$kd = nospam_name_decode($k, $jeton);
-				if ($kd !== $k) {
-					set_request($kd, $v);
-					$re_verifier = true;
-				}
+		// donc on repasse ici une deuxieme fois, et il ne faut pas relancer le decryptage,
+		// ce qui est assure par le fait que nospam_encrypt_decrypt_post() retourne false au second coup
+		if (_SPAM_ENCRYPT_NAME or _request('_nospam_encrypt')) {
+			$res = nospam_encrypt_decrypt_post($form);
+
+			if (is_string($res)) {
+				$erreur = $res;
 			}
 			// si on a decode des champs, il faut relancer toute la chaine de verification et sortir
-			if ($re_verifier) {
+			elseif ($res) {
 				$verifier = charger_fonction("verifier", "formulaires/$form/", true);
 				$flux['data'] = pipeline(
 					'formulaire_verifier',
@@ -225,29 +130,43 @@ function nospam_formulaire_verifier($flux) {
 						'args' => array('form' => $form, 'args' => $flux['args']['args']),
 						'data' => $verifier ? call_user_func_array($verifier, $flux['args']['args']) : array())
 				);
-				$deja = false;
 				return $flux;
 			}
 		}
-		// si l'encrypt a ete active depuis l'affichage initial de ce form, on rebalance l'erreur technique
-		// pour reforcer un POST
-		if (_SPAM_ENCRYPT_NAME AND !_request('_encrypt')) {
-			spip_log('SPAM_ENCRYPT_NAME active mais _encrypt manquant', 'nospam');
-			$flux['data']['message_erreur'] = _T('nospam:erreur_jeton');
-		} // le jeton prend en compte l'heure et l'ip de l'internaute
-		elseif (_request('nobot') // trop facile !
-			OR _request('email_nobot')
-			OR (!verifier_jeton($jeton, $form))
-		) {
-			if (_request('email_nobot'))
-				spip_log('email_nobot rempli : ' . _request('email_nobot'), 'nospam');
-			if (_request('nobot'))
-				spip_log('nobot rempli : ' . _request('email_nobot'), 'nospam');
-			#spip_log('pas de jeton pour '.var_export($flux,true),'nospam');
-			$flux['data']['message_erreur'] .= _T('nospam:erreur_jeton');
+
+		// pas la peine si on a deja une erreur
+		if (!$erreur) {
+			$jeton = _request('_jeton');
+			if (_request('nobot') // trop facile !
+				OR _request('email_nobot')
+				OR (!verifier_jeton($jeton, $form))
+			) {
+				if (_request('email_nobot')) {
+					spip_log("form $form:email_nobot rempli: " . _request('email_nobot'), 'nospam' . _LOG_INFO_IMPORTANTE);
+					$erreur = _T('nospam:erreur_jeton');
+				}
+				elseif (_request('nobot')) {
+					spip_log("form $form:nobot rempli: " . _request('email_nobot'), 'nospam' . _LOG_INFO_IMPORTANTE);
+					$erreur = _T('nospam:erreur_jeton');
+				}
+				elseif(!verifier_jeton($jeton, $form)) {
+					spip_log("form $form:jeton incorrect: $jeton", 'nospam' . _LOG_INFO_IMPORTANTE);
+					#spip_log('pas de jeton pour '.var_export($flux,true),'nospam' . _LOG_DEBUG);
+					$erreur = _T('nospam:erreur_jeton');
+				}
+			}
+		}
+
+		if ($erreur) {
+			if (!isset($flux['data']['message_erreur'])) {
+				$flux['data']['message_erreur'] = '';
+			}
+			$flux['data']['message_erreur'] .= $erreur;
+
 			if ($form == 'forum')
 				unset($flux['data']['previsu']);
 		}
+
 
 		// pas la peine de filtrer les contenus postés par un admin
 		if (!isset($GLOBALS['visiteur_session']['statut']) OR $GLOBALS['visiteur_session']['statut'] != '0minirezo') {
