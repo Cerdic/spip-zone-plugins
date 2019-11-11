@@ -1,15 +1,15 @@
 <paquet
 	prefix="isocode"
 	categorie="outil"
-	version="0.3.0"
+	version="0.4.0"
 	etat="dev"
 	compatibilite="[3.1.0;3.2.*]"
 	logo="isocode_logo-64.png"
 	schema="1"
 >
 
-	<nom>Codes ISO</nom>
-	<!-- Codes ISO pour les langues, les pays et autres objets -->
+	<nom>Nomenclatures officielles</nom>
+	<!-- Nomenclatures pour les langues, les pays et autres éléments -->
 
 	<auteur lien="http://blog.smellup.net/">Eric Lupinacci</auteur>
 
