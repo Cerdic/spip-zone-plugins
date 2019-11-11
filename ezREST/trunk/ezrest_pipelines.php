@@ -28,7 +28,6 @@ function ezrest_post_cache($flux) {
 	$fichier_index = constant($configuration['racine']) . $configuration['dossier_plugin'] . 'index.txt';
 
 	// Lecture du fichier d'index et récupération du tableau des caches.
-	$contenu_index = '';
 	lire_fichier($fichier_index, $contenu_index);
 	$index = $contenu_index ? unserialize($contenu_index) : array();
 
