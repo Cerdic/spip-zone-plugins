@@ -24,8 +24,8 @@ function action_nospam_confirm_action_dist() {
 		if ($desc_json and $hash === nospam_hash_action($desc_json)) {
 
 			if ($desc = json_decode($desc_json, true)) {
-				// on purge ce fichier, tout de suite, l'action est imminente
-				@unlink($fichier_action);
+				// on move ce fichier, le temps de l'execution, pour eviter une double exec (les navs font parfois un double hit sur l'iframe)
+				@rename($fichier_action, $fichier_action = $fichier_action . ".inprogress");
 
 				// si on a fournit un time alors il faut ajouter l'action dans la queue
 				if (!is_null($desc['time'])) {
@@ -66,7 +66,10 @@ function action_nospam_confirm_action_dist() {
 		@unlink($fichier_action);
 	}
 	else {
-		spip_log("nospam_confirm_action_dist:hash $hash errone: fichier $fichier_action absent (doublon deja execute ?)", 'nospam' . _LOG_ERREUR);
+		// pas la peine de loger si le fichier .inprogress est la, c'est un autre thread qui s'en occupe
+		if (!file_exists($fichier_action . '.inprogress')) {
+			spip_log("nospam_confirm_action_dist:hash $hash errone: fichier $fichier_action absent (doublon deja execute ?)", 'nospam' . _LOG_ERREUR);
+		}
 	}
 
 	// supprimer les actions plus vieilles que 5mn
