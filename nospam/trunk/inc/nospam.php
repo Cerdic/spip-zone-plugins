@@ -35,7 +35,7 @@ function nospam_hash_env() {
  *   cle calculee
  */
 function creer_jeton($form, $qui = null) {
-	$time = date('Y-m-d-H');
+	$time = date('Y-m-d-H',$_SERVER['REQUEST_TIME']);
 	if (is_null($qui)) {
 		if (isset($GLOBALS['visiteur_session']['id_auteur']) and intval($GLOBALS['visiteur_session']['id_auteur'])) {
 			$qui = ':'.$GLOBALS['visiteur_session']['id_auteur'].':'.$GLOBALS['visiteur_session']['nom'];
@@ -60,7 +60,7 @@ function creer_jeton($form, $qui = null) {
  * @return bool cle correcte ?
  */
 function verifier_jeton($jeton, $form, $qui = null) {
-	$time = time();
+	$time = $_SERVER['REQUEST_TIME'];
 	$time_old = date('Y-m-d-H', $time-3600);
 	$time = date('Y-m-d-H', $time);
 
