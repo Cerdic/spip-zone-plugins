@@ -45,7 +45,7 @@ function isocode_liste_ezcollection($collections) {
 	$collections['pays'] = array(
 		'module'    => 'isocode',
 		'cache'     => array(
-			'type'  => 'spip',
+			'type'  => 'ezrest',
 			'duree' => 3600 * 24 * 30
 		),
 		'filtres'   => array(

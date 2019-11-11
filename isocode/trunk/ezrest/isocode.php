@@ -8,6 +8,22 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+$GLOBALS['isocode']['pays']['champs'] = array(
+	'code_alpha2' => 'code',
+	'code_alpha3' => 'code_a3',
+	'code_num' => 'code_num',
+	'label' => 'nom',
+	'capital' => 'capitale',
+	'area' => 'superficie',
+	'population' => 'population',
+	'code_continent' => 'continent',
+	'code_num_region' => 'region',
+	'tld' => 'tld',
+	'code_4217_3' => 'code_devise',
+	'currency_en' => 'nom_devise',
+	'phone_id' => 'indicatif_uit'
+);
+
 
 // -----------------------------------------------------------------------
 // -------------------------- COLLECTION PAYS ----------------------------
@@ -41,8 +57,13 @@ function pays_collectionner($conditions, $filtres, $configuration) {
 	$from = array('spip_iso3166countries');
 	// -- Tous le champs sauf les labels par langue et la date de mise à jour.
 	$description_table = sql_showtable('spip_iso3166countries');
-	$select = array_keys($description_table['field']);
-	$select = array_diff($select, array('label_fr', 'label_en', 'maj'));
+	$champs = array_keys($description_table['field']);
+	$champs = array_diff($champs, array('label_fr', 'label_en', 'maj'));
+	// -- Traduire les champs de Isocode en champs pour Géographie
+	$select = array();
+	foreach ($champs as $_champ) {
+		$select[] = "${_champ} as {$GLOBALS['isocode']['pays']['champs'][$_champ]}";
+	}
 
 	// -- Initialisation du where avec les conditions sur la table des dépots.
 	$where = array();
