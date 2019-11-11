@@ -20,8 +20,7 @@ function geographie_upgrade($nom_meta_base_version, $version_cible) {
 	// Installation du plugin
 	$maj['create'] = array(
 		array('creer_base'),
-		array('geographie_upgrade_importer_geographie'), // importation de presque toute la géo sauf arrondissements
-		array('geographie_upgrade_importer_arrondissements'), // importation des arrondissements
+		array('geographie_importer'), // importation des pays, régions et continents à partir du serveur
 	);
 
 	// On refait la base des pays
@@ -70,6 +69,9 @@ function geographie_upgrade($nom_meta_base_version, $version_cible) {
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
+function geographie_importer() {
+}
+
 function geographie_upgrade_importer_geographie() {
 	if ($importer_geographie = charger_fonction('geographie', 'imports')) {
 		$importer_geographie();
@@ -98,15 +100,13 @@ function geographie_upgrade_importer_pays() {
 function geographie_vider_tables($nom_meta_base_version) {
 	sql_drop_table('spip_geo_pays');
 	sql_drop_table('spip_geo_regions');
-	sql_drop_table('spip_geo_departements');
-	sql_drop_table('spip_geo_arrondissements');
-	sql_drop_table('spip_geo_communes');
+	sql_drop_table('spip_geo_continents');
+//	sql_drop_table('spip_geo_subdivisions');
+//	sql_drop_table('spip_geo_communes');
 
 	sql_drop_table('spip_geo_pays_liens');
-	sql_drop_table('spip_geo_regions_liens');
-	sql_drop_table('spip_geo_departements_liens');
-	sql_drop_table('spip_geo_arrondissements_liens');
-	sql_drop_table('spip_geo_communes_liens');
+//	sql_drop_table('spip_geo_subdivisions_liens');
+//	sql_drop_table('spip_geo_communes_liens');
 
 	effacer_meta($nom_meta_base_version);
 }

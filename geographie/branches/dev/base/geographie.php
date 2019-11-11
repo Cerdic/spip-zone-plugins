@@ -16,11 +16,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Déclarations d'interface pour le compilateur
  */
 function geographie_declarer_tables_interfaces($interface) {
-	$interface['table_des_tables']['geo_pays'] = 'geo_pays';
+	$interface['table_des_tables']['geo_continents'] = 'geo_continents';
 	$interface['table_des_tables']['geo_regions'] = 'geo_regions';
-	$interface['table_des_tables']['geo_departements'] = 'geo_departements';
-	$interface['table_des_tables']['geo_arrondissements'] = 'geo_arrondissements';
-	$interface['table_des_tables']['geo_communes'] = 'geo_communes';
+	$interface['table_des_tables']['geo_pays'] = 'geo_pays';
+//	$interface['table_des_tables']['geo_subdivisions'] = 'geo_subdivisions';
+//	$interface['table_des_tables']['geo_communes'] = 'geo_communes';
 
 	return $interface;
 }
@@ -42,17 +42,31 @@ function geographie_declarer_tables_objets_sql($tables) {
 		'principale' => 'oui',
 		'table_objet_surnoms' => array('geo_pay', 'geopay', 'geopays'), // table_objet('geopays') => 'geo_pays'
 		'field' => array(
-			'id_pays' => 'smallint NOT NULL',
-			'code' => 'varchar(2) default "" NOT NULL',
-			'nom' => 'text DEFAULT "" NOT NULL',
+			'id_pays'       => 'bigint(21) NOT NULL',                   // Permet d'utiliser le pays comme un objet
+			'code'          => 'varchar(2) default "" NOT NULL',        // Code ISO 3166 alpha2 utilisé dans les liens
+			'nom'           => 'text DEFAULT "" NOT NULL',              // Nom normalisé multilingue
+			'code_a3'       => "char(3) DEFAULT '' NOT NULL",           // Code ISO 3166 alpha3
+			'code_num'      => "char(3) DEFAULT '' NOT NULL",           // Code ISO 3166 numérique (compatible UN M49)
+			'capitale'      => "varchar(255) DEFAULT '' NOT NULL",      // Nom de la capitale
+			'superficie'    => "int DEFAULT 0 NOT NULL",                // Superficie en km2
+			'population'    => "int DEFAULT 0 NOT NULL",                //
+			'continent'     => "char(2) DEFAULT '' NOT NULL",           // Code GeoIP du continent
+			'region'        => "char(3) DEFAULT '' NOT NULL",           // Code ISO 3166 numérique de la région (UN M49)
+			'tld'           => "char(3) DEFAULT '' NOT NULL",           // Tld - Domaine internet
+			'code_devise'   => "char(3) DEFAULT '' NOT NULL",           // Code ISO-4217 de la devise du pays
+			'nom_devise'    => "varchar(255) DEFAULT '' NOT NULL",      // Nom anglais de la devise
+			'indicatif_uit' => "varchar(16) DEFAULT '' NOT NULL",       // Indicatif téléphonique du pays
 		),
 		'key' => array(
-			'PRIMARY KEY' => 'id_pays',
+			'PRIMARY KEY'   => 'id_pays',
+			'KEY code'      => 'code',
+			'KEY code_a3'   => 'code',
+			'KEY code_num'  => 'code'
 		),
 		'titre' => 'nom AS titre, "" AS lang',
 		'champs_editables' => array(''),
 		'champs_versionnes' => array(''),
-		'rechercher_champs' => array('code' => 10, 'nom' => 8),
+		'rechercher_champs' => array('code' => 10, 'nom' => 8, 'code_a3' => 5),
 		'tables_jointures' => array(),
 	);
 
@@ -61,9 +75,10 @@ function geographie_declarer_tables_objets_sql($tables) {
 		'principale' => 'oui',
 		'table_objet_surnoms' => array('georegion'),
 		'field' => array(
-			'id_region' => 'smallint NOT NULL',
-			'id_pays' => 'smallint NOT NULL',
-			'nom' => 'tinytext DEFAULT "" NOT NULL',
+			'id_region' => 'bigint(21) NOT NULL',
+			'code'      => "char(3) DEFAULT '' NOT NULL",  // Code UN M49 numérique
+			'parent'    => "char(3) DEFAULT '' NOT NULL",  // Code UN M49 du parent ou ''
+			'nom'       => 'text DEFAULT "" NOT NULL',     // Nom normalisé multilingue
 		),
 		'key' => array(
 			'PRIMARY KEY' => 'id_region',
@@ -71,87 +86,32 @@ function geographie_declarer_tables_objets_sql($tables) {
 		'titre' => 'nom AS titre, "" AS lang',
 		'champs_editables' => array(''),
 		'champs_versionnes' => array(''),
-		'rechercher_champs' => array('nom' => 10),
+		'rechercher_champs' => array('nom' => 10, 'code' => 8),
 		'tables_jointures' => array(),
 	);
 
-	$tables['spip_geo_departements'] = array(
-		'type' => 'geo_departement',
+	$tables['spip_geo_continents'] = array(
+		'type' => 'geo_continent',
 		'principale' => 'oui',
-		'table_objet_surnoms' => array('geodepartement'),
 		'field' => array(
-			'id_departement' => 'smallint NOT NULL',
-			'abbr' => 'varchar(5) default "" NOT NULL',
-			'id_region' => 'smallint NOT NULL',
-			'nom' => 'tinytext DEFAULT "" NOT NULL',
+			'id_continent' => 'bigint(21) NOT NULL',
+			'code'         => "char(2) DEFAULT '' NOT NULL", // Code GeoIP à deux lettres majuscules
+			'nom'          => 'text DEFAULT "" NOT NULL',    // Nom normalisé multilingue
 		),
 		'key' => array(
-			'PRIMARY KEY' => 'id_departement',
+			'PRIMARY KEY' => 'id_continent',
 		),
 		'titre' => 'nom AS titre, "" AS lang',
 		'champs_editables' => array(''),
 		'champs_versionnes' => array(''),
-		'rechercher_champs' => array('nom' => 10, 'abbr' => 5),
-		'tables_jointures' => array(),
-	);
-
-	$tables['spip_geo_arrondissements'] = array(
-		'type' => 'geo_arrondissement',
-		'principale' => 'oui',
-		'table_objet_surnoms' => array('geoarrondissement'),
-		'field' => array(
-			'id_arrondissement' => 'bigint(21) NOT NULL',
-			'id_departement' => 'smallint NOT NULL',
-			'nom' => 'tinytext DEFAULT "" NOT NULL',
-			'id_commune' => 'bigint(21) NOT NULL',
-			'population' => 'integer DEFAULT 0',
-			'superficie' => 'integer DEFAULT 0',
-			'densite' => 'integer DEFAULT 0',
-			'nb_cantons' => 'integer DEFAULT 0',
-			'nb_communes' => 'integer DEFAULT 0',
-		),
-		'key' => array(
-			'PRIMARY KEY' => 'id_arrondissement',
-		),
-		'titre' => 'nom AS titre, "" AS lang',
-		'champs_editables' => array(''),
-		'champs_versionnes' => array(''),
-		'rechercher_champs' => array('nom' => 10),
-		'tables_jointures' => array(),
-	);
-
-	$tables['spip_geo_communes'] = array(
-		'type' => 'geo_commune',
-		'principale' => 'oui',
-		'table_objet_surnoms' => array('geocommune'),
-		'field' => array(
-			'id_commune' => 'bigint(21) NOT NULL',
-			'insee' => 'char(6) default "" NOT NULL',
-			'id_departement' => 'smallint NOT NULL',
-			'id_pays' => 'smallint NOT NULL',
-			'code_postal' => 'char(5) default "" NOT NULL',
-			'nom' => 'tinytext DEFAULT "" NOT NULL',
-			'longitude' => 'varchar(15) default "" NOT NULL',
-			'latitude' => 'varchar(15) default "" NOT NULL',
-		),
-		'key' => array(
-			'PRIMARY KEY' => 'id_commune',
-			'INDEX insee' => 'insee',
-			'INDEX id_pays' => 'id_pays',
-		),
-		'titre' => 'nom AS titre, "" AS lang',
-		'champs_editables' => array(''),
-		'champs_versionnes' => array(''),
-		'rechercher_champs' => array('nom' => 10, 'code_postal' => 5),
+		'rechercher_champs' => array('nom' => 10, 'code' => 8),
 		'tables_jointures' => array(),
 	);
 
 	// Jointures pour tous les objets
 	$tables[]['tables_jointures'][] = 'geo_pays_liens';
-	$tables[]['tables_jointures'][] = 'geo_regions_liens';
-	$tables[]['tables_jointures'][] = 'geo_departements_liens';
-	$tables[]['tables_jointures'][] = 'geo_arrondissements_liens';
-	$tables[]['tables_jointures'][] = 'geo_communes_liens';
+//	$tables[]['tables_jointures'][] = 'geo_subdivisions_liens';
+//	$tables[]['tables_jointures'][] = 'geo_communes_liens';
 
 	return $tables;
 }
@@ -170,20 +130,21 @@ function geographie_declarer_tables_objets_sql($tables) {
 function geographie_declarer_tables_auxiliaires($tables) {
 	$tables['spip_geo_pays_liens'] = array(
 		'field' => array(
-			'id_pays' => 'bigint(21) DEFAULT "0" NOT NULL',
+			'code' => 'VARCHAR(2) DEFAULT "" NOT NULL',
 			'id_objet' => 'bigint(21) DEFAULT "0" NOT NULL',
 			'objet' => 'VARCHAR(25) DEFAULT "" NOT NULL',
 			'vu' => 'VARCHAR(6) DEFAULT "non" NOT NULL',
 		),
 		'key' => array(
-			'PRIMARY KEY' => 'id_pays,id_objet,objet',
-			'KEY id_pays' => 'id_pays',
+			'PRIMARY KEY' => 'code,id_objet,objet',
+			'KEY code' => 'code',
 		),
 	);
-
-	$tables['spip_geo_regions_liens'] = array(
+/*
+	$tables['spip_geo_subdivisions_liens'] = array(
 		'field' => array(
-			'id_region' => 'bigint(21) DEFAULT "0" NOT NULL',
+			'code' => 'VARCHAR(6) DEFAULT "" NOT NULL',
+			'type_subdivision' => 'VARCHAR(32) DEFAULT "" NOT NULL',
 			'id_objet' => 'bigint(21) DEFAULT "0" NOT NULL',
 			'objet' => 'VARCHAR(25) DEFAULT "" NOT NULL',
 			'vu' => 'VARCHAR(6) DEFAULT "non" NOT NULL',
@@ -191,32 +152,6 @@ function geographie_declarer_tables_auxiliaires($tables) {
 		'key' => array(
 			'PRIMARY KEY' => 'id_region,id_objet,objet',
 			'KEY id_region' => 'id_region',
-		),
-	);
-
-	$tables['spip_geo_departements_liens'] = array(
-		'field' => array(
-			'id_departement' => 'bigint(21) DEFAULT "0" NOT NULL',
-			'id_objet' => 'bigint(21) DEFAULT "0" NOT NULL',
-			'objet' => 'VARCHAR(25) DEFAULT "" NOT NULL',
-			'vu' => 'VARCHAR(6) DEFAULT "non" NOT NULL',
-		),
-		'key' => array(
-			'PRIMARY KEY' => 'id_departement,id_objet,objet',
-			'KEY id_departement' => 'id_departement',
-		),
-	);
-
-	$tables['spip_geo_arrondissements_liens'] = array(
-		'field' => array(
-			'id_arrondissement' => 'bigint(21) DEFAULT "0" NOT NULL',
-			'id_objet' => 'bigint(21) DEFAULT "0" NOT NULL',
-			'objet' => 'VARCHAR(25) DEFAULT "" NOT NULL',
-			'vu' => 'VARCHAR(6) DEFAULT "non" NOT NULL',
-		),
-		'key' => array(
-			'PRIMARY KEY' => 'id_arrondissement,id_objet,objet',
-			'KEY id_arrondissement' => 'id_arrondissement',
 		),
 	);
 
@@ -232,14 +167,14 @@ function geographie_declarer_tables_auxiliaires($tables) {
 			'KEY id_commune' => 'id_commune',
 		),
 	);
-
+*/
 	return $tables;
 }
 
 function geographie_lister_tables_noexport($liste) {
-	$liste[] = 'spip_geo_communes';
-	$liste[] = 'spip_geo_arrondissements';
-	$liste[] = 'spip_geo_departements';
+//	$liste[] = 'spip_geo_communes';
+//	$liste[] = 'spip_geo_subdivisions';
+	$liste[] = 'spip_geo_continents';
 	$liste[] = 'spip_geo_regions';
 	$liste[] = 'spip_geo_pays';
 
@@ -247,8 +182,8 @@ function geographie_lister_tables_noexport($liste) {
 }
 
 global $IMPORT_tables_noerase;
-$IMPORT_tables_noerase[] = 'spip_geo_communes';
-$IMPORT_tables_noerase[] = 'spip_geo_arrondissements';
-$IMPORT_tables_noerase[] = 'spip_geo_departements';
+//$IMPORT_tables_noerase[] = 'spip_geo_communes';
+//$IMPORT_tables_noerase[] = 'spip_geo_subdivisions';
+$IMPORT_tables_noerase[] = 'spip_geo_continents';
 $IMPORT_tables_noerase[] = 'spip_geo_regions';
 $IMPORT_tables_noerase[] = 'spip_geo_pays';

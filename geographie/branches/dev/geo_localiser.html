@@ -12,7 +12,7 @@ $(document).ready(function(){
 $("#codepostal").focus().autocomplete('#URL_PAGE{inc-codepostaux}');
 
 //on envoi le code postal dans l'url
-//le pays est france si une ville est entrée
+//le pays est france si une ville est entr√©e
 $("#ville").focus().autocomplete('#URL_PAGE{inc-villes}', {
    extraParams: {
        code_postal: function() { return $("#codepostal").val(); }

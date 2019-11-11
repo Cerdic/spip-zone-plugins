@@ -4,9 +4,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
- * Utilisation du pipeline afficher_contenu_objet
+ * Utilisation du pipeline afficher_complement_objet
  *
- * @pipeline afficher_contenu_objet
+ * @pipeline afficher_complement_objet
  *
  * @param array $flux
  *     Données du pipeline
