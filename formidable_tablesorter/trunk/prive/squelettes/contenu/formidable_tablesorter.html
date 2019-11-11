@@ -1,0 +1,20 @@
+<BOUCLE_formulaire(FORMULAIRES){id_formulaire}{tout}{si #AUTORISER{voir, formulairesreponse, #ID_FORMULAIRE}}>
+	<h1>#TITRE</h1>
+	#SET{saisies,#SAISIES|unserialize}
+	#SET{saisies_finales,#GET{saisies}|saisies_lister_finales}
+	<B_reponses>
+	<table class="tablesorter">
+		<B_entete>
+		<thead>
+			<tr>
+		<BOUCLE_entete(POUR) {tableau #GET{saisies_finales}}>
+			[<th>(#VALEUR{options/label}|sinon{#VALEUR{options/label_case}})</th>]
+		</BOUCLE_entete>
+			</tr>
+		</thead>
+		</B_entete>
+		<BOUCLE_reponses(FORMULAIRES_REPONSES){id_formulaire}>
+		</BOUCLE_reponses>
+	</table>
+	</B_reponses>
+</BOUCLE_formulaire>
