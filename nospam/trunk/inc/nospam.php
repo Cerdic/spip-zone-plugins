@@ -12,6 +12,29 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
+ * Recuperer le HTML a afficher pour faire confirmer une action par l'utilisateur a son insu
+ * (antispam qui declenche l'action uniquement si l'utilisateur charge les ressources de la page apres le POST du formulaire)
+ *
+ * @param string $function
+ * @param string $description
+ * @param array $arguments
+ * @param string $file
+ * @param null $time
+ * @return string
+ */
+function nospam_confirm_action_html(
+	$function,
+	$description,
+	$arguments = array(),
+	$file = '',
+	$time = null) {
+	include_spip('action/nospam_confirm_action');
+
+	return nospam_confirm_action_prepare($function, $description, $arguments, $file, $time);
+}
+
+
+/**
  * Calculer un hash qui represente l'utilisateur
  * @return string
  */
