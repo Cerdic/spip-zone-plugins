@@ -72,6 +72,25 @@ function saisies_lister_par_nom($contenu, $avec_conteneur = true) {
 }
 
 /**
+ * Liste les saisies en parcourant tous les niveau de la hiérarchie, et en excluant les saisies ayant des sous-saisies
+ *
+ *
+ * @param array  $saisies Liste de saisies
+ *
+ * @return liste de ces saisies triées selon l'ordre de déclaration initiale
+ */
+function saisies_lister_finales($saisies) {
+	$saisies_retour = array();
+	foreach ($saisies as $identifiant => $saisie) {
+		if (isset($saisie['saisies'])) {
+			$saisies_retour = array_merge($saisies_retour, saisies_lister_finales($saisie['saisies']));
+		} elseif (isset($saisie['saisie'])) {// pour ne pas avoir les options gloables des saisies
+			$saisies_retour[] = $saisie;
+		}
+	}
+	return $saisies_retour;
+}
+/**
  * Liste les saisies ayant une option X
  * # saisies_lister_avec_option('sql', $saisies);.
  *
