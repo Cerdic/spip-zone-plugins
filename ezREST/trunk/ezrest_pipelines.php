@@ -23,30 +23,33 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function ezrest_post_cache($flux) {
 
-	// Identification du fichier d'index des caches
-	$configuration = $flux['args']['configuration'];
-	$fichier_index = constant($configuration['racine']) . $configuration['dossier_plugin'] . 'index.txt';
+	// On vérifie que l'appel du pipeline est bien consécutif à une action sur les caches de REST Factory
+	if ($flux['args']['plugin'] == 'ezrest') {
+		// Identification du fichier d'index des caches
+		$configuration = $flux['args']['configuration'];
+		$fichier_index = constant($configuration['racine']) . $configuration['dossier_plugin'] . 'index.txt';
 
-	// Lecture du fichier d'index et récupération du tableau des caches.
-	lire_fichier($fichier_index, $contenu_index);
-	$index = $contenu_index ? unserialize($contenu_index) : array();
+		// Lecture du fichier d'index et récupération du tableau des caches.
+		lire_fichier($fichier_index, $contenu_index);
+		$index = $contenu_index ? unserialize($contenu_index) : array();
 
-	// Extraction du fichier cache : on utilise juste le nom et le répertoire du plugin ce qui suffit pour être unique.
-	$fichier_cache = basename(dirname($flux['args']['fichier_cache'])) . '/' . basename($flux['args']['fichier_cache']);
+		// Extraction du fichier cache : on utilise juste le nom et le répertoire du plugin ce qui suffit pour être unique.
+		$fichier_cache = basename(dirname($flux['args']['fichier_cache'])) . '/' . basename($flux['args']['fichier_cache']);
 
-	if ($flux['args']['fonction'] == 'ecrire') {
-		// On vient d'écrire un cache, on le loge dans l'index.
-		$index[$fichier_cache] = $flux['args']['cache'];
+		if ($flux['args']['fonction'] == 'ecrire') {
+			// On vient d'écrire un cache, on le loge dans l'index.
+			$index[$fichier_cache] = $flux['args']['cache'];
 
-	} elseif ($flux['args']['fonction'] == 'supprimer') {
-		// On vient de supprimer un cache, on le retire de l'index.
-		if ($index and isset($index[$fichier_cache])) {
-			unset($index[$fichier_cache]);
+		} elseif ($flux['args']['fonction'] == 'supprimer') {
+			// On vient de supprimer un cache, on le retire de l'index.
+			if ($index and isset($index[$fichier_cache])) {
+				unset($index[$fichier_cache]);
+			}
 		}
-	}
 
-	// Mise à jour de l'index
-	ecrire_fichier($fichier_index, serialize($index));
+		// Mise à jour de l'index
+		ecrire_fichier($fichier_index, serialize($index));
+	}
 
 	return $flux;
 }
