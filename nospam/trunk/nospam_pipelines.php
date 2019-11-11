@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin No-SPAM
- * (c) 2008-2011 Cedric Morin Yterium.net
+ * (c) 2008-2019 Cedric Morin Yterium&Nursit
  * Licence GPL
  *
  */
@@ -82,7 +82,7 @@ function nospam_formulaire_charger($flux) {
 		AND is_array($flux['data'])
 	) {
 		include_spip("inc/nospam");
-		$jeton = creer_jeton($form);
+		$jeton = nospam_creer_jeton($form);
 		if (!isset($flux['data']['_hidden'])) {
 			$flux['data']['_hidden'] = "";
 		}
@@ -139,7 +139,7 @@ function nospam_formulaire_verifier($flux) {
 			$jeton = _request('_jeton');
 			if (_request('nobot') // trop facile !
 				OR _request('email_nobot')
-				OR (!verifier_jeton($jeton, $form))
+				OR (!nospam_verifier_jeton($jeton, $form))
 			) {
 				if (_request('email_nobot')) {
 					spip_log("form $form:email_nobot rempli: " . _request('email_nobot'), 'nospam' . _LOG_INFO_IMPORTANTE);
@@ -149,7 +149,7 @@ function nospam_formulaire_verifier($flux) {
 					spip_log("form $form:nobot rempli: " . _request('email_nobot'), 'nospam' . _LOG_INFO_IMPORTANTE);
 					$erreur = _T('nospam:erreur_jeton');
 				}
-				elseif(!verifier_jeton($jeton, $form)) {
+				elseif(!nospam_verifier_jeton($jeton, $form)) {
 					spip_log("form $form:jeton incorrect: $jeton", 'nospam' . _LOG_INFO_IMPORTANTE);
 					#spip_log('pas de jeton pour '.var_export($flux,true),'nospam' . _LOG_DEBUG);
 					$erreur = _T('nospam:erreur_jeton');
@@ -303,9 +303,9 @@ function nospam_pre_edition($flux) {
 			);
 
 			$seuils = isset($GLOBALS['ip_blacklist'][$GLOBALS['ip']]) ? $seuils['blacklist'] : (($spammeur_connu OR $lang_suspecte) ? $seuils['suspect'] : $seuils[0]);
-			include_spip("inc/nospam"); // pour analyser_spams()
+			include_spip("inc/nospam"); // pour nospam_analyser_spams()
 			foreach ($flux['data'] as $champ => $valeur) {
-				$infos = analyser_spams($valeur);
+				$infos = nospam_analyser_spams($valeur);
 				if ($infos['contenu_cache']) {
 					// s'il y a du contenu caché avec des styles => spam direct
 					$flux['data']['statut'] = 'spam';
@@ -330,7 +330,7 @@ function nospam_pre_edition($flux) {
 
 					if ($flux['data']['statut'] != 'spam') {
 						$champs = array_unique(array('texte', $champ));
-						if ($h = rechercher_presence_liens_spammes($infos['liens'], _SPAM_URL_MAX_OCCURENCES, 'spip_forum', $champs)) {
+						if ($h = nospam_rechercher_presence_liens_spammes($infos['liens'], _SPAM_URL_MAX_OCCURENCES, 'spip_forum', $champs)) {
 							$flux['data']['statut'] = 'spam';
 							spip_log("\t" . $flux['data']['auteur'] . "\t" . $GLOBALS['ip'] . "\t" . "requalifié en spam car lien $h deja dans un spam", 'nospam');
 						}
@@ -409,6 +409,7 @@ function nospam_flush_and_update() {
 }
 
 if (!defined('_NOSPAM_IP_LIST_CACHE')) define('_NOSPAM_IP_LIST_CACHE', 3600);
+
 /**
  * Recuperer la liste des IP black ou grey sur nospam.spip.net
  * si on a pas une liste a jour
@@ -480,5 +481,3 @@ function nospam_check_ip_status($ip) {
 	}
 	return "ok";
 }
-
-?>

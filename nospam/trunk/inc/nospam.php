@@ -1,15 +1,20 @@
 <?php
 /**
  * Plugin No-SPAM
- * (c) 2008 Cedric Morin Yterium.net
+ * (c) 2008-2019 Cedric Morin Yterium&Nursit
  * Licence GPL
  *
  */
+
 
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+/**
+ * Calculer un hash qui represente l'utilisateur
+ * @return string
+ */
 function nospam_hash_env() {
 	static $res ='';
 	if ($res) {
@@ -34,7 +39,7 @@ function nospam_hash_env() {
  * @return string
  *   cle calculee
  */
-function creer_jeton($form, $qui = null) {
+function nospam_creer_jeton($form, $qui = null) {
 	$time = date('Y-m-d-H',$_SERVER['REQUEST_TIME']);
 	if (is_null($qui)) {
 		if (isset($GLOBALS['visiteur_session']['id_auteur']) and intval($GLOBALS['visiteur_session']['id_auteur'])) {
@@ -59,7 +64,7 @@ function creer_jeton($form, $qui = null) {
  *   identifiant du visiteur a qui est attribue le jeton
  * @return bool cle correcte ?
  */
-function verifier_jeton($jeton, $form, $qui = null) {
+function nospam_verifier_jeton($jeton, $form, $qui = null) {
 	$time = $_SERVER['REQUEST_TIME'];
 	$time_old = date('Y-m-d-H', $time-3600);
 	$time = date('Y-m-d-H', $time);
@@ -93,7 +98,7 @@ function verifier_jeton($jeton, $form, $qui = null) {
  * @return int
  *   compte du texte nettoye
  */
-function compter_caracteres_utiles($texte, $propre = true) {
+function nospam_compter_caracteres_utiles($texte, $propre = true) {
 	include_spip('inc/charsets');
 	if ($propre) {
 		$texte = propre($texte);
@@ -121,7 +126,7 @@ function compter_caracteres_utiles($texte, $propre = true) {
  * @param string $texte texte d'entree
  * @return array rapport d'analyse
  */
-function analyser_spams($texte) {
+function nospam_analyser_spams($texte) {
 	$infos = array(
 		'caracteres_utiles' => 0, // nombre de caracteres sans les liens
 		'nombre_liens' => 0, // nombre de liens
@@ -159,10 +164,10 @@ function analyser_spams($texte) {
 	$texte = propre($texte);
 
 	// caracteres_utiles
-	$infos['caracteres_utiles'] = compter_caracteres_utiles($texte, false);
+	$infos['caracteres_utiles'] = nospam_compter_caracteres_utiles($texte, false);
 
 	// nombre de liens
-	$liens = array_filter(extraire_balises($texte, 'a'), 'pas_lien_ancre');
+	$liens = array_filter(extraire_balises($texte, 'a'), 'nospam_pas_lien_ancre');
 	$infos['nombre_liens'] = count($liens);
 	$infos['liens'] = $liens;
 
@@ -185,7 +190,7 @@ function analyser_spams($texte) {
  * @param string $texte lien
  * @return boolean : true ->
  */
-function pas_lien_ancre($texte) {
+function nospam_pas_lien_ancre($texte) {
 	return substr(extraire_attribut($texte, 'href'), 0, 1) == '#' ? false : true;
 }
 
@@ -204,7 +209,7 @@ function pas_lien_ancre($texte) {
  *   condition sur le statut='spam' pour ne regarder que les enregistrement en statut spam
  * @return bool
  */
-function rechercher_presence_liens_spammes($liens, $seuil, $table, $champs, $condstatut = null) {
+function nospam_rechercher_presence_liens_spammes($liens, $seuil, $table, $champs, $condstatut = null) {
 	include_spip('inc/filtres');
 
 	if (is_null($condstatut)) {

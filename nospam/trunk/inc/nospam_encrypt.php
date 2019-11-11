@@ -1,10 +1,11 @@
 <?php
 /**
  * Plugin No-SPAM
- * (c) 2008 Cedric Morin Yterium.net
+ * (c) 2008-2019 Cedric Morin Yterium&Nursit
  * Licence GPL
  *
  */
+
 
 
 if (!defined('_ECRIRE_INC_VERSION')) {
