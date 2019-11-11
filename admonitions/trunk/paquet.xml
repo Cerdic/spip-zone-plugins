@@ -1,14 +1,14 @@
 <paquet
-	prefix="notencart"
+	prefix="admonitions"
 	categorie="edition"
-	version="0.1.0"
+	version="0.1.1"
 	etat="test"
 	compatibilite="[2.0.0;3.2.*]"
-	logo="notencart.png"
+	logo="admonition.png"
 	documentation="https://contrib.spip.net/?article5191"
 >
 
-	<nom>Notes encadr&#233;es</nom>
+	<nom>Admonitions</nom>
 
 	<auteur lien="https://contrib.spip.net/gilcot">gilcot</auteur>
 
@@ -18,11 +18,11 @@
 	<credit lien="https://contrib.spip.net/Plugin-Encarts">Encarts</credit>
 	<credit lien="https://www.dokuwiki.org/plugin:note">DW Notes Plugin</credit>
 
-	<pipeline nom="pre_typo" inclure="notencart_pipelines.php" />
-	<pipeline nom="header_prive" inclure="notencart_pipelines.php" />
-	<pipeline nom="insert_head_css" inclure="notencart_pipelines.php" />
-	<pipeline nom="porte_plume_barre_pre_charger" inclure="notencart_pipelines.php" />
-	<pipeline nom="porte_plume_lien_class_vers_icone" inclure="notencart_pipelines.php" />
+	<pipeline nom="pre_typo" inclure="admonitions_pipelines.php" />
+	<pipeline nom="header_prive" inclure="admonitions_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="admonitions_pipelines.php" />
+	<pipeline nom="porte_plume_barre_pre_charger" inclure="admonitions_pipelines.php" />
+	<pipeline nom="porte_plume_lien_class_vers_icone" inclure="admonitions_pipelines.php" />
 
 	<utilise nom="porte_plume" />
 </paquet>
