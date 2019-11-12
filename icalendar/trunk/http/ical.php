@@ -44,6 +44,7 @@ function http_ical_get_collection_dist($requete, $reponse) {
 		$reponse->setStatusCode(200);
 		$reponse->setCharset('utf-8');
 		$reponse->headers->set('Content-Type', 'text/calendar');
+		$reponse->headers->set('Content-Disposition', 'attachment; filename="'.$collection.'.ics"');
 		$reponse->setContent($ics);
 	}
 	// Si on ne trouve rien c'est que ça n'existe pas
@@ -76,6 +77,7 @@ function http_ical_get_ressource_dist($requete, $reponse) {
 		$reponse->setStatusCode(200);
 		$reponse->setCharset('utf-8');
 		$reponse->headers->set('Content-Type', 'text/calendar');
+		$reponse->headers->set('Content-Disposition', 'attachment; filename="'.$collection.'_'.$ressource.'.ics"');
 		$reponse->setContent($ics);
 	}
 	// Si on ne trouve rien c'est que ça n'existe pas
