@@ -18,6 +18,8 @@ function action_formidable_recuperer_fichier() {
 	$arg = $securiser_action();
 	$arg = unserialize($arg);
 
+	spip_log("Action recuperer_fichier :  le arg est $arg et le hash $hash.", "formidable"._LOG_DEBUG);
+	spip_log("Du coup le resultat de securiser_action() est ". _action_auteur("$action-$arg", '', $pass, 'alea_ephemere'), "formidable"._LOG_DEBUG);
 	// test si autorisation de voir la réponse par cookie
 	$cookie_ok = false;
 	if (isset($arg['cookie'])) {
