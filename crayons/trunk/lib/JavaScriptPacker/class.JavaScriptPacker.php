@@ -724,7 +724,6 @@ class ParseMaster {
 // https://code.spip.net/@_escape
 	function _escape($string, $escapeChar) {
 		if ($escapeChar) {
-			$this->buffer = $escapeChar;
 			return preg_replace_callback(
 				'/\\' . $escapeChar . '(.)' .'/',
 				array(&$this, '_escapeBis'),
@@ -737,16 +736,15 @@ class ParseMaster {
 	}
 // https://code.spip.net/@_escapeBis
 	function _escapeBis($match) {
-		$this->_escaped[] = $match[1];
-		return $this->buffer;
+		$this->_escaped[] = $match[0];
+		return "@@@@AVECDELACROUTE".(count($this->_escaped)-1)."@@@@";
 	}
 
 	// decode escaped characters
 // https://code.spip.net/@_unescape
 	function _unescape($string, $escapeChar) {
 		if ($escapeChar) {
-			$regexp = '/'.'\\'.$escapeChar.'/';
-			$this->buffer = array('escapeChar'=> $escapeChar, 'i' => 0);
+			$regexp = '/@@@@AVECDELACROUTE(\d+)@@@@/';
 			return preg_replace_callback
 			(
 				$regexp,
@@ -759,16 +757,8 @@ class ParseMaster {
 		}
 	}
 // https://code.spip.net/@_unescapeBis
-	function _unescapeBis() {
-		if (isset($this->_escaped[$this->buffer['i']])
-			&& $this->_escaped[$this->buffer['i']] != '')
-		{
-			 $temp = $this->_escaped[$this->buffer['i']];
-		} else {
-			$temp = '';
-		}
-		$this->buffer['i']++;
-		return $this->buffer['escapeChar'] . $temp;
+	function _unescapeBis($r) {
+		return $this->_escaped[$r[1]];
 	}
 
 // https://code.spip.net/@_internalEscape
