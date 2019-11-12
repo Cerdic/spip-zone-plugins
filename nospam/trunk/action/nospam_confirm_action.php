@@ -72,10 +72,9 @@ function action_nospam_confirm_action_dist() {
 		}
 	}
 
-	// supprimer les actions plus vieilles que 5mn
-	include_spip('inc/invalideur');
+	// supprimer les actions plus vieilles que 5mn en les logeant
 	$old_time = $_SERVER['REQUEST_TIME'] - 5 * 60;
-	purger_repertoire($dir_actions, ['mtime' => $old_time, 'limit' => 100]);
+	nospam_purge_actions($dir_actions, ['mtime' => $old_time, 'limit' => 100]);
 
 	// et on renvoie un html minimum
 	if (!_request('redirect')) {
@@ -112,7 +111,8 @@ function nospam_confirm_action_prepare(
 		'description' => $description,
 		'arguments' => $arguments,
 		'file' => $file,
-		'time' => $time
+		'time' => $time,
+		'date' => date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']), // pour les logs, on met la date de la demande d'action
 	];
 	$desc = json_encode($desc);
 
@@ -165,4 +165,69 @@ function nospam_hash_action($desc_json) {
 	$hash = substr(md5(__FILE__ . secret_du_site() . $desc_json), 0, 16);
 
 	return $hash;
+}
+
+
+/**
+ * Purge le répertoire des actions en logant tout ce qu'on purge
+ *
+ * @param string $dir
+ *     Chemin du répertoire à purger
+ * @param array $options
+ *     Tableau des options. Peut être :
+ *
+ *     - atime : timestamp pour ne supprimer que les fichiers antérieurs
+ *       à cette date (via fileatime)
+ *     - mtime : timestamp pour ne supprimer que les fichiers antérieurs
+ *       à cette date (via filemtime)
+ *     - limit : nombre maximum de suppressions
+ * @return int
+ *     Nombre de fichiers supprimés
+ **/
+function nospam_purge_actions($dir, $options = array()) {
+	if (!is_dir($dir) or !is_readable($dir)) {
+		return;
+	}
+	$handle = opendir($dir);
+	if (!$handle) {
+		return;
+	}
+
+	$total = 0;
+
+	while (($fichier = @readdir($handle)) !== false) {
+		// Eviter ".", "..", ".htaccess", ".svn" etc.
+		if ($fichier[0] == '.') {
+			continue;
+		}
+		$chemin = "$dir/$fichier";
+		if (is_file($chemin)) {
+			if ((!isset($options['atime']) or (@fileatime($chemin) < $options['atime']))
+				and (!isset($options['mtime']) or (@filemtime($chemin) < $options['mtime']))
+			) {
+				$action = file_get_contents($chemin);
+				spip_log("Purge action non confirmee $fichier: $action", 'nospam_unconfirmed' . _LOG_INFO_IMPORTANTE);
+				@unlink($chemin);
+				$total++;
+			}
+		} else {
+			if (is_dir($chemin)) {
+				$opts = $options;
+				if (isset($options['limit'])) {
+					$opts['limit'] = $options['limit'] - $total;
+				}
+				$total += nospam_purge_actions($chemin, $opts);
+				if (isset($options['subdir']) && $options['subdir']) {
+					spip_unlink($chemin);
+				}
+			}
+		}
+
+		if (isset($options['limit']) and $total >= $options['limit']) {
+			break;
+		}
+	}
+	closedir($handle);
+
+	return $total;
 }
