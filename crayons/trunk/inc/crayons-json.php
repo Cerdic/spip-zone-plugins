@@ -61,7 +61,11 @@ function crayons_var2js($var) {
 	return false;
 }
 
-// Un json_encode qui marche en iso (la spec JSON exige utf-8)
+/**
+ * Un json_encode qui marche en iso (la spec JSON exige utf-8)
+ * @param $v
+ * @return bool|false|mixed|string
+ */
 function crayons_json_encode($v) {
 	if ($GLOBALS['meta']['charset'] == 'utf-8' and function_exists('json_encode')) {
 		return json_encode($v);
@@ -77,17 +81,13 @@ function crayons_json_encode($v) {
 	return $v;
 }
 
-// https://code.spip.net/@json_export
+/**
+ * https://code.spip.net/@json_export
+ *
+ * @param $var
+ * @return bool|false|mixed|string
+ * @deprecated
+ */
 function crayons_json_export($var) {
 	return crayons_json_encode($var);
-
-/// Il semble que ce hack n'ait plus lieu d'etre avec jquery 1.5
-/*
-	// flag indiquant qu'on est en iframe et qu'il faut proteger nos
-	// donnees dans un <textarea> ; attention $_FILES a ete vide par array_pop
-	if (defined('FILE_UPLOAD'))
-		return "<textarea>".htmlspecialchars($var)."</textarea>";
-	else
-		return $var;
-*/
 }

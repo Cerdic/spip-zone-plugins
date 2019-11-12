@@ -482,7 +482,8 @@ function crayons_update($id, $colval = array(), $type = '') {
 		} else {
 			// modification d'une table principale
 			include_spip('inc/modifier');
-			$a = modifier_contenu($type, $id, array(), $colval);
+			$res = objet_modifier_champs($type, $id, array(), $colval);
+			$a = ($res === '' ? true : false);
 		}
 	}
 	return $a;
@@ -495,7 +496,7 @@ function crayons_update_article($id_article, $c = false) {
 	include_spip('action/editer_article');
 
 	// Enregistrer les nouveaux contenus
-	revisions_articles($id_article, $c);
+	article_modifier($id_article, $c);
 
 	// En cas de statut ou de id_rubrique
 	// NB: instituer_article veut id_parent, et pas id_rubrique !
@@ -503,7 +504,7 @@ function crayons_update_article($id_article, $c = false) {
 		$c['id_parent'] = $c['id_rubrique'];
 		unset($c['id_rubrique']);
 	}
-	instituer_article($id_article, $c);
+	article_instituer($id_article, $c);
 }
 
 /**
@@ -585,7 +586,7 @@ function action_crayons_store_args($store = 'crayons_store') {
 		}
 	} else {
 		// Cas normal : JSON
-		echo crayons_json_export($r);
+		echo crayons_json_encode($r);
 	}
 
 	exit;

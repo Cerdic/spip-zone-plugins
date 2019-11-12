@@ -12,11 +12,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 define('_PREG_CRAYON', ',crayon\b[^<>\'"]+?\b((\w+)-(\w+)-(\w+(?:-\w+)*))\b,');
 
-// Compatibilite pour 1.92 : on a besoin de sql_fetch et table_objet_sql
-if ($GLOBALS['spip_version_code'] < '1.93' and $f = charger_fonction('compat_crayons', 'inc')) {
-	$f();
-}
-
 // Autoriser les crayons sur les tables non SPIP ?
 // Par defaut : oui (pour les admins complets, si autoriser_defaut_dist()) ;
 // mettre a false en cas de mutualisation par prefixe de table,
@@ -70,24 +65,6 @@ if (!function_exists('autoriser_message_modifier_dist')) {
 		return false;
 	}
 }
-//compat 192 documents
-if ($GLOBALS['spip_version_code'] < '1.93') {
-	if (!function_exists('get_spip_doc')) {
-		function get_spip_doc($fichier) {
-			// fichier distant
-			if (preg_match(',^\w+://,', $fichier)) {
-				return $fichier;
-			}
-			// gestion d'erreurs, fichier=''
-			if (!strlen($fichier)) {
-				return false;
-			}
-
-			// fichier normal
-			return (strpos($fichier, _DIR_IMG) === false) ? _DIR_IMG . $fichier : $fichier;
-		}
-	}
-}
 
 // Autoriser l'usage des crayons ?
 function autoriser_crayonner_dist($faire, $type, $id, $qui, $opt) {
@@ -138,10 +115,7 @@ function valeur_champ_logo($table, $id, $champ) {
 
 // Idem : si un doc est demande, on renvoie la date du doc
 function valeur_champ_document($table, $id, $champ) {
-	$s = spip_query('SELECT date FROM spip_documents WHERE id_document=' . _q($id));
-	if ($t = sql_fetch($s)) {
-		return $t['date'];
-	}
+	return sql_getfetsel('date', 'spip_documents', 'id_document=' . intval($id));
 }
 
 function valeur_champ_vignette($table, $id, $champ) {
@@ -162,33 +136,14 @@ function logo_revision($id, $file, $type, $ref) {
 	if ($file['logo']) {
 		define('FILE_UPLOAD', true); // message pour crayons_json_export :(
 
-		if (include_spip('action/editer_logo')
-			and function_exists('logo_modifier')) {
-			logo_modifier($type, $id, 'on', $file['logo']);
-		} else {
-			// compat SPIP < 3.1
-			// supprimer l'ancien logo
-			$on = $chercher_logo($id, $_id_objet, 'on');
-			if ($on) {
-				@unlink($on[0]);
-			}
-
-			// ajouter le nouveau
-			include_spip('action/iconifier');
-			action_spip_image_ajouter_dist(type_du_logo($_id_objet) . 'on' . $id, false, false); // beurk
-		}
+		include_spip('action/editer_logo');
+		logo_modifier($type, $id, 'on', $file['logo']);
 	} else {
 		// Suppression du logo ?
 		if ($wid = array_pop($ref)
 			and $_POST['content_'.$wid.'_logo_supprimer'] == 'on') {
-			if (include_spip('action/editer_logo')
-				and function_exists('logo_supprimer')) {
-				logo_supprimer($type, $id, 'on');
-			} else {
-				if ($on = $chercher_logo($id, $_id_objet, 'on')) {
-					@unlink($on[0]);
-				}
-			}
+			include_spip('action/editer_logo');
+			logo_supprimer($type, $id, 'on');
 		}
 	}
 
@@ -202,15 +157,8 @@ function logo_revision($id, $file, $type, $ref) {
 		$img2 = preg_replace(',[?].*,', '', extraire_attribut($img1, 'src'));
 		if (@file_exists($img2)
 			and $img2 !=  $temp) {
-			if (include_spip('action/editer_logo')
-				and function_exists('logo_modifier')) {
-				logo_modifier($type, $id, 'on', $img2);
-			} else {
-				@unlink($on[0]);
-				$dest = $on[1].$on[2].'.'
-					.preg_replace(',^.*\.(gif|jpg|png)$,', '\1', $img2);
-				@rename($img2, $dest);
-			}
+			include_spip('action/editer_logo');
+			logo_modifier($type, $id, 'on', $img2);
 		}
 		@unlink($temp);
 	}
@@ -222,8 +170,7 @@ function logo_revision($id, $file, $type, $ref) {
 // cette fonction de revision recoit le fichier upload a passer en document
 function document_fichier_revision($id, $data, $type, $ref) {
 
-	$s = spip_query('SELECT * FROM spip_documents WHERE id_document=' . intval($id));
-	if (!$t = sql_fetch($s)) {
+	if (!$t = sql_fetsel('*', 'spip_documents', 'id_document=' . intval($id))) {
 		return false;
 	}
 
@@ -243,72 +190,19 @@ function document_fichier_revision($id, $data, $type, $ref) {
 	*/
 
 	// Chargement d'un nouveau doc ?
-	if ($data['document']) {
+	if ($data['document']){
 		$arg = $data['document'];
 		/**
 		 * Méthode >= SPIP 3.0
 		 * ou SPIP 2.x + Mediathèque
 		 */
-		if ($ajouter_documents = charger_fonction('ajouter_documents', 'action', true)) {
-			$actifs = $ajouter_documents($id, array($arg), '', 0, $t['mode']);
-			$x = reset($actifs);
-			if (is_numeric($x)) {
-				return true;
-			} else {
-				return false;
-			}
-		} elseif ($ajouter_documents = charger_fonction('ajouter_documents', 'inc', true)) {
-			/**
-			 * Méthode SPIP < 3.0
-			 */
-			check_upload_error($arg['error']);
-			$x = $ajouter_documents($arg['tmp_name'], $arg['name'],
-					'article', 0, 'document', null, $actifs);
-			// $actifs contient l'id_document nouvellement cree
-			// on recopie les donnees interessantes dans l'ancien
-			 $extension = ', extension ';
-			//compat 192
-			if ($GLOBALS['spip_version_code'] < '1.93') {
-				$extension = '';
-			}
-
-			if ($id_new = array_pop($actifs)
-				and $s = spip_query("SELECT fichier, taille, largeur, hauteur $extension, distant FROM spip_documents
-				WHERE id_document="._q($id_new))
-				and $new = sql_fetch($s)) {
-				define('FILE_UPLOAD', true); // message pour crayons_json_export :(
-
-				// Une vignette doit rester une image
-				if ($t['mode'] == 'vignette'
-					and !in_array($new['extension'], array('jpg', 'gif', 'png'))) {
-					return false;
-				}
-
-				// Maintenant on est bon, on recopie les nouvelles donnees
-				// dans l'ancienne ligne spip_documents
-				include_spip('inc/modifier');
-				modifier_contenu(
-					'document',
-					$id,
-					# 'champs' inutile a partir de SPIP 11348
-					array('champs' => array_keys($new)),
-					$new
-				);
-
-				// supprimer l'ancien document (sauf s'il etait distant)
-				if ($t['distant'] != 'oui'
-					and file_exists(get_spip_doc($t['fichier']))) {
-					supprimer_fichier(get_spip_doc($t['fichier']));
-				}
-
-				// Effacer la ligne temporaire de spip_document
-				spip_query('DELETE FROM spip_documents WHERE id_document='.intval($id_new));
-
-				// oublier id_document temporaire (ca marche chez moi, sinon bof)
-				spip_query('ALTER TABLE spip_documents AUTO_INCREMENT='.intval($id_new));
-
-				return true;
-			}
+		$ajouter_documents = charger_fonction('ajouter_documents', 'action');
+		$actifs = $ajouter_documents($id, array($arg), '', 0, $t['mode']);
+		$x = reset($actifs);
+		if (is_numeric($x)){
+			return true;
+		} else {
+			return false;
 		}
 	}
 }
@@ -316,8 +210,7 @@ function document_fichier_revision($id, $data, $type, $ref) {
 // cette fonction de revision soit supprime la vignette d'un document,
 // soit recoit le fichier upload a passer ou remplacer la vignette du document
 function vignette_revision($id, $data, $type, $ref) {
-	$s = sql_fetsel('id_document,id_vignette', 'spip_documents', 'id_document = '.intval($id));
-	if (!is_array($s)) {
+	if (!$s = sql_fetsel('id_document,id_vignette', 'spip_documents', 'id_document = '.intval($id))) {
 		return false;
 	}
 
@@ -354,29 +247,15 @@ function vignette_revision($id, $data, $type, $ref) {
 
 		$arg = $data['vignette'];
 		check_upload_error($arg['error']);
-		// Ajout du document comme vignette
 
-		/**
-		 * Méthode >= SPIP 3.0
-		 * ou SPIP 2.x + Mediatheque
-		 */
-		if ($ajouter_documents = charger_fonction('ajouter_documents', 'action', true)) {
-			$x = $ajouter_documents(null,array($arg),'', 0, 'vignette');
-			$vignette = reset($x);
-			if (intval($vignette)) {
-				document_modifier($id, array('id_vignette'=>$vignette));
-			} elseif ($id_vignette) {
-				document_modifier($id, array('id_vignette'=>$id_vignette));
-			}
-		} elseif ($ajouter_documents = charger_fonction('ajouter_documents', 'inc', true)) {
-			/**
-			 * Méthode < SPIP 3.0
-			 */
-			// On remet l'id_vignette a 0 si on l'a supprimé
-			if ($id_vignette) {
-				revision_document($s['id_document'], array('id_vignette' => 0));
-			}
-			$x = $ajouter_documents($arg['tmp_name'], $arg['name'],'','', 'vignette', $id, $actifs);
+		// Ajout du document comme vignette
+		$ajouter_documents = charger_fonction('ajouter_documents', 'action');
+		$x = $ajouter_documents(null,array($arg),'', 0, 'vignette');
+		$vignette = reset($x);
+		if (intval($vignette)) {
+			document_modifier($id, array('id_vignette'=>$vignette));
+		} elseif ($id_vignette) {
+			document_modifier($id, array('id_vignette'=>$id_vignette));
 		}
 	} elseif ($wid = array_pop($ref)
 		and $_POST['content_'.$wid.'_vignette_supprimer'] == 'on') {
@@ -403,7 +282,7 @@ function vignette_revision($id, $data, $type, $ref) {
 			);
 
 			// On remet l'id_vignette a 0
-			revision_document($s['id_document'], array('id_vignette'=>0));
+			document_modifier($s['id_document'], array('id_vignette'=>0));
 		}
 	}
 	return true;
@@ -621,20 +500,15 @@ function meta_valeur_colonne_table_dist($table, $col, $id) {
 	// Certaines clés de configuration sont echapées ici (cf #EDIT_CONFIG{demo/truc})
 	$id = str_replace('__', '/', $id);
 
-	// Éviter de planter les vieux SPIP
-	if (false === strpos($id, '/')) {
-		$config = isset($GLOBALS['meta'][$id]) ? $GLOBALS['meta'][$id] : '';
-	// SPIP 3 ou Bonux 2 ou CFG
-	} else {
-		include_spip('inc/config');
-		$config =  lire_config($id, '');
-	}
+	include_spip('inc/config');
+	$config =  lire_config($id, '');
+
 	return array('valeur' => $config);
 }
 
 
 function return_log($var) {
-	die(crayons_json_export(array('$erreur'=> var_export($var, true))));
+	die(crayons_json_encode(array('$erreur'=> var_export($var, true))));
 }
 
 function _U($texte, $params = array()) {
@@ -677,30 +551,11 @@ function &crayons_get_table($type, &$nom_table) {
 	if (!isset($return[$table])) {
 		$try = array(table_objet_sql($table), 'spip_'.table_objet($table), 'spip_' . $table . 's', $table . 's', 'spip_' . $table, $table);
 
-		// premiere possibilite (à partir de 1.9.3) : regarder directement la base
-		if (function_exists('sql_showtable')) {
-			foreach ($try as $nom) {
-				if ($q = sql_showtable($nom, !$distant, $distant)) {
-					$noms[$table] = $nom;
-					$return[$table] = $q;
-					break;
-				}
-			}
-		}
-
-		// seconde, une heuristique 1.9.2
-		if (!isset($return[$table])) {
-			include_spip('base/serial');
-			include_spip('base/auxiliaires');
-			include_spip('public/parametrer');
-			foreach (array('tables_principales', 'tables_auxiliaires') as $categ) {
-				foreach ($try as $nom) {
-					if (isset($GLOBALS[$categ][$nom])) {
-						$noms[$table] = $nom;
-						$return[$table] = & $GLOBALS[$categ][$nom];
-						break 2;
-					}
-				}
+		foreach ($try as $nom) {
+			if ($q = sql_showtable($nom, !$distant, $distant)) {
+				$noms[$table] = $nom;
+				$return[$table] = $q;
+				break;
 			}
 		}
 	}
