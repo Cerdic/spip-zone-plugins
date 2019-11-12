@@ -479,7 +479,7 @@ $.fn.activatecrayon = function(percent) {
 $.fn.iconecrayon = function(){
 	return this.each(function() {
 		var ctype = this.className.match(/\b[^-]type_(\w+)\b/);
-		type = (ctype) ? ctype[1] : 'crayon';
+		var type = (ctype) ? ctype[1] : 'crayon';
 		if (ctype) this.type = type; // Affecte son type a l'objet crayon
 		$(this).prepend(configCrayons.iconclick(this.className, type))
 		.find('.crayon-' + type + ', .crayon-img-changed') // le crayon a clicker lui-meme et sa memoire
