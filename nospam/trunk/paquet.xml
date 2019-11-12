@@ -1,12 +1,12 @@
 <paquet
 	prefix="nospam"
 	categorie="performance"
-	version="2.0.0"
+	version="2.0.1"
 	etat="test"
 	compatibilite="[3.1.0;3.3.*]"
 	logo="images/nospam-32.png"
 	documentation="https://contrib.spip.net/NoSPAM,1165"
->	
+>
 
 	<nom>NoSPAM</nom>
 	<!-- Limiter le risque de spams dans les forums -->
