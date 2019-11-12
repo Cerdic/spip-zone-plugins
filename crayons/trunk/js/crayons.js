@@ -372,6 +372,14 @@ $.fn.activatecrayon = function(percent) {
 				e.cancelBubble = true;
 			})
 			.keypress(function(e){
+				var maxh = this.className.match(/\bmaxheight(\d+)?\b/);
+				if (maxh) {
+					maxh = maxh[1] ? parseInt(maxh[1]) : 200;
+					maxh = this.scrollHeight < maxh ? this.scrollHeight : maxh;
+					if (maxh > this.clientHeight) {
+						$(this).css('height', maxh + 'px');
+					}
+				}
 				e.cancelBubble = true;
 			})
 			// focus par defaut (crayons sans textarea/text, mais uniquement menus ou fichiers)
@@ -396,19 +404,9 @@ $.fn.activatecrayon = function(percent) {
 				})
 			.end()
 			.keydown(function(e){
-				if(!e.charCode && e.keyCode == 119 /* F8, windows */) {
-						crayon
-						.find("form.formulaire_crayon")
-						.submit();
-				}
-				if (e.keyCode == 27) { /* esc */
-					me
-					.cancelcrayon();
-				}
-			})
-			.keypress(function(e){
 				// Clavier pour sauver
 				if (
+				(!e.charCode && e.keyCode == 119 /* F8, windows */) ||
 				(e.ctrlKey && (
 					/* ctrl-s ou ctrl-maj-S, firefox */
 					((e.charCode||e.keyCode) == 115) || ((e.charCode||e.keyCode) == 83))
@@ -419,18 +417,14 @@ $.fn.activatecrayon = function(percent) {
 					e.shiftKey && (e.keyCode == 13) /* shift-return */
 				)
 				) {
-                    e.preventDefault(); // Lorsque l'on utilise ctrl+s, on n'ouvre pas la fenêtre de sauvegarde
+					e.preventDefault(); // Lorsque l'on utilise ctrl+s, on n'ouvre pas la fenêtre de sauvegarde
 					crayon
 					.find("form.formulaire_crayon")
 					.submit();
 				}
-				var maxh = this.className.match(/\bmaxheight(\d+)?\b/);
-				if (maxh) {
-					maxh = maxh[1] ? parseInt(maxh[1]) : 200;
-					maxh = this.scrollHeight < maxh ? this.scrollHeight : maxh;
-					if (maxh > this.clientHeight) {
-						$(this).css('height', maxh + 'px');
-					}
+				if (e.keyCode == 27) { /* esc */
+					me
+					.cancelcrayon();
 				}
 			})
 			.find(".crayon-submit")
