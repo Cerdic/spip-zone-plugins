@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xml:space="preserve"
+     width="500"
+     height="500"
+     version="1.1"
+     style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+     viewBox="0 0 500 500"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+ <g>
+  <path fill="#8A1F11" d="M480 383l-97 97 -133 -133 0 -194 133 -133 97 97 -133 133 133 133zm-460 0l97 97 133 -133 0 -194 -133 -133 -97 97 133 133 -133 133z"/>
+ </g>
+</svg>

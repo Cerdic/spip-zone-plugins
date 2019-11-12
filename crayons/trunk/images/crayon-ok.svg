@@ -1,0 +1,12 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  xml:space="preserve"
+  width="500"
+  height="500"
+  version="1.1"
+  style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+  viewBox="0 0 500 500"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+  <!-- https://icon-icons.com/fr/icone/tique-mono/105887 -->
+  <g transform="translate(0 -15) rotate(-10 250 250) scale(1 1.1)"><polygon points="105,169 204,268 388,84 466,162 211,416 34,239 " fill="#4E7F0B"/></g>
+</svg>
