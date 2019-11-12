@@ -506,8 +506,9 @@ function formidable_generer_url_action_recuperer_fichier($id_formulaire, $id_for
 
 	$param = serialize($param);
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	spip_log("recuperer_fichier : pour la $saisie et le fichier $fichier avec les options ".print_r($options,true)." le arg est $arg et le  hash $hash. Du coup l'url est $url", "formidable"._LOG_DEBUG);
-	return $securiser_action('formidable_recuperer_fichier', $param, '', false);
+	$url = $securiser_action('formidable_recuperer_fichier', $param, '', false);
+	spip_log("recuperer_fichier : pour la $saisie et le fichier $fichier avec les options ".print_r($param,true)." : l'url est $url", "formidable"._LOG_DEBUG);
+	return $url;
 }
 
 /** Générer une url d'action pour récuperer un fichier à partir d'un lien email
