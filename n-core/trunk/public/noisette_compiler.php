@@ -61,19 +61,23 @@ function balise_NOISETTE_COMPILER_dist($p) {
 	// le plugin et le stockage sont passées).
 	// Seule l'inclusion statique est possible pour l'appel à la compilation des noisettes incluses.
 	// L'encapsulation se fait en compilant la noisette conteneur avec ses paramètres et sans ajax.
+	$environnement = "\$Pile[0]";
 	$inclusion_statique_conteneur = "noisette_encapsuler(
 		$plugin,
 		recuperer_fond(
 			'conteneur_compiler',
-			array(
-				'plugin' => $plugin,
-				'id_conteneur' => conteneur_identifier(
-					$plugin, 
-					array('id_noisette' => $id_noisette, 'type_noisette' => $type_noisette),
-					$stockage
-				),
-				'stockage' => $stockage
-			),
+			array_merge(
+				$environnement,
+				array(
+					'plugin' => $plugin,
+					'id_conteneur' => conteneur_identifier(
+						$plugin, 
+						array('id_noisette' => $id_noisette, 'type_noisette' => $type_noisette),
+						$stockage
+					),
+					'stockage' => $stockage
+				)
+			),	
 			array()
 		),
 		'conteneur',
@@ -84,7 +88,6 @@ function balise_NOISETTE_COMPILER_dist($p) {
 	// Cas d'une noisette 'non conteneur' : 
 	// - on compile la noisette,
 	// - et on appelle l'encapsulation avec ses paramètres adéquates configurés pour la noisette (encapsulation, css, type)
-	$environnement = "\$Pile[0]";
 	$encapsulation = champ_sql('encapsulation', $p);
 	$css = champ_sql('css', $p);
 

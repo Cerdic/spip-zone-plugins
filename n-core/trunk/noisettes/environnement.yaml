@@ -1,0 +1,6 @@
+nom: '<:ncore:type_noisette_environnement_titre:>'
+description: '<:ncore:type_noisette_environnement_description:>'
+icon: 'env.png'
+contexte: 'env'
+ajax: 'non'
+inclusion: 'statique'
