@@ -1,0 +1,23 @@
+<paquet
+	prefix="crayons"
+	categorie="edition"
+	version="1.26.19"
+	etat="stable"
+	compatibilite="[1.9.0;3.2.*]"
+	logo="images/crayon-32.png"
+	documentation="https://contrib.spip.net/Les-Crayons"
+>
+	<nom>Crayons</nom>
+
+	<auteur>Fil</auteur>
+	<auteur>toggg</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<traduire gestionnaire="salvatore" module="crayons" reference="fr" />
+
+	<pipeline nom="affichage_final" inclure="crayons_fonctions.php" />
+	<pipeline nom="header_prive" inclure="crayons_fonctions.php" action="insert_head" />
+	<pipeline nom="crayons_controleur" action="" />
+	<pipeline nom="crayons_verifier" action="" />
+</paquet>

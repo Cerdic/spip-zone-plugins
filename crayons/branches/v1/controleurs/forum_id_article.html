@@ -1,0 +1,33 @@
+[(#REM)
+
+	Controleur pour le crayon 'forum-id_article'
+
+	NB: il est possible d'ajouter ci-dessous un second menu
+	qui permettrait de passer d'un article a une breve ; la seule
+	difficulte etant de savoir remettre a zero la valeur id_article
+	si une breve a ete selectionnee (et vice-versa)
+
+	Tant qu'on en  pas besoin, hein, on va laisser comme ça.
+
+]
+#CACHE{0}
+
+<BOUCLE_f(FORUMS){id_forum}{statut==.}{id_parent=0}{id_article>0}>
+
+<B_a>
+<fieldset style="#ENV{style}">
+Associer ce forum &#224; l'article :
+<select class="crayon-active" name="#ENV{name_id_article}"
+	onchange="cQuery(this).parents('form.formulaire_spip').submit();">
+<option value="0"[
+	(#ID_ARTICLE|?{'',selected})]>&gt;&gt;</option>
+<BOUCLE_a(ARTICLES)>
+<option value="#ID_ARTICLE"[
+	(#ID_ARTICLE|=={#_f:ID_ARTICLE}|?{selected})]>#ID_ARTICLE - [(#TITRE|couper{30})]</option>
+</BOUCLE_a>
+</select>
+</fieldset>
+</B_a>
+
+
+</BOUCLE_f>

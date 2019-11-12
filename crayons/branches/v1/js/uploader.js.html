@@ -1,0 +1,70 @@
+<script>
+// activer l'uploader
+(function($) {
+	var url = '[(#VAL{crayons_upload}|generer_url_action{id=#ENV{id_article}&type=article, true, true})]';
+
+	$('textarea.crayon-active,#uploader#ENV{id_article}')
+	.html5Uploader({
+		name: 'upss',
+		postUrl: url,
+		onClientLoadStart: function(e, file) {
+			file.mark = 'up'+Math.ceil(10000000*Math.random());
+			$('<li>lecture de '+file.name+'...</li>')
+			.addClass('loading')
+			.attr('id', file.mark)
+			.prependTo('#uploader_liste')
+			;
+		},
+		onClientLoad: function(e, file) {
+			$('#uploader#ENV{id_article}')
+			.removeClass('hover');
+		},
+		onServerProgress: function(e,file) {
+			var percent = '';
+			if(e.lengthComputable)
+				percent = ''+Math.ceil(100*e.loaded/e.total)+'%';
+			$('#'+file.mark)
+			.html('envoi de '+file.name+' vers le serveur... '+percent);
+		},
+		onServerReadyStateChange: function(e,file) {
+			if (e.target.responseText) {
+				// traiter la reponse du serveur
+				// todo: la passer en JSON si on veut
+				$('#'+file.mark)
+				.html(e.target.responseText);
+			}
+		},
+		onServerLoad: function(e,file) {
+			$('#'+file.mark)
+			.removeClass('loading')
+			.addClass('ok');
+		},
+	})
+	.bind("dragenter dragover", function() {
+		$(this).addClass('hover');
+		$('#uploader#ENV{id_article}')
+		.removeClass('ferme');
+	})
+	.bind("dragleave", function() {
+		$(this).removeClass('hover');
+		$('#uploader#ENV{id_article}')
+		.addClass('ferme');
+	})
+	.bind("drop", function(e) {
+		$(this)
+		.removeClass('hover');
+		$('#uploader#ENV{id_article}')
+		.removeClass('ferme');
+	})
+	.addClass('uploader')
+	;
+	$('#uploader#ENV{id_article}')
+	.hover(function() {
+		$(this).removeClass('ferme');
+	}, function() {
+		$(this).addClass('ferme');
+	});
+
+})(cQuery);
+
+</script>

@@ -1,0 +1,40 @@
+em.crayon-img-changed { display: none; }
+.crayon-changed em.crayon-img-changed {	display: block; }
+.crayon-changed em.crayon-crayon { display: none; }
+em.crayon-edit,
+em.crayon-crayon { display: none; }
+.crayon-boutons,
+.crayon-searching { float: right;padding:0;text-align: right;}
+.crayon-boutons button { border:1px solid; cursor: pointer;display:inline-block; }
+.crayon-boutons .crayon-submit { background: #e6efc2 url(images/ok-16.png) 2px center no-repeat; color: #264409; border-color: #c6d880;float:right;margin-bottom: 0.5em;margin-left:0.5em;padding-left:20px;}
+.crayon-boutons .crayon-cancel { background: #fbe3e4 url(images/annuler-16.png) center center no-repeat; color: #8a1f11; border-color: #fbc2c4;width: 40px; text-indent: -3000em;padding-right:20px;}
+.small .crayon-boutons {float:none;}
+.small .crayon-boutons .crayon-submit {text-indent: -3000em;background-position: center;width: 40px;}
+.small .crayon-boutons .crayon-cancel {float:left;}
+
+.crayon-icones { float: right; width: 20px; text-align: right; position: relative; top:0; left:0; z-index:4999; }
+.crayon-icones span,.crayon-icones em { position:absolute; left:0; }
+em.crayon-edit,
+em.crayon-crayon,
+em.crayon-img-changed { cursor: pointer; border:0; }
+
+/* definition des icones */
+.crayon-icones em.crayon-crayon { background: url(images/crayon20.png) no-repeat; height: 20px; width: 20px; }
+.crayon-icones em.crayon-searching { background: url(images/searching.gif) no-repeat; height: 13px; width: 13px; }
+.crayon-icones em.crayon-edit { background: url(images/edit.png) no-repeat; height: 20px; width: 20px; }
+.crayon-icones em.crayon-img-changed { background: url(images/changed.png) no-repeat; height: 20px; width: 20px; }
+
+.formulaire_crayon .crayon-active { padding: 1px; border: 1px inset; font: inherit; display:block; }
+.crayon-html .formulaire_crayon { max-width: 703px; }
+.crayon-html textarea { overflow: auto; font: inherit; }
+.crayon-html { z-index:1000; }
+.crayon-html .crayon-boutons { position:absolute; right:0px; }
+.crayon-html .small .crayon-boutons {position: relative;}
+
+
+.crayon-invalide { display: block; background-color: #ff8888; border: 1px dashed #ff0000; }
+.crayon-invalide p { margin:0; padding: 1%; font-style: italic; font-size: 80%; }
+/* resizer */
+.resizehandle { background:transparent url("images/resizer.png") no-repeat scroll 50%; cursor:ns-resize; font-size:0.1em; width: auto !important;margin-right: 150px;}
+.small .resizehandle {margin-right: 0;}
+.resizehandle_boutons { margin-top: -16px; }

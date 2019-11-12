@@ -1,0 +1,9 @@
+<BOUCLE_f(BREVES){id_breve}{statut==.}>
+<fieldset style="#ENV{largeur}px;#ENV{style}"><legend>Hyperlien</legend>
+<label><:form_prop_indiquer_nom_site:></label> <input class="crayon-active" name="#ENV{name_lien_titre}"
+ style="width:100%;" value="[(#NOM_SITE**|entites_html)]" />
+ <br />
+ <label><:form_prop_url_site:></label> <input class="crayon-active" name="#ENV{name_lien_url}"
+ style="width:100%;" value="[(#URL_SITE**|entites_html)]" />
+</fieldset>
+</BOUCLE_f>
