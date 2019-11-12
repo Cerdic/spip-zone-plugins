@@ -121,6 +121,11 @@ function filtre_bouton_action_dist($libelle, $url, $class="", $confirm="", $titl
 		$ajax = "";
 	$onclick = $callback?" onclick='return ".addcslashes($callback,"'")."'":"";
 	$title = $title ? " title='$title'" : "";
+	// il faut un class btn-xxx pour que le bouton soit style : on ajoute par defaut btn-secondary si rien fourni
+	// dans les classes passees en arg
+	if (strpos($class, 'btn-') === false) {
+		$class = trim("btn-secondary $class");
+	}
 	return "<form class='bouton_action_post$ajax' method='post' action='$url'><div>".form_hidden($url)
 		."<button type='submit' class='submit btn $class'$title$onclick>$libelle</button></div></form>";
 }

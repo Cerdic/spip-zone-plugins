@@ -51,12 +51,12 @@ $form-padding-sm: $spacer / 2 !default;
   .formulaire_spip .boutons {margin: 0 -1 * $form-padding-sm -1 * $form-padding-sm; padding: $form-padding-sm;}
 }
 
-input.submit, .formulaire_spip button.submit:not(.btn-link) {
+input.submit, .formulaire_spip button.submit:not(.btn) {
 	@extend %btn-base;
 }
 
 body {
-	input.submit, .formulaire_spip button.submit:not(.btn-link) {
+	input.submit, .formulaire_spip button.submit:not(.btn) {
 		@include button-variant(theme-color("light"), $input-group-addon-border-color);
 	}
 }
