@@ -534,7 +534,6 @@ function wdgcfg() {
 	foreach (array(
 		'msgNoChange' => false,
 		'msgAbandon' => false,  /* etait: true */
-		'filet' => false,
 		'yellow_fade' => false,
 		'clickhide' => false /* etait: true */
 	) as $cfgi => $def) {

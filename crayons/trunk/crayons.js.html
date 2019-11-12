@@ -25,7 +25,7 @@ cQuery.noConflict();
 
 [(#CHEMIN{js/jquery.html5uploader.js}|pack_cQuery)]
 
-[(#CONFIG{crayons}|match{s:11:"yellow_fade";s:2:"on";}|?{' ',''})
+[(#CONFIG{crayons/yellow_fade}|=={on}|oui)
 	[(#CHEMIN{js/crayons-fade.js}|pack_cQuery)]
 ]
 
