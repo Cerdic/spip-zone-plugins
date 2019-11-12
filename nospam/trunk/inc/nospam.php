@@ -20,6 +20,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param array $arguments
  * @param string $file
  * @param null $time
+ * @param string $method
  * @return string
  */
 function nospam_confirm_action_html(
@@ -27,10 +28,11 @@ function nospam_confirm_action_html(
 	$description,
 	$arguments = array(),
 	$file = '',
-	$time = null) {
-	include_spip('action/nospam_confirm_action');
+	$time = null,
+	$method = 'script') {
 
-	return nospam_confirm_action_prepare($function, $description, $arguments, $file, $time);
+	include_spip('action/nospam_confirm_action');
+	return nospam_confirm_action_prepare($function, $description, $arguments, $file, $time, $method);
 }
 
 

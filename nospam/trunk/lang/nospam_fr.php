@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_ip_suspecte' => 'Votre adresse IP est suspectée de procéder à du SPAM. Merci de confirmer votre bonne intention.',
 	'info_alt_antispam' => 'Antispam silencieux - aucun contenu affiché',
+	'libelle_je_ne_suis_pas_un_robot' => 'Cliquez pour confirmer que vous n\'êtes pas un robot',
 
 	// L
 	'label_message_licite' => 'Ceci n’est pas un message abusif'

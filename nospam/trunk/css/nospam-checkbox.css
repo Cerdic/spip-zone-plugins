@@ -1,0 +1,146 @@
+@-moz-keyframes dothabottomcheck {
+	0% {
+		height: 0;
+	}
+	100% {
+		height: 0.5em;
+	}
+}
+
+@-webkit-keyframes dothabottomcheck {
+	0% {
+		height: 0;
+	}
+	100% {
+		height: 0.5em;
+	}
+}
+
+@keyframes dothabottomcheck {
+	0% {
+		height: 0;
+	}
+	100% {
+		height: 0.5em;
+	}
+}
+
+@keyframes dothatopcheck {
+	0% {
+		height: 0;
+	}
+	50% {
+		height: 0;
+	}
+	100% {
+		height: 1.2em;
+	}
+}
+
+@-webkit-keyframes dothatopcheck {
+	0% {
+		height: 0;
+	}
+	50% {
+		height: 0;
+	}
+	100% {
+		height: 1.2em;
+	}
+}
+
+@-moz-keyframes dothatopcheck {
+	0% {
+		height: 0;
+	}
+	50% {
+		height: 0;
+	}
+	100% {
+		height: 1.2em;
+	}
+}
+
+.nospam-checkbox {
+	height: 1em;
+	width: 1em;
+	background-color: transparent;
+	border: 0.15em solid #888;
+	border-radius: 0.1em;
+	position: relative;
+	display: inline-block;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	-moz-transition: border-color ease 0.2s;
+	-o-transition: border-color ease 0.2s;
+	-webkit-transition: border-color ease 0.2s;
+	transition: border-color ease 0.2s;
+	opacity: 0;
+}
+.loading .nospam-checkbox {
+	visibility: hidden !important;
+}
+
+.nospam-checkbox::before,
+.nospam-checkbox::after {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	position: absolute;
+	height: 0;
+	width: 0.2em;
+	background-color: currentColor;
+	display: inline-block;
+	-moz-transform-origin: left top;
+	-ms-transform-origin: left top;
+	-o-transform-origin: left top;
+	-webkit-transform-origin: left top;
+	transform-origin: left top;
+	border-radius: 0.05em;
+	content: ' ';
+	-webkit-transition: opacity ease .5;
+	-moz-transition: opacity ease .5;
+	transition: opacity ease .5;
+}
+
+.nospam-checkbox::before {
+	top: 0.72em;
+	left: 0.41em;
+	-moz-transform: rotate(-135deg);
+	-ms-transform: rotate(-135deg);
+	-o-transform: rotate(-135deg);
+	-webkit-transform: rotate(-135deg);
+	transform: rotate(-135deg);
+}
+
+.nospam-checkbox::after {
+	top: 0.37em;
+	left: 0.05em;
+	-moz-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+
+.nospam-checkbox.checked {
+	border-color: currentColor;
+	opacity: 1;
+}
+
+.nospam-checkbox.checked::after {
+	height: 0.5em;
+	-moz-animation: dothabottomcheck 0.2s ease 0s forwards;
+	-o-animation: dothabottomcheck 0.2s ease 0s forwards;
+	-webkit-animation: dothabottomcheck 0.2s ease 0s forwards;
+	animation: dothabottomcheck 0.2s ease 0s forwards;
+}
+
+.nospam-checkbox.checked::before {
+	height: 1.2em;
+	-moz-animation: dothatopcheck 0.4s ease 0s forwards;
+	-o-animation: dothatopcheck 0.4s ease 0s forwards;
+	-webkit-animation: dothatopcheck 0.4s ease 0s forwards;
+	animation: dothatopcheck 0.4s ease 0s forwards;
+}

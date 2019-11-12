@@ -78,9 +78,11 @@ function action_nospam_confirm_action_dist() {
 	purger_repertoire($dir_actions, ['mtime' => $old_time, 'limit' => 100]);
 
 	// et on renvoie un html minimum
-	include_spip('inc/actions');
-	$out = "<html></html>";
-	ajax_retour($out, false);
+	if (!_request('redirect')) {
+		include_spip('inc/headers');
+		http_status(204); // No Content
+		header("Connection: close");
+	}
 }
 
 
@@ -93,6 +95,7 @@ function action_nospam_confirm_action_dist() {
  * @param array $arguments
  * @param string $file
  * @param null $time
+ * @param string $method
  * @return string
  */
 function nospam_confirm_action_prepare(
@@ -100,7 +103,8 @@ function nospam_confirm_action_prepare(
 	$description,
 	$arguments = array(),
 	$file = '',
-	$time = null) {
+	$time = null,
+	$method = 'script') {
 
 	// on stocke le descriptif de l'action a lancer dans un fichier
 	$desc = [
@@ -119,9 +123,30 @@ function nospam_confirm_action_prepare(
 
 	include_spip('inc/actions');
 	include_spip('inc/filtres');
-	$url_action = generer_action_auteur("nospam_confirm_action", $hash);
-	$title = attribut_html(_T('nospam:info_alt_antispam'));
-	$html_action = "<iframe src='$url_action' width='1' height='1' style='display:inline-block;border:0;background:transparent;overflow:hidden;' title='$title'></iframe>";
+	$url_action = str_replace("&amp;", "&", generer_action_auteur("nospam_confirm_action", $hash));
+	$url_action_redirect = parametre_url($url_action, 'redirect', self(), '&');
+
+	switch ($method) {
+		case 'iframe':
+			$title = attribut_html(_T('nospam:info_alt_antispam'));
+			$html_action = "<iframe src='$url_action' width='1' height='1' style='display:inline-block;border:0;background:transparent;overflow:hidden;' title='$title'></iframe>";
+			break;
+
+		case 'script':
+		default:
+
+			$bouton_action = charger_filtre('bouton_action');
+			$libelle = attribut_html(_T('nospam:libelle_je_ne_suis_pas_un_robot'));
+			$html_action = $bouton_action($libelle, $url_action_redirect, 'btn-primary btn-sm btn-antispam');
+
+			$js = "jQuery.ajax({url: '{$url_action}'}).done(function(){jQuery('.nospam-checkbox').addClass('checked');})";
+			$html_action = "<span class='nospam-checkbox small'></span><script>$js</script><noscript>$html_action</noscript>";
+			$css = file_get_contents(find_in_path('css/nospam-checkbox.min.css'));
+			$html_action .= "<style type='text/css'>$css</style>";
+			break;
+
+	}
+
 
 	return $html_action;
 }
