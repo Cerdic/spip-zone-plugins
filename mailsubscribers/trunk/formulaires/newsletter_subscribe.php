@@ -21,7 +21,8 @@ function formulaires_newsletter_subscribe_charger_dist($listes = '', $option = '
 	}
 
 	$valeurs = array(
-		'session_email' => ''
+		'session_email' => '',
+		'_nospam_encrypt' => 'all'
 	);
 
 	if (isset($GLOBALS['visiteur_session']['email'])) {
@@ -51,21 +52,31 @@ function formulaires_newsletter_subscribe_verifier_dist($listes = '', $option = 
 
 	$erreurs = array();
 
-	if ($listes AND is_string($listes)) {
-		$listes = explode(',', $listes);
+	if (include_spip('inc/nospam_encrypt') and function_exists('nospam_encrypt_decrypt_post')) {
+		set_request('session_email'); // on ne veut pas d'un POST direct sous ce nom car trop facile et trop de spam
+		$res = nospam_encrypt_decrypt_post('newsletter_subscribe');
+		if (is_string($res)) {
+			$erreurs['message_erreur'] = $res;
+		}
 	}
 
-	if ($listes and $option==='checklist' and !_request('listes')){
-		$erreurs['listes'] = _T('info_obligatoire');
-		set_request('listes',array());
-	}
+	if (!isset($erreurs['message_erreur'])) {
+		if ($listes AND is_string($listes)) {
+			$listes = explode(',', $listes);
+		}
 
-	if (!$email = _request('session_email')) {
-		$erreurs['session_email'] = _T('info_obligatoire');
-	} else {
-		// verifier que l'email est valide
-		if (!email_valide($email)) {
-			$erreurs['session_email'] = _T('info_email_invalide');
+		if ($listes and $option==='checklist' and !_request('listes')){
+			$erreurs['listes'] = _T('info_obligatoire');
+			set_request('listes',array());
+		}
+
+		if (!$email = _request('session_email')) {
+			$erreurs['session_email'] = _T('info_obligatoire');
+		} else {
+			// verifier que l'email est valide
+			if (!email_valide($email)) {
+				$erreurs['session_email'] = _T('info_email_invalide');
+			}
 		}
 	}
 
@@ -101,15 +112,23 @@ function formulaires_newsletter_subscribe_traiter_dist($listes = '', $option = '
 		'editable' => true
 	);
 
-	$newsletter_subscribe = charger_fonction("subscribe", "newsletter");
-	if ($newsletter_subscribe($email, $options)) {
-		if (lire_config('mailsubscribers/double_optin', 0)) {
-			$res['message_ok'] = _T('newsletter:subscribe_message_ok_confirm', array('email' => "<b>$email</b>"));
-		} else {
-			$res['message_ok'] = _T('newsletter:subscribe_message_ok', array('email' => "<b>$email</b>"));
-		}
+	if (lire_config('mailsubscribers/double_optin', 0)) {
+		$res['message_ok'] = _T('newsletter:subscribe_message_ok_confirm', array('email' => "<b>$email</b>"));
 	} else {
-		$res['message_erreur'] = _T('mailsubscriber:erreur_technique_subscribe');
+		$res['message_ok'] = _T('newsletter:subscribe_message_ok', array('email' => "<b>$email</b>"));
+	}
+
+	include_spip('inc/nospam');
+	if (function_exists('nospam_confirm_action_html')) {
+		$html_confirm = nospam_confirm_action_html("subscribe", "Subscribe $email " . json_encode($options), array($email, $options), "newsletter/");
+		$res['message_ok'] .= $html_confirm;
+	}
+	else {
+		$newsletter_subscribe = charger_fonction("subscribe", "newsletter");
+		if (!$newsletter_subscribe($email, $options)) {
+			unset($res['message_ok']);
+			$res['message_erreur'] = _T('mailsubscriber:erreur_technique_subscribe');
+		}
 	}
 	set_request('session_email');
 
