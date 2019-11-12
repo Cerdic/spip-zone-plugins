@@ -2,7 +2,7 @@
 /**
  * Crayons
  * plugin for spip
- * (c) Fil, toggg 2006-2014
+ * (c) Fil, toggg 2006-2019
  * licence GPL
  *
  * @package SPIP\Crayons\Fonctions
