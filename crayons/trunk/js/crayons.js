@@ -343,10 +343,6 @@ $.fn.activatecrayon = function(percent) {
 				if (typeof jQuery.spip == 'object' && typeof jQuery.spip.triggerAjaxLoad == 'function') {
 					jQuery.spip.triggerAjaxLoad(tous.get());
 				}
-				// SPIP 2.x
-				else if (typeof triggerAjaxLoad == 'function') {
-					triggerAjaxLoad(tous.get());
-				}
 			}})
 			.bind('form-submit-validate',function(form,a, e, options, veto){
 				if(!veto.veto)
@@ -481,10 +477,6 @@ $.fn.activatecrayon = function(percent) {
 		// (apres donc le chargement de la page de saisie (controleur))
 		if (typeof jQuery.spip == 'object' && typeof jQuery.spip.triggerAjaxLoad == 'function') {
 			jQuery.spip.triggerAjaxLoad(crayon.get());
-		}
-		// SPIP 2.x
-		else if (typeof triggerAjaxLoad == 'function') {
-			triggerAjaxLoad(crayon.get());
 		}
 	});
 };
