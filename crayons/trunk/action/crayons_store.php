@@ -10,7 +10,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-function verif_secu($w, $secu) {
+/**
+ * Verifier le hash de securite
+ * @param $w
+ * @param $secu
+ * @return bool
+ */
+function crayons_verif_secu($w, $secu) {
 	return (
 		$secu == md5($GLOBALS['meta']['alea_ephemere'].'='.$w)
 	or
@@ -18,7 +24,11 @@ function verif_secu($w, $secu) {
 	);
 }
 
-function post_crayons() {
+/**
+ * Recuperer les valeurs postees par les crayons
+ * @return array|bool
+ */
+function crayons_recupere_post() {
 	$results = array();
 
 	if (isset($_POST['crayons']) and is_array($_POST['crayons'])) {
@@ -56,7 +66,7 @@ function post_crayons() {
 			if (isset($name)
 				and md5(serialize($content)) != $_POST['md5_'.$crayon]) {
 				if (!isset($_POST['secu_'.$crayon])
-					or verif_secu($name, $_POST['secu_' . $crayon])) {
+					or crayons_verif_secu($name, $_POST['secu_' . $crayon])) {
 					$results[] = array($name, $content, $_POST['md5_'.$crayon], $crayon);
 				} else {
 					return false; // erreur secu
@@ -70,7 +80,10 @@ function post_crayons() {
 	return $results;
 }
 
-
+/**
+ * @param array $options
+ * @return array
+ */
 function crayons_store($options = array()) {
 	// permettre de surcharger les fonctions de recuperation des valeurs
 	// et de sauvegardes de celles-ci
@@ -84,7 +97,7 @@ function crayons_store($options = array()) {
 
 	$return = array('$erreur'=>'');
 
-	$postees = post_crayons();
+	$postees = crayons_recupere_post();
 
 	$invalides = $modifs = $updates = array();
 
@@ -212,15 +225,29 @@ function crayons_store($options = array()) {
 	return $return;
 }
 
-// recuperer une valeur en fonction des parametres recuperes
-// cette fonction cherche une valeur d'une colonne d'une table SQL
+/**
+ * recuperer une valeur en fonction des parametres recuperes
+ * cette fonction cherche une valeur d'une colonne d'une table SQL
+ *
+ * @param $content
+ * @param $regs
+ * @return array
+ */
 function crayons_store_get_valeur($content, $regs) {
 	list(,$crayon,$type,$modele,$id) = $regs;
 	return valeur_colonne_table($type, array_keys($content), $id);
 }
 
-// stocke les valeurs envoyees dans des colonnes de table SQL
+/**
+ * stocke les valeurs envoyees dans des colonnes de table SQL
+ *
+ * @param $modifs
+ * @param $return
+ * @return mixed
+ */
 function crayons_store_set_modifs($modifs, $return) {
+	static $tables_objet;
+
 	// sinon on bosse : toutes les modifs ont ete acceptees
 	// verifier qu'on a tout ce qu'il faut pour mettre a jour la base
 	// et regrouper les mises a jour par type/id
@@ -234,58 +261,28 @@ function crayons_store_set_modifs($modifs, $return) {
 			or function_exists($f = $modele . '_revision')
 			or function_exists($f = $type . '_revision')) {
 			$fun = $f;
-		} elseif (function_exists('lister_tables_objets_sql')
-			and $tables_objet = lister_tables_objets_sql()
-			and isset($tables_objet[table_objet_sql($type)])) {
-			// si on est en SPIP 3+ et qu'on edite un objet editorial bien declare
-			// passer par l'API objet_modifier
-			$fun = 'crayons_objet_modifier';
-		} else {
-			// sinon spip < 3 (ou pas un objet edito)
-			// on teste les objets connus et on route sur les fonctions correspondantes
-			switch ($type) {
-				case 'article':
-					$fun = 'crayons_update_article';
-					break;
-				case 'breve':
-					include_spip('action/editer_breve');
-					$fun = 'revisions_breves';
-					break;
-				case 'forum':
-					include_spip('inc/forum');
-					$fun = 'enregistre_et_modifie_forum';
-					break;
-				case 'rubrique':
-					include_spip('action/editer_rubrique');
-					$fun = 'revisions_rubriques';
-					break;
-				case 'syndic':
-				case 'site':
-					include_spip('action/editer_site');
-					$fun = 'revisions_sites';
-					break;
-				case 'document':
-					include_spip('plugins/installer');
-					include_spip('inc/plugin');
-					if (spip_version_compare($GLOBALS['spip_version_branche'], '3.0.0alpha', '>=')) {
-						include_spip('action/editer_document');
-						$fun = 'document_modifier';
-					} else {
-						include_spip('inc/modifier');
-						$fun = 'revision_document';
-					}
-					break;
-				// cas geres de la maniere la plus standard
-				case 'auteur':
-				case 'mot':
-				case 'signature':
-				case 'petition':
-				default:
-					include_spip('inc/modifier');
-					$fun = 'revision_'.$type;
-					break;
+		}
+
+		if (!$fun){
+			if (is_null($tables_objet)){
+				include_spip('base/objets');
+				$tables_objet = lister_tables_objets_sql();
+			}
+			if (isset($tables_objet[table_objet_sql($type)])){
+				// si on edite un objet editorial bien declare
+				// passer par l'API objet_modifier
+				$fun = 'crayons_objet_modifier';
 			}
 		}
+
+		// c'est pas un objet editorial connu, mais on a peut etre une fonction revision_xxx specifique
+		if (!$fun){
+			include_spip('inc/modifier');
+			if (function_exists('revision_' . $type)) {
+				$fun = 'revision_' . $type;
+			}
+		}
+
 		// si on a pas reussi on passe par crayons_update() qui fera un update sql brutal
 		if (!$fun or !function_exists($fun)) {
 			$fun = 'crayons_update';
@@ -339,9 +336,16 @@ function crayons_store_set_modifs($modifs, $return) {
 	return $return;
 }
 
-//
-// VUE
-//
+/**
+ * VUE
+ *
+ * @param $type
+ * @param $modele
+ * @param $id
+ * @param $content
+ * @param $wid
+ * @return array|mixed|string
+ */
 function vues_dist($type, $modele, $id, $content, $wid) {
 	// pour ce qui a une {lang_select} par defaut dans la boucle,
 	// la regler histoire d'avoir la bonne typo dans le propre()
@@ -372,6 +376,7 @@ function vues_dist($type, $modele, $id, $content, $wid) {
 		$contexte = array_merge($contexte, $content);
 		include_spip('public/assembler');
 		return recuperer_fond($fond, $contexte);
+
 	} else {
 		// vue par defaut
 		// Par precaution on va rechercher la valeur
@@ -420,22 +425,25 @@ function vues_dist($type, $modele, $id, $content, $wid) {
  * @return bool|mixed|string
  */
 function crayons_objet_modifier($id, $data, $type, $ref) {
-	if (include_spip('action/editer_objet')
-		and function_exists('objet_modifier')) {
-		$type = objet_type($type);
-		// objet_modifier attend id_parent pour le parent et pas id_rubrique
-		if (isset($data['id_rubrique']) and !isset($data['id_parent']) and $type!=='rubrique') {
-			$data['id_parent'] = $data['id_rubrique'];
-		}
-		return objet_modifier($type, $id, $data);
+	include_spip('action/editer_objet');
+	$type = objet_type($type);
+
+	// objet_modifier attend id_parent pour le parent et pas id_rubrique
+	if (isset($data['id_rubrique']) and !isset($data['id_parent']) and $type!=='rubrique') {
+		$data['id_parent'] = $data['id_rubrique'];
 	}
-	// fallback
-	return crayons_update($id, $data, $type);
+	return objet_modifier($type, $id, $data);
 }
 
-//
-// Fonctions de mise a jour generique
-//
+/**
+ * Fonctions de mise a jour generique
+ * fallback utilise par crayons_store_set_modifs
+ *
+ * @param $id
+ * @param array $colval
+ * @param string $type
+ * @return bool|string
+ */
 function crayons_update($id, $colval = array(), $type = '') {
 	if (!$colval or !count($colval)) {
 		return false;
@@ -455,29 +463,21 @@ function crayons_update($id, $colval = array(), $type = '') {
 		}
 
 		// Sur une bdd externe on utilise sql_updateq de preference ;
-        // l'api sql sait gerer les prefixes contrairement a spip_query.
-        // On garde un semblant de compatibilité
-        if ( isset($GLOBALS['spip_version_code']) && $GLOBALS['spip_version_code'] >= '1.93' ) {
-            $a = sql_updateq($nom_table , $colval, $where,'',$distant);
-        }
-        else {
-            $a = spip_query($q = 'UPDATE `' . $nom_table . '` SET ' . $update . ' WHERE ' . $where, $distant);
-            #spip_log($q);
-        }
+    // l'api sql sait gerer les prefixes contrairement a spip_query.
+    $a = sql_updateq($nom_table , $colval, $where,'',$distant);
 
 		include_spip('inc/invalideur');
 
 		// Pour une base externe doit on prefixer le type avec le nom du connecteur?
-        // ex: nomconnect_objet
+    // ex: nomconnect_objet
 		suivre_invalideur($type, $modif = true);
 
 	} else {
 		// cle primaire composee : 3-4-rubrique
 		// calculer un where approprie
 		// et modifier sans passer par la fonction destinee aux tables principales
-		// on limite a SPIP 2 mini car sql_updateq n'est pas mappe dans les crayons_compat
-		if (is_scalar($id) and ($GLOBALS['spip_version_code'] >= '1.93')) {
-			list($nom_table, $where) = table_where($type, $id, true); // where sous forme de tableau
+		list($nom_table, $where) = table_where($type, $id, true); // where sous forme de tableau
+		if (is_scalar($id) and count($where)>1) {
 			$a = sql_updateq($nom_table, $colval, $where);
 		} else {
 			// modification d'une table principale
@@ -489,23 +489,6 @@ function crayons_update($id, $colval = array(), $type = '') {
 	return $a;
 }
 
-//
-// Fonctions de mise a jour
-//
-function crayons_update_article($id_article, $c = false) {
-	include_spip('action/editer_article');
-
-	// Enregistrer les nouveaux contenus
-	article_modifier($id_article, $c);
-
-	// En cas de statut ou de id_rubrique
-	// NB: instituer_article veut id_parent, et pas id_rubrique !
-	if (isset($c['id_rubrique'])) {
-		$c['id_parent'] = $c['id_rubrique'];
-		unset($c['id_rubrique']);
-	}
-	article_instituer($id_article, $c);
-}
 
 /**
  * Enregistre les modifications sur une configuration
@@ -549,11 +532,17 @@ function modeles_tags($id, $c) {
 	var_dump($c); # perturbant : ici on a array('id_article'=>'valeur envoyee')
 }
 
+/**
+ * fonction generique surchargeable
+ */
 function action_crayons_store_dist() {
 	return action_crayons_store_args();
 }
 
-// permettre de passer une autre fonction de stockage des informations
+/**
+ * permettre de passer une autre fonction de stockage des informations
+ * @param string $store
+ */
 function action_crayons_store_args($store = 'crayons_store') {
 	header('Content-Type: text/plain; charset='.$GLOBALS['meta']['charset']);
 	lang_select($GLOBALS['auteur_session']['lang']);
