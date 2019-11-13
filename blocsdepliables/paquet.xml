@@ -1,7 +1,7 @@
 <paquet
 	prefix="blocsdepliables"
 	categorie="edition"
-	version="1.2.3"
+	version="1.2.4"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/blocsdepliables-64.png"
