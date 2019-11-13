@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_champs_auteur' => 'Formulaire Auteur',
 	'cfg_titre_portfolio' => 'Affichage des documents',
 	'cfg_titre_restriction_par_rubrique' => 'Restreindre les contenus par rubrique',
-	'cfg_select_objets' => 'sélectionner les objets',
+	'cfg_select_objets' => 'Selectionner les contenus',
 	
 	
 
