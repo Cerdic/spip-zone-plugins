@@ -54,10 +54,10 @@ function multilang_creer_config() {
 	$config = lire_config('multilang', array());
 	$config_defaut = array_merge_recursive(array(
 		'formulaires' => array(
-			'siteconfig' => 'on',
-			'rubrique'   => 'on',
-			'auteur'     => 'on',
-			'document'   => 'on',
+			'siteconfig',
+			'rubrique',
+			'auteur',
+			'document',
 	)), $config);
 	ecrire_config('multilang', $config_defaut);
 }
@@ -82,7 +82,7 @@ function multilang_maj_011() {
 		$surnoms   = is_array($surnoms) ? $surnoms : array();
 		$surnoms[] = $cle;
 		if (array_intersect($surnoms, $formulaires)) {
-			$cfg_formulaires[$cle] = $valeur;
+			$cfg_formulaires[] = $cle;
 			foreach ($surnoms as $surnom) {
 				$surnom = str_replace('-', '', $surnom); // mot-cle => motcle
 				unset($config[$surnom]);

@@ -14,7 +14,6 @@
 					<ul class="editer-groupe">
 
 						[(#REM) Formulaires à prendre en compte ]
-						#SET{defaut,#ENV{formulaires,#ARRAY}|array_keys}
 						[(#SET{data,#ARRAY{siteconfig,<:multilang:cfg_lbl_siteconfig:>}})]
 						<BOUCLE_objets(DATA){source tableau,#REM|lister_tables_objets_sql}{editable=oui}>
 						#SET{objet,#CLE|objet_type}
@@ -25,7 +24,6 @@
 						[(#SAISIE{checkbox,formulaires,
 							label=<:multilang:cfg_formulaires_label:>,
 							data=#GET{data},
-							defaut=#GET{defaut},
 							conteneur_class=pleine_largeur
 						})]
 
