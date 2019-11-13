@@ -124,7 +124,7 @@ function albums_affiche_milieu($flux) {
 			}
 		}
 		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
-		if (in_array($id_auteur, $auteurs_album) and !autoriser(modifier, album, $id_objet)) {
+		if (in_array($id_auteur, $auteurs_album) and !autoriser('modifier', 'album', $id_objet)) {
 			$texte .= recuperer_fond('prive/squelettes/inclure/message_album_non_editable');
 		}
 	}
