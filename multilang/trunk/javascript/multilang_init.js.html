@@ -1,3 +1,89 @@
 #CACHE{7*24*3600}
 #HTTP_HEADER{Content-Type: text/javascript; charset=#CHARSET}
-[(#REM|generer_multilang_init)]
+#SET{params,     #REM|multilang_init_parametres}
+#SET{globales,   #REM|multilang_init_globales}
+#SET{nb_langues, #CONFIG{langues_multilingue}|explode{","}|count}
+#SET{has_params, #GET{params}|count|>{0}}
+#SET{activer,    #GET{nb_langues}|>{1}|et{#GET{has_params}}}
+<BOUCLE_activer(CONDITION) {si #GET{activer}}>
+[(#REM)<script>]
+
+// Variables globales
+var
+	multilang_avail_langs   = "[(#GET{globales/avail_langs}|implode{','})]",
+	multilang_avail_langs   = multilang_avail_langs.split(','),
+	multilang_dir_langs     = [(#GET{globales/dir_langs}|json_encode)],
+	multilang_def_lang      = "#GET{globales/def_lang}",
+	multilang_lang_courante = "#GET{globales/lang_courante}",
+	multilang_dir_plugin    = "#GET{globales/dir_plugin}";
+
+// On trie les langues : langue de l'environnement en premier,
+// puis langue principale du site, puis les autres en ordre alphabétique.
+// Un utilisateur de langue anglaise souhaite logiquement traduire en anglais.
+multilang_avail_langs = jQuery.grep(multilang_avail_langs, function(value) {
+	return (value != multilang_def_lang && value != multilang_lang_courante);
+});
+multilang_avail_langs.sort();
+multilang_avail_langs.unshift(multilang_lang_courante);
+if (multilang_lang_courante!=multilang_def_lang) {
+	multilang_avail_langs.unshift(multilang_def_lang);
+}
+
+// Appel de multilang_init_lang si
+// - document.ready
+// - onAjaxLoad (cas des docs et de la configuration du site)
+jQuery(function ($) {
+
+	// Lance le script principal et passe le menu en sticky
+	function multilang_init() {
+
+		// Appel du script principal
+		multilang_init_lang([(#GET{params}|json_encode)]);
+
+		// Passe le menu en sticky
+		if ($(".menu_multilang").length > 0) {
+			$(".menu_multilang").each(function () {
+				var $menu_lang = $(this),
+					$form = $menu_lang.parents("form"),
+					hauteur_menu = $menu_lang.outerHeight();
+
+				$(window).scroll(function () {
+					var offset = $form.offset(),
+						limite_multilang = offset.top,
+						limite_bas = limite_multilang + $form.height() - $form.find(".boutons").height(),
+						pos_bas = $menu_lang.offset().top + hauteur_menu;
+
+					if (($(window).scrollTop() >= limite_multilang) && (pos_bas <= limite_bas) && ($(window).scrollTop() < limite_bas)) {
+						if (!$menu_lang.hasClass("menu_multilang_flottant")) {
+							$menu_lang.addClass("menu_multilang_flottant");
+						}
+						var menu_lang_width = $menu_lang.outerWidth();
+						$menu_lang.css({
+							"position": "fixed",
+							"top": 0,
+							"width": menu_lang_width + "px",
+							"z-index": "1001"
+						});
+						// Un padding sur la parent
+						$form.css({'padding-top': hauteur_menu + 'px'});
+					}
+					if (($(window).scrollTop() < limite_multilang) || (pos_bas > limite_bas)) {
+						$menu_lang.removeClass("menu_multilang_flottant").css({
+							"position": "static",
+							"width": "auto"
+						});
+						$form.css({'padding-top': ''});
+					}
+				});
+			});
+		}
+	}
+
+	multilang_init();
+	if (typeof onAjaxLoad == "function") {
+		onAjaxLoad(multilang_init);
+	}
+});
+
+</BOUCLE_activer>
+#FILTRE{trim}

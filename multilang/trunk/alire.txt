@@ -68,4 +68,3 @@ En fait faut pas passer 2 fois dans la fonction d'init. Ce n'est pas prevu pour.
 	});
 
 Bon donc ca marche toujours avec ou sans mediatheque... Reste plus qu'a tester avec un plugin qui veut du multilang
-

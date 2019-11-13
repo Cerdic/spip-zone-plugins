@@ -17,7 +17,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_crayons' => 'Utiliser multilang dans les crayons',
 	'cfg_lbl_espace_public' => 'Utiliser multilang dans l’espace public du site',
 	'cfg_lbl_formstables' => 'des forms&tables',
-	'cfg_lbl_siteconfig' => 'de la configuration du site',
+	'cfg_formulaires_label' => 'Formulaires',
+	'cfg_formulaires_autres_label' => 'Autres formulaires',
+	'cfg_formulaires_autres_explication' => 'Sélecteurs jQuery séparés par des virgules : <code>.formulaire_editer_patate,.formulaire_machiner_truc:not([bidule])</code>',
+	'cfg_lbl_siteconfig' => 'Configuration du site (accueil et identité)',
 	'cfg_titre_multilang' => 'Multilang',
 	'champ_numero' => 'Numéro',
 	'configuration_multilang' => 'Multilang',
@@ -27,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_langues_utilisees' => 'Langues utilisées par multilang',
+	'label_langues' => 'Langues',
 	'lien_desactiver' => 'Tout',
 	'lien_multi_title' => 'Éditer les champs multilingues en « @lang@ »',
 	'lien_multi_title_sans' => 'La version « @lang@ » est incomplète. Cliquez pour l’éditer.',

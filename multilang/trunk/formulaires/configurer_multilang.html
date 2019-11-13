@@ -12,27 +12,37 @@
 				<fieldset>
 					<h3 class="legend"><:multilang:cfg_activer:></h3>
 					<ul class="editer-groupe">
-						[(#SAISIE{case,siteconfig,
-							label_case=<:multilang:cfg_lbl_siteconfig:>,
-							defaut=on,
-							conteneur_class=pleine_largeur})]
-						#SET{defaut_on,#LISTE{rubrique,auteur,document}}
+
+						[(#REM) Formulaires à prendre en compte ]
+						#SET{defaut,#ENV{formulaires,#ARRAY}|array_keys}
+						[(#SET{data,#ARRAY{siteconfig,<:multilang:cfg_lbl_siteconfig:>}})]
 						<BOUCLE_objets(DATA){source tableau,#REM|lister_tables_objets_sql}{editable=oui}>
-							[(#SET{name,[(#CLE|objet_type)]})]
-							[(#SET{label,[(#VALEUR{texte_objets}|_T)]})]
-							[(#SAISIE{case,#GET{name},
-								label_case=#GET{label},
-								defaut='',
-								conteneur_class=pleine_largeur})]
+						#SET{objet,#CLE|objet_type}
+						#SET{objet_nom,#VALEUR{texte_objets}|_T}
+						#SET{data,#GET{data}|array_merge{#ARRAY{#GET{objet},#GET{objet_nom}}}}
 						</BOUCLE_objets>
 
-						[(#SAISIE{oui_non,multilang_public,
-							label=<:multilang:cfg_lbl_espace_public:>,
+						[(#SAISIE{checkbox,formulaires,
+							label=<:multilang:cfg_formulaires_label:>,
+							data=#GET{data},
+							defaut=#GET{defaut},
+							conteneur_class=pleine_largeur
+						})]
+
+						[(#SAISIE{textarea,formulaires_autres,
+							label=<:multilang:cfg_formulaires_autres_label:>,
+							explication=<:multilang:cfg_formulaires_autres_explication:>,
+							rows=2,
+						})]
+
+						[(#SAISIE{case,multilang_public,
+							label_case=<:multilang:cfg_lbl_espace_public:>,
 							defaut=''})]
 
-						[(#SAISIE{oui_non,multilang_crayons,
-							label=<:multilang:cfg_lbl_crayons:>,
+						[(#SAISIE{case,multilang_crayons,
+							label_case=<:multilang:cfg_lbl_crayons:>,
 							explication=<:multilang:cfg_explication_crayons:>,
+							afficher_si='@multilang_public@',
 							defaut=''})]
 					</ul>
 				</fieldset>

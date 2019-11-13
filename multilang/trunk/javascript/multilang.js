@@ -76,12 +76,15 @@ function multilang_init_lang(options) {
 	 * On crée le modèle du menu de langue
 	 * C'est ce modèle qui est cloné au début de chaque formulaire
 	 */
-	multilang_menu_lang = $("<div class='langues'></div>");
+	multilang_menu_lang =
+		$("<div class='langues'></div>")
+		.append($('<span class="langues__label">').html(eval('multilang_lang.label_langues')+'&nbsp;'));
 	$.each(multilang_avail_langs,function() {
-		var title = 'multilang_lang.title_lien_multi_'+this;
-		multilang_menu_lang.append($("<a class='change_lang "+this+"' title='"+eval(title)+"'></a>").html("["+this+"]"));
+		var title = 'multilang_lang.title_lien_multi_'+this,
+			label = 'multilang_lang.label_'+this;
+		multilang_menu_lang.append($("<a class='langues__item change_lang "+this+"' title='"+eval(title)+"'></a>").html(eval(label)));
 	});
-	multilang_menu_lang.append($("<a class='recover_lang' href='#'></a>").html("["+multilang_lang.lien_desactiver+"]"));
+	multilang_menu_lang.append($("<a class='langues__item recover_lang' href='#'></a>").html(multilang_lang.lien_desactiver));
 
 	//init fields
 	multilang_fields_selector = options.fields;

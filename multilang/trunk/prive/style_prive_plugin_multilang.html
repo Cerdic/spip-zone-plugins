@@ -1,5 +1,18 @@
-#CACHE{0*100,cache-client}
-#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
 #SET{claire,##ENV{couleur_claire,edf3fe}}
@@ -9,60 +22,105 @@
 
 .menu_multilang {
 	background-color:transparent;
-	padding:5px;
+	border-bottom: 3px solid transparent;
+	transition: all 0.2s;
 }
 
-.menu_multilang .langues{
-	overflow:auto;
+/* Boutons de langue */
+.menu_multilang .langues {
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	justify-content: center;
+	text-align: center; /* vieux navs */
+	overflow: auto;
+	margin: 1em 0;
 }
 
-.menu_multilang .langues a{
-	cursor:pointer;
-	font-weight:normal;
-	margin-right:2px;
-	display:block;
-	float:left;
+.menu_multilang .langues__item {
+	display: inline-block; /* vieux navs */
+	flex: 0 1 auto;
+	padding: 0.33em 0.66em;
+	margin: 0.33em 0.33em 0 0;
+	background-color: [#(#GET{claire}|couleur_eclaircir)];
+	border: 1px solid transparent;
+	cursor: pointer;
+	font-weight: 400;
+	transition: all 0.2s;
+	border-radius: 0.2em;
+	text-decoration: none;
 }
 
-.menu_multilang .langues a.on{
-	font-weight:bold;
+.menu_multilang .langues__item:first-letter {
+	text-transform: uppercase;
 }
 
-.menu_multilang .langues a.empty{
-	background-color:#GET{foncee};
-	padding:2px;
-	color:#fff;
+.menu_multilang .langues__item.on,
+.menu_multilang .langues__item:hover,
+.menu_multilang .langues__item:focus {
+	background-color: #GET{foncee};
+	color: #fff;
 }
 
-.menu_multilang .multilang_message{
-	clear:both;
+.menu_multilang .langues__item.empty:before {
+	content: '∅';
+	margin-right: 0.25em;
 }
 
-.menu_lang_flottant{
-	border-bottom:3px solid #GET{foncee};
+.menu_multilang .langues__label {
+	display: inline-block; /* vieux navs */
+	padding-left: 2.5em;
+	margin: 0.33em 0.33em 0 0;
+	background-image: url(#CHEMIN{prive/themes/spip/images/icone-multilang.svg});
+	background-repeat: no-repeat;
+	background-size: 2em auto;
+	background-position: left center;
+}
+
+.menu_multilang .multilang_message {
+	padding: 0.25em 0.5em;
+	clear: both;
+	text-align: center;
+	font-weight: bold;
+	background-color: hsla(0, 0%, 0%, 0.066);
+}
+.menu_multilang .multilang_message p:last-child {
+	margin: 0;
+}
+/* Mode sticky */
+.menu_multilang_flottant {
+	border-bottom-color: #GET{foncee};
 	background-color:[#(#GET{claire}|couleur_eclaircir)];
-	opacity:.8;
+	opacity: 0.9;
+}
+.menu_multilang_flottant .langues {
+	margin: 0;
+}
+
+.menu_multilang_flottant .langues__item {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
 }
 
 #SET{langues,#EVAL{$GLOBALS["meta"]["langues_multilingue"]}}
 <BOUCLE_langues(POUR){tableau #GET{langues}|explode{','}}>
 .multi_lang_#VALEUR {
-	background-position:98% 1px;
-	background-repeat:no-repeat;
-	background-image:url([(#VAL{Multi #VALEUR}|image_typo{taille=11,couleur=cccccc}|extraire_attribut{src}|url_absolue)]);
+	background-position: 98% 1px;
+	background-repeat: no-repeat;
+	background-image: url([(#VAL{Multi #VALEUR}|image_typo{taille=11,couleur=cccccc}|extraire_attribut{src}|url_absolue)]);
 }
 </BOUCLE_langues>
 
 .multi_lang_no_multi {
-	background-position:98% 1px;
-	background-repeat:no-repeat;
-	background-image:url([(#VAL{No multi}|image_typo{taille=11,couleur=cccccc}|extraire_attribut{src}|url_absolue)]);
+	background-position: 98% 1px;
+	background-repeat: no-repeat;
+	background-image: url([(#VAL{No multi}|image_typo{taille=11,couleur=cccccc}|extraire_attribut{src}|url_absolue)]);
 }
 
 .multi_lang_broken {
-	background-position:98% 1px;
-	background-repeat:no-repeat;
-	background-image:url(#CHEMIN{images/multi_forbidden.png});
+	background-position: 98% 1px;
+	background-repeat: no-repeat;
+	background-image: url(#CHEMIN{images/multi_forbidden.png});
 }
 
 .multi_lang_rtl {background-position:2% 1px;}
