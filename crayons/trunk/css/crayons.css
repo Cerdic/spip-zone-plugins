@@ -50,7 +50,7 @@ em.crayon-img-changed { cursor: pointer; border:0; }
 
 .crayon-html .formulaire_spip { max-width: 44rem; padding: 0;margin: 0;border: 0;background: none;min-width: 10rem;}
 .crayon-html .formulaire_spip .formulaire_crayon { padding-bottom: 2em;}
-.crayon-html .formulaire_spip:before {content:'';display: block;position: absolute;top:-1rem;left:-1rem;right:-1rem;bottom: -1rem;background: rgba(245,245,245,0.95);z-index: -1;}
+.crayon-html .formulaire_spip:before {content:'';display: block;position: absolute;top:-1rem;left:-1rem;right:-1rem;bottom: -1rem;background: #f4f4f4;opacity:0.95;z-index: -1;}
 .crayon-html textarea { overflow: auto; font: inherit; }
 .crayon-html { z-index:1000; }
 .crayon-html .small .crayon-boutons {position: relative;}
