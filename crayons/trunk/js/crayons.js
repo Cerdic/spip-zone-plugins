@@ -85,13 +85,14 @@ $.fn.opencrayon = function(evt, percent) {
 	}
 	return this
 	.each(function(){
+		var $me = $(this);
 		// verifier que je suis un crayon
-		if (!$(this).is('.crayon'))
+		if (!$me.is('.crayon'))
 			return;
 
 		// voir si je dispose deja du crayon comme voisin
-		if ($(this).is('.crayon-has')) {
-			$(this)
+		if ($me.is('.crayon-has')) {
+			$me
 			.css('visibility','hidden')
 			.crayon()
 				.show();
@@ -99,37 +100,39 @@ $.fn.opencrayon = function(evt, percent) {
 		// sinon charger le formulaire
 		else {
 			// sauf si je suis deja en train de le charger (lock)
-			if ($(this).find("em.crayon-searching").length) {
+			if ($me.is('.crayon-loading')) {
 				return;
 			}
-			$(this)
-			.find('>span.crayon-icones span')
-			.append(configCrayons.mkimg('searching')); // icone d'attente
+			$me
+				.addClass('crayon-loading')
+				.find('>span.crayon-icones span')
+				.append(configCrayons.mkimg('searching')); // icone d'attente
 			var me=this;
-			var offset = $(this).offset();
+			var offset = $me.offset();
+			var bgcolor = $me.css('backgroundColor');
 			var params = {
 				'top': offset.top,
 				'left': offset.left,
-				'w': $(this).width(),
-				'h': $(this).height(),
+				'w': $me.width(),
+				'h': $me.height(),
 				'ww': (window.innerWidth ? window.innerWidth : (document.documentElement.clientWidth ? document.documentElement.clientWidth : document.body.offsetWidth)),
 				'wh': (window.innerHeight ? window.innerHeight : (document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.offsetHeight)),
-				'em': $(this).css('fontSize'), // Bug de jquery resolu : http://bugs.jquery.com/ticket/760
-				'class': me.className,
-				'color': $(this).css('color'),
-				'font-size': $(this).css('fontSize'),
-				'font-family': $(this).css('fontFamily'),
-				'font-weight': $(this).css('fontWeight'),
-				'line-height': $(this).css('lineHeight'),
-				'min-height': $(this).css('lineHeight'),
-				'text-align': $(this).css('textAlign'),
-				'background-color': $(this).css('backgroundColor'),
+				'em': $me.css('fontSize'), // Bug de jquery resolu : http://bugs.jquery.com/ticket/760
+				'class': this.className,
+				'color': $me.css('color'),
+				'font-size': $me.css('fontSize'),
+				'font-family': $me.css('fontFamily'),
+				'font-weight': $me.css('fontWeight'),
+				'line-height': $me.css('lineHeight'),
+				'min-height': $me.css('lineHeight'),
+				'text-align': $me.css('textAlign'),
+				'background-color': $me.css('backgroundColor'),
 				'self': configCrayons.self
 			};
-			if (me.type) params.type = me.type;
+			if (this.type) params.type = this.type;
 			if (params['background-color'] == 'transparent'
 			|| params['background-color'] == 'rgba(0, 0, 0, 0)') {
-				$(me).parents()
+				$me.parents()
 				.each(function(){
 					var bg = $(this).css('backgroundColor');
 					if (bg != 'transparent'
@@ -146,8 +149,9 @@ $.fn.opencrayon = function(evt, percent) {
 					} catch(e) {
 						c = {'$erreur': 'erreur de communication :' + '  ' + e.message, '$html':''};
 					}
-					$(me)
-					.find("em.crayon-searching")
+					$me
+						.removeClass('crayon-loading')
+						.find("em.crayon-searching")
 						.remove();
 					if (c.$erreur) {
 						uniAlert(c.$erreur);
@@ -156,12 +160,12 @@ $.fn.opencrayon = function(evt, percent) {
 					id_crayon++;
 
 					var position = 'absolute';
-					$(me).parents().each(function(){
+					$me.parents().each(function(){
 						if($(this).css("position") == "fixed")
 							position = 'fixed';
 					});
 
-					$(me)
+					$me
 					.css('visibility','hidden')
 					.addClass('crayon-has')
 					.find('>.crayon-icones')
@@ -169,9 +173,9 @@ $.fn.opencrayon = function(evt, percent) {
 					// Detection IE sur sa capacite a gerer zoom :
 					// http://www.sitepoint.com/detect-css3-property-browser-support/
 					if (document.createElement("detect").style.zoom === "") {
-						$(me).css({'zoom':1});
+						$me.css({'zoom':1});
 					}
-					var pos = $(me).offset();
+					var pos = $me.offset();
 					$('<div class="crayon-html" id="crayon_'+id_crayon+'"></div>')
 					.css({
 						'position':position,
@@ -180,7 +184,7 @@ $.fn.opencrayon = function(evt, percent) {
 					})
 					.appendTo('body')
 					.html(c.$html);
-					$(me)
+					$me
 					.activatecrayon(percent);
 					// Si le crayon a une taille mini qui le fait deborder
 					// a droite de l'ecran, recadrer vers la gauche
@@ -265,7 +269,8 @@ $.fn.activatecrayon = function(percent) {
 					}
 				}
 				me
-				.find("em.crayon-searching")
+					.removeClass('crayon-loading')
+					.find("em.crayon-searching")
 					.remove();
 
 				//Remise a zero des warnings invalides (unwrap)
@@ -317,6 +322,7 @@ $.fn.activatecrayon = function(percent) {
 						.find(".crayon-boutons,.resizehandle")
 							.show()
 						.end()
+						.removeClass('crayon-loading')
 						.find('.crayon-searching')
 							.remove();
 						return false;
@@ -347,8 +353,8 @@ $.fn.activatecrayon = function(percent) {
 			.bind('form-submit-validate',function(form,a, e, options, veto){
 				if(!veto.veto)
 				crayon
+				.addClass('crayon-loading')
 				.find('form')
-					.css('opacity', 0.5)
 					.after(configCrayons.mkimg('searching')) // icone d'attente
 					.find(".crayon-boutons,.resizehandle")
 						.hide();
