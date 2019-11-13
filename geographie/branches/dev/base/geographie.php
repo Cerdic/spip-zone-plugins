@@ -17,7 +17,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function geographie_declarer_tables_interfaces($interface) {
 	$interface['table_des_tables']['geo_continents'] = 'geo_continents';
-	$interface['table_des_tables']['geo_regions'] = 'geo_regions';
+	$interface['table_des_tables']['geo_zones'] = 'geo_zones';
 	$interface['table_des_tables']['geo_pays'] = 'geo_pays';
 //	$interface['table_des_tables']['geo_subdivisions'] = 'geo_subdivisions';
 //	$interface['table_des_tables']['geo_communes'] = 'geo_communes';
@@ -51,7 +51,7 @@ function geographie_declarer_tables_objets_sql($tables) {
 			'superficie'    => "int DEFAULT 0 NOT NULL",                // Superficie en km2
 			'population'    => "int DEFAULT 0 NOT NULL",                //
 			'continent'     => "char(2) DEFAULT '' NOT NULL",           // Code GeoIP du continent
-			'region'        => "char(3) DEFAULT '' NOT NULL",           // Code ISO 3166 numérique de la région (UN M49)
+			'zone'          => "char(3) DEFAULT '' NOT NULL",           // Code ISO 3166 numérique de la zone (UN M49)
 			'tld'           => "char(3) DEFAULT '' NOT NULL",           // Tld - Domaine internet
 			'code_devise'   => "char(3) DEFAULT '' NOT NULL",           // Code ISO-4217 de la devise du pays
 			'nom_devise'    => "varchar(255) DEFAULT '' NOT NULL",      // Nom anglais de la devise
@@ -70,18 +70,17 @@ function geographie_declarer_tables_objets_sql($tables) {
 		'tables_jointures' => array(),
 	);
 
-	$tables['spip_geo_regions'] = array(
-		'type' => 'geo_region',
+	$tables['spip_geo_zones'] = array(
+		'type' => 'geo_zone',
 		'principale' => 'oui',
-		'table_objet_surnoms' => array('georegion'),
 		'field' => array(
-			'id_region' => 'bigint(21) NOT NULL',
-			'code'      => "char(3) DEFAULT '' NOT NULL",  // Code UN M49 numérique
-			'parent'    => "char(3) DEFAULT '' NOT NULL",  // Code UN M49 du parent ou ''
-			'nom'       => 'text DEFAULT "" NOT NULL',     // Nom normalisé multilingue
+			'id_zone' => 'bigint(21) NOT NULL',
+			'code'    => "char(3) DEFAULT '' NOT NULL",  // Code UN M49 numérique
+			'parent'  => "char(3) DEFAULT '' NOT NULL",  // Code UN M49 du parent ou ''
+			'nom'     => 'text DEFAULT "" NOT NULL',     // Nom normalisé multilingue
 		),
 		'key' => array(
-			'PRIMARY KEY' => 'id_region',
+			'PRIMARY KEY' => 'id_zone',
 		),
 		'titre' => 'nom AS titre, "" AS lang',
 		'champs_editables' => array(''),
@@ -175,7 +174,7 @@ function geographie_lister_tables_noexport($liste) {
 //	$liste[] = 'spip_geo_communes';
 //	$liste[] = 'spip_geo_subdivisions';
 	$liste[] = 'spip_geo_continents';
-	$liste[] = 'spip_geo_regions';
+	$liste[] = 'spip_geo_zones';
 	$liste[] = 'spip_geo_pays';
 
 	return $liste;
@@ -185,5 +184,5 @@ global $IMPORT_tables_noerase;
 //$IMPORT_tables_noerase[] = 'spip_geo_communes';
 //$IMPORT_tables_noerase[] = 'spip_geo_subdivisions';
 $IMPORT_tables_noerase[] = 'spip_geo_continents';
-$IMPORT_tables_noerase[] = 'spip_geo_regions';
+$IMPORT_tables_noerase[] = 'spip_geo_zones';
 $IMPORT_tables_noerase[] = 'spip_geo_pays';
