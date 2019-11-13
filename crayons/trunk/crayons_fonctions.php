@@ -183,7 +183,7 @@ function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode = 'pag
 	$cssFile = direction_css(find_in_path('crayons.css'));
 
 	$config = crayons_var2js(array(
-		'imgPath' => dirname(find_in_path('images/crayon.png')),
+		'imgPath' => dirname(find_in_path('images/crayon.svg')),
 		'droits' => $droits,
 		'dir_racine' => _DIR_RACINE,
 		'self' => self('&'),
