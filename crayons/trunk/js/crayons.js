@@ -547,15 +547,19 @@ $.fn.crayonsstart = function() {
 	// demarrer les crayons
 	if ((typeof crayons_init_dynamique == 'undefined') || (crayons_init_dynamique==false)) {
 
-		$('body')
-		.on('mouseover touchstart', '.crayon:not(.crayon-init)', function(e) {
-			$(this)
-			.addClass('crayon-init')
-			.filter(configCrayons.droits)
-			.initcrayon()
-			.trigger('mouseover');
-			if (e.type=='touchstart')
-				$(this).trigger('touchstart');
+		$(function(){
+			$('body')
+			.on('mouseover touchstart', '.crayon:not(.crayon-init)', function(e) {
+				console.log('over');
+				console.log(this);
+				$(this)
+				.addClass('crayon-init')
+				.filter(configCrayons.droits)
+				.initcrayon()
+				.trigger('mouseover');
+				if (e.type=='touchstart')
+					$(this).trigger('touchstart');
+			});
 		});
 	}
 
