@@ -55,6 +55,28 @@ function nospam_hash_env() {
 
 
 /**
+ * Est-ce qu'on suspecte cet utilisateur d'etre un bot ?
+ * @return bool
+ */
+function nospam_may_be_bot() {
+	if (defined('_IS_BOT') and _IS_BOT) {
+		return true;
+	}
+	if (!isset($_SERVER['HTTP_USER_AGENT'])) {
+		return true;
+	}
+
+	if (preg_match(','
+	. implode ('|', array(
+		// mots generiques supplementaires
+		'curl',
+	)) . ',i', $_SERVER['HTTP_USER_AGENT'])) {
+		return true;
+	}
+	return false;
+}
+
+/**
  * Calcule une cle de jeton pour un formulaire
  *
  * @param string $form

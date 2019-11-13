@@ -115,9 +115,10 @@ function nospam_name_decode($name, $jeton = "") {
  * @param bool $preserve_sessions_name
  *   si false les name commencant par session_ seront aussi encode
  * @param null|string $jeton
+ * @param string $isbot
  * @return mixed
  */
-function nospam_encrypt_form_names($form, $preserve_sessions_name = true, $jeton=null) {
+function nospam_encrypt_form_names($form, $preserve_sessions_name = true, $jeton = null, $isbot = false) {
 	// recuperer toutes les balises input, textarea, select
 	$balises = array_merge(extraire_balises($form, 'input'));
 	foreach ($balises as $k => $b) {
@@ -146,7 +147,18 @@ function nospam_encrypt_form_names($form, $preserve_sessions_name = true, $jeton
 		}
 	}
 
+	if ($isbot) {
+		$form = str_replace(nospam_encrypt_html_hidden(), nospam_encrypt_html_checkbox(), $form);
+	}
+
 	return $form;
+}
+
+function nospam_encrypt_html_hidden() {
+	return "<input type='hidden' name='_nospam_encrypt' value='1' />";
+}
+function nospam_encrypt_html_checkbox() {
+	return "<label class='check_if_nobot'><input type='checkbox' name='_nospam_encrypt' value='1' /> " . _T('nospam:label_je_ne_suis_pas_un_robot') . "</label>";
 }
 
 /**
@@ -157,7 +169,7 @@ function nospam_encrypt_form_names($form, $preserve_sessions_name = true, $jeton
  * @return array
  */
 function nospam_encrypt_check_valeurs($valeurs, $args) {
-	$valeurs['_hidden'] .= "<input type='hidden' name='_nospam_encrypt' value='1' />";
+	$valeurs['_hidden'] .= nospam_encrypt_html_hidden();
 	// recuperer les autosave encryptes si possible
 	if (is_array($valeurs)
 		AND isset($valeurs['_autosave_id'])

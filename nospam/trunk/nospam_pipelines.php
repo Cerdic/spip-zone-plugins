@@ -64,7 +64,7 @@ function nospam_inserer_nobot(&$texte, $args) {
 	if (_SPAM_ENCRYPT_NAME
 		or (isset($args['_nospam_encrypt']) and $args['_nospam_encrypt'])) {
 		include_spip('inc/nospam_encrypt');
-		$texte = nospam_encrypt_form_names($texte, $args['_nospam_encrypt'] === 'all' ? false : true);
+		$texte = nospam_encrypt_form_names($texte, $args['_nospam_encrypt'] === 'all' ? false : true, null, isset($args['_nospam_may_be_bot']) ? $args['_nospam_may_be_bot'] : false);
 	}
 }
 
@@ -93,6 +93,10 @@ function nospam_formulaire_charger($flux) {
 			or (isset($flux['data']['_nospam_encrypt']) and $flux['data']['_nospam_encrypt'])) {
 			include_spip('inc/nospam_encrypt');
 			$flux['data'] = nospam_encrypt_check_valeurs($flux['data'], $flux['args']);
+			// si on suspecte que c'est un bot on va lui faire cocher une case
+			if (nospam_may_be_bot()) {
+				$flux['data']['_nospam_may_be_bot'] = 1;
+			}
 		}
 	}
 	return $flux;
