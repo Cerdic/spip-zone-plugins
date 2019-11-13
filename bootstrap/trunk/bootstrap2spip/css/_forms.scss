@@ -221,3 +221,19 @@ body {
 	}
 }
 
+.crayon-html {
+	.formulaire_spip {
+		padding: 0;
+		background: transparent;
+	}
+	&:before {
+		content:'';
+		display: block;
+		position: absolute;
+		left: -$form-padding;
+		right: -$form-padding;
+		top: -$form-padding;
+		bottom: -$form-padding;
+		background-color: rgba($form-bg,0.95);
+	}
+}
