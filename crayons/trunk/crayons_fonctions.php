@@ -71,8 +71,7 @@ function Crayons_insert_head($head) {
 	}
 
 	// verifie que l'edition de l'espace prive est autorisee
-	if (isset($config_espace_prive['espaceprive'])
-	and $config_espace_prive['espaceprive'] == 'on') {
+	if (isset($config_espace_prive['espaceprive']) and $config_espace_prive['espaceprive'] == 'on') {
 		// determine les pages (exec) crayonnables
 		if (test_exec_crayonnable(_request('exec'))) {
 			// Calcul des droits
@@ -175,17 +174,29 @@ function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode = 'pag
 		}
 	}
 
+	$jsSkel = find_in_path('crayons.js.html');
 	$contexte = array('callback' => 'startCrayons');
 	if (_DEBUG_CRAYONS) {
 		$contexte['debug_crayons'] = 1;
 	}
-	$jsFile = produire_fond_statique('crayons.js', $contexte);
+	$hash = substr(md5($jsSkel . json_encode($contexte)),0,7);
+	$jsFile = _DIR_VAR . "crayons-{$hash}.js";
+	if (!file_exists($jsFile) or _VAR_MODE === 'recalcul') {
+		include_spip('inc/filtres'); // pour produire_fond_statique()
+		$jsFondStatique = supprimer_timestamp(produire_fond_statique('crayons.js', $contexte));
+		@copy($jsFondStatique, $jsFile);
+	}
+	$jsFile .=  "?" . filemtime($jsFile);
 
-	include_spip('inc/filtres'); // rien que pour direction_css() :(
-	$cssFile = direction_css(find_in_path('crayons.css'));
+	$cssFile = find_in_path('css/crayons.css');
+	if (lang_dir() === 'rtl') {
+		include_spip('inc/filtres'); // pour direction_css()
+		$cssFile = direction_css($cssFile, 'rtl');
+	}
+	$cssFile .= "?" . filemtime($cssFile);
 
 	$config = crayons_var2js(array(
-		'imgPath' => dirname(find_in_path('images/crayon.svg')),
+		'imgPath' => dirname(find_in_path('css/images/crayon.svg')), // ne sert visiblement plus ?
 		'droits' => $droits,
 		'dir_racine' => _DIR_RACINE,
 		'self' => self('&'),
