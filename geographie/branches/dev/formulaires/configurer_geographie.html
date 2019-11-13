@@ -6,18 +6,38 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		
-		<div class="editer_groupe">
-			<div class="editer">
-				<label><:geographie:configurer_communes_lier_objets_label:></label>
-				<!-- <input type="hidden" name="communes" /> -->
-				#INCLURE{fond=formulaires/inc-choisir-objets,
-					name=communes\[lier_objets\],
-					selected=#ENV{communes/lier_objets},
-					exclus=#LISTE{spip_geo_pays,spip_geo_regions,spip_geo_departements,spip_geo_arrondissements,spip_geo_communes}}
+		#SET{exclusions, #LISTE{spip_geo_pays,spip_geo_zones,spip_geo_continents,spip_geo_subdivisions,spip_geo_communes}}
+		<fieldset>
+			<legend><:geo_commune:titre_geo_communes:></legend>
+			<div class="editer_groupe">
+				<div class="editer">
+					<label><:geographie:configurer_lier_objets_label:></label>
+					<!-- <input type="hidden" name="communes" /> -->
+					#INCLURE{fond=formulaires/inc-choisir-objets,
+						name=communes\[lier_objets\],
+						selected=#ENV{communes/lier_objets},
+						exclus=#GET{exclusions}}
+				</div>
 			</div>
-		</div>
-		
-		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+		</fieldset>
+
+		<fieldset>
+			<legend><:geo_pays:titre_geo_pays:></legend>
+			<div class="editer_groupe">
+				<div class="editer">
+					<label><:geographie:configurer_lier_objets_label:></label>
+					#INCLURE{fond=formulaires/inc-choisir-objets,
+						name=pays\[lier_objets\],
+						selected=#ENV{pays/lier_objets},
+						exclus=#GET{exclusions}}
+				</div>
+			</div>
+		</fieldset>
+
+		<p class="boutons">
+			<span class="image_loading">&nbsp;</span>
+			<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
 	</div>
 	</form>
 </div>
