@@ -58,3 +58,21 @@ em.crayon-img-changed { cursor: pointer; border:0; }
 .resizehandle { background:transparent url("images/resizer.svg") center no-repeat;background-size: contain; cursor:ns-resize; font-size:0.1em; width: auto !important;margin-right: 150px;opacity: 0.5;}
 .small .resizehandle {margin-right: 0;}
 .resizehandle_boutons { margin-top: -16px; }
+
+
+.crayon-fade.crayon-hover{
+	-webkit-animation-name: crayon-fade-highlight;
+	-webkit-animation-duration: 1s;
+	animation-name: crayon-fade-highlight;
+  animation-duration: 1s;
+}
+@-webkit-keyframes crayon-fade-highlight {
+    0%   {background-color: initial;}
+    50%  {background-color: #FFFFB4;}
+    100% {background-color: initial;}
+}
+@keyframes crayon-fade-highlight {
+    0%   {background-color: initial;}
+    50%  {background-color: #FFFFB4;}
+    100% {background-color: initial;}
+}

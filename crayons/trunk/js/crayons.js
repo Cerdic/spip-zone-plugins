@@ -500,7 +500,7 @@ $.fn.initcrayon = function(){
 	};
 	var timeme;
 	this
-	.addClass('crayon-autorise')
+	.addClass('crayon-autorise' + (configCrayons.cfg.yellow_fade ? ' crayon-fade' : ''))
 	.dblclick(editme)
 	.bind("touchstart",function(e){var me=this;timeme=setTimeout(function(){editme.apply(me,[e]);},800);})
 	.bind("touchend",function(e){if (timeme) {clearTimeout(timeme);timeme=null;}})
