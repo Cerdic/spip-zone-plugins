@@ -65,10 +65,10 @@ function isocode_liste_ezcollection($collections) {
 		'ressource' => 'code_alpha2'
 	);
 
-	$collections['regions'] = array(
+	$collections['zones'] = array(
 		'module'  => 'isocode',
 		'cache'     => array(
-			'type'  => 'ezrest',
+			'type'  => 'spip',
 			'duree' => 3600 * 24 * 30
 		),
 		'filtres' => array()
@@ -77,7 +77,7 @@ function isocode_liste_ezcollection($collections) {
 	$collections['continents'] = array(
 		'module'  => 'isocode',
 		'cache'     => array(
-			'type'  => 'ezrest',
+			'type'  => 'spip',
 			'duree' => 3600 * 24 * 30
 		),
 		'filtres' => array()

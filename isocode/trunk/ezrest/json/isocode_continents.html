@@ -1,0 +1,9 @@
+#HTTP_HEADER{Content-Type: text/plain; charset=#CHARSET}
+{
+"pays": [
+	<BOUCLE_pays(GEOIPCONTINENTS){code?}{","}>{
+		"code" : "#CODE",
+		"nom" : "#LABEL"
+	}</BOUCLE_pays>
+]
+}
