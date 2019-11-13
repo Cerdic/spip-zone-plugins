@@ -175,10 +175,12 @@ function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode = 'pag
 		}
 	}
 
-	$jsFile = generer_url_public('crayons.js');
+	$contexte = array('callback' => 'startCrayons');
 	if (_DEBUG_CRAYONS) {
-		$jsFile = parametre_url($jsFile, 'debug_crayons', 1, '&');
+		$contexte['debug_crayons'] = 1;
 	}
+	$jsFile = produire_fond_statique('crayons.js', $contexte);
+
 	include_spip('inc/filtres'); // rien que pour direction_css() :(
 	$cssFile = direction_css(find_in_path('crayons.css'));
 
@@ -210,7 +212,7 @@ function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode = 'pag
 
 
 	// Est-ce que PortePlume est la ?
-	$meta_crayon = isset($GLOBALS['meta']['crayons']) ? unserialize($GLOBALS['meta']['crayons']): array();
+	$meta_crayon = (isset($GLOBALS['meta']['crayons']) ? unserialize($GLOBALS['meta']['crayons']): array());
 	$pp = '';
 	if (isset($meta_crayon['barretypo']) && $meta_crayon['barretypo']) {
 		if (function_exists('chercher_filtre')
@@ -242,7 +244,7 @@ function startCrayons() {
 }
 var cr = document.createElement('script');
 cr.type = 'text/javascript'; cr.async = true;
-cr.src = '{$jsFile}\x26callback=startCrayons';
+cr.src = '{$jsFile}';
 var s = document.getElementsByTagName('script')[0];
 s.parentNode.insertBefore(cr, s);
 /* ]]> */</script>
