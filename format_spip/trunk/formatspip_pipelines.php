@@ -24,40 +24,40 @@
 		$txt = '';
 		if (strlen($row['titre'])>0) {
 			$txt .= "----- "._T('info_titre')." -----\n";
-			$txt .= $row['titre']."\n\n";
+			$txt .= interdire_scripts(entites_html($row['titre']))."\n\n";
 		}
 		if (strlen($row['surtitre'])>0) {
 			$txt .= "----- "._T('info_surtitre')." -----\n";
-			$txt .= $row['surtitre']."\n\n";
+			$txt .= interdire_scripts(entites_html($row['surtitre']))."\n\n";
 		}
 		if (strlen($row['soustitre'])>0) {
 			$txt .= "----- "._T('texte_sous_titre')." -----\n";
-			$txt .= $row['soustitre']."\n\n";
+			$txt .= interdire_scripts(entites_html($row['soustitre']))."\n\n";
 		}
 		if (strlen($row['descriptif'])>0) {
 			$txt .= "----- "._T('texte_descriptif_rapide')." -----\n";
-			$txt .= $row['descriptif']."\n\n";
+			$txt .= interdire_scripts(entites_html($row['descriptif']))."\n\n";
 		}
 		if (strlen($row['chapo'])>0) {
 			$txt .= "----- "._T('info_chapeau')." -----\n";
-			$txt .= $row['chapo']."\n\n";
+			$txt .= interdire_scripts(entites_html($row['chapo']))."\n\n";
 		}
 		if (strlen($row['url_site'])>0) {
 			$txt .= "----- "._T('entree_liens_sites')." -----\n";
-			$txt .= _T('info_titre') . $row['nom_site']."\n";
-			$txt .= _T('info_url') . $row['url_site']."\n\n";
+			$txt .= _T('info_titre') . interdire_scripts(entites_html($row['nom_site']))."\n";
+			$txt .= _T('info_url') . interdire_scripts(entites_html($row['url_site']))."\n\n";
 		}
 		if (strlen($row['texte'])>0) {
 			$txt .= "----- "._T('info_texte')." -----\n";
-			$txt .= $row['texte']."\n\n";
+			$txt .= interdire_scripts(entites_html($row['texte']))."\n\n";
 		}
 		if (strlen($row['ps'])>0) {
 			$txt .= "----- "._T('info_post_scriptum')." -----\n";
-			$txt .= $row['ps']."\n\n";
+			$txt .= interdire_scripts(entites_html($row['ps']))."\n\n";
 		}
 		if (strlen($row['virtuel'])>0) {
 			$txt .= "----- "._T('bouton_redirection')." -----\n";
-			$txt .= $row['virtuel']."\n\n";
+			$txt .= interdire_scripts(entites_html($row['virtuel']))."\n\n";
 		}
 		
 		$txt = '<pre style="white-space: pre-wrap;       /* css-3 */
