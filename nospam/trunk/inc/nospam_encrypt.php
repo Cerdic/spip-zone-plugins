@@ -220,10 +220,14 @@ function nospam_encrypt_decrypt_post($form) {
 	// si pas de _nospam_encrypt poste, on refuse la saisie => erreur
 	if (!_request('_nospam_encrypt')) {
 		spip_log("SPAM_ENCRYPT_NAME active mais _nospam_encrypt manquant sur formulaire $form", 'nospam' . _LOG_INFO_IMPORTANTE);
+		$ua = (isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : 'undefined');
+		spip_log("Suspect SPAMMEUR (_nospam_encrypt) UA:$ua POST:" . json_encode($_POST), 'nospam_suspects' . _LOG_INFO_IMPORTANTE);
 		return _T('nospam:erreur_jeton');
 	}
 	if (!$jeton = _request('_jeton')){
 		spip_log("SPAM_ENCRYPT_NAME active mais _jeton manquant sur formulaire $form", 'nospam' . _LOG_INFO_IMPORTANTE);
+		$ua = (isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : 'undefined');
+		spip_log("Suspect SPAMMEUR (_jeton) UA:$ua POST:" . json_encode($_POST), 'nospam_suspects' . _LOG_INFO_IMPORTANTE);
 		return _T('nospam:erreur_jeton');
 	}
 
