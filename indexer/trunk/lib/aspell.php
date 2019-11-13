@@ -28,10 +28,10 @@ if(!defined('ASPELL_BIN')) define('ASPELL_BIN','aspell');
 
 
 // different spelling modes supported by aspell
-if(!defined('PSPELL_FAST'))         define(PSPELL_FAST,1);         # Fast mode (least number of suggestions)
-if(!defined('PSPELL_NORMAL'))       define(PSPELL_NORMAL,2);       # Normal mode (more suggestions)
-if(!defined('PSPELL_BAD_SPELLERS')) define(PSPELL_BAD_SPELLERS,3); # Slow mode (a lot of suggestions)
-if(!defined('ASPELL_ULTRA'))        define(ASPELL_ULTRA,4);        # Ultra fast mode (not available in Pspell!)
+if(!defined('PSPELL_FAST'))         define('PSPELL_FAST', 1);         # Fast mode (least number of suggestions)
+if(!defined('PSPELL_NORMAL'))       define('PSPELL_NORMAL', 2);       # Normal mode (more suggestions)
+if(!defined('PSPELL_BAD_SPELLERS')) define('PSPELL_BAD_SPELLERS', 3); # Slow mode (a lot of suggestions)
+if(!defined('ASPELL_ULTRA'))        define('ASPELL_ULTRA', 4);        # Ultra fast mode (not available in Pspell!)
 
 
 
