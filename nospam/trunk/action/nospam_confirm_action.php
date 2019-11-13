@@ -112,7 +112,10 @@ function nospam_confirm_action_prepare(
 		'arguments' => $arguments,
 		'file' => $file,
 		'time' => $time,
+		// et des infos pour qualifier les spammeurs plus tard si besoin
+		'ip' => $GLOBALS['ip'],
 		'date' => date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']), // pour les logs, on met la date de la demande d'action
+		'ua' => isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : 'undefined',
 	];
 	$desc = json_encode($desc);
 
