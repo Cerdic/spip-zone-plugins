@@ -289,7 +289,7 @@ class Aspell{
     function suggest($word){
         if($this->runAspell("^$word",$out,$err)){
             //parse output
-            $lines = str_split("\n",$out);
+            $lines = preg_split("|\n|",$out);
             foreach ($lines as $line){
                 $line = trim($line);
                 if(empty($line))    continue;       // empty line
@@ -298,7 +298,7 @@ class Aspell{
                 if($line[0] == '#') return array(); // mistake but no suggestions
                 if($line[0] == '&'){
                     $line = preg_replace('/&.*?: /','',$line);
-                    return str_split(', ',$line);
+                    return preg_split('|, |',$line);
                 }
             }
         }

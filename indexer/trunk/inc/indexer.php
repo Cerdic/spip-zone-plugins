@@ -271,7 +271,7 @@ function indexer_suggestions($mot) {
 			// match with suggestions
 			$word = $match[1];
 			$off  = $match[3]-1;
-			$sug  = str_split(', ', $match[4]);
+			$sug  = preg_split('|, |', $match[4]);
 		} else if (preg_match('/^# ([^ ]+) (\d+)/',$line,$match)) {
 			// match without suggestions
 			$word = $match[1];
