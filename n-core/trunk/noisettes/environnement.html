@@ -1,15 +1,7 @@
-[(#REM) <!--  CONTENEUR_COMPILER
+[(#REM) <!--  ENVIRONNEMENT
 
-	Compile les noisettes d'un conteneur fourni en paramètre de l'inclusion.
-	Cette inclusion est utilisée pour compiler récursivement une noisette conteneur.
-	Ce fichier est une surcharge du fichier original fourni par N-Core car il permet d'améliorer les
-	performances en utilisant une boucle SPIP directement sur la table des noisettes.
+	Affiche les variables d'environnement fournies. Cette noisette est un outil de debug.
 
 	@api
-
-	@param string  id_conteneur
-	       Identifiant du conteneur.
-	@param string stockage
-           Identifiant du service de stockage à utiliser si précisé.
 -->]
 [(#ENV**|unserialize|foreach)]

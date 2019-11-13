@@ -2,8 +2,10 @@ nom: '<:ncore:type_noisette_conteneur_titre:>'
 description: '<:ncore:type_noisette_conteneur_description:>'
 icon: 'conteneur-24.png'
 conteneur: 'oui'
+# Paramètre valorisé à titre indicatif : l'environnement est toujours fourni quelque soit la valeur configurée.
 contexte: 'env'
 ajax: 'non'
+# Paramètre valorisé à titre indicatif : l'inclusion d'un conteneur est toujours statique quelque soit la valeur configurée.
 inclusion: 'statique'
 parametres:
   -

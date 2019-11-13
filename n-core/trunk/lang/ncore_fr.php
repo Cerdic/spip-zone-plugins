@@ -21,5 +21,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_noisette_conteneur_titre' => 'Bloc conteneur',
 	'type_noisette_conteneur_description' => 'Conteneur pouvant accueillir des noisettes',
 	'type_noisette_environnement_titre' => 'Environnement SPIP',
-	'type_noisette_environnement_description' => 'Affichage des variables d\'environnement <code>#ENV</code> à des fins de débusquage',
+	'type_noisette_environnement_description' => 'Affichage des variables d\'environnement, balise <code>#ENV</code>, à des fins de debug',
 );

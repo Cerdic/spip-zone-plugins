@@ -56,9 +56,8 @@ function balise_NOISETTE_COMPILER_dist($p) {
 	// Cas d'une noisette conteneur : 
 	// - on ne compile pas la noisette conteneur mais on appelle la compilation des noisettes incluses (récursif),
 	// - et on applique systématiquement une encapsulation avec comme capsule la noisette conteneur elle-même.
-	// L'appel du fond conteneur_compiler pour le noisettes incluses est non ajaxé et l'environnement n'est pas fourni
-	// (seules les variables nécessaires à la détermination des noisettes incluses, à savoir, l'id du conteneur, 
-	// le plugin et le stockage sont passées).
+	// L'appel du fond conteneur_compiler pour le noisettes incluses est non ajaxé mais l'environnement est fourni
+	// de façon à ce qu'il soit transmis aux noisettes incluses.
 	// Seule l'inclusion statique est possible pour l'appel à la compilation des noisettes incluses.
 	// L'encapsulation se fait en compilant la noisette conteneur avec ses paramètres et sans ajax.
 	$environnement = "\$Pile[0]";
