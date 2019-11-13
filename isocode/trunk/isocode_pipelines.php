@@ -36,10 +36,17 @@ function isocode_liste_ezcollection($collections) {
 		'filtres'   => array(
 			array(
 				'critere'         => 'pays',
-				'est_obligatoire' => false
+				'est_obligatoire' => true,
+				'champ_nom'       => 'country',
+				'champ_table'     => 'iso3166subdivisions'
 			),
-		),
-		'ressource' => 'prefixe'
+			array(
+				'critere'         => 'type',
+				'est_obligatoire' => false,
+				'champ_nom'       => 'type',
+				'champ_table'     => 'iso3166subdivisions'
+			),
+		)
 	);
 
 	$collections['pays'] = array(
@@ -50,7 +57,7 @@ function isocode_liste_ezcollection($collections) {
 		),
 		'filtres'   => array(
 			array(
-				'critere'         => 'region',
+				'critere'         => 'zone',
 				'est_obligatoire' => false,
 				'champ_nom'       => 'code_num_region',
 				'champ_table'     => 'iso3166countries'

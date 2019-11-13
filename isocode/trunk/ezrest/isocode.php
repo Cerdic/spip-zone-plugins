@@ -17,7 +17,7 @@ $GLOBALS['isocode']['pays']['champs'] = array(
 	'area' => 'superficie',
 	'population' => 'population',
 	'code_continent' => 'continent',
-	'code_num_region' => 'region',
+	'code_num_region' => 'zone',
 	'tld' => 'tld',
 	'code_4217_3' => 'code_devise',
 	'currency_en' => 'nom_devise',
@@ -82,7 +82,7 @@ function pays_collectionner($conditions, $filtres, $configuration) {
  * Détermine si la valeur du critère de région d'appartenance du pays est valide.
  * La fonction compare uniquement la structure de la chaine passée qui doit être cohérente avec un code à 3 chiffres.
  *
- * @param string $region
+ * @param string $zone
  *        La valeur du critère région, soit son code ISO 3166-1 numérique (3 chiffres).
  * @param string $extra
  *        Message complémentaire à renvoyer dans la réponse en cas d'erreur.
@@ -90,13 +90,13 @@ function pays_collectionner($conditions, $filtres, $configuration) {
  * @return bool
  *        `true` si la valeur est valide, `false` sinon.
  */
-function pays_verifier_filtre_region($region, &$erreur) {
+function pays_verifier_filtre_zone($zone, &$erreur) {
 
 	$est_valide = true;
 
-	if (!preg_match('#^[0-9]{3}$#', $region)) {
+	if (!preg_match('#^[0-9]{3}$#', $zone)) {
 		$est_valide = false;
-		$erreur['type'] = 'region_nok';
+		$erreur['type'] = 'zone_nok';
 	}
 
 	return $est_valide;

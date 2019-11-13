@@ -10,8 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_isocode'                => 'Nomenclatures officielles',
 
 	// E
-	'erreur_400_region_nok_titre'      => 'La région d\'identifiant « @valeur@ » est invalide',
-	'erreur_400_region_nok_message'    => 'La région doit être désignée par son identifiant UN M49 (3 chiffres)',
+	'erreur_400_zone_nok_titre'        => 'La zone géographique d\'identifiant « @valeur@ » est invalide',
+	'erreur_400_zone_nok_message'      => 'La zone géographique doit être désignée par son identifiant UN M49 (3 chiffres)',
 	'erreur_400_continent_nok_titre'   => 'Le continent d\'identifiant « @valeur@ » est invalide',
 	'erreur_400_continent_nok_message' => 'Le continent doit être désignée par son identifiant GeoIP (2 lettres)',
 	'erreur_charger_table'             => 'Une erreur s\'est produite lors du chargement de la ou des tables « @tables@ ».',
