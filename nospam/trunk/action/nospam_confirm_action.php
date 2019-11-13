@@ -74,7 +74,7 @@ function action_nospam_confirm_action_dist() {
 
 	// supprimer les actions plus vieilles que 5mn en les logeant
 	$old_time = $_SERVER['REQUEST_TIME'] - 5 * 60;
-	nospam_purge_actions($dir_actions, ['mtime' => $old_time, 'limit' => 100]);
+	nospam_purge_actions($dir_actions, ['mtime' => $old_time, 'limit' => 1000]);
 
 	// et on renvoie un html minimum
 	if (!_request('redirect')) {
@@ -150,6 +150,10 @@ function nospam_confirm_action_prepare(
 
 	}
 
+	// supprimer des actions plus vieilles que 5mn en les logeant
+	// si on le fait qu'a l'exec d'action legitime, on risque le flood si y a que des spammeurs !
+	$old_time = $_SERVER['REQUEST_TIME'] - 5 * 60;
+	nospam_purge_actions($dir_actions, ['mtime' => $old_time, 'limit' => 10]);
 
 	return $html_action;
 }
