@@ -55,13 +55,13 @@ function lim_verifier_presence_petitions() {
 
 /**
  * Vérifier si il existe déjà des objets dans la rubrique
- * on renvoi un tableau avec le type et la table_objet
+ *
  * @param int $id_rubrique
- * @param string $objet
+ * @param string $type de l'objet
  * @return bool
  */
-function lim_verifier_presence_objets($id_rubrique, $objet) {
-	$table = table_objet_sql($objet);
+function lim_verifier_presence_objets($id_rubrique, $type) {
+	$table = table_objet_sql($type);
 	if (sql_countsel($table, "id_rubrique=$id_rubrique") > 0) return true;
 	return false;
 }
@@ -109,23 +109,41 @@ function lim_objets_a_exclure() {
 /**
  * Récupérer la liste des rubriques dans lesquelles il est possible de créer l'objet demandé
  * 
- * @param string $type
+ * @param string $type de l'objet
  * @return array
  */
 
 function lim_publierdansrubriques($type) {
-	$rubriques_choisies = array();
-	$tab_rubrique_objet = lire_config("lim_rubriques/$type");
+	$rubriques_autorisees = array();
 
-	// si l'objet n'est pas dans la config, on sort
-	if (is_null($tab_rubrique_objet)) {
-		return $rubriques_choisies;
+	$tab_rubriques_exclues = lire_config("lim_rubriques/$type"); // renvoi NULL si meta/lim_rubriques/$type n'existe pas
+
+	if ($tab_rubriques_exclues) {
+		$res = sql_allfetsel('id_rubrique', 'spip_rubriques');
+		$tab_rubriques = array_column($res, 'id_rubrique');
+		$rubriques_autorisees = array_diff($tab_rubriques, $tab_rubriques_exclues);
 	} 
 
-	$res = sql_allfetsel('id_rubrique', 'spip_rubriques');
-	$tab_rubriques = array_column($res, 'id_rubrique');
-	$rubriques_choisies = array_diff($tab_rubriques,$tab_rubrique_objet);
-	return $rubriques_choisies;
+	return $rubriques_autorisees;
+}
+
+/**
+ * Retourner le nombre de rubriques dans lesquelles il est possible de créer l'objet demandé
+ * 
+ * @param string $type de l'objet
+ * @return int
+ */
+
+function lim_nbre_rubriques_autorisees($type) {
+	// par défaut c'est le nombre total de rubrique
+	$nbre_rubriques_autorisees = sql_countsel('spip_rubriques');
+
+	$tab_rubriques_exclues	= lire_config("lim_rubriques/$type");
+	if ($tab_rubriques_exclues) {
+		$nbre_rubriques_autorisees = $nbre_rubriques_autorisees - count($tab_rubriques_exclues);
+	}
+
+	return $nbre_rubriques_autorisees;
 }
 
 /**

@@ -1,7 +1,7 @@
 <paquet
 	prefix="lim"
 	categorie="maintenance"
-	version="2.1.4"
+	version="2.1.5"
 	etat="stable"
 	compatibilite="[3.2.0;3.3.*]"
 	logo="prive/themes/spip/images/lim-64.png"
@@ -28,7 +28,9 @@
 	<pipeline nom="afficher_config_objet" inclure="lim_pipelines.php" />
 	<pipeline nom="formulaire_charger" inclure="lim_pipelines.php" />
 	<pipeline nom="formulaire_verifier" inclure="lim_pipelines.php" />
+	<pipeline nom="formulaire_fond" inclure="lim_pipelines.php" />
 	<pipeline nom="recuperer_fond" inclure="lim_pipelines.php" />
+
 
 	<onglet nom="configurer_lim" titre="lim:onglet_lim" parent="configurer_lim"  icone="images/lim-24.png" />
 	<onglet nom="configurer_lim_logos" titre="lim:onglet_lim_logo" parent="configurer_lim"  icone="images/image-lim-24.png" />

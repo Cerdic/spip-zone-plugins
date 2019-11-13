@@ -64,12 +64,10 @@ function lim_formulaire_charger($flux) {
 	) {
 		$objet = substr($flux['args']['form'], 7); // 'editer_article' -> 'article'
 		$nom_table	= table_objet_sql($objet); // article -> spip_articles
-		$tableau_conf_lim_objet	= lire_config("lim_rubriques/$objet");
-		
+		$tab_rubriques_exclues	= lire_config("lim_rubriques/$objet");
 
-		if (isset($tableau_conf_lim_objet)) {
-			$nbre_rubriques = sql_countsel('spip_rubriques');
-			$nbre_rubriques_autorisees = $nbre_rubriques - count($tableau_conf_lim_objet);
+		if ($tab_rubriques_exclues) {
+			$nbre_rubriques_autorisees = lim_nbre_rubriques_autorisees($objet);
 
 			// Cas #0 : voir TODO's
 			// if ($nbre_rubriques_autorisees == 0) {
@@ -86,7 +84,7 @@ function lim_formulaire_charger($flux) {
 				$id_parent = '';
 			}
 		} else { // Cas #2
-			// ici dans l'idéal, il faudrait utiliser l'API du plugin  Declarer_parent
+			// ici dans l'idéal, il faudrait utiliser l'API du plugin Declarer_parent
 			$trouver_table = charger_fonction('trouver_table', 'base');
 			$desc = $trouver_table($nom_table);
 			if (isset($desc['field']['id_rubrique'])) {
@@ -149,6 +147,20 @@ function lim_formulaire_verifier($flux) {
 			// if (!autoriser($faire, 'rubrique', _request('id_parent'))) {
 			// 	$flux['data']['id_parent'] = _T('lim:info_creer_dans_rubrique_non_autorise');
 		}
+	}
+
+	return $flux;
+}
+
+function lim_formulaire_fond($flux) {
+	// si ce n'est pas un formulaire d'édition d'un objet ou si la restriction par rubrique n'a pas été activée, on sort.
+	if (strncmp($flux['args']['form'], 'editer_', 7) !== 0 OR is_null(lire_config('lim_objets'))) {
+		return $flux;
+	}
+
+	$objet = substr($flux['args']['form'], 7); // 'editer_objet' devient 'objet'
+	if (lim_nbre_rubriques_autorisees($objet) <= 1){
+		$flux['data'] .= "<style>.editer.editer_parent {display:none}</style>";
 	}
 
 	return $flux;
