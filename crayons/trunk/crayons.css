@@ -55,6 +55,6 @@ em.crayon-img-changed { cursor: pointer; border:0; }
 .crayon-invalide { display: block; background-color: #ff8888; border: 1px dashed #ff0000; }
 .crayon-invalide p { margin:0; padding: 1%; font-style: italic; font-size: 80%; }
 /* resizer */
-.resizehandle { background:transparent url("images/resizer.png") no-repeat scroll 50%; cursor:ns-resize; font-size:0.1em; width: auto !important;margin-right: 150px;}
+.resizehandle { background:transparent url("images/resizer.svg") center no-repeat;background-size: contain; cursor:ns-resize; font-size:0.1em; width: auto !important;margin-right: 150px;opacity: 0.5;}
 .small .resizehandle {margin-right: 0;}
 .resizehandle_boutons { margin-top: -16px; }
