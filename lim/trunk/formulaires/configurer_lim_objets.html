@@ -8,10 +8,13 @@
 	<form method="post" action="#ENV{action}">
 		<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		#SET{name,lim_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-		[(#SET{exclus, #REM|lim_objets_a_exclure})]
+		
+		#SET{name,lim_objets}
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		#SET{exclus, #REM|lim_objets_a_exclure}
 		
 		#INCLURE{fond=formulaires/inc-choisir-objets,name=#GET{name},selected=#ENV**{#GET{name}},exclus=#GET{exclus}}
+		
 		<input type="hidden" name="_meta_casier" value="lim_select_objets" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 		</div>
