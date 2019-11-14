@@ -1,0 +1,22 @@
+<div class="formulaire_spip formulaire_configurer formulaire_configurer_lim_figer_objets">
+
+	<h3 class="titrem"><img src="#CHEMIN_IMAGE{lim-24.png}" class="cadre-icone" /><:lim:cfg_titre_figer_objets:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+
+			#SET{name,objets_fige}
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			#SET{exclus, #REM|lim_objets_a_exclure}
+			
+			#INCLURE{fond=formulaires/inc-choisir-tables_objet,name=#GET{name},selected=#ENV**{#GET{name}},exclus=#GET{exclus}}
+
+			<input type="hidden" name="_meta_casier" value="lim" />
+			<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+		</div>
+	</form>
+</div>

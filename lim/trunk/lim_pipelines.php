@@ -188,3 +188,31 @@ function lim_recuperer_fond($flux) {
 	}
 	return $flux;
 }
+
+/**
+ * Gestion des contenus par rubrique :
+ * lors de la création d'une rubrique, mettre la config à la bonne valeur pour les objets "figé"
+ * Autrement dit, désactiver la possibilité de publier les objets dits "figé"" dans cette nouvelle rubrique
+ *
+ * @param array $flux
+ * @return array $flux
+ */
+function lim_post_insertion($flux) {
+	if (isset($flux['args']['table']) 
+		and $flux['args']['table'] == 'spip_rubriques'
+	) {
+		$id_rubrique = $flux['args']['id_objet'];
+		include_spip('inc/config');
+		$tables_objet = lire_config('lim/objets_fige');
+		foreach ($tables_objet as $table) {
+			$objet_type = objet_type($table);
+			$valeurs = lire_config("lim_rubriques/$objet_type");
+			if ($valeurs) {
+				$valeurs[] = $id_rubrique;
+				ecrire_config("lim_rubriques/$objet_type", $valeurs);
+			}
+		}
+	}
+
+	return $flux;
+}
