@@ -62,33 +62,38 @@ function lim_formulaire_charger($flux) {
 		strncmp($flux['args']['form'], 'editer_', 7) == 0 // c'est bien un formulaire d'edition d'objet
 		and !is_numeric($flux['args']['args']['0']) // c'est bien une création d'objet (pas une modif ou autre)
 	) {
-		$objet = substr($flux['args']['form'], 7); // 'editer_article' -> 'article'
-		$nom_table	= table_objet_sql($objet); // article -> spip_articles
-		$tab_rubriques_exclues	= lire_config("lim_rubriques/$objet");
+		if (!empty($flux['data']['id_parent'])) {
+			$id_parent = $flux['data']['id_parent'];
+		}
+		else {
+			$objet = substr($flux['args']['form'], 7); // 'editer_article' -> 'article'
+			$nom_table	= table_objet_sql($objet); // article -> spip_articles
+			$tab_rubriques_exclues	= lire_config("lim_rubriques/$objet");
 
-		if ($tab_rubriques_exclues) {
-			$nbre_rubriques_autorisees = lim_nbre_rubriques_autorisees($objet);
+			if ($tab_rubriques_exclues) {
+				$nbre_rubriques_autorisees = lim_nbre_rubriques_autorisees($objet);
 
-			// Cas #0 : voir TODO's
-			// if ($nbre_rubriques_autorisees == 0) {
-			// 	debug('Cas #0');
-			// 	$id_parent = '0';
-			// }
+				// Cas #0 : voir TODO's
+				// if ($nbre_rubriques_autorisees == 0) {
+				// 	debug('Cas #0');
+				// 	$id_parent = '0';
+				// }
 
-			if ($nbre_rubriques_autorisees == 1) { // Cas #1.1
-				$tab_rubrique_choisie = lim_publierdansrubriques($objet);
-				$id_parent = implode($tab_rubrique_choisie);
-			}
+				if ($nbre_rubriques_autorisees == 1) { // Cas #1.1
+					$tab_rubrique_choisie = lim_publierdansrubriques($objet);
+					$id_parent = implode($tab_rubrique_choisie);
+				}
 
-			if ($nbre_rubriques_autorisees >= 2) { // Cas #1.2
-				$id_parent = '';
-			}
-		} else { // Cas #2
-			// ici dans l'idéal, il faudrait utiliser l'API du plugin Declarer_parent
-			$trouver_table = charger_fonction('trouver_table', 'base');
-			$desc = $trouver_table($nom_table);
-			if (isset($desc['field']['id_rubrique'])) {
-				$id_parent = '';
+				if ($nbre_rubriques_autorisees >= 2) { // Cas #1.2
+					$id_parent = '';
+				}
+			} else { // Cas #2
+				// ici dans l'idéal, il faudrait utiliser l'API du plugin Declarer_parent
+				$trouver_table = charger_fonction('trouver_table', 'base');
+				$desc = $trouver_table($nom_table);
+				if (isset($desc['field']['id_rubrique'])) {
+					$id_parent = '';
+				}
 			}
 		}
 
