@@ -152,6 +152,13 @@ function lim_formulaire_verifier($flux) {
 	return $flux;
 }
 
+/**
+ * Gestion des contenus par rubrique :
+ * masquer l'input id_parent si la config de l’objet renvoie une seule rubrique dans laquelle publier
+ *
+ * @param array $flux
+ * @return array $flux
+ */
 function lim_formulaire_fond($flux) {
 	// si ce n'est pas un formulaire d'édition d'un objet ou si la restriction par rubrique n'a pas été activée, on sort.
 	if (strncmp($flux['args']['form'], 'editer_', 7) !== 0 OR is_null(lire_config('lim_objets'))) {
@@ -160,7 +167,7 @@ function lim_formulaire_fond($flux) {
 
 	$objet = substr($flux['args']['form'], 7); // 'editer_objet' devient 'objet'
 	if (lim_nbre_rubriques_autorisees($objet) <= 1){
-		$flux['data'] .= "<style>.editer.editer_parent {display:none}</style>";
+		$flux['data'] .= "<style>.editer.editer_parent, .editer.editer_rubrique {display:none}</style>";
 	}
 
 	return $flux;
