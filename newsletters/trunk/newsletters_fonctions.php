@@ -245,14 +245,23 @@ function newsletter_fixer_image($src,$id_newsletter){
 	}
 	$url = parse_url($src);
 
-	// hack : mettre un #fixed sur une url d'image pour indiquer qu'elle a deja ete fixee
+	// Ancien hack :
+	// on utilise plus cette methode car yahoo mail n'affiche pas les images avec une ancre
+	// mais on continue a la reconnaitre au cas ou elle est utilisee dans des squelettes de newsletter
+	//
+	// mettre un #fixed sur une url d'image pour indiquer qu'elle a deja ete fixee
 	// on ne fait plus rien dans ce cas
 	if (isset($url['fragment']) and $url['fragment'] == 'fixed') {
 		return false;
 	}
-
 	$path_parts = pathinfo($url['path']);
-	$dest = $dir[$id_newsletter].md5($src).".".$path_parts['extension'];
+
+	// nouvelle convention : l'image fixee fini par .fixed.(jpg|png|gif...)
+	if (strpos($url['path'], ".fixed.".$path_parts['extension']) !== false) {
+		return false;
+	}
+
+	$dest = $dir[$id_newsletter].md5($src).".fixed.".$path_parts['extension'];
 
 	if (
 		empty($url['scheme'])
@@ -269,7 +278,7 @@ function newsletter_fixer_image($src,$id_newsletter){
 	if (!file_exists($dest))
 		return false;
 
-	return timestamp($dest)."#fixed";
+	return timestamp($dest);
 }
 
 /**
