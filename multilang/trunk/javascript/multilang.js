@@ -82,7 +82,7 @@ function multilang_init_lang(options) {
 	$.each(multilang_avail_langs,function() {
 		var title = 'multilang_lang.title_lien_multi_'+this,
 			label = 'multilang_lang.label_'+this;
-		multilang_menu_lang.append($("<a class='langues__item change_lang "+this+"' title='"+eval(title)+"'></a>").html(eval(label)));
+		multilang_menu_lang.append($("<a class='langues__item change_lang "+this+"' lang='"+this+"' title='"+eval(title)+"' role='button'></a>").html(eval(label)));
 	});
 	multilang_menu_lang.append($("<a class='langues__item recover_lang' href='#'></a>").html(multilang_lang.lien_desactiver));
 
@@ -404,9 +404,7 @@ function multilang_init_field(el,lang,force) {
 function multilang_change_lang(el,container,target) {
 	var added_lang="";
 	var target_id = multilang_init_target_id(target);
-	var lang = el.innerHTML;
-
-	lang = lang.slice(1,-1);
+	var lang = $(el).attr('lang');
 
 	if(target[0].isfull){
 		// Maj du menu de langues avant multilang_init_field
