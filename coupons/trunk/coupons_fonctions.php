@@ -35,7 +35,7 @@ function coupon_utilisable($id_coupon, $id_commande = null, $test_session = true
 		array(
 			'id_coupon = ' . intval($id_coupon),
 			'actif = ' . sql_quote('on'),
-			'date_validite >= ' . sql_quote(date('Y-m-d H:i:s')),
+			'date_validite >= ' . sql_quote(date('Y-m-d 00:00:00')),
 		)
 	)) {
 		$utilisable = true;
