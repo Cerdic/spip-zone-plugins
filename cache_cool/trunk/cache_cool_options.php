@@ -313,6 +313,12 @@ function cache_cool_set_global_contexte($c){
 	}
 }
 
+
+/**
+ * Un curl async
+ * @param string $url
+ * @return bool
+ */
 function cache_cool_async_curl($url){
 	// Si fsockopen est possible, on lance l'url via un socket
 	// en asynchrone
@@ -320,11 +326,22 @@ function cache_cool_async_curl($url){
 		$parts=parse_url($url);
 		$fp = @fsockopen($parts['host'],isset($parts['port'])?$parts['port']:80,$errno, $errstr, 30);
 		if ($fp) {
+			$timeout = 200; // ms
+			stream_set_timeout($fp, 0, $timeout * 1000);
 			$query = $parts['path'].($parts['query']?"?".$parts['query']:"");
 			$out = "GET ".$query." HTTP/1.1\r\n";
 			$out.= "Host: ".$parts['host']."\r\n";
 			$out.= "Connection: Close\r\n\r\n";
 			fwrite($fp, $out);
+			spip_timer('cache_cool_async_curl');
+			$t = 0;
+			// on lit la reponse si possible pour fermer proprement la connexion
+			// avec un timeout total de 200ms pour ne pas se bloquer
+			while (!feof($fp) and $t < $timeout) {
+				@fgets($fp, 1024);
+				$t += spip_timer('cache_cool_async_curl', true);
+				spip_timer('cache_cool_async_curl');
+			}
 			fclose($fp);
 			return true;
 		}
@@ -345,4 +362,3 @@ function cache_cool_async_curl($url){
 	}
 	return false;
 }
-?>
