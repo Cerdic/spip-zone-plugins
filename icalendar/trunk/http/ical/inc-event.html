@@ -17,7 +17,7 @@ DTEND:(#DATE_FIN|date_ical)],[
 DTSTART;VALUE=DATE:(#DATE_DEBUT|affdate{Ymd})][
 DTEND;VALUE=DATE:(#DATE_FIN|agenda_jourdecal{1,Ymd})]})][
 (#GET{titre_gis}|?{LOCATION:#GET{titre_gis}[\, (#GET{adresse})][\, [(#GET{code_postal}) ](#GET{ville})],[
-LOCATION:(#LIEU|PtoBR|textebrut|filtrer_ical)]]})][
+LOCATION:(#LIEU|PtoBR|textebrut|filtrer_ical)]})][
 (#GET{lat}|et{#GET{lon}}|?{GEO:#GET{lat};#GET{lon}})][
 DESCRIPTION:(#DESCRIPTIF|supprimer_tags|textebrut|filtrer_ical)]
 CATEGORIES:<BOUCLE_article(ARTICLES) {id_article=#ID_ARTICLE}>[(#TITRE|textebrut|filtrer_ical)]</BOUCLE_article><B_mots>\, <BOUCLE_mots(MOTS?){id_evenement=#ID_EVENEMENT}{"\, "}>[(#TITRE|textebrut|filtrer_ical)]</BOUCLE_mots>
