@@ -90,6 +90,10 @@ if ($settings){
 	if (isset($settings['min_filesize']) AND $v=intval($settings['min_filesize']))
 		$AdaptiveImages->minFileSize = $v*1024;
 
+	// Experimental
+	if (isset($settings['markup_method']) and $settings['markup_method'] === 'srcset') {
+		$AdaptiveImages->markupMethod = "srcset";
+	}
 
 	// Pour generer chaque variante d'image uniquement quand elle est demandee pour la premiere fois
 	// par defaut false : on genere toutes les images au calcul de la page (mais timeout possible)
@@ -389,7 +393,11 @@ function adaptive_images_insert_head($texte){
 			$texte .= "<script type='text/javascript' src='$js'></script>\n";
 	}
 	if (defined('_ADAPTIVE_IMAGES_DEBUG_PREVIEW') and _ADAPTIVE_IMAGES_DEBUG_PREVIEW) {
-		$texte .= "<style type='text/css'>.adapt-img:hover {opacity: 1 !important;}</style>";
+		$style_debug = ".adapt-img:hover {opacity: 1 !important;}";
+		if ($AdaptiveImages->markupMethod === 'srcset') {
+			$style_debug = ".adapt-img-wrapper:hover{background-size:cover !important;}.adapt-img-wrapper:hover .adapt-img {opacity: 0.01 !important;}";
+		}
+		$texte .= "<style type='text/css'>$style_debug</style>";
 	}
 
 	return $texte;

@@ -52,6 +52,10 @@ Evite de générer toutes les images d\'un coup ce qui peut produire des erreurs
 
 	'label_thumbnail_debug_1' => '<i>Activer le debug (les aperçus apparaissent au survol de l\'image)</i>',
 
+	'label_markup_method' => 'Markup généré :',
+	'label_markup_method_3layers' => 'Méthode des 3 couches (large support)',
+	'label_markup_method_srcset' => '<tt>srcset</tt> + <tt>&lt;source></tt>',
+
 );
 
 ?>
