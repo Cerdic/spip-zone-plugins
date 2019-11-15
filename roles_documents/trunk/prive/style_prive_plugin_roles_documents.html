@@ -17,6 +17,9 @@
 	display: flex;
 	flex-flow: row wrap;
 }
+.roles-documents .label {
+	margin-#ENV{left}: auto;
+}
 .roles-documents > *:not(:first-of-type) {
 	margin-#ENV{left}: 0.5em;
 }
@@ -37,16 +40,63 @@
 [class*=role-logo] {
 	font-weight: bold;
 }
+
 /* fix pour s'assurer que le dropdown soit visible */
 .portfolios.portfolios .item,
 .portfolios.portfolios .item .descriptions {
 	overflow: visible;
 }
 
+
+/**
+ * Formulaire de logo
+ */
+.formulaire_editer_logo .titrem {
+	text-align: center;
+}
+/* Apercu */
+.formulaire_editer_logo .apercu {
+	border: 0;
+}
+.formulaire_editer_logo .apercu .titrem {
+	margin: 0 0 0.5em 0;
+	word-break: break-all;
+}
+.formulaire_editer_logo .item {
+	margin: 0;
+	border: 0;
+}
+.formulaire_editer_logo .descriptions {
+	text-align: #ENV{left};
+}
+.formulaire_editer_logo .infos {
+	margin-bottom: 0.5em;
+}
+.formulaire_editer_logo .lien_details {
+	float: right;
+	cursor: pointer;
+}
+.formulaire_editer_logo .deplacer-modifier {
+	display: inline;
+}
+.formulaire_editer_logo .detaillees,
+.formulaire_editer_logo .mode,
+.formulaire_editer_logo .deplacer-document {
+	display: none;
+}
+.formulaire_editer_logo .editer-groupe.roles,
+.formulaire_editer_logo .editer-groupe.roles .editer {
+	padding: 0;
+}
+.formulaire_editer_logo.no-logo .editer .titrem {
+	display: none;
+}
+
+
 /**
  * Mediathèque
  */
-.onglets_simple .formulaire_filtrer_roles_documents {
+ .onglets_simple .formulaire_filtrer_roles_documents {
 	display: inline-block;
 	margin: 0 0 0 30px;
 	padding: 0;
@@ -76,38 +126,6 @@
 }
 .onglets_simple .formulaire_filtrer_roles_documents .chosen-container li {
 	float: none;
-}
-
-
-/**
- * Formulaire de logo
- */
-.formulaire_editer_logo .titrem {
-	text-align: center;
-}
-/* Apercu */
-.formulaire_editer_logo .apercu {
-	border: 0;
-}
-.formulaire_editer_logo .item {
-	margin: 0;
-	border: 0;
-}
-.formulaire_editer_logo .descriptions {
-	text-align: #ENV{left};
-}
-.formulaire_editer_logo .detaillees,
-.formulaire_editer_logo .mode,
-.formulaire_editer_logo .deplacer-document {
-	display: none;
-}
-/* Ajouts */
-.formulaire_editer_logo .editer-groupe.roles,
-.formulaire_editer_logo .editer-groupe.roles .editer {
-	padding: 0;
-}
-.formulaire_editer_logo.no-logo .editer .titrem {
-	display: none;
 }
 
 
