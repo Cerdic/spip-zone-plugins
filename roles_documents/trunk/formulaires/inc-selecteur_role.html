@@ -1,6 +1,6 @@
 [(#REM)
 
-	Sélection d'un role à attribuer à un document
+	Sélection d'un rôle à attribuer à un document
 
 	Identifiant du champ (name) : « roles »
 
@@ -14,76 +14,79 @@
 		**obligatoire
 		*conseillé
 
-		- roles : rôle(s) sélectionné(s)
+		- roles                : rôle(s) sélectionné(s)
 		- **roles_attribuables : tableau linéaire des rôles possibles
-		- multiple : 'oui' pour permettre une sélection de plusieurs rôles
-		- readonly : 'oui' pour interdire l'édition
+		- multiple             : 'oui' pour permettre une sélection de plusieurs rôles
+		- readonly             : 'oui' pour interdire l'édition
+		- editer_logo          : indique si on est dans le formualire d'édition de logo
 ]
-#SET{nb_roles, #ENV{roles_attribuables}|count}
-#SET{multiple, #ENV{multiple}|=={oui}|?{multiple}}
-#SET{readonly, #ENV{readonly}|=={oui}|?{readonly}}
+#SET{nb_roles,    #ENV{roles_attribuables}|count}
+#SET{multiple,    #ENV{multiple}|=={oui}|?{multiple}}
+#SET{readonly,    #ENV{readonly}|=={oui}|?{readonly}}
+#SET{role_unique, #ENV{roles_attribuables/0}}
 
-<div class="editer editer-role">
+<div class="editer-groupe roles">
+	<div class="editer pleine_largeur">
 
+		[(#ENV{editer_logo}|?{
+			[<h3 class="titrem">(#GET{nb_roles}|=={1}|?{
+				[(#GET{role_unique}|role{document})],
+				<:roles_documents:titre_ajouter_logo:>,
+			})</h3>],
+			[<label for="champ_roles">(#GET{nb_roles}|=={1}|?{
+				<:roles_documents:champ_role_label:> : [(#GET{role_unique}|role{document})],
+				<:roles_documents:champ_role_label:>
+			})</pan>]
+		})]
 
-	[(#REM) Cas 1 : un seul rôle attribuable -> input hidden avec label ]
-	<BOUCLE_roles_un(CONDITION){si #GET{nb_roles}|<={1}}>
-	#SET{role,#ENV{roles_attribuables/0}}
-	<label><:roles_documents:champ_role_label:> : [(#GET{role}|role{document})]
-	</label>
-	<input
-		type="hidden"
-		id="champ_roles"
-		name="roles"
-		value="#GET{role}"
-	>
-	</BOUCLE_roles_un>
-
-
-	[(#REM) Cas 2 : plusieurs rôles attribuables ]
-	<label><:roles_documents:champ_roles_label:></label>
-
-
-	[(#REM) Cas 2.1 : moins de 5 rôles -> radio ou checkbox ]
-	<BOUCLE_roles_peu(DATA)
-		{source table, #ENV{roles_attribuables}}
-		{si #GET{nb_roles}|<{5}}
-	>
-	#SET{type,#GET{multiple}|?{checkbox,radio}}
-	#SET{checked, #VALEUR|=={#ENV{role}}|ou{#ENV{role}|non|et{#COMPTEUR_BOUCLE|=={1}}}|?{checked}}
-	<div class="choix">
+		[(#REM) Si un seul rôle attribuable : input hidden avec label ]
+		<BOUCLE_roles_un(CONDITION) {si #GET{nb_roles}|=={1}}>
 		<input
-			type="#GET{type}"
-			class="#GET{type}"
-			id="champ_roles_#COMPTEUR_BOUCLE"
+			type="hidden"
+			id="champ_roles"
 			name="roles"
-			value="#VALEUR"
-			[checked="(#GET{checked})"]
-			[readonly="(#GET{readonly})"]
+			value="#GET{role_unique}"
 		>
-		<label for="champ_roles_#COMPTEUR_BOUCLE">[(#VALEUR|role{document})]</label>
-	</div>
-	</BOUCLE_roles_peu>
+		</BOUCLE_roles_un>
 
-
-	[(#REM) Cas 2.2 : plus de 5 rôles -> select ]
-	<B_roles_beaucoup>
-	<select
-		class="select chosen"
-		id="champ_roles"
-		name="roles[(#GET{multiple}|oui)\[\]]"
-		[multiple="(#GET{multiple})"]
-	>
-		<BOUCLE_roles_beaucoup(DATA)
+		[(#REM) Moins de 5 rôles : radio ou checkbox ]
+		<BOUCLE_roles_peu(DATA)
 			{source table, #ENV{roles_attribuables}}
-			{si #GET{nb_roles}|>={5}}
+			{si #GET{nb_roles}|>{1}|et{#GET{nb_roles}|<{5}}}
 		>
-		#SET{selected, #VALEUR|=={#ENV{role}}|ou{#ENV{role}|non|et{#COMPTEUR_BOUCLE|=={1}}}|?{selected}}
-		<option value="#VALEUR"[ selected="(#GET{selected})"]>[(#VALEUR|role{document})]</option>
-		</BOUCLE_roles_beaucoup>
-	</select>
-	</B_roles_beaucoup>
+		#SET{type,#GET{multiple}|?{checkbox,radio}}
+		#SET{checked, #VALEUR|=={#ENV{role}}|ou{#ENV{role}|non|et{#COMPTEUR_BOUCLE|=={1}}}|?{checked}}
+		<div class="choix">
+			<input
+				type="#GET{type}"
+				class="#GET{type}"
+				id="champ_roles_#COMPTEUR_BOUCLE"
+				name="roles"
+				value="#VALEUR"
+				[checked="(#GET{checked})"]
+				[readonly="(#GET{readonly})"]
+			>
+			<label for="champ_roles_#COMPTEUR_BOUCLE">[(#VALEUR|role{document})]</label>
+		</div>
+		</BOUCLE_roles_peu>
 
-	<//B_roles_un>
+		[(#REM) 5 rôles ou plus : select ]
+		<B_roles_beaucoup>
+		<select
+			class="select chosen"
+			id="champ_roles"
+			name="roles[(#GET{multiple}|oui)\[\]]"
+			[multiple="(#GET{multiple})"]
+		>
+			<BOUCLE_roles_beaucoup(DATA)
+				{source table, #ENV{roles_attribuables}}
+				{si #GET{nb_roles}|>={5}}
+			>
+			#SET{selected, #VALEUR|=={#ENV{role}}|ou{#ENV{role}|non|et{#COMPTEUR_BOUCLE|=={1}}}|?{selected}}
+			<option value="#VALEUR"[ selected="(#GET{selected})"]>[(#VALEUR|role{document})]</option>
+			</BOUCLE_roles_beaucoup>
+		</select>
+		</B_roles_beaucoup>
 
+	</div>
 </div>

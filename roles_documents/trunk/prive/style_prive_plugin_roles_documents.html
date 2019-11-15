@@ -7,40 +7,35 @@
 /**
  * Formulaire d'édition de rôle
  */
-.formulaire_editer_roles_document {
+.fiche_objet .formulaire_editer_roles_document {
 	margin: 0.5em 0 0;
 	padding: 0;
 	background: transparent;
 	border: 0 none;
 }
-/* Conteneur liste des rôles + bouton */
 .roles-documents {
-	display: inline-block;
+	display: flex;
+	flex-flow: row wrap;
 }
-/* Bouton modifier adjacent */
-.roles-documents .btn-group {
-	display: inline-block;
+.roles-documents > *:not(:first-of-type) {
 	margin-#ENV{left}: 0.5em;
-	vertical-align: middle;
 }
-.roles-documents .label {}
+.roles-documents .btn-group {
+	position: relative;
+	margin-#ENV{left}: 0.5em;
+}
+.roles-documents .btn {
+	padding: 0 0.2em;
+	border-radius: 5px;
+	background-color: #GET{claire};
+	color: inherit;
+}
+.roles-documents .caret {
+	vertical-align: middle; /* Top par défaut, pourquoi ??? */
+}
 /* Exposer les rôles de logos */
 [class*=role-logo] {
 	font-weight: bold;
-}
-[class*=role-logo]:before {
-	content: "";
-	display: inline-block;
-	background: url(#CHEMIN_IMAGE{media-logo-16});
-	width: 16px;
-	height: 16px;
-	margin-right: 0.2em;
-	vertical-align: middle;
-}
-small[class*=role-logo]:before {
-	background: url(#CHEMIN_IMAGE{media-logo-12});
-	width: 12px;
-	height: 12px;
 }
 /* fix pour s'assurer que le dropdown soit visible */
 .portfolios.portfolios .item,
@@ -83,51 +78,38 @@ small[class*=role-logo]:before {
 	float: none;
 }
 
+
 /**
  * Formulaire de logo
  */
-.formulaire_editer_logo h3.titrem {
-	margin-bottom: 0;
-}
-.formulaire_editer_logo .editer-groupe{
-	padding-top: 0;
-	padding-bottom: 0;
-}
-/* Apercu */
-#navigation .formulaire_editer_logo .apercu {
-	margin: 0;
-	border: none;
-	text-align: left;
-}
-.formulaire_editer_logo .apercu .liste_items {
-	margin: 0;
-	padding: 0;
-}
-.formulaire_editer_logo .apercu .vignette,
-.formulaire_editer_logo .apercu .titrem {
+.formulaire_editer_logo .titrem {
 	text-align: center;
 }
-.formulaire_editer_logo .apercu .detaillees {
+/* Apercu */
+.formulaire_editer_logo .apercu {
+	border: 0;
+}
+.formulaire_editer_logo .item {
+	margin: 0;
+	border: 0;
+}
+.formulaire_editer_logo .descriptions {
+	text-align: #ENV{left};
+}
+.formulaire_editer_logo .detaillees,
+.formulaire_editer_logo .mode,
+.formulaire_editer_logo .deplacer-document {
 	display: none;
 }
-.formulaire_editer_logo .apercu .titrem {
-	text-transform: none;
-	margin: 0 0 0.5em;
+/* Ajouts */
+.formulaire_editer_logo .editer-groupe.roles,
+.formulaire_editer_logo .editer-groupe.roles .editer {
+	padding: 0;
 }
-.formulaire_editer_logo .apercu .mode,
-.formulaire_editer_logo .apercu .deplacer-document {
+.formulaire_editer_logo.no-logo .editer .titrem {
 	display: none;
 }
-.formulaire_editer_logo .apercu .editbox {
-	font-weight: bold;
-}
-.lat .editer-role {
-	font-size: 0.9em;
-}
-/* Ajout */
-.lat .editer_logo.joindre_document {
-	padding-bottom: 0;
-}
+
 
 /**
  * Fix plugin médias < r109742

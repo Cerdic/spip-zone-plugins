@@ -119,7 +119,7 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 	// 2) Cherchons ensuite les vieux logos
 	// ====================================
 	$etats = array('on', 'off');
-	foreach($etats as $k => $etat) {
+	foreach ($etats as $k => $etat) {
 		if ($config[$k] == 'oui'
 			and $logo = $chercher_logo($id_objet, $id_table_objet, $etat, true)
 		) {
@@ -169,9 +169,8 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 
 	// Si le logo n'est pas editable et qu'il n'y en a pas,
 	// on n'affiche pas du tout le formulaire
-	if ((!$valeurs['editable']
-			and empty($logos)
-		)
+	if (
+		(!$valeurs['editable'] and empty($logos))
 		or (lire_config('activer_logos') != 'oui')
 	) {
 		return false;

@@ -324,7 +324,8 @@ function roles_documents_formulaire_traiter($flux) {
 function roles_documents_recuperer_fond($flux) {
 
 	// Ajout de document
-	if ($flux['args']['fond'] == 'formulaires/inc-upload_document'
+	if (
+		$flux['args']['fond'] == 'formulaires/inc-upload_document'
 		and isset($flux['args']['contexte']['objet'])
 		and isset($flux['args']['contexte']['id_objet'])
 	) {
@@ -350,6 +351,7 @@ function roles_documents_recuperer_fond($flux) {
 			'roles'              => (isset($flux['args']['contexte']['roles']) ? $flux['args']['contexte']['roles'] : ''),
 			'roles_attribuables' => $roles_attribuables,
 			'multiple'           => $multiple,
+			'editer_logo'        => $editer_logo,
 		);
 
 		// On place le sélecteur au début (compliqué de le placer juste avant les boutons, déplacés en JS, et des blocs cachés)
