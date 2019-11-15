@@ -1425,37 +1425,41 @@ class Compiler
             }
         }
 
-        $this->formatter->stripSemicolon($out->lines);
-
         $this->popEnv();
     }
 
 
     /**
      * Compile the value of a comment that can have interpolation
-     * @param $value
-     * @param bool $pushEnv
+     *
+     * @param array   $value
+     * @param boolean $pushEnv
+     *
      * @return array|mixed|string
      */
     protected function compileCommentValue($value, $pushEnv = false)
     {
         $c = $value[1];
+
         if (isset($value[2])) {
             if ($pushEnv) {
                 $this->pushEnv();
                 $storeEnv = $this->storeEnv;
                 $this->storeEnv = $this->env;
             }
+
             try {
                 $c = $this->compileValue($value[2]);
             } catch (\Exception $e) {
                 // ignore error in comment compilation which are only interpolation
             }
+
             if ($pushEnv) {
                 $this->storeEnv = $storeEnv;
                 $this->popEnv();
             }
         }
+
         return $c;
     }
 
@@ -2355,15 +2359,15 @@ class Compiler
                     $shorthandValue=&$value;
 
                     $shorthandDividerNeedsUnit = false;
-                    $maxListElements = null;
-                    $maxShorthandDividers = 1;
+                    $maxListElements           = null;
+                    $maxShorthandDividers      = 1;
+
                     switch ($compiledName) {
                         case 'border-radius':
                             $maxListElements = 4;
                             $shorthandDividerNeedsUnit = true;
                             break;
                     }
-
 
                     if ($compiledName === 'font' and $value[0] === Type::T_LIST && $value[1]==',') {
                         // this is the case if more than one font is given: example: "font: 400 1em/1.3 arial,helvetica"
@@ -2373,15 +2377,19 @@ class Compiler
 
                     if ($shorthandValue[0] === Type::T_EXPRESSION && $shorthandValue[1] === '/') {
                         $revert = true;
+
                         if ($shorthandDividerNeedsUnit) {
                             $divider = $shorthandValue[3];
+
                             if (is_array($divider)) {
                                 $divider = $this->reduce($divider, true);
                             }
+
                             if (intval($divider->dimension) and !count($divider->units)) {
                                 $revert = false;
                             }
                         }
+
                         if ($revert) {
                             $shorthandValue = $this->expToString($shorthandValue);
                         }
@@ -2395,14 +2403,17 @@ class Compiler
                                     if (is_null($maxListElements) or count($shorthandValue[2]) <= $maxListElements) {
                                         if ($shorthandDividerNeedsUnit) {
                                             $divider = $item[3];
+
                                             if (is_array($divider)) {
                                                 $divider = $this->reduce($divider, true);
                                             }
+
                                             if (intval($divider->dimension) and !count($divider->units)) {
                                                 $revert = false;
                                             }
                                         }
                                     }
+
                                     if ($revert) {
                                         $item = $this->expToString($item);
                                         $maxShorthandDividers--;
@@ -2445,7 +2456,8 @@ class Compiler
             case Type::T_MIXIN:
             case Type::T_FUNCTION:
                 list(, $block) = $child;
-
+                // the block need to be able to go up to it's parent env to resolve vars
+                $block->parentEnv = $this->getStoreEnv();
                 $this->set(static::$namespaces[$block->type] . $block->name, $block, true);
                 break;
 
@@ -2656,6 +2668,12 @@ class Compiler
                 }
 
                 $this->env->marker = 'mixin';
+
+                if (! empty($mixin->parentEnv)) {
+                    $this->env->declarationScopeParent = $mixin->parentEnv;
+                } else {
+                    $this->throwError("@mixin $name() without parentEnv");
+                }
 
                 $this->compileChildrenNoReturn($mixin->children, $out, $selfParent, $this->env->marker . " " . $name);
 
@@ -4091,7 +4109,6 @@ class Compiler
             $env = $this->getStoreEnv();
         }
 
-        $nextIsRoot = false;
         $hasNamespace = $normalizedName[0] === '^' || $normalizedName[0] === '@' || $normalizedName[0] === '%';
 
         $maxDepth = 10000;
@@ -4110,12 +4127,16 @@ class Compiler
             }
 
             if (! $hasNamespace && isset($env->marker)) {
-                if (! $nextIsRoot && ! empty($env->store[$specialContentKey])) {
+                if (! empty($env->store[$specialContentKey])) {
                     $env = $env->store[$specialContentKey]->scope;
                     continue;
                 }
 
-                $env = $this->rootEnv;
+                if (! empty($env->declarationScopeParent)) {
+                    $env = $env->declarationScopeParent;
+                } else {
+                    $env = $this->rootEnv;
+                }
                 continue;
             }
 
@@ -4595,6 +4616,11 @@ class Compiler
         $tmp->children = [];
 
         $this->env->marker = 'function';
+        if (! empty($func->parentEnv)) {
+            $this->env->declarationScopeParent = $func->parentEnv;
+        } else {
+            $this->throwError("@function $name() without parentEnv");
+        }
 
         $ret = $this->compileChildren($func->children, $tmp, $this->env->marker . " " . $name);
 
