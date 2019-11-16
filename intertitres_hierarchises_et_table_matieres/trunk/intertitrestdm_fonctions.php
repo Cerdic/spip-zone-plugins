@@ -31,7 +31,154 @@ function extrait_titres($texte) {
 	return $sortie;
 }
 
-function extrait_emphaseforte($texte, $guillemets='fr') {
+/*
+ * règles : https://fr.wikipedia.org/wiki/Guillemet#Autres_langues_et_autres_pays
+ * entités : https://www.w3.org/wiki/Common_HTML_entities_used_for_typography
+*/
+function bien_guillemeter($extrait, $languepays='fr') {
+	switch ($languepays) {
+	case 'fr': // français
+	case 'pt': // Portugal
+		$niveau1_ouvrant = '&laquo;&nbsp;';
+		$niveau1_fermant = '&nbsp;&raquo;';
+		$niveau2_ouvrant = '&ldquo;';
+		$niveau2_fermant = '&rdquo;';
+		$niveau3_ouvrant = '&rsquo;';
+		$niveau3_fermant = '&lsquo;';
+		break;
+	case 'en': // anglais
+	case 'eo': // esperanto
+	case 'nl': // néerlandais
+	case 'br': // Brésil
+		$niveau1_ouvrant = '&ldquo;';
+		$niveau1_fermant = '&rdquo;';
+		$niveau2_ouvrant = '&lsquo;';
+		$niveau2_fermant = '&rsquo;';
+		$niveau3_ouvrant = '&Prime;';
+		$niveau3_fermant = '&Prime;';
+		break;
+	case 'es': // Espagne
+		$niveau1_ouvrant = '&laquo;';
+		$niveau1_fermant = '&raquo;';
+		$niveau2_ouvrant = '&ldquo;';
+		$niveau2_fermant = '&rdquo;';
+		$niveau3_ouvrant = '&lsquo;';
+		$niveau3_fermant = '&rsquo;';
+		break;
+	case 'it': // italien
+		$niveau1_ouvrant = '&laquo;&nbsp;';
+		$niveau1_fermant = '&nbsp;&raquo;';
+		$niveau2_ouvrant = '&ldquo;';
+		$niveau2_fermant = '&rdquo;';
+		$niveau3_ouvrant = '&Prime;';
+		$niveau3_fermant = '&Prime;';
+		break;
+	case 'da': // dannois
+	case 'de': // allemand
+	case 'hr': // croate
+	case 'sl': // slovène
+		$niveau1_ouvrant = '&raquo;';
+		$niveau1_fermant = '&laquo;';
+		$niveau2_ouvrant = '&gt;';
+		$niveau2_fermant = '&lt;';
+		$niveau3_ouvrant = '&sbquo;';
+		$niveau3_fermant = '&lsquo;';
+		break;
+	case 'bg': // bulgare
+	case 'cs': // tchèque
+		$niveau1_ouvrant = '&bdquo;';
+		$niveau1_fermant = '&ldquo;';
+		$niveau2_ouvrant = '&gt;';
+		$niveau2_fermant = '&lt;';
+		$niveau3_ouvrant = '&sbquo;';
+		$niveau3_fermant = '&lsquo;';
+		break;
+	case 'hu': // hongrois
+	case 'pl': // polonais
+		$niveau1_ouvrant = '&bdquo;';
+		$niveau1_fermant = '&rdquo;';
+		$niveau2_ouvrant = '&gt;';
+		$niveau2_fermant = '&lt;';
+		$niveau3_ouvrant = '&sbquo;';
+		$niveau3_fermant = '&lsquo;';
+		break;
+	case 'no': // norvégien
+		$niveau1_ouvrant = '&laquo;&nbsp;';
+		$niveau1_fermant = '&nbsp;&raquo;';
+		$niveau2_ouvrant = '&lt;';
+		$niveau2_fermant = '&gt;';
+		$niveau3_ouvrant = '&Prime;';
+		$niveau3_fermant = '&Prime;';
+		break;
+	case 'fi': // finnois
+	case 'sv': // suédois
+		$niveau1_ouvrant = '&ldquo;';
+		$niveau1_fermant = '&ldquo;';
+		$niveau2_ouvrant = '&lsquo;';
+		$niveau2_fermant = '&lsquo;';
+		$niveau3_ouvrant = '&Prime;';
+		$niveau3_fermant = '&Prime;';
+		break;
+	case 'ch': // Suisse
+	case 'li': // Liechtenstein
+		$niveau1_ouvrant = '&laquo;';
+		$niveau1_fermant = '&raquo;';
+		$niveau2_ouvrant = '&ldquo;';
+		$niveau2_fermant = '&rdquo;';
+		$niveau3_ouvrant = '&rsquo;';
+		$niveau3_fermant = '&lsquo;';
+		break;
+	case 'be': // biélorusse
+	case 'ru': // russe
+	case 'uk': // ukrainien
+		$niveau1_ouvrant = '&laquo;';
+		$niveau1_fermant = '&raquo;';
+		$niveau2_ouvrant = '&bdquo;';
+		$niveau2_fermant = '&ldquo;';
+		$niveau3_ouvrant = '&sbquo;';
+		$niveau3_fermant = '&rsquo;';
+		break;
+	case 'jp': // japonais
+		$niveau1_ouvrant = '&#x300c;';
+		$niveau1_fermant = '&#x300d;';
+		$niveau2_ouvrant = '&#xff62;';
+		$niveau2_fermant = '&#xff63;';
+		$niveau3_ouvrant = '&Prime;';
+		$niveau3_fermant = '&Prime;';
+		break;
+	case 'zh': // mandarin
+		$niveau1_ouvrant = '&#x300a;';
+		$niveau1_fermant = '&#x300b;';
+		$niveau2_ouvrant = '&#x2329;';
+		$niveau2_fermant = '&#x232a;';
+		$niveau3_ouvrant = '&Prime;';
+		$niveau3_fermant = '&Prime;';
+		break;
+	default: // pandunia ; informatique
+		$niveau1_ouvrant = '&Prime;';
+		$niveau1_fermant = '&Prime;';
+		$niveau2_ouvrant = '&prime;';
+		$niveau2_fermant = '&prime;';
+		$niveau3_ouvrant = '`';
+		$niveau3_fermant = '`';
+		break;
+	}
+	// décalage des niveaux 2 d'abord
+	$extrait = str_replace(
+		array($niveau2_ouvrant, $niveau2_fermant),
+		array($niveau3_ouvrant, $niveau3_fermant),
+		htmlentities($extrait, ENT_NOQUOTE|ENT_SUBSTITUTE)
+	) ;
+	// décalage des niveaux 1 ensuite
+	$extrait = str_replace(
+		array($niveau1_ouvrant, $niveau1_fermant),
+		array($niveau2_ouvrant, $niveau2_fermant),
+		$extrait ) ;
+	// encadrement de l'ensemble enfin
+	return $niveau1_ouvrant.$extrait.$niveau1_fermant;
+}
+
+function extrait_emphaseforte($texte, $type_guillemets='fr') {
 	// protection des tites
 	$texte = preg_replace('/(\{\{\{)(.*?)(\}\}\})/', '', $texte);
 	// c'est parti
@@ -39,12 +186,12 @@ function extrait_emphaseforte($texte, $guillemets='fr') {
 	$key = key($matches[1]);
 	$val = current($matches[1]);
 	while (list($key, $val) = each($matches[1])) {
-		$sortie .= '«'.$val.'»; ';
+		$sortie .= bien_guillemeter($val, $type_guillemets) . ' ; ';
 	};
 	return $sortie;
 }
 
-function extrait_emphase($texte, $guillemets='fr') {
+function extrait_emphase($texte, $type_guillemets='fr') {
 	// protection des titres et emphases fortes
 	$texte = preg_replace('/(\{\{)(.*?)(\}\})/', '', $texte);
 	// c'est parti
@@ -52,7 +199,7 @@ function extrait_emphase($texte, $guillemets='fr') {
 	$key = key($matches[1]);
 	$val = current($matches[1]);
 	while (list($key, $val) = each($matches[1])) {
-		$sortie .= '«'.$val.'»; ';
+		$sortie .= bien_guillemeter($val, $type_guillemets) . ' ; ';
 	};
 	return $sortie;
 }
