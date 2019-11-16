@@ -28,7 +28,7 @@ $(function() {
 		<BOUCLE_reponses(FORMULAIRES_REPONSES){id_formulaire}>
 		<tr>
 			<td>#ID_FORMULAIRES_REPONSE</td>
-			<td>[(#DATE|affdate_heure)]</td>
+			<td data-text="#DATE">[(#DATE|affdate_heure)]</td>
 			<BOUCLE_champ(POUR){tableau #GET{saisies_finales}}>
 			[(#VALEUR{saisie}|!={explication}|oui)
 			<td>#VOIR_REPONSE{#VALEUR{options/nom},valeur_uniquement}</td>
