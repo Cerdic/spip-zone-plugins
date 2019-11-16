@@ -1,6 +1,6 @@
 <?php
 /*
- * plugin: notencart
+ * plugin: admonitions
  * licence: GPL3
  * copyleft: 2019-09-20 -- 9999-12-31
  *
@@ -17,10 +17,10 @@ if ( !defined('_ECRIRE_INC_VERSION') ) {
  *
  * @return string
  */
-function notencart_header_prive($flux) {
+function admonitions_header_prive($flux) {
 	return $flux
 		. '<link href="'
-		. find_in_path('css/notencart.css')
+		. find_in_path('css/admonitions.css')
 		. '" rel="stylesheet" type="text/css" />'
 		. "\n" ;
 }
@@ -32,10 +32,10 @@ function notencart_header_prive($flux) {
  *
  * @return string
  */
-function notencart_insert_head_css($flux) {
+function admonitions_insert_head_css($flux) {
 	return $flux
 		. '<link href="'
-		. find_in_path('css/notencart.css')
+		. find_in_path('css/admonitions.css')
 		. '" rel="stylesheet" type="text/css" />'
 		. "\n" ;
 }
@@ -46,7 +46,7 @@ function notencart_insert_head_css($flux) {
  *
  * @return array
  */
-function notencart_connus() {
+function admonitions_connus() {
 	$notetypes = array(
 		'alert' => 'fatal',
 		'alerte' => 'fatal',
@@ -125,7 +125,7 @@ function notencart_connus() {
 	return $notetypes ;
 }
 
-function notencart_name2class($notetype) {
+function admonitions_name2class($notetype) {
 	return trim(strtolower(str_replace(' ', '', $notetype))) ;
 }
 
@@ -136,7 +136,7 @@ function notencart_name2class($notetype) {
  *
  * @return bool
  */
-function notencart_teste($texte='') {
+function admonitions_teste($texte='') {
 	if ( 
 		( strpos($texte, '</note_') === false
 			or
@@ -173,7 +173,7 @@ function notencart_teste($texte='') {
  *
  * @return string
  */
-function notencart_filtre_texte_echappe($texte, $filtre, 
+function admonitions_filtre_texte_echappe($texte, $filtre, 
 	$balises='', $args=null) {
 	if ( !strlen($texte) ) {
 		return '' ;
@@ -181,7 +181,7 @@ function notencart_filtre_texte_echappe($texte, $filtre,
 	if ( $filtre !== false ) {
 		$fonction = chercher_filtre($filtre, false);
 		if ( !$fonction ) {
-			spip_log("notencart_filtre_texte_echappe(): $filtre() non defini",
+			spip_log("admonitions_filtre_texte_echappe(): $filtre() non defini",
 			_LOG_ERREUR) ;
 			return $texte ;
 		}
@@ -225,27 +225,27 @@ function notencart_filtre_texte_echappe($texte, $filtre,
  *
  * @return string
  */
-function notencart_remplacer($texte) {
-	if ( !notencart_teste($texte) ) {
+function admonitions_remplacer($texte) {
+	if ( !admonitions_teste($texte) ) {
 		return $texte ;
 	}
 	// premiere passe : raccourcis et standards en fr
 	$rempl = array() ;
-	$notetypes = notencart_connus() ;
+	$notetypes = admonitions_connus() ;
 	// 1.1. generer les correspondances
 	foreach( $notetypes as $n_fr => $n_en ) {
-		$c_en = notencart_name2class($n_en) ;
-		$c_fr = notencart_name2class($n_fr) ;
+		$c_en = admonitions_name2class($n_en) ;
+		$c_fr = admonitions_name2class($n_fr) ;
 		$rempl["[$n_fr]"] = "<div class='$c_en'>" ;
 		$rempl["[/$n_fr]"] = '</div>' ;
-		$rempl["[note $n_fr]"] = "<div class='notencart note_$c_en'>" ;
-		$rempl["[note_$n_fr]"] = "<div class='notencart note_$c_en'>" ;
-		$rempl["<note $n_fr>"] = "<div class='notencart note_$c_en'>" ;
-		$rempl["<note_$n_fr>"] = "<div class='notencart note_$c_en'>" ;
+		$rempl["[note $n_fr]"] = "<div class='admonition note_$c_en'>" ;
+		$rempl["[note_$n_fr]"] = "<div class='admonition note_$c_en'>" ;
+		$rempl["<note $n_fr>"] = "<div class='admonition note_$c_en'>" ;
+		$rempl["<note_$n_fr>"] = "<div class='admonition note_$c_en'>" ;
 		$rempl["</$n_fr>"] = '</div>' ;
-		$rempl["<$n_en>"] = "<div class='notencart note_$c_en'>" ;
+		$rempl["<$n_en>"] = "<div class='admonition note_$c_en'>" ;
 		$rempl["</$n_en>"] = '</div>' ;
-		$rempl["[$n_en]"] = "<div class='notencart note_$c_en'>" ;
+		$rempl["[$n_en]"] = "<div class='admonition note_$c_en'>" ;
 		$rempl["[/$n_en]"] = '</div>' ;
 	}
 	// 1.2. enfin les fermetures generiques
@@ -256,11 +256,11 @@ function notencart_remplacer($texte) {
 		array_values($rempl), $texte) ;
 	// seconde passe pour les fermetures et les perso...
 	$texte = preg_replace( '#<note(_|\s+)(\w+?)>#',
-		'<div class="notencart note_${2}">', $texte) ;
+		'<div class="admonition note_${2}">', $texte) ;
 	$texte = preg_replace( '#</note(_|\s+)(\w+?)>#',
 		'</div>', $texte) ;
 	$texte = preg_replace( '#\[note(_|\s+)(\w+?)\]#',
-		'<div class="notencart note_${2}">', $texte) ;
+		'<div class="admonition note_${2}">', $texte) ;
 	$texte = preg_replace( '#\[/note(_|\s+)(\w+?)\]#',
 		'</div>', $texte) ;
 	return $texte ;
@@ -273,12 +273,12 @@ function notencart_remplacer($texte) {
  *
  * @return string
  */
-function notencart_pre_typo($texte) {
-	if ( !notencart_teste($texte) ) {
+function admonitions_pre_typo($texte) {
+	if ( !admonitions_teste($texte) ) {
 		return $texte ;
 	}
-	// appeler notencart_remplacer() une fois les balises protegees
-	return notencart_filtre_texte_echappe($texte, 'notencart_remplacer') ;
+	// appeler admonitions_remplacer() une fois les balises protegees
+	return admonitions_filtre_texte_echappe($texte, 'admonitions_remplacer') ;
 }
 
 /**
@@ -288,17 +288,17 @@ function notencart_pre_typo($texte) {
  *
  * @return array
  */
-function notencart_porte_plume_barre_pre_charger($barres) {
-	$notetypes = notencart_connus() ;
+function admonitions_porte_plume_barre_pre_charger($barres) {
+	$notetypes = admonitions_connus() ;
 	// boutons sous-menus
 	$smenu = array() ;
 	foreach ( array_unique($notetypes) as $k => $v ) {
-		$id = notencart_name2class($v) ;
+		$id = admonitions_name2class($v) ;
 		if ( find_in_path("icones_barre/note-$id-16.png") ) {
 			$smenu[] = array(
-				'id' => "notencart_$id",
-				'name' => _T('notencart:note_'.$id),
-				'className' => "notencart_$id",
+				'id' => "admonitions_$id",
+				'name' => _T('admonitions:note_'.$id),
+				'className' => "admonition_$id",
 				'openBlockWith' => "[note_$v]\n",
 				'closeBlockWith' => "\n[/note_$v]",
 				'selectionType' => 'line',
@@ -312,14 +312,14 @@ function notencart_porte_plume_barre_pre_charger($barres) {
 		$barre = &$barres[$nom] ;
 		$barre->ajouterPlusieursApres('grpCaracteres', array(
 			array(
-				'id' => 'sepNotencart',
+				'id' => 'sepAdmonitions',
 				'separator' => '---------------',
 				'display' => true,
 			),
 			array(
-				'id' => 'notencarts',
-				'name' => _T('notencart:inserer_note'),
-				'className' => 'notencarts', 
+				'id' => 'admonitions',
+				'name' => _T('admonitions:inserer_note'),
+				'className' => 'admonitions', 
 				#'openBlockWith' => "<note>\n",
 				#'closeBlockWith' => "\n</note>",
 				#'replaceWith' => '',
@@ -339,15 +339,15 @@ function notencart_porte_plume_barre_pre_charger($barres) {
  *
  * @return array
  */
-function notencart_porte_plume_lien_classe_vers_icone($flux) {
+function admonitions_porte_plume_lien_classe_vers_icone($flux) {
 	$icones = array( 
-		'notencarts' => 'notencart-16.png', 
+		'admonitions' => 'notencart-16.png', 
 	);
-	$notetypes = notencart_connus() ;
+	$notetypes = admonitions_connus() ;
 	foreach ( array_unique($notetypes) as $k => $v ) {
-		$id = notencart_name2class($v) ;
+		$id = admonitions_name2class($v) ;
 		if ( find_in_path("icones_barre/note-$id-16.png") ) {
-			$icones["notencart_$id"] = "note-$id-16.png" ;
+			$icones["admonition_$id"] = "note-$id-16.png" ;
 		}
 	}
 	return array_merge($flux, $icones);
