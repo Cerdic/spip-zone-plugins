@@ -43,11 +43,11 @@ function saisies_date_jour_mois_annee_changer_date(me, datetime) {
 	var	mois = jQuery.trim(li.find('.date_mois').val());
 	var	annee = jQuery.trim(li.find('.date_annee').val());
 	var	date = jQuery.trim(li.find('.datetime').val());
-	
+
 	while(jour.length < 2) {jour = '0' + jour;}
 	while(mois.length < 2) {mois = '0' + mois;}
 	while(annee.length < 4) {annee = '0' + annee;}
-	
+
 	if (datetime == 'oui') {
 		heure = date.substring(10);
 		if (!heure || !(heure.length == 9)) {
