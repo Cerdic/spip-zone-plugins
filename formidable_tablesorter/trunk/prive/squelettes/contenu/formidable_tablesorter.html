@@ -7,13 +7,26 @@
 		<B_entete>
 		<thead>
 			<tr>
-		<BOUCLE_entete(POUR) {tableau #GET{saisies_finales}}>
-			[<th>(#VALEUR{options/label}|sinon{#VALEUR{options/label_case}})</th>]
+				<th>#</th>
+				<th><:date:></th>
+				<BOUCLE_entete(POUR) {tableau #GET{saisies_finales}}>
+				[(#VALEUR{saisie}|!={explication}|oui)
+					[<th>(#VALEUR{options/label}|sinon{#VALEUR{options/label_case}}|sinon{#VALEUR{options/nom}})</th>]
+				]
 		</BOUCLE_entete>
 			</tr>
 		</thead>
 		</B_entete>
 		<BOUCLE_reponses(FORMULAIRES_REPONSES){id_formulaire}>
+		<tr>
+			<td>#ID_FORMULAIRES_REPONSE</td>
+			<td>[(#DATE|affdate_heure)]</td>
+			<BOUCLE_champ(POUR){tableau #GET{saisies_finales}}>
+			[(#VALEUR{saisie}|!={explication}|oui)
+			<td>#VOIR_REPONSE{#VALEUR{options/nom},valeur_uniquement}</td>
+			]
+			</BOUCLE_champ>
+		</tr>
 		</BOUCLE_reponses>
 	</table>
 	</B_reponses>

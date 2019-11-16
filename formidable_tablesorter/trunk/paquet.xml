@@ -13,5 +13,6 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 	<necessite nom="formidable" compatibilite="[3.46.4;[" />
+	<necessite nom="saisies" compatibilite="[3.29.0;[" />
 
 </paquet>
