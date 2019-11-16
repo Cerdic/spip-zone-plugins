@@ -5,23 +5,19 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/widgets/widget-stickyHeaders.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/widgets/widget-columnSelector.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/widgets/widget-print.min.js"></script>
+<link rel="stylesheet" href="#CHEMIN{css/formidable_tablesorter.css}" />
 <script>
 $(function() {
 	$(".tablesorter").tablesorter({
 		widgets: ["zebra","stickyHeaders", "filter","print", "columnSelector"],
+		widgetOptions: {
+			columnSelector_container : $('#columnSelector'),
+		}
 	});
   $('.print').click(function() {
     $('.tablesorter').trigger('printTable');
   });
   $.tablesorter.columnSelector.attachTo( $('.bootstrap-popup'), '#popover-target');
-
-
-  $('#popover')
-    .popover({
-      placement: 'right',
-      html: true, // required if content has HTML
-      content: $('#popover-target')
-    });
 });
 </script>
 <BOUCLE_formulaire(FORMULAIRES){id_formulaire}{tout}{si #AUTORISER{voir, formulairesreponse, #ID_FORMULAIRE}}>
@@ -30,12 +26,14 @@ $(function() {
 	#SET{saisies_finales,#GET{saisies}|saisies_lister_finales}
 	#SET{cextras,#VAL{spip_formulaires_reponses}|appliquer_filtre{champs_extras_objet}|sinon{#LISTE}}
 	<B_reponses>
-	<button class="print button"><:formidable_ts:imprimer:></button>
-	<div class="columnSelectorWrapper">
-		<input id="colSelect1" type="checkbox" class="hidden">
-		<label class="columnSelectorButton" for="colSelect1"><:formidable_ts:colonnes:></label>
-		<div id="columnSelector" class="columnSelector">
-			<!-- this div is where the column selector is added -->
+	<div id="tablesorter_boutons" class="formulaire_spip">
+		<div class="boutons">
+			<button class="print submit button"><:formidable_ts:imprimer:></button>
+			<div class="columnSelectorWrapper">
+				<input id="colSelect1" type="checkbox" class="hidden">
+				<label class="submit columnSelectorButton" for="colSelect1"><:formidable_ts:colonnes:></label>
+				<div id="columnSelector"></div>
+			</div>
 		</div>
 	</div>
 	<table class="tablesorter">

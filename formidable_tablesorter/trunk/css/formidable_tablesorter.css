@@ -1,0 +1,20 @@
+
+#tablesorter_boutons .boutons{
+	text-align:left;
+	color:blue;
+}
+
+#columnSelector label{
+	display:block;
+}
+}
+#colSelect1:checked + label {
+  background: #5797d7;
+  border-color: #555;
+}
+#colSelect1:checked ~ #columnSelector {
+  display: block;
+}
+#columnSelector {
+  display: none;
+}
