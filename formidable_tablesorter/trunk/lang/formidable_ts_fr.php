@@ -9,4 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'tableau_reponses' => 'Tableau des réponses',
+
+	'imprimer' => 'Imprimer le tableau',
+	'colonnes' => 'Colonnes'
 );
