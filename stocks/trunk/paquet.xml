@@ -1,7 +1,7 @@
 <paquet
 	prefix="stocks"
 	categorie="divers"
-	version="0.2.9"
+	version="0.2.10"
 	etat="dev"
 	compatibilite="[3.0.1;3.2.*]"
 	logo="prive/themes/spip/images/stocks-32.png"
@@ -16,18 +16,18 @@
 	<!--  Déclarer la structure des tables et ajouter un statut épuisé aux produits -->
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/stocks.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/stocks.php" />
-    <!-- Gérer les autorisations -->
-    <pipeline nom="autoriser" inclure="stocks_autorisations.php" />
+	<!-- Gérer les autorisations -->
+	<pipeline nom="autoriser" inclure="stocks_autorisations.php" />
 
 	<!--  Ajouter la gestion du stock sur la vue et sur produit_edit -->
-	<pipeline nom="formulaire_charger" inclure="stocks_pipelines.php" />
+	<!-- <pipeline nom="formulaire_charger" inclure="stocks_pipelines.php" /> -->
+	<pipeline nom="formulaire_saisies" inclure="stocks_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="stocks_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="stocks_pipelines.php" />
-	<!-- Au passage d'une commande au statut payé
-				décrémenter le stock  -->
+	<!-- Au passage d'une commande au statut payé décrémenter le stock  -->
 	<pipeline nom="post_edition" inclure="stocks_pipelines.php" />
-    <!-- Tester le stock lors d'un ajout au panier -->
-    <pipeline nom="remplir_panier" inclure="stocks_pipelines.php" />
+	<!-- Tester le stock lors d'un ajout au panier -->
+	<pipeline nom="remplir_panier" inclure="stocks_pipelines.php" />
 
 	<utilise nom="commandes" compatibilite="[1.15.3;["/>
 	<utilise nom="panier" compatibilite="[1.4.0;["/>

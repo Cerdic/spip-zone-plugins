@@ -12,17 +12,17 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  *
  */
-function stocks_formulaire_charger($flux) {
+function stocks_formulaire_saisies($flux) {
 	$form = $flux['args']['form'];
 
 	if ($form == 'editer_produit') {
-		$stock_default = lire_config('stocks/quantite_default');
 		include_spip('inc/stocks');
-		$id_produit = intval($flux['args']['args'][0]);
-		$quantite = get_quantite('produit', $id_produit);
+		$stock_default = lire_config('stocks/quantite_default');
+		$id_produit    = intval($flux['args']['args'][0]);
+		$quantite      = get_quantite('produit', $id_produit);
 
 		// La quantité produit
-		$flux['data']['_saisies'][] = array(
+		$flux['data'][] = array(
 			'saisie' => 'fieldset',
 			'options' => array(
 				'nom' => 'stocks',
