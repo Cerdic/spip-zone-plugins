@@ -9,6 +9,7 @@ $(function() {
 	<h1>#TITRE</h1>
 	#SET{saisies,#SAISIES|unserialize}
 	#SET{saisies_finales,#GET{saisies}|saisies_lister_finales}
+	#SET{cextras,#VAL{spip_formulaires_reponses}|appliquer_filtre{champs_extras_objet}|sinon{#LISTE}}
 	<B_reponses>
 	<table class="tablesorter">
 		<B_entete>
@@ -16,6 +17,11 @@ $(function() {
 			<tr>
 				<th>#</th>
 				<th><:date:></th>
+				<BOUCLE_entete_cextras(POUR){tableau #GET{cextras}}>
+					[(#VALEUR{saisie}|!={explication}|oui)
+						[<th>(#VALEUR{options/label}|sinon{#VALEUR{options/label_case}}|sinon{#VALEUR{options/nom}})</th>]
+					]
+				</BOUCLE_entete_cextras>
 				<BOUCLE_entete(POUR) {tableau #GET{saisies_finales}}>
 				[(#VALEUR{saisie}|!={explication}|oui)
 					[<th>(#VALEUR{options/label}|sinon{#VALEUR{options/label_case}}|sinon{#VALEUR{options/nom}})</th>]
@@ -29,6 +35,7 @@ $(function() {
 		<tr>
 			<td>#ID_FORMULAIRES_REPONSE</td>
 			<td data-text="#DATE">[(#DATE|affdate_heure)]</td>
+			[(#GET{cextras}|cextras2td{#ID_FORMULAIRES_REPONSE})]
 			<BOUCLE_champ(POUR){tableau #GET{saisies_finales}}>
 			[(#VALEUR{saisie}|!={explication}|oui)
 			<td>#VOIR_REPONSE{#VALEUR{options/nom},valeur_uniquement}</td>
