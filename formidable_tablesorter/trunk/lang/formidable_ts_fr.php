@@ -11,5 +11,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tableau_reponses' => 'Tableau des réponses',
 
 	'imprimer' => 'Imprimer le tableau',
-	'colonnes' => 'Colonnes'
+	'colonnes' => 'Colonnes',
+	'exporter' => 'Exporter'
 );
