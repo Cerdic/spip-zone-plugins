@@ -20,7 +20,7 @@
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/archobjet_declarations.php" />
 	<pipeline nom="autoriser" inclure="archobjet_pipelines.php" />
+	<pipeline nom="pre_boucle" inclure="archobjet_pipelines.php" />
 	<pipeline nom="boite_infos" inclure="archobjet_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="archobjet_pipelines.php" />
-	<pipeline nom="affiche_enfants" inclure="archobjet_pipelines.php" />
 </paquet>

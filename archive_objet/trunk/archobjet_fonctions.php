@@ -9,7 +9,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * {est_archive=0}.
  *
  */
-function critere_archive_dist($idb, &$boucles, $crit) {
+function critere_archive_dist($idb, &$boucles, $critere) {
 
 	// Initialisation de la table sur laquelle porte le critère
 	include_spip('base/objets');
@@ -21,7 +21,7 @@ function critere_archive_dist($idb, &$boucles, $crit) {
 	$tables_autorisees = lire_config('archobjet/objets_archivables', array());
 	if (in_array($table, $tables_autorisees)) {
 		// Définition de la valeur du champ est_archive en fonction de l'existence du not ou pas
-		$valeur = ($crit->not == '!') ? 0 : 1;
+		$valeur = ($critere->not == '!') ? 0 : 1;
 		$champ = 'est_archive';
 
 		// Création du critère sur le champ 'est_archive'.

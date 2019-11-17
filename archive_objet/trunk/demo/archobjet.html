@@ -1,12 +1,12 @@
 <h2>D&eacute;mo du crit&egrave;re <code>{archive}</code></h2>
 
-<h3>Articles tout statut et archiv&eacute;s <code>{archive}</code></h3>
+<h3>Articles tout statut et archiv&eacute;s <code>{est_archive=1}</code></h3>
 
 <B_articles_archives>
 (#GRAND_TOTAL)
 #ANCRE_PAGINATION
 <ul>
-<BOUCLE_articles_archives(ARTICLES){archive}{tout}{par id_article}{pagination 20}>
+<BOUCLE_articles_archives(ARTICLES){est_archive=1}{tout}{par id_article}{pagination 20}>
 <li>#ID_ARTICLE - #STATUT - #TITRE[(#EST_ARCHIVE|=={1}|oui) (Archive)]</li>
 </BOUCLE_articles_archives>
 </ul>
