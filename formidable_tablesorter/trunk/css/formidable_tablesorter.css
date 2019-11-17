@@ -5,7 +5,11 @@
 	text-align:left;
 }
 .boutons > * {
-	display:inline;
+	display:inline-block;
+}
+.formidable_tablesorter .boutons label {
+	box-sizing:border-box;
+	padding:4px;
 }
 .tablesorter-ignoreRow th {
 	border:1px black solid;
@@ -16,11 +20,6 @@
 }
 #columnSelector label{
 	display:block;
-}
-}
-#colSelect1:checked + label {
-  background: #5797d7;
-  border-color: #555;
 }
 #colSelect1:checked ~ #columnSelector {
   display: block;
