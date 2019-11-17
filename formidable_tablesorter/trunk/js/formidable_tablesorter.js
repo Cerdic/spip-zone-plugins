@@ -5,7 +5,7 @@ $(function() {
 			columnSelector_container : $('#columnSelector'),
       print_columns: 's',
       print_rows: 'f',
-			print_extraCSS: 'table{font-size:12pt}',
+			print_extraCSS: 'table{font-size:10pt}',
       filter_saveFilters : true
 		}
 	});
