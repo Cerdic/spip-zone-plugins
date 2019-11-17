@@ -11,8 +11,8 @@
 	<auteur>Maïeul</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	<pipeline nom="affiche_gauche" inclure="formidable_ts_pipelines.php" />
 
 	<necessite nom="formidable" compatibilite="[3.46.4;[" />
 	<necessite nom="saisies" compatibilite="[3.29.0;[" />
-
 </paquet>
