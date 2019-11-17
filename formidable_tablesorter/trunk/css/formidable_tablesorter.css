@@ -7,6 +7,13 @@
 .boutons > * {
 	display:inline;
 }
+.tablesorter-ignoreRow th {
+	border:1px black solid;
+	text-align:center;
+	font-size:1.25em;
+	padding-top:1em;
+	padding-bottom:1em;
+}
 #columnSelector label{
 	display:block;
 }

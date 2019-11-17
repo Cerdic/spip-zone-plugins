@@ -27,6 +27,22 @@
 		<B_entete>
 		<caption>#TITRE</caption>
 		<thead>
+			<tr class="tablesorter-ignoreRow">
+				<th colspan="2">
+				</th>
+				[<th colspan="(#GET{cextras}|count)"></th>]
+
+				<BOUCLE_entete_fieldsets(POUR) {tableau #GET{saisies}}>
+					[(#VALEUR{saisies}|non)
+						[(#VALEUR{saisie}|!={explication}|oui)
+						<th></th>
+						]
+					]
+					[(#VALEUR{saisies}|oui)
+					[<th colspan="(#VALEUR{saisies}|count|moins{#VALEUR{saisies}|saisies_lister_avec_type{explication}|count})">#VALEUR{options/label}</th>]
+					]
+				</BOUCLE_entete_fieldsets>
+			</tr>
 			<tr>
 				<th>#</th>
 				<th><:date:></th>
