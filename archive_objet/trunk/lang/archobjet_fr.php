@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_desarchivage_label' => 'Consigner, pour un contenu, le retrait des archives',
 
 	// O
+	'objets_archives_page_titre' => 'Liste des archives',
 	'objet_archiver' => 'Archiver',
 	'objet_desarchiver' => 'Retirer des archives ',
 	'objet_archive_message' => 'Ce contenu a été archivé le @date@.',

@@ -156,31 +156,33 @@ function archobjet_pre_boucle($boucle){
 	include_spip('base/objets');
 	$table = table_objet_sql($boucle->id_table);
 
-	// Vérifier que la table fait bien partie de la liste autorisée à utiliser l'archivage.
-	include_spip('inc/config');
-	$tables_autorisees = lire_config('archobjet/objets_archivables', array());
-	if (in_array($table, $tables_autorisees)) {
-		// On boucle sur chaque critère et on cherche les critères :
-		// - {est_article = 0} ou {est_article = 1}
-		// - {archive} ou {!archive}
-		// et on sort au premier trouvé.
-		$criteres = $boucle->criteres;
-		$critere_archive_explicite = false;
-		foreach($criteres as $_critere){
-			if (
-				($_critere->op == 'archive')
-				or (!empty($_critere->param[0][0]->texte)
-					and ($_critere->param[0][0]->texte == 'est_archive')
-				)
-			) {
-				$critere_archive_explicite = true;
-				break;
+	if ($table) {
+		// Vérifier que la table fait bien partie de la liste autorisée à utiliser l'archivage.
+		include_spip('inc/config');
+		$tables_autorisees = lire_config('archobjet/objets_archivables', array());
+		if (in_array($table, $tables_autorisees)) {
+			// On boucle sur chaque critère et on cherche les critères :
+			// - {est_article = 0} ou {est_article = 1}
+			// - {archive} ou {!archive}
+			// et on sort au premier trouvé.
+			$criteres = $boucle->criteres;
+			$critere_archive_explicite = false;
+			foreach($criteres as $_critere){
+				if (
+					($_critere->op == 'archive')
+					or (!empty($_critere->param[0][0]->texte)
+						and ($_critere->param[0][0]->texte == 'est_archive')
+					)
+				) {
+					$critere_archive_explicite = true;
+					break;
+				}
 			}
-		}
 
-		// Aucun critère d'archivage explicite, on peut filtrer la boucle en excluant les archives.
-		if (!$critere_archive_explicite) {
-			$boucle->where[] = array("'='", "'est_archive'", 0);
+			// Aucun critère d'archivage explicite, on peut filtrer la boucle en excluant les archives.
+			if (!$critere_archive_explicite) {
+				$boucle->where[] = array("'='", "'est_archive'", 0);
+			}
 		}
 	}
 

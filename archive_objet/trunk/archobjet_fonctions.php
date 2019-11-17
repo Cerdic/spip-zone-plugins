@@ -28,3 +28,46 @@ function critere_archive_dist($idb, &$boucles, $critere) {
 		$boucle->where[] = array("'='", "'$champ'", $valeur);
 	}
 }
+
+/**
+ * Compile la balise `#TYPE_OBJET_ARCHIVE` qui renvoie la liste des types d'objet autorisés à l'archivage
+ * Chaque type d'objet est fourni avec son titre.
+ * La signature de la balise est : `#TYPE_OBJET_ARCHIVE`.
+ *
+ * @balise
+ *
+ * @param Champ $p
+ *        Pile au niveau de la balise.
+ *
+ * @return Champ
+ *         Pile complétée par le code à générer.
+ **/
+function balise_TYPE_OBJET_ARCHIVE_dist($p) {
+
+	// Aucun argument à la balise.
+	$p->code = "calculer_types_objet_archives()";
+
+	return $p;
+}
+
+/**
+ * @internal
+ *
+ * @return array
+ */
+function calculer_types_objet_archives() {
+
+	// Liste des tables autorisées à l'archivage
+	include_spip('inc/config');
+	$tables_autorisees = lire_config('archobjet/objets_archivables', array());
+
+	// Construction de la liste des types d'objets archivables
+	include_spip('base/objets');
+	$types_archives = array();
+	foreach ($tables_autorisees as $_table) {
+		$type_objet = objet_type($_table);
+		$types_archives[$type_objet] = table_objet($type_objet);
+	}
+
+	return $types_archives;
+}

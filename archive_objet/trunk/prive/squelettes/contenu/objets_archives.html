@@ -1,0 +1,12 @@
+[(#AUTORISER{archivage}|sinon_interdire_acces)]
+<h1 class="grostitre">
+	<:archobjet:objets_archives_page_titre:>
+</h1>
+<B_archives>
+<BOUCLE_archives(DATA) {source table, #TYPE_OBJET_ARCHIVE}{par cle}>
+[<h3>[(#CLE|objet_info{texte_objets}|_T)]</h3>
+	(#VALEUR|trouver_fond{prive/objets/liste/}|oui)
+		#INCLURE{fond=prive/objets/liste/#VALEUR, env}
+]
+</BOUCLE_archives>
+</B_archives>
