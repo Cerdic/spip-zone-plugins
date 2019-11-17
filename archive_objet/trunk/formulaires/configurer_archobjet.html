@@ -1,0 +1,49 @@
+<div class="formulaire_spip formulaire_configurer formulaire_configurer_#FORM">
+	<h3 class="titrem"><:archobjet:configuration_form_titre:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#SELF"><div>
+		#ACTION_FORMULAIRE
+		<div class="editer-groupe">
+			#SET{name, objets_archivables}#SET{obli,''}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label><:archobjet:configuration_objets_archivables_label:></label>[
+				<span class="erreur_message">(#GET{erreurs})</span>
+				]
+				#INCLURE{fond=formulaires/inc-choisir-objets,name=#GET{name},
+					selected=#ENV**{#GET{name}}}
+			</div>
+
+			#SET{name, consigner_desarchivage}#SET{obli, ''}#SET{defaut, 0}#SET{erreurs, #ENV**{erreurs/#GET{name}}}
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<div class="choix">
+					#SET{value,0}
+					<input type="hidden" name="#GET{name}" value="#GET{value}" />
+					#SET{value,1}
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{value}" value="#GET{value}" aria-describedby="#GET{name}_explication" [(#ENV{#GET{name},#GET{defaut}}|=={#GET{value}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{value}"><:archobjet:configuration_desarchivage_label:></label>
+				</div>
+			</div>
+
+			#SET{name, utiliser_raison}#SET{obli, ''}#SET{defaut, 0}#SET{erreurs, #ENV**{erreurs/#GET{name}}}
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<div class="choix">
+					#SET{value,0}
+					<input type="hidden" name="#GET{name}" value="#GET{value}" />
+					#SET{value,1}
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{value}" value="#GET{value}" aria-describedby="#GET{name}_explication" [(#ENV{#GET{name},#GET{defaut}}|=={#GET{value}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{value}"><:archobjet:configuration_raison_label:></label>
+				</div>
+			</div>
+		</div>
+
+		<p class='boutons'>
+			<input class='submit' type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" />
+		</p>
+	</div></form>
+
+</div>

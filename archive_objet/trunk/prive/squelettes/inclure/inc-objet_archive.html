@@ -1,0 +1,12 @@
+#BOITE_OUVRIR{'', note center #ETAT}
+<p>[
+	(#VAL{archobjet:objet_}
+		|concat{#ETAT}
+		|concat{_message}
+		|_T{#ARRAY{date,#DATE_ARCHIVE|affdate_court}})][
+	(#CONFIG{archobjet/utiliser_raison}|et{#RAISON_ARCHIVE}|oui)
+		#SET{raison, #VAL{archobjet:objet_}|concat{#ETAT}|concat{_raison_}|concat{#RAISON_ARCHIVE}|_T}
+		<br />
+		<:archobjet:objet_archive_raison{raison=#GET{raison}}:>
+]</p>
+#BOITE_FERMER
