@@ -49,7 +49,7 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 			}
 
 			// On transforme en une condition PHP valide
-			$ok = saisies_evaluer_afficher_si($condition, $env);
+			$ok = saisies_evaluer_afficher_si($condition, $env, saisies_lister_par_nom($saisies));
 			if (!$ok) {
 				if ($remplissage_uniquement == false or is_null($env)) {
 					unset($saisies[$cle]);
@@ -94,11 +94,13 @@ function saisies_set_request_null_recursivement($saisie) {
  * sinon en _request() ou en $env["valeurs"]
  * @param string $champ: le champ
  * @param null|array $env
+ * @param array $saisies
  * @return  la valeur du champ ou de la config
  **/
-function saisies_afficher_si_get_valeur_champ($champ, $env) {
+function saisies_afficher_si_get_valeur_champ($champ, $env, $saisies) {
 	$plugin = saisies_afficher_si_evaluer_plugin($champ);
 	$config = saisies_afficher_si_get_valeur_config($champ);
+	$fichiers = $saisies[$champ]['saisie'] == 'fichiers';
 	if ($plugin !== '') {
 		$champ = $plugin;
 	} elseif ($config) {
@@ -110,13 +112,32 @@ function saisies_afficher_si_get_valeur_champ($champ, $env) {
 			preg_match_all('/\[([\w]+)\]/', $separe[2], $index);
 			// On va chercher au fond du tableau
 			foreach ($index[1] as $cle) {
-				$champ = $champ[$cle];
+				if ($fichiers) {
+					$files = isset($_FILES[$champ[$cle]]) ? $_FILES[$champ[$cle]]['name'] : array();
+					$precedent = _request('cvtupload_fichiers_precedents');
+					$precedent = $precedent[$champ[$cle]];
+				} else {
+					$champ = $champ[$cle];
+				}
 			}
 		} else {
-			$champ = _request($champ);
+			if ($fichiers) {
+				$files = isset($_FILES[$champ]) ? $_FILES[$champ]['name'] : array();
+				$precedent = _request('cvtupload_fichiers_precedents');
+				$precedent = $precedent[$champ];
+			} else {
+				$champ = _request($champ);
+			}
 		}
 	} else {
 		$champ = $env["valeurs"][$champ];
+	}
+	if ($fichiers) {
+		if (!is_array($precedent)) {
+			$precedent = array();
+		}
+		$champ = array_merge($files, $precedent);
+		$champ = array_filter($champ);
 	}
 	return $champ;
 }
@@ -131,9 +152,10 @@ function saisies_afficher_si_get_valeur_champ($champ, $env) {
  * @param array|null $env
  *   Tableau d'environnement transmis dans inclure/voir_saisies.html,
  *   NULL si on doit rechercher dans _request (pour saisies_verifier()).
+ * @param  array $saisies
  * @return string $condition
 **/
-function saisies_transformer_condition_afficher_si($condition, $env = null) {
+function saisies_transformer_condition_afficher_si($condition, $env = null, $saisies = array()) {
 	if ($tests = saisies_parser_condition_afficher_si($condition)) {
 		if (!saisies_afficher_si_verifier_syntaxe($condition, $tests)) {
 			spip_log("Afficher_si incorrect. $condition syntaxe_incorrecte", "saisies"._LOG_CRITIQUE);
@@ -143,7 +165,7 @@ function saisies_transformer_condition_afficher_si($condition, $env = null) {
 			$expression = $test[0];
 			if (!isset($test['booleen'])) {
 
-				$champ = saisies_afficher_si_get_valeur_champ($test['champ'], $env);
+				$champ = saisies_afficher_si_get_valeur_champ($test['champ'], $env, $saisies);
 				$total = isset($test['total']) ? $test['total'] : '';
 				$operateur = isset($test['operateur']) ? $test['operateur'] : null;
 				$negation = isset($test['negation']) ? $test['negation'] : '';
@@ -175,10 +197,11 @@ function saisies_transformer_condition_afficher_si($condition, $env = null) {
  * @param array|null $env
  *   Tableau d'environnement transmis dans inclure/voir_saisies.html,
  *   NULL si on doit rechercher dans _request (pour saisies_verifier()).
+ * @param array $saisies
  * @return bool le résultat du test
 **/
-function saisies_evaluer_afficher_si($condition, $env = null) {
-	$condition = saisies_transformer_condition_afficher_si($condition, $env);
+function saisies_evaluer_afficher_si($condition, $env = null, $saisies=array()) {
+	$condition = saisies_transformer_condition_afficher_si($condition, $env, $saisies);
 	if ($condition) {
 		eval('$ok = '.$condition.';');
 	} else {

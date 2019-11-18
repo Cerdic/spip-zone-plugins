@@ -93,6 +93,16 @@ function saisies_afficher_si_js_champ($champ, $total, $operateur, $valeur, $vale
 	if ($saisie == 'checkbox') {
 		return saisies_afficher_si_js_checkbox($champ, $total, $operateur, $valeur, $negation);
 	}
+	// cas fichier
+	if ($saisie == 'fichiers') {
+		$nb_fichiers = $saisies_form[$champ]['options']['nb_fichiers'];
+		if (!$nb_fichiers) {
+			$nb_fichiers = 1;
+		} else {
+			$nb_fichiers = intval($nb_fichiers);
+		}
+		return saisies_afficher_si_js_fichiers($champ, $total, $operateur, $valeur, $negation, $nb_fichiers);
+	}
 	// cas case
 	if ($saisie == 'case') {// case
 		return saisies_afficher_si_js_case($champ, $total, $operateur, $valeur, $guillemet, $negation);
@@ -134,6 +144,28 @@ function saisies_afficher_si_js_case($champ, $total, $operateur, $valeur, $guill
 **/
 function saisies_afficher_si_js_radio($champ, $total, $operateur, $valeur, $guillemet, $negation) {
 	return "$negation$(form).find(\"[name='$champ']:checked\").val() $operateur $guillemet$valeur$guillemet";
+}
+
+
+/**
+ * Génère les tests js pour les cas de fichiers
+ * @param string $champ
+ * @param string $total
+ * @param string $operateur
+ * @param string $valeur
+ * @param string $negation
+ * @param int $nb_fichiers
+**/
+function saisies_afficher_si_js_fichiers($champ, $total, $operateur, $valeur, $negation, $nb_fichiers) {
+	$total = "$(form).find(\"[name^='cvtupload_fichiers_precedents[$champ]']\").length";
+	$i = 0;
+	while ($i < $nb_fichiers) {
+		$total .= " + $(form).find(\"[name^='$champ']\")[$i].files.length";
+		$i++;
+	}
+	$total = "($total)";
+	$result = "$negation $total $operateur $valeur";
+	return $result;
 }
 
 /**
