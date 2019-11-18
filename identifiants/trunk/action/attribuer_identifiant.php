@@ -20,7 +20,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     identifiant-objet-id_objet
  * @return void
  */
-function action_generer_identifiant_objet_dist($arg = null) {
+function action_attribuer_identifiant_dist($arg = null) {
 
 	if (is_null($arg)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');

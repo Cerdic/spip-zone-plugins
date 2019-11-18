@@ -23,6 +23,7 @@ Ce champ n'est ajouté qu'aux tables configurées, celles possédant nativement 
 **Fonctions renommées :**
 
 * `identifiants_utiles()` → `identifiants_lister_utiles()`
+* `action_generer_identifiant_objet_dist()` → `action_attribuer_identifiant_dist()`
 
 **Fonctions supprimées :**
 
