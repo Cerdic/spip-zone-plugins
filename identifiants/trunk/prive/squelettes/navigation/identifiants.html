@@ -1,0 +1,18 @@
+[(#BOITE_OUVRIR{'',simple})]
+<div class="liste">
+	<h4><:identifiant:champ_objets_label:></h4>
+	<ul class="liste-items">
+		<li class="item">[(#SELF|parametre_url{objet,''}|lien_ou_expose{<:identifiant:filtre_tous:>,#ENV{objet}|=={''}})]</li>
+		<BOUCLE_filtrer_objets(DATA) {source table, #REM|identifiants_lister_tables_identifiables}>
+		#SET{objet,#VALEUR|table_objet_sql}
+		#SET{objet_nom,#GET{objet}|objet_info{texte_objets}|_T}
+		<li class="item">
+			[(#SELF
+				|parametre_url{objet,#GET{objet}}
+				|lien_ou_expose{[(#GET{objet}|objet_icone{16})][ (#GET{objet_nom})],#ENV{objet}|=={#GET{objet}}}
+			)]
+		</li>
+		</BOUCLE_filtrer_objets>
+	</ul>
+</div>
+#BOITE_FERMER

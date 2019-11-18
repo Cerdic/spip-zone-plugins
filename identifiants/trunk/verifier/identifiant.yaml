@@ -1,0 +1,16 @@
+
+titre: '<:identifiant:verifier_identifiant_titre:>'
+description: '<:identifiant:verifier_identifiant_description:>'
+options:
+  -
+    saisie: 'case'
+    options:
+      nom: 'unicite'
+      label: '<:identifiant:verifier_identifiant_unicite_label:>'
+  -
+    saisie: 'choisir_objet'
+    options:
+      nom: 'objet'
+      label: '<:identifiant:verifier_identifiant_unicite_objet_label:>'
+      obligatoire: 'oui'
+      afficher_si: '@unicite@'

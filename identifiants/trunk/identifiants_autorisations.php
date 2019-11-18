@@ -32,7 +32,7 @@ function identifiants_autoriser() {
  * @return bool          true s'il a le droit, false sinon
  */
 function autoriser_identifiants_menu($faire, $type, $id, $qui, $opt) {
-	return autoriser('voir','identifiant');
+	return autoriser('voir', 'identifiant');
 }
 
 /**
