@@ -283,9 +283,16 @@ function mailsubscribers_formulaire_fond($flux) {
 				}
 			}
 
-			if ($show AND ($p = strpos($flux['data'], "</ul>")) !== false) {
-				$input = recuperer_fond("formulaires/inc-optin-subscribe", $flux['args']['contexte']);
-				$flux['data'] = substr_replace($flux['data'], $input, $p, 0);
+			if ($show AND ($pform = strrpos($flux['data'], "<form")) !== false) {
+				if (strrpos($flux['data'], '</textarea>') < $pform) {
+					$pform = 0;
+				}
+				if (preg_match(",</(div|ul)>\s*</fieldset>,Uims", substr($flux['data'], $pform), $m)){
+					$p = strpos($flux['data'], $m[0], $pform);
+					$c = array_merge($flux['args']['contexte'], array('tag' => ($m[1]=='ul' ? 'li' : 'div')));
+					$input = recuperer_fond("formulaires/inc-optin-subscribe", $c);
+					$flux['data'] = substr_replace($flux['data'], $input, $p, 0);
+				}
 			}
 		}
 	}
