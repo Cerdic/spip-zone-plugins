@@ -65,7 +65,7 @@
 		<tbody>
 		<BOUCLE_reponses(FORMULAIRES_REPONSES){id_formulaire}>
 		<tr>
-			<td>#ID_FORMULAIRES_REPONSE</td>
+			<td><a href="#URL_ECRIRE{formulaires_reponse,id_formulaires_reponse=#ID_FORMULAIRES_REPONSE}">#ID_FORMULAIRES_REPONSE</a></td>
 			<td data-text="#DATE">[(#DATE|affdate_heure)]</td>
 			[(#GET{cextras}|cextras2td{#ID_FORMULAIRES_REPONSE})]
 			<BOUCLE_champ(POUR){tableau #GET{saisies_finales}}>
