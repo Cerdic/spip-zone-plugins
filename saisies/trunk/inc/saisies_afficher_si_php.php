@@ -144,6 +144,7 @@ function saisies_transformer_condition_afficher_si($condition, $env = null) {
 			if (!isset($test['booleen'])) {
 
 				$champ = saisies_afficher_si_get_valeur_champ($test['champ'], $env);
+				$total = isset($test['total']) ? $test['total'] : '';
 				$operateur = isset($test['operateur']) ? $test['operateur'] : null;
 				$negation = isset($test['negation']) ? $test['negation'] : '';
 				if (isset($test['valeur_numerique'])) {
@@ -154,7 +155,7 @@ function saisies_transformer_condition_afficher_si($condition, $env = null) {
 					$valeur = null;
 				}
 
-				$test_modifie = saisies_tester_condition_afficher_si($champ, $operateur, $valeur, $negation) ? 'true' : 'false';
+				$test_modifie = saisies_tester_condition_afficher_si($champ, $total, $operateur, $valeur, $negation) ? 'true' : 'false';
 				$condition = str_replace($expression, $test_modifie, $condition);
 			}
 		}

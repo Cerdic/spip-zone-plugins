@@ -102,6 +102,11 @@
 				0 => true,
 				1 => "true"
 			),
+			'total' =>
+			array(
+				0 => true,
+				1 => '@checkbox_1@:TOTAL > 1'
+			)
 		);
 		foreach ($essais as $nom=>$param) {
 			$essais[$nom][2] = saisies_parser_condition_afficher_si($param[1]);

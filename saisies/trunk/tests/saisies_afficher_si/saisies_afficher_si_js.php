@@ -155,6 +155,11 @@
 				1 => '@checkbox_1@ IN \'toto\'',
 				2 => $saisies_form
 			),
+			'checkbox_TOTAL' => array(
+				0 => '$(form).find(&quot;[name^=\'checkbox_1\']:checked&quot;).length > 1',
+				1 => '@checkbox_1@:TOTAL > 1',
+				2 => $saisies_form
+			),
 			'checkbox_NOT_IN' => array(
 				0 => '!($(form).find(\'[name=&quot;checkbox_1[]&quot;][value=&quot;toto&quot;]\').is(\':checked\'))',
 				1 => '@checkbox_1@ !IN \'toto\'',

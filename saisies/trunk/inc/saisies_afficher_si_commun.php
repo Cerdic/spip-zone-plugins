@@ -18,6 +18,7 @@ function saisies_parser_condition_afficher_si($condition) {
 	$regexp =
 	  '(?<negation>!?)' // négation éventuelle
 		. '(?:@(?<champ>.+?)@)' // @champ_@
+		. '(?<total>:TOTAL)?' // TOTAL éventuel (pour les champs de type case à cocher)
 		. '(' // partie operateur + valeur (optionnelle) : debut
 		. '(?:\s*?)' // espaces éventuels après
 		. '(?<operateur>==|!=|IN|!IN|>=|>|<=|<)' // opérateur
@@ -59,12 +60,13 @@ function saisies_afficher_si_evaluer_plugin($champ, $negation = '') {
  *	- un string
  *	- un tableau
  *	- un tableau sérializé
+ * @param string $total TOTAL si on demande de faire le décompte dans un tableau
  * @param string $operateur : l'opérateur:
  * @param string $valeur la valeur à tester pour un IN. Par exemple "23" ou encore "23", "25"
  * @param string $negation y-a-t-il un négation avant le test ? '!' si oui
  * @return bool false / true selon la condition
 **/
-function saisies_tester_condition_afficher_si($champ, $operateur=null, $valeur=null, $negation = '') {
+function saisies_tester_condition_afficher_si($champ, $total, $operateur=null, $valeur=null, $negation = '') {
 	// Si operateur null => on test juste qu'un champ est cochée / validé
 	if ($operateur === null and $valeur === null) {
 		if ($negation) {
@@ -89,7 +91,7 @@ function saisies_tester_condition_afficher_si($champ, $operateur=null, $valeur=n
 	if (is_string($champ)) {
 		$retour = saisies_tester_condition_afficher_si_string($champ, $operateur, $valeur);
 	} elseif (is_array($champ)) {
-		$retour = saisies_tester_condition_afficher_si_array($champ, $operateur, $valeur);
+		$retour = saisies_tester_condition_afficher_si_array($champ, $total, $operateur, $valeur);
 	} else {
 		$retour = false;
 	}
@@ -132,15 +134,19 @@ function saisies_tester_condition_afficher_si_string($champ, $operateur, $valeur
  * @param string $valeur la valeur à tester pour un IN. Par exemple "23" ou encore "23", "25"
  * @return bool false / true selon la condition
 **/
-function saisies_tester_condition_afficher_si_array($champ, $operateur, $valeur) {
-	$valeur = explode(',', $valeur);
-	$intersection = array_intersect($champ, $valeur);
-	if ($operateur == "==" or $operateur == "IN") {
-		return count($intersection) > 0;
-	} else {
-		return count($intersection) == 0;
+function saisies_tester_condition_afficher_si_array($champ, $total, $operateur, $valeur) {
+	if ($total) {//Cas 1 : on demande à compter le nombre total de champ
+		return saisies_tester_condition_afficher_si_string(count($champ), $operateur, $valeur);
+	} else {//Cas deux : on test une valeur
+		$valeur = explode(',', $valeur);
+		$intersection = array_intersect($champ, $valeur);
+		if ($operateur == "==" or $operateur == "IN") {
+			return count($intersection) > 0;
+		} else {
+			return count($intersection) == 0;
+		}
+		return false;
 	}
-	return false;
 }
 
 /**

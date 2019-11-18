@@ -35,6 +35,7 @@ function saisies_afficher_si_js($condition, $saisies_form = array()) {
 			$expression = $test[0];
 			$negation = isset($test['negation']) ? $test['negation'] : '' ;
 			$champ = isset($test['champ']) ? $test['champ'] : '' ;
+			$total = isset($test['total']) ? $test['total'] : '';
 			$operateur = isset($test['operateur']) ? $test['operateur'] : '' ;
 			$guillemet = isset($test['guillemet']) ? $test['guillemet'] : '' ;
 			$negation = isset($test['negation']) ? $test['negation'] : '';
@@ -46,12 +47,12 @@ function saisies_afficher_si_js($condition, $saisies_form = array()) {
 				$condition = str_replace($expression, $plugin ? 'true' : 'false', $condition);
 			} elseif (stripos($champ, 'config:') !== false) {
 				$config = saisies_afficher_si_get_valeur_config($champ);
-				$test_modifie = eval('return '.saisies_tester_condition_afficher_si($config, $operateur, $valeur, $negation).';') ? 'true' : 'false';
+				$test_modifie = eval('return '.saisies_tester_condition_afficher_si($config, $total, $operateur, $valeur, $negation).';') ? 'true' : 'false';
 				$condition = str_replace($expression, $test_modifie, $condition);
 			} elseif ($booleen)  {
 				$condition = $condition;
 			} else { // et maintenant, on rentre dans le vif du sujet : les champs. On délégue cela à une autre fonction
-				$condition = str_replace($expression, saisies_afficher_si_js_champ($champ, $operateur, $valeur, $valeur_numerique, $guillemet, $negation, $saisies_form), $condition);
+				$condition = str_replace($expression, saisies_afficher_si_js_champ($champ, $total, $operateur, $valeur, $valeur_numerique, $guillemet, $negation, $saisies_form), $condition);
 			}
 		}
 	} else {
@@ -66,6 +67,7 @@ function saisies_afficher_si_js($condition, $saisies_form = array()) {
 /**
  * Génère à partir de l'analyse d'une condition afficher_si le test js, pour les champs
  * @param string $champ
+ * @param string $total
  * @param string $operateur
  * @param string $valeur
  * @param string $valeur_numerique
@@ -75,29 +77,29 @@ function saisies_afficher_si_js($condition, $saisies_form = array()) {
  * @param string $saisies_form listée par nom
  * @return string condition_js
 **/
-function saisies_afficher_si_js_champ($champ, $operateur, $valeur, $valeur_numerique, $guillemet, $negation, $saisies_form) {
+function saisies_afficher_si_js_champ($champ, $total, $operateur, $valeur, $valeur_numerique, $guillemet, $negation, $saisies_form) {
 	if (!isset($saisies_form[$champ])) {//La saisie conditionnante n'existe pas pour ce formulaire > on laisse tomber
 		spip_log("Afficher_si incorrect. Champ $champ inexistant", "saisies"._LOG_CRITIQUE);
 		return '';
 	}
 	$saisie = $saisies_form[$champ]['saisie'];
-	if ($saisie == 'checkbox') {
-		return saisies_afficher_si_js_checkbox($champ, $operateur, $valeur, $negation);
-	}
 
 	// Cas d'une valeur numérique : pour le test js, cela ne change rien, on la passe comme valeur
 	if (strlen($valeur_numerique) and !$valeur) {
 		$valeur = $valeur_numerique;
 	}
-	// Guillemets : si double, les échapper
 
+	// cas checkbox
+	if ($saisie == 'checkbox') {
+		return saisies_afficher_si_js_checkbox($champ, $total, $operateur, $valeur, $negation);
+	}
 	// cas case
 	if ($saisie == 'case') {// case
-		return saisies_afficher_si_js_case($champ, $operateur, $valeur, $guillemet, $negation);
+		return saisies_afficher_si_js_case($champ, $total, $operateur, $valeur, $guillemet, $negation);
 	}
 	// cas radio
 	if ($saisie == 'radio' or $saisie == 'oui_non' or $saisie == 'true_false') {// radio et assimilés
-		return saisies_afficher_si_js_radio($champ, $operateur, $valeur, $guillemet, $negation);
+		return saisies_afficher_si_js_radio($champ, $total, $operateur, $valeur, $guillemet, $negation);
 	}
 	// sinon cas par défaut
 	return "$negation\$(form).find('[name=\"$champ\"]').val() $operateur $guillemet$valeur$guillemet";
@@ -107,12 +109,13 @@ function saisies_afficher_si_js_champ($champ, $operateur, $valeur, $valeur_numer
 /**
  * Génère les tests js pour les cas de case
  * @param string $champ
+ * @param string $total
  * @param string $operateur
  * @param string $valeur
  * @param string $guillemet
  * @param string $negation
 **/
-function saisies_afficher_si_js_case($champ, $operateur, $valeur, $guillemet, $negation) {
+function saisies_afficher_si_js_case($champ, $total, $operateur, $valeur, $guillemet, $negation) {
 	if ($valeur  and $operateur) {
 		return "$negation($(form).find(\".checkbox[name='$champ']\").is(':checked') ? $(form).find(\".checkbox[name='$champ']\").val() : '') $operateur $guillemet$valeur$guillemet";
 	} else {
@@ -123,40 +126,47 @@ function saisies_afficher_si_js_case($champ, $operateur, $valeur, $guillemet, $n
 /**
  * Génère les tests js pour les cas de radio
  * @param string $champ
+ * @param string $total
  * @param string $operateur
  * @param string $valeur
  * @param string $guillemet
  * @param string $negation
 **/
-function saisies_afficher_si_js_radio($champ, $operateur, $valeur, $guillemet, $negation) {
+function saisies_afficher_si_js_radio($champ, $total, $operateur, $valeur, $guillemet, $negation) {
 	return "$negation$(form).find(\"[name='$champ']:checked\").val() $operateur $guillemet$valeur$guillemet";
 }
 
 /**
  * Génère les tests js pour les cas de checkbox
  * @param string $champ
+ * @param string $total
  * @param string $operateur
  * @param string $valeur
  * @param string $negation
 **/
-function saisies_afficher_si_js_checkbox($champ, $operateur, $valeur, $negation) {
-	// Convertir les conditions en test IN (compatibilité historique)
-	if ($operateur == '==') {
-		$operateur = 'IN';
-	} elseif ($operateur == '!=') {
-		$operateur = '!IN';
+function saisies_afficher_si_js_checkbox($champ, $total, $operateur, $valeur, $negation) {
+	if ($total) {// Cas 1 : on cherche juste à savoir le nombre total de case coché
+		$result = "$negation$(form).find(\"[name^='$champ']:checked\").length $operateur $valeur";
+		return $result;
+	} else {// Cas 2 : on cherche à savoir s'il y a une case avec une certaine valeur
+		// Convertir les conditions en test IN (compatibilité historique)
+		if ($operateur == '==') {
+			$operateur = 'IN';
+		} elseif ($operateur == '!=') {
+			$operateur = '!IN';
+		}
+		// La négation de l'opérateur remonte globalement
+		if ($operateur == '!IN' and $negation) {
+			$negation = '';
+		} elseif ($operateur == '!IN') {
+			$negation = '!';
+		}
+		// Spliter la valeur pour trouver toutes les cases qui doivent être cochées (ou pas)
+		$valeurs = explode(',', $valeur);
+		$valeurs = array_map('saisies_afficher_si_js_IN_individuel', $valeurs, array_fill(0,count($valeurs),$champ));
+		$valeurs = implode(' || ', $valeurs);
+		return "$negation($valeurs)";
 	}
-	// La négation de l'opérateur remonte globalement
-	if ($operateur == '!IN' and $negation) {
-		$negation = '';
-	} elseif ($operateur == '!IN') {
-		$negation = '!';
-	}
-	// Spliter la valeur pour trouver toutes les cases qui doivent être cochées (ou pas)
-	$valeurs = explode(',', $valeur);
-	$valeurs = array_map('saisies_afficher_si_js_IN_individuel', $valeurs, array_fill(0,count($valeurs),$champ));
-	$valeurs = implode(' || ', $valeurs);
-	return "$negation($valeurs)";
 }
 
 /**

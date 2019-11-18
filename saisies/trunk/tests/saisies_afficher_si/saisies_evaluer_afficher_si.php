@@ -220,6 +220,14 @@
 			'cascade' => array(
 				0 => true,
 				1 => '@cascade[a]@ == \'a\''
+			),
+			'total_tableau_sup' => array(
+				0 => true,
+				1 => '@tableau_1@:TOTAL > 2'
+			),
+			'total_tableau_inf' => array(
+				0 => false,
+				1 => '@tableau_1@:TOTAL < 2'
 			)
 		);
 		return $essais;
