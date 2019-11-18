@@ -180,8 +180,18 @@ function adaptive_images_base($texte, $max_width_1x, $background_only = false){
 			$bkpt = null;
 		}
 	}
+	// on peut passer une valeur chaine genre '-' ou '*' si on veut rien preciser mais fournir l'argument size suivant
+	if ($max_width_1x and !intval($max_width_1x)) {
+		$max_width_1x = null;
+	}
 	$AdaptiveImages = SPIPAdaptiveImages::getInstance();
-	$res = $AdaptiveImages->adaptHTMLPart($texte, $max_width_1x, $bkpt, $background_only);
+	try {
+		$res = $AdaptiveImages->adaptHTMLPart($texte, $max_width_1x, $bkpt, $background_only);
+	}
+	catch (Exception $e) {
+		erreur_squelette($e->getMessage(),'SPIPAdaptiveImages:adaptHTMLPart');
+		return $texte;
+	}
 
 	if (!$background_only) {
 		// injecter la class filtre_inactif sur les balises img pour ne pas repasser un filtre image dessus
