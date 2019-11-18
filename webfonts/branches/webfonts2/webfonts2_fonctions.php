@@ -28,7 +28,7 @@ function googlefont_request($webfonts,$subsets='',$type='css'){
     	foreach($webfonts as $font){
 				$family = $font['family'];
 				$variants = $font['variants'] ;
-				(array_key_exists($family,$fonts)) ? array_merge($fonts[$family],$variants) : $fonts[$family] = $variants;
+				(array_key_exists($family,$fonts)) ? $fonts[$family] = array_merge($fonts[$family],$variants) : $fonts[$family] = $variants;
 			}
       if(isset($fonts)){
 				$typeset = array();
@@ -41,7 +41,7 @@ function googlefont_request($webfonts,$subsets='',$type='css'){
       		$request = "https://fonts.google.com/selection?selection.family=$fonts";
       	}else{
       		$request = "https://fonts.googleapis.com/css?family=$fonts".$subset."&display=swap";
-      	}
+        }
 
         return htmlentities($request);
       }
