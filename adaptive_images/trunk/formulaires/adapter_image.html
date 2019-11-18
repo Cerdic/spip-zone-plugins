@@ -6,8 +6,8 @@
 	<form action="#ENV{action}#formulaire_annexer_document-#ENV{mode}-#ENV{id,new}" method="post" enctype='multipart/form-data'><div>
 		[<p class="notice">(#ENV*{_warning_ratio})</p>]
 		[(#ACTION_FORMULAIRE{#ENV{action}})]
-		<ul>
-			<li class="editer_fichier[ (#ENV**{erreurs}|table_valeur{fichier}|oui)erreur]">
+		<div class="editer-groupe">
+			<div class="editer editer_fichier[ (#ENV**{erreurs}|table_valeur{fichier}|oui)erreur]">
 				<label for="#ENV{mode}">[(#VAL{'adaptive_images:label_fichier_'}|concat{#ENV{mode}}|_T)]</label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier})</span>
 				]
@@ -26,8 +26,8 @@
 				<div id='#FORM-#ENV{mode}' style='display:none;'>
 				[(#INCLURE{fond=formulaires/inc-upload_document}{env}{joindre_upload=oui})]
 				</div>
-	    </li>
-		</ul>
+	    </div>
+		</div>
 	</div></form>
 	]
 </div>
