@@ -16,14 +16,14 @@
 **/
 function saisies_parser_condition_afficher_si($condition) {
 	$regexp =
-	  "(?<negation>!?)" // négation éventuelle
-		. "(?:@(?<champ>.+?)@)" // @champ_@
-		. "(" // partie operateur + valeur (optionnelle) : debut
-		. "(?:\s*?)" // espaces éventuels après
-		. "(?<operateur>==|!=|IN|!IN|>=|>|<=|<)" // opérateur
-		. "(?:\s*?)" // espaces éventuels après
-		. "((?<guillemet>\"|')(?<valeur>.*?)(\k<guillemet>)|(?<valeur_numerique>\d+))" // valeur (string) ou valeur_numérique (int)
-		. ")?" // partie operateur + valeur (optionnelle) : fin
+	  '(?<negation>!?)' // négation éventuelle
+		. '(?:@(?<champ>.+?)@)' // @champ_@
+		. '(' // partie operateur + valeur (optionnelle) : debut
+		. '(?:\s*?)' // espaces éventuels après
+		. '(?<operateur>==|!=|IN|!IN|>=|>|<=|<)' // opérateur
+		. '(?:\s*?)' // espaces éventuels après
+		. '((?<guillemet>"|\')(?<valeur>.*?)(\k<guillemet>)|(?<valeur_numerique>\d+))' // valeur (string) ou valeur_numérique (int)
+		. ')?' // partie operateur + valeur (optionnelle) : fin
 		. '|(?<booleen>false|true)';//accepter false/true brut
 	$regexp = "#$regexp#";
 	preg_match_all($regexp, $condition, $tests, PREG_SET_ORDER);
