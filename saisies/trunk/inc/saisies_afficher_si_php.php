@@ -100,7 +100,10 @@ function saisies_set_request_null_recursivement($saisie) {
 function saisies_afficher_si_get_valeur_champ($champ, $env, $saisies) {
 	$plugin = saisies_afficher_si_evaluer_plugin($champ);
 	$config = saisies_afficher_si_get_valeur_config($champ);
-	$fichiers = $saisies[$champ]['saisie'] == 'fichiers';
+	$fichiers = false;
+	if (isset($saisies[$champ])) {
+		$fichiers = $saisies[$champ]['saisie'] == 'fichiers';
+	}
 	if ($plugin !== '') {
 		$champ = $plugin;
 	} elseif ($config) {
