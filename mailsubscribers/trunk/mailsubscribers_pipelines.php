@@ -260,8 +260,10 @@ function mailsubscribers_formulaire_fond($flux) {
 	if ($flux['args']['form'] == "inscription") {
 		include_spip('inc/config');
 		if (lire_config("mailsubscribers/proposer_signup_optin", 0)) {
-			if (($p = strpos($flux['data'], "</ul>")) !== false) {
-				$input = recuperer_fond("formulaires/inc-optin-subscribe", $flux['args']['contexte']);
+			if (preg_match(",</(div|ul)>\s*</fieldset>,Uims", $flux['data'], $m)) {
+				$p = strrpos($flux['data'], $m[0]);
+				$c = array_merge($flux['args']['contexte'], array('tag' => ($m[1] == 'ul' ? 'li' : 'div')));
+				$input = recuperer_fond("formulaires/inc-optin-subscribe", $c);
 				$flux['data'] = substr_replace($flux['data'], $input, $p, 0);
 			}
 		}
