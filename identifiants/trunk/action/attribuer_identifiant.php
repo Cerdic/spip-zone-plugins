@@ -14,17 +14,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
- * Action : générer (ou mettre à jour/supprimer) l'identifiant d'un objet
+ * Action : attribuer un identifiant à un objet
  *
  * @param string|null $arg
- *     objet, id_objet et identifiant séparés par le charatère "-"
+ *     identifiant-objet-id_objet
  * @return void
  */
 function action_generer_identifiant_objet_dist($arg = null) {
-
-	if (!function_exists('maj_identifiant_objet')) {
-		include_spip('identifiants_fonctions');
-	}
 
 	if (is_null($arg)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -33,10 +29,17 @@ function action_generer_identifiant_objet_dist($arg = null) {
 
 	list($identifiant, $objet, $id_objet) = explode('-', $arg);
 	if (
-		$objet
+		$identifiant
+		and $objet
 		and $id_objet = intval($id_objet)
 	) {
-		maj_identifiant_objet($objet, $id_objet, $identifiant);
+		include_spip('action/editer_objet');
+		include_spip('base/objets');
+		$table_objet = table_objet_sql($objet);
+		$tables_identifiables = identifiants_lister_tables_identifiables();
+		$set = array('identifiant' => $identifiant);
+		if (in_array($table_objet, $tables_identifiables)) {
+			objet_modifier($objet, $id_objet, $set);
+		}
 	}
-
 }

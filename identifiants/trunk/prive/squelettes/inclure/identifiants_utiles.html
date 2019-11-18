@@ -5,10 +5,11 @@
 
 	Inclus via le pipeline affiche_gauche.
 
-	Paramètres (*obligatoire) :
-	- objet* : type d'objet
-	- id_objet* : identifiant de l'objet
-	- identifiants_utiles* : liste d'identifiants à créer *pour ce type d'objet*.
+	Paramètres :
+		**obligatoire
+		- objet** : type d'objet
+		- id_objet** : identifiant de l'objet
+		- identifiants_utiles* : liste d'identifiants à créer *pour ce type d'objet*.
 
 ]
 #SET{identifiants_utiles, #ENV{identifiants_utiles}|sinon{#REM|identifiants_utiles|table_valeur{#ENV{objet}}}|sinon{#ARRAY}}
@@ -20,7 +21,7 @@
 	<li>
 		[(#BOUTON_ACTION{
 			<:identifiant:utiles_generer_identifiant{identifiant=#VALEUR}:>,
-			[(#URL_ACTION_AUTEUR{generer_identifiant_objet,[(#VALEUR)]-[(#ENV{objet})]-[(#ENV{id_objet})],#SELF})]
+			[(#URL_ACTION_AUTEUR{attribuer_identifiant,[(#VALEUR)]-[(#ENV{objet})]-[(#ENV{id_objet})],#SELF})]
 		})]
 	</li>
 	</BOUCLE_utiles>
