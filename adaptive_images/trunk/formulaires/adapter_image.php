@@ -20,7 +20,9 @@ function formulaires_adapter_image_charger_dist($id_document,$mode){
 		'id' => $id_document,
 		'_hidden' => "<input name='id_document' value='$id_document' type='hidden' />",
 		'mode' => $mode, // pour les id dans le dom
+		'_bigup_rechercher_fichiers' => true,
 	);
+
 	$annexe = adaptive_images_variante($id_document,$mode);
 	if ($annexe){
 		$valeurs['id_annexe'] = $annexe['id_document'];
@@ -43,6 +45,26 @@ function formulaires_adapter_image_charger_dist($id_document,$mode){
 
 	return $valeurs;
 }
+
+/**
+ * @param array $args
+ * @param \Spip\Bigup\Formulaire $formulaire
+ * @return \Spip\Bigup\Formulaire
+ */
+function inc_bigup_medias_formulaire_adapter_image_dist($args, $formulaire) {
+	$formulaire->preparer_input(
+		'fichier_upload[]',
+		[
+			'multiple' => false,
+			'previsualiser' => true,
+			'input_class' => 'bigup_illustration',
+			'drop-zone-extended' => '.formulaire_adapter_image .editer_fichier',
+		]
+	);
+	$formulaire->inserer_js('bigup.adapter_image.js');
+	return $formulaire;
+}
+
 
 function formulaires_adapter_image_verifier_dist($id_document,$mode){
 	$mode = preg_replace(',\W,','',$mode);
@@ -148,4 +170,3 @@ function adaptive_images_width_from_mode($mode, &$valeurs){
 	}
 	$valeurs['_width_hr'] = 2*$valeurs['_width'];
 }
-?>
