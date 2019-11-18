@@ -160,15 +160,42 @@ function action_adapt_img_dist(){
 }
 
 /**
+ * Convertir un tableau de taille ecran, taille image en media queries
+ * #ARRAY{768px,100vw,900px,50vw,*,33vw} => (max-width: 768px) 100vw, (max-width: 900px) 50vw, 33vw
+ *
+ * @param array $sizes
+ * @return array
+ */
+function adaptive_images_convert_sizes_array($sizes) {
+	$mq = array();
+	foreach ($sizes as $screen_width => $image_width) {
+		if (is_numeric($image_width)) {
+			$image_width .= "px";
+		}
+		if ($screen_width === '*') {
+			$mq[] = $image_width;
+		}
+		else {
+			if (is_numeric($screen_width)) {
+				$screen_width .= "px";
+			}
+			$mq[] = "(max-width: {$screen_width}) {$image_width}";
+		}
+	}
+	return $mq;
+}
+
+/**
  * Fonction de base pour les filtres, ne pas utiliser directement
  * @protected
  *
  * @param $texte
  * @param $max_width_1x
+ * @param string|array $sizes
  * @param bool $background_only
  * @return mixed|string
  */
-function adaptive_images_base($texte, $max_width_1x, $background_only = false){
+function adaptive_images_base($texte, $max_width_1x, $sizes=null, $background_only = false){
 	$bkpt = null;
 	// plusieurs valeurs separees par un / : ce sont les breakpoints, max_width_1x est la derniere valeur
 	if (strpos($max_width_1x,"/")!==false){
@@ -184,9 +211,14 @@ function adaptive_images_base($texte, $max_width_1x, $background_only = false){
 	if ($max_width_1x and !intval($max_width_1x)) {
 		$max_width_1x = null;
 	}
+	// preparer le tableau de media queries pour les sizes si besoin
+	if (is_array($sizes)) {
+		$sizes = adaptive_images_convert_sizes_array($sizes);
+	}
+
 	$AdaptiveImages = SPIPAdaptiveImages::getInstance();
 	try {
-		$res = $AdaptiveImages->adaptHTMLPart($texte, $max_width_1x, $bkpt, $background_only);
+		$res = $AdaptiveImages->adaptHTMLPart($texte, $max_width_1x, $bkpt, $background_only ? true : $sizes);
 	}
 	catch (Exception $e) {
 		erreur_squelette($e->getMessage(),'SPIPAdaptiveImages:adaptHTMLPart');
@@ -250,12 +282,21 @@ function adaptive_images_preview_geometrize($image, $options) {
  * [(#TEXTE|adaptive_images{1024})]
  * ou passer la liste des breakpoints (le dernier est la largeur maxi 1x)
  * [(#TEXTE|adaptive_images{160/320/480/640/1024})]
+ * ou passer un argument de sizes pour indiquer le comportement des images de ce bloc
+ *   - au format media queries (en string)
+ *    (la taille par defaut 100vw ou 100% en dernier argument peut etre omise, elle sera ajoutee automatiquement si besoin)
+ * [(#TEXTE|adaptive_images{1024,'(min-width: 40em) 80vw, 100vw'})]
+ * [(#TEXTE|adaptive_images{1024,'(max-width: 768px) 100vw, (max-width: 900px) 50vw, 33vw'})]
+ *   - au format tableau, plus rapide a ecrire (l'unite px peut etre omise, elle est ajoutee aux nombres sans unites)
+ * [(#TEXTE|adaptive_images{1024,#ARRAY{768px,100vw,900px,50vw,*,33vw}})]
+ *
  * @param string $texte
- * @param null|int $max_width_1x
+ * @param null|int|string $max_width_1x
+ * @param null|string|array $sizes
  * @return mixed
  */
-function adaptive_images($texte, $max_width_1x=null){
-	return adaptive_images_base($texte, $max_width_1x);
+function adaptive_images($texte, $max_width_1x=null, $sizes=null){
+	return adaptive_images_base($texte, $max_width_1x, $sizes);
 }
 
 /**
@@ -267,7 +308,7 @@ function adaptive_images($texte, $max_width_1x=null){
  * @return mixed
  */
 function adaptive_images_background($texte, $max_width_1x=null, $class = '', $bgcolor=''){
-	$res = adaptive_images_base($texte, !empty($max_width_1x) ? $max_width_1x : null, true);
+	$res = adaptive_images_base($texte, !empty($max_width_1x) ? $max_width_1x : null, null, true);
 	if ($class or $bgcolor) {
 		// injecter la class sur les balises span.adapt-img-background
 		$spans = extraire_balises($res, 'span');
@@ -302,12 +343,13 @@ function adaptive_images_background($texte, $max_width_1x=null, $class = '', $bg
 
 /**
  * nommage alternatif
- * @param $texte
- * @param int $max_width_1x
+ * @param string $texte
+ * @param null|int|string $max_width_1x
+ * @param null|string|array $sizes
  * @return mixed
  */
-function adaptative_images($texte, $max_width_1x=null){
-	return adaptive_images($texte, $max_width_1x);
+function adaptative_images($texte, $max_width_1x=null, $sizes=null){
+	return adaptive_images($texte, $max_width_1x, $sizes);
 }
 
 /** Pipelines  ********************************************************************************************************/
