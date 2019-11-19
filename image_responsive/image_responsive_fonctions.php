@@ -279,7 +279,7 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 							$set = $fichiers[$i][1] . " 1x";
 							$set .= "," . $fichiers[$i][2] . " 2x";
 							$set_webp = $fichiers_webp[$i][1] . " 1x";
-							$setset_webp .= "," . $fichiers_webp[$i][2] . " 2x";
+							$set_webp .= "," . $fichiers_webp[$i][2] . " 2x";
 							$sources .= "<source srcset='$set_webp' type='image/webp'>";
 							$sources .= "<source srcset='$set' type='$mime'>";
 							
@@ -309,7 +309,7 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 						$set .= "," . $fichiers[$i][2] . " 2x";
 						if (_IMAGE_WEBP) {
 							$set_webp = $fichiers_webp[$i][1] . " 1x";
-							$setset_webp .= "," . $fichiers_webp[$i][2] . " 2x";
+							$set_webp .= "," . $fichiers_webp[$i][2] . " 2x";
 						}
 
 						if (strlen($m) > 0) {
