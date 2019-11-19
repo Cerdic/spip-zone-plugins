@@ -22,7 +22,7 @@ Aucun article archiv&eacute;s
 #ANCRE_PAGINATION
 <ul>
 <BOUCLE_articles_pub_archives(ARTICLES){archive}{par id_article}{pagination 20}>
-<li>#ID_ARTICLE - #TITRE[(#EST_ARCHIVE|=={1}|oui) (Archive)]</li>
+<li>#ID_ARTICLE - #STATUT - #TITRE[(#EST_ARCHIVE|=={1}|oui) (Archive)]</li>
 </BOUCLE_articles_pub_archives>
 </ul>
 <div class="pagination">#PAGINATION</div>
@@ -37,7 +37,7 @@ Aucun article publié et archiv&eacute;
 #ANCRE_PAGINATION
 <ul>
 <BOUCLE_articles_non_archives(ARTICLES){!archive}{par id_article}{pagination 20}>
-<li>#ID_ARTICLE - #TITRE[(#EST_ARCHIVE|=={0}|oui) (Non archive)]</li>
+<li>#ID_ARTICLE - #STATUT - #TITRE[(#EST_ARCHIVE|=={0}|oui) (Non archive)]</li>
 </BOUCLE_articles_non_archives>
 </ul>
 <div class="pagination">#PAGINATION</div>
@@ -52,10 +52,42 @@ Tout est archiv&eacute;
 #ANCRE_PAGINATION
 <ul>
 <BOUCLE_articles_publies(ARTICLES){est_archive>=0}{par id_article}{pagination 20}>
-	<li>#ID_ARTICLE - #TITRE[ (#EST_ARCHIVE|?{\(Archive\), \(Non archive\)})]</li>
+	<li>#ID_ARTICLE - #STATUT - #TITRE[ (#EST_ARCHIVE|?{\(Archive\), \(Non archive\)})]</li>
 </BOUCLE_articles_publies>
 </ul>
 <div class="pagination">#PAGINATION</div>
 </B_articles_publies>
 Aucun article publi&eacute;
 <//B_articles_publies>
+
+
+<h3>Articles publi&eacute;s avec condition d'archivage variable {id_?}</h3>
+
+<B_articles_variables>
+(#GRAND_TOTAL)
+#ANCRE_PAGINATION
+<ul>
+<BOUCLE_articles_variables(ARTICLES){id_?}{par id_article}{pagination 20}>
+	<li>#ID_ARTICLE - #STATUT - #TITRE[ (#EST_ARCHIVE|?{\(Archive\), \(Non archive\)})]</li>
+</BOUCLE_articles_variables>
+</ul>
+<div class="pagination">#PAGINATION</div>
+</B_articles_variables>
+Aucun article publi&eacute;
+<//B_articles_variables>
+
+
+<h3>Articles publi&eacute;s avec condition d'archivage conditionnelle {est_archive?}</h3>
+
+<B_articles_conditionnels>
+(#GRAND_TOTAL)
+#ANCRE_PAGINATION
+<ul>
+<BOUCLE_articles_conditionnels(ARTICLES){est_archive?}{par id_article}{pagination 20}>
+	<li>#ID_ARTICLE - #STATUT - #TITRE[ (#EST_ARCHIVE|?{\(Archive\), \(Non archive\)})]</li>
+</BOUCLE_articles_conditionnels>
+</ul>
+<div class="pagination">#PAGINATION</div>
+</B_articles_conditionnels>
+Aucun article publi&eacute;
+<//B_articles_conditionnels>

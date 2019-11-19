@@ -141,9 +141,9 @@ function archobjet_boite_infos($flux) {
 }
 /**
  * Filtrer les boucles pour ne pas afficher les objets archivés par défaut sauf si un critère
- * achive explicite ou conditionnel existe.
+ * d'archivage explicite ou conditionnel existe.
  *
- * @pipeline pre_boucle
+ * @pipeline post_boucle
  *
  * @param Boucle $boucle
  *        Objet boucle de SPIP correspond à la boucle en cours de traitement.
@@ -162,48 +162,50 @@ function archobjet_post_boucle($boucle){
 		include_spip('inc/config');
 		$tables_autorisees = lire_config('archobjet/objets_archivables', array());
 		if (in_array($table, $tables_autorisees)) {
+			// On cherche un critère d'archivage explicite parmi :
+			// - {est_archive = 0} ou {est_archivee = 1}
+			// - {archive} ou {!archive}
+			// Si il existe un tel critère, alors on n'exclut pas les archives par défaut, on laisse le traitement
+			// du critère explicite.
 			$critere_archive_explicite = false;
-			// On boucle sur chaque condition where et on cherche si un critère est_archive conditionnel
-			// existe : dans ce cas il ne faut pas rajouter le critère d'exclusion des archives.
-			$conditions = $boucle->where;
-			foreach ($conditions as $_cle => $_condition) {
+			$criteres = $boucle->criteres;
+			foreach ($criteres as $_critere) {
 				if (
-					(strpos($_condition[0], '?') !== false)
-					and (strpos($_condition[1], 'est_archive') !== false)
+					($_critere->op == 'archive')
+					or (!empty($_critere->param[0][0]->texte)
+						and ($_critere->param[0][0]->texte == 'est_archive')
+					)
 				) {
-					// On met à jour cette condition pour que l'absence de est_archive dans l'env
-					// implique l'ajout de est_archive=1.
-					$where_est_article[0] = $_condition[0];
-					$where_est_article[1] = $_condition[1];
-					$where_est_article[2] = array("'='", "'est_archive'", 0);
-					$where_est_article[3] = $_condition[3][3];
-					$boucle->where[$_cle] = $where_est_article;
 					$critere_archive_explicite = true;
 					break;
 				}
 			}
 
-			// On boucle sur chaque critère et on cherche les critères :
-			// - {est_archive = 0} ou {est_archivee = 1}
-			// - {archive} ou {!archive}
-			// et on sort au premier trouvé.
+			// Si on a trouvé aucun critère explicite, il se peut qu'il y ait un critère conditionnel du type {id_?} :
+			// dans ce cas, la condition a déjà été calculée mais pas de la bonne façon.
+			// -> Il faut donc la corriger et ne pas rajouter la condition par défaut.
 			if (!$critere_archive_explicite) {
-				$criteres = $boucle->criteres;
-				foreach ($criteres as $_critere) {
+				$conditions = $boucle->where;
+				foreach ($conditions as $_cle => $_condition) {
 					if (
-						($_critere->op == 'archive')
-						or (!empty($_critere->param[0][0]->texte)
-							and ($_critere->param[0][0]->texte == 'est_archive')
-						)
+						(strpos($_condition[0], '?') !== false)
+						and (strpos($_condition[1], 'est_archive') !== false)
 					) {
+						// On met à jour cette condition pour que l'absence de est_archive dans l'env
+						// implique l'ajout de est_archive=0.
+						// TODO : faire évoluer le core pour calculer cette condition avec une fonction spéficique.
+						$where_est_article[0] = $_condition[0];
+						$where_est_article[1] = $_condition[1];
+						$where_est_article[2] = array("'='", "'est_archive'", 0);
+						$where_est_article[3] = $_condition[3][3];
+						$boucle->where[$_cle] = $where_est_article;
 						$critere_archive_explicite = true;
 						break;
 					}
 				}
 
-				// Aucun critère d'archivage explicite, on peut filtrer la boucle en excluant les archives.
+				// Aucun critère d'archivage explicite ni conditionnel : on peut filtrer la boucle en excluant les archives.
 				if (!$critere_archive_explicite) {
-					// On vérifie aussi si on a pas passé est_archive via le modificateur id_
 					$boucle->where[] = array("'='", "'est_archive'", 0);
 				}
 			}
