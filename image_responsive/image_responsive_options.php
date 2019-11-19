@@ -258,7 +258,7 @@ function retour_image_responsive($img, $taille, $dpr, $xsendfile, $retour="http"
 		$dest = $base.$dest.".".$terminaison;
 		if ($format == "webp") $dest .= ".webp";
 
-		if (file_exists($dest)) {
+		if ($retour == "http" && file_exists($dest)) {
 			if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && 
 				strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) >= filemtime($dest))
 			{
@@ -289,7 +289,6 @@ function retour_image_responsive($img, $taille, $dpr, $xsendfile, $retour="http"
 			copy($img_new, $dest);
 			if ($img_new != $img) unlink ($img_new);
 		}
-
 		if($retour == "http") {
 			$extension = str_replace("jpg", "jpeg", $terminaison);
 			$expires = 60*60*24*14;
