@@ -1,9 +1,9 @@
 <paquet
 	prefix="adaptive_images"
 	categorie="multimedia"
-	version="1.15.0"
+	version="1.16.0"
 	etat="stable"
-	compatibilite="[3.0.0;3.2.*]"
+	compatibilite="[3.0.0;3.3.*]"
 	logo="prive/themes/spip/images/adaptive_images-32.png"
 	documentation="https://contrib.spip.net/4458"
 >
@@ -11,11 +11,14 @@
 	<nom>Adaptive Images</nom>
 
 	<auteur lien='http://www.nursit.com/Cedric-Morin'>Cédric</auteur>
+	<credit lien="https://www.flaticon.com/authors/smashicons">Icon SVG made by Smashicons</credit>
 
 	<licence>GNU/GPL</licence>
 	<pipeline nom="affiche_milieu" />
 	<pipeline nom="recuperer_fond" />
 	<pipeline nom="affichage_final" />
 	<pipeline nom="insert_head" />
+
+	<menu nom="configurer_adaptive_images" titre="adaptive_images:adaptive_images_titre" parent="menu_squelette" icone="images/adaptive_images-16.png" />
 
 </paquet>

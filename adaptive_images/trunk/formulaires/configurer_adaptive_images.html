@@ -9,7 +9,7 @@
 		#SET{fl,adaptive_images}
 		<div class="editer-groupe">
 			#SET{name,markup_method}#SET{obli,''}#SET{defaut,'3layers'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<div class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]
