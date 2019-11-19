@@ -29,13 +29,16 @@ function formulaires_adapter_image_charger_dist($id_document,$mode){
 		$annexe['type_document'] = sql_getfetsel('titre as type_document','spip_types_documents','extension='.sql_quote($annexe['extension']));
 
 		// verifier que les proportions de la version mobile et de la version desktop sont les memes
-		$h2 = intval(round($annexe['largeur']*$doc['hauteur']/$doc['largeur']));
-		if (abs(intval($h2-$annexe['hauteur']))>1){
-			$size1 = $annexe['largeur']." x {$h2} pixels";
-			$w2 = intval(round($annexe['hauteur']*$doc['largeur']/$doc['hauteur']));
-			$size2 = "{$w2} x ".$annexe['hauteur']." pixels";
-			$valeurs['_warning_ratio'] = _T('adaptive_images:warning_ratio_mobileview',array('size1'=>$size1,'size2'=>$size2));
-			$valeurs['_warning_ratio'] .= " <input type='submit' name='recadrer' value='".attribut_html(_T('adaptive_images:bouton_recadrer'))."' />";
+		// si on utilise la methode 3 couches
+		if (lire_config('adaptive_images/markup_method','3layers') === '3layers') {
+			$h2 = intval(round($annexe['largeur']*$doc['hauteur']/$doc['largeur']));
+			if (abs(intval($h2-$annexe['hauteur']))>1){
+				$size1 = $annexe['largeur']." x {$h2} pixels";
+				$w2 = intval(round($annexe['hauteur']*$doc['largeur']/$doc['hauteur']));
+				$size2 = "{$w2} x ".$annexe['hauteur']." pixels";
+				$valeurs['_warning_ratio'] = _T('adaptive_images:warning_ratio_mobileview',array('size1'=>$size1,'size2'=>$size2));
+				$valeurs['_warning_ratio'] .= " <input type='submit' name='recadrer' value='".attribut_html(_T('adaptive_images:bouton_recadrer'))."' />";
+			}
 		}
 	}
 	$valeurs['annexe'] = $annexe;
