@@ -1,7 +1,7 @@
 <paquet
 	prefix="metasplus"
 	categorie="divers"
-	version="2.3.1"
+	version="2.3.2"
 	schema="1.0.0"
 	etat="stable"
 	compatibilite="[3.1.0;3.2.*]"
@@ -20,4 +20,6 @@
 	<pipeline nom="post_edition" inclure="metasplus_pipelines.php" />
 	<pipeline nom="boite_infos" inclure="metasplus_pipelines.php" />
 	<pipeline nom="autoriser" inclure="metasplus_autorisations.php" />
+
+	<utilise nom="composition" compatibilite="[3.7.0;[" />
 </paquet>

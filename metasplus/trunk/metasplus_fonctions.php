@@ -88,13 +88,14 @@ function metasplus_selectionner_fond($contexte) {
 	$fond_page        = $racine . $type_page;
 	$fond_composition = '';
 
-	if (
+  if (
 		test_plugin_actif('compositions')
 		and $objet
 		and $id_objet
-		and $composition = compositions_determiner($objet, $id_objet)
 	) {
-		$fond_composition = $fond_page . '-' . $composition;
+		include_spip('compositions_fonctions');
+		if($composition = compositions_determiner($objet, $id_objet))
+			$fond_composition = $fond_page . '-' . $composition;
 	}
 
 	if ($composition and find_in_path($fond_composition.'.html')) {
