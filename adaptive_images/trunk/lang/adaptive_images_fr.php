@@ -54,7 +54,7 @@ Evite de générer toutes les images d\'un coup ce qui peut produire des erreurs
 
 	'label_markup_method' => 'Markup généré :',
 	'label_markup_method_3layers' => 'Méthode des 3 couches (large support)',
-	'label_markup_method_srcset' => '<tt>srcset</tt> + <tt>&lt;source></tt>',
+	'label_markup_method_srcset' => '<tt>srcset</tt> + <tt>&lt;source></tt> (HTML5)',
 
 );
 
