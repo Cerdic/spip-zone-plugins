@@ -140,7 +140,8 @@ function archobjet_boite_infos($flux) {
 	return $flux;
 }
 /**
- * Filtrer les boucles pour ne pas afficher les objets archivés.
+ * Filtrer les boucles pour ne pas afficher les objets archivés par défaut sauf si un critère
+ * achive explicite ou conditionnel existe.
  *
  * @pipeline pre_boucle
  *
@@ -150,7 +151,7 @@ function archobjet_boite_infos($flux) {
  * @return Boucle
  *         La boucle dont la condition `where` a été modifiée ou pas.
  */
-function archobjet_pre_boucle($boucle){
+function archobjet_post_boucle($boucle){
 
 	// Initialisation de la table sur laquelle porte le critère
 	include_spip('base/objets');
@@ -161,30 +162,73 @@ function archobjet_pre_boucle($boucle){
 		include_spip('inc/config');
 		$tables_autorisees = lire_config('archobjet/objets_archivables', array());
 		if (in_array($table, $tables_autorisees)) {
-			// On boucle sur chaque critère et on cherche les critères :
-			// - {est_article = 0} ou {est_article = 1}
-			// - {archive} ou {!archive}
-			// et on sort au premier trouvé.
-			$criteres = $boucle->criteres;
 			$critere_archive_explicite = false;
-			foreach($criteres as $_critere){
+			// On boucle sur chaque condition where et on cherche si un critère est_archive conditionnel
+			// existe : dans ce cas il ne faut pas rajouter le critère d'exclusion des archives.
+			$conditions = $boucle->where;
+			foreach ($conditions as $_cle => $_condition) {
 				if (
-					($_critere->op == 'archive')
-					or (!empty($_critere->param[0][0]->texte)
-						and ($_critere->param[0][0]->texte == 'est_archive')
-					)
+					(strpos($_condition[0], '?') !== false)
+					and (strpos($_condition[1], 'est_archive') !== false)
 				) {
+					// On met à jour cette condition pour que l'absence de est_archive dans l'env
+					// implique l'ajout de est_archive=1.
+					$where_est_article[0] = $_condition[0];
+					$where_est_article[1] = $_condition[1];
+					$where_est_article[2] = array("'='", "'est_archive'", 0);
+					$where_est_article[3] = $_condition[3][3];
+					$boucle->where[$_cle] = $where_est_article;
 					$critere_archive_explicite = true;
 					break;
 				}
 			}
 
-			// Aucun critère d'archivage explicite, on peut filtrer la boucle en excluant les archives.
+			// On boucle sur chaque critère et on cherche les critères :
+			// - {est_archive = 0} ou {est_archivee = 1}
+			// - {archive} ou {!archive}
+			// et on sort au premier trouvé.
 			if (!$critere_archive_explicite) {
-				$boucle->where[] = array("'='", "'est_archive'", 0);
+				$criteres = $boucle->criteres;
+				foreach ($criteres as $_critere) {
+					if (
+						($_critere->op == 'archive')
+						or (!empty($_critere->param[0][0]->texte)
+							and ($_critere->param[0][0]->texte == 'est_archive')
+						)
+					) {
+						$critere_archive_explicite = true;
+						break;
+					}
+				}
+
+				// Aucun critère d'archivage explicite, on peut filtrer la boucle en excluant les archives.
+				if (!$critere_archive_explicite) {
+					// On vérifie aussi si on a pas passé est_archive via le modificateur id_
+					$boucle->where[] = array("'='", "'est_archive'", 0);
+				}
 			}
 		}
 	}
 
 	return $boucle;
 }
+
+function archobjet_lister_champs_selection_conditionnelle($flux) {
+
+	if (isset($flux['args']['table'])
+		and $flux['args']['table']
+	) {
+		$table = $flux['args']['table'];
+
+		// Vérifier que la table fait bien partie de la liste autorisée à utiliser l'archivage.
+		include_spip('inc/config');
+		$tables_autorisees = lire_config('archobjet/objets_archivables', array());
+		if (in_array($table, $tables_autorisees)) {
+			$flux['data'][] = 'est_archive';
+		}
+	}
+
+	return $flux;
+}
+
+

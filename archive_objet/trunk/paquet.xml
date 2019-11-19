@@ -20,7 +20,10 @@
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/archobjet_declarations.php" />
 	<pipeline nom="autoriser" inclure="archobjet_pipelines.php" />
-	<pipeline nom="pre_boucle" inclure="archobjet_pipelines.php" />
+	<pipeline nom="post_boucle" inclure="archobjet_pipelines.php" />
+	<pipeline nom="lister_champs_selection_conditionnelle" inclure="archobjet_pipelines.php" />
 	<pipeline nom="boite_infos" inclure="archobjet_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="archobjet_pipelines.php" />
+
+	<menu nom="objets_archives" titre="archobjet:objets_archives_titre" parent="menu_administration" icone="images/archive-16.png" action="objets_archives" />
 </paquet>

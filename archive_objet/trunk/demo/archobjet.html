@@ -51,7 +51,7 @@ Tout est archiv&eacute;
 (#GRAND_TOTAL)
 #ANCRE_PAGINATION
 <ul>
-<BOUCLE_articles_publies(ARTICLES){par id_article}{pagination 20}>
+<BOUCLE_articles_publies(ARTICLES){est_archive>=0}{par id_article}{pagination 20}>
 	<li>#ID_ARTICLE - #TITRE[ (#EST_ARCHIVE|?{\(Archive\), \(Non archive\)})]</li>
 </BOUCLE_articles_publies>
 </ul>
