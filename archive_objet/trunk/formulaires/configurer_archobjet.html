@@ -12,8 +12,10 @@
 				<label><:archobjet:configuration_objets_archivables_label:></label>[
 				<span class="erreur_message">(#GET{erreurs})</span>
 				]
-				#INCLURE{fond=formulaires/inc-choisir-objets,name=#GET{name},
-					selected=#ENV**{#GET{name}}}
+				#INCLURE{fond=formulaires/inc-choisir-objets,
+					name=#GET{name},
+					selected=#ENV**{#GET{name}}
+				}
 			</div>
 
 			#SET{name, consigner_desarchivage}#SET{obli, ''}#SET{defaut, 0}#SET{erreurs, #ENV**{erreurs/#GET{name}}}

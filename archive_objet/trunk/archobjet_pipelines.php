@@ -156,6 +156,7 @@ function archobjet_post_boucle($boucle){
 	// Initialisation de la table sur laquelle porte le critère
 	include_spip('base/objets');
 	$table = table_objet_sql($boucle->id_table);
+	$id_table = id_table_objet($boucle->id_table);
 
 	if ($table) {
 		// Vérifier que la table fait bien partie de la liste autorisée à utiliser l'archivage.
@@ -165,15 +166,19 @@ function archobjet_post_boucle($boucle){
 			// On cherche un critère d'archivage explicite parmi :
 			// - {est_archive = 0} ou {est_archivee = 1}
 			// - {archive} ou {!archive}
-			// Si il existe un tel critère, alors on n'exclut pas les archives par défaut, on laisse le traitement
-			// du critère explicite.
+			// Ou un critère explicite sur l'id de la table comme {id_article} ou {id_article=xxx}
+			// --> Si il existe un tel critère, alors on n'exclut pas les archives par défaut.
 			$critere_archive_explicite = false;
 			$criteres = $boucle->criteres;
 			foreach ($criteres as $_critere) {
 				if (
 					($_critere->op == 'archive')
+					or ($_critere->op == $id_table)
 					or (!empty($_critere->param[0][0]->texte)
-						and ($_critere->param[0][0]->texte == 'est_archive')
+						and (
+							($_critere->param[0][0]->texte == 'est_archive')
+							or ($_critere->param[0][0]->texte == $id_table)
+						)
 					)
 				) {
 					$critere_archive_explicite = true;
