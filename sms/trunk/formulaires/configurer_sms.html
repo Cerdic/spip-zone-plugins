@@ -31,13 +31,9 @@ $(function(){
 		<ul class="">
 			<li class="fieldset">
 				<h3 class="legend"><:sms:choix_prestataire:></h3>
-				<ul>
-					<li class="editer">
-						<input type="radio" name="prestataire" id="aucun" value="" [(#ENV{prestataire}|=={""}|oui) checked]><:sms:aucun:>
-						<input type="radio" name="prestataire" id="smsfactor" value="smsfactor" [(#ENV{prestataire}|=={smsfactor}|oui) checked]>SMS Factor
-						<input type="radio" name="prestataire" id="octopush" value="octopush" [(#ENV{prestataire}|=={octopush}|oui) checked]>Octopush
-					</li>
-				</ul>
+				<input type="radio" name="prestataire" id="aucun" value="" [(#ENV{prestataire}|=={""}|oui) checked]><label for="aucun"><:sms:aucun:></label>
+				<input type="radio" name="prestataire" id="smsfactor" value="smsfactor" [(#ENV{prestataire}|=={smsfactor}|oui) checked]><label for="smsfactor">SMS Factor</label>
+				<input type="radio" name="prestataire" id="octopush" value="octopush" [(#ENV{prestataire}|=={octopush}|oui) checked]><label for="octopush">Octopush</label>
 			</li>
 
 			<li class="fieldset smsfactor">
