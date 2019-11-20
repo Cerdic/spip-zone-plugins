@@ -87,6 +87,16 @@ function filtre_generer_url_commande_facture_dist($id_commande) {
 function commande_totalise_taxes($prix_ht = null, $prix_ttc = null) {
 	static $taxes = array();
 
+	if (is_null($prix_ht) or !strlen($prix_ht)){
+		$return = $taxes;
+		// par defaut on reset le tableau mais si on a a besoin plusieurs fois,
+		// possible de le garder en passant n'importe quoi non vide en second argument
+		if (is_null($prix_ttc) or !strlen($prix_ttc)) {
+			$taxes = array();
+		}
+		return $return;
+	}
+
 	if ($prix_ht
 		and $prix_ttc
 		and $prix_ht = floatval(str_replace(',','.',$prix_ht))
@@ -100,9 +110,6 @@ function commande_totalise_taxes($prix_ht = null, $prix_ttc = null) {
 		$taxes[$taux] += ($prix_ttc - $prix_ht);
 	}
 
-	if (is_null($prix_ht) or !strlen($prix_ht)){
-		return $taxes;
-	}
 	return '';
 }
 
