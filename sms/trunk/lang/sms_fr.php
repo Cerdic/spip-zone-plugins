@@ -17,6 +17,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choix_prestataire' => 'Choix du prestataire',
 	'cle_api' => 'Clé API',
 
+	//D
+	'date_debut' => 'Date de début',
+	'date_fin' => 'Date de fin',
+
 	// E
 	'expediteur' => 'Expéditeur',
 	'explication_expediteur' => 'Personnalisation de l’expéditeur avec du texte (11 caractères Max.) N° de Téléphone non pris en charge en France.',
@@ -33,10 +37,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'reel' => 'Réel',
+	'recup_nbr_sms' => 'Nombre de SMS',
 
 	// S
 	'simulation' => 'Simulation',
 	'sms_titre' => 'SMS SPIP',
+	'sms' => 'SMS',
 
 	// T
 	'titre_page_configurer_sms' => 'Configuration de l’API SMS'

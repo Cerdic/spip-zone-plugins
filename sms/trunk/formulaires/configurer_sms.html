@@ -1,3 +1,9 @@
+<style type="text/css" media="screen">
+	.nbr_sms > div{
+		display: inline;
+		font-weight: bold;
+	}
+</style>
 <script type="text/javascript">
 $(function(){
 	[(#ENV{prestataire}|=={smsfactor}|non)$( ".smsfactor" ).addClass( "none" );]
@@ -14,6 +20,18 @@ $(function(){
 		$( ".smsfactor" ).addClass( "none" );
 		$( ".octopush" ).removeClass( "none" );
 	});
+	$('.selection_dates .date').on('change', function(){
+		var date_debut = $('.date_debut').val();
+		var date_fin = $('.date_fin').val();
+		if (date_debut && date_fin) {
+			ajaxReload('calculer_nbr_sms', {
+				args:{
+					date_debut: date_debut,
+					date_fin: date_fin
+				}
+			});
+		}
+	});
 });
 </script>
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM">
@@ -28,59 +46,74 @@ $(function(){
 
 		<input type="hidden" name="_meta_casier" value="sms" />
 
-		<ul class="">
-			<li class="fieldset">
+		<div class="">
+			<div class="fieldset">
 				<h3 class="legend"><:sms:choix_prestataire:></h3>
 				<input type="radio" name="prestataire" id="aucun" value="" [(#ENV{prestataire}|=={""}|oui) checked]><label for="aucun"><:sms:aucun:></label>
 				<input type="radio" name="prestataire" id="smsfactor" value="smsfactor" [(#ENV{prestataire}|=={smsfactor}|oui) checked]><label for="smsfactor">SMS Factor</label>
 				<input type="radio" name="prestataire" id="octopush" value="octopush" [(#ENV{prestataire}|=={octopush}|oui) checked]><label for="octopush">Octopush</label>
-			</li>
+			</div>
 
-			<li class="fieldset smsfactor">
+			<div class="fieldset smsfactor">
 				<h3 class="legend">SMS Factor</h3>
 				<p class="explication"><:sms:explication_smsfactor:></p>
-				<ul>
-					<li class="editer">
+				<div>
+					<div class="editer">
 						<label for="login_smsfactor"><:sms:login:></label>
 						<input type="text" name="login_smsfactor" value="[(#ENV{login_smsfactor})]" placeholder="mon_mail@spip.net" size="58">
-					</li>
-					<li class="editer">
+					</div>
+					<div class="editer">
 						<label for="login_smsfactor"><:sms:mot_de_passe:></label>
 						<input type="password" name="mdp_smsfactor" value="[(#ENV{mdp_smsfactor})]" size="58">
-					</li>
-					<li class="editer">
+					</div>
+					<div class="editer">
 						<p class="explication"><:sms:explication_expediteur:></p>
 						<label for="expediteur_smsfactor"><:sms:expediteur:></label>
 						<input type="text" name="expediteur_smsfactor" value="[(#ENV{expediteur_smsfactor})]" size="11">
-					</li>
-				</ul>
-			</li>
-			<li class="fieldset octopush">
+					</div>
+				</div>
+				<div class="explication nbr_sms">
+					<:sms:recup_nbr_sms:> :
+					#INCLURE{fond=inclure/calculer_nbr_sms,env,ajax=calculer_nbr_sms}
+				</div>
+				<div class="selection_dates">
+					<div class="editer">
+						<label for="date_debut"> <:sms:date_debut:> </label>
+						<input class="date_debut date" type="date" id="date_debut">
+					</div>
+					<div class="editer">
+						<label for="date_fin"> <:sms:date_fin:> </label>
+						<input class="date_fin date" type="date" id="date_fin">
+					</div>
+				</div>
+			</div>
+			<div class="fieldset octopush">
 				<h3 class="legend">Octopush</h3>
 				<p class="explication"><INCLURE{fond=inclure/octopush_balance} /></p>
-				<ul>
-					<li class="editer">
+				<div>
+					<div class="editer">
 						<label for="login_octopush"><:sms:login:></label>
 						<input type="text" name="login_octopush" value="[(#ENV{login_octopush})]" placeholder="mon_mail@spip.net" size="58">
-					</li>
-					<li class="editer">
+					</div>
+					<div class="editer">
 						<label for="login_octopush"><:sms:cle_api:></label>
 						<input type="password" name="cle_api_octopush" value="[(#ENV{cle_api_octopush})]" size="58">
-					</li>
-					<li class="editer">
+					</div>
+					<div class="editer">
 						<p class="explication"><:sms:explication_expediteur:></p>
 						<label for="expediteur_octopush"><:sms:expediteur:></label>
 						<input type="text" name="expediteur_octopush" value="[(#ENV{expediteur_octopush,#NOM_SITE_SPIP})]" size="11">
-					</li>
-					<li class="editer">
+					</div>
+					<div class="editer">
 						<label for="mode_octopush"><:sms:mode_octopush:></label>
 						<p class="explication"><:sms:explication_mode_octopush:></p>
 						<input type="radio" name="mode_octopush" id="real" value="real" [(#ENV{mode_octopush}|=={real}|ou{#ENV{mode_octopush}|=={""}}|oui) checked]><:sms:reel:>
 						<input type="radio" name="mode_octopush" id="simu" value="simu" [(#ENV{mode_octopush}|=={simu}|oui) checked]><:sms:simulation:>
-					</li>
-				</ul>
-			</li>
+					</div>
+				</div>
+			</div>
+		</div>
 
-		<p class="boutons"> <input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+		<div class="boutons"> <input type="submit" class="submit" value="<:bouton_enregistrer:>" /></div>
 	</form>
 </div>

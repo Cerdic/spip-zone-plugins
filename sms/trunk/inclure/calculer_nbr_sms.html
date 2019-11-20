@@ -1,0 +1,4 @@
+[(#AUTORISER{calculer,texto}|sinon_interdire_acces)]
+<BOUCLE_nbr_sms(SMS_LOGS){date >= #ENV{date_debut}}{date<=#ENV{date_fin}}>
+	#TOTAL_BOUCLE <:sms:sms:>
+</BOUCLE_nbr_sms>
