@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choix_prestataire' => 'Choix du prestataire',
 	'cle_api' => 'Clé API',
 
-	//D
+	// D
 	'date_debut' => 'Date de début',
 	'date_fin' => 'Date de fin',
 
@@ -36,13 +36,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mot_de_passe' => 'Mot de passe',
 
 	// R
-	'reel' => 'Réel',
 	'recup_nbr_sms' => 'Nombre de SMS',
+	'reel' => 'Réel',
 
 	// S
 	'simulation' => 'Simulation',
-	'sms_titre' => 'SMS SPIP',
 	'sms' => 'SMS',
+	'sms_titre' => 'SMS SPIP',
 
 	// T
 	'titre_page_configurer_sms' => 'Configuration de l’API SMS'
