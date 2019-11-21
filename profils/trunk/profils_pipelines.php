@@ -56,14 +56,36 @@ function profils_formulaire_saisies($flux) {
 }
 
 /**
- * Ajoute les champs au formulaire d'inscription
+ * Ajoute les champs au formulaire d'inscription et l'édition du profil principal d'un auteur
  *
  * @pipeline formulaire_fond
  * @param  array $flux Données du pipeline
  * @return array       Données du pipeline
  */
 function profils_formulaire_fond($flux) {
+	include_spip('inc/autoriser');
+	
 	if (
+		$flux['args']['form'] == 'editer_auteur'
+		and autoriser('modifierprofil', 'auteur', $flux['args']['contexte']['id_auteur'])
+	) {
+		$contexte = array_merge(
+			$flux['args']['contexte'],
+			array(
+				'type_saisie'=>'profils',
+				'nom'=>'id_profil',
+				'label' => _T('profil:titre_profil'),
+				'valeur'=>$flux['args']['contexte']['id_profil']
+			)
+		);
+		$saisie = recuperer_fond('saisies/_base', $contexte);
+		
+		if (preg_match(",<(li|div)[^>]*editer_email[^>]*>.*?</\\1>,is", $flux['data'], $m)) {
+			$p = strpos($flux['data'], $m[0]) + strlen($m[0]);
+			$flux['data'] = substr_replace($flux['data'], $saisie, $p, 0);
+		}
+	}
+	elseif (
 		$flux['args']['form'] == 'inscription'
 		and $saisies = $flux['args']['contexte']['_saisies']
 	) {
