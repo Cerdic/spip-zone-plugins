@@ -309,7 +309,44 @@ function profils_formulaire_traiter($flux) {
 }
 
 /**
- * Ajouter la liste des comptes d'un profil
+ * Ajoute le profil principal sur la page de l'utilisateur
+ * 
+ * @pipeline boite_infos
+ * @param $flux
+ * @return mixed
+ */
+function profils_boite_infos($flux) {
+	// S'il y a un profil associé
+	if (
+		$flux['args']['type']=='auteur'
+		and $id_auteur = intval($flux['args']['id'])
+		and $id_profil = sql_getfetsel('id_profil', 'spip_auteurs', 'id_auteur = '.$id_auteur)
+	) {
+		include_spip('inc/presentation');
+		
+		$html = icone_horizontale(
+			generer_info_entite($id_profil, 'profil', 'titre'),
+			generer_url_entite($id_profil, 'profil'),
+			'profil-24'
+		);
+		
+		// On l'ajoute au début du statut (deuxième paragraphe)
+		if (
+			$p = strpos($flux['data'], '</p>')
+			and $p = strpos($flux['data'], '<p>', $p)
+		) {
+			$flux['data'] = substr_replace($flux['data'], $html , $p, 0);
+		}
+		else {
+			$flux['data'] .= $html;
+		}
+	}
+	
+	return $flux;
+}
+
+/**
+ * Ajouter les formulaires d'import export
  *
  * @pipeline affiche_enfants
  * @param  array $flux Données du pipeline
