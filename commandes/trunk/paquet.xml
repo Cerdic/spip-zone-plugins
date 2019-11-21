@@ -1,7 +1,7 @@
 <paquet
 	prefix="commandes"
 	categorie="divers"
-	version="1.15.10"
+	version="1.15.11"
 	schema="0.7.9"
 	etat="stable"
 	compatibilite="[3.0.5;3.2.*]"
@@ -12,7 +12,7 @@
 	<auteur lien="http://www.cym.fr">Ateliers CYM</auteur>
 	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
 	<auteur lien="http://magraine.net">Matthieu Marcillaud</auteur>
-	<auteur lien="http://bravecassine.com">Charles Razack</auteur>
+	<auteur lien="https://bravecassine.com">Charles Razack</auteur>
 	<auteur lien="http://www.elastick.net">Anne-lise Martenot</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>

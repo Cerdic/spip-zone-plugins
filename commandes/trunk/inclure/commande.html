@@ -7,7 +7,7 @@
 	#SET{details, #GET{details}|push{#ARRAY{
 		objet,#OBJET,
 		id_objet,#ID_OBJET,
-		descriptif,#QUANTITE|commandes_afficher_quantite_descriptif|concat{#DESCRIPTIF*|supprimer_numero},
+		descriptif,#QUANTITE|commandes_afficher_quantite_descriptif|concat{#DESCRIPTIF|ptobr|supprimer_numero},
 		quantite, #QUANTITE,
 		prix, #PRIX*,
     prix_ht, #PRIX_HT*}}}
