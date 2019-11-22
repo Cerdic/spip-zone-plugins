@@ -40,10 +40,6 @@ function choix_selon ($test, $sioui, $sinon) {
 // À mieux tester et étendre en prenant autrement le pb
 //
 function reinjecte_expression_compilee($expr_org) {
-	if (isset($_GET['debug'])) {
-		echo "reinjecte_expression_compilee reçoit : <pre style='display: inline'>$expr_org </pre>";
-	}
-
 	$expr = $expr_org;
 	// #GET{aa} est implémenté par un appel à table_valeur
 	// On traduit en appels de tableau php
