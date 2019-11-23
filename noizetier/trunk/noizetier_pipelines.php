@@ -460,6 +460,9 @@ function noizetier_formulaire_traiter($flux) {
 				'$(".noisettes-cfg").ajaxReload();' .
 			'});' .
 			'</script>';
+		if (!isset($flux['message_ok'])) {
+			$flux['message_ok'] = '';
+		}
 		$flux['message_ok'] .= $js;
 	}
 	return $flux;
