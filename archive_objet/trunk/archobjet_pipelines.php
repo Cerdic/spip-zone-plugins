@@ -197,12 +197,12 @@ function archobjet_post_boucle($boucle){
 					) {
 						// On met à jour cette condition pour que l'absence de est_archive dans l'env
 						// implique l'ajout de est_archive=0.
-						// TODO : faire évoluer le core pour calculer cette condition avec une fonction spéficique.
-//						$where_est_article[0] = $_condition[0];
-//						$where_est_article[1] = $_condition[1];
-//						$where_est_article[2] = array("'='", "'est_archive'", 0);
-//						$where_est_article[3] = $_condition[3][3];
-//						$boucle->where[$_cle] = $where_est_article;
+						// TODO : tant que le core n'accepte pas la fonction generer_where_est_article il faut bidouiller.
+						$where_est_article[0] = $_condition[0];
+						$where_est_article[1] = $_condition[1];
+						$where_est_article[2] = array("'='", "'est_archive'", 0);
+						$where_est_article[3] = $_condition[3][3];
+						$boucle->where[$_cle] = $where_est_article;
 						$critere_archive_explicite = true;
 						break;
 					}
