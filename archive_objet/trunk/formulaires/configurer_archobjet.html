@@ -17,29 +17,13 @@
 				}
 			</div>
 
-			#SET{name, consigner_desarchivage}#SET{obli, ''}#SET{defaut, 0}#SET{erreurs, #ENV**{erreurs/#GET{name}}}
-			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				<div class="choix">
-					#SET{value,0}
-					<input type="hidden" name="#GET{name}" value="#GET{value}" />
-					#SET{value,1}
-					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{value}" value="#GET{value}" aria-describedby="#GET{name}_explication" [(#ENV{#GET{name},#GET{defaut}}|=={#GET{value}}|oui)checked="checked"] />
-					<label for="#GET{name}_#GET{value}"><:archobjet:configuration_desarchivage_label:></label>
-				</div>
-			</div>
+			[(#SAISIE{case, consigner_desarchivage,
+				label_case=<:archobjet:configuration_desarchivage_label:>,
+			})]
 
-			#SET{name, utiliser_raison}#SET{obli, ''}#SET{defaut, 0}#SET{erreurs, #ENV**{erreurs/#GET{name}}}
-			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				<div class="choix">
-					#SET{value,0}
-					<input type="hidden" name="#GET{name}" value="#GET{value}" />
-					#SET{value,1}
-					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{value}" value="#GET{value}" aria-describedby="#GET{name}_explication" [(#ENV{#GET{name},#GET{defaut}}|=={#GET{value}}|oui)checked="checked"] />
-					<label for="#GET{name}_#GET{value}"><:archobjet:configuration_raison_label:></label>
-				</div>
-			</div>
+			[(#SAISIE{case, utiliser_raison,
+				label_case=<:archobjet:configuration_raison_label:>,
+			})]
 		</div>
 
 		<p class='boutons'>
