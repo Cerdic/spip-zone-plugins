@@ -1,6 +1,6 @@
 <?php
 /**
- * Gestion du formulaire d'affectation d'un type de plugin à un plugin.
+ * Gestion du formulaire de modification de la raison d'archivage ou de désarchivage.
  **/
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
