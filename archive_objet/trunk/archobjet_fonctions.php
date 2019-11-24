@@ -65,9 +65,58 @@ function calculer_types_objet_archives() {
 	include_spip('base/objets');
 	$types_archives = array();
 	foreach ($tables_autorisees as $_table) {
-		$type_objet = objet_type($_table);
-		$types_archives[$type_objet] = table_objet($type_objet);
+		if ($_table) {
+			$type_objet = objet_type($_table);
+			$types_archives[$type_objet] = table_objet($type_objet);
+		}
 	}
 
 	return $types_archives;
+}
+
+/**
+ * Compile la balise `#OBJET_ETAT_ARCHIVAGE` qui renvoie la liste des types d'objet autorisés à l'archivage
+ * Chaque type d'objet est fourni avec son titre.
+ * La signature de la balise est : `#TYPE_OBJET_ARCHIVE`.
+ *
+ * @balise
+ *
+ * @param Champ $p
+ *        Pile au niveau de la balise.
+ *
+ * @return Champ
+ *         Pile complétée par le code à générer.
+ **/
+function balise_OBJET_ETAT_ARCHIVAGE_dist($p) {
+
+	// Récupération des arguments de la balise.
+	// -- seul l'argument information est optionnel.
+	$objet = interprete_argument_balise(1, $p);
+	$objet = str_replace('\'', '"', $objet);
+	$id_objet = interprete_argument_balise(2, $p);
+	$id_objet = isset($id_objet) ? $id_objet : '0';
+	$information = interprete_argument_balise(3, $p);
+	$information = isset($information) ? str_replace('\'', '"', $information) : '""';
+
+	// Calcul de la balise
+	$p->code = "calculer_etat_archivage($objet, $id_objet, $information)";
+
+	return $p;
+}
+
+/**
+ * @internal
+ *
+ * @return array
+ */
+function calculer_etat_archivage($objet, $id_objet, $information) {
+
+	// Tableau de l'archivage de l'objet
+	include_spip('inc/archobjet_objet');
+	$etat_archivage = objet_etat_archivage(
+		$objet,
+		$id_objet
+	);
+
+	return $information ? $etat_archivage[$information] : $etat_archivage;
 }

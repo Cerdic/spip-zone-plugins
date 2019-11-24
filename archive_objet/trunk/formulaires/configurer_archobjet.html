@@ -10,8 +10,7 @@
 			#SET{name, objets_archivables}#SET{obli,''}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
 			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:archobjet:configuration_objets_archivables_label:></label>[
-				<span class="erreur_message">(#GET{erreurs})</span>
-				]
+				<span class="erreur_message">(#GET{erreurs})</span>]
 				#INCLURE{fond=formulaires/inc-choisir-objets,
 					name=#GET{name},
 					selected=#ENV**{#GET{name}}

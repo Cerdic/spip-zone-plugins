@@ -45,7 +45,7 @@ Aucun article publié et archiv&eacute;
 Tout est archiv&eacute;
 <//B_articles_non_archives>
 
-<h3>Articles publi&eacute;s, archiv&eacute;s ou pas</h3>
+<h3>Articles publi&eacute;s, archiv&eacute;s ou pas <code>{est_archive>=0}</code></h3>
 
 <B_articles_publies>
 (#GRAND_TOTAL)
@@ -91,3 +91,6 @@ Aucun article publi&eacute;
 </B_articles_conditionnels>
 Aucun article publi&eacute;
 <//B_articles_conditionnels>
+
+[(#VAL{article}|objet_info{key}|table_valeur{'PRIMARY KEY'}|var_dump)]
+[(#VAL{article}|id_table_objet|var_dump)]

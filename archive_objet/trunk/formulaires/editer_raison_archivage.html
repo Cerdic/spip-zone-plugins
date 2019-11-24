@@ -1,0 +1,22 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM[ (#ENV{editable}|non)non_editable]">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
+		#ACTION_FORMULAIRE
+		<div class="editer-groupe">
+			[(#SAISIE{radio, raison,
+				label=#ENV{_raison_label},
+				data=#ENV{_raisons},
+			})]
+		</div>
+		<p class="boutons">
+			<span class="image_loading">&nbsp;</span>
+			<input type="submit" name="save" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+	</div></form>
+	]
+</div>

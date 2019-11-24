@@ -64,7 +64,7 @@ function autoriser_archivage_dist($faire, $type, $id, $qui, $options) {
  *
  * @return bool true s'il a le droit, false sinon
 **/
-function autoriser_objetmodifierarchivage_dist($faire, $type, $id, $qui, $options) {
+function autoriser_modifierarchivage_dist($faire, $type, $id, $qui, $options) {
 	$autoriser = false;
 
 	if (
@@ -87,8 +87,9 @@ function autoriser_objetmodifierarchivage_dist($faire, $type, $id, $qui, $option
 			or (
 				($action == 'desarchiver')
 				and $etat_archivage['est_archive']
-				)
-			) {
+			)
+			or ($action == 'modifier_raison')
+		) {
 			$autoriser = true;
 		}
 	}

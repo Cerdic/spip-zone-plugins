@@ -1,12 +1,35 @@
 #BOITE_OUVRIR{'', note center #ETAT}
-<p>[
-	(#VAL{archobjet:objet_}
-		|concat{#ETAT}
-		|concat{_message}
-		|_T{#ARRAY{date,#DATE_ARCHIVE|affdate_court}})][
-	(#CONFIG{archobjet/utiliser_raison}|et{#RAISON_ARCHIVE}|oui)
-		#SET{raison, #VAL{archobjet:objet_}|concat{#ETAT}|concat{_raison_}|concat{#RAISON_ARCHIVE}|_T}
+<p class="message_archive">[
+(#VAL{archobjet:objet_message_}
+	|concat{#ETAT}
+	|_T{#ARRAY{date,#DATE_ARCHIVE|affdate_court}})][
+(#CONFIG{archobjet/utiliser_raison}|oui)[
+	(#RAISON_ARCHIVE|oui)
+		#SET{raison, #VAL{archobjet:raison_}|concat{#RAISON_ARCHIVE}|concat{_label}|_T}
 		<br />
-		<:archobjet:objet_archive_raison{raison=#GET{raison}}:>
+		<:archobjet:objet_message_raison{raison=#GET{raison}}:>
+	][
+	(#AUTORISER{modifierarchivage, #OBJET, #ID_OBJET, '', #ARRAY{action, modifier_raison}})
+	<a href="[(#URL_ECRIRE{objet_archive_edit}
+				|parametre_url{objet, #OBJET}
+				|parametre_url{id_objet, #ID_OBJET})]"
+		class="edition_raison bouton-changer"
+		data-action="modifier">
+		[\[(#RAISON_ARCHIVE|?{<:archobjet:objet_bouton_raison_modifier:>, <:archobjet:objet_bouton_raison_definir:>})\]]
+	</a>]
 ]</p>
 #BOITE_FERMER
+<script type="text/javascript">
+/*<!\[CDATA\[*/
+	$(function() {
+		$('.bouton-changer').click(function(){
+			var archive = $(this).parents('.message_archive').eq(0);
+			$(archive).animateLoading();
+			$.modalboxload(parametre_url(parametre_url(parametre_url($(this).attr('href'),'popin','oui'),'var_zajax','contenu'), 'redirect',''),{
+				onClose: function (dialog) {$(archive).ajaxReload()}
+			});
+			return false;
+		});
+	});
+/*\]\]>*/
+</script>

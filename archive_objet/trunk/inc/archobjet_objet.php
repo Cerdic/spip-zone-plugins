@@ -40,7 +40,12 @@ function objet_etat_archivage($objet, $id_objet, $options = array()) {
 
 		if (!$archivage = sql_fetsel($select, $options['table'], $where)) {
 			$archivage = array();
+		} else {
+			// On rajoute un identifiant littéral pour l'état d'archivage
+			$archivage['etat'] = $archivage['est_archive'] ? 'archive' : 'desarchive';
 		}
+
+		// Mise en cache des données d'archivage de l'objet.
 		$est_archive[$objet][$id_objet] = $archivage;
 	}
 

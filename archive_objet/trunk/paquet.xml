@@ -1,7 +1,7 @@
 <paquet
 	prefix="archobjet"
 	categorie="date"
-	version="0.1.0"
+	version="0.2.0"
 	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="archobjet_logo-64.png"
@@ -18,6 +18,7 @@
 	<copyright>2019</copyright>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
+	<pipeline nom="liste_raison_archivage" action="" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/archobjet_declarations.php" />
 	<pipeline nom="autoriser" inclure="archobjet_pipelines.php" />
 	<pipeline nom="post_boucle" inclure="archobjet_pipelines.php" />
@@ -25,5 +26,5 @@
 	<pipeline nom="boite_infos" inclure="archobjet_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="archobjet_pipelines.php" />
 
-	<menu nom="objets_archives" titre="archobjet:objets_archives_titre" parent="menu_administration" icone="images/archiver-16.png" action="objets_archives" />
+	<menu nom="objets_archives" titre="archobjet:archives_page_titre" parent="menu_administration" icone="images/archiver-16.png" action="objets_archives" />
 </paquet>

@@ -62,7 +62,6 @@ function archobjet_affiche_milieu($flux){
 				$contexte = array_merge(
 					$etat_archivage,
 					array(
-						'etat'     => $etat_archivage['est_archive'] ? 'archive' : 'desarchive',
 						'objet'    => $objet,
 						'id_objet' => $id_objet,
 					)
@@ -177,7 +176,7 @@ function archobjet_post_boucle($boucle){
 					or (!empty($_critere->param[0][0]->texte)
 						and (
 							($_critere->param[0][0]->texte == 'est_archive')
-							or ($_critere->param[0][0]->texte == $id_table)
+							or (($_critere->param[0][0]->texte == $id_table) and ($_critere->op != 'par'))
 						)
 					)
 				) {
@@ -199,11 +198,11 @@ function archobjet_post_boucle($boucle){
 						// On met à jour cette condition pour que l'absence de est_archive dans l'env
 						// implique l'ajout de est_archive=0.
 						// TODO : faire évoluer le core pour calculer cette condition avec une fonction spéficique.
-						$where_est_article[0] = $_condition[0];
-						$where_est_article[1] = $_condition[1];
-						$where_est_article[2] = array("'='", "'est_archive'", 0);
-						$where_est_article[3] = $_condition[3][3];
-						$boucle->where[$_cle] = $where_est_article;
+//						$where_est_article[0] = $_condition[0];
+//						$where_est_article[1] = $_condition[1];
+//						$where_est_article[2] = array("'='", "'est_archive'", 0);
+//						$where_est_article[3] = $_condition[3][3];
+//						$boucle->where[$_cle] = $where_est_article;
 						$critere_archive_explicite = true;
 						break;
 					}
