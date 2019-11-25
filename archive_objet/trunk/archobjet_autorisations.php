@@ -41,7 +41,7 @@ function autoriser_archivage_dist($faire, $type, $id, $qui, $options) {
 		// Si l'objet est archivable et que l'utilisateur est un administrateur non restreint on autorise
 		// l'archivage.
 		if (
-			in_array($table, $tables_autorises)
+			in_array($table, $tables_autorisees)
 			and ($qui['statut'] == '0minirezo')
 		) {
 			$autoriser = true;
