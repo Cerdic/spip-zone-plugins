@@ -1,0 +1,8 @@
+[(#REM) <!-- Boite d'information sur la gestion des archives --> ]
+[#BOITE_OUVRIR{#CHEMIN_IMAGE{archiver-24.png}|balise_img{'',cadre-icone}, info}
+	(#VAL{archobjet:archives_boite_info_message}|_T)
+#BOITE_FERMER]
+
+[(#REM) <!-- Menu des onglets --> ]
+<INCLURE{fond=prive/squelettes/inclure/inc-archive_navigation,
+	env} />

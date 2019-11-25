@@ -48,7 +48,7 @@ function formulaires_editer_raison_archivage_charger($objet, $id_objet, $redirec
 		array(
 			'args' => array(
 				'objet' => $objet,
-				'etat' => $etat
+				'etat'  => $etat
 			),
 			'data' => $ids_raisons,
 		)
@@ -97,15 +97,12 @@ function formulaires_editer_raison_archivage_traiter($objet, $id_objet, $redirec
 			$modifier("modifier_raison:${objet}:${id_objet}:${raison}");
 		}
 
-		// Fermeture de la modale
+		// Fermeture de la modale et redirection
 		$autoclose = '<script type="text/javascript">if (window.jQuery) jQuery.modalboxclose();</script>';
 		$retour['message_ok'] = _T('info_modification_enregistree') . $autoclose;
-
-		if ($redirect) {
-			$retour['redirect'] = $redirect;
-		}
+		$retour['redirect'] = $redirect ? $redirect : '';
 	} else {
-		$retour['message_erreur'] = _T('probleme_droits');
+		$retour['message_erreur'] = _T('archobjet:erreur_modifier_archivage_non_autorisee');
 	}
 
 	return $retour;

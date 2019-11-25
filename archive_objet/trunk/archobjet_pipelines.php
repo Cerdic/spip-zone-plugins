@@ -35,7 +35,6 @@ function archobjet_affiche_milieu($flux){
 			and in_array($table, $configuration['objets_archivables'])
 			and ($objet = $objet_exec['type'])
 			and ($id_objet = intval($flux['args'][$objet_exec['id_table_objet']]))
-			and autoriser('archivage', $objet, $id_objet)
 		) {
 			// Page d'un objet archivable : message d'archivage si besoin
 			// -- Etat d'archivage.
@@ -107,7 +106,6 @@ function archobjet_boite_infos($flux) {
 			and ($table = $objet_exec['table_objet_sql'])
 			and in_array($table, $tables_autorisees)
 			and ($id_objet = intval($flux['args']['id']))
-			and autoriser('archivage', $objet, $id_objet)
 		) {
 			// Page d'un objet archivable : afficher le bouton adéquat.
 			// -- Acquérir l'état d'archivage.

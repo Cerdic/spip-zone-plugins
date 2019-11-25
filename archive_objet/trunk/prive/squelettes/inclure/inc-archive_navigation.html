@@ -1,0 +1,16 @@
+[(#REM) <!-- Menu des onglets "Liste des archives" et "configuration du plugin"
+ --> ]
+<ul class="liste-items sous_navigation">
+	[<li class="item">
+		(#URL_ECRIRE{objets_archives}
+			|lien_ou_expose{
+				<:archobjet:archives_onglet_titre:>,
+				[(#ENV{exec}|=={objets_archives})]})
+	</li>]
+	[<li class="item">
+		(#URL_ECRIRE{configurer_archobjet}
+			|lien_ou_expose{
+				<:archobjet:configuration_onglet_titre:>,
+				[(#ENV{exec}|=={configurer_archobjet})]})
+	</li>]
+</ul>
