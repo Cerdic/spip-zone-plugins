@@ -34,8 +34,9 @@
 			<tr class="tablesorter-ignoreRow">
 				<th colspan="2">
 				</th>
-				[<th colspan="(#GET{cextras}|count)"></th>]
-
+				[(#GET{cextras}|count|oui)
+					[<th colspan="(#GET{cextras}|count)"></th>]
+				]
 				<BOUCLE_entete_fieldsets(POUR) {tableau #GET{saisies}}>
 					[(#VALEUR{saisies}|non)
 						[(#VALEUR{saisie}|!={explication}|oui)
