@@ -15,8 +15,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_form_titre' => 'Configuration',
 	'configuration_objets_archivables_label' => 'Autoriser l\'archivage pour les contenus',
 	'configuration_page_titre' => 'Archivage de contenus SPIP',
-	'configuration_raison_label' => 'Autoriser la saisie d\'une raison pour chaque archivage',
-	'configuration_desarchivage_label' => 'Consigner, pour un contenu, le retrait des archives',
+	'configuration_raison_label' => 'Permettre de préciser le motif de chaque archivage ou désarchivage',
+	'configuration_desarchivage_label' => 'Permettre de conserver la date de fin d\'archivage',
 
 	// D
 	'desarchiver_action_label' => 'Retirer des archives',

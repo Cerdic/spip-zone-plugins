@@ -238,3 +238,50 @@ function archobjet_lister_champs_selection_conditionnelle($flux) {
 }
 
 
+/**
+ * Surcharge de la fonction charger des formulaires concernes, a savoir :
+ * - article / instituer_objet : dans la page de l'article en cours de relecture bloque le statut de l'article
+ *
+ * @param array $flux
+ * @return array
+ *
+ **/
+function archobjet_formulaire_charger($flux){
+
+	// Identifier le formulaire
+	$form = $flux['args']['form'];
+
+	// Filtrer le formulaire instituer_objet
+	if ($form == 'instituer_objet') {
+		$objet = !empty($flux['data']['objet']) ? $flux['data']['objet'] : $flux['data']['_objet'];
+		$id_objet = !empty($flux['data']['id_objet']) ? intval($flux['data']['id_objet']) : intval($flux['data']['_id_objet']);
+
+		// Initialisation de la table sur laquelle porte le critère
+		include_spip('base/objets');
+		$table = table_objet_sql($objet);
+		$id_table = id_table_objet($objet);
+
+		// Vérifier que la table fait bien partie de la liste autorisée à utiliser l'archivage.
+		include_spip('inc/config');
+		$tables_autorisees = lire_config('archobjet/objets_archivables', array());
+		if (in_array($table, $tables_autorisees)) {
+			// -- Acquérir l'état d'archivage.
+			include_spip('inc/archobjet_objet');
+			$etat_archivage = objet_etat_archivage(
+				$objet,
+				$id_objet,
+				array(
+					'table' => $table,
+					'champ_id' => $id_table
+				)
+			);
+
+			// Si l'objet est archivé on bloque l'édition du formulaire instituer.
+			if ($etat_archivage['est_archive']) {
+				$flux['data']['editable'] = false;
+			}
+		}
+	}
+
+	return $flux;
+}
