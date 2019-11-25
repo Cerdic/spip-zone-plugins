@@ -12,5 +12,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'imprimer' => 'Imprimer le tableau',
 	'colonnes' => 'Colonnes',
-	'exporter' => 'Exporter'
+	'exporter' => 'Exporter',
+	'nb_lignes' => 'Nombre de lignes affichées :',
 );
