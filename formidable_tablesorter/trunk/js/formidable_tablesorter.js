@@ -1,6 +1,6 @@
 $(function() {
 	$(".tablesorter").tablesorter({
-		widgets: ["zebra","stickyHeaders", "filter","print", "columnSelector", "output"],
+		widgets: ["zebra","stickyHeaders", "filter","print", "columnSelector", "output", "resizable"],
 		widgetOptions: {
 			columnSelector_container : $('#columnSelector'),
       print_columns: 's',
@@ -9,7 +9,8 @@ $(function() {
       filter_saveFilters : true,
 			output_saveFileName : 'export.csv',
 			output_encoding      : 'data:application/octet-stream;charset=utf8,',
-			output_delivery: 'download'
+			output_delivery: 'download',
+			resizable_addLastColumn: true
 		}
 	});
   $('.print').click(function() {
