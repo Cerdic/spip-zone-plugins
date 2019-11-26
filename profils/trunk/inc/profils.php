@@ -57,6 +57,7 @@ function profils_recuperer_profil($id_ou_identifiant_profil) {
 	else {
 		// Si pas de profil précis demandé
 		if (!$id_ou_identifiant_profil) {
+			include_spip('inc/config');
 			// Si on a configuré un profil par défaut explicitement
 			if ($id_profil_defaut = intval(lire_config('profils/id_profil_defaut'))) {
 				$profil = sql_fetsel('*', 'spip_profils', 'id_profil = '.$id_profil_defaut);
