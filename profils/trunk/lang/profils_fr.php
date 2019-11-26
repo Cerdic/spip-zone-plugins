@@ -6,10 +6,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
+	// C
+	'configurer_titre' => 'Configuration des Profils',
+	'configurer_id_profil_defaut_label' => 'Profil par défaut',
+	
 	// E
 	'erreur_autoriser_profil' => 'Ce compte n’existe pas ou vous n’avez pas le droit de le modifier',
-
+	
 	// P
 	'profils_titre' => 'Profils'
 );

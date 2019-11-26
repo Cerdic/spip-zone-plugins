@@ -55,9 +55,16 @@ function profils_recuperer_profil($id_ou_identifiant_profil) {
 	}
 	// Sinon on cherche
 	else {
-		// Si pas d'id on va chercher le premier
+		// Si pas de profil précis demandé
 		if (!$id_ou_identifiant_profil) {
-			$profil = sql_fetsel('*', 'spip_profils', '', '', 'id_profil asc', '0,1');
+			// Si on a configuré un profil par défaut explicitement
+			if ($id_profil_defaut = intval(lire_config('profils/id_profil_defaut'))) {
+				$profil = sql_fetsel('*', 'spip_profils', 'id_profil = '.$id_profil_defaut);
+			}
+			// Sinon on prend le tout premier
+			else {
+				$profil = sql_fetsel('*', 'spip_profils', '', '', 'id_profil asc', '0,1');
+			}
 		}
 		// Si c'est un identifiant numérique
 		elseif (is_numeric($id_ou_identifiant_profil)) {
@@ -69,7 +76,7 @@ function profils_recuperer_profil($id_ou_identifiant_profil) {
 		}
 	}
 	
-	if ($profil) {
+	if (isset($profil['config'])) {
 		$profil['config'] = unserialize($profil['config']);
 	}
 	
