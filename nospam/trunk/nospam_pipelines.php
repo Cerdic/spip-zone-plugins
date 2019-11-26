@@ -120,6 +120,7 @@ function nospam_formulaire_verifier($flux) {
 		// donc on repasse ici une deuxieme fois, et il ne faut pas relancer le decryptage,
 		// ce qui est assure par le fait que nospam_encrypt_decrypt_post() retourne false au second coup
 		if (_SPAM_ENCRYPT_NAME or _request('_nospam_encrypt')) {
+			include_spip("inc/nospam_encrypt");
 			$res = nospam_encrypt_decrypt_post($form);
 
 			if (is_string($res)) {
