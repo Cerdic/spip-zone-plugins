@@ -29,5 +29,6 @@ cQuery.noConflict();
 	[(#CHEMIN{js/crayons-fade.js}|pack_cQuery)]
 ]
 
-[(#REM) Appeler la callback si demandee ]
-[(#ENV{callback})();]
+[(#REM) Appeler la callback si demandee
+][(#ENV{callback}|et{#ENV{callback}|match{\W}|non})
+[(#ENV{callback})();]]
