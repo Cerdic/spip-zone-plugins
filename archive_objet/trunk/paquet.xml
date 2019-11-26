@@ -1,7 +1,7 @@
 <paquet
 	prefix="archobjet"
 	categorie="date"
-	version="0.2.2"
+	version="0.2.3"
 	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="archobjet_logo-64.png"
