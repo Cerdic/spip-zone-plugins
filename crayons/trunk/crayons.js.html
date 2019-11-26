@@ -25,5 +25,6 @@ cQuery.noConflict();
 
 [(#CHEMIN{js/jquery.html5uploader.js}|pack_cQuery)]
 
-[(#REM) Appeler la callback si demandee ]
-[(#ENV{callback})();]
+[(#REM) Appeler la callback si demandee
+][(#ENV{callback}|et{#ENV{callback}|match{\W}|non})
+[(#ENV{callback})();]]
