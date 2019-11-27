@@ -1,10 +1,10 @@
 <paquet
 	prefix="nospam"
 	categorie="performance"
-	version="2.1.4"
+	version="2.1.5"
 	etat="test"
 	compatibilite="[3.1.0;3.3.*]"
-	logo="images/nospam-32.png"
+	logo="images/nospam-64.png"
 	documentation="https://contrib.spip.net/NoSPAM,1165"
 >
 

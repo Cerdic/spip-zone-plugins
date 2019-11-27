@@ -62,7 +62,7 @@ function nospam_may_be_bot() {
 	if (defined('_IS_BOT') and _IS_BOT) {
 		return true;
 	}
-	if (!isset($_SERVER['HTTP_USER_AGENT'])) {
+	if (!isset($_SERVER['HTTP_USER_AGENT']) or !strlen($_SERVER['HTTP_USER_AGENT'])) {
 		return true;
 	}
 
@@ -70,6 +70,7 @@ function nospam_may_be_bot() {
 	. implode ('|', array(
 		// mots generiques supplementaires
 		'curl',
+		'python-requests',
 	)) . ',i', $_SERVER['HTTP_USER_AGENT'])) {
 		return true;
 	}
