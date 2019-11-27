@@ -9,6 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'switchcase_nom' => 'Balises #SWITCH et #CASE',
-	'switchcase_slogan' => 'Les balises #SWITCH, #CASE ET #CASE_DEFAULT implémentent les contrôles switch... case... default... du php et du C'
+	'switchcase_nom' => 'Balises #SWITCH #CASE et filtre |switchcase',
+	'switchcase_slogan' => 'Les balises #SWITCH, #CASE ET #CASE_DEFAULT ainsi que le filtre |switchcase implémentent les contrôles switch... case... default... du php et du C'
 );
