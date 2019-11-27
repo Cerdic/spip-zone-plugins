@@ -20,6 +20,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
         'erreur_lors_ajout_message_chatbox'=>'Error occured while saving your message',
         'max'=>'maximum',
         'characteres'=>'characters',
+		'rafraichir' =>'Refresh',
+
 );
 
 ?>

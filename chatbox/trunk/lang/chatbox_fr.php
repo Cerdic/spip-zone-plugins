@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
         'erreur_lors_ajout_message_chatbox'=>'Erreur lors de l\'enregirstrement du message',
         'max'=>'maximum',
         'characteres'=>'caractères',	
+        'rafraichir' =>'Rafraichir',
 );
 
 ?>
