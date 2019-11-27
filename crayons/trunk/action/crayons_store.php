@@ -523,6 +523,40 @@ function revision_meta($a, $c = false) {
 	}
 }
 
+/**
+ * Enregistre les modifications dans un fichier de langue
+ * suite à un crayon sur une chaine de langue
+ *
+ *
+ * @param string $a
+ *   Nom ou clé du module de langue
+ * @param bool|array $c
+ *   Liste des champs modifiés
+ *   'motif_chaine_traduction' => valeur saisie 
+ * @return void
+**/
+function revision_traduction($a, $c = false) {
+  if (  $a == "public" && ! test_espace_prive() ) $a="local";
+	if ( $fichier_lang = find_in_path("lang/".$a."_".substr($GLOBALS['idx_lang'],-2).".php") ){
+    foreach ($c as $key => $value){
+      $GLOBALS[$GLOBALS['idx_lang']][$key] = $value;
+      spip_log("revision_traduction(): MAJ motif langue $key dans $fichier_lang", _LOG_INFO_IMPORTANTE);
+    }
+    // TODO : enregistrer la modification dans le fichier de langue
+    $contenu_original = file_get_contents($fichier_lang);
+    $contenu_modifie = "<?php\nif (!defined('_ECRIRE_INC_VERSION')) return;\n".'$GLOBALS[$GLOBALS[\'idx_lang\']] = array(';
+    foreach ($GLOBALS[$GLOBALS['idx_lang']] as $key => $value){
+      if ( strpos($contenu_original, "'$key'") !== false ){
+        $contenu_modifie.= "'".$key."' => '".str_replace("'", "\'", $value)."',\n";
+      } else {
+        spip_log("clé de GLOBALS incohérente :  \$GLOBALS[".$GLOBALS['idx_lang']."][$key] = ".$GLOBALS[$GLOBALS['idx_lang']][$key], _LOG_INFO_IMPORTANTE);
+      }
+    }
+    $contenu_modifie .=');';    
+    include_spip('inc/flock');
+    ecrire_fichier($fichier_lang, $contenu_modifie);
+  }
+}
 
 // TODO:
 // Ce modele est cense enregistrer les tags sous forme de ??
