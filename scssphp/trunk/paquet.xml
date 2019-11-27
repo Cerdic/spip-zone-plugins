@@ -1,10 +1,10 @@
 <paquet
 	prefix="scssphp"
 	categorie="outil"
-	version="2.1.5"
+	version="2.1.6"
 	etat="stable"
 	compatibilite="[3.1.0;3.3.*]"
-	logo="scssphp-32.png"
+	logo="scssphp-64.png"
 	documentation="https://contrib.spip.net/ScssPhp"
 >
 	<nom>SCSS PHP</nom>
