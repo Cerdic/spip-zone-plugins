@@ -11,6 +11,7 @@ function formulaires_configurer_profils_saisies_dist() {
 			'options' => array(
 				'nom' => 'id_profil_defaut',
 				'label' => _T('profils:configurer_id_profil_defaut_label'),
+				'defaut' => lire_config('profils/id_profil_defaut'),
 			),
 		),
 	);
