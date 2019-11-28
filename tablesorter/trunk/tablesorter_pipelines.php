@@ -20,11 +20,7 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  * @return string $flux Le contenu complété de la balise
  */
 function tablesorter_insert_head_css($flux) {
-	static $done = false;
-	if (!$done) {
-		$done = true;
-		$flux .= '<link rel="stylesheet" href="' . direction_css(find_in_path('css/tablesorter.css')) . '" type="text/css" />';
-	}
+	$flux .= '<link rel="stylesheet" href="' . direction_css(find_in_path('css/tablesorter.css')) . '" type="text/css" />';
 
 	return $flux;
 }
@@ -34,8 +30,6 @@ function tablesorter_insert_head_css($flux) {
  *
  * Ajout de la librairie js tablesorter et du script d'init
  * dans le head de l'espace public
- * Ajout également, pour les anciennes versions de SPIP de la CSS
- * dans le head
  *
  * @pipeline insert_head
  * @param string $flux Le contenu de la balise #INSERT_HEAD
@@ -66,8 +60,6 @@ function tablesorter_insert_head($flux) {
 	})(jQuery);
 	/* ]]> */</script>';
 
-	$flux .= tablesorter_insert_head_css('');
-	// compat pour les vieux spip
 	return $flux;
 }
 
