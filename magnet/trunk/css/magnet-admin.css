@@ -1,14 +1,21 @@
 .bouton_action_post.spip-admin-boutons,.bouton_action_post.spip-admin-boutons div {display:inline;}
 .spip-admin-boutons button {border: none;background: none;padding: 0;color:inherit;}
 .admin-magnet {margin: 0}
-.admin-magnet button, button.admin-magnet {min-height:32px;position: relative;}
+.admin-magnet button, button.admin-magnet {min-height:32px;position: relative; cursor: pointer;}
 .admin-magnet.magnet i {display:inline-block;width:32px;}
-.admin-magnet.magnet i:after {content:"";display:block;position:absolute;left:0;top:50%;margin-top:-16px;width:32px;height:32px;background:url(img/spt-magnets.png) no-repeat left 0px;}
-.admin-magnet.magnet-up,.spip-admin-boutons.magnet-down {padding-left: 0;padding-right: 0;}
+.admin-magnet.magnet i:after {content:"";display:block;position:absolute;left:0;top:50%;margin-top:-16px;width:32px;height:32px;background-repeat:no-repeat;background-position:center;background-size: contain;}
+.admin-magnet.magnet.magnetized i:after, .admin-magnet.magnet.demagnetized:hover i:after {background-image:url(img/magnet-on.svg);filter: none;}
+.admin-magnet.magnet.magnetized:hover i:after, .admin-magnet.magnet.demagnetized i:after {background-image:url(img/magnet-off.svg);}
+.admin-magnet.magnet.demagnetized i:after {filter: grayscale(100%);}
+
+.admin-magnet.magnet-up,.admin-magnet.magnet-down {padding-left: 0;padding-right: 0;height: 50%;min-height:16px;width: 48px;display: inline-block}
+.admin-magnet.magnet-up .bouton_action_post,.admin-magnet.magnet-down .bouton_action_post {width: 100%;height: 100%;}
+.admin-magnet.magnet-up {vertical-align: top !important;margin-top: 0;}
+.admin-magnet.magnet-down {vertical-align: top !important; margin-top: 16px;}
+.admin-magnet.magnet-down+.admin-magnet.magnet-up {margin-left: -48px;}
+.admin-magnet.magnet-up button,.admin-magnet.magnet-down button{height: 16px;min-height: 16px; min-width:32px;width: 100%;line-height: 1;font-size: 16px;position: relative;}
+.admin-magnet.magnet-up button img,.admin-magnet.magnet-down button img {position: absolute;left: 50%;top:50%;margin-left: -16px;margin-top: -8px;}
 .admin-magnet.magnet.magnetized button {}
-.admin-magnet.magnet.magnetized:hover i:after {background-position:left -32px;}
-.admin-magnet.magnet.demagnetized i:after {background-position:left -96px;}
-.admin-magnet.magnet.demagnetized:hover i:after {background-position:left 0;}
 .admin-magnet.magnet span {visibility: hidden;}
 .admin-magnet.magnet:hover span {visibility: visible;}
 .spip-admin.magnets {text-align:right;}

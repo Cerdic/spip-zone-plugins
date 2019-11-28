@@ -225,13 +225,19 @@ function magnet_html_boutons_admin($objet, $id_objet, $class="", $pile='', $libe
 		$bclass .= "magnetized";
 		$label = "<i></i>($magnet_rang) <span>"._T('magnet:label_demagnetize')."</span>";
 		$boutons = $bouton_action($label,$ur_action,$bclass);
+		$ext = "png";
+		if (defined('_SPIP_VERSION_ID') and _SPIP_VERSION_ID>=30205) {
+			$ext = "svg";
+		}
 		if ($magnet_rang>1){
 			$ur_action = generer_action_auteur("magnetize",$objet."-".$id_objet."-"."up".$pile_arg,self());
-			$boutons = $bouton_action($balise_img(_DIR_PLUGIN_MAGNET."img/magnet-up-24.png","monter"),$ur_action, $class ." magnet-up",'',_T('magnet:label_up')) . $boutons;
+			$b = $bouton_action($balise_img(_DIR_PLUGIN_MAGNET."img/magnet-up.$ext","monter"),$ur_action, '','',_T('magnet:label_up'));
+			$boutons =  "<span class=\"$class magnet-up\">$b</span>" . $boutons;
 		}
 		if ($magnet_rang<magnet_count($objet, $pile)){
 			$ur_action = generer_action_auteur("magnetize",$objet."-".$id_objet."-"."down".$pile_arg,self());
-			$boutons = $bouton_action($balise_img(_DIR_PLUGIN_MAGNET."img/magnet-down-24.png","descendre"),$ur_action, $class ." magnet-down",'',_T('magnet:label_down')) . $boutons;
+			$b = $bouton_action($balise_img(_DIR_PLUGIN_MAGNET."img/magnet-down.$ext","descendre"),$ur_action, '' ,'',_T('magnet:label_down'));
+			$boutons =  "<span class=\"$class magnet-down\">$b</span>" . $boutons;
 		}
 	}
 	else {
@@ -273,7 +279,11 @@ function magnet_formulaire_admin($flux){
 		AND include_spip('inc/autoriser')
 		AND autoriser('administrermagnet',$objet,$id_objet))
 	{
-		$boutons = magnet_html_boutons_admin($objet, $id_objet,"spip-admin-boutons admin-magnet admin-magnet-$objet") . " ";
+		$class = "spip-admin-boutons admin-magnet admin-magnet-$objet";
+		if (test_espace_prive()) {
+			$class .= " spip-admin-ecrire";
+		}
+		$boutons = magnet_html_boutons_admin($objet, $id_objet, $class) . " ";
 		$p = strpos($flux['data'],"<a");
 		$flux['data'] = substr_replace($flux['data'],$boutons,$p,0);
 	}
