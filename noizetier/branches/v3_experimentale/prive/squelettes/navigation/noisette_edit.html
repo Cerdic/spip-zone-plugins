@@ -1,0 +1,11 @@
+<BOUCLE_navigation_noisette(NOISETTES types_noisettes){id_noisette}>
+[(#REM) <!-- Boite d'info de la noisette
+	Il est nécessaire d'appliquer typo sur le champ description car les traitements typo configurés
+	par défaut ne sont pas appliqués lors d'une jointure --> ]
+#SET{explication, #DESCRIPTION|typo}
+<INCLURE{fond=prive/squelettes/inclure/inc-infos_noisette,
+	id_noisette,
+	type_noisette,
+	explication=#GET{explication},
+	env} />
+</BOUCLE_navigation_noisette>

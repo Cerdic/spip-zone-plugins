@@ -1,0 +1,23 @@
+[(#REM) <!-- Navigation dans les blocs configurables de la page --> ]
+#SET{blocs_decompte,
+	#ENV{page}|?{
+		#PAGE_NOIZETIER_INFOS{#ENV{page}, compteurs_noisette},
+		#OBJET_NOIZETIER_INFOS{#ENV{objet}, #ENV{id_objet}, compteurs_noisette}
+	}
+}
+<B_blocs>
+<div class="onglets_simple second clearfix">
+	<ul class="blocs">
+<BOUCLE_blocs(DATA){source table, #ENV{blocs}}>
+		#SET{nb_noisettes, #GET{blocs_decompte/#VALEUR}|sinon{0}}
+		[<li>
+			(#SELF
+				|parametre_url{bloc, #VALEUR}
+				|lien_ou_expose{
+					#BLOC_Z_INFOS{#VALEUR, nom}&nbsp;\(#GET{nb_noisettes}\),
+					#VALEUR|=={#ENV{bloc_affiche}}})
+		</li>]
+</BOUCLE_blocs>
+	</ul>
+</div>
+</B_blocs>

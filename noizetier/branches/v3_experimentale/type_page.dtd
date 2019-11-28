@@ -1,0 +1,47 @@
+<!-- DTD retrospective pour un fichier type_page.xml du noiZetier (déprécié) -->
+
+<!--================ Entites XML std =========================-->
+
+<!ENTITY % HTMLlat1 PUBLIC
+   "-//W3C//ENTITIES Latin 1 for XHTML//EN"
+   "xhtml-lat1.ent">
+%HTMLlat1;
+
+<!ENTITY % HTMLsymbol PUBLIC
+   "-//W3C//ENTITIES Symbols for XHTML//EN"
+   "xhtml-symbol.ent">
+%HTMLsymbol;
+
+<!ENTITY % HTMLspecial PUBLIC
+   "-//W3C//ENTITIES Special for XHTML//EN"
+   "xhtml-special.ent">
+%HTMLspecial;
+
+<!--================ DTD originale =========================-->
+
+<!ENTITY % NAME "CDATA"> <!-- identificateur (notamment nom de fonction) -->
+<!ENTITY % IDIOME "CDATA"> <!-- chaine de langue écriture avec balise <:module:item:> -->
+<!ENTITY % ITEM "CDATA"> <!-- chaine de langue écriture sans balise module:item -->
+<!ENTITY % PATH "CDATA"> <!-- chemin d'acces relatif a un fichier -->
+
+<!ENTITY % CONTENT "(description|icon)*" >
+
+<!ELEMENT page (nom, %CONTENT;, bloc*, necessite*) >
+
+<!ELEMENT nom (%IDIOME|#PCDATA)>
+
+<!ELEMENT description (%IDIOME|#PCDATA)>
+<!ELEMENT icon (%PATH)>
+
+<!ELEMENT bloc EMPTY>
+<!ATTLIST bloc
+	id %NAME; #REQUIRED
+	nom %ITEM; #IMPLIED
+	description %ITEM; #IMPLIED
+	icon %PATH; #IMPLIED
+>
+
+<!ELEMENT necessite EMPTY>
+<!ATTLIST necessite
+	id %NAME; #REQUIRED
+>

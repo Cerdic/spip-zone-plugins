@@ -1,0 +1,51 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:noizetier:configurer_titre:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<div class="editer-groupe">
+			[(#SAISIE{case, encapsulation_noisette,
+				label=<:noizetier:configurer_balise_noisette_label:>,
+				label_case=<:noizetier:label_noizetier_balise:>,
+				explication=<:noizetier:explication_noizetier_balise:>,
+			})]
+
+			[(#SAISIE{case, ajax_noisette,
+				label=<:noizetier:configurer_ajax_noisette_label:>,
+				label_case=<:noizetier:label_noizetier_ajax:>
+			})]
+
+			[(#SAISIE{case, inclusion_dynamique_noisette,
+				label=<:noizetier:configurer_dynamique_noisette_label:>,
+				label_case=<:noizetier:label_noizetier_dynamique:>
+			})]
+
+			[(#REM) Imbrication : on prend en priorité la valeur définie par constante ]
+			#SET{constant,#VAL{_NOIZETIER_PROFONDEUR_MAX}|defined|?{#EVAL{_NOIZETIER_PROFONDEUR_MAX}}}
+			[(#SAISIE{input, profondeur_max,
+				label=<:noizetier:configurer_profondeur_max_label:>,
+				explication=<:noizetier:explication_noizetier_profondeur_max:>[(#GET{constant}|oui)<br><:noizetier:explication_noizetier_cfg_constant:>],
+				readonly=#GET{constant}|?{oui},
+				disable=#GET{constant}|?{oui},
+				valeur_forcee=#GET{constant},
+				defaut=#GET{constant},
+			})]
+
+			[(#REM) Il faut exclure les types d'objet qui n'ont pas de page explicitement détectable par le noiZetier pour
+		        ne proposer que les types d'objet potentiellement utilisables ]
+			[(#SAISIE{choisir_objets, objets_noisettes,
+				label=<:noizetier:configurer_objets_noisettes_label:>,
+				explication=<:noizetier:configurer_objets_noisettes_explication:>,
+				exclus=#ENV{_objets_exclus}})]
+		</div>
+
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>

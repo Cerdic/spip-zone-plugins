@@ -1,0 +1,102 @@
+#SET{type, #ENV{objet}|?{'', #ENV{type, #ENV{type-page, #ENV{page}}}}}
+#SET{composition, #ENV{objet}|?{'', #ENV{composition}}}
+[(#SET{page, #GET{type}[-(#GET{composition})]})]
+[(#ENV{objet}|?{
+	#SET{informations, #OBJET_NOIZETIER_INFOS{#ENV{objet}, #ENV{id_objet}}},
+	#SET{informations, #PAGE_NOIZETIER_INFOS{#ENV{page}}}
+})]
+
+<div class="noizetier-bloc" id="noizetier-bloc-#ENV{bloc}">
+	<input type='hidden' name='ordre[]' value='bloc-#ENV{bloc}' class="noizetier-tri" />
+	[(#GET{type}|oui)
+	<input type='hidden' name='ordre\[\]' value='page-#GET{type}[-(#GET{composition})]' class="noizetier-tri" />
+	]
+	[(#GET{type}|non)
+	<input type='hidden' name='ordre\[\]' value='objet-#OBJET' class="noizetier-tri" />
+	<input type='hidden' name='ordre\[\]' value='id_objet-#ID_OBJET' class="noizetier-tri" />
+	]
+
+	<div class="bloc-nom">
+		[(#BLOC_Z_INFOS{#ENV{bloc}, nom})]
+	</div>
+
+	<BOUCLE_noisettes(NOISETTES) {plugin=noizetier}{id_conteneur=#ENV{id_conteneur}}{par rang_noisette}>
+	<div class="bloc-noisette" id="noizetier-noisette-#ID_NOISETTE">
+		<BOUCLE_type_noisette(TYPES_NOISETTES){type_noisette}>
+			<div class="type_noisette">
+				<strong>
+					<div class="icone">[(#CHEMIN_IMAGE{#ICON|sinon{noisette-24.png}}|balise_img)]</div>
+					[(#NOM)]
+				</strong>
+			</div>
+		</BOUCLE_type_noisette>
+
+		[(#ENV{editer_noisette}|=={#ID_NOISETTE}|oui)
+			[(#FORMULAIRE_EDITER_NOISETTE{#ID_NOISETTE,[(#SELF|parametre_url{editer_noisette,''})#noizetier-noisette-#ID_NOISETTE]})]
+			<div class="action_noisette-#LANG_DIR">
+				\[<strong>
+					<a href="[(#SELF|parametre_url{editer_noisette,''})#noizetier-noisette-#ID_NOISETTE]">
+						<:bouton_annuler:>
+					</a>
+				</strong>\]
+			</div>
+		]
+
+		[(#ENV{ajouter_noisette}|ou{#ENV{editer_noisette}}|non)
+			[<div class="noisette noisette_#NOISETTE[ (#CHAMP_SQL{css})]">(#NOISETTE_COMPILER{#ID_NOISETTE})</div>]
+			<div class="action_noisette-#LANG_DIR">
+				\[<strong>
+					<a href="[(#SELF|parametre_url{editer_noisette,#ID_NOISETTE})#noizetier-noisette-#ID_NOISETTE]">
+						<:noizetier:formulaire_modifier_noisette:>
+					</a>
+				</strong>\]
+				[(#BOUTON_ACTION{
+					[(#VAL{noizetier:formulaire_supprimer_noisette}|_T)],
+					#URL_ACTION_AUTEUR{supprimer_noisettes,noisette:#ID_NOISETTE,
+					#SELF#noizetier-noisette-#ID_NOISETTE}
+				})]
+			</div>
+		]
+		<input type='hidden' name='ordre[]' value='noisette-#ID_NOISETTE' class="noizetier-tri" />
+	</div>
+	</BOUCLE_noisettes>
+
+	[(#ENV{ajouter_noisette}|ou{#ENV{editer_noisette}}|non)
+		<div class="action_noisette-#LANG_DIR">
+			\[<strong>
+				<a href="[(#SELF|parametre_url{ajouter_noisette,#ENV{bloc}})#noizetier-ajouter-noisette]">
+					<:noizetier:formulaire_ajouter_noisette:>
+				</a>
+			</strong>\]
+		</div>
+	]
+	[(#ENV{ajouter_noisette}|=={#ENV{bloc}}|oui)
+		<div id="noizetier-ajouter-noisette">
+			[(#SET{page,[(#GET{type}|?{#GET{type}[-(#ENV{composition})], #ARRAY{objet,#OBJET,id_objet,#ID_OBJET}})]})]
+			[(#FORMULAIRE_AJOUTER_NOISETTE{#GET{page},#ENV{bloc},[(#SELF|parametre_url{ajouter_noisette,''})&editer_noisette=@id_noisette@#noizetier-noisette-@id_noisette@]})]
+			<div class="action_noisette-#LANG_DIR">
+				\[<strong>
+					<a href="[(#SELF|parametre_url{ajouter_noisette,''})#noizetier-bloc-#ENV{bloc}]">
+						<:bouton_annuler:>
+					</a>
+				</strong>\]
+			</div>
+			<style type="text/css">ul.liste-noisettes li.noisette {padding-#LANG_LEFT: 30px; background-repeat: no-repeat; background-position: #LANG_LEFT 9px;}</style>
+		</div>
+	]
+	[(#ENV{ajouter_noisette}|ou{#ENV{editer_noisette}}|non)<div class="ajax">#FORMULAIRE_NOIZETIER_VALIDER_TRI{#SELF}</div>]
+</div>
+[(#ENV{ajouter_noisette}|ou{#ENV{editer_noisette}}|non)
+<script type="text/javascript">/*<!\[CDATA\[*/
+	jQuery('div#noizetier-bloc-#ENV{bloc}').sortable({
+		items: 'div.noizetier-noisette',
+		opacity: 0.8,
+		connectWith: 'div.noizetier-bloc',
+		forcePlaceholderSize: true,
+		cursor: 'move',
+		update: function(event, ui) {
+			jQuery('.noizetier-valider-tri').show(500);
+			jQuery('.noizetier-action').hide(500);
+		}
+	});
+/*\]\]>*/</script>]

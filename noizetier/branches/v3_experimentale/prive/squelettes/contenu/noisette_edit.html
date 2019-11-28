@@ -1,0 +1,54 @@
+[(#REM)
+
+	Page d'édition d'une noisette
+
+	Paramètres :
+		- id_noisette
+		- redirect : URL de redirection
+		- retourajax :
+		- popin : pour indiquer que la page est incluse dans une modale
+]
+[(#AUTORISER{editernoisette, noizetier, #ENV{id_noisette}}|sinon_interdire_acces)]
+<BOUCLE_noisette(NOISETTES types_noisettes){id_noisette}>
+#SET{redirect, ''}
+[(#ENV{popin}|non)
+	[(#OBJET|et{#ID_OBJET}|?{
+		[(#SET{redirect, [(#URL_ECRIRE{noizetier_page}
+							|parametre_url{objet,#OBJET}
+							|parametre_url{id_objet,#ID_OBJET}
+							|parametre_url{bloc,#BLOC}
+							|ancre_url{noisette-#ID_NOISETTE})]})],
+		[(#SET{redirect, [(#URL_ECRIRE{noizetier_page}
+							|parametre_url{page, #TYPE[-(#COMPOSITION)]}
+							|parametre_url{bloc,#BLOC}
+							|ancre_url{noisette-#ID_NOISETTE})]})]}
+	)]
+]
+
+#SET{redirect, #ENV{redirect}|sinon{#GET{redirect}}}
+<div class='cadre-formulaire-editer[ (#ENV{popin}|oui)popin]'>
+<div class="entete-formulaire">
+	[(#ENV{popin}|non)
+		[(#GET{redirect}|icone_verticale{<:noizetier:retour:>,page-noisettes-24,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	<:noizetier:formulaire_modifier_noisette:>
+	<h1>
+		[(#NOM)]
+	</h1>
+</div>
+
+
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+]
+<div class="ajax">
+	[(#FORMULAIRE_EDITER_NOISETTE{#ID_NOISETTE, #GET{redirect}})]
+</div>
+[(#EVAL{_AJAX}|et{#ENV{popin}|non}|oui)
+	<script type="text/javascript">/*<!\[CDATA\[*/
+		jQuery('#chemin').find('>div').ajaxReload({'args':{'exec':'noisette_edit','id_noisette':#ID_NOISETTE}});
+		jQuery('#navigation').find('>div').ajaxReload({'args':{'exec':'noisette_edit','id_noisette':#ID_NOISETTE}});
+	/*\]\]>*/</script>
+]
+</div>
+</BOUCLE_noisette>

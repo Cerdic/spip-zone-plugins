@@ -1,0 +1,45 @@
+[(#AUTORISER{configurerpage, noizetier, '', '', #ENV{page}|?{#ARRAY{page, #ENV{page}}, #ARRAY{objet,#OBJET,id_objet,#ID_OBJET}}}|sinon_interdire_acces)]
+[(#OBJET|et{#ID_OBJET}|?{
+	[(#SET{retour, [(#URL_ECRIRE{noizetier_page}
+						|parametre_url{objet, #OBJET}
+						|parametre_url{id_objet, #ID_OBJET}
+						|parametre_url{bloc, #ENV{bloc}}
+						|ancre_url{bloc-#ENV{bloc}})]})],
+	[(#SET{retour, [(#URL_ECRIRE{noizetier_page}
+						|parametre_url{page, #ENV{page}}
+						|parametre_url{bloc, #ENV{bloc}}
+						|ancre_url{bloc-#ENV{bloc}})]})]}
+)]
+#SET{retour, #ENV{retour}|sinon{#GET{retour}}}
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#GET{retour}|icone_verticale{<:noizetier:retour:>, page-noisettes-24, '', left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	<:noizetier:formulaire_ajouter_noisette:>
+	<h1>
+		<:ecrire:info_sans_titre:>
+	</h1>
+</div>
+
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").attr("href","'#GET{redirect}'").followLink();'}
+]
+<div class="ajax">
+	[(#ENV{id_noisette}|?{
+		[(#SET{noisette, #ARRAY{type_noisette, #ENV{type_noisette}, id_noisette, #ENV{id_noisette}, profondeur, #ENV{profondeur}}})],
+		[(#SET{noisette, #ARRAY})]}
+	)]
+	#FORMULAIRE_AJOUTER_NOISETTE{
+		#ENV{page, #ARRAY{objet,#OBJET,id_objet,#ID_OBJET}},
+		#ENV{bloc},
+		#GET{noisette},
+		#GET{retour}}
+</div>
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\[CDATA\[*/
+		jQuery('html,body').animate({scrollTop: jQuery("#chemin").offset().top}, 'slow');
+		jQuery('#chemin').find('>div').ajaxReload({'args':{'exec':'noisette_add','page':'#ENV{page}','objet':'#OBJET','id_objet':#ID_OBJET,'bloc':'#ENV{bloc}'}});
+		jQuery('#navigation').find('>div').ajaxReload({'args':{'exec':'noisette_add','page':'#ENV{page}','objet':'#OBJET','id_objet':#ID_OBJET,'bloc':'#ENV{bloc}'}});
+	/*\]\]>*/</script>
+]
+</div>

@@ -1,0 +1,144 @@
+[(#REM) en ajax, on perds parfois le paramètre dans l'URL ]
+#SET{self, #SELF|parametre_url{objet, #ENV{objet}}}
+#SET{self, #GET{self}|parametre_url{id_objet, #ENV{id_objet}}}
+#SET{self, #GET{self}|parametre_url{page, #ENV{page}}}
+#SET{self, #GET{self}|parametre_url{bloc, #ENV{bloc}}}
+#SET{profondeur_max, #VAL{_NOIZETIER_PROFONDEUR_MAX}|defined|?{#EVAL{_NOIZETIER_PROFONDEUR_MAX},#CONFIG{noizetier/profondeur_max}}}
+[(#ENV{page}|?{
+	#SET{url_add, #URL_ECRIRE{noisette_add, page=#ENV{page}&bloc=#ENV{bloc}}},
+	#SET{url_add, #URL_ECRIRE{noisette_add, objet=#ENV{objet}&id_objet=#ENV{id_objet}&bloc=#ENV{bloc}}}
+})]
+#SET{infos_bloc, #BLOC_Z_INFOS{#ENV{bloc}}}
+<form method="post" action="#ENV{action}">
+	[(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<input type="hidden" name="conteneur_id" value="#ENV{id_conteneur}" />
+
+	[#BOITE_OUVRIR{'','error'}(#ENV*{message_erreur})#BOITE_FERMER]
+	[#BOITE_OUVRIR{'','success'}(#ENV*{message_ok})#BOITE_FERMER]
+
+	<a name="bloc-#ENV{bloc}"></a>
+	[(#BOITE_OUVRIR{
+	#GET{infos_bloc/nom}[(#GET{infos_bloc/nom}|!={#ENV{bloc}}|oui) <i>\(#ENV{bloc}\)</i>]
+		[(#CHEMIN_IMAGE{#GET{infos_bloc/icone}}|image_reduire{24}|extraire_attribut{src}|balise_img{page,cadre-icone})],
+		simple,
+		 titrem}
+	 )]
+		[<p>(#GET{infos_bloc/description})</p>]
+		<B_noisettes>
+		<ul
+			class="editer-groupe liste-items liste-noisettes liste-noisettes-bloc"
+			data-conteneur="[(#ENV{id_conteneur}|attribut_html)]"
+			data-profondeur_max="[(#GET{profondeur_max})]"
+		>
+		<BOUCLE_noisettes(NOISETTES)
+			{plugin = noizetier}
+			{id_conteneur?}
+			{par rang_noisette}
+		>
+			#SET{profondeur, 0}
+			#SET{id_conteneur, #CONTENEUR_IDENTIFIER{noizetier, #ARRAY{type_noisette, #TYPE_NOISETTE, id_noisette, #ID_NOISETTE}}}
+			<li
+				class="editer item noisette[ (#EST_CONTENEUR|=={oui}|oui)noisette_conteneur]"
+				id="noisette-#ID_NOISETTE"
+				data-id_noisette="#ID_NOISETTE"
+				data-rang="#RANG_NOISETTE"
+				data-profondeur="[(#GET{profondeur})]"
+				data-est_conteneur="[(#EST_CONTENEUR|attribut_html)]"
+				[(#EST_CONTENEUR|=={oui}|oui)data-conteneur="[(#GET{id_conteneur}|attribut_html)]"]
+			>
+				<INCLURE{fond=formulaires/inclure/inc-resume_noisette,
+					id_noisette,
+					id_conteneur,
+					rang_noisette,
+					nb_noisettes=#TOTAL_BOUCLE,
+					classe=noisette__content,
+					profondeur=#GET{profondeur},
+					url_page=#GET{self},
+					url_add=#GET{url_add},
+					bloc} />
+
+				[(#REM) Enfants ]
+				<B_noisettes_enfants>
+				<ul class="liste-noisettes-conteneur">
+				<BOUCLE_noisettes_enfants(NOISETTES)
+					{plugin = noizetier}
+					{id_conteneur = #GET{id_conteneur}}
+					{par rang_noisette}
+				>
+					#SET{profondeur, #GET{profondeur}|plus{1}}
+					#SET{id_conteneur, #CONTENEUR_IDENTIFIER{noizetier, #ARRAY{type_noisette, #TYPE_NOISETTE, id_noisette, #ID_NOISETTE}}}
+					<li
+						class="editer item noisette[ (#EST_CONTENEUR|=={oui}|oui)noisette_conteneur]"
+						id="noisette-#ID_NOISETTE"
+						data-id_noisette="#ID_NOISETTE"
+						data-rang="#RANG_NOISETTE"
+						data-profondeur="[(#GET{profondeur})]"
+						data-est_conteneur="[(#EST_CONTENEUR|attribut_html)]"
+						[(#EST_CONTENEUR|=={oui}|oui)data-conteneur="[(#GET{id_conteneur}|attribut_html)]"]
+					>
+						<INCLURE{fond=formulaires/inclure/inc-resume_noisette,
+							id_noisette,
+							id_conteneur,
+							rang_noisette,
+							nb_noisettes=#_noisettes_enfants:TOTAL_BOUCLE,
+							classe=noisette__content conteneur-#GET{profondeur},
+							profondeur=#GET{profondeur},
+							url_page=#GET{self},
+							url_add=#GET{url_add},
+							bloc} />
+
+						[(#REM) Petits enfants récursifs ]
+						<BOUCLE_noisettes_petits_enfants(BOUCLE_noisettes_enfants)></BOUCLE_noisettes_petits_enfants>
+					</li>
+				#SET{profondeur,#GET{profondeur}|moins{1}}
+				</BOUCLE_noisettes_enfants>
+				</ul>
+				</B_noisettes_enfants>
+
+				[(#REM) Il faut toujours un li pour le drag & drop ]
+				[(#EST_CONTENEUR|=={oui}|oui)
+				<ul class="liste-noisettes-conteneur placebo">
+					<li class="item noisette placebo"></li>
+				</ul>
+				]
+				<//B_noisettes_enfants>
+
+			</li>
+
+		</BOUCLE_noisettes>
+		</ul>
+		<input type="hidden" name="nb_noisettes" value="#TOTAL_BOUCLE" />
+		[(#URL_ACTION_AUTEUR{vider_conteneur, [(#ENV{id_conteneur})], #GET{self}}
+			|icone_verticale{<:noizetier:formulaire_supprimer_noisettes_bloc:>, noizetier-24, del, #LANG_LEFT})]
+		</B_noisettes>
+
+		[(#REM) message aucun ]
+		<ul
+			class="editer-groupe liste-items liste-noisettes liste-noisettes-bloc aucun"
+			data-conteneur="[(#ENV{id_conteneur}|attribut_html)]"
+			data-profondeur_max="[(#GET{profondeur_max})]"
+		>
+			<li class="editer item">
+				<div class="notice"><:noizetier:bloc_sans_noisette:></span>
+			</li>
+			<input type="hidden" name="nb_noisettes" value="0" />
+		</ul>
+		<//B_noisettes>
+
+		[(#GET{url_add}
+			|icone_verticale{<:noizetier:formulaire_ajouter_noisette_bloc:>,noisette, add, right preload})]
+	#BOITE_FERMER
+
+	[(#REM) <!-- ajouter les saisies supplementaires : extra et autre, a cet endroit -->]
+	<!--extra-->
+</form>
+
+<script type="text/javascript">
+/*<!\[CDATA\[*/
+	// Affichage du menu des actions de chaque noisette
+	$( function() {
+		$( ".noisette .edition__menu" ).menu();
+	});
+/*\]\]>*/
+</script>

@@ -1,0 +1,210 @@
+[(#REM)<script>]
+/**
+ * Noizetier : édition d'une page
+ *
+ * => Gestion du drag and drop
+ * => Édition des nosiettes dans une modale
+ * => Mettre la liste des noisettes dispos en sticky
+ */
+;jQuery(function($){
+
+	$('.types-noisettes').show();
+
+	/* Menu d'édition */
+	function noizetier_menu() {
+		$('.noisette .edition__menu').menu();
+	}
+	noizetier_menu();
+	$('.noisette .bouton-modifier').click(function(e) {
+		e.preventDefault();
+		var noisette = $(this).parents('.noisette').eq(0);
+		var id_noisette = $(this).data('id_noisette');
+		ajaxReload('noisettes_edition', {args:{id_noisette: id_noisette}, history: true});
+		$('.noisette').removeClass('on');
+		noisette.addClass('on');
+		return false;
+	});
+
+	/**
+	 * Réordonner les noisettes par glisser-déposer
+	 */
+	$('.liste-noisettes-bloc').sortable({
+		items: '.noisette',
+		//containment: '.liste-noisettes-bloc',
+		revert: true,
+		opacity: 0.66,
+		placeholder: 'ui-state-highlight',
+		forcePlaceholderSize: 1,
+
+		// Event : début du tri
+		// Noter le conteneur d'origine et les conteneurs où on ne peut pas relâcher les noisettes
+		start: function( event, ui ) {
+			//console.log('start');
+			var liste          = $(this);
+			var noisette       = ui.item;
+			var est_conteneur  = noisette.data('est_conteneur');
+			var profondeur_max = liste.data('profondeur_max');
+
+			liste.addClass('sorting');
+
+			// Noter le conteneur d'origine
+			id_conteneur = noisette.parents('[data-conteneur]').data('conteneur');
+			noisette.data('id_conteneur_origine', id_conteneur);
+
+			// Noter les conteneurs où on ne peut pas relâcher la noisette
+			// On teste en fonction de la profondeur
+			// Si la noisette est elle-même un conteneur, un niveau de moins
+			if ($.isNumeric(profondeur_max)) {
+				/*if (est_conteneur == 'oui') {
+					profondeur_max =- 1;
+				}*/
+				liste.find('[data-conteneur]').each( function(i) {
+						var profondeur = $(this).data('profondeur') - 1;
+						// profondeur +1 pour les noisettes conteneur
+						if (est_conteneur == 'oui') {
+							profondeur += 1;
+						}
+						if (profondeur >= profondeur_max) {
+							$(this).data('receive', false).addClass('recevoir_non');
+						}
+				});
+			}
+		},
+
+		// Event : si le DOM est modifié
+		// Changer le rang d'une noisette, ou bien en créer une nouvelle
+		update: function( event, ui ) {
+			//console.log('update');
+			var liste            = $(this);
+			var noisette         = ui.item;
+			var id_noisette      = noisette.data('id_noisette');
+			var profondeur_max   = liste.data('profondeur_max');
+			var id_conteneur_origine = noisette.data('id_conteneur_origine');
+			var ajouter          = noisette.data('ajouter');
+
+			// Trouver le conteneur où on a relaché la noisette
+			var id_conteneur_destination = noisette.parents('[data-conteneur]').data('conteneur');
+
+			// Trouver le nouveau rang
+			var rang = 1;
+			if (noisette.prev('.noisette').length){
+				rang = noisette.prev('.noisette').data('rang') + 1;
+			}
+
+			// ACTIONS
+
+			// 1) Annuler si on a pas le droit de relacher à cette profondeur.
+			// Nb : on ne peut pas annuler dans les events en amont car on a pas encore les infos sur l'endroit où est relâché l'item.
+			var annuler = (noisette.parents('[data-conteneur]').data('receive') === false);
+			if (annuler) {
+				//console.log('noisette: annuler');
+				noisette.animateRemove(function(){liste.ajaxReload()});
+
+			// 2) Ajouter la noisette si c'est un clone issu de .draggable()
+			} else if (!annuler && ajouter === true) {
+				//console.log('noisette: ajouter');
+				var type_noisette = noisette.data('type_noisette');
+				var params = {
+					_type_noisette: type_noisette,
+					_id_conteneur: id_conteneur_destination,
+					rang: rang,
+				};
+				//console.log(params);
+				var action = '[(#VAL{ajouter_noisette}|generer_url_action{"",1})]';
+				noisette.animateLoading(); // Animation
+				$.ajax({
+					url: action,
+					data: params,
+					dataType: 'json',
+					cache: false,
+				}).done(function(data) {
+					noisette.endLoading(true);
+					if (data.success.length) {
+						var id_noisette = data.success[0];
+						noisette.ajaxReload({
+							callback: function(){
+								$('.noisette[data-id_noisette="'+id_noisette+'"]').animateAppend();
+							}
+						});
+					}
+					if (data.errors.length) {
+						noisette.animateRemove(function(){$(this).remove()});
+						console.log(data.errors);
+					}
+				});
+
+			// 3) Déplacer la noisette
+			} else if (!annuler) {
+				//console.log('noisette : deplacer');
+				var id_conteneur_origine = noisette.data('id_conteneur_origine');
+				var params = {
+					_id_noisette: id_noisette,
+					rang: rang,
+					_id_conteneur_origine: id_conteneur_origine,
+					_id_conteneur_destination: id_conteneur_destination,
+				};
+				//console.log(params);
+				var action = '[(#VAL{deplacer_noisette}|generer_url_action{"",1})]';
+				$.ajax({
+					url: action,
+					data: params,
+					dataType: 'json',
+					cache: false,
+				}).complete(function(data) {
+					if (data.success.length) {
+						noisette.ajaxReload();
+					}
+					if (data.errors.length) {
+						liste.sortable('cancel');
+						console.log(data.errors);
+					}
+				});
+			}	
+		},
+
+		// Event : fin du tri
+		// Faire le ménage
+		stop: function( event, ui ) {
+			//console.log('stop');
+			var liste = $(this);
+			liste
+				.removeClass('sorting')
+				.find('[data-conteneur]').each( function(i) {
+				$(this).data('receive', null).removeClass('recevoir_non');
+			});
+		}
+	});
+
+	/**
+	 * Ajouter des noisettes par glisser-déposer
+	 * La traitement se fait dans .sortable()
+	 */
+	$('.liste-noisettes-disponibles .noisette').draggable({
+		connectToSortable: '.liste-noisettes-bloc',
+		containment: '.liste-noisettes-bloc',
+		helper: 'clone', // Super important
+		cursor: 'move',
+		opacity: 0.66,
+		// Event : fin
+		// On tag la noisette pour la repérer dans .sortable()
+		stop: function( event, ui ) {
+			ui.helper.data('ajouter', true);
+		}
+	});
+
+	/**
+	 * Éléments d'interface en sticky
+	 */
+	$('.noizetier-dashboard__outils > *').stick_in_parent();
+	$('.noisettes-dashboard__edition > *').stick_in_parent();
+
+	/**
+	 * Lors des rechargements ajax
+	 */
+	if (window.jQuery){
+		$(function(){
+			onAjaxLoad('noizetier_menu');
+		});
+	}
+
+});

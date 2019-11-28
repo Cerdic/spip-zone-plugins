@@ -1,0 +1,91 @@
+#CACHE{0}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+
+<body dir="#LANG_DIR">
+<div id="container">
+<?php
+	include_spip('demo/noizetier');
+?>
+
+	#SET{valeur, ''}
+	<p>{composition}</p>
+	<B_pages_1>
+	<ul class="liste-items liste-pages noizetier-liste-pages">
+	<BOUCLE_pages_1(NOIZETIER_PAGES) {composition} {par type, composition}>
+		<li>#TYPE - #COMPOSITION</li>
+	</BOUCLE_pages_1>
+	</ul>
+	</B_pages_1>
+		Aucune page
+	<//B_pages_1>
+
+	<p>{composition}</p>
+	<B_pages_11>
+	<ul class="liste-items liste-pages noizetier-liste-pages">
+	<BOUCLE_pages_11(NOIZETIER_PAGES) {composition}{tout} {par type, composition}>
+		<li>#TYPE - #COMPOSITION</li>
+	</BOUCLE_pages_11>
+	</ul>
+	</B_pages_11>
+		Aucune page
+	<//B_pages_11>
+
+	<p>{composition?}</p>
+	<B_pages_2>
+	<ul class="liste-items liste-pages noizetier-liste-pages">
+	<BOUCLE_pages_2(NOIZETIER_PAGES) {composition?} {par type, composition}>
+		<li>#TYPE - #COMPOSITION</li>
+	</BOUCLE_pages_2>
+	</ul>
+	</B_pages_2>
+		Aucune page
+	<//B_pages_2>
+
+	<p>{!composition}</p>
+	<B_pages_3>
+	<ul class="liste-items liste-pages noizetier-liste-pages">
+	<BOUCLE_pages_3(NOIZETIER_PAGES) {!composition} {par type, composition}>
+		<li>#TYPE - #COMPOSITION</li>
+	</BOUCLE_pages_3>
+	</ul>
+	</B_pages_3>
+		Aucune page
+	<//B_pages_3>
+
+	<p>{composition=x}</p>
+	<B_pages_4>
+	<ul class="liste-items liste-pages noizetier-liste-pages">
+	<BOUCLE_pages_4(NOIZETIER_PAGES) {composition=#GET{valeur}} {par type, composition}>
+		<li>#TYPE - #COMPOSITION</li>
+	</BOUCLE_pages_4>
+	</ul>
+	</B_pages_4>
+		Aucune page
+	<//B_pages_4>
+
+	<p>{composition!=x}</p>
+	<B_pages_5>
+	<ul class="liste-items liste-pages noizetier-liste-pages">
+	<BOUCLE_pages_5(NOIZETIER_PAGES) {composition!=#GET{valeur}} {par type, composition}>
+		<li>#TYPE - #COMPOSITION</li>
+	</BOUCLE_pages_5>
+	</ul>
+	</B_pages_5>
+		Aucune page
+	<//B_pages_5>
+
+	<p>{!composition=x}</p>
+	<B_pages_6>
+	<ul class="liste-items liste-pages noizetier-liste-pages">
+	<BOUCLE_pages_6(NOIZETIER_PAGES) {!composition=#GET{valeur}} {par type, composition}>
+		<li>#TYPE - #COMPOSITION</li>
+	</BOUCLE_pages_6>
+	</ul>
+	</B_pages_6>
+		Aucune page
+	<//B_pages_6>
+
+</div>
+</body>
+</html>

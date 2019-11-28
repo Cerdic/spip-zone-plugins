@@ -1,0 +1,112 @@
+[(#REM)
+
+	Résumé d'une noisette : nom, aperçu du contenu et boutons d'édition
+
+	Paramètres :
+		**obligatoires
+		*conseillé
+
+		- **id_noisette
+		- **profondeur : profondeur du conteneur
+		- **nb_noisettes : nombre total de noisettes du conteneur
+		- url_page : URL vers la page appelante
+		- url_add : URL vers la page d'ajout
+		- bloc : nom du bloc Z
+]
+<BOUCLE_noisette(NOISETTES){id_noisette}>
+<div[ class="(#ENV{classe})"]>
+	<div class="resume">
+	#SET{type_noisette_disponible, ''}
+	<BOUCLE_type_noisette(TYPES_NOISETTES) {type_noisette}>
+		#SET{type_noisette_nom, #NOM|typo}
+		#SET{type_noisette_icone, #ICON}
+		#SET{type_noisette_actif, #ACTIF}
+		#SET{type_noisette_necessite, #NECESSITE**}
+		#SET{type_noisette_disponible, oui}
+	</BOUCLE_type_noisette>
+	[(#GET{type_noisette_disponible}|oui)
+		[(#CHEMIN_IMAGE{#GET{type_noisette_icone}}|image_reduire{24}|inserer_attribut{class,resume__icone})]
+		[<strong class="resume__nom"[ title="id: (#ID_NOISETTE) - rang: #RANG_NOISETTE - profondeur: #PROFONDEUR"]>(#GET{type_noisette_nom})</strong>]
+		[<div class="resume__content">
+			(#NOISETTE_PREVIEW{#ID_NOISETTE, #GET{type_noisette_actif}, #GET{type_noisette_necessite}})
+		</div>]
+	]
+	[(#GET{type_noisette_disponible}|non)
+		#BOITE_OUVRIR{'','error'}
+			<:noizetier:erreur_type_noisette_indisponible{type_noisette=#TYPE_NOISETTE}:>
+		#BOITE_FERMER
+	]
+	</div>
+
+	<div class="edition">
+		[(#REM) Le bouton principal affiché en parmanence ]
+		[(#GET{type_noisette_disponible}|oui)
+			<a href="[(#URL_ECRIRE{noisette_edit}|parametre_url{id_noisette, #ID_NOISETTE})]" class="edition__main bouton-modifier" data-action="modifier" title="<:noizetier:formulaire_modifier_noisette|attribut_html:>">[(#CHEMIN_IMAGE{edit-24}|balise_img)]</a>
+		]
+		[(#REM) Menu dépliant avec les autres boutons ]
+		<ul class="edition__menu">
+			<li>
+				<div class="edition__toggle" title="<:noizetier:label_menu_ouvrir|attribut_html:>">
+					[<img height="24" width="24" src="(#CHEMIN_IMAGE{menu-24.png})" alt="" />]
+				</div>
+				<ul>
+					[<li>
+						<a 	href="(#URL_ACTION_AUTEUR{dupliquer_noisette, [(#ID_NOISETTE)], #ENV{url_page}#bloc-#ENV{bloc}})">
+							<:noizetier:formulaire_dupliquer_noisette:>
+						</a>
+					</li>]
+					[<li>
+						<a 	href="(#URL_ACTION_AUTEUR{supprimer_noisette, [(#ID_NOISETTE)], #ENV{url_page}#bloc-#ENV{bloc}})">
+							<:noizetier:formulaire_supprimer_noisette:>
+						</a>
+					</li>]
+					[(#PROFONDEUR|=={0}|oui)
+						[<li>
+							<a href="(#URL_ECRIRE{noisette_copy}
+								|parametre_url{id_noisette, #ID_NOISETTE}
+								|parametre_url{bloc, #ENV{bloc}})">
+								<:noizetier:formulaire_etendre_noisette:>
+							</a>
+						</li>]
+					]
+					[(#ENV{nb_noisettes}|>{1}|oui)
+						[<li class="groupe">
+							<a href="(#URL_ACTION_AUTEUR{decaler_noisette, [haut:(#ID_NOISETTE):#ID_CONTENEUR:#ENV{nb_noisettes}], #ENV{url_page}})">
+								↑&nbsp;<:noizetier:formulaire_deplacer_haut:>
+							</a>
+						</li>]
+						[<li>
+							<a href="(#URL_ACTION_AUTEUR{decaler_noisette, [bas:(#ID_NOISETTE):#ID_CONTENEUR:#ENV{nb_noisettes}], #ENV{url_page}})">
+								↓&nbsp;<:noizetier:formulaire_deplacer_bas:>
+							</a>
+						</li>]
+					]
+					[(#EST_CONTENEUR|=={oui}|et{#GET{type_noisette_disponible}}|oui)
+						#SET{conteneur, #CONTENEUR_IDENTIFIER{noizetier, #ARRAY{type_noisette, #TYPE_NOISETTE, id_noisette, #ID_NOISETTE}}
+						[(#REM) Bouton d'ajout de noisette à un conteneur si profondeur ok ]
+						#SET{profondeur_max,#VAL{_NOIZETIER_PROFONDEUR_MAX}|defined|?{#EVAL{_NOIZETIER_PROFONDEUR_MAX},#CONFIG{noizetier/profondeur_max}}}
+						#SET{profondeur_ok,#GET{profondeur_max}|non|ou{#ENV{profondeur}|<={#GET{profondeur_max}}}}
+						[(#GET{profondeur_ok}|oui)
+							[<li class="groupe">
+								<a href="(#ENV{url_add}
+										|parametre_url{type_noisette, #TYPE_NOISETTE}
+										|parametre_url{id_noisette, #ID_NOISETTE}
+										|parametre_url{profondeur, #ENV{profondeur}})">
+									<:noizetier:formulaire_ajouter_noisette_conteneur:>
+								</a>
+							</li>]
+						]
+						[<li>
+							<a href="(#URL_ACTION_AUTEUR{vider_conteneur, [(#GET{conteneur})], #ENV{url_page}#bloc-#ENV{bloc}})">
+								<:noizetier:formulaire_supprimer_noisettes_noisette:>
+							</a>
+						</li>]
+					]
+				</ul>
+			</li>
+		</ul>
+	</div>
+
+</div>
+<input type="hidden" name="ordre[]" value="#ID_NOISETTE" />
+</BOUCLE_noisette>

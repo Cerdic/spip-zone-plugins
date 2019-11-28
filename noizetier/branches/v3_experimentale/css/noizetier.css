@@ -1,0 +1,30 @@
+/* Styles d'une page publique en édition avec voir=noisettes */
+/* -- pour le bloc */
+.noizetier-bloc {padding:10px; border:4px dotted #df454f; margin:10px 0;}
+.noizetier-bloc .bloc-nom {color:#8a1f11; font-size:2em; margin:5px 0;}
+.noizetier-bloc .bloc-noisette {padding:10px; border:2px solid #9dba00; margin:10px 0;}
+.noizetier-bloc .bloc-noisette .type_noisette {color:#9DBA00; font-size:1.5em; margin:5px 0;}
+.noizetier-bloc .bloc-noisette .type_noisette .icone {float:right;}
+.noizetier-bloc .action_noisette-ltr {text-align:right;}
+.noizetier-bloc .action_noisette-rtl {text-align:left;}
+
+.formulaire_editer_noisette li.fieldset {margin-left:10px; margin-right:10px; border-left: solid 1px #CCC; border-right: solid 1px #CCC; border-bottom: solid 1px #CCC;}
+ul.liste-noisettes li.noisette {padding-left: 30px; background-repeat: no-repeat; background-position: left 9px;}
+ul.noizetier-liste-pages li.page,
+ul.noizetier-liste-objets li.objet {padding-left: 30px; background-repeat: no-repeat; background-position: left 9px;}
+ul.bloc li.noisette {min-height:36px;}
+ul.liste-noisettes .icone {width:36px; height:36px; padding:0; margin-left: 10px;}
+ul.liste-noisettes .icone a {width:36px; height:36px; padding:0;}
+ul.liste-noisettes .icone b {display:none;}
+.icones_texte ul.liste-noisettes .icone b {display: block;}
+.icones_texte ul.liste-noisettes .icone {width:60px;}
+.icones_texte ul.liste-noisettes .icone a {width:60px;}
+ul.liste-noisettes .noisette-up-24, ul.liste-noisettes .noisette-down-24, ul.liste-noisettes .noisette-del-24 {display:none;}
+ul.liste-noisettes li:hover .icone {display:block;}
+.liste-noisettes .editer.noisette label { float:none; margin-left:0; }
+.valider_rang input.link{background:none;border:0;cursor:pointer;padding:0 0 1px;color:#444}
+.valider_rang input.link:hover{border-bottom:1px solid;padding:0}
+.formulaire_ajouter_noisette ul.liste-noisettes-disponibles {margin: 10px;}
+/* Pour la noisette code Spip libre */
+.formulaire_editer_noisette li.editer_description_code, .formulaire_editer_noisette li.editer_code {padding-left:10px;}
+.formulaire_editer_noisette li.editer_description_code label, .formulaire_editer_noisette li.editer_code label {width:100%; margin-left:0; float:none;}
