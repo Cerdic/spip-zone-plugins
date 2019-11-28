@@ -48,7 +48,7 @@ function tablesorter_insert_head($flux) {
 						options.headers = {};
 						$(this).find("th").each(function(index,value){
 							if($(this).is(".ts_disabled"))
-								options.headers[index] = {sorter : false}; 
+								options.headers[index] = {sorter : false};
 						});
 					}
 					$(this).tablesorter(options);
@@ -89,4 +89,3 @@ function tablesorter_header_prive($flux) {
 	/* ]]> */</script>';
 	return $flux;
 }
-?>
