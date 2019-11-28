@@ -82,9 +82,9 @@ function url_absolue_si($path, $base = '') {
  * Il suffit de lui mettre un float:xxx ou un display:block pour qu'il respecte la largeur initiale du logo
  *
  * Pour masquer les logos :
- * .spip_logos {display:none}
+ * .spip_logo {display:none}
  * Pour forcer une taille maxi :
- * .spip_logos {max-width:25%;float:right}
+ * .spip_logo {max-width:25%;float:right}
  *
  * @param $logo
  *
