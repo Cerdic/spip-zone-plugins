@@ -1,0 +1,15 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+
+				<input type="checkbox" name="no_insert" class="checkbox" id="champ_no_insert "[(#CONFIG{tablesorter/no_insert}|oui) checked="checked"] value="on" />
+				<label for="champ_no_insert"><:tablesorter:no_insert:></label>
+			<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+		</div>
+	</form>
+</div>
