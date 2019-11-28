@@ -1,6 +1,0 @@
-[(#SET{niveau_titre,[(#ENV{niveau_titre}|sinon{h2})]})]
-<div class="noisette_bloctexte">
-	[<[(#GET{niveau_titre}) ]class="#GET{niveau_titre}">(#ENV**{titre}|typo)</[(#GET{niveau_titre})]>]
-	[<div class="texte">(#ENV**{texte}|propre|image_reduire{500,0})</div>]
-	[<div class="notes surlignable"><h2 class="h2 pas_surlignable"><:info_notes:></h2>(#NOTES)</div>]
-</div>
