@@ -12,13 +12,13 @@
 
 /* Logos, documents et images */
 /*
-.spip_logos {}
+.spip_logo {}
 
 .spip_documents_left,
 .spip_documents_right,
 .spip_documents_center img,
 .spip_documents:not(.spip_documents_left):not(.spip_documents_right) img,
-.spip_logos {
+.spip_logo {
   // .img-polaroid ou .img-rounded ou .img-circle
 }
 */
@@ -39,7 +39,7 @@ dl.spip_documents { dt,dd {margin-left:auto;margin-right:auto;padding-left:0;pad
 
 .cartouche {&:last-child{margin-bottom: 0};margin-bottom: $rem-vert-margin;}
 .cartouche,.hero-unit,.entry-title {
-  .spip_logos {float: right; clear: right; margin: $padding-y-lg $padding-x-lg; margin-top: 0;margin-right: 0; line-height: 1px;}
+  .spip_logo {float: right; clear: right; margin: $padding-y-lg $padding-x-lg; margin-top: 0;margin-right: 0; line-height: 1px;}
 }
 .cartouche,.hero-unit,.entry{
   h1+.publication {margin-top: -1 * $rem-vert-margin;}
@@ -48,7 +48,7 @@ dl.spip_documents { dt,dd {margin-left:auto;margin-right:auto;padding-left:0;pad
   }
 }
 .entry {margin-bottom: $rem-vert-margin;}
-.secondary .entry-title .spip_logos { margin: $padding-y-sm $padding-x-sm; margin-top: 0;margin-right: 0; }
+.secondary .entry-title .spip_logo { margin: $padding-y-sm $padding-x-sm; margin-top: 0;margin-right: 0; }
 .postmeta >:first-child >.sep:first-child {display: none}
 
 /* Notes */
