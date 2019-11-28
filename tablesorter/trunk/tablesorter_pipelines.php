@@ -20,7 +20,10 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  * @return string $flux Le contenu complété de la balise
  */
 function tablesorter_insert_head_css($flux) {
-	$flux .= '<link rel="stylesheet" href="' . direction_css(find_in_path('css/tablesorter.css')) . '" type="text/css" />';
+	if (lire_config('tablesorter/no_insert')) {
+		return $flux;
+	}
+	$flux .= '<link rel="stylesheet" href="' . direction_css(find_in_path('css/tablesorter.min.css')) . '" type="text/css" />';
 
 	return $flux;
 }
@@ -36,7 +39,10 @@ function tablesorter_insert_head_css($flux) {
  * @return string $flux Le contenu complété de la balise
  */
 function tablesorter_insert_head($flux) {
-	$flux .= '<script src="' . find_in_path('javascript/jquery.tablesorter.js') . '" type="text/javascript"></script>';
+	if (lire_config('tablesorter/no_insert')) {
+		return $flux;
+	}
+	$flux .= '<script src="' . find_in_path('javascript/jquery.tablesorter.min.js') . '" type="text/javascript"></script>';
 	$flux .= '
 	<script type="text/javascript">/* <![CDATA[ */
 	(function($){
@@ -74,8 +80,11 @@ function tablesorter_insert_head($flux) {
  * @return string $flux Le contenu complété du head
  */
 function tablesorter_header_prive($flux) {
+	if (lire_config('tablesorter/no_insert')) {
+		return $flux;
+	}
 	// Insertion des librairies js
-	$flux .= '<script src="' . find_in_path('javascript/jquery.tablesorter.js') . '" type="text/javascript"></script>';
+	$flux .= '<script src="' . find_in_path('javascript/jquery.tablesorter.min.js') . '" type="text/javascript"></script>';
 	// Inclusion des styles du plugin
 	$flux .= '<link rel="stylesheet" href="' . direction_css(find_in_path('css/tablesorter.css')) . '" type="text/css" />';
 	// Init de tablesorter
