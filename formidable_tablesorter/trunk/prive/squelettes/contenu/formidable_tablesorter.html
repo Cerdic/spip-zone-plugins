@@ -1,13 +1,13 @@
 [(#AUTORISER{voir, formulairesreponse, #ID_FORMULAIRE}|sinon_interdire_acces)]
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/css/theme.default.min.css" />
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/jquery.tablesorter.js"></script>
+<link rel="stylesheet" href="#CHEMIN{css/tablesorter.min.css}" />
+<script type="text/javascript" src="#CHEMIN{javascript/jquery.tablesorter.min.js}"></script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/jquery.tablesorter.widgets.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/widgets/widget-stickyHeaders.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/widgets/widget-columnSelector.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/widgets/widget-print.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/widgets/widget-output.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/widgets/widget-resizable.min.js"></script>
+<script type="text/javascript" src="#CHEMIN{javascript/jquery.tablesorter.widgets.min.js}"></script>
+<script type="text/javascript" src="#CHEMIN{javascript/widget-stickyHeaders.min.js}"></script>
+<script type="text/javascript" src="#CHEMIN{javascript/widget-columnSelector.min.js}"></script>
+<script type="text/javascript" src="#CHEMIN{javascript/widget-print.min.js}"></script>
+<script type="text/javascript" src="#CHEMIN{javascript/widget-output.min.js}"></script>
+<script type="text/javascript" src="#CHEMIN{javascript/widget-resizable.min.js}"></script>
 <link rel="stylesheet" href="#CHEMIN{css/formidable_tablesorter.css}" />
 <script type="text/javascript" src="#CHEMIN{js/formidable_tablesorter.js}"></script>
 <BOUCLE_formulaire(FORMULAIRES){id_formulaire}{tout}{si #AUTORISER{voir, formulairesreponse, #ID_FORMULAIRE}}>
