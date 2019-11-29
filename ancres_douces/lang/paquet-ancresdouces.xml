@@ -8,7 +8,7 @@
 	<langue code="es" url="https://trad.spip.net/tradlang_module/paquet-ancresdouces?lang_cible=es" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="dani" lien="https://trad.spip.net/auteur/dani" />
 	</langue>
-	<langue code="fa" url="https://trad.spip.net/tradlang_module/paquet-ancresdouces?lang_cible=fa" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fa" url="https://trad.spip.net/tradlang_module/paquet-ancresdouces?lang_cible=fa" total="3" traduits="2" relire="0" modifs="0" nouveaux="1" pourcent="66.67">
 		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 		<traducteur nom="RealET" lien="https://trad.spip.net/auteur/realet" />
 	</langue>
