@@ -60,13 +60,14 @@ function reinjecte_expression_compilee($expr_org) {
 		'\'{$1}\'',
 		$expr);
 
-	if (isset($_GET['debug']))
+	if (isset($_GET['debug']) and ($_GET['debug'] == 'macrosession')) {
 		echo "et renvoie : <pre>$expr</pre>";
+	}
 	return $expr;
 }
 
 function macrosession_pipe($q="!!! non défini !!!") {
-	if (isset($_GET['debug'])) {
+	if (isset($_GET['debug']) and ($_GET['debug'] == 'macrosession')) {
 		echo "exec macrosession_pipe($q)<br>";
 	}
 	return $q;
@@ -77,8 +78,9 @@ function macrosession_pipe($q="!!! non défini !!!") {
  * @return string
  */
 function macrosession_print($a) {
-	if (isset($_GET['debug']))
-		echo '<pre>'.print_r($a, 1).'</pre>';
+	if (isset($_GET['debug']) and ($_GET['debug'] == 'macrosession')) {
+		echo '<pre>' . print_r ($a, 1) . '</pre>';
+	}
 	return "''";
 }
 
@@ -96,7 +98,6 @@ function erreur_argument_macro($macro, $arg_name, $val, $p, $contexte_ok=false) 
 	if (substr($val, 0, 1) != "'") {
 		if ($contexte_ok)
 			$contexte_ok = "Pour chercher dans les variables d'environnement ou d'url, vous pouvez utiliser 'env', 'boucle', 'url' et aussi '#BALISE' pour les balises reçues par le squelette, mais pas pour les champs de la boucle immédiatement englobante";
-		// if (isset($_GET['debug']))
 		erreur_squelette ("L'argument '$arg_name' de la macro '$macro' ne doit pas être une valeur calculée (".$val."). $contexte_ok", $p);
 		return true;
 	};
