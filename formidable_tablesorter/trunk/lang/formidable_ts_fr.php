@@ -7,11 +7,18 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// F
-	'tableau_reponses' => 'Tableau des réponses',
-
-	'imprimer' => 'Imprimer le tableau',
+	// C
 	'colonnes' => 'Colonnes',
+
+	// E
 	'exporter' => 'Exporter',
-	'nb_lignes' => 'Nombre de lignes affichées :',
+
+	// I
+	'imprimer' => 'Imprimer le tableau',
+
+	// N
+	'nb_lignes' => 'Nombre de lignes affichées :',
+
+	// T
+	'tableau_reponses' => 'Tableau des réponses'
 );
