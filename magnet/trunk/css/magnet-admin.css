@@ -24,3 +24,4 @@
 .liste-items .item {position:relative;}
 .liste-items .item .spip-admin.magnets {position:absolute;right:0;bottom:0;visibility: hidden;margin: 0}
 .liste-items .item:hover .spip-admin.magnets {visibility: visible}
+.spip-admin-boutons.magnet-up,.spip-admin-boutons.magnet-down {padding-bottom: 0;padding-top: 0;line-height: 1}
