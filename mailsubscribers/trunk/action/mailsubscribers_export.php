@@ -32,12 +32,6 @@ function action_mailsubscribers_export_dist($arg = null) {
 	$id_liste = isset($args[1]) ? intval($args[1]) : false;
 
 	$where = array();
-	// '' ou 'all' pour tout exporter (sauf poubelle)
-	if (in_array($statut, array('', 'all'))) {
-		$where[] = 'M.statut<>' . sql_quote('poubelle');
-	} else {
-		$where[] = 'M.statut=' . sql_quote($statut);
-	}
 
 	$entetes = array(
 		'email',
@@ -55,12 +49,24 @@ function action_mailsubscribers_export_dist($arg = null) {
 		$identifiant = sql_getfetsel('identifiant', 'spip_mailsubscribinglists', 'id_mailsubscribinglist	=' . intval($id_liste));
 		$titre = _T('mailsubscriber:titre_mailsubscribers') . "-" . $GLOBALS['meta']['nom_site'] . "-" . $identifiant . "-" . date('Y-m-d');
 		$where[] = "N.id_mailsubscribinglist=$id_liste";
+		// '' ou 'all' pour tout exporter (sauf poubelle)
+		if (in_array($statut, array('', 'all'))) {
+			$where[] = 'N.statut<>' . sql_quote('poubelle');
+		} else {
+			$where[] = 'N.statut=' . sql_quote($statut);
+		}
 		$res = sql_select(
-			"M.email,M.nom,M.lang,M.date,M.statut,($listes) as listes",
+			"M.email,M.nom,M.lang,M.date,N.statut,($listes) as listes",
 			"spip_mailsubscribers AS M LEFT JOIN spip_mailsubscriptions as N ON M.id_mailsubscriber=N.id_mailsubscriber",
 			$where
 		);
 	} else {
+		// '' ou 'all' pour tout exporter (sauf poubelle)
+		if (in_array($statut, array('', 'all'))) {
+			$where[] = 'M.statut<>' . sql_quote('poubelle');
+		} else {
+			$where[] = 'M.statut=' . sql_quote($statut);
+		}
 		$titre = _T('mailsubscriber:titre_mailsubscribers') . "-" . $GLOBALS['meta']['nom_site'] . "-" . date('Y-m-d');
 		$res = sql_select(
 			"M.email,M.nom,M.lang,M.date,M.statut,($listes) as listes",
