@@ -51,17 +51,17 @@
 			<legend><:facteur:configuration_mailer:></legend>
 			<p class="explication"><:facteur:configuration_smtp_descriptif:></p>
 			<div class="editer-groupe">
-				<div class="editer pleine_largeur editer_facteur_smtp [ (#ENV**{erreurs}|table_valeur{facteur_smtp}|oui)erreur]">
-					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_smtp})</span>]
+				<div class="editer pleine_largeur editer_facteur_mailer [ (#ENV**{erreurs}|table_valeur{facteur_mailer}|oui)erreur]">
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_mailer})</span>]
 					<div class="choix">
-						<input type="radio" name="facteur_smtp" class="radio" value="non" id="facteur_smtp_non"[(#ENV{facteur_smtp,'non'}|=={non}|oui)checked="checked"]/>
-						<label for="facteur_smtp_non"><:facteur:utiliser_mail:></label>
+						<input type="radio" name="facteur_mailer" class="radio" value="mail" id="facteur_mailer_mail"[(#ENV{facteur_mailer,'mail'}|=={mail}|oui)checked="checked"]/>
+						<label for="facteur_mailer_mail"><:facteur:utiliser_mail:></label>
 					</div>
 					<div class="choix">
-						<input type="radio" name="facteur_smtp" class="radio" value="oui" id="facteur_smtp_oui"[(#ENV{facteur_smtp,'non'}|=={oui}|oui)checked="checked"]/>
-						<label for="facteur_smtp_oui"><:facteur:utiliser_smtp:></label>
+						<input type="radio" name="facteur_mailer" class="radio" value="smtp" id="facteur_mailer_smtp"[(#ENV{facteur_mailer,'mail'}|=={smtp}|oui)checked="checked"]/>
+						<label for="facteur_mailer_smtp"><:facteur:utiliser_smtp:></label>
 
-						<div class="suite editer-groupe editer_facteur_smtp_param" [(#ENV{facteur_smtp,'non'}|=={non}|oui)style='display:none;']>
+						<div class="suite editer-groupe editer_facteur_smtp_param" [(#ENV{facteur_mailer,'mail'}|=={smtp}|non)style='display:none;']>
 							<div class="editer editer_facteur_smtp_host [ (#ENV**{erreurs}|table_valeur{facteur_smtp_host}|oui)erreur]">
 								<label for="facteur_smtp_host"><:facteur:facteur_smtp_host:></label>[
 								<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_smtp_host})</span>]

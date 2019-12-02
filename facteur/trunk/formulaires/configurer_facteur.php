@@ -13,12 +13,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 function formulaires_configurer_facteur_charger_dist() {
 	include_spip('inc/config');
+	include_spip('classes/facteur');
+
 	$valeurs = array(
 		'facteur_adresse_envoi'             => lire_config('facteur_adresse_envoi'),
 		'facteur_adresse_envoi_nom'         => lire_config('facteur_adresse_envoi_nom'),
 		'facteur_adresse_envoi_email'       => lire_config('facteur_adresse_envoi_email'),
 		'facteur_forcer_from'               => lire_config('facteur_forcer_from'),
-		'facteur_smtp'                      => lire_config('facteur_smtp'),
+		'facteur_mailer'                    => facteur_config_mailer(),
 		'facteur_smtp_host'                 => lire_config('facteur_smtp_host'),
 		'facteur_smtp_port'                 => lire_config('facteur_smtp_port', 25),
 		'facteur_smtp_auth'                 => lire_config('facteur_smtp_auth'),
@@ -37,7 +39,6 @@ function formulaires_configurer_facteur_charger_dist() {
 	);
 
 	// recuperer le from par defaut actuel pour l'indiquer dans le formulaire
-	include_spip('classes/facteur');
 	$facteur = new Facteur('test@example.org', 'Test', '', '', array('adresse_envoi' => 'non'));
 	$valeurs['_from_defaut'] = $facteur->From;
 	if ($facteur->FromName) {
@@ -55,7 +56,7 @@ function formulaires_configurer_facteur_verifier_dist() {
 		$erreurs['facteur_adresse_envoi_email'] = _T('form_email_non_valide');
 		set_request('facteur_adresse_envoi', 'oui');
 	}
-	if (_request('facteur_smtp') == 'oui') {
+	if (_request('facteur_mailer') === 'smtp') {
 		if (!($h = _request('facteur_smtp_host'))) {
 			$erreurs['facteur_smtp_host'] = _T('info_obligatoire');
 		} else {
@@ -132,8 +133,8 @@ function formulaires_configurer_facteur_traiter_dist() {
 	$facteur_forcer_from = _request('facteur_forcer_from');
 	ecrire_meta('facteur_forcer_from', ($facteur_forcer_from=='oui')?'oui':'non');
 
-	$facteur_smtp = _request('facteur_smtp');
-	ecrire_meta('facteur_smtp', ($facteur_smtp=='oui')?'oui':'non');
+	$facteur_mailer = _request('facteur_mailer');
+	ecrire_meta('facteur_mailer', $facteur_mailer);
 
 	$facteur_smtp_host = _request('facteur_smtp_host');
 	ecrire_meta('facteur_smtp_host', $facteur_smtp_host?$facteur_smtp_host:'');
@@ -171,18 +172,6 @@ function formulaires_configurer_facteur_traiter_dist() {
 
 
 	$res = array('message_ok' => _T('facteur:config_info_enregistree'));
-
-	// faut-il envoyer un message de test ?
-	if (_request('tester')) {
-		$res = array();
-		$destinataire = _request('email_test');
-		$err = facteur_envoyer_mail_test($destinataire, _T('facteur:corps_email_de_test'));
-		if ($err) {
-			$res['message_erreur'] = $err;
-		} else {
-			$res['message_ok'] = _T('facteur:email_test_envoye');
-		}
-	}
 
 	return $res;
 }

@@ -26,6 +26,25 @@ function facteur_log_debug($message,$level){
 	spip_log("$level: ".trim($message),"facteur"._LOG_DEBUG);
 }
 
+/**
+ * Recuperer la methode du mailer configuree
+ * avec fallback vers l'ancienne config facteur_smtp
+ * @return string
+ */
+function facteur_config_mailer() {
+	$config_mailer = '';
+	if (isset($GLOBALS['meta']["facteur_mailer"])) {
+		$config_mailer = $GLOBALS['meta']["facteur_mailer"];
+	}
+	if (!$config_mailer and isset($GLOBALS['meta']["facteur_smtp"])) {
+		$config_mailer = ($GLOBALS['meta']["facteur_smtp"] === 'oui') ? 'smtp' : 'mail';
+	}
+	if (!in_array($config_mailer, array('mail', 'smtp'))) {
+		$config_mailer = 'mail';
+	}
+	return $config_mailer;
+}
+
 
 class Facteur extends PHPMailer {
 	/**
@@ -54,12 +73,14 @@ class Facteur extends PHPMailer {
 		foreach (array(
 			'adresse_envoi', 'adresse_envoi_email', 'adresse_envoi_nom', 'forcer_from',
 			'cc', 'bcc',
-			'smtp', 'smtp_host', 'smtp_port', 'smtp_auth',
+			'smtp_host', 'smtp_port', 'smtp_auth',
 			'smtp_username', 'smtp_password', 'smtp_secure', 'smtp_sender', 'smtp_tls_allow_self_signed',
 			'filtre_images', 'filtre_iso_8859',
 		) as $config) {
 			$defaut[$config] = isset($GLOBALS['meta']["facteur_$config"]) ? $GLOBALS['meta']["facteur_$config"] : '';
 		}
+		$defaut['smtp'] = (facteur_config_mailer() === 'smtp' ? 'oui' : 'non');
+
 		// On fusionne les options avec d'éventuelles surcharges lors de l'appel
 		$options = array_merge($defaut, $options);
 

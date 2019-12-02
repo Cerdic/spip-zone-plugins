@@ -15,7 +15,7 @@ function facteur_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
 	$maj['create'] = array(
-		array('ecrire_meta','facteur_smtp', 'non'),
+		array('ecrire_meta','facteur_mailer', 'mail'),
 		array('ecrire_meta','facteur_smtp_auth', 'non'),
 		array('ecrire_meta','facteur_smtp_secure', 'non'),
 		array('ecrire_meta','facteur_smtp_sender', ''),
@@ -33,7 +33,7 @@ function facteur_upgrade($nom_meta_base_version, $version_cible) {
 function facteur_vieil_upgrade() {
 	// migration depuis tres ancienne version, a la main
 	if (isset($GLOBALS['meta']['spip_notifications_version'])) {
-		ecrire_meta('facteur_smtp', $GLOBALS['meta']['spip_notifications_smtp']);
+		ecrire_meta('facteur_mailer', ($GLOBALS['meta']['spip_notifications_smtp'] === 'oui') ? 'smtp' : 'mail');
 		ecrire_meta('facteur_smtp_auth', $GLOBALS['meta']['spip_notifications_smtp_auth']);
 		ecrire_meta('facteur_smtp_secure', $GLOBALS['meta']['spip_notifications_smtp_secure']);
 		ecrire_meta('facteur_smtp_sender', $GLOBALS['meta']['spip_notifications_smtp_sender']);
@@ -63,9 +63,9 @@ function facteur_vieil_upgrade() {
 
 
 function facteur_vider_tables($nom_meta_base_version) {
-	// cfg la dessus, ca serait mieux !
 	effacer_meta('facteur_version');
-	effacer_meta('facteur_smtp');
+	effacer_meta('facteur_smtp'); // vieille config
+	effacer_meta('facteur_mailer');
 	effacer_meta('facteur_smtp_auth');
 	effacer_meta('facteur_smtp_secure');
 	effacer_meta('facteur_smtp_sender');
