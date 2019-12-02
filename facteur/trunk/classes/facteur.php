@@ -32,13 +32,14 @@ function facteur_log_debug($message,$level){
  * @return string
  */
 function facteur_config_mailer() {
-	$config_mailer = '';
-	if (isset($GLOBALS['meta']["facteur_mailer"])) {
-		$config_mailer = $GLOBALS['meta']["facteur_mailer"];
+	include_spip('inc/config');
+
+	// si jamais les meta sont pas migrees... le faire a l'arrache !
+	if (isset($GLOBALS['meta']["facteur_smtp"])) {
+		include_spip('facteur_administrations');
+		facteur_migre_metas_to_config();
 	}
-	if (!$config_mailer and isset($GLOBALS['meta']["facteur_smtp"])) {
-		$config_mailer = ($GLOBALS['meta']["facteur_smtp"] === 'oui') ? 'smtp' : 'mail';
-	}
+	$config_mailer = lire_config("facteur/mailer",'');
 	if (!in_array($config_mailer, array('mail', 'smtp'))) {
 		$config_mailer = 'mail';
 	}
@@ -66,10 +67,12 @@ class Facteur extends PHPMailer {
 	 * @param $message_texte
 	 * @param array $options
 	 *
+	 * @throws Exception
 	 */
 	public function __construct($email, $objet, $message_html, $message_texte, $options = array()) {
 		// On récupère toutes les options par défaut depuis le formulaire de config
 		$defaut = array();
+		$defaut['smtp'] = (facteur_config_mailer() === 'smtp' ? 'oui' : 'non');
 		foreach (array(
 			'adresse_envoi', 'adresse_envoi_email', 'adresse_envoi_nom', 'forcer_from',
 			'cc', 'bcc',
@@ -77,9 +80,8 @@ class Facteur extends PHPMailer {
 			'smtp_username', 'smtp_password', 'smtp_secure', 'smtp_sender', 'smtp_tls_allow_self_signed',
 			'filtre_images', 'filtre_iso_8859',
 		) as $config) {
-			$defaut[$config] = isset($GLOBALS['meta']["facteur_$config"]) ? $GLOBALS['meta']["facteur_$config"] : '';
+			$defaut[$config] = lire_config("facteur/$config", '');
 		}
-		$defaut['smtp'] = (facteur_config_mailer() === 'smtp' ? 'oui' : 'non');
 
 		// On fusionne les options avec d'éventuelles surcharges lors de l'appel
 		$options = array_merge($defaut, $options);

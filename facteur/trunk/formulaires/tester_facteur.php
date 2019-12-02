@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function formulaires_tester_facteur_charger_dist() {
 	include_spip('inc/config');
 	$valeurs = array(
-		'email_test'                        => lire_config('facteur_adresse_envoi') == 'oui' ? lire_config('facteur_adresse_envoi_email') : $GLOBALS['meta']['email_webmaster'],
+		'email_test' => lire_config('facteur/adresse_envoi') == 'oui' ? lire_config('facteur/adresse_envoi_email', '') : $GLOBALS['meta']['email_webmaster'],
 	);
 
 	if (isset($GLOBALS['_message_html_test'])) {

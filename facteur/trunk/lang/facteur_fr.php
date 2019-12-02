@@ -63,7 +63,7 @@ Vérifiez votre fichier <tt>mes_options.php</tt>",
 	'label_message_envoye' => 'Message envoyé :',
 
 	// M
-	'message_identite_email' => 'La <a href="@url@">configuration du plugin <i>Facteur</i></a> surcharge cette adresse email pour l’envoi de courriels.',
+	'message_identite_email' => 'La <a href="@url@">configuration du plugin <i>Facteur</i></a> surcharge cette adresse email avec <b>@email@</b> pour l’envoi de courriels.',
 
 	// N
 	'note_test_configuration' => 'Un email sera envoyé à cette adresse.',

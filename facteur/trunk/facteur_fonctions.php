@@ -86,11 +86,12 @@ function facteur_mail_html2text($html){
  * 		Le contexte du pipeline modifé
  */
 function facteur_formulaire_fond($flux) {
-	if (($flux['args']['form'] == 'configurer_identite')
-		&& (isset($GLOBALS['meta']['facteur_adresse_envoi']) && $GLOBALS['meta']['facteur_adresse_envoi'] == 'oui')
-		&& (isset($GLOBALS['meta']['facteur_adresse_envoi_email']) && strlen($GLOBALS['meta']['facteur_adresse_envoi_email']) > 0)) {
+	if ($flux['args']['form'] == 'configurer_identite'
+	  and include_spip('inc/config')
+	  and lire_config('facteur/adresse_envoi') === 'oui'
+	  and strlen($email = lire_config('facteur/adresse_envoi_email', '')) ) {
 		$url = generer_url_ecrire('configurer_facteur');
-		$ajout = '<p class="notice" style="margin-top:0">'._T('facteur:message_identite_email', array('url' => $url)).'</p>';
+		$ajout = '<p class="notice" style="margin-top:0">'._T('facteur:message_identite_email', array('url' => $url, 'email' => $email)).'</p>';
 		if (preg_match(",<(div|li) [^>]*class=[\"']editer editer_email_webmaster.*>,Uims", $flux['data'], $match)) {
 			$p = strpos($flux['data'], $match[0]);
 			$p = strpos($flux['data'], "<input", $p);
