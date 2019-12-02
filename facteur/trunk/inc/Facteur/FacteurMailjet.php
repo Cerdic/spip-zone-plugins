@@ -1,0 +1,405 @@
+<?php
+/**
+ * Plugin Facteur 4
+ * (c) 2009-2019 Collectif SPIP
+ * Distribue sous licence GPL
+ *
+ * @package SPIP\Facteur\FacteurSMTP
+ */
+
+namespace SPIP\Facteur;
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use SPIP\Facteur\Api\Mailjetv3 as Mailjet;
+
+if (!defined("_ECRIRE_INC_VERSION")){
+	return;
+}
+
+include_spip('inc/Facteur/FacteurMail');
+
+/**
+ * Utilise l'API REST en v3
+ * Class FacteurMailjetv3
+ */
+class FacteurMailjet extends FacteurMail {
+
+	protected $api_version = "v3/";
+	protected $message = array(
+		'FromEmail' => '',
+		'FromName' => '',
+		'Subject' => '',
+		'Text-part' => '',
+		'Html-part' => '',
+		//'Mj-campaign' => '',
+		//'Mj-deduplicatecampaign' => 1,
+		//'Mj-CustomID' => '',
+		'Headers' => array(//'Reply-To' => 'copilot@mailjet.com',
+		),
+		'Attachments' => array(// {"Content-type":"text/plain","Filename":"test.txt","content":"VGhpcyBpcyB5b3VyIGF0dGFjaGVkIGZpbGUhISEK"}]
+		),
+		'Inline_attachments' => array(// {"Content-type":"text/plain","Filename":"test.txt","content":"VGhpcyBpcyB5b3VyIGF0dGFjaGVkIGZpbGUhISEK"}]
+		),
+
+	);
+	protected $message_dest = array(
+		'To' => array(/*array(
+	    'Email' => '',
+	    'Name' => '',
+	   )*/
+		),
+		'CC' => array(/*array(
+	    'Email' => '',
+	    'Name' => '',
+	   )*/
+		),
+		'BCC' => array(/*array(
+	    'Email' => '',
+	    'Name' => '',
+	   )*/
+		),
+	);
+
+	// pour le tracking des campagne
+	protected $trackingId;
+
+	protected $apiVersion = 3;
+	protected $apiKey;
+	protected $apiSecretKey;
+
+	/**
+	 * Facteur constructor.
+	 * @param array $options
+	 * @throws Exception
+	 */
+	public function __construct($options = array()){
+		parent::__construct($options);
+		$this->mailer = 'mailjet';
+
+		if (!empty($options['mailjet_api_version'])){
+			$this->apiVersion = $options['mailjet_api_version'];
+		}
+		if (!empty($options['mailjet_api_key'])){
+			$this->apiKey = $options['mailjet_api_key'];
+		}
+		if (!empty($options['mailjet_api_version'])){
+			$this->apiSecretKey = $options['mailjet_secret_key'];
+		}
+		if (!empty($options['tracking_id'])){
+			$this->trackingId = $options['tracking_id'];
+		}
+	}
+
+	/**
+	 * Auto-configuration du mailer si besoin
+	 * (rien a faire ici dans le cas par defaut)
+	 * @return bool
+	 */
+	public function configure(){
+		parent::configure();
+		$this->addAuthorizedSender($this->From);
+		return true;
+	}
+
+	/**
+	 * @return Mailjet
+	 */
+	protected function &getMailjetAPI(){
+		static $mj = null;
+		if (is_null($mj)){
+
+			switch ($this->apiVersion) {
+				case 3:
+				default:
+					include_spip('inc/Facteur/Api/Mailjetv3');
+					$mj = new Mailjet($this->apiKey, $this->apiSecretKey);
+			}
+
+			$mj->debug = 0;
+		}
+		return $mj;
+	}
+
+
+	/**
+	 * Verifier si un email d'envoi est dans la liste des senders mailjet
+	 * et sinon l'ajoute
+	 *
+	 * @param string $sender_email
+	 * @param bool $force
+	 * @return bool
+	 */
+	protected function addAuthorizedSender($sender_email, $force = false){
+
+		$status = $this->readSenderStatus($sender_email);
+
+		if ($status=="active"){
+			return $status;
+		} // active
+		if ($status AND !$force){
+			return $status;
+		} // pending
+
+		// si le sender n'est pas dans la liste ou en attente
+		$mj = $this->getMailjetAPI();
+
+		$params = array(
+			'data' => array('Email' => $sender_email),
+		);
+		$res = $mj->sender($params);
+
+		return $this->readSenderStatus($sender_email);
+	}
+
+	/**
+	 * Lire le status d'un sender chez mailjet
+	 * @param string $sender_email
+	 * @return bool|string
+	 */
+	protected function readSenderStatus($sender_email){
+
+		$mj = $this->getMailjetAPI();
+		$params = array(
+			'filters' => array('Email' => $sender_email),
+		);
+		$res = (array)$mj->sender($params);
+		if (!isset($res['Count'])){
+			return null;
+		}
+		if (isset($res['Data'])){
+			foreach ($res['Data'] as $sender){
+				if ($sender['Email']==$sender_email){
+					if (in_array($sender['Status'], array('Active', 'Inactive'))){
+						return strtolower($sender['Status']);
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+
+
+	protected function cleanAdress($address, $name = ''){
+		$address = trim($address);
+		$name = trim(preg_replace('/[\r\n]+/', '', $name)); //Strip breaks and trim
+		if (!self::ValidateAddress($address)){
+			$this->SetError('invalid_address' . ': ' . $address);
+			return false;
+		}
+		return array($address, $name);
+	}
+
+	/**
+	 * Adds a "To" address.
+	 * @param string $address
+	 * @param string $name
+	 * @return boolean true on success, false if address already used
+	 */
+	public function AddAddress($address, $name = ''){
+		if ($a = $this->cleanAdress($address, $name)){
+			$this->message_dest['To'][] = array('Email' => $address, 'Name' => $name);
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Adds a "Cc" address.
+	 * Note: this function works with the SMTP mailer on win32, not with the "mail" mailer.
+	 * @param string $address
+	 * @param string $name
+	 * @return boolean true on success, false if address already used
+	 */
+	public function AddCC($address, $name = ''){
+		if ($a = $this->cleanAdress($address, $name)){
+			$this->message_dest['CC'][] = array('Email' => $address, 'Name' => $name);
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Adds a "Bcc" address.
+	 * Note: this function works with the SMTP mailer on win32, not with the "mail" mailer.
+	 * @param string $address
+	 * @param string $name
+	 * @return boolean true on success, false if address already used
+	 */
+	public function AddBCC($address, $name = ''){
+		if ($a = $this->cleanAdress($address, $name)){
+			$this->message_dest['BCC'][] = array('Email' => $address, 'Name' => $name);
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Adds a "Reply-to" address.
+	 * @param string $address
+	 * @param string $name
+	 * @return boolean
+	 */
+	public function AddReplyTo($address, $name = ''){
+		if ($a = $this->cleanAdress($address, $name)){
+			$this->message['Headers']['ReplyTo'] = $address;
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Adds a custom header.
+	 * @access public
+	 * @return void
+	 */
+	public function AddCustomHeader($name, $value = null){
+		if ($value===null){
+			// Value passed in as name:value
+			list($name, $value) = explode(':', $name, 2);
+		}
+		$this->message['Headers'][$name] = trim($value);
+	}
+
+	/**
+	 * @return bool
+	 * @throws \Exception
+	 */
+	public function Send(){
+
+		$this->message['Html-part'] = $this->Body;
+		$this->message['Text-part'] = $this->AltBody;
+		$this->message['Subject'] = $this->Subject;
+		$this->message['FromEmail'] = $this->From;
+		$this->message['FromName'] = $this->FromName;
+
+
+		if (count($this->attachment)){
+			$inline_attachements = [];
+			$attachments = [];
+			foreach ($this->attachment as $attachment){
+				$bString = $attachment[5];
+				if ($bString){
+					$string = $attachment[0];
+				} else {
+					$path = $attachment[0];
+					$string = file_get_contents($path);
+				}
+				$string = base64_encode($string);
+
+				if ($attachment[6]==='inline'){
+					$inline_attachements[] = array(
+						"Content-type" => $attachment[4],
+						"Filename" => $attachment[7], // cid
+						"content" => $string,
+					);
+				} else {
+					$attachments[] = array(
+						"Content-type" => $attachment[4],
+						"Filename" => $attachment[1],
+						"content" => $string
+					);
+				}
+				// {"Content-type":"text/plain","Filename":"test.txt","content":"VGhpcyBpcyB5b3VyIGF0dGFjaGVkIGZpbGUhISEK"}]
+			}
+			$this->message['Attachments'] = $attachments;
+			$this->message['Inline_attachments'] = $inline_attachements;
+		}
+
+		foreach (['To', 'CC', 'BCC'] as $dest_type){
+			if (!empty($this->message_dest[$dest_type]) and count($this->message_dest[$dest_type])){
+				$dests = array();
+				foreach ($this->message_dest[$dest_type] as $dest){
+					$d = $dest['Email'];
+					if (!empty($dest['Name'])){
+						$d = $dest['Name'] . " <$d>";
+					}
+					$dests[] = $d;
+				}
+				$this->message[$dest_type] = implode(',', $dests);
+			}
+		}
+
+		// ajouter le trackingId en tag, pour retrouver le message apres webhook
+		if (!empty($this->trackingId)
+			and $id = $this->trackingId){
+			// prefixer le tracking par l'url du site pour ne pas melanger les feedbacks
+			$this->message['Mj-campaign'] = protocole_implicite($GLOBALS['meta']['adresse_site']) . "/#" . $id;
+			$this->message['Mj-deduplicatecampaign'] = 1;
+		}
+
+
+		// pas de valeur vide dans le message
+		foreach (array_keys($this->message) as $k){
+			if (empty($this->message[$k])){
+				unset($this->message[$k]);
+			}
+		}
+
+		$mj = $this->getMailjetAPI();
+		$res = $mj->send(array('data' => $this->message));
+		if (!$res){
+			$this->SetError($mj->_error);
+			if ($this->exceptions){
+				throw new \Exception($mj->_error);
+			}
+			return false;
+		}
+
+		/*
+		{
+		    "ErrorInfo": "Bad Request",
+		    "ErrorMessage": "Unknown resource: \"contacts\"",
+		    "StatusCode": 400
+		}
+		*/
+
+		// statut d'erreur au premier niveau ?
+		if (isset($res['StatusCode'])
+			AND intval($res['StatusCode']/100)>2){
+
+			$error = "status " . $res['StatusCode'] . " - " . $res['ErrorInfo'] . ": " . $res['ErrorMessage'];
+			$this->SetError($error);
+			if ($this->exceptions){
+				throw new \Exception($error);
+			}
+			return false;
+		}
+
+		// { "Sent" : [{ "Email" : "cedric@yterium.com", "MessageID" : 19140330729428381 }] }
+		if (isset($res['Sent']) AND count($res['Sent'])){
+			return true;
+		}
+		// les autres type de reponse sont non documentees. On essaye au hasard?
+		if (isset($res['Queued']) AND count($res['Queued'])){
+			return true;
+		}
+		if (isset($res['Invalid']) AND count($res['Invalid'])){
+			$this->SetError($error = "invalid");
+			if ($this->exceptions){
+				throw new \Exception($error);
+			}
+			return false;
+		}
+		if (isset($res['Rejected']) AND count($res['Rejected'])){
+			$this->SetError($error = "rejected");
+			if ($this->exceptions){
+				throw new \Exception($error);
+			}
+			return false;
+		}
+
+		// Erreur inconnue
+		$this->SetError("mailjetERROR " . var_export($res, true));
+		$this->log($error = "mailjet/send resultat inatendu : " . json_encode($res), _LOG_ERREUR);
+		if ($this->exceptions){
+			throw new \Exception($error);
+		}
+		return false;
+	}
+
+
+	public function CreateHeader(){
+	}
+}

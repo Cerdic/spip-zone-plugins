@@ -67,6 +67,7 @@
 					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{mailer})</span>]
 					<INCLURE{fond=formulaires/inc-config-facteur-mailer-mail,env} />
 					<INCLURE{fond=formulaires/inc-config-facteur-mailer-smtp,env} />
+					<INCLURE{fond=formulaires/inc-config-facteur-mailer-mailjet,env} />
 				</div>
 				<div class="editer editer_smtp_sender [ (#ENV**{erreurs}|table_valeur{smtp_sender}|oui)erreur]">
 					<label for="smtp_sender"><:facteur:facteur_smtp_sender:></label>[

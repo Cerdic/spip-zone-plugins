@@ -13,9 +13,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 function formulaires_tester_facteur_charger_dist() {
 	include_spip('inc/config');
+
 	$valeurs = array(
-		'email_test' => lire_config('facteur/adresse_envoi') == 'oui' ? lire_config('facteur/adresse_envoi_email', '') : $GLOBALS['meta']['email_webmaster'],
+		'email_test' => $GLOBALS['meta']['email_webmaster'],
 	);
+	if (!empty($GLOBALS['visiteur_session']['email'])) {
+		$valeurs['email_test'] = $GLOBALS['visiteur_session']['email'];
+	}
 
 	if (defined('_TEST_EMAIL_DEST')) {
 		if (_TEST_EMAIL_DEST) {

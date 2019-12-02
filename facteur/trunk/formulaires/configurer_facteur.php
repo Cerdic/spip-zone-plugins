@@ -11,6 +11,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+function formulaires_configurer_facteur_cles_password_masques() {
+	return array(
+		'smtp_password',
+		'mailjet_secret_key',
+	);
+}
+
 function formulaires_configurer_facteur_charger_dist() {
 
 	include_spip('inc/cvt_configurer');
@@ -18,8 +25,11 @@ function formulaires_configurer_facteur_charger_dist() {
 	$valeurs = cvtconf_formulaires_configurer_recense('configurer_facteur');
 	$valeurs['editable'] = true;
 
-	$valeurs['_smtp_password'] = isset($valeurs['smtp_password']) ? $valeurs['smtp_password'] : '';
-	$valeurs['smtp_password'] = '';
+	foreach(formulaires_configurer_facteur_cles_password_masques() as $_key){
+		$valeurs['_'.$_key] = $valeurs[$_key];
+		$valeurs[$_key] = '';
+	}
+
 
 	include_spip('classes/facteur');
 	// recuperer le from par defaut actuel pour l'indiquer dans le formulaire
@@ -119,9 +129,7 @@ function formulaires_configurer_facteur_traiter_dist() {
 
 	// reinjecter les password pas saisis si besoin
 	$restore_after_save = array();
-	foreach(array(
-		        'smtp_password',
-		        ) as $_key){
+	foreach(formulaires_configurer_facteur_cles_password_masques() as $_key){
 		if (!_request($_key)){
 			$restore_after_save[$_key] = '';
 			set_request($_key,lire_config('facteur/'.$_key));
