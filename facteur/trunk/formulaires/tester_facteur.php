@@ -17,6 +17,15 @@ function formulaires_tester_facteur_charger_dist() {
 		'email_test' => lire_config('facteur/adresse_envoi') == 'oui' ? lire_config('facteur/adresse_envoi_email', '') : $GLOBALS['meta']['email_webmaster'],
 	);
 
+	if (defined('_TEST_EMAIL_DEST')) {
+		if (_TEST_EMAIL_DEST) {
+			$valeurs['_message_warning'] = _T('facteur:info_envois_forces_vers_email', array('email' => _TEST_EMAIL_DEST));
+		}
+		else {
+			$valeurs['_message_warning'] = _T('facteur:info_envois_bloques_constante');
+		}
+	}
+
 	if (isset($GLOBALS['_message_html_test'])) {
 		$valeurs['_message_html_test'] = $GLOBALS['_message_html_test'];
 	}

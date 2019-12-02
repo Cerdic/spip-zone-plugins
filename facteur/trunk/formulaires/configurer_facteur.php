@@ -29,6 +29,15 @@ function formulaires_configurer_facteur_charger_dist() {
 		$valeurs['_from_defaut'] = $facteur->FromName . ' &lt;'.$valeurs['_from_defaut'].'&gt;';
 	}
 
+	if (defined('_TEST_EMAIL_DEST')) {
+		if (_TEST_EMAIL_DEST) {
+			$valeurs['_message_warning'] = _T('facteur:info_envois_forces_vers_email', array('email' => _TEST_EMAIL_DEST));
+		}
+		else {
+			$valeurs['_message_warning'] = _T('facteur:info_envois_bloques_constante');
+		}
+	}
+
 	return $valeurs;
 }
 

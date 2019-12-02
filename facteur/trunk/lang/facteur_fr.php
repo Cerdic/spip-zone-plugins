@@ -25,8 +25,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_generale' => 'Il y a une ou plusieurs erreurs de configuration. Veuillez vérifier le contenu du formulaire.',
 	'erreur_invalid_host' => 'Ce nom d’hôte n’est pas correct',
 	'erreur_invalid_port' => 'Ce numéro de port n’est pas correct',
-	'erreur_envoi_bloque_constante' => "Envois bloqués par la constante <tt>_TEST_EMAIL_DEST</tt>.
+	'erreur_envoi_bloque_constante' => "Envoi bloqué par la constante <tt>_TEST_EMAIL_DEST</tt>.
 Vérifiez votre fichier <tt>mes_options.php</tt>",
+
+	// I
+	'info_envois_forces_vers_email' => "Tous les envois sont forcés vers l'adresse <b>@email@</b> par la constante <tt>_TEST_EMAIL_DEST</tt>",
+	'info_envois_bloques_constante' => "Tous les envois sont bloqués par la constante <tt>_TEST_EMAIL_DEST</tt>.",
 
 	// F
 	'facteur_adresse_envoi_email' => 'Email :',
