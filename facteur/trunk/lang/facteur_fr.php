@@ -77,7 +77,7 @@ Vérifiez votre fichier <tt>mes_options.php</tt>",
 	'titre_configurer_facteur' => 'Configuration de Facteur',
 
 	// U
-	'utiliser_mail' => 'Utiliser la fonction mail de PHP',
+	'utiliser_mail' => 'Utiliser la fonction <tt>mail()</tt> de PHP',
 	'utiliser_reglages_site' => 'Utiliser les réglages du site SPIP : <br /><tt>@from@</tt>',
 	'utiliser_smtp' => 'Utiliser SMTP',
 
