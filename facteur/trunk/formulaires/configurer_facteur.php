@@ -25,8 +25,11 @@ function formulaires_configurer_facteur_charger_dist() {
 	// recuperer le from par defaut actuel pour l'indiquer dans le formulaire
 	$facteur = new Facteur('test@example.org', 'Test', '', '', array('adresse_envoi' => 'non'));
 	$valeurs['_from_defaut'] = $facteur->From;
+	$valeurs['_from_defaut_nom'] = '';
+	$valeurs['_from_defaut_email'] = $facteur->From;
 	if ($facteur->FromName) {
 		$valeurs['_from_defaut'] = $facteur->FromName . ' &lt;'.$valeurs['_from_defaut'].'&gt;';
+		$valeurs['_from_defaut_nom'] = $facteur->FromName;
 	}
 
 	if (defined('_TEST_EMAIL_DEST')) {

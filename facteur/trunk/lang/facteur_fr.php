@@ -82,7 +82,7 @@ Vérifiez votre fichier <tt>mes_options.php</tt>",
 
 	// U
 	'utiliser_mail' => 'Utiliser la fonction <tt>mail()</tt> de PHP',
-	'utiliser_reglages_site' => 'Utiliser les réglages du site SPIP : <br /><tt>@from@</tt>',
+	'utiliser_reglages_site' => 'Utiliser les réglages du site SPIP',
 	'utiliser_smtp' => 'Utiliser SMTP',
 
 	// V

@@ -17,6 +17,16 @@
 					<div class="choix">
 						<input type="radio" name="adresse_envoi" class="radio" value="non" id="adresse_envoi_non"[(#ENV{adresse_envoi,'non'}|=={non}|oui)checked="checked"]/>
 						<label for="adresse_envoi_non"><:facteur:utiliser_reglages_site{from=#ENV{_from_defaut}}:></label>
+						<div class="suite editer-groupe"[(#ENV{adresse_envoi,'non'}|=={non}|non)style='display:none;']>
+							<div class="editer editer_from_defaut_nom">
+								<label for="from_defaut_nom"><:facteur:facteur_adresse_envoi_nom:></label>
+								<input type="text" disabled="disabled" class="text" value="#ENV**{_from_defaut_nom}" id="from_defaut_nom" />
+							</div>
+							<div class="editer editer_from_defaut_email">
+								<label for="from_defaut_email"><:facteur:facteur_adresse_envoi_email:></label>
+								<input type="text" disabled="disabled" class="text" value="#ENV**{_from_defaut_email}" id="from_defaut_email" />
+							</div>
+						</div>
 					</div>
 					<div class="choix">
 						<input type="radio" name="adresse_envoi" class="radio" value="oui" id="adresse_envoi_oui"[(#ENV{adresse_envoi,'non'}|=={oui}|oui)checked="checked"]/>
