@@ -1,0 +1,45 @@
+<B_a>
+<pre style="white-space: pre-wrap;       /* css-3 */
+ white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+ white-space: -pre-wrap;      /* Opera 4-6 */
+ white-space: -o-pre-wrap;    /* Opera 7 */
+ word-wrap: break-word;       /* Internet Explorer 5.5+ */"
+ ><BOUCLE_a(ARTICLES){id_article=#ENV*{id_article}}{tout}>
+[
+===== <:info_titre:> =====
+(#TITRE*|entites_html)
+
+][
+===== <:info_surtitre:> =====
+(#SURTITRE*|entites_html)
+
+][
+===== <:soustitre:> =====
+(#SOUSTITRE*|entites_html)
+
+][
+===== <:texte_descriptif_rapide:> =====
+(#DESCRIPTIF*|entites_html)
+
+][
+===== <:info_chapeau:> =====
+(#CHAPO*|entites_html)
+
+][
+===== <:entree_liens_sites:> =====
+<:info_titre:>[(#NOM_SITE*|entites_html)]
+<:info_url:>(#URL_SITE*|entites_html)
+
+][
+===== <:info_texte:> =====
+(#TEXTE*|entites_html)
+
+][
+===== <:info_post_scriptum:> =====
+(#PS*|entites_html)]
+[
+===== <:bouton_redirection:> =====
+(#VIRTUEL*|entites_html)]
+</BOUCLE_a>
+</pre>
+</B_a>

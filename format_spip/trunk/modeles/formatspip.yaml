@@ -1,0 +1,15 @@
+nom: '<:formatspip:texte_formatspip:>'
+logo: 'images/formatspip-24.png'
+icone_barre: 'formatspip.png'
+parametres:
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'modele'
+      defaut: 'formatspip'
+  -
+    saisie: 'input'
+    options:
+      nom: 'id_modele'
+      label: 'Id Article'
+      defaut: ''

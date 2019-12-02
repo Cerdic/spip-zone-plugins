@@ -3,7 +3,7 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-'texte_formatspip' => 'TEXTE AU FORMAT SPIP',
+'texte_formatspip' => 'Texte au format SPIP',
 
 );
 
