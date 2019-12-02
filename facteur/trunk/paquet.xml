@@ -17,7 +17,7 @@
 
 	<pipeline nom="facteur_pre_envoi" action="" />
 	<pipeline nom="ieconfig_metas" inclure="facteur_ieconfig_metas.php" />
-	<pipeline nom="formulaire_fond" inclure="facteur_pipelines.php" />
+	<pipeline nom="formulaire_fond" inclure="facteur_fonctions.php" />
 
 	<menu nom="configurer_facteur" titre="facteur:configuration_facteur" parent="menu_configuration" icone="images/facteur-16.png" />
 </paquet>
