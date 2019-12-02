@@ -111,63 +111,61 @@ function multilang_formulaire_traiter($flux) {
 }
 
 /**
+ * Modifie le résultat de la compilation des squelettes
+ *
+ * Sur la page crayons.js, on insère également notre javascript pour être utilisable
+ * dans les crayons
+ *
+ * @note
+ * Pour crayons v2+
+ * Pour les versions précédentes, voir dans affichage_final
+ * On fait l'économie du test de version, car ce sont 2 pipelines différents selon les versions.
+ *
+ * @param string $flux Le contenu de la page
+ * @return string $flux Le contenu de la page modifiée
+ */
+function multilang_recuperer_fond($flux) {
+	if (
+		$flux['args']['fond'] === 'crayons.js'
+		and (count(explode(',', $GLOBALS['meta']['langues_multilingue'])) > 1)
+		and include_spip('inc/config')
+		and $config = lire_config('multilang', array())
+		and ($config['multilang_public'] == 'on')
+		and ($config['multilang_crayons'] == 'on')
+	) {
+		include_spip('javascript/multilang_crayons');
+		$flux['data']['texte'] .= multilang_javascript_crayons($config);
+	}
+
+	return $flux;
+}
+
+/**
  * Insertion dans le pipeline affichage_final (SPIP)
  *
  * Sur la page crayons.js, on insère également notre javascript pour être utilisable
  * dans les crayons
  *
+ * @note
+ * Pour crayons < v2
+ * Pour les versions ultérieures, voir dans recuperer_fond
+ * On fait l'économie du test de version, car ce sont 2 pipelines différents selon les versions.
+ *
  * @param string $flux Le contenu de la page
  * @return string $flux Le contenu de la page modifiée
  */
 function multilang_affichage_final($flux) {
-	if (isset($_REQUEST['page']) && $_REQUEST['page'] == 'crayons.js'
-		and (count(explode(',', $GLOBALS['meta']['langues_multilingue'])) > 1)) {
-		if (!function_exists('lire_config')) {
-			include_spip('inc/config');
-		}
-		$config = lire_config('multilang', array());
-
-		/**
-		 * On n'utilise multilang que si l'espace public est activé ainsi que les crayons
-		 */
-		if (($config['multilang_public'] == 'on') && ($config['multilang_crayons'] == 'on')) {
-			unset($config['multilang_public']);
-			unset($config['multilang_crayons']);
-			$root = array();
-
-			if (isset($config['siteconfig']) && $config['siteconfig']) {
-				$root[] = 'input[type=hidden][name*=name_][value|=meta-valeur]';
-				unset($config['siteconfig']);
-			}
-			foreach ($config as $conf => $val) {
-				if ($conf == 'gis') {
-					// Les points gis sont traités bizarrement dans les crayons qui enlèvent
-					// purement et simplement leur 's'
-					$conf = 'gi';
-				}
-				if ($val == 'on') {
-					$root[] = 'input[type=hidden][name*=name_][value|='.$conf.']:not(input[value|='.$conf.'-logo]):not(input[value|='.$conf.'-vignette]):not(input[value|='.$conf.'-fichier])';
-					unset($config[$conf]);
-				}
-			}
-			$texte = '
-				var crayons_multilang_init = function(){
-					if(typeof(multilang_init_lang) == "function"){
-						var crayons_root = ".formulaire_spip:has('.implode(',', $root).')",
-							fields_selector = "textarea,input:text:not(input.date,input.heure,*.nomulti)",
-							forms_selector = "form[class!=\'form_upload\'][class!=\'form_upload_icon\']",
-							root_opt = "form:has(.multilang)",
-							fields_selector_opt = ".multilang";
-						multilang_init_lang({fields:fields_selector,fields_opt:fields_selector_opt,root:crayons_root,root_opt:root_opt,forms:forms_selector,init_done:false});
-					}
-				}
-
-				cQuery(document).ready(function(){
-					if(typeof onAjaxLoad == "function") onAjaxLoad(crayons_multilang_init);
-					crayons_multilang_init();
-				});';
-			$flux .= $texte;
-		}
+	if (
+		isset($_REQUEST['page'])
+		and $_REQUEST['page'] == 'crayons.js'
+		and (count(explode(',', $GLOBALS['meta']['langues_multilingue'])) > 1)
+		and include_spip('inc/config')
+		and $config = lire_config('multilang', array())
+		and ($config['multilang_public'] == 'on')
+		and ($config['multilang_crayons'] == 'on')
+	) {
+		include_spip('javascript/multilang_crayons');
+		$flux .= multilang_javascript_crayons($config);
 	}
 	return $flux;
 }
