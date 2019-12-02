@@ -26,9 +26,8 @@ function facteur_config_default() {
 
 	$config = lire_config('facteur');
 
-	if ($config['adresse_envoi'] !== 'oui' or !$config['adresse_envoi_email']
-	) {
-		$config['adresse_envoi'] = (isset($GLOBALS['meta']["email_envoi"]) AND $GLOBALS['meta']["email_envoi"]) ?
+	if ($config['adresse_envoi'] !== 'oui' or !$config['adresse_envoi_email']) {
+		$config['adresse_envoi_email'] = (isset($GLOBALS['meta']["email_envoi"]) AND $GLOBALS['meta']["email_envoi"]) ?
 					$GLOBALS['meta']["email_envoi"]
 					: $GLOBALS['meta']['email_webmaster'];
 
