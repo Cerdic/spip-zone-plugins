@@ -130,7 +130,18 @@ function formulaires_configurer_facteur_traiter_dist() {
 
 	include_spip('inc/cvt_configurer');
 	$trace = cvtconf_formulaires_configurer_enregistre('configurer_facteur', array());
-	$res = array('message_ok' => _T('facteur:config_info_enregistree') . $trace, 'editable' => true);
+	$res = array(
+		'editable' => true
+	);
+	include_spip('inc/facteur_factory');
+	try {
+		$facteur = facteur_factory(array('exceptions' => true));
+		$facteur->configure();
+		$res['message_ok'] = _T('facteur:config_info_enregistree') . $trace;
+	}
+	catch (Exception $e) {
+		$res['message_erreur'] = $e->getMessage();
+	}
 
 	foreach($restore_after_save as $k=>$v){
 		set_request($k,$v);
