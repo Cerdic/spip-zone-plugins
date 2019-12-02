@@ -89,8 +89,14 @@ function facteur_formulaire_fond($flux) {
 	if (($flux['args']['form'] == 'configurer_identite')
 		&& (isset($GLOBALS['meta']['facteur_adresse_envoi']) && $GLOBALS['meta']['facteur_adresse_envoi'] == 'oui')
 		&& (isset($GLOBALS['meta']['facteur_adresse_envoi_email']) && strlen($GLOBALS['meta']['facteur_adresse_envoi_email']) > 0)) {
-		$ajout = '<p class="notice">'._T('facteur:message_identite_email').'</p>';
-		$flux['data'] = preg_replace(",(<(?:div|li) [^>]*class=[\"']editer editer_email_webmaster.*>)(.*<label),Uims", "\\1".$ajout."\\2", $flux['data'], 1);
+		$url = generer_url_ecrire('configurer_facteur');
+		$ajout = '<p class="notice" style="margin-top:0">'._T('facteur:message_identite_email', array('url' => $url)).'</p>';
+		if (preg_match(",<(div|li) [^>]*class=[\"']editer editer_email_webmaster.*>,Uims", $flux['data'], $match)) {
+			$p = strpos($flux['data'], $match[0]);
+			$p = strpos($flux['data'], "<input", $p);
+			$p = strpos($flux['data'], "</".$match[1], $p);
+			$flux['data'] = substr_replace($flux['data'], $ajout, $p, 0);
+		}
 	}
 	return $flux;
 }
