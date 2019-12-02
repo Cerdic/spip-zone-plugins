@@ -133,7 +133,7 @@ function formulaires_configurer_facteur_traiter_dist() {
 	$res = array(
 		'editable' => true
 	);
-	include_spip('inc/facteur_factory');
+	include_spip('inc/facteur');
 	try {
 		$facteur = facteur_factory(array('exceptions' => true));
 		$facteur->configure();

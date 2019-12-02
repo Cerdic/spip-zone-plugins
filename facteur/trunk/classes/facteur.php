@@ -11,7 +11,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/facteur_factory');
+include_spip('inc/facteur');
 include_spip('inc/Facteur/FacteurSMTP');
 
 class Facteur extends SPIP\Facteur\FacteurSMTP {
