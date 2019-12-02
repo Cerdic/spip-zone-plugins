@@ -134,7 +134,7 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	// mode TEST : forcer l'email
 	if (defined('_TEST_EMAIL_DEST')) {
 		if (!_TEST_EMAIL_DEST){
-			spip_log($e="Envois bloques par la constante _TEST_EMAIL_DEST", 'mail.' . _LOG_ERREUR);
+			spip_log($e=_T('facteur:erreur_envoi_bloque_constante'), 'mail.' . _LOG_ERREUR);
 			if ($exceptions) {
 				throw new Exception($e);
 			}

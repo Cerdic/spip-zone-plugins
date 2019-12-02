@@ -25,6 +25,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_generale' => 'Il y a une ou plusieurs erreurs de configuration. Veuillez vérifier le contenu du formulaire.',
 	'erreur_invalid_host' => 'Ce nom d’hôte n’est pas correct',
 	'erreur_invalid_port' => 'Ce numéro de port n’est pas correct',
+	'erreur_envoi_bloque_constante' => "Envois bloqués par la constante <tt>_TEST_EMAIL_DEST</tt>.
+Vérifiez votre fichier <tt>mes_options.php</tt>",
 
 	// F
 	'facteur_adresse_envoi_email' => 'Email :',
@@ -58,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_facteur_forcer_from' => 'Forcer cette adresse d’envoi quand le <tt>From</tt> n’est pas sur le même domaine',
+	'label_message_envoye' => 'Message envoyé :',
 
 	// M
 	'message_identite_email' => 'La configuration du plugin "facteur" surcharge cette adresse email pour l’envoi de courriels.',
@@ -71,6 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'tester' => 'Tester',
 	'tester_la_configuration' => 'Tester la configuration',
+	'titre_configurer_facteur' => 'Configuration de Facteur',
 
 	// U
 	'utiliser_mail' => 'Utiliser la fonction mail de PHP',

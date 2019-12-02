@@ -16,12 +16,20 @@
 		</BOUCLE_art2>
 	<//B_art>
 
-	<BOUCLE_image(DOCUMENTS){extension IN jpg,png,gif}{0,1}>
+	<BOUCLE_image(DOCUMENTS){extension IN jpg,png,gif}{0,1}{statut==.*}{brise=0}>
 		[(#MODELE{img}|image_reduire{550,0})]
 	</BOUCLE_image>
 
-	<BOUCLE_pdf(DOCUMENTS){extension=pdf}{0,1}>
+	<BOUCLE_pdf(DOCUMENTS){extension=pdf}{0,1}{statut==.*}{brise=0}>
 		[(#MODELE{doc}|image_reduire{550,0})]
 	</BOUCLE_pdf>
+
+	[(#ENV{piece_jointe}|oui)
+	<div>
+		<h3><:medias:titre_documents_joints:></h3>
+		[(#ENV{piece_jointe/chemin}|basename|unique{basename})][ - (#ENV{piece_jointe/nom}|unique{basename})]
+	</div>
+	]
 </body>
+#FILTRE{liens_absolus}
 #FILTRE{facteur_email_wrap_to_html}

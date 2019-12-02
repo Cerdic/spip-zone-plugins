@@ -10,3 +10,9 @@
 			[(#TEXTE|textebrut)]
 	</BOUCLE_art2>
 <//B_art>
+
+[(#ENV{piece_jointe}|oui)
+### <:medias:titre_documents_joints:>
+[(#ENV{piece_jointe/chemin}|basename|unique{basename})][ - (#ENV{piece_jointe/nom}|unique{basename})]
+]
+
