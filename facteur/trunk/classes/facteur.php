@@ -1,23 +1,20 @@
 <?php
 /*
- * Plugin Facteur 2
+ * Plugin Facteur 4
  * (c) 2009-2011 Collectif SPIP
  * Distribue sous licence GPL
  *
  */
+
+use PHPMailer\PHPMailer\PHPMailer;
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/charsets');
 include_spip('inc/texte');
 include_spip('inc/filtres');
-
-if (!class_exists('PHPMailer')) {
-	include_spip('lib/phpmailer-php5/class.phpmailer');
-	include_spip('lib/phpmailer-php5/class.smtp');
-}
-
 include_spip('facteur_fonctions');
+include_spip('lib/PHPMailer-6/autoload');
 
 /**
  * Wrapper de spip_log pour par PHPMailer
