@@ -13,8 +13,8 @@ include_spip('inc/texte');
 include_spip('inc/filtres');
 
 if (!class_exists('PHPMailer')) {
-	include_spip('phpmailer-php5/class.phpmailer');
-	include_spip('phpmailer-php5/class.smtp');
+	include_spip('lib/phpmailer-php5/class.phpmailer');
+	include_spip('lib/phpmailer-php5/class.smtp');
 }
 
 include_spip('facteur_fonctions');
