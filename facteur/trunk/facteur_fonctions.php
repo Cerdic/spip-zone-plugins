@@ -1,9 +1,10 @@
 <?php
-/*
- * Plugin Facteur 2
- * (c) 2009-2011 Collectif SPIP
+/**
+ * Plugin Facteur 4
+ * (c) 2009-2019 Collectif SPIP
  * Distribue sous licence GPL
  *
+ * @package SPIP\Facteur\Fonctions
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -306,7 +307,7 @@ function facteur_nl2br_si_pas_autobr($texte){
 
 /**
  * Transformer un mail HTML en mail Texte proprement :
- * - les tableaux de mise en page sont utilis�s pour structurer le mail texte
+ * - les tableaux de mise en page sont utilisés pour structurer le mail texte
  * - le reste du HTML est markdownifie car c'est un format texte lisible et conventionnel
  *
  * @param string $html

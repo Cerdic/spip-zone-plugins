@@ -1,9 +1,10 @@
 <?php
-/*
+/**
  * Plugin Facteur 4
- * (c) 2009-2011 Collectif SPIP
+ * (c) 2009-2019 Collectif SPIP
  * Distribue sous licence GPL
  *
+ * @package SPIP\Facteur\Classes\Facteur
  */
 
 use PHPMailer\PHPMailer\PHPMailer;

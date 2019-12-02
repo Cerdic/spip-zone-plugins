@@ -1,9 +1,10 @@
 <?php
 /**
- * Plugin Facteur 2
- * (c) 2009-2011 Collectif SPIP
+ * Plugin Facteur 4
+ * (c) 2009-2019 Collectif SPIP
  * Distribue sous licence GPL
  *
+ * @package SPIP\Facteur\Formulaires\Configurer_facteur
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {

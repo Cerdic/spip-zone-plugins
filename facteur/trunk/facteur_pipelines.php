@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Facteur
- * (c) 2009-2013 Collectif SPIP
+ * Plugin Facteur 4
+ * (c) 2009-2019 Collectif SPIP
  * Distribue sous licence GPL
  *
  * @package SPIP\Facteur\Pipelines
