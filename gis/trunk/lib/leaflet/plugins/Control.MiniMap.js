@@ -20,6 +20,9 @@
 }(function (L) {
 
 	var MiniMap = L.Control.extend({
+
+		includes: L.Evented ? L.Evented.prototype : L.Mixin.Events,
+
 		options: {
 			position: 'bottomright',
 			toggleDisplay: false,
@@ -33,8 +36,8 @@
 			height: 150,
 			collapsedWidth: 19,
 			collapsedHeight: 19,
-			aimingRectOptions: {color: '#ff7800', weight: 1, clickable: false},
-			shadowRectOptions: {color: '#000000', weight: 1, clickable: false, opacity: 0, fillOpacity: 0},
+			aimingRectOptions: {color: '#ff7800', weight: 1, interactive: false},
+			shadowRectOptions: {color: '#000000', weight: 1, interactive: false, opacity: 0, fillOpacity: 0},
 			strings: {hideText: 'Hide MiniMap', showText: 'Show MiniMap'},
 			mapOptions: {}  // Allows definition / override of Leaflet map options.
 		},
@@ -43,8 +46,8 @@
 		initialize: function (layer, options) {
 			L.Util.setOptions(this, options);
 			// Make sure the aiming rects are non-clickable even if the user tries to set them clickable (most likely by forgetting to specify them false)
-			this.options.aimingRectOptions.clickable = false;
-			this.options.shadowRectOptions.clickable = false;
+			this.options.aimingRectOptions.interactive = false;
+			this.options.shadowRectOptions.interactive = false;
 			this._layer = layer;
 		},
 
@@ -190,6 +193,7 @@
 				this._container.style.display = 'none';
 			}
 			this._minimized = true;
+			this._onToggle();
 		},
 
 		_restore: function () {
@@ -203,6 +207,7 @@
 				this._container.style.display = 'block';
 			}
 			this._minimized = false;
+			this._onToggle();
 		},
 
 		_onMainMapMoved: function (e) {
@@ -313,6 +318,22 @@
 
 		_isDefined: function (value) {
 			return typeof value !== 'undefined';
+		},
+
+		_onToggle: function () {
+			L.Util.requestAnimFrame(function () {
+				L.DomEvent.on(this._container, 'transitionend', this._fireToggleEvents, this);
+				if (!L.Browser.any3d) {
+					L.Util.requestAnimFrame(this._fireToggleEvents, this);
+				}
+			}, this);
+		},
+
+		_fireToggleEvents: function () {
+			L.DomEvent.off(this._container, 'transitionend', this._fireToggleEvents, this);
+			var data = { minimized: this._minimized };
+			this.fire(this._minimized ? 'minimize' : 'restore', data);
+			this.fire('toggle', data);
 		}
 	});
 

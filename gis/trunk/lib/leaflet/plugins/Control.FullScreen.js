@@ -26,10 +26,28 @@ L.Control.FullScreen = L.Control.extend({
 		}
 
 		this._createButton(this.options.title, className, content, container, this.toggleFullScreen, this);
+		this._map.fullscreenControl = this;
 
 		this._map.on('enterFullscreen exitFullscreen', this._toggleTitle, this);
 
 		return container;
+	},
+	
+	onRemove: function (map) {
+		L.DomEvent
+			.off(this.link, 'click', L.DomEvent.stopPropagation)
+			.off(this.link, 'click', L.DomEvent.preventDefault)
+			.off(this.link, 'click', this.toggleFullScreen, this);
+		
+		L.DomEvent
+			.off(this._container, fullScreenApi.fullScreenEventName, L.DomEvent.stopPropagation)
+			.off(this._container, fullScreenApi.fullScreenEventName, L.DomEvent.preventDefault)
+			.off(this._container, fullScreenApi.fullScreenEventName, this._handleFullscreenChange, this);
+		
+		L.DomEvent
+			.off(document, fullScreenApi.fullScreenEventName, L.DomEvent.stopPropagation)
+			.off(document, fullScreenApi.fullScreenEventName, L.DomEvent.preventDefault)
+			.off(document, fullScreenApi.fullScreenEventName, this._handleFullscreenChange, this);
 	},
 	
 	_createButton: function (title, className, content, container, fn, context) {
@@ -38,20 +56,23 @@ L.Control.FullScreen = L.Control.extend({
 		this.link.title = title;
 		this.link.innerHTML = content;
 
+		this.link.setAttribute('role', 'button');
+		this.link.setAttribute('aria-label', title);
+
 		L.DomEvent
-			.addListener(this.link, 'click', L.DomEvent.stopPropagation)
-			.addListener(this.link, 'click', L.DomEvent.preventDefault)
-			.addListener(this.link, 'click', fn, context);
+			.on(this.link, 'click', L.DomEvent.stopPropagation)
+			.on(this.link, 'click', L.DomEvent.preventDefault)
+			.on(this.link, 'click', fn, context);
 		
 		L.DomEvent
-			.addListener(container, fullScreenApi.fullScreenEventName, L.DomEvent.stopPropagation)
-			.addListener(container, fullScreenApi.fullScreenEventName, L.DomEvent.preventDefault)
-			.addListener(container, fullScreenApi.fullScreenEventName, this._handleEscKey, context);
+			.on(container, fullScreenApi.fullScreenEventName, L.DomEvent.stopPropagation)
+			.on(container, fullScreenApi.fullScreenEventName, L.DomEvent.preventDefault)
+			.on(container, fullScreenApi.fullScreenEventName, this._handleFullscreenChange, context);
 		
 		L.DomEvent
-			.addListener(document, fullScreenApi.fullScreenEventName, L.DomEvent.stopPropagation)
-			.addListener(document, fullScreenApi.fullScreenEventName, L.DomEvent.preventDefault)
-			.addListener(document, fullScreenApi.fullScreenEventName, this._handleEscKey, context);
+			.on(document, fullScreenApi.fullScreenEventName, L.DomEvent.stopPropagation)
+			.on(document, fullScreenApi.fullScreenEventName, L.DomEvent.preventDefault)
+			.on(document, fullScreenApi.fullScreenEventName, this._handleFullscreenChange, context);
 
 		return this.link;
 	},
@@ -61,11 +82,10 @@ L.Control.FullScreen = L.Control.extend({
 		map._exitFired = false;
 		if (map._isFullscreen) {
 			if (fullScreenApi.supportsFullScreen && !this.options.forcePseudoFullscreen) {
-				fullScreenApi.cancelFullScreen(this.options.fullscreenElement ? this.options.fullscreenElement : map._container);
+				fullScreenApi.cancelFullScreen();
 			} else {
 				L.DomUtil.removeClass(this.options.fullscreenElement ? this.options.fullscreenElement : map._container, 'leaflet-pseudo-fullscreen');
 			}
-			map.invalidateSize();
 			map.fire('exitFullscreen');
 			map._exitFired = true;
 			map._isFullscreen = false;
@@ -76,7 +96,6 @@ L.Control.FullScreen = L.Control.extend({
 			} else {
 				L.DomUtil.addClass(this.options.fullscreenElement ? this.options.fullscreenElement : map._container, 'leaflet-pseudo-fullscreen');
 			}
-			map.invalidateSize();
 			map.fire('enterFullscreen');
 			map._isFullscreen = true;
 		}
@@ -86,9 +105,10 @@ L.Control.FullScreen = L.Control.extend({
 		this.link.title = this._map._isFullscreen ? this.options.title : this.options.titleCancel;
 	},
 	
-	_handleEscKey: function () {
+	_handleFullscreenChange: function () {
 		var map = this._map;
-		if (!fullScreenApi.isFullScreen(map) && !map._exitFired) {
+		map.invalidateSize();
+		if (!fullScreenApi.isFullScreen() && !map._exitFired) {
 			map.fire('exitFullscreen');
 			map._exitFired = true;
 			map._isFullscreen = false;
@@ -96,10 +116,15 @@ L.Control.FullScreen = L.Control.extend({
 	}
 });
 
+L.Map.include({
+	toggleFullscreen: function () {
+		this.fullscreenControl.toggleFullScreen();
+	}
+});
+
 L.Map.addInitHook(function () {
 	if (this.options.fullscreenControl) {
-		this.fullscreenControl = L.control.fullscreen(this.options.fullscreenControlOptions);
-		this.addControl(this.fullscreenControl);
+		this.addControl(L.control.fullscreen(this.options.fullscreenControlOptions));
 	}
 });
 
