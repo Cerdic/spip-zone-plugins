@@ -18,6 +18,41 @@ include_spip('classes/facteur');
 include_once _DIR_RESTREINT."inc/envoyer_mail.php";
 
 /**
+ * Extraire automatiquement le sujet d'un message si besoin
+ * @param $message_html
+ * @param string $message_texte
+ * @return string
+ */
+function facteur_extraire_sujet($message_html, $message_texte = '') {
+	if (strlen($message_html = trim($message_html))) {
+		// dans ce cas on ruse un peu : extraire le sujet du title
+		if (preg_match(",<title>(.*)</title>,Uims",$message_html,$m))
+			return ($sujet = $m[1]);
+		else {
+			// fallback, on prend le body si on le trouve
+			if (preg_match(",<body[^>]*>(.*)</body>,Uims", $message_html, $m)){
+				$message_html = $m[1];
+			}
+			// et on le nettoie/decoupe comme du texte
+			$message_texte = $message_html;
+		}
+	}
+
+	// et on extrait la premiere ligne de vrai texte...
+	// nettoyer le html et les retours chariots
+	$message_texte = textebrut($message_texte);
+	$message_texte = str_replace("\r\n", "\r", $message_texte);
+	$message_texte = str_replace("\r", "\n", $message_texte);
+	$message_texte = trim($message_texte);
+	// decouper
+	$message_texte = explode("\n", $message_texte);
+
+	// extraire la premiere ligne de texte brut
+	return ($sujet = array_shift($message_texte));
+}
+
+
+/**
  * @param string $destinataire
  * @param string $sujet
  * @param string|array $message
@@ -46,6 +81,7 @@ include_once _DIR_RESTREINT."inc/envoyer_mail.php";
  * @param string $from (deprecie, utiliser l'entree from de $message)
  * @param string $headers (deprecie, utiliser l'entree headers de $message)
  * @return bool
+ * @throws Exception
  */
 function inc_envoyer_mail($destinataire, $sujet, $message, $from = "", $headers = "") {
 	$message_html	= '';
@@ -100,38 +136,7 @@ function inc_envoyer_mail($destinataire, $sujet, $message, $from = "", $headers 
 	}
 
 	if(!strlen($sujet)){
-		if ($message_html) {
-			// dans ce cas on ruse un peu : extraire le sujet du title
-			if (preg_match(",<title>(.*)</title>,Uims",$message_html,$m))
-				$sujet = $m[1];
-			else {
-				$ttrim = $message_html;
-				// fallback, on prend le body si on le trouve
-				if (preg_match(",<body[^>]*>(.*)</body>,Uims",$message_html,$m))
-					$ttrim = $m[1];
-
-				// et on extrait la premiere ligne de vrai texte...
-				// nettoyer le html et les retours chariots
-				$ttrim = textebrut($ttrim);
-				$ttrim = str_replace("\r\n", "\r", $ttrim);
-				$ttrim = str_replace("\r", "\n", $ttrim);
-				// decouper
-				$ttrim = explode("\n",trim($ttrim));
-				// extraire la premiere ligne de texte brut
-				$sujet = array_shift($ttrim);
-			}
-		}
-		else {
-			// et on extrait la premiere ligne de vrai texte...
-			// nettoyer le html et les retours chariots
-			$ttrim = textebrut($message_texte);
-			$ttrim = str_replace("\r\n", "\r", $ttrim);
-			$ttrim = str_replace("\r", "\n", $ttrim);
-			// decouper
-			$ttrim = explode("\n",trim($ttrim));
-			// extraire la premiere ligne de texte brut
-			$sujet = array_shift($ttrim);
-		}
+		$sujet = facteur_extraire_sujet($message_html, $message_texte);
 	}
 
 	$sujet = nettoyer_titre_email($sujet);
