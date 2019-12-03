@@ -86,26 +86,6 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 				AND substr($ttrim,-1,1)==">"
 				AND stripos($ttrim,"</html>")!==false){
 
-				if(!strlen($sujet)){
-					// dans ce cas on ruse un peu : extraire le sujet du title
-					if (preg_match(",<title>(.*)</title>,Uims",$corps,$m))
-						$sujet = $m[1];
-					else {
-						// fallback, on prend le body si on le trouve
-						if (preg_match(",<body[^>]*>(.*)</body>,Uims",$corps,$m))
-							$ttrim = $m[1];
-
-						// et on extrait la premiere ligne de vrai texte...
-						// nettoyer le html et les retours chariots
-						$ttrim = textebrut($ttrim);
-						$ttrim = str_replace("\r\n", "\r", $ttrim);
-						$ttrim = str_replace("\r", "\n", $ttrim);
-						// decouper
-						$ttrim = explode("\n",trim($ttrim));
-						// extraire la premiere ligne de texte brut
-						$sujet = array_shift($ttrim);
-					}
-				}
 				$message_html	= $corps;
 			}
 			// c'est vraiment un message texte
@@ -115,6 +95,42 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 		$headers = array_map('trim',explode("\n",$headers));
 		$headers = array_filter($headers);
 	}
+
+	if(!strlen($sujet)){
+		if ($message_html) {
+			// dans ce cas on ruse un peu : extraire le sujet du title
+			if (preg_match(",<title>(.*)</title>,Uims",$message_html,$m))
+				$sujet = $m[1];
+			else {
+				$ttrim = $message_html;
+				// fallback, on prend le body si on le trouve
+				if (preg_match(",<body[^>]*>(.*)</body>,Uims",$message_html,$m))
+					$ttrim = $m[1];
+
+				// et on extrait la premiere ligne de vrai texte...
+				// nettoyer le html et les retours chariots
+				$ttrim = textebrut($ttrim);
+				$ttrim = str_replace("\r\n", "\r", $ttrim);
+				$ttrim = str_replace("\r", "\n", $ttrim);
+				// decouper
+				$ttrim = explode("\n",trim($ttrim));
+				// extraire la premiere ligne de texte brut
+				$sujet = array_shift($ttrim);
+			}
+		}
+		else {
+			// et on extrait la premiere ligne de vrai texte...
+			// nettoyer le html et les retours chariots
+			$ttrim = textebrut($message_texte);
+			$ttrim = str_replace("\r\n", "\r", $ttrim);
+			$ttrim = str_replace("\r", "\n", $ttrim);
+			// decouper
+			$ttrim = explode("\n",trim($ttrim));
+			// extraire la premiere ligne de texte brut
+			$sujet = array_shift($ttrim);
+		}
+	}
+
 	$sujet = nettoyer_titre_email($sujet);
 
 	// si le mail est en texte brut, on l'encapsule dans un modele surchargeable

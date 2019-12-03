@@ -115,6 +115,7 @@ function facteur_envoyer_mail_test($destinataire, $titre, &$message_html) {
 		'html' => $message_html,
 		'texte' => $message_texte,
 		'exceptions' => true,
+		'from' => 'compta@yterium.com'
 	);
 
 	if ($piece_jointe) {
