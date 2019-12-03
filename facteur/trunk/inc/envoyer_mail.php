@@ -20,7 +20,7 @@ include_once _DIR_RESTREINT."inc/envoyer_mail.php";
 /**
  * @param string $destinataire
  * @param string $sujet
- * @param string|array $corps
+ * @param string|array $message
  *   au format string, c'est un corps d'email au format texte, comme supporte nativement par le core
  *   au format array, c'est un corps etendu qui peut contenir
  *     string texte : le corps d'email au format texte
@@ -42,57 +42,58 @@ include_once _DIR_RESTREINT."inc/envoyer_mail.php";
  *       string mime : mime type du document
  *     array headers : tableau d'en-tetes personalises, une entree par ligne d'en-tete
  *     bool exceptions : lancer une exception en cas d'erreur (false par defaut)
- * @param string $from (deprecie, utiliser l'entree from de $corps)
- * @param string $headers (deprecie, utiliser l'entree headers de $corps)
+ *     bool important : un flag pour signaler les messages important qui necessitent un feedback en cas d'erreur
+ * @param string $from (deprecie, utiliser l'entree from de $message)
+ * @param string $headers (deprecie, utiliser l'entree headers de $message)
  * @return bool
  */
-function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = "") {
+function inc_envoyer_mail($destinataire, $sujet, $message, $from = "", $headers = "") {
 	$message_html	= '';
 	$message_texte	= '';
 	$nom_envoyeur = $cc = $bcc = $repondre_a = '';
 	$pieces_jointes = array();
 	$important = false;
 
-	// si $corps est un tableau -> fonctionnalites etendues
+	// si $message est un tableau -> fonctionnalites etendues
 	// avec entrees possible : html, texte, pieces_jointes, nom_envoyeur, ...
-	if (is_array($corps)) {
-		$message_html   = isset($corps['html']) ? $corps['html'] : "";
-		$message_texte  = isset($corps['texte']) ? nettoyer_caracteres_mail($corps['texte']) : "";
-		$pieces_jointes = isset($corps['pieces_jointes']) ? $corps['pieces_jointes'] : array();
-		$nom_envoyeur   = isset($corps['nom_envoyeur']) ? $corps['nom_envoyeur'] : "";
-		$from = isset($corps['from']) ? $corps['from']: $from;
-		$cc   = isset($corps['cc']) ? $corps['cc'] : "";
-		$bcc  = isset($corps['bcc']) ? $corps['bcc'] : "";
-		$repondre_a = isset($corps['repondre_a']) ? $corps['repondre_a'] : "";
-		$nom_repondre_a = isset($corps['nom_repondre_a']) ? $corps['nom_repondre_a'] : '';
-		$adresse_erreur = isset($corps['adresse_erreur']) ? $corps['adresse_erreur'] : "";
-		$headers = isset($corps['headers']) ? $corps['headers'] : $headers;
+	if (is_array($message)) {
+		$message_html   = isset($message['html']) ? $message['html'] : "";
+		$message_texte  = isset($message['texte']) ? nettoyer_caracteres_mail($message['texte']) : "";
+		$pieces_jointes = isset($message['pieces_jointes']) ? $message['pieces_jointes'] : array();
+		$nom_envoyeur   = isset($message['nom_envoyeur']) ? $message['nom_envoyeur'] : "";
+		$from = isset($message['from']) ? $message['from']: $from;
+		$cc   = isset($message['cc']) ? $message['cc'] : "";
+		$bcc  = isset($message['bcc']) ? $message['bcc'] : "";
+		$repondre_a = isset($message['repondre_a']) ? $message['repondre_a'] : "";
+		$nom_repondre_a = isset($message['nom_repondre_a']) ? $message['nom_repondre_a'] : '';
+		$adresse_erreur = isset($message['adresse_erreur']) ? $message['adresse_erreur'] : "";
+		$headers = isset($message['headers']) ? $message['headers'] : $headers;
 		if (is_string($headers)){
 			$headers = array_map('trim',explode("\n",$headers));
 			$headers = array_filter($headers);
 		}
-		$important = (isset($corps['important']) ? !!$corps['important'] : $important);
+		$important = (isset($message['important']) ? !!$message['important'] : $important);
 	}
-	// si $corps est une chaine -> compat avec la fonction native SPIP
+	// si $message est une chaine -> compat avec la fonction native SPIP
 	// gerer le cas ou le corps est du html avec un Content-Type: text/html dans les headers
 	else {
 		if (preg_match(',Content-Type:\s*text/html,ims',$headers)){
-			$message_html	= $corps;
+			$message_html	= $message;
 		}
 		else {
 			// Autodetection : tester si le mail est en HTML
 			if (strpos($headers,"Content-Type:")===false
-				AND strpos($corps,"<")!==false // eviter les tests suivants si possible
-				AND $ttrim = trim($corps)
+				AND strpos($message,"<")!==false // eviter les tests suivants si possible
+				AND $ttrim = trim($message)
 				AND substr($ttrim,0,1)=="<"
 				AND substr($ttrim,-1,1)==">"
 				AND stripos($ttrim,"</html>")!==false){
 
-				$message_html	= $corps;
+				$message_html	= $message;
 			}
 			// c'est vraiment un message texte
 			else
-				$message_texte	= nettoyer_caracteres_mail($corps);
+				$message_texte	= nettoyer_caracteres_mail($message);
 		}
 		$headers = array_map('trim',explode("\n",$headers));
 		$headers = array_filter($headers);
@@ -146,8 +147,8 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	}
 
 	$exceptions = false;
-	if (is_array($corps) AND isset($corps['exceptions'])){
-		$exceptions = $corps['exceptions'];
+	if (is_array($message) AND isset($message['exceptions'])){
+		$exceptions = $message['exceptions'];
 	}
 
 	// mode TEST : forcer l'email
@@ -201,11 +202,12 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 
 	// On crée l'objet Facteur (PHPMailer) pour le manipuler ensuite
 	$options = array();
-	if (is_array($corps) AND !empty($corps['exceptions'])){
-		$options['exceptions'] = $corps['exceptions'];
+	if ($exceptions){
+		$options['exceptions'] = $exceptions;
 	}
 	include_spip('inc/facteur');
 	$facteur = facteur_factory($options);
+
 	$facteur->setDest($destinataire);
 	$facteur->setObjet($sujet);
 	$facteur->setMessage($message_html, $message_texte);
@@ -300,7 +302,7 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	}
 
 	// si entetes personalises : les ajouter
-	// attention aux collisions : si on utilise l'option cc de $corps
+	// attention aux collisions : si on utilise l'option cc de $message
 	// et qu'on envoie en meme temps un header Cc: xxx, yyy
 	// on aura 2 lignes Cc: dans les headers
 	if (!empty($headers)) {
