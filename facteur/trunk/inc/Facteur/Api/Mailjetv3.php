@@ -148,19 +148,7 @@ class Mailjetv3 {
 		}
 
 		try {
-			if (function_exists('recuperer_url')){
-				$options = array(
-					'methode' => $this->_request,
-				);
-				if ($this->_data){
-					$options['datas'] = $this->_data;
-				}
-				spip_log("sendRequest via recuperer_url", "mailjet" . _LOG_DEBUG);
-				$res = recuperer_url($url, $options);
-				spip_log($res, "mailjet" . _LOG_DEBUG);
-				$this->_response_code = $res['status'];
-				$response = $res['page'];
-			} elseif (function_exists('curl_init')) {
+			if (function_exists('curl_init')) {
 				$ch = curl_init();
 				$headers = explode("\n", $headers);
 				$headers = array_map("trim", $headers);
@@ -182,21 +170,27 @@ class Mailjetv3 {
 				spip_log($response, "mailjet" . _LOG_DEBUG);
 				$this->_response_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 				curl_close($ch);
-			} else {
-				// en cas de DELETE on appelle directement recuperer_lapage
-				// en esperant ne pas avoir de 301
-				if (in_array($this->_request, array('DELETE'))){
-					$response = recuperer_lapage($url, false, $this->_request, 1048576, $this->_data);
-				} else {
-					$response = recuperer_page($url, false, false, null, $this->_data);
+			}
+			else {
+				$options = array(
+					'methode' => $this->_request,
+				);
+				if ($this->_data){
+					$options['datas'] = $this->_data;
 				}
-				if (!$response){
-					$this->_error = 'erreur lors de recuperer_page sur API Mailjet ' . $this->apiVersion;
+				spip_log("sendRequest via recuperer_url", "mailjet" . _LOG_DEBUG);
+				$res = recuperer_url($url, $options);
+				spip_log($res, "mailjet" . _LOG_DEBUG);
+				if ($res) {
+					$this->_response_code = $res['status'];
+					$response = $res['page'];
+				}
+				else {
+					$this->_error = "Fail sendRequest $url_log via recuperer_url";
+					spip_log($this->_error, "mailjet" . _LOG_ERREUR);
 					return false;
 				}
-				$this->_response_code = 200; // on suppose car sinon renvoie false
 			}
-
 		} catch (Exception $e) {
 			$this->_error = "sendRequest $url_log : " . $e->getMessage();
 			spip_log($this->_error, "mailjet" . _LOG_ERREUR);

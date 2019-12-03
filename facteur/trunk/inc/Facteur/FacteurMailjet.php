@@ -49,12 +49,12 @@ class FacteurMailjet extends FacteurMail {
 	    'Name' => '',
 	   )*/
 		),
-		'CC' => array(/*array(
+		'Cc' => array(/*array(
 	    'Email' => '',
 	    'Name' => '',
 	   )*/
 		),
-		'BCC' => array(/*array(
+		'Bcc' => array(/*array(
 	    'Email' => '',
 	    'Name' => '',
 	   )*/
@@ -214,7 +214,7 @@ class FacteurMailjet extends FacteurMail {
 	 */
 	public function AddCC($address, $name = ''){
 		if ($a = $this->cleanAdress($address, $name)){
-			$this->message_dest['CC'][] = array('Email' => $address, 'Name' => $name);
+			$this->message_dest['Cc'][] = array('Email' => $address, 'Name' => $name);
 			return true;
 		}
 		return false;
@@ -229,7 +229,7 @@ class FacteurMailjet extends FacteurMail {
 	 */
 	public function AddBCC($address, $name = ''){
 		if ($a = $this->cleanAdress($address, $name)){
-			$this->message_dest['BCC'][] = array('Email' => $address, 'Name' => $name);
+			$this->message_dest['Bcc'][] = array('Email' => $address, 'Name' => $name);
 			return true;
 		}
 		return false;
@@ -307,7 +307,7 @@ class FacteurMailjet extends FacteurMail {
 			$this->message['Inline_attachments'] = $inline_attachements;
 		}
 
-		foreach (['To', 'CC', 'BCC'] as $dest_type){
+		foreach (['To', 'Cc', 'Bcc'] as $dest_type){
 			if (!empty($this->message_dest[$dest_type]) and count($this->message_dest[$dest_type])){
 				$dests = array();
 				foreach ($this->message_dest[$dest_type] as $dest){
@@ -336,6 +336,19 @@ class FacteurMailjet extends FacteurMail {
 				unset($this->message[$k]);
 			}
 		}
+
+		/*
+		$trace = $this->message;
+		unset($trace['Html-part']);
+		unset($trace['Text-part']);
+		if (!empty($trace['Attachments'])) {
+			$trace['Attachments'] = "Array(".count($trace['Attachments']) .")";
+		}
+		if (!empty($trace['Inline_attachments'])) {
+			$trace['Inline_attachments'] = "Array(".count($trace['Inline_attachments']) .")";
+		}
+		$this->log($trace, _LOG_DEBUG);
+		*/
 
 		$mj = $this->getMailjetAPI();
 		$res = $mj->send(array('data' => $this->message));
