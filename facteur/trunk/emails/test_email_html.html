@@ -16,7 +16,7 @@
 		</BOUCLE_art2>
 	<//B_art>
 
-	<BOUCLE_image(DOCUMENTS){extension IN jpg,png,gif}{0,1}{statut==.*}{brise=0}>
+	<BOUCLE_image(DOCUMENTS){extension IN jpg,png,gif}{0,1}{statut==.*}{brise=0}{largeur>300}{par taille}>
 		[(#MODELE{img}|image_reduire{550,0})]
 	</BOUCLE_image>
 
