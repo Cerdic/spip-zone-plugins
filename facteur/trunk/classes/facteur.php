@@ -27,15 +27,16 @@ class Facteur extends SPIP\Facteur\FacteurSMTP {
 	 */
 	public function __construct($email, $objet, $message_html, $message_texte, $options = array()) {
 
-		$defaut = facteur_config_default();
+		// config eventuellement surchargeee lors de l'appel
+		$config = facteur_config($options);
 
-		// compat ancicenne option smtp
-		$defaut['smtp'] = ($defaut['mailer'] === 'smtp' ? 'oui' : 'non');
+		// compat ancienne option smtp
+		if (isset($options['smtp']) and empty($config['mailer'])) {
+			$config['mailer'] = ($options['smtp'] === 'oui' ? 'smtp' : 'mail');
+		}
 
-		// On fusionne les options avec d'éventuelles surcharges lors de l'appel
-		$options = array_merge($defaut, $options);
-
-		if ($options['smtp'] !== 'oui') {
+		// toute autre config que smtp se degrade en mail()
+		if ($config['mailer'] !== 'smtp') {
 			unset($options['smtp_host']);
 			unset($options['smtp_port']);
 		}

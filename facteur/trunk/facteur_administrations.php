@@ -61,8 +61,8 @@ function facteur_migre_metas_to_config(){
 	if (isset($GLOBALS['meta']["facteur_smtp"])) {
 		if (!lire_config("facteur/mailer",'')) {
 			ecrire_config("facteur/mailer", $GLOBALS['meta']["facteur_smtp"] === 'oui' ? 'smtp' : 'mail');
-			effacer_meta('facteur_smtp');
 		}
+		effacer_meta('facteur_smtp');
 	}
 }
 
