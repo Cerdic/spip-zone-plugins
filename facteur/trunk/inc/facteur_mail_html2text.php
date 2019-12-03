@@ -16,7 +16,7 @@
  * @param string $html
  * @return string
  */
-function facteur_mail_html2text($html){
+function inc_facteur_mail_html2text_dist($html){
 	// nettoyer les balises de mise en page html
 	$html = preg_replace(",</(td|th)>,Uims","<br/>",$html);
 	$html = preg_replace(",</(table)>,Uims","@@@hr@@@",$html);
