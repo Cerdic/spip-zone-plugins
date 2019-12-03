@@ -67,7 +67,7 @@ class FacteurMail extends PHPMailer {
 		if (empty($level)) {
 			$level = _LOG_INFO;
 		}
-		spip_log("$class: $message", "facteur" . $level);
+		spip_log("$class: " . (is_scalar($message) ? $message : json_encode($message, true)), "facteur" . $level);
 	}
 
 	/**
