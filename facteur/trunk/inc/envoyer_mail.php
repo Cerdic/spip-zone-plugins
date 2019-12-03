@@ -51,6 +51,7 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	$message_texte	= '';
 	$nom_envoyeur = $cc = $bcc = $repondre_a = '';
 	$pieces_jointes = array();
+	$important = false;
 
 	// si $corps est un tableau -> fonctionnalites etendues
 	// avec entrees possible : html, texte, pieces_jointes, nom_envoyeur, ...
@@ -70,6 +71,7 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 			$headers = array_map('trim',explode("\n",$headers));
 			$headers = array_filter($headers);
 		}
+		$important = (isset($corps['important']) ? !!$corps['important'] : $important);
 	}
 	// si $corps est une chaine -> compat avec la fonction native SPIP
 	// gerer le cas ou le corps est du html avec un Content-Type: text/html dans les headers
@@ -293,6 +295,10 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	if (!empty($adresse_erreur))
 		$facteur->Sender = $adresse_erreur;
 
+	if ($important) {
+		$facteur->setImportant();
+	}
+
 	// si entetes personalises : les ajouter
 	// attention aux collisions : si on utilise l'option cc de $corps
 	// et qu'on envoie en meme temps un header Cc: xxx, yyy
@@ -319,6 +325,15 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 
 	if (!$retour){
 		spip_log("Erreur Envoi mail via Facteur : ".print_r($facteur->ErrorInfo,true),'mail.'._LOG_ERREUR);
+
+		if ($important
+		  and $dest_alertes = $this->Sender) {
+			$dest = (is_array($destinataire) ? implode(', ', $destinataire) : $destinataire);
+			$sujet_alerte = _L("Fail envoi mail pour @dest@ (était: @sujet@)", array('email' => $dest, 'sujet' => $sujet));
+			$facteur->setDest($dest_alertes);
+			$facteur->setObjet($sujet_alerte);
+			$facteur->Send();
+		}
 	}
 
 	return $retour ;
