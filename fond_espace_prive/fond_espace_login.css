@@ -1,10 +1,9 @@
-body.page_login {
+ #minipres {
 	background-repeat: non-repeat;
 	background-attachment: fixed;
 	background-position: center center;
 	background-size: cover;
-}
-body.page_login  #minipres {
+
 	box-shadow: 0 0 0;
 	font-size: 16px;
 	color: white;
@@ -14,12 +13,12 @@ body.page_login  #minipres {
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 100%;
+	width: 100% !important;
 	height: 100%;
 	font-family: arial, helvetica, sans;
 	background-color: transparent !important;
 }
-body.page_login  #minipres #var_lang_ecrire {
+ #minipres #var_lang_ecrire {
 	position: absolute;
 	top: 10px;
 	right: 10px;
@@ -29,13 +28,13 @@ body.page_login  #minipres #var_lang_ecrire {
 	font-size: 12px;
 	-webkit-appearance: none;
 }
-body.page_login  #minipres .formulaire_menu_lang {
+ #minipres .formulaire_menu_lang {
 	position: absolute;
 	top: 15px;
 	right: 5%;
 	width: 200px;
 }
-body.page_login  #minipres .formulaire_login {
+ #minipres .formulaire_login, #minipres .formulaire_spip.pass {
 	width: 90%;
 	max-width: 400px;
 	position: absolute;
@@ -43,26 +42,38 @@ body.page_login  #minipres .formulaire_login {
 	top: 50%;
 	transform: translate(-50%, -50%);
 }
-body.page_login  #minipres h1, body.page_login  #minipres h3 {
+#minipres .formulaire_spip fieldset {
+	background: rgba(0, 0, 0, 0.5);
+	padding: 20px;
+	line-height: 130%;
+	border: 0;
+}
+#minipres .formulaire_spip fieldset legend {
 	display: none;
 }
-body.page_login .editer_password {
+#minipres .formulaire_spip fieldset p {
+	margin-bottom: 1em;
+}
+ #minipres h1,  #minipres h3 {
+	display: none;
+}
+.editer_password {
 	position: relative;
 }
-body.page_login  #pass_securise {
+ #pass_securise {
 	position: absolute;
 	top: 0;
 	right: 0;
 }
-body.page_login  #minipres h1 {
+ #minipres h1 {
 	margin-left: -1.5em;
 }
-body.page_login  #minipres h1, body.page_login  label {
+ #minipres h1,  #minipres label {
 	font-size: 0.9em;
 	padding-bottom: 0.2em;
 	text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }
-body.page_login  #minipres h1, body.page_login  input.text {
+ #minipres h1,  #minipres input.text {
 	width: 100%;
 	box-sizing: border-box;
 	border: 0px;
@@ -71,12 +82,12 @@ body.page_login  #minipres h1, body.page_login  input.text {
 	border-radius: 4px;
 	transition: 0.2s background-color;
 }
-body.page_login  #minipres h1, body.page_login  input.text:hover,
-body.page_login  #minipres h1, body.page_login  input.text:focus{
+ #minipres h1,  input.text:hover,
+ #minipres h1,  input.text:focus{
 	background-color: white;
 }
 
-body.page_login  #minipres h1, body.page_login #spip_logo_auteur {
+ #minipres h1, #minipres #spip_logo_auteur {
 	float: none;
 	position: absolute;
 	top: -130px;
@@ -87,33 +98,33 @@ body.page_login  #minipres h1, body.page_login #spip_logo_auteur {
 	border-radius: 50%;
 	overflow: hidden;
 }
-body.page_login  #minipres h1 {
+ #minipres h1 {
 	font-size: 85%;
 	text-align: right;
 	padding-top: 5px;
 	padding-right: 30px;
 }
-body.page_login p.details {
+p.details {
 	font-size: 85%;
 	text-align: right;
 	padding-top: 0.3em;
 }
-body.page_login div.choix {
+div.choix {
 	padding-top: 0.7em;
 }
-body.page_login  #minipres h1, body.page_login p.details a {
+ #minipres h1, #minipres p.details a {
 	color: white;
 	text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 	opacity: 0.7;
 }
-body.page_login  #minipres h1, body.page_login p.details a:hover {
+ #minipres h1, #minipres p.details a:hover {
 	opacity: 1;
 }
-body.page_login  #minipres h1, body.page_login .boutons {
+ #minipres h1, #minipres .boutons {
 	text-align: right;
 	margin-right: 0px;
 }
-body.page_login  #minipres h1, body.page_login .boutons input.submit {
+ #minipres h1, #minipres .boutons input.submit {
 	font-size: 16px;
 	border: 0px;
 	padding: 7px 15px;
@@ -124,29 +135,29 @@ body.page_login  #minipres h1, body.page_login .boutons input.submit {
 	color: black;
 	-webkit-appearance: none;
 }
-body.page_login  #minipres h1, body.page_login .boutons input.submit:hover,
-body.page_login  #minipres h1, body.page_login .boutons input.submit:focus {
+ #minipres h1, #minipres .boutons input.submit:hover,
+ #minipres h1, #minipres .boutons input.submit:focus {
 	background-color: white;
 }
 
-body.page_login  #minipres h1, body.page_login #spip_logo_auteur img {
+ #minipres h1, #minipres #spip_logo_auteur img {
 	position: inline;
 	margin: 0 !important;
 }
-body.page_login  #minipres p.retour {
+ #minipres p.retour {
 	position: absolute;
 	left: 20px;
 	bottom: 10px;
 }
-body.page_login  #minipres p.retour a {
+ #minipres p.retour a {
 	color: white;
 	font-size: 12px;
 	text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }
-body.page_login  #minipres p.retour a:before {
+ #minipres p.retour a:before {
 	content: "⬅︎ ";
 }
-body.page_login  #minipres p.generator {
+ #minipres p.generator {
 	position: absolute;
 	right: 10px;
 	bottom: 10px;

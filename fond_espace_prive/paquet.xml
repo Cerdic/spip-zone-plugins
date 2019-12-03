@@ -1,7 +1,7 @@
 <paquet
 	prefix="fond_espace_prive"
 	categorie="outil"
-	version="2.3.0"
+	version="2.4.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/fond_espace_prive-32.png"
