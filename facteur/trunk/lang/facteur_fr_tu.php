@@ -62,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_facteur_forcer_from' => 'Forcer cette adresse d’envoi quand le <tt>From</tt> n’est pas sur le même domaine',
 
 	// M
-	'message_identite_email' => 'La configuration du plugin "facteur" surcharge cette adresse email pour l’envoi de courriels.',
+	'message_identite_email' => 'La configuration du plugin "facteur" surcharge cette adresse email pour l’envoi de courriels.', # MODIF
 
 	// N
 	'note_test_configuration' => 'Un email sera envoyé à cette adresse.',
@@ -75,8 +75,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tester_la_configuration' => 'Tester la configuration',
 
 	// U
-	'utiliser_mail' => 'Utiliser la fonction mail de PHP',
-	'utiliser_reglages_site' => 'Utiliser les réglages du site SPIP : <br /><tt>@from@</tt>',
+	'utiliser_mail' => 'Utiliser la fonction mail de PHP', # MODIF
+	'utiliser_reglages_site' => 'Utiliser les réglages du site SPIP : <br /><tt>@from@</tt>', # MODIF
 	'utiliser_smtp' => 'Utiliser SMTP',
 
 	// V

@@ -54,7 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_username' => 'Nome dell’utente:',
 
 	// M
-	'message_identite_email' => 'La configurazione del plugin "facteur" sovraccarica questo indirizzo mail per l’invio della posta.',
+	'message_identite_email' => 'La configurazione del plugin "facteur" sovraccarica questo indirizzo mail per l’invio della posta.', # MODIF
 
 	// N
 	'note_test_configuration' => 'Una mail sarà inviata all’indirizzo definito (o all’indirizzo del webmaster).', # MODIF
@@ -67,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tester_la_configuration' => 'Provare la configurazione',
 
 	// U
-	'utiliser_mail' => 'Usare la funzione mail di PHP',
+	'utiliser_mail' => 'Usare la funzione mail di PHP', # MODIF
 	'utiliser_reglages_site' => 'Usare le impostazioni del sito SPIP: il nome visualizzato sarà il nome del sito SPIP e l’indirizzo mail sarà quello del webmaster', # MODIF
 	'utiliser_smtp' => 'Utilisare SMTP',
 

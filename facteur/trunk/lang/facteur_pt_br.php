@@ -59,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_facteur_forcer_from' => 'Forçar o endereço de envio quando o <tt>From</tt> não é no mesmo domínio.',
 
 	// M
-	'message_identite_email' => 'A configuração do plugin "Carteiro" define este endereço de e-mail para o envio das mensagens.',
+	'message_identite_email' => 'A configuração do plugin "Carteiro" define este endereço de e-mail para o envio das mensagens.', # MODIF
 
 	// N
 	'note_test_configuration' => 'Um e-mail será enviado a este endereço.',
@@ -72,8 +72,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tester_la_configuration' => 'Testar a configuração',
 
 	// U
-	'utiliser_mail' => 'Usar a função mail do PHP',
-	'utiliser_reglages_site' => 'Usar as configurações do site SPIP:  : <br /><tt>@from@</tt> ',
+	'utiliser_mail' => 'Usar a função mail do PHP', # MODIF
+	'utiliser_reglages_site' => 'Usar as configurações do site SPIP:  : <br /><tt>@from@</tt> ', # MODIF
 	'utiliser_smtp' => 'Usar SMTP',
 
 	// V

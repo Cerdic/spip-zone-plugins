@@ -62,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_facteur_forcer_from' => 'Diese Versandadresse verwenden wenn  die Domain im Feld <tt>From</tt> nicht identisch ist',
 
 	// M
-	'message_identite_email' => 'Die Konfiguration des Plugins Postbote (facteur) überschreibt diese Adresse für den Mailversand.',
+	'message_identite_email' => 'Die Konfiguration des Plugins Postbote (facteur) überschreibt diese Adresse für den Mailversand.', # MODIF
 
 	// N
 	'note_test_configuration' => 'Eine Mail wird an diese Adresse geschickt.',
@@ -75,8 +75,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tester_la_configuration' => 'Konfiguration testen',
 
 	// U
-	'utiliser_mail' => 'Funktion mail() von PHP verwenden',
-	'utiliser_reglages_site' => 'Einstellungen von SPIP verwenden: <br /><tt>@from@</tt> ',
+	'utiliser_mail' => 'Funktion mail() von PHP verwenden', # MODIF
+	'utiliser_reglages_site' => 'Einstellungen von SPIP verwenden: <br /><tt>@from@</tt> ', # MODIF
 	'utiliser_smtp' => 'SMTP verwenden',
 
 	// V

@@ -56,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_username' => 'Používateľské meno:',
 
 	// M
-	'message_identite_email' => 'Nastavenia zásuvného modulu "Poštár" predvolili túto e-mailovú adresu na posielanie e-mailov.',
+	'message_identite_email' => 'Nastavenia zásuvného modulu "Poštár" predvolili túto e-mailovú adresu na posielanie e-mailov.', # MODIF
 
 	// N
 	'note_test_configuration' => 'E-mail bude odoslaný na túto adresu.',
@@ -69,7 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tester_la_configuration' => 'Otestovať nastavenia',
 
 	// U
-	'utiliser_mail' => 'Používať funkciu mail z PHP',
+	'utiliser_mail' => 'Používať funkciu mail z PHP', # MODIF
 	'utiliser_reglages_site' => 'Použiť nastavenia stránky v SPIPe: zobrazovaný názov je názov stránky a e-mailová adresa je e-mail webmastera', # MODIF
 	'utiliser_smtp' => 'Používať SMTP',
 

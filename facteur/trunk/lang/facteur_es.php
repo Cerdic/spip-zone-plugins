@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_username' => 'Nombre de usuario:',
 
 	// M
-	'message_identite_email' => 'La configuración del plugin "cartero" sobrecarga esta dirección de correo para el envío de correos.',
+	'message_identite_email' => 'La configuración del plugin "cartero" sobrecarga esta dirección de correo para el envío de correos.', # MODIF
 
 	// N
 	'note_test_configuration' => 'Un correo electrónico se enviará a la dirección de envío definida (o aquélla del webmaster).', # MODIF
@@ -68,7 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tester_la_configuration' => 'Testar la configuración',
 
 	// U
-	'utiliser_mail' => 'Utilizar la función de correo electrónico de PHP',
+	'utiliser_mail' => 'Utilizar la función de correo electrónico de PHP', # MODIF
 	'utiliser_reglages_site' => 'Utilizar la configuración del sitio SPIP: el nombre mostrado será el nombre del sitio SPIP y la dirección de correo electrónico será la del webmaster', # MODIF
 	'utiliser_smtp' => 'Utilizar SMTP',
 

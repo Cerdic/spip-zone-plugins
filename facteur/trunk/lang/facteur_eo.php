@@ -62,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_facteur_forcer_from' => 'Uzi tiun ĉi sendadreson, se <tt>From</tt> (sendanto) ne estas ĉe la sama domajno',
 
 	// M
-	'message_identite_email' => 'La agordo de la kromprogramo „Leterportisto“ superas tiun retpoŝtadreson pri la sendo de retmesâgoj.',
+	'message_identite_email' => 'La agordo de la kromprogramo „Leterportisto“ superas tiun retpoŝtadreson pri la sendo de retmesâgoj.', # MODIF
 
 	// N
 	'note_test_configuration' => 'Retmesaĝo estos sendita al tiu ĉi adreso.',
@@ -75,8 +75,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tester_la_configuration' => 'Testi la agordon',
 
 	// U
-	'utiliser_mail' => 'Uzi PHP-funkcion „mail“',
-	'utiliser_reglages_site' => 'Uzi la agordon el la retejo :<br /><tt>@from@</tt>',
+	'utiliser_mail' => 'Uzi PHP-funkcion „mail“', # MODIF
+	'utiliser_reglages_site' => 'Uzi la agordon el la retejo :<br /><tt>@from@</tt>', # MODIF
 	'utiliser_smtp' => 'Uzi SMTP (sendan servilon)',
 
 	// V

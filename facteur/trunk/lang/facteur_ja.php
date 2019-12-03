@@ -62,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_facteur_forcer_from' => '</tt>form<tt> が同じドメインにない場合、この送信アドレスを強制する。',
 
 	// M
-	'message_identite_email' => '「郵便屋さん」というプラグインの設定は、Ｅメールを送信するためにこのメールアドレスをオーバーロードします。',
+	'message_identite_email' => '「郵便屋さん」というプラグインの設定は、Ｅメールを送信するためにこのメールアドレスをオーバーロードします。', # MODIF
 
 	// N
 	'note_test_configuration' => 'このアドレスにＥメールを送信します。',
@@ -75,8 +75,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tester_la_configuration' => '設定をテストする',
 
 	// U
-	'utiliser_mail' => 'PHPメール機能を使用する',
-	'utiliser_reglages_site' => 'SPIPサイト設定を使用する： <br/>@from@',
+	'utiliser_mail' => 'PHPメール機能を使用する', # MODIF
+	'utiliser_reglages_site' => 'SPIPサイト設定を使用する： <br/>@from@', # MODIF
 	'utiliser_smtp' => 'SMTPを使用する',
 
 	// V

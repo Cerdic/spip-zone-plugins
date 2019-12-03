@@ -22,15 +22,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'email_test_envoye' => 'L’email de test a correctement été envoyé. Si vous ne le recevez pas correctement, vérifiez la configuration de votre serveur ou contactez un administrateur du serveur.',
 	'erreur' => 'Erreur',
 	'erreur_dans_log' => ' : consultez le fichier log pour plus de détails',
+	'erreur_envoi_bloque_constante' => 'Envoi bloqué par la constante <tt>_TEST_EMAIL_DEST</tt>.
+Vérifiez votre fichier <tt>mes_options.php</tt>',
 	'erreur_generale' => 'Il y a une ou plusieurs erreurs de configuration. Veuillez vérifier le contenu du formulaire.',
 	'erreur_invalid_host' => 'Ce nom d’hôte n’est pas correct',
 	'erreur_invalid_port' => 'Ce numéro de port n’est pas correct',
-	'erreur_envoi_bloque_constante' => "Envoi bloqué par la constante <tt>_TEST_EMAIL_DEST</tt>.
-Vérifiez votre fichier <tt>mes_options.php</tt>",
-
-	// I
-	'info_envois_forces_vers_email' => "Tous les envois sont forcés vers l'adresse <b>@email@</b> par la constante <tt>_TEST_EMAIL_DEST</tt>",
-	'info_envois_bloques_constante' => "Tous les envois sont bloqués par la constante <tt>_TEST_EMAIL_DEST</tt>.",
 
 	// F
 	'facteur_adresse_envoi_email' => 'Email :',
@@ -62,13 +58,17 @@ Vérifiez votre fichier <tt>mes_options.php</tt>",
 	'facteur_smtp_tls_allow_self_signed_oui' => 'le certificat SSL du serveur SMTP est auto-signé.',
 	'facteur_smtp_username' => 'Nom d’utilisateur :',
 
+	// I
+	'info_envois_bloques_constante' => 'Tous les envois sont bloqués par la constante <tt>_TEST_EMAIL_DEST</tt>.',
+	'info_envois_forces_vers_email' => 'Tous les envois sont forcés vers l’adresse <b>@email@</b> par la constante <tt>_TEST_EMAIL_DEST</tt>',
+
 	// L
 	'label_facteur_forcer_from' => 'Forcer cette adresse d’envoi quand le <tt>From</tt> n’est pas sur le même domaine',
+	'label_mailjet_api_key' => 'Clé API Mailjet',
+	'label_mailjet_api_version' => 'API Version',
+	'label_mailjet_secret_key' => 'Clé secrète Mailjet',
 	'label_message_envoye' => 'Message envoyé :',
 	'label_utiliser_mailjet' => 'Utiliser Mailjet',
-	'label_mailjet_api_key' => 'Clé API Mailjet',
-	'label_mailjet_secret_key' => 'Clé secrète Mailjet',
-	'label_mailjet_api_version' => 'API Version',
 
 	// M
 	'message_identite_email' => 'La <a href="@url@">configuration du plugin <i>Facteur</i></a> surcharge cette adresse email avec <b>@email@</b> pour l’envoi de courriels.',

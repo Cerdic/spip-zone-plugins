@@ -62,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_facteur_forcer_from' => 'Forceer dit verzendadres wanneer de <tt>From</tt> niet tot hetzelfde domein behoort',
 
 	// M
-	'message_identite_email' => 'De configuratie van plugin "facteur" laadt dit e-mailadres voor het verzenden van mails.',
+	'message_identite_email' => 'De configuratie van plugin "facteur" laadt dit e-mailadres voor het verzenden van mails.', # MODIF
 
 	// N
 	'note_test_configuration' => 'Een mail wordt naar het aangegeven adres (of naar de webmaster) verzonden.',
@@ -75,8 +75,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tester_la_configuration' => 'Configuratietest',
 
 	// U
-	'utiliser_mail' => 'Gebruik de PHP mail functie',
-	'utiliser_reglages_site' => 'Gebruik de instellingen van SPIP: <br /><tt>@from@</tt><br/>De getoonde naam is die van de site en het adres dat van de webmaster',
+	'utiliser_mail' => 'Gebruik de PHP mail functie', # MODIF
+	'utiliser_reglages_site' => 'Gebruik de instellingen van SPIP: <br /><tt>@from@</tt><br/>De getoonde naam is die van de site en het adres dat van de webmaster', # MODIF
 	'utiliser_smtp' => 'Gebruik SMTP',
 
 	// V

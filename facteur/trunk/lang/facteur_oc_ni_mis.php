@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_username' => 'Noum d’utilisaire :',
 
 	// M
-	'message_identite_email' => 'Lou counfiguracioun dóu plugin "fatour" soubre-scriéu aquela adressa e-mail per la spedissioun.',
+	'message_identite_email' => 'Lou counfiguracioun dóu plugin "fatour" soubre-scriéu aquela adressa e-mail per la spedissioun.', # MODIF
 
 	// N
 	'note_test_configuration' => 'Un e-mail serà mandat a l’adressa de spedissioun definida (o aquela dóu webmèstre).', # MODIF
@@ -68,7 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tester_la_configuration' => 'Prouvà la counfiguracioun',
 
 	// U
-	'utiliser_mail' => 'Utilisà la founcioun mail de PHP',
+	'utiliser_mail' => 'Utilisà la founcioun mail de PHP', # MODIF
 	'utiliser_reglages_site' => 'Utilisà lu reglage dóu sit SPIP : lou noum afichat serà lou noum dóu sit SPIP et l’adressa e-mail serà aquela dóu webmèstre', # MODIF
 	'utiliser_smtp' => 'Utilisà SMTP',
 
