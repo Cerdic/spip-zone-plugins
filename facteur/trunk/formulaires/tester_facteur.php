@@ -16,6 +16,8 @@ function formulaires_tester_facteur_charger_dist() {
 
 	$valeurs = array(
 		'email_test' => $GLOBALS['meta']['email_webmaster'],
+		'email_test_from' => '',
+		'email_test_important' => 0,
 	);
 	if (!empty($GLOBALS['visiteur_session']['email'])) {
 		$valeurs['email_test'] = $GLOBALS['visiteur_session']['email'];
@@ -45,6 +47,10 @@ function formulaires_tester_facteur_verifier_dist() {
 	} elseif (!email_valide($email)) {
 		$erreurs['email_test'] = _T('form_email_non_valide');
 	}
+	if ($from = _request('email_test_from')
+	  and !email_valide($from)) {
+		$erreurs['email_test_from'] = _T('form_email_non_valide');
+	}
 
 	return $erreurs;
 }
@@ -55,7 +61,15 @@ function formulaires_tester_facteur_traiter_dist() {
 	$res = array();
 	$destinataire = _request('email_test');
 	$message_html = '';
-	$err = facteur_envoyer_mail_test($destinataire, _T('facteur:corps_email_de_test'), $message_html);
+	$options = array();
+	if ($from = _request('email_test_from')) {
+		$options['from'] = $from;
+	}
+	if (_request('email_test_important')) {
+		$options['important'] = true;
+	}
+
+	$err = facteur_envoyer_mail_test($destinataire, _T('facteur:corps_email_de_test'), $message_html, $options);
 	if ($err) {
 		$res['message_erreur'] = nl2br($err);
 	} else {
@@ -82,10 +96,11 @@ function facteur_inline_base64src($texte, $type="text/html"){
  * @param string $destinataire
  * @param string $titre
  * @param string $message_html
+ * @param array $options
  * @return string
  *   message erreur ou vide si tout est OK
  */
-function facteur_envoyer_mail_test($destinataire, $titre, &$message_html) {
+function facteur_envoyer_mail_test($destinataire, $titre, &$message_html, $options = array()) {
 
 	include_spip('classes/facteur');
 
@@ -115,13 +130,15 @@ function facteur_envoyer_mail_test($destinataire, $titre, &$message_html) {
 		'html' => $message_html,
 		'texte' => $message_texte,
 		'exceptions' => true,
-		'from' => 'compta@yterium.com'
 	);
 
 	if ($piece_jointe) {
 		$corps['pieces_jointes'] = array($piece_jointe);
 	}
 
+	if ($options) {
+		$corps = array_merge($options, $corps);
+	}
 
 	// passer par envoyer_mail pour bien passer par les pipeline et avoir tous les logs
 	$envoyer_mail = charger_fonction('envoyer_mail', 'inc');

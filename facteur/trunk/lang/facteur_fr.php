@@ -69,6 +69,9 @@ Vérifiez votre fichier <tt>mes_options.php</tt>',
 	'label_mailjet_secret_key' => 'Clé secrète Mailjet',
 	'label_message_envoye' => 'Message envoyé :',
 	'label_utiliser_mailjet' => 'Utiliser Mailjet',
+	'label_email_test_from' => 'Expéditeur',
+	'label_email_test_from_placeholder' => 'from@example.org (optionnel)',
+	'label_email_test_important' => 'Cet email est important',
 
 	// M
 	'message_identite_email' => 'La <a href="@url@">configuration du plugin <i>Facteur</i></a> surcharge cette adresse email avec <b>@email@</b> pour l’envoi de courriels.',

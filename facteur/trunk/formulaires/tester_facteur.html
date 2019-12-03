@@ -16,6 +16,23 @@
 				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 				<p class="explication"><:facteur:note_test_configuration:></p>
 			</div>
+			#SET{name,email_test_from}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:facteur:label_email_test_from:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" placeholder="<:facteur:label_email_test_from_placeholder|attribut_html:>" [(#HTML5|et{#GET{obli}})required='required']/>
+			</div>
+			#SET{name,email_test_important}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<div class="choix">
+					#SET{val,0}
+					<input type="hidden" name="#GET{name}" value="#GET{val}" />
+					#SET{val,1}
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}" aria-describedby="#GET{name}_explication" [(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}"><:facteur:label_email_test_important:></label>
+				</div>
+			</div>
 		</div>
 		<p class="boutons">
 			<input type="submit" name="tester" class="submit" value="<:facteur:tester:>" />
