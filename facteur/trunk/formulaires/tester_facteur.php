@@ -92,6 +92,7 @@ function facteur_envoyer_mail_test($destinataire, $titre, &$message_html) {
 	$piece_jointe = array();
 
 	if (test_plugin_actif('medias')) {
+		include_spip('inc/documents');
 		// trouver une piece jointe dans les documents si possible, la plus legere possible, c'est juste pour le principe
 		$docs = sql_allfetsel('*', 'spip_documents', 'media='.sql_quote('file').' AND distant='.sql_quote('non').' AND brise=0','', 'taille DESC', '0,10');
 		foreach ($docs as $doc) {
