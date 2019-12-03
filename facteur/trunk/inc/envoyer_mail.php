@@ -213,12 +213,13 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 		$facteur->From = $from;
 		// la valeur par défaut de la config n'est probablement pas valable pour ce mail,
 		// on l'écrase pour cet envoi
-		$facteur->FromName = $from;
+		$facteur->FromName = '';
 	}
 
 	// On ajoute le nom de l'envoyeur s'il fait partie des options
-	if ($nom_envoyeur)
+	if ($nom_envoyeur){
 		$facteur->FromName = $nom_envoyeur;
+	}
 
 	// Si plusieurs emails dans le from, pas de Name !
 	if (strpos($facteur->From,",")!==false){
@@ -293,17 +294,9 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	// On passe dans un pipeline pour modifier tout le facteur avant l'envoi
 	$facteur = pipeline('facteur_pre_envoi', $facteur);
 
-	// On génère les headers
-	$head = $facteur->CreateHeader();
-
 	// Et c'est parti on envoie enfin
 	$backtrace = facteur_backtrace();
-	$trace = trim($head);
-	// si c'est un envoi par mail() on a pas le sujet dans le head, ce qui rend le debug complique, on l'ajoute manuellement
-	if (strpos($trace, 'Subject:') === false) {
-		$trace .= "\nSubject: $sujet";
-	}
-	$trace .= ($destinataire ? "\nDestinataire: " . implode(', ', $destinataire): '');
+	$trace = $facteur->getMessageLog();
 	spip_log("mail via facteur\n$trace",'mail'._LOG_FACTEUR);
 	spip_log("mail\n$backtrace\n$trace",'facteur'._LOG_FACTEUR);
 	$retour = $facteur->Send();

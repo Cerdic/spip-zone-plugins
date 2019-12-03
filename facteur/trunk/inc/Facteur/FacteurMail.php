@@ -62,6 +62,11 @@ class FacteurMail extends PHPMailer {
 		spip_log("$level: " . trim($message), "facteur" . _LOG_DEBUG);
 	}
 
+	/**
+	 * Fonction de log interne aux Facteurs pour prefixer avec la class qui genere le log
+	 * @param string|array $message
+	 * @param null|int $level
+	 */
 	protected function log($message, $level = null) {
 		$class = get_class($this);
 		if (empty($level)) {
@@ -227,6 +232,46 @@ class FacteurMail extends PHPMailer {
 
 
 	/**
+	 * Generer le log informatif sur le mail qui va etre envoye
+	 * @return string
+	 */
+	public function getMessageLog(){
+		$this->forceFromIfNeeded();
+		$header = $this->CreateHeader();
+		$trace = trim($header) . "\n";
+
+		// completer le header avec les infos essentielles qu'on veut dans les logs
+		if (!empty($this->to) and strpos($trace, "To:") === false) {
+			$trace .= $this->addrAppend('To', $this->to);
+		}
+		if (!empty($this->cc) and strpos($trace, "Cc:") === false) {
+			$trace .= $this->addrAppend('Cc', $this->cc);
+		}
+		if (!empty($this->bcc) and strpos($trace, "Bcc:") === false) {
+			$trace .= $this->addrAppend('Bcc', $this->bcc);
+		}
+		if (strpos($trace, 'Subject:') === false) {
+			$trace .= "Subject: " . $this->Subject . "\n";
+		}
+
+		$message_desc = [];
+		if (!empty($this->Body)) {
+			$message_desc[] = "Body(".strlen($this->Body)."c)";
+		}
+		if (!empty($this->AltBody)) {
+			$message_desc[] = "AltBody(".strlen($this->AltBody)."c)";
+		}
+		if (!empty($this->attachment)) {
+			$message_desc[] = "Files(".count($this->attachment).")";
+		}
+		$trace .= "Message: " . implode(' ', $message_desc)."\n";
+
+
+		return "Sent by " . get_class($this) . "\n" . rtrim($trace);
+	}
+
+
+	/**
 	 * @param bool $exceptions
 	 */
 	public function setExceptions($exceptions){
@@ -363,6 +408,29 @@ class FacteurMail extends PHPMailer {
 	}
 
 	/**
+	 * Forcer le from avant envoi si il n'est pas sur le bon domaine
+	 * @throws Exception
+	 */
+	protected function forceFromIfNeeded() {
+		if ($this->ForceFrom
+			AND $this->From!==$this->ForceFrom){
+
+			$forcedomain = explode('@', $this->ForceFrom);
+			$forcedomain = end($forcedomain);
+			$domain = explode('@', $this->From);
+			$domain = end($domain);
+
+			if ($domain!==$forcedomain){
+				// le From passe en ReplyTo
+				$this->AddReplyTo($this->From, $this->FromName);
+				// on force le From
+				$this->From = $this->ForceFrom;
+				$this->FromName = $this->ForceFromName;
+			}
+		}
+	}
+
+	/**
 	 * Une fonction wrapper pour appeler une methode de phpMailer
 	 * en recuperant l'erreur eventuelle, en la loguant via SPIP et en lancant une exception si demandee
 	 * @param string $function
@@ -402,23 +470,7 @@ class FacteurMail extends PHPMailer {
 	 * @throws Exception
 	 */
 	public function Send(){
-		if ($this->ForceFrom
-			AND $this->From!==$this->ForceFrom){
-
-			$forcedomain = explode('@', $this->ForceFrom);
-			$forcedomain = end($forcedomain);
-			$domain = explode('@', $this->From);
-			$domain = end($domain);
-
-			if ($domain!==$forcedomain){
-				// le From passe en ReplyTo
-				$this->AddReplyTo($this->From, $this->FromName);
-				// on force le From
-				$this->From = $this->ForceFrom;
-				$this->FromName = $this->ForceFromName;
-			}
-		}
-
+		$this->forceFromIfNeeded();
 		$args = func_get_args();
 		return $this->callWrapper(array('parent', 'Send'), $args);
 	}

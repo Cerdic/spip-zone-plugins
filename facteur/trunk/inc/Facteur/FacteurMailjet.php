@@ -183,12 +183,29 @@ class FacteurMailjet extends FacteurMail {
 
 	protected function cleanAdress($address, $name = ''){
 		$address = trim($address);
-		$name = trim(preg_replace('/[\r\n]+/', '', $name)); //Strip breaks and trim
+		$name = trim(preg_replace('/[\r\n]+/', ' ', $name)); //Strip breaks and trim
 		if (!self::ValidateAddress($address)){
 			$this->SetError('invalid_address' . ': ' . $address);
 			return false;
 		}
-		return array($address, $name);
+		return array('Email' => $address, 'Name' => $name);
+	}
+
+	/**
+	 * Mettre en forme une addresse email
+	 * @param $dest
+	 * @return string
+	 */
+	protected function formatEmailDest($dest) {
+		$d = $dest['Email'];
+		if (!empty($dest['Name'])){
+			$name = $dest['Name'];
+			if (preg_match(",\W,", $name)) {
+				$name = '"'. $name . '"';
+			}
+			$d = $name . " <$d>";
+		}
+		return $d;
 	}
 
 	/**
@@ -199,7 +216,7 @@ class FacteurMailjet extends FacteurMail {
 	 */
 	public function AddAddress($address, $name = ''){
 		if ($a = $this->cleanAdress($address, $name)){
-			$this->message_dest['To'][] = array('Email' => $address, 'Name' => $name);
+			$this->message_dest['To'][] = $a;
 			return true;
 		}
 		return false;
@@ -214,7 +231,7 @@ class FacteurMailjet extends FacteurMail {
 	 */
 	public function AddCC($address, $name = ''){
 		if ($a = $this->cleanAdress($address, $name)){
-			$this->message_dest['Cc'][] = array('Email' => $address, 'Name' => $name);
+			$this->message_dest['Cc'][] = $a;
 			return true;
 		}
 		return false;
@@ -229,7 +246,7 @@ class FacteurMailjet extends FacteurMail {
 	 */
 	public function AddBCC($address, $name = ''){
 		if ($a = $this->cleanAdress($address, $name)){
-			$this->message_dest['Bcc'][] = array('Email' => $address, 'Name' => $name);
+			$this->message_dest['Bcc'][] = $a;
 			return true;
 		}
 		return false;
@@ -243,7 +260,7 @@ class FacteurMailjet extends FacteurMail {
 	 */
 	public function AddReplyTo($address, $name = ''){
 		if ($a = $this->cleanAdress($address, $name)){
-			$this->message['Headers']['ReplyTo'] = $address;
+			$this->message['Headers']['Reply-To'] = $this->formatEmailDest($a);
 			return true;
 		}
 		return false;
@@ -262,11 +279,45 @@ class FacteurMailjet extends FacteurMail {
 		$this->message['Headers'][$name] = trim($value);
 	}
 
+
+	/**
+	 * Ne sert pas, sauf aux logs internes
+	 * @return string|void
+	 */
+	public function CreateHeader(){
+		$header = "";
+
+		$header .= "Date: ". date('Y-m-d H:i:s'). "\n";
+
+		$from = $this->formatEmailDest(['Email' => $this->From, 'Name' => $this->FromName]);
+		$header .= "From: $from\n";
+
+		foreach (['To', 'Cc', 'Bcc'] as $dest_type){
+			if (!empty($this->message_dest[$dest_type]) and count($this->message_dest[$dest_type])){
+				$dests = [];
+				foreach ($this->message_dest[$dest_type] as $dest){
+					$dests[] = $this->formatEmailDest($dest);
+				}
+				$header .= "$dest_type: ". implode(',', $dests) ."\n";
+			}
+		}
+
+		if (!empty($this->message['Headers'])) {
+			foreach ($this->message['Headers'] as $k=>$h) {
+				$header .= "$k: $h\n";
+			}
+		}
+
+		return $header;
+	}
+
+
 	/**
 	 * @return bool
 	 * @throws \Exception
 	 */
 	public function Send(){
+		$this->forceFromIfNeeded();
 
 		$this->message['Html-part'] = $this->Body;
 		$this->message['Text-part'] = $this->AltBody;
@@ -311,11 +362,7 @@ class FacteurMailjet extends FacteurMail {
 			if (!empty($this->message_dest[$dest_type]) and count($this->message_dest[$dest_type])){
 				$dests = array();
 				foreach ($this->message_dest[$dest_type] as $dest){
-					$d = $dest['Email'];
-					if (!empty($dest['Name'])){
-						$d = $dest['Name'] . " <$d>";
-					}
-					$dests[] = $d;
+					$dests[] = $this->formatEmailDest($dest);
 				}
 				$this->message[$dest_type] = implode(',', $dests);
 			}
@@ -412,7 +459,4 @@ class FacteurMailjet extends FacteurMail {
 		return false;
 	}
 
-
-	public function CreateHeader(){
-	}
 }
