@@ -54,6 +54,18 @@ class FacteurMail extends PHPMailer {
 	protected $urlsBase = array();
 
 	/**
+	 * CC Auto a remettre quand on clear les recipients
+	 * @var mixed|null
+	 */
+	protected $autoCc = null;
+
+	/**
+	 * Bcc Auto a remettre quand on clear les recipients
+	 * @var mixed|null
+	 */
+	protected $autoBcc = null;
+
+	/**
 	 * Wrapper de spip_log pour par PHPMailer
 	 * @param $message
 	 * @param $level
@@ -126,10 +138,12 @@ class FacteurMail extends PHPMailer {
 		// Destinataires en copie, seulement s'il n'y a pas de destinataire de test
 		if (!defined('_TEST_EMAIL_DEST')){
 			if (!empty($options['cc'])){
-				$this->AddCC($options['cc']);
+				$this->autoCc = $options['cc'];
+				$this->AddCC($this->autoCc);
 			}
 			if (!empty($options['bcc'])){
-				$this->AddBCC($options['bcc']);
+				$this->autoBcc = $options['bcc'];
+				$this->AddBCC($this->autoBcc);
 			}
 		}
 
@@ -169,11 +183,15 @@ class FacteurMail extends PHPMailer {
 	}
 
 	/**
-	 * Destinataire(s) du mail
+	 * Definir le ou les Destinataire(s) du mail
+	 * clear tous les destinataires precedemment definis
+	 *
 	 * @param string | array $email
 	 * @throws Exception
 	 */
 	public function setDest($email) {
+		$this->clearAllRecipients();
+
 		//Pour un envoi multiple de mail, $email doit être un tableau avec les adresses.
 		if (is_array($email)){
 			foreach ($email as $cle => $adresseMail){
@@ -230,6 +248,14 @@ class FacteurMail extends PHPMailer {
 		}
 	}
 
+	/**
+	 * Set the important flag more or less supported by client mails
+	 */
+	public function setImportant() {
+		$this->addCustomHeader("X-Priority", "1 (High)");
+		$this->addCustomHeader("X-MSMail-Priority", "High");
+		$this->addCustomHeader("Importance", "High");
+	}
 
 	/**
 	 * Generer le log informatif sur le mail qui va etre envoye
@@ -429,6 +455,20 @@ class FacteurMail extends PHPMailer {
 			}
 		}
 	}
+
+	/**
+	 * Clear all recipients
+	 */
+	public function clearAllRecipients(){
+		parent::clearAllRecipients();
+		if (!empty($this->autoCc)) {
+			$this->AddCC($this->autoCc);
+		}
+		if (!empty($this->autoBcc)){
+			$this->AddBCC($this->autoBcc);
+		}
+	}
+
 
 	/**
 	 * Une fonction wrapper pour appeler une methode de phpMailer

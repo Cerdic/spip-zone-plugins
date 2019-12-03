@@ -196,16 +196,26 @@ class FacteurMailjet extends FacteurMail {
 	 * @param $dest
 	 * @return string
 	 */
-	protected function formatEmailDest($dest) {
+	protected function formatEmailDest($dest){
 		$d = $dest['Email'];
 		if (!empty($dest['Name'])){
 			$name = $dest['Name'];
-			if (preg_match(",\W,", $name)) {
-				$name = '"'. $name . '"';
+			if (preg_match(",\W,", $name)){
+				$name = '"' . $name . '"';
 			}
 			$d = $name . " <$d>";
 		}
 		return $d;
+	}
+
+	/**
+	 * Clear all recipients
+	 */
+	public function clearAllRecipients(){
+		$this->message_dest['To'] = [];
+		$this->message_dest['Cc'] = [];
+		$this->message_dest['Bcc'] = [];
+		parent::clearAllRecipients();
 	}
 
 	/**
@@ -287,7 +297,7 @@ class FacteurMailjet extends FacteurMail {
 	public function CreateHeader(){
 		$header = "";
 
-		$header .= "Date: ". date('Y-m-d H:i:s'). "\n";
+		$header .= "Date: " . date('Y-m-d H:i:s') . "\n";
 
 		$from = $this->formatEmailDest(['Email' => $this->From, 'Name' => $this->FromName]);
 		$header .= "From: $from\n";
@@ -298,12 +308,12 @@ class FacteurMailjet extends FacteurMail {
 				foreach ($this->message_dest[$dest_type] as $dest){
 					$dests[] = $this->formatEmailDest($dest);
 				}
-				$header .= "$dest_type: ". implode(',', $dests) ."\n";
+				$header .= "$dest_type: " . implode(',', $dests) . "\n";
 			}
 		}
 
-		if (!empty($this->message['Headers'])) {
-			foreach ($this->message['Headers'] as $k=>$h) {
+		if (!empty($this->message['Headers'])){
+			foreach ($this->message['Headers'] as $k => $h){
 				$header .= "$k: $h\n";
 			}
 		}
