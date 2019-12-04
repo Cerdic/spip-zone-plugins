@@ -506,24 +506,6 @@ function meta_valeur_colonne_table_dist($table, $col, $id) {
 	return array('valeur' => $config);
 }
 
-/**
- * Extrait la valeur d'une chaine de langue
- *
- * @param string $table
- *   Nom de la """table""" (traduction)
- * @param array $motifs
- *   Motifs a traduire
- * @param string $module
- *   Module de langue
- * @return array
- *   Couple motif_chaine_de_langue => valeur traduite
-**/
-function traduction_valeur_colonne_table_dist($table, $motifs, $module) {
-	$valeur = _T("$module:$motifs[0]");
-	return array($motifs[0] => $valeur);
-}
-
-
 function return_log($var) {
 	die(crayons_json_encode(array('$erreur'=> var_export($var, true))));
 }
