@@ -63,15 +63,15 @@ Vérifiez votre fichier <tt>mes_options.php</tt>',
 	'info_envois_forces_vers_email' => 'Tous les envois sont forcés vers l’adresse <b>@email@</b> par la constante <tt>_TEST_EMAIL_DEST</tt>',
 
 	// L
+	'label_email_test_from' => 'Expéditeur',
+	'label_email_test_from_placeholder' => 'from@example.org (optionnel)',
+	'label_email_test_important' => 'Cet email est important',
 	'label_facteur_forcer_from' => 'Forcer cette adresse d’envoi quand le <tt>From</tt> n’est pas sur le même domaine',
 	'label_mailjet_api_key' => 'Clé API Mailjet',
 	'label_mailjet_api_version' => 'API Version',
 	'label_mailjet_secret_key' => 'Clé secrète Mailjet',
 	'label_message_envoye' => 'Message envoyé :',
 	'label_utiliser_mailjet' => 'Utiliser Mailjet',
-	'label_email_test_from' => 'Expéditeur',
-	'label_email_test_from_placeholder' => 'from@example.org (optionnel)',
-	'label_email_test_important' => 'Cet email est important',
 
 	// M
 	'message_identite_email' => 'La <a href="@url@">configuration du plugin <i>Facteur</i></a> surcharge cette adresse email avec <b>@email@</b> pour l’envoi de courriels.',
