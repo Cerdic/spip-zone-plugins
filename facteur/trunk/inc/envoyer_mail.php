@@ -339,7 +339,7 @@ function inc_envoyer_mail($destinataire, $sujet, $message, $from = "", $headers 
 	// en fonction de la reponse et du modus operandi pour connaitre le status du message
 	if ($important and $dest_alertes = $facteur->Sender) {
 		$dest = (is_array($destinataire) ? implode(', ', $destinataire) : $destinataire);
-		$sujet_alerte = _L("[MAIL] FAIL envoi mail pour @dest@ (était: @sujet@)", array('dest' => $dest, 'sujet' => $sujet));
+		$sujet_alerte = _L('facteur:sujet_alerte_mail_fail', array('dest' => $dest, 'sujet' => $sujet));
 		$args = func_get_args();
 		$args[0] = $dest_alertes;
 		$args[1] = $sujet_alerte;
