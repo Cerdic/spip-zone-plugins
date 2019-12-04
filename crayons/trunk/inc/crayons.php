@@ -506,6 +506,26 @@ function meta_valeur_colonne_table_dist($table, $col, $id) {
 	return array('valeur' => $config);
 }
 
+/**
+ * Extrait la valeur d'une chaine de langue
+ *
+ * @param string $table
+ *   Nom de la """table""" (traduction)
+ * @param array $motifs
+ *   Motifs a traduire
+ * @param string $module
+ *   Module de langue sous la forme module_lang, ex local_fr
+ * @return array
+ *   Couple motif_chaine_de_langue => valeur traduite
+**/
+function traduction_valeur_colonne_table_dist($table, $motifs, $module) {
+	$lang = substr($module,-2);
+	$mod = substr($module,0,-3);
+	$valeur = _T("$mod:$motifs[0]", array('spip_lang'=>$lang));
+	return array($motifs[0] => $valeur);
+}
+
+
 function return_log($var) {
 	die(crayons_json_encode(array('$erreur'=> var_export($var, true))));
 }

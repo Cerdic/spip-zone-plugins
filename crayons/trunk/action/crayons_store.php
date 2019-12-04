@@ -528,15 +528,16 @@ function revision_meta($a, $c = false) {
  * suite à un crayon sur une chaine de langue
  *
  * @param string $a
- *   Nom ou clé du module de langue
+ *   Nom du module de langue sous la forme module_lang (ex local_fr)
  * @param bool|array $c
  *   Liste des champs modifiés
  *   'motif_chaine_traduction' => valeur saisie 
  * @return void
 **/
 function revision_traduction($a, $c = false) {
-	if ( $a == "public" && ! test_espace_prive() ) $a="local";
-	foreach ( chercher_module_lang($a, substr($GLOBALS['idx_lang'],-2)) as $fichier_lang ) {
+	$module = substr($a,0,-3);
+	if ( $module == "public" && ! test_espace_prive() ) $module="local";
+	foreach ( chercher_module_lang($module, substr($GLOBALS['idx_lang'],-2)) as $fichier_lang ) {
 		$motif = array_keys($c)[0];
 		$valeur = array_values($c)[0];
 		$contenu_original = file_get_contents($fichier_lang);

@@ -8,16 +8,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 // html == avec un modele, controleurs/traduction.html)
 function controleurs_traduction_dist($regs) {
 	list(,$crayon,$type,$champ,$id,$classes) = $regs;
-	preg_match('|\slang_[a-z]{2}\s|', $classes, $classe_lang);
-	$lang = substr($classe_lang[0],6,2);	
-	$valeur = _T("$champ:$id",array('spip_lang'=>$lang));
+	spip_log("controleurs_traduction_dist $champ", _LOG_INFO_IMPORTANTE);
+	
+	$valeur = valeur_colonne_table($type, $id, $champ);
 	$n = new Crayon(
 		"traduction-".$id."-".$champ,
 		$valeur,
 		array('motif_langue' => $id, 'controleur' => 'controleurs/traduction')
 	);
 	
-	$contexte = array('valeur'=>$valeur);
+	$contexte = array('motif_langue' => $id, 'value'=>$valeur[$id]);
 	$html = $n->formulaire($contexte);
 	$status = null;
 
