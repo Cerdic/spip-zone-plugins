@@ -289,12 +289,17 @@ function inc_envoyer_mail($destinataire, $sujet, $message, $from = "", $headers 
 	// S'il y a des pièces jointes on les ajoute proprement
 	if (count($pieces_jointes)) {
 		foreach ($pieces_jointes as $piece) {
-			$facteur->AddAttachment(
-				$piece['chemin'],
-				isset($piece['nom']) ? $piece['nom']:'',
-				(isset($piece['encodage']) AND in_array($piece['encodage'],array('base64', '7bit', '8bit', 'binary', 'quoted-printable'))) ? $piece['encodage']:'base64',
-				isset($piece['mime']) ? $piece['mime']:Facteur::_mime_types(pathinfo($piece['chemin'], PATHINFO_EXTENSION))
-			);
+			if (!empty($piece['chemin']) and file_exists($piece['chemin'])) {
+				$facteur->AddAttachment(
+					$piece['chemin'],
+					isset($piece['nom']) ? $piece['nom']:'',
+					(isset($piece['encodage']) AND in_array($piece['encodage'],array('base64', '7bit', '8bit', 'binary', 'quoted-printable'))) ? $piece['encodage']:'base64',
+					isset($piece['mime']) ? $piece['mime']:Facteur::_mime_types(pathinfo($piece['chemin'], PATHINFO_EXTENSION))
+				);
+			}
+			else {
+				spip_log("Piece jointe manquante ignoree : ".json_encode($piece),'facteur' . _LOG_ERREUR);
+			}
 		}
 	}
 
@@ -339,13 +344,19 @@ function inc_envoyer_mail($destinataire, $sujet, $message, $from = "", $headers 
 		$args[0] = $dest_alertes;
 		$args[1] = $sujet_alerte;
 		$args[2]['important'] = false; // ne pas faire une alerte sur l'envoi de l'alerte etc.
+		if (!empty($args[2]['pieces_jointes'])) {
+			foreach ($args[2]['pieces_jointes'] as $k=>$pj) {
+				// passer les chemins en absolus car on sait pas si l'alerte sera lancee depuis le meme cote racine/ecrire
+				$args[2]['pieces_jointes'][$k]['chemin'] = realpath($pj['chemin']);
+			}
+		}
 		$facteur->setSendFailFunction('envoyer_mail', $args, 'inc/');
 	}
 
 	$retour = $facteur->Send();
 
 	if (!$retour){
-		spip_log("Erreur Envoi mail via Facteur : ".print_r($facteur->ErrorInfo,true),'mail.'._LOG_ERREUR);
+		spip_log("Erreur Envoi mail via Facteur : ".print_r($facteur->ErrorInfo,true),'mail'._LOG_ERREUR);
 		// si le mail est important, c'est le facteur qui aura gere l'envoi de l'alerte fail
 	}
 
