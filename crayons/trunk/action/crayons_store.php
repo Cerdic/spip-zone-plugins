@@ -536,19 +536,26 @@ function revision_meta($a, $c = false) {
 **/
 function revision_traduction($a, $c = false) {
 	$module = substr($a,0,-3);
+	$lang = substr($a,-2);
+	$i18n = "i18n_".$module."_".$lang;
 	if ( $module == "public" && ! test_espace_prive() ) $module="local";
-	foreach ( chercher_module_lang($module, substr($GLOBALS['idx_lang'],-2)) as $fichier_lang ) {
+	foreach ( chercher_module_lang($module, $lang) as $fichier_lang ) {
+		$action="maj";
 		$motif = array_keys($c)[0];
 		$valeur = array_values($c)[0];
 		$contenu_original = file_get_contents($fichier_lang);
-		if ( strpos($contenu_original, "'$motif'") === false) // motif absent du fichier
-			continue; // fichier suivant
-
-		$GLOBALS[$GLOBALS['idx_lang']][$motif] = $valeur;
-		spip_log("revision_traduction(): MAJ motif '$motif' dans $fichier_lang", _LOG_INFO_IMPORTANTE);
+		if ( $lang != $GLOBALS['meta']['langue_site'] && strpos($contenu_original, "'$motif'") === false) { // motif absent du fichier et langue différente de la langue du site : ajout
+			spip_log("revision_traduction(): '$motif' absent de $fichier_lang", _LOG_INFO_IMPORTANTE);
+			$action="ajout";
+			$contenu_lang_defaut = file_get_contents(str_replace("_$lang.php", "_".$GLOBALS['meta']['langue_site'].".php", $fichier_lang));
+			if ( strpos($contenu_lang_defaut, "'$motif'") === false)
+			  continue; // fichier suivant
+		}
+		$GLOBALS[$i18n][$motif] = $valeur;
+		spip_log("revision_traduction(): $action du motif '$motif' dans $fichier_lang", _LOG_INFO_IMPORTANTE);
 		$contenu_modifie = "<?php\nif (!defined('_ECRIRE_INC_VERSION')) return;\n".'$GLOBALS[$GLOBALS[\'idx_lang\']] = array(';
-		foreach ($GLOBALS[$GLOBALS['idx_lang']] as $key => $value){
-			if ( strpos($contenu_original, "'$key'") !== false ){
+		foreach ($GLOBALS[$i18n] as $key => $value){
+			if ( strpos($contenu_original, "'$key'") !== false || $motif == $key ){ // MAJ ou insertion du motif
 				$contenu_modifie.= "'".$key."' => '".str_replace("'", "\'", $value)."',\n";
 			}
 		}
