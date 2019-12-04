@@ -17,7 +17,77 @@ if (!defined("_ECRIRE_INC_VERSION")){
 	return;
 }
 
+
+
 include_spip('inc/Facteur/FacteurMail');
+
+
+function checkMessagesSentStatus($ids, $apiCredentials, $sendFailFunction, $count=0) {
+	$count++;
+	$recheck = [];
+	$failed = [];
+	if ($ids
+	  and $mj = FacteurMailjet::newMailjetApi($apiCredentials['version'], $apiCredentials['key'], $apiCredentials['secretKey'])) {
+		foreach ($ids as $id) {
+			FacteurMailjet::logDebug("checkMessagesSentStatus: check message id $id", 0);
+			$status = $mj->message(['path' => $id]);
+			if (!$status){
+				$recheck[] = $id;
+			}
+			else {
+				if (empty($status['Count']) or empty($status['Data'])) {
+					FacteurMailjet::logDebug("checkMessagesSentStatus: FAIL message $id " . json_encode($status), 0);
+					$failed[] = $id;
+				}
+				else {
+					foreach ($status['Data'] as $message) {
+						switch (strtolower($message['Status'])) {
+							case 'unknown':
+							case 'queued':
+							case 'deferred':
+								FacteurMailjet::logDebug("checkMessagesSentStatus: RECHECK message $id " . json_encode($message), 0);
+								$recheck[] = $id;
+								break;
+
+							case 'bounce':
+							case 'spam':
+							case 'unsub':
+							case 'blocked':
+							case 'hardbounced':
+							case 'softbounced':
+								$failed[] = $id;
+								FacteurMailjet::logDebug("checkMessagesSentStatus: FAIL message $id " . json_encode($message), 0);
+								break;
+
+							case 'sent':
+							case 'opened':
+							case 'clicked':
+							default:
+								FacteurMailjet::logDebug("checkMessagesSentStatus: OK message $id " . json_encode($message), 0);
+								break;
+						}
+					}
+				}
+			}
+			if (count($failed)) {
+				break;
+			}
+		}
+	}
+
+	if ($failed
+	  or ($recheck and $count>=5)) {
+		$facteur_envoyer_alerte_fail = charger_fonction('facteur_envoyer_alerte_fail','inc');
+		$facteur_envoyer_alerte_fail($sendFailFunction['function'], $sendFailFunction['args'], $sendFailFunction['include']);
+	}
+	elseif ($recheck) {
+		// on re-essaye dans 5mn, 5 fois maxi en tout
+		$delay = 5 * 60;
+		FacteurMailjet::planCheckMessagesSent($delay, $ids, $apiCredentials, $sendFailFunction, $count);
+	}
+	// tout est bon, rien a faire on a fini
+	FacteurMailjet::logDebug("checkMessagesSentStatus: Fini", 0);
+}
 
 /**
  * Utilise l'API REST en v3
@@ -68,6 +138,29 @@ class FacteurMailjet extends FacteurMail {
 	protected $apiKey;
 	protected $apiSecretKey;
 
+	public static function newMailjetApi($version, $key, $secretKey) {
+		switch ($version) {
+			case 3:
+			default:
+				include_spip('inc/Facteur/Api/Mailjetv3');
+				$mj = new Mailjet($key, $secretKey);
+		}
+		$mj->debug = 0;
+
+		return $mj;
+	}
+
+	public static function planCheckMessagesSent($delay, $ids, $apiCredentials, $sendFailFunction, $count=0) {
+		$include = substr(__FILE__, 0, -4);
+		$include = _DIR_RACINE . substr($include, strlen(_ROOT_RACINE));
+		if (defined('_DIR_PLUGIN_FACTEUR') and strpos($include, _DIR_PLUGIN_FACTEUR) === 0) {
+			$include = substr($include, strlen(_DIR_PLUGIN_FACTEUR));
+		}
+		$time = time() + $delay;
+		self::logDebug("planCheckMessagesSent: ids " . implode(', ', $ids), 0);
+		job_queue_add('SPIP\Facteur\checkMessagesSentStatus', "Mailjet Important mail checkMessagesSentStatus", [$ids, $apiCredentials, $sendFailFunction, $count], $include, false, $time);
+	}
+
 	/**
 	 * Facteur constructor.
 	 * @param array $options
@@ -108,15 +201,7 @@ class FacteurMailjet extends FacteurMail {
 	protected function &getMailjetAPI(){
 		static $mj = null;
 		if (is_null($mj)){
-
-			switch ($this->apiVersion) {
-				case 3:
-				default:
-					include_spip('inc/Facteur/Api/Mailjetv3');
-					$mj = new Mailjet($this->apiKey, $this->apiSecretKey);
-			}
-
-			$mj->debug = 0;
+			$mj = self::newMailjetApi($this->apiVersion, $this->apiKey, $this->apiSecretKey);
 		}
 		return $mj;
 	}
@@ -414,7 +499,7 @@ class FacteurMailjet extends FacteurMail {
 			if ($this->exceptions){
 				throw new \Exception($mj->_error);
 			}
-			return false;
+			return $this->sendAlertIfNeeded(false);
 		}
 
 		/*
@@ -434,30 +519,30 @@ class FacteurMailjet extends FacteurMail {
 			if ($this->exceptions){
 				throw new \Exception($error);
 			}
-			return false;
+			return $this->sendAlertIfNeeded(false);
 		}
 
 		// { "Sent" : [{ "Email" : "cedric@yterium.com", "MessageID" : 19140330729428381 }] }
 		if (isset($res['Sent']) AND count($res['Sent'])){
-			return true;
+			return $this->sendAlertIfNeeded($res);
 		}
 		// les autres type de reponse sont non documentees. On essaye au hasard?
 		if (isset($res['Queued']) AND count($res['Queued'])){
-			return true;
+			return $this->sendAlertIfNeeded($res);
 		}
 		if (isset($res['Invalid']) AND count($res['Invalid'])){
 			$this->SetError($error = "invalid");
 			if ($this->exceptions){
 				throw new \Exception($error);
 			}
-			return false;
+			return $this->sendAlertIfNeeded(false);
 		}
 		if (isset($res['Rejected']) AND count($res['Rejected'])){
 			$this->SetError($error = "rejected");
 			if ($this->exceptions){
 				throw new \Exception($error);
 			}
-			return false;
+			return $this->sendAlertIfNeeded(false);
 		}
 
 		// Erreur inconnue
@@ -466,7 +551,42 @@ class FacteurMailjet extends FacteurMail {
 		if ($this->exceptions){
 			throw new \Exception($error);
 		}
-		return false;
+		return $this->sendAlertIfNeeded(false);
+	}
+
+
+	/**
+	 * Verifier si il faut envoyer le mail d'alerte
+	 * @param mixed $res
+	 * @return mixed
+	 */
+	protected function sendAlertIfNeeded($res) {
+		if ($res === false) {
+			return parent::sendAlertIfNeeded($res);
+		}
+		if ($this->important and !empty($this->sendFailFunction)){
+			// sinon chercher les ids des message a verifier un peu plus tard
+			if (isset($res['Sent']) AND count($res['Sent'])){
+				$message_ids = [];
+				$all_dests = array_column($this->message_dest['To'], 'Email');
+				foreach ($res['Sent'] as $message){
+					if (!empty($message['Email']) and !empty($message['MessageID'])){
+						$dest = $message['Email'];
+						$id = $message['MessageID'];
+						if (in_array($dest, $all_dests)){
+							$message_ids[] = $id;
+						}
+					}
+				}
+				if ($message_ids){
+					// verifier ces ids dans 60s
+					$apiCredentials = ['version' => $this->apiVersion, 'key' => $this->apiKey, 'secretKey' => $this->apiSecretKey];
+					FacteurMailjet::planCheckMessagesSent(60, $message_ids, $apiCredentials, $this->sendFailFunction);
+				}
+			}
+		}
+
+		return $res;
 	}
 
 }
