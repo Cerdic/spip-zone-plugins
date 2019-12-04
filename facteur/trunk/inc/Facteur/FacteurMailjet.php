@@ -151,11 +151,7 @@ class FacteurMailjet extends FacteurMail {
 	}
 
 	public static function planCheckMessagesSent($delay, $ids, $apiCredentials, $sendFailFunction, $count=0) {
-		$include = substr(__FILE__, 0, -4);
-		$include = _DIR_RACINE . substr($include, strlen(_ROOT_RACINE));
-		if (defined('_DIR_PLUGIN_FACTEUR') and strpos($include, _DIR_PLUGIN_FACTEUR) === 0) {
-			$include = substr($include, strlen(_DIR_PLUGIN_FACTEUR));
-		}
+		$include = "inc/Facteur/FacteurMailjet";
 		$time = time() + $delay;
 		self::logDebug("planCheckMessagesSent: ids " . implode(', ', $ids), 0);
 		job_queue_add('SPIP\Facteur\checkMessagesSentStatus', "Mailjet Important mail checkMessagesSentStatus", [$ids, $apiCredentials, $sendFailFunction, $count], $include, false, $time);
