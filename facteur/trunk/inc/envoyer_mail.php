@@ -328,19 +328,25 @@ function inc_envoyer_mail($destinataire, $sujet, $message, $from = "", $headers 
 	$trace = $facteur->getMessageLog();
 	spip_log("mail via facteur\n$trace",'mail'._LOG_FACTEUR);
 	spip_log("mail\n$backtrace\n$trace",'facteur'._LOG_FACTEUR);
+
+	// si c'est un mail important, preparer le forward a envoyer en cas d'echec
+	// mais on delegue la gestion de cet envoi au facteur qui est le seul a savoir quoi faire
+	// en fonction de la reponse et du modus operandi pour connaitre le status du message
+	if ($important and $dest_alertes = $facteur->Sender) {
+		$dest = (is_array($destinataire) ? implode(', ', $destinataire) : $destinataire);
+		$sujet_alerte = _L("[MAIL] FAIL envoi mail pour @dest@ (était: @sujet@)", array('dest' => $dest, 'sujet' => $sujet));
+		$args = func_get_args();
+		$args[0] = $dest_alertes;
+		$args[1] = $sujet_alerte;
+		$args[2]['important'] = false; // ne pas faire une alerte sur l'envoi de l'alerte etc.
+		$facteur->setSendFailFunction('envoyer_mail', $args, 'inc/');
+	}
+
 	$retour = $facteur->Send();
 
 	if (!$retour){
 		spip_log("Erreur Envoi mail via Facteur : ".print_r($facteur->ErrorInfo,true),'mail.'._LOG_ERREUR);
-
-		if ($important
-		  and $dest_alertes = $this->Sender) {
-			$dest = (is_array($destinataire) ? implode(', ', $destinataire) : $destinataire);
-			$sujet_alerte = _L("Fail envoi mail pour @dest@ (était: @sujet@)", array('email' => $dest, 'sujet' => $sujet));
-			$facteur->setDest($dest_alertes);
-			$facteur->setObjet($sujet_alerte);
-			$facteur->Send();
-		}
+		// si le mail est important, c'est le facteur qui aura gere l'envoi de l'alerte fail
 	}
 
 	return $retour ;

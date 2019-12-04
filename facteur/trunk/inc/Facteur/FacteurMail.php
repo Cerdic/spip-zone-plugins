@@ -66,6 +66,13 @@ class FacteurMail extends PHPMailer {
 	protected $autoBcc = null;
 
 	/**
+	 * @var bool
+	 */
+	protected $important = false;
+
+	protected $sendFailFunction = null;
+
+	/**
 	 * Wrapper de spip_log pour par PHPMailer
 	 * @param $message
 	 * @param $level
@@ -251,10 +258,27 @@ class FacteurMail extends PHPMailer {
 	/**
 	 * Set the important flag more or less supported by client mails
 	 */
-	public function setImportant() {
-		$this->addCustomHeader("X-Priority", "1 (High)");
-		$this->addCustomHeader("X-MSMail-Priority", "High");
-		$this->addCustomHeader("Importance", "High");
+	public function setImportant($important = true) {
+		if ($important) {
+			$this->addCustomHeader("X-Priority", "1 (High)");
+			$this->addCustomHeader("X-MSMail-Priority", "High");
+			$this->addCustomHeader("Importance", "High");
+		}
+		$this->important = $important;
+	}
+
+	/**
+	 * Set the fail function to call if an important mail was not sent
+	 * @param $function
+	 * @param $args
+	 * @param $include
+	 */
+	public function setSendFailFunction($function, $args, $include) {
+		$this->sendFailFunction = array(
+			'function' => $function,
+			'args' => $args,
+			'include' => $include,
+		);
 	}
 
 	/**
@@ -471,6 +495,21 @@ class FacteurMail extends PHPMailer {
 
 
 	/**
+	 * Verifier si il faut envoyer le mail d'alerte
+	 * @param mixed $res
+	 * @return mixed
+	 */
+	protected function sendAlertIfNeeded($res) {
+		if ($res === false) {
+			if ($this->important and !empty($this->sendFailFunction)) {
+				$facteur_envoyer_alerte_fail = charger_fonction('facteur_envoyer_alerte_fail','inc');
+				$facteur_envoyer_alerte_fail($this->sendFailFunction['function'], $this->sendFailFunction['args'], $this->sendFailFunction['include']);
+			}
+		}
+		return $res;
+	}
+
+	/**
 	 * Une fonction wrapper pour appeler une methode de phpMailer
 	 * en recuperant l'erreur eventuelle, en la loguant via SPIP et en lancant une exception si demandee
 	 * @param string $function
@@ -512,7 +551,8 @@ class FacteurMail extends PHPMailer {
 	public function Send(){
 		$this->forceFromIfNeeded();
 		$args = func_get_args();
-		return $this->callWrapper(array('parent', 'Send'), $args);
+		$res = $this->callWrapper(array('parent', 'Send'), $args);
+		return $this->sendAlertIfNeeded($res);
 	}
 
 	public function addAttachment($path, $name = '', $encoding = 'base64', $type = '', $disposition = 'attachment'){
