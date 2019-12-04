@@ -25,13 +25,13 @@ function action_ordonner_liens_dist() {
 	$objet = objet_type(_request('objet_source'));
 
 	// objet lié
-	$objet_lie = _request('objet_lie');
+	$objet_lie = objet_type(_request('objet_lie'));
 	$id_objet_lie = intval(_request('id_objet_lie'));
 
 	// ordre des éléments
 	$ordre = _request('ordre');
 
-	if (!$objet or !$objet_lie or !$id_objet_lie or !$ordre or !objet_associable($objet)) {
+	if (!$objet or !$objet_lie or !$id_objet_lie or !$ordre or !is_array($ordre) or !objet_associable($objet)) {
 		return ordoc_json_erreur(_T('ordoc:erreur_objet_absent') . ' ' . _T('ordoc:erreur_deplacement_impossible'));
 	}
 
