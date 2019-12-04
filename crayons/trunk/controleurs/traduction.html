@@ -3,9 +3,7 @@
 ]
 [(#CACHE{0})]
 
-[(#SET{chaine_a_traduire,[(#ENV{module_langue}):][(#ENV{motif_langue})]})]
-
-<input class="crayon-active" name="content_#ENV{key}_#ENV{motif_langue}" style="width:#ENV{largeur}px;#ENV{style}" value="[(#GET{chaine_a_traduire}|_T|attribut_html)]" />
+<input class="crayon-active" name="content_#ENV{key}_#ENV{motif_langue}" style="width:#ENV{largeur}px;#ENV{style}" value="[(#ENV{valeur})]" />
 
 
 

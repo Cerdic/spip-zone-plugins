@@ -7,15 +7,17 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 // un controleur php + html
 // html == avec un modele, controleurs/traduction.html)
 function controleurs_traduction_dist($regs) {
-	list(,$crayon,$type,$champ,$id) = $regs;
-	$valeur = valeur_colonne_table($type, $id, $champ);
+	list(,$crayon,$type,$champ,$id,$classes) = $regs;
+	preg_match('|\slang_[a-z]{2}\s|', $classes, $classe_lang);
+	$lang = substr($classe_lang[0],6,2);	
+	$valeur = _T("$champ:$id",array('spip_lang'=>$lang));
 	$n = new Crayon(
 		"traduction-".$id."-".$champ,
 		$valeur,
-		array('module_langue' => $champ, 'motif_langue' => $id, 'controleur' => 'controleurs/traduction')
+		array('motif_langue' => $id, 'controleur' => 'controleurs/traduction')
 	);
-
-	$contexte = array('module_langue' => $champ, 'motif_langue' => $id);
+	
+	$contexte = array('valeur'=>$valeur);
 	$html = $n->formulaire($contexte);
 	$status = null;
 
