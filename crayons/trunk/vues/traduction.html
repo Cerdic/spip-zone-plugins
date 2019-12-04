@@ -1,0 +1,12 @@
+[(#REM)
+
+	Vue pour le crayon 'traduction'
+
+]
+#CACHE{0}
+
+[(#SET{motif,[(#ENV{id_traduction}|substr{0,-3}):][(#ENV{crayon_modele})]})]
+
+[(#GET{motif}|_T{#ARRAY{spip_lang,#ENV{id_traduction}|substr{-2}}})]
+
+
