@@ -364,7 +364,7 @@ function orthotypo_exposants_fr($texte){
 			'/\bm([23])\b/u' => 'm'._TYPO_sup,
 
 			// millions, milliards
-			'/\b([Mm])([nd]s?)\b/u' => _TYPO_sup2,
+			'/\b([\s\d][Mm])([nd]s?)\b/u' => _TYPO_sup2,
 
 			// Vve
 			'/\bV(ve)\b/' => 'V'._TYPO_sup,
