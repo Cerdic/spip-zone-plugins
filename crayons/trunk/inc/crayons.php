@@ -522,13 +522,9 @@ function traduction_valeur_colonne_table_dist($table, $motifs, $module) {
 	$lang = substr($module,-2);
 	$mod = substr($module,0,-3);
 	$valeur = _T("$mod:$motifs[0]", array('spip_lang'=>$lang), array('force'=>false));
-	if ( $lang != $GLOBALS['meta']['langue_site']){ // vérifie qu'on n'utilise pas la traduction dans la langue par défaut
-	  include_spip("inc/traduire_texte");
-	  if ( function_exists("traduire") && $valeur == _T("$mod:$motifs[0]", array('spip_lang'=>$GLOBALS['meta']['langue_site'])) ){
-		   include_spip("inc/filtres");
-		  $valeur_traduite = traduire($valeur, $lang, $GLOBALS['meta']['langue_site']);
-		  $valeur = textebrut($valeur_traduite);
-	  }
+	// valeur vide si traduction trouvée dans la langue du site
+	if ( $lang != $GLOBALS['meta']['langue_site'] && $valeur == _T("$mod:$motifs[0]", array('spip_lang'=>$GLOBALS['meta']['langue_site'])) ){
+		$valeur='';
 	}
 	return array($motifs[0] => $valeur);
 }
