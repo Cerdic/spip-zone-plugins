@@ -11,7 +11,7 @@
 #SET{afficher_reduction,''}
 <BOUCLE_ligne_avec_reduction(COMMANDES_DETAILS){id_commande}{reduction>0.0}{0,1}>#SET{afficher_reduction,' '}</BOUCLE_ligne_avec_reduction>
 <BOUCLE_nbtrans(TRANSACTIONS){id_commande}{statut=ok}{1,1}>#SET{afficher_prix_detail,''}</BOUCLE_nbtrans>
-<BOUCLE_commande(COMMANDES){id_commande}>
+<BOUCLE_commande(COMMANDES){id_commande}{tout}>
 <B_liste>
 <table>
 	<thead>
