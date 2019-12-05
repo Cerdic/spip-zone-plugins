@@ -34,13 +34,15 @@ function facteur_extraire_sujet($message_html, $message_texte = '') {
 				$message_html = $m[1];
 			}
 			// et on le nettoie/decoupe comme du texte
-			$message_texte = $message_html;
+			$message_texte = textebrut($message_html);
 		}
+	}
+	else {
+		$message_texte = supprimer_tags($message_texte);
 	}
 
 	// et on extrait la premiere ligne de vrai texte...
 	// nettoyer le html et les retours chariots
-	$message_texte = textebrut($message_texte);
 	$message_texte = str_replace("\r\n", "\r", $message_texte);
 	$message_texte = str_replace("\r", "\n", $message_texte);
 	$message_texte = trim($message_texte);
