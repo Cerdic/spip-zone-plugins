@@ -82,7 +82,8 @@ Vérifiez votre fichier <tt>mes_options.php</tt>',
 	// P
 	'personnaliser' => 'Personnaliser ces réglages',
 
-	'sujet_alerte_mail_fail' => '[MAIL] FAIL envoi à @dest@ (était: @sujet@)',
+	// S
+	'sujet_alerte_mail_fail' => '[MAIL] FAIL envoi à @dest@ (était : @sujet@)',
 
 	// T
 	'tester' => 'Tester',
