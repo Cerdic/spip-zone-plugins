@@ -5,7 +5,6 @@
 	by Tetue - GPL - 2011
 
 -------------------------------------------------------------- */
-/* TODO : Moderniser avec des icones svg plutot que gif */
 
 a { background: transparent no-repeat right center; }
 
@@ -17,43 +16,43 @@ a.spip_in {} /* liens internes */
 /* Liens externes */
 a.spip_out,
 a.spip_url,
-a.external { padding-right: 13px; background-image: url(img/links/external.gif); }
+a.external { padding-right: 13px; background-image: url(img/links/external.svg); }
 
 /* Liens courriel */
 a.spip_mail,
-a[href ^="mailto:"] { padding-right: 14px; background-image: url(img/links/mail.gif); }
+a[href ^="mailto:"] { padding-right: 14px; background-image: url(img/links/mail.svg); }
 a.spip_mail:before { content: ''; }
 
 /* Autres services */
 a[href ^="https://"],
-a.lock { padding-right: 13px; background-image: url(img/links/lock.gif); }
+a.lock { padding-right: 13px; background-image: url(img/links/lock.svg); }
 
 a[href ^="ftp://"],
-a.ftp { padding-right: 13px; background-image: url(img/links/ftp.gif); }
+a.ftp { padding-right: 13px; background-image: url(img/links/ftp.svg); }
 
 a.gopher,
-a[href ^="gopher://"] { padding-right: 13px; background-image: url(img/links/external.gif); }
+a[href ^="gopher://"] { padding-right: 13px; background-image: url(img/links/external.svg); }
 
 a[href ^="news://"],
-a.news { padding-right: 13px; background-image: url(img/links/news.gif); }
+a.news { padding-right: 13px; background-image: url(img/links/news.svg); }
 
 a[href ^="irc://"],
 a.extiw[href ^="irc://"],
-a.talk { padding-right: 13px; background-image: url(img/links/talk.gif); }
+a.talk { padding-right: 13px; background-image: url(img/links/talk.svg); }
 
-a.feed { padding-right: 13px; background-image: url(img/links/feed.gif); }
+a.feed { padding-right: 13px; background-image: url(img/links/feed.svg); }
 
 /* Liens vers encyclopedie */
-a.spip_glossaire { padding-right: 13px; background-image: url(img/links/glossaire.gif); }
+a.spip_glossaire { padding-right: 13px; background-image: url(img/links/glossaire.svg); }
 
 /* Documents a telecharger */
-a.spip_doc { padding-right: 13px; background-image: url(img/links/spip_doc.gif); }
-a.download { padding-right: 13px; background-image: url(img/links/download.gif); }
+a.spip_doc { padding-right: 13px; background-image: url(img/links/spip_doc.svg); }
+a.download { padding-right: 13px; background-image: url(img/links/download.svg); }
 
 a[href$=".pdf"], a[href$=".PDF"],
 a[href*=".pdf#"], a[href*=".PDF#"],
 a[href*=".pdf?"], a[href*=".PDF?"],
-a.pdf { padding-right: 13px; background-image: url(img/links/pdf.gif); }
+a.pdf { padding-right: 13px; background-image: url(img/links/pdf.svg); }
 
 a[href $=".ogg"], a[href $=".OGG"],
 a[href $=".mid"], a[href $=".MID"],
@@ -61,13 +60,13 @@ a[href $=".midi"], a[href $=".MIDI"],
 a[href $=".mp3"], a[href $=".MP3"],
 a[href $=".wav"], a[href $=".WAV"],
 a[href $=".wma"], a[href $=".WMA"],
-a.audio { padding-right: 13px; background-image: url(img/links/audio.gif); }
+a.audio { padding-right: 13px; background-image: url(img/links/audio.svg); }
 
 a[href $=".ogm"], a[href $=".OGM"],
 a[href $=".avi"], a[href $=".AVI"],
 a[href $=".mpeg"], a[href $=".MPEG"],
 a[href $=".mpg"], a[href $=".MPG"],
-a.video { padding-right: 13px; background-image: url(img/links/video.gif); }
+a.video { padding-right: 13px; background-image: url(img/links/video.svg); }
 
 /* Exception previsibles */
 .spip_documents dt a { padding-right: 0; background-image: none; }

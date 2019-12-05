@@ -1,7 +1,7 @@
 <paquet
 	prefix="links"
 	categorie="navigation"
-	version="3.0.1"
+	version="3.0.2"
 	etat="stable"
 	compatibilite="[3.1.0;3.3.*]"
 	logo="prive/themes/spip/images/links-64.png"
