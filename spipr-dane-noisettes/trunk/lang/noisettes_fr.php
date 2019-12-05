@@ -8,6 +8,8 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 /* noisettes */
+'alert_activer_breves'=>'Attention, vous devez <a href="./?exec=configurer_contenu#activer_breves_oui">activer l\'utilisation des brèves</a> pour utiliser cette noisette.',
+'alert_activer_sites'=>'Attention, vous devez <a href="./?exec=configurer_contenu#activer_sites_oui">activer la gestion\'annuaire de sites web</a> pour utiliser cette noisette.',
 'article_contenu'=>'Contenu de l\'article',
 'article_documents'=>'Documents de l\'article',
 'article_forum'=>'Forum de l\'article',

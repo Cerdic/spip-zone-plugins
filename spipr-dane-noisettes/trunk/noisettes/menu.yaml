@@ -3,6 +3,7 @@
 nom: '<:noisettes:menu:>'
 description: '<:menus:noisette_description:>'
 icon: 'menu-24.png'
+necessite: 'menus'
 contexte:
   - 'identifiant'
 parametres:

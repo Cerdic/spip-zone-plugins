@@ -1,5 +1,4 @@
 #SET{masquer_h2, #ENV{masquer_titre}|et{#ENV{masquer_picto}}|oui|?{on,''}}
 <INCLURE{fond=inclure/conteneur_ouvrir, env}/>
-    </INCLURE{fond></INCLURE{fond><div class="liste syndics"><INCLURE{fond=inclure/listes-sites-syndics,nb=#ENV{nb,10}, masquer_h2=#GET{masquer_h2},env,ajax}></div>
-[(#CONFIG{sdn/conf_avancee}|et{#ENV{fermer_conteneur}}|oui)[</(#ENV{sdn_conteneur})>]]
+    <div class="liste syndics"><INCLURE{fond=inclure/listes-sites-syndics,nb=#ENV{nb,10}, masquer_h2=#GET{masquer_h2},env,ajax}></div>
 <INCLURE{fond=inclure/conteneur_fermer, env}/>
