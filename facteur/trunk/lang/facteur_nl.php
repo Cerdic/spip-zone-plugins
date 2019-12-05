@@ -24,6 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'email_test_envoye' => 'Het testbericht is verzonden. Ontvang je het niet juist, controleer dan de configuratie van de server.',
 	'erreur' => 'Fout',
 	'erreur_dans_log' => ': meer details in het logbestand',
+	'erreur_envoi_bloque_constante' => 'Verzending wordt geblokkeerd door de constante <tt>_TEST_EMAIL_DEST</tt>.
+Controleer het bestand <tt>mes_options.php</tt>',
 	'erreur_generale' => 'Een of meerdere fouten in de configuratie. Controleer de inhoud van dit formulier.',
 	'erreur_invalid_host' => 'Deze hostnaam is onjuist',
 	'erreur_invalid_port' => 'Dit poortnummer is onjuist',
@@ -53,30 +55,43 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_secure_ssl' => 'SSL (gedeprecieerd)',
 	'facteur_smtp_secure_tls' => 'TLS (aanbevolen)',
 	'facteur_smtp_sender' => 'Return-Path (optioneel)',
-	'facteur_smtp_sender_descriptif' => 'Geef het Return-Path voor de mail aan, bv voor feedback. In SMTP bepaalt het het emailadres van de verzender.',
+	'facteur_smtp_sender_descriptif' => 'Geef het Return-Path voor de mail aan, bv voor feedback of fouten.',
 	'facteur_smtp_tls_allow_self_signed_non' => 'het SSL certificaat van de SMTP server is uitgegeven door een Certificaatautoriteit (aanbevolen).',
-	'facteur_smtp_tls_allow_self_signed_oui' => 'het SSL certificaat van de SMTP server is auto-signé.',
+	'facteur_smtp_tls_allow_self_signed_oui' => 'het SSL certificaat van de SMTP server is automatisch ondertekend.',
 	'facteur_smtp_username' => 'Naam van de gebruiker:',
 
+	// I
+	'info_envois_bloques_constante' => 'Verzending wordt volledig geblokkeerd door de constante <tt>_TEST_EMAIL_DEST</tt>.',
+	'info_envois_forces_vers_email' => 'Verzending wordt geforceerd naar adres <b>@email@</b> door de  constante <tt>_TEST_EMAIL_DEST</tt>',
+
 	// L
+	'label_email_test_from' => 'Verzender',
+	'label_email_test_from_placeholder' => 'from@example.org (optioneel)',
+	'label_email_test_important' => 'Deze e-mail is belangrijk',
 	'label_facteur_forcer_from' => 'Forceer dit verzendadres wanneer de <tt>From</tt> niet tot hetzelfde domein behoort',
+	'label_mailjet_api_key' => 'Sleutel API Mailjet',
+	'label_mailjet_api_version' => 'API Versie',
+	'label_mailjet_secret_key' => 'Geheime sleutel Mailjet',
+	'label_message_envoye' => 'Bericht verzonden:',
+	'label_utiliser_mailjet' => 'Mailjet gebruiken',
 
 	// M
-	'message_identite_email' => 'De configuratie van plugin "facteur" laadt dit e-mailadres voor het verzenden van mails.', # MODIF
+	'message_identite_email' => 'De <a href="@url@">configuratie van plugin <i>Facteur</i></a> laadt dit e-mailadres met <b>@email@</b> voor het verzenden van mails.',
 
 	// N
-	'note_test_configuration' => 'Een mail wordt naar het aangegeven adres (of naar de webmaster) verzonden.',
+	'note_test_configuration' => 'Een e-mail wordt naar het aangegeven adres verzonden.',
 
 	// P
-	'personnaliser' => 'Personaliseren',
+	'personnaliser' => 'Instellingen aanpassen',
 
 	// T
 	'tester' => 'Testen',
 	'tester_la_configuration' => 'Configuratietest',
+	'titre_configurer_facteur' => 'Configuratie van Postbode (<i>Facteur</i>)',
 
 	// U
-	'utiliser_mail' => 'Gebruik de PHP mail functie', # MODIF
-	'utiliser_reglages_site' => 'Gebruik de instellingen van SPIP: <br /><tt>@from@</tt><br/>De getoonde naam is die van de site en het adres dat van de webmaster', # MODIF
+	'utiliser_mail' => 'Gebruik de PHP <tt>mail()</tt> functie',
+	'utiliser_reglages_site' => 'Gebruik de instellingen van de SPIP site',
 	'utiliser_smtp' => 'Gebruik SMTP',
 
 	// V
