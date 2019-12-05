@@ -121,32 +121,35 @@ function ck_produire_code($c=null){
 	$code .= ck_code_globale('derniere_modif_invalide',_request('derniere_modif_invalide',$c)?'true':'false');
 	$code .= ck_code_constante('_DUREE_CACHE_DEFAUT',intval(_request('cache_duree',$c)));
 	$code .= ck_code_constante('_DELAI_CACHE_resultats',intval(_request('cache_duree_recherche',$c)));
-	$code .= ck_code_globale('quota_cache',intval(_request('cache_taille',$c)));
 
+	// quota_cache disparait a partir de SPIP 3.3
+	if (!defined('_SPIP_VERSION_ID') or _SPIP_VERSION_ID<30300) {
+		$code .= ck_code_globale('quota_cache',intval(_request('cache_taille',$c)));
+	}
 
 	// taille des logo et images
-	if ($t = _request('image_seuil_document',$c))
+	if ($t = _request('image_seuil_document',$c) and $t!=='_LARGEUR_MODE_IMAGE')
 		$code .= ck_code_constante('_LARGEUR_MODE_IMAGE',intval($t));
-	if ($t = _request('logo_max_size',$c))
+	if ($t = _request('logo_max_size',$c) and $t!=='_LOGO_MAX_SIZE')
 		$code .= ck_code_constante('_LOGO_MAX_SIZE',intval($t));
-	if ($t = _request('logo_max_width',$c))
+	if ($t = _request('logo_max_width',$c) and $t!=='_LOGO_MAX_WIDTH')
 		$code .= ck_code_constante('_LOGO_MAX_WIDTH',intval($t));
-	if ($t = _request('logo_max_height',$c))
+	if ($t = _request('logo_max_height',$c) and $t!=='_LOGO_MAX_HEIGHT')
 		$code .= ck_code_constante('_LOGO_MAX_HEIGHT',intval($t));
-	if ($t = _request('docs_max_size',$c))
+	if ($t = _request('docs_max_size',$c) and $t!=='_DOC_MAX_SIZE')
 		$code .= ck_code_constante('_DOC_MAX_SIZE',intval($t));
-	if ($t = _request('imgs_max_size',$c))
+	if ($t = _request('imgs_max_size',$c) and $t!=='_IMG_MAX_SIZE')
 		$code .= ck_code_constante('_IMG_MAX_SIZE',intval($t));
-	if ($t = _request('imgs_max_width',$c))
+	if ($t = _request('imgs_max_width',$c) and $t!=='_IMG_MAX_WIDTH')
 		$code .= ck_code_constante('_IMG_MAX_WIDTH',intval($t));
-	if ($t = _request('imgs_max_height',$c))
+	if ($t = _request('imgs_max_height',$c) and $t!=='_IMG_MAX_HEIGHT')
 		$code .= ck_code_constante('_IMG_MAX_HEIGHT',intval($t));
 
 
 	// ecrire
 	if ($t = _request('longueur_login_mini',$c))
 		$code .= ck_code_constante('_LOGIN_TROP_COURT',intval($t)-1);
-	if ($t = _request('nb_objets_tranches',$c))
+	if ($t = _request('nb_objets_tranches',$c) and $t!=='_TRANCHES')
 		$code .= ck_code_constante('_TRANCHES',intval($t));
 	if (!$t = _request('compacte_head_ecrire',$c))
 		$code .= ck_code_constante('_INTERDIRE_COMPACTE_HEAD_ECRIRE','true');
@@ -179,20 +182,23 @@ function formulaires_configurer_ck_charger_dist(){
 		'cache_taille' => $GLOBALS['quota_cache'],
 
 		'image_seuil_document' => defined('_LARGEUR_MODE_IMAGE')?_LARGEUR_MODE_IMAGE:'',
-		'logo_max_size' => _LOGO_MAX_SIZE?_LOGO_MAX_SIZE:'',
-		'logo_max_width' => _LOGO_MAX_WIDTH?_LOGO_MAX_WIDTH:'',
-		'logo_max_height' => _LOGO_MAX_HEIGHT?_LOGO_MAX_HEIGHT:'',
-		'docs_max_size' => _DOC_MAX_SIZE?_DOC_MAX_SIZE:'',
-		'imgs_max_size' => _IMG_MAX_SIZE?_IMG_MAX_SIZE:'',
-		'imgs_max_width' => _IMG_MAX_WIDTH?_IMG_MAX_WIDTH:'',
-		'imgs_max_height' => _IMG_MAX_HEIGHT?_IMG_MAX_HEIGHT:'',
+		'logo_max_size' => defined('_LOGO_MAX_SIZE')?_LOGO_MAX_SIZE:'',
+		'logo_max_width' => defined('_LOGO_MAX_WIDTH')?_LOGO_MAX_WIDTH:'',
+		'logo_max_height' => defined('_LOGO_MAX_HEIGHT')?_LOGO_MAX_HEIGHT:'',
+		'docs_max_size' => defined('_DOC_MAX_SIZE')?_DOC_MAX_SIZE:'',
+		'imgs_max_size' => defined('_IMG_MAX_SIZE')?_IMG_MAX_SIZE:'',
+		'imgs_max_width' => defined('_IMG_MAX_WIDTH')?_IMG_MAX_WIDTH:'',
+		'imgs_max_height' => defined('_IMG_MAX_HEIGHT')?_IMG_MAX_HEIGHT:'',
 
 		'longueur_login_mini' => _LOGIN_TROP_COURT+1,
-		'nb_objets_tranches' => _TRANCHES,
+		'nb_objets_tranches' => defined('_TRANCHES')?_TRANCHES:'',
 		'compacte_head_ecrire' => defined('_INTERDIRE_COMPACTE_HEAD_ECRIRE')?(_INTERDIRE_COMPACTE_HEAD_ECRIRE?0:1):1,
 		'inhiber_javascript_ecrire' => $GLOBALS['filtrer_javascript']==1?0:1,
 
 	);
+	if (defined('_SPIP_VERSION_ID') and _SPIP_VERSION_ID>=30300) {
+		$valeurs['_no_quota_cache'] = 1;
+	}
 	return $valeurs;
 }
 
@@ -201,10 +207,13 @@ function formulaires_configurer_ck_verifier_dist(){
 	$erreurs = array();
 	$cache_strategie = _request('cache_strategie');
 	if ($cache_strategie!=-1){
-		if (!$t = _request('cache_taille')
-		  OR !$t=intval($t)
-			OR $t<10){
-			$erreurs['cache_taille'] = _T('ck:erreur_cache_taille_mini');
+		// quota_cache disparait a partir de SPIP 3.3
+		if (!defined('_SPIP_VERSION_ID') or _SPIP_VERSION_ID<30300){
+			if (!$t = _request('cache_taille')
+				OR !$t = intval($t)
+				OR $t<10){
+				$erreurs['cache_taille'] = _T('ck:erreur_cache_taille_mini');
+			}
 		}
 	}
 	if ($d = _request('dossier_squelettes')){

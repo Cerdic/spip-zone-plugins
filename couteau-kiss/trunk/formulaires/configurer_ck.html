@@ -60,11 +60,12 @@
 					<div class="choix"><input type="radio" name="cache_strategie" id="cache_strategie_normale" value=""[(#ENV{cache_strategie}|=={''}|oui)checked="checked"] /><label for="cache_strategie_normale"><:ck:label_cache_strategie_normale:></label></div>
 					<div class="choix derniere_modif_invalide"><input type="checkbox" name="derniere_modif_invalide" id="derniere_modif_invalide" value="1"[(#ENV{derniere_modif_invalide}|=={'1'}|oui)checked="checked"] /><label for="derniere_modif_invalide"><:ck:label_derniere_modif_invalide:></label></div>
 				</div>
+				[(#ENV{_no_quota_cache,0}|non)
 				<div class="editer editer_cache_taille obligatoire[ (#ENV**{erreurs}|table_valeur{cache_taille}|oui)erreur]">
 					<label><:ck:label_cache_taille:></label>[
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{cache_taille})</span>
 					]<input type='text' class='text' name='cache_taille' id='cache_taille' value="#ENV{cache_taille}" />
-				</div>
+				</div>]
 				<div class="editer editer_cache_duree_defaut obligatoire[ (#ENV**{erreurs}|table_valeur{cache_duree}|oui)erreur]">
 					<label><:ck:label_cache_duree:></label>[
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{cache_duree})</span>
