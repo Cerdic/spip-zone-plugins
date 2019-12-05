@@ -37,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'explication_carousel'=>'Les articles affichés dans le carousel sont les articles séléctionnés à la racine du site pour l\'affichage<br/> dans la page d\'accueil et ceux selectionnés dans la rubrique pour l\'affichage dans une page rubrique.',
 'explication_conf_avancee_noisettes'=>'<strong>/!\ Attention, vous devez avoir une connaisance minimum du html5 pour utiliser cette option./!\</strong>',
+'explication_exclure_article_selection'=>'Vous pouvez exclure les articles sélectionnés à la racine du site ou de la rubrique <i>(articles affichés dans le carrousel)</i>.',
 'explication_image_passe_partout'=>'Rogne le logo pour l\'afficher aux dimensions (largeur,hauteur) saisies ci-dessus.',
 'explication_image_zoom_hover'=>'Zoom à 110% au survol de l\'image.',
 'explication_liste_span'=>'Par défaut, la liste affichée est une liste simple (les items sont les uns au dessous des autres).<br/> Vous pouvez choisir d\'afficher la liste sous forme de vignettes en 2, 3 ou 4 colonnes.',
@@ -75,6 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_compte_twitter'=>'Nom du compte Twitter',
 'label_couleur_bg'=>'Couleur d\'arrière-plan',
 'label_coupe_texte'=>'Nombre de caractères de l\'introduction',
+'label_exclure_article_selection'=>'Exclure les articles sélectionnés',
 'label_fieldset_affichage'=>'Options d\'affichage',
 'label_fieldset_picto'=>'Pictogramme',
 'label_fieldset_span'=>'Colonnage',

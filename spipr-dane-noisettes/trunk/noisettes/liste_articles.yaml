@@ -50,6 +50,14 @@ parametres:
       defaut: ''
       conteneur_class: 'long_label'
   -
+    saisie: 'oui_non'
+    options:
+      nom: 'exclure_article_selection'
+      label: '<:noisettes:label_exclure_article_selection:>'
+      explication: '<:noisettes:explication_exclure_article_selection:>'
+      defaut: ''
+      conteneur_class: 'long_label'
+  -
     saisie: 'input'
     options:
       nom: 'rubriques_exclues'

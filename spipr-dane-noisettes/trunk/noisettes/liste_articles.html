@@ -8,7 +8,7 @@
 
 <INCLURE{fond=inclure/conteneur_ouvrir, env}/>
 <div class="liste articles [(#ENV{liste_span}|non) long ]clear offset">
-    <INCLURE{fond=liste/articles-resume,env, span=#GET{span}, articles_exclus=#GET{articles_exclus}, rubriques_exclues=#GET{rubriques_exclues}, masquer_h2=#GET{masquer_h2}, ajax}>
+    <INCLURE{fond=liste/articles-resume,env, span=#GET{span}, articles_exclus=#GET{articles_exclus}, rubriques_exclues=#GET{rubriques_exclues}, masquer_h2=#GET{masquer_h2}, exclure_article_selection=#ENV{exclure_article_selection}, ajax}>
 </div>
 <INCLURE{fond=inclure/conteneur_fermer, env}/>
    

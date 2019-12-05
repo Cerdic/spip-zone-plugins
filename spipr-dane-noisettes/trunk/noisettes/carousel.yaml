@@ -92,8 +92,8 @@ parametres:
       nom: 'couleur'
       label: '<:noisettes:label_couleur_bg:>'
       defaut: ''
-      # #e0e2e4
       class: 'palette''
+      conteneur_class: 'long_label'
   -
     saisie: 'fieldset'
     options:
