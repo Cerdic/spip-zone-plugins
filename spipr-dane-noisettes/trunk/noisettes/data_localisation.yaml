@@ -1,0 +1,91 @@
+nom: '<:noisettes:data_localisation:>'
+icon: 'map-marker-24.png'
+ajax: 'oui'
+necessite: 'gis'
+parametres:
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'masquer_titre'
+      label: '<:noisettes:label_masquer_titre:>'
+      defaut: ''
+      conteneur_class: 'long_label'
+  -
+    saisie: 'input'
+    options:
+      nom: 'titre'
+      label: '<:noisettes:label_titre:>'
+      defaut: 'Nous situer'
+      afficher_si: '@masquer_titre@ != "on"'
+      conteneur_class: 'long_label'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'masquer_picto'
+      label: '<:noisettes:label_masquer_picto:>'
+      defaut: ''
+      conteneur_class: 'long_label'
+  -
+    saisie: 'input'
+    options:
+      nom: 'picto'
+      label: '<:noisettes:label_picto:>'
+      explication: '<:noisettes:explication_picto:>'
+      defaut: 'map-marker'
+      afficher_si: '@masquer_picto@ != "on"'
+      conteneur_class: 'long_label'
+  -
+    saisie: 'input'
+    options:
+      nom: 'uai'
+      label: '<:noisettes:label_uai:>'
+      explication: '<:noisettes:explication_uai:>'
+      defaut: ''
+      conteneur_class: 'long_label'
+  -
+    saisie: 'input'
+    options:
+      nom: 'zoom'
+      label: '<:noisettes:zoom:>'
+      defaut: '9'
+      conteneur_class: 'long_label'
+    verifier:
+      type: 'entier'
+  -
+    saisie: 'input'
+    options:
+      nom: 'height'
+      label: '<:noisettes:hauteur:>'
+      defaut: '300'
+      conteneur_class: 'long_label'
+    verifier:
+      type: 'entier'
+#  -
+#    saisie: 'selection'
+#    options:
+#      nom: 'kml'
+#      label: '<:noisettes:label_afficher_kml:>'
+#      datas:
+#        '': 'Aucun'
+#        Département:
+#          calvados: 'Calvados'
+#          eure: 'Eure'
+#          manche: 'Manche'
+#          orne: 'Orne'
+#          seine-maritime: 'Seine Maritime'
+#        Région:
+#          basse-normandie: 'Basse Normandie (3 départements)'
+#          haute-normandie: 'Haute Normandie (2 départements)'
+#          normandie: 'Normandie (5 départements)'
+#        autre: 'Autre'
+#      masquer_option_intro: ''
+#      conteneur_class: 'long_label'
+#      class: 'chosen'
+#  -
+#    saisie: 'input'
+#    options:
+#      nom: 'autre_kml'
+#      label: '<:noisettes:label_autre_kml:>'
+#      defaut: ''
+#      conteneur_class: 'long_label'
+#      afficher_si: '@kml@  == "autre"'

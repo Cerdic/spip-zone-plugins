@@ -1,0 +1,29 @@
+#SET{id_unique, #EVAL{rand()}}
+#SET{uai, #ENV{uai,0501219D}}
+#SET{kml, #ENV{kml}|=={autre}|et{#ENV{autre_kml}}|?{#ENV{autre_kml},#ENV{kml}}}
+<div class="liste selection">
+    [(#ENV{masquer_h2}|non)<h2 class="h2">[(#ENV{masquer_titre}|non)[(#ENV{titre,<:noisette:nous_situer:>})]][(#ENV{masquer_picto}|non)<span class="picto"><i class="fa fa-#ENV{picto,map-marker} "></i></span>]</h2>]
+	<BOUCLE_json_localisation(DATA){source json, https://data.normandie.education.gouv.fr/api/records/1.0/search/?dataset=fr-en-adresse-et-geolocalisation-etablissements-premier-et-second-degre&q=[(#GET{uai})]&limit=1}{datapath records}>
+		<BOUCLE_infos_localisation(DATA){source table, #VALEUR}>
+			<BOUCLE_filtre_localisation(CONDITION){si #NUMERO_UAI|!={''}}>
+			[(#SET{description,[<p>(#ADRESSE_UAI)</p>][ (#CODE_COMMUNE)][ (#LIBELLE_COMMUNE)] })] 
+			[(#POSITION|oui)[(#INCLURE{fond=modeles/carte_gis,
+				id=#GET{id_unique},
+				objets=point_libre,
+				lat=[(#LATITUDE)],
+				lon=[(#LONGITUDE)],
+				titre=#APPELLATION_OFFICIELLE,
+				description=[(#GET{description}|textebrut)],
+				zoom=[(#ENV{zoom,11}|intval)],
+				scale=oui[,
+				(#REM)tooltip=oui,
+				minZoom=1,
+				maxZoom=25],
+				centrer_auto=oui,
+				kml=[(#CHEMIN{kml/#GET{kml}.kml,''}|timestamp|url_absolue)],
+				height=[(#ENV{height,300})px]})]
+			] 
+			</BOUCLE_filtre_localisation>
+		</BOUCLE_infos_localisation>
+	</BOUCLE_json_localisation>
+</div>

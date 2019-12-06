@@ -2,4 +2,4 @@
 <p><small>[(#ENV{nb_total}|?{#ENV{nb_total} articles,Tous les articles})][ Pagination (#ENV{nb})]
 <br/>[(#ENV{masquer_logo}|?{Pas de logo, Logo #ENV{largeur_logo}x#ENV{hauteur_logo} [&nbsp;-&nbsp; (#ENV{image_passe_partout}|?{ Image forcée aux dimensions,''})]})]
 <br/>[(#ENV{masquer_intro}|?{'',Intro[ (#ENV{coupe}) caractères]})][ - (#ENV{masquer_date}|?{'', Date})][ - (#ENV{afficher_tags}|?{Mots-clé,''})][ - (#ENV{afficher_parent}|?{Rubrique parent,''})]
-<br/>[(#ENV{liste_span}|oui)Liste span - #ENV{span}]</small></p>
+<br/>[(#ENV{liste_span}|oui)[(#EVAL{12/#ENV{span}|replace{span}}) colonnes]]</small></p>
