@@ -1,0 +1,14 @@
+<paquet
+	prefix="spout"
+	categorie="outil"
+	version="1.0"
+	etat="stable"
+	compatibilite="[3.1.8;3.3.*]"
+	logo="img_pack/spout-48.png"
+>
+	<nom>Lib Spout</nom>
+	<!-- Un lib pour lire et écrire des XLSX, ODS et CSV -->
+	<auteur lien="https://contrib.spip.net/RealET">RealET</auteur>
+	<copyright>2019</copyright>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+</paquet>
