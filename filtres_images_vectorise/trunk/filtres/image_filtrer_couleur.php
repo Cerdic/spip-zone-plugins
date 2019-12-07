@@ -16,19 +16,22 @@
  * @param string $img
  * @param string $couleur
  * @param int $rayon
- * @param string $operation
+ * @param string $mode
  *   masque|mask : cree un masque noir et blanc (pixels de la couleur cherchee sont en noir, pixels tres differents sont en blanc)
  *   couleur|color : créé un masque couleur/opacite (pixels de la couleur cherchee sont en opacite 1, pixels tres differents sont en blanc transparent) - opacite et clarete varient
  *   opacite|opacity : créé un masque opacite (pixels de la couleur cherchee sont en opacite 1, pixels tres differents sont transparent) - seule l'opacite varie
  *   retire|remove : les pixes de la couleur cherchee sont rendus transparents, on ne garde que les pixels tres eloignes en couleur
- * @param string $ext
+ * @param string $format
  * @return string
  */
-function image_filtrer_couleur($img, $couleur, $rayon=100, $operation='masque', $ext='png') {
+function image_filtrer_couleur($img, $couleur, $rayon=100, $mode='masque', $format='png') {
 
 	$fonction = "image_filtrer_couleur";
 	$args = func_get_args();
-	$cache = _image_valeurs_trans($img, "filtrer_couleur-$couleur-$rayon-$operation", $ext, [$fonction, $args]);
+	if ($format === 'auto') {
+		$format = false;
+	}
+	$cache = _image_valeurs_trans($img, "filtrer_couleur-$couleur-$rayon-$mode", $format, [$fonction, $args]);
 
 	if (!$cache) {
 		return false;
@@ -36,7 +39,7 @@ function image_filtrer_couleur($img, $couleur, $rayon=100, $operation='masque', 
 
 	$im = $cache["fichier"];
 	$dest = $cache["fichier_dest"];
-	if (true or $cache["creer"]) {
+	if ($cache["creer"]) {
 
 		$im = $cache["fonction_imagecreatefrom"]($im);
 		$w = $cache["largeur"];
@@ -50,7 +53,7 @@ function image_filtrer_couleur($img, $couleur, $rayon=100, $operation='masque', 
 
 		$cc = _couleur_hex_to_dec($couleur);
 
-		switch ($operation) {
+		switch ($mode) {
 			case 'retire':
 			case 'remove':
 				$filtre_pixel = 'pixel_filtrer_couleur_retire';
@@ -84,7 +87,7 @@ function image_filtrer_couleur($img, $couleur, $rayon=100, $operation='masque', 
 					+ ($cc['blue'] - $b) * ($cc['blue'] - $b);
 				$d = sqrt($d) / $rayon;
 
-				switch ($operation) {
+				switch ($mode) {
 					case 'retire':
 					case 'remove':
 				}
