@@ -4,10 +4,9 @@
  *
  * @package SPIP\ARCHOBJET\PIPELINES
  */
-
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
-
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 /**
  * Affichage, dans la fiche d'un objet autorisé à être archivé, d'un bloc identifiant
  * l'état d'archivage, la date d'archivage et la raison.
@@ -18,8 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  * @return array Données de contexte complétées par la fonction
  */
-function archobjet_affiche_milieu($flux){
-
+function archobjet_affiche_milieu($flux) {
 	if (isset($flux['args']['exec'])) {
 		// Initialisation de la page du privé
 		$exec = $flux['args']['exec'];
@@ -43,7 +41,7 @@ function archobjet_affiche_milieu($flux){
 				$objet,
 				$id_objet,
 				array(
-					'table' => $table,
+					'table'    => $table,
 					'champ_id' => $objet_exec['id_table_objet']
 				)
 			);
@@ -67,7 +65,7 @@ function archobjet_affiche_milieu($flux){
 				);
 
 				if ($texte = recuperer_fond('prive/squelettes/inclure/inc-objet_archive', $contexte)) {
-					if ($pos = strpos($flux['data'],'<!--affiche_milieu-->')) {
+					if ($pos = strpos($flux['data'], '<!--affiche_milieu-->')) {
 						$flux['data'] = substr_replace($flux['data'], $texte, $pos, 0);
 					} else {
 						$flux['data'] .= $texte;
@@ -91,7 +89,6 @@ function archobjet_affiche_milieu($flux){
  * @return $flux array Le contexte du pipeline modifié
  */
 function archobjet_boite_infos($flux) {
-
 	if (isset($flux['args']['type'])) {
 		// Initialisation du type d'objet concerné.
 		$objet = $flux['args']['type'];
@@ -114,7 +111,7 @@ function archobjet_boite_infos($flux) {
 				$objet,
 				$id_objet,
 				array(
-					'table' => $table,
+					'table'    => $table,
 					'champ_id' => $objet_exec['id_table_objet']
 				)
 			);
@@ -143,12 +140,12 @@ function archobjet_boite_infos($flux) {
  * @pipeline post_boucle
  *
  * @param Boucle $boucle
- *        Objet boucle de SPIP correspond à la boucle en cours de traitement.
+ *                       Objet boucle de SPIP correspond à la boucle en cours de traitement.
  *
  * @return Boucle
- *         La boucle dont la condition `where` a été modifiée ou pas.
+ *                La boucle dont la condition `where` a été modifiée ou pas.
  */
-function archobjet_post_boucle($boucle){
+function archobjet_post_boucle($boucle) {
 
 	// Initialisation de la table sur laquelle porte le critère
 	include_spip('base/objets');
@@ -217,16 +214,16 @@ function archobjet_post_boucle($boucle){
 	return $boucle;
 }
 
-
 /**
  * Surcharge de la fonction charger des formulaires concernes, a savoir :
- * - article / instituer_objet : dans la page de l'article en cours de relecture bloque le statut de l'article
+ * - article / instituer_objet : dans la page de l'article en cours de relecture bloque le statut de l'article.
  *
  * @param array $flux
+ *
  * @return array
  *
  **/
-function archobjet_formulaire_charger($flux){
+function archobjet_formulaire_charger($flux) {
 
 	// Identifier le formulaire
 	$form = $flux['args']['form'];
@@ -251,7 +248,7 @@ function archobjet_formulaire_charger($flux){
 				$objet,
 				$id_objet,
 				array(
-					'table' => $table,
+					'table'    => $table,
 					'champ_id' => $id_table
 				)
 			);
