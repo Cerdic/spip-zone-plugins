@@ -1,7 +1,7 @@
 <paquet
 	prefix="archobjet"
 	categorie="date"
-	version="0.2.3"
+	version="0.2.4"
 	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="archobjet_logo-64.png"
@@ -22,7 +22,6 @@
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/archobjet_declarations.php" />
 	<pipeline nom="autoriser" inclure="archobjet_pipelines.php" />
 	<pipeline nom="post_boucle" inclure="archobjet_pipelines.php" />
-	<pipeline nom="lister_champs_selection_conditionnelle" inclure="archobjet_pipelines.php" />
 	<pipeline nom="boite_infos" inclure="archobjet_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="archobjet_pipelines.php" />
 	<pipeline nom="formulaire_charger" inclure="archobjet_pipelines.php" />

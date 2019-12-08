@@ -217,24 +217,6 @@ function archobjet_post_boucle($boucle){
 	return $boucle;
 }
 
-function archobjet_lister_champs_selection_conditionnelle($flux) {
-
-	if (isset($flux['args']['table'])
-		and $flux['args']['table']
-	) {
-		$table = $flux['args']['table'];
-
-		// Vérifier que la table fait bien partie de la liste autorisée à utiliser l'archivage.
-		include_spip('inc/config');
-		$tables_autorisees = lire_config('archobjet/objets_archivables', array());
-		if (in_array($table, $tables_autorisees)) {
-			$flux['data'][] = 'est_archive';
-		}
-	}
-
-	return $flux;
-}
-
 
 /**
  * Surcharge de la fonction charger des formulaires concernes, a savoir :
