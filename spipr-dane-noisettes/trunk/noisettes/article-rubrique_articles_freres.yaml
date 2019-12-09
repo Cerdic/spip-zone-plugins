@@ -1,5 +1,5 @@
-nom: '<:noisettes:liste_articles_meme_rubrique:>'
-description: '<:noisettes:description_liste_articles_meme_rubrique:>'
+nom: '<:sdnnoisettes:liste_articles_meme_rubrique:>'
+description: '<:sdnnoisettes:description_liste_articles_meme_rubrique:>'
 icon: 'liste-articles-24.png'
 ajax: 'oui'
 inclusion: 'dynamique'
@@ -11,14 +11,14 @@ parametres:
     saisie: 'oui_non'
     options:
       nom: 'masquer_titre'
-      label: '<:noisettes:label_masquer_titre:>'
+      label: '<:sdnnoisettes:label_masquer_titre:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
     saisie: 'input'
     options:
       nom: 'titre'
-      label: '<:noisettes:label_titre:>'
+      label: '<:sdnnoisettes:label_titre:>'
       defaut: 'Autres articles'
       afficher_si: '@masquer_titre@ != "on"'
       conteneur_class: 'long_label'
@@ -26,22 +26,22 @@ parametres:
     saisie: 'oui_non'
     options:
       nom: 'masquer_nombre'
-      label: '<:noisettes:label_masquer_nombre:>'
+      label: '<:sdnnoisettes:label_masquer_nombre:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
     saisie: 'oui_non'
     options:
       nom: 'masquer_picto'
-      label: '<:noisettes:label_masquer_picto:>'
+      label: '<:sdnnoisettes:label_masquer_picto:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
     saisie: 'input'
     options:
       nom: 'picto'
-      label: '<:noisettes:label_picto:>'
-      explication: '<:noisettes:explication_picto:>'
+      label: '<:sdnnoisettes:label_picto:>'
+      explication: '<:sdnnoisettes:explication_picto:>'
       defaut: 'files-o'
       afficher_si: '@masquer_picto@ != "on"'
       conteneur_class: 'long_label'
@@ -49,9 +49,9 @@ parametres:
     saisie: 'input'
     options:
       nom: 'pagination'
-      label: '<:noisettes:label_pagination_articles:>'
+      label: '<:sdnnoisettes:label_pagination_articles:>'
       defaut: '5'
-      explication: '<:noisettes:explication_pagination_sans:>'
+      explication: '<:sdnnoisettes:explication_pagination_sans:>'
       conteneur_class: 'long_label'
     verifier:
       type: 'entier'

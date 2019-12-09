@@ -1,4 +1,4 @@
-nom: '<:noisettes:socialtags:>'
+nom: '<:sdnnoisettes:socialtags:>'
 icon: 'socialtags-24.png'
 ajax: 'non'
 necessite: 'socialtags'
@@ -7,4 +7,4 @@ parametres:
     saisie: 'explication'
     options:
       nom: 'explication_socialtags'
-      texte: '<:noisettes:explication_socialtags:>'
+      texte: '<:sdnnoisettes:explication_socialtags:>'

@@ -1,5 +1,5 @@
-nom: '<:noisettes:article_ecrire_auteur:>'
-description: '<:noisettes:description_article_ecrire_auteur:>'
+nom: '<:sdnnoisettes:article_ecrire_auteur:>'
+description: '<:sdnnoisettes:description_article_ecrire_auteur:>'
 icon: 'ecrire-auteur-24.png'
 ajax: 'non'
 contexte:

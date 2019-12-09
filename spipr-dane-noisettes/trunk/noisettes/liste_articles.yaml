@@ -1,5 +1,5 @@
-nom: '<:noisettes:liste_articles:>'
-description: '<:noisettes:description_liste_articles:>'
+nom: '<:sdnnoisettes:liste_articles:>'
+description: '<:sdnnoisettes:description_liste_articles:>'
 icon: 'liste-articles-24.png'
 ajax: 'non'
 parametres:
@@ -7,14 +7,14 @@ parametres:
     saisie: 'oui_non'
     options:
       nom: 'masquer_titre'
-      label: '<:noisettes:label_masquer_titre:>'
+      label: '<:sdnnoisettes:label_masquer_titre:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
     saisie: 'input'
     options:
       nom: 'titre'
-      label: '<:noisettes:label_titre:>'
+      label: '<:sdnnoisettes:label_titre:>'
       defaut: 'Derniers articles'
       afficher_si: '@masquer_titre@ != "on"'
       conteneur_class: 'long_label'
@@ -22,22 +22,22 @@ parametres:
     saisie: 'oui_non'
     options:
       nom: 'masquer_nombre'
-      label: '<:noisettes:label_masquer_nombre:>'
+      label: '<:sdnnoisettes:label_masquer_nombre:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
     saisie: 'oui_non'
     options:
       nom: 'masquer_picto'
-      label: '<:noisettes:label_masquer_picto:>'
+      label: '<:sdnnoisettes:label_masquer_picto:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
     saisie: 'input'
     options:
       nom: 'picto'
-      label: '<:noisettes:label_picto:>'
-      explication: '<:noisettes:explication_picto:>'
+      label: '<:sdnnoisettes:label_picto:>'
+      explication: '<:sdnnoisettes:explication_picto:>'
       defaut: 'rss'
       afficher_si: '@masquer_picto@ != "on"'
       conteneur_class: 'long_label'
@@ -45,55 +45,55 @@ parametres:
     saisie: 'input'
     options:
       nom: 'articles_exclus'
-      label: '<:noisettes:label_articles_exclus:>'
-      explication: '<:noisettes:explication_articles_exclus:>'
+      label: '<:sdnnoisettes:label_articles_exclus:>'
+      explication: '<:sdnnoisettes:explication_articles_exclus:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
     saisie: 'oui_non'
     options:
       nom: 'exclure_article_selection'
-      label: '<:noisettes:label_exclure_article_selection:>'
-      explication: '<:noisettes:explication_exclure_article_selection:>'
+      label: '<:sdnnoisettes:label_exclure_article_selection:>'
+      explication: '<:sdnnoisettes:explication_exclure_article_selection:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
     saisie: 'input'
     options:
       nom: 'rubriques_exclues'
-      label: '<:noisettes:label_rubriques_exclues:>'
-      explication: '<:noisettes:explication_rubriques_exclues:>'
+      label: '<:sdnnoisettes:label_rubriques_exclues:>'
+      explication: '<:sdnnoisettes:explication_rubriques_exclues:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
     saisie: 'selection'
     options:
       nom: 'tri'
-      label: '<:noisettes:label_tri:>'
-      explication: '<:noisettes:explication_tri:>'
+      label: '<:sdnnoisettes:label_tri:>'
+      explication: '<:sdnnoisettes:explication_tri:>'
       datas:
-        date: '<:noisettes:date:>'
-        titre: '<:noisettes:titre:>'
-        num_titre: '<:noisettes:num_titre:>'
+        date: '<:sdnnoisettes:date:>'
+        titre: '<:sdnnoisettes:titre:>'
+        num_titre: '<:sdnnoisettes:num_titre:>'
       defaut: ''
       conteneur_class: 'long_label'
 #  -
 #    saisie: 'input'
 #    options:
 #      nom: 'nb_total'
-#      label: '<:noisettes:label_nb_total:>'
+#      label: '<:sdnnoisettes:label_nb_total:>'
 #      defaut: ''
 #      conteneur_class: 'long_label'
-#      explication: '<:noisettes:explication_nb_total:>'
+#      explication: '<:sdnnoisettes:explication_nb_total:>'
 #    verifier:
 #      type: 'entier'
   -
     saisie: 'input'
     options:
       nom: 'nb'
-      label: '<:noisettes:label_pagination_articles:>'
+      label: '<:sdnnoisettes:label_pagination_articles:>'
       defaut: '5'
-#      explication: '<:noisettes:explication_pagination:>'
+#      explication: '<:sdnnoisettes:explication_pagination:>'
       conteneur_class: 'long_label'
     verifier:
       type: 'entier'
@@ -101,21 +101,21 @@ parametres:
     saisie: 'oui_non'
     options:
       nom: 'afficher_liste_simple'
-      label: '<:noisettes:label_afficher_liste_simple:>'
+      label: '<:sdnnoisettes:label_afficher_liste_simple:>'
       conteneur_class: 'long_label'
       defaut: ''
   -
     saisie: 'oui_non'
     options:
       nom: 'masquer_logo'
-      label: '<:noisettes:label_masquer_logo:>'
+      label: '<:sdnnoisettes:label_masquer_logo:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
     saisie: 'input'
     options:
       nom: 'largeur_logo'
-      label: '<:noisettes:label_largeur_logo:>'
+      label: '<:sdnnoisettes:label_largeur_logo:>'
       defaut: '150'
       afficher_si: '@masquer_logo@  != "on"'
       conteneur_class: 'long_label'
@@ -125,7 +125,7 @@ parametres:
     saisie: 'input'
     options:
       nom: 'hauteur_logo'
-      label: '<:noisettes:label_hauteur_logo:>'
+      label: '<:sdnnoisettes:label_hauteur_logo:>'
       defaut: '150'
       afficher_si: '@masquer_logo@ != "on"'
       conteneur_class: 'long_label'
@@ -135,8 +135,8 @@ parametres:
     saisie: 'oui_non'
     options:
       nom: 'image_passe_partout'
-      label: '<:noisettes:label_image_passe_partout:>'
-      explication: '<:noisettes:explication_image_passe_partout:>'
+      label: '<:sdnnoisettes:label_image_passe_partout:>'
+      explication: '<:sdnnoisettes:explication_image_passe_partout:>'
       defaut: ''
       afficher_si: '@masquer_logo@  != "on"'
       conteneur_class: 'long_label'
@@ -144,8 +144,8 @@ parametres:
     saisie: 'oui_non'
     options:
       nom: 'image_zoom_hover'
-      label: '<:noisettes:label_image_zoom_hover:>'
-      explication: '<:noisettes:explication_image_zoom_hover:>'
+      label: '<:sdnnoisettes:label_image_zoom_hover:>'
+      explication: '<:sdnnoisettes:explication_image_zoom_hover:>'
       defaut: ''
       afficher_si: '@masquer_logo@  != "on" && @image_passe_partout@ == "on"'
       conteneur_class: 'long_label'
@@ -153,21 +153,21 @@ parametres:
     saisie: 'fieldset'
     options:
       nom: 'fieldset_affichage'
-      label: '<:noisettes:label_fieldset_affichage:>'
+      label: '<:sdnnoisettes:label_fieldset_affichage:>'
       afficher_si: '@afficher_liste_simple@ != "on"'
     saisies:
       -
         saisie: 'oui_non'
         options:
           nom: 'masquer_intro'
-          label: '<:noisettes:label_masquer_intro:>'
+          label: '<:sdnnoisettes:label_masquer_intro:>'
           conteneur_class: 'long_label'
           defaut: ''
       -
         saisie: 'input'
         options:
           nom: 'coupe'
-          label: '<:noisettes:label_coupe_texte:>'
+          label: '<:sdnnoisettes:label_coupe_texte:>'
           defaut: '100'
           afficher_si: '@masquer_intro@ != "on"'
           conteneur_class: 'long_label'
@@ -177,43 +177,43 @@ parametres:
         saisie: 'oui_non'
         options:
           nom: 'masquer_date'
-          label: '<:noisettes:label_masquer_date:>'
+          label: '<:sdnnoisettes:label_masquer_date:>'
           conteneur_class: 'long_label'
           defaut: ''
       -
         saisie: 'oui_non'
         options:
           nom: 'afficher_tags'
-          label: '<:noisettes:label_afficher_tags:>'
+          label: '<:sdnnoisettes:label_afficher_tags:>'
           conteneur_class: 'long_label'
           defaut: ''
       -
         saisie: 'oui_non'
         options:
           nom: 'afficher_parent'
-          label: '<:noisettes:label_afficher_parent:>'
+          label: '<:sdnnoisettes:label_afficher_parent:>'
           conteneur_class: 'long_label'
           defaut: ''
   -
     saisie: 'fieldset'
     options:
       nom: 'fieldset_span'
-      label: '<:noisettes:label_fieldset_span:>'
+      label: '<:sdnnoisettes:label_fieldset_span:>'
       afficher_si: '@afficher_liste_simple@ != "on"'
     saisies:
       -
         saisie: 'oui_non'
         options:
           nom: 'liste_span'
-          label: '<:noisettes:label_liste_span:>'
-          explication: '<:noisettes:explication_liste_span:>'
+          label: '<:sdnnoisettes:label_liste_span:>'
+          explication: '<:sdnnoisettes:explication_liste_span:>'
           defaut: ''
           conteneur_class: 'long_label'
       -
         saisie: 'selection'
         options:
           nom: 'span'
-          label: '<:noisettes:label_span:>'
+          label: '<:sdnnoisettes:label_span:>'
           datas:
             span6: '2 colonnes'
             span4: '3 colonnes'
@@ -227,7 +227,7 @@ parametres:
     options:
       nom: 'fieldset_conf_avancee'
       label: '<:sdn:label_conf_avancee_noisettes:>'
-      explication: '<:noisettes:explication_conf_avancee_noisettes:>'
+      explication: '<:sdnnoisettes:explication_conf_avancee_noisettes:>'
       afficher_si: '@config:sdn:conf_avancee@  == "on"'
     saisies:
       - 'inclure:inclure/yaml/conf_avancee.yaml'

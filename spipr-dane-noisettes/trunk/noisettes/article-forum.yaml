@@ -1,5 +1,5 @@
-nom: '<:noisettes:article_forum:>'
-description: '<:noisettes:description_article_forum:>'
+nom: '<:sdnnoisettes:article_forum:>'
+description: '<:sdnnoisettes:description_article_forum:>'
 icon: 'article_forum-24.png'
 ajax: 'non'
 contexte:

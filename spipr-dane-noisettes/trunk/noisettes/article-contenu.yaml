@@ -1,5 +1,5 @@
-nom: '<:noisettes:article_contenu:>'
-description: '<:noisettes:description_article_contenu:>'
+nom: '<:sdnnoisettes:article_contenu:>'
+description: '<:sdnnoisettes:description_article_contenu:>'
 icon: 'article_contenu-24.png'
 ajax: 'non'
 contexte:
@@ -10,20 +10,20 @@ parametres:
     saisie: 'oui_non'
     options:
       nom: 'afficher_descriptif'
-      label: '<:noisettes:label_afficher_descriptif:>'
+      label: '<:sdnnoisettes:label_afficher_descriptif:>'
       defaut: ''
   -
     saisie: 'oui_non'
     options:
       nom: 'masquer_logo'
-      label: '<:noisettes:label_masquer_logo:>'
+      label: '<:sdnnoisettes:label_masquer_logo:>'
       defaut: ''
   -
     saisie: 'fieldset'
     options:
       nom: 'fieldset_conf_avancee'
       label: '<:sdn:label_conf_avancee_noisettes:>'
-      explication: '<:noisettes:explication_conf_avancee_noisettes:>'
+      explication: '<:sdnnoisettes:explication_conf_avancee_noisettes:>'
       afficher_si: '@config:sdn:conf_avancee@  == "on"'
     saisies:
       - 'inclure:inclure/yaml/conf_avancee.yaml'

@@ -2,14 +2,14 @@
   saisie: 'oui_non'
   options:
     nom: '_utiliser_conteneur'
-    label: '<:noisettes:label_utiliser_sdn_conteneur:>'
+    label: '<:sdnnoisettes:label_utiliser_sdn_conteneur:>'
     conteneur_class: 'long_label'
     defaut: ''
 -
   saisie: 'selection'
   options:
     nom: 'sdn_conteneur'
-    label: '<:noisettes:label_sdn_conteneur:>'
+    label: '<:sdnnoisettes:label_sdn_conteneur:>'
     datas:
       div: 'div'
       section: 'section'
@@ -28,7 +28,7 @@
   saisie: 'oui_non'
   options:
     nom: 'ouvrir_conteneur'
-    label: '<:noisettes:label_sdn_conteneur_ouvrir:>'
+    label: '<:sdnnoisettes:label_sdn_conteneur_ouvrir:>'
     conteneur_class: 'long_label'
     defaut: 'on'
     afficher_si: '@sdn_conteneur@  != ""'
@@ -36,7 +36,7 @@
   saisie: 'oui_non'
   options:
     nom: 'fermer_conteneur'
-    label: '<:noisettes:label_sdn_conteneur_fermer:>'
+    label: '<:sdnnoisettes:label_sdn_conteneur_fermer:>'
     conteneur_class: 'long_label'
     defaut: 'on'
     afficher_si: '@sdn_conteneur@  != ""'
@@ -44,6 +44,6 @@
   saisie: 'input'
   options:
     nom: 'sdn_conteneur_class'
-    label: '<:noisettes:label_sdn_conteneur_class:>'
+    label: '<:sdnnoisettes:label_sdn_conteneur_class:>'
     conteneur_class: 'long_label'
     afficher_si: '@sdn_conteneur@  != ""'

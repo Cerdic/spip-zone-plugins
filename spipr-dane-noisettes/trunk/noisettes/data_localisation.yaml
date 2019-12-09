@@ -1,4 +1,4 @@
-nom: '<:noisettes:data_localisation:>'
+nom: '<:sdnnoisettes:data_localisation:>'
 icon: 'map-marker-24.png'
 ajax: 'oui'
 necessite: 'gis'
@@ -7,14 +7,14 @@ parametres:
     saisie: 'oui_non'
     options:
       nom: 'masquer_titre'
-      label: '<:noisettes:label_masquer_titre:>'
+      label: '<:sdnnoisettes:label_masquer_titre:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
     saisie: 'input'
     options:
       nom: 'titre'
-      label: '<:noisettes:label_titre:>'
+      label: '<:sdnnoisettes:label_titre:>'
       defaut: 'Nous situer'
       afficher_si: '@masquer_titre@ != "on"'
       conteneur_class: 'long_label'
@@ -22,15 +22,15 @@ parametres:
     saisie: 'oui_non'
     options:
       nom: 'masquer_picto'
-      label: '<:noisettes:label_masquer_picto:>'
+      label: '<:sdnnoisettes:label_masquer_picto:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
     saisie: 'input'
     options:
       nom: 'picto'
-      label: '<:noisettes:label_picto:>'
-      explication: '<:noisettes:explication_picto:>'
+      label: '<:sdnnoisettes:label_picto:>'
+      explication: '<:sdnnoisettes:explication_picto:>'
       defaut: 'map-marker'
       afficher_si: '@masquer_picto@ != "on"'
       conteneur_class: 'long_label'
@@ -38,15 +38,15 @@ parametres:
     saisie: 'input'
     options:
       nom: 'uai'
-      label: '<:noisettes:label_uai:>'
-      explication: '<:noisettes:explication_uai:>'
+      label: '<:sdnnoisettes:label_uai:>'
+      explication: '<:sdnnoisettes:explication_uai:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
     saisie: 'input'
     options:
       nom: 'zoom'
-      label: '<:noisettes:zoom:>'
+      label: '<:sdnnoisettes:zoom:>'
       defaut: '9'
       conteneur_class: 'long_label'
     verifier:
@@ -55,7 +55,7 @@ parametres:
     saisie: 'input'
     options:
       nom: 'height'
-      label: '<:noisettes:hauteur:>'
+      label: '<:sdnnoisettes:hauteur:>'
       defaut: '300'
       conteneur_class: 'long_label'
     verifier:
@@ -64,7 +64,7 @@ parametres:
 #    saisie: 'selection'
 #    options:
 #      nom: 'kml'
-#      label: '<:noisettes:label_afficher_kml:>'
+#      label: '<:sdnnoisettes:label_afficher_kml:>'
 #      datas:
 #        '': 'Aucun'
 #        Département:
@@ -85,7 +85,7 @@ parametres:
 #    saisie: 'input'
 #    options:
 #      nom: 'autre_kml'
-#      label: '<:noisettes:label_autre_kml:>'
+#      label: '<:sdnnoisettes:label_autre_kml:>'
 #      defaut: ''
 #      conteneur_class: 'long_label'
 #      afficher_si: '@kml@  == "autre"'

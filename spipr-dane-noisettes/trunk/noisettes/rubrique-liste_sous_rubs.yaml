@@ -1,5 +1,5 @@
-nom: '<:noisettes:liste_sous_rubriques:>'
-description: '<:noisettes:description_liste_sous_rubriques:>'
+nom: '<:sdnnoisettes:liste_sous_rubriques:>'
+description: '<:sdnnoisettes:description_liste_sous_rubriques:>'
 icon: 'liste_sous-rubs-24.png'
 ajax: 'non'
 parametres:
@@ -7,7 +7,7 @@ parametres:
     saisie: 'checkbox'
     options:
       nom: 'masquer_titre'
-      label: '<:noisettes:label_masquer_titre:>'
+      label: '<:sdnnoisettes:label_masquer_titre:>'
       datas:
         on: 'Oui'
       defaut: ''
@@ -16,7 +16,7 @@ parametres:
     saisie: 'input'
     options:
       nom: 'titre'
-      label: '<:noisettes:label_titre:>'
+      label: '<:sdnnoisettes:label_titre:>'
       defaut: 'Sous-rubriques'
       afficher_si: '@masquer_titre@ !IN "on"'
       conteneur_class: 'long_label'
@@ -24,15 +24,15 @@ parametres:
     saisie: 'oui_non'
     options:
       nom: 'masquer_picto'
-      label: '<:noisettes:label_masquer_picto:>'
+      label: '<:sdnnoisettes:label_masquer_picto:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
     saisie: 'input'
     options:
       nom: 'picto'
-      label: '<:noisettes:label_picto:>'
-      explication: '<:noisettes:explication_picto:>'
+      label: '<:sdnnoisettes:label_picto:>'
+      explication: '<:sdnnoisettes:explication_picto:>'
       defaut: 'sitemap'
       afficher_si: '@masquer_picto@ != "on"'
       conteneur_class: 'long_label'

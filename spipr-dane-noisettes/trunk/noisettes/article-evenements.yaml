@@ -1,5 +1,5 @@
-nom: '<:noisettes:article_evenements:>'
-description: '<:noisettes:description_article_evenements:>'
+nom: '<:sdnnoisettes:article_evenements:>'
+description: '<:sdnnoisettes:description_article_evenements:>'
 icon: 'article_evenements-24.png'
 ajax: 'non'
 contexte:

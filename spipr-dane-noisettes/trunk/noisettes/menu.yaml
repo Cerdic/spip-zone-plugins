@@ -1,6 +1,6 @@
 #Surcharge du plugin menus
 #noisettes/menu.yaml
-nom: '<:noisettes:menu:>'
+nom: '<:sdnnoisettes:menu:>'
 description: '<:menus:noisette_description:>'
 icon: 'menu-24.png'
 necessite: 'menus'
@@ -18,14 +18,14 @@ parametres:
     saisie: 'oui_non'
     options:
       nom: 'masquer_titre'
-      label: '<:noisettes:label_masquer_titre:>'
+      label: '<:sdnnoisettes:label_masquer_titre:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
     saisie: 'input'
     options:
       nom: 'titre'
-      label: '<:noisettes:label_titre:>'
+      label: '<:sdnnoisettes:label_titre:>'
       defaut: 'Menu'
       afficher_si: '@masquer_titre@ != "on"'
       conteneur_class: 'long_label'
@@ -33,15 +33,15 @@ parametres:
     saisie: 'oui_non'
     options:
       nom: 'masquer_picto'
-      label: '<:noisettes:label_masquer_picto:>'
+      label: '<:sdnnoisettes:label_masquer_picto:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
     saisie: 'input'
     options:
       nom: 'picto'
-      label: '<:noisettes:label_picto:>'
-      explication: '<:noisettes:explication_picto:>'
+      label: '<:sdnnoisettes:label_picto:>'
+      explication: '<:sdnnoisettes:explication_picto:>'
       defaut: 'bars'
       afficher_si: '@masquer_picto@ != "on"'
       conteneur_class: 'long_label'

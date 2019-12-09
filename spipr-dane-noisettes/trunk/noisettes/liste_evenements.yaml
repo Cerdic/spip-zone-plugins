@@ -1,5 +1,5 @@
-nom: '<:noisettes:liste_evenements:>'
-description: '<:noisettes:description_liste_evenements:>'
+nom: '<:sdnnoisettes:liste_evenements:>'
+description: '<:sdnnoisettes:description_liste_evenements:>'
 icon: 'evenements-24.png'
 ajax: 'non'
 necessite: 'agenda'
@@ -8,14 +8,14 @@ parametres:
     saisie: 'oui_non'
     options:
       nom: 'masquer_titre'
-      label: '<:noisettes:label_masquer_titre:>'
+      label: '<:sdnnoisettes:label_masquer_titre:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
     saisie: 'input'
     options:
       nom: 'titre'
-      label: '<:noisettes:label_titre:>'
+      label: '<:sdnnoisettes:label_titre:>'
       defaut: 'Agenda'
       afficher_si: '@masquer_titre@ != "on"'
       conteneur_class: 'long_label'
@@ -23,15 +23,15 @@ parametres:
     saisie: 'oui_non'
     options:
       nom: 'masquer_picto'
-      label: '<:noisettes:label_masquer_picto:>'
+      label: '<:sdnnoisettes:label_masquer_picto:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
     saisie: 'input'
     options:
       nom: 'picto'
-      label: '<:noisettes:label_picto:>'
-      explication: '<:noisettes:explication_picto:>'
+      label: '<:sdnnoisettes:label_picto:>'
+      explication: '<:sdnnoisettes:explication_picto:>'
       defaut: 'calendar'
       afficher_si: '@masquer_picto@ != "on"'
       conteneur_class: 'long_label'
@@ -39,7 +39,7 @@ parametres:
     saisie: 'input'
     options:
       nom: 'nb'
-      label: '<:noisettes:label_nb_evenements:>'
+      label: '<:sdnnoisettes:label_nb_evenements:>'
       defaut: '5'
       conteneur_class: 'long_label'
     verifier:
@@ -49,15 +49,15 @@ parametres:
     saisie: 'oui_non'
     options:
       nom: 'masquer_logo'
-      label: '<:noisettes:label_masquer_logo:>'
+      label: '<:sdnnoisettes:label_masquer_logo:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
     saisie: 'oui_non'
     options:
       nom: 'image_passe_partout'
-      label: '<:noisettes:label_image_passe_partout:>'
-      explication: '<:noisettes:explication_image_passe_partout:>'
+      label: '<:sdnnoisettes:label_image_passe_partout:>'
+      explication: '<:sdnnoisettes:explication_image_passe_partout:>'
       defaut: ''
       afficher_si: '@masquer_logo@  != "on"'
       conteneur_class: 'long_label'
@@ -65,7 +65,7 @@ parametres:
     saisie: 'input'
     options:
       nom: 'largeur_logo'
-      label: '<:noisettes:label_largeur_logo:>'
+      label: '<:sdnnoisettes:label_largeur_logo:>'
       defaut: '150'
       afficher_si: '@masquer_logo@  != "on"'
       conteneur_class: 'long_label'
@@ -75,7 +75,7 @@ parametres:
     saisie: 'input'
     options:
       nom: 'hauteur_logo'
-      label: '<:noisettes:label_hauteur_logo:>'
+      label: '<:sdnnoisettes:label_hauteur_logo:>'
       defaut: '150'
       afficher_si: '@masquer_logo@ != "on"'
       conteneur_class: 'long_label'
@@ -85,28 +85,28 @@ parametres:
     saisie: 'oui_non'
     options:
       nom: 'masquer_date'
-      label: '<:noisettes:label_masquer_date:>'
+      label: '<:sdnnoisettes:label_masquer_date:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
     saisie: 'oui_non'
     options:
       nom: 'masquer_descriptif'
-      label: '<:noisettes:label_masquer_descriptif:>'
+      label: '<:sdnnoisettes:label_masquer_descriptif:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
     saisie: 'oui_non'
     options:
       nom: 'masquer_adresse'
-      label: '<:noisettes:label_masquer_adresse:>'
+      label: '<:sdnnoisettes:label_masquer_adresse:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
     saisie: 'oui_non'
     options:
       nom: 'masquer_mots'
-      label: '<:noisettes:label_masquer_mots:>'
+      label: '<:sdnnoisettes:label_masquer_mots:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
@@ -114,7 +114,7 @@ parametres:
     options:
       nom: 'fieldset_conf_avancee'
       label: '<:sdn:label_conf_avancee_noisettes:>'
-      explication: '<:noisettes:explication_conf_avancee_noisettes:>'
+      explication: '<:sdnnoisettes:explication_conf_avancee_noisettes:>'
       afficher_si: '@config:sdn:conf_avancee@  == "on"'
     saisies:
       - 'inclure:inclure/yaml/conf_avancee.yaml'

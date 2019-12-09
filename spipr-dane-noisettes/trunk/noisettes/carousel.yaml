@@ -1,5 +1,5 @@
-nom: '<:noisettes:nom_carousel:>'
-description: '<:noisettes:description_carousel:>'
+nom: '<:sdnnoisettes:nom_carousel:>'
+description: '<:sdnnoisettes:description_carousel:>'
 icon: 'carousel-24.png'
 ajax: 'non'
 parametres:
@@ -7,19 +7,19 @@ parametres:
     saisie: 'explication'
     options:
       nom: 'explication_carousel'
-      texte: '<:noisettes:explication_carousel:>'
+      texte: '<:sdnnoisettes:explication_carousel:>'
   -
     saisie: 'oui_non'
     options:
       nom: 'masquer_titre'
-      label: '<:noisettes:label_masquer_titre:>'
+      label: '<:sdnnoisettes:label_masquer_titre:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
     saisie: 'input'
     options:
       nom: 'titre'
-      label: '<:noisettes:label_titre:>'
+      label: '<:sdnnoisettes:label_titre:>'
       defaut: 'À la une'
       afficher_si: '@masquer_titre@ != "on"'
       conteneur_class: 'long_label'
@@ -27,15 +27,15 @@ parametres:
     saisie: 'oui_non'
     options:
       nom: 'masquer_picto'
-      label: '<:noisettes:label_masquer_picto:>'
+      label: '<:sdnnoisettes:label_masquer_picto:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
     saisie: 'input'
     options:
       nom: 'picto'
-      label: '<:noisettes:label_picto:>'
-      explication: '<:noisettes:explication_picto:>'
+      label: '<:sdnnoisettes:label_picto:>'
+      explication: '<:sdnnoisettes:explication_picto:>'
       defaut: 'star'
       afficher_si: '@masquer_picto@ != "on"'
       conteneur_class: 'long_label'
@@ -43,7 +43,7 @@ parametres:
     saisie: 'input'
     options:
       nom: 'nb'
-      label: '<:noisettes:label_nb_diapos:>'
+      label: '<:sdnnoisettes:label_nb_diapos:>'
       defaut: ''
       conteneur_class: 'long_label'
     verifier:
@@ -55,15 +55,15 @@ parametres:
     saisie: 'oui_non'
     options:
       nom: 'image_passe_partout'
-      label: '<:noisettes:label_image_passe_partout:>'
-      explication: '<:noisettes:explication_image_passe_partout:>'
+      label: '<:sdnnoisettes:label_image_passe_partout:>'
+      explication: '<:sdnnoisettes:explication_image_passe_partout:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
     saisie: 'input'
     options:
       nom: 'largeur_image_carousel'
-      label: '<:noisettes:label_largeur_image_carousel:>'
+      label: '<:sdnnoisettes:label_largeur_image_carousel:>'
       defaut: '400'
       conteneur_class: 'long_label'
     verifier:
@@ -72,7 +72,7 @@ parametres:
     saisie: 'input'
     options:
       nom: 'hauteur_image_carousel'
-      label: '<:noisettes:label_hauteur_image_carousel:>'
+      label: '<:sdnnoisettes:label_hauteur_image_carousel:>'
       defaut: '250'
       conteneur_class: 'long_label'
     verifier:
@@ -81,7 +81,7 @@ parametres:
     saisie: 'input'
     options:
       nom: 'coupe'
-      label: '<:noisettes:label_coupe_texte:>'
+      label: '<:sdnnoisettes:label_coupe_texte:>'
       defaut: '160'
       conteneur_class: 'long_label'
     verifier:
@@ -90,7 +90,7 @@ parametres:
     saisie: 'input'
     options:
       nom: 'couleur'
-      label: '<:noisettes:label_couleur_bg:>'
+      label: '<:sdnnoisettes:label_couleur_bg:>'
       defaut: ''
       class: 'palette''
       conteneur_class: 'long_label'

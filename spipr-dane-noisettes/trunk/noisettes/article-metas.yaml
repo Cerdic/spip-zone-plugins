@@ -1,5 +1,5 @@
 nom: 'Infos sur l’article'
-description: '<:noisettes:description_article_contenu:>'
+description: '<:sdnnoisettes:description_article_contenu:>'
 icon: 'metas_aricle-24.png'
 ajax: 'non'
 parametres:
@@ -7,25 +7,25 @@ parametres:
     saisie: 'oui_non'
     options:
       nom: 'masquer_auteurs'
-      label: '<:noisettes:label_masquer_auteurs:>'
+      label: '<:sdnnoisettes:label_masquer_auteurs:>'
       defaut: ''
   -
     saisie: 'oui_non'
     options:
       nom: 'afficher_logo'
-      label: '<:noisettes:label_afficher_logo:>'
+      label: '<:sdnnoisettes:label_afficher_logo:>'
       defaut: ''
   -
     saisie: 'oui_non'
     options:
       nom: 'masquer_date'
-      label: '<:noisettes:label_masquer_date:>'
+      label: '<:sdnnoisettes:label_masquer_date:>'
       defaut: ''
   -
     saisie: 'oui_non'
     options:
       nom: 'masquer_mots'
-      label: '<:noisettes:label_masquer_mots:>'
+      label: '<:sdnnoisettes:label_masquer_mots:>'
       defaut: ''
   -
     saisie: 'fieldset'
