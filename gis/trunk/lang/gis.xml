@@ -2,10 +2,11 @@
 	<langue code="de" url="https://trad.spip.net/tradlang_module/gis?lang_cible=de" total="162" traduits="154" relire="0" modifs="1" nouveaux="7" pourcent="95.06">
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
-	<langue code="en" url="https://trad.spip.net/tradlang_module/gis?lang_cible=en" total="162" traduits="150" relire="0" modifs="1" nouveaux="11" pourcent="92.59">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/gis?lang_cible=en" total="162" traduits="162" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
+		<traducteur nom="jack31" lien="https://trad.spip.net/auteur/jack31" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="es" url="https://trad.spip.net/tradlang_module/gis?lang_cible=es" total="162" traduits="143" relire="5" modifs="3" nouveaux="11" pourcent="88.27">

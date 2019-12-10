@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_lien' => 'Remove this link',
 
 	// C
-	'cfg_descr_gis' => 'Geographic Information System.<br /><a href="http://contrib.spip.net/4189" class="spip_out">Link to the documentation</a>.', # MODIF
+	'cfg_descr_gis' => 'Geographic Information System.<br /><a href="https://contrib.spip.net/4189" class="spip_out">Link to the documentation</a>.',
 	'cfg_inf_adresse' => 'Displays additional address fields (country, city, state, address ...)',
 	'cfg_inf_bing' => 'The Bing Aerial layer needs a key you can create on <a href=\'@url@\' class="spip_out">the Bing website</a>.',
 	'cfg_inf_geocoder' => 'Enable geocoder functions (search from an address, recovery of the address from the coordinates).',
@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_layer_defaut' => 'Default layer',
 	'cfg_lbl_layers' => 'Proposed layers',
 	'cfg_lbl_maptype' => 'Base map',
+	'cfg_lbl_plugins_desactives' => 'Disable some plugins',
 	'cfg_lbl_styles' => 'Show the style fields',
 	'cfg_titre_gis' => 'GIS configuration',
 
@@ -55,8 +56,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_fillopacity' => 'Filler opacity between 0 and 1 (default: 0.2)',
 	'explication_import' => 'Import a file in GPX or KML format.',
 	'explication_layer_forcee' => 'The layer is imposed by another plugin or skeleton.',
+	'explication_layers' => '<b>@nb@</b> layers currently saved in the configuration',
+	'explication_layers_un' => '<b>1</b> layer currently saved in the configuration',
 	'explication_maptype_force' => 'The base map is imposed by another plugin or skeleton.',
 	'explication_opacity' => 'Line opacity between 0 and 1 (default: 0.5)',
+	'explication_plugins_desactives' => 'Be careful, some features provided by these plugins will no longer be operational.',
 	'explication_weight' => 'Line thickness (default: 5)',
 
 	// F
@@ -125,6 +129,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_inserer_modele_rubriques' => 'linked to sections',
 	'label_inserer_modele_sites' => 'linked to websites',
 	'label_inserer_modele_titre_carte' => 'Map title',
+	'label_inserer_modele_tooltip' => 'Display a tooltip when hovering over the points ',
 	'label_opacity' => 'Opacity',
 	'label_pays' => 'Country',
 	'label_rechercher_address' => 'Search for an address',
@@ -136,6 +141,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'libelle_logo_gis' => 'POINT\\’S LOGO',
 	'lien_ajouter_gis' => 'Add this point',
 	'lon' => 'Longitude',
+
+	// M
+	'message_limite_atteinte' => 'You have more geolocated points than the current display limit. <br /> If you want to display all of them, follow <a href="@url@">this link</a>. ',
+
+	// O
+	'onglet_carte' => 'Map',
+	'onglet_liste' => 'List',
 
 	// P
 	'placeholder_geocoder' => 'An address, a town, a country, a touristic site...',
@@ -150,6 +162,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_bloc_creer_point' => 'Link a new point',
 	'titre_bloc_points_lies' => 'Linked points',
 	'titre_bloc_rechercher_point' => 'Search for a point',
+	'titre_limite_atteinte' => 'Limit of the number of points displayed reached (@limite@)',
 	'titre_nombre_utilisation' => 'One use',
 	'titre_nombre_utilisations' => '@nb@ uses',
 	'titre_nouveau_point' => 'New point',
@@ -167,6 +180,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'toolbar_edit_handlers_edit_tooltip_subtext' => 'Clickc cancel to suppress your modifications',
 	'toolbar_edit_handlers_edit_tooltip_text' => 'Move the markers to modify the object.',
 	'toolbar_edit_handlers_remove_tooltip_text' => 'Click on an object to delete it',
+	'toolbar_finish_text' => 'Complete',
+	'toolbar_finish_title' => 'Complete the route',
 	'toolbar_handlers_marker_tooltip_start' => 'Click to set marker',
 	'toolbar_handlers_polygon_tooltip_cont' => 'Click to continue drawing the polygon',
 	'toolbar_handlers_polygon_tooltip_end' => 'Click the first point to close the polygon',
