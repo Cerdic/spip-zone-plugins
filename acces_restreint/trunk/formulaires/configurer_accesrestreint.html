@@ -10,9 +10,9 @@
 
 		<fieldset>
 			<legend><:accesrestreint:label_creer_htaccess:></legend>
-			<[(#DIV|sinon{ul})] class="editer-groupe">
+			<div class="editer-groupe">
 				#SET{name,accesrestreint_proteger_documents}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<[(#DIV|sinon{li})] class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+				<div class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]
 					<p class="explication"><:accesrestreint:explication_creer_htaccess:></p>
@@ -26,18 +26,18 @@
 						<input type="radio" class="radio" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)checked="checked"] />
 						<label for="#GET{name}_#GET{val}"><:accesrestreint:label_creer_htaccess_non:></label>
 					</div>
-				</[(#DIV|sinon{li})]>
-			</[(#DIV|sinon{ul})]>
+				</div>
+			</div>
 		</fieldset>
 
 		<fieldset>
 			<legend><:info_fichiers_authent:></legend>
-			<[(#DIV|sinon{ul})] class="editer-groupe">
+			<div class="explication"><:texte_fichier_authent{dossier=#GET{dossier}}:></div>
+			<div class="editer-groupe">
 				#SET{name,creer_htpasswd}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<[(#DIV|sinon{li})] class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<div class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					[<span class='erreur_message'>(#GET{erreurs})</span>]
 					#SET{dossier,#VAL{_DIR_TMP}|constant|joli_repertoire|wrap{'<tt>'}}
-					<p class="explication"><:texte_fichier_authent{dossier=#GET{dossier}}:></p>
 					#SET{val,oui}
 					<div class="choix">
 						<input type="radio" class="radio" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)checked="checked"] />
@@ -48,8 +48,8 @@
 						<input type="radio" class="radio" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)checked="checked"] />
 						<label for="#GET{name}_#GET{val}"><:item_non_creer_fichiers_authent:></label>
 					</div>
-				</[(#DIV|sinon{li})]>
-			</[(#DIV|sinon{ul})]>
+				</div>
+			</div>
 		</fieldset>
 
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
