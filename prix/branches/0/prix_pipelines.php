@@ -12,3 +12,13 @@ function prix_declarer_tables_interfaces($interface) {
 	
 	return $interface;
 }
+
+// Pour déclarer les deux pipelines
+function prix_prix_ht($flux) {
+	return $flux;
+}
+
+function prix_priiix($flux){
+	return $flux;
+}
+

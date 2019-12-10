@@ -1,12 +1,13 @@
 <paquet
 	prefix="prix"
 	categorie="outil"
-	version="1.0.0"
-	etat="dev"
-	compatibilite="[3.2.0;3.2.*]"
+	version="0.1.17"
+	etat="stable"
+	compatibilite="[2.1.8;3.2.*]"
 	logo="prive/themes/spip/images/prix-64.png"
 	documentation="https://contrib.spip.net/Plugin-API-Prix"
 >
+
 	<nom>API Prix</nom>
 
 	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
@@ -15,6 +16,6 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="prix_pipelines.php" />
 
 	<!-- les pipelines du plugin API Prix -->
-	<pipeline nom="prix" inclure="prix_pipelines.php" action="" />
-	<pipeline nom="prix_ht" inclure="prix_pipelines.php" action="" />
+	<pipeline nom="prix" inclure="prix_pipelines.php" action="priiix" />
+	<pipeline nom="prix_ht" inclure="prix_pipelines.php" />
 </paquet>
