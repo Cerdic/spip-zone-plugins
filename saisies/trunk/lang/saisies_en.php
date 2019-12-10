@@ -76,10 +76,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_rub_interface_label' => 'Multilingual display',
 	'option_afficher_si_explication' => 'Specify the conditions to display the field based on the value of the other fields. The identifier of the other fields has to be entered between <code>@</code>. <br />Example <code>@selection_1@=="Toto"</code> conditions the display of the field only when field <code>selection_1</code> has a value of <code>Toto</code>.<br />
 It is possible to use Boolean operators <code> || </code> (or) and <code> && </code> (and).<br/>
-You will find <a href="https://contrib.spip.net/5080" target="_blank">full documentation of the syntax on spip-contrib</a>.', # MODIF
+You will find <a href="https://contrib.spip.net/5080" target="_blank">full documentation of the syntax on contrib.spip</a>.',
 	'option_afficher_si_label' => 'Conditional display',
 	'option_afficher_si_remplissage_uniquement_explication' => 'By checking this box, the conditional display will only apply when filling in the form, not when displaying the results.',
 	'option_afficher_si_remplissage_uniquement_label' => 'Only when filling the form',
+	'option_afficher_si_remplissage_uniquement_label_case' => 'Hide entries only during filling ',
 	'option_attention_explication' => 'A message more important than the explanation.',
 	'option_attention_label' => 'Warning',
 	'option_attribut_title_label' => 'Put a title attribute in the label, containing the value of the field. Use with moderation.',
@@ -112,7 +113,7 @@ You will find <a href="https://contrib.spip.net/5080" target="_blank">full docum
 	'option_disable_explication' => 'The field can not get the focus.',
 	'option_disable_label' => 'Disable the field',
 	'option_erreur_obligatoire_explication' => 'You can customize the error message displayed to show an obligation (otherwise leave blank).',
-	'option_erreur_obligatoire_label' => 'Obligation message', # MODIF
+	'option_erreur_obligatoire_label' => 'Error message for the obligation',
 	'option_explication_explication' => 'If necessary, a short sentence describing the subject field.',
 	'option_explication_label' => 'Explanation',
 	'option_forcer_select_explication' => 'If a group of words is selected, by default it will be a radio entry. You can force the use of a select.',
@@ -126,7 +127,7 @@ You will find <a href="https://contrib.spip.net/5080" target="_blank">full docum
 	'option_horaire_label' => 'Schedule',
 	'option_horaire_label_case' => 'Allow to fill in the time',
 	'option_id_groupe_label' => 'Keyword group',
-	'option_info_obligatoire_explication' => 'You can modify the default indication of obligation: <i>[Obligatoire]</i>.', # MODIF
+	'option_info_obligatoire_explication' => 'You can change the default obligation indication: <i>[Mandatory]</i>. To keep the default information, leave it blank. To display nothing, put a text composed only of space.', # RELIRE
 	'option_info_obligatoire_label' => 'Indication of obligation',
 	'option_inserer_barre_choix_edition' => 'complete editing toolbar',
 	'option_inserer_barre_choix_forum' => 'forums toolbar',
