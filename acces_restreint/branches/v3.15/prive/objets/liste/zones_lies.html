@@ -1,0 +1,44 @@
+[(#SET{defaut_tri,#ARRAY{
+	type,1,
+	num titre,1,
+	titre,1,
+	id_zone,1
+}})
+]
+#SET{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
+<input type="hidden" name="debutzonel" value='#ENV{debutzonel,#EVAL{_request("debutzonel");}}' />
+<B_liste_zone>
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies zones">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{accesrestreint:info_1_zone,accesrestreint:info_nb_zones}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='publique' scope='col'><:accesrestreint:publique:></th>
+			<th class='privee' scope='col'><:accesrestreint:privee:></th>
+			<th class='action' scope='col'>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_zone(ZONES){id_zone IN #GET{selection}}{where?}{tri #ENV{par,titre},#GET{defaut_tri}}{par multi titre}{pagination #ENV{nb,10} zonel}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][(#ID_ZONE|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class='picto'>[(#CHEMIN_IMAGE{zone-16.png}|balise_img)]</td>
+			<td class='titre principale'><a href="[(#ID_ZONE|generer_url_entite{zone})]"
+																																						title="<:info_numero_abbreviation|attribut_html:> #ID_ZONE">[(#RANG). ]#TITRE</a></td>
+			<td class='publique secondaire'>[[(#CHEMIN_IMAGE{restreint-16.png}|balise_img{<:accesrestreint:publique:>})](#PUBLIQUE|=={oui}|oui)]</td>
+			<td class='privee secondaire'>[[(#CHEMIN_IMAGE{restreint-16.png}|balise_img{<:accesrestreint:publique:>})](#PRIVEE|=={oui}|oui)]</td>
+			<td class='action'><button type="submit" class="button link delete" name="supprimer_lien[zone-#ID_ZONE-#OBJET-#ID_OBJET]" value="X"><:accesrestreint:info_retirer_zone:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button></td>
+		</tr>
+	</BOUCLE_liste_zone>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien#EVAL{chr(91)}zone-*-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="X"><:accesrestreint:info_retirer_zones:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button></div>]
+</div>
+</B_liste_zone>
+<div class="liste-objets liste-objets-lies zones caption-wrap">
+<strong class="caption">[(#ENV*{titre,<:accesrestreint:info_aucune_zone:>}) ]#AIDER{artzones}</strong>
+</div>
+<//B_liste_zone>
