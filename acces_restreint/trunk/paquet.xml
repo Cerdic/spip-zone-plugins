@@ -1,10 +1,10 @@
 <paquet
 	prefix="accesrestreint"
 	categorie="auteur"
-	version="3.15.18"
+	version="4.0.0"
 	etat="test"
-	compatibilite="[3.0.0;3.2.*]"
-	logo="prive/themes/spip/images/zone-32.png"
+	compatibilite="[3.1.0;3.3.*]"
+	logo="prive/themes/spip/images/accesrestreint-64.png"
 	schema="0.5.0"
 	documentation="https://contrib.spip.net/Acces-Restreint-3-0"
 >	
@@ -12,8 +12,9 @@
 	<!-- Gestion de zones d'acces restreint -->
 
 	<auteur lien="http://www.yterium.net" mail="cedric.morin@yterium.com">Cedric Morin</auteur>
+	<credit lien="https://www.flaticon.com/authors/pixel-perfect">Icons made by Pixel perfect from www.flaticon.com</credit>
 
-	<copyright>2007-2014</copyright>
+	<copyright>2007-2019</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
 
