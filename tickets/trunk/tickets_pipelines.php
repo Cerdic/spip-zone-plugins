@@ -272,6 +272,7 @@ function tickets_notifications_destinataires($flux){
 		if(is_array($auteurs)){
 			foreach($auteurs as $auteur){
 				$email = sql_getfetsel('email','spip_auteurs','id_auteur='.intval($auteur));
+				$flux['data'][] = $email;
 			}
 		}
 		/**
