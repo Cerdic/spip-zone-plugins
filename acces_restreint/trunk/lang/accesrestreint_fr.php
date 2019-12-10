@@ -53,6 +53,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_retirer_zones' => 'Enlever de toutes les zones',
 	'info_rubrique_dans_zone' => 'Cette rubrique fait partie de la zone :',
 	'info_rubrique_dans_zones' => 'Cette rubrique fait partie des zones :',
+	'info_vous_avez_acces_a_cette_zone' => 'Vous avez accès à cette zone',
+	'info_vous_navez_pas_acces_a_cette_zone' => 'Vous n\'avez pas accès à cette zone',
 
 	// L
 	'label_creer_htaccess' => 'Accès aux documents joints par leur URL',
