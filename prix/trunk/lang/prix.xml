@@ -1,4 +1,4 @@
-<traduction module="prix" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/prix/lang/" reference="fr">
+<traduction module="prix" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/prix/trunk/lang/" reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/prix?lang_cible=en" total="8" traduits="7" relire="0" modifs="0" nouveaux="1" pourcent="87.50">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 	</langue>
