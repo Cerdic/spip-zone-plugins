@@ -12,7 +12,14 @@ function horlogeflash($timezone='Europe/Paris', $period=false, $offset=false) {
 	date_default_timezone_set($curenttimezone);
 	if ($period) {	
 		return "$ampm";
-	} elseif ($offset) {	
+	} elseif ($offset) {
+		// D'après mes sources sur place, le décalage en hiver n'est que de 5h avec Baïkonour
+		if (($timezone === 'Asia/Almaty')
+			and
+			(!date('I', time()))
+		) {
+			$theoffset = 5;
+		}
 		return "$theoffset";
 	} else {
 		return "heure=$heure&amp;minute=$minute&amp;seconde=$seconde";
