@@ -6,39 +6,44 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /*
  * Permet d'obtenir le prix HT d'un objet SPIP. C'est le résultat de cette fonction qui est utilisée pour calculer le prix TTC.
  *
- * @param string $type_objet Le type de l'objet
+ * @param string $objet Le type de l'objet
  * @param int $id_objet L'identifiant de l'objet
  * @return float Retourne le prix HT de l'objet sinon 0
  */
-function inc_prix_ht_dist($type_objet, $id_objet, $arrondi = 2, $serveur = ''){
+function inc_prix_ht_dist($objet, $id_objet, $arrondi = 2, $serveur = ''){
 	$prix_ht = 0;
+	
 	// Cherchons d'abord si l'objet existe bien
-	if ($type_objet
+	if (
+		$objet
 		and $id_objet = intval($id_objet)
 		and include_spip('base/connect_sql')
-		and $type_objet = objet_type($type_objet)
-		and $table_sql = table_objet_sql($type_objet,$serveur)
-		and $cle_objet = id_table_objet($type_objet,$serveur)
+		and $objet = objet_type($objet)
+		and $table_sql = table_objet_sql($objet, $serveur)
+		and $cle_objet = id_table_objet($objet, $serveur)
 		and $ligne = sql_fetsel('*', $table_sql, "$cle_objet = $id_objet",'','','','',$serveur)
 	){
 		// Existe-t-il une fonction précise pour le prix HT de ce type d'objet : prix_<objet>_ht() dans prix/<objet>.php
-		if ($fonction_ht = charger_fonction('ht', "prix/$type_objet", true)){
+		if ($fonction_ht = charger_fonction('ht', "prix/$objet", true)){
 			// On passe la ligne SQL en paramètre pour ne pas refaire la requête
 			$prix_ht = $fonction_ht($id_objet, $ligne);
 		}
 		// S'il n'y a pas de fonction, regardons s'il existe des champs normalisés, ce qui évite d'écrire une fonction pour rien
-		elseif (!empty($ligne['prix_ht'])) 
+		elseif (!empty($ligne['prix_ht'])) {
 			$prix_ht = $ligne['prix_ht'];
-		elseif ($ligne['prix'])
+		}
+		elseif ($ligne['prix']) {
 			$prix_ht = $ligne['prix'];
+		}
 		
 		// Enfin on passe dans un pipeline pour modifier le prix HT
 		$prix_ht = pipeline(
 			'prix_ht',
 			array(
 				'args' => array(
+					'objet' => $objet,
 					'id_objet' => $id_objet,
-					'type_objet' => $type_objet,
+					'type_objet' => $objet, // déprécié, utiliser plutôt "objet"
 					'prix_ht' => $prix_ht
 				),
 				'data' => $prix_ht
@@ -47,8 +52,9 @@ function inc_prix_ht_dist($type_objet, $id_objet, $arrondi = 2, $serveur = ''){
 	}
 	
 	// Si on demande un arrondi, on le fait
-	if ($arrondi)
+	if ($arrondi) {
 		$prix_ht = round($prix_ht, $arrondi);
+	}
 	
 	return $prix_ht;
 }
@@ -56,21 +62,28 @@ function inc_prix_ht_dist($type_objet, $id_objet, $arrondi = 2, $serveur = ''){
 /*
  * Permet d'obtenir le prix final TTC d'un objet SPIP quel qu'il soit.
  *
- * @param string $type_objet Le type de l'objet
+ * @param string $objet Le type de l'objet
  * @param int $id_objet L'identifiant de l'objet
  * @return float Retourne le prix TTC de l'objet sinon 0
  */
-function inc_prix_dist($type_objet, $id_objet, $arrondi = 2, $serveur = ''){
+function inc_prix_dist($objet, $id_objet, $arrondi = 2, $serveur = ''){
 	include_spip('base/connect_sql');
 	
 	// On va d'abord chercher le prix HT. On délègue le test de présence de l'objet dans cette fonction.
 	$fonction_prix_ht = charger_fonction('ht', 'inc/prix');
-	$type_objet = objet_type($type_objet);
-	$prix = $prix_ht = $fonction_prix_ht($type_objet, $id_objet, 0, $serveur);
+	$objet = objet_type($objet);
+	$prix = $prix_ht = $fonction_prix_ht($objet, $id_objet, 0, $serveur);
+	$taxes = array();
 	
-	// On cherche maintenant s'il existe une personnalisation pour les taxes : prix_<objet>() dans prix/<objet>.php
-	if ($fonction_prix_objet = charger_fonction($type_objet, 'prix/', true)){
+	// On cherche maintenant s'il existe une personnalisation pour le prix total TTC : prix_<objet>() dans prix/<objet>.php
+	if ($fonction_prix_objet = charger_fonction($objet, 'prix/', true)){
 		$prix = $fonction_prix_objet($id_objet, $prix_ht);
+	}
+	// Sinon on appelle une fonction générique pour trouver les taxes d'un objet, et on ajoute au HT
+	elseif ($fonction_taxes = charger_fonction('taxes', 'inc/', true)) {
+		$taxes = $fonction_taxes($objet, $id_objet);
+		$taxes_total = array_sum(array_column($taxes, 'montant'));
+		$prix = $prix_ht + $taxes_total;
 	}
 	
 	// Enfin on passe dans un pipeline pour pouvoir ajouter taxes, ristournes ou autres modifications
@@ -78,18 +91,21 @@ function inc_prix_dist($type_objet, $id_objet, $arrondi = 2, $serveur = ''){
 		'prix',
 		array(
 			'args' => array(
+				'objet' => $objet,
 				'id_objet' => $id_objet,
-				'type_objet' => $type_objet,
+				'type_objet' => $objet, // déprécié, utiliser plutôt "objet"
 				'prix_ht' => $prix_ht,
-				'prix' => $prix
+				'prix' => $prix,
+				'taxes' => $taxes,
 			),
 			'data' => $prix
 		)
 	);
 	
 	// Si on demande un arrondi, on le fait
-	if ($arrondi)
+	if ($arrondi) {
 		$prix = round($prix, $arrondi);
+	}
 	
 	// Et c'est fini
 	return $prix;
