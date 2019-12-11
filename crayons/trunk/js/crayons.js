@@ -550,8 +550,8 @@ $.fn.crayonsstart = function() {
 		$(function(){
 			$('body')
 			.on('mouseover touchstart', '.crayon:not(.crayon-init)', function(e) {
-				console.log('over');
-				console.log(this);
+				//console.log('over');
+				//console.log(this);
 				$(this)
 				.addClass('crayon-init')
 				.filter(configCrayons.droits)
