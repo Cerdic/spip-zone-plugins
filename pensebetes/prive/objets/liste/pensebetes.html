@@ -1,0 +1,45 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	date,#ENV{date_sens,-1},
+	id_receveur,1,
+	id_donneur,1,
+	id_pensebete,1,
+	points,-1
+}})
+]
+<B_liste_pensebetes>
+#ANCRE_PAGINATION
+<div class="liste-objets pensebetes">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{pensebete:info_1_pensebete,pensebete:info_nb_pensebetes}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:pensebete:label_titre:>,ajax})]</th>
+			<th class='donneur' scope='col'>[(#TRI{id_donneur,<:pensebete:label_donneur:>,ajax})]</th>
+			<th class='receveur' scope='col'>[(#TRI{id_receveur,<:pensebete:label_receveur:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_pensebete,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_pensebetes(PENSEBETES){id_mot?}{id_donneur=#SESSION{id_auteur}}{id_receveur?}{where?}{recherche?}{tri #ENV{par,num id_donneur},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='picto'>[(#CHEMIN_IMAGE{pensebete-16.png}|balise_img)]</td>
+			<td class='titre principale'>[(#LOGO_PENSEBETE|image_reduire{20,26})]<a href="[(#ID_PENSEBETE|generer_url_entite{pensebete})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PENSEBETE">[(#RANG). ]#TITRE</a></td>
+			<td class='donneur'><a href="[(#URL_ECRIRE{auteur,id_auteur=#ID_DONNEUR})]">#INFO_NOM{'auteur',#ID_DONNEUR}</a></td>
+			<td class='receveur'><a href="[(#URL_ECRIRE{auteur,id_auteur=#ID_RECEVEUR})]">#INFO_NOM{'auteur',#ID_RECEVEUR}</td>
+			<td class='date'>[(#DATE|affdate_jourcourt)]</td>
+			<td class='id'>[(#AUTORISER{modifier,pensebete,#ID_PENSEBETE}|?{
+				<a href="[(#URL_ECRIRE{pensebete_edit,id_pensebete=#ID_PENSEBETE})]">#ID_PENSEBETE</a>,
+				#ID_PENSEBETE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_pensebetes>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_pensebetes>[
+<div class="liste-objets pensebetes caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_pensebetes>

@@ -1,0 +1,34 @@
+<paquet
+	prefix="pensebetes"
+	categorie="edition"
+	version="1.0.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/pensebete-64.png"
+	schema="1.0.0"
+	documentation=""
+>
+
+	<nom>Pense-bêtes</nom>
+	<!-- Un plugin qui attache ! -->
+
+	<auteur lien="https://contrib.spip.net/Pense-betes">Vincent CALLIES</auteur>
+	<licence>GNU/GPL</licence>
+
+	<credit lien="https://code.tutsplus.com/tutorials/create-a-sticky-note-effect-in-5-easy-steps-with-css3-and-html5--net-13934">Chris Heilmann pour son exemple de post-it en CSS3 and HTML5</credit>
+
+	<necessite nom="saisies" compatibilite="[2.28.0;]" /> 
+	<necessite nom="verifier" compatibilite="[1.8.1;]" /> 
+	<necessite nom="spip" compatibilite="[3.0.0;]"	/>
+
+	<pipeline nom="autoriser" inclure="pensebetes_autorisations.php" /> 
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/pensebetes.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/pensebetes.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/pensebetes.php" />
+	<pipeline nom="affiche_milieu" inclure="pensebetes_pipelines.php" /> 
+	<pipeline nom="affiche_gauche" inclure="pensebetes_pipelines.php" /> 
+
+	<menu nom="pensebetes" titre="pensebete:titre_pensebetes" parent="menu_edition" icone="images/pensebete-16.png" />
+	<menu nom="pensebete_creer" titre="pensebete:icone_creer_pensebete" parent="outils_rapides" icone="images/pensebete-new-16.png" action="pensebete_edit" parametres="new=oui" />
+
+</paquet>

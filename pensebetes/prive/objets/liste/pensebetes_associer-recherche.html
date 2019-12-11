@@ -1,0 +1,39 @@
+<input type="text" class="text" name="recherche" value="[(#ENV*{recherche})]" />
+<input type="submit" class="submit" name="rechercheb" value="<:info_rechercher:>" />
+<input type="hidden" name="debutpensebetea" value='#ENV{debutpensebetea,#VAL{debutpensebeteapensebetea}|_request}' />
+#SET{recherche,#ENV*{recherche}}
+[(#GET{recherche}|non|et{#ENV*{rechercheb}})
+	#SET{recherche,'/./'}
+	<input type="hidden" name="rechercheb" value='x' />
+]
+<B_liste_pensebete>
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-associer pensebetes">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{pensebete:info_1_pensebete,pensebete:info_nb_pensebetes}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:pensebete:label_titre:>,ajax})]</th>
+			<th class='race' scope='col'>[(#TRI{race,<:pensebete:label_race:>,ajax})]</th>
+			<th class='action' scope='col'>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_pensebete(PENSEBETES){doublons 2}{recherche #GET{recherche}}{tri #ENV{par,titre},#GET{defaut_tri}}{par num titre}{pagination 10 pensebetea}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='picto'>[(#CHEMIN_IMAGE{pensebete-16.png}|balise_img)]</td>
+			<td class='titre principale'>[(#LOGO_PENSEBETE|image_reduire{20,20})]<a href="[(#ID_PENSEBETE|generer_url_entite{pensebete})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PENSEBETE">[(#RANG). ]#TITRE</a></td>
+			<td class='race'>#RACE</td>
+			<td class='action'><button class="button link" name="ajouter_lien[pensebete-#ID_PENSEBETE-#OBJET-#ID_OBJET]" value="+"><:pensebete:lien_ajouter_pensebete:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button></td>
+		</tr>
+	</BOUCLE_liste_pensebete>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_pensebete>[(#ENV*{recherche}|oui)
+<div class="liste-objets liste-objets-associer pensebetes caption-wrap">
+<strong class="caption">[(#ENV*{titre,<:pensebete:info_aucun_pensebete:>}) ]</strong>
+</div>]
+<//B_liste_pensebete>

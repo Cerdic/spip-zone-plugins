@@ -1,0 +1,11 @@
+<B_donneur>
+[(#GRAND_TOTAL|singulier_ou_pluriel{pensebete:info_1_pensebete_donne,pensebete:info_nb_pensebetes_donnes})]<br />
+<BOUCLE_donneur(PENSEBETES){id_donneur=#ENV{id_auteur}}{tout}{par id_receveur}>
+	<BOUCLE_receveurs(AUTEURS){id_auteur=#ID_RECEVEUR}{tout}>
+	[<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]" title="<:info_numero_abbreviation|attribut_html:> #ID_AUTEUR">(#NOM|unique)</a>
+            [((#INCLURE{fond=prive/squelettes/inclure/pensebetes_total}{id_donneur=#ENV{id_auteur}}{id_receveur=#ID_RECEVEUR}))]<br />
+            ]
+	</BOUCLE_receveurs>
+</BOUCLE_donneur>
+<:pensebete:info_aucun_pensebete_donne:>
+<//B_donneur>

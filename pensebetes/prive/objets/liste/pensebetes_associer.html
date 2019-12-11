@@ -1,0 +1,46 @@
+[(#SET{defaut_tri,#ARRAY{
+	statut,1,
+	multi titre,1,
+}})]
+[(#SET{_MAX_PENSEBETES_LISTE,[(#VAL{_MAX_PENSEBETES_LISTE}|defined|?{[(#VAL{_MAX_PENSEBETES_LISTE}|constant)],50})]})]
+<BOUCLE_exclus(PENSEBETES){tout}{id_objet}{objet}{doublons 1}{doublons 2} />
+<BOUCLE_nb_pensebetes(PENSEBETES){tout}{doublons 1} />#SET{total,#TOTAL_BOUCLE}<//B_nb_pensebetes>
+
+<BOUCLE_nombreux(CONDITION){si #GET{total}|>{#GET{_MAX_PENSEBETES_LISTE}}}>
+
+	[(#INCLURE{fond=prive/objets/liste/pensebetes_associer-recherche,env,doublons})]
+
+</BOUCLE_nombreux>
+
+[(#REM) Pas beaucoup de pensebete ]
+<B_pensebetes>
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-associer pensebetes">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{pensebete:info_1_pensebete,pensebete:info_nb_pensebetes}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:pensebete:label_titre:>,ajax})]</th>
+			<th class='action' scope='col'>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_pensebetes(PENSEBETES){doublons 2}{tri #ENV{par,titre},#GET{defaut_tri}}{par num titre, titre}{pagination 10}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='picto'>[(#CHEMIN_IMAGE{pensebete-16.png}|balise_img)]</td>
+			<td class='titre principale'>[(#LOGO_PENSEBETE|image_reduire{20,20})]<a href="[(#ID_PENSEBETE|generer_url_entite{pensebete})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PENSEBETE">[(#RANG). ]#TITRE</a></td>
+			<td class='action'><button class="button link" name="ajouter_lien[pensebete-#ID_PENSEBETE-#OBJET-#ID_OBJET]" value="+"><:pensebete:lien_ajouter_pensebete:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button></td>
+		</tr>
+	</BOUCLE_pensebetes>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_pensebetes>
+<div class="liste-objets liste-objets-associer pensebetes caption-wrap">
+<strong class="caption">[(#ENV*{titre,<:pensebete:info_aucun_pensebete:>}) ]</strong>
+</div>
+<//B_pensebetes>
+
+<//B_nombreux>
