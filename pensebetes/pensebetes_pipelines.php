@@ -15,6 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 function pensebetes_affiche_gauche($flux){
     if ($flux['args']['exec'] == 'auteur'){
+	include_spip('inc/presentation');
         $flux['data'] .= debut_cadre_relief('pensebete-24.png',true,'',_T('pensebete:titre_pensebetes')); 
         $flux['data'] .= recuperer_fond('prive/squelettes/inclure/pensebetes_donnes',array('id_auteur'=>$flux['args']['id_auteur']));
         $flux['data'] .= recuperer_fond('prive/squelettes/inclure/pensebetes_recus',array('id_auteur'=>$flux['args']['id_auteur']));
