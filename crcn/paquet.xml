@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.3.*]"
 	logo="img/crcn.png"
-	documentation=""
+	documentation="http://numeriques.spip.ac-rouen.fr/?Attribuer-des-competences-numeriques-et-les-afficher-dans-les-articles-plugin"
 >
 	<nom>CRCN</nom>
 
