@@ -41,12 +41,24 @@
 ]
 </BOUCLE_doc>
 [(#REM)
-
+	Cas (rare) d'un mp3 d'une boucle articles sur une base distante qui utilise un 
+	modele modele doc dans squelettes qui inclu ce modele.
+	en precisant url=#URL_DOCUMENT pour garder l'url distante.
+	Le doc ne sera pas trouvé dans la base locale, mais c'est quand meme un mp3.
+	On envoie alors une balise audio.
+]
+[(#ENV{url}|match{mp3$}|oui)
+<audio controls="controls">
+	<source src="#ENV{url}" type="audio/mp3" />
+</audio>
+]
+[(#REM)
 	Cas normal d'un document ne correspondant pas aux type de fichiers
 	gérés par le lecteur multimedia
 	
 ]
-[(#SPIP_VERSION|>={3.0}|oui) [(#INCLURE{fond=plugins-dist/medias/modeles/doc,env})] ]
-[(#SPIP_VERSION|<{3.0}|oui) [(#INCLURE{fond=prive/modeles/doc,env})] ]
+[(#ENV{url}|match{mp3$}|non)
+	[(#SPIP_VERSION|>={3.0}|oui) [(#INCLURE{fond=plugins-dist/medias/modeles/doc,env})] ]
+	[(#SPIP_VERSION|<{3.0}|oui) [(#INCLURE{fond=prive/modeles/doc,env})] ]
+]
 <//B_doc>
-
