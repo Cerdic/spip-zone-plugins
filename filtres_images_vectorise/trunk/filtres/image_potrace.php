@@ -240,7 +240,12 @@ function image_potrace($img, $options=[]) {
 			$balise_svg .= $svg_bg;
 		}
 
-		$svg_image = $balise_svg . implode('', $svg_layers) . "</svg>";
+		$progress="";
+		if ($abort) {
+			$done = 100 - intval(round(100 * count($couleurs)/$nb_colors));
+			$progress = '<rect x="0" y="0" height="2.5%" width="'.$done.'%" fill="red" />';
+		}
+		$svg_image = $balise_svg . implode('', $svg_layers) . "$progress</svg>";
 
 		ecrire_fichier($dest, $svg_image);
 		if ($abort){
