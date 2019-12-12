@@ -1,7 +1,7 @@
 <paquet
 	prefix="pensebetes"
 	categorie="edition"
-	version="1.0.0"
+	version="1.0.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/pensebete-64.png"
@@ -28,6 +28,7 @@
 	<pipeline nom="affiche_milieu" inclure="pensebetes_pipelines.php" /> 
 	<pipeline nom="affiche_gauche" inclure="pensebetes_pipelines.php" /> 
 
+	<menu nom="murs" titre="pensebete:titre_murs" parent="outils_collaboratifs" icone="images/mur-16.png" />
 	<menu nom="pensebetes" titre="pensebete:titre_pensebetes" parent="menu_edition" icone="images/pensebete-16.png" />
 	<menu nom="pensebete_creer" titre="pensebete:icone_creer_pensebete" parent="outils_rapides" icone="images/pensebete-new-16.png" action="pensebete_edit" parametres="new=oui" />
 
