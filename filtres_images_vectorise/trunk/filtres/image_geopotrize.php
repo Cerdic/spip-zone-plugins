@@ -85,8 +85,8 @@ function image_geopotrize($img, $nb_shapes = 'auto', $opacite_trace = 0.66, $mix
 
 
 		// on genere ensuite un trace PotRace plus fin, sans background
-		if (!isset($potraceOptions['bgcolor'])) {
-			$potraceOptions['bgcolor'] = 'transparent';
+		if (!isset($potraceOptions['background'])) {
+			$potraceOptions['background'] = 'transparent';
 		}
 		if (!isset($potraceOptions['colors'])){
 			$potraceOptions['colors'] = '8';
@@ -106,7 +106,7 @@ function image_geopotrize($img, $nb_shapes = 'auto', $opacite_trace = 0.66, $mix
 		$scale = $width_geo / $width_pot;
 
 		// et on superpose
-		if ($potraceOptions['bgcolor'] != 'transparent') {
+		if ($potraceOptions['background'] != 'transparent') {
 			$potrace = explode("fill=", $svg_pot[1], 2);
 			$svg_pot[1] = $potrace[0] . "opacity=\"0.5\" fill=" . $potrace[1];
 		}
