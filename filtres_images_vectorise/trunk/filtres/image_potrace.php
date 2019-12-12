@@ -18,6 +18,13 @@ use Potracio\Potracio;
  *
  * @param string $img
  * @param array $options
+ *   int width_thumb : taille de la vignette que l'on vectorise (256px par defaut)
+ *   int|string rounding : nombre de decimales pour arrondir le path ('off' ou false pour ne pas arrondir)
+ *   string background : 'auto' ou 'image' ou une couleur web
+ *   int|array colors : nombre de couleurs ou liste des couleurs a vectoriser
+ *   string stroke_width : épaisseurs des contours des tracés en opacité 50% : 0.1%, 2px, none (par défaut 8/nb_colors%)
+ *
+ *   (autre options pour l'algo de potracio, non documentees ici)
  * @return string
  */
 function image_potrace($img, $options=[]) {
@@ -38,13 +45,15 @@ function image_potrace($img, $options=[]) {
 		'optcurve' => true,
 		'alphamax' => 0.75,
 		'opttolerance' => 0.2,
+
 		'rounding' => 1,
-		'bgcolor' => 'auto',
+		'background' => 'auto',
 		'colors' => 16,
+		'stroke_width' => 'auto',
 	];
 	$potconfig = array_merge($potconfig, $options);
 
-	$cache = _image_valeurs_trans($img, "image_potrace2-$width_thumb-".json_encode($potconfig), "svg");
+	$cache = _image_valeurs_trans($img, "image_potracev3-$width_thumb-".json_encode($potconfig), "svg");
 	if (!$cache) {
 		return false;
 	}
@@ -74,24 +83,19 @@ function image_potrace($img, $options=[]) {
 		$width_thumb = largeur($thumb);
 
 		$nb_colors = 16;
-		if (is_numeric($potconfig['colors'])) {
-			$nb_colors = max(1,intval($potconfig['colors']));
-			$potconfig['colors'] = 'auto';
-		}
-		elseif(is_array($potconfig['colors'])) {
+		if(is_array($potconfig['colors'])) {
 			$nb_colors = count($potconfig['colors']);
+			$couleurs = $potconfig['colors'];
 		}
-		if ($potconfig['bgcolor'] === 'auto' or $potconfig['colors'] === 'auto') {
-
-			$palette = extraire_palette_couleurs($img, max($nb_colors, 5), 32);
+		else {
+			if (is_numeric($potconfig['colors'])) {
+				$nb_colors = max(1,intval($potconfig['colors']));
+			}
+			$palette = extraire_palette_couleurs($img, max($nb_colors + 1, 5), 32);
 			$couleurs = [];
-			while (count($couleurs) < $nb_colors and count($palette)>1) {
+			while (count($couleurs) < $nb_colors and count($palette)) {
 				$couleurs[] = array_shift($palette);
 			}
-			#$couleurs[] = '#ffffff';
-		}
-		if (is_array($potconfig['colors']) and count($potconfig['colors'])) {
-			$couleurs = $potconfig['colors'];
 		}
 
 		$rounding = $potconfig['rounding'];
@@ -111,13 +115,21 @@ function image_potrace($img, $options=[]) {
 		}
 
 		spip_timer('potrace');
-		$img_bg = $thumb;
-		if ($potconfig['bgcolor'] === 'auto'){
-			$img_bg = image_reduire($img_bg, 128);
-			$img_bg = filtrer('image_fond_transparent', $img_bg, 'ffffff');
+		$img_bg = false;
+		if ($potconfig['background'] === 'auto' or $potconfig['background'] === 'image'){
+			$img_bg = image_reduire($thumb, 128);
 		}
 		$svg_layers = [];
 		$offset_rayon = 50;
+		if ($potconfig['stroke_width'] === 'auto') {
+			$stroke_width = round(8 / $nb_colors, 2) . '%'; //round(0.05 * $cache['largeur']);
+		}
+		else {
+			$stroke_width = strltolower($potconfig['stroke_width']);
+			if (!$stroke_width) {
+				$stroke_width = 'none';
+			}
+		}
 		//$couleurs = array_reverse($couleurs);
 		foreach ($couleurs as $couleur) {
 			$couleur = '#' . ltrim(couleur_html_to_hex($couleur), '#');
@@ -128,8 +140,8 @@ function image_potrace($img, $options=[]) {
 			$offset_rayon = max(0, $offset_rayon - 10);
 
 			$thumbc = filtrer('image_filtrer_couleur', $thumb, $couleur,$rayon);
-			if ($potconfig['bgcolor'] === 'auto'){
-				$img_bg = filtrer('image_filtrer_couleur', $img_bg, $couleur, $rayon, 'remove');
+			if ($img_bg){
+				$img_bg = filtrer('image_filtrer_couleur', $img_bg, $couleur, $rayon / 2, 'remove', 'png');
 			}
 
 			$source = extraire_attribut($thumbc, 'src');
@@ -142,13 +154,18 @@ function image_potrace($img, $options=[]) {
 			$svg_image = explode('>', $svg_image, 2);
 			$balise_svg = $svg_image[0] . '>';
 
+			$layer = $svg_image[1];
+			$layer =  str_replace("</svg>", "", $layer);
 			// optimize the size : round all points to integer
 			if ($rounding !== false and $rounding !== 'off'){
-				$svg_image[1] = preg_replace_callback(",\b(\d+\.\d+)\b,ims", "_svg_round_point", $svg_image[1]);
+				$layer = preg_replace_callback(",\b(\d+\.\d+)\b,ims", "_svg_round_point", $layer);
 			}
-			//$svg_image[1] = preg_replace(",(\s)\s+,", "\\1", $svg_image[1]);
-			$svg_image[1] = str_replace("black", $couleur, $svg_image[1]);
-			$svg_layers[] = str_replace("</svg>", "", $svg_image[1]);
+			//$layer = preg_replace(",(\s)\s+,", "\\1", $layer);
+			$layer = str_replace("black", $couleur, $layer);
+			if ($stroke_width !== 'none') {
+				$layer = str_replace("stroke=\"none\"","stroke=\"$couleur\" stroke-width=\"$stroke_width\" stroke-opacity=\"0.5\" paint-order=\"stroke\"", $layer);
+			}
+			$svg_layers[] = $layer;
 
 			if (time()>$start_time+$time_budget or time()>$time_out){
 				break;
@@ -163,21 +180,34 @@ function image_potrace($img, $options=[]) {
 
 		$balise_svg = "<svg viewBox=\"0 0 $w $h\" xmlns=\"http://www.w3.org/2000/svg\">";
 
-		if ($potconfig['bgcolor'] === 'auto'){
-			//$img_bg = filtrer('image_fond_transparent', $img_bg,'00ff00');
-			#var_dump($img_bg);
-			$couleur_bg = _image_extraire_couleur_moyenne_restante($img_bg, 64);
-			#var_dump($couleur_bg);
-			$couleur_bg = couleur_eclaircir($couleur_bg);
-			#var_dump($couleur_bg);
+		$couleur_bg = false;
+		$svg_bg = '';
+		if ($img_bg){
+			//var_dump($img_bg);
+			if ($potconfig['background']==='auto' or $potconfig['background'] === 'image'){
+				$couleur_bg = _image_extraire_couleur_moyenne_restante($img_bg, 64);
+				//var_dump($couleur_bg);
+				//$couleur_bg = couleur_eclaircir($couleur_bg);
+				//var_dump($couleur_bg);
+			}
+		} else {
+			$couleur_bg = $potconfig['background'];
 		}
-		else {
-			$couleur_bg = $potconfig['bgcolor'];
-		}
-		if ($couleur_bg !== 'transparent') {
+		if ($couleur_bg and $couleur_bg !== 'transparent') {
 			$couleur_bg = '#' . ltrim(couleur_html_to_hex($couleur_bg), '#');
 			//$balise_svg .= "<rect width=\"100%\" height=\"100%\" fill=\"$couleur_bg\"/>";
-			$balise_svg .= "<path d=\"M-1,-1V{$h}H{$w}V-1z\" fill=\"$couleur_bg\"/>";
+			$svg_bg .= "<path d=\"M-1,-1V{$h}H{$w}V-1z\" fill=\"$couleur_bg\"/>";
+		}
+		if ($potconfig['background'] === 'image') {
+			$src_bg = extraire_attribut($img_bg, 'src');
+			$encoded = filtre_embarque_fichier($src_bg, '', 100000);
+			$svg_bg .= '<image opacity="0.9" xlink:href="'.$encoded.'" x="0" y="0" height="'.$h.'" width="'.$w.'" />';
+			$balise_svg = substr($balise_svg, 0, -1)
+				. ' xmlns:xlink="http://www.w3.org/1999/xlink">'
+			  . $svg_bg;
+		}
+		else {
+			$balise_svg .= $svg_bg;
 		}
 
 		$svg_image = $balise_svg . implode('', $svg_layers) . "</svg>";
