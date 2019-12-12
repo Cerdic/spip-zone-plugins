@@ -28,6 +28,9 @@ use Potracio\Potracio;
  * @return string
  */
 function image_potrace($img, $options=[]) {
+	static $potrace_version = '1.0';
+
+	static $deja = [];
 
 	include_spip("inc/filtres_images_lib_mini");
 	include_spip('lib/potracio/Potracio');
@@ -53,7 +56,7 @@ function image_potrace($img, $options=[]) {
 	];
 	$potconfig = array_merge($potconfig, $options);
 
-	$cache = _image_valeurs_trans($img, "image_potracev3-$width_thumb-".json_encode($potconfig), "svg");
+	$cache = _image_valeurs_trans($img, "image_potracev{$potrace_version}-$width_thumb-".json_encode($potconfig), "svg");
 	if (!$cache) {
 		return false;
 	}
@@ -65,6 +68,11 @@ function image_potrace($img, $options=[]) {
 	if ($cache["creer"]) {
 		$fichier = $cache["fichier"];
 		$dest = $cache["fichier_dest"];
+		// seulement un calcul par image par hit pour ne pas surcharger si la meme image apparait plusieurs fois dans la page
+		// et est trop lourde pour etre calculee en 1 fois
+		if (isset($deja[$dest])) {
+			return $deja[$dest];
+		}
 
 		// temps maxi en secondes par iteration
 		// si on a pas fini on renvoie une image incomplete et on finira au calcul suivant
@@ -81,22 +89,6 @@ function image_potrace($img, $options=[]) {
 
 		$thumb = image_reduire($img,$width_thumb);
 		$width_thumb = largeur($thumb);
-
-		$nb_colors = 16;
-		if(is_array($potconfig['colors'])) {
-			$nb_colors = count($potconfig['colors']);
-			$couleurs = $potconfig['colors'];
-		}
-		else {
-			if (is_numeric($potconfig['colors'])) {
-				$nb_colors = max(1,intval($potconfig['colors']));
-			}
-			$palette = extraire_palette_couleurs($img, max($nb_colors + 1, 5), 32);
-			$couleurs = [];
-			while (count($couleurs) < $nb_colors and count($palette)) {
-				$couleurs[] = array_shift($palette);
-			}
-		}
 
 		$rounding = $potconfig['rounding'];
 		unset($potconfig['rounding']);
@@ -115,23 +107,57 @@ function image_potrace($img, $options=[]) {
 		}
 
 		spip_timer('potrace');
-		$img_bg = false;
-		if ($potconfig['background'] === 'auto' or $potconfig['background'] === 'image'){
-			$img_bg = image_reduire($thumb, 128);
+
+		// si on avait pas fini au calcul suivant on a stocke un runner ici pour continuer le calcul
+		if (file_exists("$dest.runner")){
+			lire_fichier("$dest.runner", $r);
+			if ($r = unserialize($r)
+				and $version = array_shift($r)
+				and $version === $potrace_version){
+				list($nb_colors, $couleurs, $svg_layers, $img_bg, $balise_svg_potrace) = $r;
+			}
+			unset($r);
 		}
-		$svg_layers = [];
+
+		if (!isset($couleurs) or !isset($img_bg)) {
+			$nb_colors = 16;
+			if(is_array($potconfig['colors'])) {
+				$nb_colors = count($potconfig['colors']);
+				$couleurs = $potconfig['colors'];
+			}
+			else {
+				if (is_numeric($potconfig['colors'])) {
+					$nb_colors = max(1,intval($potconfig['colors']));
+				}
+				$palette = extraire_palette_couleurs($img, max($nb_colors + 1, 5), 32);
+				$couleurs = [];
+				while (count($couleurs) < $nb_colors and count($palette)) {
+					$couleurs[] = array_shift($palette);
+				}
+			}
+
+			$img_bg = false;
+			if ($potconfig['background'] === 'auto' or $potconfig['background'] === 'image'){
+				$img_bg = image_reduire($thumb, 128);
+			}
+			$svg_layers = [];
+		}
+
 		$offset_rayon = 50;
 		if ($potconfig['stroke_width'] === 'auto') {
 			$stroke_width = round(8 / $nb_colors, 2) . '%'; //round(0.05 * $cache['largeur']);
 		}
 		else {
-			$stroke_width = strltolower($potconfig['stroke_width']);
+			$stroke_width = strtolower($potconfig['stroke_width']);
 			if (!$stroke_width) {
 				$stroke_width = 'none';
 			}
 		}
+
 		//$couleurs = array_reverse($couleurs);
-		foreach ($couleurs as $couleur) {
+		$abort = false;
+		while (count($couleurs)) {
+			$couleur = array_shift($couleurs);
 			$couleur = '#' . ltrim(couleur_html_to_hex($couleur), '#');
 			//var_dump("<div style='display: inline-block;width: 30px;height: 15px;background-color:$couleur'></div>");
 
@@ -152,7 +178,7 @@ function image_potrace($img, $options=[]) {
 			$svg_image = $pot->getSVG($coeffSize);
 
 			$svg_image = explode('>', $svg_image, 2);
-			$balise_svg = $svg_image[0] . '>';
+			$balise_svg_potrace = $svg_image[0] . '>';
 
 			$layer = $svg_image[1];
 			$layer =  str_replace("</svg>", "", $layer);
@@ -168,13 +194,15 @@ function image_potrace($img, $options=[]) {
 			$svg_layers[] = $layer;
 
 			if (time()>$start_time+$time_budget or time()>$time_out){
+				$abort = true;
 				break;
 			}
 		}
+
 		$svg_layers = array_reverse($svg_layers);
 
-		$w = extraire_attribut($balise_svg, "width");
-		$h = extraire_attribut($balise_svg, "height");
+		$w = extraire_attribut($balise_svg_potrace, "width");
+		$h = extraire_attribut($balise_svg_potrace, "height");
 
 		$time_compute = spip_timer('potrace');
 
@@ -182,23 +210,25 @@ function image_potrace($img, $options=[]) {
 
 		$couleur_bg = false;
 		$svg_bg = '';
-		if ($img_bg){
-			//var_dump($img_bg);
-			if ($potconfig['background']==='auto' or $potconfig['background'] === 'image'){
-				$couleur_bg = _image_extraire_couleur_moyenne_restante($img_bg, 64);
-				//var_dump($couleur_bg);
-				//$couleur_bg = couleur_eclaircir($couleur_bg);
-				//var_dump($couleur_bg);
+		if (!$abort) {
+			if ($img_bg){
+				//var_dump($img_bg);
+				if ($potconfig['background']==='auto' or $potconfig['background'] === 'image'){
+					$couleur_bg = _image_extraire_couleur_moyenne_restante($img_bg, 64);
+					//var_dump($couleur_bg);
+					//$couleur_bg = couleur_eclaircir($couleur_bg);
+					//var_dump($couleur_bg);
+				}
+			} else {
+				$couleur_bg = $potconfig['background'];
 			}
-		} else {
-			$couleur_bg = $potconfig['background'];
+			if ($couleur_bg and $couleur_bg !== 'transparent') {
+				$couleur_bg = '#' . ltrim(couleur_html_to_hex($couleur_bg), '#');
+				//$balise_svg .= "<rect width=\"100%\" height=\"100%\" fill=\"$couleur_bg\"/>";
+				$svg_bg .= "<path d=\"M-1,-1V{$h}H{$w}V-1z\" fill=\"$couleur_bg\"/>";
+			}
 		}
-		if ($couleur_bg and $couleur_bg !== 'transparent') {
-			$couleur_bg = '#' . ltrim(couleur_html_to_hex($couleur_bg), '#');
-			//$balise_svg .= "<rect width=\"100%\" height=\"100%\" fill=\"$couleur_bg\"/>";
-			$svg_bg .= "<path d=\"M-1,-1V{$h}H{$w}V-1z\" fill=\"$couleur_bg\"/>";
-		}
-		if ($potconfig['background'] === 'image') {
+		if ($img_bg and $potconfig['background'] === 'image') {
 			$src_bg = extraire_attribut($img_bg, 'src');
 			$encoded = filtre_embarque_fichier($src_bg, '', 100000);
 			$svg_bg .= '<image opacity="0.9" xlink:href="'.$encoded.'" x="0" y="0" height="'.$h.'" width="'.$w.'" />';
@@ -213,25 +243,44 @@ function image_potrace($img, $options=[]) {
 		$svg_image = $balise_svg . implode('', $svg_layers) . "</svg>";
 
 		ecrire_fichier($dest, $svg_image);
-		spip_log("FINISHED: $fichier t=$time_compute length:" . strlen($svg_image), 'image_potrace');
+		if ($abort){
+			@touch($dest, 1); // on antidate l'image pour revenir ici au prochain affichage
+			ecrire_fichier("$dest.runner", serialize([$potrace_version, $nb_colors, $couleurs, $svg_layers, $img_bg, $balise_svg_potrace]));
+			$done = $nb_colors - count($couleurs);
+			spip_log("PROGRESS: $fichier t=$time_compute couleurs:$done/$nb_colors length:" . strlen($svg_image), 'image_potrace');
+		} else {
+			@unlink("$dest.runner");
+			spip_log("FINISHED: $fichier t=$time_compute couleurs:$nb_colors length:" . strlen($svg_image), 'image_potrace');
+		}
+
 	}
 
 	if (!@file_exists($cache["fichier_dest"])) {
 		return false;
 	}
 
-	return _image_ecrire_tag($cache, array('src' => $cache["fichier_dest"]));
+	return $deja[$cache["fichier_dest"]] = image_graver(_image_ecrire_tag($cache, array('src' => $cache["fichier_dest"])));
 }
 
 if (!function_exists('_svg_round_point')) {
+	/**
+	 * Arrondir les coordonnes d'un point
+	 * @param $m
+	 * @return float
+	 */
 	function _svg_round_point($m) {
-		return round($m[0]);
+		return intval(round($m[0]));
 	}
 }
 
 
-// A partir d'une image,
-// calcule la couleur moyenne sur une version reduite de l'image
+/**
+ * A partir d'une image,
+ * calcule la couleur moyenne sur les pixels non transparents d'une image
+ * @param $img
+ * @param int $seuil_opacite
+ * @return string
+ */
 function _image_extraire_couleur_moyenne_restante($img, $seuil_opacite = 64){
 	// valeur par defaut si l'image ne peut etre lue
 	$defaut = "F26C4E";
@@ -239,14 +288,13 @@ function _image_extraire_couleur_moyenne_restante($img, $seuil_opacite = 64){
 	include_spip('inc/filtres_images_lib_mini');
 	$cache = _image_valeurs_trans($img, "_image_extraire_couleur_moyenne_restante-$seuil_opacite", "txt");
 	if (!$cache){
-		return [$defaut];
+		return $defaut;
 	}
-
 
 	$fichier = $cache["fichier"];
 	$dest = $cache["fichier_dest"];
 
-	if (true or $cache["creer"]){
+	if ($cache["creer"]){
 
 		if (@file_exists($fichier)){
 			$im = $cache["fonction_imagecreatefrom"]($fichier);
