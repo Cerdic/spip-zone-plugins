@@ -429,10 +429,11 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 
 
 function image_responsive($texte, $taille = -1, $lazy = 0, $vertical = 0, $medias = '', $proportions = '') {
-	if (!preg_match("/^<img /i", $texte)) {
+	if (!preg_match("/^<img/i", $texte)) {
 		if (strlen($texte) < 256 && file_exists($texte)) $texte = "<img src='$texte'>";
 		else return $texte;
 	}
+
 	if (defined('PHP_VERSION_ID') and PHP_VERSION_ID > 50300) {
 		
 		/* ATTENTION, cette version plante les scripts en PHP 5.2.6. Page blanche. 
@@ -444,7 +445,7 @@ function image_responsive($texte, $taille = -1, $lazy = 0, $vertical = 0, $media
 			$texte
 		);*/
 		return preg_replace_callback(
-			",(<img\ [^>]*>),",
+			",(<img[^>]*>),",
 			create_function('$matches',
 				'return _image_responsive($matches[0],"' . $taille . '",' . $lazy . ',' . $vertical . ',"' . $medias . '","' . $proportions . '");'
 			),
@@ -453,7 +454,7 @@ function image_responsive($texte, $taille = -1, $lazy = 0, $vertical = 0, $media
 
 	} else {
 		return preg_replace_callback(
-			",(<img\ [^>]*>),",
+			",(<img[^>]*>),",
 			create_function('$matches',
 				'return _image_responsive($matches[0],"' . $taille . '",' . $lazy . ',' . $vertical . ',"' . $medias . '","' . $proportions . '");'
 			),
@@ -485,7 +486,7 @@ function image_responsive_svg($img, $taille = -1, $lazy = 0, $vertical = 0) {
 
 	$htactif = (bool)image_responsive_htaccess_actif();
 
-	if (preg_match("/^<img /i", $img)) {
+	if (preg_match("/^<img/i", $img)) {
 		$img = extraire_attribut($img, "src");
 	}
 	$img = preg_replace(",\?[0-9]*$,", "", $img);
@@ -585,7 +586,7 @@ function image_responsive_svg($img, $taille = -1, $lazy = 0, $vertical = 0) {
 
 function background_responsive($src, $taille = 120, $lazy = 0, $align = "") {
 
-	if (preg_match("/^<img /i", $src)) {
+	if (preg_match("/^<img/i", $src)) {
 		$src = extraire_attribut($src, "src");
 	}
 
