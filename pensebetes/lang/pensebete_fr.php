@@ -25,6 +25,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	
 	// L
+	'label_de' => "De",
+	'label_a' => "à",
 	'label_donneur' => "De",
 	'label_receveur' => "Pour",
 	'label_titre' => "Titre",
@@ -45,7 +47,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_pensebetes_rubrique' => "Pense-bêtes de la rubrique",
 	'titre_langue_pensebete' => "Langue de ce pense-bête",
 	'titre_logo_pensebete' => "Logo du pense-bête",
-
+	'titre_murs' => "Les Pense-bêtes sur...",
+	'titre_mur_mien' => "Mon mur",
+	'titre_murs_autres' => "Les murs des autres",
 );
 
 ?>
