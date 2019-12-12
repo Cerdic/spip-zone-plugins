@@ -14,13 +14,15 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function pensebetes_affiche_gauche($flux){
+
     if ($flux['args']['exec'] == 'auteur'){
 	include_spip('inc/presentation');
-        $flux['data'] .= debut_cadre_relief('pensebete-24.png',true,'',_T('pensebete:titre_pensebetes')); 
+      $flux['data'] .= debut_cadre_relief('pensebete-24.png',true,'',_T('pensebete:titre_pensebetes')); 
         $flux['data'] .= recuperer_fond('prive/squelettes/inclure/pensebetes_donnes',array('id_auteur'=>$flux['args']['id_auteur']));
         $flux['data'] .= recuperer_fond('prive/squelettes/inclure/pensebetes_recus',array('id_auteur'=>$flux['args']['id_auteur']));
         $flux['data'] .= fin_cadre_relief(true);
     }
+
     return $flux;
 }
 
@@ -63,7 +65,6 @@ function pensebetes_affiche_milieu($flux) {
 	if ($flux['args']['exec']=='accueil'){
 		$ajout= recuperer_fond('prive/squelettes/inclure/pensebete_accueil',
 				array(
-					'titre' => _T('responsable:titre_fourmis'),
 					'id_receveur' => $GLOBALS['visiteur_session']['id_auteur']
 					#'editable'=>autoriser('associerpensebetes',$e['type'],$e['id_objet'])?'oui':'non'
 					)
