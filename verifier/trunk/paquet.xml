@@ -1,7 +1,7 @@
 <paquet
 	prefix="verifier"
 	categorie="outil"
-	version="1.9.5"
+	version="1.9.6"
 	etat="stable"
 	compatibilite="[2.0.10;3.2.*]"
 	logo="images/verifier-128.png"
