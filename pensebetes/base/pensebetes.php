@@ -1,6 +1,22 @@
 <?php
+/**
+ * Déclaration de l'objet editorial pensebete
+ *
+ * @plugin Pensebetes
+ * @copyright  2019
+ * @author     Vincent CALLIES
+ * @licence    GNU/GPL
+ * @package SPIP\Pensebetes\Base
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/**
+ * Declaration de l'objet éditorial pensebetes
+ *
+ * @param array $tables
+ * @return array
+ */
 
 function pensebetes_declarer_tables_objets_sql($tables){
 	$tables['spip_pensebetes'] = array(
@@ -38,6 +54,12 @@ function pensebetes_declarer_tables_objets_sql($tables){
 	return $tables;
 }
 
+/**
+ * Declaration de la table de liaison de l'objet éditorial pensebetes
+ *
+ * @param array $tables
+ * @return array
+ */
 
 
 function pensebetes_declarer_tables_auxiliaires($tables) {
@@ -55,6 +77,13 @@ function pensebetes_declarer_tables_auxiliaires($tables) {
 	);
 	return $tables;
 }
+
+/**
+ * Interfaces de la table pensebetes
+ *
+ * @param array $interfaces
+ * @return array
+ */
 
 function pensebetes_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['pensebetes'] = 'pensebetes';
