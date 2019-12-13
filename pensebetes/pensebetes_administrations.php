@@ -1,4 +1,16 @@
 <?php
+/**
+ * Définit l'administration du plugin Pensebetes
+ *
+ * Installation et désinstallation du plugin
+ *
+ * @plugin     Pensebetes
+ * @copyright  2019
+ * @author     Vincent CALLIES
+ * @licence    GNU/GPL
+ * @package    SPIP\Pensebetes\Administrations
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
