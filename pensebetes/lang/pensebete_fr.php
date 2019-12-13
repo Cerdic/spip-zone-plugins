@@ -1,4 +1,14 @@
 <?php
+/**
+ * Définit les variables de langue du plugin Pensebetes
+ *
+ * @plugin     Pensebetes
+ * @copyright  2019
+ * @author     Vincent CALLIES
+ * @licence    GNU/GPL
+ * @package    SPIP\Pensebetes\Lang
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -8,6 +18,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'explication_titre'=> "Votre titre doit être bref (17 caractères).",
 	'explication_texte'=> "Votre texte doit allé droit au but (110 caractères).",
+	'erreur_suppression'=> "Vous n'avez pas l'autorisation de supprimer ce pense-bête",
+	'erreur_titre'=> "Erreur",
 
 	// I
 	'icone_creer_pensebete' => "Créer un pense-bête",
