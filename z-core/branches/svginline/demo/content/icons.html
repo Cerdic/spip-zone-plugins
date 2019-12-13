@@ -1,0 +1,68 @@
+<style>
+#INCLURE{css/icons.css}
+</style>
+
+	<h1>Icons</h1>
+
+	<p>
+		<a href="https://danklammer.com/bytesize-icons/">https://danklammer.com/bytesize-icons/</a>
+		<br />
+		<code>\#ICON{name,class,alt}</code>
+		<br />
+		<code>\#ICON{search,icon-lg,Rechercher}</code>
+	</p>
+	#SET{icons,#REM|lister_icones_svg}
+
+	<h2>Default</h2>
+	<p>
+		<BOUCLE_i1(POUR){tableau #GET{icons}}>
+		#ICON{#VALEUR,'',#VALEUR}
+		</BOUCLE_i1>
+	</p>
+
+	<h2>Large <code>.icon-lg</code></h2>
+	<p>
+		<BOUCLE_i2(POUR){tableau #GET{icons}}>
+		#ICON{#VALEUR,icon-lg,#VALEUR}
+		</BOUCLE_i2>
+	</p>
+
+	<h2>Small <code>.icon-sm</code></h2>
+	<p>
+		<BOUCLE_i3(POUR){tableau #GET{icons}}>
+		#ICON{#VALEUR,icon-sm,#VALEUR}
+		</BOUCLE_i3>
+	</p>
+
+	<h2>Styles</h2>
+	<h3>Rounded (default)</h3>
+	<p style="font-size: 4em;">
+		<BOUCLE_i4(POUR){tableau #GET{icons}}{0,6}>
+		#ICON{#VALEUR,icon-lg,#VALEUR}
+		</BOUCLE_i4>
+	</p>
+
+	<h3>Bevel <code>.icon-bevel</code></h3>
+	<p style="font-size: 4em;">
+		<BOUCLE_i5(POUR){tableau #GET{icons}}{0,6}>
+		#ICON{#VALEUR,icon-lg icon-bevel,#VALEUR}
+		</BOUCLE_i5>
+	</p>
+
+	<h3>Miter <code>.icon-miter</code></h3>
+	<p style="font-size: 4em;">
+		<BOUCLE_i6(POUR){tableau #GET{icons}}{0,6}>
+		#ICON{#VALEUR,icon-lg icon-miter,#VALEUR}
+		</BOUCLE_i6>
+	</p>
+
+	<h2>Thickness</h2>
+
+	<BOUCLE_g(POUR){tableau #LISTE{ulight,thin,light,regular,medium,bold,heavy}}>
+<h3><code>[.icon-(#_g:VALEUR)]</code></h3>
+	<p>
+		<BOUCLE_i7(POUR){tableau #GET{icons}}{0,12}>
+			[(#ICON{#_i7:VALEUR,[icon-lg icon-(#_g:VALEUR)],#_i7:#VALEUR})]
+		</BOUCLE_i7>
+	</p>
+	</BOUCLE_g>

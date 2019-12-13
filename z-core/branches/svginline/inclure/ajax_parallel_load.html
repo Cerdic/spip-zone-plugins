@@ -1,0 +1,16 @@
+[(#REM)
+
+  Squelette Big_Pipe
+	http://www.yterium.net/Zpip-blocs-de-page-et-Ajax
+
+  (c) 2010 Cedric Morin
+  Distribue sous licence GPL
+
+]
+#SET{bloc,#ENV{bloc}|dirname|basename}
+<div id="zapl-#GET{bloc}" class="zapl-loading"><:zcore:zapl_loading:></div>
+<script type="text/javascript">getZapl('#GET{bloc}');</script>
+<noscript>
+	<meta http-equiv="refresh" content="2;url=<?php echo ($url=parametre_url(self(),'var_zapl','non'));?>" />
+	<a href="<?php echo $url ?>"><:zcore:zapl_reload_off:></a>
+</noscript>
