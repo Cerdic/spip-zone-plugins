@@ -2,7 +2,6 @@
 
 .progress-bar {
 	background-color: #f1f1f1;
-	height: 20px;
 	padding: 1px;
 	margin: 2px 0;
 	-moz-border-radius: 5px;
@@ -20,22 +19,25 @@
 	-webkit-moz-text-shadow: 0 1px 1px #fff;
 	-moz-text-shadow: 0 1px 1px #fff;
 	text-shadow: 0 1px 1px #fff;
-	position:absolute;
-	top:2px;
-	left:0;
+	position:relative;
 }
 .progress-bar strong small {font-size:90%; font-weight:normal;}
 
 .progress-bar span {
-	background-color: #bbb;
-	  background-image: -webkit-gradient(linear, left top, left bottom, from(#bbb), to(#777));
-	  background-image: -webkit-linear-gradient(top, #bbb, #777);
-	  background-image: -moz-linear-gradient(top, #bbb, #777);
-	  background-image: -ms-linear-gradient(top, #bbb, #777);
-	  background-image: -o-linear-gradient(top, #bbb, #777);
-	  background-image: linear-gradient(top, #bbb, #777);
-	display: inline-block;
-	height: 100%;
+	background-color: #ddd;
+	  background-image: -webkit-gradient(linear, left top, left bottom, from(#ddd), to(#999));
+	  background-image: -webkit-linear-gradient(top, #ddd, #999);
+	  background-image: -moz-linear-gradient(top, #ddd, #999);
+	  background-image: -ms-linear-gradient(top, #ddd, #999);
+	  background-image: -o-linear-gradient(top, #ddd, #999);
+	  background-image: linear-gradient(top, #ddd, #999);
+	display: block;
+	position: absolute;
+	top: 2px;
+	bottom: 2px;
+	left: 2px;
+	height: calc(100% - 4px);
+	max-width: calc(100% - 4px);
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
@@ -50,13 +52,13 @@
 }
 
 .progress-bar.gray span {
-	background-color: #bbb;
-	  background-image: -webkit-gradient(linear, left top, left bottom, from(#bbb), to(#777));
-	  background-image: -webkit-linear-gradient(top, #bbb, #777);
-	  background-image: -moz-linear-gradient(top, #bbb, #777);
-	  background-image: -ms-linear-gradient(top, #bbb, #777);
-	  background-image: -o-linear-gradient(top, #bbb, #777);
-	  background-image: linear-gradient(top, #bbb, #777);
+	background-color: #ddd;
+	  background-image: -webkit-gradient(linear, left top, left bottom, from(#ddd), to(#999));
+	  background-image: -webkit-linear-gradient(top, #ddd, #999);
+	  background-image: -moz-linear-gradient(top, #ddd, #999);
+	  background-image: -ms-linear-gradient(top, #ddd, #999);
+	  background-image: -o-linear-gradient(top, #ddd, #999);
+	  background-image: linear-gradient(top, #ddd, #999);
 }
 
 .progress-bar.blue span {
