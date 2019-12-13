@@ -29,13 +29,14 @@
 		<BOUCLE_liste(COMMANDES_DETAILS)
 			{id_commande}{par id_commandes_detail}
 		>
+		#SET{taxe,#TAXE_EXONEREE_RAISON|?{0,#TAXE*}}
 		<tr>
 			<td class="descriptif">[(#DESCRIPTIF*|typo|supprimer_numero)]</td>
 			<td class="quantite[ (#QUANTITE*|>{0}|non)null]">[(#QUANTITE)]</td>
 			<td class="prix_unitaire">[(#GET{afficher_prix_detail}|oui) [(#PRIX_UNITAIRE_HT*|round{2}|prix_formater)] ]</td>
 			[(#GET{afficher_reduction}|oui)
 			<td class="reduction">[(#REDUCTION|commandes_afficher_reduction_si)]</td>]
-			<td class="taxe[ (#TAXE*|floatval|>{0.0}|non)null]">[(#GET{afficher_prix_detail}|oui) [(#TAXE*|mult{100}|number_format{1})%] ]</td>
+			<td class="taxe[ (#GET{taxe}|floatval|>{0.0}|non)null]">[(#GET{afficher_prix_detail}|oui) [(#GET{taxe}|mult{100}|number_format{1})%] ]</td>
 			<td class="montant">[(#GET{afficher_prix_detail}|oui) #PRIX_HT]</td>
 			[(#PRIX_HT|commande_totalise_taxes{#PRIX})]
 		</tr>
