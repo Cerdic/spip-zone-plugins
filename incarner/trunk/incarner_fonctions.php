@@ -77,7 +77,7 @@ function incarner_renouveler_cle() {
 	spip_setcookie(
 		'spip_cle_incarner',
 		$nouvelle_cle,
-		defined('INCARNER_COOKIE_PERSISTANT') ? time()+intval(INCARNER_COOKIE_PERSISTANT) : 0
+		defined('_INCARNER_COOKIE_PERSISTANT') ? time()+intval(_INCARNER_COOKIE_PERSISTANT) : 0
 	);
 }
 
