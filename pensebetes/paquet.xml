@@ -19,7 +19,6 @@
 
 	<necessite nom="saisies" compatibilite="[2.28.0;]" />
 	<necessite nom="verifier" compatibilite="[1.8.1;]" />
-	<necessite nom="spip" compatibilite="[3.0.0;]"	/>
 
 	<pipeline nom="autoriser" inclure="pensebetes_autorisations.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/pensebetes.php" />
