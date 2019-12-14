@@ -45,13 +45,13 @@ function compile_appel_macro_autoriser ($p) {
 		switch($id) {
 			case "'env'" :
 				$ret = "autoriser('.\"$autorisation\".', '.\"$type\".', '.\"macrosession_pipe({\$Pile[0][$id_type_q]})\".')";
-				if (debug_get_mode('_session'))
+				if (debug_get_mode('macrosession'))
 					echo "Avec 'env' : compile appel autoriser donne <pre>$ret</pre><br>";
 				return $ret;
 
 			case "'boucle'" :
 				$ret = "autoriser('.\"$autorisation\".', '.\"$type\".', '.\"macrosession_pipe({\$Pile[\$SP][$id_type_q]})\".')";
-				if (debug_get_mode('_session'))
+				if (debug_get_mode('macrosession'))
 					echo "Avec 'boucle' : compile appel autoriser donne <pre>$ret</pre><br>";
 				return $ret;
 

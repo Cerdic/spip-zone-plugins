@@ -51,7 +51,7 @@ function reinjecte_expression_compilee($expr_org) {
 		$expr
 	);
 
-	if (($expr!=$expr_org) and isset($_GET['debug']))
+	if (($expr!=$expr_org) and debug_get_mode('macrosession'))
 		echo "Passe par : <pre style='display:inline'>$expr</pre> ";
 
 	// Variables scalaires $truc et tableaux multiniveaux $Pile[0][$SP]['index']

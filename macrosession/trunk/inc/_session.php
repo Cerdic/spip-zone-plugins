@@ -75,7 +75,7 @@ function compile_appel_macro_session ($p) {
 
 	if (existe_argument_balise(3, $p)) {
 		$arg_un = trim_quote(interprete_argument_balise(3, $p));
-		if (debug_get_mode('_session')) {
+		if (debug_get_mode('macrosession')) {
 			echo "_SESSION_SI\{$champ $filtre $arg_un}<br>";
 		}
 
@@ -110,7 +110,7 @@ function compile_appel_macro_session ($p) {
 // ou '<'.'?php  echo appliquer_filtre( pipelined_session_get('."'nbreste'".'), '."'plus'" .', "'3'" .');  ?'.'>'
 	$r = "appliquer_filtre($get_champ, '.\"$filtre\" $virgule_arg_un $virgule_arg_deux .')";
 
-	if (debug_get_mode('_session'))
+	if (debug_get_mode('macrosession'))
 		echo "<b>compile_appel_macro_session renvoie :</b><pre>$r</pre>";
 	return $r;
 }
