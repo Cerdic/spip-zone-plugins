@@ -74,7 +74,11 @@ function incarner_renouveler_cle() {
 	ecrire_config('incarner/cles', $cles);
 	ecrire_config('incarner/maj', $maj);
 
-	spip_setcookie('spip_cle_incarner', $nouvelle_cle);
+	spip_setcookie(
+		'spip_cle_incarner',
+		$nouvelle_cle,
+		defined('INCARNER_COOKIE_PERSISTANT') ? time()+intval(INCARNER_COOKIE_PERSISTANT) : 0
+	);
 }
 
 /**
