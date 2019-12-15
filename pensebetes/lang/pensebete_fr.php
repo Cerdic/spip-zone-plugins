@@ -13,7 +13,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// A
+	// C
+	'cfg_boites'=>"Boites d'activité sur le côté de :",
+	'cfg_lieux'=>"Pense-bêtes dans (lieux) :",
+	'cfg_objets'=>"Pense-bêtes sur (objets) :",
 	
 	// E
 	'explication_titre'=> "Votre titre doit être bref (17 caractères).",
@@ -37,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	
 	// L
+	'label_date' => "Date",
 	'label_de' => "De",
 	'label_a' => "à",
 	'label_donneur' => "De",
@@ -56,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_creer_associer_pensebete'=> "Créer un pense-bête et l'associer",
 	'titre_pensebete' => "Pense-bête",
 	'titre_pensebetes' => "Pense-bêtes",
+	'titre_activite_mur' => "Activité du mur",
 	'titre_pensebetes_rubrique' => "Pense-bêtes de la rubrique",
 	'titre_langue_pensebete' => "Langue de ce pense-bête",
 	'titre_logo_pensebete' => "Logo du pense-bête",
