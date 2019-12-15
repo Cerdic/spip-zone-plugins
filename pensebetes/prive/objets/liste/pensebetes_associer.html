@@ -3,8 +3,8 @@
 	multi titre,1,
 }})]
 [(#SET{_MAX_PENSEBETES_LISTE,[(#VAL{_MAX_PENSEBETES_LISTE}|defined|?{[(#VAL{_MAX_PENSEBETES_LISTE}|constant)],50})]})]
-<BOUCLE_exclus(PENSEBETES){tout}{id_objet}{objet}{doublons 1}{doublons 2} />
-<BOUCLE_nb_pensebetes(PENSEBETES){tout}{doublons 1} />#SET{total,#TOTAL_BOUCLE}<//B_nb_pensebetes>
+<BOUCLE_exclus(PENSEBETES){id_donneur=#SESSION{id_auteur}}{id_objet}{objet}{doublons 1}{doublons 2} />
+<BOUCLE_nb_pensebetes(PENSEBETES){id_donneur=#SESSION{id_auteur}}{doublons 1} />#SET{total,#TOTAL_BOUCLE}<//B_nb_pensebetes>
 
 <BOUCLE_nombreux(CONDITION){si #GET{total}|>{#GET{_MAX_PENSEBETES_LISTE}}}>
 
@@ -12,7 +12,8 @@
 
 </BOUCLE_nombreux>
 
-[(#REM) Pas beaucoup de pensebete ]
+[(#REM) Pas beaucoup de pensebetes ]
+
 <B_pensebetes>
 #ANCRE_PAGINATION
 <div class="liste-objets liste-objets-associer pensebetes">
@@ -26,11 +27,11 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_pensebetes(PENSEBETES){doublons 2}{tri #ENV{par,titre},#GET{defaut_tri}}{par num titre, titre}{pagination 10}>
+	<BOUCLE_pensebetes(PENSEBETES){id_donneur=#SESSION{id_auteur}}{doublons 2}{tri #ENV{par,titre},#GET{defaut_tri}}{par num titre, titre}{pagination 10}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='picto'>[(#CHEMIN_IMAGE{pensebete-16.png}|balise_img)]</td>
 			<td class='titre principale'>[(#LOGO_PENSEBETE|image_reduire{20,20})]<a href="[(#ID_PENSEBETE|generer_url_entite{pensebete})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PENSEBETE">[(#RANG). ]#TITRE</a></td>
-			<td class='action'><button class="button link" name="ajouter_lien[pensebete-#ID_PENSEBETE-#OBJET-#ID_OBJET]" value="+"><:pensebete:lien_ajouter_pensebete:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button></td>
+			<td class='action'><button type="submit" class="button link" name="ajouter_lien[pensebete-#ID_PENSEBETE-#OBJET-#ID_OBJET]" value="+"><:lien_ajouter_pensebete:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button></td>				
 		</tr>
 	</BOUCLE_pensebetes>
 	</tbody>
