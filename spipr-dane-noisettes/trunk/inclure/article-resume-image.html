@@ -1,43 +1,19 @@
 [(#REM) Retourne la première image de l'article 
 	On prend une image parmi celles inclues dans le texte, sinon dans le portfolio
 ]<BOUCLE_test(CONDITION){si #ENV{utiliser_image_article}|non}>
-<BOUCLE_image_inclue(DOCUMENTS){id_article}{vu=oui}{extension IN png,jpg,gif}{0,1}>
-[(#ENV{image_passe_partout}|?{
+<BOUCLE_image_inclue(DOCUMENTS){id_article}{vu=oui}{par rang_lien}{extension IN png,jpg,gif}{0,1}>
 [(#FICHIER
-	|image_passe_partout{#ENV{largeur_image,150},#ENV{hauteur_image,150}}
-	|image_recadre{#ENV{largeur_image,150},#ENV{hauteur_image,150},#ENV{align, center center},#ENV{couleur,transparent}}
-    |inserer_attribut{class,spip_logo spip_logos}
-	|responsive_logo)]
-    ,
-[(#FICHIER
+	|image_recadre{#ENV{largeur_image,150}:#ENV{hauteur_image,150},#ENV{passe_partout},#ENV{align},#ENV{couleur,transparent}}
 	|image_reduire{#ENV{largeur_image,150},#ENV{hauteur_image,150}}
-	|image_recadre{#ENV{largeur_image,150},#ENV{hauteur_image,150},#ENV{align, center center},#ENV{couleur,transparent}}
-    |inserer_attribut{class,spip_logo spip_logos}
-	|responsive_logo)]    
-})]
+	|inserer_attribut{class,spip_logo spip_logos}
+	|responsive_logo)]
 </BOUCLE_image_inclue>
-<BOUCLE_image_portfolio(DOCUMENTS){id_article}{mode=document}{extension IN png,jpg,gif}{0,1}>
-[(#ENV{image_passe_partout}|?{
+<BOUCLE_image_portfolio(DOCUMENTS){id_article}{mode=document}{par rang_lien}{extension IN png,jpg,gif}{0,1}>
 [(#FICHIER
-	|image_passe_partout{#ENV{largeur_image,150},#ENV{hauteur_image,150}}
-	|image_recadre{#ENV{largeur_image,150},#ENV{hauteur_image,150},#ENV{align, center center},#ENV{couleur,transparent}}
-    |inserer_attribut{class,spip_logo spip_logos}
-	|responsive_logo)]
-    ,
-[(#FICHIER
+	|image_recadre{#ENV{largeur_image,150}:#ENV{hauteur_image,150},#ENV{passe_partout},#ENV{align},#ENV{couleur,transparent}}
 	|image_reduire{#ENV{largeur_image,150},#ENV{hauteur_image,150}}
-	|image_recadre{#ENV{largeur_image,150},#ENV{hauteur_image,150},#ENV{align, center center},#ENV{couleur,transparent}}
-    |inserer_attribut{class,spip_logo spip_logos}
-	|responsive_logo)]    
-})]
+	|inserer_attribut{class,spip_logo spip_logos}
+	|responsive_logo)]
 </BOUCLE_image_portfolio>
 <//B_image_inclue>
 </BOUCLE_test>
-[(#REM)
-[(#FICHIER
-	|image_reduire{#ENV{largeur_image,150},#ENV{hauteur_image,150}}
-	|image_recadre{[(#ENV{largeur_image}|plus{1})],[(#ENV{hauteur_image}|plus{1})],#ENV{align, center center},#ENV{couleur,transparent}}
-	|inserer_attribut{class,spip_logos}
-	|inserer_attribut{alt,[(#TITRE|attribut_html|couper{80})]}
-	|responsive_logo)]
-]
