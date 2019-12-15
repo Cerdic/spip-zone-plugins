@@ -31,8 +31,8 @@ function pensebetes_affiche_gauche($flux){
 			 	$flux['args']['id_auteur']=$GLOBALS['visiteur_session']['id_auteur'];
     		if ($flux['args']['id_auteur']==$GLOBALS['visiteur_session']['id_auteur']) {
 				$titre ="<a href='".generer_url_ecrire('murs')."'>"._T('pensebete:titre_activite_mur')."</a></h3>";
-        		$soustitre1 = "<a href='".generer_url_ecrire('murs','quoi=mien')."'>".$img." </a>";
-        		$soustitre2 = "<a href='".generer_url_ecrire('murs','quoi=autres')."'>".$img." </a>";
+        		$soustitre2 = "<a href='".generer_url_ecrire('murs','quoi=mien')."'>".$img." </a>";
+        		$soustitre1 = "<a href='".generer_url_ecrire('murs','quoi=autres')."'>".$img." </a>";
    			}
     		else {
 	    		$titre = _T('pensebete:titre_activite_mur'); 
