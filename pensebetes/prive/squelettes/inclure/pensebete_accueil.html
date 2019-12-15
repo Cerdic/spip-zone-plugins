@@ -1,10 +1,13 @@
 <B_affiche_pensebetes>
 <div class="monpostit">
 <ul>
-<BOUCLE_affiche_pensebetes(PENSEBETES){id_pensebete?}{id_mot?}{id_donneur?}{id_receveur?}{where?}{recherche?}>
+<BOUCLE_affiche_pensebetes(PENSEBETES){id_objet?}{objet?}{id_pensebete?}{id_mot?}{id_donneur?}{id_receveur?}{where?}{recherche?}>
   <li>
     <div class="pensebete"><h2><a href="#URL_ACTION_AUTEUR{supprimer_pensebete,#ID_PENSEBETE,#SELF}" class="supprime">[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img|inserer_attribut{title,<:supprimer:>})]</a> #TITRE</h2>
       <span class="itineraire"><:pensebete:label_de:>&nbsp;#INFO_NOM{auteur,#ID_DONNEUR}&nbsp;<:pensebete:label_a:>&nbsp;#INFO_NOM{auteur,#ID_RECEVEUR} - [(#DATE|affdate{'d/m/Y'})]</span>
+		<BOUCLE_affiche_liaison(spip_pensebetes_liens){id_pensebete}>
+		<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]" title="<:info_numero_abbreviation|attribut_html:> #ID_OBJET">[(#CHEMIN_IMAGE{#OBJET-24}|balise_img|inserer_attribut{class, 'cadre-icone'})]</a>
+		</BOUCLE_affiche_liaison>
       #TEXTE
 	</div>
   </li>
