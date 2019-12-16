@@ -13,6 +13,7 @@
 </BOUCLE_nombreux>
 
 [(#REM) Pas beaucoup de pensebetes ]
+	#SET{nom_donneur,#INFO_NOM{'auteur',#SESSION{id_auteur}}
 
 <B_pensebetes>
 #ANCRE_PAGINATION
@@ -23,14 +24,21 @@
 		<tr class='first_row'>
 			<th class='picto' scope='col'></th>
 			<th class='titre' scope='col'>[(#TRI{titre,<:pensebete:label_titre:>,ajax})]</th>
+			<th class='donneur' scope='col'>[(#TRI{id_donneur,<:pensebete:label_donneur:>,ajax})]</th>
+			<th class='receveur' scope='col'>[(#TRI{id_receveur,<:pensebete:label_receveur:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
 			<th class='action' scope='col'>&nbsp;</th>
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_pensebetes(PENSEBETES){id_donneur=#SESSION{id_auteur}}{doublons 2}{tri #ENV{par,titre},#GET{defaut_tri}}{par num titre, titre}{pagination 10}>
+	<BOUCLE_pensebetes(PENSEBETES spip_auteurs){id_donneur=#SESSION{id_auteur}}{doublons 2}{tri #ENV{par,titre},#GET{defaut_tri}}{par num titre, titre}{pagination 10}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='picto'>[(#CHEMIN_IMAGE{pensebete-16.png}|balise_img)]</td>
 			<td class='titre principale'>[(#LOGO_PENSEBETE|image_reduire{20,20})]<a href="[(#ID_PENSEBETE|generer_url_entite{pensebete})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PENSEBETE">[(#RANG). ]#TITRE</a></td>
+			<td class='donneur'><a href="[(#URL_ECRIRE{auteur,id_auteur=#ID_DONNEUR})]" title="#GET{nom_donneur}">[(#GET{nom_donneur}|substr{0,5})][(#GET{nom_donneur}|strlen|>{5}|oui)&hellip;] #DONNEUR</a></td>
+			#SET{nom_receveur,#INFO_NOM{'auteur',#ID_RECEVEUR}}
+			<td class='receveur'><a href="[(#URL_ECRIRE{auteur,id_auteur=#ID_RECEVEUR})]" title="#GET{nom_receveur}">[(#GET{nom_receveur}|substr{0,5})][(#GET{nom_receveur}|strlen|>{5}|oui)&hellip;]</td>
+			<td class='date'>[(#DATE|affdate_jourcourt)]</td>
 			<td class='action'><button type="submit" class="button link" name="ajouter_lien[pensebete-#ID_PENSEBETE-#OBJET-#ID_OBJET]" value="+"><:lien_ajouter_pensebete:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button></td>				
 		</tr>
 	</BOUCLE_pensebetes>
