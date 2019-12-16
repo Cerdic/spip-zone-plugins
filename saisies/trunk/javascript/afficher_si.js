@@ -1,4 +1,3 @@
-#CACHE{3600*100,cache-client}
 $(function(){
 	$('form').each(function(){
 		afficher_si = $(this).find('[data-afficher_si]').each(function(){
@@ -15,19 +14,19 @@ $(function(){
 		})
 	})
 })
-[(#REM) EVAL et pas CONST pour compatibilité SPIP <3.2]
 function verifier_afficher_si(form, saisie, chargement) {
 	var condition = saisie.attr('data-afficher_si');
 	condition = eval(condition);
 	if (condition) {
-		saisie.[(#EVAL{_SAISIES_AFFICHER_SI_JS_SHOW})];
+		afficher_si_show(saisie);
 		saisie.removeClass('afficher_si_masque').addClass('afficher_si_visible');
 		saisie.find('[data-afficher-si-required]').attr('required', true).attr('data-afficher-si-required',false);
 	} else {
 		if (chargement) {
-			saisie.[(#EVAL{_SAISIES_AFFICHER_SI_JS_HIDE})].css('display','none');
+			afficher_si_hide(saisie);
+			saisie.css('display','none');
 		} else {
-			saisie.[(#EVAL{_SAISIES_AFFICHER_SI_JS_HIDE})];
+			afficher_si_hide(saisie);
 		}
 		saisie.addClass('afficher_si_masque').removeClass('afficher_si_visible');
 		saisie.find('[required]').attr('required', false).attr('data-afficher-si-required', null);

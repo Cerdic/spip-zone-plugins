@@ -44,4 +44,12 @@
 
 [(#REM) Ajout du script js pour les options si des saisies ]
 [(#ENV{from_fieldset}|non|et{#ENV{saisies}|saisies_afficher_si})
-<script src='#PRODUIRE{fond=javascript/afficher_si.js}'></script>]
+	<script>
+		function afficher_si_show(src) {
+			src.[(#EVAL{_SAISIES_AFFICHER_SI_JS_SHOW})];
+		}
+		function afficher_si_hide(src) {
+			src.[(#EVAL{_SAISIES_AFFICHER_SI_JS_HIDE})];
+		}
+	</script>
+	[<script src='(#CHEMIN{javascript/afficher_si.js}|timestamp)'></script>]]
