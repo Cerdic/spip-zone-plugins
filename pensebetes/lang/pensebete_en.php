@@ -64,9 +64,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_pensebetes_rubrique' => "Sticky notes of the rubric",
 	'titre_langue_pensebete' => "Language of this sticky note",
 	'titre_logo_pensebete' => "Sticky note logo",
-	'titre_murs' => "Sticky notes on...",
-	'titre_mur_mien' => "your wall",
-	'titre_murs_autres' => "The walls of the neighbors",
+	'titre_murs' => "Sticky notes...",
+	'titre_mur_mien' => "on my wall",
+	'titre_murs_autres' => "on the neighbors' walls",
+	'titre_mur_de' => "on @auteur@'s wall",
+	'titre_sur_mur' => "on my wall from @auteur@",
 );
 
 ?>
