@@ -3,7 +3,7 @@
 [<strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{pensebete:info_1_pensebete_recu,pensebete:info_nb_pensebetes_recus}})</strong>]
 	<BOUCLE_liste_pensebete(PENSEBETES){id_receveur=#SESSION{id_auteur}}{id_pensebete?}{id_objet?}{objet}{where?}{tri #ENV{par,titre},#GET{defaut_tri}}{par num titre,titre}{pagination #ENV{nb,10} pensebetel}>
 	</BOUCLE_liste_pensebete>
-<INCLURE{fond=prive/squelettes/inclure/pensebetes_lies_recus_affiches,id_receveur=#SESSION{id_auteur},id_objet=#ID_OBJET,objet=#OBJET,ajax}>
+<INCLURE{fond=prive/squelettes/inclure/pensebete_accueil,id_receveur=#SESSION{id_auteur},id_objet=#ID_OBJET,objet=#OBJET,lien=oui,editable=#ENV{editable},ajax}>
 [(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien\[pensebete-*-#OBJET-#ID_OBJET\]" value="X"><:pensebete:lien_retirer_pensebetes:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
 </div>
 </B_liste_pensebete>
