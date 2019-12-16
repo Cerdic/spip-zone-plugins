@@ -4,9 +4,12 @@
 </BOUCLE_combien_recu>
 <BOUCLE_receveur(PENSEBETES){id_receveur=#ENV{id_auteur}}{"<br />"}{fusion id_donneur}>
 	<BOUCLE_donneurs(AUTEURS){id_auteur=#ID_DONNEUR}>
-	[<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]" title="<:info_numero_abbreviation|attribut_html:> #ID_AUTEUR">(#NOM)</a>
-		[((#INCLURE{fond=prive/squelettes/inclure/pensebetes_total}{id_donneur=#ID_DONNEUR}{id_receveur=#ENV{id_auteur}}))]
-		]
+	[
+	[(#ENV{out}|=={auteur}|?{<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]" title="<:info_numero_abbreviation|attribut_html:> #ID_AUTEUR">,
+	<a href="[(#URL_ECRIRE{sur,id_donneur=#ID_AUTEUR})]" title="<:info_numero_abbreviation|attribut_html:> #ID_AUTEUR">})]
+		(#NOM)</a>
+    [((#INCLURE{fond=prive/squelettes/inclure/pensebetes_total}{id_donneur=#ID_AUTEUR}{id_receveur=#ENV{id_auteur}}))]
+    ]
 	</BOUCLE_donneurs>
 </BOUCLE_receveur>
 </B_combien_recu>
