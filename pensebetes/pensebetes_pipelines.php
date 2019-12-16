@@ -21,13 +21,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return array       Données du pipeline
  */
 function pensebetes_affiche_gauche($flux){
-    if (in_array($flux['args']['exec'],array('auteur','accueil'))) {
+    if (in_array($flux['args']['exec'],array('auteur','accueil','murs','sur','mur'))) {
 		$mes_boites=lire_config('pensebetes/mes_boites');
-		if (in_array($flux['args']['exec'],$mes_boites)) {
+		if (in_array($flux['args']['exec'],$mes_boites) OR in_array($flux['args']['exec'],array('murs','sur','mur'))) {
 			include_spip('inc/presentation');
 			$balise_img = chercher_filtre('balise_img');
 			$img = $balise_img(chemin_image('pensebete-16.png'), "", '');
-			if ($flux['args']['exec']=='accueil')
+			if (in_array($flux['args']['exec'],array('accueil','murs','sur','mur')))
 			 	$flux['args']['id_auteur']=$GLOBALS['visiteur_session']['id_auteur'];
     		if ($flux['args']['id_auteur']==$GLOBALS['visiteur_session']['id_auteur']) {
 				$titre ="<a href='".generer_url_ecrire('murs')."'>"._T('pensebete:titre_activite_mur')."</a></h3>";
@@ -37,12 +37,13 @@ function pensebetes_affiche_gauche($flux){
     		else {
 	    		$titre = _T('pensebete:titre_activite_mur'); 
     			$soustitre1=$soustitre2= "$img ";
+    			$out="auteur";
     		}
 	    	$flux['data'] .= debut_cadre_relief('mur-24.png',true,'',$titre); 
     		$flux['data'] .= $soustitre1;
-    		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/pensebetes_donnes',array('id_auteur'=>$flux['args']['id_auteur']));
+    		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/pensebetes_donnes',array('id_auteur'=>$flux['args']['id_auteur'],'out'=>$out));
    			$flux['data'] .= $soustitre2; 
-    		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/pensebetes_recus',array('id_auteur'=>$flux['args']['id_auteur']));
+    		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/pensebetes_recus',array('id_auteur'=>$flux['args']['id_auteur'],'out'=>$out));
     		$flux['data'] .= fin_cadre_relief(true);
     	}
     }
