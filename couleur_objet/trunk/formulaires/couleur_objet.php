@@ -25,11 +25,11 @@ function formulaires_couleur_objet_charger_dist($objet,$id_objet,$couleur_objet)
 function formulaires_couleur_objet_traiter_dist($objet, $id_objet, $couleur_objet) {
 	include_spip('inc/couleur_objet');
 	if (_request('supprimer')){
-		supprimer_objet_couleur($objet, $id_objet);
+		supprimer_couleur_objet($objet, $id_objet);
 		set_request('couleur_objet','');
 	}
 	else {
 		$couleur_objet = _request('couleur_objet');
-		modifier_objet_couleur($objet, $id_objet, $couleur_objet);
+		modifier_couleur_objet($objet, $id_objet, $couleur_objet);
 	}
 }
