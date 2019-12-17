@@ -21,7 +21,7 @@ function formulaires_editer_titre_logo_charger_dist($objet, $id_objet, $retour =
 	$_id_objet = id_table_objet($objet);
 	$titre_logo = '';
 	$descriptif_logo = '';
-	$objets_autorises = lire_config('titre_logo/objets_autorises');
+	$objets_autorises = lire_config('titre_logo/objets_autorises', array('spip_articles'));
 	$objets_autorises = (isset($objets_autorises))
 		? array_filter($objets_autorises)
 		: array();

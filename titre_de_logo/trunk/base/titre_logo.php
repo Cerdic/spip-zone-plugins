@@ -39,7 +39,7 @@ function titre_logo_declarer_tables_interfaces($interfaces) {
 function titre_logo_declarer_tables_objets_sql($tables) {
 	// champs titre_logo et descriptif_logo sur les objets configurés
 	include_spip('inc/config');
-	$tables_logo = lire_config('titre_logo/objets_autorises', array());
+	$tables_logo = lire_config('titre_logo/objets_autorises', array('spip_articles'));
 	if (is_array($tables_logo) && count($tables_logo) > 0) {
 		foreach ($tables_logo as $table) {
 			if (isset($tables[$table])) {

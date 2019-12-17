@@ -22,7 +22,7 @@ function titre_logo_recuperer_fond($flux) {
 		$editable	= $flux['args']['contexte']['_options']['editable'];
 
 		if ($editable) {
-			$objets_autorises = lire_config('titre_logo/objets_autorises');
+			$objets_autorises = lire_config('titre_logo/objets_autorises', array('spip_articles'));
 			$objets_autorises = (isset($objets_autorises))
 				? array_filter($objets_autorises)
 				: array();
