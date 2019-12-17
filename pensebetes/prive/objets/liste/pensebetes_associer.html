@@ -39,7 +39,7 @@
 			#SET{nom_receveur,#INFO_NOM{'auteur',#ID_RECEVEUR}}
 			<td class='receveur'><a href="[(#URL_ECRIRE{auteur,id_auteur=#ID_RECEVEUR})]" title="#GET{nom_receveur}">[(#GET{nom_receveur}|substr{0,5})][(#GET{nom_receveur}|strlen|>{5}|oui)&hellip;]</td>
 			<td class='date'>[(#DATE|affdate_jourcourt)]</td>
-			<td class='action'><button type="submit" class="button link" name="ajouter_lien[pensebete-#ID_PENSEBETE-#OBJET-#ID_OBJET]" value="+"><:lien_ajouter_pensebete:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button></td>				
+			<td class='action'><button type="submit" class="button link" name="ajouter_lien[pensebete-#ID_PENSEBETE-#OBJET-#ID_OBJET]" value="+"><:pensebete:lien_ajouter_pensebete:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button></td>				
 		</tr>
 	</BOUCLE_pensebetes>
 	</tbody>
