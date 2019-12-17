@@ -37,10 +37,10 @@ class Facteur extends SPIP\Facteur\FacteurSMTP {
 
 		// toute autre config que smtp se degrade en mail()
 		if ($config['mailer'] !== 'smtp') {
-			unset($options['smtp_host']);
-			unset($options['smtp_port']);
+			unset($config['smtp_host']);
+			unset($config['smtp_port']);
 		}
-		parent::__construct($options);
+		parent::__construct($config);
 
 		$this->setObjet($objet);
 		$this->setDest($email);
