@@ -24,14 +24,12 @@ function titre_logo_upgrade($nom_meta_base_version, $version_cible) {
 	include_spip('base/objets');
 	$tables_objets = titre_logo_liste_tables();
 	$maj = array();
-	$maj['create'] = array();
-	foreach ($tables_objets as $table) {
-		$maj['create'][] = array('sql_alter',"TABLE $table ADD titre_logo text DEFAULT '' NOT NULL");
-		$maj['create'][] = array('sql_alter',"TABLE $table ADD descriptif_logo text DEFAULT '' NOT NULL");
-	}
+	$maj['create'] = array(
+		array('titre_logo_check_upgrade'),
+	);
 
-	$maj['3.0.3'] = array(
-		array('titre_logo_nettoyer', array())
+	$maj['3.1.0'] = array(
+		array('titre_logo_check_upgrade')
 	);
 
 	include_spip('base/upgrade');
@@ -45,27 +43,69 @@ function titre_logo_upgrade($nom_meta_base_version, $version_cible) {
  */
 function titre_logo_check_upgrade() {
 	include_spip('base/objets');
-	$tables_objets = titre_logo_liste_tables();
+	include_spip('base/titre_logo');
+
+	$tables_avec_titre_logo = titre_logo_liste_tables();
+	$tables_objets = array_keys(lister_tables_objets_sql());
 	$trouver_table = charger_fonction('trouver_table', 'base');
+	$trouver_table(''); // vider le cache des descriptions SQL
+
 	foreach ($tables_objets as $table) {
-		$desc = $trouver_table($table);
-		if (!isset($desc['field']['titre_logo'])) {
-			sql_alter("TABLE $table ADD titre_logo text DEFAULT '' NOT NULL");
+		if (in_array($table, $tables_avec_titre_logo)) {
+			titre_logo_upgrader_table($table);
 		}
-		if (!isset($desc['field']['descriptif_logo'])) {
-			sql_alter("TABLE $table ADD descriptif_logo text DEFAULT '' NOT NULL");
+		else {
+			titre_logo_nettoyer_table($table);
+		}
+	}
+}
+
+/**`
+ * Creer les champs nécessaires à titre logo pour une table sql
+ * @param $table
+ */
+function titre_logo_upgrader_table($table) {
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$table = table_objet_sql($table);
+	$desc = $trouver_table($table);
+
+	$defs = array(
+		'titre_logo' => 'text DEFAULT \'\' NOT NULL',
+		'descriptif_logo' => 'text DEFAULT \'\' NOT NULL',
+	);
+
+	foreach ($defs as $champ => $defsql) {
+		if (!isset($desc['field'][$champ])) {
+			sql_alter($q="TABLE $table ADD $champ $defsql");
+			spip_log($q, 'titre_logo' . _LOG_DEBUG);
 		}
 	}
 }
 
 /**
- * supprimer les champs 'titre_logo' et 'descriptif_logo' dans les tables de la black_list
+ * supprimer les champs 'titre_logo' et 'descriptif_logo' d'une table si pas utilise (tous les champs sont vides)
+ * si force=true, on supprime les champs dans tous les cas
+ * @param string $table
+ * @param bool $force
  */
-function titre_logo_nettoyer() {
-	$black_liste = titre_logo_black_list();
-	foreach ($black_liste as $table) {
-		sql_alter("TABLE $table DROP titre_logo");
-		sql_alter("TABLE $table DROP descriptif_logo");
+function titre_logo_nettoyer_table($table, $force = false) {
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$table = table_objet_sql($table);
+	$desc = $trouver_table($table);
+	foreach (array('titre_logo', 'descriptif_logo') as $champ) {
+		if (isset($desc['field']['titre_logo'])) {
+			$used = false;
+			if (!$force) {
+				$used = sql_countsel($table, "$champ!=''");
+			}
+			if ($force or !$used) {
+				sql_alter($q = "TABLE $table DROP $champ");
+				spip_log($q, 'titre_logo' . _LOG_DEBUG);
+			}
+			else {
+				spip_log("Table $table on conserve le champ $champ car il y a du contenu", 'titre_logo' . _LOG_DEBUG);
+			}
+		}
 	}
 }
 
@@ -77,46 +117,13 @@ function titre_logo_nettoyer() {
 function titre_logo_vider_tables($nom_meta_base_version) {
 	include_spip('inc/meta');
 	include_spip('base/abstract_sql');
-
 	include_spip('base/objets');
-	$tables_objets = titre_logo_liste_tables();
+
+	$tables_objets = array_keys(lister_tables_objets_sql());
 	foreach ($tables_objets as $table) {
-		sql_alter("TABLE $table DROP titre_logo");
-		sql_alter("TABLE $table DROP descriptif_logo");
+		titre_logo_nettoyer_table($table, true);
 	}
 
 	effacer_meta('titre_logo');
 	effacer_meta($nom_meta_base_version);
-}
-
-/**
- * Fournir la liste des tables pour lesquels fournir les champs 'titre_logo' et 'descriptif_logo'
- * écarter les tables connues pour lesquelles c'est inutile
- * @return array
- */
-
-function titre_logo_liste_tables() {
-	$tables_objets	 = array_keys(lister_tables_objets_sql());
-	$black_liste	   = titre_logo_black_list();
-	$list_tables_logos = array_diff($tables_objets, $black_liste);
-
-	return $list_tables_logos;
-}
-
-/**
- * Black list : les tables connues pour lesquelles il est inutile de fournir les champs 'titre_logo' et 'descriptif_logo'
- * @return array
- */
-
-function titre_logo_black_list() {
-	$black_list = array(0 => 'spip_depots',
-						1 => 'spip_documents',
-						2 => 'spip_forum',
-						3 => 'spip_messages',
-						4 => 'spip_paquets',
-						5 => 'spip_petitions',
-						6 => 'spip_plugins',
-						7 => 'spip_signatures',
-						8 => 'spip_syndic_articles');
-	return $black_list;
 }

@@ -50,3 +50,44 @@ function titre_logo_declarer_tables_objets_sql($tables) {
 	}
 	return $tables;
 }
+
+
+/**
+ * Fournir la liste des tables objets existantes sur lesquelles on a active les titre_logo
+ * écarter les tables connues pour lesquelles c'est inutile
+ * @return array
+ */
+function titre_logo_liste_tables() {
+	include_spip('base/objets');
+	$tables_objets	 = array_keys(lister_tables_objets_sql());
+	$black_liste	   = titre_logo_black_list();
+
+	$tables_logo = lire_config('titre_logo/objets_autorises', array('spip_articles'));
+
+	// uniquement les objets existants
+	$tables_logo = array_intersect($tables_logo, $tables_objets);
+
+	// et hors les exclusions
+	$tables_logo = array_diff($tables_logo, $black_liste);
+
+	return $tables_logo;
+}
+
+
+/**
+ * Black list : les tables connues pour lesquelles il est inutile de fournir les champs 'titre_logo' et 'descriptif_logo'
+ * @return array
+ */
+
+function titre_logo_black_list() {
+	$black_list = array(0 => 'spip_depots',
+						1 => 'spip_documents',
+						2 => 'spip_forum',
+						3 => 'spip_messages',
+						4 => 'spip_paquets',
+						5 => 'spip_petitions',
+						6 => 'spip_plugins',
+						7 => 'spip_signatures',
+						8 => 'spip_syndic_articles');
+	return $black_list;
+}

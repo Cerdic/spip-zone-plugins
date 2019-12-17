@@ -4,7 +4,7 @@
 	<form method='post' action='#ENV{action}'role="form">
 		<div>
 			#ACTION_FORMULAIRE{#ENV{action}}
-			<ul class="editer-groupe">
+			<[(#DIV|sinon{ul})] class="editer-groupe">
 			[(#SET{inserer_barre,[(#CONFIG{titre_logo/inserer_barre}|sinon{'edition'})]})]
 			[(#REM) Pas de barre dans un formulaire étroit ]
 			[(#SET{inserer_barre,0})]
@@ -14,7 +14,7 @@
 					label=<:titre_logo:label_descriptif_logo:>,
 					inserer_barre=#GET{inserer_barre,edition},
 					rows=6})]
-			</ul>
+			</[(#DIV|sinon{ul})]>
 			<p class="boutons">
 				<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
 			</p>
