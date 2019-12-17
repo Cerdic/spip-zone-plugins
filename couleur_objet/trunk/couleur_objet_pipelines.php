@@ -17,8 +17,8 @@ function couleur_objet_affiche_droite($flux){
 		AND $id_objet=$flux['args'][$e['id_table_objet']]
 	){
 		$objet = $e['type'];
-		$row = sql_fetsel("couleur_objet", "spip_couleur_objet_liens", "objet=".sql_quote($objet)." AND id_objet=".intval($id_objet));
-		$couleur_objet = $row['couleur_objet'];
+		include_spip('inc/couleur_objet');
+		$couleur_objet = objet_lire_couleur($objet, $id_objet);
 		$contexte = array('objet' => $objet, 'id_objet' => $id_objet, 'couleur_objet' => $couleur_objet);
 		$flux["data"] .= recuperer_fond("inclure/couleur_objet", $contexte);
 	}
