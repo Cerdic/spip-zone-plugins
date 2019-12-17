@@ -107,16 +107,18 @@ function _motscreer_traiter_mot($mots, $id_groupe, $id_parent = 0, $mode = 'cree
 	foreach ($mots as $key => $value) {
 		$titre = str_replace(_MOTSCREER_DEUX_POINTS_SUBSTITUT, ':', $key);
 		if ($mode == 'creer') {
-			if (!$id_mot = sql_insertq('spip_mots', array(
+			$data = array(
 				'titre'      => $titre,
 				'id_groupe'  => $id_groupe,
 				'type'       => $titre_groupe,
-				'profondeur' => $profondeur,
-				'id_parent'  => $id_parent,
-			))) {
+			);
+			if(test_plugin_actif('motsar')) {
+				$data['profondeur'] = $profondeur;
+				$data['id_parent'] = $id_parent;
+			}
+			if (!$id_mot = sql_insertq('spip_mots', $data)) {
 				return _T('erreur_technique_enregistrement_impossible');
 			}
-
 		} else {
 			$retour .= "\n" . '-' . str_repeat('*', $profondeur) . '* <span class="mot">' . $titre . '</span>';
 		}
