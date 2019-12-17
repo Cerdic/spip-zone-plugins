@@ -1,4 +1,3 @@
-
 	<B_ld>
 		<div class="onglets_traduction[ (#ENV{objet}) ] barre_onglet">
 		<ul>
@@ -13,7 +12,7 @@
 					,
 				#SET{non_traduits,oui}
 				#SET{id_trad,#ENV{id_trad}}
-				#SET{objet,#ENV{objet}}
+				#SET{objet,#ENV{objet}|replace{_edit,''}}
 				[(#ENV{id_parent}|oui)
 					#SET{parent,''}
 					[(#ENV{objet}|=={rubrique}|oui)#SET{parent,1}]
@@ -30,7 +29,13 @@
 				[(#VALEUR|=={#ENV{lang_objet}}|?{
 						<li class="non_traduit box_onglet"><strong class="on">[(#VALEUR|traduire_nom_langue)][(#ENV{ref_#VALEUR}|oui)<span><:spip:trad_reference:></span>]</strong></li>
 						,
-						[(#AUTORISER{creerrubriquedans,rubrique,#GET{id_parent_trad}})<li class="non_traduit box_onglet"><a[ (#GET{alert})]  href="[(#VAL{new}|generer_url_ecrire_entite_edit{#GET{objet}}|parametre_url{id_parent,#GET{id_parent_trad}}|parametre_url{lang_dest,#VALEUR}|parametre_url{lier_trad,#GET{id_trad}}|parametre_url{trad_new,#ENV{trad_new}}|parametre_url{retour,nav})]">[(#VALEUR|traduire_nom_langue)]</a>#SET{objet,rubrique}</li>]
+						[(#AUTORISER{creerrubriquedans,rubrique,#GET{id_parent_trad}})
+						<li class="non_traduit box_onglet">
+							<a[ (#GET{alert})]
+								href="[(#VAL{new}|generer_url_ecrire_entite_edit{#GET{objet}}|parametre_url{id_parent,#GET{id_parent_trad}}|parametre_url{lang_dest,#VALEUR}|parametre_url{lier_trad,#GET{id_trad}}|parametre_url{trad_new,#ENV{trad_new}}|parametre_url{retour,nav})]">
+								[(#VALEUR|traduire_nom_langue)]
+							</a>#SET{objet,rubrique}
+						</li>]
 						})]
 				})]
 		</BOUCLE_ld>
