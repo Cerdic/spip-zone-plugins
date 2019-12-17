@@ -170,7 +170,6 @@ function formulaires_configurer_ck_charger_dist(){
 		'dossier_squelettes' => ck_recupere_dossier_squelette($GLOBALS['dossier_squelettes']),
 		'supprimer_numero' => preg_match(",supprimer_numero,",reset($GLOBALS['table_des_traitements']['TITRE']))?1:0,
 		'toujours_paragrapher' => $GLOBALS['toujours_paragrapher']?1:0,
-		'forcer_lang' => $GLOBALS['forcer_lang']?1:0,
 		'no_set_html_base' => defined('_SET_HTML_BASE')?(_SET_HTML_BASE==false):0,
 		'introduction_suite' => defined('_INTRODUCTION_SUITE')?_INTRODUCTION_SUITE:'',
 		'no_autobr' => defined('_AUTOBR')?(_AUTOBR?false:true):false,
@@ -199,6 +198,17 @@ function formulaires_configurer_ck_charger_dist(){
 	if (defined('_SPIP_VERSION_ID') and _SPIP_VERSION_ID>=30300) {
 		$valeurs['_no_quota_cache'] = 1;
 	}
+
+	// forcer_lang est toujours true dans le prive donc on est oblige de reinclure le fichier ck_option pour savoir ce que ça vaut, et si le fichier n'existe pas on laisse decoche
+	if (file_exists($f=((defined('_ROOT_CWD')?_ROOT_CWD:'')._DIR_TMP."ck_options.php"))) {
+		include $f;
+		$valeurs['forcer_lang'] = (!empty($GLOBALS['forcer_lang']) and $GLOBALS['forcer_lang'] and $GLOBALS['forcer_lang']!=='non')?1:0;
+	}
+	else {
+		// si on ne sait pas on mets 0
+		$valeurs['forcer_lang'] = 0;
+	}
+
 	return $valeurs;
 }
 
