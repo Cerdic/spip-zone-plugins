@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
- * Perermet de compléter ou modifier le résultat de la compilation d’un squelette donné.
+ * Permet de compléter ou modifier le résultat de la compilation d’un squelette donné.
  *
  * @param array $flux
  *   Les données du pipeline
@@ -178,14 +178,22 @@ function interface_traduction_objets_recuperer_fond($flux) {
 	return $flux;
 }
 
-
+/**
+ * Ajoute des contenus dans la partie <head> des pages de l’espace privé. Il fonctionne comme le pipeline insert_head.
+ *
+ * @param array $flux
+ *   Les données du pipeline
+ *
+ * @return array
+ *   Les données du pipeline
+ */
 function interface_traduction_objets_header_prive($flux) {
 	$flux .= '<link rel="stylesheet" href="' . find_in_path('css/interface_traduction_objets_styles.css') . '" type="text/css" media="all" />';
 
 	return $flux;
 }
 
-/*Ajoute la langue de traduction dans le chargement du formulaire edition_rubrique*/
+/*Ajoute la langue de traduction dans le chargement du formulaire edition*/
 function interface_traduction_objets_formulaire_charger($flux) {
 	$form = $flux['args']['form'];
 	$segments = explode('_', $form);
@@ -213,12 +221,14 @@ function interface_traduction_objets_formulaire_charger($flux) {
 	return $flux;
 }
 
-/*Prise en compte de la langue de traduction dans le traitement du formulaire edition_article*/
+/*Prise en compte de la langue de traduction dans le traitement du formulaire d'édition d'un objet*/
 function interface_traduction_objets_pre_insertion($flux) {
 	if ($lang = _request('lang_dest')) {
 		$flux['data']['lang'] = $lang;
 		$flux['data']['langue_choisie'] = 'oui';
-		$flux['data']['id_trad'] = _request('lier_trad');
+		if (_request('lier_trad')) {
+			$flux['data']['id_trad'] = _request('lier_trad');
+		}
 	}
 	return $flux;
 }
