@@ -2,8 +2,6 @@
 <div class='infos'>
 	<div class='numero'><:gis:info_numero_gis:><p>#ID_GIS</p></div>
 
-	[(#INCLURE{fond=prive/objets/liste/objets_gis_simple,id_gis=#ID_GIS,env})]
-
 	[(#AUTORISER{supprimer,gis,#ID_GIS}|oui)
 		[(#URL_ACTION_AUTEUR{
 			supprimer_gis,
