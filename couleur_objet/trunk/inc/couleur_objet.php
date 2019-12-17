@@ -25,8 +25,8 @@
 function objet_lire_couleur($objet, $id_objet, $fallback_parent = false, $fallback_recursif = false) {
 	include_spip('base/objets');
 
-    $objet = objet_type($objet);
-    $id_objet = intval($id_objet);
+	$objet = objet_type($objet);
+	$id_objet = intval($id_objet);
 
 	$couleur_objet = sql_getfetsel(
 		'couleur_objet',
@@ -59,34 +59,34 @@ function objet_lire_couleur($objet, $id_objet, $fallback_parent = false, $fallba
  * @return bool true si ok.
  */
 function objet_modifier_couleur($objet, $id_objet, $couleur_objet) {
-    $objet = objet_type($objet);
-    $id_objet = intval($id_objet);
+	$objet = objet_type($objet);
+	$id_objet = intval($id_objet);
 
-    // si la ligne $id_objet / $objet existe, on actualise, sinon on insère
-    if (sql_countsel('spip_couleur_objet_liens', array(
-        "objet=" . sql_quote($objet),
-        "id_objet=" . sql_quote($id_objet),
-    ))) {
-        return (bool) sql_updateq(
-            'spip_couleur_objet_liens', 
-            array(
-                'couleur_objet' => $couleur_objet
-            ), 
-            array(            
-                "objet=" . sql_quote($objet),
-                "id_objet=" . sql_quote($id_objet)
-            )
-        );
-    } else {
-        return (bool) sql_insertq(
-            'spip_couleur_objet_liens', 
-            array(
-                'id_objet' => $id_objet, 
-                'objet' => $objet, 
-                'couleur_objet' => $couleur_objet
-            )
-        );
-    }
+	// si la ligne $id_objet / $objet existe, on actualise, sinon on insère
+	if (sql_countsel('spip_couleur_objet_liens', array(
+		"objet=" . sql_quote($objet),
+		"id_objet=" . sql_quote($id_objet),
+	))) {
+		return (bool) sql_updateq(
+			'spip_couleur_objet_liens', 
+			array(
+				'couleur_objet' => $couleur_objet
+			), 
+			array(            
+				"objet=" . sql_quote($objet),
+				"id_objet=" . sql_quote($id_objet)
+			)
+		);
+	} else {
+		return (bool) sql_insertq(
+			'spip_couleur_objet_liens', 
+			array(
+				'id_objet' => $id_objet, 
+				'objet' => $objet, 
+				'couleur_objet' => $couleur_objet
+			)
+		);
+	}
 }
 
 /**
@@ -100,16 +100,16 @@ function objet_modifier_couleur($objet, $id_objet, $couleur_objet) {
  * @return bool true si une suppression est réalisée.
  */
 function objet_supprimer_couleur($objet, $id_objet) {
-    $objet = objet_type($objet);
-    $id_objet = intval($id_objet);
+	$objet = objet_type($objet);
+	$id_objet = intval($id_objet);
 
-    return (bool) sql_delete(
-        "spip_couleur_objet_liens", 
-        array(
-            "objet=" . sql_quote($objet),
-            "id_objet=" . sql_quote($id_objet)
-        )
-    );
+	return (bool) sql_delete(
+		"spip_couleur_objet_liens", 
+		array(
+			"objet=" . sql_quote($objet),
+			"id_objet=" . sql_quote($id_objet)
+		)
+	);
 }
 
 /**
