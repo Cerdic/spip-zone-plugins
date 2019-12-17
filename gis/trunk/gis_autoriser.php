@@ -121,11 +121,20 @@ function autoriser_gis_delier_dist($faire, $quoi, $id, $qui, $opts) {
  * @return boolean true/false
  */
 function autoriser_gis_supprimer_dist($faire, $quoi, $id, $qui, $opts) {
-	$liaisons = sql_select('*', 'spip_gis_liens', 'id_gis=' . intval($id));
+	include_spip('base/objets');
+	
+	$objets_legitimes = array_map('objet_type', array_keys(lister_tables_objets_sql()));
+	$liaisons = sql_select(
+		'*',
+		'spip_gis_liens',
+		array('id_gis=' . intval($id), sql_in('objet', $objets_legitimes))
+	);
+	
 	while ($liaison = sql_fetch($liaisons)) {
 		if (!autoriser('delier', 'gis', $liaison['id_gis'], $qui, $liaison)) {
 			return false;
 		}
 	}
+	
 	return autoriser('modifier', 'gis', $id, $qui, $opts);
 }
