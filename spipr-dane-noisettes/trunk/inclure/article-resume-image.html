@@ -4,14 +4,14 @@
 <BOUCLE_image_inclue(DOCUMENTS){id_article}{vu=oui}{par rang_lien}{extension IN png,jpg,gif}{0,1}>
 [(#FICHIER
 	|image_recadre{#ENV{largeur_image,150}:#ENV{hauteur_image,150},#ENV{passe_partout},#ENV{align},#ENV{couleur,transparent}}
-	|image_reduire{#ENV{largeur_image,150},#ENV{hauteur_image,150}}
+	|image_reduire{#ENV{liste_span}|?{10000,#ENV{largeur_image,150}},#ENV{liste_span}|?{0,#ENV{hauteur_image,150}}}
 	|inserer_attribut{class,spip_logo spip_logos}
 	|responsive_logo)]
 </BOUCLE_image_inclue>
 <BOUCLE_image_portfolio(DOCUMENTS){id_article}{mode=document}{par rang_lien}{extension IN png,jpg,gif}{0,1}>
 [(#FICHIER
 	|image_recadre{#ENV{largeur_image,150}:#ENV{hauteur_image,150},#ENV{passe_partout},#ENV{align},#ENV{couleur,transparent}}
-	|image_reduire{#ENV{largeur_image,150},#ENV{hauteur_image,150}}
+	|image_reduire{#ENV{liste_span}|?{10000,#ENV{largeur_image,150}},#ENV{liste_span}|?{0,#ENV{hauteur_image,150}}}
 	|inserer_attribut{class,spip_logo spip_logos}
 	|responsive_logo)]
 </BOUCLE_image_portfolio>

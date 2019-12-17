@@ -15,8 +15,8 @@
 			[(#ENV{masquer_logo}|non)
 			[(#LOGO_ARTICLE
 				|image_recadre{#ENV{largeur_logo,150}:#ENV{hauteur_logo,150},#GET{passe_partout},#GET{align},#ENV{couleur,transparent}}
-				|image_reduire{#ENV{largeur_logo,150},#ENV{hauteur_logo,150}}|responsive_logo
-				|sinon{#INCLURE{fond=inclure/article-resume-image, id_article=#ID_ARTICLE, largeur_image=#ENV{largeur_logo}, hauteur_image=#ENV{hauteur_logo}, passe_partout=#GET{passe_partout}, align=#GET{align}}})]            
+				|image_reduire{#ENV{liste_span}|?{10000,#ENV{largeur_image,150}},#ENV{liste_span}|?{0,#ENV{hauteur_image,150}}}|responsive_logo
+				|sinon{#INCLURE{fond=inclure/article-resume-image, id_article=#ID_ARTICLE, largeur_image=#ENV{largeur_logo}, hauteur_image=#ENV{hauteur_logo}, passe_partout=#GET{passe_partout}, align=#GET{align}, liste_span=#ENV{liste_span}}})]
 			]
 			[<span class="titre">(#TITRE)</span>]
 		</a>
