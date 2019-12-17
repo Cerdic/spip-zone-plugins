@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'article_portfolio'=>'Galerie d\'images de l\'article',
 'article_ecrire_auteur'=>'&Eacute;crire à l\'auteur',
     
-'nom_carousel'=>'Carrousel',
+'nom_carousel'=>'Carousel',
     
 'carte_gis'=>'Carte',
  
@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_galerie'=>'Galerie',
 
 'erreur_uai' => 'Attention&#44; vous devez <a href="[(#URL_ECRIRE{noisette_edit, id_noisette=#ENV{id_noisette}})]"> saisir le code UAI de votre établissement</a>.',
-'explication_carousel'=>'Les articles affichés dans le carrousel sont les articles séléctionnés à la racine du site pour l\'affichage<br/> dans la page d\'accueil et ceux selectionnés dans la rubrique pour l\'affichage dans une page rubrique.',
+'explication_carousel'=>'Les articles affichés dans le carousel sont les articles séléctionnés à la racine du site pour l\'affichage<br/> dans la page d\'accueil et ceux selectionnés dans la rubrique pour l\'affichage dans une page rubrique.',
 'explication_conf_avancee_noisettes'=>'<strong>/!\ Attention, vous devez avoir une connaisance minimum du html5 pour utiliser cette option./!\</strong>',
 'explication_exclure_article_selection'=>'Vous pouvez exclure les articles sélectionnés à la racine du site ou de la rubrique <i>(articles affichés dans le carrousel)</i>.',
 'explication_image_passe_partout'=>'Rogne le logo pour l\'afficher aux dimensions (largeur,hauteur) saisies ci-dessus.',
@@ -54,7 +54,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //'explication_picto' => 'Par défaut, le pictogramme est " @picto@ <i class="fa fa-@picto@ "></i>".<br/>Vous pouvez le modifier en choisissant un autre pictogramme sur <a href="https://fontawesome.com/v4.7.0/icons/" title="Fontawesome" class="spip-out">Fontawesome</a>',
 'explication_sites_partenaires'=>'Saisissez les identifiants des sites que vous voulez afficher (maximum 6), séparés par une virgule.<br/> <i>1. Les sites doivent avoir été préalablement enregistrés sur le site. <br/>2. Les logos des sites seront affichés dans l\'ordre de la saisie.</i>',
 'explication_socialtags'=>'Les réseaux sociaux à afficher sont à sélectionner dans la page de configuration du plugin "<a href="./?exec=configurer_socialtags" title="Configurer Socialtags">Socialtags</a>"',
-'explication_titre_groupe_mots'=>'Laisser vide pour afficher le nom du groupe de mots',
 'explication_titre_mot_video'=>'/!\ Pour afficher une ou plusieurs vidéos, il faut que celles-ci soient insérées dans le chapo d\'un article et que cet article soit associé à un mot clé (par défaut "Vidéo à la une"). /!\ ',
 'explication_tri'=>'Vous pouvez choisir de trier les articles par date (du plus récent au plus ancien),<br/>par titre (ordre alphabétique) ou par numéro de titre si vous utilisez la numérotation des articles.',
 'explication_uai' => 'Le code UAI (anciennement RNE) est composé de 7 chiffres et 1 lettre. On le retrouve dans l\'adresse mail de l\'étalissement. Exemple 0141234A',
@@ -165,8 +164,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'liste_videos' => 'Liste de vidéos',
 
 'menu' => 'Menu',
-'mot_contenu'=>'Contenu du mot-clé',
-'mots_meme_groupe'=>'Mots-clé du même groupe',
 
 'nom_calendrier_mini' => 'Mini-calendrier des évènements',
 'nuage' => 'Nuage de mots-clé',
