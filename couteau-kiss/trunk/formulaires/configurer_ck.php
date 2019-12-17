@@ -42,7 +42,7 @@ function ck_produire_options($code){
 
 	// et enregistrer dans le fichier le cas echeant
 	$file = _DIR_TMP."ck_options.php";
-	ecrire_fichier($file, "<"."?php\n$code\n?>");
+	ecrire_fichier($file, "<"."?php\n$code\n");
 
 	// sauvegarder dans une meta pour recuperer les options apres vidage de tmp/
 	include_spip('inc/meta');
