@@ -23,11 +23,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_texte'=> "Votre texte doit allé droit au but (110 caractères).",
 	'erreur_suppression'=> "Vous n'avez pas l'autorisation de supprimer ce pense-bête",
 	'erreur_titre'=> "Erreur",
+	'erreur_association'=>"Le pense-bête est créé (n° @id_pensebete@) mais l'association à l'objet éditorial n'a pas pu être faite.",
 
 	// I
+	'info_lassociation'=>"L'association",
 	'icone_creer_pensebete' => "Créer un pense-bête",
 	'icone_modifier_pensebete' => "Modifier ce pense-bête",
 	'info_aucun_pensebete' => "Aucun pense-bête",
+	'info_le_pensebete' => "Le pense-bête",
 	'info_1_pensebete' => "Un pense-bête",
 	'info_nb_pensebetes' => "@nb@ pense-bêtes",
 	'info_aucun_pensebete_donne'=>"Aucun pense-bête donné",
@@ -36,8 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_pensebetes_donnes' => "@nb@ pense-bêtes donnés",
 	'info_1_pensebete_recu' => "Un pense-bête reçu",
 	'info_nb_pensebetes_recus' => "@nb@ pense-bêtes reçus",
-
-
 	
 	// L
 	'label_date' => "Date",
@@ -58,6 +59,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_avertissement_retrait' => "Êtes-vous sûr de vouloir retirer ce pense-bête ?",
 	'texte_changer_statut' => "Ce pense-bête est :",
 	'texte_creer_associer_pensebete'=> "Créer un pense-bête et l'associer",
+	'texte_associer_pensebete'=> "Voulez vous associer ce pense-bête à cet objet ?",
+	'texte_nouveau_pensebete'=> "Nouveau pense-bête",
+	'texte_association'=> "Association",
 	'titre_pensebete' => "Pense-bête",
 	'titre_pensebetes' => "Pense-bêtes",
 	'titre_activite_mur' => "Activité du mur",

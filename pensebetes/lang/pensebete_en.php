@@ -23,11 +23,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_texte'=> "Your text must have gone straight to the point (110 characters).",
 	'erreur_suppression'=> "You do not have permission to delete this sticky note",
 	'erreur_titre'=> "Something is wrong",
+	'erreur_association'=>"The sticky note is created (n° @id_pensebete@) but the association with the editorial object could not be made.",
 
 	// I
+	'info_lassociation'=>"The association",
 	'icone_creer_pensebete' => "Create a sticky note",
 	'icone_modifier_pensebete' => "Edit this sticky note",
 	'info_aucun_pensebete' => "No sticky note",
+	'info_le_pensebete' => "Your sticky note",
 	'info_1_pensebete' => "A sticky note",
 	'info_nb_pensebetes' => "@nb@ sticky notes",
 	'info_aucun_pensebete_donne'=>"No sticky note given",
@@ -36,9 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_pensebetes_donnes' => "@nb@ sticky notes given",
 	'info_1_pensebete_recu' => "One sticky note received",
 	'info_nb_pensebetes_recus' => "@nb@ sticky notes received",
-
-
-	
+ 	
 	// L
 	'label_date' => "Date",
 	'label_de' => "From",
@@ -57,7 +58,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_ajouter_pensebete' => "Add a sticky note",
 	'texte_avertissement_retrait' => "Are you sure you want to remove this sticky note?",
 	'texte_changer_statut' => "This sticky note is :",
-	'texte_creer_associer_pensebete'=> "Create a sticky note and associate it",
+	'texte_creer_associer_pensebete'=> "Create and associate a sticky note",
+	'texte_associer_pensebete'=> "Do you want to associate this sticky note ti this object ?",
+	'texte_nouveau_pensebete'=> "New sticky note",
+	'texte_association'=> "Association",
 	'titre_pensebete' => "Sticky note",
 	'titre_pensebetes' => "Sticky notes",
 	'titre_activite_mur' => "Wall activity",
