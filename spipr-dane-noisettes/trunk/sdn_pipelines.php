@@ -29,11 +29,11 @@ function sdn_affiche_milieu($flux) {
         $ret .= recuperer_fond("prive/squelettes/inclure/blocs_exclus");
 		$flux["data"] .= $ret;
 	}
-	if ($exec == "configurer_identite") {
+/*	if ($exec == "configurer_identite") {
 		$page = $flux["args"]["page"];
         $ret .= recuperer_fond("prive/squelettes/inclure/contact_site");
 		$flux["data"] .= $ret;
 	}
- 
+*/ 
 	return $flux;
 }
