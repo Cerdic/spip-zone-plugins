@@ -286,8 +286,8 @@ function retour_image_responsive($img, $taille, $dpr, $xsendfile, $retour="http"
 			}
 			$img_new = extraire_attribut($img_new, "src");
 			
-			copy($img_new, $dest);
-			if ($img_new != $img) unlink ($img_new);
+			@copy($img_new, $dest);
+			if ($img_new != $img) @unlink ($img_new);
 		}
 		if($retour == "http") {
 			$extension = str_replace("jpg", "jpeg", $terminaison);

@@ -398,16 +398,20 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 			// pour affichage dans la classe de picture
 			$nom_class = " " . $nom_class;
 		}
-
+		$r = false;
 		if ($vertical == 0) {
-			if (count($p) == 1) $r = ($p[1]["h"] / $p[1]["l"]) * 100;
-			else if (count($p) == 0) $r = (($h / $l) * 100);
+			if (count($p) == 1 && $p[1]["l"]>0) $r = ($p[1]["h"] / $p[1]["l"]) * 100;
+			else if (count($p) == 0 && $l > 0) $r = (($h / $l) * 100);
 
-			if ($r) $aff_r = "padding-bottom:$r%";
-			$img = "<picture style='padding:0;$aff_r' class='conteneur_image_responsive_h$nom_class'>$sources$img</picture>";
+			if ($r) {
+				$aff_r = "padding-bottom:$r%";
+				$img = "<picture style='padding:0;$aff_r' class='conteneur_image_responsive_h$nom_class'>$sources$img</picture>";
+			}
 		} else {
-			$r = (($h / $l) * 100);
-			$img = "<picture class='conteneur_image_responsive_v$nom_class'>$sources$img</picture>";
+			if ($l > 0) {
+				$r = (($h / $l) * 100);
+				$img = "<picture class='conteneur_image_responsive_v$nom_class'>$sources$img</picture>";
+			}
 		}
 		$img = $img . $styles;
 	}
