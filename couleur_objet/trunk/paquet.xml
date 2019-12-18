@@ -1,7 +1,7 @@
 <paquet
 	prefix="couleur_objet"
 	categorie="outil"
-	version="0.5.2"
+	version="0.6.0"
 	schema="1.0.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"

@@ -1,0 +1,76 @@
+<h1>Demo Couleur Objet</h1>
+
+<menu>
+    <ul>
+        <li><a href="[(#SELF|parametre_url{avec_erreurs,''})]">Sans Erreurs Squelettes</a></li>
+        <li><a href="[(#SELF|parametre_url{avec_erreurs,1})]">Avec Erreurs Squelettes</a></li>
+    </ul>
+</menu>
+
+<style>
+body { margin:2em; }
+table { border-collapse: collapse; margin:2em 0; }
+caption { font-size: 1.5em; background-color: #ddd; text-align: left; padding: .3em .5em; }
+th, td { text-align: left; border-bottom: 1px solid #ddd; padding: .3em .5em; }
+th { font-weight: bold; }
+td { font-weight: normal; }
+.couleur { 
+    display:inline-block; width:1em; height:1em; 
+    background-color: var(--couleur); 
+    border: 1px solid #444; 
+    margin-right:1em;
+}
+</style>
+
+[(#ENV{avec_erreurs}|oui)<INCLURE{fond=demo/couleur_objet_erreurs} />]
+
+<h2>Balises hors boucle</h2>
+
+<h3><code>\#COULEUR_OBJET</code></h3>
+<table>
+    <tr>
+        <th><code>\#COULEUR_OBJET{rubrique,1}</code></th>
+        <td><span class="couleur"[ style="--couleur: (#COULEUR_OBJET{rubrique,1});"]></span>#COULEUR_OBJET{rubrique,1}</td>
+    </tr>
+    <tr>
+        <th><code>\#COULEUR_OBJET{article,1}</code></th>
+        <td><span class="couleur"[ style="--couleur: (#COULEUR_OBjet{article,1});"]></span>#COULEUR_OBJET{article,1}</td>
+    </tr>
+</table>
+
+<h2>Balises dans Rubriques</h2>
+
+<BOUCLE_secteurs(RUBRIQUES){racine}{par num titre, titre}>
+    <table>
+        <caption><code>Secteur #ID_SECTEUR : #TITRE</code></caption>
+        <tr>
+            <th>Id Rubrique</th>
+            <th>Id Parent</th>
+            <th><code>\#COULEUR_OBJET</code></th>
+            <th><code>\#COULEUR_OBJET_HIERARCHIE</code></th>
+            <th><code>\#COULEUR</code></th>
+            <th><code>\#COULEUR{parent}</code></th>
+            <th><code>\#COULEUR{parent,recursif}</code></th>
+        </tr>
+        <tr>
+            <th>#ID_RUBRIQUE</th>
+            <th>#ID_PARENT</th>
+            <td><span class="couleur"[ style="--couleur: (#COULEUR_OBJET);"]></span>#COULEUR_OBJET</td>
+            <td><span class="couleur"[ style="--couleur: (#COULEUR_OBJET_HIERARCHIE);"]></span>#COULEUR_OBJET_HIERARCHIE</td>
+            <td><span class="couleur"[ style="--couleur: (#COULEUR);"]></span>#COULEUR</td>
+            <td><span class="couleur"[ style="--couleur: (#COULEUR{parent});"]></span>#COULEUR{parent}</td>
+            <td><span class="couleur"[ style="--couleur: (#COULEUR{parent,recursif});"]></span>#COULEUR{parent,recursif}</td>
+        </tr>
+        <BOUCLE_rubriques(RUBRIQUES){!racine}{id_secteur}{par num titre, titre}>
+            <tr>
+                <th>#ID_RUBRIQUE</th>
+                <th>#ID_PARENT</th>
+                <td><span class="couleur"[ style="--couleur: (#COULEUR_OBJET);"]></span>#COULEUR_OBJET</td>
+                <td><span class="couleur"[ style="--couleur: (#COULEUR_OBJET_HIERARCHIE);"]></span>#COULEUR_OBJET_HIERARCHIE</td>
+                <td><span class="couleur"[ style="--couleur: (#COULEUR);"]></span>#COULEUR</td>
+                <td><span class="couleur"[ style="--couleur: (#COULEUR{parent});"]></span>#COULEUR{parent}</td>
+                <td><span class="couleur"[ style="--couleur: (#COULEUR{parent,recursif});"]></span>#COULEUR{parent,recursif}</td>
+            </tr>
+        </BOUCLE_rubriques>
+    </table>
+</BOUCLE_secteurs>
