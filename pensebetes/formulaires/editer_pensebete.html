@@ -5,13 +5,8 @@
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<input type='hidden' name='id_pensebete' value='#ENV{id_pensebete}' />
-		<input type='hidden' name='id_donneur' value='#ENV{id_donneur}' />
 		<ul class='editer-groupe'>
-			[(#SAISIE{auteurs, id_receveur, label=<:pensebete:label_receveur:>, obligatoire=oui})]
-			[(#SAISIE{input, titre, label=<:pensebete:label_titre:>, explication=<:pensebete:explication_titre:>, maxlength=17})]
-			[(#SAISIE{textarea, texte, label=<:pensebete:label_texte:>, explication=<:pensebete:explication_texte:>,rows=3,cols=60,longueur_max=110})]
-
+      #GENERER_SAISIES{#ENV{_mes_saisies}}
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
