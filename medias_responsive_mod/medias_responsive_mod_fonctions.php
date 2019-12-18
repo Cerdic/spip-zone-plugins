@@ -9,6 +9,8 @@ if (!function_exists('centre_image_x')) {
 	function centre_image_y($img) { return 0.5; }
 }
 
+if (!defined("_SPIP_DOC_INTITULES_ALIGN")) define("_SPIP_DOC_INTITULES_ALIGN", "top");
+
 // Fabrique une image avec couche alpha
 // en fonction du détourage de l'image
 function image_detourer_alpha($im) {
