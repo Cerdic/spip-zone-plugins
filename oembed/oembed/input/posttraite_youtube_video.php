@@ -33,15 +33,26 @@ function oembed_input_posttraite_youtube_video_dist($data, $url_orig) {
 
 	// recuperer la duree si possible, ruse de sioux
 	// http://stackoverflow.com/questions/10066638/get-youtube-information-via-json-for-single-video-not-feed-in-javascript
-	if (defined('_OEMBED_VIDEO_DURATION') and _OEMBED_VIDEO_DURATION
-		and $v = parametre_url($url_orig, 'v')){
-		$oembed_recuperer_url = charger_fonction('oembed_recuperer_url', 'inc');
-		if ($infos = $oembed_recuperer_url("http://www.youtube.com/get_video_info?html5=1&video_id=".$v,'','')){
-			$infos = explode('length_seconds=',$infos);
-			if ($duree = intval(end($infos))){
-				$data['duration'] = $duree;
+	if (defined('_OEMBED_VIDEO_DURATION') and _OEMBED_VIDEO_DURATION){
+		$v = null;
+		$r = parse_url($url_orig);
+		if (!empty($r['query'])){
+			$v = parametre_url($url_orig, 'v');
+		} elseif (!empty($r['path'])) {
+			$v = ltrim($r['path'], '/');
+		}
+		if ($v){
+			$oembed_recuperer_url = charger_fonction('oembed_recuperer_url', 'inc');
+			if ($infos = $oembed_recuperer_url("https://www.youtube.com/get_video_info?html5=1&video_id=" . $v, '', '')){
+				$infos = rawurldecode($infos);
+				// et une deuxieme fois car on cherche dur= qui est encode dans une autre variable
+				$infos = rawurldecode($infos);
+				$infos = explode('dur=', $infos, 2);
+				if ($duree = intval(round(floatval(end($infos))))){
+					$data['duration'] = $duree;
+				}
+				unset($infos);
 			}
-			unset($infos);
 		}
 	}
 
