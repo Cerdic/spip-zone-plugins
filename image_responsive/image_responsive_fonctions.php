@@ -81,8 +81,6 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 		$taille_defaut = 0;
 		$taille = preg_replace(",^0$|^0\/,", "", $taille);
 	}
-
-
 	$tailles = explode("/", $taille);
 
 	if ($taille_defaut < 0) {
@@ -99,7 +97,7 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 	if (file_exists($source)) {
 		$l = largeur($source);
 		$h = hauteur($source);
-
+		
 		// mime_content_type ne fonctionn pas sur certaines versions de PHP…
 		// $mime = mime_content_type($source);
 		if (preg_match("/png$/", $source)) $mime = "image/png";
@@ -381,7 +379,6 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 			$sources = "<!--[if IE 9]><video style='display: none;'><![endif]-->$sources<!--[if IE 9]></video><![endif]-->";
 		}
 
-
 		$styles = $nom_class = '';
 		if ($pad_bot_styles) {
 
@@ -399,19 +396,19 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 			$nom_class = " " . $nom_class;
 		}
 		$r = false;
+		
 		if ($vertical == 0) {
 			if (count($p) == 1 && $p[1]["l"]>0) $r = ($p[1]["h"] / $p[1]["l"]) * 100;
 			else if (count($p) == 0 && $l > 0) $r = (($h / $l) * 100);
-
 			if ($r) {
 				$aff_r = "padding-bottom:$r%";
-				$img = "<picture style='padding:0;$aff_r' class='conteneur_image_responsive_h$nom_class'>$sources$img</picture>";
 			}
+				$img = "<picture style='padding:0;$aff_r' class='conteneur_image_responsive_h$nom_class'>$sources$img</picture>";
 		} else {
 			if ($l > 0) {
 				$r = (($h / $l) * 100);
-				$img = "<picture class='conteneur_image_responsive_v$nom_class'>$sources$img</picture>";
 			}
+				$img = "<picture class='conteneur_image_responsive_v$nom_class'>$sources$img</picture>";
 		}
 		$img = $img . $styles;
 	}
