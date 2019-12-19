@@ -228,7 +228,7 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 				if ($vertical && $t > $h) $t = $h;
 				else if (!$vertical && $t > $l) $t = $l;
 				if (_IMAGE_RESPONSIVE_RETINA_HQ) {
-					$t2  = $t*2;
+					$t2  = intval($t)*2;
 					if ($vertical && $t2 > $h) $t2 = $h;
 					else if (!$vertical && $t2 > $l) $t2 = $l;
 				
