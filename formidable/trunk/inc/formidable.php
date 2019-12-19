@@ -169,7 +169,12 @@ function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identific
 	$where_cookie = '';
 	$where_variable_php = '';
 	if ($id_auteur) {
-		$where_id_auteur = 'id_auteur='.$id_auteur;
+		if ($anonymiser == 'on') {
+			$id_auteur = formidable_crypter_id_auteur($id_auteur);
+			$where_id_auteur = 'variable_php="'.$id_auteur.'"';
+		} else {
+			$where_id_auteur = 'id_auteur='.$id_auteur;
+		}
 	}
 	if ($cookie) {
 		$where_cookie = 'cookie='.sql_quote($cookie);
@@ -187,13 +192,9 @@ function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identific
 		}
 	} elseif ($choix_identification == 'id_auteur') {
 		if ($id_auteur) {
-			if ($anonymiser == 'on') {
-				$id_auteur = formidable_crypter_id_auteur($id_auteur);
-				$where_id_auteur = 'variable_php="'.$id_auteur.'"';
-			}
 			$where = array($where_id_auteur);
 		} else {
-			$where = array($where_cookie, $where_variable_php);
+			$where = array($where_cookie);
 		}
 	} elseif ($choix_identification == 'variable_php') {
 		if ($variable_php_identification) {
