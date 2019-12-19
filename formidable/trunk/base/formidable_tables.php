@@ -132,7 +132,7 @@ function formidable_declarer_tables_objets_sql($tables) {
 			'ip' => "varchar(255) NOT NULL default ''",
 			'id_auteur' => 'bigint(21) NOT NULL default 0',
 			'cookie' => "varchar(255) NOT NULL default ''",
-			'variable_php' => 'bigint(21) NOT NULL default 0',
+			'variable_php' => "varchar(255) NOT NULL default ''",
 			'statut' => "varchar(10) NOT NULL default ''",
 			'maj' => 'timestamp'
 		),

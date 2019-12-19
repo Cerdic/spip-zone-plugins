@@ -22,10 +22,9 @@ function traiter_enregistrement_dist($args, $retours) {
 	// traitement de l'anonymisation de l'auteur lorsque la méthode d'identification se fait par l'identifiant
 	if ($options['anonymiser'] == 'on' and $id_auteur) {
 		if ($options['identification'] == 'id_auteur' ) {
-			$id_auteur = preg_replace('/[a-zA-Z]/','',md5($id_formulaire.$id_auteur));
-		} else {
-			$id_auteur = 1;
+			$variable_php = formidable_crypter_id_auteur($id_auteur);
 		}
+		$id_auteur = 0;
 	}
 
 	// On cherche le cookie et sinon on le crée
@@ -36,8 +35,11 @@ function traiter_enregistrement_dist($args, $retours) {
 		include_spip('inc/acces');
 		$cookie = creer_uniqid();
 	}
+
 	// On crée un identifiant depuis l'éventuelle variable php d'identification
-	$variable_php = formidable_variable_php_identification($options['variable_php'], $id_formulaire);
+	if ($options['identification'] == 'variable_php' ) {
+		$variable_php = formidable_variable_php_identification($options['variable_php'], $id_formulaire);
+	}
 
 	// On regarde si c'est une modif d'une réponse existante
 	$id_formulaires_reponse = $args['id_formulaires_reponse'];

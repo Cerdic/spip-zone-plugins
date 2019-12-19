@@ -101,6 +101,9 @@ function formidable_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.15.0'] = array(
 		array('formidable_effacer_traitement_enregistrer_sans_option')
 	);
+	$maj['0.17.1'] = array(
+		array('sql_alter','TABLE spip_formulaires_reponses CHANGE variable_php variable_php VARCHAR(255) NOT NULL default ""')
+	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

@@ -149,9 +149,10 @@ function formidable_trouver_reponse_a_editer($id_formulaire, $id_formulaires_rep
  * @param int $id_formulaire L'identifiant du formulaire
  * @param string $choix_identification Comment verifier une reponse. Priorite sur 'cookie' ou sur 'id_auteur'
  * @param string $variable_php_identification : la variable php servant à identifier une réponse
+ * @param string $anonymiser : si 'on', le formulaire doit-être anonymisé
  * @return unknown_type Retourne un tableau contenant les id des réponses si elles existent, sinon false
  */
-function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identification = 'cookie', $variable_php_identification = '') {
+function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identification = 'cookie', $variable_php_identification = '', $anonymiser='') {
 	global $auteur_session;
 	$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
 	$nom_cookie = formidable_generer_nom_cookie($id_formulaire);
@@ -162,7 +163,6 @@ function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identific
 	if (!$cookie and !$id_auteur and !$variable_php_identification) {
 		return false;
 	}
-
 
 	// Determiner les différentes clauses $WHERE possible en fonction de ce qu'on a
 	$where_id_auteur = '';
@@ -187,12 +187,9 @@ function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identific
 		}
 	} elseif ($choix_identification == 'id_auteur') {
 		if ($id_auteur) {
-			$formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = '.$id_formulaire);
-			$traitement =  unserialize($formulaire['traitements']);
-			$anonymiser = $traitement['enregistrement']['anonymiser'];
 			if ($anonymiser == 'on') {
-				$id_auteur = preg_replace('/[a-zA-Z]/','',md5($id_formulaire.$id_auteur));
-				$where_id_auteur = 'id_auteur='.$id_auteur;
+				$id_auteur = formidable_crypter_id_auteur($id_auteur);
+				$where_id_auteur = 'cookie="'.$id_auteur.'"';
 			}
 			$where = array($where_id_auteur);
 		} else {
@@ -602,4 +599,15 @@ function formidable_variable_php_identification($nom_variable, $id_formulaire) {
 		$valeur_variable = formidable_scramble($valeur_variable, $id_formulaire);
 	}
 	return $valeur_variable;
+}
+
+/**
+ * Retourne une valeur crypté de l'id_auteur.
+ * @param string $id_auteur
+ * @return string
+ */
+function formidable_crypter_id_auteur($id_auteur) {
+	include_spip('inc/securiser_action');
+	$pass = secret_du_site();
+	return md5($pass.$id_auteur);
 }
