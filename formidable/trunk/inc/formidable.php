@@ -194,7 +194,11 @@ function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identific
 		if ($id_auteur) {
 			$where = array($where_id_auteur);
 		} else {
-			$where = array($where_cookie);
+			if ($anonymiser) {
+				$where = array($where_cookie);
+			} else {
+				$where = array($where_cookie, $where_variable_php);
+			}
 		}
 	} elseif ($choix_identification == 'variable_php') {
 		if ($variable_php_identification) {
