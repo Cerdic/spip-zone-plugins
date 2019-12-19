@@ -19,9 +19,13 @@ function traiter_enregistrement_dist($args, $retours) {
 	$id_auteur = isset($GLOBALS['visiteur_session']) ? (isset($GLOBALS['visiteur_session']['id_auteur']) ?
 		$GLOBALS['visiteur_session']['id_auteur'] : 0) : 0;
 
-	// traitement de l'anonymisation
+	// traitement de l'anonymisation de l'auteur lorsque la méthode d'identification se fait par l'identifiant
 	if ($options['anonymiser'] == 'on' and $id_auteur) {
-		$id_auteur = 0;
+		if ($options['identification'] == 'id_auteur' ) {
+			$id_auteur = preg_replace('/[a-zA-Z]/','',md5($id_formulaire.$id_auteur));
+		} else {
+			$id_auteur = 1;
+		}
 	}
 
 	// On cherche le cookie et sinon on le crée

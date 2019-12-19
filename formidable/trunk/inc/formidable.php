@@ -187,6 +187,13 @@ function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identific
 		}
 	} elseif ($choix_identification == 'id_auteur') {
 		if ($id_auteur) {
+			$formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = '.$id_formulaire);
+			$traitement =  unserialize($formulaire['traitements']);
+			$anonymiser = $traitement['enregistrement']['anonymiser'];
+			if ($anonymiser == 'on') {
+				$id_auteur = preg_replace('/[a-zA-Z]/','',md5($id_formulaire.$id_auteur));
+				$where_id_auteur = 'id_auteur='.$id_auteur;
+			}
 			$where = array($where_id_auteur);
 		} else {
 			$where = array($where_cookie, $where_variable_php);
