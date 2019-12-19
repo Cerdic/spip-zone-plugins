@@ -22,7 +22,7 @@ function traiter_enregistrement_dist($args, $retours) {
 	// traitement de l'anonymisation de l'auteur lorsque la méthode d'identification se fait par l'identifiant
 	if ($options['anonymiser'] == 'on' and $id_auteur) {
 		if ($options['identification'] == 'id_auteur' ) {
-			$variable_php = formidable_crypter_id_auteur($id_auteur);
+			$variable_php = formidable_hasher_id_auteur($id_auteur);
 		}
 		$id_auteur = 0;
 	}

@@ -170,7 +170,7 @@ function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identific
 	$where_variable_php = '';
 	if ($id_auteur) {
 		if ($anonymiser == 'on') {
-			$id_auteur = formidable_crypter_id_auteur($id_auteur);
+			$id_auteur = formidable_hasher_id_auteur($id_auteur);
 			$where_id_auteur = 'variable_php="'.$id_auteur.'"';
 		} else {
 			$where_id_auteur = 'id_auteur='.$id_auteur;
@@ -603,11 +603,11 @@ function formidable_variable_php_identification($nom_variable, $id_formulaire) {
 }
 
 /**
- * Retourne une valeur crypté de l'id_auteur.
+ * Retourne une valeur hashée de l'id_auteur + secret du site.
  * @param string $id_auteur
  * @return string
  */
-function formidable_crypter_id_auteur($id_auteur="") {
+function formidable_hasher_id_auteur($id_auteur="") {
 	include_spip('inc/securiser_action');
 	$pass = secret_du_site();
 	return md5($pass.$id_auteur);
