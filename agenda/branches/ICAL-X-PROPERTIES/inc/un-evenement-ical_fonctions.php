@@ -36,8 +36,8 @@ function evenement_ical_X_properties($id_evenement) {
 	}
 
 	// Puis les infos sur le nombre de places
-	if ($values['INSCRIPTION']) {
-		$return .= 'X-INSCRIPTION:'.$values['INSCRIPTION']."\n";
+	if ($values['inscription']) {
+		$return .= 'X-INSCRIPTION:'.$values['inscription']."\n";
 	}
 	if ($values['places']) {
 		$return .= 'X-PLACES:'.$values['places']."\n";
