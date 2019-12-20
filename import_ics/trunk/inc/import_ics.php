@@ -152,7 +152,9 @@ function importer_evenement($objet_evenement,$id_almanach,$id_article,$decalage,
  * @return array un tableau des champs sql à insérer/modifier, après passage dans le pipeline evenement_ical_to_sql
 **/
 function evenement_ical_to_sql($objet_evenement, $decalage, $dtend_inclus = false){
-	#on recupere les infos de l'evenement dans des variables
+	//on recupere les infos de l'evenement dans des variables
+
+	$uid_distante = $objet_evenement->getProperty('UID');#uid de l'evenement
 	$attendee = $objet_evenement->getProperty('attendee'); #nom de l'attendee
 	$lieu = $objet_evenement->getProperty('location');#récupération du lieu
 	$summary_array = $objet_evenement->getProperty('summary', 1, TRUE); #summary est un array on recupere la valeur dans l'insertion attention, summary c'est pour le titre !
@@ -165,14 +167,15 @@ function evenement_ical_to_sql($objet_evenement, $decalage, $dtend_inclus = fals
 	if (is_null($sequence_distante)){
 		$sequence_distante = 0;
 	}
-	#données de localisation de l'évenement
+
+
+	//données de localisation de l'évenement
 	$localisation = $objet_evenement->getProperty('GEO');#c'est un array array( "latitude"  => <latitude>, "longitude" => <longitude>))
 	$latitude = $localisation['latitude'];
 	$longitude = $localisation['longitude'];
-	//un petit coup avec l'uid
-	$uid_distante = $objet_evenement->getProperty('UID');#uid de l'evenement
 
-	# récupérer la date de début et la formater correctement
+
+	// Dates de début et de fin
 	$dtstart_array = $objet_evenement->getProperty('dtstart', 1, TRUE);
 	list ($date_debut,$start_all_day) = date_ical_to_sql($dtstart_array,$decalage);
 	#les 3 lignes suivantes servent à récupérer la date de fin et à la mettre dans le bon format
@@ -209,6 +212,8 @@ function evenement_ical_to_sql($objet_evenement, $decalage, $dtend_inclus = fals
 	else{
 		$horaire = 'oui';
 	}
+
+	// Passage au pipeline
 	$sql = array(
 		'date_debut' => $date_debut,
 		'date_fin' => $date_fin,
