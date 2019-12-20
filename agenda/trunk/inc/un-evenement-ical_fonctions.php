@@ -42,7 +42,7 @@ function evenement_ical_X_properties($id_evenement) {
 	if ($values['places']) {
 		$return .= 'X-PLACES:'.$values['places']."\n";
 		$places_reservees = sql_countsel('spip_evenements_participants', array("id_evenement=$id_evenement",'reponse='.sql_quote('oui')));
-		$places_restantes = $values['places'] - $places_reserves;
+		$places_restantes = $values['places'] - $places_reservees;
 		$return .= 'X-PLACES-RESERVEES:'.$places_reservees."\n";
 		$return .= 'X-PLACES-RESTANTES:'.$places_restantes."\n";
 	}
