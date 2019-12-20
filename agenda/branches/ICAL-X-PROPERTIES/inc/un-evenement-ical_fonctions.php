@@ -30,6 +30,7 @@ function evenement_ical_X_properties($id_evenement) {
 	$values = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement");
 
 	// D'abord, le champ adresse
+	$return = '';
 	if ($values['adresse']) {
 		$return = 'X-ADRESSE:'.filtrer_ical($values['adresse'])."\n";
 	}
