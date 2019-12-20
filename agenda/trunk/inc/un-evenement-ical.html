@@ -13,5 +13,6 @@ DESCRIPTION:(#DESCRIPTIF|supprimer_tags|textebrut|filtrer_ical)]
 CATEGORIES:<BOUCLE_article(ARTICLES) {id_article=#ID_ARTICLE}>[(#TITRE|textebrut|filtrer_ical)]</BOUCLE_article>
 URL:[(#URL_ARTICLE|parametre_url{id_evenement,#ID_EVENEMENT}|url_absolue|filtrer_ical)]<BOUCLE_sequence(VERSIONS ?){objet=evenement}{id_objet=#ID_EVENEMENT}{!par id_version}{0,1}>[
 SEQUENCE:(#ID_VERSION|moins{1})]</BOUCLE_sequence>
+[(#ID_EVENEMENT|evenement_ical_X_properties)]
 STATUS:CONFIRMED
 END:VEVENT
