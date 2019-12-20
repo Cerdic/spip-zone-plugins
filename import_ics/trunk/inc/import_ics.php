@@ -162,7 +162,7 @@ function evenement_ical_to_sql($objet_evenement, $decalage, $dtend_inclus = fals
 	$url = $objet_evenement->getProperty('URL');#on récupère l'url de l'événement pour la mettre dans les notes histoire de pouvoir relier à l'événement original
 	$descriptif_array = $objet_evenement->getProperty('DESCRIPTION', 1,TRUE);
 	$organizer = $objet_evenement->getProperty('ORGANIZER');#organisateur de l'evenement
-	$last_modified_distant = serialize($objet_evenement->getProperty("LAST-MODIFIED"));
+	$last_modified_distant = serialize($objet_evenement->getProperty('LAST-MODIFIED'));
 	$sequence_distante = $objet_evenement->getProperty('SEQUENCE');
 	if (is_null($sequence_distante)){
 		$sequence_distante = 0;
