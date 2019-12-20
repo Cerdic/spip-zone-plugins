@@ -11,7 +11,9 @@ include_spip('action/editer_liens');
 include_spip('inc/config');
 include_spip('import_ics_fonctions');
 include_spip('inc/filtres_ecrire');
-
+if (!defined('_IMPORT_ICS_DEPUBLIER_ANCIENS_EVTS')) {
+	define('_IMPORT_ICS_DEPUBLIER_ANCIENS_EVTS','');
+}
 /**
 * Fonction qui trouve tous les évènements associés à un almanach, sauf les archivés (sauf si on demande explicitement)
 **/
