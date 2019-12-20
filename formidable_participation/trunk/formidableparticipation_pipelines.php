@@ -11,6 +11,9 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+if (!defined('_FORMIDABLE_PARTICIPATION_ACTUALISE_MAJ')) {
+	define ('_FORMIDABLE_PARTICIPATION_ACTUALISE_MAJ', false);
+}
 /**
  * Traiter les formulaires de participation
  * @param array $flux
@@ -58,7 +61,9 @@ function formidableparticipation_traiter_formidableparticipation($flux){
 					}
 				}
 		}
-
+		if (_FORMIDABLE_PARTICIPATION_ACTUALISE_MAJ) {
+			sql_update('spip_evenements',array('maj'=>'NOW()'),"id_evenement=$id_evenement");
+		}
 		spip_log("pipeline evenement $id_evenement pour $email et id_auteur=$id_auteur et id_formulaires_reponse=$id_formulaires_reponse et reponse=$reponse ($nb_inscriptions fois)","formidable_participation");
 	}
 
@@ -86,7 +91,12 @@ function formidableparticipation_post_edition($flux) {
 		} else {
 			$champs = array('reponse' => 'non');
 		}
-		sql_updateq("spip_evenements_participants",$champs,'id_formulaires_reponse='.intval($id_formulaires_reponse));
+		$where = 'id_formulaires_reponse='.intval($id_formulaires_reponse);
+		sql_updateq("spip_evenements_participants",$champs,$where);
+		if (_FORMIDABLE_PARTICIPATION_ACTUALISE_MAJ) {
+			$id_evenement = sql_getfetsel('id_evenement','spip_evenements_participants',$where);
+			sql_update('spip_evenements',array('maj'=>'NOW()'),"id_evenement=$id_evenement");
+		}
 	}
 	return $flux;
 }
