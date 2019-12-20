@@ -144,10 +144,14 @@ function importer_evenement($objet_evenement,$id_almanach,$id_article,$decalage,
 	spip_log ("Import de l'évènement $id_evenement, almanach $id_almanach",'import_ics'._LOG_INFO);
 }
 
-/*
- ** Récupérer les propriétés d'un evenements de sorte qu'on puisse en faire la requete sql
- */
-function evenement_ical_to_sql($objet_evenement, $decalage, $dtend_inclus=false){
+/**
+ * Récupérer les propriétés d'un evenements de sorte qu'on puisse en faire la requete sql
+ * @param \vevent $objet_evenement un objet de classe vevent
+ * @param array $decalage un tableau decrivant les éventuels décalage horaire à appliquer
+ * @param bool $dtend_inclus pour signaler si la date de fin est incluse (normalement, si la norme est respectée, non)
+ * @return array un tableau des champs sql à insérer/modifier, après passage dans le pipeline evenement_ical_to_sql
+**/
+function evenement_ical_to_sql($objet_evenement, $decalage, $dtend_inclus = false){
 	#on recupere les infos de l'evenement dans des variables
 	$attendee = $objet_evenement->getProperty('attendee'); #nom de l'attendee
 	$lieu = $objet_evenement->getProperty('location');#récupération du lieu
@@ -205,7 +209,7 @@ function evenement_ical_to_sql($objet_evenement, $decalage, $dtend_inclus=false)
 	else{
 		$horaire = 'oui';
 	}
-	return array(
+	$sql = array(
 		'date_debut' => $date_debut,
 		'date_fin' => $date_fin,
 		'titre' => $titre_evt,
@@ -221,6 +225,16 @@ function evenement_ical_to_sql($objet_evenement, $decalage, $dtend_inclus=false)
 		'sequence' => $sequence_distante,
 		'last_modified_distant' => $last_modified_distant,
 		'notes' => $url
+	);
+	return pipeline('evenement_ical_to_sql',
+		array(
+			'data' => $sql,
+			'args' => array(
+				'objet_evenement' => $objet_evenement,
+				'decalage' => $decalage,
+				'dtend_inclus' => $dtend_inclus
+			)
+		)
 	);
 }
 

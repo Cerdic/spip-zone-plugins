@@ -1,7 +1,7 @@
 <paquet
 	prefix="import_ics"
 	categorie="date"
-	version="4.5.1"
+	version="4.6.0"
 	etat="stable"
 	compatibilite="[3.0.7;3.2.*]"
 	logo="prive/themes/spip/images/import_ics-64.png"
@@ -40,6 +40,7 @@
 	<pipeline nom="post_edition_lien" inclure="import_ics_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="import_ics_pipelines.php" />
 	<pipeline nom="corbeille_table_infos" inclure="import_ics_pipelines.php" />
+	<pipeline nom="evenement_ical_to_sql" />
 
 	<menu nom="almanachs" titre="almanach:titre_almanachs" parent="menu_edition" icone="images/almanach-16.png" action="almanachs" />
 	<menu nom="almanach_creer" titre="almanach:icone_creer_almanach" parent="outils_rapides" icone="images/almanach-new-16.png" action="almanach_edit" parametres="new=oui" />
