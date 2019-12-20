@@ -30,19 +30,19 @@ function genie_import_ics_synchro_dist($t){
 		{
 			//pour chacun des almanachs, on va importer les evenements
 		foreach ($resultats as $r) {
-				$id_almanach = $r["id_almanach"];
-				spip_log ("Import via génie de l'almanach $id_almanach","import_ics"._LOG_INFO);
+				$id_almanach = $r['id_almanach'];
+				spip_log ("Import via génie de l'almanach $id_almanach",'import_ics'._LOG_INFO);
 				importer_almanach(
 					$id_almanach,
-					$r["url"],
-					$r["id_article"],
+					$r['url'],
+					$r['id_article'],
 					array(
-						'ete' => $r["decalage_ete"],
-						'hiver' => $r["decalage_hiver"]
+						'ete' => $r['decalage_ete'],
+						'hiver' => $r['decalage_hiver']
 					),
 					$r['dtend_inclus']
 				);
-				spip_log ("Fin de l'import via génie de l'almanach $id_almanach","import_ics"._LOG_INFO);
+				spip_log ("Fin de l'import via génie de l'almanach $id_almanach",'import_ics'._LOG_INFO);
 			}
 			return 1;
 		}
