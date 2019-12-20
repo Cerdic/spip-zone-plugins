@@ -213,16 +213,12 @@ function evenement_ical_to_sql($objet_evenement, $decalage, $dtend_inclus = fals
 		$horaire = 'oui';
 	}
 
-	// Passage au pipeline
 	$sql = array(
 		'date_debut' => $date_debut,
 		'date_fin' => $date_fin,
 		'titre' => $titre_evt,
 		'descriptif' => import_ics_correction_retour_ligne($descriptif_array['value']),
 		'lieu' => import_ics_correction_retour_ligne($lieu),
-		'adresse' => '',
-		'inscription' => '0',
-		'places' => '0',
 		'horaire' => $horaire,
 		'attendee' => str_replace('MAILTO:', '', $attendee),
 		'id_evenement_source' => '0',
@@ -231,13 +227,37 @@ function evenement_ical_to_sql($objet_evenement, $decalage, $dtend_inclus = fals
 		'last_modified_distant' => $last_modified_distant,
 		'notes' => $url
 	);
+
+	// Les propriétés X- (fournies par le plugin agenda > 3.34 si demandée expressement)
+	$xprops = array();
+	while ($prop = $objet_evenement->getProperty('X-PROP','',true)) {
+		$xprops[$prop[0]] = $prop[1]['value'];
+	}
+	$champs_x = array('adresse', 'places', 'inscription');
+	if (test_plugin_actif('cextras')) {
+		include_spip('cextras_pipelines');
+		$cextras = champs_extras_objet('spip_evenements');
+		$cextras = array_keys($cextras);
+		$champs_x = array_merge($champs_x,$cextras);
+	}
+
+
+	foreach ($champs_x as $champ) {
+		$xchamp = 'X-'.strtoupper($champ);
+		if (isset($xprops[$xchamp])) {
+			$sql[$champ] = $xprops[$xchamp];
+		}
+	}
+	// Passage au pipeline
 	return pipeline('evenement_ical_to_sql',
 		array(
 			'data' => $sql,
 			'args' => array(
 				'objet_evenement' => $objet_evenement,
 				'decalage' => $decalage,
-				'dtend_inclus' => $dtend_inclus
+				'dtend_inclus' => $dtend_inclus,
+				'xprops' => $xprops, // On le passe car c'est pénible à parcourir, on qu'on a avancer l'itérateur de toute facon
+				'champs_x' => $champs_x // idem
 			)
 		)
 	);
