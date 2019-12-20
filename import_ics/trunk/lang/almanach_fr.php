@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'alamnachs_corbeille_tous' => '@nb@ almanachs à la corbeille',
 	'almanach' => 'Almanach',
 	'almanachs_corbeille_un' => 'Un almanach à la corbeille',
-	'attendee' => 'Intervenant(e)',
+	'attendee' => 'Intervenant·e',
 	'aucun_decalage' => 'Aucun décalage',
 	'aucun_evenement' => 'Cet almanach ne contient aucun événement.',
 
