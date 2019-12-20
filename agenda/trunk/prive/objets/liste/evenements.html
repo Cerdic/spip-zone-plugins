@@ -23,7 +23,7 @@
 	<BOUCLE_liste_evt(EVENEMENTS){id_evenement?}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}{where?}{statut?}{recherche?}{tri #ENV{par,date_debut},#GET{defaut_tri}}{pagination #ENV{nb,15}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE)][(#ID_EVENEMENT_SOURCE|oui)repetition]">
 			<td class='statut'>[(#STATUT|puce_statut{evenement,#ID_EVENEMENT})]</td>
-			<td class='date'>[(#DATE_DEBUT|affdate_jourcourt|unique{liste_evt})]</td>
+			<td class='date'>[(#DATE_DEBUT|affdate_jourcourt)]</td>
 			<td class='article secondaire'>[<a (#ID_ARTICLE|oui) href="[(#ID_ARTICLE|generer_url_entite{article})]" title="[(#INFO_TITRE{article,#ID_ARTICLE}|attribut_html)]">[(#CHEMIN_IMAGE{article-16.png}|balise_img{#INFO_TITRE{article,#ID_ARTICLE}})]</a>]</td>
 			<td class='titre principale'><a href="[(#ID_EVENEMENT|generer_url_entite{evenement})]" title="<:info_numero_abbreviation|attribut_html:> #ID_EVENEMENT">[(#RANG). ]#TITRE</a>
 				<p class="date">[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#HORAIRE})]</p>
