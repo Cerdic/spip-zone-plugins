@@ -29,13 +29,18 @@
 				<p class="date">[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#HORAIRE})]</p>
 			</td>
 			<td class='lieu secondaire'>#LIEU</td>
-			#SET{id_evenement,#ID_EVENEMENT_SOURCE|?{#ID_EVENEMENT_SOURCE,#ID_EVENEMENT}}
 			<td class='id'>[(#ID_EVENEMENT_SOURCE|oui)
 				[(#CHEMIN_IMAGE{repetition-16.png}|balise_img{<:agenda:repetition:>,''}|inserer_attribut{title,<:agenda:repetition:>})]
-				][(#AUTORISER{modifier,evenement,#GET{id_evenement}}|?{[
-				<a href="[(#URL_ECRIRE{evenement_edit}|parametre_url{id_evenement,#GET{id_evenement}}|parametre_url{redirect,#SELF})]">(#GET{id_evenement})</a>],
-				[(#GET{id_evenement})]
+				][(#AUTORISER{modifier,evenement,#ID_EVENEMENT}|?{[
+				<a href="[(#URL_ECRIRE{evenement_edit}|parametre_url{id_evenement,#ID_EVENEMENT}|parametre_url{redirect,#SELF})]">(#ID_EVENEMENT)</a>],
+				#ID_EVENEMENT
 			})]
+			[(#ID_EVENEMENT_SOURCE|oui)
+			[(#AUTORISER{modifier,evenement,#ID_EVENEMENT_SOURCE}|?{[
+			<a href="[(#URL_ECRIRE{evenement_edit}|parametre_url{id_evenement,#ID_EVENEMENT_SOURCE}|parametre_url{redirect,#SELF})]"> \((#ID_EVENEMENT_SOURCE)\)</a>],
+			\(#ID_EVENEMENT_SOURCE\)
+			})]
+			]
 			</td>
 		</tr>
 	</BOUCLE_liste_evt>
