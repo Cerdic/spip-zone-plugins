@@ -24,7 +24,7 @@ function pp_chgt_lg_porte_plume_barre_pre_charger($barres) {
 	return $barres;
 }
 
-// Icônes pour le porte-plume
+// Icones pour le porte-plume
 
 function pp_chgt_lg_porte_plume_lien_classe_vers_icone($flux) {
 	$icones = array();
@@ -36,6 +36,3 @@ function pp_chgt_lg_header_prive($texte) {
 	$texte.= '<link rel="stylesheet" type="text/css" href="' . _DIR_PLUGIN_PP_CHGT_LG . 'css/pp_chgt_lg_prive.css" />' . "\n";
 	return $texte;
 }
-
-
-?>

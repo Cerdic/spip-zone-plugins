@@ -16,4 +16,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pp_chgt_lg_description' => 'Ajoute un bouton au porte-plume permettant d\'indiquer un changement de langue dans le texte.',
 	'pp_chgt_lg_slogan' => 'Extension changement de langue pour Porte-Plume',
 );
-?>
