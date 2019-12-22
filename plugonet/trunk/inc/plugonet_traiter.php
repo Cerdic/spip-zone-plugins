@@ -295,6 +295,7 @@ function plugin2balise_nom($texte) {
 // -- on renvoie aussi le tableau des noms, descriptions et slogans par langue pour eviter de le 
 //    recalculer ensuite
 function plugin2balise_commentaire($nom, $description, $slogan, $prefixe) {
+	$res = '';
 	$descriptions = extraire_descriptions($nom, $description, $slogan, $prefixe);
 	if ($slogan = $descriptions['fr'][strtolower($prefixe) . '_slogan'])
 		$res = "\t<!-- ". $slogan . " -->";
