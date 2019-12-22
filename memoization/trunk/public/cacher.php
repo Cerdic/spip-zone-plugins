@@ -47,8 +47,8 @@ function cache_signature(&$page) {
 /**
  * gestion des delais d'expiration du cache...
  * $page passee par reference pour accelerer
- * 
- * La fonction retourne 
+ *
+ * La fonction retourne
  * 1 si il faut mettre le cache a jour
  * 0 si le cache est valide
  * -1 si il faut calculer sans stocker en cache
@@ -140,7 +140,7 @@ function cache_valide(&$page, $date) {
 		# le cache est anterieur a la derniere purge : l'ignorer, meme pour les bots
 	  OR $date<$cache_mark) {
 	  	if (_IS_BOT) return -1;
-	  	
+
 	  	// si la charge est trop elevee on accepte de prendre un vieux cache
 	  	$load = function_exists('sys_getloadavg') ? sys_getloadavg() : array(0);
 	  	if ($load[0]>20) {
@@ -216,12 +216,6 @@ function creer_cache(&$page, &$chemin_cache, &$memo) {
 	spip_log((_IS_BOT?"Bot:":"")."Creation du cache $chemin_cache ". $memo->methode ." pour "
 		. $page['entetes']['X-Spip-Cache']." secondes". ($ok?'':' (erreur!)'));
 
-	// Inserer ses invalideurs
-	/* compat SPIP 1.9 : ne pas appeler les invalideurs du tout */
-	if (!(isset($GLOBALS['spip_version']) AND $GLOBALS['spip_version']<2)) {
-		include_spip('inc/invalideur');
-		maj_invalideurs($chemin_cache, $page);
-	}
 }
 
 
@@ -257,7 +251,7 @@ function nettoyer_petit_cache($prefix, $duree = 300) {
 // https://code.spip.net/@public_cacher_dist
 function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmodified) {
 	$chemin_cache_session = false;
-	
+
 	/* compat SPIP 1.9 */
 	if (is_null($contexte) AND function_exists('nettoyer_uri'))
 		$contexte = array('uri' => nettoyer_uri());
@@ -284,7 +278,7 @@ function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmod
 
 	// Cas ignorant le cache car completement dynamique
 	if ($_SERVER['REQUEST_METHOD'] == 'POST'
-	OR (substr($contexte_implicite['cache'],0,8)=='modeles/') 
+	OR (substr($contexte_implicite['cache'],0,8)=='modeles/')
 	OR (_request('connect'))
 // Mode auteur authentifie appelant de ecrire/ : il ne faut rien lire du cache
 // et n'y ecrire que la compilation des squelettes (pas les pages produites)
@@ -322,15 +316,6 @@ function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmod
 		unset($page['gz']);
 	}
 
-	if (intval($GLOBALS['spip_version_branche'])<3){
-		// HEAD : cas sans jamais de calcul pour raisons de performance
-		// supprime en SPIP 3 par https://core.spip.net/projects/spip/repository/revisions/19959
-		if ($_SERVER['REQUEST_METHOD'] == 'HEAD') {
-			$use_cache = 0;
-			$page = array('contexte_implicite'=>$contexte_implicite);
-			return;
-		}
-	}
 
 	// Si un calcul, recalcul [ou preview, mais c'est recalcul] est demande,
 	// on supprime le cache
