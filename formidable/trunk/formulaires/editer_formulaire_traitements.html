@@ -27,11 +27,11 @@
 					var check = jQuery(me).prev().find('input.checkbox');
 					check.bind('change',function(){
 						if (check.is(':checked')){
-							jQuery(me).show('fast');
+							jQuery(me).show('slow');
 							check.closest('.editer').addClass('hover');
 						}
 						else {
-							jQuery(me).hide('fast');
+							jQuery(me).hide('slow');
 							check.closest('.editer').removeClass('hover');
 						}
 					})
