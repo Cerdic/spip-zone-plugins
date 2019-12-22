@@ -225,6 +225,15 @@ global $Memoization;
 					}
 				}
 				continue 2;	 // échec : passe à la $cle suivante
+			case '==' :
+			case 'egal' :
+			case 'equal':
+				foreach ($chemins as $unchemin) {
+					if ($unchemin==$partie_cle) {
+						break 2;	// trouvé : sort du foreach et du switch et poursuit le test des autres conditions
+					}
+				}
+				continue 2;	 // échec : passe à la $cle suivante
 			case 'regexp':
 				if ($chemin and ($danslechemin = preg_match(",$chemin,i", $partie_cle))) {
 					break;	// trouvé : poursuit le test des autres conditions

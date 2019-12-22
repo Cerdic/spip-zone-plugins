@@ -1,7 +1,7 @@
 <paquet
 	prefix="cachelab"
 	categorie="performance"
-	version="0.99.5"
+	version="1.0.0"
 	etat="test"
 	compatibilite="[3.0.0;3.3.*]"
 	logo="images/cachelab-32.png"
