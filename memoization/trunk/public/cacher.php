@@ -215,6 +215,12 @@ function creer_cache(&$page, &$chemin_cache, &$memo) {
 
 	spip_log((_IS_BOT?"Bot:":"")."Creation du cache $chemin_cache ". $memo->methode ." pour "
 		. $page['entetes']['X-Spip-Cache']." secondes". ($ok?'':' (erreur!)'));
+	// Inserer ses invalideurs
+	/* compat SPIP 1.9 : ne pas appeler les invalideurs du tout */
+	if (!(isset($GLOBALS['spip_version']) AND $GLOBALS['spip_version']<2)) {
+		include_spip('inc/invalideur');
+		maj_invalideurs($chemin_cache, $page);
+	}
 
 }
 
