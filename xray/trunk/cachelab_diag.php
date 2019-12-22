@@ -1,4 +1,7 @@
-<p><b>Action ciblée sur le cache</b> : Les arguments supplémentaires de l'url spécifient quelle action doit être appliquée sur quels caches.
+<h3>Essais "manuels" de cachelab</h3>
+<p><b>Action ciblée sur le cache</b> : cette page permet d'essayer cachelab "à la main". Ç'a été utile pendant la mise au point de cachelab.<br>
+Les arguments supplémentaires de l'url spécifient quelle action doit être appliquée sur quels caches.<br>
+Ci après, les valeurs en gras sont les valeurs par défaut.
 <small><ul>
 <li>action : del, mark, pass, <b>list</b></li>
 <li>chemin : liste de morceaux de chemins séparés par | , ou expression régulière si methode=regexp</li>
@@ -20,9 +23,7 @@ if (isset($_GET['methode']) and $_GET['methode'])
 else 
 	$cachelab_methode_chemin = 'strpos';
 
-if (isset ($_GET['chemin']))
-	$chemin = $_GET['chemin'];
-
+$chemin = (isset ($_GET['chemin']) ?$_GET['chemin'] : '');
 
 if (isset ($_GET['objet']))
 	$objet = $_GET['objet'];
