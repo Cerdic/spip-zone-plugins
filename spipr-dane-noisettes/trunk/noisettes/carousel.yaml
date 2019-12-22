@@ -94,12 +94,3 @@ parametres:
       defaut: ''
       class: 'palette''
       conteneur_class: 'long_label'
-  -
-    saisie: 'fieldset'
-    options:
-      nom: 'fieldset_conf_avancee'
-      label: '<:sdn:label_conf_avancee_noisettes:>'
-      explication: '<:sdn:explication_conf_avancee_noisettes:>'
-      afficher_si: '@config:sdn:conf_avancee@  == "on"'
-    saisies:
-      - 'inclure:inclure/yaml/conf_avancee.yaml'

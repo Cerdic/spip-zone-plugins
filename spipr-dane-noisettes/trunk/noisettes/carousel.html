@@ -4,7 +4,6 @@
 [(#ID_RUBRIQUE|>{0}|oui)#SET{id_rubrique,#ID_RUBRIQUE}]
 [(#ID_RUBRIQUE|>{0}|non)#SET{id_rubrique,0}]
 #SET{masquer_h2, #ENV{masquer_titre}|et{#ENV{masquer_picto}}|oui|?{on,''}}
-<INCLURE{fond=inclure/conteneur_ouvrir, env}/>
 <B_articles_selection>
     <div class="liste selection">
     [(#ENV{masquer_h2}|non)<h2 class="h2">[(#ENV{masquer_titre}|non)[(#ENV{titre,<:spipr_dane:a_la_une:>})]][(#ENV{masquer_picto}|non)<span class="picto"><i class="fa fa-#ENV{picto,star} "></i></span>]</h2>]
@@ -45,4 +44,3 @@
 </div><!-- /.carousel -->
     </div>
 </B_articles_selection>
-<INCLURE{fond=inclure/conteneur_fermer, env}/>

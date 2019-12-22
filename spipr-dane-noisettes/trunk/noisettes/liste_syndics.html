@@ -1,4 +1,2 @@
 #SET{masquer_h2, #ENV{masquer_titre}|et{#ENV{masquer_picto}}|oui|?{on,''}}
-<INCLURE{fond=inclure/conteneur_ouvrir, env}/>
     <div class="liste syndics"><INCLURE{fond=inclure/listes-sites-syndics,nb=#ENV{nb,10}, masquer_h2=#GET{masquer_h2},env,ajax}></div>
-<INCLURE{fond=inclure/conteneur_fermer, env}/>
