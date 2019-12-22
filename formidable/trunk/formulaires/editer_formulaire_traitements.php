@@ -37,7 +37,7 @@ function formulaires_editer_formulaire_traitements_charger($id_formulaire) {
 				'saisie' => 'checkbox',
 				'options' => array(
 					'nom' => 'traitements_choisis',
-					'label' => $traitement['titre'],
+					'conteneur_class' => 'pleine_largeur',
 					'datas' => array(
 						$type_traitement => $traitement['description']
 					)
