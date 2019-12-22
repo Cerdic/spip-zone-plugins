@@ -11,7 +11,7 @@ date_redac,-1
 	#ANCRE_PAGINATION
     [(#ENV{masquer_h2}|non)<h2 class="h2">[(#ENV{masquer_titre}|non)[(#ENV{titre,<:derniers_articles:>}) ][(#ENV{masquer_nombre}|non)<small>&#40;#GRAND_TOTAL&#41;</small>] ][(#ENV{masquer_picto}|non)<span class="picto"><i class="fa fa-#ENV{picto,rss} "></i></span>]</h2>]
 	<ul class="liste-items[ (#ENV{liste_span}|oui) liste-span][ (#ENV{liste_simple}|oui) liste-simple]">
-		<BOUCLE_articles(ARTICLES){branche ?}{tri #GET{tri},#GET{defaut_tri}}{!id_article IN #ENV{articles_exclus,#ARRAY}}{!id_rubrique IN #ENV{rubriques_exclues,#ARRAY}}{pagination #ENV{nb,5}}{doublons}>
+		<BOUCLE_articles(ARTICLES){branche ?}{id_mot ?}{tri #GET{tri},#GET{defaut_tri}}{!id_article IN #ENV{articles_exclus,#ARRAY}}{!id_rubrique IN #ENV{rubriques_exclues,#ARRAY}}{pagination #ENV{nb,5}}{doublons}>
 		<li class="item[ (#ENV{span})]">#INCLURE{fond=inclure/resume/article,id_article,env}</li>
 		</BOUCLE_articles>
 	</ul>
