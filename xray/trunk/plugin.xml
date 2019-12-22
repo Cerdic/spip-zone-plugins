@@ -8,7 +8,7 @@
 	<auteur>Ilia Alshanetsky</auteur>
 	<licence>GPL</licence>
 	<licence>PHP</licence>
-	<version>0.23.4</version>
+	<version>0.24.0</version>
 	<etat>test</etat>
 	<description>
 	Explorer les caches des squelettes SPIP avec memoization APC pour les comprendre et les optimiser

@@ -5,7 +5,8 @@ Ci après, les valeurs en gras sont les valeurs par défaut.
 <small><ul>
 <li>action : del, mark, pass, <b>list</b></li>
 <li>chemin : liste de morceaux de chemins séparés par | , ou expression régulière si methode=regexp</li>
-<li>methode : fonction de détection du chemin spécifié : <b>strpos</b> ou regexp</li>
+<li>methode : fonction de détection du chemin spécifié : <b>strpos</b> ou regexp ou equal (paramètre de cachelab_cibler : <i>methode_chemin</i>)</li>
+<li>partie_chemin : <b>tout</b> ou dossier ou fichier : la partie du chemin qui est testée</li>
 <li>objet : un type d'objet (article, breve, etc) ou XRAY_OBJET_SPECIAL si non spécifié</li>
 <li>cle_objet : clé primaire (si différente de 'id_'+objet)</li>
 <li>id_article, id_breve, etc selon objet</li>
@@ -20,23 +21,29 @@ else
 
 if (isset($_GET['methode']) and $_GET['methode'])
 	$cachelab_methode_chemin = $_GET['methode'];
-else 
+else
 	$cachelab_methode_chemin = 'strpos';
 
 $chemin = (isset ($_GET['chemin']) ?$_GET['chemin'] : '');
+
+if (isset($_GET['partie_chemin']) and $_GET['partie_chemin'])
+	$cachelab_partie_chemin = $_GET['partie_chemin'];
+else
+	$cachelab_partie_chemin = 'tout';
+
 
 if (isset ($_GET['objet']))
 	$objet = $_GET['objet'];
 elseif (defined ('XRAY_OBJET_SPECIAL') and XRAY_OBJET_SPECIAL)
 	$objet = XRAY_OBJET_SPECIAL;
-else 
+else
 	$objet = null;
 
 if (isset ($_GET['cle_objet']))
 	$cle_objet = $_GET['cle_objet'];
 elseif ($objet)
 	$cle_objet = 'id_'.$objet;	// TODO appeler API spip
-else 
+else
 	$cle_objet = '';
 
 if ($cle_objet and isset ($_GET[$cle_objet]))
@@ -47,7 +54,7 @@ else
 $id_objet=intval($id_objet);
 if ($id_objet and $objet)
 	$url_objet = "?page=$objet&$cle_objet=$id_objet";
-else 
+else
 	$url_objet = '';
 
 if (isset ($_GET['action']))
@@ -57,24 +64,24 @@ else
 
 $contexte_test=array('id_article' => 1 , 'id_rubrique' => 48 );
 $contexte = ((isset ($_GET['contexte'])) ? $contexte_test : '');
-	
+
 if ($cle_objet and !$id_objet)
 	$cle_objet='';
 
 $conditions = array('session'=>$session, 'chemin'=>$chemin, 'cle_objet'=>$cle_objet, 'id_objet'=>$id_objet, 'contexte'=>$contexte);
-$options = array('list'=>true, 'methode_chemin'=>$cachelab_methode_chemin);
+$options = array('list'=>true, 'methode_chemin'=>$cachelab_methode_chemin, 'partie_chemin'=>$cachelab_partie_chemin);
 
 echo "<pre>"
 	.preg_replace(
 		'/^Array/', 'cachelab_cibler',
 		print_r(array(
-			'action'=>$action, 
-			'conditions'=>$conditions, 
+			'action'=>$action,
+			'conditions'=>$conditions,
 			'options'=>$options), 1))
 	."</pre>";
 
 $stats = cachelab_cibler(
-	$action, 
+	$action,
 	$conditions,
 	$options
 );
@@ -117,3 +124,4 @@ if (count($l_cible)) {
 }
 else
 	echo "Pas de cache cible<br>";
+))
