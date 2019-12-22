@@ -145,6 +145,14 @@ body.large {
   font-size: 1em;
 }
 
+.formulaire_spip .pleine_largeur {
+	padding-#ENV{left}:10px;
+}
+
+.formulaire_spip .pleine_largeur>label {
+	width:auto;
+	margin-#ENV{left}: 0;
+}
 
 /* Petit écran : tout en pleine largeur (pas mobile-first, car sinon ça peut péter des trucs avec les plugins qui stylent les saisies) */
 @media (max-width: 640px) {
