@@ -20,7 +20,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function saisies_header_prive($flux) {
 	$js = find_in_path('javascript/saisies.js');
 	$flux .= "\n<script type='text/javascript' src='$js'></script>\n";
-	$css = generer_url_public('saisies.css');
+	$css = produire_fond_statique('saisies.css');
 	$flux .= "\n<link rel='stylesheet' href='$css' type='text/css' media='all' />\n";
 	$css_constructeur = find_in_path('css/formulaires_constructeur.css');
 	$flux .= "\n<link rel='stylesheet' href='$css_constructeur' type='text/css' />\n";
@@ -47,7 +47,7 @@ function saisies_affichage_final($flux) {
 		if (!$pi = strpos($flux, '<link') and !$pi = strpos($flux, '</head')) {
 			$pi = $p; // si pas de <link inserer comme un goret entre 2 <li> de saisies
 		}
-		$css = generer_url_public('saisies.css');
+		$css = produire_fond_statique('saisies.css');
 		$ins_css = "\n<link rel='stylesheet' href='$css' type='text/css' media='all' />\n";
 
 		//si on a une saisie de type date, on va charger les css de jquery_ui
