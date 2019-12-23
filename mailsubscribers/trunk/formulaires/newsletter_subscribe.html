@@ -19,7 +19,9 @@
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
-		<p class="boutons"><input type="submit" class="submit" value="<:newsletter:bouton_subscribe|attribut_html:>" /></p>
+		[(#REM) S'il y a plusieurs choix possibles, on change le label ]
+		[(#SET{bouton, #ENV{_listes_choix}|count|>{1}|et{#ENV{_checkable}}|?{<:newsletter:bouton_subscribe_multiples|attribut_html:>, <:newsletter:bouton_subscribe|attribut_html:>}})]
+		<p class="boutons"><input type="submit" class="submit" value="#GET{bouton}" /></p>
 	</div></form>
 	]
 </div>
