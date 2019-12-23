@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
-	'mathjax_description' => 'Le plugin remplace les balises <math> et </math> de SPIP.',
+	'mathjax_description' => 'Le plugin remplace les balises <code><math></code> et <code></math></code> de SPIP.',
 	'mathjax_nom' => 'MathJax pour SPIP !',
-	'mathjax_slogan' => 'Afficher des équations, des fonctions mathématiques'
+	'mathjax_slogan' => 'Afficher des équations et des fonctions mathématiques'
 );
