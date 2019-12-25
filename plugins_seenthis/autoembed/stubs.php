@@ -73,6 +73,15 @@ $AutoEmbed_stubs = array(
     'iframe-player' => 'https://www.dailymotion.com/embed/video/$2',
   ),
  array(
+    'title' => 'Invidious',
+    'website' => 'https://invidio.us/',
+    'url-match' => 'http://invidio\.us/watch\?v=([A-Za-z0-9\-_]+)',
+    'embed-width' => '480',
+    'embed-height' => '270',
+    'image-src' => 'https://invidio.us/vi/$2/maxres.jpg',
+    'iframe-player' => 'https://invidio.us/embed/$2',
+  ),
+ array(
     'title' => 'PeerTube DataGueule',
     'website' => 'https://peertube.datagueule.tv/',
     'url-match' => 'http://peertube\.datagueule\.tv/videos/watch/(.*)',
