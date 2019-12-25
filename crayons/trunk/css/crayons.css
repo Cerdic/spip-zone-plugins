@@ -17,14 +17,14 @@
 .crayon-icones>span {position: absolute;top:0;right: 0;left: auto;width: 100%;height: 0;padding-bottom: 100%;}
 .crayon-icones>em { position:absolute; left:0; }
 
-.crayon-hover .crayon-icones { display: block;}
-.crayon-hover .crayon-icones span,.crayon-hover .crayon-icones em.crayon-crayon {display: block !important;}
-.crayon-changed .crayon-icones,.crayon-changed .crayon-icones span,.crayon-changed .crayon-icones em.crayon-img-changed {display: block !important;}
-.crayon-changed.crayon-hover em.crayon-img-changed {background-color:#fff; filter:grayscale(100%)}
-.crayon-changed.crayon-hover em.crayon-crayon {z-index:2;background-color: rgba(255,255,255,0.5);}
+.crayon-hover>.crayon-icones { display: block;}
+.crayon-hover>.crayon-icones span,.crayon-hover>.crayon-icones em.crayon-crayon {display: block !important;}
+.crayon-changed>.crayon-icones,.crayon-changed>.crayon-icones span,.crayon-changed>.crayon-icones em.crayon-img-changed {display: block !important;}
+.crayon-changed.crayon-hover>.crayon-icones em.crayon-img-changed {background-color:#fff; filter:grayscale(100%)}
+.crayon-changed.crayon-hover>.crayon-icones em.crayon-crayon {z-index:2;background-color: rgba(255,255,255,0.5);}
 
-.crayon-loading .crayon-icones, .crayon-loading .crayon-icones span,.crayon-loading .crayon-icones em.crayon-searching {display: block !important;}
-.crayon-loading .crayon-icones em.crayon-crayon {display: none !important;}
+.crayon-loading>.crayon-icones, .crayon-loading>.crayon-icones span,.crayon-loading>.crayon-icones em.crayon-searching {display: block !important;}
+.crayon-loading>.crayon-icones em.crayon-crayon {display: none !important;}
 
 
 em.crayon-edit,
