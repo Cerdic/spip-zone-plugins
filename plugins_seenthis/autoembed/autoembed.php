@@ -14,6 +14,12 @@ function embed_url($url) {
 	$host = $p["host"];
 	$host = preg_replace(",^www\.,", "", $host);
 	$host = str_replace(".", "-", $host);
+	
+	// détecter les cas de mixed content
+	$mixed_content = false;
+	if ($p['scheme'] == 'http' and (!empty($_SERVER["HTTPS"]) and $_SERVER["HTTPS"] == 'on')) {
+		$mixed_content = true;
+	}
 
 	$fichier = md5($url).".php";
 	$dossier = substr(md5($url), 0, 3);
@@ -131,7 +137,7 @@ function embed_url($url) {
 				if ($html) $code_ae = "<div class='oembed-container'>$html</div>";
 			}
 		}
-		else if (preg_match(",^https?://[^\"\'\`\<\>\@\*\$]*?\.mp3(\?.*)?$,i", $url)) {
+		else if (preg_match(",^https?://[^\"\'\`\<\>\@\*\$]*?\.mp3(\?.*)?$,i", $url) and !$mixed_content) {
 			$html = file_get_contents(dirname(__FILE__).'/modeles/mp3.html');
 			$html = str_replace('{source}', htmlspecialchars($url), $html);
 			$url_dewplayer = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME']).'/autoembed/modeles/dewplayer.swf';
