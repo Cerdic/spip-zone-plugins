@@ -29,7 +29,7 @@ function navbar_responsive($nav, $class_collapse = 'nav-collapse-main'){
 	static $navbarcount = 1;
 	if (strpos($nav,'navbar-collapse')!==false) return $nav;
 
-	$respnav = '';
+	$respnav = $nav;
 
 	$uls = extraire_balises($nav,"ul");
 	$n = 1;
@@ -39,7 +39,6 @@ function navbar_responsive($nav, $class_collapse = 'nav-collapse-main'){
 	}
 	if ($ul){
 		$id = "navbar-".substr(md5($navbarcount . ':' . time() .':' . $nav),0,4);
-		$respnav = $nav;
 		$p = strpos($respnav,$ul);
 		$respnav = substr_replace($respnav,
 			'<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#' . $id . '" aria-controls="'. $id . '" aria-expanded="false" aria-label="Toggle navigation">'
