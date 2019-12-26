@@ -4,10 +4,12 @@ icon: 'liste-articles-24.png'
 ajax: 'non'
 parametres:
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'masquer_titre'
       label: '<:sdnnoisettes:label_masquer_titre:>'
+      datas:
+        on: '<:sdnnoisettes:masquer:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
@@ -19,17 +21,21 @@ parametres:
       afficher_si: '@masquer_titre@ != "on"'
       conteneur_class: 'long_label'
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'masquer_nombre'
       label: '<:sdnnoisettes:label_masquer_nombre:>'
+      datas:
+        on: '<:sdnnoisettes:masquer:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'masquer_picto'
       label: '<:sdnnoisettes:label_masquer_picto:>'
+      datas:
+        on: '<:sdnnoisettes:masquer:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
@@ -42,27 +48,31 @@ parametres:
       afficher_si: '@masquer_picto@ != "on"'
       conteneur_class: 'long_label'
   -
-    saisie: 'input'
+    saisie: 'selecteur_article'
     options:
       nom: 'articles_exclus'
       label: '<:sdnnoisettes:label_articles_exclus:>'
       explication: '<:sdnnoisettes:explication_articles_exclus:>'
+      multiple: 'oui'
       defaut: ''
       conteneur_class: 'long_label'
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'exclure_article_selection'
       label: '<:sdnnoisettes:label_exclure_article_selection:>'
       explication: '<:sdnnoisettes:explication_exclure_article_selection:>'
+      datas:
+        on: '<:sdnnoisettes:oui:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
-    saisie: 'input'
+    saisie: 'selecteur_rubrique'
     options:
       nom: 'rubriques_exclues'
       label: '<:sdnnoisettes:label_rubriques_exclues:>'
       explication: '<:sdnnoisettes:explication_rubriques_exclues:>'
+      multiple: 'oui'
       defaut: ''
       conteneur_class: 'long_label'
   -
@@ -98,17 +108,21 @@ parametres:
     verifier:
       type: 'entier'
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'afficher_liste_simple'
       label: '<:sdnnoisettes:label_afficher_liste_simple:>'
       conteneur_class: 'long_label'
+      datas:
+        on: '<:sdnnoisettes:liste_simple:>'
       defaut: ''
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'masquer_logo'
       label: '<:sdnnoisettes:label_masquer_logo:>'
+      datas:
+        on: '<:sdnnoisettes:masquer:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
@@ -132,20 +146,24 @@ parametres:
     verifier:
       type: 'entier'
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'image_passe_partout'
       label: '<:sdnnoisettes:label_image_passe_partout:>'
       explication: '<:sdnnoisettes:explication_image_passe_partout:>'
+      datas:
+        on: '<:sdnnoisettes:oui:>'
       defaut: ''
       afficher_si: '@masquer_logo@  != "on"'
       conteneur_class: 'long_label'
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'image_zoom_hover'
       label: '<:sdnnoisettes:label_image_zoom_hover:>'
       explication: '<:sdnnoisettes:explication_image_zoom_hover:>'
+      datas:
+        on: '<:sdnnoisettes:oui:>'
       defaut: ''
       afficher_si: '@masquer_logo@  != "on" && @image_passe_partout@ == "on"'
       conteneur_class: 'long_label'
@@ -157,11 +175,13 @@ parametres:
       afficher_si: '@afficher_liste_simple@ != "on"'
     saisies:
       -
-        saisie: 'oui_non'
+        saisie: 'checkbox'
         options:
           nom: 'masquer_intro'
           label: '<:sdnnoisettes:label_masquer_intro:>'
           conteneur_class: 'long_label'
+          datas:
+            on: '<:sdnnoisettes:masquer:>'
           defaut: ''
       -
         saisie: 'input'
@@ -174,25 +194,31 @@ parametres:
         verifier:
           type: 'entier'
       -
-        saisie: 'oui_non'
+        saisie: 'checkbox'
         options:
           nom: 'masquer_date'
           label: '<:sdnnoisettes:label_masquer_date:>'
           conteneur_class: 'long_label'
+          datas:
+            on: '<:sdnnoisettes:masquer:>'
           defaut: ''
       -
-        saisie: 'oui_non'
+        saisie: 'checkbox'
         options:
           nom: 'afficher_tags'
           label: '<:sdnnoisettes:label_afficher_tags:>'
           conteneur_class: 'long_label'
+          datas:
+            on: '<:sdnnoisettes:afficher:>'
           defaut: ''
       -
-        saisie: 'oui_non'
+        saisie: 'checkbox'
         options:
           nom: 'afficher_parent'
           label: '<:sdnnoisettes:label_afficher_parent:>'
           conteneur_class: 'long_label'
+          datas:
+            on: '<:sdnnoisettes:afficher:>'
           defaut: ''
   -
     saisie: 'fieldset'
@@ -202,11 +228,13 @@ parametres:
       afficher_si: '@afficher_liste_simple@ != "on"'
     saisies:
       -
-        saisie: 'oui_non'
+        saisie: 'checkbox'
         options:
           nom: 'liste_span'
           label: '<:sdnnoisettes:label_liste_span:>'
           explication: '<:sdnnoisettes:explication_liste_span:>'
+          datas:
+            on: '<:sdnnoisettes:oui:>'
           defaut: ''
           conteneur_class: 'long_label'
       -

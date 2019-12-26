@@ -4,26 +4,38 @@ icon: 'metas_aricle-24.png'
 ajax: 'non'
 parametres:
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'masquer_auteurs'
       label: '<:sdnnoisettes:label_masquer_auteurs:>'
+      datas:
+        on: '<:sdnnoisettes:masquer:>'
       defaut: ''
+      conteneur_class: 'long_label'
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'afficher_logo'
       label: '<:sdnnoisettes:label_afficher_logo:>'
+      datas:
+        on: '<:sdnnoisettes:afficher:>'
       defaut: ''
+      conteneur_class: 'long_label'
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'masquer_date'
       label: '<:sdnnoisettes:label_masquer_date:>'
+      datas:
+        on: '<:sdnnoisettes:masquer:>'
       defaut: ''
+      conteneur_class: 'long_label'
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'masquer_mots'
       label: '<:sdnnoisettes:label_masquer_mots:>'
+      datas:
+        on: '<:sdnnoisettes:masquer:>'
       defaut: ''
+      conteneur_class: 'long_label'

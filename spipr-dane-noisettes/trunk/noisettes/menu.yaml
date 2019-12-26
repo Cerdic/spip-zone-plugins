@@ -15,10 +15,12 @@ parametres:
       cacher_option_intro: 'oui'
       conteneur_class: 'long_label'
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'masquer_titre'
       label: '<:sdnnoisettes:label_masquer_titre:>'
+      datas:
+        on: '<:sdnnoisettes:masquer:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
@@ -30,10 +32,12 @@ parametres:
       afficher_si: '@masquer_titre@ != "on"'
       conteneur_class: 'long_label'
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'masquer_picto'
       label: '<:sdnnoisettes:label_masquer_picto:>'
+      datas:
+        on: '<:sdnnoisettes:masquer:>'
       defaut: ''
       conteneur_class: 'long_label'
   -

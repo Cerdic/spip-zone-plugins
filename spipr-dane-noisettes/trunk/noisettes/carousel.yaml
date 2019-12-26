@@ -9,10 +9,12 @@ parametres:
       nom: 'explication_carousel'
       texte: '<:sdnnoisettes:explication_carousel:>'
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'masquer_titre'
       label: '<:sdnnoisettes:label_masquer_titre:>'
+      datas:
+        on: '<:sdnnoisettes:masquer:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
@@ -24,10 +26,12 @@ parametres:
       afficher_si: '@masquer_titre@ != "on"'
       conteneur_class: 'long_label'
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'masquer_picto'
       label: '<:sdnnoisettes:label_masquer_picto:>'
+      datas:
+        on: '<:sdnnoisettes:masquer:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
@@ -52,11 +56,13 @@ parametres:
         min: 2
         max: 10
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'image_passe_partout'
       label: '<:sdnnoisettes:label_image_passe_partout:>'
       explication: '<:sdnnoisettes:explication_image_passe_partout:>'
+      datas:
+        on: '<:sdnnoisettes:oui:>'
       defaut: ''
       conteneur_class: 'long_label'
   -

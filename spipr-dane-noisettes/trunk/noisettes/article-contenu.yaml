@@ -7,14 +7,40 @@ contexte:
   - 'id_rubrique'
 parametres:
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'afficher_descriptif'
       label: '<:sdnnoisettes:label_afficher_descriptif:>'
+      datas:
+        on: '<:sdnnoisettes:afficher:>'
       defaut: ''
+      conteneur_class: 'long_label'
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'masquer_logo'
       label: '<:sdnnoisettes:label_masquer_logo:>'
+      datas:
+        on: '<:sdnnoisettes:masquer:>'
       defaut: ''
+      conteneur_class: 'long_label'
+  -
+    saisie: 'input'
+    options:
+      nom: 'largeur_logo'
+      label: '<:sdnnoisettes:label_largeur_logo:>'
+      defaut: '200'
+      afficher_si: '@masquer_logo@  != "on"'
+      conteneur_class: 'long_label'
+    verifier:
+      type: 'entier'
+  -
+    saisie: 'input'
+    options:
+      nom: 'hauteur_logo'
+      label: '<:sdnnoisettes:label_hauteur_logo:>'
+      defaut: '200'
+      afficher_si: '@masquer_logo@ != "on"'
+      conteneur_class: 'long_label'
+    verifier:
+      type: 'entier'

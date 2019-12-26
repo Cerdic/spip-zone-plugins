@@ -1,7 +1,7 @@
 <BOUCLE_content(ARTICLES){id_article}>
 <article class="contenu">
 	<header class="cartouche">
-		[(#ENV{masquer_logo}|non)[(#LOGO_ARTICLE|image_reduire{200,200})]]
+		[(#ENV{masquer_logo}|non)[(#LOGO_ARTICLE|image_reduire{#ENV{largeur_logo,200},#ENV{hauteur_logo,200}})]]
 		[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
 		<h1><span class="#EDIT{titre}">#TITRE</span>[
 			<small class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</small>

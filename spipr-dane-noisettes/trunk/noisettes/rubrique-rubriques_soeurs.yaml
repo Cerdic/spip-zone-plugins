@@ -13,7 +13,7 @@ parametres:
       nom: 'masquer_titre'
       label: '<:sdnnoisettes:label_masquer_titre:>'
       datas:
-        on: 'Oui'
+        on: '<:sdnnoisettes:masquer:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
@@ -25,10 +25,12 @@ parametres:
       afficher_si: '@masquer_titre@ !IN "on"'
       conteneur_class: 'long_label'
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'masquer_picto'
       label: '<:sdnnoisettes:label_masquer_picto:>'
+      datas:
+        on: '<:sdnnoisettes:masquer:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
@@ -41,10 +43,11 @@ parametres:
       afficher_si: '@masquer_picto@ != "on"'
       conteneur_class: 'long_label'
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'masquer_rubrique_en_cours'
       label: '<:sdnnoisettes:label_masquer_rubrique_en_cours:>'
+      datas:
+        on: '<:sdnnoisettes:masquer:>'
       defaut: ''
       conteneur_class: 'long_label'
-  -

@@ -8,6 +8,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 /* noisettes */
+'afficher'=>'Afficher',
 'alert_activer_breves'=>'Attention, vous devez <a href="./?exec=configurer_contenu#activer_breves_oui">activer l\'utilisation des brèves</a> pour utiliser cette noisette.',
 'alert_activer_sites'=>'Attention, vous devez <a href="./?exec=configurer_contenu#activer_sites_oui">activer la gestion\'annuaire de sites web</a> pour utiliser cette noisette.',
 'article_contenu'=>'Contenu de l\'article',
@@ -23,6 +24,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  
 'data_localisation' => 'Localisation',
 'date' => 'Date',
+'description_article_contenu' => 'Affiche le titre et le texte de l\'article, et le logo s\il existe. Les autres éléments activés <i>(sur-titre, sous-titre, chapo, etc...)</i> de l\'article sont également affichés s\'ils existent.',
+'description_article_documents' => 'Documents liès à l\'article en cours.',
+'description_article_ecrire_auteur' => 'Formulaire "Écrire à l\'auteur" de l\'article en cours.',
 'description_calendrier_mini' => 'Affiche un mini-calendrier mensuel navigable avec un lien pointant vers une page au choix en filtrant les résultats sur le jour en question.',
 'description_carousel'=>'Bannière animée d\'images et de textes.',
 'description_liste_articles'=>'Liste d\'articles d\'une rubrique particulère ou non.',
@@ -37,20 +41,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_galerie'=>'Galerie',
 
 'erreur_uai' => 'Attention&#44; vous devez <a href="[(#URL_ECRIRE{noisette_edit, id_noisette=#ENV{id_noisette}})]"> saisir le code UAI de votre établissement</a>.',
+'explication_articles_exclus'=>'Cliquer sur "Ajouter" à droite et sélectionner les articles à exclure de la liste.',
 'explication_carousel'=>'Les articles affichés dans le carousel sont les articles séléctionnés à la racine du site pour l\'affichage<br/> dans la page d\'accueil et ceux selectionnés dans la rubrique pour l\'affichage dans une page rubrique.',
+'explication_carousel_id_rubrique'=>'Par défaut, affiche les articles sélectionnés à la racine du site. <br/>Vous pouvez choisir d\'afficher les articles sélectionnés d\'une rubrique particuliére.',
 'explication_conf_avancee_noisettes'=>'<strong>/!\ Attention, vous devez avoir une connaisance minimum du html5 pour utiliser cette option./!\</strong>',
 'explication_exclure_article_selection'=>'Vous pouvez exclure les articles sélectionnés à la racine du site ou de la rubrique <i>(articles affichés dans le carrousel)</i>.',
 'explication_image_passe_partout'=>'Rogne le logo pour l\'afficher aux dimensions (largeur,hauteur) saisies ci-dessus.',
 'explication_image_zoom_hover'=>'Zoom à 110% au survol de l\'image.',
 'explication_liste_span'=>'Par défaut, la liste affichée est une liste simple (les items sont les uns au dessous des autres).<br/> Vous pouvez choisir d\'afficher la liste sous forme de vignettes en 2, 3 ou 4 colonnes.',
-'explication_articles_exclus'=>'Saisissez les identifiants des articles à exclure de la liste, séparés par une virgule.',
-'explication_carousel_id_rubrique'=>'Par défaut, affiche les articles sélectionnés à la racine du site. <br/>Vous pouvez choisir d\'afficher les articles sélectionnés d\'une rubrique particuliére.',
 'explication_nb_total'=>'Laisser vide pour "tous"',
 'explication_pagination'=>'Pour ne pas afficher de pagination, saisissez un nombre supérieur au nombre total.',
 'explication_pagination_sans'=>'Laisser vide pour ne pas afficher de pagination.',
 'explication_picto' => 'Pour modifier le pictograme, choisissez en un autre  sur <a href="https://fontawesome.com/v4.7.0/icons/" title="Fontawesome" class="spip-out">Fontawesome</a>.',
-'explication_rubriques_exclues'=>'Saisissez les identifiants des rubriques dont les articles sont à exclure de la liste, séparés par une virgule.',
-'explication_rubriques_exclues_sites'=>'Saisissez les identifiants des rubriques dont les sites sont à exclure de la liste, séparés par une virgule.',
+'explication_rubriques_exclues'=>'Cliquer sur "Ajouter" à droite et sélectionner les rubriques dont les articles sont à exclure de la liste.',
+'explication_rubriques_exclues_sites'=>'Cliquer sur "Ajouter" à droite et sélectionner les rubriques dont les sites sont à exclure de la liste.',
 //'explication_picto' => 'Par défaut, le pictogramme est " @picto@ <i class="fa fa-@picto@ "></i>".<br/>Vous pouvez le modifier en choisissant un autre pictogramme sur <a href="https://fontawesome.com/v4.7.0/icons/" title="Fontawesome" class="spip-out">Fontawesome</a>',
 'explication_sites_partenaires'=>'Saisissez les identifiants des sites que vous voulez afficher (maximum 6), séparés par une virgule.<br/> <i>1. Les sites doivent avoir été préalablement enregistrés sur le site. <br/>2. Les logos des sites seront affichés dans l\'ordre de la saisie.</i>',
 'explication_socialtags'=>'Les réseaux sociaux à afficher sont à sélectionner dans la page de configuration du plugin "<a href="./?exec=configurer_socialtags" title="Configurer Socialtags">Socialtags</a>"',
@@ -154,18 +158,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'liste_breves' => 'Liste de brèves ',
 'liste_evenements' => 'Liste des événements',
 'liste_rubriques_soeurs' => 'Liste des rubriques soeurs',
-'liste_sites' => 'Liste de sites ',
+'liste_simple' => 'Liste simple',
+'liste_sites' => 'Liste de sites',
 'liste_sous_rubriques' => 'Liste des sous-rubriques',
 'liste_syndics' => 'Liste d\'articles syndics',
 'liste_videos' => 'Liste de vidéos',
 
-'menu' => 'Menu',
+'masquer' => 'Masquer',
 
 'nom_calendrier_mini' => 'Mini-calendrier des évènements',
+'non' => 'Non',
 'nuage' => 'Nuage de mots-clé',
 'num_titre' => 'Numero de titre',
 'nous_situer' => 'Nous situer',
 
+'oui' => 'Oui',
+	
 'rub_cartouche'=>'Cartouche de la rubrique',
 'rub_conteneur'=>'Bloc conteneur pour rubrique',
 'rub_documents'=>'Documents de la rubrique',

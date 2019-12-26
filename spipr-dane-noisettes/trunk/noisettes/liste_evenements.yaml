@@ -5,10 +5,12 @@ ajax: 'non'
 necessite: 'agenda'
 parametres:
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'masquer_titre'
       label: '<:sdnnoisettes:label_masquer_titre:>'
+      datas:
+        on: '<:sdnnoisettes:masquer:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
@@ -20,10 +22,12 @@ parametres:
       afficher_si: '@masquer_titre@ != "on"'
       conteneur_class: 'long_label'
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'masquer_picto'
       label: '<:sdnnoisettes:label_masquer_picto:>'
+      datas:
+        on: '<:sdnnoisettes:masquer:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
@@ -46,18 +50,22 @@ parametres:
       type: 'entier'
       min: 1
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'masquer_logo'
       label: '<:sdnnoisettes:label_masquer_logo:>'
+      datas:
+        on: '<:sdnnoisettes:masquer:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'image_passe_partout'
       label: '<:sdnnoisettes:label_image_passe_partout:>'
       explication: '<:sdnnoisettes:explication_image_passe_partout:>'
+      datas:
+        on: '<:sdnnoisettes:oui:>'
       defaut: ''
       afficher_si: '@masquer_logo@  != "on"'
       conteneur_class: 'long_label'
@@ -82,30 +90,38 @@ parametres:
     verifier:
       type: 'entier'
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'masquer_date'
       label: '<:sdnnoisettes:label_masquer_date:>'
+      datas:
+        on: '<:sdnnoisettes:masquer:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'masquer_descriptif'
       label: '<:sdnnoisettes:label_masquer_descriptif:>'
+      datas:
+        on: '<:sdnnoisettes:masquer:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'masquer_adresse'
       label: '<:sdnnoisettes:label_masquer_adresse:>'
+      datas:
+        on: '<:sdnnoisettes:masquer:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
-    saisie: 'oui_non'
+    saisie: 'checkbox'
     options:
       nom: 'masquer_mots'
       label: '<:sdnnoisettes:label_masquer_mots:>'
+      datas:
+        on: '<:sdnnoisettes:masquer:>'
       defaut: ''
       conteneur_class: 'long_label'
