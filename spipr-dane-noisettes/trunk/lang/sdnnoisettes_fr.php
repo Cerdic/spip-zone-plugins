@@ -165,6 +165,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'liste_videos' => 'Liste de vidéos',
 
 'masquer' => 'Masquer',
+'menu' => 'Menu',
 
 'nom_calendrier_mini' => 'Mini-calendrier des évènements',
 'non' => 'Non',
