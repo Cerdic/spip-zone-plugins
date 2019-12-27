@@ -1,7 +1,7 @@
 jQuery(function($){
 	function init_faq() {
-		$('dl.faq > dt').addClass("close").click(function(){
-			$(this).toggleClass("close").next().toggle('fast');
+		$('dl.faq > dt').addClass("item-faq-closed").click(function(){
+			$(this).toggleClass("item-faq-closed").next().toggle('fast');
 			return false;
 		}).next().hide();
 	}
