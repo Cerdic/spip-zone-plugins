@@ -29,6 +29,7 @@
 	#SET{titre, #GET{titre}|concat{#GET{separateur}}|concat{#ENV{titre_actualite}}}
 	[<h2 class="h2">(#GET{titre})</h2>]
 	[(#ENV*{avant_liste})]
+	<div class="syndic-blocs">
 <BOUCLE_boussole(BOUSSOLES)	{aka_boussole=#ENV{boussole}}
 							{aka_groupe?}
 							{id_syndic > 0}
@@ -36,6 +37,7 @@
 							{0, #ENV{max_sites, 3}}>
 	[(#REM) <!-- Liste des site articles syndiques des sites -->]
 	<B_syndication>
+		<div class="syndic-bloc">
 [(#ENV{titre_site}|=={oui}|oui)
 	[<h3 class="h3">(#AKA_BOUSSOLE|boussole_traduire{nom_site, #AKA_SITE})</h3>]
 ]
@@ -44,8 +46,10 @@
 		[<li[ class="(#ENV{li_class})"]><a href="#URL_ARTICLE">(#TITRE|supprimer_numero)</a></li>]
 	</BOUCLE_syndication>
 	</ul>
+		</div>
 	</B_syndication>
 </BOUCLE_boussole>
+	</div>
 	[(#ENV*{apres_liste})]
 </div>
 </B_boussole>
