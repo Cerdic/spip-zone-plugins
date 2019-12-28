@@ -1,8 +1,8 @@
 <paquet
 	prefix="bootstrap4"
 	categorie="outil"
-	version="4.1.7"
-	etat="test"
+	version="4.1.8"
+	etat="stable"
 	compatibilite="[3.2.0;3.3.*]"
 	logo="img/bootstrap-64.png"
 	documentation="http://spipr.nursit.com/bootstrap"
