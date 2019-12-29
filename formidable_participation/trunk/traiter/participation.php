@@ -86,7 +86,7 @@ function traiter_participation_dist($args, $retours){
 			'id_evenement'=> $evenement, //si oui, traitement avec agenda
 			'choix_participation' => $choix_participation,
 			'email' => $email_participation,
-			'champ_evenement_participation' => $options['champ_evenement_participation'];
+			'champ_evenement_participation' => $options['champ_evenement_participation'],
 			'autoriser_email_multiple' => $options['autoriser_email_multiple'],
 			'nom' => $nom_participation,
 			'prenom' => $prenom_participation,
