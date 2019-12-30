@@ -1,13 +1,11 @@
 <?php
 
 function cachelab_insert_head_css($flux) {
-//  $css = find_in_path('css/cachelab.css');
-//  $flux .= "<link rel='stylesheet' type='text/css' media='all' href='$css' />\n";
 	$flux .= "
 <style>
-.cachelab_blocs {  
-	margin: 5px; 
-	background-color: lightyellow; 
+.cachelab_blocs {
+	margin: 5px;
+	background-color: lightyellow;
 	font-family: Courier, \"Courier New\", monospace;
     font-size: 0.8em;
 	color: black;

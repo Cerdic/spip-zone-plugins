@@ -166,7 +166,7 @@ static $var_cache;
 			spip_log("#CACHE duree cache : la fonction '$f' n'existe pas (arg='$arg')\n".print_r($page, 1), 'cachelab_erreur');
 		}
 	}
-	
+
 	// Exemple : <INCLURE{fond=mes_scores,duree-cache=#GET{duree_sicestmoi_oupas}}/>
 	if (isset($page['contexte']['duree-cache'])) {
 		if (!defined('LOG_BALISECACHE_DUREES_DYNAMIQUES') or LOG_BALISECACHE_DUREES_DYNAMIQUES) {
@@ -207,7 +207,7 @@ static $var_cache;
 			spip_log("#CACHE filtre : la fonction '$f' n'existe pas (arg='$arg')\n".print_r($page, 1), 'cachelab_erreur');
 		}
 	}
-	
+
 	if ($var_cache) {
 		echo '<div class="cachelab_blocs" '.$hint_squel.'><h6>Sessionnement : '
 				.cachelab_etat_sessionnement($page['invalideurs'], 'précis')
