@@ -1,5 +1,5 @@
 <traduction module="autorite" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/autorite/trunk/lang/" reference="fr">
-	<langue code="ar" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=ar" total="81" traduits="80" relire="0" modifs="0" nouveaux="1" pourcent="98.77">
+	<langue code="ar" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=ar" total="81" traduits="81" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
@@ -9,7 +9,7 @@
 		<traducteur nom="Nils T." lien="https://trad.spip.net/auteur/nils-t" />
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
-	<langue code="en" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=en" total="81" traduits="80" relire="0" modifs="0" nouveaux="1" pourcent="98.77">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=en" total="81" traduits="81" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
