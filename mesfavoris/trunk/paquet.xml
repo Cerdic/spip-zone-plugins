@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.1.0;3.3.*]"
 	logo="images/mesfavoris-128.png"
-	schema="1.2.0"
+	schema="1.4.0"
 	documentation="https://contrib.spip.net/Mes-Favoris-2-0"
 >	
 

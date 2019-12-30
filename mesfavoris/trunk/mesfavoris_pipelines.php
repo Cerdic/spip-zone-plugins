@@ -67,24 +67,11 @@ function mesfavoris_declarer_tables_principales($tables_principales) {
  *
  * @pipeline insert_head_css
  * @param string $flux Le contenu CSS du head
- * @param string $flux Le contenu CSS du head modifié
+ * @return string Le contenu CSS du head modifié
  */
 function mesfavoris_insert_head_css($flux) {
-	$config = '';
-	
-	if (isset($GLOBALS['meta']['mesfavoris'])) {
-		$config = unserialize($GLOBALS['meta']['mesfavoris']);
-	}
-	
-	if ($config and isset($config['style_formulaire'])) {
-		$config = $config['style_formulaire'];
-	}
-
-	if (!$config or !$css=find_in_path("mesfavoris-$config.css")) {
-		$css = find_in_path("mesfavoris-32.css");
-	}
-	
-	$flux .= "<link rel='stylesheet' type='text/css' media='all' href='".direction_css($css)."' />\n";
+	$css = find_in_path("css/mesfavoris.css");
+	$flux .= "<link rel='stylesheet' type='text/css' media='all' href='".timestamp(direction_css($css))."' />\n";
 	
 	return $flux;
 }
