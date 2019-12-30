@@ -1,0 +1,11 @@
+<h2>Test sur la récupération des favoris</h2>
+
+<B_2>
+<ul>
+<BOUCLE_2(FAVORIS){categorie ?}{id_auteur ?}{id_article ?}{id_rubrique ?}>
+<li>#ID_OBJET : #OBJET : #INFO_URL{#OBJET,#ID_OBJET}</li>
+</BOUCLE_2>
+</ul>
+</B_2>
+Aucun favori pour l'auteur #ENV{id_auteur,#SESSION{id_auteur}}
+<//B_2>

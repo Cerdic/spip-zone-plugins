@@ -1,0 +1,20 @@
+<BOUCLE_favori(FAVORIS){id_favori}>
+[(#SET{item, [(#ARRAY{
+	href, [(#URL_SITE_SPIP|concat{/http.api/collectionjson/favoris/#ID_FAVORI})],
+	updated, [(#MAJ|date_iso)],
+	links, [(#LISTE{
+		[(#ARRAY{rel,edit, type,application/json, href,[(#URL_SITE_SPIP|concat{/http.api/collectionjson/favoris/#ID_FAVORI})]})],
+		[(#ARRAY{rel,related, type,application/json, href,[(#URL_SITE_SPIP|concat{/http.api/collectionjson/, [(#OBJET|table_objet)], "/", #ID_FAVORI})]})],
+		[(#ARRAY{rel,related, type,text/html, href,[(#ID_OBJET|generer_url_entite{#OBJET}|url_absolue)]})],
+	})],
+	data, [(#LISTE{
+		#ARRAY{name,id_favori, value,#ID_FAVORI},
+		#ARRAY{name,id_auteur, value,#ID_AUTEUR},
+		#ARRAY{name,objet, value,#OBJET},
+		#ARRAY{name,id_objet, value,#ID_OBJET},
+		#ARRAY{name,categorie, value,#CATEGORIE},
+	})],
+})]})]
+
+[(#GET{item}|json_encode)]
+</BOUCLE_favori>

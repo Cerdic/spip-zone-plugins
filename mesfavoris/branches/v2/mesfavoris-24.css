@@ -1,0 +1,16 @@
+.formulaire_favori {float:right;}
+.formulaire_favori form button {cursor: pointer;border:0;background-color:transparent;text-align:right;padding:2px 0;}
+
+/* Icone Bookmark 24px */
+.formulaire_favori form button span {display:block;padding-bottom:0px;width:50px;}
+.formulaire_favori form button.ajouter_favori img {visibility: hidden;width:24px;height:24px}
+.formulaire_favori form button.ajouter_favori span {visibility:hidden;}
+.formulaire_favori form button.ajouter_favori {background: url(images/bookmark-grey-add-24.png) no-repeat bottom right;}
+.formulaire_favori form button.ajouter_favori:hover {background-image: url(images/bookmark-add-24.png);}
+.formulaire_favori form button.ajouter_favori:hover span {visibility:visible;}
+
+.formulaire_favori form button.retirer_favori img {visibility: hidden;width:24px;height:24px}
+.formulaire_favori form button.retirer_favori span {visibility:hidden;}
+.formulaire_favori form button.retirer_favori {background: url(images/bookmark-24.png) no-repeat bottom right;}
+.formulaire_favori form button.retirer_favori:hover {background-image: url(images/bookmark-grey-remove-24.png);}
+.formulaire_favori form button.retirer_favori:hover span {visibility:visible;}

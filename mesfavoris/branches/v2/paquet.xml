@@ -1,0 +1,25 @@
+<paquet
+	prefix="mesfavoris"
+	categorie="navigation"
+	version="2.5.6"
+	etat="test"
+	compatibilite="[2.0.0;3.2.*]"
+	logo="images/mesfavoris-128.png"
+	schema="1.2.0"
+	documentation="https://contrib.spip.net/Mes-Favoris-2-0"
+>	
+
+	<nom>Mes Favoris</nom>
+	<!-- Sélection de favoris -->
+
+	<auteur>Olivier Sallou</auteur>
+	<auteur lien="http://www.yterium.net">Cédric Morin</auteur>
+	<auteur lien="http://www.tech-nova.fr">Gilles Vincent</auteur>
+
+	<pipeline nom="declarer_tables_principales" inclure="mesfavoris_pipelines.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="mesfavoris_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="mesfavoris_pipelines.php" />
+	<pipeline nom="autoriser" inclure="mesfavoris_autoriser.php" />
+	
+	<utilise nom="collectionjson" compatibilite="[1.4.0;]" />
+</paquet>
