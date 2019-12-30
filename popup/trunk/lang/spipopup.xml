@@ -1,4 +1,4 @@
-<traduction module="spipopup" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/popup/spipopup_spip3/lang/" reference="fr">
+<traduction module="spipopup" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/popup/trunk/lang/" reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/spipopup?lang_cible=en" total="32" traduits="31" relire="0" modifs="1" nouveaux="0" pourcent="96.88">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 	</langue>
