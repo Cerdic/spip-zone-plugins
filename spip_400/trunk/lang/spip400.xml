@@ -1,4 +1,4 @@
-<traduction module="spip400" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/spip_400/spip_3/lang/" reference="fr">
+<traduction module="spip400" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/spip_400/trunk/lang/" reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/spip400?lang_cible=de" total="29" traduits="29" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
