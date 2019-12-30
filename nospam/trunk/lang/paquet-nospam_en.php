@@ -10,6 +10,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
-	'nospam_description' => 'Stop spam! Filter spam in messages, without nuisance to honest users.',
-	'nospam_slogan' => 'Reduce the risk of spams in the forums'
+	'nospam_description' => 'Stop spam! Filter spam in messages, without nuisance to honest users.', # MODIF
+	'nospam_slogan' => 'Reduce the risk of spams in the forums' # MODIF
 );
