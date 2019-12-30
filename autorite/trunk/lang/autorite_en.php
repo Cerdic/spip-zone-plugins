@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	<i>N.B. : This option also applies to registered visitors, whether they are authors and a specific interface is provided.</i>',
 	'auteur_modifie_email' => '<strong>Editor modify email</strong> : Each editor can edit his email on his record of personal information.',
 	'auteur_modifie_forum' => '<strong>Author moderate forum</strong> : Each editor may moderate the forum articles he has authored.',
-	'auteur_modifie_petition' => '<strong>Author moderae petition</strong> : Each editor can moderate the petition of the articles he has authored.',
+	'auteur_modifie_petition' => '<strong>Author moderate petition</strong> : Each editor can moderate the petition of the articles he has authored.',
 
 	// C
 	'config_auteurs' => 'Configuring authors',
@@ -110,6 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'redacteur' => 'editor',
 	'redacteur_lire_stats' => '<strong>Editor could see Stats</strong> : editors can view statistics.',
 	'redacteur_modifie_article' => '<strong>Editor changes proposed</strong> : 	Each editor can edit an article proposed for publication, even if he is not the author.',
+	'redacteurs_voir_auteurs' => '<strong>Editor sees authors</strong> : editiors can <strong>see the list of authors with their mails</strong> and the page of other authors in the private area?',
 	'refus_1' => '<p>Only webmasters of the site',
 	'refus_2' => 'are allowed to change these settings.</p>
 <p>For more information, see <a href="http://contrib.spip.net/Autorite">the documentation</a>.</p>',
