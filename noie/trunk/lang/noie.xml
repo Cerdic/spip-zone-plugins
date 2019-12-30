@@ -1,4 +1,4 @@
-<traduction module="noie" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/noie/version2/lang/" reference="fr">
+<traduction module="noie" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/noie/trunk/lang/" reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/noie?lang_cible=ar" total="2" traduits="1" relire="0" modifs="1" nouveaux="0" pourcent="50.00">
 	</langue>
 	<langue code="ast" url="https://trad.spip.net/tradlang_module/noie?lang_cible=ast" total="2" traduits="1" relire="0" modifs="1" nouveaux="0" pourcent="50.00">
