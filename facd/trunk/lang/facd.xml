@@ -1,4 +1,4 @@
-<traduction module="facd" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/facd/lang/" reference="fr">
+<traduction module="facd" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/facd/trunk/lang/" reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/facd?lang_cible=en" total="38" traduits="38" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
