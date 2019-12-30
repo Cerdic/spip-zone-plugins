@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/spip_400/spip_3/lang/
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/spip_400/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
