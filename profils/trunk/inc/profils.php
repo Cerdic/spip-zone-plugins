@@ -258,6 +258,12 @@ function profils_chercher_saisies_profil($form, $id_auteur=0, $id_ou_identifiant
 								}
 								// Alors que si c'est une adresse on l'utilise pour le groupe de champs
 								else {
+									// On rend chaque champ obligatoire si nécessaire
+									if ($champ['obligatoire']) {
+										foreach ($saisies_coordonnee as $k => $saisie) {
+											$saisies_coordonnee[$k]['options']['obligatoire'] = 'oui';
+										}
+									}
 									$saisies_a_utiliser[] = array(
 										'saisie' => 'fieldset',
 										'options' => array(
