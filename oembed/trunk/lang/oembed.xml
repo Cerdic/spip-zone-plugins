@@ -1,4 +1,4 @@
-<traduction module="oembed" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/oembed/lang/" reference="fr">
+<traduction module="oembed" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/oembed/trunk/lang/" reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/oembed?lang_cible=de" total="22" traduits="19" relire="0" modifs="1" nouveaux="2" pourcent="86.36">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 	</langue>
