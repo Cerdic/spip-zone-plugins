@@ -1,9 +1,10 @@
 <paquet
 	prefix="anonymiser_revisions"
 	categorie="maintenance"
-	version="0.1.1"
+	version="0.1.2"
 	etat="stable"
 	compatibilite="[3.2.0;3.2.*]"
+	documentation="https://contrib.spip.net/5228"
 >
 	<nom>Anonymisation des révisions</nom>
 	<!-- Générateur de formulaires -->
