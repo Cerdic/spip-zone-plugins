@@ -5,13 +5,13 @@
 		<div>
 			[(#ENV{_deja_favori}|non)
 			<button type='submit' class="submit ajouter_favori" name="ajouter" value="<:mesfavoris:add_to|attribut_html:>" title="<:mesfavoris:add_to|attribut_html:>">
-				<span class="title"><:mesfavoris:add|attribut_html:></span>
-				[<span class="logo"><img width="32" height="32" src="(#CHEMIN{css/img/favoris.svg})" alt="<:mesfavoris:add_to|attribut_html:>" /></span>]
+				<span class="fav-title"><:mesfavoris:add|attribut_html:></span>
+				[<span class="fav-picto"><img width="32" height="32" src="(#CHEMIN{css/img/favoris.svg})" alt="<:mesfavoris:add_to|attribut_html:>" /></span>]
 			</button>
 			][(#ENV{_deja_favori}|oui)
 			<button type='submit' class="submit retirer_favori" name="retirer" value="<:mesfavoris:remove_from|attribut_html:>" title="<:mesfavoris:remove_from|attribut_html:>">
-				<span class="title"><:mesfavoris:remove|attribut_html:></span>
-				[<span class="logo"><img width="32" height="32" src="(#CHEMIN{css/img/favoris.svg})" alt="<:mesfavoris:remove_from|attribut_html:>" /></span>]
+				<span class="fav-title"><:mesfavoris:remove|attribut_html:></span>
+				[<span class="fav-picto"><img width="32" height="32" src="(#CHEMIN{css/img/favoris.svg})" alt="<:mesfavoris:remove_from|attribut_html:>" /></span>]
 			</button>
 			]
 		</div>

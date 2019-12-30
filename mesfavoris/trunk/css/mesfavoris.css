@@ -1,27 +1,28 @@
-.formulaire_favori {float:right;}
-.formulaire_favori form button {cursor: pointer;border:0;background-color:transparent;text-align:right;padding:2px 0;}
+.formulaire_favori {float:right;margin-left: 1em;margin-bottom: 0.5em;}
+.formulaire_favori form button {cursor: pointer;border:0;background-color:transparent;text-align:right;padding:0;}
+.formulaire_favori form button {display: flex; flex-direction: column; align-items: flex-end;}
 
 /* Icone favoris coeur */
-.formulaire_favori form button .title {display:block;padding-bottom:0.25em;width:auto;visibility:hidden;}
-.formulaire_favori form button:hover .title {visibility:visible;}
-.formulaire_favori form button .logo  {display: inline-block;position: relative;line-height: 0.5;}
-.formulaire_favori form button .logo:before {content:'';display: block;position: absolute;top:0;left:0;width: 100%;height: 100%;}
-.formulaire_favori form button .logo:after {content:'';display: block;position: absolute;top:0;left:0;width: 100%;height: 100%;background-size:58%;background-repeat:no-repeat;background-position:bottom right;}
+.formulaire_favori form button .fav-title {display:block;margin-bottom:0.25em;width:auto;visibility:hidden; order:2;}
+.formulaire_favori form button:hover .fav-title {visibility:visible;}
+.formulaire_favori form button .fav-picto  {display: inline-block;position: relative;line-height: 0.5; order:1;}
+.formulaire_favori form button .fav-picto:before {content:'';display: block;position: absolute;top:0;left:0;width: 100%;height: 100%;}
+.formulaire_favori form button .fav-picto:after {content:'';display: block;position: absolute;top:0;left:0;width: 100%;height: 100%;background-size:58%;background-repeat:no-repeat;background-position:bottom right;}
 .formulaire_favori form button img {visibility: hidden;width:2em;height:auto}
 /* Par defaut variante coeur */
-.formulaire_favori form button .logo:before {background: url(img/favoris.svg) no-repeat center; background-size: contain;}
+.formulaire_favori form button .fav-picto:before {background: url(img/favoris.svg) no-repeat center; background-size: contain;}
 
 /* coeur gris, function add */
-.formulaire_favori form button.ajouter_favori .logo:before {filter: grayscale(100%) brightness(300%);}
-.formulaire_favori form button.ajouter_favori .logo:after {background-image:url(img/add.svg);}
+.formulaire_favori form button.ajouter_favori .fav-picto:before {filter: grayscale(100%) brightness(300%);}
+.formulaire_favori form button.ajouter_favori .fav-picto:after {background-image:url(img/add.svg);}
 /* au survol, coeur en couleur */
-.formulaire_favori form button.ajouter_favori:hover .logo:before {filter:none;}
+.formulaire_favori form button.ajouter_favori:hover .fav-picto:before {filter:none;}
 
 /* coeur, function remove en gris */
-.formulaire_favori form button.retirer_favori .logo:after {background-image:url(img/remove.svg);display: none}
+.formulaire_favori form button.retirer_favori .fav-picto:after {background-image:url(img/remove.svg);display: none}
 /* au survol, coeur en gris, function en couleur */
-.formulaire_favori form button.retirer_favori:hover .logo:before {filter: grayscale(100%) brightness(300%);}
-.formulaire_favori form button.retirer_favori:hover .logo:after {filter: none;display: block;}
+.formulaire_favori form button.retirer_favori:hover .fav-picto:before {filter: grayscale(100%) brightness(300%);}
+.formulaire_favori form button.retirer_favori:hover .fav-picto:after {filter: none;display: block;}
 
 /* Variante bookmark */
-.formulaire-favori-bookmark form button .logo:before {background-image: url(img/bookmark.svg);}
+.formulaire-favori-bookmark form button .fav-picto:before {background-image: url(img/bookmark.svg);}
