@@ -1,4 +1,4 @@
-<traduction module="paquet-ck" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/couteau-kiss/lang/" reference="fr">
+<traduction module="paquet-ck" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/couteau-kiss/trunk/lang/" reference="fr">
 	<langue code="ast" url="https://trad.spip.net/tradlang_module/paquet-ck?lang_cible=ast" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 	<langue code="br" url="https://trad.spip.net/tradlang_module/paquet-ck?lang_cible=br" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
