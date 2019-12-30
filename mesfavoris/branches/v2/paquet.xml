@@ -1,8 +1,8 @@
 <paquet
 	prefix="mesfavoris"
 	categorie="navigation"
-	version="2.5.6"
-	etat="test"
+	version="2.5.7"
+	etat="stable"
 	compatibilite="[2.0.0;3.2.*]"
 	logo="images/mesfavoris-128.png"
 	schema="1.2.0"
