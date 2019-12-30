@@ -110,6 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'redacteur' => 'محرر',
 	'redacteur_lire_stats' => '<strong>المحرر يرى الإحصاءات</strong>: المحررون يمكنهم الاطلاع على الإحصاءات.',
 	'redacteur_modifie_article' => '<strong>المحرر يعدّل المقالات المعروضة</strong>: كل محرر يمكنه تعديل مقال معروض للنشر، حتى إذا لم يكن مؤلفه.',
+	'redacteurs_voir_auteurs' => '<strong>المحرر يرى المؤلفين</strong> : يمكن للمحررين <strong>مشاهدة قائمة المؤلفين وعناوين بريدهم</strong> إضافة الى صفحة المؤلفين الآخرين في المجال الخاص؟',
 	'refus_1' => '<p>مشرفو الموقع فقط',
 	'refus_2' => 'مخولون تعديل هذه الإعدادات.</p>
 <p>للمزيد من المعلومات، انظر <a href="https://contrib.spip.net/Autorite">التعليمات</a>.</p>',
