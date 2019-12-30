@@ -1,4 +1,4 @@
-<traduction module="ck" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/couteau-kiss/lang/" reference="fr">
+<traduction module="ck" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/couteau-kiss/trunk/lang/" reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/174?lang_cible=en" total="42" traduits="42" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Martin McCaffery" lien="https://trad.spip.net/auteur/martin-mccaffery" />
