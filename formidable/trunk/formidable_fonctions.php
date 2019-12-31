@@ -167,11 +167,12 @@ function affiche_resume_reponse($id_formulaires_reponse, $id_formulaire = null, 
 	$chaine = formidable_raccourcis_arobases_2_valeurs_champs($modele_resume, $saisies, false, '', $source = 'base', $id_formulaires_reponse, $id_formulaire, $valeurs, $valeurs_libellees);
 
 	// Pour compatibilité historique : remplacer les clés dans $valeurs_libellees pour mettre un arobase autour
-	foreach ($valeurs_libellees as $cle => $val) {
-		unset($valeurs_libellees[$cle]);
-		$valeurs_libellees["@$cle@"] = $val;
+	if (is_array($valeurs_libellees)) {
+		foreach ($valeurs_libellees as $cle => $val) {
+			unset($valeurs_libellees[$cle]);
+			$valeurs_libellees["@$cle@"] = $val;
+		}
 	}
-
 	return pipeline(
 		'formidable_affiche_resume_reponse',
 		array(
