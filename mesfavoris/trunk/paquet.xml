@@ -15,6 +15,7 @@
 	<auteur>Olivier Sallou</auteur>
 	<auteur lien="http://www.yterium.net">Cédric Morin</auteur>
 	<auteur lien="http://www.tech-nova.fr">Gilles Vincent</auteur>
+	<credit lien="https://www.flaticon.com/authors/freepik">Icon SVG made by Freepik</credit>
 
 	<pipeline nom="declarer_tables_principales" inclure="mesfavoris_pipelines.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="mesfavoris_pipelines.php" />
