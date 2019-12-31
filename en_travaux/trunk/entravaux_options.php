@@ -105,7 +105,7 @@ function entravaux_styliser($flux){
 		// les pages exceptions
 		$pages_ok = array('login_sos','robots.txt','spip_pass','favicon.ico','informer_auteur');
         // des squelettes autorisés configurables via mes_options
-		if (defined('_SKEL_HORS_TRAVAUX')) $skels_ok = explode(',',_SKEL_HORS_TRAVAUX); 
+		if (defined('_SKEL_HORS_TRAVAUX')) $skels_ok = explode(',',_SKEL_HORS_TRAVAUX);
 		else $skels_ok = array();
 		if (!autoriser('travaux')
 			AND !in_array($flux['args']['fond'], $pages_ok)
@@ -126,7 +126,7 @@ function entravaux_styliser($flux){
 /**
  * Afficher une icone de travaux sur tout le site public pour que le webmestre n'oublie pas
  * de retablir le site
- * 
+ *
  * @param string $flux
  * @return string
  */
@@ -170,4 +170,3 @@ function entravaux_affiche_milieu($flux){
 	return $flux;
 }
 
-?>
