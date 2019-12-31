@@ -35,9 +35,9 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='picto'>[(#CHEMIN_IMAGE{pensebete-16.png}|balise_img)]</td>
 			<td class='titre principale'>[(#LOGO_PENSEBETE|image_reduire{20,20})]<a href="[(#ID_PENSEBETE|generer_url_entite{pensebete})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PENSEBETE">[(#RANG). ]#TITRE</a></td>
-			<td class='donneur'><a href="[(#URL_ECRIRE{auteur,id_auteur=#ID_DONNEUR})]" title="#GET{nom_donneur}">[(#GET{nom_donneur}|substr{0,5})][(#GET{nom_donneur}|strlen|>{5}|oui)&hellip;] #DONNEUR</a></td>
+			<td class='donneur'><a href="[(#URL_ECRIRE{auteur,id_auteur=#ID_DONNEUR})]" title="[(#GET{nom_donneur}|attribut_html)]">[(#GET{nom_donneur}|substr{0,5})][(#GET{nom_donneur}|strlen|>{5}|oui)&hellip;] #DONNEUR</a></td>
 			#SET{nom_receveur,#INFO_NOM{'auteur',#ID_RECEVEUR}}
-			<td class='receveur'><a href="[(#URL_ECRIRE{auteur,id_auteur=#ID_RECEVEUR})]" title="#GET{nom_receveur}">[(#GET{nom_receveur}|substr{0,5})][(#GET{nom_receveur}|strlen|>{5}|oui)&hellip;]</td>
+			<td class='receveur'><a href="[(#URL_ECRIRE{auteur,id_auteur=#ID_RECEVEUR})]" title="[(#GET{nom_receveur}|attribut_html)]">[(#GET{nom_receveur}|substr{0,5})][(#GET{nom_receveur}|strlen|>{5}|oui)&hellip;]</td>
 			<td class='date'>[(#DATE|affdate_jourcourt)]</td>
 			<td class='action'><button type="submit" class="button link" name="ajouter_lien[pensebete-#ID_PENSEBETE-#OBJET-#ID_OBJET]" value="+"><:pensebete:lien_ajouter_pensebete:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button></td>				
 		</tr>
