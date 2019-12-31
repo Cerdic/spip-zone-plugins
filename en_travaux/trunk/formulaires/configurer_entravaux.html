@@ -24,17 +24,17 @@
 			<li class="editer editer_accesferme pleine_largeur">
 				<div class="choix">
 					<input type="checkbox" name="accesferme"[ (#ENV{accesferme}|?{checked="checked"})] id="accesferme" value="1"
-					onchange="if ($(this).is(':checked')) $(this).parent().closest('li').next().show('fast').next().hide('fast'); else $(this).parent().closest('li').next().hide('fast').next().show('fast');" />
+																																																				onchange="if ($(this).is(':checked')) {$('.maintenance_oui').show('fast'); $('.maintenance_non').hide('fast');} else {$('.maintenance_oui').hide('fast'); $('.maintenance_non').show('fast');}" />
 					<label for="accesferme"><:entravaux:activer_message:></label>
 				</div>
 			</li>
-			<li class="editer editer_message pleine_largeur[(#ENV{accesferme}|non)none]">
+			<li class="editer editer_message pleine_largeur[(#ENV{accesferme}|non)none] maintenance_oui">
 				<label for='message'><:entravaux:message_temporaire:></label>
 				<textarea name='message' id='message'>[(#ENV{message,<:entravaux:info_travaux_texte:>})]
 				</textarea>
 				<p class="explication"><strong><:entravaux:info_disallow_robot:></strong></p>
 			</li>
-			<li class="editer editer_disallow_robots pleine_largeur[(#ENV{accesferme}|oui)none]">
+			<li class="editer editer_disallow_robots pleine_largeur[(#ENV{accesferme}|oui)none] maintenance_non">
 				<div class="choix">
 					<input type="checkbox" name="disallow_robots"[ (#ENV{disallow_robots}|?{checked="checked"})] id="disallow_robots" />
 					<label for="disallow_robots"><:entravaux:label_disallow_robots:></label>
