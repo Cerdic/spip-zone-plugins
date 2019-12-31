@@ -26,7 +26,7 @@
 #SET{mes_objets,#GET{mes_objets}|array_merge{#ARRAY{#VALEUR{type},(#VALEUR{texte_objets}|_T)}}}
 </BOUCLE_objets>
 
-	[(#SAISIE{checkbox, mes_pensebetes}
+	[(#SAISIE{checkbox, mes_objets}
 	{label=<:pensebete:cfg_objets:>}
 	{datas=#GET{mes_objets}})]
 
