@@ -64,7 +64,7 @@ function pensebetes_affiche_milieu($flux) {
 	$e = trouver_objet_exec($flux['args']['exec']);
 
 	// Poser des pense-bêtes sur les objets éditoriaux éditables sélectionnés dans la configuration
-	if (in_array($e['type'], lire_config('pensebetes/mes_pensebetes')) AND !$e['edition']) {
+	if (in_array($e['type'], lire_config('pensebetes/mes_objets')) AND !$e['edition']) {
 			$texte = recuperer_fond('prive/objets/editer/liens', array(
 			'table_source' => 'pensebetes',
 			'objet' => $e['type'],
