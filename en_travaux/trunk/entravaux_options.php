@@ -9,10 +9,24 @@
 #var_dump($GLOBALS['meta']['entravaux_id_auteur']);
 
 /**
- * Autoriser a voir le site en travaux : par defaut tous les webmestre
+ * Autoriser a voir le site en travaux : par defaut tous les webmestre,
+ * mais c'est configurable
  * @return mixed
  */
-function autoriser_travaux_dist(){ return autoriser('webmestre'); }
+function autoriser_travaux_dist($faire, $type, $id, $qui, $opt){
+	$statut = lire_config('entravaux/autoriser_travaux');
+	if (!$statut) {
+		$statut = 'webmestre';
+	}
+	if ($statut == 'webmestre') {
+		return autoriser('webmestre');
+	} elseif ($statut == '0minirezo') {
+		return $qui['statut'] == '0minirezo';
+	} elseif ($statut == '1comite') {
+		return $qui['statut'] == '1comite' or $qui['statut'] == '0minirezo';
+	}
+	return false;
+}
 
 /**
  * Verifier un verrou fichier pose dans local/entravaux_xxx.lock

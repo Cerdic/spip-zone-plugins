@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'activer_message' => 'Activer la maintenance',
+	'autoriser_travaux' => 'Quel statut est-il nécessaire pour voir le site durant les travaux',
 
 	// E
 	'en_travaux' => 'En travaux',

@@ -28,6 +28,21 @@
 					<label for="accesferme"><:entravaux:activer_message:></label>
 				</div>
 			</li>
+			<li class="editer editer_autoriser_travaux[(#ENV{accesferme}|non)none] maintenance_oui">
+				<label><:entravaux:autoriser_travaux:></label>
+				<div class="choix">
+					<input type="radio" name="autoriser_travaux"[ (#ENV{autoriser_travaux}|=={webmestre}|ou{#ENV{autoriser_travaux}|non}|oui)checked="checked"]id="autoriser_travaux_webmestre" value="webmestre" />
+					<label for="autoriser_travaux_webmestre"><:statut_webmestre|Ucfirst:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="autoriser_travaux"[ (#ENV{autoriser_travaux}|=={0minirezo}|oui)checked="checked"]id="autoriser_travaux_admin" value="0minirezo" />
+					<label for="autoriser_travaux_admin"><:info_statut_administrateur|Ucfirst:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="autoriser_travaux"[ (#ENV{autoriser_travaux}|=={1comite}|oui)checked="checked"]id="autoriser_travaux_auteur" value="1comite" />
+					<label for="autoriser_travaux_auteur"><:info_statut_redacteur|Ucfirst:></label>
+				</div>
+			</li>
 			<li class="editer editer_message pleine_largeur[(#ENV{accesferme}|non)none] maintenance_oui">
 				<label for='message'><:entravaux:message_temporaire:></label>
 				<textarea name='message' id='message'>[(#ENV{message,<:entravaux:info_travaux_texte:>})]
