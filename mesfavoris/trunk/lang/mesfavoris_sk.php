@@ -21,9 +21,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nombre_favoris_objet' => 'Pridaných @nb@ obľúbených položiek.', # Pas utile dans le plugin lui-même mais peut l'être dans les squelettes
 
 	// L
-	'label_style_formulaire16' => 'Malý (16 px)',
-	'label_style_formulaire24' => 'Stredný (24 px)',
-	'label_style_formulaire32' => 'Veľký (32 px)',
 	'legend_formulaire_public' => 'Verejný formulár',
 	'legend_style_formulaire' => 'Štýl formulára',
 	'login_first' => 'Prepáčte, akcia si vyžaduje uloženie, najprv sa prihláste',

@@ -18,9 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer' => 'Configurar',
 
 	// L
-	'label_style_formulaire16' => 'Pequeno (16px)',
-	'label_style_formulaire24' => 'Médio (24px)',
-	'label_style_formulaire32' => 'Grande (32px)',
 	'legend_formulaire_public' => 'Formulário público',
 	'legend_style_formulaire' => 'Estilo do formulário',
 	'login_first' => 'Lamentamos mas a operação requer o seu registo, autentifique-se primeiro',

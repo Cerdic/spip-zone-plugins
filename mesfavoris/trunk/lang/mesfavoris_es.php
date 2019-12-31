@@ -21,9 +21,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nombre_favoris_objet' => 'Agregado @nb@ veces como favorito.', # Pas utile dans le plugin lui-même mais peut l'être dans les squelettes
 
 	// L
-	'label_style_formulaire16' => 'Pequeño (16px)',
-	'label_style_formulaire24' => 'Medio (24px)',
-	'label_style_formulaire32' => 'Grande (32px)',
 	'legend_formulaire_public' => 'Formulario público',
 	'legend_style_formulaire' => 'Estilo del formulario',
 	'login_first' => 'Disculpe, la acción requiere ser registrado. Identifíquese primero',

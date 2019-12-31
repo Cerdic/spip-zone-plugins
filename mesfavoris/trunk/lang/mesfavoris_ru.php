@@ -18,9 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer' => 'конфигурировать',
 
 	// L
-	'label_style_formulaire16' => 'Маленький (16px)',
-	'label_style_formulaire24' => 'Средний (24px)',
-	'label_style_formulaire32' => 'Большой (32px)',
 	'legend_formulaire_public' => 'Публичный бланк',
 	'legend_style_formulaire' => 'Стиль бланка',
 	'login_first' => 'Извините, чтобы выполнить это действие, Вам надо зарегистрироваться',

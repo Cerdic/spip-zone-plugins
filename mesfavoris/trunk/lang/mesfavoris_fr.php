@@ -19,7 +19,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'dans_categorie' => 'dans la catégorie',
-	'explication_taille_formulaire' => 'Vous pouvez personaliser la taille du formulaire simplement en CSS :',
+
+	// E
+	'explication_taille_formulaire' => 'Vous pouvez personaliser la taille du formulaire simplement en CSS :',
 
 	// I
 	'info_1_favori' => '1 favori',
@@ -30,8 +32,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nombre_favoris_objet' => 'Ajouté @nb@ fois en favori.', # Pas utile dans le plugin lui-même mais peut l'être dans les squelettes
 
 	// L
-	'label_style_formulaire_coeur' => 'Coeur',
 	'label_style_formulaire_bookmark' => 'Bookmark',
+	'label_style_formulaire_coeur' => 'Coeur',
 	'legend_formulaire_public' => 'Formulaire public',
 	'legend_style_formulaire' => 'Style du formulaire',
 	'login_first' => 'Désolé l’action requiert d’être enregistré, authentifiez-vous d’abord',

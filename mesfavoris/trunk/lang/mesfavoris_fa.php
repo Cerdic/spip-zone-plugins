@@ -18,9 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer' => 'پيكربندي',
 
 	// L
-	'label_style_formulaire16' => 'كوچك (160 پيكسل)',
-	'label_style_formulaire24' => 'متوسط (240 پيكسل)',
-	'label_style_formulaire32' => 'بزرگ (320 پيكسل)',
 	'legend_formulaire_public' => 'فرم همگاني',
 	'legend_style_formulaire' => 'سبك فرم',
 	'login_first' => 'متأسفانه اين كار مستلزم وصل شدن است، اول متصل شويد',
