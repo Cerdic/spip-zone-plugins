@@ -56,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// T
 	'texte_ajouter_pensebete' => "Ajouter un pense-bête",
-	'texte_avertissement_retrait' => "Êtes-vous sûr de vouloir retirer ce pense-bête ?",
+	'texte_avertissement_retrait' => "Êtes-vous sûr de vouloir supprimer ce pense-bête ?",
 	'texte_changer_statut' => "Ce pense-bête est :",
 	'texte_creer_associer_pensebete'=> "Créer un pense-bête et l'associer",
 	'texte_associer_pensebete'=> "Voulez vous associer ce pense-bête à cet objet ?",
