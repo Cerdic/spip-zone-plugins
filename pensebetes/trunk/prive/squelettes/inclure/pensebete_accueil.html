@@ -6,7 +6,12 @@
 <BOUCLE_affiche_pensebetes(PENSEBETES){id_objet?}{objet?}{id_pensebete?}{id_mot?}{id_donneur?}{id_receveur?}{where?}{recherche?}{pagination 4}>
   <li>
     <div class="pensebete">
-    <h2>[(#ENV{lien}|=={oui}|?{[(#ENV{editable}|oui)<button type="submit" class="button link delete" name="supprimer_lien\[pensebete-#ID_PENSEBETE-#ENV{objet}-#ENV{id_objet}\]" value="X" title="<:pensebete:lien_retirer_pensebete:>">[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>],<a href="#URL_ACTION_AUTEUR{supprimer_pensebete,#ID_PENSEBETE,#SELF}" class="supprime">[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img|inserer_attribut{title,<:supprimer:>})]</a>})] #TITRE</h2>
+    <h2>
+[(#ENV{lien}|=={oui}|?{[(#ENV{editable}|oui)<button type="submit" class="button link delete" name="supprimer_lien\[pensebete-#ID_PENSEBETE-#ENV{objet}-#ENV{id_objet}\]" value="X" title="<:pensebete:lien_retirer_pensebete:>">[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>],
+<a href="[(#URL_ACTION_AUTEUR{supprimer_pensebete,#ID_PENSEBETE,#SELF})]">
+[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img|inserer_attribut{title,<:supprimer:>}|inserer_attribut{class,supprime})]
+</a>})]
+ #TITRE</h2>
       <span class="itineraire"><:pensebete:label_de:>&nbsp;#INFO_NOM{auteur,#ID_DONNEUR}&nbsp;<:pensebete:label_a:>&nbsp;#INFO_NOM{auteur,#ID_RECEVEUR} - [(#DATE|affdate{'d/m/Y'})]</span>
 <BOUCLE_affiche_liaison(spip_pensebetes_liens){id_pensebete}>
 <a href="[(#ID_OBJET|generer_url_entite{#OBJET})]" title="<:info_numero_abbreviation|attribut_html:> #ID_OBJET">[(#CHEMIN_IMAGE{#OBJET-24}|balise_img|inserer_attribut{class, 'pensebete-icone'})]</a>
