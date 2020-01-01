@@ -12,21 +12,38 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'add' => 'إضافة',
 	'add_to' => 'إضافة إلى قائمة المفضلات',
-	'ajoute_le' => 'أضيف في', # MODIF
+	'ajoute_le' => 'أضيف في',
 
 	// C
+	'ce_favori' => 'مفضّل',
+	'change_to' => 'تعديل',
 	'configurer' => 'إعداد',
 
+	// D
+	'dans_categorie' => 'في الفئة',
+
+	// E
+	'explication_taille_formulaire' => 'يمكن تخصيص حجم الاستمترة بسهولة من خلال أوراق الأنماط:',
+
 	// I
+	'info_1_favori' => 'مفضّل واحد',
+	'info_aucune_categorie' => 'لا توجد أية فئة محددة',
+	'info_categorie_filtre' => 'ترشيح',
+	'info_categories_tous' => 'كل الفئات',
+	'info_nb_favoris' => '@nb@ مفضّل',
 	'info_nombre_favoris_objet' => 'تمت إضافته @nb@ مرة كمفضل', # Pas utile dans le plugin lui-même mais peut l'être dans les squelettes
 
 	// L
+	'label_style_formulaire_bookmark' => 'المرجعية',
+	'label_style_formulaire_coeur' => 'إعجاب',
 	'legend_formulaire_public' => 'استمارة عمومية',
 	'legend_style_formulaire' => 'نمط الاستمارة',
 	'login_first' => 'المعذرة، يجب عليك التسجيل قبل القيام بهذه الخطوة. الرجاء إدخال المعرف وكلمة السر ثم إعادة المحاولة.',
 
 	// M
 	'mes_favoris' => 'قائمة المفضلات',
+	'modifie_le' => 'عدّل في',
+	'mon_favori' => 'مفضّلي',
 
 	// R
 	'remove' => 'سحب',
@@ -34,7 +51,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'ses_favoris' => 'المفضلة لديه (ها)',
+	'son_favori' => 'مفضّلهم',
 
 	// V
-	'vos_favoris' => 'المفضلة لديك' # Utile pour modifier le titre de l'inclusion
+	'vos_favoris' => 'المفضلة لديك', # Utile pour modifier le titre de l'inclusion
+	'votre_favori' => 'مفضّلك '
 );
