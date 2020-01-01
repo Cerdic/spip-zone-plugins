@@ -1,4 +1,4 @@
-<traduction module="couteau" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/couteau_suisse/lang/" reference="fr">
+<traduction module="couteau" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/couteau_suisse/trunk/lang/" reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/couteau?lang_cible=ar" total="99" traduits="74" relire="0" modifs="2" nouveaux="23" pourcent="74.75">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
