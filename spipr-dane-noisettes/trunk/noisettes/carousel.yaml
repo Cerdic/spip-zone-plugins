@@ -9,94 +9,106 @@ parametres:
       nom: 'explication_carousel'
       texte: '<:sdnnoisettes:explication_carousel:>'
   -
-    saisie: 'checkbox'
+    saisie: 'fieldset'
     options:
-      nom: 'masquer_titre'
-      label: '<:sdnnoisettes:label_masquer_titre:>'
-      datas:
-        on: '<:sdnnoisettes:masquer:>'
-      defaut: ''
-      conteneur_class: 'long_label'
+      nom: 'fieldset_conf_titre_noisette'
+      label: '<:sdnnoisettes:label_conf_titre_noisette:>'
+    saisies:
+      -
+        saisie: 'case'
+        options:
+          nom: 'masquer_titre'
+          label: '<:sdnnoisettes:label_masquer_titre:>'
+          label_case: '<:sdnnoisettes:masquer:>'
+          defaut: ''
+          conteneur_class: 'long_label'
+      -
+        saisie: 'input'
+        options:
+          nom: 'titre'
+          label: '<:sdnnoisettes:label_titre:>'
+          defaut: 'À la une'
+          afficher_si: '@masquer_titre@ != "on"'
+          conteneur_class: 'long_label'
+      -
+        saisie: 'case'
+        options:
+          nom: 'masquer_picto'
+          label: '<:sdnnoisettes:label_masquer_picto:>'
+          label_case: '<:sdnnoisettes:masquer:>'
+          defaut: ''
+          conteneur_class: 'long_label'
+      -
+        saisie: 'input'
+        options:
+          nom: 'picto'
+          label: '<:sdnnoisettes:label_picto:>'
+          explication: '<:sdnnoisettes:explication_picto:>'
+          defaut: 'star'
+          afficher_si: '@masquer_picto@ != "on"'
+          conteneur_class: 'long_label'
   -
-    saisie: 'input'
+    saisie: 'fieldset'
     options:
-      nom: 'titre'
-      label: '<:sdnnoisettes:label_titre:>'
-      defaut: 'À la une'
-      afficher_si: '@masquer_titre@ != "on"'
-      conteneur_class: 'long_label'
-  -
-    saisie: 'checkbox'
-    options:
-      nom: 'masquer_picto'
-      label: '<:sdnnoisettes:label_masquer_picto:>'
-      datas:
-        on: '<:sdnnoisettes:masquer:>'
-      defaut: ''
-      conteneur_class: 'long_label'
-  -
-    saisie: 'input'
-    options:
-      nom: 'picto'
-      label: '<:sdnnoisettes:label_picto:>'
-      explication: '<:sdnnoisettes:explication_picto:>'
-      defaut: 'star'
-      afficher_si: '@masquer_picto@ != "on"'
-      conteneur_class: 'long_label'
-  -
-    saisie: 'input'
-    options:
-      nom: 'nb'
-      label: '<:sdnnoisettes:label_nb_diapos:>'
-      defaut: ''
-      conteneur_class: 'long_label'
-    verifier:
-      type: 'entier'
-      options:
-        min: 2
-        max: 10
-  -
-    saisie: 'checkbox'
-    options:
-      nom: 'image_passe_partout'
-      label: '<:sdnnoisettes:label_image_passe_partout:>'
-      explication: '<:sdnnoisettes:explication_image_passe_partout:>'
-      datas:
-        on: '<:sdnnoisettes:oui:>'
-      defaut: ''
-      conteneur_class: 'long_label'
-  -
-    saisie: 'input'
-    options:
-      nom: 'largeur_image_carousel'
-      label: '<:sdnnoisettes:label_largeur_image_carousel:>'
-      defaut: '400'
-      conteneur_class: 'long_label'
-    verifier:
-      type: 'entier'
-  -
-    saisie: 'input'
-    options:
-      nom: 'hauteur_image_carousel'
-      label: '<:sdnnoisettes:label_hauteur_image_carousel:>'
-      defaut: '250'
-      conteneur_class: 'long_label'
-    verifier:
-      type: 'entier'
-  -
-    saisie: 'input'
-    options:
-      nom: 'coupe'
-      label: '<:sdnnoisettes:label_coupe_texte:>'
-      defaut: '160'
-      conteneur_class: 'long_label'
-    verifier:
-      type: 'entier'
-  -
-    saisie: 'input'
-    options:
-      nom: 'couleur'
-      label: '<:sdnnoisettes:label_couleur_bg:>'
-      defaut: ''
-      class: 'palette''
-      conteneur_class: 'long_label'
+      nom: 'fieldset_conf_carrousel'
+      label: '<:sdnnoisettes:label_conf_carrousel:>'
+    saisies:
+      -
+        saisie: 'input'
+        options:
+          nom: 'nb'
+          label: '<:sdnnoisettes:label_nb_diapos:>'
+          defaut: ''
+          size: 4
+          conteneur_class: 'long_label'
+        verifier:
+          type: 'entier'
+          options:
+            min: 2
+            max: 10
+      -
+        saisie: 'case'
+        options:
+          nom: 'image_passe_partout'
+          label: '<:sdnnoisettes:label_image_passe_partout:>'
+          label_case: '<:sdnnoisettes:oui:>'
+          explication: '<:sdnnoisettes:explication_image_passe_partout:>'
+          defaut: ''
+          conteneur_class: 'long_label'
+      -
+        saisie: 'input'
+        options:
+          nom: 'largeur_image_carousel'
+          label: '<:sdnnoisettes:label_largeur_image_carousel:>'
+          defaut: '400'
+          size: 4
+          conteneur_class: 'long_label'
+        verifier:
+          type: 'entier'
+      -
+        saisie: 'input'
+        options:
+          nom: 'hauteur_image_carousel'
+          label: '<:sdnnoisettes:label_hauteur_image_carousel:>'
+          defaut: '250'
+          size: 4
+          conteneur_class: 'long_label'
+        verifier:
+          type: 'entier'
+      -
+        saisie: 'input'
+        options:
+          nom: 'coupe'
+          label: '<:sdnnoisettes:label_coupe_texte:>'
+          defaut: '160'
+          conteneur_class: 'long_label'
+        verifier:
+          type: 'entier'
+      -
+        saisie: 'input'
+        options:
+          nom: 'couleur'
+          label: '<:sdnnoisettes:label_couleur_bg:>'
+          defaut: ''
+          class: 'palette''
+          conteneur_class: 'long_label'

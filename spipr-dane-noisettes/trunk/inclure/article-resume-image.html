@@ -1,5 +1,5 @@
 [(#REM) Retourne la première image de l'article 
-	On prend une image parmi celles inclues dans le texte, sinon dans le portfolio
+	On prend une image parmi celles incluses dans le texte, sinon dans le portfolio
 ]<BOUCLE_test(CONDITION){si #ENV{utiliser_image_article}|non}>
 <BOUCLE_image_inclue(DOCUMENTS){id_article}{vu=oui}{par rang_lien}{extension IN png,jpg,gif}{0,1}>
 [(#FICHIER

@@ -8,56 +8,57 @@ contexte:
   - 'id_rubrique'
 parametres:
   -
-    saisie: 'checkbox'
+    saisie: 'fieldset'
     options:
-      nom: 'masquer_titre'
-      label: '<:sdnnoisettes:label_masquer_titre:>'
-      datas:
-        on: '<:sdnnoisettes:masquer:>'
-      defaut: ''
-      conteneur_class: 'long_label'
+      nom: 'fieldset_conf_titre_noisette'
+      label: '<:sdnnoisettes:label_conf_titre_noisette:>'
+    saisies:
+      -
+        saisie: 'case'
+        options:
+          nom: 'masquer_titre'
+          label: '<:sdnnoisettes:label_masquer_titre:>'
+          label_case: '<:sdnnoisettes:masquer:>'
+          defaut: ''
+          conteneur_class: 'long_label'
+      -
+        saisie: 'input'
+        options:
+          nom: 'titre'
+          label: '<:sdnnoisettes:label_titre:>'
+          defaut: 'Autres articles'
+          afficher_si: '@masquer_titre@ != "on"'
+          conteneur_class: 'long_label'
+      -
+        saisie: 'case'
+        options:
+          nom: 'masquer_picto'
+          label: '<:sdnnoisettes:label_masquer_picto:>'
+          label_case: '<:sdnnoisettes:masquer:>'
+          defaut: ''
+          conteneur_class: 'long_label'
+      -
+        saisie: 'input'
+        options:
+          nom: 'picto'
+          label: '<:sdnnoisettes:label_picto:>'
+          explication: '<:sdnnoisettes:explication_picto:>'
+          defaut: 'files-o'
+          afficher_si: '@masquer_picto@ != "on"'
+          conteneur_class: 'long_label'
   -
-    saisie: 'input'
+    saisie: 'fieldset'
     options:
-      nom: 'titre'
-      label: '<:sdnnoisettes:label_titre:>'
-      defaut: 'Autres articles'
-      afficher_si: '@masquer_titre@ != "on"'
-      conteneur_class: 'long_label'
-  -
-    saisie: 'checkbox'
-    options:
-      nom: 'masquer_nombre'
-      label: '<:sdnnoisettes:label_masquer_nombre:>'
-      datas:
-        on: '<:sdnnoisettes:masquer:>'
-      defaut: ''
-      conteneur_class: 'long_label'
-  -
-    saisie: 'checkbox'
-    options:
-      nom: 'masquer_picto'
-      label: '<:sdnnoisettes:label_masquer_picto:>'
-      datas:
-        on: '<:sdnnoisettes:masquer:>'
-      defaut: ''
-      conteneur_class: 'long_label'
-  -
-    saisie: 'input'
-    options:
-      nom: 'picto'
-      label: '<:sdnnoisettes:label_picto:>'
-      explication: '<:sdnnoisettes:explication_picto:>'
-      defaut: 'files-o'
-      afficher_si: '@masquer_picto@ != "on"'
-      conteneur_class: 'long_label'
-  -
-    saisie: 'input'
-    options:
-      nom: 'pagination'
-      label: '<:sdnnoisettes:label_pagination_articles:>'
-      defaut: '5'
-      explication: '<:sdnnoisettes:explication_pagination_sans:>'
-      conteneur_class: 'long_label'
-    verifier:
-      type: 'entier'
+      nom: 'fieldset_conf_liste'
+      label: '<:sdnnoisettes:label_conf_liste:>'
+    saisies:
+      -
+        saisie: 'input'
+        options:
+          nom: 'pagination'
+          label: '<:sdnnoisettes:label_pagination_articles:>'
+          defaut: '5'
+          explication: '<:sdnnoisettes:explication_pagination_sans:>'
+          conteneur_class: 'long_label'
+        verifier:
+          type: 'entier'

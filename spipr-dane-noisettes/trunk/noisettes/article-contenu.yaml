@@ -7,21 +7,19 @@ contexte:
   - 'id_rubrique'
 parametres:
   -
-    saisie: 'checkbox'
+    saisie: 'case'
     options:
       nom: 'afficher_descriptif'
       label: '<:sdnnoisettes:label_afficher_descriptif:>'
-      datas:
-        on: '<:sdnnoisettes:afficher:>'
+      label_case: '<:sdnnoisettes:afficher:>'
       defaut: ''
       conteneur_class: 'long_label'
   -
-    saisie: 'checkbox'
+    saisie: 'case'
     options:
       nom: 'masquer_logo'
       label: '<:sdnnoisettes:label_masquer_logo:>'
-      datas:
-        on: '<:sdnnoisettes:masquer:>'
+      label_case: '<:sdnnoisettes:masquer:>'
       defaut: ''
       conteneur_class: 'long_label'
   -

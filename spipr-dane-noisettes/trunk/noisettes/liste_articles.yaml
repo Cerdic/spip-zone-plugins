@@ -4,222 +4,217 @@ icon: 'liste-articles-24.png'
 ajax: 'non'
 parametres:
   -
-    saisie: 'checkbox'
+    saisie: 'fieldset'
     options:
-      nom: 'masquer_titre'
-      label: '<:sdnnoisettes:label_masquer_titre:>'
-      datas:
-        on: '<:sdnnoisettes:masquer:>'
-      defaut: ''
-      conteneur_class: 'long_label'
-  -
-    saisie: 'input'
-    options:
-      nom: 'titre'
-      label: '<:sdnnoisettes:label_titre:>'
-      defaut: 'Derniers articles'
-      afficher_si: '@masquer_titre@ != "on"'
-      conteneur_class: 'long_label'
-  -
-    saisie: 'checkbox'
-    options:
-      nom: 'masquer_nombre'
-      label: '<:sdnnoisettes:label_masquer_nombre:>'
-      datas:
-        on: '<:sdnnoisettes:masquer:>'
-      defaut: ''
-      conteneur_class: 'long_label'
-  -
-    saisie: 'checkbox'
-    options:
-      nom: 'masquer_picto'
-      label: '<:sdnnoisettes:label_masquer_picto:>'
-      datas:
-        on: '<:sdnnoisettes:masquer:>'
-      defaut: ''
-      conteneur_class: 'long_label'
-  -
-    saisie: 'input'
-    options:
-      nom: 'picto'
-      label: '<:sdnnoisettes:label_picto:>'
-      explication: '<:sdnnoisettes:explication_picto:>'
-      defaut: 'rss'
-      afficher_si: '@masquer_picto@ != "on"'
-      conteneur_class: 'long_label'
-  -
-    saisie: 'selecteur_article'
-    options:
-      nom: 'articles_exclus'
-      label: '<:sdnnoisettes:label_articles_exclus:>'
-      explication: '<:sdnnoisettes:explication_articles_exclus:>'
-      multiple: 'oui'
-      defaut: ''
-      conteneur_class: 'long_label'
-  -
-    saisie: 'checkbox'
-    options:
-      nom: 'exclure_article_selection'
-      label: '<:sdnnoisettes:label_exclure_article_selection:>'
-      explication: '<:sdnnoisettes:explication_exclure_article_selection:>'
-      datas:
-        on: '<:sdnnoisettes:oui:>'
-      defaut: ''
-      conteneur_class: 'long_label'
-  -
-    saisie: 'selecteur_rubrique'
-    options:
-      nom: 'rubriques_exclues'
-      label: '<:sdnnoisettes:label_rubriques_exclues:>'
-      explication: '<:sdnnoisettes:explication_rubriques_exclues:>'
-      multiple: 'oui'
-      defaut: ''
-      conteneur_class: 'long_label'
-  -
-    saisie: 'selection'
-    options:
-      nom: 'tri'
-      label: '<:sdnnoisettes:label_tri:>'
-      explication: '<:sdnnoisettes:explication_tri:>'
-      datas:
-        date: '<:sdnnoisettes:date:>'
-        titre: '<:sdnnoisettes:titre:>'
-        num_titre: '<:sdnnoisettes:num_titre:>'
-      defaut: ''
-      conteneur_class: 'long_label'
-#  -
-#    saisie: 'input'
-#    options:
-#      nom: 'nb_total'
-#      label: '<:sdnnoisettes:label_nb_total:>'
-#      defaut: ''
-#      conteneur_class: 'long_label'
-#      explication: '<:sdnnoisettes:explication_nb_total:>'
-#    verifier:
-#      type: 'entier'
-  -
-    saisie: 'input'
-    options:
-      nom: 'nb'
-      label: '<:sdnnoisettes:label_pagination_articles:>'
-      defaut: '5'
-#      explication: '<:sdnnoisettes:explication_pagination:>'
-      conteneur_class: 'long_label'
-    verifier:
-      type: 'entier'
-  -
-    saisie: 'checkbox'
-    options:
-      nom: 'afficher_liste_simple'
-      label: '<:sdnnoisettes:label_afficher_liste_simple:>'
-      conteneur_class: 'long_label'
-      datas:
-        on: '<:sdnnoisettes:liste_simple:>'
-      defaut: ''
-  -
-    saisie: 'checkbox'
-    options:
-      nom: 'masquer_logo'
-      label: '<:sdnnoisettes:label_masquer_logo:>'
-      datas:
-        on: '<:sdnnoisettes:masquer:>'
-      defaut: ''
-      conteneur_class: 'long_label'
-  -
-    saisie: 'input'
-    options:
-      nom: 'largeur_logo'
-      label: '<:sdnnoisettes:label_largeur_logo:>'
-      defaut: '150'
-      afficher_si: '@masquer_logo@  != "on"'
-      conteneur_class: 'long_label'
-    verifier:
-      type: 'entier'
-  -
-    saisie: 'input'
-    options:
-      nom: 'hauteur_logo'
-      label: '<:sdnnoisettes:label_hauteur_logo:>'
-      defaut: '150'
-      afficher_si: '@masquer_logo@ != "on"'
-      conteneur_class: 'long_label'
-    verifier:
-      type: 'entier'
-  -
-    saisie: 'checkbox'
-    options:
-      nom: 'image_passe_partout'
-      label: '<:sdnnoisettes:label_image_passe_partout:>'
-      explication: '<:sdnnoisettes:explication_image_passe_partout:>'
-      datas:
-        on: '<:sdnnoisettes:oui:>'
-      defaut: ''
-      afficher_si: '@masquer_logo@  != "on"'
-      conteneur_class: 'long_label'
-  -
-    saisie: 'checkbox'
-    options:
-      nom: 'image_zoom_hover'
-      label: '<:sdnnoisettes:label_image_zoom_hover:>'
-      explication: '<:sdnnoisettes:explication_image_zoom_hover:>'
-      datas:
-        on: '<:sdnnoisettes:oui:>'
-      defaut: ''
-      afficher_si: '@masquer_logo@  != "on" && @image_passe_partout@ == "on"'
-      conteneur_class: 'long_label'
+      nom: 'fieldset_conf_titre_noisette'
+      label: '<:sdnnoisettes:label_conf_titre_noisette:>'
+    saisies:
+      -
+        saisie: 'case'
+        options:
+          nom: 'masquer_titre'
+          label: '<:sdnnoisettes:label_masquer_titre:>'
+          label_case: '<:sdnnoisettes:masquer:>'
+          defaut: ''
+          conteneur_class: 'long_label'
+      -
+        saisie: 'input'
+        options:
+          nom: 'titre'
+          label: '<:sdnnoisettes:label_titre:>'
+          defaut: 'Derniers articles'
+          afficher_si: '@masquer_titre@ != "on"'
+          conteneur_class: 'long_label'
+      -
+        saisie: 'case'
+        options:
+          nom: 'masquer_nombre'
+          label: '<:sdnnoisettes:label_masquer_nombre:>'
+          label_case: '<:sdnnoisettes:masquer:>'
+          defaut: ''
+          conteneur_class: 'long_label'
+      -
+        saisie: 'case'
+        options:
+          nom: 'masquer_picto'
+          label: '<:sdnnoisettes:label_masquer_picto:>'
+          label_case: '<:sdnnoisettes:masquer:>'
+          defaut: ''
+          conteneur_class: 'long_label'
+      -
+        saisie: 'input'
+        options:
+          nom: 'picto'
+          label: '<:sdnnoisettes:label_picto:>'
+          explication: '<:sdnnoisettes:explication_picto:>'
+          defaut: 'rss'
+          afficher_si: '@masquer_picto@ != "on"'
+          conteneur_class: 'long_label'
   -
     saisie: 'fieldset'
     options:
-      nom: 'fieldset_affichage'
-      label: '<:sdnnoisettes:label_fieldset_affichage:>'
-      afficher_si: '@afficher_liste_simple@ != "on"'
+      nom: 'fieldset_conf_liste'
+      label: '<:sdnnoisettes:label_conf_liste:>'
     saisies:
       -
-        saisie: 'checkbox'
+        saisie: 'case'
+        options:
+          nom: 'exclure_article_selection'
+          label: '<:sdnnoisettes:label_exclure_article_selection:>'
+          label_case: '<:sdnnoisettes:oui:>'
+          explication: '<:sdnnoisettes:explication_exclure_article_selection:>'
+          defaut: ''
+          conteneur_class: 'long_label'
+      -
+        saisie: 'selecteur_article'
+        options:
+          nom: 'articles_exclus'
+          label: '<:sdnnoisettes:label_articles_exclus:>'
+          explication: '<:sdnnoisettes:explication_articles_exclus:>'
+          multiple: 'oui'
+          defaut: ''
+          conteneur_class: 'long_label'
+      -
+        saisie: 'selecteur_rubrique'
+        options:
+          nom: 'rubriques_exclues'
+          label: '<:sdnnoisettes:label_rubriques_exclues:>'
+          explication: '<:sdnnoisettes:explication_rubriques_exclues:>'
+          multiple: 'oui'
+          defaut: ''
+          conteneur_class: 'long_label'
+      -
+        saisie: 'selection'
+        options:
+          nom: 'tri'
+          label: '<:sdnnoisettes:label_tri:>'
+          explication: '<:sdnnoisettes:explication_tri:>'
+          datas:
+            date: '<:sdnnoisettes:date:>'
+            titre: '<:sdnnoisettes:titre:>'
+            num_titre: '<:sdnnoisettes:num_titre:>'
+          defaut: ''
+          conteneur_class: 'long_label'
+      -
+        saisie: 'input'
+        options:
+          nom: 'nb'
+          label: '<:sdnnoisettes:label_pagination_articles:>'
+          defaut: '5'
+#          explication: '<:sdnnoisettes:explication_pagination:>'
+          conteneur_class: 'long_label'
+          afficher_si: '@masquer_pagination@  == "on"'
+        verifier:
+          type: 'entier'
+      -
+        saisie: 'case'
+        options:
+          nom: 'afficher_liste_simple'
+          label: '<:sdnnoisettes:label_afficher_liste_simple:>'
+          label_case: '<:sdnnoisettes:oui:>'
+          conteneur_class: 'long_label'
+          defaut: ''
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'fieldset_conf_items'
+      label: '<:sdnnoisettes:label_conf_items_liste:>'
+#      afficher_si: '@masquer_logo@  == "on" && @afficher_liste_simple@  == "on"'
+    saisies:
+      -
+        saisie: 'case'
+        options:
+          nom: 'masquer_logo'
+          label: '<:sdnnoisettes:label_masquer_logo:>'
+          label_case: '<:sdnnoisettes:masquer:>'
+          defaut: ''
+          conteneur_class: 'long_label'
+      -
+        saisie: 'input'
+        options:
+          nom: 'largeur_logo'
+          label: '<:sdnnoisettes:label_largeur_logo:>'
+          defaut: '150'
+          afficher_si: '@masquer_logo@  != "on"'
+          conteneur_class: 'long_label'
+        verifier:
+          type: 'entier'
+      -
+        saisie: 'input'
+        options:
+          nom: 'hauteur_logo'
+          label: '<:sdnnoisettes:label_hauteur_logo:>'
+          defaut: '150'
+          afficher_si: '@masquer_logo@ != "on"'
+          conteneur_class: 'long_label'
+        verifier:
+          type: 'entier'
+      -
+        saisie: 'case'
+        options:
+          nom: 'image_passe_partout'
+          label: '<:sdnnoisettes:label_image_passe_partout:>'
+          label_case: '<:sdnnoisettes:oui:>'
+          explication: '<:sdnnoisettes:explication_image_passe_partout:>'
+          defaut: ''
+          afficher_si: '@masquer_logo@  != "on"'
+          conteneur_class: 'long_label'
+      -
+        saisie: 'case'
+        options:
+          nom: 'image_zoom_hover'
+          label: '<:sdnnoisettes:label_image_zoom_hover:>'
+          label_case: '<:sdnnoisettes:oui:>'
+          explication: '<:sdnnoisettes:explication_image_zoom_hover:>'
+          defaut: ''
+          afficher_si: '@masquer_logo@  != "on" && @image_passe_partout@ == "on" && @afficher_liste_simple@ != "on"'
+          conteneur_class: 'long_label'
+      -
+        saisie: 'case'
         options:
           nom: 'masquer_intro'
           label: '<:sdnnoisettes:label_masquer_intro:>'
+          label_case: '<:sdnnoisettes:masquer:>'
           conteneur_class: 'long_label'
-          datas:
-            on: '<:sdnnoisettes:masquer:>'
           defaut: ''
+          afficher_si: '@afficher_liste_simple@ != "on"'
       -
         saisie: 'input'
         options:
           nom: 'coupe'
           label: '<:sdnnoisettes:label_coupe_texte:>'
           defaut: '100'
-          afficher_si: '@masquer_intro@ != "on"'
+          afficher_si: '@masquer_intro@ != "on" && @afficher_liste_simple@ != "on"'
           conteneur_class: 'long_label'
         verifier:
           type: 'entier'
       -
-        saisie: 'checkbox'
+        saisie: 'case'
         options:
           nom: 'masquer_date'
           label: '<:sdnnoisettes:label_masquer_date:>'
+          label_case: '<:sdnnoisettes:masquer:>'
           conteneur_class: 'long_label'
-          datas:
-            on: '<:sdnnoisettes:masquer:>'
           defaut: ''
+          afficher_si: '@afficher_liste_simple@ != "on"'
       -
-        saisie: 'checkbox'
+        saisie: 'case'
         options:
           nom: 'afficher_tags'
           label: '<:sdnnoisettes:label_afficher_tags:>'
+          label_case: '<:sdnnoisettes:afficher:>'
           conteneur_class: 'long_label'
-          datas:
-            on: '<:sdnnoisettes:afficher:>'
           defaut: ''
+          afficher_si: '@afficher_liste_simple@ != "on"'
       -
-        saisie: 'checkbox'
+        saisie: 'case'
         options:
           nom: 'afficher_parent'
           label: '<:sdnnoisettes:label_afficher_parent:>'
+          label_case: '<:sdnnoisettes:afficher:>'
           conteneur_class: 'long_label'
-          datas:
-            on: '<:sdnnoisettes:afficher:>'
           defaut: ''
+          afficher_si: '@afficher_liste_simple@ != "on"'
   -
     saisie: 'fieldset'
     options:
@@ -228,13 +223,12 @@ parametres:
       afficher_si: '@afficher_liste_simple@ != "on"'
     saisies:
       -
-        saisie: 'checkbox'
+        saisie: 'case'
         options:
           nom: 'liste_span'
           label: '<:sdnnoisettes:label_liste_span:>'
+          label_case: '<:sdnnoisettes:oui:>'
           explication: '<:sdnnoisettes:explication_liste_span:>'
-          datas:
-            on: '<:sdnnoisettes:oui:>'
           defaut: ''
           conteneur_class: 'long_label'
       -
