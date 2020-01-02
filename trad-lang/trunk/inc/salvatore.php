@@ -57,14 +57,33 @@ function salvatore_init(){
 
 		// verifications des repertoires
 		foreach ([_DIR_SALVATORE, _DIR_SALVATORE_TRADUCTION, _DIR_SALVATORE_TMP] as $dir){
-			if (!is_dir($dir)){
-				throw new Exception("Erreur : le répertoire $dir n'existe pas");
-			}
+			salvatore_check_dir($dir);
 		}
 		$initialized = true;
 	}
 }
 
+/**
+ * Verifier qu'un repertoire existe
+ * @param $dir
+ * @throws Exception
+ */
+function salvatore_check_dir($dir) {
+	if (!is_dir($dir)){
+		throw new Exception("Erreur : le répertoire $dir n'existe pas");
+	}
+}
+
+/**
+ * Verifier qu'un fichier existe
+ * @param $file
+ * @throws Exception
+ */
+function salvatore_check_file($file) {
+	if (!file_exists($file)){
+		throw new Exception("Erreur : Le fichier $file est introuvable");
+	}
+}
 
 /**
  * chargement du fichier traductions.txt
@@ -75,11 +94,15 @@ function salvatore_init(){
  * @return array
  * @throws Exception
  */
-function salvatore_charger_fichier_traductions($chemin = _DIR_SALVATORE_TRADUCTION, $trad_list = 'traductions.txt'){
+function salvatore_charger_fichier_traductions($fichier_traductions = null){
 
 	salvatore_init();
+	if (is_null($fichier_traductions)) {
+		$fichier_traductions = _DIR_SALVATORE_TRADUCTION . 'traductions.txt';
+	}
+	salvatore_check_file($fichier_traductions);
 
-	$contenu = file_get_contents($chemin . $trad_list);
+	$contenu = file_get_contents($fichier_traductions);
 	$contenu = preg_replace('/#.*/', '', $contenu); // supprimer les commentaires
 
 	$tab = preg_split("/\r\n|\n\r|\n|\r/", $contenu);
@@ -120,6 +143,18 @@ function salvatore_log($msg = ''){
 	}
 }
 
+/**
+ * Echec sur erreur : on envoie un mail si possible et on echoue en lançant une exception
+ * @param $sujet
+ * @param $corps
+ * @throws Exception
+ */
+function salvatore_fail($sujet, $corps) {
+	$sujet = 'Tireur : Erreur';
+	$corps = "! Erreur pas de fichier de langue conforme dans le module : $tmp" . $source[1] . "\n";
+	salvatore_envoyer_mail($sujet, $corps);
+	throw new Exception($corps);
+}
 
 /**
  * @param string $sujet
