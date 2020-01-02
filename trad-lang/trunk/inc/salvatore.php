@@ -24,44 +24,16 @@
  		kent1 <kent1@arscenic.info>
 */
 
-// securite : en ligne de commande c tout
-if (isset($_SERVER['SERVER_NAME'])) {
-	die('en ligne de commande svp');
-}
-
-// modules demandes en ligne de commande
-//$GLOBALS['modules'] = $_SERVER['argv'];
-//array_shift($GLOBALS['modules']);
-
-ini_set('memory_limit', '50M');
+@ini_set('memory_limit', '50M');
 
 define('_DEBUG_TRAD_LANG', 1); // undef si on ne veut pas de messages
-define('_SALVATORE', './');
-define('_SALVATORE_TRADUCTION', './traductions/');
-if (!defined('_DIR_RESTREINT_ABS')) {
-	define('_DIR_RESTREINT_ABS', '../ecrire/');
-}
-define('_DIR_RACINE', '../');
 
-// eviter les notice inutiles si les erreurs sont a un niveau (E_ALL)
-// lors de l'inclusion des modules SPIP
-$GLOBALS['HTTP_USER_AGENT']='shell';
-$_SERVER['QUERY_STRING'] = '';
-$_SERVER['HTTP_HOST'] = '';
-$_SERVER['REQUEST_METHOD'] = '';
-$_SERVER['HTTP_ACCEPT_LANGUAGE'] = 'fr_fr';
-$GLOBALS['ip'] = getHostByName(getHostName());
-$GLOBALS['SERVER_SOFTWARE'] = $_SERVER['SERVER_SOFTWARE'] = 'system';
-$GLOBALS['REQUEST_METHOD']='$';
+define('_SALVATORE', _DIR_RACINE . 'salvatore/');
+define('_SALVATORE_TRADUCTION', _SALVATORE. 'traductions/');
+define('_SALVATORE_TMP', _SALVATORE.'tmp/');
+
 $GLOBALS['idx_lang']=0;
 
-/* Prepare l'inclusion des modules SPIP */
-require_once(_DIR_RESTREINT_ABS.'inc_version.php');
-
-
-/* fin inclusion */
-
-define('_SALVATORE_TMP', _SALVATORE.'tmp/');
 if (!is_dir(_SALVATORE_TMP)) {
 	die("\nErreur : le répertoire "._SALVATORE_TMP." n'existe pas\n\n");
 }
