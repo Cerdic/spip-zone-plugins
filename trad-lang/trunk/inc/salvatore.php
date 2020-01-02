@@ -217,7 +217,7 @@ function salvatore_set_credentials($methode, $url_repository, $module) {
 			}
 
 			if ($user and $pass) {
-				$url_repository = str_replace("://$host", "://$user:$pass@$host", $url_repository);
+				$url_repository = str_replace("://$host", "://".urlencode($user).":".urlencode($pass)."@$host", $url_repository);
 			}
 		}
 
