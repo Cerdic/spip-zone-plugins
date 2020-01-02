@@ -58,15 +58,21 @@ class SalvatoreTirer extends Command {
 		global $spip_loaded;
 
 		include_spip('inc/salvatore');
+		include_spip('inc/salvatore_tireur');
+
 		salvatore_init();
+
+		$output->writeln("=======================================");
+		$output->writeln("TIREUR [Va chercher les fichiers dans un repo SVN|GIT et les depose dans sa copie locale]");
+		$output->writeln("=======================================");
+
 
 		$traductions = $input->getOption('traductions');
 		$liste_trad = salvatore_charger_fichier_traductions($traductions);
 		$n = count($liste_trad);
 		$output->writeln("<info>$n modules dans le fichier traductions " . ($traductions ? $traductions : '') . "</info>");
 
-		#die();
-		#salvatore_tirer($liste_trad);
+		salvatore_tirer($liste_trad);
 	}
 }
 

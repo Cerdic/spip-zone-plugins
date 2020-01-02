@@ -39,77 +39,55 @@ function salvatore_tirer($liste_sources, $tmp=null) {
 	}
 
 	salvatore_check_dir($tmp);
-
-	salvatore_log("\n=======================================\nTIREUR\nVa chercher les fichiers dans SVN et les depose dans sa copie locale\n=======================================\n");
+	$done = array();
 
 	foreach ($liste_sources as $source){
-		$cmd = false;
-		if (isset($domaines_exceptions) && is_array($domaines_exceptions) && in_array($domaine_svn, $domaines_exceptions)){
-			/**
-			 * On est dans une exception (Github?)
-			 */
-			if (is_array($domaines_exceptions_credentials) and isset($domaines_exceptions_credentials[$domaine_svn])){
-				$user = $domaines_exceptions_credentials[$domaine_svn]['user'];
-				$pass = $domaines_exceptions_credentials[$domaine_svn]['pass'];
-				$credentials = true;
-			}
-		}
-		if (isset(${$module . '_user'})){
-			$user = ${$module . '_user'};
-			$pass = ${$module . '_passwd'};
-		} elseif (!$credentials) {
-			$user = $SVNUSER;
-			$pass = $SVNPASSWD;
-		}
-		salvatore_log("\n===== Module " . $source[1] . " =====\n");
-		if (is_dir($tmp . $source[1] . '/.svn')){
-			$depot = "env LANG=en_US svn info --non-interactive --trust-server-cert --username $user --password $pass " . $tmp . $source[1] . " | awk '/^URL:/ { print $2 }'";
-			$depot = exec($depot, $depot);
-			$depot = $depot . '/';
-			if ($depot!=$source[0]){
-				$domaine_depot = parse_url($depot);
-				$domaine_depot = $domaine_depot['host'];
-				$domaine_source = parse_url($source[0]);
-				$domaine_source = $domaine_source['host'];
-				/**
-				 * Simple switch si même serveur sinon on supprime le répertoire et on refait un checkout
-				 */
-				if ($domaine_depot==$domaine_source){
-					$cmd = "svn switch --non-interactive --ignore-ancestry --trust-server-cert --username $user --password $pass " . $source[0] . ' ' . $tmp . $source[1] . '/';
-				} else {
-					$cmd = 'rm -Rvf ' . $tmp . $source[1] . "/ && svn checkout  --non-interactive --trust-server-cert --username $user --password $pass --non-recursive " . $source[0] . '/ ' . $tmp . $source[1] . '/';
-				}
-			} else {
-				$revision_actuelle = "env LANG=en_US svn info  --non-interactive --trust-server-cert --username $user --password $pass " . $tmp . $source[1] . " | awk '/^Revision:/ { print $2 }'";
-				$revision_actuelle = exec($revision_actuelle, $revision_actuelle);
-				$last_revision = "env LANG=en_US svn info  --non-interactive --trust-server-cert --username $user --password $pass " . $source[0] . " | awk '/^Last\ Changed\ Rev:/ { print $4 }'";
-				$last_revision = exec($last_revision, $last_revision);
-				if ($revision_actuelle>=$last_revision){
-					salvatore_log("Pas besoin de mettre à jour\n");
-				} else {
-					$cmd = "svn update  --non-interactive --trust-server-cert --username $user --password $pass --non-recursive --accept theirs-full " . $tmp . $source[1] . '/';
-				}
-			}
-		} else {
-			$cmd = "svn checkout  --non-interactive --trust-server-cert --username $user --password $pass --non-recursive " . $source[0] . '/ ' . $tmp . $source[1] . '/';
+		salvatore_log("\n--- Module " . $source['module'] . " | " . $source['url']);
+
+		$url_with_credentials = salvatore_set_credentials($source['methode'], $source['url'], $source['module']);
+
+		$dir_checkout = $tmp . $source['dir_checkout'];
+		$dir_module = $tmp . $source['dir_module'];
+		$dir_target = $dir_checkout;
+		if ($source['dir']) {
+			$dir_target .= "/" . $source['dir'];
 		}
 
-		if ($cmd){
-			exec("$cmd 2> /dev/null", $out, $int);
-			if ($int==0){
-				salvatore_log(end($out) . "\n");
-			} else {
-				$sujet = 'Tireur : Erreur';
-				$corps = $source[0] . '/ ' . $source[1] . "\n\n";
-				$corps .= "L'adresse distante de ce module n'est certainement plus valide\n\n";
-				salvatore_envoyer_mail($sujet, $corps);
-				die("L'adresse distante de ce module n'est certainement plus valide\n\n");
-			}
+		$return = 0;
+		if (empty($done[$dir_checkout])) {
+			$cmd = "checkout.php"
+			  . ' ' . $source['methode']
+				. ($source['branche'] ? ' -b'.$source['branche'] : '')
+				. ' ' . $url_with_credentials
+				. ' ' . $dir_checkout;
+
+			echo "$cmd\n";
+			passthru("$cmd 2>/dev/null", $return);
+			$done[$dir_checkout] = true;
 		}
 
+		if ($return !== 0 or !is_dir($dir_checkout) or !is_dir($dir_target)) {
+			$corps = $source['url'] . ' | ' . $source['module'] . "\n" . "Erreur lors du checkout";
+			salvatore_fail('[Tireur] : Erreur', $corps);
+		}
+
+		if (file_exists($dir_module) and !is_link($dir_module)) {
+			$corps = $source['url'] . ' | ' . $source['module'] . "\n" . "Il y a deja un repertoire $dir_module";
+			salvatore_fail('[Tireur] : Erreur', $corps);
+		}
+
+		$dir_target = realpath($dir_target);
+		if (is_link($dir_module) and readlink($dir_module) !== $dir_target) {
+			@unlink($dir_module);
+		}
+		if (!file_exists($dir_module)) {
+			symlink($dir_target, $dir_module);
+		}
+
+		$fichier_lang_master = $dir_module . '/' . $source['module'] . '_' . $source['lang'] . '.php';
 		// controle des erreurs : requiert au moins 1 fichier par module !
-		if (!file_exists($tmp . $source[1] . '/' . $source[1] . '_' . $source[2] . '.php')){
-			salvatore_fail('Tireur : Erreur', "! Erreur pas de fichier de langue conforme dans le module : $tmp" . $source[1]);
+		if (!file_exists($fichier_lang_master)){
+			salvatore_fail('[Tireur] : Erreur', "! Erreur pas de fichier de langue maitre $fichier_lang_master");
 		}
 	}
 
