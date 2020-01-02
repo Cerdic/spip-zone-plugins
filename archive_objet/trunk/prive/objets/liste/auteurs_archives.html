@@ -1,0 +1,61 @@
+[(#SET{defaut_tri,#ARRAY{
+	date_archive,-1,
+	statut,1,
+	multi nom,1,
+	points,-1
+}})
+]<B_liste_aut>
+#ANCRE_PAGINATION
+<div class="liste-objets archives auteurs">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_auteur,info_nb_auteurs}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'>[(#TRI{statut,#CHEMIN_IMAGE{auteur-16.png}|balise_img{<:lien_trier_statut|attribut_html:>},ajax})]</th>
+			<th class='nom' scope='col'>[(#TRI{multi nom,<:info_nom:>,ajax})]</th>
+			<th class='email' scope='col'>[(#TRI{email,<:email:>,ajax})]</th>
+			<th class='date_archive secondaire' scope='col'>[(#TRI{date_archive,<:archobjet:colonne_date_archive_label:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_auteur,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class='action_archive' scope='col'>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_aut(AUTEURS){tout}{where?}{statut?}{archive}{recherche?}{tri #ENV{par, date_archive},#GET{defaut_tri}}{pagination #ENV{nb,10} aut}>
+		[(#LANG|changer_typo)]
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|initiale|=={#ENV{i}}|et{#ENV{i}}|?{on}|unique)]">
+			<td class='statut'>[(#STATUT|puce_statut{auteur})]</td>
+			<td class='nom[ (#NOM|non)vide]'>
+				<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>
+					[(#RANG). ][(#NOM|trim|sinon{#BIO*|couper{80}|trim}|sinon{<:info_numero_abbreviation:>#ID_AUTEUR})]
+				</a>
+				[ <small>((#STATUT|=={0minirezo}|et{#WEBMESTRE|=={oui}}|?{<:statut_webmestre:>}))</small>]
+				[ <small>((#STATUT|=={0minirezo}|et{#AUTORISER{'','','',#ID_AUTEUR}|non}|?{<:statut_admin_restreint:>}))</small>]
+			</td>
+			<td class='email'>[<a href='mailto:(#EMAIL)'>[(#EMAIL|couper{30})]</a>]</td>
+			#SET{raison, ''}
+			[(#RAISON_ARCHIVE|oui)
+				#SET{raison, #VAL{archobjet:raison_}|concat{#RAISON_ARCHIVE}|concat{_label}|_T}
+			]
+			<td class='date_archive secondaire'>[<span title="[(#GET{raison}|_T|attribut_html|sinon{#DATE_ARCHIVE|heures_minutes})]">(#DATE_ARCHIVE|affdate_jourcourt)</span>]</td>
+			<td class='id'>[(#AUTORISER{modifier,auteur,#ID_AUTEUR}|?{
+				<a href="[(#URL_ECRIRE{auteur_edit,id_auteur=#ID_AUTEUR})]" title="<:admin_modifier_auteur|attribut_html:>">#ID_AUTEUR</a>,
+				#ID_AUTEUR
+			})]</td>
+			<td class='action_archive secondaire'>
+				[(#BOUTON_ACTION{
+					[(#CHEMIN_IMAGE{desarchiver-16.png}
+						|balise_img{<:archobjet:action_desarchiver_label|ucfirst:>}
+						|inserer_attribut{title, <:archobjet:action_desarchiver_label|ucfirst:>})],
+					#URL_ACTION_AUTEUR{objet_modifier_archivage, desarchiver:auteur:#ID_AUTEUR:, #ID_AUTEUR|generer_url_entite{auteur}},
+				})]
+			</td>
+		</tr>
+	</BOUCLE_liste_aut>
+	[(#REM|changer_typo)]
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_aut>[
+<div class="liste-objets auteurs caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_aut>

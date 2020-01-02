@@ -1,0 +1,50 @@
+<h2>D&eacute;mo du crit&egrave;re <code>{archive}</code></h2>
+
+<h3>Article identifi&eacute; par son id <code>{id_article=5168}</code></h3>
+
+<B_articles_1>
+<ul>
+<BOUCLE_articles_1(ARTICLES){id_article=5168}>
+<li>#ID_ARTICLE - #STATUT - #TITRE[(#EST_ARCHIVE|=={1}|oui) (Archive)]</li>
+</BOUCLE_articles_1>
+</ul>
+</B_articles_1>
+Article non trouv&eacute; 1
+<//B_articles_1>
+
+
+<h3>Articles identifiés par id dans un IN <code>{id_article IN 5168,5186}</code></h3>
+
+<B_articles_2>
+<ul>
+<BOUCLE_articles_2(ARTICLES){id_article IN 5168, 5186}{tout}>
+<li>#ID_ARTICLE - #STATUT - #TITRE[(#EST_ARCHIVE|=={1}|oui) (Archive)]</li>
+</BOUCLE_articles_2>
+</ul>
+</B_articles_2>
+Articles non trouv&eacute;s 2
+<//B_articles_2>
+
+<h3>Article donné en ENV <code>{id_article}</code></h3>
+
+<B_articles_3>
+<ul>
+<BOUCLE_articles_3(ARTICLES){id_article}>
+<li>#ID_ARTICLE - #STATUT - #TITRE[(#EST_ARCHIVE|=={1}|oui) (Archive)]</li>
+</BOUCLE_articles_3>
+</ul>
+</B_articles_3>
+Article non trouv&eacute; 3
+<//B_articles_3>
+
+<h3>Article donné en ENV avec condition <code>{id_article?}</code></h3>
+
+<B_articles_4>
+<ul>
+<BOUCLE_articles_4(ARTICLES){id_article?}{par id_article}>
+<li>#ID_ARTICLE - #STATUT - #TITRE[(#EST_ARCHIVE|=={1}|oui) (Archive)]</li>
+</BOUCLE_articles_4>
+</ul>
+</B_articles_4>
+Articles non trouv&eacute;s 4
+<//B_articles_4>

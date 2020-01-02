@@ -1,0 +1,18 @@
+[(#AUTORISER{archivage}|sinon_interdire_acces)]
+<h1 class="grostitre">
+	<:archobjet:archives_page_titre:>
+</h1>
+<B_archives>
+<BOUCLE_archives(DATA) {source table, #TYPE_OBJET_AVEC_ARCHIVE}{par cle}>
+#SET{sinon, #VAL{archobjet:}|concat{#CLE}|concat{_liste_aucune_archive}|_T}
+[(#SET{fond, [(#VALEUR)_archives]})]
+[<h3>[(#CLE|objet_info{texte_objets}|_T)]</h3>
+	(#GET{fond}|trouver_fond{prive/objets/liste/}|oui)
+		<INCLURE{fond=prive/objets/liste/#GET{fond},
+			sinon=#GET{sinon},
+			classe_archive=archives,
+			par=date_archive,
+			env} />
+]
+</BOUCLE_archives>
+</B_archives>
