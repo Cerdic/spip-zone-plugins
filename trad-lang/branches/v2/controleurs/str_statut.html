@@ -1,0 +1,67 @@
+[(#REM)
+
+	Controleur pour le crayon 'str_statut' , uniquement html
+
+]
+#CACHE{0}
+<BOUCLE_a(TRADLANGS tradlang_modules){id_tradlang}>
+<fieldset[ style="min-width:(#ENV{largeur}|<{400}|?{#ENV{largeur}|mult{2},''})px]">
+<legend>TRADLANG ##ID_TRADLANG</legend>
+<ul>
+	#SET{lines,1}
+	<BOUCLE_orig(TRADLANGS){id=#ID}{module=#MODULE}{lang=#VAL{lang_orig}|_request|sinon{#LANG_MERE}}>
+	[(#SET{lines,#STR*|strlen|div{40}|intval|plus{1}})]
+	<li class="editer editer_str_orig">
+		<label for="str_orig_#_a:ID_TRADLANG"><:tradlang:label_version_originale{lang=#LANG}:></label>
+		<textarea readonly="readonly" title="<:tradlang:info_textarea_readonly|attribut_html:>" rows="#GET{lines}" id="str_orig_#_a:ID_TRADLANG" rows="4" class="crayon-active readonly" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html)]</textarea>
+	</li>
+	</BOUCLE_orig>
+	<li class="editer editer_str">
+		<label for="str_#ID_TRADLANG"><:tradlang:label_tradlang_str{lang=#LANG}:></label>
+		<textarea class="crayon-active" name="#ENV{name_str}" id="str_#ID_TRADLANG"
+		 style="text-align:#LANG_LEFT;" rows="#GET{lines}" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html)]</textarea>
+	</li>
+	<li class="editer editer_statut">
+		<label for="statut_#ID_TRADLANG"><:tradlang:label_tradlang_status:></label>
+		<div class="choix">
+		<input type="radio" class="crayon_active" name="#ENV{name_statut}" value="OK"[(#STATUT|=={OK}|oui)checked="checked"] id="statut#ID_TRADLANG_ok" /><label for="statut#ID_TRADLANG_ok"><:tradlang:str_status_traduit:></label>
+		</div>
+		<div class="choix">
+		<input type="radio" class="crayon_active" name="#ENV{name_statut}" value="MODIF"[(#STATUT|=={MODIF}|oui)checked="checked"] id="statut#ID_TRADLANG_modif" /><label for="statut#ID_TRADLANG_modif"><:tradlang:str_status_modif:></label>
+		</div>
+		<div class="choix">
+		<input type="radio" class="crayon_active" name="#ENV{name_statut}" value="RELIRE"[(#STATUT|=={RELIRE}|oui)checked="checked"] id="statut#ID_TRADLANG_relire" /><label for="statut#ID_TRADLANG_relire"><:tradlang:str_status_relire:></label>
+		</div>
+		<div class="choix">
+		<input type="radio" class="crayon_active" name="#ENV{name_statut}" value="NEW"[(#STATUT|=={NEW}|oui)checked="checked"] id="statut#ID_TRADLANG_new" /><label for="statut#ID_TRADLANG_new"><:tradlang:str_status_new:></label>
+		</div>
+	</li>
+</ul>
+</fieldset>
+<script type='text/javascript'>
+	var contenu_orig = '[(#STR**|tradlang_utf8|entites_html|replace{"\n","_"}|replace{"\r",""}|replace{"\t",""})]',
+		statut_orig = '#STATUT',
+		id = cQuery(".tradlang-str_statut-#_a:ID_TRADLANG").crayon().find('form'),
+		vars = cQuery('#str_orig_#ID_TRADLANG').val().match('@[^<@][a-z:_]+@','gi');
+	cQuery(id).bind('form-submit-validate',function(truc,a, e, options, veto){
+		if(vars){
+			erreur_chaine = '<:tradlang:erreur_variable_manquante:>';
+			jQuery(vars).each(function(i,elt){
+				if(!cQuery('#str_#ID_TRADLANG').val().match(elt,'g')){
+					erreur_chaine += '\n'+elt;
+					alert(erreur_chaine);
+					veto.veto = true;
+					return;
+				}
+			});
+		}
+		var newstatut = cQuery(id).find('#statut_#ID_TRADLANG').val(),
+			new_contenu = cQuery(id).find('#str_#ID_TRADLANG').val().replace(/\n/g,'_').replace(/\r/g,'').replace(/\t/g,'');
+		if((new_contenu != contenu_orig) && ((statut_orig != 'OK') && (newstatut == statut_orig)))
+			if(!window.confirm('<:tradlang:crayon_changer_statut|filtrer_entites|texte_script:>')){
+				veto.veto = true;
+				jQuery('#statut_#ID_TRADLANG').focus();
+			}
+	});
+</script>
+</BOUCLE_a>

@@ -1,0 +1,67 @@
+<div class="formulaire_spip formulaire_tradlang_ajout_codelangue" id="formulaire_tradlang_ajout_codelangue">
+	<!-- <br class='bugajaxie' /> -->
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="editer editer_nom_mod obligatoire[(#ENV{erreurs}|table_valeur{nom_mod}|oui)erreur]">
+				<label for="nom_mod"><:tradlang:label_nommodule:></label>[
+				<span class="erreur_message">(#ENV{erreurs}|table_valeur{nom_mod})</span>]
+				<input type="text" class="text multilang" name="nom_mod" id="nom_mod" value="#ENV{nom_mod}" />
+			</li>
+			<li>
+				<label><:tradlang:label_idmodule:></label>
+				#ENV{module}
+			</li>
+			<li class="editer editer_lang_mere obligatoire[(#ENV{erreurs}|table_valeur{lang_mere}|oui)erreur]">
+				<label for="lang_mere"><:tradlang:label_langue_mere:></label>[
+				<span class="erreur_message">(#ENV{erreurs}|table_valeur{lang_mere})</span>]
+				<INCLURE{fond=formulaires/tradlang_selecteur_langue_module_dispo}{name=lang_mere}{module=#ENV{module}}{lang_select=#ENV{lang_mere}}{env}>
+			</li>
+			<B_langues>
+			<li>
+				<label><:tradlang:languesdispo:></label>
+				<BOUCLE_langues(DATA){source table, #ENV{_langues}}>
+				<abbr title="[(#VALEUR|traduire_nom_langue)]">#VALEUR</abbr>
+				</BOUCLE_langues>
+			</li>
+			</B_langues>
+			<li class='editer editer_codelangue[(#ENV{erreurs}|table_valeur{codelangue}|oui)erreur]'>
+				<label for='codelangue'><:tradlang:entrerlangue:></label>[
+				<span class="erreur_message">(#ENV{erreurs}|table_valeur{codelangue})</span>]
+				<input type='text' size='8' class='text' id='codelangue' name='codelangue' value='#ENV{codelangue}' />
+			</li>
+			<B_priorites>
+			<li class="editer editer_priorite[(#ENV{erreurs}|table_valeur{priorite}|oui)erreur]">
+				<label for='priorite'><:tradlang:label_priorite:></label>[
+				<span class="erreur_message">(#ENV{erreurs}|table_valeur{priorite})</span>]
+				<select name="priorite">
+				<option value=''>--</option>
+				<BOUCLE_priorites(DATA){source table,#EVAL{_TRAD_PRIORITES}|explode{';'}}>
+				<option value="#VALEUR"[(#ENV{priorite}|=={#VALEUR}|oui)selected="selected"]>[(#VALEUR|supprimer_numero)]</option>
+				</BOUCLE_priorites>
+				</select>
+			</li>
+			</B_priorites>
+			<li class='editer editer_limite_trad[(#ENV{erreurs}|table_valeur{limite_trad}|oui)erreur]'>
+				<label for='limite_trad'><:tradlang:label_limite_trad:></label>[
+				<span class="erreur_message">(#ENV{erreurs}|table_valeur{limite_trad})</span>]
+				<input type='text' size='3' maxlength="3" class='text' id='limite_trad' name='limite_trad' value='#ENV{limite_trad,0}' />
+			</li>
+			<li class='editer editer_texte[(#ENV{erreurs}|table_valeur{texte}|oui)erreur]'>
+				<label for='texte'><:tradlang:label_texte:></label>[
+				<span class="erreur_message">(#ENV{erreurs}|table_valeur{texte})</span>]
+				<textarea id='texte_module' name='texte' cols='40' rows='15' class='text multilang'>#ENV*{texte}</textarea>
+			</li>
+		</ul>
+		<p class='boutons'>
+			<input type='submit' class='submit' value='<:bouton_valider:>' />
+			[(#REM)<input type='submit' class='submit' name="delete_module" value='<:tradlang:bouton_supprimer_module:>' />]
+		</p>
+	</div></form>
+	</BOUCLE_editable>
+</div>

@@ -1,0 +1,38 @@
+<paquet
+	prefix="tradlang"
+	categorie="outil"
+	version="2.4.6"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="images/spip_lang.png"
+	schema="0.5.2"
+>
+
+	<nom>Trad-Lang</nom>
+
+	<auteur>Fil</auteur>
+	<auteur>Florent Jugla</auteur>
+	<auteur lien="http://www.kent1.info">kent1</auteur>
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/tradlang.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/tradlang.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/tradlang.php" />
+	<pipeline nom="pre_edition" inclure="tradlang_pipelines.php" />
+	<pipeline nom="post_edition" inclure="tradlang_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="tradlang_pipelines.php" />
+	<pipeline nom="pre_boucle" inclure="tradlang_pipelines.php" />
+	<pipeline nom="editer_contenu_objet" inclure="tradlang_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="tradlang_pipelines.php" />
+	<pipeline nom="autoriser" inclure="tradlang_autoriser.php" />
+	<pipeline nom="forum_objets_depuis_env" inclure="tradlang_autoriser.php" />
+	<pipeline nom="taches_generales_cron" inclure="tradlang_pipelines.php" />
+	<pipeline nom="revisions_chercher_label" inclure="tradlang_pipelines.php" />
+	<pipeline nom="grappes_objets_lies" inclure="tradlang_pipelines.php" />
+
+	<utilise nom="fulltext" compatibilite="[0.6.7;[" />
+	<utilise nom="crayons" compatibilite="[1.13.3;[" />
+	<utilise nom="grappes" compatibilite="[1.0.0;[" />
+
+	<menu nom="configurer_tradlang" titre="tradlang:titre_tradlang" parent="menu_configuration" icone="images/spip_lang-16.png" />
+	<menu nom="tradlang_modules" titre="tradlang:titre_tradlang" parent="menu_edition" icone="images/spip_lang-16.png" />
+</paquet>

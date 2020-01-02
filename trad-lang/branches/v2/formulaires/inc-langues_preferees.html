@@ -1,0 +1,28 @@
+[(#SET{langues,[(#REM|liste_langues)]})]
+[(#SET{langues_preferees,#ENV**{langues_preferees}|is_array|?{#ENV**{langues_preferees,#ARRAY},#ENV**{langues_preferees,#ARRAY|serialize}|unserialize}})]
+
+<li class="editer editer_langues_preferees">
+	<label for="langues_preferees">[(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:tradlang:label_langues_preferees_auteur:>,<:tradlang:label_langues_preferees_autre:>})]</label>
+	<select multiple="multiple" name="langues_preferees[]" id="langues_preferees" size="12">
+	<BOUCLE_si_langues(CONDITION){si #GET{langues_preferees}|count|>{1}|oui}>
+	#SET{langues_preferees_ok,oui}
+	<optgroup label="<:tradlang:info_langues_preferees|attribut_html:>">
+		<BOUCLE_langues_preferees(DATA){source table,#GET{langues_preferees}}>
+			<option value="#VALEUR"[(#VALEUR|in_array{#GET{langues_preferees}}|oui)selected="selected"]>[(#VALEUR|traduire_nom_langue)]</option>
+		</BOUCLE_langues_preferees>
+	</optgroup>
+	<B_langues_pas_preferees>
+	<optgroup label="<:tradlang:info_langues_non_preferees|attribut_html:>">
+		<BOUCLE_langues_pas_preferees(DATA){source table,#GET{langues}}{valeur !IN #GET{langues_preferees}}>
+			<option value="#VALEUR"[(#VALEUR|in_array{#GET{langues_preferees}}|oui)selected="selected"]>[(#VALEUR|traduire_nom_langue)]</option>
+		</BOUCLE_langues_pas_preferees>
+	</optgroup>
+	</B_langues_pas_preferees>
+	</BOUCLE_si_langues>
+	</B_si_langues>
+	<BOUCLE_langues(DATA){source table,#GET{langues}}>
+	<option value="#VALEUR"[(#VALEUR|in_array{#GET{langues_preferees}}|oui)selected="selected"]>[(#VALEUR|traduire_nom_langue)]</option>
+	</BOUCLE_langues>
+	<//B_si_langues>
+	</select>
+</li>

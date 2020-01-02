@@ -1,0 +1,62 @@
+<div class="formulaire_spip formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) les hidden qui declencheront le service du formulaire parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action},#FORM}
+			<h3 class="titrem"><:tradlang:titre_form_import_step_2:></h3>
+			<B_modifs>
+			<ul>
+				<li>
+					<a href="#" onclick="jQuery('input.checkbox:not(:checked)').attr('checked', 'checked');return false;" class="btn"><:tradlang:lien_check_all:></a>
+					<a href="#" onclick="jQuery('input.checkbox:checked').attr('checked',null);return false;" class="btn"><:tradlang:lien_check_none:></a>
+				</li>
+				<BOUCLE_modifs(DATA){source tableau, #ENV*{_modifs}}>#SET{statut,''}
+				<li class="fieldset">
+					<fieldset>
+						<legend>##COMPTEUR_BOUCLE <:tradlang:label_valeur_id:> #CLE</legend>
+						<BOUCLE_tradlang_lang(TRADLANGS){id=#CLE}{id_tradlang_module}{lang=#ENV{lang_orig}}>
+						<li class="editer editer_version_originale_choisie">
+							<label><:tradlang:label_version_originale_choisie{lang=#LANG}:></label>
+							<textarea readonly="readonly" class="readonly" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html)]</textarea>
+						</li>
+						</BOUCLE_tradlang_lang>
+						<BOUCLE_tradlang_langcible(TRADLANGS){id=#CLE}{id_tradlang_module}{lang=#ENV{lang_cible}}>
+						#SET{statut,#STATUT}
+						<li class="editer editer_valeur_originale">
+							<label><:tradlang:label_valeur_originale:></label>
+							<textarea readonly="readonly" class="readonly" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#VALEUR|table_valeur{orig}|tradlang_utf8|entites_html)]</textarea>
+						</li>
+						</BOUCLE_tradlang_langcible>
+						<li class="editer editer_valeur_fichier">
+							<label><:tradlang:label_valeur_fichier:></label>
+							<textarea readonly="readonly" class="readonly" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#VALEUR|table_valeur{new}|tradlang_utf8|entites_html)]</textarea>
+						</li>
+						[(#GET{statut}|!={[(#VALEUR|table_valeur{statut})]}|oui)
+						#SET{statut_new,#VALEUR|table_valeur{statut}}
+						<li class="editer editer_statut notice">
+							<p><:tradlang:message_changement_statut{statut_old=#GET{statut},statut_new=#GET{statut_new}}:></p>
+						</li>]
+						<li class="editer">
+							<div class="choix">
+								<input type="checkbox" class="checkbox" name="#CLE" id="#CLE" value="oui" />
+								<label for="#CLE"><:tradlang:label_valeur_fichier_valider:></label>
+							</div>
+						</li>
+					</fieldset>
+				</li>
+				</BOUCLE_modifs>
+				<li>
+					<a href="#" onclick="jQuery('input.checkbox:not(:checked)').attr('checked', 'checked');return false;" class="btn"><:tradlang:lien_check_all:></a>
+					<a href="#" onclick="jQuery('input.checkbox:checked').attr('checked',null);return false;" class="btn"><:tradlang:lien_check_none:></a>
+				</li>
+			</ul>
+			</B_modifs>
+			<p class="boutons">
+				<input type="submit" name="_retour_etape_1" class="submit" value="<:tradlang:bouton_precedent:>" />
+				<input type="submit" class="submit" value="<:tradlang:bouton_suivant:>" />
+			</p>
+         </div></form>
+	</BOUCLE_editable>
+</div>
