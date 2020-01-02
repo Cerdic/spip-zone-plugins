@@ -62,12 +62,11 @@ class SalvatoreTirer extends Command {
 
 		$traductions = $input->getOption('traductions');
 		$liste_trad = salvatore_charger_fichier_traductions($traductions);
+		$n = count($liste_trad);
+		$output->writeln("<info>$n modules dans le fichier traductions " . ($traductions ? $traductions : '') . "</info>");
 
-		var_dump($liste_trad);
-		die();
-
-		salvatore_tirer($liste_trad);
-		//$output->writeln("<error>Indiquez un ou des id_objet a indexer (séparés par des virgules)</error>");
+		#die();
+		#salvatore_tirer($liste_trad);
 	}
 }
 

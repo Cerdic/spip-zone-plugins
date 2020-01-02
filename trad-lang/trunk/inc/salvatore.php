@@ -63,6 +63,170 @@ function salvatore_init(){
 	}
 }
 
+
+/**
+ * chargement du fichier traductions.txt
+ * Construit une liste de modules avec pour chacun un tableau associatif
+ *
+ * @param string $fichier_traductions
+ * @return array
+ * @throws Exception
+ */
+function salvatore_charger_fichier_traductions($fichier_traductions = null){
+
+	salvatore_init();
+	if (is_null($fichier_traductions)) {
+		$fichier_traductions = _DIR_SALVATORE_TRADUCTION . 'traductions.txt';
+	}
+	salvatore_check_file($fichier_traductions);
+
+	$lignes = file($fichier_traductions);
+	$lignes = array_map('trim', $lignes);
+	$lignes = array_filter($lignes);
+
+	$liste_trad = array();
+	foreach ($lignes as $ligne){
+		if ($ligne[0] !== '#') {
+			$liste = explode(';', trim($ligne));
+			$methode = $url = $branche = $dir = $module = $lang = '';
+
+			// deprecated ancien format, forcement en svn
+			// liste courte de type
+			// url;module;lang
+			if (count($liste)<=3) {
+				$methode = 'svn';
+				$branche = '';
+				$url = $liste[0];
+				if (empty($liste[1])) {
+					$module = preg_replace('#.*/(.*)$#', '$1', $url);
+				}
+				else {
+					$module = $liste[1];
+				}
+				if (empty($liste[2])) {
+					$lang = 'fr';
+				}
+				else {
+					$lang = $liste[2];
+				}
+			}
+			// format complet et explicite de 6 valeurs
+			// seule les valeurs pour branche et dir peuvent etre vide (branche master par defaut en git)
+			// svn;url;;;module;lang
+			// git;url;master;subdir/tolang;module;lang
+			else {
+				list($methode,$url,$branche,$dir,$module,$lang) = $liste;
+			}
+			$methode = trim($methode);
+			$url = trim($url);
+			$url = rtrim($url, '/'); // homogeneiser
+			$dir = trim($dir);
+			$dir = trim($dir, '/'); // homogeneiser
+			$branche = trim($branche);
+			$module = trim($module);
+			$lang = trim($lang);
+
+			if ($methode
+			  and $url
+			  and $module
+			  and $lang) {
+				// que fait la $GLOBALS['modules'] ?
+				if (empty($GLOBALS['modules']) or in_array($module, $GLOBALS['modules'])){
+					// definir un dir checkout unique meme si plusieurs modules de meme nom dans differents repos
+					$d = explode('/', $url);
+					while (count($d) and in_array(end($d), ['', 'lang', 'trunk', 'ecrire'])) {
+						array_pop($d);
+					}
+					$source = '';
+					if (end($d)) {
+						$source = '--' . preg_replace(',[^\w-],','_', end($d));
+					}
+					$dir_module = "{$module}{$source}-" . substr(md5("$methode:$url:$branche"),0,5);
+					$dir_checkout = "." . preg_replace(",\W+,","-","$methode-$url--$branche") . '-' . substr(md5("$methode:$url:$branche"),0,5);
+
+					$liste_trad[] = [
+						'methode' => $methode,
+						'url' => $url,
+						'branche' => $branche,
+						'dir' => $dir,
+						'module' => $module,
+						'lang' => $lang,
+						'dir_module' => $dir_module,
+						'dir_checkout' => $dir_checkout,
+					];
+				}
+			}
+			else {
+				salvatore_log("Fichier $fichier_traductions, IGNORE ligne incomplete : $ligne");
+			}
+		}
+	}
+	return $liste_trad;
+}
+
+/**
+ * Ajouter les credentials user/pass sur les urls de repo
+ * @param string $methode
+ * @param string $url_repository
+ * @param string $module
+ * @return string
+ */
+function salvatore_set_credentials($methode, $url_repository, $module) {
+	global $domaines_exceptions, $domaines_exceptions_credentials,
+	       $SVNUSER, $SVNPASSWD,
+	       $GITUSER, $GITPASSWD
+	       ;
+
+	// on ne sait pas mettre des credentials si c'est du ssh
+	if (strpos($url_repository, '://') !== false) {
+		$user = $pass = false;
+		$parts = parse_url($url_repository);
+		if (empty($parts['user']) and empty($parts['pass'])) {
+			$host = $parts['host'];
+			require_once(_DIR_ETC . 'salvatore_passwd.inc');
+
+			if (!empty($domaines_exceptions)
+				and is_array($domaines_exceptions)
+			  and in_array($host, $domaines_exceptions)) {
+				// on est dans une exception
+
+				/**
+				 * Est-ce que cette exception dispose de credentials (Github?)
+				 */
+				if (is_array($domaines_exceptions_credentials)
+					and !empty($domaines_exceptions_credentials[$host])){
+					$user = $domaines_exceptions_credentials[$host]['user'];
+					$pass = $domaines_exceptions_credentials[$host]['pass'];
+				}
+
+			}
+			else {
+				// un truc perso pour un module en particulier ?
+				if (isset(${$module . '_user'})){
+					$user = ${$module . '_user'};
+					$pass = ${$module . '_passwd'};
+				}
+				elseif ($methode === 'svn' and isset($SVNUSER)) {
+					$user = $SVNUSER;
+					$pass = $SVNPASSWD;
+				}
+				elseif ($methode === 'git' and isset($GITUSER)) {
+					$user = $GITUSER;
+					$pass = $GITPASSWD;
+				}
+			}
+
+			if ($user and $pass) {
+				$url_repository = str_replace("://$host", "://$user:$pass@$host", $url_repository);
+			}
+		}
+
+	}
+
+	return $url_repository;
+}
+
+
 /**
  * Verifier qu'un repertoire existe
  * @param $dir
@@ -86,55 +250,13 @@ function salvatore_check_file($file) {
 }
 
 /**
- * chargement du fichier traductions.txt
- * Construit une liste de modules avec pour chacun un tableau compose de : 0 chemin, 1 nom, 2 langue principale
- *
- * @param string $chemin
- * @param string $trad_list
- * @return array
- * @throws Exception
- */
-function salvatore_charger_fichier_traductions($fichier_traductions = null){
-
-	salvatore_init();
-	if (is_null($fichier_traductions)) {
-		$fichier_traductions = _DIR_SALVATORE_TRADUCTION . 'traductions.txt';
-	}
-	salvatore_check_file($fichier_traductions);
-
-	$contenu = file_get_contents($fichier_traductions);
-	$contenu = preg_replace('/#.*/', '', $contenu); // supprimer les commentaires
-
-	$tab = preg_split("/\r\n|\n\r|\n|\r/", $contenu);
-
-	$liste_trad = array();
-	foreach ($tab as $ligne){
-		$liste = explode(';', trim($ligne));
-		if (!empty($liste[0])){
-			if (!isset($liste[1]) or empty($liste[1])){
-				$liste[1] = preg_replace('#.*/(.*)$#', '$1', $liste[0]);
-			}
-			if (!isset($liste[2]) or empty($liste[2])){
-				$liste[2] = 'fr';
-			}
-			if (!count($GLOBALS['modules']) or in_array($liste[1], $GLOBALS['modules'])){
-				$liste_trad[] = $liste;
-			}
-		}
-	}
-	reset($liste_trad);
-	return $liste_trad;
-}
-
-
-/**
  * Loger
  * @param string $msg
  */
 function salvatore_log($msg = ''){
 	static $cnt;
 	if (defined('_DEBUG_TRAD_LANG')){
-		echo $msg;
+		echo rtrim($msg) . "\n";
 		$cnt++;
 	}
 	if ($cnt>10){
@@ -150,8 +272,6 @@ function salvatore_log($msg = ''){
  * @throws Exception
  */
 function salvatore_fail($sujet, $corps) {
-	$sujet = 'Tireur : Erreur';
-	$corps = "! Erreur pas de fichier de langue conforme dans le module : $tmp" . $source[1] . "\n";
 	salvatore_envoyer_mail($sujet, $corps);
 	throw new Exception($corps);
 }
@@ -161,7 +281,8 @@ function salvatore_fail($sujet, $corps) {
  * @param string $corps
  */
 function salvatore_envoyer_mail($sujet = 'Erreur', $corps = ''){
-	if (defined('_EMAIL_ERREURS') and defined('_EMAIL_SALVATORE')){
+	if (defined('_EMAIL_ERREURS') and _EMAIL_ERREURS
+		and defined('_EMAIL_SALVATORE') and _EMAIL_SALVATORE){
 		$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 		$destinataire = _EMAIL_ERREURS;
 		$from = _EMAIL_SALVATORE;
