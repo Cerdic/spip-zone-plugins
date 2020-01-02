@@ -5,15 +5,17 @@ num titre,1,
 date,-1,
 date_redac,-1
 }}
+<BOUCLE_articles_rubriques_incluses(ARTICLES){id_rubrique !IN #ENV{rubriques_incluses}}{si #ENV{filtrer_articles}|=={afficher_rubriques}}{doublons}>
+</BOUCLE_articles_rubriques_incluses>
 <BOUCLE_articles_selection(ARTICLES pb_selection){spip_pb_selection.id_rubrique=#GET{id_rubrique}}{si #ENV{exclure_article_selection}|=={on}}{doublons}>
 </BOUCLE_articles_selection>
 <B_articles>
 	#ANCRE_PAGINATION
     [(#ENV{masquer_h2}|non)<h2 class="h2">[(#ENV{masquer_titre}|non)[(#ENV{titre,<:derniers_articles:>}) ][(#ENV{masquer_nombre}|non)<small>&#40;#GRAND_TOTAL&#41;</small>] ][(#ENV{masquer_picto}|non)<span class="picto"><i class="fa fa-#ENV{picto,rss} "></i></span>]</h2>]
 	<ul class="liste-items[ (#ENV{liste_span}|oui) liste-span][ (#ENV{liste_simple}|oui) liste-simple]">
-		<BOUCLE_articles(ARTICLES){branche ?}{id_mot ?}{tri #GET{tri},#GET{defaut_tri}}{!id_article IN #ENV{articles_exclus,#ARRAY}}{!id_rubrique IN #ENV{rubriques_exclues,#ARRAY}}{pagination #ENV{nb,5}}{doublons}>
+		<BOUCLE_articles(ARTICLES){id_article ?IN #ENV{articles_inclus}}{branche ?}{id_mot ?}{tri #GET{tri},#GET{defaut_tri}}{!id_article IN #ENV{articles_exclus,#ARRAY}}{!id_rubrique IN #ENV{rubriques_exclues,#ARRAY}}{pagination #ENV{nb,5}}{doublons}>
 		<li class="item[ (#ENV{span})]">#INCLURE{fond=inclure/resume/article,id_article,env}</li>
 		</BOUCLE_articles>
 	</ul>
-	[(#ENV{afficher_liste_simple}|non)[<div class="pagination clear">(#PAGINATION)</div>]]
+	[(#ENV{afficher_liste_simple}|et{#ENV{masquer_pagination}}|non)[<div class="pagination clear">(#PAGINATION)</div>]]
 </B_articles>

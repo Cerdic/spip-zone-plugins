@@ -66,23 +66,41 @@ parametres:
           defaut: ''
           conteneur_class: 'long_label'
       -
+        saisie: 'selection'
+        options:
+          nom: 'filtrer_articles'
+          label: '<:sdnnoisettes:label_filtrer_articles:>'
+          datas:
+            '': '<:sdnnoisettes:afficher_articles_secteur:>'
+#            tous: '<:sdnnoisettes:afficher_articles_tout:>'
+            afficher_articles: '<:sdnnoisettes:afficher_articles_selection:>'
+#            masquer_articles: '<:sdnnoisettes:masquer_articles_selection:>'
+            afficher_rubriques: '<:sdnnoisettes:afficher_articles_rubriques_selection:>'
+#            masquer_rubriques: '<:sdnnoisettes:masquer_articles_rubriques_selection:>'
+            masquer_rubriques_articles: '<:sdnnoisettes:masquer_articles_rubriques_articles_selection:>'
+          defaut: ''
+          cacher_option_intro: 'oui'
+          conteneur_class: 'long_label'
+      -
         saisie: 'selecteur_article'
         options:
           nom: 'articles_exclus'
-          label: '<:sdnnoisettes:label_articles_exclus:>'
-          explication: '<:sdnnoisettes:explication_articles_exclus:>'
+          label: '<:sdnnoisettes:label_articles_choisis:>'
+          explication: '<:sdnnoisettes:explication_articles_choisis:>'
           multiple: 'oui'
           defaut: ''
           conteneur_class: 'long_label'
+          afficher_si: '@filtrer_articles@ == "afficher_articles" || @filtrer_articles@ == "masquer_rubriques_articles"'
       -
         saisie: 'selecteur_rubrique'
         options:
           nom: 'rubriques_exclues'
-          label: '<:sdnnoisettes:label_rubriques_exclues:>'
-          explication: '<:sdnnoisettes:explication_rubriques_exclues:>'
+          label: '<:sdnnoisettes:label_rubriques_choisies:>'
+          explication: '<:sdnnoisettes:explication_rubriques_choisies:>'
           multiple: 'oui'
           defaut: ''
           conteneur_class: 'long_label'
+          afficher_si: '@filtrer_articles@ == "afficher_rubriques" || @filtrer_articles@ == "masquer_rubriques_articles"'
       -
         saisie: 'selection'
         options:
@@ -95,6 +113,14 @@ parametres:
             num_titre: '<:sdnnoisettes:num_titre:>'
           defaut: ''
           conteneur_class: 'long_label'
+      -
+        saisie: 'case'
+        options:
+          nom: 'masquer_pagination'
+          label: '<:sdnnoisettes:label_masquer_pagination:>'
+          label_case: '<:sdnnoisettes:oui:>'
+          conteneur_class: 'long_label'
+          defaut: ''
       -
         saisie: 'input'
         options:

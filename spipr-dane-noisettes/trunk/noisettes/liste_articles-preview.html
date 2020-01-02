@@ -1,5 +1,22 @@
 <div><strong>[(#ENV*{titre}) ]<i class="fa fa-#ENV{picto}"></i></strong></div>
-<p><small>[(#ENV{nb_total}|?{#ENV{nb_total} articles,Tous les articles})][ Pagination (#ENV{nb})]
-<br/>[(#ENV{masquer_logo}|?{Pas de logo, Logo #ENV{largeur_logo}x#ENV{hauteur_logo} [&nbsp;-&nbsp; (#ENV{image_passe_partout}|?{ Image forcée aux dimensions,''})]})]
-<br/>[(#ENV{masquer_intro}|?{'',Intro[ (#ENV{coupe}) caractères]})][ - (#ENV{masquer_date}|?{'', Date})][ - (#ENV{afficher_tags}|?{Mots-clé,''})][ - (#ENV{afficher_parent}|?{Rubrique parent,''})]
-<br/>[(#ENV{liste_span}|oui)[(#EVAL{12/#ENV{span}|replace{span}}) colonnes]]</small></p>
+<ul class="small">
+	[<li><strong>(#ENV{filtrer_articles}|?{
+		#ENV{filtrer_articles}|match{^afficher}|?{
+			#ENV{articles_exclus}|?{
+				Seulement les articles #ENV{articles_exclus}|picker_selected{article}|implode{', '}
+			,
+				Seulement les articles des rubriques #ENV{rubriques_exclues}|picker_selected{rubrique}|implode{', '}
+			}
+		,
+			[(#ENV{articles_exclus}|?{Sauf les articles #ENV{articles_exclus}|picker_selected{article}|implode{','}})] 
+			#ENV{rubriques_exclues}|?{Sauf les articles des rubriques #ENV{rubriques_exclus}|picker_selected{rubrique}|implode{','}}
+		}
+	,
+		Tous les articles
+	}) </strong></li>]
+	[<li>(#ENV{masquer_pagination}|non) Pagination #ENV{nb}</li>]
+	[<li>(#ENV{masquer_logo}|?{Pas de logo, Logo #ENV{largeur_logo}x#ENV{hauteur_logo} [&nbsp;-&nbsp; (#ENV{image_passe_partout}|?{ Image forcée aux dimensions,''})]})</li>]
+	[<li>(#ENV{exclure_article_selection}|oui)Articles du carrousel exclus </li>]	
+	<li>[(#ENV{masquer_intro}|?{'',Intro[ (#ENV{coupe}) caractères]})][ - (#ENV{masquer_date}|?{'', Date})][ - (#ENV{afficher_tags}|?{Mots-clé,''})][ - (#ENV{afficher_parent}|?{Rubrique parent,''})]</li>
+	[<li>(#ENV{liste_span}|?{[(#EVAL{12/#ENV{span}|replace{span}}) colonnes], Affichage en ligne})</li>]
+</ul>

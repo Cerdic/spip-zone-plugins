@@ -1,9 +1,31 @@
-#SET{articles_exclus, #ENV{articles_exclus}|is_array|?{#ENV{articles_exclus}|picker_selected{article},#ENV{articles_exclus}|explode{','}}}
+#SET{id_rubrique,#ENV{id_rubrique}}
+
+[(#REM) ** Rétrocompatibilité **
+]#SET{articles_exclus, #ENV{articles_exclus}|is_array|?{#ENV{articles_exclus}|picker_selected{article},#ENV{articles_exclus}|explode{','}}}
 #SET{rubriques_exclues, #ENV{rubriques_exclues}|is_array|?{#ENV{rubriques_exclues}|picker_selected{rubrique},#ENV{rubriques_exclues}|explode{','}}}
+
+[(#REM) ** On affecte les id en fonction du filtre **
+][(#ENV{filtrer_articles}|match{^afficher}|?{
+	#SET{articles_exclus, ''}
+	#SET{rubriques_exclues, ''}
+	#ENV{filtrer_articles}|=={afficher_articles}|?{
+		#SET{id_article, -1}
+		#SET{id_rubrique, ''}
+		#SET{articles_inclus, #ENV{articles_exclus}|picker_selected{article}} 
+		,
+		#SET{id_rubrique, 0}
+		#SET{rubriques_incluses,  #ENV{rubriques_exclues}|picker_selected{rubrique}}
+	}
+	,
+	#ENV{id_rubrique}|?{
+		#SET{rubriques_incluses, ''}
+	}
+})]
+
 #SET{span, #ENV{liste_span}|?{#ENV{span}, ''}}
 #SET{masquer_h2, #ENV{masquer_titre}|et{#ENV{masquer_picto}}|oui|?{on,''}}
 
 <div class="liste articles [(#ENV{liste_span}|non) long ]clear offset">
-    <INCLURE{fond=liste/articles-resume,env, span=#GET{span}, articles_exclus=#GET{articles_exclus}, rubriques_exclues=#GET{rubriques_exclues}, masquer_h2=#GET{masquer_h2}, exclure_article_selection=#ENV{exclure_article_selection}, ajax}>
+    <INCLURE{fond=liste/articles-resume,env, span=#GET{span}, articles_inclus=#GET{articles_inclus}, rubriques_incluses=#GET{rubriques_incluses}, articles_exclus=#GET{articles_exclus}, rubriques_exclues=#GET{rubriques_exclues}, masquer_h2=#GET{masquer_h2}, exclure_article_selection=#ENV{exclure_article_selection}, id_article=#GET{id_article}, id_rubrique=#GET{id_rubrique}, ajax}>
 </div>
    
