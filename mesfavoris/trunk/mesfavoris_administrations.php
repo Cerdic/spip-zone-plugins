@@ -31,7 +31,7 @@ function mesfavoris_upgrade($nom_meta_base_version, $version_cible) {
 
 	$maj = array();
 	$maj['create'] = array(
-		array('maj_table', array('spip_favoris'))
+		array('maj_tables', array('spip_favoris')),
 	);
 
 	$maj['1.0.0'] = array(
