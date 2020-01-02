@@ -24,19 +24,31 @@
  		kent1 <kent1@arscenic.info>
 */
 
-@ini_set('memory_limit', '50M');
 
-define('_DEBUG_TRAD_LANG', 1); // undef si on ne veut pas de messages
+/**
+ * initialiser salvatore
+ * @throws Exception
+ */
+function salvatore_init() {
+	@ini_set('memory_limit', '50M');
+	define('_DEBUG_TRAD_LANG', 1); // undef si on ne veut pas de messages
 
-define('_SALVATORE', _DIR_RACINE . 'salvatore/');
-define('_SALVATORE_TRADUCTION', _SALVATORE. 'traductions/');
-define('_SALVATORE_TMP', _SALVATORE.'tmp/');
+	define('_SALVATORE', _DIR_RACINE . 'salvatore/');
+	define('_SALVATORE_TRADUCTION', _SALVATORE. 'traductions/');
+	define('_SALVATORE_TMP', _SALVATORE.'tmp/');
+	$GLOBALS['idx_lang']=0;
 
-$GLOBALS['idx_lang']=0;
+	// verifications
 
-if (!is_dir(_SALVATORE_TMP)) {
-	die("\nErreur : le répertoire "._SALVATORE_TMP." n'existe pas\n\n");
+	foreach ([_SALVATORE, _SALVATORE_TRADUCTION, _SALVATORE_TMP] as $dir) {
+		if (!is_dir($dir)) {
+			throw new Exception("Erreur : le répertoire $dir n'existe pas");
+		}
+	}
 }
+
+
+
 
 //
 // chargement du fichier traductions.txt
