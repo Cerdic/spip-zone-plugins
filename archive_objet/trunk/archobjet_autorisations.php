@@ -74,8 +74,8 @@ function autoriser_modifierarchivage_dist($faire, $type, $id, $qui, $options) {
 		and ($action = $options['action'])
 	) {
 		// Vérification de l'état d'archivage
-		include_spip('inc/archobjet_objet');
-		$etat_archivage = objet_etat_archivage(
+		include_spip('inc/archobjet');
+		$etat_archivage = archivage_lire_etat_objet(
 			$type,
 			$id_objet
 		);

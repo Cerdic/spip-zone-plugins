@@ -36,8 +36,8 @@ function archobjet_affiche_milieu($flux) {
 		) {
 			// Page d'un objet archivable : message d'archivage si besoin
 			// -- Etat d'archivage.
-			include_spip('inc/archobjet_objet');
-			$etat_archivage = objet_etat_archivage(
+			include_spip('inc/archobjet');
+			$etat_archivage = archivage_lire_etat_objet(
 				$objet,
 				$id_objet,
 				array(
@@ -106,8 +106,8 @@ function archobjet_boite_infos($flux) {
 		) {
 			// Page d'un objet archivable : afficher le bouton adéquat.
 			// -- Acquérir l'état d'archivage.
-			include_spip('inc/archobjet_objet');
-			$etat_archivage = objet_etat_archivage(
+			include_spip('inc/archobjet');
+			$etat_archivage = archivage_lire_etat_objet(
 				$objet,
 				$id_objet,
 				array(
@@ -149,8 +149,9 @@ function archobjet_post_boucle($boucle) {
 
 	// Initialisation de la table sur laquelle porte le critère
 	include_spip('base/objets');
-	$table = table_objet_sql($boucle->id_table);
-	$id_table = id_table_objet($boucle->id_table);
+	$table_objet = $boucle->id_table;
+	$table = table_objet_sql($table_objet);
+	$id_table = id_table_objet($table_objet);
 
 	if ($table) {
 		// Vérifier que la table fait bien partie de la liste autorisée à utiliser l'archivage.
@@ -158,20 +159,30 @@ function archobjet_post_boucle($boucle) {
 		$tables_autorisees = lire_config('archobjet/objets_archivables', array());
 		if (in_array($table, $tables_autorisees)) {
 			// On cherche un critère d'archivage explicite parmi :
-			// - {est_archive = 0} ou {est_archivee = 1}
+			// - {est_archive = 0} ou {est_archive = 1}
 			// - {archive} ou {!archive}
 			// Ou un critère explicite sur l'id de la table comme {id_article} ou {id_article=xxx}
 			// --> Si il existe un tel critère, alors on n'exclut pas les archives par défaut.
+			//
+			// Les critères {id_article?} ou {id_article IN x,y,z} ne sont pas considérés comme une recherche unique
+			// et donc le critère d'archivage doit s'appliquer par défaut.
 			$critere_archive_explicite = false;
 			$criteres = $boucle->criteres;
 			foreach ($criteres as $_critere) {
 				if (
 					($_critere->op == 'archive')
-					or ($_critere->op == $id_table)
-					or (!empty($_critere->param[0][0]->texte)
+					or (
+						($_critere->op == $id_table)
+						and (!$_critere->cond)
+					)
+					or (
+						!empty($_critere->param[0][0]->texte)
 						and (
 							($_critere->param[0][0]->texte == 'est_archive')
-							or (($_critere->param[0][0]->texte == $id_table) and ($_critere->op != 'par'))
+							or (
+								($_critere->param[0][0]->texte == $id_table)
+								and ($_critere->op == '=')
+							)
 						)
 					)
 				) {
@@ -195,7 +206,7 @@ function archobjet_post_boucle($boucle) {
 						// TODO : tant que le core n'accepte pas la fonction generer_where_est_article il faut bidouiller.
 						$where_est_article[0] = $_condition[0];
 						$where_est_article[1] = $_condition[1];
-						$where_est_article[2] = array("'='", "'est_archive'", 0);
+						$where_est_article[2] = array("'='", "'${table_objet}.est_archive'", 0);
 						$where_est_article[3] = $_condition[3][3];
 						$boucle->where[$_cle] = $where_est_article;
 						$critere_archive_explicite = true;
@@ -205,7 +216,7 @@ function archobjet_post_boucle($boucle) {
 
 				// Aucun critère d'archivage explicite ni conditionnel : on peut filtrer la boucle en excluant les archives.
 				if (!$critere_archive_explicite) {
-					$boucle->where[] = array("'='", "'est_archive'", 0);
+					$boucle->where[] = array("'='", "'${table_objet}.est_archive'", 0);
 				}
 			}
 		}
@@ -243,8 +254,8 @@ function archobjet_formulaire_charger($flux) {
 		$tables_autorisees = lire_config('archobjet/objets_archivables', array());
 		if (in_array($table, $tables_autorisees)) {
 			// -- Acquérir l'état d'archivage.
-			include_spip('inc/archobjet_objet');
-			$etat_archivage = objet_etat_archivage(
+			include_spip('inc/archobjet');
+			$etat_archivage = archivage_lire_etat_objet(
 				$objet,
 				$id_objet,
 				array(

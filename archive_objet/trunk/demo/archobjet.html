@@ -61,22 +61,6 @@ Aucun article publi&eacute;
 <//B_articles_publies>
 
 
-<h3>Articles publi&eacute;s avec condition d'archivage variable {id_?}</h3>
-
-<B_articles_variables>
-(#GRAND_TOTAL)
-#ANCRE_PAGINATION
-<ul>
-<BOUCLE_articles_variables(ARTICLES){id_?}{par id_article}{pagination 20}>
-	<li>#ID_ARTICLE - #STATUT - #TITRE[ (#EST_ARCHIVE|?{\(Archive\), \(Non archive\)})]</li>
-</BOUCLE_articles_variables>
-</ul>
-<div class="pagination">#PAGINATION</div>
-</B_articles_variables>
-Aucun article publi&eacute;
-<//B_articles_variables>
-
-
 <h3>Articles publi&eacute;s avec condition d'archivage conditionnelle {est_archive?}</h3>
 
 <B_articles_conditionnels>

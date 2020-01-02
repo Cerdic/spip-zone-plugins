@@ -15,6 +15,7 @@
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
+/* Fiche objet : bloc d'information sur l'archivage */
 #contenu .fiche_objet .archive .inner {
     border: 0;
     -webkit-border-radius: 0;
@@ -36,9 +37,13 @@
     padding: 15px;
     position: relative;
 }
-
 #contenu .fiche_objet .edition_raison {position:absolute; top:5px; #ENV{right}:21px;}
 #contenu .fiche_objet .edition_raison {-webkit-opacity:0.6;-moz-opacity:0.6;opacity:0.6;filter:alpha(opacity=60);;z-index: 1;font-size: 10px;}
 #contenu .fiche_objet .edition_raison {font-size: 10px; font-weight:normal;}
 #contenu .fiche_objet .archive:hover .edition_raison,
 #contenu .fiche_objet .desarchive:hover .edition_raison {-webkit-opacity:1.0;-moz-opacity:1.0;opacity:1.0;filter:alpha(opacity=100);}
+
+/* Listes d'objets :masquage de certaines colonnes pendant que le privé est encore peu large */
+/* -- listes des archives */
+.liste-objets.archives .id,
+.liste-objets.archives .auteur {display: none;}

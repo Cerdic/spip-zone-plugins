@@ -3,11 +3,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-
 /**
  * Définition du critère {archive} et {!archive} plus pratique à utiliser que {est_archive=1} ou
  * {est_archive=0}.
  *
+ * @param mixed $idb
+ * @param mixed $boucles
+ * @param mixed $critere
  */
 function critere_archive_dist($idb, &$boucles, $critere) {
 
@@ -25,27 +27,27 @@ function critere_archive_dist($idb, &$boucles, $critere) {
 		$champ = 'est_archive';
 
 		// Création du critère sur le champ 'est_archive'.
-		$boucle->where[] = array("'='", "'$champ'", $valeur);
+		$boucle->where[] = array("'='", "'${champ}'", $valeur);
 	}
 }
 
 /**
- * Compile la balise `#TYPE_OBJET_ARCHIVE` qui renvoie la liste des types d'objet autorisés à l'archivage
+ * Compile la balise `#TYPE_OBJET_AVEC_ARCHIVE` qui renvoie la liste des types d'objet autorisés à l'archivage
  * Chaque type d'objet est fourni avec son titre.
- * La signature de la balise est : `#TYPE_OBJET_ARCHIVE`.
+ * La signature de la balise est : `#TYPE_OBJET_AVEC_ARCHIVE`.
  *
  * @balise
  *
  * @param Champ $p
- *        Pile au niveau de la balise.
+ *                 Pile au niveau de la balise.
  *
  * @return Champ
- *         Pile complétée par le code à générer.
+ *               Pile complétée par le code à générer.
  **/
-function balise_TYPE_OBJET_ARCHIVE_dist($p) {
+function balise_TYPE_OBJET_AVEC_ARCHIVE_dist($p) {
 
 	// Aucun argument à la balise.
-	$p->code = "calculer_types_objet_archives()";
+	$p->code = 'calculer_type_objet_avec_archive()';
 
 	return $p;
 }
@@ -55,7 +57,7 @@ function balise_TYPE_OBJET_ARCHIVE_dist($p) {
  *
  * @return array
  */
-function calculer_types_objet_archives() {
+function calculer_type_objet_avec_archive() {
 
 	// Liste des tables autorisées à l'archivage
 	include_spip('inc/config');
@@ -75,17 +77,65 @@ function calculer_types_objet_archives() {
 }
 
 /**
- * Compile la balise `#OBJET_ETAT_ARCHIVAGE` qui renvoie la liste des types d'objet autorisés à l'archivage
+ * Compile la balise `#TYPE_OBJET_AVEC_ARCHIVE` qui renvoie la liste des types d'objet autorisés à l'archivage
  * Chaque type d'objet est fourni avec son titre.
- * La signature de la balise est : `#TYPE_OBJET_ARCHIVE`.
+ * La signature de la balise est : `#TYPE_OBJET_AVEC_ARCHIVE`.
  *
  * @balise
  *
  * @param Champ $p
- *        Pile au niveau de la balise.
+ *                 Pile au niveau de la balise.
  *
  * @return Champ
- *         Pile complétée par le code à générer.
+ *               Pile complétée par le code à générer.
+ **/
+function balise_TABLE_OBJET_ARCHIVABLE_dist($p) {
+
+	// Aucun argument à la balise.
+	$p->code = 'calculer_table_objet_archivable()';
+
+	return $p;
+}
+
+/**
+ * @internal
+ *
+ * @return array
+ */
+function calculer_table_objet_archivable() {
+
+	// Liste des tables potentiellement archivable
+	include_spip('inc/archobjet');
+	$tables = archivage_lister_tables_objet();
+
+	// On rajoute les traductions
+	// -- on initialise le tableau [table] = traduction
+	$tables_traduites = array();
+
+	// -- on acquiert les déclarations de toutes les tables d'objet SQL.
+	include_spip('base/objets');
+	$descriptions = lister_tables_objets_sql();
+
+	// On boucle sur chaque table archivable pour insérer la traduction
+	foreach ($tables as $_table) {
+		$tables_traduites[$_table] = _T($descriptions[$_table]['texte_objets']);
+	}
+
+	return $tables_traduites;
+}
+
+/**
+ * Compile la balise `#OBJET_ETAT_ARCHIVAGE` qui renvoie la liste des types d'objet autorisés à l'archivage
+ * Chaque type d'objet est fourni avec son titre.
+ * La signature de la balise est : `#TYPE_OBJET_AVEC_ARCHIVE`.
+ *
+ * @balise
+ *
+ * @param Champ $p
+ *                 Pile au niveau de la balise.
+ *
+ * @return Champ
+ *               Pile complétée par le code à générer.
  **/
 function balise_OBJET_ETAT_ARCHIVAGE_dist($p) {
 
@@ -99,7 +149,7 @@ function balise_OBJET_ETAT_ARCHIVAGE_dist($p) {
 	$information = isset($information) ? str_replace('\'', '"', $information) : '""';
 
 	// Calcul de la balise
-	$p->code = "calculer_etat_archivage($objet, $id_objet, $information)";
+	$p->code = "calculer_etat_archivage(${objet}, ${id_objet}, ${information})";
 
 	return $p;
 }
@@ -107,13 +157,17 @@ function balise_OBJET_ETAT_ARCHIVAGE_dist($p) {
 /**
  * @internal
  *
+ * @param mixed $objet
+ * @param mixed $id_objet
+ * @param mixed $information
+ *
  * @return array
  */
 function calculer_etat_archivage($objet, $id_objet, $information) {
 
 	// Tableau de l'archivage de l'objet
-	include_spip('inc/archobjet_objet');
-	$etat_archivage = objet_etat_archivage(
+	include_spip('inc/archobjet');
+	$etat_archivage = archivage_lire_etat_objet(
 		$objet,
 		$id_objet
 	);

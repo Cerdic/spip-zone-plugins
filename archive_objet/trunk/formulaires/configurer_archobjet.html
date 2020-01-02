@@ -9,10 +9,14 @@
 			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:archobjet:configuration_objets_archivables_label:></label>[
 				<span class="erreur_message">(#GET{erreurs})</span>]
-				#INCLURE{fond=formulaires/inc-choisir-objets,
-					name=#GET{name},
-					selected=#ENV**{#GET{name}}
-				}
+				<BOUCLE_objets(DATA){source table, #TABLE_OBJET_ARCHIVABLE}{par valeur}>[(#EDITABLE|oui)
+					#SET{id,#GET{name}|replace{\W,'_'}|concat{'_',#CLE}}
+					<div class="choix choix_#CLE">
+						<input type="checkbox"  id="#GET{id}" name="#GET{name}\[\]" value="#CLE"[(#CLE|in_any{#ENV{objets_archivables}})checked="checked"] />
+						<label for="#GET{id}">#VALEUR</label>
+					</div>
+				]</BOUCLE_objets>
+				<input type="hidden" name="#ENV{name}[]" value="" />
 			</div>
 
 			[(#SAISIE{case, consigner_desarchivage,

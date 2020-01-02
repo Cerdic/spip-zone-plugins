@@ -1,6 +1,7 @@
 <?php
 /**
  * Gestion du formulaire de modification de la raison d'archivage ou de désarchivage.
+ *
  **/
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -11,6 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @param string $objet
  * @param int    $id_objet
+ * @param mixed  $redirect
  *
  * @return array
  */
@@ -27,46 +29,20 @@ function formulaires_editer_raison_archivage_charger($objet, $id_objet, $redirec
 	);
 
 	// Construction de la liste des raisons
-	// Récupération de l'état d'archivage
-	include_spip('inc/archobjet_objet');
-	$etat_archivage = objet_etat_archivage(
+	// -- récupération de l'état d'archivage
+	include_spip('inc/archobjet');
+	$etat_archivage = archivage_lire_etat_objet(
 		$objet,
 		$id_objet
 	);
 
-	// Construction de la liste des raisons
-	// -- Initialisation de la liste par des raisons standard valables pour tous les types d'objets
-	//    et pour l'état courant de l'objet. Ces raisons sont fournies par le plugin Archive.
-	$etat = $etat_archivage['etat'];
-	$ids_raisons = array(
-		"${etat}_aucune",
-		"${etat}_defaut"
-	);
-	// -- Ajout des raisons additionnelles fournies par d'autres plugins pour le type d'objet en question.
-	$ids_raisons = pipeline(
-		'liste_raison_archivage',
-		array(
-			'args' => array(
-				'objet' => $objet,
-				'etat'  => $etat
-			),
-			'data' => $ids_raisons,
-		)
-	);
-	// -- Calcul du tableau des raisons pour la saisie
-	foreach ($ids_raisons as $_id_raison) {
-		// La valeur aucune raison est en fait la chaine vide
-		if ($_id_raison == "${etat}_aucune") {
-			$raisons[''] = _T("archobjet:raison_${_id_raison}_label");
-		} else {
-			$raisons[$_id_raison] = _T("archobjet:raison_${_id_raison}_label");
-		}
-	}
+	// -- constitution de la liste des raisons en fonction du type d'objet et de l'état d'archivage
+	$raisons = archivage_lister_raisons($objet, $etat_archivage['etat']);
 
 	// Constitution du tableau des variables du formulaire.
 	$valeurs = array(
 		'editable'       => $editable,
-		'_raison_label'  => _T("archobjet:edition_raison_label"),
+		'_raison_label'  => _T('archobjet:edition_raison_label'),
 		'_raisons'       => $raisons,
 		'raison'         => $etat_archivage['raison_archive']
 	);
@@ -79,6 +55,7 @@ function formulaires_editer_raison_archivage_charger($objet, $id_objet, $redirec
  *
  * @param string $objet
  * @param int    $id_objet
+ * @param mixed  $redirect
  *
  * @return array
  */
