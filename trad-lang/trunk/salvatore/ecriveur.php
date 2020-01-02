@@ -25,7 +25,7 @@
 */
 
 require_once(dirname(__FILE__) . '/inc_tradlang.php');
-$tmp = _SALVATORE_TMP;
+$tmp = _DIR_SALVATORE_TMP;
 
 trad_log("\n=======================================\nECRIVEUR\nExporte les fichiers de traduction dans sa copie locale a partir de la base de donnees\n=======================================\n");
 
@@ -332,12 +332,12 @@ function export_trad_module($source, $url_site, $url_trad, $message_commit = '')
 			}
 			unset($people_unique);
 
-			if (substr(exec('svn status ' . _SALVATORE_TMP . $source[1] . '/' . $source[1] . '_' . $lang . '.php'), 0, 1)=='?'){
+			if (substr(exec('svn status ' . _DIR_SALVATORE_TMP . $source[1] . '/' . $source[1] . '_' . $lang . '.php'), 0, 1)=='?'){
 				if ($module['limite_trad']==0){
-					passthru('svn add ' . _SALVATORE_TMP . $source[1] . '/' . $source[1] . "_$lang.php 2> /dev/null") ? trad_log("$log\n") : '';
+					passthru('svn add ' . _DIR_SALVATORE_TMP . $source[1] . '/' . $source[1] . "_$lang.php 2> /dev/null") ? trad_log("$log\n") : '';
 				} elseif (!in_array($source[1], array('ecrire', 'spip', 'public'))) {
 					if ((intval(($infos[$lang]['traduits']/$count_original)*100)>$seuil_export)){
-						passthru('svn add ' . _SALVATORE_TMP . $source[1] . '/' . $source[1] . "_$lang.php* 2> /dev/null") ? trad_log("$log\n") : '';
+						passthru('svn add ' . _DIR_SALVATORE_TMP . $source[1] . '/' . $source[1] . "_$lang.php* 2> /dev/null") ? trad_log("$log\n") : '';
 					}
 				}
 			}
@@ -349,8 +349,8 @@ function export_trad_module($source, $url_site, $url_trad, $message_commit = '')
 			 * Si un seul auteur de révisions (Hors salvatore et -1) on l'ajoute comme commiteur
 			 * Si plusieurs auteurs le commiteur sera Salvatore
 			 */
-			if (in_array(substr(exec('svn status ' . _SALVATORE_TMP . $source[1] . '/' . $source[1] . "_$lang.php"), 0, 1), array('A', 'M'))){
-				$last_change = exec('env LC_MESSAGES=en_US.UTF-8 svn info ' . _SALVATORE_TMP . $source[1] . '/' . $source[1] . "_$lang.php | awk '/^Last Changed Date/ { print $4 \" \" $5 }'");
+			if (in_array(substr(exec('svn status ' . _DIR_SALVATORE_TMP . $source[1] . '/' . $source[1] . "_$lang.php"), 0, 1), array('A', 'M'))){
+				$last_change = exec('env LC_MESSAGES=en_US.UTF-8 svn info ' . _DIR_SALVATORE_TMP . $source[1] . '/' . $source[1] . "_$lang.php | awk '/^Last Changed Date/ { print $4 \" \" $5 }'");
 				$auteur_versions = sql_allfetsel('id_auteur', 'spip_versions', 'objet="tradlang" AND date > ' . sql_quote($last_change) . ' AND ' . sql_in('id_objet', $tradlangs) . ' AND id_auteur != "-1" AND id_auteur !=' . intval(_ID_AUTEUR_SALVATORE), 'id_auteur');
 				if (count($auteur_versions)==1){
 					$email = sql_getfetsel('email', 'spip_auteurs', 'id_auteur = ' . intval($auteur_versions[0]['id_auteur']));
@@ -393,18 +393,18 @@ function export_trad_module($source, $url_site, $url_trad, $message_commit = '')
 		}
 		if ($module['limite_trad']==0){
 			foreach ($liste_lang as $lang){
-				passthru('svn add ' . _SALVATORE_TMP . $source[1] . '/' . $source[1] . "_$lang.php* 2> /dev/null") ? trad_log("$log\n") : '';
+				passthru('svn add ' . _DIR_SALVATORE_TMP . $source[1] . '/' . $source[1] . "_$lang.php* 2> /dev/null") ? trad_log("$log\n") : '';
 			}
 		} elseif (!in_array($source[1], array('ecrire', 'spip', 'public'))) {
 			trad_log('Limite trad = ' . $seuil_export);
 			foreach ($liste_lang as $lang){
 				if ((intval(($infos[$lang]['traduits']/$count_original)*100)>$seuil_export)
-					and (substr(exec('svn status ' . _SALVATORE_TMP . $source[1] . '/' . $source[1] . "_$lang.php"), 0, 1)=='?')){
-					passthru('svn add ' . _SALVATORE_TMP . $source[1] . '/' . $source[1] . "_$lang.php* 2> /dev/null") ? trad_log("$log\n") : '';
+					and (substr(exec('svn status ' . _DIR_SALVATORE_TMP . $source[1] . '/' . $source[1] . "_$lang.php"), 0, 1)=='?')){
+					passthru('svn add ' . _DIR_SALVATORE_TMP . $source[1] . '/' . $source[1] . "_$lang.php* 2> /dev/null") ? trad_log("$log\n") : '';
 				}
 			}
 		}
-		trad_log("\n" . passthru('svn status ' . _SALVATORE_TMP . $source[1] . '/') . "\n");
+		trad_log("\n" . passthru('svn status ' . _DIR_SALVATORE_TMP . $source[1] . '/') . "\n");
 		if (strlen($message_commit)>1 || count($commiteurs)>0){
 			$fd = fopen($tmp . $source[1] . '/message_commit.inc', 'w');
 			# ecrire le fichier

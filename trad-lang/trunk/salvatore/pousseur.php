@@ -39,7 +39,7 @@ if (isset($NO_PROPSET)){
 	$propset = false;
 }
 
-$tmp = _SALVATORE_TMP;
+$tmp = _DIR_SALVATORE_TMP;
 
 /* MAIN ***********************************************************************/
 
@@ -72,7 +72,7 @@ foreach ($liste_sources as $source){
 		$pass = $SVNPASSWD;
 	}
 
-	$f = _SALVATORE_TMP . $module . '/';
+	$f = _DIR_SALVATORE_TMP . $module . '/';
 
 	/**
 	 * On ajoute les .xml
@@ -103,7 +103,7 @@ foreach ($liste_sources as $source){
 					 * Si plusieurs commiteurs (veut dire que plusieurs fichiers sont à commiter)
 					 * ou si le fichier original est modifié, on ne commit que fichier par fichier
 					 */
-					if (count($commiteurs)>1 || in_array(substr(exec('svn status ' . _SALVATORE_TMP . $source[1] . '/' . $source[1] . '_' . $source[2] . '.php'), 0, 1), array('A', 'M'))){
+					if (count($commiteurs)>1 || in_array(substr(exec('svn status ' . _DIR_SALVATORE_TMP . $source[1] . '/' . $source[1] . '_' . $source[2] . '.php'), 0, 1), array('A', 'M'))){
 						$path = $f . $module . '_' . $lang . '.php';
 					} else {
 						/**

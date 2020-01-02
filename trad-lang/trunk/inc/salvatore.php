@@ -33,14 +33,14 @@ function salvatore_init(){
 	@ini_set('memory_limit', '50M');
 	define('_DEBUG_TRAD_LANG', 1); // undef si on ne veut pas de messages
 
-	define('_SALVATORE', _DIR_RACINE . 'salvatore/');
-	define('_SALVATORE_TRADUCTION', _SALVATORE . 'traductions/');
-	define('_SALVATORE_TMP', _SALVATORE . 'tmp/');
+	define('_DIR_SALVATORE', _DIR_RACINE . 'salvatore/');
+	define('_DIR_SALVATORE_TRADUCTION', _DIR_SALVATORE . 'traductions/');
+	define('_DIR_SALVATORE_TMP', _DIR_SALVATORE . 'tmp/');
 	$GLOBALS['idx_lang'] = 0;
 
 	// verifications
 
-	foreach ([_SALVATORE, _SALVATORE_TRADUCTION, _SALVATORE_TMP] as $dir){
+	foreach ([_DIR_SALVATORE, _DIR_SALVATORE_TRADUCTION, _DIR_SALVATORE_TMP] as $dir){
 		if (!is_dir($dir)){
 			throw new Exception("Erreur : le répertoire $dir n'existe pas");
 		}
@@ -52,14 +52,14 @@ function salvatore_init(){
 // chargement du fichier traductions.txt
 // Construit une liste de modules avec pour chacun un tableau compose de : 0 chemin, 1 nom, 2 langue principale
 //
-function charger_fichier_traductions($chemin = _SALVATORE_TRADUCTION, $trad_list = 'traductions.txt'){
+function charger_fichier_traductions($chemin = _DIR_SALVATORE_TRADUCTION, $trad_list = 'traductions.txt'){
 
-	if (!is_dir(_SALVATORE_TRADUCTION)){
-		die('Le répertoire ' . _SALVATORE_TRADUCTION . " n'existe pas !!!\n\n");
+	if (!is_dir(_DIR_SALVATORE_TRADUCTION)){
+		die('Le répertoire ' . _DIR_SALVATORE_TRADUCTION . " n'existe pas !!!\n\n");
 	}
 
-	if (!file_exists(_SALVATORE_TRADUCTION . $trad_list)){
-		die('Le fichier ' . _SALVATORE_TRADUCTION . "$trad_list n'existe pas !!!\n\n");
+	if (!file_exists(_DIR_SALVATORE_TRADUCTION . $trad_list)){
+		die('Le fichier ' . _DIR_SALVATORE_TRADUCTION . "$trad_list n'existe pas !!!\n\n");
 	}
 
 	$contenu = file_get_contents($chemin . $trad_list);

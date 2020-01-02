@@ -26,7 +26,7 @@
 
 
 require_once(dirname(__FILE__) . '/inc_tradlang.php');
-$tmp = _SALVATORE_TMP;
+$tmp = _DIR_SALVATORE_TMP;
 $invalider = $die_message = false;
 
 /* modules de SPIP requis - il y a surement plus propre... */

@@ -31,7 +31,7 @@
  */
 require_once(dirname(__FILE__) . '/inc_tradlang.php');
 require_once(_DIR_ETC . 'salvatore_passwd.inc');
-$tmp = _SALVATORE_TMP;
+$tmp = _DIR_SALVATORE_TMP;
 
 trad_log("\n=======================================\nTIREUR\nVa chercher les fichiers dans SVN et les depose dans sa copie locale\n=======================================\n");
 
