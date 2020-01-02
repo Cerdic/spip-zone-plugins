@@ -43,14 +43,14 @@ $tmp = _DIR_SALVATORE_TMP;
 
 /* MAIN ***********************************************************************/
 
-trad_log("\n=======================================\nPOUSSEUR\nPrend les fichiers langue dans sa copie locale et les commite SVN\n=======================================\n");
+salvatore_log("\n=======================================\nPOUSSEUR\nPrend les fichiers langue dans sa copie locale et les commite SVN\n=======================================\n");
 
-$liste_sources = charger_fichier_traductions(); // chargement du fichier traductions.txt
+$liste_sources = salvatore_charger_fichier_traductions(); // chargement du fichier traductions.txt
 
 foreach ($liste_sources as $source){
 	$credentials = false;
 	$module = $source[1];
-	trad_log("===== Module $module ======================================\n");
+	salvatore_log("===== Module $module ======================================\n");
 
 	$domaine_svn = parse_url($source[0]);
 	$domaine_svn = $domaine_svn['host'];
@@ -77,14 +77,14 @@ foreach ($liste_sources as $source){
 	/**
 	 * On ajoute les .xml
 	 */
-	trad_log(exec("svn add --quiet $f*xml 2>/dev/null") . "\n");
+	salvatore_log(exec("svn add --quiet $f*xml 2>/dev/null") . "\n");
 	$ignore = array(
 		//	'spip','ecrire','public'
 		'couteau', 'couteauprive', 'paquet-couteau_suisse'// désactivés suite à scandale, je ne sais pas comment le gérer correctement
 	);
 
 	if (in_array($module, $ignore)){
-		trad_log("$module ignore'\n");
+		salvatore_log("$module ignore'\n");
 	} else {
 		$depot = exec("env LC_MESSAGES=en_US.UTF-8 svn info $f |awk '/^Repository Root/ { print $3 }'") . '/';
 		$svn_url = exec("env LC_MESSAGES=en_US.UTF-8 svn info $f |awk '/^URL/ { print $2 }'") . '/';
@@ -111,12 +111,12 @@ foreach ($liste_sources as $source){
 						 */
 						$path = $f;
 					}
-					trad_log("On devrait commiter $path avec comme message '$message_commit_unique' avec l'email $email\n");
-					trad_log(exec("svn commit $path --username $user --password $pass --no-auth-cache --non-interactive --trust-server-cert -m " . escapeshellarg($message_commit_unique)) . "\n");
+					salvatore_log("On devrait commiter $path avec comme message '$message_commit_unique' avec l'email $email\n");
+					salvatore_log(exec("svn commit $path --username $user --password $pass --no-auth-cache --non-interactive --trust-server-cert -m " . escapeshellarg($message_commit_unique)) . "\n");
 					$revision = exec("svn up $path && env LC_MESSAGES=en_US.UTF-8 svn info $path |awk '/^Last Changed Rev/ { print $4 }'");
 					if ($propset){
-						trad_log(exec("svn propset --revprop -r $revision svn:author '$email' $path --username $user --password $pass --no-auth-cache --non-interactive --trust-server-cert") . "\n");
-						trad_log("svn propset --revprop -r $revision svn:author '$email' $path --username $user --password $pass --no-auth-cache --non-interactive --trust-server-cert\n");
+						salvatore_log(exec("svn propset --revprop -r $revision svn:author '$email' $path --username $user --password $pass --no-auth-cache --non-interactive --trust-server-cert") . "\n");
+						salvatore_log("svn propset --revprop -r $revision svn:author '$email' $path --username $user --password $pass --no-auth-cache --non-interactive --trust-server-cert\n");
 					}
 				}
 			}
@@ -129,12 +129,12 @@ foreach ($liste_sources as $source){
 		if (strlen(trim(exec("svn status $f |awk /^[MA]/")))>1){
 			$commit_message = "[Salvatore] [source:$path_svn $module] Export depuis http://trad.spip.net\n\n";
 			$commit_message .= $message_commit . "\n";
-			trad_log("On commit $f car il reste des fichiers\n");
-			trad_log(exec("svn commit $f --username $user --password $pass --no-auth-cache --non-interactive --trust-server-cert -m " . escapeshellarg($commit_message)) . "\n");
+			salvatore_log("On commit $f car il reste des fichiers\n");
+			salvatore_log(exec("svn commit $f --username $user --password $pass --no-auth-cache --non-interactive --trust-server-cert -m " . escapeshellarg($commit_message)) . "\n");
 			$revision_fin = exec("svn up $f && env LC_MESSAGES=en_US.UTF-8 svn info $f |awk '/^Last Changed Rev/ { print $4 }'");
 			if (!$credentials && $propset){
-				trad_log(exec("svn propset --revprop -r $revision_fin svn:author 'salvatore@rezo.net' $f --username $user --password $pass --no-auth-cache --non-interactive --trust-server-cert") . "\n");
-				trad_log("svn propset --revprop -r $revision_fin svn:author 'salvatore@rezo.net' $f --username $user --password $pass --no-auth-cache --non-interactive --trust-server-cert\n");
+				salvatore_log(exec("svn propset --revprop -r $revision_fin svn:author 'salvatore@rezo.net' $f --username $user --password $pass --no-auth-cache --non-interactive --trust-server-cert") . "\n");
+				salvatore_log("svn propset --revprop -r $revision_fin svn:author 'salvatore@rezo.net' $f --username $user --password $pass --no-auth-cache --non-interactive --trust-server-cert\n");
 			}
 		}
 

@@ -33,9 +33,9 @@ require_once(dirname(__FILE__) . '/inc_tradlang.php');
 require_once(_DIR_ETC . 'salvatore_passwd.inc');
 $tmp = _DIR_SALVATORE_TMP;
 
-trad_log("\n=======================================\nTIREUR\nVa chercher les fichiers dans SVN et les depose dans sa copie locale\n=======================================\n");
+salvatore_log("\n=======================================\nTIREUR\nVa chercher les fichiers dans SVN et les depose dans sa copie locale\n=======================================\n");
 
-$liste_sources = charger_fichier_traductions(); // chargement du fichier traductions.txt
+$liste_sources = salvatore_charger_fichier_traductions(); // chargement du fichier traductions.txt
 
 $ret = 0;
 $cmd = false;
@@ -58,7 +58,7 @@ foreach ($liste_sources as $source){
 		$user = $SVNUSER;
 		$pass = $SVNPASSWD;
 	}
-	trad_log("\n===== Module " . $source[1] . " =====\n");
+	salvatore_log("\n===== Module " . $source[1] . " =====\n");
 	if (is_dir($tmp . $source[1] . '/.svn')){
 		$depot = "env LANG=en_US svn info --non-interactive --trust-server-cert --username $user --password $pass " . $tmp . $source[1] . " | awk '/^URL:/ { print $2 }'";
 		$depot = exec($depot, $depot);
@@ -82,7 +82,7 @@ foreach ($liste_sources as $source){
 			$last_revision = "env LANG=en_US svn info  --non-interactive --trust-server-cert --username $user --password $pass " . $source[0] . " | awk '/^Last\ Changed\ Rev:/ { print $4 }'";
 			$last_revision = exec($last_revision, $last_revision);
 			if ($revision_actuelle>=$last_revision){
-				trad_log("Pas besoin de mettre à jour\n");
+				salvatore_log("Pas besoin de mettre à jour\n");
 			} else {
 				$cmd = "svn update  --non-interactive --trust-server-cert --username $user --password $pass --non-recursive --accept theirs-full " . $tmp . $source[1] . '/';
 			}
@@ -94,12 +94,12 @@ foreach ($liste_sources as $source){
 	if ($cmd){
 		exec("$cmd 2> /dev/null", $out, $int);
 		if ($int==0){
-			trad_log(end($out) . "\n");
+			salvatore_log(end($out) . "\n");
 		} else {
 			$sujet = 'Tireur : Erreur';
 			$corps = $source[0] . '/ ' . $source[1] . "\n\n";
 			$corps .= "L'adresse distante de ce module n'est certainement plus valide\n\n";
-			trad_sendmail($sujet, $corps);
+			salvatore_envoyer_mail($sujet, $corps);
 			die("L'adresse distante de ce module n'est certainement plus valide\n\n");
 		}
 	}
@@ -109,7 +109,7 @@ foreach ($liste_sources as $source){
 		$ret = 1;
 		$sujet = 'Tireur : Erreur';
 		$corps = "! Erreur pas de fichier de langue conforme dans le module : $tmp" . $source[1] . "\n";
-		trad_sendmail($sujet, $corps);
+		salvatore_envoyer_mail($sujet, $corps);
 		die("! Erreur pas de fichier de langue conforme dans le module : $tmp" . $source[1] . "\n");
 	}
 	$cmd = false;

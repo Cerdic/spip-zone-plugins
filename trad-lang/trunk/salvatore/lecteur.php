@@ -48,12 +48,12 @@ $url_site = $GLOBALS['meta']['adresse_site'];
 
 /* MAIN ***********************************************************************/
 
-trad_log("\n=======================================\nLECTEUR\nPrend les fichiers de reference dans sa copie locale et met a jour la base de donnees\n=======================================\n");
+salvatore_log("\n=======================================\nLECTEUR\nPrend les fichiers de reference dans sa copie locale et met a jour la base de donnees\n=======================================\n");
 
-$liste_sources = charger_fichier_traductions(); // chargement du fichier traductions.txt
+$liste_sources = salvatore_charger_fichier_traductions(); // chargement du fichier traductions.txt
 
 foreach ($liste_sources as $source){
-	trad_log('==== Module ' . $source[1] . " =======================================\n");
+	salvatore_log('==== Module ' . $source[1] . " =======================================\n");
 	$liste_fic_lang = glob($tmp . $source[1] . '/' . $source[1] . '_*.php');
 	$import = true;
 	/**
@@ -70,8 +70,8 @@ foreach ($liste_sources as $source){
 				$import = false;
 				$sujet = 'Lecteur : Erreur sur ' . $source[1];
 				$corps = "\nErreur : import impossible, le fichier est traduit autre part : $url\n\n";
-				trad_sendmail($sujet, $corps);
-				trad_log("\nErreur : import impossible, le fichier est traduit autre part : $url\n\n");
+				salvatore_envoyer_mail($sujet, $corps);
+				salvatore_log("\nErreur : import impossible, le fichier est traduit autre part : $url\n\n");
 			}
 		}
 	}
@@ -112,7 +112,7 @@ foreach ($liste_sources as $source){
 				if (!intval($id_module)){
 					$sujet = 'Lecteur : Erreur sur ' . $source[1];
 					$corps = "Le module n'est pas un entier";
-					trad_sendmail($sujet, $corps);
+					salvatore_envoyer_mail($sujet, $corps);
 					$die_message = "Le module n'est pas un entier";
 					break;
 				}
@@ -126,9 +126,9 @@ foreach ($liste_sources as $source){
 						list(, $lang) = explode('_', $fich, 2);
 						if (($modifs>0) and function_exists('inc_tradlang_verifier_langue_base_dist')){
 							inc_tradlang_verifier_langue_base_dist($source[1], $lang);
-							trad_log('|-- Synchro de la langue ' . $lang . ' pour le module ' . $source[1] . "\n");
+							salvatore_log('|-- Synchro de la langue ' . $lang . ' pour le module ' . $source[1] . "\n");
 						} elseif (!function_exists('inc_tradlang_verifier_langue_base_dist')) {
-							trad_log("|-- Fonction de synchro inexistante\n");
+							salvatore_log("|-- Fonction de synchro inexistante\n");
 						}
 						$langues_a_jour[] = $lang;
 					}
@@ -141,21 +141,21 @@ foreach ($liste_sources as $source){
 					$langues_pas_a_jour = sql_allfetsel('lang', 'spip_tradlangs', 'id_tradlang_module = ' . intval($id_module) . ' AND ' . sql_in('lang', $langues_a_jour, 'NOT'), 'lang');
 					foreach ($langues_pas_a_jour as $langue_a_jour){
 						inc_tradlang_verifier_langue_base_dist($source[1], $langue_a_jour['lang']);
-						trad_log('|-- Synchro de la langue non exportée en fichier ' . $langue_a_jour['lang'] . ' pour le module ' . $source[1] . "\n");
+						salvatore_log('|-- Synchro de la langue non exportée en fichier ' . $langue_a_jour['lang'] . ' pour le module ' . $source[1] . "\n");
 					}
 				}
 				$invalider = true;
-				trad_log("|\n");
+				salvatore_log("|\n");
 				unset($langues_a_jour, $langues_pas_a_jour);
 			} else {
 				$sujet = 'Lecteur : Erreur sur ' . $source[1];
 				$corps = '|-- Pas de fichier lang ' . $source[2] . ' pour le module ' . $source[1] . " : import impossible pour ce module\n";
-				trad_sendmail($sujet, $corps);
+				salvatore_envoyer_mail($sujet, $corps);
 				$die_message = '|-- Pas de fichier lang ' . $source[2] . ' pour le module ' . $source[1] . " : import impossible pour ce module\n";
 				break;
 			}
 		} else {
-			trad_log("On ne modifie rien car l'original a été modifié il y a longtemps\n");
+			salvatore_log("On ne modifie rien car l'original a été modifié il y a longtemps\n");
 			/**
 			 * Le fichier d'origine n'a pas été modifié
 			 * Mais on a peut être de nouvelles langues
@@ -174,7 +174,7 @@ foreach ($liste_sources as $source){
 				}
 			}
 			if (count($langues_a_ajouter)>0){
-				trad_log('On a ' . count($langues_a_ajouter) . " nouvelle(s) langue(s) à insérer \n");
+				salvatore_log('On a ' . count($langues_a_ajouter) . " nouvelle(s) langue(s) à insérer \n");
 				$module = sql_fetsel('*', 'spip_tradlang_modules', 'module = ' . sql_quote($source[1]));
 				$id_module = $module['id_tradlang_module'];
 				$liste_id_orig = array();
@@ -186,11 +186,11 @@ foreach ($liste_sources as $source){
 					}
 				}
 			}
-			trad_log("\n");
+			salvatore_log("\n");
 		}
 		// Mise à jour des bilans
 		if (function_exists('inc_tradlang_verifier_bilans_dist')){
-			trad_log('Création ou MAJ des bilans de ' . $source[1] . "\n\n");
+			salvatore_log('Création ou MAJ des bilans de ' . $source[1] . "\n\n");
 			inc_tradlang_verifier_bilans_dist($source[1], $source[2], false);
 		}
 	}
@@ -217,7 +217,7 @@ return 0;
  * @return string
  */
 function import_module_spip($source = array(), $module = '', &$liste_id_orig, $orig = null, $id_module){
-	trad_log("!\n+ Import de $module\n");
+	salvatore_log("!\n+ Import de $module\n");
 	$memtrad = $GLOBALS['idx_lang'] = 'i18n_' . crc32($module) . '_tmp';
 	$GLOBALS[$GLOBALS['idx_lang']] = null;
 	$comm_fic_lang = charger_comm_fichier_langue($module);
@@ -226,10 +226,10 @@ function import_module_spip($source = array(), $module = '', &$liste_id_orig, $o
 	$str_lang = $GLOBALS[$memtrad];  // on a vu certains fichiers faire des betises et modifier idx_lang
 
 	if (is_null($str_lang)){
-		trad_log("Erreur, fichier $module mal forme\n");
+		salvatore_log("Erreur, fichier $module mal forme\n");
 		$sujet = 'Lecteur : Erreur sur ' . $module;
 		$corps = "Erreur, fichier $module mal forme\n";
-		trad_sendmail($sujet, $corps);
+		salvatore_envoyer_mail($sujet, $corps);
 		return false;
 	}
 
@@ -257,7 +257,7 @@ function import_module_spip($source = array(), $module = '', &$liste_id_orig, $o
 	list(, $lang) = explode('_', $fich, 2);
 
 	if (!array_key_exists($lang, $GLOBALS['codes_langues'])){
-		trad_log("!-- Attention : La langue $lang n'existe pas dans les langues possibles - $mod \n");
+		salvatore_log("!-- Attention : La langue $lang n'existe pas dans les langues possibles - $mod \n");
 	} else {
 		if (1==$orig){
 			$res = spip_query("SELECT id, str, md5 FROM spip_tradlangs WHERE module='" . $source[1] . "' and lang='" . $lang . "' AND statut != 'attic' ");
@@ -266,7 +266,7 @@ function import_module_spip($source = array(), $module = '', &$liste_id_orig, $o
 		}
 		$nb = sql_count($res);
 		if ($nb>0){
-			trad_log("!-- Fichier de langue $lang du module $mod deja inclus dans la base\n");
+			salvatore_log("!-- Fichier de langue $lang du module $mod deja inclus dans la base\n");
 		}
 
 		$ajoutees = $inchangees = $supprimees = $modifiees = $ignorees = $recuperees = 0;
@@ -297,7 +297,7 @@ function import_module_spip($source = array(), $module = '', &$liste_id_orig, $o
 						$md5 = md5($str_lang[$id]);
 					} else {
 						if (!isset($liste_id_orig[$id])){
-							trad_log("!-- Chaine $id inconnue dans la langue principale\n");
+							salvatore_log("!-- Chaine $id inconnue dans la langue principale\n");
 							$ignorees++;
 						} else {
 							$md5 = $liste_id_orig[$id];
@@ -391,12 +391,12 @@ function import_module_spip($source = array(), $module = '', &$liste_id_orig, $o
 							$tradlang = sql_fetsel('*', 'spip_tradlangs', 'id = ' . sql_quote($id) . ' AND module = ' . sql_quote($source[1]) . 'AND lang = ' . sql_quote($lang) . ' AND statut = ' . sql_quote('attic'));
 							if (is_array($tradlang)){
 								$id_tradlang = intval($tradlang['id_tradlang']);
-								trad_log("\n Recuperation d'une chaine de statut ATTIC \n");
+								salvatore_log("\n Recuperation d'une chaine de statut ATTIC \n");
 								sql_updateq('spip_tradlangs', $data, 'id_tradlang=' . $id_tradlang);
 								$trads = sql_allfetsel('id_tradlang', 'spip_tradlangs', 'id = ' . sql_quote($id) . ' AND module = ' . sql_quote($source[1]) . 'AND lang != ' . sql_quote($lang) . ' AND statut = ' . sql_quote('attic'));
 								$maj = array('statut' => 'MODIF');
 								foreach ($trads as $trad){
-									trad_log("\n Changement d'une trad dans ATTIC \n");
+									salvatore_log("\n Changement d'une trad dans ATTIC \n");
 									sql_updateq('spip_tradlangs', $maj, 'id_tradlang = ' . intval($trad['id_tradlang']));
 								}
 								$recuperees++;
@@ -410,7 +410,7 @@ function import_module_spip($source = array(), $module = '', &$liste_id_orig, $o
 						 */
 						$identique_module = sql_getfetsel('id', 'spip_tradlangs', 'module = ' . sql_quote($source[1]) . ' AND lang = ' . sql_quote($lang) . ' AND str = ' . sql_quote($str_lang[$id]));
 						if ($identique_module){
-							trad_log('La nouvelle chaine est une chaine dupliquée : ' . $identique_module . "\n");
+							salvatore_log('La nouvelle chaine est une chaine dupliquée : ' . $identique_module . "\n");
 							$chaines_a_dupliquer = sql_allfetsel('*', 'spip_tradlangs', 'id = ' . sql_quote($identique_module) . ' AND id_tradlang_module = ' . intval($id_module) . ' AND lang != ' . sql_quote($lang));
 							foreach ($chaines_a_dupliquer as $chaine){
 								unset($chaine['id_tradlang']);
@@ -423,7 +423,7 @@ function import_module_spip($source = array(), $module = '', &$liste_id_orig, $o
 									$chaine['statut'] = 'NEW';
 								}
 								$nouvelle_chaine = sql_insertq('spip_tradlangs', $chaine);
-								trad_log('Ajout de la version ' . $chaine['lang'] . ' - ' . $nouvelle_chaine . "\n");
+								salvatore_log('Ajout de la version ' . $chaine['lang'] . ' - ' . $nouvelle_chaine . "\n");
 							}
 						}
 						$ajoutees++;
@@ -484,7 +484,7 @@ function import_module_spip($source = array(), $module = '', &$liste_id_orig, $o
 						$inchangees++;
 					} else {
 						// * modifiee ? => UPDATE
-						trad_log(md5($str_lang[$id]) . ' !- ' . md5($str_existant[$id]) . "\n");
+						salvatore_log(md5($str_lang[$id]) . ' !- ' . md5($str_existant[$id]) . "\n");
 						// modifier la chaine
 						$modifs = array(
 							'str' => $str_lang[$id],
@@ -529,7 +529,7 @@ function import_module_spip($source = array(), $module = '', &$liste_id_orig, $o
 					$liste_id_orig[$id] = md5($str_lang[$id]);
 				}
 			}
-			trad_log('!-- module ' . $source[1] . ", $lang : $modifiees modifiees, $ajoutees ajoutees, $supprimees supprimees, $recuperees recuperees, $ignorees ignorees, $inchangees inchangees\n");
+			salvatore_log('!-- module ' . $source[1] . ", $lang : $modifiees modifiees, $ajoutees ajoutees, $supprimees supprimees, $recuperees recuperees, $ignorees ignorees, $inchangees inchangees\n");
 		}
 	}
 	unset($liste_id_orig, $str_lang, $GLOBALS[$GLOBALS['idx_lang']]);

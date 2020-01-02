@@ -27,9 +27,9 @@
 require_once(dirname(__FILE__) . '/inc_tradlang.php');
 $tmp = _DIR_SALVATORE_TMP;
 
-trad_log("\n=======================================\nECRIVEUR\nExporte les fichiers de traduction dans sa copie locale a partir de la base de donnees\n=======================================\n");
+salvatore_log("\n=======================================\nECRIVEUR\nExporte les fichiers de traduction dans sa copie locale a partir de la base de donnees\n=======================================\n");
 
-$liste_sources = charger_fichier_traductions(); // chargement du fichier traductions.txt
+$liste_sources = salvatore_charger_fichier_traductions(); // chargement du fichier traductions.txt
 
 if (!is_dir($tmp)){
 	die('Manque le repertoire ' . $tmp);
@@ -54,7 +54,7 @@ if (isset($argv[1]) and strlen($argv[1])>1){
 }
 
 foreach ($liste_sources as $source){
-	trad_log('==== Module ' . $source[1] . " =======================================\n");
+	salvatore_log('==== Module ' . $source[1] . " =======================================\n");
 	$export = true;
 	/**
 	 * On test ici si le fichier est géré par un autre salvatore
@@ -70,8 +70,8 @@ foreach ($liste_sources as $source){
 				$export = false;
 				$sujet = 'Ecriveur : Erreur sur ' . $source[1];
 				$corps = "\nErreur : export impossible, le fichier est traduit autre part : $url != $url_site\n\n";
-				trad_sendmail($sujet, $corps);
-				trad_log("\nErreur : export impossible, le fichier est traduit autre part : $url != $url_site\n\n");
+				salvatore_envoyer_mail($sujet, $corps);
+				salvatore_log("\nErreur : export impossible, le fichier est traduit autre part : $url != $url_site\n\n");
 			}
 		}
 	}
@@ -119,7 +119,7 @@ function export_trad_module($source, $url_site, $url_trad, $message_commit = '')
 
 		$liste_lang = $liste_lang_non_exportees = $liste_lang_supprimer = array();
 		$minimal = ceil((($count_original*$seuil_export)/100));
-		trad_log("\nMinimal = $minimal ($seuil_export %)\n");
+		salvatore_log("\nMinimal = $minimal ($seuil_export %)\n");
 
 		$res = sql_allfetsel('lang,COUNT(*) as N', 'spip_tradlangs', 'module = ' . sql_quote($source[1]) . ' AND statut != "NEW" AND statut != "attic"', 'lang', 'lang');
 		foreach ($res as $row){
@@ -152,7 +152,7 @@ function export_trad_module($source, $url_site, $url_trad, $message_commit = '')
 		// traiter chaque langue
 		$infos = $commiteurs = array();
 		foreach ($liste_lang as $lang){
-			trad_log("Generation de la langue $lang ");
+			salvatore_log("Generation de la langue $lang ");
 			// Proteger les caracteres typographiques a l'interieur des tags html
 			$typo = (in_array($lang, array('eo', 'fr', 'cpf')) || strncmp($lang, 'fr_', 3)==0) ? 'fr' : 'en';
 			$typographie = charger_fonction($typo, 'typographie');
@@ -260,7 +260,7 @@ function export_trad_module($source, $url_site, $url_trad, $message_commit = '')
 			}
 			$orig = ($lang==$source[2]) ? $source[0] : false;
 
-			trad_log(" - traduction ($traduits/$count_original OK | $relire/$count_original RELIRE | $modifs/$count_original MODIFS), export\n");
+			salvatore_log(" - traduction ($traduits/$count_original OK | $relire/$count_original RELIRE | $modifs/$count_original MODIFS), export\n");
 			// historiquement les fichiers de lang de spip_loader ne peuvent pas etre securises
 			$secure = ($source[1]=='tradloader')
 				? ''
@@ -334,10 +334,10 @@ function export_trad_module($source, $url_site, $url_trad, $message_commit = '')
 
 			if (substr(exec('svn status ' . _DIR_SALVATORE_TMP . $source[1] . '/' . $source[1] . '_' . $lang . '.php'), 0, 1)=='?'){
 				if ($module['limite_trad']==0){
-					passthru('svn add ' . _DIR_SALVATORE_TMP . $source[1] . '/' . $source[1] . "_$lang.php 2> /dev/null") ? trad_log("$log\n") : '';
+					passthru('svn add ' . _DIR_SALVATORE_TMP . $source[1] . '/' . $source[1] . "_$lang.php 2> /dev/null") ? salvatore_log("$log\n") : '';
 				} elseif (!in_array($source[1], array('ecrire', 'spip', 'public'))) {
 					if ((intval(($infos[$lang]['traduits']/$count_original)*100)>$seuil_export)){
-						passthru('svn add ' . _DIR_SALVATORE_TMP . $source[1] . '/' . $source[1] . "_$lang.php* 2> /dev/null") ? trad_log("$log\n") : '';
+						passthru('svn add ' . _DIR_SALVATORE_TMP . $source[1] . '/' . $source[1] . "_$lang.php* 2> /dev/null") ? salvatore_log("$log\n") : '';
 					}
 				}
 			}
@@ -357,7 +357,7 @@ function export_trad_module($source, $url_site, $url_trad, $message_commit = '')
 					if ($email){
 						$commiteurs[$lang] = $email;
 					}
-					trad_log("\nLe commiteur sera pour la langue $lang : " . $commiteurs[$lang] . " \n");
+					salvatore_log("\nLe commiteur sera pour la langue $lang : " . $commiteurs[$lang] . " \n");
 				}
 			}
 		}
@@ -383,28 +383,28 @@ function export_trad_module($source, $url_site, $url_trad, $message_commit = '')
 
 		if (isset($liste_lang_non_exportees) and (count($liste_lang_non_exportees)>0)){
 			$liste_lang_non_exportees_string = implode(', ', $liste_lang_non_exportees);
-			trad_log("\nLes langues suivantes ne sont pas exportées car trop peu traduites:\n");
-			trad_log("$liste_lang_non_exportees_string\n");
+			salvatore_log("\nLes langues suivantes ne sont pas exportées car trop peu traduites:\n");
+			salvatore_log("$liste_lang_non_exportees_string\n");
 		}
 		if (isset($liste_lang_supprimer) and (count($liste_lang_supprimer)>0)){
 			$liste_lang_supprimer_string = implode(', ', $liste_lang_supprimer);
-			trad_log("\nLes langues suivantes devraient être supprimées car trop peu traduites:\n");
-			trad_log("$liste_lang_supprimer_string\n");
+			salvatore_log("\nLes langues suivantes devraient être supprimées car trop peu traduites:\n");
+			salvatore_log("$liste_lang_supprimer_string\n");
 		}
 		if ($module['limite_trad']==0){
 			foreach ($liste_lang as $lang){
-				passthru('svn add ' . _DIR_SALVATORE_TMP . $source[1] . '/' . $source[1] . "_$lang.php* 2> /dev/null") ? trad_log("$log\n") : '';
+				passthru('svn add ' . _DIR_SALVATORE_TMP . $source[1] . '/' . $source[1] . "_$lang.php* 2> /dev/null") ? salvatore_log("$log\n") : '';
 			}
 		} elseif (!in_array($source[1], array('ecrire', 'spip', 'public'))) {
-			trad_log('Limite trad = ' . $seuil_export);
+			salvatore_log('Limite trad = ' . $seuil_export);
 			foreach ($liste_lang as $lang){
 				if ((intval(($infos[$lang]['traduits']/$count_original)*100)>$seuil_export)
 					and (substr(exec('svn status ' . _DIR_SALVATORE_TMP . $source[1] . '/' . $source[1] . "_$lang.php"), 0, 1)=='?')){
-					passthru('svn add ' . _DIR_SALVATORE_TMP . $source[1] . '/' . $source[1] . "_$lang.php* 2> /dev/null") ? trad_log("$log\n") : '';
+					passthru('svn add ' . _DIR_SALVATORE_TMP . $source[1] . '/' . $source[1] . "_$lang.php* 2> /dev/null") ? salvatore_log("$log\n") : '';
 				}
 			}
 		}
-		trad_log("\n" . passthru('svn status ' . _DIR_SALVATORE_TMP . $source[1] . '/') . "\n");
+		salvatore_log("\n" . passthru('svn status ' . _DIR_SALVATORE_TMP . $source[1] . '/') . "\n");
 		if (strlen($message_commit)>1 || count($commiteurs)>0){
 			$fd = fopen($tmp . $source[1] . '/message_commit.inc', 'w');
 			# ecrire le fichier
@@ -421,6 +421,6 @@ $commiteurs = ' . var_export($commiteurs, 1) . ';
 			fclose($fd);
 		}
 	} else {
-		trad_log("\n Ce module n'existe pas\n");
+		salvatore_log("\n Ce module n'existe pas\n");
 	}
 }

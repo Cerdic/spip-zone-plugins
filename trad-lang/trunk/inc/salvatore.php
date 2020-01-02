@@ -26,50 +26,65 @@
 
 
 /**
- * initialiser salvatore
+ * initialiser salvatore si besoin
+ * peut etre appelle plusieurs fois
  * @throws Exception
  */
 function salvatore_init(){
-	@ini_set('memory_limit', '50M');
-	define('_DEBUG_TRAD_LANG', 1); // undef si on ne veut pas de messages
+	static $initialized;
 
-	define('_DIR_SALVATORE', _DIR_RACINE . 'salvatore/');
-	define('_DIR_SALVATORE_TRADUCTION', _DIR_SALVATORE . 'traductions/');
-	define('_DIR_SALVATORE_TMP', _DIR_SALVATORE . 'tmp/');
-	$GLOBALS['idx_lang'] = 0;
-
-	// verifications
-
-	foreach ([_DIR_SALVATORE, _DIR_SALVATORE_TRADUCTION, _DIR_SALVATORE_TMP] as $dir){
-		if (!is_dir($dir)){
-			throw new Exception("Erreur : le répertoire $dir n'existe pas");
+	if (is_null($initialized)) {
+		@ini_set('memory_limit', '50M');
+		if (!defined('_DEBUG_TRAD_LANG')) {
+			define('_DEBUG_TRAD_LANG', 1); // undef si on ne veut pas de messages
 		}
+
+		if (!defined('_DIR_SALVATORE')) {
+			define('_DIR_SALVATORE', _DIR_RACINE . 'salvatore/');
+		}
+
+		if (!defined('_DIR_SALVATORE_TRADUCTION')) {
+			define('_DIR_SALVATORE_TRADUCTION', _DIR_SALVATORE . 'traductions/');
+		}
+
+		if (!defined('_DIR_SALVATORE_TMP')) {
+			define('_DIR_SALVATORE_TMP', _DIR_SALVATORE . 'tmp/');
+		}
+
+		if (!isset($GLOBALS['idx_lang'])) {
+			$GLOBALS['idx_lang'] = 0;
+		}
+
+		// verifications des repertoires
+		foreach ([_DIR_SALVATORE, _DIR_SALVATORE_TRADUCTION, _DIR_SALVATORE_TMP] as $dir){
+			if (!is_dir($dir)){
+				throw new Exception("Erreur : le répertoire $dir n'existe pas");
+			}
+		}
+		$initialized = true;
 	}
 }
 
 
-//
-// chargement du fichier traductions.txt
-// Construit une liste de modules avec pour chacun un tableau compose de : 0 chemin, 1 nom, 2 langue principale
-//
-function charger_fichier_traductions($chemin = _DIR_SALVATORE_TRADUCTION, $trad_list = 'traductions.txt'){
+/**
+ * chargement du fichier traductions.txt
+ * Construit une liste de modules avec pour chacun un tableau compose de : 0 chemin, 1 nom, 2 langue principale
+ *
+ * @param string $chemin
+ * @param string $trad_list
+ * @return array
+ * @throws Exception
+ */
+function salvatore_charger_fichier_traductions($chemin = _DIR_SALVATORE_TRADUCTION, $trad_list = 'traductions.txt'){
 
-	if (!is_dir(_DIR_SALVATORE_TRADUCTION)){
-		die('Le répertoire ' . _DIR_SALVATORE_TRADUCTION . " n'existe pas !!!\n\n");
-	}
-
-	if (!file_exists(_DIR_SALVATORE_TRADUCTION . $trad_list)){
-		die('Le fichier ' . _DIR_SALVATORE_TRADUCTION . "$trad_list n'existe pas !!!\n\n");
-	}
+	salvatore_init();
 
 	$contenu = file_get_contents($chemin . $trad_list);
-
 	$contenu = preg_replace('/#.*/', '', $contenu); // supprimer les commentaires
 
 	$tab = preg_split("/\r\n|\n\r|\n|\r/", $contenu);
 
 	$liste_trad = array();
-
 	foreach ($tab as $ligne){
 		$liste = explode(';', trim($ligne));
 		if (!empty($liste[0])){
@@ -86,12 +101,14 @@ function charger_fichier_traductions($chemin = _DIR_SALVATORE_TRADUCTION, $trad_
 	}
 	reset($liste_trad);
 	return $liste_trad;
-} // liste_traductions
+}
 
-//
-// Gere les logs
-//
-function trad_log($msg = ''){
+
+/**
+ * Loger
+ * @param string $msg
+ */
+function salvatore_log($msg = ''){
 	static $cnt;
 	if (defined('_DEBUG_TRAD_LANG')){
 		echo $msg;
@@ -101,14 +118,19 @@ function trad_log($msg = ''){
 		$cnt = 0;
 		flush();
 	}
-} // trad_log
+}
 
-function trad_sendmail($sujet = 'Erreur', $corps = ''){
+
+/**
+ * @param string $sujet
+ * @param string $corps
+ */
+function salvatore_envoyer_mail($sujet = 'Erreur', $corps = ''){
 	if (defined('_EMAIL_ERREURS') and defined('_EMAIL_SALVATORE')){
 		$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 		$destinataire = _EMAIL_ERREURS;
 		$from = _EMAIL_SALVATORE;
 		$envoyer_mail($destinataire, $sujet, $corps, $from);
-		trad_log("Un email a été envoyé à l'adresse : " . _EMAIL_ERREURS . "\n");
+		salvatore_log("Un email a été envoyé à l'adresse : " . _EMAIL_ERREURS . "\n");
 	}
 }
