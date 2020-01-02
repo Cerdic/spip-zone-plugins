@@ -62,7 +62,7 @@ function salvatore_tirer($liste_sources, $tmp=null) {
 				. ' ' . $dir_checkout;
 
 			echo "$cmd\n";
-			passthru("$cmd 2>/dev/null", $return);
+			passthru("export FORCE_RM_AND_CHECKOUT_AGAIN_BAD_DEST=1 && $cmd 2>/dev/null", $return);
 			$done[$dir_checkout] = true;
 		}
 
