@@ -7,7 +7,7 @@
 	logo="img_pack/spout_spipcsv-48.png"
 	documentation="https://contrib.spip.net/5230"
 >
-	<nom>Spout</nom>
+	<nom>Spout SPIPCSV</nom>
 	<!-- Une lib pour lire et écrire des XLSX, ODS et CSV -->
 	<auteur lien="https://contrib.spip.net/RealET">RealET</auteur>
 	<copyright>2019</copyright>
