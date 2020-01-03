@@ -35,6 +35,11 @@ include_spip('inc/xml');
 include_spip('inc/lang_liste');
 include_spip('inc/session');
 
+/**
+ * @param array $liste_sources
+ * @param string $dir_modules
+ * @throws Exception
+ */
 function salvatore_lire($liste_sources, $dir_modules = null){
 	include_spip('inc/salvatore');
 	salvatore_init();
@@ -48,6 +53,7 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 	$refresh_time = time()-_SALVATORE_LECTEUR_REFRESH_DELAY;
 
 	$tradlang_verifier_langue_base = charger_fonction('tradlang_verifier_langue_base', 'inc', true);
+	$tradlang_verifier_bilans = charger_fonction('tradlang_verifier_bilans', 'inc', true);
 
 
 	foreach ($liste_sources as $source){
@@ -77,6 +83,7 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 		$last_update = filemtime($fichier_lang_principal);
 		// TODO : utiliser $source['dir_module'] et pas $source['module']
 		$row_module = sql_fetsel('id_tradlang_module, lang_mere', 'spip_tradlang_modules', 'module = ' . sql_quote($source['module']));
+		$langues_a_jour = array();
 
 		if (!$row_module or $last_update>$refresh_time){
 			$priorite = '';
@@ -88,7 +95,7 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 			/**
 			 * Si le module n'existe pas... on le crée
 			 */
-			if (!$row_module or !$id_module=intval($row_module['id_tradlang_module'])){
+			if (!$row_module or !$id_module = intval($row_module['id_tradlang_module'])){
 				$insert = [
 					'module' => $source['module'],
 					'nom_mod' => $source['module'],
@@ -103,19 +110,53 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 				if (!intval($id_module)){
 					salvatore_fail("[Lecteur] Erreur sur $module", "Echec insertion dans spip_tradlang_modules " . json_encode($insert));
 				}
-			} elseif ($row_module['lang_mere']!==$source['lang']) {
+			}
+			elseif ($row_module['lang_mere']!==$source['lang']) {
 				/**
 				 * Si la langue mere a changée, on la modifie
 				 */
 				sql_updateq('spip_tradlang_modules', array('lang_mere' => $source['lang']), 'id_tradlang_module = ' . intval($id_module));
 			}
+		}
+		// Pas de mise a jour recente du fichier maitre deja en base
+		else {
+			salvatore_log("On ne modifie rien : fichier original $fichier_lang_principal inchangé depuis " . date("Y-m-d H:i:s", $last_update));
+			$id_module=intval($row_module['id_tradlang_module']);
+
+			/**
+			 * Le fichier d'origine n'a pas été modifié
+			 * Mais on a peut être de nouvelles langues
+			 */
+			$langues_en_base = sql_allfetsel('DISTINCT lang', 'spip_tradlangs', 'id_tradlang_module = ' . intval($id_module));
+			$langues_en_base = array_column($langues_en_base, 'lang');
+
+			$langues_a_ajouter = array();
+			foreach ($liste_fichiers_lang as $fichier_lang){
+				$lang = salvatore_get_lang_from($module, $fichier_lang);
+				if (!in_array($lang, $langues_en_base)){
+					$langues_a_ajouter[] = array('lang' => $lang, 'fichier' => $fichier_lang);
+				}
+				else {
+					// inutile de regarder ce fichier
+					$langues_a_jour[] = $lang;
+				}
+			}
+
+			$liste_fichiers_lang = array();
+			if ($langues_a_ajouter){
+				salvatore_log('On a ' . count($langues_a_ajouter) . " nouvelle(s) langue(s) à insérer");
+				$liste_fichiers_lang = array_column($langues_a_ajouter, 'fichier');
+			}
+		}
+
+		// traiter les fichiers lang
+		if (count($liste_fichiers_lang)) {
 
 			// on commence par la langue mere
 			$liste_md5_master = array();
 			$modifs_master = salvatore_importer_module_langue($id_module, $source, $fichier_lang_principal, true, $liste_md5_master);
 
 			// et on fait les autres langues
-			$langues_a_jour = array();
 			foreach ($liste_fichiers_lang as $fichier_lang){
 				salvatore_importer_module_langue($id_module, $source, $fichier_lang, false, $liste_md5_master);
 
@@ -138,11 +179,14 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 			 * s'il y a eu au moins une modif et que l'on peut faire la synchro
 			 */
 			if ($modifs_master>0 and $tradlang_verifier_langue_base){
-				$langues_pas_a_jour = sql_allfetsel('lang', 'spip_tradlangs', 'id_tradlang_module = ' . intval($id_module) . ' AND ' . sql_in('lang', $langues_a_jour, 'NOT'), 'lang');
-				$langues_pas_a_jour = array_column($langues_pas_a_jour, 'lang');
-				foreach ($langues_pas_a_jour as $langue_todo){
-					$tradlang_verifier_langue_base($module, $langue_todo);
-					salvatore_log("|-- Synchro de la langue non exportée en fichier $langue_todo pour le module $module");
+				$langues_en_base = sql_allfetsel('DISTINCT lang', 'spip_tradlangs', 'id_tradlang_module = ' . intval($id_module));
+				$langues_en_base = array_column($langues_en_base, 'lang');
+
+				if ($langues_pas_a_jour = array_diff($langues_en_base, $langues_a_jour)) {
+					foreach ($langues_pas_a_jour as $langue_todo){
+						$tradlang_verifier_langue_base($module, $langue_todo);
+						salvatore_log("|-- Synchro de la langue non exportée en fichier $langue_todo pour le module $module");
+					}
 				}
 			}
 
@@ -150,47 +194,12 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 			salvatore_log("|");
 			unset($langues_a_jour, $langues_pas_a_jour);
 		}
-		// Pas de mise a jour recente du fichier maitre deja en base
-		else {
-			salvatore_log("On ne modifie rien : fichier original $fichier_lang_principal inchangé depuis " . date("Y-m-d H:i:s", $last_update));
-			$id_module=intval($row_module['id_tradlang_module']);
 
-			/**
-			 * Le fichier d'origine n'a pas été modifié
-			 * Mais on a peut être de nouvelles langues
-			 */
-			$langues_en_base = sql_allfetsel('DISTINCT lang', 'spip_tradlangs', 'id_tradlang_module = ' . intval($id_module));
-			$langues_en_base = array_column($langues_en_base, 'lang');
-
-			$langues_a_ajouter = array();
-			foreach ($liste_fichiers_lang as $fichier_lang){
-				$lang = salvatore_get_lang_from($module, $fichier_lang);
-				if (!in_array($lang, $langues_en_base)){
-					$langues_a_ajouter[] = array('lang' => $lang, 'fichier' => $fichier_lang);
-				}
-			}
-
-			if ($langues_a_ajouter){
-				salvatore_log('On a ' . count($langues_a_ajouter) . " nouvelle(s) langue(s) à insérer");
-
-				// on commence par la langue mere
-				$liste_md5_master = array();
-				$modifs_master = salvatore_importer_module_langue($id_module, $source, $fichier_lang_principal, true, $liste_md5_master);
-
-				// puis les langues a ajouter
-				foreach ($langues_a_ajouter as $fichier){
-					salvatore_importer_module_langue($id_module, $source, $fichier['fichier'], false, $liste_md5_master);
-					if (($modifs>0) && function_exists('inc_tradlang_verifier_langue_base_dist')){
-						inc_tradlang_verifier_langue_base_dist($source['module'], $lang);
-					}
-				}
-			}
-			salvatore_log("\n");
-		}
 		// Mise à jour des bilans
-		if (function_exists('inc_tradlang_verifier_bilans_dist')){
-			salvatore_log('Création ou MAJ des bilans de ' . $source['module'] . "\n\n");
-			inc_tradlang_verifier_bilans_dist($source['module'], $source['lang'], false);
+		if ($tradlang_verifier_bilans){
+			salvatore_log('Création ou MAJ des bilans de ' . $source['module']);
+			salvatore_log("-");
+			$tradlang_verifier_bilans($module, $source['lang'], false);
 		}
 	}
 
