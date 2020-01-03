@@ -26,8 +26,6 @@
 
 
 include_spip('base/abstract_sql');
-include_spip('inc/tradlang_verifier_langue_base');
-include_spip('inc/tradlang_verifier_bilans');
 include_spip('inc/charsets');
 include_spip('inc/filtres');
 include_spip('inc/texte');
@@ -197,9 +195,9 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 
 		// Mise à jour des bilans
 		if ($tradlang_verifier_bilans){
-			salvatore_log('Création ou MAJ des bilans de ' . $source['module']);
+			salvatore_log("Création ou MAJ des bilans du module #$id_module $module");
+			$tradlang_verifier_bilans($id_module, $source['lang'], false);
 			salvatore_log("-");
-			$tradlang_verifier_bilans($module, $source['lang'], false);
 		}
 	}
 
