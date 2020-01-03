@@ -65,6 +65,17 @@ function salvatore_init($log_function = null){
 			define('_DIR_SALVATORE_DEPOTS', _DIR_SALVATORE . 'depots/');
 		}
 
+		if (defined('_ID_AUTEUR_SALVATORE') and is_numeric(_ID_AUTEUR_SALVATORE)){
+			$GLOBALS['visiteur_session'] = array();
+			$GLOBALS['visiteur_session']['id_auteur'] = _ID_AUTEUR_SALVATORE;
+			// TODO : charger une session complete ?
+		}
+
+		// par defaut on relit les fichiers si modifies depuis moins de 1J
+		if (!defined('_SALVATORE_LECTEUR_REFRESH_DELAY')){
+			define('_SALVATORE_LECTEUR_REFRESH_DELAY', 24 * 3600);
+		}
+
 		if (!isset($GLOBALS['idx_lang'])){
 			$GLOBALS['idx_lang'] = 0;
 		}
@@ -175,6 +186,54 @@ function salvatore_charger_fichier_traductions($fichier_traductions = null){
 	}
 	return $liste_trad;
 }
+
+/**
+ * Extraire la lang d'un fichier de langue d'un module donne
+ * @param string $module
+ * @param string $fichier_lang
+ * @return array|mixed|string|string[]
+ */
+function salvatore_get_lang_from($module, $fichier_lang) {
+	$lang = str_replace($module, '__', basename($fichier_lang, '.php'));
+	$lang = explode('___', $lang, 2);
+	$lang = end($lang);
+
+	return $lang;
+}
+
+/**
+ * Verifier si un module de langue est gere par ce salvatore
+ * @param $dir_module
+ * @param $module
+ * @return string
+ *   l'autre gestionnaire de trad si c'est pas nous
+ *   chaine vide si c'est bien nous qui gerons
+ */
+function salvatore_verifier_gestionnaire_traduction($dir_module, $module) {
+	$xml_file = $dir_module . '/' . $module . '.xml';
+
+	/**
+	 * On teste ici si le fichier est géré par un autre salvatore
+	 * Si oui on empeche son import en le signifiant
+	 */
+	if (file_exists($xml_file)){
+		$xml_content = spip_xml_load($xml_file);
+		if (is_array($xml_content)){
+			spip_xml_match_nodes('/^traduction/', $xml_content, $matches);
+			$nodes = array_keys($matches);
+			$test = '<' . reset($nodes) . '>';
+			$url = extraire_attribut($test, 'url');
+			$gestionnaire = extraire_attribut($test, 'gestionnaire');
+			if ($gestionnaire !== 'salvatore'
+			  or protocole_implicite($url) !== protocole_implicite($GLOBALS['meta']['adresse_site'])) {
+				return "$gestionnaire@$url";
+			}
+		}
+	}
+
+	return '';
+}
+
 
 /**
  * Ajouter les credentials user/pass sur les urls de repo
@@ -289,6 +348,7 @@ function salvatore_log($msg = '', $display_function = null){
  * @throws Exception
  */
 function salvatore_fail($sujet, $corps){
+	$corps = rtrim($corps) . "\n\n";
 	salvatore_envoyer_mail($sujet, $corps);
 	throw new Exception($corps);
 }
