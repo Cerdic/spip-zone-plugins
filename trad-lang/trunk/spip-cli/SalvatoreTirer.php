@@ -60,11 +60,11 @@ class SalvatoreTirer extends Command {
 		include_spip('inc/salvatore');
 		include_spip('inc/salvatore_tireur');
 
-		salvatore_init();
+		salvatore_init(array($output, 'writeln'));
 
-		$output->writeln("=======================================");
-		$output->writeln("TIREUR [Va chercher les fichiers dans un repo SVN|GIT et les depose dans sa copie locale]");
-		$output->writeln("=======================================");
+		$output->writeln("<comment>=======================================</comment>");
+		$output->writeln("<comment>TIREUR [Va chercher les fichiers dans un repo SVN|GIT et les depose dans sa copie locale]</comment>");
+		$output->writeln("<comment>=======================================</comment>");
 
 
 		$traductions = $input->getOption('traductions');

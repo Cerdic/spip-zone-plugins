@@ -28,38 +28,44 @@
 /**
  * initialiser salvatore si besoin
  * peut etre appelle plusieurs fois
+ * @param string|array $log_function
  * @throws Exception
  */
-function salvatore_init(){
+function salvatore_init($log_function = null){
 	static $initialized;
 
-	if (is_null($initialized)) {
+	// set log function if any
+	if ($log_function){
+		salvatore_log('', $log_function);
+	}
+
+	if (is_null($initialized)){
 		@ini_set('memory_limit', '50M');
-		if (!defined('_DEBUG_TRAD_LANG')) {
+		if (!defined('_DEBUG_TRAD_LANG')){
 			define('_DEBUG_TRAD_LANG', 1); // undef si on ne veut pas de messages
 		}
 
-		if (!defined('_DIR_SALVATORE')) {
+		if (!defined('_DIR_SALVATORE')){
 			define('_DIR_SALVATORE', _DIR_RACINE . 'salvatore/');
 		}
 
-		if (!defined('_DIR_SALVATORE_TRADUCTIONS')) {
+		if (!defined('_DIR_SALVATORE_TRADUCTIONS')){
 			define('_DIR_SALVATORE_TRADUCTIONS', _DIR_SALVATORE . 'traductions/');
 		}
 
-		if (!defined('_DIR_SALVATORE_TMP')) {
+		if (!defined('_DIR_SALVATORE_TMP')){
 			define('_DIR_SALVATORE_TMP', _DIR_SALVATORE . 'tmp/');
 		}
 
-		if (!defined('_DIR_SALVATORE_MODULES')) {
+		if (!defined('_DIR_SALVATORE_MODULES')){
 			define('_DIR_SALVATORE_MODULES', _DIR_SALVATORE . 'modules/');
 		}
 
-		if (!defined('_DIR_SALVATORE_DEPOTS')) {
+		if (!defined('_DIR_SALVATORE_DEPOTS')){
 			define('_DIR_SALVATORE_DEPOTS', _DIR_SALVATORE . 'depots/');
 		}
 
-		if (!isset($GLOBALS['idx_lang'])) {
+		if (!isset($GLOBALS['idx_lang'])){
 			$GLOBALS['idx_lang'] = 0;
 		}
 
@@ -83,7 +89,7 @@ function salvatore_init(){
 function salvatore_charger_fichier_traductions($fichier_traductions = null){
 
 	salvatore_init();
-	if (is_null($fichier_traductions)) {
+	if (is_null($fichier_traductions)){
 		$fichier_traductions = _DIR_SALVATORE_TRADUCTIONS . 'traductions.txt';
 	}
 	salvatore_check_file($fichier_traductions);
@@ -94,27 +100,25 @@ function salvatore_charger_fichier_traductions($fichier_traductions = null){
 
 	$liste_trad = array();
 	foreach ($lignes as $ligne){
-		if ($ligne[0] !== '#') {
+		if ($ligne[0]!=='#'){
 			$liste = explode(';', trim($ligne));
 			$methode = $url = $branche = $dir = $module = $lang = '';
 
 			// deprecated ancien format, forcement en svn
 			// liste courte de type
 			// url;module;lang
-			if (count($liste)<=3) {
+			if (count($liste)<=3){
 				$methode = 'svn';
 				$branche = '';
 				$url = $liste[0];
-				if (empty($liste[1])) {
+				if (empty($liste[1])){
 					$module = preg_replace('#.*/(.*)$#', '$1', $url);
-				}
-				else {
+				} else {
 					$module = $liste[1];
 				}
-				if (empty($liste[2])) {
+				if (empty($liste[2])){
 					$lang = 'fr';
-				}
-				else {
+				} else {
 					$lang = $liste[2];
 				}
 			}
@@ -123,7 +127,7 @@ function salvatore_charger_fichier_traductions($fichier_traductions = null){
 			// svn;url;;;module;lang
 			// git;url;master;subdir/tolang;module;lang
 			else {
-				list($methode,$url,$branche,$dir,$module,$lang) = $liste;
+				list($methode, $url, $branche, $dir, $module, $lang) = $liste;
 			}
 			$methode = trim($methode);
 			$url = trim($url);
@@ -135,23 +139,23 @@ function salvatore_charger_fichier_traductions($fichier_traductions = null){
 			$lang = trim($lang);
 
 			if ($methode
-			  and $url
-			  and $module
-			  and $lang) {
+				and $url
+				and $module
+				and $lang){
 				// que fait la $GLOBALS['modules'] ?
 				if (empty($GLOBALS['modules']) or in_array($module, $GLOBALS['modules'])){
 					// definir un dir checkout unique meme si plusieurs modules de meme nom dans differents repos
 					$d = explode('/', $url);
-					while (count($d) and in_array(end($d), ['', 'lang', 'trunk', 'ecrire'])) {
+					while (count($d) and in_array(end($d), ['', 'lang', 'trunk', 'ecrire'])){
 						array_pop($d);
 					}
 					$source = '';
-					if (end($d)) {
+					if (end($d)){
 						$source = basename(end($d), '.git');
-						$source = '--' . preg_replace(',[^\w-],','_', $source);
+						$source = '--' . preg_replace(',[^\w-],', '_', $source);
 					}
-					$dir_module = "{$module}{$source}-" . substr(md5("$methode:$url:$branche"),0,5);
-					$dir_checkout = preg_replace(",\W+,","-","$methode-$url") . ($branche ? "--$branche-" : "-") . substr(md5("$methode:$url:$branche"),0,5);
+					$dir_module = "{$module}{$source}-" . substr(md5("$methode:$url:$branche"), 0, 5);
+					$dir_checkout = preg_replace(",\W+,", "-", "$methode-$url") . ($branche ? "--$branche-" : "-") . substr(md5("$methode:$url:$branche"), 0, 5);
 
 					$liste_trad[] = [
 						'methode' => $methode,
@@ -164,8 +168,7 @@ function salvatore_charger_fichier_traductions($fichier_traductions = null){
 						'dir_checkout' => $dir_checkout,
 					];
 				}
-			}
-			else {
+			} else {
 				salvatore_log("Fichier $fichier_traductions, IGNORE ligne incomplete : $ligne");
 			}
 		}
@@ -180,23 +183,22 @@ function salvatore_charger_fichier_traductions($fichier_traductions = null){
  * @param string $module
  * @return string
  */
-function salvatore_set_credentials($methode, $url_repository, $module) {
+function salvatore_set_credentials($methode, $url_repository, $module){
 	global $domaines_exceptions, $domaines_exceptions_credentials,
 	       $SVNUSER, $SVNPASSWD,
-	       $GITUSER, $GITPASSWD
-	       ;
+	       $GITUSER, $GITPASSWD;
 
 	// on ne sait pas mettre des credentials si c'est du ssh
-	if (strpos($url_repository, '://') !== false) {
+	if (strpos($url_repository, '://')!==false){
 		$user = $pass = false;
 		$parts = parse_url($url_repository);
-		if (empty($parts['user']) and empty($parts['pass'])) {
+		if (empty($parts['user']) and empty($parts['pass'])){
 			$host = $parts['host'];
 			require_once(_DIR_ETC . 'salvatore_passwd.inc');
 
 			if (!empty($domaines_exceptions)
 				and is_array($domaines_exceptions)
-			  and in_array($host, $domaines_exceptions)) {
+				and in_array($host, $domaines_exceptions)){
 				// on est dans une exception
 
 				/**
@@ -208,25 +210,22 @@ function salvatore_set_credentials($methode, $url_repository, $module) {
 					$pass = $domaines_exceptions_credentials[$host]['pass'];
 				}
 
-			}
-			else {
+			} else {
 				// un truc perso pour un module en particulier ?
 				if (isset(${$module . '_user'})){
 					$user = ${$module . '_user'};
 					$pass = ${$module . '_passwd'};
-				}
-				elseif ($methode === 'svn' and isset($SVNUSER)) {
+				} elseif ($methode==='svn' and isset($SVNUSER)) {
 					$user = $SVNUSER;
 					$pass = $SVNPASSWD;
-				}
-				elseif ($methode === 'git' and isset($GITUSER)) {
+				} elseif ($methode==='git' and isset($GITUSER)) {
 					$user = $GITUSER;
 					$pass = $GITPASSWD;
 				}
 			}
 
-			if ($user and $pass) {
-				$url_repository = str_replace("://$host", "://".urlencode($user).":".urlencode($pass)."@$host", $url_repository);
+			if ($user and $pass){
+				$url_repository = str_replace("://$host", "://" . urlencode($user) . ":" . urlencode($pass) . "@$host", $url_repository);
 			}
 		}
 
@@ -241,7 +240,7 @@ function salvatore_set_credentials($methode, $url_repository, $module) {
  * @param $dir
  * @throws Exception
  */
-function salvatore_check_dir($dir) {
+function salvatore_check_dir($dir){
 	if (!is_dir($dir)){
 		throw new Exception("Erreur : le répertoire $dir n'existe pas");
 	}
@@ -252,7 +251,7 @@ function salvatore_check_dir($dir) {
  * @param $file
  * @throws Exception
  */
-function salvatore_check_file($file) {
+function salvatore_check_file($file){
 	if (!file_exists($file)){
 		throw new Exception("Erreur : Le fichier $file est introuvable");
 	}
@@ -261,16 +260,25 @@ function salvatore_check_file($file) {
 /**
  * Loger
  * @param string $msg
+ * @param string|array $display_function
  */
-function salvatore_log($msg = ''){
-	static $cnt;
-	if (defined('_DEBUG_TRAD_LANG')){
-		echo rtrim($msg) . "\n";
-		$cnt++;
+function salvatore_log($msg = '', $display_function = null){
+	static $function = null;
+
+	if ($display_function and is_callable($display_function)){
+		$function = $display_function;
 	}
-	if ($cnt>10){
-		$cnt = 0;
-		flush();
+
+	if (defined('_DEBUG_TRAD_LANG')
+		and _DEBUG_TRAD_LANG
+		and $msg){
+		if ($function){
+			call_user_func($function, rtrim($msg));
+		} else {
+			// fallback : utiliser echo mais enlever les balises de formatage symphony
+			$msg = str_replace(["<info>", "</info>", "<error>", "</error>", "<comment>", "</comment>", "<question>", "</question>", "</>"], "", $msg);
+			echo rtrim($msg) . "\n";
+		}
 	}
 }
 
@@ -280,7 +288,7 @@ function salvatore_log($msg = ''){
  * @param $corps
  * @throws Exception
  */
-function salvatore_fail($sujet, $corps) {
+function salvatore_fail($sujet, $corps){
 	salvatore_envoyer_mail($sujet, $corps);
 	throw new Exception($corps);
 }

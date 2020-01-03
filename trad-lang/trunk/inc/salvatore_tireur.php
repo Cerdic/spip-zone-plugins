@@ -47,7 +47,7 @@ function salvatore_tirer($liste_sources, $dir_modules=null, $dir_depots=null) {
 	$done = array();
 
 	foreach ($liste_sources as $source){
-		salvatore_log("\n--- Module " . $source['module'] . " | " . $source['dir_module'] . " | " . $source['url']);
+		salvatore_log("\n<info>--- Module " . $source['module'] . " | " . $source['dir_module'] . " | " . $source['url']."</info>");
 
 		$url_with_credentials = salvatore_set_credentials($source['methode'], $source['url'], $source['module']);
 
