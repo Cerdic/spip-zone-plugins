@@ -1,10 +1,10 @@
 <paquet
-	prefix="spout"
+	prefix="spout_spipcsv"
 	categorie="outil"
-	version="1.2.0"
+	version="1.0.0"
 	etat="stable"
 	compatibilite="[3.1.8;3.3.*]"
-	logo="img_pack/spout-48.png"
+	logo="img_pack/spout_spipcsv-48.png"
 	documentation="https://contrib.spip.net/5223"
 >
 	<nom>Spout</nom>
@@ -13,4 +13,6 @@
 	<copyright>2019</copyright>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 	
+	<necessite nom="spout" compatibilite="[1.2.0;[" />
+	<utilise nom="spip_bonux" compatibilite="[3.2.0;[" />
 </paquet>
