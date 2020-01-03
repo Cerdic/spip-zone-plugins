@@ -14,6 +14,7 @@
  * @return mixed
  */
 function autoriser_travaux_dist($faire, $type, $id, $qui, $opt){
+	include_spip('inc/config');
 	$statut = lire_config('entravaux/autoriser_travaux');
 	if (!$statut) {
 		$statut = 'webmestre';
