@@ -6,11 +6,25 @@
  * @copyright  2019
  * @author     Vincent CALLIES
  * @licence    GNU/GPL
- * @package    SPIP\Pensebete\Pipelines
+ * @package    SPIP\Pensebetes\Pipelines
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
+}
+
+
+/**
+ * Ajout de la feuille de style de Pensebetes,
+ *
+ * @pipeline header_prive
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+
+function pensebetes_header_prive($flux){
+	$flux .= '<link rel="stylesheet" href="' . _DIR_PLUGIN_PENSEBETES  .'prive/themes/spip/style_prive_pensebetes.css" type="text/css" media="all" />';
+	return $flux;
 }
 
 /**
