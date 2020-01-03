@@ -5,7 +5,7 @@
 	<h2 class="h2"><:spipr_dane:publie_le:></h2>
 	<p class="center">
 		<time datetime="[(#DATE|date_iso)]" ><i class="icon-calendar"></i> [(#DATE|nom_jour) ][(#DATE|affdate)]</time>
-		[<small>(<:spipr_dane:modifie_le:> (#DATE_MODIF|affdate))</small>]
+		[(#DATE_MODIF|affdate|!=={[(#DATE|affdate)]}|?{[<small>(<:spipr_dane:modifie_le:> (#DATE_MODIF|affdate))</small>]})] 
 	</p>
 	[<h2 class="h2"><:spipr_dane:auteurs:></h2>
 	<p class="authors center">(#LESAUTEURS)</p>]
