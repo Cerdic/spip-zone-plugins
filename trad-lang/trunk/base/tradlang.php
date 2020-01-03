@@ -39,6 +39,7 @@ function tradlang_declarer_tables_objets_sql($tables) {
 			"nom_mod" => "text DEFAULT '' NOT NULL",
 			"lang_mere" => "varchar(16) NOT NULL default 'fr'",
 			"type_export" => "varchar(16) NOT NULL default 'spip'",
+			"dir_module" => "varchar(255) NOT NULL",
 			"dir_lang" => "varchar(255) NOT NULL",
 			"texte" => "longtext DEFAULT '' NOT NULL",
 			"priorite" => "varchar(128) NOT NULL",
@@ -48,7 +49,8 @@ function tradlang_declarer_tables_objets_sql($tables) {
 		),
 		'key' => array(
 			'PRIMARY KEY' => 'id_tradlang_module',
-			'UNIQUE' => 'module'
+			'UNIQUE dir_module' => 'dir_module',
+			'KEY module' => 'module'
 		),
 		'join' => array(
 			'id_tradlang_module' => 'id_tradlang_module',

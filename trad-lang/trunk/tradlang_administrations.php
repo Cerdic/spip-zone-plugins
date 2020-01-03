@@ -89,6 +89,20 @@ function tradlang_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.5.2'] = array(
 		array('maj_tables',array('spip_tradlang_modules'))
 	);
+
+	// changement de cle unique sur spip_tradlang_modules
+	$maj['1.0.0'] = array(
+		array('sql_alter','TABLE spip_tradlang_modules DROP INDEX module'),
+		// ajouter le champ dir_module
+		array('sql_alter','TABLE spip_tradlang_modules ADD dir_module varchar(255) NOT NULL DEFAULT \'\''),
+		// on preremplit avec module pour avoir l'unicite
+		array('sql_update','spip_tradlang_modules',array('dir_module' => 'module'), "dir_module=''"),
+		// ajout de l'index unique sur dir_module
+		array('sql_alter','TABLE spip_tradlang_modules ADD UNIQUE INDEX dir_module (dir_module)'),
+		// et on remet un index module simple
+		array('sql_alter','TABLE spip_tradlang_modules ADD INDEX module (module)'),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

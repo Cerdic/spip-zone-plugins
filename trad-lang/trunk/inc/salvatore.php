@@ -392,8 +392,8 @@ function salvatore_verifier_base_upgradee() {
 		throw new Exception("Pas de champ dir_module dans la base spip_tradlang_modules. Lancez la commande \nspip salvatore:upgrade --help");
 	}
 
-	// est-ce que tous les modules en base on bien eu un dir_module affecte
-	$nb = sql_countsel('spip_tradlang_modules', "dir_module=''");
+	// est-ce que tous les modules en base on bien eu un dir_module affecte (et ni vide ni =module qui est la valeur par defaut lors de l'upgrade de base)
+	$nb = sql_countsel('spip_tradlang_modules', "dir_module='' OR dir_module=module");
 	if ($nb>0) {
 		throw new Exception("Le champ dir_module de spip_tradlang_modules n'est pas renseigne pour tous les modules. Lancez la commande \nspip salvatore:upgrade --help");
 	}

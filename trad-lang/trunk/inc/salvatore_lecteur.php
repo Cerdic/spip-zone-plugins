@@ -80,8 +80,8 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 		 * On regarde quelle est la date de dernière modification du fichier de langue principale
 		 */
 		$last_update = filemtime($fichier_lang_principal);
-		// TODO : utiliser $source['dir_module'] et pas $source['module']
-		$row_module = sql_fetsel('id_tradlang_module, lang_mere', 'spip_tradlang_modules', 'module = ' . sql_quote($source['module']));
+
+		$row_module = sql_fetsel('id_tradlang_module, lang_mere', 'spip_tradlang_modules', 'dir_module = ' . sql_quote($source['dir_module']));
 		$langues_a_jour = array();
 
 		if (!$row_module or $last_update>$refresh_time){
@@ -97,6 +97,7 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 			if (!$row_module or !$id_module = intval($row_module['id_tradlang_module'])){
 				$insert = [
 					'module' => $source['module'],
+					'dir_module' => $source['dir_module'],
 					'nom_mod' => $source['module'],
 					'lang_prefix' => $source['module'],
 					'lang_mere' => $source['lang'],
