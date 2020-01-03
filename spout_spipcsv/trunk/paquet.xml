@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.1.8;3.3.*]"
 	logo="img_pack/spout_spipcsv-48.png"
-	documentation="https://contrib.spip.net/5223"
+	documentation="https://contrib.spip.net/5230"
 >
 	<nom>Spout</nom>
 	<!-- Une lib pour lire et écrire des XLSX, ODS et CSV -->
