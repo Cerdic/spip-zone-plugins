@@ -30,24 +30,29 @@
  * @return bool
  * @throws Exception
  */
-function salvatore_tirer($liste_sources, $tmp=null) {
+function salvatore_tirer($liste_sources, $dir_modules=null, $dir_depots=null) {
 	include_spip('inc/salvatore');
 	salvatore_init();
 
-	if (is_null($tmp)) {
-		$tmp = _DIR_SALVATORE_TMP;
+	if (is_null($dir_modules)) {
+		$dir_modules = _DIR_SALVATORE_MODULES;
 	}
+	salvatore_check_dir($dir_modules);
 
-	salvatore_check_dir($tmp);
+	if (is_null($dir_depots)) {
+		$dir_depots = _DIR_SALVATORE_DEPOTS;
+	}
+	salvatore_check_dir($dir_depots);
+
 	$done = array();
 
 	foreach ($liste_sources as $source){
-		salvatore_log("\n--- Module " . $source['module'] . " | " . $source['url']);
+		salvatore_log("\n--- Module " . $source['module'] . " | " . $source['dir_module'] . " | " . $source['url']);
 
 		$url_with_credentials = salvatore_set_credentials($source['methode'], $source['url'], $source['module']);
 
-		$dir_checkout = $tmp . $source['dir_checkout'];
-		$dir_module = $tmp . $source['dir_module'];
+		$dir_checkout = $dir_depots . $source['dir_checkout'];
+		$dir_module = $dir_modules . $source['dir_module'];
 		$dir_target = $dir_checkout;
 		if ($source['dir']) {
 			$dir_target .= "/" . $source['dir'];

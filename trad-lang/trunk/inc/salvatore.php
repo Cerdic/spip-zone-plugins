@@ -43,12 +43,20 @@ function salvatore_init(){
 			define('_DIR_SALVATORE', _DIR_RACINE . 'salvatore/');
 		}
 
-		if (!defined('_DIR_SALVATORE_TRADUCTION')) {
-			define('_DIR_SALVATORE_TRADUCTION', _DIR_SALVATORE . 'traductions/');
+		if (!defined('_DIR_SALVATORE_TRADUCTIONS')) {
+			define('_DIR_SALVATORE_TRADUCTIONS', _DIR_SALVATORE . 'traductions/');
 		}
 
 		if (!defined('_DIR_SALVATORE_TMP')) {
 			define('_DIR_SALVATORE_TMP', _DIR_SALVATORE . 'tmp/');
+		}
+
+		if (!defined('_DIR_SALVATORE_MODULES')) {
+			define('_DIR_SALVATORE_MODULES', _DIR_SALVATORE . 'modules/');
+		}
+
+		if (!defined('_DIR_SALVATORE_DEPOTS')) {
+			define('_DIR_SALVATORE_DEPOTS', _DIR_SALVATORE . 'depots/');
 		}
 
 		if (!isset($GLOBALS['idx_lang'])) {
@@ -56,7 +64,7 @@ function salvatore_init(){
 		}
 
 		// verifications des repertoires
-		foreach ([_DIR_SALVATORE, _DIR_SALVATORE_TRADUCTION, _DIR_SALVATORE_TMP] as $dir){
+		foreach ([_DIR_SALVATORE, _DIR_SALVATORE_TRADUCTIONS, _DIR_SALVATORE_MODULES, _DIR_SALVATORE_DEPOTS, _DIR_SALVATORE_TMP] as $dir){
 			salvatore_check_dir($dir);
 		}
 		$initialized = true;
@@ -76,7 +84,7 @@ function salvatore_charger_fichier_traductions($fichier_traductions = null){
 
 	salvatore_init();
 	if (is_null($fichier_traductions)) {
-		$fichier_traductions = _DIR_SALVATORE_TRADUCTION . 'traductions.txt';
+		$fichier_traductions = _DIR_SALVATORE_TRADUCTIONS . 'traductions.txt';
 	}
 	salvatore_check_file($fichier_traductions);
 
@@ -139,10 +147,11 @@ function salvatore_charger_fichier_traductions($fichier_traductions = null){
 					}
 					$source = '';
 					if (end($d)) {
-						$source = '--' . preg_replace(',[^\w-],','_', end($d));
+						$source = basename(end($d), '.git');
+						$source = '--' . preg_replace(',[^\w-],','_', $source);
 					}
 					$dir_module = "{$module}{$source}-" . substr(md5("$methode:$url:$branche"),0,5);
-					$dir_checkout = "." . preg_replace(",\W+,","-","$methode-$url--$branche") . '-' . substr(md5("$methode:$url:$branche"),0,5);
+					$dir_checkout = preg_replace(",\W+,","-","$methode-$url") . ($branche ? "--$branche-" : "-") . substr(md5("$methode:$url:$branche"),0,5);
 
 					$liste_trad[] = [
 						'methode' => $methode,
