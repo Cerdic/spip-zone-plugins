@@ -2,8 +2,13 @@
 
 ##Les outils fournis :
 
-* ```tireur.php``` :
-	va chercher les fichiers de langue (décrits dans traduction.txt) et les dépose dans sa copie locale
+Salvatore s'utilise via des fonctions spip-cli.
+
+* ```spip salvatore:tirer``` :
+	va chercher et met à jour les repositories et link les sous-repertoires contenant les modules de langue décrits dans le fichier traductions
+	Les depots sont checkout/update dans salvatore/depots/, 
+	et leurs repertoires contenant les modules de langue sont ciblés par des liens symboliques placés dans modules/
+	On peut avoir plusieurs fois le même module extrait de plusieurs repositories differents ou de plusieurs repertoires du meme repository 
 * ```lecteur.php``` :
 	prend les fichiers de référence dans sa copie locale (des SVN), et met à jour la base de données (Voir le plugin tradlang)
 * ```ecriveur.php``` :
@@ -16,15 +21,16 @@
 ##Installation et fonctionnement de tradlang
 
 Ces scripts nécessitent pour fonctionner : 
-1. SPIP v3.0.x
-2. Trad-lang v2.0.x
-3. copier le répertoire à la racine du site ayant le plugin tradlang
-4. créer manuellement le répertoire ```tmp/``` dans le répertoire des scripts, ce répertoire sert à stocker les copies locales des fichiers
-5. créer manuellement le répertoire ```traductions/``` dans le répertoire des scripts et y placer un fichier traductions.txt comportant les descriptions des modules à importer [comme cet exemple](http://zone.spip.org/trac/spip-zone/browser/traductions.txt)
-6. Pour récupérer ce fichier par svn, et uniquement celui-ci, se placer dans le répertoire des scripts et lancer : ```svn co svn://zone.spip.org/spip-zone/ traductions --depth empty```
+1. SPIP v3.2.x
+2. Trad-lang v3.0.x
+3. créer le repertoire `salvatore/` a la racine du site avec les sous-dossiers `depots/` `modules/` et `tmp/`
+4. créer également le sous-répertoire ```salvatore/traductions/``` dans le répertoire des scripts 
+et y placer un ou des fichiers traductions.txt comportant les descriptions des modules à importer [comme cet exemple](http://zone.spip.org/trac/spip-zone/browser/traductions.txt)
+<br/>Pour récupérer ce fichier par svn, et uniquement celui-ci, se placer dans le répertoire `salvatore/` et lancer : ```svn co svn://zone.spip.org/spip-zone/ traductions --depth empty```
 	1. Cette commande ne crée qu'un répertoire SVN vide, puis lancer cette commande ```cd traductions && svn up traductions.txt```
 	2. Cette dernière commande ne récupère que le fichier traductions.txt
-7. récupérer les fichiers de langue indiqués dans le fichier traductions.txt, dans le répertoire des scripts lancer : ```php tireur.php```
+5. récupérer les fichiers de langue indiqués dans le fichier traductions.txt, dans le répertoire des scripts lancer : ```spip salvatore:tirer```
+
 8. import dans la base des modules de langue et de leur contenu, dans le répertoire des scripts, lancer : ```php lecteur.php```
 9. exporter le contenu de la base de donnée, dans le répertoire des scripts, lancer : ```php ecriveur.php```
 10. envoyer les modifications sur le SVN, pour ceci, vous devez pouvoir écrire sur le serveur SVN.

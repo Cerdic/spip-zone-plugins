@@ -42,12 +42,12 @@ class SalvatoreTirer extends Command {
 	protected function configure(){
 		$this
 			->setName('salvatore:tirer')
-			->setDescription('Indexer un objet en particulier')
+			->setDescription('Va chercher et met à jour les repositories et link les sous-repertoires contenant les modules de langue décrits dans le fichier traductions')
 			->addOption(
 				'traductions',
 				null,
 				InputOption::VALUE_REQUIRED,
-				'Chemin vers le fichier traductions.txt a utiliser',
+				'Chemin vers le fichier traductions.txt a utiliser [salvatore/traductions/traductions.txt]',
 				null
 			)
 		;
