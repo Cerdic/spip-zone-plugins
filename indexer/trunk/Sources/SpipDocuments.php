@@ -355,16 +355,22 @@ class SpipDocuments implements SourceInterface {
 			$doc->properties['date_redac'] = $contenu['date_redac'];
 			$doc->properties['annee_redac'] = substr($contenu['date_redac'],0,4);
 			$doc->properties['date'] = $contenu['date'];
-			return;
 		}
-
 		// Sinon on utilise la date de publication déclarée par l'API, ou 'date'
-		if ($champ_date = objet_info($this->objet, 'date')) {
+		else if ($champ_date = objet_info($this->objet, 'date')) {
 			$doc->date = $contenu[$champ_date];
-		} elseif (isset($contenu['date'])) {
+		}
+		// Sinon le champ "date" en dur s'il existe
+		else if (isset($contenu['date'])) {
 			$doc->date = $contenu['date'];
-		} else {
-			$doc->date = '0000-00-00 00:00:00';
+		}
+		// Sinon le champ "maj" en dur s'il existe
+		else if (isset($contenu['maj'])) {
+			$doc->date = $contenu['maj'];
+		}
+		// Sinon la date du jour, et il FAUT une date car "0000…" n'existe pas dans Sphinx
+		else {
+			$doc->date = date('Y-m-d H:i:s');
 		}
 	}
 
