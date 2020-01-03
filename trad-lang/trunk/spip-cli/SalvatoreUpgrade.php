@@ -47,7 +47,7 @@ class SalvatoreUpgrade extends Command {
 				'traductions',
 				null,
 				InputOption::VALUE_REQUIRED,
-				'Chemin vers le fichier traductions.txt a utiliser [salvatore/traductions/traductions.txt] pour mettre a jour les modules en base lors de l\'upgrade',
+				"Chemin vers le fichier traductions.txt a utiliser [salvatore/traductions/traductions.txt] pour mettre a jour les modules en base lors de l'upgrade\nIndiquez la valeur 'force' pour forcer la fin de la mise a jour meme si des modules restent non upgrades",
 				null
 			)
 		;
@@ -76,27 +76,37 @@ class SalvatoreUpgrade extends Command {
 		tradlang_upgrade('tradlang_base_version', $schema_declare);
 		$output->writeln("-");
 
-		$traductions = $input->getOption('traductions');
-		$liste_trad = salvatore_charger_fichier_traductions($traductions);
-		$n = count($liste_trad);
-		$output->writeln("<info>$n modules dans le fichier traductions " . ($traductions ? $traductions : '') . "</info>");
-
 		$modules_todo = sql_allfetsel('distinct module','spip_tradlang_modules', "dir_module='' OR dir_module=module");
 		$modules_todo = array_column($modules_todo, 'module');
 		$n = count($modules_todo);
 		$output->writeln("$n modules en base sans dir_module");
 
-		foreach ($liste_trad as $traduction) {
-			if (in_array($traduction['module'], $modules_todo)) {
-				sql_updateq('spip_tradlang_modules', array('dir_module' => $traduction['dir_module']), "module=".sql_quote($traduction['module'])." AND (dir_module='' OR dir_module=module)");
-				$output->writeln("  Module " . $traduction['module'] . " -> " . $traduction['dir_module']);
+		$traductions = $input->getOption('traductions');
+		if ($traductions === 'force') {
+			if ($n > 0) {
+				$output->writeln("<info>Forcer un dir_module arbitraire pour les modules restant :</info>");
+				$output->writeln(implode(', ', $modules_todo));
+				sql_update('spip_tradlang_modules', array('dir_module' => "CONCAT('--',module)"), "dir_module='' OR dir_module=module");
 			}
 		}
+		else {
+			$liste_trad = salvatore_charger_fichier_traductions($traductions);
+			$n = count($liste_trad);
+			$output->writeln("<info>$n modules dans le fichier traductions " . ($traductions ? $traductions : '') . "</info>");
+
+			foreach ($liste_trad as $traduction) {
+				if (in_array($traduction['module'], $modules_todo)) {
+					sql_updateq('spip_tradlang_modules', array('dir_module' => $traduction['dir_module']), "module=".sql_quote($traduction['module'])." AND (dir_module='' OR dir_module=module)");
+					$output->writeln("  Module " . $traduction['module'] . " -> " . $traduction['dir_module']);
+				}
+			}
+		}
+
 
 		$modules_todo = sql_allfetsel('distinct module','spip_tradlang_modules', "dir_module='' OR dir_module=module");
 		$modules_todo = array_column($modules_todo, 'module');
 		if ($n = count($modules_todo)) {
-			throw new Exception("Encore $n modules en base sans dir_module : \n" . implode(',', $modules_todo)."\n\nEssayez avec un fichier traductions complementaire");
+			throw new Exception("Encore $n modules en base sans dir_module : \n" . implode(', ', $modules_todo)."\n\nEssayez avec un fichier traductions complementaire");
 		}
 
 

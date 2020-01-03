@@ -95,6 +95,7 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 			 * Si le module n'existe pas... on le crée
 			 */
 			if (!$row_module or !$id_module = intval($row_module['id_tradlang_module'])){
+				// TODO : c'est peut-etre juste un repo qui a change d'adresse ?
 				$insert = [
 					'module' => $source['module'],
 					'dir_module' => $source['dir_module'],
