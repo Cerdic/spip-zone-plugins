@@ -42,7 +42,8 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 	include_spip('inc/salvatore');
 	salvatore_init();
 
-	throw new Exception("On est encore en travaux");
+	// on va modifier a la base, il faut qu'elle soit a jour
+	salvatore_verifier_base_upgradee();
 
 	if (is_null($dir_modules)){
 		$dir_modules = _DIR_SALVATORE_MODULES;

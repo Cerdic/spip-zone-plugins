@@ -367,3 +367,35 @@ function salvatore_envoyer_mail($sujet = 'Erreur', $corps = ''){
 		salvatore_log("Un email a été envoyé à l'adresse : " . _EMAIL_ERREURS . "\n");
 	}
 }
+
+
+/**
+ * Verifier que la base de salvatore a bien ete mise a jour
+ * pour ajouter le dir_module qui est la cle unique a la place de module
+ * lancer
+ * spip salvatore:upgrade --traductions=...
+ * avec le bon fichier de traduction pour mettre à jour la base de salvatore avant de pouvoir lancer a nouveau le lecteur ou l'ecriveur
+ */
+function salvatore_verifier_base_upgradee() {
+
+	$schema_declare = filtre_info_plugin_dist('tradlang', 'schema');
+	$schema_base = $GLOBALS['meta']['tradlang_base_version'];
+	if ($schema_base !== $schema_declare) {
+		throw new Exception("Schema de base pas a jour ($schema_base vs $schema_declare). Lancez la commande \nspip salvatore:upgrade --help");
+	}
+
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$desc = $trouver_table('spip_tradlang_modules');
+
+	// est-ce que le champ a ete cree ?
+	if (!isset($desc['field']['dir_module'])) {
+		throw new Exception("Pas de champ dir_module dans la base spip_tradlang_modules. Lancez la commande \nspip salvatore:upgrade --help");
+	}
+
+	// est-ce que tous les modules en base on bien eu un dir_module affecte
+	$nb = sql_countsel('spip_tradlang_modules', "dir_module=''");
+	if ($nb>0) {
+		throw new Exception("Le champ dir_module de spip_tradlang_modules n'est pas renseigne pour tous les modules. Lancez la commande \nspip salvatore:upgrade --help");
+	}
+
+}
