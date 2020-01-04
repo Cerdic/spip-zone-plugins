@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plugin_nom' => 'Nom du plugin',
 
 	// T
-	'titre_verifier_plugins' => 'Vérifier la compatibilité des plugins avec un autre version de SPIP',
+	'titre_verifier_plugins' => 'Vérifier la compatibilité des plugins avec une autre version de SPIP',
 	'titre_verifier_plugins_version' => 'Vérifier la compatibilité des plugins avec SPIP @version@',
 
 	// V
