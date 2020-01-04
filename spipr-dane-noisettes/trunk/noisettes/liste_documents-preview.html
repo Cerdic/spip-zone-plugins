@@ -1,0 +1,10 @@
+<div><strong>[(#ENV*{titre}) ]<i class="fa fa-#ENV{picto}"></i></strong></div>
+<ul class="small">
+	<li>
+		Affiche 
+		[(#ENV{filtrer_docs}|non)tous les documents]
+		[(#ENV{filtrer_docs}|=={afficher_docs}|oui)les documents N° #ENV{docs_choisis}]
+		[(#ENV{filtrer_docs}|=={afficher_docs_articles}|oui)les documents de l'article N° [(#ENV{articles_choisis}|picker_selected{article}|table_valeur{0})]]
+		[(#ENV{filtrer_docs}|=={afficher_docs_rubriques}|oui)les documents de la rubrique N° [(#ENV{rubriques_choisies}|picker_selected{rubrique}|table_valeur{0})]].
+	</li>
+</ul>

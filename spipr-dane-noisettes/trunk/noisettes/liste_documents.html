@@ -1,0 +1,15 @@
+[(#REM) Liste de documents ]
+[(#REM) ** On affecte les id en fonction du filtre **
+#SET{vu,#ENV{vu}|?{oui}}
+][(#ENV{filtrer_docs}|match{^afficher}|?{
+	#SET{objet, ''}
+	#SET{id_objet, ''}
+	#SET{id_article, ''}
+	#SET{id_rubrique, ''}
+	[(#ENV{filtrer_docs}|=={afficher_docs}|oui) #SET{id_document, -1} #SET{docs_choisis, #ENV{docs_choisis}|explode{','}} 
+	][(#ENV{filtrer_docs}|=={afficher_docs_articles}|oui) #SET{id_article, #ENV{articles_choisis}|picker_selected{article}|table_valeur{0}} 
+	][(#ENV{filtrer_docs}|=={afficher_docs_rubriques}|oui) #SET{id_rubrique, #ENV{rubriques_choisies}|picker_selected{rubrique}|table_valeur{0}} 
+	]
+})]
+
+<INCLURE{fond=inclure/documents,id_document=#GET{id_document},id_article=#GET{id_article},id_rubrique=#GET{id_rubrique}, quoi=documents, vu=#GET{vu}, docs_choisis=#GET{docs_choisis}, env}/>
