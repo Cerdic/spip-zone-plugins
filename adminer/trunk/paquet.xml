@@ -1,9 +1,9 @@
 <paquet
 	prefix="adminer"
 	categorie="outil"
-	version="4.7.5.0"
+	version="4.7.5.1"
 	etat="stable"
-	compatibilite="[2.0.0;3.2.*]"
+	compatibilite="[2.0.0;3.3.*]"
 	logo="adminer-64.png"
 	documentation="https://contrib.spip.net/Adminer"
 >
