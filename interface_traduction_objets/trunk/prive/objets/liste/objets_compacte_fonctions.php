@@ -3,7 +3,7 @@
  * Fonctions pour le plugin
  *
  * @plugin     Interface de traduction pour objets
- * @copyright  2019
+ * @copyright  2019 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Interface_traduction_objets\Pipelines

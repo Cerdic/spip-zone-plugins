@@ -1,9 +1,9 @@
 <paquet
 	prefix="interface_traduction_objets"
 	categorie="edition"
-	version="1.1.7"
+	version="1.1.8"
 	etat="test"
-	compatibilite="[3.0.0;3.2.*]"
+	compatibilite="[3.0.0;3.3.*]"
 	logo="prive/themes/spip/images/interface_traduction_objets-64.png"
 	documentation="https://contrib.spip.net/Interface-de-traduction-pour-objets"
 >
