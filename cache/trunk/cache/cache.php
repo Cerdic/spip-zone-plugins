@@ -12,7 +12,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-
 // -----------------------------------------------------------------------
 // ---------------------- SERVICES SURCHARGEABLES ------------------------
 // -----------------------------------------------------------------------
@@ -27,11 +26,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @uses ecrire_config()
  *
  * @param string $plugin
- *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
- *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ *                       Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *                       un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  *
  * @return array
- *        Tableau de la configuration complétée des caches d'un plugin venant d'être enregistrée.
+ *               Tableau de la configuration complétée des caches d'un plugin venant d'être enregistrée.
  */
 function cache_cache_configurer($plugin) {
 
@@ -64,26 +63,32 @@ function cache_cache_configurer($plugin) {
 	// La durée est exprimée en secondes.
 	$configuration['conservation'] = abs(intval($configuration['conservation']));
 
-	// On vérifie que la sérialisation et le décodage sont cohérents:
-	// - si une sérialisation est demandée, alors le décodage n'est pas possible.
+	// On vérifie en priorité la sécurisation. Si le cache doit être sécurisé :
+	// - le décodage et la sérialisation ne sont pas possibles
+	// - l'extension du cache doit absolument être .php. Si ce n'est pas le cas on la force.
+	if ($configuration['securisation']) {
+		$configuration['decodage'] = false;
+		$configuration['serialisation'] = false;
+		if ($configuration['extension'] != '.php') {
+			$configuration['extension'] = '.php';
+		}
+	}
+
+	// On vérifie ensuite la sérialisation. Si le cache est sérialisé :
+	// - la sécurisation n'est pas possible mais a été traitée précédemment
+	// - le décodage n'est pas possible non plus.
 	if ($configuration['securisation']) {
 		$configuration['decodage'] = false;
 	}
 
-	// On vérifie que le décodage est valide et cohérent avec l'extension:
-	// - on ne peut décoder que des extensions json, xml et yaml.
+	// On vérifie en dernier le décodage. Si le cache demande un décodage :
+	// - sécurisation et sérialisation ne sont pas possibles mais ont été traitées précédemment
+	// - le cache n'accepte que les extensions : json, xml ou yaml.
 	if ($configuration['decodage']) {
 		if ((($configuration['extension'] == 'yaml') or ($configuration['extension'] == 'yml'))
 		and (!defined('_DIR_PLUGIN_YAML'))) {
 			$configuration['decodage'] = false;
 		}
-	}
-
-	// On vérifie l'indicateur de sécurisation : si le cache doit être sécurisé alors son extension
-	// doit absolument être .php. Si ce n'est pas le cas on la force.
-	if ($configuration['securisation']
-	and ($configuration['extension'] != '.php')) {
-		$configuration['extension'] = '.php';
 	}
 
 	// Pour faciliter la construction du chemin des caches on stocke les éléments récurrents composant
@@ -99,8 +104,8 @@ function cache_cache_configurer($plugin) {
 	// Construction du tableau des composants du nom : dans l'ordre on a toujours les composants obligatoires
 	// suivis des composants facultatifs.
 	$configuration['nom'] = array_merge($configuration['nom_obligatoire'], $configuration['nom_facultatif']);
-	
-	// Si le nom ne comporte qu'un seul composant forcer le séparateur à '' pour ne pas interdire d'utiliser les 
+
+	// Si le nom ne comporte qu'un seul composant forcer le séparateur à '' pour ne pas interdire d'utiliser les
 	// caractères '_' ou '-' dans le composant unique.
 	if (count($configuration['nom']) == 1) {
 		$configuration['separateur'] = '';
@@ -116,19 +121,18 @@ function cache_cache_configurer($plugin) {
 	return $configuration;
 }
 
-
 /**
  * Construit le chemin complet du fichier cache.
  *
  * @uses cache_service_chercher()
  *
  * @param string $plugin
- *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
- *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ *                              Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *                              ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param array  $cache
- *        Tableau identifiant le cache pour lequel on veut construire le nom.
+ *                              Tableau identifiant le cache pour lequel on veut construire le nom.
  * @param array  $configuration
- *        Configuration complète des caches du plugin utlisateur lue à partir de la meta de stockage.
+ *                              Configuration complète des caches du plugin utlisateur lue à partir de la meta de stockage.
  *
  * @return string
  */
@@ -191,7 +195,6 @@ function cache_cache_composer($plugin, $cache, $configuration) {
 	return $fichier_cache;
 }
 
-
 /**
  * Décompose le chemin complet du fichier cache en éléments constitutifs. Par défaut, le tableau obtenu coïncide
  * avec l’identifiant relatif du cache. La fonction utilise la configuration générale pour connaitre la structure
@@ -202,15 +205,15 @@ function cache_cache_composer($plugin, $cache, $configuration) {
  * @uses cache_service_chercher()
  *
  * @param string $plugin
- *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
- *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ *                              Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *                              ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param string $fichier_cache
- *        Le chemin complet du fichier à phraser.
+ *                              Le chemin complet du fichier à phraser.
  * @param array  $configuration
- *        Configuration complète des caches du plugin utlisateur lue à partir de la meta de stockage.
+ *                              Configuration complète des caches du plugin utlisateur lue à partir de la meta de stockage.
  *
  * @return array
- *         Tableau des composants constitutifs du cache
+ *               Tableau des composants constitutifs du cache
  */
 function cache_cache_decomposer($plugin, $fichier_cache, $configuration) {
 
@@ -229,7 +232,7 @@ function cache_cache_decomposer($plugin, $fichier_cache, $configuration) {
 		$dir_cache = constant($configuration['racine']) . $configuration['dossier_plugin'];
 		$fichier_cache = str_replace($dir_cache, '', $fichier_cache);
 
-		// Détermination du nom du cache sans extension et décomposition suivant la configuration du nom.		
+		// Détermination du nom du cache sans extension et décomposition suivant la configuration du nom.
 		$nom_cache = basename($fichier_cache, $configuration['extension']);
 		if (count($configuration['nom']) == 1) {
 			// Le nom est composé d'un seul composant : on le renvoie directement.
@@ -250,7 +253,6 @@ function cache_cache_decomposer($plugin, $fichier_cache, $configuration) {
 	return $cache;
 }
 
-
 /**
  * Complète la description d'un cache issue du service `cache_decomposer()`.
  *
@@ -259,17 +261,17 @@ function cache_cache_decomposer($plugin, $fichier_cache, $configuration) {
  * @uses cache_service_chercher()
  *
  * @param string $plugin
- *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
- *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ *                              Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *                              ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param array  $cache
- *       Tableau identifiant le cache pour lequel on veut construire le nom.
+ *                              Tableau identifiant le cache pour lequel on veut construire le nom.
  * @param string $fichier_cache
- *        Fichier cache désigné par son chemin complet.
+ *                              Fichier cache désigné par son chemin complet.
  * @param array  $configuration
- *        Configuration complète des caches du plugin utilisateur lue à partir de la meta de stockage.
+ *                              Configuration complète des caches du plugin utilisateur lue à partir de la meta de stockage.
  *
  * @return array
- *         Description du cache complétée par un ensemble de données propres au plugin.
+ *               Description du cache complétée par un ensemble de données propres au plugin.
  */
 function cache_cache_completer($plugin, $cache, $fichier_cache, $configuration) {
 
@@ -287,7 +289,6 @@ function cache_cache_completer($plugin, $cache, $fichier_cache, $configuration) 
 	return $cache;
 }
 
-
 /**
  * Décode le contenu du fichier cache en fonction de l'extension.
  *
@@ -297,15 +298,15 @@ function cache_cache_completer($plugin, $cache, $fichier_cache, $configuration) 
  * @uses cache_service_chercher()
  *
  * @param string $plugin
- *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
- *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ *                              Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *                              ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param string $contenu
- *        Contenu du fichier cache au format chaine.
+ *                              Contenu du fichier cache au format chaine.
  * @param array  $configuration
- *        Configuration complète des caches du plugin utilisateur lue à partir de la meta de stockage.
+ *                              Configuration complète des caches du plugin utilisateur lue à partir de la meta de stockage.
  *
  * @return array
- *         Contenu du cache décodé si la fonction idoine a été appliqué ou tel que fourni en entrée sinon.
+ *               Contenu du cache décodé si la fonction idoine a été appliqué ou tel que fourni en entrée sinon.
  */
 function cache_cache_decoder($plugin, $contenu, $configuration) {
 
@@ -344,7 +345,6 @@ function cache_cache_decoder($plugin, $contenu, $configuration) {
 	return $contenu;
 }
 
-
 /**
  * Effectue le chargement du formulaire de vidage des caches pour un plugin utilisateur donné.
  *
@@ -355,17 +355,17 @@ function cache_cache_decoder($plugin, $contenu, $configuration) {
  * @uses cache_repertorier()
  *
  * @param string $plugin
- *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
- *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ *                              Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *                              ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param array  $options
- *        Tableau d'options qui peut être fourni par un plugin utilisateur uniquement si celui-ci fait appel
- *        au formulaire. La page cache_vider de Cache Factory n'utilise pas ce paramètre.
- *        Le tableau est passé à la fonction de service de chargement du formulaire uniquement.
+ *                              Tableau d'options qui peut être fourni par un plugin utilisateur uniquement si celui-ci fait appel
+ *                              au formulaire. La page cache_vider de Cache Factory n'utilise pas ce paramètre.
+ *                              Le tableau est passé à la fonction de service de chargement du formulaire uniquement.
  * @param array  $configuration
- *        Configuration complète des caches du plugin utilisateur lue à partir de la meta de stockage.
+ *                              Configuration complète des caches du plugin utilisateur lue à partir de la meta de stockage.
  *
  * @return array
- *         Description du cache complétée par un ensemble de données propres au plugin.
+ *               Description du cache complétée par un ensemble de données propres au plugin.
  */
 function cache_formulaire_charger($plugin, $options, $configuration) {
 
@@ -389,7 +389,6 @@ function cache_formulaire_charger($plugin, $options, $configuration) {
 	return $valeurs;
 }
 
-
 // -----------------------------------------------------------------------
 // ----------------- UTILITAIRE PROPRE AU PLUGIN CACHE -------------------
 // -----------------------------------------------------------------------
@@ -401,16 +400,15 @@ function cache_formulaire_charger($plugin, $options, $configuration) {
  * @internal
  *
  * @param string $plugin
- *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
- *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ *                         Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *                         un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param bool   $fonction
- *        Nom de la fonction de service à chercher.
+ *                         Nom de la fonction de service à chercher.
  *
  * @return string
- *        Nom complet de la fonction si trouvée ou chaine vide sinon.
+ *                Nom complet de la fonction si trouvée ou chaine vide sinon.
  */
 function cache_service_chercher($plugin, $fonction) {
-
 	$fonction_trouvee = '';
 
 	// Eviter la réentrance si on demande explicitement le service du plugin Cache Factory.
