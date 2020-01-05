@@ -64,20 +64,18 @@ function cache_cache_configurer($plugin) {
 	$configuration['conservation'] = abs(intval($configuration['conservation']));
 
 	// On vérifie en priorité la sécurisation. Si le cache doit être sécurisé :
-	// - le décodage et la sérialisation ne sont pas possibles
+	// - le décodage n'est pas possible
 	// - l'extension du cache doit absolument être .php. Si ce n'est pas le cas on la force.
 	if ($configuration['securisation']) {
 		$configuration['decodage'] = false;
-		$configuration['serialisation'] = false;
 		if ($configuration['extension'] != '.php') {
 			$configuration['extension'] = '.php';
 		}
 	}
 
 	// On vérifie ensuite la sérialisation. Si le cache est sérialisé :
-	// - la sécurisation n'est pas possible mais a été traitée précédemment
-	// - le décodage n'est pas possible non plus.
-	if ($configuration['securisation']) {
+	// - le décodage n'est pas possible.
+	if ($configuration['serialisation']) {
 		$configuration['decodage'] = false;
 	}
 
