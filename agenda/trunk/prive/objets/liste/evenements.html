@@ -16,6 +16,7 @@
 			<th class='article secondaire' scope='col'></th>
 			<th class='titre principale' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
 			<th class='lieu secondaire' scope='col'><:agenda:evenement_lieu:></th>
+			<th class='place' scope='col'><:agenda:evenement_places:></th>
 			<th class='id' scope='col'>[(#TRI{id_evenement,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
@@ -29,6 +30,21 @@
 				<p class="date">[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#HORAIRE})]</p>
 			</td>
 			<td class='lieu secondaire'>#LIEU</td>
+			<td class='place secondaire'>
+				[(#INSCRIPTION|oui)<dl>
+					<dt><:agenda:info_nb_places_total:></dt>
+					<dd>#PLACES</dd>
+					#SET{inscrits,#NB_INSCRITS}
+					<dt><:agenda:inscrits:></dt>
+					<dd>#GET{inscrits}</dd>
+					<dt><:agenda:info_nb_places_restantes:></dt>
+					<dl>[(#PLACES|moins{#GET{inscrits}})]</dl>
+				</dl>
+				]
+				[(#INSCRIPTION|non)
+				<:agenda:no_limite:>
+				]
+			</td>
 			<td class='id'>[(#ID_EVENEMENT_SOURCE|oui)
 				[(#CHEMIN_IMAGE{repetition-16.png}|balise_img{<:agenda:repetition:>,''}|inserer_attribut{title,<:agenda:repetition:>})]
 				][(#AUTORISER{modifier,evenement,#ID_EVENEMENT}|?{[

@@ -61,6 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_descriptif' => 'Descriptif',
 	'evenement_horaire' => 'Toute la journée',
 	'evenement_lieu' => 'Lieu',
+	'evenement_places' => 'Places',
 	'evenement_participant_email_mention' => 'Pour rester en contact, vous pouvez indiquer votre adresse email. Elle ne sera pas communiquée sur le site.',
 	'evenement_repetitions' => 'Répétitions',
 	'evenement_titre' => 'Titre',
@@ -88,8 +89,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_evenement_publie' => 'Événement publié',
 	'info_evenements' => 'Événements',
 	'info_inscription' => 'Inscription en ligne :',
-	'info_lieu' => 'Lieu :',
 	'info_nb_inscrits' => '@nb@ inscrits',
+	'info_nb_places_total' => 'Nombre total de places',
+	'info_nb_places_restantes' => 'Places restantes',
 	'info_nb_mois' => '@nb@ mois',
 	'info_nb_places' => '@nb@ places',
 	'info_nb_reponses' => '@nb@ réponses',
@@ -131,6 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notification_publie_detail' => 'L’événement "@titre@" vient d’être publié par @connect_nom@.',
 	'notification_publie_sujet' => '[@nom_site_spip@] PUBLIE : @titre@',
 	'notification_publie_titre' => 'Événement publié',
+	'no_limite' => 'Pas de limite',
 
 	// P
 	'participation_incertaine_prise_en_compte' => 'Votre participation éventuelle est enregistrée',
