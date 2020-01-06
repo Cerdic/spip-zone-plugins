@@ -10,7 +10,7 @@ include_spip('inc/formidable_fichiers');
 function traiter_email_dist($args, $retours) {
 
 	// Vérifier si on doit envoyer en cas de modification de réponses
-	if ($retours['modification_reponse'] == true and isset($args['options']['modification_reponse'])) {
+	if (isset($retours['modification_reponse']) and  $retours['modification_reponse'] == true and isset($args['options']['modification_reponse'])) {
 		$retours['traitements']['email'] = true;
 		return $retours;
 	}
@@ -46,7 +46,7 @@ function traiter_email_dist($args, $retours) {
 	$email_webmaster = supprimer_tags(typo(lire_meta('email_webmaster')));
 
 	// On récupère les destinataires
-	if ($options['champ_destinataires']) {
+	if (isset($options['champ_destinataires'])) {
 		$destinataires = formidable_traiter_email_champ_destinataires($options['champ_destinataires']);
 	}
 
