@@ -11,6 +11,7 @@
 	[<a href="(#SELF|parametre_url{statut,#VALEUR})">[(#VAL{agenda:info_evenements_#VALEUR}|_T)]</a>]
 	})]
 </BOUCLE_statut>
+|
 [(#ENV{statut}|?{
 	[<a href="(#SELF|parametre_url{statut,''})"><:agenda:info_evenements_tout:></a>],
 	<span class='on'><:agenda:info_evenements_tout:></span>
