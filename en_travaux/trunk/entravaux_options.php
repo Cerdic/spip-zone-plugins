@@ -65,7 +65,11 @@ if (is_entravaux()){
 	// il voit le site, mais pas de cache car il travaille dessus !
 	if (!test_espace_prive()){
 		if (!autoriser('travaux')){
-			$GLOBALS['marqueur'].= ":en_travaux";
+			if (isset($GLOBALS['marqueur'])) {
+				$GLOBALS['marqueur'].= ':en_travaux';
+			} else {
+				$GLOBALS['marqueur'] = ':en_travaux';
+			}
 		}
 		else {
 			// desactiver le cache sauf si inhibe par define
