@@ -169,7 +169,7 @@ function saisies_generer_html($champ, $env = array()) {
 	} else {
 		// Sinon on ne sélectionne que quelques éléments importants
 		// On récupère la liste des erreurs
-		$contexte['erreurs'] = $env['erreurs'];
+		$contexte['erreurs'] = isset($env['erreurs']) ? $env['erreurs'] : array();
 		// On récupère la langue de l'objet si existante
 		if (isset($env['langue'])) {
 			$contexte['langue'] = $env['langue'];
