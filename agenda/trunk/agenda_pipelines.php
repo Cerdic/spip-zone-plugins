@@ -298,7 +298,8 @@ function agenda_accueil_encours($flux){
 	$flux .= recuperer_fond('prive/objets/liste/evenements',
 		array(
 			'statut' => array('prop'),
-			'nb' => 5
+			'nb' => 5,
+			'filtre_statut' => 'non',
 		),
 		array('ajax' => true)
 	);
