@@ -162,6 +162,13 @@ function objet_dupliquer($objet, $id_objet, $modifications=array(), $options=arr
 			
 			// On duplique les liens
 			objet_dupliquer_liens($objet, $id_objet, $id_objet_duplicata, $liens, $liens_exclus);
+			
+			// Cas particulier de ces satanées rubriques poly qui ne suivent pas l'API des liens !
+			if (test_plugin_actif('polyhier')) {
+				include_spip('inc/polyhier');
+				$id_parents = polyhier_get_parents($id_objet, $objet);
+				polyhier_set_parents($id_objet_duplicata, $objet, $id_parents);
+			}
 		}
 		
 		// On duplique les logos
