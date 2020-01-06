@@ -44,7 +44,8 @@ function sprite($img, $nom) {
 		$fichier .= "?m=spiprempdate[$fichier]";
 
 		$date_src = @filemtime($src);
-		if ($date_src > $GLOBALS['sprites'][$nom]['date']) {
+		if (!isset($GLOBALS['sprites'][$nom]['date'])
+			or ($date_src > $GLOBALS['sprites'][$nom]['date'])) {
 			$GLOBALS['sprites'][$nom]['date'] = $date_src;
 		}
 
