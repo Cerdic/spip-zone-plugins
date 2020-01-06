@@ -129,7 +129,7 @@ parametres:
           defaut: '5'
 #          explication: '<:sdnnoisettes:explication_pagination:>'
           conteneur_class: 'long_label'
-          afficher_si: '@masquer_pagination@  == "on"'
+          afficher_si: '@masquer_pagination@  != "on"'
         verifier:
           type: 'entier'
       -
