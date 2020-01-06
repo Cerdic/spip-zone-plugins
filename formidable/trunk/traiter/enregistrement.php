@@ -14,6 +14,7 @@ function traiter_enregistrement_dist($args, $retours) {
 	$id_formulaire = $args['id_formulaire'];
 	$saisies = unserialize($formulaire['saisies']);
 	$saisies = saisies_lister_par_nom($saisies);
+	$variable_php = '';
 
 	// La personne a-t-elle un compte ?
 	$id_auteur = isset($GLOBALS['visiteur_session']) ? (isset($GLOBALS['visiteur_session']['id_auteur']) ?
