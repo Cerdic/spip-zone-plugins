@@ -4,7 +4,19 @@
 	id_evenement,1,
 	points,-1
 }})
-]<B_liste_evt>
+]
+<BOUCLE_statut(POUR) {tableau #LISTE{prop, publie, poubelle}} {'|'}>
+[(#ENV{statut}|=={#VALEUR}|?{
+<span class='on'>[(#VAL{agenda:info_evenements_#VALEUR}|_T)]</span>,
+	[<a href="(#SELF|parametre_url{statut,#VALEUR})">[(#VAL{agenda:info_evenements_#VALEUR}|_T)]</a>]
+	})]
+</BOUCLE_statut>
+[(#ENV{statut}|?{
+	[<a href="(#SELF|parametre_url{statut,''})"><:agenda:info_evenements_tout:></a>],
+	<span class='on'><:agenda:info_evenements_tout:></span>
+})]
+</B_statut>
+<B_liste_evt>
 #ANCRE_PAGINATION
 <div class="liste-objets evenements">
 <table class='spip liste'>
