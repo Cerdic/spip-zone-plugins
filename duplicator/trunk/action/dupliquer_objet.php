@@ -170,9 +170,9 @@ function objet_dupliquer($objet, $id_objet, $modifications=array(), $options=arr
 		
 		// On continue de lancer l'ancien pipeline
 		pipeline('duplicator', array(
-			'objet' => 'rubrique',
-			'id_objet_origine' => $id_rubrique,
-			'id_objet' => $id_nouvelle_rubrique
+			'objet' => $objet,
+			'id_objet_origine' => $id_objet,
+			'id_objet' => $id_objet_duplicata,
 		));
 		
 		// On duplique peut-être aussi tous les enfants
