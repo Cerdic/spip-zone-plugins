@@ -4,6 +4,10 @@
 		<dt>@nom_site_spip@</dt>
 		<dd><:info_nom_site:></dd>
 	</dl>
+	<dl>
+		<dt>@message_retour@</dt>
+		<dd><:formidable:editer_message_ok:></dd>
+	</dl>
 	<BOUCLE_champs(POUR){tableau #SAISIES*|unserialize|saisies_lister_par_nom{1}}>
 	[(#VALEUR{saisie}|=={explication}|oui)
 		#SET{label,#VALEUR{options/texte}}

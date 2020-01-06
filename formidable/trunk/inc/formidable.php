@@ -519,7 +519,13 @@ function formidable_raccourcis_arobases_2_valeurs_champs($chaine, $saisies, $bru
 		else {
 			$a_remplacer = array_intersect_key($valeurs_libellees, $a_remplacer);
 		}
-		$a_remplacer = array_merge($a_remplacer, array('nom_site_spip' => lire_config("nom_site")));
+
+		$a_remplacer = array_merge($a_remplacer,array('nom_site_spip' => lire_config('nom_site')));
+		if (strpos($chaine,'@message_retour@') !== false) {// test pour éviter recurrence infinie
+			$message_retour = sql_getfetsel('message_retour', 'spip_formulaires', "id_formulaire=$id_formulaire");
+			$message_retour = formidable_raccourcis_arobases_2_valeurs_champs($message_retour, $saisies, $brut, $sans_reponse, $source, $id_formulaires_reponse, $id_formulaire);
+			$a_remplacer = array_merge($a_remplacer,array('message_retour' => $message_retour));
+		}
 	}
 	return trim(_L($chaine, $a_remplacer));
 }

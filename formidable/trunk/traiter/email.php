@@ -24,6 +24,7 @@ function traiter_email_dist($args, $retours) {
 	}
 	$timestamp = time();
 	$retours['timestamp'] = $timestamp;
+	$id_formulaire = $args['id_formulaire'];
 	$formulaire = $args['formulaire'];
 	$options = $args['options'];
 	$saisies = unserialize($formulaire['saisies']);
@@ -242,7 +243,10 @@ function traiter_email_dist($args, $retours) {
 					$options['texte_accuse'] ? $options['texte_accuse'] : $formulaire['message_retour'],
 					$saisies,
 					false,
-					''),
+					'',
+					'request',
+					0,
+					$id_formulaire),
 				'traitements' => $traitements,
 				'saisies' => $options['masquer_valeurs_accuse'] ? '' : $saisies,
 				'valeurs' => $options['masquer_valeurs_accuse'] ? '' : $valeurs
