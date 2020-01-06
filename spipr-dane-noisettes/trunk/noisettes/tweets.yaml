@@ -45,7 +45,7 @@ parametres:
         options:
           nom: 'compte_twitter'
           label: '<:sdnnoisettes:label_compte_twitter:>'
-          defaut: 'DaneCaen'
+          defaut: 'DaneNormandie'
           conteneur_class: 'long_label'
       -
         saisie: 'input'
