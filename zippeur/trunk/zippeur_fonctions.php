@@ -28,7 +28,7 @@ function zippeur_dynamique($dossier,$date, $cmd,$dynamiques=array(),$statiques=a
 	// création des fichiers dynamiques
 	if (is_array($dynamiques)) {
 		foreach ($dynamiques as $dyn){
-			if ($dyn[1]==''){ 	// si le 2 argument est vide, alors pas de souci, on prend le chemin tel quel
+			if ($dyn[1] == '') { 	// si le 2 argument est vide, alors pas de souci, on prend le chemin tel quel
 				$dyn[1] = $dyn[0];
 			}
 			zippeur_creer_fichier($dyn[0],$dossier.'/'.$dyn[1],$dyn[2]);
@@ -36,8 +36,8 @@ function zippeur_dynamique($dossier,$date, $cmd,$dynamiques=array(),$statiques=a
 	}
 	// Les fichiers statiques
 	if (is_array($statiques)) {
-		foreach ($statiques as $stat){
-			if ($stat[1]==''){		// si le 2 argument est vide, alors pas de souci, on prend le chemin tel quel
+		foreach ($statiques as $stat) {
+			if ($stat[1] == '') {		// si le 2 argument est vide, alors pas de souci, on prend le chemin tel quel
 				$stat[1] = $stat[0];
 			}
 
@@ -49,7 +49,7 @@ function zippeur_dynamique($dossier,$date, $cmd,$dynamiques=array(),$statiques=a
 	}
 	// Et ceux où la notion de chemin ne s'applique pas
 	if (is_array($sanspath)) {
-		foreach ($sanspath as $sp){
+		foreach ($sanspath as $sp) {
 			defined('_DIR_SITE') ? $base = _DIR_SITE: $base = _DIR_RACINE;
 			if (stripos($sp[0],'http://') === 0 or stripos($sp[0],'https://')) {		   // On peut passer une url
 				include_spip('inc/distant');
@@ -91,13 +91,11 @@ function zippeur($array,$date='',$cmd='',$nom='',$plat='oui',$delai='0',$extensi
 	/* On vérifie si le zip existe*/
 	if (count(preg_files($chemin))==0 or!$enbase['id_zip'] or $enbase['date_modif']!=$date or count($array)!=$enbase['fichiers'] or (defined('_NO_CACHE') and _NO_CACHE!=0 and !defined('_NO_CACHE_SAUF_ZIPPEUR'))){
 
-		if(zippeur_zipper($chemin,$array,$cmd,$plat))
-		{
+		if (zippeur_zipper($chemin,$array,$cmd,$plat)) {
 			spip_log("Zippage de $nom.$extension avec cmd=$cmd","zippeur");
-			if ($enbase['id_zip']){
+			if ($enbase['id_zip']) {
 				sql_updateq("spip_zippeur",array("delai_suppression"=>$delai,"date_modif"=>$date,'date_zip'=>date('Y-m-d H-i-s'),'fichiers'=>count($array)),"id_zip=".$enbase['id_zip']);
-			}
-			else{
+			} else{
 				sql_insertq("spip_zippeur",array("delai_suppression"=>$delai,"nom"=>$nom,'extension' => $extension,"date_modif"=>$date,'date_zip'=>date('Y-m-d H-i-s'),'fichiers'=>count($array)));
 			}
 		}
@@ -107,12 +105,13 @@ function zippeur($array,$date='',$cmd='',$nom='',$plat='oui',$delai='0',$extensi
 	return $chemin;
 }
 
-function zippeur_zipper($chemin,$array,$cmd,$plat){
+function zippeur_zipper($chemin,$array,$cmd,$plat) {
 	$temps_un=explode(" ",microtime());
 	if($cmd=='PclZip'){include_spip('inc/pclzip');}
 	sous_repertoire(zippeur_chemin_dossier_local(),'cache-zip');
 	supprimer_fichier($chemin);
 	$fichiers = 0;
+	$fichier_liste = '';
 	if($cmd=='PclZip')
 	{
 		$zip = new PclZip($chemin);
