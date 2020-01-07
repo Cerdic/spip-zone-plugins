@@ -90,7 +90,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_evenement_publie' => 'Gepubliceerd evenement',
 	'info_evenements' => 'Evenementen',
 	'info_inscription' => 'Online inschrijving:',
-	'info_lieu' => 'Plaats:',
 	'info_nb_inscrits' => '@nb@ inschrijvingen',
 	'info_nb_mois' => '@nb@ maanden',
 	'info_nb_places' => '@nb@ plaatsen',

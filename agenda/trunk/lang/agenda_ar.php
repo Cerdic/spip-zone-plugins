@@ -70,7 +70,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_evenement_publie' => 'حدث منشور',
 	'info_evenements' => 'أحداث',
 	'info_inscription' => 'التسجيل عن بعد :',
-	'info_lieu' => 'المكان:',
 	'info_nb_inscrits' => '@nb@ مسجل',
 	'info_nb_mois' => '@nb@ شهر',
 	'info_nb_places' => '@nb@ مقاعد',

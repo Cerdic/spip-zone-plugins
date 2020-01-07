@@ -86,7 +86,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_evenement_publie' => 'Evento publicado',
 	'info_evenements' => 'Eventos',
 	'info_inscription' => 'Inscripción en línea:',
-	'info_lieu' => 'Lugar:',
 	'info_nb_inscrits' => '@nb@ inscritos',
 	'info_nb_mois' => '@nb@ meses',
 	'info_nb_places' => '@nb@ plazas',
