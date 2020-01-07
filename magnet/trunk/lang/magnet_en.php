@@ -10,8 +10,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
+	'label_activer_magnet_objets' => 'Activate magnets on objects',
 	'label_demagnetize' => 'Remove',
 	'label_down' => 'Down',
 	'label_magnetize' => 'Magnetize',
-	'label_up' => 'Up'
+	'label_up' => 'Up',
+
+	// T
+	'titre_page_configurer' => 'Magnet Configuration'
 );
