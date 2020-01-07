@@ -138,7 +138,7 @@ var jQgisloader;
 					tooltip: [(#ENV{tooltip}|=={oui}|?{true,false})],
 					cluster: [(#ENV{cluster}|=={oui}|?{true,false})],
 					clusterOptions: {
-						disableClusteringAtZoom: [(#ENV{clusterMaxZoom,0})],
+						disableClusteringAtZoom: [(#ENV{clusterMaxZoom,null})],
 						showCoverageOnHover: [(#ENV{clusterShowCoverageOnHover}|?{true,false})],
 						spiderfyOnMaxZoom: [(#ENV{clusterSpiderfyOnMaxZoom}|?{true,false})],
 						maxClusterRadius: [(#ENV{maxClusterRadius,80})],
