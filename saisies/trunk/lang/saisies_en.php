@@ -44,13 +44,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'construire_verifications_label' => 'Type of verification to be performed',
 
 	// D
-	'data_cols_label' => 'Possible answers (in column)',
-	'data_rows_label' => 'Questions ( on line)',
+	'data_cols_label' => 'Possible answers (down)',
+	'data_rows_label' => 'Questions ( across)',
 
 	// E
 	'erreur_generique' => 'There are errors in the fields below, please check your inputs',
 	'erreur_option_nom_unique' => 'This name is already used by another field and it must be unique in this form.',
-	'erreur_syntaxe_afficher_si' => 'Incorrect test syntax',
+	'erreur_syntaxe_afficher_si' => 'Wrong syntax of the test',
 	'erreur_valeur_inacceptable' => 'Entered value cannot be accepted.',
 
 	// F
@@ -84,7 +84,7 @@ You will find <a href="https://contrib.spip.net/5080" target="_blank">full docum
 	'option_attention_explication' => 'A message more important than the explanation.',
 	'option_attention_label' => 'Warning',
 	'option_attribut_title_label' => 'Put a title attribute in the label, containing the value of the field. Use with moderation.',
-	'option_autocomplete_defaut' => 'Leave the default',
+	'option_autocomplete_defaut' => 'Keep default',
 	'option_autocomplete_explication' => 'At page load, your browser may pre-fill the field based on its history',
 	'option_autocomplete_label' => 'Pre-fill the field',
 	'option_autocomplete_off' => 'Disable',
@@ -109,7 +109,7 @@ You will find <a href="https://contrib.spip.net/5080" target="_blank">full docum
 	'option_disable_avec_post_explication' => 'Same as previous option position but still post value in a hidden field.',
 	'option_disable_avec_post_label' => 'Disabled but posted.',
 	'option_disable_choix_explication' => 'Indicate the choices separated by a comma, example: choix1,choix3',
-	'option_disable_choix_label' => 'Deactivate some choices',
+	'option_disable_choix_label' => 'Disable some choices',
 	'option_disable_explication' => 'The field can not get the focus.',
 	'option_disable_label' => 'Disable the field',
 	'option_erreur_obligatoire_explication' => 'You can customize the error message displayed to show an obligation (otherwise leave blank).',
@@ -127,7 +127,7 @@ You will find <a href="https://contrib.spip.net/5080" target="_blank">full docum
 	'option_horaire_label' => 'Schedule',
 	'option_horaire_label_case' => 'Allow to fill in the time',
 	'option_id_groupe_label' => 'Keyword group',
-	'option_info_obligatoire_explication' => 'You can change the default obligation indication: <i>[Mandatory]</i>. To keep the default information, leave it blank. To display nothing, put a text composed only of space.', # RELIRE
+	'option_info_obligatoire_explication' => 'You can change the default required indication: <i>[Required]</i>. To keep the default information, leave it blank. To display nothing, put a text composed only of space.',
 	'option_info_obligatoire_label' => 'Indication of obligation',
 	'option_inserer_barre_choix_edition' => 'complete editing toolbar',
 	'option_inserer_barre_choix_forum' => 'forums toolbar',
