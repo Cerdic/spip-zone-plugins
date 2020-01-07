@@ -133,15 +133,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_tickets_redac' => 'قيد التحرير',
 
 	// L
+	'label_mots' => 'ربط مفاتيح بالتذكرة',
 	'label_paginer_par' => 'تصفح حسب:',
+	'lien_ajouter_ticket' => 'إضافة تذكرة',
 	'lien_filtrer' => 'ترشيح التذاكر',
 	'lien_reponse_ticket' => 'الرد على التذكرة',
 	'lien_supprimer_filtres' => 'حذف كل المرشحات',
+	'lien_vue_roadmap' => 'خريطة الطريق',
 	'lien_vue_tous' => 'القائمة الكاملة',
 
 	// M
 	'mail_texte_message_auto' => 'هذه رسالة آلية: الرجاء عدم الإجابة عليها.',
 	'message_aucun_ticket_recherche' => 'لا يوجد اي تذكرة تناسب البحث',
+	'message_automatique' => 'هذه رسالة آلية: الرجاء عدم الرد.',
+	'mots_aucun' => 'لا يوجد مفاتيح',
 
 	// N
 	'no_assignation' => 'لا أحد',
@@ -151,6 +156,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'option_navigateur_tous' => 'كل برامج التصفح',
+
+	// R
+	'revenir_gestion' => 'العودة الى إدارة التذاكر',
 
 	// S
 	'severite_bloquant' => 'معطِل',
@@ -162,8 +170,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_ferme_long' => 'كل التذاكر المقفلة',
 	'statut_ouvert' => 'مفتوحة ومناقشة',
 	'statut_poubelle' => 'الى المهملات',
+	'statut_redac' => 'قيد التحرير',
 	'statut_resolu' => 'تم الحل',
 	'statut_resolu_long' => 'كل التذاكر المحلولة',
+	'suivre_tickets_comments' => 'متابعة تعليقات التذاكر',
+	'suivre_tickets_de' => 'تذاكر @nom@',
 	'suivre_tickets_rss' => 'متابعة هذه التذاكر من خلال RSS',
 	'suivre_tickets_rss_unique' => 'متابعة هذه التذكرة من خلال RSS',
 	'suivre_tickets_tous' => 'كل التذاكر',
@@ -177,8 +188,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tickets' => 'التذاكر',
 	'tickets_autorisations' => 'الأذونات',
 	'tickets_derniers_commentaires' => 'أحدث التعليقات',
+	'tickets_general' => 'الاعدادات العامة',
 	'tickets_sticked' => 'التذاكر اللاصقة',
 	'tickets_traites' => 'كل التذاكر المعالجة',
+	'tickets_typologie' => 'ترتيب',
+	'titre' => 'تذاكر، متابعة الأخطاء',
+	'titre_ajouter_un_ticket' => 'إضافة تذكرة',
 	'titre_identification' => 'التعريف',
 	'titre_liste' => 'لائحة التذاكر',
 	'tous_tickets_en_redaction' => 'كل التذاكر قيد التحرير',
