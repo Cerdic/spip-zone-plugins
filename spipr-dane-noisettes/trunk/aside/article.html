@@ -5,7 +5,7 @@
 	<div class="liste">
 		<h2 class="h2"><:spipr_dane:publie_le:></h2>
 		<p class="center">
-			<time datetime="[(#DATE|date_iso)]" ><i class="icon-calendar"></i> [(#DATE|nom_jour) ][(#DATE|affdate)]</time>
+			<time datetime="[(#DATE|date_iso)]" ><i class="fa fa-calendar"></i> [(#DATE|nom_jour) ][(#DATE|affdate)]</time>
 			[(#DATE_MODIF|affdate|!=={[(#DATE|affdate)]}|?{[<small>(<:spipr_dane:modifie_le:> (#DATE_MODIF|affdate))</small>]})] 
 		</p>
 		[<h2 class="h2"><:spipr_dane:auteurs:></h2>
@@ -15,7 +15,7 @@
 		<span class="tags">
 			<ul class="inline center">
 				<BOUCLE_tags(MOTS){id_article}>
-				<li><a class="label" href="#URL_MOT"><i class="icon-tag icon-white"></i> #TITRE</a></li>
+				<li><a class="label" href="#URL_MOT"><i class="fa fa-tags"></i> #TITRE</a></li>
 				</BOUCLE_tags>
 			</ul>
 		</span>
@@ -38,4 +38,3 @@
 </div>
 </B_articles_rubrique>
 <//B_noisettes>
-		
