@@ -1,13 +1,13 @@
-<BOUCLE_content(ARTICLES){id_article}>
-<BOUCLE_noisettes(NOISETTES){type=article}{bloc=content}{0,1}>
-</BOUCLE_noisettes>
+<BOUCLE_content(ARTICLES){id_article=#ENV{article_inclu}|picker_selected{article}|table_valeur{0}}>
+<div class="liste articles">
 <article>
 	<header class="cartouche">
-		[(#LOGO_ARTICLE|image_reduire{200,200})]
+		[(#ENV{masquer_logo}|non)[(#LOGO_ARTICLE|image_reduire{#ENV{largeur_logo,200},#ENV{hauteur_logo,200}})]]
 		[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
-		<h1><span class="#EDIT{titre}">#TITRE</span>[
+		<h2 class="h2">
+			<div class="h2 center #EDIT{titre}">#TITRE[ (#ENV{masquer_picto}|non)<span class="picto"><i class="fa fa-#ENV{picto,rss} "></i></span>]</div>[
 			<small class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</small>
-		]</h1>
+		]</h2>
 	</header>
 
 	<div class="main">
@@ -21,20 +21,16 @@
 		[<div class="#EDIT{ps} ps surlignable"><h2><:info_ps:></h2>(#PS|adaptive_images)</div>]
 		[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
 	</footer>
-
+	
 	<aside>
 		[(#REM) Gestion du portfolio et des documents ]
 		[(#INCLURE{fond=inclure/documents,id_article, quoi=documents})]
 		[(#INCLURE{fond=inclure/documents,id_article, quoi=galerie})]
 		
-		[(#PLUGIN{agenda}|oui)<INCLURE{fond=inclure/agenda-evenements-article,env} />]
 		
-		[(#REM) Forum de l'article
-		NB : pour desactiver les forums de l'article, supprimez simplement la ligne ci-dessous ]
-		<INCLURE{fond=inclure/forum,id_article,repondre_url=(#PARAMETRES_FORUM|url_reponse_forum),repondre_titre=<:spipr_dane:repondre_article:>} />
-
+		[(#PLUGIN{agenda}|oui)<INCLURE{fond=inclure/agenda-evenements-article,id_article} />]
+		
 	</aside>
-
 </article>
-<//B_noisettes>
+</div>
 </BOUCLE_content>

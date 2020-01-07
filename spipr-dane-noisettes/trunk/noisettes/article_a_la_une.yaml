@@ -1,0 +1,70 @@
+nom: '<:sdnnoisettes:nom_article_a_la_une:>'
+description: '<:sdnnoisettes:description_article_a_la_une:>'
+icon: 'article_a_la_une-24.png'
+ajax: 'non'
+parametres:
+  -
+    saisie: 'explication'
+    options:
+      nom: 'explication_article_a_la_une'
+      texte: '<:sdnnoisettes:explication_article_a_la_une:>'
+  -
+    saisie: 'selecteur_article'
+    options:
+      nom: 'article_inclu'
+      obligatoire: 'oui'
+      label: '<:sdnnoisettes:label_article_choisi:>'
+      explication: '<:sdnnoisettes:explication_article_choisi:>'
+      defaut: ''
+      conteneur_class: 'long_label'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'fieldset_conf_titre_noisette'
+      label: '<:sdnnoisettes:label_conf_titre_noisette:>'
+    saisies:
+      -
+        saisie: 'case'
+        options:
+          nom: 'masquer_picto'
+          label: '<:sdnnoisettes:label_masquer_picto:>'
+          label_case: '<:sdnnoisettes:masquer:>'
+          defaut: ''
+          conteneur_class: 'long_label'
+      -
+        saisie: 'input'
+        options:
+          nom: 'picto'
+          label: '<:sdnnoisettes:label_picto:>'
+          explication: '<:sdnnoisettes:explication_picto:>'
+          defaut: 'star'
+          afficher_si: '@masquer_picto@ != "on"'
+          conteneur_class: 'long_label'
+      -
+        saisie: 'case'
+        options:
+          nom: 'masquer_logo'
+          label: '<:sdnnoisettes:label_masquer_logo:>'
+          label_case: '<:sdnnoisettes:masquer:>'
+          defaut: ''
+          conteneur_class: 'long_label'
+      -
+        saisie: 'input'
+        options:
+          nom: 'largeur_logo'
+          label: '<:sdnnoisettes:label_largeur_logo:>'
+          defaut: '200'
+          afficher_si: '@masquer_logo@  != "on"'
+          conteneur_class: 'long_label'
+        verifier:
+          type: 'entier'
+      -
+        saisie: 'input'
+        options:
+          nom: 'hauteur_logo'
+          label: '<:sdnnoisettes:label_hauteur_logo:>'
+          defaut: '200'
+          afficher_si: '@masquer_logo@ != "on"'
+          conteneur_class: 'long_label'
+        verifier:
+          type: 'entier'

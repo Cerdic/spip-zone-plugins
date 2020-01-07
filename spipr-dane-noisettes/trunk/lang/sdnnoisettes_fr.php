@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'article_ecrire_auteur'=>'&Eacute;crire à l\'auteur',
     
 'nom_carousel'=>'Carousel',
-    
+'nom_article_a_la_une'=>'Article à la une',
 'carte_gis'=>'Carte',
  
 'data_localisation' => 'Localisation',
@@ -43,11 +43,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'description_liste_sites'=>'Liste des sites référencés.',
 'description_sites_partenaires'=>'Liste des sites partenaires.',
 'description_article_ecrire_auteur'=>'Formulaire de contact de l\'auteur.',
+'description_article_a_la_une'=>'Un article sélectionné',
 
 'info_galerie'=>'Galerie',
 
 'erreur_uai' => 'Attention&#44; vous devez <a href="[(#URL_ECRIRE{noisette_edit, id_noisette=#ENV{id_noisette}})]"> saisir le code UAI de votre établissement</a>.',
 'explication_articles_choisis'=>'Cliquer sur "Ajouter" à droite et sélectionner les articles à inclure ou exclure de la liste.',
+'explication_article_choisi'=>'Cliquer sur «&nbsp;Ajouter&nbsp;» à droite et sélectionner l\'article.',
+'explication_article_a_la_une'=>'Permet de choisir un article à afficher entièrement (suivant les champs paramétrés).',
 #'explication_articles_exclus'=>'Cliquer sur "Ajouter" à droite et sélectionner les articles à exclure de la liste.',
 'explication_carousel'=>'Les articles affichés dans le carousel sont les articles séléctionnés à la racine du site pour l\'affichage<br/> dans la page d\'accueil et ceux selectionnés dans la rubrique pour l\'affichage dans une page rubrique.',
 'explication_carousel_id_rubrique'=>'Par défaut, affiche les articles sélectionnés à la racine du site. <br/>Vous pouvez choisir d\'afficher les articles sélectionnés d\'une rubrique particuliére.',
@@ -62,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'explication_nb_total'=>'Laisser vide pour "tous"',
 'explication_pagination'=>'Pour ne pas afficher de pagination, saisissez un nombre supérieur au nombre total.',
 'explication_pagination_sans'=>'Laisser vide pour ne pas afficher de pagination.',
-'explication_picto' => 'Pour modifier le pictograme, choisissez en un autre  sur <a href="https://fontawesome.com/v4.7.0/icons/" title="Fontawesome" class="spip-out">Fontawesome</a>.',
+'explication_picto' => 'Pour modifier le pictograme, choisissez en un autre  sur <a href="?exec=picto" title="Fontawesome" class="spip-out">Fontawesome</a>.',
 #'explication_rubriques_exclues'=>'Cliquer sur "Ajouter" à droite et sélectionner les rubriques dont les articles sont à exclure de la liste.',
 'explication_rubriques_choisies'=>'Cliquer sur "Ajouter" à droite et sélectionner les rubriques dont les articles sont à inclure ou exclure de la liste.',
 'explication_rubriques_exclues_sites'=>'Cliquer sur "Ajouter" à droite et sélectionner les rubriques dont les sites sont à exclure de la liste.',
@@ -90,6 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_afficher_syndics'=>'Afficher les articles syndiqués',
 'label_afficher_tags'=>'Afficher les mots-clé',
 'label_afficher_titre'=>'Afficher un titre',
+'label_article_choisi'=>'Article choisi',
 'label_articles_choisis'=>'Articles choisis',
 'label_articles_exclus'=>'Articles exclus',
 'label_articles_rubrique'=>'N\'afficher que les articles liès à une rubrique',
