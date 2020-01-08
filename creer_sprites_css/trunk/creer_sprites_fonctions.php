@@ -29,11 +29,12 @@ function sprite($img, $nom) {
 
 		$largeur = largeur($img);
 		$hauteur = hauteur($img);
-		if ($largeur > $GLOBALS['sprites'][$nom]['largeur']) {
+		if (!isset($GLOBALS['sprites'][$nom]['largeur'])
+			or ($largeur > $GLOBALS['sprites'][$nom]['largeur'])) {
 			$GLOBALS['sprites'][$nom]['largeur'] = $largeur;
 		}
-		$hauteur_old = max(0, $GLOBALS['sprites'][$nom]['hauteur']);
-		$GLOBALS['sprites'][$nom]['hauteur'] += $hauteur;
+		$hauteur_old = (isset($GLOBALS['sprites'][$nom]['hauteur']) ? $GLOBALS['sprites'][$nom]['hauteur'] : 0);
+		$GLOBALS['sprites'][$nom]['hauteur'] = $hauteur_old + $hauteur;
 
 		$alt = extraire_attribut($img, 'alt');
 		$class = extraire_attribut($img, 'class');

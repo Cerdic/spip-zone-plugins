@@ -1,7 +1,7 @@
 <paquet
 	prefix="creer_sprites"
 	categorie="multimedia"
-	version="2.1.1"
+	version="2.1.2"
 	etat="test"
 	compatibilite="[3.2.0;3.3.*]"
 	documentation="https://23forward.com/Plugin-Creer-Sprites-CSS"
