@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_plugins_inactifs' => 'List of inactive plugins',
 
 	// P
-	'plugin_borne' => 'Limits', # RELIRE
+	'plugin_borne' => 'Limits',
 	'plugin_compat_version' => 'SPIP @version@ compatible ',
 	'plugin_compat_version_maj' => 'The latest version of the plugin on the zone is compatible, please update your plugin.',
 	'plugin_compat_version_maj_gestion' => 'Plugins management',
@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plugin_nom' => 'Plugin name',
 
 	// T
-	'titre_verifier_plugins' => 'Check the compatibility of plugins with another version of SPIP', # MODIF
+	'titre_verifier_plugins' => 'Check the compatibility of the plugins with another SPIP version',
 	'titre_verifier_plugins_version' => 'Check plugin compatibility with SPIP @version@',
 
 	// V
