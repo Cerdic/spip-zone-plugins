@@ -1,7 +1,4 @@
-#CACHE{0}
-[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
-<BOUCLE_si(CONDITION){si #SESSION{statut}|<{2}}>
-<?php
+#CACHE{0}[(#HTTP_HEADER{Content-Type: application/json [; charset=(#CHARSET)]})]<BOUCLE_si(CONDITION){si #SESSION{statut}|<{2}}><?php
 	$funcNum = intval(_request('CKEditorFuncNum')) ;
 	$CKEditor = _request('CKEditor') ;
 	$langCode = _request('langCode') ;
@@ -41,24 +38,6 @@
 	$request_dir = preg_replace(array('#^(\.\./)+#', '#/(\.\./)+#'), array('', '/'),  $request_dir) ;
 	$dir_name = _FILEBROWSER_DIR .'/'. $request_dir ;
 
-?><!DOCTYPE html 
-     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $lang ; ?>" lang="<?php echo $lang ; ?>">
-<head>
-	<title><?php echo _T('ckeditor:explorateur_titre'); ?></title>
-	<link rel="stylesheet" type="text/css" href="#CHEMIN{css/filebrowser.css}" />
-	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<script type="text/javascript">  
-	function loadFile(url) {  
-		var parent_window = (window.parent == window) ? window.opener : window.parent ;  
-		parent_window.CKEDITOR.tools.callFunction( <?php echo intval(_request('CKEditorFuncNum')); ?>, url, '');  
-		window.close();  
-	}  
-	</script>
-</head>
-<body>
-<?php
 	$autorise_parcours = ckeditor_lire_config('autorise_parcours', _CKE_PARCOURS_DEF) ;
 	$autorise_admin_telecharger = ckeditor_lire_config('autorise_telechargement', _CKE_UPLOAD_DEF) ;
 	$autorise_redac_telecharger = $autorise_admin_telecharger && ckeditor_lire_config('autorise_telechargement_redacteur', _CKE_UPLOAD_REDAC_DEF) ;
@@ -119,7 +98,14 @@
 				} else {
 					$message = strip_tags(_T('ckeditor:acces_interdit')) ;
 				}
-				echo "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($funcNum, '$url', '$message');</script>";
+				$json = json_encode(
+					array(
+						'fileName' => $name_file,
+						'uploaded' => 1,
+						'url' => $url
+						)
+					);
+				echo $json;
 
 		} else  {
 
@@ -234,7 +220,4 @@
 	} else {
 		print("<p>"._T('ckeditor:acces_interdit')."</p>") ;
 	}
- ?>
-</body>
-</html>
-</BOUCLE_si>
+?></BOUCLE_si>
