@@ -614,9 +614,9 @@ function ckeditor_preparescript($config) {
 
 	if (!$init_done) {
 		$script = "
-	<script type=\"application/javascript\" src=\"".url_absolue(_CKE_JS)."\"></script>
+	<script type=\"application/javascript\" src=\"".url_absolue(timestamp(_CKE_JS))."\"></script>
 	<script type=\"application/javascript\">CKEDITOR.config.jqueryOverrideVal=true;</script>
-	<script type=\"application/javascript\" src=\"".url_absolue(_CKE_JQUERY)."\"></script>
+	<script type=\"application/javascript\" src=\"".url_absolue(timestamp(_CKE_JQUERY))."\"></script>
 	<script type=\"application/javascript\" src=\"".(function_exists("produire_fond_statique")?produire_fond_statique("ckeditor4spip.js"):url_absolue(_DIR_RACINE."?page=ckeditor4spip.js"))."\"></script>\n";
 		if (isset($load_extra_js)) { 
 			$script .= "	<script type=\"application/javascript\" src=\"$load_extra_js\"></script>\n" ;

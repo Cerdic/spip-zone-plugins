@@ -2,7 +2,7 @@
 	<nom><multi>[fr]CKEditor pour SPIP[en]CKEditor for SPIP[ar]CKEDITOR &#1604; SPIP</multi></nom>
 	<auteur>Auteurs : [Fr&#233;d&#233;ric Bonnaud->mailto:fred@lea-linux.org], [Mehdi Cherifi (Superyms)->mailto:superyms@gmail.com], [Emmanuel Dreyfus->mailto:manu@netbsd.org]</auteur>
 	<version>1.0.3</version>
-	<version_base>1.0.2</version_base>
+	<version_base>1.0.4</version_base>
 	<etat>stable</etat>
 	<description>
 		<h3>
