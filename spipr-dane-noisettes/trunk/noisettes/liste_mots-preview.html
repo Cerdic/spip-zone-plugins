@@ -1,0 +1,35 @@
+#SET{nom_humain_vue, #ARRAY{articles-resume,Liste d'articles,3,Liste de sites}}
+#SET{nom_type_liste, #ARRAY{lines,En ligne,pills,En pastilles,tabs,En onglets}}
+[(#SET{nom_humain_vue, [(#GET{nom_humain_vue}|table_valeur{#ENV{est_vue}})]})]
+#SET{nom_vue, #ARRAY{articles-resume,liste_articles,sites-resume,liste_sites}}
+[(#SET{nom_vue, [(#GET{nom_vue}|table_valeur{#ENV{est_vue}})]})]
+#SET{conteneur_en_cours, #ENV{id_conteneur}|match{^conteneur}|?{
+	#INFO_ID_CONTENEUR{noisette, #ENV{id_conteneur}|explode{|}|table_valeur{2}}|explode{/}|table_valeur{1}
+,
+	#ENV{id_conteneur}|explode{/}|table_valeur{1}}
+}
+[(#REM) ***DEBUG*** 
+[(#ENV**|unserialize|foreach)]
+]
+<div>[(#ENV{masquer_titre}|non)[<strong>(#ENV{titre,Tags})</strong>]][(#ENV{masquer_picto}|non)[ <i class="fa fa-(#ENV{picto,tags})"></i>]]</div>
+<div>
+	[(#REM)[(#ENV{id_groupes}|non)<div class="error light"><strong>Attention !</strong> Aucun groupe de mots n'est sélectionné </div>]]
+	<small>
+		Mots-clé du groupe :[ <strong>(#INFO_TITRE{groupe_mots, #ENV{id_groupes}})</strong>]
+		[(#ENV{masquer_mots_non_lies}|oui), Mots non liès exclus][(#ENV{afficher_logo}|oui), Logo #ENV{largeur_logo}x#ENV{largeur_logo}px][(#ENV{afficher_descriptif}|oui), Descriptif]<br/>
+		Type de liste :[ <strong>(#GET{nom_type_liste}|table_valeur{#ENV{type_liste}|sinon{En ligne}})</strong>]
+		[<br/>(#ENV{est_controleur}|non)Page cible : page #ENV{lien_mot,mot}]
+		[(#ENV{est_controleur}|ou{#ENV{lien_mot}|et{#ENV{lien_mot}|!={mot}}}|et{#CONFIG{sdn/conf_avancee}|non}|oui), <div class="notice light">Attention, des paramètres avancés sont utilisés sans que l'utilisation de la configuration avancée soit activée.</div>]
+		[Classe CSS : (#ENV{css})]
+		<div>#ENV{est_controleur}
+		<BOUCLE_verif(NOISETTES){type_noisette=#GET{nom_vue,liste_articles}}{si #ENV{est_controleur}|=={on}}>[
+			(#GET{conteneur_en_cours}|=={#ID_CONTENEUR|match{^conteneur}|?{
+	#INFO_ID_CONTENEUR{noisette, #ID_CONTENEUR|explode{|}|table_valeur{2}}|explode{/}|table_valeur{1}
+,
+	#ID_CONTENEUR|explode{/}|table_valeur{1}}}|?{#PARAMETRES|table_valeur{est_vue}|?{#SET{bloc_vue,#BLOC} #SET{bloc,#BLOC}, #SET{bloc,#BLOC}}})
+		]</BOUCLE_verif></div>
+		[<div class="notice light">(#ENV{est_controleur}|oui)Est <strong>contrôleur</strong> de la noisette [<strong>(#GET{nom_humain_vue})</strong> ][(#REM)<i>#ENV{est_vue}</i>][ du bloc <strong>(#GET{bloc_vue})</strong>].</div>]
+		[(#ENV{est_controleur}|et{#GET{bloc}}|et{#GET{bloc_vue}|non}|oui)<div class="error light"><strong>Modèle Vue Contrôleur : Attention !</strong> Aucune noisette [(#GET{nom_humain_vue, Liste d'articles})] n'est paramétrès comme vue du controleur </div>]
+		[(#ENV{est_controleur}|et{#GET{bloc}|non}|oui)<div class="error light"><strong>Modèle Vue Contrôleur : Attention !</strong> Aucune noisette [(#GET{nom_humain_vue, Liste d'articles})] n'est insérée dans cette page </div>]
+	</small>
+</div>

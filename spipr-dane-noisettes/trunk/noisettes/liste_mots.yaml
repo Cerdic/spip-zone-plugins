@@ -1,0 +1,185 @@
+nom: '<:sdnnoisettes:liste_mots:>'
+description: '<:sdnnoisettes:description_liste_mots:>'
+icon: 'mots-24.png'
+ajax: 'non'
+parametres:
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'fieldset_conf_titre_noisette'
+      label: '<:sdnnoisettes:label_conf_titre_noisette:>'
+    saisies:
+      -
+        saisie: 'case'
+        options:
+          nom: 'masquer_titre'
+          label: '<:sdnnoisettes:label_masquer_titre:>'
+          label_case: '<:sdnnoisettes:masquer:>'
+          defaut: ''
+          conteneur_class: 'long_label'
+      -
+        saisie: 'input'
+        options:
+          nom: 'titre'
+          label: '<:sdnnoisettes:label_titre:>'
+          afficher_si: '@masquer_titre@ != "on"'
+          defaut: 'Tags'
+          conteneur_class: 'long_label'
+      -
+        saisie: 'case'
+        options:
+          nom: 'masquer_picto'
+          label: '<:sdnnoisettes:label_masquer_picto:>'
+          label_case: '<:sdnnoisettes:masquer:>'
+          defaut: ''
+          conteneur_class: 'long_label'
+      -
+        saisie: 'input'
+        options:
+          nom: 'picto'
+          label: '<:sdnnoisettes:label_picto:>'
+          explication: '<:sdnnoisettes:explication_picto:>'
+          defaut: 'tags'
+          afficher_si: '@masquer_picto@ != "on"'
+          conteneur_class: 'long_label'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'fieldset_conf_liste'
+      label: '<:sdnnoisettes:label_conf_liste:>'
+    saisies:
+      -
+        saisie: 'selection'
+        options:
+          nom: 'filtrer_mots'
+          label: '<:sdnnoisettes:label_filtrer_mots:>'
+          defaut: ''
+          datas:
+            '': '<:sdnnoisettes:mots_tous:>'
+            groupes_mots: '<:sdnnoisettes:mots_groupes_selection:>'
+          cacher_option_intro: 'oui'
+          conteneur_class: 'long_label'
+      -
+        saisie: 'groupe_mots'
+        options:
+          nom: 'id_groupes'
+          label: '<:sdnnoisettes:label_groupe_mots:>'
+          explication: '<:sdnnoisettes:explication_groupe_mots:>'
+          defaut: ''
+          multiple: 'oui'
+          afficher_si: '@filtrer_mots@ == "groupes_mots"'
+          conteneur_class: 'long_label'
+      -
+        saisie: 'case'
+        options:
+          nom: 'masquer_mots_non_lies'
+          label: '<:sdnnoisettes:label_masquer_mots_non_lies:>'
+          label_case: '<:sdnnoisettes:masquer:>'
+          defaut: ''
+          conteneur_class: 'long_label'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'fieldset_conf_items'
+      label: '<:sdnnoisettes:label_conf_items_liste:>'
+    saisies:
+      -
+        saisie: 'selection'
+        options:
+          nom: 'type_liste'
+          label: '<:sdnnoisettes:label_type_liste:>'
+          defaut: 'lines'
+          datas:
+            lines: '<:sdnnoisettes:lines:>'
+            tabs: '<:sdnnoisettes:tabs:>'
+            pills: '<:sdnnoisettes:pills:>'
+          cacher_option_intro: 'oui'
+          conteneur_class: 'long_label'
+      -
+        saisie: 'case'
+        options:
+          nom: 'afficher_logo'
+          label: '<:sdnnoisettes:label_afficher_logo:>'
+          label_case: '<:sdnnoisettes:afficher:>'
+          defaut: ''
+          afficher_si: '@type_liste@  == "lines"'
+          conteneur_class: 'long_label'
+      -
+        saisie: 'input'
+        options:
+          nom: 'largeur_logo'
+          label: '<:sdnnoisettes:label_largeur_logo:>'
+          defaut: '64'
+          afficher_si: '@afficher_logo@  == "on"'
+          conteneur_class: 'long_label'
+        verifier:
+          type: 'entier'
+      -
+        saisie: 'input'
+        options:
+          nom: 'hauteur_logo'
+          label: '<:sdnnoisettes:label_hauteur_logo:>'
+          defaut: '64'
+          afficher_si: '@afficher_logo@ == "on"'
+          conteneur_class: 'long_label'
+        verifier:
+          type: 'entier'
+      -
+        saisie: 'case'
+        options:
+          nom: 'afficher_descriptif'
+          label_case: '<:sdnnoisettes:afficher:>'
+          label: '<:sdnnoisettes:label_afficher_descriptif:>'
+          defaut: ''
+          afficher_si: '@type_liste@  == "lines"'
+          conteneur_class: 'long_label'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'fieldset_conf_avancee'
+      label: '<:sdn:label_conf_avancee_noisettes:>'
+      explication: '<:sdnnoisettes:explication_conf_avancee_noisettes:>'
+      afficher_si: '@config:sdn:conf_avancee@  == "on"'
+    saisies:
+      - 
+        saisie: 'selection'
+        options:
+          nom: 'lien_mot'
+          label: '<:sdnnoisettes:label_lien_page_cible:>'
+          explication: '<:sdnnoisettes:explication_lien_page_cible:>'
+          defaut: 'mot'
+          datas:
+            mot: "Page Mot"
+            self: "Page en cours"
+            autre: "Autre page"
+          conteneur_class: 'long_label'
+      - 
+        saisie: 'input'
+        options:
+          nom: 'page_cible'
+          label: '<:sdnnoisettes:label_page_cible:>'
+          explication: '<:sdnnoisettes:explication_page_cible:>'
+          defaut: ''
+          afficher_si: '@lien_mot@ == "autre"'
+          conteneur_class: 'long_label'
+      - 
+        saisie: 'case'
+        options:
+          nom: 'est_controleur'
+          label: '<:sdnnoisettes:label_est_controleur:>'
+          label_case: '<:sdnnoisettes:oui:>'
+          explication: '<:sdnnoisettes:explication_est_controleur:>'
+          afficher_si: '@lien_mot@ == "self"'
+          defaut: ''
+          conteneur_class: 'long_label'
+      - 
+        saisie: 'selection'
+        options:
+          nom: 'est_vue'
+          label: '<:sdnnoisettes:label_est_vue_selection:>'
+          explication: '<:sdnnoisettes:explication_est_vue:>'
+          defaut: 'articles-resume'
+          datas:
+            articles-resume: "Liste d'articles"
+          conteneur_class: 'long_label'
+          afficher_si: '@lien_mot@ == "self" && @est_controleur@ == "on"'

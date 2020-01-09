@@ -1,0 +1,4 @@
+#SET{masquer_h2, #ENV{masquer_titre}|et{#ENV{masquer_picto}}|oui|?{on,''}}
+#SET{id_groupe, #ENV{filtrer_mots}|?{-1,''}}
+<INCLURE{fond=liste/mots-resume, id_groupe=#GET{id_groupe},masquer_h2=#GET{masquer_h2},env}>
+	<INCLURE{fond=liste/mots-resume, id_groupe=[(#ENV{filtrer_mots})-1], id_groupes=#ENV{id_groupes,1},env}>

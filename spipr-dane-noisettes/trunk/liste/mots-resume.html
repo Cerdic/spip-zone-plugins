@@ -1,0 +1,55 @@
+#SET{id_unique, #EVAL{rand()}}
+<div class="liste mots subnav clear[ mots-(#GET{id_unique})]">
+	[(#ENV{masquer_h2}|non)<h2 class="h2">[(#ENV{masquer_titre}|non)[(#ENV{titre,<:mots:>})] ][(#ENV{masquer_picto}|non)<span class="picto"><i class="fa fa-#ENV{picto,tags} "></i></span>]</h2>]
+<BOUCLE_groupes(GROUPES_MOTS){par titre}{id_groupe ?IN #ENV{id_groupes}}>
+	<ul class="liste-mots [ (#ENV{type_liste,lines}|=={lines}|?{liste-items, nav nav-#ENV{type_liste}})]">
+		<li class="[(#ENV{type_liste,lines}|=={lines}|?{h3,brand})]"><a>[(#ENV{titre_filtre}) ]<strong>#TITRE</strong></a></li>
+		[(#ENV{est_controleur}|oui) <li class="item[ (#ENV{id_mot}|non)active]">
+			<a href="[(#SELF|parametre_url{id_mot,''})]" data-vue="#ENV{est_vue, liste_articles}" data-id="" data-title="Tous"><span class="picto"><i class="fa fa-tags"></i>Tous</span></a>
+		</li>
+		]<BOUCLE_mots(MOTS){id_groupe}{tri num titre, titre}>			
+		#SET{url, #ENV{est_controleur}|ou{#ENV{lien_mot}|=={self}}|?{#SELF|parametre_url{id_mot,#ID_MOT},#ENV{lien_mot}|=={autre}|et{#ENV{page_cible}}|?{#URL_PAGE{#ENV{page_cible}}, #URL_MOT}}}
+		[(#ENV{masquer_mots_non_lies}|oui)#SET{mots_lies,''}]
+		<BOUCLE_verif_articles_lies(ARTICLES){id_mot}{si #ENV{masquer_mots_non_lies}|=={on}}{0,1}>[(#ID_ARTICLE|oui)#SET{mots_lies,on}] </BOUCLE_verif_articles_lies>
+		[(#GET{mots_lies}|ou{#ENV{masquer_mots_non_lies}|non}|oui)
+		<li class="item[ (#ENV{id_mot}|=={#ID_MOT}|oui)active]">
+			<a href="#GET{url}" rel="tag" title="[(#ENV{est_controleur}|?{<:sdnnoisettes:filtrer_par> #TITRE, #TITRE})]" [(#ENV{est_controleur}|oui) data-vue="#ENV{est_vue, liste_articles}" data-id="#ID_MOT" data-title="#TITRE" data-group="[(#INFO_TITRE{groupe_mots, #ID_GROUPE})]"]>
+				<span class="picto"><i class="fa fa-tag"></i>[ (#TITRE)]</span>
+			[(#ENV{afficher_logo}|oui)[(#LOGO|image_reduire{#ENV{largeur_logo,64},#ENV{largeur_logo,64}})]]
+			</a>
+			[(#ENV{afficher_descriptif}|oui)<div class="descriptif texte">[(#DESCRIPTIF)]</div>]
+		</li>]
+		</BOUCLE_mots>
+	</ul>
+</BOUCLE_groupes>
+</div>
+[(#ENV{est_controleur}|oui)
+<script>
+$(document).ready(function(){
+	// detecter les clics sur les articles
+	$('.mots[-(#GET{id_unique}) ] .liste-mots > .item > a').on('click', function(event){
+ 		// ne pas propager l'evenement javascript
+		event.preventDefault();
+
+		// on ajoute une classe "active" sur le bloc en cours
+		$('.liste-mots > .item.active').removeClass('active');
+		$(this).parent('li').addClass('active');
+ 
+		// on recupere les attributs data-xxx
+		var est_vue = $(this).attr("data-vue");
+		var id_mot_on = $(this).attr("data-id");
+		var titre_mot_on = $(this).attr("data-title");
+		var titre_groupe_on = $(this).attr("data-group");
+
+		// on appelle le fonction ajaxReload pour rafraichir le bloc defini dans 
+		// la variable "est_vue" avec comme argument le tableau des valeurs des data-xxx
+		ajaxReload( est_vue, {
+			args:{id_mot: id_mot_on,
+				titre_mot: titre_mot_on,
+				titre_groupe: titre_groupe_on
+			}
+		});
+	});
+});
+</script>
+]
