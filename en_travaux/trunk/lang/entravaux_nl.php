@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'activer_message' => 'Het onderhoud activeren',
+	'autoriser_travaux' => 'Wat is de benodigde status om de site tijdens onderhoud te bekijken?',
 
 	// E
 	'en_travaux' => 'Werk in uitvoering',
