@@ -79,6 +79,7 @@ Je vindt <a href="https://contrib.spip.net/5080" target="_blank">volledige docum
 	'option_afficher_si_label' => 'Tonen onder voorwaarde',
 	'option_afficher_si_remplissage_uniquement_explication' => 'Door het aanvinken van dit vakje wordt de voorwaardelijke weergave alleen toegepast bij het invullen van het formulier en niet bij het weergeven van de resultaten.',
 	'option_afficher_si_remplissage_uniquement_label' => 'Alleen bij het invullen van het formulier',
+	'option_afficher_si_remplissage_uniquement_label_case' => 'Verberg de invoer uitsluitend tijdens het invullen',
 	'option_attention_explication' => 'Een boodschap die belangrijker is dan de uitleg.',
 	'option_attention_label' => 'Waarschuwing',
 	'option_attribut_title_label' => 'Zet een title attribuut op het label, dat de waarde van het veld bevat. Gebruiken met voorbehoud.',
