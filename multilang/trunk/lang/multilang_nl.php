@@ -15,11 +15,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_descr_multilang' => 'Multilang: Plugin voor het beheer van meertalige tags',
 	'cfg_effacer' => 'Herinitialiseren',
 	'cfg_explication_crayons' => 'Multilang moet in de publieke site zijn geäctiveerd.',
+	'cfg_formulaires_autres_explication' => 'jQuery selectors gescheiden door een komma: <code>.formulaire_editer_patate, .formulaire_machiner_truc:not([bidule])</code>',
+	'cfg_formulaires_autres_label' => 'Overige formulieren',
+	'cfg_formulaires_label' => 'Formulieren',
 	'cfg_langues' => 'Gebruikte talen',
 	'cfg_lbl_crayons' => 'Gebruik Multilang in Crayons',
 	'cfg_lbl_espace_public' => 'Gebruik Multilang in de publieke site',
 	'cfg_lbl_formstables' => 'van forms&tables',
-	'cfg_lbl_siteconfig' => 'van de configuratie van de site', # MODIF
+	'cfg_lbl_siteconfig' => 'Configuratie van de site (welkom en identiteit)',
 	'cfg_titre_multilang' => 'Multilang',
 	'champ_numero' => 'Nummer',
 	'configuration_multilang' => 'Multilang',
@@ -28,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_langues_utilisees' => 'Kies de voor het menu van Multilang te gebruiken talen. Maak geen keuze wanneer je alle talen wilt gebruiken.',
 
 	// L
+	'label_langues' => 'Talen',
 	'label_langues_utilisees' => 'Door Multilang gebruikte talen',
 	'lien_desactiver' => 'Alles',
 	'lien_multi_title' => 'Pas de meertalige velden aan in het « @lang@ »',
