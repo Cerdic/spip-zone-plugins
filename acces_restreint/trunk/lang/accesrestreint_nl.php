@@ -55,6 +55,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_retirer_zones' => 'Alle zones wegnemen',
 	'info_rubrique_dans_zone' => 'Deze rubriek maakt deel uit van zone:',
 	'info_rubrique_dans_zones' => 'Deze rubriek maakt deel uit van de zones:',
+	'info_vous_avez_acces_a_cette_zone' => 'Je hebt toegang tot deze zone',
+	'info_vous_navez_pas_acces_a_cette_zone' => 'Je hebt geen toegang tot deze zone',
 
 	// L
 	'label_creer_htaccess' => 'Toegang tot bijgevoegde documenten via hun URL',
