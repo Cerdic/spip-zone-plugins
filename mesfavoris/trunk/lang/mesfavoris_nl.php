@@ -22,6 +22,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'dans_categorie' => 'in de categorie',
 
+	// E
+	'explication_taille_formulaire' => 'Je kunt de afmeting van het formulier eenvoudig aanpassen in CSS:',
+
 	// I
 	'info_1_favori' => '1 favoriet',
 	'info_aucune_categorie' => 'Geen enkele categorie bepaald',
@@ -31,6 +34,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nombre_favoris_objet' => ' @nb@ keer aan favorieten toegevoegd.', # Pas utile dans le plugin lui-même mais peut l'être dans les squelettes
 
 	// L
+	'label_style_formulaire_bookmark' => 'Bookmark',
+	'label_style_formulaire_coeur' => 'Hart',
 	'legend_formulaire_public' => 'Publiek formulier',
 	'legend_style_formulaire' => 'Formulierstijl',
 	'login_first' => 'Voor deze actie moet je aangemeld zijn. Doe dat eerst',
