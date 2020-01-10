@@ -22,8 +22,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_saisie_texte_info' => 'Dit formulier accepteert alleen SPIP code <code>[-&gt;url] {{vet}} {cursief} &lt;quote&gt; &lt;code&gt;</code> &lt;cadre&gt;</cadre> en HTML code <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Op paragrafen aan te maken, kun je gewoon een paar regels leeg laten.',
 
 	// I
+	'info_alt_antispam' => 'Stille antispam - geen weergave van inhoud',
 	'info_ip_suspecte' => 'Uw IP-adres wordt ervan verdacht SPAM te verzenden. Laat uw goede bedoelingen blijken.',
 
 	// L
-	'label_message_licite' => 'Dit is geen verkeerd bericht'
+	'label_je_ne_suis_pas_un_robot' => 'Ik ben geen robot',
+	'label_message_licite' => 'Dit is geen verkeerd bericht',
+	'libelle_je_ne_suis_pas_un_robot' => 'Klik om aan te geven dat je geen robot bent'
 );
