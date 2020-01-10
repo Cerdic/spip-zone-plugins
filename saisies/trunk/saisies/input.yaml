@@ -29,11 +29,12 @@ options:
           label: '<:saisies:option_placeholder_label:>'
           size: 50
       -
-        saisie: 'textarea'
+        saisie: 'input'
         options:
           nom: 'explication'
           label: '<:saisies:option_explication_label:>'
           explication: '<:saisies:option_explication_explication:>'
+          size: 50
       -
         saisie: 'case'
         options:
