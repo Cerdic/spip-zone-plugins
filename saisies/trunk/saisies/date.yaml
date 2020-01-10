@@ -30,12 +30,11 @@ options:
           label: '<:saisies:option_defaut_label:>'
           size: 50
       -
-        saisie: 'input'
+        saisie: 'textarea'
         options:
           nom: 'explication'
           label: '<:saisies:option_explication_label:>'
           explication: '<:saisies:option_explication_explication:>'
-          size: 50
   -
     saisie: 'fieldset'
     options:
