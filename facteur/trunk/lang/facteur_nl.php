@@ -84,6 +84,9 @@ Controleer het bestand <tt>mes_options.php</tt>',
 	// P
 	'personnaliser' => 'Instellingen aanpassen',
 
+	// S
+	'sujet_alerte_mail_fail' => '[MAIL] FAIL verzending aan @dest@ (status: @sujet@)',
+
 	// T
 	'tester' => 'Testen',
 	'tester_la_configuration' => 'Configuratietest',
