@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_fichier_supprime' => 'Vous avez supprimé le fichier « @nom@ ». C’est pourquoi nous vous proposons à nouveau ce formulaire.',
+	'erreur' => 'Erreur sur ce fichier (@erreur@)',
 
 	// R
 	'remplacer_fichier' => 'Remplacer ce fichier',
