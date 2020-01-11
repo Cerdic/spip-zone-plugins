@@ -238,10 +238,12 @@ function formidable_ajouter_action_recuperer_fichier($saisie_a_modifier, $nom_sa
 					$valeur['nom']
 				);
 				$saisie_a_modifier[$i]['url'] = $url;
-				if (in_array($valeur['extension'],array('png','jpg','gif'))) {
-					$saisie_a_modifier[$i]['vignette'] = _DIR_FICHIERS_FORMIDABLE."formulaire_$id_formulaire/reponse_$id_formulaires_reponse/$nom_saisie/".$valeur['nom'];
-				}	else {
-					$saisie_a_modifier[$i]['vignette'] = $vignette_par_defaut($valeur['extension'], false);
+				if (isset($valeur['extension'])) {
+					if (in_array($valeur['extension'],array('png','jpg','gif'))) {
+						$saisie_a_modifier[$i]['vignette'] = _DIR_FICHIERS_FORMIDABLE."formulaire_$id_formulaire/reponse_$id_formulaires_reponse/$nom_saisie/".$valeur['nom'];
+					}	else {
+						$saisie_a_modifier[$i]['vignette'] = $vignette_par_defaut($valeur['extension'], false);
+					}
 				}
 			}
 		}
