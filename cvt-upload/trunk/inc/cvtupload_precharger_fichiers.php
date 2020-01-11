@@ -37,20 +37,24 @@ function inc_cvtupload_precharger_fichiers_dist($fichiers, $form) {
 		if (is_array($valeur)) {
 			foreach ($valeur as $f => $fichier) {
 				$chemin = $fichier['chemin'];
-				$pseudo_files[$champ]['tmp_name'][$f] = $chemin;
-				$pseudo_files[$champ]['name'][$f] = basename($chemin);
-				$pseudo_files[$champ]['error'][$f] = 0;
-				$pseudo_files[$champ]['type'][$f] = mime_content_type($chemin);
-				$pseudo_files[$champ]['size'][$f] = filesize($chemin);
+				if ($chemin) {
+					$pseudo_files[$champ]['tmp_name'][$f] = $chemin;
+					$pseudo_files[$champ]['name'][$f] = basename($chemin);
+					$pseudo_files[$champ]['error'][$f] = 0;
+					$pseudo_files[$champ]['type'][$f] = mime_content_type($chemin);
+					$pseudo_files[$champ]['size'][$f] = filesize($chemin);
+				}
 			}
 		} else {
 			$chemin = $valeur['chemin'];
-			$pseudo_files[$champ] = array();
-			$pseudo_files[$champ]['tmp_name'] = $chemin;
-			$pseudo_files[$champ]['name'] = basename($chemin);
-			$pseudo_files[$champ]['error'] = 0;
-			$pseudo_files[$champ]['type'] = mime_content_type($chemin);
-			$pseudo_files[$champ]['size'] = filesize($chemin);
+			if ($chemin) {
+				$pseudo_files[$champ] = array();
+				$pseudo_files[$champ]['tmp_name'] = $chemin;
+				$pseudo_files[$champ]['name'] = basename($chemin);
+				$pseudo_files[$champ]['error'] = 0;
+				$pseudo_files[$champ]['type'] = mime_content_type($chemin);
+				$pseudo_files[$champ]['size'] = filesize($chemin);
+			}
 		}
 	}
 	// faire une copie dans tmp/cvtupload
