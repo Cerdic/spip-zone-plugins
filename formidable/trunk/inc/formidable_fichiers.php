@@ -89,9 +89,11 @@ function formidable_creer_dossier_formulaire($id_formulaire, $forcer = false) {
 
 	include_spip('inc/distant');
 	$url = url_absolue($fichier);
-	if ($data = recuperer_page($url) && $data != null) {
+	$data = recuperer_url($url, array(
+		'methode' => 'HEAD'
+	));
+	if ($data and $data['status'] == 200) {
 		// si on peut récuperer la page avec un statut http 200,
-		// c'est qu'il y a un problème. recuperer_page() est obsolète en 3.1, mais recuperer_url() n'existe pas en 3.0
 		spip_log("$nom_dossier accessible en lecture depuis le web", 'formidable'._LOG_CRITIQUE);
 		return _T(
 			'formidable:creer_dossier_formulaire_erreur_possible_lire_exterieur',
