@@ -8,8 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'erreur_fichier_supprime' => 'Vous avez supprimé le fichier « @nom@ ». C’est pourquoi nous vous proposons à nouveau ce formulaire.',
 	'erreur' => 'Erreur sur ce fichier (@erreur@)',
+	'erreur_fichier_supprime' => 'Vous avez supprimé le fichier « @nom@ ». C’est pourquoi nous vous proposons à nouveau ce formulaire.',
 
 	// R
 	'remplacer_fichier' => 'Remplacer ce fichier',
