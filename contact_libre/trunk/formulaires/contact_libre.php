@@ -46,20 +46,20 @@ function formulaires_contact_libre_verifier_dist($adresse = null, $url = '', $su
 
 	// on traite les spams
 	if (include_spip('inc/nospam')) {
-		$caracteres = compter_caracteres_utiles($texte);
+		$caracteres = nospam_compter_caracteres_utiles($texte);
 		// moins de 10 caracteres sans les liens = spam !
 		if ($caracteres < 10) {
 			$erreurs['texte_message'] = _T('forum_attention_dix_caracteres', '', array('force'=>false)) ? _T('forum_attention_dix_caracteres') : _T('forum:forum_attention_dix_caracteres');
 		}
 		// on analyse le sujet
-		$infos_sujet = analyser_spams($sujet);
+		$infos_sujet = nospam_analyser_spams($sujet);
 		// si un lien dans le sujet = spam !
 		if ($infos_sujet['nombre_liens'] > 0) {
 			$erreurs['sujet_message'] = _T('nospam:erreur_spam');
 		}
 
 		// on analyse le texte
-		$infos_texte = analyser_spams($texte);
+		$infos_texte = nospam_analyser_spams($texte);
 		if ($infos_texte['nombre_liens'] > 0) {
 			// si un lien a un titre de moins de 3 caracteres = spam !
 			if ($infos_texte['caracteres_texte_lien_min'] < 3) {
