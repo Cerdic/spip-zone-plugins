@@ -174,8 +174,7 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 				$lang = salvatore_get_lang_from($module, $fichier_lang);
 				if ($modifs_master>0) {
 					if ($tradlang_verifier_langue_base) {
-						// TODO : check la fonction et utiliser sans doute id_tradlang_module plutot que module
-						$tradlang_verifier_langue_base($module, $lang);
+						$tradlang_verifier_langue_base($id_module, $lang);
 						salvatore_log('|-- Synchro de la langue ' . $lang . ' pour le module ' . $source['module']);
 					}
 					else {
@@ -195,7 +194,7 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 
 				if ($langues_pas_a_jour = array_diff($langues_en_base, $langues_a_jour)) {
 					foreach ($langues_pas_a_jour as $langue_todo){
-						$tradlang_verifier_langue_base($module, $langue_todo);
+						$tradlang_verifier_langue_base($id_module, $langue_todo);
 						salvatore_log("|-- Synchro de la langue non exportée en fichier $langue_todo pour le module $module");
 					}
 				}
