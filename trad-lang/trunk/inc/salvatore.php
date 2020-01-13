@@ -219,8 +219,12 @@ function salvatore_verifier_gestionnaire_traduction($dir_module, $module) {
 	if ($t = salvatore_lire_gestionnaire_traduction($dir_module, $module)){
 		$url = extraire_attribut($t, 'url');
 		$gestionnaire = extraire_attribut($t, 'gestionnaire');
+		$gestionnaire_url = $GLOBALS['meta']['adresse_site'];
+		if (defined('_SALVATORE_TEST_URL_GESTIONNAIRE')) {
+			$gestionnaire_url = _SALVATORE_TEST_URL_GESTIONNAIRE;
+		}
 		if ($gestionnaire !== 'salvatore'
-		  or protocole_implicite($url) !== protocole_implicite($GLOBALS['meta']['adresse_site'])) {
+		  or protocole_implicite($url) !== protocole_implicite($gestionnaire_url)) {
 			return "$gestionnaire@$url";
 		}
 	}
