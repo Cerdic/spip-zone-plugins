@@ -87,14 +87,14 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 			 * Si la langue mere a changée, on la modifie
 			 */
 			if ($row_module['lang_mere']!==$source['lang']){
-				sql_updateq('spip_tradlang_modules', array('lang_mere' => $source['lang']), 'id_tradlang_module = ' . intval($id_tradlang_module));
+				sql_updateq('spip_tradlang_modules', array('lang_mere' => $source['lang']), 'id_tradlang_module=' . intval($id_tradlang_module));
 				$last_update = time();
 			}
 			/**
 			 * Si le dir_module a change, on le met a jour
 			 */
 			if ($row_module['dir_module']!==$source['dir_module']){
-				sql_updateq('spip_tradlang_modules', array('dir_module' => $source['dir_module']), 'id_tradlang_module = ' . intval($id_tradlang_module));
+				sql_updateq('spip_tradlang_modules', array('dir_module' => $source['dir_module']), 'id_tradlang_module=' . intval($id_tradlang_module));
 				$last_update = time();
 			}
 		}
@@ -138,7 +138,7 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 			 * Le fichier d'origine n'a pas été modifié
 			 * Mais on a peut être de nouvelles langues
 			 */
-			$langues_en_base = sql_allfetsel('DISTINCT lang', 'spip_tradlangs', 'id_tradlang_module = ' . intval($id_tradlang_module));
+			$langues_en_base = sql_allfetsel('DISTINCT lang', 'spip_tradlangs', 'id_tradlang_module=' . intval($id_tradlang_module));
 			$langues_en_base = array_column($langues_en_base, 'lang');
 
 			$langues_a_ajouter = array();
@@ -189,7 +189,7 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 			 * s'il y a eu au moins une modif et que l'on peut faire la synchro
 			 */
 			if ($modifs_master>0 and $tradlang_verifier_langue_base){
-				$langues_en_base = sql_allfetsel('DISTINCT lang', 'spip_tradlangs', 'id_tradlang_module = ' . intval($id_tradlang_module));
+				$langues_en_base = sql_allfetsel('DISTINCT lang', 'spip_tradlangs', 'id_tradlang_module=' . intval($id_tradlang_module));
 				$langues_en_base = array_column($langues_en_base, 'lang');
 
 				if ($langues_pas_a_jour = array_diff($langues_en_base, $langues_a_jour)) {
@@ -292,7 +292,7 @@ function salvatore_importer_module_langue($id_tradlang_module, $source, $fichier
 				$str_existant[$row['id']] = $row['str'];
 			}
 
-			$bigwhere = "id_tradlang_module=" . intval($id_tradlang_module) . ' AND lang = ' . sql_quote($lang);
+			$bigwhere = "id_tradlang_module=" . intval($id_tradlang_module) . ' AND lang=' . sql_quote($lang);
 
 			include_spip('action/editer_tradlang');
 			// Dans ce qui arrive, il y a 4 cas :
@@ -366,17 +366,17 @@ function salvatore_importer_module_langue($id_tradlang_module, $source, $fichier
 						 * On le récupère donc
 						 */
 						if (!$id_tradlang){
-							$tradlang = sql_fetsel('*', 'spip_tradlangs', 'id = ' . sql_quote($id) . ' AND id_tradlang_module = ' . intval($id_tradlang_module) . 'AND lang = ' . sql_quote($lang) . ' AND statut = ' . sql_quote('attic'));
+							$tradlang = sql_fetsel('*', 'spip_tradlangs', 'id=' . sql_quote($id) . ' AND id_tradlang_module=' . intval($id_tradlang_module) . 'AND lang=' . sql_quote($lang) . ' AND statut=' . sql_quote('attic'));
 							if (is_array($tradlang)){
 								$id_tradlang = intval($tradlang['id_tradlang']);
 								salvatore_log("<info>Recuperation d'une chaine de statut ATTIC</info>");
 								sql_updateq('spip_tradlangs', $set, 'id_tradlang=' . intval($id_tradlang));
 
-								$trads = sql_allfetsel('id_tradlang', 'spip_tradlangs', 'id = ' . sql_quote($id) . ' AND id_tradlang_module = ' . intval($id_tradlang_module) . 'AND lang != ' . sql_quote($lang) . ' AND statut = ' . sql_quote('attic'));
+								$trads = sql_allfetsel('id_tradlang', 'spip_tradlangs', 'id=' . sql_quote($id) . ' AND id_tradlang_module=' . intval($id_tradlang_module) . 'AND lang!=' . sql_quote($lang) . ' AND statut=' . sql_quote('attic'));
 								$maj = array('statut' => 'MODIF');
 								foreach ($trads as $trad){
 									salvatore_log("Changement de la trad #" . $trad['id_tradlang'] . " ATTIC => MODIF");
-									sql_updateq('spip_tradlangs', $maj, 'id_tradlang = ' . intval($trad['id_tradlang']));
+									sql_updateq('spip_tradlangs', $maj, 'id_tradlang=' . intval($trad['id_tradlang']));
 								}
 								$recuperees++;
 							}
@@ -387,11 +387,11 @@ function salvatore_importer_module_langue($id_tradlang_module, $source, $fichier
 						 *
 						 * Si oui, on sélectionne toutes les occurences existantes dans les autres langues et on les duplique
 						 */
-						$identique_module = sql_getfetsel('id', 'spip_tradlangs', 'id_tradlang_module = ' . intval($id_tradlang_module) . ' AND lang = ' . sql_quote($lang) . ' AND str = ' . sql_quote($chaines[$id]));
+						$identique_module = sql_getfetsel('id', 'spip_tradlangs', 'id_tradlang_module=' . intval($id_tradlang_module) . ' AND lang=' . sql_quote($lang) . ' AND str=' . sql_quote($chaines[$id]));
 						if ($identique_module){
 							salvatore_log('La nouvelle chaine est une chaine dupliquée : ' . $identique_module);
 
-							$chaines_a_dupliquer = sql_allfetsel('*', 'spip_tradlangs', 'id = ' . sql_quote($identique_module) . ' AND id_tradlang_module = ' . intval($id_tradlang_module) . ' AND lang != ' . sql_quote($lang));
+							$chaines_a_dupliquer = sql_allfetsel('*', 'spip_tradlangs', 'id=' . sql_quote($identique_module) . ' AND id_tradlang_module=' . intval($id_tradlang_module) . ' AND lang!=' . sql_quote($lang));
 							foreach ($chaines_a_dupliquer as $chaine){
 								unset($chaine['id_tradlang']);
 								unset($chaine['maj']);
