@@ -11,61 +11,68 @@
 				<ul class="editer-groupe">
 				<!--EX01-->
 				#SET{name,titre}#SET{obli,''}[(#SET{defaut,<:agenda:titre_sur_l_agenda:>})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
-					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
-				</li>
-				#SET{name,descriptif}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
-					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<textarea name="#GET{name}" class="textarea">
-#ENV*{#GET{name},#GET{defaut}}</textarea>
-				</li>
-				#SET{name,articlepardefaut}#SET{obli,''}[(#SET{defaut,''})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
-					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
-				</li>
-				#SET{name,url_evenement}#SET{obli,''}#SET{defaut,'evenement'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-					<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
-					<span class='erreur_message'>(#GET{erreurs})</span>
-					]
-					#SET{val,evenement}
-					<div class="choix">
-						<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
-						<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
-					</div>
-					#SET{val,article}
-					<div class="choix">
-						<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
-						<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
-					</div>
-				</li>
-				[(#VAL{_AGENDA_INSERT_HEAD_CSS}|defined|non)
-				#SET{name,insert_head_css}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
-					<span class='erreur_message'>(#GET{erreurs})</span>
-					]
-					#SET{val,1}
-					<div class="choix">
-						<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
-						<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
-					</div>
-				</li>
-				]
-				#SET{name,synchro_statut}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
-					<span class='erreur_message'>(#GET{erreurs})</span>
-					]
-					#SET{val,1}
-					<div class="choix">
-						<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
-						<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
-					</div>
+				<li class="fieldset">
+					<fieldset>
+						<legend><:configureragenda:legend_presentation_agenda_public:></legend>
+						<ul>
+							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+								<span class='erreur_message'>(#GET{erreurs})</span>
+								]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+							</li>
+							#SET{name,descriptif}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+								<span class='erreur_message'>(#GET{erreurs})</span>
+								]<textarea name="#GET{name}" class="textarea">
+									#ENV*{#GET{name},#GET{defaut}}</textarea>
+							</li>
+							#SET{name,articlepardefaut}#SET{obli,''}[(#SET{defaut,''})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+								<span class='erreur_message'>(#GET{erreurs})</span>
+								]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+							</li>
+							#SET{name,url_evenement}#SET{obli,''}#SET{defaut,'evenement'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+								<span class='erreur_message'>(#GET{erreurs})</span>
+								]
+								#SET{val,evenement}
+								<div class="choix">
+									<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+									<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+								</div>
+								#SET{val,article}
+								<div class="choix">
+									<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+									<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+								</div>
+							</li>
+							[(#VAL{_AGENDA_INSERT_HEAD_CSS}|defined|non)
+							#SET{name,insert_head_css}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+								<span class='erreur_message'>(#GET{erreurs})</span>
+								]
+								#SET{val,1}
+								<div class="choix">
+									<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+									<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+								</div>
+							</li>
+							]
+							#SET{name,synchro_statut}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+								<span class='erreur_message'>(#GET{erreurs})</span>
+								]
+								#SET{val,1}
+								<div class="choix">
+									<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+									<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+								</div>
+							</li>
+						</ul>
+					</fieldset>
 				</li>
 				<li class="fieldset">
 					<fieldset>

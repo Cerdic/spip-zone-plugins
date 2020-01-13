@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'explication_effacer_evenements_passes' => 'Mettre le nombre de jour après lequel un évènement passés est automatiquement effacés (0 ou nombre négatif pour désactiver)',
+	'explication_effacer_evenements_passes' => 'Mettre le nombre de jour après lequel un évènement passé est automatiquement effacé (0 ou nombre négatif pour désactiver)',
 
 	// L
 	'label_affichage_debut' => 'Début de la liste',
@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_affichage_duree' => 'Lister les événements sur',
 	'label_articlepardefaut' => 'Identifiant article par défaut',
 	'label_descriptif' => 'Descriptif',
-	'label_effacer_evenements_passes' => 'Effacer automatiquement les évènement passés',
+	'label_effacer_evenements_passes' => 'Effacer les évènement passés',
 	'label_insert_head_css_1' => 'Insérer automatiquement les styles par défaut de l’agenda',
 	'label_synchro_statut_1' => 'Synchroniser automatiquement les statuts des évènements avec ceux des articles',
 	'label_titre' => 'Titre de la page',
@@ -31,8 +31,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_url_evenement_article' => 'sur la page de l’article associé',
 	'label_url_evenement_evenement' => 'sur une page dédiée pour chaque événement',
 	'legend_nettoyage_agenda' => 'Nettoyage régulier de l’agenda',
-	'legend_presentation_agenda' => 'Présentation de l’agenda',
-
+	'legend_presentation_agenda' => 'Présentation de l’agenda dans l\'espace privé',
+	'legend_presentation_agenda_public' => 'Présentation de l’agenda sur le site public',
 	// T
-	'titre_configuration' => 'Affichage de l’Agenda'
+	'titre_configuration' => 'Configuration de l’Agenda'
 );
