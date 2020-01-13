@@ -70,11 +70,12 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 		 */
 		$fichier_lang_principal = $dir_module . '/' . $module . '_' . $source['lang'] . '.php';
 		$liste_fichiers_lang = glob($dir_module . '/' . $module . '_*.php');
-		$liste_fichiers_lang = array_diff($liste_fichiers_lang, [$fichier_lang_principal]);
-
 		if (!in_array($fichier_lang_principal, $liste_fichiers_lang)){
 			salvatore_fail("[Lecteur] Erreur sur $module", "|-- Pas de fichier lang principal $fichier_lang_principal : import impossible pour ce module");
 		}
+
+		// pour la suite, on enleve la langue principale de la liste des fichiers
+		$liste_fichiers_lang = array_diff($liste_fichiers_lang, [$fichier_lang_principal]);
 
 		/**
 		 * On regarde quelle est la date de dernière modification du fichier de langue principale
@@ -83,11 +84,13 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 
 		if ($row_module = salvatore_retrouver_tradlang_module($dir_module, $module)) {
 			$id_tradlang_module = intval($row_module['id_tradlang_module']);
+			salvatore_log("Module en base #$id_tradlang_module");
 			/**
 			 * Si la langue mere a changée, on la modifie
 			 */
 			if ($row_module['lang_mere']!==$source['lang']){
 				sql_updateq('spip_tradlang_modules', array('lang_mere' => $source['lang']), 'id_tradlang_module=' . intval($id_tradlang_module));
+				salvatore_log("lang_mere mise a jour : " . $row_module['lang_mere'] . " => " . $source['lang']);
 				$last_update = time();
 			}
 			/**
@@ -95,6 +98,7 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 			 */
 			if ($row_module['dir_module']!==$source['dir_module']){
 				sql_updateq('spip_tradlang_modules', array('dir_module' => $source['dir_module']), 'id_tradlang_module=' . intval($id_tradlang_module));
+				salvatore_log("dir_module mis a jour : " . $row_module['dir_module'] . " => " . $source['dir_module']);
 				$last_update = time();
 			}
 		}
@@ -127,7 +131,11 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 				if (!intval($id_tradlang_module)){
 					salvatore_fail("[Lecteur] Erreur sur $module", "Echec insertion dans spip_tradlang_modules " . json_encode($insert));
 				}
+				else {
+					salvatore_log("Insertion en base #$id_tradlang_module");
+				}
 			}
+
 		}
 		// Pas de mise a jour recente du fichier maitre deja en base
 		else {
@@ -155,7 +163,7 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 
 			$liste_fichiers_lang = array();
 			if ($langues_a_ajouter){
-				salvatore_log('On a ' . count($langues_a_ajouter) . " nouvelle(s) langue(s) à insérer");
+				salvatore_log('On a ' . count($langues_a_ajouter) . " nouvelle(s) langue(s) à insérer (".count($langues_en_base). " langue(s) an base)");
 				$liste_fichiers_lang = array_column($langues_a_ajouter, 'fichier');
 			}
 		}
@@ -247,7 +255,9 @@ function salvatore_importer_module_langue($id_tradlang_module, $source, $fichier
 	$chaines = $GLOBALS[$idx];  // on a vu certains fichiers faire des betises et modifier idx_lang
 
 	if (is_null($chaines)){
-		salvatore_envoyer_mail("[Lecteur] Erreur sur $module", "Erreur, fichier $fichier_lang mal forme");
+		$erreur = "Erreur, fichier $fichier_lang mal forme";
+		salvatore_log("<error>$erreur</error>");
+		salvatore_envoyer_mail("[Lecteur] Erreur sur $module", $erreur);
 		return false;
 	}
 
@@ -366,10 +376,11 @@ function salvatore_importer_module_langue($id_tradlang_module, $source, $fichier
 						 * On le récupère donc
 						 */
 						if (!$id_tradlang){
-							$tradlang = sql_fetsel('*', 'spip_tradlangs', 'id=' . sql_quote($id) . ' AND id_tradlang_module=' . intval($id_tradlang_module) . 'AND lang=' . sql_quote($lang) . ' AND statut=' . sql_quote('attic'));
-							if (is_array($tradlang)){
-								$id_tradlang = intval($tradlang['id_tradlang']);
-								salvatore_log("<info>Recuperation d'une chaine de statut ATTIC</info>");
+							// TODO : la cle unique id doit etre sur id	- id_tradlang_module - lang et pas sur id	- module - lang
+							// mais il serait bien de pouvoir piquer une chaine attic du meme module meme si pas id_tradlang_module identique
+							$tradlang = sql_fetsel('*', 'spip_tradlangs', 'id=' . sql_quote($id) . ' AND id_tradlang_module=' . intval($id_tradlang_module) . ' AND lang=' . sql_quote($lang) . ' AND statut=' . sql_quote('attic'));
+							if ($tradlang and $id_tradlang = intval($tradlang['id_tradlang'])){
+								salvatore_log("<info>Recuperation chaine ".$source['module'].":{$id}[{$lang}] de statut ATTIC</info>");
 								sql_updateq('spip_tradlangs', $set, 'id_tradlang=' . intval($id_tradlang));
 
 								$trads = sql_allfetsel('id_tradlang', 'spip_tradlangs', 'id=' . sql_quote($id) . ' AND id_tradlang_module=' . intval($id_tradlang_module) . 'AND lang!=' . sql_quote($lang) . ' AND statut=' . sql_quote('attic'));
@@ -379,6 +390,9 @@ function salvatore_importer_module_langue($id_tradlang_module, $source, $fichier
 									sql_updateq('spip_tradlangs', $maj, 'id_tradlang=' . intval($trad['id_tradlang']));
 								}
 								$recuperees++;
+							}
+							else {
+								salvatore_fail("[Lecteur] Echec insertion", "Echec insertion en base : " . json_encode($set));
 							}
 						}
 
