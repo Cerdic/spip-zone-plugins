@@ -1,0 +1,56 @@
+<div class="formulaire_spip formulaire_contact_libre ajax" id="formulaire_contact_libre#ENV{id}">
+<br class="bugajaxie" />
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+[(#ENV{editable})
+<form method="post" action="#ENV{action}#formulaire_contact_libre#ENV{id}">
+	[(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
+	#ACTION_FORMULAIRE{#ENV{action}}
+
+	[(#REM) Previsualisation... ]
+	[(#ENV*{erreurs}|table_valeur{previsu}|oui)
+	<fieldset class="previsu">
+		<legend><:previsualisation:></legend>
+		<div>
+			<div><strong>#ENV{sujet_message}</strong> - <em>#ENV{email_message}</em></div>
+			<div>[(#ENV{texte_message}|nl2br)]</div>
+		</div>
+		<p class="boutons"><input type="submit" class="submit" name="confirmer" value="<:form_prop_confirmer_envoi:>" /></p>
+	</fieldset>
+	]
+
+	[(#REM) Sinon, formulaire normal ]
+	<fieldset>
+		<legend><:envoyer_message:></legend>
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+			[(#SAISIE{input,email_message,
+				id=email_message#ENV{id},
+				label=<:entree_adresse_email:>,
+				size=30,
+				obligatoire=oui,
+				info_obligatoire=""})]
+			[(#SAISIE{input,sujet_message,
+				id=sujet_message#ENV{id},
+				label=<:form_prop_sujet:>,
+				size=30,
+				obligatoire=oui,
+				info_obligatoire=""})]
+			[(#SAISIE{textarea,texte_message,
+				id=texte_message#ENV{id},
+				label=<:info_texte_message:>,
+				rows=8,
+				cols=60,
+				obligatoire=oui,
+				info_obligatoire=""})]
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+	</fieldset>
+	[(#REM) Piege a robots spammeurs ]
+	<p style="display: none;">
+		<label for="nobot"><:antispam_champ_vide:></label>
+		<input type="text" class="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" />
+	</p>
+	<p class="boutons"><input type="submit" class="submit" name="valide" value="<:form_prop_envoyer:>" /></p>
+</form>
+]
+</div>
