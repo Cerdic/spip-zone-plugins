@@ -5,7 +5,7 @@
 	points,-1
 }})
 ]
-<BOUCLE_statut(POUR) {tableau #LISTE{prop, publie, poubelle}} {'|'} {si #ENV{filtre_statut,oui}|!={non}}>
+<BOUCLE_statut(POUR) {tableau #LISTE{prop, publie, poubelle}} {'|'} {si #ENV{filtre_statut,oui}|!={non}} {si #CONFIG{agenda/filtres_statut}}>
 [(#ENV{statut}|=={#VALEUR}|?{
 <span class='on'>[(#VAL{agenda:info_evenements_#VALEUR}|_T)]</span>,
 	[<a href="(#SELF|parametre_url{statut,#VALEUR})">[(#VAL{agenda:info_evenements_#VALEUR}|_T)]</a>]
