@@ -201,6 +201,7 @@ function salvatore_get_lang_from($module, $fichier_lang) {
 	return $lang;
 }
 
+
 /**
  * Verifier si un module de langue est gere par ce salvatore
  * @param $dir_module
@@ -210,8 +211,31 @@ function salvatore_get_lang_from($module, $fichier_lang) {
  *   chaine vide si c'est bien nous qui gerons
  */
 function salvatore_verifier_gestionnaire_traduction($dir_module, $module) {
-	$xml_file = $dir_module . '/' . $module . '.xml';
 
+	/**
+	 * On teste ici si le fichier est géré par un autre salvatore
+	 * Si oui on empeche son import en le signifiant
+	 */
+	if ($t = salvatore_lire_gestionnaire_traduction($dir_module, $module)){
+		$url = extraire_attribut($t, 'url');
+		$gestionnaire = extraire_attribut($t, 'gestionnaire');
+		if ($gestionnaire !== 'salvatore'
+		  or protocole_implicite($url) !== protocole_implicite($GLOBALS['meta']['adresse_site'])) {
+			return "$gestionnaire@$url";
+		}
+	}
+
+	return '';
+}
+
+/**
+ * Lire la balise <traduction> du fichier .xml
+ * @param string $dir_module
+ * @param string $module
+ * @return string
+ */
+function salvatore_lire_gestionnaire_traduction($dir_module, $module) {
+	$xml_file = $dir_module . '/' . $module . '.xml';
 	/**
 	 * On teste ici si le fichier est géré par un autre salvatore
 	 * Si oui on empeche son import en le signifiant
@@ -219,21 +243,45 @@ function salvatore_verifier_gestionnaire_traduction($dir_module, $module) {
 	if (file_exists($xml_file)){
 		$xml_content = spip_xml_load($xml_file);
 		if (is_array($xml_content)){
-			spip_xml_match_nodes('/^traduction/', $xml_content, $matches);
-			$nodes = array_keys($matches);
-			$test = '<' . reset($nodes) . '>';
-			$url = extraire_attribut($test, 'url');
-			$gestionnaire = extraire_attribut($test, 'gestionnaire');
-			if ($gestionnaire !== 'salvatore'
-			  or protocole_implicite($url) !== protocole_implicite($GLOBALS['meta']['adresse_site'])) {
-				return "$gestionnaire@$url";
+			// normalement on a qu'une balise <traduction...> englobante, donc on prend la premiere qu'on trouve
+			if (spip_xml_match_nodes('/^traduction/', $xml_content, $matches)
+			  and $nodes = array_keys($matches)
+			  and $node = reset($nodes)) {
+				return "<$node>";
 			}
 		}
 	}
-
 	return '';
 }
 
+/**
+ * Retrouver la ligne de spip_tradlang_modules qui correspond a un dir_module/module, meme en cas de chanchement de repo (url/branches)
+ * Attention : ca veut dire que si on branche et qu'on veut traduire 2 branches d'un meme module
+ * il faut supprimer le fichier xml de la nouvelle branche pour qu'elle soit bien ajoutee a trad-lang
+ * et eviter qu'on pense que c'est un renommage
+ *
+ * @param $dir_module
+ * @param $module
+ * @return array|bool
+ */
+function salvatore_retrouver_tradlang_module($dir_module, $module) {
+	$base_dir_module = basename($dir_module);
+	if ($row_module = sql_fetsel('*', 'spip_tradlang_modules', 'dir_module = ' . sql_quote($base_dir_module))) {
+		return $row_module;
+	}
+	// peut-etre c'est un module qui a change d'url repo, et donc son dir_module a change ?
+	// TODO : ecrire dir_module dans dir=".." de la balise <traduction>
+	if ($t = salvatore_lire_gestionnaire_traduction($dir_module, $module)
+	  and $old_dir_module = extraire_attribut($t, 'dir')
+	  and $old_dir_module !== $base_dir_module){
+
+		if ($row_module = sql_fetsel('*', 'spip_tradlang_modules', 'dir_module = ' . sql_quote($old_dir_module))) {
+			return $row_module;
+		}
+	}
+
+	return false;
+}
 
 /**
  * Ajouter les credentials user/pass sur les urls de repo

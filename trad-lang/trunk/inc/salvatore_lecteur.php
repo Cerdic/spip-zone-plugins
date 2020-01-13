@@ -53,7 +53,7 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 
 	$tradlang_verifier_langue_base = charger_fonction('tradlang_verifier_langue_base', 'inc', true);
 	$tradlang_verifier_bilans = charger_fonction('tradlang_verifier_bilans', 'inc', true);
-
+	$invalider = false;
 
 	foreach ($liste_sources as $source){
 		salvatore_log("\n<info>--- Module " . $source['module'] . " | " . $source['dir_module'] . " | " . $source['url'] . "</info>");
@@ -81,7 +81,24 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 		 */
 		$last_update = filemtime($fichier_lang_principal);
 
-		$row_module = sql_fetsel('id_tradlang_module, lang_mere', 'spip_tradlang_modules', 'dir_module = ' . sql_quote($source['dir_module']));
+		if ($row_module = salvatore_retrouver_tradlang_module($dir_module, $module)) {
+			$id_module = intval($row_module['id_tradlang_module']);
+			/**
+			 * Si la langue mere a changée, on la modifie
+			 */
+			if ($row_module['lang_mere']!==$source['lang']){
+				sql_updateq('spip_tradlang_modules', array('lang_mere' => $source['lang']), 'id_tradlang_module = ' . intval($id_module));
+				$last_update = time();
+			}
+			/**
+			 * Si le dir_module a change, on le met a jour
+			 */
+			if ($row_module['dir_module']!==$source['dir_module']){
+				sql_updateq('spip_tradlang_modules', array('dir_module' => $source['dir_module']), 'id_tradlang_module = ' . intval($id_module));
+				$last_update = time();
+			}
+		}
+
 		$langues_a_jour = array();
 
 		if (!$row_module or $last_update>$refresh_time){
@@ -95,7 +112,6 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 			 * Si le module n'existe pas... on le crée
 			 */
 			if (!$row_module or !$id_module = intval($row_module['id_tradlang_module'])){
-				// TODO : c'est peut-etre juste un repo qui a change d'adresse ?
 				$insert = [
 					'module' => $source['module'],
 					'dir_module' => $source['dir_module'],
@@ -111,12 +127,6 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 				if (!intval($id_module)){
 					salvatore_fail("[Lecteur] Erreur sur $module", "Echec insertion dans spip_tradlang_modules " . json_encode($insert));
 				}
-			}
-			elseif ($row_module['lang_mere']!==$source['lang']) {
-				/**
-				 * Si la langue mere a changée, on la modifie
-				 */
-				sql_updateq('spip_tradlang_modules', array('lang_mere' => $source['lang']), 'id_tradlang_module = ' . intval($id_module));
 			}
 		}
 		// Pas de mise a jour recente du fichier maitre deja en base
