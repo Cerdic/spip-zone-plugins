@@ -381,3 +381,11 @@ function agenda_saisies_afficher_si_js_saisies_form($flux) {
 	return $flux;
 }
 
+/**
+ * Effacer regulièrement les evenements de l'agenda
+ * en attendant qu'on soit en full spip 3.0 et qu'on ait droit à la balise genie
+*/
+function agenda_taches_generales_cron($flux) {
+	$flux['agenda_effacer_evenements_passes'] = 24*3600;
+	return $flux;
+}
