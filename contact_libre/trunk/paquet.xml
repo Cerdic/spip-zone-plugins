@@ -1,7 +1,7 @@
 <paquet
 	prefix="contact_libre"
 	categorie="communication"
-	version="2.0.1"
+	version="2.0.2"
 	etat="stable"
 	compatibilite="[3.1.0;3.2.*]"
 	logo="prive/themes/spip/images/contact_libre-48.png"
@@ -14,5 +14,5 @@
 	<licence>GNU/GPL</licence>
 
 	<necessite nom="saisies" compatibilite="[3.31.3;[" />
-	<utilise nom="nospam" compatibilite="[2.1.16;[" />
+	<utilise nom="nospam" compatibilite="[2.1.6;[" />
 </paquet>
