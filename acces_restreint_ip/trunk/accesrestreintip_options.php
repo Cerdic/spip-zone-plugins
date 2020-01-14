@@ -29,23 +29,33 @@ function accesrestreintip_lister_zones_par_ip($ip=null) {
 	
 	if ($zones = sql_allfetsel('id_zone, ips', 'spip_zones', 'ips != ""') and is_array($zones)) {
 		foreach ($zones as $zone) {
-			$ranges = explode(',', $zone['ips']);
-			foreach ($ranges as $range) {
-				$range = trim($range);
-				// Range d'IP contenant - comme séparateur
-				if (preg_match ("/-/",$range))  {
-					$ranges_2 = explode ('-', $range) ;
-					$low_long_ip = ip2long($ranges_2[0]);
-					$high_long_ip = ip2long($ranges_2[1]);
-					if ($long_ip <= $high_long_ip and $low_long_ip <= $long_ip) {
-						$zones_autorisees[] = $zone['id_zone'];
-						break; // on a trouvé une IP bonne on ne continue pas plus loin
-					}
-				} // IP individuelle
-				else {
-					if ($long_ip == ip2long($range)) {
-						$zones_autorisees[] = $zone['id_zone'];
-						break; // on a trouvé une IP bonne on ne continue pas plus loin
+			// On découpe par lignes
+			$lignes = explode("\n", $zone['ips']);
+			foreach ($lignes as $ligne) {
+				// On supprime les commentaires
+				$ligne = trim(preg_replace('|^#(.*)$|', '', $ligne));
+				// S'il reste quelque chose
+				if ($ligne) {
+					// Maintenant on découpe par virgules
+					$ranges = explode(',', $ligne);
+					foreach ($ranges as $range) {
+						$range = trim($range);
+						// Range d'IP contenant - comme séparateur
+						if (preg_match ("/-/",$range))  {
+							$ranges_2 = explode ('-', $range) ;
+							$low_long_ip = ip2long($ranges_2[0]);
+							$high_long_ip = ip2long($ranges_2[1]);
+							if ($long_ip <= $high_long_ip and $low_long_ip <= $long_ip) {
+								$zones_autorisees[] = $zone['id_zone'];
+								break; // on a trouvé une IP bonne pour cette zone, on ne continue pas plus loin
+							}
+						} // IP individuelle
+						else {
+							if ($long_ip == ip2long($range)) {
+								$zones_autorisees[] = $zone['id_zone'];
+								break; // on a trouvé une IP bonne pour cette zone, on ne continue pas plus loin
+							}
+						}
 					}
 				}
 			}
