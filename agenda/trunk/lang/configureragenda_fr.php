@@ -32,8 +32,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_url_evenement_article' => 'sur la page de l’article associé',
 	'label_url_evenement_evenement' => 'sur une page dédiée pour chaque événement',
 	'legend_nettoyage_agenda' => 'Nettoyage régulier de l’agenda',
-	'legend_presentation_agenda' => 'Présentation de l’agenda dans l\'espace privé',
+	'legend_presentation_agenda' => 'Présentation de l’agenda dans l’espace privé',
 	'legend_presentation_agenda_public' => 'Présentation de l’agenda sur le site public',
+
 	// T
 	'titre_configuration' => 'Configuration de l’Agenda'
 );

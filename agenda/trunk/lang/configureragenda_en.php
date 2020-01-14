@@ -27,8 +27,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_url_evenement' => 'Event display',
 	'label_url_evenement_article' => 'on the page of the related article',
 	'label_url_evenement_evenement' => 'on a dedicated page for each event',
-	'legend_presentation_agenda' => 'Agenda introduction',
+	'legend_presentation_agenda' => 'Agenda introduction', # MODIF
 
 	// T
-	'titre_configuration' => 'Agenda display'
+	'titre_configuration' => 'Agenda display' # MODIF
 );
