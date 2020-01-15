@@ -9,13 +9,16 @@
  * 
  */
 
+pour les possibilités voir MediaWiki API
+https://www.mediawiki.org/wiki/API:Main_page
+
 Attention, DEV en cours
 
 Pour le moment :
 - ne fonctionne qu'avec CURL
 - Ne fonctionne que sur un objet, soit contact du plugin Contacts & Organisations
 
-Il faut ajouter les champs sur la table spip_contacts, avec par exmple le plugin cextras
+Il faut ajouter les champs sur la table spip_contacts, avec par exemple le plugin cextras
 
 - date_naissance
 - date_deces

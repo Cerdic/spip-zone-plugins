@@ -12,6 +12,7 @@
 	<!-- Extraire des données Wikipedia -->
 
 	<auteur lien='https://elastick.net/'>Anne-lise Martenot</auteur>
+	<credit lien='https://www.mediawiki.org/wiki/API:Main_page'>MediaWiki API</credit>
 
 	<licence>MIT License</licence>
 
