@@ -1,0 +1,21 @@
+<paquet
+	prefix="askwiki"
+	categorie="outil"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.2.7;3.2.*]"
+	logo="prive/themes/spip/images/askwiki-64.png"
+	documentation="pas encore"
+	schema="1.0.0" 
+>
+	<nom>Askwiki</nom>
+	<!-- Extraire des données Wikipedia -->
+
+	<auteur lien='https://elastick.net/'>Anne-lise Martenot</auteur>
+
+	<licence>MIT License</licence>
+
+	<pipeline nom="autoriser" inclure="askwiki_autorisations.php" /> 
+
+
+</paquet>

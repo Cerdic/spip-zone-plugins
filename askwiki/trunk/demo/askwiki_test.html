@@ -1,0 +1,47 @@
+La page demandé est 
+[(#SET{titre_page,[(#ENV{titre_page,"Nathalie_Sarraute"})]})]
+
+[(#ENV{titre_page}|oui)
+	[(#SELF|parametre_url{titre_page})]
+]
+[(#ENV{titre_page}|non)
+	[(#SELF|parametre_url{titre_page,"Nathalie_Sarraute"})]
+]
+
+<h4>Titre = #GET{titre_page}</h4>
+<p>Texte récupéré = [(#GET{titre_page}|askwiki)] </p>
+<p>Première phrase = [(#GET{titre_page}|askwiki|first_line)]</p>
+
+[(#SET{dates,[(#GET{titre_page}|askwiki|extraire_balises{time})]})]
+
+[(#GET{dates}|foreach)]
+
+<h4>VALEUR peut-être un tableau ou un string</h4>
+<p>
+<BOUCLE_dadates(DATA){source table,#GET{dates}}>
+[-#CLE (#CLE|=={0}|oui) Date 1 - date de naissance:]
+[-#CLE (#CLE|=={1}|oui) Date 2 - date de décès:]
+[(#VALEUR|extraire_attribut{datetime}|sinon{[(#VALEUR|extraire_balise{time})]})]<br>
+</BOUCLE_dadates>
+</p>
+
+<h4>Autre méthode, pour une personne uniquement !</h4>
+Todo ⇒ tester le type de date (annee ou sql date)
+<p>[Date de naissance: (#GET{titre_page}|askwiki_datelife{0})]</p>
+<p>[Date de décès: (#GET{titre_page}|askwiki_datelife{1})]</p>
+
+<h4>boutons d'action</h4>
+[(#BOUTON_ACTION{
+   '<:remplir_champ_date_naissance:>',
+   [(#URL_ACTION_AUTEUR{remplir_champ,[(#GET{titre_page}|askwiki_datelife{0})]/date_naissance/contact/471,#SELF})],
+ajax})]
+
+[(#BOUTON_ACTION{
+   '<:remplir_champ_date_deces:>',
+   [(#URL_ACTION_AUTEUR{remplir_champ,[(#GET{titre_page}|askwiki_datelife{1})]/date_deces/contact/471,#SELF})],
+ajax})]
+
+[(#BOUTON_ACTION{
+   '<:remplir_champ_page_wikipedia:>',
+   [(#URL_ACTION_AUTEUR{remplir_champ,[(#GET{titre_page}|askwiki)]/page_wikipedia/organisation/3,#SELF})],
+ajax})]

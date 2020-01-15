@@ -1,0 +1,92 @@
+[(#SET{defaut_tri,#ARRAY{
+	nom,1,
+	id_contact,1
+}})
+]
+<B_liste_contacts>
+[(#GRAND_TOTAL|>{20}|et{#ENV{id_annuaire}|ou{#ENV{id_organisation}}|non}|oui)
+	<INCLURE{fond=inclure/pagination_alpha_contacts, env} />
+]
+[(#TOTAL_BOUCLE|>={10}|oui)
+<div class="actions">
+	<a href="#" onclick="jQuery('.selection input').attr('checked','checked');return false;"><:askwiki:selectionner_tout:></a>
+	<a href="#" onclick="jQuery('.selection input').attr('checked',false);return false;"><:askwiki:selectionner_rien:></a>
+</div>]
+#ANCRE_PAGINATION
+<div class="liste-objets contacts">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{contacts:contact_un,contacts:contacts_nb}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+		<th class="selection"></th>
+		<th class="nom">[(#TRI{nom,<:askwiki:nom:>,ajax})]</th>
+		<th class="page_wikipedia"><:askwiki:page_wikipedia:></th>
+		<th class="phrase_wikipedia"><:askwiki:phrase_wikipedia:></th>
+		<th class="date_naissance"><:askwiki:date_naissance:></th>
+		<th class="date_deces"><:askwiki:date_deces:></th>
+		<th class="action"><:askwiki:action:></th>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_contacts(CONTACTS spip_mots_liens)
+		{id_annuaire?}
+		{id_contact?}
+		{id_organisation?}
+		{recherche?}
+		{id_mot?}
+		{where?}
+		{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,20} #ENV{pagination_id,'_liste_contacts'}}
+	>
+		<tr class="contact#ID_FOND #STATUT[ (#COMPTEUR_BOUCLE|alterner{row_odd odd,row_even even})]">
+			<td class="selection">
+				<input type="checkbox" name="contacts[]" value="#ID_CONTACT" />
+			</td>
+			<td class="nom"><a href="#URL_CONTACT">#PRENOM #NOM</a></td>
+			<td class="email #EDIT{page_wikipedia}">#PAGE_WIKIPEDIA</td>
+			<td class="phrase_wikipedia #EDIT{phrase_wikipedia}" title="[(#PHRASE_WIKIPEDIA|supprimer_tags)]">[(#PHRASE_WIKIPEDIA|couper{10})]</td>
+			<td class="date_naissance #EDIT{date_naissance}">[(#DATE_NAISSANCE|annee|>{0}|oui) [(#DATE_NAISSANCE|affdate{Y-m-d})] ]</td>
+			<td class="date_deces #EDIT{date_deces}">[(#DATE_DECES|annee|>{0}|oui) [(#DATE_DECES|affdate{Y-m-d})] ]</td>
+			<td class="actions">
+				<button
+					type="submit"
+					name="askwiki_contact"
+					value="#ID_CONTACT"
+				>
+					<:askwiki:rechercher_la_page:>
+				</button>
+			</td>
+		</tr>
+		<tr> <!-- previsu -->
+			[(#ENV*{td_plus#ID_CONTACT}|oui)<td colspan="7">]
+			
+			[<h5>(#ENV*{page_wikipedia#ID_CONTACT})</h5>]
+			[<p>(#ENV*{phrase_wikipedia#ID_CONTACT})</p>]
+			[Naissance :(#ENV*{naissance#ID_CONTACT})<br>]
+			[Décès :(#ENV*{deces#ID_CONTACT})<br>]
+			[(#ENV*{td_plus#ID_CONTACT}|oui) 
+				<button
+					type="submit"
+					name="enregistrer_askwiki"
+					value="#ID_CONTACT"
+				>
+					<:askwiki:enregistrer_le_resultat:>
+				</button>
+			]
+			[(#ENV*{td_plus#ID_CONTACT}|oui)</td>]
+		</tr>
+	</BOUCLE_liste_contacts>
+	</tbody>
+</table>
+[(#TOTAL_BOUCLE|>={10}|oui)
+<div class="actions">
+	<a href="#" onclick="jQuery('.selection input').attr('checked','checked');return false;"><:askwiki:selectionner_tout:></a>
+	<a href="#" onclick="jQuery('.selection input').attr('checked',false);return false;"><:askwiki:selectionner_rien:></a>
+</div>]
+</B_liste_contacts>
+
+
+			[(#REM)page_wikipedia : 
+			<br>[https://fr.wikipedia.org/wiki/(#ID_CONTACT|titre_page_wiki{contact})]
+			<br>phrase_wikipedia : [(#ID_CONTACT|titre_page_wiki{contact}|askwiki_first_line|sinon{La page demandée n'existe pas.})]
+			<p>Date de naissance: [(#ID_CONTACT|titre_page_wiki{contact}|askwiki_datelife{0})]</p>
+			<p>Date de décès: [(#ID_CONTACT|titre_page_wiki{contact}|askwiki_datelife{1})]</p>
+			]

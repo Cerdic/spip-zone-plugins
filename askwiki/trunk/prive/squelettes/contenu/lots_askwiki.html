@@ -1,0 +1,18 @@
+[(#AUTORISER{configurer,_askwiki}|sinon_interdire_acces)]
+
+<h1 class="grostitre"><:askwiki:recuperer_depuis_askwiki:></h1>
+<a href="#URL_ECRIRE{configurer_askwiki}" title="#CONFIG{askwiki/url_wikipedia,#CONFIG}">Modifier le serveur de Wikipedia </a>
+
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class='nettoyeur'></div>
+
+<div class="ajax">
+	[(#FORMULAIRE_LOTS_ASKWIKI{[(#SELF|parametre_url{lettre,#ENV{lettre}}|parametre_url{id_contact,#ENV{id_contact}})]})]
+</div>
+
+[(#AUTORISER{creer,contact})
+	[(#URL_ECRIRE{contact_edit,new=oui}
+		|icone_verticale{<:contacts:contact_creer:>,contact,new,right})]
+]
+
+
