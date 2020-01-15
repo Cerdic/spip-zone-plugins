@@ -1,57 +1,66 @@
-	<B_ld>
-		<div class="onglets_traduction[ (#ENV{objet}) ] barre_onglet">
-		<ul>
-		<BOUCLE_ld(DATA){source tableau, #ENV{langues_dispos}}>#SET{creer_racine,''}#SET{alert,''}
-		[(#ENV{langues_traduites}|table_valeur{#VALEUR}|=={#ENV{id_trad}}|oui)#SET{ref_#VALEUR,oui}]
-			[(#VALEUR|array_key_exists{#ENV{langues_traduites}}|?{
-				[(#VALEUR|=={#ENV{lang_objet}}|?{
-					<li class="box_onglet"><strong class="on">[(#GET{ref_#VALEUR}|oui)<div class="ref">*<span><:spip:trad_reference:></span></div>][(#VALEUR|traduire_nom_langue)]</strong></li>
-					,
-					<li class="traduit box_onglet">[(#GET{ref_#VALEUR}|oui)<div class="ref">*<span><:spip:trad_reference:></span></div>]<a href="[(#URL_ECRIRE{#ENV{objet}}|parametre_url{#ENV{id_table_objet},#ENV{langues_traduites}|table_valeur{#VALEUR}})]">[(#VALEUR|traduire_nom_langue)]</a></li>
-					})]
-					,
-				#SET{non_traduits,oui}
-				#SET{id_trad,#ENV{id_trad}}
-				#SET{objet,#ENV{objet}|replace{_edit,''}}
-				[(#ENV{id_parent}|oui)
-					#SET{parent,''}
-					[(#ENV{objet}|=={rubrique}|oui)#SET{parent,1}]
-					[(#SET{donnees_trad,#VALEUR|appliquer_filtre{rubrique_destination_traduction, #ENV{id_parent},#GET{parent}}})]
-					#SET{id_parent_trad,#GET{donnees_trad}|table_valeur{id_parent_trad}}
-					[(#SET{creer_racine, #GET{donnees_trad}|table_valeur{creer_racine}})]
+<B_ld>
+	<div class="onglets_traduction[ (#ENV{objet}) ] barre_onglet">
+	<ul>
+	<BOUCLE_ld(DATA){source tableau, #ENV{langues_dispos}}>#SET{creer_racine,''}#SET{alert,''}#SET{autoriser,''}
+	[(#ENV{langues_traduites}|table_valeur{#VALEUR}|=={#ENV{id_trad}}|oui)#SET{ref_#VALEUR,oui}]
+		[(#VALEUR|array_key_exists{#ENV{langues_traduites}}|?{
+			[(#VALEUR|=={#ENV{lang_objet}}|?{
+				<li class="box_onglet"><strong class="on">[(#GET{ref_#VALEUR}|oui)<div class="ref">*<span><:spip:trad_reference:></span></div>][(#VALEUR|traduire_nom_langue)]</strong></li>
+				,
+				<li class="traduit box_onglet">[(#GET{ref_#VALEUR}|oui)<div class="ref">*<span><:spip:trad_reference:></span></div>]<a href="[(#URL_ECRIRE{#ENV{objet}}|parametre_url{#ENV{id_table_objet},#ENV{langues_traduites}|table_valeur{#VALEUR}})]">[(#VALEUR|traduire_nom_langue)]</a></li>
+				})]
+				,
+			#SET{non_traduits,oui}
+			#SET{id_trad,#ENV{id_trad}}
+			#SET{objet,#ENV{objet}|replace{_edit,''}}
+			[(#ENV{id_parent}|oui)
+				#SET{parent,''}
+				[(#GET{objet}|=={rubrique}|oui)#SET{parent,1}]
+				[(#SET{donnees_trad,#VALEUR|appliquer_filtre{rubrique_destination_traduction, #ENV{id_parent},#GET{parent}}})]
+				#SET{id_parent_trad,#GET{donnees_trad}|table_valeur{id_parent_trad}}
+				[(#SET{creer_racine, #GET{donnees_trad}|table_valeur{creer_racine}})]
 
-					[(#GET{creer_racine}|oui)
-						#SET{alert,class="avis_source"}
-						#SET{id_trad,#GET{donnees_trad}|table_valeur{id_trad}}
-						#SET{objet,rubrique}
-						]
+				[(#GET{creer_racine}|oui)
+					#SET{alert,class="avis_source"}
+					#SET{id_trad,#GET{donnees_trad}|table_valeur{id_trad}}
+					#SET{objet,rubrique}
+					]
+			]
+			[(#REM) autorisations]
+			[(#GET{objet}|=={rubrique}|?{
+				[(#AUTORISER{creerrubriquedans,rubrique,#GET{id_parent_trad}})
+					#SET{autoriser,oui}
+				],
+				[(#AUTORISER{creer,#GET{objet}})
+					#SET{autoriser,oui}
 				]
-				[(#VALEUR|=={#ENV{lang_objet}}|?{
-						<li class="non_traduit box_onglet"><strong class="on">[(#VALEUR|traduire_nom_langue)][(#ENV{ref_#VALEUR}|oui)<span><:spip:trad_reference:></span>]</strong></li>
-						,
-						[(#AUTORISER{creerrubriquedans,rubrique,#GET{id_parent_trad}})
-						<li class="non_traduit box_onglet">
-							<a[ (#GET{alert})]
-								href="[(#VAL{new}|generer_url_ecrire_entite_edit{#GET{objet}}|parametre_url{id_parent,#GET{id_parent_trad}}|parametre_url{lang_dest,#VALEUR}|parametre_url{lier_trad,#GET{id_trad}}|parametre_url{trad_new,#ENV{trad_new}}|parametre_url{retour,nav})]">
-								[(#VALEUR|traduire_nom_langue)]
-							</a>#SET{objet,rubrique}
-						</li>]
-						})]
-				})]
-		</BOUCLE_ld>
-			<li class="box_onglet bouton_options[ (#ENV{voir}|oui)on]">
-				[(#ENV{voir}|? {
-					<a class="ajax bouton_options" href="[(#SELF|parametre_url{voir,''})]" title="<:ecrire:bouton_fermer:>">
-						[(#CHEMIN{prive/themes/spip/images/interface_traduction_objets-32.png}|image_reduire{22})]
-					</a>,
-					<a  class="ajax bouton_options" href="[(#SELF|parametre_url{voir,options})]" title="<:interface_traduction_objets:options:>">
-						[(#CHEMIN{prive/themes/spip/images/interface_traduction_objets-32.png}|image_reduire{22})]
-					</a>
-				})]
-			</li>
-		</ul>
-		</div>
-	</B_ld>
+			})]
+			[(#VALEUR|=={#ENV{lang_objet}}|?{
+					<li class="non_traduit box_onglet"><strong class="on">[(#VALEUR|traduire_nom_langue)][(#ENV{ref_#VALEUR}|oui)<span><:spip:trad_reference:></span>]</strong></li>
+					,
+					[(#GET{autoriser}|oui)
+					<li class="non_traduit box_onglet">
+						<a[ (#GET{alert})]
+							href="[(#VAL{new}|generer_url_ecrire_entite_edit{#GET{objet}}|parametre_url{id_parent,#GET{id_parent_trad}}|parametre_url{lang_dest,#VALEUR}|parametre_url{lier_trad,#GET{id_trad}}|parametre_url{trad_new,#ENV{trad_new}}|parametre_url{retour,nav})]">
+							[(#VALEUR|traduire_nom_langue)]
+						</a>#SET{objet,rubrique}
+					</li>]
+					})]
+			})]
+	</BOUCLE_ld>
+		<li class="box_onglet bouton_options[ (#ENV{voir}|oui)on]">
+			[(#ENV{voir}|? {
+				<a class="ajax bouton_options" href="[(#SELF|parametre_url{voir,''})]" title="<:ecrire:bouton_fermer:>">
+					[(#CHEMIN{prive/themes/spip/images/interface_traduction_objets-32.png}|image_reduire{22})]
+				</a>,
+				<a  class="ajax bouton_options" href="[(#SELF|parametre_url{voir,options})]" title="<:interface_traduction_objets:options:>">
+					[(#CHEMIN{prive/themes/spip/images/interface_traduction_objets-32.png}|image_reduire{22})]
+				</a>
+			})]
+		</li>
+	</ul>
+	</div>
+</B_ld>
 [(#ENV{voir}|oui)
 <div class="changer [(#ENV{voir}|?{cadre-e,defaut})]">
 	<div class="ajax">
