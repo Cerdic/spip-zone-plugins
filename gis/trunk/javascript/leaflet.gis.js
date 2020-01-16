@@ -210,6 +210,7 @@ L.Map.Gis = L.Map.extend({
 		panonly = panonly === undefined ? false : panonly;
 		// avoid infinite zoom if bounds focus on a point
 		if (bounds._northEast.lat == bounds._southWest.lat && bounds._northEast.lng == bounds._southWest.lng) {
+			var singlePoint = true;
 			options.maxZoom = options.zoom;
 			if (panonly) {
 				options.maxZoom = map._zoom;
@@ -221,7 +222,7 @@ L.Map.Gis = L.Map.extend({
 		}
 		map.fitBounds(bounds, options);
 		map.options.maxZoom = maxZoomOriginal;
-		if (options.zoom) {
+		if (options.zoom && singlePoint) {
 			map.setZoom(options.zoom);
 		}
 	},
