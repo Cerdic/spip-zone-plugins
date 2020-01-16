@@ -270,6 +270,14 @@ function mailshot_verifier_email_envoi_bloque($email, $subscriber, $shoot) {
 	static $envois_idem = array();
 	static $test_email_vu = array();
 
+	if (!$subscriber or empty($subscriber['email'])) {
+		return array(
+			'fail' => true,
+			'statut' => 'fail',
+			'date' => date('Y-m-d H:i:s'),
+			'log' => "ERREUR Plus de subscriber pour $email",
+		);
+	}
 	if (preg_match(",@example\.org$,i",$subscriber['email'])) {
 		return array(
 			'fail' => true,
