@@ -39,10 +39,14 @@
 				var checkRadioName = $(this).attr('name');
 				// si rien n'est coché
 				if(!base.$el.find('input[name="'+checkRadioName+'"]:checked').length){
-					// supprimer les données du nom avec []
-					delete formData[checkRadioName];
-					// ajouter un tableau vide sur le nom sans [] 
-					formData[checkRadioName.replace(/[\[\]]+/g, '')] = [];
+					var name = checkRadioName.replace(/[\[\]]+/g, '');
+					// et si on n'a pas déjà des données
+					if(!formData[name].length) {
+						// // supprimer les données du nom avec []
+						delete formData[checkRadioName];
+						// // ajouter un tableau vide sur le nom sans [] 
+						formData[name] = [];
+					}
 				}
 			});
 
