@@ -4,7 +4,13 @@
 	[<input type="hidden" name="lang" value="(#ENV{lang})" />]
 	<label for="#ENV{_id_champ}" class="text-muted"><:info_rechercher_02:></label>
 	<div class="input-group">
-		<input type="[(#HTML5|?{search,text})]" class="search text search-query form-control" name="recherche" id="#ENV{_id_champ}"[ value="(#ENV{recherche})"] accesskey="4" autocapitalize="off" autocorrect="off" />
+		<input type="[(#HTML5|?{search,text})]"
+		       class="search text search-query form-control"
+		       name="recherche"
+		       id="#ENV{_id_champ}"[
+		       value="(#ENV{recherche})"]
+		       placeholder="<:info_rechercher|attribut_html:>"
+		       accesskey="4" autocapitalize="off" autocorrect="off" />
 		<span class="input-group-append">
 			<button type="submit" class="btn btn-outline-secondary" title="<:info_rechercher|attribut_html:>" >&gt;&gt;</button>
 		</span>
