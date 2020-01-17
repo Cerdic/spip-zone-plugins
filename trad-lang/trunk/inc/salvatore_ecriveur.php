@@ -40,7 +40,7 @@ include_spip('inc/session');
  * @param string $dir_modules
  * @throws Exception
  */
-function salvatore_ecriveur($liste_sources, $dir_modules = null, $message_commit=''){
+function salvatore_ecrire($liste_sources, $dir_modules = null, $message_commit=''){
 	include_spip('inc/salvatore');
 	salvatore_init();
 

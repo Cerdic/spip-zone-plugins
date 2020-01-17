@@ -52,6 +52,13 @@ class SalvatoreEcrire extends Command {
 				'Chemin vers le fichier traductions.txt a utiliser [salvatore/traductions/traductions.txt]',
 				null
 			)
+			->addOption(
+				'message',
+				null,
+				InputOption::VALUE_REQUIRED,
+				'Message de commit',
+				null
+			)
 		;
 	}
 
@@ -75,7 +82,9 @@ class SalvatoreEcrire extends Command {
 		$n = count($liste_trad);
 		$output->writeln("<info>$n modules dans le fichier traductions " . ($traductions ? $traductions : '') . "</info>");
 
-		salvatore_ecrire($liste_trad);
+		$message = $input->getOption('message');
+
+		salvatore_ecrire($liste_trad, null, $message ? $message : '');
 	}
 }
 
