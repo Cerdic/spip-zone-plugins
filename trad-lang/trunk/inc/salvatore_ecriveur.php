@@ -17,78 +17,66 @@
     along with Trad-Lang; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-    Copyright 2003-2013
+    Copyright 2003-2020
         Florent Jugla <florent.jugla@eledo.com>,
         Philippe Riviere <fil@rezo.net>,
         Chryjs <chryjs!@!free!.!fr>,
- 		kent1 <kent1@arscenic.info>
+        kent1 <kent1@arscenic.info>
+        Cerdic <cedric@yterium.com>
 */
 
-require_once(dirname(__FILE__) . '/inc_tradlang.php');
-$tmp = _DIR_SALVATORE_TMP;
-
-salvatore_log("\n=======================================\nECRIVEUR\nExporte les fichiers de traduction dans sa copie locale a partir de la base de donnees\n=======================================\n");
-
-$liste_sources = salvatore_charger_fichier_traductions(); // chargement du fichier traductions.txt
-
-if (!is_dir($tmp)){
-	die('Manque le repertoire ' . $tmp);
-}
-
 include_spip('base/abstract_sql');
+include_spip('inc/charsets');
+include_spip('inc/config');
 include_spip('inc/filtres');
 include_spip('inc/texte');
-include_spip('inc/config');
 include_spip('inc/xml');
+include_spip('inc/lang_liste');
+include_spip('inc/session');
+
 
 /**
- * On récupère l'URL du site de traduction
- * Elle servira à :
- * -* empêcher l'export de fichiers traduits sur une autre plateforme
- * -* générer l'url de l'interface de traduction d'un module
+ * @param array $liste_sources
+ * @param string $dir_modules
+ * @throws Exception
  */
-$url_site = $GLOBALS['meta']['adresse_site'];
+function salvatore_ecriveur($liste_sources, $dir_modules = null, $message_commit=''){
+	include_spip('inc/salvatore');
+	salvatore_init();
 
-if (isset($argv[1]) and strlen($argv[1])>1){
-	$message_commit = $argv[1] . "\n\n";
-}
+	// on va lire dans la base, il faut qu'elle soit a jour
+	salvatore_verifier_base_upgradee();
 
-foreach ($liste_sources as $source){
-	salvatore_log('==== Module ' . $source[1] . " =======================================\n");
-	$export = true;
-	/**
-	 * On test ici si le fichier est géré par un autre salvatore
-	 * Si oui on empeche son export en le signifiant
-	 */
-	if (file_exists($xml = $tmp . $source[1] . '/' . $source[1] . '.xml')){
-		$xml_content = spip_xml_load($xml);
-		if (is_array($xml_content)){
-			spip_xml_match_nodes('/^traduction/', $xml_content, $matches);
-			$test = '<' . key($matches) . '>';
-			$url = extraire_attribut($test, 'url');
-			if ($url && (str_replace(array('http://', 'https://'), '', $url)!=str_replace(array('http://', 'https://'), '', $url_site))){
-				$export = false;
-				$sujet = 'Ecriveur : Erreur sur ' . $source[1];
-				$corps = "\nErreur : export impossible, le fichier est traduit autre part : $url != $url_site\n\n";
-				salvatore_envoyer_mail($sujet, $corps);
-				salvatore_log("\nErreur : export impossible, le fichier est traduit autre part : $url != $url_site\n\n");
-			}
+	if (is_null($dir_modules)){
+		$dir_modules = _DIR_SALVATORE_MODULES;
+	}
+	salvatore_check_dir($dir_modules);
+	$gestionnaire_url = $GLOBALS['meta']['adresse_site'];
+	if (defined('_SALVATORE_TEST_URL_GESTIONNAIRE')) {
+		$gestionnaire_url = _SALVATORE_TEST_URL_GESTIONNAIRE;
+	}
+
+	foreach ($liste_sources as $source){
+		salvatore_log("\n<info>--- Module " . $source['module'] . " | " . $source['dir_module'] . " | " . $source['url'] . "</info>");
+
+		$module = $source['module'];
+		$dir_module = $dir_modules . $source['dir_module'];
+
+		if ($autre_gestionnaire = salvatore_verifier_gestionnaire_traduction($dir_module, $module)){
+			salvatore_fail("[Lecteur] Erreur sur $module", "Erreur : import impossible, le fichier est traduit autre part : $autre_gestionnaire\n");
 		}
-	}
-	/**
-	 * Si on l'exporte
-	 */
-	if ($export){
+
 		$id_tradlang_module = sql_getfetsel('id_tradlang_module', 'spip_tradlang_modules', 'module = ' . sql_quote($source[1]));
-		$url_trad = url_absolue(generer_url_entite($id_tradlang_module, 'tradlang_module'), $url_site);
-		export_trad_module($source, $url_site, $url_trad, $message_commit);
+
+		// url de l'interface de traduction d'un module
+		$url_trad = url_absolue(generer_url_entite($id_tradlang_module, 'tradlang_module'), $gestionnaire_url);
+		export_trad_module($source, $gestionnaire_url, $url_trad, $message_commit);
 	}
 }
-
-return 0;
 
 //
 // Genere les fichiers de traduction d'un module
+// TODO
 //
 function export_trad_module($source, $url_site, $url_trad, $message_commit = ''){
 	global $tmp;
