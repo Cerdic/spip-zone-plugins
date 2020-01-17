@@ -113,19 +113,20 @@ function formulaires_editer_ticket_verifier($id_ticket='new', $retour='', $assoc
 	 */
 	if (include_spip('inc/nospam')) {
 		include_spip('inc/texte');
+		include_spip('inc/nospam');
 		$texte = _request('texte');
-        $caracteres = compter_caracteres_utiles($texte);
+        $caracteres = nospam_compter_caracteres_utiles($texte);
         // moins de 10 caracteres sans les liens = spam !
         if ($caracteres < 10)
 			$erreurs['texte'] = _T('forum:forum_attention_dix_caracteres');
 
         // on analyse le titre
-        $infos_titre = analyser_spams(_request('titre'));
+        $infos_titre = nospam_analyser_spams(_request('titre'));
         // si un lien dans le titre = spam !
         if ($infos_titre['nombre_liens'] > 0)
 			$erreurs['titre'] = _T('nospam:erreur_spam');
         // on analyse le texte
-        $infos_texte = analyser_spams($texte);
+        $infos_texte = nospam_analyser_spams($texte);
 
         if ($infos_texte['nombre_liens'] > 0) {
         	// plus de 3 liens = spam, sauf si todo est là et donc 6 liens
