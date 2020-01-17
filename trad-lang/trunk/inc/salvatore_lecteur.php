@@ -376,7 +376,6 @@ function salvatore_importer_module_langue($id_tradlang_module, $source, $fichier
 						 * On le récupère donc
 						 */
 						if (!$id_tradlang){
-							// TODO : la cle unique id doit etre sur id	- id_tradlang_module - lang et pas sur id	- module - lang
 							// mais il serait bien de pouvoir piquer une chaine attic du meme module meme si pas id_tradlang_module identique
 							$tradlang = sql_fetsel('*', 'spip_tradlangs', 'id=' . sql_quote($id) . ' AND id_tradlang_module=' . intval($id_tradlang_module) . ' AND lang=' . sql_quote($lang) . ' AND statut=' . sql_quote('attic'));
 							if ($tradlang and $id_tradlang = intval($tradlang['id_tradlang'])){
@@ -401,11 +400,19 @@ function salvatore_importer_module_langue($id_tradlang_module, $source, $fichier
 						 *
 						 * Si oui, on sélectionne toutes les occurences existantes dans les autres langues et on les duplique
 						 */
-						$identique_module = sql_getfetsel('id', 'spip_tradlangs', 'id_tradlang_module=' . intval($id_tradlang_module) . ' AND lang=' . sql_quote($lang) . ' AND str=' . sql_quote($chaines[$id]));
-						if ($identique_module){
-							salvatore_log('La nouvelle chaine est une chaine dupliquée : ' . $identique_module);
+						$where_identique = [
+							'id_tradlang_module=' . intval($id_tradlang_module),
+							'lang=' . sql_quote($lang),
+							'id!=' . sql_quote($id),
+							'str=' . sql_quote($chaines[$id]),
+						];
+						$identique_meme_module = sql_getfetsel('id', 'spip_tradlangs', $where_identique);
+						if ($identique_meme_module){
+							salvatore_log("La nouvelle chaine $id est une chaine dupliquée de " . $identique_meme_module);
 
-							$chaines_a_dupliquer = sql_allfetsel('*', 'spip_tradlangs', 'id=' . sql_quote($identique_module) . ' AND id_tradlang_module=' . intval($id_tradlang_module) . ' AND lang!=' . sql_quote($lang));
+							$deja_lang = sql_allfetsel('lang', 'spip_tradlangs', 'id=' . sql_quote($id) . ' AND id_tradlang_module=' . intval($id_tradlang_module));
+							$deja_lang = array_column($deja_lang, 'lang');
+							$chaines_a_dupliquer = sql_allfetsel('*', 'spip_tradlangs', 'id=' . sql_quote($identique_meme_module) . ' AND id_tradlang_module=' . intval($id_tradlang_module) . ' AND ' . sql_in('lang', $deja_lang, 'NOT'));
 							foreach ($chaines_a_dupliquer as $chaine){
 								unset($chaine['id_tradlang']);
 								unset($chaine['maj']);
@@ -416,8 +423,11 @@ function salvatore_importer_module_langue($id_tradlang_module, $source, $fichier
 								if ($chaine['statut']=='attic'){
 									$chaine['statut'] = 'NEW';
 								}
-								$nouvelle_chaine = sql_insertq('spip_tradlangs', $chaine);
-								salvatore_log('Ajout de la version ' . $chaine['lang'] . ' - #' . $nouvelle_chaine);
+								$id_tradlang_new = sql_insertq('spip_tradlangs', $chaine);
+								if (!$id_tradlang_new) {
+									salvatore_fail("[Lecteur] Echec insertion", "Echec insertion en base : " . json_encode($chaine));
+								}
+								salvatore_log('Ajout de la version ' . $chaine['lang'] . ' - #' . $id_tradlang_new);
 							}
 						}
 						$ajoutees++;
