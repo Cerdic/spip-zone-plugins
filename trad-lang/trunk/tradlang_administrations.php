@@ -103,6 +103,29 @@ function tradlang_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter','TABLE spip_tradlang_modules ADD INDEX module (module)'),
 	);
 
+	$maj['1.1.0'] = array(
+		// supprimer tous les indexs
+		array('sql_alter','TABLE spip_tradlangs DROP INDEX id'),
+		array('sql_alter','TABLE spip_tradlangs DROP INDEX module'),
+		array('sql_alter','TABLE spip_tradlangs DROP INDEX id_tradlang_module'),
+		array('sql_alter','TABLE spip_tradlangs DROP INDEX statut'),
+		array('sql_alter','TABLE spip_tradlangs DROP INDEX langstatut'),
+		array('sql_alter','TABLE spip_tradlangs DROP INDEX modlangstatut'),
+		array('sql_alter','TABLE spip_tradlangs DROP INDEX idmodlangstatut'),
+		array('sql_alter','TABLE spip_tradlangs DROP INDEX idmodlang'),
+
+		array('sql_alter','TABLE spip_tradlangs ADD UNIQUE INDEX id_tradlang_module_id_lang (id_tradlang_module,id,lang)'),
+		array('sql_alter','TABLE spip_tradlangs ADD INDEX id_tradlang_module (id_tradlang_module)'),
+		array('sql_alter','TABLE spip_tradlangs ADD INDEX id (id)'),
+		array('sql_alter','TABLE spip_tradlangs ADD INDEX lang (lang)'),
+		array('sql_alter','TABLE spip_tradlangs ADD INDEX module (module)'),
+		array('sql_alter','TABLE spip_tradlangs ADD INDEX statut (statut)'),
+		array('sql_alter','TABLE spip_tradlangs ADD INDEX module_lang (module,lang)'),
+	);
+	$maj['1.1.1'] = array(
+		array('sql_alter','TABLE spip_tradlangs ADD INDEX id_tradlang_module_lang_statut (id_tradlang_module,lang,statut)'),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

@@ -105,12 +105,14 @@ function tradlang_declarer_tables_objets_sql($tables) {
 		),
 		'key' => array(
 			'PRIMARY KEY' => 'id_tradlang',
-			'UNIQUE' => 'id,module,lang',
-			'INDEX' => 'id',
-			'INDEX' => 'module',
-			'INDEX' => 'module,lang',
-			'INDEX' => 'id_tradlang_module',
-			'INDEX' => 'statut'
+			'UNIQUE id_tradlang_module_id_lang' => 'id_tradlang_module,id,lang',
+			'KEY id_tradlang_module' => 'id_tradlang_module',
+			'KEY id' => 'id',
+			'KEY lang' => 'lang',
+			'KEY module' => 'module',
+			'KEY statut' => 'statut',
+			'KEY module_lang' => 'module,lang',
+			'KEY id_tradlang_module_lang_statut' => 'id_tradlang_module,lang,statut', // accelere le calcul des bilans
 		),
 		'join' => array(
 			'id_tradlang' => 'id_tradlang',

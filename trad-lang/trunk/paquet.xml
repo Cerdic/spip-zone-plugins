@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.2.0;3.3.*]"
 	logo="images/spip_lang.png"
-	schema="1.0.0"
+	schema="1.1.1"
 >
 
 	<nom>Trad-Lang</nom>
