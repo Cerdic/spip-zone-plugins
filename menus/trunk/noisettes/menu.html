@@ -13,7 +13,7 @@
 
 ]
 <BOUCLE_menu(MENUS) {identifiant}>
-<nav class="menu[ (#ENV{class_conteneur}|attribut_html)]">
+<nav class="menu menu_#IDENTIFIANT[ (#ENV{class_conteneur}|attribut_html)]">
 	[(#ENV{afficher_titre_menu}|oui)[<h2 class="h2">(#TITRE|typo)</h2>]]
 	<INCLURE{fond=inclure/menu, class=#ENV{class_menu}, env, identifiant}>
 </nav>
