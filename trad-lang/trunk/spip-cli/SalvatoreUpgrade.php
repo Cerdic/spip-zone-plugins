@@ -89,7 +89,7 @@ class SalvatoreUpgrade extends Command {
 				sql_update('spip_tradlang_modules', array('dir_module' => "CONCAT('--',module)"), "dir_module='' OR dir_module=module");
 			}
 		}
-		else {
+		elseif ($traductions) {
 			$liste_trad = salvatore_charger_fichier_traductions($traductions);
 			$n = count($liste_trad);
 			$output->writeln("<info>$n modules dans le fichier traductions " . ($traductions ? $traductions : '') . "</info>");
