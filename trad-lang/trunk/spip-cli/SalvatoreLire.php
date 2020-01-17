@@ -17,15 +17,17 @@
     along with Trad-Lang; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-    Copyright 2003-2018
+    Copyright 2003-2020
         Florent Jugla <florent.jugla@eledo.com>,
         Philippe Riviere <fil@rezo.net>,
         Chryjs <chryjs!@!free!.!fr>,
- 		kent1 <kent1@arscenic.info>
+        kent1 <kent1@arscenic.info>
+        Cerdic <cedric@yterium.com>
 */
 
 /**
- * Ce script va chercher les fichiers définis dans le fichier traductions/traductions.txt
+ * Prend les fichiers de langue de référence de salvatore/modules/ et met à jour la base de données
+ * pour les modules decrits dans le fichier traductions/traductions.txt
  *
  */
 

@@ -17,11 +17,12 @@
     along with Trad-Lang; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-    Copyright 2003-2015
+    Copyright 2003-2020
         Florent Jugla <florent.jugla@eledo.com>,
         Philippe Riviere <fil@rezo.net>,
         Chryjs <chryjs!@!free!.!fr>,
- 		kent1 <kent1@arscenic.info>
+        kent1 <kent1@arscenic.info>
+        Cerdic <cedric@yterium.com>
 */
 
 
