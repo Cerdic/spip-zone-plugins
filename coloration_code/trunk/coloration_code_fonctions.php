@@ -51,6 +51,8 @@ function coloration_code_color($code, $language, $cadre = 'cadre', $englobant = 
 	}
 	$balise_code = ($englobant == 'div' ? "div" : "code");
 
+	// conserver une version du code reçu avant nettoyage
+	$code_avant_nettoyage = $code;
 	// Supprime le premier et le dernier retour chariot
 	$code = preg_replace("/^(\r\n|\n|\r)*/", "", $code);
 	$code = preg_replace("/(\r\n|\n|\r)*$/", "", $code);
@@ -132,7 +134,7 @@ function coloration_code_color($code, $language, $cadre = 'cadre', $englobant = 
 		$code_corps = $geshi->parse_code();
 		// si le code est sur plusieurs lignes, on passe le traitement à precode
 		// sinon, c'est du code inline que precode ne gère pas
-		if (is_int(strpos($code, "\n"))) {
+		if (strpos($code_avant_nettoyage, "\n") !== false) {
 			$traitement_par_precode = true;
 			// supprimer le <pre> englobant, qui sera ajouté par PRECODE
 			$code_corps = trim(preg_replace('!^<pre[^>]*>|</pre>$!', '', $code_corps), "\n\r");

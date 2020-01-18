@@ -1,7 +1,7 @@
 <paquet
 	prefix="coloration_code"
 	categorie="edition"
-	version="0.10.4"
+	version="0.10.5"
 	etat="stable"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="coloration-32.png"
