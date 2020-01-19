@@ -184,7 +184,7 @@ function jeux_trous($texte, $indexJeux, $form=true) {
 	$fond = str_replace(
 		array('@@FORM_JEUX_DEBUT@@', '@@FORM_JEUX_FIN@@', '@@FORM_CORRIGER@@', '@@RECOMMENCER@@'), 
 		$form?array(
-			jeux_form_debut('trous', $indexJeux),
+			jeux_form_debut('trous', $indexJeux, '', 'post', self()),
 			jeux_form_fin(),
 			jeux_bouton(jeux_config('bouton_corriger'), $id_jeu),
 			jeux_bouton(jeux_config('bouton_refaire'), $id_jeu)):'', 
