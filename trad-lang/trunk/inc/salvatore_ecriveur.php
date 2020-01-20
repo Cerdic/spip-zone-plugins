@@ -308,7 +308,14 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 		}
 	}
 	$xml .= "</traduction>\n";
-	file_put_contents($dir_module . '/' . $module . '.xml', $xml);
+	$file_xml = $dir_module . '/' . $module . '.xml';
+	file_put_contents($file_xml, $xml);
+	$commit_infos['.xml'] = array(
+		'file_name' => basename($file_xml),
+		'lastmodified' => salvatore_read_lastmodified_file(basename($file_xml), $source, $dir_depots),
+		'must_add' => true,
+	);
+
 
 
 	if (isset($liste_lang_non_exportees) and (count($liste_lang_non_exportees)>0)){

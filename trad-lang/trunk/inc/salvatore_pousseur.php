@@ -92,7 +92,7 @@ function salvatore_pousser($liste_sources, $dir_modules=null, $dir_depots=null) 
 
 				$commits_todo = array();
 				$salvatore_status_file = "salvatore_" . $source['methode'] . "_status_file";
-				foreach ($commit_infos as $commit_info) {
+				foreach ($commit_infos as $what => $commit_info) {
 
 					$file = $commit_info['file_name'];
 
@@ -104,6 +104,11 @@ function salvatore_pousser($liste_sources, $dir_modules=null, $dir_depots=null) 
 							$author = 0;
 							if (!empty($commit_info['author'])) {
 								$author = $commit_info['author'];
+							}
+							// si c'est le xml et qu'on a un seul auteur de commit, on lui fait commit aussi le xml
+							elseif($what === '.xml' and count($commits_todo)===1) {
+								$author = array_keys($commits_todo);
+								$author = reset($author);
 							}
 
 							if (!isset($commits_todo[$author])) {
@@ -152,7 +157,6 @@ function salvatore_pousser($liste_sources, $dir_modules=null, $dir_depots=null) 
 					//salvatore_git_commit_files($dir_depots . $source['dir_checkout'], $commit_todo['files'], $message)
 				}
 
-				die('?');
 			}
 		}
 
