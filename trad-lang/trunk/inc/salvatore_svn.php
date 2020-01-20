@@ -66,3 +66,92 @@ function salvatore_svn_status_file($dir_repo, $file_or_files) {
 	chdir($d);
 	return implode("\n", $output);
 }
+
+
+/**
+ * Commit une liste de fichiers avec un message et auteur fourni
+ *
+ * @param string $dir_repo
+ * @param array $files
+ * @param string $message
+ * @param string $author
+ * @param string $user
+ * @param string $pass
+ * @return array
+ */
+function salvatore_svn_commit_files($dir_repo, $files, $message, $author, $user=null, $pass=null) {
+
+	// lister deja les fichiers qui necessitent un svn add (fichiers ajoutes qui ne sont pas dans le repo)
+	$files_to_add = array();
+	foreach ($files as $file) {
+		if (!salvatore_svn_lastmodified_file($dir_repo, $file)) {
+			$files_to_add[] = $file;
+		}
+	}
+
+	$files = array_map('escapeshellarg', $files);
+	$files = implode(' ', $files);
+
+	$files_to_add = array_map('escapeshellarg', $files_to_add);
+	$files_to_add = implode(' ', $files_to_add);
+
+	$d = getcwd();
+	chdir($dir_repo);
+	$output = array();
+	$res = true;
+
+	$auth = "";
+	$auth_disp = "";
+	if ($user) {
+		$auth .= " --username=".escapeshellarg($user);
+		$auth_disp .= " --username=".escapeshellarg('xxxxx');
+	}
+	if ($user) {
+		$auth .= " --password=".escapeshellarg($pass);
+		$auth_disp .= " --password=".escapeshellarg('xxxxx');
+	}
+
+	$commands = [];
+	if ($files_to_add) {
+		$commands[] = "svn add --quiet $files_to_add 2>&1";
+	}
+	// TODO : activer le commit quand on sera en prod
+	// $commands[] = "svn commit $files{$auth} --no-auth-cache --non-interactive --trust-server-cert -m " . escapeshellarg($message) . " 2>&1";
+
+	foreach ($commands as $command) {
+		$output[] = "> " . ($auth ? str_replace($auth, $auth_disp, $command) : $command);
+		$return_var = 0;
+		exec($command, $output, $return_var);
+		// si une erreur a eu lieu le signaler dans le retour
+		if ($return_var) {
+			$res = false;
+		}
+	}
+	if ($res and $author and _SALVATORE_SVN_PROPSET) {
+		if ($revision = exec("svn up . && env LC_MESSAGES=en_US.UTF-8 svn info . |awk '/^Last Changed Rev/ { print $4 }'")) {
+			$command = "svn propset --revprop -r $revision svn:author ".escapeshellarg($author). " .{$auth} --no-auth-cache --non-interactive --trust-server-cert";
+			$output[] = "> " . ($auth ? str_replace($auth, $auth_disp, $command) : $command);
+			exec($command, $output, $return_var);
+			if ($return_var) {
+				$res = false;
+			}
+		}
+	}
+	chdir($d);
+
+	return array($res, implode("\n", $output));
+}
+
+
+
+/**
+ * Rien a faire : en svn le commit push, mais fonction symetrique de git
+ *
+ * @param string $dir_repo
+ * @param null $user
+ * @param null $pass
+ * @return array
+ */
+function salvatore_svn_push_repository($dir_repo, $user=null, $pass=null) {
+	return array(true, '');
+}

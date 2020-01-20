@@ -85,8 +85,9 @@ function salvatore_init($log_function = null){
 			define('_SALVATORE_AUTHOR_COMMITS', 'Salvatore <salvatore@rezo.net>');
 		}
 
+		// TODO : a tester/valider quand on sera en prod si on utilise encore
 		if (!defined('_SALVATORE_SVN_PROPSET')) {
-			define('_SALVATORE_SVN_PROPSET', true);
+			define('_SALVATORE_SVN_PROPSET', false);
 		}
 
 
