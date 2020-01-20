@@ -52,8 +52,14 @@ function salvatore_vcs_svn_lastmodified_file_dist($dir_repo, $file) {
 function salvatore_vcs_svn_status_file_dist($dir_repo, $file_or_files) {
 
 	if (is_array($file_or_files)) {
-		$file_or_files = array_map('escapeshellarg', $file_or_files);
-		$file_or_files = implode(' ', $file_or_files);
+		$escaped_file_or_files = array_map('escapeshellarg', $file_or_files);
+		// si on passe un nom de fichier avec un * il ne faut pas le quoter pour svn :(
+		foreach ($file_or_files as $k=>$file) {
+			if (strpos($file, '*')!==false and $file === trim($escaped_file_or_files[$k], "'")) {
+				$escaped_file_or_files[$k] = $file;
+			}
+		}
+		$file_or_files = implode(' ', $escaped_file_or_files);
 	}
 	else {
 		$file_or_files = escapeshellarg($file_or_files);
