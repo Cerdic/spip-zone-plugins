@@ -90,7 +90,8 @@ function salvatore_vcs_svn_commit_files_dist($dir_repo, $files, $message, $autho
 	// lister deja les fichiers qui necessitent un svn add (fichiers ajoutes qui ne sont pas dans le repo)
 	$files_to_add = array();
 	foreach ($files as $file) {
-		if (!salvatore_vcs_svn_lastmodified_file($dir_repo, $file)) {
+		$status = trim(salvatore_vcs_svn_status_file_dist($dir_repo, $file));
+		if (strpos($status, '?') !== false) {
 			$files_to_add[] = $file;
 		}
 	}
@@ -121,8 +122,7 @@ function salvatore_vcs_svn_commit_files_dist($dir_repo, $files, $message, $autho
 	if ($files_to_add) {
 		$commands[] = "svn add --quiet $files_to_add 2>&1";
 	}
-	// TODO : activer le commit quand on sera en prod
-	// $commands[] = "svn commit $files{$auth} --no-auth-cache --non-interactive --trust-server-cert -m " . escapeshellarg($message) . " 2>&1";
+	$commands[] = "svn commit $files{$auth} --no-auth-cache --non-interactive --trust-server-cert -m " . escapeshellarg($message) . " 2>&1";
 
 	foreach ($commands as $command) {
 		$output[] = "> " . ($auth ? str_replace($auth, $auth_disp, $command) : $command);

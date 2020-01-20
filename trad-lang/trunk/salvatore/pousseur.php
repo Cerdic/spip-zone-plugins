@@ -171,8 +171,8 @@ function savatore_commit_and_push_module($source, $dir_modules, $dir_depots, $ur
 	$url_with_credentials = salvatore_set_credentials($source['methode'], $source['url'], $source['module']);
 	$parts = parse_url($url_with_credentials);
 	if (!empty($parts['user']) and !empty($parts['pass'])){
-		$source['user'] = $parts['user'];
-		$source['pass'] = $parts['pass'];
+		$source['user'] = urldecode($parts['user']);
+		$source['pass'] = urldecode($parts['pass']);
 	}
 
 	foreach ($commits_todo as $author => $commit_todo) {
