@@ -440,34 +440,3 @@ function salvatore_read_status_modif($module, $source, $dir_depots) {
 	$salvatore_status_file = "salvatore_" . $source['methode'] . "_status_file";
 	return $salvatore_status_file($dir_depots . $source['dir_checkout'], $files_list);
 }
-
-/*
-if ($row_module['limite_trad']==0){
-	foreach ($liste_lang as $lang){
-		passthru('svn add ' . _DIR_SALVATORE_TMP . $module . '/' . $module . "_$lang.php* 2> /dev/null") ? salvatore_log("$log\n") : '';
-	}
-} elseif (!in_array($module, array('ecrire', 'spip', 'public'))) {
-	salvatore_log('Limite trad = ' . $seuil_export);
-	foreach ($liste_lang as $lang){
-		if ((intval(($xml_infos[$lang]['traduits']/$count_trad_reference)*100)>$seuil_export)
-			and (substr(exec('svn status ' . _DIR_SALVATORE_TMP . $module . '/' . $module . "_$lang.php"), 0, 1)=='?')){
-			passthru('svn add ' . _DIR_SALVATORE_TMP . $module . '/' . $module . "_$lang.php* 2> /dev/null") ? salvatore_log("$log\n") : '';
-		}
-	}
-}
-*/
-
-/*
-
-		if (substr(exec('svn status ' . _DIR_SALVATORE_TMP . $module . '/' . $module . '_' . $lang . '.php'), 0, 1)=='?'){
-			if ($row_module['limite_trad']==0){
-				passthru('svn add ' . _DIR_SALVATORE_TMP . $module . '/' . $module . "_$lang.php 2> /dev/null") ? salvatore_log("$log\n") : '';
-			} elseif (!in_array($module, array('ecrire', 'spip', 'public'))) {
-				if ((intval(($xml_infos[$lang]['traduits']/$count_trad_reference)*100)>$seuil_export)){
-					passthru('svn add ' . _DIR_SALVATORE_TMP . $module . '/' . $module . "_$lang.php* 2> /dev/null") ? salvatore_log("$log\n") : '';
-				}
-			}
-		}
-
-
- */
