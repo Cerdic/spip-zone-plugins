@@ -67,7 +67,7 @@ class SalvatoreLire extends Command {
 		global $spip_loaded;
 
 		include_spip('inc/salvatore');
-		include_spip('inc/salvatore_lecteur');
+		include_spip('salvatore/lecteur');
 
 		salvatore_init(array($output, 'writeln'));
 

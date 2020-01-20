@@ -66,7 +66,7 @@ class SalvatorePousser extends Command {
 		global $spip_loaded;
 
 		include_spip('inc/salvatore');
-		include_spip('inc/salvatore_pousseur');
+		include_spip('salvatore/pousseur');
 
 		salvatore_init(array($output, 'writeln'));
 

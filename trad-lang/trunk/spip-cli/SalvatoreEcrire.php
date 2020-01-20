@@ -74,7 +74,7 @@ class SalvatoreEcrire extends Command {
 		global $spip_loaded;
 
 		include_spip('inc/salvatore');
-		include_spip('inc/salvatore_ecriveur');
+		include_spip('salvatore/ecriveur');
 
 		salvatore_init(array($output, 'writeln'));
 

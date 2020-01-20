@@ -66,7 +66,7 @@ class SalvatoreTirer extends Command {
 		global $spip_loaded;
 
 		include_spip('inc/salvatore');
-		include_spip('inc/salvatore_tireur');
+		include_spip('salvatore/tireur');
 
 		salvatore_init(array($output, 'writeln'));
 
