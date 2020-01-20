@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-scssphp"
-	id="paquet-scssphp--scssphp-36fe1"
+	id="paquet-scssphp--scssphp-11de2"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/scssphp/trunk"
+	source="https://git.spip.net/spip-contrib-extensions/scssphp.git"
 	reference="fr">
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-scssphp?lang_cible=fr" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
