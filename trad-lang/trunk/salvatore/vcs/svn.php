@@ -37,7 +37,7 @@ function salvatore_vcs_svn_lastmodified_file_dist($dir_repo, $file) {
 	$d = getcwd();
 	chdir($dir_repo);
 	$file = escapeshellarg($file);
-	$lastmodified = exec('env LC_MESSAGES=en_US.UTF-8 svn info ' . $file . "| awk '/^Last Changed Date/ { print $4 \" \" $5 }'");
+	$lastmodified = exec('env LC_MESSAGES=en_US.UTF-8 svn info ' . $file . " 2>/dev/null | awk '/^Last Changed Date/ { print $4 \" \" $5 }'");
 	$lastmodified = strtotime($lastmodified);
 	chdir($d);
 	return $lastmodified;
