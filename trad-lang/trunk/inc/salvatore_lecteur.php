@@ -443,7 +443,7 @@ function salvatore_importer_module_langue($id_tradlang_module, $source, $fichier
 				elseif (isset($chaines[$id]) and isset($existant[$id])) {
 					// * chaine existante
 					// * identique ? => NOOP
-					$chaines[$id] = salvatore_nettoyer_chaine_php($chaines[$id], $lang);
+					$chaines[$id] = salvatore_nettoyer_chaine_langue($chaines[$id], $lang);
 
 					/**
 					 * Calcul du nouveau md5
