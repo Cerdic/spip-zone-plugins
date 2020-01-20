@@ -400,27 +400,47 @@ function salvatore_importer_module_langue($id_tradlang_module, $source, $fichier
 						}
 
 						/**
-						 * Vérifier si une autre chaîne de langue était identique (str == str)
+						 * Rechercher si on serait pas en train de copier une chaine existante
+						 * (C'est un renommage)
 						 *
 						 * Si oui, on sélectionne toutes les occurences existantes dans les autres langues et on les duplique
 						 */
+
+						// si on a un contenu identique a une autre chaine du meme module
+						// (renommage de l'id dans un meme fichier de langue)
 						$where_identique = [
 							'id_tradlang_module=' . intval($id_tradlang_module),
 							'lang=' . sql_quote($lang),
 							'id!=' . sql_quote($id),
 							'str=' . sql_quote($chaines[$id]),
 						];
-						$identique_meme_module = sql_getfetsel('id', 'spip_tradlangs', $where_identique);
-						if ($identique_meme_module){
-							salvatore_log("La nouvelle chaine $id est une chaine dupliquée de " . $identique_meme_module);
+						$identique = sql_fetsel('id_tradlang_module, module, id', 'spip_tradlangs', $where_identique);
+
+						// si on est sur la langue master on cherche si ce n'est pas un renommage/decoupe de module :
+						// chercher une chaine avec meme id et meme contenu dans un autre module
+						if (!$identique and $is_master) {
+							$where_identique = [
+								'id_tradlang_module!=' . intval($id_tradlang_module),
+								'lang=' . sql_quote($lang),
+								'id=' . sql_quote($id),
+								'str=' . sql_quote($chaines[$id]),
+							];
+							$identique = sql_fetsel('id_tradlang_module, module, id', 'spip_tradlangs', $where_identique);
+						}
+
+
+						if ($identique){
+							salvatore_log("La nouvelle chaine $id est une chaine dupliquée de " . $identique['module'].':'.$identique['id']);
 
 							$deja_lang = sql_allfetsel('lang', 'spip_tradlangs', 'id=' . sql_quote($id) . ' AND id_tradlang_module=' . intval($id_tradlang_module));
 							$deja_lang = array_column($deja_lang, 'lang');
-							$chaines_a_dupliquer = sql_allfetsel('*', 'spip_tradlangs', 'id=' . sql_quote($identique_meme_module) . ' AND id_tradlang_module=' . intval($id_tradlang_module) . ' AND ' . sql_in('lang', $deja_lang, 'NOT'));
+							$chaines_a_dupliquer = sql_allfetsel('*', 'spip_tradlangs', 'id=' . sql_quote($identique['id']) . ' AND id_tradlang_module=' . intval($identique['id_tradlang_module']) . ' AND ' . sql_in('lang', $deja_lang, 'NOT'));
 							foreach ($chaines_a_dupliquer as $chaine){
 								unset($chaine['id_tradlang']);
 								unset($chaine['maj']);
 								$chaine['id'] = $id;
+								$chaine['id_tradlang_module'] = $id_tradlang_module;
+								$chaine['module'] = $source['module'];
 								$chaine['titre'] = $id . ' : ' . $source['module'] . ' - ' . $chaine['lang'];
 								$chaine['md5'] = md5($chaine['str']);
 								$chaine['date_modif'] = date('Y-m-d H:i:s');
