@@ -528,24 +528,41 @@ function salvatore_importer_module_langue($id_tradlang_module, $source, $fichier
 function salvatore_charger_commentaires_fichier_langue($fichier_lang){
 
 	$contenu = file_get_contents($fichier_lang);
+	$tokens = token_get_all($contenu);
+	$comments = array();
 
-	$tab = preg_split("/\r\n|\n\r|;\n|\n\/\/|\(\n|\n\);\n|\'\,\n|\n[\s\t]*(\')|\/\/[\s\t][0-9A-Z]\n[\s\t](\')/", $contenu, '-1', PREG_SPLIT_NO_EMPTY);
-
-	$liste_trad = array();
-	reset($tab);
-
-	while (list(, $ligne) = each($tab)){
-		$ligne = str_replace("\'", '', $ligne);
-		if (strlen($ligne)>0){
-			if (preg_match("/(.*?)\'[\s\t]*=>[\s\t]*\'(.*?)\'[\s\t]*,{0,1}[\s\t]*(#.*)?/ms", $ligne, $matches)){
-				if (isset($matches[1]) and isset($matches[3]) and strlen(trim($matches[3]))>0){
-					list(, $comm) = explode('#', $matches[3]);
-					$liste_trad[$matches[1]] = trim($comm);
-				}
-			}
+	// allons jusqu'au debut du tableau
+	while (count($tokens)) {
+		$token = array_shift($tokens);
+		if ($token[0] === T_ARRAY) {
+			break;
 		}
 	}
-	reset($liste_trad);
-	return $liste_trad;
+
+	$last_tring = '';
+	$index = '';
+	while (count($tokens)){
+		$token = array_shift($tokens);
+		switch ($token[0]) {
+			case T_CONSTANT_ENCAPSED_STRING:
+				$last_tring = $token[1];
+				break;
+			case T_DOUBLE_ARROW:
+				$index = trim($last_tring,"'\"");
+				break;
+			case T_WHITESPACE:
+				// si c'est une nouvelle ligne, on est plus interesse par le commentaire
+				if (strpos($token[1], "\n") !== false or strpos($token[1], "\r") !== false) {
+					$index = '';
+				}
+				break;
+			case T_COMMENT:
+				if ($index and strpos($token[1], '#') === 0) {
+					$comments[$index] = trim(substr($token[1],1));
+				}
+				break;
+		}
+	}
+	return $comments;
 }
 
