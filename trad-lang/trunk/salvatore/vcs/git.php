@@ -48,7 +48,7 @@ function salvatore_git_format_author($author) {
  * @param string $file
  * @return false|int
  */
-function salvatore_git_lastmodified_file($dir_repo, $file) {
+function salvatore_vcs_git_lastmodified_file_dist($dir_repo, $file) {
 
 	$d = getcwd();
 	chdir($dir_repo);
@@ -65,7 +65,7 @@ function salvatore_git_lastmodified_file($dir_repo, $file) {
  * @param string|array $file_or_files
  * @return string
  */
-function salvatore_git_status_file($dir_repo, $file_or_files) {
+function salvatore_vcs_git_status_file_dist($dir_repo, $file_or_files) {
 
 	if (is_array($file_or_files)) {
 		$file_or_files = array_map('escapeshellarg', $file_or_files);
@@ -95,7 +95,7 @@ function salvatore_git_status_file($dir_repo, $file_or_files) {
  * @param string $pass
  * @return array
  */
-function salvatore_git_commit_files($dir_repo, $files, $message, $author, $user=null, $pass=null) {
+function salvatore_vcs_git_commit_files_dist($dir_repo, $files, $message, $author, $user=null, $pass=null) {
 	$files = array_map('escapeshellarg', $files);
 	$files = implode(' ', $files);
 
@@ -132,7 +132,7 @@ function salvatore_git_commit_files($dir_repo, $files, $message, $author, $user=
  * @param null $pass
  * @return array
  */
-function salvatore_git_push_repository($dir_repo, $user=null, $pass=null) {
+function salvatore_vcs_git_push_repository_dist($dir_repo, $user=null, $pass=null) {
 	$d = getcwd();
 	chdir($dir_repo);
 	$output = array();

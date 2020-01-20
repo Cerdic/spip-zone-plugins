@@ -117,16 +117,16 @@ function savatore_commit_and_push_module($source, $dir_modules, $dir_depots, $ur
 	// - regrouper par auteur
 
 	$commits_todo = array();
-	$salvatore_status_file = "salvatore_" . $source['methode'] . "_status_file";
-	$salvatore_commit_files = "salvatore_" . $source['methode'] . "_commit_files";
-	$salvatore_push_repository = "salvatore_" . $source['methode'] . "_push_repository";
+	$vcs_status_file = salvatore_vcs_function($source['methode'],  "status_file");
+	$vcs_commit_files = salvatore_vcs_function($source['methode'],  "commit_files");
+	$vcs_push_repository = salvatore_vcs_function($source['methode'],  "push_repository");
 
 	foreach ($commit_infos as $what => $commit_info) {
 
 		$file = $commit_info['file_name'];
 
 		if ($commit_info['lastmodified'] or $commit_info['must_add']) {
-			$status = $salvatore_status_file($dir_depots . $source['dir_checkout'], $subdir . $file);
+			$status = $vcs_status_file($dir_depots . $source['dir_checkout'], $subdir . $file);
 
 			// fichier nouveau ou modifie (sinon on l'ignore)
 			if ($status) {
@@ -186,7 +186,7 @@ function savatore_commit_and_push_module($source, $dir_modules, $dir_depots, $ur
 		salvatore_log("Commit de <info>$author</info> :" . implode(', ', $commit_todo['files']));
 		salvatore_log("\t" . str_replace("\n", "\n\t", $message));
 
-		list($res,$out) = $salvatore_commit_files($dir_depots . $source['dir_checkout'], $commit_todo['files'], $message, $author, empty($source['user']) ? null : $source['user'], empty($source['pass']) ? null : $source['pass']);
+		list($res,$out) = $vcs_commit_files($dir_depots . $source['dir_checkout'], $commit_todo['files'], $message, $author, empty($source['user']) ? null : $source['user'], empty($source['pass']) ? null : $source['pass']);
 		salvatore_log($out);
 		if (!$res) {
 			salvatore_fail("[Pousseur] Erreur sur $module", "Erreur lors du commit :\n$out");
@@ -199,7 +199,7 @@ function savatore_commit_and_push_module($source, $dir_modules, $dir_depots, $ur
 
 	// et push si besoin
 	// ne fera rien en svn (deja pushe)
-	list($res,$out) = $salvatore_push_repository($dir_depots . $source['dir_checkout'], empty($source['user']) ? null : $source['user'], empty($source['pass']) ? null : $source['pass']);
+	list($res,$out) = $vcs_push_repository($dir_depots . $source['dir_checkout'], empty($source['user']) ? null : $source['user'], empty($source['pass']) ? null : $source['pass']);
 	salvatore_log($out);
 	if (!$res) {
 		salvatore_fail("[Pousseur] Erreur sur $module", "Erreur lors du commit :\n$out");

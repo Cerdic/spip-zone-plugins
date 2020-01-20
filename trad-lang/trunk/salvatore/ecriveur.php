@@ -418,8 +418,8 @@ function salvatore_read_lastmodified_file($file_name, $source, $dir_depots) {
 		$file_path_relative = $source['dir'] . DIRECTORY_SEPARATOR . $file_path_relative;
 	}
 
-	$salvatore_lastmodified_file = "salvatore_" . $source['methode'] . "_lastmodified_file";
-	return $salvatore_lastmodified_file($dir_depots . $source['dir_checkout'], $file_path_relative);
+	$vcs_lastmodified_file = salvatore_vcs_function($source['methode'],  "lastmodified_file");
+	return $vcs_lastmodified_file($dir_depots . $source['dir_checkout'], $file_path_relative);
 }
 
 
@@ -437,6 +437,6 @@ function salvatore_read_status_modif($module, $source, $dir_depots) {
 	}
 	$files_list = [$pre . $module . '_*', $pre . $module . '.xml'];
 
-	$salvatore_status_file = "salvatore_" . $source['methode'] . "_status_file";
-	return $salvatore_status_file($dir_depots . $source['dir_checkout'], $files_list);
+	$vcs_status_file = salvatore_vcs_function($source['methode'],  "status_file");
+	return $vcs_status_file($dir_depots . $source['dir_checkout'], $files_list);
 }

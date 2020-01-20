@@ -395,6 +395,21 @@ function salvatore_set_credentials($methode, $url_repository, $module){
 	return $url_repository;
 }
 
+/**
+ * Charger une fonction vcs
+ * @param string $methode (git|svn)
+ * @param string $function
+ * @return string
+ * @throws Exception
+ */
+function salvatore_vcs_function($methode, $function) {
+	include_spip('salvatore/vcs/' . $methode);
+	if (function_exists($f = "salvatore_vcs_{$methode}_$function")
+	  or function_exists($f = $f . '_dist')) {
+		return $f;
+	}
+	throw new \Exception("Erreur fonction $f inexistante");
+}
 
 /**
  * Verifier qu'un repertoire existe
