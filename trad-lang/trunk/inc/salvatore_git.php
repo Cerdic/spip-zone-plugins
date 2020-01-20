@@ -86,6 +86,7 @@ function salvatore_git_status_file($dir_repo, $file_or_files) {
 
 /**
  * Commit une liste de fichiers avec un message et auteur fourni
+ * on utilise pas $user et $pass en git pour commit
  * @param string $dir_repo
  * @param array $files
  * @param string $message
@@ -105,7 +106,42 @@ function salvatore_git_commit_files($dir_repo, $files, $message, $author, $user=
 	// on ajoute tous les fichiers pour commit
 	$commands = [
 		"git add $files 2>&1",
-		"git commit -m " . escapeshellarg($message)." --author=".escapeshellarg(salvatore_git_format_author($author)),
+		"git commit -m " . escapeshellarg($message)." --author=".escapeshellarg(salvatore_git_format_author($author)) . " 2>&1",
+	];
+
+	foreach ($commands as $command) {
+		$output[] = "> $command";
+		$return_var = 0;
+		exec($command, $output, $return_var);
+		// si une erreur a eu lieu le signaler dans le retour
+		if ($return_var) {
+			$res = false;
+		}
+	}
+	chdir($d);
+
+	return array($res, implode("\n", $output));
+}
+
+/**
+ * on utilise pas $user et $pass en git pour push car ils sont dans le remote si c'est un https
+ * et si c'est ssh il faut une cle pour le user www-data
+ *
+ * @param string $dir_repo
+ * @param null $user
+ * @param null $pass
+ * @return array
+ */
+function salvatore_git_push_repository($dir_repo, $user=null, $pass=null) {
+	$d = getcwd();
+	chdir($dir_repo);
+	$output = array();
+	$res = true;
+	// on ajoute tous les fichiers pour commit
+	$commands = [
+		"git pull --rebase 2>&1",
+		// TODO : activer le push quand on sera en prod
+		//"git push 2>&1",
 	];
 
 	foreach ($commands as $command) {

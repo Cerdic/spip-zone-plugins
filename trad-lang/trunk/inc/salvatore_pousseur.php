@@ -167,9 +167,17 @@ function salvatore_pousser($liste_sources, $dir_modules=null, $dir_depots=null) 
 					}
 				}
 
-				// TODO : push
-				// ne fera rien en svn (deja pushe)
+				// tous les commits sont faits
+				// on peut supprimer le fichier qui liste les commits
+				@unlink($file_commit);
 
+				// et push si besoin
+				// ne fera rien en svn (deja pushe)
+				list($res,$out) = $salvatore_push_repository($dir_depots . $source['dir_checkout'], empty($source['user']) ? null : $source['user'], empty($source['pass']) ? null : $source['pass']);
+				salvatore_log($out);
+				if (!$res) {
+					salvatore_fail("[Pousseur] Erreur sur $module", "Erreur lors du commit :\n$out");
+				}
 			}
 		}
 
