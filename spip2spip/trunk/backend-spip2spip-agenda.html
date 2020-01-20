@@ -26,7 +26,7 @@ version="1.0"[ encoding="(#CHARSET)"]?>[
 	<s2s_url_site_distant>[(#S2S_URL_SITE_DISTANT|sinon{#URL_SITE_SPIP})]</s2s_url_site_distant>
 	<s2s_id_article_distant>[(#S2S_ID_ARTICLE_DISTANT|sinon{#ID_ARTICLE})]</s2s_id_article_distant>
 	<BOUCLE_trad_dispo (ARTICLES){traduction}{0,1}{exclus}> </BOUCLE_trad_dispo><BOUCLE_trad (ARTICLES){traduction}{origine_traduction}><trad>#URL_SITE_SPIP/#URL_ARTICLE</trad></BOUCLE_trad></B_trad_dispo>
-	[<virtuel>(#VIRTUEL*)</virtuel>]
+	[<virtuel>(#VIRTUEL*|texte_backend)</virtuel>]
 	[<statut>(#STATUT*)</statut>]
 	[<date>(#DATE*)</date>]
 	[<date_redac>(#DATE_REDAC*)</date_redac>]
