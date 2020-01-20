@@ -299,12 +299,10 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 
 
 	if (isset($liste_lang_non_exportees) and (count($liste_lang_non_exportees)>0)){
-		salvatore_log("Les langues suivantes ne sont pas exportées car trop peu traduites:");
-		salvatore_log(implode(', ', $liste_lang_non_exportees));
+		salvatore_log("Les langues suivantes ne sont pas exportées car trop peu traduites : " . implode(', ', $liste_lang_non_exportees));
 	}
 	if (isset($liste_lang_a_supprimer) and (count($liste_lang_a_supprimer)>0)){
-		salvatore_log("Les langues suivantes devraient être supprimées car trop peu traduites:");
-		salvatore_log(implode(', ', $liste_lang_a_supprimer));
+		salvatore_log("<error>Les langues suivantes devraient être supprimées car trop peu traduites : " . implode(', ', $liste_lang_a_supprimer)."</error>");
 	}
 
 	$nb_to_commit = 0;
@@ -358,6 +356,7 @@ function salvatore_exporter_fichier_php($dir_module, $module, $lang, $php_lines,
 		$file_content .= '// Fichier source, a modifier dans ' . $origin;
 	}
 	else {
+		$url_trad_module = parametre_url($url_trad_module, 'lang_cible', $lang, '&');
 		$file_content .= '// extrait automatiquement de ' . $url_trad_module . '
 // ** ne pas modifier le fichier **
 ';
@@ -365,7 +364,7 @@ function salvatore_exporter_fichier_php($dir_module, $module, $lang, $php_lines,
 
 	// historiquement les fichiers de lang de spip_loader ne peuvent pas etre securises
 	if ($module !== 'tradloader') {
-		$file_content .= "if (!defined('_ECRIRE_INC_VERSION')) {
+		$file_content .= "\nif (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }\n\n";
 	}
@@ -373,7 +372,10 @@ function salvatore_exporter_fichier_php($dir_module, $module, $lang, $php_lines,
 	# supprimer la virgule du dernier item
 	$php_lines[count($php_lines)-1] = preg_replace('/,([^,]*)$/', '\1', $php_lines[count($php_lines)-1]);
 
-	$file_content .= implode("\n", $php_lines);
+	$file_content .=
+		'$GLOBALS[$GLOBALS[\'idx_lang\']] = array(' . "\n"
+		. implode("\n", $php_lines)
+	  . "\n);\n";
 	file_put_contents($file_name, $file_content);
 	return $file_name;
 }
@@ -433,7 +435,7 @@ function salvatore_read_status_modif($module, $source, $dir_depots) {
 	$output = array();
 	switch ($source['methode']) {
 		case 'git':
-			exec("git status $files_list 2>&1", $output);
+			exec("git status --short $files_list 2>&1", $output);
 			break;
 		case 'svn':
 			exec("svn status $files_list 2>&1", $output);
