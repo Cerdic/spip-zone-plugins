@@ -121,7 +121,12 @@ function salvatore_pousser($liste_sources, $dir_modules=null, $dir_depots=null) 
 								}
 							}
 							$commits_todo[$author]['files'][] = $subdir . $file;
-							$message = "[Salvatore] [source:$subdir $module] Export depuis $url_gestionnaire";
+							if ($what === '.xml') {
+								$message = "[Salvatore] [source:$subdir $module] Mise a jour du bilan depuis $url_gestionnaire";
+							}
+							else {
+								$message = "[Salvatore] [source:$subdir $module] Export depuis $url_gestionnaire";
+							}
 							if (!empty($commit_info['lang'])) {
 								$message .= " de la langue " . $commit_info['lang'];
 							}
@@ -149,9 +154,8 @@ function salvatore_pousser($liste_sources, $dir_modules=null, $dir_depots=null) 
 						$author = _SALVATORE_AUTHOR_COMMITS;
 					}
 					$message = implode("\n", $commit_todo['message']);
-					salvatore_log("<info>Commit de $author :</info>");
-					salvatore_log("Fichiers : " . implode(', ', $commit_todo['files']));
-					salvatore_log("Message : \n" . $message);
+					salvatore_log("Commit de <info>$author</info> :" . implode(', ', $commit_todo['files']));
+					salvatore_log("\t" . str_replace("\n", "\n\t", $message));
 
 					// TODO
 					//salvatore_git_commit_files($dir_depots . $source['dir_checkout'], $commit_todo['files'], $message)
