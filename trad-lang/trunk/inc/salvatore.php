@@ -201,6 +201,17 @@ function salvatore_get_lang_from($module, $fichier_lang) {
 	return $lang;
 }
 
+/**
+ * URL du gestionnaire trad-lang exportee dans les xml
+ * @return mixed
+ */
+function salvatore_get_self_url() {
+	$url_gestionnaire = $GLOBALS['meta']['adresse_site'];
+	if (defined('_SALVATORE_TEST_URL_GESTIONNAIRE')) {
+		$url_gestionnaire = _SALVATORE_TEST_URL_GESTIONNAIRE;
+	}
+	return $url_gestionnaire;
+}
 
 /**
  * Verifier si un module de langue est gere par ce salvatore
@@ -219,12 +230,9 @@ function salvatore_verifier_gestionnaire_traduction($dir_module, $module) {
 	if ($t = salvatore_lire_gestionnaire_traduction($dir_module, $module)){
 		$url = extraire_attribut($t, 'url');
 		$gestionnaire = extraire_attribut($t, 'gestionnaire');
-		$gestionnaire_url = $GLOBALS['meta']['adresse_site'];
-		if (defined('_SALVATORE_TEST_URL_GESTIONNAIRE')) {
-			$gestionnaire_url = _SALVATORE_TEST_URL_GESTIONNAIRE;
-		}
+		$url_gestionnaire = salvatore_get_self_url();
 		if ($gestionnaire !== 'salvatore'
-		  or protocole_implicite($url) !== protocole_implicite($gestionnaire_url)) {
+		  or protocole_implicite($url) !== protocole_implicite($url_gestionnaire)) {
 			return "$gestionnaire@$url";
 		}
 	}

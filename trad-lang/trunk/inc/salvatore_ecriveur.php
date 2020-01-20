@@ -51,10 +51,7 @@ function salvatore_ecrire($liste_sources, $dir_modules = null, $message_commit='
 		$dir_modules = _DIR_SALVATORE_MODULES;
 	}
 	salvatore_check_dir($dir_modules);
-	$gestionnaire_url = $GLOBALS['meta']['adresse_site'];
-	if (defined('_SALVATORE_TEST_URL_GESTIONNAIRE')) {
-		$gestionnaire_url = _SALVATORE_TEST_URL_GESTIONNAIRE;
-	}
+	$url_gestionnaire = salvatore_get_self_url();
 
 	foreach ($liste_sources as $source){
 		salvatore_log("\n<info>--- Module " . $source['module'] . " | " . $source['dir_module'] . " | " . $source['url'] . "</info>");
@@ -69,8 +66,8 @@ function salvatore_ecrire($liste_sources, $dir_modules = null, $message_commit='
 		$id_tradlang_module = sql_getfetsel('id_tradlang_module', 'spip_tradlang_modules', 'module = ' . sql_quote($source[1]));
 
 		// url de l'interface de traduction d'un module
-		$url_trad = url_absolue(generer_url_entite($id_tradlang_module, 'tradlang_module'), $gestionnaire_url);
-		export_trad_module($source, $gestionnaire_url, $url_trad, $message_commit);
+		$url_trad = url_absolue(generer_url_entite($id_tradlang_module, 'tradlang_module'), $url_gestionnaire);
+		export_trad_module($source, $url_gestionnaire, $url_trad, $message_commit);
 	}
 }
 
