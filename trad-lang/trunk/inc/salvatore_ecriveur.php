@@ -153,7 +153,7 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 	// traiter chaque langue
 	$infos = $commiteurs = array();
 	foreach ($liste_lang as $lang){
-		salvatore_log("Generation de la langue $lang ");
+		salvatore_log("Generation de la langue $lang");
 		// Proteger les caracteres typographiques a l'interieur des tags html
 		$typo = (in_array($lang, array('eo', 'fr', 'cpf')) || strncmp($lang, 'fr_', 3)==0) ? 'fr' : 'en';
 		$typographie = charger_fonction($typo, 'typographie');
@@ -186,66 +186,22 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 				$comment = ' # ' . trim($comment); // on rajoute les commentaires ?
 			}
 
-			$str = savlatore_nettoyer_chaine_base($chaine['str'], $lang);
-
-			/**
-			 * Calcul du nouveau md5
-			 */
+			// nettoyger la chaine de langue et calcul du md5
+			$str = salvatore_nettoyer_chaine_langue($chaine['str'], $lang);
 			$newmd5 = md5($str);
 
 			/**
 			 * Si le md5 ou la chaine à changé, on la met à jour dans la base
 			 */
 			if (($chaine['md5']!==$newmd5) || ($str!=$chaine['str'])){
-				$r = sql_updateq('spip_tradlangs', array('md5' => $newmd5, 'str' => $str), 'id_tradlang = ' . intval($chaine['id_tradlang']));
+				$r = sql_updateq('spip_tradlangs', array('md5' => $newmd5, 'str' => $str), 'id_tradlang=' . intval($chaine['id_tradlang']));
 			}
 
 			$php_lines[] = $tab . var_export($chaine['id'], 1) . ' => ' . var_export($str, 1) . ',' . $comment;
 		}
 
-
-		$orig = ($lang==$lang_ref) ? $url_repo : false;
-
-		salvatore_log(" - traduction ($total_chaines['OK']/$count_trad_reference OK | $total_chaines['RELIRE']/$count_trad_reference RELIRE | $total_chaines['MODIF']/$count_trad_reference MODIFS), export\n");
-		// historiquement les fichiers de lang de spip_loader ne peuvent pas etre securises
-		$secure = ($module=='tradloader')
-			? ''
-			: "if (!defined('_ECRIRE_INC_VERSION')) {
-return;
-}\n\n";
-
-		$fd = fopen($dir_module . '/' . $module . '_' . $lang . '.php', 'w');
-
-		# supprimer la virgule du dernier item
-		$php_lines[count($php_lines)-1] = preg_replace('/,([^,]*)$/', '\1', $php_lines[count($php_lines)-1]);
-
-		$contenu = join("\n", $php_lines);
-
-		// L'URL du site de traduction
-		$url_trad_module = parametre_url($url_trad_module, 'lang_cible', $lang);
-		/**
-		 * Ecrire le fichier de langue complet
-		 */
-		fwrite(
-			$fd,
-			'<' . '?php
-// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-'
-
-			. ($orig
-				? '// Fichier source, a modifier dans ' . $orig
-				: '// extrait automatiquement de ' . $url_trad_module . '
-// ** ne pas modifier le fichier **
-'
-			)
-			. "\n" . $secure . '$GLOBALS[$GLOBALS[\'idx_lang\']] = array(
-'
-			. $contenu
-			. '
-);
-'
-		);
-		fclose($fd);
+		salvatore_log(" - traduction (".$total_chaines['OK']."/$count_trad_reference OK | ".$total_chaines['RELIRE']."/$count_trad_reference RELIRE | ".$total_chaines['MODIF']."/$count_trad_reference MODIFS), export");
+		salvatore_exporter_fichier_php($dir_module, $module, $lang, $php_lines, $url_trad_module, ($lang==$lang_ref) ? $url_repo : false);
 
 		// noter la langue et les traducteurs pour lang/module.xml
 		$infos[$lang] = $people_unique = array();
@@ -385,63 +341,38 @@ function salvatore_clean_comment($comment) {
 }
 
 /**
- * Nettoyer la chaine traduite qui est en base avant export dans le PHP
- * @param string $chaine
+ * Generer un fichier de langue a partir de ses lignes php
+ * @param string $dir_module
+ * @param string $module
  * @param string $lang
- * @return string
+ * @param array $php_lines
+ * @param string $url_trad_module
+ * @param $origin
  */
-function savlatore_nettoyer_chaine_base($chaine, $lang) {
-	static $typographie_functions = array();
-
-	if (!isset($typographie_functions[$lang])){
-		$typo = (in_array($lang, array('eo', 'fr', 'cpf')) || strncmp($lang, 'fr_', 3)==0) ? 'fr' : 'en';
-		$typographie_functions[$lang] = charger_fonction($typo, 'typographie');
+function salvatore_exporter_fichier_php($dir_module, $module, $lang, $php_lines, $url_trad_module, $origin) {
+	$file_name = $dir_module . '/' . $module . '_' . $lang . '.php';
+	$file_content = '<' . '?php
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+';
+	if ($origin) {
+		$file_content .= '// Fichier source, a modifier dans ' . $origin;
+	}
+	else {
+		$file_content .= '// extrait automatiquement de ' . $url_trad_module . '
+// ** ne pas modifier le fichier **
+';
 	}
 
-	/**
-	 * On enlève les sauts de lignes windows pour des sauts de ligne linux
-	 */
-	$chaine = str_replace("\r\n", "\n", $chaine);
-
-	/**
-	 * protection dans les balises genre <a href="..." ou <img src="..."
-	 * cf inc/filtres
-	 */
-	if (preg_match_all(_TYPO_BALISE, $chaine, $regs, PREG_SET_ORDER)){
-		foreach ($regs as $reg){
-			$insert = $reg[0];
-			// hack: on transforme les caracteres a proteger en les remplacant
-			// par des caracteres "illegaux". (cf corriger_caracteres())
-			$insert = strtr($insert, _TYPO_PROTEGER, _TYPO_PROTECTEUR);
-			$chaine = str_replace($reg[0], $insert, $chaine);
-		}
+	// historiquement les fichiers de lang de spip_loader ne peuvent pas etre securises
+	if ($module !== 'tradloader') {
+		$file_content .= "if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}\n\n";
 	}
 
-	/**
-	 * Protéger le contenu des balises <html> <code> <cadre> <frame> <tt> <pre>
-	 */
-	define('_PROTEGE_BLOCS_HTML', ',<(html|code|cadre|pre|tt)(\s[^>]*)?>(.*)</\1>,UimsS');
-	if ((strpos($chaine, '<')!==false) and preg_match_all(_PROTEGE_BLOCS_HTML, $chaine, $matches, PREG_SET_ORDER)){
-		foreach ($matches as $reg){
-			$insert = $reg[0];
-			// hack: on transforme les caracteres a proteger en les remplacant
-			// par des caracteres "illegaux". (cf corriger_caracteres())
-			$insert = strtr($insert, _TYPO_PROTEGER, _TYPO_PROTECTEUR);
-			$chaine = str_replace($reg[0], $insert, $chaine);
-		}
-	}
+	# supprimer la virgule du dernier item
+	$php_lines[count($php_lines)-1] = preg_replace('/,([^,]*)$/', '\1', $php_lines[count($php_lines)-1]);
 
-	/**
-	 * On applique la typographie de la langue
-	 */
-	$chaine = $typographie_functions[$lang]($chaine);
-
-	/**
-	 * On remet les caractères normaux sur les caractères illégaux
-	 */
-	$chaine = strtr($chaine, _TYPO_PROTECTEUR, _TYPO_PROTEGER);
-
-	$chaine = unicode_to_utf_8(html_entity_decode(preg_replace('/&([lg]t;)/S', '&amp;\1', $chaine), ENT_NOQUOTES, 'utf-8'));
-
-	return $chaine;
+	$file_content .= implode("\n", $php_lines);
+	file_put_contents($file_name, $file_content);
 }

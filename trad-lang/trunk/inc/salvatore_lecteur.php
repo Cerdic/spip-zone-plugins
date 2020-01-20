@@ -328,7 +328,7 @@ function salvatore_importer_module_langue($id_tradlang_module, $source, $fichier
 					}
 
 					if ($md5){
-						$chaines[$id] = salvatore_nettoyer_chaine_php($chaines[$id], $lang);
+						$chaines[$id] = salvatore_nettoyer_chaine_langue($chaines[$id], $lang);
 
 						/**
 						 * Calcul du nouveau md5
@@ -549,65 +549,3 @@ function salvatore_charger_commentaires_fichier_langue($fichier_lang){
 	return $liste_trad;
 }
 
-/**
- * Nettoyer la chaine de langue venant du fichier PHP
- * @param string $chaine
- * @param string $lang
- * @return string
- */
-function salvatore_nettoyer_chaine_php($chaine, $lang){
-	static $typographie_functions = array();
-
-	if (!isset($typographie_functions[$lang])){
-		$typo = (in_array($lang, array('eo', 'fr', 'cpf')) || strncmp($lang, 'fr_', 3)==0) ? 'fr' : 'en';
-		$typographie_functions[$lang] = charger_fonction($typo, 'typographie');
-	}
-
-	/**
-	 * On enlève les sauts de lignes windows pour des sauts de ligne linux
-	 */
-
-	$chaine = str_replace("\r\n", "\n", $chaine);
-
-	/**
-	 * protection dans les balises genre <a href="..." ou <img src="..."
-	 * cf inc/filtres
-	 */
-	if (preg_match_all(_TYPO_BALISE, $chaine, $regs, PREG_SET_ORDER)){
-		foreach ($regs as $reg){
-			$insert = $reg[0];
-			// hack: on transforme les caracteres a proteger en les remplacant
-			// par des caracteres "illegaux". (cf corriger_caracteres())
-			$insert = strtr($insert, _TYPO_PROTEGER, _TYPO_PROTECTEUR);
-			$chaine = str_replace($reg[0], $insert, $chaine);
-		}
-	}
-
-	/**
-	 * Protéger le contenu des balises <html> <code> <cadre> <frame> <tt> <pre>
-	 */
-	define('_PROTEGE_BLOCS_HTML', ',<(html|code|cadre|pre|tt)(\s[^>]*)?>(.*)</\1>,UimsS');
-	if ((strpos($chaine, '<')!==false) and preg_match_all(_PROTEGE_BLOCS_HTML, $chaine, $matches, PREG_SET_ORDER)){
-		foreach ($matches as $reg){
-			$insert = $reg[0];
-			// hack: on transforme les caracteres a proteger en les remplacant
-			// par des caracteres "illegaux". (cf corriger_caracteres())
-			$insert = strtr($insert, _TYPO_PROTEGER, _TYPO_PROTECTEUR);
-			$chaine = str_replace($reg[0], $insert, $chaine);
-		}
-	}
-
-	/**
-	 * On applique la typographie de la langue
-	 */
-	$chaine = $typographie_functions[$lang]($chaine);
-
-	/**
-	 * On remet les caractères normaux sur les caractères illégaux
-	 */
-	$chaine = strtr($chaine, _TYPO_PROTECTEUR, _TYPO_PROTEGER);
-
-	$chaine = unicode_to_utf_8(html_entity_decode(preg_replace('/&([lg]t;)/S', '&amp;\1', $chaine), ENT_NOQUOTES, 'utf-8'));
-
-	return $chaine;
-}
