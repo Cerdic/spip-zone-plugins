@@ -1,18 +1,13 @@
 <paquet
 	prefix="guestbook"
 	categorie="communication"
-	version="3.0.1"
+	version="3.0.2"
 	etat="test"
 	compatibilite="[3.0.5;3.0.*]"
 	logo=""
 	documentation=""
 	schema="3.0.0"
 >
-	<!--
-		Paquet généré le 2013-01-13 11:27:03
-		(Vous pouvez bien entendu supprimer ces commentaires) 
-	-->
-
 	<nom>Guestbook</nom>
 
 	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs --> 
@@ -21,7 +16,10 @@
 	<licence>GNU/GPL</licence>
 
 	<necessite nom="saisies" compatibilite="[3.23.2;[" />
-	<utilise nom="nospam" compatibilite="[1.0.0;[" />
+	
+	<!-- nospam 2.0 préfixe compter_caracteres_utiles par nospam_ mais n'est compatible qu'avec spip 3.1 -->
+	<utilise nom="nospam" compatibilite="[1.0.0;1.9.99[" />
+	
 
 	<pipeline nom="autoriser" inclure="guestbook_autorisations.php" /> 
 
