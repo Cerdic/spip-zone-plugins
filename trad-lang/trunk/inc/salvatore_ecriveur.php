@@ -119,6 +119,11 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 		$seuil_export = lire_config('tradlang/seuil_export_tradlang', _SALVATORE_SEUIL_EXPORT);
 	}
 
+	$file_commit_infos = $dir_module . '/' . $module . '.commit.json';
+	if (file_exists($file_commit_infos)) {
+		salvatore_fail("[Ecriveur] Erreur sur $module", "Erreur : il y a deja un fichier $file_commit_infos avec des commits en attente");
+	}
+
 
 	$xml_infos = $commit_infos = array();
 	$liste_lang = $liste_lang_non_exportees = $liste_lang_a_supprimer = array();
@@ -315,7 +320,7 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 		if ($message_commit) {
 			$commit_infos['.message'] = $message_commit;
 		}
-		file_put_contents($dir_module . '/' . $module . '.commit.json', json_encode($commit_infos));
+		file_put_contents($file_commit_infos, json_encode($commit_infos));
 	}
 
 	$log = salvatore_read_status_modif($module, $source, $dir_depots);
