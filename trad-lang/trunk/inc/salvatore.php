@@ -76,6 +76,11 @@ function salvatore_init($log_function = null){
 			define('_SALVATORE_LECTEUR_REFRESH_DELAY', 24 * 3600);
 		}
 
+		// pourcentage de traduction a partir duquel on exporte la langue
+		if (!defined('_SALVATORE_SEUIL_EXPORT')) {
+			define('_SALVATORE_SEUIL_EXPORT', 50);
+		}
+
 		if (!isset($GLOBALS['idx_lang'])){
 			$GLOBALS['idx_lang'] = 0;
 		}
