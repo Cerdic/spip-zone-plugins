@@ -22,3 +22,10 @@ table.ffedata tbody tr.odd  {background:#EBEFF5;}
 table.ffedata tbody tr.even {background:#C6D3E8;}
 
 table.ffedata td {font-size: 12px; text-align: center;     padding:0 4px 0 4px; border: 1px solid #fff;}
+
+/* Styler les champs importés de la base FFE */
+
+#champ_NrFFE  , #champ_Nom , #champ_Prenom , #champ_Cat , #champ_AffType , #champ_Elo , #champ_Rapide , #champ_ClubNom , #champ_NeLe , #champ_Sexe  {
+	background-color: #daedfa;
+	color: #1a1515;
+}
