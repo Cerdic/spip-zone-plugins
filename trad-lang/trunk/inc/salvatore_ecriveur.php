@@ -133,8 +133,8 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 			/**
 			 * Le fichier n'est pas suffisamment traduit et n'existe pas, on ne fera donc rien
 			 */
-			if (!file_exists($dir_module . '/' . $module . '_' . $row['lang'] . '.php')){
-				$liste_lang_non_exportees[] = $row['lang'];
+			if (!file_exists($dir_module . '/' . $module . '_' . $langue['lang'] . '.php')){
+				$liste_lang_non_exportees[] = $langue['lang'];
 			} else {
 				/**
 				 * Il n'est pas suffisamment traduit, cependant, il existe déjà
@@ -142,7 +142,7 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 				 */
 				$liste_lang[] = $langue['lang'];
 				$liste_lang_a_supprimer[] = $langue['lang'];
-				$percent = (($row['N']/$count_trad_reference)*100);
+				$percent = (($langue['count']/$count_trad_reference)*100);
 				if ($percent<($seuil_export-15)){
 					$message_commit .= "La langue '" . $langue['lang'] . "' devrait être supprimée car trop peu traduite (" . number_format($percent, 2) . " %)\n";
 				}
@@ -159,91 +159,34 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 		$typographie = charger_fonction($typo, 'typographie');
 		$tab = "\t";
 
-		$x = $tous = $tradlangs = array();
-		$prev = '';
-		$traduits = $modifs = $relire = 0;
+		$php_lines = $chaines = $id_tradlangs = array();
+		$initiale = '';
 
 		// On ne prend que les MODIF, les RELIRE et les OK pour ne pas rendre les sites multilingues en français
-		$res = sql_allfetsel('id_tradlang,id,str,comm,statut,md5', 'spip_tradlangs', 'module = "' . $module . '" AND lang = "' . $lang . '" AND statut != "NEW" AND statut != "attic"', 'id');
-		foreach ($res as $row){
-			$tradlangs[] = $row['id_tradlang'];
-			$tous[$row['id']] = $row;
-		}
-		ksort($tous);
+		$chaines = sql_allfetsel('id_tradlang,id,str,comm,statut,md5', 'spip_tradlangs', 'id_tradlang_module=' . intval($id_tradlang_module) . ' AND lang=' . sql_quote($lang) . " AND statut!='NEW' AND statut!='attic'", 'id');
+		$id_tradlangs = array_column($chaines, 'id_tradlang');
+		$chaines = array_combine(array_column($chaines, 'id'), $chaines);
+		ksort($chaines);
 
-		foreach ($tous as $row){
-			if ($row['statut']=='OK'){
-				$traduits++;
-			} elseif ($row['statut']=='MODIF') {
-				$modifs++;
-			} elseif ($row['statut']=='RELIRE') {
-				$relire++;
+		$total_chaines = ['OK' => 0, 'MODIF' => 0, 'RELIRE' => 0];
+		foreach ($chaines as $chaine){
+			$total_chaines[$chaine['statut']]++;
+
+			$comment = salvatore_clean_comment($chaine['comm']);
+
+			if ($initiale !== strtoupper($chaine['id'][0])){
+				$initiale = strtoupper($chaine['id'][0]);
+				$php_lines[] = "\n$tab// $initiale";
 			}
 
-			if (strlen($row['comm'])>1){
-				// On remplace les sauts de lignes des commentaires sinon ça crée des erreurs php
-				$row['comm'] = str_replace(array("\r\n", "\n", "\r"), ' ', $row['comm']);
-				// Conversion des commentaires en utf-8
-				$row['comm'] = unicode_to_utf_8(html_entity_decode(preg_replace('/&([lg]t;)/S', '&amp;\1', $row['comm']), ENT_NOQUOTES, 'utf-8'));
+			if (strlen($chaine['statut']) and ($chaine['statut']!=='OK')){
+				$comment .= ' ' . $chaine['statut'];
+			}
+			if ($comment){
+				$comment = ' # ' . trim($comment); // on rajoute les commentaires ?
 			}
 
-			if ($prev!=strtoupper($row['id'][0])){
-				$x[] = "\n$tab// " . strtoupper($row['id'][0]);
-			}
-			$prev = strtoupper($row['id'][0]);
-
-			if (strlen($row['statut']) and ($row['statut']!='OK')){
-				$row['comm'] .= ' ' . $row['statut'];
-			}
-			if (trim($row['comm'])){
-				$row['comm'] = ' # ' . trim($row['comm']); // on rajoute les commentaires ?
-			}
-
-			$str = $row['str'];
-
-			/**
-			 * On enlève les sauts de lignes windows pour des sauts de ligne linux
-			 */
-			$str = str_replace("\r\n", "\n", $str);
-
-			/**
-			 * protection dans les balises genre <a href="..." ou <img src="..."
-			 * cf inc/filtres
-			 */
-			if (preg_match_all(_TYPO_BALISE, $str, $regs, PREG_SET_ORDER)){
-				foreach ($regs as $reg){
-					$insert = $reg[0];
-					// hack: on transforme les caracteres a proteger en les remplacant
-					// par des caracteres "illegaux". (cf corriger_caracteres())
-					$insert = strtr($insert, _TYPO_PROTEGER, _TYPO_PROTECTEUR);
-					$str = str_replace($reg[0], $insert, $str);
-				}
-			}
-
-			/**
-			 * Protéger le contenu des balises <html> <code> <cadre> <frame> <tt> <pre>
-			 */
-			define('_PROTEGE_BLOCS_HTML', ',<(html|code|cadre|pre|tt)(\s[^>]*)?>(.*)</\1>,UimsS');
-			if ((strpos($str, '<')!==false) and preg_match_all(_PROTEGE_BLOCS_HTML, $str, $matches, PREG_SET_ORDER)){
-				foreach ($matches as $reg){
-					$insert = $reg[0];
-					// hack: on transforme les caracteres a proteger en les remplacant
-					// par des caracteres "illegaux". (cf corriger_caracteres())
-					$insert = strtr($insert, _TYPO_PROTEGER, _TYPO_PROTECTEUR);
-					$str = str_replace($reg[0], $insert, $str);
-				}
-			}
-
-			/**
-			 * On applique la typographie de la langue
-			 */
-			$str = $typographie($str);
-			/**
-			 * On remet les caractères normaux sur les caractères illégaux
-			 */
-			$str = strtr($str, _TYPO_PROTECTEUR, _TYPO_PROTEGER);
-
-			$str = unicode_to_utf_8(html_entity_decode(preg_replace('/&([lg]t;)/S', '&amp;\1', $str), ENT_NOQUOTES, 'utf-8'));
+			$str = savlatore_nettoyer_chaine_base($chaine['str'], $lang);
 
 			/**
 			 * Calcul du nouveau md5
@@ -253,15 +196,17 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 			/**
 			 * Si le md5 ou la chaine à changé, on la met à jour dans la base
 			 */
-			if (($row['md5']!=$newmd5) || ($str!=$row['str'])){
-				$r = sql_updateq('spip_tradlangs', array('md5' => $newmd5, 'str' => $str), 'id_tradlang = ' . intval($row['id_tradlang']));
+			if (($chaine['md5']!==$newmd5) || ($str!=$chaine['str'])){
+				$r = sql_updateq('spip_tradlangs', array('md5' => $newmd5, 'str' => $str), 'id_tradlang = ' . intval($chaine['id_tradlang']));
 			}
 
-			$x[] = $tab . var_export($row['id'], 1) . ' => ' . var_export($str, 1) . ',' . $row['comm'];
+			$php_lines[] = $tab . var_export($chaine['id'], 1) . ' => ' . var_export($str, 1) . ',' . $comment;
 		}
+
+
 		$orig = ($lang==$lang_ref) ? $url_repo : false;
 
-		salvatore_log(" - traduction ($traduits/$count_trad_reference OK | $relire/$count_trad_reference RELIRE | $modifs/$count_trad_reference MODIFS), export\n");
+		salvatore_log(" - traduction ($total_chaines['OK']/$count_trad_reference OK | $total_chaines['RELIRE']/$count_trad_reference RELIRE | $total_chaines['MODIF']/$count_trad_reference MODIFS), export\n");
 		// historiquement les fichiers de lang de spip_loader ne peuvent pas etre securises
 		$secure = ($module=='tradloader')
 			? ''
@@ -272,9 +217,9 @@ return;
 		$fd = fopen($dir_module . '/' . $module . '_' . $lang . '.php', 'w');
 
 		# supprimer la virgule du dernier item
-		$x[count($x)-1] = preg_replace('/,([^,]*)$/', '\1', $x[count($x)-1]);
+		$php_lines[count($php_lines)-1] = preg_replace('/,([^,]*)$/', '\1', $php_lines[count($php_lines)-1]);
 
-		$contenu = join("\n", $x);
+		$contenu = join("\n", $php_lines);
 
 		// L'URL du site de traduction
 		$url_trad_module = parametre_url($url_trad_module, 'lang_cible', $lang);
@@ -305,9 +250,9 @@ return;
 		// noter la langue et les traducteurs pour lang/module.xml
 		$infos[$lang] = $people_unique = array();
 		$infos[$lang]['traducteurs'] = array();
-		$infos[$lang]['traduits'] = $traduits;
-		$infos[$lang]['modifs'] = $modifs;
-		$infos[$lang]['relire'] = $relire;
+		$infos[$lang]['traduits'] = $total_chaines['OK'];
+		$infos[$lang]['modifs'] = $total_chaines['MODIF'];
+		$infos[$lang]['relire'] = $total_chaines['RELIRE'];
 		if (defined('_ID_AUTEUR_SALVATORE') and intval(_ID_AUTEUR_SALVATORE)>0){
 			$people_unique[] = _ID_AUTEUR_SALVATORE;
 		}
@@ -352,7 +297,7 @@ return;
 		 */
 		if (in_array(substr(exec('svn status ' . _DIR_SALVATORE_TMP . $module . '/' . $module . "_$lang.php"), 0, 1), array('A', 'M'))){
 			$last_change = exec('env LC_MESSAGES=en_US.UTF-8 svn info ' . _DIR_SALVATORE_TMP . $module . '/' . $module . "_$lang.php | awk '/^Last Changed Date/ { print $4 \" \" $5 }'");
-			$auteur_versions = sql_allfetsel('id_auteur', 'spip_versions', 'objet="tradlang" AND date > ' . sql_quote($last_change) . ' AND ' . sql_in('id_objet', $tradlangs) . ' AND id_auteur != "-1" AND id_auteur !=' . intval(_ID_AUTEUR_SALVATORE), 'id_auteur');
+			$auteur_versions = sql_allfetsel('id_auteur', 'spip_versions', 'objet="tradlang" AND date > ' . sql_quote($last_change) . ' AND ' . sql_in('id_objet', $id_tradlangs) . ' AND id_auteur != "-1" AND id_auteur !=' . intval(_ID_AUTEUR_SALVATORE), 'id_auteur');
 			if (count($auteur_versions)==1){
 				$email = sql_getfetsel('email', 'spip_auteurs', 'id_auteur = ' . intval($auteur_versions[0]['id_auteur']));
 				if ($email){
@@ -421,4 +366,82 @@ $commiteurs = ' . var_export($commiteurs, 1) . ';
 		);
 		fclose($fd);
 	}
+}
+
+/**
+ * Nettoyer le commentaire avant ecriture dans le PHP
+ * @param $comment
+ * @return mixed|string
+ */
+function salvatore_clean_comment($comment) {
+	if (strlen(trim($comment))>1){
+		// On remplace les sauts de lignes des commentaires sinon ça crée des erreurs php
+		$comment = str_replace(array("\r\n", "\n", "\r"), ' ', $comment);
+		// Conversion des commentaires en utf-8
+		$comment = unicode_to_utf_8(html_entity_decode(preg_replace('/&([lg]t;)/S', '&amp;\1', $comment), ENT_NOQUOTES, 'utf-8'));
+		return $comment;
+	}
+	return '';
+}
+
+/**
+ * Nettoyer la chaine traduite qui est en base avant export dans le PHP
+ * @param string $chaine
+ * @param string $lang
+ * @return string
+ */
+function savlatore_nettoyer_chaine_base($chaine, $lang) {
+	static $typographie_functions = array();
+
+	if (!isset($typographie_functions[$lang])){
+		$typo = (in_array($lang, array('eo', 'fr', 'cpf')) || strncmp($lang, 'fr_', 3)==0) ? 'fr' : 'en';
+		$typographie_functions[$lang] = charger_fonction($typo, 'typographie');
+	}
+
+	/**
+	 * On enlève les sauts de lignes windows pour des sauts de ligne linux
+	 */
+	$chaine = str_replace("\r\n", "\n", $chaine);
+
+	/**
+	 * protection dans les balises genre <a href="..." ou <img src="..."
+	 * cf inc/filtres
+	 */
+	if (preg_match_all(_TYPO_BALISE, $chaine, $regs, PREG_SET_ORDER)){
+		foreach ($regs as $reg){
+			$insert = $reg[0];
+			// hack: on transforme les caracteres a proteger en les remplacant
+			// par des caracteres "illegaux". (cf corriger_caracteres())
+			$insert = strtr($insert, _TYPO_PROTEGER, _TYPO_PROTECTEUR);
+			$chaine = str_replace($reg[0], $insert, $chaine);
+		}
+	}
+
+	/**
+	 * Protéger le contenu des balises <html> <code> <cadre> <frame> <tt> <pre>
+	 */
+	define('_PROTEGE_BLOCS_HTML', ',<(html|code|cadre|pre|tt)(\s[^>]*)?>(.*)</\1>,UimsS');
+	if ((strpos($chaine, '<')!==false) and preg_match_all(_PROTEGE_BLOCS_HTML, $chaine, $matches, PREG_SET_ORDER)){
+		foreach ($matches as $reg){
+			$insert = $reg[0];
+			// hack: on transforme les caracteres a proteger en les remplacant
+			// par des caracteres "illegaux". (cf corriger_caracteres())
+			$insert = strtr($insert, _TYPO_PROTEGER, _TYPO_PROTECTEUR);
+			$chaine = str_replace($reg[0], $insert, $chaine);
+		}
+	}
+
+	/**
+	 * On applique la typographie de la langue
+	 */
+	$chaine = $typographie_functions[$lang]($chaine);
+
+	/**
+	 * On remet les caractères normaux sur les caractères illégaux
+	 */
+	$chaine = strtr($chaine, _TYPO_PROTECTEUR, _TYPO_PROTEGER);
+
+	$chaine = unicode_to_utf_8(html_entity_decode(preg_replace('/&([lg]t;)/S', '&amp;\1', $chaine), ENT_NOQUOTES, 'utf-8'));
+
+	return $chaine;
 }
