@@ -247,6 +247,7 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 		}
 		unset($people_unique);
 
+		$commit_infos[$lang]['lang'] = $lang;
 		$commit_infos[$lang]['file_name'] = basename($file_name);
 		$commit_infos[$lang]['lastmodified'] = salvatore_read_lastmodified_file(basename($file_name), $source, $dir_depots);
 		$commit_infos[$lang]['must_add'] = false;
