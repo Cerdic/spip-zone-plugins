@@ -702,6 +702,7 @@ function analyser_backend_spip2spip($rss) {
 
                     // bug lieu et desc  (suite au p)
                     $data_node['lieu'] = strip_tags(html_entity_decode($data_node['lieu']));
+                    $data_node['adresse'] = html_entity_decode($data_node['adresse']);
                     $data_node['desc'] = strip_tags(html_entity_decode($data_node['desc']));
 
                     // On parse le noeud motevt (mot evenement) ?
