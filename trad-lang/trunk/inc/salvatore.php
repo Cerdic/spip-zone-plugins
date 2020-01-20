@@ -193,6 +193,26 @@ function salvatore_charger_fichier_traductions($fichier_traductions = null){
 }
 
 /**
+ * Filtrer la liste complete pour ne garder que un ou plusieurs modules specifiques
+ * @param array $liste_trad
+ * @param string|array $modules
+ * @return array
+ */
+function salvatore_filtrer_liste_traductions($liste_trad, $modules) {
+	if (is_string($modules)) {
+		$modules = explode(',', $modules);
+	}
+	$modules = array_map('trim', $modules);
+	$liste_filtree = array();
+	foreach ($liste_trad as $trad) {
+		if (in_array($trad['module'], $modules)) {
+			$liste_filtree[] = $trad;
+		}
+	}
+	return $liste_filtree;
+}
+
+/**
  * Extraire la lang d'un fichier de langue d'un module donne
  * @param string $module
  * @param string $fichier_lang

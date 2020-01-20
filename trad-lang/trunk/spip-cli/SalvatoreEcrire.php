@@ -53,6 +53,13 @@ class SalvatoreEcrire extends Command {
 				null
 			)
 			->addOption(
+				'module',
+				null,
+				InputOption::VALUE_REQUIRED,
+				'Un ou plusieurs modules a traiter (par defaut tous les modules du fichier de traduction seront traites)',
+				null
+			)
+			->addOption(
 				'message',
 				null,
 				InputOption::VALUE_REQUIRED,
@@ -81,6 +88,13 @@ class SalvatoreEcrire extends Command {
 		$liste_trad = salvatore_charger_fichier_traductions($traductions);
 		$n = count($liste_trad);
 		$output->writeln("<info>$n modules dans le fichier traductions " . ($traductions ? $traductions : '') . "</info>");
+
+		$modules = $input->getOption('module');
+		if ($modules = trim($modules)) {
+			$liste_trad = salvatore_filtrer_liste_traductions($liste_trad, $modules);
+			$n = count($liste_trad);
+			$output->writeln("<info>$n modules à traiter : " . $modules . "</info>");
+		}
 
 		$message = $input->getOption('message');
 
