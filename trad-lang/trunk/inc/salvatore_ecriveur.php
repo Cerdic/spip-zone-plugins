@@ -34,6 +34,9 @@ include_spip('inc/xml');
 include_spip('inc/lang_liste');
 include_spip('inc/session');
 
+include_spip('inc/salvatore_svn');
+include_spip('inc/salvatore_git');
+
 
 /**
  * @param array $liste_sources
@@ -310,7 +313,7 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 	if (count($commit_infos)) {
 		$nb_to_commit = count($commit_infos);
 		if ($message_commit) {
-			$commit_infos['message'] = $message_commit;
+			$commit_infos['.message'] = $message_commit;
 		}
 		file_put_contents($dir_module . '/' . $module . '.commit.json', json_encode($commit_infos));
 	}
@@ -394,24 +397,9 @@ function salvatore_read_lastmodified_file($file_name, $source, $dir_depots) {
 	if ($source['dir']) {
 		$file_path_relative = $source['dir'] . DIRECTORY_SEPARATOR . $file_path_relative;
 	}
-	$file_path = $dir_depots . $source['dir_checkout'] . DIRECTORY_SEPARATOR . $file_path_relative;
 
-	$lastmodified = 0;
-	switch ($source['methode']) {
-		case 'git':
-			$d = getcwd();
-			chdir($dir_depots . $source['dir_checkout']);
-			$lastmodified = exec("git log -1 -c --pretty=tformat:'%ct' $file_path_relative | head -1");
-			$lastmodified = intval(trim($lastmodified));
-			chdir($d);
-			break;
-		case 'svn':
-			$lastmodified = exec('env LC_MESSAGES=en_US.UTF-8 svn info ' . $file_path . "| awk '/^Last Changed Date/ { print $4 \" \" $5 }'");
-			$lastmodified = strtotime($lastmodified);
-			break;
-	}
-
-	return $lastmodified;
+	$salvatore_lastmodified_file = "salvatore_" . $source['methode'] . "_lastmodified_file";
+	return $salvatore_lastmodified_file($dir_depots . $source['dir_checkout'], $file_path_relative);
 }
 
 
@@ -428,21 +416,9 @@ function salvatore_read_status_modif($module, $source, $dir_depots) {
 		$pre = $source['dir'] . DIRECTORY_SEPARATOR;
 	}
 	$files_list = [$pre . $module . '_*', $pre . $module . '.xml'];
-	$files_list = implode(' ', $files_list);
 
-	$d = getcwd();
-	chdir($dir_depots . $source['dir_checkout']);
-	$output = array();
-	switch ($source['methode']) {
-		case 'git':
-			exec("git status --short $files_list 2>&1", $output);
-			break;
-		case 'svn':
-			exec("svn status $files_list 2>&1", $output);
-			break;
-	}
-	chdir($d);
-	return implode("\n", $output);
+	$salvatore_status_file = "salvatore_" . $source['methode'] . "_status_file";
+	return $salvatore_status_file($dir_depots . $source['dir_checkout'], $files_list);
 }
 
 /*
