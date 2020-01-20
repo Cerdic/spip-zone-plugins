@@ -284,7 +284,7 @@ function salvatore_importer_module_langue($id_tradlang_module, $source, $fichier
 	$ajoutees = $inchangees = $supprimees = $modifiees = $ignorees = $recuperees = 0;
 
 	if (array_key_exists($lang, $GLOBALS['codes_langues'])) {
-		$statut_exclus = ($is_master ? 'attic' : 'MODIF');
+		$statut_exclus = 'attic';
 		$res = sql_select("id, str, md5", "spip_tradlangs", "id_tradlang_module=" . intval($id_tradlang_module) . " AND lang=" . sql_quote($lang) . " AND statut!=" . sql_quote($statut_exclus));
 		$nb = sql_count($res);
 		if ($nb>0){
