@@ -59,6 +59,13 @@ class SalvatoreLire extends Command {
 				'Un ou plusieurs modules a traiter (par defaut tous les modules du fichier de traduction seront traites)',
 				null
 			)
+			->addOption(
+				'force',
+				null,
+				InputOption::VALUE_NONE,
+				'Forcer la relecture du ou des modules et la mise a jour en base indépendament de la date de dernière mise a jour des fichiers',
+				null
+			)
 		;
 	}
 
@@ -89,7 +96,8 @@ class SalvatoreLire extends Command {
 			$output->writeln("<info>$n modules à traiter : " . $modules . "</info>");
 		}
 
-		salvatore_lire($liste_trad);
+		$force = $input->getOption('force');
+		salvatore_lire($liste_trad, $force);
 	}
 }
 

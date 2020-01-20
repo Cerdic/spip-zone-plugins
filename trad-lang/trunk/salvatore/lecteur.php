@@ -36,10 +36,11 @@ include_spip('inc/session');
 
 /**
  * @param array $liste_sources
+ * @param bool $force_reload
  * @param string $dir_modules
  * @throws Exception
  */
-function salvatore_lire($liste_sources, $dir_modules = null){
+function salvatore_lire($liste_sources, $force_reload = false, $dir_modules = null){
 	include_spip('inc/salvatore');
 	salvatore_init();
 
@@ -106,7 +107,9 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 
 		$langues_a_jour = array();
 
-		if (!$row_module or $last_update>$refresh_time){
+		if (!$row_module
+		  or $force_reload
+			or $last_update>$refresh_time){
 			$priorite = '';
 			$modifs = 0;
 			if (defined('_TRAD_PRIORITE_DEFAUT')){
@@ -136,7 +139,7 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 					salvatore_log("Insertion en base #$id_tradlang_module");
 				}
 			}
-
+			$force_reload = true;
 		}
 		// Pas de mise a jour recente du fichier maitre deja en base
 		else {
@@ -170,7 +173,7 @@ function salvatore_lire($liste_sources, $dir_modules = null){
 		}
 
 		// traiter les fichiers lang
-		if (count($liste_fichiers_lang)) {
+		if (count($liste_fichiers_lang) or $force_reload) {
 
 			// on commence par la langue mere
 			$liste_md5_master = array();
