@@ -170,6 +170,12 @@ function salvatore_charger_fichier_traductions($fichier_traductions = null){
 				and $lang){
 				// que fait la $GLOBALS['modules'] ?
 				if (empty($GLOBALS['modules']) or in_array($module, $GLOBALS['modules'])){
+
+					// unifier les urls git en https, plus simple a gerer car ne necessitent pas une cle ssh sur le user php (www-data)
+					if (strpos($url, "git@git.spip.net:") === 0) {
+						$url = "https://git.spip.net/" . substr($url, 17);
+					}
+
 					// definir un dir checkout unique meme si plusieurs modules de meme nom dans differents repos
 					$d = explode('/', $url);
 					while (count($d) and in_array(end($d), ['', 'lang', 'trunk', 'ecrire'])){
