@@ -88,9 +88,7 @@ body {
 	font-size: 1em;
 }
 
-/* prévisualisation du contenu éditorial */
 #wysiwyg {
-	max-width: 45em; /* ~70 caractères par ligne */
 	margin-bottom: 1.5em;
 }
 /* pas de justification, c'est mal, et pas de césure auto */
@@ -106,6 +104,11 @@ body {
 }
 #wysiwyg .contenu_email {
 	margin:0;
+}
+#wysiwyg .contenu_texte {
+	max-width: 75ch; /* 75 caractères par ligne */
+	margin-left: auto;
+	margin-right: auto;
 }
 #wysiwyg.revision {
 	word-break: break-all;
@@ -168,13 +171,16 @@ div.en_lignes {
 .liste-objets tr > .auteur {
 	min-width: 130px;
 }
-
+.liste-objets strong.caption,
 .liste-objets table caption strong.caption {
-	font-size: 1.1em;
+	font-size: 1em !important;
+	background-position-y: center;
 }
-
 .liste-objets td .spip_logo {
 	float: right;
+}
+.liste-objets td.statut {
+	vertical-align: top;
 }
 
 .inner .liste-objets.articles {
@@ -249,11 +255,6 @@ div.en_lignes {
   sauf les boites de rubriques et
   dans les barres d'onglets
 ----------------------------------------*/
-
-.liste-objets .caption {
-	background-image: none !important;
-	padding-#ENV{left}: inherit !important;
-}
 
 a.plus_info,
 .cadre-icone {
@@ -394,26 +395,9 @@ a.plus_info,
 .formulaire_spip .long_label {padding-#ENV{left}:280px;}
 .formulaire_spip .long_label > label {width: 260px;margin-#ENV{left}:-270px;}
 
-/* Formulaires avec label en haut */
-/* les cas particuliers des edition pleines largeur */
-
-.formulaire_spip .editer_parent,
-.formulaire_spip .editer_groupe_mot,
-.formulaire_spip .editer_descriptif,
-.formulaire_spip .editer_chapo,
-.formulaire_spip .editer_texte,
-.formulaire_spip .editer_ps,
-.formulaire_spip .haut,
-.formulaire_spip .pleine_largeur { padding-#ENV{left}:10px;}
-
-.formulaire_spip .editer_parent label,
-.formulaire_spip .editer_groupe_mot label,
-.formulaire_spip .editer_descriptif label,
-.formulaire_spip .editer_chapo label,
-.formulaire_spip .editer_texte label,
-.formulaire_spip .editer_ps label,
-.formulaire_spip .haut label,
-.formulaire_spip .pleine_largeur>label {display: block;float: none;width:auto;margin-#ENV{left}: 0;}
+.formulaire_spip .editer_parent .rubrique_actuelle {
+	clear: none;
+}
 
 /* Fieldsets et legends */
 
@@ -441,8 +425,7 @@ a.plus_info,
 
 .fiche_objet .formulaire_spip.formulaire_dater {
 	background: #f5f5f5;
-	margin-top: 1em;
-	margin-bottom: 1.5em;
+	margin: 1em 0 1.5em 0;
 	padding: 5px;
 }
 .formulaire_spip.formulaire_dater label,
@@ -475,10 +458,7 @@ a.plus_info,
 .formulaire_configurer_urls .editer_type_urls .choix {
 	display: block;
 }
-/*.formulaire_spip.formulaire_traduire .editer {*/
-	/*padding-top: 0;*/
-	/*padding-bottom: 0;*/
-/*}*/
+
 .formulaire_spip.formulaire_traduire .editer > label {
 	margin-top: 0;
 }
@@ -605,7 +585,7 @@ body.large {
 .largeur, #conteneur, .table_page,
 .large .largeur, .large #conteneur, .large .table_page {
 	width: auto !important;
-	max-width: 1100px;
+	max-width: 1300px;
 }
 
 #bando_haut .largeur,
@@ -636,13 +616,9 @@ body.large {
 */
 
 #conteneur {
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	-ms-flex-direction: column;
 	flex-direction: column;
+	-webkit-flex-direction: column;
 }
 
 #contenu, #navigation, #extra {
@@ -652,21 +628,15 @@ body.large {
 
 /* ordre des items */
 #contenu {
-	-webkit-box-ordinal-group: 2;
-	-ms-flex-order: 1;
 	order: 1;
 	margin-#ENV{left}: 0;
 }
 
 #navigation {
-	-webkit-box-ordinal-group: 3;
-	-ms-flex-order: 2;
 	order: 2;
 }
 
 #extra {
-	-webkit-box-ordinal-group: 4;
-	-ms-flex-order: 3;
 	order: 3;
 }
 
@@ -685,9 +655,6 @@ body.large {
 
 	/* Conteneur */
 	#conteneur {
-		-webkit-box-orient: horizontal;
-		-webkit-box-direction: normal;
-		-ms-flex-direction: row;
 		flex-direction: row;
 	}
 
@@ -698,11 +665,7 @@ body.large {
 	/* contenu principal */
 	#contenu {
 		width: 70% !important;
-		-webkit-box-flex: 1;
-		-ms-flex-positive: 1;
 		flex-grow: 1;
-		-webkit-box-ordinal-group: 3;
-		-ms-flex-order: 2;
 		order: 2;
 		margin-#ENV{left}: 30px !important;
 	}
@@ -711,13 +674,8 @@ body.large {
 	#navigation, #extra {
 		width: initial !important; /* pas de colonne fantome en abscence de contenu */
 		/*width: 30% !important;*/
-		-webkit-box-flex: 0;
-		-ms-flex-positive: 0;
 		flex-grow: 0; /* pas de colonne fantome en abscence de contenu */
-		-ms-flex-negative: 1;
 		flex-shrink: 1;
-		-webkit-box-ordinal-group: 2;
-		-ms-flex-order: 1;
 		order: 1;
 	}
 	/* Hack : on met une largeur au contenu des colonnes latérales,
