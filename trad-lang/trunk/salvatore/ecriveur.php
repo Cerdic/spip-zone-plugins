@@ -34,9 +34,6 @@ include_spip('inc/xml');
 include_spip('inc/lang_liste');
 include_spip('inc/session');
 
-include_spip('salvatore/vcs/svn');
-include_spip('salvatore/vcs/git');
-
 
 /**
  * @param array $liste_sources

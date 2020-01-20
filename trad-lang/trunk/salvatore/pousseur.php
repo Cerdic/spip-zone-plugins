@@ -28,9 +28,6 @@
 
 // il commit et push les fichiers modifies
 
-include_spip('salvatore/vcs/git');
-include_spip('salvatore/vcs/svn');
-
 /**
  * @param array $liste_sources
  * @param string|null $tmp
