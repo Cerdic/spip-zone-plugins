@@ -17,22 +17,126 @@
     along with Trad-Lang; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-    Copyright 2003-2013
+    Copyright 2003-2020
         Florent Jugla <florent.jugla@eledo.com>,
         Philippe Riviere <fil@rezo.net>,
         Chryjs <chryjs!@!free!.!fr>,
- 		kent1 <kent1@arscenic.info>
+        kent1 <kent1@arscenic.info>
+        Cerdic <cedric@yterium.com>
 */
 
-// il envoie les fichiers dans le svn
+
+// il commit et push les fichiers modifies
 
 
-require_once(dirname(__FILE__) . '/inc_tradlang.php');
-require_once(_DIR_ETC . 'salvatore_passwd.inc');
+/**
+ * @param array $liste_sources
+ * @param string|null $tmp
+ * @return bool
+ * @throws Exception
+ */
+function salvatore_pousser($liste_sources, $dir_modules=null, $dir_depots=null) {
+	include_spip('inc/salvatore');
+	salvatore_init();
 
-if (!isset($SVNUSER) or !isset($SVNPASSWD)){
-	die('Veuillez indiquer $SVNUSER et $SVNPASSWD dans le fichier ' . _DIR_ETC . 'salvatore_passwd.inc');
+	if (is_null($dir_modules)) {
+		$dir_modules = _DIR_SALVATORE_MODULES;
+	}
+	salvatore_check_dir($dir_modules);
+
+	if (is_null($dir_depots)) {
+		$dir_depots = _DIR_SALVATORE_DEPOTS;
+	}
+	salvatore_check_dir($dir_depots);
+
+	$done = array();
+
+	foreach ($liste_sources as $source){
+		salvatore_log("\n<info>--- Module " . $source['module'] . " | " . $source['dir_module'] . " | " . $source['url']."</info>");
+
+		$dir_module = $dir_modules . $source['dir_module'];
+		$module = $source['module'];
+
+		// on peut poser un .salvatore.ignore.{module} manuellement pour forcer salvatore a ne jamais pousser certains modules
+		// (gestion de tensions sur certains plugins/modules)
+
+		$file_commit = $dir_module . '/' . $module . '.commit.json';
+
+		if (file_exists($dir_module . '/.salvatore.ignore.' . $module)) {
+			salvatore_log("<info>Module $module ignoré</info>");
+		}
+		else {
+			if (!file_exists($file_commit)
+			  or !$commit_infos = file_get_contents($file_commit)
+			  or !$commit_infos = json_decode($commit_infos, true)) {
+				salvatore_log("<info>Module $module rien à faire (pas de fichier $file_commit ou fichier invalide)</info>");
+			}
+			else {
+				// on a la liste des fichiers a commit
+				$message_commit = '';
+				if (isset($commit_infos['.message'])) {
+					$message_commit = $commit_infos['.message'];
+					unset($commit_infos['.message']);
+				}
+
+
+
+
+			}
+		}
+
+		/*
+		$url_with_credentials = salvatore_set_credentials($source['methode'], $source['url'], $source['module']);
+
+		$dir_checkout = $dir_depots . $source['dir_checkout'];
+		$dir_module = $dir_modules . $source['dir_module'];
+		$dir_target = $dir_checkout;
+		if ($source['dir']) {
+			$dir_target .= "/" . $source['dir'];
+		}
+
+		$return = 0;
+		if (empty($done[$dir_checkout])) {
+			$cmd = "checkout.php"
+			  . ' ' . $source['methode']
+				. ($source['branche'] ? ' -b'.$source['branche'] : '')
+				. ' ' . $url_with_credentials
+				. ' ' . $dir_checkout;
+
+			echo "$cmd\n";
+			passthru("export FORCE_RM_AND_CHECKOUT_AGAIN_BAD_DEST=1 && $cmd 2>/dev/null", $return);
+			$done[$dir_checkout] = true;
+		}
+
+		if ($return !== 0 or !is_dir($dir_checkout) or !is_dir($dir_target)) {
+			$corps = $source['url'] . ' | ' . $source['module'] . "\n" . "Erreur lors du checkout";
+			salvatore_fail('[Tireur] : Erreur', $corps);
+		}
+
+		if (file_exists($dir_module) and !is_link($dir_module)) {
+			$corps = $source['url'] . ' | ' . $source['module'] . "\n" . "Il y a deja un repertoire $dir_module";
+			salvatore_fail('[Tireur] : Erreur', $corps);
+		}
+
+		$dir_target = realpath($dir_target);
+		if (is_link($dir_module) and readlink($dir_module) !== $dir_target) {
+			@unlink($dir_module);
+		}
+		if (!file_exists($dir_module)) {
+			symlink($dir_target, $dir_module);
+		}
+
+		$fichier_lang_master = $dir_module . '/' . $source['module'] . '_' . $source['lang'] . '.php';
+		// controle des erreurs : requiert au moins 1 fichier par module !
+		if (!file_exists($fichier_lang_master)){
+			salvatore_fail('[Tireur] : Erreur', "! Erreur pas de fichier de langue maitre $fichier_lang_master");
+		}
+		*/
+	}
+
+	return true;
 }
+
 
 $propset = true;
 if (isset($NO_PROPSET)){
