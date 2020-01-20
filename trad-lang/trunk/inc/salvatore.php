@@ -81,6 +81,15 @@ function salvatore_init($log_function = null){
 			define('_SALVATORE_SEUIL_EXPORT', 50);
 		}
 
+		if (!defined('_SALVATORE_AUTHOR_COMMITS')) {
+			define('_SALVATORE_AUTHOR_COMMITS', 'salvatore@rezo.net');
+		}
+
+		if (!defined('_SALVATORE_SVN_PROPSET')) {
+			define('_SALVATORE_SVN_PROPSET', true);
+		}
+
+
 		if (!isset($GLOBALS['idx_lang'])){
 			$GLOBALS['idx_lang'] = 0;
 		}

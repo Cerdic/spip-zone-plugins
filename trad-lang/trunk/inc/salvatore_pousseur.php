@@ -28,6 +28,8 @@
 
 // il commit et push les fichiers modifies
 
+include_spip('inc/salvatore_git');
+include_spip('inc/salvatore_svn');
 
 /**
  * @param array $liste_sources
@@ -49,7 +51,7 @@ function salvatore_pousser($liste_sources, $dir_modules=null, $dir_depots=null) 
 	}
 	salvatore_check_dir($dir_depots);
 
-	$done = array();
+	$url_gestionnaire = salvatore_get_self_url();
 
 	foreach ($liste_sources as $source){
 		salvatore_log("\n<info>--- Module " . $source['module'] . " | " . $source['dir_module'] . " | " . $source['url']."</info>");
@@ -75,112 +77,104 @@ function salvatore_pousser($liste_sources, $dir_modules=null, $dir_depots=null) 
 				// on a la liste des fichiers a commit
 				$message_commit = '';
 				if (isset($commit_infos['.message'])) {
-					$message_commit = $commit_infos['.message'];
+					$message_commit = trim($commit_infos['.message']) . "\n";
 					unset($commit_infos['.message']);
 				}
+				$dir_depot = $dir_depots . $source['dir_checkout'];
+				$subdir = '';
+				if (isset($source['dir'])) {
+					$subdir = $source['dir'] . DIRECTORY_SEPARATOR;
+				}
 
+				// reorganiser les fichiers a commit et preparer les messages de commit
+				// - ignorer les fichiers non modifies, ou non versionnes et qui ne doivent pas etre ajoutes
+				// - regrouper par auteur
 
+				$commits_todo = array();
+				$salvatore_status_file = "salvatore_" . $source['methode'] . "_status_file";
+				foreach ($commit_infos as $commit_info) {
 
+					$file = $commit_info['file_name'];
 
+					if ($commit_info['lastmodified'] or $commit_info['must_add']) {
+						$status = $salvatore_status_file($dir_depots . $source['dir_checkout'], $subdir . $file);
+
+						// fichier nouveau ou modifie (sinon on l'ignore)
+						if ($status) {
+							$author = 0;
+							if (!empty($commit_info['author'])) {
+								$author = $commit_info['author'];
+							}
+
+							if (!isset($commits_todo[$author])) {
+								$commits_todo[$author] = array(
+									'files' => array(),
+									'message' => []
+								);
+								if ($message_commit) {
+									$commits_todo[$author]['message'][] = $message_commit;
+								}
+							}
+							$commits_todo[$author]['files'][] = $subdir . $file;
+							$message = "[Salvatore] [source:$subdir $module] Export depuis $url_gestionnaire";
+							if (!empty($commit_info['lang'])) {
+								$message .= " de la langue " . $commit_info['lang'];
+							}
+							if (!empty($commit_info['message'])) {
+								$message .= "\n            " . $commit_info['message'];
+							}
+							$commits_todo[$author]['message'][] = $message;
+						}
+
+					}
+
+				}
+
+				// on peut maintenant lancer les commits
+				// ajoutons les credentials dans la source pour pouvoir commit ou push
+				$url_with_credentials = salvatore_set_credentials($source['methode'], $source['url'], $source['module']);
+				$parts = parse_url($url_with_credentials);
+				if (!empty($parts['user']) and !empty($parts['pass'])){
+					$source['user'] = $parts['user'];
+					$source['pass'] = $parts['pass'];
+				}
+
+				foreach ($commits_todo as $author => $commit_todo) {
+					if (!$author) {
+						$author = _SALVATORE_AUTHOR_COMMITS;
+					}
+					$message = implode("\n", $commit_todo['message']);
+					salvatore_log("<info>Commit de $author :</info>");
+					salvatore_log("Fichiers : " . implode(', ', $commit_todo['files']));
+					salvatore_log("Message : \n" . $message);
+
+					// TODO
+					//salvatore_git_commit_files($dir_depots . $source['dir_checkout'], $commit_todo['files'], $message)
+				}
+
+				die('?');
 			}
 		}
 
-		/*
-		$url_with_credentials = salvatore_set_credentials($source['methode'], $source['url'], $source['module']);
-
-		$dir_checkout = $dir_depots . $source['dir_checkout'];
-		$dir_module = $dir_modules . $source['dir_module'];
-		$dir_target = $dir_checkout;
-		if ($source['dir']) {
-			$dir_target .= "/" . $source['dir'];
-		}
-
-		$return = 0;
-		if (empty($done[$dir_checkout])) {
-			$cmd = "checkout.php"
-			  . ' ' . $source['methode']
-				. ($source['branche'] ? ' -b'.$source['branche'] : '')
-				. ' ' . $url_with_credentials
-				. ' ' . $dir_checkout;
-
-			echo "$cmd\n";
-			passthru("export FORCE_RM_AND_CHECKOUT_AGAIN_BAD_DEST=1 && $cmd 2>/dev/null", $return);
-			$done[$dir_checkout] = true;
-		}
-
-		if ($return !== 0 or !is_dir($dir_checkout) or !is_dir($dir_target)) {
-			$corps = $source['url'] . ' | ' . $source['module'] . "\n" . "Erreur lors du checkout";
-			salvatore_fail('[Tireur] : Erreur', $corps);
-		}
-
-		if (file_exists($dir_module) and !is_link($dir_module)) {
-			$corps = $source['url'] . ' | ' . $source['module'] . "\n" . "Il y a deja un repertoire $dir_module";
-			salvatore_fail('[Tireur] : Erreur', $corps);
-		}
-
-		$dir_target = realpath($dir_target);
-		if (is_link($dir_module) and readlink($dir_module) !== $dir_target) {
-			@unlink($dir_module);
-		}
-		if (!file_exists($dir_module)) {
-			symlink($dir_target, $dir_module);
-		}
-
-		$fichier_lang_master = $dir_module . '/' . $source['module'] . '_' . $source['lang'] . '.php';
-		// controle des erreurs : requiert au moins 1 fichier par module !
-		if (!file_exists($fichier_lang_master)){
-			salvatore_fail('[Tireur] : Erreur', "! Erreur pas de fichier de langue maitre $fichier_lang_master");
-		}
-		*/
 	}
 
 	return true;
 }
 
+return;
 
-$propset = true;
-if (isset($NO_PROPSET)){
-	$propset = false;
-}
-
-$tmp = _DIR_SALVATORE_TMP;
-
-/* MAIN ***********************************************************************/
-
-salvatore_log("\n=======================================\nPOUSSEUR\nPrend les fichiers langue dans sa copie locale et les commite SVN\n=======================================\n");
-
-$liste_sources = salvatore_charger_fichier_traductions(); // chargement du fichier traductions.txt
-
+/*
 foreach ($liste_sources as $source){
 	$credentials = false;
 	$module = $source[1];
 	salvatore_log("===== Module $module ======================================\n");
 
-	$domaine_svn = parse_url($source[0]);
-	$domaine_svn = $domaine_svn['host'];
-	if (isset($domaines_exceptions) and is_array($domaines_exceptions) && in_array($domaine_svn, $domaines_exceptions)){
-		/**
-		 * On est dans une exception (Github?)
-		 */
-		if (is_array($domaines_exceptions_credentials) and isset($domaines_exceptions_credentials[$domaine_svn])){
-			$user = $domaines_exceptions_credentials[$domaine_svn]['user'];
-			$pass = $domaines_exceptions_credentials[$domaine_svn]['pass'];
-			$credentials = true;
-		}
-	}
-	if (isset(${$module . '_user'})){
-		$user = ${$module . '_user'};
-		$pass = ${$module . '_passwd'};
-	} elseif (!$credentials) {
-		$user = $SVNUSER;
-		$pass = $SVNPASSWD;
-	}
 
 	$f = _DIR_SALVATORE_TMP . $module . '/';
 
 	/**
 	 * On ajoute les .xml
-	 */
+	 * /
 	salvatore_log(exec("svn add --quiet $f*xml 2>/dev/null") . "\n");
 	$ignore = array(
 		//	'spip','ecrire','public'
@@ -206,13 +200,13 @@ foreach ($liste_sources as $source){
 					/**
 					 * Si plusieurs commiteurs (veut dire que plusieurs fichiers sont à commiter)
 					 * ou si le fichier original est modifié, on ne commit que fichier par fichier
-					 */
+					 * /
 					if (count($commiteurs)>1 || in_array(substr(exec('svn status ' . _DIR_SALVATORE_TMP . $source[1] . '/' . $source[1] . '_' . $source[2] . '.php'), 0, 1), array('A', 'M'))){
 						$path = $f . $module . '_' . $lang . '.php';
 					} else {
 						/**
 						 * Sinon on ne s'embarasse pas, on balance tout avec cet utilisateur
-						 */
+						 * /
 						$path = $f;
 					}
 					salvatore_log("On devrait commiter $path avec comme message '$message_commit_unique' avec l'email $email\n");
@@ -229,7 +223,7 @@ foreach ($liste_sources as $source){
 		/**
 		 * Si on a encore un fichier ajouté ou modifié
 		 * On commite le tout avec salvatore
-		 */
+		 * /
 		if (strlen(trim(exec("svn status $f |awk /^[MA]/")))>1){
 			$commit_message = "[Salvatore] [source:$path_svn $module] Export depuis http://trad.spip.net\n\n";
 			$commit_message .= $message_commit . "\n";
