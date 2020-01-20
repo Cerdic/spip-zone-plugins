@@ -273,10 +273,13 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 			}
 			$auteur_versions = sql_allfetsel('DISTINCT id_auteur', 'spip_versions',  $where);
 			if (count($auteur_versions)==1){
-				$email = sql_getfetsel('email', 'spip_auteurs', 'id_auteur = ' . intval($auteur_versions[0]['id_auteur']));
-				if ($email){
-					$commit_infos[$lang]['author'] = $email;
-					salvatore_log("Le commiteur pour la langue $lang : $email");
+				$auteur = sql_fetsel('nom,email', 'spip_auteurs', 'id_auteur = ' . intval($auteur_versions[0]['id_auteur']));
+				if ($auteur and $auteur['email']){
+					$commit_infos[$lang]['author'] = $auteur['email'];
+					if ($auteur['nom']) {
+						$commit_infos[$lang]['author'] = $auteur['nom'] . "<" . $commit_infos[$lang]['author'] . ">";
+					}
+					salvatore_log("Le commiteur pour la langue $lang : " . $commit_infos[$lang]['author']);
 				}
 			}
 		}

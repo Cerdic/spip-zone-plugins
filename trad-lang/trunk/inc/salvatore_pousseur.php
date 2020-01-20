@@ -92,6 +92,9 @@ function salvatore_pousser($liste_sources, $dir_modules=null, $dir_depots=null) 
 
 				$commits_todo = array();
 				$salvatore_status_file = "salvatore_" . $source['methode'] . "_status_file";
+				$salvatore_commit_files = "salvatore_" . $source['methode'] . "_commit_files";
+				$salvatore_push_repository = "salvatore_" . $source['methode'] . "_push_repository";
+
 				foreach ($commit_infos as $what => $commit_info) {
 
 					$file = $commit_info['file_name'];
@@ -157,9 +160,15 @@ function salvatore_pousser($liste_sources, $dir_modules=null, $dir_depots=null) 
 					salvatore_log("Commit de <info>$author</info> :" . implode(', ', $commit_todo['files']));
 					salvatore_log("\t" . str_replace("\n", "\n\t", $message));
 
-					// TODO
-					//salvatore_git_commit_files($dir_depots . $source['dir_checkout'], $commit_todo['files'], $message)
+					list($res,$out) = $salvatore_commit_files($dir_depots . $source['dir_checkout'], $commit_todo['files'], $message, $author, empty($source['user']) ? null : $source['user'], empty($source['pass']) ? null : $source['pass']);
+					salvatore_log($out);
+					if (!$res) {
+						salvatore_fail("[Pousseur] Erreur sur $module", "Erreur lors du commit :\n$out");
+					}
 				}
+
+				// TODO : push
+				// ne fera rien en svn (deja pushe)
 
 			}
 		}

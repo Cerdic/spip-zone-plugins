@@ -82,7 +82,7 @@ function salvatore_init($log_function = null){
 		}
 
 		if (!defined('_SALVATORE_AUTHOR_COMMITS')) {
-			define('_SALVATORE_AUTHOR_COMMITS', 'salvatore@rezo.net');
+			define('_SALVATORE_AUTHOR_COMMITS', 'Salvatore <salvatore@rezo.net>');
 		}
 
 		if (!defined('_SALVATORE_SVN_PROPSET')) {

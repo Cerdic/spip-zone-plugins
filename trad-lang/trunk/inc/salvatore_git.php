@@ -26,6 +26,22 @@
 */
 
 /**
+ * Formate l'auteur en Nom <email> si jamais seul l'email est fourni
+ * @param string $author
+ * @return string
+ */
+function salvatore_git_format_author($author) {
+	if (strpos($author, '<') !== false and strpos($author, '>') !== false) {
+		return $author;
+	}
+	else {
+		$name = explode('@', $author);
+		$name = reset($name);
+		return "$name <$author>";
+	}
+}
+
+/**
  * Lire la date de derniere modif d'un fichier versionne
  * (retourne 0 si le fichier n'est pas versionne)
  * @param string $dir_repo
@@ -66,4 +82,42 @@ function salvatore_git_status_file($dir_repo, $file_or_files) {
 	//exec("svn status $files_list 2>&1", $output);
 	chdir($d);
 	return implode("\n", $output);
+}
+
+/**
+ * Commit une liste de fichiers avec un message et auteur fourni
+ * @param string $dir_repo
+ * @param array $files
+ * @param string $message
+ * @param string $author
+ * @param string $user
+ * @param string $pass
+ * @return array
+ */
+function salvatore_git_commit_files($dir_repo, $files, $message, $author, $user=null, $pass=null) {
+	$files = array_map('escapeshellarg', $files);
+	$files = implode(' ', $files);
+
+	$d = getcwd();
+	chdir($dir_repo);
+	$output = array();
+	$res = true;
+	// on ajoute tous les fichiers pour commit
+	$commands = [
+		"git add $files 2>&1",
+		"git commit -m " . escapeshellarg($message)." --author=".escapeshellarg(salvatore_git_format_author($author)),
+	];
+
+	foreach ($commands as $command) {
+		$output[] = "> $command";
+		$return_var = 0;
+		exec($command, $output, $return_var);
+		// si une erreur a eu lieu le signaler dans le retour
+		if ($return_var) {
+			$res = false;
+		}
+	}
+	chdir($d);
+
+	return array($res, implode("\n", $output));
 }
