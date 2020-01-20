@@ -285,22 +285,26 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 	// le fichier XML recapitulatif
 	$indent = "\t";
 	$xml = "<traduction
-{$indent}module=\"$module\" 
-{$indent}dir_module=\"".$row_module['dir_module']."\"
+{$indent}module=\"$module\"
+{$indent}id=\"".$row_module['dir_module']."\"
 {$indent}gestionnaire=\"salvatore\"
 {$indent}url=\"$url_site\"
 {$indent}source=\"$url_repo\"
 {$indent}reference=\"$lang_ref\">\n";
 	foreach ($xml_infos as $lang => $info){
-		if (count($info['traducteurs']>0)){
-			$xml .= "$indent<langue code=\"$lang\" url=\"" . parametre_url($url_trad_module, 'lang_cible', $lang) . "\" total=\"$count_trad_reference\" traduits=\"" . $info['traduits'] . '" relire="' . $info['relire'] . '" modifs="' . $info['modifs'] . '" nouveaux="' . ($count_trad_reference-($info['modifs']+$info['traduits']+$info['relire'])) . '" pourcent="' . number_format((($info['traduits']/$count_trad_reference)*100), 2) . "\">\n";
+		$detail = "";
+		if ($info['traduits'] > 0) {
+			$detail = " total=\"$count_trad_reference\" traduits=\"" . $info['traduits'] . '" relire="' . $info['relire'] . '" modifs="' . $info['modifs'] . '" nouveaux="' . ($count_trad_reference-($info['modifs']+$info['traduits']+$info['relire'])) . '" pourcent="' . number_format((($info['traduits']/$count_trad_reference)*100), 2) . "\"";
+		}
+		if (count($info['traducteurs'])>0){
+			$xml .= "$indent<langue code=\"$lang\" url=\"" . parametre_url($url_trad_module, 'lang_cible', $lang) . "\"{$detail}>\n";
 			ksort($info['traducteurs']);
 			foreach ($info['traducteurs'] as $nom => $people){
 				$xml .= $indent . $indent . '<traducteur nom="' . entites_html($people['nom']) . '" lien="' . entites_html($people['lien']) . "\" />\n";
 			}
 			$xml .= "$indent</langue>\n";
 		} else {
-			$xml .= "$indent<langue code=\"$lang\" url=\"" . parametre_url($url_trad_module, 'lang_cible', $lang) . "\" />\n";
+			$xml .= "$indent<langue code=\"$lang\" url=\"" . parametre_url($url_trad_module, 'lang_cible', $lang) . "\"{$detail} />\n";
 		}
 	}
 	$xml .= "</traduction>\n";

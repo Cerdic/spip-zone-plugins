@@ -315,10 +315,11 @@ function salvatore_retrouver_tradlang_module($dir_module, $module) {
 	if ($row_module = sql_fetsel('*', 'spip_tradlang_modules', 'dir_module = ' . sql_quote($base_dir_module))) {
 		return $row_module;
 	}
+
 	// peut-etre c'est un module qui a change d'url repo, et donc son dir_module a change ?
-	// TODO : ecrire dir_module dans dir=".." de la balise <traduction>
+	// sur la balise <traduction> le dir_module est ecrit dans id
 	if ($t = salvatore_lire_gestionnaire_traduction($dir_module, $module)
-	  and $old_dir_module = extraire_attribut($t, 'dir')
+	  and $old_dir_module = extraire_attribut($t, 'id')
 	  and $old_dir_module !== $base_dir_module){
 
 		if ($row_module = sql_fetsel('*', 'spip_tradlang_modules', 'dir_module = ' . sql_quote($old_dir_module))) {
