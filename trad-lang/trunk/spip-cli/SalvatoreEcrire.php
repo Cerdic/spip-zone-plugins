@@ -84,7 +84,7 @@ class SalvatoreEcrire extends Command {
 
 		$message = $input->getOption('message');
 
-		salvatore_ecrire($liste_trad, null, $message ? $message : '');
+		salvatore_ecrire($liste_trad, $message ? $message : '');
 	}
 }
 

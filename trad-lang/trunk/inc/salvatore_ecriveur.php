@@ -37,10 +37,12 @@ include_spip('inc/session');
 
 /**
  * @param array $liste_sources
+ * @param string $message_commit
  * @param string $dir_modules
+ * @param string $dir_depots
  * @throws Exception
  */
-function salvatore_ecrire($liste_sources, $dir_modules = null, $message_commit=''){
+function salvatore_ecrire($liste_sources, $message_commit='', $dir_modules = null, $dir_depots=null){
 	include_spip('inc/salvatore');
 	salvatore_init();
 
@@ -51,6 +53,12 @@ function salvatore_ecrire($liste_sources, $dir_modules = null, $message_commit='
 		$dir_modules = _DIR_SALVATORE_MODULES;
 	}
 	salvatore_check_dir($dir_modules);
+
+	if (is_null($dir_depots)) {
+		$dir_depots = _DIR_SALVATORE_DEPOTS;
+	}
+	salvatore_check_dir($dir_depots);
+
 	$url_gestionnaire = salvatore_get_self_url();
 
 	foreach ($liste_sources as $source){
@@ -70,7 +78,7 @@ function salvatore_ecrire($liste_sources, $dir_modules = null, $message_commit='
 		else {
 			// url de l'interface de traduction d'un module
 			$url_trad_module = url_absolue(generer_url_entite($id_tradlang_module, 'tradlang_module'), $url_gestionnaire);
-			salvatore_exporter_module($id_tradlang_module, $source, $url_gestionnaire, $url_trad_module, $message_commit);
+			salvatore_exporter_module($id_tradlang_module, $source, $url_gestionnaire, $url_trad_module, $dir_modules, $dir_depots, $message_commit);
 		}
 	}
 }
@@ -83,9 +91,11 @@ function salvatore_ecrire($liste_sources, $dir_modules = null, $message_commit='
  * @param string $url_site
  * @param string $url_trad_module
  * @param string $dir_modules
+ * @param string $dir_depots
  * @param string $message_commit
+ * @return false|int
  */
-function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url_trad_module, $dir_modules, $message_commit = ''){
+function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url_trad_module, $dir_modules, $dir_depots, $message_commit = ''){
 
 	$url_repo = $source['url'];
 
@@ -106,18 +116,11 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 		$seuil_export = lire_config('tradlang/seuil_export_tradlang', _SALVATORE_SEUIL_EXPORT);
 	}
 
-	// charger la langue originale, pour la copier si necessaire
-	// TODO : simplifier ? aucune reference a $trad_reference
-	$trad_reference = [];
-	$count_trad_reference = 0;
-	$rows = sql_allfetsel('id, id_tradlang_module,str,comm,statut', 'spip_tradlangs', 'id_tradlang_module=' . intval($id_tradlang_module) . ' AND lang=' . sql_quote($row_module['lang_mere']) . " AND statut='OK'", 'id');
-	foreach ($rows as $row){
-		$row['statut'] = 'NEW';
-		$trad_reference[$row['id']] = $row;
-		$count_trad_reference++;
-	}
 
+	$xml_infos = $commit_infos = array();
 	$liste_lang = $liste_lang_non_exportees = $liste_lang_a_supprimer = array();
+
+	$count_trad_reference = sql_countsel('spip_tradlangs', 'id_tradlang_module=' . intval($id_tradlang_module) . ' AND lang=' . sql_quote($row_module['lang_mere']) . " AND statut='OK'", 'id');
 	$minimal = ceil((($count_trad_reference*$seuil_export)/100));
 	salvatore_log("Minimal = $minimal ($seuil_export %)");
 
@@ -128,6 +131,7 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 		 */
 		if ($langue['count']>=$minimal){
 			$liste_lang[] = $langue['lang'];
+			$commit_infos[$langue['lang']] = array();
 		} 
 		else {
 			/**
@@ -141,23 +145,20 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 				 * On ne va donc pas le supprimer à la barbare, mais on le met à jour quand même
 				 */
 				$liste_lang[] = $langue['lang'];
+				$commit_infos[$langue['lang']] = array();
 				$liste_lang_a_supprimer[] = $langue['lang'];
 				$percent = (($langue['count']/$count_trad_reference)*100);
 				if ($percent<($seuil_export-15)){
-					$message_commit .= "La langue '" . $langue['lang'] . "' devrait être supprimée car trop peu traduite (" . number_format($percent, 2) . " %)\n";
+					$commit_infos[$langue['lang']]['message'] = "La langue '" . $langue['lang'] . "' devrait être supprimée car trop peu traduite (" . number_format($percent, 2) . " %)\n";
 				}
 			}
 		}
 	}
 
 	// traiter chaque langue
-	$infos = $commiteurs = array();
 	foreach ($liste_lang as $lang){
 		salvatore_log("Generation de la langue $lang");
-		// Proteger les caracteres typographiques a l'interieur des tags html
-		$typo = (in_array($lang, array('eo', 'fr', 'cpf')) || strncmp($lang, 'fr_', 3)==0) ? 'fr' : 'en';
-		$typographie = charger_fonction($typo, 'typographie');
-		$tab = "\t";
+		$indent = "\t";
 
 		$php_lines = $chaines = $id_tradlangs = array();
 		$initiale = '';
@@ -176,7 +177,7 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 
 			if ($initiale !== strtoupper($chaine['id'][0])){
 				$initiale = strtoupper($chaine['id'][0]);
-				$php_lines[] = "\n$tab// $initiale";
+				$php_lines[] = "\n$indent// $initiale";
 			}
 
 			if (strlen($chaine['statut']) and ($chaine['statut']!=='OK')){
@@ -197,26 +198,31 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 				$r = sql_updateq('spip_tradlangs', array('md5' => $newmd5, 'str' => $str), 'id_tradlang=' . intval($chaine['id_tradlang']));
 			}
 
-			$php_lines[] = $tab . var_export($chaine['id'], 1) . ' => ' . var_export($str, 1) . ',' . $comment;
+			$php_lines[] = $indent . var_export($chaine['id'], 1) . ' => ' . var_export($str, 1) . ',' . $comment;
 		}
 
 		salvatore_log(" - traduction (".$total_chaines['OK']."/$count_trad_reference OK | ".$total_chaines['RELIRE']."/$count_trad_reference RELIRE | ".$total_chaines['MODIF']."/$count_trad_reference MODIFS), export");
-		salvatore_exporter_fichier_php($dir_module, $module, $lang, $php_lines, $url_trad_module, ($lang==$lang_ref) ? $url_repo : false);
+		$file_name = salvatore_exporter_fichier_php($dir_module, $module, $lang, $php_lines, $url_trad_module, ($lang==$lang_ref) ? $url_repo : false);
 
 		// noter la langue et les traducteurs pour lang/module.xml
-		$infos[$lang] = $people_unique = array();
-		$infos[$lang]['traducteurs'] = array();
-		$infos[$lang]['traduits'] = $total_chaines['OK'];
-		$infos[$lang]['modifs'] = $total_chaines['MODIF'];
-		$infos[$lang]['relire'] = $total_chaines['RELIRE'];
+		$people_unique = array();
+		$xml_infos[$lang] = array(
+			'traducteurs' => array(),
+			'traduits' => $total_chaines['OK'],
+			'modifs' => $total_chaines['MODIF'],
+			'relire' => $total_chaines['RELIRE'],
+		);
 		if (defined('_ID_AUTEUR_SALVATORE') and intval(_ID_AUTEUR_SALVATORE)>0){
 			$people_unique[] = _ID_AUTEUR_SALVATORE;
 		}
-		$s = sql_allfetsel('DISTINCT(traducteur)', 'spip_tradlangs', 'id_tradlang_module = ' . intval($row_module['id_tradlang_module']) . ' AND lang = ' . sql_quote($lang));
-		foreach ($s as $t){
+
+		// ici on prend tous les statut de chaine (?)
+		$traducteurs = sql_allfetsel('DISTINCT(traducteur)', 'spip_tradlangs', 'id_tradlang_module=' . intval($id_tradlang_module) . ' AND lang=' . sql_quote($lang));
+		foreach ($traducteurs as $t){
 			$traducteurs_lang = explode(',', $t['traducteur']);
 			foreach ($traducteurs_lang as $traducteur){
 				if (!in_array($traducteur, $people_unique)){
+					$traducteur_supp = array();
 					if (is_numeric($traducteur) and $id_auteur = intval($traducteur)){
 						$traducteur_supp['nom'] = extraire_multi(sql_getfetsel('nom', 'spip_auteurs', 'id_auteur = ' . $id_auteur));
 						$traducteur_supp['lien'] = url_absolue(generer_url_entite($id_auteur, 'auteur'), $url_site);
@@ -225,103 +231,95 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 						$traducteur_supp['lien'] = '';
 					}
 					if (isset($traducteur_supp['nom'])){
-						$infos[$lang]['traducteurs'][strtolower($traducteur_supp['nom'])] = $traducteur_supp;
+						$xml_infos[$lang]['traducteurs'][strtolower($traducteur_supp['nom'])] = $traducteur_supp;
 					}
-					unset($traducteur_supp);
 					$people_unique[] = $traducteur;
 				}
 			}
 		}
 		unset($people_unique);
 
-		if (substr(exec('svn status ' . _DIR_SALVATORE_TMP . $module . '/' . $module . '_' . $lang . '.php'), 0, 1)=='?'){
-			if ($row_module['limite_trad']==0){
-				passthru('svn add ' . _DIR_SALVATORE_TMP . $module . '/' . $module . "_$lang.php 2> /dev/null") ? salvatore_log("$log\n") : '';
-			} elseif (!in_array($module, array('ecrire', 'spip', 'public'))) {
-				if ((intval(($infos[$lang]['traduits']/$count_trad_reference)*100)>$seuil_export)){
-					passthru('svn add ' . _DIR_SALVATORE_TMP . $module . '/' . $module . "_$lang.php* 2> /dev/null") ? salvatore_log("$log\n") : '';
-				}
+		$commit_infos[$lang]['file_name'] = basename($file_name);
+		$commit_infos[$lang]['lastmodified'] = salvatore_read_lastmodified_file(basename($file_name), $source, $dir_depots);
+		$commit_infos[$lang]['must_add'] = false;
+
+		if ($row_module['limite_trad']==0){
+			$commit_infos[$lang]['must_add'] = true;
+		} elseif (!in_array($module, array('ecrire', 'spip', 'public'))) {
+			if ((intval(($xml_infos[$lang]['traduits']/$count_trad_reference)*100)>$seuil_export)){
+				$commit_infos[$lang]['must_add'] = true;
 			}
 		}
-		/**
-		 * Le fichier a été modifié ou ajouté (svn status A ou M)
-		 *
-		 * On récupère la date de dernier changement avec svn info
-		 * On cherche toutes les dernières modifications dans la base de donnée
-		 * Si un seul auteur de révisions (Hors salvatore et -1) on l'ajoute comme commiteur
-		 * Si plusieurs auteurs le commiteur sera Salvatore
-		 */
-		if (in_array(substr(exec('svn status ' . _DIR_SALVATORE_TMP . $module . '/' . $module . "_$lang.php"), 0, 1), array('A', 'M'))){
-			$last_change = exec('env LC_MESSAGES=en_US.UTF-8 svn info ' . _DIR_SALVATORE_TMP . $module . '/' . $module . "_$lang.php | awk '/^Last Changed Date/ { print $4 \" \" $5 }'");
-			$auteur_versions = sql_allfetsel('id_auteur', 'spip_versions', 'objet="tradlang" AND date > ' . sql_quote($last_change) . ' AND ' . sql_in('id_objet', $id_tradlangs) . ' AND id_auteur != "-1" AND id_auteur !=' . intval(_ID_AUTEUR_SALVATORE), 'id_auteur');
+
+		// trouver le commiteur si c'est un fichier deja versionne ou a ajouter
+		if ($commit_infos[$lang]['lastmodified'] or $commit_infos[$lang]['must_add']) {
+			$where = [
+				"objet='tradlang'",
+				sql_in('id_objet', $id_tradlangs),
+				"id_auteur != '-1'",
+				'id_auteur !=' . intval(_ID_AUTEUR_SALVATORE),
+			];
+			if ($commit_infos[$lang]['lastmodified']) {
+				$where[] = "date>".sql_quote(date('Y-m-d H:i:s', $commit_infos[$lang]['lastmodified']));
+			}
+			$auteur_versions = sql_allfetsel('DISTINCT id_auteur', 'spip_versions',  $where);
 			if (count($auteur_versions)==1){
 				$email = sql_getfetsel('email', 'spip_auteurs', 'id_auteur = ' . intval($auteur_versions[0]['id_auteur']));
 				if ($email){
-					$commiteurs[$lang] = $email;
+					$commit_infos[$lang]['author'] = $email;
+					salvatore_log("Le commiteur pour la langue $lang : $email");
 				}
-				salvatore_log("\nLe commiteur sera pour la langue $lang : " . $commiteurs[$lang] . " \n");
 			}
 		}
 	}
 
-	// ecrire lang/module.xml
-	$xml = "<traduction module=\"$module\" gestionnaire=\"salvatore\" url=\"$url_site\" source=\"$url_repo\" reference=\"$lang_ref\">\n";
-	foreach ($infos as $lang => $info){
+	// le fichier XML recapitulatif
+	$indent = "\t";
+	$xml = "<traduction
+{$indent}module=\"$module\" 
+{$indent}dir_module=\"".$row_module['dir_module']."\"
+{$indent}gestionnaire=\"salvatore\"
+{$indent}url=\"$url_site\"
+{$indent}source=\"$url_repo\"
+{$indent}reference=\"$lang_ref\">\n";
+	foreach ($xml_infos as $lang => $info){
 		if (count($info['traducteurs']>0)){
-			$xml .= "	<langue code=\"$lang\" url=\"" . parametre_url($url_trad_module, 'lang_cible', $lang) . "\" total=\"$count_trad_reference\" traduits=\"" . $info['traduits'] . '" relire="' . $info['relire'] . '" modifs="' . $info['modifs'] . '" nouveaux="' . ($count_trad_reference-($info['modifs']+$info['traduits']+$info['relire'])) . '" pourcent="' . number_format((($info['traduits']/$count_trad_reference)*100), 2) . "\">\n";
+			$xml .= "$indent<langue code=\"$lang\" url=\"" . parametre_url($url_trad_module, 'lang_cible', $lang) . "\" total=\"$count_trad_reference\" traduits=\"" . $info['traduits'] . '" relire="' . $info['relire'] . '" modifs="' . $info['modifs'] . '" nouveaux="' . ($count_trad_reference-($info['modifs']+$info['traduits']+$info['relire'])) . '" pourcent="' . number_format((($info['traduits']/$count_trad_reference)*100), 2) . "\">\n";
 			ksort($info['traducteurs']);
 			foreach ($info['traducteurs'] as $nom => $people){
-				$xml .= '		<traducteur nom="' . entites_html($people['nom']) . '" lien="' . entites_html($people['lien']) . "\" />\n";
+				$xml .= $indent . $indent . '<traducteur nom="' . entites_html($people['nom']) . '" lien="' . entites_html($people['lien']) . "\" />\n";
 			}
-			$xml .= "	</langue>\n";
+			$xml .= "$indent</langue>\n";
 		} else {
-			$xml .= "	<langue code=\"$lang\" url=\"" . parametre_url($url_trad_module, 'lang_cible', $lang) . "\" />\n";
+			$xml .= "$indent<langue code=\"$lang\" url=\"" . parametre_url($url_trad_module, 'lang_cible', $lang) . "\" />\n";
 		}
 	}
-	unset($traducteurs[$lang_ref]);
 	$xml .= "</traduction>\n";
+	file_put_contents($dir_module . '/' . $module . '.xml', $xml);
 
-	ecrire_fichier($dir_module . '/' . $module . '.xml', $xml);
 
 	if (isset($liste_lang_non_exportees) and (count($liste_lang_non_exportees)>0)){
-		$liste_lang_non_exportees_string = implode(', ', $liste_lang_non_exportees);
-		salvatore_log("\nLes langues suivantes ne sont pas exportées car trop peu traduites:\n");
-		salvatore_log("$liste_lang_non_exportees_string\n");
+		salvatore_log("Les langues suivantes ne sont pas exportées car trop peu traduites:");
+		salvatore_log(implode(', ', $liste_lang_non_exportees));
 	}
 	if (isset($liste_lang_a_supprimer) and (count($liste_lang_a_supprimer)>0)){
-		$liste_lang_a_supprimer_string = implode(', ', $liste_lang_a_supprimer);
-		salvatore_log("\nLes langues suivantes devraient être supprimées car trop peu traduites:\n");
-		salvatore_log("$liste_lang_a_supprimer_string\n");
+		salvatore_log("Les langues suivantes devraient être supprimées car trop peu traduites:");
+		salvatore_log(implode(', ', $liste_lang_a_supprimer));
 	}
-	if ($row_module['limite_trad']==0){
-		foreach ($liste_lang as $lang){
-			passthru('svn add ' . _DIR_SALVATORE_TMP . $module . '/' . $module . "_$lang.php* 2> /dev/null") ? salvatore_log("$log\n") : '';
-		}
-	} elseif (!in_array($module, array('ecrire', 'spip', 'public'))) {
-		salvatore_log('Limite trad = ' . $seuil_export);
-		foreach ($liste_lang as $lang){
-			if ((intval(($infos[$lang]['traduits']/$count_trad_reference)*100)>$seuil_export)
-				and (substr(exec('svn status ' . _DIR_SALVATORE_TMP . $module . '/' . $module . "_$lang.php"), 0, 1)=='?')){
-				passthru('svn add ' . _DIR_SALVATORE_TMP . $module . '/' . $module . "_$lang.php* 2> /dev/null") ? salvatore_log("$log\n") : '';
-			}
-		}
-	}
-	salvatore_log("\n" . passthru('svn status ' . _DIR_SALVATORE_TMP . $module . '/') . "\n");
-	if (strlen($message_commit)>1 || count($commiteurs)>0){
-		$fd = fopen($dir_module . '/message_commit.inc', 'w');
-		# ecrire le fichier
-		fwrite(
-			$fd,
-			'<' . '?php
-$message_commit = "' . $message_commit . '";
 
-$commiteurs = ' . var_export($commiteurs, 1) . ';
-
-?' . '>
-'
-		);
-		fclose($fd);
+	$nb_to_commit = 0;
+	// et on ecrit un json pour que le pousseur sache quoi commit
+	if (count($commit_infos)) {
+		$nb_to_commit = count($commit_infos);
+		if ($message_commit) {
+			$commit_infos['message'] = $message_commit;
+		}
+		file_put_contents($dir_module . '/' . $module . '.commit.json', json_encode($commit_infos));
 	}
+
+	$log = salvatore_read_status_modif($module, $source, $dir_depots);
+	salvatore_log($log);
+	return $nb_to_commit;
 }
 
 /**
@@ -340,6 +338,7 @@ function salvatore_clean_comment($comment) {
 	return '';
 }
 
+
 /**
  * Generer un fichier de langue a partir de ses lignes php
  * @param string $dir_module
@@ -348,6 +347,7 @@ function salvatore_clean_comment($comment) {
  * @param array $php_lines
  * @param string $url_trad_module
  * @param $origin
+ * @return string
  */
 function salvatore_exporter_fichier_php($dir_module, $module, $lang, $php_lines, $url_trad_module, $origin) {
 	$file_name = $dir_module . '/' . $module . '_' . $lang . '.php';
@@ -375,4 +375,101 @@ function salvatore_exporter_fichier_php($dir_module, $module, $lang, $php_lines,
 
 	$file_content .= implode("\n", $php_lines);
 	file_put_contents($file_name, $file_content);
+	return $file_name;
 }
+
+
+/**
+ * Lire la date de derniere modif d'un fichier de langue
+ * @param string $file_name
+ * @param array $source
+ * @param string $dir_depots
+ * @return false|int
+ */
+function salvatore_read_lastmodified_file($file_name, $source, $dir_depots) {
+
+	$file_path_relative = $file_name;
+	if ($source['dir']) {
+		$file_path_relative = $source['dir'] . DIRECTORY_SEPARATOR . $file_path_relative;
+	}
+	$file_path = $dir_depots . $source['dir_checkout'] . DIRECTORY_SEPARATOR . $file_path_relative;
+
+	$lastmodified = 0;
+	switch ($source['methode']) {
+		case 'git':
+			$d = getcwd();
+			chdir($dir_depots . $source['dir_checkout']);
+			$lastmodified = exec("git log -1 -c --pretty=tformat:'%ct' $file_path_relative | head -1");
+			$lastmodified = intval(trim($lastmodified));
+			chdir($d);
+			break;
+		case 'svn':
+			$lastmodified = exec('env LC_MESSAGES=en_US.UTF-8 svn info ' . $file_path . "| awk '/^Last Changed Date/ { print $4 \" \" $5 }'");
+			$lastmodified = strtotime($lastmodified);
+			break;
+	}
+
+	return $lastmodified;
+}
+
+
+/**
+ * Afficher le status des fichiers modifies pour un module
+ * @param string $module
+ * @param array $source
+ * @param $dir_depots
+ * @return string
+ */
+function salvatore_read_status_modif($module, $source, $dir_depots) {
+	$pre = "";
+	if ($source['dir']) {
+		$pre = $source['dir'] . DIRECTORY_SEPARATOR;
+	}
+	$files_list = [$pre . $module . '_*', $pre . $module . '.xml'];
+	$files_list = implode(' ', $files_list);
+
+	$d = getcwd();
+	chdir($dir_depots . $source['dir_checkout']);
+	$output = array();
+	switch ($source['methode']) {
+		case 'git':
+			exec("git status $files_list 2>&1", $output);
+			break;
+		case 'svn':
+			exec("svn status $files_list 2>&1", $output);
+			break;
+	}
+	chdir($d);
+	return implode("\n", $output);
+}
+
+/*
+if ($row_module['limite_trad']==0){
+	foreach ($liste_lang as $lang){
+		passthru('svn add ' . _DIR_SALVATORE_TMP . $module . '/' . $module . "_$lang.php* 2> /dev/null") ? salvatore_log("$log\n") : '';
+	}
+} elseif (!in_array($module, array('ecrire', 'spip', 'public'))) {
+	salvatore_log('Limite trad = ' . $seuil_export);
+	foreach ($liste_lang as $lang){
+		if ((intval(($xml_infos[$lang]['traduits']/$count_trad_reference)*100)>$seuil_export)
+			and (substr(exec('svn status ' . _DIR_SALVATORE_TMP . $module . '/' . $module . "_$lang.php"), 0, 1)=='?')){
+			passthru('svn add ' . _DIR_SALVATORE_TMP . $module . '/' . $module . "_$lang.php* 2> /dev/null") ? salvatore_log("$log\n") : '';
+		}
+	}
+}
+*/
+
+/*
+
+		if (substr(exec('svn status ' . _DIR_SALVATORE_TMP . $module . '/' . $module . '_' . $lang . '.php'), 0, 1)=='?'){
+			if ($row_module['limite_trad']==0){
+				passthru('svn add ' . _DIR_SALVATORE_TMP . $module . '/' . $module . "_$lang.php 2> /dev/null") ? salvatore_log("$log\n") : '';
+			} elseif (!in_array($module, array('ecrire', 'spip', 'public'))) {
+				if ((intval(($xml_infos[$lang]['traduits']/$count_trad_reference)*100)>$seuil_export)){
+					passthru('svn add ' . _DIR_SALVATORE_TMP . $module . '/' . $module . "_$lang.php* 2> /dev/null") ? salvatore_log("$log\n") : '';
+				}
+			}
+		}
+
+
+ */
