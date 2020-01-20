@@ -354,7 +354,6 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                                 // -----------------------------------
                                 $_mots = $article['mots'];
                                 if ($_mots != "" && $import_mot_article) {
-                                    $_mots = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_mots);
                                     $_mots = unserialize($_mots);
                                     foreach ($_mots as $_mot) {
                                         $groupe = stripslashes($_mot['groupe']);
@@ -368,7 +367,12 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                                 // -----------------------------------
                                 $_evenements = $article['evenements'];
                                 if ($_evenements != "") {
-                                    $_evenements = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_evenements);
+									$_evenements = preg_replace_callback('!s:(\d+):"(.*?)";!', 
+									function ($matches) {
+										return strtolower("'s:'.strlen($matches[1]).':\".$matches[1].\";'");
+										}
+										,
+										$_evenements);
                                     $_evenements = unserialize(base64_decode($_evenements));
                                     foreach ($_evenements as $_evenement) {
                                         $datedeb = $_evenement['datedeb'];
