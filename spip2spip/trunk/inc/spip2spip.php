@@ -381,7 +381,7 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                                         $adresse = spip2spip_convert_extra(stripslashes($_evenement['adresse']), $documents_current_article, $version_flux);
                                         $horaire = $_evenement['horaire'];
                                         $titre = stripslashes($_evenement['titre']);
-                                        $statut = ($import_statut == "identique") ? $_evt_statut : $import_statut;
+                                        $statut = ($import_statut == "identique") ? $_evenement['statut']  : $import_statut;
                                         $desc = spip2spip_convert_extra(stripslashes($_evenement['desc']), $documents_current_article, $version_flux);
                                         $motevts = $_evenement['motevts'];
 
