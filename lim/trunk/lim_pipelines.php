@@ -208,13 +208,14 @@ function lim_post_insertion($flux) {
 	) {
 		$id_rubrique = $flux['args']['id_objet'];
 		include_spip('inc/config');
-		$tables_objet = lire_config('lim/objets_fige');
-		foreach ($tables_objet as $table) {
-			$objet_type = objet_type($table);
-			$valeurs = lire_config("lim_rubriques/$objet_type");
-			if ($valeurs) {
-				$valeurs[] = $id_rubrique;
-				ecrire_config("lim_rubriques/$objet_type", $valeurs);
+		if ($tables_objet = lire_config('lim/objets_fige')) {
+			foreach ($tables_objet as $table) {
+				$objet_type = objet_type($table);
+				$valeurs = lire_config("lim_rubriques/$objet_type");
+				if ($valeurs) {
+					$valeurs[] = $id_rubrique;
+					ecrire_config("lim_rubriques/$objet_type", $valeurs);
+				}
 			}
 		}
 	}
