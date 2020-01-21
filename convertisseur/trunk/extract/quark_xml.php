@@ -46,6 +46,7 @@ function convertir_quark_xml($c) {
 
 	// L'article et son illustration sont dans des <spread>
 	// Il peut y avoir plusieurs illustrations dans un même spread
+	$u = preg_replace("/MASTERSPREAD>/", "SPREAD>", $u);
 	$sequences = extraire_balises($u, "SPREAD") ;
 	foreach($sequences as $s){
 		// est-on dans une illustration ?
@@ -104,7 +105,9 @@ function convertir_quark_xml($c) {
 			//$item["texte"] .= "//// IMAGE $src // \n <img src='$src' /> \n $legende\n $credit \n\n" ;
 
 
-		}else{
+		}
+		
+		{
 			// On est dans du texte
 			// Parcourir les paragraphes en séparant les éléments trouvés selon leur feuille de style.
 			// Titre // Auteurs // chapo // notes // signature // Paragraphes
