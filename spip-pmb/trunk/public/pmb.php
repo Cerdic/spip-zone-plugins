@@ -771,7 +771,7 @@ function pmb_critere_valeur($criteres, $cle, $op = '=') {
 			// enlever les guillemets si presents
 			$v = $c[2];
 			if ($v !== 'NULL') {
-				if (($v[0] == "'") and ($v[ count($v)-1 ] == "'")) {
+				if (($v[0] == "'") and ($v[ strlen($v)-1 ] == "'")) {
 					$v = substr($v, 1,-1);
 				}
 				$res[] = $v;
