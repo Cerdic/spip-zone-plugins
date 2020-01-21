@@ -140,8 +140,7 @@ function agenda_declarer_tables_objets_sql($tables) {
 			'poubelle' => 'texte_statut_poubelle',
 		),
 		'texte_changer_statut' => 'agenda:texte_evenement_statut',
-		'champs_versionnes' => array('id_article', 'titre', 'descriptif', 'lieu', 'adresse', 'date_debut', 'date_fin', 'horaire'),
-
+		'champs_versionnes' => array('id_article', 'titre', 'descriptif', 'lieu', 'adresse', 'date_debut', 'date_fin', 'horaire', 'inscription', 'places'),
 	);
 
 	//-- Jointures ----------------------------------------------------
