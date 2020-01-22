@@ -23,7 +23,7 @@ function tablesorter_insert_head_css($flux) {
 	if (lire_config('tablesorter/no_insert')) {
 		return $flux;
 	}
-	$flux .= '<link rel="stylesheet" href="' . direction_css(find_in_path('css/tablesorter.min.css')) . '" type="text/css" />';
+	$flux .= '<link rel="stylesheet" href="' . timestamp(direction_css(find_in_path('css/tablesorter.min.css'))) . '" type="text/css" />';
 
 	return $flux;
 }
@@ -42,7 +42,7 @@ function tablesorter_insert_head($flux) {
 	if (lire_config('tablesorter/no_insert')) {
 		return $flux;
 	}
-	$flux .= '<script src="' . find_in_path('javascript/jquery.tablesorter.min.js') . '" type="text/javascript"></script>';
+	$flux .= '<script src="' . timestamp(find_in_path('javascript/jquery.tablesorter.min.js')) . '" type="text/javascript"></script>';
 	$flux .= '
 	<script type="text/javascript">/* <![CDATA[ */
 	(function($){
