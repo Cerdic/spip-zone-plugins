@@ -40,4 +40,3 @@ function action_supprimer_dictionnaire_dist($arg=null){
 	}
 }
 
-?>

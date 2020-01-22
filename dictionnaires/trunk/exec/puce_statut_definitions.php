@@ -58,4 +58,3 @@ function exec_puce_statut_definitions_args($id, $type)
 	ajax_retour($puce_statut($id,$statut,$id_parent,$type, true));
 }
 
-?>

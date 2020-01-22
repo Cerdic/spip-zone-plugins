@@ -200,4 +200,3 @@ function dictionnaire_instituer($id_dictionnaire, $c){
 	return '';
 }
 
-?>

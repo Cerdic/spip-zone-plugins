@@ -285,4 +285,3 @@ function definition_instituer($id_definition, $c, $purger_cache=true){
 	return '';
 }
 
-?>

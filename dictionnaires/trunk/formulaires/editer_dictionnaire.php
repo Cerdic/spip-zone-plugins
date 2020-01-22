@@ -4,10 +4,12 @@
  * Gestion du formulaire de d'édition d'un dictionnaire
  *
  * @package SPIP\Dictionnaires\Formulaires
-**/
+ **/
 
 // Sécurité
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')){
+	return;
+}
 
 include_spip('inc/editer');
 
@@ -20,8 +22,8 @@ include_spip('inc/editer');
  *     URL de redirection après le traitement
  * @return array
  *     Liste de saisies et leurs options
-**/
-function formulaires_editer_dictionnaire_saisies_dist($id_dictionnaire='new', $retour=''){
+ **/
+function formulaires_editer_dictionnaire_saisies_dist($id_dictionnaire = 'new', $retour = ''){
 	$saisies = array(
 		array(
 			'saisie' => 'hidden',
@@ -63,13 +65,13 @@ function formulaires_editer_dictionnaire_saisies_dist($id_dictionnaire='new', $r
 				'explication' => _T('dictionnaire:champ_actif_explication'),
 				'datas' => array(
 					'inactif' => _T('dictionnaire:champ_actif_non'),
-					'actif'   => _T('dictionnaire:champ_actif_oui'),
+					'actif' => _T('dictionnaire:champ_actif_oui'),
 				),
 				'cacher_option_intro' => 'on'
 			)
 		),
 	);
-	
+
 	return $saisies;
 }
 
@@ -77,16 +79,16 @@ function formulaires_editer_dictionnaire_saisies_dist($id_dictionnaire='new', $r
 /**
  * Chargement du formulaire d'édition de dictionnaire
  *
- * @see formulaires_editer_objet_charger()
- * 
  * @param int|string $id_dictionnaire
  *     Identifiant du dictionnaire. 'new' pour un nouveau dictionnaire.
  * @param string $retour
  *     URL de redirection après le traitement
  * @return array
  *     Environnement du formulaire
-**/
-function formulaires_editer_dictionnaire_charger_dist($id_dictionnaire='new', $retour=''){
+ **@see formulaires_editer_objet_charger()
+ *
+ */
+function formulaires_editer_dictionnaire_charger_dist($id_dictionnaire = 'new', $retour = ''){
 	$contexte = formulaires_editer_objet_charger('dictionnaire', $id_dictionnaire, 0, 0, $retour, '');
 	return $contexte;
 }
@@ -94,16 +96,16 @@ function formulaires_editer_dictionnaire_charger_dist($id_dictionnaire='new', $r
 /**
  * Vérifications du formulaire d'édition de dictionnaire
  *
- * @see formulaires_editer_objet_verifier()
- * 
  * @param int|string $id_dictionnaire
  *     Identifiant du dictionnaire. 'new' pour un nouveau dictionnaire.
  * @param string $retour
  *     URL de redirection après le traitement
  * @return array
  *     Tableau des erreurs
-**/
-function formulaires_editer_dictionnaire_verifier_dist($id_dictionnaire='new', $retour=''){
+ **@see formulaires_editer_objet_verifier()
+ *
+ */
+function formulaires_editer_dictionnaire_verifier_dist($id_dictionnaire = 'new', $retour = ''){
 	$erreurs = formulaires_editer_objet_verifier('dictionnaire', $id_dictionnaire);
 	return $erreurs;
 }
@@ -111,19 +113,20 @@ function formulaires_editer_dictionnaire_verifier_dist($id_dictionnaire='new', $
 /**
  * Traitements du formulaire d'édition de dictionnaire
  *
- * @see formulaires_editer_objet_traiter()
- * 
  * @param int|string $id_dictionnaire
  *     Identifiant du dictionnaire. 'new' pour un nouveau dictionnaire.
  * @param string $retour
  *     URL de redirection après le traitement
  * @return array
  *     Retour des traitements
-**/
-function formulaires_editer_dictionnaire_traiter_dist($id_dictionnaire='new', $retour=''){
-	if (is_null(_request('type_defaut'))){ set_request('type_defaut', ''); }
+ **@see formulaires_editer_objet_traiter()
+ *
+ */
+function formulaires_editer_dictionnaire_traiter_dist($id_dictionnaire = 'new', $retour = ''){
+	if (is_null(_request('type_defaut'))){
+		set_request('type_defaut', '');
+	}
 	$retours = formulaires_editer_objet_traiter('dictionnaire', $id_dictionnaire, 0, 0, $retour, '');
 	return $retours;
 }
 
-?>

@@ -4,10 +4,10 @@
  * Fichier gérant l'installation et désinstallation du plugin
  *
  * @package SPIP\Dictionnaire\Installation
-**/
+ **/
 
 // Sécurité
-if (!defined('_ECRIRE_INC_VERSION')) {
+if (!defined('_ECRIRE_INC_VERSION')){
 	return;
 }
 
@@ -20,7 +20,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
  * @return void
  */
-function dictionnaires_upgrade($nom_meta_base_version, $version_cible) {
+function dictionnaires_upgrade($nom_meta_base_version, $version_cible){
 
 	include_spip('inc/config');
 	include_spip('base/create');
@@ -39,8 +39,8 @@ function dictionnaires_upgrade($nom_meta_base_version, $version_cible) {
 	// deplacer les statuts du dictionnaires de 'actif' a 'statut'
 	$maj['0.4.0'] = array(
 		array('maj_tables', 'spip_dictionnaires'),
-		array('sql_update', 'spip_dictionnaires', array('statut'=>'actif'), 'actif=1'),
-		array('sql_update', 'spip_dictionnaires', array('statut'=>'inactif'), 'actif=0'),
+		array('sql_update', 'spip_dictionnaires', array('statut' => 'actif'), 'actif=1'),
+		array('sql_update', 'spip_dictionnaires', array('statut' => 'inactif'), 'actif=0'),
 		array('sql_alter', 'TABLE spip_dictionnaires DROP COLUMN actif'),
 	);
 	// pas de not null sans integer pour sqlite
@@ -49,7 +49,7 @@ function dictionnaires_upgrade($nom_meta_base_version, $version_cible) {
 	);
 	// Ajout du champ url_extense dans la table spip_definitions
 	$maj['0.4.2'] = array(array('maj_tables', 'spip_definitions'));
-	
+
 	// Ajout du champ id_trad sur les définitions
 	$maj['0.4.3'] = array(array('maj_tables', 'spip_definitions'));
 	// Ajouter les langues sur les définitions anciennes
@@ -61,21 +61,24 @@ function dictionnaires_upgrade($nom_meta_base_version, $version_cible) {
 
 
 function definitions_langues(){
-	sql_updateq('spip_definitions',array('lang'=>$GLOBALS['meta']['langue_site']),'lang = ""');
-	
+	sql_updateq('spip_definitions', array('lang' => $GLOBALS['meta']['langue_site']), 'lang = ""');
+
 }
+
 /**
  * Migre les acronymes du plugins Forms & Tables (s'il est actif)
  * dans ce plugin.
-**/
-function dictionnaires_migrer_acronymes() {
+ **/
+function dictionnaires_migrer_acronymes(){
 	// Si F&T contient une table d'acronymes
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table('spip_forms');
-	if (!is_array($desc)) return;
-	if (count($liste = sql_fetsel('id_form', 'spip_forms', "type_form='acronymes_sigles'"))) {
+	if (!is_array($desc)){
+		return;
+	}
+	if (count($liste = sql_fetsel('id_form', 'spip_forms', "type_form='acronymes_sigles'"))){
 		$id_form = intval(reset($liste));
-		$acronymes = sql_allfetsel('id_donnee, statut, date', 'spip_forms_donnees', 'id_form = '.$id_form);
+		$acronymes = sql_allfetsel('id_donnee, statut, date', 'spip_forms_donnees', 'id_form = ' . $id_form);
 		if ($acronymes and is_array($acronymes)){
 			// On commence par créer un dictionnaire pour l'importation
 			include_spip('action/editer_dictionnaire');
@@ -89,23 +92,23 @@ function dictionnaires_migrer_acronymes() {
 					'type_defaut' => 'abbr',
 				));
 				autoriser_exception('modifier', 'dictionnaire', $id_dictionnaire, false);
-				
+
 				// On parcourt ensuite les acronymes à importer pour récupérer leurs infos
 				foreach ($acronymes as $acronyme){
-					if ($titre = trim(str_replace("." , "", reset(sql_fetsel("valeur", "spip_forms_donnees_champs", array('id_donnee='.$acronyme['id_donnee'], "champ='ligne_1'")))))){
-						$lang_select = reset(sql_fetsel("valeur", "spip_forms_donnees_champs", array('id_donnee='.$acronyme['id_donnee'], "champ='select_2'")));
+					if ($titre = trim(str_replace(".", "", reset(sql_fetsel("valeur", "spip_forms_donnees_champs", array('id_donnee=' . $acronyme['id_donnee'], "champ='ligne_1'")))))){
+						$lang_select = reset(sql_fetsel("valeur", "spip_forms_donnees_champs", array('id_donnee=' . $acronyme['id_donnee'], "champ='select_2'")));
 						$lang = reset(sql_fetsel("titre", "spip_forms_champs_choix", array("champ='select_2'", "choix='$lang_select'")));
 						$definition = array(
 							'id_dictionnaire' => $id_dictionnaire,
 							'titre' => $titre,
-							'texte' => reset(sql_fetsel("valeur", "spip_forms_donnees_champs", array('id_donnee='.$acronyme['id_donnee'], "champ='texte_1'"))),
+							'texte' => reset(sql_fetsel("valeur", "spip_forms_donnees_champs", array('id_donnee=' . $acronyme['id_donnee'], "champ='texte_1'"))),
 							'type' => 'abbr',
 							'casse' => 1,
 							'date' => $acronyme['date'],
-							'statut' => ($acronyme['statut'] == 'publie') ? 'publie' : 'prop',
+							'statut' => ($acronyme['statut']=='publie') ? 'publie' : 'prop',
 							'lang' => $lang
 						);
-						
+
 						// On crée la définition dans la base SANS calculer le cache
 						include_spip('action/editer_definition');
 						if ($id_definition = definition_inserer()){
@@ -119,7 +122,7 @@ function dictionnaires_migrer_acronymes() {
 						}
 					}
 				}
-				
+
 				// On calcule le cache des définitions une seule fois à la fin
 				include_spip('inc/dictionnaires');
 				dictionnaires_lister_definitions(true);
@@ -135,7 +138,7 @@ function dictionnaires_migrer_acronymes() {
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
  * @return void
  */
-function dictionnaires_vider_tables($nom_meta_base_version) {
+function dictionnaires_vider_tables($nom_meta_base_version){
 
 	include_spip('base/abstract_sql');
 
