@@ -118,7 +118,7 @@ function diogene_geo_diogene_verifier($flux) {
 			$zoom = _request('zoom');
 			$titre = _request('gis_titre');
 
-			if (_request('statut') != 'poubelle' && ($lat or $lon or $zoom)) {
+			if (_request('statut') != 'poubelle' && ($lat or $lon or $zoom or $titre)) {
 				if (!$lat) {
 					$flux['data']['lat'] = _T('info_obligatoire');
 				}
