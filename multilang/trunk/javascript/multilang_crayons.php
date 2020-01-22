@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Uniquement si plusieurs langues, espace public activé, ainsi que les crayons.
  *
  * @param Array $config
- * @return void
+ * @return string
  */
 function multilang_javascript_crayons($config) {
 
