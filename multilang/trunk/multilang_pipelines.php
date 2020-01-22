@@ -21,7 +21,7 @@ function multilang_insert_head_css($flux) {
 		static $done = false;
 		if (!$done) {
 			$done = true;
-			$css = url_absolue(generer_url_public('multilang.css'));
+			$css = timestamp(produire_fond_statique('multilang.css'));
 			$flux .= '<link rel="stylesheet" href="'.$css.'" type="text/css" media="all" />';
 		}
 	}
@@ -83,7 +83,7 @@ function multilang_inserer_head($config = array()) {
 	 */
 	if (count(explode(',', $GLOBALS['meta']['langues_multilingue'])) > 1) {
 		$data = '
-<script type="text/javascript" src="'.generer_url_public('multilang.js', 'lang='.$GLOBALS['spip_lang']).'"></script>
+<script type="text/javascript" src="'.$css = timestamp(produire_fond_statique('multilang.js', array('lang' => $GLOBALS['spip_lang']))).'"></script>
 ';
 	}
 	return $data;
