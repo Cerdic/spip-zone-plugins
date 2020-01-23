@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucunmodule' => 'Geen enkele module.',
 	'auteur_revision' => '@nb@ aanpassing van de vertaling.',
 	'auteur_revision_specifique' => '@nb@ aanpassing van de vertaling in het <abbr title="@lang@">@langue_longue@</abbr>.',
-	'auteur_revisions' => '@nb@ aanpassingen van de vertalingen.',
+	'auteur_revisions' => '@nb@ aanpassingen van de vertaling.',
 	'auteur_revisions_langue' => 'Zijn ingebrachte taal:',
 	'auteur_revisions_langues' => 'De @nb@ ingebrachte talen:',
 	'auteur_revisions_specifique' => '@nb@ aanpassingen van de vertalingen in het <abbr title="@lang@">@langue_longue@</abbr>.',
@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_form_tradlang_autorisations' => 'De autorisaties',
-	'cfg_inf_type_autorisation' => 'Wanner je per status of per auteur kiest, wordt hieronder je selectie gevraagd.',
+	'cfg_inf_type_autorisation' => 'Wanneer je per status of per auteur kiest, wordt hieronder je selectie gevraagd.',
 	'cfg_lbl_autorisation_auteurs' => 'Toestaan per lijst van auteurs',
 	'cfg_lbl_autorisation_statuts' => 'Toestaan per status van auteurs',
 	'cfg_lbl_autorisation_webmestre' => 'Alleen webmasters toestaan',
@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_legende_autorisation_voir' => 'De vertaalinterface zien',
 	'codelangue' => 'Taalcode',
 	'crayon_changer_statut' => 'Let op! Je hebt de inhoud van de string aangepast zonder de status te wijzigen.',
-	'crayon_changer_statuts' => 'Let op! e hebt de inhoud van een of meer strings aangepast zonder de status te wijzigen.',
+	'crayon_changer_statuts' => 'Let op! Je hebt de inhoud van een of meer strings aangepast zonder de status te wijzigen.',
 
 	// E
 	'entrerlangue' => 'Een taalcode toevoegen',
@@ -81,7 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_upload_fichier_php' => 'Je bestand "@fichier@" komt niet overeen met het verwachte bestand "@fichier_attendu@".',
 	'erreur_variable_manquante' => 'Het deel van de volgende string moet niet worden vertaald:',
 	'erreur_variable_manquante_js' => 'Een of meerdere verplichte variabelen werden aangepast',
-	'erreur_variable_manquantes' => 'De @nb@ delen van de volgende strings moeten niet worden aangepast:',
+	'erreur_variable_manquantes' => 'De @nb@ delen van de volgende string moeten niet worden aangepast:',
 	'explication_comm' => 'Het commentaar is een in het taalbestand toegevoegde tekst bedoeld om bijvoorbeeld een bepaalde vertaalkeuze voor te stellen.',
 	'explication_export_fichier_complet' => 'Het volgende bestand is onvolledig. Alle al dan niet vertaalde stings zijn beschikbaar.<br />Het kan als basis voor de vertaling worden gebruikt.',
 	'explication_export_fichier_original' => 'Het volgende bestand is het taalbestand in de oorspronkelijke taal.<br />Het kan als basis voor de vertaling worden gebruikt.',
@@ -257,7 +257,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'menu_titre_interface' => 'Vertaalomgeving',
 	'message_afficher_vos_modules' => 'Modules tonen:',
 	'message_aucun_resultat_chaine' => 'Geen enkel resultaat komt overeen met je criteria in de taalstrings.',
-	'message_aucun_resultat_statut' => 'Geen nekle string komt overeen met de gevraagde status.',
+	'message_aucun_resultat_statut' => 'Geen enkele string komt overeen met de gevraagde status.',
 	'message_aucune_nouvelle_langue_dispo' => 'Deze module is beschikbaar in alle mogelijke talen',
 	'message_avertissement_export_langue_complet' => 'Gebruik dit bestand niet in de productie-omgeving. Het is aanbevolen hem slechts in de vertaalomgeving te gebruiken.',
 	'message_avertissement_export_langue_po' => 'Dit bestand kan uitsluiten in speciale software worden gebruikt, waarin je hem met de juiste knop importeert.',
@@ -401,10 +401,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_tradlang_non_traduit' => '1 onvertaalde taalstring',
 	'titre_tradlang_non_traduits' => '@nb@ onvertaalde taalstrings',
 	'titre_traduction' => 'Vertalingen',
-	'titre_traduction_chaine_de_vers' => 'VErtaling van string « @chaine@ » van module « @module@ » van het <abbr title="@lang_orig_long@">@lang_orig@</abbr> naar het <abbr title="@lang_cible_long@">@lang_cible@</abbr>',
+	'titre_traduction_chaine_de_vers' => 'Vertaling van string « @chaine@ » van module « @module@ » van het <abbr title="@lang_orig_long@">@lang_orig@</abbr> naar het <abbr title="@lang_cible_long@">@lang_cible@</abbr>',
 	'titre_traduction_de' => 'Vertaling van ',
 	'titre_traduction_module_de_vers' => 'Vertaling van module "@module@" van het <abbr title="@lang_orig_long@">@lang_orig@</abbr> naar het <abbr title="@lang_cible_long@">@lang_cible@</abbr>',
-	'titre_traduire' => 'VErtalen',
+	'titre_traduire' => 'Vertalen',
 	'tradlang' => 'Trad-Lang',
 	'traduction' => 'Vertaling @lang@',
 	'traductions' => 'Vertalingen'
