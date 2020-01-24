@@ -1,0 +1,17 @@
+<paquet
+	prefix="griseusico"
+	categorie="theme"
+	version="0.1.6"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/griseus/images/griseusico-256.png"
+	documentation="https://contrib.spip.net/Icones-Griseus-pour-l-espace-prive"
+>
+
+	<nom>Griseus : icônes espace privé</nom>
+
+	<auteur>tcharlss</auteur>
+
+	<licence>GNU/GPL</licence>
+
+</paquet>
