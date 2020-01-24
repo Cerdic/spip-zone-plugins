@@ -75,7 +75,10 @@ function cvt_rechercher_formulaire_traiter($flux){
 			if (isset($contexte['_rechercher_ancre']) and $ancre = $contexte['_rechercher_ancre']) {
 				$redirect = ancre_url($redirect, $ancre);
 			}
-		
+			
+			if (!is_array($flux['data'])) {
+				$flux['data'] = array();
+			}
 			$flux['data']['redirect'] = $redirect;
 		}
 	}
