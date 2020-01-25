@@ -1,0 +1,145 @@
+
+titre: '<:formidable:traiter_enregistrement_titre:>'
+description: '<:formidable:traiter_enregistrement_description:>'
+options:
+  -
+    saisie: 'fieldset'
+    options:
+      nom : 'reglages_generaux'
+      label: '<:formidable:traiter_enregistrement_reglages_generaux:>'
+      tagfield: '<legend>'
+    saisies:
+      -
+        saisie: 'radio'
+        options:
+          nom: 'moderation'
+          label: '<:formidable:traiter_enregistrement_option_moderation_label:>'
+          datas:
+            posteriori: '<:forum:bouton_radio_modere_posteriori:>'
+            priori: '<:forum:bouton_radio_modere_priori:>'
+          defaut: 'posteriori'
+      -
+        saisie: 'case'
+        options:
+          nom: 'multiple'
+          label_case: '<:formidable:traiter_enregistrement_option_multiple_explication:>'
+          defaut: 'on'
+          li_class: 'pleine_largeur'
+      -
+        saisie: 'case'
+        options:
+          nom: 'modifiable'
+          label_case: '<:formidable:traiter_enregistrement_option_modifiable_explication:>'
+          defaut: ''
+          li_class: 'pleine_largeur'
+      -
+        saisie: 'case'
+        options:
+          nom: 'effacement'
+          label_case: '<:formidable:traiter_enregistrement_option_effacement_label:>'
+          li_class: 'pleine_largeur'
+      -
+        saisie: 'input'
+        options:
+          nom: 'effacement_delai'
+          label: '<:formidable:traiter_enregistrement_option_effacement_delai_label:>'
+          afficher_si: '@traitements[enregistrement][effacement]@=="on"'
+  -
+    saisie: 'fieldset'
+    options:
+      nom : 'identification_reponses'
+      label: '<:formidable:traiter_enregistrement_identification_reponses:>'
+      tagfield: '<legend>'
+      afficher_si: '@traitements[enregistrement][multiple]@ != "on" || @traitements[enregistrement][modifiable]@ == "on"'
+    saisies:
+      -
+        saisie: 'radio'
+        options:
+          nom: 'identification'
+          label: '<:formidable:traiter_enregistrement_option_identification_label:>'
+          explication: '<:formidable:traiter_enregistrement_option_identification_explication:>'
+          datas:
+            cookie: '<:formidable:identification_par_cookie:>'
+            id_auteur: '<:formidable:identification_par_id_auteur:>'
+            variable_php: '<:formidable:identification_par_variable_php:>'
+          defaut: 'cookie'
+      -
+        saisie: 'selection'
+        options:
+          nom: 'variable_php'
+          label: '<:formidable:traiter_enregistrement_option_identification_variable_php_label:>'
+          explication: '<:formidable:traiter_enregistrement_option_identification_variable_php_explication:>'
+          datas:
+            remote_user: '<:formidable:traiter_enregistrement_option_remote_user_label:>'
+            php_auth_user: '<:formidable:traiter_enregistrement_option_php_auth_user_label:>'
+          defaut: ''
+          afficher_si : '@traitements[enregistrement][identification]@ == "variable_php"'
+  -
+    saisie: 'fieldset'
+    options:
+      nom : 'unicite_champ'
+      label: '<:formidable:traiter_enregistrement_unicite_champ:>'
+      tagfield: '<legend>'
+    saisies:
+      -
+        saisie: 'champ'
+        options:
+          nom: 'unicite'
+          label: '<:formidable:editer_unicite_label:>'
+          explication: '<:formidable:editer_unicite_explication:>'
+          env: true
+      -
+        saisie: 'input'
+        options:
+          nom: 'message_erreur_unicite'
+          label: '<:formidable:editer_message_erreur_unicite_label:>'
+          explication: '<:formidable:editer_message_erreur_unicite_explication:>'
+          afficher_si: '@traitements[enregistrement][unicite]@!=""'
+  -
+    saisie: 'fieldset'
+    options:
+      nom : 'donnees_personnelles'
+      label: '<:formidable:traiter_enregistrement_donnees_personelles:>'
+      tagfield: '<legend>'
+    saisies:
+      -
+        saisie: 'case'
+        options:
+          nom: 'anonymiser'
+          label_case: '<:formidable:traiter_enregistrement_option_anonymiser_label:>'
+          defaut: ''
+          li_class: 'pleine_largeur'
+          afficher_si: '!(@traitements[enregistrement][identification]@ == "id_auteur" && @traitements[enregistrement][multiple]@!="on" || @traitements[enregistrement][modifiable]@=="on")'
+      -
+        saisie: 'case'
+        options:
+          nom: 'ip'
+          label_case: '<:formidable:traiter_enregistrement_option_ip_label:>'
+          li_class: 'pleine_largeur'
+  -
+    saisie: 'fieldset'
+    options:
+      nom : 'divers'
+      label: '<:formidable:traiter_enregistrement_divers:>'
+      tagfield: '<legend>'
+    saisies:
+      -
+        saisie: 'case'
+        options:
+          nom: 'invalider'
+          li_class: 'pleine_largeur'
+          label_case: '<:formidable:traiter_enregistrement_option_invalider_label:>'
+          explication: '<:formidable:traiter_enregistrement_option_invalider_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'resume_reponse'
+          label: '<:formidable:traiter_enregistrement_option_resume_reponse_label:>'
+          explication: '<:formidable:traiter_enregistrement_option_resume_reponse_explication:>'
+      -
+        saisie: 'textarea'
+        options:
+          nom: 'analyse_exclure_champs'
+          label: '<:formidable:analyse_exclure_champs_label:>'
+          explication: '<:formidable:analyse_exclure_champs_explication:>'
+          rows: 4
