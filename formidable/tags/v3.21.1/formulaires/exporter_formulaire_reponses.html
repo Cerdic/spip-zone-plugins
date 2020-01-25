@@ -1,0 +1,49 @@
+[(#SET{type_export, #ARRAY{csv,<:formidable:reponses_exporter_format_csv:>,xls,<:formidable:reponses_exporter_format_xls:>}})]
+[(#SET{statut, #ARRAY{publie,<:formidable:reponses_exporter_statut_publie:>,tout,<:formidable:reponses_exporter_statut_tout:>}})]
+
+<div class="formulaire_spip formulaire_#ENV{form}[ formulaire_#ENV{form}-(#ENV{id})]">
+	<h3 class="titrem">
+	[(#CHEMIN{images/formulaire-reponses-exporter-24.png}|balise_img{horizontale})]
+	<:formidable:reponses_exporter:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable}|oui)
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_formulaire" value="#ID_FORMULAIRE" />
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+			[(#SAISIE{selection, type_export,
+				label=<:formidable:exporter_formulaire_format_label:>,
+				datas=#GET{type_export},
+				defaut=csv,
+				cacher_option_intro=oui})]
+			[(#SAISIE{selection, statut_reponses,
+				label=<:formidable:exporter_formulaire_statut_label:>,
+				datas=#GET{statut},
+				defaut=publie,
+				cacher_option_intro=oui})]
+			[(#SAISIE{radio, cle_ou_valeur,
+				label=<:formidable:exporter_formulaire_cle_ou_valeur_label:>,
+				data=#ARRAY{
+					cle,<:formidable:exporter_formulaire_cle_ou_valeur_cle_label:>,
+					valeur,<:formidable:exporter_formulaire_cle_ou_valeur_valeur_label:>,
+				},
+				defaut=cle
+				}
+			)]
+			[(#SAISIE{date, date_debut,
+					label=<:formidable:exporter_formulaire_date_debut_label:>
+				})]
+			[(#SAISIE{date, date_fin,
+					label=<:formidable:exporter_formulaire_date_fin_label:>
+				})]
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+
+		<p class="boutons"><span class="image_loading"></span><input type="submit" class="submit" value="<:bouton_telecharger:>" /></p>
+	</div></form>
+	]
+</div>
