@@ -1,0 +1,36 @@
+<[(#ENV{saisies_base_conteneur,#DIV|sinon{li}})] class="editer pleine_largeur editer_explication[ explication_(#ENV{nom}|saisie_nom2classe)][ (#ENV{conteneur_class,#ENV{li_class}})][ (#ENV{type_saisie}|saisie_type2classe)]"[ data-id="(#ENV{id_saisie})"][ data-afficher_si="(#ENV*{afficher_si}|saisies_afficher_si_js{#ENV{_saisies}})"]>
+	#ENV*{inserer_debut}
+	<div class="explication">
+		[<strong class="explication_titre">(#ENV*{titre})</strong>]
+		[<div class="explication_texte">(#ENV*{texte}|propre|saisies_liens_ouvrants)</div>]
+	</div>
+	#ENV*{inserer_fin}
+</[(#ENV{saisies_base_conteneur,#DIV|sinon{li}})]>
+[(#ENV{masquer}|oui)
+[(#SET{selector,[.explication_(#ENV{nom}|saisie_nom2classe)]})]
+<script>
+	function masquer(){
+		$("[(#GET{selector})] .explication_texte").#CONST{_SAISIES_AFFICHER_SI_JS_HIDE};
+		$("[(#GET{selector})] button").text('<:saisies:afficher:>');
+	};
+	function afficher(){
+		$("[(#GET{selector})] .explication_texte").#CONST{_SAISIES_AFFICHER_SI_JS_SHOW};
+		$("[(#GET{selector})] button").text('<:saisies:masquer:>');
+	};
+	function basculer(){
+		if (est_masque == true) {
+			est_masque = false;
+			afficher();
+		} else {
+			est_masque = true;
+			masquer();
+		}
+	};
+
+	est_masque = true;
+	$("[(#GET{selector})] .explication_texte").css('display','none');
+	$("[(#GET{selector})] .explication_titre").append("<span class='boutons'><button type='button'><:saisies:afficher:></button></span>");
+	$("[(#GET{selector})] .explication_titre button").click(function(){basculer();});
+</script>
+]
+
