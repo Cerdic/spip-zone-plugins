@@ -1,0 +1,85 @@
+[(#AUTORISER{voir, formulairesreponse, #ID_FORMULAIRE}|sinon_interdire_acces)]
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/css/theme.default.min.css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/jquery.tablesorter.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/jquery.tablesorter.widgets.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/widgets/widget-stickyHeaders.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/widgets/widget-columnSelector.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/widgets/widget-print.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/widgets/widget-output.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/widgets/widget-resizable.min.js"></script>
+<link rel="stylesheet" href="#CHEMIN{css/formidable_tablesorter.css}" />
+<script type="text/javascript" src="#CHEMIN{js/formidable_tablesorter.js}"></script>
+<BOUCLE_formulaire(FORMULAIRES){id_formulaire}{tout}{si #AUTORISER{voir, formulairesreponse, #ID_FORMULAIRE}}>
+	<h1>#TITRE</h1>
+	#SET{saisies,#SAISIES|unserialize}
+	#SET{saisies_finales,#GET{saisies}|saisies_lister_finales}
+	#SET{cextras,#VAL{spip_formulaires_reponses}|appliquer_filtre{champs_extras_objet}|sinon{#LISTE}}
+	<B_reponses>
+	<div id="tablesorter_boutons" class="formulaire_spip">
+		<div class="boutons">
+			<button class="print submit button"><:formidable_ts:imprimer:></button>
+			<div class="columnSelectorWrapper">
+				<input id="colSelect1" type="checkbox" class="invisible">
+				<label class="submit columnSelectorButton" for="colSelect1"><:formidable_ts:colonnes:></label>
+				<div id="columnSelector"></div>
+			</div>
+			<button class="submit button output"><:formidable_ts:exporter:></button>
+
+			<span class="totalWrapper"><:formidable_ts:nb_lignes:>&nbsp;<span id="total">#TOTAL_BOUCLE</span></span>
+		</div>
+	</div>
+	<table id="formidable_tablesorter#ID_FORMULAIRE" class="tablesorter">
+		<B_entete>
+		<caption>#TITRE</caption>
+		<thead>
+			<tr class="tablesorter-ignoreRow">
+				<th colspan="2">
+				</th>
+				[(#GET{cextras}|count|oui)
+					[<th colspan="(#GET{cextras}|count)"></th>]
+				]
+				<BOUCLE_entete_fieldsets(POUR) {tableau #GET{saisies}}>
+					[(#VALEUR{saisies}|non)
+						[(#VALEUR{saisie}|!={explication}|oui)
+						<th></th>
+						]
+					]
+					[(#VALEUR{saisies}|oui)
+					[<th colspan="(#VALEUR{saisies}|count|moins{#VALEUR{saisies}|saisies_lister_avec_type{explication}|count})">#VALEUR{options/label}</th>]
+					]
+				</BOUCLE_entete_fieldsets>
+			</tr>
+			<tr>
+				<th>#</th>
+				<th><:date:></th>
+				<BOUCLE_entete_cextras(POUR){tableau #GET{cextras}}>
+					[(#VALEUR{saisie}|!={explication}|oui)
+						[<th>(#VALEUR{options/label}|sinon{#VALEUR{options/label_case}}|sinon{#VALEUR{options/nom}})</th>]
+					]
+				</BOUCLE_entete_cextras>
+				<BOUCLE_entete(POUR) {tableau #GET{saisies_finales}}>
+				[(#VALEUR{saisie}|!={explication}|oui)
+					[<th>(#VALEUR{options/label}|sinon{#VALEUR{options/label_case}}|sinon{#VALEUR{options/nom}})</th>]
+				]
+		</BOUCLE_entete>
+			</tr>
+		</thead>
+		</B_entete>
+		<tbody>
+		<BOUCLE_reponses(FORMULAIRES_REPONSES){id_formulaire}>
+		<tr>
+			<td><a href="#URL_ECRIRE{formulaires_reponse,id_formulaires_reponse=#ID_FORMULAIRES_REPONSE}">#ID_FORMULAIRES_REPONSE</a></td>
+			<td data-text="#DATE">[(#DATE|affdate_heure)]</td>
+			[(#GET{cextras}|cextras2td{#ID_FORMULAIRES_REPONSE})]
+			<BOUCLE_champ(POUR){tableau #GET{saisies_finales}}>
+			[(#VALEUR{saisie}|!={explication}|oui)
+			<td>#VOIR_REPONSE{#VALEUR{options/nom},valeur_uniquement}</td>
+			]
+			</BOUCLE_champ>
+		</tr>
+		</BOUCLE_reponses>
+		</tbody>
+	</table>
+	</B_reponses>
+</BOUCLE_formulaire>

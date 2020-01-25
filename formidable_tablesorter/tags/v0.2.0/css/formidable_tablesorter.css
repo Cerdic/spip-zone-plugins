@@ -1,0 +1,31 @@
+.formidable_tablesorter #conteneur, .formidable_tablesorter #contenu{
+	width:100%;
+}
+.formidable_tablesorter .boutons{
+	text-align:left;
+}
+.boutons > * {
+	display:inline-block;
+}
+.formidable_tablesorter .boutons label {
+	box-sizing:border-box;
+	padding:4px;
+}
+.tablesorter-ignoreRow th {
+	border:1px black solid;
+	text-align:center;
+	font-size:1.25em;
+	padding-top:1em;
+	padding-bottom:1em;
+}
+#columnSelector label{
+	display:block;
+}
+#colSelect1:checked ~ #columnSelector {
+  display: block;
+}
+#columnSelector {
+  display: none;
+}
+
+
