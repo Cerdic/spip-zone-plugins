@@ -1,14 +1,14 @@
 <paquet
 	prefix="basicone"
 	categorie="theme"
-	version="0.1.7"
+	version="0.1.5"
 	etat="stable"
-	compatibilite="[3.0.0;3.2.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="images/basicone.png"
-	documentation="https://contrib.spip.net/basicone-icones-du-theme-prive"
->
+	documentation="http://contrib.spip.net/basicone-icones-du-theme-prive"
+>	
 
-	<nom>Basicône</nom>
+	<nom>Basic&#244;ne</nom>
 
 	<auteur>chankalan</auteur>
 
