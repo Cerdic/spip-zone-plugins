@@ -86,7 +86,7 @@
 
 			[(#REM)page_wikipedia : 
 			<br>[https://fr.wikipedia.org/wiki/(#ID_CONTACT|titre_page_wiki{contact})]
-			<br>phrase_wikipedia : [(#ID_CONTACT|titre_page_wiki{contact}|askwiki_first_line|sinon{La page demandée n'existe pas.})]
+			<br>phrase_wikipedia : [(#ID_CONTACT|titre_page_wiki{contact}|askwiki_first_paragraph|sinon{La page demandée n'existe pas.})]
 			<p>Date de naissance: [(#ID_CONTACT|titre_page_wiki{contact}|askwiki_datelife{0})]</p>
 			<p>Date de décès: [(#ID_CONTACT|titre_page_wiki{contact}|askwiki_datelife{1})]</p>
 			]

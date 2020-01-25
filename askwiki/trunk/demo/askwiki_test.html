@@ -10,7 +10,7 @@ La page demandé est
 
 <h4>Titre = #GET{titre_page}</h4>
 <p>Texte récupéré = [(#GET{titre_page}|askwiki)] </p>
-<p>Première phrase = [(#GET{titre_page}|askwiki|first_line)]</p>
+<p>Première phrase = [(#GET{titre_page}|askwiki|first_paragraph)]</p>
 
 [(#SET{dates,[(#GET{titre_page}|askwiki|extraire_balises{time})]})]
 

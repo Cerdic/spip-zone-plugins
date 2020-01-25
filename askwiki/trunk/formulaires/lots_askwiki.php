@@ -27,7 +27,7 @@ function formulaires_lots_askwiki_charger($retour = ''){
     	$contexte['id_contact'] = $id_contact;
     	
     	$page_wikipedia = titre_page_wiki($id_contact,'contact');
-		$phrase_wikipedia = askwiki_first_line($page_wikipedia);
+		$phrase_wikipedia = askwiki_first_paragraph($page_wikipedia);
 		$naissance = askwiki_datelife($page_wikipedia,0);
 		$deces = askwiki_datelife($page_wikipedia,1);
 		
@@ -87,7 +87,7 @@ function formulaires_lots_askwiki_traiter($retour = ''){
 		
 		$url_wikipedia = which_wikipedia('wiki');
     	$page_wikipedia = titre_page_wiki($id_objet,$objet);
-		$phrase_wikipedia = askwiki_first_line($page_wikipedia);
+		$phrase_wikipedia = askwiki_first_paragraph($page_wikipedia);
 		$naissance = askwiki_datelife($page_wikipedia,0);
 		$deces = askwiki_datelife($page_wikipedia,1);
 		

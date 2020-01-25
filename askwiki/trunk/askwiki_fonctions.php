@@ -42,13 +42,13 @@ function which_wikipedia($type = ''){
  * param string $titre_page
  * param numeric bool $life
  * exemple [Date de naissance: (#GET{titre_page}|askwiki_datelife{0})]
- *
+ * exemple [Date de décès: (#GET{titre_page}|askwiki_datelife{1})]
  */
 function askwiki_datelife($titre_page,$life){
 	$datas = askwiki($titre_page);
-	$first_line = first_line($datas);
-	if($first_line){
-		$array_dates = extraire_balises($first_line,'time');
+	$first_paragraph = first_paragraph($datas);
+	if($first_paragraph){
+		$array_dates = extraire_balises($first_paragraph,'time');
 		if((count($array_dates) > 1 AND $life == 1) 
 			OR (count($array_dates) > 0 AND $life == 0) ){
 			$datetime = extraire_attribut($array_dates[$life],'datetime');
@@ -68,13 +68,13 @@ function quel_age($date_deces,$date_naissance){
 	}
 }
 
-function askwiki_first_line($titre_page){
+function askwiki_first_paragraph($titre_page){
 	$datas = askwiki($titre_page);
-	$first_line = first_line($datas);
-	return $first_line;
+	$first_paragraph = first_paragraph($datas);
+	return $first_paragraph;
 }
 
-function first_line($text){
+function first_paragraph($text){
 	$p = extraire_balise($text,'p');
 	if(is_string($p) AND strlen($p) > 0){
 		return $p;
@@ -83,9 +83,9 @@ function first_line($text){
 }
 
 /*
- * extraire des données depuis une page wikipedia existante
- * param $titre_page
- * exchars : nombre de caractères à extraire
+ * extrait des données d'une page wikipedia depuis un titre préformaté
+ * @use 
+ * param string $titre_page
  * voir https://www.mediawiki.org/wiki/API:Get_the_contents_of_a_page
  *
  */
@@ -102,7 +102,7 @@ function askwiki($titre_page){
 		"titles" => $titre_page,
 		"exlimit" => "1",
 		"formatversion" => "2",
-		"exsentences" => "1"
+		"exsentences" => "1" //nombre de phrases à extraire
 	];
 	
 	$url = $endPoint . "?" . http_build_query( $params );
