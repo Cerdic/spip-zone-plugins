@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION"))
 // Doc de contrib.spip.net
 @define('_URL_CONTRIB', 'https://contrib.spip.net/?article');
 // Revisions du CS
-@define('_URL_CS_PLUGIN_XML', 'https://zone.spip.org/trac/spip-zone/browser/_plugins_/couteau_suisse/plugin.xml?format=txt');
+@define('_URL_CS_PLUGIN_XML', 'https://zone.spip.org/trac/spip-zone/browser/_plugins_/couteau_suisse/trunk/plugin.xml?format=txt');
 // On met a jour le flux rss toutes les 2 heures
 define('_CS_RSS_UPDATE', 2 * 3600);
 define('_CS_RSS_COUNT', 15);

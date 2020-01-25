@@ -1,4 +1,4 @@
-<traduction module="couteauprive" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/couteau_suisse/lang/" reference="fr">
+<traduction module="couteauprive" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/couteau_suisse/trunk/lang/" reference="fr">
 	<langue code="ast" url="https://trad.spip.net/tradlang_module/couteauprive?lang_cible=ast" total="584" traduits="322" relire="0" modifs="76" nouveaux="186" pourcent="55.14">
 	</langue>
 	<langue code="ca" url="https://trad.spip.net/tradlang_module/couteauprive?lang_cible=ca" total="584" traduits="490" relire="0" modifs="31" nouveaux="63" pourcent="83.90">
