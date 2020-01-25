@@ -1,0 +1,11 @@
+<p class='boutons'>
+    <span class='image_loading'></span>
+    [(#SET{label_valider, #ENV{_saisies/options/texte_submit, #ENV{saisies_texte_submit, <:bouton_enregistrer:>}}})]
+		[(#ENV{_etape}|et{#ENV{_etape}|!={#ENV{_etapes}}})
+			[(#SET{label_valider, #ENV{_saisies/options/etapes_suivant, <:bouton_suivant:>}})]
+		]
+		[(#ENV{_etape}|>{1}|oui)
+			<input type="submit" class="submit" name="_retour_etape_[(#ENV{_etape}|moins{1})]" value="[(#ENV{_saisies/options/etapes_precedent, <:precedent|ucfirst:>})]" />
+		]
+		<input type="submit" class="submit" value="#GET{label_valider}" />
+</p>
