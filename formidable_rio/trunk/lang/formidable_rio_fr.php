@@ -7,5 +7,5 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_submit' => 'Réinitialiser',
-	'explication' => 'En cliquant sur ce boutons, vous réinitialiserait la valeur pour indiquer que les champs sont obligatoires.'
+	'explication' => 'En cliquant sur ce boutons, vous réinitialiserez la valeur pour indiquer que les champs sont obligatoires.'
 );
