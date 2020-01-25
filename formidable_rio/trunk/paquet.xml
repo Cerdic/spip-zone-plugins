@@ -10,4 +10,5 @@
 	<auteur>Maïeul</auteur>
 
 	<necessite nom="formidable" compatibilite="[3.0.8;[" />
+	<pipeline nom="affiche_gauche" inclure="formidable_rio_pipelines.php" />
 </paquet>
