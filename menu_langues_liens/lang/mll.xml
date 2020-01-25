@@ -1,4 +1,4 @@
-<traduction module="mll" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/menu_langues_liens/trunk/lang/" reference="fr">
+<traduction module="mll" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/menu_langues_liens/lang/" reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/mll?lang_cible=en" total="17" traduits="11" relire="0" modifs="1" nouveaux="5" pourcent="64.71">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
