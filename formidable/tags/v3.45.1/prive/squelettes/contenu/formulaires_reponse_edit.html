@@ -1,0 +1,10 @@
+<BOUCLE_formulaires_reponses(FORMULAIRES_REPONSES){id_formulaires_reponse} {si #AUTORISER{modifier,formulairesreponse,#ID_FORMULAIRES_REPONSE}}>
+	#SET{redirect,#URL_ECRIRE{formulaires_reponse,id_formulaires_reponse=#ID_FORMULAIRES_REPONSE,true}}
+	<div class='cadre-formulaire-editer'>
+		<div class='entete-formulaire'>
+			[(#URL_ECRIRE{formulaires_reponse,id_formulaires_reponse=#ID_FORMULAIRES_REPONSE}|icone_verticale{<:formidable:icone_retour_formulaires_reponse:>,formulaires_reponse,edit,left})]
+			<h1><:formulaires_reponse:formulaires_reponse_numero{nb=#ID_FORMULAIRES_REPONSE}:></h1>
+		</div>
+		#FORMULAIRE_FORMIDABLE{#ID_FORMULAIRE,#ARRAY{},#ID_FORMULAIRES_REPONSE,#GET{redirect}}
+	</div>
+</BOUCLE_formulaires_reponses>
