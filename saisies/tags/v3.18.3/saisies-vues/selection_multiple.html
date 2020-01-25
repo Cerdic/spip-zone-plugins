@@ -1,0 +1,10 @@
+[(#REM) data peut être une chaine qu'on sait décomposer ]
+#SET{data, #ENV*{data, #ENV*{datas}}|saisies_chaine2tableau|saisies_aplatir_tableau}
+#SET{valeur, #ENV*{valeur}|saisies_valeur2tableau}
+<B_choix>
+<ul>
+	<BOUCLE_choix(POUR){tableau #GET{valeur}}>
+	<li class="choix">#GET{data/#VALEUR}</li>
+	</BOUCLE_choix>
+</ul>
+</B_choix>
