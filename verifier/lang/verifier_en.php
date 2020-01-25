@@ -13,7 +13,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'data_choix' => 'Possible choices:',
 
 	// E
-	'erreur_attribut_class' => 'The syntax of this class attribute is invalid.',
 	'erreur_code_postal' => 'This postcode is invalid.',
 	'erreur_comparaison_egal' => 'The value must be equal to the field "@nom_champ@"',
 	'erreur_comparaison_egal_type' => 'The value must be equal to and the same type as the field "@nom_champ@"',
@@ -24,8 +23,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_couleur' => 'The color code is invalid.',
 	'erreur_date' => 'The date is invalid.',
 	'erreur_date_format' => 'The date format is invalid.',
-	'erreur_date_format_date_vide' => 'The date must be filled in',
-	'erreur_date_format_heure_vide' => 'The time must be filled in.',
 	'erreur_decimal' => 'The value must be a decimal number.',
 	'erreur_decimal_nb_decimales' => 'The number must have more than @nb_decimales@ digits after the decimal point.',
 	'erreur_dimension_image' => 'The file "@name@" is too large: @taille@ (maximum @taille_max@).',
@@ -93,7 +90,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_couleur_normaliser_label' => 'Normalize the color code?',
 	'option_couleur_type_hexa' => 'Color code in hexadecimal format',
 	'option_couleur_type_label' => 'Checking type to be made',
-	'option_decimal_nb_decimales_label' => 'Maximum number of decimals after the decimal point',
+	'option_decimal_nb_decimales_label' => 'Number of decimal places', # MODIF
 	'option_decimal_separateur_explication' => 'The dot will be accepted in all cases.',
 	'option_decimal_separateur_label' => 'Decimal separator',
 	'option_email_disponible_label' => 'Available address',
@@ -141,8 +138,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_page_verifier_doc' => 'Documentation of the Verification API',
-	'type_attribut_class' => 'Attribute class',
-	'type_attribut_class_description' => 'Checks that the value is a valid class attribute.',
 	'type_code_postal' => 'Postal code',
 	'type_code_postal_description' => 'Check that the value is a valid postal code.',
 	'type_comparaison_champ' => 'Comparison',
