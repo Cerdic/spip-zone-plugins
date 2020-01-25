@@ -1,0 +1,29 @@
+[(#ENV{type_choix}|=={checkbox}|?{
+	#SET{data,#ARRAY},
+	#SET{data,#ARRAY{'',#VAL{formidable:traitements_champ_aucun}|_T}}
+})]
+
+	[(#ENV{forcer_type}|non)
+		#SET{tab,#ENV{formulaire}}
+	]
+	[(#ENV{forcer_type}|oui)
+		[(#SET{tab,[(#ENV{formulaire}|saisies_lister_avec_type{#ENV{forcer_type}})]})]
+	]
+	<BOUCLE_parcours(POUR){tableau #GET{tab}}>
+	#SET{nom,#VALEUR|table_valeur{options}|table_valeur{nom}}
+	#SET{label,#VALEUR|table_valeur{options}|table_valeur{label}|sinon{#GET{nom}}}
+	#SET{enfants,#ARRAY}
+	<BOUCLE_enfants(POUR){tableau #VALEUR|table_valeur{'saisies'}}>
+		#SET{enfant,#ARRAY{#VALEUR|table_valeur{options}|table_valeur{nom},#VALEUR|table_valeur{options}|table_valeur{label}}}
+		#SET{enfants,#GET{enfants}|array_merge{#GET{enfant}}}
+		<BOUCLE_petits_enfants(BOUCLE_enfants) />
+	</BOUCLE_enfants>
+	#SET{saisie,#ARRAY{#GET{nom},#GET{enfants}}}
+	</B_enfants>
+	#SET{saisie,#ARRAY{#GET{nom},#GET{label}}}
+	<//B_enfants>
+	#SET{data,#GET{data}|array_merge{#GET{saisie}}}
+	</BOUCLE_parcours>
+
+	[(#SET{data,#GET{data}|array_filter})]
+	<INCLURE{fond=saisies/#ENV{type_choix,selection},data=#GET{data},env,option_intro=<:formidable:traitements_champ_aucun:>,defaut=''}>
