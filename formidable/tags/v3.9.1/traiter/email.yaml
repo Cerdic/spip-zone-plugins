@@ -1,0 +1,156 @@
+
+titre: '<:formidable:traiter_email_titre:>'
+description: '<:formidable:traiter_email_description:>'
+options:
+  -
+    saisie: 'fieldset'
+    options: 
+      nom: 'destinataires'
+      label: '<:formidable:traiter_email_destinataires_courriel_label:>'
+      tagfield: '<legend>'
+    saisies:
+      -
+        saisie: 'champ'
+        options:
+          nom: 'champ_destinataires'
+          label: '<:formidable:traiter_email_option_destinataires_label:>'
+          explication: '<:formidable:traiter_email_option_destinataires_explication:>'
+          forcer_type: [destinataires,hidden]
+          env: true
+      -
+        saisie: 'input'
+        options:
+          nom: 'destinataires_plus'
+          label: '<:formidable:traiter_email_option_destinataires_plus_label:>'
+          explication: '<:formidable:traiter_email_option_destinataires_plus_explication:>'
+        verifier:
+          type: 'email'
+      -
+        saisie: 'textarea'
+        options:
+          nom: 'destinataires_selon_champ'
+          label: '<:formidable:traiter_email_option_destinataires_selon_champ_label:>'
+          explication: '<:formidable:traiter_email_option_destinataires_selon_champ_explication:>'
+          placeholder: "@selection_1@/choix1 : mail1@example.tld, mail2@example.tld"
+          conteneur_class: 'pleine_largeur'
+          rows: 4
+      -
+        saisie: 'champ'
+        options:
+          nom: 'champ_courriel_destinataire_form'
+          label: '<:formidable:traiter_email_option_destinataires_champ_form_label:>'
+          explication: '<:formidable:traiter_email_option_destinataires_champ_form_explication:>'
+          attention: '<:formidable:traiter_email_option_destinataires_champ_form_attention:>'
+          afficher_si: '@traitements[email][champ_courriel_destinataire_form]@!=""'
+          env: true
+  -
+    saisie: 'fieldset'
+    options: 
+      nom: 'envoyeur'
+      label: '<:formidable:traiter_email_envoyeur_courriel_label:>'
+      tagfield: '<legend>'
+    saisies:
+      -
+        saisie: 'champ'
+        options:
+          nom: 'champ_courriel'
+          label: '<:formidable:traiter_email_option_envoyeur_courriel_label:>'
+          explication: '<:formidable:traiter_email_option_envoyeur_courriel_explication:>'
+          env: true
+      -
+        saisie: 'case'
+        options:
+          nom: 'activer_vrai_envoyeur'
+          label_case: '<:formidable:traiter_email_option_vrai_envoyeur_label:>'
+          explication: '<:formidable:traiter_email_option_vrai_envoyeur_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'champ_nom'
+          label: '<:formidable:traiter_email_option_envoyeur_nom_label:>'
+          explication: '<:formidable:traiter_email_option_envoyeur_nom_explication:>'
+  -
+    saisie: 'fieldset'
+    options: 
+      nom: 'sujet'
+      label: '<:formidable:traiter_email_sujet_courriel_label:>'
+      tagfield: '<legend>'
+    saisies:
+      -
+        saisie: 'input'
+        options:
+          nom: 'champ_sujet'
+          label: '<:formidable:traiter_email_option_sujet_label:>'
+          explication: '<:formidable:traiter_email_option_sujet_explication:>'
+      - 
+        saisie: 'case'
+        options:
+          nom: 'champ_sujet_valeurs_brutes'
+          label : '<:formidable:traiter_email_option_sujet_valeurs_brutes_label:>'
+          label_case : '<:formidable:traiter_email_option_sujet_valeurs_brutes_label_case:>'
+  -
+    saisie: 'fieldset'
+    options: 
+      nom: 'contenu'
+      label: '<:formidable:traiter_email_contenu_courriel_label:>'
+      tagfield: '<legend>'
+    saisies:
+      -
+        saisie: 'textarea'
+        options:
+          nom: 'exclure_champs_email'
+          label: '<:formidable:traiter_email_option_exclure_champs_email_label:>'
+          explication: '<:formidable:traiter_email_option_exclure_champs_email_explication:>'
+          placeholder: "input_3,selection_2"
+          conteneur_class: 'pleine_largeur'
+          rows: 4
+      -
+        saisie: 'case'
+        options:
+          nom: 'pj'
+          li_class: 'pleine_largeur'
+          label_case: '<:formidable:traiter_email_option_pj_label:>'
+          explication: '<:formidable:traiter_email_option_pj_explication:>'
+      -
+        saisie: 'case'
+        options:
+          nom: 'masquer_liens'
+          li_class: 'pleine_largeur'
+          label_case: '<:formidable:traiter_email_option_masquer_liens_label_case:>'
+      -
+        saisie: 'case'
+        options:
+          nom: 'activer_ip'
+          li_class: 'pleine_largeur'
+          label_case: '<:formidable:traiter_email_option_activer_ip_label_case:>'
+  -
+    saisie: 'fieldset'
+    options: 
+      nom: 'AR'
+      label: '<:formidable:traiter_email_AR_label:>'
+      tagfield: '<legend>'
+    saisies:
+      -
+        saisie: 'case'
+        options:
+          nom: 'activer_accuse'
+          li_class: 'pleine_largeur'
+          label_case: '<:formidable:traiter_email_option_activer_accuse_label_case:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'sujet_accuse'
+          label: '<:formidable:traiter_email_option_sujet_accuse_label:>'
+          explication: '<:formidable:traiter_email_option_sujet_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'courriel_envoyeur_accuse'
+          label: '<:formidable:traiter_email_option_courriel_envoyeur_accuse_label:>'
+          explication: '<:formidable:traiter_email_option_courriel_envoyeur_accuse_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'nom_envoyeur_accuse'
+          label: '<:formidable:traiter_email_option_nom_envoyeur_accuse_label:>'
+          explication: '<:formidable:traiter_email_option_nom_envoyeur_accuse_explication:>'
