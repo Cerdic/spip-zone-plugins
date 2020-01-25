@@ -1,0 +1,53 @@
+<paquet
+	prefix="formidable"
+	categorie="communication"
+	version="3.38.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="images/formidable-64.png"
+	schema="0.15.0"
+	documentation="https://contrib.spip.net/Formidable-le-generateur-de-formulaires"
+>
+	<nom>Formidable</nom>
+	<!-- Générateur de formulaires -->
+
+	<auteur>RastaPopoulos</auteur>
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<auteur>Maïeul</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="formidable_affiche_resume_reponse" action="" />
+	<pipeline nom="formidable_parametres_accuse" action="" />
+	<pipeline nom="formidable_exporter_formulaire_reponses_titres" action="" />
+	<pipeline nom="formidable_exporter_formulaire_reponses_reponse" action="" />
+	<pipeline nom="formidable_traitements" inclure="formidable_pipelines.php" />
+
+	<pipeline nom="autoriser" inclure="formidable_autorisations.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/formidable_tables.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/formidable_tables.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/formidable_tables.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/formidable_tables.php" />
+
+	<pipeline nom="nospam_lister_formulaires" inclure="formidable_pipelines.php" />
+	<pipeline nom="affiche_droite" inclure="formidable_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="formidable_pipelines.php" />
+	<pipeline nom="post_edition" inclure="formidable_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="formidable_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="formidable_pipelines.php" />
+
+	<pipeline nom="corbeille_table_infos" inclure="formidable_pipelines.php" />
+	<necessite nom="spip_bonux" compatibilite="[3.3.8;[" />
+	<necessite nom="saisies" compatibilite="[3.18.9;[" />
+	<necessite nom="verifier" compatibilite="[1.6.2;[" />
+	<necessite nom="yaml" compatibilite="[1.5.2;[" />
+	<necessite nom="facteur" compatibilite="[3.6.2;[" />
+	<necessite nom="nospam" compatibilite="[1.6.1;[" />
+
+	<utilise nom="collectionjson" compatibilite="[1.5.0;[" />
+	<utilise nom="cvtupload" compatibilite="[1.16.0;[" />
+	<utilise nom="corbeille" compatibilite="[3.1.0;[" />
+
+	<menu nom="formulaires" titre="formidable:bouton_formulaires" parent="menu_edition" icone="images/formulaire-16.png" />
+	<menu nom="formulaire_creer" titre="formidable:formulaires_nouveau" parent="outils_rapides" action="formulaire_edit" parametres="nouveau=oui" icone="images/formulaire-new-16.png" />
+</paquet>
