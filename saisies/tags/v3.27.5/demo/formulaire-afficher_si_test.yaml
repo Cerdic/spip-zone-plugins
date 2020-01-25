@@ -1,0 +1,106 @@
+id_formulaire: '41'
+identifiant: afficher_si_test
+titre: afficher_si_test
+descriptif: 'Ce formulaire donne des exemples d''utilisation d''afficher_si, pour faire des tests en cas de modif du code. '
+css: ''
+message_retour: ''
+saisies:
+  -
+    options: { label: 'La saisie qui fait basculer les autres', datas: "choix1|Un\r\nchoix2|Deux\r\nchoix3|Trois", obligatoire: on, nom: radio_1 }
+    identifiant: '@5cc85dbf55e2b'
+    verifier: {  }
+    saisie: radio
+  -
+    options: { label: Date, heure_pas: '30', afficher_si: '@radio_1@=="choix1"', obligatoire: on, nom: date_2 }
+    verifier: { type: date, options: { normaliser: datetime } }
+    identifiant: '@5cc85f44233f5'
+    saisie: date
+  -
+    options: { label: 'Date (copie)', heure_pas: '30', afficher_si: '@radio_1@=="choix1"', nom: date_3 }
+    verifier: { type: date, options: { normaliser: datetime } }
+    identifiant: '@5cc8602f80ab6'
+    saisie: date
+  -
+    options: { label: 'Cases à cocher', datas: "choix1|Un\r\nchoix2|Deux\r\nchoix3|Trois", choix_alternatif_label: 'Autre choix', afficher_si: '@radio_1@=="choix1"', obligatoire: on, nom: checkbox_2 }
+    identifiant: '@5cc85f44233f7'
+    verifier: {  }
+    saisie: checkbox
+  -
+    options: { label: 'Cases à cocher (copie)', datas: "choix1|Un\r\nchoix2|Deux\r\nchoix3|Trois", choix_alternatif_label: 'Autre choix', afficher_si: '@radio_1@=="choix1"', nom: checkbox_3 }
+    identifiant: '@5cc86038d0079'
+    verifier: {  }
+    saisie: checkbox
+  -
+    options: { label: 'Case unique', label_case: 'Case unique', valeur_oui: on, afficher_si: '@radio_1@=="choix1"', obligatoire: on, nom: case_2 }
+    identifiant: '@5cc85f44233f9'
+    verifier: {  }
+    saisie: case
+  -
+    options: { label: 'Case unique (copie)', label_case: 'Case unique', valeur_oui: on, afficher_si: '@radio_1@=="choix1"', nom: case_3 }
+    identifiant: '@5cc860403d408'
+    verifier: {  }
+    saisie: case
+  -
+    options: { label: 'Bloc de texte', afficher_si: '@radio_1@=="choix1"', rows: '5', cols: '40', obligatoire: on, nom: textarea_2 }
+    identifiant: '@5cc85f44233fa'
+    verifier: {  }
+    saisie: textarea
+  -
+    options: { label: 'Bloc de texte (copie)', afficher_si: '@radio_1@=="choix1"', rows: '5', cols: '40', nom: textarea_3 }
+    identifiant: '@5cc860477aa9b'
+    verifier: {  }
+    saisie: textarea
+  -
+    options: { label: 'Boutons radios', datas: "choix1|Un\r\nchoix2|Deux\r\nchoix3|Trois", afficher_si: '@radio_1@=="choix1"', obligatoire: on, nom: radio_3 }
+    identifiant: '@5cc85f44233fc'
+    verifier: {  }
+    saisie: radio
+  -
+    options: { label: 'Boutons radios (copie)', datas: "choix1|Un\r\nchoix2|Deux\r\nchoix3|Trois", afficher_si: '@radio_1@=="choix1"', nom: radio_4 }
+    identifiant: '@5cc8605aa7cf2'
+    verifier: {  }
+    saisie: radio
+  -
+    options: { label: 'Ligne de texte', type: text, afficher_si: '@radio_1@=="choix1"', size: '40', autocomplete: defaut, obligatoire: on, nom: input_2 }
+    identifiant: '@5cc85f44233fd'
+    verifier: {  }
+    saisie: input
+  -
+    options: { label: 'Ligne de texte (copie)', type: text, afficher_si: '@radio_1@=="choix1"', size: '40', autocomplete: defaut, nom: input_3 }
+    identifiant: '@5cc86061d2285'
+    verifier: {  }
+    saisie: input
+  -
+    options: { label: 'Groupe de champs', explication: 'Maintenant on test les input qui sont dans des champs', afficher_si: '@radio_1@=="choix1"', nom: fieldset_1 }
+    identifiant: '@5cc85e4c9482f'
+    verifier: {  }
+    saisie: fieldset
+    saisies: [{ options: { label: Date, heure_pas: '30', obligatoire: on, nom: date_1 }, verifier: { type: date, options: { normaliser: datetime } }, identifiant: '@5cc85e34de92f', saisie: date }, { options: { label: 'Cases à cocher', datas: "choix1|Un\r\nchoix2|Deux\r\nchoix3|Trois", choix_alternatif_label: 'Autre choix', obligatoire: on, nom: checkbox_1 }, identifiant: '@5cc85e451728f', verifier: {  }, saisie: checkbox }, { options: { label: 'Case unique', label_case: 'Case unique', valeur_oui: on, afficher_si: '@radio_1@=="choix1"', obligatoire: on, nom: case_1 }, identifiant: '@5cc85e4697f41', verifier: {  }, saisie: case }, { options: { label: 'Bloc de texte', rows: '5', cols: '40', obligatoire: on, nom: textarea_1 }, identifiant: '@5cc85f11bbfb3', verifier: {  }, saisie: textarea }, { options: { label: 'Boutons radios', datas: "choix1|Un\r\nchoix2|Deux\r\nchoix3|Trois", obligatoire: on, nom: radio_2 }, identifiant: '@5cc85f37f1a79', verifier: {  }, saisie: radio }, { options: { label: 'Ligne de texte', type: text, afficher_si: '@radio_1@=="choix1"', size: '40', autocomplete: defaut, obligatoire: on, nom: input_1 }, identifiant: '@5cc85e42775e3', verifier: {  }, saisie: input }]
+  -
+    options: { label: 'Groupe de champs (copie)', explication: 'Maintenant on test les input qui sont dans des champs', afficher_si: '@radio_1@=="choix1"', nom: fieldset_2 }
+    identifiant: '@5cc8606c00a44'
+    verifier: {  }
+    saisie: fieldset
+    saisies: [{ options: { label: Date, heure_pas: '30', nom: date_4 }, verifier: { type: date, options: { normaliser: datetime } }, identifiant: '@5cc8606c00a49', saisie: date }, { options: { label: 'Cases à cocher', datas: "choix1|Un\r\nchoix2|Deux\r\nchoix3|Trois", choix_alternatif_label: 'Autre choix', nom: checkbox_4 }, identifiant: '@5cc8606c00a4a', verifier: {  }, saisie: checkbox }, { options: { label: 'Case unique', label_case: 'Case unique', valeur_oui: on, afficher_si: '@radio_1@=="choix1"', nom: case_4 }, identifiant: '@5cc8606c00a4c', verifier: {  }, saisie: case }, { options: { label: 'Bloc de texte', rows: '5', cols: '40', nom: textarea_4 }, identifiant: '@5cc8606c00a4d', verifier: {  }, saisie: textarea }, { options: { label: 'Boutons radios', datas: "choix1|Un\r\nchoix2|Deux\r\nchoix3|Trois", nom: radio_5 }, identifiant: '@5cc8606c00a4e', verifier: {  }, saisie: radio }, { options: { label: 'Ligne de texte', type: text, afficher_si: '@radio_1@=="choix1"', size: '40', autocomplete: defaut, nom: input_4 }, identifiant: '@5cc8606c00a50', verifier: {  }, saisie: input }]
+traitements:
+  enregistrement:
+    moderation: posteriori
+    multiple: on
+    modifiable: ''
+    effacement: ''
+    effacement_delai: ''
+    identification: cookie
+    variable_php: ''
+    unicite: ''
+    message_erreur_unicite: ''
+    anonymiser: ''
+    ip: ''
+    invalider: ''
+    resume_reponse: ''
+    analyse_exclure_champs: ''
+public: non
+statut: prop
+date_creation: '2019-04-30 16:37:09'
+maj: '2019-04-30 16:51:51'
+apres: formulaire
+url_redirect: ''
