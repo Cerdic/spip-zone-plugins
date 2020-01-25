@@ -98,11 +98,11 @@ Dies führt bei zahlreichem Versenden zu einer großen Datenmenge, weshalb es ra
 	'texte_statut_pause' => 'Pause',
 	'texte_statut_processing' => 'Wird ausgeführt',
 	'titre_envois_archives' => 'Versandarchiv',
-	'titre_envois_destinataires_fail' => 'Fehlgeschlagene Sendungen',
+	'titre_envois_destinataires_fail' => 'Fehlgeschlagene Sendungen', # MODIF
 	'titre_envois_destinataires_init_encours' => 'Kein Empfänger vorprogrammiert (wird initialisiert)',
 	'titre_envois_destinataires_ok' => 'Erfolgreiche Sendungen',
 	'titre_envois_destinataires_sent' => 'Erfolgreiche Sendungen',
-	'titre_envois_destinataires_todo' => 'Anstehende Sendungen',
+	'titre_envois_destinataires_todo' => 'Anstehende Sendungen', # MODIF
 	'titre_envois_en_cours' => 'Versand wird ausgeführt',
 	'titre_envois_planifies' => 'Geplante Versendungen',
 	'titre_envois_termines' => 'Versand beeendet',

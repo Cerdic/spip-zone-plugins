@@ -100,11 +100,11 @@ Isto pode representar um volume importante de dados; se você faz muitos envios,
 	'texte_statut_pause' => 'em pausa',
 	'texte_statut_processing' => 'em andamento',
 	'titre_envois_archives' => 'Envios arquivados',
-	'titre_envois_destinataires_fail' => 'Envios falhados',
+	'titre_envois_destinataires_fail' => 'Envios falhados', # MODIF
 	'titre_envois_destinataires_init_encours' => 'Nenhum destinatário programado (inicialisação em andamento)',
 	'titre_envois_destinataires_ok' => 'Envios com êxito',
 	'titre_envois_destinataires_sent' => 'Envios com êxito',
-	'titre_envois_destinataires_todo' => 'Envios futuros',
+	'titre_envois_destinataires_todo' => 'Envios futuros', # MODIF
 	'titre_envois_en_cours' => 'Envios em andamento',
 	'titre_envois_planifies' => 'Envios agendados',
 	'titre_envois_termines' => 'Envios terminados',
