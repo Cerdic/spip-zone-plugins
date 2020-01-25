@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+	
+	<title>Test du générateur de formulaire</title>
+	[<link rel="stylesheet" href="(#CHEMIN{spip_formulaires.css})" type="text/css" media="all" title="formulaires" charset="utf-8" />]
+	<style type="text/css">
+		.formulaire_spip{
+			width:40%;
+			border:1px solid black;
+			-moz-border-radius:10px;
+			-webkit-border-radius:10px;
+			border-radius:10px;
+		}
+		.formulaire_spip ul li{
+			padding:0.5em;
+		}
+		.formulaire_spip li.fieldset{
+			padding:0;
+		}
+		.formulaire_spip li.obligatoire{
+			background:#ddd;
+		}
+		.formulaire_spip li.erreur{
+			background:#ffcfcf;
+		}
+		.formulaire_spip .fieldset .legend{
+			margin:0;
+			font-style:italic;
+		}
+		.nettoyeur{
+			clear:both;
+			font-size:1%;
+			height:0;
+		}
+	</style>
+	
+	#INSERT_HEAD
+</head>
+
+<body>
+	<h1>Test du générateur de formulaire</h1>
+	#SET{saisies,
+		#ARRAY{
+			0,#ARRAY{
+				explication, Une explication générale par exemple.
+			},
+			42,#ARRAY{
+				saisie, destinataires,
+				options, #ARRAY{
+					nom, destinataires,
+					label, Destinataires,
+					obligatoire, 'oui',
+					choix_destinataires, #ARRAY{
+						0,2,
+						1,1},
+					type_choix, 'plusieurs'
+				}
+			},
+			1,#ARRAY{
+				saisie, input,
+				options, #ARRAY{
+					nom, nom,
+					label, Votre nom,
+					explication, C'est pas clair ?,
+					obligatoire, 'oui'
+				},
+				verifier, #ARRAY{
+					type, taille,
+					options, #ARRAY{
+						min, 3,
+					}
+				}
+			},
+			37,#ARRAY{
+				saisie, input,
+				options, #ARRAY{
+					nom, email,
+					label, Votre courriel,
+					explication, Une adresse du type <em>vous@mail.com</em>.,
+					obligatoire, 'oui'
+				},
+				verifier, #ARRAY{
+					type, email,
+				}
+			},
+			2,#ARRAY{
+				saisie, case,
+				options, #ARRAY{
+					nom, test2,
+					label, Une sorte de case à cocher,
+					label_case, Check la vibes
+				}
+			},
+			3,#ARRAY{
+				groupe, Un groupe de champs,
+				contenu, #ARRAY{
+					0,#ARRAY{
+						explication, "C'est un groupe de champs, c'est cool pour l'ergonomie."
+					},
+					1,#ARRAY{
+						saisie, auteurs,
+						options, #ARRAY{
+							nom, auteur,
+							label, Choisir un auteur,
+							obligatoire, 'oui',
+							info_obligatoire, " / obligatoire"
+						}
+					},
+					2,#ARRAY{
+						saisie, oui_non,
+						options, #ARRAY{
+							nom, peutetre,
+							label, Tu veux ou tu veux pas ?,
+							info_obligatoire, " / obligatoire"
+						}
+					},
+					3,#ARRAY{
+						saisie, textarea,
+						options, #ARRAY{
+							nom, texte,
+							label, Vos impressions,
+							explication, Donnez-nous vos impressions sur cette incroyable génération de formulaire.,
+							obligatoire, 'oui'
+						},
+						verifier, #ARRAY{
+							type, taille,
+							options, #ARRAY{
+								min, 10,
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	#SET{traitements,
+		#ARRAY{
+			email, #ARRAY{
+				champ_destinataires, 'destinataires',
+				champ_courriel, 'email',
+				champ_nom, 'nom',
+			}
+		}
+	}
+	
+	<div class="ajax">
+	#FORMULAIRE_GENERER_FORMULAIRE{#GET{saisies}, #GET{traitements}}
+	</div>
+</body>
+
+</html>
