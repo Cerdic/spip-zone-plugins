@@ -1,0 +1,12 @@
+[(#REM) S'il y a des options afficher_si, il faut v�rifier que les conditions sont remplies ]
+[(#SET{saisies,#ENV{saisies}|saisies_verifier_afficher_si{#ENV**|unserialize}})]
+<BOUCLE_saisies(POUR){tableau #GET{saisies}}>
+[(#EVAL{!defined('_SAISIES_AFFICHAGE_COMPACT')}|oui)
+[(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
+	[(#VALEUR|saisies_generer_vue{#ENV{_env}|sinon{#ENV**|unserialize}})]
+]
+]
+[(#EVAL{defined('_SAISIES_AFFICHAGE_COMPACT')}|oui)
+[<div class="[(#VALEUR|table_valeur{options/nom})]">[<b>(#VALEUR|table_valeur{options/label}|typo)</b>:] (#VAL{saisie}|array_key_exists{#VALEUR}|?{[(#VALEUR|saisies_generer_vue{#ENV{_env}|sinon{#ENV**|unserialize},#ARRAY{valeur_uniquement,oui,sans_reponse,''}}|ptobr)]})</div>]
+]
+</BOUCLE_saisies>
