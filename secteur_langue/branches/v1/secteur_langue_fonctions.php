@@ -3,7 +3,7 @@
  * Fonctions utiles au plugin Secteur par langue
  *
  * @plugin     Secteur par langue
- * @copyright  2019
+ * @copyright  2019 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL v3
  * @package    SPIP\Secteur_langue\Fonctions
