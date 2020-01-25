@@ -57,12 +57,6 @@ options:
       -
         saisie: 'input'
         options:
-          nom: 'info_obligatoire'
-          label: '<:saisies:option_info_obligatoire_label:>'
-          explication: '<:saisies:option_info_obligatoire_explication:>'
-      -
-        saisie: 'input'
-        options:
           nom: 'class'
           label: '<:saisies:option_class_label:>'
           size: 50
@@ -89,6 +83,12 @@ options:
           nom: 'erreur_obligatoire'
           label: '<:saisies:option_erreur_obligatoire_label:>'
           explication: '<:saisies:option_erreur_obligatoire_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'info_obligatoire'
+          label: '<:saisies:option_info_obligatoire_label:>'
+          explication: '<:saisies:option_info_obligatoire_explication:>'
 defaut:
   options:
     label: '<:saisie_calcul:saisie_calcul_titre:>'
