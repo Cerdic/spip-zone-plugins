@@ -1,4 +1,4 @@
-<traduction module="paquet-bonne_annee" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/bonne_annee/lang/" reference="fr">
+<traduction module="paquet-bonne_annee" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/bonne_annee/trunk/lang/" reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-bonne_annee?lang_cible=en" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Gilles" lien="https://trad.spip.net/auteur/gilles" />
 	</langue>
