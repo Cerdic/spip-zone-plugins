@@ -1,0 +1,44 @@
+[(#ENV{multiple}|?{
+	#SET{nom,#ENV{nom}\[\]},
+	#SET{nom,#ENV{nom}}
+	}
+)]
+<select name="#GET{nom}" id="champ_#ENV{nom}"[ (#ENV{multiple}|oui)multiple="multiple"]>
+	<option value=""><:formidable:traitements_champ_aucun:></option>
+	[(#ENV{forcer_type}|non)
+		#SET{tab,#ENV{formulaire}}
+	]
+	[(#ENV{forcer_type}|oui)
+		[(#SET{tab,[(#ENV{formulaire}|saisies_lister_par_nom{0})]})]
+	]
+	#SET{padding,0}
+	<BOUCLE_parcours(POUR){tableau #GET{tab}}>
+		#SET{saisie,#VALEUR}
+		<BOUCLE_test_enfants(CONDITION){si #GET{saisie}|table_valeur{saisies}|is_array}>
+		<optgroup style="padding-left:#GET{padding}px" label="[(#GET{saisie}|table_valeur{options}|table_valeur{label}|sinon{#GET{saisie}|table_valeur{options}|table_valeur{nom}})]">
+				#SET{tab,#GET{saisie}|table_valeur{saisies}}
+				#SET{padding,#GET{padding}|plus{20}}
+				<BOUCLE_parcours_recursif(BOUCLE_parcours)/>
+				#SET{padding,#GET{padding}|moins{20}}
+		</optgroup>
+		</BOUCLE_test_enfants>
+			<BOUCLE_test_type(CONDITION){si #ENV{forcer_type}|non|ou{#GET{saisie}|table_valeur{saisie}|in_array{#ENV{forcer_type}}}}>
+			#SET{saisie_currente_nom,#GET{saisie}|table_valeur{options}|table_valeur{nom}}
+			#SET{selected,''}
+			[(#ENV{multiple}|oui)
+				[(#GET{saisie_currente_nom}|in_array{#ENV{valeur,#ENV{saisie_a_positionner}}}|oui)
+					#SET{selected,'selected="selected"'}
+				)]
+			]
+			[(#ENV{multiple}|non)
+				[(#GET{saisie_currente_nom}|=={#ENV{valeur,#ENV{saisie_a_positionner}}}|oui)
+					#SET{selected,'selected="selected"'}
+				)]
+			]
+			<option value="[(#GET{saisie}|table_valeur{options}|table_valeur{nom})]" style="padding-left:#GET{padding}px" #GET{selected}>
+				[(#GET{saisie}|table_valeur{options}|table_valeur{label}|sinon{#GET{saisie}|table_valeur{options}|table_valeur{nom}})]
+			</option>
+			</BOUCLE_test_type>
+		<//B_test_enfants>
+	</BOUCLE_parcours>
+</select>
