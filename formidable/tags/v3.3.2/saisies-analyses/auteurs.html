@@ -1,0 +1,22 @@
+#SET{auteurs,#ARRAY}
+<BOUCLE_reponses(DATA){source table,#ENV{valeurs}}>
+	[(#VALEUR|in_array{#GET{auteurs}|array_keys}|oui)
+		#SET{auteur_valeur,#GET{auteurs}|table_valeur{auteur-#VALEUR}|plus{1}}
+		#SET{auteur,#ARRAY{#VALEUR,#GET{auteur_valeur}|plus{1}}}
+		#SET{auteurs,#GET{auteurs}|array_merge{#GET{auteur}}}
+	]
+	[(#VALEUR|in_array{#GET{auteurs}|array_keys}|non)
+		#SET{auteur,#ARRAY{auteur-#VALEUR,1}}
+		#SET{auteurs,#GET{auteurs}|array_merge{#GET{auteur}}}
+	]
+</BOUCLE_reponses>
+#SET{total, #TOTAL_BOUCLE}
+</B_reponses>
+
+<BOUCLE_auteurs(DATA){source table,#GET{auteurs}}>
+#SET{id_auteur, #CLE|replace{'auteur-', ''}}
+<tr class="tr_liste">
+	<td class="choix"><a href="#INFO_URL{auteur, #CLE}">#INFO_TITRE{auteur, #GET{id_auteur}}</a></td>
+	<td class="stat"[ title="(#VALEUR|titre_nb_reponses|attribut_html)"]>[(#VALEUR|div{#GET{total}}|mult{100})]</td>
+</tr>
+</BOUCLE_auteurs>
