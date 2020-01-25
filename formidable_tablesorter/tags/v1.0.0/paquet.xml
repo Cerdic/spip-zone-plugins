@@ -1,0 +1,20 @@
+<paquet
+	prefix="formidable_ts"
+	categorie="communication"
+	version="1.0.0"
+	etat="stable"
+	compatibilite="[3.1.0;3.2.*]"
+	logo="images/formidable-64.png"
+	documentation="https://contrib.spip.net/5211"
+>
+	<nom>Tablesorter pour Formidable</nom>
+
+	<auteur>Maïeul</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	<pipeline nom="affiche_gauche" inclure="formidable_ts_pipelines.php" />
+
+	<necessite nom="formidable" compatibilite="[3.46.4;[" />
+	<necessite nom="tablesorter" compatibilite="[2.0.0;[" />
+	<necessite nom="saisies" compatibilite="[3.29.0;[" />
+</paquet>
