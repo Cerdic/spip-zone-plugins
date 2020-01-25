@@ -1,4 +1,4 @@
-<traduction module="recommander" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/recommander/trunk/lang/" reference="fr">
+<traduction module="recommander" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/recommander/lang/" reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/recommander?lang_cible=ar" total="5" traduits="2" relire="0" modifs="3" nouveaux="0" pourcent="40.00">
 	</langue>
 	<langue code="en" url="https://trad.spip.net/tradlang_module/recommander?lang_cible=en" total="5" traduits="5" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
