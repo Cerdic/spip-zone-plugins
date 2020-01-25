@@ -1,0 +1,33 @@
+<BOUCLE_formulaire(FORMULAIRES){id_formulaire}{tout}>
+	<strong><:formidable:traitements_aide_memoire:></strong>
+	<dl>
+		<dt>@nom_site_spip@</dt>
+		<dd><:info_nom_site:></dd>
+	</dl>
+	<BOUCLE_champs(POUR){tableau #SAISIES*|unserialize|saisies_lister_par_nom{1}}>
+	[(#VALEUR{saisie}|=={explication}|oui)
+		#SET{label,#VALEUR{options/texte}}
+	]
+	[(#VALEUR{saisie}|=={explication}|non)
+		[(#SET{label, [(#VALEUR|table_valeur{options}|table_valeur{label})]})]
+		[(#SET{label_case, [(#VALEUR|table_valeur{options}|table_valeur{label_case})]})]
+		[(#SET{data, [(#VALEUR|table_valeur{options}|table_valeur{data}|saisies_tableau2chaine)]})]
+		[(#SET{datas, [(#VALEUR|table_valeur{options}|table_valeur{datas}|saisies_tableau2chaine)]})]
+		[(#SET{nom, [(#VALEUR{nom})]})]
+	]
+	[(#VALEUR{saisie}|=={fieldset}|oui)
+	<hr />
+
+	]
+	<dl>
+		<dt>@#CLE@</dt>
+		[<dd>(#GET{label}|sinon{#GET{label_case}}|sinon{#GET{nom}})</dd>]
+		[<dl style="margin-left:1em">
+			<dd>
+			<dt><:saisies:option_datas_label:></dt>
+			<dd>(#GET{data}|sinon{#GET{datas}|propre})</dd>
+			</dd>
+		</dl>]
+	</dl>
+	</BOUCLE_champs>
+</BOUCLE_formulaire>
