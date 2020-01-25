@@ -19,7 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param array $flux
  *   Données du pipeline.
  *
- * @return
+ * @return array
  *   Données du pipelin.
  */
 function secteur_langue_header_prive($flux) {
@@ -50,17 +50,41 @@ function secteur_langue_header_prive($flux) {
  */
 function secteur_langue_pre_edition($flux) {
 	$table = $flux['args']['table'];
-	// Si tradrub actif, on suppose le  système de secteur par langue.
-	// L'article doit donc avoir la mème langue que la rubrique parente. Peut être pas nécessaire, á évaluer.
-	if ($table == 'spip_articles') {
-		$rubrique = sql_fetsel('id_rubrique,lang', $table, 'id_article=' . $flux['args']['id_objet']);
-		if ($lang = sql_getfetsel(
+	// Tout objet dépendant d'une rubrique hérite automatiquement sa langue.
+	if ($trouver_table = charger_fonction('trouver_table', 'base') AND
+			$desc = $trouver_table($table) AND
+			isset($desc['field']['id_rubrique'])) {
+		$identifiant =  id_table_objet($table);
+		$rubrique_parente = sql_fetsel('id_rubrique,lang,' . $identifiant, $table, $identifiant . '=' . $flux['args']['id_objet']);
+		$id_rubrique = _request('id_parent') ? _request('id_parent')  : $rubrique_parente['id_rubrique'];
+		$lang = sql_getfetsel(
 				'lang',
 				'spip_rubriques',
-				'id_rubrique=' . $rubrique['id_rubrique']) and $lang != $rubrique['lang']) {
+				'id_rubrique=' . $id_rubrique);
+		if ($lang != $rubrique_parente['lang']) {
 			$flux['data']['lang'] = $lang;
 		}
 	}
 
 	return $flux;
 }
+
+/**
+ * Modifier le tableau retourné par la fonction traiter d’un formulaire CVT ou effectuer des traitements supplémentaires.
+ *
+ * @param array $flux
+ *   Les données du pipeline
+ *
+ * @return array
+ *   Les données du pipeleine.
+ */
+function secteur_langue_formulaire_traiter($flux) {
+	$form= $flux['args']['form'];
+	// Assurer que la langue enregistré soit celle de la lang_dest, ne fonctionnait plus automatiquement sous spip 3.3.
+	if ($form == 'editer_rubrique' AND $lang = _request('lang_dest')) {
+		sql_updateq('spip_rubriques', ['lang' => $lang, 'langue_choisie' => 'oui'], 'id_rubrique=' . $flux['data']['id_rubrique']);
+	}
+
+	return $flux;
+}
+
