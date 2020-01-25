@@ -495,9 +495,9 @@ var geocoder;]
 				edited = false;
 			}
 		});
+		console.log(editableLayers_[(#ENV{nom})]);
 		if (Object.keys(editableLayers_[(#ENV{nom})]._layers).length == 1) {
 			editableLayers_[(#ENV{nom})].eachLayer(function (layer) {
-				layer.editing.enable();
 				drawControl._toolbars.edit._modes.edit.handler.enable();
 			});
 		}
