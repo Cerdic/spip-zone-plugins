@@ -1,0 +1,17 @@
+<paquet
+	prefix="formidable_ts"
+	categorie="communication"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.1.0;3.2.*]"
+	logo="images/formidable-64.png"
+>
+	<nom>Tablesorter pour Formidable</nom>
+
+	<auteur>Maïeul</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<necessite nom="formidable" compatibilite="[3.46.4;[" />
+
+</paquet>
