@@ -86,9 +86,12 @@ function first_line($text){
  * extraire des données depuis une page wikipedia existante
  * param $titre_page
  * exchars : nombre de caractères à extraire
+ * voir https://www.mediawiki.org/wiki/API:Get_the_contents_of_a_page
  *
  */
 function askwiki($titre_page){
+	
+	$titre_page = rawurlencode(utf8_encode($titre_page));
 	
 	$endPoint = which_wikipedia('api');
 
@@ -97,9 +100,9 @@ function askwiki($titre_page){
 		"format" => "json",
 		"prop" => "extracts",
 		"titles" => $titre_page,
-		"exchars" => "3000",
 		"exlimit" => "1",
-		"formatversion" => "2"
+		"formatversion" => "2",
+		"exsentences" => "1"
 	];
 	
 	$url = $endPoint . "?" . http_build_query( $params );
