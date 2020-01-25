@@ -1,0 +1,48 @@
+#SET{data_cols, #ENV*{data_cols}|saisies_chaine2tableau}
+#SET{data_rows, #ENV*{data_rows}|saisies_chaine2tableau}
+
+<BOUCLE_questions(DATA) {source table, #GET{data_rows}}>
+	#SET{libelles, #VALEUR|explode{'|'}}
+	#SET{choix_question, #CLE}
+	#SET{total_reponses,#ARRAY}
+
+	<tr class="grille_libelle grille_libelle_top">
+		<td>&nbsp;</td>
+		<td>[(#GET{libelles/0})]</td>
+	</tr>
+
+	<BOUCLE_valeurs(DATA) {source table, #ENV{valeurs}}>
+		#SET{reponse,#VALEUR}
+		<BOUCLE_choix(DATA) {source table, #GET{data_cols}}>
+		[(#ENV{multiple}|non)
+			[(#GET{reponse}|table_valeur{#GET{choix_question}}|=={#CLE}|oui)
+				#SET{nbplus, #GET{total_reponses}|table_valeur{#CLE}|plus{1}}
+				#SET_MERGE{total_reponses,#GET{total_reponses},#ARRAY{#CLE,#GET{nbplus}}}
+			]
+		]
+		[(#ENV{multiple}|oui)
+			#SET{valeurs, #GET{reponse}|table_valeur{#GET{choix_question}}}
+			[(#GET{valeurs}|is_array|oui)
+				[(#CLE|in_array{#GET{valeurs}}|oui)
+					#SET{nbplus, #GET{total_reponses}|table_valeur{#CLE}|plus{1}}
+					#SET_MERGE{total_reponses,#GET{total_reponses},#ARRAY{#CLE,#GET{nbplus}}}
+				]
+			]
+		]
+		</BOUCLE_choix>
+	</BOUCLE_valeurs>
+
+	<BOUCLE_choix_affichage(DATA) {source table, #GET{data_cols}}>
+		<tr class="grille_choix">
+			<td class="choix">#VALEUR</td>
+			<td class="stat"[ title="(#GET{total_reponses}|table_valeur{#CLE}|titre_nb_reponses|attribut_html)"]>[(#GET{total_reponses}|table_valeur{#CLE})]</td>
+		</tr>
+	</BOUCLE_choix_affichage>
+
+	[<tr class="grille_libelle grille_libelle_bottom">
+		<td>&nbsp;</td>
+		<td>(#GET{libelles/1})</td>
+	</tr>]
+</BOUCLE_questions>
+
+
