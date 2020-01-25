@@ -1,0 +1,62 @@
+[(#REM)
+
+  Parametres supplementaire :
+  - ** data : tableau de donnees indice=>valeur
+  - defaut : valeur par defaut du parametre
+  - type : type de l'input (defaut: text)
+  - class : classe(s) css ajoutes a l'input
+  - size : taille du champ
+  - maxlength : nombre de caracteres maximum
+  - disable : champ insaisissable ? 'oui' (defaut : '')
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+  - autofocus : indique si le champ prend le focus a l'affichage (HTML5 requis)
+  - placeholder : texte du placeholder
+  - cle_secrete : l'input est une cle secrete. On n'affiche pas la valeur mais simplement un placeholder indiquant les premiers élèments de la clef secrete
+
+
+  Exemple d'appel :
+	[(#SAISIE{input,couleur_foncee,
+		label=<:spa:couleur_foncee:>,
+		size=7,
+		data=#ARRAY{
+				0,valeur0,
+				1,valeur1,
+				2,valeur2}})]
+]
+
+#SET{type,#ENV{type,text}}
+
+[(#REM) data peut être une chaine qu'on sait décomposer ]
+#SET{data, #ENV*{data, #ENV*{datas}}}
+#SET{data, #GET{data}|is_string|?{(#GET{data}|saisies_chaine2tableau), #GET{data}}}
+
+[(#REM) Pas de HTML5, pas de data]
+#SET{data, #HTML5|?{#GET{data}}}
+
+[(#REM)  l'attribut autocomplete ne peut avoir pour valeur que on ou off ]
+#SET{val_autocomplete, #ARRAY}
+#SET{val_autocomplete, #GET{val_autocomplete}|push{on}}
+#SET{val_autocomplete, #GET{val_autocomplete}|push{off}}
+
+[(#REM) cle secrete > on modifie le place holder]
+#SET{placeholder,''}
+[(#ENV{cle_secrete}|oui)
+	#SET{placeholder,#ENV{valeur_forcee,#ENV{valeur,#ENV{{default}}}|saisies_masquer_cle_secrete}
+]
+[(#ENV{cle_secrete}|non)
+	#SET{placeholder,#ENV{placeholder}}
+]
+
+[(#REM) permettre de donner un identifiant de list specifique en option de la saisie
+]#SET{list_id,#ENV{list}}
+[(#REM) Détecter si le tableau est séquentiel ou associatif, pour choisir s'il faut prendre la clé en valeur
+]#SET{data_is_sequential,#GET{data}|is_array|?{#GET{data}|array_keys|=={#VAL{0}|range{#GET{data}|count|moins{1}}}}}
+<B_selection>
+[(#SET{list_id,[(#GET{list_id,[champ_(#ENV{nom})_data]})]})]
+<datalist id="#GET{list_id}">
+<BOUCLE_selection(POUR){tableau #GET{data}}>
+  [<option value="(#GET{data_is_sequential}|?{#VALEUR,#CLE}|attribut_html)">[(#VALEUR|attribut_html)]</option>]
+</BOUCLE_selection>
+</datalist>
+</B_selection>
+<input type="#GET{type}" name="#ENV{nom}" class="#GET{type}[ (#ENV{class})]" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ list="(#GET{list_id})"][ value="(#ENV{cle_secrete}|?{'',#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}})"][ size="(#ENV{size})"][ maxlength="(#ENV{maxlength})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ placeholder="(#GET{placeholder})"][(#HTML5|oui)[(#ENV{obligatoire}|et{#ENV{obligatoire}|!={non}}|oui) required="required"][ min="(#ENV{min})"][ max="(#ENV{max})"][ step="(#ENV{step})"][(#ENV{autofocus}|et{#ENV{autofocus}|!={non}}|oui) autofocus="autofocus"]][(#GET{val_autocomplete}|find{#ENV{autocomplete}}|oui) autocomplete="#ENV{autocomplete}"][ aria-describedby="(#ENV{describedby})"][ (#ENV*{attributs})] />
