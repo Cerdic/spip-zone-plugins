@@ -1,0 +1,7 @@
+<[(#ENV{saisies_base_conteneur,[(#VAL{li}|saisie_balise_structure_formulaire)]})] class="editer pleine_largeur editer_explication[ explication_(#ENV{nom})][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]"[ data-id="(#ENV{id_saisie})"]>
+	<div class="explication">
+		#ENV*{inserer_debut}
+		[(#ENV*{texte}|propre)]
+		#ENV*{inserer_fin}
+	</div>
+</[(#ENV{saisies_base_conteneur,[(#VAL{li}|saisie_balise_structure_formulaire)]})]>
