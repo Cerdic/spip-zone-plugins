@@ -1,7 +1,7 @@
 <paquet
 	prefix="gisgeom"
 	categorie="divers"
-	version="1.11.6"
+	version="1.11.7"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/gis.png"
@@ -28,6 +28,6 @@
 	<pipeline nom="pre_boucle" inclure="gisgeom_pipelines.php" />
 
 	<necessite nom="gis" compatibilite="[4.42.0;[" />
-	<utilise nom="saisies" compatibilite="[3.26.0;[" />
+	<utilise nom="saisies" compatibilite="[3.27.5;[" />
 	<lib nom="geoPHP-1.2" lien="https://github.com/phayes/geoPHP/archive/1.2.zip" />
 </paquet>
