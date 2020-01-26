@@ -1,7 +1,7 @@
 <paquet
 	prefix="cache_cool"
 	categorie="performance"
-	version="1.0.1"
+	version="1.0.2"
 	etat="stable"
 	compatibilite="[3.1.0;3.3.*]"
 	logo="images/cache_cool-128.png"

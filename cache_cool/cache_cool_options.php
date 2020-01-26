@@ -301,6 +301,11 @@ function cache_cool_set_global_contexte($c){
 	
 	url_de_base($c['url_de_base']); unset($c['url_de_base']);
 	nettoyer_uri($c['nettoyer_uri']); unset($c['nettoyer_uri']);
+	foreach (array_keys($GLOBALS) as $k){
+		if (!isset($c[$k]) and $k!=='GLOBALS'){
+			unset($GLOBALS[$k]);
+		}
+	}
 	foreach($c as $k=>$v){
 		$GLOBALS[$k] = $v;
 	}
