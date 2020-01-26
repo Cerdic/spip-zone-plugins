@@ -148,8 +148,9 @@ function cache_cool_flush($content){
 	if (isset($GLOBALS['cache_cool_queue']) and is_array($GLOBALS['cache_cool_queue']) and $n=count($GLOBALS['cache_cool_queue'])) {
 		$close = true;
 		if (defined('_DIR_PLUGIN_MEMOIZATION')){
-			#spip_log('meta cache_cool_action_refresh : '.$GLOBALS['meta']['cache_cool_action_refresh'],'cachecool'._LOG_DEBUG);
+			#spip_log('meta cache_cool_action_refresh : '.$GLOBALS['meta']['cache_cool_action_refresh']." (il y a ".($_SERVER['REQUEST_TIME']-$GLOBALS['meta']['cache_cool_action_refresh'])."s)",'cachecool'._LOG_DEBUG);
 			if (!isset($GLOBALS['meta']['cache_cool_action_refresh']) OR $GLOBALS['meta']['cache_cool_action_refresh']<$_SERVER['REQUEST_TIME']-86400){
+				#spip_log('meta cache_cool_action_refresh_test : '.$GLOBALS['meta']['cache_cool_action_refresh_test']." (il y a ".($_SERVER['REQUEST_TIME']-$GLOBALS['meta']['cache_cool_action_refresh_test'])."s)",'cachecool'._LOG_DEBUG);
 				if (!isset($GLOBALS['meta']['cache_cool_action_refresh_test']) OR $GLOBALS['meta']['cache_cool_action_refresh_test']<$_SERVER['REQUEST_TIME']-86400){
 					ecrire_meta('cache_cool_action_refresh_test',$_SERVER['REQUEST_TIME']);
 					$url = generer_url_action('cache_cool_refresh','',true);
@@ -176,8 +177,9 @@ function cache_cool_flush($content){
 						spip_log("Mise a jour $n cache lancee en async sur $url",'cachecool'._LOG_DEBUG);
 					}
 				}
-				else
+				else {
 					spip_log("cache_set('cachecool-$id') return false",'cachecool');
+				}
 			}
 		}
 		if ($close){
@@ -327,17 +329,37 @@ function cache_cool_set_global_contexte($c){
  * @return bool
  */
 function cache_cool_async_curl($url){
-	// Si fsockopen est possible, on lance l'url via un socket
-	// en asynchrone
+	#spip_log("cache_cool_async_curl $url","cachecool" . _LOG_DEBUG);
+
+	// methode la plus rapide :
+	// Si fsockopen est possible, on lance le cron via un socket en asynchrone
+	// si fsockopen echoue (disponibilite serveur, firewall) on essaye pas cURL
+	// car on a toutes les chances d'echouer pareil mais sans moyen de le savoir
+	// on passe direct a la methode background-image
 	if(function_exists('fsockopen')){
 		$parts=parse_url($url);
-		$fp = @fsockopen($parts['host'],isset($parts['port'])?$parts['port']:80,$errno, $errstr, 30);
+		spip_log("cache_cool_async_curl avec fsockopen ".json_encode($parts),"cachecool" . _LOG_DEBUG);
+		switch ($parts['scheme']) {
+			case 'https':
+				$scheme = 'ssl://';
+				$port = 443;
+				break;
+			case 'http':
+			default:
+				$scheme = '';
+				$port = 80;
+		}
+		$fp = @fsockopen($scheme . $parts['host'], isset($parts['port']) ? $parts['port'] : $port, $errno, $errstr, 1);
 		if ($fp) {
+			$host_sent = $parts['host'];
+			if (isset($parts['port']) and $parts['port'] !== $port) {
+				$host_sent .= ':' . $parts['port'];
+			}
 			$timeout = 200; // ms
 			stream_set_timeout($fp, 0, $timeout * 1000);
 			$query = $parts['path'].($parts['query']?"?".$parts['query']:"");
 			$out = "GET ".$query." HTTP/1.1\r\n";
-			$out.= "Host: ".$parts['host']."\r\n";
+			$out.= "Host: ".$host_sent."\r\n";
 			$out.= "Connection: Close\r\n\r\n";
 			fwrite($fp, $out);
 			spip_timer('cache_cool_async_curl');
@@ -353,9 +375,9 @@ function cache_cool_async_curl($url){
 			return true;
 		}
 	}
-
 	// ici lancer le cron par un CURL asynchrone si CURL est present
-	if (function_exists("curl_init")){
+	elseif (function_exists("curl_init")){
+		spip_log("cache_cool_async_curl avec curl $url","cachecool" . _LOG_DEBUG);
 		//setting the curl parameters.
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
