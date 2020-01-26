@@ -1,4 +1,4 @@
-<traduction module="gravatar" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/gravatar/trunk/lang/" reference="fr">
+<traduction module="gravatar" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/gravatar/lang/" reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/gravatar?lang_cible=de" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 	</langue>
