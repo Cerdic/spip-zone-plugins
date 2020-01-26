@@ -22,7 +22,6 @@ function bigfoot_insert_head_css($flux){
  */
 function bigfoot_insert_head($flux){
 	$flux .="\n".'<script type="text/javascript" src="'. find_in_path('javascript/littlefoot.js') .'"></script>';
-	$voir_note = attribut_html(_T('bigfoot:voir_note'));
 	$flux .= <<<EOH
 <script type="text/javascript">/* <![CDATA[ */
 (function($) {
@@ -34,7 +33,7 @@ function bigfoot_insert_head($flux){
 			anchorPattern: /(nb\d+(-\d+)?(footnote|appendix))/gi,
 			anchorParentSelector: "span",
 			footnoteSelector: "div",
-			buttonTemplate: '<span class="littlefoot-footnote__container"><button aria-controls="fncontent:<%= id %>" aria-expanded="false" aria-label="Footnote <%= number %>" class="littlefoot-footnote__button littlefoot-footnote__button__number" data-footnote-button-id="<%= id %>" data-footnote-number="<%= number %>" id="<%= reference %>" rel="footnote" title="$voir_note <%= number %>"><svg viewbox="0 0 31 6" preserveAspectRatio="xMidYMid"><circle r="3" cx="3" cy="3" fill="white"></circle><circle r="3" cx="15" cy="3" fill="white"></circle><circle r="3" cx="27" cy="3" fill="white"></circle></svg></button></span>'
+			buttonTemplate: '<span class="littlefoot-footnote__container"><button aria-controls="fncontent:<%= id %>" aria-expanded="false" aria-label="Footnote <%= number %>" class="littlefoot-footnote__button littlefoot-footnote__button__number" data-footnote-button-id="<%= id %>" data-footnote-number="<%= number %>" id="<%= reference %>" rel="footnote" title="See Footnote <%= number %>"><svg viewbox="0 0 31 6" preserveAspectRatio="xMidYMid"><circle r="3" cx="3" cy="3" fill="white"></circle><circle r="3" cx="15" cy="3" fill="white"></circle><circle r="3" cx="27" cy="3" fill="white"></circle></svg></button></span>'
 		});
 		jQuery('div.notes').hide();
 	};
