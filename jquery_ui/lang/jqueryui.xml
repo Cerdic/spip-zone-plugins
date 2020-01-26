@@ -1,4 +1,4 @@
-<traduction module="jqueryui" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/jquery_ui/trunk/lang/" reference="fr">
+<traduction module="jqueryui" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/jquery_ui/lang/" reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/jqueryui?lang_cible=en" total="51" traduits="51" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
