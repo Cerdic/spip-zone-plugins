@@ -213,31 +213,6 @@ function cache_cool_process($force=false){
 	}
 }
 
-// en SPIP 3 le test de doublon sur f_jQuery a ete supprime,
-// plus la peine de surcharger
-if (intval($GLOBALS['spip_version_branche'])<3){
-
-$GLOBALS['spip_pipeline']['insert_head'] = str_replace('|f_jQuery','|cache_cool_f_jQuery',$GLOBALS['spip_pipeline']['insert_head']);
-
-// Inserer jQuery sans test de doublon
-// incompatible avec le calcul multiple de squelettes sur un meme hit
-// https://code.spip.net/@f_jQuery
-function cache_cool_f_jQuery ($texte) {
-	$x = '';
-	foreach (pipeline('jquery_plugins',
-	array(
-		'javascript/jquery.js',
-		'javascript/jquery.form.js',
-		'javascript/ajaxCallback.js'
-	)) as $script)
-		if ($script = find_in_path($script))
-			$x .= "\n<script src=\"$script\" type=\"text/javascript\"></script>\n";
-	$texte = $x.$texte;
-	
-	return $texte;
-}
-}
-
 /**
  * Definir un nouveau contexte de globales (en sauvegardant l'ancien),
  * ou restaurer l'ancien contexte avec la valeur false
