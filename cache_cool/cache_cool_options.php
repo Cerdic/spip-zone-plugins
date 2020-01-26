@@ -148,9 +148,8 @@ function cache_cool_flush($content){
 	if (isset($GLOBALS['cache_cool_queue']) and is_array($GLOBALS['cache_cool_queue']) and $n=count($GLOBALS['cache_cool_queue'])) {
 		$close = true;
 		if (defined('_DIR_PLUGIN_MEMOIZATION')){
-			#spip_log('meta cache_cool_action_refresh : '.$GLOBALS['meta']['cache_cool_action_refresh']." (il y a ".($_SERVER['REQUEST_TIME']-$GLOBALS['meta']['cache_cool_action_refresh'])."s)",'cachecool'._LOG_DEBUG);
+			#spip_log('meta cache_cool_action_refresh : '.$GLOBALS['meta']['cache_cool_action_refresh'],'cachecool'._LOG_DEBUG);
 			if (!isset($GLOBALS['meta']['cache_cool_action_refresh']) OR $GLOBALS['meta']['cache_cool_action_refresh']<$_SERVER['REQUEST_TIME']-86400){
-				#spip_log('meta cache_cool_action_refresh_test : '.$GLOBALS['meta']['cache_cool_action_refresh_test']." (il y a ".($_SERVER['REQUEST_TIME']-$GLOBALS['meta']['cache_cool_action_refresh_test'])."s)",'cachecool'._LOG_DEBUG);
 				if (!isset($GLOBALS['meta']['cache_cool_action_refresh_test']) OR $GLOBALS['meta']['cache_cool_action_refresh_test']<$_SERVER['REQUEST_TIME']-86400){
 					ecrire_meta('cache_cool_action_refresh_test',$_SERVER['REQUEST_TIME']);
 					$url = generer_url_action('cache_cool_refresh','',true);
@@ -177,9 +176,8 @@ function cache_cool_flush($content){
 						spip_log("Mise a jour $n cache lancee en async sur $url",'cachecool'._LOG_DEBUG);
 					}
 				}
-				else {
+				else
 					spip_log("cache_set('cachecool-$id') return false",'cachecool');
-				}
 			}
 		}
 		if ($close){
@@ -211,6 +209,31 @@ function cache_cool_process($force=false){
 			public_produire_page($args[0],$args[1],$args[2],$args[3],$args[4],$args[5],$args[6],$args[7],$args[8],$args[9]);
 		}
 	}
+}
+
+// en SPIP 3 le test de doublon sur f_jQuery a ete supprime,
+// plus la peine de surcharger
+if (intval($GLOBALS['spip_version_branche'])<3){
+
+$GLOBALS['spip_pipeline']['insert_head'] = str_replace('|f_jQuery','|cache_cool_f_jQuery',$GLOBALS['spip_pipeline']['insert_head']);
+
+// Inserer jQuery sans test de doublon
+// incompatible avec le calcul multiple de squelettes sur un meme hit
+// https://code.spip.net/@f_jQuery
+function cache_cool_f_jQuery ($texte) {
+	$x = '';
+	foreach (pipeline('jquery_plugins',
+	array(
+		'javascript/jquery.js',
+		'javascript/jquery.form.js',
+		'javascript/ajaxCallback.js'
+	)) as $script)
+		if ($script = find_in_path($script))
+			$x .= "\n<script src=\"$script\" type=\"text/javascript\"></script>\n";
+	$texte = $x.$texte;
+	
+	return $texte;
+}
 }
 
 /**
@@ -245,12 +268,11 @@ function cache_cool_global_context($push){
  */
 function cache_cool_get_global_context(){
 	$contexte = array();
-	$globals_to_save = array(
+	foreach(array(
 		'spip_lang',
 		'visiteur_session',
 		'auteur_session',
 		'marqueur',
-		'marqueur_skel',
 		'dossier_squelettes',
 		'_COOKIE',
 		'_SERVER',
@@ -259,15 +281,8 @@ function cache_cool_get_global_context(){
 		'profondeur_url',
 		'REQUEST_URI',
 		'REQUEST_METHOD',
-	);
-	if (defined('_CACHE_COOL_GLOBALS_TO_SAVE')) {
-		$globals_to_save = array_merge($globals_to_save, explode(',', _CACHE_COOL_GLOBALS_TO_SAVE));
-		$globals_to_save = array_filter($globals_to_save);
-	}
-
-	foreach($globals_to_save as $v) {
+	) as $v)
 		$contexte[$v] = (isset($GLOBALS[$v])?$GLOBALS[$v]:null);
-	}
 	$contexte['url_de_base'] = url_de_base(false);
 	$contexte['nettoyer_uri'] = nettoyer_uri();
 	return $contexte;
@@ -298,61 +313,25 @@ function cache_cool_set_global_contexte($c){
 	}
 }
 
-/**
- * Un curl async
- * @param $url
- * @return bool
- */
 function cache_cool_async_curl($url){
-	#spip_log("cache_cool_async_curl $url","cachecool" . _LOG_DEBUG);
-
-	// methode la plus rapide :
-	// Si fsockopen est possible, on lance le cron via un socket en asynchrone
-	// si fsockopen echoue (disponibilite serveur, firewall) on essaye pas cURL
-	// car on a toutes les chances d'echouer pareil mais sans moyen de le savoir
-	// on passe direct a la methode background-image
+	// Si fsockopen est possible, on lance l'url via un socket
+	// en asynchrone
 	if(function_exists('fsockopen')){
 		$parts=parse_url($url);
-		spip_log("cache_cool_async_curl avec fsockopen ".json_encode($parts),"cachecool" . _LOG_DEBUG);
-		switch ($parts['scheme']) {
-			case 'https':
-				$scheme = 'ssl://';
-				$port = 443;
-				break;
-			case 'http':
-			default:
-				$scheme = '';
-				$port = 80;
-		}
-		$fp = @fsockopen($scheme . $parts['host'], isset($parts['port']) ? $parts['port'] : $port, $errno, $errstr, 1);
+		$fp = @fsockopen($parts['host'],isset($parts['port'])?$parts['port']:80,$errno, $errstr, 30);
 		if ($fp) {
-			$host_sent = $parts['host'];
-			if (isset($parts['port']) and $parts['port'] !== $port) {
-				$host_sent .= ':' . $parts['port'];
-			}
-			$timeout = 200; // ms
-			stream_set_timeout($fp, 0, $timeout * 1000);
 			$query = $parts['path'].($parts['query']?"?".$parts['query']:"");
 			$out = "GET ".$query." HTTP/1.1\r\n";
-			$out.= "Host: ".$host_sent."\r\n";
+			$out.= "Host: ".$parts['host']."\r\n";
 			$out.= "Connection: Close\r\n\r\n";
 			fwrite($fp, $out);
-			spip_timer('cache_cool_async_curl');
-			$t = 0;
-			// on lit la reponse si possible pour fermer proprement la connexion
-			// avec un timeout total de 200ms pour ne pas se bloquer
-			while (!feof($fp) and $t < $timeout) {
-				@fgets($fp, 1024);
-				$t += spip_timer('cache_cool_async_curl', true);
-				spip_timer('cache_cool_async_curl');
-			}
 			fclose($fp);
 			return true;
 		}
 	}
+
 	// ici lancer le cron par un CURL asynchrone si CURL est present
-	elseif (function_exists("curl_init")){
-		spip_log("cache_cool_async_curl avec curl $url","cachecool" . _LOG_DEBUG);
+	if (function_exists("curl_init")){
 		//setting the curl parameters.
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -366,3 +345,4 @@ function cache_cool_async_curl($url){
 	}
 	return false;
 }
+?>
