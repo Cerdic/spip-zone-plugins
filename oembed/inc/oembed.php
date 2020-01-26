@@ -81,7 +81,6 @@ function oembed_lister_providers() {
 		'http://www.facebook.com/questions/*'     => 'https://www.facebook.com/plugins/post/oembed.json/',
 		'http://www.facebook.com/notes/*'         => 'https://www.facebook.com/plugins/post/oembed.json/',
 		'http://www.facebook.com/*/videos/*'      => 'https://www.facebook.com/plugins/video/oembed.json/',
-		'http://*.arte.tv/*/videos/*'             => 'https://api.arte.tv/api/player/v1/oembed/',
 
 		'http://egliseinfo.catholique.fr/*'       => 'http://egliseinfo.catholique.fr/api/oembed',
 
