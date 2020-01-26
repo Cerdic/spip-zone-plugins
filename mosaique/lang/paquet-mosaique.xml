@@ -1,4 +1,4 @@
-<traduction module="paquet-mosaique" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/saisies/lang/" reference="fr">
+<traduction module="paquet-mosaique" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/saisies/lang/" reference="fr">
 	<langue code="en" />
 	<langue code="fr" />
 </traduction>
