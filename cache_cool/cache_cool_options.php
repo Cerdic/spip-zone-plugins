@@ -268,11 +268,12 @@ function cache_cool_global_context($push){
  */
 function cache_cool_get_global_context(){
 	$contexte = array();
-	foreach(array(
+	$globals_to_save = array(
 		'spip_lang',
 		'visiteur_session',
 		'auteur_session',
 		'marqueur',
+		'marqueur_skel',
 		'dossier_squelettes',
 		'_COOKIE',
 		'_SERVER',
@@ -281,8 +282,15 @@ function cache_cool_get_global_context(){
 		'profondeur_url',
 		'REQUEST_URI',
 		'REQUEST_METHOD',
-	) as $v)
+	);
+	if (defined('_CACHE_COOL_GLOBALS_TO_SAVE')) {
+		$globals_to_save = array_merge($globals_to_save, explode(',', _CACHE_COOL_GLOBALS_TO_SAVE));
+		$globals_to_save = array_filter($globals_to_save);
+	}
+
+	foreach($globals_to_save as $v) {
 		$contexte[$v] = (isset($GLOBALS[$v])?$GLOBALS[$v]:null);
+	}
 	$contexte['url_de_base'] = url_de_base(false);
 	$contexte['nettoyer_uri'] = nettoyer_uri();
 	return $contexte;
@@ -313,10 +321,9 @@ function cache_cool_set_global_contexte($c){
 	}
 }
 
-
 /**
  * Un curl async
- * @param string $url
+ * @param $url
  * @return bool
  */
 function cache_cool_async_curl($url){
