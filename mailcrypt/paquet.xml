@@ -1,0 +1,22 @@
+<paquet
+	prefix="mailcrypt"
+	categorie="performance"
+	version="2.4.4"
+	etat="stable"
+	compatibilite="[2.1.0;3.1.*]"
+	logo="images/mailcrypt-256.png"
+	documentation="http://contrib.spip.net/?article3828"
+>	
+
+	<nom>MailCrypt 2</nom>
+	<!-- Protéger les liens de courriels -->
+
+	<auteur lien="http://contrib.spip.net/Alexis-Roussel">Alexis Roussel</auteur>
+	<auteur lien="http://contrib.spip.net/paolo">Paolo</auteur>
+	<auteur lien="http://contrib.spip.net/Patrice-Vanneufville">Patrice Vanneufville</auteur>
+	<auteur lien="http://contrib.spip.net/Joseph">Joseph</auteur>
+
+	<pipeline nom="post_propre" inclure="mailcrypt_fonctions.php" />
+	<pipeline nom="affichage_final" inclure="mailcrypt_fonctions.php" />
+	<pipeline nom="facteur_pre_envoi" inclure="mailcrypt_fonctions.php" />
+</paquet>
