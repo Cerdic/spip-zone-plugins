@@ -1,4 +1,4 @@
-<traduction module="paquet-licence" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/licence/trunk/lang/" reference="fr">
+<traduction module="paquet-licence" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/licence/lang/" reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-licence?lang_cible=de" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 	</langue>
