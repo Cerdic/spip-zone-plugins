@@ -91,7 +91,7 @@ function first_paragraph($text){
  */
 function askwiki($titre_page){
 	
-	$titre_page = rawurlencode(utf8_encode($titre_page));
+	//$titre_page = rawurlencode(utf8_encode($titre_page));
 	
 	$endPoint = which_wikipedia('api');
 
