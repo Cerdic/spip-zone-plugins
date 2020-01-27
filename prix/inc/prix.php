@@ -50,7 +50,7 @@ function inc_prix_ht_dist($objet, $id_objet, $options = array(), $serveur = ''){
 		// Existe-t-il une fonction précise pour le prix HT de ce type d'objet : prix_<objet>_ht() dans prix/<objet>.php
 		if ($fonction_ht = charger_fonction('ht', "prix/$objet", true)){
 			// On passe la ligne SQL en paramètre pour ne pas refaire la requête
-			$prix_ht = $fonction_ht($id_objet, $ligne);
+			$prix_ht = $fonction_ht($id_objet, $ligne, $options);
 		}
 		// S'il n'y a pas de fonction, regardons s'il existe des champs normalisés, ce qui évite d'écrire une fonction pour rien
 		elseif (!empty($ligne['prix_ht'])) {
@@ -68,7 +68,8 @@ function inc_prix_ht_dist($objet, $id_objet, $options = array(), $serveur = ''){
 					'objet' => $objet,
 					'id_objet' => $id_objet,
 					'type_objet' => $objet, // déprécié, utiliser plutôt "objet"
-					'prix_ht' => $prix_ht
+					'prix_ht' => $prix_ht,
+					'options' => $options,
 				),
 				'data' => $prix_ht
 			)
@@ -120,16 +121,17 @@ function inc_prix_dist($objet, $id_objet, $options = array(), $serveur = ''){
 	// On va d'abord chercher le prix HT. On délègue le test de présence de l'objet dans cette fonction.
 	$fonction_prix_ht = charger_fonction('ht', 'inc/prix');
 	$objet = objet_type($objet);
-	$prix = $prix_ht = $fonction_prix_ht($objet, $id_objet, 0, $options['serveur']);
+	$options_ht = array_merge($options, array('arrondi'=>0));
+	$prix = $prix_ht = $fonction_prix_ht($objet, $id_objet, $options_ht);
 	$taxes = array();
 	
 	// On cherche maintenant s'il existe une personnalisation pour le prix total TTC : prix_<objet>() dans prix/<objet>.php
 	if ($fonction_prix_objet = charger_fonction($objet, 'prix/', true)){
-		$prix = $fonction_prix_objet($id_objet, $prix_ht);
+		$prix = $fonction_prix_objet($id_objet, $prix_ht, $options);
 	}
 	// Sinon on appelle une fonction générique pour trouver les taxes d'un objet, et on ajoute au HT
 	elseif ($fonction_taxes = charger_fonction('taxes', 'inc/', true)) {
-		$taxes = $fonction_taxes($objet, $id_objet);
+		$taxes = $fonction_taxes($objet, $id_objet, $options);
 		$taxes_total = array_sum(array_column($taxes, 'montant'));
 		$prix = $prix_ht + $taxes_total;
 	}
@@ -143,7 +145,7 @@ function inc_prix_dist($objet, $id_objet, $options = array(), $serveur = ''){
 				'id_objet' => $id_objet,
 				'type_objet' => $objet, // déprécié, utiliser plutôt "objet"
 				'prix_ht' => $prix_ht,
-				'prix' => $prix,
+				'options' => $options,
 				'taxes' => $taxes,
 			),
 			'data' => $prix
