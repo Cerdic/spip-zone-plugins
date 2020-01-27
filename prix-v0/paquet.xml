@@ -2,7 +2,7 @@
 	prefix="prix"
 	categorie="outil"
 	version="0.1.17"
-	etat="dev"
+	etat="stable"
 	compatibilite="[2.1.8;3.2.*]"
 	logo="prive/themes/spip/images/prix-64.png"
 	documentation="https://contrib.spip.net/Plugin-API-Prix"
