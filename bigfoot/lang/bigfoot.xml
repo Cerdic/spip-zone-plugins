@@ -1,4 +1,4 @@
-<traduction module="bigfoot" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/bigfoot/trunk/lang/" reference="fr">
+<traduction module="bigfoot" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/bigfoot/lang/" reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/bigfoot?lang_cible=en" total="1" traduits="1" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 	</langue>
