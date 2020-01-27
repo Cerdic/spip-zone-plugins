@@ -1,8 +1,8 @@
 #HTTP_HEADER{Content-Type: text/plain; charset=#CHARSET}
 #CACHE{0}
 #SET{resultats, #LISTE}
-<BOUCLE_s(ARTICLES){statut==.}{titre LIKE %(#ENV{q})%}{0,20}{par multi titre}>
-<BOUCLE_h(HIERARCHIE){statut==.}{n-2,2}>[(#SET{rub,[(#TITRE|couper{12,''}) > ]})]</BOUCLE_h>
+<BOUCLE_s(ARTICLES){tout}{statut==.}{titre LIKE %(#ENV{q})%}{0,20}{par multi titre}>
+<BOUCLE_h(HIERARCHIE){statut==.}{n-2,2}>[(#SET{rub,[(#TITRE|couper{12,''}) > ]})]</BOUCLE_h>[(#SET{rub,Page unique > })]<//B_h>
 [(#SET{resultats, [(#GET{resultats}|push{[(#ARRAY{label,[(#GET{rub}|textebrut)][(#TITRE|textebrut)],value,[(#TITRE|textebrut)],id,#ID_ARTICLE})]})]})]
 </BOUCLE_s>
 [(#GET{resultats}|json_encode)]
