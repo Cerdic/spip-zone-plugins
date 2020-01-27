@@ -6,12 +6,36 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /*
  * Permet d'obtenir le prix HT d'un objet SPIP. C'est le résultat de cette fonction qui est utilisée pour calculer le prix TTC.
  *
- * @param string $objet Le type de l'objet
- * @param int $id_objet L'identifiant de l'objet
+ * @param string $objet
+ *   Le type de l'objet
+ * @param int $id_objet
+ *   L'identifiant de l'objet
+ * @param array $options
+ *   Tableau d'options
+ *   - arrondi
+ *   - serveur
+ *   ou un entier pour l'arrondi pour compat avec l'ancienne signature
+ * @param string $serveur
+ *   Déprécié. Autre base distante.
  * @return float Retourne le prix HT de l'objet sinon 0
  */
-function inc_prix_ht_dist($objet, $id_objet, $arrondi = 2, $serveur = ''){
+function inc_prix_ht_dist($objet, $id_objet, $options = array(), $serveur = ''){
 	$prix_ht = 0;
+	
+	// Compatibilité avec l'ancienne signature
+	if (is_int($options)) {
+		$options = array(
+			'arrondi' => $options,
+			'serveur' => $serveur,
+		);
+	}
+	// Options par défaut
+	$options_defaut = array(
+		'arrondi' => 2,
+		'serveur' => '',
+	);
+	// On fusionne avec les défauts
+	$options = array_merge($options_defaut, $options);
 	
 	// Cherchons d'abord si l'objet existe bien
 	if (
@@ -19,9 +43,9 @@ function inc_prix_ht_dist($objet, $id_objet, $arrondi = 2, $serveur = ''){
 		and $id_objet = intval($id_objet)
 		and include_spip('base/connect_sql')
 		and $objet = objet_type($objet)
-		and $table_sql = table_objet_sql($objet, $serveur)
-		and $cle_objet = id_table_objet($objet, $serveur)
-		and $ligne = sql_fetsel('*', $table_sql, "$cle_objet = $id_objet",'','','','',$serveur)
+		and $table_sql = table_objet_sql($objet, $options['serveur'])
+		and $cle_objet = id_table_objet($objet, $options['serveur'])
+		and $ligne = sql_fetsel('*', $table_sql, "$cle_objet = $id_objet", '', '', '', '', $options['serveur'])
 	){
 		// Existe-t-il une fonction précise pour le prix HT de ce type d'objet : prix_<objet>_ht() dans prix/<objet>.php
 		if ($fonction_ht = charger_fonction('ht', "prix/$objet", true)){
@@ -52,8 +76,8 @@ function inc_prix_ht_dist($objet, $id_objet, $arrondi = 2, $serveur = ''){
 	}
 	
 	// Si on demande un arrondi, on le fait
-	if ($arrondi) {
-		$prix_ht = round($prix_ht, $arrondi);
+	if ($options['arrondi']) {
+		$prix_ht = round($prix_ht, $options['arrondi']);
 	}
 	
 	return $prix_ht;
@@ -62,17 +86,41 @@ function inc_prix_ht_dist($objet, $id_objet, $arrondi = 2, $serveur = ''){
 /*
  * Permet d'obtenir le prix final TTC d'un objet SPIP quel qu'il soit.
  *
- * @param string $objet Le type de l'objet
- * @param int $id_objet L'identifiant de l'objet
+ * @param string $objet
+ *   Le type de l'objet
+ * @param int $id_objet
+ *   L'identifiant de l'objet
+ * @param array $options
+ *   Tableau d'options
+ *   - arrondi
+ *   - serveur
+ *   ou un entier pour l'arrondi pour compat avec l'ancienne signature
+ * @param string $serveur
+ *   Déprécié. Autre base distante.
  * @return float Retourne le prix TTC de l'objet sinon 0
  */
-function inc_prix_dist($objet, $id_objet, $arrondi = 2, $serveur = ''){
+function inc_prix_dist($objet, $id_objet, $options = array(), $serveur = ''){
 	include_spip('base/connect_sql');
+	
+	// Compatibilité avec l'ancienne signature
+	if (is_int($options)) {
+		$options = array(
+			'arrondi' => $options,
+			'serveur' => $serveur,
+		);
+	}
+	// Options par défaut
+	$options_defaut = array(
+		'arrondi' => 2,
+		'serveur' => '',
+	);
+	// On fusionne avec les défauts
+	$options = array_merge($options_defaut, $options);
 	
 	// On va d'abord chercher le prix HT. On délègue le test de présence de l'objet dans cette fonction.
 	$fonction_prix_ht = charger_fonction('ht', 'inc/prix');
 	$objet = objet_type($objet);
-	$prix = $prix_ht = $fonction_prix_ht($objet, $id_objet, 0, $serveur);
+	$prix = $prix_ht = $fonction_prix_ht($objet, $id_objet, 0, $options['serveur']);
 	$taxes = array();
 	
 	// On cherche maintenant s'il existe une personnalisation pour le prix total TTC : prix_<objet>() dans prix/<objet>.php
@@ -103,8 +151,8 @@ function inc_prix_dist($objet, $id_objet, $arrondi = 2, $serveur = ''){
 	);
 	
 	// Si on demande un arrondi, on le fait
-	if ($arrondi) {
-		$prix = round($prix, $arrondi);
+	if ($options['arrondi']) {
+		$prix = round($prix, $options['arrondi']);
 	}
 	
 	// Et c'est fini
