@@ -20,6 +20,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return float Retourne le prix HT de l'objet sinon 0
  */
 function inc_prix_ht_dist($objet, $id_objet, $options = array(), $serveur = ''){
+	include_spip('base/objets');
 	$prix_ht = 0;
 	
 	// Compatibilité avec l'ancienne signature
@@ -41,7 +42,6 @@ function inc_prix_ht_dist($objet, $id_objet, $options = array(), $serveur = ''){
 	if (
 		$objet
 		and $id_objet = intval($id_objet)
-		and include_spip('base/connect_sql')
 		and $objet = objet_type($objet)
 		and $table_sql = table_objet_sql($objet, $options['serveur'])
 		and $cle_objet = id_table_objet($objet, $options['serveur'])
@@ -100,8 +100,8 @@ function inc_prix_ht_dist($objet, $id_objet, $options = array(), $serveur = ''){
  *   Déprécié. Autre base distante.
  * @return float Retourne le prix TTC de l'objet sinon 0
  */
-function inc_prix_dist($objet, $id_objet, $options = array(), $serveur = ''){
-	include_spip('base/connect_sql');
+function inc_prix_dist($objet, $id_objet, $options = array(), $serveur = '') {
+	include_spip('base/objets');
 	
 	// Compatibilité avec l'ancienne signature
 	if (is_int($options)) {
