@@ -129,17 +129,18 @@
 	<table class="spip calendrier">
 		<tbody>
 			<BOUCLE_commandes_mois(DATA){enum 1,12}>
+			#SET{lemois,#VAL{%02d}|sprintf{#VALEUR}}
 			[(#COMPTEUR_BOUCLE|modulo{3}|=={1}|oui)<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,'','','',row_even,'','',''})]">]
 				#SET{nom_mois,#VAL{1970-}|concat{#VALEUR,'-1'}|nom_mois{abbr}|ucfirst}
 				[(#VALEUR|in_array{#GET{mois}}|oui)
 				<td>
 					[(#SELF
-						|parametre_url{#GET{param_mois},#VALEUR}
+						|parametre_url{#GET{param_mois},#GET{lemois}}
 						|lien_ou_expose{
 							#GET{nom_mois},
-							#GET{mois_env}|=={#VALEUR},
+							#GET{mois_env}|=={#GET{lemois}},
 							ajax}
-						|inserer_attribut{data-ajaxreload_args,\{"[(#GET{param_mois})]":"[(#VALEUR)]"\}})]
+						|inserer_attribut{data-ajaxreload_args,\{"[(#GET{param_mois})]":"[(#GET{lemois})]"\}})]
 				</td>
 				][(#VALEUR|in_array{#GET{mois}}|non)
 				<td class="inactif"><span>#GET{nom_mois}</span></td>
