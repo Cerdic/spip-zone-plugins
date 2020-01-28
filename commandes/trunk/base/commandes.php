@@ -93,6 +93,7 @@ function commandes_declarer_tables_objets_sql($tables) {
 			'retour' => 'commandes:statut_retour',
 			'retour_partiel' => 'commandes:statut_retour_partiel',
 			'erreur' => 'commandes:statut_erreur',
+			'abandonne' => 'commandes:statut_abandonne',
 			'poubelle' => 'commandes:statut_poubelle',
 		),
 		'statut_images' => array(
@@ -104,6 +105,7 @@ function commandes_declarer_tables_objets_sql($tables) {
 			'retour' => 'puce-commande-retour.png',
 			'retour_partiel' => 'puce-commande-retour_partiel.png',
 			'erreur' => 'puce-commande-erreur.png',
+			'abandonne' => 'puce-commande-abandonne.png',
 			'poubelle' => 'puce-commande-poubelle.png',
 		),
 		'statut' => array(

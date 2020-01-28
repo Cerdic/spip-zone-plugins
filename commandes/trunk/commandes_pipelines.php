@@ -28,33 +28,36 @@ function commandes_insert_head_css($flux){
 
 
 /**
- * Optimiser la base de donnée en supprimant toutes les commandes en cours qui sont trop vieilles
- * 
- * Le délai de "péremption" est défini dans les options de configuration du plugin
+ * Optimiser la base de donnée en abandonnant toutes les commandes en cours qui sont trop vieilles
+ *
+ * Le délai de "péremption" est défini dans les options de configuration du plugin.
+ * Par défaut, c'est 24h
  *
  * @pipeline optimiser_base_disparus
  * @param  array $flux Données du pipeline
  * @return array       Données du pipeline
  */
-function commandes_optimiser_base_disparus($flux){
+function commandes_optimiser_base_disparus($flux) {
 	include_spip('inc/config');
-	if (is_numeric($duree_vie = lire_config('commandes/duree_vie'))) {
-		// On cherche la date depuis quand on a le droit d'avoir fait la commande
-		$depuis = date('Y-m-d H:i:s', time() - 3600*intval($duree_vie));
-		// On récupère les commandes trop vieilles
-		$commandes = sql_allfetsel(
-			'id_commande',
-			'spip_commandes',
-			'statut = '.sql_quote('encours').' and date<'.sql_quote($depuis)
-		);
+	include_spip('base/abstract_sql');
+	$duree_vie = lire_config('commandes/duree_vie', 24);
+	// On cherche la date depuis quand on a le droit d'avoir fait la commande
+	$depuis = date('Y-m-d H:i:s', time() - 3600*intval($duree_vie));
+	// On récupère les commandes trop vieilles
+	$commandes = sql_allfetsel(
+		'id_commande',
+		'spip_commandes',
+		'statut = '.sql_quote('encours').' and date<'.sql_quote($depuis)
+	);
 
-		// S'il y a bien des commandes à supprimer
-		if ($commandes) {
-			$commandes = array_map('reset', $commandes);
-			include_spip('inc/commandes');
-			commandes_supprimer($commandes);
-			$flux['data'] += count($commandes);
+	// S'il y a bien des commandes à abandonner
+	if ($commandes) {
+		$ids_commandes = array_map('reset', $commandes);
+		include_spip('action/editer_objet');
+		foreach ($ids_commandes as $id_commande) {
+			objet_instituer('commande', $id_commande, array('statut' => 'abandonne'));
 		}
+		$flux['data'] += count($commandes);
 	}
 
 	return $flux;

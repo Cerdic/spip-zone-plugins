@@ -93,6 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_1_commande' => '1 commande',
 	'info_1_commande_active' => '1 commande active',
+	'info_1_commande_statut_abandonne' => '1 commande abondonnée',
 	'info_1_commande_statut_attente' => '1 commande en attente de validation',
 	'info_1_commande_statut_encours' => '1 commande en cours',
 	'info_1_commande_statut_envoye' => '1 commande envoyée',
@@ -112,6 +113,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_date_paiement_vide' => 'commande non payée',
 	'info_nb_commandes' => '@nb@ commandes',
 	'info_nb_commandes_actives' => '@nb@ commandes actives',
+	'info_nb_commandes_statut_abandonne' => '@nb@ commandes abandonnées',
 	'info_nb_commandes_statut_attente' => '@nb@ commandes en attente de validation',
 	'info_nb_commandes_statut_envoye' => '@nb@ commandes envoyées',
 	'info_nb_commandes_statut_erreur' => '@nb@ commandes erronées',
@@ -196,7 +198,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'parametres_cfg_titre' => 'Paramètres',
-	'parametres_duree_vie_explication' => 'Limiter la durée de vie (en heures) d’une commande avec le statut en cours',
+	'parametres_duree_vie_explication' => 'Limiter la durée de vie (en heures) d’une commande avec le statut en cours, avant qu’elle ne soit considérée comme étant abandonnée.',
 	'parametres_duree_vie_label' => 'Durée de vie',
 	'passer_la_commande' => 'Passer la commande',
 
@@ -208,6 +210,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'simuler' => 'Simuler changement de statut',
+	'statut_abandonne' => 'Abandonnée',
 	'statut_attente' => 'En attente de validation',
 	'statut_encours' => 'En cours',
 	'statut_envoye' => 'Envoyée',

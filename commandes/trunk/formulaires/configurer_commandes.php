@@ -55,8 +55,14 @@ function formulaires_configurer_commandes_saisies_dist(){
 						'nom' => 'duree_vie',
 						'label' => _T('commandes:parametres_duree_vie_label'),
 						'explication' => _T('commandes:parametres_duree_vie_explication'),
-						'defaut' => $config['duree_vie']
-					)
+						'defaut' => ($config['duree_vie'] ? $config['duree_vie'] : 24),
+						'type' => 'number',
+						'min' => 1,
+					),
+					'verifier' => array(
+						'type' => 'entier',
+						'options' => array('min' => 1),
+					),
 				)
 			)
 		),
