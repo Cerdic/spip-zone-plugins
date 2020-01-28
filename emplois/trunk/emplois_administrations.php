@@ -28,6 +28,10 @@ function emplois_upgrade($nom_meta_base_version, $version_cible) {
 
 	$maj['create'] = array(array('maj_tables', array('spip_offres', 'spip_cvs')), array('emplois_init_metas'));
 
+	$maj['1.0.1'] = array(
+		array('emplois_maj_metas')
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -57,6 +61,9 @@ function emplois_init_metas() {
 	ecrire_config("emplois/affichage_public/class_fiedset_description", '');
 }
 
+function emplois_maj_metas() {
+	ecrire_config("emplois/offres/activer_deposant", 'oui');
+}
 /**
  * Fonction de désinstallation du plugin Emplois.
  *

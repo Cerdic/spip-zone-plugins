@@ -109,12 +109,12 @@ function formulaires_editer_offre_verifier_dist($id_offre='new', $id_rubrique=0,
 		}
 	}
 	// TODO chercher les autres champs obligatoires
-	$champs_obligatoires = array('nom', 'titre');
+	$champs_obligatoires = array('titre');
 	$erreurs += formulaires_editer_objet_verifier('offre', $id_offre, $champs_obligatoires);
 
 	//verifier validité de l'email
 	$email = _request('email');
-	if (!email_valide($email)) {
+	if ($email and !email_valide($email)) {
 		$erreurs['email'] = "email non valide";
 	}
 

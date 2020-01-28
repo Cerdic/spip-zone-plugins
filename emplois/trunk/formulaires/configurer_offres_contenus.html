@@ -8,34 +8,37 @@
 	<form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<fieldset>
-		<legend><:emplois:cfg_legend_contenu_offre_deposant:></legend>
-		<div class="editer-groupe">
+		<fieldset class='editer_traitements_choisis'>
+			<legend>
+				<:emplois:cfg_legend_contenu_offre_deposant:>
+				<input type="checkbox" name="activer_deposant" class="checkbox" id="champ_num_thematique" [(#ENV{activer_deposant}|=={oui}|oui)checked="checked"] value="oui" />
+			</legend>
+			<div class="editer-groupe options_traiter">
 
-			<div class="editer long_label editer_email[ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
-				<label for="email"><:offre:champ_email_label:></label>[
-				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</span>
-				]<div class="choix">
-					<input type="radio" name="email" id="email_oui" value="oui"
-					[(#CONFIG{emplois/offres/email}|=={oui}|oui)checked="checked"] /><label for="email_oui"><:item_oui:></label>
-					&nbsp;&nbsp;
-					<input type="radio" name="email" id="email_non" value="non"
-					[(#CONFIG{emplois/offres/email}|=={oui}|non)checked="checked"] /><label for="email_non"><:item_non:></label>
+				<div class="editer long_label editer_email[ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
+					<label for="email"><:offre:champ_email_label:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</span>
+					]<div class="choix">
+						<input type="radio" name="email" id="email_oui" value="oui"
+						[(#ENV{email}|=={oui}|oui)checked="checked"] /><label for="email_oui"><:item_oui:></label>
+						&nbsp;&nbsp;
+						<input type="radio" name="email" id="email_non" value="non"
+						[(#ENV{email}|=={oui}|non)checked="checked"] /><label for="email_non"><:item_non:></label>
+					</div>
+				</div>
+
+				<div class="editer long_label editer_telephone[ (#ENV**{erreurs}|table_valeur{telephone}|oui)erreur]">
+					<label for="telephone"><:offre:champ_telephone_label:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{telephone})</span>
+					]<div class="choix">
+						<input type="radio" name="telephone" id="telephone_oui" value="oui"
+						[(#ENV{telephone}|=={oui}|oui)checked="checked"] /><label for="telephone_oui"><:item_oui:></label>
+						&nbsp;&nbsp;
+						<input type="radio" name="telephone" id="telephone_non" value="non"
+						[(#ENV{telephone}|=={oui}|non)checked="checked"] /><label for="telephone_non"><:item_non:></label>
+					</div>
 				</div>
 			</div>
-
-			<div class="editer long_label editer_telephone[ (#ENV**{erreurs}|table_valeur{telephone}|oui)erreur]">
-				<label for="telephone"><:offre:champ_telephone_label:></label>[
-				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{telephone})</span>
-				]<div class="choix">
-					<input type="radio" name="telephone" id="telephone_oui" value="oui"
-					[(#CONFIG{emplois/offres/telephone}|=={oui}|oui)checked="checked"] /><label for="telephone_oui"><:item_oui:></label>
-					&nbsp;&nbsp;
-					<input type="radio" name="telephone" id="telephone_non" value="non"
-					[(#CONFIG{emplois/offres/telephone}|=={oui}|non)checked="checked"] /><label for="telephone_non"><:item_non:></label>
-				</div>
-			</div>
-		</div>
 		</fieldset>
 
 		<fieldset>
@@ -47,10 +50,10 @@
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{emetteur})</span>
 					]<div class="choix">
 						<input type="radio" name="emetteur" id="emetteur_oui" value="oui"
-						[(#CONFIG{emplois/offres/emetteur}|=={oui}|oui)checked="checked"] /><label for="emetteur_oui"><:item_oui:></label>
+						[(#ENV{emetteur}|=={oui}|oui)checked="checked"] /><label for="emetteur_oui"><:item_oui:></label>
 						&nbsp;&nbsp;
 						<input type="radio" name="emetteur" id="emetteur_non" value="non"
-						[(#CONFIG{emplois/offres/emetteur}|=={oui}|non)checked="checked"] /><label for="emetteur_non"><:item_non:></label>
+						[(#ENV{emetteur}|=={oui}|non)checked="checked"] /><label for="emetteur_non"><:item_non:></label>
 					</div>
 				</div>
 
@@ -59,10 +62,10 @@
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte_offre})</span>
 					]<div class="choix">
 						<input type="radio" name="texte_offre" id="texte_offre_oui" value="oui"
-						[(#CONFIG{emplois/offres/texte_offre}|=={oui}|oui)checked="checked"] /><label for="texte_offre_oui"><:item_oui:></label>
+						[(#ENV{texte_offre}|=={oui}|oui)checked="checked"] /><label for="texte_offre_oui"><:item_oui:></label>
 						&nbsp;&nbsp;
 						<input type="radio" name="texte_offre" id="texte_offre_non" value="non"
-						[(#CONFIG{emplois/offres/texte_offre}|=={oui}|non)checked="checked"] /><label for="texte_offre_non"><:item_non:></label>
+						[(#ENV{texte_offre}|=={oui}|non)checked="checked"] /><label for="texte_offre_non"><:item_non:></label>
 					</div>
 				</div>
 
@@ -71,10 +74,10 @@
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</span>
 					]<div class="choix">
 						<input type="radio" name="date_fin" id="date_fin_oui" value="oui"
-						[(#CONFIG{emplois/offres/date_fin}|=={oui}|oui)checked="checked"] /><label for="date_fin_oui"><:item_oui:></label>
+						[(#ENV{date_fin}|=={oui}|oui)checked="checked"] /><label for="date_fin_oui"><:item_oui:></label>
 						&nbsp;&nbsp;
 						<input type="radio" name="date_fin" id="date_fin_non" value="non"
-						[(#CONFIG{emplois/offres/date_fin}|=={oui}|non)checked="checked"] /><label for="date_fin_non"><:item_non:></label>
+						[(#ENV{date_fin}|=={oui}|non)checked="checked"] /><label for="date_fin_non"><:item_non:></label>
 					</div>
 				</div>
 
@@ -84,10 +87,10 @@
 					]<p class="explication">Pouvoir joindre un PDF depuis le formulaire publique</p>
 					<div class="choix">
 						<input type="radio" name="offre_pdf" id="offre_pdf_oui" value="oui"
-						[(#CONFIG{emplois/offres/offre_pdf}|=={oui}|oui)checked="checked"] /><label for="offre_pdf_oui"><:item_oui:></label>
+						[(#ENV{offre_pdf}|=={oui}|oui)checked="checked"] /><label for="offre_pdf_oui"><:item_oui:></label>
 						&nbsp;&nbsp;
 						<input type="radio" name="offre_pdf" id="offre_pdf_non" value="non"
-						[(#CONFIG{emplois/offres/offre_pdf}|=={oui}|non)checked="checked"] /><label for="offre_pdf_non"><:item_non:></label>
+						[(#ENV{offre_pdf}|=={oui}|non)checked="checked"] /><label for="offre_pdf_non"><:item_non:></label>
 					</div>
 				</div>
 			</div>
@@ -98,3 +101,22 @@
 	</div>
 	</form>
 </div>
+
+<script type="text/javascript">
+	$(function(){
+		// On commence par cacher toutes les options
+		$('.options_traiter').hide().find('h3');
+		
+		// Ensuite on parcourt les traitements choisis
+		$('.editer_traitements_choisis input:checkbox')
+			.each(function(){
+				// Si c'est coché on affiche le fieldset d'options
+				if ($(this).is(':checked')){
+					$(this).parent().next().show();
+				}
+			})
+			.click(function(){
+				$(this).parent().next().slideToggle('fast');
+			});
+	});
+</script>

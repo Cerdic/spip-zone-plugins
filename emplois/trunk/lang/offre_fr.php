@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'champ_date_fin_label' => 'Date de clôture de l’offre',
-	'champ_texte_offre_label' => 'Texte de l’offre',
+	'champ_texte_offre_label' => 'Présentation de l’offre',
 	'champ_email_label' => 'Email',
 	'champ_emetteur_label' => 'Émetteur',
 	'champ_id_document_offre_label' => 'id_document_offre',
@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_offres' => '@nb@ offres  d’emploi',
 	'info_nom' => 'Nom du déposant',
 	'info_offres_auteur' => 'Les offres de cet auteur',
-	'info_texte_offre' => 'Texte de l’offre',
+	'info_texte_offre' => 'Présentation de l’offre',
 
 	// L
 	'legende_deposant' => 'Déposant',

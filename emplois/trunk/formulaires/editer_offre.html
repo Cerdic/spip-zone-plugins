@@ -8,11 +8,12 @@
 		<input type="hidden" name="id_offre" value="#ENV{id_offre}" />
 		<input type="hidden" name="id_document_offre" value="#ENV{id_document_offre}" />
 
+		[(#CONFIG{emplois/offres/activer_deposant|=={oui}|oui})
 		<fieldset id="offre_deposant" [(#CONFIG{emplois/affichage_public/class_fieldset_deposant}|!={''}|oui) class="#CONFIG{emplois/affichage_public/class_fieldset_deposant}"]>
 		<legend><:offre:legende_deposant:></legend>
 			<div class="editer-groupe">
 	 
-				<div class="editer nom obligatoire[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
+				<div class="editer nom [ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
 					<label for="nom"><:offre:champ_signature_label:><span class="obligatoire"> <:required:></span></label>[
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</span>
 					]<input type='text' class='text' name='nom' id='nom'[ lang='(#LANGUE)']
@@ -21,7 +22,7 @@
 				</div>
 
 	 			[(#CONFIG{emplois/offres/email}|=={oui}|oui)
-	 			<div class="editer email obligatoire[ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
+	 			<div class="editer email [ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
 					<label for="email"><:offre:champ_email_label:><span class="obligatoire"> <:required:></span></label>[
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</span>
 					]<input type='text' class='text' name='email' id='email'[ lang='(#LANGUE)']
@@ -30,7 +31,7 @@
 				</div>]
 	 
 	 			[(#CONFIG{emplois/offres/telephone}|=={oui}|oui)
-	 			<div class="editer telephone obligatoire[ (#ENV**{erreurs}|table_valeur{telephone}|oui)erreur]">
+	 			<div class="editer telephone [ (#ENV**{erreurs}|table_valeur{telephone}|oui)erreur]">
 					<label for="telephone"><:offre:champ_telephone_label:><span class="obligatoire"> <:required:></span></label>[
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{telephone})</span>
 					]<input type='text' class='text' name='telephone' id='telephone'[ lang='(#LANGUE)']
@@ -40,6 +41,7 @@
 
 	 		</div>
  		</fieldset>
+ 		]
 
  		<fieldset id="offre_description" [(#CONFIG{emplois/affichage_public/class_fieldset_description}|!={''}|oui)class="#CONFIG{emplois/affichage_public/class_fieldset_description}"]>
 			<legend><:offre:legende_description_offre:></legend>
@@ -53,12 +55,13 @@
 					value="[(#ENV**{titre})]" />
 				</div>
 
-				[<div class="editer editer_rubrique[ (#ENV**{erreurs/id_parent}|oui)erreur]" style='display:none;'>
+				[<div class="editer editer_rubrique[ (#ENV**{erreurs/id_parent}|oui)erreur]">
 						<label for="id_parent"><:titre_cadre_interieur_rubrique:></label>[
 						<span class="erreur_message">(#ENV**{erreurs/id_parent})</span>
 						]
 						(#VAL|chercher_rubrique{#ENV{id_offre},#ENV{id_parent},'offre',#ENV{id_secteur},'',0,form_simple})
 				</div>]
+
 
 				[(#CONFIG{emplois/offres/emetteur}|=={oui}|oui)
 	 			<div class="editer emetteur obligatoire[ (#ENV**{erreurs}|table_valeur{emetteur}|oui)erreur]">
