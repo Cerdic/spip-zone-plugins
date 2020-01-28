@@ -75,26 +75,20 @@
 				</td>
 				<td class='dates'>
 					<ul>
-						#SET{date,#DATE|annee|=={#ENV{date}|annee}|?{
-							#DATE|affdate{jourcourt},
-							#DATE|jour|concat{'&nbsp;',#DATE|nom_mois{abbr},'&nbsp;'#DATE|annee}}}
 						<li class="date">
-							[<div class="label"><:commandes:date_commande_label_court:>&nbsp;:</div> (#GET{date})]
+							[<div class="label"><:commandes:date_commande_label_court:>&nbsp;:</div>
+							<abbr title="[(#DATE|attribut_html)]">(#DATE|affdate{jourcourt})</abbr>]
 						</li>
 						[(#DATE_PAIEMENT|intval|>{0}|oui)
-						#SET{date_paiement,#DATE_PAIEMENT|annee|=={#ENV{date}|annee}|?{
-							#DATE_PAIEMENT|affdate{jourcourt},
-							#DATE_PAIEMENT|jour|concat{'&nbsp;',#DATE_PAIEMENT|nom_mois{abbr},'&nbsp;'#DATE_PAIEMENT|annee}}}
 						<li class="date paiement">
-							[<div class="label"><:commandes:date_paiement_label_court:>&nbsp;:</div> (#GET{date_paiement})]
+							[<div class="label"><:commandes:date_paiement_label_court:>&nbsp;:</div>
+							<abbr title="[(#DATE_PAIEMENT|attribut_html)]">(#DATE_PAIEMENT|affdate{jourcourt})</abbr>]
 						</li>
 						]
 						[(#DATE_ENVOI|intval|>{0}|oui)
-						#SET{date_envoi,#DATE_ENVOI|annee|=={#ENV{date}|annee}|?{
-							#DATE_ENVOI|affdate{jourcourt},
-							#DATE_ENVOI|jour|concat{'&nbsp;',#DATE_ENVOI|nom_mois{abbr},'&nbsp;'#DATE_ENVOI|annee}}}
 						<li class="date envoi">
-							[<div class="label"><:commandes:date_envoi_label_court:>&nbsp;:</div> (#GET{date_envoi})]
+							[<div class="label"><:commandes:date_envoi_label_court:>&nbsp;:</div>
+							<abbr title="[(#DATE_ENVOI|attribut_html)]">(#DATE_ENVOI|affdate{jourcourt})</abbr>]
 						</li>
 						]
 					</ul>
