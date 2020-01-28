@@ -73,7 +73,7 @@
 					ajax}
 				|inserer_attribut{data-ajaxreload_args,\{"statut":""\}})
 		</li>]
-		<BOUCLE_commandes_statuts(COMMANDES){tout}{fusion statut}{statut != poubelle}>
+		<BOUCLE_commandes_statuts(COMMANDES){tout}{fusion statut}>
 		[<li class="item statut-#STATUT">
 			(#SELF
 				|parametre_url{statut,#STATUT}
