@@ -105,7 +105,12 @@ function autoriser_offre_supprimer_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_rubrique_creeroffredans_dist($faire, $type, $id, $qui, $opt) {
-	return ($id AND autoriser('voir','rubrique', $id) AND autoriser('creer','offre', $id));
+	$offres_actif = lire_config('emplois/offres/activer_offres');
+	$offres_actif == 'oui' ? $offres_actif = true : $offres_actif = false;
+
+	return
+		$offres_actif
+		AND ($id AND autoriser('voir','rubrique', $id) AND autoriser('creer','offre', $id));
 }
 
 // -----------------
@@ -194,7 +199,11 @@ function autoriser_cv_supprimer_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_rubrique_creercvdans_dist($faire, $type, $id, $qui, $opt) {
-	return ($id AND autoriser('voir','rubrique', $id) AND autoriser('creer','cv', $id));
+	$cv_actif = lire_config('emplois/offres/activer_cv');
+	$cv_actif == 'oui' ? $cv_actif = true : $cv_actif = false;
+	return 
+		$cv_actif
+		AND ($id AND autoriser('voir','rubrique', $id) AND autoriser('creer','cv', $id));
 }
 
 /* Compatibilité LIM */
