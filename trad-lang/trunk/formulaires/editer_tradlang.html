@@ -56,7 +56,7 @@
 
 <script type='text/javascript'>
 	jQuery(function(){
-		var contenu_orig = '[(#ENV**{str}|tradlang_utf8|entites_html|replace{"\n","_"}|replace{"\r",""}|replace{"\t",""})]',
+		var contenu_orig = '[(#ENV**{str}|html2unicode|tradlang_utf8|replace{"\n","_"}|replace{"\r",""}|replace{"\t",""})]',
 			statut_orig = '#STATUT';
 		var $me = jQuery('#formulaire_[#FORM-(#ENV{id})]');
 		var $notice = $me.find('.notice_statut');
