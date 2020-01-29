@@ -37,3 +37,25 @@ function str_statut_revision($id_tradlang, $c = false) {
 	include_spip('action/editer_tradlang');
 	return tradlang_set($id_tradlang, $c);
 }
+
+
+function dir_module_to_basename($dir_module) {
+	$s = '';
+	if ($dir_module) {
+		$s = explode('--', $dir_module, 2);
+		$s = end($s);
+		$s = explode('-', $s);
+		array_pop($s);
+		$s = implode('-', $s);
+	}
+	return $s;
+}
+
+function calculer_nom_module($module, $dir_module) {
+	$nom = $module;
+	if (!$s = dir_module_to_basename($dir_module)) {
+		$s = '?';
+	}
+	$nom .= " [$s]";
+	return $nom;
+}

@@ -93,6 +93,7 @@ function salvatore_lire($liste_sources, $force_reload = false, $dir_modules = nu
 			if ($row_module['lang_mere']!==$source['lang']){
 				sql_updateq('spip_tradlang_modules', array('lang_mere' => $source['lang']), 'id_tradlang_module=' . intval($id_tradlang_module));
 				salvatore_log("lang_mere mise a jour : " . $row_module['lang_mere'] . " => " . $source['lang']);
+				$row_module['lang_mere'] = $source['lang'];
 				$last_update = time();
 			}
 			/**
@@ -102,6 +103,16 @@ function salvatore_lire($liste_sources, $force_reload = false, $dir_modules = nu
 				sql_updateq('spip_tradlang_modules', array('dir_module' => $source['dir_module']), 'id_tradlang_module=' . intval($id_tradlang_module));
 				salvatore_log("dir_module mis a jour : " . $row_module['dir_module'] . " => " . $source['dir_module']);
 				$last_update = time();
+				$row_module['dir_module'] = $source['dir_module'];
+			}
+			/**
+			 * On met le titre a jour si jamais il a change (ou si on a change de facon de le calculer)
+			 */
+			if (($t = calculer_nom_module($source['module'], $source['dir_module'])) !== $row_module['nom_mod']) {
+				sql_updateq('spip_tradlang_modules', array('nom_mod' => $t), 'id_tradlang_module=' . intval($id_tradlang_module));
+				salvatore_log("nom_mod mis a jour : " . $row_module['nom_mod'] . " => " . $t);
+				$last_update = time();
+				$row_module['nom_mod'] = $t;
 			}
 		}
 
@@ -123,7 +134,7 @@ function salvatore_lire($liste_sources, $force_reload = false, $dir_modules = nu
 				$insert = [
 					'module' => $source['module'],
 					'dir_module' => $source['dir_module'],
-					'nom_mod' => $source['module'],
+					'nom_mod' => calculer_nom_module($source['module'],$source['dir_module']),
 					'lang_prefix' => $source['module'],
 					'lang_mere' => $source['lang'],
 					'priorite' => $priorite,

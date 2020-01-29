@@ -126,8 +126,32 @@ function tradlang_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter','TABLE spip_tradlangs ADD INDEX id_tradlang_module_lang_statut (id_tradlang_module,lang,statut)'),
 	);
 
+	$maj['1.2.0'] = array(
+		array('tradlang_nommer_modules'),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
+}
+
+
+function tradlang_nommer_modules() {
+
+	$res = sql_select('*', 'spip_tradlang_modules', "nom_mod=module OR nom_mod='' AND dir_module!=''");
+	$nb = sql_count($res);
+	spip_log("tradlang_nommer_modules: $nb restants", 'maj');
+	while($row_module = sql_fetch($res)) {
+
+		$id_tradlang_module = $row_module['id_tradlang_module'];
+
+		$set = array(
+			'nom_mod' => calculer_nom_module($row_module['module'], $row_module['dir_module']),
+		);
+		sql_updateq("spip_tradlang_modules", $set, "id_tradlang_module=".intval($id_tradlang_module));
+		if (time()>_TIME_OUT) {
+			return;
+		}
+	}
 }
 
 /**
