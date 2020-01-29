@@ -46,59 +46,6 @@ function tradlang_getmodules_base() {
 	return $ret;
 }
 
-/**
- * Teste la synchro du fichier de la base avec le fichier de langue en se basant
- * sur une ligne ajoutée lors de l'import si possible
- *
- * @param array $id_tradlang_module
- * 		L'identifiant numérique du module
- * @param string $lang
- * 		Le code de langue à vérifier
- * @return
- */
-function tradlang_testesynchro($id_tradlang_module, $lang) {
-	$dir_lang = tradlang_dir_lang();
-
-	$module = sql_getfetsel('module', 'spip_tradlang_modules', 'id_tradlang_module=' . intval($id_tradlang_module));
-
-	$modules = tradlang_getmodules_base();
-	$modok = $modules[$module];
-
-	$getmodules_fics = charger_fonction('tradlang_getmodules_fics', 'inc');
-	$modules2 = $getmodules_fics($dir_lang,$module);
-	$modok2 = $modules2[$module];
-
-	// union entre modok et modok2
-	if (is_array($modok2)) {
-		foreach ($modok2 as $cle => $item) {
-			if (strncmp($cle, 'langue_', 7) == 0) {
-				$sel = '';
-				$lang = substr($cle, 7);
-				if (!array_key_exists($lang, $modok)) {
-					$module_final['langue_' . $lang] = $item;
-				}
-			}
-		}
-	}
-	// Le fichier n'existe pas
-	if (!$module_final['langue_' . $lang]) {
-		return false;
-	}
-
-	// lit le timestamp fichier
-	$fic = $dir_lang . '/' . $module_final['langue_' . $lang];
-	include($fic);
-	$chs = $GLOBALS[$GLOBALS['idx_lang']];
-	$tsf = $chs['zz_timestamp_nepastraduire'];
-	unset($GLOBALS[$GLOBALS['idx_lang']]);
-
-
-	// lit le timestamp  base
-	$tsb = sql_getfetsel('maj', 'spip_tradlangs', 'module = ' . sql_quote($module) . ' AND lang=' . sql_quote($lang), '', 'maj DESC', '0,1');
-
-	return ($tsb == $tsf);
-}
-
 function tradlang_dir_lang() {
 	global $dossier_squelettes;
 	if (!$dossier_squelettes and !is_dir(_DIR_RACINE.'squelettes')) {
