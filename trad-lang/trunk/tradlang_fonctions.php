@@ -250,3 +250,17 @@ function langue_possible($lang) {
 
 	return false;
 }
+
+function tradlang_module_jolinom($nom_mod) {
+	if (strpos($nom_mod, '[') !== false) {
+		$nom_mod = str_replace(array('[', ']'), array('<small class=\'text-muted\'>[', ']</small>'), $nom_mod);
+		if (strpos($nom_mod, ']') === false) {
+			$nom_mod .= "</small>";
+		}
+	}
+	if (strpos($nom_mod, '(') !== false and strpos($nom_mod, ')') !== false) {
+		$nom_mod = str_replace("(", "<small class='text-muted'>(", $nom_mod);
+		$nom_mod = str_replace(")", ")</small>", $nom_mod);
+	}
+	return $nom_mod;
+}

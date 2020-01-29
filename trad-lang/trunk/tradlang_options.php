@@ -52,10 +52,16 @@ function dir_module_to_basename($dir_module) {
 }
 
 function calculer_nom_module($module, $dir_module) {
+	$s = dir_module_to_basename($dir_module);
 	$nom = $module;
-	if (!$s = dir_module_to_basename($dir_module)) {
-		$s = '?';
+	if (strpos($nom, 'paquet-') === 0) {
+		$nom = substr($nom, 7) . " (paquet.xml)";
+		if ($s and $s !== $module) {
+			$nom .= " [$s]";
+		}
 	}
-	$nom .= " [$s]";
+	else {
+		$nom .= " [" . ($s ? $s : '?') . "]";
+	}
 	return $nom;
 }
