@@ -74,7 +74,8 @@ function mesfavoris_ajouter($id_objet, $objet, $id_auteur, $categorie='') {
 					'id_auteur' => $id_auteur,
 					'id_objet'  => $id_objet,
 					'categorie' => $categorie,
-					'objet'     => $objet
+					'objet'     => $objet,
+					'date_ajout' => date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']),
 				)
 			);
 
