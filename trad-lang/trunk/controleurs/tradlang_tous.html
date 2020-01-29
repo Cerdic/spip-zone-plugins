@@ -24,7 +24,7 @@
 #BOITE_OUVRIR{'',notice}
 	<p><:tradlang:notice_affichage_limite{nb=30}:></p>
 #BOITE_FERMER]
-<div class="formulaire_spip">
+<div class="formulaire_spip formulaire_tradlang_tous">
 	<form action="spip.php" method="post" enctype="multipart/form-data" class="formulaire_crayon" id="formulaire_tradlang_tous_#ENV{id_tradlang_module}">
 		<input type="hidden" name="action" value="crayons" />
 		<input type="hidden" name="redirect" value="[(#SELF|parametre_url{edit,''})]" />
@@ -65,7 +65,7 @@
 			</BOUCLE_nb_tradlangs_affiche>
 		</ul>
 		<p class="boutons">
-			<input type='submit' class="submit" />
+			<input type='submit' class="btn btn-primary" value="<:bouton_enregistrer:>"/>
 		</p>
 	</form>
 </div>
@@ -88,10 +88,10 @@ if (window.jQuery)(function($){
 		if(($(window).scrollTop() >= limite_haut) || (($(window).scrollTop()+$(window).height()) <= limite_bas)){
 			if(!boutons.hasClass('boutons_float'))
 				boutons.addClass('boutons_float')
-			boutons.css({'position': 'fixed', 'bottom': 0, 'width': boutons_width+'px'});
+			boutons.css({'position': 'sticky', 'bottom': 0});
 		}
 		if(($(window).scrollTop() < limite_haut)||(($(window).scrollTop()+$(window).height()) > limite_bas) )
-			boutons.removeClass('boutons_float').css({'position': 'static', 'width': 'auto'});	
+			boutons.removeClass('boutons_float').css({'position': 'static'});
 	});
 	/**
 	 * On traite les erreurs potentielles

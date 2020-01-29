@@ -12,12 +12,12 @@
 	<BOUCLE_orig(TRADLANGS){id=#ID}{module=#MODULE}{lang=#VAL{lang_orig}|_request|sinon{#LANG_MERE}}>
 	[(#SET{lines,#STR*|strlen|div{40}|intval|plus{1}})]
 	<div class="editer editer_str_orig">
-		<label for="str_orig_#_a:ID_TRADLANG"><:tradlang:label_version_originale{lang=#LANG}:></label>
+		<label for="str_orig_#_a:ID_TRADLANG">[(#VAL{tradlang:label_version_originale}|_T{#ARRAY{lang,#LANG}}|replace{\\(#LANG\\),[<b class="badge badge-secondary">(#LANG)</b>]})]</label>
 		<textarea readonly="readonly" title="<:tradlang:info_textarea_readonly|attribut_html:>" rows="#GET{lines}" id="str_orig_#_a:ID_TRADLANG" rows="4" class="crayon-active readonly" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html)]</textarea>
 	</div>
 	</BOUCLE_orig>
 	<div class="editer editer_str">
-		<label for="str_#ID_TRADLANG"><:tradlang:label_tradlang_str{lang=#LANG}:></label>
+		<label for="str_#ID_TRADLANG">[(#VAL{tradlang:label_tradlang_str}|_T{#ARRAY{lang,#LANG}}|replace{\\(#LANG\\),[<b class="badge badge-primary">(#LANG)</b>]})]</label>
 		<textarea class="crayon-active" name="#ENV{name_str}" id="str_#ID_TRADLANG"
 		 style="text-align:#LANG_LEFT;" rows="#GET{lines}" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html)]</textarea>
 	</div>
