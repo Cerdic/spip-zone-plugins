@@ -51,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'codelangue' => 'Code de langue',
 	'crayon_changer_statut' => 'Attention ! Vous avez modifié le contenu de la chaîne sans en modifier le statut.',
 	'crayon_changer_statuts' => 'Attention ! Vous avez modifié le contenu d’une ou plusieurs chaînes sans en modifier le statut.',
+	'confirm_suppression_langue_cible' => 'Attention, vous allez supprimer la langue &laquo;&nbsp;<b>@lang@</b>&nbsp;&raquo; de ce module. Êtes-vous sûr ?',
 
 	// E
 	'entrerlangue' => 'Ajouter un code langue',
