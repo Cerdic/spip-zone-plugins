@@ -1,0 +1,9 @@
+<svg version="1.1"
+		 width="512"
+		 height="512"
+		 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+		 viewBox="0 0 512 512">
+	<polyline fill="#ffffff" points="47.3,79 47.3,493 402,493 402,165 312,78.3 "/>
+	<path d="M256,128h-64v64h-64v64h64v64h64v-64h64v-64h-64V128z M128,448h192v-64H128V448z M352,0H96v32h240l112,112v304h32V128L352,0
+	z M32,64v448h384V160l-96-96H32z M384,480H64V96h240l80,80V480z"/>
+</svg>
