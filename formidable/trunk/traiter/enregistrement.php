@@ -15,7 +15,6 @@ function traiter_enregistrement_dist($args, $retours) {
 	$saisies = unserialize($formulaire['saisies']);
 	$saisies = saisies_lister_par_nom($saisies);
 	$variable_php = '';
-
 	// La personne a-t-elle un compte ?
 	$id_auteur = isset($GLOBALS['visiteur_session']) ? (isset($GLOBALS['visiteur_session']['id_auteur']) ?
 		$GLOBALS['visiteur_session']['id_auteur'] : 0) : 0;
@@ -95,7 +94,6 @@ function traiter_enregistrement_dist($args, $retours) {
 		formidable_effacer_fichiers_reponse($id_formulaire, $id_formulaires_reponse);
 		$retours['modification_reponse'] = true;// signaler aux traitements qui viendraient après qu'il s'agit d'une modif
 	}
-
 	// Si l'id n'a pas été créé correctement alors erreur
 	if (!($id_formulaires_reponse > 0)) {
 		$retours['message_erreur'] .= "\n<br/>"._T('formidable:traiter_enregistrement_erreur_base');
