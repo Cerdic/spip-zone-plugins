@@ -1,8 +1,8 @@
 <paquet
 	prefix="cvtupload"
 	categorie="outil"
-	version="1.20.0"
-	etat="test"
+	version="1.20.1"
+	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/cvtupload-64.png"
 	documentation="https://contrib.spip.net/CVT-Upload-1989"
