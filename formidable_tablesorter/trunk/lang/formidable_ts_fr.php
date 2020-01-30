@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'colonnes' => 'Colonnes',
+	'colonnes' => 'Choix des colonnes',
 
 	// E
 	'exporter' => 'Exporter',
