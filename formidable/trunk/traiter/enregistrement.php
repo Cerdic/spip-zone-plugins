@@ -127,12 +127,14 @@ function traiter_enregistrement_dist($args, $retours) {
 		}
 		// S'il y a bien des choses à modifier
 		if ($champs) {
-			// On supprime d'abord les champs
+			// On supprime d'abord TOUT les champs, y compris ceux qui ne viennent pas d'être envoyé.
+			// En effet, ils pouvaient y avoir des champs remplis lors du précédent enregistrement
+			// Qui ne le sont plus au nouvel enregistrement, car la condition d'affichage (afficher_si) n'est plus remplie
+			// Dans ce cas il ne faut pas qu'ils continuent à être stockés en base, car cela peut fausser les affichages divers (type tableaux et autres)
 			sql_delete(
 				'spip_formulaires_reponses_champs',
 				array(
-					'id_formulaires_reponse = '.$id_formulaires_reponse,
-					sql_in('nom', $champs)
+					'id_formulaires_reponse = '.$id_formulaires_reponse
 				)
 			);
 
