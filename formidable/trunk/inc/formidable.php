@@ -514,10 +514,14 @@ function formidable_raccourcis_arobases_2_valeurs_champs($chaine, $saisies, $bru
 		}
 		$a_remplacer = array_flip($a_remplacer);
 		if ($brut) {
-			$a_remplacer = array_intersect_key($valeurs, $a_remplacer);
+			if (is_array($valeurs)) {
+				$a_remplacer = array_intersect_key($valeurs, $a_remplacer);
+			}
 		}
 		else {
-			$a_remplacer = array_intersect_key($valeurs_libellees, $a_remplacer);
+			if (is_array($valeurs_libellees)) {
+				$a_remplacer = array_intersect_key($valeurs_libellees, $a_remplacer);
+			}
 		}
 
 		$a_remplacer = array_merge($a_remplacer,array('nom_site_spip' => lire_config('nom_site')));
