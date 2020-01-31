@@ -634,6 +634,8 @@ function construire_formulaire_generer_saisie_configurable($saisie, $env) {
 		);
 	}
 
+	// On effacer l'afficher_si de la saisie, sinon ca peut peter les afficher_si des constructeurs en donnant des conditions du type "||" si on part d'un "@champ@ || @champ_2@"
+	unset($saisie['options']['afficher_si']);
 	// On génère le HTML de la saisie
 	$html = saisies_generer_html($saisie, $env);
 
