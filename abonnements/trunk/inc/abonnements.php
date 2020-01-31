@@ -297,3 +297,36 @@ function abonnements_notifier_echeance($id_abonnement, $nom, $email, $duree, $pe
 	$notifications = charger_fonction('notifications', 'inc');
 	$notifications($quoi, $id_abonnement, $options);
 }
+
+/**
+ * Lister tous les abonnements d'un utilisateur, classés par statut
+ * 
+ * @param int $id_auteur
+ *     Identifiant de l'utilisateur dont on cherche les abonnements
+ * @return array
+ *     Tableau des abonnements, rangés dans une clé pour chaque statut
+ */
+function abonnements_auteur_lister($id_auteur) {
+	static $abonnements_auteurs = array();
+	$id_auteur = intval($id_auteur);
+	
+	if (is_null($abonnements_auteurs[$id_auteur])) {
+		$abonnements_auteurs[$id_auteur] = array();
+		
+		if ($abonnements = sql_allfetsel('*', 'spip_abonnements', 'id_auteur ='.$id_auteur)) {
+			foreach($abonnements as $abonnement) {
+				$statut = $abonnement['statut'];
+				
+				// Initialiser pour ce statut
+				if (!isset($abonnements_auteurs[$id_auteur][$statut])) {
+					$abonnements_auteurs[$id_auteur][$statut] = array();
+				}
+				
+				// Ajouter l'abonnement à ce statut
+				$abonnements_auteurs[$id_auteur][$statut][] = $abonnement;
+			}
+		}
+	}
+	
+	return $abonnements_auteurs[$id_auteur];
+}
