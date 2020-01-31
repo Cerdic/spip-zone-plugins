@@ -299,3 +299,41 @@
 		<div class="apercu__item"><p>image_negatif</p>[(#GET{img}|image_negatif)]</div>
 	</div>
 </div>
+
+<!-- image_tramer -->
+<div class="boite" id="image_tramer">
+	<h2 class="boite__titre">image_tramer</h2>
+	<p>
+		Tramer une image (en mode niveaux de gris) à la <a href="https://github.com/lowtechmag/solar/wiki/Solar-Web-Design#dithered-images">LOW←TECH MAGAZINE</a>
+	</p>
+	<dl class="codeblock">
+		<dt>Syntaxe</dt>
+		<dd><code>image_tramer{url_image, 6, o8x8}</code></dd>
+		<dt>Paramètre 1</dt>
+		<dd>Url de l'image servant de filtre</dd>
+		<dt>Paramètre 2</dt>
+		<dd>Nombre : niveaux de couleurs à utiliser</dd>
+		<dt>Paramètre 3</dt>
+		<dd>Booléen : générer une image en couleurs</dd>
+		<dt>Exemple</dt>
+		<dd><code class="Exemple">#VAL{"\[\(#CHEMIN{images/ecureuil.jpg}|image_tramer\)\]"}</code></dd>
+	</dl>
+	<div class="apercu apercu_images">
+		<div class="apercu__item alpha on bordure"><p>originale</p>[(#CHEMIN{images/ecureuil.jpg}|balise_img)]</div>
+		<BOUCLE_imgtramer1(DATA){liste 3,6,11}>
+		<div class="apercu__item"><p>#VALEUR</p>[(#CHEMIN{images/ecureuil.jpg}|image_tramer{#VALEUR})]</div>
+		</BOUCLE_imgtramer1>
+	</div>
+	<div class="apercu apercu_images">
+		<div class="apercu__item alpha on bordure"><p>originale</p>[(#CHEMIN{images/ecureuil.jpg}|balise_img)]</div>
+		<BOUCLE_imgtramer2(DATA){liste checks,o8x8,h8x8a,h16x16o,c5x5b,c5x5w,c6x6b,c6x6w,c7x7b,c7x7w}>
+		<div class="apercu__item"><p>6,#VALEUR</p>[(#CHEMIN{images/ecureuil.jpg}|image_tramer{6,#VALEUR})]</div>
+		</BOUCLE_imgtramer2>
+	</div>
+		<div class="apercu apercu_images">
+		<div class="apercu__item alpha on bordure"><p>originale</p>[(#CHEMIN{images/ecureuil.jpg}|balise_img)]</div>
+		<BOUCLE_imgtramer3(DATA){liste 3,6,11}>
+		<div class="apercu__item"><p>#VALEUR,o8x8,oui</p>[(#CHEMIN{images/ecureuil.jpg}|image_tramer{#VALEUR,o8x8,oui})]</div>
+		</BOUCLE_imgtramer3>
+	</div>
+</div>

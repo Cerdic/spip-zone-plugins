@@ -17,7 +17,7 @@
 			<li class="menu__item"><a href="[(#ENV{filtres}|=={couleurs}|ou{#ENV{filtres}|=={''}}|?{##VALEUR,#SELF|parametre_url{filtres,couleurs}|ancre_url{#VALEUR}})]" class="ajax">#VALEUR</a></li>
 			</BOUCLE_menu_couleurs>
 			<li class="menu__item menu__item_header">Traitement des images</li>
-			<BOUCLE_menu_images(DATA){liste image_saturer,image_niveaux_gris_auto,image_courbe,image_float,image_contour_alpha,image_sincity,image_estampage_alpha,image_merge,image_negatif}>
+			<BOUCLE_menu_images(DATA){liste image_saturer,image_niveaux_gris_auto,image_courbe,image_float,image_contour_alpha,image_sincity,image_estampage_alpha,image_merge,image_negatif,image_tramer}>
 			<li class="menu__item"><a href="[(#ENV{filtres}|=={images}|?{##VALEUR,#SELF|parametre_url{filtres,images}|ancre_url{#VALEUR}})]" class="ajax">#VALEUR</a></li>
 			</BOUCLE_menu_images>
 		</ul>

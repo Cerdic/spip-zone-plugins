@@ -1194,3 +1194,47 @@ function image_merge($im, $masque, $h='left', $v='top'){
 
 	return _image_ecrire_tag($image,array('src'=>$dest));
 }
+
+/**
+ * Tramer une image avec la fonction orderedPosterizeImage d'Imagick
+ * Inspiré de https://github.com/lowtechmag/solar/wiki/Solar-Web-Design#dithered-images
+ *
+ * @param string $im
+ *     Chemin de l'image ou balise html `<img src=... />`
+ * @param int $levels
+ *     Le nombre de niveaux de couleurs à utiliser
+ * @param string $thmap
+ *     Le nom de la carte de seuils de dither cf http://www.imagemagick.org/Usage/quantize/tmaps_list.txt
+ * @param boolean $color
+ *     Générer une image en couleurs
+ * @return string balise image
+ */
+function image_tramer($img, $levels = 6, $thmap = 'o8x8', $color = false){
+	$cache = _image_valeurs_trans($img, "tramer-".json_encode(array($thmap, $levels, $color)), 'png');
+	if (!$cache) {
+		return false;
+	}
+	// facile !
+	if ($cache['format_source'] === 'svg'){
+		return $img;
+	}
+
+	$fichier = $cache["fichier"];	
+	$dest = $cache["fichier_dest"];
+	$creer = $cache["creer"];
+
+	if ($creer) {
+		if (method_exists('Imagick', 'orderedPosterizeImage')) {
+			$imagick = new Imagick();
+			$imagick->readImage($fichier);
+			if (!$color) {
+				$imagick->setImageType(Imagick::IMGTYPE_GRAYSCALE);
+			}
+			$imagick->orderedPosterizeImage($thmap.','.$levels);
+			$imagick->setImageFormat('png');
+			$imagick->writeImage($dest);
+		}
+	}
+
+	return _image_ecrire_tag($cache, array('src' => $dest));
+}
