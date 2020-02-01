@@ -56,13 +56,13 @@ function boites_privees_affiche_milieu($flux){
 		// SPIP >= 3.0 : objets au singulier
 		case 'article': case 'articles': {
 			// texte original au format spip
-			if(defined('boites_privees_ARTICLES'))
+			if(defined('boites_privees_ARTICLES') && isset($flux['args']['id_article']))
 				$flux['data'] .= cs_formatspip($flux['args']['id_article'], 'id_article');
 			break;
 		}
 		case 'newsletter': case 'newsletters': {
 			// texte original au format spip
-			if(defined('boites_privees_ARTICLES'))
+			if(defined('boites_privees_ARTICLES') && isset($flux['args']['id_newsletter']))
 				$flux['data'] .= cs_formatspip($flux['args']['id_newsletter'], 'id_newsletter');
 			break;
 		}
@@ -184,7 +184,7 @@ function cs_infos_webmasters() {
 	include_spip('cout_define');
 	list($w) = get_liste_administrateurs();
 	return cs_cadre_depliable(_T('couteau:webmestres'), 'bp_infos_webmasters', 
-	"<p>".(strlen($w)?'&bull; '.str_replace(', ','<br/>&bull; ',$w):_T('couteau:variable_vide'))."</p>");
+		"<p>".(strlen($w)?'&bull; '.str_replace(', ','<br/>&bull; ',$w):_T('couteau:variable_vide'))."</p>");
 }
 
 function cs_infos_connection() {
@@ -197,7 +197,7 @@ function cs_infos_connection() {
 
 function cs_formatspip($id_objet, $type_id='id_article'){
 	include_spip('public/assembler');
-	if(!$txt = recuperer_fond('fonds/format_spip', array($type_id=>$id_objet))) return '';
+	if(!$txt = recuperer_fond('fonds/format_spip', array($type_id => $id_objet))) return '';
 	$txt = explode('@TITRE@=', $txt, 2);
 	// compatibilite avec SPIP 1.92
 	$compat = function_exists('bouton_block_depliable');
@@ -221,9 +221,10 @@ function cs_urls_propres($type, $id) {
 		$s = sql_select("url, date", "spip_urls", "id_objet=$id AND type='$type'", '', 'date DESC');
 		$now = date('Y-m-d H:i:s');
 		$info = ' ('._T('couteau:url_verrouillee').')';
-		while ($t = sql_fetch($s)) $res .= ($res?'<br />':'').'&bull;&nbsp;<html>'.$t['url'].($t['date']>$now?$info:'')."</html>\n";
-		if(!find_in_path($f = $type."."._EXTENSION_SQUELETTES))
-			$lien_public .= '{{[!]}} {'._T('info_erreur_squelette2',array('fichier'=>$f))."}\n\n";
+		while ($t = sql_fetch($s)) 
+			$res .= ($res?'<br />':'') . '&bull;&nbsp;<html>' . $t['url'] . ($t['date']>$now?$info:'') . "</html>\n";
+		if(!find_in_path($f = $type . '.' . _EXTENSION_SQUELETTES))
+			$lien_public .= '{{[!]}} {' . _T('info_erreur_squelette2', array('fichier' => $f)) . "}\n\n";
 	// SPIP 1.92
 	} else {
 		// impossible de calculer l'url publique d'ici.
@@ -233,8 +234,8 @@ function cs_urls_propres($type, $id) {
 			if(!strlen($r=$r['url_propre'])) $r = couteauprive_T('variable_vide');
 			$res .= "&bull;&nbsp;$r\n";
 		}
-		$lien_public = './?exec=action_rapide&arg=type_urls|URL_objet_191&format=iframe&type_objet='.$type.'&id_objet='.$id.'&script=foo';
-		$lien_public = '<iframe src="'.$lien_public.'" width="100%" style="border:none; height:4em;"></iframe>';
+		$lien_public = './?exec=action_rapide&arg=type_urls|URL_objet_191&format=iframe&type_objet=' . $type . '&id_objet=' . $id . '&script=foo';
+		$lien_public = '<iframe src="' . $lien_public . '" width="100%" style="border:none; height:4em;"></iframe>';
 	}
 
 	$format = in_array($type_urls, array('page', 'standard', 'html'))
