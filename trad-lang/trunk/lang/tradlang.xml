@@ -2,11 +2,12 @@
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/tradlang?lang_cible=ar" total="375" traduits="374" relire="0" modifs="0" nouveaux="1" pourcent="99.73">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
-	<langue code="en" url="https://trad.spip.net/tradlang_module/tradlang?lang_cible=en" total="375" traduits="374" relire="0" modifs="0" nouveaux="1" pourcent="99.73">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/tradlang?lang_cible=en" total="375" traduits="375" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="EScott" lien="https://trad.spip.net/auteur/escott" />
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
+		<traducteur nom="jack31" lien="https://trad.spip.net/auteur/jack31" />
 		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Paolo" lien="https://trad.spip.net/auteur/paolo" />
