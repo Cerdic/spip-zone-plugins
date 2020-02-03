@@ -1,4 +1,10 @@
-<traduction module="diogene_mots" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/diogene/diogene_complements/diogene_mots/trunk/lang/" reference="fr">
+<traduction
+	module="diogene_mots"
+	id="diogene_mots--diogene_mots-b6aa6"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/diogene/diogene_complements/diogene_mots/trunk/lang"
+	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/diogene_mots?lang_cible=en" total="10" traduits="7" relire="0" modifs="1" nouveaux="2" pourcent="70.00">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
@@ -6,8 +12,7 @@
 		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
 		<traducteur nom="severo" lien="https://trad.spip.net/auteur/severo" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/diogene_mots?lang_cible=fr" total="10" traduits="10" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/diogene_mots?lang_cible=fr" total="10" traduits="10" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/diogene_mots?lang_cible=pt_br" total="10" traduits="10" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
