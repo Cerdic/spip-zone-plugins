@@ -1,4 +1,10 @@
-<traduction module="media" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/modeles_media/trunk/lang/" reference="fr">
+<traduction
+	module="media"
+	id="media--modeles_media-cab36"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/modeles_media/trunk/lang"
+	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/media?lang_cible=en" total="60" traduits="57" relire="0" modifs="0" nouveaux="3" pourcent="95.00">
 		<traducteur nom="raphael" lien="https://trad.spip.net/auteur/raphael-7042" />
 	</langue>
@@ -8,6 +14,5 @@
 	<langue code="fa" url="https://trad.spip.net/tradlang_module/media?lang_cible=fa" total="60" traduits="57" relire="0" modifs="0" nouveaux="3" pourcent="95.00">
 		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/media?lang_cible=fr" total="60" traduits="60" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/media?lang_cible=fr" total="60" traduits="60" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
