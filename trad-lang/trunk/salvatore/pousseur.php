@@ -105,7 +105,7 @@ function savatore_commit_and_push_module($source, $dir_modules, $dir_depots, $ur
 	}
 
 	$subdir = '';
-	if (isset($source['dir'])) {
+	if (isset($source['dir']) and $source['dir']) {
 		$subdir = $source['dir'] . DIRECTORY_SEPARATOR;
 	}
 
