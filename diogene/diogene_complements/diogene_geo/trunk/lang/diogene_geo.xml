@@ -1,4 +1,10 @@
-<traduction module="diogene_geo" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/diogene/diogene_complements/diogene_geo/trunk/lang/" reference="fr">
+<traduction
+	module="diogene_geo"
+	id="diogene_geo--diogene_geo-1331c"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/diogene/diogene_complements/diogene_geo/trunk/lang"
+	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/diogene_geo?lang_cible=en" total="19" traduits="19" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
@@ -7,8 +13,7 @@
 		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
 		<traducteur nom="severo" lien="https://trad.spip.net/auteur/severo" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/diogene_geo?lang_cible=fr" total="19" traduits="19" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/diogene_geo?lang_cible=fr" total="19" traduits="19" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="oc_ni_mis" url="https://trad.spip.net/tradlang_module/diogene_geo?lang_cible=oc_ni_mis" total="19" traduits="12" relire="0" modifs="0" nouveaux="7" pourcent="63.16">
 		<traducteur nom="sylvain" lien="https://trad.spip.net/auteur/sylvain" />
 	</langue>
