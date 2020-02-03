@@ -1,4 +1,10 @@
-<traduction module="bando" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/bandeau/lang/" reference="fr">
+<traduction
+	module="bando"
+	id="bando--bandeau-0ac21"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/bandeau/lang"
+	reference="fr">
 	<langue code="ast" url="https://trad.spip.net/tradlang_module/bando?lang_cible=ast" total="26" traduits="26" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Xuacu" lien="https://trad.spip.net/auteur/xuacu" />
 	</langue>
@@ -24,8 +30,7 @@
 	<langue code="fa" url="https://trad.spip.net/tradlang_module/bando?lang_cible=fa" total="26" traduits="26" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/bando?lang_cible=fr" total="26" traduits="26" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/bando?lang_cible=fr" total="26" traduits="26" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/bando?lang_cible=fr_tu" total="26" traduits="26" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="beatnick" lien="https://trad.spip.net/auteur/beatnick" />
 		<traducteur nom="Cerf" lien="https://trad.spip.net/auteur/cerf" />
