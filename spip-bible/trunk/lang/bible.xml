@@ -1,4 +1,9 @@
-<traduction module="bible" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/spip-bible/trunk/lang" reference="fr">
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/bible?lang_cible=fr" total="70" traduits="70" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+<traduction
+	module="bible"
+	id="bible--spip-bible-5c058"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/spip-bible/trunk/lang"
+	reference="fr">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/bible?lang_cible=fr" total="70" traduits="70" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
