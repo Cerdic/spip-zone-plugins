@@ -1,11 +1,15 @@
-<traduction module="palette" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/palette/trunk/lang/" reference="fr">
+<traduction
+	module="palette"
+	id="palette--palette-ea23f"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/palette/trunk/lang"
+	reference="fr">
 	<langue code="ast" url="https://trad.spip.net/tradlang_module/palette?lang_cible=ast" total="12" traduits="5" relire="0" modifs="2" nouveaux="5" pourcent="41.67">
 		<traducteur nom="Xuacu" lien="https://trad.spip.net/auteur/xuacu" />
 	</langue>
-	<langue code="ca" url="https://trad.spip.net/tradlang_module/palette?lang_cible=ca" total="12" traduits="5" relire="0" modifs="2" nouveaux="5" pourcent="41.67">
-	</langue>
-	<langue code="de" url="https://trad.spip.net/tradlang_module/palette?lang_cible=de" total="12" traduits="5" relire="0" modifs="2" nouveaux="5" pourcent="41.67">
-	</langue>
+	<langue code="ca" url="https://trad.spip.net/tradlang_module/palette?lang_cible=ca" total="12" traduits="5" relire="0" modifs="2" nouveaux="5" pourcent="41.67" />
+	<langue code="de" url="https://trad.spip.net/tradlang_module/palette?lang_cible=de" total="12" traduits="5" relire="0" modifs="2" nouveaux="5" pourcent="41.67" />
 	<langue code="en" url="https://trad.spip.net/tradlang_module/palette?lang_cible=en" total="12" traduits="12" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jack31" lien="https://trad.spip.net/auteur/jack31" />
 		<traducteur nom="Mark" lien="https://trad.spip.net/auteur/mark" />
@@ -13,10 +17,8 @@
 	<langue code="es" url="https://trad.spip.net/tradlang_module/palette?lang_cible=es" total="12" traduits="5" relire="0" modifs="2" nouveaux="5" pourcent="41.67">
 		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
 	</langue>
-	<langue code="fa" url="https://trad.spip.net/tradlang_module/palette?lang_cible=fa" total="12" traduits="5" relire="0" modifs="2" nouveaux="5" pourcent="41.67">
-	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/palette?lang_cible=fr" total="12" traduits="12" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fa" url="https://trad.spip.net/tradlang_module/palette?lang_cible=fa" total="12" traduits="5" relire="0" modifs="2" nouveaux="5" pourcent="41.67" />
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/palette?lang_cible=fr" total="12" traduits="12" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/palette?lang_cible=fr_tu" total="12" traduits="12" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="beatnick" lien="https://trad.spip.net/auteur/beatnick" />
 		<traducteur nom="RealET" lien="https://trad.spip.net/auteur/realet" />
