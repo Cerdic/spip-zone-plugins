@@ -1,10 +1,13 @@
-<traduction module="programmernewsletter" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/newsletters/trunk/lang/" reference="fr">
-	<langue code="de" url="https://trad.spip.net/tradlang_module/programmernewsletter?lang_cible=de" total="32" traduits="32" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
-	<langue code="en" url="https://trad.spip.net/tradlang_module/programmernewsletter?lang_cible=en" total="32" traduits="32" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/programmernewsletter?lang_cible=fr" total="32" traduits="32" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+<traduction
+	module="programmernewsletter"
+	id="programmernewsletter--newsletters-32ca5"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/newsletters/trunk/lang"
+	reference="fr">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/programmernewsletter?lang_cible=de" total="32" traduits="32" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="en" url="https://trad.spip.net/tradlang_module/programmernewsletter?lang_cible=en" total="32" traduits="32" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/programmernewsletter?lang_cible=fr" total="32" traduits="32" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="ja" url="https://trad.spip.net/tradlang_module/programmernewsletter?lang_cible=ja" total="32" traduits="32" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="origenius" lien="https://trad.spip.net/auteur/origenius" />
 	</langue>
