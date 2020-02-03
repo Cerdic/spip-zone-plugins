@@ -1,10 +1,15 @@
-<traduction module="paquet-openinviter" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/openinviter/lang/" reference="fr">
+<traduction
+	module="paquet-openinviter"
+	id="paquet-openinviter--openinviter-6a3bf"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/openinviter/lang"
+	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-openinviter?lang_cible=en" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 	</langue>
 	<langue code="es" url="https://trad.spip.net/tradlang_module/paquet-openinviter?lang_cible=es" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-openinviter?lang_cible=fr" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-openinviter?lang_cible=fr" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
