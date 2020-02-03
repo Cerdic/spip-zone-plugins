@@ -1,12 +1,17 @@
-<traduction module="linkcheck" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/linkcheck/trunk/lang/" reference="fr">
+<traduction
+	module="linkcheck"
+	id="linkcheck--linkcheck-10d25"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/linkcheck/trunk/lang"
+	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/linkcheck?lang_cible=de" total="62" traduits="62" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 	</langue>
 	<langue code="en" url="https://trad.spip.net/tradlang_module/linkcheck?lang_cible=en" total="62" traduits="53" relire="0" modifs="2" nouveaux="7" pourcent="85.48">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/linkcheck?lang_cible=fr" total="62" traduits="62" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/linkcheck?lang_cible=fr" total="62" traduits="62" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="nl" url="https://trad.spip.net/tradlang_module/linkcheck?lang_cible=nl" total="62" traduits="62" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
