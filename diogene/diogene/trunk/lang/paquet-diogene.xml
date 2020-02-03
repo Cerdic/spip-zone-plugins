@@ -1,11 +1,15 @@
-<traduction module="paquet-diogene" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/diogene/diogene/trunk/lang/" reference="fr">
-	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-diogene?lang_cible=en" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+<traduction
+	module="paquet-diogene"
+	id="paquet-diogene--diogene-5437a"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/diogene/diogene/trunk/lang"
+	reference="fr">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-diogene?lang_cible=en" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="es" url="https://trad.spip.net/tradlang_module/paquet-diogene?lang_cible=es" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-diogene?lang_cible=fr" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-diogene?lang_cible=fr" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/paquet-diogene?lang_cible=pt_br" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
