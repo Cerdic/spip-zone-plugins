@@ -1,6 +1,11 @@
-<traduction module="jeux" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/jeux/trunk/lang/" reference="fr">
-	<langue code="de" url="https://trad.spip.net/tradlang_module/jeux?lang_cible=de" total="82" traduits="29" relire="0" modifs="32" nouveaux="21" pourcent="35.37">
-	</langue>
+<traduction
+	module="jeux"
+	id="jeux--jeux-d7cfb"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/jeux/trunk/lang"
+	reference="fr">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/jeux?lang_cible=de" total="82" traduits="29" relire="0" modifs="32" nouveaux="21" pourcent="35.37" />
 	<langue code="en" url="https://trad.spip.net/tradlang_module/jeux?lang_cible=en" total="82" traduits="65" relire="0" modifs="14" nouveaux="3" pourcent="79.27">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 	</langue>
@@ -8,8 +13,7 @@
 		<traducteur nom="Ixab" lien="https://trad.spip.net/auteur/ixab" />
 		<traducteur nom="otalazt" lien="https://trad.spip.net/auteur/otalazt" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/jeux?lang_cible=fr" total="82" traduits="82" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/jeux?lang_cible=fr" total="82" traduits="82" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="it" url="https://trad.spip.net/tradlang_module/jeux?lang_cible=it" total="82" traduits="34" relire="0" modifs="37" nouveaux="11" pourcent="41.46">
 		<traducteur nom="Alessandra" lien="https://trad.spip.net/auteur/alessandra" />
 	</langue>
