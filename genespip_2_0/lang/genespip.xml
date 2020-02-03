@@ -1,4 +1,10 @@
-<traduction module="genespip" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/genespip_2_0/lang/" reference="fr">
+<traduction
+	module="genespip"
+	id="genespip--genespip_2_0-7e2e5"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/genespip_2_0/lang"
+	reference="fr">
 	<langue code="ca" url="https://trad.spip.net/tradlang_module/genespip?lang_cible=ca" total="180" traduits="178" relire="0" modifs="0" nouveaux="2" pourcent="98.89">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="merce" lien="https://trad.spip.net/auteur/merce" />
@@ -10,10 +16,8 @@
 	<langue code="fa" url="https://trad.spip.net/tradlang_module/genespip?lang_cible=fa" total="180" traduits="177" relire="0" modifs="1" nouveaux="2" pourcent="98.33">
 		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/genespip?lang_cible=fr" total="180" traduits="180" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
-	<langue code="pt" url="https://trad.spip.net/tradlang_module/genespip?lang_cible=pt" total="180" traduits="86" relire="0" modifs="1" nouveaux="93" pourcent="47.78">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/genespip?lang_cible=fr" total="180" traduits="180" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="pt" url="https://trad.spip.net/tradlang_module/genespip?lang_cible=pt" total="180" traduits="86" relire="0" modifs="1" nouveaux="93" pourcent="47.78" />
 	<langue code="sk" url="https://trad.spip.net/tradlang_module/genespip?lang_cible=sk" total="180" traduits="180" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 	</langue>
