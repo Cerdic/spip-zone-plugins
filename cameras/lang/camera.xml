@@ -1,13 +1,17 @@
-<traduction module="camera" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/cameras/lang/" reference="en">
+<traduction
+	module="camera"
+	id="camera--cameras-64ff8"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/cameras/lang"
+	reference="en">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/camera?lang_cible=en" total="77" traduits="77" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="arthur" lien="https://trad.spip.net/auteur/harry" />
 		<traducteur nom="bubu" lien="https://trad.spip.net/auteur/bubu" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/camera?lang_cible=fr" total="77" traduits="77" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/camera?lang_cible=fr" total="77" traduits="77" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="grc" url="https://trad.spip.net/tradlang_module/camera?lang_cible=grc" total="77" traduits="71" relire="1" modifs="0" nouveaux="5" pourcent="92.21">
 		<traducteur nom="frodoo" lien="https://trad.spip.net/auteur/frodoo" />
 	</langue>
-	<langue code="ru" url="https://trad.spip.net/tradlang_module/camera?lang_cible=ru" total="77" traduits="74" relire="0" modifs="0" nouveaux="3" pourcent="96.10">
-	</langue>
+	<langue code="ru" url="https://trad.spip.net/tradlang_module/camera?lang_cible=ru" total="77" traduits="74" relire="0" modifs="0" nouveaux="3" pourcent="96.10" />
 </traduction>
