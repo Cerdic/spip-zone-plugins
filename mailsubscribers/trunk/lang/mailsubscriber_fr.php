@@ -16,15 +16,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'confirmsubscribe_invite_texte_email_1' => '@invite_email_from@ vous invite à vous inscrire à la Newsletter de @nom_site_spip@ avec l’adresse email @email@.',
 	'confirmsubscribe_invite_texte_email_3' => 'S’il s’agit d’une erreur de notre part, vous pouvez ignorer ce mail : cette demande sera automatiquement annulée.',
-	'confirmsubscribe_invite_texte_email_liste_1' => '@invite_email_from@ vous invite à vous inscrire à la newsletter « @titre_liste@ » de @nom_site_spip@ avec l’adresse email @email@.',
+	'confirmsubscribe_invite_texte_email_liste_1' => '@invite_email_from@ vous invite à vous inscrire à la newsletter « @titre_liste@ » de @nom_site_spip@ avec l’adresse email « @email@ ».',
 	'confirmsubscribe_sujet_email' => '[@nom_site_spip@] Confirmation d’inscription à la Newsletter',
 	'confirmsubscribe_texte_email_1' => 'Vous avez demandé à vous inscrire à la Newsletter de @nom_site_spip@ avec l’adresse email @email@.',
 	'confirmsubscribe_texte_email_2' => 'Pour confirmer votre inscription, merci de cliquer sur le lien suivant :
 @url_confirmsubscribe@',
 	'confirmsubscribe_texte_email_3' => 'S’il s’agit d’une erreur de notre part ou si vous avez changé d’avis, vous pouvez ignorer ce mail : cette demande sera automatiquement annulée.',
 	'confirmsubscribe_texte_email_envoye' => 'Un email a été envoyé à cette adresse pour confirmation.',
-	'confirmsubscribe_texte_email_liste_1' => 'Vous avez demandé à vous inscrire à la newsletter « @titre_liste@ » de @nom_site_spip@ avec l’adresse email @email@.',
-	'confirmsubscribe_texte_email_listes_1' => 'Vous avez demandé à vous inscrire aux newsletters « @titre_liste@ » de @nom_site_spip@ avec l’adresse email @email@.',
+	'confirmsubscribe_texte_email_liste_1' => 'Vous avez demandé à vous inscrire à la newsletter « @titre_liste@ » de @nom_site_spip@ avec l’adresse email « @email@ ».',
+	'confirmsubscribe_texte_email_listes_1' => 'Vous avez demandé à vous inscrire aux newsletters « @titre_liste@ » de @nom_site_spip@ avec l’adresse email « @email@ ».',
 	'confirmsubscribe_titre_email' => 'Confirmation d’inscription à la Newsletter',
 	'confirmsubscribe_titre_email_liste' => 'Confirmation d’inscription à la newsletter « <b>@titre_liste@</b> »',
 	'confirmsubscribe_titre_email_listes' => 'Confirmation d’inscription aux newsletter ',
@@ -91,14 +91,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mailsubscribers_valide' => 'Inscrits',
 
 	// S
-	'subscribe_deja_texte' => 'L’adresse email @email@ est déjà inscrite à cette newsletter',
+	'subscribe_deja_texte' => 'L’adresse email « @email@ » est déjà inscrite à cette newsletter',
 	'subscribe_sujet_email' => '[@nom_site_spip@] Inscription à la Newsletter',
-	'subscribe_texte_email_1' => 'Nous avons bien pris en compte votre inscription à notre Newsletter avec l’adresse email @email@.',
+	'subscribe_texte_email_1' => 'Nous avons bien pris en compte votre inscription à notre Newsletter avec l’adresse email « @email@ ».',
 	'subscribe_texte_email_2' => 'Nous vous remercions de l’intérêt que vous portez à @nom_site_spip@.',
 	'subscribe_texte_email_3' => 'En cas d’erreur de notre part, ou si vous changez d’avis, vous pouvez vous désinscrire à tout moment au moyen du lien suivant :
 @url_unsubscribe@',
-	'subscribe_texte_email_liste_1' => 'Nous avons bien pris en compte votre inscription à la newsletter « @titre_liste@ » avec l’adresse email @email@.',
-	'subscribe_texte_email_listes_1' => 'Nous avons bien pris en compte votre inscription aux newsletters « @titre_liste@ » avec l’adresse email @email@.',
+	'subscribe_texte_email_liste_1' => 'Nous avons bien pris en compte votre inscription à la newsletter « @titre_liste@ » avec l’adresse email « @email@ ».',
+	'subscribe_texte_email_listes_1' => 'Nous avons bien pris en compte votre inscription aux newsletters « @titre_liste@ » avec l’adresse email « @email@ ».',
 	'subscribe_titre_email' => 'Inscription à la Newsletter',
 	'subscribe_titre_email_liste' => 'Inscription à la newsletter « <b>@titre_liste@</b> »',
 
@@ -119,22 +119,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_langue_mailsubscriber' => 'Langue de cet inscrit',
 	'titre_listes_de_diffusion' => 'Listes de diffusion',
 	'titre_logo_mailsubscriber' => 'Logo de cet inscrit',
-	'titre_mailsubscriber' => 'Inscrit à la newsletter',
+	'titre_mailsubscriber' => 'Inscrit aux envois par email',
 	'titre_mailsubscribers' => 'Inscrits aux envois par email',
 	'titre_recherche_email' => 'Email « @email@ »',
 	'titre_recherche_envois' => 'Envois à « @email@ »',
 
 	// U
-	'unsubscribe_deja_texte' => 'L’adresse email @email@ n’est pas inscrite à cette newsletter',
-	'unsubscribe_sujet_email' => '[@nom_site_spip@] Désinscription de la Newsletter',
-	'unsubscribe_texte_confirmer_email_1' => 'Veuillez confirmer la désinscription de l’adresse email @email@ en cliquant sur le bouton : ',
-	'unsubscribe_texte_confirmer_email_liste_1' => 'Veuillez confirmer la désinscription de l’adresse email @email@ de la newsletter <b>@titre_liste@</b> en cliquant sur le bouton : ',
-	'unsubscribe_texte_email_1' => 'L’adresse email @email@ a bien été retirée de cette newsletter.',
+	'unsubscribe_deja_texte' => 'L’adresse email « @email@ » n’est pas inscrite à cette liste de diffusion',
+	'unsubscribe_sujet_email' => '[@nom_site_spip@] Désinscription aux envois par mail',
+	'unsubscribe_texte_confirmer_email_1' => 'Veuillez confirmer la désinscription de l’adresse email « @email@ » en cliquant sur le bouton : ',
+	'unsubscribe_texte_confirmer_email_liste_1' => 'Veuillez confirmer la désinscription de l’adresse email « @email@ » de la liste de diffusion « <b>@titre_liste@</b> » en cliquant sur le bouton : ',
+	'unsubscribe_texte_email_1' => 'L’adresse email « @email@ » a bien été retirée de cette liste de diffusion.',
 	'unsubscribe_texte_email_2' => 'Nous espérons vous revoir bientôt sur @nom_site_spip@.',
 	'unsubscribe_texte_email_3' => 'En cas d’erreur de notre part, ou si vous changez d’avis, vous pouvez vous réinscrire à tout moment au moyen du lien suivant :
 @url_subscribe@',
-	'unsubscribe_texte_email_liste_1' => 'L’adresse email @email@ a bien été retirée de la liste de diffusion de la newsletter <b>@titre_liste@</b>.',
-	'unsubscribe_texte_email_listes_1' => 'L’adresse email @email@ a bien été retirée des listes de diffusion aux newsletters <b>@titre_liste@</b>.',
-	'unsubscribe_titre_email' => 'Désinscription de la Newsletter',
-	'unsubscribe_titre_email_liste' => 'Désinscription de la newsletter <b>@titre_liste@</b>'
+	'unsubscribe_texte_email_liste_1' => 'L’adresse email « @email@ » a bien été retirée de la liste de diffusion intitulée « <b>@titre_liste@</b> ».',
+	'unsubscribe_texte_email_listes_1' => 'L’adresse email « @email@ » a bien été retirée des listes de diffusion intitulées « <b>@titre_liste@</b> ».',
+	'unsubscribe_titre_email' => 'Désinscription de la liste de diffusion',
+	'unsubscribe_titre_email_liste' => 'Désinscription de la liste de diffusion « <b>@titre_liste@</b> »'
 );
