@@ -1,6 +1,11 @@
-<traduction module="verifier" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/verifier/lang/" reference="fr">
-	<langue code="ca" url="https://trad.spip.net/tradlang_module/verifier?lang_cible=ca" total="158" traduits="40" relire="0" modifs="8" nouveaux="110" pourcent="25.32">
-	</langue>
+<traduction
+	module="verifier"
+	id="verifier--verifier-24859"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/verifier/lang"
+	reference="fr">
+	<langue code="ca" url="https://trad.spip.net/tradlang_module/verifier?lang_cible=ca" total="158" traduits="40" relire="0" modifs="8" nouveaux="110" pourcent="25.32" />
 	<langue code="de" url="https://trad.spip.net/tradlang_module/verifier?lang_cible=de" total="158" traduits="152" relire="0" modifs="1" nouveaux="5" pourcent="96.20">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
@@ -22,8 +27,7 @@
 	<langue code="fa" url="https://trad.spip.net/tradlang_module/verifier?lang_cible=fa" total="158" traduits="71" relire="0" modifs="15" nouveaux="72" pourcent="44.94">
 		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/verifier?lang_cible=fr" total="158" traduits="158" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/verifier?lang_cible=fr" total="158" traduits="158" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/verifier?lang_cible=fr_tu" total="158" traduits="158" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="beatnick" lien="https://trad.spip.net/auteur/beatnick" />
 		<traducteur nom="Cerf" lien="https://trad.spip.net/auteur/cerf" />
