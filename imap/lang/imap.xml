@@ -1,7 +1,12 @@
-<traduction module="imap" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/imap/lang/" reference="fr">
+<traduction
+	module="imap"
+	id="imap--imap-3c8ae"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/imap/lang"
+	reference="fr">
 	<langue code="es" url="https://trad.spip.net/tradlang_module/imap?lang_cible=es" total="18" traduits="18" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="severo" lien="https://trad.spip.net/auteur/severo" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/imap?lang_cible=fr" total="18" traduits="18" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/imap?lang_cible=fr" total="18" traduits="18" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
