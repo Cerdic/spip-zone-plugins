@@ -1,4 +1,10 @@
-<traduction module="agenda" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/agenda/trunk/lang/" reference="fr">
+<traduction
+	module="agenda"
+	id="agenda--agenda-efa0c"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/agenda/trunk/lang"
+	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/agenda?lang_cible=ar" total="140" traduits="100" relire="0" modifs="0" nouveaux="40" pourcent="71.43">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="Sami Lejmi" lien="https://trad.spip.net/auteur/sami-lejmi" />
@@ -19,8 +25,7 @@
 		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
 		<traducteur nom="severo" lien="https://trad.spip.net/auteur/severo" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/agenda?lang_cible=fr" total="140" traduits="140" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/agenda?lang_cible=fr" total="140" traduits="140" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="ja" url="https://trad.spip.net/tradlang_module/agenda?lang_cible=ja" total="140" traduits="126" relire="0" modifs="0" nouveaux="14" pourcent="90.00">
 		<traducteur nom="origenius" lien="https://trad.spip.net/auteur/origenius" />
 	</langue>
