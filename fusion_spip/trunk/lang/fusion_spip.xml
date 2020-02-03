@@ -1,7 +1,12 @@
-<traduction module="fusion_spip" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/fusion_spip/trunk/lang/" reference="fr">
+<traduction
+	module="fusion_spip"
+	id="fusion_spip--fusion_spip-ff289"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/fusion_spip/trunk/lang"
+	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/fusion_spip?lang_cible=en" total="27" traduits="27" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jack31" lien="https://trad.spip.net/auteur/jack31" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/fusion_spip?lang_cible=fr" total="27" traduits="27" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/fusion_spip?lang_cible=fr" total="27" traduits="27" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
