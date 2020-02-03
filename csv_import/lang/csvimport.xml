@@ -1,26 +1,24 @@
-<traduction module="csvimport" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/csv_import/lang/" reference="fr">
-	<langue code="ca" url="https://trad.spip.net/tradlang_module/csvimport?lang_cible=ca" total="49" traduits="40" relire="0" modifs="3" nouveaux="6" pourcent="81.63">
-	</langue>
-	<langue code="de" url="https://trad.spip.net/tradlang_module/csvimport?lang_cible=de" total="49" traduits="40" relire="0" modifs="3" nouveaux="6" pourcent="81.63">
-	</langue>
+<traduction
+	module="csvimport"
+	id="csvimport--csv_import-30982"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/csv_import/lang"
+	reference="fr">
+	<langue code="ca" url="https://trad.spip.net/tradlang_module/csvimport?lang_cible=ca" total="49" traduits="40" relire="0" modifs="3" nouveaux="6" pourcent="81.63" />
+	<langue code="de" url="https://trad.spip.net/tradlang_module/csvimport?lang_cible=de" total="49" traduits="40" relire="0" modifs="3" nouveaux="6" pourcent="81.63" />
 	<langue code="en" url="https://trad.spip.net/tradlang_module/csvimport?lang_cible=en" total="49" traduits="49" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="es" url="https://trad.spip.net/tradlang_module/csvimport?lang_cible=es" total="49" traduits="49" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="severo" lien="https://trad.spip.net/auteur/severo" />
 	</langue>
-	<langue code="fa" url="https://trad.spip.net/tradlang_module/csvimport?lang_cible=fa" total="49" traduits="40" relire="0" modifs="3" nouveaux="6" pourcent="81.63">
-	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/csvimport?lang_cible=fr" total="49" traduits="49" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
-	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/csvimport?lang_cible=fr_tu" total="49" traduits="49" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
-	<langue code="gl" url="https://trad.spip.net/tradlang_module/csvimport?lang_cible=gl" total="49" traduits="40" relire="0" modifs="3" nouveaux="6" pourcent="81.63">
-	</langue>
-	<langue code="it" url="https://trad.spip.net/tradlang_module/csvimport?lang_cible=it" total="49" traduits="40" relire="0" modifs="3" nouveaux="6" pourcent="81.63">
-	</langue>
-	<langue code="km" url="https://trad.spip.net/tradlang_module/csvimport?lang_cible=km" total="49" traduits="21" relire="0" modifs="2" nouveaux="26" pourcent="42.86">
-	</langue>
+	<langue code="fa" url="https://trad.spip.net/tradlang_module/csvimport?lang_cible=fa" total="49" traduits="40" relire="0" modifs="3" nouveaux="6" pourcent="81.63" />
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/csvimport?lang_cible=fr" total="49" traduits="49" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/csvimport?lang_cible=fr_tu" total="49" traduits="49" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="gl" url="https://trad.spip.net/tradlang_module/csvimport?lang_cible=gl" total="49" traduits="40" relire="0" modifs="3" nouveaux="6" pourcent="81.63" />
+	<langue code="it" url="https://trad.spip.net/tradlang_module/csvimport?lang_cible=it" total="49" traduits="40" relire="0" modifs="3" nouveaux="6" pourcent="81.63" />
+	<langue code="km" url="https://trad.spip.net/tradlang_module/csvimport?lang_cible=km" total="49" traduits="21" relire="0" modifs="2" nouveaux="26" pourcent="42.86" />
 	<langue code="nl" url="https://trad.spip.net/tradlang_module/csvimport?lang_cible=nl" total="49" traduits="49" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
