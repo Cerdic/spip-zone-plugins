@@ -180,7 +180,7 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 
 			$comment = salvatore_clean_comment($chaine['comm']);
 
-			if ($initiale !== strtoupper($chaine['id'][0])){
+			if ($initiale!==strtoupper($chaine['id'][0])){
 				$initiale = strtoupper($chaine['id'][0]);
 				$php_lines[] = "\n$indent// $initiale";
 			}
@@ -206,7 +206,7 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 			$php_lines[] = $indent . var_export($chaine['id'], 1) . ' => ' . var_export($str, 1) . ',' . $comment;
 		}
 
-		salvatore_log(" - traduction (".$total_chaines['OK']."/$count_trad_reference OK | ".$total_chaines['RELIRE']."/$count_trad_reference RELIRE | ".$total_chaines['MODIF']."/$count_trad_reference MODIFS), export");
+		salvatore_log(" - traduction (" . $total_chaines['OK'] . "/$count_trad_reference OK | " . $total_chaines['RELIRE'] . "/$count_trad_reference RELIRE | " . $total_chaines['MODIF'] . "/$count_trad_reference MODIFS), export");
 		$file_name = salvatore_exporter_fichier_php($dir_module, $module, $lang, $php_lines, $url_trad_module, ($lang==$lang_ref) ? $url_repo : false);
 
 		// noter la langue et les traducteurs pour lang/module.xml
@@ -244,42 +244,48 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 		}
 		unset($people_unique);
 
-		$commit_infos[$lang]['lang'] = $lang;
-		$commit_infos[$lang]['file_name'] = basename($file_name);
-		$commit_infos[$lang]['lastmodified'] = salvatore_read_lastmodified_file(basename($file_name), $source, $dir_depots);
-		$commit_infos[$lang]['must_add'] = false;
+		if (salvatore_file_need_commit(basename($file_name), $source, $dir_depots)){
 
-		if ($row_module['limite_trad']==0){
-			$commit_infos[$lang]['must_add'] = true;
-		} elseif (!in_array($module, array('ecrire', 'spip', 'public'))) {
-			if ((intval(($xml_infos[$lang]['traduits']/$count_trad_reference)*100)>$seuil_export)){
+			$commit_infos[$lang]['lang'] = $lang;
+			$commit_infos[$lang]['file_name'] = basename($file_name);
+			$commit_infos[$lang]['lastmodified'] = salvatore_read_lastmodified_file(basename($file_name), $source, $dir_depots);
+			$commit_infos[$lang]['must_add'] = false;
+
+			if ($row_module['limite_trad']==0){
 				$commit_infos[$lang]['must_add'] = true;
-			}
-		}
-
-		// trouver le commiteur si c'est un fichier deja versionne ou a ajouter
-		if ($commit_infos[$lang]['lastmodified'] or $commit_infos[$lang]['must_add']) {
-			$where = [
-				"objet='tradlang'",
-				sql_in('id_objet', $id_tradlangs),
-				"id_auteur != '-1'",
-				'id_auteur !=' . intval(_ID_AUTEUR_SALVATORE),
-			];
-			if ($commit_infos[$lang]['lastmodified']) {
-				$where[] = "date>".sql_quote(date('Y-m-d H:i:s', $commit_infos[$lang]['lastmodified']));
-			}
-			$auteur_versions = sql_allfetsel('DISTINCT id_auteur', 'spip_versions',  $where);
-			if (count($auteur_versions)==1){
-				$auteur = sql_fetsel('nom,email', 'spip_auteurs', 'id_auteur = ' . intval($auteur_versions[0]['id_auteur']));
-				if ($auteur and $auteur['email']){
-					$commit_infos[$lang]['author'] = $auteur['email'];
-					if ($auteur['nom']) {
-						$commit_infos[$lang]['author'] = $auteur['nom'] . " <" . $commit_infos[$lang]['author'] . ">";
-					}
-					salvatore_log("Le commiteur pour la langue $lang : " . $commit_infos[$lang]['author']);
+			} elseif (!in_array($module, array('ecrire', 'spip', 'public'))) {
+				if ((intval(($xml_infos[$lang]['traduits']/$count_trad_reference)*100)>$seuil_export)){
+					$commit_infos[$lang]['must_add'] = true;
 				}
 			}
+
+			// trouver le commiteur si c'est un fichier deja versionne ou a ajouter
+			if ($commit_infos[$lang]['lastmodified'] or $commit_infos[$lang]['must_add']){
+				$where = [
+					"objet='tradlang'",
+					sql_in('id_objet', $id_tradlangs),
+					"id_auteur != '-1'",
+					'id_auteur !=' . intval(_ID_AUTEUR_SALVATORE),
+				];
+				if ($commit_infos[$lang]['lastmodified']){
+					$where[] = "date>" . sql_quote(date('Y-m-d H:i:s', $commit_infos[$lang]['lastmodified']));
+				}
+				$auteur_versions = sql_allfetsel('DISTINCT id_auteur', 'spip_versions', $where);
+				if (count($auteur_versions)==1){
+					$auteur = sql_fetsel('nom,email', 'spip_auteurs', 'id_auteur = ' . intval($auteur_versions[0]['id_auteur']));
+					if ($auteur and $auteur['email']){
+						$commit_infos[$lang]['author'] = $auteur['email'];
+						if ($auteur['nom']){
+							$commit_infos[$lang]['author'] = $auteur['nom'] . " <" . $commit_infos[$lang]['author'] . ">";
+						}
+						salvatore_log("Le commiteur pour la langue $lang : " . $commit_infos[$lang]['author']);
+					}
+				}
+			}
+		} else {
+			unset($commit_infos[$lang]);
 		}
+
 	}
 
 	// le fichier XML recapitulatif
@@ -310,12 +316,13 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 	$xml .= "</traduction>\n";
 	$file_xml = $dir_module . '/' . $module . '.xml';
 	file_put_contents($file_xml, $xml);
-	$commit_infos['.xml'] = array(
-		'file_name' => basename($file_xml),
-		'lastmodified' => salvatore_read_lastmodified_file(basename($file_xml), $source, $dir_depots),
-		'must_add' => true,
-	);
-
+	if (salvatore_file_need_commit(basename($file_xml), $source, $dir_depots)){
+		$commit_infos['.xml'] = array(
+			'file_name' => basename($file_xml),
+			'lastmodified' => salvatore_read_lastmodified_file(basename($file_xml), $source, $dir_depots),
+			'must_add' => true,
+		);
+	}
 
 
 	if (isset($liste_lang_non_exportees) and (count($liste_lang_non_exportees)>0)){
@@ -436,4 +443,23 @@ function salvatore_read_status_modif($module, $source, $dir_depots) {
 
 	$vcs_status_file = salvatore_vcs_function($source['methode'],  "status_file");
 	return $vcs_status_file($dir_depots . $source['dir_checkout'], $files_list);
+}
+
+
+/**
+ * Recuperer le status d'un fichier pour voir si vide ou si modifie/nouveau
+ * @param string $file
+ * @param array $source
+ * @param $dir_depots
+ * @return string
+ */
+function salvatore_file_need_commit($file, $source, $dir_depots) {
+	$pre = "";
+	if ($source['dir']) {
+		$pre = $source['dir'] . DIRECTORY_SEPARATOR;
+	}
+
+	$vcs_status_file = salvatore_vcs_function($source['methode'],  "status_file");
+	$status = $vcs_status_file($dir_depots . $source['dir_checkout'], $pre . $file);
+	return (strlen(trim($status)) ? true : false);
 }
