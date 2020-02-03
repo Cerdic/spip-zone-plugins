@@ -64,7 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'subscribe_deja_texte' => '@email@ уже подписан на эту рассылку', # MODIF
 	'subscribe_sujet_email' => '[@nom_site_spip@] Подписаться на рассылку',
-	'subscribe_texte_email_1' => 'Ваш емейл @email@ подписан на рассылку.',
+	'subscribe_texte_email_1' => 'Ваш емейл @email@ подписан на рассылку.', # MODIF
 	'subscribe_texte_email_2' => 'Спасибо за проявленный интерес @nom_site_spip@.',
 	'subscribe_texte_email_3' => 'Для того чтобы отписаться от рассылки перейдите по ссылке:
 @url_unsubscribe@',
@@ -84,15 +84,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_langue_mailsubscriber' => 'Язык пользователя',
 	'titre_listes_de_diffusion' => 'Базы данных',
 	'titre_logo_mailsubscriber' => 'Логотип пользователя',
-	'titre_mailsubscriber' => 'Подписано на рассылку',
+	'titre_mailsubscriber' => 'Подписано на рассылку', # MODIF
 	'titre_mailsubscribers' => 'База получателей рассылки',
 
 	// U
 	'unsubscribe_deja_texte' => '@email@ отсутствует в базе подписчиков.', # MODIF
-	'unsubscribe_sujet_email' => '[@nom_site_spip@] Отписаться',
+	'unsubscribe_sujet_email' => '[@nom_site_spip@] Отписаться', # MODIF
 	'unsubscribe_texte_email_1' => '@email@ удален из базы рассылки.', # MODIF
 	'unsubscribe_texte_email_2' => 'Ждем вас еще @nom_site_spip@.',
 	'unsubscribe_texte_email_3' => 'Для оформления повторной подписки перейдите по ссылке:
 @url_subscribe@',
-	'unsubscribe_titre_email' => 'Отписаться'
+	'unsubscribe_titre_email' => 'Отписаться' # MODIF
 );

@@ -92,7 +92,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'subscribe_deja_texte' => 'Die Mailadresse @email@ befindet sich bereits in der Empfängerliste.', # MODIF
 	'subscribe_sujet_email' => '[@nom_site_spip@] Newsletter-Anmeldung',
-	'subscribe_texte_email_1' => 'Ihre Newsletter-Anmeldung mit der E-Mailadress @email@ wurde entgegengenommen.',
+	'subscribe_texte_email_1' => 'Ihre Newsletter-Anmeldung mit der E-Mailadress @email@ wurde entgegengenommen.', # MODIF
 	'subscribe_texte_email_2' => 'Vielen Dank für Ihr Interesse an @nom_site_spip@.',
 	'subscribe_texte_email_3' => 'Falls ein Irrtum vorliegt, oder Sie Ihre Meinung ändern, können Sie sich jederzeit bei der folgenden Adresse abmelden : @url_unsubscribe@',
 	'subscribe_texte_email_liste_1' => 'Sie sind jetzt in die Liste « @titre_liste@ » unter der E-Mailadresse  @email@ eingetragen.', # MODIF
@@ -116,19 +116,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_langue_mailsubscriber' => 'Sprache des Abonnenten',
 	'titre_listes_de_diffusion' => 'Newsletter',
 	'titre_logo_mailsubscriber' => 'Logo des Abonnenten',
-	'titre_mailsubscriber' => 'Abonnent',
+	'titre_mailsubscriber' => 'Abonnent', # MODIF
 	'titre_mailsubscribers' => 'Abonnenten',
 
 	// U
 	'unsubscribe_deja_texte' => 'Die Adresse email @email@ befindet sich nicht in der Liste.', # MODIF
-	'unsubscribe_sujet_email' => '[@nom_site_spip@] Newsletter Abmeldung',
-	'unsubscribe_texte_confirmer_email_1' => 'Bitte bestätigen Sie die Abmeldung der Adresse email @email@ durch einen Klick auf die Schaltfläche: ',
+	'unsubscribe_sujet_email' => '[@nom_site_spip@] Newsletter Abmeldung', # MODIF
+	'unsubscribe_texte_confirmer_email_1' => 'Bitte bestätigen Sie die Abmeldung der Adresse email @email@ durch einen Klick auf die Schaltfläche: ', # MODIF
 	'unsubscribe_texte_confirmer_email_liste_1' => 'Bestätigen Sie die Abmeldung der E-Mailadresse @email@ von der Liste <b>@titre_liste@</b> durch Klick auf den Button: ', # MODIF
 	'unsubscribe_texte_email_1' => 'Die Adresse email @email@ wurde aus der Liste entfernt.', # MODIF
 	'unsubscribe_texte_email_2' => 'Bitte besuchen Sie @nom_site_spip@ bald wieder.',
 	'unsubscribe_texte_email_3' => 'Falls ein Irrtum vorliegt, oder Sie Ihre Meinung ändern, können Sie sich jederzeit unter der folgenden Adresse wieder anmelden:
 @url_subscribe@',
 	'unsubscribe_texte_email_liste_1' => 'Die E-Mailadresse @email@ wurde von unserer Verteilerliste <b>@titre_liste@</b> entfernt.', # MODIF
-	'unsubscribe_titre_email' => 'Newsletter Abmeldung',
+	'unsubscribe_titre_email' => 'Newsletter Abmeldung', # MODIF
 	'unsubscribe_titre_email_liste' => 'Abmeldung von der Liste <b>@titre_liste@</b>' # MODIF
 );
