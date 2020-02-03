@@ -1,6 +1,10 @@
-<traduction module="paquet-massicot" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/massicot/trunk/lang/" reference="fr">
-	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-massicot?lang_cible=en" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-massicot?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+<traduction
+	module="paquet-massicot"
+	id="paquet-massicot--massicot-73c3a"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/massicot/trunk/lang"
+	reference="fr">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-massicot?lang_cible=en" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-massicot?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
