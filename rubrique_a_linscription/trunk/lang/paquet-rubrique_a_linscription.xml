@@ -1,4 +1,9 @@
-<traduction module="paquet-rubrique_a_linscription" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/rubrique_a_linscription/trunk/lang" reference="fr">
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-rubrique_a_linscription?lang_cible=fr" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+<traduction
+	module="paquet-rubrique_a_linscription"
+	id="paquet-rubrique_a_linscription--rubrique_a_linscription-3d035"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/rubrique_a_linscription/trunk/lang"
+	reference="fr">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-rubrique_a_linscription?lang_cible=fr" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
