@@ -1,6 +1,10 @@
-<traduction module="shortcut_url" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/shortcut_url/trunk/lang/" reference="fr">
-	<langue code="en" url="https://trad.spip.net/tradlang_module/shortcut_url?lang_cible=en" total="90" traduits="77" relire="0" modifs="0" nouveaux="13" pourcent="85.56">
-	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/shortcut_url?lang_cible=fr" total="90" traduits="90" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+<traduction
+	module="shortcut_url"
+	id="shortcut_url--shortcut_url-85778"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/shortcut_url/trunk/lang"
+	reference="fr">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/shortcut_url?lang_cible=en" total="90" traduits="77" relire="0" modifs="0" nouveaux="13" pourcent="85.56" />
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/shortcut_url?lang_cible=fr" total="90" traduits="90" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
