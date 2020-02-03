@@ -1,4 +1,9 @@
-<traduction module="import_ics" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/import_ics/trunk/lang/" reference="fr">
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/import_ics?lang_cible=fr" total="9" traduits="9" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+<traduction
+	module="import_ics"
+	id="import_ics--import_ics-2ac00"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/import_ics/trunk/lang"
+	reference="fr">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/import_ics?lang_cible=fr" total="9" traduits="9" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
