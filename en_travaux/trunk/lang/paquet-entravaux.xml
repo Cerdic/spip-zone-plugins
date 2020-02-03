@@ -1,4 +1,10 @@
-<traduction module="paquet-entravaux" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/en_travaux/trunk/lang/" reference="fr">
+<traduction
+	module="paquet-entravaux"
+	id="paquet-entravaux--en_travaux-f060b"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/en_travaux/trunk/lang"
+	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/paquet-entravaux?lang_cible=ar" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="SuperYMS" lien="https://trad.spip.net/auteur/superyms" />
 	</langue>
@@ -14,8 +20,7 @@
 	<langue code="es" url="https://trad.spip.net/tradlang_module/paquet-entravaux?lang_cible=es" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="dani" lien="https://trad.spip.net/auteur/dani" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-entravaux?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-entravaux?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/paquet-entravaux?lang_cible=fr_tu" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Cerf" lien="https://trad.spip.net/auteur/cerf" />
 	</langue>
