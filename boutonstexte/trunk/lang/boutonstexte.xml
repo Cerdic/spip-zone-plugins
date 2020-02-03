@@ -1,4 +1,10 @@
-<traduction module="boutonstexte" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/boutonstexte/trunk/lang/" reference="fr">
+<traduction
+	module="boutonstexte"
+	id="boutonstexte--boutonstexte-fc33e"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/boutonstexte/trunk/lang"
+	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/boutonstexte?lang_cible=ar" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
@@ -14,8 +20,7 @@
 	<langue code="fa" url="https://trad.spip.net/tradlang_module/boutonstexte?lang_cible=fa" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/boutonstexte?lang_cible=fr" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/boutonstexte?lang_cible=fr" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="it" url="https://trad.spip.net/tradlang_module/boutonstexte?lang_cible=it" total="15" traduits="5" relire="0" modifs="0" nouveaux="10" pourcent="33.33">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 	</langue>
