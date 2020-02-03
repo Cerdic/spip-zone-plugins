@@ -1,4 +1,10 @@
-<traduction module="boussole-spip" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/boussole_spip/trunk/lang/" reference="fr">
+<traduction
+	module="boussole-spip"
+	id="boussole-spip--boussole_spip-be020"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/boussole_spip/trunk/lang"
+	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/boussole-spip?lang_cible=en" total="88" traduits="88" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Eric Lupinacci" lien="https://trad.spip.net/auteur/_eric_" />
@@ -17,8 +23,7 @@
 		<traducteur nom="Eric Lupinacci" lien="https://trad.spip.net/auteur/_eric_" />
 		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/boussole-spip?lang_cible=fr" total="88" traduits="88" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/boussole-spip?lang_cible=fr" total="88" traduits="88" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="nl" url="https://trad.spip.net/tradlang_module/boussole-spip?lang_cible=nl" total="88" traduits="88" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
