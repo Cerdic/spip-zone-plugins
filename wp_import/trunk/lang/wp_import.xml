@@ -1,4 +1,9 @@
-<traduction module="wp_import" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/wp_import/trunk/lang/" reference="fr">
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/wp_import?lang_cible=fr" total="29" traduits="29" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+<traduction
+	module="wp_import"
+	id="wp_import--wp_import-23fa9"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/wp_import/trunk/lang"
+	reference="fr">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/wp_import?lang_cible=fr" total="29" traduits="29" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
