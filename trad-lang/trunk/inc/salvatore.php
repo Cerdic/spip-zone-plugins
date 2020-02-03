@@ -185,6 +185,9 @@ function salvatore_charger_fichier_traductions($fichier_traductions = null){
 					if (end($d)){
 						$source = basename(end($d), '.git');
 						$source = '--' . preg_replace(',[^\w-],', '_', $source);
+						if ($branche and $branche !== 'master') {
+							$source .= "@$branche";
+						}
 					}
 					$dir_module = "{$module}{$source}-" . substr(md5("$methode:$url:$branche:$dir"), 0, 5);
 					$dir_checkout = preg_replace(",\W+,", "-", "$methode-$url") . ($branche ? "--$branche-" : "-") . substr(md5("$methode:$url:$branche"), 0, 5);
