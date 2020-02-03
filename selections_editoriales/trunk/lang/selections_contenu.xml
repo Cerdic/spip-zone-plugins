@@ -1,4 +1,10 @@
-<traduction module="selections_contenu" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/selections_editoriales/trunk/lang/" reference="fr">
+<traduction
+	module="selections_contenu"
+	id="selections_contenu--selections_editoriales-b38c8"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/selections_editoriales/trunk/lang"
+	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/selections_contenu?lang_cible=ar" total="28" traduits="28" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
@@ -6,8 +12,7 @@
 		<traducteur nom="cerdic" lien="https://trad.spip.net/auteur/cerdic" />
 		<traducteur nom="valery" lien="https://trad.spip.net/auteur/valery" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/selections_contenu?lang_cible=fr" total="28" traduits="28" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/selections_contenu?lang_cible=fr" total="28" traduits="28" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="nl" url="https://trad.spip.net/tradlang_module/selections_contenu?lang_cible=nl" total="28" traduits="28" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
