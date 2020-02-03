@@ -1,10 +1,15 @@
-<traduction module="sommaire" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/sommaire/trunk/lang" reference="fr">
+<traduction
+	module="sommaire"
+	id="sommaire--sommaire-597bd"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/sommaire/trunk/lang"
+	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/sommaire?lang_cible=en" total="25" traduits="25" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="lohierf" lien="https://trad.spip.net/auteur/lohierf" />
 	</langue>
 	<langue code="es" url="https://trad.spip.net/tradlang_module/sommaire?lang_cible=es" total="25" traduits="25" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="henry" lien="https://trad.spip.net/auteur/henry" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/sommaire?lang_cible=fr" total="25" traduits="25" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/sommaire?lang_cible=fr" total="25" traduits="25" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
