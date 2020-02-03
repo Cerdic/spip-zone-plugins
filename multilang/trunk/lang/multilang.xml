@@ -1,4 +1,10 @@
-<traduction module="multilang" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/multilang/trunk/lang/" reference="fr">
+<traduction
+	module="multilang"
+	id="multilang--multilang-f10a1"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/multilang/trunk/lang"
+	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/multilang?lang_cible=de" total="23" traduits="18" relire="0" modifs="1" nouveaux="4" pourcent="78.26">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 	</langue>
@@ -13,8 +19,7 @@
 	<langue code="fa" url="https://trad.spip.net/tradlang_module/multilang?lang_cible=fa" total="23" traduits="18" relire="0" modifs="1" nouveaux="4" pourcent="78.26">
 		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/multilang?lang_cible=fr" total="23" traduits="23" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/multilang?lang_cible=fr" total="23" traduits="23" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="nl" url="https://trad.spip.net/tradlang_module/multilang?lang_cible=nl" total="23" traduits="23" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
