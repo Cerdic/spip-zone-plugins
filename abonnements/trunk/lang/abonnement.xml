@@ -1,4 +1,10 @@
-<traduction module="abonnement" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/abonnements/trunk/lang/" reference="fr">
+<traduction
+	module="abonnement"
+	id="abonnement--abonnements-6851d"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/abonnements/trunk/lang"
+	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/abonnement?lang_cible=en" total="60" traduits="45" relire="0" modifs="4" nouveaux="11" pourcent="75.00">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Gilles" lien="https://trad.spip.net/auteur/gilles" />
@@ -8,6 +14,5 @@
 		<traducteur nom="alf" lien="https://trad.spip.net/auteur/alf" />
 		<traducteur nom="dani" lien="https://trad.spip.net/auteur/dani" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/abonnement?lang_cible=fr" total="60" traduits="60" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/abonnement?lang_cible=fr" total="60" traduits="60" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
