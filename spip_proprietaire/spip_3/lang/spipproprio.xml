@@ -1,11 +1,16 @@
-<traduction module="spipproprio" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/spip_proprietaire/spip_3/lang/" reference="fr">
+<traduction
+	module="spipproprio"
+	id="spipproprio--spip_3-610c9"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/spip_proprietaire/spip_3/lang"
+	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/spipproprio?lang_cible=en" total="191" traduits="191" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="merce" lien="https://trad.spip.net/auteur/merce" />
 		<traducteur nom="Patrick" lien="https://trad.spip.net/auteur/patrick" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/spipproprio?lang_cible=fr" total="191" traduits="191" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/spipproprio?lang_cible=fr" total="191" traduits="191" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="sk" url="https://trad.spip.net/tradlang_module/spipproprio?lang_cible=sk" total="191" traduits="191" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 	</langue>
