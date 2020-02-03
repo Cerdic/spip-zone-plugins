@@ -77,10 +77,23 @@ function type_jeu($texte) {
 
 /* Quelques balises "raccourcis" */
 
-// extraction du titre public, equivalent a : #CONTENU*|titre_jeu
+// extraction du titre public (table 'jeux' seulement)
+// #TITRE_PUBLIC equivalent a : #CONTENU*|titre_jeu
 function balise_TITRE_PUBLIC_dist($p) {
-	$texte = champ_sql('contenu', $p);
-	$p->code = "titre_jeu($texte)";
+	if(!$p->id_boucle) {
+		$id = $p->boucles[$p->id_boucle]->id_table;
+		if($id == 'jeux') {
+			$contenu = champ_sql('contenu', $p);
+			$p->code = "titre_jeu($contenu)";
+			return $p;
+		}
+		$p->code = champ_sql('titre_public', $p);
+		return $p; 
+	}
+	// verifier s'il existe deja un champ titre_public dans la table utilisee
+	$original = champ_sql('titre_public', $p);
+	$contenu = champ_sql('contenu', $p);
+	$p->code = "(strlen($original)?$original:titre_jeu($contenu))";
 	return $p;
 }
 
