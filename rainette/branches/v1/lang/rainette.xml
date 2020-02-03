@@ -1,8 +1,12 @@
-<traduction module="rainette" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/rainette/branches/v1/lang/" reference="fr">
-	<langue code="ca" url="https://trad.spip.net/tradlang_module/rainette?lang_cible=ca" total="111" traduits="107" relire="0" modifs="4" nouveaux="0" pourcent="96.40">
-	</langue>
-	<langue code="de" url="https://trad.spip.net/tradlang_module/rainette?lang_cible=de" total="111" traduits="107" relire="0" modifs="4" nouveaux="0" pourcent="96.40">
-	</langue>
+<traduction
+	module="rainette"
+	id="rainette--v1-e2664"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/rainette/branches/v1/lang"
+	reference="fr">
+	<langue code="ca" url="https://trad.spip.net/tradlang_module/rainette?lang_cible=ca" total="111" traduits="107" relire="0" modifs="4" nouveaux="0" pourcent="96.40" />
+	<langue code="de" url="https://trad.spip.net/tradlang_module/rainette?lang_cible=de" total="111" traduits="107" relire="0" modifs="4" nouveaux="0" pourcent="96.40" />
 	<langue code="en" url="https://trad.spip.net/tradlang_module/rainette?lang_cible=en" total="111" traduits="111" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
@@ -13,8 +17,7 @@
 	<langue code="fa" url="https://trad.spip.net/tradlang_module/rainette?lang_cible=fa" total="111" traduits="107" relire="0" modifs="4" nouveaux="0" pourcent="96.40">
 		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/rainette?lang_cible=fr" total="111" traduits="111" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/rainette?lang_cible=fr" total="111" traduits="111" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="it" url="https://trad.spip.net/tradlang_module/rainette?lang_cible=it" total="111" traduits="111" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Alberto" lien="https://trad.spip.net/auteur/alberto" />
 	</langue>
