@@ -1,4 +1,10 @@
-<traduction module="formidable" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/formidable/trunk/lang/" reference="fr">
+<traduction
+	module="formidable"
+	id="formidable--formidable-30cfd"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/formidable/trunk/lang"
+	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/formidable?lang_cible=ar" total="276" traduits="116" relire="0" modifs="18" nouveaux="142" pourcent="42.03">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
@@ -18,8 +24,7 @@
 		<traducteur nom="severo" lien="https://trad.spip.net/auteur/severo" />
 		<traducteur nom="tin" lien="https://trad.spip.net/auteur/tin" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/formidable?lang_cible=fr" total="276" traduits="276" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/formidable?lang_cible=fr" total="276" traduits="276" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="it" url="https://trad.spip.net/tradlang_module/formidable?lang_cible=it" total="276" traduits="101" relire="0" modifs="14" nouveaux="161" pourcent="36.59">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
