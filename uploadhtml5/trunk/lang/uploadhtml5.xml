@@ -1,4 +1,10 @@
-<traduction module="uploadhtml5" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/uploadhtml5/trunk/lang/" reference="fr">
+<traduction
+	module="uploadhtml5"
+	id="uploadhtml5--uploadhtml5-1a0e2"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/uploadhtml5/trunk/lang"
+	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/uploadhtml5?lang_cible=ar" total="29" traduits="20" relire="0" modifs="0" nouveaux="9" pourcent="68.97">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
@@ -11,8 +17,7 @@
 	<langue code="es" url="https://trad.spip.net/tradlang_module/uploadhtml5?lang_cible=es" total="29" traduits="20" relire="0" modifs="0" nouveaux="9" pourcent="68.97">
 		<traducteur nom="dani" lien="https://trad.spip.net/auteur/dani" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/uploadhtml5?lang_cible=fr" total="29" traduits="29" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/uploadhtml5?lang_cible=fr" total="29" traduits="29" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="nl" url="https://trad.spip.net/tradlang_module/uploadhtml5?lang_cible=nl" total="29" traduits="29" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
