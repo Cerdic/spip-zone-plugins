@@ -1,4 +1,10 @@
-<traduction module="langonet" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/langonet/branches/v0/lang/" reference="fr">
+<traduction
+	module="langonet"
+	id="langonet--v0-add51"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/langonet/branches/v0/lang"
+	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/langonet?lang_cible=en" total="137" traduits="137" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Martin McCaffery" lien="https://trad.spip.net/auteur/martin-mccaffery" />
@@ -6,8 +12,7 @@
 	<langue code="es" url="https://trad.spip.net/tradlang_module/langonet?lang_cible=es" total="137" traduits="137" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="severo" lien="https://trad.spip.net/auteur/severo" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/langonet?lang_cible=fr" total="137" traduits="137" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/langonet?lang_cible=fr" total="137" traduits="137" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="nl" url="https://trad.spip.net/tradlang_module/langonet?lang_cible=nl" total="137" traduits="137" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
