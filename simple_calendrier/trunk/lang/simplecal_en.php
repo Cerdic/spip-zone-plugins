@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de https://trad.spip.net/tradlang_module/simplecal?lang_cible=en
+// extrait automatiquement de https://trad.spip.net/tradlang_module/simplecal-simple_calendrier?lang_cible=en
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'a_venir' => 'Coming',
+	'a_venir' => 'Upcoming',
 	'auteur_ajouter' => 'Add',
 	'auteur_aucun' => 'No author !',
 	'auteur_msg_ajout' => 'Author added !',
@@ -46,7 +46,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_rubrique_non' => 'No, it makes no sens for me.',
 	'config_rubrique_partout' => 'Yes, create events in folder.',
 	'config_rubrique_secteur' => 'Yes, create events in 1st level folder (sector).',
-	'config_themepublic' => 'Public area theme', # MODIF
 	'config_themes_explication' => 'You can choose a theme (color set) for the ’little calendar’ in public area.', # MODIF
 	'config_titre' => 'Simple calendrier',
 	'corbeille_tous' => '@nb@ events in garbage',
@@ -91,9 +90,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'enregistrer_dabord_une_fois' => 'It’s possible ! <br /><br />But first, please save this page one time...',
-	'entree_evenement_publie' => 'Status of the event :', # MODIF
 	'evenement' => 'Event',
 	'evenement_date' => 'Date',
+	'evenement_horaire' => 'All day',
+	'evenements' => 'Events',
 	'explication_ref' => 'Reference to an article or news (ex : article23 ; breve45)',
 	'explication_texte' => 'Text for event description.',
 	'explication_titre' => 'Event Label',
@@ -106,21 +106,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'html_title' => 'Calendar',
 
 	// I
-	'icone_modifier_evenement' => 'Edit this event',
-	'icone_nouvel_evenement' => 'Write a new event',
+	'icone_evenements' => 'Events',
+	'icone_modifier_evenement' => 'Edit the event',
 	'inconnu' => 'unknown',
 	'info_1_evenement' => 'event',
-	'info_a_valider' => '[pending]',
+	'info_a_valider' => '[awaiting validation]',
+	'info_aucun_evenement' => 'No event',
 	'info_date_debut' => 'First date',
 	'info_date_fin' => 'Last date',
 	'info_descriptif_rapide' => 'Brief description',
 	'info_en_cours' => '[in progress]',
 	'info_evenement' => 'Event',
 	'info_evenement_libelle' => 'Events',
+	'info_evenements' => 'Events',
+	'info_evenements_02' => 'Events',
+	'info_evenements_auteur' => 'Events by this author',
 	'info_evenements_liees_mot' => 'Events associated with this keyword',
 	'info_gauche_numero_evenement' => 'EVENT NUMBER',
 	'info_lieu' => 'Place',
-	'info_ref' => 'Text : by reference', # MODIF
 	'info_statut_encours' => 'In progress',
 	'info_statut_poubelle' => 'In the dustbin',
 	'info_statut_proposee' => 'Submitted for publication',
@@ -147,21 +150,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'raccourcis_demo' => 'Démo...',
-	'raccourcis_ecrire_evenement' => 'Write a new event',
 	'raccourcis_liste_evenements_rubrique' => 'Events list for this folder',
 	'raccourcis_retour' => 'Back',
 	'raccourcis_tous_evenements' => 'All events',
 	'raccourcis_tous_evenements_rubrique' => 'Events for same folder',
 	'reference_objet' => 'see',
-	'retour_accueil' => 'Back home',
+	'retour_accueil' => 'Back to dashboard',
 	'retour_rubrique' => 'Back to folder',
 
 	// T
-	'terme_evenement' => 'event',
-	'terme_evenements' => 'events',
+	'terme_evenement' => 'Event',
+	'terme_evenements' => 'Events',
 	'texte' => 'Text',
 	'texte_issu_autre_objet' => 'Text related to other content',
-	'texte_modifier_evenement' => 'Edit this event',
+	'texte_modifier_evenement' => 'Edit the event',
 	'titre_boite_refobj' => 'in calendar',
 	'titre_boite_rubrique' => 'Calendar',
 	'titre_evenement_poubelle' => 'Event in the dustbin',
@@ -169,7 +171,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_evenement_propose' => 'Event submitted for publication',
 	'titre_evenement_publie' => 'Event published',
 	'titre_evenement_refuse' => 'Event rejected',
-	'titre_evenements' => 'Events', # MODIF
+	'titre_evenements' => 'Events',
 	'titre_nouvel_evenement' => 'New event',
 	'tous' => 'All',
 
