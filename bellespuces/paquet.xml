@@ -1,0 +1,17 @@
+<paquet
+	prefix="bellespuces"
+	categorie="edition"
+	version="0.1.8"
+	etat="stable"
+	compatibilite="[1.9.0;3.2.*]"
+	logo="bellespuces.png"
+	documentation="https://contrib.spip.net/3724"
+>	
+
+	<nom>Belles puces</nom>
+	<!-- De vraies listes à puces avec « <code>-</code> », comme « <code>-*</code> » ! -->
+
+	<auteur lien="http://conseil-recherche-innovation.net/le-cri/jerome-combaz">Jérôme Combaz</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	<pipeline nom="pre_typo" action="pre_typo" inclure="bellespuces_pipelines.php" />
+</paquet>
