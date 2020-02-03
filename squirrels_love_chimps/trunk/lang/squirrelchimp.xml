@@ -1,10 +1,13 @@
-<traduction module="squirrelchimp" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/squirrels_love_chimps/trunk/lang/" reference="fr">
-	<langue code="de" url="https://trad.spip.net/tradlang_module/squirrelchimp?lang_cible=de" total="13" traduits="11" relire="0" modifs="0" nouveaux="2" pourcent="84.62">
-	</langue>
-	<langue code="en" url="https://trad.spip.net/tradlang_module/squirrelchimp?lang_cible=en" total="13" traduits="13" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/squirrelchimp?lang_cible=fr" total="13" traduits="13" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+<traduction
+	module="squirrelchimp"
+	id="squirrelchimp--squirrels_love_chimps-14bfe"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/squirrels_love_chimps/trunk/lang"
+	reference="fr">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/squirrelchimp?lang_cible=de" total="13" traduits="11" relire="0" modifs="0" nouveaux="2" pourcent="84.62" />
+	<langue code="en" url="https://trad.spip.net/tradlang_module/squirrelchimp?lang_cible=en" total="13" traduits="13" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/squirrelchimp?lang_cible=fr" total="13" traduits="13" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="sk" url="https://trad.spip.net/tradlang_module/squirrelchimp?lang_cible=sk" total="13" traduits="13" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 	</langue>
