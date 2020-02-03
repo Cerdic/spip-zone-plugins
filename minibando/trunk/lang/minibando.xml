@@ -1,4 +1,10 @@
-<traduction module="minibando" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/minibando/trunk/lang/" reference="fr">
+<traduction
+	module="minibando"
+	id="minibando--minibando-7b0fa"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/minibando/trunk/lang"
+	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/minibando?lang_cible=ar" total="14" traduits="6" relire="0" modifs="0" nouveaux="8" pourcent="42.86">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
@@ -24,8 +30,7 @@
 	<langue code="fa" url="https://trad.spip.net/tradlang_module/minibando?lang_cible=fa" total="14" traduits="4" relire="0" modifs="1" nouveaux="9" pourcent="28.57">
 		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/minibando?lang_cible=fr" total="14" traduits="14" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/minibando?lang_cible=fr" total="14" traduits="14" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="nl" url="https://trad.spip.net/tradlang_module/minibando?lang_cible=nl" total="14" traduits="14" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
