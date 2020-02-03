@@ -1,9 +1,14 @@
-<traduction module="mes_fichiers" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/mes_fichiers/trunk/lang/" reference="fr">
+<traduction
+	module="mes_fichiers"
+	id="mes_fichiers--mes_fichiers-2c94f"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/mes_fichiers/trunk/lang"
+	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/mes_fichiers?lang_cible=en" total="49" traduits="49" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Eric Lupinacci" lien="https://trad.spip.net/auteur/_eric_" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/mes_fichiers?lang_cible=fr" total="49" traduits="49" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/mes_fichiers?lang_cible=fr" total="49" traduits="49" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="nl" url="https://trad.spip.net/tradlang_module/mes_fichiers?lang_cible=nl" total="49" traduits="49" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
