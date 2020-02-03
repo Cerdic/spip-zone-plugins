@@ -1,4 +1,9 @@
-<traduction module="paquet-pmb" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/spip-pmb/trunk/lang/" reference="fr">
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-pmb?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+<traduction
+	module="paquet-pmb"
+	id="paquet-pmb--spip-pmb-856e3"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/spip-pmb/trunk/lang"
+	reference="fr">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-pmb?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
