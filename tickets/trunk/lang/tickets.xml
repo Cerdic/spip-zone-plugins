@@ -1,4 +1,10 @@
-<traduction module="tickets" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/tickets/trunk/lang/" reference="fr">
+<traduction
+	module="tickets"
+	id="tickets--tickets-2e05b"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/tickets/trunk/lang"
+	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/tickets?lang_cible=ar" total="240" traduits="173" relire="0" modifs="0" nouveaux="67" pourcent="72.08">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
@@ -18,8 +24,7 @@
 		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
 		<traducteur nom="severo" lien="https://trad.spip.net/auteur/severo" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/tickets?lang_cible=fr" total="240" traduits="240" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/tickets?lang_cible=fr" total="240" traduits="240" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="nl" url="https://trad.spip.net/tradlang_module/tickets?lang_cible=nl" total="240" traduits="240" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
