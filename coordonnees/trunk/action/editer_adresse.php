@@ -45,14 +45,19 @@ function insert_adresse($c = '') {
 
 	$id_adresse = sql_insertq("spip_adresses", $champs);
 
-	if (!$c)
-		$c = array('objet' => _request('objet'),
+	if (!$c) {
+		$c = array(
+			'objet' => _request('objet'),
 			'id_objet' => _request('id_objet'),
-			'type' => _request('type'));
+			'type' => _request('type')
+		);
+	}
 
 	// ajouter la liaison si presente
 	if (!empty($c['objet']) and !empty($c['id_objet'])) {
-		if (empty($c['type'])) $c['type'] = '';
+		if (empty($c['type'])) {
+			$c['type'] = '';
+		}
 		$c['id_adresse'] = $id_adresse;
 		sql_insertq("spip_adresses_liens", $c);
 	}

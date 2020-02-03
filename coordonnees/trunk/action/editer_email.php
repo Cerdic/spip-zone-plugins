@@ -29,7 +29,7 @@ function action_editer_email_dist($arg = null) {
 }
 
 
-function insert_email() {
+function insert_email($c = '') {
 	$champs = array(
 		'email' => _T('coordonnees:item_nouvel_email')
 	);
@@ -44,17 +44,21 @@ function insert_email() {
 
 	$id_email = sql_insertq("spip_emails", $champs);
 
+	if (!$c) {
+		$c = array(
+			'objet' => _request('objet'),
+			'id_objet' => _request('id_objet'),
+			'type' => _request('type')
+		);
+	}
+
 	// ajouter la liaison si presente
-	if ($objet = _request('objet')
-		and $id_objet = _request('id_objet')
-	) {
-		$type = _request('type') ? _request('type') : '';
-		sql_insertq("spip_emails_liens", array(
-			'id_email' => $id_email,
-			'objet' => $objet,
-			'id_objet' => $id_objet,
-			'type' => $type
-		));
+	if (!empty($c['objet']) and !empty($c['id_objet'])) {
+		if (empty($c['type'])) {
+			$c['type'] = '';
+		}
+		$c['id_email'] = $id_email;
+		sql_insertq("spip_emails_liens", $c);
 	}
 
 	return $id_email;
