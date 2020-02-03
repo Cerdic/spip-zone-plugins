@@ -1,4 +1,10 @@
-<traduction module="emballe_medias" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/emballe_medias/emballe_medias/trunk/lang/" reference="fr">
+<traduction
+	module="emballe_medias"
+	id="emballe_medias--emballe_medias-352c6"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/emballe_medias/emballe_medias/trunk/lang"
+	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/emballe_medias?lang_cible=en" total="227" traduits="219" relire="0" modifs="0" nouveaux="8" pourcent="96.48">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="EScott" lien="https://trad.spip.net/auteur/escott" />
@@ -10,8 +16,7 @@
 		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
 		<traducteur nom="severo" lien="https://trad.spip.net/auteur/severo" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/emballe_medias?lang_cible=fr" total="227" traduits="227" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/emballe_medias?lang_cible=fr" total="227" traduits="227" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/emballe_medias?lang_cible=pt_br" total="227" traduits="227" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="filipaun" lien="https://trad.spip.net/auteur/filipaun" />
 	</langue>
