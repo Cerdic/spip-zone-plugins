@@ -1,4 +1,10 @@
-<traduction module="paquet-ancresdouces" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/ancres_douces/lang/" reference="fr">
+<traduction
+	module="paquet-ancresdouces"
+	id="paquet-ancresdouces--ancres_douces-b2eda"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/ancres_douces/lang"
+	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-ancresdouces?lang_cible=de" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 	</langue>
@@ -12,8 +18,7 @@
 		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 		<traducteur nom="RealET" lien="https://trad.spip.net/auteur/realet" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-ancresdouces?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-ancresdouces?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="it" url="https://trad.spip.net/tradlang_module/paquet-ancresdouces?lang_cible=it" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Alberto" lien="https://trad.spip.net/auteur/alberto" />
 	</langue>
