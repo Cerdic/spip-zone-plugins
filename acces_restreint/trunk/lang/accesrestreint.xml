@@ -1,14 +1,18 @@
-<traduction module="accesrestreint" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/acces_restreint/trunk/lang/" reference="fr">
+<traduction
+	module="accesrestreint"
+	id="accesrestreint--acces_restreint-4981f"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/acces_restreint/trunk/lang"
+	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=ar" total="70" traduits="48" relire="0" modifs="2" nouveaux="20" pourcent="68.57">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
 	<langue code="ast" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=ast" total="70" traduits="43" relire="0" modifs="2" nouveaux="25" pourcent="61.43">
 		<traducteur nom="Xuacu" lien="https://trad.spip.net/auteur/xuacu" />
 	</langue>
-	<langue code="br" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=br" total="70" traduits="39" relire="0" modifs="2" nouveaux="29" pourcent="55.71">
-	</langue>
-	<langue code="ca" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=ca" total="70" traduits="43" relire="0" modifs="2" nouveaux="25" pourcent="61.43">
-	</langue>
+	<langue code="br" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=br" total="70" traduits="39" relire="0" modifs="2" nouveaux="29" pourcent="55.71" />
+	<langue code="ca" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=ca" total="70" traduits="43" relire="0" modifs="2" nouveaux="25" pourcent="61.43" />
 	<langue code="de" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=de" total="70" traduits="66" relire="0" modifs="0" nouveaux="4" pourcent="94.29">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
@@ -29,18 +33,15 @@
 	<langue code="fa" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=fa" total="70" traduits="48" relire="0" modifs="2" nouveaux="20" pourcent="68.57">
 		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=fr" total="70" traduits="70" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=fr" total="70" traduits="70" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=fr_tu" total="70" traduits="66" relire="0" modifs="0" nouveaux="4" pourcent="94.29">
 		<traducteur nom="beatnick" lien="https://trad.spip.net/auteur/beatnick" />
 		<traducteur nom="Cerf" lien="https://trad.spip.net/auteur/cerf" />
 		<traducteur nom="orlammd" lien="https://trad.spip.net/auteur/orlammd" />
 		<traducteur nom="RealET" lien="https://trad.spip.net/auteur/realet" />
 	</langue>
-	<langue code="gl" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=gl" total="70" traduits="39" relire="0" modifs="2" nouveaux="29" pourcent="55.71">
-	</langue>
-	<langue code="it" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=it" total="70" traduits="26" relire="0" modifs="2" nouveaux="42" pourcent="37.14">
-	</langue>
+	<langue code="gl" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=gl" total="70" traduits="39" relire="0" modifs="2" nouveaux="29" pourcent="55.71" />
+	<langue code="it" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=it" total="70" traduits="26" relire="0" modifs="2" nouveaux="42" pourcent="37.14" />
 	<langue code="ja" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=ja" total="70" traduits="66" relire="0" modifs="0" nouveaux="4" pourcent="94.29">
 		<traducteur nom="origenius" lien="https://trad.spip.net/auteur/origenius" />
 	</langue>
@@ -58,13 +59,10 @@
 	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=pt_br" total="70" traduits="66" relire="0" modifs="0" nouveaux="4" pourcent="94.29">
 		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
-	<langue code="ro" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=ro" total="70" traduits="39" relire="0" modifs="2" nouveaux="29" pourcent="55.71">
-	</langue>
+	<langue code="ro" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=ro" total="70" traduits="39" relire="0" modifs="2" nouveaux="29" pourcent="55.71" />
 	<langue code="sk" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=sk" total="70" traduits="63" relire="0" modifs="0" nouveaux="7" pourcent="90.00">
 		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 	</langue>
-	<langue code="sv" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=sv" total="70" traduits="2" relire="0" modifs="0" nouveaux="68" pourcent="2.86">
-	</langue>
-	<langue code="tr" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=tr" total="70" traduits="39" relire="0" modifs="2" nouveaux="29" pourcent="55.71">
-	</langue>
+	<langue code="sv" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=sv" total="70" traduits="2" relire="0" modifs="0" nouveaux="68" pourcent="2.86" />
+	<langue code="tr" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=tr" total="70" traduits="39" relire="0" modifs="2" nouveaux="29" pourcent="55.71" />
 </traduction>
