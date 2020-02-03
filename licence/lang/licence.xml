@@ -1,6 +1,11 @@
-<traduction module="licence" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/licence/lang/" reference="fr">
-	<langue code="ca" url="https://trad.spip.net/tradlang_module/licence?lang_cible=ca" total="52" traduits="14" relire="0" modifs="18" nouveaux="20" pourcent="26.92">
-	</langue>
+<traduction
+	module="licence"
+	id="licence--licence-362a7"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/licence/lang"
+	reference="fr">
+	<langue code="ca" url="https://trad.spip.net/tradlang_module/licence?lang_cible=ca" total="52" traduits="14" relire="0" modifs="18" nouveaux="20" pourcent="26.92" />
 	<langue code="de" url="https://trad.spip.net/tradlang_module/licence?lang_cible=de" total="52" traduits="52" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 	</langue>
@@ -18,14 +23,12 @@
 	<langue code="eu" url="https://trad.spip.net/tradlang_module/licence?lang_cible=eu" total="52" traduits="36" relire="0" modifs="11" nouveaux="5" pourcent="69.23">
 		<traducteur nom="otalazt" lien="https://trad.spip.net/auteur/otalazt" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/licence?lang_cible=fr" total="52" traduits="52" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/licence?lang_cible=fr" total="52" traduits="52" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/licence?lang_cible=fr_tu" total="52" traduits="39" relire="0" modifs="10" nouveaux="3" pourcent="75.00">
 		<traducteur nom="beatnick" lien="https://trad.spip.net/auteur/beatnick" />
 		<traducteur nom="Cerf" lien="https://trad.spip.net/auteur/cerf" />
 	</langue>
-	<langue code="it" url="https://trad.spip.net/tradlang_module/licence?lang_cible=it" total="52" traduits="14" relire="0" modifs="18" nouveaux="20" pourcent="26.92">
-	</langue>
+	<langue code="it" url="https://trad.spip.net/tradlang_module/licence?lang_cible=it" total="52" traduits="14" relire="0" modifs="18" nouveaux="20" pourcent="26.92" />
 	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/licence?lang_cible=pt_br" total="52" traduits="52" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="filipaun" lien="https://trad.spip.net/auteur/filipaun" />
 	</langue>
