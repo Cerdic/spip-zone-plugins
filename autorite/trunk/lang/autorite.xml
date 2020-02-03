@@ -1,4 +1,10 @@
-<traduction module="autorite" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/autorite/trunk/lang/" reference="fr">
+<traduction
+	module="autorite"
+	id="autorite--autorite-65ea9"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/autorite/trunk/lang"
+	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=ar" total="81" traduits="81" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
@@ -25,8 +31,7 @@
 	<langue code="fa" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=fa" total="81" traduits="74" relire="0" modifs="4" nouveaux="3" pourcent="91.36">
 		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=fr" total="81" traduits="81" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=fr" total="81" traduits="81" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="it" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=it" total="81" traduits="54" relire="23" modifs="3" nouveaux="1" pourcent="66.67">
 		<traducteur nom="Julia14" lien="https://trad.spip.net/auteur/julia14" />
 		<traducteur nom="marydeli" lien="https://trad.spip.net/auteur/marydeli" />
