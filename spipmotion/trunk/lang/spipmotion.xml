@@ -1,4 +1,10 @@
-<traduction module="spipmotion" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/spipmotion/trunk/lang/" reference="fr">
+<traduction
+	module="spipmotion"
+	id="spipmotion--spipmotion-266a7"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/spipmotion/trunk/lang"
+	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/spipmotion?lang_cible=en" total="186" traduits="186" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
@@ -8,6 +14,5 @@
 		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
 		<traducteur nom="severo" lien="https://trad.spip.net/auteur/severo" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/spipmotion?lang_cible=fr" total="186" traduits="186" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/spipmotion?lang_cible=fr" total="186" traduits="186" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
