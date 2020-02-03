@@ -1,14 +1,17 @@
-<traduction module="skeleditor" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/skeleditor/trunk/lang/" reference="fr">
-	<langue code="de" url="https://trad.spip.net/tradlang_module/skeleditor?lang_cible=de" total="59" traduits="52" relire="0" modifs="7" nouveaux="0" pourcent="88.14">
-	</langue>
+<traduction
+	module="skeleditor"
+	id="skeleditor--skeleditor-67525"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/skeleditor/trunk/lang"
+	reference="fr">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/skeleditor?lang_cible=de" total="59" traduits="52" relire="0" modifs="7" nouveaux="0" pourcent="88.14" />
 	<langue code="en" url="https://trad.spip.net/tradlang_module/skeleditor?lang_cible=en" total="59" traduits="59" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jack31" lien="https://trad.spip.net/auteur/jack31" />
 		<traducteur nom="Loiseau2nuit" lien="https://trad.spip.net/auteur/loiseau2nuit" />
 	</langue>
-	<langue code="es" url="https://trad.spip.net/tradlang_module/skeleditor?lang_cible=es" total="59" traduits="25" relire="0" modifs="5" nouveaux="29" pourcent="42.37">
-	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/skeleditor?lang_cible=fr" total="59" traduits="59" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="es" url="https://trad.spip.net/tradlang_module/skeleditor?lang_cible=es" total="59" traduits="25" relire="0" modifs="5" nouveaux="29" pourcent="42.37" />
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/skeleditor?lang_cible=fr" total="59" traduits="59" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="nl" url="https://trad.spip.net/tradlang_module/skeleditor?lang_cible=nl" total="59" traduits="59" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
