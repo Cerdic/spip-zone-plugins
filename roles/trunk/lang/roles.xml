@@ -1,6 +1,11 @@
-<traduction module="roles" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/roles/trunk/lang" reference="fr">
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/roles?lang_cible=fr" total="10" traduits="10" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+<traduction
+	module="roles"
+	id="roles--roles-ce962"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/roles/trunk/lang"
+	reference="fr">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/roles?lang_cible=fr" total="10" traduits="10" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/roles?lang_cible=pt_br" total="10" traduits="10" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
