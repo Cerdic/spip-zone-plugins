@@ -1,6 +1,10 @@
-<traduction module="produit" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/produits/trunk/lang/" reference="fr">
-	<langue code="en" url="https://trad.spip.net/tradlang_module/produit?lang_cible=en" total="25" traduits="24" relire="0" modifs="1" nouveaux="0" pourcent="96.00">
-	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/produit?lang_cible=fr" total="25" traduits="25" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+<traduction
+	module="produit"
+	id="produit--produits-22d3b"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/produits/trunk/lang"
+	reference="fr">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/produit?lang_cible=en" total="25" traduits="24" relire="0" modifs="1" nouveaux="0" pourcent="96.00" />
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/produit?lang_cible=fr" total="25" traduits="25" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
