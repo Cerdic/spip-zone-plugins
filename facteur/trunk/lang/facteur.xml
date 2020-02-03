@@ -1,4 +1,10 @@
-<traduction module="facteur" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/facteur/trunk/lang/" reference="fr">
+<traduction
+	module="facteur"
+	id="facteur--facteur-0e4cb"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/facteur/trunk/lang"
+	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/facteur?lang_cible=de" total="68" traduits="52" relire="0" modifs="3" nouveaux="13" pourcent="76.47">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
@@ -21,8 +27,7 @@
 	<langue code="fa" url="https://trad.spip.net/tradlang_module/facteur?lang_cible=fa" total="68" traduits="39" relire="0" modifs="11" nouveaux="18" pourcent="57.35">
 		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/facteur?lang_cible=fr" total="68" traduits="68" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/facteur?lang_cible=fr" total="68" traduits="68" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/facteur?lang_cible=fr_tu" total="68" traduits="52" relire="0" modifs="3" nouveaux="13" pourcent="76.47">
 		<traducteur nom="Cerf" lien="https://trad.spip.net/auteur/cerf" />
 		<traducteur nom="RealET" lien="https://trad.spip.net/auteur/realet" />
