@@ -1,4 +1,9 @@
-<traduction module="paquet-alerte_urgence" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/alerte_urgence/trunk/lang/" reference="fr">
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-alerte_urgence?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+<traduction
+	module="paquet-alerte_urgence"
+	id="paquet-alerte_urgence--alerte_urgence-2d950"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/alerte_urgence/trunk/lang"
+	reference="fr">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-alerte_urgence?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
