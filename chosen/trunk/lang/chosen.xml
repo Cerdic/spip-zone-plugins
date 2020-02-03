@@ -1,4 +1,10 @@
-<traduction module="chosen" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/chosen/trunk/lang/" reference="fr">
+<traduction
+	module="chosen"
+	id="chosen--chosen-cc061"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/chosen/trunk/lang"
+	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/chosen?lang_cible=de" total="12" traduits="12" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 	</langue>
@@ -11,8 +17,7 @@
 	<langue code="eu" url="https://trad.spip.net/tradlang_module/chosen?lang_cible=eu" total="12" traduits="1" relire="0" modifs="0" nouveaux="11" pourcent="8.33">
 		<traducteur nom="RastaPopoulos" lien="https://trad.spip.net/auteur/rastapopoulos" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/chosen?lang_cible=fr" total="12" traduits="12" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/chosen?lang_cible=fr" total="12" traduits="12" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="it" url="https://trad.spip.net/tradlang_module/chosen?lang_cible=it" total="12" traduits="11" relire="0" modifs="0" nouveaux="1" pourcent="91.67">
 		<traducteur nom="Alberto" lien="https://trad.spip.net/auteur/alberto" />
 	</langue>
