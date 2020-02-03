@@ -20,17 +20,17 @@ function action_tradlang_creer_langue_cible_dist() {
 
 	include_spip('inc/autoriser');
 	$lang_crea = _request('lang_crea');
-	if ($lang_crea and intval($arg) and autoriser('modifier', 'tradlang')) {
+	if ($lang_crea and $id_tradlang_module and autoriser('modifier', 'tradlang')) {
 		// Import de la langue mere
-		$infos_module = sql_fetsel('*', 'spip_tradlang_modules', 'id_tradlang_module = ' . intval($arg));
+		$infos_module = sql_fetsel('*', 'spip_tradlang_modules', 'id_tradlang_module = ' . intval($id_tradlang_module));
 		if (!$infos_module) {
-			spip_log('tradlang_creer_langue_cible : infos_module non existant', 'tradlang.' . _LOG_ERREUR);
+			spip_log("action_tradlang_creer_langue_cible : infos_module #$id_tradlang_module non existant", 'tradlang.' . _LOG_ERREUR);
 		} else {
 			$ajouter_code_langue = charger_fonction('tradlang_ajouter_code_langue', 'inc');
 			$ajouter_code_langue($infos_module,$lang_crea);
 		}
 	} else {
-		spip_log("action_tradlang_creer_langue_cible : Module $module_nom inexistant", 'tradlang.' . _LOG_ERREUR);
+		spip_log("action_tradlang_creer_langue_cible : modification module #$id_tradlang_module interdite", 'tradlang.' . _LOG_ERREUR);
 	}
 
 	$redirect = _request('redirect');

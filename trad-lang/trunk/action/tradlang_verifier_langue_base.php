@@ -10,16 +10,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-function action_tradlang_verifier_langue_base() {
+function action_tradlang_verifier_langue_base_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
-	if (!preg_match(',^(\w+)\/(\w+)$,', $arg, $r)) {
+	if (!preg_match(',^(\d+)\/(\w+)$,', $arg, $r)) {
 		spip_log("action_tradlang_verifier_langue_base $arg pas compris", 'tradlang');
 	} else {
-		$module = $r[1];
+		$id_tradlang_module = $r[1];
 		$lang = $r[2];
 		$tradlang_verifier_langue_base = charger_fonction('tradlang_verifier_langue_base', 'inc');
-		$tradlang_verifier_langue_base($module,$lang);
+		$tradlang_verifier_langue_base($id_tradlang_module,$lang);
 	}
 
 	return;
