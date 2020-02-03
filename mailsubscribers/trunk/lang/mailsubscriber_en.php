@@ -92,7 +92,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'subscribe_deja_texte' => 'The email address @email@ is already in our mailing list', # MODIF
 	'subscribe_sujet_email' => '[@nom_site_spip@] Subscribe to our Newsletter',
-	'subscribe_texte_email_1' => 'We have recorded your subscription to our newsletter with the email @email@.', # MODIF
+	'subscribe_texte_email_1' => 'We have recorded your subscription to our newsletter with the email @email@.',
 	'subscribe_texte_email_2' => 'Thank you for the interest you have shown in @nom_site_spip@.',
 	'subscribe_texte_email_3' => 'In case of error, or if you change your mind, you can unsubscribe at any time using the following link :
 @url_unsubscribe@',
@@ -117,19 +117,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_langue_mailsubscriber' => 'Language of the subcriber',
 	'titre_listes_de_diffusion' => 'Mailing Lists',
 	'titre_logo_mailsubscriber' => 'Logo of the subcriber',
-	'titre_mailsubscriber' => 'Email Subscriber', # MODIF
+	'titre_mailsubscriber' => 'Email Subscriber',
 	'titre_mailsubscribers' => 'Email Subscribers',
 
 	// U
 	'unsubscribe_deja_texte' => 'The email address @email@ is not in our mailing list.', # MODIF
-	'unsubscribe_sujet_email' => '[@nom_site_spip@] Unsubscribe from Newsletter', # MODIF
-	'unsubscribe_texte_confirmer_email_1' => 'Please click on button to confirm unsubscribe of email @email@: ', # MODIF
+	'unsubscribe_sujet_email' => '[@nom_site_spip@] Unsubscribe from Newsletter',
+	'unsubscribe_texte_confirmer_email_1' => 'Please click on button to confirm unsubscribe of email @email@: ',
 	'unsubscribe_texte_confirmer_email_liste_1' => 'Please confirm your request to remove @email@ from the list « @titre_liste@ » by clicking this button: ', # MODIF
 	'unsubscribe_texte_email_1' => 'The email address @email@ has been removed from our mailing list.', # MODIF
 	'unsubscribe_texte_email_2' => 'We hope to see you soon on @nom_site_spip@.',
 	'unsubscribe_texte_email_3' => 'In case of error, or if you change your mind, you can re-subscribe at any time using the following link :
 @url_subscribe@',
 	'unsubscribe_texte_email_liste_1' => 'Email address @email@ has been removed from our distribution list « @titre_liste@ ».', # MODIF
-	'unsubscribe_titre_email' => 'Unsubscribe from Newsletter', # MODIF
+	'unsubscribe_titre_email' => 'Unsubscribe from Newsletter',
 	'unsubscribe_titre_email_liste' => 'Removal from list « <b>@titre_liste@</b> »' # MODIF
 );

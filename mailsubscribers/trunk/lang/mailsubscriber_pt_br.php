@@ -89,7 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'subscribe_deja_texte' => 'O email @email@ já está en nossa mailing list', # MODIF
 	'subscribe_sujet_email' => '[@nom_site_spip@] Inscrição na newsletter',
-	'subscribe_texte_email_1' => 'Sua inscriçao está confirmada na newsletter com esse email @email@.', # MODIF
+	'subscribe_texte_email_1' => 'Sua inscriçao está confirmada na newsletter com esse email @email@.',
 	'subscribe_texte_email_2' => 'Agradecemos seu interesse pelo @nom_site_spip@.',
 	'subscribe_texte_email_3' => 'Caso tenha ocorrido um erro, ou se você mudou sua me, você pode cancelar a inscrição na newsletter na qualquer momento :
 @url_unsubscribe@',
@@ -114,19 +114,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_langue_mailsubscriber' => 'Idioma associado a essa inscrição',
 	'titre_listes_de_diffusion' => 'Mailing lists',
 	'titre_logo_mailsubscriber' => 'Logo associado a esse inscrição',
-	'titre_mailsubscriber' => 'Inscrição na newsletter', # MODIF
+	'titre_mailsubscriber' => 'Inscrição na newsletter',
 	'titre_mailsubscribers' => 'Inscrições na newsletter',
 
 	// U
 	'unsubscribe_deja_texte' => 'O endereço email @email@ não esta incluido em nossa mailing list.', # MODIF
-	'unsubscribe_sujet_email' => '[@nom_site_spip@] Cancelar a inscrição na newsletter', # MODIF
-	'unsubscribe_texte_confirmer_email_1' => 'Por favor, confirme o cancelamento da inscrição na newsletter por o email @email@, e clique no botão : ', # MODIF
+	'unsubscribe_sujet_email' => '[@nom_site_spip@] Cancelar a inscrição na newsletter',
+	'unsubscribe_texte_confirmer_email_1' => 'Por favor, confirme o cancelamento da inscrição na newsletter por o email @email@, e clique no botão : ',
 	'unsubscribe_texte_confirmer_email_liste_1' => 'Por favor, confirme o cancelamento da inscrição do endereço de e-mail @email@ da lista <b>@titre_liste@</b>, clicando no botão: ', # MODIF
 	'unsubscribe_texte_email_1' => 'Esse endereço email @email@ foi retirado da nossa mailing list.', # MODIF
 	'unsubscribe_texte_email_2' => 'A gente espera de te encontrar de novo em breve no @nom_site_spip@.',
 	'unsubscribe_texte_email_3' => 'No caso de nosso erro, ou caso você tenha mudado de ideia, você pode fazer uma nova inscrição na newsletter, clique aqui :
 @url_subscribe@',
 	'unsubscribe_texte_email_liste_1' => 'O endereço de e-mail @email@ foi excluído da lista de difusão <b>@titre_liste@</b>.', # MODIF
-	'unsubscribe_titre_email' => 'Cancelar a inscrição na newsletter', # MODIF
+	'unsubscribe_titre_email' => 'Cancelar a inscrição na newsletter',
 	'unsubscribe_titre_email_liste' => 'Cancelamento da inscrição na lista <b>@titre_liste@</b>' # MODIF
 );

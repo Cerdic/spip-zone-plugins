@@ -29,14 +29,7 @@ function action_confirm_unsubscribe_mailsubscriber_dist($email = null, $id_mails
 		$arg = explode(':', $arg);
 		$timestamp = array_pop($arg);
 		$id_mailsubscribinglists = array_pop($arg);
-		if($id_mailsubscribinglists == 'ALL') {
-			// clic sur le bouton "me desinscrire de TOUTES les listes"
-			$id_mailsubscribinglists = array('ALL' => -1);
-		} else {
-			$id_mailsubscribinglists = empty($id_mailsubscribinglists) 
-				? array() 
-				: explode('-', $id_mailsubscribinglists);
-		}
+		$id_mailsubscribinglists = explode('-', $id_mailsubscribinglists);
 		$email = implode(":", $arg);
 	}
 

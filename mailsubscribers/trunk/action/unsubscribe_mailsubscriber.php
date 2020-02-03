@@ -44,12 +44,8 @@ function action_unsubscribe_mailsubscriber_dist($email = null, $id_mailsubscribi
 		$deja = true;
 	}
 	if ($id_mailsubscribinglists){
-
-		$sql_in = isset($id_mailsubscribinglists['ALL'])
-			? sql_in('identifiant', $infos['listes']) // clic sur le bouton "me desinscrire de TOUTES les listes"
-			: sql_in('id_mailsubscribinglist', $id_mailsubscribinglists);
 		$titre_liste = array();
-		$listes = sql_allfetsel('id_mailsubscribinglist, identifiant, titre_public', 'spip_mailsubscribinglists', $sql_in);
+		$listes = sql_allfetsel('id_mailsubscribinglist, identifiant, titre_public', 'spip_mailsubscribinglists', sql_in('id_mailsubscribinglist', $id_mailsubscribinglists));
 		foreach ($listes as $liste) {
 			$identifiant = $liste['identifiant'];
 			$status = (isset($infos['subscriptions'][$identifiant]['status'])?$infos['subscriptions'][$identifiant]['status']:'');
@@ -85,15 +81,15 @@ function action_unsubscribe_mailsubscriber_dist($email = null, $id_mailsubscribi
 		);
 		if ($double_optin) {
 			include_spip('inc/filtres');
-			if ($nb_listes >= 1) {
-				if ($nb_listes > 1) {
+			if ($nb_listes>=1) {
+				if ($nb_listes>1) {
 					$titre = _T('mailsubscriber:unsubscribe_texte_confirmer_email_listes_1', $env);
 					$label_bouton_this = _T('newsletter:bouton_unsubscribe_multiples');
-				} else {
+				} elseif ($nb_listes == 1) {
 					$titre = _T('mailsubscriber:unsubscribe_texte_confirmer_email_liste_1', $env);
 					$label_bouton_this = _T('newsletter:bouton_unsubscribe');
 				}
-				// si il y a d'autres abonnements valides que ceux-la, on met un premier bouton pour le desabonnement a cette/ces newsletters
+				// si il y a d'autres abonnements valides que ceux la, on met un premier bouton pour le desabonnement a cette/ces newsletters
 				$has_other = false;
 				foreach ($infos['subscriptions'] as $identifiant => $subscription) {
 					if ($subscription['status'] === 'on' and !in_array($identifiant, $identifiants)) {
@@ -104,7 +100,7 @@ function action_unsubscribe_mailsubscriber_dist($email = null, $id_mailsubscribi
 				if ($has_other){
 					$titre .= "<br /><br />" . bouton_action($label_bouton_this,
 							generer_action_auteur('confirm_unsubscribe_mailsubscriber',
-								mailsubscriber_base64url_encode($email . ':' . implode('-', $id_mailsubscribinglists) . ':' . time())));
+								mailsubscriber_base64url_encode($email . ":" . implode('-', $id_mailsubscribinglists) . ":" . time())));
 				}
 			}
 			else {
@@ -114,11 +110,11 @@ function action_unsubscribe_mailsubscriber_dist($email = null, $id_mailsubscribi
 			// bouton de desinscription de TOUTES : il n'y aura que celui la present si pas d'autre inscription valide que celle(s) qu'on resilie
 			$titre .= "<br /><br />" . bouton_action(_T('newsletter:bouton_unsubscribe_all'),
 					generer_action_auteur('confirm_unsubscribe_mailsubscriber',
-						mailsubscriber_base64url_encode($email . ":ALL:" . time())));
+						mailsubscriber_base64url_encode($email . "::".time())));
 		}
 		else {
 			$options['force'] = true;
-			if ($nb_listes > 1) {
+			if ($nb_listes>1) {
 				$titre = _T('mailsubscriber:unsubscribe_texte_email_listes_1', $env);
 			} elseif ($nb_listes == 1) {
 				$titre = _T('mailsubscriber:unsubscribe_texte_email_liste_1', $env);

@@ -93,7 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'subscribe_deja_texte' => 'Ｅメールアドレス@email@は既にメーリングリストに登録されています。', # MODIF
 	'subscribe_sujet_email' => '「@nom_site_spip@」ニュースレターの申し込み',
-	'subscribe_texte_email_1' => 'ニュースレターを受け取るように、Ｅメールアドレス@email@は有効されました。', # MODIF
+	'subscribe_texte_email_1' => 'ニュースレターを受け取るように、Ｅメールアドレス@email@は有効されました。',
 	'subscribe_texte_email_2' => '@nom_site_spip@にご関心をお持ちいただき、ありがとうございます。',
 	'subscribe_texte_email_3' => 'こち側よりエラーが発生したか、ご意見が変わったかの場合には、次のリンクを使用して@url_unsubscribe@、いつでも購読を取り消すことが出来ます。
 ',
@@ -119,19 +119,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_langue_mailsubscriber' => '購読者の言語',
 	'titre_listes_de_diffusion' => 'メーリングリスト',
 	'titre_logo_mailsubscriber' => '購読者のロゴ',
-	'titre_mailsubscriber' => 'ニュースレターに購読', # MODIF
+	'titre_mailsubscriber' => 'ニュースレターに購読',
 	'titre_mailsubscribers' => 'Ｅメール送信の購読者',
 
 	// U
 	'unsubscribe_deja_texte' => 'メールアドレス@email@はメーリングリストに登録されていません。', # MODIF
-	'unsubscribe_sujet_email' => '「@nom_site_spip@」ニュースレターの購読を停止する', # MODIF
-	'unsubscribe_texte_confirmer_email_1' => 'メール@email@の購読停止を確認するには、ボタンをクリックしてください。', # MODIF
+	'unsubscribe_sujet_email' => '「@nom_site_spip@」ニュースレターの購読を停止する',
+	'unsubscribe_texte_confirmer_email_1' => 'メール@email@の購読停止を確認するには、ボタンをクリックしてください。',
 	'unsubscribe_texte_confirmer_email_liste_1' => 'ボタンをクリックして、メーリングリスト「@titre_liste@」の退会メールアドレス@email@を確認してください。', # MODIF
 	'unsubscribe_texte_email_1' => 'Ｅメールアドレス@email@はメーリングリストから削除されました。', # MODIF
 	'unsubscribe_texte_email_2' => 'また「@nom_site_spip@」にお会いしましょう。',
 	'unsubscribe_texte_email_3' => 'こち側よりエラーが発生したか、ご意見が変わったかの場合には、次のリンクを使用して@url_subscribe@、いつでも再購読することが出来ます。',
 	'unsubscribe_texte_email_liste_1' => 'Ｅメールアドレス@email@はメーリングリスト「@titre_liste@」より削除されまし
 た。', # MODIF
-	'unsubscribe_titre_email' => 'ニュースレターの購読を停止する', # MODIF
+	'unsubscribe_titre_email' => 'ニュースレターの購読を停止する',
 	'unsubscribe_titre_email_liste' => 'メーリングリスト「@titre_liste@」の購読を停止する' # MODIF
 );
