@@ -1,6 +1,11 @@
-<traduction module="articlepdf" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/article_pdf/trunk/lang/" reference="fr">
-	<langue code="de" url="https://trad.spip.net/tradlang_module/articlepdf?lang_cible=de" total="12" traduits="1" relire="0" modifs="0" nouveaux="11" pourcent="8.33">
-	</langue>
+<traduction
+	module="articlepdf"
+	id="articlepdf--article_pdf-3ebda"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/article_pdf/trunk/lang"
+	reference="fr">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/articlepdf?lang_cible=de" total="12" traduits="1" relire="0" modifs="0" nouveaux="11" pourcent="8.33" />
 	<langue code="en" url="https://trad.spip.net/tradlang_module/articlepdf?lang_cible=en" total="12" traduits="8" relire="0" modifs="0" nouveaux="4" pourcent="66.67">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
@@ -10,8 +15,7 @@
 	<langue code="fa" url="https://trad.spip.net/tradlang_module/articlepdf?lang_cible=fa" total="12" traduits="8" relire="0" modifs="0" nouveaux="4" pourcent="66.67">
 		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/articlepdf?lang_cible=fr" total="12" traduits="12" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/articlepdf?lang_cible=fr" total="12" traduits="12" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="nl" url="https://trad.spip.net/tradlang_module/articlepdf?lang_cible=nl" total="12" traduits="12" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
