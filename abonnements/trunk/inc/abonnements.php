@@ -306,11 +306,11 @@ function abonnements_notifier_echeance($id_abonnement, $nom, $email, $duree, $pe
  * @return array
  *     Tableau des abonnements, rangés dans une clé pour chaque statut
  */
-function abonnements_auteur_lister($id_auteur) {
+function abonnements_auteur_lister($id_auteur, $forcer=false) {
 	static $abonnements_auteurs = array();
 	$id_auteur = intval($id_auteur);
 	
-	if (is_null($abonnements_auteurs[$id_auteur])) {
+	if ($forcer or is_null($abonnements_auteurs[$id_auteur])) {
 		$abonnements_auteurs[$id_auteur] = array();
 		
 		if ($abonnements = sql_allfetsel('*', 'spip_abonnements', 'id_auteur ='.$id_auteur)) {
