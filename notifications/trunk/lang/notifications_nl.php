@@ -9,13 +9,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// A
-	'alt_logo_conf' => 'Logo van plugin Notifications',
-
 	// 0
 	'0' => '--------------',
 
 	// A
+	'alt_logo_conf' => 'Logo van plugin Notifications',
 	'article_prive' => 'Publicatie van artikelen',
 	'article_prive_admins_restreints' => '<strong>Beperkte beheerders</strong>: Beperkte beheerders ontvangen notificaties bij voorstellen voor publicatie in hun rubriek. Voor algehele beheerders kijk je bij <a href="?exec=configurer_interactions#suivi_edito_non">  de standaard tool van SPIP</a>.',
 	'article_prive_auteurs' => '<strong>Auteurs</strong>: Auteurs ontvangen notificaties bij het voorstellen, publiceren of verwijderen van hun artikel(en).',

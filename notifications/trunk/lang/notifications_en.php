@@ -9,13 +9,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// A
-	'alt_logo_conf' => 'Notifications plugin logo',
-
 	// 0
 	'0' => '--------------',
 
 	// A
+	'alt_logo_conf' => 'Notifications plugin logo',
 	'article_prive' => 'Articles publishing',
 	'article_prive_admins_restreints' => '<strong>Restricted Administrators</strong>: Restricted Administrators get notified when article(s) is(are) proposed in their section.
 For General Administrators see

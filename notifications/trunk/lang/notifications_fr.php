@@ -1,19 +1,17 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/notifications/trunk/lang/
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/notifications/trunk/lang
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// A
-	'alt_logo_conf' => 'Logo du plugin Notifications',
-
 	// 0
 	'0' => '--------------',
 
 	// A
+	'alt_logo_conf' => 'Logo du plugin Notifications',
 	'article_prive' => 'Publication d’articles',
 	'article_prive_admins_restreints' => '<strong>Administrateurs restreints</strong> : Les administrateurs restreints reçoivent les notifications lors de proposition d’articles dans leur rubrique. Pour les administrateurs généralistes, voir <a href="?exec=configurer_interactions#suivi_edito_non">l’outil par défaut de SPIP</a>.',
 	'article_prive_auteurs' => '<strong>Auteurs</strong> : les auteurs reçoivent les notifications lors de la proposition, publication ou suppression de leur(s) article(s).',

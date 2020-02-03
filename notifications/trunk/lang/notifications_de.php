@@ -9,13 +9,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// A
-	'alt_logo_conf' => 'Logo des Plugins Benachrichtigungen',
-
 	// 0
 	'0' => '--------------',
 
 	// A
+	'alt_logo_conf' => 'Logo des Plugins Benachrichtigungen',
 	'article_prive' => 'Artikel veröffentlichen',
 	'article_prive_admins_restreints' => '<strong>Rubrikadmins</strong> : Rubrikadmins erhalten eine Nachricht wenn Artikel in den von ihnen verwalteten Rubriken vorgeschlagen werden. Die Einstellung für Haupt-Admins werden im <a href="?exec=configurer_interactions#suivi_edito_non">SPIP-eigenen Konfigurationsmodul</a> gemacht.',
 	'article_prive_auteurs' => '<strong>Autoren</strong> : Autoren werden benachrichtigt, wenn ihre Artikel vorgeschlagen oder gelöscht werden.',
