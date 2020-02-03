@@ -1,4 +1,7 @@
 <traduction module="http" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/http/trunk/lang/" reference="fr">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/http?lang_cible=de" total="5" traduits="5" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
+	</langue>
 	<langue code="en" url="https://trad.spip.net/tradlang_module/http?lang_cible=en" total="5" traduits="4" relire="0" modifs="1" nouveaux="0" pourcent="80.00">
 		<traducteur nom="Gilles" lien="https://trad.spip.net/auteur/gilles" />
 	</langue>
