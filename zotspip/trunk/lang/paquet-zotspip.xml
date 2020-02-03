@@ -1,10 +1,15 @@
-<traduction module="paquet-zotspip" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/zotspip/trunk/lang/" reference="fr">
+<traduction
+	module="paquet-zotspip"
+	id="paquet-zotspip--zotspip-14a4e"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/zotspip/trunk/lang"
+	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-zotspip?lang_cible=en" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Joseph" lien="https://trad.spip.net/auteur/joseph-larmarange" />
 	</langue>
 	<langue code="es" url="https://trad.spip.net/tradlang_module/paquet-zotspip?lang_cible=es" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="agnesg63" lien="https://trad.spip.net/auteur/agnesg63" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-zotspip?lang_cible=fr" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-zotspip?lang_cible=fr" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
