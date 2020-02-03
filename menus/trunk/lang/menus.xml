@@ -1,9 +1,14 @@
-<traduction module="menus" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/menus/trunk/lang/" reference="fr">
+<traduction
+	module="menus"
+	id="menus--menus-1bc30"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/menus/trunk/lang"
+	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/menus?lang_cible=ar" total="179" traduits="76" relire="0" modifs="0" nouveaux="103" pourcent="42.46">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
-	<langue code="ca" url="https://trad.spip.net/tradlang_module/menus?lang_cible=ca" total="179" traduits="79" relire="0" modifs="3" nouveaux="97" pourcent="44.13">
-	</langue>
+	<langue code="ca" url="https://trad.spip.net/tradlang_module/menus?lang_cible=ca" total="179" traduits="79" relire="0" modifs="3" nouveaux="97" pourcent="44.13" />
 	<langue code="de" url="https://trad.spip.net/tradlang_module/menus?lang_cible=de" total="179" traduits="151" relire="0" modifs="0" nouveaux="28" pourcent="84.36">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
@@ -29,10 +34,8 @@
 	<langue code="fa" url="https://trad.spip.net/tradlang_module/menus?lang_cible=fa" total="179" traduits="133" relire="0" modifs="6" nouveaux="40" pourcent="74.30">
 		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/menus?lang_cible=fr" total="179" traduits="179" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
-	<langue code="it" url="https://trad.spip.net/tradlang_module/menus?lang_cible=it" total="179" traduits="79" relire="0" modifs="3" nouveaux="97" pourcent="44.13">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/menus?lang_cible=fr" total="179" traduits="179" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="it" url="https://trad.spip.net/tradlang_module/menus?lang_cible=it" total="179" traduits="79" relire="0" modifs="3" nouveaux="97" pourcent="44.13" />
 	<langue code="nl" url="https://trad.spip.net/tradlang_module/menus?lang_cible=nl" total="179" traduits="179" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="mpossoz" lien="https://trad.spip.net/auteur/mpossoz" />
