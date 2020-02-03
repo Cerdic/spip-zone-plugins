@@ -1,4 +1,10 @@
-<traduction module="abonnementsoffre" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/abonnements/trunk/lang/" reference="fr">
+<traduction
+	module="abonnementsoffre"
+	id="abonnementsoffre--abonnements-6851d"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="svn://zone.spip.org/spip-zone/_plugins_/abonnements/trunk/lang"
+	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/abonnementsoffre?lang_cible=en" total="63" traduits="49" relire="0" modifs="0" nouveaux="14" pourcent="77.78">
 		<traducteur nom="Gilles" lien="https://trad.spip.net/auteur/gilles" />
 		<traducteur nom="tcharlss" lien="https://trad.spip.net/auteur/drbouvierleduc" />
@@ -6,6 +12,5 @@
 	<langue code="es" url="https://trad.spip.net/tradlang_module/abonnementsoffre?lang_cible=es" total="63" traduits="33" relire="0" modifs="0" nouveaux="30" pourcent="52.38">
 		<traducteur nom="dani" lien="https://trad.spip.net/auteur/dani" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/abonnementsoffre?lang_cible=fr" total="63" traduits="63" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/abonnementsoffre?lang_cible=fr" total="63" traduits="63" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
