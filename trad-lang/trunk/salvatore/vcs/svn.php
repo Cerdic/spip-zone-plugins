@@ -32,7 +32,7 @@
  * @param string $author
  * @return array
  */
-function salvatore_vcs_git_set_default_commiter_dist($dir_repo, $author) {
+function salvatore_svn_git_set_default_commiter_dist($dir_repo, $author) {
 
 	return array(true, array());
 }
