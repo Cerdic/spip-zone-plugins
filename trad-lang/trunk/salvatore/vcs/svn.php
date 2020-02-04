@@ -96,6 +96,12 @@ function salvatore_vcs_svn_commit_files_dist($dir_repo, $files, $message, $autho
 		}
 	}
 
+	if ($author
+		and $author !== _SALVATORE_AUTHOR_COMMITS
+		and !_SALVATORE_SVN_PROPSET) {
+		$message = rtrim($message) . "\nCredits : $author\n";
+	}
+
 	$files = array_map('escapeshellarg', $files);
 	$files = implode(' ', $files);
 
