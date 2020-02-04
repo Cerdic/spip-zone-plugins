@@ -385,8 +385,7 @@ function salvatore_exporter_fichier_php($dir_module, $module, $lang, $php_lines,
 	else {
 		$url_trad_module = parametre_url($url_trad_module, 'lang_cible', $lang, '&');
 		$file_content .= '// extrait automatiquement de ' . $url_trad_module . '
-// ** ne pas modifier le fichier **
-';
+// ** ne pas modifier le fichier **' . "\n\n";
 	}
 
 	// historiquement les fichiers de lang de spip_loader ne peuvent pas etre securises
