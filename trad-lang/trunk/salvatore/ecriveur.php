@@ -380,7 +380,7 @@ function salvatore_exporter_fichier_php($dir_module, $module, $lang, $php_lines,
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 ';
 	if ($origin) {
-		$file_content .= '// Fichier source, a modifier dans ' . $origin;
+		$file_content .= '// Fichier source, a modifier dans ' . $origin . "\n";
 	}
 	else {
 		$url_trad_module = parametre_url($url_trad_module, 'lang_cible', $lang, '&');
@@ -391,11 +391,11 @@ function salvatore_exporter_fichier_php($dir_module, $module, $lang, $php_lines,
 
 	// historiquement les fichiers de lang de spip_loader ne peuvent pas etre securises
 	if ($module !== 'tradloader') {
-		$file_content .= "\nif (!defined('_ECRIRE_INC_VERSION')) {
+		$file_content .= "if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
-}";
+}\n";
 	}
-	$file_content .= "\n\n";
+	$file_content .= "\n";
 
 	# supprimer la virgule du dernier item
 	$php_lines[count($php_lines)-1] = preg_replace('/,([^,]*)$/', '\1', $php_lines[count($php_lines)-1]);
