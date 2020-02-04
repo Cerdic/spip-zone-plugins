@@ -77,6 +77,9 @@ function salvatore_tirer($liste_sources, $dir_modules=null, $dir_depots=null) {
 			salvatore_fail('[Tireur] : Erreur', $corps);
 		}
 
+		$set_default_commiter = salvatore_vcs_function($source['methode'], 'set_default_commiter');
+		$set_default_commiter($dir_checkout, _SALVATORE_AUTHOR_COMMITS);
+
 		if (file_exists($dir_module) and !is_link($dir_module)) {
 			$corps = $source['url'] . ' | ' . $source['module'] . "\n" . "Il y a deja un repertoire $dir_module";
 			salvatore_fail('[Tireur] : Erreur', $corps);

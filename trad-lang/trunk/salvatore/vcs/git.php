@@ -42,6 +42,52 @@ function salvatore_git_format_author($author) {
 }
 
 /**
+ * Definit le commiter par defaut sur un repository
+ * @param string $dir_repo
+ * @param string $author
+ * @return array
+ */
+function salvatore_vcs_git_set_default_commiter_dist($dir_repo, $author) {
+
+	$output = array();
+	$nom = $email = "";
+	include_spip('inc/filtres');
+	if (!$email = email_valide($author)) {
+		return array(false, $output);
+	}
+	if ($author !== $email) {
+		$nom = explode("<", $author);
+		$nom = trim(reset($nom));
+	}
+	if (!$nom) {
+		$nom = $email;
+	}
+
+	$d = getcwd();
+	chdir($dir_repo);
+	$res = true;
+	// on ajoute tous les fichiers pour commit
+	$commands = [
+		"git config user.name ". escapeshellarg($nom). " 2>&1",
+		"git config user.email ". escapeshellarg($email). " 2>&1",
+	];
+
+	foreach ($commands as $command) {
+		$output[] = "> $command";
+		$return_var = 0;
+		exec($command, $output, $return_var);
+		// si une erreur a eu lieu le signaler dans le retour
+		if ($return_var) {
+			$res = false;
+		}
+	}
+	chdir($d);
+
+	return array($res, implode("\n", $output));
+}
+
+
+/**
  * Lire la date de derniere modif d'un fichier versionne
  * (retourne 0 si le fichier n'est pas versionne)
  * @param string $dir_repo

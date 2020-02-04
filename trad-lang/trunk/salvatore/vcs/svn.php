@@ -26,6 +26,18 @@
 */
 
 /**
+ * Definit le commiter par defaut sur un repository
+ * rien a faire en svn : le commiter = author
+ * @param string $dir_repo
+ * @param string $author
+ * @return array
+ */
+function salvatore_vcs_git_set_default_commiter_dist($dir_repo, $author) {
+
+	return array(true, array());
+}
+
+/**
  * Lire la date de derniere modif d'un fichier versionne
  * (retourne 0 si le fichier n'est pas versionne)
  * @param string $dir_repo
