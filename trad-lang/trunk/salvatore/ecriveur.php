@@ -393,8 +393,9 @@ function salvatore_exporter_fichier_php($dir_module, $module, $lang, $php_lines,
 	if ($module !== 'tradloader') {
 		$file_content .= "\nif (!defined('_ECRIRE_INC_VERSION')) {
 	return;
-}\n\n";
+}";
 	}
+	$file_content .= "\n\n";
 
 	# supprimer la virgule du dernier item
 	$php_lines[count($php_lines)-1] = preg_replace('/,([^,]*)$/', '\1', $php_lines[count($php_lines)-1]);
