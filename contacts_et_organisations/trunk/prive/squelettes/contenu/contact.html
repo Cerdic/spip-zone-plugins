@@ -42,6 +42,11 @@
 
 #BOITE_FERMER
 
+#SET{enfants,''}
+[(#VAL|concat{contact-enfants}|trouver_fond{prive/objets/contenu/}|oui)
+	[(#SET{enfants,#INCLURE{fond=prive/objets/contenu/contact-enfants,id_contact,env}})]
+]
+[(#PIPELINE{affiche_enfants,#ARRAY{args,#ARRAY{exec,#ENV**{exec},objet,contact,id_objet,#ID_CONTACT},data,#GET{enfants}}})]
 
 [(#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation');/*\]\]>*/</script>
