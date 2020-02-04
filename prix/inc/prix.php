@@ -70,6 +70,7 @@ function inc_prix_ht_dist($objet, $id_objet, $options = array(), $serveur = ''){
 					'type_objet' => $objet, // déprécié, utiliser plutôt "objet"
 					'prix_ht' => $prix_ht,
 					'options' => $options,
+					'ligne' => $ligne,
 				),
 				'data' => $prix_ht
 			)
