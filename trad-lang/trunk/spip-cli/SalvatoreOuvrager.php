@@ -111,9 +111,13 @@ class SalvatoreOuvrager extends Command {
 
 		foreach ($liste_trad as $une_trad) {
 			salvatore_log("\n<comment>--- Module " . $une_trad['module'] . " | " . $une_trad['dir_module'] . " | " . $une_trad['url']."</comment>");
+			salvatore_log("<info>TIRER</info>");
 			salvatore_tirer([$une_trad]);
+			salvatore_log("<info>LIRE</info>");
 			salvatore_lire([$une_trad], $force);
+			salvatore_log("<info>ECRIRE</info>");
 			salvatore_ecrire([$une_trad], $message ? $message : '');
+			salvatore_log("<info>POUSSER</info>");
 			salvatore_pousser([$une_trad]);
 		}
 	}

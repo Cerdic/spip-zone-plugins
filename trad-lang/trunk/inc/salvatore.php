@@ -337,6 +337,7 @@ function salvatore_retrouver_tradlang_module($dir_module, $module) {
 		}
 	}
 
+	#salvatore_fail("Module $module non trouve", "le module dans $dir_module n'est pas en base et n'est pas un renommage de repository");
 	return false;
 }
 
