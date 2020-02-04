@@ -11,6 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_activer_javascript' => 'Please activate Javascript.',
+	'cfg_afterorappend' => 'Location:',
+	'cfg_afterorappend_exp' => 'Insertion after the selected block (default), or inside the selected block?', # RELIRE
 	'cfg_badge_fb' => 'Facebook Badge/Widget',
 	'cfg_badge_fb_existe' => 'If you have a Facebook Badge (<a href="http://www.facebook.com/facebook-widgets/" class="spip_out">see help on the Facebook site</a>), specify its contents below, either as JS or as HTML.',
 	'cfg_badge_html' => 'HTML Badge',
@@ -25,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_insertion' => 'Insertion into web pages:',
 	'cfg_liste_site' => 'List of the social websites',
 	'cfg_plusone' => 'Google plus one',
-	'cfg_plusone_existe' => 'To work with Google+1, install the plugin (<a href="http://contrib.spip.net/Google-1" class="spip_out">aide sur spip-contrib</a>).', # MODIF
+	'cfg_plusone_existe' => 'To work with Google+1, install the plugin (<a href="https://contrib.spip.net/Google-1" class="spip_out">aide sur spip-contrib</a>).',
 	'cfg_referer' => 'Only display the badge and buttons for native visitors of the sites concerned.',
 	'cfg_selector' => 'Selector:',
 	'cfg_sous_bloc' => 'Beneath the title block on the article pages',
@@ -41,6 +43,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_noisette_badge_facebook' => 'Display the Facebook badge defined in the configuration page',
 	'description_noisette_facebook_like' => 'Display the <b>Like</b> or <b>Recommand</b> and eventually <b>Send</b> button',
 	'description_noisette_facebook_like_box' => 'Displays the Facebook <b>I like</b> box. It displays the number of fans of the Facebook referenced page',
+
+	// I
+	'item_after' => 'Inside',
+	'item_append' => 'After',
 
 	// N
 	'noisette_action_like' => 'Like',
