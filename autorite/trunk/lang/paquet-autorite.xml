@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-autorite"
-	id="paquet-autorite--autorite-65ea9"
+	id="paquet-autorite--autorite-21f18"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/autorite/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/autorite.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/paquet-autorite?lang_cible=ar" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-autorite?lang_cible=de" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
