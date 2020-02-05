@@ -1,9 +1,9 @@
 <traduction
 	module="bigfoot"
-	id="bigfoot--bigfoot-6c0ad"
+	id="bigfoot--bigfoot-1c1e6"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/bigfoot/lang"
+	source="https://git.spip.net/spip-contrib-extensions/bigfoot.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/bigfoot?lang_cible=en" total="1" traduits="1" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
