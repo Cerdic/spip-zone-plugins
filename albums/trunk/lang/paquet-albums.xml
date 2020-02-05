@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-albums"
-	id="paquet-albums--albums-ff51c"
+	id="paquet-albums--albums-03577"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/albums/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/albums.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-albums?lang_cible=de" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
