@@ -1,9 +1,9 @@
 <traduction
 	module="saveauto"
-	id="saveauto--saveauto-d7434"
+	id="saveauto--saveauto-5e1a3"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/saveauto/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/saveauto.git"
 	reference="fr">
 	<langue code="ca" url="https://trad.spip.net/tradlang_module/saveauto?lang_cible=ca" total="71" traduits="17" relire="0" modifs="17" nouveaux="37" pourcent="23.94" />
 	<langue code="de" url="https://trad.spip.net/tradlang_module/saveauto?lang_cible=de" total="71" traduits="70" relire="0" modifs="1" nouveaux="0" pourcent="98.59">
