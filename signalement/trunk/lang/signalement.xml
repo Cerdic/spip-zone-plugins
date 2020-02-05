@@ -1,9 +1,9 @@
 <traduction
 	module="signalement"
-	id="signalement--signalement-2fef3"
+	id="signalement--signalement-70b84"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/signalement/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/signalement.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/signalement?lang_cible=en" total="60" traduits="60" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
