@@ -1,9 +1,9 @@
 <traduction
 	module="pp_codes"
-	id="pp_codes--porte_plume_codes-de37d"
+	id="pp_codes--porte_plume_codes-b7fbc"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/porte_plume_codes/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/porte_plume_codes.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/pp_codes?lang_cible=en" total="19" traduits="19" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
