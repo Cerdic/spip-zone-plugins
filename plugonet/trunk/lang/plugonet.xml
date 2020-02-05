@@ -1,9 +1,9 @@
 <traduction
 	module="plugonet"
-	id="plugonet--plugonet-ed8b2"
+	id="plugonet--plugonet-2b085"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/plugonet/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/plugonet.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/plugonet?lang_cible=en" total="86" traduits="86" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="dani" lien="https://trad.spip.net/auteur/dani" />
