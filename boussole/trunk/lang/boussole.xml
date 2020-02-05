@@ -1,9 +1,9 @@
 <traduction
 	module="boussole"
-	id="boussole--boussole-f035b"
+	id="boussole--boussole-a6a13"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/boussole/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/boussole.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/boussole?lang_cible=en" total="147" traduits="147" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
