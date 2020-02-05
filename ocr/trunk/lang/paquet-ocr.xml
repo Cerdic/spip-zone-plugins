@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-ocr"
-	id="paquet-ocr--ocr-424b4"
+	id="paquet-ocr--ocr-2f4f7"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/ocr/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/ocr.git"
 	reference="fr">
 	<langue code="es" url="https://trad.spip.net/tradlang_module/paquet-ocr?lang_cible=es" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="severo" lien="https://trad.spip.net/auteur/severo" />
