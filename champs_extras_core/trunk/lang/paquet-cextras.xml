@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-cextras"
-	id="paquet-cextras--champs_extras_core-6917b"
+	id="paquet-cextras--champs_extras_core-b0622"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/champs_extras_core/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/champs_extras_core.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-cextras?lang_cible=de" total="4" traduits="3" relire="0" modifs="0" nouveaux="1" pourcent="75.00">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
