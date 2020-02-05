@@ -1,9 +1,9 @@
 <traduction
 	module="thumbsites"
-	id="thumbsites--thumbsites-18400"
+	id="thumbsites--thumbsites-0d6f9"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/thumbsites/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/thumbsites.git"
 	reference="fr">
 	<langue code="ast" url="https://trad.spip.net/tradlang_module/thumbsites?lang_cible=ast" total="23" traduits="8" relire="0" modifs="2" nouveaux="13" pourcent="34.78">
 		<traducteur nom="Xuacu" lien="https://trad.spip.net/auteur/xuacu" />
