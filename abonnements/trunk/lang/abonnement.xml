@@ -1,9 +1,9 @@
 <traduction
 	module="abonnement"
-	id="abonnement--abonnements-6851d"
+	id="abonnement--abonnements-caf12"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/abonnements/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/abonnements.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/abonnement?lang_cible=en" total="60" traduits="45" relire="0" modifs="4" nouveaux="11" pourcent="75.00">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
