@@ -1,9 +1,9 @@
 <traduction
 	module="mailshot"
-	id="mailshot--mailshot-8d779"
+	id="mailshot--mailshot-d199d"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/mailshot/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/mailshot.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/mailshot?lang_cible=ar" total="94" traduits="92" relire="0" modifs="2" nouveaux="0" pourcent="97.87">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
