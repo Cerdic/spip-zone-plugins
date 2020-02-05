@@ -1,9 +1,9 @@
 <traduction
 	module="fulltext"
-	id="fulltext--fulltext-cf33d"
+	id="fulltext--fulltext-f6999"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/fulltext/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/fulltext.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=ar" total="92" traduits="92" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
