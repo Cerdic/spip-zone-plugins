@@ -1,9 +1,9 @@
 <traduction
 	module="fbmodeles"
-	id="fbmodeles--modeles_facebook-97048"
+	id="fbmodeles--modeles_facebook-aeb27"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/modeles_facebook/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/modeles_facebook.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/fbmodeles?lang_cible=en" total="46" traduits="46" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
