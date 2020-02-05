@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-accesrestreint"
-	id="paquet-accesrestreint--acces_restreint-4981f"
+	id="paquet-accesrestreint--acces_restreint-0dad7"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/acces_restreint/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/acces_restreint.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-accesrestreint?lang_cible=de" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-accesrestreint?lang_cible=en" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
