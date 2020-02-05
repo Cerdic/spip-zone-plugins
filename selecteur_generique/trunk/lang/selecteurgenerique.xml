@@ -1,9 +1,9 @@
 <traduction
 	module="selecteurgenerique"
-	id="selecteurgenerique--selecteur_generique-80b30"
+	id="selecteurgenerique--selecteur_generique-a39b4"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/selecteur_generique/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/selecteur_generique.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/selecteurgenerique?lang_cible=de" total="1" traduits="1" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
