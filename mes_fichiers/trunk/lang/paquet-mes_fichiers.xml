@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-mes_fichiers"
-	id="paquet-mes_fichiers--mes_fichiers-2c94f"
+	id="paquet-mes_fichiers--mes_fichiers-072c9"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/mes_fichiers/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/mes_fichiers.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-mes_fichiers?lang_cible=en" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Eric Lupinacci" lien="https://trad.spip.net/auteur/_eric_" />
