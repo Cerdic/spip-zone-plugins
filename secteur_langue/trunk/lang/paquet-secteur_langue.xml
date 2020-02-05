@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-secteur_langue"
-	id="paquet-secteur_langue--secteur_langue-a8b7a"
+	id="paquet-secteur_langue--secteur_langue-74b82"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/secteur_langue/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/secteur_langue.git"
 	reference="fr">
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-secteur_langue?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
