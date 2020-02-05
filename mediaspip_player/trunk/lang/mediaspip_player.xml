@@ -1,9 +1,9 @@
 <traduction
 	module="mediaspip_player"
-	id="mediaspip_player--mediaspip_player-f5df8"
+	id="mediaspip_player--mediaspip_player-319f7"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/mediaspip_player/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/mediaspip_player.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/mediaspip_player?lang_cible=en" total="58" traduits="54" relire="0" modifs="0" nouveaux="4" pourcent="93.10">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
