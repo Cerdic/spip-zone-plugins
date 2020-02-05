@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-boussole"
-	id="paquet-boussole--boussole-f035b"
+	id="paquet-boussole--boussole-a6a13"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/boussole/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/boussole.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-boussole?lang_cible=de" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
