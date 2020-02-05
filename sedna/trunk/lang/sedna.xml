@@ -1,9 +1,9 @@
 <traduction
 	module="sedna"
-	id="sedna--sedna-e5413"
+	id="sedna--sedna-001c9"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/sedna/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/sedna.git"
 	reference="fr">
 	<langue code="ast" url="https://trad.spip.net/tradlang_module/sedna?lang_cible=ast" total="24" traduits="22" relire="0" modifs="2" nouveaux="0" pourcent="91.67" />
 	<langue code="bg" url="https://trad.spip.net/tradlang_module/sedna?lang_cible=bg" total="24" traduits="22" relire="0" modifs="2" nouveaux="0" pourcent="91.67" />
