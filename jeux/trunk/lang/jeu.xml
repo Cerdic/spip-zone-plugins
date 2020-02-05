@@ -1,9 +1,9 @@
 <traduction
 	module="jeu"
-	id="jeu--jeux-d7cfb"
+	id="jeu--jeux-aced6"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/jeux/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/jeux.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/jeu?lang_cible=en" total="34" traduits="33" relire="0" modifs="1" nouveaux="0" pourcent="97.06">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
