@@ -1,9 +1,9 @@
 <traduction
 	module="uploadhtml5"
-	id="uploadhtml5--uploadhtml5-1a0e2"
+	id="uploadhtml5--uploadhtml5-3ffad"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/uploadhtml5/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/uploadhtml5.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/uploadhtml5?lang_cible=ar" total="29" traduits="20" relire="0" modifs="0" nouveaux="9" pourcent="68.97">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
