@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-inscription3"
-	id="paquet-inscription3--inscription-07313"
+	id="paquet-inscription3--inscription-f6c8c"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/inscription/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/inscription.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-inscription3?lang_cible=de" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
