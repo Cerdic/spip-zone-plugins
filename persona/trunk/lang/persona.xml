@@ -1,9 +1,9 @@
 <traduction
 	module="persona"
-	id="persona--persona-d97cb"
+	id="persona--persona-05281"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/persona/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/persona.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/persona?lang_cible=de" total="7" traduits="7" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
