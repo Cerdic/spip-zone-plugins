@@ -1,9 +1,9 @@
 <traduction
 	module="alerte"
-	id="alerte--alerte_urgence-2d950"
+	id="alerte--alerte_urgence-0b58f"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/alerte_urgence/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/alerte_urgence.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/alerte?lang_cible=en" total="5" traduits="4" relire="0" modifs="0" nouveaux="1" pourcent="80.00">
 		<traducteur nom="Gilles" lien="https://trad.spip.net/auteur/gilles" />
