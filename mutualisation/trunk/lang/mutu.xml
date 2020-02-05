@@ -1,9 +1,9 @@
 <traduction
 	module="mutu"
-	id="mutu--mutualisation-29680"
+	id="mutu--mutualisation-bf462"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/mutualisation/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/mutualisation.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/mutu?lang_cible=en" total="32" traduits="32" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
