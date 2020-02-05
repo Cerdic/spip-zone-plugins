@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-agenda"
-	id="paquet-agenda--agenda-efa0c"
+	id="paquet-agenda--agenda-95214"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/agenda/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/agenda.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-agenda?lang_cible=de" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
