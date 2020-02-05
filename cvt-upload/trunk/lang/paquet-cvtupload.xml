@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-cvtupload"
-	id="paquet-cvtupload--cvt-upload-236f4"
+	id="paquet-cvtupload--cvt-upload-d7a29"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/cvt-upload/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/cvt-upload.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-cvtupload?lang_cible=en" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jack31" lien="https://trad.spip.net/auteur/jack31" />
