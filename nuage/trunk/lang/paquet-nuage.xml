@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-nuage"
-	id="paquet-nuage--nuage-b655f"
+	id="paquet-nuage--nuage-feec1"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/nuage/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/nuage.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-nuage?lang_cible=de" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
