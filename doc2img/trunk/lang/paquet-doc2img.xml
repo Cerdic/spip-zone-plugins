@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-doc2img"
-	id="paquet-doc2img--doc2img-8f232"
+	id="paquet-doc2img--doc2img-dbd73"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/doc2img/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/doc2img.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-doc2img?lang_cible=en" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="es" url="https://trad.spip.net/tradlang_module/paquet-doc2img?lang_cible=es" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
