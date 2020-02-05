@@ -1,9 +1,9 @@
 <traduction
 	module="espaces"
-	id="espaces--espaces-8e0b2"
+	id="espaces--espaces-75556"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/espaces/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/espaces.git"
 	reference="fr">
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/espaces?lang_cible=fr" total="4" traduits="4" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
