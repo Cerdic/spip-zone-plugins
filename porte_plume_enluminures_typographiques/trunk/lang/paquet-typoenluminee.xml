@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-typoenluminee"
-	id="paquet-typoenluminee--porte_plume_enluminures_typographiques-d6503"
+	id="paquet-typoenluminee--porte_plume_enluminures_typographiques-3cbeb"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/porte_plume_enluminures_typographiques/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/porte_plume_enluminures_typographiques.git"
 	reference="fr">
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-typoenluminee?lang_cible=fr" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
