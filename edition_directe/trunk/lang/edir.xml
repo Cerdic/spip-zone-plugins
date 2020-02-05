@@ -1,9 +1,9 @@
 <traduction
 	module="edir"
-	id="edir--edition_directe-98374"
+	id="edir--edition_directe-2a852"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/edition_directe/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/edition_directe.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/edir?lang_cible=de" total="5" traduits="5" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="abelass" lien="https://trad.spip.net/auteur/abelass" />
