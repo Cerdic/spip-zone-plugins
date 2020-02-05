@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-multilingue"
-	id="paquet-multilingue--multilingue-3bf6f"
+	id="paquet-multilingue--multilingue-d759e"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/multilingue/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/multilingue.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-multilingue?lang_cible=en" total="3" traduits="2" relire="0" modifs="1" nouveaux="0" pourcent="66.67">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
