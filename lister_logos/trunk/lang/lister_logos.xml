@@ -1,9 +1,9 @@
 <traduction
 	module="lister_logos"
-	id="lister_logos--lister_logos-6ee29"
+	id="lister_logos--lister_logos-620a5"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/lister_logos/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/lister_logos.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/lister_logos?lang_cible=en" total="26" traduits="26" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
