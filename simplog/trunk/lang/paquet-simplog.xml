@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-simplog"
-	id="paquet-simplog--simplog-2a7a0"
+	id="paquet-simplog--simplog-f6651"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/simplog/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/simplog.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-simplog?lang_cible=de" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
