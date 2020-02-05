@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-taa"
-	id="paquet-taa--traduction_articles_autrement-990a0"
+	id="paquet-taa--traduction_articles_autrement-5c8a0"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/traduction_articles_autrement/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/traduction_articles_autrement.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-taa?lang_cible=en" total="3" traduits="2" relire="0" modifs="1" nouveaux="0" pourcent="66.67">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
