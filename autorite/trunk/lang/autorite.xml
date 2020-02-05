@@ -1,9 +1,9 @@
 <traduction
 	module="autorite"
-	id="autorite--autorite-65ea9"
+	id="autorite--autorite-21f18"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/autorite/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/autorite.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/autorite?lang_cible=ar" total="81" traduits="81" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
