@@ -117,6 +117,7 @@ function migrer_articles($where_articles, $champ_date_debut, $champ_date_fin, $h
 			'date_debut' => $row[$champ_date_debut],
 			'date_fin' => $row[$champ_date_fin],
 			'titre' => $row['titre'],
+			'descriptif' => $row['texte'],
 			'horaire' => ($horaire?'oui':'non')
 		);
 		evenement_modifier($id_evenement, $set);
