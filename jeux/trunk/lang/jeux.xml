@@ -1,9 +1,9 @@
 <traduction
 	module="jeux"
-	id="jeux--jeux-d7cfb"
+	id="jeux--jeux-aced6"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/jeux/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/jeux.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/jeux?lang_cible=de" total="82" traduits="29" relire="0" modifs="32" nouveaux="21" pourcent="35.37" />
 	<langue code="en" url="https://trad.spip.net/tradlang_module/jeux?lang_cible=en" total="82" traduits="65" relire="0" modifs="14" nouveaux="3" pourcent="79.27">
