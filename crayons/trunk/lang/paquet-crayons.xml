@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-crayons"
-	id="paquet-crayons--crayons-9eff1"
+	id="paquet-crayons--crayons-c725c"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/crayons/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/crayons.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/paquet-crayons?lang_cible=ar" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-crayons?lang_cible=de" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
