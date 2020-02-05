@@ -1,9 +1,9 @@
 <traduction
 	module="doc2img"
-	id="doc2img--doc2img-8f232"
+	id="doc2img--doc2img-dbd73"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/doc2img/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/doc2img.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/doc2img?lang_cible=en" total="30" traduits="30" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
