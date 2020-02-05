@@ -1,9 +1,9 @@
 <traduction
 	module="agenda"
-	id="agenda--agenda-efa0c"
+	id="agenda--agenda-95214"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/agenda/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/agenda.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/agenda?lang_cible=ar" total="140" traduits="100" relire="0" modifs="0" nouveaux="40" pourcent="71.43">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
