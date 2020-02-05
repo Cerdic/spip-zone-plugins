@@ -1,9 +1,9 @@
 <traduction
 	module="minical"
-	id="minical--calendrier_mini-eadbe"
+	id="minical--calendrier_mini-34cf9"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/calendrier_mini/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/calendrier_mini.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/minical?lang_cible=ar" total="14" traduits="14" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
