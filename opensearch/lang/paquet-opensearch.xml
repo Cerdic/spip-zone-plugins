@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-opensearch"
-	id="paquet-opensearch--opensearch-6cfdd"
+	id="paquet-opensearch--opensearch-0f11e"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/opensearch/lang"
+	source="https://git.spip.net/spip-contrib-extensions/opensearch.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/paquet-opensearch?lang_cible=ar" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
