@@ -1,9 +1,9 @@
 <traduction
 	module="player"
-	id="player--player-8fc87"
+	id="player--player-ed00e"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/player/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/player.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/player?lang_cible=en" total="93" traduits="93" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Gilles" lien="https://trad.spip.net/auteur/gilles" />
