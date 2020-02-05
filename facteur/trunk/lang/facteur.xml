@@ -1,9 +1,9 @@
 <traduction
 	module="facteur"
-	id="facteur--facteur-0e4cb"
+	id="facteur--facteur-7c60b"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/facteur/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/facteur.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/facteur?lang_cible=de" total="68" traduits="52" relire="0" modifs="3" nouveaux="13" pourcent="76.47">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
