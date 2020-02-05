@@ -1,9 +1,9 @@
 <traduction
 	module="noie"
-	id="noie--noie-d2bed"
+	id="noie--noie-bbc49"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/noie/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/noie.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/noie?lang_cible=ar" total="2" traduits="1" relire="0" modifs="1" nouveaux="0" pourcent="50.00" />
 	<langue code="ast" url="https://trad.spip.net/tradlang_module/noie?lang_cible=ast" total="2" traduits="1" relire="0" modifs="1" nouveaux="0" pourcent="50.00">
