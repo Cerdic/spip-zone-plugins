@@ -1,9 +1,9 @@
 <traduction
 	module="boutonstexte"
-	id="boutonstexte--boutonstexte-fc33e"
+	id="boutonstexte--boutonstexte-17120"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/boutonstexte/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/boutonstexte.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/boutonstexte?lang_cible=ar" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
