@@ -1,9 +1,9 @@
 <traduction
 	module="zotspip"
-	id="zotspip--zotspip-14a4e"
+	id="zotspip--zotspip-a9b9e"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/zotspip/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/zotspip.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/zotspip?lang_cible=en" total="137" traduits="124" relire="0" modifs="1" nouveaux="12" pourcent="90.51">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
