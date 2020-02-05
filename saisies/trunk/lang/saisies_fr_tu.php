@@ -76,10 +76,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_rub_interface_label' => 'Affichage multilingue',
 	'option_afficher_si_explication' => 'Indique les conditions pour afficher le champ en fonction de la valeur des autres champs. L’identifiant des autres champs doit être mis entre <code>@</code>. <br />Exemple <code>@selection_1@=="Toto"</code> conditionne l’affichage du champ à ce que le champ <code>selection_1</code> ait pour valeur <code>Toto</code>. <br />
 Il est possible d’utiliser les opérateurs booléens <code>||</code> (ou) et  <code>&&</code> (et). <br />
-Tu trouveras la <a href="https://contrib.spip.net/5080" target="_blank">documentation complète de la syntaxe sur spip-contrib</a>.', # MODIF
+Tu trouveras la <a href="https://contrib.spip.net/5080" target="_blank">documentation complète de la syntaxe sur contrib.spip</a>.',
 	'option_afficher_si_label' => 'Affichage conditionnel',
 	'option_afficher_si_remplissage_uniquement_explication' => 'En cochant cette case, l’affichage conditionnel s’appliquera uniquement lors du remplissage du formulaire, pas lors de l’affichage des résultats.',
 	'option_afficher_si_remplissage_uniquement_label' => 'Uniquement lors du remplissage',
+	'option_afficher_si_remplissage_uniquement_label_case' => 'Masquer les saisies uniquement lors du remplissage',
 	'option_attention_explication' => 'Un message plus important que l’explication.',
 	'option_attention_label' => 'Avertissement',
 	'option_attribut_title_label' => 'Mettre un attribut title dans le label, contenant la valeur du champ. À utiliser avec modération.',
@@ -112,7 +113,7 @@ Tu trouveras la <a href="https://contrib.spip.net/5080" target="_blank">document
 	'option_disable_explication' => 'Le champ ne peut plus obtenir le focus.',
 	'option_disable_label' => 'Désactiver le champ',
 	'option_erreur_obligatoire_explication' => 'Tu peux personnaliser le message d’erreur affiché pour indiquer l’obligation (sinon laisser vide).',
-	'option_erreur_obligatoire_label' => 'Message d’obligation', # MODIF
+	'option_erreur_obligatoire_label' => 'Message d’erreur pour l’obligation',
 	'option_explication_explication' => 'Si besoin, une courte phrase décrivant l’objet du champ.',
 	'option_explication_label' => 'Explication',
 	'option_forcer_select_explication' => 'Si un groupe de mots est sélectionné, par défaut il s’agira d’une saisie radio. Tu peux forcer l’utilisation d’un select.',
@@ -126,7 +127,7 @@ Tu trouveras la <a href="https://contrib.spip.net/5080" target="_blank">document
 	'option_horaire_label' => 'Horaire',
 	'option_horaire_label_case' => 'Permettre de saisie aussi l’horaire',
 	'option_id_groupe_label' => 'Groupe de mots',
-	'option_info_obligatoire_explication' => 'Tu peux modifier l’indication d’obligation par défaut : <i>[Obligatoire]</i>.', # MODIF
+	'option_info_obligatoire_explication' => 'Tu peux modifier l’indication d’obligation par défaut : <i>[Obligatoire]</i>. Pour garder l’information par défaut, ne rien mettre. Pour ne rien afficher, mettre un texte composé uniquement d’espace.',
 	'option_info_obligatoire_label' => 'Indication d’obligation',
 	'option_inserer_barre_choix_edition' => 'barre d’édition complète',
 	'option_inserer_barre_choix_forum' => 'barre des forums',
