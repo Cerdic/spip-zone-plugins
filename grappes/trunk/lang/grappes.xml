@@ -1,9 +1,9 @@
 <traduction
 	module="grappes"
-	id="grappes--grappes-89684"
+	id="grappes--grappes-2eb2f"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/grappes/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/grappes.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/grappes?lang_cible=de" total="57" traduits="37" relire="0" modifs="7" nouveaux="13" pourcent="64.91" />
 	<langue code="en" url="https://trad.spip.net/tradlang_module/grappes?lang_cible=en" total="57" traduits="27" relire="0" modifs="6" nouveaux="24" pourcent="47.37">
