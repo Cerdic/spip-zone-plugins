@@ -1,9 +1,9 @@
 <traduction
 	module="tradlang"
-	id="tradlang--trad-lang-47964"
+	id="tradlang--trad-lang-8e3c7"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/trad-lang/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/trad-lang.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/tradlang?lang_cible=ar" total="375" traduits="374" relire="0" modifs="0" nouveaux="1" pourcent="99.73">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
