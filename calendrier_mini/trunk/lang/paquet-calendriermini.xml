@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-calendriermini"
-	id="paquet-calendriermini--calendrier_mini-eadbe"
+	id="paquet-calendriermini--calendrier_mini-34cf9"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/calendrier_mini/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/calendrier_mini.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/paquet-calendriermini?lang_cible=ar" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Sami Lejmi" lien="https://trad.spip.net/auteur/sami-lejmi" />
