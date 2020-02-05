@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'activer_message' => 'Activate maintenance mode',
+	'autoriser_travaux' => 'What status is required to view the site during the maintenance ? ',
 
 	// E
 	'en_travaux' => 'Under construction',
