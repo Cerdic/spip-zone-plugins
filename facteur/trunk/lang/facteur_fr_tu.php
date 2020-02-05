@@ -24,6 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'email_test_envoye' => 'L’email de test a correctement été envoyé. Si tu ne le reçois pas correctement, vérifie la configuration de ton serveur ou contacte un administrateur du serveur.',
 	'erreur' => 'Erreur',
 	'erreur_dans_log' => ' : consulte le fichier log pour plus de détails',
+	'erreur_envoi_bloque_constante' => 'Envoi bloqué par la constante <tt>_TEST_EMAIL_DEST</tt>.
+Vérifie ton fichier <tt>mes_options.php</tt>',
 	'erreur_generale' => 'Il y a une ou plusieurs erreurs de configuration. Vérifie le contenu du formulaire.',
 	'erreur_invalid_host' => 'Ce nom d’hôte n’est pas correct',
 	'erreur_invalid_port' => 'Ce numéro de port n’est pas correct',
@@ -58,11 +60,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_tls_allow_self_signed_oui' => 'le certificat SSL du serveur SMTP est auto-signé.',
 	'facteur_smtp_username' => 'Nom d’utilisateur :',
 
+	// I
+	'info_envois_bloques_constante' => 'Tous les envois sont bloqués par la constante <tt>_TEST_EMAIL_DEST</tt>.',
+	'info_envois_forces_vers_email' => 'Tous les envois sont forcés vers l’adresse <b>@email@</b> par la constante <tt>_TEST_EMAIL_DEST</tt>',
+
 	// L
+	'label_email_test_from' => 'Expéditeur',
+	'label_email_test_from_placeholder' => 'from@example.org (optionnel)',
+	'label_email_test_important' => 'Cet email est important',
 	'label_facteur_forcer_from' => 'Forcer cette adresse d’envoi quand le <tt>From</tt> n’est pas sur le même domaine',
+	'label_mailjet_api_key' => 'Clé API Mailjet',
+	'label_mailjet_api_version' => 'API Version',
+	'label_mailjet_secret_key' => 'Clé secrète Mailjet',
+	'label_message_envoye' => 'Message envoyé :',
+	'label_utiliser_mailjet' => 'Utiliser Mailjet',
 
 	// M
-	'message_identite_email' => 'La configuration du plugin "facteur" surcharge cette adresse email pour l’envoi de courriels.', # MODIF
+	'message_identite_email' => 'La <a href="@url@">configuration du plugin <i>Facteur</i></a> surcharge cette adresse email avec <b>@email@</b> pour l’envoi de courriels.',
 
 	// N
 	'note_test_configuration' => 'Un email sera envoyé à cette adresse.',
@@ -70,13 +84,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'personnaliser' => 'Personnaliser ces réglages',
 
+	// S
+	'sujet_alerte_mail_fail' => '[MAIL] FAIL envoi à @dest@ (était : @sujet@)',
+
 	// T
 	'tester' => 'Tester',
 	'tester_la_configuration' => 'Tester la configuration',
+	'titre_configurer_facteur' => 'Configuration de Facteur',
 
 	// U
-	'utiliser_mail' => 'Utiliser la fonction mail de PHP', # MODIF
-	'utiliser_reglages_site' => 'Utiliser les réglages du site SPIP : <br /><tt>@from@</tt>', # MODIF
+	'utiliser_mail' => 'Utiliser la fonction <tt>mail()</tt> de PHP',
+	'utiliser_reglages_site' => 'Utiliser les réglages du site SPIP',
 	'utiliser_smtp' => 'Utiliser SMTP',
 
 	// V
