@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-oembed"
-	id="paquet-oembed--oembed-9477a"
+	id="paquet-oembed--oembed-0240b"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/oembed/lang"
+	source="https://git.spip.net/spip-contrib-extensions/oembed.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-oembed?lang_cible=de" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
