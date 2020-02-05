@@ -1,9 +1,9 @@
 <traduction
 	module="mesfavoris"
-	id="mesfavoris--mesfavoris-8a07d"
+	id="mesfavoris--mesfavoris-d1c3b"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/mesfavoris/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/mesfavoris.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/mesfavoris?lang_cible=ar" total="28" traduits="28" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
