@@ -1,9 +1,9 @@
 <traduction
 	module="spipopup"
-	id="spipopup--popup-0e618"
+	id="spipopup--popup-f7867"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/popup/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/popup.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/spipopup?lang_cible=en" total="32" traduits="31" relire="0" modifs="1" nouveaux="0" pourcent="96.88">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
