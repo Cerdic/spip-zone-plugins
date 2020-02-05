@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-yaml"
-	id="paquet-yaml--yaml-61d55"
+	id="paquet-yaml--yaml-18713"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/yaml/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/yaml.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-yaml?lang_cible=de" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
