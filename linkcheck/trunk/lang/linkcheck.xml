@@ -1,9 +1,9 @@
 <traduction
 	module="linkcheck"
-	id="linkcheck--linkcheck-10d25"
+	id="linkcheck--linkcheck-aad54"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/linkcheck/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/linkcheck.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/linkcheck?lang_cible=de" total="62" traduits="62" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
