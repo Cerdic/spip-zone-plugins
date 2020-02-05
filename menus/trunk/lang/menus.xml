@@ -1,9 +1,9 @@
 <traduction
 	module="menus"
-	id="menus--menus-1bc30"
+	id="menus--menus-6893a"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/menus/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/menus.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/menus?lang_cible=ar" total="179" traduits="76" relire="0" modifs="0" nouveaux="103" pourcent="42.46">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
