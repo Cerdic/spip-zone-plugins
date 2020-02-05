@@ -1,9 +1,9 @@
 <traduction
 	module="suivant_precedent"
-	id="suivant_precedent--criteres_suivant_precedent-af3d8"
+	id="suivant_precedent--criteres_suivant_precedent-49010"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/criteres_suivant_precedent/lang"
+	source="https://git.spip.net/spip-contrib-extensions/criteres_suivant_precedent.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/suivant_precedent?lang_cible=ar" total="5" traduits="5" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
