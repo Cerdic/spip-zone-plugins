@@ -1,9 +1,9 @@
 <traduction
 	module="minus"
-	id="minus--minus-b75fb"
+	id="minus--minus-c545a"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/minus/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/minus.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/minus?lang_cible=en" total="1" traduits="1" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Gilles" lien="https://trad.spip.net/auteur/gilles" />
