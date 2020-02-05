@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-auteurs_syndic"
-	id="paquet-auteurs_syndic--auteurs_syndic-82565"
+	id="paquet-auteurs_syndic--auteurs_syndic-9d73b"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/auteurs_syndic/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/auteurs_syndic.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-auteurs_syndic?lang_cible=de" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
