@@ -11,8 +11,9 @@
 	<langue code="de" url="https://trad.spip.net/tradlang_module/entravaux-193?lang_cible=de" total="12" traduits="11" relire="0" modifs="0" nouveaux="1" pourcent="91.67">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="https://trad.spip.net/tradlang_module/entravaux-193?lang_cible=en" total="12" traduits="11" relire="0" modifs="0" nouveaux="1" pourcent="91.67">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/entravaux-193?lang_cible=en" total="12" traduits="12" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
+		<traducteur nom="nicod_" lien="https://trad.spip.net/auteur/nicod_" />
 	</langue>
 	<langue code="eo" url="https://trad.spip.net/tradlang_module/entravaux-193?lang_cible=eo" total="12" traduits="11" relire="0" modifs="0" nouveaux="1" pourcent="91.67">
 		<traducteur nom="gpl" lien="https://trad.spip.net/auteur/gpl" />
@@ -24,8 +25,9 @@
 		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 	</langue>
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/entravaux-193?lang_cible=fr" total="12" traduits="12" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
-	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/entravaux-193?lang_cible=fr_tu" total="12" traduits="11" relire="0" modifs="0" nouveaux="1" pourcent="91.67">
+	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/entravaux-193?lang_cible=fr_tu" total="12" traduits="12" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Cerf" lien="https://trad.spip.net/auteur/cerf" />
+		<traducteur nom="RealET" lien="https://trad.spip.net/auteur/realet" />
 	</langue>
 	<langue code="it" url="https://trad.spip.net/tradlang_module/entravaux-193?lang_cible=it" total="12" traduits="11" relire="0" modifs="0" nouveaux="1" pourcent="91.67">
 		<traducteur nom="Alberto" lien="https://trad.spip.net/auteur/alberto" />
