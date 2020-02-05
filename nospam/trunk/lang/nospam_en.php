@@ -22,8 +22,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_saisie_texte_info' => 'For the formatting of your message, this form only accepts SPIP shortcuts <code>[-&gt;url] {{bold}} {italic} &lt;quote&gt; &lt;code&gt;</code> &lt;cadre&gt;</cadre> et le code HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. To create paragraphs, simply leave blank lines.',
 
 	// I
+	'info_alt_antispam' => 'Silent Antispam - no content displayed ',
 	'info_ip_suspecte' => 'Your IP address is suspected to send SPAMs. Thank you to confirm your are not doing so.',
 
 	// L
-	'label_message_licite' => 'This is not an abusive post'
+	'label_je_ne_suis_pas_un_robot' => 'I’m not a robot. ',
+	'label_message_licite' => 'This is not an abusive post',
+	'libelle_je_ne_suis_pas_un_robot' => 'Click to confirm that you are not a robot '
 );
