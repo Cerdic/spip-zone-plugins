@@ -1,9 +1,9 @@
 <traduction
 	module="todo"
-	id="todo--todo-6cb44"
+	id="todo--todo-1a3e6"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/todo/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/todo.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/todo?lang_cible=en" total="30" traduits="30" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
