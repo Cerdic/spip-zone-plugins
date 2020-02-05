@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-article_accueil"
-	id="paquet-article_accueil--article_accueil-e0736"
+	id="paquet-article_accueil--article_accueil-ae87f"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/article_accueil/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/article_accueil.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-article_accueil?lang_cible=en" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="es" url="https://trad.spip.net/tradlang_module/paquet-article_accueil?lang_cible=es" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
