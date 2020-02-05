@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-mailshot"
-	id="paquet-mailshot--mailshot-8d779"
+	id="paquet-mailshot--mailshot-d199d"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/mailshot/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/mailshot.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-mailshot?lang_cible=de" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-mailshot?lang_cible=en" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
