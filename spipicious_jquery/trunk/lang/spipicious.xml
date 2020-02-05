@@ -1,9 +1,9 @@
 <traduction
 	module="spipicious"
-	id="spipicious--spipicious_jquery-03cb1"
+	id="spipicious--spipicious_jquery-1362c"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/spipicious_jquery/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/spipicious_jquery.git"
 	reference="fr">
 	<langue code="ast" url="https://trad.spip.net/tradlang_module/spipicious?lang_cible=ast" total="20" traduits="15" relire="0" modifs="5" nouveaux="0" pourcent="75.00">
 		<traducteur nom="Xuacu" lien="https://trad.spip.net/auteur/xuacu" />
