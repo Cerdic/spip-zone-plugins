@@ -1,9 +1,9 @@
 <traduction
 	module="polyhier"
-	id="polyhier--polyhierarchie-6af87"
+	id="polyhier--polyhierarchie-86fd4"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/polyhierarchie/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/polyhierarchie.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/polyhier?lang_cible=ar" total="12" traduits="7" relire="0" modifs="0" nouveaux="5" pourcent="58.33">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
