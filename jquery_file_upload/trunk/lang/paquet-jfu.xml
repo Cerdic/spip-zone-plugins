@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-jfu"
-	id="paquet-jfu--jquery_file_upload-cafec"
+	id="paquet-jfu--jquery_file_upload-23061"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/jquery_file_upload/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/jquery_file_upload.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-jfu?lang_cible=en" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="es" url="https://trad.spip.net/tradlang_module/paquet-jfu?lang_cible=es" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
