@@ -1,9 +1,9 @@
 <traduction
 	module="reservations_multiples"
-	id="reservations_multiples--reservations_multiples-9aa97"
+	id="reservations_multiples--reservations_multiples-abee0"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/reservations_multiples/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/reservations_multiples.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/reservations_multiples?lang_cible=en" total="18" traduits="17" relire="0" modifs="1" nouveaux="0" pourcent="94.44">
 		<traducteur nom="Rainer Müller" lien="https://trad.spip.net/auteur/rainer-muller" />
