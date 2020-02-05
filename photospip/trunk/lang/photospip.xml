@@ -1,9 +1,9 @@
 <traduction
 	module="photospip"
-	id="photospip--photospip-83bff"
+	id="photospip--photospip-132a9"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/photospip/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/photospip.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/photospip?lang_cible=en" total="118" traduits="116" relire="0" modifs="1" nouveaux="1" pourcent="98.31">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
