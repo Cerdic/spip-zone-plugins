@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-linkcheck"
-	id="paquet-linkcheck--linkcheck-10d25"
+	id="paquet-linkcheck--linkcheck-aad54"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/linkcheck/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/linkcheck.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-linkcheck?lang_cible=en" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
