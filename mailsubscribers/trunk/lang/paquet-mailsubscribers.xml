@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-mailsubscribers"
-	id="paquet-mailsubscribers--mailsubscribers-713a9"
+	id="paquet-mailsubscribers--mailsubscribers-19761"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/mailsubscribers/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/mailsubscribers.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-mailsubscribers?lang_cible=de" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-mailsubscribers?lang_cible=en" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
