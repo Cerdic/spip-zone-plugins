@@ -185,7 +185,9 @@ function salvatore_vcs_git_push_repository_dist($dir_repo, $user=null, $pass=nul
 	$res = true;
 	// on ajoute tous les fichiers pour commit
 	$commands = [
+		"git stash 2>&1",
 		"git pull --rebase 2>&1",
+		"git stash pop 2>&1",
 		"git push 2>&1",
 	];
 

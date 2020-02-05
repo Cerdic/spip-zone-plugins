@@ -196,10 +196,12 @@ function savatore_commit_and_push_module($source, $dir_modules, $dir_depots, $ur
 
 	// et push si besoin
 	// ne fera rien en svn (deja pushe)
-	list($res,$out) = $vcs_push_repository($dir_depots . $source['dir_checkout'], empty($source['user']) ? null : $source['user'], empty($source['pass']) ? null : $source['pass']);
-	salvatore_log($out);
-	if (!$res) {
-		salvatore_fail("[Pousseur] Erreur sur $module", "Erreur lors du commit :\n$out");
+	if ($commits_todo) {
+		list($res,$out) = $vcs_push_repository($dir_depots . $source['dir_checkout'], empty($source['user']) ? null : $source['user'], empty($source['pass']) ? null : $source['pass']);
+		salvatore_log($out);
+		if (!$res) {
+			salvatore_fail("[Pousseur] Erreur sur $module", "Erreur lors du commit :\n$out");
+		}
 	}
 
 	return true;
