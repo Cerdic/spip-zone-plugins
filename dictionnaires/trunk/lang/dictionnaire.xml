@@ -1,9 +1,9 @@
 <traduction
 	module="dictionnaire"
-	id="dictionnaire--dictionnaires-dfaef"
+	id="dictionnaire--dictionnaires-2bc37"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/dictionnaires/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/dictionnaires.git"
 	reference="fr">
 	<langue code="eu" url="https://trad.spip.net/tradlang_module/dictionnaire?lang_cible=eu" total="27" traduits="24" relire="0" modifs="0" nouveaux="3" pourcent="88.89" />
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/dictionnaire?lang_cible=fr" total="27" traduits="27" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
