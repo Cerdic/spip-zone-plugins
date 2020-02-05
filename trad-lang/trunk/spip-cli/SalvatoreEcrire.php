@@ -66,6 +66,13 @@ class SalvatoreEcrire extends Command {
 				'Message de commit',
 				null
 			)
+			->addOption(
+				'time',
+				null,
+				InputOption::VALUE_NONE,
+				'Ajouter date/heure sur les sorties pour les logs',
+				null
+			)
 		;
 	}
 
@@ -76,24 +83,25 @@ class SalvatoreEcrire extends Command {
 		include_spip('inc/salvatore');
 		include_spip('salvatore/ecriveur');
 
-		salvatore_init(array($output, 'writeln'));
+		$time = $input->getOption('time');
+		salvatore_init(array($output, 'writeln'), !!$time);
 
 
-		$output->writeln("<comment>=======================================</comment>");
-		$output->writeln("<comment>ECRIVEUR [Exporte les fichiers de traduction dans sa copie locale a partir de la base de donnees]</comment>");
-		$output->writeln("<comment>=======================================</comment>");
+		salvatore_log("<comment>=======================================</comment>");
+		salvatore_log("<comment>ECRIVEUR [Exporte les fichiers de traduction dans sa copie locale a partir de la base de donnees]</comment>");
+		salvatore_log("<comment>=======================================</comment>");
 
 
 		$traductions = $input->getOption('traductions');
 		$liste_trad = salvatore_charger_fichier_traductions($traductions);
 		$n = count($liste_trad);
-		$output->writeln("<info>$n modules dans le fichier traductions " . ($traductions ? $traductions : '') . "</info>");
+		salvatore_log("<info>$n modules dans le fichier traductions " . ($traductions ? $traductions : '') . "</info>");
 
 		$modules = $input->getOption('module');
 		if ($modules = trim($modules)) {
 			$liste_trad = salvatore_filtrer_liste_traductions($liste_trad, $modules);
 			$n = count($liste_trad);
-			$output->writeln("<info>$n modules à traiter : " . $modules . "</info>");
+			salvatore_log("<info>$n modules à traiter : " . $modules . "</info>");
 		}
 
 		$message = $input->getOption('message');

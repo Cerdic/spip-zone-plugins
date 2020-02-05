@@ -457,7 +457,8 @@ function salvatore_log($msg = '', $display_function = null, $display_time = fals
 		and _DEBUG_TRAD_LANG
 		and $msg){
 		if ($time_log) {
-			$msg = date('Y-m-d H:i:s') . ': ' . $msg;
+			$t = date('Y-m-d H:i:s') . ": ";
+			$msg = $t . str_replace("\n", "\n$t", $msg);
 		}
 		if ($function){
 			call_user_func($function, rtrim($msg));
