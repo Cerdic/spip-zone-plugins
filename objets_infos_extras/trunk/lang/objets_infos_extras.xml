@@ -1,9 +1,9 @@
 <traduction
 	module="objets_infos_extras"
-	id="objets_infos_extras--objets_infos_extras-8b70d"
+	id="objets_infos_extras--objets_infos_extras-068cb"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/objets_infos_extras/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/objets_infos_extras.git"
 	reference="fr">
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/objets_infos_extras?lang_cible=fr" total="4" traduits="4" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
