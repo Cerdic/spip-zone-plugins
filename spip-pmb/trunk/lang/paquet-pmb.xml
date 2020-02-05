@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-pmb"
-	id="paquet-pmb--spip-pmb-856e3"
+	id="paquet-pmb--spip-pmb-a5ee8"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/spip-pmb/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/spip-pmb.git"
 	reference="fr">
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-pmb?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
