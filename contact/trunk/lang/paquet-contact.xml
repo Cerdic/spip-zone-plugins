@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-contact"
-	id="paquet-contact--contact-ee419"
+	id="paquet-contact--contact-d7566"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/contact/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/contact.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/paquet-contact?lang_cible=ar" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-contact?lang_cible=de" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
