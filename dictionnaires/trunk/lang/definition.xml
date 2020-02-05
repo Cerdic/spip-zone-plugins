@@ -1,9 +1,9 @@
 <traduction
 	module="definition"
-	id="definition--dictionnaires-dfaef"
+	id="definition--dictionnaires-2bc37"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/dictionnaires/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/dictionnaires.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/definition?lang_cible=en" total="26" traduits="21" relire="0" modifs="0" nouveaux="5" pourcent="80.77">
 		<traducteur nom="RealET" lien="https://trad.spip.net/auteur/realet" />
