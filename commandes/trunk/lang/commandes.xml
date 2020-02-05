@@ -1,9 +1,9 @@
 <traduction
 	module="commandes"
-	id="commandes--commandes-5c59b"
+	id="commandes--commandes-8a0f4"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/commandes/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/commandes.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/commandes?lang_cible=en" total="208" traduits="195" relire="0" modifs="2" nouveaux="11" pourcent="93.75">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
