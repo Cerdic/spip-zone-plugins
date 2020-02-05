@@ -1,9 +1,9 @@
 <traduction
 	module="newsletter"
-	id="newsletter--newsletters-32ca5"
+	id="newsletter--newsletters-dc282"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/newsletters/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/newsletters.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/newsletter-newsletters?lang_cible=ar" total="55" traduits="3" relire="0" modifs="0" nouveaux="52" pourcent="5.45">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
