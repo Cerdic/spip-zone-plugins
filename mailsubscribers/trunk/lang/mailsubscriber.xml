@@ -1,9 +1,9 @@
 <traduction
 	module="mailsubscriber"
-	id="mailsubscriber--mailsubscribers-713a9"
+	id="mailsubscriber--mailsubscribers-19761"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/mailsubscribers/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/mailsubscribers.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/mailsubscriber?lang_cible=de" total="106" traduits="83" relire="0" modifs="16" nouveaux="7" pourcent="78.30">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
