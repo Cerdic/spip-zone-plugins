@@ -1,9 +1,9 @@
 <traduction
 	module="immeuble"
-	id="immeuble--immeubles-58938"
+	id="immeuble--immeubles-5152f"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/immeubles/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/immeubles.git"
 	reference="fr">
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/immeuble?lang_cible=fr" total="26" traduits="26" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
