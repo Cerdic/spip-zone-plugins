@@ -1,9 +1,9 @@
 <traduction
 	module="pendu"
-	id="pendu--jeux-d7cfb"
+	id="pendu--jeux-aced6"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/jeux/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/jeux.git"
 	reference="fr">
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/pendu?lang_cible=fr" total="5" traduits="5" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="it" url="https://trad.spip.net/tradlang_module/pendu?lang_cible=it" total="5" traduits="4" relire="0" modifs="0" nouveaux="1" pourcent="80.00" />
