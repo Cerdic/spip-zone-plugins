@@ -131,7 +131,7 @@ class SalvatoreRecharger extends Command {
 		if (!$from) {
 			$from = '-1hour';
 		}
-		$t_since = strotime($from);
+		$t_since = strtotime($from);
 		if (!$t_since) {
 			salvatore_log("<error>Indiquez un temps valide pour l'option --from</error>");
 			exit(1);
@@ -149,7 +149,7 @@ class SalvatoreRecharger extends Command {
 			salvatore_tirer($changed_trad);
 
 			$force = $input->getOption('force');
-			salvatore_lire($liste_trad, $force);
+			salvatore_lire($changed_trad, $force);
 		}
 		else {
 			salvatore_log("<info>Rien a faire, aucun fichier correspondant a un module</info>");
@@ -199,12 +199,14 @@ class SalvatoreRecharger extends Command {
 			}
 			foreach ($liste_trad as $k=>$source) {
 				if (in_array(rtrim($source['url'], '/'), $depots_possibles)) {
-					$changed_trad[] = $source;
+					$changed_trad[$k] = $source;
 					unset($liste_trad[$k]);
 					break;
 				}
 			}
 		}
+		// on remet dans le meme ordre que la liste d'origine
+		ksort($changed_trad);
 
 		return $changed_trad;
 	}
