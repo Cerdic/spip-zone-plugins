@@ -1,9 +1,9 @@
 <traduction
 	module="profil"
-	id="profil--profils-184a3"
+	id="profil--profils-e2353"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/profils/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/profils.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/profil?lang_cible=en" total="69" traduits="68" relire="1" modifs="0" nouveaux="0" pourcent="98.55">
 		<traducteur nom="tcharlss" lien="https://trad.spip.net/auteur/drbouvierleduc" />
