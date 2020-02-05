@@ -1,9 +1,9 @@
 <traduction
 	module="jfu"
-	id="jfu--jquery_file_upload-cafec"
+	id="jfu--jquery_file_upload-23061"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/jquery_file_upload/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/jquery_file_upload.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/jfu?lang_cible=en" total="19" traduits="19" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
