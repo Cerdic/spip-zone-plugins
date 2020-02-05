@@ -1,9 +1,9 @@
 <traduction
 	module="smush"
-	id="smush--smush_images-a4041"
+	id="smush--smush_images-7c9e8"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/smush_images/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/smush_images.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/smush?lang_cible=en" total="19" traduits="18" relire="0" modifs="0" nouveaux="1" pourcent="94.74">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
