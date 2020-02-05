@@ -1,9 +1,9 @@
 <traduction
 	module="chosen"
-	id="chosen--chosen-cc061"
+	id="chosen--chosen-47bce"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/chosen/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/chosen.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/chosen?lang_cible=de" total="12" traduits="12" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
