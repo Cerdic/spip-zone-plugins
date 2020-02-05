@@ -1,9 +1,9 @@
 <traduction
 	module="pubban"
-	id="pubban--pub_banner-d2e33"
+	id="pubban--pub_banner-9f9a0"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/pub_banner/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/pub_banner.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/pubban?lang_cible=en" total="302" traduits="298" relire="0" modifs="4" nouveaux="0" pourcent="98.68">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
