@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-multilang"
-	id="paquet-multilang--multilang-f10a1"
+	id="paquet-multilang--multilang-7461e"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/multilang/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/multilang.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-multilang?lang_cible=de" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
