@@ -1,9 +1,9 @@
 <traduction
 	module="nospam"
-	id="nospam--nospam-1736f"
+	id="nospam--nospam-ac484"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/nospam/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/nospam.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/nospam?lang_cible=ar" total="13" traduits="5" relire="0" modifs="0" nouveaux="8" pourcent="38.46">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
