@@ -1,9 +1,9 @@
 <traduction
 	module="lienscontenus"
-	id="lienscontenus--liens_contenus-27200"
+	id="lienscontenus--liens_contenus-f7865"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/liens_contenus/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/liens_contenus.git"
 	reference="fr">
 	<langue code="ast" url="https://trad.spip.net/tradlang_module/lienscontenus?lang_cible=ast" total="35" traduits="9" relire="0" modifs="6" nouveaux="20" pourcent="25.71" />
 	<langue code="ca" url="https://trad.spip.net/tradlang_module/lienscontenus?lang_cible=ca" total="35" traduits="9" relire="0" modifs="6" nouveaux="20" pourcent="25.71" />
