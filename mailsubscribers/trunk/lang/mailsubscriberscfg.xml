@@ -1,9 +1,9 @@
 <traduction
 	module="mailsubscriberscfg"
-	id="mailsubscriberscfg--mailsubscribers-713a9"
+	id="mailsubscriberscfg--mailsubscribers-19761"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/mailsubscribers/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/mailsubscribers.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/mailsubscriberscfg?lang_cible=de" total="22" traduits="22" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
