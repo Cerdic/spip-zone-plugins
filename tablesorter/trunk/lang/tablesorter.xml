@@ -1,9 +1,9 @@
 <traduction
 	module="tablesorter"
-	id="tablesorter--tablesorter-6b9fc"
+	id="tablesorter--tablesorter-edbfd"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/tablesorter/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/tablesorter.git"
 	reference="fr">
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/tablesorter?lang_cible=fr" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
