@@ -1,9 +1,9 @@
 <traduction
 	module="contacts"
-	id="contacts--contacts_et_organisations-99115"
+	id="contacts--contacts_et_organisations-17aed"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/contacts_et_organisations/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/contacts_et_organisations.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/contacts?lang_cible=en" total="193" traduits="175" relire="0" modifs="13" nouveaux="5" pourcent="90.67">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
