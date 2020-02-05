@@ -1,9 +1,9 @@
 <traduction
 	module="xmlrpc"
-	id="xmlrpc--xmlrpc-210f5"
+	id="xmlrpc--xmlrpc-903c6"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/xmlrpc/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/xmlrpc.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/xmlrpc?lang_cible=en" total="12" traduits="12" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
