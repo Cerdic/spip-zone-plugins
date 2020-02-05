@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-bolo"
-	id="paquet-bolo--bolo-0940e"
+	id="paquet-bolo--bolo-edaa3"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/bolo/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/bolo.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-bolo?lang_cible=en" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-bolo?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
