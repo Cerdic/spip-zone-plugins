@@ -1,9 +1,9 @@
 <traduction
 	module="formulaires_reponse"
-	id="formulaires_reponse--formidable-30cfd"
+	id="formulaires_reponse--formidable-4d207"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/formidable/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/formidable.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/formulaires_reponse?lang_cible=en" total="8" traduits="8" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jack31" lien="https://trad.spip.net/auteur/jack31" />
