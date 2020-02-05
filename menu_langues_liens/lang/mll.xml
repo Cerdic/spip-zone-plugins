@@ -1,9 +1,9 @@
 <traduction
 	module="mll"
-	id="mll--menu_langues_liens-81b9d"
+	id="mll--menu_langues_liens-4ef7e"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/menu_langues_liens/lang"
+	source="https://git.spip.net/spip-contrib-extensions/menu_langues_liens.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/mll?lang_cible=en" total="17" traduits="11" relire="0" modifs="1" nouveaux="5" pourcent="64.71">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
