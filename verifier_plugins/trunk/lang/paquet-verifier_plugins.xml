@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-verifier_plugins"
-	id="paquet-verifier_plugins--verifier_plugins-c4e1e"
+	id="paquet-verifier_plugins--verifier_plugins-6a52c"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/verifier_plugins/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/verifier_plugins.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-verifier_plugins?lang_cible=en" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jack31" lien="https://trad.spip.net/auteur/jack31" />
