@@ -1,9 +1,9 @@
 <traduction
 	module="skeleditor"
-	id="skeleditor--skeleditor-67525"
+	id="skeleditor--skeleditor-50ee8"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/skeleditor/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/skeleditor.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/skeleditor?lang_cible=de" total="59" traduits="52" relire="0" modifs="7" nouveaux="0" pourcent="88.14" />
 	<langue code="en" url="https://trad.spip.net/tradlang_module/skeleditor?lang_cible=en" total="59" traduits="59" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
