@@ -1,9 +1,9 @@
 <traduction
 	module="fabrique"
-	id="fabrique--fabrique-5b805"
+	id="fabrique--fabrique-c448a"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/fabrique/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/fabrique.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/fabrique?lang_cible=en" total="325" traduits="325" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jack31" lien="https://trad.spip.net/auteur/jack31" />
