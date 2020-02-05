@@ -1,9 +1,9 @@
 <traduction
 	module="liaison_objet"
-	id="liaison_objet--liaison_objet-50b2d"
+	id="liaison_objet--liaison_objet-65595"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/liaison_objet/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/liaison_objet.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/liaison_objet?lang_cible=de" total="47" traduits="47" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="en" url="https://trad.spip.net/tradlang_module/liaison_objet?lang_cible=en" total="47" traduits="47" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
