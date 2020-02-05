@@ -1,9 +1,9 @@
 <traduction
 	module="migreragenda"
-	id="migreragenda--agenda-efa0c"
+	id="migreragenda--agenda-95214"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/agenda/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/agenda.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/migreragenda?lang_cible=en" total="19" traduits="19" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jack31" lien="https://trad.spip.net/auteur/jack31" />
