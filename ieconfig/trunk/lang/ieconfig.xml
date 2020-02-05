@@ -1,9 +1,9 @@
 <traduction
 	module="ieconfig"
-	id="ieconfig--ieconfig-76fab"
+	id="ieconfig--ieconfig-73dd8"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/ieconfig/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/ieconfig.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/ieconfig?lang_cible=en" total="35" traduits="26" relire="0" modifs="2" nouveaux="7" pourcent="74.29">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
