@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-mutualisation"
-	id="paquet-mutualisation--mutualisation-29680"
+	id="paquet-mutualisation--mutualisation-bf462"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/mutualisation/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/mutualisation.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-mutualisation?lang_cible=en" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
