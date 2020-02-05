@@ -1,9 +1,9 @@
 <traduction
 	module="noizetier"
-	id="noizetier--noizetier-ab0c7"
+	id="noizetier--noizetier-88079"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/noizetier/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/noizetier.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/noizetier?lang_cible=de" total="233" traduits="54" relire="0" modifs="23" nouveaux="156" pourcent="23.18">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
