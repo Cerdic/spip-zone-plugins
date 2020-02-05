@@ -1,9 +1,9 @@
 <traduction
 	module="jqueryui"
-	id="jqueryui--jquery_ui-d23b6"
+	id="jqueryui--jquery_ui-1ad1f"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/jquery_ui/lang"
+	source="https://git.spip.net/spip-contrib-extensions/jquery_ui.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/jqueryui?lang_cible=en" total="51" traduits="51" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
