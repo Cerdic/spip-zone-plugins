@@ -1,9 +1,9 @@
 <traduction
 	module="ocr"
-	id="ocr--ocr-424b4"
+	id="ocr--ocr-2f4f7"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/ocr/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/ocr.git"
 	reference="fr">
 	<langue code="es" url="https://trad.spip.net/tradlang_module/ocr?lang_cible=es" total="40" traduits="40" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
