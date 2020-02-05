@@ -61,6 +61,8 @@ function salvatore_ecrire($liste_sources, $message_commit='', $dir_modules = nul
 
 	$url_gestionnaire = salvatore_get_self_url();
 
+	$nb_to_comit = 0;
+	$modules_to_commit = [];
 	foreach ($liste_sources as $source){
 		salvatore_log("\n<info>--- Module " . $source['module'] . " | " . $source['dir_module'] . " | " . $source['url'] . "</info>");
 
@@ -78,8 +80,20 @@ function salvatore_ecrire($liste_sources, $message_commit='', $dir_modules = nul
 		else {
 			// url de l'interface de traduction d'un module
 			$url_trad_module = url_absolue(generer_url_entite($id_tradlang_module, 'tradlang_module'), $url_gestionnaire);
-			salvatore_exporter_module($id_tradlang_module, $source, $url_gestionnaire, $url_trad_module, $dir_modules, $dir_depots, $message_commit);
+			$nb = salvatore_exporter_module($id_tradlang_module, $source, $url_gestionnaire, $url_trad_module, $dir_modules, $dir_depots, $message_commit);
+			if ($nb>0) {
+				$modules_to_commit[] = $source['module'];
+				$nb_to_comit += $nb;
+			}
 		}
+	}
+
+	if (!$nb_to_comit) {
+		salvatore_log("<info>Rien a commit</info>");
+	}
+	else {
+		salvatore_log("<info>$nb_to_comit commits a envoyer</info>");
+		salvatore_log("Modules: " . implode(', ', $modules_to_commit));
 	}
 }
 
