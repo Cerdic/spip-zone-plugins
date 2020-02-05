@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-pages"
-	id="paquet-pages--pages-f9e9b"
+	id="paquet-pages--pages-080a7"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/pages/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/pages.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/paquet-pages?lang_cible=ar" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-pages?lang_cible=de" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
