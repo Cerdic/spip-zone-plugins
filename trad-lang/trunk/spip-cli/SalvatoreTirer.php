@@ -58,6 +58,13 @@ class SalvatoreTirer extends Command {
 				'Un ou plusieurs modules a traiter (par defaut tous les modules du fichier de traduction seront traites)',
 				null
 			)
+			->addOption(
+				'time',
+				null,
+				InputOption::VALUE_NONE,
+				'Ajouter date/heure sur les sorties pour les logs',
+				null
+			)
 		;
 	}
 
@@ -68,23 +75,24 @@ class SalvatoreTirer extends Command {
 		include_spip('inc/salvatore');
 		include_spip('salvatore/tireur');
 
-		salvatore_init(array($output, 'writeln'));
+		$time = $input->getOption('time');
+		salvatore_init(array($output, 'writeln'), !!$time);
 
-		$output->writeln("<comment>=======================================</comment>");
-		$output->writeln("<comment>TIREUR [Va chercher les fichiers dans un repo SVN|GIT et les depose dans sa copie locale]</comment>");
-		$output->writeln("<comment>=======================================</comment>");
+		salvatore_log("<comment>=======================================</comment>");
+		salvatore_log("<comment>TIREUR [Va chercher les fichiers dans un repo SVN|GIT et les depose dans sa copie locale]</comment>");
+		salvatore_log("<comment>=======================================</comment>");
 
 
 		$traductions = $input->getOption('traductions');
 		$liste_trad = salvatore_charger_fichier_traductions($traductions);
 		$n = count($liste_trad);
-		$output->writeln("<info>$n modules dans le fichier traductions " . ($traductions ? $traductions : '') . "</info>");
+		salvatore_log("<info>$n modules dans le fichier traductions " . ($traductions ? $traductions : '') . "</info>");
 
 		$modules = $input->getOption('module');
 		if ($modules = trim($modules)) {
 			$liste_trad = salvatore_filtrer_liste_traductions($liste_trad, $modules);
 			$n = count($liste_trad);
-			$output->writeln("<info>$n modules à traiter : " . $modules . "</info>");
+			salvatore_log("<info>$n modules à traiter : " . $modules . "</info>");
 		}
 
 		salvatore_tirer($liste_trad);

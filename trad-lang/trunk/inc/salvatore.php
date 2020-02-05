@@ -29,14 +29,15 @@
  * initialiser salvatore si besoin
  * peut etre appelle plusieurs fois
  * @param string|array $log_function
+ * @param bool $display_time
  * @throws Exception
  */
-function salvatore_init($log_function = null){
+function salvatore_init($log_function = null, $display_time = false){
 	static $initialized;
 
 	// set log function if any
 	if ($log_function){
-		salvatore_log('', $log_function);
+		salvatore_log('', $log_function, $display_time);
 	}
 
 	if (is_null($initialized)){
@@ -441,17 +442,23 @@ function salvatore_check_file($file){
  * Loger
  * @param string $msg
  * @param string|array $display_function
+ * @param bool $display_time
  */
-function salvatore_log($msg = '', $display_function = null){
+function salvatore_log($msg = '', $display_function = null, $display_time = false){
 	static $function = null;
+	static $time_log = null;
 
 	if ($display_function and is_callable($display_function)){
 		$function = $display_function;
+		$time_log = $display_time;
 	}
 
 	if (defined('_DEBUG_TRAD_LANG')
 		and _DEBUG_TRAD_LANG
 		and $msg){
+		if ($time_log) {
+			$msg = date('Y-m-d H:i:s') . ': ' . $msg;
+		}
 		if ($function){
 			call_user_func($function, rtrim($msg));
 		} else {
