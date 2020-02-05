@@ -1,9 +1,9 @@
 <traduction
 	module="corbeille"
-	id="corbeille--corbeille-3f482"
+	id="corbeille--corbeille-fe422"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/corbeille/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/corbeille.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/corbeille?lang_cible=ar" total="23" traduits="3" relire="0" modifs="1" nouveaux="19" pourcent="13.04" />
 	<langue code="de" url="https://trad.spip.net/tradlang_module/corbeille?lang_cible=de" total="23" traduits="19" relire="0" modifs="3" nouveaux="1" pourcent="82.61" />
