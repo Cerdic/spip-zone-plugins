@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-ck"
-	id="paquet-ck--couteau-kiss-167f3"
+	id="paquet-ck--couteau-kiss-e178e"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/couteau-kiss/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/couteau-kiss.git"
 	reference="fr">
 	<langue code="ast" url="https://trad.spip.net/tradlang_module/paquet-ck?lang_cible=ast" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="br" url="https://trad.spip.net/tradlang_module/paquet-ck?lang_cible=br" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
