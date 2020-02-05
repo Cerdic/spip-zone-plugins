@@ -1,9 +1,9 @@
 <traduction
 	module="socialtags"
-	id="socialtags--socialtags-f949e"
+	id="socialtags--socialtags-450fb"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/socialtags/lang"
+	source="https://git.spip.net/spip-contrib-extensions/socialtags.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/socialtags?lang_cible=en" total="62" traduits="61" relire="1" modifs="0" nouveaux="0" pourcent="98.39">
 		<traducteur nom="cerdic" lien="https://trad.spip.net/auteur/cerdic" />
