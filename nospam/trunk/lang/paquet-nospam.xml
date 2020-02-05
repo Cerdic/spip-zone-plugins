@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-nospam"
-	id="paquet-nospam--nospam-1736f"
+	id="paquet-nospam--nospam-ac484"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/nospam/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/nospam.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/paquet-nospam?lang_cible=ar" />
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-nospam?lang_cible=de">
