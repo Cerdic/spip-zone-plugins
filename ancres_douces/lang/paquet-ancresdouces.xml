@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-ancresdouces"
-	id="paquet-ancresdouces--ancres_douces-b2eda"
+	id="paquet-ancresdouces--ancres_douces-5ac36"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/ancres_douces/lang"
+	source="https://git.spip.net/spip-contrib-extensions/ancres_douces.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-ancresdouces?lang_cible=de" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
