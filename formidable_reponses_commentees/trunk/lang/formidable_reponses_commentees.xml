@@ -1,9 +1,9 @@
 <traduction
 	module="formidable_reponses_commentees"
-	id="formidable_reponses_commentees--formidable_reponses_commentees-8eb61"
+	id="formidable_reponses_commentees--formidable_reponses_commentees-00f72"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/formidable_reponses_commentees/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/formidable_reponses_commentees.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/formidable_reponses_commentees?lang_cible=en" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Gilles" lien="https://trad.spip.net/auteur/gilles" />
