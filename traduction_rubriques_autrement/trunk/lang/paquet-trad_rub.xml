@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-trad_rub"
-	id="paquet-trad_rub--traduction_rubriques_autrement-708c4"
+	id="paquet-trad_rub--traduction_rubriques_autrement-a1ff4"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/traduction_rubriques_autrement/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/traduction_rubriques_autrement.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-trad_rub?lang_cible=en" total="3" traduits="2" relire="0" modifs="1" nouveaux="0" pourcent="66.67">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
