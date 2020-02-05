@@ -1,9 +1,9 @@
 <traduction
 	module="crayons"
-	id="crayons--crayons-9eff1"
+	id="crayons--crayons-c725c"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/crayons/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/crayons.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/crayons?lang_cible=ar" total="52" traduits="14" relire="0" modifs="0" nouveaux="38" pourcent="26.92">
 		<traducteur nom="Aku Marani" lien="https://trad.spip.net/auteur/akomarani" />
