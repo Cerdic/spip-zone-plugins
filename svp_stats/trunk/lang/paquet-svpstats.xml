@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-svpstats"
-	id="paquet-svpstats--svp_stats-4590f"
+	id="paquet-svpstats--svp_stats-b0e3c"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/svp_stats/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/svp_stats.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-svpstats?lang_cible=en" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
