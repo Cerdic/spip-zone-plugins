@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-sedna"
-	id="paquet-sedna--sedna-e5413"
+	id="paquet-sedna--sedna-001c9"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/sedna/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/sedna.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-sedna?lang_cible=en" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
