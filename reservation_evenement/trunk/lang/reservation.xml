@@ -1,9 +1,9 @@
 <traduction
 	module="reservation"
-	id="reservation--reservation_evenement-c6843"
+	id="reservation--reservation_evenement-d4a50"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/reservation_evenement/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/reservation_evenement.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/reservation?lang_cible=de" total="152" traduits="113" relire="0" modifs="0" nouveaux="39" pourcent="74.34">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
