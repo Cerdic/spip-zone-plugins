@@ -1,9 +1,9 @@
 <traduction
 	module="notifications"
-	id="notifications--notifications-f5e4c"
+	id="notifications--notifications-ff2e9"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/notifications/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/notifications.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/notifications?lang_cible=de" total="98" traduits="98" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
