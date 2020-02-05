@@ -1,9 +1,9 @@
 <traduction
 	module="simplecal"
-	id="simplecal--simple_calendrier-e8683"
+	id="simplecal--simple_calendrier-f9113"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/simple_calendrier/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/simple_calendrier.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/simplecal-simple_calendrier?lang_cible=en" total="169" traduits="147" relire="0" modifs="1" nouveaux="21" pourcent="86.98">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
