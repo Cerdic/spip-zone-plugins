@@ -1,9 +1,9 @@
 <traduction
 	module="configureragenda"
-	id="configureragenda--agenda-efa0c"
+	id="configureragenda--agenda-95214"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/agenda/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/agenda.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/configureragenda?lang_cible=en" total="25" traduits="17" relire="0" modifs="2" nouveaux="6" pourcent="68.00">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
