@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-coloration_code"
-	id="paquet-coloration_code--coloration_code-c3b18"
+	id="paquet-coloration_code--coloration_code-eef45"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/coloration_code/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/coloration_code.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-coloration_code?lang_cible=de" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
