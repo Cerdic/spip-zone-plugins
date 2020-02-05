@@ -1,9 +1,9 @@
 <traduction
 	module="gis"
-	id="gis--gis-29d98"
+	id="gis--gis-28ee0"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/gis/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/gis.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/gis?lang_cible=de" total="162" traduits="154" relire="0" modifs="1" nouveaux="7" pourcent="95.06">
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
