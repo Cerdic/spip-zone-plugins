@@ -1,9 +1,9 @@
 <traduction
 	module="amap"
-	id="amap--amap-f6ba2"
+	id="amap--amap-ebc83"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/amap/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/amap.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/amap?lang_cible=en" total="133" traduits="133" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
