@@ -1,9 +1,9 @@
 <traduction
 	module="tdm"
-	id="tdm--table_matieres-4cb68"
+	id="tdm--table_matieres-8b104"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/table_matieres/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/table_matieres.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/tdm?lang_cible=de" total="12" traduits="12" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
