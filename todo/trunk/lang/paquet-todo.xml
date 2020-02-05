@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-todo"
-	id="paquet-todo--todo-6cb44"
+	id="paquet-todo--todo-1a3e6"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/todo/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/todo.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-todo?lang_cible=de" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
