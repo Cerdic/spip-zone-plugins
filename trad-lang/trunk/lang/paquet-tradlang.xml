@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-tradlang"
-	id="paquet-tradlang--trad-lang-47964"
+	id="paquet-tradlang--trad-lang-8e3c7"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/trad-lang/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/trad-lang.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/paquet-tradlang?lang_cible=ar" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-tradlang?lang_cible=de" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
