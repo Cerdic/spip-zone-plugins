@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-profils"
-	id="paquet-profils--profils-184a3"
+	id="paquet-profils--profils-e2353"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/profils/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/profils.git"
 	reference="fr">
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-profils?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
