@@ -1,9 +1,9 @@
 <traduction
 	module="tickets"
-	id="tickets--tickets-2e05b"
+	id="tickets--tickets-c1e74"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/tickets/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/tickets.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/tickets?lang_cible=ar" total="240" traduits="173" relire="0" modifs="0" nouveaux="67" pourcent="72.08">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
