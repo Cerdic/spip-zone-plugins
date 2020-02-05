@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-prix_objets"
-	id="paquet-prix_objets--prix_objets-1261f"
+	id="paquet-prix_objets--prix_objets-0fd5a"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/prix_objets/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/prix_objets.git"
 	reference="fr">
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-prix_objets?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/paquet-prix_objets?lang_cible=pt_br" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
