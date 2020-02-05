@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-getid3"
-	id="paquet-getid3--getID3-34c05"
+	id="paquet-getid3--getID3-423d3"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/getID3/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/getID3.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-getid3?lang_cible=en" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
