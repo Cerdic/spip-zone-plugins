@@ -1,9 +1,9 @@
 <traduction
 	module="saisies"
-	id="saisies--saisies-c6e8f"
+	id="saisies--saisies-b6ba2"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/saisies/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/saisies.git"
 	reference="fr">
 	<langue code="ca" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=ca" total="210" traduits="84" relire="0" modifs="10" nouveaux="116" pourcent="40.00" />
 	<langue code="de" url="https://trad.spip.net/tradlang_module/saisies?lang_cible=de" total="210" traduits="177" relire="0" modifs="3" nouveaux="30" pourcent="84.29">
