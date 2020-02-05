@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-grappes"
-	id="paquet-grappes--grappes-89684"
+	id="paquet-grappes--grappes-2eb2f"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/grappes/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/grappes.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-grappes?lang_cible=de" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
