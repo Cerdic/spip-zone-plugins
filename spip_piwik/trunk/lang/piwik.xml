@@ -1,9 +1,9 @@
 <traduction
 	module="piwik"
-	id="piwik--spip_piwik-17847"
+	id="piwik--spip_piwik-70612"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/spip_piwik/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/spip_piwik.git"
 	reference="fr">
 	<langue code="ca" url="https://trad.spip.net/tradlang_module/piwik?lang_cible=ca" total="37" traduits="28" relire="0" modifs="0" nouveaux="9" pourcent="75.68" />
 	<langue code="de" url="https://trad.spip.net/tradlang_module/piwik?lang_cible=de" total="37" traduits="37" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
