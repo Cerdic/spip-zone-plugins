@@ -1,9 +1,9 @@
 <traduction
 	module="embed_code"
-	id="embed_code--embed_code-e5802"
+	id="embed_code--embed_code-daf67"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/embed_code/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/embed_code.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/embed_code?lang_cible=en" total="9" traduits="9" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
