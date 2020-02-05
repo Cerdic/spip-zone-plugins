@@ -1,9 +1,9 @@
 <traduction
 	module="accesrestreint"
-	id="accesrestreint--acces_restreint-4981f"
+	id="accesrestreint--acces_restreint-0dad7"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/acces_restreint/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/acces_restreint.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/accesrestreint?lang_cible=ar" total="70" traduits="48" relire="0" modifs="2" nouveaux="20" pourcent="68.57">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
