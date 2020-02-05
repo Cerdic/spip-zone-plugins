@@ -1,9 +1,9 @@
 <traduction
 	module="informerpremiereconnexion"
-	id="informerpremiereconnexion--informer_premiere_connexion-85b7e"
+	id="informerpremiereconnexion--informer_premiere_connexion-e487d"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/informer_premiere_connexion/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/informer_premiere_connexion.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/informerpremiereconnexion?lang_cible=en" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Gilles" lien="https://trad.spip.net/auteur/gilles" />
