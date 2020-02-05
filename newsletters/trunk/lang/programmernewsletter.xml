@@ -1,9 +1,9 @@
 <traduction
 	module="programmernewsletter"
-	id="programmernewsletter--newsletters-32ca5"
+	id="programmernewsletter--newsletters-dc282"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/newsletters/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/newsletters.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/programmernewsletter?lang_cible=de" total="32" traduits="32" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="en" url="https://trad.spip.net/tradlang_module/programmernewsletter?lang_cible=en" total="32" traduits="32" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
