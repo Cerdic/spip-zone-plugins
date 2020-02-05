@@ -1,9 +1,9 @@
 <traduction
 	module="clevermail"
-	id="clevermail--clevermail-b45cc"
+	id="clevermail--clevermail-d62c0"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/clevermail/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/clevermail.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/clevermail?lang_cible=de" total="222" traduits="222" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="kennethkeen" lien="https://trad.spip.net/auteur/kennethkeen" />
