@@ -1,9 +1,9 @@
 <traduction
 	module="ppp"
-	id="ppp--porte_plume_partout-0fcf7"
+	id="ppp--porte_plume_partout-e1779"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/porte_plume_partout/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/porte_plume_partout.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/ppp?lang_cible=en" total="11" traduits="11" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
