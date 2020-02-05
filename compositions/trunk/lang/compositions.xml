@@ -1,9 +1,9 @@
 <traduction
 	module="compositions"
-	id="compositions--compositions-e564f"
+	id="compositions--compositions-3ace6"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/compositions/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/compositions.git"
 	reference="fr">
 	<langue code="de" url="https://trad.spip.net/tradlang_module/compositions?lang_cible=de" total="34" traduits="30" relire="0" modifs="0" nouveaux="4" pourcent="88.24">
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
