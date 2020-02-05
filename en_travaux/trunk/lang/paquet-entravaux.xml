@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-entravaux"
-	id="paquet-entravaux--en_travaux-f060b"
+	id="paquet-entravaux--en_travaux-30aea"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/en_travaux/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/en_travaux.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/paquet-entravaux?lang_cible=ar" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="SuperYMS" lien="https://trad.spip.net/auteur/superyms" />
