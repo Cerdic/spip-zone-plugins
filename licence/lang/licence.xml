@@ -1,9 +1,9 @@
 <traduction
 	module="licence"
-	id="licence--licence-362a7"
+	id="licence--licence-91042"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/licence/lang"
+	source="https://git.spip.net/spip-contrib-extensions/licence.git"
 	reference="fr">
 	<langue code="ca" url="https://trad.spip.net/tradlang_module/licence?lang_cible=ca" total="52" traduits="14" relire="0" modifs="18" nouveaux="20" pourcent="26.92" />
 	<langue code="de" url="https://trad.spip.net/tradlang_module/licence?lang_cible=de" total="52" traduits="52" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
