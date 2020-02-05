@@ -1,9 +1,9 @@
 <traduction
 	module="zeroclipboard"
-	id="zeroclipboard--zeroclipboard-02b9a"
+	id="zeroclipboard--zeroclipboard-69c1d"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/zeroclipboard/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/zeroclipboard.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/zeroclipboard?lang_cible=en" total="4" traduits="4" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="es" url="https://trad.spip.net/tradlang_module/zeroclipboard?lang_cible=es" total="4" traduits="4" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
