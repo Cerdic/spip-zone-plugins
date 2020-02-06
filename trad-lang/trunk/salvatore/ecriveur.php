@@ -290,7 +290,12 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 					if ($auteur and $auteur['email']){
 						$commit_infos[$lang]['author'] = $auteur['email'];
 						if ($auteur['nom']){
-							$commit_infos[$lang]['author'] = $auteur['nom'] . " <" . $commit_infos[$lang]['author'] . ">";
+							$nom = $auteur['nom'];
+							if (strpos($nom,"<") !== false) {
+								$nom = extraire_multi($nom);
+								$nom = textebrut($nom);
+							}
+							$commit_infos[$lang]['author'] = $nom . " <" . $commit_infos[$lang]['author'] . ">";
 						}
 						salvatore_log("Le commiteur pour la langue $lang : " . $commit_infos[$lang]['author']);
 					}
