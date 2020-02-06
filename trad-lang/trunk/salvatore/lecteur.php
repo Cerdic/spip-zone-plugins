@@ -116,6 +116,7 @@ function salvatore_lire($liste_sources, $force_reload = false, $dir_modules = nu
 			}
 		}
 
+		$new_module = false;
 		$langues_a_jour = array();
 
 		if (!$row_module
@@ -149,6 +150,7 @@ function salvatore_lire($liste_sources, $force_reload = false, $dir_modules = nu
 				else {
 					salvatore_log("Insertion en base #$id_tradlang_module");
 				}
+				$new_module = true;
 			}
 			$force_reload = true;
 		}
@@ -188,11 +190,11 @@ function salvatore_lire($liste_sources, $force_reload = false, $dir_modules = nu
 
 			// on commence par la langue mere
 			$liste_md5_master = array();
-			$modifs_master = salvatore_importer_module_langue($id_tradlang_module, $source, $fichier_lang_principal, true, $liste_md5_master);
+			$modifs_master = salvatore_importer_module_langue($id_tradlang_module, $source, $fichier_lang_principal, true, $new_module, $liste_md5_master);
 
 			// et on fait les autres langues
 			foreach ($liste_fichiers_lang as $fichier_lang){
-				salvatore_importer_module_langue($id_tradlang_module, $source, $fichier_lang, false, $liste_md5_master);
+				salvatore_importer_module_langue($id_tradlang_module, $source, $fichier_lang, false, $new_module, $liste_md5_master);
 
 				$lang = salvatore_get_lang_from($module, $fichier_lang);
 				if ($modifs_master>0) {
@@ -252,10 +254,12 @@ function salvatore_lire($liste_sources, $force_reload = false, $dir_modules = nu
  *   chemin vers le fichier de langue
  * @param bool $is_master
  *   true signifie que c'est la langue originale
+ * @param bool $new_module
+ *   true signifie qu'on est en train d'importer un nouveau module
  * @param array $liste_md5_master
  * @return string
  */
-function salvatore_importer_module_langue($id_tradlang_module, $source, $fichier_lang, $is_master, &$liste_md5_master){
+function salvatore_importer_module_langue($id_tradlang_module, $source, $fichier_lang, $is_master, $new_module, &$liste_md5_master){
 	salvatore_log("!\n+ Import de $fichier_lang\n");
 	$idx = $GLOBALS['idx_lang'] = 'i18n_' . crc32($fichier_lang) . '_tmp';
 
@@ -309,7 +313,7 @@ function salvatore_importer_module_langue($id_tradlang_module, $source, $fichier
 		 * Si la langue est deja dans la base, on ne l'ecrase que s'il s'agit
 		 * de la langue source
 		 */
-		if (!$nb or $is_master){
+		if (!$nb or $is_master or $new_module){
 			// La liste de ce qui existe deja
 			$existant = $str_existant = array();
 			while ($row = sql_fetch($res)){
@@ -445,7 +449,8 @@ function salvatore_importer_module_langue($id_tradlang_module, $source, $fichier
 
 							$deja_lang = sql_allfetsel('lang', 'spip_tradlangs', 'id=' . sql_quote($id) . ' AND id_tradlang_module=' . intval($id_tradlang_module));
 							$deja_lang = array_column($deja_lang, 'lang');
-							$chaines_a_dupliquer = sql_allfetsel('*', 'spip_tradlangs', 'id=' . sql_quote($identique['id']) . ' AND id_tradlang_module=' . intval($identique['id_tradlang_module']) . ' AND ' . sql_in('lang', $deja_lang, 'NOT'));
+							// on ne prend pas les fausse trads dont str est identique $chaines[$id]
+							$chaines_a_dupliquer = sql_allfetsel('*', 'spip_tradlangs', 'id=' . sql_quote($identique['id']) . ' AND id_tradlang_module=' . intval($identique['id_tradlang_module']) . ' AND str!=' . sql_quote($chaines[$id]) . ' AND ' . sql_in('lang', $deja_lang, 'NOT'));
 							foreach ($chaines_a_dupliquer as $chaine){
 								unset($chaine['id_tradlang']);
 								unset($chaine['maj']);
@@ -544,9 +549,7 @@ function salvatore_importer_module_langue($id_tradlang_module, $source, $fichier
 		salvatore_log("<error>!-- Attention : La langue $lang n'existe pas dans les langues possibles - $module</error>");
 	}
 
-	// TODO : BUG ?
-	// unset $liste_md5_master alors qu'elle est repassee d'un appel a l'autre ?
-	unset($liste_md5_master, $chaines, $GLOBALS[$GLOBALS['idx_lang']]);
+	unset($chaines, $GLOBALS[$GLOBALS['idx_lang']]);
 
 	return $ajoutees + $supprimees + $modifiees;
 }
