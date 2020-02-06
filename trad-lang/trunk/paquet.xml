@@ -1,8 +1,8 @@
 <paquet
 	prefix="tradlang"
 	categorie="outil"
-	version="3.0.0"
-	etat="dev"
+	version="3.0.1"
+	etat="test"
 	compatibilite="[3.2.0;3.3.*]"
 	logo="images/spip_lang.png"
 	schema="1.2.0"
@@ -13,6 +13,7 @@
 	<auteur>Fil</auteur>
 	<auteur>Florent Jugla</auteur>
 	<auteur lien="http://www.kent1.info">kent1</auteur>
+	<auteur>Cerdic</auteur>
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/tradlang.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/tradlang.php" />
