@@ -45,7 +45,8 @@ function tradlang_declarer_tables_objets_sql($tables) {
 			"priorite" => "varchar(128) NOT NULL",
 			"gestionnaire" => "varchar(32) DEFAULT 'spip' NOT NULL",
 			"lang_prefix" => "varchar(32) NOT NULL",
-			"limite_trad" => "tinyint NOT NULL DEFAULT 0"
+			"limite_trad" => "tinyint NOT NULL DEFAULT 0",
+			"bon_a_pousser" => "tinyint NOT NULL DEFAULT 0"
 		),
 		'key' => array(
 			'PRIMARY KEY' => 'id_tradlang_module',

@@ -101,6 +101,10 @@ class SalvatoreOuvrager extends Command {
 
 		$modules = $input->getOption('module');
 		if ($modules = trim($modules)) {
+			if ($modules === 'bon_a_pousser') {
+				$modules = sql_allfetsel('DISTINCT module', 'spip_tradlang_modules', 'bon_a_pousser>0');
+				$modules = array_column($modules, 'module');
+			}
 			$liste_trad = salvatore_filtrer_liste_traductions($liste_trad, $modules);
 			$n = count($liste_trad);
 			$output->writeln("<info>$n modules à traiter : " . $modules . "</info>");

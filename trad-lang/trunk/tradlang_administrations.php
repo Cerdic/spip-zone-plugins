@@ -130,6 +130,10 @@ function tradlang_upgrade($nom_meta_base_version, $version_cible) {
 		array('tradlang_nommer_modules'),
 	);
 
+	$maj['1.2.1'] = array(
+		array('sql_alter','TABLE spip_tradlang_modules ADD bon_a_pousser tinyint NOT NULL DEFAULT 0'),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
