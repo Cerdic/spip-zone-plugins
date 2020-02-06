@@ -1,9 +1,9 @@
 <traduction
 	module="paquet-spip_hop"
-	id="paquet-spip_hop--spip_hop-30948"
+	id="paquet-spip_hop--spip_hop-78432"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/spip_hop/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/spip_hop.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-spip_hop?lang_cible=en" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-spip_hop?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />

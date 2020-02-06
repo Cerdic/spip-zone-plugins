@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/spip_hop/trunk/lang
+// Fichier source, a modifier dans https://git.spip.net/spip-contrib-extensions/spip_hop.git
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
