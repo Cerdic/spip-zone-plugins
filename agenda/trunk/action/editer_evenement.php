@@ -198,12 +198,10 @@ function agenda_action_update_repetitions($id_evenement, $repetitions) {
 				// TODO : prendre en charge la mise a jour uniquement si conforme a l'original
 				$c['date_debut'] = $update_date_debut;
 				$c['date_fin'] = $update_date_fin;
-
 				// mettre a jour l'evenement
-				sql_updateq(
-					'spip_evenements',
-					$c,
-					'id_evenement = '.$row['id_evenement']
+				evenement_modifier(
+					$row['id_evenement'],
+					$c
 				);
 			} else {
 				// il est supprime
