@@ -1,9 +1,9 @@
 <traduction
 	module="tipafriend"
-	id="tipafriend--spip_3-0204c"
+	id="tipafriend--tipafriend-cb908"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/tipafriend/spip_3/lang"
+	source="https://git.spip.net/spip-contrib-extensions/tipafriend.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/tipafriend?lang_cible=en" total="114" traduits="110" relire="0" modifs="4" nouveaux="0" pourcent="96.49">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
