@@ -10,7 +10,11 @@ include_spip('inc/formidable_fichiers');
 function traiter_email_dist($args, $retours) {
 
 	// Vérifier si on doit envoyer en cas de modification de réponses
-	if (isset($retours['modification_reponse']) and  $retours['modification_reponse'] == true and isset($args['options']['modification_reponse'])) {
+	if (isset($retours['modification_reponse'])
+			and  $retours['modification_reponse'] == true
+			and isset($args['options']['modification_reponse'])
+			and $args['options']['modification_reponse'] == 'on'
+	) {
 		$retours['traitements']['email'] = true;
 		return $retours;
 	}
