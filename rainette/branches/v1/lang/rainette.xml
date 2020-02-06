@@ -1,9 +1,9 @@
 <traduction
 	module="rainette"
-	id="rainette--v1-e2664"
+	id="rainette--rainette@v1-2aded"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/rainette/branches/v1/lang"
+	source="https://git.spip.net/spip-contrib-extensions/rainette.git"
 	reference="fr">
 	<langue code="ca" url="https://trad.spip.net/tradlang_module/rainette?lang_cible=ca" total="111" traduits="107" relire="0" modifs="4" nouveaux="0" pourcent="96.40" />
 	<langue code="de" url="https://trad.spip.net/tradlang_module/rainette?lang_cible=de" total="111" traduits="107" relire="0" modifs="4" nouveaux="0" pourcent="96.40" />
