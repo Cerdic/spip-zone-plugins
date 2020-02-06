@@ -9,6 +9,7 @@ $(function() {
       filter_saveFilters : true,
 			output_saveFileName : 'export.csv',
 			output_encoding      : 'data:application/octet-stream;charset=utf8,',
+			output_wrapQuotes: 'true',
 			output_delivery: 'download',
 			resizable_addLastColumn: true
 		}
