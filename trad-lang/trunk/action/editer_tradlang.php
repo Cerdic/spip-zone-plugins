@@ -82,7 +82,7 @@ function tradlang_set($id_tradlang, $set = null) {
 	if (($statut = (in_array(_request('statut'), array('NEW', 'MODIF', 'OK', 'RELIRE'))) ? _request('statut') : $c['statut']) and ($statut != $infos_tradlang['statut'])) {
 		sql_updateq('spip_tradlangs', array('statut' => $statut), 'id_tradlang = ' . intval($id_tradlang));
 		$infos_maj = array();
-		$bilan = sql_fetsel('chaines_ok,chaines_relire,chaines_modif,chaines_new', 'spip_tradlangs_bilans', 'module = ' . sql_quote($infos_tradlang['module']) . ' AND lang = ' . sql_quote($infos_tradlang['lang']));
+		$bilan = sql_fetsel('chaines_ok,chaines_relire,chaines_modif,chaines_new', 'spip_tradlangs_bilans', 'id_tradlang_module=' . intval($infos_tradlang['id_tradlang_module']) . ' AND lang=' . sql_quote($infos_tradlang['lang']));
 		if ($statut == 'OK') {
 			$infos_maj['chaines_ok'] = ($bilan['chaines_ok']+1);
 		} elseif ($statut == 'RELIRE') {
@@ -103,7 +103,7 @@ function tradlang_set($id_tradlang, $set = null) {
 			$infos_maj['chaines_new'] = ($bilan['chaines_new']-1);
 		}
 
-		sql_updateq('spip_tradlangs_bilans', $infos_maj, 'module = ' . sql_quote($infos_tradlang['module']) . ' AND lang = ' . sql_quote($infos_tradlang['lang']));
+		sql_updateq('spip_tradlangs_bilans', $infos_maj, 'id_tradlang_module=' . intval($infos_tradlang['id_tradlang_module']) . ' AND lang=' . sql_quote($infos_tradlang['lang']));
 	}
 
 	//$c = collecter_requests(array('statut'),array(),$set);
@@ -131,7 +131,7 @@ function instituer_tradlang($id_tradlang, $c) {
 
 	// cf autorisations dans inc/instituer_article
 	if ($s != $statut) {
-		if (autoriser('modifier', 'tradlang', $tradlang)) {
+		if (autoriser('modifier', 'tradlang', $id_tradlang)) {
 			$statut = $champs['statut'] = $s;
 		} else {
 			spip_log("editer_tradlang $id_tradlang refus " . join(' ', $c));

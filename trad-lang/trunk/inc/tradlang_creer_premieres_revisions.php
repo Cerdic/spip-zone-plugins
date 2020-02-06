@@ -7,17 +7,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 /**
  * Fonction de création des premières révisions
  *
- * @param array $module
- * 		Les informations du module en base (on a besoin des champs "module","lang_mere")
+ * @param int $id_tradlang_module
  * @param string $lang
  * 		La langue dans laquelle on souhaite créer la nouvelle version
  */
-function inc_tradlang_creer_premieres_revisions_dist($module = false, $lang = false, $nb = false) {
+function inc_tradlang_creer_premieres_revisions_dist($id_tradlang_module=0, $lang = false, $nb = false) {
 	include_spip('inc/revisions');
 	$count = 0;
 	if ($versionnes = liste_champs_versionnes('spip_tradlangs')) {
 		$where = 'b.id_objet IS NULL';
-		$where .= (isset($module) and $module) ? ' AND a.module = '.sql_quote($module) : '';
+		$where .= (isset($id_tradlang_module) and $id_tradlang_module) ? ' AND a.id_tradlang_module = '.intval($id_tradlang_module) : '';
 		$where .= (isset($lang) and $lang) ? ' AND a.lang = '.sql_quote($lang) : '';
 		if (isset($nb) && is_numeric($nb) && $nb > 1) {
 			$nb = $nb;
