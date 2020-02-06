@@ -1,9 +1,9 @@
 <traduction
 	module="geoip"
-	id="geoip--v1-16484"
+	id="geoip--geoip@v1-cbf50"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/geoip/branches/v1/lang"
+	source="https://git.spip.net/spip-contrib-extensions/geoip.git"
 	reference="fr">
 	<langue code="es" url="https://trad.spip.net/tradlang_module/geoip?lang_cible=es" total="3" traduits="2" relire="1" modifs="0" nouveaux="0" pourcent="66.67">
 		<traducteur nom="danielquisbert" lien="https://trad.spip.net/auteur/danielquisbert" />
