@@ -1,8 +1,11 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de https://trad.spip.net/tradlang_module/newsletter-mailsubscribers-674?lang_cible=de
+// ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -18,9 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'subscribe_message_ok' => 'Ihre Anmeldung unter der Adresse @email@ wird bearbeitet.',
-	'unsubscribe_message_ok' => 'Die Adresse @email@ wurde aus der Empfängerliste gestrichen.',
 
-
+	// U
+	'unsubscribe_message_ok' => 'Die Adresse @email@ wurde aus der Empfängerliste gestrichen.'
 );
-
-
