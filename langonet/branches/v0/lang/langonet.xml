@@ -1,9 +1,9 @@
 <traduction
 	module="langonet"
-	id="langonet--v0-add51"
+	id="langonet--langonet@v0-2a2ea"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/langonet/branches/v0/lang"
+	source="https://git.spip.net/spip-contrib-extensions/langonet.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/langonet?lang_cible=en" total="137" traduits="137" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
