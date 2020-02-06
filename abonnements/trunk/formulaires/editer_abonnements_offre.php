@@ -32,6 +32,7 @@ function formulaires_editer_abonnements_offre_saisies_dist($id_abonnements_offre
 				'nom' => 'descriptif',
 				'label' => _T('abonnementsoffre:champ_descriptif_label'),
 				'rows' => 10,
+				'inserer_barre' => 'edition',
 			),
 		),
 		array(
