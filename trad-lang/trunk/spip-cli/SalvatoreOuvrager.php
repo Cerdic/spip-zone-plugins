@@ -73,6 +73,13 @@ class SalvatoreOuvrager extends Command {
 				'Message de commit',
 				null
 			)
+			->addOption(
+				'time',
+				null,
+				InputOption::VALUE_NONE,
+				'Ajouter date/heure sur les sorties pour les logs',
+				null
+			)
 		;
 	}
 
@@ -86,8 +93,8 @@ class SalvatoreOuvrager extends Command {
 		include_spip('salvatore/ecriveur');
 		include_spip('salvatore/pousseur');
 
-		salvatore_init(array($output, 'writeln'));
-
+		$time = $input->getOption('time');
+		salvatore_init(array($output, 'writeln'), !!$time);
 
 		$output->writeln("<comment>=======================================</comment>");
 		$output->writeln("<comment>OUVRAGER [Traiter complètement les fichiers de reference de salvatore/modules/]</comment>");
