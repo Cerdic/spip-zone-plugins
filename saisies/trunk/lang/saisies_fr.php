@@ -52,7 +52,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_valeur_inacceptable' => 'Valeur postée non acceptable.',
 
 	// F
-	'fichier_erreur_explication_renvoi' => 'Vous pouvez renvoyer un nouveau fichier, ou bien soumettre le formulaire tel quel, l’ancien fichier n’est pas conservé.',
+	'fichier_erreur_explication_renvoi_alternative' => 'Vous pouvez renvoyer un nouveau fichier, ou bien soumettre le formulaire tel quel, l’ancien fichier n’est pas conservé.',
+	'fichier_erreur_explication_renvoi_pas_alternative' => 'Vous devez envoyer un autre fichier.',
 
 	// I
 	'info_configurer_saisies' => 'Page de test des Saisies',

@@ -273,7 +273,11 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 
 				if ($verifier['type'] == 'fichiers') { // Pour les vérification/saisies de type fichiers, ajouter les erreurs détaillées par fichiers dans le tableau des erreurs détaillées par fichier
 					$erreurs_fichiers[$champ] = $normaliser;
-					$erreurs[$champ].= "<br />"._T('saisies:fichier_erreur_explication_renvoi');
+					if (isset($saisies[$champ]['options']['obligatoire'])) {
+						$erreurs[$champ].= "<br />"._T('saisies:fichier_erreur_explication_renvoi_pas_alternative');
+					} else {
+						$erreurs[$champ].= "<br />"._T('saisies:fichier_erreur_explication_renvoi_alternative');
+						}
 				}
 
 			}
