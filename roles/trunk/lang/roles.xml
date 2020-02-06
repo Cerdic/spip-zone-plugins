@@ -1,9 +1,9 @@
 <traduction
 	module="roles"
-	id="roles--roles-ce962"
+	id="roles--roles-51654"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/roles/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/roles.git"
 	reference="fr">
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/roles?lang_cible=fr" total="10" traduits="10" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/roles?lang_cible=pt_br" total="10" traduits="10" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
