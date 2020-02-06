@@ -420,6 +420,8 @@ function salvatore_exporter_fichier_php($dir_module, $module, $lang, $php_lines,
 		. implode("\n", $php_lines)
 	  . "\n);\n";
 	file_put_contents($file_name, $file_content);
+	// et on fixe le chmod au passage
+	chmod($file_name, 0644);
 	return $file_name;
 }
 
