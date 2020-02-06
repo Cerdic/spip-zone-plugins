@@ -1,9 +1,9 @@
 <traduction
 	module="rubrique_a_linscription"
-	id="rubrique_a_linscription--rubrique_a_linscription-3d035"
+	id="rubrique_a_linscription--rubrique_a_linscription-b051e"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/rubrique_a_linscription/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/rubrique_a_linscription.git"
 	reference="fr">
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/rubrique_a_linscription?lang_cible=fr" total="38" traduits="38" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
