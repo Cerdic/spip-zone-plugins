@@ -1,9 +1,9 @@
 <traduction
 	module="rubriques_virtuelles"
-	id="rubriques_virtuelles--rubriques_virtuelles-2e110"
+	id="rubriques_virtuelles--rubriques_virtuelles-a0248"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/rubriques_virtuelles/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/rubriques_virtuelles.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/rubriques_virtuelles?lang_cible=en" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
