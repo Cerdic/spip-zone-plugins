@@ -1,9 +1,9 @@
 <traduction
 	module="cfg"
-	id="cfg--v1-16510"
+	id="cfg--cfg@v1-64488"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/cfg/branches/v1/lang"
+	source="https://git.spip.net/spip-contrib-extensions/cfg.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/cfg?lang_cible=ar" total="33" traduits="33" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="ast" url="https://trad.spip.net/tradlang_module/cfg?lang_cible=ast" total="33" traduits="33" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
