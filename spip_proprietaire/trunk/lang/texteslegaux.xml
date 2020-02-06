@@ -1,9 +1,9 @@
 <traduction
 	module="texteslegaux"
-	id="texteslegaux--spip_3-610c9"
+	id="texteslegaux--spip_proprietaire-6abe1"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/spip_proprietaire/spip_3/lang"
+	source="https://git.spip.net/spip-contrib-extensions/spip_proprietaire.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/texteslegaux?lang_cible=en" total="27" traduits="26" relire="0" modifs="1" nouveaux="0" pourcent="96.30">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
