@@ -17,13 +17,20 @@
 	[(#REM) declarer les hidden qui declencheront le service du formulaire 
 	parametre : url d'action ]
 	#ACTION_FORMULAIRE{#ENV{action}}
+
+	[<div class="offre__logo">(#LOGO_ABONNEMENTS_OFFRE{#ID_ABONNEMENTS_OFFRE})</div>]
+
 	<h3 class="offre__titre">#ENV{titre}</h3>
-	
+
+	[<div class="offre__descriptif">
+		(#ENV*{descriptif})
+	</div>]
+
 	<div class="offre__prix">
 		<span class="montant">#ENV{montant} €</span>[<span class="par">
 		/ </span><span class="periodicite">(#ENV{renouvellement_auto}|?{#GET{periodicite}})</span>]
 	</div>
-	
+
 	[(#ENV{alternative}|oui)
 	<div class="offre__alternative">
 		<a class="button" [(#ENV{alternative/quel}|!={principal}|oui)href="#offre#ENV{alternative/id}"]>
@@ -34,11 +41,7 @@
 		</a>
 	</div>
 	]
-	
-	<div class="offre__descriptif">
-		#ENV*{descriptif}
-	</div>
-	
+
 	<BOUCLE_test_perso(CONDITION){si #ENV{montant_perso}}>
 	<fieldset class="offre__perso">
 		<legend>Personnaliser le montant</legend>
@@ -59,7 +62,7 @@
 		/>
 	</fieldset>
 	</BOUCLE_test_perso>
-	
+
 	<div class="offre__duree">
 		[(#ENV{renouvellement_auto}|non)
 			<span class="label"><:abonnementsoffre:info_duree:> :</span>
@@ -78,7 +81,7 @@
 		<span class="label"><:abonnementsoffre:info_paiement_auto:> :</span> [(#ENV{duree})][ (#ENV{periode})]
 		]
 	</div>
-	
+
 	<div class="offre__choix">
 		<button type="submit" name="id_abonnements_offre" value="#ENV{id_abonnements_offre}">Choisir cette offre</button>
 	</div>
