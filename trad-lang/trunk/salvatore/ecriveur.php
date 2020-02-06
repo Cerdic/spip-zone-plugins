@@ -361,6 +361,10 @@ function salvatore_exporter_module($id_tradlang_module, $source, $url_site, $url
 		file_put_contents($file_commit_infos, json_encode($commit_infos));
 	}
 
+	if ($row_module['bon_a_exporter']>0) {
+		sql_updateq("spip_tradlang_modules", array('bon_a_pousser' => 0), 'id_tradlang_module=' . intval($id_tradlang_module));
+	}
+
 	$log = salvatore_read_status_modif($module, $source, $dir_depots);
 	salvatore_log($log);
 	return $nb_to_commit;
