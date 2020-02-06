@@ -24,5 +24,7 @@ function action_tradlang_bon_a_pousser_dist(){
 	}
 
 	sql_updateq("spip_tradlang_modules", array('bon_a_pousser' => 1), 'id_tradlang_module=' . intval($id_tradlang_module));
+	include_spip('inc/invalideur');
+	suivre_invalideur("'tradlang_module/id=$id_tradlang_module'");
 
 }
