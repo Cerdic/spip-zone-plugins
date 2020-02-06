@@ -1,9 +1,9 @@
 <traduction
 	module="coordonnees"
-	id="coordonnees--v2-378d4"
+	id="coordonnees--coordonnees@v2-9532c"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/coordonnees/branches/v2/lang"
+	source="https://git.spip.net/spip-contrib-extensions/coordonnees.git"
 	reference="fr">
 	<langue code="ar" url="https://trad.spip.net/tradlang_module/coordonnees?lang_cible=ar" total="110" traduits="25" relire="0" modifs="1" nouveaux="84" pourcent="22.73">
 		<traducteur nom="SuperYMS" lien="https://trad.spip.net/auteur/superyms" />
