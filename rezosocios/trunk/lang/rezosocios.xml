@@ -1,9 +1,9 @@
 <traduction
 	module="rezosocios"
-	id="rezosocios--rezosocios-c4055"
+	id="rezosocios--rezosocios-77e4d"
 	gestionnaire="salvatore"
 	url="https://trad.spip.net"
-	source="svn://zone.spip.org/spip-zone/_plugins_/rezosocios/trunk/lang"
+	source="https://git.spip.net/spip-contrib-extensions/rezosocios.git"
 	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/rezosocios?lang_cible=en" total="33" traduits="33" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jack31" lien="https://trad.spip.net/auteur/jack31" />
