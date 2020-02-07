@@ -10,6 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bouton_actualiser_segments' => 'Atualizar os segmentos',
 	'bouton_importer' => 'Importar',
 	'bouton_invitation' => 'Convidar alguém para se cadastrar na newsletter',
 	'bouton_previsu_importer' => 'Pré-visualizar',
@@ -17,16 +18,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'confirmsubscribe_invite_texte_email_1' => '@invite_email_from@ convida-o para se cadastrar na newsletter de @nom_site_spip@ com o email @email@.',
 	'confirmsubscribe_invite_texte_email_3' => 'Caso tenha occorrido um erro, você pode ignorar essa messagem : o pedido será cancelado automaticamente.',
-	'confirmsubscribe_invite_texte_email_liste_1' => '@invite_email_from@ convida você a se inscrever na lista «@titre_liste@» do site @nom_site_spip@ com o endereço de e-mail @email@.', # MODIF
+	'confirmsubscribe_invite_texte_email_liste_1' => '@invite_email_from@ convida você a assinar a newsletter «@titre_liste@» do site @nom_site_spip@ com o endereço de e-mail @email@.',
 	'confirmsubscribe_sujet_email' => '[@nom_site_spip@] Confirmação do cadastro na newsletter',
 	'confirmsubscribe_texte_email_1' => 'Você solicitou seu cadastro na newsletter de @nom_site_spip@ com o email @email@.',
 	'confirmsubscribe_texte_email_2' => 'Para confirmar seu cadastro, por favor clique aqui : 
 	@url_confirmsubscribe@',
 	'confirmsubscribe_texte_email_3' => 'Caso tenha ocorrido um erro, ou se você mudou de ideia, você pode ignorar essa messagem : o pedido será cancelado automaticamente.',
 	'confirmsubscribe_texte_email_envoye' => 'Um e-mail foi enviado nesse endereço para confirmação.',
-	'confirmsubscribe_texte_email_liste_1' => 'Você solicitou a sua inscriçào na lista «@titre_liste@» do site @nom_site_spip@ com o endereço de e-mail @email@.', # MODIF
+	'confirmsubscribe_texte_email_liste_1' => 'Você solicitou a assinatura da newsletter «@titre_liste@» do site @nom_site_spip@ com o endereço de e-mail @email@.',
+	'confirmsubscribe_texte_email_listes_1' => 'Você solicitou a assinatura das newsletters «@titre_liste@» do site @nom_site_spip@ com o endereço de e-mail @email@.',
 	'confirmsubscribe_titre_email' => 'Confirmação do cadastro na newsletter',
-	'confirmsubscribe_titre_email_liste' => 'Confirmação de inscrição na lista «<b>@titre_liste@</b>»', # MODIF
+	'confirmsubscribe_titre_email_liste' => 'Confirmação da assinatura da newsletter «<b>@titre_liste@</b>»',
+	'confirmsubscribe_titre_email_listes' => 'Confirmação da assinatura das newsletters',
 
 	// D
 	'defaut_message_invite_email_subscribe' => 'Oi, eu estou cadastrado na newsletter do @nom_site_spip@ e gostaria de convidá-lo para fazer o cadastro tambem.',
@@ -38,6 +41,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_listes_diffusion_option_defaut' => 'Um ou mais identificadores de listas separados por vírgula',
 	'explication_listes_diffusion_option_statut' => 'Filtrar as listas de acordo com o status',
 	'explication_to_email' => 'Enviar um email de proposta de pré inscrição aos seguintes endereços (varios endereços separados por uma vírgula si presica).',
+
+	// F
+	'force_synchronisation' => 'Sincronizar',
 
 	// I
 	'icone_creer_mailsubscriber' => 'Incluir uma inscrição ',
@@ -87,15 +93,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mailsubscribers_valide' => 'Registrados',
 
 	// S
-	'subscribe_deja_texte' => 'O email @email@ já está en nossa mailing list', # MODIF
+	'subscribe_deja_texte' => 'O email @email@ já é assinante desta newsletter',
 	'subscribe_sujet_email' => '[@nom_site_spip@] Inscrição na newsletter',
-	'subscribe_texte_email_1' => 'Sua inscriçao está confirmada na newsletter com esse email @email@.', # MODIF
+	'subscribe_texte_email_1' => 'Confirmamos a sua assinatura da nossa Newsletter com o e-mail @email@.',
 	'subscribe_texte_email_2' => 'Agradecemos seu interesse pelo @nom_site_spip@.',
 	'subscribe_texte_email_3' => 'Caso tenha ocorrido um erro, ou se você mudou sua me, você pode cancelar a inscrição na newsletter na qualquer momento :
 @url_unsubscribe@',
-	'subscribe_texte_email_liste_1' => 'A sua inscrição na lista «@titre_liste@» com o endereço de e-mail @email@ foi realizada.', # MODIF
+	'subscribe_texte_email_liste_1' => 'Confirmamos a sua assinatura da newsletter «@titre_liste@» com o endereço de e-mail @email@.',
+	'subscribe_texte_email_listes_1' => 'Confirmamos a sua assinatura das newsletters «@titre_liste@» com o endereço de e-mail @email@.',
 	'subscribe_titre_email' => 'Inscrição na newsletter',
-	'subscribe_titre_email_liste' => 'Inscrição na lista «<b>@titre_liste@</b>»', # MODIF
+	'subscribe_titre_email_liste' => 'Assinatura da newsletter «<b>@titre_liste@</b>»',
 
 	// T
 	'texte_ajouter_mailsubscriber' => 'Incluir uma inscrição na newsletter',
@@ -114,19 +121,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_langue_mailsubscriber' => 'Idioma associado a essa inscrição',
 	'titre_listes_de_diffusion' => 'Mailing lists',
 	'titre_logo_mailsubscriber' => 'Logo associado a esse inscrição',
-	'titre_mailsubscriber' => 'Inscrição na newsletter', # MODIF
+	'titre_mailsubscriber' => 'Assinante da newsletter',
 	'titre_mailsubscribers' => 'Inscrições na newsletter',
+	'titre_recherche_email' => 'E-mail «@email@»',
+	'titre_recherche_envois' => 'Envios para «@email@»',
 
 	// U
-	'unsubscribe_deja_texte' => 'O endereço email @email@ não esta incluido em nossa mailing list.', # MODIF
-	'unsubscribe_sujet_email' => '[@nom_site_spip@] Cancelar a inscrição na newsletter', # MODIF
-	'unsubscribe_texte_confirmer_email_1' => 'Por favor, confirme o cancelamento da inscrição na newsletter por o email @email@, e clique no botão : ', # MODIF
-	'unsubscribe_texte_confirmer_email_liste_1' => 'Por favor, confirme o cancelamento da inscrição do endereço de e-mail @email@ da lista <b>@titre_liste@</b>, clicando no botão: ', # MODIF
-	'unsubscribe_texte_email_1' => 'Esse endereço email @email@ foi retirado da nossa mailing list.', # MODIF
+	'unsubscribe_deja_texte' => 'O endereço de e-mail @email@ não é assinante desta newsletter.',
+	'unsubscribe_sujet_email' => '[@nom_site_spip@] Cancelamento da assinatura da Newsletter',
+	'unsubscribe_texte_confirmer_email_1' => 'Por favor, confirme o cancelamento da assinatura do endereço de e-mail @email@, clicando no botão: ',
+	'unsubscribe_texte_confirmer_email_liste_1' => 'Por favor, confirme o cancelamento do endereço de e-mail @email@ da assinatura da newsletter  <b>@titre_liste@</b>, clicando no botão: ',
+	'unsubscribe_texte_email_1' => 'O endereço de e-mail @email@ cancelou a assinatura desta newsletter.',
 	'unsubscribe_texte_email_2' => 'A gente espera de te encontrar de novo em breve no @nom_site_spip@.',
 	'unsubscribe_texte_email_3' => 'No caso de nosso erro, ou caso você tenha mudado de ideia, você pode fazer uma nova inscrição na newsletter, clique aqui :
 @url_subscribe@',
-	'unsubscribe_texte_email_liste_1' => 'O endereço de e-mail @email@ foi excluído da lista de difusão <b>@titre_liste@</b>.', # MODIF
-	'unsubscribe_titre_email' => 'Cancelar a inscrição na newsletter', # MODIF
-	'unsubscribe_titre_email_liste' => 'Cancelamento da inscrição na lista <b>@titre_liste@</b>' # MODIF
+	'unsubscribe_texte_email_liste_1' => 'O endereço de e-mail @email@ foi excluído da lista de difusão da newsletter <b>@titre_liste@</b>.',
+	'unsubscribe_texte_email_listes_1' => 'O endereço de e-mail @email@ foi excluído das listas de difusão das newsletters <b>@titre_liste@</b>.',
+	'unsubscribe_titre_email' => 'Cancelamento da assinatura da Newsletter',
+	'unsubscribe_titre_email_liste' => 'Cancelamento da assinatura da newsletter <b>@titre_liste@</b>'
 );
