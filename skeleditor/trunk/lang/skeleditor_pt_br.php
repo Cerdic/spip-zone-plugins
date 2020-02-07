@@ -25,21 +25,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_skel_debug' => 'Editar o template (modo debug)',
 	'effacer_confirme' => 'Você quer realmente excluir este arquivo?',
 	'erreur_creation_sous_dossier' => 'Impossível  criaro subdomínio @dir@',
-	'erreur_droits' => 'erro: Impossível criar o arquivo. Verifique as permissões de escrita do seu diretório de templates (/squelette)', # MODIF
+	'erreur_droits' => 'erro: Impossível criar o arquivo. Verifique as permissões de escrita do seu diretório de templates (/squelette)',
 	'erreur_ecrire_dans_sous_dossier' => 'Impossível escrever no subdiretório @dir@',
-	'erreur_ecriture_fichier' => 'Impossível escrever no arquivo', # MODIF
-	'erreur_edition_ecriture' => 'erro: arquivo se permissão de escrita', # MODIF
+	'erreur_ecriture_fichier' => 'Impossível escrever no arquivo',
+	'erreur_edition_ecriture' => 'erro: arquivo sem permissão de escrita',
 	'erreur_fichier_inexistant' => 'Este arquivo não existe',
 	'erreur_fichier_modif_coucourante' => 'Este arquivo foi alterado enquanto você o editava. Esta é a nova versão:',
 	'erreur_fichier_modif_coucourante_votre_version' => 'Mesclar com a sua versão e gravar:',
-	'erreur_fichier_supprime' => 'Este arquivo foi excluído enquanto você o editava. Copie o conteúdo e crie um novo arquivo, se necessário.', # MODIF
+	'erreur_fichier_supprime' => 'Este arquivo foi excluído enquanto você o editava. Copie o conteúdo e crie um novo arquivo, se necessário.',
 	'erreur_ouvert_ecrit' => 'Erro: impossível abrir ou editar o arquivo.',
-	'erreur_ouverture_fichier' => 'erro: impossível abrir o arquivo', # MODIF
+	'erreur_ouverture_fichier' => 'erro: impossível abrir o arquivo',
 	'erreur_overwrite' => 'Impossível, este arquivo já existe',
 	'erreur_parsing' => 'Erro fatal ao analisar os laços',
 	'erreur_sansgene' => 'Erro: ação não autorizada',
 	'erreur_type_interdit' => 'Este tipo de arquivo não é permitido',
-	'explications_creer_dossier_squelettes' => 'Para usar o editor de templates, crie um diretório <b>squelettes/</b> na raiz do seu site, caso ainda não exista, e configure-o com permissão de escrita.', # MODIF
+	'explications_creer_dossier_squelettes' => 'Para usar o editor de templates, crie um diretório <b>squelettes/</b> na raiz do seu site, caso ainda não exista, e configure-o com permissão de escrita.',
 	'explications_filename_fichier_chemin' => 'Você pode indicar o caminho completo para gravar o arquivo num subdiretório  (ex "modeles/documento.html")',
 
 	// F
@@ -64,7 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'parseur_altern' => 'Alternativa',
-	'parseur_apres' => 'Após', # MODIF
+	'parseur_apres' => 'Após',
 	'parseur_avant' => 'Antes',
 	'parseur_contenu' => 'Conteúdo:',
 	'parseur_horsboucle' => 'FORA DO BOUCLE',
