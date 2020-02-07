@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annee_suivante' => 'Jahr danach',
 	'aucun_evenement' => 'Kein Event',
 	'aucun_inscrit' => 'Keine Anmeldung',
-	'aucune_rubrique_mode_agenda' => 'In der Grundeinstellung können Events in alle Rubriken eingetragen werden. Wenn sie den Kalender gezielt für eine oder mehrere Rubriken aktivieren, dann steht ihnen der Kalender nur für diese Rubriken zur Verfügung.', # MODIF
+	'aucune_rubrique_mode_agenda' => 'In der Grundeinstellung können Events in alle Rubriken eingetragen werden. Wenn sie den Kalender gezielt für eine oder mehrere Rubriken aktivieren, dann steht ihnen der Kalender nur für diese Rubriken zur Verfügung.', # RELIRE
 
 	// B
 	'bouton_annuler' => 'Abbrechen',
@@ -88,6 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_evenement_publie' => 'Event veröffentlicht',
 	'info_evenements' => 'Event',
 	'info_inscription' => 'Online Anmeldung:',
+	'info_lieu' => 'Ort:',
 	'info_nb_inscrits' => '@nb@ Anmeldungen',
 	'info_nb_mois' => '@nb@ Monate',
 	'info_nb_places' => '@nb@ Plätze',

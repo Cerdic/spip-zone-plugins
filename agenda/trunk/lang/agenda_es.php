@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annee_suivante' => 'Año siguiente',
 	'aucun_evenement' => 'Ningún evento',
 	'aucun_inscrit' => 'Ningún inscrito',
-	'aucune_rubrique_mode_agenda' => 'Por defecto, todas las secciones permiten utilizar los eventos. Si activa el modo agenda sobre una o más secciones, la gestión de enventos se limitará a su rama.', # MODIF
+	'aucune_rubrique_mode_agenda' => 'Por defecto, todas las secciones permiten utilizar los eventos. Si activa el modo agenda sobre una o más secciones, la gestión de enventos se limitará a su rama.',
 
 	// B
 	'bouton_annuler' => 'Cancelar',
@@ -86,6 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_evenement_publie' => 'Evento publicado',
 	'info_evenements' => 'Eventos',
 	'info_inscription' => 'Inscripción en línea:',
+	'info_lieu' => 'Lugar:',
 	'info_nb_inscrits' => '@nb@ inscritos',
 	'info_nb_mois' => '@nb@ meses',
 	'info_nb_places' => '@nb@ plazas',
