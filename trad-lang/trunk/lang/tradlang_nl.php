@@ -51,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_legende_autorisation_modifier' => 'De vertalingen aanpassen',
 	'cfg_legende_autorisation_voir' => 'De vertaalinterface zien',
 	'codelangue' => 'Taalcode',
+	'confirm_suppression_langue_cible' => 'Let op, je gaat taal « <b>@lang@</b> » van deze module verwijderen. Weet je het zeker?',
 	'crayon_changer_statut' => 'Let op! Je hebt de inhoud van de string aangepast zonder de status te wijzigen.',
 	'crayon_changer_statuts' => 'Let op! Je hebt de inhoud van een of meer strings aangepast zonder de status te wijzigen.',
 
