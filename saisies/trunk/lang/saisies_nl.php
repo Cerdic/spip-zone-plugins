@@ -53,9 +53,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_syntaxe_afficher_si' => 'Onjuiste syntaxis van de test',
 	'erreur_valeur_inacceptable' => 'Ingevoerde waarde is onacceptabel.',
 
-	// F
-	'fichier_erreur_explication_renvoi' => 'Je kunt een nieuw bestand versturen, of het formulier als zodanig. Het oude bestand wordt niet bewaard.',
-
 	// I
 	'info_configurer_saisies' => 'Testbladzijde voor invoer',
 

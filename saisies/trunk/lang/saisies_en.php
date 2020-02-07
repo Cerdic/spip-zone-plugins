@@ -53,9 +53,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_syntaxe_afficher_si' => 'Wrong syntax of the test',
 	'erreur_valeur_inacceptable' => 'Entered value cannot be accepted.',
 
-	// F
-	'fichier_erreur_explication_renvoi' => 'You can send a new file again, or submit the form as is, the old file is not kept.',
-
 	// I
 	'info_configurer_saisies' => 'Test page for Entries',
 
