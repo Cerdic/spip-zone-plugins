@@ -20,7 +20,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annee_suivante' => 'ano seguinte',
 	'aucun_evenement' => 'nenhum evento',
 	'aucun_inscrit' => 'Nenhum inscrito',
-	'aucune_rubrique_mode_agenda' => 'Por padrão, todas as seções permitem usar os eventos. Se você ativar o modo agenda em uma ou mais seções, o gerenciamento dos eventos será limitado a esse ramo da estrutura.', # MODIF
+	'aucune_place' => 'Nenhum local',
+	'aucune_rubrique_mode_agenda' => 'Por padrão, todas as seções permitem usar os eventos. Se você ativar o modo agenda em uma ou mais seções, o gerenciamento dos eventos será limitado a esse ramo da estrutura.',
 
 	// B
 	'bouton_annuler' => 'Anular',
@@ -49,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_adresse' => 'Endereço',
 	'evenement_article' => 'Vinculado à matéria',
 	'evenement_autres_occurences' => 'Outras ocorrências:',
+	'evenement_complet' => 'Desculpe, as inscrições para este evento estão encerradas.',
 	'evenement_date' => 'Data',
 	'evenement_date_a' => 'a ',
 	'evenement_date_a_immediat' => 'a ',
@@ -62,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_horaire' => 'Dia todo',
 	'evenement_lieu' => 'Local',
 	'evenement_participant_email_mention' => 'Para se manter em contato, você pode informar o seu endereço de e-mail. Ele não ficará visível no site.',
+	'evenement_places' => 'Locais',
 	'evenement_repetitions' => 'Repetições',
 	'evenement_titre' => 'Título',
 	'evenements' => 'Eventos',
@@ -87,10 +90,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_evenement_propose' => 'Evento proposto',
 	'info_evenement_publie' => 'Evento publicado',
 	'info_evenements' => 'Eventos',
+	'info_evenements_poubelle' => 'Eventos na lixeira',
+	'info_evenements_prop' => 'Eventos propostos',
+	'info_evenements_publie' => 'Eventos publicados',
+	'info_evenements_tout' => 'Todos os eventos',
 	'info_inscription' => 'Inscrição online:',
 	'info_nb_inscrits' => '@nb@ inscritos',
 	'info_nb_mois' => '@nb@ mês',
 	'info_nb_places' => '@nb@ locais',
+	'info_nb_places_restantes' => 'Lugares disponíveis',
+	'info_nb_places_total' => 'Lotação',
 	'info_nb_reponses' => '@nb@ respostas',
 	'info_nombre_evenements' => '@nb@ eventos',
 	'info_nouvel_evenement' => 'Novo evento',
@@ -124,7 +133,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nb_repetitions' => '@nb@ repetições',
+	'no_limite' => 'Sem limite',
+	'notification_propose_detail' => 'O evento "@titre@" está proposto para publicação desde',
+	'notification_propose_sujet' => '[@nom_site_spip@] Proposto: @titre@',
 	'notification_propose_titre' => 'Evento proposto',
+	'notification_publie_detail' => 'O evento "@titre@" foi publicado por @connect_nom@.',
+	'notification_publie_sujet' => '[@nom_site_spip@] PUBLICADO: @titre@',
 	'notification_publie_titre' => 'Evento publicado',
 
 	// P
