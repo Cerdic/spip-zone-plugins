@@ -224,6 +224,8 @@ Além disso, se a sua tabela contém já linhas com dados não inteiros na chave
 	'label_colonne_sql' => 'Coluna SQL',
 	'label_colonne_sql_explication' => 'Um nome de campo para SQL. Exemplo «post_scriptum»',
 	'label_compatibilite' => 'Compatibilidade',
+	'label_credits_logo_texte' => 'Créditos do logo',
+	'label_credits_logo_url' => 'URL para os créditos',
 	'label_definition_sql' => 'Definição SQL',
 	'label_description' => 'Descrição',
 	'label_documentation_url' => 'Documentação (url)',
