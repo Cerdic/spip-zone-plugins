@@ -5,34 +5,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-// Un filtre pour obtenir le prix HT d'un objet
-function prix_ht_objet($id_objet, $type_objet) {
-	$fonction = charger_fonction('ht', 'inc/prix');
-	return $fonction($type_objet, $id_objet);
-}
-
-// La balise qui va avec le prix HT
-function balise_PRIX_HT_dist($p) {
-	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
-	if (!$_type = interprete_argument_balise(1,$p)){
-		$_type = sql_quote($p->boucles[$b]->type_requete);
-		$_id = champ_sql($p->boucles[$b]->primary,$p);
-	}
-	else
-		$_id = interprete_argument_balise(2,$p);
-	$connect = $p->boucles[$b]->sql_serveur;
-	$p->code = "prix_ht_objet(intval(".$_id."),".$_type.','.sql_quote($connect).")";
-	$p->interdire_scripts = false;
-	return $p;
-}
-
-// Un filtre pour obtenir le prix TTC d'un objet
-function prix_objet($id_objet, $type_objet, $serveur = '') {
-	$fonction = charger_fonction('prix', 'inc/');
-	return $fonction($type_objet, $id_objet, 2, $serveur);
-}
-
-// La balise qui va avec le prix TTC
+/**
+ * La balise qui va avec le prix TTC
+ *
+ * @param Object $p
+ * @return Float
+ */
 function balise_PRIX_dist($p) {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
 	if (!$_type = interprete_argument_balise(1,$p)){
@@ -47,11 +25,85 @@ function balise_PRIX_dist($p) {
 	return $p;
 }
 
-/*
+/**
+ * La balise qui va avec le prix HT
+ *
+ * @param Object $p
+ * @return Float
+ */
+function balise_PRIX_HT_dist($p) {
+	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
+	if (!$_type = interprete_argument_balise(1,$p)){
+		$_type = sql_quote($p->boucles[$b]->type_requete);
+		$_id = champ_sql($p->boucles[$b]->primary,$p);
+	}
+	else
+		$_id = interprete_argument_balise(2,$p);
+	$connect = $p->boucles[$b]->sql_serveur;
+	$p->code = "prix_ht_objet(intval(".$_id."),".$_type.','.sql_quote($connect).")";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+/**
+ * Obtenir le prix TTC d'un objet
+ *
+ * @param Integer $id_objet
+ * @param String $type_objet
+ * @return Float
+ */
+function prix_objet($id_objet, $objet, $serveur = '') {
+	$fonction = charger_fonction('prix', 'inc/');
+	return $fonction($objet, $id_objet, 2, $serveur);
+}
+
+/**
+ * Obtenir le prix HT d'un objet
+ *
+ * @param Integer $id_objet
+ * @param String $type_objet
+ * @return Float
+ */
+function prix_ht_objet($id_objet, $objet) {
+	$fonction = charger_fonction('ht', 'inc/prix');
+	return $fonction($objet, $id_objet);
+}
+
+/**
+ * Compatibilité avec la balise #INFO_PRIX
+ *
+ * @uses prix_objet
+ *
+ * @param Integer $id_objet
+ * @param String $type_objet
+ * @param Array $ligne
+ * @return Float
+ */
+function generer_prix_entite($id_objet, $objet, $ligne) {
+	return prix_objet($id_objet, $objet);
+}
+
+/**
+ * Compatibilité avec la balise #INFO_PRIX_HT
+ *
+ * @uses prix_ht_objet
+ *
+ * @param Integer $id_objet
+ * @param String $type_objet
+ * @param Array $ligne
+ * @return Float
+ */
+function generer_prix_ht_entite($id_objet, $objet, $ligne) {
+	return prix_ht_objet($id_objet, $objet);
+}
+
+/**
  * Formater un nombre pour l'afficher comme un prix avec une devise
  *
- * @param float $prix Valeur du prix à formater
- * @return string Retourne une chaine contenant le prix formaté avec une devise (par défaut l'euro)
+ * @param Float $prix
+ *     Valeur du prix à formater
+ * @return String
+ *     Retourne une chaine contenant le prix formaté avec une devise (par défaut l'euro)
  */
  
 function prix_formater($prix) { 
@@ -59,10 +111,9 @@ function prix_formater($prix) {
 	return $fonction_formater($prix); 
 }
 
-/*
+/**
  *  Déport de la fonction pour pouvoir au besoin la surcharger avec
  *  function filtres_prix_formater
- *
  */
 function filtres_prix_formater_dist($prix) {
 
@@ -87,7 +138,6 @@ function filtres_prix_formater_dist($prix) {
 	} else {
 		 $prix .= DEVISE_DEFAUT; 
 	}
-	
 	
 	return $prix;
 }
