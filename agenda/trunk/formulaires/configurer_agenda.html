@@ -50,10 +50,11 @@
 								</div>
 							</li>
 							[(#VAL{_AGENDA_INSERT_HEAD_CSS}|defined|non)
-							#SET{name,insert_head_css}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							#SET{name,insert_head_css}#SET{obli,''}#SET{defaut,1}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 								<span class='erreur_message'>(#GET{erreurs})</span>
 								]
+								<input type="hidden" name="#GET{name}" value="0" />
 								#SET{val,1}
 								<div class="choix">
 									<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
