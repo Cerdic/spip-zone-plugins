@@ -16,9 +16,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_aucun_service_configure' => 'Nenhum serviço de e=mail configurado. <a href="@url@">Configurar um serviço</a>',
-	'erreur_envoi_mail_bloque_debug' => 'Envio da mensagem bloqueada por <tt>_TEST_EMAIL_DEST</tt>', # MODIF
-	'erreur_envoi_mail_force_debug' => 'Envio de mensagem forçada para @email@ por <tt>_TEST_EMAIL_DEST</tt>', # MODIF
-	'erreur_generation_newsletter' => 'Ocorreu um erro na geração da newsletter', # MODIF
+	'erreur_envoi_mail_bloque_debug' => 'Envio da mensagem bloqueada por <tt>_TEST_EMAIL_DEST</tt>',
+	'erreur_envoi_mail_force_debug' => 'Envio de mensagem forçada para @email@ por <tt>_TEST_EMAIL_DEST</tt>',
+	'erreur_envoi_newsletter' => 'Ocorreu um erro desconhecido no envio a newsletter.',
+	'erreur_generation_newsletter' => 'Ocorreu um erro na geração da newsletter',
 	'explication_boost_send' => 'Neste modo, as mensagens serão enviados tão rapidamente quanto possível. Nenhum limite de cadência é levado em conta.
 
 O envio rápido é desaconselhado por aumentar o risco de ser classificado como SPAM.',
@@ -65,6 +66,7 @@ Isto pode representar um volume importante de dados; se você faz muitos envios,
 	'label_date_start' => 'Data de início de envio',
 	'label_envoi' => 'Envio',
 	'label_from' => 'Remetente',
+	'label_graceful' => 'Apenas os destinatários que ainda não receberam este conteúdo',
 	'label_html' => 'Versão HTML',
 	'label_listes' => 'Listas',
 	'label_mailer_defaut' => 'Usar o mesmo serviço de envio dos outros e-mails',
@@ -80,6 +82,7 @@ Isto pode representar um volume importante de dados; se você faz muitos envios,
 	'label_purger_historique_delai' => 'Anterior a',
 	'label_purger_historique_oui' => 'Excluir os detalhes dos envios antigos',
 	'label_rate_limit' => 'Limitar a cadência de envio',
+	'label_sparkpost_api_endpoint' => 'API Endpoint',
 	'label_sparkpost_api_key' => 'Sparkpost API Key',
 	'label_sujet' => 'Assunto',
 	'label_texte' => 'Versão Texto',
@@ -100,11 +103,14 @@ Isto pode representar um volume importante de dados; se você faz muitos envios,
 	'texte_statut_pause' => 'em pausa',
 	'texte_statut_processing' => 'em andamento',
 	'titre_envois_archives' => 'Envios arquivados',
-	'titre_envois_destinataires_fail' => 'Envios falhados', # MODIF
+	'titre_envois_destinataires_clic' => 'Mails Clicados',
+	'titre_envois_destinataires_fail' => 'Envios falhados',
 	'titre_envois_destinataires_init_encours' => 'Nenhum destinatário programado (inicialisação em andamento)',
 	'titre_envois_destinataires_ok' => 'Envios com êxito',
+	'titre_envois_destinataires_read' => 'Mails Abertos',
 	'titre_envois_destinataires_sent' => 'Envios com êxito',
-	'titre_envois_destinataires_todo' => 'Envios futuros', # MODIF
+	'titre_envois_destinataires_spam' => 'Mails em Spam',
+	'titre_envois_destinataires_todo' => 'Envios futuros',
 	'titre_envois_en_cours' => 'Envios em andamento',
 	'titre_envois_planifies' => 'Envios agendados',
 	'titre_envois_termines' => 'Envios terminados',
