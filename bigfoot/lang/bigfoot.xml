@@ -9,7 +9,8 @@
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 	</langue>
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/bigfoot?lang_cible=fr" total="1" traduits="1" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
-	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/bigfoot?lang_cible=pt_br">
+	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/bigfoot?lang_cible=pt_br" total="1" traduits="1" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="filipaun" lien="https://trad.spip.net/auteur/filipaun" />
+		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
 </traduction>

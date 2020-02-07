@@ -10,5 +10,5 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// V
-	'voir_note' => 'Ver nota de rodapé' # MODIF
+	'voir_note' => 'Ver a nota de rodapé'
 );
