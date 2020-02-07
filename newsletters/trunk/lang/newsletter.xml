@@ -33,7 +33,7 @@
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="Suske" lien="https://trad.spip.net/auteur/suske" />
 	</langue>
-	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/newsletter-newsletters?lang_cible=pt_br" total="55" traduits="54" relire="0" modifs="0" nouveaux="1" pourcent="98.18">
+	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/newsletter-newsletters?lang_cible=pt_br" total="55" traduits="55" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="cerdic" lien="https://trad.spip.net/auteur/cerdic" />
 		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
 		<traducteur nom="telopa" lien="https://trad.spip.net/auteur/telopa" />

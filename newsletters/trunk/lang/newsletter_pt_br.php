@@ -58,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_selection_rubriques' => 'Seleção de seções',
 	'label_texte' => 'Texto',
 	'label_texte_email' => 'Versão Texto',
+	'label_titre' => 'Título',
 	'legend_configuration_adresse_envoi' => 'Endereço de envio para os disparos desta newsletter',
 	'lien_lire_en_ligne' => 'Ler online',
 
