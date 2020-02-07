@@ -58,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_selection_rubriques' => 'Selectie van rubrieken',
 	'label_texte' => 'Tekst',
 	'label_texte_email' => 'Tekst versie',
+	'label_titre' => 'Titel',
 	'legend_configuration_adresse_envoi' => 'Verzendadres voor de verzending van deze nieuwsbrief',
 	'lien_lire_en_ligne' => 'Lees online',
 
