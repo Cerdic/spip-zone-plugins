@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'explication_effacer_evenements_passes' => 'Vermeld het aantal dagen waarna een verlopen evenement automatisch moet worden gewist (0 of een negatief getal om dit tegen te gaan)', # MODIF
+	'explication_effacer_evenements_passes' => 'Vermeld het aantal dagen waarna een verlopen evenement automatisch moet worden gewist (0 of een negatief getal om dit tegen te gaan)',
 
 	// L
 	'label_affichage_debut' => 'Begin van de lijst',
@@ -25,7 +25,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_affichage_duree' => 'De evenementen opsommen op',
 	'label_articlepardefaut' => 'Standaardartikel (id)',
 	'label_descriptif' => 'Omschrijving',
-	'label_effacer_evenements_passes' => 'Automatisch voorbije evenementen wissen', # MODIF
+	'label_effacer_evenements_passes' => 'Automatisch voorbije evenementen wissen',
+	'label_filtres_statut_1' => 'Statusfilters voorstellen',
 	'label_insert_head_css_1' => 'Automatisch de standaardstijlen van de agenda invoegen',
 	'label_synchro_statut_1' => 'De status van evenementen automatisch synchroniseren met die van de artikelen',
 	'label_titre' => 'Paginatitel',
@@ -33,8 +34,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_url_evenement_article' => 'op de pagina van het bijbehorende artikel',
 	'label_url_evenement_evenement' => 'op een eigen pagina voor ieder evenement',
 	'legend_nettoyage_agenda' => 'Regelmatige opschoning van de agenda',
-	'legend_presentation_agenda' => 'Presentatie van de agenda', # MODIF
+	'legend_presentation_agenda' => 'Presentatie van de agenda in het privé-gedeelte',
+	'legend_presentation_agenda_public' => 'Presentatie van de agenda op de publieke site',
 
 	// T
-	'titre_configuration' => 'Weergave van de Agenda' # MODIF
+	'titre_configuration' => 'Configuratie van de Agenda'
 );
