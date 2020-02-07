@@ -131,7 +131,7 @@ function formulaires_editer_evenement_traiter_dist($id_evenement = 'new', $id_ar
 	if (!intval($id_evenement)
 		and $id_article = sql_getfetsel('id_article', 'spip_evenements', 'id_evenement='.$res['id_evenement'])
 		and objet_test_si_publie('article', $id_article)
-		and lire_config('agenda/synchro_statut')
+		and lire_config('agenda/synchro_statut', 1)
 	) {
 		// sera refuse si auteur pas autorise
 		evenement_modifier($res['id_evenement'], array('statut' => 'publie'));
