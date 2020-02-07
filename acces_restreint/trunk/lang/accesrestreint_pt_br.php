@@ -55,12 +55,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_retirer_zones' => 'retirar de todas as áreas',
 	'info_rubrique_dans_zone' => 'Esta seção faz arte da área:',
 	'info_rubrique_dans_zones' => 'Esta seção faz parte das áreas:',
+	'info_vous_avez_acces_a_cette_zone' => 'Você tem acesso a esta área',
+	'info_vous_navez_pas_acces_a_cette_zone' => 'Você não tem acesso a esta área',
 
 	// L
 	'label_creer_htaccess' => 'Acesso aos documentos anexados pelo seu URL',
 	'label_creer_htaccess_non' => 'autorizar a leitura',
 	'label_creer_htaccess_oui' => 'restringir a leitura',
 	'label_droits_acces' => 'Direitos de acesso',
+	'label_filtrer_rubriques' => 'Filtrar',
 	'label_titre_zone' => 'Título',
 
 	// M
@@ -69,6 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'page_zones_acces' => 'Acesso Restrito',
 	'par_titre' => 'Por título',
+	'placeholder_filtrer_rubriques' => 'Título de uma seção',
 	'privee' => 'Privado',
 	'publique' => 'Publicado',
 
