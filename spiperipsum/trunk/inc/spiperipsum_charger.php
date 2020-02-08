@@ -51,7 +51,7 @@ function inc_spiperipsum_charger_dist($langue, $jour, $service = 'evangelizo') {
 	$code_langue = $coder($langue);
 
 	// -- Constituer le tableau minimal
-	include_spip('inc/cache');
+	include_spip('inc/ezcache_cache');
 	$cache = array(
 		'sous_dossier' => $service,
 		'date'         => $date,
