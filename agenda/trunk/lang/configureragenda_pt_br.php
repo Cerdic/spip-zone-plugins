@@ -9,9 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// E
-	'explication_effacer_evenements_passes' => 'Informe o número de dias após o qual um evento passado será excluído automaticamente (0 ou um número negativo para desativar)',
-
 	// L
 	'label_affichage_debut' => 'Início da lista',
 	'label_affichage_debut_date_jour' => 'Data do dia',
@@ -26,7 +23,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_articlepardefaut' => 'ID da matéria padrão',
 	'label_descriptif' => 'Descrição',
 	'label_effacer_evenements_passes' => 'Excluir os eventos passados',
-	'label_filtres_statut_1' => 'Propor os filtros de status',
 	'label_insert_head_css_1' => 'Inserir automaticamente os estilos padrão da agenda',
 	'label_synchro_statut_1' => 'Sincronizar automaticamente os status dos eventos com os das matérias', # MODIF
 	'label_titre' => 'Título da página',

@@ -9,9 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// E
-	'explication_effacer_evenements_passes' => 'Vermeld het aantal dagen waarna een verlopen evenement automatisch moet worden gewist (0 of een negatief getal om dit tegen te gaan)',
-
 	// L
 	'label_affichage_debut' => 'Begin van de lijst',
 	'label_affichage_debut_date_jour' => 'Huidige datum',
@@ -26,7 +23,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_articlepardefaut' => 'Standaardartikel (id)',
 	'label_descriptif' => 'Omschrijving',
 	'label_effacer_evenements_passes' => 'Automatisch voorbije evenementen wissen',
-	'label_filtres_statut_1' => 'Statusfilters voorstellen',
 	'label_insert_head_css_1' => 'Automatisch de standaardstijlen van de agenda invoegen',
 	'label_synchro_statut_1' => 'De status van evenementen automatisch synchroniseren met die van de artikelen', # MODIF
 	'label_titre' => 'Paginatitel',

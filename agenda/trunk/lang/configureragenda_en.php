@@ -27,7 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_delai_effacer_evenements_passes' => 'Delay before deleting (days)', # RELIRE
 	'label_descriptif' => 'Descriptive',
 	'label_effacer_evenements_passes' => 'Delete past events', # RELIRE
-	'label_filtres_statut_1' => 'Display status filters', # RELIRE
 	'label_insert_head_css_1' => 'Automatically insert the default styles of the agenda',
 	'label_notifier_insitituer_1' => 'Send a notification to administrators for events proposal and publication', # RELIRE
 	'label_synchro_statut_1' => 'Events are automaticaly published/unpublished with the article they are linked to', # RELIRE
