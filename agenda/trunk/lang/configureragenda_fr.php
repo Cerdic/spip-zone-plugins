@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_articlepardefaut' => 'Identifiant article par défaut',
 	'label_descriptif' => 'Descriptif',
 	'label_effacer_evenements_passes' => 'Effacer les évènement passés',
+	'label_delai_effacer_evenements_passes' => 'Délai avant effacement (jours)',
 	'label_filtres_statut_1' => 'Proposer les filtres de statut',
 	'label_insert_head_css_1' => 'Insérer automatiquement les styles par défaut de l’agenda',
 	'label_synchro_statut_1' => 'Les événements sont automatiquement publiés/dépubliés avec l’article auquel ils sont liés',

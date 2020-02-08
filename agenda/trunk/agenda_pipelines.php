@@ -382,10 +382,15 @@ function agenda_saisies_afficher_si_js_saisies_form($flux) {
 }
 
 /**
- * Effacer regulièrement les evenements de l'agenda
- * en attendant qu'on soit en full spip 3.0 et qu'on ait droit à la balise genie
-*/
+ * Effacer regulièrement les evenements de l'agenda si l'option est activee
+ * @param array $flux
+ * @return array
+ */
 function agenda_taches_generales_cron($flux) {
-	$flux['agenda_effacer_evenements_passes'] = 24*3600;
+	include_spip('inc/config');
+	if (lire_config('agenda/effacer_evenements_passes','')) {
+		$flux['agenda_effacer_evenements_passes'] = 24*3600;
+	}
+
 	return $flux;
 }
