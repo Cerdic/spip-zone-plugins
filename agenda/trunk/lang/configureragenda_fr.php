@@ -37,6 +37,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_presentation_agenda_public' => 'Présentation de l’agenda sur le site public',
 
 	// T
-	'titre_configuration' => 'Configuration de l’Agenda'
+	'titre_configuration' => 'Configuration de l’Agenda',
 	'titre_affichage_agenda_public' => 'Affichage de l’Agenda sur le site public'
 );
