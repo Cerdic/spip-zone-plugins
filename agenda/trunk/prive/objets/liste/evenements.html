@@ -31,12 +31,7 @@
 				<p class="date">[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#HORAIRE})]</p>
 			</td>
 			<td class='lieu secondaire'>#LIEU</td>
-			<td class='place secondaire'>
-				[(#INSCRIPTION|?{
-					[(#PLACES|moins{#NB_INSCRITS})] / #PLACES,
-					-
-				})]
-			</td>
+			<td class='place secondaire'>[(#INSCRIPTION|oui)[(#PLACES|moins{#NB_INSCRITS})] / #PLACES#SET{has_places,1}]</td>
 			<td class='id'>[(#ID_EVENEMENT_SOURCE|oui)
 				[(#CHEMIN_IMAGE{repetition-16.png}|balise_img{<:agenda:repetition:>,''}|inserer_attribut{title,<:agenda:repetition:>})]
 				][(#AUTORISER{modifier,evenement,#ID_EVENEMENT}|?{[
@@ -55,6 +50,7 @@
 	</tbody>
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
+[(#GET{has_places}|non)<style type="text/css">.liste-objets.evenements th.place,.liste-objets.evenements td.place {display: none}</style> ]
 </div>
 </B_liste_evt>[
 <div class="liste-objets evenements caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
