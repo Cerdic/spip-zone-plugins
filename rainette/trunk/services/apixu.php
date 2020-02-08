@@ -23,7 +23,7 @@ if (!defined('_RAINETTE_APIXU_URL_BASE')) {
 $GLOBALS['rainette_apixu_config']['service'] = array(
 	'alias'   => 'apixu',
 	'nom'     => 'APIXU',
-	'actif'   => true,
+	'actif'   => false,
 	'credits' => array(
 		'titre' => 'APIXU',
 		'logo'  => 'apixu.png',

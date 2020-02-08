@@ -333,12 +333,12 @@ function wstack_service2url($lieu, $mode, $periodicite, $configuration) {
 	}
 
 	$url .= '?access_key=' . $configuration['inscription']
-//			. '&language=' . $code_langue
+			. '&language=' . $code_langue
 			. '&units=' . ($configuration['unite'] == 'm' ? 'm' : 'f')
 			. '&query=' . $lieu_normalise;
 
 	if ($mode == 'previsions') {
-		$url .= '&days=' . $configuration['periodicites'][$periodicite]['max_jours'];
+		$url .= '&forecast_days=' . $configuration['periodicites'][$periodicite]['max_jours'];
 	}
 
 	return $url;
