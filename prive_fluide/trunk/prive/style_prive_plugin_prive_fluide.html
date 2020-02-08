@@ -26,7 +26,7 @@
   |--.largeur
 
 */]#CACHE{3600*100,cache-client}
-#HTTP_HEADER{Content-Type: text/css;charset=utf-8}
+#HTTP_HEADER{Content-Type: text/css;charset=#CHARSET}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
 
@@ -237,4 +237,11 @@ body {
 #wysiwyg .champ,
 .preview {
   font-family: "Source Serif Pro", serif;
+}
+
+/* Message dans le formulaire */
+.formulaire_configurer_preferences .editer_spip_ecran .choix:first-of-type:before{
+  content: "<:prive_fluide:message_configurer_largeur_ecran:>";
+  display: block;
+  color: orange;
 }

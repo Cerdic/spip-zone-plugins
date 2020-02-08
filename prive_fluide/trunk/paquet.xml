@@ -1,10 +1,10 @@
 <paquet
 	prefix="prive_fluide"
 	categorie="edition"
-	version="1.1.0"
+	version="1.1.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
-	logo="images/logo_prive_fluide.svg"
+	logo="images/plugin_prive_fluide.png"
 	documentation="https://contrib.spip.net/5112"
 >
 	<nom>Espace privé fluide</nom>
@@ -13,7 +13,5 @@
 	<auteur lien="https://www.bravecassine.com">tcharlss</auteur>
 
 	<licence>GNU/GPL</licence>
-
-	<pipeline nom="formulaire_fond" inclure="prive_fluide_pipelines.php" />
 
 </paquet>
