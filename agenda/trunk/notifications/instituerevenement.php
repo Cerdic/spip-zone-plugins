@@ -4,6 +4,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function notifications_instituerevenement_dist($quoi, $id_evenement, $options) {
 
+	include_spip('inc/config');
+	if (!lire_config('agenda/notifier_insitituer',false)) {
+		return;
+	}
+
 	// ne devrait jamais se produire
 	if ($options['statut'] == $options['statut_ancien']) {
 		spip_log('statut inchange','notifications');
