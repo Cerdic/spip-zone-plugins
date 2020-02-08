@@ -5,15 +5,18 @@
 	url="https://trad.spip.net"
 	source="https://git.spip.net/spip-contrib-extensions/agenda.git"
 	reference="fr">
-	<langue code="en" url="https://trad.spip.net/tradlang_module/configureragenda?lang_cible=en" total="25" traduits="17" relire="0" modifs="2" nouveaux="6" pourcent="68.00">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/configureragenda?lang_cible=en" total="27" traduits="17" relire="6" modifs="0" nouveaux="4" pourcent="62.96">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
+		<traducteur nom="cerdic" lien="https://trad.spip.net/auteur/cerdic" />
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/configureragenda?lang_cible=fr" total="25" traduits="25" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
-	<langue code="nl" url="https://trad.spip.net/tradlang_module/configureragenda?lang_cible=nl" total="25" traduits="24" relire="0" modifs="1" nouveaux="0" pourcent="96.00">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/configureragenda?lang_cible=fr" total="27" traduits="27" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="nl" url="https://trad.spip.net/tradlang_module/configureragenda?lang_cible=nl" total="27" traduits="25" relire="0" modifs="2" nouveaux="0" pourcent="92.59">
+		<traducteur nom="cerdic" lien="https://trad.spip.net/auteur/cerdic" />
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
-	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/configureragenda?lang_cible=pt_br" total="25" traduits="24" relire="0" modifs="1" nouveaux="0" pourcent="96.00">
+	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/configureragenda?lang_cible=pt_br" total="27" traduits="25" relire="0" modifs="2" nouveaux="0" pourcent="92.59">
+		<traducteur nom="cerdic" lien="https://trad.spip.net/auteur/cerdic" />
 		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
 </traduction>
