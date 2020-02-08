@@ -31,16 +31,6 @@
 					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
 				</div>
 			</li>
-			#SET{name,filtres_statut}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
-				<span class='erreur_message'>(#GET{erreurs})</span>
-				]
-				#SET{val,1}
-				<div class="choix">
-					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
-					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
-				</div>
-			</li>
 			#SET{name,effacer_evenements_passes}#SET{obli,''}#SET{defaut,0}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 				<span class='erreur_message'>(#GET{erreurs})</span>
@@ -65,7 +55,7 @@
 			</li>
 		</ul>
 		<fieldset>
-			<legend><:configureragenda:titre_affichage_agenda_public:></legend>
+			<h3 class="titrem"><:configureragenda:titre_affichage_agenda_public:></h3>
 			<ul class="editer-groupe">
 				<!--EX01-->
 				#SET{name,titre}#SET{obli,''}[(#SET{defaut,<:agenda:titre_sur_l_agenda:>})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
