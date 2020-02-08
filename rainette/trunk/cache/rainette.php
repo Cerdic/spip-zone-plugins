@@ -46,13 +46,17 @@ function rainette_cache_configurer($plugin) {
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ * @param array  $options
+ *        Tableau d'options qui peut être fourni par un plugin utilisateur uniquement si celui-ci fait appel
+ *        au formulaire. La page cache_vider de Cache Factory n'utilise pas ce paramètre.
+ *        Le tableau est passé à la fonction de service de chargement du formulaire uniquement.
  * @param array  $configuration
  *        Configuration complète des caches du plugin utilisateur lue à partir de la meta de stockage.
  *
  * @return array
  *         Tableau des valeurs spécifique au plugin taxonomie.
  */
-function rainette_formulaire_charger($plugin, $configuration) {
+function rainette_formulaire_charger($plugin, $options, $configuration) {
 
 	$valeurs = array();
 
