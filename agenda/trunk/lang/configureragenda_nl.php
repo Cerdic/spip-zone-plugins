@@ -34,9 +34,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_url_evenement_article' => 'op de pagina van het bijbehorende artikel',
 	'label_url_evenement_evenement' => 'op een eigen pagina voor ieder evenement',
 	'legend_nettoyage_agenda' => 'Regelmatige opschoning van de agenda',
-	'legend_presentation_agenda' => 'Presentatie van de agenda in het privé-gedeelte',
+	'legend_presentation_agenda' => 'Presentatie van de agenda',
+	'legend_presentation_agenda_prive' => 'Presentatie van de agenda in het privé-gedeelte',
 	'legend_presentation_agenda_public' => 'Presentatie van de agenda op de publieke site',
 
 	// T
+	'titre_affichage_agenda_public' => 'Weergave van de Agenda', # MODIF
 	'titre_configuration' => 'Configuratie van de Agenda'
 );

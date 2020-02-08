@@ -23,12 +23,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_articlepardefaut' => 'Identification of default article',
 	'label_descriptif' => 'Descriptive',
 	'label_insert_head_css_1' => 'Automatically insert the default styles of the agenda',
+	'label_synchro_statut_1' => 'Events are automaticaly published/unpublished with the article they are linked to', # RELIRE
 	'label_titre' => 'Page title',
 	'label_url_evenement' => 'Event display',
 	'label_url_evenement_article' => 'on the page of the related article',
 	'label_url_evenement_evenement' => 'on a dedicated page for each event',
-	'legend_presentation_agenda' => 'Agenda introduction', # MODIF
+	'legend_presentation_agenda' => 'Agenda appearance', # RELIRE
+	'legend_presentation_agenda_prive' => 'Agenda display in the admin area', # RELIRE
+	'legend_presentation_agenda_public' => 'Agenda display on the public site', # RELIRE
 
 	// T
-	'titre_configuration' => 'Agenda display' # MODIF
+	'titre_affichage_agenda_public' => 'Agenda display on the public site', # RELIRE
+	'titre_configuration' => 'Agenda configuration' # RELIRE
 );
