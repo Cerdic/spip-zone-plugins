@@ -365,7 +365,7 @@ function cache_cache_decoder($plugin, $contenu, $configuration) {
  * @return array
  *               Description du cache complétée par un ensemble de données propres au plugin.
  */
-function cache_formulaire_charger($plugin, $options, $configuration) {
+function cache_cache_formulaire_charger($plugin, $options, $configuration) {
 
 	// Stocker le préfixe et le nom du plugin de façon systématique.
 	$valeurs = array('_prefixe' => $plugin);
@@ -373,7 +373,7 @@ function cache_formulaire_charger($plugin, $options, $configuration) {
 	$valeurs['_nom_plugin'] = $informer($plugin, 'nom', true);
 
 	// Le plugin utilisateur peut fournir un service propre pour construire le tableau des valeurs du formulaire.
-	if ($charger = cache_service_chercher($plugin, 'formulaire_charger')) {
+	if ($charger = cache_service_chercher($plugin, 'cache_formulaire_charger')) {
 		$valeurs_plugin = $charger($plugin, $options, $configuration);
 		if ($valeurs_plugin) {
 			$valeurs = array_merge($valeurs, $valeurs_plugin);

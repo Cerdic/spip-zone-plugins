@@ -37,7 +37,7 @@ function formulaires_cache_vider_charger($plugin, $options = array()) {
 	// On appelle le service de chargement des variables qui est soit celui par défaut de Cache Factory
 	// soit celui spécifique au plugin si il existe.
 	include_spip('cache/cache');
-	$valeurs = cache_formulaire_charger($plugin, $options, $configuration);
+	$valeurs = cache_cache_formulaire_charger($plugin, $options, $configuration);
 
 	return $valeurs;
 }
