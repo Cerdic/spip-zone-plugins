@@ -10,9 +10,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'avertissement_effacer_evenements' => 'Attention : cette option supprime des données en base de façon irreversible',
 
-	// E
-	'explication_effacer_evenements_passes' => 'Mettre le nombre de jour après lequel un évènement passé est automatiquement effacé (0 ou nombre négatif pour désactiver)',
-
 	// L
 	'label_affichage_debut' => 'Début de la liste',
 	'label_affichage_debut_date_jour' => 'Date du jour',
