@@ -1,0 +1,10 @@
+<BOUCLE_event(EVENEMENTS){id_evenement}{statut?}{tout}>
+<div class="cartouche">
+	<h2 class="titre">[(#LOGO_EVENEMENT|image_reduire{40,*}) ]#TITRE</h2>
+	[<p class="date">(#DATE_DEBUT|agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE,'hcal'})</p>]
+</div>
+
+[<div class="texte">(#DESCRIPTIF|image_reduire{500,*})</div>]
+
+[<p class="lieu"><span class="location">(#LIEU)</span>[<br /><span class="adresse">(#ADRESSE|PtoBR)</span>]</p>]
+</BOUCLE_event>
