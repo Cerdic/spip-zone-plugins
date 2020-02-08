@@ -76,7 +76,7 @@ function http_ezrest_get_index_dist($requete, $reponse) {
 	// Identification du cache pour l'index.
 	$cache = ezrest_cache_identifier('ezrest', 'index');
 
-	include_spip('inc/cache');
+	include_spip('inc/ezcache_cache');
 	if ($fichier_cache = cache_est_valide('ezrest', $cache))	{
 		// Lecture des données du fichier cache valide et peuplement de l'index données
 		$contenu['donnees'] = cache_lire('ezrest', $fichier_cache);
@@ -161,7 +161,7 @@ function http_ezrest_get_collection_dist($requete, $reponse) {
 						$configuration
 					);
 
-					include_spip('inc/cache');
+					include_spip('inc/ezcache_cache');
 					if ($fichier_cache = cache_est_valide('ezrest', $cache))	{
 						// Lecture des données du fichier cache valide et peuplement de l'index données
 						spip_timer('cache_ezrest');
@@ -309,7 +309,7 @@ function http_ezrest_get_ressource_dist($requete, $reponse) {
 						$configuration
 					);
 
-					include_spip('inc/cache');
+					include_spip('inc/ezcache_cache');
 					if ($fichier_cache = cache_est_valide('ezrest', $cache))	{
 						// Lecture des données du fichier cache valide et peuplement de l'index données
 						spip_timer('cache_ezrest');
