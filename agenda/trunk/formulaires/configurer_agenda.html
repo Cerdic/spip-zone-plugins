@@ -46,6 +46,9 @@
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 						</li>
+						<li class="pleine-largeur">
+							<div class="notice"><:configureragenda:avertissement_effacer_evenements:></div>
+						</li>
 					</ul>
 				</div>
 			</li>
