@@ -61,7 +61,7 @@ function ezrest_cache_configurer($plugin) {
  * @return array
  *         Tableau des valeurs spécifique au plugin taxonomie.
  */
-function ezrest_formulaire_charger($plugin, $options, $configuration) {
+function ezrest_cache_formulaire_charger($plugin, $options, $configuration) {
 
 	$valeurs = array();
 
