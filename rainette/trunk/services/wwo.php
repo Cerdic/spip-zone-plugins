@@ -23,6 +23,7 @@ if (!defined('_RAINETTE_WWO_URL_BASE')) {
 $GLOBALS['rainette_wwo_config']['service'] = array(
 	'alias'   => 'wwo',
 	'nom'     => 'World Weather Online',
+	'actif'   => true,
 	'credits' => array(
 		'titre'       => 'Free local weather content provider',
 		'logo'        => null,

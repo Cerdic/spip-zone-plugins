@@ -28,6 +28,7 @@ if (!defined('_RAINETTE_OWM_URL_BASE_ICONE')) {
 $GLOBALS['rainette_owm_config']['service'] = array(
 	'alias'          => 'owm',
 	'nom'            => 'OpenWeatherMap',
+	'actif'          => true,
 	'credits'        => array(
 		'titre' => null,
 		'logo'  => null,

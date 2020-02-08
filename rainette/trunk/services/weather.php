@@ -22,6 +22,7 @@ if (!defined('_RAINETTE_WEATHER_URL_BASE')) {
 $GLOBALS['rainette_weather_config']['service'] = array(
 	'alias'   => 'weather',
 	'nom'     => 'weather.com&reg;',
+	'actif'   => true,
 	'credits'        => array(
 		'titre' => 'weather.com&reg;',
 		'logo'  => null,

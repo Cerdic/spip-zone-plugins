@@ -28,6 +28,7 @@ if (!defined('_RAINETTE_WUNDERGROUND_URL_BASE_ICONE')) {
 $GLOBALS['rainette_wunderground_config']['service'] = array(
 	'alias'   => 'wunderground',
 	'nom'     => 'Weather Underground',
+	'actif'   => false,
 	'credits' => array(
 		'titre'       => 'Weather Underground',
 		'logo'        => 'wunderground.png',

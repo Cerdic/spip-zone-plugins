@@ -28,6 +28,7 @@ if (!defined('_RAINETTE_WEATHERBIT_URL_BASE_ICONE')) {
 $GLOBALS['rainette_weatherbit_config']['service'] = array(
 	'alias'   => 'weatherbit',
 	'nom'     => 'Weatherbit.io',
+	'actif'   => true,
 	'credits' => array(
 		'titre' => 'Weatherbit API',
 		'logo'  => '',
