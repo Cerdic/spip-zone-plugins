@@ -30,7 +30,8 @@ function rainette_debug_afficher_cache($lieu, $mode = 'previsions', $service = '
 	$debug = '';
 
 	// Recuperation du tableau des conditions courantes
-	if (_RAINETTE_DEBUG and function_exists('bel_env')) {
+	include_spip('inc/rainette_normaliser');
+	if (!service_est_indisponible($service) and _RAINETTE_DEBUG and function_exists('bel_env')) {
 		// Si on est en mode prévisions, on impose la périodicité à la valeur par défaut pour le service
 		$periodicite = 0;
 		if ($mode == 'previsions') {
@@ -263,9 +264,13 @@ function rainette_debug_afficher_execution() {
 function rainette_debug_verifier_langue_manquante() {
 	include_spip('inc/lang_liste');
 	include_spip('inc/rainette_normaliser');
+
+	$texte = '';
 	foreach ($GLOBALS['codes_langues'] as $code => $langue) {
 		if (!array_key_exists($code, $GLOBALS['rainette_config']['langues_alternatives'])) {
-			echo "code manquant $code<br />";
+			$texte .= "code manquant $code<br />";
 		}
 	}
+
+	return $texte;
 }

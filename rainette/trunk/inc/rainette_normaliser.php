@@ -543,8 +543,55 @@ function donnee_verifier_indice_uv($valeur) {
  * @param $erreur
  * @param $lieu
  * @param $mode
+ * @param $periodicite
+ * @param $service
+ * @param $configuration
+ *
+ * @return array
+ */
+function erreur_normaliser_extras($erreur, $lieu, $mode, $periodicite, $service, $configuration = array()) {
+
+	$extras = array(
+		'credits'           => array(),
+		'config'            => array(
+			'nom_service' => $service
+		),
+		'lieu'              => $lieu,
+		'mode'              => $mode,
+		'periodicite_cache' => $periodicite,
+		'service'           => $service,
+		'erreur'            => $erreur
+	);
+
+	// On complète les informations extras uniquement si le service est connu actif ou non.
+	if ($erreur['type'] != 'service_inconnu') {
+		if (!$configuration) {
+			// Acquérir la configuration statique du service (periode, format, données...)
+			include_spip("services/${service}");
+			$configurer = "${service}_service2configuration";
+			$configuration = $configurer($mode);
+		}
+
+		// On prépare un contexte extras pour traiter les erreurs du modèle de façon standard comme celles
+		// renvoyée par le chargement des données.
+		$extras['credits'] = $configuration['credits'];
+		$extras['config'] = array_merge(
+			parametrage_normaliser($service, $configuration['defauts']),
+			array('source' => configuration_donnees_normaliser($mode, $configuration['donnees'])),
+			array('nom_service' => $configuration['nom'])
+		);
+	}
+
+	return $extras;
+}
+
+/**
+ * @param $erreur
+ * @param $lieu
+ * @param $mode
  * @param $modele
  * @param $service
+ * @param $nom_service
  *
  * @return array
  */
@@ -592,6 +639,14 @@ function erreur_formater_texte($erreur, $lieu, $mode, $modele, $service, $nom_se
 		case 'modele_inutilisable':
 			$texte['principal'] .= _T("rainette:erreur_${type_erreur}", array('modele' => $modele));
 			$texte['conseil'] .= _T('rainette:erreur_conseil_modele_expliciter');
+			break;
+		case 'service_inactif':
+			$texte['principal'] .= _T("rainette:erreur_${type_erreur}", array('service' => $nom_service));
+			$texte['conseil'] .= _T('rainette:erreur_conseil_service_changer');
+			break;
+		case 'service_inconnu':
+			$texte['principal'] .= _T("rainette:erreur_${type_erreur}", array('service' => $service));
+			$texte['conseil'] .= _T('rainette:erreur_conseil_service_verifier');
 			break;
 	}
 
@@ -881,4 +936,26 @@ function icone_local_normaliser($icone, $service, $theme = '', $periode = '') {
 	}
 
 	return $chemin;
+}
+
+
+/**
+ * @param string $service
+ *
+ * @return string
+ */
+function service_est_indisponible($service) {
+
+	$services = rainette_lister_services('tableau', false);
+	if (!array_key_exists($service, $services)) {
+		// L'identifiant du service est erroné.
+		$erreur = 'service_inconnu';
+	} elseif (!$services[$service]['actif']) {
+		// Le service est inactivé.
+		$erreur = 'service_inactif';
+	} else {
+		$erreur = '';
+	}
+
+	return $erreur;
 }

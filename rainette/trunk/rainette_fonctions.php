@@ -292,14 +292,15 @@ function rainette_afficher_service($service) {
 
 /**
  * @param string $mode
+ * @param bool   $actif_uniquement
  *
  * @return array|string
  */
-function rainette_lister_services($mode = 'tableau') {
+function rainette_lister_services($mode = 'tableau', $actif_uniquement = true) {
 
 	static $services = array();
 
-	if (!isset($service[$mode])) {
+	if (!isset($service[$mode][$actif_uniquement])) {
 		// On lit les fichiers php dans répertoire services/ du plugin sachant ce répertoire
 		// contient exclusivement les api de chaque service dans un fichier unique appelé
 		// alias_du_service.php
@@ -314,19 +315,37 @@ function rainette_lister_services($mode = 'tableau') {
 				$configurer = "${service}_service2configuration";
 				$configuration = $configurer('service');
 
-				// Ajout du service dans la liste uniquement si celui-ci est encore actif.
-				if ($configuration['actif']) {
-					$liste[$service] = $configuration['nom'];
+				// Ajout du service dans la liste uniquement si celui-ci est encore actif ou si on demande tous
+				// les services actifs ou pas.
+				if (
+					!$actif_uniquement
+					or ($actif_uniquement
+						and $configuration['actif']
+					)
+				) {
+					if (
+						($mode == 'tableau')
+						and !$actif_uniquement
+					) {
+						$liste[$service] = array(
+							'nom'   => $configuration['nom'],
+							'actif' => $configuration['actif']
+						);
+					} else {
+						$liste[$service] = $configuration['nom'];
+					}
 				}
 			}
 		}
 
 		// Par défaut la liste est fournie comme un tableau.
 		// Si le mode demandé est 'liste' on renvoie une chaîne énumérée des alias de service séparée par des virgules.
-		$services[$mode] = ($mode == 'tableau') ? $liste : implode(',', array_keys($liste));
+		$services[$mode][$actif_uniquement] = ($mode == 'tableau')
+			? $liste
+			: implode(',', array_keys($liste));
 	}
 
-	return $services[$mode];
+	return $services[$mode][$actif_uniquement];
 }
 
 
@@ -422,69 +441,57 @@ function rainette_lister_themes($service, $source = 'local') {
  */
 function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tempsreel', $service = 'weather', $options = array()) {
 
-	// Initialisation du tableau des données météorologiques
-	$tableau = array();
+	// Vérification du service et de la cohérence entre le mode, le modèle et la périodicité.
 	include_spip('inc/rainette_normaliser');
-
-	// Détermination de la périodicité en fonction du mode et du modèle demandés
 	$periodicite = 0;
-	$erreur = '';
-	if ($mode == 'previsions') {
-		// Identification de la périodicité à partir du nom du modèle. Cela évite une configuration compliquée.
-		if (preg_match(',_(1|12|24)h,is', $modele, $match)) {
-			$type_modele = intval($match[1]);
+	if (!$type_erreur = service_est_indisponible($service)) {
+		// Détermination de la périodicité en fonction du mode et du modèle demandés
+		if ($mode == 'previsions') {
+			// Identification de la périodicité à partir du nom du modèle. Cela évite une configuration compliquée.
+			if (preg_match(',_(1|12|24)h,is', $modele, $match)) {
+				$type_modele = intval($match[1]);
 
-			// On verifie que la périodicité demandée explicitement dans l'appel du modèle est ok
-			if (isset($options['periodicite'])) {
-				$periodicite_explicite = intval($options['periodicite']);
-				if (periodicite_est_compatible($type_modele, $periodicite_explicite)) {
-					$periodicite = $periodicite_explicite;
+				// On verifie que la périodicité demandée explicitement dans l'appel du modèle est ok
+				if (isset($options['periodicite'])) {
+					$periodicite_explicite = intval($options['periodicite']);
+					if (periodicite_est_compatible($type_modele, $periodicite_explicite)) {
+						$periodicite = $periodicite_explicite;
+					} else {
+						$type_erreur = 'modele_periodicite';
+					}
 				} else {
-					$erreur = 'modele_periodicite';
+					// Dans ce cas, il faut choisir une périodicité en fonction du type du modèle et du service.
+					$periodicite = periodicite_determiner($type_modele, $service);
+					if (!$periodicite) {
+						$type_erreur = 'modele_service';
+					}
 				}
 			} else {
-				// Dans ce cas, il faut choisir une périodicité en fonction du type du modèle et du service.
-				$periodicite = periodicite_determiner($type_modele, $service);
-				if (!$periodicite) {
-					$erreur = 'modele_service';
+				// On ne connait pas le type du modèle, donc sa compatibilité.
+				// Si la périodicité est passée en argument on l'utilise sans se poser de question.
+				// Sinon c'est une erreur car on ne sait pas quelle périodicité est requise
+				if (isset($options['periodicite'])) {
+					$periodicite = intval($options['periodicite']);
+				} else {
+					$type_erreur = 'modele_inutilisable';
 				}
-			}
-		} else {
-			// On ne connait pas le type du modèle, donc sa compatibilité.
-			// Si la périodicité est passée en argument on l'utilise sans se poser de question.
-			// Sinon c'est une erreur car on ne sait pas quelle périodicité est requise
-			if (isset($options['periodicite'])) {
-				$periodicite = intval($options['periodicite']);
-			} else {
-				$erreur = 'modele_inutilisable';
 			}
 		}
 	}
 
-	if ($erreur) {
-		// Acquérir la configuration statique du service (periode, format, données...)
-		include_spip("services/${service}");
-		$configurer = "${service}_service2configuration";
-		$configuration = $configurer($mode);
-
-		// On prépare un contexte extras pour traiter les erreurs du modèle de façon standard comme celles
-		// renvoyée par le chargement des données.
-		$extras['credits'] = $configuration['credits'];
-		$extras['config'] = array_merge(
-			parametrage_normaliser($service, $configuration['defauts']),
-			array('source' => configuration_donnees_normaliser($mode, $configuration['donnees'])),
-			array('nom_service' => $configuration['nom'])
-		);
-		$extras['lieu'] = $lieu;
-		$extras['mode'] = $mode;
-		$extras['periodicite_cache'] = $periodicite;
-		$extras['service'] = $service;
-		$extras['erreur'] = array(
-			'type' => $erreur,
+	if ($type_erreur) {
+		// On construit le tableau directement sans appeler la fonction de calcul des données météo.
+		$erreur = array(
+			'type' => $type_erreur,
 			'service' => array(
 				'code' => '',
 				'message' => ''
 			)
+		);
+
+		$tableau = array(
+			'donnees' => array(),
+			'extras' => erreur_normaliser_extras($erreur, $lieu, $mode, $periodicite, $service)
 		);
 	} else {
 		// Récupération du tableau des données météo
@@ -492,10 +499,9 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 		$tableau = $charger($lieu, $mode, $periodicite, $service);
 
 		// Séparation des données communes liées au service et au mode et des données météorologiques
-		$extras = $tableau['extras'];
-		$erreur = $extras['erreur']['type'];
+		$type_erreur = $tableau['extras']['erreur']['type'];
 
-		if (!$erreur and ($mode == 'previsions')) {
+		if (!$type_erreur and ($mode == 'previsions')) {
 			// Adaptation des données en fonction de la demande et de la périodicité modèle-cache
 			$nb_index = count($tableau['donnees']);
 
@@ -518,10 +524,17 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 		}
 	}
 
-	// Affichage du message d'erreur ou des données
-	if ($erreur) {
-		$extras['erreur']['texte'] = erreur_formater_texte($extras['erreur'], $lieu, $mode, $modele, $service, $tableau['extras']['config']['nom_service']);
-		$texte = recuperer_fond('modeles/erreur_rainette', $extras);
+	if ($type_erreur) {
+		// Affichage du message d'erreur ou des données: seul l'index extras est utile
+		$tableau['extras']['erreur']['texte'] = erreur_formater_texte(
+			$tableau['extras']['erreur'],
+			$lieu,
+			$mode,
+			$modele,
+			$service,
+			$tableau['extras']['config']['nom_service']
+		);
+		$texte = recuperer_fond('modeles/erreur_rainette', $tableau['extras']);
 	} else {
 		// Appel du modèle avec le contexte complet
 		$texte = recuperer_fond("modeles/$modele", $tableau);
