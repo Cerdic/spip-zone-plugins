@@ -356,7 +356,7 @@ function itis_get_record($tsn) {
 	if (intval($tsn)) {
 		// Construction des options permettant de nommer le fichier cache.
 		// -- inutile de préciser la durée de conservation car on utilise la valeur par défaut à savoir 6 mois.
-		include_spip('inc/cache');
+		include_spip('inc/ezcache_cache');
 		$cache = array(
 			'service'  => 'itis',
 			'action'   => 'record',
@@ -468,7 +468,7 @@ function itis_get_information($action, $tsn) {
 	if (intval($tsn)) {
 		// Construction des options permettant de nommer le fichier cache.
 		// -- inutile de préciser la durée de conservation car on utilise la valeur par défaut à savoir 6 mois.
-		include_spip('inc/cache');
+		include_spip('inc/ezcache_cache');
 		$cache = array(
 			'service'  => 'itis',
 			'action'   => $action,

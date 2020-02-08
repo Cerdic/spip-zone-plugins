@@ -94,7 +94,7 @@ function wikipedia_get_page($search, $spip_language, $section = null, $options =
 
 		// Construction des options permettant de nommer le fichier cache.
 		// -- on précise la durée de conservation car ce service utilise 1 mois et pas 6 mois (par défaut).
-		include_spip('inc/cache');
+		include_spip('inc/ezcache_cache');
 		$cache = array(
 			'service'      => 'wikipedia',
 			'action'       => 'get',

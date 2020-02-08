@@ -101,7 +101,7 @@ function taxonomie_cache_formulaire_charger($plugin, $options, $configuration) {
 	$services = taxon_lister_services();
 
 	// On récupère les caches et leur description pour donner un maximum d'explication sur le contenu.
-	include_spip('inc/cache');
+	include_spip('inc/ezcache_cache');
 	foreach ($services as $_service => $_titre) {
 		// On récupère les caches du service
 		$filtres = array('service' => $_service);
