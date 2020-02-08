@@ -24,7 +24,7 @@
 	<pipeline nom="insert_head" action="insert_head_css" inclure="rainette_pipelines.php" />
 	<pipeline nom="post_chargement_meteo" action="" />
 
-	<necessite nom="cache" compatibilite="[0.3.0;]" />
+	<necessite nom="ezcache" compatibilite="[0.6.0;]" />
 	<necessite nom="saisies" compatibilite="[3.23.2;[" />
 	<necessite nom="php" compatibilite="[5.3.0;[" />
 

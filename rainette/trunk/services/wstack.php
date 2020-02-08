@@ -23,7 +23,7 @@ if (!defined('_RAINETTE_WSTACK_URL_BASE')) {
 $GLOBALS['rainette_wstack_config']['service'] = array(
 	'alias'   => 'wstack',
 	'nom'     => 'Weatherstack',
-	'actif'   => true,
+	'actif'   => false,
 	'credits' => array(
 		'titre' => 'Weatherstack',
 		'logo'  => 'weatherstack.png',

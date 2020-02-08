@@ -116,7 +116,7 @@ function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 		// Mise à jour du cache avec les nouvelles données météo si:
 		// - le fichier cache n'existe pas
 		// - la période de validité du cache est échue
-		include_spip('inc/cache');
+		include_spip('inc/ezcache_cache');
 		if (!$fichier_cache = cache_est_valide('rainette', $cache)) {
 			// Construire l'url de la requête
 			$urler = "${service}_service2url";

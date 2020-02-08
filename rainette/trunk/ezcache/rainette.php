@@ -56,24 +56,27 @@ function rainette_cache_configurer($plugin) {
  * @return array
  *         Tableau des valeurs spécifique au plugin taxonomie.
  */
-function rainette_formulaire_charger($plugin, $options, $configuration) {
+function rainette_cache_formulaire_charger($plugin, $options, $configuration) {
 
 	$valeurs = array();
 
 	// On constitue la liste des services requis par l'appel
 	include_spip('rainette_fonctions');
-	$services = rainette_lister_services();
+	$services = rainette_lister_services('tableau', false);
 
 	// On récupère les caches et leur description pour donner un maximum d'explication sur le contenu.
-	include_spip('inc/cache');
-	foreach ($services as $_service => $_titre) {
+	include_spip('inc/ezcache_cache');
+	foreach ($services as $_service => $_infos) {
 		// On récupère les caches du service
 		$filtres = array('sous_dossier' => $_service);
 		$caches = cache_repertorier('rainette', $filtres);
 
 		// Si il existe des caches pour le service on stocke les informations recueillies
 		if ($caches) {
-			$valeurs['_caches'][$_service]['titre_service'] = $_titre;
+			$complement_titre = $_infos['actif']
+				? _T('rainette:service_actif')
+				: _T('rainette:service_inactif');
+			$valeurs['_caches'][$_service]['titre_service'] = "{$_infos['nom']} (${complement_titre})";
 			$valeurs['_caches'][$_service]['caches'] = $caches;
 		}
 	}

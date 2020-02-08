@@ -281,6 +281,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'risque_precipitation' => 'risque de précip.',
 
 	// S
+	'service_actif' => 'actif',
+	'service_inactif' => 'inactif',
 	'station_observation' => 'station',
 	'succes_vider_caches' => 'Les caches sélectionnés ont bien été supprimés.',
 
