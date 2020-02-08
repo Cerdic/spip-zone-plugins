@@ -390,7 +390,7 @@ function type_noisette_decacher($plugin, $fonctions = array()) {
 
 	if ($fonctions) {
 		// Initialisation de l'identifiant du cache
-		include_spip('inc/cache');
+		include_spip('inc/ezcache_cache');
 		$cache = array(
 			'sous_dossier' => $plugin,
 			'objet'        => 'type_noisette'

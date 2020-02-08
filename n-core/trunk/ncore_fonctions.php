@@ -46,7 +46,7 @@ function type_noisette_ajaxifier($plugin, $type_noisette, $stockage = '') {
 
 	if (!isset($est_ajax[$plugin][$type_noisette])) {
 		// Initialisation de l'identifiant du cache des indicateurs Ajax
-		include_spip('inc/cache');
+		include_spip('inc/ezcache_cache');
 		$cache = array(
 			'sous_dossier' => $plugin,
 			'objet'        => 'type_noisette',
@@ -121,7 +121,7 @@ function type_noisette_dynamiser($plugin, $type_noisette, $stockage = '') {
 
 	if (!isset($est_dynamique[$plugin][$type_noisette])) {
 		// Initialisation de l'identifiant du cache des indicateurs d'inclusion dynamique
-		include_spip('inc/cache');
+		include_spip('inc/ezcache_cache');
 		$cache = array(
 			'sous_dossier' => $plugin,
 			'objet'        => 'type_noisette',
@@ -259,7 +259,7 @@ function noisette_contextualiser($plugin, $noisette, $type_noisette, $profondeur
 	// -- les contextes sont stockés dans un cache dédié.
 	if (!isset($contextes_type_noisette[$plugin][$type_noisette])) {
 		// Initialisation de l'identifiant du cache des indicateurs d'inclusion dynamique
-		include_spip('inc/cache');
+		include_spip('inc/ezcache_cache');
 		$cache = array(
 			'sous_dossier' => $plugin,
 			'objet'        => 'type_noisette',

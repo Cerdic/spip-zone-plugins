@@ -77,7 +77,7 @@ function ncore_type_noisette_stocker($plugin, $types_noisette, $recharger, $stoc
 		$cache_signatures = $cache_descriptions;
 		$cache_signatures['fonction'] = 'signatures';
 
-		include_spip('inc/cache');
+		include_spip('inc/ezcache_cache');
 		if ($recharger) {
 			// Si le rechargement est forcé, tous les types de noisette sont nouveaux, on peut donc écraser les caches
 			// existants sans s'en préoccuper.
@@ -242,7 +242,7 @@ function ncore_type_noisette_decrire($plugin, $type_noisette, $stockage = '') {
 			'fonction'     => 'descriptions'
 		);
 
-		include_spip('inc/cache');
+		include_spip('inc/ezcache_cache');
 		$descriptions = cache_lire('ncore', $cache_descriptions);
 		if (isset($descriptions[$type_noisette])) {
 			$description = $descriptions[$type_noisette];
@@ -294,7 +294,7 @@ function ncore_type_noisette_lister($plugin, $information = '', $stockage = '') 
 			'fonction'     => 'descriptions'
 		);
 
-		include_spip('inc/cache');
+		include_spip('inc/ezcache_cache');
 		if ($information == 'signature') {
 			// Les signatures md5 sont sockées dans un fichier cache séparé de celui des descriptions de noisettes.
 			$cache['fonction'] = 'signatures';
