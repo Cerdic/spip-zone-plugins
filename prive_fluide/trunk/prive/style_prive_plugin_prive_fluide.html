@@ -1,48 +1,62 @@
 [(#REM)<style>/*
 
-  Nouveau markup identique pour le mode étroit et large dans body.html :
-  - #conteneur
-      - #contenu
-      - #navigation
-      - #extra
+  Organisation :
+  1. Layout général
+  2. Contenus textes limités en largeur
+  3. Formulaires
+  4. Divers
 
-  On fait du mobile-first : pas de colonne à la base, puis on en met 2 ou 3 selon la largeur.
-  On met du float comme en 40 pour les vieux navigateurs, et du CSS grid pour les nouveaux.
+  Breakpoints : 780px / 1200px
+
+  Markup :
+
+  body
+  |--#bando_haut
+  |  |--#bando_xxx (x4)
+  |     |--.largeur
+  |--#page
+  |  |--.largeur
+  |  |  |--#haut
+  |  |     |--#chemin
+  |  |--#conteneur(.pleine_largeur)
+  |     |--#navigation
+  |     |--#extra
+  |     |--#contenu
+  |--#pied
+  |--.largeur
 
 */]#CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css;charset=utf-8}
 #HTTP_HEADER{Vary: Accept-Encoding}
-#SET{largeur_texte,42em}
+
 
 /*
-  ======
-  LAYOUT
-  ======
-  Placement et dimensions des blocs principaux
+  =================
+  1. Layout général
+  =================
 */
 
-/* Containers en pleine largeur */
+
+/* 1.1 : D'abord un reset des styles de SPIP */
+
 body,
 body.large {
   min-width: auto;
 }
-.largeur,
-#conteneur,
-.table_page,
-.large .largeur,
-.large #conteneur,
-.large .table_page {
+.largeur, #conteneur, .table_page,
+.large .largeur, .large #conteneur, .large .table_page {
   width: auto;
 }
 .largeur,
 .large .largeur {
-  padding: 0 1.5vw;
+  padding: 0 1em;
 }
 
-/* Pas de colonne
-   Obligé de mettre des !important à moins de cibler 50 variantes différentes
-   (.large #contenu, body.large .edition #contenu, etc.)
-*/
+/* 1.2 : Ensuite on refait le layout */
+
+/**
+ * Mobiles : 1 seule colonne
+ */
 #contenu,
 #navigation,
 #extra {
@@ -52,136 +66,140 @@ body.large {
   margin-right: auto !important;
 }
 
-/* Moyen écran : 2 colonnes */ 
+/**
+ * Écrans moyens : on passe en 2 colonnes.
+ * Fallback vieux navigateurs : direct en 3 colonnes et basta.
+ */
 @media (min-width: 780px) {
-
-  /* D'abord le fallback pour les vieux navigateurs */
-  /* [TODO] */
-  
-  /* Ensuite le layout en CSS grid : 2 colonnes */
-  @supports (display: grid) {
-    #conteneur {
-      display: grid;
-      grid-gap: 0 1.5vw;
-      grid-template-columns: auto repeat(3, 1fr);
-      grid-template-rows: auto 1fr; /* la 1ère ligne doit se collapser */
-      grid-template-areas:
-        "navigation contenu contenu contenu"
-        "extra      contenu contenu contenu";
-    }
-    #contenu {
-      grid-area: contenu;
-    }
-    #navigation {
-      grid-area: navigation;
-    }
-    #extra {
-      grid-area: extra;
-    }
-    /* Hack : on met une largeur au contenu des colonnes latérales,
-    ainsi quand elles sont vides, elles se collapsent */
-    #navigation > .ajaxbloc > *,
-    #navigation > :not(.ajaxbloc),
-    #extra > .ajaxbloc > *,
-    #extra > :not(.ajaxbloc) {
-      width: 20vw;
-    }
-  }
+	.largeur {
+		padding-left: 1.5em;
+		padding-right: 1.5em;
+	}
+	/* Navigateurs napthaline */
+	#contenu {
+		display: inline-block;
+		width: 60%;
+	}
+	#navigation {
+		width: 18%;
+		float: left;
+		margin-right: 2%;
+	}
+	#extra {
+		width: 18%;
+		float: right;
+	}
+	/* Navigateurs récents */
+	@supports (display: grid) {
+		/* Les pages qui demandent à être en pleine largeur (sans #nav ni #extra) */
+		.pleine_largeur #contenu {
+			width: 100%;
+		}
+		/* Les pages "normales" */
+		#conteneur:not(.pleine_largeur) {
+			display: grid;
+			grid-column-gap: 1.5em;
+			/*grid-template-columns:
+				min-content
+				minmax(auto, calc(100% - (8em + 8vw)));*/
+			grid-template-rows: auto 1fr; /* la 1ère ligne doit se collapser */
+			grid-template-columns:
+				calc(8em + 10%) /* navigation & extra */
+				1fr;           /* contenu */
+			grid-template-areas:
+				"navigation contenu "
+				"extra      contenu ";
+			-webkit-box-pack: center;
+			        justify-content: center;
+		}
+		#contenu {
+			grid-area: contenu;
+			width: initial;
+		}
+		#navigation {
+			grid-area: navigation;
+			width: initial;
+			margin-right: 0;
+		}
+		#extra {
+			grid-area: extra;
+			width: initial;
+		}
+	}
 }
 
-/* Grand écran : 3 colonnes */
+/**
+ * Sur écrans larges : 3 colonnes.
+ */
 @media (min-width: 1200px) {
-
-  @supports (display: grid) {
-    #conteneur {
-      grid-template-columns: auto repeat(3, 1fr) auto;
-      grid-template-rows: auto auto;
-      grid-template-areas:
-        "navigation contenu contenu contenu extra"
-        "navigation contenu contenu contenu extra";
-    }
-  }
-
+	@supports (display: grid) {
+		#conteneur:not(.pleine_largeur) {
+			grid-template-columns:
+				calc(8em + 10%)  /* navigation */
+				1fr             /* contenu */
+				calc(8em + 10%); /* extra */
+			grid-template-areas:
+				"navigation contenu extra"
+				"navigation contenu extra";
+		}
+	}
 }
 
 
 /*
-  ===========
-  Formulaires
-  ===========
-  Saisies centrées, largeur limitée pour avoir ~75 caractèrs max par ligne.
+  =====================================
+  2. Contenus textes limités en largeur
+  =====================================
 */
 
-.formulaire_spip .editer-groupe,
-.formulaire_spip fieldset .editer-groupe {
-  max-width: calc([(#GET{largeur_texte})] + 18vw);
-  margin-left: auto;
-  margin-right: auto;
-}
-.formulaire_spip > p,
-.formulaire_spip fieldset > p,
-.formulaire_spip fieldset .reponse_formulaire {
-  max-width: [(#GET{largeur_texte})];
-  margin-left: auto;
-  margin-right: auto;
+
+/* Limiter à ~75 caractères max par ligne */
+#wysiwyg .champ > * {
+	max-width: 35rem; /* Fallback */
+	max-width: 65ch;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-.formulaire_spip .editer,
-.formulaire_spip .editer.gauche {
-  padding-left: 18vw;
-}
-
-.formulaire_spip .editer > label,
-.formulaire_spip .editer.gauche > label {
-  width: 17vw;
-  margin-left: -18vw;
-}
-
-.formulaire_spip .fieldset {
-  margin: 1em 0;
-}
-
-.formulaire_spip .explication {
-  font-size: 1em;
-}
-
-.formulaire_spip .pleine_largeur {
-	padding-#ENV{left}:10px;
-}
-
-.formulaire_spip .pleine_largeur>label {
-	width:auto;
-	margin-#ENV{left}: 0;
-}
-
-/* Petit écran : tout en pleine largeur (pas mobile-first, car sinon ça peut péter des trucs avec les plugins qui stylent les saisies) */
-@media (max-width: 640px) {
-  .formulaire_spip .editer {
-    padding-left: 10px;
-  }
-  .formulaire_spip .editer > label {
-    display: block;
-    float: none;
-    width: 100%;
-    margin-left: 0;
-    margin-bottom: 10px;
-  }
-}
 
 /*
-  ======
-  Divers
-  ======
-  Des petits ajustements divers
+  ==============
+  3. Formulaires
+  ==============
+  On augmente la largeur des labels en proportion.
+  Nb : obligé de compenser le margin-left avec un facteur arbitraire.
 */
 
-/* Limiter en largeur pour obtenir ~75 caractères max par ligne */
-#wysiwyg {
-  display: block;
-  max-width: [(#GET{largeur_texte})];
-  margin-left: auto;
-  margin-right: auto;
+/* base */
+.formulaire_spip .editer {
+  padding-left: calc(5em + 15%);
 }
+.formulaire_spip .editer > label {
+  margin-left: calc(0em - ((5em + 15%) * 1.15));
+  width: calc((4em + 15%) * 1.15);
+}
+/* long_label */
+.formulaire_spip .editer.long_label {
+  padding-left: calc(5em + 33%);
+}
+.formulaire_spip .editer.long_label > label {
+  margin-left: calc(0em - ((5em + 33%) * 1.46));
+  width: calc((4em + 33%) * 1.46);
+}
+/* pleine_largeur */
+.formulaire_spip .editer.pleine_largeur {
+  padding-left: 10px;
+}
+.formulaire_spip .editer.pleine_largeur > label {
+  margin-left: 0;
+  width: auto;
+}
+
+
+/* =========
+   4. Divers
+   ========= */
+
 
 /* Polices */
 @font-face {
@@ -213,7 +231,7 @@ body.large {
   font-style: normal;
 }
 body {
-  font-size: calc(0.8em + 0.175vw); /* mobile => 16px, 1920px => 18px */
+  font-size: calc(0.8em + 0.175vw); /* mobile => 13px, 1920px => 15px */
   font-family: "Source Sans Pro", sans-serif;
 }
 #wysiwyg .champ,
