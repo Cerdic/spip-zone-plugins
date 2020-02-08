@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annee_suivante' => 'next year',
 	'aucun_evenement' => 'no event',
 	'aucun_inscrit' => 'No registered',
+	'aucune_place' => 'No seat', # RELIRE
 	'aucune_rubrique_mode_agenda' => 'By default, all sections can use the events. If you activate the agenda mode on one or more sections, event management will be limited to its subtree.',
 
 	// B
@@ -63,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_horaire' => 'All day',
 	'evenement_lieu' => 'Location',
 	'evenement_participant_email_mention' => 'To stay in contact, you should submit your email address. It will not be communicated on the site.',
+	'evenement_places' => 'Seats', # RELIRE
 	'evenement_repetitions' => 'Repetition',
 	'evenement_titre' => 'Title',
 	'evenements' => 'Events',
@@ -88,11 +90,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_evenement_propose' => 'Event proposed',
 	'info_evenement_publie' => 'Event published',
 	'info_evenements' => 'Events',
+	'info_evenements_poubelle' => 'Deleted', # RELIRE
+	'info_evenements_prop' => 'Proposed', # RELIRE
+	'info_evenements_publie' => 'Published', # RELIRE
+	'info_evenements_tout' => 'All events', # RELIRE
 	'info_inscription' => 'Online registration:',
 	'info_lieu' => 'Place:',
 	'info_nb_inscrits' => '@nb@ registered',
 	'info_nb_mois' => '@nb@ months',
 	'info_nb_places' => '@nb@ seats',
+	'info_nb_places_restantes' => 'Remaining seats', # RELIRE
+	'info_nb_places_total' => 'Total number of seats', # RELIRE
 	'info_nb_reponses' => '@nb@ replies',
 	'info_nombre_evenements' => '@nb@ events',
 	'info_nouvel_evenement' => 'New event',
@@ -126,6 +134,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nb_repetitions' => '@nb@ repetitions',
+	'no_limite' => 'No limit', # RELIRE
 	'notification_propose_titre' => 'Event proposed',
 	'notification_publie_titre' => 'Event published',
 
