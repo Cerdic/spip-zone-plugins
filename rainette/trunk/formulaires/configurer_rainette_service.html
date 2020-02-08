@@ -98,10 +98,10 @@
 						<td><:rainette:label_dernier_appel:></td>
 						<td>[(#ENV{_utilisation/dernier_appel})]</td>
 					</tr>
-				<BOUCLE_compteurs(DATA) {source table, #ENV{_utilisation/compteurs}}>
+				<BOUCLE_compteurs(DATA) {source table, #ENV{_configuration/offres/limites}}>
 					<tr>
 						<td>[(#VAL{rainette:label_compteur_}|concat{#CLE}|_T)]</td>
-						<td>[[<strong>(#VALEUR)</strong>] / (#ENV{_configuration/offres/limites/#CLE})]</td>
+						<td>[<strong>#ENV{_utilisation/compteurs/#CLE}</strong> / (#VALEUR)]</td>
 					</tr>
 				</BOUCLE_compteurs>
 				</tbody>

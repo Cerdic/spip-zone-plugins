@@ -42,9 +42,15 @@ function formulaires_configurer_rainette_service_charger($service) {
 	$valeurs['_utilisation']['dernier_appel'] = isset($execution['dernier_appel'])
 		? $execution['dernier_appel']
 		: '';
-	$valeurs['_utilisation']['compteurs'] = isset($execution['compteurs'])
-		? $execution['compteurs']
-		: array();
+	if (isset($execution['compteurs'])) {
+		$valeurs['_utilisation']['compteurs'] = $execution['compteurs'];
+	} else {
+		// On initialise les limites à zéro
+		$valeurs['_utilisation']['compteurs'] = array();
+		foreach ($configuration['offres']['limites'] as $_periode => $_limite) {
+			$valeurs['_utilisation']['compteurs'][$_periode] = 0;
+		}
+	}
 
 	// Gestion des thèmes locaux et distants.
 	include_spip('rainette_fonctions');
