@@ -1,0 +1,60 @@
+[(#SET{defaut_tri,#ARRAY{
+	date, -1,
+	type_controle, 1,
+	points, -1
+}})]
+<B_liste_caches>
+#ANCRE_PAGINATION
+<div class="liste-objets caches">
+<table class="spip liste">
+	[<caption>
+		<strong class="caption">
+			(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{cache:info_1_cache,pays:info_nb_cache}})
+		</strong>
+	</caption>]
+	<thead>
+		<tr class="first_row">
+		[(#ENV{type_controle}|non)
+			<th class="titre" scope="col">[(#TRI{titre,<:controle:champ_type_controle_label:>,ajax})]</th>
+		]
+			<th class="id principale" scope="col">[(#TRI{id_controle,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class="auteur" scope="col"><:auteur:></th>
+			<th class="nb" scope="col">[(#TRI{nb_anomalies,<:controle:champ_nb_anomalies_label:>,ajax})]</th>
+			<th class="date" scope="col">[(#TRI{date,<:controle:champ_date_label:>,ajax})]</th>
+			<th class="etat" scope="col">[(#TRI{date,<:controle:champ_etat_execution_label:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+<BOUCLE_liste_caches(DATA)
+	{id_controle?}
+	{type_controle?}
+	{id_auteur?}
+	{id_controle !IN #ENV{exclus, #ARRAY}}
+	{where?}
+	{recherche?}
+	{tri #ENV{par, date}, #GET{defaut_tri}}
+	{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
+		[(#ENV{type_controle}|non)
+			<td class="titre">#INFO_TITRE{controle, #ID_CONTROLE}</td>
+		]
+			<td class="id principale">#ID_CONTROLE</td>
+			<td class="auteur">
+				<div class="inner">
+				<BOUCLE_auteurs(AUTEURS){id_auteur}>
+					<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a>
+				</BOUCLE_auteurs>
+				</div>
+			</td>
+			<td class="nb">#NB_ANOMALIES</td>
+			<td class="date">[(#DATE|affdate_heure)]</td>
+			<td class="etat">#ETAT_EXECUTION</td>
+		</tr>
+</BOUCLE_liste_caches>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_caches>[
+<div class="liste-objets controles caption-wrap"><strong class="caption">(#ENV*{sinon, ''})</strong></div>
+]<//B_liste_caches>

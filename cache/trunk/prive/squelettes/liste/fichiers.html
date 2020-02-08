@@ -1,0 +1,42 @@
+[(#SET{defaut_tri,#ARRAY{
+	date, -1,
+	type_controle, 1,
+	points, -1
+}})]
+<B_telechager>
+#ANCRE_PAGINATION
+<div class="liste-objets caches">
+	<table class="spip liste">
+		<thead>
+			<caption><strong class="caption"><:mes_fichiers:titre_boite_telecharger:></strong></caption>
+			<tr class="first_row">
+				<th scope="col"><:mes_fichiers:colonne_nom:></th>
+				<th scope="col"><:label_poids_fichier:></th>
+				<th scope="col"><:date:></th>
+				<th scope="col"></th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+		<tbody>
+<BOUCLE_telechager(DATA){source table, #GET{fichiers}}{pagination 10}>
+			<tr id="zip_#COMPTEUR_BOUCLE"[ class="(#COMPTEUR_BOUCLE|alterner{row_even, row_odd})"]>
+				<td class="fichier principale">[<label[ for="zip_(#CLE|plus{1})"]>(#VALEUR|basename)</label>]</td>
+				<td class="taille">[(#VALEUR|filesize|taille_en_octets)]</td>
+				<td class="date">[(#VAL{'Y-m-d H:i:s'}|date{#VALEUR|filemtime}|affdate_heure)]</td>
+				<td>[(#BOUTON_ACTION{<:bouton_telecharger:>, #URL_ACTION_AUTEUR{mes_fichiers_telecharger, #VALEUR}})]</td>
+				<td><a class="voir_zip" href="#info_zip_#COMPTEUR_BOUCLE" rel="info_zip_#COMPTEUR_BOUCLE" title="<:mes_fichiers:bulle_bouton_voir:>"><:mes_fichiers:bouton_voir:></a></td>
+			</tr>
+			<tr>
+				<td colspan="5" style="padding-top:0;padding-bottom:0;"><div id="info_zip_#COMPTEUR_BOUCLE" class="resume_zip" style="padding:10px 0;">[(#VALEUR|mes_fichiers_resumer_zip)]</div></td>
+			</tr>
+</BOUCLE_telechager>
+		</tbody>
+	</table>
+	[<p class='pagination'>(#PAGINATION{#ENV{pagination,prive}})</p>]
+</div>
+</B_telechager>
+
+#BOITE_OUVRIR{'', notice}
+	<:mes_fichiers:message_rien_a_telecharger:>
+#BOITE_FERMER
+<//B_telechager>

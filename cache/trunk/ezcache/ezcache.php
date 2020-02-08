@@ -25,14 +25,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @uses lire_config()
  * @uses ecrire_config()
  *
- * @param string $plugin
- *                       Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ * @param string $plugin Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *                       un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  *
- * @return array
- *               Tableau de la configuration complétée des caches d'un plugin venant d'être enregistrée.
+ * @return array Tableau de la configuration complétée des caches d'un plugin venant d'être enregistrée.
  */
-function cache_cache_configurer($plugin) {
+function ezcache_cache_configurer($plugin) {
 
 	// Initialisation du tableau de configuration avec les valeurs par défaut du plugin Cache.
 	$configuration_defaut = array(
@@ -124,17 +122,14 @@ function cache_cache_configurer($plugin) {
  *
  * @uses cache_service_chercher()
  *
- * @param string $plugin
- *                              Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ * @param string $plugin        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *                              ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param array  $cache
- *                              Tableau identifiant le cache pour lequel on veut construire le nom.
- * @param array  $configuration
- *                              Configuration complète des caches du plugin utlisateur lue à partir de la meta de stockage.
+ * @param array  $cache         Tableau identifiant le cache pour lequel on veut construire le nom.
+ * @param array  $configuration Configuration complète des caches du plugin utlisateur lue à partir de la meta de stockage.
  *
  * @return string
  */
-function cache_cache_composer($plugin, $cache, $configuration) {
+function ezcache_cache_composer($plugin, $cache, $configuration) {
 
 	// Le plugin utilisateur peut fournir un service propre pour construire le chemin complet du fichier cache.
 	// Néanmoins, étant donné la généricité du mécanisme offert par le plugin Cache cela devrait être rare.
@@ -202,18 +197,14 @@ function cache_cache_composer($plugin, $cache, $configuration) {
  *
  * @uses cache_service_chercher()
  *
- * @param string $plugin
- *                              Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ * @param string $plugin        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *                              ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param string $fichier_cache
- *                              Le chemin complet du fichier à phraser.
- * @param array  $configuration
- *                              Configuration complète des caches du plugin utlisateur lue à partir de la meta de stockage.
+ * @param string $fichier_cache Le chemin complet du fichier à phraser.
+ * @param array  $configuration Configuration complète des caches du plugin utlisateur lue à partir de la meta de stockage.
  *
- * @return array
- *               Tableau des composants constitutifs du cache
+ * @return array Tableau des composants constitutifs du cache
  */
-function cache_cache_decomposer($plugin, $fichier_cache, $configuration) {
+function ezcache_cache_decomposer($plugin, $fichier_cache, $configuration) {
 
 	// Le plugin utilisateur peut fournir un service propre pour construire le chemin complet du fichier cache.
 	// Néanmoins, étant donné la généricité du mécanisme offert par le plugin Cache cela devrait être rare.
@@ -258,20 +249,15 @@ function cache_cache_decomposer($plugin, $fichier_cache, $configuration) {
  *
  * @uses cache_service_chercher()
  *
- * @param string $plugin
- *                              Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ * @param string $plugin        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *                              ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param array  $cache
- *                              Tableau identifiant le cache pour lequel on veut construire le nom.
- * @param string $fichier_cache
- *                              Fichier cache désigné par son chemin complet.
- * @param array  $configuration
- *                              Configuration complète des caches du plugin utilisateur lue à partir de la meta de stockage.
+ * @param array  $cache         Tableau identifiant le cache pour lequel on veut construire le nom.
+ * @param string $fichier_cache Fichier cache désigné par son chemin complet.
+ * @param array  $configuration Configuration complète des caches du plugin utilisateur lue à partir de la meta de stockage.
  *
- * @return array
- *               Description du cache complétée par un ensemble de données propres au plugin.
+ * @return array Description du cache complétée par un ensemble de données propres au plugin.
  */
-function cache_cache_completer($plugin, $cache, $fichier_cache, $configuration) {
+function ezcache_cache_completer($plugin, $cache, $fichier_cache, $configuration) {
 
 	// Cache Factory complète la description avec le nom sans extension et l'extension du fichier cache avant
 	// de passer la main au plugin utilisateur.
@@ -295,18 +281,14 @@ function cache_cache_completer($plugin, $cache, $fichier_cache, $configuration) 
  *
  * @uses cache_service_chercher()
  *
- * @param string $plugin
- *                              Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ * @param string $plugin        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *                              ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param string $contenu
- *                              Contenu du fichier cache au format chaine.
- * @param array  $configuration
- *                              Configuration complète des caches du plugin utilisateur lue à partir de la meta de stockage.
+ * @param string $contenu       Contenu du fichier cache au format chaine.
+ * @param array  $configuration Configuration complète des caches du plugin utilisateur lue à partir de la meta de stockage.
  *
- * @return array
- *               Contenu du cache décodé si la fonction idoine a été appliqué ou tel que fourni en entrée sinon.
+ * @return array Contenu du cache décodé si la fonction idoine a été appliqué ou tel que fourni en entrée sinon.
  */
-function cache_cache_decoder($plugin, $contenu, $configuration) {
+function ezcache_cache_decoder($plugin, $contenu, $configuration) {
 
 	// Cache Factory décode le contenu du fichier cache en fonction de l'extension (json, yaml, yml ou xml).
 	$encodage = ltrim($configuration['extension'], '.');
@@ -352,20 +334,16 @@ function cache_cache_decoder($plugin, $contenu, $configuration) {
  * @uses cache_service_chercher()
  * @uses cache_repertorier()
  *
- * @param string $plugin
- *                              Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ * @param string $plugin        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
  *                              ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param array  $options
- *                              Tableau d'options qui peut être fourni par un plugin utilisateur uniquement si celui-ci fait appel
+ * @param array  $options       Tableau d'options qui peut être fourni par un plugin utilisateur uniquement si celui-ci fait appel
  *                              au formulaire. La page cache_vider de Cache Factory n'utilise pas ce paramètre.
  *                              Le tableau est passé à la fonction de service de chargement du formulaire uniquement.
- * @param array  $configuration
- *                              Configuration complète des caches du plugin utilisateur lue à partir de la meta de stockage.
+ * @param array  $configuration Configuration complète des caches du plugin utilisateur lue à partir de la meta de stockage.
  *
- * @return array
- *               Description du cache complétée par un ensemble de données propres au plugin.
+ * @return array Description du cache complétée par un ensemble de données propres au plugin.
  */
-function cache_cache_formulaire_charger($plugin, $options, $configuration) {
+function ezcache_cache_formulaire_charger($plugin, $options, $configuration) {
 
 	// Stocker le préfixe et le nom du plugin de façon systématique.
 	$valeurs = array('_prefixe' => $plugin);
@@ -397,21 +375,18 @@ function cache_cache_formulaire_charger($plugin, $options, $configuration) {
  *
  * @internal
  *
- * @param string $plugin
- *                         Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ * @param string $plugin   Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
  *                         un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
- * @param bool   $fonction
- *                         Nom de la fonction de service à chercher.
+ * @param bool   $fonction Nom de la fonction de service à chercher.
  *
- * @return string
- *                Nom complet de la fonction si trouvée ou chaine vide sinon.
+ * @return string Nom complet de la fonction si trouvée ou chaine vide sinon.
  */
 function cache_service_chercher($plugin, $fonction) {
 	$fonction_trouvee = '';
 
 	// Eviter la réentrance si on demande explicitement le service du plugin Cache Factory.
 	if ($plugin != 'cache') {
-		include_spip("cache/${plugin}");
+		include_spip("ezcache/${plugin}");
 		$fonction_trouvee = "${plugin}_${fonction}";
 		if (!function_exists($fonction_trouvee)) {
 			$fonction_trouvee = '';

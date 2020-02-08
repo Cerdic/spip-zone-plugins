@@ -1,5 +1,5 @@
 <paquet
-	prefix="cache"
+	prefix="ezcache"
 	categorie="outil"
 	version="0.6.0"
 	etat="test"
