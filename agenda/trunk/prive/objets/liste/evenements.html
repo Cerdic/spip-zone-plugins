@@ -33,17 +33,13 @@
 			<td class='lieu secondaire'>#LIEU</td>
 			<td class='place secondaire'>[(#INSCRIPTION|oui)[(#PLACES|moins{#NB_INSCRITS})] / #PLACES#SET{has_places,1}]</td>
 			<td class='id'>[(#ID_EVENEMENT_SOURCE|oui)
-				[(#CHEMIN_IMAGE{repetition-16.png}|balise_img{<:agenda:repetition:>,''}|inserer_attribut{title,<:agenda:repetition:>})]
-				][(#AUTORISER{modifier,evenement,#ID_EVENEMENT}|?{[
-				<a href="[(#URL_ECRIRE{evenement_edit}|parametre_url{id_evenement,#ID_EVENEMENT}|parametre_url{redirect,#SELF})]">(#ID_EVENEMENT)</a>],
+				[(#SET{aff,[(#CHEMIN_IMAGE{repetition-16.png}|balise_img{[<:agenda:repetition_de:> (#ID_EVENEMENT_SOURCE)],''}|inserer_attribut{title,[<:agenda:repetition_de:> (#ID_EVENEMENT_SOURCE)]})]})]
+				#GET{aff}
+				]
+				[(#AUTORISER{modifier,evenement,#ID_EVENEMENT}|et{#ID_EVENEMENT_SOURCE|non}|?{[
+				<a href="[(#URL_ECRIRE{evenement_edit}|parametre_url{id_evenement,#ID_EVENEMENT}|parametre_url{redirect,#SELF})]" title="<:agenda:icone_modifier_evenement|attribut_html:>">(#ID_EVENEMENT)</a>],
 				#ID_EVENEMENT
-			})]
-			[(#ID_EVENEMENT_SOURCE|oui)
-			[(#AUTORISER{modifier,evenement,#ID_EVENEMENT_SOURCE}|?{[
-			<a href="[(#URL_ECRIRE{evenement_edit}|parametre_url{id_evenement,#ID_EVENEMENT_SOURCE}|parametre_url{redirect,#SELF})]"> \((#ID_EVENEMENT_SOURCE)\)</a>],
-			\(#ID_EVENEMENT_SOURCE\)
-			})]
-			]
+				})]
 			</td>
 		</tr>
 	</BOUCLE_liste_evt>
