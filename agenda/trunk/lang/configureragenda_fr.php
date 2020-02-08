@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'avertissement_effacer_evenements' => 'Attention : cette option supprime des données en base de façon irreversible',
+	'avertissement_effacer_evenements' => 'Attention : cette option supprime des données en base de façon irreversible',
 
 	// E
 	'explication_effacer_evenements_passes' => 'Mettre le nombre de jour après lequel un évènement passé est automatiquement effacé (0 ou nombre négatif pour désactiver)',
@@ -25,12 +25,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_affichage_debut_mois_passe' => '@mois@ précédent',
 	'label_affichage_duree' => 'Lister les événements sur',
 	'label_articlepardefaut' => 'Identifiant article par défaut',
+	'label_delai_effacer_evenements_passes' => 'Délai avant effacement (jours)',
 	'label_descriptif' => 'Descriptif',
 	'label_effacer_evenements_passes' => 'Effacer les évènement passés',
-	'label_delai_effacer_evenements_passes' => 'Délai avant effacement (jours)',
 	'label_filtres_statut_1' => 'Proposer les filtres de statut',
 	'label_insert_head_css_1' => 'Insérer automatiquement les styles par défaut de l’agenda',
-	'label_notifier_insitituer_1' => 'Notifier aux admins les propositions et publications d\'événements',
+	'label_notifier_insitituer_1' => 'Notifier aux admins les propositions et publications d’événements',
 	'label_synchro_statut_1' => 'Les événements sont automatiquement publiés/dépubliés avec l’article auquel ils sont liés',
 	'label_titre' => 'Titre de la page',
 	'label_url_evenement' => 'Affichage d’un événement',
