@@ -314,7 +314,10 @@ function rainette_lister_services($mode = 'tableau') {
 				$configurer = "${service}_service2configuration";
 				$configuration = $configurer('service');
 
-				$liste[$service] = $configuration['nom'];
+				// Ajout du service dans la liste uniquement si celui-ci est encore actif.
+				if ($configuration['actif']) {
+					$liste[$service] = $configuration['nom'];
+				}
 			}
 		}
 
