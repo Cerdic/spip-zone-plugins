@@ -1,4 +1,4 @@
-[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{calendrier-24.png}|balise_img{'',cadre-icone})],'simple'})]
+[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{agenda-24.png}|balise_img{'',cadre-icone})],'simple'})]
 #SET{self,#SELF|parametre_url{id_evenement|date_debut|debut_liste_evt,''}|parametre_url{debut_mois,#EVAL{_request('debut_mois')}}}
 <ul class='liste-items agenda-nav'>
 <BOUCLE_debut(EVENEMENTS){par date_debut}{0,1}{id_article?}{id_rubrique?}{id_evenement_source?}{statut==.*}>
