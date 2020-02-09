@@ -261,8 +261,11 @@ function ezcache_cache_completer($plugin, $cache, $fichier_cache, $configuration
 
 	// Cache Factory complète la description avec le nom sans extension, l'extension du fichier, la date
 	// et la taille du cache avant de passer la main au plugin utilisateur.
-	$cache['nom_cache'] = basename($fichier_cache, $configuration['extension']);
-	$cache['extension_cache'] = $configuration['extension'];
+	// Toutes ces informations proviennent du fichier lui-même et pas de la configuration (qui peut être écrasée
+	// dans certains cas).
+	$infos_cache = pathinfo($fichier_cache);
+	$cache['nom_cache'] = $infos_cache['basename'];
+	$cache['extension_cache'] = ".{$infos_cache['extension']}";
 	$cache['date_cache'] = date('Y-m-d H:i:s', filemtime($fichier_cache));
 	$cache['taille_cache'] = filesize($fichier_cache);
 

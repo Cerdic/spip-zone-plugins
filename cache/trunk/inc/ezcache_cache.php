@@ -358,7 +358,8 @@ function cache_repertorier($plugin, $filtres = array()) {
 	// Lecture de la configuration des caches du plugin.
 	$configuration = configuration_cache_lire($plugin);
 
-	// Rechercher les caches du plugin sans appliquer de filtre si ce n'est sur le sous-dossier éventuellement.
+	// Rechercher les caches du plugin sans appliquer de filtre si ce n'est sur le sous-dossier ou l'extension
+	// éventuellement.
 	// Les autres filtres seront appliqués sur les fichiers récupérés.
 	$pattern_fichier = constant($configuration['racine']) . $configuration['dossier_plugin'];
 	if ($configuration['sous_dossier']) {
@@ -369,8 +370,12 @@ function cache_repertorier($plugin, $filtres = array()) {
 		}
 	}
 
-	// On complète le pattern avec une recherche d'un nom quelconque mais avec l'extension configurée.
-	$pattern_fichier .= '*' . $configuration['extension'];
+	// On complète le pattern avec une recherche d'un nom quelconque mais avec l'extension configurée ou celle
+	// du filtre.
+	$extension = array_key_exists('extension', $filtres)
+		? $filtres['extension']
+		: $configuration['extension'];
+	$pattern_fichier .= "*${extension}";
 
 	// On recherche les fichiers correspondant au pattern.
 	$fichiers_cache = glob($pattern_fichier);
