@@ -1,54 +1,60 @@
+[(#REM) <!--  CACHES
+
+	Inclusion générique fournissant la liste des caches d'un plugin éventuellement filtrée.
+
+    @param string plugin
+           Identifiant du plugin utilisateur comme le Check Factory. Le plus pertinent est d'utiliser le préfixe.
+	@param string filtres
+           Liste des filtres basés sur le contenu du tableau retourné par la balise #CACHE_LISTE qui utilise la
+           fonction cache_repertorier().
+    @param string avec_telechargement
+           Indicateur oui/non permettant d'afficher ou pas un bouton de téléchargement des caches.
+    @param string titre
+           Titre du tableau (caption). Si vide on utilise les items de langue standards.
+    @param string sinon
+           Titre du tableau si aucun cache trouvé (caption). Si vide on utilise l'item de langue standard.
+    @param string par
+           Champ utilisé pour le tri : date ou nom_cache
+    @param int    nb
+           Nombre de caches affichés sur la même page (pagination).
+-->]
+
 [(#SET{defaut_tri,#ARRAY{
-	date, -1,
-	type_controle, 1,
-	points, -1
+	nom_cache, 1,
+	date_cache, -1,
 }})]
+#SET{avec_telechargement, #ENV{avec_telechargement, non}}
+
 <B_liste_caches>
 #ANCRE_PAGINATION
 <div class="liste-objets caches">
 <table class="spip liste">
 	[<caption>
 		<strong class="caption">
-			(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{cache:info_1_cache,pays:info_nb_cache}})
+			(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{cache:info_1_cache,cache:info_nb_cache}})
 		</strong>
 	</caption>]
 	<thead>
 		<tr class="first_row">
-		[(#ENV{type_controle}|non)
-			<th class="titre" scope="col">[(#TRI{titre,<:controle:champ_type_controle_label:>,ajax})]</th>
-		]
-			<th class="id principale" scope="col">[(#TRI{id_controle,<:info_numero_abbreviation:>,ajax})]</th>
-			<th class="auteur" scope="col"><:auteur:></th>
-			<th class="nb" scope="col">[(#TRI{nb_anomalies,<:controle:champ_nb_anomalies_label:>,ajax})]</th>
-			<th class="date" scope="col">[(#TRI{date,<:controle:champ_date_label:>,ajax})]</th>
-			<th class="etat" scope="col">[(#TRI{date,<:controle:champ_etat_execution_label:>,ajax})]</th>
+			<th class="titre principale" scope="col">[(#TRI{nom_cache,<:cache:fichier_label:>,ajax})]</th>
+			<th class="taille" scope="col"><:label_poids_fichier:></th>
+			<th class="date" scope="col">[(#TRI{date_cache,<:date:>,ajax})]</th>
+			[(#ENV{avec_telechargement}|=={oui}|oui)<th class="action" scope="col"></th>]
 		</tr>
 	</thead>
 	<tbody>
 <BOUCLE_liste_caches(DATA)
-	{id_controle?}
-	{type_controle?}
-	{id_auteur?}
-	{id_controle !IN #ENV{exclus, #ARRAY}}
+	{source table, #CACHE_LISTE{#ENV{plugin}, #ENV{filtres}}}
 	{where?}
-	{recherche?}
-	{tri #ENV{par, date}, #GET{defaut_tri}}
-	{pagination #ENV{nb,10}}>
+	{tri #ENV{par, nom_cache}, #GET{defaut_tri}}
+	{pagination #ENV{nb, 10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
-		[(#ENV{type_controle}|non)
-			<td class="titre">#INFO_TITRE{controle, #ID_CONTROLE}</td>
-		]
-			<td class="id principale">#ID_CONTROLE</td>
-			<td class="auteur">
-				<div class="inner">
-				<BOUCLE_auteurs(AUTEURS){id_auteur}>
-					<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a>
-				</BOUCLE_auteurs>
-				</div>
-			</td>
-			<td class="nb">#NB_ANOMALIES</td>
-			<td class="date">[(#DATE|affdate_heure)]</td>
-			<td class="etat">#ETAT_EXECUTION</td>
+			<td class="titre principale">#NOM_CACHE</td>
+			<td class="taille">[(#TAILLE_CACHE|taille_en_octets)]</td>
+			<td class="date">[(#DATE_CACHE|affdate_heure)]</td>
+			[(#ENV{avec_telechargement}|=={oui}|oui)
+			<td class="action">[(#BOUTON_ACTION{<:bouton_telecharger:>, #URL_ACTION_AUTEUR{telecharger_cache, #CLE}})]</td>
+			]
 		</tr>
 </BOUCLE_liste_caches>
 	</tbody>
@@ -56,5 +62,5 @@
 [<p class="pagination">(#PAGINATION{prive})</p>]
 </div>
 </B_liste_caches>[
-<div class="liste-objets controles caption-wrap"><strong class="caption">(#ENV*{sinon, ''})</strong></div>
+<div class="liste-objets controles caption-wrap"><strong class="caption">(#ENV*{sinon, <:cache:info_aucun_cache:>})</strong></div>
 ]<//B_liste_caches>

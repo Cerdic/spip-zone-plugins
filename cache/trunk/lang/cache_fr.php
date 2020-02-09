@@ -14,6 +14,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cache_vider_cocher_rien'  => 'Tout décocher',
 	'cache_vider_cocher_tout'  => 'Tout cocher',
 
+	// F
+	'fichier_label' => 'Nom sans extension',
+
 	// I
 	'info_1_cache'     => 'Un cache',
 	'info_nb_cache'    => '@nb@ caches',

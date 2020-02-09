@@ -1,10 +1,10 @@
 <paquet
 	prefix="ezcache"
 	categorie="outil"
-	version="0.6.0"
-	etat="test"
+	version="0.7.0"
+	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
-	logo="cache_logo-64.png"
+	logo="ezcache_logo-64.png"
 	documentation="https://contrib.spip.net/Cache-Factory"
 >
 	<nom>Cache Factory</nom>
@@ -14,7 +14,7 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 	<pipeline nom="post_cache" action="" />
-	<pipeline nom="affiche_milieu" inclure="cache_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="ezcache_pipelines.php" />
 
 	<menu nom="cache" titre="cache:cache_vider_titre_page" parent="menu_administration" icone="images/cache-del-16.png" action="cache_vider" />
 </paquet>

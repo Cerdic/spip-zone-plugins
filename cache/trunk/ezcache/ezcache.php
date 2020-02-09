@@ -259,10 +259,12 @@ function ezcache_cache_decomposer($plugin, $fichier_cache, $configuration) {
  */
 function ezcache_cache_completer($plugin, $cache, $fichier_cache, $configuration) {
 
-	// Cache Factory complète la description avec le nom sans extension et l'extension du fichier cache avant
-	// de passer la main au plugin utilisateur.
+	// Cache Factory complète la description avec le nom sans extension, l'extension du fichier, la date
+	// et la taille du cache avant de passer la main au plugin utilisateur.
 	$cache['nom_cache'] = basename($fichier_cache, $configuration['extension']);
 	$cache['extension_cache'] = $configuration['extension'];
+	$cache['date_cache'] = date('Y-m-d H:i:s', filemtime($fichier_cache));
+	$cache['taille_cache'] = filesize($fichier_cache);
 
 	// Le plugin utilisateur peut fournir un service propre pour construire le chemin complet du fichier cache.
 	// Néanmoins, étant donné la généricité du mécanisme offert par le plugin Cache cela devrait être rare.
