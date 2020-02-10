@@ -1,34 +1,12 @@
 [(#AUTORISER{voir, formulairesreponse, #ID_FORMULAIRE}|sinon_interdire_acces)]
-<link rel="stylesheet" href="#CHEMIN{css/tablesorter.min.css}" />
-<script type="text/javascript" src="#CHEMIN{javascript/jquery.tablesorter.min.js}"></script>
-
-<script type="text/javascript" src="#CHEMIN{javascript/jquery.tablesorter.widgets.min.js}"></script>
-<script type="text/javascript" src="#CHEMIN{javascript/widget-stickyHeaders.min.js}"></script>
-<script type="text/javascript" src="#CHEMIN{javascript/widget-columnSelector.min.js}"></script>
-<script type="text/javascript" src="#CHEMIN{javascript/widget-print.min.js}"></script>
-<script type="text/javascript" src="#CHEMIN{javascript/widget-output.min.js}"></script>
-<script type="text/javascript" src="#CHEMIN{javascript/widget-resizable.min.js}"></script>
-<link rel="stylesheet" href="#CHEMIN{css/formidable_tablesorter.css}" />
-<script type="text/javascript" src="#CHEMIN{js/formidable_tablesorter.js}"></script>
+#INCLURE{fond=prive/squelettes/inclure/formidable_tablesorter_entete}
 <BOUCLE_formulaire(FORMULAIRES){id_formulaire}{tout}{si #AUTORISER{voir, formulairesreponse, #ID_FORMULAIRE}}>
 	<h1>#TITRE</h1>
 	#SET{saisies,#SAISIES|unserialize}
 	#SET{saisies_finales,#GET{saisies}|saisies_lister_finales}
 	#SET{cextras,#VAL{spip_formulaires_reponses}|appliquer_filtre{champs_extras_objet}|sinon{#LISTE}}
 	<B_reponses>
-	<div id="tablesorter_boutons" class="formulaire_spip">
-		<div class="boutons">
-			<button class="print submit button"><:formidable_ts:imprimer:></button>
-			<div class="columnSelectorWrapper">
-				<input id="colSelect1" type="checkbox" class="invisible">
-				<label class="submit columnSelectorButton" for="colSelect1"><:formidable_ts:colonnes:></label>
-				<div id="columnSelector"></div>
-			</div>
-			<button class="submit button output"><:formidable_ts:exporter:></button>
-
-			<span class="totalWrapper"><:formidable_ts:nb_lignes:>&nbsp;<span id="total">#TOTAL_BOUCLE</span></span>
-		</div>
-	</div>
+	#INCLURE{fond=prive/squelettes/inclure/formidable_tablesorter_boutons,total=#TOTAL_BOUCLE}
 	<table id="formidable_tablesorter#ID_FORMULAIRE" class="tablesorter">
 		<B_entete>
 		<caption>#TITRE</caption>
