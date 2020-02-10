@@ -30,6 +30,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param string $idb
  * @param object $boucles
  * @param object $crit
+ * @deprecated
  */
 function critere_agendafull_dist($idb, &$boucles, $crit) {
 	$params = $crit->param;
@@ -130,80 +131,9 @@ function critere_agendafull_dist($idb, &$boucles, $crit) {
  * 		- hcal (generer une date au format hcal)
  * 		- h-event (generer une date au format h-event, dans une balise <time> HTML5)
  * @return string
+ * @deprecated 
  */
 function agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme = '') {
-	$abbr = '';
-	if (strpos($forme, 'abbr') !== false) {
-		$abbr = 'abbr';
-	}
-	$affdate = 'affdate_jourcourt';
-	if (strpos($forme, 'annee') !== false) {
-		$affdate = 'affdate';
-	}
-
-	$dtstart = $dtend = $dtabbr = '';
-	if (strpos($forme, 'hcal') !== false) {
-		$dtstart = "<abbr class='dtstart' title='".date_iso($date_debut)."'>";
-		$dtend = "<abbr class='dtend' title='".date_iso($date_fin)."'>";
-		$dtabbr = '</abbr>';
-	} else if (strpos($forme, 'h-event') !== false) {
-		$dtstart = "<time class='dt-start' datetime='".date_iso($date_debut)."'>";
-		$dtend = "<time class='dt-end' datetime='".date_iso($date_fin)."'>";
-		$dtabbr = '</time>';
-	}
-
-	$date_debut = strtotime($date_debut);
-	$date_fin = strtotime($date_fin);
-	$d = date('Y-m-d', $date_debut);
-	$f = date('Y-m-d', $date_fin);
-	$h = $horaire == 'oui';
-	$hd = date('H:i', $date_debut);
-	$hf = date('H:i', $date_fin);
-	$au = ' ' . strtolower(_T('agenda:evenement_date_au'));
-	$du = _T('agenda:evenement_date_du') . ' ';
-	$s = '';
-	if ($d == $f) { // meme jour
-		$s = ucfirst(nom_jour($d, $abbr)).' '.$affdate($d);
-		if ($h) {
-			$s .= " $hd";
-		}
-		$s = "$dtstart$s$dtabbr";
-		if ($h and $hd != $hf) {
-			$s .= "-$dtend$hf$dtabbr";
-		}
-	} elseif ((date('Y-m', $date_debut)) == date('Y-m', $date_fin)) {
-		// meme annee et mois, jours differents
-		if ($h) {
-			$s = $du . $dtstart . affdate_jourcourt($d) . " $hd" . $dtabbr;
-			$s .= $au . $dtend . $affdate($f);
-			$s .= " $hf";
-			$s .= $dtabbr;
-		} else {
-			$s = $du . $dtstart . jour($d) . $dtabbr;
-			$s .= $au . $dtend . $affdate($f) . $dtabbr;
-		}
-	} elseif ((date('Y', $date_debut)) == date('Y', $date_fin)) {
-		// meme annee, mois et jours differents
-		$s = $du . $dtstart . affdate_jourcourt($d);
-		if ($h) {
-			$s .= " $hd";
-		}
-		$s .= $dtabbr . $au . $dtend . $affdate($f);
-		if ($h) {
-			$s .= " $hf";
-		}
-		$s .= $dtabbr;
-	} else {
-		// tout different
-		$s = $du . $dtstart . affdate($d);
-		if ($h) {
-			$s .= ' '.date('(H:i)', $date_debut);
-		}
-		$s .= $dtabbr . $au . $dtend. affdate($f);
-		if ($h) {
-			$s .= ' '.date('(H:i)', $date_fin);
-		}
-		$s .= $dtabbr;
-	}
+	$s = affdate_debut_fin($date_debut, $date_fin, $horaire, $forme);
 	return unicode2charset(charset2unicode($s, 'AUTO'));
 }

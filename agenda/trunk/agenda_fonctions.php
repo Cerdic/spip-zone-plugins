@@ -12,7 +12,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 include_spip('public/agenda');
-include_spip('inc/agenda_filtres'); // deprecies mais encore supportes pour le moment
 
 /**
  * Ajout d'un offset a une date
