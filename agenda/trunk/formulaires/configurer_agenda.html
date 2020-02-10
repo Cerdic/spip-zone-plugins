@@ -17,6 +17,8 @@
 				<div class="choix">
 					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
 					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+					[(#ENV{#GET{name},#GET{defaut}}|oui)
+					<p class="explication">[(#VAL{configureragenda:explication_timezone_defaut}|_T{#ARRAY{timezone,#REM|agenda_tz_defaut}})]</p>]
 				</div>
 			</div>
 			#SET{name,synchro_statut}#SET{obli,''}#SET{defaut,1}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}

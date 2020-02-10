@@ -12,6 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 include_spip('public/agenda');
+include_spip('inc/agenda_timezone');
 
 /**
  * Ajout d'un offset a une date

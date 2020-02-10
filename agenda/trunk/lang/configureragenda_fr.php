@@ -10,6 +10,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'avertissement_effacer_evenements' => 'Attention : cette option supprime des données en base de façon irreversible',
 
+	// E
+	'explication_timezone_defaut' => 'Le fuseau par défaut (@timezone@) sera utilisé pour stocker les dates en base',
+
 	// L
 	'label_affichage_debut' => 'Début de la liste',
 	'label_affichage_debut_date_jour' => 'Date du jour',
