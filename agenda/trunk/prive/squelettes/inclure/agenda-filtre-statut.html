@@ -1,4 +1,4 @@
-<BOUCLE_totalevents(EVENEMENTS){id_evenement?}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}{where?}{statut==.*}{10,1}>
+<BOUCLE_totalevents(EVENEMENTS){id_evenement?}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}{where?}{statut==.*}{10,1}> </BOUCLE_totalevents>
 <div class="onglets_simple">
 <ul class="onglets-statut-agenda">
 	<li>[(#SELF|parametre_url{statut,''}|lien_ou_expose{<:agenda:info_evenements_tout:>,#ENV{statut}|non})]</li>
@@ -9,4 +9,4 @@
 </ul>
 <div class="nettoyeur"></div>
 </div>
-</BOUCLE_totalevents>
+</B_totalevents>
