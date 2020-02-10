@@ -2,7 +2,7 @@
 	prefix="agenda"
 	categorie="date"
 	version="4.0.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.2.0;3.3.*]"
 	logo="prive/themes/spip/images/evenement-32.png"
 	schema="1.0.0"

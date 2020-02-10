@@ -57,6 +57,9 @@ li.item .repetitions li {display:inline;margin:0;padding:0;}
 
 /* sur la fiche evenement */
 .evenement .fiche_objet .formulaire_dater {display: none;}
+.evenement #wysiwyg .contenu_dates {margin-bottom: 1.5em;}
+.evenement #wysiwyg .contenu_timezone_affiche .label {display: inline;font-weight: bold;}
+.evenement #wysiwyg .contenu_timezone_affiche .timezone_affiche {display: inline;}
 .evenement #wysiwyg .contenu_lieu .label {display: inline;font-weight: bold;}
 .evenement #wysiwyg .contenu_lieu .lieu {display: inline;}
 .evenement #wysiwyg .contenu_adresse .label {display: block;}
@@ -72,8 +75,10 @@ li.item .repetitions li {display:inline;margin:0;padding:0;}
 .formulaire_editer_evenement .editer_parent {}
 .formulaire_editer_evenement .editer_parent label {margin-#ENV{left}:0;display:block;float:left;padding:2px 0;width:130px;}
 
-.formulaire_editer_evenement .editer_horaire {padding-top:0;margin-top:0;}
+.formulaire_editer_evenement .editer_horaire {padding-top:0;margin-top:0; width: 45%; float: left;}
 .formulaire_editer_evenement .editer_horaire label {margin:0;display:inline;width:auto;float:none;}
+.formulaire_editer_evenement .editer_timezone_affiche {padding-top:0;margin-top:-1.7em; width: 45%; float: right; clear: none;}
+.formulaire_editer_evenement .editer_timezone_affiche label {margin:0;display:inline;width:auto;float:none;}
 .formulaire_editer_evenement .editer.editer_date,
 .formulaire_editer_evenement .editer.editer_date li {clear:left;}
 .formulaire_editer_evenement .editer.editer_date_debut_fin label { /*vertical-align: top;*/ }

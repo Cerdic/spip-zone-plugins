@@ -83,7 +83,7 @@ function agenda_declarer_tables_objets_sql($tables) {
 		'titre' => 'titre, "" AS lang',
 		'date' => 'date_debut',
 		'principale' => 'oui',
-		'champs_editables' => array('date_debut', 'date_fin', 'titre', 'descriptif','lieu', 'adresse', 'inscription', 'places', 'horaire'),
+		'champs_editables' => array('date_debut', 'date_fin', 'timezone_affiche', 'titre', 'descriptif','lieu', 'adresse', 'inscription', 'places', 'horaire'),
 		'field'=> array(
 			'id_evenement'	=> 'bigint(21) NOT NULL',
 			'id_article'	=> "bigint(21) DEFAULT '0' NOT NULL",

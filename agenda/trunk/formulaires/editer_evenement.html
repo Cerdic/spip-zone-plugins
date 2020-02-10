@@ -29,6 +29,12 @@
 							]<input type='checkbox' name='horaire' id='horaire' value='non' [(#ENV{horaire}|=={oui}|non)checked='checked']
 								onclick="if (this.checked==false) { $('span.afficher_horaire').show();} else {$('span.afficher_horaire').hide();}" />
 						</div>
+						[(#ENV{_saisie_timezone}|oui)
+						<div class="editer pleine_largeur editer_timezone_affiche[ (#ENV**{erreurs}|table_valeur{horaire}|oui)erreur]">
+							<label for="timezone_affiche"><:agenda:evenement_timezone_affiche:></label>[
+							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{timezone_affiche})</span>
+							][(#ENV{timezone_affiche}|agenda_tz_affiche_selecteur{timezone_affiche,timezone_affiche})]
+						</div>]
 						<div class="editer pleine_largeur editer_date_debut_fin[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur][ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur]">
 							[
 							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_debut})</span>][

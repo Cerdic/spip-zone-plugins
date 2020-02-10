@@ -18,6 +18,7 @@ include_spip('inc/autoriser');
 function formulaires_editer_evenement_charger_dist($id_evenement = 'new', $id_article = 0, $retour = '', $lier_trad = 0, $config_fonc = 'evenements_edit_config', $row = array(), $hidden = '') {
 
 	$valeurs = formulaires_editer_objet_charger('evenement', $id_evenement, $id_article, 0, $retour, $config_fonc, $row, $hidden);
+	$valeurs['_saisie_timezone'] = lire_config('agenda/fuseaux_horaires', 0);
 
 	if (!$valeurs['id_article']) {
 		$valeurs['id_article'] = $id_article;
@@ -38,11 +39,19 @@ function formulaires_editer_evenement_charger_dist($id_evenement = 'new', $id_ar
 		$valeurs['horaire'] = 'oui';
 	}
 
+	if ($valeurs['_saisie_timezone']) {
+		$valeurs['date_debut'] = agenda_tz_date_local_to_tz($valeurs['date_debut'], $valeurs['timezone_affiche']);
+		$valeurs['date_fin'] = agenda_tz_date_local_to_tz($valeurs['date_fin'], $valeurs['timezone_affiche']);
+	}
+
 	// les repetitions
 	$valeurs['repetitions'] = array();
 	if (intval($id_evenement)) {
 		$repetitons = sql_allfetsel('date_debut', 'spip_evenements', 'id_evenement_source='.intval($id_evenement), '', 'date_debut');
 		foreach ($repetitons as $d) {
+			if ($valeurs['_saisie_timezone']) {
+				$d['date_debut'] = agenda_tz_date_local_to_tz($d['date_debut'], $valeurs['timezone_affiche']);
+			}
 			$valeurs['repetitions'][] = date('d/m/Y', strtotime($d['date_debut']));
 		}
 	}
@@ -110,6 +119,13 @@ function formulaires_editer_evenement_verifier_dist($id_evenement = 'new', $id_a
 		}
 	}
 
+	// s'assurer que le fuseau horaire est valide
+	if (lire_config('agenda/fuseaux_horaires', 0) and $tz = _request('timezone_affiche')) {
+		if ($tz !== agenda_tz_valide_timezone($tz)) {
+			$erreurs['timezone_affiche'] = _T('agenda:erreur_timezone_invalide');
+		}
+	}
+
 	#if (!count($erreurs))
 	#	$erreurs['message_erreur'] = 'ok?';
 	return $erreurs;
@@ -122,8 +138,38 @@ function formulaires_editer_evenement_traiter_dist($id_evenement = 'new', $id_ar
 	$erreurs = array();
 	$date_debut = verifier_corriger_date_saisie('debut', _request('horaire') == 'oui', $erreurs);
 	$date_fin = verifier_corriger_date_saisie('fin', _request('horaire') == 'oui', $erreurs);
-	set_request('date_debut', date('Y-m-d H:i:s', $date_debut));
-	set_request('date_fin', date('Y-m-d H:i:s', $date_fin));
+
+	$date_debut = date('Y-m-d H:i:s', $date_debut);
+	$date_fin = date('Y-m-d H:i:s', $date_fin);
+
+	$offset_repetition = '';
+	if (lire_config('agenda/fuseaux_horaires', 0) and $tz = _request('timezone_affiche')){
+		$day_tz = date('Y-m-d', strtotime($date_debut));
+		$date_debut = agenda_tz_date_tz_to_local($date_debut, $tz);
+		$day_local = date('Y-m-d', strtotime($date_debut));
+		$date_fin = agenda_tz_date_tz_to_local($date_fin, $tz);
+		// si il y a un ecart de jour entre la date dans la zone de l'evenement et dans la zone du serveur, il faut decaler aussi les repetitions de +/- 1 jour
+		if ($day_local > $day_tz) {
+			$offset_repetition = 24 * 3600;
+		}
+		elseif ($day_local < $day_tz) {
+			$offset_repetition = -24 * 3600;
+		}
+	}
+
+	set_request('date_debut', $date_debut);
+	set_request('date_fin', $date_fin);
+
+	// si il y a un ecart de jour entre la date dans la zone de l'evenement et dans la zone du serveur, il faut decaler aussi les repetitions de +/- 1 jour
+	if ($offset_repetition and $repetitions = _request('repetitions')) {
+		include_spip('action/editer_evenement');
+		$reps = agenda_recup_repetitions($repetitions);
+		foreach ($reps as $k=>$rep) {
+			$reps[$k] = date('d/m/Y', $rep + $offset_repetition);
+		}
+		$repetitions = implode(',', $reps);
+		set_request('repetitions', $repetitions);
+	}
 
 	$res = formulaires_editer_objet_traiter('evenement', $id_evenement, $id_article, 0, $retour, $config_fonc, $row, $hidden);
 	// si c'est une creation dans un article publie, passer l'evenement en publie, si le plugin est configuré pour

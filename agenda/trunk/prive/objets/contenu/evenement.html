@@ -5,8 +5,13 @@
 </div>
 <div class="champ contenu_dates">
 <div class='label'><:agenda:info_dates:></div>
-<div dir='#LANG_DIR' class='dates'>[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#HORAIRE})]</div>
+<div dir='#LANG_DIR' class='dates'>[(#DATE_DEBUT|affdate_debut_fin_timezone{#DATE_FIN,#HORAIRE,#TIMEZONE_AFFICHE,'tzshort'})]</div>
 </div>
+[(#CONFIG{agenda/fuseaux_horaires,0}|oui)
+<div class="champ contenu_timezone_affiche[ (#TIMEZONE_AFFICHE*|strlen|?{'',vide})]">
+<div class='label'><:agenda:info_timezone_affiche:></div>
+<div dir='#LANG_DIR' class='timezone_affiche'>#TIMEZONE_AFFICHE</div>
+</div>]
 <B_repetitions>
 <div class="champ contenu_repetitions">
 	<div class='label'>[(#GRAND_TOTAL|singulier_ou_pluriel{agenda:une_repetition,agenda:nb_repetitions})]</div>

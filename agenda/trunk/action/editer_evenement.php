@@ -139,7 +139,12 @@ function evenement_modifier($id_evenement, $set = null) {
 	return $err;
 }
 
-function agenda_action_revision_evenement_repetitions($id_evenement, $repetitions = '') {
+/**
+ * Recupere les timestamp des repetitions
+ * @param string $repetitions
+ * @return array
+ */
+function agenda_recup_repetitions($repetitions) {
 	include_spip('inc/filtres');
 	$repetitions = preg_split(',[^0-9\-\/],', $repetitions);
 	// gestion des repetitions
@@ -152,6 +157,11 @@ function agenda_action_revision_evenement_repetitions($id_evenement, $repetition
 			}
 		}
 	}
+	return $rep;
+}
+
+function agenda_action_revision_evenement_repetitions($id_evenement, $repetitions = '') {
+	$rep = agenda_recup_repetitions($repetitions);
 	agenda_action_update_repetitions($id_evenement, $rep);
 }
 
