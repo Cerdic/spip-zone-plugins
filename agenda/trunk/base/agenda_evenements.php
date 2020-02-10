@@ -89,6 +89,7 @@ function agenda_declarer_tables_objets_sql($tables) {
 			'id_article'	=> "bigint(21) DEFAULT '0' NOT NULL",
 			'date_debut'	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 			'date_fin'	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+			'timezone_affiche' => "varchar(255) NOT NULL DEFAULT ''",
 			'titre'	=> "text NOT NULL DEFAULT ''",
 			'descriptif'	=> "text NOT NULL DEFAULT ''",
 			'lieu'	=> "text NOT NULL DEFAULT ''",
@@ -140,7 +141,7 @@ function agenda_declarer_tables_objets_sql($tables) {
 			'poubelle' => 'texte_statut_poubelle',
 		),
 		'texte_changer_statut' => 'agenda:texte_evenement_statut',
-		'champs_versionnes' => array('id_article', 'titre', 'descriptif', 'lieu', 'adresse', 'date_debut', 'date_fin', 'horaire', 'inscription', 'places'),
+		'champs_versionnes' => array('id_article', 'titre', 'descriptif', 'lieu', 'adresse', 'date_debut', 'date_fin', 'horaire', 'timezone_affiche', 'inscription', 'places'),
 	);
 
 	//-- Jointures ----------------------------------------------------

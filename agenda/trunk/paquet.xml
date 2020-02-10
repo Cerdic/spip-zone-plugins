@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.2.0;3.3.*]"
 	logo="prive/themes/spip/images/evenement-32.png"
-	schema="0.28.0"
+	schema="1.0.0"
 	documentation="https://contrib.spip.net/article2858"
 >
 

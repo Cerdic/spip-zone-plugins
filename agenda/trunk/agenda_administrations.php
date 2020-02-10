@@ -89,6 +89,11 @@ function agenda_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.28.0'] = array(
 		array('ecrire_config','agenda/synchro_statut','1')
 	);
+
+	$maj['1.0.0'] = array(
+		array('sql_alter', 'TABLE spip_evenements ADD timezone_affiche varchar(255) NOT NULL DEFAULT \'\''),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
