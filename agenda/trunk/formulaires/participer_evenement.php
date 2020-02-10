@@ -21,7 +21,7 @@ function formulaires_participer_evenement_charger_dist($id_evenement, $mode = ''
 		'reponse' => _request('reponse'),
 	);
 	// si pas d'evenement ou d'inscription, on echoue silencieusement
-	if (!$row = sql_fetsel('inscription,places', 'spip_evenements', 'id_evenement='.intval($id_evenement).' AND date_fin>NOW()')
+	if (!$row = sql_fetsel('inscription,places', 'spip_evenements', 'id_evenement='.intval($id_evenement).' AND date_fin>'.sql_quote(date('Y-m-d H:i:s')))
 		or !$row['inscription']) {
 		return false;
 	}
@@ -122,15 +122,15 @@ function formulaires_participer_evenement_traiter_dist($id_evenement) {
 				'id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur'])
 			)
 		)) {
-			sql_updateq('spip_evenements_participants', array('reponse' => $reponse, 'date' => 'NOW()'), 'id_evenement_participant='.intval($id_evenement_participant));
+			sql_updateq('spip_evenements_participants', array('reponse' => $reponse, 'date' => date('Y-m-d H:i:s')), 'id_evenement_participant='.intval($id_evenement_participant));
 		// nouvelle réponse
 		} else {
-			$id_evenement_participant = sql_insertq('spip_evenements_participants', array('id_evenement' => $id_evenement, 'id_auteur' => $GLOBALS['visiteur_session']['id_auteur'], 'reponse' => $reponse, 'date'=>'NOW()'));
+			$id_evenement_participant = sql_insertq('spip_evenements_participants', array('id_evenement' => $id_evenement, 'id_auteur' => $GLOBALS['visiteur_session']['id_auteur'], 'reponse' => $reponse, 'date' => date('Y-m-d H:i:s')));
 		}
 	// 2) Visiteur anonyme : nouvelle réponse
 	} else {
 			$editable = false;
-			$id_evenement_participant = sql_insertq('spip_evenements_participants', array('id_evenement' => $id_evenement, 'nom' => $nom, 'email' => $email,'reponse' => $reponse, 'date' => 'NOW()'));
+			$id_evenement_participant = sql_insertq('spip_evenements_participants', array('id_evenement' => $id_evenement, 'nom' => $nom, 'email' => $email,'reponse' => $reponse, 'date' => date('Y-m-d H:i:s')));
 	}
 	if ($reponse == 'oui') {
 		$message = _T('agenda:participation_prise_en_compte');
