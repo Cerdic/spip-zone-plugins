@@ -113,7 +113,7 @@ function agenda_optimiser_base_disparus($flux) {
 	}
 
 	// Evenements a la poubelle
-	sql_delete('spip_evenements', "statut='poubelle' AND maj < ".$flux['args']['date']);
+	sql_delete('spip_evenements', "statut='poubelle' AND maj < ".sql_quote($flux['args']['date']));
 
 	// Effacer les inscriptions à des evenement inexistants
 
@@ -123,8 +123,7 @@ function agenda_optimiser_base_disparus($flux) {
 		'evenements.id_evenement IS NULL'
 	);
 	while ($row = sql_fetch($res)) {
-		var_dump($row);
-		sql_delete('spip_evenements_participants','id_evenement='.$row['id_evenement']);
+		sql_delete('spip_evenements_participants','id_evenement='.intval($row['id_evenement']));
 	}
 
 	include_spip('action/editer_liens');
