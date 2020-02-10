@@ -1,7 +1,7 @@
 .formidable_tablesorter #conteneur, .formidable_tablesorter #contenu{
 	width:100%;
 }
-.formidable_tablesorter .navigation {
+.formidable_tablesorter #navigation {
 	display:none;
 }
 .formidable_tablesorter .boutons{
