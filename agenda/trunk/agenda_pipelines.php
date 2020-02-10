@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Agenda 4 pour Spip 3.0
+ * Plugin Agenda 4 pour Spip 3.2
  * Licence GPL 3
  *
- * 2006-2011
+ * 2006-2020
  * Auteurs : cf paquet.xml
  */
 
@@ -392,4 +392,14 @@ function agenda_taches_generales_cron($flux) {
 	}
 
 	return $flux;
+}
+
+/**
+ * Activer nospam sur le formulaire de participation
+ * @param array $formulaires
+ * @return array
+ */
+function agenda_nospam_lister_formulaires($formulaires) {
+	$formulaires[] = 'participer_evenement';
+	return $formulaires;
 }
