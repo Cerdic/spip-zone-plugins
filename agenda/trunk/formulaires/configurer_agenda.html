@@ -9,11 +9,20 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		#SET{fl,configureragenda}
 		<div class="editer-groupe">
+			#SET{name,fuseaux_horaires}#SET{obli,''}#SET{defaut,0}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<div class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="hidden" name="#GET{name}" value="0" />
+				#SET{val,1}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+				</div>
+			</div>
 			#SET{name,synchro_statut}#SET{obli,''}#SET{defaut,1}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<div class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 				<span class='erreur_message'>(#GET{erreurs})</span>
-				]
-				<input type="hidden" name="#GET{name}" value="0" />
+				]<input type="hidden" name="#GET{name}" value="0" />
 				#SET{val,1}
 				<div class="choix">
 					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
