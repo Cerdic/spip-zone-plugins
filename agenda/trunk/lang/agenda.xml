@@ -20,7 +20,7 @@
 		<traducteur nom="Rainer Müller" lien="https://trad.spip.net/auteur/rainer-muller" />
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
-	<langue code="en" url="https://trad.spip.net/tradlang_module/agenda?lang_cible=en" total="152" traduits="128" relire="9" modifs="0" nouveaux="15" pourcent="84.21">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/agenda?lang_cible=en" total="152" traduits="128" relire="24" modifs="0" nouveaux="0" pourcent="84.21">
 		<traducteur nom="cerdic" lien="https://trad.spip.net/auteur/cerdic" />
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
