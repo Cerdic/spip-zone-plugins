@@ -98,6 +98,7 @@ function agenda_declarer_tables_objets_sql($tables) {
 			'places' => 'int(11) DEFAULT 0 NOT NULL',
 			'horaire' => "varchar(3) DEFAULT 'oui' NOT NULL",
 			'id_evenement_source'	=> 'bigint(21) NOT NULL',
+			'modif_synchro_source'	=> 'tinyint(1) DEFAULT 1 NOT NULL',
 			'statut'	=> "varchar(10) DEFAULT '0' NOT NULL",
 			'maj'	=> 'TIMESTAMP',
 			'date_creation'	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"

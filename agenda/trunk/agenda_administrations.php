@@ -93,8 +93,13 @@ function agenda_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['1.0.0'] = array(
 		array('sql_alter', 'TABLE spip_evenements ADD timezone_affiche varchar(255) NOT NULL DEFAULT \'\''),
 	);
+
 	$maj['1.0.1'] = array(
 		array('agenda_corrige_heure_evenements_journee'),
+	);
+
+	$maj['1.0.2'] = array(
+		array('sql_alter', 'TABLE spip_evenements ADD modif_synchro_source tinyint(1) DEFAULT 1 NOT NULL'),
 	);
 
 	include_spip('base/upgrade');

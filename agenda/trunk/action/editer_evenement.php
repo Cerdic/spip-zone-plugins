@@ -26,12 +26,12 @@ function action_editer_evenement_dist($arg = null) {
 	// mais on verifie qu'on a toutes les donnees qu'il faut.
 	if (!$id_evenement = intval($arg)) {
 		$id_parent = _request('id_parent');
-		if (!$id_evenement = agenda_action_insert_evenement($id_parent)) {
+		if (!$id_evenement = evenement_inserer($id_parent)) {
 			return array(false,_L('echec'));
 		}
 	}
 
-	$err = action_evenement_set($id_evenement);
+	$err = evenement_modifier($id_evenement);
 	return array($id_evenement,$err);
 }
 
@@ -39,21 +39,31 @@ function action_editer_evenement_dist($arg = null) {
  * Creer un nouvel evenement
  *
  * @param int $id_article
- * @param int $id_evenement_source
+ * @param array $set
  * @return int
  */
-function evenement_inserer($id_article, $id_evenement_source = 0) {
+function evenement_inserer($id_article, $set=null) {
 	include_spip('inc/autoriser');
 	if (!autoriser('creerevenementdans', 'article', $id_article)) {
 		spip_log('agenda action formulaire article : auteur '.$GLOBALS['visiteur_session']['id_auteur']." n'a pas le droit de creer un evenement dans article $id_article", 'agenda');
 		return false;
 	}
 
-	$champs = array(
-		'id_evenement_source' => intval($id_evenement_source),
-		'id_article'=>intval($id_article),
-		'statut' => 'prop',
-	);
+	// support pour l'ancien format avec $id_evenement_source en second argument
+	if (is_scalar($set) and intval($set)) {
+		$set = array(
+			'id_evenement_source' => intval($set),
+		);
+	}
+
+	$champs = array();
+	if ($set and is_array($set)) {
+		$champs = $set;
+	}
+	$champs['id_article'] = intval($id_article);
+	if (empty($champs['statut'])) {
+		$champs['statut'] = 'prop';
+	}
 
 	// Envoyer aux plugins
 	$champs = pipeline(
@@ -167,9 +177,9 @@ function agenda_action_revision_evenement_repetitions($id_evenement, $repetition
 
 function agenda_action_update_repetitions($id_evenement, $repetitions) {
 	// evenement source
-	if ($row = sql_fetsel('*', 'spip_evenements', 'id_evenement='.intval($id_evenement))) {
+	if ($row_source = sql_fetsel('*', 'spip_evenements', 'id_evenement='.intval($id_evenement))) {
 		// Si ce n'est pas un événement source, on n'a rien à faire ici
-		if ($row['id_evenement_source'] != 0) {
+		if ($row_source['id_evenement_source'] != 0) {
 			return;
 		}
 
@@ -180,46 +190,51 @@ function agenda_action_update_repetitions($id_evenement, $repetitions) {
 			// black list
 			array('id_evenement', 'id_evenement_source'),
 			// donnees fournies
-			$row
+			$row_source
 		);
 
 		// Savoir si la source était publiée ou pas
-		$publie = ($row['statut'] == 'publie');
+		$publie = ($row_source['statut'] == 'publie');
 
 		// On calcule la durée en secondes de l'événement source pour la reporter telle quelle aux répétitions
-		$date_debut = strtotime($row['date_debut']);
-		$date_fin = strtotime($row['date_fin']);
+		$date_debut = strtotime($row_source['date_debut']);
+		$date_fin = strtotime($row_source['date_fin']);
 		$duree = $date_fin - $date_debut;
 
 		$repetitions_updated = array();
-		// mettre a jour toutes les repetitions deja existantes ou les supprimer si plus lieu
-		$res = sql_select('id_evenement,date_debut', 'spip_evenements', 'id_evenement_source='.intval($id_evenement));
+		// mettre a jour toutes les repetitions *avec le flag modif_synchro_source=1* deja existantes ou les supprimer si il n'y a plus lieu
+		$res = sql_select('id_evenement,date_debut,modif_synchro_source', 'spip_evenements', 'id_evenement_source='.intval($id_evenement));
 		while ($row = sql_fetch($res)) {
 			$date = strtotime(date('Y-m-d', strtotime($row['date_debut'])));
 			if (in_array($date, $repetitions)) {
-				// Cette répétition existe déjà, on la met à jour
+				// Cette répétition existe déjà
 				$repetitions_updated[] = $date;
 
-				// On calcule les nouvelles dates/heures en reportant la durée de la source
-				$update_date_debut = date('Y-m-d', $date).' '.date('H:i:s', $date_debut);
-				$update_date_fin = date('Y-m-d H:i:s', strtotime($update_date_debut)+$duree);
+				// si besoin on la met a jour
+				// cad si le flag modif_synchro_source vaut 1 sur l'evenement source ET destination
+				if ($row_source['modif_synchro_source'] and $row['modif_synchro_source']){
+					// On calcule les nouvelles dates/heures en reportant la durée de la source
+					$update_date_debut = date('Y-m-d', $date) . ' ' . date('H:i:s', $date_debut);
+					$update_date_fin = date('Y-m-d H:i:s', strtotime($update_date_debut)+$duree);
 
-				// Seules les dates sont changées dans les champs de la source
-				// TODO : prendre en charge la mise a jour uniquement si conforme a l'original
-				$c['date_debut'] = $update_date_debut;
-				$c['date_fin'] = $update_date_fin;
-				// mettre a jour l'evenement
-				evenement_modifier(
-					$row['id_evenement'],
-					$c
-				);
+					// Seules les dates sont changées dans les champs de la source
+					$c['date_debut'] = $update_date_debut;
+					$c['date_fin'] = $update_date_fin;
+					// mettre a jour l'evenement
+					evenement_modifier(
+						$row['id_evenement'],
+						$c
+					);
+				}
 			} else {
-				// il est supprime
-				sql_delete('spip_evenements', 'id_evenement='.$row['id_evenement']);
+				// il est supprime *si* modif_synchro_source vaut 1
+				if ($row['modif_synchro_source']) {
+					sql_delete('spip_evenements', 'id_evenement='.intval($row['id_evenement']));
+				}
 			}
 		}
 
-		// regarder les repetitions a ajouter
+		// regarder les repetitions a ajouter qui sont du coup dupliquees depuis la source
 		foreach ($repetitions as $date) {
 			if (!in_array($date, $repetitions_updated)) {
 				// On calcule les dates/heures en reportant la durée de la source
@@ -229,16 +244,10 @@ function agenda_action_update_repetitions($id_evenement, $repetitions) {
 				// Seules les dates sont changées dans les champs de la source
 				$c['date_debut'] = $update_date_debut;
 				$c['date_fin'] = $update_date_fin;
+				$c['id_evenement_source'] = $id_evenement;
 
 				// On crée la nouvelle répétition
-				if ($id_evenement_new = agenda_action_insert_evenement($c['id_article'], $id_evenement)) {
-					// Si c'est bon, on ajoute tous les champs
-					sql_updateq(
-						'spip_evenements',
-						$c,
-						'id_evenement = '.$id_evenement_new
-					);
-
+				if ($id_evenement_new = evenement_inserer($c['id_article'], $c)) {
 					// Pour les créations il ne faut pas oublier de dupliquer les liens
 					// En effet, sinon les documents insérés avant la création (0-id_auteur) ne seront pas dupliqués
 					include_spip('action/editer_liens');
@@ -378,39 +387,4 @@ function evenement_instituer($id_evenement, $c) {
 	}
 
 	return ''; // pas d'erreur
-}
-
-/*
-function agenda_action_supprime_repetitions($supp_evenement){
-	$res = sql_select("id_evenement", "spip_evenements", "id_evenement_source=".intval($supp_evenement));
-	while ($row = sql_fetch($res)){
-		$id_evenement = $row['id_evenement'];
-		sql_delete("spip_evenements", "id_evenement=".intval($id_evenement));
-	}
-}
-*/
-/*
-function agenda_action_supprime_evenement($id_article,$supp_evenement){
-	$id_evenement = sql_getfetsel("id_evenement", "spip_evenements", array(
-		"id_article=" . intval($id_article),
-		"id_evenement=" . intval($supp_evenement)));
-	if (intval($id_evenement) AND $id_evenement == $supp_evenement){
-		sql_delete("spip_evenements", "id_evenement=".intval($id_evenement));
-		agenda_action_supprime_repetitions($id_evenement);
-	}
-	include_spip('inc/invalideur');
-	suivre_invalideur("article/$id_article");
-	$id_evenement = 0;
-	return $id_evenement;
-}*/
-
-
-function agenda_action_insert_evenement($id_article, $id_evenement_source = 0) {
-	return evenement_inserer($id_article, $id_evenement_source);
-}
-function action_evenement_set($id_evenement, $set = null) {
-	return evenement_modifier($id_evenement, $set);
-}
-function agenda_action_instituer_evenement($id_evenement, $c) {
-	return evenement_instituer($id_evenement, $c);
 }
