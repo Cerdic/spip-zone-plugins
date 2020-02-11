@@ -39,9 +39,11 @@ function formulaires_editer_evenement_charger_dist($id_evenement = 'new', $id_ar
 		$valeurs['horaire'] = 'oui';
 	}
 
+	$now = date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
 	if ($valeurs['_saisie_timezone']) {
 		$valeurs['date_debut'] = agenda_tz_date_local_to_tz($valeurs['date_debut'], $valeurs['timezone_affiche']);
 		$valeurs['date_fin'] = agenda_tz_date_local_to_tz($valeurs['date_fin'], $valeurs['timezone_affiche']);
+		$now = agenda_tz_date_local_to_tz($now, $valeurs['timezone_affiche']);
 	}
 
 	// les repetitions
@@ -60,6 +62,13 @@ function formulaires_editer_evenement_charger_dist($id_evenement = 'new', $id_ar
 	// dispatcher date et heure
 	list($valeurs['date_debut'], $valeurs['heure_debut']) = explode(' ', date('d/m/Y H:i', strtotime($valeurs['date_debut'])));
 	list($valeurs['date_fin'], $valeurs['heure_fin']) = explode(' ', date('d/m/Y H:i', strtotime($valeurs['date_fin'])));
+
+	// si ce sont des evenements a la journee, on mets une heure par defaut calee sur l'heure actuelle (dans la timezone cible),
+	// si jamais l'utilisateur veut passer l'evenement en mode horaire
+	if ($valeurs['horaire'] === 'non') {
+		$valeurs['heure_debut'] = date('H:00', strtotime($now) + 1800);
+		$valeurs['heure_fin'] = date('H:00', strtotime($now) +1800 + 3600);
+	}
 
 	// traiter specifiquement l'horaire qui est une checkbox
 	if (_request('date_debut') and !_request('horaire')) {
@@ -139,8 +148,8 @@ function formulaires_editer_evenement_traiter_dist($id_evenement = 'new', $id_ar
 	$date_debut = verifier_corriger_date_saisie('debut', _request('horaire') == 'oui', $erreurs);
 	$date_fin = verifier_corriger_date_saisie('fin', _request('horaire') == 'oui', $erreurs);
 
-	$date_debut = date('Y-m-d H:i:s', $date_debut);
-	$date_fin = date('Y-m-d H:i:s', $date_fin);
+	$date_debut = date(_request('horaire') == 'oui' ? 'Y-m-d H:i:s' : 'Y-m-d 12:00:00', $date_debut);
+	$date_fin = date(_request('horaire') == 'oui' ? 'Y-m-d H:i:s' : 'Y-m-d 12:00:00', $date_fin);
 
 	$offset_repetition = '';
 	if (lire_config('agenda/fuseaux_horaires', 0) and $tz = _request('timezone_affiche')){

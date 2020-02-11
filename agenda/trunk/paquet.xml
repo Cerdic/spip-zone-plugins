@@ -1,11 +1,11 @@
 <paquet
 	prefix="agenda"
 	categorie="date"
-	version="4.0.0"
+	version="4.0.1"
 	etat="test"
 	compatibilite="[3.2.0;3.3.*]"
 	logo="prive/themes/spip/images/evenement-32.png"
-	schema="1.0.0"
+	schema="1.0.1"
 	documentation="https://contrib.spip.net/article2858"
 >
 

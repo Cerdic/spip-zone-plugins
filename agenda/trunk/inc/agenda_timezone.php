@@ -28,10 +28,12 @@ function affdate_debut_fin_timezone($date_debut, $date_fin, $horaire='oui', $tim
 	}
 	$tz_string = '';
 	$h = ($horaire === 'oui' or $horaire === true);
-	if ($h and $timezone and $config_timezone) {
+	if ($timezone and $config_timezone) {
 		$date_debut = agenda_tz_date_local_to_tz($date_debut, $timezone);
 		$date_fin = agenda_tz_date_local_to_tz($date_fin, $timezone);
-		$tz_string = " <i class='tz'>(".agenda_tz_to_string($date_debut, $timezone, $forme).")</i>";
+		if ($h) {
+			$tz_string = " <i class='tz'>(".agenda_tz_to_string($date_debut, $timezone, $forme).")</i>";
+		}
 	}
 
 	$aff = affdate_debut_fin($date_debut, $date_fin, $horaire, $forme) . $tz_string;

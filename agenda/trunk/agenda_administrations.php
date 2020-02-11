@@ -93,9 +93,34 @@ function agenda_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['1.0.0'] = array(
 		array('sql_alter', 'TABLE spip_evenements ADD timezone_affiche varchar(255) NOT NULL DEFAULT \'\''),
 	);
+	$maj['1.0.1'] = array(
+		array('agenda_corrige_heure_evenements_journee'),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
+}
+
+function agenda_corrige_heure_evenements_journee() {
+
+	$res = sql_select('*', 'spip_evenements', 'horaire='.sql_quote('non').' AND date_debut LIKE '.sql_quote('% 00:00:00'));
+	$nb = sql_count($res);
+	spip_log("agenda_corrige_heure_evenements_journee: $nb restants", "maj");
+	while ($row = sql_fetch($res)) {
+
+		$date_debut = date('Y-m-d 12:00:00', strtotime($row['date_debut']));
+		$date_fin = date('Y-m-d 12:00:00', strtotime($row['date_fin']));
+		$set = array(
+			'date_debut' => $date_debut,
+			'date_fin' => $date_fin,
+		);
+		sql_updateq('spip_evenements', $set, "id_evenement=".intval($row['id_evenement']));
+
+		if (time() > _TIME_OUT) {
+			return;
+		}
+	}
+
 }
 
 function agenda_vider_tables($nom_meta_base_version) {
