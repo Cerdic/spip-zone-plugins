@@ -1,7 +1,7 @@
 <paquet
 	prefix="crcn"
 	categorie="divers"
-	version="1.0.0"
+	version="1.0.1"
 	etat="test"
 	compatibilite="[3.0.0;3.3.*]"
 	logo="img/crcn.png"
@@ -9,6 +9,6 @@
 >
 	<nom>CRCN</nom>
 
-	<auteur mail="olivier.gautier@ac-rouen.fr" lien="spip.ac-rouen.fr/?_Olivier-Gautier_">Olivier Gautier</auteur>
+	<auteur mail="olivier.gautier@ac-normandie.fr" lien="spip.ac-rouen.fr/?_Olivier-Gautier_">Olivier Gautier</auteur>
 	<necessite nom="gma" compatibilite="[1.2.9;[" />
 </paquet>

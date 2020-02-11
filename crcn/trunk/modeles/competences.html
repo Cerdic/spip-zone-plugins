@@ -2,7 +2,7 @@
 <BOUCLE_branche_competence(GROUPES_MOTS){titre=Compétences}>
 	<B_presence_competence>
 		<div class="competences"[ style='(#ENV{style})']>
-			<h4 class="h4" [style='(#ENV{style_titre})']>Compétence[(#TOTAL_BOUCLE|>={2}|?{'s',''})] :</h4>
+			<h4 class="h4" [style='(#ENV{style_titre})']>Compétence[(#TOTAL_BOUCLE|>={2}|?{'s numériques',' numérique'})] (CRCN) :</h4>
 			<BOUCLE_presence_competence(MOTS){id_article}{branche_groupe}>
 			</BOUCLE_presence_competence>
 
