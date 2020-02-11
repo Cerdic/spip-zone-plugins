@@ -110,6 +110,11 @@
 				</div>
 			</div>]
 		</div>
+		[(#ENV{modif_synchro_source}|=={0}|oui)
+		<div class="warning">
+			<:agenda:info_evenement_modif_synchro_source_non:>
+		</div>
+		]
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		<p class='boutons'><input type='submit' class='submit noscroll' value='[(#ENV{id_evenement}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' /></p>

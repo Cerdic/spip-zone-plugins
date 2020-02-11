@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirm_suppression_inscription' => 'Voulez-vous vraiment supprimer cette inscription ?',
 	'confirm_suppression_inscription_toutes' => 'Voulez-vous vraiment supprimer toutes les inscriptions ?',
 	'confirm_evenement_modifie_a_des_repetitions' => 'Vous avez modifié cet événement qui a des répétitions :',
-	'confirm_evenement_modifie_est_une_repetition' => 'Vous avez modifié cet événement qui fait partie d\'une série répétitions :',
+	'confirm_evenement_modifie_est_une_repetition' => 'Vous avez modifié cet événement qui fait partie d\'une série de répétitions :',
 	'connexion_necessaire_pour_inscription' => 'Merci de vous connecter pour pouvoir vous inscrire à cet événement.',
 	'creer_evenement' => 'Créer un événement',
 
@@ -98,6 +98,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_evenements_prop' => 'Proposés',
 	'info_evenements_publie' => 'Publiés',
 	'info_evenement_repetition' => 'Cet événement est une répétition',
+	'info_evenement_modif_synchro_source_non' => 'Les modifications de cet événement n\'impacteront pas les autres occurences',
 	'info_evenements_tout' => 'Tous les événements',
 	'info_inscription' => 'Inscription en ligne :',
 	'info_lieu' => 'Lieu :',
