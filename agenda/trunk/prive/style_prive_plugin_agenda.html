@@ -68,7 +68,8 @@ li.item .repetitions li {display:inline;margin:0;padding:0;}
 .evenement #wysiwyg .contenu_places .label {display: inline;font-weight: bold;}
 .evenement #wysiwyg .contenu_places .places {display: inline;}
 .evenement .fiche_objet .contenu_repetitions {padding-#ENV{left}:20px;}
-.evenement #wysiwyg .contenu_repetitions .label, .evenement #wysiwyg .contenu_repetition_de .label {display: inline;color:inherit;}
+.evenement #wysiwyg .contenu_repetitions .label {display: inline;color:inherit;}
+ .evenement #wysiwyg .contenu_repetition_de .label {display: block;color:inherit;}
 .evenement .fiche_objet .contenu_repetitions .repetitions {display: inline;color:#999;}
 
 /* edition d'un evenement */
@@ -91,6 +92,11 @@ li.item .repetitions li {display:inline;margin:0;padding:0;}
 .formulaire_editer_evenement .editer.editer_date label.heure {display:none;}
 .formulaire_editer_evenement .editer.editer_date label {display:inline;float:none;margin:0;}
 
+.formulaire_editer_evenement .editer_repetitions>label {display: inline-block}
+.formulaire_editer_evenement .editer_repetitions>label+button {float:right;}
+.formulaire_editer_evenement .ajouter_repetitions {display: flex;flex-direction: row;}
+.formulaire_editer_evenement #repetitions_picker {order:2;}
+.formulaire_editer_evenement #repetitions_picker+textarea[readonly] {margin-#ENV{right}: 20px;order:1;height: auto}
 .formulaire_editer_evenement .editer_inscription .choix {display:block;}
 .formulaire_editer_evenement .editer_inscription .choix input.text {width:50px;margin-left:1em;/*vertical-align:top;*/}
 

@@ -52,14 +52,14 @@
 					</div>
 				</fieldset>
 			</div>
-			<div class="editer editer_repetitions[ (#ENV**{erreurs}|table_valeur{repetitions}|oui)erreur]">
-				<label for="repetitions"><:agenda:evenement_repetitions:></label>[
-				(#ENV{repetitions}|non)<a href='#' onclick="$(this).hide().next().show('fast');return false;"><:agenda:ajouter_repetition:></a>
-				<div class='ajouter_repetitions none'>][
+			<div class="editer pleine_largeur editer_repetitions[ (#ENV**{erreurs}|table_valeur{repetitions}|oui)erreur]">#SET{show_repet,'1'}
+				<label for="repetitions"><:agenda:evenement_repetitions:></label>[#SET{show_repet,'0'}
+				(#ENV{repetitions}|non)<button onclick="$(this).hide().next().show('fast');return false;"><:agenda:ajouter_repetition:></button>][
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{repetitions})</span>
-				]<div id='repetitions_picker'></div>
-				<textarea name='repetitions' id='repetitions'>#ENV{repetitions}</textarea>[
-				(#ENV{repetitions}|non)</div>]
+				]<div class='ajouter_repetitions'[(#GET{show_repet}|non|) style="display: none;"]>
+					<div id='repetitions_picker'></div>
+					<textarea name='repetitions' id='repetitions'>#ENV{repetitions}</textarea>
+				</div>
 			</div>
 			<div class="editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
 				<label for="descriptif"><:agenda:evenement_descriptif:></label>[

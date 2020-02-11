@@ -5,27 +5,28 @@
 </div>
 <div class="champ contenu_dates">
 <div class='label'><:agenda:info_dates:></div>
-<div dir='#LANG_DIR' class='dates'>[(#DATE_DEBUT|affdate_debut_fin_timezone{#DATE_FIN,#HORAIRE,#TIMEZONE_AFFICHE,'tzshort'})]</div>
+<div dir='#LANG_DIR' class='dates'>[(#DATE_DEBUT|affdate_debut_fin_timezone{#DATE_FIN,#HORAIRE,#TIMEZONE_AFFICHE,'tzshort annee'})]</div>
 </div>
-[(#CONFIG{agenda/fuseaux_horaires,0}|oui)
-<div class="champ contenu_timezone_affiche[ (#TIMEZONE_AFFICHE*|strlen|?{'',vide})]">
-<div class='label'><:agenda:info_timezone_affiche:></div>
-<div dir='#LANG_DIR' class='timezone_affiche'>#TIMEZONE_AFFICHE</div>
-</div>]
 <B_repetitions>
-<div class="champ contenu_repetitions">
+<div class="champ contenu_repetitions info">
 	<div class='label'>[(#GRAND_TOTAL|singulier_ou_pluriel{agenda:une_repetition,agenda:nb_repetitions})]</div>
 	<div dir='#LANG_DIR' class='repetitions'>(<BOUCLE_repetitions(EVENEMENTS){par date_debut}{id_evenement_source=#ID_EVENEMENT}{', '}{statut==.*}>[<a href="[(#ID_EVENEMENT|generer_url_entite{evenement})]">(#DATE_DEBUT|affdate)</a>]</BOUCLE_repetitions>)</div>
 </div>
 </B_repetitions>
 <B_repetition_de>
-<div class="champ contenu_repetition_de">
+<div class="champ contenu_repetition_de info">
 	<div class="label"><:agenda:repetition_de:></div>
 	<BOUCLE_repetition_de(EVENEMENTS){id_evenement=#ID_EVENEMENT_SOURCE} {statut==.*}>
 	[<a href="[(#ID_EVENEMENT|generer_url_entite{evenement})]">#TITRE - (#DATE_DEBUT|affdate)</a>]
 	</BOUCLE_repetition_de>
 </div>
 </B_repetition_de>
+
+[(#CONFIG{agenda/fuseaux_horaires,0}|oui)
+<div class="champ contenu_timezone_affiche[ (#TIMEZONE_AFFICHE*|strlen|?{'',vide})]">
+<div class='label'><:agenda:info_timezone_affiche:></div>
+<div dir='#LANG_DIR' class='timezone_affiche'>#TIMEZONE_AFFICHE</div>
+</div>]
 <div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
 <div class='label'><:info_descriptif:></div>
 <div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>[(#DESCRIPTIF|image_reduire{500,0})]</div>
