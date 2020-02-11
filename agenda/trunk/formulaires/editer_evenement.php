@@ -135,10 +135,47 @@ function formulaires_editer_evenement_verifier_dist($id_evenement = 'new', $id_a
 		}
 	}
 
+	if (!count($erreurs)
+		and is_null(_request('modif_synchro_source'))
+	  and $impact = formulaires_editer_evenement_verifier_modifie_evenements_lies($id_evenement, $id_article)) {
+
+		$erreurs['modif_synchro_source'] = _T('agenda:confirm_evenement_modifie_' . $impact);
+		$erreurs['message_erreur'] = '';
+	}
+
 	#if (!count($erreurs))
 	#	$erreurs['message_erreur'] = 'ok?';
 	return $erreurs;
 }
+
+
+function formulaires_editer_evenement_verifier_modifie_evenements_lies($id_evenement, $id_article) {
+	// c'est une creation : aucun impact
+	if (!intval($id_evenement)) {
+		return false;
+	}
+	$valeurs = formulaires_editer_evenement_charger_dist($id_evenement, $id_article);
+	// n'a pas de repetitions et ce n'est pas une repetitions, donc aucun impact
+	if ($valeurs['id_evenement_source'] == 0 and !$valeurs['repetitions']) {
+		return false;
+	}
+	// on est deja desynchronise des autres repetitions, donc aucun impact
+	if ($valeurs['modif_synchro_source'] == 0) {
+		return false;
+	}
+
+	foreach ($valeurs as $k => $v) {
+		if (!in_array($k, array('repetitions'))
+		  and strpos($k ,'_') !== 0
+			and !is_null($p = _request($k))
+		  and $p != $v) {
+			return ($valeurs['id_evenement_source'] ? 'est_une_repetition' : 'a_des_repetitions');
+		}
+	}
+
+	return false;
+}
+
 
 function formulaires_editer_evenement_traiter_dist($id_evenement = 'new', $id_article = 0, $retour = '', $lier_trad = 0, $config_fonc = 'evenements_edit_config', $row = array(), $hidden = '') {
 	set_request('horaire', _request('horaire') == 'non' ? 'non' : 'oui');

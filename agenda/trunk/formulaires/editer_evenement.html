@@ -52,6 +52,7 @@
 					</div>
 				</fieldset>
 			</div>
+			[(#ENV{id_evenement_source}|non)
 			<div class="editer pleine_largeur editer_repetitions[ (#ENV**{erreurs}|table_valeur{repetitions}|oui)erreur]">#SET{show_repet,'1'}
 				<label for="repetitions"><:agenda:evenement_repetitions:></label>[#SET{show_repet,'0'}
 				(#ENV{repetitions}|non)<button onclick="$(this).hide().next().show('fast');return false;"><:agenda:ajouter_repetition:></button>][
@@ -61,6 +62,10 @@
 					<textarea name='repetitions' id='repetitions'>#ENV{repetitions}</textarea>
 				</div>
 			</div>
+			][(#ENV{id_evenement_source}|oui)
+			<div class="editer pleine_largeur editer_repetitions">
+				<div class="info"><:agenda:info_evenement_repetition:></div>
+			</div>]
 			<div class="editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
 				<label for="descriptif"><:agenda:evenement_descriptif:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
@@ -88,10 +93,26 @@
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse})</span>
 				]<textarea name='adresse' rows='3' id='adresse'>[(#ENV{adresse})]</textarea>
 			</div>
+			[#SET{name,modif_synchro_source}#SET{obli,''}#SET{defaut,'1'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<div class="editer pleine_largeur editer_modif_synchro_source">
+				<div class="warning">
+					(#ENV**{erreurs}|table_valeur{modif_synchro_source})
+					#SET{val,1}
+					<div class="choix">
+						<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}" aria-describedby="#GET{name}_explication" [(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+						<label for="#GET{name}_#GET{val}"><:agenda:label_modif_synchro_source_1:></label>
+					</div>
+					#SET{val,0}
+					<div class="choix">
+						<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}" aria-describedby="#GET{name}_explication" [(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+						<label for="#GET{name}_#GET{val}"><:agenda:label_modif_synchro_source_0:></label>
+					</div>
+				</div>
+			</div>]
 		</div>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
-		<p class='boutons'><input type='submit' class='submit' value='[(#ENV{id_evenement}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' /></p>
+		<p class='boutons'><input type='submit' class='submit noscroll' value='[(#ENV{id_evenement}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' /></p>
 	</div></form>
 	#INCLURE{fond=formulaires/dateur/inc-dateur}
 	]
