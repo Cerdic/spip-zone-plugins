@@ -396,9 +396,13 @@ function cache_repertorier($plugin, $filtres = array()) {
 					$operateur_egalite = false;
 					$valeur = ltrim($_valeur, '!');
 				}
-				if (isset($cache[$_critere])
-				and (($operateur_egalite and ($cache[$_critere] != $valeur))
-					or (!$operateur_egalite and ($cache[$_critere] == $valeur)))) {
+				if (
+					!isset($cache[$_critere])
+					or (
+						isset($cache[$_critere])
+						and (($operateur_egalite and ($cache[$_critere] != $valeur))
+							or (!$operateur_egalite and ($cache[$_critere] == $valeur))))
+				) {
 					$cache_conforme = false;
 					break;
 				}
