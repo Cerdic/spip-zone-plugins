@@ -3,7 +3,7 @@
 	categorie="divers"
 	version="1.2.5"
 	etat="test"
-	compatibilite="[3.0.0;3.2.*]"
+	compatibilite="[3.0.0;3.3.*]"
 	logo="prive/themes/spip/images/objets_disponibilites-64.png"
 	documentation="https://contrib.spip.net/Disponibilites-objets"
 	schema="1.0.1"
@@ -12,7 +12,7 @@
 	<nom>Disponibilités objets</nom>
 	<!-- Gère la disponibilité d&#039;un objet -->
 
-	<auteur lien='https://websimple.be'>Rainer Müller</auteur>
+	<auteur lien='https://web-simple.eu'>Rainer Müller</auteur>
 
 	<licence>GNU/GPL v3</licence>
 
@@ -21,7 +21,7 @@
 
 	<necessite nom="saisies" compatibilite="[3.23.2;]" />
 	<necessite nom="verifier" compatibilite="[1.8.3;]" />
-	<necessite nom="dates_outils" compatibilite="[1.0.11;]" />
+	<necessite nom="dates_outils" compatibilite="[1.0.13;]" />
 
 	<pipeline nom="autoriser" inclure="objets_disponibilites_autorisations.php" />
 
