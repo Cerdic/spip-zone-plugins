@@ -56,9 +56,10 @@ function affdate_debut_fin_timezone($date_debut, $date_fin, $horaire='oui', $tim
  *     ceux supportes par affdate
  *     + ceux supportes par agenda_tz_to_string
  *     + tzonly pour n'afficher que la timezone
+ * @param $tzformat
  * @return string
  */
-function affdate_timezone($date, $timezone, $format) {
+function affdate_timezone($date, $timezone, $format = 'entier', $tzformat='') {
 	static $config_timezone;
 	if (is_null($config_timezone)) {
 		include_spip('inc/config');
@@ -67,9 +68,9 @@ function affdate_timezone($date, $timezone, $format) {
 	$tz_string = '';
 	if ($timezone and $config_timezone){
 		$date = agenda_tz_date_local_to_tz($date, $timezone);
-		$tz_string = agenda_tz_to_string($date, $timezone, $format);
+		$tz_string = agenda_tz_to_string($date, $timezone, "$format $tzformat");
 	}
-	if (stripos($format,'tzonly')!==false) {
+	if (stripos("$format $tzformat",'tzonly')!==false) {
 		return $tz_string;
 	}
 	if ($tz_string) {
@@ -78,6 +79,18 @@ function affdate_timezone($date, $timezone, $format) {
 
 	$aff = affdate($date, $format) . $tz_string;
 	return $aff;
+}
+
+function date_to_timezone($date, $timezone) {
+	static $config_timezone;
+	if (is_null($config_timezone)) {
+		include_spip('inc/config');
+		$config_timezone = lire_config('agenda/fuseaux_horaires',0);
+	}
+	if ($timezone and $config_timezone){
+		$date = agenda_tz_date_local_to_tz($date, $timezone);
+	}
+	return $date;
 }
 
 
