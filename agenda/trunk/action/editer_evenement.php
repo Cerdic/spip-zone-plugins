@@ -292,16 +292,19 @@ function agenda_action_update_repetitions($id_evenement_source, $modif_flag, $se
 				$update_date_fin = date('Y-m-d H:i:s', strtotime($update_date_debut)+$duree);
 
 				// Seules les dates sont changées dans les champs de la source
-				$c['date_debut'] = $update_date_debut;
-				$c['date_fin'] = $update_date_fin;
-				$c['id_evenement_source'] = $id_evenement_source;
+				$set['date_debut'] = $update_date_debut;
+				$set['date_fin'] = $update_date_fin;
+				$set['id_evenement_source'] = $id_evenement_source;
 
 				// On crée la nouvelle répétition
-				if ($id_evenement_new = evenement_inserer($c['id_article'], $c)) {
+				if ($id_evenement_new = evenement_inserer($set['id_article'], $set)) {
 					// Pour les créations il ne faut pas oublier de dupliquer les liens
 					// En effet, sinon les documents insérés avant la création (0-id_auteur) ne seront pas dupliqués
 					include_spip('action/editer_liens');
 					objet_dupliquer_liens('evenement', $id_evenement_source, $id_evenement_new);
+				}
+				else {
+					spip_log("agenda_action_update_repetitions : echec ajout repetition " . json_encode($set), "agenda" . _LOG_ERREUR);
 				}
 			}
 		}
