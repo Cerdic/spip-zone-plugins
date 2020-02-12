@@ -1,22 +1,22 @@
 <paquet
 	prefix="reservation_bank"
 	categorie="outil"
-	version="1.4.2"
+	version="1.4.3"
 	etat="test"
-	compatibilite="[3.0.20;3.2.*]"
+	compatibilite="[3.0.20;3.3.*]"
 	logo="prive/themes/spip/images/reservation_bank-64.png"
 	documentation="https://contrib.spip.net/Reservation-Bank-4877"
 	schema="1.1.0"
 >
 	<nom>Réservations Bank</nom>
 
-	<auteur>Rainer Müller</auteur>
+	<auteur lien='https://web-simple.eu'>Rainer Müller</auteur>
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[2.28.0;]" />
-	<necessite nom="reservation_evenement" compatibilite="[1.27.0;]" />
-	<necessite nom="bank" compatibilite="[3.5.9;]" />
-	<necessite nom="prix" compatibilite="[0.1.15;]" />
+	<necessite nom="saisies" compatibilite="[[3.32.1;]" />
+	<necessite nom="reservation_evenement" compatibilite="[1.30.5;]" />
+	<necessite nom="bank" compatibilite="[3.6.7;]" />
+	<necessite nom="prix" compatibilite="[0.1.18 ;]" />
 
 	<pipeline nom="formulaire_charger" inclure="reservation_bank_pipelines.php" />
 	<pipeline nom="formulaire_verifier" inclure="reservation_bank_pipelines.php" />
