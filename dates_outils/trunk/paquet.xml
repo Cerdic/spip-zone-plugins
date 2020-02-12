@@ -1,9 +1,9 @@
 <paquet
 	prefix="dates_outils"
 	categorie="outil"
-	version="1.0.12"
+	version="1.0.13"
 	etat="test"
-	compatibilite="[3.0.0;3.2.*]"
+	compatibilite="[3.0.0;3.3.*]"
 	logo="prive/themes/spip/images/dates_outils-64.png"
 	documentation="https://github.com/abelass/dates_outils"
 >
@@ -11,7 +11,7 @@
 	<nom>Dates outils</nom>
 	<!-- Des outil pour la gestion des dates -->
 
-	<auteur>Rainer Müller</auteur>
+	<auteur lien='https://web-simple.eu'>Rainer Müller</auteur>
 
 	<licence>GNU/GPL v3</licence>
 
