@@ -3,7 +3,7 @@
  * Fichier gérant l'installation et désinstallation du plugin Réseŕvations Crédits
  *
  * @plugin     Réseŕvations Crédits
- * @copyright  2015-18
+ * @copyright  2015-20
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Reservations_credits\Installation
@@ -19,7 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * - créer la structure SQL,
  * - insérer du pre-contenu,
  * - installer des valeurs de configuration,
- * - mettre à jour la structure SQL 
+ * - mettre à jour la structure SQL
  *
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
@@ -48,7 +48,7 @@ function reservations_credits_upgrade($nom_meta_base_version, $version_cible) {
 			'TABLE spip_reservation_credit_mouvements ADD INDEX `id_reservation` (`id_reservation`)'
 		)
 	);
-	
+
 	$maj['1.1.1'] = array(
 		array(
 			'maj_tables',
@@ -68,11 +68,11 @@ function reservations_credits_upgrade($nom_meta_base_version, $version_cible) {
 
 /**
  * Fonction de désinstallation du plugin Réseŕvations Crédits.
- * 
+ *
  * Vous devez :
  *
  * - nettoyer toutes les données ajoutées par le plugin et son utilisation
- * - supprimer les tables et les champs créés par le plugin. 
+ * - supprimer les tables et les champs créés par le plugin.
  *
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP

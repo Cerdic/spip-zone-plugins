@@ -3,7 +3,7 @@
  * Utilisations de pipelines par Réseŕvations Crédits
  *
  * @plugin     Réseŕvations Crédits
- * @copyright  2015-18
+ * @copyright  2015-20
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Reservations_credits\Pipelines
