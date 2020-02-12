@@ -3,7 +3,7 @@
  * Fonctions utiles au plugin Prix Objets
  *
  * @plugin     Prix Objets
- * @copyright  2012 - 2019
+ * @copyright  2012 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Promotions_commandes\Fonctions
