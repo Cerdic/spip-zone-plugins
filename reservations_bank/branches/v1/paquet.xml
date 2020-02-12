@@ -1,7 +1,7 @@
 <paquet
 	prefix="reservation_bank"
 	categorie="outil"
-	version="1.4.3"
+	version="1.4.4"
 	etat="test"
 	compatibilite="[3.0.20;3.3.*]"
 	logo="prive/themes/spip/images/reservation_bank-64.png"
@@ -13,7 +13,7 @@
 	<auteur lien='https://web-simple.eu'>Rainer Müller</auteur>
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[[3.32.1;]" />
+	<necessite nom="saisies" compatibilite="[3.32.1;]" />
 	<necessite nom="reservation_evenement" compatibilite="[1.30.5;]" />
 	<necessite nom="bank" compatibilite="[3.6.7;]" />
 	<necessite nom="prix" compatibilite="[0.1.18 ;]" />
