@@ -6,14 +6,15 @@
 <BOUCLE_evenements(EVENEMENTS){id_evenement}>
 	[(#ENV{masquer_heure}|oui)#SET{horaire,non}]
 	[(#ENV{masquer_heure}|non)#SET{horaire,#HORAIRE}]
+	#SET{date, #DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#GET{horaire}, #GET{forme}}}
 	[(#ENV{type_affichage,titre_date}|=={titre_date}|oui)
-	#SET{texte,#TITRE|concat{' - ', #DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#GET{horaire}, #GET{forme}}}}
+		#SET{texte,#TITRE|concat{' - ', #GET{date}}}
 	]
 	[(#ENV{type_affichage}|=={titre}|oui)
 		#SET{texte,#TITRE}
 	]
 	[(#ENV{type_affichage}|=={date}|oui)
-		#SET{texte,#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#GET{horaire},#GET{forme}}}
+		#SET{texte,#GET{date}}
 	]
 	[(#CHEMIN{saisies/inc-evenement-texte.html}|oui)
 	#SET{texte,#INCLURE{fond=saisies/inc-evenement-texte,texte-defaut=#GET{texte},env}}
