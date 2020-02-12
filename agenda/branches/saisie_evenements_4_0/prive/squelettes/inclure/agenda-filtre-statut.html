@@ -1,0 +1,12 @@
+<BOUCLE_totalevents(EVENEMENTS){id_evenement?}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}{where?}{statut==.*}{10,1}> </BOUCLE_totalevents>
+<div class="onglets_simple">
+<ul class="onglets-statut-agenda">
+	<li>[(#SELF|parametre_url{statut,''}|lien_ou_expose{<:agenda:info_evenements_tout:>,#ENV{statut}|non})]</li>
+	<BOUCLE_statut(POUR) {tableau #LISTE{publie, prop, poubelle}}
+	><BOUCLE_compte(EVENEMENTS){statut=#VALEUR}{id_evenement?}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}{where?} />[(#TOTAL_BOUCLE|oui)
+	[<li>(#SELF|parametre_url{statut,#VALEUR}|lien_ou_expose{#VAL{agenda:info_evenements_#VALEUR}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{statut}|=={#VALEUR}})</li>]
+	]<//B_compte></BOUCLE_statut>
+</ul>
+<div class="nettoyeur"></div>
+</div>
+</B_totalevents>
