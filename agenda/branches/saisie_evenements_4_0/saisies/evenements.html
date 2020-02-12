@@ -27,9 +27,7 @@
 	[(#ENV{masquer_heure}|oui)#SET{horaire,non}]
 	[(#ENV{masquer_heure}|non)#SET{horaire,oui}]
 	#SET{places_dispo_texte,''}
-	#SET{inscrits,0}
-	<BOUCLE_participants(spip_evenements_participants){id_evenement}{reponse=oui} />#SET{inscrits,#TOTAL_BOUCLE}<//B_participants>
-	#SET{places_dispo,#PLACES|moins{#GET{inscrits}}}
+	#SET{places_dispo,#PLACES|moins{#NB_INSCRITS}}
 
 	[(#ENV{liste_attente}|non)
 		[(#GET{places_dispo}|<{0}|oui)
