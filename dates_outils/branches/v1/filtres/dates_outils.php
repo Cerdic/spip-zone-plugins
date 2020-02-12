@@ -6,7 +6,7 @@
  * Déclares deprecies/obsoletes par le plugin
  *
  * @plugin     Dates outils
- * @copyright  2018 - 2019
+ * @copyright  2018 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL v3
  * @package    SPIP\Dates_outils\Filtres
