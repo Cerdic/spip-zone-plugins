@@ -1,0 +1,32 @@
+#SET{contenus,#ARRAY}
+<BOUCLE_donnes(DATA){source tableau, #ENV{_location_extras_objets}}>
+#SET{contenu,(#VALEUR|objet_location_extras_champs{#ENV{location_objet},#ENV{id_location_objet}})}
+[(#GET{contenu}|table_valeur{0}|table_valeur{options}|table_valeur{data}|oui)
+	#SET{contenus,#GET{contenus}
+		|array_merge{#ARRAY{
+				#VALEUR,#GET{contenu}
+				}
+			}
+		}
+	]
+</BOUCLE_donnes>
+
+<B_extras>
+<div class="fieldset fieldset_extras">
+	<fieldset>
+		<legend>[(#ENV{legende_extras}|sinon{<:objets_location:legende_extras:>})]</legend>
+		<div class="editer-groupe">
+	<BOUCLE_extras(DATA)
+		{source tableau, #ENV{_location_extras_objets}} {si #GET{contenus}|count|>{0}}>
+		#SET{fichier,formulaires/location_extras_#VALEUR}
+		[(#CHEMIN{#GET{fichier}|concat{.html}}|oui){
+			<INCLURE{fond=#GET{fichier},env}/>
+		]
+		[(#CHEMIN{#GET{fichier}|concat{.html}}|non)
+			#GENERER_SAISIES{#GET{contenus}|table_valeur{#VALEUR}}
+		]
+	</BOUCLE_extras>
+		</div>
+	</fieldset>
+</div>
+</B_extras>

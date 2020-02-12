@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_objets_locations_selectionnes>
+	<ul>
+	<BOUCLE_objets_locations_selectionnes(OBJETS_LOCATIONS){id_objets_location IN #GET*{valeur}}
+		{par num reference, reference}{statut?}{tout}>
+		<li class="choix">#REFERENCE (#ID_OBJETS_LOCATION)</li>
+	</BOUCLE_objets_locations_selectionnes>
+	</ul>
+	</B_objets_locations_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_objets_locations_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_objets_location_selectionne(OBJETS_LOCATIONS){id_objets_location=#ENV{valeur}}
+		{par num reference, reference}{statut?}{tout}>
+	  	<p>#REFERENCE (#ID_OBJETS_LOCATION)</p>
+	</BOUCLE_objets_location_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_objets_location_selectionne>
+<//B_test_multiple>
