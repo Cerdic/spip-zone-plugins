@@ -3,8 +3,8 @@
  * Définit les autorisations du plugin Réseŕvations Crédits
  *
  * @plugin     Réseŕvations Crédits
- * @copyright  2015
- * @author     Rainer
+ * @copyright  2015-20
+ * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Reservations_credits\Autorisations
  */
@@ -53,7 +53,7 @@ function autoriser_configurer_reservations_credits_dist($faire, $type, $id, $qui
 **/
 function autoriser_reservationcreditmouvementcreer_menu_dist($faire, $type, $id, $qui, $opt){
 	return autoriser('creer', 'reservation_credit_mouvement', '', $qui, $opt);
-} 
+}
 
 /**
  * Autorisation de créer (reservationcreditmouvement)
@@ -66,7 +66,7 @@ function autoriser_reservationcreditmouvementcreer_menu_dist($faire, $type, $id,
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_reservationcreditmouvement_creer_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo', '1comite')); 
+	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
 /**
@@ -128,7 +128,7 @@ function autoriser_reservationcreditmouvement_supprimer_dist($faire, $type, $id,
 **/
 function autoriser_reservationcredits_menu_dist($faire, $type, $id, $qui, $opt){
 	return true;
-} 
+}
 
 
 /**
@@ -143,7 +143,7 @@ function autoriser_reservationcredits_menu_dist($faire, $type, $id, $qui, $opt){
 **/
 function autoriser_reservationcreditcreer_menu_dist($faire, $type, $id, $qui, $opt){
 	return autoriser('creer', 'reservation_credit', '', $qui, $opt);
-} 
+}
 
 /**
  * Autorisation de créer (reservationcredit)
@@ -156,7 +156,7 @@ function autoriser_reservationcreditcreer_menu_dist($faire, $type, $id, $qui, $o
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_reservationcredit_creer_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo', '1comite')); 
+	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
 /**

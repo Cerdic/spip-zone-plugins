@@ -3,8 +3,8 @@
  * Gestion du formulaire de d'édition de reservation_credit
  *
  * @plugin     Réseŕvations Crédits
- * @copyright  2015
- * @author     Rainer
+ * @copyright  2015-20
+ * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Reservations_credits\Formulaires
  */
