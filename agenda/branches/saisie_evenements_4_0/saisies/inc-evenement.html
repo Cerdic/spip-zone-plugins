@@ -10,6 +10,9 @@
 	[(#ENV{type_affichage}|=={date}|oui)
 		#SET{texte,#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#GET{horaire},#GET{forme}}}
 	]
+	[(#CHEMIN{saisies/inc-evenement-texte.html}|oui)
+	#SET{texte,#INCLURE{fond=saisies/inc-evenement-texte,texte-defaut=#GET{texte},env}}
+	]
 	#SET{texte,#GET{texte}|concat{#ENV{places_dispo_texte}}}
 </BOUCLE_evenements>
 #GET{texte}
