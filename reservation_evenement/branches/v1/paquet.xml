@@ -1,9 +1,9 @@
 <paquet
 	prefix="reservation_evenement"
 	categorie="date"
-	version="1.30.4"
+	version="1.30.5"
 	etat="stable"
-	compatibilite="[3.0.16;3.2.*]"
+	compatibilite="[3.0.16;3.3.*]"
 	logo="prive/themes/spip/images/reservation_evenement-64.png"
 	documentation="https://contrib.spip.net/Reservation-d-evenements-4459"
 	schema="1.29.6"
@@ -12,15 +12,15 @@
 	<nom>Réservation Événements</nom>
 	<auteur lien='https://websimple.be'>Rainer Müller</auteur>
 	<licence>GNU/GPL</licence>
-	<necessite nom="agenda" compatibilite="[3.18.4;]" />
-	<necessite nom="facteur" compatibilite="[3.6.2;]" />
-	<necessite nom="nospam" compatibilite="[1.5.17;]" />
-	<necessite nom="saisies" compatibilite="[2.28.0;]" />
-	<necessite nom="verifier" compatibilite="[1.6.4;]" />
-	<necessite nom="yaml" compatibilite="[1.5.3;]" />
+	<necessite nom="agenda" compatibilite="[3.39.4;]" />
+	<necessite nom="facteur" compatibilite="[3.7.2;]" />
+	<necessite nom="nospam" compatibilite="[2.1.6;]" />
+	<necessite nom="saisies" compatibilite="[3.32.1;]" />
+	<necessite nom="verifier" compatibilite="[1.9.6;]" />
+	<necessite nom="yaml" compatibilite="[1.5.4;]" />
 
-	<utilise nom="declinaisons" compatibilite="[2.0.2;]" />
-	<utilise nom="prix_objets" compatibilite="[2.2.4;]" />
+	<utilise nom="declinaisons" compatibilite="[2.0.5;]" />
+	<utilise nom="prix_objets" compatibilite="[2.4.2;]" />
 	<utilise nom="notifications_archive" compatibilite="[1.1.3;]" />
 
 
