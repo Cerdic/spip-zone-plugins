@@ -1,7 +1,12 @@
-<traduction module="disponibilite_date" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/objets_disponibilites/trunk/lang/" reference="fr">
+<traduction
+	module="disponibilite_date"
+	id="disponibilite_date--objets_disponibilites-f0522"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip-contrib-extensions/objets_disponibilites.git"
+	reference="fr">
 	<langue code="en" url="https://trad.spip.net/tradlang_module/disponibilite_date?lang_cible=en" total="18" traduits="18" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Rainer Müller" lien="https://trad.spip.net/auteur/rainer-muller" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/disponibilite_date?lang_cible=fr" total="18" traduits="18" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/disponibilite_date?lang_cible=fr" total="18" traduits="18" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>

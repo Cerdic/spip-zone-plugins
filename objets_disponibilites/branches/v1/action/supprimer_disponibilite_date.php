@@ -4,7 +4,7 @@
  *
  * @plugin     Disponibilites objets
  * @copyright  2018 - 2020
- * @author     Rainer Müller
+ * @author     Rainer confMüller
  * @licence    GNU/GPL v3
  * @package    SPIP\Objets_disponibilites\Action
  */
