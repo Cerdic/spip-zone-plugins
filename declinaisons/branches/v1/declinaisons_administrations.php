@@ -3,7 +3,7 @@
  * Fichier gérant l'installation et désinstallation du plugin Déclinaisons Prix
  *
  * @plugin     Déclinaisons Prix
- * @copyright  2012 - 2018
+ * @copyright  2012 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Reservation_evenement\Installation
