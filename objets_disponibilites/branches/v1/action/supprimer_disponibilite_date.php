@@ -3,7 +3,7 @@
  * Utilisation de l'action supprimer pour l'objet disponibilite_date
  *
  * @plugin     Disponibilites objets
- * @copyright  2018 - 2019
+ * @copyright  2018 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL v3
  * @package    SPIP\Objets_disponibilites\Action
