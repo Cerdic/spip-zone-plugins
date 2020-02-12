@@ -3,7 +3,7 @@
  * Fichier gérant l'installation et désinstallation du plugin Continents
  *
  * @plugin     Continents
- * @copyright  2013 - 2018
+ * @copyright  2013 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Continents\Installation
