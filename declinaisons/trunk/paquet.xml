@@ -1,9 +1,9 @@
 <paquet
 	prefix="declinaisons"
 	categorie="communication"
-	version="2.0.4"
+	version="2.0.5"
 	etat="test"
-	compatibilite="[3.0.5;3.2.*]"
+	compatibilite="[3.0.5;3.3.*]"
 	logo="prive/themes/spip/images/declinaisons-64.png"
 	documentation="https://contrib.spip.net/Declinaisons-Prix"
 	schema="1.0.2"
@@ -11,12 +11,12 @@
 
 	<nom>Déclinaisons Prix</nom>
 
-	<auteur lien='https://websimple.be'>Rainer Müller</auteur>
+	<auteur lien='https://web-simple.eu'>Rainer Müller</auteur>
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[3.23.2;]" />
-	<necessite nom="prix_objets" compatibilite="[2.0.0;]" />
+	<necessite nom="saisies" compatibilite="[3.32.1;]" />
+	<necessite nom="prix_objets" compatibilite="[2.4.2;]" />
 	<utilise nom="shop" compatibilite="[1.1.0;]" />
 
 	<pipeline nom="autoriser" inclure="declinaisons_autorisations.php" />
