@@ -3,7 +3,7 @@
  * Fichier gérant les importations en base de donnée.
  *
  * @plugin     Continents
- * @copyright  2013 - 2018
+ * @copyright  2013 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Continents\Base
