@@ -3,7 +3,7 @@
  * Fonctions utiles au plugin Réservation Événements
  *
  * @plugin     Réservation Événements
- * @copyright  2013 - 2019
+ * @copyright  2013 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Reservation_evenement\Fonctions

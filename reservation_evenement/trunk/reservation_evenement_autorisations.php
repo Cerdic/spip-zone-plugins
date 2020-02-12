@@ -3,7 +3,7 @@
  * Définit les autorisations du plugin Réservation Événements
  *
  * @plugin     Réservation Événements
- * @copyright  2013 - 2019
+ * @copyright  2013 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Reservation_evenement\Autorisations
@@ -51,7 +51,7 @@ function autoriser_configurer_reservation_evenement_dist($faire, $type, $id, $qu
 **/
 function autoriser_reservations_menu_dist($faire, $type, $id, $qui, $opt){
 	return true;
-} 
+}
 
 
 /**
@@ -65,7 +65,7 @@ function autoriser_reservations_menu_dist($faire, $type, $id, $qui, $opt){
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_reservation_creer_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo', '1comite')); 
+	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
 /**
@@ -95,7 +95,7 @@ function autoriser_reservation_voir_dist($faire, $type, $id, $qui, $opt) {
 function autoriser_reservation_modifier_dist($faire, $type, $id, $qui, $opt) {
     if(_request('exec'))return in_array($qui['statut'], array('0minirezo', '1comite'));
     else return true;
-	
+
 }
 
 /**
