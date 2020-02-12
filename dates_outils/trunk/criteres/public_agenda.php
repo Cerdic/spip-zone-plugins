@@ -4,7 +4,7 @@
  * Tirées de agenda/public/agenda.php.
  *
  * @plugin     Dates outils
- * @copyright  2018 - 2019
+ * @copyright  2018 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL v3
  * @package    SPIP\Dates_outils\Criteres
