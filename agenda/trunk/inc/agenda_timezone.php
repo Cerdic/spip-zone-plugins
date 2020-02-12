@@ -59,7 +59,7 @@ function affdate_debut_fin_timezone($date_debut, $date_fin, $horaire='oui', $tim
  * @param $tzformat
  * @return string
  */
-function affdate_timezone($date, $timezone, $format = 'entier', $tzformat='') {
+function affdate_timezone($date, $timezone, $format = 'entier', $tzformat='tznone') {
 	static $config_timezone;
 	if (is_null($config_timezone)) {
 		include_spip('inc/config');
