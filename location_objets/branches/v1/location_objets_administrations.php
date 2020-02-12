@@ -3,7 +3,7 @@
  * Fichier gérant l'installation et désinstallation du plugin Location d&#039;objets
  *
  * @plugin     Location d&#039;objets
- * @copyright  2018 - 2019
+ * @copyright  2018 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL v3
  * @package    SPIP\Location_objets\Installation

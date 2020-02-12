@@ -3,7 +3,7 @@
  * Utilisation de l'action supprimer pour l'objet objets_location
  *
  * @plugin     Location d&#039;objets
- * @copyright  2018 - 2019
+ * @copyright  2018 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL v3
  * @package    SPIP\Location_objets\Action
