@@ -3,7 +3,7 @@
  * Déclarations relatives à la base de données.
  *
  * @plugin     Déclinaisons Prix
- * @copyright  2012 - 2018
+ * @copyright  2012 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Promotions_commandes\Vase
