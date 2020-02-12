@@ -1,9 +1,9 @@
 <paquet
 	prefix="location_objets"
 	categorie="divers"
-	version="1.5.6"
+	version="1.5.7"
 	etat="test"
-	compatibilite="[3.0.0;3.2.*]"
+	compatibilite="[3.0.0;3.3.*]"
 	logo="prive/themes/spip/images/location_objets-64.png"
 	documentation="https://contrib.spip.net/Location-d-objets"
 	schema="1.2.0"
@@ -22,13 +22,13 @@
 	<traduire module="objets_locations_detail" reference="fr" gestionnaire="salvatore" />
 
 
-	<necessite nom="saisies" compatibilite="[3.23.2;]" />
-	<necessite nom="verifier" compatibilite="[1.8.3;]" />
-	<necessite nom="prix_objets" compatibilite="[2.3.2;]" />
-	<necessite nom="objets_disponibilites" compatibilite="[1.2.1;]" />
-	<necessite nom="facteur" compatibilite="[3.6.4;]" />
-	<necessite nom="dates_outils" compatibilite="[1.0.10;]" />
-	<necessite nom="nospam" compatibilite="[1.6.0;]" />
+	<necessite nom="saisies" compatibilite="[3.32.1;]" />
+	<necessite nom="verifier" compatibilite="[1.9.6;]" />
+	<necessite nom="prix_objets" compatibilite="[2.4.2;]" />
+	<necessite nom="objets_disponibilites" compatibilite="[1.2.5;]" />
+	<necessite nom="facteur" compatibilite="[3.7.2;]" />
+	<necessite nom="dates_outils" compatibilite="[1.0.13;]" />
+	<necessite nom="nospam" compatibilite="[1.6.3;]" />
 
 	<!-- Déclaration de pipelines-->
 	<pipeline nom="location_prix_objet" action='' />
