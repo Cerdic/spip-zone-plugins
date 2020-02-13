@@ -2,7 +2,8 @@
 
 	Présentation résumée d'un abonnement en cours de commande.
 
-	On prend en priorité la commande d'abonnement en session, sinon celle en cours.
+	Prévu pour être inclus dans un tunnel de commande.
+	On prend en priorité la commande en cours, sinon la commande d'abonnement en session.
 
 	On affiche les informations suivantes :
 	- Logo et titre de l'offre
@@ -16,22 +17,17 @@
 	            logo | descriptif
 
 ]
-[(#REM) On prend en priorité la commande d'abonnement en session ]
-<BOUCLE_commande_session(CONDITION) {si #SESSION{commande_abonnement}}>
-#SET{commande, #ARRAY{
-	id_abonnements_offre, #SESSION{commande_abonnement/id_abonnements_offre},
-	prix,                 #SESSION{commande_abonnement/montant},
-	renouvellement,       #SESSION{commande_abonnement/renouvellement_auto},
-}}
-</BOUCLE_commande_session>
-
-[(#REM) Sinon la commande en cours ]
-<BOUCLE_commande_encours(COMMANDES commandes_details)
-	{id_auteur = #SESSION{id_auteur}}
-	{statut = encours}
+#CACHE{0}
+[(#REM)
+	On prend en priorité la commande en cours
+	nb : boucler sur les détails pour éviter les jointures fortuites sur id_auteur
+]
+<BOUCLE_commande_encours(COMMANDES_DETAILS commandes)
+	{commandes.id_auteur = #SESSION{id_auteur}}
+	{commandes.statut = encours}
 	{objet = abonnements_offre}
+	{!par commandes.date}
 	{0,1}
-	{!par date}
 >
 #SET{commande, #ARRAY{
 	id_abonnements_offre, #ID_OBJET,
@@ -39,9 +35,17 @@
 	reference,            #REFERENCE,
 	periode,              #ECHEANCES_TYPE|replace{annee,an},
 	renouvellement,       #ECHEANCES_TYPE|?{on},
+	id_commande,          #ID_COMMANDE,
 }}
 </BOUCLE_commande_encours>
-<//B_commande_session>
+
+[(#REM) Sinon on prend la commande d'abonnement en session ]
+#SET{commande, #ARRAY{
+	id_abonnements_offre, #SESSION{commande_abonnement/id_abonnements_offre},
+	prix,                 #SESSION{commande_abonnement/montant},
+	renouvellement,       #SESSION{commande_abonnement/renouvellement_auto},
+}}
+<//B_commande_encours>
 
 [(#REM) Pour aller plus loin il faut donc une commande ]
 <BOUCLE_is_commande(CONDITION) {si #GET{commande}}>
