@@ -14,11 +14,17 @@
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
 				]<input type='text' class='text' name='titre' id='titre' value="#ENV{titre}" />
 			</div>
+			[(#ENV{id_evenement_source}|non)
 			<div class='editer editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]'>
 				<label for="id_parent"><:agenda:evenement_article:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>
 				]<INCLURE{fond=formulaires/selecteur/articles}{selected=#ENV{parents_id}}{id_article=#ENV{id_parent}}{name=parents_id}{select=1}{rubriques=0}>
-			</div>
+			</div>]
+			[(#ENV{id_evenement_source}|oui)
+			<div class="editer editer_parent_disabled">
+				<label for="id_parent"><:agenda:evenement_article:></label>
+				<input id="id_parent" class='text' type="text" disabled="disabled" value="[(#INFO_TITRE{article, #ENV{id_parent}}|attribut_html)]">
+			</div>]
 			<div class='editer editer_date fieldset'>
 				<fieldset>
 					<legend><:agenda:evenement_date:></legend>
@@ -97,13 +103,13 @@
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		[(#ENV{modif_synchro_source}|=={0}|oui)
-		<div class="warning">
+		<div class="notice">
 			<:agenda:info_evenement_modif_synchro_source_non:>
 		</div>][
 		<div class="editer-groupe">
 			#SET{name,modif_synchro_source}#SET{obli,''}#SET{defaut,'1'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<div class="editer pleine_largeur editer_modif_synchro_source">
-				<div class="warning">
+				<div class="notice">
 					(#ENV**{erreurs}|table_valeur{modif_synchro_source})
 					#SET{val,1}
 					<div class="choix">
