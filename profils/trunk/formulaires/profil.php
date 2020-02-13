@@ -161,7 +161,34 @@ function formulaires_profil_charger_dist($id_auteur = 'new', $id_ou_identifiant_
  *     Tableau des erreurs
  */
 function formulaires_profil_verifier_dist($id_auteur = 'new', $id_ou_identifiant_profil = '', $retour = '', $options=array()) {
+	include_spip('inc/config');
 	$erreurs = array();
+	$id_auteur = intval($id_auteur);
+	
+	// Si on a interdit d'avoir plusieurs fois les mêmes emails ET qu'on édite un compte existant
+	if (lire_config('profils/email_unique') and $id_auteur > 0) {
+		// Récupérer les objets liés au profil utilisateur
+		extract(profils_chercher_ids_profil($id_auteur, $id_ou_identifiant_profil));
+		
+		// On cherche le bon profil
+		$id_ou_identifiant_profil = profils_selectionner_profil($id_ou_identifiant_profil, $id_auteur);
+		if ($profil = profils_recuperer_profil($id_ou_identifiant_profil) and $config = $profil['config']) {
+			// Email principal
+			if ($champ_email_principal = profils_chercher_champ_email_principal($config) and is_array($champ_email_principal)) {
+				$champ = array_shift($champ_email_principal);
+				$email_principal = _request($champ);
+				foreach ($champ_email_principal as $cle) {
+					$email_principal = $email_principal[$cle];
+					$champ .= "[$cle]";
+				}
+			}
+			
+			// Si l'email existe déjà dans un autre compte, on s'arrête
+			if ($sql = sql_getfetsel('id_auteur', 'spip_auteurs', array('id_auteur != '.$id_auteur, 'email = '.sql_quote($email_principal)))) {
+				$erreurs[$champ] = _T('profils:erreur_email_unique');
+			}
+		}
+	}
 	
 	return $erreurs;
 }
@@ -190,6 +217,7 @@ function formulaires_profil_traiter_dist($id_auteur = 'new', $id_ou_identifiant_
 	if ($retour) {
 		refuser_traiter_formulaire_ajax();
 	}
+	include_spip('inc/config');
 	$retours = array();
 	$champs_auteur = _request('auteur');
 	$champs_organisation = _request('organisation');
@@ -252,15 +280,17 @@ function formulaires_profil_traiter_dist($id_auteur = 'new', $id_ou_identifiant_
 			}
 			// Sinon c'est qu'une personne crée un profil pour une autre, donc édition classique
 			else {
-				// MAIS AVANT on cherche si cette personne existe déjà, identifiée par son email ou son nom et avec le même profil
+				// MAIS AVANT on cherche si cette personne existe déjà, identifiée par son email ou son nom en fallback
+				// par défaut on accepte qu'il y ait des comptes avec le même email si c'est un profil différent
+				// si l'option email_unique est cochée, alors même si c'est un profil différent, on va mettre à jour/écraser les informations liées à ce compte
 				if (
 					(
 						$email_principal
 						and $auteur = sql_fetsel(
 							'id_auteur',
 							'spip_auteurs',
-							// même email et même profil
-							array('email='.sql_quote($email_principal), 'id_profil='.$profil['id_profil'])
+							// même email et possiblement même profil
+							array('email='.sql_quote($email_principal), lire_config('profils/email_unique') ? '1=1' : 'id_profil='.$profil['id_profil'])
 						)
 					)
 					or (
@@ -269,8 +299,8 @@ function formulaires_profil_traiter_dist($id_auteur = 'new', $id_ou_identifiant_
 						and $auteur = sql_fetsel(
 							'id_auteur',
 							'spip_auteurs',
-							// même nom exactement et même profil et email VIDE
-							array('nom='.sql_quote($nom_principal), 'email=""', 'id_profil='.$profil['id_profil'])
+							// même nom exactement et possiblement même profil et email VIDE
+							array('nom='.sql_quote($nom_principal), 'email=""', lire_config('profils/email_unique') ? '1=1' : 'id_profil='.$profil['id_profil'])
 						)
 					)
 				) {

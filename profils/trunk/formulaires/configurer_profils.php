@@ -14,6 +14,16 @@ function formulaires_configurer_profils_saisies_dist() {
 				'defaut' => lire_config('profils/id_profil_defaut'),
 			),
 		),
+		array(
+			'saisie' => 'case',
+			'options' => array(
+				'nom' => 'email_unique',
+				'label_case' => _T('profils:configurer_email_unique_label_case'),
+				'explication' => _T('profils:configurer_email_unique_explication'),
+				'conteneur_class' => 'pleine_largeur',
+				'defaut' => lire_config('profils/email_unique'),
+			),
+		),
 	);
 	
 	return $saisies;
