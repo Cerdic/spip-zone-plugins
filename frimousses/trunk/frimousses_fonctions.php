@@ -277,7 +277,7 @@ function frimousses_porte_plume_barre_pre_charger($barres){
  */
 function frimousses_porte_plume_lien_classe_vers_icone($flux){
 	$fimousse_img= find_in_path('img/frimousses-72.png');
-	$svg = find_in_path("img/frimousses.svg");
+	$svg = find_in_path("img/frimousses-xx.svg");
 	$svg = file_get_contents($svg);
 	$svg = base64_encode($svg);
 	$outils_frimousses["outil_frimousses"] = array($fimousse_img, "0;background-image:url('data:image/svg+xml;base64,{$svg}');background-size:contain;margin:-1px;width:18px!important;height:18px!important;");
