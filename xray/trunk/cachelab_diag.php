@@ -1,7 +1,6 @@
-<h3>Essais "manuels" de cachelab</h3>
-<p><b>Action ciblée sur le cache</b> : cette page permet d'essayer cachelab "à la main". Ç'a été utile pendant la mise au point de cachelab.<br>
-Les arguments supplémentaires de l'url spécifient quelle action doit être appliquée sur quels caches.<br>
-Ci après, les valeurs en gras sont les valeurs par défaut.
+<h1>Essayer cachelab_cibler à la main</h1>
+<p>Les arguments supplémentaires de l'url spécifient quelle action doit être appliquée sur quels caches.<br>
+	En gras : la valeur par défaut.</p>
 <small><ul>
 <li>action : del, mark, pass, <b>list</b></li>
 <li>chemin : liste de morceaux de chemins séparés par | , ou expression régulière si methode=regexp</li>
@@ -10,6 +9,7 @@ Ci après, les valeurs en gras sont les valeurs par défaut.
 <li>objet : un type d'objet (article, breve, etc) ou XRAY_OBJET_SPECIAL si non spécifié</li>
 <li>cle_objet : clé primaire (si différente de 'id_'+objet)</li>
 <li>id_article, id_breve, etc selon objet</li>
+<li>oubien : oui ou ''(<b>vide</b>) -> teste la condition « chemin matche 'document' » OU/OR celle définie par les autres arguments d'url (et « chemin matche 'document' » s'il n'y a pas darguments d'url décrivant une condition à part 'oubien')</li>
 </ul></small>
 </p>
 
@@ -69,6 +69,17 @@ if ($cle_objet and !$id_objet)
 	$cle_objet='';
 
 $conditions = array('session'=>$session, 'chemin'=>$chemin, 'cle_objet'=>$cle_objet, 'id_objet'=>$id_objet, 'contexte'=>$contexte);
+if (isset ($_GET['ou']) and $_GET['ou']) {
+	if (!$session and !$chemin and !$cle_objet and !$contexte) {
+		$conditions = ['chemin'=>'document'];
+	}
+	$conditions = [
+		'ou' => [   $conditions,
+					['chemin' => 'liste']
+				]
+	];
+}
+
 $options = array('list'=>true, 'methode_chemin'=>$cachelab_methode_chemin, 'partie_chemin'=>$cachelab_partie_chemin);
 
 echo "<pre>"
@@ -124,4 +135,3 @@ if (count($l_cible)) {
 }
 else
 	echo "Pas de cache cible<br>";
-))
