@@ -326,6 +326,7 @@ function evenement_instituer($id_evenement, $c) {
 	$row = sql_fetsel('id_article, statut', 'spip_evenements', 'id_evenement='.intval($id_evenement));
 	$id_parent  = $id_parent_ancien = $row['id_article'];
 	$statut = $statut_ancien = $row['statut'];
+	$propager_statut_toutes_repetitions = false;
 
 	$champs = array();
 
@@ -360,11 +361,13 @@ function evenement_instituer($id_evenement, $c) {
 			case 'poubelle':
 				// si article a la poubelle, evenement aussi
 				$champs['statut'] = $statut = 'poubelle';
+				$propager_statut_toutes_repetitions = true;
 				break;
 			default:
 				// pas de publie ni 0 si article pas publie
 				if (in_array($statut, array('publie','0'))) {
 					$champs['statut'] = $statut = 'prop';
+					$propager_statut_toutes_repetitions = true;
 				}
 				break;
 		}
@@ -374,6 +377,7 @@ function evenement_instituer($id_evenement, $c) {
 	// on met en propose
 	if ($statut=='0') {
 		$champs['statut'] = $statut = 'prop';
+		$propager_statut_toutes_repetitions = true;
 	}
 
 	if (isset($c['statut'])
@@ -407,10 +411,19 @@ function evenement_instituer($id_evenement, $c) {
 		return;
 	}
 
-	// Envoyer les modifs sur l'evenement et toutes ses repetitons
-	$ids = array_map('reset', sql_allfetsel('id_evenement', 'spip_evenements', 'id_evenement_source='.intval($id_evenement)));
+	// Envoyer les modifs sur l'evenement et toutes ses repetitons synchro
+	$ids = sql_allfetsel('id_evenement', 'spip_evenements', 'modif_synchro_source=1 and id_evenement_source='.intval($id_evenement));
+	$ids = array_column($ids, 'id_evenement');
 	$ids[] = intval($id_evenement);
 	sql_updateq('spip_evenements', $champs, sql_in('id_evenement', $ids));
+
+	// et les eventuelles propagations aux repetitions non synchro
+	if (!empty($champs['id_article'])) {
+		sql_updateq('spip_evenements', ['id_article' => $champs['id_article']], 'modif_synchro_source=0 and id_evenement_source='.intval($id_evenement));
+	}
+	if (!empty($champs['statut']) and $propager_statut_toutes_repetitions) {
+		sql_updateq('spip_evenements', ['statut' => $champs['statut']], 'modif_synchro_source=0 and id_evenement_source='.intval($id_evenement));
+	}
 
 	// Invalider les caches
 	include_spip('inc/invalideur');

@@ -180,32 +180,38 @@ function agenda_post_edition($flux) {
 		and $statut != $statut_ancien
 		and lire_config('agenda/synchro_statut', 1)) {
 		$set = array();
-		// les evenements principaux, associes a cet article
-		$where = array('id_article='.intval($id_article),'id_evenement_source=0');
+		// les evenements de cet article
+		$where = array('id_article='.intval($id_article));
 		switch ($statut) {
 			case 'poubelle':
 				// on passe aussi tous les evenements associes a la poubelle, sans distinction
 				$set['statut'] = 'poubelle';
 				break;
 			case 'publie':
-				// on passe aussi tous les evenements prop en publie
+				// on passe aussi tous les evenements principaux prop en publie
+				// (sera repercute sur les repetitions synchro automatiquement)
 				$set['statut'] = 'publie';
+				$where[] = "id_evenement_source=0";
 				$where[] = "statut='prop'";
 				break;
 			default:
 				if ($statut_ancien=='publie') {
-					// on depublie aussi tous les evenements publie
+					// on depublie aussi tous les evenements source publie
 					$set['statut'] = 'prop';
+					$where[] = "id_evenement_source=0";
 					$where[] = "statut='publie'";
 				}
 				break;
 		}
+
 		if (count($set)) {
 			include_spip('action/editer_evenement');
 			$res = sql_select('id_evenement', 'spip_evenements', $where);
 			// et on applique a tous les evenements lies a l'article
 			while ($row = sql_fetch($res)) {
+				autoriser_exception('instituer', 'evenement', $row['id_evenement']);
 				evenement_modifier($row['id_evenement'], $set);
+				autoriser_exception('instituer', 'evenement', $row['id_evenement'], false);
 			}
 		}
 	}

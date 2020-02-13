@@ -3,7 +3,13 @@
 #SET{texte_objet,#VAL{evenement}|objet_info{texte_objet}|_T}
 <div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_EVENEMENT</p></div>
 
-[(#FORMULAIRE_INSTITUER_OBJET{evenement,#ID_EVENEMENT})]
+[(#FORMULAIRE_INSTITUER_OBJET{evenement,#ID_EVENEMENT,'',#ID_EVENEMENT_SOURCE|non|ou{#MODIF_SYNCHRO_SOURCE|non}})]
+
+[(#ID_EVENEMENT_SOURCE|et{#MODIF_SYNCHRO_SOURCE})
+	<div class="center">
+		[(#BOUTON_ACTION{<:agenda:bouton_modifier_repetition:>,#URL_ACTION_AUTEUR{separer_evenement_repetition,#ID_EVENEMENT,#SELF}})]
+	</div>
+]
 
 [(#REM)
 

@@ -103,18 +103,28 @@ function autoriser_evenement_modifier_dist($faire, $quoi, $id, $qui, $options) {
  * @return bool
  */
 function autoriser_evenement_instituer_dist($faire, $quoi, $id, $qui, $options) {
+	$evenement = sql_fetsel('*', 'spip_evenements', 'id_evenement='.intval($id));
+	if (!$evenement) {
+		return false;
+	}
+	// on ne modifie pas independamment le statut d'un evenement repetition qui reste synchro sur l'evenement source
+	if ($evenement['id_evenement_source']!=0
+		and $evenement['modif_synchro_source']) {
+		return false;
+	}
 	if (!isset($options['id_article']) or !$id_article=$options['id_article']) {
-		$id_article = sql_getfetsel('id_article', 'spip_evenements', 'id_evenement='.intval($id));
+		$id_article = $evenement['id_article'];
 	}
 	if (!$id_article) {
 		return false;
 	}
-	$statut = sql_getfetsel('statut', 'spip_articles', 'id_article='.intval($id_article));
-	// interdit de publier un evenement sur un article non publie
-	if ($statut!=='publie'
-		and isset($options['statut'])
-		and $options['statut']=='publie') {
-		return false;
+	if (isset($options['statut'])) {
+		$statut = sql_getfetsel('statut', 'spip_articles', 'id_article='.intval($id_article));
+		// interdit de publier un evenement sur un article non publie
+		if ($statut!=='publie'
+			and $options['statut']=='publie') {
+			return false;
+		}
 	}
 	$options['id_article'] = $id_article;
 	return autoriser('modifier', 'evenement', $id, $qui, $options);
