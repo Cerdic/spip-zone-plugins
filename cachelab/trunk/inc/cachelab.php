@@ -333,7 +333,12 @@ global $Memoization;
 		spip_log($msg, 'cachelab_chrono.'._LOG_INFO);
 	}
 	if (defined('LOG_CACHELAB_SLOW') and ($stats['chrono']  > LOG_CACHELAB_SLOW)) {
-		spip_log($msg, 'cachelab_slow.'._LOG_INFO_IMPORTANTE);
+		if (function_exists ('debug_log')) {
+			debug_log ($msg, 'cachelab_slow', true);
+		}
+		else {
+			spip_log ($msg, 'cachelab_slow.' . _LOG_INFO_IMPORTANTE);
+		}
 	}
 	if (($action=='del') and defined('LOG_CACHELAB_TOOMANY_DEL') and ($stats['nb_cible']  > LOG_CACHELAB_TOOMANY_DEL)) {
 		if (function_exists ('debug_log')) {
