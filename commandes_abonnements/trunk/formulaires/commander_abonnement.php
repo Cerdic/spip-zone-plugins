@@ -65,6 +65,7 @@ function formulaires_commander_abonnement_verifier_dist($retour = ''){
 }
 
 function formulaires_commander_abonnement_traiter_dist($retour = '') {
+	include_spip('inc/session');
 	$retours = array(
 		'redirect' => $retour,
 	);

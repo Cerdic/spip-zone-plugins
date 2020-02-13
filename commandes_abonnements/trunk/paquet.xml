@@ -1,7 +1,7 @@
 <paquet
 	prefix="commandes_abonnements"
 	categorie="divers"
-	version="1.2.2"
+	version="1.2.3"
 	schema="1.0.0"
 	etat="dev"
 	compatibilite="[3.2.0;3.2.*]"
