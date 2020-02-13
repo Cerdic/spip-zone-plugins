@@ -49,6 +49,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// J
 	'job_desactivation' => 'Désactivation de l’abonnement @id@',
 
+	// L
+	'label_date_a_partir' => 'À partir du',
+	'label_date_depuis' => 'Depuis le',
+	'label_dates' => 'Dates',
+	'label_duree' => 'Durée',
+	'label_montant' => 'Montant',
+	'label_statut' => 'Statut',
+
 	// N
 	'notification_echeance_chapo' => '<p>Bonjour @nom@,</p>',
 	'notification_echeance_corps' => '<p>Bonjour @nom@,</p>

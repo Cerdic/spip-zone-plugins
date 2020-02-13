@@ -63,6 +63,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_jours_avant' => '@nb@ jours avant',
 	'info_nb_mois_apres' => '@nb@ mois après',
 	'info_nb_mois_avant' => '@nb@ mois avant',
+	'info_1_an' => '1 an',
+	'info_1_heure' => '1 heure',
+	'info_1_jour' => '1 jour',
+	'info_1_mois' => '1 mois',
+	'info_nb_ans' => '@nb@ ans',
+	'info_nb_heures' => '@nb@ heures',
+	'info_nb_jours' => '@nb@ jours',
+	'info_nb_mois' => '@nb@ mois',
 
 	// M
 	'message_notifier_ok' => 'Les notifications ont bien été envoyées.',
