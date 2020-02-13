@@ -71,17 +71,69 @@ function formulaires_commander_abonnement_traiter_dist($retour = '') {
 	);
 	$id_abonnements_offre = _request('id_abonnements_offre');
 	$montant = _request('montant');
-	$renouvellement_auto = sql_getfetsel('renouvellement_auto', 'spip_abonnements_offres', 'id_abonnements_offre = '.$id_abonnements_offre);
-	
-	// On va enregistrer en session les infos nécessaires à la commande
-	// elle sera créée quand on aura un utilisateur sous la main et qu'on sera sûr d'avoir ses infos à jour
-	$commande_abonnement = array(
-		'id_abonnements_offre' => $id_abonnements_offre,
-		'montant' => $montant,
-		'renouvellement_auto' => $renouvellement_auto,
-	);
-	
-	session_set('commande_abonnement', $commande_abonnement);
+	$offre = sql_fetsel('*', 'spip_abonnements_offres', 'id_abonnements_offre ='.$id_abonnements_offre);
+	$renouvellement_auto = $offre['renouvellement_auto'];
+
+	// 1) Soit il y a déjà une commande d'abonnement en cours,
+	// on la met à jour avec l'offre sélectionnée
+	if ($detail = sql_fetsel(
+		'd.*',
+		'spip_commandes_details AS d INNER JOIN spip_commandes AS c ON c.id_commande=d.id_commande',
+		array(
+			'd.objet=' . sql_quote('abonnements_offre'),
+			'c.statut=' . sql_quote('encours'),
+			'c.id_auteur=' . intval(session_get('id_auteur')),
+		)
+	)) {
+		$montant_ht = $montant;
+		$echeances = array();
+		$periodicite = '';
+
+		// Si on trouve une taxe, on regénère un montant HT
+		// (car comme le montant peut être personnalisé, ce qu'on a c'est toujours le TTC)
+		if ($taxe = floatval($offre['taxe'])) {
+			$montant_ht = round($montant * (1 / (1 + $taxe)), 2);
+		}
+
+		// Échéances avec les deux seuls cas qu'on sait gérer pour l'instant
+		if ($renouvellement_auto) {
+			if ($offre['periode'] == 'mois' and $offre['duree'] == 1) {
+				$periodicite = 'mois';
+			} elseif ($offre['periode'] == 'mois' and $offre['duree'] == 12) {
+				$periodicite = 'annee';
+			}
+			$echeances = array(
+				array('montant_ht' => $montant_ht, 'montant' => $montant),
+			);
+		}
+
+		$set_detail = array(
+			'descriptif'       => $offre['titre'],
+			'id_objet'         => $id_abonnements_offre,
+			'prix_unitaire_ht' => $montant_ht,
+			'taxe'             => $taxe,
+		);
+		$set_commande = array(
+			'echeances_type' => $periodicite,
+			'echeances'      => $echeances,
+		);
+		sql_updateq('spip_commandes', $set_commande, 'id_commande='.intval($detail['id_commande']));
+		sql_updateq('spip_commandes_details', $set_detail, 'id_commandes_detail='.intval($detail['id_commandes_detail']));
+
+		// Puis juste au cas-où, on supprime la session éventuelle
+		session_set('commande_abonnement', null);
+
+	// 2) Soit pas de commande, et on enregistre en session les infos nécessaires,
+	// elle sera créée quand on aura un utilisateur sous la main
+	// et qu'on sera sûr d'avoir ses infos à jour
+	} else {
+		$commande_abonnement = array(
+			'id_abonnements_offre' => $id_abonnements_offre,
+			'montant' => $montant,
+			'renouvellement_auto' => $renouvellement_auto,
+		);
+		session_set('commande_abonnement', $commande_abonnement);
+	}
 	
 	return $retours;
 }
