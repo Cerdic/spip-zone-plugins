@@ -35,14 +35,14 @@ static $len_prefix;
 		if (!$del) {
 			spip_log("Échec 'del' $joliecle", 'cachelab_erreur');
 			return false;
-		};
-			break;
+		}
+		break;
 
 	// gérés par cachelab_cibler
 	case 'pass':	// passe
 	case 'list':	// renvoie les clés
 	case 'clean':	// nettoie
-			break;
+		break;
 		
 	case 'list_html':	// renvoie les contenus indexés par les clés sans préfixes
 						// attention ça peut grossir !
@@ -50,21 +50,21 @@ static $len_prefix;
 			$return = array();
 		}
 		$return[$joliecle] = $data['texte'];
-			break;
+		break;
 
 	case 'get':	// renvoie le 1er cache ciblé
 		if (!$data) {
 			$data = $Memoization->get($joliecle);
 		}
 		$return = $data;
-			break;
+		break;
 
 	case 'get_html':	// renvoie le contenu du 1er cache
 		if (!$data) {
 			$data = $Memoization->get($joliecle);
 		}
 		$return = $data['texte'];
-			break;
+		break;
 
 	default:
 		$f = 'cachelab_appliquer_'.$action;
@@ -79,27 +79,11 @@ static $len_prefix;
 }
 
 /**
- *
- * Applique une action donnée à tous les caches vérifiant certaines conditions
- *
- * @uses apcu_cache_info() et donc nécessite que Memoization soit activé avec APC ou APCu
- *
- * @param string $action   : l'action à appliquer
- * @param array $conditions : les conditions définissant la cible
- * @param array $options    : options de l'action et/ou des conditions
- * @return array|null
- *      le résultat si c'est une action 'get' ou 'get_...'
- *      la liste des stats sinon, avec éventuellement la liste des résultats s'ils sont demandés (pour 'list_html'...)
- *
+ * extrait du tableau les différentes conditions précodées
+ * @param array $conditions
+ * @return array ($session, $chemin, $chemins, $cle_objet, $id_objet, $plusfunc)
  */
-function cachelab_cibler($action, $conditions = array(), $options = array()) {
-global $Memoization;
-	if (!isset($Memoization) or !$Memoization or !in_array($Memoization->methode(), array('apc', 'apcu'))) {
-		spip_log("cachelab_cibler($action...) : Mémoization n'est pas activé avec APC ou APCu", 'cachelab_erreur');
-		die("cachelab_cibler($action...) : le plugin Mémoization doit être activé avec APC ou APCu");
-	}
-	$return = null;
-
+function cachelab_prepare_conditions($conditions) {
 	// filtrage
 	$session = (isset($conditions['session']) ? $conditions['session'] : null);
 	if ($session=='courante') {
@@ -107,7 +91,7 @@ global $Memoization;
 	}
 
 	$chemin = (isset($conditions['chemin']) ? $conditions['chemin'] : null);
-	$chemins = explode('|', $chemin); // sert seulement pour methode_chemin == strpos
+	$chemins = ($chemin ? explode('|', $chemin) : null); // sert seulement pour methode_chemin == strpos
 
 	$cle_objet = (isset($conditions['cle_objet']) ? $conditions['cle_objet'] : null);
 	$id_objet = (isset($conditions['id_objet']) ? $conditions['id_objet'] : null);
@@ -130,6 +114,49 @@ global $Memoization;
 	} else {
 		$plusfunc = '';
 	}
+	return array ($session, $chemin, $chemins, $cle_objet, $id_objet, $plusfunc);
+}
+/**
+ *
+ * Applique une action donnée à tous les caches vérifiant certaines conditions
+ *
+ * @uses apcu_cache_info() et donc nécessite que Memoization soit activé avec APC ou APCu
+ *
+ * @param string $action   : l'action à appliquer
+ * @param array $conditions : les conditions définissant la cible
+ * @param array $options    : options de l'action et/ou des conditions
+ * @return array|null
+ *      le résultat si c'est une action 'get' ou 'get_...'
+ *      la liste des stats sinon, avec éventuellement la liste des résultats s'ils sont demandés (pour 'list_html'...)
+ *
+ */
+function cachelab_cibler($action, $conditions = array(), $options = array()) {
+global $Memoization;
+	if (!isset($Memoization) or !$Memoization or !in_array($Memoization->methode(), array('apc', 'apcu'))) {
+		spip_log("cachelab_cibler($action...) : Mémoization n'est pas activé avec APC ou APCu", 'cachelab_erreur');
+		die("cachelab_cibler($action...) : le plugin Mémoization doit être activé avec APC ou APCu");
+	}
+
+	$return = $session = $chemin = $chemins = $cle_objet = $id_objet = $plusfunc = null;
+
+	// Prise en compte des OU (alternatives de conditions)
+	// Attention la réentrance n'est pas prévue historiquement alors surprises en perspectives
+	$l_conditions = (isset($conditions['ou']) ? $conditions['ou'] : '')
+			or (isset($conditions['or']) ? $conditions['or'] : '');
+	if (!$l_conditions) {
+		$l_conditions = array($conditions);
+	}
+	elseif (!is_array($l_conditions)) {
+		spip_log ("La condition OU ou OR pour cachelab_cibler($action,...) n'est pas un tableau : " . print_r ($conditions, 1), 'cachelab_erreur');
+		return null;
+	}
+
+	// $l_conditions est un tableau de conditions élémentaires
+	// La condition globale est statisfaite si l'une des condition est satisfaite (OR)
+	// Chaque condition élémentaire est satisfaite si chacune de ses composantes est satisfaite
+
+	$l_conditions = array_map ('cachelab_prepare_conditions', $l_conditions);
+	// prend la forme d'un tableau de conditions précalculées [$session, $chemin, $chemins, $cle_objet, $id_objet, $plusfunc]
 
 	// options
 	// explode+strpos par défaut pour les chemins
@@ -152,122 +179,135 @@ global $Memoization;
 	$meta_derniere_modif = $GLOBALS['meta']['derniere_modif'];
 	$len_prefix = strlen(_CACHE_NAMESPACE);
 
-	foreach ($cache['cache_list'] as $i => $d) {
+	foreach ($cache['cache_list'] as $d) {
 		// on "continue=passe au suivant" dés qu'on sait que le cache n'est pas cible
-
 		$cle = $d['info'];
 		$data=null;
 
-		// on saute les caches d'autres origines
-		// (et les caches d'un autre _CACHE_NAMESPACE pour ce même site)
-		if (strpos($cle, _CACHE_NAMESPACE) !== 0) {
-			$stats['nb_alien']++;
-			continue;
-		}
+		// on passe les caches non concernés
+		if (true) {
+			// on saute les caches d'autres origines
+			// (et les caches d'un autre _CACHE_NAMESPACE pour ce même site)
+			if (strpos($cle, _CACHE_NAMESPACE) !== 0) {
+				$stats['nb_alien']++;
+				continue;
+			}
 
-		// on ne veut examiner que les caches de squelettes SPIP
-		if (substr($cle, $len_prefix-1, 7) != ':cache:') {
-			continue;
-		}
+			// on ne veut examiner que les caches de squelettes SPIP
+			if (substr($cle, $len_prefix-1, 7) != ':cache:') {
+				continue;
+			}
 
-		// effacer ou sauter les caches invalidés par une invalidation totale
-		// ou que apcu ne suit plus
-		if ($meta_derniere_modif > $d['creation_time']
-			or !apcu_exists($cle)) {
-			if ($do_clean) {
-				$del=$Memoization->del(substr($cle, $len_prefix));
-				if (!$del) {
-					// Se produit parfois en salve de 10 à 50 logs simultanés (mm t, mm pid)
-					spip_log("Echec du clean du cache $cle par Memoization (création : {$d['creation_time']}, invalidation : $meta_derniere_modif)", 'cachelab_erreur');
+			// effacer ou sauter les caches invalidés par une invalidation totale
+			// ou que apcu ne suit plus
+			if ($meta_derniere_modif > $d['creation_time']
+				or !apcu_exists($cle)) {
+				if ($do_clean) {
+					$del=$Memoization->del(substr($cle, $len_prefix));
+					if (!$del) {
+						// Se produit parfois en salve de 10 à 50 logs simultanés (mm t, mm pid)
+						spip_log("Echec du clean du cache $cle par Memoization (création : {$d['creation_time']}, invalidation : $meta_derniere_modif)", 'cachelab_erreur');
+					}
+					$stats['nb_clean']++;
 				}
-				$stats['nb_clean']++;
-			};
-			continue;
+				continue;
+			}
 		}
 
 		// caches SPIP véritablement candidats
 		$stats['nb_candidats']++;
 
-		// 1er filtrage : par la session
-		if ($session) {
-			if (substr($cle, -9) != "_$session") {
+		$cible = false;
+		// La premiere condition élémentaire composée entièrement satisfaite
+		foreach ($l_conditions as list ($session, $chemin, $chemins, $cle_objet, $id_objet, $plusfunc)) {
+			// 1er filtrage : par la session
+			if ($session) {
+				if (substr ($cle, -9) != "_$session") {
+					continue;
+					// sur chaque échec on passe à la condition suivante dans le cas d'un OU ou d'un OR
+				}
+			}
+
+			// 2eme filtrage : par le chemin
+			if ($chemins) {
+				switch ($partie_chemin) {
+					case 'tout':
+					case 'chemin':
+						$partie_cle = $cle;
+						break;
+					case 'fichier':
+						$parties = explode ('/', $cle);
+						$partie_cle = array_pop ($parties);
+						break;
+					case 'dossier':
+						$parties = explode ('/', $cle);
+						$parties = array_pop ($parties);
+						$partie_cle = array_pop ($parties);
+						break;
+					default:
+						spip_log ("Option partie_chemin incorrecte : '$partie_chemin'", 'cachelab_erreur');
+						return null;
+				}
+				// mémo php : « continue resumes execution just before the closing curly bracket },
+				//              and break resumes execution just after the closing curly bracket } »
+				switch ($methode_chemin) {
+					case 'strpos':
+						foreach ($chemins as $unchemin) {
+							if ($unchemin and (strpos ($partie_cle, $unchemin) !== false)) {
+								break 2;    // trouvé : sort du foreach et du switch et poursuit le test des autres conditions
+							}
+						}
+						continue 2;     // échec : passe à la $cle suivante
+					case '==' :
+					case 'egal' :
+					case 'equal':
+						foreach ($chemins as $unchemin) {
+							if ($unchemin == $partie_cle) {
+								break 2;    // trouvé : sort du foreach et du switch et poursuit le test des autres conditions
+							}
+						}
+						continue 2;     // échec : passe à la $cle suivante
+					case 'regexp':
+						if ($chemin and ($danslechemin = preg_match (",$chemin,i", $partie_cle))) {
+							break;    // trouvé : poursuit le test des autres conditions
+						}
+						continue 2;    // échec : passe à la clé suivante
+					default:
+						spip_log ("Méthode '$methode_chemin' pas prévue pour le filtrage par le chemin", 'cachelab_erreur');
+						return null;
+				}
+			}
+
+			// pour les filtres suivants on a besoin du contenu du cache
+			if ($cle_objet or $plusfunc) {
+				global $Memoization;
+				$data = $Memoization->get (substr ($cle, $len_prefix));
+				if (!$data or !is_array ($data)) {
+					spip_log ("clé=$cle : data est vide ou n'est pas un tableau : " . print_r ($data, 1), 'cachelab_erreur');
+					continue;
+				}
+
+				// 3eme filtre : par une valeur dans l'environnement
+				if ($cle_objet
+					and (!isset($data['contexte'][$cle_objet])
+						or ($data['contexte'][$cle_objet] != $id_objet))) {
+					continue;
+				}
+
+				// 4eme filtre : par une extension
+				if ($plusfunc
+					and !$plusfunc($action, $conditions, $options, $cle, $data, $stats)) {
+					continue;
+				}
+			}
+			// Dès qu'une des conditions composée est satisfaite on sort de la boucle
+			$cible = true;
+			break;
+		}
+		if (!$cible) {
+			// si on est sorti suite sans avoir trouvé on passe au cache suivant
 			continue;
-			}
 		}
-
-		// 2eme filtrage : par le chemin
-		if ($chemin) {
-			switch ($partie_chemin) {
-			case 'tout':
-			case 'chemin':
-				$partie_cle = $cle;
-				break;
-			case 'fichier':
-				$parties = explode('/', $cle);
-				$partie_cle = array_pop($parties);
-				break;
-			case 'dossier':
-				$parties = explode('/', $cle);
-				$parties = array_pop($parties);
-				$partie_cle = array_pop($parties);
-				break;
-			default:
-				spip_log("Option partie_chemin incorrecte : '$partie_chemin'", 'cachelab_erreur');
-				return null;
-			}
-			// mémo php : « continue resumes execution just before the closing curly bracket ( } ),
-			// and break resumes execution just after the closing curly bracket. »
-			switch ($methode_chemin) {
-			case 'strpos':
-				foreach ($chemins as $unchemin) {
-					if ($unchemin and (strpos($partie_cle, $unchemin) !== false)) {
-						break 2;	// trouvé : sort du foreach et du switch et poursuit le test des autres conditions
-					}
-				}
-				continue 2;	 // échec : passe à la $cle suivante
-			case '==' :
-			case 'egal' :
-			case 'equal':
-				foreach ($chemins as $unchemin) {
-					if ($unchemin==$partie_cle) {
-						break 2;	// trouvé : sort du foreach et du switch et poursuit le test des autres conditions
-					}
-				}
-				continue 2;	 // échec : passe à la $cle suivante
-			case 'regexp':
-				if ($chemin and ($danslechemin = preg_match(",$chemin,i", $partie_cle))) {
-					break;	// trouvé : poursuit le test des autres conditions
-				}
-				continue 2;	// échec : passe à la clé suivante
-			default:
-				spip_log("Méthode '$methode_chemin' pas prévue pour le filtrage par le chemin", 'cachelab_erreur');
-				return null;
-			};
-		}
-
-		// pour les filtres suivants on a besoin du contenu du cache
-		if ($cle_objet or $plusfunc) {
-			global $Memoization;
-			$data = $Memoization->get(substr ($cle, $len_prefix));
-			if (!$data or !is_array ($data)) {
-				spip_log ("clé=$cle : data est vide ou n'est pas un tableau : " . print_r ($data, 1), 'cachelab_erreur');
-				continue;
-			};
-
-			// 3eme filtre : par une valeur dans l'environnement
-			if ($cle_objet
-				and (!isset($data['contexte'][$cle_objet])
-					or ($data['contexte'][$cle_objet] != $id_objet))) {
-				continue;
-			}
-
-			// 4eme filtre : par une extension
-			if ($plusfunc
-				and !$plusfunc($action, $conditions, $options, $cle, $data, $stats)) {
-				continue;
-			}
-		}
-
 		// restent les cibles atteintes
 		$stats['nb_cible']++;
 		if ($do_lists) {
