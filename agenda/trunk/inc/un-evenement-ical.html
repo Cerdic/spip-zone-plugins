@@ -2,8 +2,8 @@ BEGIN:VEVENT
 SUMMARY:[(#EVTITRE|textebrut|filtrer_ical)]
 UID:evenement#ID_EVENEMENT @ [(#URL_SITE_SPIP|filtrer_ical)][
 DTSTAMP:(#DATE_CREATION|date_ical)][(#HORAIRE|=={oui}|?{[
-DTSTART:(#DATE_DEBUT|date_ical)][
-DTEND:(#DATE_FIN|date_ical)],[
+DTSTART:(#DATE_DEBUT*|date_ical)][
+DTEND:(#DATE_FIN*|date_ical)],[
 DTSTART;VALUE=DATE:(#DATE_DEBUT|affdate{Ymd})][
 DTEND;VALUE=DATE:(#DATE_FIN|agenda_jourdecal{1,Ymd})]})][
 CREATED:(#DATE_CREATION|date_ical)][
