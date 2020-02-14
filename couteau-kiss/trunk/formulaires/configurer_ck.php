@@ -105,7 +105,7 @@ function ck_produire_code($c=null){
 		$code .= ck_code_constante('_AUTOBR',"''");
 
 	$code .= ck_code_globale('forcer_lang',_request('forcer_lang',$c)?'true':'false');
-	if ($v = _request('no_set_html_base',$c) OR !_SET_HTML_BASE){
+	if ($v = _request('no_set_html_base',$c) OR (defined('_SET_HTML_BASE') and ($v=!_SET_HTML_BASE))){
 		$code .= ck_code_constante('_SET_HTML_BASE',$v?'false':'true');
 	}
 	if (_request($s=_request('introduction_suite',$c)))
