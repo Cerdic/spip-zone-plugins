@@ -23,8 +23,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_annuler' => 'Annuler',
-	'bouton_supprimer' => 'Supprimer',
 	'bouton_modifier_repetition' => 'Modifier cette répétition',
+	'bouton_supprimer' => 'Supprimer',
 
 	// C
 	'cal_par_jour' => 'jour',
