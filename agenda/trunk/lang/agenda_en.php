@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_annuler' => 'Cancel',
+	'bouton_modifier_repetition' => 'Change this repetition', # RELIRE
 	'bouton_supprimer' => 'Delete',
 
 	// C
