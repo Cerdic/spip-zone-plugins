@@ -113,27 +113,3 @@ function critere_agendafull_dist($idb, &$boucles, $crit) {
 	}
 }
 
-
-/**
- * Afficher de facon textuelle les dates de debut et fin en fonction des cas
- * - Le lundi 20 fevrier a 18h
- * - Le 20 fevrier de 18h a 20h
- * - Du 20 au 23 fevrier
- * - du 20 fevrier au 30 mars
- * - du 20 fevrier 2007 au 30 mars 2008
- *
- * @param string $date_debut : la date de début au format mysql
- * @param string $date_fin : la date de fin au format mysql
- * @param string $horaire : oui / non, permet d'afficher l'horaire, toute autre valeur n'indique que le jour
- * @param string $forme : forme que prendra la date :
- * 		- annee (afficher systématiquement l'année pour la date finale, ne pas faire appelle à affdate_jourcourt)
- * 		- abbr (afficher le nom des jours en abbrege)
- * 		- hcal (generer une date au format hcal)
- * 		- h-event (generer une date au format h-event, dans une balise <time> HTML5)
- * @return string
- * @deprecated 
- */
-function agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme = '') {
-	$s = affdate_debut_fin($date_debut, $date_fin, $horaire, $forme);
-	return unicode2charset(charset2unicode($s, 'AUTO'));
-}
