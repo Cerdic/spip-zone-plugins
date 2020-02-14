@@ -43,6 +43,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// J
 	'job_desactivation' => 'Desactivación de la inscripción @id@',
 
+	// L
+	'label_statut' => 'Estatus',
+
 	// N
 	'notification_echeance_corps' => '<p>Buenos días @nom@,</p>
 		<p>Usted recibe este correo porque usted está inscrito en el sitio @nom_site_spip@ con la oferta "@offre@".</p>
