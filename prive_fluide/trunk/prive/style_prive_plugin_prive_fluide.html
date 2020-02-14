@@ -6,7 +6,7 @@
   3. Formulaires
   4. Divers
 
-  Breakpoints : 780px / 1200px
+  Breakpoints : 640px / 1200px
 
   Markup :
 
@@ -37,7 +37,7 @@
 */
 
 
-/* 1.1 : D'abord un reset des styles de SPIP */
+/* D'abord un reset des styles de SPIP */
 
 body,
 body.large {
@@ -52,7 +52,7 @@ body.large {
   padding: 0 1em;
 }
 
-/* 1.2 : Ensuite on refait le layout */
+/* Ensuite on refait le layout */
 
 /**
  * Mobiles : 1 seule colonne
@@ -70,7 +70,7 @@ body.large {
  * Écrans moyens : on passe en 2 colonnes.
  * Fallback vieux navigateurs : direct en 3 colonnes et basta.
  */
-@media (min-width: 780px) {
+@media (min-width: 640px) {
 	.largeur {
 		padding-left: 1.5em;
 		padding-right: 1.5em;
@@ -91,21 +91,13 @@ body.large {
 	}
 	/* Navigateurs récents */
 	@supports (display: grid) {
-		/* Les pages qui demandent à être en pleine largeur (sans #nav ni #extra) */
-		.pleine_largeur #contenu {
-			width: 100%;
-		}
-		/* Les pages "normales" */
-		#conteneur:not(.pleine_largeur) {
+		#conteneur {
 			display: grid;
 			grid-column-gap: 1.5em;
-			/*grid-template-columns:
-				min-content
-				minmax(auto, calc(100% - (8em + 8vw)));*/
 			grid-template-rows: auto 1fr; /* la 1ère ligne doit se collapser */
 			grid-template-columns:
-				calc(8em + 10%) /* navigation & extra */
-				1fr;           /* contenu */
+				auto /* navigation & extra */
+				1fr; /* contenu */
 			grid-template-areas:
 				"navigation contenu "
 				"extra      contenu ";
@@ -125,6 +117,22 @@ body.large {
 			grid-area: extra;
 			width: initial;
 		}
+		/*
+		Largeur des colonnes : obligé de faire un compromis.
+		On veut 2 choses :
+		- une dimension proportionnelle à celle de leur parent (#conteneur)
+		- une dimension réduite à 0 quand elles sont vides
+		Hors elles ne sont jamais techniquement vides : il y a toujours un .ajaxbloc en enfant direct.
+		On ne peut donc ni définir la largeur au niveau de grid-template-columns,
+		ni cibler les les colonnes elles-mêmes.
+		La seule façon est de cibler les petits-enfants directs.
+		Par contre ça veut dire qu'on ne peut plus utiliser de pourcentage,
+		on se rabat donc sur une fraction de la largeur de la fenêtre.
+		*/
+		#navigation > * > *,
+		#extra > * > * {
+			width: 20vw; /* grosso modo 20% de #conteneur */
+		}
 	}
 }
 
@@ -133,11 +141,11 @@ body.large {
  */
 @media (min-width: 1200px) {
 	@supports (display: grid) {
-		#conteneur:not(.pleine_largeur) {
+		#conteneur {
 			grid-template-columns:
-				calc(8em + 10%)  /* navigation */
-				1fr             /* contenu */
-				calc(8em + 10%); /* extra */
+				auto  /* navigation */
+				1fr   /* contenu */
+				auto; /* extra */
 			grid-template-areas:
 				"navigation contenu extra"
 				"navigation contenu extra";
@@ -165,7 +173,7 @@ body.large {
   ==============
   3. Formulaires
   ==============
-  On augmente la largeur des labels en proportion.
+  On augmente la largeur des labels.
   Nb : obligé de compenser le margin-left avec un facteur arbitraire.
 */
 
