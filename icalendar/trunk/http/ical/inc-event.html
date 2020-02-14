@@ -11,9 +11,9 @@
 BEGIN:VEVENT
 SUMMARY:[(#TITRE|textebrut|filtrer_ical)]
 UID:evenement#ID_EVENEMENT @ [(#URL_SITE_SPIP|filtrer_ical)][
-DTSTAMP:(#DATE_DEBUT|date_ical)][(#HORAIRE|=={oui}|?{[
-DTSTART:(#DATE_DEBUT|date_ical)][
-DTEND:(#DATE_FIN|date_ical)],[
+DTSTAMP:(#DATE_DEBUT*|date_ical)][(#HORAIRE|=={oui}|?{[
+DTSTART:(#DATE_DEBUT*|date_ical)][
+DTEND:(#DATE_FIN*|date_ical)],[
 DTSTART;VALUE=DATE:(#DATE_DEBUT|affdate{Ymd})][
 DTEND;VALUE=DATE:(#DATE_FIN|agenda_jourdecal{1,Ymd})]})][
 (#GET{titre_gis}|?{LOCATION:#GET{titre_gis}[\, (#GET{adresse})][\, [(#GET{code_postal}) ](#GET{ville})],[
