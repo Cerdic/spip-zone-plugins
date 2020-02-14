@@ -12,6 +12,43 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
+ * #DATE_DEBUT calculee en fonction de la timezone
+ * @param $p
+ * @return mixed
+ */
+function balise_DATE_DEBUT_dist($p) {
+
+	$_date_debut = champ_sql('date_debut', $p);
+	$p->code = $_date_debut;
+
+	if (!$p->etoile) {
+		$_timezone = champ_sql('timezone_affiche', $p);
+		$p->code = "date_to_timezone($_date_debut, $_timezone)";
+	}
+
+	return $p;
+}
+
+/**
+ * #DATE_FIN calculee en fonction de la timezone
+ *
+ * @param $p
+ * @return mixed
+ */
+function balise_DATE_FIN_dist($p) {
+
+	$_date_fin = champ_sql('date_fin', $p);
+	$p->code = $_date_fin;
+
+	if (!$p->etoile) {
+		$_timezone = champ_sql('timezone_affiche', $p);
+		$p->code = "date_to_timezone($_date_fin, $_timezone)";
+	}
+
+	return $p;
+}
+
+/**
  * #URL_EVENEMENT envoie sur la page de l'evenement
  * ou sur la page de l'article avec un &id_evenement=xxx
  * selon la configuration de l'agenda
