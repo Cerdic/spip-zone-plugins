@@ -45,6 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_abonnementsoffre' => 'A subscription offer',
 	'info_1_jours_apres' => '1 day after',
 	'info_1_jours_avant' => '1 day before',
+	'info_1_mois' => '1 month',
 	'info_1_mois_apres' => '1 month after',
 	'info_1_mois_avant' => '1 month before',
 	'info_abonnementsoffres_auteur' => 'Subscription offers of this author',
@@ -53,6 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_abonnementsoffres' => '@nb@ subscription offers',
 	'info_nb_jours_apres' => '@nb@ days after',
 	'info_nb_jours_avant' => '@nb@ days before',
+	'info_nb_mois' => '@nb@ months',
 	'info_nb_mois_apres' => '@nb@ month after',
 	'info_nb_mois_avant' => '@nb@ month before',
 

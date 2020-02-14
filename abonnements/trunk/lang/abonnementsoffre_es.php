@@ -34,9 +34,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_abonnementsoffre' => 'Crear una oferta de suscripción',
 	'icone_modifier_abonnementsoffre' => 'Modificar esta oferta de suscripción',
 	'info_1_abonnementsoffre' => 'Una oferta de suscripción',
+	'info_1_mois' => '1 mes',
 	'info_abonnementsoffres_auteur' => 'Las ofertas de suscripción de este autor',
 	'info_aucun_abonnementsoffre' => 'Ninguna oferta de suscripción',
 	'info_nb_abonnementsoffres' => '@nb@ ofertas de suscripción',
+	'info_nb_mois' => '@nb@ mes(es)',
 
 	// R
 	'retirer_lien_abonnementsoffre' => 'Retirar esta oferta de suscripción',
