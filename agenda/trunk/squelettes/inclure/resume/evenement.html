@@ -6,7 +6,7 @@
 			class="lire-la-suite hide"><i class="icon-chevron-right" title="<:zpip:lire_la_suite|attribut_html:><:zpip:lire_la_suite_de|attribut_html:>&laquo;[(#TITRE|attribut_html)]&raquo;"></i></span></a></strong>
 	<meta itemprop="startDate" content="[(#DATE_DEBUT|affdate{Y-m-d})]T[(#DATE_DEBUT|affdate{H:i:sO})]" />
 	<meta itemprop="endDate" content="[(#DATE_FIN|affdate{Y-m-d})]T[(#DATE_FIN|affdate{H:i:sO})]" />
-	[<p class="info-publi"><time><i class="icon-calendar"></i> (#DATE_DEBUT|affdate_debut_fin_timezone{#DATE_FIN,#HORAIRE*,#TIMEZONE_AFFICHE,'hcal tzshort'})</time></p>]
+	[<p class="info-publi"><time><i class="icon-calendar"></i> (#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#HORAIRE*,hcal})[ (#TIMEZONE{#HORAIRE,abbr})]</time></p>]
 	#SET{intro,''}<BOUCLE_art(ARTICLES){si #ENV{sinon_intro_article,oui}|=={non}|ou{#ENV{intro}|=={non}}|non}{id_article}>#SET{intro,#INTRODUCTION{#ENV{coupe,300}}</BOUCLE_art>
 	[(#ENV{intro,oui}|=={non}|non|et{#DESCRIPTIF}|oui)[(#SET{intro,[<div class="introduction #EDIT{descriptif}" itemprop="description">(#DESCRIPTIF|sinon{#GET{intro}})</div>]})]]
 	[(#GET{intro}|ou{#LIEU}|ou{#ADRESSE}|oui)

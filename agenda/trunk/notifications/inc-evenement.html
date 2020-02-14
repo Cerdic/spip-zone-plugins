@@ -1,7 +1,7 @@
 <BOUCLE_event(EVENEMENTS){id_evenement}{statut?}{tout}>
 <div class="cartouche">
 	<h2 class="titre">[(#LOGO_EVENEMENT|image_reduire{40,*}) ]#TITRE</h2>
-	[<p class="date">(#DATE_DEBUT|affdate_debut_fin_timezone{#DATE_FIN,#HORAIRE,#TIMEZONE_AFFICHE,'hcal tzshort'})</p>]
+	[<p class="date">(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#HORAIRE,hcal})[ (#TIMEZONE{#HORAIRE,abbr})]</p>]
 </div>
 
 [<div class="texte">(#DESCRIPTIF|image_reduire{500,*})</div>]

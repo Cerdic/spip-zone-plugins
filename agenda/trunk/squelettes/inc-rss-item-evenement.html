@@ -11,7 +11,7 @@
 	#SET{intro,''}<BOUCLE_art(ARTICLES){id_article}>#SET{intro,#INTRODUCTION{#ENV{coupe,300}}</BOUCLE_art>
 	[(#REM) Le bloc qui suit diffuse l'evenement a la mode RSS ]
 	<description>
-		[(#DATE_DEBUT|affdate_debut_fin_timezone{#DATE_FIN,#HORAIRE,#TIMEZONE_AFFICHE,'tzshort'}|texte_backend)][ - (#LIEU|PtoBR|texte_backend)]
+		[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#HORAIRE}|texte_backend)[ (#TIMEZONE{#HORAIRE,abbr}|texte_backend)]][ - (#LIEU|PtoBR|texte_backend)]
 		[(#DESCRIPTIF|sinon{#GET{intro}}|texte_backend)]
 	</description>
 
@@ -21,7 +21,7 @@
 	[(#CONFIG{syndication_integrale}|=={oui}|?{' ',''})<content:encoded>
 	[(#LOGO_ARTICLE{right}|image_reduire{150,150}|texte_backend)]
 	&lt;div class='rss_texte'&gt;
-		[(#DATE_DEBUT|affdate_debut_fin_timezone{#DATE_FIN,#HORAIRE,#TIMEZONE_AFFICHE,'tzshort'}|texte_backend)][ - (#LIEU|PtoBR|texte_backend)]
+		[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#HORAIRE}|texte_backend)[ (#TIMEZONE{#HORAIRE,abbr}|texte_backend)]][ - (#LIEU|PtoBR|texte_backend)]
 		[(#DESCRIPTIF|sinon{#GET{intro}}|texte_backend)]
 	&lt;/div&gt;
 	</content:encoded>]

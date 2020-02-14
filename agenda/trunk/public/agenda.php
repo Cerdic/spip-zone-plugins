@@ -49,6 +49,40 @@ function balise_DATE_FIN_dist($p) {
 }
 
 /**
+ * Affichage en clair de la timezone selon le format demande
+ * #TIMEZONE -> Europe/Paris
+ * #TIMEZONE{gmt} -> GMT+01:00
+ * #TIMEZONE{abbr} -> EDT
+ * #TIMEZONE{non} -> n'affiche rien
+ *
+ * #TIMEZONE{#HORAIRE} -> n'affiche pas la timezone si horaire=non
+ * #TIMEZONE{#HORAIRE,gmt} -> affiche pas la timezone en gmt si horaire!=non
+ *
+ * @param $p
+ * @return mixed
+ */
+function balise_TIMEZONE_dist($p) {
+
+	$_timezone = champ_sql('timezone_affiche', $p);
+	$p->code = $_timezone;
+
+	if (!$p->etoile){
+		$_format1 = interprete_argument_balise(1, $p);
+		if (!$_format1) {
+			$_format1 = "''";
+		}
+		$_format2 = interprete_argument_balise(2, $p);
+		if (!$_format2) {
+			$_format2 = "''";
+		}
+		$_date_debut = champ_sql('date_debut', $p);
+		$p->code = "afftimezone($_date_debut, $_timezone, $_format1 . ' ' . $_format2)";
+	}
+
+	return $p;
+}
+
+/**
  * #URL_EVENEMENT envoie sur la page de l'evenement
  * ou sur la page de l'article avec un &id_evenement=xxx
  * selon la configuration de l'agenda

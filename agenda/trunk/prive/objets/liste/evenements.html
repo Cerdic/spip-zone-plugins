@@ -28,7 +28,7 @@
 			<td class='date[ (#DATE_DEBUT|affdate{'Y-m-d'}|unique{liste_evt}|?{first-of,same-as})]'>[(#DATE_DEBUT|affdate_jourcourt)]</td>
 			<td class='article secondaire'>[<a (#ID_ARTICLE|oui) href="[(#ID_ARTICLE|generer_url_entite{article})]" title="[(#INFO_TITRE{article,#ID_ARTICLE}|attribut_html)]">[(#CHEMIN_IMAGE{article-16.png}|balise_img{#INFO_TITRE{article,#ID_ARTICLE}})]</a>]</td>
 			<td class='titre principale'><a href="[(#ID_EVENEMENT|generer_url_entite{evenement})]" title="<:info_numero_abbreviation|attribut_html:> #ID_EVENEMENT">[(#RANG). ]#TITRE</a>
-				<p class="date">[(#DATE_DEBUT|affdate_debut_fin_timezone{#DATE_FIN,#HORAIRE,#TIMEZONE_AFFICHE,'tzshort'})]</p>
+				<p class="date">[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#HORAIRE})[ (#TIMEZONE{#HORAIRE,abbr})]]</p>
 			</td>
 			<td class='lieu secondaire'>#LIEU</td>
 			<td class='place secondaire'>[(#INSCRIPTION|oui)[(#PLACES|moins{#NB_INSCRITS})] / #PLACES#SET{has_places,1}]</td>

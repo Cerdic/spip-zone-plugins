@@ -12,75 +12,29 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
- * Affichage de la date d'un evenement en precisant le fuseau *si* config active et il y a une timezone sur l'evenement
- * @param string $date_debut
- * @param string $date_fin
- * @param string $horaire
+ * Afficher la timezone
+ * @param string $date
+ *   date consideree, necessaire si on veut afficher en GMT+2 pour prendre en compte le daylight saving
  * @param string $timezone
+ *   timezone
  * @param string $format
- *   peux prendre plusieurs formats separes par des espaces dans la chaine, dont
- *     ceux supportes par affdate_debut_fin
- *     + ceux supportes par agenda_tz_to_string
  * @return string
  */
-function affdate_debut_fin_timezone($date_debut, $date_fin, $horaire='oui', $timezone='', $format='') {
-	static $config_timezone;
-	if (is_null($config_timezone)) {
-		include_spip('inc/config');
-		$config_timezone = lire_config('agenda/fuseaux_horaires',0);
-	}
-	$tz_string = '';
-	$h = ($horaire === 'oui' or $horaire === true);
-	if ($timezone and $config_timezone) {
-		$date_debut = agenda_tz_date_local_to_tz($date_debut, $timezone);
-		$date_fin = agenda_tz_date_local_to_tz($date_fin, $timezone);
-		if ($h) {
-			$tz_string = agenda_tz_to_string($date_debut, $timezone, $format);
-			if ($tz_string) {
-				$tz_string = " <i class='date-tz'>$tz_string</i>";
-			}
-		}
-	}
-
-	$aff = affdate_debut_fin($date_debut, $date_fin, $horaire, $format) . $tz_string;
-	return $aff;
-}
-
-
-/**
- * Afficher la date dans la TimeZone indiquee selon le format choisi
- * @param $date
- * @param $timezone
- * @param $format
- *   peux prendre plusieurs formats separes par des espaces dans la chaine, dont
- *     ceux supportes par affdate
- *     + ceux supportes par agenda_tz_to_string
- *     + tzonly pour n'afficher que la timezone
- * @param $tzformat
- * @return string
- */
-function affdate_timezone($date, $timezone, $format = 'entier', $tzformat='tznone') {
-	static $config_timezone;
-	if (is_null($config_timezone)) {
-		include_spip('inc/config');
-		$config_timezone = lire_config('agenda/fuseaux_horaires',0);
-	}
-	$tz_string = '';
-	if ($timezone and $config_timezone){
-		$date = agenda_tz_date_local_to_tz($date, $timezone);
-		$tz_string = agenda_tz_to_string($date, $timezone, "$format $tzformat");
-	}
-	if (stripos("$format $tzformat",'tzonly')!==false) {
-		return $tz_string;
-	}
+function afftimezone($date, $timezone, $format) {
+	$tz_string = agenda_tz_to_string($date, $timezone, $format);
 	if ($tz_string) {
 		$tz_string = " <i class='date-tz'>$tz_string</i>";
 	}
-
-	$aff = affdate($date, $format) . $tz_string;
-	return $aff;
+	return $tz_string;
 }
 
+/**
+ * Convertir une date de la timezone par defaut (en base) vers la timezone cible
+ * *si* la config est activee et *si* il y a une timezone fournie
+ * @param string $date
+ * @param string $timezone
+ * @return string
+ */
 function date_to_timezone($date, $timezone) {
 	static $config_timezone;
 	if (is_null($config_timezone)) {
@@ -106,6 +60,11 @@ function date_to_timezone($date, $timezone) {
  * @return string
  */
 function agenda_tz_to_string($date, $timezone, $format) {
+	// Rien a faire ?
+	if (stripos($format,'non')!==false) {
+    return '';
+	}
+
 	$timezone = agenda_tz_valide_timezone($timezone);
 
 	try {
@@ -119,11 +78,8 @@ function agenda_tz_to_string($date, $timezone, $format) {
 	if (stripos($format,'gmt')!==false) {
     return "GMT" . $dt->format('P');
 	}
-	if (stripos($format,'tzshort')!==false) {
+	if (stripos($format,'short')!==false or stripos($format,'abbr')!==false) {
     return $dt->format('T');
-	}
-	if (stripos($format,'tznone')!==false) {
-    return '';
 	}
 
 	return $dt->format('e');
