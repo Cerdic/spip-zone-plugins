@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// C
 	'cfg_lbl_activer_objets' => 'Les objets cochés pourront être liés à des pays',
+	'cfg_lbl_code_pays_defaut' => 'Pays par défaut du site',
 	'cfg_titre_parametrages' => "Objets pouvant être liés à des pays",
 
 	// I
