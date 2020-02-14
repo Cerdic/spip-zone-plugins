@@ -173,33 +173,83 @@ body.large {
   ==============
   3. Formulaires
   ==============
-  On augmente la largeur des labels.
-  Nb : obligé de compenser le margin-left avec un facteur arbitraire.
 */
-
-/* base */
-.formulaire_spip .editer {
-  padding-left: calc(5em + 15%);
-}
-.formulaire_spip .editer > label {
-  margin-left: calc(0em - ((5em + 15%) * 1.15));
-  width: calc((4em + 15%) * 1.15);
-}
-/* long_label */
-.formulaire_spip .editer.long_label {
-  padding-left: calc(5em + 33%);
-}
-.formulaire_spip .editer.long_label > label {
-  margin-left: calc(0em - ((5em + 33%) * 1.46));
-  width: calc((4em + 33%) * 1.46);
-}
-/* pleine_largeur */
-.formulaire_spip .editer.pleine_largeur {
-  padding-left: 10px;
-}
-.formulaire_spip .editer.pleine_largeur > label {
-  margin-left: 0;
-  width: auto;
+@supports (display: grid) {
+	/* reset */
+	.formulaire_spip,
+	.formulaire_spip * {
+		box-sizing: border-box;
+	}
+	.formulaire_spip .editer,
+	.formulaire_spip .editer.long_label {
+		padding: 0.5em 1em;
+	}
+	.formulaire_spip .editer > label,
+	.formulaire_spip .editer.long_label > label {
+		display: block;
+		margin: 0 0 0.5em;
+		width: auto;
+		float: none;
+	}
+	@media (min-width: 640px) {
+		/* base */
+		.formulaire_spip .editer,
+		.formulaire_spip .editer.long_label {
+			padding: 1em 0;
+		}
+		.formulaire_spip .editer {
+			display: grid;
+			grid-column-gap: 1em;
+			grid-template-columns: 30% 1fr;
+		}
+		.formulaire_spip .editer > label {
+			grid-column: 1 / 2;
+			grid-row: 1 / span 1000; /* pas joli joli... */
+		}
+		.formulaire_spip .editer > label ~ *,
+		.formulaire_spip .editer > :first-child:not(label),
+		.formulaire_spip .editer > :first-child:not(label) ~ * {
+			grid-column: 2 / 3;
+		}
+		/* .long label */
+		/* .formulaire_spip .editer.long_label {
+			grid-template-columns: 44% 1fr;
+		} */
+		/* .pleine_largeur + nombreuses exceptions */
+		.formulaire_spip .editer.pleine_largeur,
+		.formulaire_spip .editer_parent, .formulaire_spip .editer_groupe_mot, .formulaire_spip .editer_descriptif, .formulaire_spip .editer_chapo, .formulaire_spip .editer_texte, .formulaire_spip .editer_ps, .formulaire_spip .haut {
+			display: block;
+		}
+		/* Tentative pour limiter la largeur */
+		.formulaire_spip form .editer-groupe,
+		.formulaire_spip p.explication,
+		.formulaire_spip .titrem ~ *:not(form):not(.boutons),
+		.formulaire_spip fieldset > * {
+			max-width: 42rem;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.formulaire_spip .editer .explication {
+			max-width: initial;
+			margin-left: initial;
+			margin-right: initial;
+		}
+		/* Dans les colonnes */
+		.lat .formulaire_spip .editer {
+			display: block;
+		}
+		/* Dommages collatéraux, exceptions et trucs pénibles */
+		.formulaire_spip .editer_parent, .formulaire_spip .editer_groupe_mot, .formulaire_editer_auteur .editer_statut {
+			padding-left: 1em;
+			padding-right: 1em;
+		}
+		.formulaire_dater form .editer-groupe {
+			max-width: 100%;
+		}
+		.formulaire_dater .editer {
+			grid-template-columns: 30ch 1fr;
+		}
+	}
 }
 
 
