@@ -159,14 +159,33 @@ body.large {
   =====================================
   2. Contenus textes limités en largeur
   =====================================
+  Objectif : Limiter à ~75 caractères par ligne
 */
 
 
-/* Limiter à ~75 caractères max par ligne */
+/* Prévisu des contenus */
 #wysiwyg > * {
 	max-width: 45rem;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+/* Intérieur des formulaires */
+@media (min-width: 640px) {
+	.formulaire_spip form .editer-groupe,
+	.formulaire_spip p.explication,
+	.formulaire_spip .titrem ~ *:not(form):not(.boutons),
+	.formulaire_spip fieldset > * {
+		max-width: calc(45rem + 5%); /* Très légèrement proportionnel au conteneur */
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.formulaire_spip form .editer-groupe .editer-groupe,
+	.formulaire_spip .editer .explication {
+		max-width: initial;
+		margin-left: initial;
+		margin-right: initial;
+	}
 }
 
 
@@ -175,8 +194,8 @@ body.large {
   3. Formulaires
   ==============
 */
-@supports (display: grid) {
-	/* reset */
+@supports (width: calc(1em)) {
+	/* Mobiles : tout en pleine largeur */
 	.formulaire_spip,
 	.formulaire_spip * {
 		box-sizing: border-box;
@@ -192,66 +211,50 @@ body.large {
 		width: auto;
 		float: none;
 	}
+	/*
+	Écrans moyens : labels sur le côté
+	Malheureusement, on ne peut pas définir une taille en pourcentage du conteneur.
+	On se rabat sur une fraction de la largeur de la fenêtre.
+	Nb : pas de largeur fixe sinon il faudrait pleins de breakpoints et dupliquer toutes les règles.
+	*/
 	@media (min-width: 640px) {
 		/* base */
 		.formulaire_spip .editer,
 		.formulaire_spip .editer.long_label {
 			padding: 1em 0;
+			padding-left: calc(8rem + 8vw);
 		}
-		.formulaire_spip .editer {
-			display: grid;
-			grid-column-gap: 1em;
-			grid-template-columns: 30% 1fr;
+		.formulaire_spip .editer > label,
+		.formulaire_spip .editer.long_label > label {
+			margin-left: calc((8rem + 8vw) * -1);
+			width: calc(8rem + 8vw - 1em);
+			float: left;
 		}
-		.formulaire_spip .editer > label {
-			grid-column: 1 / 2;
-			grid-row: 1 / span 1000; /* pas joli joli... */
-		}
-		.formulaire_spip .editer > label ~ *,
-		.formulaire_spip .editer > :first-child:not(label),
-		.formulaire_spip .editer > :first-child:not(label) ~ * {
-			grid-column: 2 / 3;
-		}
-		/* .long label */
-		/* .formulaire_spip .editer.long_label {
-			grid-template-columns: 44% 1fr;
-		} */
-		/* .pleine_largeur + nombreuses exceptions */
+		/* Saisies en pleine largeur : classe générique .pleine_largeur + nombreuses exceptions */
 		.formulaire_spip .editer.pleine_largeur,
 		.formulaire_spip .editer.fieldset, .formulaire_spip .editer_parent, .formulaire_spip .editer_groupe_mot, .formulaire_spip .editer_descriptif, .formulaire_spip .editer_chapo, .formulaire_spip .editer_texte, .formulaire_spip .editer_ps, .formulaire_spip .haut {
-			display: block;
+			padding-left: 0;
 		}
-		/* Tentative pour limiter la largeur */
-		.formulaire_spip form > div > .editer-groupe,
-		.formulaire_spip p.explication,
-		.formulaire_spip .titrem ~ *:not(form):not(.boutons),
-		.formulaire_spip fieldset > * {
-			max-width: calc(45rem + 5%); /* Très légèrement proportionnel au conteneur */
-			margin-left: auto;
-			margin-right: auto;
+		.formulaire_spip .editer.pleine_largeur > label,
+		.formulaire_spip .editer.fieldset > label, .formulaire_spip .editer_parent > label, .formulaire_spip .editer_groupe_mot > label, .formulaire_spip .editer_descriptif > label, .formulaire_spip .editer_chapo > label, .formulaire_spip .editer_texte > label, .formulaire_spip .editer_ps > label, .formulaire_spip .haut > label {
+			width: auto;
+			float: none;
+			margin-left: 0;
 		}
-		.formulaire_spip .editer .explication {
-			max-width: initial;
-			margin-left: initial;
-			margin-right: initial;
-		}
+		/* Champs textes de même taille qu'en prévisu */
 		.formulaire_spip textarea {
-			font-size: 1.2em; /* Idem #wysiwyg */
+			font-size: 1.2em;
 		}
-		/* Dans les colonnes */
-		.lat .formulaire_spip .editer {
-			display: block;
-		}
-		/* Dommages collatéraux, exceptions et trucs pénibles */
+		/* Dommages collatéraux, exceptions et ajustements */
 		.formulaire_spip .editer_parent, .formulaire_spip .editer_groupe_mot, .formulaire_editer_auteur .editer_statut {
 			padding-left: 1em;
 			padding-right: 1em;
 		}
+		.formulaire_spip .fieldset fieldset {
+			padding: 0;
+		}
 		.formulaire_dater form .editer-groupe {
 			max-width: 100%;
-		}
-		.formulaire_dater .editer {
-			grid-template-columns: 30ch 1fr;
 		}
 	}
 }
