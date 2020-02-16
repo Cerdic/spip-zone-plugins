@@ -1,12 +1,12 @@
 [(#ENV{afficher_annee_obligatoire}|=={on}|?{
-	#SET{forme,annee},
-	#SET{forme,''}
+	#SET{format,annee},
+	#SET{format,''}
 }
 )]
 <BOUCLE_evenements(EVENEMENTS){id_evenement}>
 	[(#ENV{masquer_heure}|oui)#SET{horaire,non}]
 	[(#ENV{masquer_heure}|non)#SET{horaire,#HORAIRE}]
-	#SET{date, #DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#GET{horaire}, #GET{forme}}}
+	#SET{date, #DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#GET{horaire},#GET{format}}}
 	[(#ENV{type_affichage,titre_date}|=={titre_date}|oui)
 		#SET{texte,#TITRE|concat{' - ', #GET{date}}}
 	]
