@@ -214,13 +214,6 @@ options:
           nom: 'readonly'
           label: '<:saisies:option_readonly_label:>'
           explication: '<:saisies:option_readonly_explication:>'
-      -
-        saisie: 'input'
-        options:
-          nom: 'label_non'
-          label: '<:saisies:option_label_non_label:>'
-          explication: '<:saisies:option_label_non_explication:>'
-          size: 50
   -
     saisie: 'fieldset'
     options:
