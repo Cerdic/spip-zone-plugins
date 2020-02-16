@@ -1,3 +1,8 @@
+[(#ENV{afficher_annee_obligatoire}|=={on}|?{
+	#SET{forme,annee},
+	#SET{forme,''}
+}
+)]
 <BOUCLE_evenements(EVENEMENTS){id_evenement}>
 	[(#ENV{masquer_heure}|oui)#SET{horaire,non}]
 	[(#ENV{masquer_heure}|non)#SET{horaire,#HORAIRE}]
