@@ -54,6 +54,17 @@ options:
       -
         saisie: 'radio'
         options:
+          nom: 'tz_format'
+          label: '<:agenda:evenement_timezone_affiche:>'
+          defaut: 'abbr'
+          data:
+            'abbr': '<:saisie_evenements:evenement_timezone_abbr:>'
+            'gmt': '<:saisie_evenements:evenement_timezone_gmt:>'
+            'full': '<:saisie_evenements:evenement_timezone_full:>'
+            'none': '<:saisie_evenements:evenement_timezone_none:>'
+      -
+        saisie: 'radio'
+        options:
           nom: 'type_choix'
           label: '<:saisie_evenements:option_type_choix_label:>'
           data:

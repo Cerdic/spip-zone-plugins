@@ -25,6 +25,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_debut_min_mobile_label' => 'Date de début minimale (mobile)',
 	'disable_complet_label_case' => 'Empêcher de choisir les évènements où les inscriptions sont complètes',
 
+	// E
+	'evenement_timezone_abbr' => 'Format court (EDT, EST, GMT…)',
+	'evenement_timezone_full' => 'Format complet (Europe/Paris, America/New-York…)',
+	'evenement_timezone_gmt' => 'Décalage horaire par rapport à GMT (GMT+02:00)',
+	'evenement_timezone_none' => 'Pas d\'affichage du fuseau horaire',
+
 	// I
 	'id_article_explication' => 'Proposer les événements des articles suivants.',
 	'id_article_label' => 'Articles',
