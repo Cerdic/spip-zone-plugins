@@ -54,9 +54,9 @@ function date_to_timezone($date, $timezone) {
  * @param string $timezone
  * @param string $format
  *   gmt : decalage horaire par rapport a GMT : GMT+02:00
- *   tzshort|tzabbr : format court (EDT, EST, GMT...)
- *   tznone : la zone n'est pas affichee
- *   tzfull (default) : format complet (Europe/Paris, America/New-York...)
+ *   short|abbr : format court (EDT, EST, GMT...)
+ *   none : la zone n'est pas affichee
+ *   full (default) : format complet (Europe/Paris, America/New-York...)
  * @return string
  */
 function agenda_tz_to_string($date, $timezone, $format) {
