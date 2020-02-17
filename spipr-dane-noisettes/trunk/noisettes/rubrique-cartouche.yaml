@@ -1,3 +1,36 @@
 nom: '<:sdnnoisettes:rub_cartouche:>'
 icon: 'cartouche-24.png'
 ajax: 'non'
+contexte:
+  - 'rubrique'
+  - 'id_rubrique'
+parametres:
+  -
+    saisie: 'case'
+    options:
+      nom: 'masquer_logo'
+      label: '<:sdnnoisettes:label_masquer_logo:>'
+      label_case: '<:sdnnoisettes:masquer:>'
+      defaut: ''
+      conteneur_class: 'long_label'
+  -
+    saisie: 'input'
+    options:
+      nom: 'largeur_logo'
+      label: '<:sdnnoisettes:label_largeur_logo:>'
+      defaut: 200
+      conteneur_class: 'long_label'
+      afficher_si: '@masquer_logo@  != "on"'
+    verifier:
+      type: 'entier'
+  -
+    saisie: 'input'
+    options:
+      nom: 'hauteur_logo'
+      label: '<:sdnnoisettes:label_hauteur_logo:>'
+      defaut: 200
+      conteneur_class: 'long_label'
+      afficher_si: '@masquer_logo@  != "on"'
+    verifier:
+      type: 'entier'
+

@@ -1,4 +1,5 @@
 <header class="cartouche">
-    [(#INFO_LOGO_RUBRIQUE{rubrique, #ENV{id_rubrique}}|image_reduire{200,200})]
+	[(#REM) #INFO_LOGO_RUBRIQUE ne fonctionne pas]
+    [(#ENV{masquer_logo}|non)[(#EVAL{_DIR_IMG}|preg_files{rubon#ENV{id_rubrique}\.(jpg|gif|png)}|table_valeur{0}|balise_img{'',spip_logo spip_logos}|image_reduire{#ENV{largeur_logo,200},#ENV{hauteur_logo,200}})]]
     <h1 class="#EDIT{titre}">#INFO_TITRE{rubrique, #ENV{id_rubrique}}</h1>
 </header>

@@ -1,16 +1,16 @@
 <div><strong>[(#ENV*{titre}) ]<i class="fa fa-#ENV{picto}"></i></strong></div>
 <ul class="small">
 	[<li><strong>(#ENV{filtrer_articles}|?{
-		#ENV{filtrer_articles}|match{^afficher}|?{
-			#ENV{articles_exclus}|?{
+		[(#ENV{filtrer_articles}|match{^afficher}|?{
+			[(#ENV{articles_exclus}|?{
 				Seulement les articles #ENV{articles_exclus}|picker_selected{article}|implode{', '}
 			,
 				Seulement les articles des rubriques #ENV{rubriques_exclues}|picker_selected{rubrique}|implode{', '}
-			}
+			})]
 		,
 			[(#ENV{articles_exclus}|?{Sauf les articles #ENV{articles_exclus}|picker_selected{article}|implode{','}})] 
-			#ENV{rubriques_exclues}|?{Sauf les articles des rubriques #ENV{rubriques_exclus}|picker_selected{rubrique}|implode{','}}
-		}
+			[(#ENV{rubriques_exclues}|?{Sauf les articles des rubriques #ENV{rubriques_exclus}|picker_selected{rubrique}|implode{','}})]
+		})]
 	,
 		Tous les articles
 	}) </strong></li>]
