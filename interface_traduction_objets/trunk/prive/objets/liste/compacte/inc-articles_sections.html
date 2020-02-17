@@ -49,7 +49,7 @@
 </table>
 [(#GET{activer_rang}|oui)
 	[(#ENV{id_rubrique}|et{#VAL{article}|appliquer_filtre{rang_objet_dans_config}}|oui)
-	<INCLURE{fond=prive/squelettes/inclure/rang,objet=articles,id_parent=#ID_RUBRIQUE,suffixe_pagination=art}/>
+	<INCLURE{fond=prive/squelettes/inclure/rang,objet=articles,suffixe_pagination=art}/>
 	]
 ]
 [<p class='pagination'>(#PAGINATION{prive})</p>]

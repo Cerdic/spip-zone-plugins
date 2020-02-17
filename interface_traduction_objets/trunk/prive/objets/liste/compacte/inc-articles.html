@@ -61,8 +61,8 @@
 	</tbody>
 </table>
 [(#GET{activer_rang}|oui)
-	[(#ENV{id_rubrique}|et{#VAL{article}|appliquer_filtre{rang_objet_dans_config}}|oui)1
-	<INCLURE{fond=prive/squelettes/inclure/rang,objet=articles,id_parent=#ID_RUBRIQUE,suffixe_pagination=art}/>
+	[(#ENV{id_rubrique}|et{#VAL{article}|appliquer_filtre{rang_objet_dans_config}}|oui)
+	<INCLURE{fond=prive/squelettes/inclure/rang,objet=articles,suffixe_pagination=art}/>
 	]
 ]
 [<p class='pagination'>(#PAGINATION{prive})</p>]
