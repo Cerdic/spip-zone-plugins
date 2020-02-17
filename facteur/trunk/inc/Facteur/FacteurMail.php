@@ -523,7 +523,7 @@ class FacteurMail extends PHPMailer {
 		try {
 			$retour = call_user_func_array($function, $args);
 			$this->exceptions = $exceptions;
-		} catch (phpmailerException $exc) {
+		} catch (Exception $exc) {
 			$this->log((is_array($function) ? implode('::', $function) : $function) . "() : " . $exc->getMessage(), _LOG_ERREUR);
 			$this->exceptions = $exceptions;
 			if ($this->exceptions){
