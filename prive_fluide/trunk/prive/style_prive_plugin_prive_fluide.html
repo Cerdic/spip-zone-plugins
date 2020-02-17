@@ -108,6 +108,7 @@ body.large {
 		#contenu {
 			grid-area: contenu;
 			width: initial;
+			min-width: 0; /* empêche de déborder si contenu trop grand (<table> et cie) */
 		}
 		#navigation {
 			grid-area: navigation;
