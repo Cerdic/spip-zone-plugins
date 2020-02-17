@@ -5,18 +5,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-/**
- * Formulaire permettant de construire un formulaire  ! En agençant des champs
- * Chargement.
- * @param string $identifiant identifiant unique du formulaire
- * @param array $formulaires_initial, formulaire initial (par exemple si on modifie un formulaire déjà construit)
- * @param array $options tableau d'options
- *		- int timestamp_formulaire_initial : timestamp du formulaire initial. Si plus récent que celui en session, le formulaire initial l'emporte sur le formulaire en session dessus
- *		- array options_globales : proposer des options globales pour le formulaire, liste de ces options
- *		- array saisies_exclues : liste des saisies à ne pas proposer (= à exclure du choix)
- *		- bool uniquement_sql : ne proposer que les saisies qui permettent de remplir un champ sql
- * @return array $contexte
-**/
 function formulaires_construire_formulaire_charger($identifiant, $formulaire_initial = array(), $options = array()) {
 	include_spip('inc/saisies');
 	$contexte = array();
@@ -33,23 +21,9 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 	// On s'assure que toutes les saisies ont un identifiant (en cas de bug lors de la création, par ex.)
 	$formulaire_initial = saisies_identifier($formulaire_initial);
 
-	// Si l'option timestamp_formulaire_initial n'a pas été rempli, la mettre à zero
-	if (!isset($options['timestamp_formulaire_initial'])) {
-		$options['timestamp_formulaire_initial'] = 0;
-	}
-	$timestamp_formulaire_actuel = session_get($identifiant.'_timestamp');
-	if (!$timestamp_formulaire_actuel) {
-		$timestamp_formulaire_actuel = -1;
-	}
-	// Si pas de session, on prend le formulaire initial comme formulaire actuel,
-	// ou bien si la session est trop trop veille, on prend le formulaire initial comme formulaire
-	if (
-		is_null($formulaire_actuel = session_get($identifiant))
-		or
-		($timestamp_formulaire_actuel > $options['timestamp_formulaire_initial'] and $_SERVER['REQUEST_METHOD'] === 'GET')
-	) {
+	// On initialise la session si elle est vide
+	if (is_null($formulaire_actuel = session_get($identifiant))) {
 		session_set($identifiant, $formulaire_initial);
-		session_set($identifiant.'_timestamp', $options['timestamp_formulaire_initial']);
 		$formulaire_actuel = $formulaire_initial;
 	}
 
