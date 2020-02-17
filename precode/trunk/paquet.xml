@@ -1,7 +1,7 @@
 <paquet
 	prefix="precode"
 	categorie="edition"
-	version="1.3.5"
+	version="1.3.6"
 	etat="test"
 	compatibilite="[2.1.0;3.2.*]"
 	logo="precode.png"
