@@ -53,9 +53,9 @@ function coordonnees_declarer_tables_objets_sql($tables) {
 			"KEY zip"          => "region, code_postal"
 		),
 		'titre' => "titre AS titre, '' AS lang",
-		'champs_editables'       => array('titre', 'voie', 'complement', 'boite_postale', 'code_postal', 'ville', 'region', 'etat_federe', 'pays'),
+		'champs_editables'       => array('titre', 'voie', 'complement', 'boite_postale', 'code_postal', 'ville', 'zone_administrative', 'pays'),
 		'champs_versionnes'      => array(),
-		'rechercher_champs'      => array('pays' => 8, 'titre' => 5, 'voie' => 3, 'region' => 3, 'etat_federe' => 3, 'ville' => 3),
+		'rechercher_champs'      => array('pays' => 8, 'titre' => 5, 'voie' => 3, 'zone_administrative' => 3, 'ville' => 3),
 		'tables_jointures'       => array('spip_adresses_liens'),
 		/* Les textes standard */
 		'texte_modifier'         => 'coordonnees:modifier_adresse',
