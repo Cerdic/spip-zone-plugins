@@ -1,0 +1,23 @@
+[(#REM)<style>/*
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+*/]#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+#wysiwyg .saisie_fieldset .champ {font-size: 1em;}
+
+body.saisies_doc {
+	background-color: #efefef;
+}
+<B_saisies>
+<BOUCLE_saisies (DATA) {source table, #VAL{saisies}|saisies_lister_disponibles}>
+.navigation_avec_icones .bando2_saisie_[(#CLE)] { [background-image: url((#ICONE|image_reduire{16}|extraire_attribut{src}));] }
+</BOUCLE_saisies>
+</B_saisies>
