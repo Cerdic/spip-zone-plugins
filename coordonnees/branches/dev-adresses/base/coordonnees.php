@@ -50,7 +50,7 @@ function coordonnees_declarer_tables_objets_sql($tables) {
 		'key' => array(
 			"PRIMARY KEY"      => "id_adresse",
 			"KEY iso3166"      => "pays",
-			"KEY zip"          => "region, code_postal"
+			"KEY zip"          => "zone_administrative(255), code_postal"
 		),
 		'titre' => "titre AS titre, '' AS lang",
 		'champs_editables'       => array('titre', 'voie', 'complement', 'boite_postale', 'code_postal', 'ville', 'zone_administrative', 'pays'),

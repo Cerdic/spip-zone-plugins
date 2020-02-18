@@ -127,6 +127,11 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter', 'TABLE spip_adresses DROP COLUMN region'),
 		array('sql_alter', 'TABLE spip_adresses DROP COLUMN etat_federe'),
 	);
+	
+	$maj['1.9.1'] = array(
+		array('sql_alter', 'TABLE spip_adresses DROP INDEX zip'),
+		array('sql_alter', 'TABLE spip_adresses ADD INDEX zip (zone_administrative(255), code_postal)'),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

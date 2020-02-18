@@ -2,7 +2,7 @@
 	prefix="coordonnees"
 	categorie="auteur"
 	version="3.0.0"
-	schema="1.9.0"
+	schema="1.9.1"
 	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/addressbook-128.png"
