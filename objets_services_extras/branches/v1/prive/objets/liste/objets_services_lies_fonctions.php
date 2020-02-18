@@ -3,7 +3,7 @@
  * Fonctions du squelette associé
  *
  * @plugin     Services extras pour objets
- * @copyright  2018
+ * @copyright  2018 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Objets_services_extras\Fonctions
