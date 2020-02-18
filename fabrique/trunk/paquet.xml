@@ -1,7 +1,7 @@
 <paquet
 	prefix="fabrique"
 	categorie="outil"
-	version="2.4.4"
+	version="2.5.0"
 	etat="stable"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/fabrique-64.png"
@@ -12,6 +12,7 @@
 	<nom>Fabrique</nom>
 
 	<auteur>Matthieu Marcillaud</auteur>
+	<credit lien="https://www.flaticon.com/authors/dinosoftlabs">Icône de DinosoftLabs depuis Flaticon</credit>
 	<licence>GNU/GPL</licence>
 
 	<necessite nom="saisies" compatibilite="[3.23.2;]" />
@@ -24,8 +25,8 @@
 
 	<menu nom="fabrique" titre="fabrique:fabrique_titre" parent="menu_developpement"  icone="images/fabrique-16.png" />
 
-	<onglet nom="fabrique" titre="fabrique:onglet_fabrique" parent="fabrique"  icone="images/fabrique-24.png" />
-	<onglet nom="fabrique_restaurer" titre="fabrique:onglet_fabrique_restaurer" parent="fabrique"  icone="images/fabrique_restaurer-24.png" />
-	<onglet nom="fabrique_outils" titre="fabrique:onglet_fabrique_outils" parent="fabrique"  icone="images/fabrique_outils-24.png" />
+	<onglet nom="fabrique" titre="fabrique:onglet_fabrique" parent="fabrique" icone="images/fabrique-24.png" />
+	<onglet nom="fabrique_restaurer" titre="fabrique:onglet_fabrique_restaurer" parent="fabrique" icone="images/fabrique_restaurer-24.png" />
+	<onglet nom="fabrique_outils" titre="fabrique:onglet_fabrique_outils" parent="fabrique" icone="images/fabrique_outils-24.png" />
 
 </paquet>
