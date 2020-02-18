@@ -3,7 +3,7 @@
  * Fonctions utiles au plugin Infos extras pour objets
  *
  * @plugin     Infos extras pour objets
- * @copyright  2018
+ * @copyright  2018 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Objets_infos_extras\Fonctions
@@ -19,5 +19,5 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * systématiquement chargés lors du calcul des squelettes.
  *
  * Il peut par exemple définir des filtres, critères, balises, …
- * 
+ *
  */

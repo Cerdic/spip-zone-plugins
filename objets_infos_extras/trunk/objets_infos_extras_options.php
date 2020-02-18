@@ -3,7 +3,7 @@
  * Options au chargement du plugin Infos extras pour objets
  *
  * @plugin     Infos extras pour objets
- * @copyright  2018
+ * @copyright  2018 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Objets_infos_extras\Options
@@ -20,5 +20,5 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * Il vaut donc mieux limiter au maximum son usage
  * tout comme son volume !
- * 
+ *
  */

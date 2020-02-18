@@ -3,7 +3,7 @@
  * Utilisation de l'action supprimer pour l'objet objets_information
  *
  * @plugin     Infos extras pour objets
- * @copyright  2018
+ * @copyright  2018 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Objets_infos_extras\Action
