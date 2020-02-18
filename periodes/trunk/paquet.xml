@@ -1,9 +1,9 @@
 <paquet
 	prefix="periodes"
 	categorie="outil"
-	version="1.1.6"
+	version="1.1.7"
 	etat="test"
-	compatibilite="[3.0.0;3.2.*]"
+	compatibilite="[3.0.0;3.3.*]"
 	logo="prive/themes/spip/images/periodes-64.png"
 	documentation="https://contrib.spip.net/Periodes"
 	schema="1.1.0"
@@ -12,15 +12,15 @@
 	<nom>Périodes</nom>
 	<!-- Gestion de périodes -->
 
-	<auteur lien='https://websimple.be'>Rainer Müller</auteur>
+	<auteur lien='https://web-simple.eu'>Rainer Müller</auteur>
 
 	<licence>GNU/GPL v3</licence>
 
 	<traduire module="periodes" reference="fr" gestionnaire="salvatore" />
 	<traduire module="periode" reference="fr" gestionnaire="salvatore" />
 
-	<necessite nom="saisies" compatibilite="[3.23.2;]" />
-	<necessite nom="dates_outils" compatibilite="[1.0.10;]" />
+	<necessite nom="saisies" compatibilite="[3.32.1;]" />
+	<necessite nom="dates_outils" compatibilite="[1.0.13;]" />
 
 	<pipeline nom="autoriser" inclure="periodes_autorisations.php" />
 
