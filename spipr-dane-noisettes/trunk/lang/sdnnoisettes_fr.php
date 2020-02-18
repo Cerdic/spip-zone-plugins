@@ -49,6 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_galerie'=>'Galerie',
 
 'erreur_uai' => 'Attention&#44; vous devez <a href="[(#URL_ECRIRE{noisette_edit, id_noisette=#ENV{id_noisette}})]"> saisir le code UAI de votre établissement</a>.',
+'explication_afficher_filtre'=>'Affiche le titre du mot-clé filtrant les articles.',
 'explication_articles_choisis'=>'Cliquer sur "Ajouter" à droite et sélectionner les articles à inclure ou exclure de la liste.',
 'explication_article_choisi'=>'Cliquer sur «&nbsp;Ajouter&nbsp;» à droite et sélectionner l\'article.',
 'explication_article_a_la_une'=>'Permet de choisir un article à afficher entièrement (suivant les champs paramétrés).',
@@ -87,6 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'hauteur' => 'Hauteur',
 
 'label_afficher_descriptif'=>'Afficher le descriptif',
+'label_afficher_filtre'=>'Afficher le filtre',
 'label_afficher_liste_simple'=>'Afficher une liste simple',
 'label_afficher_logo'=>'Afficher le logo',
 'label_afficher_nom_site'=>'Afficher le nom du site',
@@ -143,6 +145,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_masquer_adresse'=>'Masquer l\'adresse',
 'label_masquer_auteurs'=>'Masquer les auteurs',
 'label_masquer_date'=>'Masquer la date',
+'label_masquer_date_modif'=>'Masquer la date de modification',
 'label_masquer_descriptif'=>'Masquer le descriptif',
 'label_masquer_intro'=>'Masquer l\'introduction',
 'label_masquer_logo'=>'Masquer le logo',
@@ -155,6 +158,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_masquer_picto'=>'Masquer le pictogramme',
 'label_masquer_rubrique_en_cours'=>'Masquer la rubrique en cours',
 'label_masquer_titre'=>'Masquer le titre',
+'label_masquer_titre_groupes'=>'Masquer le titre des groupes',
 'label_pagination_articles'=>'Nombre d\'articles à afficher (pas de la pagination)',
 'label_nb_breves'=>'Nombre de brèves à afficher',
 'label_nb_evenements'=>'Nombre d\'événements à afficher',
@@ -172,6 +176,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_utiliser_sdn_conteneur'=>'Encadrer la noisette d\'un conteneur',
 'label_titre_mot'=>'Titre du mot-clé',
 'label_tri'=>'Trier par :',
+'label_type_liste'=>'Type d\'affichage de la liste.',
 /*GIS*/
 'nom_carte_gis'=>'Carte GIS',
 'description_carte_gis'=>'Carte GIS',
@@ -211,6 +216,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'masquer' => 'Masquer',
 'masquer_articles_rubriques_articles_selection' => 'Exclure les articles sélectionnés et/ou les articles des rubriques sélectionnées',
 'menu' => 'Menu',
+'mots_groupes_selection' => 'Les mots des groupes sélectionnes',
+'mots_tous' => 'Tous les mots',
 
 'nom_calendrier_mini' => 'Mini-calendrier des évènements',
 'non' => 'Non',

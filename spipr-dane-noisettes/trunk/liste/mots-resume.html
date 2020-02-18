@@ -3,7 +3,7 @@
 	[(#ENV{masquer_h2}|non)<h2 class="h2">[(#ENV{masquer_titre}|non)[(#ENV{titre,<:mots:>})] ][(#ENV{masquer_picto}|non)<span class="picto"><i class="fa fa-#ENV{picto,tags} "></i></span>]</h2>]
 <BOUCLE_groupes(GROUPES_MOTS){par titre}{id_groupe ?IN #ENV{id_groupes}}>
 	<ul class="liste-mots [ (#ENV{type_liste,lines}|=={lines}|?{liste-items, nav nav-#ENV{type_liste}})]">
-		<li class="[(#ENV{type_liste,lines}|=={lines}|?{h3,brand})]"><a>[(#ENV{titre_filtre}) ]<strong>#TITRE</strong></a></li>
+		[(#ENV{masquer_titre_groupes}|non)<li class="[(#ENV{type_liste,lines}|=={lines}|?{h3,brand})]"><a>[(#ENV{titre_filtre}) ]<strong>#TITRE</strong></a></li>]
 		[(#ENV{est_controleur}|oui) <li class="item[ (#ENV{id_mot}|non)active]">
 			<a href="[(#SELF|parametre_url{id_mot,''})]" data-vue="#ENV{est_vue, liste_articles}" data-id="" data-title="Tous"><span class="picto"><i class="fa fa-tags"></i>Tous</span></a>
 		</li>
