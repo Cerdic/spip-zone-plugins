@@ -1,7 +1,12 @@
-<traduction module="prix_objets_periodes" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/prix_objets_periodes/trunk/lang/" reference="fr">
-	<langue code="en" url="https://trad.spip.net/tradlang_module/prix_objets_periodes?lang_cible=en" total="2" traduits="0" relire="0" modifs="2" nouveaux="0" pourcent="0.00">
+<traduction
+	module="prix_objets_periodes"
+	id="prix_objets_periodes--prix_objets_periodes-2843f"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip-contrib-extensions/prix_objets_periodes.git"
+	reference="fr">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/prix_objets_periodes?lang_cible=en">
 		<traducteur nom="Rainer Müller" lien="https://trad.spip.net/auteur/rainer-muller" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/prix_objets_periodes?lang_cible=fr" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/prix_objets_periodes?lang_cible=fr" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>

@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/prix_objets_periodes/trunk/lang/
+// Fichier source, a modifier dans https://git.spip.net/spip-contrib-extensions/prix_objets_periodes.git
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }

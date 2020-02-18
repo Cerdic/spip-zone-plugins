@@ -1,9 +1,9 @@
 <paquet
 	prefix="prix_objets_periodes"
 	categorie="divers"
-	version="1.1.4"
+	version="1.1.5"
 	etat="test"
-	compatibilite="[3.0.0;3.2.*]"
+	compatibilite="[3.0.0;3.3.*]"
 	logo="prive/themes/spip/images/prix_objets_periodes-64.png"
 	documentation="https://contrib.spip.net/Periodes-de-prix"
 	schema="1.1.0"
@@ -13,17 +13,17 @@
 	<!-- Des prix selon la date -->
 
 	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs -->
-	<auteur lien='https://websimple.be'>Rainer Müller</auteur>
+	<auteur lien='https://web-simple.eu'>Rainer Müller</auteur>
 
 	<licence>GNU/GPL v3</licence>
 
 	<traduire module="prix_objets_periodes" reference="fr" gestionnaire="salvatore" />
 	<traduire module="po_periode" reference="fr" gestionnaire="salvatore" />
 
-	<necessite nom="saisies" compatibilite="[3.23.2;]" />
-	<necessite nom="prix_objets" compatibilite="[2.3.2;]" />
-	<necessite nom="dates_outils" compatibilite="[1.0.10;]" />
-	<necessite nom="periodes" compatibilite="[1.1.2;]" />
+	<necessite nom="saisies" compatibilite="[3.32.1;]" />
+	<necessite nom="prix_objets" compatibilite="[2.4.2;]" />
+	<necessite nom="dates_outils" compatibilite="[1.0.13;]" />
+	<necessite nom="periodes" compatibilite="[1.1.7;]" />
 
 	<pipeline nom="prix_objets_extensions" inclure="prix_objets_periodes_pipelines.php" />
 
