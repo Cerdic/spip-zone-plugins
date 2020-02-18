@@ -3,7 +3,7 @@
  * Fichier gérant l'installation et désinstallation du plugin Périodes
  *
  * @plugin     Périodes
- * @copyright  2019
+ * @copyright  2019 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL v3
  * @package    SPIP\Periodes\Installation
