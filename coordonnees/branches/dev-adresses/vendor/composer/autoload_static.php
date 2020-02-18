@@ -7,10 +7,6 @@ namespace Composer\Autoload;
 class ComposerStaticInita2a09e2236b4ff2fd0f193f3e2ad4edf
 {
     public static $prefixLengthsPsr4 = array (
-        'S' => 
-        array (
-            'Spip\\Coordonnees\\' => 17,
-        ),
         'D' => 
         array (
             'Doctrine\\Common\\Collections\\' => 28,
@@ -22,10 +18,6 @@ class ComposerStaticInita2a09e2236b4ff2fd0f193f3e2ad4edf
     );
 
     public static $prefixDirsPsr4 = array (
-        'Spip\\Coordonnees\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
-        ),
         'Doctrine\\Common\\Collections\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/collections/lib/Doctrine/Common/Collections',

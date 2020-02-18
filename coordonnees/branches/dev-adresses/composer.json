@@ -19,10 +19,5 @@
             "name": "Mukt",
             "homepage": "https://www.mukt.fr"
         }
-    ],
-    "autoload": {
-        "psr-4": {
-            "Spip\\Coordonnees\\": "src/"
-        }
-    }
+    ]
 }
