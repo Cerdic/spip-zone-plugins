@@ -11,7 +11,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Version de la structure des données de sauvegarde de la fabrique
  * @var int */
-define('FABRIQUE_VERSION', 6);
+define('FABRIQUE_VERSION', 7);
 
 /**
  * Clé de stockage des infos du plugin en construction dans la session

@@ -384,3 +384,21 @@ function fabrique_migration_v6($data) {
 	}
 	return $data;
 }
+
+
+/**
+ * Migration v7
+ *
+ * L’entrée 'logo_variantes' est supprimée
+ *
+ * @param  array $data Données à migrer
+ * @return array       Données migrées
+ **/
+function fabrique_migration_v7($data) {
+	if (is_array($data['objets'])) {
+		foreach ($data['objets'] as $c => $o) {
+			unset($data['objets'][$c]['logo_variantes']);
+		}
+	}
+	return $data;
+}
