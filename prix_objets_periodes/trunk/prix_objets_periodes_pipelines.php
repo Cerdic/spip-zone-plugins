@@ -3,7 +3,7 @@
  * Utilisations de pipelines par Prix objets par périodes
  *
  * @plugin     Prix objets par périodes
- * @copyright  2018 - 2019
+ * @copyright  2018 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL v3
  * @package    SPIP\Prix_objets_periodes\Pipelines
