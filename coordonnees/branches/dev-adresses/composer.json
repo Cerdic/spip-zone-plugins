@@ -1,0 +1,28 @@
+{
+    "name": "spip-contrib-extensions/coordonnees",
+    "description": "Coordonnées",
+    "type": "library",
+    "require": {
+        "commerceguys/addressing": "^1.0"
+    },
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Matthieu Marcillaud",
+            "email": "marcimat@rezo.net"
+        },
+        {
+            "name": "Cyril MARION",
+            "homepage": "http://www.cym.fr"
+        },
+        {
+            "name": "Mukt",
+            "homepage": "https://www.mukt.fr"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Spip\\Coordonnees\\": "src/"
+        }
+    }
+}
