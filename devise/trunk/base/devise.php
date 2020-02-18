@@ -1,6 +1,19 @@
 <?php
-if (!defined("_ECRIRE_INC_VERSION")) return;
-function devise_declarer_champs_extras($champs = array()){
+/**
+ * Déclarations relatives à la base de données
+ *
+ * @plugin     Devise
+ * @author     Davux
+ * @licence    GNU/GPL
+ * @package    SPIP\Devise\Base
+ */
+
+// Sécurité
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
+function devise_declarer_champs_extras($champs = array()) {
 	$champs['spip_auteurs']['devise'] = array(
 		'saisie' => 'devise',
 		'options' => array(
@@ -15,4 +28,3 @@ function devise_declarer_champs_extras($champs = array()){
 	);
 	return $champs;
 }
-?>
