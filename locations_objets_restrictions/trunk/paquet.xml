@@ -1,9 +1,9 @@
 <paquet
 	prefix="locations_objets_restrictions"
 	categorie="divers"
-	version="1.2.1"
+	version="1.2.2"
 	etat="test"
-	compatibilite="[3.2.3;3.2.*]"
+	compatibilite="[3.2.3;3.3.*]"
 	logo="prive/themes/spip/images/locations_objets_restrictions-64.png"
 	documentation="https://github.com/abelass/locations_objets_restrictions"
 	schema="1.0.1"
@@ -16,9 +16,9 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="location_objets" compatibilite="[1.5.2;]" />
-	<necessite nom="saisies" compatibilite="[3.23.2;]" />
-	<necessite nom="verifier" compatibilite="[1.8.3;]" />
+	<necessite nom="location_objets" compatibilite="[1.5.7;]" />
+	<necessite nom="saisies" compatibilite="[3.32.1;]" />
+	<necessite nom="verifier" compatibilite="[1.9.6;]" />
 
 	<!-- Appels des pipelines -->
 	<pipeline nom="autoriser" inclure="locations_objets_restrictions_autorisations.php" />
