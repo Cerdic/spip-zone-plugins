@@ -30,6 +30,7 @@ function archobjet_affiche_milieu($flux) {
 			($objet_exec = trouver_objet_exec($exec))
 			and !$objet_exec['edition']
 			and ($table = $objet_exec['table_objet_sql'])
+			and isset($configuration['objets_archivables'])
 			and in_array($table, $configuration['objets_archivables'])
 			and ($objet = $objet_exec['type'])
 			and ($id_objet = intval($flux['args'][$objet_exec['id_table_objet']]))
