@@ -23,5 +23,4 @@
 	<pipeline nom="formulaire_traiter" inclure="liaison_objet_pipelines.php" />
 	<pipeline nom="jqueryui_plugins" inclure="liaison_objet_pipelines.php" />
 	<pipeline nom="header_prive" inclure="liaison_objet_pipelines.php" />
-
 </paquet>
