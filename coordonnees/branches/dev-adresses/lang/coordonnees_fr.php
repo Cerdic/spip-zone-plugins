@@ -84,6 +84,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_type_numero' => 'Type de numéro',
 	'label_ville' => 'Ville',
 	'label_voie' => 'N<sup>o</sup> & voie',
+	'label_zone_administrative' => 'Zone administrative',
 	'logo_adresse' => 'Logo de l\'adresse',
 	'logo_email' => 'Logo du courriel',
 	'logo_numero' => 'Logo du numero',
