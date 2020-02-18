@@ -12,7 +12,7 @@
 	<nom>Infos extras pour objets</nom>
 	<!-- Des informations extras à vos objets -->
 
-	<auteur>Rainer Müller</auteur>
+	<auteur lien='https://web-simple.eu'>Rainer Müller</auteur>
 
 	<licence>GNU/GPL</licence>
 
