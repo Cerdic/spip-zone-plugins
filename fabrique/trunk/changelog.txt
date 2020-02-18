@@ -2,6 +2,13 @@ Plugin Fabrique pour SPIP
 Ce plugin génère d'autres plugins !
 -----------------------------------
 
+2.6.0 le 18 02 2020
+-----------------------
+* Gestion des logos SVG (pour SPIP 3.3+)
+
+2.5.0 le 18 02 2020
+-----------------------
+* Logo du plugin en SVG
 
 2.4.0 le 30 10 2018
 -----------------------

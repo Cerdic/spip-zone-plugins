@@ -4,7 +4,7 @@
 	version="#ENV{paquet/version}"
 	etat="#ENV{paquet/etat}"
 	compatibilite="#ENV{paquet/compatibilite}"
-	logo="[(#ENV{paquet/logo/0/fichier}|?{prive/themes/spip/images/#PREFIXE-64.png})]"
+	logo="[(#ENV{paquet/logo/0/fichier}|fabrique_chemin_themes_images{#PREFIXE,64})]"
 	documentation="#ENV{paquet/documentation}"[
 	schema="#ENV{paquet/schema}"(#ENV{paquet/administrations}|oui)]
 >

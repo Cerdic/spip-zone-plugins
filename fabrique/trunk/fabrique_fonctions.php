@@ -1227,6 +1227,26 @@ function filtre_fabrique_miniature_image($fichier, $taille=256) {
 	return $im;
 }
 
+/**
+ * Retourne le chemin vers le répertoire themes d’une image,
+ * différent si c’est svg ou png...
+ * @param string $fichier nom du fichier enregistré dans la fabrique
+ * @param string $nom nom du fichier dans le chemin des images
+ * @param int $taille taille désirée du fichier
+ * @return string
+ */
+function fabrique_chemin_themes_images($fichier, $nom, $taille = 0) {
+	if (!$fichier) {
+		return '';
+	}
+	$extension = strtolower(pathinfo($fichier, PATHINFO_EXTENSION));
+	if ($extension === 'svg') {
+		$chemin = "prive/themes/spip/images/$nom-xx.svg";
+	} else {
+		$chemin = "prive/themes/spip/images/$nom-$taille.png";
+	}
+	return $chemin;
+}
 
 
 /**

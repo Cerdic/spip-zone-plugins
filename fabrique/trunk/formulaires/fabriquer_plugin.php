@@ -471,32 +471,32 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 	$images = session_get(FABRIQUE_ID_IMAGES);
 	if (!empty($images['paquet']['logo'][0]['fichier'])) {
 		$i = $images['paquet']['logo'][0]['fichier'];
-		fabriquer_miniature($prefixe, $i, $prefixe, 128);
-		fabriquer_miniature($prefixe, $i, $prefixe, 64);
-		fabriquer_miniature($prefixe, $i, $prefixe, 32);
+		fabriquer_miniatures($prefixe, $i, $prefixe, [128, 64, 32]);
 	}
 	// logos des objets
 	foreach ($images['objets'] as $c => $image) {
 		$obj = $data['objets'][$c]['type'];
-		$i_precedent = '';
 		// on prend en priorite la taille desiree,
 		// sinon la plus proche, avant,
 		// sinon le logo de l'objet, sinon le logo du plugin.
+		$logo_objet_base = '';
+		if (!empty($image['logo'][0]['fichier'])) {
+			$logo_objet_base = $image['logo'][0]['fichier'];
+		} elseif (!empty($images['paquet']['logo'][0]['fichier'])) {
+			$logo_objet_base = $images['paquet']['logo'][0]['fichier'];
+		}
+		fabriquer_miniatures($prefixe, $logo_objet_base, $obj, [32]);
+		$i_precedent = $logo_objet_base;
 		foreach (array(32, 24, 16, 12) as $taille) {
-			if ((isset($image['logo'][$taille]) AND $i = $image['logo'][$taille]['fichier'])
-			OR ($i = $i_precedent)
-			OR (isset($image['logo'][0]['fichier']) and $i = $image['logo'][0]['fichier'])
-			OR (isset($images['paquet']['logo'][0]['fichier']) and $i = $images['paquet']['logo'][0]['fichier'])) {
+			if (
+				(isset($image['logo'][$taille]) AND $i = $image['logo'][$taille]['fichier'])
+				or ($i = $i_precedent)
+			) {
 				$i_precedent = $i; // privilegier l'image juste plus grande que la precedente
-				fabriquer_miniature($prefixe, $i, $obj, $taille);
-				if ($data['objets'][$c]['logo_variantes'] && $taille >= 16) {
-					fabriquer_miniature($prefixe, $i, $obj, $taille, 'new');
-					fabriquer_miniature($prefixe, $i, $obj, $taille, 'add');
-					fabriquer_miniature($prefixe, $i, $obj, $taille, 'del');
-					fabriquer_miniature($prefixe, $i, $obj, $taille, 'edit');
-				} elseif ($taille == 16) {
+				fabriquer_miniatures($prefixe, $i, $obj, [$taille], $i !== $logo_objet_base);
+				if ($taille === 16) {
 					// creer la variante 16+ qui sert a la barre outils_rapides
-					fabriquer_miniature($prefixe, $i, $obj, $taille, 'new');
+					fabriquer_miniatures($prefixe, $i, $obj, [$taille], true, 'new');
 				}
 			}
 		}
@@ -594,10 +594,95 @@ function fabriquer_fichier($chemin, $data) {
 	ecrire_fichier($destination . $chemin_dest . '/' . $nom, $contenu);
 }
 
-
-
 /**
  * Réduit une image dont l'adresse est donnée,
+ * et la place dans prive/themes/spip/images du futur plugin
+ *
+ * @param string $prefixe
+ *     Préfixe du plugin
+ * @param string $src
+ *     Source de l'image
+ * @param string $nom
+ *     Nom du fichier d'image
+ * @param int[] $taille
+ *     Tailles de l'image en pixels
+ * @param bool $specifiques
+ *     Doit-on générer une image svg spécifique pour cette image ?
+ * @param string[] $variante
+ *     Variantes tel que `del`, `edit`, `new`, `add`
+ **/
+function fabriquer_miniatures($prefixe, $src, $nom, $tailles = [], $specfiques = false, $variante = '') {
+	$extension = strtolower(pathinfo($src, PATHINFO_EXTENSION));
+	if ($extension === 'svg') {
+		if ($specfiques) {
+			foreach ($tailles as $taille) {
+				fabriquer_miniature_svg($prefixe, $src, $nom, $taille, $specfiques);
+			}
+		} else {
+			fabriquer_miniature_svg($prefixe, $src, $nom, reset($tailles));
+		}
+	} else {
+		foreach ($tailles as $taille) {
+			fabriquer_miniature_png($prefixe, $src, $nom, $taille, $variante);
+		}
+	}
+}
+
+/**
+ * Crée et retourne le chemin vers le répertoire image du plugin,
+ * qui stocke les images/logos
+ * @param string $prefixe préfixe du plugin...
+ * @return string
+ */
+function fabriquer_repertoire_themes_images($prefixe) {
+	// retrouver la destination de copie des fichiers
+	$destination = fabrique_destination();
+	$destination .= $prefixe . '/';
+	// creer une fois l'arborescence de destination
+	static $chemin = false;
+	if (!$chemin) {
+		$chemin = "prive/themes/spip/images";
+		sous_repertoire_complet($destination . $chemin);
+	}
+	return $destination . $chemin;
+
+}
+/**
+ * Prépare une image SVG dont l'adresse est donnée,
+ * et la place dans prive/themes/spip/images du futur plugin
+ *
+ * @param string $prefixe
+ *     Préfixe du plugin
+ * @param string $src
+ *     Source de l'image
+ * @param string $nom
+ *     Nom du fichier d'image
+ * @param int $taille
+ *     Taille de l'image en pixels
+ **/
+function fabriquer_miniature_svg($prefixe, $src, $nom, $taille = 0, $specifique = false) {
+	$destination = fabriquer_repertoire_themes_images($prefixe);
+	include_spip('inc/filtres_images');
+	// reduire et graver
+	$img = filtrer('image_passe_partout', $src, $taille, $taille);
+	$img = filtrer('image_graver', $img);
+	$src_img = extraire_attribut($img, 'src');
+	// pas de ?date pour recuperer le contenu
+	$src_img = explode('?', $src_img);
+	$src_img = array_shift($src_img);
+	$contenu = spip_file_get_contents($src_img);
+	if ($contenu) {
+		if ($specifique) {
+			$nom = "$nom-$taille.svg";
+		} else {
+			$nom = "$nom-xx.svg";
+		}
+		ecrire_fichier( "$destination/$nom", $contenu);
+	}
+}
+
+/**
+ * Réduit une image dont l'adresse est donnée (autre que SVG),
  * et la place dans prive/themes/spip/images du futur plugin
  *
  * @param string $prefixe
@@ -611,17 +696,8 @@ function fabriquer_fichier($chemin, $data) {
  * @param string $variante
  *     Variante tel que `del`, `edit`, `new`, `add`
 **/
-function fabriquer_miniature($prefixe, $src, $nom, $taille=128, $variante='') {
-	// retrouver la destination de copie des fichiers
-	$destination = fabrique_destination();
-	$destination .= $prefixe . '/';
-	// creer une fois l'arborescence de destination
-	static $chemin = false;
-	if (!$chemin) {
-		$chemin = "prive/themes/spip/images";
-		sous_repertoire_complet($destination . $chemin);
-	}
-
+function fabriquer_miniature_png($prefixe, $src, $nom, $taille = 128, $variante = '') {
+	$destination = fabriquer_repertoire_themes_images($prefixe);
 	include_spip('inc/filtres_images');
 	// passer en png
 	$img = filtrer('image_format', $src, 'png');
@@ -638,7 +714,7 @@ function fabriquer_miniature($prefixe, $src, $nom, $taille=128, $variante='') {
 	$contenu = spip_file_get_contents($src_img);
 	if ($contenu) {
 		$nom = $nom . ($variante ? "-$variante" : ''). "-$taille.png";
-		ecrire_fichier($destination . "$chemin/$nom", $contenu);
+		ecrire_fichier( "$destination/$nom", $contenu);
 	}
 }
 
