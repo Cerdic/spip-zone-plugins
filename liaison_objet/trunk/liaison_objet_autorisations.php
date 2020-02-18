@@ -3,7 +3,7 @@
  * Définit les autorisations du plugin Liaison_objets
  *
  * @plugin     Liaison_objets
- * @copyright  2012 - 2019
+ * @copyright  2012 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Liaison_objets\Autorisations

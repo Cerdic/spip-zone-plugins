@@ -3,7 +3,7 @@
  * Des actions pour la gestion de l'objet liaison_objet
  *
  * @plugin     Liaison_objets
- * @copyright  2012 - 2019
+ * @copyright  2012 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Immeubles\Action

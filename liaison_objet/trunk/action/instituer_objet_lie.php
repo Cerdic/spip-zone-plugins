@@ -3,7 +3,7 @@
  * Action pour l'institution  d'un objet_lie
  *
  * @plugin     Liaison_objets
- * @copyright  2012 - 2019
+ * @copyright  2012 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Liaison_objets\Action
