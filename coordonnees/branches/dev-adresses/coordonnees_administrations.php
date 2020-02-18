@@ -119,6 +119,14 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['1.8.5'] = array(
 		array('sql_alter', 'TABLE spip_adresses CHANGE etat_federal etat_federe varchar(40) NOT NULL DEFAULT ""'),
 	);
+	
+	// Fusion de "region" et "etat_federe" dans un champ générique "zone_administrative" (pour l'instant un seul niveau suffit)
+	$maj['1.9.0'] = array(
+		array('maj_tables', array('spip_adresses')),
+		array('sql_update', 'spip_adresses', array('zone_administrative' => 'trim(concat(region, " ", etat_federe))')),
+		array('sql_alter', 'TABLE spip_adresses DROP COLUMN region'),
+		array('sql_alter', 'TABLE spip_adresses DROP COLUMN etat_federe'),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -133,7 +141,6 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible) {
  * @return void
  */
 function coordonnees_vider_tables($nom_meta_base_version) {
-
 	sql_drop_table("spip_adresses");
 	sql_drop_table("spip_adresses_liens");
 	sql_drop_table("spip_numeros");
@@ -145,9 +152,9 @@ function coordonnees_vider_tables($nom_meta_base_version) {
 	effacer_meta($nom_meta_base_version);
 }
 
-
 /**
- * Fonction mise a jour du plugin Coordonnees vers 1.3
+ * Fonction mise a jour du plugin Coordonnees vers schéma 1.3
+ * 
  * @return void
  */
 function coordonnees_upgrade_1_3() {
@@ -164,10 +171,10 @@ function coordonnees_upgrade_1_3() {
 	}
 }
 
-
 /**
- * Fonction mise a jour du plugin Coordonnees vers 1.8.2
+ * Fonction mise a jour du plugin Coordonnees vers schéma 1.8.2
  * Metas : conversion des objets «coordonnables» : on utilise les noms des tables (auteur -> spip_auteurs)
+ * 
  * @return void
  */
 function coordonnees_upgrade_1_8_2() {

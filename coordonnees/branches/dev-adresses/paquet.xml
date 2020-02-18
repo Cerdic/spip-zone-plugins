@@ -1,9 +1,9 @@
 <paquet
 	prefix="coordonnees"
 	categorie="auteur"
-	version="2.5.2"
-	schema="1.8.6"
-	etat="stable"
+	version="3.0.0"
+	schema="1.9.0"
+	etat="dev"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/addressbook-128.png"
 	documentation="https://contrib.spip.net/Plugin-Coordonnees"
