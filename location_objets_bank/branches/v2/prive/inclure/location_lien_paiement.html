@@ -1,0 +1,9 @@
+<BOUCLE_transactions(TRANSACTIONS){id_objets_location}{statut IN commande,attente}{par date_transaction}{0,1}>
+	[(#AUTORISER{regler,transaction,#ID_TRANSACTION})
+		[(#ENV{prix}|>{0}|oui|et{#TRANSACTION_HASH|oui})
+			<a class="action_paiement"  href="[(#URL_ECRIRE{payer,id_transaction=#ID_TRANSACTION}
+					|parametre_url{transaction_hash,#TRANSACTION_HASH}
+					|parametre_url{id_objets_location,#ID_OBJETS_LOCATION})]"><:bank:payer:></a>
+		]
+	]
+</BOUCLE_transactions>
