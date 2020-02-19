@@ -3,7 +3,7 @@
  * Utilisation de l'action supprimer pour l'objet espace
  *
  * @plugin     Espaces
- * @copyright  2018 - 2019
+ * @copyright  2018 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL v3
  * @package    SPIP\Espaces\Action
