@@ -1,9 +1,9 @@
 <paquet
 	prefix="immeubles"
 	categorie="divers"
-	version="1.0.10"
+	version="1.0.11"
 	etat="test"
-	compatibilite="[3.0.0;3.2.*]"
+	compatibilite="[3.0.0;3.3.*]"
 	logo="prive/themes/spip/images/immeubles-64.png"
 	documentation="https://github.com/abelass/immeubles"
 	schema="1.0.0"
@@ -12,14 +12,14 @@
 	<nom>Immeubles</nom>
 	<!-- Gérer des immeubles -->
 
-	<auteur lien='https://websimple.be'>Rainer Müller</auteur>
+	<auteur lien='https://web-simple.eu'>Rainer Müller</auteur>
 
 	<licence>GNU/GPL</licence>
 
 	<traduire module="immeuble" reference="fr" gestionnaire="salvatore" />
 	<traduire module="immeubles" reference="fr" gestionnaire="salvatore" />
 
-	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="saisies" compatibilite="[3.32.1;]" />
 
 	<pipeline nom="autoriser" inclure="immeubles_autorisations.php" />
 
