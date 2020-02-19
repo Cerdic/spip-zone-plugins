@@ -3,7 +3,7 @@
  * Utilisations de pipelines par Location d’objets - paiements
  *
  * @plugin     Location d’objets - paiements
- * @copyright  2018 - 2019
+ * @copyright  2018 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL v3
  * @package    SPIP\Location_objets_bank\Pipelines
