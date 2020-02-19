@@ -3,7 +3,7 @@
  * Gestion du formulaire de d'édition de immeuble
  *
  * @plugin     Immeubles
- * @copyright  2018 - 2019
+ * @copyright  2018 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Immeubles\Formulaires

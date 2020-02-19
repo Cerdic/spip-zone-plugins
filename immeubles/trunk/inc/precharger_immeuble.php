@@ -3,7 +3,7 @@
  * Préchargement des formulaires d'édition de immeuble
  *
  * @plugin     Immeubles
- * @copyright  2018 - 2019
+ * @copyright  2018 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Immeubles\Formulaires
@@ -19,7 +19,7 @@ include_spip('inc/precharger_objet');
  * Retourne les valeurs à charger pour un formulaire d'édition d'un immeuble
  *
  * Lors d'une création, certains champs peuvent être préremplis
- * (c'est le cas des traductions) 
+ * (c'est le cas des traductions)
  *
  * @param string|int $id_immeuble
  *     Identifiant de immeuble, ou "new" pour une création
@@ -36,11 +36,11 @@ function inc_precharger_immeuble_dist($id_immeuble, $id_rubrique=0, $lier_trad=0
 
 /**
  * Récupère les valeurs d'une traduction de référence pour la création
- * d'un immeuble (préremplissage du formulaire). 
+ * d'un immeuble (préremplissage du formulaire).
  *
  * @note
  *     Fonction facultative si pas de changement dans les traitements
- * 
+ *
  * @param string|int $id_immeuble
  *     Identifiant de immeuble, ou "new" pour une création
  * @param int $id_rubrique
