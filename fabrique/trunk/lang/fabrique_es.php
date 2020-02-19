@@ -219,7 +219,6 @@ Además, estos archivos a veces tienen adiciones mínimas de características, l
 	'label_licence' => 'Licencia',
 	'label_logo' => 'Logo',
 	'label_logo_taille' => 'Logo de @taille@px',
-	'label_logo_variantes' => 'Variantes de logos ?',
 	'label_nom' => 'Nombre',
 	'label_nom_pluriel' => 'Nombre Plural',
 	'label_nom_pluriel_explication' => 'Ejemplo « Choses »',
