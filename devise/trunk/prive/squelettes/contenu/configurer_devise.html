@@ -1,0 +1,9 @@
+[(#AUTORISER{configurer,_devise}|sinon_interdire_acces)]
+
+<h1 class="grostitre"><:devise:titre_page_configurer_devise:></h1>
+
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_DEVISE
+</div>
+
+<INCLURE{fond=prive/objets/liste/devises, nb=30, sinon=<:devise:info_aucune_devise:>}>
