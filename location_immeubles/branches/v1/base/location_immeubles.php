@@ -3,7 +3,7 @@
  * Déclarations relatives à la base de données
  *
  * @plugin     Immeubles
- * @copyright  2018 - 2019
+ * @copyright  2018 - 2020
  * @author     Rainer Müller
  * @licence    GNU/GPL v3
  * @package    SPIP\Location_objets\Pipelines
