@@ -1,9 +1,9 @@
 <paquet
 	prefix="espaces"
 	categorie="divers"
-	version="1.0.8"
+	version="1.0.9"
 	etat="test"
-	compatibilite="[3.0.0;3.2.*]"
+	compatibilite="[3.0.0;3.3.*]"
 	logo="prive/themes/spip/images/espaces-64.png"
 	documentation="https://github.com/abelass/espaces"
 	schema="1.0.0"
@@ -22,7 +22,7 @@
 	<traduire module="espace" reference="fr" gestionnaire="salvatore" />
 	<traduire module="espaces" reference="fr" gestionnaire="salvatore" />
 
-	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="saisies" compatibilite="[3.32.1;]" />
 
 	<pipeline nom="autoriser" inclure="espaces_autorisations.php" />
 
