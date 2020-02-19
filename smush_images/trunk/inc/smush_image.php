@@ -34,7 +34,7 @@ function inc_smush_image_dist($im) {
 				spip_log('SMUSH en erreur', 'smush.'._LOG_ERREUR);
 				spip_log($newcontent['error'], 'smush.'._LOG_ERREUR);
 			}
-			return $im;
+			return _image_ecrire_tag($image, array('src' => $im));
 		} else {
 			return image_smush($im);
 		}
