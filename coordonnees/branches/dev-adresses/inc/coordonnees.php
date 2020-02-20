@@ -125,6 +125,14 @@ function coordonnees_adresses_saisies_par_pays($code_pays, $adresse_obligatoire=
 							}
 						}
 						
+						// Pour la ville, on personnalise
+						if ($champ == 'locality') {
+							// S'il y a un type, on utilise son label si différent du code postal
+							if (($ville_type = $addressFormat->getLocalityType()) != 'city') {
+								$saisie['options']['label'] = _T("coordonnees:adresse_champ_ville_${ville_type}_label");
+							}
+						}
+						
 						// Pour la zone administrative, on personnalise
 						if ($champ == 'administrativeArea') {
 							// S'il y a un type, on utilise son label
