@@ -3,7 +3,7 @@
  * Fichier gérant l'installation et désinstallation du plugin Locations d&#039;objets - restrictions
  *
  * @plugin     Locations d&#039;objets - restrictions
- * @copyright  2019
+ * @copyright  2019 - 2020
  * @author     Rainer
  * @licence    GNU/GPL
  * @package    SPIP\Locations_objets_restrictions\Installation
@@ -22,7 +22,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * - créer la structure SQL,
  * - insérer du pre-contenu,
  * - installer des valeurs de configuration,
- * - mettre à jour la structure SQL 
+ * - mettre à jour la structure SQL
  *
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
@@ -35,7 +35,7 @@ function locations_objets_restrictions_upgrade($nom_meta_base_version, $version_
 
 	# quelques exemples
 	# (que vous pouvez supprimer !)
-	# 
+	#
 	# $maj['create'] = array(array('creer_base'));
 	#
 	# include_spip('inc/config')
@@ -62,11 +62,11 @@ function locations_objets_restrictions_upgrade($nom_meta_base_version, $version_
 
 /**
  * Fonction de désinstallation du plugin Locations d&#039;objets - restrictions.
- * 
+ *
  * Vous devez :
  *
  * - nettoyer toutes les données ajoutées par le plugin et son utilisation
- * - supprimer les tables et les champs créés par le plugin. 
+ * - supprimer les tables et les champs créés par le plugin.
  *
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP

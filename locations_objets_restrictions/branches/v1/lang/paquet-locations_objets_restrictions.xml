@@ -1,2 +1,9 @@
-<traduction module="paquet-locations_objets_restrictions" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/locations_objets_restrictions/trunk/lang/" reference="fr">
+<traduction
+	module="paquet-locations_objets_restrictions"
+	id="paquet-locations_objets_restrictions--locations_objets_restrictions-01846"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip-contrib-extensions/locations_objets_restrictions.git"
+	reference="fr">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-locations_objets_restrictions?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>

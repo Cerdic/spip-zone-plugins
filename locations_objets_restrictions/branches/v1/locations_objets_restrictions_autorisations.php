@@ -3,7 +3,7 @@
  * Définit les autorisations du plugin Locations d&#039;objets - restrictions
  *
  * @plugin     Locations d&#039;objets - restrictions
- * @copyright  2019
+ * @copyright  2019 - 2020
  * @author     Rainer
  * @licence    GNU/GPL
  * @package    SPIP\Locations_objets_restrictions\Autorisations
