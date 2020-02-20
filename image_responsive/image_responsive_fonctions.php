@@ -418,9 +418,11 @@ function _image_responsive($img, $taille = -1, $lazy = 0, $vertical = 0, $medias
 			$img .= "\n<link href='" . $f[1] . "' rel='attachment' property='url'>"
 				. "\n<link href='" . $f[2] . "' rel='attachment' property='url'>";
 		}
-		foreach ($fichiers_webp as $f) {
-			$img .= "\n<link href='" . $f[1] . "' rel='attachment' property='url'>"
-				. "\n<link href='" . $f[2] . "' rel='attachment' property='url'>";
+		if ($fichiers_webp) {
+			foreach ($fichiers_webp as $f) {
+				$img .= "\n<link href='" . $f[1] . "' rel='attachment' property='url'>"
+					. "\n<link href='" . $f[2] . "' rel='attachment' property='url'>";
+			}
 		}
 	}
 
