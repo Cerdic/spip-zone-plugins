@@ -11,6 +11,7 @@
   Parametres :
   - multiple : si oui, on peut selectionner plusieurs rubriques
   - afficher_langue : si oui, on affiche la langue de l'objet selectionne
+  - limite_branche : branche dans laquelle on limite le selecteur
   - afficher_rub_dans_langue_interface : si oui, on n'affiche que les rubriques de la langue de l'interface
   - defaut : valeur par defaut si pas présente dans l'environnement
   - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
@@ -38,4 +39,5 @@
 	name=#ENV{nom},
 	afficher_langue=#ENV{afficher_langue,''},
 	filtrer_langue_rubrique=#GET{filtrer_langue_rubrique,''},
+	limite_branche=#ENV{limite_branche,''},
 	select=[(#ENV{multiple}|?{0,1})]})]
