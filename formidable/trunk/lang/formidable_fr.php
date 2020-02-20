@@ -267,7 +267,7 @@ Cette option n’est conservée que pour compatibilité ascendante. Elle n’app
 	'traiter_email_option_modification_reponse_label_case' => 'Ne pas envoyer d’email en cas de modification d’une réponse déjà enregistrée.',
 	'traiter_email_option_nom_envoyeur_accuse_explication' => 'Précisez le nom de l’expéditeur utilisé pour envoyer l’accusé de réception. Si vous ne mettez rien, ce sera le nom du site..',
 	'traiter_email_option_nom_envoyeur_accuse_label' => 'Nom de l’expéditeur de l’accusé de réception',
-	'traiter_email_option_pj_explication' => 'Si les documents postés ne dépassent pas une certaine taille (cette taille est modifiable par le·la webmestre à travers la constante _FORMIDABLE_TAILLE_MAX_FICHIERS_EMAIL).',
+	'traiter_email_option_pj_explication' => 'Si les documents postés ne sont suffisament légers (la taille maximale est modifiable par le·la webmestre à travers la constante _FORMIDABLE_TAILLE_MAX_FICHIERS_EMAIL).',
 	'traiter_email_option_pj_label' => 'Joindre les fichiers dans le courriel',
 	'traiter_email_option_sujet_accuse_label' => 'Sujet de l’accusé de réception',
 	'traiter_email_option_sujet_explication' => 'Construisez le sujet à l’aide des @raccourcis@. Si vous ne mettez rien, le sujet sera construit automatiquement.',
