@@ -16,9 +16,15 @@ function action_api_adresses_par_pays_dist() {
 		and include_spip('inc/coordonnees')
 		and $saisies_pays = coordonnees_adresses_saisies_par_pays($code_pays, _request('obligatoire'))
 	){
-		$contexte = array_merge($_GET, array('saisies' => $saisies_pays));
+		// On remet le bon identifiant
+		if ($identifiant = _request('identifiant')) {
+			foreach ($saisies_pays as $cle=>$saisie) {
+				$saisies_pays[$cle]['options']['attributs'] = 'data-adresse-id="'.$identifiant.'"';
+			}
+		}
 		
 		// On génère le HTML de ces saisies, avec l'environnement envoyé
+		$contexte = array_merge($_GET, array('saisies' => $saisies_pays));
 		$html = recuperer_fond('inclure/generer_saisies', $contexte);
 		
 		// On renvoie tout ça
