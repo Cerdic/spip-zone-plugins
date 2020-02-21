@@ -18,6 +18,8 @@ function action_commander_abonnement_dist($arg = null) {
 		$id_abonnements_offre = intval($arg)
 		and $offre = sql_fetsel('*', 'spip_abonnements_offres', 'id_abonnements_offre = '.$id_abonnements_offre)
 	) {
+		include_spip('inc/session');
+
 		// Trouver le prix par défaut de l'offre demandée
 		$trouver_prix = charger_fonction('prix', 'inc');
 		$prix_defaut = $trouver_prix('abonnements_offre', $id_abonnements_offre);
@@ -28,12 +30,12 @@ function action_commander_abonnement_dist($arg = null) {
 			'id_abonnements_offre' => $id_abonnements_offre,
 			'montant' => $prix_defaut,
 		);
-		
+
 		session_set('commande_abonnement', $commande_abonnement);
 	}
 	else {
 		$erreur = 'L’offre demandée n’existe pas.';
 	}
-	
+
 	return array($id_abonnements_offre, $erreur);
 }
