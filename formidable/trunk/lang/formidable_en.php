@@ -262,7 +262,7 @@ Indicate the field, its value, and the concerned email(s) (separated by a comma)
 	'traiter_email_option_masquer_valeurs_accuse_label_case' => 'Do not send the response values in the acknowledgement of receipt',
 	'traiter_email_option_nom_envoyeur_accuse_explication' => 'Specify the name of the sender used to send the acknowledgment. If you do not put anything, it will be the name of the site.',
 	'traiter_email_option_nom_envoyeur_accuse_label' => 'Name of the sender of the acknowledgment',
-	'traiter_email_option_pj_explication' => 'If the documents posted weigh less than _FORMIDABLE_TAILLE_MAX_FICHIERS_EMAIL Mio (constant modifiable by the webmaster).',
+	'traiter_email_option_pj_explication' => 'If the documents posted weigh less than _FORMIDABLE_TAILLE_MAX_FICHIERS_EMAIL Mio (constant modifiable by the webmaster).', # MODIF
 	'traiter_email_option_pj_label' => 'Join the files in the email',
 	'traiter_email_option_sujet_accuse_label' => 'Subject of the acknowledgement of receipt',
 	'traiter_email_option_sujet_explication' => 'Build topic using @raccourcis@. If you enter nothing, the subject will be built automatically.',

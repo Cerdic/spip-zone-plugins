@@ -265,7 +265,7 @@ Deve ser um campo de tipo «Destinatários» ou «Invisível», contendo o ident
 	'traiter_email_option_modification_reponse_label_case' => 'Não enviar e-mail no caso de alteração de uma resposta já submetida.',
 	'traiter_email_option_nom_envoyeur_accuse_explication' => 'Indique o nome do remetente utilizado para enviar o aviso de recebimento. Se nada for informado, será usado o nome do site.',
 	'traiter_email_option_nom_envoyeur_accuse_label' => 'Nome do remetente do aviso de recebimento',
-	'traiter_email_option_pj_explication' => 'Se os documentos postados pesarem menos de _FORMIDABLE_TAILLE_MAX_FICHIERS_EMAIL Mio (constante modificável pelo webmaster).',
+	'traiter_email_option_pj_explication' => 'Se os documentos postados pesarem menos de _FORMIDABLE_TAILLE_MAX_FICHIERS_EMAIL Mio (constante modificável pelo webmaster).', # MODIF
 	'traiter_email_option_pj_label' => 'Anexar os arquivos na mensagem',
 	'traiter_email_option_sujet_accuse_label' => 'Assunto do aviso de recebimento',
 	'traiter_email_option_sujet_explication' => 'Construa o assunto com ajuda de @raccourcis@. Se for deixando em branco, o assunto será construído automaticamente.',
