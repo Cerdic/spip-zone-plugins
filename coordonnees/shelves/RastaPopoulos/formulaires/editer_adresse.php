@@ -31,6 +31,7 @@ include_spip('inc/coordonnees');
 function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = '', $associer_objet = '') {
 	$champs_superflus = lire_config('coordonnees/adresses_champs_superflus', array());
 	$code_pays_defaut = lire_config('pays/code_pays_defaut');
+	$identifiant = uniqid();
 	
 	$saisies = array(
 		array(
@@ -52,13 +53,18 @@ function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = 
 				'obligatoire' => 'oui',
 				'class' => 'chosen',
 				'defaut' => lire_config('pays/code_pays_defaut'),
-				'code_pays' => 'oui'
+				'code_pays' => 'oui',
+				'attributs' => 'data-adresse-id="'.$identifiant.'"',
 			)
 		);
 	}
 	
 	// Par défaut, on va afficher les champs suivant le pays configuré par défaut, sinon la France pour reproduire comme avant
 	$saisies_pays = coordonnees_adresses_saisies_par_pays($code_pays_defaut ? $code_pays_defaut : 'FR');
+	// On identifie cette adresse là pour pouvoir la manipuler indépendamment
+	foreach ($saisies_pays as $cle=>$saisie) {
+		$saisies_pays[$cle]['options']['attributs'] = 'data-adresse-id="'.$identifiant.'"';
+	}
 	
 	$saisies = array_merge($saisies, $saisies_pays);
 	
@@ -141,7 +147,7 @@ function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = 
 		);
 		$saisies = array_merge($saisie_type, $saisies);
 	}
-
+	
 	return $saisies;
 }
 
