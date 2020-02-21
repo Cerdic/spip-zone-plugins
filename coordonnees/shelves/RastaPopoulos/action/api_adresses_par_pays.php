@@ -24,7 +24,7 @@ function action_api_adresses_par_pays_dist() {
 		}
 		
 		// On génère le HTML de ces saisies, avec l'environnement envoyé
-		$contexte = array_merge($_GET, array('saisies' => $saisies_pays, 'timestamp' => time()));
+		$contexte = array_merge($_GET, array('saisies' => $saisies_pays));
 		$html = recuperer_fond('inclure/generer_saisies', $contexte);
 		
 		// On renvoie tout ça
