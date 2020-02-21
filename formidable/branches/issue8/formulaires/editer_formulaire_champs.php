@@ -84,7 +84,9 @@ function formulaires_editer_formulaire_champs_verifier($id_formulaire) {
 			'spip_formulaires',
 			'id_formulaire = '.$id_formulaire
 		);
-
+		if (!$saisies_anciennes) {
+			return $erreurs;
+		}
 		// On vérifie que les saisies en bases n'ont pas été modifiés depuis le début de la modification du formulaire
 		// Si tel est le cas, on demande de recommencer la modif du formulaire, avec la saisie en base
 		$md5_saisies_anciennes = md5($saisies_anciennes);
