@@ -1,0 +1,65 @@
+[(#REM)
+
+	Présentation résumée d'une offre d'abonnement.
+
+	On affiche les informations suivantes :
+	- Logo et titre de l'offre
+	- Infos techniques : prix, dates...
+	- Descriptif de l'offre
+
+	Paramètres :
+	**obligatoire
+
+	- **id_abonnements_offre
+	- masquer : tableau d'éléments à masquer
+	            logo | descriptif
+
+]
+<BOUCLE_abonnements_offre(ABONNEMENTS_OFFRES) {id_abonnements_offre}>
+<article class="abonnement abonnement_resume[ abonnement_(#GET{statut})][ (#GET{renouvellement}|oui)abonnement_renouvelable]" id="abonnement_#ID_ABONNEMENT">
+
+	[(#VAL{logo}|in_any{#ENV{masquer}}|non)
+	[<div class="abonnement__logo">
+		(#LOGO_ABONNEMENTS_OFFRE)
+	</div>]
+	]
+
+	[<h3 class="abonnement__titre">
+		(#TITRE)
+	</h3>]
+
+	<div class="abonnement__infos">
+
+		[(#REM) Montant et période éventuelle ]
+		<div class="abonnement__info abonnement__info_prix">
+			<strong class="label"><:abonnement:label_montant:></strong>
+			<span class="valeur">
+				[<span class="montant">(#PRIX)</span>]
+				[(#RENOUVELLEMENT_AUTO|oui)
+					<span class="par">/</span>
+					<span class="periode">[(#VAL{abonnementsoffre:champ_periode_choix_#PERIODE}|_T)]</span>
+				]
+			</span>
+		</div>
+
+		[(#REM) Durée / renouvellement ]
+		<div class="abonnement__info abonnement__info_duree">
+			<strong class="label"><:abonnement:label_duree:></strong>
+			<span class="valeur">
+				[(#RENOUVELLEMENT_AUTO|?{
+					<span class="renouvellement"><:abonnementsoffre:info_renouvellement_auto:></span>,
+					<span class="duree">[(#DUREE|abonnements_afficher_duree{#PERIODE})]</span>
+				})]
+			</span>
+		</div>
+
+	</div>
+
+	[(#VAL{descriptif}|in_any{#ENV{masquer}}|non)
+	[<div class="abonnement__descriptif">
+		(#DESCRIPTIF)
+	</div>]
+	]
+
+</article>
+</BOUCLE_abonnements_offre>
