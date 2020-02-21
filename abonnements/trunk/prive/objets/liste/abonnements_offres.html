@@ -38,9 +38,9 @@
 			<td class="duree secondaire">[(#DUREE|=={0}|?{<:abonnementsoffre:champ_duree_0:>,#VAL{abonnementsoffre:champ_periode_nb_}|concat{#PERIODE}|_T{#ARRAY{nb,#DUREE}}})]</td>
 			<td class="prix">[(#PRIX_HT*|=={0}|?{<:abonnementsoffre:champ_prix_0:>,#PRIX_HT})]</td>
 			<td class="taxe">[(#TAXE*|=={0}|?{'-',[(#TAXE*|mult{100})&nbsp;&#37;]})]</td>
-			<td class="prix">[(#PRIX*|appliquer_filtre{prix_formater,true})]</td>
+			<td class="prix">[(#PRIX)]</td>
 			<td class="abonnements"><BOUCLE_abonnements(ABONNEMENTS){id_abonnements_offre}/>#TOTAL_BOUCLE<//B_abonnements></td>
-	<td class="id">[(#AUTORISER{modifier,abonnements_offre,#ID_ABONNEMENTS_OFFRE}|?{
+			<td class="id">[(#AUTORISER{modifier,abonnements_offre,#ID_ABONNEMENTS_OFFRE}|?{
 				<a href="[(#URL_ECRIRE{abonnements_offre_edit,id_abonnements_offre=#ID_ABONNEMENTS_OFFRE})]">#ID_ABONNEMENTS_OFFRE</a>,
 				#ID_ABONNEMENTS_OFFRE
 			})]</td>

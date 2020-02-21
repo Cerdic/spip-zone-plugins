@@ -23,7 +23,7 @@
 
 <div class="champ contenu_prix_ttc">
 	<label><:abonnementsoffre:champ_prix_ttc_label:> : </label>
-	<span dir='#LANG_DIR' class='prix'>[(#PRIX*|appliquer_filtre{prix_formater,true})]</span>
+	<span dir='#LANG_DIR' class='prix'>[(#PRIX)]</span>
 </div>
 
 #SET{taxe,#TAXE|floatval|>{0}|?{#TAXE,#CONFIG{produits/taxe,0}}}
@@ -34,7 +34,7 @@
 ][(#TAXE|floatval|>{0}|non)
 <div class="champ contenu_prix_ttc">
 	<label><:abonnementsoffre:champ_prix_label:> : </label>
-	<span dir='#LANG_DIR' class='prix'>[(#PRIX*|appliquer_filtre{prix_formater,true})]</span>
+	<span dir='#LANG_DIR' class='prix'>[(#PRIX)]</span>
 </div>
 ]
 

@@ -26,3 +26,14 @@
 	margin-bottom: 0;
 	font-size: 1em;
 }
+/* #wysiwyg plus lisible : tout ce qu'il y a après le descriptif en vue « tabulaire » */
+.abonnements_offre #wysiwyg .champ.contenu_descriptif ~ .champ {
+	display: flex;
+	padding: 0.5em 0;
+}
+.abonnements_offre #wysiwyg .champ.contenu_descriptif ~ .champ:not(:last-child) {
+	border-bottom: 1px solid #eee;
+}
+.abonnements_offre #wysiwyg .champ.contenu_descriptif ~ .champ label {
+	flex: 0 0 12em;
+}
