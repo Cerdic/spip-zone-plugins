@@ -53,13 +53,13 @@ function sdn_upgrade($nom_meta_base_version, $version_cible) {
 	$noizetier_config = lire_config('noizetier');
 	foreach($config_noizetier_sdn['types_noisettes_masques'] as $type) {
 		if (!in_array($type,$noizetier_config['types_noisettes_masques'])) {
-			array_push($noizetier_config['types_noisettes_masques'] ,$type);
+			array_push($config_noizetier_sdn['types_noisettes_masques'] ,$type);
 		}
 	}
 	$blocs_exclus_sdn = serialize(array('head','head_js','header','footer','breadcrumb'));
 	$maj['1.0.1'] = array(
 		array('sql_updateq', 'spip_noizetier_pages', array('blocs_exclus' => $blocs_exclus_sdn)),
-		array('ecrire_config', 'noizetier', $noizetier_config)
+		array('ecrire_config', 'noizetier', $config_noizetier_sdn)
 	);
 
 
