@@ -1,12 +1,12 @@
 <paquet
 	prefix="sdn"
 	categorie="maintenance"
-	version="0.1.19"
+	version="0.1.20"
 	etat="dev"
 	compatibilite="[3.2.3;3.2.*]"
 	logo="prive/themes/spip/images/sdn-64.png"
 	documentation="https://pole-web.etab.ac-caen.fr/"
-	schema="0.1.0" 
+	schema="1.0.1" 
 >
 	<!--
 		Paquet généré le 2019-02-17 11:52
@@ -25,5 +25,6 @@
 
 	<pipeline nom="autoriser" inclure="sdn_autorisations.php" /> 
 	<pipeline nom="affiche_milieu" inclure="sdn_pipelines.php" />
+	<pipeline nom="header_prive" inclure="sdn_pipelines.php" />
 
 </paquet>

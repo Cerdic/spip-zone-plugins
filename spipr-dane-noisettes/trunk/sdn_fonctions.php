@@ -41,11 +41,3 @@ function sdn_update_blocs_exclus() {
     return;
 }
 
-/*
-* noisettes a exclure
-*/
-function sdn_types_noisettes_exclus() {
-    include_spip('inc/config');
-	ecrire_config('noizetier/types_noisettes_masques', array('environnement', 'socialtags_badge_fb', 'socialtags_fb_like', 'socialtags_fb_like_box'));
-	return;
-}

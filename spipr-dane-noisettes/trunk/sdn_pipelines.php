@@ -25,15 +25,20 @@ function sdn_affiche_milieu($flux) {
 	if ($exec == "noizetier_page" || $exec == "noizetier_pages") {
 		$page = $flux["args"]["page"];
 		$contexte = array('page'=>$page?$page:"defaut");
-        $ret .= recuperer_fond("prive/squelettes/inclure/selection_layer_page_interface", $contexte);
-        $ret .= recuperer_fond("prive/squelettes/inclure/blocs_exclus");
+		$ret .= recuperer_fond("prive/squelettes/inclure/selection_layer_page_interface", $contexte);
 		$flux["data"] .= $ret;
 	}
-/*	if ($exec == "configurer_identite") {
-		$page = $flux["args"]["page"];
-        $ret .= recuperer_fond("prive/squelettes/inclure/contact_site");
-		$flux["data"] .= $ret;
-	}
-*/ 
+	return $flux;
+}
+
+/**
+ * Insertion dans le head du prive
+ *
+ * @param array $flux
+ * @return array
+ */
+function sdn_header_prive($flux) { 
+ 		$flux .= '<script src="' . find_in_path('js/sdn_prive.js') . '" type="text/javascript"></script>' . "\n";	
+
 	return $flux;
 }
