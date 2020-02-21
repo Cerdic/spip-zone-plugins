@@ -236,7 +236,7 @@ Vous trouverez la <a href="https://contrib.spip.net/5080" target="_blank">docume
 	'saisie_selection_titre' => 'Liste déroulante',
 	'saisie_textarea_explication' => 'Un champ de texte sur plusieurs lignes.',
 	'saisie_textarea_titre' => 'Bloc de texte',
-
+	'saisies_aplatir_tableau_montrer_groupe' => '@groupe@ : @valeur@',
 	// T
 	'titre_page_saisies_doc' => 'Documentation des saisies',
 	'tous_visiteurs' => 'Tous les visiteurs (même non enregistrés)',
