@@ -40,6 +40,8 @@
 
 <div class="champ contenu_immateriel[ (#IMMATERIEL*|strlen|?{'',vide})]">
 	<label><:abonnementsoffre:champ_immateriel_label:> : </label>
-	<span dir='#LANG_DIR' class='immateriel'><:abonnementsoffre:champ_immateriel_label_case:></span>
+	<span dir='#LANG_DIR' class='immateriel'>
+		[(#IMMATERIEL|?{[(#CHEMIN_IMAGE{ok-16}|balise_img) ]<:abonnementsoffre:champ_immateriel_label_case:>,<:item_non:>})]
+	</span>
 </div>
 </BOUCLE_abonnements_offre>
