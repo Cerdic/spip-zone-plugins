@@ -72,7 +72,7 @@
 		<div class="abonnement__info abonnement__info_prix">
 			<strong class="label"><:abonnement:label_montant:></strong>
 			<span class="valeur">
-				[<span class="montant">(#ENV{montant}|appliquer_filtre{prix_formater})</span>]
+				[<span class="montant">(#ENV*{montant}|prix_formater)</span>]
 				[(#ENV{renouvellement_auto}|oui)
 					<span class="par">/</span>
 					<span class="periode">[(#VAL{abonnementsoffre:champ_periode_choix_#ENV{periode}}|_T)]</span>
@@ -99,7 +99,7 @@
 			<BOUCLE_montants(DATA){source table, #VAL{#ENV{montant}}|concat{'|', #ENV{montant_minimum}}|explode{'|'}|array_filter}>
 			#SET{montant,#VALEUR|trim}
 			<input type="radio" id="montants_persos_[(#ID_ABONNEMENTS_OFFRE)]_#GET{montant}" name="montants_persos\[#ID_ABONNEMENTS_OFFRE\]\[predef\]" value="#GET{montant}" [(#COMPTEUR_BOUCLE|=={1}|oui)checked="checked"] />
-			<label for="montants_persos_[(#ID_ABONNEMENTS_OFFRE)]_#GET{montant}">#GET{montant}€</label>
+			<label for="montants_persos_[(#ID_ABONNEMENTS_OFFRE)]_#GET{montant}">[(#GET{montant}|prix_formater)]</label>
 			</BOUCLE_montants>
 			<input
 				type="text"
