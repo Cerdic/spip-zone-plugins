@@ -179,6 +179,9 @@ function formulaires_editer_formulaire_champs_traiter($id_formulaire) {
 				'avertissement',
 				'oui'
 			);
+			if ($id_version = _request('id_version')) {
+				$retours['redirect'] = parametre_url($retours['redirect'], 'id_version', $id_version);
+			}
 		}
 	}
 

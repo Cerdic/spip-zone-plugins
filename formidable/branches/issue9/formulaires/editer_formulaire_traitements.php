@@ -18,6 +18,11 @@ function formulaires_editer_formulaire_traitements_charger($id_formulaire) {
 		and autoriser('editer', 'formulaire', $id_formulaire)
 	) {
 		$traitements = unserialize($formulaire['traitements']);
+		if ($id_version = _request('id_version')) {
+			include_spip('inc/revisions');
+			$old = recuperer_version($id_formulaire, 'formulaire', $id_version);
+			$traitements = unserialize($old['traitements']);
+		}
 		$saisies = unserialize($formulaire['saisies']);
 		if (!is_array($traitements)) {
 			$traitements = array();
