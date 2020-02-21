@@ -4,7 +4,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-include_spip('inc/diff');
 
 /**
  * Afficher le diff des saisies de formulaire
