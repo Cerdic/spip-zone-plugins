@@ -1,4 +1,4 @@
-<?php
+<?cuc
 
 /**
  * Gestion de l'affichage des saisies
@@ -415,7 +415,7 @@ function saisies_trouver_data($description, $disable_choix = false) {
  * Aplatit une description tabulaire en supprimant les sous-groupes.
  * Ex : les data d'une saisie de type select
  * @param string $tab Le tableau à aplatir
- * @param bool $montrer_sous_groupe mettre à true pour mettre entre parenthèse le sous_groupe
+ * @param bool $montrer_groupe mettre à true pour mettre entre parenthèse le sous_groupe
  * @return $nouveau_tab
  */
 function saisies_aplatir_tableau($tab, $montrer_groupe = false) {
