@@ -120,3 +120,12 @@ function coordonnees_optimiser_base_disparus($flux) {
 	$flux['data'] += objet_optimiser_liens(array('adresse'=>'*', 'numero'=>'*', 'email'=>'*'), '*');
 	return $flux;
 }
+
+/**
+ * Ajouter le JS pour gérer les adresses suivant les pays
+ */
+function coordonnees_jquery_plugins($scripts) {
+	$scripts[] = "javascript/coordonnees_adresses.js";
+	
+	return $scripts;
+}
