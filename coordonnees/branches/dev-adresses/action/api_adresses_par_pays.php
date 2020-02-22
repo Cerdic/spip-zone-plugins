@@ -23,6 +23,20 @@ function action_api_adresses_par_pays_dist() {
 			}
 		}
 		
+		// Si le name a au moins un crochet
+		if ($modele = _request('modele_name') and strpos($modele, '[') !== false) {
+			include_spip('inc/saisies');
+			
+			// On remplace le champ pays par $0
+			$modele = str_replace('pays', '$0', $modele);
+			// On transforme toutes les saisies avec ce modèle
+			$saisies_pays =  saisies_transformer_noms(
+				$saisies_pays,
+				'/^\w+$/',
+				$modele
+			);
+		}
+		
 		// On génère le HTML de ces saisies, avec l'environnement envoyé
 		$contexte = array_merge($_GET, array('saisies' => $saisies_pays));
 		$html = recuperer_fond('inclure/generer_saisies', $contexte);
