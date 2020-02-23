@@ -10,14 +10,14 @@
 <B_repetitions>
 <div class="champ contenu_repetitions info information">
 	<div class='label'>[(#GRAND_TOTAL|singulier_ou_pluriel{agenda:une_repetition,agenda:nb_repetitions})]</div>
-	<div dir='#LANG_DIR' class='repetitions'>(<BOUCLE_repetitions(EVENEMENTS){par date_debut}{id_evenement_source=#ID_EVENEMENT}{', '}{statut==.*}>[<a href="[(#ID_EVENEMENT|generer_url_entite{evenement})]">(#DATE_DEBUT|affdate)[(#MODIF_SYNCHRO_SOURCE|non|ou{#_afficher_contenu:MODIF_SYNCHRO_SOURCE|non}) #TITRE[(#CHEMIN_IMAGE{broken-link-event-16.png}|balise_img)]]</a>]</BOUCLE_repetitions>)</div>
+	<div dir='#LANG_DIR' class='repetitions'>(<BOUCLE_repetitions(EVENEMENTS){par date_debut}{id_evenement_source=#ID_EVENEMENT}{', '}{statut==.*}><a href="[(#ID_EVENEMENT|generer_url_entite{evenement})]">#INCLURE{fond=prive/objets/inclure/une-repetition,date_debut,titre,modif_synchro_source,parent_modif_synchro_source=#_afficher_contenu:MODIF_SYNCHRO_SOURCE}</a></BOUCLE_repetitions>)</div>
 </div>
 </B_repetitions>
 <B_repetition_de>
 <div class="champ contenu_repetition_de info information">
 	<div class="label"><:agenda:repetition_de:></div>
 	<BOUCLE_repetition_de(EVENEMENTS){id_evenement=#ID_EVENEMENT_SOURCE} {statut==.*}>
-	[<a href="[(#ID_EVENEMENT|generer_url_entite{evenement})]">[(#MODIF_SYNCHRO_SOURCE|non|ou{#_afficher_contenu:MODIF_SYNCHRO_SOURCE|non})[(#CHEMIN_IMAGE{broken-link-event-16.png}|balise_img)]]#TITRE - (#DATE_DEBUT|affdate)</a>]
+	<a href="[(#ID_EVENEMENT|generer_url_entite{evenement})]">#INCLURE{fond=prive/objets/inclure/une-repetition,date_debut,titre,modif_synchro_source,parent_modif_synchro_source=#_afficher_contenu:MODIF_SYNCHRO_SOURCE}</a>
 	</BOUCLE_repetition_de>
 </div>
 </B_repetition_de>
