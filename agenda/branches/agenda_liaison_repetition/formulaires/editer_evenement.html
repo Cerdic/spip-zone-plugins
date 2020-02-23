@@ -3,7 +3,7 @@
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
-		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_evenement' value='#ID_EVENEMENT' />
@@ -102,27 +102,7 @@
 		</div>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
-		[(#ENV{modif_synchro_source}|=={0}|oui)
-		<div class="notice">
-			<:agenda:info_evenement_modif_synchro_source_non:>
-		</div>][
-		<div class="editer-groupe">
-			#SET{name,modif_synchro_source}#SET{obli,''}#SET{defaut,'1'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<div class="editer pleine_largeur editer_modif_synchro_source">
-				<div class="notice">
-					(#ENV**{erreurs}|table_valeur{modif_synchro_source})
-					#SET{val,1}
-					<div class="choix">
-						<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}" aria-describedby="#GET{name}_explication" [(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
-						<label for="#GET{name}_#GET{val}"><:agenda:label_modif_synchro_source_1:></label>
-					</div>
-					#SET{val,0}
-					<div class="choix">
-						<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}" aria-describedby="#GET{name}_explication" [(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
-						<label for="#GET{name}_#GET{val}"><:agenda:label_modif_synchro_source_0:></label>
-					</div>
-				</div>
-			</div>]
+		<INCLURE{fond=formulaires/inc-modif_synchro_source,env} />
 		</div>
 		<p class='boutons'><input type='submit' class='submit noscroll' value='[(#ENV{id_evenement}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' /></p>
 	</div></form>
@@ -134,7 +114,7 @@
 	jQuery('#date_debut').on('change', function(){
 		var debut_date     = jQuery('#date_debut').datepicker("getDate");
 		jQuery('#date_fin').datepicker( "option", "minDate", new Date(debut_date));
-	}); 
+	});
 	var repetitions_done = false;
 	jQuery(document).bind('datePickerLoaded',function(){
 		if (!repetitions_done){

@@ -137,7 +137,7 @@ function formulaires_editer_evenement_verifier_dist($id_evenement = 'new', $id_a
 
 	if (!count($erreurs)
 		and is_null(_request('modif_synchro_source'))
-	  and $impact = formulaires_editer_evenement_verifier_modifie_evenements_lies($id_evenement, $id_article)) {
+		and $impact = formulaires_editer_evenement_verifier_modifie_evenements_lies($id_evenement, $id_article)) {
 
 		$erreurs['modif_synchro_source'] = _T('agenda:confirm_evenement_modifie_' . $impact);
 		$erreurs['message_erreur'] = '';
@@ -166,9 +166,9 @@ function formulaires_editer_evenement_verifier_modifie_evenements_lies($id_evene
 
 	foreach ($valeurs as $k => $v) {
 		if (!in_array($k, array('repetitions'))
-		  and strpos($k ,'_') !== 0
+			and strpos($k ,'_') !== 0
 			and !is_null($p = _request($k))
-		  and $p != $v) {
+			and $p != $v) {
 			return ($valeurs['id_evenement_source'] ? 'est_une_repetition' : 'a_des_repetitions');
 		}
 	}

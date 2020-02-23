@@ -35,6 +35,8 @@
 	<pipeline nom="compositions_declarer_heritage"  inclure="agenda_pipelines.php" />
 	<pipeline nom="corbeille_table_infos" inclure="agenda_pipelines.php" />
 	<pipeline nom="formulaire_fond"  inclure="agenda_pipelines.php" />
+	<pipeline nom="formulaire_verifier"  inclure="agenda_pipelines.php" />
+	<pipeline nom="formulaire_receptionner"  inclure="agenda_pipelines.php" />
 	<pipeline nom="insert_head_css" inclure="agenda_pipelines.php" />
 	<pipeline nom="nospam_lister_formulaires" inclure="agenda_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="agenda_pipelines.php" />

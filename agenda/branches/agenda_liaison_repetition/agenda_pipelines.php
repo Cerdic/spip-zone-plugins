@@ -29,7 +29,12 @@ function agenda_insert_head_css($flux) {
 	}
 	return $flux;
 }
-
+/**
+ * Dans le formulaire d'édition de rubrique, ajout de la partie sur le mode agenda pour rubrique
+ * Dans les formulaires d'édition de lien pour les évènements, ajout du questionnement sur la synchro
+ * @param $flux
+ * @return $flux
+ **/
 function agenda_formulaire_fond($flux) {
 	if ($flux['args']['form'] == 'editer_rubrique') {
 		$contexte = $flux['args']['contexte'];
@@ -37,6 +42,61 @@ function agenda_formulaire_fond($flux) {
 		if ($p = strpos($flux['data'], '<!--extra-->')) {
 			$flux['data'] = substr_replace($flux['data'], $form, $p, 0);
 		}
+	}
+
+	if ($flux['args']['form'] == 'editer_liens' and $flux['args']['args'][1] == 'evenement') {
+		$contexte = $flux['args']['contexte'];
+		$form = recuperer_fond('formulaires/inc-modif_synchro_source', $contexte);
+		$flux['data'] = preg_replace('#<form.*>#U', "$0$form", $flux['data']);
+	}
+	return $flux;
+}
+
+/**
+ * Pour les formulaires de liaison,
+ * demande le cas échéant s'il faut que cela impact les répetitions
+ * @param $flux
+ * @return $flux
+**/
+function agenda_formulaire_verifier($flux) {
+	if ($flux['args']['form'] == 'editer_liens' and $flux['args']['args'][1] == 'evenement') {
+		$id_evenement = $flux['args']['args'][2];
+		$row_evenement = sql_fetsel('id_evenement_source, modif_synchro_source', 'spip_evenements', "id_evenement=$id_evenement");
+		$id_evenement_source = $row_evenement['id_evenement_source'];
+		if ($id_evenement_source) {
+			$repetition_source = sql_getfetsel('modif_synchro_source', 'spip_evenements', "id_evenement=$id_evenement_source");
+		} else {
+			$repetition_source = $row_evenement['modif_synchro_source'];
+		}
+		$possede_repetition = sql_getfetsel('id_evenement','spip_evenements', "id_evenement_source=$id_evenement");
+		if (
+			($row_evenement['id_evenement_source'] or $possede_repetition)
+			and $row_evenement['modif_synchro_source']
+			and $repetition_source
+			and !count($flux['data'])
+			and is_null(_request('modif_synchro_source'))
+		) {
+			$impact = $row_evenement['id_evenement_source'] ? 'est_une_repetition' : 'a_des_repetitions';
+			$flux['data']['modif_synchro_source'] = _T('agenda:confirm_evenement_modifie_' . $impact);
+			$flux['data']['message_erreur'] = '';
+		}
+	}
+	return $flux;
+}
+
+/**
+ * Pour les formulaires de liaison,
+ * modifie le paramètre de répetitions, le cas échéant
+ * @param $flux
+ * @return $flux
+**/
+function agenda_formulaire_receptionner($flux) {
+	if ($flux['args']['form'] == 'editer_liens'
+		and $flux['args']['args'][1] == 'evenement'
+		and _request('modif_synchro_source') !== null) {
+		$id_evenement = $flux['args']['args'][2];
+		include_spip('action/editer_evenement');
+		evenement_modifier($id_evenement, array('modif_synchro_source' => _request('modif_synchro_source')));
 	}
 	return $flux;
 }
@@ -277,7 +337,6 @@ function agenda_post_edition_lien($flux) {
 			);
 			$repetitions = array_map('reset', $repetitions);
 		}
-
 		include_spip('action/editer_liens');
 		// Si c'est un ajout de lien, on l'ajoute à toutes les répétitions
 		if ($flux['args']['action'] == 'insert') {
