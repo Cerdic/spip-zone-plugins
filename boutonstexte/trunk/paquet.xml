@@ -1,9 +1,9 @@
 <paquet
 	prefix="boutonstexte"
 	categorie="edition"
-	version="2.0.6"
+	version="2.0.7"
 	etat="stable"
-	compatibilite="[3.0.0;3.2.*]"
+	compatibilite="[3.0.0;3.3.*]"
 	logo="boutonstexte-32.png"
 	documentation="https://contrib.spip.net/Texte-agrandi-ou-pleine-page"
 >
