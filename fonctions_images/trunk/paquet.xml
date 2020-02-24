@@ -1,9 +1,9 @@
 <paquet
 	prefix="fonctions_images"
 	categorie="multimedia"
-	version="0.7.0"
+	version="0.7.1"
 	etat="stable"
-	compatibilite="[3.0.0;3.2.*]"
+	compatibilite="[3.0.0;3.3.*]"
 	logo="prive/themes/spip/images/fonctions_images_48.png"
 	documentation="https://contrib.spip.net/Plugin-fonctions-d-images-les-filtres-de-traitement"
 >	
