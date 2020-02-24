@@ -1,9 +1,9 @@
 <paquet
 	prefix="typoenluminee"
 	categorie="edition"
-	version="3.5.14"
+	version="3.5.15"
 	etat="stable"
-	compatibilite="[2.0.3;3.2.*]"
+	compatibilite="[2.0.3;3.3.*]"
 	logo="prive/themes/spip/images/typoenluminee-32.png"
 	documentation="https://contrib.spip.net/Enluminures-typographiques-V3-pour-SPIP-2-avec"
 	schema="0.1.0"
