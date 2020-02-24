@@ -342,3 +342,67 @@ function balise_REGION_dist($p) {
 	return $p;
 }
 }
+
+/**
+ * Formate une adresse selon le standard du pays
+ */
+function coordonnees_adresses_formater($id_adresse) {
+	$formatage = '';
+	
+	if (
+		$id_adresse = intval($id_adresse)
+		and $adresse = sql_fetsel('*', 'spip_adresses', 'id_adresse = '.$id_adresse)
+	) {
+		include_spip('inc/coordonnees');
+		coordonnees_loader();
+		
+		$addressFormatRepository = new CommerceGuys\Addressing\AddressFormat\AddressFormatRepository();
+		$countryRepository = new CommerceGuys\Addressing\Country\CountryRepository();
+		$subdivisionRepository = new CommerceGuys\Addressing\Subdivision\SubdivisionRepository();
+		$formatter = new CommerceGuys\Addressing\Formatter\DefaultFormatter($addressFormatRepository, $countryRepository, $subdivisionRepository);
+		
+		$address = new CommerceGuys\Addressing\Address();
+		$address = $address
+			->withCountryCode($adresse['pays'])
+			->withAdministrativeArea($adresse['zone_administrative'])
+			->withLocality($adresse['ville'])
+			->withAddressLine1($adresse['voie'])
+			->withAddressLine2($adresse['complement'])
+			->withPostalCode($adresse['code_postal']);
+		
+		$formatage = $formatter->format(
+			$address, 
+			array(
+				'locale'=>$GLOBALS['spip_lang'],
+				'html' => true,
+				'html_tag' => 'address',
+				'html_attributes' => array(
+					'translate' => 'no',
+				)
+			)
+		);
+	}
+	
+	return $formatage;
+}
+
+/**
+ * Compile la balise #ADRESSE_FORMATER qui affiche comme il faut suivant le pays
+ * 
+ * À utiliser dans une boucle ADRESSES ou avec #ADRESSE_FORMATER{#ID_ADRESSE}
+ * 
+ * @param $p 
+ * @return
+ * 		Code PHP à exécuter 
+ */
+function balise_ADRESSE_FORMATER_dist($p) {
+	$_id = interprete_argument_balise(1, $p);
+
+	if (!$_id) {
+		$_id = champ_sql('id_adresse', $p);
+	}
+	
+	$p->code = "coordonnees_adresses_formater($_id)";
+	
+	return $p;
+}

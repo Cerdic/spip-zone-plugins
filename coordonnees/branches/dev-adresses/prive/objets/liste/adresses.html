@@ -23,7 +23,7 @@
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{adresse-16.png}|balise_img)]</td>
 			<td class='titre principale'>[(#LOGO_ADRESSE|image_reduire{20,26})]<a href="[(#ID_ADRESSE|generer_url_entite{adresse})]" title="<:info_numero_abbreviation|attribut_html:> #ID_ADRESSE">[(#RANG). ][(#TITRE|sinon{#VAL{info_sans_titre}|_T})]</a></td>
-			<td class='adresse'><address>#VOIE #COMPLEMENT #BOITE_POSTALE #CODE_POSTAL #ZONE_ADMINISTRATIVE #VILLE</address></td>
+			<td class='adresse'>#ADRESSE_FORMATER</td>
 			<td class='pays'><BOUCLE_pays(PAYS){code=#PAYS*}>#NOM <small><abbr>\(#PAYS\)</abbr></small></BOUCLE_pays></td>
 			<td class='id'>[(#AUTORISER{modifier,adresse,#ID_ADRESSE}|?{
 				<a href="[(#URL_ECRIRE{adresse_edit,id_adresse=#ID_ADRESSE})]">#ID_ADRESSE</a>,
