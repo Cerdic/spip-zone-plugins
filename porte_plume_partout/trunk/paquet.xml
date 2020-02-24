@@ -1,9 +1,9 @@
 <paquet
 	prefix="ppp"
 	categorie="edition"
-	version="1.0.10"
+	version="1.0.11"
 	etat="test"
-	compatibilite="[2.0.10;3.2.*]"
+	compatibilite="[2.0.10;3.3.*]"
 	logo="images/configure_toolbars-48.png"
 	documentation="https://contrib.spip.net/Plugin-Porte-plume-partout"
 >

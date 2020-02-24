@@ -13,7 +13,7 @@
 	</slogan>
 	<auteur>Pascal M&#233;chin - Matthieu Marcillaud - Jacques Pyrat</auteur>
 	<licence>GPLv3</licence>
-	<version>1.0.9</version>
+	<version>1.0.11</version>
 	<icon>images/configure_toolbars-48.png</icon>
 	<lien>https://contrib.spip.net/Plugin-Porte-plume-partout</lien>
 
@@ -31,7 +31,7 @@
 		<inclure>ppp_pipelines.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[2.0.10;3.2.99]" />
+	<necessite id="SPIP" version="[2.0.10;3.3.99]" />
 	<necessite id="porte_plume" version="[1.7.9;]" />
 	<necessite id="cfg" version="[1.16.1;]" />
 	<necessite id="saisies" version="[1.42.11;]" />
