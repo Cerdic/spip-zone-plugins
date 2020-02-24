@@ -1,9 +1,9 @@
 <paquet
 	prefix="pp_chgt_lg"
 	categorie="edition"
-	version="0.3.4"
+	version="0.3.5"
 	etat="test"
-	compatibilite="[2.0.3;3.2.*]"
+	compatibilite="[2.0.3;3.3.*]"
 	logo="images/chgt_lg-128.png"
 	documentation="https://contrib.spip.net/?article3705"
 >	
