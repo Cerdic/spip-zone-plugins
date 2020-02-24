@@ -24,19 +24,12 @@
                         <img src="#CHEMIN{prive/themes/spip/images/layers-sdn/layer-#VALEUR.png}" title="[(#VAL{sdn:layer_#CLE}|_T)]" alt="[(#VAL{sdn:layer_#CLE}|_T)]" style="width:120px;margin-left:20px" /></label>
                         <p class="explication" style="clear:both;">
                         <input type="radio" name="layer" id="#CLE" value="#CLE" [ (#GET{layer}|=={#CLE}|oui)checked="checked" disabled="disabled"]/>
-                        <label for="#CLE">[Modèle N°(#VALEUR)]</label></p>
+                        <label for="#CLE"><:sdn:modele_num{num=#VALEUR}:></label></p>
                     </div>
                 </li>
                 </BOUCLE_ls2>
             </ul>
         </div>
-        [(#SAISIE{checkbox, largeur_content}
-            {label=<:sdc:background_fixer:>}
-            {datas=#ARRAY{
-                large, Oui}
-            }
-            {conteneur_class=long_label afficher_si_layer_#GET{id_unique}}
-        )]
 
 		<p class="boutons">
 			<input type="submit" name="enregistrer" class="submit save" value="<:bouton_enregistrer:>" />
@@ -44,26 +37,3 @@
 		</p>
 	</div></form>
 </div>
-<script type="text/javascript">// <![CDATA[
-	$(document).ready(function(){
-        $('.divimg > p input').on('change', function () {
-			if ( $(this).attr('value') == 'content-aside_extra' 
-               || $(this).attr('value') == 'aside-content_extra' 
-               || $(this).attr('value') == 'content-aside_-extra' 
-               || $(this).attr('value') == 'aside_-extra-content' ) {
-				$(".afficher_si_layer_#GET{id_unique}").show()
-			}else {
-				$(".afficher_si_layer_#GET{id_unique}").hide();
-			}
-		});
-        if ( '#ENV{layer}' == 'content-aside_extra' 
-            || '#ENV{layer}' == 'aside-content_extra' 
-            || '#ENV{layer}' == 'content-aside_-extra' 
-            || '#ENV{layer}' == 'aside_-extra-content' ) {
-				$(".afficher_si_layer_#GET{id_unique}").show();
-		} else {
-				$(".afficher_si_layer_#GET{id_unique}").hide();
-		}
-
-	});
-//]]></script>

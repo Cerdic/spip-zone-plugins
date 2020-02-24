@@ -24,7 +24,9 @@ function sdn_affiche_milieu($flux) {
  
 	if ($exec == "noizetier_page" || $exec == "noizetier_pages") {
 		$page = $flux["args"]["page"];
-		$contexte = array('page'=>$page?$page:"defaut");
+		$objet = $flux["args"]["objet"];
+		$id_objet = $flux["args"]["id_objet"];
+		$contexte = array('page'=>$page,'objet'=>$objet,'id_objet'=>$id_objet);
 		$ret .= recuperer_fond("prive/squelettes/inclure/selection_layer_page_interface", $contexte);
 		$flux["data"] .= $ret;
 	}

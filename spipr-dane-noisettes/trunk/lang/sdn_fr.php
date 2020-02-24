@@ -17,6 +17,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_contact_site' => 'Contact du site',
 	'cfg_titre_parametrages' => 'Paramétrages',
 	'choisir_modele' => 'Choisir un modèle de présentation',
+	'conf_colonnes_erreur' => 'La configuration des  colonnes n\'a pas été enregistrée.',
+	'conf_colonnes_ok' => 'La configuration des  colonnes a été enregistrée',
+	'conf_colonnes_supprimee' => 'La configuration des  colonnes a été réinitialisée',
 
     // D
 	'description_page_article' => 'Page par défaut pour les articles.',
@@ -59,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     // M
     'modele_defaut' => 'Modèle par défaut',
     'modele_num' => 'Modèle N°@num@',
-    'modele_page' => 'Modèle de la page @page@',
+    'modele_page' => 'Modèle de la page',
 
     // N
 	'nom_page_article'=>'Page article',

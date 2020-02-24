@@ -19,7 +19,6 @@ function formulaires_layer_page_charger_dist( $bloc ) {
 	'modeles' => is_file(find_in_path('yaml/liste-modeles.yaml')) ? yaml_decode_file(find_in_path('yaml/liste-modeles.yaml'))
       : array("content-aside_extra"=>"3","content_aside_extra"=>"1"),
 	'layer' =>  !is_null(lire_config('sdn/'.$bloc.'/layer') )? lire_config('sdn/'.$bloc.'/layer') : 'content-aside_-extra', 
-    'largeur_content' => '',
  );
   return $valeurs;
 }
@@ -39,18 +38,17 @@ function formulaires_layer_page_traiter_dist( $bloc ) {
 	if (!_request('_cfg_delete')){
 		if (  _request('layer')!='' ){
 			ecrire_config('sdn/'.$bloc.'/layer',  _request('layer'));
-			ecrire_config('sdn/'.$bloc.'/largeur_content',  _request('largeur_content'));
 			if(is_null(lire_config('sdn/'.$bloc.'/layer'))) {
-				$errs = 'La configuration des  colonnes n\'a pas été enregistrée.';
+				$errs = _T('sdn:conf_colonnes_erreur');
 			}
 			else {
-				$oks = 'La configuration des  colonnes a été enregistrée';
+				$oks = _T('sdn:conf_colonnes_ok');
 			}
 		}
 	}
 	else 
 	{
-		$oks = 'La configuration des colonnes a été suprimée'; 
+		$oks =  _T('sdn:conf_colonnes_supprimee'); 
 		effacer_config('sdn/'.$bloc.'/layer');
 		return array('message_ok'=>$oks);
 	}

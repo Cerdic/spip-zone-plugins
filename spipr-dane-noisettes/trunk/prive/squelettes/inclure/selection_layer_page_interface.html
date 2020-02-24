@@ -1,8 +1,9 @@
 <div class="pave_selection_layer" [ (#ENV{exec}|=={noizetier_page}|oui)style="padding-top: 35px;"]>
-    [(#SET{titre, #ENV{page}|=={defaut}|?{<:sdn:modele_defaut:>, Modèle de la page #ENV{page}}})]
+	#SET{page_layer, #ENV{id_objet}|?{#ENV{objet}|concat{#ENV{id_objet}}, #ENV{page,defaut}} }
+	[(#SET{titre, #GET{page_layer}|!={defaut}|ou{#ENV{id_objet}}|?{Modèle de la page  #ENV{id_objet}|?{#ENV{objet} &nbsp;N°#ENV{id_objet}, #ENV{page}} , <:sdn:modele_defaut:>}})]
 	[(#BOITE_OUVRIR{#GET{titre},'simple fiche_objet',''})]
-		<div>[(#ENV|unserialize|foreach)]
-		      <INCLURE{fond=prive/squelettes/inclure/selection_layer_page, page=#ENV{page}, env, ajax}>
+		<div>
+			<INCLURE{fond=prive/squelettes/inclure/selection_layer_page, page_layer=#GET{page_layer}, page=#ENV{page}, objet=#ENV{objet}, id_objet=#ENV{id_objet}, env, ajax}>
 		</div>
 	#BOITE_FERMER
 </div>

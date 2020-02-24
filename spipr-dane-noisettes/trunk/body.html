@@ -5,8 +5,10 @@
   Distribue sous licence GPL3
 
 ]#SET{compo, #ENV{type-page}}
+#SET{id_objet, #ENV{id_article}|?{#ENV{id_article},#ENV{id_rubrique}|?{#ENV{id_rubrique},#ENV{id_mot}}}}
 #SET{pages_exclues, #ARRAY{0,recherche}}[
-(#ENV{composition}|oui) #SET{compo, #ENV{type-page}|concat{-#ENV{composition}}}
+(#GET{id_objet}|oui) #SET{compo, #ENV{type-page}|concat{#GET{id_objet}}
+][(#ENV{composition}|oui) #SET{compo, #ENV{type-page}|concat{-#ENV{composition}}}
 ][(#CONFIG{sdn/#GET{compo}/layer}|non)#SET{compo,defaut}
 ]#SET{layer, #CONFIG{sdn/#GET{compo,defaut}/layer, content-aside_-extra-a}}
 [(#ENV{type-page}|in_array{#GET{pages_exclues}}|oui)#SET{layer, content-aside_-extra-a}]
