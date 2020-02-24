@@ -16,14 +16,16 @@
 			// Le modèle de name
 			var name = select.attr('name');
 			// API
-			var api = '../' + 'adresses_par_pays.api/';
+			var api = 'adresses_par_pays.api/';
+			if (spip_ecrire) {
+				api = '../' + api;
+			}
 			// Environnement à garder pour le remplacement
 			var env = ['adresse-id=' + identifiant, 'obligatoire=' + obligatoire, 'modele_name=' + name];
 			
 			// On récupère les valeurs
 			env.push(saisie_pays.siblings('.editer').find('[data-adresse-id=' + identifiant + ']').serialize());
 			env = env.join('&');
-			console.log(env);
 			
 			// On va cherche le HTML des nouveaux champs à remplacer
 			$.get(api+code_pays, env, function(html) {

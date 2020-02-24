@@ -35,6 +35,7 @@
 	<!-- Import/export de configuration avec ieconfig -->
 	<pipeline nom="ieconfig_metas" inclure="coordonnees_pipelines.php" />
 	<!-- Pour JS des adresses -->
+	<pipeline nom="header_prive" inclure="coordonnees_pipelines.php" />
 	<pipeline nom="jquery_plugins" inclure="coordonnees_pipelines.php" />
 
 	<menu nom="coordonnees" titre="coordonnees:titre_coordonnees" parent="menu_edition" icone="images/addressbook-16.png" action="coordonnees" />
