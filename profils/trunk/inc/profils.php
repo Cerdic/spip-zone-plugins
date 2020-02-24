@@ -140,19 +140,19 @@ function profils_chercher_champ_email_principal($config) {
  * 		Retoure un tableau de saisies
  * 
  */
-function profils_chercher_saisies_objet($objet) {
+function profils_chercher_saisies_objet($objet, $id_objet='new') {
 	static $saisies = array();
 	$objet = objet_type($objet);
 	
-	if (isset($saisies[$objet])) {
-		return $saisies[$objet];
+	if (isset($saisies[$objet][$id_objet])) {
+		return $saisies[$objet][$id_objet];
 	}
 	else {
-		$saisies[$objet] = array();
+		$saisies[$objet][$id_objet] = array();
 		
 		// Les saisies de base
-		if ($saisies_objet = saisies_chercher_formulaire("editer_$objet", array())) {
-			$saisies[$objet] = array_merge($saisies[$objet], $saisies_objet);
+		if ($saisies_objet = saisies_chercher_formulaire("editer_$objet", array($id_objet))) {
+			$saisies[$objet][$id_objet] = array_merge($saisies[$objet][$id_objet], $saisies_objet);
 		}
 		
 		// Les saisies des champs extras
@@ -160,12 +160,12 @@ function profils_chercher_saisies_objet($objet) {
 			include_spip('cextras_pipelines');
 			
 			if ($saisies_extra = champs_extras_objet(table_objet_sql($objet))) {
-				$saisies[$objet] = array_merge($saisies[$objet], $saisies_extra);
+				$saisies[$objet][$id_objet] = array_merge($saisies[$objet][$id_objet], $saisies_extra);
 			}
 		}
 	}
 	
-	return $saisies[$objet];
+	return $saisies[$objet][$id_objet];
 }
 
 /**
@@ -186,13 +186,17 @@ function profils_chercher_saisies_profil($form, $id_auteur=0, $id_ou_identifiant
 	// On cherche le bon profil
 	$id_ou_identifiant_profil = profils_selectionner_profil($id_ou_identifiant_profil, $id_auteur);
 	
+	// Récupérer les objets liés au profil utilisateur
+	$ids = profils_chercher_ids_profil($id_auteur, $id_ou_identifiant_profil);
+	
 	// On ne continue que si on a un profil sous la main
 	if ($profil = profils_recuperer_profil($id_ou_identifiant_profil) and $config = $profil['config']) {
 		foreach (array('auteur', 'organisation', 'contact') as $objet) {
 			// Si c'est autre chose que l'utilisateur, faut le plugin qui va avec et que ce soit activé
 			if ($objet == 'auteur' or (defined('_DIR_PLUGIN_CONTACTS') and $config["activer_$objet"])) {
 				// On récupère les champs pour cet objet ET ses champs extras s'il y a
-				$saisies_objet = profils_chercher_saisies_objet($objet);
+				$cle_objet = id_table_objet($objet);
+				$saisies_objet = profils_chercher_saisies_objet($objet, $ids[$cle_objet]);
 				$saisies_a_utiliser = array();
 				
 				// Pour chaque chaque champ vraiment configuré
@@ -222,12 +226,14 @@ function profils_chercher_saisies_profil($form, $id_auteur=0, $id_ou_identifiant
 						foreach ($champs as $cle => $champ) {
 							// Si ce cette coordonnées est configurée pour le form demandé
 							if ($champ[$form]) {
+								$cle_objet = id_table_objet($coordonnee);
+								$id_objet = $ids['coordonnees'][$objet][$coordonnee][$champ['type']];
 								// Attention, si pas de type, on transforme ici en ZÉRO
 								if (!$champ['type']) {
 									$champ['type'] = 0;
 								}
 								// On va chercher les saisies de ce type de coordonnées
-								$saisies_coordonnee = profils_chercher_saisies_objet($coordonnee);
+								$saisies_coordonnee = profils_chercher_saisies_objet($coordonnee, $id_objet);
 								// On vire le titre libre
 								$saisies_coordonnee = saisies_supprimer($saisies_coordonnee, 'titre');
 								// On change le nom de chacun des champs
