@@ -4,7 +4,7 @@
 	<slogan>Mod&#233;le pour afficher une imagemap des d&#233;partements fran&#231;ais</slogan>
 	<auteur>cy_altern</auteur>
 	<licence>GNU/GPL - (c) 2010</licence>
-	<version>0.3.2</version>
+	<version>0.3.3</version>
 	<etat>dev</etat>
 	<description>
 	    Propose un mod&#233;le pour afficher une carte de France avec une imagemap des d&#233;partements:
@@ -27,5 +27,5 @@ Cr&#233;dits:
 	<options>imapdepart_options.php</options><!-- gere l'appel de base/imapdepart_base.php -->
 	<fonctions>imapdepart_fonctions.php</fonctions>
 	<categorie>divers</categorie>
-	<necessite id="spip" version="[2.0.0;3.1.99]" />
+	<necessite id="spip" version="[2.0.0;3.2.99]" />
 </plugin>
