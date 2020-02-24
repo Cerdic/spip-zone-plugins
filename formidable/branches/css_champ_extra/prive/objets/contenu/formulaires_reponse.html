@@ -1,5 +1,5 @@
 <BOUCLE_formulaires_reponse(FORMULAIRES_REPONSES){tout}{id_formulaires_reponse}>
-<div class="champ contenu_auteur[ (#ID_AUTEUR*|strlen|?{'',vide})]">
+<div class="champ afficher contenu_auteur[ (#ID_AUTEUR*|strlen|?{'',vide})]">
 	<div class='label'><:auteur:></div>
 	<div dir='#LANG_DIR'>
 		[(#ID_AUTEUR|>{0}|oui)
@@ -10,13 +10,13 @@
 		]
 	</div>
 </div>
-<div class="champ contenu_ip[ (#IP*|strlen|?{'',vide})]">
+<div class="champ afficher contenu_ip[ (#IP*|strlen|?{'',vide})]">
 	<div class='label'><:formidable:reponses_ip:></div>
 	<div dir='#LANG_DIR'>
 		#IP
 	</div>
 </div>
-<div class="champ contenu_formulaire[ (#ID_FORMULAIRE*|strlen|?{'',vide})]">
+<div class="champ afficher contenu_formulaire[ (#ID_FORMULAIRE*|strlen|?{'',vide})]">
 	<div class='label'><:formulaire:titre_formulaire:></div>
 	<div dir='#LANG_DIR'>
 		<a href="[(#URL_ECRIRE{formulaire,id_formulaire=#ID_FORMULAIRE})]">
