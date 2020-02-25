@@ -75,7 +75,7 @@ function agenda_formulaire_verifier($flux) {
 			and is_null(_request('modif_synchro_source'))
 		) {
 			$impact = $row_evenement['id_evenement_source'] ? 'est_une_repetition' : 'a_des_repetitions';
-			$flux['data']['modif_synchro_source'] = _T('agenda:confirm_evenement_modifie_' . $impact);
+			$flux['data']['modif_synchro_source'] = _T('agenda:confirm_evenement_modifie_liaison_' . $impact);
 			$flux['data']['message_erreur'] = '';
 		}
 	}
