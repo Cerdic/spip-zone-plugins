@@ -28,7 +28,7 @@ include_spip('inc/coordonnees');
  * @return array
  *     Tableau des saisies
  */
-function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = '', $associer_objet = '') {
+function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '', $obligatoire=false) {
 	$champs_superflus = lire_config('coordonnees/adresses_champs_superflus', array());
 	$identifiant = uniqid();
 	
@@ -57,7 +57,7 @@ function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = 
 			'options' => array(
 				'nom' => 'pays',
 				'label' => _T('coordonnees:label_pays'),
-				'obligatoire' => 'oui',
+				'obligatoire' => $obligatoire,
 				'class' => 'select2 chosen',
 				'defaut' => lire_config('pays/code_pays_defaut'),
 				'code_pays' => 'oui',
@@ -67,7 +67,7 @@ function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = 
 	}
 	
 	// Par défaut, on va afficher les champs suivant le pays configuré par défaut, sinon la France pour reproduire comme avant
-	$saisies_pays = coordonnees_adresses_saisies_par_pays($code_pays_defaut ? $code_pays_defaut : 'FR');
+	$saisies_pays = coordonnees_adresses_saisies_par_pays($code_pays_defaut ? $code_pays_defaut : 'FR', $obligatoire);
 	// On identifie cette adresse là pour pouvoir la manipuler indépendamment
 	foreach ($saisies_pays as $cle=>$saisie) {
 		$saisies_pays[$cle]['options']['attributs'] = 'data-adresse-id="'.$identifiant.'"';
@@ -179,7 +179,7 @@ function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = 
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_adresse_identifier_dist($id_adresse = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+function formulaires_editer_adresse_identifier_dist($id_adresse = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '', $obligatoire=false) {
 	return serialize(array(intval($id_adresse), $associer_objet));
 }
 
@@ -208,7 +208,7 @@ function formulaires_editer_adresse_identifier_dist($id_adresse = 'new', $retour
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_adresse_charger_dist($id_adresse = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+function formulaires_editer_adresse_charger_dist($id_adresse = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '', $obligatoire=false) {
 	$valeurs = formulaires_editer_objet_charger('adresse', $id_adresse, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
 
 	// valeur de la saisie "type" dans la table de liens
@@ -245,7 +245,7 @@ function formulaires_editer_adresse_charger_dist($id_adresse = 'new', $retour = 
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_adresse_verifier_dist($id_adresse = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+function formulaires_editer_adresse_verifier_dist($id_adresse = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '', $obligatoire=false) {
 	// verification generique
 	$erreurs = formulaires_editer_objet_verifier('adresse', $id_adresse);
 
@@ -277,7 +277,7 @@ function formulaires_editer_adresse_verifier_dist($id_adresse = 'new', $retour =
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_adresse_traiter_dist($id_adresse = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+function formulaires_editer_adresse_traiter_dist($id_adresse = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '', $obligatoire=false) {
 	$res = formulaires_editer_objet_traiter('adresse', $id_adresse, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
 
 	// Un lien a prendre en compte ?
