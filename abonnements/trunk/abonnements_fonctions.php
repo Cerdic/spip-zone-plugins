@@ -50,7 +50,7 @@ function filtre_abonnements_afficher_duree_dist($duree, $periode) {
 		if (substr($periode, -1, 1) !== 's') {
 			$periode .= 's';
 		}
-		$texte = _T("abonnementsoffre:info_nb_$periode");
+		$texte = _T("abonnementsoffre:info_nb_$periode", array('nb' => $duree));
 	}
 
 	return $texte;
