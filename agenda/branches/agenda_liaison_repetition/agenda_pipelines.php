@@ -46,7 +46,12 @@ function agenda_formulaire_fond($flux) {
 
 	if ($flux['args']['form'] == 'editer_liens' and $flux['args']['args'][1] == 'evenement') {
 		$contexte = $flux['args']['contexte'];
-		$form = recuperer_fond('formulaires/inc-modif_synchro_source', $contexte);
+		$form = '';
+		//Ne pas demander systmatiquement lorsqu'on fait des modifs en série
+		if ($m = _request('modif_synchro_source') !== null) {
+			$form = "<input type='hidden' name='modif_synchro_source' value='$m' />";
+		}
+		$form .= recuperer_fond('formulaires/inc-modif_synchro_source', $contexte);
 		$flux['data'] = preg_replace('#<form.*>#U', "$0$form", $flux['data']);
 	}
 	return $flux;
