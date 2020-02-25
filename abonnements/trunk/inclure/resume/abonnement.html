@@ -43,7 +43,8 @@
 }}
 </BOUCLE_commande>
 
-<BOUCLE_abonnement(ABONNEMENTS) {id_abonnement}>
+[(#REM) L'abonnement lui-même ]
+<BOUCLE_abonnement(ABONNEMENTS) {id_abonnement} {statut?}>
 [(#REM) Infos sur l'abonnement : prendre en priorité dans la commande éventuelle ]
 #SET{prix,           #GET{commande/prix}|sinon{#GET{offre/prix}}}
 #SET{renouvellement, #GET{commande}|?{#GET{commande/renouvellement},#GET{offre/renouvellement}}}
