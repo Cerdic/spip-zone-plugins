@@ -140,9 +140,10 @@ function profils_chercher_champ_email_principal($config) {
  * 		Retoure un tableau de saisies
  * 
  */
-function profils_chercher_saisies_objet($objet, $id_objet='new') {
+function profils_chercher_saisies_objet($objet, $args=array('new')) {
 	static $saisies = array();
 	$objet = objet_type($objet);
+	$id_objet = $args[0]; // L'id de l'objet est toujours en premier
 	
 	if (isset($saisies[$objet][$id_objet])) {
 		return $saisies[$objet][$id_objet];
@@ -151,7 +152,7 @@ function profils_chercher_saisies_objet($objet, $id_objet='new') {
 		$saisies[$objet][$id_objet] = array();
 		
 		// Les saisies de base
-		if ($saisies_objet = saisies_chercher_formulaire("editer_$objet", array($id_objet))) {
+		if ($saisies_objet = saisies_chercher_formulaire("editer_$objet", $args)) {
 			$saisies[$objet][$id_objet] = array_merge($saisies[$objet][$id_objet], $saisies_objet);
 		}
 		
@@ -196,7 +197,7 @@ function profils_chercher_saisies_profil($form, $id_auteur=0, $id_ou_identifiant
 			if ($objet == 'auteur' or (defined('_DIR_PLUGIN_CONTACTS') and $config["activer_$objet"])) {
 				// On récupère les champs pour cet objet ET ses champs extras s'il y a
 				$cle_objet = id_table_objet($objet);
-				$saisies_objet = profils_chercher_saisies_objet($objet, $ids[$cle_objet]);
+				$saisies_objet = profils_chercher_saisies_objet($objet, array($ids[$cle_objet]));
 				$saisies_a_utiliser = array();
 				
 				// Pour chaque chaque champ vraiment configuré
@@ -228,12 +229,17 @@ function profils_chercher_saisies_profil($form, $id_auteur=0, $id_ou_identifiant
 							if ($champ[$form]) {
 								$cle_objet = id_table_objet($coordonnee);
 								$id_objet = $ids['coordonnees'][$objet][$coordonnee][$champ['type']];
+								$args_editer = array($id_objet);
+								if ($coordonnee == 'adresses') {
+									// C'EST DE LA MERDE
+									$args_editer = array($id_objet, '', '', '', '', '', '', $champ['obligatoire']);
+								}
 								// Attention, si pas de type, on transforme ici en ZÉRO
 								if (!$champ['type']) {
 									$champ['type'] = 0;
 								}
 								// On va chercher les saisies de ce type de coordonnées
-								$saisies_coordonnee = profils_chercher_saisies_objet($coordonnee, $id_objet);
+								$saisies_coordonnee = profils_chercher_saisies_objet($coordonnee, $args_editer);
 								// On vire le titre libre
 								$saisies_coordonnee = saisies_supprimer($saisies_coordonnee, 'titre');
 								// On change le nom de chacun des champs
@@ -264,12 +270,6 @@ function profils_chercher_saisies_profil($form, $id_auteur=0, $id_ou_identifiant
 								}
 								// Alors que si c'est une adresse on l'utilise pour le groupe de champs
 								else {
-									// On rend chaque champ obligatoire si nécessaire
-									if ($champ['obligatoire']) {
-										foreach ($saisies_coordonnee as $k => $saisie) {
-											$saisies_coordonnee[$k]['options']['obligatoire'] = 'oui';
-										}
-									}
 									$saisies_a_utiliser[] = array(
 										'saisie' => 'fieldset',
 										'options' => array(
