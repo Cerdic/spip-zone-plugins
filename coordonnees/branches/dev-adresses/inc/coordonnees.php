@@ -51,6 +51,13 @@ function coordoonnes_adresses_addressing_saisies() {
 				'label' => _T('coordonnees:label_ville')
 			),
 		),
+		'dependentLocality' => array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'localite_dependante',
+				'label' => _T('coordonnees:label_localite_dependante')
+			),
+		),
 		'administrativeArea' => array(
 			'saisie' => 'input',
 			'options' => array(
@@ -130,6 +137,14 @@ function coordonnees_adresses_saisies_par_pays($code_pays, $adresse_obligatoire=
 							// S'il y a un type, on utilise son label si différent du code postal
 							if (($ville_type = $addressFormat->getLocalityType()) != 'city') {
 								$saisie['options']['label'] = _T("coordonnees:adresse_champ_ville_${ville_type}_label");
+							}
+						}
+						
+						// Pour la localité dépendante, on personnalise
+						if ($champ == 'dependentLocality') {
+							// S'il y a un type, on utilise son label si différent du code postal
+							if ($localite_type = $addressFormat->getDependentLocalityType()) {
+								$saisie['options']['label'] = _T("coordonnees:adresse_champ_localite_dependante_${localite_type}_label");
 							}
 						}
 						
