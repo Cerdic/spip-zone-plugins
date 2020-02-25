@@ -97,11 +97,9 @@ function autoriser_formulaire_editer_dist($faire, $type, $id, $qui, $opt) {
 
 	/* Test des autorisations pour un admin restreint */
 	if (count($qui['restreint'])) {
-		$autoriser_admin_restreint = isset($GLOBALS['autoriser_admin_restreint'])
-				? $GLOBALS['autoriser_admin_restreint']
-					: lire_config('formidable/autoriser_admin_restreint') == 'on'
-						? true
-						: false;
+		$autoriser_admin_restreint = (isset($GLOBALS['autoriser_admin_restreint'])
+			? $GLOBALS['autoriser_admin_restreint']
+			: (lire_config('formidable/autoriser_admin_restreint') == 'on' ? true : false));
 
 		return $autoriser_admin_restreint;
 	}
