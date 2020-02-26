@@ -315,3 +315,30 @@ function filtre_logo_type_email($type_email) {
 function filtre_logo_type_mel($type_email) {
 	return filtre_logo_type_email($type_email);
 }
+
+/**
+ * Compile la balise #REGION en faisant une exception pour la boucle ADRESSES
+ * 
+ * @param $p 
+ * @return
+ * 		Code PHP à exécuter 
+ */
+if (!function_exists('balise_REGION_dist')) { // Si pas déjà défini dans un autre plugin
+function balise_REGION_dist($p) {
+	// Si le champ existe on l'utilise en priorité
+	if (
+		$region = champ_sql('region', $p, false)
+		and $region != '@$Pile[0][\'region\']'
+	) {
+		$p->code = "safehtml($region)";
+		// $p->interdire_scripts = true;
+	}
+	// Si le champ n'existe pas, on cherche le champ "zone_administrative" à la place
+	else {
+		$region = champ_sql('zone_administrative', $p, false);
+		$p->code = "safehtml($region)";
+	}
+	
+	return $p;
+}
+}
