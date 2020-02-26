@@ -122,6 +122,15 @@ function coordonnees_optimiser_base_disparus($flux) {
 }
 
 /**
+ * Permettre aux JS de savoir si on est dans l'espace privé
+ */
+function coordonnees_header_prive($flux) {
+	$flux = '<script type="text/javascript">var spip_ecrire = true;</script>' . $flux;
+	
+	return $flux;
+}
+
+/**
  * Ajouter le JS pour gérer les adresses suivant les pays
  */
 function coordonnees_jquery_plugins($scripts) {
