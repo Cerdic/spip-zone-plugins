@@ -36,17 +36,16 @@ function coordonnees_declarer_tables_objets_sql($tables) {
 		'type'                   => 'adresse',
 		'principale'             => "oui",
 		'field' => array(
-			"id_adresse"       => "bigint(21) NOT NULL",
-			"titre"            => "varchar(255) NOT NULL DEFAULT ''", // perso, pro, vacance...
-			"voie"             => "tinytext NOT NULL", // p. ex. 21 rue de cotte
-			"complement"       => "tinytext NOT NULL", // p. ex. 3e etage
-			"boite_postale"    => "varchar(40) NOT NULL DEFAULT ''",
-			"code_postal"      => "varchar(40) NOT NULL DEFAULT ''",
-			"ville"            => "tinytext NOT NULL",
-			"region"           => "varchar(40) NOT NULL DEFAULT ''",
-			"etat_federe"      => "varchar(40) NOT NULL DEFAULT ''",
-			"pays"             => "varchar(3) NOT NULL DEFAULT ''",
-			"maj"              => "TIMESTAMP"
+			"id_adresse"          => "bigint(21) NOT NULL",
+			"titre"               => "varchar(255) NOT NULL DEFAULT ''", // perso, pro, vacance...
+			"voie"                => "tinytext NOT NULL default ''", // p. ex. 21 rue de cotte
+			"complement"          => "tinytext NOT NULL default ''", // p. ex. 3e etage
+			"boite_postale"       => "varchar(40) NOT NULL DEFAULT ''",
+			"code_postal"         => "varchar(40) NOT NULL DEFAULT ''",
+			"ville"               => "tinytext NOT NULL",
+			'zone_administrative' => 'tinytext NOT NULL default ""',
+			"pays"                => "varchar(3) NOT NULL DEFAULT ''",
+			"maj"                 => "TIMESTAMP"
 		),
 		'key' => array(
 			"PRIMARY KEY"      => "id_adresse",
