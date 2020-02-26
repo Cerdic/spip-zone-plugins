@@ -4,7 +4,7 @@
 	 */
 	function coordonnees_adresses_par_pays() {
 		// On cherche tous les champs "pays" des adresses
-		$('.editer_pays:has(select[data-adresse-id])').change(function() {
+		$('.saisie_pays:has(select[data-adresse-id])').change(function() {
 			var saisie_pays = $(this);
 			var select = saisie_pays.find('select[data-adresse-id]');
 			// Obligatoire ?
@@ -13,14 +13,17 @@
 			var identifiant = select.data('adresse-id');
 			// Et le code pays demandé
 			var code_pays = select.val();
+			// Le modèle de name
+			var name = select.attr('name');
 			// API
 			var api = '../' + 'adresses_par_pays.api/';
 			// Environnement à garder pour le remplacement
-			var env = ['adresse-id=' + identifiant, 'obligatoire=' + obligatoire];
+			var env = ['adresse-id=' + identifiant, 'obligatoire=' + obligatoire, 'modele_name=' + name];
 			
 			// On récupère les valeurs
 			env.push(saisie_pays.siblings('.editer').find('[data-adresse-id=' + identifiant + ']').serialize());
 			env = env.join('&');
+			console.log(env);
 			
 			// On va cherche le HTML des nouveaux champs à remplacer
 			$.get(api+code_pays, env, function(html) {
