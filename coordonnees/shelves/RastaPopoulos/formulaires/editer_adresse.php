@@ -87,16 +87,6 @@ function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = 
 		);
 	}
 	
-	if (!in_array('region', $champs_superflus)) {
-		$saisies[] = array(
-			'saisie' => 'input',
-			'options' => array(
-				'nom' => 'region',
-				'label' => _T('coordonnees:label_region')
-			)
-		);
-	}
-	
 	if (!in_array('ville', $champs_superflus)) {
 		$saisies[] = array(
 			'saisie' => 'input',
@@ -107,12 +97,12 @@ function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = 
 		);
 	}
 	
-	if (!in_array('etat_federe', $champs_superflus)) {
+	if (!in_array('zone_administrative', $champs_superflus)) {
 		$saisies[] = array(
 			'saisie' => 'input',
 			'options' => array(
-				'nom' => 'etat_federe',
-				'label' => _T('coordonnees:label_etat_federe')
+				'nom' => 'zone_administrative',
+				'label' => _T('coordonnees:label_zone_administrative')
 			)
 		);
 	}
