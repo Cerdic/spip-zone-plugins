@@ -24,9 +24,9 @@ function pays_affiche_milieu($flux) {
 	$e = trouver_objet_exec($flux['args']['exec']);
 
 	include_spip('inc/config');
-	
+
 	// pays sur les articles, auteurs, contacts, organisations, rubriques
-	if (!$e['edition'] AND in_array($e['table_objet_sql'], array_filter(lire_config('pays/pays_objets',array())))) {
+	if ($e and !$e['edition'] and in_array($e['table_objet_sql'], array_filter(lire_config('pays/pays_objets',array())))) {
 		$texte .= recuperer_fond('prive/objets/editer/liens', array(
 			'table_source' => 'pays',
 			'objet' => $e['type'],
