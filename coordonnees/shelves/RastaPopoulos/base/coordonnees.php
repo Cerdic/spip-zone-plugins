@@ -40,7 +40,7 @@ function coordonnees_declarer_tables_objets_sql($tables) {
 			"titre"               => "varchar(255) NOT NULL DEFAULT ''", // perso, pro, vacance...
 			"voie"                => "tinytext NOT NULL default ''", // p. ex. 21 rue de cotte
 			"complement"          => "tinytext NOT NULL default ''", // p. ex. 3e etage
-			"boite_postale"       => "varchar(40) NOT NULL DEFAULT ''",
+			"localite_dependante" => 'tinytext NOT NULL default ""',
 			"code_postal"         => "varchar(40) NOT NULL DEFAULT ''",
 			"ville"               => "tinytext NOT NULL",
 			'zone_administrative' => 'tinytext NOT NULL default ""',
