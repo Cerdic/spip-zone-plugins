@@ -26,12 +26,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_adresse' => 'تعديل عنوان',
 	'editer_email' => 'تعديل بريد إلكتروني',
 	'editer_numero' => 'تعديل رقم',
+	'email' => 'بريد إلكتروني',
 	'emails' => 'البريد الإلكتروني',
 
 	// I
-	'info_gauche_numero_adresse' => 'عدد العنوان',
-	'info_gauche_numero_email' => 'عدد البريد الإلكتروني',
-	'info_gauche_numero_numero' => 'عدد الرقم',
+	'info_gauche_numero_adresse' => 'عدد العنوان', # MODIF
+	'info_gauche_numero_email' => 'عدد البريد الإلكتروني', # MODIF
+	'info_gauche_numero_numero' => 'عدد الرقم', # MODIF
 	'item_nouveau_numero' => 'رقم جديد',
 	'item_nouvel_email' => 'بريد إلكتروني جديد',
 	'item_nouvelle_adresse' => 'عنوان جديد',
