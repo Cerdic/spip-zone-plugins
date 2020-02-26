@@ -237,6 +237,7 @@ Je vindt <a href="https://contrib.spip.net/5080" target="_blank">volledige docum
 	'saisie_selection_titre' => 'Dropdown listbox',
 	'saisie_textarea_explication' => 'Een tekstveld meet meerder regels.',
 	'saisie_textarea_titre' => 'Textarea',
+	'saisies_aplatir_tableau_montrer_groupe' => '@groupe@: @valeur@',
 
 	// T
 	'titre_page_saisies_doc' => 'Documentatie van saisies',
