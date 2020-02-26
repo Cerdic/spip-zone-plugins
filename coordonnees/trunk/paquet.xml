@@ -1,10 +1,10 @@
 <paquet
 	prefix="coordonnees"
 	categorie="auteur"
-	version="2.5.5"
+	version="3.0.0"
 	schema="1.8.6"
-	etat="stable"
-	compatibilite="[3.0.0;3.2.*]"
+	etat="dev"
+	compatibilite="[3.2.0;3.3.*]"
 	logo="prive/themes/spip/images/addressbook-128.png"
 	documentation="https://contrib.spip.net/Plugin-Coordonnees"
 >
