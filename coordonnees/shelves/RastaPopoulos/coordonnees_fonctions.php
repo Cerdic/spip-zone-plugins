@@ -366,6 +366,7 @@ function coordonnees_adresses_formater($id_adresse) {
 			->withCountryCode($adresse['pays'])
 			->withAdministrativeArea($adresse['zone_administrative'])
 			->withLocality($adresse['ville'])
+			->withDependentLocality($adresse['localite_dependante'])
 			->withAddressLine1($adresse['voie'])
 			->withAddressLine2($adresse['complement'])
 			->withPostalCode($adresse['code_postal']);
