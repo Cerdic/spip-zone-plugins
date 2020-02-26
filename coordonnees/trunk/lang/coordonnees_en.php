@@ -3,17 +3,29 @@
 // extrait automatiquement de https://trad.spip.net/tradlang_module/coordonnees?lang_cible=en
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'adresse' => 'Address',
 	'adresse_perso' => 'Home',
 	'adresse_pro' => 'Professional',
 	'adresses' => 'Addresses',
 	'ajouter_adresse' => 'Add an address',
+	'ajouter_adresse_court' => 'Add address',
 	'ajouter_email' => 'Add an email',
+	'ajouter_email_court' => 'Add email',
 	'ajouter_telephone' => 'Add a phone number',
+	'ajouter_telephone_court' => 'Add number',
+
+	// B
+	'bouton_dissocier' => 'Remove',
+	'bouton_dissocier_adresse' => 'Remove this address',
+	'bouton_dissocier_email' => 'Remove this email',
+	'bouton_dissocier_numero' => 'Remove this number',
 
 	// C
 	'configuration_coordonnees' => 'Configuration of Address book',
@@ -30,11 +42,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_type_email' => 'it can be "personnal" or "professional" type',
 
 	// I
+	'info_1_adresse' => '1 address',
+	'info_1_email' => '1 email',
+	'info_1_numero' => '1 number',
 	'info_adresse_utilisee_par' => 'This address is used by :',
+	'info_aucun_email' => 'No e-mail',
+	'info_aucun_numero' => 'No number',
+	'info_aucune_adresse' => 'No address',
 	'info_email_utilise_par' => 'Email used by :',
 	'info_gauche_numero_adresse' => 'Address id',
 	'info_gauche_numero_email' => 'Email id',
 	'info_gauche_numero_numero' => 'Id Number',
+	'info_nb_adresses' => '@nb@ addresses',
+	'info_nb_emails' => '@nb@ emails',
+	'info_nb_numeros' => '@nb@ numbers',
 	'info_numero_utilise_par' => 'This phone number is used by :',
 	'item_nouveau_numero' => 'New phone number',
 	'item_nouvel_email' => 'New email',
@@ -86,6 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_email_pref' => 'Prefered',
 	'type_email_x400' => 'X.400',
 	'type_mel_home' => 'Personnal',
+	'type_mel_intl' => 'International',
 	'type_mel_work' => 'Professionnal',
 	'type_tel_bbs' => 'Messaging service',
 	'type_tel_car' => 'Car',
@@ -105,5 +127,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_tel_voice' => 'Vocal',
 	'type_tel_work' => 'Professionnal'
 );
-
-?>

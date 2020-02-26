@@ -1,35 +1,37 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/coordonnees/branches/trunk/lang/
-if (!defined('_ECRIRE_INC_VERSION')) return;
+// Fichier source, a modifier dans https://git.spip.net/spip-contrib-extensions/coordonnees.git
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'adresse' => 'Adresse',
 	'adresse_perso' => 'Domicile',
 	'adresse_pro' => 'Professionnel',
 	'adresses' => 'Adresses',
-	'adresse' => 'Adresse',
 	'ajouter_adresse' => 'Ajouter une adresse',
-	'ajouter_email' => 'Ajouter un email',
-	'ajouter_telephone' => 'Ajouter un numéro',
 	'ajouter_adresse_court' => 'Ajouter adresse',
+	'ajouter_email' => 'Ajouter un email',
 	'ajouter_email_court' => 'Ajouter email',
+	'ajouter_telephone' => 'Ajouter un numéro',
 	'ajouter_telephone_court' => 'Ajouter numéro',
 
 	// B
+	'bouton_dissocier' => 'Retirer',
 	'bouton_dissocier_adresse' => 'Retirer cette adresse',
 	'bouton_dissocier_email' => 'Retirer cet email',
 	'bouton_dissocier_numero' => 'Retirer ce numéro',
-	'bouton_dissocier' => 'Retirer',
 
 	// C
 	'configuration_adresses_champs_superflus_explication' => 'Permet de ne pas utiliser certains champs inutiles pour ce site dans les adresses.',
 	'configuration_adresses_champs_superflus_label' => 'Champs superflus des adresses',
 	'configuration_coordonnees' => 'Configuration des coordonnées',
-	'confirmer_suppression_adresse' => 'Voulez-vous vraiment supprimer cette adresse ?',
-	'confirmer_suppression_email' => 'Voulez-vous vraiment supprimer ce courriel ?',
-	'confirmer_suppression_numero' => 'Voulez-vous vraiment supprimer ce numéro ?',
+	'confirmer_suppression_adresse' => 'Voulez-vous vraiment supprimer cette adresse ?',
+	'confirmer_suppression_email' => 'Voulez-vous vraiment supprimer ce courriel ?',
+	'confirmer_suppression_numero' => 'Voulez-vous vraiment supprimer ce numéro ?',
 	'contacter_adresse' => 'Contacter par courrier',
 	'contacter_adresse_qui' => 'Contacter @nom@ par courrier',
 	'contacter_email' => 'Contacter par email',
@@ -43,25 +45,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_numero' => 'Éditer un numéro',
 	'emails' => 'Courriels',
 	'email' => 'Courriel',
-	'explication_objets_actifs' => 'Sur quels objets éditoriaux proposer les coordonnées ?',
-	'explication_type_email' => 'Le type peut être \'perso\' ou \'pro\'.',
+	'explication_objets_actifs' => 'Sur quels objets éditoriaux proposer les coordonnées ?',
+	'explication_type_email' => 'Le type peut être ’perso’ ou ’pro’.',
 
 	// I
 	'info_1_adresse' => '1 adresse',
 	'info_1_email' => '1 courriel',
 	'info_1_numero' => '1 numero',
-	'info_adresse_utilisee_par' => 'Adresse utilisée par :',
+	'info_adresse_utilisee_par' => 'Adresse utilisée par :',
 	'info_aucun_email' => 'Aucun courriel',
 	'info_aucun_numero' => 'Aucun numero',
 	'info_aucune_adresse' => 'Aucune adresse',
-	'info_email_utilise_par' => 'Courriel utilisé par :',
+	'info_email_utilise_par' => 'Courriel utilisé par :',
 	'info_gauche_numero_adresse' => 'Adresse N°',
 	'info_gauche_numero_email' => 'Email N°',
 	'info_gauche_numero_numero' => 'Numéro N°',
 	'info_nb_adresses' => '@nb@ adresses',
 	'info_nb_emails' => '@nb@ courriels',
 	'info_nb_numeros' => '@nb@ numeros',
-	'info_numero_utilise_par' => 'Numéro utilisé par :',
+	'info_numero_utilise_par' => 'Numéro utilisé par :',
 	'item_nouveau_numero' => 'Nouveau numéro',
 	'item_nouvel_email' => 'Nouveau courriel',
 	'item_nouvelle_adresse' => 'Nouvelle adresse',
@@ -79,12 +81,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_telephone' => 'Téléphone',
 	'label_titre' => 'Titre',
 	'label_type' => 'Type',
-	'label_type_adresse' => 'Type d\'adresse',
+	'label_type_adresse' => 'Type d’adresse',
 	'label_type_email' => 'Type de courriel',
 	'label_type_numero' => 'Type de numéro',
 	'label_ville' => 'Ville',
 	'label_voie' => 'N<sup>o</sup> & voie',
-	'logo_adresse' => 'Logo de l\'adresse',
+	'logo_adresse' => 'Logo de l’adresse',
 	'logo_email' => 'Logo du courriel',
 	'logo_numero' => 'Logo du numero',
 
@@ -97,14 +99,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nouveau_numero' => 'Nouveau numéro',
 	'nouvel_email' => 'Nouveau courriel',
 	'nouvelle_adresse' => 'Nouvelle adresse',
-	'numeros' => 'Numéros',
 	'numero' => 'Numéro',
+	'numeros' => 'Numéros',
 
 	// P
-	'placeholder_complement_adresse' => 'étage, n° du bâtiment...',
+	'placeholder_complement_adresse' => 'étage, n° du bâtiment...',
 	'placeholder_email' => 'email@site.com',
-	'placeholder_titre_adresse' => 'Un nom pour identifier l\'adresse',
-	'placeholder_titre_email' => 'Un nom pour identifier l\'email',
+	'placeholder_titre_adresse' => 'Un nom pour identifier l’adresse',
+	'placeholder_titre_email' => 'Un nom pour identifier l’email',
 	'placeholder_titre_numero' => 'Un nom pour identifier le numéro de téléphone',
 
 	// S
@@ -146,7 +148,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_tel_textphone' => 'Retranscripteur texte',
 	'type_tel_video' => 'Visiophone (visioconférence)',
 	'type_tel_voice' => 'Vocal',
-	'type_tel_work' => 'Professionnel',
+	'type_tel_work' => 'Professionnel'
 );
-
-?>

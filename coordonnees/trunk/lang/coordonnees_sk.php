@@ -3,7 +3,9 @@
 // extrait automatiquement de https://trad.spip.net/tradlang_module/coordonnees?lang_cible=sk
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -50,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_pays' => 'Krajina',
 	'label_region' => 'Región (kraj)',
 	'label_telephone' => 'Telefón',
-	'label_titre' => 'Nadpis',
+	'label_titre' => 'Titulok',
 	'label_type_adresse' => 'Typ adresy',
 	'label_type_email' => 'Typ e-mailu',
 	'label_type_numero' => 'Typ telefónneho čísla',
@@ -86,6 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_email_pref' => 'Preferovaný',
 	'type_email_x400' => 'X.400',
 	'type_mel_home' => 'Domov',
+	'type_mel_intl' => 'Medzinárodná',
 	'type_mel_work' => 'Práca',
 	'type_tel_bbs' => 'Odkazová služba',
 	'type_tel_car' => 'Auto',
@@ -105,5 +108,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_tel_voice' => 'Hlasový',
 	'type_tel_work' => 'Do práce'
 );
-
-?>
