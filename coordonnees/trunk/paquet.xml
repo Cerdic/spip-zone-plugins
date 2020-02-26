@@ -2,7 +2,7 @@
 	prefix="coordonnees"
 	categorie="auteur"
 	version="3.0.0"
-	schema="1.8.6"
+	schema="1.10.0"
 	etat="dev"
 	compatibilite="[3.2.0;3.3.*]"
 	logo="prive/themes/spip/images/addressbook-128.png"
@@ -11,11 +11,12 @@
 	<nom>Coordonnées</nom>
 	<auteur>Matthieu Marcillaud</auteur>
 	<auteur lien="http://www.cym.fr">Cyril MARION</auteur>
+	<auteur lien="https://www.mukt.fr">Mukt</auteur>
 	<licence>GNU/GPL</licence>
 	<traduire gestionnaire="salvatore" module="coordonnees" reference="fr" />
 
 	<necessite nom="saisies" compatibilite="[3.23.2;]" />
-	<necessite nom="pays" compatibilite="[1.0.6;]" />
+	<necessite nom="pays" compatibilite="[3.3.0;]" />
 	<necessite nom="verifier" compatibilite="[0.1.15;]" />
 
 	<!-- Declaration des tables -->
@@ -33,6 +34,9 @@
 	<pipeline nom="types_coordonnees" action=""/>
 	<!-- Import/export de configuration avec ieconfig -->
 	<pipeline nom="ieconfig_metas" inclure="coordonnees_pipelines.php" />
+	<!-- Pour JS des adresses -->
+	<pipeline nom="header_prive" inclure="coordonnees_pipelines.php" />
+	<pipeline nom="jquery_plugins" inclure="coordonnees_pipelines.php" />
 
 	<menu nom="coordonnees" titre="coordonnees:titre_coordonnees" parent="menu_edition" icone="images/addressbook-16.png" action="coordonnees" />
 </paquet>

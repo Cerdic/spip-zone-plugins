@@ -21,16 +21,7 @@
 					<span class="#EDIT{titre} titre">(#TITRE)</span>
 				</a>
 			</div>]
-			[<div class="#EDIT{voie} voie">(#VOIE)</div>]
-			[<div class="#EDIT{complement} complement">(#COMPLEMENT)</div>]
-			[<div class="#EDIT{boite_postale} boite_postale">(#BOITE_POSTALE)</div>]
-			[<div class="#EDIT{region} region">(#REGION)</div>]
-			[<div class="#EDIT{etat_federe} etat_federe">(#ETAT_FEDERE)</div>]
-			<div>
-				[<span class="#EDIT{code_postal} code_postal">(#CODE_POSTAL)</span>]
-				[<span class="#EDIT{ville} ville">(#VILLE)</span>]
-			</div>
-			<B_pays><div class='pays nom_pays'><BOUCLE_pays(PAYS){code=#PAYS}>#NOM</BOUCLE_pays></div></B_pays>
+			#ADRESSE_FORMATER
 		</td>
 		[(#REM) Un coup pour les champs extras ]
 		[<td class="extra">(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{type,adresse,id_objet,#ID_ADRESSE,contexte,[(#ENV**|unserialize)]})],data,''})]})</td>]

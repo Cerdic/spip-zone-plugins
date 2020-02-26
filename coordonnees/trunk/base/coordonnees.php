@@ -36,27 +36,26 @@ function coordonnees_declarer_tables_objets_sql($tables) {
 		'type'                   => 'adresse',
 		'principale'             => "oui",
 		'field' => array(
-			"id_adresse"       => "bigint(21) NOT NULL",
-			"titre"            => "varchar(255) NOT NULL DEFAULT ''", // perso, pro, vacance...
-			"voie"             => "tinytext NOT NULL", // p. ex. 21 rue de cotte
-			"complement"       => "tinytext NOT NULL", // p. ex. 3e etage
-			"boite_postale"    => "varchar(40) NOT NULL DEFAULT ''",
-			"code_postal"      => "varchar(40) NOT NULL DEFAULT ''",
-			"ville"            => "tinytext NOT NULL",
-			"region"           => "varchar(40) NOT NULL DEFAULT ''",
-			"etat_federe"      => "varchar(40) NOT NULL DEFAULT ''",
-			"pays"             => "varchar(3) NOT NULL DEFAULT ''",
-			"maj"              => "TIMESTAMP"
+			"id_adresse"          => "bigint(21) NOT NULL",
+			"titre"               => "varchar(255) NOT NULL DEFAULT ''", // perso, pro, vacance...
+			"voie"                => "tinytext NOT NULL default ''", // p. ex. 21 rue de cotte
+			"complement"          => "tinytext NOT NULL default ''", // p. ex. 3e etage
+			"localite_dependante" => 'tinytext NOT NULL default ""',
+			"code_postal"         => "varchar(40) NOT NULL DEFAULT ''",
+			"ville"               => "tinytext NOT NULL",
+			'zone_administrative' => 'tinytext NOT NULL default ""',
+			"pays"                => "varchar(3) NOT NULL DEFAULT ''",
+			"maj"                 => "TIMESTAMP"
 		),
 		'key' => array(
 			"PRIMARY KEY"      => "id_adresse",
 			"KEY iso3166"      => "pays",
-			"KEY zip"          => "region, code_postal"
+			"KEY zip"          => "zone_administrative(255), code_postal"
 		),
 		'titre' => "titre AS titre, '' AS lang",
-		'champs_editables'       => array('titre', 'voie', 'complement', 'boite_postale', 'code_postal', 'ville', 'region', 'etat_federe', 'pays'),
+		'champs_editables'       => array('titre', 'voie', 'complement', 'boite_postale', 'code_postal', 'ville', 'zone_administrative', 'pays'),
 		'champs_versionnes'      => array(),
-		'rechercher_champs'      => array('pays' => 8, 'titre' => 5, 'voie' => 3, 'region' => 3, 'etat_federe' => 3, 'ville' => 3),
+		'rechercher_champs'      => array('pays' => 8, 'titre' => 5, 'voie' => 3, 'zone_administrative' => 3, 'ville' => 3),
 		'tables_jointures'       => array('spip_adresses_liens'),
 		/* Les textes standard */
 		'texte_modifier'         => 'coordonnees:modifier_adresse',

@@ -13,6 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/actions');
 include_spip('inc/editer');
 include_spip('inc/config');
+include_spip('inc/coordonnees');
 
 /**
  * Definition des saisies du formulaire
@@ -27,8 +28,17 @@ include_spip('inc/config');
  * @return array
  *     Tableau des saisies
  */
-function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = '', $associer_objet = '') {
+function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '', $obligatoire=false) {
 	$champs_superflus = lire_config('coordonnees/adresses_champs_superflus', array());
+	$identifiant = uniqid();
+	
+	// Si on connait le pays de l'adresse existante, on l'utilise, sinon défaut
+	if (is_numeric($id_adresse) and $id_adresse>0 and $code_pays = sql_getfetsel('pays', 'spip_adresses', 'id_adresse = '.intval($id_adresse))) {
+		$code_pays_defaut = $code_pays;
+	}
+	else {
+		$code_pays_defaut = lire_config('pays/code_pays_defaut');
+	}
 	
 	$saisies = array(
 		array(
@@ -41,96 +51,96 @@ function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = 
 		),
 	);
 	
-	if (!in_array('voie', $champs_superflus)) {
-		$saisies[] = array(
-			'saisie' => 'input',
-			'options' => array(
-				'nom' => 'voie',
-				'label' => _T('coordonnees:label_voie')
-			)
-		);
-	}
-	
-	if (!in_array('complement', $champs_superflus)) {
-		$saisies[] = array(
-			'saisie' => 'input',
-			'options' => array(
-				'nom' => 'complement',
-				'label' => _T('coordonnees:label_complement'),
-				'placeholder' => _T('coordonnees:placeholder_complement_adresse')
-			)
-		);
-	}
-	
-	if (!in_array('boite_postale', $champs_superflus)) {
-		$saisies[] = array(
-			'saisie' => 'input',
-			'options' => array(
-				'nom' => 'boite_postale',
-				'label' => _T('coordonnees:label_boite_postale'),
-			)
-		);
-	}
-	
-	if (!in_array('code_postal', $champs_superflus)) {
-		$saisies[] = array(
-			'saisie' => 'input',
-			'options' => array(
-				'nom' => 'code_postal',
-				'label' => _T('coordonnees:label_code_postal')
-			),
-			// decommenter ces lignes quand les codes postaux
-			// internationaux seront pris en compte par 'verifier'
-			/*'verifier' => array (
-				'type' => 'code_postal'
-			)*/
-		);
-	}
-	
-	if (!in_array('region', $champs_superflus)) {
-		$saisies[] = array(
-			'saisie' => 'input',
-			'options' => array(
-				'nom' => 'region',
-				'label' => _T('coordonnees:label_region')
-			)
-		);
-	}
-	
-	if (!in_array('ville', $champs_superflus)) {
-		$saisies[] = array(
-			'saisie' => 'input',
-			'options' => array(
-				'nom' => 'ville',
-				'label' => _T('coordonnees:label_ville')
-			)
-		);
-	}
-	
-	if (!in_array('etat_federe', $champs_superflus)) {
-		$saisies[] = array(
-			'saisie' => 'input',
-			'options' => array(
-				'nom' => 'etat_federe',
-				'label' => _T('coordonnees:label_etat_federe')
-			)
-		);
-	}
-	
 	if (!in_array('pays', $champs_superflus)) {
 		$saisies[] = array(
 			'saisie' => 'pays',
 			'options' => array(
 				'nom' => 'pays',
 				'label' => _T('coordonnees:label_pays'),
-				'obligatoire' => 'oui',
-				'class' => 'chosen',
-				'defaut' => _COORDONNEES_PAYS_DEFAUT,
-				'code_pays' => 'oui'
+				'obligatoire' => $obligatoire,
+				'class' => 'select2 chosen',
+				'defaut' => lire_config('pays/code_pays_defaut'),
+				'code_pays' => 'oui',
+				'attributs' => 'data-adresse-id="'.$identifiant.'"',
 			)
 		);
 	}
-
+	
+	// Par défaut, on va afficher les champs suivant le pays configuré par défaut, sinon la France pour reproduire comme avant
+	$saisies_pays = coordonnees_adresses_saisies_par_pays($code_pays_defaut ? $code_pays_defaut : 'FR', $obligatoire);
+	// On identifie cette adresse là pour pouvoir la manipuler indépendamment
+	foreach ($saisies_pays as $cle=>$saisie) {
+		$saisies_pays[$cle]['options']['attributs'] = 'data-adresse-id="'.$identifiant.'"';
+	}
+	
+	$saisies = array_merge($saisies, $saisies_pays);
+	
+	//~ if (!in_array('voie', $champs_superflus)) {
+		//~ $saisies[] = array(
+			//~ 'saisie' => 'input',
+			//~ 'options' => array(
+				//~ 'nom' => 'voie',
+				//~ 'label' => _T('coordonnees:label_voie')
+			//~ )
+		//~ );
+	//~ }
+	
+	//~ if (!in_array('complement', $champs_superflus)) {
+		//~ $saisies[] = array(
+			//~ 'saisie' => 'input',
+			//~ 'options' => array(
+				//~ 'nom' => 'complement',
+				//~ 'label' => _T('coordonnees:label_complement'),
+				//~ 'placeholder' => _T('coordonnees:placeholder_complement_adresse')
+			//~ )
+		//~ );
+	//~ }
+	
+	//~ if (!in_array('boite_postale', $champs_superflus)) {
+		//~ $saisies[] = array(
+			//~ 'saisie' => 'input',
+			//~ 'options' => array(
+				//~ 'nom' => 'boite_postale',
+				//~ 'label' => _T('coordonnees:label_boite_postale'),
+			//~ )
+		//~ );
+	//~ }
+	
+	//~ if (!in_array('code_postal', $champs_superflus)) {
+		//~ $saisies[] = array(
+			//~ 'saisie' => 'input',
+			//~ 'options' => array(
+				//~ 'nom' => 'code_postal',
+				//~ 'label' => _T('coordonnees:label_code_postal')
+			//~ ),
+			//~ // decommenter ces lignes quand les codes postaux
+			//~ // internationaux seront pris en compte par 'verifier'
+			//~ /*'verifier' => array (
+				//~ 'type' => 'code_postal'
+			//~ )*/
+		//~ );
+	//~ }
+	
+	//~ if (!in_array('ville', $champs_superflus)) {
+		//~ $saisies[] = array(
+			//~ 'saisie' => 'input',
+			//~ 'options' => array(
+				//~ 'nom' => 'ville',
+				//~ 'label' => _T('coordonnees:label_ville')
+			//~ )
+		//~ );
+	//~ }
+	
+	//~ if (!in_array('zone_administrative', $champs_superflus)) {
+		//~ $saisies[] = array(
+			//~ 'saisie' => 'input',
+			//~ 'options' => array(
+				//~ 'nom' => 'zone_administrative',
+				//~ 'label' => _T('coordonnees:label_zone_administrative')
+			//~ )
+		//~ );
+	//~ }
+	
 	// si on associe l'adresse à un objet, rajouter la saisie 'type'
 	if($associer_objet) {
 		$saisie_type = array(
@@ -144,7 +154,7 @@ function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = 
 		);
 		$saisies = array_merge($saisie_type, $saisies);
 	}
-
+	
 	return $saisies;
 }
 
@@ -169,7 +179,7 @@ function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = 
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_adresse_identifier_dist($id_adresse = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+function formulaires_editer_adresse_identifier_dist($id_adresse = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '', $obligatoire=false) {
 	return serialize(array(intval($id_adresse), $associer_objet));
 }
 
@@ -198,7 +208,7 @@ function formulaires_editer_adresse_identifier_dist($id_adresse = 'new', $retour
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_adresse_charger_dist($id_adresse = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+function formulaires_editer_adresse_charger_dist($id_adresse = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '', $obligatoire=false) {
 	$valeurs = formulaires_editer_objet_charger('adresse', $id_adresse, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
 
 	// valeur de la saisie "type" dans la table de liens
@@ -235,7 +245,7 @@ function formulaires_editer_adresse_charger_dist($id_adresse = 'new', $retour = 
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_adresse_verifier_dist($id_adresse = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+function formulaires_editer_adresse_verifier_dist($id_adresse = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '', $obligatoire=false) {
 	// verification generique
 	$erreurs = formulaires_editer_objet_verifier('adresse', $id_adresse);
 
@@ -267,7 +277,7 @@ function formulaires_editer_adresse_verifier_dist($id_adresse = 'new', $retour =
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_adresse_traiter_dist($id_adresse = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+function formulaires_editer_adresse_traiter_dist($id_adresse = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '', $obligatoire=false) {
 	$res = formulaires_editer_objet_traiter('adresse', $id_adresse, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
 
 	// Un lien a prendre en compte ?
