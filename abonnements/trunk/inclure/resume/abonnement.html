@@ -51,6 +51,7 @@
 #SET{periode,        #GET{commande/periode}|sinon{#GET{offre/periode}}}
 #SET{duree,          #GET{offre/duree}}
 #SET{actif,          #PUBLIE}
+#SET{statut,         #STATUT}
 
 <article class="abonnement abonnement_resume[ abonnement_(#GET{statut})][ (#GET{renouvellement}|oui)abonnement_renouvelable]" id="abonnement_#ID_ABONNEMENT">
 
@@ -109,7 +110,7 @@
 		</div>
 
 		[(#REM) Statut ]
-		<div class="abonnement__info abonnement__info_statut[ abonnement__info_statut_(#GET{actif})]">
+		<div class="abonnement__info abonnement__info_statut[ abonnement__info_statut_(#GET{statut})]">
 			<strong class="label"><:abonnement:label_statut:></strong>
 			<span class="valeur">
 				[<span class="statut">(#GET{actif}|?{
