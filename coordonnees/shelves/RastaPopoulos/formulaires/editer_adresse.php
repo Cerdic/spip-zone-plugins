@@ -30,8 +30,15 @@ include_spip('inc/coordonnees');
  */
 function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = '', $associer_objet = '') {
 	$champs_superflus = lire_config('coordonnees/adresses_champs_superflus', array());
-	$code_pays_defaut = lire_config('pays/code_pays_defaut');
 	$identifiant = uniqid();
+	
+	// Si on connait le pays de l'adresse existante, on l'utilise, sinon défaut
+	if (is_numeric($id_adresse) and $id_adresse>0 and $code_pays = sql_getfetsel('pays', 'spip_adresses', 'id_adresse = '.intval($id_adresse))) {
+		$code_pays_defaut = $code_pays;
+	}
+	else {
+		$code_pays_defaut = lire_config('pays/code_pays_defaut');
+	}
 	
 	$saisies = array(
 		array(
