@@ -125,7 +125,7 @@ function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = 
 				'label' => _T('coordonnees:label_pays'),
 				'obligatoire' => 'oui',
 				'class' => 'chosen',
-				'defaut' => 'FR',
+				'defaut' => _COORDONNEES_PAYS_DEFAUT,
 				'code_pays' => 'oui'
 			)
 		);
