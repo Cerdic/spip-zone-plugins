@@ -50,7 +50,7 @@ function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = 
 				'nom' => 'pays',
 				'label' => _T('coordonnees:label_pays'),
 				'obligatoire' => 'oui',
-				'class' => 'chosen',
+				'class' => 'select2 chosen',
 				'defaut' => lire_config('pays/code_pays_defaut'),
 				'code_pays' => 'oui'
 			)
