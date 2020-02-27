@@ -250,11 +250,15 @@ function filtre_icone_href_class_from_name_dist($name) {
 		if (!isset($sprite_files[''])) {
 			if (!defined('_ICON_SPRITE_SVG_FILE')) {
 				define('_ICON_SPRITE_SVG_FILE', "css/bytesize/bytesize-symbols.min.svg");
+				define('_ICON_SPRITE_SVG_ID_PREFIX', "i-");
 			}
 			$sprite_files[''] = timestamp(find_in_path(_ICON_SPRITE_SVG_FILE));
 		}
 		// sanitizer l'ancre pour la class
 		$class = preg_replace(",[^\w\-],", "", $name);
+		if (_ICON_SPRITE_SVG_ID_PREFIX) {
+			$class .= " " . _ICON_SPRITE_SVG_ID_PREFIX . "icon";
+		}
 		if (!$name) {
 			return array($sprite_files[''], $class);
 		}
@@ -265,6 +269,11 @@ function filtre_icone_href_class_from_name_dist($name) {
 }
 
 function filtre_icone_anchor_from_name_dist($name) {
+	if (_ICON_SPRITE_SVG_ID_PREFIX) {
+		if (strpos($name, _ICON_SPRITE_SVG_ID_PREFIX) === 0) {
+			$name = substr($name, strlen(_ICON_SPRITE_SVG_ID_PREFIX));
+		}
+	}
 	switch ($name) {
 		case "comment":
 			$ancre = 'msg';
@@ -276,7 +285,7 @@ function filtre_icone_anchor_from_name_dist($name) {
 			$ancre = $name;
 			break;
 	}
-	return "i-$ancre";
+	return _ICON_SPRITE_SVG_ID_PREFIX . $ancre;
 }
 
 function lister_icones_svg() {
@@ -284,8 +293,16 @@ function lister_icones_svg() {
 	if ($sprite_file
 		and $sprite_file = supprimer_timestamp($sprite_file)
 	  and $sprite = file_get_contents($sprite_file)
-	  and preg_match_all(',id="i-([\w\-]+)",', $sprite, $matches, PREG_PATTERN_ORDER)) {
+	  and preg_match_all(',id="([\w\-]+)",', $sprite, $matches, PREG_PATTERN_ORDER)) {
 		$icons = $matches[1];
+		if (_ICON_SPRITE_SVG_ID_PREFIX){
+			foreach ($icons as $k => $name){
+				if (strpos($name, _ICON_SPRITE_SVG_ID_PREFIX)===0){
+					$icons[$k] = substr($name, strlen(_ICON_SPRITE_SVG_ID_PREFIX));
+				}
+			}
+		}
+		sort($icons);
 		return $icons;
 	}
 	return array();
