@@ -1562,8 +1562,6 @@ class Compiler
         if (isset($value[2])) {
             if ($pushEnv) {
                 $this->pushEnv();
-                $storeEnv = $this->storeEnv;
-                $this->storeEnv = $this->env;
             }
 
             try {
@@ -1573,7 +1571,6 @@ class Compiler
             }
 
             if ($pushEnv) {
-                $this->storeEnv = $storeEnv;
                 $this->popEnv();
             }
         }
@@ -2643,11 +2640,9 @@ class Compiler
             case Type::T_EACH:
                 list(, $each) = $child;
 
-                $list = $this->coerceList($this->reduce($each->list));
+                $list = $this->coerceList($this->reduce($each->list), ',', true);
 
                 $this->pushEnv();
-                $storeEnv = $this->storeEnv;
-                $this->storeEnv = $this->env;
 
                 foreach ($list[2] as $item) {
                     if (count($each->vars) === 1) {
@@ -2665,13 +2660,8 @@ class Compiler
                     if ($ret) {
                         if ($ret[0] !== Type::T_CONTROL) {
                             $store = $this->env->store;
-                            $this->storeEnv = $storeEnv;
                             $this->popEnv();
-                            foreach ($store as $key => $value) {
-                                if (!in_array($key, $each->vars)) {
-                                    $this->set($key, $value, true);
-                                }
-                            }
+                            $this->backPropagateEnv($store, $each->vars);
 
                             return $ret;
                         }
@@ -2682,13 +2672,8 @@ class Compiler
                     }
                 }
                 $store = $this->env->store;
-                $this->storeEnv = $storeEnv;
                 $this->popEnv();
-                foreach ($store as $key => $value) {
-                    if (!in_array($key, $each->vars)) {
-                        $this->set($key, $value, true);
-                    }
-                }
+                $this->backPropagateEnv($store, $each->vars);
 
                 break;
 
@@ -2728,6 +2713,8 @@ class Compiler
 
                 $d = $start < $end ? 1 : -1;
 
+                $this->pushEnv();
+
                 for (;;) {
                     if ((! $for->until && $start - $d == $end) ||
                         ($for->until && $start == $end)
@@ -2742,6 +2729,9 @@ class Compiler
 
                     if ($ret) {
                         if ($ret[0] !== Type::T_CONTROL) {
+                            $store = $this->env->store;
+                            $this->popEnv();
+                            $this->backPropagateEnv($store, [$for->var]);
                             return $ret;
                         }
 
@@ -2750,6 +2740,11 @@ class Compiler
                         }
                     }
                 }
+
+                $store = $this->env->store;
+                $this->popEnv();
+                $this->backPropagateEnv($store, [$for->var]);
+
                 break;
 
             case Type::T_BREAK:
@@ -2781,9 +2776,6 @@ class Compiler
                 // push scope, apply args
                 $this->pushEnv();
                 $this->env->depth--;
-
-                $storeEnv = $this->storeEnv;
-                $this->storeEnv = $this->env;
 
                 // Find the parent selectors in the env to be able to know what '&' refers to in the mixin
                 // and assign this fake parent to childs
@@ -2838,8 +2830,6 @@ class Compiler
 
                 $this->compileChildrenNoReturn($mixin->children, $out, $selfParent, $this->env->marker . " " . $name);
 
-                $this->storeEnv = $storeEnv;
-
                 $this->popEnv();
                 break;
 
@@ -2850,9 +2840,6 @@ class Compiler
                 $argContent = $child[1];
 
                 if (! $content) {
-                    $content = new \stdClass();
-                    $content->scope    = new \stdClass();
-                    $content->children = $env->parent->block->children;
                     break;
                 }
 
@@ -2861,7 +2848,7 @@ class Compiler
 
                 if (isset($argUsing) && isset($argContent)) {
                     // Get the arguments provided for the content with the names provided in the "using" argument list
-                    $this->storeEnv = $this->env;
+                    $this->storeEnv = null;
                     $varsUsing = $this->applyArguments($argUsing, $argContent, false);
                 }
 
@@ -4175,11 +4162,13 @@ class Compiler
     {
         $env = new Environment;
         $env->parent = $this->env;
+        $env->parentStore = $this->storeEnv;
         $env->store  = [];
         $env->block  = $block;
         $env->depth  = isset($this->env->depth) ? $this->env->depth + 1 : 0;
 
         $this->env = $env;
+        $this->storeEnv = null;
 
         return $env;
     }
@@ -4189,7 +4178,22 @@ class Compiler
      */
     protected function popEnv()
     {
+        $this->storeEnv = $this->env->parentStore;
         $this->env = $this->env->parent;
+    }
+
+    /**
+     * propagate vars from a just poped Env (used in @each and @for)
+     * @param array $store
+     * @param null|array $excludedVars
+     */
+    protected function backPropagateEnv($store, $excludedVars = null)
+    {
+        foreach ($store as $key => $value) {
+            if (empty($excludedVars) || !in_array($key, $excludedVars)) {
+                $this->set($key, $value, true);
+            }
+        }
     }
 
     /**
@@ -4241,7 +4245,13 @@ class Compiler
 
         $hasNamespace = $name[0] === '^' || $name[0] === '@' || $name[0] === '%';
 
+        $maxDepth = 10000;
+
         for (;;) {
+            if ($maxDepth-- <= 0) {
+                break;
+            }
+
             if (array_key_exists($name, $env->store)) {
                 break;
             }
@@ -4261,12 +4271,14 @@ class Compiler
                 }
             }
 
-            if (! isset($env->parent)) {
+            if (isset($env->parentStore)) {
+                $env = $env->parentStore;
+            } elseif (isset($env->parent)) {
+                $env = $env->parent;
+            } else {
                 $env = $storeEnv;
                 break;
             }
-
-            $env = $env->parent;
         }
 
         $env->store[$name] = $value;
@@ -4345,11 +4357,13 @@ class Compiler
                 continue;
             }
 
-            if (! isset($env->parent)) {
+            if (isset($env->parentStore)) {
+                $env = $env->parentStore;
+            } elseif (isset($env->parent)) {
+                $env = $env->parent;
+            } else {
                 break;
             }
-
-            $env = $env->parent;
         }
 
         if ($shouldThrow) {
@@ -4819,9 +4833,6 @@ class Compiler
 
         $this->pushEnv();
 
-        $storeEnv = $this->storeEnv;
-        $this->storeEnv = $this->env;
-
         // set the args
         if (isset($func->args)) {
             $this->applyArguments($func->args, $argValues);
@@ -4840,8 +4851,6 @@ class Compiler
         }
 
         $ret = $this->compileChildren($func->children, $tmp, $this->env->marker . " " . $name);
-
-        $this->storeEnv = $storeEnv;
 
         $this->popEnv();
 
@@ -5316,14 +5325,15 @@ class Compiler
      *
      * @param array  $item
      * @param string $delim
+     * @param bool $removeTrailingNull
      *
      * @return array
      */
-    protected function coerceList($item, $delim = ',')
+    protected function coerceList($item, $delim = ',', $removeTrailingNull = false)
     {
         if (isset($item) && $item[0] === Type::T_LIST) {
             // remove trailing null from the list
-            while (end($item[2]) === static::$null) {
+            if ($removeTrailingNull && end($item[2]) === static::$null) {
                 array_pop($item[2]);
             }
             return $item;
@@ -6512,7 +6522,7 @@ class Compiler
     protected static $libLength = ['list'];
     protected function libLength($args)
     {
-        $list = $this->coerceList($args[0]);
+        $list = $this->coerceList($args[0], ',', true);
 
         return count($list[2]);
     }
@@ -6540,7 +6550,7 @@ class Compiler
     protected static $libNth = ['list', 'n'];
     protected function libNth($args)
     {
-        $list = $this->coerceList($args[0]);
+        $list = $this->coerceList($args[0], ',', false);
         $n = $this->assertNumber($args[1]);
 
         if ($n > 0) {
@@ -6717,8 +6727,8 @@ class Compiler
     {
         list($list1, $list2, $sep, $bracketed) = $args;
 
-        $list1 = $this->coerceList($list1, ' ');
-        $list2 = $this->coerceList($list2, ' ');
+        $list1 = $this->coerceList($list1, ' ', true);
+        $list2 = $this->coerceList($list2, ' ', true);
         $sep   = $this->listSeparatorForJoin($list1, $sep);
 
         if ($bracketed === static::$true) {
@@ -6759,7 +6769,7 @@ class Compiler
     {
         list($list1, $value, $sep) = $args;
 
-        $list1 = $this->coerceList($list1, ' ');
+        $list1 = $this->coerceList($list1, ' ', true);
         $sep = $this->listSeparatorForJoin($list1, $sep);
 
         $res = [Type::T_LIST, $sep, array_merge($list1[2], [$value])];
