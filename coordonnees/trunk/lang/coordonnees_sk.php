@@ -51,7 +51,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_numero' => 'Telefónne číslo',
 	'label_objets_actifs' => 'Objekty',
 	'label_pays' => 'Krajina',
-	'label_region' => 'Región (kraj)',
 	'label_telephone' => 'Telefón',
 	'label_titre' => 'Titulok',
 	'label_type' => 'Typ',
