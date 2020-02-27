@@ -68,7 +68,6 @@ function traiter_email_dist($args, $retours) {
 		$destinataires_plus = explode(',', $options['destinataires_plus']);
 		$destinataires_plus = array_map('trim', $destinataires_plus);
 		$destinataires = array_merge($destinataires, $destinataires_plus);
-		$destinataires = array_unique($destinataires);
 	}
 
 	// On ajoute les destinataires en fonction des choix de saisie dans le formulaire
@@ -77,9 +76,18 @@ function traiter_email_dist($args, $retours) {
 	if (!empty($options['destinataires_selon_champ'])) {
 		if ($destinataires_selon_champ = formidable_traiter_email_destinataire_selon_champ($options['destinataires_selon_champ'])) {
 			$destinataires = array_merge($destinataires, $destinataires_selon_champ);
-			$destinataires = array_unique($destinataires);
 		}
 	}
+
+	$destinataires = pipeline('formidable_traiter_email_destinataires', array(
+		'args' => $args,
+		'data' => $destinataires)
+	);
+
+
+	// S'assurer que les destinataires ne soient pas en doublons
+	$destinataires = array_filter($destinataires, 'trim');
+	$destinataires = array_unique($destinataires);
 
 	// On récupère le courriel de l'envoyeur s'il existe
 	if ($options['champ_courriel']) {
@@ -410,7 +418,6 @@ function formidable_traiter_email_destinataire_selon_champ($description) {
 
 					if ($ok) {
 						$destinataires = array_merge($destinataires, $mails);
-						$destinataires = array_unique($destinataires);
 					}
 				}
 			}
