@@ -21,6 +21,7 @@
 	<pipeline nom="formidable_parametres_accuse" action="" />
 	<pipeline nom="formidable_exporter_formulaire_reponses_titres" action="" />
 	<pipeline nom="formidable_exporter_formulaire_reponses_reponse" action="" />
+	<pipeline nom="formidable_traiter_email_destinataires" action="" />
 	<pipeline nom="formidable_traitements" inclure="formidable_pipelines.php" />
 
 	<pipeline nom="autoriser" inclure="formidable_autorisations.php" />

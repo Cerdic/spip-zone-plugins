@@ -79,6 +79,10 @@ function traiter_email_dist($args, $retours) {
 		}
 	}
 
+	$destinataires = pipeline('formidable_traiter_email_destinataires', array(
+		'args' => $args,
+		'data' => $destinataires)
+	);
 
 
 	// S'assurer que les destinataires ne soient pas en doublons
