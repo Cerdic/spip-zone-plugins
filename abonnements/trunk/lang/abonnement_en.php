@@ -13,7 +13,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_lien_abonnement' => 'Add a subscription',
 
 	// C
+	'champ_date_au_label' => 'To',
 	'champ_date_debut_label' => 'Subscription start',
+	'champ_date_du_label' => 'From',
 	'champ_date_echeance_label' => 'Next deadline',
 	'champ_date_fin_allonger_label' => 'You can change the end date',
 	'champ_date_fin_label' => 'Subscription end date',
@@ -27,9 +29,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_abonnement' => 'Create a subscription',
 	'icone_modifier_abonnement' => 'Edit this subscription',
 	'icone_renouveler_abonnement' => 'Renew this subscription',
-	'info_1_abonnement' => 'A subscription',
-	'info_1_abonnement_actif' => 'An active subscription',
-	'info_1_abonnement_inactif' => 'An inactive subscription',
+	'info_1_abonnement' => 'One subscription',
+	'info_1_abonnement_actif' => 'One active subscription',
+	'info_1_abonnement_inactif' => 'One inactive subscription',
 	'info_abonnements_auteur' => 'Subscriptions of this user',
 	'info_aucun_abonnement' => 'No subscription',
 	'info_aucun_abonnement_actif' => 'No active subscription',
@@ -44,6 +46,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'job_desactivation' => 'Deactivation of the subscription @id@',
 
 	// L
+	'label_date_a_partir' => 'Starting from',
+	'label_date_depuis' => 'Since',
+	'label_dates' => 'Dates',
+	'label_duree' => 'Duration',
+	'label_montant' => 'Amount',
 	'label_statut' => 'Status',
 
 	// N
@@ -76,7 +83,9 @@ We invite you to renew it.</p>', # MODIF
 
 	// S
 	'statut_actif' => 'active',
+	'statut_actifs' => 'active',
 	'statut_inactif' => 'disabled',
+	'statut_tous' => 'All',
 
 	// T
 	'texte_ajouter_abonnement' => 'Add a subscription',

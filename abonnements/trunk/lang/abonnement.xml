@@ -5,7 +5,7 @@
 	url="https://trad.spip.net"
 	source="https://git.spip.net/spip-contrib-extensions/abonnements.git"
 	reference="fr">
-	<langue code="en" url="https://trad.spip.net/tradlang_module/abonnement?lang_cible=en" total="66" traduits="46" relire="0" modifs="4" nouveaux="16" pourcent="69.70">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/abonnement?lang_cible=en" total="66" traduits="55" relire="0" modifs="4" nouveaux="7" pourcent="83.33">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Gilles" lien="https://trad.spip.net/auteur/gilles" />
 		<traducteur nom="tcharlss" lien="https://trad.spip.net/auteur/drbouvierleduc" />
