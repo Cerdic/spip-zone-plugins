@@ -241,7 +241,8 @@ function nettoyer_xml_quark($xml){
 	$texte = preg_replace("/>\s+</","><",$texte);
 
 	// espace insécable en balise vide.
-	$texte = preg_replace("/<RICHTEXT MERGE=\"false\" NONBREAKING=\"true\"\/?>(<\/RICHTEXT>)?/ims", "<RICHTEXT MERGE=\"false\" NONBREAKING=\"true\">~</RICHTEXT>", $texte);
+	$texte = preg_replace("/<RICHTEXT MERGE=\"false\" NONBREAKING=\"true\"\/>/ims", "<RICHTEXT MERGE=\"false\" NONBREAKING=\"true\">~</RICHTEXT>", $texte);
+	$texte = preg_replace("/<RICHTEXT MERGE=\"false\" NONBREAKING=\"true\"><\/RICHTEXT>/ims", "<RICHTEXT MERGE=\"false\" NONBREAKING=\"true\">~</RICHTEXT>", $texte);
 	$texte = preg_replace("/<RICHTEXT[^>]+><\/RICHTEXT>/ims", "<RICHTEXT> </RICHTEXT>", $texte);
 
 	$ital = false ;
