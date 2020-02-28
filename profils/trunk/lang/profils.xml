@@ -5,5 +5,6 @@
 	url="https://trad.spip.net"
 	source="https://git.spip.net/spip-contrib-extensions/profils.git"
 	reference="fr">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/profils?lang_cible=en" total="7" traduits="7" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 	<langue code="fr" url="https://trad.spip.net/tradlang_module/profils?lang_cible=fr" total="7" traduits="7" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
 </traduction>
