@@ -186,6 +186,13 @@ function balise_ICON_dist($p) {
 	return $p;
 }
 
+/**
+ * Fonction interne utilisee par la balise #ICON
+ * @param string $name
+ * @param string $class
+ * @param string $alt
+ * @return string
+ */
 function afficher_icone_svg($name, $class = '', $alt = '') {
 	$icone_href_class_from_name = chercher_filtre("icone_href_class_from_name");
 	list($href, $class_base) = $icone_href_class_from_name($name);
@@ -278,6 +285,11 @@ function afficher_icone_inline_svg($svg_file, $id = '', $title = ''){
 	return $svg;
 }
 
+/**
+ * filtre surchargeable pour determiner le href et la class en fonction du nom de l'icone demandee
+ * @param string $name
+ * @return array
+ */
 function filtre_icone_href_class_from_name_dist($name) {
 	static $sprite_files = array();
 
@@ -323,6 +335,11 @@ function filtre_icone_href_class_from_name_dist($name) {
 	}
 }
 
+/**
+ * Filtre surchargeable pour renommer les icones a la volee quand on adapte le jeu d'icone
+ * @param string $name
+ * @return string
+ */
 function filtre_icone_anchor_from_name_dist($name) {
 	if (_ICON_SPRITE_SVG_ID_PREFIX) {
 		if (strpos($name, _ICON_SPRITE_SVG_ID_PREFIX) === 0) {
@@ -343,6 +360,12 @@ function filtre_icone_anchor_from_name_dist($name) {
 	return _ICON_SPRITE_SVG_ID_PREFIX . $ancre;
 }
 
+/**
+ * Fonction utilisee par la page demo/icons
+ * liste tous les ids d'un sprite svg
+ * @param string $sprite_file
+ * @return array
+ */
 function lister_icones_svg($sprite_file = '') {
 	$trim_prefix = false;
 	if (!$sprite_file) {
