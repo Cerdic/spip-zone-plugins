@@ -157,6 +157,9 @@ if (!defined('_DIR_PLUGIN_ADAPTIVE_IMAGES')) {
  * utiliser une l'icone #search definie dans un svg externe (qui sera resolu via #CHEMIN)
  * #ICON{img/sprite.svg#search,icon-sm,Rechercher}
  *
+ * utiler une icone svg du path, sans connaitre son id
+ * #ICON{img/mon_icone_search.svg,icon-sm,Rechercher}
+ *
  * @param $p
  * @return mixed
  */
@@ -191,36 +194,88 @@ function afficher_icone_svg($name, $class = '', $alt = '') {
 	}
 
 	if ($href) {
-		/*
-			<svg aria-labelledby="my-icon-title" role="img">
-		    <title id="my-icon-title">Texte alternatif</title>
-		    <use xlink:href="bytesize-symbols.min.svg#search"></use>
-	    </svg>
-			<svg aria-hidden="true" role="img">
-		    <use xlink:href="bytesize-symbols.min.svg#search"></use>
-			</svg>
-		 */
-		// width="0" height="0" -> rien ne s'affiche si on a pas la CSS icons.css
-		$svg = "<svg role=\"img\" width=\"0\" height=\"0\"";
-		if ($alt) {
-			$id = "icon-title-" . substr(md5("$name:$alt:$href"),0,4);
-			$svg .= " aria-labelledby=\"$id\"><title id=\"$id\">" . entites_html($alt)."</title>";
-		}
-		else {
-			$svg .= ">";
-		}
-		$svg .= "<use xlink:href=\"$href\"></use>";
-		$svg .= "</svg>";
-
 		if ($class_base = trim($class_base)) {
 			$class_base = ' icon-' . $class_base;
 		}
 		if ($class = trim($class)) {
 			$class = preg_replace(",[^\w\s\-],", "", $class);
 		}
-		return "<i class=\"icon{$class_base}" . ($class ? " $class" : "") . "\">$svg</i> ";
+
+		if (strpos($href, '#') === false) {
+			$id = "icon-title-" . substr(md5("$name:$alt:$href"),0,4);
+			$svg = afficher_icone_inline_svg(supprimer_timestamp($href), $id, $alt);
+		}
+		else {
+			/*
+				<svg aria-labelledby="my-icon-title" role="img">
+			    <title id="my-icon-title">Texte alternatif</title>
+			    <use xlink:href="bytesize-symbols.min.svg#search"></use>
+		    </svg>
+				<svg aria-hidden="true" role="img">
+			    <use xlink:href="bytesize-symbols.min.svg#search"></use>
+				</svg>
+			 */
+			// width="0" height="0" -> rien ne s'affiche si on a pas la CSS icons.css
+			$svg = "<svg role=\"img\" width=\"0\" height=\"0\"";
+			if ($alt) {
+				$id = "icon-title-" . substr(md5("$name:$alt:$href"),0,4);
+				$svg .= " aria-labelledby=\"$id\"><title id=\"$id\">" . entites_html($alt)."</title>";
+			}
+			else {
+				$svg .= ">";
+			}
+			$svg .= "<use xlink:href=\"$href\"></use>";
+			$svg .= "</svg>";
+		}
+
+		if ($svg) {
+			return "<i class=\"icon{$class_base}" . ($class ? " $class" : "") . "\">$svg</i> ";
+		}
 	}
 	return "";
+}
+
+/**
+ * function qui permet d'afficher une icone svg inline
+ * La fonction supprime tout ce qui se trouve au dessus de la balise <svg>
+ * et force un width=0 et un height=0 car ils seront definis en CSS
+ * l'image sera toujours affichee au format carre
+ *
+ * @param string $svg_file
+ *   chemin du fichier
+ * @param string $id
+ * @param string $title
+ * @return string
+ *  le code svg
+ */
+function afficher_icone_inline_svg($svg_file, $id = '', $title = ''){
+
+	if (!file_exists($svg_file) or !$svg = file_get_contents($svg_file)) {
+		return;
+	}
+
+	$svg = explode("<svg", $svg);
+	array_shift($svg);
+	array_unshift($svg, "");
+	$svg = implode("<svg", $svg);
+
+	$svg = explode(">", $svg, 2);
+	$balise_svg = array_shift($svg);
+
+	if ($title) {
+		// on ajoute le aria-labelledby si besoin
+		$balise_svg .= ' aria-labelledby="'.$id.'"';
+		$title = "<title id='".$id."'>".entites_html($title)."</title>";
+	}
+	// on supprime id, width et height du svg
+	$balise_svg = preg_replace('/(\s+(id|width|height)=["\'].*?["\'])/s', '', $balise_svg);
+	// on ajoute le role, width et height
+	// width="0" height="0" -> rien ne s'affiche si on a pas la CSS icons.css
+	$balise_svg .= ' role="img" width="0" height="0">' . $title;
+
+	$svg = $balise_svg . end($svg);
+
+	return $svg;
 }
 
 function filtre_icone_href_class_from_name_dist($name) {
