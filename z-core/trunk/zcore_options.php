@@ -288,14 +288,19 @@ function filtre_icone_anchor_from_name_dist($name) {
 	return _ICON_SPRITE_SVG_ID_PREFIX . $ancre;
 }
 
-function lister_icones_svg() {
-	$sprite_file = afficher_icone_svg('');
+function lister_icones_svg($sprite_file = '') {
+	$trim_prefix = false;
+	if (!$sprite_file) {
+		$sprite_file = afficher_icone_svg('');
+		$trim_prefix = true;
+	}
+
 	if ($sprite_file
 		and $sprite_file = supprimer_timestamp($sprite_file)
 	  and $sprite = file_get_contents($sprite_file)
 	  and preg_match_all(',id="([\w\-]+)",', $sprite, $matches, PREG_PATTERN_ORDER)) {
 		$icons = $matches[1];
-		if (_ICON_SPRITE_SVG_ID_PREFIX){
+		if ($trim_prefix and _ICON_SPRITE_SVG_ID_PREFIX){
 			foreach ($icons as $k => $name){
 				if (strpos($name, _ICON_SPRITE_SVG_ID_PREFIX)===0){
 					$icons[$k] = substr($name, strlen(_ICON_SPRITE_SVG_ID_PREFIX));
