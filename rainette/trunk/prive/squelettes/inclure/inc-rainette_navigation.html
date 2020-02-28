@@ -6,7 +6,7 @@
 	(#URL_ECRIRE{configurer_rainette}|parametre_url{service, #CLE}
 		|lien_ou_expose{
 			[(#VALEUR)],
-			[(#ENV{service, weather}|=={#CLE}|et{#ENV{exec}|=={configurer_rainette}})]})
+			[(#ENV{service, #VAL|rainette_service_defaut}|=={#CLE}|et{#ENV{exec}|=={configurer_rainette}})]})
 	</li>]
 </BOUCLE_navigation_cfg>
 </ul>

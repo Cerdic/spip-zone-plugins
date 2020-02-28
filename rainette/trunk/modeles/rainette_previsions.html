@@ -1,7 +1,7 @@
 [(#REM) <!-- Afficher les previsions meteo
 	- lieu : (obligatoire) - le lieu pour lequel on affiche les données méteo
 	- sous_modele : (defaut previsions_24h) - le sous-modele Rainette ou personnalisé
-	- service : (defaut weather) - le service méteo utilisé (weather, wwo, wunderground, owm)
+	- service : (defaut '') - le service méteo utilisé (weather, wwo, wunderground, owm)
 	- periodicite : (optionnel) - impose de choisir une périodicité pour les données
 	- premier_jour : (optionnel, defaut 0) - numéro du jour de 0 (jour courant) à n
 	- nombre_jours : (optionnel, defaut tous les jours possibles) - nombre de jours à afficher à partir du premier_jour
@@ -19,5 +19,5 @@
 [(#ENV{lieu}|rainette_coasser{
 	previsions,
 	#ENV{sous_modele, previsions_24h},
-	#ENV{service, weather},
+	#ENV{service, ''},
 	#GET{options}})]

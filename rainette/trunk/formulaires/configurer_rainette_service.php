@@ -1,7 +1,6 @@
 <?php
 /**
  * Gestion du formulaire de configuration du plugin Rainette.
- *
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -12,12 +11,18 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * et son état d'exécution au formulaire.
  *
  * @param string $service
- *        Alias du service.
+ *                        Alias du service.
  *
  * @return array
- *        Tableau des données à charger par le formulaire.
+ *               Tableau des données à charger par le formulaire.
  */
 function formulaires_configurer_rainette_service_charger($service) {
+
+	// On récupère le service par défaut si besoin
+	if (!$service) {
+		include_spip('rainette_fonctions');
+		$service = rainette_service_defaut();
+	}
 
 	// Récupération et normalisation des données de configuration utilisateur.
 	include_spip("services/${service}");
@@ -53,7 +58,6 @@ function formulaires_configurer_rainette_service_charger($service) {
 	}
 
 	// Gestion des thèmes locaux et distants.
-	include_spip('rainette_fonctions');
 	$valeurs['_themes']['distants'] = rainette_lister_themes($service, 'api');
 	$valeurs['_themes']['locaux'] = rainette_lister_themes($service, 'local');
 	$valeurs['_themes']['weather'] = !in_array($service, array('weather', 'owm', 'weatherbit'))

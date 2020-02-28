@@ -17,7 +17,6 @@ if (!defined('_RAINETTE_DEBUG_CLES_PREVISIONS')) {
 	define('_RAINETTE_DEBUG_CLES_PREVISIONS', '1');
 }
 
-
 /**
  * @param string $lieu
  * @param string $mode
@@ -25,9 +24,14 @@ if (!defined('_RAINETTE_DEBUG_CLES_PREVISIONS')) {
  *
  * @return string
  */
-function rainette_debug_afficher_cache($lieu, $mode = 'previsions', $service = 'weather') {
+function rainette_debug_afficher_cache($lieu, $mode = 'previsions', $service = '') {
+
+	// Initialisations : en particulier on récupère le service par défaut si besoin
 	static $cles_previsions = array();
 	$debug = '';
+	if (!$service) {
+		$service = rainette_service_defaut();
+	}
 
 	// Recuperation du tableau des conditions courantes
 	include_spip('inc/rainette_normaliser');
@@ -64,7 +68,6 @@ function rainette_debug_afficher_cache($lieu, $mode = 'previsions', $service = '
 	return $debug;
 }
 
-
 /**
  * @param string $lieu
  * @param string $mode
@@ -84,7 +87,6 @@ function rainette_debug_afficher_config() {
 
 	return $debug;
 }
-
 
 /**
  * @param string $mode
@@ -165,7 +167,6 @@ function rainette_debug_comparer_services($mode = 'conditions', $jeu = array()) 
 	return $debug;
 }
 
-
 /**
  * @param string $donnee
  * @param mixed  $valeur
@@ -175,8 +176,13 @@ function rainette_debug_comparer_services($mode = 'conditions', $jeu = array()) 
  *
  * @return string
  */
-function rainette_debug_afficher_donnee($donnee, $valeur, $type_php, $type_unite, $service = 'weather') {
+function rainette_debug_afficher_donnee($donnee, $valeur, $type_php, $type_unite, $service = '') {
+
+	// Initialisations : en particulier on récupère le service par défaut si besoin
 	$texte = '';
+	if (!$service) {
+		$service = rainette_service_defaut();
+	}
 
 	if ($type_php === 'NULL') {
 		$texte = '<del>API</del>';
@@ -203,7 +209,6 @@ function rainette_debug_afficher_donnee($donnee, $valeur, $type_php, $type_unite
  * @return array
  */
 function rainette_debug_jeu_defaut() {
-
 	$jeu = array();
 
 	include_spip('rainette_fonctions');
@@ -225,7 +230,6 @@ function rainette_debug_jeu_defaut() {
  * @return array
  */
 function rainette_debug_afficher_execution() {
-
 	$debug = array();
 
 	$services = rainette_lister_services();
@@ -259,7 +263,6 @@ function rainette_debug_afficher_execution() {
 
 /**
  * Fonction permettant de vérifier si la liste des langues de SPIP a changé et qu'il faut modifier la config rainette.
- *
  */
 function rainette_debug_verifier_langue_manquante() {
 	include_spip('inc/lang_liste');
@@ -268,7 +271,7 @@ function rainette_debug_verifier_langue_manquante() {
 	$texte = '';
 	foreach ($GLOBALS['codes_langues'] as $code => $langue) {
 		if (!array_key_exists($code, $GLOBALS['rainette_config']['langues_alternatives'])) {
-			$texte .= "code manquant $code<br />";
+			$texte .= "code manquant ${code}<br />";
 		}
 	}
 

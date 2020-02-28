@@ -9,7 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-
 /**
  * Renvoyer le contenu du fichier cache des données météos correspondant au lieu et au type de données choisis
  * après l'avoir éventuellement mis à jour.
@@ -23,33 +22,33 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @uses indice2risque_uv()
  *
  * @param string $lieu
- *        Le lieu concerné par la méteo exprimé selon les critères requis par le service.
+ *                            Le lieu concerné par la méteo exprimé selon les critères requis par le service.
  * @param string $mode
- *        Le type de données météorologiques demandé :
- *            - `conditions`, la valeur par défaut
- *            - `previsions`
- *            - `infos`
- * @param int $periodicite
- *        La périodicité horaire des prévisions :
- *            - `24`, les prévisions de la journée
- *            - `12`, les prévisions du jour et de la nuit
- *            - `6`, les prévisions de la journée par période de 6h
- *            - `3`, les prévisions de la journée par période de 3h
- *            - `1`, les prévisions de la journée pour chaque heure
- *            - `0`, pour les modes `conditions` et `infos`
+ *                            Le type de données météorologiques demandé :
+ *                            - `conditions`, la valeur par défaut
+ *                            - `previsions`
+ *                            - `infos`
+ * @param int    $periodicite
+ *                            La périodicité horaire des prévisions :
+ *                            - `24`, les prévisions de la journée
+ *                            - `12`, les prévisions du jour et de la nuit
+ *                            - `6`, les prévisions de la journée par période de 6h
+ *                            - `3`, les prévisions de la journée par période de 3h
+ *                            - `1`, les prévisions de la journée pour chaque heure
+ *                            - `0`, pour les modes `conditions` et `infos`
  * @param string $service
- *        Le nom abrégé du service :
- *            - `weather` pour le weather.com, la valeur par défaut car elle ne nécessite aucune inscription
- *            - `wwo` pour World Weather Online
- *            - `wunderground` pour Wunderground
- *            - `owm` pour Open Weather Map
- *            - `apixu` pour APIXU
- *            - `weatherbit` pour Weatherbit.io
+ *                            Le nom abrégé du service :
+ *                            - `weather` pour le weather.com, la valeur par défaut car elle ne nécessite aucune inscription
+ *                            - `wwo` pour World Weather Online
+ *                            - `wunderground` pour Wunderground
+ *                            - `owm` pour Open Weather Map
+ *                            - `apixu` pour APIXU
+ *                            - `weatherbit` pour Weatherbit.io
  *
  * @return array
- *        Le contenu du fichier cache contenant les données à jour demandées.
+ *               Le contenu du fichier cache contenant les données à jour demandées.
  */
-function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $service = 'weather') {
+function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $service = '') {
 
 	// Initialisation du tableau de sortie.
 	$tableau = array();
@@ -62,15 +61,16 @@ function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 		$periodicite = 0;
 	}
 	if (!$service) {
-		$service = 'weather';
+		include_spip('rainette_fonctions');
+		$service = rainette_service_defaut();
 	}
 
 	// On vérifie d'abord si le service est connu et actif car sinon il est inutile de continuer.
 	// -- on initialise le bloc d'erreur
 	$erreur = array(
-		'type' => '',
+		'type'    => '',
 		'service' => array(
-			'code' => '',
+			'code'    => '',
 			'message' => ''
 		)
 	);
@@ -82,7 +82,7 @@ function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 		// On construit le tableau directement sans passer par un cache.
 		$tableau = array(
 			'donnees' => array(),
-			'extras' => erreur_normaliser_extras($erreur, $lieu, $mode, $periodicite, $service)
+			'extras'  => erreur_normaliser_extras($erreur, $lieu, $mode, $periodicite, $service)
 		);
 	} else {
 		// Service ok :
@@ -111,7 +111,7 @@ function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 		}
 
 		// Construire le tableau identifiant le cache
-	 	$cache = cache_normaliser($lieu, $mode, $periodicite, $configuration);
+		$cache = cache_normaliser($lieu, $mode, $periodicite, $configuration);
 
 		// Mise à jour du cache avec les nouvelles données météo si:
 		// - le fichier cache n'existe pas
@@ -250,14 +250,14 @@ function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 				// Pour les prévisions l'index 0 à n désigne le jour, il faut donc le conserver
 				$tableau = array(
 					'donnees' => ($mode != 'previsions' ? array_shift($tableau) : $tableau),
-					'extras' => $extras
+					'extras'  => $extras
 				);
 			} else {
 				// Traitement des erreurs de flux. On positionne toujours les bloc extra contenant l'erreur,
 				// le bloc des données qui est mis à tableau vide dans ce cas à l'index 1.
 				$tableau = array(
 					'donnees' => array(),
-					'extras' => $extras
+					'extras'  => $extras
 				);
 			}
 

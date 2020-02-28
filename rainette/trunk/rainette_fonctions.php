@@ -4,6 +4,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+if (!defined('_RAINETTE_SERVICE_DEFAUT')) {
+	define('_RAINETTE_SERVICE_DEFAUT', 'owm');
+}
 if (!defined('_RAINETTE_ICONES_GRANDE_TAILLE')) {
 	define('_RAINETTE_ICONES_GRANDE_TAILLE', 110);
 }
@@ -18,13 +21,12 @@ if (!defined('_RAINETTE_ICONES_PETITE_TAILLE')) {
  * @return mixed
  */
 function balise_RAINETTE_INFOS($p) {
-
 	$lieu = interprete_argument_balise(1, $p);
 	$lieu = isset($lieu) ? str_replace('\'', '"', $lieu) : '""';
 	$type_info = interprete_argument_balise(2, $p);
 	$type_info = isset($type_info) ? str_replace('\'', '"', $type_info) : '""';
 	$service = interprete_argument_balise(3, $p);
-	$service = isset($service) ? str_replace('\'', '"', $service) : '"weather"';
+	$service = isset($service) ? str_replace('\'', '"', $service) : '""';
 
 	$p->code = 'calculer_infos(' . $lieu . ', ' . $type_info . ', ' . $service . ')';
 	$p->interdire_scripts = false;
@@ -47,7 +49,7 @@ function calculer_infos($lieu, $type, $service) {
 	// Traitement des cas ou les arguments sont vides
 	if ($lieu) {
 		if (!$service) {
-			$service = 'weather';
+			$service = rainette_service_defaut();
 		}
 
 		// Récupération des informations sur le lieu
@@ -55,10 +57,8 @@ function calculer_infos($lieu, $type, $service) {
 		$tableau = $charger($lieu, 'infos', 0, $service);
 		if (!isset($type) or !$type) {
 			$info = serialize($tableau);
-		} else {
-			if (isset($tableau['donnees'][strtolower($type)])) {
-				$info = $tableau['donnees'][strtolower($type)];
-			}
+		} elseif (isset($tableau['donnees'][strtolower($type)])) {
+			$info = $tableau['donnees'][strtolower($type)];
 		}
 	}
 
@@ -72,7 +72,7 @@ function calculer_infos($lieu, $type, $service) {
  * @filtre
  *
  * @param array      $icone
- * @param string|int $taille
+ * @param int|string $taille
  * @param array      $options
  *
  * @return string
@@ -92,14 +92,14 @@ function rainette_afficher_icone($icone, $taille = 'petit', $options = array()) 
 
 		// Calcul de la taille maximale de l'icone
 		if ($taille == 'petit') {
-			$taille_max =_RAINETTE_ICONES_PETITE_TAILLE;
+			$taille_max = _RAINETTE_ICONES_PETITE_TAILLE;
 		} elseif ($taille == 'grand') {
-			$taille_max =_RAINETTE_ICONES_GRANDE_TAILLE;
+			$taille_max = _RAINETTE_ICONES_GRANDE_TAILLE;
 		} else {
 			$taille_max = intval($taille);
 		}
 
-		if (($largeur < $taille_max)	or ($hauteur < $taille_max)) {
+		if (($largeur < $taille_max) or ($hauteur < $taille_max)) {
 			// Image plus petite que celle par défaut :
 			// --> Il faut insérer et recadrer l'image dans une image plus grande à la taille par défaut
 			$source = extraire_attribut(image_recadre($source, $taille_max, $taille_max, 'center', 'transparent'), 'src');
@@ -119,22 +119,21 @@ function rainette_afficher_icone($icone, $taille = 'petit', $options = array()) 
 }
 
 /**
- *
  * @package    RAINETTE/AFFICHAGE
+ *
  * @api
  * @filtre
  *
- * @param string|int $resume
+ * @param int|string $resume
  *
  * @return string
  */
 function rainette_afficher_resume($resume) {
-
 	if (is_numeric($resume)) {
 		// On utilise l'option de _T permettant de savoir si un item existe ou pas
 		$texte = _T('rainette:meteo_' . $resume, array(), array('force' => false));
 		if (!$texte) {
-			$texte = _T('rainette:meteo_na') . " ($resume)";
+			$texte = _T('rainette:meteo_na') . " (${resume})";
 		}
 	} else {
 		$texte = $resume ? $resume : _T('rainette:meteo_na');
@@ -148,19 +147,19 @@ function rainette_afficher_resume($resume) {
  * l'affichage dans les modèles.
  *
  * @package    RAINETTE/AFFICHAGE
+ *
  * @api
  * @filtre
  *
  * @param mixed $direction
- *        La direction soit sous forme d'une valeur numérique entre 0 et 360, soit sous forme
- *        d'une chaine. Certains services utilisent la chaine "V" pour indiquer une direction
- *        variable.
+ *                         La direction soit sous forme d'une valeur numérique entre 0 et 360, soit sous forme
+ *                         d'une chaine. Certains services utilisent la chaine "V" pour indiquer une direction
+ *                         variable.
  *
  * @return string
- *        La chaine traduite indiquant la direction du vent.
+ *                La chaine traduite indiquant la direction du vent.
  */
 function rainette_afficher_direction($direction) {
-
 	include_spip('inc/rainette_convertir');
 	$direction_abregee = angle2direction($direction);
 
@@ -178,31 +177,31 @@ function rainette_afficher_direction($direction) {
  * icone).
  *
  * @package    RAINETTE/AFFICHAGE
+ *
  * @api
  * @filtre
  *
  * @param string $tendance_en
- * 		Texte anglais représentant la tendance et récupérée par le service.
+ *                            Texte anglais représentant la tendance et récupérée par le service.
  * @param string $methode
- * 		Methode d'affichage de la tendance qui prend les valeurs:
- * 		- `texte`   : pour afficher un texte en clair décrivant la tendance (méthode par défaut).
- * 		- `symbole` : pour afficher un symbole de flèche (1 caractère) décrivant la tendance.
+ *                            Methode d'affichage de la tendance qui prend les valeurs:
+ *                            - `texte`   : pour afficher un texte en clair décrivant la tendance (méthode par défaut).
+ *                            - `symbole` : pour afficher un symbole de flèche (1 caractère) décrivant la tendance.
  *
  * @return string
  */
 function rainette_afficher_tendance($tendance_en, $methode = 'texte') {
-
 	$tendance = '';
 
 	// Certains textes sont composés de plusieurs mots comme "falling rapidly".
 	// On en fait un texte unique en remplaçant les espaces par des underscores.
 	$tendance_en = str_replace(' ', '_', trim($tendance_en));
 
-	if (($tendance_en) and ($texte = _T("rainette:tendance_texte_$tendance_en", array(), array('force' => false)))) {
+	if (($tendance_en) and ($texte = _T("rainette:tendance_texte_${tendance_en}", array(), array('force' => false)))) {
 		if ($methode == 'texte') {
 			$tendance = $texte;
 		} else {
-			$tendance = _T("rainette:tendance_symbole_$tendance_en");
+			$tendance = _T("rainette:tendance_symbole_${tendance_en}");
 		}
 	}
 
@@ -213,23 +212,25 @@ function rainette_afficher_tendance($tendance_en, $methode = 'texte') {
  * Affiche toute donnée météorologique au format numérique avec son unité.
  *
  * @package    RAINETTE/AFFICHAGE
+ *
  * @api
  * @filtre
  *
  * @param int/float $valeur
- * 		La valeur à afficher
+ *                               La valeur à afficher
  * @param string    $type_donnee
- *      Type de données à afficher parmi 'temperature', 'pourcentage', 'angle', 'pression',
- *      'distance', 'vitesse', 'population', 'precipitation'.
+ *                               Type de données à afficher parmi 'temperature', 'pourcentage', 'angle', 'pression',
+ *                               'distance', 'vitesse', 'population', 'precipitation'.
  * @param int       $precision
- *      Nombre de décimales à afficher pour les réels uniquement ou -1 pour utiliser le défaut.
- * @param string	$service
+ *                               Nombre de décimales à afficher pour les réels uniquement ou -1 pour utiliser le défaut.
+ * @param string    $service
  *
  * @return string
- *      La chaine calculée ou le texte désignant une valeur indéterminée ou vide si la valeur est null.
+ *                La chaine calculée ou le texte désignant une valeur indéterminée ou vide si la valeur est null.
  */
-function rainette_afficher_unite($valeur, $type_donnee = '', $precision = -1, $service = 'weather') {
+function rainette_afficher_unite($valeur, $type_donnee = '', $precision = -1, $service = '') {
 
+	// Initialisations : en particulier on récupère le service par défaut si besoin
 	static $precision_defaut = array(
 		'temperature'   => 0,
 		'pression'      => 1,
@@ -241,9 +242,8 @@ function rainette_afficher_unite($valeur, $type_donnee = '', $precision = -1, $s
 		'vitesse'       => 0,
 		'indice'        => 0
 	);
-
 	if (!$service) {
-		$service = 'weather';
+		$service = rainette_service_defaut();
 	}
 	include_spip('inc/config');
 	$unite = lire_config("rainette/${service}/unite", 'm');
@@ -278,7 +278,6 @@ function rainette_afficher_unite($valeur, $type_donnee = '', $precision = -1, $s
 	return $valeur_affichee;
 }
 
-
 function rainette_afficher_service($service) {
 
 	// Acquérir la configuration statique du service.
@@ -290,6 +289,12 @@ function rainette_afficher_service($service) {
 }
 
 
+function rainette_service_defaut() {
+
+	return _RAINETTE_SERVICE_DEFAUT;
+}
+
+
 /**
  * @param string $mode
  * @param bool   $actif_uniquement
@@ -297,7 +302,6 @@ function rainette_afficher_service($service) {
  * @return array|string
  */
 function rainette_lister_services($mode = 'tableau', $actif_uniquement = true) {
-
 	static $services = array();
 
 	if (!isset($service[$mode][$actif_uniquement])) {
@@ -348,7 +352,6 @@ function rainette_lister_services($mode = 'tableau', $actif_uniquement = true) {
 	return $services[$mode][$actif_uniquement];
 }
 
-
 /**
  * @param string $mode
  * @param int    $periodicite
@@ -356,7 +359,6 @@ function rainette_lister_services($mode = 'tableau', $actif_uniquement = true) {
  * @return array
  */
 function rainette_lister_modeles($mode = 'conditions', $periodicite = 24) {
-
 	$modeles = array();
 
 	// On lit les modèles suivant le mode choisi dans l'ensemble du site.
@@ -369,7 +371,7 @@ function rainette_lister_modeles($mode = 'conditions', $periodicite = 24) {
 	} else {
 		$pattern = "${mode}_${periodicite}h.*\\.html$";
 	}
-	if ($fichiers = find_all_in_path("modeles/", $pattern)) {
+	if ($fichiers = find_all_in_path('modeles/', $pattern)) {
 		foreach ($fichiers as $_fichier) {
 			$modeles[] = strtolower(basename($_fichier, '.html'));
 		}
@@ -378,7 +380,6 @@ function rainette_lister_modeles($mode = 'conditions', $periodicite = 24) {
 	return $modeles;
 }
 
-
 /**
  * @param string $service
  * @param string $source
@@ -386,7 +387,6 @@ function rainette_lister_modeles($mode = 'conditions', $periodicite = 24) {
  * @return array
  */
 function rainette_lister_themes($service, $source = 'local') {
-
 	static $themes = array();
 
 	if (!isset($themes[$service][$source])) {
@@ -429,7 +429,6 @@ function rainette_lister_themes($service, $source = 'local') {
 	return $themes[$service][$source];
 }
 
-
 /**
  * @param string $lieu
  * @param string $mode
@@ -439,7 +438,12 @@ function rainette_lister_themes($service, $source = 'local') {
  *
  * @return array|string
  */
-function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tempsreel', $service = 'weather', $options = array()) {
+function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tempsreel', $service = '', $options = array()) {
+
+	// Initialisations : on récupère le service par défaut si besoin
+	if (!$service) {
+		$service = rainette_service_defaut();
+	}
 
 	// Vérification du service et de la cohérence entre le mode, le modèle et la périodicité.
 	include_spip('inc/rainette_normaliser');
@@ -466,15 +470,13 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 						$type_erreur = 'modele_service';
 					}
 				}
-			} else {
+			} elseif (isset($options['periodicite'])) {
 				// On ne connait pas le type du modèle, donc sa compatibilité.
 				// Si la périodicité est passée en argument on l'utilise sans se poser de question.
+				$periodicite = intval($options['periodicite']);
+			} else {
 				// Sinon c'est une erreur car on ne sait pas quelle périodicité est requise
-				if (isset($options['periodicite'])) {
-					$periodicite = intval($options['periodicite']);
-				} else {
-					$type_erreur = 'modele_inutilisable';
-				}
+				$type_erreur = 'modele_inutilisable';
 			}
 		}
 	}
@@ -482,16 +484,16 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 	if ($type_erreur) {
 		// On construit le tableau directement sans appeler la fonction de calcul des données météo.
 		$erreur = array(
-			'type' => $type_erreur,
+			'type'    => $type_erreur,
 			'service' => array(
-				'code' => '',
+				'code'    => '',
 				'message' => ''
 			)
 		);
 
 		$tableau = array(
 			'donnees' => array(),
-			'extras' => erreur_normaliser_extras($erreur, $lieu, $mode, $periodicite, $service)
+			'extras'  => erreur_normaliser_extras($erreur, $lieu, $mode, $periodicite, $service)
 		);
 	} else {
 		// Récupération du tableau des données météo
@@ -509,7 +511,7 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 			if (isset($options['premier_jour'])) {
 				$jour1 = intval($options['premier_jour']) < $nb_index
 					? intval($options['premier_jour'])
-					: $nb_index -1;
+					: $nb_index - 1;
 			}
 
 			$nb_jours = $nb_index - $jour1;
@@ -537,7 +539,7 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 		$texte = recuperer_fond('modeles/erreur_rainette', $tableau['extras']);
 	} else {
 		// Appel du modèle avec le contexte complet
-		$texte = recuperer_fond("modeles/$modele", $tableau);
+		$texte = recuperer_fond("modeles/${modele}", $tableau);
 	}
 
 	return $texte;

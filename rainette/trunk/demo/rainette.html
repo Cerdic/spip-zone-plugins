@@ -8,7 +8,7 @@
 	#INSERT_HEAD
 </head>
 
-#SET{service, #ENV{service, weather}}
+#SET{service, #ENV{service, #VAL|rainette_service_defaut}}
 #SET{mode, #ENV{mode, conditions}}
 #SET{jeu, #VAL|rainette_debug_jeu_defaut}
 #SET{lieu, #ENV{ville, #GET{jeu/#GET{service}}}}

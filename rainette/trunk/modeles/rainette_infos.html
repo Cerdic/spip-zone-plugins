@@ -2,9 +2,9 @@
 	Afficher les informations generales sur le lieu
 	- lieu : le lieu pour lequel on affiche les données méteo
 	- sous_modele : le sous-modele Rainette ou personnalisé
-	- service : le service méteo utilisé (weather, wwo, wunderground, owm...)
+	- service : le service méteo utilisé (weather, wwo, wunderground, owm...) ou chaine vide
  -->]
 [(#ENV{lieu}|rainette_coasser{
 	infos,
 	#ENV{sous_modele, infos_ville},
-	#ENV{service, weather}})]
+	#ENV{service, ''}})]

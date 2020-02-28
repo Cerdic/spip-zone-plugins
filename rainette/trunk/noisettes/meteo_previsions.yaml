@@ -35,7 +35,7 @@ parametres:
     options:
       nom: 'service'
       label: '<:rainette:noisette_label_service:>'
-      defaut: 'weather'
+      defaut: ''
       cacher_option_intro: 'oui'
   -
     saisie: 'radio'
