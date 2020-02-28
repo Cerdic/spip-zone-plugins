@@ -16,13 +16,12 @@ if (!defined('_RAINETTE_WEATHER_URL_BASE')) {
 	define('_RAINETTE_WEATHER_URL_BASE', 'http://wxdata.weather.com/wxdata/weather/local/');
 }
 
-
 // Configuration des valeurs par défaut des éléments de la configuration dynamique.
 // Ces valeurs sont applicables à tous les modes.
 $GLOBALS['rainette_weather_config']['service'] = array(
-	'alias'   => 'weather',
-	'nom'     => 'weather.com&reg;',
-	'actif'   => true,
+	'alias'          => 'weather',
+	'nom'            => 'weather.com&reg;',
+	'actif'          => false,
 	'credits'        => array(
 		'titre' => 'weather.com&reg;',
 		'logo'  => null,
@@ -149,14 +148,13 @@ $GLOBALS['rainette_weather_config']['previsions'] = array(
 // Configuration des données fournies par le service weather en cas d'erreur.
 // -- Seules les données non calculées sont configurées.
 $GLOBALS['rainette_weather_config']['erreurs'] = array(
-	'cle_base'    => array('children', 'err', 0,),
+	'cle_base'    => array('children', 'err', 0),
 	'donnees'     => array(
 		// Erreur
 		'code'     => array('cle' => array()),
 		'message'  => array('cle' => array('text')),
 	),
 );
-
 
 /**
  * @param string $mode
@@ -172,7 +170,6 @@ function weather_service2configuration($mode) {
 	return $config;
 }
 
-
 /**
  * @param $lieu
  * @param $mode
@@ -182,7 +179,6 @@ function weather_service2configuration($mode) {
  * @return string
  */
 function weather_service2url($lieu, $mode, $periodicite, $configuration) {
-
 
 	// On normalise le lieu et on récupère son format.
 	// Le service accepte la format ville,pays, le format latitude,longitude et le format adresse IP.
@@ -204,7 +200,6 @@ function weather_service2url($lieu, $mode, $periodicite, $configuration) {
 	return $url;
 }
 
-
 /**
  * @param array $erreur
  *
@@ -222,7 +217,6 @@ function weather_erreur_verifier($erreur) {
 
 	return $est_erreur;
 }
-
 
 /**
  * @param $tableau
@@ -244,7 +238,6 @@ function weather_complement2infos($tableau, $configuration) {
 	return $tableau;
 }
 
-
 /**
  * @param $tableau
  * @param $configuration
@@ -252,7 +245,6 @@ function weather_complement2infos($tableau, $configuration) {
  * @return mixed
  */
 function weather_complement2conditions($tableau, $configuration) {
-
 	if ($tableau) {
 		// Compléter le tableau standard avec les états météorologiques calculés
 		// La traduction du resume dans la bonne langue est toujours faite par les fichiers de langue SPIP
@@ -263,7 +255,6 @@ function weather_complement2conditions($tableau, $configuration) {
 	return $tableau;
 }
 
-
 /**
  * Complète par des données spécifiques au service le tableau des conditions issu
  * uniquement de la lecture du flux.
@@ -271,19 +262,18 @@ function weather_complement2conditions($tableau, $configuration) {
  * @api
  *
  * @param array $tableau
- *        Tableau standardisé des conditions contenant uniquement les données fournies sans traitement
- *        par le service.
+ *                             Tableau standardisé des conditions contenant uniquement les données fournies sans traitement
+ *                             par le service.
  * @param array $configuration
- *        Configuration complète du service, statique et utilisateur.
+ *                             Configuration complète du service, statique et utilisateur.
  * @param int   $index_periode
- *        Index où trouver et ranger les données. Cet index n'est pas utilisé pour les conditions
+ *                             Index où trouver et ranger les données. Cet index n'est pas utilisé pour les conditions
  *
  * @return array
- *        Tableau standardisé des conditions météorologiques complété par les données spécifiques
- *        du service.
+ *               Tableau standardisé des conditions météorologiques complété par les données spécifiques
+ *               du service.
  */
 function weather_complement2previsions($tableau, $configuration, $index_periode) {
-
 	if (($tableau) and ($index_periode > -1)) {
 		// Compléter le tableau standard avec les états météorologiques calculés
 		etat2resume_weather($tableau, $configuration);
@@ -295,7 +285,10 @@ function weather_complement2previsions($tableau, $configuration, $index_periode)
 /**
  * ---------------------------------------------------------------------------------------------
  * Les fonctions qui suivent sont des utilitaires uniquement appelées par les fonctions de l'API
- * ---------------------------------------------------------------------------------------------
+ * ---------------------------------------------------------------------------------------------.
+ *
+ * @param mixed $tableau
+ * @param mixed $configuration
  */
 
 /**
@@ -304,15 +297,14 @@ function weather_complement2previsions($tableau, $configuration, $index_periode)
  * @internal
  *
  * @param array $tableau
- *        Tableau standardisé des conditions contenant uniquement les données fournies sans traitement
- *        par le service. Le tableau est mis à jour et renvoyé à l'appelant.
+ *                             Tableau standardisé des conditions contenant uniquement les données fournies sans traitement
+ *                             par le service. Le tableau est mis à jour et renvoyé à l'appelant.
  * @param array $configuration
- *        Configuration complète du service, statique et utilisateur.
+ *                             Configuration complète du service, statique et utilisateur.
  *
  * @return void
  */
 function etat2resume_weather(&$tableau, $configuration) {
-
 	if ($tableau['code_meteo']) {
 		// A priori la période de nuit commence à 14h et se termine à 5h.
 		// Cette donnée n'est pas utile pour les conditions de ce service, on la positionne à 0.
@@ -335,5 +327,5 @@ function etat2resume_weather(&$tableau, $configuration) {
 	$chemin = icone_weather_normaliser($code, $configuration['theme_local']);
 
 	include_spip('inc/utils');
-	$tableau['icone'] =array('code' => $code, 'source' => find_in_path($chemin));
+	$tableau['icone'] = array('code' => $code, 'source' => find_in_path($chemin));
 }
