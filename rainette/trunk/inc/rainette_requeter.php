@@ -4,27 +4,25 @@
  *
  * @package SPIP\RAINETTE\REQUETE
  */
-
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
-
 
 /**
  * Fait appel au service spécifié en utilisant l'URL fournie et retourne le flux brut JSON ou XML transcodé dans un tableau.
  * Chaque appel est comptabilisé et logé dans une meta.
  *
  * @param string $url
- * 		URL complète de la requête formatée en fonction de la demande et du service.
+ *                              URL complète de la requête formatée en fonction de la demande et du service.
  * @param array  $configuration
- * 		Configuration statique et utilisateur du service nécessaire pour identifier les seuils de requêtes
- *      par période propres au service et le format du flux pour le transcodage.
+ *                              Configuration statique et utilisateur du service nécessaire pour identifier les seuils de requêtes
+ *                              par période propres au service et le format du flux pour le transcodage.
  * @param string $service
- *      Alias du service.
+ *                              Alias du service.
  *
  * @return array
- *      Tableau des données météorologiques retournées par le service ou tableau limité à l'index `erreur` en cas
- *      d'erreur de transcodage.
+ *               Tableau des données météorologiques retournées par le service ou tableau limité à l'index `erreur` en cas
+ *               d'erreur de transcodage.
  */
 function requeter($url, $configuration, $service) {
 
@@ -55,43 +53,40 @@ function requeter($url, $configuration, $service) {
 	if (empty($flux['page'])) {
 		spip_log("URL indiponible : ${url}", 'rainette');
 		$reponse['erreur'] = 'url_indisponible';
-	} else {
+	} elseif ($configuration['format_flux'] == 'xml') {
 		// Transformation de la chaîne xml reçue en tableau associatif
-		if ($configuration['format_flux'] == 'xml') {
-			$convertir = charger_fonction('simplexml_to_array', 'inc');
+		$convertir = charger_fonction('simplexml_to_array', 'inc');
 
-			// Pouvoir attraper les erreurs de simplexml_load_string().
-			// http://stackoverflow.com/questions/17009045/how-do-i-handle-warning-simplexmlelement-construct/17012247#17012247
-			set_error_handler(
-				function ($erreur_id, $erreur_message, $erreur_fichier, $erreur_ligne) {
-					throw new Exception($erreur_message, $erreur_id);
-				}
-			);
-
-			try {
-				$reponse = $convertir(simplexml_load_string($flux['page']), false);
-				$reponse = $reponse['root'];
-			} catch (Exception $erreur) {
-				$reponse['erreur'] = 'analyse_xml';
-				restore_error_handler();
-				spip_log("Erreur d'analyse XML pour l'URL `${url}` : " . $erreur->getMessage(), 'rainette' . _LOG_ERREUR);
+		// Pouvoir attraper les erreurs de simplexml_load_string().
+		// http://stackoverflow.com/questions/17009045/how-do-i-handle-warning-simplexmlelement-construct/17012247#17012247
+		set_error_handler(
+			function ($erreur_id, $erreur_message, $erreur_fichier, $erreur_ligne) {
+				throw new Exception($erreur_message, $erreur_id);
 			}
+		);
 
+		try {
+			$reponse = $convertir(simplexml_load_string($flux['page']), false);
+			$reponse = $reponse['root'];
+		} catch (Exception $erreur) {
+			$reponse['erreur'] = 'analyse_xml';
 			restore_error_handler();
-		} else {
-			// Transformation de la chaîne json reçue en tableau associatif
-			try {
-				$reponse = json_decode($flux['page'], true);
-			} catch (Exception $erreur) {
-				$reponse['erreur'] = 'analyse_json';
-				spip_log("Erreur d'analyse JSON pour l'URL `${url}` : " . $erreur->getMessage(), 'rainette' . _LOG_ERREUR);
-			}
+			spip_log("Erreur d'analyse XML pour l'URL `${url}` : " . $erreur->getMessage(), 'rainette' . _LOG_ERREUR);
+		}
+
+		restore_error_handler();
+	} else {
+		// Transformation de la chaîne json reçue en tableau associatif
+		try {
+			$reponse = json_decode($flux['page'], true);
+		} catch (Exception $erreur) {
+			$reponse['erreur'] = 'analyse_json';
+			spip_log("Erreur d'analyse JSON pour l'URL `${url}` : " . $erreur->getMessage(), 'rainette' . _LOG_ERREUR);
 		}
 	}
 
 	return $reponse;
 }
-
 
 /**
  * Vérifie si la requête prévue peut être adressée au service sans excéder les limites d'utilisation fixées dans
@@ -99,15 +94,14 @@ function requeter($url, $configuration, $service) {
  * Si une période est échue, la fonction remet à zéro le compteur associé.
  *
  * @param array  $limites
- *      Tableau des seuils de requêtes par période (année, mois,..., minute).
+ *                        Tableau des seuils de requêtes par période (année, mois,..., minute).
  * @param string $service
- *      Alias du service.
+ *                        Alias du service.
  *
  * @return bool
- *      `true` si la requête est autorisée, `false`sinon.
+ *              `true` si la requête est autorisée, `false`sinon.
  */
 function requete_autorisee($limites, $service) {
-
 	$autorisee = true;
 
 	// On loge la date de l'appel et on incrémente le compteur de requêtes du service.

@@ -17,7 +17,6 @@ if (!defined('_RAINETTE_WSTACK_URL_BASE')) {
 	define('_RAINETTE_WSTACK_URL_BASE', 'http://api.weatherstack.com');
 }
 
-
 // Configuration des valeurs par défaut des éléments de la configuration dynamique.
 // Ces valeurs sont applicables à tous les modes.
 $GLOBALS['rainette_wstack_config']['service'] = array(
@@ -31,63 +30,63 @@ $GLOBALS['rainette_wstack_config']['service'] = array(
 	),
 	'termes'         => array(
 		'titre' => 'Terms of Service',
-		'lien' => 'https://weatherstack.com/terms'
+		'lien'  => 'https://weatherstack.com/terms'
 	),
 	'enregistrement' => array(
-		'titre' => 'Signup Free Plan',
-		'lien' => 'https://weatherstack.com/signup/free',
+		'titre'      => 'Signup Free Plan',
+		'lien'       => 'https://weatherstack.com/signup/free',
 		'taille_cle' => 32
 	),
 	'offres'         => array(
-		'titre' => 'Pricing',
-		'lien' => 'https://weatherstack.com/product',
+		'titre'   => 'Pricing',
+		'lien'    => 'https://weatherstack.com/product',
 		'limites' => array(
 			'month' => 1000
 		),
 	),
 	'langues' => array(
 		'disponibles' => array(
-			'ar'    => 'ar',
-			'bg'    => 'bg',
-			'bn'    => 'bn',
-			'cs'    => 'cs',
-			'da'    => 'da',
-			'de'    => 'de',
-			'el'    => 'el',
-			'en'    => 'en',
-			'es'    => 'es',
-			'fi'    => 'fi',
-			'fr'    => 'fr',
-			'hi'    => 'hi',
-			'hu'    => 'hu',
-			'it'    => 'it',
-			'ja'    => 'ja',
-			'jv'    => 'jv',
-			'ko'    => 'ko',
-			'mr'    => 'mr',
-			'nl'    => 'nl',
-			'pa'    => 'pa',
-			'pl'    => 'pl',
-			'pt'    => 'pt',
-			'ro'    => 'ro',
-			'ru'    => 'ru',
-			'si'    => 'si',
-			'sk'    => 'sk',
-			'sr'    => 'sr',
-			'sv'    => 'sv',
-			'ta'    => 'ta',
-			'te'    => 'te',
-			'tr'    => 'tr',
-			'uk'    => 'uk',
-			'ur'    => 'ur',
-			'vi'    => 'vi',
-			'zh'    => 'zh',
-			'zh_tw' => 'zh_tw',
+			'ar'     => 'ar',
+			'bg'     => 'bg',
+			'bn'     => 'bn',
+			'cs'     => 'cs',
+			'da'     => 'da',
+			'de'     => 'de',
+			'el'     => 'el',
+			'en'     => 'en',
+			'es'     => 'es',
+			'fi'     => 'fi',
+			'fr'     => 'fr',
+			'hi'     => 'hi',
+			'hu'     => 'hu',
+			'it'     => 'it',
+			'ja'     => 'ja',
+			'jv'     => 'jv',
+			'ko'     => 'ko',
+			'mr'     => 'mr',
+			'nl'     => 'nl',
+			'pa'     => 'pa',
+			'pl'     => 'pl',
+			'pt'     => 'pt',
+			'ro'     => 'ro',
+			'ru'     => 'ru',
+			'si'     => 'si',
+			'sk'     => 'sk',
+			'sr'     => 'sr',
+			'sv'     => 'sv',
+			'ta'     => 'ta',
+			'te'     => 'te',
+			'tr'     => 'tr',
+			'uk'     => 'uk',
+			'ur'     => 'ur',
+			'vi'     => 'vi',
+			'zh'     => 'zh',
+			'zh_tw'  => 'zh_tw',
 			'zh_cmn' => '',
 			'zh_wuu' => '',
 			'zh_hsn' => '',
 			'zh_yue' => '',
-			'zu'    => 'zu',
+			'zu'     => 'zu',
 		),
 		'defaut'      => 'en'
 	),
@@ -264,8 +263,6 @@ $GLOBALS['rainette_wstack_config']['erreurs'] = array(
 	),
 );
 
-
-
 // ------------------------------------------------------------------------------------------------
 // Les fonctions qui suivent définissent l'API standard du service et sont appelées par la fonction
 // unique de chargement des données météorologiques `meteo_charger()`.
@@ -277,11 +274,11 @@ $GLOBALS['rainette_wstack_config']['erreurs'] = array(
  * @api
  *
  * @param string $mode
- *        Type de données météorologiques. Les valeurs possibles sont `infos`, `conditions` ou `previsions`.
- *        La périodicité n'est pas nécessaire car la configuration est indifférente à ce paramètre.
+ *                     Type de données météorologiques. Les valeurs possibles sont `infos`, `conditions` ou `previsions`.
+ *                     La périodicité n'est pas nécessaire car la configuration est indifférente à ce paramètre.
  *
  * @return array
- *        Le tableau des données de configuration communes au service et propres au type de données demandé.
+ *               Le tableau des données de configuration communes au service et propres au type de données demandé.
  */
 function wstack_service2configuration($mode) {
 	// On merge la configuration propre au mode et la configuration du service proprement dite
@@ -291,27 +288,27 @@ function wstack_service2configuration($mode) {
 	return $config;
 }
 
-
 /**
  * Construit l'url de la requête correspondant au lieu, au type de données et à la configuration utilisateur
  * du service (par exemple, le code d'inscription, le format des résultats...).
  *
  * @api
+ *
  * @uses langue2code_wstack()
  *
  * @param string $lieu
- *        Lieu pour lequel on acquiert les données météorologiques.
+ *                              Lieu pour lequel on acquiert les données météorologiques.
  * @param string $mode
- *        Type de données météorologiques. Les valeurs possibles sont `infos`, `conditions` ou `previsions`.
+ *                              Type de données météorologiques. Les valeurs possibles sont `infos`, `conditions` ou `previsions`.
  * @param int    $periodicite
- *        La périodicité horaire des prévisions :
- *        - `24`, `12`, `6`, `3` ou `1`, pour le mode `previsions`
- *        - `0`, pour les modes `conditions` et `infos`
+ *                              La périodicité horaire des prévisions :
+ *                              - `24`, `12`, `6`, `3` ou `1`, pour le mode `previsions`
+ *                              - `0`, pour les modes `conditions` et `infos`
  * @param array  $configuration
- *        Configuration complète du service, statique et utilisateur.
+ *                              Configuration complète du service, statique et utilisateur.
  *
  * @return string
- *        URL complète de la requête.
+ *                URL complète de la requête.
  */
 function wstack_service2url($lieu, $mode, $periodicite, $configuration) {
 
@@ -344,7 +341,6 @@ function wstack_service2url($lieu, $mode, $periodicite, $configuration) {
 	return $url;
 }
 
-
 /**
  * @param array $erreur
  *
@@ -363,7 +359,6 @@ function wstack_erreur_verifier($erreur) {
 	return $est_erreur;
 }
 
-
 /**
  * Complète par des données spécifiques au service le tableau des conditions issu
  * uniquement de la lecture du flux.
@@ -371,17 +366,16 @@ function wstack_erreur_verifier($erreur) {
  * @api
  *
  * @param array $tableau
- *        Tableau standardisé des conditions contenant uniquement les données fournies sans traitement
- *        par le service.
+ *                             Tableau standardisé des conditions contenant uniquement les données fournies sans traitement
+ *                             par le service.
  * @param array $configuration
- *        Configuration complète du service, statique et utilisateur.
+ *                             Configuration complète du service, statique et utilisateur.
  *
  * @return array
- *        Tableau standardisé des conditions météorologiques complété par les données spécifiques
- *        du service.
+ *               Tableau standardisé des conditions météorologiques complété par les données spécifiques
+ *               du service.
  */
 function wstack_complement2conditions($tableau, $configuration) {
-
 	if ($tableau) {
 		// Compléter le tableau standard avec les états météorologiques calculés
 		etat2resume_wstack($tableau, $configuration);
@@ -390,7 +384,6 @@ function wstack_complement2conditions($tableau, $configuration) {
 	return $tableau;
 }
 
-
 /**
  * Complète par des données spécifiques au service le tableau des conditions issu
  * uniquement de la lecture du flux.
@@ -398,19 +391,18 @@ function wstack_complement2conditions($tableau, $configuration) {
  * @api
  *
  * @param array $tableau
- *        Tableau standardisé des conditions contenant uniquement les données fournies sans traitement
- *        par le service.
+ *                             Tableau standardisé des conditions contenant uniquement les données fournies sans traitement
+ *                             par le service.
  * @param array $configuration
- *        Configuration complète du service, statique et utilisateur.
+ *                             Configuration complète du service, statique et utilisateur.
  * @param int   $index_periode
- *        Index où trouver et ranger les données. Cet index n'est pas utilisé pour les conditions
+ *                             Index où trouver et ranger les données. Cet index n'est pas utilisé pour les conditions
  *
  * @return array
- *        Tableau standardisé des conditions météorologiques complété par les données spécifiques
- *        du service.
+ *               Tableau standardisé des conditions météorologiques complété par les données spécifiques
+ *               du service.
  */
 function wstack_complement2previsions($tableau, $configuration, $index_periode) {
-
 	if (($tableau) and ($index_periode > -1)) {
 		// Convertir les informations exprimées en système métrique dans le systeme US si la
 		// configuration le demande
@@ -425,11 +417,12 @@ function wstack_complement2previsions($tableau, $configuration, $index_periode) 
 	return $tableau;
 }
 
-
 /**
  * ---------------------------------------------------------------------------------------------
  * Les fonctions qui suivent sont des utilitaires uniquement appelées par les fonctions de l'API
- * ---------------------------------------------------------------------------------------------
+ * ---------------------------------------------------------------------------------------------.
+ *
+ * @param mixed $tableau
  */
 
 /**
@@ -455,22 +448,20 @@ function metrique2imperial_wstack(&$tableau) {
 		: '';
 }
 
-
 /**
  * Calcule les états en fonction des états météorologiques natifs fournis par le service.
  *
  * @internal
  *
  * @param array $tableau
- *        Tableau standardisé des conditions contenant uniquement les données fournies sans traitement
- *        par le service. Le tableau est mis à jour et renvoyé à l'appelant.
+ *                             Tableau standardisé des conditions contenant uniquement les données fournies sans traitement
+ *                             par le service. Le tableau est mis à jour et renvoyé à l'appelant.
  * @param array $configuration
- *        Configuration complète du service, statique et utilisateur.
+ *                             Configuration complète du service, statique et utilisateur.
  *
  * @return void
  */
 function etat2resume_wstack(&$tableau, $configuration) {
-
 	if ($tableau['code_meteo'] and $tableau['icon_meteo']) {
 		// Determination de l'indicateur jour/nuit. Pour ce service aucun indicateur n'est disponible.
 		// -> on utilise l'url de l'icone qui contient l'indication "/night/" pour la nuit
@@ -510,14 +501,16 @@ function etat2resume_wstack(&$tableau, $configuration) {
 					basename($tableau['icon_meteo']),
 					$configuration['alias'],
 					$configuration['theme_local'],
-					$tableau['periode'] == 0 ? 'day' : 'night');
+					$tableau['periode'] == 0 ? 'day' : 'night'
+				);
 			} else {
 				// On affiche l'icône correspondant au code météo transcodé dans le système weather.com.
 				$chemin = icone_weather_normaliser(
 					$tableau['code_meteo'],
 					$configuration['theme_weather'],
 					$configuration['transcodage_weather'],
-					$tableau['periode']);
+					$tableau['periode']
+				);
 			}
 			include_spip('inc/utils');
 			$tableau['icone']['source'] = find_in_path($chemin);

@@ -69,9 +69,6 @@ function rainette_debug_afficher_cache($lieu, $mode = 'previsions', $service = '
 }
 
 /**
- * @param string $lieu
- * @param string $mode
- * @param string $service
  *
  * @return string
  */
