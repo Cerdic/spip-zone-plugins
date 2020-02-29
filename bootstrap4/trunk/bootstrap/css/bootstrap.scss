@@ -42,3 +42,7 @@
 @import "css/spinners";
 @import "css/utilities";
 @import "css/print";
+
+// BootStrap Theming : 2 possible names, Has to be last-last to override when necessary
+@import "css/bootswatch";
+@import "css/boot-theme";
