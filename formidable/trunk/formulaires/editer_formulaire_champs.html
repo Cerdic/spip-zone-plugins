@@ -3,8 +3,11 @@
 	<p class="explication message_saisies_modifiees"><strong><:saisies:construire_attention_enregistrer:></strong></p>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-
-	[(#ENV*{message_erreur}|non)
+	#SET{constuire_formulaire,''}
+	[(#ENV*{message_erreur}|non|ou{#ENV*{erreurs/saisies_modifiees_parallele}})
+		#SET{constuire_formulaire,oui}
+	]
+	[(#GET{constuire_formulaire}|oui)
 	<div class="ajax">
 		#FORMULAIRE_CONSTRUIRE_FORMULAIRE{#ENV{saisie_id}, #ENV{_saisies}, #ARRAY{options_globales,#ENV{_options_globales}}}
 	</div>
@@ -19,11 +22,11 @@
 		<p class="boutons">
 			<span class='image_loading'></span>
 
-			[(#ENV*{message_erreur}|oui)
+			[(#GET{constuire_formulaire}|non)
 			<input type='submit' class='submit' name="annulation" value='<:bouton_annuler|attribut_html:>' />
 			<input type='submit' class='submit' name="enregistrer_confirmation" value='<:bouton_enregistrer|attribut_html:>' />
 			]
-			[(#ENV*{message_erreur}|non)
+			[(#GET{constuire_formulaire}|oui)
 			<input type='submit' class='submit revert' name="revert" value='<:formidable:bouton_revert_formulaire|attribut_html:>'
 			       onclick="return confirm('<:saisies:construire_reinitialiser_confirmer:>')" />
 			<input type='submit' class='submit' name="enregistrer" value='<:bouton_enregistrer|attribut_html:>' />

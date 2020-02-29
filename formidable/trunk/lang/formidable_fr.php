@@ -89,6 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_identifiant_format' => 'L’identifiant ne peut contenir que des chiffres, lettres latines non accentuées et le caractère "_"',
 	'erreur_importer_forms' => 'Erreur durant l’importation du formulaire Forms&Tables',
 	'erreur_importer_wcs' => 'Erreur durant l’importation du formulaire W.C.S',
+	'erreur_saisies_modifiees_parallele' => 'Les saisies du formulaire ont été modifiées par ailleurs. Vos propres modifications n\'ont donc pas été enregistrées. Veuillez recommencer la modification des champs.',
 	'erreur_importer_yaml' => 'Erreur durant l’importation du fichier YAML',
 	'erreur_inexistant' => 'Le formulaire n’existe pas.',
 	'erreur_unicite' => 'Cette valeur est déjà utilisée',

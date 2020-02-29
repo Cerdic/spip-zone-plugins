@@ -15,6 +15,13 @@ function formulaires_editer_formulaire_champs_charger($id_formulaire) {
 		and autoriser('editer', 'formulaire', $id_formulaire)
 	) {
 		$saisies = unserialize($formulaire['saisies']);
+
+		// Est-ce qu'on restaure une révision ?
+		if ($id_version = _request('id_version')) {
+			include_spip('inc/revisions');
+			$old = recuperer_version($id_formulaire, 'formulaire', $id_version);
+			$saisies = unserialize($old['saisies']);
+		}
 		if (!is_array($saisies)) {
 			$saisies = array();
 		}
@@ -76,15 +83,31 @@ function formulaires_editer_formulaire_champs_verifier($id_formulaire) {
 		and !($annulation = _request('annulation'))) {
 		// On récupère le formulaire dans la session
 		$saisies_nouvelles = session_get("constructeur_formulaire_formidable_$id_formulaire");
+		$md5_precedent_formulaire_initial = session_get("constructeur_formulaire_formidable_$id_formulaire".'_md5_formulaire_initial');
 
 		// On récupère les anciennes saisies
-		$saisies_anciennes = unserialize(sql_getfetsel(
+		$saisies_anciennes = sql_getfetsel(
 			'saisies',
 			'spip_formulaires',
 			'id_formulaire = '.$id_formulaire
-		));
+		);
+		if (!$saisies_anciennes) {
+			return $erreurs;
+		}
+		// On vérifie que les saisies en bases n'ont pas été modifiés depuis le début de la modification du formulaire
+		// Si tel est le cas, on demande de recommencer la modif du formulaire, avec la saisie en base
+		// Ne pas le faire si on est en train de restaurer une vieille version, puisque dans ce cas ce qui compte sera bien sur la veille version qu'on veut restaurer, et pas la version plus récente en base:)
+		$md5_saisies_anciennes = md5($saisies_anciennes);
+		$saisies_anciennes = unserialize($saisies_anciennes);
+		if ($md5_precedent_formulaire_initial and $md5_precedent_formulaire_initial != $md5_saisies_anciennes and !_request('id_version')) {
+			session_set("constructeur_formulaire_formidable_$id_formulaire", $saisies_anciennes);
+			session_set("constructeur_formulaire_formidable_$id_formulaire".'_md5_formulaire_initial', $md5_saisies_anciennes);
+			$erreurs['message_erreur'] = _T('formidable:erreur_saisies_modifiees_parallele');
+			$erreurs['saisies_modifiees_parallele'] = _T('formidable:erreur_saisies_modifiees_parallele');
+			return $erreurs;
+		}
 
-		// On compare
+		// On compare les anciennes saisies aux nouvelles
 		$comparaison = saisies_comparer($saisies_anciennes, $saisies_nouvelles);
 
 		// S'il y a des suppressions, on demande confirmation avec attention
@@ -123,7 +146,7 @@ function formulaires_editer_formulaire_champs_traiter($id_formulaire) {
 		// On envoie les nouvelles dans la table dans la table
 		include_spip('action/editer_objet');
 		$err = objet_modifier('formulaire', $id_formulaire, array('saisies' => serialize($saisies_nouvelles)));
-		
+
 		// Si c'est bon on appelle d'éventuelles fonctions d'update des traitements
 		// puis on renvoie vers la config des traitements
 		if (!$err) {
@@ -156,6 +179,9 @@ function formulaires_editer_formulaire_champs_traiter($id_formulaire) {
 				'avertissement',
 				'oui'
 			);
+			if ($id_version = _request('id_version')) {
+				$retours['redirect'] = parametre_url($retours['redirect'], 'id_version', $id_version);
+			}
 		}
 	}
 
