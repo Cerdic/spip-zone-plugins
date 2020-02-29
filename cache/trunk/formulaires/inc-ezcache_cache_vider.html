@@ -15,22 +15,22 @@
 			</label>
 		</div>
 	</BOUCLE_caches>
-		<div class="action-checkbox">
-			<a href="#" id="tout_#ENV{_prefixe}"><:cache:cache_vider_cocher_tout:></a><span class="sep"> | </span>
-			<a href="#" id="rien_#ENV{_prefixe}"><:cache:cache_vider_cocher_rien:></a>
-		</div>
+	</div>
+	<div class="action-cocher">
+		<a href="#" id="tout_#ENV{_prefixe}"><:cache:cache_vider_cocher_tout:></a><span class="sep"> | </span>
+		<a href="#" id="rien_#ENV{_prefixe}"><:cache:cache_vider_cocher_rien:></a>
+	</div>
 	</B_caches>
 		#BOITE_OUVRIR{'','notice'}
 			<p><:cache:cache_vider_notice_aucun:></p>
 		#BOITE_FERMER
 	<//B_caches>
-	</div>
 </div>
 [(#REM) <!-- Gestion des liens tout cocher et tout décocher --> ]
 <script type="text/javascript">
 //<![CDATA[
 	(function($){
-		jQuery(".action-checkbox a").click(function(){
+		jQuery(".action-cocher a").click(function(){
 			var id = $(this).attr('id').split('_');
 			var action = id[0];
 			var plugin = id[1];
