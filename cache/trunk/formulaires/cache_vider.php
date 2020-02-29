@@ -23,7 +23,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @return array Tableau des données à charger par le formulaire (affichage). Aucune donnée chargée n'est un
  *               champ de saisie, celle-ci sont systématiquement remises à zéro. Le tableau comprend à minima l'index suivant:
- *               - `_caches`	: (affichage) liste des descriptions des caches rangés par service
+ *               - `_caches`	: (affichage) liste des descriptions des caches du plugin rangés par groupes
  */
 function formulaires_cache_vider_charger($plugin, $options = array()) {
 

@@ -364,7 +364,13 @@ function ezcache_cache_formulaire_charger($plugin, $options, $configuration) {
 	} else {
 		// On présente simplement les fichiers caches en ordre alphabétique en visualisant uniquement
 		// le sous-dossuer éventuel et le nom du fichier sans décomposition.
-		$valeurs['_caches'] = cache_repertorier($plugin, array());
+		// On construit un pseudo groupe unique sans titre dont l'id est le préfixe du plugin, ce qui permet de gérer
+		// automatiquement les regroupements spécifiques de caches si besoin (par exemple, par services météo pour
+		// Rainette).
+		$valeurs['_caches'][$plugin] = array(
+			'titre' => '',
+			'liste' => cache_repertorier($plugin, array())
+		);
 	}
 
 	return $valeurs;
