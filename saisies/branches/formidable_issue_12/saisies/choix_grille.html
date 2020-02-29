@@ -1,0 +1,81 @@
+[(#REM)
+  Parametres :
+  - data_cols : tableau de donnees cle=>valeur des colonnes
+  - data_rows : tableau de donnees cle=>valeur des lignes
+  - defaut : valeur par defaut si pas présente dans l'environnement
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+
+  Exemple d'appel :
+	[(#SAISIE{choix_grille, criteres,
+		label=<:plugin:choisir_criteres:>,
+		defaut=#ARRAY{0,cle1,1,cle3}, ??? à corriger
+		data_cols=#ARRAY{
+			col1,valeur1,
+			col2,valeur2,
+			col3,valeur3},
+		data_rows=#ARRAY{
+			row1,valeur1,
+			row2,valeur2,
+			row3,valeur3}})]
+]
+
+[(#REM) data peut être une chaine qu'on sait décomposer ]
+#SET{data_cols, #ENV*{data_cols}|saisies_chaine2tableau}
+#SET{data_rows, #ENV*{data_rows}|saisies_chaine2tableau}
+
+[(#REM) defaut peut être une chaine (plusieurs valeurs ou pas) qu'on sait décomposer ]
+#SET{defaut, #ENV{defaut}|saisies_chaine2tableau}
+
+[(#REM) valeur doit être un tableau ! ]
+#SET{valeur, #ENV{valeur_forcee, #ENV{valeur}}|saisies_valeur2tableau}
+
+[(#REM) lorsque qu'on donne un 'disabled' qui est une chaine,
+	il faut la transformer en tableau. Ce tableau est vide si la chaine valait ''
+	sinon une clé 0 serait considérée disabled à tord
+]
+#SET{disabled, #ENV{disable}}
+[(#GET{disabled}|is_string|oui)
+	[(#GET{disabled}|strlen|non) #SET{disabled,#ARRAY} ]
+	[(#GET{disabled}|oui) #SET{disabled,#ARRAY|push{#GET{disabled}}} ]
+]
+
+<B_lignes>
+<table>
+	[<caption>(#ENV{caption})</caption>]
+	<B_colonnes_entete>
+	<thead>
+		<tr>
+			<td></td>
+			<BOUCLE_colonnes_entete (DATA) {source table,#GET{data_cols}}>
+			<th scope="col">#VALEUR</th>
+			</BOUCLE_colonnes_entete>
+			<td></td>
+		</tr>
+	</thead>
+	</B_colonnes_entete>
+	<tbody>
+		<BOUCLE_lignes (DATA) {source table,#GET{data_rows}}>
+		<B_colonnes>
+		<tr>
+			#SET{libelles, #VALEUR|explode{'|'}}
+			<th scope="row">[(#GET{libelles}|table_valeur{0})]</th>
+			<BOUCLE_colonnes (DATA) {source table,#GET{data_cols}}>
+			<td>
+				#SET{type, radio}
+				#SET{name, #ENV{nom}\[#_lignes:CLE\]}
+				#SET{coche, #CLE|=={#GET{valeur/#_lignes:CLE}}}
+				[(#ENV{multiple}|et{#ENV{multiple}|!={non}}|oui)
+					#SET{type, checkbox}
+					#SET{name, #GET{name}\[\]}
+					#SET{coche, #CLE|in_array{#GET{valeur/#_lignes:CLE, #ARRAY}}}
+				]
+				<input type="#GET{type}"[ (#ENV{disabled}|oui)disabled="disabled"] name="#GET{name}" value="#CLE"[ (#GET{coche}|oui)checked="checked"] />
+			</td>
+			</BOUCLE_colonnes>
+			<th scope="row">[(#GET{libelles}|table_valeur{1})]</th>
+		</tr>
+		</B_colonnes>
+		</BOUCLE_lignes>
+	</tbody>
+</table>
+</B_lignes>
