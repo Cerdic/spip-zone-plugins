@@ -5,6 +5,76 @@ $GLOBALS['marqueur_skel'] = (isset($GLOBALS['marqueur_skel']) ?  $GLOBALS['marqu
 $GLOBALS['puce'] = '<span class="spip-puce ltr"><b>–</b></span>';
 $GLOBALS['puce_rtl'] = '<span class="spip-puce rtl"><b>–</b></span>';
 
+// les icones BS4
+// un fichier qui contient toutes les icones, utilise pour la page de demo uniquement
+define('_ICON_SPRITE_SVG_FILE', "img/bi-all-symbols.svg");
+// 2 sprites : celui de base + celui avec les variantes fill
+define('_ICON_SPRITE_SVG_NOFILL_FILE', "img/bi-symbols.svg");
+define('_ICON_SPRITE_SVG_FILL_FILE', "img/bi-fill-symbols.svg");
+
+define('_ICON_SPRITE_SVG_ID_PREFIX', "bi-");
+
+function filtre_icone_href_class_from_name($name) {
+	static $sprite_files = [];
+	if (strpos($name,'#') !== false or strpos($name,'/') !== false or strpos($name,'.svg') !== false){
+		return filtre_icone_href_class_from_name_dist($name);
+	}
+	else {
+		if (!$name) {
+			return array(find_in_path(_ICON_SPRITE_SVG_FILE), '');
+		}
+
+		// c'est le sprite par defaut avec un name qui correspond a l'ancre abregee
+		// et la gestion de quelques historiques de nommage/renommage
+		if (strpos($name, '-fill') !== false){
+			if (!isset($sprite_files['fill'])){
+				$sprite_files['fill'] = timestamp(find_in_path(_ICON_SPRITE_SVG_FILL_FILE));
+			}
+			$file = $sprite_files['fill'];
+		}
+		else {
+			if (!isset($sprite_files['nofill'])){
+				$sprite_files['nofill'] = timestamp(find_in_path(_ICON_SPRITE_SVG_NOFILL_FILE));
+			}
+			$file = $sprite_files['nofill'];
+		}
+		// sanitizer l'ancre pour la class
+		$class = preg_replace(",[^\w\-],", "", $name);
+		if (_ICON_SPRITE_SVG_ID_PREFIX) {
+			$class .= " " . _ICON_SPRITE_SVG_ID_PREFIX . "icon";
+		}
+
+		$icone_anchor_from_name = chercher_filtre("icone_anchor_from_name");
+		$anchor = $icone_anchor_from_name($name);
+		return array($file . '#' . $anchor, $class);
+	}
+}
+
+function filtre_icone_anchor_from_name($name) {
+	if (_ICON_SPRITE_SVG_ID_PREFIX) {
+		if (strpos($name, _ICON_SPRITE_SVG_ID_PREFIX) === 0) {
+			$name = substr($name, strlen(_ICON_SPRITE_SVG_ID_PREFIX));
+		}
+	}
+	switch ($name) {
+		case "comment":
+		case "msg":
+			$ancre = 'chat';
+			break;
+		case "ok-circle":
+			$ancre = 'check-box';
+			break;
+		case "user":
+			$ancre = 'person';
+			break;
+		default:
+			$ancre = $name;
+			break;
+	}
+	return _ICON_SPRITE_SVG_ID_PREFIX . $ancre;
+}
+
+
 function bootstrap4_affichage_final($flux){
 	if (
 		$GLOBALS['html']
