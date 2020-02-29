@@ -298,7 +298,12 @@ function filtre_icone_href_class_from_name_dist($name) {
 		// voire le nom du fichier sprite svg
 		list($filename, $anchor) = explode('#', trim($name), 2);
 		// sanitizer l'ancre pour la class
-		$class = preg_replace(",[^\w\-],", "", $anchor);
+		if ($anchor) {
+			$class = preg_replace(",[^\w\-],", "", $anchor);
+		}
+		else {
+			$class = preg_replace(",[^\w\-],", "", basename($filename, '.svg'));
+		}
 
 		if ($filename) {
 			if (!isset($sprite_files[$filename])) {
