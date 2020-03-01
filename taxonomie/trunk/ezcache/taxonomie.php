@@ -1,22 +1,20 @@
 <?php
 /**
  * Ce fichier contient les fonctions de service nécessité par le plugin Cache Factory.
- *
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-
 /**
  * Renvoie la configuration spécifique des caches de Taxonomie.
  *
  * @param string $plugin
- *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
- *        un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ *                       Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+ *                       un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  *
  * @return array
- *        Tableau de la configuration brute du plugin Taxonomie.
+ *               Tableau de la configuration brute du plugin Taxonomie.
  */
 function taxonomie_cache_configurer($plugin) {
 
@@ -29,30 +27,29 @@ function taxonomie_cache_configurer($plugin) {
 		'extension'       => '.txt',
 		'securisation'    => false,
 		'serialisation'   => true,
-		'separateur'      => '_' ,
+		'separateur'      => '_',
 		'conservation'    => 86400 * 30 * 6
 	);
 
 	return $configuration;
 }
 
-
 /**
  * Complète la description canonique d'un cache.
  * Le plugin Taxonomie rajoute le nom scientifique du taxon.
  *
  * @param string $plugin
- *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
- *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ *                              Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *                              ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param array  $cache
- *       Tableau identifiant le cache pour lequel on veut construire le nom.
+ *                              Tableau identifiant le cache pour lequel on veut construire le nom.
  * @param string $fichier_cache
- *        Fichier cache désigné par son chemin complet.
+ *                              Fichier cache désigné par son chemin complet.
  * @param array  $configuration
- *        Configuration complète des caches du plugin utilisateur lue à partir de la meta de stockage.
+ *                              Configuration complète des caches du plugin utilisateur lue à partir de la meta de stockage.
  *
  * @return array
- *         Description du cache complétée par un ensemble de données propres au plugin.
+ *               Description du cache complétée par un ensemble de données propres au plugin.
  */
 function taxonomie_cache_completer($plugin, $cache, $fichier_cache, $configuration) {
 
@@ -76,7 +73,6 @@ function taxonomie_cache_completer($plugin, $cache, $fichier_cache, $configurati
 	return $cache;
 }
 
-
 /**
  * Effectue le chargement du formulaire de vidage des caches pour le plugin Taxonomie.
  * L'intérêt est de permette le rangement des caches par service.
@@ -84,16 +80,16 @@ function taxonomie_cache_completer($plugin, $cache, $fichier_cache, $configurati
  * @uses cache_chercher_service()
  *
  * @param string $plugin
- *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
- *        ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+ *                              Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier
+ *                              ou un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
  * @param array  $configuration
- *        Configuration complète des caches du plugin utilisateur lue à partir de la meta de stockage.
+ *                              Configuration complète des caches du plugin utilisateur lue à partir de la meta de stockage.
+ * @param mixed  $options
  *
  * @return array
- *         Tableau des valeurs spécifique au plugin taxonomie.
+ *               Tableau des valeurs spécifique au plugin taxonomie.
  */
 function taxonomie_cache_formulaire_charger($plugin, $options, $configuration) {
-
 	$valeurs = array();
 
 	// On constitue la liste des services requis par l'appel
@@ -109,8 +105,8 @@ function taxonomie_cache_formulaire_charger($plugin, $options, $configuration) {
 
 		// Si il existe des caches pour le service on stocke les informations recueillies
 		if ($caches) {
-			$valeurs['_caches'][$_service]['titre_service'] = $_titre;
-			$valeurs['_caches'][$_service]['caches'] = $caches;
+			$valeurs['_caches'][$_service]['titre'] = $_titre;
+			$valeurs['_caches'][$_service]['liste'] = $caches;
 		}
 	}
 
