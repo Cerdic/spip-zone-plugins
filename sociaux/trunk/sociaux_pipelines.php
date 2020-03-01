@@ -37,6 +37,7 @@ function sociaux_sociaux_lister($flux) {
 		$flux['data']['rss'] = 'RSS';
 		$flux['data']['facebook'] = 'Facebook';
 		$flux['data']['twitter'] = 'Twitter';
+		$flux['data']['mastodon'] = 'Mastodon';
 		$flux['data']['instagram'] = 'Instagram';
 		$flux['data']['blogger'] = 'Blogger';
 		$flux['data']['pinterest'] = 'Pinterest';
