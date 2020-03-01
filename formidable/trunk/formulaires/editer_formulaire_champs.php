@@ -143,7 +143,7 @@ function formulaires_editer_formulaire_champs_traiter($id_formulaire) {
 			'id_formulaire = '.$id_formulaire
 		));
 
-		// On envoie les nouvelles dans la table dans la table
+		// On envoie les nouvelles dans la table
 		include_spip('action/editer_objet');
 		$err = objet_modifier('formulaire', $id_formulaire, array('saisies' => serialize($saisies_nouvelles)));
 
