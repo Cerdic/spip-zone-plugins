@@ -1,4 +1,4 @@
-[(#REM) S'il y a des options afficher_si, il faut v�rifier que les conditions sont remplies ]
+[(#REM) S'il y a des options afficher_si, il faut vérifier que les conditions sont remplies ]
 [(#SET{saisies,#ENV{saisies}|saisies_verifier_afficher_si{#ENV**|unserialize}})]
 <BOUCLE_saisies(POUR){tableau #GET{saisies}}>
 [(#EVAL{!defined('_SAISIES_AFFICHAGE_COMPACT')}|oui)
