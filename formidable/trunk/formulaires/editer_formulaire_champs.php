@@ -4,7 +4,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
-include_spip('inc/autoriser');
+
 function formulaires_editer_formulaire_champs_charger($id_formulaire) {
 	$contexte = array();
 	$id_formulaire = intval($id_formulaire);
