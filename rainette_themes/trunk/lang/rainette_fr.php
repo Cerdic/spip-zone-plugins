@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_etape' => 'Etape @etape@ / @etapes@',
 	'info_page_themer' => 'Rainette autorise l\'utilisation de thèmes d\'icones adaptés à chaque service. Le plugin « Thèmes d\'icones pour Rainette » installe de nombreux thèmes supplémentaires et permet de les visualiser et de les comparer.',
+	'info_icone_commun' => 'Icones communs jour et nuit',
 
 	// L
 	'label_icone' => 'Icone à comparer',

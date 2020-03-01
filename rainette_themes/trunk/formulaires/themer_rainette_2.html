@@ -66,15 +66,15 @@
 			})]
 		]
 
-		[(#ENV{service}|=={weather}|oui)
+		[(#ENV{_icone_journuit}|non)
 			[(#SAISIE{input, periode_choisie,
-				defaut=<:rainette:info_periode_weather:>,
+				defaut=<:rainette:info_icone_commun:>,
 				disable=oui,
 				label=<:rainette:label_periode:>
 			})]
 			<input type="hidden" name="periode" value="0" />
 		]
-		[(#ENV{service}|=={weather}|non)
+		[(#ENV{_icone_journuit}|oui)
 			[(#SAISIE{radio, periode,
 				datas=#LISTE{<:rainette:label_icone_jour:>, <:rainette:label_icone_nuit:>},
 				defaut=0,

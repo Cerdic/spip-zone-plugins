@@ -35,12 +35,15 @@ function formulaires_themer_rainette_charger() {
 	}
 
 	// -- Liste des services : on ne sélectionne que ceux qui possèdent des thèmes et on initialise le défaut
-	//    au premier service de la liste.
+	//    au premier service de la liste. On prend les thèmes actifs et inactifs car ils peuvent servir de référence.
 	include_spip('rainette_fonctions');
-	$valeurs['_services'] = rainette_lister_services();
-	foreach ($valeurs['_services'] as $_service => $_titre) {
-		if (!rainette_lister_themes($_service, 'local')) {
-			unset($valeurs['_services'][$_service]);
+	$services = rainette_lister_services('tableau', false);
+	foreach ($services as $_service => $_data) {
+		$activite = $_data['actif']
+			? _T('rainette:service_actif')
+			: _T('rainette:service_inactif');
+		if (rainette_lister_themes($_service, 'local')) {
+			$valeurs['_services'][$_service] = $_data['nom'] . " (${activite})";
 		}
 	}
 	reset($valeurs['_services']);
@@ -59,6 +62,15 @@ function formulaires_themer_rainette_charger() {
 		}
 	}
 
+	// -- Si on a déjà choisi un service on détermine si il propose ou pas des icones jour / nuit :
+	//    weather et darksky ne fournissent pas un jeu d'icones par période
+	if ($valeurs['service']) {
+		$valeurs['_icone_journuit'] = true;
+		if (in_array($valeurs['service'], array('weather', 'darksky'))) {
+			$valeurs['_icone_journuit'] = false;
+		}
+	}
+
 	// Préciser le nombre d'étapes du formulaire
 	$valeurs['_etapes'] = 2;
 
@@ -73,6 +85,9 @@ function formulaires_themer_rainette_traiter() {
 	$operation = _request('operation');
 	$service = _request('service');
 	$periode = _request('periode');
+	if ($periode == null) {
+		$periode = 0;
+	}
 
 	include_spip('rainetheme_fonctions');
 	include_spip('rainette_fonctions');

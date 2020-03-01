@@ -258,6 +258,22 @@ $GLOBALS['rainette_icones']['wunderground'] = array(
 //	'partlycloudy' => array('texte' => 'Scattered Clouds', 'icone' => array('partlycloudy', 'nt_partlycloudy'))
 );
 
+$GLOBALS['rainette_icones']['darksky'] = array(
+	'clear-day'           => array('texte' => 'Clear (day)', 'icone' => array('clear-day', '')),
+	'clear-night'         => array('texte' => 'Clear (night)', 'icone' => array('clear-night', '')),
+	'cloudy'              => array('texte' => 'Cloudy', 'icone' => array('cloudy', '')),
+	'fog'                 => array('texte' => 'Foggy', 'icone' => array('fog', '')),
+	'partly-cloudy-day'   => array('texte' => 'Partly cloudy (day)', 'icone' => array('partly-cloudy-day', '')),
+	'partly-cloudy-night' => array('texte' => 'Partly cloudy (night)', 'icone' => array('partly-cloudy-night', '')),
+	'rain'                => array('texte' => 'Rain', 'icone' => array('rain', '')),
+	'sleet'               => array('texte' => 'Sleet', 'icone' => array('sleet', '')),
+	'snow'                => array('texte' => 'Snow', 'icone' => array('snow', '')),
+	'wind'                => array('texte' => 'Windy', 'icone' => array('wind', '')),
+	'hail'                => array('texte' => 'Hail', 'icone' => array('hail', '')),
+	'thunderstorm'        => array('texte' => 'Thunderstorms', 'icone' => array('thunderstorm', '')),
+	'tornado'             => array('texte' => 'Tornado', 'icone' => array('tornado', ''))
+);
+
 
 /**
  * @param string $service
@@ -299,10 +315,10 @@ function rainette_lister_icones($service, $theme, $periode = 0) {
 
 	include_spip('inc/rainette_normaliser');
 
-	if ($service == 'weather') {
+	if (in_array($service, array('weather'))) {
 		$codes = rainette_lister_codes($service);
 		foreach ($codes as $_code => $_resume) {
-			$fichier = find_in_path(icone_weather_normaliser($_code,	$theme));
+			$fichier = find_in_path(icone_weather_normaliser($_code, $theme));
 			$icones[$_code] = array(
 				'resume' => $_resume,
 				'icone'  => array('code' => $_code, 'source' => $fichier)
