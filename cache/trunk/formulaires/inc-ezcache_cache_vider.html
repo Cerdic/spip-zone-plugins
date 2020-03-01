@@ -28,9 +28,11 @@
 		<a href="#" id="rien_#CLE"><:cache:cache_vider_cocher_rien:></a>
 	</div>
 </BOUCLE_groupes>
-	#BOITE_OUVRIR{'','notice'}
-		<p><:cache:cache_vider_notice_aucun:></p>
-	#BOITE_FERMER
+	<div class="editer pleine_largeur">
+		#BOITE_OUVRIR{'','notice'}
+			<p><:cache:cache_vider_notice_aucun:></p>
+		#BOITE_FERMER
+	</div>
 <//B_groupes>
 </div>
 [(#REM) <!-- Gestion des liens tout cocher et tout décocher --> ]
