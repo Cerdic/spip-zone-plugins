@@ -1,7 +1,6 @@
 <?php
 /**
- * Ce fichier contient la configuration et l'ensemble des fonctions implémentant le service WeatherStack (wstack).
- * Ce service remplace le service APIXU qui a fermé le 14 octobre 2019.
+ * Ce fichier contient la configuration et l'ensemble des fonctions implémentant le service Dark Sky (darksky).
  * Ce service est capable de fournir des données au format JSON.
  *
  * @package SPIP\RAINETTE\SERVICES\WSTACK
@@ -10,90 +9,102 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-if (!defined('_RAINETTE_WSTACK_URL_BASE')) {
+if (!defined('_RAINETTE_DARKSKY_URL_BASE')) {
 	/**
 	 * URL de base (endpoint) des requêtes au service APIXU.
 	 */
-	define('_RAINETTE_WSTACK_URL_BASE', 'http://api.weatherstack.com');
+	define('_RAINETTE_DARKSKY_URL_BASE', 'https://api.darksky.net');
 }
 
 // Configuration des valeurs par défaut des éléments de la configuration dynamique.
 // Ces valeurs sont applicables à tous les modes.
-$GLOBALS['rainette_wstack_config']['service'] = array(
-	'alias'   => 'wstack',
-	'nom'     => 'Weatherstack',
+$GLOBALS['rainette_darksky_config']['service'] = array(
+	'alias'   => 'darksky',
+	'nom'     => 'Dark Sky',
 	'actif'   => false,
 	'credits' => array(
-		'titre' => 'Weatherstack',
-		'logo'  => 'weatherstack.png',
-		'lien'  => 'https://www.weatherstack.com/',
+		'titre' => 'Powered by Dark Sky',
+		'logo'  => 'darksky.png',
+		'lien'  => 'https://darksky.net/poweredby/',
 	),
 	'termes'         => array(
 		'titre' => 'Terms of Service',
-		'lien'  => 'https://weatherstack.com/terms'
+		'lien'  => 'https://darksky.net/dev/docs/terms'
 	),
 	'enregistrement' => array(
-		'titre'      => 'Signup Free Plan',
-		'lien'       => 'https://weatherstack.com/signup/free',
+		'titre'      => 'Register',
+		'lien'       => 'https://darksky.net/dev/register',
 		'taille_cle' => 32
 	),
 	'offres'         => array(
-		'titre'   => 'Pricing',
-		'lien'    => 'https://weatherstack.com/product',
+		'titre'   => 'Dead Simple Pricing',
+		'lien'    => 'https://darksky.net/dev',
 		'limites' => array(
-			'month' => 1000
+			'day' => 1000
 		),
 	),
 	'langues' => array(
 		'disponibles' => array(
-			'ar'     => 'ar',
-			'bg'     => 'bg',
-			'bn'     => 'bn',
-			'cs'     => 'cs',
-			'da'     => 'da',
-			'de'     => 'de',
-			'el'     => 'el',
-			'en'     => 'en',
-			'es'     => 'es',
-			'fi'     => 'fi',
-			'fr'     => 'fr',
-			'hi'     => 'hi',
-			'hu'     => 'hu',
-			'it'     => 'it',
-			'ja'     => 'ja',
-			'jv'     => 'jv',
-			'ko'     => 'ko',
-			'mr'     => 'mr',
-			'nl'     => 'nl',
-			'pa'     => 'pa',
-			'pl'     => 'pl',
-			'pt'     => 'pt',
-			'ro'     => 'ro',
-			'ru'     => 'ru',
-			'si'     => 'si',
-			'sk'     => 'sk',
-			'sr'     => 'sr',
-			'sv'     => 'sv',
-			'ta'     => 'ta',
-			'te'     => 'te',
-			'tr'     => 'tr',
-			'uk'     => 'uk',
-			'ur'     => 'ur',
-			'vi'     => 'vi',
-			'zh'     => 'zh',
-			'zh_tw'  => '',
-			'zh_cmn' => '',
-			'zh_wuu' => '',
-			'zh_hsn' => '',
-			'zh_yue' => '',
-			'zu'     => 'zu',
+			'ar'          => 'ar',
+			'az'          => 'az',
+			'be'          => 'be',
+			'bg'          => 'bg',
+			'bn'          => 'bn',
+			'bs'          => 'bs',
+			'ca'          => 'ca',
+			'cs'          => 'cs',
+			'da'          => 'da',
+			'de'          => 'de',
+			'el'          => 'el',
+			'en'          => 'en',
+			'eo'          => 'eo',
+			'es'          => 'es',
+			'et'          => 'et',
+			'fi'          => 'fi',
+			'fr'          => 'fr',
+			'he'          => 'he',
+			'hi'          => 'hi',
+			'hr'          => 'hr',
+			'hu'          => 'hu',
+			'id'          => 'id',
+			'is'          => 'is',
+			'it'          => 'it',
+			'ja'          => 'ja',
+			'ka'          => 'ka',
+			'kn'          => 'kn',
+			'ko'          => 'ko',
+			'kw'          => '',
+			'lv'          => 'lv',
+			'ml'          => 'ml',
+			'mr'          => 'mr',
+			'nb'          => 'nb',
+			'nl'          => 'nl',
+			'no'          => 'no',
+			'pa'          => 'pa',
+			'pl'          => 'pl',
+			'pt'          => 'pt',
+			'ro'          => 'ro',
+			'ru'          => 'ru',
+			'sk'          => 'sk',
+			'sl'          => 'sl',
+			'sr'          => 'sr',
+			'sv'          => 'sv',
+			'ta'          => 'ta',
+			'te'          => 'te',
+			'tet'         => '',
+			'tr'          => 'tr',
+			'uk'          => 'uk',
+			'ur'          => 'ur',
+			'x-pig-latin' => '',
+			'zh'          => 'zh',
+			'zh_tw'       => 'zh_tw',
 		),
 		'defaut'      => 'en'
 	),
 	'defauts' => array(
 		'inscription'   => '',
 		'unite'         => 'm',
-		'condition'     => 'wstack',
+		'condition'     => 'darksky',
 		'theme'         => '',
 		'theme_local'   => 'original',
 		'theme_weather' => 'sticker',
@@ -155,52 +166,52 @@ $GLOBALS['rainette_wstack_config']['service'] = array(
 
 // Configuration des données fournies par le service weatherstack pour le mode 'infos' en format JSON.
 // -- Seules les données non calculées sont configurées.
-$GLOBALS['rainette_wstack_config']['infos'] = array(
+$GLOBALS['rainette_darksky_config']['infos'] = array(
 	'periode_maj' => 86400,
 	'format_flux' => 'json',
-	'cle_base'    => array('location'),
+	'cle_base'    => array(),
 	'donnees'     => array(
 		// Lieu
-		'ville'     => array('cle' => array('name')),
-		'pays'      => array('cle' => array('country')),
+		'ville'     => array('cle' => array()),
+		'pays'      => array('cle' => array()),
 		'pays_iso2' => array('cle' => array()),
-		'region'    => array('cle' => array('region')),
+		'region'    => array('cle' => array()),
 		// Coordonnées
-		'longitude' => array('cle' => array('lon')),
-		'latitude'  => array('cle' => array('lat')),
+		'longitude' => array('cle' => array('longitude')),
+		'latitude'  => array('cle' => array('latitude')),
 		// Informations complémentaires : aucune configuration car ce sont des données calculées
 	),
 );
 
 // Configuration des données fournies par le service weatherstack pour le mode 'conditions'.
 // -- Seules les données non calculées sont configurées.
-$GLOBALS['rainette_wstack_config']['conditions'] = array(
+$GLOBALS['rainette_darksky_config']['conditions'] = array(
 	'periode_maj' => 10800,
 	'format_flux' => 'json',
-	'cle_base'    => array('current'),
+	'cle_base'    => array('currently'),
 	'donnees'     => array(
 		// Données d'observation
-		'derniere_maj'          => array('cle' => array('observation_time')),
+		'derniere_maj'          => array('cle' => array('time')),
 		'station'               => array('cle' => array()),
 		// Températures
 		'temperature_reelle'    => array('cle' => array('temperature')),
-		'temperature_ressentie' => array('cle' => array('feelslike')),
+		'temperature_ressentie' => array('cle' => array('apparentTemperature')),
 		// Données anémométriques
-		'vitesse_vent'          => array('cle' => array('wind_speed')),
-		'angle_vent'            => array('cle' => array('wind_degree')),
-		'direction_vent'        => array('cle' => array('wind_dir')),
+		'vitesse_vent'          => array('cle' => array('windSpeed')),
+		'angle_vent'            => array('cle' => array('windBearing')),
+		'direction_vent'        => array('cle' => array('')),
 		// Données atmosphériques : risque_uv est calculé
-		'precipitation'         => array('cle' => array('precip')),
+		'precipitation'         => array('cle' => array('')),
 		'humidite'              => array('cle' => array('humidity')),
-		'point_rosee'           => array('cle' => array()),
+		'point_rosee'           => array('cle' => array('dewPoint')),
 		'pression'              => array('cle' => array('pressure')),
 		'tendance_pression'     => array('cle' => array()),
 		'visibilite'            => array('cle' => array('visibility')),
-		'indice_uv'             => array('cle' => array('uv_index')),
+		'indice_uv'             => array('cle' => array('uvIndex')),
 		// Etats météorologiques natifs
-		'code_meteo'            => array('cle' => array('weather_code')),
-		'icon_meteo'            => array('cle' => array('weather_icons', 0)),
-		'desc_meteo'            => array('cle' => array('weather_descriptions', 0)),
+		'code_meteo'            => array('cle' => array('icon')),
+		'icon_meteo'            => array('cle' => array('icon', 0)),
+		'desc_meteo'            => array('cle' => array('summary', 0)),
 		'trad_meteo'            => array('cle' => array()),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
 	),
@@ -209,7 +220,7 @@ $GLOBALS['rainette_wstack_config']['conditions'] = array(
 // Configuration des données fournies par le service weatherstack pour le mode 'conditions'.
 // -- L'API fournit 10 jours de prévisions avec une périodicité systématique de 1h.
 // -- Seules les données non calculées sont configurées.
-$GLOBALS['rainette_wstack_config']['previsions'] = array(
+$GLOBALS['rainette_darksky_config']['previsions'] = array(
 	'periodicites'       => array(
 		24 => array('max_jours' => 10),
 		//		1 => array('max_jours' => 10)
@@ -217,36 +228,36 @@ $GLOBALS['rainette_wstack_config']['previsions'] = array(
 	'periodicite_defaut' => 24,
 	'periode_maj'        => 14400,
 	'format_flux'        => 'json',
-	'cle_base'           => array('forecast', 'forecastday'),
+	'cle_base'           => array('daily', 'data'),
 	'cle_heure'          => array(),
 	'structure_heure'    => false,
 	'donnees'            => array(
 		// Données d'observation
-		'date'                 => array('cle' => array('date')),
+		'date'                 => array('cle' => array('time')),
 		'heure'                => array('cle' => array('time')),
 		// Données astronomiques
-		'lever_soleil'         => array('cle' => array('astro', 'sunrise')),
-		'coucher_soleil'       => array('cle' => array('astro', 'sunset')),
+		'lever_soleil'         => array('cle' => array('sunriseTime')),
+		'coucher_soleil'       => array('cle' => array('sunsetTime')),
 		// Températures
-		'temperature'          => array('cle' => array('day', 'avgtemp_'), 'suffixe_unite' => array('id_cle' => 1, 'm' => 'c', 's' => 'f')),
-		'temperature_max'      => array('cle' => array('day', 'maxtemp_'), 'suffixe_unite' => array('id_cle' => 1, 'm' => 'c', 's' => 'f')),
-		'temperature_min'      => array('cle' => array('day', 'mintemp_'), 'suffixe_unite' => array('id_cle' => 1, 'm' => 'c', 's' => 'f')),
+		'temperature'          => array('cle' => array()),
+		'temperature_max'      => array('cle' => array('temperatureMax')),
+		'temperature_min'      => array('cle' => array('temperatureMin')),
 		// Données anémométriques
-		'vitesse_vent'         => array('cle' => array('day', 'maxwind_'), 'suffixe_unite' => array('id_cle' => 1, 'm' => 'kph', 's' => 'mph')),
-		'angle_vent'           => array('cle' => array()),
+		'vitesse_vent'         => array('cle' => array('windSpeed')),
+		'angle_vent'           => array('cle' => array('windBearing')),
 		'direction_vent'       => array('cle' => array()),
 		// Données atmosphériques : risque_uv est calculé
 		'risque_precipitation' => array('cle' => array()),
-		'precipitation'        => array('cle' => array('day', 'totalprecip_'), 'suffixe_unite' => array('id_cle' => 1, 'm' => 'mm', 's' => 'in')),
-		'humidite'             => array('cle' => array('day', 'avghumidity')),
-		'point_rosee'          => array('cle' => array()),
-		'pression'             => array('cle' => array()),
-		'visibilite'           => array('cle' => array('day', 'avgvis_'), 'suffixe_unite' => array('id_cle' => 1, 'm' => 'km', 's' => 'miles')),
-		'indice_uv'            => array('cle' => array('day', 'uv')),
+		'precipitation'        => array('cle' => array('')),
+		'humidite'             => array('cle' => array('humidity')),
+		'point_rosee'          => array('cle' => array('dewPoint')),
+		'pression'             => array('cle' => array('pressure')),
+		'visibilite'           => array('cle' => array('visibility')),
+		'indice_uv'            => array('cle' => array('uvIndex')),
 		// Etats météorologiques natifs
-		'code_meteo'           => array('cle' => array('day', 'condition', 'code')),
-		'icon_meteo'           => array('cle' => array('day', 'condition', 'icon')),
-		'desc_meteo'           => array('cle' => array('day', 'condition', 'text')),
+		'code_meteo'           => array('cle' => array('icon')),
+		'icon_meteo'           => array('cle' => array('icon')),
+		'desc_meteo'           => array('cle' => array('summary')),
 		'trad_meteo'           => array('cle' => array()),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
 	),
@@ -254,12 +265,12 @@ $GLOBALS['rainette_wstack_config']['previsions'] = array(
 
 // Configuration des données fournies par le service weatherstack en cas d'erreur.
 // -- Seules les données non calculées sont configurées.
-$GLOBALS['rainette_wstack_config']['erreurs'] = array(
+$GLOBALS['rainette_darksky_config']['erreurs'] = array(
 	'cle_base' => array('error'),
 	'donnees'  => array(
 		// Erreur
-		'code'    => array('cle' => array('code')),
-		'message' => array('cle' => array('info')),
+		'code'  => array('cle' => array('code')),
+		'error' => array('cle' => array('info')),
 	),
 );
 
@@ -280,10 +291,10 @@ $GLOBALS['rainette_wstack_config']['erreurs'] = array(
  * @return array
  *               Le tableau des données de configuration communes au service et propres au type de données demandé.
  */
-function wstack_service2configuration($mode) {
+function darksky_service2configuration($mode) {
 	// On merge la configuration propre au mode et la configuration du service proprement dite
 	// composée des valeurs par défaut de la configuration utilisateur et de paramètres généraux.
-	$config = array_merge($GLOBALS['rainette_wstack_config'][$mode], $GLOBALS['rainette_wstack_config']['service']);
+	$config = array_merge($GLOBALS['rainette_darksky_config'][$mode], $GLOBALS['rainette_darksky_config']['service']);
 
 	return $config;
 }
@@ -294,7 +305,7 @@ function wstack_service2configuration($mode) {
  *
  * @api
  *
- * @uses langue2code_wstack()
+ * @uses langue2code_darksky()
  *
  * @param string $lieu
  *                              Lieu pour lequel on acquiert les données météorologiques.
@@ -310,7 +321,7 @@ function wstack_service2configuration($mode) {
  * @return string
  *                URL complète de la requête.
  */
-function wstack_service2url($lieu, $mode, $periodicite, $configuration) {
+function darksky_service2url($lieu, $mode, $periodicite, $configuration) {
 
 	// Identification de la langue du resume.
 	include_spip('inc/rainette_normaliser');
@@ -321,22 +332,21 @@ function wstack_service2url($lieu, $mode, $periodicite, $configuration) {
 	// Néanmoins, la query a toujours la même forme; il n'est donc pas nécessaire de gérer le format.
 	$lieu_normalise = lieu_normaliser($lieu);
 
-	$url = _RAINETTE_WSTACK_URL_BASE;
-
+	// Exclusion des blocs inutiles en réponse à la requête.
+	$exclusions = 'minutely,hourly,alerts,flags,';
 	if ($mode == 'previsions') {
-		$url .= '/forecast';
+		$exclusions .= 'currently';
 	} else {
-		$url .= '/current';
+		$exclusions .= 'daily';
 	}
 
-	$url .= '?access_key=' . $configuration['inscription']
-//			. '&language=' . $code_langue
-			. '&units=' . ($configuration['unite'] == 'm' ? 'm' : 'f')
-			. '&query=' . $lieu_normalise;
-
-	if ($mode == 'previsions') {
-		$url .= '&forecast_days=' . $configuration['periodicites'][$periodicite]['max_jours'];
-	}
+	$url = _RAINETTE_DARKSKY_URL_BASE
+		. '/forecast'
+		. "/{$configuration['inscription']}"
+		. "/${lieu_normalise}"
+		. "?lang=${code_langue}"
+		. '&units=' . ($configuration['unite'] == 'm' ? 'si' : 'us')
+		. "exclude=${exclusions}";
 
 	return $url;
 }
@@ -346,13 +356,13 @@ function wstack_service2url($lieu, $mode, $periodicite, $configuration) {
  *
  * @return bool
  */
-function wstack_erreur_verifier($erreur) {
+function darksky_erreur_verifier($erreur) {
 
 	// Initialisation
 	$est_erreur = false;
 
 	// Une erreur est toujours décrite par un code et un message.
-	if (!empty($erreur['code']) and !empty($erreur['message'])) {
+	if (!empty($erreur['code']) and !empty($erreur['error'])) {
 		$est_erreur = true;
 	}
 
@@ -375,10 +385,10 @@ function wstack_erreur_verifier($erreur) {
  *               Tableau standardisé des conditions météorologiques complété par les données spécifiques
  *               du service.
  */
-function wstack_complement2conditions($tableau, $configuration) {
+function darksky_complement2conditions($tableau, $configuration) {
 	if ($tableau) {
 		// Compléter le tableau standard avec les états météorologiques calculés
-		etat2resume_wstack($tableau, $configuration);
+		etat2resume_darksky($tableau, $configuration);
 	}
 
 	return $tableau;
@@ -402,16 +412,16 @@ function wstack_complement2conditions($tableau, $configuration) {
  *               Tableau standardisé des conditions météorologiques complété par les données spécifiques
  *               du service.
  */
-function wstack_complement2previsions($tableau, $configuration, $index_periode) {
+function darksky_complement2previsions($tableau, $configuration, $index_periode) {
 	if (($tableau) and ($index_periode > -1)) {
 		// Convertir les informations exprimées en système métrique dans le systeme US si la
 		// configuration le demande
 		if ($configuration['unite'] == 's') {
-			metrique2imperial_wstack($tableau);
+			metrique2imperial_darksky($tableau);
 		}
 
 		// Compléter le tableau standard avec les états météorologiques calculés
-		etat2resume_wstack($tableau, $configuration);
+		etat2resume_darksky($tableau, $configuration);
 	}
 
 	return $tableau;
@@ -430,7 +440,7 @@ function wstack_complement2previsions($tableau, $configuration, $index_periode) 
  *
  * @return void
  */
-function metrique2imperial_wstack(&$tableau) {
+function metrique2imperial_darksky(&$tableau) {
 
 	// Seules la température, la température ressentie et la vitesse du vent sont fournies dans
 	// les deux systèmes.
@@ -461,7 +471,7 @@ function metrique2imperial_wstack(&$tableau) {
  *
  * @return void
  */
-function etat2resume_wstack(&$tableau, $configuration) {
+function etat2resume_darksky(&$tableau, $configuration) {
 	if ($tableau['code_meteo'] and $tableau['icon_meteo']) {
 		// Determination de l'indicateur jour/nuit. Pour ce service aucun indicateur n'est disponible.
 		// -> on utilise l'url de l'icone qui contient l'indication "/night/" pour la nuit

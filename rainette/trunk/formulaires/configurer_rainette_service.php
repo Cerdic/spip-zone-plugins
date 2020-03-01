@@ -10,11 +10,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * On surcharge la fonction de chargement par défaut afin de fournir le service, sa configuration
  * et son état d'exécution au formulaire.
  *
- * @param string $service
- *                        Alias du service.
+ * @param string $service Alias du service.
  *
- * @return array
- *               Tableau des données à charger par le formulaire.
+ * @return array Tableau des données à charger par le formulaire.
  */
 function formulaires_configurer_rainette_service_charger($service) {
 
