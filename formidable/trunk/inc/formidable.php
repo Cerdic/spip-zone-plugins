@@ -626,3 +626,16 @@ function formidable_hasher_id_auteur($id_auteur="") {
 	$pass = secret_du_site();
 	return md5($pass.$id_auteur);
 }
+
+/**
+ * Fonction de rappel pour array_walk_recursive
+ * pour automatiquement transformer les valeur numérique en strval
+ * comme SPIP le fait (mais par quel biais?) lorsqu'on envoie un tableau en environnement
+ * @param &$value
+ * @param $key
+**/
+function formidable_array_walk_recursive_strval(&$value, $key) {
+	if (!is_array($value)) {
+		$value = strval($value);
+	}
+}

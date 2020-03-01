@@ -4,7 +4,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
-
+include_spip('inc/autoriser');
 function formulaires_editer_formulaire_champs_charger($id_formulaire) {
 	$contexte = array();
 	$id_formulaire = intval($id_formulaire);
@@ -97,8 +97,13 @@ function formulaires_editer_formulaire_champs_verifier($id_formulaire) {
 		// On vérifie que les saisies en bases n'ont pas été modifiés depuis le début de la modification du formulaire
 		// Si tel est le cas, on demande de recommencer la modif du formulaire, avec la saisie en base
 		// Ne pas le faire si on est en train de restaurer une vieille version, puisque dans ce cas ce qui compte sera bien sur la veille version qu'on veut restaurer, et pas la version plus récente en base:)
-		$md5_saisies_anciennes = md5($saisies_anciennes);
+		// Attention à s'assurer que tout les elements du tableau soit bien soit des tableaux, soit un string
+		// En effet, le md5 du formulaire_initial est calculé à partir de ce qui est passé au squelette
+		// Or dès qu'une valeur est passé à un squelette, elle est changé en string, à cause du mode de compilation (?)
 		$saisies_anciennes = unserialize($saisies_anciennes);
+		$saisies_anciennes_str = $saisies_anciennes;
+		array_walk_recursive($saisies_anciennes_str, 'formidable_array_walk_recursive_strval');
+		$md5_saisies_anciennes = md5(serialize($saisies_anciennes_str));
 		if ($md5_precedent_formulaire_initial and $md5_precedent_formulaire_initial != $md5_saisies_anciennes and !_request('id_version')) {
 			session_set("constructeur_formulaire_formidable_$id_formulaire", $saisies_anciennes);
 			session_set("constructeur_formulaire_formidable_$id_formulaire".'_md5_formulaire_initial', $md5_saisies_anciennes);
