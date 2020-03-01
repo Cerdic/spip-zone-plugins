@@ -214,6 +214,8 @@ function rainette_debug_jeu_defaut() {
 		foreach ($services as $_service => $_nom) {
 			if (($_service == 'weather') or ($_service == 'wunderground')) {
 				$jeu[$_service] = 'FRXX0076';
+			} elseif ($_service == 'darksky') {
+				$jeu[$_service] = '48.85,2.35';
 			} else {
 				$jeu[$_service] = 'Paris,France';
 			}

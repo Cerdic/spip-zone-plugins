@@ -47,7 +47,7 @@
 						[(#ENV{service})_local], <:rainette:label_icone_local:>,
 						weather, <:rainette:label_icone_weather:>})]})]
 					[(#SET{disable,
-						[(#ARRAY{#ENV{service}, 0,
+						[(#ARRAY{#ENV{service}, [(#ENV{_themes/icone_api}|non)],
 						[(#ENV{service})_local], [(#ENV{_themes/locaux}|non)],
 						weather, [(#ENV{_themes/weather}|non)]})]})]
 					[(#SAISIE{radio, condition,

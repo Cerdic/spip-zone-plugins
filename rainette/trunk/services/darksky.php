@@ -21,10 +21,10 @@ if (!defined('_RAINETTE_DARKSKY_URL_BASE')) {
 $GLOBALS['rainette_darksky_config']['service'] = array(
 	'alias'   => 'darksky',
 	'nom'     => 'Dark Sky',
-	'actif'   => false,
+	'actif'   => true,
 	'credits' => array(
 		'titre' => 'Powered by Dark Sky',
-		'logo'  => 'darksky.png',
+		'logo'  => '',
 		'lien'  => 'https://darksky.net/poweredby/',
 	),
 	'termes'         => array(
@@ -104,63 +104,27 @@ $GLOBALS['rainette_darksky_config']['service'] = array(
 	'defauts' => array(
 		'inscription'   => '',
 		'unite'         => 'm',
-		'condition'     => 'darksky',
+		'condition'     => 'darksky_local',
 		'theme'         => '',
 		'theme_local'   => 'original',
 		'theme_weather' => 'sticker',
 	),
-	// @link http://plugins.trac.wordpress.org/browser/weather-and-weather-forecast-widget/trunk/gg_funx_.php
-	// Transcodage issu du plugin Wordpress weather forecast.
-	// TODO : a revoir, index ok, idem que wwo a priori
+	// Dark Sky ne gère pas le jour et la nuit pour les résumés ou icones :
+	// - de fait, on indique les mêmes codes pour le jour et la nuit
 	'transcodage_weather' => array(
-		113 => array(32, 31),
-		116 => array(30, 29),
-		119 => array(28, 27),
-		122 => array(26, 26),
-		143 => array(20, 20),
-		176 => array(40, 49),
-		179 => array(16, 16),
-		182 => array(18, 18),
-		185 => array(10, 10),
-		200 => array(38, 47),
-		227 => array(15, 15),
-		230 => array(16, 16),
-		248 => array(20, 20),
-		260 => array(20, 20),
-		263 => array(9, 9),
-		266 => array(9, 9),
-		281 => array(9, 9),
-		284 => array(10, 10),
-		293 => array(9, 9),
-		296 => array(9, 9),
-		299 => array(39, 45),
-		302 => array(11, 11),
-		305 => array(39, 45),
-		308 => array(40, 40),
-		311 => array(8, 8),
-		314 => array(8, 8),
-		317 => array(18, 18),
-		320 => array(18, 18),
-		323 => array(13, 13),
-		326 => array(13, 13),
-		329 => array(14, 14),
-		332 => array(14, 14),
-		335 => array(16, 16),
-		338 => array(16, 16),
-		350 => array(18, 18),
-		353 => array(9, 9),
-		356 => array(11, 11),
-		359 => array(11, 11),
-		362 => array(6, 6),
-		365 => array(6, 6),
-		368 => array(13, 13),
-		371 => array(14, 14),
-		374 => array(6, 6),
-		377 => array(6, 6),
-		386 => array(37, 47),
-		389 => array(38, 47),
-		392 => array(41, 46),
-		395 => array(41, 46)
+		'clear-day'           => array(32, 32),
+		'clear-night'         => array(31, 31),
+		'cloudy'              => array(26, 26),
+		'fog'                 => array(20, 20),
+		'partly-cloudy-day'   => array(30, 30),
+		'partly-cloudy-night' => array(29, 29),
+		'rain'                => array(11, 11),
+		'sleet'               => array(18, 18),
+		'snow'                => array(16, 16),
+		'wind'                => array(24, 24),
+		'hail'                => array(17, 17), // for future use
+		'thunderstorm'        => array(4, 4), // for future use
+		'tornado'             => array(0, 0)  // for future use
 	)
 );
 
@@ -199,9 +163,9 @@ $GLOBALS['rainette_darksky_config']['conditions'] = array(
 		// Données anémométriques
 		'vitesse_vent'          => array('cle' => array('windSpeed')),
 		'angle_vent'            => array('cle' => array('windBearing')),
-		'direction_vent'        => array('cle' => array('')),
+		'direction_vent'        => array('cle' => array()),
 		// Données atmosphériques : risque_uv est calculé
-		'precipitation'         => array('cle' => array('')),
+		'precipitation'         => array('cle' => array()),
 		'humidite'              => array('cle' => array('humidity')),
 		'point_rosee'           => array('cle' => array('dewPoint')),
 		'pression'              => array('cle' => array('pressure')),
@@ -210,8 +174,8 @@ $GLOBALS['rainette_darksky_config']['conditions'] = array(
 		'indice_uv'             => array('cle' => array('uvIndex')),
 		// Etats météorologiques natifs
 		'code_meteo'            => array('cle' => array('icon')),
-		'icon_meteo'            => array('cle' => array('icon', 0)),
-		'desc_meteo'            => array('cle' => array('summary', 0)),
+		'icon_meteo'            => array('cle' => array('icon')),
+		'desc_meteo'            => array('cle' => array('summary')),
 		'trad_meteo'            => array('cle' => array()),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
 	),
@@ -248,7 +212,7 @@ $GLOBALS['rainette_darksky_config']['previsions'] = array(
 		'direction_vent'       => array('cle' => array()),
 		// Données atmosphériques : risque_uv est calculé
 		'risque_precipitation' => array('cle' => array()),
-		'precipitation'        => array('cle' => array('')),
+		'precipitation'        => array('cle' => array()),
 		'humidite'             => array('cle' => array('humidity')),
 		'point_rosee'          => array('cle' => array('dewPoint')),
 		'pression'             => array('cle' => array('pressure')),
@@ -266,11 +230,11 @@ $GLOBALS['rainette_darksky_config']['previsions'] = array(
 // Configuration des données fournies par le service weatherstack en cas d'erreur.
 // -- Seules les données non calculées sont configurées.
 $GLOBALS['rainette_darksky_config']['erreurs'] = array(
-	'cle_base' => array('error'),
+	'cle_base' => array(),
 	'donnees'  => array(
 		// Erreur
-		'code'  => array('cle' => array('code')),
-		'error' => array('cle' => array('info')),
+		'code'    => array('cle' => array('code')),
+		'message' => array('cle' => array('error')),
 	),
 );
 
@@ -346,7 +310,7 @@ function darksky_service2url($lieu, $mode, $periodicite, $configuration) {
 		. "/${lieu_normalise}"
 		. "?lang=${code_langue}"
 		. '&units=' . ($configuration['unite'] == 'm' ? 'si' : 'us')
-		. "exclude=${exclusions}";
+		. "&exclude=${exclusions}";
 
 	return $url;
 }
@@ -387,6 +351,12 @@ function darksky_erreur_verifier($erreur) {
  */
 function darksky_complement2conditions($tableau, $configuration) {
 	if ($tableau) {
+		// Calcul de la direction du vent (16 points).
+		include_spip('inc/rainette_convertir');
+		$tableau['direction_vent'] = angle2direction($tableau['angle_vent']);
+		// On convertit aussi l'humidité en pourcentage car elle est fournie en float entre 0 et 1.
+		$tableau['humidite'] = 100 * $tableau['humidite'];
+
 		// Compléter le tableau standard avec les états météorologiques calculés
 		etat2resume_darksky($tableau, $configuration);
 	}
@@ -414,11 +384,14 @@ function darksky_complement2conditions($tableau, $configuration) {
  */
 function darksky_complement2previsions($tableau, $configuration, $index_periode) {
 	if (($tableau) and ($index_periode > -1)) {
-		// Convertir les informations exprimées en système métrique dans le systeme US si la
-		// configuration le demande
-		if ($configuration['unite'] == 's') {
-			metrique2imperial_darksky($tableau);
-		}
+		// Calcul de la direction du vent (16 points).
+		include_spip('inc/rainette_convertir');
+		$tableau['direction_vent'] = angle2direction($tableau['angle_vent']);
+		// On convertit aussi l'humidité en pourcentage car elle est fournie en float entre 0 et 1.
+		$tableau['humidite'] = 100 * $tableau['humidite'];
+		// On calcule aussi le risque UV car celui-ci n'est pas calculé systématiquement pour les prévisions car
+		// très rare.
+		$tableau['risque_uv'] = indice2risque_uv($tableau['indice_uv']);
 
 		// Compléter le tableau standard avec les états météorologiques calculés
 		etat2resume_darksky($tableau, $configuration);
@@ -435,28 +408,6 @@ function darksky_complement2previsions($tableau, $configuration, $index_periode)
  * @param mixed $tableau
  */
 
-/**
- * @param array $tableau
- *
- * @return void
- */
-function metrique2imperial_darksky(&$tableau) {
-
-	// Seules la température, la température ressentie et la vitesse du vent sont fournies dans
-	// les deux systèmes.
-	// Etant donnée que les tableaux sont normalisés, ils contiennent toujours les index de chaque
-	// donnée météo, il est donc inutile de tester leur existence.
-	include_spip('inc/rainette_convertir');
-	$tableau['visibilite'] = ($tableau['visibilite'])
-		? kilometre2mile($tableau['visibilite'])
-		: '';
-	$tableau['pression'] = ($tableau['pression'])
-		? millibar2inch($tableau['pression'])
-		: '';
-	$tableau['precipitation'] = ($tableau['precipitation'])
-		? millimetre2inch($tableau['precipitation'])
-		: '';
-}
 
 /**
  * Calcule les états en fonction des états météorologiques natifs fournis par le service.
@@ -472,10 +423,11 @@ function metrique2imperial_darksky(&$tableau) {
  * @return void
  */
 function etat2resume_darksky(&$tableau, $configuration) {
+
 	if ($tableau['code_meteo'] and $tableau['icon_meteo']) {
 		// Determination de l'indicateur jour/nuit. Pour ce service aucun indicateur n'est disponible.
-		// -> on utilise l'url de l'icone qui contient l'indication "/night/" pour la nuit
-		if (strpos($tableau['icon_meteo'], '/night/') === false) {
+		// -> on ne se sert cependant pas de cet indicateur pour l'icone qui lui est commun.
+		if (strpos($tableau['icon_meteo'], '-night') === false) {
 			// C'est le jour
 			$tableau['periode'] = 0;
 		} else {
@@ -494,36 +446,27 @@ function etat2resume_darksky(&$tableau, $configuration) {
 		// -- on stocke le code afin de le fournir en alt dans la balise img
 		$tableau['icone'] = array();
 		$tableau['icone']['code'] = $tableau['code_meteo'];
-		// -- on calcule le chemin complet de l'icone.
-		if ($configuration['condition'] == $configuration['alias']) {
-			// On affiche l'icône natif fourni par le service et désigné par son url
-			// en faisant une copie locale dans IMG/.
-			include_spip('inc/distant');
-			$tableau['icone']['source'] = copie_locale($tableau['icon_meteo']);
+
+		// -- on calcule le chemin complet de l'icone. Le service ne founit pas d'icone via l'API.
+		include_spip('inc/rainette_normaliser');
+		if ($configuration['condition'] == "{$configuration['alias']}_local") {
+			// On affiche un icône d'un thème local compatible avec Dark Sky.
+			// Les icônes sont rangés dans themes/$service/$theme_local/. Pas de distinction en fonction de
+			// la période.
+			$chemin = icone_local_normaliser(
+				"{$tableau['icon_meteo']}.png",
+				$configuration['alias'],
+				$configuration['theme_local']
+			);
 		} else {
-			include_spip('inc/rainette_normaliser');
-			if ($configuration['condition'] == "{$configuration['alias']}_local") {
-				// On affiche un icône d'un thème local compatible avec APIXU.
-				// Les icônes sont rangés dans themes/$service/$theme_local/$periode où periode vaut 'day' ou 'night'.
-				// Les icônes APIXU sont les mêmes que ceux de wwo, seuls le code météo change. Néanmoins, le service
-				// APIXU renvoi dans la donnée 'icon_meteo' le code wwo que l'on peut utiliser pour construire l'icone.
-				$chemin = icone_local_normaliser(
-					basename($tableau['icon_meteo']),
-					$configuration['alias'],
-					$configuration['theme_local'],
-					$tableau['periode'] == 0 ? 'day' : 'night'
-				);
-			} else {
-				// On affiche l'icône correspondant au code météo transcodé dans le système weather.com.
-				$chemin = icone_weather_normaliser(
-					$tableau['code_meteo'],
-					$configuration['theme_weather'],
-					$configuration['transcodage_weather'],
-					$tableau['periode']
-				);
-			}
-			include_spip('inc/utils');
-			$tableau['icone']['source'] = find_in_path($chemin);
+			// On affiche l'icône correspondant au code météo transcodé dans le système weather.com.
+			$chemin = icone_weather_normaliser(
+				$tableau['code_meteo'],
+				$configuration['theme_weather'],
+				$configuration['transcodage_weather']
+			);
 		}
+		include_spip('inc/utils');
+		$tableau['icone']['source'] = find_in_path($chemin);
 	}
 }

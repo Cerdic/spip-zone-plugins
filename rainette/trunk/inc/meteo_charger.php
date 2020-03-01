@@ -38,12 +38,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *                            - `0`, pour les modes `conditions` et `infos`
  * @param string $service
  *                            Le nom abrégé du service :
- *                            - `weather` pour le weather.com, la valeur par défaut car elle ne nécessite aucune inscription
- *                            - `wwo` pour World Weather Online
- *                            - `wunderground` pour Wunderground
- *                            - `owm` pour Open Weather Map
- *                            - `apixu` pour APIXU
+ *                            - `owm` pour Open Weather Map, la valeur par défaut car elle propose un plan gratuit
  *                            - `weatherbit` pour Weatherbit.io
+ *                            - `wstack` pour WeatherStack qui a remplacé APIXU
+ *                            - `darksky` pour Dark Sky
+ *                            - `wwo` pour World Weather Online
  *
  * @return array
  *               Le contenu du fichier cache contenant les données à jour demandées.

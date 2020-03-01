@@ -56,6 +56,7 @@ function formulaires_configurer_rainette_service_charger($service) {
 	}
 
 	// Gestion des thèmes locaux et distants.
+	$valeurs['_themes']['icone_api'] = in_array($service, array('weather', 'darksky')) ? false : true;
 	$valeurs['_themes']['distants'] = rainette_lister_themes($service, 'api');
 	$valeurs['_themes']['locaux'] = rainette_lister_themes($service, 'local');
 	$valeurs['_themes']['weather'] = !in_array($service, array('weather', 'owm', 'weatherbit'))

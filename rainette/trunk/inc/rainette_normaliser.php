@@ -56,7 +56,7 @@ $GLOBALS['rainette_config']['conditions'] = array(
 	'direction_vent'        => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_anemometriques'),
 	// Données atmosphériques
 	'precipitation'         => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'precipitation', 'groupe' => 'donnees_atmospheriques'),
-	'humidite'              => array('origine' => 'service', 'type_php' => 'int', 'type_unite' => 'pourcentage', 'groupe' => 'donnees_atmospheriques'),
+	'humidite'              => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'pourcentage', 'groupe' => 'donnees_atmospheriques'),
 	'point_rosee'           => array('origine' => 'service', 'type_php' => 'int', 'type_unite' => 'temperature', 'groupe' => 'donnees_atmospheriques'),
 	'pression'              => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'pression', 'groupe' => 'donnees_atmospheriques'),
 	'tendance_pression'     => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_atmospheriques'),
@@ -92,7 +92,7 @@ $GLOBALS['rainette_config']['previsions'] = array(
 	// Données atmosphériques
 	'risque_precipitation' => array('origine' => 'service', 'type_php' => 'int', 'type_unite' => 'pourcentage', 'rangement' => 'heure', 'groupe' => 'donnees_atmospheriques'),
 	'precipitation'        => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'precipitation', 'rangement' => 'heure', 'groupe' => 'donnees_atmospheriques'),
-	'humidite'             => array('origine' => 'service', 'type_php' => 'int', 'type_unite' => 'pourcentage', 'rangement' => 'heure', 'groupe' => 'donnees_atmospheriques'),
+	'humidite'             => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'pourcentage', 'rangement' => 'heure', 'groupe' => 'donnees_atmospheriques'),
 	'point_rosee'          => array('origine' => 'service', 'type_php' => 'int', 'type_unite' => 'temperature', 'rangement' => 'heure', 'groupe' => 'donnees_atmospheriques'),
 	'pression'             => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'pression', 'rangement' => 'heure', 'groupe' => 'donnees_atmospheriques'),
 	'visibilite'           => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'distance', 'rangement' => 'heure', 'groupe' => 'donnees_atmospheriques'),
