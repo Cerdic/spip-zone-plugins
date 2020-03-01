@@ -355,22 +355,28 @@ function ezcache_cache_formulaire_charger($plugin, $options, $configuration) {
 	$informer = chercher_filtre('info_plugin');
 	$valeurs['_nom_plugin'] = $informer($plugin, 'nom', true);
 
+	// On répertorie les caches pour vérifier qu'ils existent. Si non, on n'appelle aucune fonction spécifique.
+	$valeurs['_caches'] = array();
+	$caches = cache_repertorier($plugin, array());
+
 	// Le plugin utilisateur peut fournir un service propre pour construire le tableau des valeurs du formulaire.
-	if ($charger = cache_service_chercher($plugin, 'cache_formulaire_charger')) {
-		$valeurs_plugin = $charger($plugin, $options, $configuration);
-		if ($valeurs_plugin) {
-			$valeurs = array_merge($valeurs, $valeurs_plugin);
+	if ($caches) {
+		if ($charger = cache_service_chercher($plugin, 'cache_formulaire_charger')) {
+			$valeurs_plugin = $charger($plugin, $options, $configuration);
+			if ($valeurs_plugin) {
+				$valeurs = array_merge($valeurs, $valeurs_plugin);
+			}
+		} else {
+			// On présente simplement les fichiers caches en ordre alphabétique en visualisant uniquement
+			// le sous-dossuer éventuel et le nom du fichier sans décomposition.
+			// On construit un pseudo groupe unique sans titre dont l'id est le préfixe du plugin, ce qui permet de gérer
+			// automatiquement les regroupements spécifiques de caches si besoin (par exemple, par services météo pour
+			// Rainette).
+			$valeurs['_caches'][$plugin] = array(
+				'titre' => '',
+				'liste' => $caches
+			);
 		}
-	} else {
-		// On présente simplement les fichiers caches en ordre alphabétique en visualisant uniquement
-		// le sous-dossuer éventuel et le nom du fichier sans décomposition.
-		// On construit un pseudo groupe unique sans titre dont l'id est le préfixe du plugin, ce qui permet de gérer
-		// automatiquement les regroupements spécifiques de caches si besoin (par exemple, par services météo pour
-		// Rainette).
-		$valeurs['_caches'][$plugin] = array(
-			'titre' => '',
-			'liste' => cache_repertorier($plugin, array())
-		);
 	}
 
 	return $valeurs;
