@@ -148,8 +148,11 @@ function formulaires_editer_formulaire_champs_traiter($id_formulaire) {
 		$err = objet_modifier('formulaire', $id_formulaire, array('saisies' => serialize($saisies_nouvelles)));
 
 		// Si c'est bon on appelle d'éventuelles fonctions d'update des traitements
+		// On reinitialise aussi les sessions
 		// puis on renvoie vers la config des traitements
 		if (!$err) {
+			session_set("constructeur_formulaire_formidable_$id_formulaire");
+			session_set("constructeur_formulaire_formidable_$id_formulaire".'_md5_formulaire_initial');
 			// On va chercher les traitements
 			$traitements = unserialize(sql_getfetsel(
 				'traitements',
