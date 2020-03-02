@@ -381,8 +381,8 @@ function owm_erreur_verifier($erreur) {
 function owm_complement2conditions($tableau, $configuration) {
 
 	if ($tableau) {
-		// Calcul de la direction du vent (16 points), celle-ci n'étant pas fournie nativement par owm
 		include_spip('inc/rainette_convertir');
+		// Calcul de la direction du vent (16 points), celle-ci n'étant pas fournie nativement par owm
 		$tableau['direction_vent'] = angle2direction($tableau['angle_vent']);
 		// On convertit aussi la visibilité en km car elle est fournie en mètres.
 		$tableau['visibilite'] = metre2kilometre($tableau['visibilite']);
@@ -430,6 +430,7 @@ function owm_complement2previsions($tableau, $configuration, $index_periode) {
 
 		// Vitesse du vent en km/h plutôt qu'en m/s si on est en système métrique.
 		if ($configuration['unite'] == 'm') {
+			include_spip('inc/rainette_convertir');
 			$tableau['vitesse_vent'] = metre_seconde2kilometre_heure($tableau['vitesse_vent']);
 		}
 
