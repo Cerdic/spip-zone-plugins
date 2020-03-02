@@ -186,8 +186,7 @@ $GLOBALS['rainette_darksky_config']['conditions'] = array(
 // -- Seules les données non calculées sont configurées.
 $GLOBALS['rainette_darksky_config']['previsions'] = array(
 	'periodicites'       => array(
-		24 => array('max_jours' => 10),
-		//		1 => array('max_jours' => 10)
+		24 => array('max_jours' => 7),
 	),
 	'periodicite_defaut' => 24,
 	'periode_maj'        => 14400,
@@ -248,14 +247,13 @@ $GLOBALS['rainette_darksky_config']['erreurs'] = array(
  *
  * @api
  *
- * @param string $mode
- *                     Type de données météorologiques. Les valeurs possibles sont `infos`, `conditions` ou `previsions`.
+ * @param string $mode Type de données météorologiques. Les valeurs possibles sont `infos`, `conditions` ou `previsions`.
  *                     La périodicité n'est pas nécessaire car la configuration est indifférente à ce paramètre.
  *
- * @return array
- *               Le tableau des données de configuration communes au service et propres au type de données demandé.
+ * @return array Le tableau des données de configuration communes au service et propres au type de données demandé.
  */
 function darksky_service2configuration($mode) {
+
 	// On merge la configuration propre au mode et la configuration du service proprement dite
 	// composée des valeurs par défaut de la configuration utilisateur et de paramètres généraux.
 	$config = array_merge($GLOBALS['rainette_darksky_config'][$mode], $GLOBALS['rainette_darksky_config']['service']);
@@ -271,19 +269,14 @@ function darksky_service2configuration($mode) {
  *
  * @uses langue2code_darksky()
  *
- * @param string $lieu
- *                              Lieu pour lequel on acquiert les données météorologiques.
- * @param string $mode
- *                              Type de données météorologiques. Les valeurs possibles sont `infos`, `conditions` ou `previsions`.
- * @param int    $periodicite
- *                              La périodicité horaire des prévisions :
- *                              - `24`, `12`, `6`, `3` ou `1`, pour le mode `previsions`
+ * @param string $lieu          Lieu pour lequel on acquiert les données météorologiques.
+ * @param string $mode          Type de données météorologiques. Les valeurs possibles sont `infos`, `conditions` ou `previsions`.
+ * @param int    $periodicite   La périodicité horaire des prévisions :
+ *                              - `24` pour le mode `previsions`
  *                              - `0`, pour les modes `conditions` et `infos`
- * @param array  $configuration
- *                              Configuration complète du service, statique et utilisateur.
+ * @param array  $configuration Configuration complète du service, statique et utilisateur.
  *
- * @return string
- *                URL complète de la requête.
+ * @return string URL complète de la requête.
  */
 function darksky_service2url($lieu, $mode, $periodicite, $configuration) {
 
@@ -316,7 +309,9 @@ function darksky_service2url($lieu, $mode, $periodicite, $configuration) {
 }
 
 /**
- * @param array $erreur
+ * Vérifie si une erreur a été renvoyée dans la réponse du service.
+ *
+ * @param array $erreur Bloc d'erreur du service avant normalisation.
  *
  * @return bool
  */
@@ -339,23 +334,26 @@ function darksky_erreur_verifier($erreur) {
  *
  * @api
  *
- * @param array $tableau
- *                             Tableau standardisé des conditions contenant uniquement les données fournies sans traitement
+ * @param array $tableau       Tableau standardisé des conditions contenant uniquement les données fournies sans traitement
  *                             par le service.
- * @param array $configuration
- *                             Configuration complète du service, statique et utilisateur.
+ * @param array $configuration Configuration complète du service, statique et utilisateur.
  *
- * @return array
- *               Tableau standardisé des conditions météorologiques complété par les données spécifiques
+ * @return array Tableau standardisé des conditions météorologiques complété par les données spécifiques
  *               du service.
  */
 function darksky_complement2conditions($tableau, $configuration) {
+
 	if ($tableau) {
-		// Calcul de la direction du vent (16 points).
 		include_spip('inc/rainette_convertir');
+		// Calcul de la direction du vent (16 points).
 		$tableau['direction_vent'] = angle2direction($tableau['angle_vent']);
 		// On convertit aussi l'humidité en pourcentage car elle est fournie en float entre 0 et 1.
 		$tableau['humidite'] = 100 * $tableau['humidite'];
+
+		// Vitesse du vent en km/h plutôt qu'en m/s si on est en système métrique.
+		if ($configuration['unite'] == 'm') {
+			$tableau['vitesse_vent'] = metre_seconde2kilometre_heure($tableau['vitesse_vent']);
+		}
 
 		// Compléter le tableau standard avec les états météorologiques calculés
 		etat2resume_darksky($tableau, $configuration);
@@ -370,19 +368,16 @@ function darksky_complement2conditions($tableau, $configuration) {
  *
  * @api
  *
- * @param array $tableau
- *                             Tableau standardisé des conditions contenant uniquement les données fournies sans traitement
+ * @param array $tableau       Tableau standardisé des conditions contenant uniquement les données fournies sans traitement
  *                             par le service.
- * @param array $configuration
- *                             Configuration complète du service, statique et utilisateur.
- * @param int   $index_periode
- *                             Index où trouver et ranger les données. Cet index n'est pas utilisé pour les conditions
+ * @param array $configuration Configuration complète du service, statique et utilisateur.
+ * @param int   $index_periode Index où trouver et ranger les données. Cet index n'est pas utilisé pour les conditions
  *
- * @return array
- *               Tableau standardisé des conditions météorologiques complété par les données spécifiques
+ * @return array Tableau standardisé des conditions météorologiques complété par les données spécifiques
  *               du service.
  */
 function darksky_complement2previsions($tableau, $configuration, $index_periode) {
+
 	if (($tableau) and ($index_periode > -1)) {
 		// Calcul de la direction du vent (16 points).
 		include_spip('inc/rainette_convertir');
@@ -392,6 +387,11 @@ function darksky_complement2previsions($tableau, $configuration, $index_periode)
 		// On calcule aussi le risque UV car celui-ci n'est pas calculé systématiquement pour les prévisions car
 		// très rare.
 		$tableau['risque_uv'] = indice2risque_uv($tableau['indice_uv']);
+
+		// Vitesse du vent en km/h plutôt qu'en m/s si on est en système métrique.
+		if ($configuration['unite'] == 'm') {
+			$tableau['vitesse_vent'] = metre_seconde2kilometre_heure($tableau['vitesse_vent']);
+		}
 
 		// Compléter le tableau standard avec les états météorologiques calculés
 		etat2resume_darksky($tableau, $configuration);
@@ -404,21 +404,16 @@ function darksky_complement2previsions($tableau, $configuration, $index_periode)
  * ---------------------------------------------------------------------------------------------
  * Les fonctions qui suivent sont des utilitaires uniquement appelées par les fonctions de l'API
  * ---------------------------------------------------------------------------------------------.
- *
- * @param mixed $tableau
  */
-
 
 /**
  * Calcule les états en fonction des états météorologiques natifs fournis par le service.
  *
  * @internal
  *
- * @param array $tableau
- *                             Tableau standardisé des conditions contenant uniquement les données fournies sans traitement
+ * @param array $tableau       Tableau standardisé des conditions contenant uniquement les données fournies sans traitement
  *                             par le service. Le tableau est mis à jour et renvoyé à l'appelant.
- * @param array $configuration
- *                             Configuration complète du service, statique et utilisateur.
+ * @param array $configuration Configuration complète du service, statique et utilisateur.
  *
  * @return void
  */

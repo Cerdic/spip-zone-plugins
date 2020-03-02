@@ -5,11 +5,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
- * @param int $angle
- *                   Angle du vent exprimé en degrés.
+ * @param int $angle Angle du vent exprimé en degrés.
  *
- * @return string
- *                Direction du vent en abrégée anglais standard selon 16 directions.
+ * @return string Direction du vent en abrégée anglais standard selon 16 directions.
  */
 function angle2direction($angle) {
 	static $liste_directions = array(
@@ -44,11 +42,9 @@ function angle2direction($angle) {
 }
 
 /**
- * @param int $indice_uv
- *                       Entier représentant l'indice UV
+ * @param int $indice_uv Entier représentant l'indice UV
  *
- * @return string
- *                Chaine représentant le risque lié à l'indice UV. Cette chaine permet de calculer
+ * @return string Chaine représentant le risque lié à l'indice UV. Cette chaine permet de calculer
  *                l'item de langue du risque dans la langue requise.
  */
 function indice2risque_uv($indice_uv) {
@@ -73,11 +69,9 @@ function indice2risque_uv($indice_uv) {
 /**
  * Conversion des kilomètres en miles.
  *
- * @param float $kilometre
- *                         La valeur réelle en kilomètres.
+ * @param float $kilometre La valeur réelle en kilomètres.
  *
- * @return float
- *               La valeur réelle correspondante convertie en miles
+ * @return float La valeur réelle correspondante convertie en miles
  */
 function kilometre2mile($kilometre) {
 	return 0.6215 * $kilometre;
@@ -86,11 +80,9 @@ function kilometre2mile($kilometre) {
 /**
  * Conversion des températures celsius en farenheit.
  *
- * @param int $celsius
- *                     La valeur réelle en degrés celsius.
+ * @param int $celsius La valeur réelle en degrés celsius.
  *
- * @return float
- *               La valeur réelle correspondante convertie en farenheit.
+ * @return float La valeur réelle correspondante convertie en farenheit.
  */
 function celsius2farenheit($celsius) {
 	return $celsius * 9 / 5 + 32;
@@ -99,11 +91,9 @@ function celsius2farenheit($celsius) {
 /**
  * Conversion des millimètres en pouces.
  *
- * @param float $millimetre
- *                          La valeur réelle en millimètres
+ * @param float $millimetre La valeur réelle en millimètres
  *
- * @return float
- *               La valeur réelle correspondante convertie en pouces.
+ * @return float La valeur réelle correspondante convertie en pouces.
  */
 function millimetre2inch($millimetre) {
 	return $millimetre / 25.4;
@@ -112,11 +102,9 @@ function millimetre2inch($millimetre) {
 /**
  * Conversion des pressions millibar en pouces.
  *
- * @param float $millibar
- *                        La valeur réelle en millibars
+ * @param float $millibar La valeur réelle en millibars
  *
- * @return float
- *               La valeur réelle correspondante convertie en pouces.
+ * @return float La valeur réelle correspondante convertie en pouces.
  */
 function millibar2inch($millibar) {
 	return $millibar / 33.86;
@@ -128,13 +116,10 @@ function millibar2inch($millibar) {
  * Le calcul n'a de sens que pour des températures réelles supérieures à -50°C et inférieures à 10°C.
  * Au-delà de ces valeurs, la fonction renvoie la température réelle fournie en entrée.
  *
- * @param float $temperature
- *                            Température réelle mesurée en celsius.
- * @param float $vitesse_vent
- *                            Vitesse du vent en kilomètre par heure.
+ * @param float $temperature  Température réelle mesurée en celsius.
+ * @param float $vitesse_vent Vitesse du vent en kilomètre par heure.
  *
- * @return float
- *               Température ressentie arrondie en entier et exprimée en degrés celsius.
+ * @return float Température ressentie arrondie en entier et exprimée en degrés celsius.
  */
 function temperature2ressenti($temperature, $vitesse_vent) {
 	if (($temperature >= -50) and ($temperature <= 10)) {
@@ -154,12 +139,21 @@ function temperature2ressenti($temperature, $vitesse_vent) {
 /**
  * Conversion en kilomètres d'une valeur en mètres.
  *
- * @param int $metre
- *                   La valeur entière en mètres
+ * @param int $metre La valeur entière en mètres
  *
- * @return float
- *               La valeur correspondante convertie en kilomètres.
+ * @return float La valeur correspondante convertie en kilomètres.
  */
 function metre2kilometre($metre) {
 	return $metre / 1000;
+}
+
+/**
+ * Conversion en kilomètres par heure d'une valeur en mètres par seconde.
+ *
+ * @param float $vitesse_vent Vitesse du vent en mètres par seconde.
+ *
+ * @return float La valeur correspondante convertie en kilomètres par heure.
+ */
+function metre_seconde2kilometre_heure($vitesse_vent) {
+	return ($vitesse_vent * 3600) / 1000;
 }

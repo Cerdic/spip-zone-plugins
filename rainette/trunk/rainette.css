@@ -60,6 +60,7 @@
 	text-align: center;
 	font-weight: bold;
 	padding: 1em 0 0.25em;
+	clear: both;
 }
 .rainette_conditions .maj {
 	float: left;
