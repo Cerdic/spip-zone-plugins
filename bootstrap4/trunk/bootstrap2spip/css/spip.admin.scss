@@ -197,3 +197,37 @@ html {
     }
   }
 }
+
+$enable-admin-buttons: false !default;
+@if $enable-admin-buttons {
+  .spip-admin-bloc, .spip-admin-float {
+    font-size: 0.7rem;
+    top:auto !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    .spip-admin-boutons {
+      background-color: $gray-600;
+      border-radius: $border-radius-sm 0 0 $border-radius-sm;
+      display: block;
+      margin: 5px 0;
+      font-variant: small-caps;
+      text-transform: capitalize;
+    }
+    &:before {
+      content:'';
+      display: block;
+      background: $gray-500;
+      color: $white;
+      padding: 10px;
+      position: fixed;
+      bottom:0;
+      left: 0;
+      font-weight: bold;
+      @each $breakpoint in map-keys($grid-breakpoints) {
+        @include media-breakpoint-up($breakpoint) {
+          content: '#{$breakpoint}';
+        }
+      }
+    }
+  }
+}
