@@ -191,7 +191,7 @@ $GLOBALS['rainette_owm_config']['conditions'] = array(
 		'station'               => array('cle' => array()),
 		// Températures
 		'temperature_reelle'    => array('cle' => array('main', 'temp')),
-		'temperature_ressentie' => array('cle' => array()),
+		'temperature_ressentie' => array('cle' => array('main', 'feels_like')),
 		// Données anémométriques
 		'vitesse_vent'          => array('cle' => array('wind', 'speed')),
 		'angle_vent'            => array('cle' => array('wind', 'deg')),
@@ -218,7 +218,6 @@ $GLOBALS['rainette_owm_config']['conditions'] = array(
 $GLOBALS['rainette_owm_config']['previsions'] = array(
 	'periodicites'       => array(
 		24 => array('max_jours' => 16),
-		//		3                      => array('max_jours' => 5)
 	),
 	'periodicite_defaut' => 24,
 	'periode_maj'        => 3600 * 2,
@@ -234,7 +233,7 @@ $GLOBALS['rainette_owm_config']['previsions'] = array(
 		'lever_soleil'         => array('cle' => array()),
 		'coucher_soleil'       => array('cle' => array()),
 		// Températures
-		'temperature'          => array('cle' => array()),
+		'temperature'          => array('cle' => array('temp', 'day')),
 		'temperature_max'      => array('cle' => array('temp', 'max')),
 		'temperature_min'      => array('cle' => array('temp', 'min')),
 		// Données anémométriques
@@ -382,13 +381,16 @@ function owm_erreur_verifier($erreur) {
 function owm_complement2conditions($tableau, $configuration) {
 
 	if ($tableau) {
-		// Calcul de la température ressentie et de la direction du vent (16 points), celles-ci
-		// n'étant pas fournie nativement par owm
+		// Calcul de la direction du vent (16 points), celle-ci n'étant pas fournie nativement par owm
 		include_spip('inc/rainette_convertir');
-		$tableau['temperature_ressentie'] = temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']);
 		$tableau['direction_vent'] = angle2direction($tableau['angle_vent']);
 		// On convertit aussi la visibilité en km car elle est fournie en mètres.
 		$tableau['visibilite'] = metre2kilometre($tableau['visibilite']);
+
+		// Vitesse du vent en km/h plutôt qu'en m/s si on est en système métrique.
+		if ($configuration['unite'] == 'm') {
+			$tableau['vitesse_vent'] = metre_seconde2kilometre_heure($tableau['vitesse_vent']);
+		}
 
 		// Compléter le tableau standard avec les états météorologiques calculés
 		etat2resume_owm($tableau, $configuration);
@@ -424,6 +426,11 @@ function owm_complement2previsions($tableau, $configuration, $index_periode) {
 		// l'affichage.
 		if ($tableau['precipitation'] === '') {
 			$tableau['precipitation'] = 0;
+		}
+
+		// Vitesse du vent en km/h plutôt qu'en m/s si on est en système métrique.
+		if ($configuration['unite'] == 'm') {
+			$tableau['vitesse_vent'] = metre_seconde2kilometre_heure($tableau['vitesse_vent']);
 		}
 
 		// Compléter le tableau standard avec les états météorologiques calculés

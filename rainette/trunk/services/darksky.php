@@ -1,9 +1,9 @@
 <?php
 /**
  * Ce fichier contient la configuration et l'ensemble des fonctions implémentant le service Dark Sky (darksky).
- * Ce service est capable de fournir des données au format JSON.
+ * Ce service fournit des données au format JSON.
  *
- * @package SPIP\RAINETTE\SERVICES\WSTACK
+ * @package SPIP\RAINETTE\SERVICES\DARKSKY
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -11,7 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 if (!defined('_RAINETTE_DARKSKY_URL_BASE')) {
 	/**
-	 * URL de base (endpoint) des requêtes au service APIXU.
+	 * URL de base (endpoint) des requêtes au service Dark Sky.
 	 */
 	define('_RAINETTE_DARKSKY_URL_BASE', 'https://api.darksky.net');
 }
