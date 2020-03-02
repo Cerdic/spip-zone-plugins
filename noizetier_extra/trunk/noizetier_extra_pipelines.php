@@ -35,9 +35,13 @@ function noizetier_extra_formulaire_charger($flux) {
 
 		// Ajouter les saisies dans un fieldset 'affichage'.
 		$fieldset_affichage = false;
+		if (!is_array($flux['data']['_champs_noisette'])) {
+			$flux['data']['_champs_noisette'] = array(); // aukazou
+		}
 		foreach ($flux['data']['_champs_noisette'] as $k => $saisie) {
 			if (
-				$saisie['saisie'] === 'fieldset'
+				isset($saisie['saisie'])
+				and $saisie['saisie'] === 'fieldset'
 				and $saisie['options']['nom'] === 'affichage'
 			) {
 				$fieldset_affichage = true;
