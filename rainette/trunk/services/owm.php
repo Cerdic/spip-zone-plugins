@@ -78,7 +78,7 @@ $GLOBALS['rainette_owm_config']['service'] = array(
 		'inscription'   => '',
 		'unite'         => 'm',
 		'condition'     => 'owm',
-		'theme'         => '',
+		'theme'         => 'n',
 		'theme_local'   => '',
 		'theme_weather' => 'sticker',
 	),
@@ -491,18 +491,22 @@ function etat2resume_owm(&$tableau, $configuration) {
 			// On affiche l'icône natif fourni par le service et désigné par son url
 			// en faisant une copie locale dans IMG/.
 			include_spip('inc/distant');
-			$url = _RAINETTE_OWM_URL_BASE_ICONE . '/' . $tableau['icon_meteo'] . '.png';
+			$url = _RAINETTE_OWM_URL_BASE_ICONE
+				. (substr($configuration['theme'], 0, 1) == 'n' ? 'n' : '')
+				.  '/' . $tableau['icon_meteo']
+				. (substr($configuration['theme'], 1, 2) == '2x' ? '@2x' : '')
+				. '.png';
 			$tableau['icone']['source'] = copie_locale($url);
 		} else {
 			include_spip('inc/rainette_normaliser');
 			if ($configuration['condition'] == "{$configuration['alias']}_local") {
-				// On affiche un icône d'un thème local compatible avec OWM.
-				// TODO : à vérifier car aucun thème n'est pour l'instant disponible
+				// On affiche un icône d'un thème local compatible avec OWM. Inutile de considérer la période
+				// car le nom de l'icone désigne déjà la période.
 				$chemin = icone_local_normaliser(
 					"{$tableau['icon_meteo']}.png",
 					$configuration['alias'],
 					$configuration['theme_local'],
-					$tableau['periode'] == 0 ? 'day' : 'night');
+					0);
 			} else {
 				// On affiche l'icône correspondant au code météo transcodé dans le système weather.com.
 				$chemin = icone_weather_normaliser(

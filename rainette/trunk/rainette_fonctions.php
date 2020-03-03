@@ -397,10 +397,12 @@ function rainette_lister_themes($service, $source = 'local') {
 		if (strtolower($source) == 'api') {
 			// Certains services proposent des thèmes d'icones accessibles via l'API.
 			// C'est le cas de wunderground.
-			if ($service == 'wunderground') {
-				$cles = array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k');
+			if (in_array($service, array('wunderground', 'owm'))) {
+				$cles = $service == 'wunderground'
+					? array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k')
+					: array('n2x', 'n1x', 'o1x');
 				foreach ($cles as $_cle) {
-					$themes[$service][$source][$_cle] = _T("rainette:label_theme_wunderground_${_cle}");
+					$themes[$service][$source][$_cle] = _T("rainette:label_theme_${service}_${_cle}");
 				}
 			}
 		} else {
