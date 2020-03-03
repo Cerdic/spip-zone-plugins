@@ -143,6 +143,10 @@ function agenda_declarer_tables_objets_sql($tables) {
 		),
 		'texte_changer_statut' => 'agenda:texte_evenement_statut',
 		'champs_versionnes' => array('id_article', 'titre', 'descriptif', 'lieu', 'adresse', 'date_debut', 'date_fin', 'horaire', 'timezone_affiche', 'inscription', 'places'),
+		'parent' => array(
+			'type' => 'article',
+			'champ' => 'id_article',
+		),
 	);
 
 	//-- Jointures ----------------------------------------------------
