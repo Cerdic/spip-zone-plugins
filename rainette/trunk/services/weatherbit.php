@@ -35,7 +35,7 @@ $GLOBALS['rainette_weatherbit_config']['service'] = array(
 		'lien'  => 'https://www.weatherbit.io/',
 	),
 	'termes'         => array(
-		'titre' => 'Terms and Conditions',
+		'titre' => 'Terms of Service',
 		'lien' => 'https://www.weatherbit.io/terms'
 	),
 	'enregistrement' => array(
@@ -44,7 +44,7 @@ $GLOBALS['rainette_weatherbit_config']['service'] = array(
 		'taille_cle' => 32
 	),
 	'offres'         => array(
-		'titre' => 'Affordable Weather API plans',
+		'titre' => 'Weather API - Pricing',
 		'lien' => 'https://www.weatherbit.io/pricing',
 		'limites' => array(
 			'hour' => 75
@@ -162,8 +162,8 @@ $GLOBALS['rainette_weatherbit_config']['conditions'] = array(
 $GLOBALS['rainette_weatherbit_config']['previsions'] = array(
 	'periodicites'       => array(
 		24 => array('max_jours' => 16),
-		1 => array('max_jours' => 2),
-		3 => array('max_jours' => 5)
+		1  => array('max_jours' => 5),
+		3  => array('max_jours' => 5)
 	),
 	'periodicite_defaut' => 24,
 	'periode_maj'        => 14400,
@@ -173,7 +173,7 @@ $GLOBALS['rainette_weatherbit_config']['previsions'] = array(
 	'structure_heure'    => false,
 	'donnees'            => array(
 		// Données d'observation
-		'date'                 => array('cle' => array('datetime')),
+		'date'                 => array('cle' => array('valid_date')),
 		'heure'                => array('cle' => array()),
 		// Données astronomiques
 		'lever_soleil'         => array('cle' => array()),
@@ -350,6 +350,12 @@ function weatherbit_erreur_verifier($erreur) {
 function weatherbit_complement2conditions($tableau, $configuration) {
 
 	if ($tableau) {
+		// Vitesse du vent en km/h plutôt qu'en m/s si on est en système métrique.
+		if ($configuration['unite'] == 'm') {
+			include_spip('inc/rainette_convertir');
+			$tableau['vitesse_vent'] = metre_seconde2kilometre_heure($tableau['vitesse_vent']);
+		}
+
 		// Compléter le tableau standard avec les états météorologiques calculés
 		etat2resume_weatherbit($tableau, $configuration);
 	}
@@ -379,6 +385,12 @@ function weatherbit_complement2conditions($tableau, $configuration) {
 function weatherbit_complement2previsions($tableau, $configuration, $index_periode) {
 
 	if (($tableau) and ($index_periode > -1)) {
+		// Vitesse du vent en km/h plutôt qu'en m/s si on est en système métrique.
+		if ($configuration['unite'] == 'm') {
+			include_spip('inc/rainette_convertir');
+			$tableau['vitesse_vent'] = metre_seconde2kilometre_heure($tableau['vitesse_vent']);
+		}
+
 		// Compléter le tableau standard avec les états météorologiques calculés
 		etat2resume_weatherbit($tableau, $configuration);
 	}
