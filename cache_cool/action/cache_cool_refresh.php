@@ -9,6 +9,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 function action_cache_cool_refresh_dist(){
+	include_spip('inc/headers');
+	http_status(204); // No Content
 	// lever le flag pour dire que l'on peut utiliser cette action pour refresh
 	if (!isset($GLOBALS['meta']['cache_cool_action_refresh']) OR $GLOBALS['meta']['cache_cool_action_refresh']<$_SERVER['REQUEST_TIME']-86400){
 		ecrire_meta('cache_cool_action_refresh',$_SERVER['REQUEST_TIME']);
