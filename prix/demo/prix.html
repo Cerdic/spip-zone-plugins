@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="#LANG">
+<head>
+	<meta charset="#CHARSET">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>[(#PLUGIN{prix,nom})] : <:prix:icone_voir_demo|attribut_html:></title>
+	#INSERT_HEAD
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+	<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script> -->
+	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-tablesort@0.0.11/jquery.tablesort.min.js"></script>
+	<script>
+		$(function() {
+			$('.ui.dropdown').dropdown({
+				action: function(text, value) {
+					if (value) {
+						window.location = value;
+					}
+				}
+			});
+			$('table.ui.sortable').tablesort();
+		});
+	</script>
+	<style>
+		.page { padding: 3em 0; }
+		body h1.ui.header { margin-bottom: 3em; }
+	</style>
+</head>
+<body>
+	<main class="page">
+	<div class="ui text container">
+
+		<h1 class="ui center aligned header">
+			[(#CHEMIN{#PLUGIN{prix,logo}}|balise_img)][(#PLUGIN{prix,nom})] : <:prix:icone_voir_demo:>
+		</h1>
+
+		#SET{lesprix,#LISTE{"123456.789","9876.54","-2.99"}}
+		#SET{prix,#ENV{prix,#GET{lesprix/0}}|floatval}
+		#SET{options,#ENV{style}|?{#ARRAY{style,#ENV{style}},#ARRAY}}
+		<section class="section">
+
+			<h2 class="ui header">Formatage des prix</h2>
+
+			<p>Exemple de formatage des prix selon les devises et les langues.</p>
+
+			<pre class="ui violet inverted segment"><code class="ui code">\[\(\#VALEUR|prix_formater{EUR,fr-FR,\#GET{options}}\)\]</code></pre>
+
+			<table class="ui collapsing sortable table">
+				<thead>
+					<tr>
+						<th colspan="4" class="no-sort">
+							Langue :
+							<select class="ui dropdown">
+								<BOUCLE_langues(DATA) {source table, #REM|prix_lister_langues}>
+								<option value="[(#SELF|parametre_url{locale,#CLE}|attribut_html)]"[ (#CLE|=={#ENV{locale}}|oui)selected]>#VALEUR</option>
+								</BOUCLE_langues>
+							</select>
+							Prix :
+							<select class="ui dropdown">
+								<BOUCLE_prix(DATA) {source table, #GET{lesprix}}>
+								<option value="[(#SELF|parametre_url{prix,#VALEUR}|attribut_html)]"[ (#VALEUR|=={#GET{prix}}|oui)selected]>#VALEUR</option>
+								</BOUCLE_prix>
+							</select>
+							#SET{active,#ENV{style}|=={accounting}|?{active}}
+							#SET{param,#GET{active}|?{'',accounting}}
+							[<a href="(#SELF|parametre_url{style,#GET{param}})" class="ui toggle basic button[ (#GET{active})]">Format comptable</span>]
+						</th>
+					</tr>
+					<tr>
+						<th><:prix:label_devise_nom:></th>
+						<th><:prix:label_devise_code:></th>
+						<th><:prix:label_devise_symbole:></th>
+						<th>Prix formaté</th>
+					</tr>
+				</thead>
+				<tbody>
+				<BOUCLE_devises(DATA) {source table, #REM|prix_lister_devises} {par cle}>
+					<tr>
+						<td>#VALEUR{nom}</td>
+						<td>#VALEUR{code}</td>
+						<td>#VALEUR{symbole}</td>
+						<td class="right aligned">
+							[(#GET{prix}|prix_formater{#CLE,#ENV{locale},#GET{options}})]
+						</td>
+					</tr>
+				</BOUCLE_devises>
+				</tbody>
+			</table>
+
+		</section>
+
+	</div>
+</main>
+</body>
+</html>

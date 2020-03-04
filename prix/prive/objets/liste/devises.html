@@ -1,0 +1,38 @@
+[(#REM)
+
+	Liste des devises
+
+	Nb : il ne s'agit pas d'un objet SPIP
+
+]
+<B_liste_devises>
+#ANCRE_PAGINATION
+<div class="liste-objets devises">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{prix:info_1_devise,prix:info_nb_devises}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='code' scope='col'><:prix:label_devise_code:></th>
+			<th class='code_num' scope='col'><:prix:label_devise_code_num:></th>
+			<th class='symbole' scope='col'><:prix:label_devise_symbole:></th>
+			<th class='nom' scope='col'><:prix:label_devise_nom:></th>
+			<th class='fraction' scope='col'><:prix:label_devise_fraction:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_devises(DATA) {source table, #REM|prix_lister_devises} {pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='code principale'>#VALEUR{code}</td>
+			<td class='code_num secondaire'>#VALEUR{code_num}</td>
+			<td class='symbole secondaire'>#VALEUR{symbole}</td>
+			<td class='nom secondaire'>#VALEUR{nom}</td>
+			<td class='fraction secondaire'>#VALEUR{fraction}</td>
+		</tr>
+	</BOUCLE_liste_devises>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_devises>[
+<div class="liste-objets devises caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_devises>

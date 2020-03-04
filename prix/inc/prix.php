@@ -3,7 +3,7 @@
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-/*
+/**
  * Permet d'obtenir le prix HT d'un objet SPIP. C'est le résultat de cette fonction qui est utilisée pour calculer le prix TTC.
  *
  * @param string $objet
@@ -85,7 +85,7 @@ function inc_prix_ht_dist($objet, $id_objet, $options = array(), $serveur = ''){
 	return $prix_ht;
 }
 
-/*
+/**
  * Permet d'obtenir le prix final TTC d'un objet SPIP quel qu'il soit.
  *
  * @param string $objet

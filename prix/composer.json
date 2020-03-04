@@ -1,0 +1,19 @@
+{
+    "name": "spip-contrib-extensions/prix",
+    "description": "API pour connaître le prix d’un objet",
+    "type": "library",
+    "require": {
+        "commerceguys/intl": "^1.0"
+    },
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Les Développements Durables",
+            "homepage": "http://www.ldd.fr"
+        },
+        {
+            "name": "Mukt",
+            "homepage": "https://www.mukt.fr"
+        }
+    ]
+}

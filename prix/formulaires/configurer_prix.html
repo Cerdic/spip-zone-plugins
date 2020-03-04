@@ -1,0 +1,50 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:prix:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+		<form method="post" action="#ENV{action}"><div>
+			#ACTION_FORMULAIRE
+
+			<div class="editer-groupe">
+
+				[(#REM) Devise principale ]
+				#SET{name,devise_defaut}
+				#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+				#SET{defaut,#REM|prix_devise_defaut}
+				#SET{valeur,#ENV**{#GET{name}}|sinon{#GET{defaut}}}
+				<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="champ_#GET{name}"><:prix:cfg_devise_label:></label>
+					[<span class='erreur_message'>(#GET{erreurs})</span>]
+					<select class="select select2 chosen" name="#GET{name}" id="champ_#GET{name}">
+						<option value=""[ (#GET{valeur}|non)selected="selected"]><:prix:cfg_choisir_option:></option>
+						<BOUCLE_devises(DATA) {source table, #REM|prix_lister_devises}>
+						<option value="#CLE"[ (#CLE|=={#GET{valeur}}|oui)selected="selected"]>#VALEUR{nom}[ - (#CLE)][ - (#VALEUR{symbole})]</option>
+						</BOUCLE_devises>
+					</select>
+				</div>
+
+				[(#REM) Langue principale ]
+				#SET{name,langue_defaut}
+				#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+				#SET{defaut,#REM|prix_langue_defaut}
+				#SET{valeur,#ENV**{#GET{name}}|sinon{#GET{defaut}}}
+				<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="champ_#GET{name}"><:prix:cfg_locale_label:></label>
+					<p class="explication"><:prix:cfg_locale_explication:></p>
+					[<span class='erreur_message'>(#GET{erreurs})</span>]
+					<select class="select select2 chosen" name="#GET{name}" id="champ_#GET{name}">
+						<option value=""[ (#GET{valeur}|non)selected="selected"]><:prix:cfg_choisir_option:></option>
+						<BOUCLE_langues(DATA) {source table, #REM|prix_lister_langues}>
+						<option value="#CLE"[ (#CLE|=={#GET{valeur}}|oui)selected="selected"]>#VALEUR</option>
+						</BOUCLE_langues>
+					</select>
+				</div>
+
+			</div>
+
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+</div>
