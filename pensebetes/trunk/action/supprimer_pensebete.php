@@ -10,6 +10,13 @@
  */
  
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
+/**
+ * Action pour supprimer un Pense-bête
+ *
+ * @param  int    $id_pensebete    Identifiant de l'objet
+ * @return void
+**/
  
 function action_supprimer_pensebete_dist($id_pensebete=null){
 

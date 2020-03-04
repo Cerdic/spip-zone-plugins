@@ -123,9 +123,16 @@ $mes_saisies = array(
  *
  * Déclarer les champs postés et y intégrer les valeurs par défaut
  *
+ * @param int|string $id_pensebete identifiant de l'objet ou 'new' si absent.
+ * @param int $id_rubrique identifiant de la rubrique.
+ * @param string $retour lien pour le retour.
  * @param string $associer_objet
  *     Éventuel 'objet|x' indiquant de lier le mot créé à cet objet,
  *     tel que 'article|3'
+ * @param int $lier_trad 
+ * @param string $config_fonc 
+ * @param array $row 
+ * @param array $hidden 
  * @uses formulaires_editer_objet_charger()
  * @uses mes_saisies_pensebete()
  *
@@ -159,6 +166,17 @@ function formulaires_editer_pensebete_charger_dist($id_pensebete='new', $id_rubr
 
 /**
  * Identifier le formulaire en faisant abstraction des parametres qui ne representent pas l'objet edite
+ *
+ * @param int|string $id_pensebete identifiant de l'objet ou 'new' si absent.
+ * @param int $id_rubrique identifiant de la rubrique.
+ * @param string $retour lien pour le retour.
+ * @param string $associer_objet
+ *     Éventuel 'objet|x' indiquant de lier le mot créé à cet objet,
+ *     tel que 'article|3'
+ * @param int $lier_trad 
+ * @param string $config_fonc 
+ * @param array $row 
+ * @param array $hidden 
  */
 function formulaires_editer_pensebete_identifier_dist($id_pensebete='new', $id_rubrique=0, $retour='', $associer_objet, $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	return serialize(array(intval($id_pensebete), $associer_objet));
@@ -167,6 +185,16 @@ function formulaires_editer_pensebete_identifier_dist($id_pensebete='new', $id_r
 /**
  * Vérification du formulaire d'édition de pensebete
  *
+ * @param int|string $id_pensebete identifiant de l'objet ou 'new' si absent.
+ * @param int $id_rubrique identifiant de la rubrique.
+ * @param string $retour lien pour le retour.
+ * @param string $associer_objet
+ *     Éventuel 'objet|x' indiquant de lier le mot créé à cet objet,
+ *     tel que 'article|3'
+ * @param int $lier_trad 
+ * @param string $config_fonc 
+ * @param array $row 
+ * @param array $hidden 
  * @uses formulaires_editer_objet_verifier()
  * @uses saisies_verifier()
  *
@@ -192,6 +220,16 @@ function formulaires_editer_pensebete_verifier_dist($id_pensebete='new', $id_rub
  *
  * Le traitement effectue une mise à zéro de l'id_auteur pour éviter des associations considérées comme inutiles.
  *
+ * @param int|string $id_pensebete identifiant de l'objet ou 'new' si absent.
+ * @param int $id_rubrique identifiant de la rubrique.
+ * @param string $retour lien pour le retour.
+ * @param string $associer_objet
+ *     Éventuel 'objet|x' indiquant de lier le mot créé à cet objet,
+ *     tel que 'article|3'
+ * @param int $lier_trad 
+ * @param string $config_fonc 
+ * @param array $row 
+ * @param array $hidden 
  * @uses formulaires_editer_objet_traiter()
  * @uses objet_associer()
  *

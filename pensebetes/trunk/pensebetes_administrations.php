@@ -13,6 +13,13 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/**
+ * Création et mise à jour du plugin Pensebetes
+ *
+ * @param  string $nom_meta_base_version version du schéma de données du plugin installé
+ * @param  string $version_cible Version déclarée dans paquet.xml
+ * @return void
+**/
 
 function pensebetes_upgrade($nom_meta_base_version, $version_cible){
 
@@ -31,6 +38,13 @@ function pensebetes_upgrade($nom_meta_base_version, $version_cible){
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
+
+/**
+ * Faire le ménage lors de la désinstallation du plugin Pensebetes
+ *
+ * @param  string $nom_meta_base_version version du schéma de données du plugin installé
+ * @return void
+**/
 
 function pensebetes_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_pensebetes");
