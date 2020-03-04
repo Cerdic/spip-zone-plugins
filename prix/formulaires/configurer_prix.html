@@ -9,8 +9,8 @@
 			#ACTION_FORMULAIRE
 
 			[(#REM) Message si extensions php absentes ]
-			#SET{zbcmath,#VAL{bcmath}|extension_loaded}
-			#SET{zintl,#VAL{intl}|extension_loaded}
+			#SET{bcmath,#VAL{bcmath}|extension_loaded}
+			#SET{intl,#VAL{intl}|extension_loaded}
 			#SET{ext,#LISTE{bcmath,intl}|join{", "}}
 			[(#GET{bcmath}|non|et{#GET{intl}|non}|oui)
 			<p class="notice">
