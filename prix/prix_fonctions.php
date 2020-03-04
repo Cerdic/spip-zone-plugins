@@ -144,7 +144,8 @@ function prix_formater($prix, $devise = '', $langue = '', $options = array()) {
 function filtres_prix_formater_dist($prix, $devise = '', $langue = '', $options = array()) {
 	prix_loader();
 
-	$prix = floatval($prix);
+	$prix = floatval(str_replace(',', '.', $prix));
+	$prix_formate = $prix;
 
 	// Devise à utiliser
 	$devise = $devise ?: prix_devise_defaut();
@@ -152,22 +153,34 @@ function filtres_prix_formater_dist($prix, $devise = '', $langue = '', $options 
 	// Langue à utiliser
 	$langue = $langue ?: prix_langue_defaut();
 
-	// Options : langue, style, etc.
-	$options_formatter = array(
-		'locale'           => $langue,
-		'currency_display' => 'code', // pour l'accessibilité
-	);
-	if (is_array($options)) {
-		$options_formatter = array_merge($options_formatter, $options);
-	}
+	// De préférence, on utilise la librairie Intl de Commerceguys
+	if (extension_loaded('bcmath')) {
+		// Options : langue, style, etc.
+		$options_formatter = array(
+			'locale'           => $langue,
+			'currency_display' => 'code', // pour l'accessibilité
+		);
+		if (is_array($options)) {
+			$options_formatter = array_merge($options_formatter, $options);
+		}
 
-	// Définitions des formats numériques depuis resources/numberFormat.
-	$numberFormatRepository = new CommerceGuys\Intl\NumberFormat\NumberFormatRepository;
-	// Définitions des devises depuis resources/currency.
-	$currencyRepository = new CommerceGuys\Intl\Currency\CurrencyRepository;
-	// Formatage des devises
-	$currencyFormatter = new CommerceGuys\Intl\Formatter\CurrencyFormatter($numberFormatRepository, $currencyRepository, $options_formatter);
-	$prix_formate = $currencyFormatter->format($prix, $devise);
+		// Définitions des formats numériques depuis resources/numberFormat.
+		$numberFormatRepository = new CommerceGuys\Intl\NumberFormat\NumberFormatRepository;
+		// Définitions des devises depuis resources/currency.
+		$currencyRepository = new CommerceGuys\Intl\Currency\CurrencyRepository;
+		// Formatage des devises
+		$currencyFormatter = new CommerceGuys\Intl\Formatter\CurrencyFormatter($numberFormatRepository, $currencyRepository, $options_formatter);
+		$prix_formate = $currencyFormatter->format($prix, $devise);
+
+	// Sinon on se rabat sur la librairie Intl de php
+	} elseif (extension_loaded('intl')) {
+		$formatter = new NumberFormatter( $langue, NumberFormatter::CURRENCY );
+		$prix_formate = numfmt_format_currency($formatter, $prix, $devise);
+
+	// Sinon, on fait le minimum syndical
+	} else {
+		$prix_formate = str_replace('.', ',', $prix) . '&nbsp;' . $devise;
+	}
 
 	return $prix_formate;
 }

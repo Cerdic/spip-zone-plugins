@@ -8,6 +8,16 @@
 		<form method="post" action="#ENV{action}"><div>
 			#ACTION_FORMULAIRE
 
+			[(#REM) Message si extensions php absentes ]
+			#SET{zbcmath,#VAL{bcmath}|extension_loaded}
+			#SET{zintl,#VAL{intl}|extension_loaded}
+			#SET{ext,#LISTE{bcmath,intl}|join{", "}}
+			[(#GET{bcmath}|non|et{#GET{intl}|non}|oui)
+			<p class="notice">
+				<:prix:message_extensions_php_ou{ext=#GET{ext}}:>
+			</p>
+			]
+
 			<div class="editer-groupe">
 
 				[(#REM) Devise principale ]

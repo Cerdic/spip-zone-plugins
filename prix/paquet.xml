@@ -1,7 +1,7 @@
 <paquet
 	prefix="prix"
 	categorie="outil"
-	version="1.1.0"
+	version="1.1.1"
 	etat="dev"
 	compatibilite="[3.2.0;3.2.*]"
 	logo="prive/themes/spip/images/prix-64.png"
@@ -13,7 +13,7 @@
 	<auteur lien="https://mukt.fr">Mukt</auteur>
 	<licence>GPL v3</licence>
 
-	<necessite nom="php" compatibilite="[7.0.0;]" />
+	<necessite nom="php" compatibilite="[7.0.8;]" />
 
 	<pipeline nom="declarer_tables_interfaces" inclure="prix_pipelines.php" />
 
