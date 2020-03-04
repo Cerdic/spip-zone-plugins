@@ -11,6 +11,7 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+include_spip('inc/formidableparticipation');
 function traiter_participation_dist($args, $retours){
 	$formulaire = $args['formulaire'];
 	$options = $args['options'];
@@ -38,21 +39,7 @@ function traiter_participation_dist($args, $retours){
 		$organisme_participation = _request($options['champ_organisme_participation']);
 	}
 
-	if ($options['participation_auto'] == 'auto') {
-		$choix_participation = 'oui';
-	} elseif ($options['champ_choix_participation']) {
-		$choix_participation = _request($options['champ_choix_participation']);
-
-		if ($options['choix_participation_oui']) {
-			$participation_oui = $options['choix_participation_oui'];
-		}
-
-		if($choix_participation == $participation_oui) {
-			$choix_participation='oui';
-		} else {
-			$choix_participation='non';
-		}
-	}
+	$choix_participation = formidableparticipation_choix_participation($options);
 	$id_formulaires_reponse = $retours['id_formulaires_reponse'];
 
 
@@ -63,11 +50,7 @@ function traiter_participation_dist($args, $retours){
 	}
 
 	// détermination de l'évènement où s'inscrire
-	if ($options['evenement_type'] == 'fixe') {
-		$id_evenement = $options['id_evenement_participation'];
-	} elseif ($options['evenement_type'] == 'variable' and isset($options['champ_evenement_participation'])) {
-		$id_evenement = _request($options['champ_evenement_participation']);
-	}
+	$id_evenement = formidableparticipation_id_evenement($options);
 
 	// Nombre total d'inscription
 	if (isset($options['plusieurs_fois']) and $options['plusieurs_fois']) {
@@ -77,9 +60,6 @@ function traiter_participation_dist($args, $retours){
 		}
 	} else {
 		$nb_inscriptions = 1;
-	}
-	if (!is_array($id_evenement)) {
-		$id_evenement = array($id_evenement);
 	}
 	foreach ($id_evenement as $evenement) {
 		$options = array(
