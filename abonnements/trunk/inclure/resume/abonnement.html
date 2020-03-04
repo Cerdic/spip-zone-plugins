@@ -92,7 +92,7 @@
 			<strong class="label"><:abonnement:label_duree:></strong>
 			<span class="valeur">
 				[(#GET{renouvellement}|?{
-					<span class="renouvellement"><:abonnementsoffre:info_renouvellement_auto:></span>,
+					<span class="renouvellement"><:abonnementsoffre:info_renouvellement_auto:></span>[ <span class="sep">-</span> (#DATE_FIN|intval|oui)<span class="date_fin">[(#VAL{abonnement:info_date_fin}|_T{#ARRAY{date,#DATE_FIN|affdate}})]</span>],
 					<span class="duree">[(#GET{duree}|abonnements_afficher_duree{#GET{periode}})]</span>
 				})]
 			</span>

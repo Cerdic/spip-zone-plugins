@@ -45,6 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_abonnements_notifier' => '@nb@ abonnements à notifier',
 	'info_numero_abbr' => 'n°',
 	'info_numero_abbr_maj' => 'N°',
+	'info_date_fin' => 'fin le @date@',
 
 	// J
 	'job_desactivation' => 'Désactivation de l’abonnement @id@',
