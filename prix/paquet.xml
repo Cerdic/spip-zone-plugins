@@ -10,6 +10,7 @@
 	<nom>API Prix</nom>
 
 	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<auteur lien="https://mukt.fr">Mukt</auteur>
 	<licence>GPL v3</licence>
 
 	<necessite nom="php" compatibilite="[7.0.0;]" />
