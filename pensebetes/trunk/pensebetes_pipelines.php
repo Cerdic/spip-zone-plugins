@@ -110,4 +110,36 @@ function pensebetes_affiche_milieu($flux) {
 	return $flux;
 }
 
+/**
+ * Insérer des évènements dans le calendrier privé
+ *
+ * On y insère les Pense-bêtes de l'auteur. Les données sont formatées en json
+ * et utilisées par la librairie javascript Fullcalendar
+ * au travers du Plugin Organiseur.
+ *
+ * @pipeline quete_calendrier_prive
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+**/
 
+function pensebetes_quete_calendrier_prive($flux) {
+	
+	$id_auteur =$GLOBALS['visiteur_session']['id_auteur'] ;
+
+	if ($mes_pensebetes = sql_allfetsel('id_pensebete, titre, texte, date', 'spip_pensebetes', 'id_receveur=' . intval($id_auteur). ' AND date >= "'.$flux['args']['start'].'" AND date <= "'.$flux['args']['end'].'"')) {
+	foreach ($mes_pensebetes as $un) {
+		$texte=generer_url_ecrire('pensebete','id_pensebete='.$un['id_pensebete']);// fonction dans urls.php
+		$texte=str_replace ('&amp;','&',$texte); // on injecte du json pas du HTML
+		$flux['data'][]=array ('id' => 0,
+			'title' => $un['titre'],
+			'allDay' => 1,
+			'start' => substr ($un['date'],0,10),
+			'end' => substr ($un['date'],0,10),
+			'url' => liens_absolus($texte, ''), //fonction de filtres_mini.php
+			'className' => 'calendrier-event calendrier-couleur01',
+			'description' =>$un['texte']);
+	}
+}
+
+	return $flux;
+}

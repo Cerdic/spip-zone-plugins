@@ -1,7 +1,7 @@
 <paquet
 	prefix="pensebetes"
 	categorie="edition"
-	version="1.0.8"
+	version="1.0.9"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/pensebete-64.png"
@@ -24,6 +24,7 @@
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/pensebetes.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/pensebetes.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/pensebetes.php" />
+	<pipeline nom="quete_calendrier_prive" inclure="pensebetes_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="pensebetes_pipelines.php" />
 	<pipeline nom="affiche_gauche" inclure="pensebetes_pipelines.php" />
 	<pipeline nom="header_prive" inclure="pensebetes_pipelines.php" />
