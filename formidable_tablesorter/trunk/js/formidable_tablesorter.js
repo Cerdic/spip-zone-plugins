@@ -26,4 +26,7 @@ $(function() {
 		$('.tablesorter').trigger('outputTable');
 		return false;
 	});
+	$('.reset').click(function() {
+		$('.tablesorter').trigger('filterReset');
+	});
 });
