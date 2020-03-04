@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_total_ttc' => 'Total TTC',
 
 	// M
-	'message_extensions_php_ou' => 'Une des extensions PHP suivante est nécessaire : <em>@ext@</em>. <br>Installez-en une ou contactez votre hébergeur.',
+	'message_extensions_php_ou' => 'Une des extensions PHP suivante est nécessaire : <em>@ext@</em>. <br>Installez-en une ou contactez votre hébergeur (de préférence la 1ère listée).',
 
 	// P
 	'prix_ht' => '@prix@ HT',
