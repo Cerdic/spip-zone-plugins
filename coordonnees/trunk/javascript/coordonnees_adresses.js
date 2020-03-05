@@ -17,7 +17,7 @@
 			var name = select.attr('name');
 			// API
 			var api = 'adresses_par_pays.api/';
-			if (spip_ecrire) {
+			if (typeof spip_ecrire !== 'undefined' && spip_ecrire) {
 				api = '../' + api;
 			}
 			// Environnement à garder pour le remplacement
