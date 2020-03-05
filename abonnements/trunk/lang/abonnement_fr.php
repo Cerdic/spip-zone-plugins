@@ -39,13 +39,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_abonnement_actif' => 'Aucun abonnement actif',
 	'info_aucun_abonnement_inactif' => 'Aucun abonnement inactif',
 	'info_aucun_abonnement_notifier' => 'Aucun abonnement à notifier',
+	'info_date_fin' => 'fin le @date@',
 	'info_nb_abonnements' => '@nb@ abonnements',
 	'info_nb_abonnements_actifs' => '@nb@ abonnements actifs',
 	'info_nb_abonnements_inactifs' => '@nb@ abonnements inactifs',
 	'info_nb_abonnements_notifier' => '@nb@ abonnements à notifier',
 	'info_numero_abbr' => 'n°',
 	'info_numero_abbr_maj' => 'N°',
-	'info_date_fin' => 'fin le @date@',
 
 	// J
 	'job_desactivation' => 'Désactivation de l’abonnement @id@',
