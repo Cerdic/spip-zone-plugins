@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'reset' => 'Réinitialiser les fitlres',
+
 	// T
 	'tableau_reponses' => 'Tableau des réponses'
 );
