@@ -1,6 +1,6 @@
 [(#REM)N'afficher que si les saisies concernés par le fieldset ont bien des valeurs non null)]
 #SET{saisies_fieldset,#ENV{saisies}|saisies_lister_par_nom|array_keys|array_flip}
-#SET{valeurs_filtrees,#ENV{valeurs}|array_intersect_key{#GET{saisies_fieldset}}}
+#SET{valeurs_filtrees,#ENV{valeurs,#ARRAY}|array_intersect_key{#GET{saisies_fieldset}}}
 #SET{valeurs_filtrees,#GET{valeurs_filtrees}|array_filter}
 [(#GET{valeurs_filtrees}|count|ou{#ENV{sans_reponse}}|oui)
 	[(#ENV{valeur_uniquement}|et{#ENV{valeur_uniquement}|!={non}}|non)
