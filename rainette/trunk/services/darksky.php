@@ -386,9 +386,6 @@ function darksky_complement2previsions($tableau, $configuration, $index_periode)
 		$tableau['direction_vent'] = angle2direction($tableau['angle_vent']);
 		// On convertit aussi l'humidité en pourcentage car elle est fournie en float entre 0 et 1.
 		$tableau['humidite'] = 100 * $tableau['humidite'];
-		// On calcule aussi le risque UV car celui-ci n'est pas calculé systématiquement pour les prévisions car
-		// très rare.
-		$tableau['risque_uv'] = indice2risque_uv($tableau['indice_uv']);
 
 		// Vitesse du vent en km/h plutôt qu'en m/s si on est en système métrique.
 		if ($configuration['unite'] == 'm') {

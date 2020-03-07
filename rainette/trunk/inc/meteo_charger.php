@@ -213,16 +213,17 @@ function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 										//    Si ces compléments sont inutiles, la fonction n'existe pas
 										$completer = "${service}_complement2${mode}";
 										if (function_exists($completer)) {
-											$donnees = $mode == 'previsions' ? $completer($donnees, $configuration, $_periode) : $completer($donnees, $configuration);
+											$donnees = $mode == 'previsions'
+												? $completer($donnees, $configuration, $_periode)
+												: $completer($donnees, $configuration);
 										}
 
-										// 3- Compléments standard communs à tous les services mais fonction du mode
-										if ($mode == 'conditions') {
-											// Vérifier que l'indice uv si celui-ci est fourni
-											// Calcul du risque uv à partir de l'indice uv si celui-ci est fourni
-											include_spip('inc/rainette_convertir');
-											$donnees['risque_uv'] = is_int($donnees['indice_uv']) ? indice2risque_uv($donnees['indice_uv']) : $donnees['indice_uv'];
-										}
+										// 3- Compléments standard communs à tous les services
+										// Calcul du risque uv à partir de l'indice uv si celui-ci est fourni
+										include_spip('inc/rainette_convertir');
+										$donnees['risque_uv'] = is_int($donnees['indice_uv'])
+											? indice2risque_uv($donnees['indice_uv'])
+											: $donnees['indice_uv'];
 
 										// Ajout du bloc à l'index en cours
 										if ($_periode == -1) {
