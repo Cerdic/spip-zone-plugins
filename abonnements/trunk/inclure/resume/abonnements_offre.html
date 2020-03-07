@@ -18,48 +18,63 @@
 <BOUCLE_abonnements_offre(ABONNEMENTS_OFFRES) {id_abonnements_offre}>
 <article class="abonnement abonnement_resume[ abonnement_(#GET{statut})][ (#GET{renouvellement}|oui)abonnement_renouvelable]" id="abonnement_#ID_ABONNEMENT">
 
-	[(#VAL{logo}|in_any{#ENV{masquer}}|non)
-	[<div class="abonnement__logo">
-		(#LOGO_ABONNEMENTS_OFFRE)
-	</div>]
-	]
+	[(#REM) Logo et titre ]
+	<header class="abonnement__header">
 
-	[<h3 class="abonnement__titre">
-		(#TITRE)
-	</h3>]
+		[(#VAL{logo}|in_any{#ENV{masquer}}|non)
+		[<div class="abonnement__logo">
+			(#LOGO_ABONNEMENTS_OFFRE)
+		</div>]
+		]
 
-	<div class="abonnement__infos">
+		[<h3 class="abonnement__titre">
+			(#TITRE)
+		</h3>]
 
-		[(#REM) Montant et période éventuelle ]
-		<div class="abonnement__info abonnement__info_prix">
-			<strong class="label"><:abonnement:label_montant:></strong>
-			<span class="valeur">
-				[<span class="montant">(#PRIX)</span>]
-				[(#RENOUVELLEMENT_AUTO|oui)
-					<span class="par">/</span>
-					<span class="periode">[(#VAL{abonnementsoffre:champ_periode_choix_#PERIODE}|_T)]</span>
-				]
-			</span>
+	</header>
+
+	[(#REM) Infos techniques et descriptif ]
+	<div class="abonnement__content">
+
+		<div class="abonnement__infos">
+
+			[(#REM) Montant et période éventuelle ]
+			<div class="abonnement__info abonnement__info_prix">
+				<strong class="label"><:abonnement:label_montant:></strong>
+				<span class="valeur">
+					[<span class="montant">(#PRIX)</span>]
+					[(#RENOUVELLEMENT_AUTO|oui)
+						<span class="par">/</span>
+						<span class="periode">[(#VAL{abonnementsoffre:champ_periode_choix_#PERIODE}|_T)]</span>
+					]
+				</span>
+			</div>
+
+			[(#REM) Durée / renouvellement ]
+			<div class="abonnement__info abonnement__info_duree">
+				<strong class="label"><:abonnement:label_duree:></strong>
+				<span class="valeur">
+					[(#RENOUVELLEMENT_AUTO|?{
+						<span class="renouvellement"><:abonnementsoffre:info_renouvellement_auto:></span>,
+						<span class="duree">[(#DUREE|abonnements_afficher_duree{#PERIODE})]</span>
+					})]
+				</span>
+			</div>
+
 		</div>
 
-		[(#REM) Durée / renouvellement ]
-		<div class="abonnement__info abonnement__info_duree">
-			<strong class="label"><:abonnement:label_duree:></strong>
-			<span class="valeur">
-				[(#RENOUVELLEMENT_AUTO|?{
-					<span class="renouvellement"><:abonnementsoffre:info_renouvellement_auto:></span>,
-					<span class="duree">[(#DUREE|abonnements_afficher_duree{#PERIODE})]</span>
-				})]
-			</span>
-		</div>
+		[(#VAL{descriptif}|in_any{#ENV{masquer}}|non)
+		[<div class="abonnement__descriptif">
+			(#DESCRIPTIF)
+		</div>]
+		]
 
 	</div>
 
-	[(#VAL{descriptif}|in_any{#ENV{masquer}}|non)
-	[<div class="abonnement__descriptif">
-		(#DESCRIPTIF)
-	</div>]
-	]
+	[(#REM) Footer : boutons, liens... ]
+	[<footer class="abonnement__footer">
+		(#INCLURE{fond=inclure/resume/inc-abonnements_offre_footer, env})
+	</footer>]
 
 </article>
 </BOUCLE_abonnements_offre>

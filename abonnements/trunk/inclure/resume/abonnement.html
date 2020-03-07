@@ -55,78 +55,92 @@
 
 <article class="abonnement abonnement_resume[ abonnement_(#GET{statut})][ (#GET{renouvellement}|oui)abonnement_renouvelable]" id="abonnement_#ID_ABONNEMENT">
 
-	[(#VAL{logo}|in_any{#ENV{masquer}}|non)
-	[<div class="abonnement__logo">
-		(#GET{offre/logo}|balise_img)
-	</div>]
-	]
+	[(#REM) Logo et titre ]
+	<header class="abonnement__header">
 
-	[<h3 class="abonnement__titre">
-		(#GET{offre/titre})
-	</h3>]
+		[(#VAL{logo}|in_any{#ENV{masquer}}|non)
+		[<div class="abonnement__logo">
+			(#GET{offre/logo}|balise_img)
+		</div>]
+		]
 
-	<div class="abonnement__infos">
+		[<h3 class="abonnement__titre">
+			(#GET{offre/titre})
+		</h3>]
 
-		[(#REM) Commande liée éventuelle ]
-		<div class="abonnement__info abonnement__info_commande">
-			[<strong class="label"><:commandes:commande_titre:></strong>
-			<span class="valeur">
-				<span class="reference">(#GET{commande/reference})</span>
-			</span>]
+	</header>
+
+	[(#REM) Infos techniques et descriptif ]
+	<div class="abonnement__content">
+
+		<div class="abonnement__infos">
+
+			[(#REM) Commande liée éventuelle ]
+			<div class="abonnement__info abonnement__info_commande">
+				[<strong class="label"><:commandes:commande_titre:></strong>
+				<span class="valeur">
+					<span class="reference">(#GET{commande/reference})</span>
+				</span>]
+			</div>
+
+			[(#REM) Montant et période éventuelle ]
+			<div class="abonnement__info abonnement__info_prix">
+				<strong class="label"><:abonnement:label_montant:></strong>
+				<span class="valeur">
+					[<span class="montant">(#GET{prix}|prix_formater)</span>]
+					[(#GET{renouvellement}|oui)
+						<span class="par">/</span>
+						<span class="periode">[(#VAL{abonnementsoffre:champ_periode_choix_#GET{periode}}|_T)]</span>
+					]
+				</span>
+			</div>
+
+			[(#REM) Durée / renouvellement ]
+			<div class="abonnement__info abonnement__info_duree">
+				<strong class="label"><:abonnement:label_duree:></strong>
+				<span class="valeur">
+					[(#GET{renouvellement}|?{
+						<span class="renouvellement"><:abonnementsoffre:info_renouvellement_auto:></span>[ <span class="sep">-</span> (#DATE_FIN|intval|oui)<span class="date_fin">[(#VAL{abonnement:info_date_fin}|_T{#ARRAY{date,#DATE_FIN|affdate}})]</span>],
+						<span class="duree">[(#GET{duree}|abonnements_afficher_duree{#GET{periode}})]</span>
+					})]
+				</span>
+			</div>
+
+			[(#REM) Dates ]
+			<div class="abonnement__info abonnement__info_dates">
+				<strong class="label"><:abonnement:label_dates:></strong>
+				<span class="valeur">
+					[(#GET{renouvellement}|et{#GET{actif}}|?{
+						[<span class="dates dates_debut"><:abonnement:label_date_depuis:> (#DATE_DEBUT|affdate)</span>],
+						[<span class="dates dates_debut-fin">(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN})</span>]
+					})]
+				</span>
+			</div>
+
+			[(#REM) Statut ]
+			<div class="abonnement__info abonnement__info_statut[ abonnement__info_statut_(#GET{statut})]">
+				<strong class="label"><:abonnement:label_statut:></strong>
+				<span class="valeur">
+					[<span class="statut">(#GET{actif}|?{
+						<:abonnement:statut_actif|ucfirst:>,
+						<:abonnement:statut_inactif|ucfirst:>
+					})</span>]
+				</span>
+			</div>
+
 		</div>
 
-		[(#REM) Montant et période éventuelle ]
-		<div class="abonnement__info abonnement__info_prix">
-			<strong class="label"><:abonnement:label_montant:></strong>
-			<span class="valeur">
-				[<span class="montant">(#GET{prix}|prix_formater)</span>]
-				[(#GET{renouvellement}|oui)
-					<span class="par">/</span>
-					<span class="periode">[(#VAL{abonnementsoffre:champ_periode_choix_#GET{periode}}|_T)]</span>
-				]
-			</span>
-		</div>
-
-		[(#REM) Durée / renouvellement ]
-		<div class="abonnement__info abonnement__info_duree">
-			<strong class="label"><:abonnement:label_duree:></strong>
-			<span class="valeur">
-				[(#GET{renouvellement}|?{
-					<span class="renouvellement"><:abonnementsoffre:info_renouvellement_auto:></span>[ <span class="sep">-</span> (#DATE_FIN|intval|oui)<span class="date_fin">[(#VAL{abonnement:info_date_fin}|_T{#ARRAY{date,#DATE_FIN|affdate}})]</span>],
-					<span class="duree">[(#GET{duree}|abonnements_afficher_duree{#GET{periode}})]</span>
-				})]
-			</span>
-		</div>
-
-		[(#REM) Dates ]
-		<div class="abonnement__info abonnement__info_dates">
-			<strong class="label"><:abonnement:label_dates:></strong>
-			<span class="valeur">
-				[(#GET{renouvellement}|et{#GET{actif}}|?{
-					[<span class="dates dates_debut"><:abonnement:label_date_depuis:> (#DATE_DEBUT|affdate)</span>],
-					[<span class="dates dates_debut-fin">(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN})</span>]
-				})]
-			</span>
-		</div>
-
-		[(#REM) Statut ]
-		<div class="abonnement__info abonnement__info_statut[ abonnement__info_statut_(#GET{statut})]">
-			<strong class="label"><:abonnement:label_statut:></strong>
-			<span class="valeur">
-				[<span class="statut">(#GET{actif}|?{
-					<:abonnement:statut_actif|ucfirst:>,
-					<:abonnement:statut_inactif|ucfirst:>
-				})</span>]
-			</span>
-		</div>
-
+		[(#VAL{descriptif}|in_any{#ENV{masquer}}|non)
+		[<div class="abonnement__descriptif">
+			(#GET{offre/descriptif})
+		</div>]
+		]
 	</div>
 
-	[(#VAL{descriptif}|in_any{#ENV{masquer}}|non)
-	[<div class="abonnement__descriptif">
-		(#GET{offre/descriptif})
-	</div>]
-	]
+	[(#REM) Footer : boutons, liens... ]
+	[<footer class="abonnement__footer">
+		(#INCLURE{fond=inclure/resume/inc-abonnement_footer, env})
+	</footer>]
 
 </article>
 </BOUCLE_abonnement>
