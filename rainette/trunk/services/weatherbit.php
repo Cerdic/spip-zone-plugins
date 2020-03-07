@@ -148,9 +148,9 @@ $GLOBALS['rainette_weatherbit_config']['infos'] = array(
 	'donnees'     => array(
 		// Lieu
 		'ville'     => array('cle' => array('city_name')),
-		'pays'      => array('cle' => array('')),
+		'pays'      => array('cle' => array()),
 		'pays_iso2' => array('cle' => array('country_code')),
-		'region'    => array('cle' => array('')),
+		'region'    => array('cle' => array()),
 		// Coordonnées
 		'longitude' => array('cle' => array('lon')),
 		'latitude'  => array('cle' => array('lat')),
@@ -174,7 +174,7 @@ $GLOBALS['rainette_weatherbit_config']['conditions'] = array(
 		// Données anémométriques
 		'vitesse_vent'          => array('cle' => array('wind_spd')),
 		'angle_vent'            => array('cle' => array('wind_dir')),
-		'direction_vent'        => array('cle' => array('')), // la valeur renvoyée par le service dépend de la langue
+		'direction_vent'        => array('cle' => array()), // la valeur renvoyée par le service dépend de la langue
 		// Données atmosphériques : risque_uv est calculé
 		'precipitation'         => array('cle' => array('precip')),
 		'humidite'              => array('cle' => array('rh')),
@@ -182,6 +182,7 @@ $GLOBALS['rainette_weatherbit_config']['conditions'] = array(
 		'pression'              => array('cle' => array('pres')),
 		'tendance_pression'     => array('cle' => array()),
 		'visibilite'            => array('cle' => array('vis')),
+		'nebulosite'            => array('cle' => array('clouds')),
 		'indice_uv'             => array('cle' => array('uv')),
 		// Etats météorologiques natifs
 		'code_meteo'            => array('cle' => array('weather', 'code')),
@@ -230,13 +231,14 @@ $GLOBALS['rainette_weatherbit_config']['previsions'] = array(
 		'point_rosee'          => array('cle' => array('dewpt')),
 		'pression'             => array('cle' => array('pres')),
 		'visibilite'           => array('cle' => array('vis')),
+		'nebulosite'           => array('cle' => array('clouds')),
 		'indice_uv'            => array('cle' => array('uv')),
 		// Etats météorologiques natifs
 		'code_meteo'           => array('cle' => array('weather', 'code')),
 		'icon_meteo'           => array('cle' => array('weather', 'icon')),
 		'desc_meteo'           => array('cle' => array('weather', 'description')),
 		'trad_meteo'           => array('cle' => array()),
-		'jour_meteo'           => array('cle' => array('pod')),
+		'jour_meteo'           => array('cle' => array()),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
 	),
 );
@@ -464,8 +466,12 @@ function etat2resume_weatherbit(&$tableau, $configuration) {
 
 	if ($tableau['code_meteo'] and $tableau['icon_meteo']) {
 		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icône.
-		// - on utilise l'indicateur fourni par le service
-		$tableau['periode'] = $tableau['jour_meteo'] == 'd' ? 0 : 1;
+		// - on utilise l'indicateur fourni par le service si il existe sinon l'icone
+		if ($tableau['jour_meteo']) {
+			$tableau['periode'] = $tableau['jour_meteo'] == 'd' ? 0 : 1;
+		} else {
+			$tableau['periode'] = strpos($tableau['icon_meteo'], 'n') === false ? 0 : 1;
+		}
 
 		// Détermination du résumé à afficher.
 		// Depuis la 3.4.6 on affiche plus que le résumé natif de chaque service car les autres services

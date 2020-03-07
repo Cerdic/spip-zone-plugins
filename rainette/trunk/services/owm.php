@@ -184,6 +184,7 @@ $GLOBALS['rainette_owm_config']['conditions'] = array(
 		'pression'              => array('cle' => array('main', 'pressure')),
 		'tendance_pression'     => array('cle' => array()),
 		'visibilite'            => array('cle' => array('visibility')),
+		'nebulosite'            => array('cle' => array('clouds', 'all')),
 		'indice_uv'             => array('cle' => array()),
 		// Etats météorologiques natifs
 		'code_meteo'            => array('cle' => array('weather', 0, 'id')),
@@ -229,6 +230,7 @@ $GLOBALS['rainette_owm_config']['previsions'] = array(
 		'point_rosee'          => array('cle' => array()),
 		'pression'             => array('cle' => array('pressure')),
 		'visibilite'           => array('cle' => array()),
+		'nebulosite'           => array('cle' => array('clouds')),
 		'indice_uv'            => array('cle' => array()),
 		// Etats météorologiques natifs
 		'code_meteo'           => array('cle' => array('weather', 0, 'id')),

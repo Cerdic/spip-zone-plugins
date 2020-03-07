@@ -61,6 +61,7 @@ $GLOBALS['rainette_config']['conditions'] = array(
 	'pression'              => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'pression', 'groupe' => 'donnees_atmospheriques'),
 	'tendance_pression'     => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_atmospheriques'),
 	'visibilite'            => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'distance', 'groupe' => 'donnees_atmospheriques'),
+	'nebulosite'            => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'pourcentage', 'groupe' => 'donnees_atmospheriques'),
 	'indice_uv'             => array('origine' => 'service', 'type_php' => 'int', 'type_unite' => 'indice', 'groupe' => 'donnees_atmospheriques'),
 	'risque_uv'             => array('origine' => 'calcul', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_atmospheriques'),
 	// Etats météorologiques natifs
@@ -97,6 +98,7 @@ $GLOBALS['rainette_config']['previsions'] = array(
 	'point_rosee'          => array('origine' => 'service', 'type_php' => 'int', 'type_unite' => 'temperature', 'rangement' => 'heure', 'groupe' => 'donnees_atmospheriques'),
 	'pression'             => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'pression', 'rangement' => 'heure', 'groupe' => 'donnees_atmospheriques'),
 	'visibilite'           => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'distance', 'rangement' => 'heure', 'groupe' => 'donnees_atmospheriques'),
+	'nebulosite'           => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'pourcentage', 'rangement' => 'heure', 'groupe' => 'donnees_atmospheriques'),
 	'indice_uv'            => array('origine' => 'service', 'type_php' => 'int', 'type_unite' => 'indice', 'rangement' => 'heure', 'groupe' => 'donnees_atmospheriques'),
 	'risque_uv'            => array('origine' => 'calcul', 'type_php' => 'string', 'type_unite' => '', 'rangement' => 'heure', 'groupe' => 'donnees_atmospheriques'),
 	// Etats météorologiques natifs

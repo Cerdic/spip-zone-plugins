@@ -171,6 +171,7 @@ $GLOBALS['rainette_darksky_config']['conditions'] = array(
 		'pression'              => array('cle' => array('pressure')),
 		'tendance_pression'     => array('cle' => array()),
 		'visibilite'            => array('cle' => array('visibility')),
+		'nebulosite'            => array('cle' => array('cloudCover')),
 		'indice_uv'             => array('cle' => array('uvIndex')),
 		// Etats météorologiques natifs
 		'code_meteo'            => array('cle' => array('icon')),
@@ -217,6 +218,7 @@ $GLOBALS['rainette_darksky_config']['previsions'] = array(
 		'point_rosee'          => array('cle' => array('dewPoint')),
 		'pression'             => array('cle' => array('pressure')),
 		'visibilite'           => array('cle' => array('visibility')),
+		'nebulosite'           => array('cle' => array('cloudCover')),
 		'indice_uv'            => array('cle' => array('uvIndex')),
 		// Etats météorologiques natifs
 		'code_meteo'           => array('cle' => array('icon')),
@@ -349,8 +351,9 @@ function darksky_complement2conditions($tableau, $configuration) {
 		include_spip('inc/rainette_convertir');
 		// Calcul de la direction du vent (16 points).
 		$tableau['direction_vent'] = angle2direction($tableau['angle_vent']);
-		// On convertit aussi l'humidité en pourcentage car elle est fournie en float entre 0 et 1.
+		// On convertit aussi l'humidité et la nébulosité en pourcentage car elle sont fournies en float entre 0 et 1.
 		$tableau['humidite'] = 100 * $tableau['humidite'];
+		$tableau['nebulosite'] = 100 * $tableau['nebulosite'];
 
 		// Vitesse du vent en km/h plutôt qu'en m/s si on est en système métrique.
 		if ($configuration['unite'] == 'm') {
@@ -384,8 +387,9 @@ function darksky_complement2previsions($tableau, $configuration, $index_periode)
 		// Calcul de la direction du vent (16 points).
 		include_spip('inc/rainette_convertir');
 		$tableau['direction_vent'] = angle2direction($tableau['angle_vent']);
-		// On convertit aussi l'humidité en pourcentage car elle est fournie en float entre 0 et 1.
+		// On convertit aussi l'humidité et la nébulosité en pourcentage car elle sont fournies en float entre 0 et 1.
 		$tableau['humidite'] = 100 * $tableau['humidite'];
+		$tableau['nebulosite'] = 100 * $tableau['nebulosite'];
 
 		// Vitesse du vent en km/h plutôt qu'en m/s si on est en système métrique.
 		if ($configuration['unite'] == 'm') {
