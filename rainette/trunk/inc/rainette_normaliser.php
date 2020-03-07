@@ -406,9 +406,10 @@ function meteo_normaliser($configuration_service, $mode, $flux, $periode) {
 						$donnee = null;
 					}
 				} else {
-					// La données météo est toujours calculée à posteriori par le plugin indépendamment
-					// du service. On l'initialise temporairement à la chaine vide.
-					$donnee = '';
+					// La données météo est en général calculée à posteriori par le plugin indépendamment
+					// du service. On l'initialise temporairement à null car il arrive parfois que le calcul
+					// dépende d'une donnée du service qui n'est pas fournie (index UV par exemple).
+					$donnee = null;
 				}
 
 				$tableau[$_donnee] = $donnee;

@@ -205,7 +205,9 @@ function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 									//    fournies par le service.
 									//    Suivant la période il faut prendre le flux jour ou le flux heure. On calcule donc le flux heure
 									//    quand c'est nécessaire.
-									$flux_a_normaliser = $_periode == -1 ? $_flux_jour : ($configuration['structure_heure'] ? $flux_heure[$_periode] : $flux_heure);
+									$flux_a_normaliser = ($_periode == -1)
+										? $_flux_jour
+										: ($configuration['structure_heure'] ? $flux_heure[$_periode] : $flux_heure);
 									$donnees = meteo_normaliser($configuration, $mode, $flux_a_normaliser, $_periode);
 
 									if ($donnees) {
@@ -220,10 +222,13 @@ function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 
 										// 3- Compléments standard communs à tous les services
 										// Calcul du risque uv à partir de l'indice uv si celui-ci est fourni
-										include_spip('inc/rainette_convertir');
-										$donnees['risque_uv'] = is_int($donnees['indice_uv'])
-											? indice2risque_uv($donnees['indice_uv'])
-											: $donnees['indice_uv'];
+										if (
+											isset($donnees['indice_uv'])
+											and is_int($donnees['indice_uv'])
+										) {
+											include_spip('inc/rainette_convertir');
+											$donnees['risque_uv'] = indice2risque_uv($donnees['indice_uv']);
+										}
 
 										// Ajout du bloc à l'index en cours
 										if ($_periode == -1) {
