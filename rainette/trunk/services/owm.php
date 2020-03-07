@@ -404,6 +404,10 @@ function owm_complement2conditions($tableau, $configuration) {
 function owm_complement2previsions($tableau, $configuration, $index_periode) {
 
 	if (($tableau) and ($index_periode > -1)) {
+		include_spip('inc/rainette_convertir');
+		// Calcul de la direction du vent (16 points), celle-ci n'étant pas fournie nativement par owm
+		$tableau['direction_vent'] = angle2direction($tableau['angle_vent']);
+
 		// Vérifier les précipitations. Pour les prévisions, OWM renvoie le champ rain uniquement si il est
 		// différent de zéro. Il faut donc rétablir la valeur zéro dans ce cas pour éviter d'avoir N/D lors de
 		// l'affichage.
@@ -413,7 +417,6 @@ function owm_complement2previsions($tableau, $configuration, $index_periode) {
 
 		// Vitesse du vent en km/h plutôt qu'en m/s si on est en système métrique.
 		if ($configuration['unite'] == 'm') {
-			include_spip('inc/rainette_convertir');
 			$tableau['vitesse_vent'] = metre_seconde2kilometre_heure($tableau['vitesse_vent']);
 		}
 
