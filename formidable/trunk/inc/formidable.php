@@ -210,7 +210,7 @@ function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identific
 		$where = array("1=1");
 	}
 	$where = array_filter($where);//Supprimer les wheres null
-	$where = implode($where, ' OR ');
+	$where = implode(' OR ', $where);
 
 	$reponses = sql_allfetsel(
 		'id_formulaires_reponse',
