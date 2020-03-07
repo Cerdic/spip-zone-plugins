@@ -68,6 +68,7 @@ $GLOBALS['rainette_config']['conditions'] = array(
 	'icon_meteo'            => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_etats_natifs'),
 	'desc_meteo'            => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_etats_natifs'),
 	'trad_meteo'            => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_etats_natifs'),
+	'jour_meteo'            => array('origine' => 'service', 'type_php' => 'mixed', 'type_unite' => '', 'groupe' => 'donnees_etats_natifs'),
 	// Etats météorologiques calculés
 	'icone'                 => array('origine' => 'calcul', 'type_php' => 'mixed', 'type_unite' => '', 'groupe' => 'donnees_etats_calcules'),
 	'resume'                => array('origine' => 'calcul', 'type_php' => 'mixed', 'type_unite' => '', 'groupe' => 'donnees_etats_calcules'),
@@ -103,6 +104,7 @@ $GLOBALS['rainette_config']['previsions'] = array(
 	'icon_meteo'           => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'rangement' => 'heure', 'groupe' => 'donnees_etats_natifs'),
 	'desc_meteo'           => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'rangement' => 'heure', 'groupe' => 'donnees_etats_natifs'),
 	'trad_meteo'           => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'rangement' => 'heure', 'groupe' => 'donnees_etats_natifs'),
+	'jour_meteo'           => array('origine' => 'service', 'type_php' => 'mixed', 'type_unite' => '', 'rangement' => 'heure', 'groupe' => 'donnees_etats_natifs'),
 	// Etats météorologiques calculés
 	'icone'                => array('origine' => 'calcul', 'type_php' => 'mixed', 'type_unite' => '', 'rangement' => 'heure', 'groupe' => 'donnees_etats_calcules'),
 	'resume'               => array('origine' => 'calcul', 'type_php' => 'mixed', 'type_unite' => '', 'rangement' => 'heure', 'groupe' => 'donnees_etats_calcules'),
@@ -180,6 +182,7 @@ $GLOBALS['rainette_config']['langues_alternatives'] = array(
 	'gu'           => array(),           // goudjrati
 	'ha'           => array(),           // haoussa
 	'hac'          => array('ku'),       // Kurdish-Horami
+	'haz'          => array('fa'),       // Hazara
 	'hbo'          => array('il'),       // hebreu classique ou biblique
 	'he'           => array(),           // hébreu
 	'hi'           => array(),           // hindi
@@ -389,7 +392,7 @@ function meteo_normaliser($configuration_service, $mode, $flux, $periode) {
 							: table_valeur($flux, implode('/', $cle_service), '');
 						if ($valeur_service !== '') {
 							$typer = donnee_typer($mode, $_donnee);
-							$valeur_typee = $typer($valeur_service);
+							$valeur_typee = $typer ? $typer($valeur_service) : $valeur_service;
 
 							// Vérification de la donnée en cours de traitement si une fonction idoine existe
 							$verifier = "donnee_verifier_${_donnee}";
@@ -453,12 +456,27 @@ function donnee_typer($mode, $donnee) {
 			case 'heure':
 				$fonction = 'donnee_formater_heure';
 				break;
+			case 'mixed':
+				$fonction = '';
+				break;
 			default:
 				$fonction = '';
 		}
 	}
 
 	return $fonction;
+}
+
+/**
+ * Formate un mixed.
+ *
+ * @param mixed $donnee Correspond à un index du tableau associatif standardisé à formater en date standard.
+ *
+ * @return mixed La donnée renvoyée telle que.
+ */
+function donnee_formater_mixed($donnee) {
+	// On ne fait rien car on ne sait
+	return $donnee;
 }
 
 /**

@@ -199,6 +199,7 @@ $GLOBALS['rainette_wwo_config']['conditions'] = array(
 		'icon_meteo'            => array('cle' => array('weatherIconUrl', 0, 'value')),
 		'desc_meteo'            => array('cle' => array('weatherDesc', 0, 'value')),
 		'trad_meteo'            => array('cle' => array('lang_', 0, 'value'), 'suffixe_langue' => array('id_cle' => 0)),
+		'jour_meteo'            => array('cle' => array()),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
 	),
 );
@@ -248,6 +249,7 @@ $GLOBALS['rainette_wwo_config']['previsions'] = array(
 		'icon_meteo'           => array('cle' => array('weatherIconUrl', 0, 'value')),
 		'desc_meteo'           => array('cle' => array('weatherDesc', 0, 'value')),
 		'trad_meteo'           => array('cle' => array('lang_', 0, 'value'), 'suffixe_langue' => array('id_cle' => 0)),
+		'jour_meteo'            => array('cle' => array()),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
 	),
 );
@@ -295,7 +297,8 @@ function wwo_service2configuration($mode) {
  * du service (par exemple, le code d'inscription, le format des résultats...).
  *
  * @api
- * @uses langue2code_wwo()
+ * @uses langue_determiner()
+ * @uses lieu_normaliser()
  *
  * @param string $lieu
  *        Lieu pour lequel on acquiert les données météorologiques.
@@ -478,7 +481,7 @@ function etat2resume_wwo(&$tableau, $configuration) {
 	if ($tableau['code_meteo'] and $tableau['icon_meteo']) {
 		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
 		// Pour ce service aucun indicateur n'est disponible
-		// -> on utilise le nom de l'icone qui contient l'indication "night" pour la nuit
+		// -> on utilise le nom de l'icone qui contient toujours l'indication "night" pour la nuit
 		$icone = basename($tableau['icon_meteo']);
 		if (strpos($icone, '_night') === false) {
 			// C'est le jour

@@ -177,6 +177,7 @@ $GLOBALS['rainette_darksky_config']['conditions'] = array(
 		'icon_meteo'            => array('cle' => array('icon')),
 		'desc_meteo'            => array('cle' => array('summary')),
 		'trad_meteo'            => array('cle' => array()),
+		'jour_meteo'            => array('cle' => array()),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
 	),
 );
@@ -222,6 +223,7 @@ $GLOBALS['rainette_darksky_config']['previsions'] = array(
 		'icon_meteo'           => array('cle' => array('icon')),
 		'desc_meteo'           => array('cle' => array('summary')),
 		'trad_meteo'           => array('cle' => array()),
+		'jour_meteo'           => array('cle' => array()),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
 	),
 );
@@ -421,7 +423,7 @@ function etat2resume_darksky(&$tableau, $configuration) {
 
 	if ($tableau['code_meteo'] and $tableau['icon_meteo']) {
 		// Determination de l'indicateur jour/nuit. Pour ce service aucun indicateur n'est disponible.
-		// -> on ne se sert cependant pas de cet indicateur pour l'icone qui lui est commun.
+		// -> le calcul qui est fait n'est pas déterministe car il existe des icones communs jour/nuit.
 		if (strpos($tableau['icon_meteo'], '-night') === false) {
 			// C'est le jour
 			$tableau['periode'] = 0;

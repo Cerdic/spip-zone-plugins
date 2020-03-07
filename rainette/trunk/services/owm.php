@@ -190,6 +190,7 @@ $GLOBALS['rainette_owm_config']['conditions'] = array(
 		'icon_meteo'            => array('cle' => array('weather', 0, 'icon')),
 		'desc_meteo'            => array('cle' => array('weather', 0, 'description')),
 		'trad_meteo'            => array('cle' => array()),
+		'jour_meteo'            => array('cle' => array()),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
 	),
 );
@@ -234,6 +235,7 @@ $GLOBALS['rainette_owm_config']['previsions'] = array(
 		'icon_meteo'           => array('cle' => array('weather', 0, 'icon')),
 		'desc_meteo'           => array('cle' => array('weather', 0, 'description')),
 		'trad_meteo'           => array('cle' => array()),
+		'jour_meteo'           => array('cle' => array()),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
 	),
 );
@@ -446,7 +448,7 @@ function etat2resume_owm(&$tableau, $configuration) {
 
 	if ($tableau['code_meteo'] and $tableau['icon_meteo']) {
 		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
-		// Pour ce service le nom du fichier icone finit par "d" pour le jour et
+		// Pour ce service le nom du fichier icone finit toujours par "d" pour le jour et
 		// par "n" pour la nuit.
 		if (strpos($tableau['icon_meteo'], 'n') === false) {
 			// C'est le jour

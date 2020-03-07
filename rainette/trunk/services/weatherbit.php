@@ -188,8 +188,8 @@ $GLOBALS['rainette_weatherbit_config']['conditions'] = array(
 		'icon_meteo'            => array('cle' => array('weather', 'icon')),
 		'desc_meteo'            => array('cle' => array('weather', 'description')),
 		'trad_meteo'            => array('cle' => array()),
+		'jour_meteo'            => array('cle' => array('pod')),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
-		// TODO : il existe l'indicateur jour/nuit directement renvoyé par le service (pod).
 	),
 );
 
@@ -236,8 +236,8 @@ $GLOBALS['rainette_weatherbit_config']['previsions'] = array(
 		'icon_meteo'           => array('cle' => array('weather', 'icon')),
 		'desc_meteo'           => array('cle' => array('weather', 'description')),
 		'trad_meteo'           => array('cle' => array()),
+		'jour_meteo'           => array('cle' => array('pod')),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
-		// TODO : il existe l'indicateur jour/nuit directement renvoyé par le service (pod).
 	),
 );
 
@@ -459,14 +459,8 @@ function etat2resume_weatherbit(&$tableau, $configuration) {
 
 	if ($tableau['code_meteo'] and $tableau['icon_meteo']) {
 		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icône.
-		// TODO : Pour ce service il existe un indicateur qu'il faudra utiliser
-		if (substr($tableau['icon_meteo'], -1) == 'd') {
-			// C'est le jour
-			$tableau['periode'] = 0;
-		} else {
-			// C'est la nuit
-			$tableau['periode'] = 1;
-		}
+		// - on utilise l'indicateur fourni par le service
+		$tableau['periode'] = $tableau['jour_meteo'] == 'd' ? 0 : 1;
 
 		// Détermination du résumé à afficher.
 		// Depuis la 3.4.6 on affiche plus que le résumé natif de chaque service car les autres services
