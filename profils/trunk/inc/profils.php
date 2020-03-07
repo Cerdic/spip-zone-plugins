@@ -192,6 +192,7 @@ function profils_chercher_saisies_profil($form, $id_auteur=0, $id_ou_identifiant
 	
 	// On ne continue que si on a un profil sous la main
 	if ($profil = profils_recuperer_profil($id_ou_identifiant_profil) and $config = $profil['config']) {
+		// Pour chaque objet, on va chercher les bonnes saisies
 		foreach (array('auteur', 'organisation', 'contact') as $objet) {
 			// Si c'est autre chose que l'utilisateur, faut le plugin qui va avec et que ce soit activé
 			if ($objet == 'auteur' or (defined('_DIR_PLUGIN_CONTACTS') and $config["activer_$objet"])) {
@@ -300,6 +301,27 @@ function profils_chercher_saisies_profil($form, $id_auteur=0, $id_ou_identifiant
 					$saisies = array_merge($saisies, $saisies_a_utiliser);
 				}
 			}
+		}
+		
+		// Quel est le champ email principal
+		$champ_email_principal = profils_chercher_champ_email_principal($config);
+		$name_email_principal = '';
+		foreach ($champ_email_principal as $cle) {
+			if (!$name_email_principal) {
+				$name_email_principal = $cle;
+			}
+			else {
+				$name_email_principal .= "[$cle]";
+			}
+		}
+		// On ajoute une info à ce champ
+		if ($saisie_email_principal = saisies_chercher($saisies, $name_email_principal)) {
+			$saisie_email_principal['options']['conteneur_class'] .= ' email_principal';
+			$saisies = saisies_modifier(
+				$saisies,
+				$name_email_principal,
+				$saisie_email_principal
+			);
 		}
 	}
 		

@@ -89,23 +89,24 @@ function profils_formulaire_fond($flux) {
 		$flux['args']['form'] == 'inscription'
 		and $saisies = $flux['args']['contexte']['_saisies']
 	) {
-		// On commence par virer les champs de départ car on va faire à notre sauce
-		$flux['data'] = preg_replace(
-			"%<div[^>]*saisie_(nom|mail)_inscription[^>]*>.*?</div>%ims",
-			'',
-			$flux['data']
-		);
-		
 		// On génère le HTML des champs
 		$contexte = $flux['args']['contexte'];
 		$contexte['saisies'] = $contexte['_saisies'];
 		unset($contexte['_saisies']);
-		$champs = recuperer_fond('inclure/generer_saisies', $contexte);
+		$champs = '<div class="editer-groupe">' . recuperer_fond('inclure/generer_saisies', $contexte) . '</div>';
 		
-		// On insère
+		// On insère après le fieldset existant
 		$flux['data'] = preg_replace(
 			"|</fieldset>|Uims",
 			"\\0" . $champs,
+			$flux['data'],
+			1
+		);
+		
+		// On supprime tout le PREMIER fieldset par défaut, qui n'est pas utilisé
+		$flux['data'] = preg_replace(
+			"%<fieldset[^>]*>.*?</fieldset>%ims",
+			'',
 			$flux['data'],
 			1
 		);

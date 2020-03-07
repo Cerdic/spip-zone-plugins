@@ -19,7 +19,6 @@
 	<utilise nom="contacts" compatibilite="[4.0.0;]" />
 	<utilise nom="coordonnees" compatibilite="[2.3.28;]" />
 	<utilise nom="cextras" compatibilite="[3.11.4;]" />
-	<utilise nom="inscriptionmotdepasse" />
 
 	<pipeline nom="autoriser" inclure="profils_autorisations.php" /> 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/profils.php" /> 
