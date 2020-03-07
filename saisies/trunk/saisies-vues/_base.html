@@ -29,11 +29,18 @@ Hors option 'valeur_uniquement' :
 		#SET{reponse,#ENV*{valeur}|saisie_traitement_vue{#ENV**}}
 	]
 
+[(#GET{enfants}|oui)
+	#SET{saisies_enfants,#ENV{saisies}|saisies_lister_par_nom|array_keys}
+	#SET{valeurs_enfants,#ENV{valeurs}|array_intersect_key{#GET{saisies_enfants}|array_flip}}
+	#SET{enfants_vides,0}
+	[(#GET{valeurs_enfants}|array_filter|non)
+		#SET{enfants_vides,1}
+	]
+]
 [(#REM) Maintenant on affiche en encapsulant ou pas ]
-
 [(#REM) Cas normal avec présentation ]
 [(#GET{valeur_uniquement}|non)
-<div class="champ afficher[ afficher_(#ENV{nom}|saisie_nom2classe)][ saisie_(#ENV{type_saisie})][ (#ENV{conteneur_class,#ENV{li_class}})][ (#GET{reponse}|non)sans_reponse vide]">
+<div class="champ afficher[ afficher_(#ENV{nom}|saisie_nom2classe)][ saisie_(#ENV{type_saisie})][ (#ENV{conteneur_class,#ENV{li_class}})][ (#GET{reponse}|non)sans_reponse vide][(#GET{enfants_vides}|oui) sans_reponse vide]">
 	[(#REM) S'il y a des enfants on n'inclut que la vue ]
 	[(#GET{enfants}|oui)
 		#GET{reponse}
