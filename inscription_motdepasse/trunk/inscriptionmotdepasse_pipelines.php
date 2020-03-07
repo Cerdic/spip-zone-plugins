@@ -37,8 +37,17 @@ function inscriptionmotdepasse_formulaire_fond($flux){
 	if ($flux['args']['form'] == 'inscription'){
 		$champs_password = recuperer_fond('formulaires/inc-inscriptionmotdepasse', $flux['args']['contexte']);
 		
+		// S'il y a le plugin Profils, on cherche l'email principal
+		if (defined('_DIR_PLUGIN_PROFILS')) {
+			$chercher = '%<(li|div)[^>]*email_principal[^>]*>.*?</\1>%is';
+		}
+		// Sinon cas par défaut, on insère après le champ email (dans le editer-groupe)
+		else {
+			$chercher = '%<(li|div)[^>]*(saisie|editer)_mail_inscription[^>]*>.*?</\1>%is';
+		}
+		
 		$flux['data'] = preg_replace(
-			'%<(li|div)[^>]*(saisie|editer)_mail_inscription[^>]*>.*?</\1>%is',
+			$chercher,
 			"$0$champs_password",
 			$flux['data']
 		);
