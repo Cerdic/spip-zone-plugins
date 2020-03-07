@@ -12,7 +12,6 @@ function formulaires_commander_abonnement_charger_dist($retour = ''){
 		'id_abonnements_offre' => 0,
 		'montants_persos' => array(),
 	);
-	
 	return $contexte;
 }
 
@@ -76,15 +75,18 @@ function formulaires_commander_abonnement_traiter_dist($retour = '') {
 
 	// 1) Soit il y a déjà une commande d'abonnement en cours,
 	// on la met à jour avec l'offre sélectionnée
-	if ($detail = sql_fetsel(
-		'd.*',
-		'spip_commandes_details AS d INNER JOIN spip_commandes AS c ON c.id_commande=d.id_commande',
-		array(
-			'd.objet=' . sql_quote('abonnements_offre'),
-			'c.statut=' . sql_quote('encours'),
-			'c.id_auteur=' . intval(session_get('id_auteur')),
+	if (
+		$id_auteur = session_get('id_auteur')
+		and $detail = sql_fetsel(
+			'd.*',
+			'spip_commandes_details AS d INNER JOIN spip_commandes AS c ON c.id_commande=d.id_commande',
+			array(
+				'd.objet=' . sql_quote('abonnements_offre'),
+				'c.statut=' . sql_quote('encours'),
+				'c.id_auteur=' . intval($id_auteur),
+			)
 		)
-	)) {
+	) {
 		$montant_ht = $montant;
 		$echeances = array();
 		$periodicite = '';
@@ -134,6 +136,5 @@ function formulaires_commander_abonnement_traiter_dist($retour = '') {
 		);
 		session_set('commande_abonnement', $commande_abonnement);
 	}
-	
 	return $retours;
 }
