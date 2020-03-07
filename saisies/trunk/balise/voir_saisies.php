@@ -14,12 +14,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Compile la balise `#VOIR_SAISIES` qui retourne le code HTML des vues de formulaire,
  * à partir du tableau des saisies transmises
  *
- * La balise accepte 1 paramètre qui est une liste de descriptions de saisies
- * dont on veut générer le HTML affichant les vues du formulaires
- *
+ * La balise accepte 2 paramètre :
+ *  - une liste de descriptions de saisies
+ *  dont on veut générer le HTML affichant les vues du formulaires
+ *  - un liste des valeurs
  * Cette balise est un raccourcis :
  * - `#VOIR_SAISIES{#TABLEAU_DE_SAISIES}` est équivalent à
- * - `#INCLURE{fond=inclure/voir_saisies,env,saisies=#TABLEAU_DE_SAISIES}`
+ * - `#INCLURE{fond=inclure/voir_saisies,env,saisies=#TABLEAU_DE_SAISIES,valeurs=#TABLEAU_DE_VALEURS}`
  *
  * @syntaxe `#VOIR_SAISIES{#TABLEAU_DE_SAISIES}`
  * @uses Pile::recuperer_et_supprimer_argument_balise()
