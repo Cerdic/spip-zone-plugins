@@ -69,23 +69,6 @@ function rainette_debug_afficher_cache($lieu, $mode = 'previsions', $service = '
 }
 
 /**
- *
- * @return string
- */
-function rainette_debug_afficher_config() {
-	$debug = '';
-
-	// Recuperation du tableau des conditions courantes
-	if (_RAINETTE_DEBUG and function_exists('bel_env')) {
-		include_spip('inc/config');
-		$execution = lire_config('rainette_execution', array());
-		$debug = bel_env(serialize($execution), true);
-	}
-
-	return $debug;
-}
-
-/**
  * @param string $mode
  * @param array  $jeu
  *
