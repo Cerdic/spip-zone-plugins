@@ -5,8 +5,12 @@
 	url="https://trad.spip.net"
 	source="https://git.spip.net/spip-contrib-extensions/prix.git"
 	reference="fr">
-	<langue code="en" url="https://trad.spip.net/tradlang_module/prix?lang_cible=en" total="25" traduits="7" relire="0" modifs="0" nouveaux="18" pourcent="28.00">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/prix?lang_cible=en" total="25" traduits="23" relire="2" modifs="0" nouveaux="0" pourcent="92.00">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
+		<traducteur nom="tcharlss" lien="https://trad.spip.net/auteur/drbouvierleduc" />
+	</langue>
+	<langue code="es" url="https://trad.spip.net/tradlang_module/prix?lang_cible=es">
+		<traducteur nom="tcharlss" lien="https://trad.spip.net/auteur/drbouvierleduc" />
 	</langue>
 	<langue code="fa" url="https://trad.spip.net/tradlang_module/prix?lang_cible=fa" total="25" traduits="7" relire="0" modifs="0" nouveaux="18" pourcent="28.00">
 		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
