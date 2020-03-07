@@ -174,7 +174,7 @@ $GLOBALS['rainette_weatherbit_config']['conditions'] = array(
 		// Données anémométriques
 		'vitesse_vent'          => array('cle' => array('wind_spd')),
 		'angle_vent'            => array('cle' => array('wind_dir')),
-		'direction_vent'        => array('cle' => array('wind_cdir')),
+		'direction_vent'        => array('cle' => array('')), // la valeur renvoyée par le service dépend de la langue
 		// Données atmosphériques : risque_uv est calculé
 		'precipitation'         => array('cle' => array('precip')),
 		'humidite'              => array('cle' => array('rh')),
@@ -387,9 +387,11 @@ function weatherbit_erreur_verifier($erreur) {
 function weatherbit_complement2conditions($tableau, $configuration) {
 
 	if ($tableau) {
+		include_spip('inc/rainette_convertir');
+		// Calcul de la direction du vent (16 points) car l'indicateur fourni change en fonction de la langue.
+		$tableau['direction_vent'] = angle2direction($tableau['angle_vent']);
 		// Vitesse du vent en km/h plutôt qu'en m/s si on est en système métrique.
 		if ($configuration['unite'] == 'm') {
-			include_spip('inc/rainette_convertir');
 			$tableau['vitesse_vent'] = metre_seconde2kilometre_heure($tableau['vitesse_vent']);
 		}
 
@@ -422,6 +424,9 @@ function weatherbit_complement2conditions($tableau, $configuration) {
 function weatherbit_complement2previsions($tableau, $configuration, $index_periode) {
 
 	if (($tableau) and ($index_periode > -1)) {
+		include_spip('inc/rainette_convertir');
+		// Calcul de la direction du vent (16 points) car l'indicateur fourni change en fonction de la langue.
+		$tableau['direction_vent'] = angle2direction($tableau['angle_vent']);
 		// Vitesse du vent en km/h plutôt qu'en m/s si on est en système métrique.
 		if ($configuration['unite'] == 'm') {
 			include_spip('inc/rainette_convertir');
