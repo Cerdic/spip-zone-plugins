@@ -409,9 +409,10 @@ function saisies_comparer_par_identifiant($saisies_anciennes, $saisies_nouvelles
 /**
  * Liste toutes les saisies configurables (ayant une description).
  * @param string $saisies_repertoire le répertoire où trouver les saisies
+ * @param bool $inclure_obsolete : faut-il inclure les saisies obsolètes ?
  * @return array Un tableau listant des saisies et leurs options
  */
-function saisies_lister_disponibles($saisies_repertoire = 'saisies') {
+function saisies_lister_disponibles($saisies_repertoire = 'saisies', $inclure_obsoletes = true) {
 	static $saisies = null;
 
 	if (is_null($saisies)) {
@@ -422,7 +423,6 @@ function saisies_lister_disponibles($saisies_repertoire = 'saisies') {
 			foreach ($liste as $fichier => $chemin) {
 				$type_saisie = preg_replace(',[.]yaml$,i', '', $fichier);
 				$dossier = str_replace($fichier, '', $chemin);
-
 				// On ne garde que les saisies qui ont bien le HTML avec !
 				if (
 					file_exists("$dossier$type_saisie.html")
@@ -430,7 +430,12 @@ function saisies_lister_disponibles($saisies_repertoire = 'saisies') {
 						is_array($saisie = saisies_charger_infos($type_saisie))
 					)
 				) {
-					$saisies[$type_saisie] = $saisie;
+					if (!isset($saisie['obsolete'])
+							or $saisie['obsolete'] == false
+							or $inclure_obsoletes
+					) {
+						$saisies[$type_saisie] = $saisie;
+					}
 				}
 			}
 		}
@@ -441,7 +446,6 @@ function saisies_lister_disponibles($saisies_repertoire = 'saisies') {
 
 /**
  * Liste tous les groupes de saisies configurables (ayant une description).
- *
  * @return array Un tableau listant des saisies et leurs options
  */
 function saisies_groupes_lister_disponibles($saisies_repertoire = 'saisies') {
@@ -468,12 +472,13 @@ function saisies_groupes_lister_disponibles($saisies_repertoire = 'saisies') {
 
 /**
  * Lister les saisies existantes ayant une définition SQL.
- *
+ * @param string $saisies_repertoire le répertoire où trouver les saisies
+ * @param bool $inclure_obsoletes : faut-il inclure les saisies obsolètes ?
  * @return array Un tableau listant des saisies et leurs options
  */
-function saisies_lister_disponibles_sql($saisies_repertoire = 'saisies') {
+function saisies_lister_disponibles_sql($saisies_repertoire = 'saisies', $inclure_obsoletes = true) {
 	$saisies = array();
-	$saisies_disponibles = saisies_lister_disponibles($saisies_repertoire);
+	$saisies_disponibles = saisies_lister_disponibles($saisies_repertoire, $inclure_obsoletes);
 	foreach ($saisies_disponibles as $type => $saisie) {
 		if (isset($saisie['defaut']['options']['sql']) and $saisie['defaut']['options']['sql']) {
 			$saisies[$type] = $saisie;

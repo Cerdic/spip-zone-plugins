@@ -79,9 +79,9 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 
 	// La liste des saisies
 	if (isset($options['uniquement_sql']) and $options['uniquement_sql']) {
-		$saisies_disponibles = saisies_lister_disponibles_sql();
+		$saisies_disponibles = saisies_lister_disponibles_sql('saisies',false);
 	} else {
-		$saisies_disponibles = saisies_lister_disponibles();
+		$saisies_disponibles = saisies_lister_disponibles('saisies', false);
 	}
 	if (isset($options['saisies_exclues']) and  is_array($options['saisies_exclues'])) {
 		$saisies_disponibles = array_diff_key($saisies_disponibles, array_flip($options['saisies_exclues']));

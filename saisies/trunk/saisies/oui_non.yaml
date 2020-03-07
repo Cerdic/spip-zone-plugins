@@ -2,6 +2,7 @@
 titre: '<:saisies:saisie_oui_non_titre:>'
 description: '<:saisies:saisie_oui_non_explication:>'
 icone: 'images/saisies_oui_non.png'
+obsolete: true
 options:
   -
     saisie: 'fieldset'
