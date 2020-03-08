@@ -224,7 +224,7 @@ function inc_meteo_charger_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 										// Calcul du risque uv à partir de l'indice uv si celui-ci est fourni
 										if (
 											isset($donnees['indice_uv'])
-											and is_int($donnees['indice_uv'])
+											and is_float($donnees['indice_uv'])
 										) {
 											include_spip('inc/rainette_convertir');
 											$donnees['risque_uv'] = indice2risque_uv($donnees['indice_uv']);

@@ -49,7 +49,7 @@ function angle2direction($angle) {
  */
 function indice2risque_uv($indice_uv) {
 	$risque_uv = '';
-	if (is_int($indice_uv)) {
+	if (is_float($indice_uv)) {
 		if ($indice_uv >= 11) {
 			$risque_uv = 'extreme';
 		} elseif ($indice_uv >= 8) {

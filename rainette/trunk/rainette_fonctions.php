@@ -151,15 +151,15 @@ function rainette_afficher_resume($resume) {
  * @api
  * @filtre
  *
- * @param mixed $direction
- *                         La direction soit sous forme d'une valeur numérique entre 0 et 360, soit sous forme
+ * @param mixed $direction La direction soit sous forme d'une valeur numérique entre 0 et 360, soit sous forme
  *                         d'une chaine. Certains services utilisent la chaine "V" pour indiquer une direction
  *                         variable.
  *
- * @return string
- *                La chaine traduite indiquant la direction du vent.
+ * @return string La chaine traduite indiquant la direction du vent.
  */
 function rainette_afficher_direction($direction) {
+
+	// Calcul de la direction abrégée si on passe un angle et pas une direction
 	include_spip('inc/rainette_convertir');
 	$direction_abregee = angle2direction($direction);
 
@@ -240,7 +240,7 @@ function rainette_afficher_unite($valeur, $type_donnee = '', $precision = -1, $s
 		'population'    => 0,
 		'precipitation' => 1,
 		'vitesse'       => 0,
-		'indice'        => 0
+		'indice'        => 1
 	);
 	if (!$service) {
 		$service = rainette_service_defaut();

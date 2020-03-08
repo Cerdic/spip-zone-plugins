@@ -97,7 +97,6 @@ $GLOBALS['rainette_weatherbit_config']['service'] = array(
 		'theme_local'   => 'original',
 		'theme_weather' => 'sticker',
 	),
-	// TODO : tout à revoir
 	'transcodage_weather' => array(
 		'200' => array(4, 4),
 		'201' => array(4, 4),
