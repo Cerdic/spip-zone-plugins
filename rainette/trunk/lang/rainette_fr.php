@@ -256,6 +256,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meteo_395' => 'Neige Lourde',
 
 	// N
+	'nebulosite' => 'Nébulosité',
 	'noisette_description_conditions' => 'Affichage des conditions météorologiques pour un service donné',
 	'noisette_description_previsions_24h' => 'Affichage des prévisions météorologiques 24h pour un service donné',
 	'noisette_explication_jour' => 'Le jour courant correspond à la valeur 0 et ainsi de suite. Consultez la documentation pour connaitre le nombre de jours de prévisions fournis pour chaque service.',

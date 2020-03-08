@@ -35,6 +35,7 @@
 	#SET{entete, #GET{entete}|array_merge{#ARRAY{indice_uv, 2}}}
 	#SET{indice_uv, oui}
 ]
+#SET{entete, #GET{entete}|array_merge{#ARRAY{nebulosite, 1}}}
 #SET{nb_colonnes, 0}
 <B_previsions_table_24h>
 <table class="table rainette_previsions_table_24h">
@@ -102,6 +103,9 @@
 			<td class="indice_uv">
 				[(#VALEUR{heure/#GET{index_heure}/risque_uv})]
 			</td>]
+			<td class="nebulosite">
+				[(#VALEUR{heure/#GET{index_heure}/nebulosite})]
+			</td>
 		</tr>
 </BOUCLE_previsions_table_24h>
 	</tbody>
