@@ -78,9 +78,11 @@ function formulaires_editer_formulaire_champs_verifier($id_formulaire) {
 	include_spip('inc/saisies');
 	$erreurs = array();
 
-	// Si c'est pas une confirmation ni une annulation
+	// Si c'est pas une confirmation ni une annulation, ni un revert
 	if (!_request('enregistrer_confirmation')
-		and !($annulation = _request('annulation'))) {
+		and !($annulation = _request('annulation'))
+		and !_request('revert')
+		) {
 		// On récupère le formulaire dans la session
 		$saisies_nouvelles = session_get("constructeur_formulaire_formidable_$id_formulaire");
 		$md5_precedent_formulaire_initial = session_get("constructeur_formulaire_formidable_$id_formulaire".'_md5_formulaire_initial');
