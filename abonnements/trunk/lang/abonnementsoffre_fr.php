@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_creer_abonnementsoffre' => 'Créer une offre d’abonnement',
 	'icone_modifier_abonnementsoffre' => 'Modifier cette offre d’abonnement',
-	'info_1_abonnementsoffre' => 'Une offre d’abonnement',
+	'info_1_abonnementsoffre' => '1 offre d’abonnement',
 	'info_1_an' => '1 an',
 	'info_1_heure' => '1 heure',
 	'info_1_jour' => '1 jour',
