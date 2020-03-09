@@ -1,0 +1,64 @@
+
+titre: '<:saisies:saisie_explication_titre:>'
+description: '<:saisies:saisie_explication_explication:>'
+icone: 'images/saisies_explication.png'
+options:
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'description'
+      label: '<:saisies:option_groupe_description:>'
+    saisies:
+      -
+        saisie: 'textarea'
+        options:
+          nom: 'texte'
+          label: '<:saisies:saisie_explication_texte_label:>'
+          explication: '<:saisies:saisie_explication_explication:>'
+          class: 'inserer_barre_edition'
+          cols: 40
+          rows: 5
+      -
+        saisie: 'input'
+        options:
+          nom: 'titre'
+          label: '<:saisies:saisie_explication_titre_label:>'
+      -
+        saisie: 'case'
+        options:
+          nom: 'masquer'
+          label: '<:saisies:saisie_explication_masquer_label:>'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'affichage'
+      label: '<:saisies:option_groupe_affichage:>'
+    saisies:
+      -
+        saisie: 'textarea'
+        options:
+          nom: 'afficher_si'
+          label: '<:saisies:option_afficher_si_label:>'
+          explication: '<:saisies:option_afficher_si_explication:>'
+          rows: 5
+        verifier:
+          type: 'afficher_si'
+      -
+        saisie: 'case'
+        options:
+          nom: 'afficher_si_remplissage_uniquement'
+          label: '<:saisies:option_afficher_si_remplissage_uniquement_label:>'
+          label_case: '<:saisies:option_afficher_si_remplissage_uniquement_label_case:>'
+          explication: '<:saisies:option_afficher_si_remplissage_uniquement_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'conteneur_class'
+          label: '<:saisies:option_class_label:>'
+          size: 50
+defaut:
+  options:
+    texte: '<:saisies:saisie_explication_titre:>'
+    # champs extras (definition du champ sql)
+    # Non, cette saisie n'a rien à saisir en bdd !
+    # sql: "text DEFAULT '' NOT NULL"

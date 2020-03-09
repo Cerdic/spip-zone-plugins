@@ -1,0 +1,13 @@
+<B_etapes>
+<nav class="formulaire_spip__etapes etapes">
+	<ol class="etapes__items">
+		<BOUCLE_etapes(DATA){source table, #ENV{etapes}}>
+		<li class="etapes__item"[(#ENV{_etape}|=={#CLE}|oui) aria-current="step"]>
+			[(#ENV{_etape}|=={#CLE}|oui)<em>#VALEUR{options/label}</em>]
+			[(#ENV{_etape}|>{#CLE}|oui)<input type="submit" class="submit" name="_retour_etape_#CLE" value="#VALEUR{options/label}" />]
+			[(#ENV{_etape}|<{#CLE}|oui)<span>#VALEUR{options/label}</span>]
+		</li>
+		</BOUCLE_etapes>
+	</ol>
+</nav>
+</B_etapes>
