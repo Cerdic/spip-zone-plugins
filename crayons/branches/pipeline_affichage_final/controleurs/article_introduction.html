@@ -1,0 +1,54 @@
+[(#REM)
+
+	Controleur pour le crayon 'article_introduction' php+html
+	
+	(les balises écrites ci-dessous sont volontairement avec un espace pour ne pas être
+	compilée)
+	
+	Appelé via # EDIT{introduction} dans une boucle article
+	
+	Affiche les trois champs :
+	- descriptif (si rempli, il sera le rendu de # INTRODUCTION)
+	- chapo 
+	- texte
+	
+	Si aucun descriptif, le rendu de # INTRODUCTION est par défaut les 600 premiers caractères de
+	# CHAPO + # TEXTE
+
+]
+#CACHE{0}
+<BOUCLE_a(ARTICLES){id_article}{statut==.}>
+<ul class="editer-groupe">
+	<li class="fieldset" style="width:#ENV{largeur}px;#ENV{style}">
+		<h3 class="legend"><:crayons:legend_introduction_article:></h3>
+		<p class="explication"><:crayons:explication_introduction_article:></p>
+		<ul class="editer-groupe">
+			<li class="editer_descriptif">
+				<label for="descriptif"><:texte_descriptif_rapide:></label>
+				<textarea class="crayon-active maxheight150" 
+					name="#ENV{name_descriptif}"
+					id="descriptif"
+					style="width:100%;
+					height:#ENV{h_descriptif}px;">[(#DESCRIPTIF**|entites_html)]</textarea>
+			</li>
+			[(#CONFIG{articles_chapeau}|=={oui}|oui)
+			<li class="editer_chapo">
+				<label for="chapo"><:info_chapeau:></label>
+				<textarea class="crayon-active"
+					name="#ENV{name_chapo}"
+					id="chapo"
+					style="width:100%;
+					height:#ENV{h_chapo}px;">[(#CHAPO**|entites_html)]</textarea>
+			</li>]
+			<li class="editer_texte">
+				<label for="text_area"><:info_texte:></label>
+				<textarea class="crayon-active"
+					name="#ENV{name_texte}"
+					id="text_area"
+					style="width:100%;
+					height:#ENV{h_texte}px;">[(#TEXTE**|entites_html)]</textarea>
+			</li>
+		</ul>
+	</li>
+</ul>
+</BOUCLE_a>
