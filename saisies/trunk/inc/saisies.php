@@ -142,7 +142,7 @@ function saisies_identifier($saisies, $regenerer = false) {
 	}
 
 	foreach ($saisies as $k => $saisie) {
-		if ($k != 'options') {
+		if ($k !== 'options') {
 			$saisies[$k] = saisie_identifier($saisie, $regenerer);
 		}
 	}
