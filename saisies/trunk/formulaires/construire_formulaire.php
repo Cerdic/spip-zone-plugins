@@ -702,7 +702,6 @@ function saisies_groupe_inserer($formulaire_actuel, $saisie) {
 	//les champs du groupe
 	foreach ($saisies_charger_infos[$champ_options] as $info_saisie) {
 		unset($info_saisie['identifiant']);
-		$saisies_disponibles = saisies_lister_disponibles();
 		$construire_nom = $info_saisie[$champ_options]['nom'] ? $info_saisie[$champ_options]['nom'] : $info_saisie['saisie'];
 		$nom = $info_saisie[$champ_options]['nom'] = saisies_generer_nom($formulaire_actuel, $construire_nom);
 
