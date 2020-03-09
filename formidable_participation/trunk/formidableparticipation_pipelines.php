@@ -43,8 +43,13 @@ function formidableparticipation_traiter_formidableparticipation($flux){
 			'id_formulaires_reponse' => $id_formulaires_reponse
 		);
 
-		// Si c'est une mise à jour d'une réponse, on supprime les anciennes inscriptions avant de créer les nouvels
-		sql_delete('spip_evenements_participants', "id_formulaires_reponse=$id_formulaires_reponse");
+		// Si c'est une mise à jour d'une réponse, on supprime TOUTES
+		// les anciennes inscriptions avant de créer les nouvelles, mais on ne le fait qu'une fois
+		static $suppression_faite;
+		if (!$suppression_faite) {
+			sql_delete('spip_evenements_participants', "id_formulaires_reponse=$id_formulaires_reponse");
+			$suppression_faite = true;
+		}
 
 		// si evenement, on insere le participant et ses données
 		// et on laisse le traitement du nombre de places à la charge du webmestre et du squelette evenements
