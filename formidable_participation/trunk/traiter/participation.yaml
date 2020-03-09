@@ -12,6 +12,7 @@ options:
     options:
       nom: 'participation_auto'
       label: '<:formidableparticipation:traiter_participation_champ_participation_auto_label:>'
+      obligatoire: 'on'
       data:
         auto: '<:formidableparticipation:traiter_participation_champ_participation_auto_choix_auto_label:>'
         variable: '<:formidableparticipation:traiter_participation_champ_participation_auto_choix_variable_label:>'
@@ -106,6 +107,7 @@ options:
           data:
             fixe: '<:formidableparticipation:traiter_participation_champ_evenement_type_fixe_label:>'
             variable: '<:formidableparticipation:traiter_participation_champ_evenement_type_variable_label:>'
+          obligatoire: 'on'
       -
         saisie: 'input'
         options:
@@ -113,6 +115,7 @@ options:
           label: '<:formidableparticipation:traiter_participation_id_evenement_participation:>'
           explication: '<:formidableparticipation:traiter_participation_id_evenement_participation_explication:>'
           afficher_si : '@traitements[participation][evenement_type]@=="fixe"'
+          obligatoire: 'on'
       -
         saisie: 'champ'
         options:
@@ -121,3 +124,4 @@ options:
           env: true
           forcer_type: 'evenements'
           afficher_si : '@traitements[participation][evenement_type]@=="variable"'
+          obligatoire: 'on'
