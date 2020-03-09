@@ -622,7 +622,7 @@ function saisies_trouver_choix_alternatif($data, $valeur) {
  */
 function saisies_generer_aide() {
 	// On a déjà la liste par saisie
-	$saisies = saisies_lister_disponibles();
+	$saisies = saisies_lister_disponibles('saisies',false);
 
 	// On construit une liste par options
 	$options = array();

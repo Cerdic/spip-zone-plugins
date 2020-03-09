@@ -17,7 +17,7 @@ body.saisies_doc {
 	background-color: #efefef;
 }
 <B_saisies>
-<BOUCLE_saisies (DATA) {source table, #VAL{saisies}|saisies_lister_disponibles}>
+<BOUCLE_saisies (DATA) {source table, #VAL{saisies}|saisies_lister_disponibles{''}}>
 .navigation_avec_icones .bando2_saisie_[(#CLE)] { [background-image: url((#ICONE|image_reduire{16}|extraire_attribut{src}));] }
 </BOUCLE_saisies>
 </B_saisies>
