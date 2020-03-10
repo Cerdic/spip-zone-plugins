@@ -5,12 +5,12 @@
 	url="https://trad.spip.net"
 	source="https://git.spip.net/spip-contrib-extensions/abonnements.git"
 	reference="fr">
-	<langue code="en" url="https://trad.spip.net/tradlang_module/abonnement-abonnements?lang_cible=en" total="67" traduits="55" relire="0" modifs="4" nouveaux="8" pourcent="82.09">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/abonnement-abonnements?lang_cible=en" total="67" traduits="52" relire="0" modifs="7" nouveaux="8" pourcent="77.61">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Gilles" lien="https://trad.spip.net/auteur/gilles" />
 		<traducteur nom="tcharlss" lien="https://trad.spip.net/auteur/drbouvierleduc" />
 	</langue>
-	<langue code="es" url="https://trad.spip.net/tradlang_module/abonnement-abonnements?lang_cible=es" total="67" traduits="38" relire="0" modifs="1" nouveaux="28" pourcent="56.72">
+	<langue code="es" url="https://trad.spip.net/tradlang_module/abonnement-abonnements?lang_cible=es" total="67" traduits="35" relire="0" modifs="4" nouveaux="28" pourcent="52.24">
 		<traducteur nom="alf" lien="https://trad.spip.net/auteur/alf" />
 		<traducteur nom="dani" lien="https://trad.spip.net/auteur/dani" />
 		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
