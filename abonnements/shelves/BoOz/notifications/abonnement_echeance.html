@@ -1,0 +1,42 @@
+[(#REM)
+
+	Modèle pour la notification d'une échéance d'un abonnement
+
+	Paramètres :
+	** obligatoire
+	* conseillé
+	
+	- id_abonnement**
+	- nom*     : nom du destinataire
+	- email*   : email du destinataire
+	- duree*   : nombre indiquant la durée par rapport à l'échéance
+	- periode* : unité de la durée
+	             jours | mois
+	- quand*   : indique quand on se situe par rapport à l'échéance
+	             avant | apres | pendant
+]
+<BOUCLE_abonnement(ABONNEMENTS){id_abonnement}{tout}>
+[(#REM)
+	Pour la date, si on n'a pas les valeurs requises dans l'env, on prévoit un fallback
+]
+<BOUCLE_date(CONDITION){si #ENV{duree}|is_null|ou{#ENV{periode}|is_null}|ou{#ENV{quand}|is_null}}>
+#SET{duree,#ENV{date}|strtotime|moins{#DATE_FIN|strtotime}|div{86400}|abs|round}
+#SET{periode,jours}
+#SET{quand,#GET{duree}|=={0}|?{pendant,#ENV{date}|strtotime|>{#DATE_FIN|strtotime}|?{apres,avant}}}
+</BOUCLE_date>
+#SET{duree,#ENV{duree}}
+#SET{periode,#ENV{periode}}
+#SET{quand,#ENV{quand}}
+<//B_date>
+#SET{nom,#ENV{nom}|sinon{#INFO_NOM{auteur,#ID_AUTEUR}}}
+#SET{email,#ENV{email}|sinon{#INFO_EMAIL{auteur,#ID_AUTEUR}}}
+#SET{offre,#INFO_TITRE{abonnements_offre,#ID_ABONNEMENTS_OFFRE}}
+#SET{echeance, #VAL{abonnementsoffre:champ_periode_nb_}|concat{#GET{periode}}|_T{#ARRAY{nb,#GET{duree}}}}
+
+<body>
+<:abonnement:notification_echeance_chapo{nom=#GET{nom}}:>
+[(#VAL{abonnement:notification_echeance_corps_}|concat{#GET{quand}}|_T{#ARRAY{echeance,#GET{echeance},nom_site_spip,#NOM_SITE_SPIP,offre,#GET{offre}}})]
+<:abonnement:notification_echeance_signature:>
+</body>
+</BOUCLE_abonnement>
+#FILTRE{facteur_email_wrap_to_html}
