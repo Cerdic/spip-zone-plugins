@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_creer_abonnementsoffre' => 'Create a subscription offer',
 	'icone_modifier_abonnementsoffre' => 'Modify this subscription offer',
-	'info_1_abonnementsoffre' => 'A subscription offer',
+	'info_1_abonnementsoffre' => 'A subscription offer', # MODIF
 	'info_1_jours_apres' => '1 day after',
 	'info_1_jours_avant' => '1 day before',
 	'info_1_mois' => '1 month',
