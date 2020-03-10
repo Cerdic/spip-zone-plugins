@@ -410,7 +410,16 @@ function vues_dist($type, $modele, $id, $content, $wid) {
 					$valeur = typo($valeur);
 				}
 			}
+			$valeur = pipeline('crayons_vue_affichage_final',array(
+				'args'=>array(
+					'type'   => $type,
+					'modele' => $modele,
+					'id'     => $id
+				),
+				'data'=> $valeur
+			));
 		}
+
 		return $valeur;
 	}
 }
@@ -531,7 +540,7 @@ function revision_meta($a, $c = false) {
  *   Nom du module de langue sous la forme module_lang (ex local_fr)
  * @param bool|array $c
  *   Liste des champs modifiés
- *   'motif_chaine_traduction' => valeur saisie 
+ *   'motif_chaine_traduction' => valeur saisie
  * @return void
 **/
 function revision_traduction($a, $c = false) {
