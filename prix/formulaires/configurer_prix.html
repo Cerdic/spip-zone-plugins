@@ -31,7 +31,7 @@
 					<select class="select select2 chosen" name="#GET{name}" id="champ_#GET{name}">
 						<option value=""[ (#GET{valeur}|non)selected="selected"]><:prix:cfg_choisir_option:></option>
 						<BOUCLE_devises(DATA) {source table, #REM|prix_lister_devises}>
-						<option value="#CLE"[ (#CLE|=={#GET{valeur}}|oui)selected="selected"]>#VALEUR{nom}[ - (#CLE)][ - (#VALEUR{symbole})]</option>
+						<option value="#CLE"[ (#CLE|=={#GET{valeur}}|oui)selected="selected"]>#CODE - #NOM</option>
 						</BOUCLE_devises>
 					</select>
 				</div>

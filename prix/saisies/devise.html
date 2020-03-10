@@ -1,0 +1,19 @@
+[(#REM)
+
+	Saisie : sélection d'une devise
+
+	Paramètres :
+
+	- code_num : « oui » pour prendre le code numérique au lieu du code alphabétique à 3 lettres.
+	- multiple : « oui » pour autoriser une sélection de plusieurs valeurs
+	- paramètres de saisies/selection.html
+
+]
+#SET{devises,#ARRAY}
+#SET{code,#ENV{code_num}|=={oui}|?{code_num,code}}
+#SET{saisie,#ENV{multiple}|=={oui}|?{selection_multiple,selection}}
+<BOUCLE_devises(DATA) {source table, #REM|prix_lister_devises}>
+#SET{libelle,#CODE - #NOM}
+#SET{devises,#GET{devises}|array_merge{#ARRAY{#VALEUR{#GET{code}},#GET{libelle}}}}
+</BOUCLE_devises>
+<INCLURE{fond=saisies/#GET{saisie}, data=#GET{devises}, env}/>

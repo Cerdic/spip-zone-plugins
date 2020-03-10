@@ -1,0 +1,11 @@
+#SET{devises,#REM|prix_lister_devises}
+#SET{devise,#GET{devises/#ENV{valeur}}}
+[<span
+	class="devise"
+	[data-code="(#GET{devise/code}|attribut_html)"]
+	[data-code_num="(#GET{devise/code_num}|attribut_html)"]
+	[data-symbole="(#GET{devise/symbole}|attribut_html)"]
+	[data-nom="(#GET{devise/nom}|attribut_html)"]
+>
+	(#GET{devise/code})[ - (#GET{devise/nom})]
+</span>]

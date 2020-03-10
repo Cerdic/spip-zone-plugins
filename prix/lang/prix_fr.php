@@ -39,6 +39,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'prix_ht' => '@prix@ HT',
 	'prix_ttc' => '@prix@ TTC',
 
+	// S
+	'saisie_devise_titre' => 'Devise',
+	'saisie_devise_description' => 'Sélection unique ou multiple de devises',
+	'saisie_devise_option_code_label' => 'Valeur utilisée',
+	'saisie_devise_option_code_alpha_label' => 'Code alphabétique à 3 lettres',
+	'saisie_devise_option_code_num_label' => 'Code numérique',
+	'saisie_devise_option_multiple_label' => 'Permettre de sélectionner plusieurs devises',
+
 	// T
 	'titre_devises' => 'Devises',
 	'titre_page_configurer' => 'Configurer Prix',
