@@ -108,7 +108,10 @@ function abonnements_declarer_tables_objets_sql($tables) {
 		'date' => "date_debut",
 		'champs_editables' => array('id_abonnements_offre', 'id_auteur', 'date_debut', 'date_echeance', 'date_fin'),
 		'champs_versionnes' => array('id_abonnements_offre', 'id_auteur', 'date_debut', 'date_echeance', 'date_fin'),
-		'rechercher_champs' => array(),
+		'rechercher_champs' => array('date_echeance ' => 1),
+		'rechercher_jointures' => array(
+			'auteur' => array('nom' => 10, 'email' => 10),
+		),
 		'tables_jointures' => array(),
 		'join' => array('id_auteur' => 'id_auteur'),
 		'statut_textes_instituer' => array(
