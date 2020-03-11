@@ -47,7 +47,7 @@
 	<p><:reservation:label_email:> #GET{email}</p>
 
 	<BOUCLE_champs_extras(DATA){source tableau, #GET{valeurs_extras}}>
-		<p>[(#CLE|chercher_label|extraire_multi)] : #VALEUR</p>
+		[<p>[(#CLE|chercher_label|extraire_multi)] (#VALEUR)</p>]
 	</BOUCLE_champs_extras>
 	<BOUCLE_champs_extras_reservation(DATA){source tableau, #GET{extras}|table_valeur{reservation}}>
 		<p>
