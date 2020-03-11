@@ -41,6 +41,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'prix_ht' => '@prix@ ET',
 	'prix_ttc' => '@prix@ ATI',
 
+	// S
+	'saisie_devise_option_code_num_label' => 'Numeric code',
+
 	// T
 	'titre_devises' => 'Currencies',
 	'titre_page_configurer' => 'Configure Prices',

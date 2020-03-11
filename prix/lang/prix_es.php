@@ -40,6 +40,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'prix_ht' => '@prix@ excl.', # RELIRE
 	'prix_ttc' => '@prix@ incl.', # RELIRE
 
+	// S
+	'saisie_devise_option_code_num_label' => 'Código numérico', # RELIRE
+
 	// T
 	'titre_devises' => 'Monedas', # RELIRE
 	'titre_page_configurer' => 'Configurar Precio', # RELIRE
