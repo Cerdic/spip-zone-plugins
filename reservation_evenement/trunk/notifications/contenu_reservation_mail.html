@@ -50,12 +50,12 @@
 		[<p>[(#CLE|chercher_label|extraire_multi)] (#VALEUR)</p>]
 	</BOUCLE_champs_extras>
 	<BOUCLE_champs_extras_reservation(DATA){source tableau, #GET{extras}|table_valeur{reservation}}>
-		<p>
-			[(#VALEUR{options/label}
+		[<p>
+			(#VALEUR{options/label}
 				|chercher_label{#GET{extras}
 				|table_valeur{reservation}}
-				|extraire_multi|_T)] : [(#ID_RESERVATION|generer_info_entite{reservation,#VALEUR{options/nom}})]
-		</p>
+				|extraire_multi|_T)] : [(#ID_RESERVATION|generer_info_entite{reservation,#VALEUR{options/nom}})
+		</p>]
 	</BOUCLE_champs_extras_reservation>
 
 	<p><:reservation:details_reservation:></p>
