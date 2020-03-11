@@ -1,7 +1,7 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-if( !defined('_ECRIRE_INC_VERSION') ){
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'confirmer_import'             => 'Confirmer l\'import',
+	'creer_articles'               => 'Créer un article (au statut publié) dans chaque rubrique, qui portera le même nom que le rubrique',
 
 	// D
 	'dans_la_rubrique'             => 'Dans la rubrique :',
@@ -24,15 +25,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_analyse'               => 'Erreur dans l\'analyse des rubriques',
 
 	// L
-	'langue'                       => 'Langue',
+	'langue'                       => 'Langue :',
+
+	// N
+	'numeroter'                    => 'Numéroter :',
+	'numeroter_explication'        => 'Numéroter automatiquement de 10 en 10',
+	'numeroter_articles'           => 'les articles',
+	'numeroter_rubriques'          => 'les rubriques',
 
 	// P
 	'pas_autorise'                 => 'Vous n\'êtes pas autorisé•e à modifier cette rubrique',
 
 	// R
-	'rubrique_racine'              => 'Dans la rubrique',
+	'rubrique_racine'              => 'Dans la rubrique :',
 	'rubrique_racine_explications' => 'Choisir la rubrique dans laquelle les rubriques ci dessous seront créées, sinon les rubriques seront créées à la racine du site.',
-	'rubriques'                    => 'Rubriques à créer',
+	'rubriques'                    => 'Rubriques à créer :',
 	'rubriques_creees'             => 'Les rubriques ont été créées',
 	'rubriques_explications'       => 'Une ligne par rubrique
 <br>Deux espaces en début de ligne pour créer une sous rubrique ou un article.

@@ -4,6 +4,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+include_spip('action/editer_rubrique');
+include_spip('action/editer_article');
+
 define('_RUBRIQUEUR_DEUX_POINTS_SUBSTITUT', '%%DEUXPOINTS%%');
 
 function formulaires_rubriqueur_charger_dist() {
@@ -17,6 +20,8 @@ function formulaires_rubriqueur_charger_dist() {
 	return array(
 		'rubrique_racine' => '',
 		'rubriques'       => '',
+		'numeroter'       => '',
+		'creer_articles'  => '',
 		'langue'          => _request('langue') ? _request('langue') : lire_config('langue_site'),
 		'langues'         => $langues,
 	);
@@ -40,17 +45,16 @@ function formulaires_rubriqueur_verifier_dist() {
 		if (is_array($data)) {
 			$previsu = '{{{' . _T('rubriqueur:apercu_import') . '}}}';
 			if ((int)_request('rubrique_racine')) {
-				$previsu .= _T('rubriqueur:dans_la_rubrique') . ' {{' . sql_getfetsel('titre', 'spip_rubriques',
-						'id_rubrique=' . $rubrique_racine) . '}}';
+				$previsu .= _T('rubriqueur:dans_la_rubrique') . ' {{' . sql_getfetsel('titre', 'spip_rubriques', 'id_rubrique=' . $rubrique_racine) . '}}';
 			} else {
 				$previsu .= _T('rubriqueur:a_la_racine');
 			}
-			$langue    = _request('langue');
+			$langue = _request('langue');
 			if(!$langue){
 				$langue = lire_config('langue_site');
 			}
-			$previsu                  .= _rubriqueur_traiter_rubrique($data, $rubrique_racine, 'previsu', 0, '', $langue);
-			$retour['previsu']        = $previsu;
+			$previsu .= _rubriqueur_traiter_rubrique($data, $rubrique_racine, 'previsu', 0, '', $langue, _request('numeroter'), _request('creer_articles'));
+			$retour['previsu'] = $previsu;
 			$retour['message_erreur'] = _T('rubriqueur:confirmer_import');
 		} 
 		// sinon, on retourne le message d'erreur
@@ -69,12 +73,12 @@ function formulaires_rubriqueur_traiter_dist() {
 		$rubrique_racine = array_pop(picker_selected(_request('rubrique_racine'), 'rubrique'));
 	}
 	$rubriques = _rubriqueur_parse_texte(_request('rubriques'));
-	$langue    = _request('langue');
+	$langue = _request('langue');
 	if(!$langue){
 		$langue = lire_config('langue_site');
 	}
 	
-	_rubriqueur_traiter_rubrique($rubriques, $rubrique_racine, 'creer', 0, '', $langue);
+	_rubriqueur_traiter_rubrique($rubriques, $rubrique_racine, 'creer', 0, '', $langue, _request('numeroter'), _request('creer_articles'));
 
 	// mettre à jour les status, id_secteur et profondeur
 	include_spip('inc/rubriques');
@@ -87,39 +91,54 @@ function formulaires_rubriqueur_traiter_dist() {
 	);
 }
 
-function _rubriqueur_traiter_rubrique($rubriques, $id_parent = 0, $mode = 'creer', $profondeur = 0, $retour = '', $langue = '') {
+function _rubriqueur_traiter_rubrique($rubriques, $id_parent = 0, $mode = 'creer', $profondeur = 0, $retour = '', $langue = '', $numeroter = '', $creer_articles = '') {
 	if(!is_array($rubriques)) {
 		return;
 	}
+
+	$index_article = 1;
+	$index_rubrique = 1;
+	static $index_articles_rubriques = array();
+	
 	foreach ($rubriques as $key => $value) {
-		if (is_numeric($key)) {
-			$titre = str_replace(_RUBRIQUEUR_DEUX_POINTS_SUBSTITUT, ':', $value);
+		if (!is_numeric($key)) {
+
+			// Créer une rubrique
+			$index_articles_rubriques[$profondeur+1] = 1;
+			$titre = (in_array('rubriques',$numeroter) ? ($index_rubrique * 10) . '. ' : '') . str_replace(_RUBRIQUEUR_DEUX_POINTS_SUBSTITUT, ':', $key);
 			if ($mode == 'creer') {
-				sql_insertq('spip_articles', array(
-					'titre'       => $titre,
-					'id_rubrique' => $id_parent,
-					'statut'      => 'publie',
-					'lang'        => $langue,
-					'date'        => date('Y-m-d H:i:s'),
-				));
+				$id_rubrique = rubrique_inserer($id_parent, array('titre' => $titre, 'lang' => $langue, 'langue_choisie' => 'oui'));
+			} else {
+				$id_rubrique = null;
+				$retour .= "\n" . '-' . str_repeat('*', $profondeur) . '* <span class="rubrique">' . $titre . '</span>';
+			}
+			$retour .= _rubriqueur_traiter_rubrique($value, $id_rubrique, $mode, $profondeur + 1, '', $langue, $numeroter, $creer_articles);
+			$index_rubrique++;
+			
+			if($creer_articles) {
+				// Ajouter un article par défaut
+				$index = isset($index_articles_rubriques[$profondeur+1]) ? $index_articles_rubriques[$profondeur+1] : 1;
+				$titre = (in_array('articles',$numeroter) ? ($index * 10) . '. ' : '') . str_replace(_RUBRIQUEUR_DEUX_POINTS_SUBSTITUT, ':', $key);
+				if ($mode == 'creer') {
+					article_inserer($id_rubrique, array('titre' => $titre, 'lang' => $langue, 'langue_choisie' => 'oui', 'statut' => 'publie'));
+				} else {
+					$retour .= "\n" . '-' . str_repeat('*', $profondeur+1) . '* <span class="article">' . $titre . '</span>';
+				}
+			}
+			
+		} else {
+			
+			// Créer un article
+			$titre = (in_array('articles',$numeroter) ? ($index_article * 10) . '. ' : '') . str_replace(_RUBRIQUEUR_DEUX_POINTS_SUBSTITUT, ':', $value);
+			if ($mode == 'creer') {
+				article_inserer($id_parent, array('titre' => $titre, 'lang' => $langue, 'langue_choisie' => 'oui', 'statut' => 'publie'));
 			} else {
 				$retour .= "\n" . '-' . str_repeat('*', $profondeur) . '* <span class="article">' . $titre . '</span>';
 			}
-		} else {
-			$titre = str_replace(_RUBRIQUEUR_DEUX_POINTS_SUBSTITUT, ':', $key);
-			if ($mode == 'creer') {
-				$id_rubrique = sql_insertq('spip_rubriques', array(
-					'titre'     => $titre,
-					'id_parent' => $id_parent,
-					'statut'    => 'publie',
-					'lang'      => $langue,
-					'date'      => date('Y-m-d H:i:s'),
-				));
-			} else {
-				$retour .= "\n" . '-' . str_repeat('*', $profondeur) . '* <span class="rubrique">' . $titre . '</span>';
-			}
-			$retour .= _rubriqueur_traiter_rubrique($value, $id_rubrique, $mode, $profondeur + 1, '', $langue);
-		}
+			$index_article++;
+			$index_articles_rubriques[$profondeur] = $index_article;
+			
+		} 
 	}
 
 	return $retour;
@@ -145,5 +164,4 @@ function _rubriqueur_parse_texte($texte, $mode = 'creer', $indentation = '  ') {
 	}
 
 	return $retour;
-
 }

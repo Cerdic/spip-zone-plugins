@@ -16,12 +16,19 @@
 				explication=<:rubriqueur:rubrique_racine_explications:>})]
 
 			[(#ENV{langues}|count|>{1}|oui)
-			[(#SAISIE{selection, langue, label=<:rubriqueur:langue:>, data=#ENV{langues}, cacher_option_intro=oui, obligatoire=oui})]
+			[(#SAISIE{selection, langue, label=<:rubriqueur:langue:>, 
+				data=#ENV{langues}, cacher_option_intro=oui, obligatoire=oui})]
 			]
 
 			[(#SAISIE{textarea, rubriques, obligatoire=oui, 
 				label=<:rubriqueur:rubriques:>, 
 				explication=<:rubriqueur:rubriques_explications:>})]
+
+			[(#SAISIE{checkbox, numeroter, label=<:rubriqueur:numeroter:>, 
+				explication=<:rubriqueur:numeroter_explication:>,
+				data=#ARRAY{rubriques,<:rubriqueur:numeroter_rubriques:>,articles,<:rubriqueur:numeroter_articles:>}})]
+							
+			[(#SAISIE{case, creer_articles, label_case=<:rubriqueur:creer_articles:>})]
 
 			#SET{intitule_bouton,#EVAL{_T('previsualiser')}}
 			<a name="confirmation"></a>
