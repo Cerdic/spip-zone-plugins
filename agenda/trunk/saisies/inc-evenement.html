@@ -6,7 +6,7 @@
 <BOUCLE_evenements(EVENEMENTS){id_evenement}>
 	[(#ENV{masquer_heure}|oui)#SET{horaire,non}]
 	[(#ENV{masquer_heure}|non)#SET{horaire,#HORAIRE}]
-	#SET{date, #DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#GET{horaire},#GET{format}}}
+	[(#SET{date,[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#GET{horaire},#GET{format}})][ (#TIMEZONE{#GET{horaire},#ENV{tz_format,abbr}})]})]
 	[(#ENV{type_affichage,titre_date}|=={titre_date}|oui)
 		#SET{texte,#TITRE|concat{' - ', #GET{date}}}
 	]
