@@ -51,8 +51,10 @@ function balise_DATE_FIN_dist($p) {
 /**
  * Affichage en clair de la timezone selon le format demande
  * #TIMEZONE -> Europe/Paris
+ * #TIMEZONE{full} -> Europe/Paris
  * #TIMEZONE{gmt} -> GMT+01:00
  * #TIMEZONE{abbr} -> EDT
+ * #TIMEZONE{short} -> EDT
  * #TIMEZONE{non} -> n'affiche rien
  *
  * #TIMEZONE{#HORAIRE} -> n'affiche pas la timezone si horaire=non
