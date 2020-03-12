@@ -67,6 +67,10 @@ function filtre_icone_anchor_from_name($name) {
 		case "user":
 			$ancre = 'person';
 			break;
+		case "end":
+		case "start":
+			$ancre = 'skip-' . $name;
+			break;
 		default:
 			$ancre = $name;
 			break;
