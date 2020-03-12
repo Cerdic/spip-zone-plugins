@@ -1,0 +1,21 @@
+<paquet
+	prefix="adaptive_images"
+	categorie="multimedia"
+	version="1.9.2"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/adaptive_images-32.png"
+	documentation="https://contrib.spip.net/4458"
+>
+
+	<nom>Adaptive Images</nom>
+
+	<auteur lien='http://www.nursit.com/Cedric-Morin'>Cédric</auteur>
+
+	<licence>GNU/GPL</licence>
+	<pipeline nom="affiche_milieu" />
+	<pipeline nom="recuperer_fond" />
+	<pipeline nom="affichage_final" />
+	<pipeline nom="insert_head" />
+
+</paquet>
