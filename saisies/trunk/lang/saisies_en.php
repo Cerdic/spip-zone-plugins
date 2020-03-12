@@ -53,6 +53,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_syntaxe_afficher_si' => 'Wrong syntax of the test',
 	'erreur_valeur_inacceptable' => 'Entered value cannot be accepted.',
 
+	// F
+	'fichier_erreur_explication_renvoi_alternative' => 'You can resend a new file, or submit the form as is, the old file is not kept.',
+	'fichier_erreur_explication_renvoi_pas_alternative' => 'You can send another file.',
+
 	// I
 	'info_configurer_saisies' => 'Test page for Entries',
 
@@ -234,6 +238,7 @@ You will find <a href="https://contrib.spip.net/5080" target="_blank">full docum
 	'saisie_selection_titre' => 'Dropdown list box',
 	'saisie_textarea_explication' => 'A multilines text field.',
 	'saisie_textarea_titre' => 'Textarea',
+	'saisies_aplatir_tableau_montrer_groupe' => '@groupe@: @valeur@',
 
 	// T
 	'titre_page_saisies_doc' => 'Documentation of input fields',
