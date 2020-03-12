@@ -472,13 +472,13 @@ function crayons_update($id, $colval = array(), $type = '') {
 		}
 
 		// Sur une bdd externe on utilise sql_updateq de preference ;
-    // l'api sql sait gerer les prefixes contrairement a spip_query.
-    $a = sql_updateq($nom_table , $colval, $where,'',$distant);
+		// l'api sql sait gerer les prefixes contrairement a spip_query.
+		$a = sql_updateq($nom_table , $colval, $where,'',$distant);
 
 		include_spip('inc/invalideur');
 
 		// Pour une base externe doit on prefixer le type avec le nom du connecteur?
-    // ex: nomconnect_objet
+		// ex: nomconnect_objet
 		suivre_invalideur($type, $modif = true);
 
 	} else {
@@ -486,7 +486,7 @@ function crayons_update($id, $colval = array(), $type = '') {
 		// calculer un where approprie
 		// et modifier sans passer par la fonction destinee aux tables principales
 		list($nom_table, $where) = table_where($type, $id, true); // where sous forme de tableau
-		if (is_scalar($id) and count($where)>1) {
+		if (is_scalar($id) and count($where)>=1) {
 			$a = sql_updateq($nom_table, $colval, $where);
 		} else {
 			// modification d'une table principale
