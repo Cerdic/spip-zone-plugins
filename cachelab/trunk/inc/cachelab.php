@@ -203,12 +203,15 @@ global $Memoization;
 			if ($meta_derniere_modif > $d['creation_time']
 				or !apcu_exists($cle)) {
 				if ($do_clean) {
-					$del=$Memoization->del(substr($cle, $len_prefix));
-					if (!$del) {
-						// Se produit parfois en salve de 10 à 50 logs simultanés (mm t, mm pid)
-						spip_log("Echec du clean du cache $cle par Memoization (création : {$d['creation_time']}, invalidation : $meta_derniere_modif)", 'cachelab_erreur');
+					$memoiz_cle=substr($cle, $len_prefix);
+					// Avant ce test il arrivait parfois des salves de 10 à 50 logs d'échec du clean cache simultanés (mm t, mm pid)
+					if ($Memoization->exists($memoiz_cle)) {
+						$del = $Memoization->del($memoiz_cle);
+						if (!$del) {
+							spip_log("Echec de Memoization->del du cache $cle (création : {$d['creation_time']}, invalidation : $meta_derniere_modif)", 'cachelab_ERREUR');
+						}
+						$stats['nb_clean']++;
 					}
-					$stats['nb_clean']++;
 				}
 				continue;
 			}
