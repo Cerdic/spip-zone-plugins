@@ -5,7 +5,7 @@
 	url="https://trad.spip.net"
 	source="https://git.spip.net/spip-contrib-extensions/prix.git"
 	reference="fr">
-	<langue code="en" url="https://trad.spip.net/tradlang_module/prix?lang_cible=en" total="31" traduits="24" relire="2" modifs="0" nouveaux="5" pourcent="77.42">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/prix?lang_cible=en" total="31" traduits="29" relire="2" modifs="0" nouveaux="0" pourcent="93.55">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="tcharlss" lien="https://trad.spip.net/auteur/drbouvierleduc" />
 	</langue>

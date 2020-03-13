@@ -42,7 +42,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'prix_ttc' => '@prix@ ATI',
 
 	// S
+	'saisie_devise_description' => 'Single or multiple currency selection',
+	'saisie_devise_option_code_alpha_label' => '3-letter alphabetical code',
+	'saisie_devise_option_code_label' => 'Value used',
 	'saisie_devise_option_code_num_label' => 'Numeric code',
+	'saisie_devise_option_multiple_label' => 'Allow to select multiple currencies',
+	'saisie_devise_titre' => 'Currency',
 
 	// T
 	'titre_devises' => 'Currencies',
