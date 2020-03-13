@@ -17,7 +17,8 @@
 
 	- **id_abonnement
 	- masquer : tableau d'éléments à masquer
-	            logo | descriptif
+							logo | descriptif
+	- class : classe ajoutée au conteneur
 
 ]
 [(#REM) L'offre d'abonnement liée ]
@@ -53,7 +54,7 @@
 #SET{actif,          #PUBLIE}
 #SET{statut,         #STATUT}
 
-<article class="abonnement abonnement_resume[ abonnement_(#GET{statut})][ (#GET{renouvellement}|oui)abonnement_renouvelable]" id="abonnement_#ID_ABONNEMENT">
+<article class="abonnement abonnement_resume[ abonnement_(#GET{statut})][ (#GET{renouvellement}|oui)abonnement_renouvelable][ #ENV{class}|attribut_html)]" id="abonnement_#ID_ABONNEMENT">
 
 	[(#REM) Logo et titre ]
 	<header class="abonnement__header">

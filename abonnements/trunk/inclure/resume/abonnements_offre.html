@@ -12,11 +12,12 @@
 
 	- **id_abonnements_offre
 	- masquer : tableau d'éléments à masquer
-	            logo | descriptif
+							logo | descriptif
+	- class : classe ajoutée au conteneur
 
 ]
 <BOUCLE_abonnements_offre(ABONNEMENTS_OFFRES) {id_abonnements_offre}>
-<article class="abonnement abonnement_resume[ abonnement_(#GET{statut})][ (#GET{renouvellement}|oui)abonnement_renouvelable]" id="abonnement_#ID_ABONNEMENT">
+<article class="abonnement abonnement_resume[ abonnement_(#GET{statut})][ (#GET{renouvellement}|oui)abonnement_renouvelable][ #ENV{class}|attribut_html)]" id="abonnement_#ID_ABONNEMENT">
 
 	[(#REM) Logo et titre ]
 	<header class="abonnement__header">
