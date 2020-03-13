@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.2.7;3.2.*]"
 	logo="prive/themes/spip/images/redirection-64.png"
-	documentation="https://contrib.spip.net/xxx"
+	documentation="https://contrib.spip.net/5249"
 	schema="1.0.0" 
 >
 	<nom>Redirection</nom>
