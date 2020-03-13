@@ -52,7 +52,7 @@
 <form
 	method="post" action="#ENV{action}" enctype="multipart/form-data"
 	id="offre#ID_ABONNEMENTS_OFFRE"
-	class="editer editer_abonnements_offre abonnement abonnement_resume abonnement_choix[ abonnement_(#ENV{alternative/quel}|!={principal}|?{alternative})][ (#ENV{renouvellement_auto}|oui)abonnement_renouvelable]"
+	class="editer editer_abonnements_offre abonnement abonnement_resume abonnement_resume_choisir[ abonnement_(#ENV{alternative/quel}|!={principal}|?{alternative})][ (#ENV{renouvellement_auto}|oui)abonnement_renouvelable]"
 ><div>
 	[(#REM) declarer les hidden qui declencheront le service du formulaire 
 	parametre : url d'action ]

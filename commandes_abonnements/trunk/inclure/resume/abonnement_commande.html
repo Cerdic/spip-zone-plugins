@@ -14,7 +14,8 @@
 	**obligatoire
 
 	- masquer : tableau d'éléments à masquer
-	            logo | descriptif
+							logo | descriptif
+	- class : classe ajoutée au conteneur
 
 ]
 #CACHE{0}
@@ -92,7 +93,7 @@
 #SET{periode_fin, #GET{periodes_datetime/#GET{periode}}}
 #SET{date_fin, #VAL{Y-m-d H:i:s}|date{#GET{date_debut}|concat{" + ", #GET{duree}, #GET{periode_fin}}|strtotime}}
 
-<article class="abonnement abonnement_resume abonnement_commander[ (#GET{renouvellement}|oui)abonnement_renouvelable]">
+<article class="abonnement abonnement_resume abonnement_resume_commande[ (#GET{renouvellement}|oui)abonnement_renouvelable][ #ENV{class}|attribut_html)]">
 
 	[(#REM) Logo et titre ]
 	<header class="abonnement__header">
