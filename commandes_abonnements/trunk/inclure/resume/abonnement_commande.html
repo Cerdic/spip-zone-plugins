@@ -96,22 +96,18 @@
 <article class="abonnement abonnement_resume abonnement_resume_commande[ (#GET{renouvellement}|oui)abonnement_renouvelable][ (#ENV{class}|attribut_html)]">
 
 	[(#REM) Logo et titre ]
-	<header class="abonnement__header">
+	[(#VAL{logo}|in_any{#ENV{masquer}}|non)
+	[<header class="abonnement__header">
+		(#GET{offre/logo}|balise_img{'','abonnement__logo spip_logo'})
+	</header>]
+	]
 
-		[(#VAL{logo}|in_any{#ENV{masquer}}|non)
-		[<div class="abonnement__logo">
-			(#GET{offre/logo}|balise_img)
-		</div>]
-		]
+	[(#REM) Titre, infos techniques, descriptif ]
+	<div class="abonnement__content">
 
 		[<h3 class="abonnement__titre">
 			(#GET{offre/titre})
 		</h3>]
-
-	</header>
-
-	[(#REM) Infos techniques et descriptif ]
-	<div class="abonnement__content">
 
 		<div class="abonnement__infos">
 

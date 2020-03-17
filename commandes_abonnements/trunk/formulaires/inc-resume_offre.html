@@ -59,20 +59,16 @@
 	#ACTION_FORMULAIRE{#ENV{action}}
 
 	[(#REM) Logo et titre ]
-	<header class="abonnement__header">
+	[<header class="abonnement__header">
+		(#LOGO_ABONNEMENTS_OFFRE{#ID_ABONNEMENTS_OFFRE}|extraire_attribut{src}|balise_img{'','abonnement__logo spip_logo'})
+	</header>]
 
-		[<div class="abonnement__logo">
-			(#LOGO_ABONNEMENTS_OFFRE{#ID_ABONNEMENTS_OFFRE}|extraire_attribut{src}|balise_img)
-		</div>]
+	[(#REM) Infos techniques et descriptif ]
+	<div class="abonnement__content">
 
 		[<h3 class="abonnement__titre">
 			(#ENV{titre})
 		</h3>]
-
-	</header>
-
-	[(#REM) Infos techniques et descriptif ]
-	<div class="abonnement__content">
 
 		<div class="abonnement__infos">
 
