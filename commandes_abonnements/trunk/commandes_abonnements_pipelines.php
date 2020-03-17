@@ -142,7 +142,7 @@ function commandes_abonnements_generer_commande($id_auteur) {
 	$retours = array();
 	$commande_abonnement = session_get('commande_abonnement');
 	
-	// Si on trouve des infos de commande en session
+	// Si on trouve des infos de commande d'abonnement en session
 	if (
 		$id_auteur = intval($id_auteur)
 		and is_array($commande_abonnement)
@@ -174,13 +174,14 @@ function commandes_abonnements_generer_commande($id_auteur) {
 				array('montant_ht' => $montant_ht, 'montant' => $montant),
 			);
 		}
-		
+
 		// On crée une nouvelle commande, l'abonnement ne sera créé ou renouvelé que lors du paiement !
 		if (
 			$id_commande = commande_inserer(0, array(
 				'id_auteur' => $id_auteur,
 				'echeances_type' => $periodicite,
 				'echeances' => $echeances,
+				'source' => 'abonnementsoffre#' .$offre['id_abonnements_offre'],
 			))
 		) {
 			include_spip('inc/filtres');

@@ -118,6 +118,7 @@ function formulaires_commander_abonnement_traiter_dist($retour = '') {
 		$set_commande = array(
 			'echeances_type' => $periodicite,
 			'echeances'      => $echeances,
+			'source'         => 'abonnementsoffre#' .$offre['id_abonnements_offre'],
 		);
 		sql_updateq('spip_commandes', $set_commande, 'id_commande='.intval($detail['id_commande']));
 		sql_updateq('spip_commandes_details', $set_detail, 'id_commandes_detail='.intval($detail['id_commandes_detail']));
