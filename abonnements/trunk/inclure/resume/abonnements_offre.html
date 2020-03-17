@@ -19,23 +19,19 @@
 <BOUCLE_abonnements_offre(ABONNEMENTS_OFFRES) {id_abonnements_offre}>
 <article class="abonnement abonnement_resume[ abonnement_(#GET{statut})][ (#GET{renouvellement}|oui)abonnement_renouvelable][ (#ENV{class}|attribut_html)]" id="abonnement_#ID_ABONNEMENT">
 
-	[(#REM) Logo et titre ]
-	<header class="abonnement__header">
+	[(#REM) Logo ]
+	[(#VAL{logo}|in_any{#ENV{masquer}}|non)
+	[<header class="abonnement__header">
+		(#LOGO_ABONNEMENTS_OFFRE|inserer_attribut{class,'abonnement__logo spip_logo'})
+	</header>]
+	]
 
-		[(#VAL{logo}|in_any{#ENV{masquer}}|non)
-		[<div class="abonnement__logo">
-			(#LOGO_ABONNEMENTS_OFFRE)
-		</div>]
-		]
+	[(#REM) Titre, infos techniques, descriptif ]
+	<div class="abonnement__content">
 
 		[<h3 class="abonnement__titre">
 			(#TITRE)
 		</h3>]
-
-	</header>
-
-	[(#REM) Infos techniques et descriptif ]
-	<div class="abonnement__content">
 
 		<div class="abonnement__infos">
 
