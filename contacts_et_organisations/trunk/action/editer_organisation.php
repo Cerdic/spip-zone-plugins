@@ -154,9 +154,9 @@ function organisation_instituer($id_organisation, $c, $calcul_rub = true) {
 	// Verifier que le parent demandee existe et est different
 	// du parent actuel
 	if (isset($c['id_parent'])
-		and $id_parent = intval($c['id_parent'])
-		and $id_parent != $id_parent_actuel
-		and sql_countsel('spip_organisations', 'id_organisation='.intval($id_parent))) {
+		and !is_null($id_parent = $c['id_parent'])
+		and intval($id_parent) != $id_parent_actuel
+		and (!($id_parent = intval($id_parent)) or sql_countsel('spip_organisations', 'id_organisation='.intval($id_parent)))) {
 		$champs['id_parent'] = $id_parent;
 	}
 	
