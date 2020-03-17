@@ -15,7 +15,15 @@ if (!defined("_ECRIRE_INC_VERSION")) {
 }
 
 /**
- * Abandonne une commande liee a une transaction (appel conventionnel par abandonner_transaction)
+ * Abandonne une commande
+ *
+ * @note
+ * appel conventionnel par abandonner_transaction
+ *
+ * @example
+ *     ```
+ *     #URL_ACTION_AUTEUR{supprimer_commande,#ID_COMMANDE,#SELF}
+ *     ```
  *
  * @param $arg string
  *     id_commande : identifiant de la commande
