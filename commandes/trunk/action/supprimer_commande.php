@@ -41,8 +41,11 @@ function action_supprimer_commande_dist($arg=null) {
 	if ($id_commande = intval($id_commande)) {
 		spip_log("Commande $id_commande -> poubelle",'commandes');
 		sql_updateq("spip_commandes",array('statut'=>'poubelle'),'id_commande = '.intval($id_commande));
+		// Retirer la commande si elle est en session
+		include_spip('inc/session');
+		if ($id_commande === intval(session_get('id_commande'))) {
+			session_set('id_commande');
+		}
 	}
 
 }
-
-?>

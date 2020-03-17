@@ -39,6 +39,10 @@ function action_abandonner_commande_dist($arg = null) {
 			array('statut' => 'abandonne'),
 			'id_commande = '.intval($id_commande)
 		);
+		// Retirer la commande si elle est en session
+		include_spip('inc/session');
+		if ($id_commande === intval(session_get('id_commande'))) {
+			session_set('id_commande');
+		}
 	}
-
 }
