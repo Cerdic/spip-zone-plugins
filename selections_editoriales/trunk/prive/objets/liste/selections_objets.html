@@ -27,7 +27,7 @@
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='titre principale'><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[(#INFO_TITRE{#OBJET,#ID_OBJET})] ([(#OBJET|objet_info{texte_objet}|_T)])</a></td>
 			<td class='titre principale'><a href="[(#ID_SELECTION|generer_url_entite{selection})]" title="<:info_numero_abbreviation|attribut_html:> #ID_SELECTION">[(#RANG). ]#TITRE</a></td>
-			<td class='nb_contenus id'><BOUCLE_contenus(SELECTIONS_CONTENUS){id_selection}> </BOUCLE_contenus>#TOTAL_BOUCLE</B_contenus>0<//B_contenus></td>
+			<td class='nb_contenus id'><BOUCLE_contenus(SELECTIONS_CONTENUS){id_selection}> </BOUCLE_contenus>#TOTAL_BOUCLE</B_contenus>0<//B_contenus>[/#LIMITE(#LIMITE|>{0}|oui)]</td>
 			<td class='id'>[(#AUTORISER{modifier,selection,#ID_SELECTION}|?{
 				<a href="[(#URL_ECRIRE{selection_edit,id_selection=#ID_SELECTION})]">#ID_SELECTION</a>,
 				#ID_SELECTION

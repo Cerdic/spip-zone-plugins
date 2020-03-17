@@ -110,6 +110,13 @@ function selections_editoriales_affiche_milieu($flux) {
 		));
 	}
 
+
+	if ($flux['args']['exec'] == "accueil") {
+		$texte = recuperer_fond("prive/objets/liste/selections_orphelines", array(
+			'titre' => _T("selection:titre_selections_autonomes")
+		));
+	}
+
 	if ($texte) {
 		if ($p=strpos($flux['data'], '<!--affiche_milieu-->')) {
 			$flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
@@ -117,6 +124,7 @@ function selections_editoriales_affiche_milieu($flux) {
 			$flux['data'] .= $texte;
 		}
 	}
+
 
 	return $flux;
 }
