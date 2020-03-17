@@ -175,6 +175,24 @@ function commandes_abonnements_generer_commande($id_auteur) {
 			);
 		}
 
+		// Il ne peut y avoir qu'une seule commande en cours à la fois :
+		// s'il y a déjà une commande en cours précédente, on la supprime.
+		// Cf. creer_commande_encours() dans le plugin commandes.
+		if (($id_commande = intval(session_get('id_commande'))) > 0) {
+			// Si la commande est toujours "encours" il faut la mettre à la poubelle
+			// il ne faut pas la supprimer tant qu'il n'y a pas de nouvelles commandes pour etre sur qu'on reutilise pas son numero
+			// (sous sqlite la nouvelle commande reprend le numero de l'ancienne si on fait delete+insert)
+			if (
+				$statut = sql_getfetsel('statut', 'spip_commandes', 'id_commande = ' . intval($id_commande))
+				and $statut == 'encours'
+			) {
+				spip_log("Commande ancienne encours->poubelle en session : $id_commande", 'commandes_abonnements');
+				sql_updateq('spip_commandes', array('statut' => 'poubelle'), 'id_commande = ' . intval($id_commande));
+			}
+			// Dans tous les cas on supprime la valeur de session
+			session_set('id_commande');
+		}
+
 		// On crée une nouvelle commande, l'abonnement ne sera créé ou renouvelé que lors du paiement !
 		if (
 			$id_commande = commande_inserer(0, array(
@@ -204,8 +222,9 @@ function commandes_abonnements_generer_commande($id_auteur) {
 					'spip_commandes',
 					'id_commande=' . intval($id_commande)
 				);
-				// Et on supprime la session
+				// Et on supprime le pseudo-panier de la session, puis on met la vraie commande
 				session_set('commande_abonnement', null);
+				session_set('id_commande', $id_commande);
 			}
 		}
 	}
