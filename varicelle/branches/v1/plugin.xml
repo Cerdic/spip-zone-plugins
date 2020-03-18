@@ -5,7 +5,7 @@
 	<prefix>varicelle</prefix>
 	<icon>icon/varicelle.png</icon>
 
-	<version>1.1.4</version>
+	<version>1.1.5</version>
 	<etat>stable</etat>
 	<categorie>outil</categorie>
 
@@ -19,7 +19,7 @@
 			[es]Botones bonitos: seductor, ligero y potente, para estilizar todos los botones en el sitio. Se aplica a los botones SPIP formas y cualquier cosa con el selector <code>.submit</code>.
 		</multi>
 	</description>
-	<lien>https://contrib.spip.net/?article3484</lien>
+	<lien>https://contrib.spip.net/3484</lien>
 	<auteur>[Tetue->http://spip.tetue.net] - 2010</auteur>
 
 	<pipeline>
