@@ -1,0 +1,17 @@
+<paquet
+	prefix="Zless"
+	categorie="outil"
+	version="0.3.1"
+	etat="dev"
+	compatibilite="[3.0.0;3.3.*]"
+	logo="z-less-32.png"
+>
+	<nom>Zpip-less</nom>
+
+	<auteur>Cédric Morin</auteur>
+	<auteur>Romy Tetue</auteur>
+
+	<necessite nom="Zcore" compatibilite="[2.0.0;[" />
+	<necessite nom="lesscss" compatibilite="[0.7.1;]" />
+	<utilise nom="Zpip" compatibilite="[;]" />
+</paquet>

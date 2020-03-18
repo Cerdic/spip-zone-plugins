@@ -4,7 +4,7 @@
 	<auteur>C&#233;dric Morin, Romy T&ecirc;tue</auteur>
 	<icon>z-less-32.png</icon>
 	<licence>GNU/GPL</licence>
-	<version>0.3.0</version>
+	<version>0.3.1</version>
 	<etat>dev</etat>
 	<description>
 Selectionne les feuilles de style au format .less de préférence, et les convertit en css à la volée. Si une feuille n'est disponible qu'au format .css, elle est utilisée telle quelle.
