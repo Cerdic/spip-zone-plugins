@@ -22,7 +22,8 @@ function formulaires_newsletter_subscribe_charger_dist($listes = '', $option = '
 
 	$valeurs = array(
 		'session_email' => '',
-		'_nospam_encrypt' => 'all'
+		'_nospam_encrypt' => 'all',
+		'_listes_choix' => [],
 	);
 
 	if (isset($GLOBALS['visiteur_session']['email'])) {
@@ -32,12 +33,12 @@ function formulaires_newsletter_subscribe_charger_dist($listes = '', $option = '
 	}
 
 	if ($listes){
-		if ($option==='checklist') {
+		if ($option === 'checklist') {
 			$valeurs['_listes_choix'] = $listes;
 			$valeurs['_checkable'] = ' ';
 			$valeurs['listes'] = $listes;
 		}
-		elseif($option==='list') {
+		elseif ($option === 'list') {
 			$valeurs['_listes_choix'] = $listes;
 		}
 	}
