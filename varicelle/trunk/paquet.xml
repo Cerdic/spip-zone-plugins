@@ -1,0 +1,16 @@
+<paquet
+	prefix="varicelle"
+	categorie="outil"
+	version="2.2.7"
+	etat="stable"
+	compatibilite="[3.0.0;3.3.*]"
+	logo="icon/varicelle.png"
+	documentation="https://contrib.spip.net/Varicelle-2"
+>
+
+	<nom>Varicelle</nom>
+
+	<auteur lien="http://spip.tetue.net">Tetue</auteur>
+
+	<pipeline nom="insert_head_css" inclure="varicelle_pipelines.php" />
+</paquet>
