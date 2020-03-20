@@ -41,7 +41,7 @@ Sie finden ihn unter folgender Adresse:',
 
 	// B
 	'bouton_changer_pass' => 'Mein Passwort ändern',
-	'bouton_finir_inscription' => 'Mein Abonnement beenden',
+	'bouton_finir_inscription' => 'Anmeldung abschließen',
 	'breve_propose_detail' => 'Die Meldung "@titre@" wurde zur Veröffentlichung vorgeschlagen.
 	depuis',
 	'breve_propose_sujet' => '[@nom_site_spip@] vorgeschlagen : @titre@',
