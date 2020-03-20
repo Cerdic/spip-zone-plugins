@@ -114,7 +114,7 @@ function formulaires_editer_produit_saisies_dist($id_produit = 'new', $id_rubriq
 						'nom' => 'poids',
 						'label' => _T('produits:produit_champ_poids_label'),
 						'li_class' => 'unit size1of4',
-						'afficher_si' => '@immateriel@==""'
+						'afficher_si' => '!@immateriel@'
 					)
 				),
 				array(
@@ -123,7 +123,7 @@ function formulaires_editer_produit_saisies_dist($id_produit = 'new', $id_rubriq
 						'nom' => 'largeur',
 						'label' => _T('produits:produit_champ_largeur_label'),
 						'li_class' => 'unit size1of4',
-						'afficher_si' => '@immateriel@==""'
+						'afficher_si' => '!@immateriel@'
 					)
 				),
 				array(
@@ -132,7 +132,7 @@ function formulaires_editer_produit_saisies_dist($id_produit = 'new', $id_rubriq
 						'nom' => 'longueur',
 						'label' => _T('produits:produit_champ_longueur_label'),
 						'li_class' => 'unit size1of4',
-						'afficher_si' => '@immateriel@==""'
+						'afficher_si' => '!@immateriel@'
 					)
 				),
 				array(
@@ -141,7 +141,7 @@ function formulaires_editer_produit_saisies_dist($id_produit = 'new', $id_rubriq
 						'nom' => 'hauteur',
 						'label' => _T('produits:produit_champ_hauteur_label'),
 						'li_class' => 'unit size1of4',
-						'afficher_si' => '@immateriel@==""'
+						'afficher_si' => '!@immateriel@'
 					)
 				)
 			)
