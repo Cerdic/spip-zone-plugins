@@ -10,7 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_choisir_option' => 'Veuillez choisir une option',
 	'cfg_devise_label' => 'Devise par défaut',
-	'cfg_locale_explication' => 'Langue à utiliser pour formater les prix. C’est par défaut la langue du site, mais vous pouvez préciser une langue régionale si nécessaire (anglais australien, anglais des états-unis, etc.)',
+	'cfg_locales_legend' => 'Formatage des prix',
+	'cfg_locales_explication' => 'Pour chaque langue utilisée sur le site, veuillez préciser la région quand plusieurs options sont possibles.',
 	'cfg_locale_label' => 'Langue par défaut',
 	'cfg_titre_parametrages' => 'Configuration',
 

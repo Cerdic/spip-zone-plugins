@@ -116,14 +116,14 @@ function prix_formater($prix, $devise = '', $langue = '', $options = array()) {
  * @see https://github.com/commerceguys/intl/blob/master/src/Formatter/CurrencyFormatterInterface.php#L8
  *
  * @uses prix_devise_defaut
- * @uses prix_langue_defaut
+ * @uses prix_locale_defaut
  *
  * @param Float $prix
  *     Valeur du prix à formater
  * @param String $devise
  *     Code alphabétique à 3 lettres de la devise
- * @param String $langue
- *     Code de langue
+ * @param String $locale
+ *     Identifiant d'une locale (fr-CA) ou code de langue spip (fr_tu)
  * @param Array $options
  *     Tableau d'options :
  *     - style :                   (String) standard | accounting.
@@ -141,7 +141,7 @@ function prix_formater($prix, $devise = '', $langue = '', $options = array()) {
  * @return String
  *     Retourne une chaine contenant le prix formaté avec une devise
  */
-function filtres_prix_formater_dist($prix, $devise = '', $langue = '', $options = array()) {
+function filtres_prix_formater_dist($prix, $devise = '', $locale = '', $options = array()) {
 	prix_loader();
 
 	$prix = floatval(str_replace(',', '.', $prix));
@@ -150,31 +150,28 @@ function filtres_prix_formater_dist($prix, $devise = '', $langue = '', $options 
 	// Devise à utiliser
 	$devise = $devise ?: prix_devise_defaut();
 
-	// Langue à utiliser
-	$langue = $langue ?: prix_langue_defaut();
+	// Locale à utiliser
+	$locale = $locale ?: prix_locale_defaut();
 
 	// De préférence, on utilise la librairie Intl de Commerceguys
 	if (extension_loaded('bcmath')) {
 		// Options : langue, style, etc.
 		$options_formatter = array(
-			'locale'           => $langue,
+			'locale'           => $locale,
 			'currency_display' => 'code', // pour l'accessibilité
 		);
 		if (is_array($options)) {
 			$options_formatter = array_merge($options_formatter, $options);
 		}
 
-		// Définitions des formats numériques depuis resources/numberFormat.
 		$numberFormatRepository = new CommerceGuys\Intl\NumberFormat\NumberFormatRepository;
-		// Définitions des devises depuis resources/currency.
 		$currencyRepository = new CommerceGuys\Intl\Currency\CurrencyRepository;
-		// Formatage des devises
 		$currencyFormatter = new CommerceGuys\Intl\Formatter\CurrencyFormatter($numberFormatRepository, $currencyRepository, $options_formatter);
 		$prix_formate = $currencyFormatter->format($prix, $devise);
 
 	// Sinon on se rabat sur la librairie Intl de php
 	} elseif (extension_loaded('intl')) {
-		$formatter = new NumberFormatter( $langue, NumberFormatter::CURRENCY );
+		$formatter = new NumberFormatter( $locale, NumberFormatter::CURRENCY );
 		$prix_formate = numfmt_format_currency($formatter, $prix, $devise);
 
 	// Sinon, on fait le minimum syndical
@@ -207,18 +204,18 @@ function prix_lister_devises() {
 	$codes_devises = $currencyRepository->getList();
 
 	// On veut la langue de l'utilisateur pour les noms
-	$langue = $GLOBALS['spip_lang'];
-	$langue = substr($langue, strpos($langue, '_'));
+	$langue_spip = $GLOBALS['spip_lang'];
+	$locale = substr($langue_spip, strpos($langue_spip, '_'));
 
 	foreach ($codes_devises as $code => $nom) {
-		$devise = $currencyRepository->get($code, $langue);
+		$devise = $currencyRepository->get($code, $locale);
 		$devises[$code] = array(
 			'code'     => $code, // ça ne mange pas de pain de le remettre
 			'code_num' => $devise->getNumericCode(),
 			'nom'      => $devise->getName(),
 			'fraction' => $devise->getFractionDigits(),
 			'symbole'  => $devise->getSymbol(),
-			'langue'   => $devise->getLocale(),
+			'locale'   => $devise->getLocale(),
 		);
 	}
 
@@ -226,30 +223,28 @@ function prix_lister_devises() {
 }
 
 /**
- * Liste toutes les langues avec leur code ISO.
+ * Liste les langues avec leur identifiant de locale.
  *
- * @note
- * Les codes de langues peuvent différer de ceux de SPIP, qui ne sont pas ISO
+ * @see https://www.php.net/manual/fr/class.locale.php
  *
  * @return Array
- *     Tableau associatif : code => nom
+ *     Tableau associatif : locale => nom
  */
 function prix_lister_langues() {
 
 	prix_loader();
 	$langues = array();
 
-	// Définitions des langues depuis resources/language.
 	$languageRepository = new CommerceGuys\Intl\Language\LanguageRepository;
-	$codes_langues = $languageRepository->getlist();
+	$repo_locales = $languageRepository->getlist();
 
 	// Prendre la langue de l'utilisateur pour les noms
-	$langue = $GLOBALS['spip_lang'];
-	$langue = substr($langue, strpos($langue, '_'));
+	$langue_spip = $GLOBALS['spip_lang'];
+	$locale_utilisateur = prix_langue_vers_locale($langue_spip);
 
-	foreach ($codes_langues as $code => $nom) {
-		$language = $languageRepository->get($code, $langue);
-		$langues[$code] = $language->getName();
+	foreach ($repo_locales as $locale => $nom) {
+		$language = $languageRepository->get($locale, $locale_utilisateur);
+		$langues[$locale] = $language->getName();
 	}
 
 	return $langues;
@@ -279,31 +274,44 @@ function prix_devise_defaut() {
 }
 
 /**
- * Retourne le code de langue par défaut.
- *
- * Celle configurée, sinon celle du site, sinon du français de france.
+ * Retourne la locale d'après la langue du contexte
  *
  * @return String
- *      Code de langue
+ *      Identifiant de la locale
  */
-function prix_langue_defaut() {
+function prix_locale_defaut() {
 
 	include_spip('inc/config');
 
-	// Par défaut on prend celle configurée
-	if ($langue_config = lire_config('prix/langue_defaut')) {
-		$langue = $langue_config;
-	// Sinon on prend la langue du site (possiblement moins précise).
-	// Il ne faut que les premières lettres pour être sûr
-	// d'avoir quelque chose d'exploitable (fr_fem → fr).
-	} elseif ($langue_site = lire_config('langue_site')) {
-		$langue = substr($langue_site, strpos($langue_site, '_'));
-	// En dernier recours, du français de france
+	$langue_spip = $GLOBALS['spip_lang'];
+	$locales_config = lire_config('prix/locales', array());
+
+	// Normalement l'admin a configuré la locale correspondante à chaque code langue de spip
+	if (!empty($locales_config[$langue_spip])) {
+		$locale = $locales_config[$langue_spip];
+	// Sinon tant pis, on donne juste le code pays tiré du code langue de spip
 	} else {
-		$langue = 'fr-FR';
+		$locale = prix_langue_vers_locale($langue_spip);
 	}
 
-	return $langue;
+	return $locale;
+}
+
+/**
+ * Donne la locale pour un code langue de SPIP
+ *
+ * On se contente d'extraire le code pays,
+ * il s'agit des 2 à 3 lettres précédentes le tiret.
+ *
+ * @todo Vérifier s'il y a des exceptions
+ * @see https://blog.smellup.net/106
+ *
+ * @param string $langue_spip
+ * @return string
+ */
+function prix_langue_vers_locale($langue_spip) {
+	$code_pays = strtolower(substr($langue_spip, strpos($langue_spip, '_')));
+	return $code_pays;
 }
 
 /**
