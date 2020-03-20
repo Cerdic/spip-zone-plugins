@@ -50,10 +50,10 @@
 <BOUCLE_normaliser_logos(DATA){source table, #ENV{logos}|is_array|?{#ENV{logos},#ENV{logos}|explode{','}}|array_filter}>
 #SET{valeur,#VALEUR|is_array|?{
 	#ARRAY{
-		url, #VAL{#VALEUR{url}|supprimer_timestamp},
+		url, #VALEUR{url},
 		alt, #VAL{#VALEUR{alt}|trim|supprimer_tags|textebrut},
 	},
-	#ARRAY{url,#VALEUR|supprimer_timestamp}
+	#ARRAY{url,#VALEUR}
 }|array_filter}
 [(#CHEMIN{#GET{valeur/url}}|oui)
 #SET{logos,#GET{logos}|push{#GET{valeur}}}
@@ -177,7 +177,7 @@
 	|image_reduire{#GET{largeur},#GET{hauteur}}
 	|extraire_attribut{src}
 	|sinon{#VALEUR{url}}
-	|supprimer_timestamp}
+	|timestamp}
 [<meta name="twitter:image" content="(#GET{src}|url_absolue)" />]
 [<meta property="twitter:image:alt" content="(#VALEUR{alt}|couper{80}|attribut_html)" />]
 </BOUCLE_images_twitter>
