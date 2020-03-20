@@ -1,10 +1,12 @@
-[(#ENV{uai}|?{
-<div>[(#ENV{masquer_titre}|non)[<strong>(#ENV{titre,<:sdnnoisettes:nous_situer:>})</strong>]][(#ENV{masquer_picto}|non)[ <i class="fa fa-(#ENV{picto,map-marker})"></i>]]</div>
-<p><small>
-	[Code UAI : <strong>(#ENV{uai})</strong>]
-    [<br/>Zoom :(#ENV{zoom});][ Hauteur :(#ENV{height})]
+[(#ENV{uai}|oui)
+	<div>[(#ENV{masquer_titre}|non)[<strong>(#ENV{titre,<:sdnnoisettes:nous_situer:>})</strong>]][(#ENV{masquer_picto}|non)[ <i class="fa fa-(#ENV{picto,map-marker})"></i>]]</div>
+	<ul class="small">
+		<li>[Code UAI : <strong>(#ENV{uai})</strong>]</li>
+		[(#ENV{choix_coordonnees}|?{Latitude : #ENV{latitude} - Longitude : #ENV{longitude}})]
+		<li>[Zoom :(#ENV{zoom});][ Hauteur :(#ENV{height})]</li>
 
-</small></p>
-,
-<div style="background:#ffcc33;padding:0 .5em;border-radius:5px;"><strong><:sdnnoisettes:erreur_uai:></strong></div>
-})]
+	</ul>
+]
+[(#ENV{uai}|non)
+		<div style="background:#ffcc33;padding:0 .5em;border-radius:5px;"><:sdnnoisettes:erreur_uai{url=#URL_ECRIRE{noisette_edit, id_noisette=#ENV{id_noisette}}}:></strong></div>
+]

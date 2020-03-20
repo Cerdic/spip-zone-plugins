@@ -46,7 +46,7 @@ parametres:
     saisie: 'fieldset'
     options:
       nom: 'fieldset_conf_map'
-      label: '<:sdnnoisettes:label_conf_map:>'
+      label: '<:sdnnoisettes:label_fieldset_conf_map:>'
     saisies:
       -
         saisie: 'input'
@@ -56,6 +56,35 @@ parametres:
           explication: '<:sdnnoisettes:explication_uai:>'
           defaut: ''
           conteneur_class: 'long_label'
+      -
+        saisie: 'case'
+        options:
+          nom: 'choix_coordonnees'
+          label: '<:sdnnoisettes:label_choix_coordonnees:>'
+          label_case: '<:sdnnoisettes:modifier:>'
+          explication: '<:sdnnoisettes:explication_choix_coordonnees:>'
+          defaut: ''
+          conteneur_class: 'long_label'
+      -
+        saisie: 'input'
+        options:
+          nom: 'latitude'
+          label: '<:sdnnoisettes:label_latitude:>'
+          defaut: ''
+          conteneur_class: 'long_label'
+          afficher_si: '@choix_coordonnees@  == "on"'
+        verifier:
+          type: 'decimal'
+      -
+        saisie: 'input'
+        options:
+          nom: 'longitude'
+          label: '<:sdnnoisettes:label_longitude:>'
+          defaut: ''
+          conteneur_class: 'long_label'
+          afficher_si: '@choix_coordonnees@  == "on"'
+        verifier:
+          type: 'decimal'
       -
         saisie: 'input'
         options:

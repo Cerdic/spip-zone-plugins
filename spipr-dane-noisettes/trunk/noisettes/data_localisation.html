@@ -6,12 +6,14 @@
 	<BOUCLE_json_localisation(DATA){source json, https://data.normandie.education.gouv.fr/api/records/1.0/search/?dataset=fr-en-adresse-et-geolocalisation-etablissements-premier-et-second-degre&q=[(#GET{uai})]&limit=1}{datapath records}>
 		<BOUCLE_infos_localisation(DATA){source table, #VALEUR}>
 			<BOUCLE_filtre_localisation(CONDITION){si #NUMERO_UAI|!={''}}>
+			#SET{latitude, #ENV{latitude,#LATITUDE}}
+			#SET{longitude, #ENV{longitude,#LONGITUDE}}
 			[(#SET{description,[<p>(#ADRESSE_UAI)</p>][ (#CODE_COMMUNE)][ (#LIBELLE_COMMUNE)] })] 
 			[(#POSITION|oui)[(#INCLURE{fond=modeles/carte_gis,
 				id=#GET{id_unique},
 				objets=point_libre,
-				lat=[(#LATITUDE)],
-				lon=[(#LONGITUDE)],
+				lat=[(#GET{latitude})],
+				lon=[(#GET{longitude})],
 				titre=#APPELLATION_OFFICIELLE,
 				description=[(#GET{description}|textebrut)],
 				zoom=[(#ENV{zoom,11}|intval)],
