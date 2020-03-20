@@ -298,23 +298,40 @@ function prix_locale_defaut() {
 }
 
 /**
- * Donne la locale pour un code langue de SPIP
+ * Donne la locale correspondante un code langue de SPIP pour le formatage des prix.
  *
- * On se contente d'extraire le code pays, ce qui doit permettre d'obtenir une locale "générale".
- * Il s'agit des 2 à 3 lettres précédentes l'undescore : fr_tu → fr.
+ * L'objectif est d'obtenir une locale qui fait partie de la liste prise en charge par Intl
  *
- * L'objectif est d'obtenir une locale qui fait partie de la liste suivante :
- * https://github.com/commerceguys/intl/blob/master/src/Language/LanguageRepository.php#L46
+ * On extrait le code pays afin d'obtenir la locale "générale" (norme ISO 639).
+ * Il s'agit des 2 à 3 lettres précédentes l'underscore : fr_tu → fr.
  *
- * @todo Vérifier s'il y a des exceptions
+ * @see https://github.com/commerceguys/intl/blob/master/src/Language/LanguageRepository.php#L46
  * @see https://blog.smellup.net/106
  *
  * @param string $langue_spip
  * @return string
  */
 function prix_langue_vers_locale($langue_spip) {
-	$code_pays = strtolower(substr($langue_spip, strpos($langue_spip, '_')));
-	return $code_pays;
+
+	// Extraire le code pays pour avoir la locale "générale" : fr_tu → fr
+	$locale = strtolower(strtok($langue_spip, '_'));
+
+	// Exceptions : certains codes pays des langues de spip ne font pas partie de la liste des locales.
+	// On fait une correspondance manuellement en prenant la locale la plus proche.
+	// (ça n'indique pas que ce sont des langues identiques, mais suffisamment proches pour le formatage des prix)
+	$exceptions = array(
+		'oc'  => 'fr', // occitan
+		'ay'  => 'ayr', // aymara
+		'co'  => 'fr', // corse
+		'cpf' => 'fr', // créole et pidgins (rcf)
+		'fon' => '', // fongbè
+		'roa' => 'pdc', // langues romanes
+	);
+	if (!empty($exceptions[$locale])) {
+		$locale = $exceptions[$locale];
+	}
+
+	return $locale;
 }
 
 /**

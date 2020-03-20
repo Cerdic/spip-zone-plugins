@@ -47,24 +47,37 @@
 				<div class="editer-groupe">
 
 					[(#REM)
-						Configurer la locale pour chaque langue de spip utilisée sur le site
+						Choisir la locale pour chaque langue de spip utilisée sur le site.
 						On obtient un tableau associatif dans la clé 'locales' : code langue de spip => locale
+						S'il y a plusieurs déclinaisons régionales, on met un select pour choisir laquelle.
+						Sinon on indique qu'il n'y en a pas.
 					]
 					#SET{langues_spip,#LISTE{#CONFIG{langue_site}}|array_merge{#CONFIG{langues_multilingue}|explode{","}}|array_unique|array_filter}
 					#SET{langues_intl,#REM|prix_lister_langues}
 					<BOUCLE_langues_spip(DATA) {source table, #GET{langues_spip}}>
 					#SET{name,locales\[#VALEUR\]}
 					#SET{erreurs,#ENV**{erreurs/#GET{name}}}
-					#SET{defaut,#VALEUR|prix_langue_vers_locale}
-					#SET{valeur,#ENV**{locales/#VALEUR}|sinon{#GET{defaut}}}
+					#SET{locale,#VALEUR|prix_langue_vers_locale}
+					#SET{valeur,#ENV**{locales/#VALEUR}|sinon{#GET{locale}}}
 					<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 						<label for="champ_#GET{name}">[(#VALEUR|traduire_nom_langue)]</label>
 						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						[(#REM) S'il y a des déclinaisons régionales pour la langue, un select ]
+						#SET{locales_langue,#ARRAY}
+						<BOUCLE_set_locales(DATA) {source table, #GET{langues_intl}} {cle == ^#GET{locale}} {par cle}>
+						#SET{locales_langue,#GET{locales_langue}|array_merge{#ARRAY{#CLE,#VALEUR}}}
+						</BOUCLE_set_locales>
+						<B_locales>
 						<select class="select select2 chosen" name="#GET{name}" id="champ_#GET{name}">
-							<BOUCLE_locales(DATA) {source table, #GET{langues_intl}} {cle == ^#VALEUR} {par cle}>
-							<option value="#CLE"[ (#CLE|=={#GET{valeur}}|oui)selected="selected"]>#VALEUR</option>
+							<BOUCLE_locales(DATA) {source table, #GET{locales_langue}} {si #GET{locales_langue}|count|>{1}}>
+							<option value="[(#CLE|attribut_html)]"[ (#CLE|=={#GET{valeur}}|oui)selected="selected"]>#VALEUR</option>
 							</BOUCLE_locales>
 						</select>
+						</B_locales>
+						[(#REM) S'il n'y a aucune option régionale, un input ]
+						<p class="explication"><:prix:cfg_locale_non:></p>
+						<input class="text" name="#GET{name}" id="champ_#GET{name}" readonly="readonly" value="[(#GET{langues_intl/#GET{locale}}|sinon{#GET{locale}}|attribut_html)]" />
+						<//B_locales>
 					</div>
 					</BOUCLE_langues_spip>
 
