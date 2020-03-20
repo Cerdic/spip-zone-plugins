@@ -100,6 +100,7 @@ class ConvertisseurImagesOptimiser extends Command {
 					passthru('plugins/convertisseur/scripts/optimg.sh ' . escapeshellarg($image) . $param_r . $param_d . $param_c);
 				}
 				elseif($source){
+					
 					$param_s = " $source" ;
 					$output->writeln("<info>C'est parti pour une petite optimisation des images de $source/ ${label_r}${label_d}/${label_c} !</info>");
 					
@@ -123,7 +124,7 @@ class ConvertisseurImagesOptimiser extends Command {
 						$param_d=" $dpt";
 						
 						// Conversion imagemagick
-						passthru('plugins/convertisseur/scripts/optimg.sh ' . escapeshellarg($image) . $param_r . $param_d . $param_c);
+						passthru('plugins/convertisseur/scripts/optimg.sh ' . escapeshellarg($image) . $param_r . " " . escapeshellarg(trim($param_d)) . $param_c);
 					}
 				}
 			}

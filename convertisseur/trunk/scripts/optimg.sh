@@ -15,6 +15,12 @@ resize=${2-0} # 0 par défaut
 compress=${4-0} # 0 par défaut
 dest="${3-0}"
 
+echo "$nom"
+echo "resize $resize"
+echo "compress $compress"
+echo "dest $dest"
+exit
+
 # resize ?
 if (( $resize > 0 )) ; then 
 	l=" avec une largeur de ${resize} pixels"
@@ -49,7 +55,7 @@ if [[ "$dest" != "0" ]] ; then
 		
 		ext="${1##*.}"
 		dest="${filename}${suffixe}.$ext"
-		echo "\nOptimisation de $1 vers $dest"
+		echo "\nOptimisation de $1 vers >> $dest <<<"
 		echo "convert ${r}-strip -interlace Plane ${opt}${1} ${dest}"
-		convert ${r}-strip -interlace Plane"${opt}" "${1}" "${dest}"
+		convert "${r}-strip" -interlace Plane"${opt}" "${1}" "${dest}"
 fi
