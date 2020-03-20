@@ -300,8 +300,11 @@ function prix_locale_defaut() {
 /**
  * Donne la locale pour un code langue de SPIP
  *
- * On se contente d'extraire le code pays,
- * il s'agit des 2 à 3 lettres précédentes le tiret.
+ * On se contente d'extraire le code pays, ce qui doit permettre d'obtenir une locale "générale".
+ * Il s'agit des 2 à 3 lettres précédentes l'undescore : fr_tu → fr.
+ *
+ * L'objectif est d'obtenir une locale qui fait partie de la liste suivante :
+ * https://github.com/commerceguys/intl/blob/master/src/Language/LanguageRepository.php#L46
  *
  * @todo Vérifier s'il y a des exceptions
  * @see https://blog.smellup.net/106
