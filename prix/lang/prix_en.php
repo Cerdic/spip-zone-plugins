@@ -12,8 +12,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_choisir_option' => 'Please choose an option',
 	'cfg_devise_label' => 'Default currency',
-	'cfg_locale_explication' => 'Language used for formatting prices. It is the site language by default, but you can specify a regional one if necessary (Australian English, English of the United States, etc.)', # RELIRE
-	'cfg_locale_label' => 'Default language',
 	'cfg_titre_parametrages' => 'Configuration',
 
 	// I
