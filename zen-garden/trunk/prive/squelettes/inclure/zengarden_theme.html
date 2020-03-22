@@ -9,7 +9,8 @@
 	<li class='theme'>
 		<div class="qTip target_leftMiddle tooltip_rightMiddle">
 		[(#EVAL{_DIR_RACINE}|concat{#CLE,'/',#VALEUR{logo}}
-		|image_reduire{#ENV{largeur_previsu,100},#ENV{hauteur_previsu,75}}
+		|image_reduire{#ENV{largeur_previsu,100}|mult{2},#ENV{hauteur_previsu,75}|mult{2}}
+		|inserer_attribut{style,[max-width:(#ENV{largeur_previsu,100})px;]}
 		|inserer_attribut{class,''}
 		|inserer_attribut{alt,#VALEUR|table_valeur{nom}|typo|extraire_multi})]
 		<h3 class="">[(#VALEUR|table_valeur{nom}|typo|extraire_multi)]</h3>
