@@ -72,6 +72,13 @@ body {
 .formulaire_spip form>ul,
 .formulaire_spip form>div>ul {margin-left: 0;list-style: none;margin-bottom: $form-group-margin-bottom;}
 
+.formulaire_spip fieldset,
+.formulaire_spip .fieldset {
+	margin-bottom: $form-group-margin-bottom;
+	&>:last-child {margin-bottom: 0}
+}
+
+
 .formulaire_spip .editer { list-style: none;clear: both; margin: 0 -1 * $form-padding; padding: $rem-vert-margin / 4 $form-padding $rem-vert-margin / 2; }
 
 .formulaire_spip label {font-weight: inherit;margin-bottom: $rem-vert-margin / 4}
@@ -92,7 +99,10 @@ body {
 /* choix */
 .formulaire_spip input.radio, .formulaire_spip input.checkbox {display:inline-block;}
 .formulaire_spip .choix label {display:inline;font-weight:normal;}
-.formulaire_spip .choix input.radio, .formulaire_spip .choix input.checkbox {
+.formulaire_spip .choix input.radio, .formulaire_spip .choix input.checkbox,
+.formulaire_spip input[type="checkbox"],
+.formulaire_spip .editer .erreur_message input[type="checkbox"],
+{
 	width:auto;
 	margin: $form-check-input-margin-y $form-check-input-margin-x;
 	margin-left:0;

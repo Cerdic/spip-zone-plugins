@@ -71,6 +71,9 @@ function filtre_icone_anchor_from_name($name) {
 		case "start":
 			$ancre = 'skip-' . $name;
 			break;
+		case "close":
+			$ancre = 'x';
+			break;
 		default:
 			$ancre = $name;
 			break;
