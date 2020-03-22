@@ -31,10 +31,10 @@ function lim_afficher_config_objet($flux) {
 		$tab_data[1] = "<div class='ajax'>".$tab_data[1];
 		$tab_data[2] = "<div class='ajax'>".$tab_data[2];
 
-		if ( strpos($tab_data[1], 'formulaire_activer_forums') AND lire_config('forums_publics') == 'non' AND lire_config('lim/forums_publics') == 'on' ) {
+		if ( strpos($tab_data[1], 'formulaire_activer_forums') AND lire_config('forums_publics') == 'non' AND lire_config('lim/divers/forums_publics') == 'on' ) {
 			$tab_data[1] = '';
 		}
-		if ( strpos($tab_data[2], 'formulaire_activer_petition') AND lire_config('lim/petitions') == 'on') {
+		if ( strpos($tab_data[2], 'formulaire_activer_petition') AND lire_config('lim/divers/petitions') == 'on') {
 			$tab_data[2] = '';
 		}
 		$flux['data'] = $tab_data[1].$tab_data[2];
@@ -116,13 +116,13 @@ function lim_formulaire_charger($flux) {
 **/
 function lim_formulaire_verifier($flux) {
 	// si ce n'est pas un formulaire d'édition d'un objet ou si la restriction par rubrique n'a pas été activée, on sort.
-	if (strncmp($flux['args']['form'], 'editer_', 7) !== 0 OR is_null(lire_config('lim_objets'))) {
+	if (strncmp($flux['args']['form'], 'editer_', 7) !== 0 OR is_null(lire_config('lim/rubriques/objets'))) {
 		return $flux;
 	}
 
 	$objet = substr($flux['args']['form'], 7); // 'editer_objet' devient 'objet'
 	$nom_table	= table_objet_sql($objet);
-	$tableau_tables_lim	= explode(',', lire_config('lim_objets'));
+	$tableau_tables_lim	= explode(',', lire_config('lim/rubriques/objets'));
 
 	if (in_array($nom_table, $tableau_tables_lim)) {
 		include_spip('inc/autoriser');
@@ -166,7 +166,7 @@ function lim_formulaire_verifier($flux) {
  */
 function lim_formulaire_fond($flux) {
 	// si ce n'est pas un formulaire d'édition d'un objet ou si la restriction par rubrique n'a pas été activée, on sort.
-	if (strncmp($flux['args']['form'], 'editer_', 7) !== 0 OR is_null(lire_config('lim_objets'))) {
+	if (strncmp($flux['args']['form'], 'editer_', 7) !== 0 OR is_null(lire_config('lim/rubriques/objets'))) {
 		return $flux;
 	}
 
@@ -208,7 +208,7 @@ function lim_post_insertion($flux) {
 	) {
 		$id_rubrique = $flux['args']['id_objet'];
 		include_spip('inc/config');
-		if ($tables_objet = lire_config('lim/objets_fige')) {
+		if ($tables_objet = lire_config('lim/rubriques/cadenas')) {
 			foreach ($tables_objet as $table) {
 				$objet_type = objet_type($table);
 				$valeurs = lire_config("lim_rubriques/$objet_type");

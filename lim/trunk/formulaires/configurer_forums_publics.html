@@ -18,7 +18,6 @@
 	#BOITE_FERMER
 	#SET{disable,disabled}
 	]
-	
 
 	<form method="post" action="#ENV{action}">
 	<div>
@@ -28,7 +27,7 @@
 			[(#SAISIE{oui_non_ligne, forums_publics,label=<:lim:label_forums_publics:>, li_class=long_label,disable=#GET{disable}})]
 		</[(#DIV|sinon{ul})]>
 
-		<input type="hidden" name="_meta_casier" value="lim" />
+		<input type="hidden" name="_meta_casier" value="lim/divers" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div>
 	</form>

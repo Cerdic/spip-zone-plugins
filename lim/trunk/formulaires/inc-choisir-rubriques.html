@@ -1,8 +1,6 @@
 [(#REM) Récupérer les objets sélectionnés. ex. spip_articles -> article ]
 
-#SET{objets, #ARRAY}
-<BOUCLE_objets_selectionnes(DATA){liste #CONFIG{lim_objets}}>#SET{objets,#GET{objets}|push{#VALEUR}} #SET{nbre_objets,#TOTAL_BOUCLE|moins{1}}</BOUCLE_objets_selectionnes>
-#SET{objets, #GET{objets}|array_flip}
+#SET{objets, #CONFIG{lim/rubriques/objets}|array_flip}
 
 
 [(#REM) multilinguisme : pour les objets sélectionnés, récupérer le nom traduit et les afficher dans l'ordre alphabétique ]
@@ -11,10 +9,10 @@
 ]</BOUCLE_objets>
 [(#SET{traductions,#GET{traductions}|array_intersect_key{#GET{objets}}})]
 
+
 [(#REM) Récupérer le tableau des types d'objets sélectionnés. ex. spip_articles -> article ]
 #SET{type, #ARRAY}
 [(#SET{type, #GET{traductions}|lim_type})]
-
 
 <div class="grid_rub">
 	<div></div>
@@ -22,6 +20,9 @@
 		#SET{type_obj, #CLE|objet_type}
 		<div class="center"><img src='#CHEMIN_IMAGE{#GET{type_obj}-24.png}'><br>#VALEUR</div>
 	</BOUCLE_entete2>
+	#SET{nbre_objets, #TOTAL_BOUCLE}
+	</B_entete2>
+
 </div>
 
 <BOUCLE_titre_rubrique(RUBRIQUES){racine}{par num titre,titre}{tout}>

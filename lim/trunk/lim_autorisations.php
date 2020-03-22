@@ -23,27 +23,31 @@ function lim_autoriser() {}
 
 /* Exceptions historiques */
 function autoriser_auteur_iconifier($faire,$type,$id,$qui,$opt) {
-	if (in_array(table_objet_sql($type),explode(',',lire_config('lim_logos'))))
+	if (in_array(table_objet_sql($type), lire_config('lim/logos/objets'))) {
 		return false;
+	}
 	else return (($id == $qui['id_auteur']) OR
 			(($qui['statut'] == '0minirezo') AND !$qui['restreint']));
 }
 
 function autoriser_mot_iconifier($faire,$type,$id,$qui,$opt) {
-	if (in_array(table_objet_sql($type),explode(',',lire_config('lim_logos'))))
+	if (in_array(table_objet_sql($type), lire_config('lim/logos/objets'))){
 		return false;
+	}
 	return (($qui['statut'] == '0minirezo') AND !$qui['restreint']);
 }
 
 function autoriser_groupemots_iconifier($faire,$type,$id,$qui,$opt) {
-	if (in_array(table_objet_sql($type),explode(',',lire_config('lim_logos'))))
+	if (in_array(table_objet_sql($type), lire_config('lim/logos/objets'))) {
 		return false;
+	}
 	else return (($qui['statut'] == '0minirezo') AND !$qui['restreint']);
 }
 
 function autoriser_rubrique_iconifier($faire,$type,$id,$qui,$opt) {
-	if (in_array(table_objet_sql($type),explode(',',lire_config('lim_logos'))))
+	if (in_array(table_objet_sql($type), lire_config('lim/logos/objets'))) {
 		return false;
+	}
 	return autoriser('publierdans', 'rubrique', $id, $qui, $opt);
 }
 
@@ -55,8 +59,9 @@ function autoriser_iconifier($faire, $type, $id, $qui, $opt) {
     if (_request('exec') == 'configurer_identite' AND  $type =='site') {
         return true;
     }
-	if (in_array(table_objet_sql($type),explode(',',lire_config('lim_logos'))))
+	if (in_array(table_objet_sql($type), lire_config('lim/logos/objets'))) {
 		return false;
+	}
 	// par defaut, on a le droit d'iconifier si on a le droit de modifier
 	else return autoriser('modifier', $type, $id, $qui, $opt);
 }
@@ -130,6 +135,13 @@ if (!function_exists('autoriser_joindredocument')) {
 			AND autoriser_joindredocument_dist($faire, $type, $id, $qui, $opt);
 	}
 }
+
+// Dans une rubrique, déterminer l'autorisation pour la création d'un objet heuristique
+// est-ce possible ?
+// idée : s'inspirer de /ecrire/inc/filtres_ecrire.php, function trouver_rubrique_creer_objet() 
+
+
+
 
 // if (!function_exists('autoriser_rubrique_publierdans')) {
 // 	function autoriser_rubrique_publierdans($faire, $type, $id, $qui, $opt) {

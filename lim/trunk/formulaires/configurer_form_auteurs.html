@@ -5,7 +5,6 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-	
 	<form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
@@ -20,7 +19,7 @@
 			[(#SAISIE{oui_non_ligne, liens_sites,label=<:lim:label_desactive_auteur_liens_sites:>, li_class=long_label})]
 		</[(#DIV|sinon{ul})]>
 
-		<input type="hidden" name="_meta_casier" value="lim/divers" />
+		<input type="hidden" name="_meta_casier" value="lim/divers/form_auteur" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div>
 	</form>

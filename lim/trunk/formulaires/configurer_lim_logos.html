@@ -10,12 +10,13 @@
 		<p class='lim_info'>Vous devez activer l'option "Utiliser les logos" ci-dessus pour pouvoir<br> activer / désactiver les logos au cas par cas.</p>
 		#BOITE_FERMER
 	]
+
 	<form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<p class='lim_info'>Note : les contenus marqués d'un <img src='#CHEMIN_IMAGE{warning-16.png}' /> contiennent déjà des logos.</p>
+		
 		<[(#DIV|sinon{ul})] class='editer-groupe'>
-			#SET{name,lim_logos}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			#SET{name,objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<[(#DIV|sinon{li})] class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:lim:label_activer_logo_objets:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
@@ -23,6 +24,9 @@
 			</[(#DIV|sinon{li})]>
 		</[(#DIV|sinon{ul})]>
 
+		<p class='lim_info'>Note : les contenus marqués d'un <img src='#CHEMIN_IMAGE{warning-16.png}' /> contiennent déjà des logos.</p>
+
+		<input type="hidden" name="_meta_casier" value="lim/logos" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div>
 	</form>
