@@ -125,7 +125,7 @@ function auth_pmb_dist ($login, $pass, $serveur='') {
 			// Recuperer les donnees de l'auteur
 			// Convertir depuis UTF-8 (jeu de caracteres par defaut)
 			include_spip('inc/charsets');
-			$nom = importer_charset($resultpmb->personal_information->firstname." ".$result->personal_information->lastname, 'utf-8');
+			$nom = importer_charset($resultpmb->personal_information->firstname . " " . $resultpmb->personal_information->lastname, 'utf-8');
 			$email = importer_charset($resultpmb->personal_information->email, 'utf-8');
 			//$login = strtolower(importer_charset($resultpmb->cb, 'utf-8'));
 			$bio = '';
