@@ -3,9 +3,15 @@
 code {
   white-space:inherit;
 }
-.spip_code {
+code, .spip_code {
   color: $code-color;
   word-break: break-word;
+  background: rgba($gray-500,0.07);
+  border:1px solid rgba($gray-500,0.15);
+  padding: $padding-y-xs $padding-x-xs;
+  @if $enable-rounded {
+    border-radius: $border-radius-sm;
+  }
 
   // Streamline the style when inside anchors to avoid broken underline and more
   a > & {

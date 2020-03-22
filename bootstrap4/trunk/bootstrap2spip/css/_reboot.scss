@@ -30,6 +30,8 @@
 .spip_doc_descriptif { margin-right: auto; margin-left: auto; text-align: center; max-width: 100%;}
 .spip_documents_center { clear: both; display: block; width: 100%;}
 
+.spip_documents {picture,img {max-width: 100%;height: auto;}}
+
 dl.spip_documents { dt,dd {margin-left:auto;margin-right:auto;padding-left:0;padding-right:0}}
 
 .spip_documents_left { float: left; margin: $padding-y-lg $padding-x-lg;margin-left: 0; }
