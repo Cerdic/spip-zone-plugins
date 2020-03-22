@@ -1,0 +1,15 @@
+			#SET{name,aide_par_objet}#SET{erreurs,#ENV{erreurs/#GET{name}}}#SET{obli,''}
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label><:aide_par_objet:cfg_label_titre:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<div class="choix">
+					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_1'[(#ENV{#GET{name}}|=={navigation_sans_aide}|oui)checked="checked" ]value="navigation_sans_aide"
+					onchange="if (this.checked) jQuery('body').addClass('navigation_sans_aide').removeClass('navigation_avec_aides'); else jQuery('body').removeClass('navigation_sans_aide').addClass('navigation_avec_aides');" [(#CONFIG{aide_par_objet/forcee}|=={on}) disabled]/>
+					<label for="[(#GET{name})]_1"><:aide_par_objet:cfg_label_sans_aide:></label>
+				</div>
+				<div class="choix">
+					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_2'[(#ENV{#GET{name}}|=={navigation_sans_aide}|non)checked="checked" ]value="navigation_avec_aides"
+					onchange="if (!this.checked) jQuery('body').addClass('navigation_sans_aide').removeClass('navigation_avec_aides'); else jQuery('body').removeClass('navigation_sans_aide').addClass('navigation_avec_aides');" [(#CONFIG{aide_par_objet/forcee}|=={on}) disabled]/>
+					<label for="[(#GET{name})]_2"><:aide_par_objet:cfg_label_aides:></label>
+				</div>
+			</div>
