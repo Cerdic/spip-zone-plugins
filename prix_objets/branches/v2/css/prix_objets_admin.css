@@ -1,0 +1,19 @@
+.formulaire_spip select.code_devise {
+	width: auto;
+}
+
+.fieldset_extensions .editer-groupe {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.fieldset_extensions .saisie_ajouter_action {
+	width: 72px;
+	padding: 0 10px;
+}
+
+.liste-objets.prix_objets .caption {
+	background-image: url('../prive/themes/spip/images/prix_objets-24.png');
+	padding-left: 30px;
+}

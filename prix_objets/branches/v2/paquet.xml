@@ -1,0 +1,34 @@
+<paquet
+	prefix="prix_objets"
+	categorie="edition"
+	version="2.4.2"
+	etat="stable"
+	compatibilite="[3.0.5;3.3.*]"
+	logo="prive/themes/spip/images/prix_objets-64.png"
+	documentation="https://contrib.spip.net/Prix-Objets"
+	schema="2.1.4"
+>
+
+	<nom>Prix Objets</nom>
+
+	<auteur lien='https://web-simple.eu'>Rainer Müller</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="saisies" compatibilite="[3.32.1;]" />
+	<necessite nom="prix" compatibilite="[0.1.18;]" />
+
+	<!-- Déclaration des pipelines -->
+	<pipeline nom="prix_objets_extensions" action='' />
+	<pipeline nom="prix_par_objet" action='' />
+
+	<!-- Appels des pipelines -->
+	<pipeline nom="autoriser" inclure="prix_objets_autorisations.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/prix_objets.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/prix_objets.php" />
+	<pipeline nom="affiche_milieu" inclure="prix_objets_pipelines.php" />
+	<pipeline nom="shop_objets" inclure="prix_objets_pipelines.php" />
+	<pipeline nom="header_prive" inclure="prix_objets_pipelines.php" />
+	<pipeline nom="reservation_evenement_objets_configuration" inclure="prix_objets_pipelines.php" />
+	<pipeline nom="jqueryui_plugins" inclure="prix_objets_pipelines.php" />
+</paquet>
