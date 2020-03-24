@@ -185,7 +185,7 @@ class ConvertisseurConvertir extends Command {
 						$c = array(
 							"fichier_source" => $f,
 							"dest" => $dest,
-							"collection" => ($contenu['collection']) ? $contenu['collection'] : $collection,
+							"collection" => ($contenu['collection']) ? trim($contenu['collection']) : trim($collection),
 							"numero" => ($contenu['numero']) ? $contenu['numero'] : $numero,
 							"contenu" => $contenu,
 							"basename" => $file ,
@@ -202,6 +202,7 @@ class ConvertisseurConvertir extends Command {
 						if(!is_dir($c["dest"] . "/" .  $c["collection"])){
 							mkdir($c["dest"]  . "/" . $c["collection"]) ;
 						}
+						
 						if(!is_dir($c["dest"]  . "/" . $c["collection"] . $c["numero"])){
 							mkdir($c["dest"]  . "/" . $c["collection"] . $c["numero"]) ;
 						}
