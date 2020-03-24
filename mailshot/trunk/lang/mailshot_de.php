@@ -18,7 +18,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_aucun_service_configure' => 'Kein Ausgangsserver eingerichtet. <a href="@url@">Ausgangsserver einrichten</a>',
 	'erreur_envoi_mail_bloque_debug' => 'Mailing blockiert von <tt>_TEST_EMAIL_DEST</tt>', # MODIF
 	'erreur_envoi_mail_force_debug' => 'Versand an @email@ erzwungen von <tt>_TEST_EMAIL_DEST</tt>', # MODIF
-	'erreur_generation_newsletter' => 'Beim Erzeugen des Newsletters ist ein Fehler aufgetreten', # MODIF
+	'erreur_envoi_newsletter' => 'Unbekannter Fehler beim Versenden des Newsletter',
+	'erreur_generation_newsletter' => 'Beim Erzeugen des Newsletters ist ein Fehler aufgetreten',
 	'explication_boost_send' => 'In diesem Modus werden die Mails so schnell wie möglich verschickt. Es wird keine Begrenzung berücksichtigt. Der Schnellversand ist nicht empfehlenswert, da er die Wahrscheinlichkeit der Einstufung der Mails als SPAM vergrößert.',
 	'explication_purger_historique' => 'Für jeden Massenversand werden die Empfänger in der Datenbank gespeichert, mit Informationen zum Status des jeweiligen Versand.
 Dies führt bei zahlreichem Versenden zu einer großen Datenmenge, weshalb es ratsam ist diese Versanddetails nach einer gewissen Zeit zu löschen.',
@@ -98,11 +99,11 @@ Dies führt bei zahlreichem Versenden zu einer großen Datenmenge, weshalb es ra
 	'texte_statut_pause' => 'Pause',
 	'texte_statut_processing' => 'Wird ausgeführt',
 	'titre_envois_archives' => 'Versandarchiv',
-	'titre_envois_destinataires_fail' => 'Fehlgeschlagene Sendungen', # MODIF
+	'titre_envois_destinataires_fail' => 'Fehlgeschlagene Sendungen',
 	'titre_envois_destinataires_init_encours' => 'Kein Empfänger vorprogrammiert (wird initialisiert)',
 	'titre_envois_destinataires_ok' => 'Erfolgreiche Sendungen',
 	'titre_envois_destinataires_sent' => 'Erfolgreiche Sendungen',
-	'titre_envois_destinataires_todo' => 'Anstehende Sendungen', # MODIF
+	'titre_envois_destinataires_todo' => 'Ausstehende Sendungen',
 	'titre_envois_en_cours' => 'Versand wird ausgeführt',
 	'titre_envois_planifies' => 'Geplante Versendungen',
 	'titre_envois_termines' => 'Versand beeendet',
