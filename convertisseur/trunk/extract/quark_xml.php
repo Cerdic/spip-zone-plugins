@@ -43,12 +43,12 @@ function convertir_quark_xml($c) {
 	$mise_en_page = extraire_attribut($mise_en_page, "parentAssetName");
 	$item["mise_en_page"] = $mise_en_page ;
 
-
 	// L'article et son illustration sont dans des <spread>
 	// Il peut y avoir plusieurs illustrations dans un même spread
 	$u = preg_replace("/MASTERSPREAD>/", "SPREAD>", $u);
 	$sequences = extraire_balises($u, "SPREAD") ;
 	foreach($sequences as $s){
+		
 		// est-on dans une illustration ?
 		if(extraire_balise($s , 'PICTURE')){
 			$images = array();
@@ -112,10 +112,27 @@ function convertir_quark_xml($c) {
 			// Parcourir les paragraphes en séparant les éléments trouvés selon leur feuille de style.
 			// Titre // Auteurs // chapo // notes // signature // Paragraphes
 
+			// intercepter les notes auto dans le texte.
+			$notes_auto = extraire_balises($s, "REFNOTE") ;
+			
+			foreach($notes_auto as $k => $n){
+				$nn = $k+1 ;
+				
+				$s = preg_replace("`$n`", " <RICHTEXT>(" . $nn . ") </RICHTEXT>", $s);
+				
+				$item["notes"] .= "\n($nn) " ;
+				
+				foreach($par = extraire_balises($n, "PARAGRAPH") as $papa){
+					$item["notes"] .= nettoyer_xml_quark($papa) ."\n\n" ;
+				}
+			}
+			
+			$s = preg_replace("` ,`", ",", $s);
+			
 			$paragraphes = extraire_balises($s, "PARAGRAPH") ;
 
 			foreach($paragraphes as $p){
-
+				//var_dump($p);
 				$paragraphe = extraire_balise($p, "PARAGRAPH");
 				$type = extraire_attribut($paragraphe, "PARASTYLE");
 
@@ -194,7 +211,7 @@ function convertir_quark_xml($c) {
 	}
 
 	// ajouter les notes
-
+	// var_dump("ajout", $item["notes"]); 
 	if($item["notes"]){
 		$item["texte"] = $item["texte"] . "[[<>\n" . trim($item["notes"]) ."\n]]" . "\n" ;
 		unset($item["notes"]) ;
