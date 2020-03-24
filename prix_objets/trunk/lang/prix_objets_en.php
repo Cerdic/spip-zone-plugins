@@ -20,8 +20,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choix_prix' => 'The products price',
 
 	// D
-	'devise_default' => 'Default Devise',
-	'devises_choisis' => 'Selected devises',
+	'devise_default' => 'Default Devise:',
+	'devises_choisis' => 'Selected devises:',
 
 	// H
 	'htva' => 'ex VAT',

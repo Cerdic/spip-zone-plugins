@@ -1,6 +1,6 @@
 #SET{objets,#ARRAY}
-#SET{devises,(#VAL|devises)}
-#SET{config,#CONFIG{prix_objets,#ARRAY}
+#SET{devises,(#VAL|prix_objets_devises_disponibles)}
+#SET{config,#CONFIG{prix_objets,#ARRAY}}
 [(#VAL{inc/cookie}|include_spip|oui)]
 
 
@@ -10,12 +10,7 @@
 	#SET{selected,#ARRAY}
 })]
 
-#SET{devise_default,#ENV{devise_default,#GET{config}|table_valeur{devise_default}}
-
-#GET{devise_default}
-<BOUCLE_defaut(DATA){source tableau, #GET{selected}}{si #GET{devise_default}|non}{0,1}>
-	#SET{devise_default,#VALEUR}
-</BOUCLE_defaut>
+#SET{devise_default,(#VAL|prix_objets_devise_defaut)}
 
 [(#VAL{devise_selectionnee}|spip_setcookie{#GET{devise_default},#VAL|time|plus{3660*24*365},/}|oui)]
 
@@ -30,7 +25,6 @@
 <div class="formulaire_spip formulaire_#FORM">
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-
 	<form action="#ENV{action}" method="post"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<div class="editer-groupe">
@@ -50,6 +44,14 @@
 		<div class="editer-groupe">
 			<div class="fieldset fieldset_fieldset_parametres saisie_fieldset">
 				<fieldset><legend><:prix_objets:infos_produits:></legend>
+					<div class="editer_devise_default[ (#GET{erreurs}|oui)erreur]">
+						<label for="devise_default"><:prix_objets:devise_default:></label>
+						<span>#GET{devise_default}</span>
+						<p class="explication" id="explication_devise_default">
+							<:prix_objets:explication_devise_default:>
+						</p>
+					</div>
+
 					<div class="editer-groupe">
 						<div class="editer_devises_choisis[ (#GET{erreurs}|oui)erreur]">
 						<B_choix>
@@ -62,6 +64,9 @@
 						</B_choix>
 						<div class="editer_choix_devises[ (#GET{erreurs}|oui)erreur]">
 							<label for="devises"><:prix_objets:choix_devises:></label>
+							<p class="explication" id="explication_devises">
+								<:prix_objets:explication_devises:>
+							</p>
 							<select name="devises[]" class="forml" style="width:auto;" multiple="multiple" size="5" id="devises">
 								<option value=""><:prix_objets:choix_devise:></option>
 							<BOUCLE_selection(DATA){source tableau, #GET{devises}}>
@@ -69,18 +74,6 @@
 							</BOUCLE_selection>
 							</select>
 						</div>
-
-						<B_selection_default>
-						<div class="editer_devise_default[ (#GET{erreurs}|oui)erreur]">
-							<label for="devises"><:prix_objets:devise_default:></label>
-							<select name="devise_default" class="forml" style="width:auto;" id="devise_default">
-								<option value=""><:prix_objets:choisir:></option>
-							<BOUCLE_selection_default(DATA){source tableau, #GET{selected}}>
-								<option value="#VALEUR" [(#GET{devise_default}|=={#VALEUR}|?{'selected="selected"'})]>[(#VALEUR|traduire_devise)]</option>
-							</BOUCLE_selection_default>
-							</select>
-						</div>
-					</B_selection_default>
 				<B_frais>
 					<div class="editer_frais_livraison[ (#GET{erreurs}|oui)erreur]">
 						<label for="frais_livraison"><:prix_objets:frais_livraison:></label>

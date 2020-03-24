@@ -21,8 +21,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choix_prix' => 'O preço do produto',
 
 	// D
-	'devise_default' => 'Moeda padrão',
-	'devises_choisis' => 'Moedas selecionadas',
+	'devise_default' => 'Moeda padrão:',
+	'devises_choisis' => 'Moedas selecionadas:',
 
 	// F
 	'frais_livraison' => 'Frete:',
