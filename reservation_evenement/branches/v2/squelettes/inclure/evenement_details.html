@@ -1,0 +1,65 @@
+#SET{prix,''}
+<BOUCLE_prix (PRIX_OBJETS?){id_objet}{objet=evenement}{0,1}>
+	#SET{prix,#PRIX}
+</BOUCLE_prix>
+[(#REM) ou à l'article]
+<BOUCLE_prix_article(PRIX_OBJETS?){id_objet=#ID_ARTICLE}{objet=article}{0,1}>
+		#SET{prix,#PRIX}
+	</BOUCLE_prix_article>
+		[(#REM) Sinon, si l'événement ne contient pas de prix, on prend le prix
+		du champs prix l'article]
+		<BOUCLE_art_present(ARTICLES){id_article}{si #GET{prix}|>{0}|non}>
+			#SET{prix,#PRIX}
+		</BOUCLE_art_present>
+		[(#REM) sinon on prend le prix du champs prix de l'événement]
+		#SET{prix,#ENV{prix}}
+		<//B_art_present>
+	<//B_prix_article>
+<//B_prix>
+
+[(#LIEU|ou{#ADRESSE}|ou{#GET{prix}}|ou{#INSCRIPTION}|oui)
+<aside class="details well">
+	[<div class="location" itemprop="location">
+		<div class="lieu #EDIT{lieu}">
+			<div>
+				<strong><:agenda:evenement_lieu:></strong>
+			</div>
+			<div>(#LIEU)</div>
+			[
+			<div class="adresse #EDIT{adresse}">(#ADRESSE)</div>
+			]
+		</div>
+	</div>
+	]
+
+		[(#GET{prix}|>{0}|oui)
+			<div class>
+				<:prix_objets:prix:> : #GET{prix}
+			</div>
+		]
+		[(#PLACES|>{0}|oui)
+			<INCLURE
+				{fond=inclure/places_disponibles,
+					id_evenement=#ID_OBJET,
+					places,
+					statut=#VAL|statuts_complet}/>
+		]
+	[(#DATE_FIN|>{#DATE}|?{
+	[(#PLUGIN{bootstrap3_sass}|?{
+		#SET{class_a,btn btn-default}
+		#SET{class_i,glyphicon glyphicon-hand-right}
+		,
+		[(#PLUGIN{bootstrap}|oui)
+			#SET{class_a,btn btn-small}
+			#SET{class_1,icon-hand-right}
+		]
+		})]
+		<a[ class="(#GET{class_a})"] title="<:reservation:inscrire:>" href="[(#URL_PAGE{inscription}|parametre_url{id_evenement,#ID_OBJET})]">
+		[<i class="(#GET{class_i})"> </i>] <:reservation:inscrire:>
+		</a>,
+		<p><strong><:reservation:evenement_ferme_inscription:></strong></p>
+		<a[ class="(#GET{class_a})"] title="<:reservation:inscrire:>" href="[(#URL_PAGE{inscription})]">
+			[<i class="(#GET{class_i})"> </i>] <:reservation:inscrire:>
+		</a>
+		})]
+</aside>]
