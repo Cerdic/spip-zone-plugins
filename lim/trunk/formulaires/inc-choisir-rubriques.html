@@ -1,5 +1,4 @@
 [(#REM) Récupérer les objets sélectionnés. ex. spip_articles -> article ]
-
 #SET{objets, #CONFIG{lim/rubriques/objets}|array_flip}
 
 
@@ -22,23 +21,23 @@
 	</BOUCLE_entete2>
 	#SET{nbre_objets, #TOTAL_BOUCLE}
 	</B_entete2>
-
 </div>
 
 <BOUCLE_titre_rubrique(RUBRIQUES){racine}{par num titre,titre}{tout}>
 	<div class='pin'><img src='#CHEMIN_IMAGE{rubrique-16.png}'></div>
 	<div class='secteur'>
 		<div class="grid_rub">
-			<div class="tab rub"><b><a href="#URL_ECRIRE{rubrique,id_rubrique=#ID_RUBRIQUE}">#TITRE</a></b></div>
+			<div class="titre_rub"><a href="#URL_ECRIRE{rubrique,id_rubrique=#ID_RUBRIQUE}">#TITRE</a></div>
 			<BOUCLE_par_traduction1(DATA){source tableau,#GET{type}}{par cle}>
 				[(#INCLURE{fond=formulaires/inc-input-rub,env,name=#VALEUR}{#VALEUR=#ENV{#VALEUR}}{id_rubrique=#ID_RUBRIQUE}{secteur=oui})]
 			</BOUCLE_par_traduction1>
 		</div>
 		<BOUCLE_enfants_rubriques(RUBRIQUES){id_parent}{par num titre,titre}{tout}>
-			<div class='sousrub_#PROFONDEUR grid_rub'>
-			<div class="tab rub">#TITRE</div><BOUCLE_par_traduction2(DATA){source tableau,#GET{type}}{par cle}>
-			[(#INCLURE{fond=formulaires/inc-input-rub,env,name=#VALEUR}{#VALEUR=#ENV{#VALEUR}}{id_rubrique=#ID_RUBRIQUE})]
-			</BOUCLE_par_traduction2></div><BOUCLE_rec(BOUCLE_enfants_rubriques)/>
+			<div class='grid_rub sousrub sousrub--#PROFONDEUR'>
+				<div class="titre_rub"><a href="#URL_ECRIRE{rubrique,id_rubrique=#ID_RUBRIQUE}">#TITRE</a></div>
+				<BOUCLE_par_traduction2(DATA){source tableau,#GET{type}}{par cle}>
+				[(#INCLURE{fond=formulaires/inc-input-rub,env,name=#VALEUR}{#VALEUR=#ENV{#VALEUR}}{id_rubrique=#ID_RUBRIQUE})]
+				</BOUCLE_par_traduction2></div><BOUCLE_rec(BOUCLE_enfants_rubriques)/>
 		</BOUCLE_enfants_rubriques>
 	</div>
 </BOUCLE_titre_rubrique>
@@ -46,18 +45,19 @@
 <style type="text/css">
 	.grid_rub{
 		display:grid;
-		grid-template-columns: 320px repeat(#GET{nbre_objets}, 1fr);
+		grid-template-columns: 3fr repeat(#GET{nbre_objets}, 1fr);
 		justify-items: center;
 		align-items: center;
 	}
 
-	.grid_rub .tab {
+	.grid_rub .titre_rub {
 		justify-self: start;
 	}
 
-	.grid_rub:hover {
+	.grid_rub.sousrub:hover {
 		background-color: #ffffef;
 	}
+
 </style>
 
 <script type="text/javascript">
