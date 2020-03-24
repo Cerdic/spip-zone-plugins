@@ -1,0 +1,14 @@
+[(#AUTORISER{creer,declinaison})
+<[(#ENV{saisies_base_conteneur,#DIV|sinon{li}})] class="editer pleine_largeur editer_ajouter_action[ explication_(#ENV{nom})][ (#ENV{conteneur_class,#ENV{li_class}})][ saisie_(#ENV{type_saisie})]"[ data-id="(#ENV{id_saisie})"]>
+	#ENV*{inserer_debut}
+	<div class="ajouter_action">
+		[(#SET{redirect,#SELF|parametre_url{retour_action,oui}|parametre_url{visible,1}})]
+		[(#URL_ECRIRE{
+			[(#ENV{objet}|concat{_edit})],
+			new=oui}
+			|parametre_url{redirect,#GET{redirect}#form_prix}|icone_verticale{#ENV{label_action},#ENV{objet},new,right}
+		)]
+	</div>
+	#ENV*{inserer_fin}
+</[(#ENV{saisies_base_conteneur,#DIV|sinon{li}})]>
+]
