@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'devises_choisis' => 'Devises choisis :',
 
 	// E
-	'explication_devises' => 'Les devises avec lesquelles vous pouvez encoder des prix, si rien choisit, la devise par défaut sera utilisée.',
+	'explication_devises' => 'Les devises avec lesquelles vous pouvez encoder des prix. Si rien choisit, la devise par défaut sera utilisée.',
 	'explication_devise_default' => 'Définit par le <a href="/ecrire/?exec=configurer_prix">plugin API Prix</a>',
 
 	// F

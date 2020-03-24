@@ -39,7 +39,7 @@
 								label=<:prix_objets:rubrique_prix:>})]
 					</div>
 				</fieldset>
-			</div>
+			</div> 
 		</div>
 		<div class="editer-groupe">
 			<div class="fieldset fieldset_fieldset_parametres saisie_fieldset">
@@ -56,7 +56,7 @@
 						<div class="editer_devises_choisis[ (#GET{erreurs}|oui)erreur]">
 						<B_choix>
 							<div>
-								<:prix_objets:devises_choisis:> :
+								<:prix_objets:devises_choisis:>
 							<BOUCLE_choix(DATA){source tableau, #GET{selected}}{', '}>
 								[(#VALEUR|traduire_devise)]
 							</BOUCLE_choix>

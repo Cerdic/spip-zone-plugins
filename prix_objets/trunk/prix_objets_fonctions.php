@@ -16,147 +16,16 @@ if (!defined('_ECRIRE_INC_VERSION'))
 include_spip('base/abstract_sql');
 
 /**
- * Un tableau des devises dispoibles.
+ * Un tableau des devises disponibles.
  *
  * @return array
  *   Les devises disponibles.
  */
-function devises() {
-	$devises = array(
-
-		// A
-		'AUD' => 'AUD',
-
-		// B
-		'BRL' => 'Real',
-
-		// C
-		'CAD' => 'CAD',
-		'CHF' => 'CHF',
-		'CNY' => 'Yuan',
-		'CSD' => 'CSD',
-		'CZK' => 'CZK',
-
-		// D
-		'DKK' => 'DKK',
-
-		// E
-		'EUR' => '€',
-
-		// G
-		'GBP' => '£',
-
-		// H
-		'HKD' => 'HKD',
-		'HUF' => 'HUF',
-
-		// I
-		'IDR' => 'IDR',
-		'ILS' => 'Shekel',
-		'IQD' => 'IQD',
-		'IRR' => 'IRR',
-		'ISK' => 'ISK',
-
-		// J
-		'JEP' => 'JEP',
-		'JOD' => 'JOD',
-		'JMD' => 'JMD',
-		'JPY' => '¥',
-
-		// K
-		'KES' => 'KES',
-		'KGS' => 'KGS',
-		'KWD' => 'KWD',
-		'KZT' => 'Tenge',
-
-		// L
-		'LAK' => 'Kip',
-		'LBP' => 'LBP',
-		'LKR' => 'LKR',
-		'LRD' => 'LRD',
-		'LTL' => 'Litas',
-		'LVL' => 'Lat',
-
-		// M
-		'MAD' => 'Dirham',
-		'MDL' => 'MDL',
-		'MGA' => 'Ariary',
-		'MKD' => 'MKD',
-		'MNT' => 'Tughrik',
-		'MRO' => 'Ouguiya',
-		'MUR' => 'MUR',
-		'MVR' => 'Rufiyaa',
-		'MWK' => 'MWK',
-		'MXN' => 'MXN',
-		'MYR' => 'Ringgit',
-		'MZN' => 'Metical',
-
-		// N
-		'NAD' => 'NAD',
-		'NGN' => 'Naira',
-		'NIO' => 'Cordoba',
-		'NPR' => 'NPR',
-		'NOK' => 'NOK',
-		'NZD' => 'NZD',
-
-		// O
-		'OMR' => 'OMR',
-
-		'QAR' => 'Riyal',
-
-		// P
-		'PGK' => 'Kina',
-		'PHP' => 'PHP',
-		'PKR' => 'PKR',
-		'PLN' => 'Zloty',
-
-		'RON' => 'RON',
-		'RUB' => 'Rouble',
-		'RWF' => 'RWF',
-
-		// S
-		'SCR' => 'SCR',
-		'SDD' => 'SDD',
-		'SEK' => 'SEK',
-		'SGD' => 'SGD',
-		'SOS' => 'SOS',
-		'SLL' => 'Leone',
-		'SRD' => 'SRD',
-		'STD' => 'Dobra',
-		'SVC' => 'Colon',
-		'SYP' => 'SYP',
-
-		// T
-		'THB' => 'Baht',
-		'TJS' => 'Somoni',
-		'TND' => 'TND',
-		'TMM' => 'TMM',
-		'TRY' => 'Lirasi',
-		'TTD' => 'TTD',
-		'TWD' => 'TWD',
-		'TZS' => 'TZS',
-
-		// U
-		'UAH' => 'Hryvna',
-		'UGX' => 'UGX',
-		'USD' => 'USD',
-		'UZS' => 'UZS',
-
-		// V
-		'VND' => 'Dong',
-
-		// X
-		'XAF' => 'XAF',
-		'XOF' => 'XOF',
-
-		// Y
-		'YER' => 'Rial',
-
-		// Z
-		'ZMK' => 'ZMK',
-		'ZWN' => 'ZWN'
-	);
-
+function prix_objets_devises_disponibles() {
+	$devises = array();
+	foreach (prix_lister_devises() as $cle => $valeur) {
+		$devises[$cle] = $valeur['symbole'];
+	}
 	return $devises;
 }
 
@@ -169,26 +38,10 @@ function devises() {
 function traduire_devise($code_devise) {
 	include_spip('inc/devises');
 
-	$devises = devises();
+	$devises = prix_objets_devises_disponibles();
 	$trad = $devises[$code_devise];
 
 	return $trad;
-}
-
-/**
- * Donne le prix d'un objet avec sa devise.
- *
- * @deprecated 2.3.0 Utilisez prix_objet_formate($id_objet, $objet = 'article');
- * @param integer $id_objet
- *   L'identifiant de l'objet
- * @param string $objet
- *   L'objet
- *
- * @return string
- *   Le prix formaté.
- */
-function prix_defaut($id_objet, $objet = 'article') {
-	prix_objet_formate($id_objet, $objet);
 }
 
 /**
@@ -207,7 +60,7 @@ function prix_objet_formate($id_objet, $objet = 'article') {
 	$req = sql_fetsel('code_devise,prix', 'spip_prix_objets', 'id_objet=' . $id_objet . ' AND objet=' . sql_quote($objet));
 
 	$devise = isset($reg['code_devise']) ? $reg['code_devise'] : '';
-	$prix = filtres_prix_formater($req['prix'], $devise);
+	$prix = prix_formater($req['prix'], $devise);
 
 	return $prix;
 }
@@ -226,14 +79,13 @@ function prix_objet_formate($id_objet, $objet = 'article') {
 function devise_defaut_prix($prix = '', $traduire = true) {
 	if ($_COOKIE['spip_devise']) {
 		$devise_defaut = $_COOKIE['spip_devise'];
-	}
+	} 
 	else {
-		$devise_defaut = $devise_defaut = prix_objets_devise_defaut();
+		$devise_defaut  = prix_devise_defaut();
 	}
-	$devise_defaut = traduire_devise($devise_defaut);
 
 	if ($prix) {
-		$devise_defaut = $prix . ' ' . $devise_defaut;
+		$devise_defaut = prix_formater($prix, $devise_defaut);
 	}
 
 	return $devise_defaut;
@@ -266,7 +118,7 @@ function rubrique_prix($id = '', $objet = 'article', $sousrubriques = false) {
 
 		if (!$sousrubriques) {
 			$rubriques = $id_parent;
-		}
+		} 
 		else {
 			$rubriques = array();
 		}
@@ -274,11 +126,11 @@ function rubrique_prix($id = '', $objet = 'article', $sousrubriques = false) {
 		$rubriques = rubriques_enfant($id_parent, $rubriques);
 		if ($id) {
 			$retour = sql_getfetsel('id_' . $objet, 'spip_' . $objet . 's', 'id_' . $objet . '=' . $id . ' AND id_rubrique IN (' . implode(',', $rubriques) . ')');
-		}
+		} 
 		else {
 			$retour = $rubriques;
 		}
-	}
+	} 
 	else {
 		return false;
 	}
@@ -286,7 +138,8 @@ function rubrique_prix($id = '', $objet = 'article', $sousrubriques = false) {
 	return $retour;
 }
 
-function rubriques_enfant($id_parent, $rubriques = array()) {
+function rubriques_enfant($id_parent, $rubriques = array())
+{
 	$id_p = '';
 
 	if (is_array($id_parent)) {
@@ -313,28 +166,10 @@ function rubriques_enfant($id_parent, $rubriques = array()) {
 /**
  * Détermine la devise par défaut
  *
- * @param array $config
- *        	Les donnes de configuration de prix_objets
  * @return string Code de la devise
  */
-function prix_objets_devise_defaut($config = '') {
-	if (!$config) {
-		include_spip('inc/config');
-		$config = lire_config('prix_objets');
-	}
-	$devises = isset($config['devises']) ? $config['devises'] : array();
-	// Sinon on regarde si il ya une devise defaut valable
-	if ($config['devise_default']) {
-		$devise_defaut = $config['devise_default'];
-	} // Sinon on prend la première des devises choisies
-	elseif (isset($devises[0])) {
-		$devise_defaut = $devises[0];
-	} // Sinon on met l'Euro
-	else {
-		$devise_defaut = 'EUR';
-	}
-
-	return $devise_defaut;
+function prix_objets_devise_defaut() {
+	return prix_devise_defaut();
 }
 
 /**
@@ -358,7 +193,7 @@ function prix_par_objet($objet, $id_objet, $contexte, $type = 'prix_ht', $option
 
 	if ($type == 'prix_ht') {
 		$fonction_prix = charger_fonction('ht', 'inc/prix');
-	}
+	} 
 	else {
 		$fonction_prix = charger_fonction('prix', 'inc');
 	}
@@ -366,7 +201,7 @@ function prix_par_objet($objet, $id_objet, $contexte, $type = 'prix_ht', $option
 	// Le mode de calcul de prix, ou passé dans les options, ou depuis la config.
 	if (isset($options['mode']) and !empty($options['mode'])) {
 		$mode = $options['mode'];
-	}
+	} 
 	else {
 		include_spip('inc/config');
 		$mode = lire_config('prix_objets/prix_par_objet_mode', 'global');
@@ -380,41 +215,42 @@ function prix_par_objet($objet, $id_objet, $contexte, $type = 'prix_ht', $option
 		if (!$sequence) {
 
 			// Séquence composé de dates.
-			if (isset($contexte['date_debut']) and
-					isset($contexte['date_fin']) and
-					include_spip('filtres/dates_outils') and
-					function_exists('dates_intervalle')) {
-
-						$sequence = dates_intervalle($contexte['date_debut'], $contexte['date_fin'], 0, -1, $horaire, $format);
-					}
-					else {
-						$sequence = array();
-					}
+			if (
+				isset($contexte['date_debut']) and
+				isset($contexte['date_fin']) and
+				include_spip('filtres/dates_outils') and
+				function_exists('dates_intervalle')
+			) {
+				$sequence = dates_intervalle($contexte['date_debut'], $contexte['date_fin'], 0, -1, $horaire, $format);
+			} 
+			else {
+				$sequence = array();
+			}
 		}
 
 		$nr_elements_sequence = count($sequence);
 		$contexte['date_fin'] = $contexte['date_debut'];
-	}
+	} 
 	else {
 		$nr_elements_sequence = 0;
 	}
 
 	$prix_source = sql_allfetsel(
-			'id_prix_objet,prix_total,titre',
-			'spip_prix_objets',
-			'id_prix_objet_source=0 AND objet LIKE ' . sql_quote(trim($objet)) . ' AND id_objet=' . $id_objet, '',
-			array(
-				'rang_lien',
-				'titre',
-				'prix_ht'
-			)
-			);
+		'id_prix_objet,prix_total,titre',
+		'spip_prix_objets',
+		'id_prix_objet_source=0 AND objet LIKE ' . sql_quote(trim($objet)) . ' AND id_objet=' . $id_objet,
+		'',
+		array(
+			'rang_lien',
+			'titre',
+			'prix_ht'
+		)
+	);
 
 
 	// On parcours les extension pour chaque prix principal.
 	$prix_elements = array();
 	foreach ($prix_source as $index => $data_source) {
-
 		$id_prix_objet = $data_source['id_prix_objet'];
 
 		// passer l'info sur le prix total dans l'environnement
@@ -432,12 +268,12 @@ function prix_par_objet($objet, $id_objet, $contexte, $type = 'prix_ht', $option
 
 			// On établit l'extension qui définit le prix.
 			foreach ($extensions as $data_extension) {
-				$i ++;
+				$i++;
 				$id_extension = $data_extension['id_extension'];
 
 				if ($extension = charger_fonction($data_extension['extension'], 'prix_objet/', TRUE)) {
 					switch ($mode) {
-						// Si global on met les resultats positiv dans un simple tableau.
+							// Si global on met les resultats positiv dans un simple tableau.
 						case 'global':
 							if ($applicable = $extension($id_extension, $contexte, $mode)) {
 								$applicables[] = $applicable;
@@ -457,7 +293,7 @@ function prix_par_objet($objet, $id_objet, $contexte, $type = 'prix_ht', $option
 							}
 							break;
 					}
-				}
+				} 
 				else {
 					$applicables[] = 1;
 				}
