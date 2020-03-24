@@ -5,7 +5,9 @@
 	url="https://trad.spip.net"
 	source="https://git.spip.net/spip-contrib-extensions/mailsubscribers.git"
 	reference="fr">
-	<langue code="de" url="https://trad.spip.net/tradlang_module/newsletter-mailsubscribers-674?lang_cible=de" total="15" traduits="8" relire="0" modifs="0" nouveaux="7" pourcent="53.33" />
+	<langue code="de" url="https://trad.spip.net/tradlang_module/newsletter-mailsubscribers-674?lang_cible=de" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
+	</langue>
 	<langue code="en" url="https://trad.spip.net/tradlang_module/newsletter-mailsubscribers-674?lang_cible=en" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="cerdic" lien="https://trad.spip.net/auteur/cerdic" />
 	</langue>
