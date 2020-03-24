@@ -3,7 +3,7 @@
 	categorie="edition"
 	version="2.4.2"
 	etat="stable"
-	compatibilite="[3.0.5;3.3.*]"
+	compatibilite="[3.2.0;3.3.*]"
 	logo="prive/themes/spip/images/prix_objets-64.png"
 	documentation="https://contrib.spip.net/Prix-Objets"
 	schema="2.1.4"
@@ -15,8 +15,8 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[3.32.1;]" />
-	<necessite nom="prix" compatibilite="[0.1.18;]" />
+	<necessite nom="saisies" compatibilite="[3.36.2;]" />
+	<necessite nom="prix" compatibilite="[1.2.2;]" />
 
 	<!-- Déclaration des pipelines -->
 	<pipeline nom="prix_objets_extensions" action='' />

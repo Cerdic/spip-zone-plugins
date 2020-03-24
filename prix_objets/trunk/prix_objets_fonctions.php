@@ -311,57 +311,6 @@ function rubriques_enfant($id_parent, $rubriques = array()) {
 }
 
 /**
- * Surcharge de la fonction filtres_prix_formater_dist du plugin prix.
- * Formate le prix en y ajoutant la devise.
- *
- * @param string $prix
- * @param string $devise
- * @param integer $decimals
- * @return string
- */
-function filtres_prix_formater($prix, $devise = '') {
-	include_spip('inc/config');
-	include_spip('inc/cookie');
-
-	$config = lire_config('prix_objets');
-
-	if (!$devise) {
-		$devises = isset($config['devises']) ? $config['devises'] : array();
-
-		// Si il y a un cookie 'devise_selectionnee' et qu'il figure parmis les devises disponibles on le prend
-		if (isset($_COOKIE['devise_selectionnee']) and in_array($_COOKIE['devise_selectionnee'], $devises)) {
-			$devise = $_COOKIE['devise_selectionnee'];
-			$GLOBALS['devise_defaut'] = $devise;
-		} // Sinon on regarde si il ya une devise defaut valable
-		else {
-			$devise = prix_objets_devise_defaut($config);
-		}
-	}
-
-	// On met le cookie
-	spip_setcookie('devise_selectionnee', $devise, time() + 3660 * 24 * 365, '/');
-
-	// On détermine la langue du contexte
-	if (isset($_COOKIE['spip_lang'])) {
-		$lang = $_COOKIE['spip_lang'];
-	}
-	else {
-		$lang = lire_config('langue_site');
-	}
-
-	// Si PECL intl est présent on dermine le format de l'affichage de la devise selon la langue du contexte
-	if (function_exists('numfmt_create') and is_float($prix)) {
-		$fmt = numfmt_create($lang, NumberFormatter::CURRENCY);
-		$prix = numfmt_format_currency($fmt, $prix, $devise);
-	} // Sinon à la française
-	else {
-		$prix = $prix . '&nbsp;' . traduire_devise($devise);
-	}
-
-	return $prix;
-}
-
-/**
  * Détermine la devise par défaut
  *
  * @param array $config
