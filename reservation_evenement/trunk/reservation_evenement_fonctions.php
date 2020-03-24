@@ -115,35 +115,6 @@ function infos_client($email, $champ = '', $retour_vide = TRUE) {
 }
 
 /*
- * Formater un nombre pour l'afficher comme un prix avec une devise
- *
- * @param float $prix Valeur du prix à formater
- * @param string $devise devise
- * @return string Retourne une chaine contenant le prix formaté avec une devise (par défaut l'euro)
- */
-function prix_formater_devise($montant, $devise) {
-	include_spip('inc/config');
-	include_spip('inc/cookie');
-
-	$montant = number_format($montant, 2, '.', '');
-
-	//On détermine la langue du contexte
-	$lang = $GLOBALS['spip_lang'];
-	// Si PECL intl est présent on dermine le format de l'affichage de la devise selon la langue du contexte
-	if (function_exists('numfmt_create')) {
-		$fmt = numfmt_create($lang, NumberFormatter::CURRENCY);
-		$montant = numfmt_format_currency($fmt, $montant, $devise);
-	}
-	//Sinon on formate à la française
-	elseif (function_exists('traduire_devise'))
-		$montant = $montant . '&nbsp;' . traduire_devise($devise);
-	else
-		$montant = $montant . '&nbsp;' . $devise;
-
-	return $montant;
-}
-
-/*
  * Permet d'appeler la fonction statut_texte_instituer por établir le nom ou traductions d'un statut
  *
  * @param string $objet Objet dont on cherche le nom
