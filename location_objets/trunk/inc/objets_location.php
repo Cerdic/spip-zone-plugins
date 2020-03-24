@@ -57,7 +57,7 @@ function location_prix_objet($set, $contexte) {
 				)
 			);
 			$set['taxe'] = $prix_ttc - $prix_unitaire_ht;
-			$set['devise'] = devise_defaut_objet($id_location_objet, $location_objet);
+			$set['devise'] = prix_objet_formate($id_location_objet, $location_objet);
 			$set['prix_total'] = _request('prix_total');
 		}
 	}
