@@ -5,7 +5,7 @@
 	url="https://trad.spip.net"
 	source="https://git.spip.net/spip-contrib-extensions/mailsubscribers.git"
 	reference="fr">
-	<langue code="de" url="https://trad.spip.net/tradlang_module/mailsubscriber?lang_cible=de" total="106" traduits="83" relire="0" modifs="16" nouveaux="7" pourcent="78.30">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/mailsubscriber?lang_cible=de" total="106" traduits="105" relire="0" modifs="1" nouveaux="0" pourcent="99.06">
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
 	</langue>

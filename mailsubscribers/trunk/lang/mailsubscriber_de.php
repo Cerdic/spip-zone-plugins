@@ -10,6 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bouton_actualiser_segments' => 'Abschnitte aktualisieren',
 	'bouton_importer' => 'Importieren',
 	'bouton_invitation' => 'Zur Anmeldung zum Newsletter einladen',
 	'bouton_previsu_importer' => 'Vorschau',
@@ -17,16 +18,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'confirmsubscribe_invite_texte_email_1' => '@invite_email_from@ hat sie dazu eingeladen, sich zum Newsletter von @nom_site_spip@ mit der E-Mailadresse @email@ anzumelden.',
 	'confirmsubscribe_invite_texte_email_3' => 'Falls sie diese E-Mail fälschlcherweise erhalten haben, können Sie diese ignorieren: Die Anfrage wird automatisch gelöscht.',
-	'confirmsubscribe_invite_texte_email_liste_1' => '@invite_email_from@ hat Sie dazu eingeladen, sich für die Liste « @titre_liste@ » der Website @nom_site_spip@ mit der E-Mail_adresse @email@ einzutragen.', # MODIF
+	'confirmsubscribe_invite_texte_email_liste_1' => '@invite_email_from@ hat Sie dazu eingeladen, sich für den Newsletter « @titre_liste@ » der Website @nom_site_spip@ mit der E-Mailadresse @email@ einzutragen.',
 	'confirmsubscribe_sujet_email' => '[@nom_site_spip@] Bestätigung Newsletter-Anmeldung',
-	'confirmsubscribe_texte_email_1' => 'Sie haben sich mit der Adresse @email@ für den Bezug des Newsletters angemeldet.',
+	'confirmsubscribe_texte_email_1' => 'Sie haben sich mit der Adresse @email@ für den Bezug des Newsletters von @nom_site_spip@ angemeldet.',
 	'confirmsubscribe_texte_email_2' => 'Um die Anmeldung abzuschließen, klicken Sie bitte auf den Link:
 @url_confirmsubscribe@',
 	'confirmsubscribe_texte_email_3' => 'Sollte es sich um einen Irrtum handeln, oder Sie es sich anders überlegt haben, brauchen Sie nichts zu unternehmen. Die Anmeldung wird automatisch gelöscht.',
 	'confirmsubscribe_texte_email_envoye' => 'Eine Bestätigungsmail wurde an die Mailadresse geschickt.',
-	'confirmsubscribe_texte_email_liste_1' => 'Sie haben haben sich für die E-Mail-Liste « @titre_liste@ » der Website @nom_site_spip@ mit der E-Mailadresse @email@ eingetragen.', # MODIF
+	'confirmsubscribe_texte_email_liste_1' => 'Sie haben haben sich für den Newsletter« @titre_liste@ » der Website @nom_site_spip@ mit der E-Mailadresse @email@ eingetragen.',
+	'confirmsubscribe_texte_email_listes_1' => 'Sie haben sich für die Newsletter « @titre_liste@ » von @nom_site_spip@ mit der E-Mailadresse « @email@ » angemeldet.',
 	'confirmsubscribe_titre_email' => 'Bestätigung der Newsletter-Anmeldung',
-	'confirmsubscribe_titre_email_liste' => 'Bestätigung der Anmeldung für die Liste « <b>@titre_liste@</b> »', # MODIF
+	'confirmsubscribe_titre_email_liste' => 'Bestätigung der Anmeldung für den Newsletter« <b>@titre_liste@</b> »',
+	'confirmsubscribe_titre_email_listes' => 'Bestätigung der Newsletteranmeldung',
 
 	// D
 	'defaut_message_invite_email_subscribe' => 'Hallo, ich abonniere den Newsletter von @nom_site_spip@ und schlage dir vor, diesen ebenfalls zu abonnieren.',
@@ -90,14 +93,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mailsubscribers_valide' => 'Angemeldet',
 
 	// S
-	'subscribe_deja_texte' => 'Die Mailadresse @email@ befindet sich bereits in der Empfängerliste.', # MODIF
+	'subscribe_deja_texte' => 'Die Mailadresse @email@ ist bereits für diesen Newsletter eingeschrieben',
 	'subscribe_sujet_email' => '[@nom_site_spip@] Newsletter-Anmeldung',
-	'subscribe_texte_email_1' => 'Ihre Newsletter-Anmeldung mit der E-Mailadress @email@ wurde entgegengenommen.', # MODIF
+	'subscribe_texte_email_1' => 'Ihre Newsletter-Anmeldung mit der E-Mailadress @email@ wurde entgegengenommen.',
 	'subscribe_texte_email_2' => 'Vielen Dank für Ihr Interesse an @nom_site_spip@.',
 	'subscribe_texte_email_3' => 'Falls ein Irrtum vorliegt, oder Sie Ihre Meinung ändern, können Sie sich jederzeit bei der folgenden Adresse abmelden : @url_unsubscribe@',
-	'subscribe_texte_email_liste_1' => 'Sie sind jetzt in die Liste « @titre_liste@ » unter der E-Mailadresse  @email@ eingetragen.', # MODIF
+	'subscribe_texte_email_liste_1' => 'Sie sind jetzt für den Newsletter « @titre_liste@ » mit der E-Mailadresse  @email@ angemeldet.',
+	'subscribe_texte_email_listes_1' => 'Ihre Anmeldung für die Newsletter « @titre_liste@ » mit der E-Mail-Adresse « @email@ » ist abgeschlossen.',
 	'subscribe_titre_email' => 'Newsletter-Anmeldung',
-	'subscribe_titre_email_liste' => 'Anmeldung für die Liste« <b>@titre_liste@</b> »', # MODIF
+	'subscribe_titre_email_liste' => 'Anmeldung für den Newsletter « <b>@titre_liste@</b> »',
 
 	// T
 	'texte_ajouter_mailsubscriber' => 'Newsletter-Abonnent hinzufügen',
@@ -118,17 +122,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_mailsubscriber' => 'Logo des Abonnenten',
 	'titre_mailsubscriber' => 'Abonnent', # MODIF
 	'titre_mailsubscribers' => 'Abonnenten',
+	'titre_recherche_email' => 'E-Mail « @email@ »',
+	'titre_recherche_envois' => 'Versendet an « @email@ »',
 
 	// U
-	'unsubscribe_deja_texte' => 'Die Adresse email @email@ befindet sich nicht in der Liste.', # MODIF
-	'unsubscribe_sujet_email' => '[@nom_site_spip@] Newsletter Abmeldung', # MODIF
-	'unsubscribe_texte_confirmer_email_1' => 'Bitte bestätigen Sie die Abmeldung der Adresse email @email@ durch einen Klick auf die Schaltfläche: ', # MODIF
-	'unsubscribe_texte_confirmer_email_liste_1' => 'Bestätigen Sie die Abmeldung der E-Mailadresse @email@ von der Liste <b>@titre_liste@</b> durch Klick auf den Button: ', # MODIF
-	'unsubscribe_texte_email_1' => 'Die Adresse email @email@ wurde aus der Liste entfernt.', # MODIF
+	'unsubscribe_deja_texte' => 'Die E-Mail-Adresse @email@ ist nicht für diesen Newsletter angemeldet.',
+	'unsubscribe_sujet_email' => '[@nom_site_spip@] Newsletter Abmeldung',
+	'unsubscribe_texte_confirmer_email_1' => 'Bitte bestätigen Sie die Abmeldung der E-Mail-Adresse @email@ durch einen Klick auf die Schaltfläche: ',
+	'unsubscribe_texte_confirmer_email_liste_1' => 'Bestätigen Sie die Abmeldung der E-Mailadresse @email@ vom Newsletter <b>@titre_liste@</b> durch Klick auf den Button: ',
+	'unsubscribe_texte_email_1' => 'Die E-Mail-Adresse @email@ wurde von diesem Newsletter abgemeldet.',
 	'unsubscribe_texte_email_2' => 'Bitte besuchen Sie @nom_site_spip@ bald wieder.',
 	'unsubscribe_texte_email_3' => 'Falls ein Irrtum vorliegt, oder Sie Ihre Meinung ändern, können Sie sich jederzeit unter der folgenden Adresse wieder anmelden:
 @url_subscribe@',
-	'unsubscribe_texte_email_liste_1' => 'Die E-Mailadresse @email@ wurde von unserer Verteilerliste <b>@titre_liste@</b> entfernt.', # MODIF
-	'unsubscribe_titre_email' => 'Newsletter Abmeldung', # MODIF
-	'unsubscribe_titre_email_liste' => 'Abmeldung von der Liste <b>@titre_liste@</b>' # MODIF
+	'unsubscribe_texte_email_liste_1' => 'Die E-Mailadresse @email@ wurde von unserer Verteilerliste für den Newsletter <b>@titre_liste@</b> entfernt.',
+	'unsubscribe_texte_email_listes_1' => 'Die E-Mailadresse « @email@ » wurde von den Verteilerlisten für die Newsletter « <b>@titre_liste@</b> » entfernt.',
+	'unsubscribe_titre_email' => 'Newsletter Abmeldung',
+	'unsubscribe_titre_email_liste' => 'Abmeldung vom Newsletter <b>@titre_liste@</b>'
 );
