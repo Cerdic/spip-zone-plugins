@@ -44,7 +44,7 @@ function metasplus_affichage_final($flux) {
 		// Il y a un <head>
 		and $pos_head = strpos($flux, '</head>')
 		// Au moins un protocole est activé
-		and count(lire_config('metasplus'))
+		and !empty(lire_config('metasplus'))
 		// Le contexte est retrouvé
 		and $url = self()
 		and $contexte = recuperer_fond('metasplus_identifier_contexte', array('url' => $url))
