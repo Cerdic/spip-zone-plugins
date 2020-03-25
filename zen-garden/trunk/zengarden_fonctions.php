@@ -142,6 +142,14 @@ function zengarden_filtrer_themes_compatibles_avec($themes, $search = "") {
 	return $themes;
 }
 
+function zengarden_T_si_besoin($chaine, $dir, $infos) {
+	$prefixe = $infos['prefix'];
+	if (strpos($chaine,"$prefixe:{$prefixe}_")===0) {
+		$chaine = _T("$dir/lang/paquet-".$chaine);
+	}
+	return $chaine;
+}
+
 /**
  * Insertion dans le pipeline filter_liste_plugins (SPIP)
  * 

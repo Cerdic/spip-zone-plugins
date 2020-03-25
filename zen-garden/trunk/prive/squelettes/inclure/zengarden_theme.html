@@ -16,7 +16,7 @@
 		<h3 class="">[(#VALEUR|table_valeur{nom}|typo|extraire_multi)]</h3>
 		</div>
 		<div class="qTipContent">
-		<div class='descriptif'>[(#VALEUR{description}|propre)]</div>
+		<div class='descriptif'>[(#VALEUR{description}|zengarden_T_si_besoin{#CLE,#VALEUR}|propre)]</div>
 		<div class='auteur'>[(#VAL{info_les_auteurs_1}|_T{#ARRAY{les_auteurs,#VALEUR{auteur}|zengarden_affiche_info|propre|PtoBR}})]</div>
 		<div class='licence'>[<:intitule_licence:> (#VALEUR{licence}|zengarden_affiche_info|propre|PtoBR)]</div>
 		<B_squelettes>

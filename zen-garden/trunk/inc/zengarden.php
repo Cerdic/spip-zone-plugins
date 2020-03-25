@@ -34,6 +34,15 @@ function zengarden_charge_themes($dir = _DIR_THEMES, $tous = false, $force = fal
 				if (isset($t[$d]['categorie']) and $t[$d]['categorie']=='theme'
 				  AND ($tous OR $t[$d]['etat']=='stable')){
 					$t[$d]['tri'] = strtolower(basename($d));
+
+					$prefix = $t[$d]['prefix'];
+					if ($t[$d]['slogan'] === $prefix . '_slogan') {
+						$t[$d]['slogan'] = "$prefix:" . $t[$d]['slogan'];
+					}
+					if ($t[$d]['description'] === $prefix . '_description') {
+						$t[$d]['description'] = "$prefix:" . $t[$d]['description'];
+					}
+
 					$themes[substr($dir.$d,strlen(_DIR_RACINE))] = $t[$d];
 				}
 			}
