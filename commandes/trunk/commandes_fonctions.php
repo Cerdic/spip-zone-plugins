@@ -65,6 +65,7 @@ function commandes_id_premier_webmestre(){
 		return false;
 }
 
+
 /**
  * Générer l'URL correspondant à la facture d'une commande
  *
@@ -192,4 +193,65 @@ function commandes_afficher_reduction_si($reduction) {
 		return '';
 	}
 	return round($reduction * 100, 2).'%';
+}
+
+/**
+ * Critère pour prendre la commande en cours du visiteur, qu'il soit connecté ou non
+ *
+ * Soit la commande est en session, soit on prend celle dans la db.
+ * Nb : il ne peut en théorie y avoir qu'une seule commande en cours par auteur,
+ * dans le cas improbable où il y en aurait plusieurs, on prend la plus récente.
+ *
+ * @uses commandes_calculer_critere_encours_visiteur()
+ * @example <BOUCLE_commande(COMMANDES) {encours_visiteur}>
+ *
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
+ */
+function critere_COMMANDES_encours_visiteur_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	$cond = $crit->cond;
+	$not = $crit->not ? 'NOT ' : '';
+	$where = "'$not" .$boucle->id_table.".id_commande = '.commandes_calculer_critere_encours_visiteur()";
+	$boucle->where[]= $where;
+	$boucles[$idb]->descr['session'] = true; // drapeau pour avoir un cache visiteur
+}
+
+/**
+ * Fonction privée pour le calcul du critère {encours_visiteur}
+ *
+ * @return int
+ *     Numéro de la commande ou 0 s'il n'y en a pas
+ */
+function commandes_calculer_critere_encours_visiteur() {
+	include_spip('inc/session');
+	$id_commande = 0;
+	// Soit la commande est dans la session, que le visiteur soit connecté ou pas
+	// On vérifie le statut au cas-où, même si c'est forcément "encours" normalement
+	if (
+		!$id_commande = sql_getfetsel(
+			'id_commande',
+			'spip_commandes',
+			array(
+				'statut = ' . sql_quote('encours'),
+				'id_commande = ' . intval(session_get('id_commande')),
+			)
+		)
+		and $id_auteur = session_get('id_auteur')
+	// Soit on prend la plus récente "encours" de l'auteur connecté
+	) {
+		$id_commande = sql_getfetsel(
+			'id_commande',
+			'spip_commandes',
+			array(
+				'statut = ' . sql_quote('encours'),
+				'id_auteur = ' . intval($id_auteur),
+			),
+			'',
+			'date DESC'
+		);
+	}
+	$id_commande = intval($id_commande);
+	return $id_commande;
 }
