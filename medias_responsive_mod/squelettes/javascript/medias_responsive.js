@@ -63,8 +63,8 @@ function _declencher_documents_actifs() {
 $(document).ready(calculer_spip_documents);
 $(window).smartresize(calculer_spip_documents);
 
-$(window).on("load",declencher_documents_actifs);
-$("body").on("scroll touchmove",declencher_documents_actifs);
+$(window).on("load touchmove",declencher_documents_actifs);
+$("body").on("scroll",declencher_documents_actifs);
 $(document).on("ajaxComplete", declencher_documents_actifs);
 
 
