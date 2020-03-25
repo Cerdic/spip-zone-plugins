@@ -52,11 +52,12 @@ function agenda_affiche_milieu($flux) {
 	$e = trouver_objet_exec($flux['args']['exec']);
 	$out = '';
 	$rubrique_agenda_presente = NULL;
-	if ($e['type']=='rubrique'
-		and $e['edition']==false
+	if ($e
+		and $e['type'] === 'rubrique'
+		and $e['edition'] === false
 		and $id_rubrique = intval($flux['args']['id_rubrique'])
-		and $rubrique_agenda_presente = sql_countsel('spip_rubriques', 'agenda=1')) {
-
+		and $rubrique_agenda_presente = sql_countsel('spip_rubriques', 'agenda=1'))
+	{
 		$actif = sql_getfetsel('agenda', 'spip_rubriques', 'id_rubrique='.intval($id_rubrique));
 		$statut = '-32';
 		$alt = '';
@@ -76,8 +77,10 @@ function agenda_affiche_milieu($flux) {
 				. boite_fermer();
 		}
 	}
-	elseif ($e['type']=='article'
-		and $e['edition']==false) {
+	elseif ($e
+		and $e['type'] === 'article'
+		and $e['edition'] === false)
+	{
 		$id_article = $flux['args']['id_article'];
 		$out .= recuperer_fond('prive/objets/contenu/article-evenements', $flux['args']);
 	}
