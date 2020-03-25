@@ -36,9 +36,9 @@ function calculer_top_documents_actifs(this_img, type) {
 
 function _declencher_documents_actifs() {
 	if (scrollT) var sTop = scrollT;
-	else var sTop = $(window).scrollTop();
+	else var sTop = $("body").scrollTop();
 
-	var hauteur = $(window).height();
+	var hauteur = $("body").height();
 	
 	var limite_haut = sTop - 0.2*hauteur;
 	if (limite_haut < 0) limite_haut = 0;
@@ -63,7 +63,8 @@ function _declencher_documents_actifs() {
 $(document).ready(calculer_spip_documents);
 $(window).smartresize(calculer_spip_documents);
 
-$(window).on("load scroll touchmove",declencher_documents_actifs);
+$(window).on("load",declencher_documents_actifs);
+$("body").on("scroll touchmove",declencher_documents_actifs);
 $(document).on("ajaxComplete", declencher_documents_actifs);
 
 
