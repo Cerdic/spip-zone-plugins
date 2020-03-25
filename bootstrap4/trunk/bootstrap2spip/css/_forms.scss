@@ -2,10 +2,15 @@
 
 legend {
 	font-size: $h3-font-size;
+	color:$headings-color;
 	line-height: $line-height-base / ($h3-font-size / $font-size-base);
-	margin-bottom: $rem-vert-margin / 2;
-	margin-top: $rem-vert-margin / 2;
-	border-bottom: $input-border-width solid $input-border-color;
+	margin-bottom: $rem-vert-margin * 0.75;
+	padding-bottom: $rem-vert-margin * 0.25;
+	border-bottom: $input-border-width solid rgba($input-border-color,0.5);
+	margin-top: $rem-vert-margin;
+	&:first-child {
+		margin-top: 0;
+	}
 }
 
 /* Surcharge RTL */
