@@ -4,8 +4,11 @@ html, body, .hentry, #skrollr-body, .remplir_vertical,  .remplir_vertical .inter
 }
 */
 .remplir_vertical {
-	height: 600px;
-	height: 100vh;
+	min-height: 600px;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 .remplir_vertical .interieur {
 	overflow: auto;

@@ -1,9 +1,9 @@
 <paquet
 	prefix="fonds"
 	categorie="outil"
-	version="2.8.1"
+	version="2.9.0"
 	etat="test"
-	compatibilite="[3.0.0;3.2.*]"
+	compatibilite="[3.0.0;3.3.*]"
 	logo="imgs/logo.png"
 	schema="0.8.2"
 >

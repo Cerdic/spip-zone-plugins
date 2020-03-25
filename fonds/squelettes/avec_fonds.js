@@ -3,19 +3,6 @@ function calculer_hauteur_img_fond() {
 
 	$("#skrollr-body").css("height", "auto");
 
-	$(".remplir_vertical").css("height","auto").find(".interieur").each(function() {
-		var hauteur_ecran = $(window).height();
-	
-		$(this).css( "min-height", hauteur_ecran );
-		
-		var contenu = $(this).find(".fonds_contenu");
-		if (contenu.innerHeight() < hauteur_ecran) {
-			var decal_contenu = (hauteur_ecran - contenu.innerHeight()) /2;
-			contenu.css("padding-top", decal_contenu).css("padding-bottom", decal_contenu-1);
-		} else {
-			contenu.css("padding-top", 0).css("padding-bottom", 0);
-		}
-	});
 
 	$(".fonds_svg").each(function() {
 		if ($(this).attr("data-largeur") > 0) {
