@@ -8,7 +8,6 @@ $rem-vert-margin: 1rem * $line-height-base;
 
 $link-hover-bg: lighten(mix(scale_color(adjust-hue($link-color,-5deg), $lightness:66%), $gray-100, 25%),1%) !default;
 
-$headings-color: inherit;
 $headings-small-color: $text-muted !default;
 
 $indent-x: 1.5 * $grid-gutter-width;
