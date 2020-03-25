@@ -10,7 +10,8 @@
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 		<traducteur nom="tcharlss" lien="https://trad.spip.net/auteur/drbouvierleduc" />
 	</langue>
-	<langue code="es" url="https://trad.spip.net/tradlang_module/abonnementsoffre?lang_cible=es" total="71" traduits="34" relire="0" modifs="1" nouveaux="36" pourcent="47.89">
+	<langue code="es" url="https://trad.spip.net/tradlang_module/abonnementsoffre?lang_cible=es" total="71" traduits="70" relire="1" modifs="0" nouveaux="0" pourcent="98.59">
+		<traducteur nom="BoOz" lien="https://trad.spip.net/auteur/booz" />
 		<traducteur nom="dani" lien="https://trad.spip.net/auteur/dani" />
 		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
 	</langue>
