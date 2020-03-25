@@ -94,8 +94,11 @@ function compositions_affiche_milieu($flux){
 	$e = trouver_objet_exec($flux['args']['exec']);
 	include_spip('compositions_fonctions');
 	$objets = compositions_objets_actives();
-	if (in_array($e['type'],$objets)
-	  AND $e['edition']===false){
+	if (
+		$e
+		and in_array($e['type'], $objets)
+		and $e['edition'] === false)
+	{
 		$type = $e['type'];
 		if ($id = $flux['args'][$e['id_table_objet']]) {
 			$config = (isset($GLOBALS['meta']['compositions']) ? unserialize($GLOBALS['meta']['compositions']) : array());
