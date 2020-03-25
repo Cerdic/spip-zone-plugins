@@ -37,7 +37,7 @@
 <[(#GET{a})][(#GET{a}|=={a}|oui) href="#FICHIER"[ title="(#TITRE|supprimer_numero|supprimer_tags|texte_backend)"][ style="shape-outside: content-box (#GET{polygon});"] class="fond mediabox" type="#MIME_TYPE" data-photo-w="#LARGEUR" data-photo-h="#HAUTEUR"] >
 ]
 	[(#ENV{largeur}|non)
-		[(#FICHIER|image_responsive{160/320/640/1200/1920})]
+		[(#FICHIER|image_responsive{160/320/640/1280/1920})]
 	]
 	[(#ENV{largeur}|oui)
 		[(#GET{kenburns}|oui)

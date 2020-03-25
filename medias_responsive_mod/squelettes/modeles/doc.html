@@ -43,7 +43,7 @@
 	[<a href="(#GET{url})"[
 		class="(#ENV{lien_class})"] [ title="(#TITRE|supprimer_numero|supprimer_tags|texte_backend)"][
 		(#ENV{lien}|?{'',type="#MIME_TYPE"})]>]
-			[(#GET{fichier}|image_responsive{320/560/1200/1920})]
+			[(#GET{fichier}|image_responsive{320/640/1280/1920})]
 	[(#GET{url}|?{</a>})]
 	[(#ENV{legende}|=={non}|non)
 	[(#TITRE|sinon{#DESCRIPTIF}|sinon{#CREDITS}|oui)
