@@ -198,10 +198,6 @@ function commandes_afficher_reduction_si($reduction) {
 /**
  * Critère pour prendre la commande en cours du visiteur, qu'il soit connecté ou non
  *
- * Soit la commande est en session, soit on prend celle dans la db.
- * Nb : il ne peut en théorie y avoir qu'une seule commande en cours par auteur,
- * dans le cas improbable où il y en aurait plusieurs, on prend la plus récente.
- *
  * @uses commandes_calculer_critere_encours_visiteur()
  * @example <BOUCLE_commande(COMMANDES) {encours_visiteur}>
  *
@@ -213,18 +209,22 @@ function critere_COMMANDES_encours_visiteur_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$cond = $crit->cond;
 	$not = $crit->not ? 'NOT ' : '';
-	$where = "'$not" .$boucle->id_table.".id_commande = '.commandes_calculer_critere_encours_visiteur()";
+	$where = "'$not" .$boucle->id_table.".id_commande = '.commandes_id_commande_encours_visiteur()";
 	$boucle->where[]= $where;
 	$boucles[$idb]->descr['session'] = true; // drapeau pour avoir un cache visiteur
 }
 
 /**
- * Fonction privée pour le calcul du critère {encours_visiteur}
+ * Retourne le numéro de la commande en cours du visiteur, qu'il soit connecté ou non
  *
+ * Soit la commande est en session, soit on prend celle dans la db.
+ * Nb : il ne peut en théorie y avoir qu'une seule commande en cours par auteur,
+ * dans le cas improbable où il y en aurait plusieurs, on prend la plus récente.
+ * 
  * @return int
  *     Numéro de la commande ou 0 s'il n'y en a pas
  */
-function commandes_calculer_critere_encours_visiteur() {
+function commandes_id_commande_encours_visiteur() {
 	include_spip('inc/session');
 	$id_commande = 0;
 	// Soit la commande est dans la session, que le visiteur soit connecté ou pas
