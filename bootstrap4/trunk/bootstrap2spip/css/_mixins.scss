@@ -1,2 +1,37 @@
 @import "css/_spip.variables";
 @import "bootstrap/css/_mixins";
+
+
+@mixin make-navbar-button-float($side: 'right', $bg-color: $dark, $space-x: $grid-gutter-width / 2, $space-y: $spacer) {
+
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top:$space-y;
+  #{$side}:$space-x;
+  background: none !important;
+  z-index:10;
+
+  .navbar-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    .navbar-toggler {
+      margin-left: auto;
+      border-top-right-radius: $border-radius;
+      border-top-left-radius: $border-radius;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+      &.collapsed {
+        border-bottom-right-radius: $border-radius;
+        border-bottom-left-radius: $border-radius;
+      }
+      background: $bg-color;
+    }
+    .navbar-nav {
+      background: $bg-color;
+    }
+  }
+  @content;
+
+}

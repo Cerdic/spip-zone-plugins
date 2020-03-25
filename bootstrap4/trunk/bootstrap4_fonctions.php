@@ -41,7 +41,7 @@ function navbar_responsive($nav, $class_collapse = 'nav-collapse-main'){
 		$id = "navbar-".substr(md5($navbarcount . ':' . time() .':' . $nav),0,4);
 		$p = strpos($respnav,$ul);
 		$respnav = substr_replace($respnav,
-			'<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#' . $id . '" aria-controls="'. $id . '" aria-expanded="false" aria-label="Toggle navigation">'
+			'<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#' . $id . '" aria-controls="'. $id . '" aria-expanded="false" aria-label="Toggle navigation">'
 			. '<span class="navbar-toggler-icon"></span>'
 			. '</button>'
 			. "\n" . '<div class="collapse navbar-collapse ' . $class_collapse . '" id="'.$id.'">',$p,0);
