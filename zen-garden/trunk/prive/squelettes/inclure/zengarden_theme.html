@@ -7,16 +7,16 @@
 <ul class='liste_themes'>
 <BOUCLE_themes(POUR){tableau #GET{themes_activables}}{cle!=#ENV{selection}}{par tri}{pagination 20}>
 	<li class='theme'>
-		<div class="qTip target_leftMiddle tooltip_rightMiddle">
-		[(#EVAL{_DIR_RACINE}|concat{#CLE,'/',#VALEUR{logo}}
-		|image_reduire{#ENV{largeur_previsu,100}|mult{4},#ENV{hauteur_previsu,75}|mult{4}}
-		|inserer_attribut{style,[max-width:(#ENV{largeur_previsu,100})px;]}
-		|inserer_attribut{class,''}
-		|inserer_attribut{alt,#VALEUR|table_valeur{nom}|typo|extraire_multi})]
-		<h3 class="">[(#VALEUR|table_valeur{nom}|typo|extraire_multi)]</h3>
+		<div class="logo-titre">
+			[(#EVAL{_DIR_RACINE}|concat{#CLE,'/',#VALEUR{logo}}
+			|image_reduire{#ENV{largeur_previsu,100}|mult{4},#ENV{hauteur_previsu,75}|mult{4}}
+			|inserer_attribut{style,[max-width:(#ENV{largeur_previsu,100})px;]}
+			|inserer_attribut{class,''}
+			|inserer_attribut{alt,#VALEUR|table_valeur{nom}|typo|extraire_multi})]
+			<h3 class="">[(#VALEUR|table_valeur{nom}|typo|extraire_multi)]</h3>
 		</div>
-		<div class="qTipContent">
 		<div class='descriptif'>[(#VALEUR{description}|zengarden_T_si_besoin{#CLE,#VALEUR}|propre)]</div>
+		<!--
 		<div class='auteur'>[(#VAL{info_les_auteurs_1}|_T{#ARRAY{les_auteurs,#VALEUR{auteur}|zengarden_affiche_info|propre|PtoBR}})]</div>
 		<div class='licence'>[<:intitule_licence:> (#VALEUR{licence}|zengarden_affiche_info|propre|PtoBR)]</div>
 		<B_squelettes>
@@ -35,11 +35,11 @@
 		</B_squelettes>
 
 		[<div class='bandeau'>(#VALEUR{bandeau}|?{<:zengarden:bandeau_personalisable:>})</div>]
+		-->
+		<div class='actions'>
+			<a class="apercevoir" target='_blank' href='[(#URL_ACTION_AUTEUR{zengarden_activer_theme,apercu:#CLE,[(#EVAL{_DIR_RACINE}|sinon{#ENV{redirect}})]})]'>\[<:zengarden:apercevoir_ce_theme:>\]</a>
+			[(#BOUTON_ACTION{<:zengarden:choisir_ce_theme:>,[(#URL_ACTION_AUTEUR{zengarden_activer_theme,activation:#CLE,#SELF|parametre_url{debut_themes,''}})],ajax})]
 		</div>
-		<p class='actions'>
-		<a class="apercevoir" target='_blank' href='[(#URL_ACTION_AUTEUR{zengarden_activer_theme,apercu:#CLE,[(#EVAL{_DIR_RACINE}|sinon{#ENV{redirect}})]})]'>\[<:zengarden:apercevoir_ce_theme:>\]</a>
-		<a class='ajax' href='#URL_ACTION_AUTEUR{zengarden_activer_theme,activation:#CLE,#SELF|parametre_url{debut_themes,''}}'>\[<:zengarden:choisir_ce_theme:>\]</a>
-		</p>
 	</li>
 </BOUCLE_themes>
 </ul>
