@@ -107,9 +107,9 @@
 						</div>
 						]
 						<div>
-							[<label for="ajouter_document">(#ENV{formats_documents_forum}|is_array|?{#ENV{formats_documents_forum}|join{', '},#ENV{formats_documents_forum}})</label>]
+							[<label for="ajouter_document">(#ENV{formats_documents_forum}|is_array|?{#ENV{formats_documents_forum}|implode{', '},#ENV{formats_documents_forum}})</label>]
 							<input class='file' type="file" name="ajouter_document" id="ajouter_document"[
-							accept="(#ENV{formats_documents_forum}|is_array|?{#ENV{formats_documents_forum}|join{', '},''})"] />
+							accept="(#ENV{formats_documents_forum}|is_array|?{#ENV{formats_documents_forum}|implode{', '},''})"] />
 						</div>
 
 						<script type='text/javascript'>/*<!\[CDATA\[*/
