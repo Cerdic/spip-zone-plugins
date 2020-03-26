@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'choisir' => 'Select',
 	'choix_devise' => 'Devise',
-	'choix_devises' => 'Select a devise',
+	'choix_devises' => 'Select a devise:',
 	'choix_prix' => 'The products price',
 
 	// D

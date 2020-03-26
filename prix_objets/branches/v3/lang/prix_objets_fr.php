@@ -15,16 +15,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_prix_total_label' => 'Prix total',
 	'choisir' => 'Sélectionner',
 	'choix_devise' => 'Devise',
-	'choix_devises' => 'Choix des devises :',
+	'choix_devises' => 'Choix des devises :',
 	'choix_prix' => 'Le prix du produit',
 
 	// D
-	'devise_default' => 'Devise par défaut :',
-	'devises_choisis' => 'Devises choisis :',
+	'devise_default' => 'Devise par défaut :',
+	'devises_choisis' => 'Devises choisis :',
 
 	// E
-	'explication_devises' => 'Les devises avec lesquelles vous pouvez encoder des prix. Si rien choisit, la devise par défaut sera utilisée.',
 	'explication_devise_default' => 'Définit par le <a href="/ecrire/?exec=configurer_prix">plugin API Prix</a>',
+	'explication_devises' => 'Les devises avec lesquelles vous pouvez encoder des prix. Si rien choisit, la devise par défaut sera utilisée.',
 
 	// F
 	'frais_livraison' => 'Frais de livraison :',

@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_prix_total_label' => 'Preço total',
 	'choisir' => 'Selecionar',
 	'choix_devise' => 'Moeda',
-	'choix_devises' => 'Seleção de moedas',
+	'choix_devises' => 'Seleção de moedas:',
 	'choix_prix' => 'O preço do produto',
 
 	// D
