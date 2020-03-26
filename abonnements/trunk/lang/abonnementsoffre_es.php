@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de https://trad.spip.net/tradlang_module/abonnementsoffre?lang_cible=es
+// extrait automatiquement de https://trad.spip.net/tradlang_module/abonnementsoffre-abonnements?lang_cible=es
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_immateriel_label_case' => 'Esta oferta corresponde a un servicio digital',
 	'champ_periode_choix_heures' => 'Horas',
 	'champ_periode_choix_jours' => 'Días',
-	'champ_periode_choix_mois' => 'Meses',
+	'champ_periode_choix_mois' => 'Mes',
 	'champ_periode_label' => 'Tipo de período',
 	'champ_periode_nb_heures' => '@nb@ hora(s)',
 	'champ_periode_nb_jours' => '@nb@ día(s)',
