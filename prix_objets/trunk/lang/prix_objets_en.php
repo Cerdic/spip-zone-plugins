@@ -16,12 +16,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'choisir' => 'Select',
 	'choix_devise' => 'Devise',
-	'choix_devises' => 'Select a devise', # MODIF
+	'choix_devises' => 'Select a devise:',
 	'choix_prix' => 'The products price',
 
 	// D
-	'devise_default' => 'Default Devise', # MODIF
-	'devises_choisis' => 'Selected devises', # MODIF
+	'devise_default' => 'Default Devise:',
+	'devises_choisis' => 'Selected devises:',
 
 	// H
 	'htva' => 'ex VAT',

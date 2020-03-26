@@ -17,12 +17,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_prix_total_label' => 'Preço total',
 	'choisir' => 'Selecionar',
 	'choix_devise' => 'Moeda',
-	'choix_devises' => 'Seleção de moedas', # MODIF
+	'choix_devises' => 'Seleção de moedas:',
 	'choix_prix' => 'O preço do produto',
 
 	// D
-	'devise_default' => 'Moeda padrão', # MODIF
-	'devises_choisis' => 'Moedas selecionadas', # MODIF
+	'devise_default' => 'Moeda padrão:',
+	'devises_choisis' => 'Moedas selecionadas:',
 
 	// F
 	'frais_livraison' => 'Frete:',
