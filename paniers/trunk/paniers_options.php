@@ -53,10 +53,15 @@ function paniers_nombre_produits($id_panier, $compte_quantite = true){
 // Eviter une collistion de fonction si le plugin deprecie panier2commande est encore actif
 if (!defined('_DIR_PLUGIN_PANIER2COMMANDE')){
 	/**
-	 * Creer la commande si connecte ou renvoyer vers la page de login
+	 * Créer la commande si on est connecté,
+	 * sinon noter la demande de création dans un cookie,
+	 * et celle-ci sera créée dès qu'on sera connecté.
+	 *
+	 * Dérogation : renvoie vers la page "qui" si elle existe
+	 *
 	 * @param null $arg
 	 */
-	function action_commandes_paniers_if_loged_dist($arg = null){
+	function action_commandes_paniers_if_loged_dist($arg = null) {
 
 		// Si $arg n'est pas donne directement, le recuperer via _POST ou _GET
 		if (is_null($arg)){
@@ -69,14 +74,25 @@ if (!defined('_DIR_PLUGIN_PANIER2COMMANDE')){
 			$commandes_paniers = charger_fonction("commandes_paniers", "action");
 			$commandes_paniers($arg);
 		}
-		// sinon on note le arg pour creer la commande des qu'on est idenfie
-		// et on redirige vers la page d'idendification
+		// sinon on note le arg pour creer la commande des qu'on est identifie
 		else {
 			include_spip('inc/cookie');
 			include_spip('inc/filtres');
 			spip_setcookie("spip_pwl", encoder_contexte_ajax(array($arg), 'spip_pwl'));
 
-			$GLOBALS['redirect'] = parametre_url(generer_url_public('qui'), 'url', _request('redirect'));
+			// Dérogation : s'il existe une page d'identification "qui",
+			// on redirige vers celle-ci en passant le redirect d'origine en paramètre
+			if (
+				find_in_path('qui.html')
+				or (
+					test_plugin_actif('zcore')
+					and include_spip('public/styliser_par_z')
+					and $contenu = reset(z_blocs(false))
+					and find_in_path('qui.html', "$contenu/")
+				)
+			) {
+				$GLOBALS['redirect'] = parametre_url(generer_url_public('qui'), 'url', _request('redirect'));
+			}
 		}
 	}
 }
