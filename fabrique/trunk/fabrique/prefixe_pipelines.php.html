@@ -28,10 +28,13 @@
  * @return array       Données du pipeline
 **/
 function [(#PREFIXE)]_affiche_enfants($flux) {
-	if ($e = trouver_objet_exec($flux['args']['exec']) and $e['edition'] == false) {
+	if (
+		$e = trouver_objet_exec($flux['args']['exec'])
+		and $e['edition'] === false
+	) {
 		$id_objet = $flux['args']['id_objet'];
 <B_objets_affiche_enfants_rubrique>
-		if ($e['type'] == 'rubrique') {
+		if ($e['type'] === 'rubrique') {
 <BOUCLE_objets_affiche_enfants_rubrique(DATA){source tableau,(#OBJETS|objets_option_presente{vue_rubrique})}>
 			$flux['data'] .= recuperer_fond(
 				'prive/objets/liste/#OBJET',
@@ -55,7 +58,7 @@ function [(#PREFIXE)]_affiche_enfants($flux) {
 		}
 </B_objets_affiche_enfants_rubrique>[(#REM)
 ]<BOUCLE_objets_affiche_enfants_directs(DATA){source tableau,(#OBJETS|objets_option_presente{liaison_directe})}>
-		if ($e['type'] == '[(#VALEUR{parent/type})]') {
+		if ($e['type'] === '[(#VALEUR{parent/type})]') {
 			$flux['data'] .= recuperer_fond(
 				'prive/objets/liste/#OBJET',
 				array(
@@ -103,7 +106,11 @@ function [(#PREFIXE)]_affiche_milieu($flux) {
 	$e = trouver_objet_exec($flux['args']['exec']);
 <BOUCLE_si_affiche_milieu_auteurs(CONDITION){si (#OBJETS|objets_option_presente{auteurs_liens})}>
 	// auteurs sur les [(#OBJETS|objets_option_presente{auteurs_liens, objet}|implode{', '})]
-	if (!$e['edition'] and in_array($e['type'], array('[(#OBJETS|objets_option_presente{auteurs_liens, type}|implode{"', '"})]'))) {
+	if (
+		$e
+		and !$e['edition']
+		and in_array($e['type'], array('[(#OBJETS|objets_option_presente{auteurs_liens, type}|implode{"', '"})]'))
+	) {
 		$texte .= recuperer_fond('prive/objets/editer/liens', array(
 			'table_source' => 'auteurs',
 			'objet' => $e['type'],
@@ -113,7 +120,11 @@ function [(#PREFIXE)]_affiche_milieu($flux) {
 
 <BOUCLE_objet_liens_sur_objet(DATA){source tableau,(#OBJETS|objets_options_presentes{#LISTE{table_liens,vue_liens}})}>
 	// #LOBJET sur les [(#VUE_LIENS|fabrique_array_map{table_objet, #OBJETS}|implode{', '})]
-	if (!$e['edition'] and in_array($e['type'], array('[(#VUE_LIENS|fabrique_array_map{objet_type, #OBJETS}|implode{"', '"})]'))) {
+	if (
+		$e
+		and !$e['edition']
+		and in_array($e['type'], array('[(#VUE_LIENS|fabrique_array_map{objet_type, #OBJETS}|implode{"', '"})]'))
+	) {
 		$texte .= recuperer_fond('prive/objets/editer/liens', array(
 			'table_source' => '#LOBJET',
 			'objet' => $e['type'],
