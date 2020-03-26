@@ -55,15 +55,17 @@ function autoriser_rubrique_iconifier($faire,$type,$id,$qui,$opt) {
 // iconifier ou non les objets
 function autoriser_iconifier($faire, $type, $id, $qui, $opt) {
 	// on gère d'abord une exception sur l'objet Sites référencés
-    // on a toujours le droit d'ajouter un logo au site lui même.
-    if (_request('exec') == 'configurer_identite' AND  $type =='site') {
-        return true;
-    }
-	if (in_array(table_objet_sql($type), lire_config('lim/logos/objets'))) {
-		return false;
+	// on a toujours le droit d'ajouter un logo au site lui même.
+	if (_request('exec') == 'configurer_identite' AND  $type =='site') {
+		return true;
 	}
-	// par defaut, on a le droit d'iconifier si on a le droit de modifier
-	else return autoriser('modifier', $type, $id, $qui, $opt);
+
+	if (in_array(table_objet_sql($type), lire_config('lim/logos/objets', array()))) {
+		return false;
+	} else {
+		// par defaut, on a le droit d'iconifier si on a le droit de modifier
+		return autoriser('modifier', $type, $id, $qui, $opt);
+	}
 }
 
 /**********************************************************/
