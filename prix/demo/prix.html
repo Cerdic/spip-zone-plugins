@@ -36,14 +36,13 @@
 
 		#SET{lesprix,#LISTE{"123456.789","9876.54","-2.99"}}
 		#SET{prix,#ENV{prix,#GET{lesprix/0}}|floatval}
-		#SET{options,#ENV{style}|?{#ARRAY{style,#ENV{style}},#ARRAY}}
 		<section class="section">
 
 			<h2 class="ui header">Formatage des prix</h2>
 
 			<p>Exemple de formatage des prix selon les devises et les langues.</p>
 
-			<pre class="ui violet inverted segment"><code class="ui code">\[\(\#VALEUR|prix_formater{EUR,fr-FR,\#GET{options}}\)\]</code></pre>
+			<pre class="ui violet inverted segment"><code class="ui code">\[\(\#VALEUR|prix_formater\{\#ARRAY\{currency,EUR,locale,fr-CA\}\}\)\]</code></pre>
 
 			<table class="ui collapsing sortable table">
 				<thead>
@@ -80,7 +79,8 @@
 						<td>#VALEUR{code}</td>
 						<td>#VALEUR{symbole}</td>
 						<td class="right aligned">
-							[(#GET{prix}|prix_formater{#CLE,#ENV{locale},#GET{options}})]
+							#SET{options,#ARRAY{currency,#CLE,locale,#ENV{locale},style,#ENV{style}}}
+							[(#GET{prix}|prix_formater{#GET{options}})]
 						</td>
 					</tr>
 				</BOUCLE_devises>
