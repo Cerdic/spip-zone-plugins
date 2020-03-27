@@ -5,7 +5,7 @@
 	url="https://trad.spip.net"
 	source="https://git.spip.net/spip-contrib-extensions/commandes.git"
 	reference="fr">
-	<langue code="en" url="https://trad.spip.net/tradlang_module/commandes?lang_cible=en" total="208" traduits="195" relire="0" modifs="2" nouveaux="11" pourcent="93.75">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/commandes?lang_cible=en" total="209" traduits="195" relire="0" modifs="2" nouveaux="12" pourcent="93.30">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Cyril MARION" lien="https://trad.spip.net/auteur/cyril-marion" />
 		<traducteur nom="EScott" lien="https://trad.spip.net/auteur/escott" />
@@ -15,11 +15,14 @@
 		<traducteur nom="RastaPopoulos" lien="https://trad.spip.net/auteur/rastapopoulos" />
 		<traducteur nom="tcharlss" lien="https://trad.spip.net/auteur/drbouvierleduc" />
 	</langue>
-	<langue code="fa" url="https://trad.spip.net/tradlang_module/commandes?lang_cible=fa" total="208" traduits="22" relire="0" modifs="3" nouveaux="183" pourcent="10.58">
+	<langue code="es" url="https://trad.spip.net/tradlang_module/commandes?lang_cible=es" total="209" traduits="208" relire="0" modifs="1" nouveaux="0" pourcent="99.52">
+		<traducteur nom="BoOz" lien="https://trad.spip.net/auteur/booz" />
+	</langue>
+	<langue code="fa" url="https://trad.spip.net/tradlang_module/commandes?lang_cible=fa" total="209" traduits="22" relire="0" modifs="3" nouveaux="184" pourcent="10.53">
 		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/commandes?lang_cible=fr" total="208" traduits="208" relire="0" modifs="1" nouveaux="-1" pourcent="100.00" />
-	<langue code="sk" url="https://trad.spip.net/tradlang_module/commandes?lang_cible=sk" total="208" traduits="163" relire="0" modifs="2" nouveaux="43" pourcent="78.37">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/commandes?lang_cible=fr" total="209" traduits="209" relire="0" modifs="1" nouveaux="-1" pourcent="100.00" />
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/commandes?lang_cible=sk" total="209" traduits="163" relire="0" modifs="2" nouveaux="44" pourcent="77.99">
 		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
