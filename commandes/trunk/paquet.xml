@@ -2,7 +2,7 @@
 	prefix="commandes"
 	categorie="divers"
 	version="1.17.1"
-	schema="0.7.9"
+	schema="0.8.0"
 	etat="stable"
 	compatibilite="[3.0.5;3.2.*]"
 	logo="prive/themes/spip/images/commande.png"

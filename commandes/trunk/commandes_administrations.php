@@ -153,6 +153,11 @@ function commandes_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter', 'TABLE spip_commandes_details CHANGE prix_unitaire_ht prix_unitaire_ht DECIMAL(20,6) NOT NULL DEFAULT 0'),
 	);
 
+	// le champ reduction peut etre 1.0000 mais du coup il n'est plus clampé par construction en base, faire attention a sa manipulation
+	$maj['0.8.0'] = array(
+		array('sql_alter', 'TABLE spip_commandes_details CHANGE reduction reduction decimal(5,4) not null default 0'),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

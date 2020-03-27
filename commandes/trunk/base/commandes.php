@@ -140,7 +140,7 @@ function commandes_declarer_tables_objets_sql($tables) {
 			'quantite' => 'int not null default 0',
 			'prix_unitaire_ht' => 'decimal(20,6) not null default 0',
 			'taxe' => 'decimal(4,4) not null default 0',
-			'reduction' => 'decimal(4,4) not null default 0',
+			'reduction' => 'decimal(5,4) not null default 0',
 			'statut' => 'varchar(25) not null default ""',
 			'objet' => 'varchar(25) not null default ""',
 			'id_objet' => 'bigint(21) not null default 0',
@@ -155,8 +155,8 @@ function commandes_declarer_tables_objets_sql($tables) {
 			'id_commande' => 'id_commande'
 		),
 		'titre' => 'descriptif as titre, "" as lang',
-		'champs_editables' => array('id_commande', 'descriptif', 'quantite', 'prix_unitaire_ht', 'taxe', 'objet', 'id_objet'),
-		'champs_versionnes' => array('id_commande', 'descriptif', 'quantite', 'prix_unitaire_ht', 'taxe', 'objet', 'id_objet'),
+		'champs_editables' => array('id_commande', 'descriptif', 'quantite', 'prix_unitaire_ht', 'reduction', 'taxe', 'objet', 'id_objet'),
+		'champs_versionnes' => array('id_commande', 'descriptif', 'quantite', 'prix_unitaire_ht', 'reduction', 'taxe', 'objet', 'id_objet'),
 		'rechercher_champs' => array('descriptif' => 8),
 		'statut' => array(
 			array(
