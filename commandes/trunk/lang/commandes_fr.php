@@ -66,6 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'detail_champ_objet_label' => 'Type du contenu SPIP',
 	'detail_champ_prix_unitaire_ht_label' => 'Prix unitaire HT',
 	'detail_champ_quantite_label' => 'Quantité',
+	'detail_champ_reduction_label' => 'Réduction',
 	'detail_champ_taxe_label' => 'Taxe',
 	'detail_creer' => 'Créer un détail de commande',
 	'detail_modifier' => 'Modifier ce détail de commande',

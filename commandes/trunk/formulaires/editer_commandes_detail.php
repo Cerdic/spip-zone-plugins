@@ -71,6 +71,19 @@ function formulaires_editer_commandes_detail_saisies($id_commandes_detail='new',
 		array(
 			'saisie' => 'input',
 			'options' => array(
+				'nom' => 'quantite',
+				'label' => _T('commandes:detail_champ_quantite_label'),
+			),
+			'verifier' => array(
+				'type' => 'entier',
+				'options' => array(
+					'min' => 1,
+				),
+			),
+		),
+		array(
+			'saisie' => 'input',
+			'options' => array(
 				'nom' => 'prix_unitaire_ht',
 				'label' => _T('commandes:detail_champ_prix_unitaire_ht_label'),
 				'obligatoire' => 'oui',
@@ -83,13 +96,16 @@ function formulaires_editer_commandes_detail_saisies($id_commandes_detail='new',
 		array(
 			'saisie' => 'input',
 			'options' => array(
-				'nom' => 'quantite',
-				'label' => _T('commandes:detail_champ_quantite_label'),
+				'nom' => 'reduction',
+				'label' => _T('commandes:detail_champ_reduction_label'),
+				'obligatoire' => 'non',
+				'defaut' => 0,
 			),
 			'verifier' => array(
-				'type' => 'entier',
+				'type' => 'decimal',
 				'options' => array(
-					'min' => 1,
+					'min' => 0,
+					'max' => 1,
 				),
 			),
 		),
@@ -104,6 +120,7 @@ function formulaires_editer_commandes_detail_saisies($id_commandes_detail='new',
 				'type' => 'decimal',
 				'options' => array(
 					'min' => 0,
+					'max' => 1,
 				),
 			),
 		),
