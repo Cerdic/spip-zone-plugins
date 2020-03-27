@@ -15,7 +15,7 @@
 		<traducteur nom="RastaPopoulos" lien="https://trad.spip.net/auteur/rastapopoulos" />
 		<traducteur nom="tcharlss" lien="https://trad.spip.net/auteur/drbouvierleduc" />
 	</langue>
-	<langue code="es" url="https://trad.spip.net/tradlang_module/commandes?lang_cible=es" total="209" traduits="208" relire="0" modifs="1" nouveaux="0" pourcent="99.52">
+	<langue code="es" url="https://trad.spip.net/tradlang_module/commandes?lang_cible=es" total="209" traduits="210" relire="0" modifs="0" nouveaux="-1" pourcent="100.48">
 		<traducteur nom="BoOz" lien="https://trad.spip.net/auteur/booz" />
 	</langue>
 	<langue code="fa" url="https://trad.spip.net/tradlang_module/commandes?lang_cible=fa" total="209" traduits="22" relire="0" modifs="3" nouveaux="184" pourcent="10.53">

@@ -165,7 +165,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'merci_de_votre_commande' => 'Hemos registrado correctamente su pedido y le agradecemos su confianza.',
-	'merci_de_votre_commande_paiement' => 'Hemos registrado correctamente su pedido <b>@reference@</b>', # MODIF
+	'merci_de_votre_commande_paiement' => 'Hemos registrado su pedido <b>@reference@</b>,  y lo despacharemos lo más pronto posible.',
 	'modifier_commande_statut' => 'Este pedido es:',
 	'montant' => 'Monto',
 
@@ -185,6 +185,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_expediteur_explication' => 'Escoger el o los destinatarios de notificaciones para los envíos al vendedor',
 	'notifications_expediteur_label' => 'Expeditor',
 	'notifications_expediteur_webmaster_label' => 'Escoger un webmestre: ',
+	'notifications_explication' => 'Las notificaciones que permiten enviar mails tras cambios en el estatus de los pedidos: A la espera de validación, en curso, enviado, pracialmente pagado, pagado,devuelto, devuelto parcialmente, Esta función necesita <a href="https://plugins.spip.net/notifavancees.html">le plugin Notifications Avancées</a>.',
 	'notifications_parametres' => 'Parámetros de notificaciones',
 	'notifications_quand_explication' => '¿Qué cambios de estatuto provocan el envío de una notificación?',
 	'notifications_quand_label' => 'Provocan',
