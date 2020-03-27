@@ -166,6 +166,9 @@ function commandes_afficher_prix_detaille_abbr($prix_ttc, $quantite, $prix_unit_
 	if ($reduction>0.0) {
 		$abbr = "$abbr - " . round($reduction*100, 2) . "% &times; $abbr";
 		$prix_unit_ht = $prix_unit_ht * (1.0 - $reduction);
+		if ($reduction>1.00) {
+			$prix_unit_ht = 0;
+		}
 		$parentheses = true;
 	}
 	if ($taxe) {
@@ -192,7 +195,7 @@ function commandes_afficher_reduction_si($reduction) {
 	if ($reduction<=0.0) {
 		return '';
 	}
-	return round($reduction * 100, 2).'%';
+	return min(100, round($reduction * 100, 2)).'%';
 }
 
 /**
