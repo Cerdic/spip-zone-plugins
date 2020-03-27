@@ -1,7 +1,7 @@
 <paquet
 	prefix="ckeditor"
 	categorie="edition"
-	version="1.0.5"
+	version="1.0.6"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="images/ckspip-logo.png"
@@ -38,6 +38,6 @@
 	<necessite nom="saisies" compatibilite="[3.27.7;]" />
 	<necessite nom="yaml" compatibilite="[1.5.1;]" />
 
-	<lib nom='ckeditor' lien='https://contrib.spip.net/IMG/zip/lib_ckeditor_4.12.1_fulldev.zip' />
+	<lib nom='ckeditor' lien='https://ckeditor.com/cke4/builder/download/929ab64177a39d5bbf68f0f5b538bc35' />
 
 </paquet>
