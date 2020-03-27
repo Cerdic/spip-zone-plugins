@@ -164,7 +164,6 @@ function filtres_prix_formater_dist($prix, $options = array()) {
 
 	// Alias des options
 	$options = prix_alias_options_formater($options);
-	var_dump($options);
 
 	// S'assurer d'avoir un nombre flottant
 	$prix = floatval(str_replace(',', '.', $prix));
