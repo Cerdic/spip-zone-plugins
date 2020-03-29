@@ -23,8 +23,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_renouvellement' => 'Si usted ya tiene una suscripción activa en esta propuesta, la suscripciñon será prolongada a partir de su fecha de expiracioón.',
 
 	// I
-	'info_dates_from' => 'Deste @date_debut@',
-	'info_dates_from_to' => 'Deste @date_debut@ al @date_fin@',
+	'info_dates_from' => 'A partir de @date_debut@',
+	'info_dates_from_to' => 'Del @date_debut@  al  @date_fin@',
 	'info_duree' => 'Duración',
 	'info_paiement' => 'Pago',
 	'info_paiement_auto' => 'Periodicidad del pago automático',
