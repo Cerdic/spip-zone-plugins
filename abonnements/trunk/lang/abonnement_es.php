@@ -71,6 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notification_echeance_corps_apres' => '<p>Usted recibe este mail  por su suscripción al sitio @nom_site_spip@ con el modo « @offre@ ».</p>
  <p>Esta suscripción llegó a su término el: <strong>@echeance@</strong>.<br/>
  le invitamos a renovarla antes que expire.</p>',
+	'notification_echeance_corps_avant' => '<p>usted recibe este mail por su suscripción al sitio @nom_site_spip@ con el modo « @offre@ ».</p><p>Esta suscripción finbaliza en: <strong>@echeance@</strong>.<br/> Le invitamos a revovarla antes que finalice.</p>',
 	'notification_echeance_corps_pendant' => '<p>usted recibe este mail por su suscripción al sitio @nom_site_spip@ con el modo « @offre@ ».</p> <p>Esta suscripción llegó a su término hoy le invitamos a renovarla antes que expire.</p>',
 	'notification_echeance_signature' => '<p>Gracias por su confianza y no dude en contactarnos para cualinformación complementaria.<p>',
 	'notification_echeance_sujet_jours_apres' => 'Su suscripción terminñó desde @duree@ día(s)) ',
