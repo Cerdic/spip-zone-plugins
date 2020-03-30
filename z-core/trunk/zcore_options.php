@@ -296,7 +296,7 @@ function filtre_icone_href_class_from_name_dist($name) {
 	if (strpos($name,'#') !== false or strpos($name,'/') !== false or strpos($name,'.svg') !== false) {
 		// l'ancre est fournie explicitement (sprite inline)
 		// voire le nom du fichier sprite svg
-		list($filename, $anchor) = explode('#', trim($name), 2);
+		list($filename, $anchor) = array_pad(explode('#', trim($name), 2), 2, null);
 		// sanitizer l'ancre pour la class
 		if ($anchor) {
 			$class = preg_replace(",[^\w\-],", "", $anchor);
