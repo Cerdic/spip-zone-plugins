@@ -147,24 +147,41 @@ function lim_nbre_rubriques_autorisees($type) {
 }
 
 /**
- * Récupérer le type des objets sélectionnés. ex. spip_articles -> article
+ * Gestion des contenus par rubriques : renvoyer le tableau des objets sélectionnés au format array($type_objet, trad(texte_objets))
+ * Ex. en français : array('article' => 'Articles', 'site' => 'Sites référencés')
+ * Ex. en espagnol : array('article' => 'Artículos', 'site' => 'Sitios referenciados')
  * 
- * @param array 
  * @return array
  */
-function lim_type($tableau) {
-	if (!is_array($tableau)) {
-		return '';
-	}
 
-	array_walk($tableau, 'lim_get_type');
-	return $tableau;
+function lim_get_rubriques_objets() {
+	include_spip('inc/config');
+	include_spip('base/objets');
+
+	$liste = array();
+	if ($objets_lim = lire_config('lim/rubriques/objets')) {
+		foreach ($objets_lim as $value) {
+			if(!empty($value)) {
+				$key = objet_type($value);
+				$infos_table = lister_tables_objets_sql($value);
+				$liste[$key] = _T($infos_table['texte_objets']);
+			}
+		}
+	}
+	
+	return $liste;
 }
 
-/**
- * fonction callback pour lim_type
- * Changer les valeurs du tableau spip_articles -> article
- */
-function lim_get_type(&$value, $key) {
-	$value = objet_type(table_objet($key));
+
+function lim_valeur_cadenas($objet) {
+	include_spip('inc/config');
+
+	$cadenas = null;
+
+	$table = table_objet_sql($objet);
+	if ($objets_cadenas = lire_config('lim/rubriques/cadenas')) {
+		in_array($table, $objets_cadenas) ? $cadenas = true : $cadenas = false;
+	}
+
+	return $cadenas;
 }
