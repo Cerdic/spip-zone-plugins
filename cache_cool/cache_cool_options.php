@@ -80,7 +80,7 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 				job_queue_add('public_produire_page',$c="Calcul du cache $fond [$where]",$args,"",TRUE);
 			}
 			else {
-				if (!is_array($GLOBALS['cache_cool_queue'])){
+				if (!isset($GLOBALS['cache_cool_queue'])){
 					register_shutdown_function("cache_cool_process");
 					$GLOBALS['cache_cool_queue'] = array();
 				}
