@@ -561,7 +561,7 @@ function wdgcfg() {
 		'clickhide' => false /* etait: true */
 	) as $cfgi => $def) {
 		$wdgcfg[$cfgi] = isset($php[$cfgi]) ? $php[$cfgi] :
-			isset($metacrayons[$cfgi]) ? $metacrayons[$cfgi] : $def;
+			(isset($metacrayons[$cfgi]) ? $metacrayons[$cfgi] : $def);
 	}
 	return $wdgcfg;
 }
