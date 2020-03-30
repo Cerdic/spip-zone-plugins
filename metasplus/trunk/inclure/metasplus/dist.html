@@ -90,6 +90,7 @@
 #SET{titre_auto,      #INFO_TITRE{#ENV{objet},#ENV{id_objet}}|concat{" – ",#NOM_SITE_SPIP}}
 #SET{desc_auto,       #INFO_INTRODUCTION{#ENV{objet},#ENV{id_objet}}
 	|sinon{#INFO_DESCRIPTIF{#ENV{objet},#ENV{id_objet}}}
+	|sinon{#INFO_CHAPO{#ENV{objet},#ENV{id_objet}}}
 	|sinon{#INFO_TEXTE{#ENV{objet},#ENV{id_objet}}}}
 #SET{url_auto,        #INFO_URL{#ENV{objet},#ENV{id_objet}}}
 #SET{date_auto,       #INFO_DATE{#ENV{objet},#ENV{id_objet}}}
