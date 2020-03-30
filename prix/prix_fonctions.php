@@ -411,22 +411,24 @@ function prix_filtrer_options_formater($options) {
 		'maximum_fraction_digits',
 		'currency_display',
 	);
-	foreach ($options as $k => $v) {
-		// option inconnue, chaine vide ou null : on retire la valeur
-		if (!in_array($k, $options_valides) or is_null($v) or $v == '') {
-			unset($options[$k]);
-			// nombre flottant / entier
-		} elseif (is_numeric($v)) {
-			if (intval($v) == $v) {
-				$options[$k] = intval($v);
-			} else {
-				$options[$k] = floatval($v);
+	if (is_array($options)) {
+		foreach ($options as $k => $v) {
+			// option inconnue, chaine vide ou null : on retire la valeur
+			if (!in_array($k, $options_valides) or is_null($v) or $v == '') {
+				unset($options[$k]);
+				// nombre flottant / entier
+			} elseif (is_numeric($v)) {
+				if (intval($v) == $v) {
+					$options[$k] = intval($v);
+				} else {
+					$options[$k] = floatval($v);
+				}
+			// booléens
+			} elseif (in_array($v, array('true', 'oui'))) {
+				$options[$k] = true;
+			} elseif (in_array($v, array('false', 'non'))) {
+				$options[$k] = false;
 			}
-		// booléens
-		} elseif (in_array($v, array('true', 'oui'))) {
-			$options[$k] = true;
-		} elseif (in_array($v, array('false', 'non'))) {
-			$options[$k] = false;
 		}
 	}
 	return $options;
@@ -443,12 +445,14 @@ function prix_alias_options_formater($options) {
 		'currency' => 'devise',
 		'float'    => 'flottant',
 	);
-	foreach ($options as $k => $v) {
-		foreach ($options_alias as $option => $alias) {
-			if ($k == $alias) {
-				$options[$option] = $v;
-				unset($options[$k]);
-				break;
+	if (is_array($options)) {
+		foreach ($options as $k => $v) {
+			foreach ($options_alias as $option => $alias) {
+				if ($k == $alias) {
+					$options[$option] = $v;
+					unset($options[$k]);
+					break;
+				}
 			}
 		}
 	}
