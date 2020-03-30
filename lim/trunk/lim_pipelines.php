@@ -122,7 +122,7 @@ function lim_formulaire_verifier($flux) {
 
 	$objet = substr($flux['args']['form'], 7); // 'editer_objet' devient 'objet'
 	$nom_table	= table_objet_sql($objet);
-	$tableau_tables_lim	= explode(',', lire_config('lim/rubriques/objets'));
+	$tableau_tables_lim	= lire_config('lim/rubriques/objets');
 
 	if (in_array($nom_table, $tableau_tables_lim)) {
 		include_spip('inc/autoriser');
