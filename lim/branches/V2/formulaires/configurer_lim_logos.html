@@ -20,7 +20,7 @@
 			<[(#DIV|sinon{li})] class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:lim:label_activer_logo_objets:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
-				]#INCLURE{fond=formulaires/inc-choisir-logo,name=#GET{name},selected=#ENV**{#GET{name}},exclus=#LISTE{spip_messages,spip_documents}}
+				]#INCLURE{fond=formulaires/inc-choisir-logo,name=#GET{name},selected=#ENV**{#GET{name}},exclus=#LISTE{spip_messages,spip_documents,spip_groupes_mots}}
 			</[(#DIV|sinon{li})]>
 		</[(#DIV|sinon{ul})]>
 

@@ -23,7 +23,7 @@ function lim_autoriser() {}
 
 /* Exceptions historiques */
 function autoriser_auteur_iconifier($faire,$type,$id,$qui,$opt) {
-	if (in_array(table_objet_sql($type), lire_config('lim/logos/objets'))) {
+	if (in_array(table_objet_sql($type), lire_config('lim/logos/objets', array()))) {
 		return false;
 	}
 	else return (($id == $qui['id_auteur']) OR
@@ -31,21 +31,21 @@ function autoriser_auteur_iconifier($faire,$type,$id,$qui,$opt) {
 }
 
 function autoriser_mot_iconifier($faire,$type,$id,$qui,$opt) {
-	if (in_array(table_objet_sql($type), lire_config('lim/logos/objets'))){
+	if (in_array(table_objet_sql($type), lire_config('lim/logos/objets', array()))) {
 		return false;
 	}
 	return (($qui['statut'] == '0minirezo') AND !$qui['restreint']);
 }
 
 function autoriser_groupemots_iconifier($faire,$type,$id,$qui,$opt) {
-	if (in_array(table_objet_sql($type), lire_config('lim/logos/objets'))) {
+	if (in_array(table_objet_sql($type), lire_config('lim/logos/objets', array()))) {
 		return false;
 	}
 	else return (($qui['statut'] == '0minirezo') AND !$qui['restreint']);
 }
 
 function autoriser_rubrique_iconifier($faire,$type,$id,$qui,$opt) {
-	if (in_array(table_objet_sql($type), lire_config('lim/logos/objets'))) {
+	if (in_array(table_objet_sql($type), lire_config('lim/logos/objets', array()))) {
 		return false;
 	}
 	return autoriser('publierdans', 'rubrique', $id, $qui, $opt);
