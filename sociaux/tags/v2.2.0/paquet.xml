@@ -1,0 +1,21 @@
+<paquet
+	prefix="sociaux"
+	categorie="edition"
+	version="2.2.0"
+	etat="stable"
+	compatibilite="[3.0.20;3.2.*]"
+	logo="prive/themes/spip/images/sociaux-64.png"
+	documentation="https://contrib.spip.net/4720"
+	schema="1.0.0"
+>
+	<nom>Liens vers les réseaux sociaux</nom>
+	<auteur lien='https://www.erational.org'>erational</auteur>
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="insert_head_css" inclure="sociaux_pipelines.php"/>
+	<pipeline nom="header_prive" inclure="sociaux_pipelines.php" />
+	<pipeline nom="sociaux_lister" inclure="sociaux_pipelines.php"/>
+
+	<menu nom="sociaux" titre="sociaux:sociaux_titre" parent="menu_squelette" icone="images/sociaux-16.png" action="configurer_sociaux"/>
+
+</paquet>

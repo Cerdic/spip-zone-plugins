@@ -1,0 +1,14 @@
+[(#REM)
+liste les liens vers les réseaux sociaux
+
+on associe les classes de socicon si l'option est activée
+http://www.socicon.com/how.php
+
+]<!-- sociaux -->
+<div class="sociaux">
+	<ul class="sociaux-list">[(#SET{rezo,[(#PIPELINE{sociaux_lister,#ARRAY{args,#ARRAY{skel,#SQUELETTE,date,#ENV**{date}},data,#ARRAY}})]})]
+		<BOUCLE_rezo (DATA) {source tableau,#GET{rezo}}>[(#CONFIG{sociaux/#CLE}|oui)
+		<li><a href="[(#CLE|=={mail}|oui)mailto:][(#CLE|=={skype}|oui)callto:]#CONFIG{sociaux/#CLE}" class="#CLE[(#CLE|in_array{#LISTE{rss,mail,whatsapp,skype}}|non)spip_out external]">[(#CONFIG{sociaux/css}|oui)<span class="socicon socicon-#CLE"></span>]<span class="name">[(#VALEUR)]</span></a></li>]</BOUCLE_rezo>
+	</ul>
+</div>
+<!-- #sociaux -->

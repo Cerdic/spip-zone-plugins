@@ -1,0 +1,54 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+		<div>
+
+			#ACTION_FORMULAIRE{#ENV{action}}
+
+			<fieldset>
+				<h3 class="legend"><:sociaux:css_fiedset:></h3>
+				<ul class="editer-groupe">
+					<!-- activer l'habillage CSS -->
+					<li class="editer editer_css editer_radio">
+						<p class="explication"><:sociaux:cfg_label_css:></p>
+						<div class="choix">
+							<input type="checkbox" name="css" class="checkbox" value='on' id='cssn'[(#ENV{css}|oui)checked="checked" ]/>
+							<label for='cssn'>
+								<:sociaux:cfg_label_css_oui:>
+							</label>
+						</div>
+					</li>
+
+				</ul>
+
+			</fieldset>
+			<!-- les reseaux -->
+			<fieldset>
+				<h3 class="legend"><:sociaux:reseaux_sociaux_fieldset:></h3>
+				<p><:sociaux:cfg_explication:></p>
+				[(#SET{rezo,[(#PIPELINE{sociaux_lister,#ARRAY{args,#ARRAY{skel,#SQUELETTE,date,#ENV**{date}},data,#ARRAY}})]})]
+				<B_rezo>
+					<ul class="editer-groupe">
+					<BOUCLE_rezo (DATA){source tableau,#GET{rezo,#ARRAY}}>
+						<!-- #VALEUR -->
+						<li class="editer editer-[(#CLE)]">
+							<label for="socicon-[(#CLE)]"><span class="socicon socicon-#CLE"></span> [(#VALEUR)]</label>
+							<input type="text" name="#CLE" id="socicon-[(#CLE)]" value="[(#ENV{#CLE})]" class="text"/>
+						</li>
+					</BOUCLE_rezo>
+					</ul>
+				</B_rezo>
+
+			</fieldset>
+
+
+			<input type="hidden" name="_meta_casier" value="sociaux"/>
+			<p class="boutons">
+				<span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>"/>
+			</p>
+		</div>
+	</form>
+</div>
