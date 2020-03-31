@@ -5,7 +5,9 @@
 <div class="choix choix_#CLE">
 	<input type="checkbox"  id="#GET{id}" name="#ENV{name}\[\]" value="#CLE"[(#ENV{selected}|=={all}|ou{#CLE|in_any{#ENV{selected}}})checked="checked"]
 	[(#CONFIG{activer_logos}|=={non}|oui)disabled='disabled'] />
-	<label for="#GET{id}">#VALEUR[(#CLE|lim_verifier_presence_logo|oui)<img class='forbidden' src='#CHEMIN_IMAGE{warning-16.png}' />]</label>
+	<label for="#GET{id}">#VALEUR[(#CLE|lim_verifier_presence_logo|oui)
+		[(#CHEMIN_IMAGE{warning-16.png}|balise_img|inserer_attribut{class, forbidden})]
+	]</label>
 </div>
 </BOUCLE_par_traduction>
 <input type="hidden" name="#ENV{name}[]" value="" />

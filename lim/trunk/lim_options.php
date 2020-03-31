@@ -42,19 +42,4 @@ if (test_espace_prive()) {
 
 		return $erreurs;
 	}
-
-
-	// Gestion de la désactivation de la notion de Portfolio dans l'affichage des documents
-	// Effacer les boutons "Déposer dans le portfolio" et "Retirer du portfolio"
-	include_spip('inc/config');
-	if (lire_config('lim/divers/portfolio') == 'on') {
-		include_spip('inc/filtres');
-		include_spip('plugins/installer');
-		$get_infos = charger_fonction('get_infos', 'plugins');
-		$infos_medias = $get_infos(_DIR_RACINE.'plugins-dist/medias');
-		$spip_version = spip_version();
-		if (spip_version_compare(spip_version(), '3.2', '>') AND $infos_medias['version'] > '2.20.27') {
-			define('_BOUTON_MODE_IMAGE', false);
-		}
-	}
 }

@@ -1,14 +1,4 @@
 <h1 class="grostitre"><:lim:titre_page_configurer_lim:></h1>
-#LARGEUR_ECRAN{pleine_largeur}
 
 [(#REM) <!-- Barre d'onglets de premier niveau --> ]
 [(#VAL{configurer_lim}|barre_onglets{configurer_lim_rubriques})]
-
-[(#REM) Forcer cette page en écran large ]
-<script type="text/javascript">
-(function($){
-	$(document).ready(function(){
-		$('body').removeClass('etroit').addClass('large')
-	});
-})(jQuery);
-</script>

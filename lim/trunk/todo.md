@@ -1,9 +1,7 @@
 ﻿## TODO
 
-**1 - En priorité** 
-Pouvoir figer les choix dans la gestion des restrictions par rubriques
 
-**2- Gestion des contenus par rubrique**
+**1- Gestion des contenus par rubrique**
 Pouvoir gérer le cas où un rédacteur décoche toutes les cases : du coup on ne retrouve l'objet éditorial que via  le menu Édition -> Objets
 
 **2- Utiliser le plugin Declarer Parent**

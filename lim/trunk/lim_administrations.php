@@ -33,6 +33,10 @@ function lim_upgrade($nom_meta_base_version, $version_cible) {
         array('lim_metas_order', array())
     );
 
+    $maj['1.3.0'] = array(
+        array('lim_spip33', array())
+    );
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -116,6 +120,11 @@ function lim_metas_order() {
 		ecrire_config('lim/rubriques/cadenas', $cadenas);
 		effacer_config('lim/objets_fige');
 	}
+}
+
+function lim_spip33() {
+	effacer_config('lim/divers/portfolio');
+	effacer_config('lim/divers/petitions');
 }
 
 

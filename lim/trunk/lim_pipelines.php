@@ -17,7 +17,7 @@ include_spip('inc/lim');
 include_spip('inc/config');
 
 /**
- * gestion forums public et pétitions : supprime ou non le bloc en fonction de la demande
+ * gestion forums publics : supprime ou non le bloc en fonction de la demande
  *
  * @param array $flux
  * @return array $flux
@@ -29,15 +29,12 @@ function lim_afficher_config_objet($flux) {
 
 		$tab_data = explode("<div class='ajax'>", $flux['data']);
 		$tab_data[1] = "<div class='ajax'>".$tab_data[1];
-		$tab_data[2] = "<div class='ajax'>".$tab_data[2];
 
 		if ( strpos($tab_data[1], 'formulaire_activer_forums') AND lire_config('forums_publics') == 'non' AND lire_config('lim/divers/forums_publics') == 'on' ) {
 			$tab_data[1] = '';
 		}
-		if ( strpos($tab_data[2], 'formulaire_activer_petition') AND lire_config('lim/divers/petitions') == 'on') {
-			$tab_data[2] = '';
-		}
-		$flux['data'] = $tab_data[1].$tab_data[2];
+
+		$flux['data'] = $tab_data[1];
 	}
 	return $flux;
 }

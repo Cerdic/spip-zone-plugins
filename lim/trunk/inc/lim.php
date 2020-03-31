@@ -17,39 +17,29 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Vérifier si il existe déjà des logos de téléchargés pour un type d'objet
  * Exception : le logo du site (dans 'Identité du site') n'est pas pris en compte
  * 
- * @type string
+ * @table_sql string (ex. : spip_articles)
+ *
  * @return bool
  */
-function lim_verifier_presence_logo($type) {
-	include_spip('inc/chercher_logo');
+function lim_verifier_presence_logo($table_sql) {
 	include_spip('base/objets');
-	$id_objet = id_table_objet($type);
-	$prefixe_logo = _DIR_LOGOS.type_du_logo($id_objet).'*.*';
-	$liste_logos = glob($prefixe_logo);
+	$objet = objet_type($table_sql);
 
-	// ne pas prendre en compte le logo du site (id = 0)
-	if ($type == 'spip_syndic') {
-		$chercher_logo = charger_fonction('chercher_logo','inc');
-		$logo_du_site = $chercher_logo(0,'id_syndic');
-		if(!empty($logo_du_site[0])) {
-			$logo_du_site = array_slice($logo_du_site, 0, 1);
-			$liste_logos = array_diff($liste_logos, $logo_du_site);
-		}
+	switch ($objet) {
+		case 'spip_syndic': // gérer le cas du logo du site : ne pas le prendre en compte ici (logo du site -> id_objet = 0).
+			$where = "L.objet=".sql_quote($objet)." AND L.id_objet!=0 AND D.mode=".sql_quote('logoon');
+			break;
+		default:
+			$where = "L.objet=".sql_quote($objet).' AND D.mode='.sql_quote('logoon');
+			break;
 	}
-	
-	if (is_array($liste_logos) AND count($liste_logos) > 0) return true;
-	return false;
-}
 
-/**
- * Vérifier si il existe déjà des pétitions
- * @return bool
- */
-function lim_verifier_presence_petitions() {
-	/* recherche de pétitions */
-	if (sql_countsel('spip_petitions', "statut='publie'") > 0) {
+	$existe_logos = sql_getfetsel('D.id_document', 'spip_documents AS D JOIN spip_documents_liens AS L ON D.id_document=L.id_document', $where);
+	
+	if ($existe_logos){
 		return true;
 	}
+
 	return false;
 }
 
