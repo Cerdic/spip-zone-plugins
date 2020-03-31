@@ -1539,6 +1539,7 @@ function fabrique_code_autorisation($type, $prefixe, $objet) {
 **/
 function fabrique_autorisation_defaut($autorisation) {
 	switch ($autorisation) {
+		case 'objets_voir':
 		case 'objet_voir':
 			return 'toujours';
 			break;

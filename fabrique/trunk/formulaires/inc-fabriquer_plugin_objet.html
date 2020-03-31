@@ -278,6 +278,7 @@
 	<div class='editer-groupe'>
 	<BOUCLE_chaines(DATA){si #ENV{objets/#CLE/nom}}{liste
 		titre_objets,
+		titre_page_objets,
 		titre_objet,
 		info_aucun_objet,
 		info_1_objet,
@@ -477,6 +478,7 @@
 	<B_autorisations>
 	<div class='editer-groupe'>
 	<BOUCLE_autorisations(DATA){si #ENV{objets/#CLE/nom}}{liste
+		objets_voir,
 		objet_creer,
 		objet_voir,
 		objet_modifier,
@@ -497,8 +499,10 @@
 		webmestre,<:fabrique:autorisation_webmestre:>,
 		jamais,<:fabrique:autorisation_jamais:>})]})]
 
-	[(#REM) Pas de choix "Auteur de l'objet" à la création… ]
-	[(#VALEUR|=={objet_creer}|oui) [(#SET{choix,#GET{choix}|array_diff_key{#LISTE{auteur_objet,auteur_objet_statut}|array_flip}})] ]
+	[(#REM) Pas de choix "Auteur de l'objet" à la création… ou sur la vue liste ]
+	[(#VALEUR|in_any{#LISTE{objets_voir,objet_creer}}|oui)
+		[(#SET{choix,#GET{choix}|array_diff_key{#LISTE{auteur_objet,auteur_objet_statut}|array_flip}})]
+	]
 
 	[(#SAISIE{selection, objets/#_objet:CLE/autorisations/#VALEUR,
 		label=[(#VALEUR|cle_de_langue{#ARRAY{objet,#GET{objets},type,#GET{type}}})],

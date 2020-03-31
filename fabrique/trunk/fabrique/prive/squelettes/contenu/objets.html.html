@@ -1,9 +1,12 @@
-[(#SET{titre,#ENV{objet/champ_titre,#ENV{objet/champs/0/champ, titre}}})][
+[
 
 (#REM)
 
 
-]\#FORMULAIRE_RECHERCHE_ECRIRE{\#SELF,ajax}
+]\[(\#AUTORISER{voir,_#LOBJET}|sinon_interdire_acces)\]
+<h1 class="grostitre"><:#TYPE:titre_page_#LOBJET:></h1>
+
+\#FORMULAIRE_RECHERCHE_ECRIRE{\#SELF,ajax}
 <div class="nettoyeur"></div>
 
 \<INCLURE{fond=prive/objets/liste/#LOBJET, env, ajax, sinon=<:#TYPE:info_aucun_#TYPE:>}>
