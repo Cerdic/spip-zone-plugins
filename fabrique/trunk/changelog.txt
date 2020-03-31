@@ -2,6 +2,10 @@ Plugin Fabrique pour SPIP
 Ce plugin génère d'autres plugins !
 -----------------------------------
 
+2.6.1 le31 03 2020
+-----------------------
+* Ajout de l’utorisation de voir la page objets.
+
 2.6.0 le 18 02 2020
 -----------------------
 * Gestion des logos SVG (pour SPIP 3.3+)
