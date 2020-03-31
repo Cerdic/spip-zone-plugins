@@ -1,0 +1,14 @@
+[(#REM)
+
+  Ce Squelette est une surcharge de plugins-dist/medias/prive/objets/contenu/portfolio_document.html
+
+]
+[(#CONFIG{lim/divers/portfolio}|=={on}|oui)
+	[(#INCLURE{fond=prive/squelettes/inclure/documents-sans-portfolio, env, id_unique='', ajax=documents})]
+]
+[(#CONFIG{lim/divers/portfolio}|=={on}|non)
+	[(#INCLURE{fond=prive/squelettes/inclure/portfolio-documents, env, id_unique='', ajax=documents})]
+]
+[
+(#INCLURE{fond=prive/squelettes/inclure/ajouter-documents, env, ajax})
+]
