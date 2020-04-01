@@ -1,7 +1,7 @@
 <paquet
 	prefix="lim"
 	categorie="maintenance"
-	version="3.0.0"
+	version="3.0.1"
 	etat="stable"
 	compatibilite="[3.3.0-dev;3.3.*]"
 	logo="prive/themes/spip/images/lim-64.png"
@@ -17,11 +17,10 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[3.23.2;[" />
-	<necessite nom="medias" compatibilite="[2.20.15;[" />
+	<necessite nom="saisies" compatibilite="[3.36.2;[" />
 	<necessite nom="php" compatibilite="[5.5.0;[" />
 
-	<!-- Donner aux plugins la possibilité de gérer quels objets peuvent rentrer dans la gestion des contenus par rubrique -->
+	<!-- Autres plugins : accès à liste des objets qui peuvent rentrer dans la gestion des 'Contenus par rubrique' -->
 	<pipeline nom="lim_declare_exclus" action="" />
 
 	<pipeline nom="autoriser" inclure="lim_autorisations.php" />
