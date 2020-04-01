@@ -14,9 +14,11 @@
 	<licence>GPL v3</licence>
 
 	<necessite nom="php" compatibilite="[7.0.8;]" />
+	<utilise nom="bank" />
 
 	<pipeline nom="declarer_tables_interfaces" inclure="prix_pipelines.php" />
-
+	<pipeline nom="bank_devise_defaut" inclure="prix_pipelines.php" />
+	
 	<!-- les pipelines du plugin API Prix -->
 	<pipeline nom="prix" inclure="prix_pipelines.php" action="" />
 	<pipeline nom="prix_ht" inclure="prix_pipelines.php" action="" />

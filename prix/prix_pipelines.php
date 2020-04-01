@@ -12,3 +12,13 @@ function prix_declarer_tables_interfaces($interface) {
 	
 	return $interface;
 }
+
+function prix_bank_devise_defaut($devise) {
+	include_spip('prix_fonctions');
+	
+	// On va chercher la devise par défaut configurée
+	$devise_defaut_code = prix_devise_defaut();
+	$devise_defaut_info = prix_devise_info($devise_defaut_code);
+	
+	return $devise_defaut_info;
+}
