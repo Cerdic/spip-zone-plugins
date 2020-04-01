@@ -27,6 +27,7 @@ function traiter_email_dist($args, $retours) {
 		$ajouter_fichier = false;
 	}
 	$timestamp = time();
+	$erreur_envoi = false;
 	$retours['timestamp'] = $timestamp;
 	$id_formulaire = $args['id_formulaire'];
 	$formulaire = $args['formulaire'];
@@ -217,11 +218,13 @@ function traiter_email_dist($args, $retours) {
 
 		// On envoie aux destinataires
 		if ($destinataires) {
-			$ok = $envoyer_mail($destinataires, $sujet, $corps, $courriel_from, 'X-Originating-IP: '.$GLOBALS['ip']);
+			if (!$envoyer_mail($destinataires, $sujet, $corps, $courriel_from, 'X-Originating-IP: '.$GLOBALS['ip'])){
+				$erreur_envoi = true;
+			}
 		}
 
-		// Si c'est bon, on envoie l'accusé de réception
-		if ($ok and $courriel_envoyeur and $options['activer_accuse']) {
+		// Si besoin, on envoie l'accusé de réception
+		if ($courriel_envoyeur and $options['activer_accuse']) {
 			// On récupère le sujet s'il existe sinon on le construit
 			if ($options['sujet_accuse']) {
 				$sujet_accuse = formidable_raccourcis_arobases_2_valeurs_champs(
@@ -311,10 +314,12 @@ function traiter_email_dist($args, $retours) {
 				$corps['pieces_jointes'] = $fichiers_facteur;
 			}
 
-			$ok = $envoyer_mail($courriel_envoyeur, $sujet_accuse, $corps, $courriel_from_accuse, 'X-Originating-IP: '.$GLOBALS['ip']);
+			if(!$envoyer_mail($courriel_envoyeur, $sujet_accuse, $corps, $courriel_from_accuse, 'X-Originating-IP: '.$GLOBALS['ip'])){
+				$erreur_envoi = true;
+			}
 		}
 
-		if ($ok) {
+		if (!$erreur_envoi) {
 			if (isset($retours['message_ok'])) {
 				$retours['message_ok'] .= "\n"._T('formidable:traiter_email_message_ok');
 			} else {
