@@ -238,6 +238,13 @@ function formulaires_editer_organisation_traiter_dist($id_organisation = 'new', 
 	
 	$res = formulaires_editer_objet_traiter('organisation', $id_organisation, $id_parent, 0, $redirect);
 
+	// bugfix core : rediriger sur la page de l'organisation qui vient d'etre cree et pas sur la page des organisations
+	if (!intval($id_organisation)
+		and !empty($res['id_organisation'])
+		and !empty($res['redirect'])) {
+		$res['redirect'] = str_replace("exec=organisations", "exec=organisation", $res['redirect']);
+	}
+
 	// eviter le changement de id_organisation si on veut rediriger sur le parent
 	// au moment d'une creation d'une organisation fille.
 	if (_request('id_parent')) {

@@ -176,6 +176,13 @@ function formulaires_editer_contact_verifier_dist($id_contact = 'new', $id_organ
 function formulaires_editer_contact_traiter_dist($id_contact = 'new', $id_organisation = 0, $redirect = '', $associer_objet = '') {
 	$res = formulaires_editer_objet_traiter('contact', $id_contact, $id_organisation, 0, $redirect);
 
+	// bugfix core : rediriger sur la page de l'organisation qui vient d'etre cree et pas sur la page des organisations
+	if (!intval($id_contact)
+		and !empty($res['id_contact'])
+		and !empty($res['redirect'])) {
+		$res['redirect'] = str_replace("exec=contacts", "exec=contact", $res['redirect']);
+	}
+
 	include_spip('inc/config');
 	if (
 		!intval($id_contact)
