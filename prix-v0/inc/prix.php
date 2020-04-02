@@ -8,6 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  * @param string $type_objet Le type de l'objet
  * @param int $id_objet L'identifiant de l'objet
+ * @param int $arrondi Mettre -1 pour ne pas arrondir
  * @return float Retourne le prix HT de l'objet sinon 0
  */
 function inc_prix_ht_dist($type_objet, $id_objet, $arrondi = 2, $serveur = ''){
@@ -47,9 +48,10 @@ function inc_prix_ht_dist($type_objet, $id_objet, $arrondi = 2, $serveur = ''){
 	}
 	
 	// Si on demande un arrondi, on le fait
-	if ($arrondi)
+	if ($arrondi >= 0) {
 		$prix_ht = round($prix_ht, $arrondi);
-	
+	}
+
 	return $prix_ht;
 }
 
@@ -58,6 +60,7 @@ function inc_prix_ht_dist($type_objet, $id_objet, $arrondi = 2, $serveur = ''){
  *
  * @param string $type_objet Le type de l'objet
  * @param int $id_objet L'identifiant de l'objet
+ * @param int $arrondi Mettre -1 pour ne pas arrondir
  * @return float Retourne le prix TTC de l'objet sinon 0
  */
 function inc_prix_dist($type_objet, $id_objet, $arrondi = 2, $serveur = ''){
@@ -88,8 +91,9 @@ function inc_prix_dist($type_objet, $id_objet, $arrondi = 2, $serveur = ''){
 	);
 	
 	// Si on demande un arrondi, on le fait
-	if ($arrondi)
+	if ($arrondi >= 0) {
 		$prix = round($prix, $arrondi);
+	}
 	
 	// Et c'est fini
 	return $prix;
