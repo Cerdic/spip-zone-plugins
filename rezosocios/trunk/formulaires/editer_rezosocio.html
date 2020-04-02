@@ -20,7 +20,8 @@
 				][(#INCLURE{fond=formulaires/selecteur_rezosocio, types_rezosocios=#ENV{_types_rezosocios}, name=type_rezo, type_rezo=#ENV{type_rezo},id=type_rezo})]
 			</div>
 			<div class="editer editer_nom_compte obligatoire[ (#ENV**{erreurs}|table_valeur{nom_compte}|oui)erreur]">
-				<label for="url_site"><:rezosocios:info_nom_compte:></label>[
+				<label for="url_site"><:rezosocios:info_nom_compte:></label>
+				<p class="explication"><:rezosocios:info_nom_compte_explication:></p>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_compte})</span>
 				]<input type='text' class='text' name='nom_compte' id='nom_compte' value="[(#ENV**{nom_compte})]" />
 			</div>
