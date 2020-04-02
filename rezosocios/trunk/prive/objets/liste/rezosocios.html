@@ -22,8 +22,10 @@
 	<BOUCLE_liste_rezosocios(REZOSOCIOS){id_rezosocio?}{id_auteur?}{where?}{type_rezo?}{statut?}{recherche?}{tri #ENV{par,date},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}{!lang_select}{tout}>
 		[(#LANG|changer_typo)]
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class='titre principale'>[(#LOGO_REZOSOCIO|image_reduire{20,26})]<a href="[(#ID_REZOSOCIO|generer_url_entite{rezosocio})]"
-																																						title="<:info_numero_abbreviation|attribut_html:> #ID_REZOSOCIO">[(#RANG). ]#TITRE</a> [(#ENV{lang}|=={#LANG}|non) &#40;#LANG&#41;]</td>
+			<td class='titre principale'>
+				[(#LOGO_REZOSOCIO|image_reduire{20,26})]
+				<a href="[(#ID_REZOSOCIO|generer_url_entite{rezosocio})]" title="<:info_numero_abbreviation|attribut_html:> #ID_REZOSOCIO">[(#RANG). ]#TITRE</a> [(#ENV{lang}|=={#LANG}|non) &#40;#LANG&#41;]
+			</td>
 			<td class='type_rezo'>#TYPE_REZO</td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
 			<td class='id'>[(#AUTORISER{modifier,rezosocio,#ID_REZOSOCIO}|?{

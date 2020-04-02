@@ -9,6 +9,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_titre_rezosocios' => 'Configuration de "Réseaux sociaux"',
+	'cfg_activer_habillage_explication' => 'Vous pouvez activer l’habillage par défaut qui ajoute des icônes basées sur la police Socicon.',
+	'cfg_activer_habillage_label' => 'Habillage',
+	'cfg_activer_habillage_label_case' => 'Activer l’habillage sur le site public.',
+	'cfg_apercu_habillage' => 'Aperçu :',
 
 	// E
 	'erreur_url_utilisee' => 'Le lien du profil de réseau social est déjà utilisé.',

@@ -51,3 +51,21 @@ function rezosocios_optimiser_base_disparus($flux) {
 	$flux['data'] += objet_optimiser_liens(array('rezosocio' => '*'), '*');
 	return $flux;
 }
+
+/**
+ * Insérer du contenu dans le <head>
+ *
+ * → Feuilles de style Socicon + celle du plugin si l'option est activée
+ *
+ * @param  string $flux Données du pipeline
+ * @return string       Données du pipeline
+ */
+function rezosocios_insert_head_css($flux) {
+	include_spip('inc/config');
+	if (lire_config('rezosocios/activer_habillage')) {
+		$flux .= "\n<!-- Rezosocios -->\n";
+		$flux .= '<link rel="stylesheet" type="text/css" href="' . find_in_path('lib/socicon/style.css') . '" />' . "\n";
+		$flux .= '<link rel="stylesheet" type="text/css" href="' . find_in_path('css/rezosocios.css') . '" />' . "\n";
+	}
+	return $flux;
+}
