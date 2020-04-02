@@ -139,10 +139,7 @@ function prix_formater($prix, $options = array()) {
  * @param array $options
  *     Tableau d'options :
  *     - currency|devise :         (String) devise, code alphabétique à 3 lettres.
- *                                 Défaut : celle par défaut configurée
- *     - float|flottant :          (Bool) pour retourner le nombre flottant arrondi selon la devise
- *                                 au lieu d'une chaîne de texte.
- *                                 Défaut : false
+ *                                 Défaut : celle configurée
  *     - locale :                  (String) identifiant d'une locale (fr-CA) ou code de langue SPIP (fr_tu)
  *     - style :                   (String) standard | accounting.
  *                                 Défaut : standard
@@ -168,51 +165,42 @@ function filtres_prix_formater_dist($prix, $options = array()) {
 	// S'assurer d'avoir un nombre flottant
 	$prix = floatval(str_replace(',', '.', $prix));
 
-	// Devise à utiliser et sa fraction (ex. : nb pour passer des euros aux centimes)
+	// Devise à utiliser
 	$devise = (!empty($options['currency']) ? $options['currency'] : prix_devise_defaut());
-	$fraction = intval(prix_devise_info($devise, 'fraction'));
 
-	// S'il faut retourner directement le nombre flottant, on arrondit simplement selon la devise.
-	if (!empty($options['float'])) {
-		$prix_formate = round($prix, $fraction);
+	// Locale à utiliser
+	$locale = (!empty($options['locale']) ? $options['locale'] : prix_locale_defaut());
+	$locale = prix_langue_vers_locale($locale);
 
-	// Sinon lançons la machine
-	} else {
+	// 1) De préférence, on utilise la librairie Intl de Commerceguys
+	if (extension_loaded('bcmath')) {
 
-		// Locale à utiliser
-		$locale = (!empty($options['locale']) ? $options['locale'] : prix_locale_defaut());
-		$locale = prix_langue_vers_locale($locale);
-
-		// 1) De préférence, on utilise la librairie Intl de Commerceguys
-		if (extension_loaded('bcmath')) {
-
-			// Options : on pose celles de base puis on ajoute celles passées en paramètre.
-			$options_base = array(
-				'locale'           => $locale,
-				'currency_display' => 'code', // pour l'accessibilité
-			);
-			if (is_array($options)) {
-				$options = prix_filtrer_options_formater($options);
-				$options = array_merge($options_base, $options);
-			} else {
-				$options = $options_base;
-			}
-
-			// Formatons
-			$numberFormatRepository = new CommerceGuys\Intl\NumberFormat\NumberFormatRepository;
-			$currencyRepository = new CommerceGuys\Intl\Currency\CurrencyRepository;
-			$currencyFormatter = new CommerceGuys\Intl\Formatter\CurrencyFormatter($numberFormatRepository, $currencyRepository, $options);
-			$prix_formate = $currencyFormatter->format($prix, $devise);
-
-		// 2) Sinon on se rabat sur la librairie Intl PECL
-		} elseif (extension_loaded('intl')) {
-			$currencyFormatter = new NumberFormatter($locale, NumberFormatter::CURRENCY);
-			$prix_formate = $currencyFormatter->formatCurrency($prix, $devise);
-
-		// 3) Sinon, on fait le formatage du pauvre
+		// Options : on pose celles de base puis on ajoute celles passées en paramètre.
+		$options_base = array(
+			'locale'           => $locale,
+			'currency_display' => 'code', // pour l'accessibilité
+		);
+		if (is_array($options)) {
+			$options = prix_filtrer_options_formater($options);
+			$options = array_merge($options_base, $options);
 		} else {
-			$prix_formate = str_replace('.', ',', round($prix, $fraction)) . '&nbsp;' . $devise;
+			$options = $options_base;
 		}
+
+		// Formatons
+		$numberFormatRepository = new CommerceGuys\Intl\NumberFormat\NumberFormatRepository;
+		$currencyRepository = new CommerceGuys\Intl\Currency\CurrencyRepository;
+		$currencyFormatter = new CommerceGuys\Intl\Formatter\CurrencyFormatter($numberFormatRepository, $currencyRepository, $options);
+		$prix_formate = $currencyFormatter->format($prix, $devise);
+
+	// 2) Sinon on se rabat sur la librairie Intl PECL
+	} elseif (extension_loaded('intl')) {
+		$currencyFormatter = new NumberFormatter($locale, NumberFormatter::CURRENCY);
+		$prix_formate = $currencyFormatter->formatCurrency($prix, $devise);
+
+	// 3) Sinon, on fait le formatage du pauvre, au doigt mouillé
+	} else {
+		$prix_formate = str_replace('.', ',', $prix) . '&nbsp;' . $devise;
 	}
 
 	return $prix_formate;

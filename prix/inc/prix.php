@@ -4,25 +4,31 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Permet d'obtenir le prix HT d'un objet SPIP. C'est le résultat de cette fonction qui est utilisée pour calculer le prix TTC.
+ * Permet d'obtenir le prix HT d'un objet SPIP.
+ * C'est le résultat de cette fonction qui est utilisée pour calculer le prix TTC.
  *
  * @param string $objet
  *   Le type de l'objet
  * @param int $id_objet
  *   L'identifiant de l'objet
  * @param array $options
- *   Tableau d'options
- *   - arrondi
+ *   Tableau d'options :
+ *   - arrondi : nombre entier, par défaut celui de la devise.
+ *               -1 ou false pour ne pas arrondir.
  *   - serveur
- *   ou un entier pour l'arrondi pour compat avec l'ancienne signature
+ *   Ou un entier pour l'arrondi pour compat avec l'ancienne signature
  * @param string $serveur
  *   Déprécié. Autre base distante.
  * @return float Retourne le prix HT de l'objet sinon 0
  */
-function inc_prix_ht_dist($objet, $id_objet, $options = array(), $serveur = ''){
+function inc_prix_ht_dist($objet, $id_objet, $options = array(), $serveur = '') {
 	include_spip('base/objets');
 	$prix_ht = 0;
-	
+
+	// Arrondi de la devise
+	$devise = prix_devise_defaut();
+	$arrondi_devise = intval(prix_devise_info($devise, 'fraction'));
+
 	// Compatibilité avec l'ancienne signature
 	if (is_int($options)) {
 		$options = array(
@@ -32,12 +38,12 @@ function inc_prix_ht_dist($objet, $id_objet, $options = array(), $serveur = ''){
 	}
 	// Options par défaut
 	$options_defaut = array(
-		'arrondi' => 2,
+		'arrondi' => $arrondi_devise,
 		'serveur' => '',
 	);
 	// On fusionne avec les défauts
 	$options = array_merge($options_defaut, $options);
-	
+
 	// Cherchons d'abord si l'objet existe bien
 	if (
 		$objet
@@ -46,9 +52,9 @@ function inc_prix_ht_dist($objet, $id_objet, $options = array(), $serveur = ''){
 		and $table_sql = table_objet_sql($objet, $options['serveur'])
 		and $cle_objet = id_table_objet($objet, $options['serveur'])
 		and $ligne = sql_fetsel('*', $table_sql, "$cle_objet = $id_objet", '', '', '', '', $options['serveur'])
-	){
+	) {
 		// Existe-t-il une fonction précise pour le prix HT de ce type d'objet : prix_<objet>_ht() dans prix/<objet>.php
-		if ($fonction_ht = charger_fonction('ht', "prix/$objet", true)){
+		if ($fonction_ht = charger_fonction('ht', "prix/$objet", true)) {
 			// On passe la ligne SQL en paramètre pour ne pas refaire la requête
 			$prix_ht = $fonction_ht($id_objet, $ligne, $options);
 		}
@@ -59,8 +65,8 @@ function inc_prix_ht_dist($objet, $id_objet, $options = array(), $serveur = ''){
 		elseif ($ligne['prix']) {
 			$prix_ht = $ligne['prix'];
 		}
-		
-		// Enfin on passe dans un pipeline pour modifier le prix HT
+
+		// On passe dans un pipeline pour modifier le prix HT
 		$prix_ht = pipeline(
 			'prix_ht',
 			array(
@@ -76,12 +82,15 @@ function inc_prix_ht_dist($objet, $id_objet, $options = array(), $serveur = ''){
 			)
 		);
 	}
-	
-	// Si on demande un arrondi, on le fait
-	if ($options['arrondi']) {
+
+	// Enfin si nécessaire, on fait un arrondi
+	if (
+		is_int($options['arrondi'])
+		and $options['arrondi'] >= 0
+	) {
 		$prix_ht = round($prix_ht, $options['arrondi']);
 	}
-	
+
 	return $prix_ht;
 }
 
@@ -93,17 +102,22 @@ function inc_prix_ht_dist($objet, $id_objet, $options = array(), $serveur = ''){
  * @param int $id_objet
  *   L'identifiant de l'objet
  * @param array $options
- *   Tableau d'options
- *   - arrondi
+ *   Tableau d'options :
+ *   - arrondi : nombre entier, par défaut celui de la devise.
+ *               -1 ou false pour ne pas arrondir.
  *   - serveur
- *   ou un entier pour l'arrondi pour compat avec l'ancienne signature
+ *   Ou un entier pour l'arrondi pour compat avec l'ancienne signature
  * @param string $serveur
  *   Déprécié. Autre base distante.
  * @return float Retourne le prix TTC de l'objet sinon 0
  */
 function inc_prix_dist($objet, $id_objet, $options = array(), $serveur = '') {
 	include_spip('base/objets');
-	
+
+	// Arrondi de la devise
+	$devise = prix_devise_defaut();
+	$arrondi_devise = intval(prix_devise_info($devise, 'fraction'));
+
 	// Compatibilité avec l'ancienne signature
 	if (is_int($options)) {
 		$options = array(
@@ -113,7 +127,7 @@ function inc_prix_dist($objet, $id_objet, $options = array(), $serveur = '') {
 	}
 	// Options par défaut
 	$options_defaut = array(
-		'arrondi' => 2,
+		'arrondi' => $arrondi_devise,
 		'serveur' => '',
 	);
 	// On fusionne avec les défauts
@@ -125,9 +139,9 @@ function inc_prix_dist($objet, $id_objet, $options = array(), $serveur = '') {
 	$options_ht = array_merge($options, array('arrondi'=>0));
 	$prix = $prix_ht = $fonction_prix_ht($objet, $id_objet, $options_ht);
 	$taxes = array();
-	
+
 	// On cherche maintenant s'il existe une personnalisation pour le prix total TTC : prix_<objet>() dans prix/<objet>.php
-	if ($fonction_prix_objet = charger_fonction($objet, 'prix/', true)){
+	if ($fonction_prix_objet = charger_fonction($objet, 'prix/', true)) {
 		$prix = $fonction_prix_objet($id_objet, $prix_ht, $options);
 	}
 	// Sinon on appelle une fonction générique pour trouver les taxes d'un objet, et on ajoute au HT
@@ -136,8 +150,8 @@ function inc_prix_dist($objet, $id_objet, $options = array(), $serveur = '') {
 		$taxes_total = array_sum(array_column($taxes, 'montant'));
 		$prix = $prix_ht + $taxes_total;
 	}
-	
-	// Enfin on passe dans un pipeline pour pouvoir ajouter taxes, ristournes ou autres modifications
+
+	// On passe dans un pipeline pour pouvoir ajouter taxes, ristournes ou autres modifications
 	$prix = pipeline(
 		'prix',
 		array(
@@ -152,13 +166,15 @@ function inc_prix_dist($objet, $id_objet, $options = array(), $serveur = '') {
 			'data' => $prix
 		)
 	);
-	
-	// Si on demande un arrondi, on le fait
-	if ($options['arrondi']) {
+
+	// Enfin si nécessaire, on fait un arrondi
+	if (
+		is_int($options['arrondi'])
+		and $options['arrondi'] >= 0
+	) {
 		$prix = round($prix, $options['arrondi']);
 	}
-	
+
 	// Et c'est fini
 	return $prix;
 }
-
