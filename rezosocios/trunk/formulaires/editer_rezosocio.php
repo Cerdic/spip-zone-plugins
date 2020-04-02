@@ -79,6 +79,7 @@ function formulaires_editer_rezosocio_verifier_dist($id_rezosocio = 'new', $id_p
 	if (sql_countsel(
 		'spip_rezosocios',
 		array(
+			'id_rezosocio != ' . intval($id_rezosocio),
 			'nom_compte = ' . sql_quote(_request('nom_compte')),
 			'type_rezo = ' . sql_quote(_request('type_rezo')),
 		)
