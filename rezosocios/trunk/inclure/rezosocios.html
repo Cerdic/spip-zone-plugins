@@ -11,11 +11,20 @@
 	- id_rezosocio : un ou plusieurs identifiants
 	- type_rezo : facebook | twitter, etc.
 	- objet + id_objet : identifiant d'un objet lié
+	- par : champ utilisé pour le tri, défaut = type_rezo + sinum titre
 	- class : classes ajoutées au conteneur
 	- align : classe d'alignement ajoutée au conteneur (left | right)
 
 ]
 #SET{habillage,#CONFIG{rezosocios/activer_habillage}|oui}
+#SET{defaut_tri,#ARRAY{
+	date,#ENV{date_sens,-1},
+	titre,1,
+	num titre,1,
+	id_rezosocio,1,
+	type_rezo,1,
+	points,-1
+}}
 <div class="sociaux[ (#GET{habillage}|oui)sociaux_themed][ (#ENV{class}|attribut_html)][ (#ENV{align}|attribut_html)]">
 	<ul class="sociaux__list sociaux-list">
 		<BOUCLE_rezo (REZOSOCIOS)
@@ -23,6 +32,8 @@
 			{type_rezo?}
 			{objet?}
 			{id_objet?}
+			{tri #ENV{par,type_rezo},#GET{defaut_tri}}
+			{par sinum titre}
 		>
 		<li class="sociaux__item">
 			<a
