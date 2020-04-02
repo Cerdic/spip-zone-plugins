@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de 
+// extrait automatiquement de https://trad.spip.net/tradlang_module/coordonnees?lang_cible=es
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -99,12 +99,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_code_postal' => 'Código postal',
 	'label_complement' => 'Complemento',
 	'label_email' => 'E-mail',
-	'label_etat_federe' => 'Province / Land / Ile etc …', # attic
 	'label_localite_dependante' => 'Localidad dependiente',
 	'label_numero' => 'Número',
 	'label_objets_actifs' => 'Objetos',
 	'label_pays' => 'País',
-	'label_region' => 'Région', # attic
 	'label_telephone' => 'Teléfono',
 	'label_titre' => 'Título',
 	'label_type' => 'Tipo',
@@ -178,5 +176,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_tel_voice' => 'Vocal',
 	'type_tel_work' => 'Profesional'
 );
-
-?>
