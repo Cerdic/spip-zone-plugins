@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_replace' => 'Remplacer par :',
 	'label_replace_yes' => 'Remplacer',
 	'label_search' => 'Rechercher :',
+	'label_sensible' => 'Sensible à la casse',
 
 	// N
 	'nb_occurences_dans' => '@nb@ occurences dans',
