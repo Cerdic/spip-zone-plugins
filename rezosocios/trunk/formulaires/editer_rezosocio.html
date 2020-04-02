@@ -8,23 +8,23 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_rezosocio' value='#ENV{id_rezosocio}' />
-		<ul>
-			<li class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+		<div class="editer-groupe">
+			<div class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
 				<label for="titre"><:info_titre:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
 				]<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre})]" placeholder="<:rezosocios:texte_nouveau_rezosocio:>" />
-			</li>
-			<li class="editer editer_type_rezo obligatoire[ (#ENV**{erreurs}|table_valeur{type_rezo}|oui)erreur]">
+			</div>
+			<div class="editer editer_type_rezo obligatoire[ (#ENV**{erreurs}|table_valeur{type_rezo}|oui)erreur]">
 				<label for="type_rezo"><:rezosocios:info_type_rezosocios:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{type_rezo})</span>
 				][(#INCLURE{fond=formulaires/selecteur_rezosocio, types_rezosocios=#ENV{_types_rezosocios}, name=type_rezo, type_rezo=#ENV{type_rezo},id=type_rezo})]
-			</li>
-			<li class="editer editer_nom_compte obligatoire[ (#ENV**{erreurs}|table_valeur{nom_compte}|oui)erreur]">
+			</div>
+			<div class="editer editer_nom_compte obligatoire[ (#ENV**{erreurs}|table_valeur{nom_compte}|oui)erreur]">
 				<label for="url_site"><:rezosocios:info_nom_compte:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_compte})</span>
 				]<input type='text' class='text' name='nom_compte' id='nom_compte' value="[(#ENV**{nom_compte})]" />
-			</li>
-			<li class="editer editer_lang obligatoire[ (#ENV**{erreurs}|table_valeur{lang}|oui)erreur]">
+			</div>
+			<div class="editer editer_lang obligatoire[ (#ENV**{erreurs}|table_valeur{lang}|oui)erreur]">
 				<label for="changer_lang"><:rezosocios:info_langue:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lang})</span>]
 				[<span class="input">
@@ -33,8 +33,8 @@
 				[(#CONFIG{langues_multilingue}|explode{','}|count|=={1}|oui)
 				<input class="text" readonly="readonly" disabled="disabled" value="[(#ENV{lang}|traduire_nom_langue|attribut_html)]" />
 				]
-			</li>
-		</ul>
+			</div>
+		</div>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
