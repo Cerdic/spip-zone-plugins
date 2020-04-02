@@ -1,9 +1,26 @@
 <?php
+/**
+ * Fonctions du plugin Rezosocios
+ *
+ * @plugin     Rezosocios
+ * @copyright  2015
+ * @author     kent1
+ * @licence    GPL 3
+ * @package    SPIP\Rezosocios\Fonctions
+ */
 
+ // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+/**
+ * Renvoie le nom d'un type de réseau social
+ *
+ * @param string $type
+ *     Type : facebook, twitter, etc.
+ * @return string|null
+ */
 function rezosocios_nom($type) {
 	include_spip('inc/rezosocios');
 
@@ -16,6 +33,15 @@ function rezosocios_nom($type) {
 	return $nom;
 }
 
+/**
+ * Renvoie l'URL d'après le type et un identifiant de compte
+ *
+ * @param string $type
+ *     Type : facebook, twitter, etc.
+ * @param string $compte
+ *     Identifiant du compte
+ * @return string|boolean
+ */
 function rezosocios_url($type, $compte) {
 	include_spip('inc/rezosocios');
 
@@ -35,9 +61,10 @@ function rezosocios_url($type, $compte) {
 }
 
 /**
- * Renvoie la bonne classe socicon d'après le type
+ * Renvoie la bonne classe socicon pour un type de réseau social
  *
  * @param string $type
+ *     Type : facebook, twitter, etc.
  * @return string
  */
 function rezosicos_classe_socicon($type) {
