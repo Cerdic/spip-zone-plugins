@@ -33,8 +33,9 @@ function prix_commande_ht_dist($id_commande) {
 		$details = array_map('reset', $details);
 
 		// Pour chaque détail on va chercher son prix HT x sa quantité
+		// Il faut prendre les prix sans arrondi
 		foreach ($details as $id_commandes_detail) {
-			$prix_ht += $fonction_ht('commandes_detail', $id_commandes_detail);
+			$prix_ht += $fonction_ht('commandes_detail', $id_commandes_detail, -1);
 		}
 	}
 
@@ -69,8 +70,9 @@ function prix_commande_dist($id_commande, $prix_ht = null) {
 		$details = array_map('reset', $details);
 
 		// Pour chaque objet on va chercher son prix TTC x sa quantité
+		// Il faut prendre les prix sans arrondi
 		foreach ($details as $id_commandes_detail) {
-			$prix += $fonction_ttc('commandes_detail', $id_commandes_detail);
+			$prix += $fonction_ttc('commandes_detail', $id_commandes_detail, -1);
 		}
 	}
 
