@@ -30,6 +30,10 @@
 				[<span class="input">
 					<select name="changer_lang" id="changer_lang">(#INCLURE{fond=formulaires/inc-options-langues,name=changer_lang,default=#ENV**{changer_lang,#ENV{lang}}})</select>
 				</span>]
+				[(#CONFIG{langues_multilingue}|explode{','}|count|=={1}|oui)
+				<input class="text" readonly="readonly" disabled="disabled" value="[(#ENV{lang}|traduire_nom_langue|attribut_html)]" />
+				]
+			</li>
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
