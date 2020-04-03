@@ -1,6 +1,6 @@
 [(#REM)
 
-	Affiche les liens vers les réseaux sociaux
+	Barre de liens vers les réseaux sociaux.
 
 	Nb : on réutilise les classes du plugin sociaux
 
@@ -25,9 +25,10 @@
 	type_rezo,1,
 	points,-1
 }}
+<B_rezosocios>
 <div class="sociaux[ (#GET{habillage}|oui)sociaux_themed][ (#ENV{class}|attribut_html)][ (#ENV{align}|attribut_html)]">
 	<ul class="sociaux__list sociaux-list">
-		<BOUCLE_rezo (REZOSOCIOS)
+		<BOUCLE_rezosocios (REZOSOCIOS)
 			{id_rezosocio?}
 			{type_rezo?}
 			{objet?}
@@ -49,6 +50,7 @@
 				<span class="sociaux__name name">[(#TITRE|sinon{#TYPE_REZO})]</span>
 			</a>
 		</li>
-		</BOUCLE_rezo>
+		</BOUCLE_rezosocios>
 	</ul>
 </div>
+</B_rezosocios>
