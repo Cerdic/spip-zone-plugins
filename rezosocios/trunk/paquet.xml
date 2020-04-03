@@ -6,6 +6,7 @@
 	compatibilite="[3.2.0;3.3.*]"
 	schema="0.2.0"
 	logo="prive/themes/spip/images/rezosocios-64.png"
+	documentation="https://git.spip.net/spip-contrib-extensions/rezosocios/src/branch/master/Readme.md"
 >
 
 	<nom>Réseaux sociaux</nom>
