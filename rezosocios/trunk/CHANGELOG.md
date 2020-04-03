@@ -2,6 +2,17 @@
 
 Ce fichier sert de changelog, il liste les modifications lors du changement de version.
 
+## Version 1.0.x
+
+* Compatibilité SPIP 3.2+
+* Ajout d'un modèle et d'une inclusion générique : `inclure/rezosocio.html`
+* Ajout de socicon (suppression des anciennes icônes png et de la fonction de logo)
+* Ajout d'une option de configuration pour activer l'habillage
+* Ajout d'une entrée de menu
+* Ajout de 2 saisies pour sélectionner un lien et un type de réseau
+* Ajout d'une noisette
+* PSR, phpdoc
+
 ## Version 0.4.x
 
 ### Version 0.4.10 (2017-06-29)
