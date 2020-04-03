@@ -1,0 +1,42 @@
+[(#SET{defaut_tri,#ARRAY{
+	date,#ENV{date_sens,-1},
+	num titre,1,
+	id_rezosocio,1,
+	type_rezo,1,
+	points,-1
+}})
+]<B_liste_rezosocios>
+#ANCRE_PAGINATION
+<div class="liste-objets rezosocios">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{rezosocios:rezosocio_un,rezosocios:rezosocios_nb}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='titre principale' scope='col'>[(#TRI{num titre,<:info_titre:>,ajax})]</th>
+			<th class='type_rezo secondaire' scope='col'>[(#TRI{type_rezo,<:rezosocios:info_type_rezosocios:>,ajax})]</th>
+			<th class='date secondaire' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_rezosocio,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_rezosocios(REZOSOCIOS){id_rezosocio?}{id_auteur?}{where?}{type_rezo?}{statut?}{recherche?}{tri #ENV{par,date},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}{!lang_select}{tout}>
+		[(#LANG|changer_typo)]
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='titre principale'>[(#LOGO_REZOSOCIO|image_reduire{20,26})]<a href="[(#ID_REZOSOCIO|generer_url_entite{rezosocio})]"
+																																						title="<:info_numero_abbreviation|attribut_html:> #ID_REZOSOCIO">[(#RANG). ]#TITRE</a> [(#ENV{lang}|=={#LANG}|non) &#40;#LANG&#41;]</td>
+			<td class='type_rezo'>#TYPE_REZO</td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
+			<td class='id'>[(#AUTORISER{modifier,rezosocio,#ID_REZOSOCIO}|?{
+				<a href="[(#URL_ECRIRE{rezosocio_edit,id_rezosocio=#ID_REZOSOCIO})]">#ID_REZOSOCIO</a>,
+				#ID_REZOSOCIO
+			})]</td>
+		</tr>
+	</BOUCLE_liste_rezosocios>
+	[(#REM|changer_typo)]
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{#ENV{pagination,prive}})</p>]
+</div>
+</B_liste_rezosocios>[
+<div class="liste-objets articles caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_rezosocios>
