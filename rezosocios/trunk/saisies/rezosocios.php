@@ -19,7 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param array $description la description de la saisie
  * @return bool true si valeur ok, false sinon,
  */
-function rezosocio_valeurs_acceptables($valeur, $description) {
+function rezosocios_valeurs_acceptables($valeur, $description) {
 
 	if (!empty($description['options']['multiple'])) {
 		include_spip('saisies/selection_multiple');
