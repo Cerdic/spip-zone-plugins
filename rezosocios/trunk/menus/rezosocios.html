@@ -12,7 +12,13 @@
 <li class="menu-items__item menu-items__item_rezosocios menu-entree item sociaux[ (#ENV{css})]">
 	<BOUCLE_rezosocios_menu(REZOSOCIOS) {id_rezosocio?} {si #ENV{appel_menu}}>
 	#SET{rezo,#TYPE_REZO*|rezosicos_classe_socicon}
-	<a href="[(#TYPE_REZO*|rezosocios_url{#NOM_COMPTE})]" class="menu-items__lien spip_out external[ (#GET{rezo})][ (#ENV{css_lien})]" rel="external" lang="#LANG">
+	<a
+		href="[(#TYPE_REZO*|rezosocios_url{#NOM_COMPTE})]"
+		class="menu-items__lien spip_out external[ (#GET{rezo})][ (#ENV{css_lien})]"
+		rel="external"
+		lang="#LANG"
+		title="[(#TITRE|attribut_html)]"
+	>
 		<span class="socicon socicon-[(#GET{rezo})]"></span>
 	</a>
 	</BOUCLE_rezosocios_menu>
