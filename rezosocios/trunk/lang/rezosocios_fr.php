@@ -35,6 +35,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_activer_rezosocio_objets' => 'Activer les liens de réseaux sociaux pour les contenus :',
 	'lien_ajouter_rezosocio' => 'Ajouter ce lien de réseau social',
 
+	// M
+	'menu_titre' => 'Liens vers les réseaux sociaux',
+	'menu_description' => 'Vous pouvez avoir un ou plusieurs liens dans l’entrée de menu',
+	'menu_id_rezosocio_label' => 'Un ou plusieurs numéros séparés par des virgules.',
+
+	// N
+	'noisette_rezosocios_nom' => 'Liens vers les réseaux sociaux',
+	'noisette_rezosocios_description' => 'Barre de liens vers les réseaux sociaux, que l’on peut filtrer selon plusieurs critères.',
+	'noisette_contenu_label' => 'Contenu',
+	'noisette_objet_lie_label' => 'Contenu lié',
+	'noisette_objet_lie_explication' => 'Raccourci d’un contenu : article10, rubrique5, etc. Avec le plugin Sélecteur générique, tapez les 1ères lettres d’un titre pour obtenir des suggestions.',
+	'noisette_id_rezosocio_label' => 'Sélection',
+	'noisette_liaison_label' => 'Liaison',
+	'noisette_liaison_explication' => 'Prendre les réseaux liés à un contenu ?',
+	'noisette_liaison_objet_lie' => 'Un contenu choisi manuellement',
+	'noisette_liaison_objet_contexte' => 'Le contenu du contexte',
+	'noisette_liaison_non' => 'Non',
+
 	// R
 	'rezosocio' => 'Réseau social',
 	'rezosocio_ajouter' => 'Ajouter un lien de réseau social',
@@ -45,6 +63,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rezosocio_un' => '1 lien de réseau social',
 	'rezosocios' => 'Réseaux sociaux',
 	'rezosocios_nb' => '@nb@ liens de réseaux sociaux',
+
+	// S
+	'saisie_rezosocio_titre' => 'Sélection de liens de réseaux sociaux',
+	'saisie_rezosocio_description' => 'Un ou plusieurs liens de réseaux sociaux',
+	'saisie_rezosocio_option_multiple_label' => 'Choix multiples',
+	'saisie_rezosocio_option_multiple_label_case' => 'Plusieurs choix possibles',
+	'saisie_rezosocio_option_type_rezo_label' => 'Type de réseau',
 
 	// T
 	'texte_nouveau_rezosocio' => 'Nouveau lien de réseau social',
