@@ -1,0 +1,115 @@
+/**
+ * Habillage par défaut du composant "sociaux".
+ * Cette feuille de style peut-être surchargée.
+ */
+.sociaux__list {
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sociaux__item {
+	margin: 0 0.2em 0.4em 0;
+}
+
+a.sociaux__link {
+	text-decoration: none;
+}
+
+a.sociaux__link:focus,
+a.sociaux__link:hover,
+a.sociaux__link:active {
+	background-color: transparent;
+	text-decoration: none;
+}
+
+a.sociaux__link:hover .socicon,
+a.sociaux__link:focus .socicon,
+a.sociaux__link:active .socicon {
+	background: #000;
+}
+
+a.sociaux__link.spip_out:after,
+a.sociaux__link.external:after,
+a.sociaux__link[rel=external]:after {
+	content: none; /* unicode éventuel avec tinytypo ou autre */
+}
+
+.sociaux__name {
+	display: none;
+}
+
+.sociaux .socicon {
+	display: block;
+	font-size: 1.4em;
+	padding: .5em;
+	border-radius: 1em;
+	color: #fff;
+	background: #000;
+	transition: all 0.2s;
+}
+
+/* Couleurs par type */
+
+.sociaux .socicon-facebook {
+	background: #3E5B98;
+}
+
+.sociaux .socicon-twitter {
+	background: #4DA7DE;
+}
+
+.sociaux .socicon-mastodon {
+	background: #313543;
+}
+
+.sociaux .socicon-instagram {
+	background: #9C7C6E;
+}
+
+.sociaux .socicon-googleplus {
+	background: #DD4B39;
+}
+
+.sociaux .socicon-blogger {
+	background: #ff9b38;
+}
+
+.sociaux .socicon-linkedin {
+	background: #3371B7;
+}
+
+.sociaux .socicon-youtube {
+	background: #E02A20;
+}
+
+.sociaux .socicon-pinterest {
+	background: #C92619;
+}
+
+.sociaux .socicon-tripadvisor {
+	background: #599541;
+}
+
+.sociaux .socicon-vimeo {
+	background: #51b5e7;
+}
+
+.sociaux .socicon-fickr {
+	background: #1e1e1b;
+}
+
+.sociaux .socicon-viber {
+	background: #7b519d;
+}
+
+.sociaux .socicon-whatsapp {
+	background: #20B038;
+}
+
+.sociaux .socicon-skype {
+	background: #28abe3;
+}

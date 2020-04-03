@@ -1,0 +1,16 @@
+[(#REM)
+
+	Saisie : sélection d'un type de réseau social
+
+	Paramètres :
+
+	- multiple : « oui » pour autoriser une sélection de plusieurs valeurs
+	- paramètres de saisies/selection.html
+
+]
+#SET{types_rezos,#ARRAY}
+#SET{saisie,#ENV{multiple}|=={oui}|?{selection_multiple,selection}}
+<BOUCLE_types_rezos(DATA) {source table, #REM|rezosocios_liste} {par cle}>
+#SET{types_rezos,#GET{types_rezos}|array_merge{#ARRAY{#CLE,#NOM}}}
+</BOUCLE_types_rezos>
+<INCLURE{fond=saisies/#GET{saisie}, data=#GET{types_rezos}, env}/>

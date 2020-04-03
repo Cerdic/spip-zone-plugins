@@ -1,0 +1,9 @@
+<entree>
+	<nom><:rezosocios:menu_titre:></nom>
+	<rang>32</rang>
+	<description><:rezosocios:menu_description:></description>
+	<icone>prive/themes/spip/images/rezosocio-24.png</icone>
+	<parametre nom="id_rezosocio" class="multilang" label="rezosocios:menu_id_rezosocio_label" />
+	<parametre nom="css" label="menus:entree_css" />
+	<parametre nom="css_lien" label="menus:entree_css_lien" />
+</entree>
