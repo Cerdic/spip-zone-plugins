@@ -13,6 +13,6 @@
 #SET{saisie,#ENV{multiple}|=={oui}|?{selection_multiple,selection}}
 <BOUCLE_rezos(REZOSOCIOS) {type_rezo?} {par type_rezo, sinum titre}>
 #SET{libelle,#TITRE \(#TYPE_REZO*\)}
-#SET{rezos,#GET{rezos}|array_merge{#ARRAY{#ID_REZOSOCIO,#GET{libelle}}}}
+#SET{rezos,#GET{rezos}|plus{#ARRAY{#ID_REZOSOCIO,#GET{libelle}}}}
 </BOUCLE_rezos>
 <INCLURE{fond=saisies/#GET{saisie}, data=#GET{rezos}, env}/>

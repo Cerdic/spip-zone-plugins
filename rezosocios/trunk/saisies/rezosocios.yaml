@@ -1,7 +1,7 @@
 
 titre: '<:rezosocios:saisie_rezosocio_titre:>'
 description: '<:rezosocios:saisie_rezosocio_explication:>'
-icone: 'prive/themes/spip/images/saisie_rezosocio.png'
+icone: 'prive/themes/spip/images/saisie_rezosocios.png'
 options:
   -
     saisie: 'fieldset'
