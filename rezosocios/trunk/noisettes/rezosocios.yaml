@@ -1,0 +1,44 @@
+nom: '<:rezosocios:noisette_rezosocios_nom:>'
+description: '<:rezosocios:noisette_rezosocios_description:>'
+icon: 'noisette_rezosocios.png'
+ajax: 'non'
+parametres:
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'contenu'
+      label: '<:rezosocios:noisette_contenu_label:>'
+      pliable: 'oui'
+    saisies:
+      -
+        saisie: 'rezosocios'
+        options:
+          nom: 'id_rezosocio'
+          label: '<:rezosocios:noisette_id_rezosocio_label:>'
+          multiple: 'oui'
+          class: 'chosen select2'
+      -
+        saisie: 'type_rezo'
+        options:
+          nom: 'type_rezo'
+          label: '<:rezosocios:info_type_rezosocios:>'
+          multiple: 'oui'
+          class: 'chosen select2'
+      -
+        saisie: 'radio'
+        options:
+          nom: 'liaison'
+          label: '<:rezosocios:noisette_liaison_label:>'
+          explication: '<:rezosocios:noisette_liaison_explication:>'
+          data:
+            '': '<:rezosocios:noisette_liaison_non:>'
+            objet_contexte: '<:rezosocios:noisette_liaison_objet_contexte:>'
+            objet_lie: '<:rezosocios:noisette_liaison_objet_lie:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'objet_lie'
+          label: '<:rezosocios:noisette_objet_lie_label:>'
+          explication: '<:rezosocios:noisette_objet_lie_explication:>'
+          attributs: 'data-selecteur="generique" data-select-php="oui"'
+          afficher_si: '@liaison@=="objet_lie"'
