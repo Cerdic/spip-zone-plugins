@@ -1,5 +1,5 @@
 /**
- * Habillage par défaut.
+ * Habillage par défaut du composant "sociaux".
  * Cette feuille de style peut-être surchargée.
  */
 .sociaux__list {
@@ -15,26 +15,27 @@
 	margin: 0 0.2em 0.4em 0;
 }
 
-.sociaux__link {
+a.sociaux__link {
 	text-decoration: none;
 }
 
-.sociaux__link:focus,
-.sociaux__link:hover,
-.sociaux__link:active {
+a.sociaux__link:focus,
+a.sociaux__link:hover,
+a.sociaux__link:active {
 	background-color: transparent;
 	text-decoration: none;
 }
 
-.sociaux__link:hover .socicon,
-.sociaux__link:focus .socicon,
-.sociaux__link:active .socicon {
+a.sociaux__link:hover .socicon,
+a.sociaux__link:focus .socicon,
+a.sociaux__link:active .socicon {
 	background: #000;
 }
 
-.sociaux__link.spip_out:after,
-.sociaux__link.external:after {
-	content: none;
+a.sociaux__link.spip_out:after,
+a.sociaux__link.external:after,
+a.sociaux__link[rel=external]:after {
+	content: none; /* unicode éventuel avec tinytypo ou autre */
 }
 
 .sociaux__name {
