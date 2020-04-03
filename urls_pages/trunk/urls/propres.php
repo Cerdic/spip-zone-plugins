@@ -42,7 +42,7 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  *     ou URL décodée de l'objet donné
  */
 function urls_propres($i, $entite, $args = '', $ancre = '') {
-
+	include_spip('base/abstract_sql');
 	// 1) Gestion des pages (voir @note)
 	if (is_string($i) // c'est une URL et pas un id
 		and strlen($i)
