@@ -24,7 +24,7 @@ Il y a 2 différences principales :
 * On peut créer plusieurs liens pour un même type de réseau social
 * On peut lier les réseaux aux contenus
 
-L'apparence de la barre d'icônes est similaire entre les 2 plugins : c'est la même police de de caractère [Socicon](http://www.socicon.com/) qui est utilisée, et il s'agit du même composant CSS `.sociaux`, avec le même markup.
+L'apparence de la barre d'icônes est similaire entre les 2 plugins : c'est la même police de de caractère [Socicon](https://www.socicon.com/) qui est utilisée, et il s'agit du même composant CSS `.sociaux`, avec le même markup.
 
 On peut donc passer de l’un à l’autre sans bouleverser l’affichage sur le site public.
 La feuille de style surchargeable se trouve dans `css/rezosocios.css`.

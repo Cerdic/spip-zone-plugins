@@ -12,6 +12,8 @@
 
 	<auteur lien="http://www.kent1.info/">kent1</auteur>
 
+	<credit lien="https://www.socicon.com">Socicon</credit>
+
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/rezosocios.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/rezosocios.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/rezosocios.php" />
