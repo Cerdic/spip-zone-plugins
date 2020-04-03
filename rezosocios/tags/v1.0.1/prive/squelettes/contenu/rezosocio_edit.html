@@ -1,0 +1,26 @@
+[(#ID_REZOSOCIO|oui)
+	[(#AUTORISER{modifier,rezosocio,#ID_REZOSOCIO}|sinon_interdire_acces)]]
+[(#ID_REZOSOCIO|non)
+	[(#AUTORISER{creer,rezosocio,#ID_REZOSOCIO,'','',#ARRAY{associer_objet,#ENV{associer_objet}}}|sinon_interdire_acces)]]
+
+#SET{retour,#ENV{redirect}|sinon{#ENV{id_rezosocio}|?{#URL_ECRIRE{rezosocio,id_rezosocio=#ID_REZOSOCIO},#URL_ECRIRE{rezosocios}}}}
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#ID_REZOSOCIO|oui)
+	[(#GET{retour}|icone_verticale{<:icone_retour:>,rezosocio,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[[(#ID_REZOSOCIO|?{<:rezosocios:info_modifier_rezosocio:>,<:rezosocios:titre_ajouter_un_rezosocio:>})]
+	<h1>(#ENV{titre,#INFO_TITRE{rezosocio,#ID_REZOSOCIO}|sinon{<:rezosocios:texte_nouveau_rezosocio:>}})</h1>]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_REZOSOCIO|generer_url_entite{rezosocio}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		#FORMULAIRE_EDITER_REZOSOCIO{#ENV{id_rezosocio,oui},'',#GET{redirect},#ENV{associer_objet}}
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/if (window.jQuery) jQuery('#navigation>div,#extra>div').ajaxReload({args:{exec:'#ENV{exec}'}});/*\]\]>*/</script>
+]
+</div>

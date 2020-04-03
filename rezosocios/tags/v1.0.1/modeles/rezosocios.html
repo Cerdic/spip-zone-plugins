@@ -1,0 +1,14 @@
+[(#REM)
+
+	Affiche les liens vers les réseaux sociaux
+
+	Exemples :
+
+	<rezosocios|> : tous
+	<rezosocios|id=10> : le n°10
+	<rezosocios|type_rezo=facebook> : tous les facebook
+	<rezosocios|objet=article|id_objet=10> : ceux liés à l'objet 10
+
+]
+#SET{id,#ENV{id_rezosocio,#ENV{id}}}
+<INCLURE{fond=inclure/rezosocios, id_rezosocio=#GET{id}, env}>

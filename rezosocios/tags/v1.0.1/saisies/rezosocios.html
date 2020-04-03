@@ -1,0 +1,18 @@
+[(#REM)
+
+	Saisie : sélection d'une lien de réseau social
+
+	Paramètres :
+
+	- type_rezo : pour limiter à un type de réseau : facebook, twitter, etc.
+	- multiple : « oui » pour autoriser une sélection de plusieurs valeurs
+	- paramètres de saisies/selection.html
+
+]
+#SET{rezos,#ARRAY}
+#SET{saisie,#ENV{multiple}|=={oui}|?{selection_multiple,selection}}
+<BOUCLE_rezos(REZOSOCIOS) {type_rezo?} {par type_rezo, sinum titre}>
+#SET{libelle,#TITRE \(#TYPE_REZO*\)}
+#SET{rezos,#GET{rezos}|plus{#ARRAY{#ID_REZOSOCIO,#GET{libelle}}}}
+</BOUCLE_rezos>
+<INCLURE{fond=saisies/#GET{saisie}, data=#GET{rezos}, env}/>
