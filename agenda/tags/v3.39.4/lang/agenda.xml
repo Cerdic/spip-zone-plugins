@@ -1,0 +1,54 @@
+<traduction
+	module="agenda"
+	id="agenda--agenda-95214"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip-contrib-extensions/agenda.git"
+	reference="fr">
+	<langue code="ar" url="https://trad.spip.net/tradlang_module/agenda?lang_cible=ar" total="141" traduits="101" relire="0" modifs="0" nouveaux="40" pourcent="71.63">
+		<traducteur nom="cerdic" lien="https://trad.spip.net/auteur/cerdic" />
+		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
+		<traducteur nom="Sami Lejmi" lien="https://trad.spip.net/auteur/sami-lejmi" />
+	</langue>
+	<langue code="br" url="https://trad.spip.net/tradlang_module/agenda?lang_cible=br" total="141" traduits="108" relire="0" modifs="0" nouveaux="33" pourcent="76.60">
+		<traducteur nom="cerdic" lien="https://trad.spip.net/auteur/cerdic" />
+		<traducteur nom="kerivo" lien="https://trad.spip.net/auteur/kerivo" />
+	</langue>
+	<langue code="de" url="https://trad.spip.net/tradlang_module/agenda?lang_cible=de" total="141" traduits="126" relire="1" modifs="0" nouveaux="14" pourcent="89.36">
+		<traducteur nom="cerdic" lien="https://trad.spip.net/auteur/cerdic" />
+		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
+		<traducteur nom="Rainer Müller" lien="https://trad.spip.net/auteur/rainer-muller" />
+		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
+	</langue>
+	<langue code="en" url="https://trad.spip.net/tradlang_module/agenda?lang_cible=en" total="141" traduits="128" relire="9" modifs="0" nouveaux="4" pourcent="90.78">
+		<traducteur nom="cerdic" lien="https://trad.spip.net/auteur/cerdic" />
+		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
+		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
+	</langue>
+	<langue code="es" url="https://trad.spip.net/tradlang_module/agenda?lang_cible=es" total="141" traduits="125" relire="0" modifs="0" nouveaux="16" pourcent="88.65">
+		<traducteur nom="cerdic" lien="https://trad.spip.net/auteur/cerdic" />
+		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
+		<traducteur nom="severo" lien="https://trad.spip.net/auteur/severo" />
+	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/agenda?lang_cible=fr" total="141" traduits="141" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="ja" url="https://trad.spip.net/tradlang_module/agenda?lang_cible=ja" total="141" traduits="127" relire="0" modifs="0" nouveaux="14" pourcent="90.07">
+		<traducteur nom="cerdic" lien="https://trad.spip.net/auteur/cerdic" />
+		<traducteur nom="origenius" lien="https://trad.spip.net/auteur/origenius" />
+	</langue>
+	<langue code="nl" url="https://trad.spip.net/tradlang_module/agenda?lang_cible=nl" total="141" traduits="138" relire="0" modifs="3" nouveaux="0" pourcent="97.87">
+		<traducteur nom="cerdic" lien="https://trad.spip.net/auteur/cerdic" />
+		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
+	</langue>
+	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/agenda?lang_cible=pt_br" total="141" traduits="138" relire="0" modifs="3" nouveaux="0" pourcent="97.87">
+		<traducteur nom="cerdic" lien="https://trad.spip.net/auteur/cerdic" />
+		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
+	</langue>
+	<langue code="ru" url="https://trad.spip.net/tradlang_module/agenda?lang_cible=ru" total="141" traduits="125" relire="0" modifs="0" nouveaux="16" pourcent="88.65">
+		<traducteur nom="cerdic" lien="https://trad.spip.net/auteur/cerdic" />
+		<traducteur nom="olly" lien="https://trad.spip.net/auteur/olly" />
+	</langue>
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/agenda?lang_cible=sk" total="141" traduits="127" relire="0" modifs="0" nouveaux="14" pourcent="90.07">
+		<traducteur nom="cerdic" lien="https://trad.spip.net/auteur/cerdic" />
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
+	</langue>
+</traduction>
