@@ -1,0 +1,21 @@
+<paquet
+	prefix="spipiris"
+	categorie="multimedia"
+	version="2.2.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/spipiris-32.png"
+	documentation="https://contrib.spip.net/Cooliris-pour-SPIP"
+	schema="0.1.0"
+>
+	<nom>Cooliris</nom>
+	<!-- Affiche un mur 3D avec les images jointes d’un article -->
+
+	<auteur>Phil</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+	<copyright>2012-2015</copyright>
+
+	<menu nom="configurer_spipiris" titre="spipiris:configuration_cooliris" parent="menu_configuration" icone="images/spipiris-16.png" />
+
+</paquet>
