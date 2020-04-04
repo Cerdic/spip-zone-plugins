@@ -1,0 +1,25 @@
+<paquet
+	prefix="rubriqueur"
+	categorie="edition"
+	version="2.2.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/rubriqueur-64.png"
+	documentation="https://contrib.spip.net/4561"
+>
+
+	<nom>Rubriqueur</nom>
+
+	<auteur>nicod_</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<menu nom="rubriqueur" titre="rubriqueur:rubriqueur_titre" parent="menu_edition" icone="images/rubriqueur-16.png" action="rubriqueur" />
+
+	<pipeline nom="autoriser" inclure="rubriqueur_autorisations.php"/>
+	<pipeline nom="header_prive" inclure="rubriqueur_pipelines.php"/>
+
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
+	<necessite nom="yaml" compatibilite="[1.5.3;[" />
+
+</paquet>

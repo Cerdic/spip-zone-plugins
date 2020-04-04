@@ -1,0 +1,56 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	<h3 class="titrem">
+		<:rubriqueur:rubriqueur_titre:>
+	</h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>] 
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#EDITABLE)
+	<form method="post" action="#ENV{action}#confirmation">
+		<[(#DIV|sinon{ul})] class="editer-groupe">
+			#ACTION_FORMULAIRE{#ENV{action}}
+			
+			[(#SAISIE{selecteur_rubrique, rubrique_racine, 
+				label=<:rubriqueur:rubrique_racine:>, 
+				explication=<:rubriqueur:rubrique_racine_explications:>})]
+
+			[(#ENV{langues}|count|>{1}|oui)
+			[(#SAISIE{selection, langue, label=<:rubriqueur:langue:>, 
+				data=#ENV{langues}, cacher_option_intro=oui, obligatoire=oui})]
+			]
+
+			[(#SAISIE{textarea, rubriques, obligatoire=oui, 
+				label=<:rubriqueur:rubriques:>, 
+				explication=<:rubriqueur:rubriques_explications:>})]
+
+			[(#SAISIE{checkbox, numeroter, label=<:rubriqueur:numeroter:>, 
+				explication=<:rubriqueur:numeroter_explication:>,
+				data=#ARRAY{rubriques,<:rubriqueur:numeroter_rubriques:>,articles,<:rubriqueur:numeroter_articles:>}})]
+							
+			[(#SAISIE{case, creer_articles, label_case=<:rubriqueur:creer_articles:>})]
+
+			#SET{intitule_bouton,#EVAL{_T('previsualiser')}}
+			<a name="confirmation"></a>
+
+			[
+			#SET{intitule_bouton,#EVAL{_T('rubriqueur:bouton_creer')}}
+			<[(#DIV|sinon{li})] class="editer rubriqueur_previsu">
+				(#ENV**{erreurs}|table_valeur{previsu}|propre)
+			</[(#DIV|sinon{li})]>
+			[(#SAISIE{oui_non, confirmer, label=<:rubriqueur:confirmer_import:>})]
+			]
+
+			[
+			<[(#DIV|sinon{li})] class="editer">
+				(#ENV**{erreurs}|table_valeur{erreur_analyse}|propre)
+			</[(#DIV|sinon{li})]>
+			]
+		</[(#DIV|sinon{ul})]>
+
+		<p class="boutons">
+			<span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="#GET{intitule_bouton}"/>
+		</p>
+	</form>
+	]
+</div>
