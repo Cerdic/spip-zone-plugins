@@ -1,0 +1,100 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+#INCLURE{img_pack/datePicker.css}
+#INCLURE{img_pack/timePicker.css}
+
+.pagination a.creer {float:#GET{left};}
+/* vevent */
+li.item div.vevent h3 {margin:0;font-size:1.1em;}
+li.item div.vevent p {margin:2px 0 0;}
+li.item div.vevent p.date {font-size: 0.98em; }
+ul.evenements li.item.court p { display: none; }
+li.item div.vevent p.category {font-size:0.9em;color:#999;}
+
+/* liste des evenements */
+.plier_deplier { float: #GET{left}; font-size: 0.9em; }
+.evenements li.item { padding-#GET{left}: 130px; }
+.evenements li.court { border-width: 1px; }
+.evenements li.item .jour { width: 120px; margin-#GET{left}: -130px; float: #GET{left}; display: inline; position: relative; overflow: hidden; white-space: nowrap; font-size: 98%; }
+
+li.item .repetitions {margin-top:0.5em;font-size:0.9em;}
+li.court .repetitions {display: none;}
+li.item .repetitions ul,
+li.item .repetitions li {display:inline;margin:0;padding:0;}
+
+.evenements p.actions {text-align:right;font-size:0.9em;margin:5px 0 0;}
+
+/* sur la fiche rubriques */
+.naviguer .agenda-statut {float:#GET{left};margin-#GET{right}:5px;}
+
+/* sur la fiche article */
+.articles .fiche_objet #agenda { border: 1px solid #999;}
+.articles .fiche_objet #agenda h2.titre { margin: 0; padding: 4px 4px 8px; background: #GET{claire}; font-size: 100%; }
+.articles .fiche_objet .plier_deplier a:hover { color:#333;}
+.articles .fiche_objet .evenements { margin-left: 4px; margin-right: 4px; }
+.articles .fiche_objet .evenements li.item { padding-left: 120px; }
+.articles .fiche_objet .evenements li.item .jour { width: 110px; margin-left: -120px; }
+.articles .fiche_objet .evenements span.lien_article {display:none;}
+
+/* edition d'un evenement */
+.formulaire_editer_evenement .editer_parent {padding-#GET{left}:10px;background:#fff;}
+.formulaire_editer_evenement .editer_parent label {margin-#GET{left}:0;display:block;float:left;padding:2px 0;}
+
+.formulaire_editer_evenement .editer_horaire {padding-top:0;margin-top:0;}
+.formulaire_editer_evenement .editer_horaire label {margin:0;display:inline;width:auto;float:none;}
+.formulaire_editer_evenement li.editer_date,
+.formulaire_editer_evenement li.editer_date li {clear:left;}
+.formulaire_editer_evenement li.editer_date_debut_fin label { /*vertical-align: top;*/ }
+
+.formulaire_editer_evenement input.date {width:7em;padding-right:20px;-moz-box-sizing: content-box;-webkit-box-sizing: content-box;-ms-box-sizing: content-box;box-sizing: content-box;}
+.formulaire_editer_evenement span.afficher_horaire label {float:none;display:inline;padding:0;margin:0;}
+.formulaire_editer_evenement input.heure {width:4.5em;}
+
+.formulaire_editer_evenement li.editer_date label.heure {display:none;}
+.formulaire_editer_evenement li.editer_date label {display:inline;float:none;margin:0;}
+
+.formulaire_editer_evenement .editer_inscription .choix {display:inline;}
+.formulaire_editer_evenement .editer_inscription .choix input.text {width:50px;margin-left:1em;/*vertical-align:top;*/}
+
+/* le picker */
+a.dp-choose-date { display: inline-block; padding: 0; margin: 3px 0 0 -19px; vertical-align: bottom; }
+#repetitions_picker {float:left;}
+li.editer_repetitions textarea {float:left;width:110px;height:11em;}
+
+div.time-picker {font-size:11px;  width:5em; /* needed for IE */}
+
+/* selecteur de mots */
+.formulaire_editer_evenement li.editer_mots ul#mots_sel {display:block;}
+.formulaire_editer_evenement li.editer_mots ul#mots_sel li {padding:2px;background:#eee;border:1px solid #999;display:block;float:left;margin:0 4px 3px 0;width:auto;clear:none;font-size:0.9em;}
+.formulaire_editer_evenement li.editer_mots ul#mots_sel li em {display:none;}
+.formulaire_editer_evenement li.editer_mots ul#mots_sel li.show {font-weight:bold;}
+.formulaire_editer_evenement li.editer_mots .mots_chemin {clear:left;margin:1em 0 0.5em 0;border-bottom:1px solid #eee;}
+.formulaire_editer_evenement li.editer_mots ul.groupes_contenus {clear:left;}
+.formulaire_editer_evenement li.editer_mots ul.groupes_contenus li {padding:0;margin:0;border:0;clear:none;float:left;width:48%;margin-right:5px;}
+.formulaire_editer_evenement li.editer_mots ul.groupes_contenus li.groupe a {background:url(triangle-droite.gif) no-repeat center right;padding-right:12px;}
+.formulaire_editer_evenement li.editer_mots ul.groupes_contenus li.mot a {color:#GET{claire};}
+
+.formulaire_editer_evenement li.editer_repetitions div.ajouter_repetitions.cachee #repetitions_picker {display:none;}
+.formulaire_editer_evenement li.editer_repetitions div.ajouter_repetitions.cachee textarea {margin:0;padding:0;height:1px;visibility:hidden;} /* bug ff : si on le met hidden on ne peut plus saisir dedans apres */
+
+/* Calendrier */
+ul.menu li .pagination a, ul.menu li .pagination strong.on { display:inline; }

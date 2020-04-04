@@ -1,0 +1,68 @@
+[(#REM) Trouver, par rapport à la date du jour, la date de début de la période ]
+[(#SET{date_debut,[(#ENV{date_debut,#DATE}|programmation_debut{#ENV{jour_debut}}|affdate{'Y-m-d'})]})]
+<div class="programmation_agenda">
+	<table summary="<:agenda:programmation_summary:>" class="spip programmation">
+		<caption><:agenda:programmation_caption:></caption>
+		<thead>
+				<tr class="row_first"><th scope="col">[(#GET{date_debut}|agenda_affdate_debut_fin{[(#GET{date_debut}|programmation_datedecalejours{[(#ENV{duree,7}|moins{1})]})],non, abbr}|typo)] (<abbr title="[<:spip:date_une_semaine|UCFirst:> (#GET{date_debut}|affdate{'W'})]">[(#GET{date_debut}|affdate{'W'})]</abbr>)</th>
+				[(#REM) Affiche la première ligne du tableau donnant les jours concernés ]
+				<BOUCLE_Jours(ENUM){0,#ENV{duree,7}}>
+				[(#SET{lejour,[(#GET{date_debut}|programmation_datedecalejours{#VALEUR})]})]
+				<th scope="col"><abbr title="[(#GET{lejour}|nom_jour|ucfirst)]">[(#GET{lejour}|nom_jour|substr{0,2}|ucfirst)]</abbr> [(#GET{lejour}|affdate{'j/n'})]</th>
+				</BOUCLE_Jours>
+			</tr>
+		</thead>
+		<B_Films>
+		<tbody>
+			[(#REM) Récupérer le liste des évenements entre la date de début et sur la durée choisie.
+				Ne prendre qu'un événement par article ]
+			<BOUCLE_Films(EVENEMENTS){branche?}{id_article?}{statut=publie}{date_debut>=(#GET{date_debut}|affdate{'Y-m-d'})}{date_debut<(#GET{date_debut}|programmation_datedecalejours{(#ENV{duree,7})}|affdate{'Y-m-d'})}{fusion evenements.id_article}{par titre}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_even,row_odd})]">
+				<th scope="row">[(#ID_ARTICLE|<>{#ENV{id_article}}|?{<a href="[(#URL_ARTICLE{#ID_ARTICLE})]">})]#TITRE[(#ID_ARTICLE|<>{#ENV{id_article}}|?{</a>})]</th>
+				[(#REM) Lister les événements de l'article, jour par jour sur la période. ]
+				<BOUCLE_JoursFilm(ENUM){0,#ENV{duree,7}}>
+				[(#SET{lejour,[(#GET{date_debut}|programmation_datedecalejours{#VALEUR})]})]
+				<B_HorraireFilm>
+				<td>
+				<BOUCLE_HorraireFilm(EVENEMENTS){id_article=#_Films:ID_ARTICLE}{date_debut>=(#GET{lejour}|affdate{'Y-m-d'})}{date_debut<(#GET{lejour}|programmation_datedecalejours{1}|affdate{'Y-m-d'})}{par date_debut}{"<br />"}>
+				[(#DATE_DEBUT|affdate{'H:i'})]
+				</BOUCLE_HorraireFilm>
+				</td>
+				</B_HorraireFilm>
+				<td> </td>
+				<//B_HorraireFilm>
+				</BOUCLE_JoursFilm>
+			</tr>
+			</BOUCLE_Films>
+		</tbody>
+	</table>
+	</B_Films>
+		<tbody>
+			<tr class="row_even">
+				<td colspan="[(#ENV{duree,7}|plus{1})]"><:agenda:programmation_vide:></td>
+			</tr>
+		</tbody>
+	</table>
+	<//B_Films>
+	<div class="programmation_nav">
+	[(#SET{precedent,[(#GET{date_debut}|programmation_datedecalejours{-[(#ENV{duree,7})]}|affdate{'Y-m-d'}|programmation_debut{#ENV{jour_debut}}|affdate{'Y-m-d'})]})]
+	[(#SET{suivant,[(#GET{date_debut}|programmation_datedecalejours{#ENV{duree,7}}|affdate{'Y-m-d'}|programmation_debut{#ENV{jour_debut}}|affdate{'Y-m-d'})]})]
+	[(#REM) Ne pas afficher le bouton Précédent s'il n'y a pas de programmation définie avant ]
+	<BOUCLE_ProgrammationPassee(EVENEMENTS){branche?}{id_article?}
+		{statut=publie}
+		{date_debut>=(#GET{precedent})}
+		{date_debut<(#GET{date_debut})}
+		{0,1}>
+	[<a href="(#SELF|parametre_url{date_debut,#GET{precedent}})" class='ajax preload'><:agenda:programmation_nav_precedent:> ([(#GET{precedent}|affdate{'j/n'})])</a>]
+	#SET{passee,1}
+	</BOUCLE_ProgrammationPassee>
+	[(#REM) Ne pas afficher le bouton Suivant s'il n'y a pas de programmation définie plus tard ]
+	<BOUCLE_ProgrammationFuture(EVENEMENTS){branche?}{id_article?}
+		{statut=publie}
+		{date_debut>=(#GET{suivant})}
+		{0,1}>
+	[(#GET{passee}|oui)|]
+	[<a href="(#SELF|parametre_url{date_debut,#GET{suivant}})" class='ajax preload'><:agenda:programmation_nav_suivant:> ([(#GET{suivant}|affdate{'j/n'})])</a>]
+	</BOUCLE_ProgrammationFuture>
+	</div>
+</div>

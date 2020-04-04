@@ -1,0 +1,11 @@
+#SET{self,#SELF|parametre_url{id_evenement|date_debut,''}|parametre_url{debut_mois,#EVAL{_request('debut_mois')}}}
+<ul class='agenda_navigation menu'>
+<li>[(#GET{self}|aoustrong{<:agenda:evenements_a_venir:>,#ENV{date_debut,''}|non})]</li>
+<BOUCLE_debut(EVENEMENTS){par date_debut}{0,1}{id_article?}{id_rubrique?}{id_evenement_source?}>
+<li>[(#GET{self}|parametre_url{date_debut,#DATE_DEBUT|affdate{Y-01-01}}|aoustrong{<:agenda:evenements_depuis_debut:>,#ENV{date_debut,''}|=={#DATE_DEBUT|affdate{Y-01-01}}})]</li>
+</BOUCLE_debut>
+[<li>
+(#INCLURE{fond=prive/listes/mois-evenements}{ajax}{env}{self=#GET{self}})
+</li>]
+</ul>
+[(#INCLURE{fond=prive/listes/rubriques-agenda}{ajax}{env}{self=#GET{self}})]
