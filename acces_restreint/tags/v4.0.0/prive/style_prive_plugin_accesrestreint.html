@@ -1,0 +1,48 @@
+#CACHE{0}
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+.liste-items.zones .item > .actions {display:block;float:#GET{right};}
+.item.zone p.actions {float:none;text-align:#GET{right};margin:0;}
+
+.item.zone .quoi {display:block;padding-left:20px;background:url(#CHEMIN_IMAGE{restreint-16.png}) center left no-repeat;background-size: 16px;}
+
+/* formulaire d'édition d'une zone */
+.formulaire_editer_zone .filtrer { float: right; margin-top: -1em; font-size: 0.9em; }
+.formulaire_editer_zone input { font-size: inherit }
+.formulaire_spip ul.hierarchie {margin: 0; padding: 2em 0 0;}
+.formulaire_spip ul.hierarchie ul {margin:0;padding:0;}
+.formulaire_spip ul.hierarchie li {margin:0;margin-#ENV{left}:15px;padding:0;}
+.formulaire_spip ul.hierarchie li li {border-#ENV{left}:1px solid #ddd;}
+.formulaire_spip ul.hierarchie li.checked {background:[#(#ENV{claire}|couleur_eclaircir)];}
+.formulaire_spip ul.hierarchie li.checked .choix {
+	background-color: transparent;
+}
+.formulaire_spip ul.hierarchie li.checked > .choix label {font-weight:bold;}
+
+.liste-items.zones .item {padding-left:1em;padding-right: 1em;position: relative}
+.item.zone .info-acces {position: absolute;right:5px;top:5px;max-width: 48px;height: auto;}
+
+.zone_edit .formulaire_editer_liens {margin-bottom: 0;}
+.formulaire_editer_liens .liste-objets.zones .publique, .formulaire_editer_liens .liste-objets.zones .privee {width:4em;text-align: center;}
+.formulaire_editer_liens .liste-objets.zones tr > .action {width:140px;}
+
+.infos .bloc-info-acces {margin: 1em 0; text-align: center;}
+.infos .bloc-info-acces .info-acces {max-width: 48px; height: auto;}

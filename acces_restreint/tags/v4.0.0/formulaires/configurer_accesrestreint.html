@@ -1,0 +1,61 @@
+<div class="ajax formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		#SET{fl,accesrestreint}
+
+		<fieldset>
+			<legend><:accesrestreint:label_creer_htaccess:></legend>
+			<div class="editer-groupe">
+				#SET{name,accesrestreint_proteger_documents}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<div class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]
+					<p class="explication"><:accesrestreint:explication_creer_htaccess:></p>
+					#SET{val,oui}
+					<div class="choix">
+						<input type="radio" class="radio" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)checked="checked"] />
+						<label for="#GET{name}_#GET{val}"><:accesrestreint:label_creer_htaccess_oui:></label>
+					</div>
+					#SET{val,non}
+					<div class="choix">
+						<input type="radio" class="radio" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)checked="checked"] />
+						<label for="#GET{name}_#GET{val}"><:accesrestreint:label_creer_htaccess_non:></label>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+
+		<fieldset>
+			<legend><:info_fichiers_authent:></legend>
+			<div class="explication"><:texte_fichier_authent{dossier=#GET{dossier}}:></div>
+			<div class="editer-groupe">
+				#SET{name,creer_htpasswd}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<div class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					[<span class='erreur_message'>(#GET{erreurs})</span>]
+					#SET{dossier,#VAL{_DIR_TMP}|constant|joli_repertoire|wrap{'<tt>'}}
+					#SET{val,oui}
+					<div class="choix">
+						<input type="radio" class="radio" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)checked="checked"] />
+						<label for="#GET{name}_#GET{val}"><:item_creer_fichiers_authent:></label>
+					</div>
+					#SET{val,non}
+					<div class="choix">
+						<input type="radio" class="radio" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)checked="checked"] />
+						<label for="#GET{name}_#GET{val}"><:item_non_creer_fichiers_authent:></label>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

@@ -1,0 +1,8 @@
+[(#AUTORISER{modifier,zone}|sinon_interdire_acces)]
+<h1 class="grostitre"><:accesrestreint:titre_zones_acces:></h1>
+[(#AUTORISER{modifier,zone})
+	[(#INCLURE{fond=prive/squelettes/inclure/acces_restreint, env, ajax})]
+	
+	[(#URL_ECRIRE{zone_edit,new=oui}|parametre_url{redirect,#SELF}|icone_verticale{<:accesrestreint:creer_zone:>,zone-24.png,new,right})]
+
+]

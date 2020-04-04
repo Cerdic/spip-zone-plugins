@@ -1,0 +1,15 @@
+[(#ENV{id_zone}|intval|oui)
+#BOITE_OUVRIR{'',info}
+<div class='infos'>
+	<div class='numero'><:accesrestreint:zone_numero:><p>[(#ENV{id_zone})]</p></div>
+
+	<div class="bloc-info-acces">
+		#SET{acces_ok,#ID_ZONE|accesrestreint_acces_zone|oui}
+		[(#SET{alt,#GET{acces_ok}|?{<:accesrestreint:info_vous_avez_acces_a_cette_zone:>,<:accesrestreint:info_vous_navez_pas_acces_a_cette_zone:>}})]
+		[(#CHEMIN_IMAGE{#GET{acces_ok}|?{acces-ok-48.png,acces-interdit-48.png}}|balise_img{'',info-acces}|inserer_attribut{title,#GET{alt}})<br />]
+		[<strong>(#GET{alt})</strong>]
+	</div>
+
+</div>
+#BOITE_FERMER
+]

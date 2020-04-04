@@ -1,0 +1,104 @@
+<div class="formulaire_spip formulaire_editer formulaire_editer_zone formulaire_editer_zone-#ENV{id_zone,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<input type="hidden" name="id_zone" value="#ENV{id_zone}" />
+		<div class="editer-groupe">
+			<div class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+				<label for="titre"><:accesrestreint:label_titre_zone:></label>[
+					<span class="erreur_message">(#ENV**{erreurs}|table_valeur{titre})</span>
+					]<input type="text" class="text" name="titre" id="titre" value="#ENV{titre}" />
+			</div>
+		</div>
+
+		<fieldset class="droits">
+			<legend><:accesrestreint:label_droits_acces:></legend>
+			<div class="editer-groupe">
+				[(#ENV{id_zone}|intval|non|et{#AUTORISER{modifier,zone}})
+				<div class="editer editer_droits_admin pleine_largeur">
+					<div class="choix"><input type="checkbox" name="droits_admin" value="oui" id="droits_admin" checked="checked" />
+					<label for="droits_admin"><:accesrestreint:ajouter_droits_auteur:></label></div>
+				</div>]
+				<div class="editer editer_publique_privee pleine_largeur">
+					<div class="choix"><input type="checkbox" name="publique" value="oui" id="publique"[ (#PUBLIQUE|=={oui}|oui)checked="checked"] />
+					<label for="publique"><:accesrestreint:zone_restreinte_publique:></label></div>
+					<div class="choix"><input type="checkbox" name="privee" value="oui" id="privee"[ (#PRIVEE|=={oui}|oui)checked="checked"] />
+					<label for="privee"><:accesrestreint:zone_restreinte_espace_prive:></label></div>
+				</div>
+				<div class="editer editer_autoriser_si_connexion pleine_largeur">
+					<div class="choix"><input type="checkbox" name="autoriser_si_connexion" value="oui" id="autoriser_si_connexion"[ (#AUTORISER_SI_CONNEXION|=={oui}|oui)checked="checked"] />
+					<label for="autoriser_si_connexion"><:accesrestreint:zone_restreinte_autoriser_si_connexion_label:></label></div>
+				</div>
+			</div>
+		</fieldset>
+
+		<div class="editer-groupe">
+			<div class="editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
+				<label for="descriptif"><:accesrestreint:descriptif:></label>[
+				<span class="erreur_message">(#ENV**{erreurs}|table_valeur{descriptif})</span>
+				]<textarea name="descriptif" rows="5" id="descriptif">[(#ENV{descriptif})]</textarea>
+			</div>
+		</div>
+
+		<fieldset class="rubriques">
+			<legend><:accesrestreint:rubriques_zones_acces:></legend>
+			<div class="filtrer">
+				<label for="filtrer_rubriques"><:accesrestreint:label_filtrer_rubriques:> :</label>
+				<input type="input" id="filtrer_rubriques" placeholder="<:accesrestreint:placeholder_filtrer_rubriques|attribut_html:>">
+			</div>
+			[(#INCLURE{fond=formulaires/inc-select_rubriques}{rubriques=#ENV{rubriques}})]
+		</fieldset>
+
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type="submit" class="submit" value="[(#ENV{id_zone}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]" /></p>
+	</div></form>
+	]
+</div>
+
+<script type="text/javascript">
+	/*<![CDATA[*/
+		(function($){
+
+			var tous_les_elements = $('.formulaire_editer_zone ul.hierarchie li');
+			console.log(tous_les_elements);
+
+			// on filtre les plugins
+			$('input#filtrer_rubriques').keyup(function(){
+				var that = this;
+				jQuery('.formulaire_editer_zone .rubriques > legend').attr('data-filtrer',$(this).val());
+				var elements_trouves = tous_les_elements.filter(function(i, li){
+					var listItemText = $(li).text().toUpperCase()
+					searchText       = that.value.toUpperCase();
+					return ~listItemText.indexOf(searchText);
+				});
+				tous_les_elements.hide();
+				elements_trouves.show();
+			});
+
+			onAjaxLoad(refiltrer);
+
+			// Au rechargement de la page et lors du chargement du descriptif d'un plugin
+			// on recupere l'éventuel filtre et on l'applique si présent
+			function refiltrer(){
+				if (jQuery('.formulaire_editer_zone .rubriques > legend').attr('data-filtrer')) {
+					var elements_trouves = tous_les_elements.filter(function(i, li){
+						var listItemText = $(li).text().toUpperCase()
+						var searchText = jQuery('.formulaire_editer_zone .rubriques > legend').attr('data-filtrer');
+						jQuery('input#filtrer_rubriques').val(searchText);
+						return ~listItemText.indexOf(searchText.toUpperCase());
+					});
+					tous_les_elements.hide();
+					elements_trouves.show();
+				}
+			}
+
+		})(jQuery);
+
+	/*]]>*/
+</script>
