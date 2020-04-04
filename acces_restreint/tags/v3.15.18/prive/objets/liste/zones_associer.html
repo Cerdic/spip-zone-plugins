@@ -1,0 +1,59 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+}})
+]
+#SET{exclus,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
+#SET{debut,#ENV{debutzonea,#EVAL{_request("debutzonea");}}}
+<input type="hidden" name="debutzonea" value="#GET{debut}" />
+<B_liste_aut>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutzonea,#EVAL{_request("debutzonea");}}}
+#ANCRE_PAGINATION
+[<h3><:info_resultat_recherche:> &laquo;(#ENV{recherche})&raquo;</h3>]
+<div class="liste-objets liste-objets-associer zones">
+<table class='spip liste'>
+[<caption><span class="caption"><strong>(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{accesrestreint:info_1_zone,accesrestreint:info_nb_zones}})</strong>
+<span class="recherche">
+	<label for="recherche-#ENV{id}"><:info_rechercher_02:></label>
+	<input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" />
+	<input type="submit" class="tout_voir" name="tout_voir" value="<:info_tout_afficher:>" />
+</span>
+</span>
+</caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='publique' scope='col'><:accesrestreint:publique:></th>
+			<th class='privee' scope='col'><:accesrestreint:privee:></th>
+			<th class='action' scope='col'>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_aut(ZONES){!id_zone IN #GET{exclus}}{tout}{where?}{recherche?}{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} zonea}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)]">
+			<td class='picto'>[(#CHEMIN_IMAGE{zone-16.png}|balise_img)]</td>
+			<td class='titre principale'><a href="[(#ID_ZONE|generer_url_entite{zone})]"
+																																						title="<:info_numero_abbreviation|attribut_html:> #ID_ZONE">[(#RANG). ]#TITRE</a></td>
+			<td class='publique secondaire'>[[(#CHEMIN_IMAGE{restreint-16.png}|balise_img{<:accesrestreint:publique:>})](#PUBLIQUE|=={oui}|oui)]</td>
+			<td class='privee secondaire'>[[(#CHEMIN_IMAGE{restreint-16.png}|balise_img{<:accesrestreint:publique:>})](#PRIVEE|=={oui}|oui)]</td>
+			<td class='action'><button type="submit" class="button" name="ajouter_lien[zone-#ID_ZONE-#OBJET-#ID_OBJET]" value="+"><:accesrestreint:titre_ajouter_zone:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button></td>
+		</tr>
+	</BOUCLE_liste_aut>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_aut>
+[(#ENV{recherche}|oui)
+<div class="liste-objets liste-objets-associer zones caption-wrap">
+<span class="caption"><strong>[(#VAL{accesrestreint:info_recherche_auteur_zero}|_T{#ARRAY{cherche_auteur,#ENV{recherche}}})]</strong>
+<span class="recherche">
+	<label for="recherche-#ENV{id}"><:info_rechercher_02:></label>
+	<input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" />
+	<input type="submit" class="tout_voir" name="tout_voir" value="<:info_tout_afficher:>" />
+</span>
+</span>
+</div>
+]<//B_liste_aut>
