@@ -1,0 +1,20 @@
+<paquet
+	prefix="date_creation"
+	categorie="date"
+	version="1.0.2"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	schema="1.0.0"
+	logo="prive/themes/spip/images/date_creation-64.png"
+	documentation="https://contrib.spip.net/4967"
+>
+	<nom>Date de création</nom>
+	<auteur lien='https://contrib.spip.net/nicod_'>nicod_</auteur>
+	<credit>Icone de Saeful Muslim, the Noun Project</credit>
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="declarer_tables_principales" inclure="date_creation_administrations.php" />
+	<pipeline nom="pre_insertion" inclure="date_creation_pipelines.php" />
+	<pipeline nom="afficher_contenu_objet" inclure="date_creation_pipelines.php" />
+	
+</paquet>
