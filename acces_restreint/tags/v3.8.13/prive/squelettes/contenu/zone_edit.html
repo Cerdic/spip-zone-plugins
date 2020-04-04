@@ -1,0 +1,19 @@
+[(#ID_ZONE|oui)
+	[(#AUTORISER{modifier,zone,#ID_ZONE}|sinon_interdire_acces)]]
+[(#ID_ZONE|non)
+	[(#AUTORISER{creer,zone,#ID_ZONE,'','',#ARRAY{associer_objet,#ENV{associer_objet}}}|sinon_interdire_acces)]]
+
+#SET{retour,#ENV{redirect}|sinon{#ENV{id_zone}|?{#URL_ECRIRE{zones,id_zone=#ID_ZONE},#URL_ECRIRE{zones}}}}
+<div class='cadre-formulaire-editer'>
+	<div class="entete-formulaire">
+		[(#GET{retour}|icone_verticale{<:icone_retour:>,zone,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+		[[(#VAL{zone}|objet_info{texte_modifier}|_T)]
+		<h1>(#ENV{titre,#INFO_TITRE{zone,#ID_ZONE}|sinon{<:info_sans_titre:>}})</h1>]
+	</div>
+	<div class="ajax">
+		#FORMULAIRE_EDITER_LIENS{zone,#ID_ZONE,auteurs,' '}
+	</div>
+
+	#FORMULAIRE_EDITER_ZONE{#ENV{id_zone,oui},#GET{retour},#ENV{associer_objet}}
+</div>
+
