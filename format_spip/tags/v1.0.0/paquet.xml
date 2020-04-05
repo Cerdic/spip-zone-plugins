@@ -1,0 +1,20 @@
+<paquet
+	prefix="formatspip"
+	categorie="edition"
+	version="1.0.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="images/formatspip-48.png"
+>	
+
+	<nom>Format SPIP</nom>
+	<!-- Permettre à un rédacteur de pouvoir copier le code spip d'un article -->
+
+	<auteur>Joseph LARMARANGE</auteur>
+	<auteur>RealET</auteur>
+
+	<pipeline nom="affiche_milieu" inclure="formatspip_pipelines.php" />
+
+	<utilise nom="inserer_modeles" compatibilite="[1.2.11;[" />
+
+</paquet>
