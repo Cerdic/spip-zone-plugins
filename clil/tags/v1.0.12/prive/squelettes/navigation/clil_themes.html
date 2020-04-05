@@ -1,0 +1,20 @@
+<style>
+	.liste-items .item a {font-size:11px;}
+	.liste-items.themes_clil { margin:1.385em 0;}
+	.bouton_tous { padding:10px 0; font-weight:bold; }
+</style>
+[(#BOITE_OUVRIR{<:clil:clil_titre:>,info})]
+<B_nav>
+	<div class="liste">
+		<a class='tous none bouton_tous' href='#' onclick='$(".clil_themes_secteur").show();$(this).siblings("ul").find(">li").removeClass("on");$(this).hide();return false;'>[<:clil_theme:icone_voir_tous_themes:>]</a>
+		<ul class='liste-items themes_clil'>
+		<BOUCLE_nav(CLIL_THEMES){par libelle}{racine}>
+		<li class="item"><a href='#clil_theme-#ID_CLIL_THEME'
+					 onclick='$(".clil_themes_secteur").hide().filter("#theme-secteur-#ID_CLIL_THEME").show();$(this).parent().addClass("on").siblings().removeClass("on").parent().siblings("a.tous").show();return false;'
+				>#LIBELLE</a></li>
+		</BOUCLE_nav>
+		</ul>
+		<a class='tous none bouton_tous' href='#' onclick='$(".clil_themes_secteur").show();$(this).siblings("ul").find(">li").removeClass("on");$(this).hide();return false;'>[<:clil_theme:icone_voir_tous_themes:>]</a>
+	</div>
+</B_nav>
+#BOITE_FERMER

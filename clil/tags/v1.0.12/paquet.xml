@@ -1,0 +1,38 @@
+<paquet
+	prefix="clil"
+	categorie="divers"
+	version="1.0.12"
+	etat="test"
+	compatibilite="[3.0.18;3.2.*]"
+	logo="prive/themes/spip/images/clil-64.png"
+	documentation=""
+	schema="1.0.2" 
+>
+	<!--
+		Paquet genere le 2015-07-07 15:59:46
+	-->
+
+	<nom>Thèmes CLIL</nom>
+
+	<auteur lien='http://www.akilia.net'>Pierre Miquel</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="bouq" compatibilite="[1.0.0;[" />
+	<necessite nom="cextras" compatibilite="[3.6.0;[" />
+
+	<pipeline nom="autoriser" inclure="clil_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/clil.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/clil.php" />
+	<pipeline nom="declarer_champs_extras" inclure="base/clil.php" />
+
+	
+	<menu nom="configurer_clil" titre="clil:clil_titre" parent="menu_publication" icone="images/clil-16.png" />
+	<onglet nom="configurer_clil" titre="clil:onglet_clil" parent="configurer_clil" icone="images/add-32.png" />
+	<onglet nom="configurer_clil_libelles" titre="clil:onglet_clil_libelle" parent="configurer_clil" icone="images/edit-24.png" action="clil_themes" />
+
+	<spip compatibilite="[3.0.18;3.0.*]">
+		<necessite nom="spip_bonux" compatibilite="[3.2.1;[" />
+	</spip>
+
+</paquet>
