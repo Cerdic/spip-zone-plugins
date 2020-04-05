@@ -1,0 +1,19 @@
+<paquet
+	prefix="informerpremiereconnexion"
+	categorie="auteur"
+	version="1.0.1"
+	etat="test"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="informerpremiereconnexion.png"
+	documentation="https://contrib.spip.net/Informer-a-la-premiere-connexion"
+>
+	<nom>Informer à la première connexion</nom>
+	<!-- Afficher un message explicatif lors de la première connexion d'un utilisateur -->
+
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<auteur lien="http://www.avec-limousin.fr/">AVEC Limousin</auteur>
+	<copyright>2014</copyright>
+	<licence>GPL v3</licence>
+	
+	<pipeline nom="affichage_final" inclure="informerpremiereconnexion_pipelines.php" />
+</paquet>
