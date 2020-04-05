@@ -1,0 +1,57 @@
+<script type="text/javascript">
+
+if (window.jQuery) {
+	function rang(){
+		[(#SPIP_VERSION|version_compare{3.2, <}|oui)
+		$.getScript("#CHEMIN{prive/javascript/ui/core.js}", function(){
+		$.getScript("#CHEMIN{prive/javascript/ui/widget.js}", function(){
+		$.getScript("#CHEMIN{prive/javascript/ui/mouse.js}", function(){
+		$.getScript("#CHEMIN{prive/javascript/ui/sortable.js}", function(){
+		]
+			
+		$(".spip.liste tbody").each(function(){
+			if($(this).find('tr').length > 1 && $(this).find('tr').data('id_objet')) {
+				// ajouter automatiquement une colonne avec le picto "draggable" si elle n'est pas présente
+				if(!$(this).find('img[src*=draggable]').length) {
+					$(this).parent('table').find('thead').find('tr').prepend("<th class='drag'>&nbsp;</th>");
+					$(this).find('tr').prepend("<td class='drag'>[(#CHEMIN_IMAGE{draggable-16.png}|balise_img)]</td>");
+				}
+				// ajouter le comportement "sortable"
+				$(this).sortable({
+					placeholder: ".ui-state-highlight",
+					cursor: "move",
+					containment: "parent",
+					tolerance: "pointer",
+					classes: {"ui-sortable-helper": "rang-sortable-helper"},
+					update: function( event, ui ) {
+						var url = "[(#VAL{trier_items}|generer_url_action{#ENV{objet}, 1})]";
+						var $me = $(this);
+						var liste = $me.sortable("toArray", {attribute: 'data-id_objet'});
+						var page = parseInt(window.location.search.split('&debut_liste_#ENV{suffixe_pagination}=')[1]);
+						if (isNaN(page) === false) {
+							page = (page < 0) ? 0 : page;
+						} else {
+							page = 0;
+						}
+	
+						$.post(url, {objet: "#ENV{objet}", id_parent: "#ENV{id_parent, rien}", debut_liste: page, trier: liste})
+							.done(function(data){
+								$me.ajaxReload();
+							});
+					}
+				});
+				$(this).disableSelection();
+			}
+		});		
+
+		[(#SPIP_VERSION|version_compare{3.2, <}|oui)
+		})})})})
+		]
+	}
+
+	/* ---------------- ECOUTEURS -------------- */
+	// Lancement du script au chargement de la page
+	jQuery(function($){ rang(); });
+}
+
+</script>

@@ -1,0 +1,28 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:rang:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+
+	<form method="post" action="#ENV{action}">
+	<[(#DIV|sinon{ul})]>
+		
+		#ACTION_FORMULAIRE{#ENV{action}}
+		#SET{name, objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		[(#SET{exclus, #REM|rang_objets_a_exclure})]
+
+		<[(#DIV|sinon{li})] class="editer">
+			<label><:rang:cfg_objets:></label>
+			<p class="explication"><:rang:cfg_objets_explication:></p>
+			#INCLURE{fond=formulaires/inc-choisir-objets,name=#GET{name},selected=#ENV**{#GET{name}},exclus=#GET{exclus}}
+		</[(#DIV|sinon{li})]>
+
+		[(#SAISIE{case, rang_max, label=<:rang:cfg_rang_max:>, explication=<:rang:cfg_rang_max_explication:>})]
+		
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	
+	</[(#DIV|sinon{ul})]>
+	</form>
+</div>
