@@ -1,0 +1,25 @@
+<?php
+include_spip('lib/elfinder-2.0-rc1/php/elFinderConnector.class');
+include_spip('lib/elfinder-2.0-rc1/php/elFinder.class');
+include_spip('lib/elfinder-2.0-rc1/php/elFinderVolumeDriver.class');
+include_spip('inc/elFinderVolumeSPIP.class');
+
+
+$opts = array(
+	'debug' => false,
+	'roots' => array(
+			array(
+			'driver'        => 'SPIP',   
+			'path'			=> 0,
+			'id'			=> 'spip',
+			'alias'			=> 'racine',
+			'tmbPath' => _DIR_RACINE . _NOM_TEMPORAIRES_INACCESSIBLES,
+            'tmbURL' => dirname($_SERVER['PHP_SELF']) . _NOM_TEMPORAIRES_INACCESSIBLES.'.dbtmb/',
+			)),
+
+);
+$connector = new elFinderConnector(new elFinder($opts));
+$connector->run();
+
+
+
