@@ -1,0 +1,86 @@
+<div class="formulaire_spip formulaire_editer formulaire_editer_liens formulaire_editer_prix_objets">
+	<form id="form_prix" name="form_prix" action="#ENV{action}#form_prix" method="post"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="visible" value="#ENV{visible,0}" id="visible-prix"/>
+		<div class="toggle_box_link">
+			&#91;<button type="submit" class="link" name="visible" value="1">
+				<:prix_objets:ajouter_prix:>
+			</button>&#93;
+		</div>
+		<INCLURE {fond=formulaires/inc-prix_affichage,env} />
+<BOUCLE_test0(CONDITION){si #ENV{devises,#ARRAY}|count|>{0}}>
+	<BOUCLE_editable_visible(CONDITION){si #ENV{visible,0}|et{#ENV{editable}}|oui}>
+	<div class="selecteur[(#ENV{recherche}|oui)filtre]">
+		<h3 class="titrem"><:prix_objets:ajouter_prix:></h3>
+		<div class="editer-groupe">
+			<div class="obligatoire editer editer_prix saisie_input [ (#ENV**{erreurs}|table_valeur{prix_ht}) erreur]">
+				<div>
+					[<div class='erreur_message'>(#ENV**{erreurs}|table_valeur{prix})</div>]
+					<label><:prix_objets:info_prix:></label>
+					<input type="text" name="prix" value="#ENV{prix}"/>
+					<BOUCLE_test(CONDITION){si #ENV{devises,#ARRAY}|count|<{2}}>
+					[(#ENV{devises}|table_valeur{0}|traduire_devise)]
+					<input type="hidden" name="code_devise" value="[(#ENV{devises}|table_valeur{0})]"/>
+					</BOUCLE_test>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{code_devise})</span>]
+						<B_selection>
+							<select name="code_devise" class="code_devise">
+								<option value=""><:prix_objets:choix_devise:></option>
+								<BOUCLE_selection(POUR){tableau #ENV{devises}}>
+								<option value="#VALEUR">[(#VALEUR|traduire_devise)]</option>
+								</BOUCLE_selection>
+							</select>
+						</B_selection>
+					<//B_test>
+				</div>
+			</div>
+
+			[(#SAISIE{oui_non,taxes_inclus,
+					label=<:prix_objets:taxes_inclus:>})]
+			<div class="editer">
+					<p><:prix_objets:taxes_defaut:> #ENV{taxes}%</p>
+			</div>
+			[(#SAISIE{input,taxe,
+					label=<:prix_objets:taxes_surcharge:>})]
+
+			[(#SAISIE{oui_non,prix_total,
+					label=<:prix_objets:champ_prix_total_label:>,
+					valeur_oui=1,
+					valeur_non=0})]
+
+			#GENERER_SAISIES{#ENV{_saisies_extras}}
+
+			<!--fini champs!-->
+			</div>
+		<p class="boutons">
+			<input type="submit"  class="submit" value="<:prix_objets:ajouter_prix:>" />
+		</p>
+				<div class="toggle_box_link">
+					&#91;<a href="#"
+						onclick="jQuery(this).parents('div.selecteur').hide('fast').siblings('.toggle_box_link').show();jQuery('#visible-prix').attr('value',0);return false;"
+						><:bouton_fermer:></a>&#93;
+				</div>
+			</div>
+			<div class="toggle_box_link" style="display:none;">
+					&#91;<a href="#"
+						onclick="jQuery(this).parents('div.toggle_box_link').hide('fast').siblings('.selecteur').show('fast');jQuery('#visible-prix').attr('value',1);return false;"
+						><:prix_objets:ajouter_prix:></a>&#93;
+			</div>
+	</div>
+		</BOUCLE_editable_visible>
+	[(#ENV{editable})
+		[(#ENV{visible,0}|non)
+		<div class="toggle_box_link">
+			&#91;<button type="submit" class="link" name="visible" value="1">
+				<:prix_objets:ajouter_prix:>
+			</button>&#93;
+		</div>
+		]
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+	</div></form>
+	]
+
+</BOUCLE_test0>
+</div>
+
