@@ -1,0 +1,48 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+/* La caption du tableau qui porte le nom du log, les actions et les filtres */
+.simplog .caption {padding-bottom: 2em;}
+/* -- le nom du log */
+.simplog .caption .log {font-size: 125%; font-style: bold; text-align: left;}
+/* -- les actions sur le log */
+.simplog .caption .action {text-align: center;}
+.simplog .caption .bouton_action_post .submit {background-color: transparent;}
+.simplog .caption .bouton_action_post button:hover {cursor: pointer;}
+.simplog .caption .action a {padding: 1px 5px; margin-bottom: 3px; margin-top: 3px; background-color: transparent;}
+/* -- les filtres sur les enregistrements du log */
+.simplog .caption .filtre {text-align: right;}
+
+/* Les boutons de sens de tri (thead) et la pagination (thead et tfoot) */
+.simplog .pagination {margin: 0; border: 0; padding: 0.5em; background-color: [#(#ENV{claire}|couleur_eclaircir{0.4})];}
+.simplog .pagination .on {background-color: #ENV{foncee}; font-style: normal;}
+.simplog .pagination .sep,
+.simplog .pagination a {font-style: normal;}
+
+.simplog .navigation,
+.simplog .sens {padding: 0;}
+.simplog .navigation .pagination {text-align: #GET{left};}
+.simplog .first_row .navigation {border-right: 0;}
+.simplog .sens .pagination {text-align: #GET{right};}
+.simplog .first_row .sens {border-left: 0;}
+
+[(#REM)	</style>]

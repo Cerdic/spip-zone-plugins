@@ -1,0 +1,21 @@
+<paquet
+	prefix="simplog"
+	categorie="maintenance"
+	version="1.4.4"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/simplog-32.png"
+	documentation="https://contrib.spip.net/Simples-Logs"
+>
+
+	<nom>Simples Logs</nom>
+	<!-- Visualisation des logs SPIP par les administrateurs -->
+
+	<auteur mail="luc.tech@free.fr">Luc Tech</auteur>
+	<auteur lien="http://blog.smellup.net/">Eric Lupinacci</auteur>
+
+	<licence>GNU/GLP</licence>
+
+	<pipeline nom="autoriser" inclure="simplog_autorisations.php" />
+	<menu nom="simplog_bt" titre="simplog:logs" parent="menu_administration" icone="images/simplog-16.png" action="simplog" />
+</paquet>

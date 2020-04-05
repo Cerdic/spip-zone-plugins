@@ -1,0 +1,36 @@
+[(#REM) Inclusion de la caption de la table des enregistrements du log
+	- log : nom du fichier de log
+	- fichier : chemin complet du fichier de log
+]
+<div class="caption">
+	<div class="log unit size2of5">
+		<:simplog:fichier{fichier=#ENV{log}}:>
+	</div>
+	<div class="action unit size1of5">
+		[<a href="[(#SELF|parametre_url{hasard,[(#VAL{1}|rand{10000000})]})]" title="<:simplog:clic_rafraichir:>" class="ajax">(#CHEMIN_IMAGE{update-16.png}|balise_img{<:simplog:clic_rafraichir:>, rafraichir})</a>]
+		[(#BOUTON_ACTION{
+			[(#CHEMIN_IMAGE{telecharger-16.png}|balise_img{<:bouton_telecharger:>}|inserer_attribut{title, <:bouton_telecharger:>})],
+			#URL_ACTION_AUTEUR{telecharger_log, #ENV{fichier}}}
+		)]
+		[(#BOUTON_ACTION{
+			[(#CHEMIN_IMAGE{supprimer-16.png}|balise_img{<:lien_supprimer|ucfirst:>}|inserer_attribut{title, <:lien_supprimer|ucfirst:>})],
+			#URL_ACTION_AUTEUR{supprimer_log, #ENV{fichier}},
+			'', <:simplog:message_fichier_suppression:>}
+		)]
+	</div>
+	<div class="filtre unit size2of5 lastunit">
+	<B_filtre_gravite>
+		<form method="GET" action="#SELF" onChange="this.submit(); return true;">
+			[(#SELF|parametre_url{gravite,''}|form_hidden)]
+			<select name="gravite" id="filtre_gravite">
+				<option value=""[(#ENV{gravite}|non) selected="selected"]><:simplog:filtre_gravite_aucun:></option>
+	<BOUCLE_filtre_gravite(DATA){liste hs, alerte, critique, erreur, warning, !info, info, debug}>
+				<option class="" value="#VALEUR"[(#ENV{gravite}|=={#VALEUR}|oui) selected="selected"]>
+					[<:simplog:colonne_gravite|strtolower:>&nbsp;(#VALEUR)]
+				</option>
+	</BOUCLE_filtre_gravite>
+			</select>
+		</form>
+	</B_filtre_gravite>
+	</div>
+</div>
