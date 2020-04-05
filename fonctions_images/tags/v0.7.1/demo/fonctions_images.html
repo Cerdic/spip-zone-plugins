@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="#LANG">
+<head>
+	<title>Page de démonstration du plugin fonctions d'images</title>
+	#INSERT_HEAD
+	#INSERT_HEAD_CSS
+	<link rel="stylesheet" href="[(#CHEMIN{demo/style_demo_fonctions_images.css})]" type="text/css" />
+</head>
+<body>
+
+	<div class="page">
+
+		<!-- menu à gauche -->
+		<ul class="menu">
+			<li class="menu__item menu__item_header">Traitement des couleurs</li>
+			<BOUCLE_menu_couleurs(DATA){liste couleur_chroma,couleur_saturer,couleur_teinter,couleur_inverserluminosite,couleur_foncerluminosite,couleur_eclaircirluminosite,couleur_melanger}>
+			<li class="menu__item"><a href="[(#ENV{filtres}|=={couleurs}|ou{#ENV{filtres}|=={''}}|?{##VALEUR,#SELF|parametre_url{filtres,couleurs}|ancre_url{#VALEUR}})]" class="ajax">#VALEUR</a></li>
+			</BOUCLE_menu_couleurs>
+			<li class="menu__item menu__item_header">Traitement des images</li>
+			<BOUCLE_menu_images(DATA){liste image_saturer,image_niveaux_gris_auto,image_courbe,image_float,image_contour_alpha,image_sincity,image_estampage_alpha,image_merge,image_negatif,image_tramer}>
+			<li class="menu__item"><a href="[(#ENV{filtres}|=={images}|?{##VALEUR,#SELF|parametre_url{filtres,images}|ancre_url{#VALEUR}})]" class="ajax">#VALEUR</a></li>
+			</BOUCLE_menu_images>
+		</ul>
+
+		<!-- contenu -->
+		<main class="main">
+			<h1>Plugin fonctions d'images</h1>
+			<p class="lead">
+			Démonstration des filtres proposés par le plugin fonctions d'images.
+			La plupart de ces filtres sont expliqués en détail sur le site <a href="http://www.paris-beyrouth.org/tutoriaux-spip/">Paris-Beyrouth</a>.
+			</p>
+			[(#ENV{filtres}|=={couleurs}|ou{#ENV{filtres}|=={''}}|oui)
+				<INCLURE{fond=demo/inc-filtres_couleurs}>
+			]
+			[(#ENV{filtres}|=={images}|oui)
+				<INCLURE{fond=demo/inc-filtres_images}>
+			]
+		</main>
+
+	</div>
+</body>
+</html>

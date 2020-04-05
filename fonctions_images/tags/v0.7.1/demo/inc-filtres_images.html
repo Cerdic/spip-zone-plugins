@@ -1,0 +1,339 @@
+#SET{img,#CHEMIN{images/ecureuil.jpg}|balise_img}
+#SET{couleur1, #c5e41d}
+#SET{couleur2, ##GET{couleur1}|couleur_inverser}
+
+
+<hr>
+
+<!-- image_saturer -->
+<div class="boite" id="image_saturer">
+	<h2 class="boite__titre">image_saturer</h2>
+	<p>
+		Modifie la saturation d'une image<br />
+	</p>
+	<dl class="codeblock">
+		<dt>Syntaxe</dt>
+		<dd><code>image_saturer{1.2}</code></dd>
+		<dt>Paramètre</dt>
+		<dd>nombre entre 0 et 2 (1 = saturation d'origine)</dd>
+		<dt>Exemple</dt>
+		<dd><code class="Exemple">#VAL{"\[\(#CHEMIN{images/ecureuil.jpg}|image_saturer{1.2}\)\]"}</code></dd>
+	</dl>
+	<div class="apercu apercu_images">
+		<BOUCLE_imgsaturer(DATA){liste 0.0, 0.5, 1, 1.5, 2}>
+		[(#VALEUR|=={1}|oui)
+		<div class="apercu__item on">[<p>(#VALEUR) = originale</p>][(#GET{img})]</div>
+		]
+		[(#VALEUR|=={1}|non)
+		<div class="apercu__item">[<p>(#VALEUR)</p>][(#GET{img}|image_saturer{#VALEUR})]</div>
+		]
+		</BOUCLE_imgsaturer>
+	</div>
+</div>
+
+<hr>
+
+<!-- image_niveaux_gris_auto -->
+<div class="boite" id="image_niveaux_gris_auto">
+	<h2 class="boite__titre">image_niveaux_gris_auto</h2>
+	<p>
+		Corrige automatiquement les niveaux de gris d'une image.
+		<a href="http://www.paris-beyrouth.org/Corriger-les-niveaux-des-images">(Paris-Beyrouth : Corriger les niveaux des images</a>)
+	</p>
+	<dl class="codeblock">
+		<dt>Syntaxe</dt>
+		<dd><code>image_niveaux_gris_auto</code></dd>
+		<dt>Exemple</dt>
+		<dd><code class="Exemple">#VAL{"\[\(#CHEMIN{images/ecureuil.jpg}|image_niveaux_gris_auto\)\]"}</code></dd>
+	</dl>
+	<div class="apercu apercu_images">
+		<div class="apercu__item on"><p>originale</p>[(#GET{img}|image_courbe{rvb, 1=75})]</div>
+		<div class="apercu__item"><p>niveaux_gris_auto</p>[(#GET{img}|image_courbe{rvb, 1=75}|image_niveaux_gris_auto)]</div>
+	</div>
+</div>
+
+[(#REM) ne semble pas marcher
+<hr>
+<!-- image_podpod -->
+<div class="boite" id="image_podpod">
+	<h2 class="boite__titre">image_podpod</h2>
+	<p>
+		Rempli par une couleur la plage de niveau de gris compris entre 2 Paramètres.
+		(<a href="http://www.paris-beyrouth.org/Creer-automatiquement-une">Paris-Beyrouth : Créer automatiquement une publicité podPod</a>)
+	</p>
+	<dl class="codeblock">
+		<dt>Syntaxe</dt>
+		<dd><code>image_podpod{c5e41d,150,200}</code></dd>
+		<dt>Paramètre1</dt>
+		<dd>Code hexadécimal</dd>
+		<dt>Paramètre2</dt>
+		<dd>Nombre entre 0 et 255 : borne basse de la plage de couleur</dd>
+		<dt>Paramètre3</dt>
+		<dd>Nombre entre 0 et 255 : borne haute de la plage de couleur</dd>
+		<dt>Exemple</dt>
+		<dd><code class="Exemple">#VAL{"\[\(#CHEMIN{images/ecureuil.jpg}|image_podpod{c5e41d,150,200}\)\]"}</code></dd>
+	</dl>
+	<div class="apercu apercu_images">
+		<div class="apercu__item on"><p>originale</p>[(#GET{img}|balise_img)]</div>
+		<div class="apercu__item"><p>dd5500,100,255</p>[(#GET{img}|balise_img|image_podpod{000000,0,70})]</div>
+	</div>
+</div>
+]
+
+<hr>
+
+<!-- filtre couleur_courbe -->
+<div class="boite" id="image_courbe">
+	<h2 class="boite__titre">image_courbe</h2>
+	<p>
+		Modifie les courbes d'une image, en manipulant 1 ou 2 points de la courbe 
+		<a href="http://www.paris-beyrouth.org/tutoriaux-spip/article/modifier-les-courbes-d-une-image">(Paris-Beyrouth : Modifier les courbes d'une image)</a><br />
+	</p>
+	[<p>(#CHEMIN{images/courbes.png}|balise_img)</p>]
+	<dl class="codeblock">
+		<dt>Syntaxe</dt>
+		<dd><code>image_courbe{rvb, 80=30, 170=220}</code></dd>
+		<dt>Paramètre 1</dt>
+		<dd>rvb/r/v/b : couche(s) de couleur(s) affectée(s)</dd>
+		<dt>Paramètre 2</dt>
+		<dd>x=y : nombres de 0 à 255</dd>
+		<dt>Paramètre3</dt>
+		<dd>x=y : (optionnel) nombres de 0 à 255</dd>
+		<dt>Exemple</dt>
+		<dd><code class="Exemple">#VAL{"\[\(#CHEMIN{images/ecureuil.jpg}|image_courbe{rvb, 80=30, 170=220}\)\]"}</code></dd>
+	</dl>
+	<div class="apercu apercu_images">
+		<div class="apercu__item on"><p>originale</p>[(#GET{img})]</div>
+		<BOUCLE_imgcourbe(DATA){source table, #LISTE{#ARRAY{param1,rvb, param2,80=30, param3,170=220}, #ARRAY{param1,rvb, param2,80=100, param3,170=150}, #ARRAY{param1,r, param2,130=40, param3,190=160}}}>
+		<div class="apercu__item"><p>#VALEUR{param1}, #VALEUR{param2}, #VALEUR{param3}</p>[(#GET{img}|image_courbe{#VALEUR{param1},#VALEUR{param2},#VALEUR{param3}})]</div>
+		</BOUCLE_imgcourbe>
+	</div>
+</div>
+
+<hr>
+
+<!-- image_float -->
+<div class="boite" id="image_float">
+	<h2 class="boite__titre">image_float</h2>
+	<p>
+		Faire un texte qui épouse une image 
+		<a href="http://www.paris-beyrouth.org/Un-habillage-irregulier-2">(Paris-Beyrouth :  Un habillage irrégulier</a>)<br />
+	</p>
+	<dl class="codeblock">
+		<dt>Syntaxe</dt>
+		<dd><code>image_float{left, 10, ffffff}</code></dd>
+		<dt>Paramètre 1</dt>
+		<dd>left/center/right : position de l'image</dd>
+		<dt>Paramètre 2</dt>
+		<dd>Nombre : marge en px autour de l'image</dd>
+		<dt>Paramètre3</dt>
+		<dd>Code hexadécimal : (optionnel) couleur de fond de l'image</dd>
+		<dt>Exemple</dt>
+		<dd><code class="Exemple">#VAL{"\[\(#CHEMIN{images/ecureuil_decoupe.png}|image_float{left, 5}\)\]"}</code></dd>
+	</dl>
+	<div class="texte float">
+	[(#CHEMIN{images/ecureuil_decoupe.png}|image_float{left, 5})]
+	<p>
+	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus utnunc eget ante ornare nonummy. Ut arcu. Duis tincidunt tincidunt quam. In elementum blandit odio. Nullam ultrices. Nulla sem augue, mollis id, vulputate eget, ullamcorper ultrices, purus. Aenean porttitor odio at mauris. Mauris quis enim vitae purus dictum ultricies.
+	</p>
+	<p>
+	Proin pharetra lectus auctor lacus. Quisque at sem ac lectus ornare vehicula. Nunc pulvinar, leo ut tristique auctor, felis diam gravida neque, consectetuer cursus sem
+	nisl ut enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec justo. Aliquam erat volutpat. Sed vel enim nec tellus suscipit imperdiet. Maecenas sagittis, dolor id tincidunt suscipit, orci tortor fermentum mi, id varius dolor nisi quis lectus. Quisque ante sem, molestie a, euismod sed, tempus sit amet, mauris. Integer vel ante eget urna sagittis consectetuer. Quisque ullamcorper convallis velit.
+	</p>
+	</div>
+</div>
+
+<hr>
+
+<!-- image_contour_alpha -->
+<div class="boite" id="image_contour_alpha">
+	<h2 class="boite__titre">image_contour_alpha</h2>
+	<p>
+		Trace le contour d'une image transparente (<a href="http://www.paris-beyrouth.org/tutoriaux-spip/article/tracer-les-contours-de">Paris-Beyrout : Tracer les contours de transparence</a>)
+	</p>
+	<dl class="codeblock">
+		<dt>Syntaxe</dt>
+		<dd><code>image_contour_alpha{000000, 1}</code></dd>
+		<dt>Paramètre 1</dt>
+		<dd>Code hexadécimal : couleur du contour</dd>
+		<dt>Paramètre 2</dt>
+		<dd>Nombre : épaisseur du contour</dd>
+		<dt>Exemple</dt>
+		<dd><code class="Exemple">#VAL{"\[\(#CHEMIN{images/ecureuil.jpg}|image_contour_alpha{000000, 1}\)\]"}</code></dd>
+	</dl>
+	<div class="apercu apercu_images">
+		<div class="apercu__item on alpha bordure"><p>originale</p>[(#CHEMIN{images/ecureuil_decoupe.png}|balise_img)]</div>
+		<div class="apercu__item alpha bordure"><p>000000, 2</p>[(#CHEMIN{images/ecureuil_decoupe.png}|image_contour_alpha{000000, 2})]</div>
+		<div class="apercu__item alpha bordure"><p>9dba00, 2</p>[(#CHEMIN{images/ecureuil_decoupe.png}|image_contour_alpha{9dba00, 2})]</div>
+	</div>
+</div>
+
+<hr>
+
+<!-- image_sincity -->
+<div class="boite" id="image_sincity">
+	<h2 class="boite__titre">image_sincity</h2>
+	<p>
+		Effet automatique : saturation contrastée + accentuation du rouge 
+		<a href="http://www.paris-beyrouth.org/Welcome-to-Spip-City">(Paris-Beyrouth : Welcome to Spip-City)</a>
+	</p>
+	<dl class="codeblock">
+		<dt>Syntaxe</dt>
+		<dd><code>image_sincity</code></dd>
+		<dt>Exemple</dt>
+		<dd><code class="Exemple">#VAL{"\[\(#CHEMIN{images/ecureuil.jpg}|image_sincity\)\]"}</code></dd>
+	</dl>
+	<div class="apercu apercu_images">
+		<div class="apercu__item on"><p>originale</p>[(#GET{img}|image_courbe{rvb, 80=40})]</div>
+		<div class="apercu__item"><p>sincity</p>[(#GET{img}|image_courbe{rvb, 80=40}|image_sincity)]</div>
+	</div>
+</div>
+
+<hr>
+
+<!-- image_estampage_alpha -->
+<div class="boite" id="image_estampage_alpha">
+	<h2 class="boite__titre">image_estampage_alpha</h2>
+	<p>
+		Réalise des estampages 
+		<a href="http://www.paris-beyrouth.org/Des-titres-en-relief">(Paris-Beyrouth : Des titres en relief)</a>
+	</p>
+	<dl class="codeblock">
+		<dt>Syntaxe</dt>
+		<dd><code>image_estampage_alpha{1,1}</code></dd>
+		<dt>Paramètre 1</dt>
+		<dd>Nombre : épaisseur en px</dd>
+		<dt>Paramètre 2</dt>
+		<dd>nombre : netteté</dd>
+		<dt>Exemple</dt>
+		<dd><code class="Exemple">#VAL{"\[\(#CHEMIN{images/ecureuil_decoupe.png}|image_estampage_alpha{1,1}\)\]"}</code></dd>
+	</dl>
+	<div class="apercu apercu_images">
+		<div class="apercu__item alpha on bordure"><p>originale</p>[(#CHEMIN{images/ecureuil_decoupe.png}|balise_img)]</div>
+		<BOUCLE_imgestampage(DATA){source table, #LISTE{#ARRAY{param1,1, param2,1}, #ARRAY{param1,1, param2,4}, #ARRAY{param1,4, param2,1}}}>
+		<div class="apercu__item"><p>#VALEUR{param1}, #VALEUR{param2}</p>[(#CHEMIN{images/ecureuil_decoupe.png}|image_estampage_alpha{#VALEUR{param1},#VALEUR{param2}})]</div>
+		</BOUCLE_imgestampage>
+	</div>
+</div>
+
+<hr>
+
+<!-- image_dispersion -->
+<div class="boite" id="image_dispersion">
+	<h2 class="boite__titre">image_dispersion</h2>
+	<p>
+		Réalise des dispersions, des floutages
+		<a href="http://www.paris-beyrouth.org/Un-filtre-de-dispersion-graphique">(Paris-Beyrouth : Un filtre de dispersion graphique</a>)
+	</p>
+	<dl class="codeblock">
+		<dt>Syntaxe</dt>
+		<dd><code>image_dispersion{url_image, 8, 8}</code></dd>
+		<dt>Paramètre 1</dt>
+		<dd>Url de l'image servant de filtre</dd>
+		<dt>Paramètre 2</dt>
+		<dd>Nombre : déplacement en x</dd>
+		<dt>Paramètre 3</dt>
+		<dd>Nombre : déplacement en y</dd>
+		<dt>Exemple</dt>
+		<dd><code class="Exemple">#VAL{"\[\(#CHEMIN{images/ecureuil.jpg}|image_dispersion{#CHEMIN{images/disp-noir.png},8,8}\)\]"}</code></dd>
+	</dl>
+	<div class="apercu apercu_images">
+		<div class="apercu__item alpha on"><p>Image</p>[(#GET{img})]</div>
+		<div class="apercu__item alpha on"><p>Masque</p>[(#CHEMIN{images/disp-noir.png}|balise_img)]</div>
+		<div class="apercu__item"><p>8, 8</p>[(#GET{img}|image_dispersion{#CHEMIN{images/disp-noir.png},8,8})]</div>
+	</div>
+	<div class="apercu apercu_images">
+		<div class="apercu__item alpha on"><p>Image 1</p>[(#GET{img})]</div>
+		<div class="apercu__item alpha on"><p>Masque</p>[(#CHEMIN{images/disp-twirl.png}|balise_img)]</div>
+		<div class="apercu__item"><p>8, 8</p>[(#GET{img}|image_dispersion{#CHEMIN{images/disp-twirl.png},8,8})]</div>
+	</div>
+</div>
+
+<hr>
+
+<!-- image_merge -->
+<div class="boite" id="image_merge">
+	<h2 class="boite__titre">image_merge</h2>
+	<p>
+		Superpose une image sur une autre<br>
+	</p>
+	<p>
+			<span class="warning">Le filtre <code>image_Masque</code> de Spip permet d'obtenir le même résultat, et propose plus d'options.</span>
+	</p>
+	<dl class="codeblock">
+		<dt>Syntaxe</dt>
+		<dd><code>image_merge{url_image, right, top}</code></dd>
+		<dt>Paramètre 1</dt>
+		<dd>left/center/right : position horizontal</dd>
+		<dt>Paramètre 2</dt>
+		<dd>top/middle/bottom : position verticale</dd>
+		<dt>Exemple</dt>
+		<dd><code class="Exemple">#VAL{"\[\(#CHEMIN{images/quadrillage.png}|image_merge{#CHEMIN{images/cercle.png},center,middle}\)\]"}</code></dd>
+	</dl>
+	<div class="apercu apercu_images">
+		<div class="apercu__item on bordure"><p>image 1</p>[(#CHEMIN{images/quadrillage.png}|balise_img)]</div>
+		<div class="apercu__item alpha on"><p>image 2</p>[(#CHEMIN{images/cercle.png}|balise_img)]</div>
+		<div class="apercu__item bordure"><p>center, middle</p>[(#CHEMIN{images/quadrillage.png}|image_merge{#CHEMIN{images/cercle.png},center,middle})]</div>
+		<div class="apercu__item bordure"><p>left, bottom</p>[(#CHEMIN{images/quadrillage.png}|image_merge{#CHEMIN{images/cercle.png},left,bottom})]</div>
+	</div>
+</div>
+
+
+<!-- image_negatif -->
+<div class="boite" id="image_negatif">
+	<h2 class="boite__titre">image_negatif</h2>
+	<p>
+		Passe une image en négatif
+	</p>
+	<p>
+		<span class="warning">Le filtre <code class="Exemple">image_courbe{rvb, 0=255, 255=0}</code> produira le même résultat</span>
+	</p>
+	<dl class="codeblock">
+		<dt>Syntaxe</dt>
+		<dd><code>image_negatif</code></dd>
+		<dt>Exemple</dt>
+		<dd><code class="Exemple">#VAL{"\[\(#CHEMIN{images/ecureuil.jpg}|image_negatif\)\]"}</code></dd>
+	</dl>
+	<div class="apercu apercu_images">
+		<div class="apercu__item on"><p>originale</p>[(#GET{img})]</div>
+		<div class="apercu__item"><p>image_negatif</p>[(#GET{img}|image_negatif)]</div>
+	</div>
+</div>
+
+<!-- image_tramer -->
+<div class="boite" id="image_tramer">
+	<h2 class="boite__titre">image_tramer</h2>
+	<p>
+		Tramer une image (en mode niveaux de gris) à la <a href="https://github.com/lowtechmag/solar/wiki/Solar-Web-Design#dithered-images">LOW←TECH MAGAZINE</a>
+	</p>
+	<dl class="codeblock">
+		<dt>Syntaxe</dt>
+		<dd><code>image_tramer{url_image, 6, o8x8}</code></dd>
+		<dt>Paramètre 1</dt>
+		<dd>Url de l'image servant de filtre</dd>
+		<dt>Paramètre 2</dt>
+		<dd>Nombre : niveaux de couleurs à utiliser</dd>
+		<dt>Paramètre 3</dt>
+		<dd>Booléen : générer une image en couleurs</dd>
+		<dt>Exemple</dt>
+		<dd><code class="Exemple">#VAL{"\[\(#CHEMIN{images/ecureuil.jpg}|image_tramer\)\]"}</code></dd>
+	</dl>
+	<div class="apercu apercu_images">
+		<div class="apercu__item alpha on bordure"><p>originale</p>[(#CHEMIN{images/ecureuil.jpg}|balise_img)]</div>
+		<BOUCLE_imgtramer1(DATA){liste 3,6,11}>
+		<div class="apercu__item"><p>#VALEUR</p>[(#CHEMIN{images/ecureuil.jpg}|image_tramer{#VALEUR})]</div>
+		</BOUCLE_imgtramer1>
+	</div>
+	<div class="apercu apercu_images">
+		<div class="apercu__item alpha on bordure"><p>originale</p>[(#CHEMIN{images/ecureuil.jpg}|balise_img)]</div>
+		<BOUCLE_imgtramer2(DATA){liste checks,o8x8,h8x8a,h16x16o,c5x5b,c5x5w,c6x6b,c6x6w,c7x7b,c7x7w}>
+		<div class="apercu__item"><p>6,#VALEUR</p>[(#CHEMIN{images/ecureuil.jpg}|image_tramer{6,#VALEUR})]</div>
+		</BOUCLE_imgtramer2>
+	</div>
+		<div class="apercu apercu_images">
+		<div class="apercu__item alpha on bordure"><p>originale</p>[(#CHEMIN{images/ecureuil.jpg}|balise_img)]</div>
+		<BOUCLE_imgtramer3(DATA){liste 3,6,11}>
+		<div class="apercu__item"><p>#VALEUR,o8x8,oui</p>[(#CHEMIN{images/ecureuil.jpg}|image_tramer{#VALEUR,o8x8,oui})]</div>
+		</BOUCLE_imgtramer3>
+	</div>
+</div>

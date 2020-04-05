@@ -1,0 +1,132 @@
+/* Reset */
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+html, body {
+  padding: 0;
+  margin: 0;
+  font-family: sans;
+}
+a {
+  text-decoration: none;
+}
+
+/* Layout */
+.page {
+  padding: 1em;
+}
+.menu {
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  width: 20em;
+}
+.main {
+  width: calc(100% - 20em);
+  margin-left: 20em;
+}
+
+/* menu */
+.menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.menu__item {
+  padding: 0.25em 0;
+}
+.menu__item_header {
+  padding: 1em 0;
+  font-weight: bold;
+}
+
+/* Boite */
+.boite {
+  margin: 2em 0;
+}
+.boite__titre {
+  margin: 0 0 2em;
+}
+
+/* Paramètres et cie */
+.codeblock {
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: 2em;
+}
+.codeblock dd,
+.codeblock dt {
+  margin-bottom: 0.5em;
+}
+.codeblock dt {
+  flex: 0 0 10em;
+  font-weight: bold;
+}
+.codeblock dd {
+  flex: 0 0 calc(100% - 11em);
+  margin-left: 0;
+}
+code {
+  font-family: monospace;
+  font-size: 1.15em;
+  color: hsl(320, 100%, 40%);
+}
+
+/* apercus */
+.apercu {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+}
+.apercu__item {
+  margin-right: 0.5em;
+  font-weight: bold;
+  position: relative;
+}
+.apercu__item p {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.2em 0.5em;
+  margin: 0;
+  background: black;
+  color: white;
+  font-family: monospace;
+}
+.apercu_couleurs .apercu__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5em;
+  height: 5em;
+  border: 1px solid hsla(0, 0%, 0%, 0.05);
+}
+.apercu_couleurs .apercu__item.on {
+  width: 10em;
+  height: 10em;
+}
+
+
+/* Divers */
+.warning {
+  background-color: hsl(60, 100%, 75%);
+  padding: 0.2em;
+}
+.texte.float {
+  max-width: 50em;
+}
+.texte.float img {
+  max-width: none;
+}
+.alpha {
+  background-image: url(../images/transparent.jpg);
+}
+.bordure {
+  border: 1px solid #aaa;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+hr {
+  margin: 2em 0;
+  border-color: 1px solid hsl(0, 0%, 33%);
+}

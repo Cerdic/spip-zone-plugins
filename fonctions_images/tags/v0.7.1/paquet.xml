@@ -1,0 +1,20 @@
+<paquet
+	prefix="fonctions_images"
+	categorie="multimedia"
+	version="0.7.1"
+	etat="stable"
+	compatibilite="[3.0.0;3.3.*]"
+	logo="prive/themes/spip/images/fonctions_images_48.png"
+	documentation="https://contrib.spip.net/Plugin-fonctions-d-images-les-filtres-de-traitement"
+>	
+
+	<nom>Fonctions d'images</nom>
+	<!-- Filtres pour le traitement des images -->
+
+	<auteur lien="http://www.paris-beyrouth.org/-SPIP-">Arnaud Martin</auteur>
+	<auteur>Matthieu Marcillaud (mise en plugin)</auteur>
+
+	<copyright>2007-2012</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+</paquet>

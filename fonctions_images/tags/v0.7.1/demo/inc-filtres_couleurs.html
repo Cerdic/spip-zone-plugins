@@ -1,0 +1,229 @@
+#SET{couleur1, #c5e41d}
+#SET{couleur2, ##GET{couleur1}|couleur_inverser}
+
+<hr>
+
+<!-- couleur_chroma -->
+<div class="boite" id="couleur_chroma">
+	<h2 class="boite__titre">couleur_chroma</h2>
+	<p>
+		Crée une palette de couleurs automatique d'après une couleur 
+		(<a href="http://www.paris-beyrouth.org/Une-nuance-de-couleurs">Paris-Beyrouth : Une nuance de couleurs</a>)
+	</p>
+	<dl class="codeblock">
+		<dt>Syntaxe</dt>
+		<dd><code>couleur_chroma{3/6}</code></dd>
+		<dt>Paramètre</dt>
+		<dd>Numéro de la couleur / nombre de couleurs souhaitées</dd>
+		<dt>Exemple</dt>
+		<dd><code class="Exemple">#VAL{"\[\(#VAL{c5e41d}|couleur_chroma{1/6}\)\]"}</code></dd>
+	</dl>
+	<BOUCLE_chroma(DATA){liste #GET{couleur1},#GET{couleur2}}>
+	<div class="apercu apercu_couleurs">
+		<div class="apercu__item on" style="background-color:[(#VALEUR)]; color:[#(#VALEUR|couleur_extreme|couleur_inverser)];">[(#VALEUR)]</div>
+		<BOUCLE_chromabis(DATA){liste 1/4,2/4,3/4,4/4}>
+		#SET{couleur, ##_chroma:VALEUR|couleur_chroma{#VALEUR}}
+		<div class="apercu__item" style="background-color:[(#GET{couleur})]; color:[#(#GET{couleur}|couleur_extreme|couleur_inverser)];">#VALEUR</div>
+		</BOUCLE_chromabis>
+		<br style="clear:left" />
+</div>
+</BOUCLE_chroma>
+</div>
+
+<hr>
+
+<!-- couleur_saturer -->
+<div class="boite" id="couleur_saturer">
+	<h2 class="boite__titre">couleur_saturer</h2>
+	<p>
+		Modifie la saturation d'une couleur.
+	</p>
+	<p>
+		<span class="warning">
+		À ne pas confondre avec le filtre <code>couleur_saturation</code> de SPIP qui agit sur l'intensité d'une couleur.
+	</span>
+	</p>
+	<dl class="codeblock">
+		<dt>Syntaxe</dt>
+		<dd><code>couleur_saturer{1.2}</code></dd>
+		<dt>Paramètre</dt>
+		<dd>nombre entre 0 et 2 (saturation d'origine = 1)</dd>
+		<dt>Exemple</dt>
+		<dd><code class="Exemple">#VAL{"\[\(#VAL{c5e41d}|couleur_saturer{0.75}\)\]"}</code></dd>
+	</dl>
+	<BOUCLE_saturer(DATA){liste ##GET{couleur1}|couleur_saturer{0.65},##GET{couleur2}|couleur_saturer{0.65}}>
+	<div class="apercu apercu_couleurs">
+		<BOUCLE_saturerbis(DATA){liste 0.0,0.2,0.4,0.6,0.8,1,1.2,1.4,1.6,1.8,2}>
+		#SET{couleur, ##_saturer:VALEUR|couleur_saturer{#VALEUR}}
+		[(#VALEUR|=={1}|oui)
+		<div class="apercu__item on" style="background-color:[(#_saturer:VALEUR)]; color:[#(#_saturer:VALEUR|couleur_extreme|couleur_inverser)];">[(#_saturer:VALEUR)]</div>
+		]
+		[(#VALEUR|=={1}|non)
+		<div class="apercu__item" style="background-color:[(#GET{couleur})]; color:[#(#GET{couleur}|couleur_extreme|couleur_inverser)];">#VALEUR</div>
+		]
+		</BOUCLE_saturerbis>
+		<br style="clear:left" />
+</div>
+</BOUCLE_saturer>
+</div>
+
+<hr>
+
+<!-- couleur_teinter -->
+<div class="boite" id="couleur_teinter">
+	<h2 class="boite__titre">couleur_teinter</h2>
+	<p>
+		Modifie la teinte d'une couleur.
+	</p>
+	<dl class="codeblock">
+		<dt>Syntaxe</dt>
+		<dd><code>couleur_teinter{30}</code></dd>
+		<dt>Paramètre</dt>
+		<dd>nombre entre -360 et 360 (défaut = 30)</dd>
+		<dt>Exemple</dt>
+		<dd><code class="Exemple">#VAL{"\[\(#VAL{c5e41d}|couleur_teinter{30}\)\]"}</code></dd>
+	</dl>
+	<BOUCLE_teinter(DATA){liste #GET{couleur1},#GET{couleur2}}>
+	<div class="apercu apercu_couleurs">
+		<BOUCLE_teinterbis(DATA){liste -360,-150,-120,-90,-60,-30,0,30,60,90,120,150,360}>
+		#SET{couleur, ##_teinter:VALEUR|couleur_teinter{#VALEUR}}
+		[(#VALEUR|=={0}|oui)
+		<div class="apercu__item on" style="background-color:[(#_teinter:VALEUR)]; color:[#(#_teinter:VALEUR|couleur_extreme|couleur_inverser)];"><p><strong>#_teinter:VALEUR</strong></p></div>
+		]
+		[(#VALEUR|=={0}|non)
+		<div class="apercu__item" style="background-color:[(#GET{couleur})]; color:[#(#GET{couleur}|couleur_extreme|couleur_inverser)];">#VALEUR</div>
+		]
+		</BOUCLE_teinterbis>
+		<br style="clear:left" />
+	</div>
+	</BOUCLE_teinter>
+</div>
+
+<hr>
+
+<!-- couleur_inverserluminosite -->
+<div class="boite" id="couleur_inverserluminosite">
+	<h2 class="boite__titre">couleur_inverserluminosite</h2>
+	<p>
+		Inverse la luminosité d'une couleur.
+	</p>
+	<p>
+		<span class="warning">
+		Ce filtre est apparenté aux filtres <code>couleur_foncer_si_claire</code> et <code>couleur_eclaircir_si_foncee</code> natifs de SPIP, à ceci près qu'il détermine automatiquement s'il doit foncer ou éclaircir la couleur.
+		<span class="warning">
+	</p>
+	<dl class="codeblock">
+		<dt>Syntaxe</dt>
+		<dd><code>couleur_inverserluminosite{20, false}</code></dd>
+		<dt>Paramètre 1</dt>
+		<dd>pourcentage : nombre entre 0 et 100 (défaut = 20)</dd>
+		<dt>Paramètre 2</dt>
+		<dd>intensifier : true / false (défaut = false)</dd>
+		<dt>Exemple</dt>
+		<dd><code class="Exemple">#VAL{"\[\(#VAL{c5e41d}|couleur_inverserluminosite{20,true}\)\]"}</code></dd>
+	</dl>
+	<BOUCLE_inverser(DATA){liste #GET{couleur1},##GET{couleur2}|couleur_foncerluminosite{30},#ffffff,#000000}>
+	<div class="apercu apercu_couleurs">
+		<div class="apercu__item on" style="background-color:[(#VALEUR)]; color:[#(#VALEUR|couleur_extreme|couleur_inverser)];">#VALEUR</div>
+		<BOUCLE_inverserbis(DATA){liste 10,20,30,40,50,60,70,80,90,100}>
+		#SET{couleur, ##_inverser:VALEUR|couleur_inverserluminosite{#VALEUR}}
+		<div class="apercu__item" style="background-color:[(#GET{couleur})]; color:[#(#GET{couleur}|couleur_extreme|couleur_inverser)];">#VALEUR</div>
+		</BOUCLE_inverserbis>
+		<br style="clear:left" />
+	</div>
+	</BOUCLE_inverser>
+</div>
+
+<hr>
+
+
+<!-- couleur_foncerluminosite -->
+<div class="boite" id="couleur_foncerluminosite">
+	<h2 class="boite__titre">couleur_foncerluminosite</h2>
+	<p>
+		Fonce une couleur
+	</p>
+	<p>
+		<span class="warning">
+			Le filtre <code>couleur_foncer</code> de SPIP procure la même fonctionnalité.
+		</span>
+	</p>
+	<dl class="codeblock">
+		<dt>Syntaxe</dt>
+		<dd><code>couleur_foncerluminosite{20}</code></dd>
+		<dt>Paramètre</dt>
+		<dd>nombre entre 0 et 100 (défaut = 20)</dd>
+		<dt>Exemple</dt>
+		<dd><code class="Exemple">#VAL{"\[\(#VAL{c5e41d}|couleur_foncerluminosite{20}\)\]"}</code></dd>
+	</dl>
+	<div class="apercu apercu_couleurs">
+		<div class="apercu__item on" style="background-color:[(#GET{couleur1})]; color:[#(#GET{couleur1}|couleur_extreme|couleur_inverser)];">#GET{couleur1}</div>
+		<BOUCLE_foncer(DATA){liste 10,20,30,40,50,60,70,80,90,100}>
+		#SET{couleur, ##GET{couleur1}|couleur_foncerluminosite{#VALEUR}}
+		<div class="apercu__item" style="background-color:[(#GET{couleur})]; color:[#(#GET{couleur}|couleur_extreme|couleur_inverser)];">#VALEUR</div>
+		</BOUCLE_foncer>
+	</div>
+</div>
+
+<hr>
+
+
+<!-- couleur_eclaircirluminosite -->
+<div class="boite" id="couleur_eclaircirluminosite">
+	<h2 class="boite__titre">couleur_eclaircirluminosite</h2>
+	<p>
+		Eclaircit une couleur<br>
+	</p>
+	<p>
+		<span class="warning">
+		Le filtre <code>couleur_eclaircir</code> de SPIP procure la même fonctionnalité.
+		</span>
+	</p>
+	<dl class="codeblock">
+		<dt>Syntaxe</dt>
+		<dd><code>couleur_eclaircirluminosite{20}</code></dd>
+		<dt>Paramètre</dt>
+		<dd><code>nombre entre 0 et 100</code> <small>(défaut=20)</small></dd>
+		<dt>Exemple</dt>
+		<dd><code class="Exemple">#VAL{"\[\(#VAL{c5e41d}|couleur_eclaircirluminosite{20}\)\]"}</code></dd>
+	</dl>
+	<div class="apercu apercu_couleurs">
+		<div class="apercu__item on" style="background-color:[(#GET{couleur1})]; color:[#(#GET{couleur1}|couleur_extreme|couleur_inverser)];">#GET{couleur1}</div>
+		<BOUCLE_eclaircir(DATA){liste 10,20,30,40,50,60,70,80,90,100}>
+		#SET{couleur, ##GET{couleur1}|couleur_eclaircirluminosite{#VALEUR}}
+		<div class="apercu__item" style="background-color:[(#GET{couleur})]; color:[#(#GET{couleur}|couleur_extreme|couleur_inverser)];">#VALEUR</div>
+		</BOUCLE_eclaircir>
+	</div>
+</div>
+
+<hr>
+
+
+<!-- couleur_melanger -->
+<div class="boite" id="couleur_melanger">
+	<h2 class="boite__titre">couleur_melanger</h2>
+	<p>
+		Mélange deux couleurs.
+	</p>
+	<dl class="codeblock">
+		<dt>Syntaxe</dt>
+		<dd><code>couleur_melanger{couleurB, 50}</code></dd>
+		<!--<dd><code>#VAL{"#LISTE{couleurA, couleurB}|couleur_melanger{50}"}</code></dd>-->
+		<dt>Paramètre</dt>
+		<dd>nombre entre 0 et 100 (défaut=50)</dd>
+		<dt>Exemples</dt>
+		<dd><code class="Exemple">#VAL{"\[\(#VAL{ff4900}|couleur_melanger{c5e41d, 50}\)\]"}</code></dd>
+		<!--<dd><code class="Exemple">#VAL{"#LISTE{ff4900, c5e41d}|couleur_melanger{50}"}</code></dd>-->
+	</dl>
+	<BOUCLE_melanger(DATA){source table, #ARRAY{#GET{couleur1},#GET{couleur2}, #GET{couleur2},#dddddd, #ff4900, #GET{couleur1}}}>
+	<div class="apercu apercu_couleurs">
+		<div class="apercu__item on" style="background-color:[(#CLE)]; color:[#(#CLE|couleur_extreme|couleur_inverser)];"><p><strong>#CLE</strong></p></div>
+		<div class="apercu__item on" style="background-color:[(#VALEUR)]; color:[#(#VALEUR|couleur_extreme|couleur_inverser)];">#VALEUR</div>
+		<BOUCLE_melangerbis(DATA){liste 0.0,20,40,60,80,100}>
+		#SET{couleur, ##_melanger:CLE|couleur_melanger{#_melanger:VALEUR, #VALEUR}}
+		<div class="apercu__item" style="background-color:[(#GET{couleur})]; color:[#(#GET{couleur}|couleur_extreme|couleur_inverser)];">#VALEUR</div>
+		</BOUCLE_melangerbis>
+		<br style="clear:left" />
+	</div>
+	</BOUCLE_melanger>
+</div>
