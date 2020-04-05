@@ -1,0 +1,26 @@
+[<!--(#REM)
+
+	http://schema-creator.org/organization.php	
+		
+-->]
+<div class="schema organization" itemscope itemtype="http://schema.org/Organization">
+	[<div itemprop="name" class="item organization__nom">
+		<a itemprop="url" href="#URL_SITE_SPIP"><strong>(#IDENTITE_NOM_ORGANISATION)</strong></a>
+	</div>]
+	[<div class="organization__adresse item" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+		<i class="icon-location"></i>
+		<span class="item__sub">
+			<span class="#EDIT{meta-identite_extra/adresse}" itemprop="streetAddress">(#IDENTITE_ADRESSE)</span><span class="sep">, </span>
+		</span>
+		<span class="item__sub">
+			[<span class="#EDIT{meta-identite_extra/code_postal} code-postal zip" itemprop="postalCode">(#IDENTITE_CODE_POSTAL)</span>][
+			<span class="#EDIT{meta-identite_extra/ville} ville" itemprop="addressLocality">(#IDENTITE_VILLE)</span>][<span class="sep">, </span>
+			<span class="#EDIT{meta-identite_extra/region} region" itemprop="addressRegion">(#IDENTITE_REGION)</span>][<span class="sep">, </span>
+			<span class="#EDIT{meta-identite_extra/pays} pays" itemprop="addressCountry">(#IDENTITE_PAYS)</span>]
+		</span>
+	</div>]
+	[<div class="organization__telephone item">
+		<i class="icon-phone"></i>
+		<span class="#EDIT{meta-identite_extra/telephone} telephone" itemprop="telephone">(#IDENTITE_TELEPHONE)</span>
+	</div>]
+</div><!-- .schema.organization -->

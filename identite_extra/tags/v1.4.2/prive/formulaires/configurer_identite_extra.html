@@ -1,0 +1,17 @@
+[<!--(#REM) Squelette "addon" au form configurer_identite -->]
+#SET{version,#EVAL{$GLOBALS['spip_version_affichee']}}
+[(#GET{version}|version_compare{3.1.0,'>='}|oui)#SET{div,div}]
+
+<B_data>
+<[(#GET{div,ul}) ]class="editer-groupe">
+	<BOUCLE_data(DATA){source table,#ENV{identite_extra}}>
+		<[(#GET{div,li}) ]class="editer editer_[(#CLE)][ (#ENV{erreur/#CLE}|oui)erreur]">
+			<label for="#CLE">[(#VAL{identite_extra:#CLE}|_T|ucfirst)]</label>
+			[<p id="[(#CLE|strtolower)]_explication" class="explication">(#VAL{identite_extra:#CLE}|concat{_explication}|_T{#ARRAY,#ARRAY{force,''}})</p>]
+			[<span class="erreur_message">(#ENV{erreurs/#CLE})</span>]
+			<input type="text" class="text" name="identite_extra[#CLE]" id="#CLE" value="#ENV{identite_extra/#CLE, #VALEUR}" />
+		</[(#GET{div,li})]>
+	</BOUCLE_data>
+</[(#GET{div,ul})]>
+</B_data>
+
