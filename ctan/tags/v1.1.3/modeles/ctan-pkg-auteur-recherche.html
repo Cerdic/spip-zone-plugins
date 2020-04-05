@@ -1,0 +1,26 @@
+#SET{url_auteur,http://www.ctan.org/xml/author/#ENV{class}?ref=true}
+
+<B_pkg_auteur>
+<ul class="spip">
+<BOUCLE_pkg_auteur(DATA){source simplexml, #GET{url_auteur}} {datapath root/children/package}{par attributes/key}>
+	#SET{inactif,''}
+	<BOUCLE_test_actif(DATA){source simplexml, http://www.ctan.org/xml/pkg/#VALEUR{attributes/key}}{datapath root/children/authorref} >
+	 [(#VALEUR{attributes/id}|=={#ENV{class}}|oui)
+		[(#VALEUR{attributes/active}|=={false}|oui)
+		#SET{inactif,oui}
+		]
+	 ]
+	 </BOUCLE_test_actif>
+	
+		<B_pkg>
+			<li>
+			<BOUCLE_pkg(DATA){source simplexml, http://www.ctan.org/xml/pkg/#VALEUR{attributes/key}}{si #GET{inactif}|non|ou{#ENV{inactif}|oui}}>
+	
+				
+				<a href="http://www.ctan.org/tex-archive#VALEUR{children/ctan/0/attributes/path}" class="spip_out">[(#VALEUR{children/name/0/text})]</a>[ ((#VALEUR{children/version/0/attributes/number}))][, <em>(#VALEUR{children/caption/0/text})</em>] [(#GET{inactif}|oui)(<:ctan:inactif:>)] (<a href="[(#URL_PAGE{recherche}|parametre_url{recherche,#VALEUR{children/name/0/text}})]" class="spip_in"><:info_rechercher|strtolower:></a>)[(#_pkg_auteur:TOTAL_BOUCLE|=={#_pkg_auteur:COMPTEUR_BOUCLE}|?{.,&nbsp;;})]
+			</BOUCLE_pkg>
+			</li>
+		</B_pkg>
+</BOUCLE_pkg_auteur>
+</ul>
+</B_pkg_auteur>
