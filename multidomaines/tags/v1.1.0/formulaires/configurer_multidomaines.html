@@ -1,0 +1,21 @@
+<div class="formulaire_spip formulaire_configurer ajax">
+<form action="#ENV{action}" method="post"><div>
+    #ACTION_FORMULAIRE{#ENV{action}}
+    <ul>
+        <li class="editer_url obligatoire[(#ENV**{erreurs}|table_valeur{url}|oui)erreur]">
+            <label for="url"><:multidomaines:label_editer_url:></label>
+            [<span class="erreur_message">(#ENV**{erreurs}|table_valeur{url})</span>]
+            [<p class="explication">(#VAL{<:multidomaines:precisions_editer_url:>})</p>]
+            <input type='text' name='url' id='url' value="#ENV{url}" class="text" />
+            <div></div>
+        </li>
+        <li class="editer_dossier obligatoire[(#ENV**{erreurs}|table_valeur{squelettes}|oui)erreur]">
+            <label for="squelettes"><:multidomaines:label_squelette:></label>
+            [<span class="erreur_message">(#ENV**{erreurs}|table_valeur{squelettes})</span>]
+            [<p class="explication">(#VAL{<:multidomaines:precisions_squelette:>})</p>]
+            <input type='text' name='squelettes' id='squelettes' value="#ENV{squelettes}" class="text" />
+        </li>
+    </ul>
+    <p class="boutons"><input type="submit" class="submit" value="<:pass_ok:>" /></p>
+</div></form>
+</div>
