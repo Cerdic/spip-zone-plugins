@@ -1,0 +1,21 @@
+<paquet
+	prefix="taa"
+	categorie="edition"
+	version="2.0.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="img_pack/Translation-icon_32.png"
+	documentation="https://contrib.spip.net/Traductions-d-articles-autrement-3"
+>
+
+	<nom>Traduction d'articles autrement</nom>
+
+	<auteur lien="http://websimple.be">Rainer Müller</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<traduire module="taa" reference="fr" gestionnaire="salvatore" />
+
+	<necessite nom="interface_traduction_objets" compatibilite="[1.0.0;[" />
+
+
+</paquet>
