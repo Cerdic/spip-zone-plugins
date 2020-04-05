@@ -1,0 +1,21 @@
+<paquet
+	prefix="supersized"
+	categorie="multimedia"
+	version="0.6.2"
+	etat="stable"
+	compatibilite="[3.0.5;3.2.*]"
+	logo="prive/themes/spip/images/supersized-64.png"
+	documentation="https://supersized.brubel.net/spip.php?rubrique3"
+	demonstration="https://supersized.brubel.net/spip.php?page=slide"
+>
+	<nom>SuperSized slideshow</nom>
+	<auteur lien="http://lapsuske.brubel.net" mail="suske@brubel.net">Suske</auteur>
+	<copyright>2013</copyright>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
+
+	<credit lien="http://www.buildinternet.com/project/supersized/">Supersized by Sam Dunn</credit>
+	<credit lien="http://www.vectorilla.com/2010/02/elementary-vector-icons-big-set-more-than-5000-icons/">Logo by vectorilla.com</credit>
+
+	<traduire module="supersized" reference="fr" gestionnaire="salvatore" />
+
+</paquet>

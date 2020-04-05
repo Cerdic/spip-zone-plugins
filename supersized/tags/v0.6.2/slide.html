@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+	<!--
+		Supersized - Fullscreen Slideshow jQuery Plugin
+		Version : 3.2.7
+		Site	: www.buildinternet.com/project/supersized
+		
+		Author	: Sam Dunn
+		Company : One Mighty Roar (www.onemightyroar.com)
+		License : MIT License / GPL License
+
+		Plugin Supersized SlideShow pour SPIP
+
+		Auteur: Suske
+		License: GPL
+	-->
+
+	<head>
+
+		<title>#NOM_SITE_SPIP<BOUCLE_titre_rub(RUBRIQUES){id_rubrique}> | #TITRE</BOUCLE_titre_rub>
+		<BOUCLE_titre_art(ARTICLES){id_article}> | #TITRE</BOUCLE_titre_art><//B_titre_rub></title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		
+		[<link rel="stylesheet" href="(#CHEMIN{css/supersized.css})" type="text/css" media="screen" />]
+		[<link rel="stylesheet" href="(#CHEMIN{theme/supersized.shutter.css})" type="text/css" media="screen" />]
+		
+		#INSERT_HEAD
+		
+		[<script type="text/javascript" src="(#CHEMIN{js/supersized.3.2.7.min.js})"></script>]
+		[<script type="text/javascript" src="(#URL_PAGE{supersized.shutter.min.js})"></script>]
+		[<script type="text/javascript" src="(#CHEMIN{js/jquery-easing-compatibility.pack.js})"></script>]
+		[<script type="text/javascript" src="(#CHEMIN{js/jquery.easing.min.js})"></script>]
+
+[(#ENV{nbre_max}|?{#SET{nbre_max,#ENV{nbre_max}},#SET{nbre_max,25}})] <!-- Nombre max d'images par slideshow -->
+[(#ENV{tri}|?{#SET{tri,#ENV{tri}},#SET{tri,""}})] <!-- tri SPIP -->
+[(#ENV{triinverse}|?{#SET{triinverse,#ENV{triinverse}},#SET{triinverse,""}})] <!-- tri SPIP -->
+[(#ENV{transition}|?{#SET{transition,#ENV{transition}},#SET{transition,3}})] <!--  options 0 à 7 voir ci-dessous - mettre 00 pour 0 sinon ça vaut false -->
+[(#ENV{pause}|?{#SET{pause,#ENV{pause}},#SET{pause,5000}})] <!--  durée de l'affichage -->
+[(#ENV{vitesse}|?{#SET{vitesse,#ENV{vitesse}},#SET{vitesse,1000}})] <!--  durée  -->
+[(#ENV{nolinks}|?{#SET{slide_links,"false"},#SET{slide_links,"'blank'"}})] <!--  num et name sont pas bô alors on limite à false ou 'blank' -->
+[(#ENV{noclic}|?{#SET{ouvririmg,""},#SET{ouvririmg,"true"}})] <!--  noclic=1 empêche d ouvrir l'image seule depuis le slideshow -->
+#SET{taillemax,1200}#SET{qualite,80} <!--  taille max des images - defaut 1200 -->
+[(#ENV{taille}|=={"petit"}|oui)#SET{taillemax,640}#SET{qualite,80}]
+[(#ENV{taille}|=={"normal"}|oui)#SET{taillemax,1200}#SET{qualite,75}]
+[(#ENV{taille}|=={"grand"}|oui)#SET{taillemax,1600}#SET{qualite,70}]
+
+		
+		<script type="text/javascript">
+			
+			jQuery(function($){
+				
+				$.supersized({
+				
+					// Functionality
+					slide_interval          :   #GET{pause},		// Length between transitions
+					transition              :   #GET{transition}, 			// 0-None, 1-Fade, 2-Slide Top, 3-Slide Right, 4-Slide Bottom, 5-Slide Left, 6-Carousel Right, 7-Carousel Left
+					transition_speed		:	#GET{vitesse},		// Speed of transition
+					image_protect			:	0, // 1 pour interdire le clic droit :-/
+					new_window				:	0, // pas de popup
+															   
+					// Components
+
+					slide_links				:	#GET{slide_links},	// Individual links for each slide (Options: false, 'num', 'name', 'blank') 
+					slides 					:  	[			// Slideshow Images
+<BOUCLE_photos(DOCUMENTS){extension in jpg,png}{mode=document}{", "}{id_rubrique ?}{id_article ?}{id_mot ?}{0,#GET{nbre_max}}{par #GET{tri}}{!par #GET{triinverse}}>
+{image : '[(#FICHIER|image_reduire{[(#GET{taillemax})]}|image_aplatir{jpg,ffffff,[(#GET{qualite})],1}|extraire_attribut{src})]', title : '#TITRE'[, thumb : '(#FICHIER|image_reduire{200,150}||extraire_attribut{src})'][(#GET{ouvririmg}|oui), url : '#URL_DOCUMENT']}
+</BOUCLE_photos>
+												]
+					
+				});
+		    });
+		    
+		</script>
+	</head>
+	
+	<style type="text/css">
+		ul#demo-block{ margin:0 15px 15px 15px; }
+			ul#demo-block li{ margin:0 0 10px 0; padding:10px; display:inline; float:left; clear:both; color:#aaa; background:url('#CHEMIN{img/bg-black.png}'); font:11px Helvetica, Arial, sans-serif; }
+			ul#demo-block li a{ color:#eee; font-weight:bold; }
+	</style>
+
+<body>
+	<!--Demo styles (you can delete this block)-->
+	
+	<ul id="demo-block">#SET{navig,1}
+		<li><a href="#URL_SITE_SPIP" >[(#LOGO_SITE_SPIP|sinon{#NOM_SITE_SPIP})]</a></li>
+		<B_rub><li>
+		<BOUCLE_rub(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE" >#TITRE</a></BOUCLE_rub>
+		</li>#SET{navig,0}
+		</B_rub>
+		<B_art><li>
+		<BOUCLE_art(ARTICLES){id_article}><a href="#URL_ARTICLE" >#TITRE</a></BOUCLE_art>
+		</li>#SET{navig,0}
+		</B_art>
+		[(#GET{navig}|=={1}|oui)[<li>(#INCLURE{fond=inclure/liste_rub})</li>]]
+		[(#GET{navig}|=={1}|oui)[<li>(#INCLURE{fond=inclure/liste_art})</li>]]
+	</ul>
+	
+	<!--End of styles-->
+
+	<!--Thumbnail Navigation-->
+	<div id="prevthumb"></div>
+	<div id="nextthumb"></div>
+	
+	<!--Arrow Navigation-->
+	<a id="prevslide" class="load-item"></a>
+	<a id="nextslide" class="load-item"></a>
+	
+	<div id="thumb-tray" class="load-item">
+		<div id="thumb-back"></div>
+		<div id="thumb-forward"></div>
+	</div>
+	
+	<!--Time Bar-->
+	<div id="progress-back" class="load-item">
+		<div id="progress-bar"></div>
+	</div>
+	
+	<!--Control Bar-->
+	<div id="controls-wrapper" class="load-item">
+		<div id="controls">
+			
+			<a id="play-button"><img id="pauseplay" src="#CHEMIN{img/pause.png}"/></a>
+		
+			<!--Slide counter-->
+			<div id="slidecounter">
+				<span class="slidenumber"></span> / <span class="totalslides"></span>
+			</div>
+			
+			<!--Slide captions displayed here-->
+			<div id="slidecaption"></div>
+			
+			<!--Thumb Tray button-->
+			<a id="tray-button"><img id="tray-arrow" src="#CHEMIN{img/button-tray-up.png}"/></a>
+			
+			<!--Navigation-->
+			<ul id="slide-list"></ul>
+			
+		</div>
+	</div>
+
+</body>
+</html>
