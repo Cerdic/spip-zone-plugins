@@ -1,0 +1,11 @@
+<BOUCLE_favori(FAVORIS){id_favori}>
+{
+	"collection": {
+		"version": "1.0",
+		"href": "[(#VAL{&}|self|url_absolue)]",
+		"items": [
+			<INCLURE{fond=http/#ENV{format}/inc-favori, id_favori, mode, url_self=#SELF}>
+		]
+	}
+}
+</BOUCLE_favori>

@@ -1,0 +1,51 @@
+<h2>Test sur le critere {mesfavoris oui}</h2>
+
+[(#SESSION{id_auteur}|non)
+<div class="error"><h3>Vous devez être authentifié !</h3></div>
+]
+
+<B_3>
+<ul>
+<BOUCLE_3(ARTICLES){mesfavoris oui}{id_auteur ?}{id_article ?}{id_rubrique ?}{id_mot ?}>
+<li>Favori #ID_FAVORI trouvé pour l'article #ID_ARTICLE</li>
+</BOUCLE_3>
+</ul>
+</B_3>
+<//B_3>
+
+<hr/>
+
+<h2>Test sur le critere {mesfavoris non}</h2>
+<B_4>
+<ul>
+<BOUCLE_4(ARTICLES){mesfavoris non}{id_auteur ?}{id_article ?}{id_rubrique ?}{id_mot ?}>
+<li>L'article #ID_ARTICLE n'est pas en favori</li>
+</BOUCLE_4>
+</ul>
+</B_4>
+<//B_4>
+
+<hr/>
+
+<h2>Test sur le critere {mesfavoris}</h2>
+<B_5>
+<ul>
+<BOUCLE_5(ARTICLES){mesfavoris}{id_auteur ?}{id_article ?}{id_rubrique ?}{id_mot ?}>
+<li>Favori #ID_FAVORI trouvé pour l'article #ID_ARTICLE</li>
+</BOUCLE_5>
+</ul>
+</B_5>
+<//B_5>
+
+<hr/>
+
+<h2>Test sur le critere {!mesfavoris}</h2>
+<B_6>
+<ul>
+<BOUCLE_6(ARTICLES){!mesfavoris}{id_auteur ?}{id_article ?}{id_rubrique ?}{id_mot ?}>
+<li>L'article #ID_ARTICLE n'est pas en favori</li>
+</BOUCLE_6>
+</ul>
+</B_6>
+<//B_6>
+

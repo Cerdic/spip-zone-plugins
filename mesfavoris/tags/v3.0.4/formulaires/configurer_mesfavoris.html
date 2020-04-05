@@ -1,0 +1,46 @@
+<!-- autoriser=configurer -->
+<!-- refus=<:cfg:refus_configuration_administrateur:> -->
+<!-- nom=<:mesfavoris:mesfavoris:> -->
+
+<style type="text/css">
+div.choix img { vertical-align: top; margin: 0 5px 10px; }
+</style>
+
+<div class="formulaire_spip formulaire_cfg formulaire_#FORM">
+<h3 class="titrem">[(#CHEMIN_IMAGE{favori-24.png}|balise_img{'',cadre-icone})]<:mesfavoris:legend_formulaire_public:></h3>
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+	<div class="editer-groupe">
+		#SET{name,style_formulaire}#SET{obli,''}#SET{defaut,'coeur'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<label><:mesfavoris:legend_style_formulaire:></label>[
+			<span class='erreur_message'>(#GET{erreurs})</span>
+			]
+			#SET{val,coeur}
+			<div class="choix">
+				<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}" aria-describedby="#GET{name}_explication" [(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+				<label for="#GET{name}_#GET{val}"><:mesfavoris:label_style_formulaire_coeur:>[<img src="(#CHEMIN{css/img/favoris.svg})" alt="" width="24" height="24" />]</label>
+			</div>
+			#SET{val,bookmark}
+			<div class="choix">
+				<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}" aria-describedby="#GET{name}_explication" [(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+				<label for="#GET{name}_#GET{val}"><:mesfavoris:label_style_formulaire_bookmark:>[<img src="(#CHEMIN{css/img/bookmark.svg})" alt="" width="24" height="24" />]</label>
+			</div>
+		</div>
+	</div>
+	<div class="explication p"><:mesfavoris:explication_taille_formulaire:>
+<pre>
+.formulaire_favori {font-size:0.8em}
+.formulaire_favori img {width:1em;}
+</pre>
+	</div>
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
+	</p>
+</div>
+</form>
+</div>
