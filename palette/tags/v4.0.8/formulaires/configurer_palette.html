@@ -1,0 +1,30 @@
+<div class="formulaire_spip formulaire_config formulaire_#FORM">
+	<h3 class="titrem"><:palette:config_titre:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE
+			<div class="editer-groupe">
+				<div class="editer editer_palette_public">
+					<div class="choix">
+						<input type="checkbox" name="palette_public" id="palette_public"[ checked="(#ENV{palette_public}|!={''}|?{'checked'})"]  class="checkbox" value="on" />
+						<label for="palette_public"><:palette:palette_public:></label>
+					</div>
+				</div>
+				<div class="editer editer_palette_ecrire">
+					<div class="choix">
+						<input type="checkbox" name="palette_ecrire" id="palette_ecrire"[ checked="(#ENV{palette_ecrire}|!={''}|?{'checked'})"]  class="checkbox" value="on" />
+						<label for="palette_ecrire"><:palette:palette_ecrire:></label>
+					</div>
+				</div>
+			</div>
+			<input type="hidden" name="_meta_casier" value="palette"/>
+			<div class="boutons">
+				<input type="submit" class="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" />
+			</div>
+		</div>
+	</form>
+</div>

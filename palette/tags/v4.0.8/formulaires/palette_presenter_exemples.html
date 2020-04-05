@@ -1,0 +1,56 @@
+<div class="formulaire_spip formulaire_#FORM">
+	<h3 class="titrem"><:palette:config_exemple:></h3>
+	<form action="#ENV{action}">
+		#FORMULAIRE_ACTION
+		<div class="editer-groupe">
+			<div class="editer pleine_largeur">
+				<label><:palette:config_exemple_couleur:></label>
+				<input class="text palette" name="couleur" value="#ff6633" />
+			</div>
+			<div class="editer pleine_largeur">
+				<label><:palette:config_exemple_couleur_alpha:></label>
+				<input class="text palette" name="couleur" value="rgba(250, 150, 50, .5)" data-palette-withalpha="1" />
+			</div>
+			<div class="editer pleine_largeur">
+				<label><:palette:config_exemple_code_source:></label>
+				<p class="explication"><:palette:config_lien_doc:></p>
+				<textarea class="spip_cadre" rows="8">
+&lt;input class="text palette" name="couleur" value="#ff6633" /&gt;
+&lt;input
+	class="text palette"
+	name="couleur"
+	value="rgba(250, 150, 50, .5)"
+	data-palette-withalpha="1"
+/>
+				</textarea>
+			</div>
+		</div>
+
+		<div class="fieldset">
+			<legend><:palette:config_exemples_couleurs_vides:></legend>
+			<div class="editer-groupe">
+				<div class="editer pleine_largeur">
+					<label><:palette:config_exemple_couleur:></label>
+					<input class="text palette" name="couleur" value="" />
+				</div>
+				<div class="editer pleine_largeur">
+					<label><:palette:config_exemple_couleur_alpha:></label>
+					<input class="text palette" name="couleur" value="" data-palette-withalpha="1" />
+				</div>
+				<div class="editer pleine_largeur">
+					<label><:palette:config_exemple_code_source:></label>
+					<p class="explication"><:palette:config_lien_doc:></p>
+					<textarea class="spip_cadre" rows="8">
+&lt;input class="text palette" name="couleur" value="" /&gt;
+&lt;input
+	class="text palette"
+	name="couleur"
+	value=""
+	data-palette-withalpha="1"
+/>
+					</textarea>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
