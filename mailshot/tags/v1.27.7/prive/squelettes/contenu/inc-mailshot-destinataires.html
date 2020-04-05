@@ -1,0 +1,19 @@
+<BOUCLE_statuts(POUR){tableau #LISTE{todo,sent,read,clic,spam,fail}}>[
+	[(#GET{un}|non)
+		#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+		<div class="nettoyeur"></div>
+	]
+	<h2>[(#VAL{mailshot:titre_envois_destinataires_}|concat{#VALEUR}|_T)]</h2>#SET{un,' '}
+	<div class="dest_un_statut dest_#VALEUR">
+		(#INCLURE{fond=prive/objets/liste/mailshots_destinataires,env,statut=#VALEUR,ajax})
+	</div>
+]</BOUCLE_statuts>
+[(#GET{un}|non)
+	[(#ENV{recherche}|oui)
+		#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+		<div class="nettoyeur"></div>
+	]
+	[(#INFO_STATUT{mailshot,#ID_MAILSHOT}|in_array{#LISTE{pause,processing}}|oui)
+		<p class="notice"><:mailshot:titre_envois_destinataires_init_encours:></p>
+	]
+]

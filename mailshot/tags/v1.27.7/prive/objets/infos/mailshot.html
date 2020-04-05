@@ -1,0 +1,26 @@
+<BOUCLE_mailshot(MAILSHOTS){id_mailshot=#ENV{id}}{statut?}>
+<div class='infos'>
+#SET{texte_objet,#VAL{mailshot}|objet_info{texte_objet}|_T}
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_MAILSHOT</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{mailshot,#ID_MAILSHOT,'',#VAL{mailshot}|objet_info{editable}})]
+
+[(#AUTORISER{instituer,mailshot,#ID_MAILSHOT}|oui)
+<div class="actions">
+[(#STATUT|in_array{#LISTE{processing}}|oui)
+  [(#BOUTON_ACTION{#CHEMIN_IMAGE{mailshot-pause-16.png}|balise_img{<:mailshot:label_control_pause:>,<:mailshot:label_control_pause:>},#URL_ACTION_AUTEUR{instituer_objet,mailshot-#ID_MAILSHOT-pause,#SELF},ajax})]
+][(#STATUT|in_array{#LISTE{pause}}|oui)
+	[(#BOUTON_ACTION{#CHEMIN_IMAGE{mailshot-play-16.png}|balise_img{<:mailshot:label_control_play:>},#URL_ACTION_AUTEUR{instituer_objet,mailshot-#ID_MAILSHOT-processing,#SELF},ajax})]
+][(#STATUT|in_array{#LISTE{pause,processing}}|oui)
+	[(#BOUTON_ACTION{#CHEMIN_IMAGE{mailshot-stop-16.png}|balise_img{<:mailshot:label_control_stop:>},#URL_ACTION_AUTEUR{instituer_objet,mailshot-#ID_MAILSHOT-cancel,#SELF},ajax})]
+]
+</div>
+	[(#STATUT|in_array{#LISTE{init}}|oui)
+		[(#URL_ACTION_AUTEUR{instituer_objet,mailshot-#ID_MAILSHOT-cancel,#SELF}|icone_horizontale{<:mailshot:info_annuler_envoi:>,mailshot-24,del})]
+	]
+]
+[(#AUTORISER{archiver,mailshot,#ID_MAILSHOT}|oui)
+	[(#URL_ACTION_AUTEUR{mailshot_archiver,#ID_MAILSHOT,#SELF}|icone_horizontale{<:mailshot:info_archiver:>,mailshot-archiver-24})]
+]
+
+</div></BOUCLE_mailshot>

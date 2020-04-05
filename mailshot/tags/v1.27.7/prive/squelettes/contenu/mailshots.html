@@ -1,0 +1,21 @@
+<h1 class="grostitre"><:mailshot:titre_menu_mailshots:></h1>
+
+[<h2><:mailshot:titre_envois_planifies:></h2>#SET{un,' '}
+(#INCLURE{fond=prive/objets/liste/mailshots,env,statut=#LISTE{init},ajax})]
+
+[<h2><:mailshot:titre_envois_en_cours:></h2>#SET{un,' '}
+(#INCLURE{fond=prive/objets/liste/mailshots,env,statut=#LISTE{pause,processing},ajax})]
+
+[<h2><:mailshot:titre_envois_termines:></h2>#SET{un,' '}
+<div class="mailshot_ended">
+(#INCLURE{fond=prive/objets/liste/mailshots,env,statut=#LISTE{end,cancel},ajax})
+</div>]
+
+[<h2><:mailshot:titre_envois_archives:></h2>#SET{un,' '}
+<div class="mailshot_ended">
+(#INCLURE{fond=prive/objets/liste/mailshots,env,statut=archive,ajax})
+</div>]
+
+[(#GET{un}|non)
+<p class="info"><:mailshot:info_aucun_envoi:></p>
+]

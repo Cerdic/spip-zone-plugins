@@ -1,0 +1,160 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:mailshot:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		#SET{fl,mailshot}
+		<input type="hidden" name="_meta_casier" value="mailshot" />
+		<ul class="editer-groupe">
+			<li class="fieldset">
+				<fieldset>
+					<legend><:mailshot:legend_configuration_mailer:></legend>
+					<ul class="editer-groupe">
+						<li class="editer pleine_largeur editer_mailer [ (#ENV**{erreurs}|table_valeur{smtp}|oui)erreur]">
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{smtp})</span>]
+							#SET{disable,#CONFIG{facteur_smtp}|=={oui}|non}
+							<div class="choix[(#GET{disable}|oui)disabled]">
+								<input type="radio" name="mailer" class="radio" value="defaut" id="mailer_defaut"[(#GET{disable}|non)[(#ENV{mailer,'defaut'}|=={defaut}|oui)checked="checked"]][(#GET{disable}|oui)disabled="disabled"]/>
+								<label for="mailer_defaut"><:mailshot:label_mailer_defaut:>[(#GET{disable}|oui)<br /><b><:mailshot:label_mailer_defaut_desactive:>]</b></label>
+							</div>
+
+							<INCLURE{fond=formulaires/inc-config-mailshot-smtp,env} />
+							<INCLURE{fond=formulaires/inc-config-mailshot-mailjet,env} />
+							<INCLURE{fond=formulaires/inc-config-mailshot-sparkpost,env} />
+							<INCLURE{fond=formulaires/inc-config-mailshot-mandrill,env} />
+
+							<!--editer_mailer_choix-->
+						</li>
+						<!--EX01-->
+						#SET{name,rate_limit}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}"
+							[(#ENV{boost_send,non}|=={oui}|oui)disabled="disabled"]
+							[(#HTML5|et{#GET{obli}})required='required']/>
+							[<p class="explication">(#GET{fl}|concat{':explication_',#GET{name}}|_T)</p>]
+						</li>
+						#SET{name,boost_send}#SET{obli,''}#SET{defaut,'non'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]
+							#SET{val,non}
+							<input type="hidden" name="#GET{name}" value="#GET{val}" />
+							#SET{val,oui}
+							<div class="choix">
+								<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"
+								onchange="jQuery('#rate_limit').attr('disabled',jQuery(this).prop('checked')?true:false);"
+								[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+								<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+							</div>
+							<p class="explication"><:mailshot:explication_boost_send:></p>
+						</li>
+
+					</ul>
+				</fieldset>
+			</li>
+			<li class="fieldset">
+				<fieldset>
+					<legend><:mailshot:legend_configuration_adresse_envoi:></legend>
+					<ul class="editer-groupe">
+						<li class="editer pleine_largeur editer_adresse_envoi [ (#ENV**{erreurs}|table_valeur{adresse_envoi}|oui)erreur]">
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse_envoi})</span>]
+							<div class="choix">
+								<input type="radio" name="adresse_envoi" class="radio" value="non" id="adresse_envoi_non"[(#ENV{adresse_envoi,'non'}|=={non}|oui)checked="checked"]/>
+								<label for="adresse_envoi_non"><:facteur:utiliser_reglages_site{from=#ENV{_from_defaut}}:></label>
+							</div>
+							<div class="choix">
+								<input type="radio" name="adresse_envoi" class="radio" value="oui" id="adresse_envoi_oui"[(#ENV{adresse_envoi,'non'}|=={oui}|oui)checked="checked"]/>
+								<label for="adresse_envoi_oui"><:facteur:personnaliser:></label>
+								<ul class="editer-groupe suite">
+									<li class="editer gauche editer_adresse_envoi_perso editer_adresse_envoi_nom [ (#ENV**{erreurs}|table_valeur{adresse_envoi_nom}|oui)erreur]">
+										<label for="adresse_envoi_nom"><:facteur:facteur_adresse_envoi_nom:></label>[
+										<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse_envoi_nom})</span>]
+										<input type="text" name="adresse_envoi_nom" class="text" value="#ENV**{adresse_envoi_nom}" id="adresse_envoi_nom" />
+									</li>
+									<li class="editer gauche editer_adresse_envoi_perso editer_adresse_envoi_email [ (#ENV**{erreurs}|table_valeur{adresse_envoi_email}|oui)erreur]">
+										<label for="adresse_envoi_email"><:facteur:facteur_adresse_envoi_email:></label>[
+										<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse_envoi_email})</span>]
+										<input type="text" name="adresse_envoi_email" class="text" value="#ENV**{adresse_envoi_email}" id="adresse_envoi_email" />
+									</li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			<li class="fieldset">
+				<fieldset>
+					<legend><:mailshot:legend_configuration_historique:></legend>
+					<p class="explication"><:mailshot:explication_purger_historique:></p>
+					<ul class="editer-groupe">
+						#SET{name,purger_historique}#SET{obli,''}#SET{defaut,'oui'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]
+							#SET{val,non}
+							<input type="hidden" name="#GET{name}" value="#GET{val}" />
+							#SET{val,oui}
+							<div class="choix">
+								<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"
+								[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+								<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+								<ul class="editer-groupe suite">
+									#SET{name,purger_historique_delai}#SET{obli,''}#SET{defaut,'12'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+									<li class="editer gauche long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+										<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+										<span class='erreur_message'>(#GET{erreurs})</span>
+										]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']
+										style="width: 6em;" /> <:date_mois:>
+									</li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
+
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>
+<script type="text/javascript">
+function radio_choix_change(input,suite,vitesse){
+	if (typeof vitesse=="undefined") vitesse='fast';
+	if (input.prop('checked'))
+		suite.show(vitesse);
+	else
+		suite.hide(vitesse);
+};
+jQuery(
+	function(){
+		jQuery('.suite').each(
+			function(){
+				var input=jQuery(this).prev('.choix');
+				if (!input.length){
+					input = jQuery(this).closest('.choix');
+				}
+				input=input.find('>input.radio,>input.checkbox');
+				var me = jQuery(this);
+				var name = input.attr('name');
+				if (input.length){
+					radio_choix_change(input,me,'');
+					jQuery("input[name='"+name+"']").change(function(){radio_choix_change(input,me);});
+				}
+			}
+		);
+	}
+);
+</script>
+<style type="text/css">
+.choix.disabled label {font-style: italic;opacity: 0.7;}
+.formulaire_spip .suite {padding-left: 20px;}
+.formulaire_spip .suite .editer {background: #f8f8f8}
+</style>

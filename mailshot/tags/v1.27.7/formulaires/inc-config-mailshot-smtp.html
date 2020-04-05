@@ -1,0 +1,65 @@
+#SET{fl,mailshot}
+<div class="choix">
+	<input type="radio" name="mailer" class="radio" value="smtp" id="mailer_smtp"[(#ENV{mailer,'defaut'}|=={smtp}|oui)checked="checked"]/>
+	<label for="mailer_smtp"><:mailshot:label_mailer_smtp:></label>
+	<ul class="editer-groupe suite">
+		<li class="editer gauche editer_smtp_param editer_smtp_host [ (#ENV**{erreurs}|table_valeur{smtp_host}|oui)erreur]">
+			<label for="smtp_host"><:facteur:facteur_smtp_host:></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{smtp_host})</span>]
+			<input type="text" name="smtp[host]" class="text" value="#ENV**{smtp/host}" id="smtp_host" />
+		</li>
+		<li class="editer gauche editer_smtp_param editer_smtp_port [ (#ENV**{erreurs}|table_valeur{smtp_port}|oui)erreur]">
+			<label for="smtp_port"><:facteur:facteur_smtp_port:></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{smtp_port})</span>]
+			<input type="text" name="smtp[port]" class="text" value="#ENV**{smtp/port}" id="smtp_port" />
+		</li>
+		<li class="editer editer_smtp_param editer_smtp_auth [ (#ENV**{erreurs}|table_valeur{smtp_auth}|oui)erreur]">
+			<label><:facteur:facteur_smtp_auth:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{smtp_auth})</span>]
+			<div class="choix">
+				<input type="radio" name="smtp[auth]" class="radio" value="non" id="smtp_auth_non"[(#ENV{smtp/auth,'non'}|=={non}|oui)checked="checked"]/>
+				<label for="smtp_auth_non"><:facteur:facteur_smtp_auth_non:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="smtp[auth]" class="radio" value="oui" id="smtp_auth_oui"[(#ENV{smtp/auth,'non'}|=={oui}|oui)checked="checked"]/>
+				<label for="smtp_auth_oui"><:facteur:facteur_smtp_auth_oui:></label>
+				<ul class="editer-groupe suite">
+					<li class="editer gauche editer_smtp_username [ (#ENV**{erreurs}|table_valeur{smtp_username}|oui)erreur]">
+						<label for="smtp_username"><:facteur:facteur_smtp_username:></label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{smtp_username})</span>]
+						<input type="text" name="smtp[username]" class="text" value="#ENV**{smtp/username}" id="smtp_username" />
+					</li>
+					<li class="editer gauche editer_smtp_password [ (#ENV**{erreurs}|table_valeur{smtp_password}|oui)erreur]">
+						<label for="smtp_password"><:facteur:facteur_smtp_password:></label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{smtp_password})</span>]
+						<input type="password" name="smtp[password]" class="text" value="#ENV**{smtp/password}" id="smtp_password"
+			       [placeholder="(#ENV*{_smtp_password}|mailshot_affiche_password_masque)"] />
+					</li>
+				</ul>
+			</div>
+		</li>
+		[(#ENV{_enable_smtp_secure}|non)
+		<li class="editer editer_smtp_param editer_smtp_secure [ (#ENV**{erreurs}|table_valeur{smtp_secure}|oui)erreur]">
+			<label><:facteur:facteur_smtp_secure:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{smtp_secure})</span>]
+			<div class="choix">
+				<input type="radio" name="smtp\[secure\]" class="radio" value="non" id="smtp_secure_non"[(#ENV{smtp/secure,'non'}|=={non}|oui)checked="checked"]/>
+				<label for="smtp_secure_non"><:facteur:facteur_smtp_secure_non:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="smtp\[secure\]" class="radio" value="ssl" id="smtp_secure_ssl"[(#ENV{smtp/secure,'non'}|=={ssl}|oui)checked="checked"]/>
+				<label for="smtp_secure_ssl"><:facteur:facteur_smtp_secure_ssl:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="smtp\[secure\]" class="radio" value="tls" id="smtp_secure_tls"[(#ENV{smtp/secure,'non'}|=={tls}|oui)checked="checked"]/>
+				<label for="smtp_secure_tls"><:facteur:facteur_smtp_secure_tls:></label>
+			</div>
+		</li>]
+		<li class="editer editer_smtp_errorsto [ (#ENV**{erreurs}|table_valeur{smtp_errorsto}|oui)erreur]">
+			<label for="smtp_errorsto"><:facteur:facteur_smtp_sender:></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{smtp_errorsto})</span>]
+			<p class="explication"><:facteur:facteur_smtp_sender_descriptif:></p>
+			<input type="text" name="smtp[errorsto]" class="text" value="#ENV**{smtp/errorsto}" id="smtp_errorsto" />
+		</li>
+	</ul>
+</div>

@@ -1,0 +1,67 @@
+<div class="formulaire_spip formulaire_#FORM">
+	<span class='image_loading'>&nbsp;</span>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable}|oui)
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		#SET{fl,newsletter}
+		<fieldset>
+			<legend>[(#ENV{_mode_test}|?{<:newsletter:info_tester_newsletter:>,<:newsletter:info_envoi_unique_newsletter:>})]</legend>
+			<ul class="editer-groupe">
+				#SET{name,email_test}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+					<input type="submit" name="envoi_test" class="submit" value="[(#ENV{_mode_test}|?{<:newsletter:bouton_tester_envoi:>,<:newsletter:bouton_envoyer:>})]" name="test" />
+				</li>
+			</ul>
+		</fieldset>
+		[(#ENV{_mode_test}|non)
+		<fieldset>
+			<legend><:newsletter:info_envoyer_newsletter:></legend>
+			<ul class="editer-groupe">
+				#SET{name,liste}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<select name="#GET{name}" class="select" id="#GET{name}">
+					<INCLURE{fond=formulaires/inc-options-subscribinglists,name=#GET{name},choix_listes=#ENV{_listes_dispo},env} />
+					</select>
+					<input type="submit" name="envoi" class="submit" value="<:newsletter:bouton_envoyer:>" name="test" />
+				</li>
+				#SET{name,resend}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<div class="choix">
+						#SET{val,non}
+						<input type="hidden" name="#GET{name}" value="#GET{val}" />
+						#SET{val,oui}
+						<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+						<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+					</div>
+				</li>
+				#SET{name,date_start}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="planifie">
+						<input type="checkbox" class="checkbox" name="planifie" id="planifie" value="1" [(#ENV{planifie}|oui)checked="checked"] onchange="if (jQuery(this).is(':checked')) jQuery(this).parent().siblings().show(); else jQuery(this).parent().siblings().hide();"/>
+						[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<span [(#ENV{planifie}|non)style="display: none;"]>
+					<input type="text" class="text date" name="#GET{name}_jour" id="#GET{name}_jour" value="#ENV{#GET{name}_jour}" size="10" placeholder="[(#ENV{date}|affdate{d/m/Y})]"/>
+					<input type="text" class="text heure time" name="#GET{name}_heure" id="#GET{name}_heure" value="#ENV{#GET{name}_heure}" size="5" placeholder="[(#ENV{date}|affdate{H:00})]"/>
+				</span>
+				</li>
+			</ul>
+		</fieldset>
+		][<p class="explication">(#ENV{_mode_test})</p>]
+	</div>
+	</form>
+	]
+
+	<INCLURE{fond=prive/objets/liste/mailshots,id=#ENV{_id_newsletter},env,ajax} />
+</div>
+<INCLURE{fond=formulaires/dateur/inc-dateur} />

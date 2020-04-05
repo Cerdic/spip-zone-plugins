@@ -1,0 +1,36 @@
+#SET{fl,mailshot}
+<div class="choix">
+	<input type="radio" name="mailer" class="radio" value="mailjet" id="mailer_mailjet"[(#ENV{mailer,'defaut'}|=={mailjet}|oui)checked="checked"]/>
+	<label for="mailer_mailjet"><:mailshot:label_mailer_mailjet:></label>
+	<a href="http://www.mailjet.com/">http://www.mailjet.com/</a>
+	<ul class="editer-groupe suite">
+		#SET{name,mailjet_api_key}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		<li class="editer gauche editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+			<span class='erreur_message'>(#GET{erreurs})</span>
+			]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+		</li>
+		#SET{name,mailjet_secret_key}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		<li class="editer gauche editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+			<span class='erreur_message'>(#GET{erreurs})</span>
+			]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']
+			[placeholder="(#ENV*{_#GET{name}}|mailshot_affiche_password_masque)"] />
+
+		</li>
+		#SET{name,mailjet_api_version}#SET{obli,''}#SET{defaut,'3'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		[(#ENV{mailjet_api_key,''}|oui)#SET{defaut,'1'}]
+		<li class="editer gauche editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+			<span class='erreur_message'>(#GET{erreurs})</span>
+			]<select name="#GET{name}" class="select" id="#GET{name}">
+				#SET{val,1}
+				<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[v(#GET{val})] (in.mailjet.com)</option>
+				#SET{val,2}
+				<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[v(#GET{val})] (in-v#GET{val}.mailjet.com)</option>
+				#SET{val,3}
+				<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[v(#GET{val})] (api.mailjet.com/v3/)</option>
+			</select>
+		</li>
+	</ul>
+</div>

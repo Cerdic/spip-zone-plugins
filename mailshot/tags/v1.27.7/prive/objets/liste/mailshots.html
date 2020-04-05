@@ -1,0 +1,56 @@
+[(#SET{defaut_tri,#ARRAY{
+	id_mailshot,-1,
+	sujet,1,
+	date,-1
+}})]#SET{autoreload,''}<B_mailshot>
+#ANCRE_PAGINATION
+<div class="liste-objets mailshots">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{mailshot:info_1_mailshot,mailshot:info_nb_mailshots}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='id_mailshot' scope='col'>[(#TRI{id_mailshot,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class='sujet' scope='col'>[(#TRI{sujet,<:mailshot:label_sujet:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class='listes' scope='col'><:mailshot:label_listes:></th>
+			<th class='progress' scope='col'>%</th>
+			<th class='action' scope='col'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_mailshot(MAILSHOTS){id?}{where?}{statut?}{recherche?}{tri #ENV{par,id_mailshot},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='statut'>[(#STATUT|mailshot_puce_statut{mailshot,#ID_MAILSHOT})]</td>
+			<td class='id_mailshot'><a href="[(#ID_MAILSHOT|generer_url_entite{mailshot})]" title="<:mailshot:label_envoi|attribut_html:> <:info_numero_abbreviation|attribut_html:>#ID_MAILSHOT"><:mailshot:info_mailshot_no{id=#ID_MAILSHOT}:></a></td>
+			<td class='sujet principale'>[(#SUJET|couper{160})]
+				[<span class="small">\[<a href="(#ID|mailshot_url_newsletter)" title="<:info_numero_abbreviation|attribut_html:> #ID"><:mailshot:lien_voir_newsletter:></a>\]</span>]
+			</td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
+			<td class='listes secondaire'>[(#LISTES|mailshot_affiche_nom_liste)]</td>
+			<td class='progress'>[(#CURRENT|mailshot_afficher_avancement{#TOTAL,#FAILED})]</td>
+			<td class='action'>
+			[(#AUTORISER{instituer,mailshot,#ID_MAILSHOT}|oui)
+			[(#STATUT|in_array{#LISTE{processing}}|oui)
+			  [(#BOUTON_ACTION{#CHEMIN_IMAGE{mailshot-pause-16.png}|balise_img{<:mailshot:label_control_pause:>},#URL_ACTION_AUTEUR{instituer_objet,mailshot-#ID_MAILSHOT-pause,#SELF},ajax,'',<:mailshot:label_control_pause:>})]
+			][(#STATUT|in_array{#LISTE{pause}}|oui)
+				[(#BOUTON_ACTION{#CHEMIN_IMAGE{mailshot-play-16.png}|balise_img{<:mailshot:label_control_play:>},#URL_ACTION_AUTEUR{instituer_objet,mailshot-#ID_MAILSHOT-processing,#SELF},ajax,'',<:mailshot:label_control_play:>})]
+			][(#STATUT|in_array{#LISTE{pause,processing}}|oui)
+				[(#BOUTON_ACTION{#CHEMIN_IMAGE{mailshot-stop-16.png}|balise_img{<:mailshot:label_control_stop:>},#URL_ACTION_AUTEUR{instituer_objet,mailshot-#ID_MAILSHOT-cancel,#SELF},ajax,'',<:mailshot:label_control_stop:>})]
+			]
+			]
+			</td>
+		</tr>
+		[(#STATUT|=={processing}|oui)#SET{autoreload,' '}]
+	</BOUCLE_mailshot>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_mailshot>[
+<div class="liste-objets mailshot caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_mailshot>
+[(#GET{autoreload}|oui)#SET{uniqid,r#REM|time|uniqid}
+<span id="#GET{uniqid}"></span>
+<script type="text/javascript">setTimeout(function(){jQuery("##GET{uniqid}").ajaxReload();},120000);</script>
+]

@@ -1,0 +1,36 @@
+[(#SET{defaut_tri,#ARRAY{
+	id_mailshot,-1,
+	email,1,
+	date,-1,
+	points,-1
+}})]#SET{autoreload,''}[(#SET{recherche,[(#ENV{recherche}|?{[%(#ENV{recherche})%],'%'})]})]<B_mailshot_dest>
+#ANCRE_PAGINATION
+[<h3>(#ENV*{titre_liste})</h3>]
+<div class="liste-objets mailshots_destinataires">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{mailshot:info_1_mailshot_destinataire,mailshot:info_nb_mailshots_destinataires}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='id_mailshot' scope='col'>[(#TRI{id_maishot,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class='email' scope='col'>[(#TRI{email,<:email:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_mailshot_dest(mailshots_destinataires){id_mailshot?}{email?}{where?}{statut?}{email LIKE #GET{recherche}}{tri #ENV{par,email},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='id_mailshot'><a href="[(#ID_MAILSHOT|generer_url_entite{mailshot})]">#ID_MAILSHOT</a></td>
+			<td class='email'>[(#EMAIL|mailshot_link_admin_email)]</td>
+			<td class='date secondaire'>[(#DATE|affdate_heure)]</td>
+			<td class='statut'>[(#VAL{mailshot:info_statut_destinataire_}|concat{#STATUT}|_T)]</td>
+		</tr>
+		[(#STATUT|=={processing}|oui)#SET{autoreload,' '}]
+	</BOUCLE_mailshot_dest>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_mailshot_dest>[
+<div class="liste-objets mailshot caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_mailshot_dest>

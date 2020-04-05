@@ -1,0 +1,58 @@
+[(#AUTORISER{voir,mailshot,#ID_MAILSHOT}|sinon_interdire_acces)]
+<BOUCLE_mailshot(MAILSHOTS){id_mailshot}{statut?}>
+
+[<div class="champ contenu_sujet[ (#SUJET*|strlen|?{'',vide})]">
+	<div class='label'><:mailshot:label_sujet:> : </div>
+	<span dir='#LANG_DIR' class='#EDIT{sujet} sujet'>(#SUJET)[ \[<a href="(#ID|mailshot_url_newsletter)" title="<:info_numero_abbreviation|attribut_html:> #ID"><:mailshot:lien_voir_newsletter:></a>\]]</span>
+</div>]
+
+[<div class="champ contenu_date_start[(#STATUT|=={init}|oui)notice][ (#DATE_START*|strlen|?{'',vide})]">
+	<div class='label'><:mailshot:label_date_start:> : </div>
+	<span dir='#LANG_DIR' class='#EDIT{date_start} date_start'>(#DATE_START|affdate_heure)</span>
+</div>]
+[(#STATUT|in_array{#LISTE{processing,pause,init}}|non)
+[<div class="champ contenu_date[ (#DATE*|strlen|?{'',vide})]">
+	<div class='label'><:mailshot:label_date_fin:> : </div>
+	<span dir='#LANG_DIR' class='#EDIT{date} date'>(#DATE|affdate_heure)</span>
+</div>]
+]
+
+[[(#BOITE_OUVRIR{#VAL{mailshot:label_listes}|_T|concat{' ',#GRACEFUL|?{<small class="graceful"><:mailshot:label_graceful:></small>}}})]
+<div class="champ contenu_listes[ (#LISTES*|strlen|?{'',vide})]">
+	<div class='label'><:mailshot:label_listes:> : </div>
+	<span dir='#LANG_DIR' class='#EDIT{listes} listes'>(#LISTES|mailshot_affiche_nom_liste)</span>
+</div>
+#BOITE_FERMER
+]
+
+<div class="champ contenu_from[ (#FROM_EMAIL*|strlen|?{'',vide})]">
+	<div class='label'><:mailshot:label_from:> : </div>
+	<span dir='#LANG_DIR' class=''>[(#FROM_NAME|sinon{#FROM_EMAIL}) ][&lt;(#FROM_EMAIL)&gt;]</span>
+</div>
+
+
+[<div class="champ contenu_avancement">
+	<div class='label'><:mailshot:label_avancement:> : </div>
+	<span dir='#LANG_DIR' class='avancement'>(#CURRENT|mailshot_afficher_avancement{#TOTAL,#FAILED})</span>
+	[(#NB_READ|plus{#NB_CLIC}|plus{#FAILED}|plus{#NB_SPAM}|oui)
+	<ul class="spip">
+		[(#NB_READ|intval|oui)<li>[(#NB_READ|mult{1000}|div{#TOTAL}|round|div{10})% <:mailshot:info_statut_destinataire_read:>]</li>]
+		[(#NB_CLIC|intval|oui)<li>[(#NB_CLIC|mult{1000}|div{#TOTAL}|round|div{10})% <:mailshot:info_statut_destinataire_clic:>]</li>]
+		[(#FAILED|intval|oui)<li>[(#FAILED|mult{1000}|div{#TOTAL}|round|div{10})% <:mailshot:info_statut_destinataire_fail:>]</li>]
+		[(#NB_SPAM|intval|oui)<li>[(#NB_SPAM|mult{1000}|div{#TOTAL}|round|div{10})% <:mailshot:info_statut_destinataire_spam:>]</li>]
+	</ul>]
+</div>]
+
+
+[<div class="champ contenu_html[ (#HTML*|strlen|?{'',vide})]">
+	<div class="label"><:mailshot:label_html:> : </div>
+	<div dir='#LANG_DIR' class='html'><iframe src="(#HTML**|mailshot_inline_base64src)" style="width: 100%;"></iframe></div>
+</div>]
+
+[<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+	<div class="label"><:mailshot:label_texte:> : </div>
+	<div dir='#LANG_DIR' class='texte'><iframe src="(#TEXTE**|mailshot_inline_base64src{text/plain})" style="width: 100%;"></iframe></div>
+</div>]
+
+
+</BOUCLE_mailshot>

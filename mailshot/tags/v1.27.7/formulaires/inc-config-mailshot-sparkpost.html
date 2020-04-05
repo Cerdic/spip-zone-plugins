@@ -1,0 +1,26 @@
+#SET{fl,mailshot}
+<div class="choix">
+	<input type="radio" name="mailer" class="radio" value="sparkpost" id="mailer_sparkpost"[(#ENV{mailer,'defaut'}|=={sparkpost}|oui)checked="checked"]/>
+	<label for="mailer_sparkpost"><:mailshot:label_mailer_sparkpost:></label>
+	<a href="https://www.sparkpost.com/">https://www.sparkpost.com/</a>
+	<ul class="editer-groupe suite">
+		#SET{name,sparkpost_api_key}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		<li class="editer gauche editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+			<span class='erreur_message'>(#GET{erreurs})</span>
+			]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']
+        [placeholder="(#ENV*{_#GET{name}}|mailshot_affiche_password_masque)"] />
+		</li>
+		#SET{name,sparkpost_api_endpoint}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		<li class="editer gauche editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+			<span class='erreur_message'>(#GET{erreurs})</span>
+			]<select name="#GET{name}" class="select" id="#GET{name}">
+				#SET{val,''}
+				<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>sparkpost.com</option>
+				#SET{val,'eu'}
+				<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>eu.sparkpost.com</option>
+			</select>
+		</li>
+	</ul>
+</div>
