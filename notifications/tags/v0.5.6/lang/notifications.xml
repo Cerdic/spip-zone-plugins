@@ -1,0 +1,6 @@
+<traduction module="notifications" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/notifications/lang/" reference="fr">
+	<langue code="en">
+		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
+	</langue>
+	<langue code="fr" />
+</traduction>
