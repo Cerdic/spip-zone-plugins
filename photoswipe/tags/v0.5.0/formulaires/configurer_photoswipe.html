@@ -1,0 +1,37 @@
+<div class="formulaire_spip formulaire_configurer formulaire_configurer_photoswipe">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#SELF"><div>
+		#ACTION_FORMULAIRE
+		<ul class="editer-groupe">
+			#SET{name,selecteur}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label>Sélecteur</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				<input type="text" name="#GET{name}" value="[(#CONFIG{photoswipe/selecteur}|sinon{'img\[data-photo\], a\[type\]'}|attribut_html)]" class="text" />
+			</li>
+			#SET{name,galerie}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label>En galeries ?</label>
+				<div class="choix choix_[(#GET{name})]">[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]
+					<input type="radio" name="#GET{name}" value="true" id="#GET{name}"[(#CONFIG{photoswipe/galerie}|=={false}|non) checked="checked"] class="radio" />
+					<label for="#GET{name}">Oui</label> /
+					<input type="radio" name="#GET{name}" value="false" id="#GET{name}"[(#CONFIG{photoswipe/galerie}|=={false}|oui) checked="checked"] class="radio" />
+					<label for="#GET{name}">Non</label>
+				</div>
+			</li>
+			#SET{name,conteneur}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label>Classe du conteneur des galeries automomes</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				<input type="text" name="#GET{name}" value="[(#CONFIG{photoswipe/conteneur}|sinon{'.photoswipe-cont'}|attribut_html)]" class="text" />
+			</li>
+		</ul>
+		<p class='boutons'><input class='submit' type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+</div>

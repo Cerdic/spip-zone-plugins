@@ -1,0 +1,24 @@
+<html>
+
+<head>
+    <title>Demo PhotoSwipe</title>
+    #INSERT_HEAD
+</head>
+
+<body>
+<h1>Demo PhotoSwipe</h1>
+<div class="demo">
+<BOUCLE_galerie(DOCUMENTS){extension=jpg}{!par date}{0,5}{largeur>400}{statut in prop,publie}>
+        <a href="#URL_DOCUMENT" onclick="return false;">
+              [(#FICHIER|image_reduire{400,0}
+                 |inserer_attribut{data-photo,#URL_DOCUMENT}
+                 |inserer_attribut{data-photo-h,#HAUTEUR}
+                 |inserer_attribut{data-photo-w,#LARGEUR}
+                 |inserer_attribut{alt,#TITRE}
+                 |inserer_attribut{title,#TITRE}
+                 )]
+	    </a>
+</BOUCLE_galerie>
+</div>
+</body>
+</html>

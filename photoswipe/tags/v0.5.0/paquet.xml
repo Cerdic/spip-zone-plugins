@@ -1,0 +1,20 @@
+<paquet
+	prefix="photoswipe"
+	categorie="multimedia"
+	version="0.5.0"
+	etat="stable"
+ 	compatibilite="[2.0.0;3.2.*]"
+	logo="photoswipe-128.png"
+	documentation="https://contrib.spip.net/4825"
+>	
+
+	<nom>PhotoSwipe</nom>
+	<!-- Une lightbox simple et élégante -->
+
+	<auteur lien="http://photoswipe.com/">PhotoSwipe</auteur>
+	<auteur lien="http://zzz.rezo.net">Fil</auteur>
+	<auteur>avec Baroug</auteur>
+
+	<pipeline nom="insert_head" inclure="photoswipe_pipelines.php" />
+	<pipeline nom="post_propre" action="post_propre" inclure="photoswipe_pipelines.php" />
+</paquet>

@@ -1,0 +1,47 @@
+<BOUCLE_doc(DOCUMENTS) {id_document=#ENV{id}} {tout}>
+[(#REM)
+
+** Pour utiliser ce modèle, supprimer -figure du nom de fichier, 
+et déplacer-le dans squelettes/modeles (créer le dossier /modeles s'il n'eexiste pas) **
+
+** Pour ceux qui utilisent le plugin multimedia : mettre un modèle doc dans son dossier squelettes 
+provoque un conflit : voir http://www.baroug.net/Plugin-multimedia-et-modele-doc
+        
+	Modele pour <doc> en <figure> une balise à utiliser en html5
+
+	La largeur de la legende est egale a la largeur de l'image
+	avec un minimum de 120px
+	
+	Ce modele possède les attributs necessaires pour fonctionner avec Photoswipe
+	De plus, il supprime la logique de largeur maximale des legendes (titre et descriptif)
+	pour la rétablir si besoin (?), mettre la valeur voulue dans max{} (oui ça aussi c'est bizarre)
+
+	Dans le cas d'une simple image (mode=image), on affiche
+	le document lui-meme, sans lien de telechargement
+]
+[(#MODE|=={image}|oui)
+	#SET{fichier,#URL_DOCUMENT}
+	#SET{width,#LARGEUR}
+	#SET{height,#HAUTEUR}
+	#SET{url,#ENV{lien}}
+]
+[(#MODE|=={image}|non)
+	[(#SET{fichier,[(#LOGO_DOCUMENT|extraire_attribut{src})]})]
+	[(#SET{width,[(#LOGO_DOCUMENT|extraire_attribut{width})]})]
+	[(#SET{height,[(#LOGO_DOCUMENT|extraire_attribut{height})]})]
+	#SET{url,#ENV{lien,#URL_DOCUMENT}}
+	#SET{vraielargeur,#LARGEUR}
+	#SET{vraiehauteur,#HAUTEUR}
+	[(#SET{urlabs,[(#GET{url}|url_absolue)]})]
+]
+
+<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});[width:(#GET{width}|min{350}|max{120})]px;']>
+<div class="limage">
+[<a href="(#GET{url})"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'[ (#ENV{lien}|?{'',type="#MIME_TYPE"})]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}' class='[ (#GET{url}|oui)photoshow' data-photo='#GET{urlabs}' data-photo-w='#GET{vraielargeur}' data-photo-h='#GET{vraiehauteur}]' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' />[(#GET{url}|?{</a>})]
+</div>
+<figcaption>
+    [<div class='#EDIT{titre} spip_doc_titre'[ style='width:(#GET{width}|min{120px}|max{});']>(#TITRE)</div>]
+    [<div class='#EDIT{descriptif} spip_doc_descriptif'[ style='width:(#GET{width}|min{120px}|max{});']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</div>]
+</figcaption>
+</figure>
+</BOUCLE_doc>
