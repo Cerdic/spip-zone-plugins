@@ -1,0 +1,23 @@
+<B_sites>
+	<table id="thumbsites" class="spip liste">
+		<thead>
+			<caption><strong class="caption">Listes des logos et vignettes Thumbsites</strong></caption>
+			<tr class="first_row">
+				<th scope="col">Site</th>
+				<th scope="col">Logo</th>
+				<th scope="col">Vignette Thumbsites</th>
+			</tr>
+		</thead>
+		<tbody>
+<BOUCLE_sites(SITES)>
+			<tr id="site_#COMPTEUR_BOUCLE"[ class="(#COMPTEUR_BOUCLE|alterner{row_even, row_odd})"]>
+				<td class="nom principale">[(#NOM_SITE)]</td>
+				<!-- balise #LOGO_SITE -->
+				<td class="logo">[(#LOGO_SITE)]</td>
+				<!-- balise #THUMBSHOT -->
+				<td class="logo">[(#THUMBSHOT{#URL_SITE, 60})]</td>
+			</tr>
+</BOUCLE_sites>
+		</tbody>
+	</table>
+</B_sites>

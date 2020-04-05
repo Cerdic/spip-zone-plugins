@@ -1,0 +1,110 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	<h3 class='titrem'><img src="#CHEMIN_IMAGE{thumbsites-24.png}" class="cadre-icone" /><:thumbsites:cfg_titre_form:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:thumbsites:cfg_lgd_choix_serveur:></legend>
+			<ul class="editer-groupe">
+				<li class="editer">
+					<p class="explication"><:thumbsites:cfg_inf_choix_serveur:></p>
+					<label for="serveur"><:thumbsites:cfg_lbl_serveur:></label>
+					<select name="serveur" id="serveur">
+						<option value="apercite"[ (#ENV{serveur, apercite}|=={apercite}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_apercite:></option>
+						<option value="robothumb"[ (#ENV{serveur, apercite}|=={robothumb}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_robothumb:></option>
+					</select>
+				</li>
+			</ul>
+
+			<ul id="apercite" class="editer-groupe conf_serveur [(#ENV{serveur, apercite}|=={'apercite'}|?{'actif'})]">
+				<li class="editer">
+					<label><:thumbsites:cfg_lbl_usage:></label>
+					<p class="explication"><:thumbsites:cfg_inf_apercite_presentation:></p>
+				</li>
+				<li class="editer">
+					<label for="apercite_taille"><:thumbsites:cfg_lbl_taille_vignette:></label>
+					<select name="apercite_taille" id="apercite_taille">
+						<option value="80x50" [(#ENV{apercite_taille, 120x90}|=={80x50}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=80x50}:></option>
+						<option value="80x60" [(#ENV{apercite_taille, 120x90}|=={80x60}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=80x60}:></option>
+						<option value="100x75" [(#ENV{apercite_taille, 120x90}|=={100x75}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=100x75}:></option>
+						<option value="120x75" [(#ENV{apercite_taille, 120x90}|=={120x75}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=120x75}:></option>
+						<option value="120x90" [(#ENV{apercite_taille, 120x90}|=={120x90}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=120x90}:></option>
+						<option value="160x100" [(#ENV{apercite_taille, 120x90}|=={160x100}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=160x100}:></option>
+						<option value="160x120" [(#ENV{apercite_taille, 120x90}|=={160x120}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=160x120}:></option>
+						<option value="180x135" [(#ENV{apercite_taille, 120x90}|=={180x135}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=180x135}:></option>
+						<option value="200x125" [(#ENV{apercite_taille, 120x90}|=={200x125}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=200x125}:></option>
+						<option value="240x150" [(#ENV{apercite_taille, 120x90}|=={240x150}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=240x150}:></option>
+						<option value="240x180" [(#ENV{apercite_taille, 120x90}|=={240x180}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=240x180}:></option>
+						<option value="320x200" [(#ENV{apercite_taille, 120x90}|=={320x200}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=320x200}:></option>
+						<option value="320x240" [(#ENV{apercite_taille, 120x90}|=={320x240}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=320x240}:></option>
+						<option value="560x420" [(#ENV{apercite_taille, 120x90}|=={560x420}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=560x420}:></option>
+						<option value="560x350" [(#ENV{apercite_taille, 120x90}|=={560x350}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=560x350}:></option>
+						<option value="640x400" [(#ENV{apercite_taille, 120x90}|=={640x400}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=640x400}:></option>
+						<option value="640x480" [(#ENV{apercite_taille, 120x90}|=={640x480}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=640x480}:></option>
+						<option value="800x500" [(#ENV{apercite_taille, 120x90}|=={800x500}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=800x500}:></option>
+						<option value="800x600" [(#ENV{apercite_taille, 120x90}|=={800x600}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=800x600}:></option>
+					</select>
+				</li>
+			</ul>
+
+			<ul id="robothumb" class="editer-groupe conf_serveur [(#ENV{serveur, apercite}|=={'robothumb'}|?{'actif'})]">
+				<li class="editer">
+					<label><:thumbsites:cfg_lbl_usage:></label>
+					<p class="explication"><:thumbsites:cfg_inf_rotothumb_presentation:></p>
+				</li>
+				<li class="editer">
+					<label for="robothumb_taille"><:thumbsites:cfg_lbl_taille_vignette:></label>
+					<select name="robothumb_taille" id="robothumb_taille">
+						<option value="100x75" [(#ENV{robothumb_taille, 120x90}|=={100x75}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=100x75}:></option>
+						<option value="120x90" [(#ENV{robothumb_taille, 120x90}|=={120x90}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=120x90}:></option>
+						<option value="160x120" [(#ENV{robothumb_taille, 120x90}|=={160x120}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=160x120}:></option>
+						<option value="180x135" [(#ENV{robothumb_taille, 120x90}|=={180x135}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=180x135}:></option>
+						<option value="240x180" [(#ENV{robothumb_taille, 120x90}|=={240x180}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=240x180}:></option>
+						<option value="320x240" [(#ENV{robothumb_taille, 120x90}|=={320x240}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=320x240}:></option>
+						<option value="560x420" [(#ENV{robothumb_taille, 120x90}|=={560x420}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=560x420}:></option>
+						<option value="640x480" [(#ENV{robothumb_taille, 120x90}|=={640x480}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=640x480}:></option>
+						<option value="800x600" [(#ENV{robothumb_taille, 120x90}|=={800x600}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=800x600}:></option>
+					</select>
+				</li>
+			</ul>
+		</fieldset>
+
+
+		<fieldset>
+			<legend><:thumbsites:cfg_lgd_cache:></legend>
+			<ul class="editer-groupe">
+				<li class="editer">
+					<label for="duree_cache"><:thumbsites:cfg_lbl_duree_cache:></label>
+					<input type="text" name="duree_cache" id="duree_cache" [value="(#ENV{duree_cache, 30})"]>
+				</li>
+			</ul>
+		</fieldset>
+
+		[(#REM) Code jQuery de la gestion des configuration serveur ]
+		<script type="text/javascript">/*<![CDATA[*/
+			//on cache les configuration serveur excepte de celui actif
+			$('.conf_serveur:not(.actif)').hide();
+			[(#ENV{serveur, apercite}|non)
+				$('#apercite').show();
+			]
+
+			$('#serveur')
+			.bind('change', function() {
+				//on cache le serveur eventuellement actif
+				$('.conf_serveur').hide();
+				//on affiche le serveur selectionné
+				$("#"+this.value).show('slow');
+			});
+		/*]]>*/</script>
+
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'>
+		  <span class='image_loading'>&nbsp;</span>
+		  <input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+	  </p>
+	</div></form>
+</div>
+
