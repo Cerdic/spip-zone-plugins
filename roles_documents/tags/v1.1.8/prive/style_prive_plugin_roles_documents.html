@@ -1,0 +1,56 @@
+[(#REM)<style>]
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
+#HTTP_HEADER{Vary: Accept-Encoding}
+#SET{claire,##ENV{couleur_claire,c5e41c}}
+#SET{foncee,##ENV{couleur_foncee,9dba00}}
+
+/* formulaire */
+.fiche_objet .formulaire_editer_roles_document {
+	margin: 0.5em 0 0;
+	padding: 0;
+	background: transparent;
+	border: 0 none;
+	padding: 0; 
+}
+/* conteneur liste des rôles + bouton */
+.roles-documents {
+	display: inline-block;
+}
+/* bouton modifier adjacent */
+.roles-documents .btn-group {
+	display: inline-block;
+	margin-#ENV{left}: 0.5em;
+	vertical-align: middle;
+}
+.roles-documents .label {
+	/*font-weight: bold;*/
+}
+/* Exposer le logo */
+.role-logo {
+	font-weight: bold;
+	/*color: #GET{foncee};*/
+}
+.role-logo:before {
+	content: "";
+	display: inline-block;
+	background: url(#CHEMIN_IMAGE{media-logo-16});
+	width: 16px;
+	height: 16px;
+	margin-right: 0.2em;
+	vertical-align: middle;
+}
+small.role-logo:before {
+	background: url(#CHEMIN_IMAGE{media-logo-12});
+	width: 12px;
+	height: 12px;
+}
+/* fix pour s'assurer que le dropdown soit visible */
+.liste_items.documents .item {
+	overflow: visible;
+}
+/* Mediathèque : onglet logos */
+.onglets_simple .medias .logo a,
+.onglets_simple .medias .logo strong {
+	padding-left: 27px;
+	background: url(#CHEMIN_IMAGE{media-logo-16}) no-repeat 5px center;
+}

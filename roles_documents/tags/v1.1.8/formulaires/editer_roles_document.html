@@ -1,0 +1,16 @@
+<div class="formulaire_spip formulaire_#FORM">
+	[<div class="reponse_formulaire reponse_formulaire_ok none">(#ENV**{message_ok})</div>]
+	[<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</div>]
+	<form action="#ENV{action}" method="post"><div class="spip roles roles-documents">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<B_roles>[<span class="label">(#TOTAL_BOUCLE|singulier_ou_pluriel{roles:role_titre,roles:roles_titre})</span> : ]
+		<BOUCLE_roles(documents_liens){id_document}{objet}{id_objet}{par role}{role!=''}{", "}>[<span class="role-#ROLE">(#ROLE|role{documents})</span>]</BOUCLE_roles>
+		[(#ENV{editable}|oui)
+		<INCLURE{fond=formulaires/inc-editer_liens_actions_roles,
+			env,
+			id=#ENV{id_document},
+			cle=document-#ENV{id_document}-#ENV{objet}-#ENV{id_objet},
+			libelle=<:roles_documents:bouton_modifier_roles:>}>
+		]
+	</div></form>
+</div>
