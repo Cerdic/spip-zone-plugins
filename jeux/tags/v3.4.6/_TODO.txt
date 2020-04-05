@@ -1,0 +1,4 @@
+- Vérifier que les jeux supprimés soient biens supprimés en base.
+- Gérer correctement le traitement automatique sur le champs texte des jeux
+- utiliser le champ resultat_unique (quelle est déjà la fonction ?)
+- chaînes de langues : trier

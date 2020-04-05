@@ -1,0 +1,52 @@
+/* Mise en forme du jeu de pendu */
+
+table.pendu { 
+ text-align:center;
+}
+
+table.pendu td { 
+ padding:1px;
+ vertical-align: bottom;
+}
+
+/* clavier */
+table.pendu_clavier, td.pendu_clavier{ 
+ text-align:center;
+ width:16em;
+}
+
+/* bouton de clavier */
+input.pendu_clavier{ 
+ font-size: 120%; 
+ text-align:center;
+ width:2em;
+ display:inline;
+ margin:1px;
+ line-height:normal;
+ padding:0.2em 0;
+}
+
+/* mot a deviner */
+input.pendu_deviner{ 
+ border:0px none;
+ font-weight:bold;
+ font-size: 120%;
+}
+
+/* bouton reset */
+input.pendu_reset{ 
+ border:0px none;
+ color:#333333;
+}
+
+/* une cellule d'image */
+img.pendu_image{ 
+ border:0px none;
+ display:block;
+}
+
+/* ensemble des images du pendu */
+div.pendu_images{ 
+ line-height:0pt;
+/* border:2px solid; */
+}

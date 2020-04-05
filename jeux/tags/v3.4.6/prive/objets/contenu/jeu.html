@@ -1,0 +1,23 @@
+<BOUCLE_jeu(JEUX){id_jeu}{statut?}>
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:jeu:label_titre:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{titre} titre'>(#TITRE_PRIVE)</span>
+</div>]
+
+[<div class="champ contenu_type_resultat[ (#TYPE_RESULTAT*|strlen|?{'',vide})]">
+	<label><:jeu:label_type_resultat:> : </label>
+	<span dir='#LANG_DIR'>(#TYPE_RESULTAT_LONG)</span>
+</div>]
+
+[<div class="champ contenu_type_jeu[ (#TYPE_JEU*|strlen|?{'',vide})]">
+	<label><:jeu:label_type_jeu:> : </label>
+	<span dir='#LANG_DIR'>(#TYPE_JEU)</span>
+</div>]
+
+[<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+	<label><:jeu:label_texte:> : </label>
+	<div dir='#LANG_DIR' class='#EDIT{texte} texte'>(#MODELE{jeu,id=#ID_JEU,statut=#STATUT})</div>
+</div>]
+
+</BOUCLE_jeu>

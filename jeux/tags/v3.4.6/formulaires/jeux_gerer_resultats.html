@@ -1,0 +1,18 @@
+<div class="formulaire_spip formulaire_jeux_gerer_resultats">
+<form action="#ENV{action}" method="post"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	<ul>
+	   
+	   #GENERER_SAISIES{#ENV{saisies}}
+	                           
+	   [(#ENV**{erreurs}|table_valeur{non_confirme}|oui)
+	   <li class='editer_confirmer obligatoire erreur'>
+	       <label for='confirmer'><span class='erreur_message'><:jeux_gerer_resultats:confirmer_choix:></span></label>
+	       <input type="checkbox" name="confirmer" />
+	   </li>
+	   ]
+	</ul>
+	<p class="boutons"><input type="submit" class="submit" value="<:pass_ok:>" /></p>
+</div></form>
+</div>

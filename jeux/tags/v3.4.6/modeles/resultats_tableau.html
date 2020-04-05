@@ -1,0 +1,37 @@
+ #SET{pagination,#ENV{pagination,10}}
+	<B_jeux>
+	<table class="spip">
+	[<caption class="pagination">(#PAGINATION)</caption>]
+    <thead>
+    <tr class="row_first">
+	<td><strong><:jeux:auteur:></strong></td>
+	<BOUCLE_jeux(JEUX){pagination #GET{pagination}}>
+    <td><strong>[(#TITRE_PUBLIC|sinon{#TYPE_JEU})] (#ID_JEU)</strong></td>    
+    </BOUCLE_jeux>
+    </tr></thead>
+    
+        <B_auteurs>
+        <tbody>
+        <BOUCLE_auteurs (AUTEURS){tout}{par nom}>
+            <tr [class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]><td>#NOM</td>
+            <BOUCLE_jeux2(JEUX){#ENV{debut_jeux,0},#GET{pagination}}>
+				<B_auteur_jeux>
+				<td><ul>
+				<BOUCLE_auteur_jeux(JEUX_RESULTATS){id_auteur}{id_jeu}{! par date}><li>[<strong>(#DATE|affdate) [(#DATE|heures)]h[(#DATE|minutes)]</strong> :]
+				
+				#RESULTAT_COURT / #TOTAL</li>
+            	</BOUCLE_auteur_jeux>
+            	</ul>
+            	</td>
+            	</B_auteur_jeux>
+            	<td><ul><li><:jeu:info_aucun_resultat:></li></ul></td>
+            	<//B_auteur_jeux>
+            </BOUCLE_jeux2>
+            </tr>
+        </BOUCLE_auteurs>
+        </tbody>
+        </B_auteurs>
+    </table>
+    </B_jeux>
+    <:jeu:aucun_jeu:>
+   <//B_jeux> 

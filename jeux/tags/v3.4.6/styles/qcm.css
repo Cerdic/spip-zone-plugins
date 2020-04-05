@@ -1,0 +1,76 @@
+/* Mise en forme des QCM
+ */
+
+.qcm{ 
+ text-align:left;
+ font-size: 90%;
+ font-family: arial, helvetica, sans-serif;
+ color: #3F5264;
+ border: 1px solid #F78C54;
+ background-color: #FFEADE;
+ line-height: normal;
+}
+
+.qcm_titre{ 
+}
+
+.qcm_proposition{ 
+ font-size: 90%; 
+}
+
+.qcm_proposition label{ 
+ display: inline; 
+}
+
+.qcm_element{
+}
+
+.qcm_reponse{
+}
+
+.qcm_correction{
+}
+
+.qcm_precision{
+ margin:0.1em auto 0.5em;
+ text-align:left;
+ font-size: 85%;
+ width:90%;
+ border: 1px dotted #3F5264;
+ padding: .2em; 
+}
+
+.qcm_correction_faux{ 
+ background-color: red;
+ color: #FFEADE;
+ font-weight: bold; 
+ padding-right: 0.5em;
+ padding-left: 0.5em;
+ font-weight:normal;
+}
+
+.qcm_correction_juste{ 
+ background-color: green;
+ color: #FFEADE;
+ font-weight: bold;
+ padding-right: 0.5em;
+ padding-left: 0.5em;
+ font-weight:normal;
+}
+
+.qcm_correction_null{ 
+ font-size: 90%; 
+ font-weight: bold;
+}
+
+.qcm_select{ 
+ color: #3F5264;
+ font-size: 10pt; 
+ background-color: #F3EEEA;
+}
+
+.qcm_radio, qcm_cocher{
+/* margin:2pt;
+ padding:2pt; */
+ width: 15px;
+}

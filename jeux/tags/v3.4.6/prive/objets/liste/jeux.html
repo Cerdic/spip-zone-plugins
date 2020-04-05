@@ -1,0 +1,91 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre_prive,1, 
+	date,-1, 
+	id_jeu,1,
+    type_resultat,1
+	titre,1, 
+	id_article,1,
+}})]<B_liste_jeux>
+#ANCRE_PAGINATION
+<div class="liste-objets jeux">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{jeu:info_1_jeu,jeu:info_nb_jeux}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class='titre titre_prive' scope='col'>[(#TRI{titre_prive,<:jeu:label_titre_prive:>,ajax})]</th>
+			<th class='type_jeu' scope='col'>[(#TRI{type_jeu,<:jeu:label_type_jeu:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class='nb_resultats' scope='col'><:jeu:label_nb_resultats:></th> 
+			<th class='type_resultat' scope='col'>[(#TRI{type_resultat,<:jeu:label_type_resultat:>,ajax})]</th> 
+			<th class='id' scope='col'>[(#TRI{id_jeu,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_jeux(JEUX){where?}{statut?}{recherche?}{tri #ENV{par,num titre_prive},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='statut'>[(#STATUT|puce_statut{jeu,#ID_JEU,#ID_RUBRIQUE})]</td> 
+			<td class='titre principale'>[(#LOGO_JEU|image_reduire{20,26})]<a href="[(#ID_JEU|generer_url_entite{jeu})]" title="<:info_numero_abbreviation|attribut_html:> #ID_JEU">[(#RANG). ]#TITRE_PRIVE</a></td>
+			<td class='type_jeu'>#TYPE_JEU</td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
+			<td class='nb_resultats'><BOUCLE_resultats(JEUX_RESULTATS){id_jeu}></BOUCLE_resultats>[(#TOTAL_BOUCLE|jeux_lien_jeu{jeux_resultats,#ID_JEU})]<//B_resultats></td>
+            <td class='type_resultat'>#TYPE_RESULTAT_COURT</td>
+			<td class='id'>[(#AUTORISER{modifier,jeu,#ID_JEU}|?{
+				<a href="[(#URL_ECRIRE{jeu_edit,id_jeu=#ID_JEU})]">#ID_JEU</a>,
+				#ID_JEU
+			})]</td>
+		</tr>
+	</BOUCLE_liste_jeux>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_jeux>[
+<div class="liste-objets jeux caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_jeux>
+
+<B_articles>
+#ANCRE_PAGINATION
+<div class="liste-objets articles">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{jeu:info_1_jeu_inline,jeu:info_nb_jeux_inline}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut_article' scope='col'>[(#TRI{statut_article,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class='titre' scope='col'>[(#TRI{titre,<:jeu:label_titre_article:>,ajax})]</th>
+			<th class='type_jeu_article' scope='col'><:jeu:label_type_jeu:></th>
+			<th class='date_article' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class='id' scope='col'>[(#TRI{id_article,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+    <BOUCLE_articles(ARTICLES){statut?}{recherche &lt;/jeux&gt;}{tri #ENV{par,num titre},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='statut'>[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})]</td> 
+			<td class='titre principale'>[(#LOGO_ARTICLE|image_reduire{20,26})]<a href="[(#ID_ARTICLE|generer_url_entite{article})]" title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">[(#RANG). ]#TITRE</a></td>
+			<td class='type_jeu'>[(#TEXTE**|type_jeu)]</td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
+			<td class='id'>[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
+				<a href="[(#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE})]">#ID_ARTICLE</a>,
+				#ID_ARTICLE
+			})]</td>
+		</tr>
+	</BOUCLE_articles>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_articles>
+<div class="liste-objets articles caption-wrap"><strong class="caption"><:jeu:info_aucun_jeu_inline:></strong></div>
+<//B_articles>
+
+<div class="modules_jeux">
+
+[(#BOITE_OUVRIR{#CHEMIN_IMAGE{jeu-16.png}|balise_img{'',cadre-icone}
+	|concat{<:jeu:titre_modules_dispos:>},'simple','titrem'})]
+
+[(#VAL|table_jeux_caracteristiques)]
+
+#BOITE_FERMER
+
+</div>

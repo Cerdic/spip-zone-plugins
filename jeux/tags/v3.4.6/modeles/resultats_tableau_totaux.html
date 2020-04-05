@@ -1,0 +1,51 @@
+[(#REM) pour le moment on ne pagine pas pour éviter de devoir faire une autre boucle pour les totaux)]
+	<B_jeux>#SET{grand_total,0}
+	<table class="spip">
+
+    <thead>
+    <tr class="row_first">
+	<td><strong><:jeux:auteur:></strong></td>
+	<BOUCLE_jeux(JEUX)>
+    <td><strong>[(#TITRE_PUBLIC|sinon{#TYPE_JEU})] (#ID_JEU)</strong>#SET{total_jeu_#ID_JEU}</td>    
+    </BOUCLE_jeux>
+    <td><strong><:jeux:total:></strong></td>
+    </tr></thead>
+    
+        <B_auteurs>
+        
+        <tbody>
+        <BOUCLE_auteurs (AUTEURS){tout}{par nom}>
+            <tr [class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]><td>#NOM</td>
+            #SET{total_auteur_#ID_AUTEUR,0}
+            <BOUCLE_jeux2(JEUX)>
+				<B_auteur_jeux>
+				
+				<td><ul>
+				<BOUCLE_auteur_jeux(JEUX_RESULTATS){id_auteur}{id_jeu}{! par date}><li>[<strong>(#DATE|affdate) [(#DATE|heures)]h[(#DATE|minutes)]</strong> :]
+				#SET{total_auteur_#ID_AUTEUR,#GET{total_auteur_#ID_AUTEUR}|plus{#RESULTAT_COURT}}
+				#SET{total_jeu_#ID_JEU,#GET{total_jeu_#ID_JEU}|plus{#RESULTAT_COURT}}
+				#SET{grand_total,#GET{grand_total}|plus{#RESULTAT_COURT}}
+
+				#RESULTAT_COURT / #TOTAL</li>
+            	</BOUCLE_auteur_jeux>
+            	</ul>
+            	</td>
+            	</B_auteur_jeux>
+            	<td><ul><li><:jeu:info_aucun_resultat:></li></ul></td>
+            	<//B_auteur_jeux>
+            </BOUCLE_jeux2>
+            <td>#GET{total_auteur_#ID_AUTEUR}</td>
+            </tr>
+        </BOUCLE_auteurs>
+        <B_jeux_3><tr><td><:jeux:total:></td>
+       
+        <BOUCLE_jeux_3(JEUX)><td>#GET{total_jeu_#ID_JEU}</td></BOUCLE_jeux_3>
+        <td>#GET{grand_total}</td>
+        </tr>
+        </B_jeux_3>
+        </tbody>
+        </B_auteurs>
+    </table>
+    </B_jeux>
+    <:jeu:aucun_jeu:>
+   <//B_jeux> 

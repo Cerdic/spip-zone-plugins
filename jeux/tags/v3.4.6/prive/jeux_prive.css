@@ -1,0 +1,16 @@
+table .centrer, table .nb_resultats { 
+	text-align:center; 
+}
+
+table .titre_prive {
+	width:35%;
+}
+
+.modules_jeux h3 {
+	font-size: 1em;
+}
+
+p.jeux_info {
+	margin-top: 1.385em;
+	margin-bottom: 1.385em;
+}

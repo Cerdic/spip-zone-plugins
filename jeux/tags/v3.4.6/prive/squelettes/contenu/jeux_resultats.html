@@ -1,0 +1,45 @@
+<BOUCLE_auteurs(AUTEURS){id_auteur}{tout}>
+<h1><:jeux:resultats_auteur{nom=#NOM}:></h1>
+</BOUCLE_auteurs>
+<BOUCLE_jeux(JEUX){id_jeu}{tout}>
+<h1><:jeux:resultats_jeu{titre=#TYPE_JEU,id=#ID_JEU}:></h1>
+<h3>#TITRE_PRIVE</h3>
+</BOUCLE_jeux>
+[(#ID_JEU|ou{#ID_AUTEUR}|non)<h1><:jeux:resultats:></h1>]
+[(#SET{defaut_tri,#ARRAY{
+	titre_prive,1,
+	nom,1
+}})]<B_liste_resultats>
+#ANCRE_PAGINATION
+
+
+<div class="liste-objets jeux_resultats">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{jeu:info_1_resultat,jeu:info_nb_resultats}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+		    <th scope="col">[(#TRI{date,<:jeu:label_date:>,ajax})]</th>
+            <th scope="col">[(#TRI{titre_prive,<:jeu:label_titre_prive:>,ajax})]</th>
+            <th scope="col">[(#TRI{nom,<:jeu:label_nom:>,ajax})]</th>
+            <th scope="col">[(#TRI{resultat_court,<:jeu:label_resultat:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_resultats(JEUX_RESULTATS jeux spip_auteurs){id_jeu?}{id_auteur?}{pagination #ENV{nb,10}}{tri titre_prive,#GET{defaut_tri}}>
+		<tr class='row_odd odd'>
+		    <td>[(#DATE|affdate_heure)]</td>
+			<td><a href="#URL_ECRIRE{jeu,id_jeu=#ID_JEU}">#TITRE_PRIVE</a></td>
+			<td><a href="#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}">#NOM</a></td>
+			<td>#RESULTAT_COURT / #TOTAL</td>
+		</tr>
+[		<tr class='row_even even'>
+            <td colspan="4" style="padding-left: 1em;"> (#RESULTAT_LONG)</td>
+		</tr>]
+	</BOUCLE_liste_resultats>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_resultats>[
+<div class="liste-objets jeux_resultats caption-wrap"><strong class="caption">(#ENV*{sinon,<:jeu:info_aucun_resultat:>})</strong></div>
+]<//B_liste_resultats>

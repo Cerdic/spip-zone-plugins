@@ -1,0 +1,19 @@
+#SET{par,#EVAL{$_GET['par']}|sinon{'resultat_court'}}
+
+<B_resultats>
+<table  class='spip'>
+<thead><tr class="row_first" >
+					<th>[(#GET{par}|!=={nom}|?{' '})<a href="[(#SELF|parametre_url{par,nom})]" class="ajax">]<:jeux:auteur:>[(#GET{par}|!=={nom}|?{' '})</a>]</th>
+					<th>[(#GET{par}|!=={date}|?{' '})<a href="[(#SELF|parametre_url{par,date})]" class="ajax">]<:date:>[(#GET{par}|!=={date}|?{' '})</a>]</th>
+					<th style="text-align:center">[(#GET{par}|!=={'resultat_court'}|?{' '})<a href="[(#SELF|parametre_url{par,'resultat_court'})]"  class="ajax">]<:jeux:resultat:>[(#GET{par}|!=={'resultat_court'}|?{' '})</a>]</th>
+			</tr></thead>
+<BOUCLE_resultats(JEUX_RESULTATS spip_auteurs) {id_jeu=#ENV{id}}{par #GET{par}}{inverse #GET{par}|!={nom}}>
+<!-- {statut==refuse|publie} -->
+<tr [class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
+	<td><a href="#URL_AUTEUR">#NOM</a></td>
+	<td>[(#DATE|affdate)] [(#DATE|heures)]:[(#DATE|minutes)]</td>
+	<td>#RESULTAT_COURT / #TOTAL</td>
+</tr>
+</BOUCLE_resultats>
+</table></B_resultats><br/><:jeu:info_aucun_resultat:><//B_resultats>
+

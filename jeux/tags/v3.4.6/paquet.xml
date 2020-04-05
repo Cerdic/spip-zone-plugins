@@ -1,0 +1,43 @@
+<paquet
+	prefix="jeux"
+	categorie="divers"
+	version="3.4.6"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/jeux-48.png"
+	schema="0.20"
+	documentation="https://contrib.spip.net/Des-jeux-dans-vos-articles"
+>
+	<nom>Des jeux dans vos articles</nom>
+	<auteur>Patrice VANNEUFVILLE</auteur>
+	<auteur lien="http://www.maieul.net">Ma&#239;eul Rouquette</auteur>
+	<licence>GNU/LGPL - (c) 2006-2012</licence>
+
+	<traduire module="jeu" reference="fr"/>
+	<traduire module="jeux" reference="fr"/>
+	<traduire module="jeux_gerer_resultats" reference="fr"/>
+	<traduire module="motscroises" reference="fr"/>
+	<traduire module="pendu" reference="fr"/>
+	<traduire module="qcm" reference="fr"/>
+	<traduire module="sudoku" reference="fr"/>
+
+	<pipeline nom="autoriser" inclure="jeux_autorisations.php" /> 
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/jeux_tables.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/jeux_tables.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/jeux_tables.php" />
+	<pipeline nom="insert_head" inclure="jeux_pipelines.php" />
+	<pipeline nom="pre_propre" inclure="jeux_pipelines.php" />
+	<pipeline nom="post_propre" inclure="jeux_pipelines.php" />
+	<pipeline nom="header_prive" inclure="jeux_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="jeux_pipelines.php" />
+	<pipeline nom="affichage_final" inclure="jeux_pipelines.php" />
+	<pipeline nom="affiche_gauche" inclure="jeux_pipelines.php" />
+	<pipeline nom="jeux_caracteristiques" action="" />
+
+	<menu nom="jeux" titre="jeux:jeux" parent="menu_edition" icone="images/jeu-16.png" />
+	<menu nom="jeu_creer" titre="jeux:nouveau_jeu" parent="outils_rapides" icone="images/jeu-new-16.png" parametres="new=oui" action="jeu_edit" />
+	<menu nom="configurer_jeux" titre="jeux:configuration_jeux" parent="menu_configuration" icone="images/jeu-16.png" />
+	<menu nom="jeux_resultats" titre="jeux:resultats_jeux" parent="menu_activite" icone="images/jeu-laurier-16.png" />
+
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+</paquet>

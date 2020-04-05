@@ -1,0 +1,31 @@
+[(#ID_OBJET|oui)
+	[(#AUTORISER{modifier,jeu,#ID_JEU}|sinon_interdire_acces)]
+][(#ID_OBJET|non)
+	#SET{id_rubrique,#ENV{id_rubrique,#ENV{id_parent}}|trouver_rubrique_creer_objet{jeus}}
+	[(#GET{id_rubrique}|non|ou{[(#AUTORISER{creerjeudans,rubrique,#GET{id_rubrique}})]}|sinon_interdire_acces)]
+]
+ 
+#SET{redirect,#ENV{redirect}|sinon{#ID_JEU|?{#ID_JEU|generer_url_entite{jeu},#GET{id_rubrique}|?{#GET{id_rubrique}|generer_url_entite{rubrique},#URL_ECRIRE{rubriques}}}}}
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#ID_JEU|oui)
+	[(#GET{redirect}|icone_verticale{Retour,jeu,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_JEU|?{<:jeu:icone_modifier_jeu:>,<:jeu:icone_creer_jeu:>})]
+		<h1>(#ENV{titre,#INFO_TITRE_PRIVE{jeu,#ID_JEU}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_JEU|generer_url_entite{jeu}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_JEU{#ENV{id_jeu,oui}, #GET{id_rubrique}, #GET{redirect}, #ENV{associer_objet}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>

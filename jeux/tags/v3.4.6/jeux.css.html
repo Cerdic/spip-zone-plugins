@@ -1,0 +1,211 @@
+[(#REM)
+
+	Ce squelette definit les styles du plugin jeux
+
+	Note:l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary:Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION:il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type:text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary:Accept-Encoding}
+
+
+.titrem { font-weight:bold; }
+.cadre-info { margin:1em 0; }
+
+/* Histoire de mettre tous les navigateurs d'accord... */
+.jeux_global { margin:0pt; padding:0pt; }
+.jeux_global p { margin:1em auto; } /* separation des paragraphes */
+/*ul, ol, dd, dir, menu { padding-left:40px; } /* decalage des listes */
+/*ul, ol { margin:1em; } /* marge des listes */
+/*ol ul, ul ol, ul ul, ol ol { margin-top:0; margin-bottom:0 } /* liste imbriquees */
+/*fieldset { padding:4pt; }
+.check { margin-left:3pt; margin-right:3pt; }*/
+
+/* Espaceur de blocs */
+.jeux_nettoyeur { clear:both; margin:0; padding:0; border:none; height:0; line-height:1px; font-size:1px; }
+
+/* Un cadre. Par exemple :les QCM ou les trous */
+.jeux_cadre { 
+ text-align:left;
+ font-size:90%;
+ color:#3F5264;
+ border:1px solid #F78C54;
+ padding:0.4em; 
+ margin:0.4em;
+ background-color:#FFEADE;
+}
+
+.multi_jeux_cadre {
+ font-size:112%;
+}
+
+.jeux_titre{ 
+ font-size:120%;
+ font-weight:bold;
+ text-align:center;
+}
+
+.jeux_question{ 
+ font-weight:bold;
+}
+
+
+.jeux_bouton{ 
+ color:#3F5264;
+ font-size:85%;
+ font-weight:bold;
+ background-color:#FFEADE;
+ padding:0.4em 1em; 
+ text-align:center;
+}
+
+.jeux_bouton_reset{ 
+ text-align:right;
+}
+
+.jeux_input{ 
+ color:#3F5264;
+ background-color:#FFEADE;
+ border:1px solid;
+}
+
+.jeux_score{  
+ text-align:center;
+ width:23%;
+ font-family:arial, helvetica, sans-serif;
+ color:red;
+ font-weight:bold;
+ border:2px solid green;
+ padding:3px;
+ margin:0 auto;
+}
+
+.jeux_commentaire_score {
+ margin:1em auto 0.5em;
+ text-align:left;
+ font-size: 80%;
+ width:90%;
+ border: 1px dotted #3F5264;
+ padding: .2em; 
+}
+
+.jeux_indices {
+ text-align:center;
+}
+
+.jeux_points{ 
+ font-weight:normal;
+}
+
+.jeux_erreur{ 
+ font-family:arial, helvetica, sans-serif;
+ color:red;
+ font-size:90%;
+ font-weight:bold;
+ font-style:italic;
+ clear:both;
+ text-align:left;
+}
+
+.jeux_regle{
+ font-size:75%;
+ font-style:italic;
+}
+
+.jeux_cocher, .jeux_radio {
+ margin-right:2pt;
+}
+
+.jeux_solution  {
+ font-weight:bold;
+ padding:4pt 0 0 0;
+ clear:both;
+}
+
+.jeux_grille{
+	margin:0;
+	padding:0;
+}
+
+form.jeux_grille{
+	clear:both;
+	padding:0 4pt 0 0;
+	margin:0;
+	width:auto;
+}
+
+.jeux_left{
+	float:left;
+}
+
+table.jeux_grille label{
+	display:none 
+}
+
+table.jeux_grille {
+	border:0; 
+	padding:0;
+	margin:4pt;
+	width:initial;
+}	
+
+table.jeux_grille input, table.jeux_grille th, table.jeux_grille td{
+	min-width:1.5em;
+	width:1.5em;
+	height:1.5em;
+	min-height:1.5em;
+	text-align:center;
+	vertical-align:middle;
+	border:0;
+	margin:0;
+	padding:0;
+}
+
+table.jeux_grille td{
+	border-top:1px solid black;
+	border-left:1px solid black;
+}
+
+
+.jeux_grille td.jeux_noir {
+	background-color:#000000; 
+	color:#000000;
+}
+
+.jeux_grille td.jeux_coin{
+	border:0px;
+}
+
+.jeux_grille td.jeux_droite{
+	border-right:1px solid black;
+}
+
+.jeux_grille td.jeux_bas{
+	border-bottom:1px solid black;
+}
+
+/* Deplier / Replier */
+.jeux_deplie { 
+	display:block;
+	background-image:url([(#EVAL{_DIR_IMG_PACK}|url_absolue)]deplierbas.gif);
+	background-repeat:no-repeat;
+	background-position:left center;
+	padding-left:15px;
+	margin:1em auto 0;
+	cursor:pointer;
+}
+.jeux_replie { 
+	background-image:url([(#EVAL{_DIR_IMG_PACK}|url_absolue)]deplierhaut.gif); 
+}
+.jeux_deplie_contenu {
+	border:dotted thin gray;
+	margin:0pt 15px 1em;
+}
+
+.jeux_rem { display:none; }

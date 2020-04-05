@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,jeu,#ID_JEU}|sinon_interdire_acces)]
+<BOUCLE_jeu(JEUX){id_jeu}{statut==.*}{si #ENV{exec}|=={jeu}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,jeu,#ID_JEU})
+		[(#ID_JEU|afficher_qui_edite{jeu}|non)
+			[(#URL_ECRIRE{jeu_edit,id_jeu=#ID_JEU}|icone_verticale{<:jeu:icone_modifier_jeu:>,jeu,edit,right ajax preload})]
+		]
+		[(#ID_JEU|afficher_qui_edite{jeu}|oui)
+			[(#URL_ECRIRE{jeu_edit,id_jeu=#ID_JEU}|icone_verticale{#ID_JEU|afficher_qui_edite{jeu},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE_PRIVE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{jeu-24.png}|balise_img{jeu,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{jeu,#ID_JEU}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/jeu,id=#ID_JEU,id_jeu=#ID_JEU,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,jeu,#ID_JEU})
+	[(#ID_JEU|afficher_qui_edite{jeu}|non)
+		[(#URL_ECRIRE{jeu_edit,id_jeu=#ID_JEU}|icone_verticale{<:jeu:icone_modifier_jeu:>,jeu,edit,right ajax preload})]
+	]
+	[(#ID_JEU|afficher_qui_edite{jeu}|oui)
+		[(#URL_ECRIRE{jeu_edit,id_jeu=#ID_JEU}|icone_verticale{#ID_JEU|afficher_qui_edite{jeu},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,jeu,id,#ID_JEU},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_jeu>
+[(#ENV**{exec}|=={jeu_edit}|?{#INCLURE{fond=prive/squelettes/contenu/jeu_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_jeu>

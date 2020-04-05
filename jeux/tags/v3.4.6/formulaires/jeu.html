@@ -1,0 +1,14 @@
+<BOUCLE_jeu(JEUX){id_jeu}>
+<!--<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_jeu-#ENV{id_jeu}'>-->
+<div class='formulaire_#FORM formulaire_jeu-#ENV{id_jeu}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}'>
+		<input type='hidden' name='id_jeu' value='#ENV{id_jeu}' />
+		<input type='hidden' name='jeu_cvt' value='oui' />
+		#ACTION_FORMULAIRE{#ENV{action}}
+		#TEXTE_JEU{jeu_cvt,oui,index_jeux,#ENV{index_jeux}}
+<!--		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>-->
+	</form>
+</div>
+</BOUCLE_jeu>

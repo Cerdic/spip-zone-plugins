@@ -1,0 +1,27 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_jeu,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_jeu' value='#ENV{id_jeu}' />
+		<p><:jeu:explication_jeu_edit:></p>
+		<ul>
+
+			[(#SAISIE{input, titre_prive, obligatoire=oui,
+				label=<:jeu:label_titre_prive:>})]
+            
+            [(#SAISIE{textarea,texte,obligatoire=oui,label=<:jeu:label_texte:>})]
+            
+            [(#SET{choix_type_resultat,[(#ARRAY{defaut,<:jeux:resultat2_defaut:>,premier,<:jeux:resultat2_premier:>,dernier,<:jeux:resultat2_dernier:>,meilleur,<:jeux:resultat2_meilleur:>,meilleurs,<:jeux:resultat2_meilleurs:>,tous,<:jeux:resultat2_tous:>,aucun,<:jeux:resultat2_aucun:>})]})]
+
+            [(#SAISIE{selection,type_resultat,label=<:jeux:type_resultat:>,defaut=defaut,obligatoire=oui,datas=#GET{choix_type_resultat},cacher_option_intro=oui})]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>
