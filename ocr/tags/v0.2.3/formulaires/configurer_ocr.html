@@ -1,0 +1,52 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:ocr:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<input type="hidden" name="_meta_casier" value="ocr" />
+		
+		<ul>
+			<li class="fieldset">
+				<h3 class="legend"><:ocr:general:></h3>
+				<ul>
+					<li class="editer ocr_intervalle_cron[ (#ENV**{erreurs}|table_valeur{intervalle_cron}|oui)erreur]">
+						<label for="nb_docs"><:ocr:intervalle_cron:></label>
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{intervalle_cron})</span>
+						]<input type="text" class="text" name="intervalle_cron" id="intervalle_cron" value="[(#ENV{intervalle_cron})]" />
+					</li>
+					<li class="editer ocr_nb_docs[ (#ENV**{erreurs}|table_valeur{nb_docs}|oui)erreur]">
+						<label for="nb_docs"><:ocr:nombre_documents:></label>
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nb_docs})</span>
+						]<input type="text" class="text" name="nb_docs" id="nb_docs" value="[(#ENV{nb_docs})]" />
+					</li>
+					<li class="editer ocr_taille_texte_max[ (#ENV**{erreurs}|table_valeur{taille_texte_max}|oui)erreur]">
+						<label for="taille_texte_max"><:ocr:taille_texte_max:></label>
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{taille_texte_max})</span>
+						]<input type="text" class="text" name="taille_texte_max" id="taille_texte_max" value="[(#ENV{taille_texte_max})]" />
+					</li>
+					<li class="editer ocr_ocr_bin[ (#ENV**{erreurs}|table_valeur{ocr_bin}|oui)erreur]">
+						<label for="ocr_bin"><:ocr:indiquer_chemin_bin:> .pdf</label>
+						[(#ENV{ocr_bin_readonly}|oui)<p class="explication"><:ocr:explication_option_readonly:></p>][
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ocr_bin})</span>
+						]<input type="text" class="text" name="ocr_bin" id="ocr_bin" value="[(#ENV{ocr_bin})]"[(#ENV{ocr_bin_readonly}|oui) readonly="readonly" disabled="disabled"] />
+					</li>
+					<li class="editer ocr_ocr_opt[ (#ENV**{erreurs}|table_valeur{ocr_opt}|oui)erreur]">
+						<label for="ocr_opt"><:ocr:indiquer_options_bin:> .pdf</label>
+						[(#ENV{ocr_opt_readonly}|oui)<p class="explication"><:ocr:explication_option_readonly:></p>][
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ocr_opt})</span>
+						]<input type="text" class="text" name="ocr_opt" id="ocr_opt" value="[(#ENV{ocr_opt})]"[(#ENV{ocr_opt_readonly}|oui) readonly="readonly" disabled="disabled"] />
+					</li>
+				</ul>
+			</li>
+		</ul>
+		
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>
