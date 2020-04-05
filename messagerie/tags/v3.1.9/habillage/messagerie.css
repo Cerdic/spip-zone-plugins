@@ -1,0 +1,44 @@
+
+.formulaire_ecrire_message form span.dest {padding:3px;background:#F4FFBF;border:1px solid #89AF02;display:block;float:left;margin:0 4px 3px 0;}
+.formulaire_ecrire_message form span.dest.hover {background:#EEFF9F;}
+.formulaire_ecrire_message form span.dest img {cursor:pointer;padding:1px;}
+.formulaire_ecrire_message form li.champ_destinataire span.details {display:inline;padding:2px 0;}
+.formulaire_ecrire_message form li.champ_destinataire label.nocmx {float:left;width:100px;}
+.formulaire_ecrire_message form li.champ_destinataire div.faux_input {width:305px;padding:0;float:left;margin:0 0 0 0;/*background:#fff;border:1px solid #DDDDDD;padding:2px;*/}
+ced.formulaire_ecrire_message form li {clear:left;}
+.formulaire_ecrire_message form li input {width:307px;}
+
+/* autocompletion */
+/*.ac_input {	width: 200px; }*/
+.ac_results {	padding: 0px;	border: 1px solid WindowFrame;	background-color: Window;	overflow: hidden;text-align:left;z-index:1000;}
+.ac_results ul {	width: 100%;	list-style-position: outside;	list-style: none;	padding: 0;	margin: 0;}
+.ac_results iframe {
+	display:none;/*sorry for IE5*/
+	display/**/:block;/*sorry for IE5*/
+	position:absolute;	top:0;	left:0;	z-index:-1;	filter:mask();	width:3000px;	height:3000px;}
+
+.ac_results li {	margin: 0px;	padding: 2px 5px;	cursor: pointer;	display: block;	width: 100%;	font-size: 1em;	overflow: hidden;}
+.formulaire input.ac_loading {	background-image : url('searching.gif');background-position: right center;background-repeat: no-repeat;}
+.ac_over {	background-color: Highlight;	color: HighlightText;}
+
+/* listes */
+.liste_items {list-style:none;margin:1em 0;padding:0;border-top:1px solid #eee;clear:both;}
+.liste_items li.item {border-bottom:1px solid #eee;padding:0.8em 0;}
+.liste_items li.item:hover {background-color:#eee;}
+.liste_items li.item.on {background-color:#F4FFBF;}
+.liste_items li.item.on:hover {background-color:#EEFF9F;}
+
+
+/* messages_recus */
+.messages li {clear:left;}
+.messages li .message {padding-left:20px;}
+.messages li .message input {float:left;margin:0 0 0 -20px;position:relative;dislpaly:inline;}
+.messages li .message a.plier {float:right;margin:-0.8em 0 0 8px;display:none;}
+.messages li.on .message a.plier {display:block;}
+.messages li .message span.logo {float:left;margin:0 8px 8px;}
+.messages li .message h3 {margin:0;}
+.messages li .message.new h3 a {color:#ff6600;}
+.messages li .message .texte {display:none;}
+.messages li.on .message .intro {display:none}
+.messages li.on .message .texte {display:block;font-size:1em;}
+.messages li .message .repondre {clear:none;float:right;padding:0;margin:-0.8em 0 0 8px;position:relative;display:inline;font-size:0.95em;}
