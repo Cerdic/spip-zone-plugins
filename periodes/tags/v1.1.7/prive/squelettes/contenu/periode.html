@@ -1,0 +1,56 @@
+[(#AUTORISER{voir,periode,#ID_PERIODE}|sinon_interdire_acces)]
+[(#SET{url_voir,#VAL{periode}|objet_info{url_voir}})]
+[(#SET{url_edit,#VAL{periode}|objet_info{url_edit}})]
+<BOUCLE_periode(PERIODES){id_periode}{si #ENV{exec}|=={#GET{url_voir}}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,periode,#ID_PERIODE})
+		[(#ID_PERIODE|afficher_qui_edite{periode}|non)
+			[(#URL_ECRIRE{#GET{url_edit},id_periode=#ID_PERIODE}|icone_verticale{<:periode:icone_modifier_periode:>,periode,edit,right ajax preload})]
+		]
+		[(#ID_PERIODE|afficher_qui_edite{periode}|oui)
+			[(#URL_ECRIRE{#GET{url_edit},id_periode=#ID_PERIODE}|icone_verticale{#ID_PERIODE|afficher_qui_edite{periode},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{periode-24.png}|balise_img{periode,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{periode,#ID_PERIODE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/periode,id=#ID_PERIODE,id_periode=#ID_PERIODE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,periode,#ID_PERIODE})
+	[(#ID_PERIODE|afficher_qui_edite{periode}|non)
+		[(#URL_ECRIRE{#GET{url_edit},id_periode=#ID_PERIODE}|icone_verticale{<:periode:icone_modifier_periode:>,periode,edit,right ajax preload})]
+	]
+	[(#ID_PERIODE|afficher_qui_edite{periode}|oui)
+		[(#URL_ECRIRE{#GET{url_edit},id_periode=#ID_PERIODE}|icone_verticale{#ID_PERIODE|afficher_qui_edite{periode},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,periode,id,#ID_PERIODE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+
+#SET{enfants,''}
+[(#VAL{prive/objets/contenu/periode-enfants}|trouver_fond|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/periode-enfants,id_periode,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,periode,id_periode,#ID_PERIODE,objet,periode,id_objet,#ID_PERIODE},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_periode>
+[(#ENV**{exec}|=={#GET{url_edit}}|?{#INCLURE{fond=prive/squelettes/contenu/#GET{url_edit},redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_periode>
