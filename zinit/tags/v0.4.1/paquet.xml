@@ -1,0 +1,21 @@
+<paquet
+	prefix="zinit"
+	categorie="outil"
+	version="0.4.1"
+	etat="experimental"
+	compatibilite="[3.0.9;3.2.*]"
+	logo="prive/themes/spip/images/zinit-64.png"
+	documentation="https://contrib.spip.net/4699"
+>
+	<nom>Initialiser Zcore</nom>
+
+	<auteur>Teddy Payet</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="zcore" compatibilite="[2.4.5;]" />
+
+	<pipeline nom="autoriser" inclure="zinit_autorisations.php" />
+
+	<menu nom="zcore_skel" titre="zinit:titre_zcore_skel" parent="menu_squelette" icone="images/zinit-16.png" />
+
+</paquet>

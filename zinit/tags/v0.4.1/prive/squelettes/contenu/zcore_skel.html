@@ -1,0 +1,201 @@
+[(#SET{zinit_dir_squelettes,[(#EVAL{_ZINIT_DIR_SQUELETTES})]})]
+[(#SET{dir_squelettes,[(#EVAL{_DIR_SQUELETTES})]})]
+[(#SET{dir_squelettes_dist,[(#EVAL{_DIR_SQUELETTES_DIST})]})]
+[(#SET{blocs,[(#VAL|zinit_repertoire_skel_defaut)]})]
+<h1><:zinit:titre_page_zcore_skel:></h1>
+<div class="liste controles zi">
+    <table class="table">
+        <thead>
+            <tr>
+                <th><:zinit:titre_controle:></th>
+                <th><:zinit:titre_verification:></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><:zinit:check_presence_globale_z_blocs:></td>
+                <td>[(#VAL|zinit_blocs_verifier|?{
+                    [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
+                    [(#CHEMIN_IMAGE{uncheck-16.png}|balise_img)]
+                    })]</td>
+            </tr>
+            <tr>
+                <td><:zinit:check_body_skel:></td>
+                <td>[(#CHEMIN{body.html})]</td>
+            </tr>
+            <tr>
+                <td><:zinit:check_structure_skel:></td>
+                <td>[(#CHEMIN{structure.html})]</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="nettoyeur"></div>
+
+<B_repertoires>
+    <div class="liste repertoires zi">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th><:zinit:titre_repertoires:></th>
+                    <th>[(#GET{zinit_dir_squelettes})]</th>
+                    <th>[(#GET{dir_squelettes})]</th>
+                </tr>
+            </thead>
+            <tbody>
+                <BOUCLE_repertoires (DATA) {source table, #VAL|zinit_repertoire_skel_defaut}>
+                <tr>
+                    <td>
+                        #VALEUR
+                    </td>
+                    <td>
+                    [(#GET{zinit_dir_squelettes}|concat{[(#VALEUR)]}|is_dir|?{
+                        [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
+                        [(#CHEMIN_IMAGE{uncheck-16.png}|balise_img)]
+                    })]</td>
+                    <td>
+                    [(#GET{dir_squelettes}|concat{[(#VALEUR)]}|is_dir|?{
+                        [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
+                        [(#CHEMIN_IMAGE{uncheck-16.png}|balise_img)]
+                    })]</td>
+                </tr>
+                </BOUCLE_repertoires>
+                <tr>
+                    <td></td>
+                    <td>[(#BOUTON_ACTION{<:zinit:maj_label:>,
+                        #URL_ACTION_AUTEUR{zinit_repertoires,
+                        #SESSION{'webmestre'}/zinit_dir_squelettes,
+                        #SELF|parametre_url{var_mode,recalcul}},
+                        zcore,
+                        <:zinit:maj_confirm_repertoires:>
+                    })]</td>
+                    <td>[(#BOUTON_ACTION{<:zinit:maj_label:>,
+                        #URL_ACTION_AUTEUR{zinit_repertoires,
+                        #SESSION{'webmestre'}/dir_squelettes,
+                        #SELF|parametre_url{var_mode,recalcul}},
+                        zcore,
+                        <:zinit:maj_confirm_repertoires:>
+                    })]</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="nettoyeur"></div>
+</B_repertoires>
+
+<B_objets>
+    <div class="liste objets zi">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th><:zinit:titre_objets:></th>
+                    <th>[(#GET{zinit_dir_squelettes})]</th>
+                    <th>[(#GET{dir_squelettes})]</th>
+                </tr>
+            </thead>
+            <tbody>
+                <BOUCLE_objets (DATA) {source table, #VAL|zinit_lister_tables} {par cle}>
+                <tr>
+                    <td>[(#VALEUR{texte_objet}|_T)]</td>
+                    <td>[(#GET{zinit_dir_squelettes}|concat{[(#CLE|objet_type)],'.html'}|is_file|?{
+                        [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
+                        [(#CHEMIN_IMAGE{uncheck-16.png}|balise_img)]
+                    })] [(#CLE|objet_type).html]</td>
+                    <td>[(#GET{dir_squelettes}|concat{[(#CLE|objet_type)],'.html'}|is_file|?{
+                        [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
+                        [(#CHEMIN_IMAGE{uncheck-16.png}|balise_img)]
+                    })] [(#CLE|objet_type).html]</td>
+                </tr>
+                </BOUCLE_objets>
+                <tr>
+                    <td></td>
+                    <td>[(#BOUTON_ACTION{<:zinit:maj_label:>,
+                        #URL_ACTION_AUTEUR{zinit_fichiers,
+                        #SESSION{'webmestre'}/zinit_dir_squelettes,
+                        #SELF|parametre_url{var_mode,recalcul}},
+                        zcore,
+                        <:zinit:maj_confirm_fichiers:>
+                    })]</td>
+                    <td>[(#BOUTON_ACTION{<:zinit:maj_label:>,
+                        #URL_ACTION_AUTEUR{zinit_fichiers,
+                        #SESSION{'webmestre'}/dir_squelettes,
+                        #SELF|parametre_url{var_mode,recalcul}},
+                        zcore,
+                        <:zinit:maj_confirm_fichiers:>
+                    })]</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="nettoyeur"></div>
+</B_objets>
+
+<B_content>
+    <div class="liste objets zi">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th><:zinit:titre_objets:></th>
+                    <th>[(#GET{zinit_dir_squelettes}|concat{#GET{blocs/0},'/'})]</th>
+                    <th>[(#GET{dir_squelettes}|concat{#GET{blocs/0},'/'})]</th>
+                </tr>
+            </thead>
+            <tbody>
+                <BOUCLE_content (DATA) {source table, #VAL|zinit_lister_tables} {par cle}>
+                <tr>
+                    <td>[(#VALEUR{texte_objet}|_T)]</td>
+                    <td>[(#GET{zinit_dir_squelettes}|concat{#GET{blocs/0},'/',[(#CLE|objet_type)],'.html'}|is_file|?{
+                        [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
+                        [(#CHEMIN_IMAGE{uncheck-16.png}|balise_img)]
+                    })] [(#CLE|objet_type).html]</td>
+                    <td>[(#GET{dir_squelettes}|concat{#GET{blocs/0},'/',[(#CLE|objet_type)],'.html'}|is_file|?{
+                        [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
+                        [(#CHEMIN_IMAGE{uncheck-16.png}|balise_img)]
+                    })] [(#CLE|objet_type).html]</td>
+                </tr>
+                </BOUCLE_content>
+            </tbody>
+        </table>
+    </div>
+    <div class="nettoyeur"></div>
+</B_content>
+
+<B_skel_dist>
+    <div class="liste objets dist zi">
+        <table class="table">
+            <caption><strong><:zinit:surcharge_fichiers_dist{repertoire=#GET{dir_squelettes_dist}}:></strong></caption>
+            <thead>
+            <tr>
+	            <th rowspan="2" style="width:15%;">[(#GET{dir_squelettes_dist})]</th>
+	            <th colspan="[(#GET{blocs}|count|plus{1})]" style="text-align: center; border-bottom: 1px solid white;">[(#GET{dir_squelettes})]</th>
+            </tr>
+            <tr>
+                <th style="width:[(#VAL{85}|div{#GET{blocs}|count|plus{1}})%]; text-align: center; border-left: 1px solid white;">./</th>
+	            <BOUCLE_blocs_head (DATA) {source table, #GET{blocs}} {par cle}>
+		            <th class="#VALEUR" style="width:[(#VAL{85}|div{#GET{blocs}|count|plus{1}})%]; text-align: center; border-left: 1px solid white;">[./(#VALEUR)/]</th>
+	            </BOUCLE_blocs_head>
+            </tr>
+            </thead>
+            <tbody>
+            <BOUCLE_skel_dist (DATA) {source table, #LISTE{dist.html}|array_merge{#VAL|zinit_check_skel_dist}}>
+            <tr>
+                <td style="width:15%;">#VALEUR</td>
+                <td style="width:[(#VAL{85}|div{#GET{blocs}|count|plus{1}})%]">[(#GET{dir_squelettes}|concat{#VALEUR}|is_file|?{
+                    [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
+                    -
+                    })]</td>
+	            <BOUCLE_blocs (DATA) {source table, #GET{blocs}} {par cle}>
+		            <td class="#VALEUR" style="width:[(#VAL{85}|div{#GET{blocs}|count|plus{1}})%]; text-align: center; border-left: 1px solid white;">[(#GET{dir_squelettes}|concat{#VALEUR,'/',#_skel_dist:VALEUR}|is_file|?{
+			            [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
+			            -
+			            })]</td>
+	            </BOUCLE_blocs>
+            </tr>
+            </BOUCLE_skel_dist>
+            </tbody>
+        </table>
+        <!-- /.table -->
+    </div>
+    <div class="nettoyeur"></div>
+</B_skel_dist>
+
