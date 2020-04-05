@@ -1,0 +1,18 @@
+<paquet
+	prefix="pgn4spip"
+	categorie="divers"
+	version="3.0.1"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="pgn4spip.png"
+	documentation="https://contrib.spip.net/pgn4spip"
+>
+	<nom>pgn4spip</nom>
+	<auteur>Matt Chesstale</auteur>
+	<auteur lien="https://contrib.spip.net/Jacques" >Jacques </auteur>
+	<copyright>2012 - 2017</copyright>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	<credit lien="http://pgn4web.casaschi.net"> Paolo Casaschi's pgn4web </credit>
+	<pipeline nom="pre_propre" action="prepropre" inclure="pgn4spip_fonctions.php" />
+	<pipeline nom="post_propre" action="postpropre" inclure="pgn4spip_postpropre.php" />
+</paquet>

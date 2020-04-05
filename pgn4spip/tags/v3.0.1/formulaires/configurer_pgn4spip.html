@@ -1,0 +1,183 @@
+<style type="text/css">
+
+.formulaire_spip fieldset, .formulaire_spip legend
+{
+	margin: 1px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	border-radius: 8px;
+	border:solid 1px #ccc;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+}
+
+.formulaire_spip label, .formulaire_spip .gauche label
+{
+	margin:0 10px 0 10px;
+	line-height:25px;
+}
+
+.formulaire_spip select
+{ 	max-width:15%;
+}
+
+
+</style>
+
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#ENV{action}">
+<div style="font-size:11px;">
+#ACTION_FORMULAIRE{#ENV{action}}
+
+<div class="fieldset">
+			[(#REM) paramétrage général du module ]
+<fieldset ><legend><:pgn4spip:module:></legend>
+
+	<select name="cfg_l"  > 
+		<option value="h" [(#CONFIG{pgn4spip/cfg_l, "h"}|=={"h"}|?{selected="selected",''})]><:pgn4spip:horizontal:></option>
+		<option value="v" [(#CONFIG{pgn4spip/cfg_l, "h"}|=={"v"}|?{selected="selected",''})]><:pgn4spip:vertical:></option>
+	</select>
+		<input type="radio" name="cfg_isManual" value="" [checked="(#CONFIG{pgn4spip/cfg_isManual}|=={''}|?{'checked'})"] class="fondl" />
+		<:pgn4spip:auto:>
+		<input type="radio" name="cfg_isManual" value="manual" [checked="(#CONFIG{pgn4spip/cfg_isManual}|!={''}|?{'checked'})"] class="fondl" />
+		<:pgn4spip:manual:><input type="text" name="cfg_height_site" value="[(#CONFIG{pgn4spip/cfg_height_site, 268})]" size="2"><:pgn4spip:pixels:>
+
+</fieldset>
+</div>
+<div class="fieldset">
+			[(#REM) paramétrage de l'échiquier ]
+<fieldset><legend><:pgn4spip:chessboard:></legend>
+	<div class="editer-groupe">
+<p>
+
+	<label for="cfg_ss"><:pgn4spip:square:></label><select name="cfg_ss" > 
+	<option value="22" [(#CONFIG{pgn4spip/cfg_ss, "22"}|=={"22"}|?{selected="selected",''})]><:22:></option>
+	<option value="38" [(#CONFIG{pgn4spip/cfg_ss, "38"}|=={"38"}|?{selected="selected",''})]><:38:></option>
+	<option value="56" [(#CONFIG{pgn4spip/cfg_ss, "56"}|=={"56"}|?{selected="selected",''})]><:56:></option>
+	</select>
+	<label for="cfg_lch"><:pgn4spip:white:></label><input type="text" name="cfg_lch" value="[(#CONFIG{pgn4spip/cfg_lch, "F0F0F0"})]" size="5"/>
+	<label for="cfg_dch"><:pgn4spip:black:></label><input type="text" name="cfg_dch" value="[(#CONFIG{pgn4spip/cfg_dch, "ABABAB"})]" size="5"/> 
+</p>
+
+<p>
+	<label for="cfg_hch"><:pgn4spip:focus:></label><input type="text" name="cfg_hch" value="[(#CONFIG{pgn4spip/cfg_hch, "ABABAB"})]" size="5"/>
+	<label for="cfg_bbch"><:pgn4spip:border:></label><input type="text" name="cfg_bbch" value="[(#CONFIG{pgn4spip/cfg_bbch, "E0E0E0"})]" size="5"/>
+	<label for="cfg_bch"><:pgn4spip:background:></label><input type="text" name="cfg_bch" value="[(#CONFIG{pgn4spip/cfg_bch, "F6F6F6"})]" size="5"/>
+</p>
+
+	</div >
+
+<p><:pgn4spip:squareclick:></p>
+
+</fieldset>
+</div>
+
+<div class="fieldset">
+			[(#REM) paramétrage des textes et commentaires ]
+<fieldset ><legend><:pgn4spip:pgn:></legend>
+			<div class="editer-groupe">
+<p>
+<label for="cfg_md"><:pgn4spip:showmoves:></label>	<select name="cfg_md" > <br />
+	<option value="f" [(#CONFIG{pgn4spip/cfg_md, "f"}|=={"f"}|?{selected="selected",''})]><:pgn4spip:figurine:></option><
+	<option value="t" [(#CONFIG{pgn4spip/cfg_md, "f"}|=={"t"}|?{selected="selected",''})]><:pgn4spip:text:></option><br />
+	<option value="p" [(#CONFIG{pgn4spip/cfg_md, "f"}|=={"p"}|?{selected="selected",''})]><:pgn4spip:puzzle:></option><br />
+	<option value="h" [(#CONFIG{pgn4spip/cfg_md, "f"}|=={"h"}|?{selected="selected",''})]><:pgn4spip:hidden:></option><br />
+	<option value="l" [(#CONFIG{pgn4spip/cfg_md, "f"}|=={"l"}|?{selected="selected",''})]><:pgn4spip:live:></option><br />
+	</select>
+<label for="cfg_fhch"><:pgn4spip:pgnheader:></label>	<input type="text" name="cfg_fhch" value="[(#CONFIG{pgn4spip/cfg_fhch, "000000"})]" size="5"/>
+<label for="cfg_fmch"><:pgn4spip:pgnmove:></label>	<input type="text" name="cfg_fmch" value="[(#CONFIG{pgn4spip/cfg_fmch, "000000"})]" size="5"/>
+</p>
+
+<p>
+<label for="cfg_fcch"><:pgn4spip:pgncomment:></label>		<input type="text" name="cfg_fcch" value="[(#CONFIG{pgn4spip/cfg_fcch, "000080"})]" size="5"/>
+	<select name="cfg_cd" > 
+		<option value="n" [(#CONFIG{pgn4spip/cfg_cd, "n"}|=={"n"}|?{selected="selected",''})]><:pgn4spip:newline:></option>
+		<option value="i" [(#CONFIG{pgn4spip/cfg_cd, "n"}|=={"i"}|?{selected="selected",''})]><:pgn4spip:inline:></option>
+		<option value="h" [(#CONFIG{pgn4spip/cfg_cd, "n"}|=={"h"}|?{selected="selected",''})]><:pgn4spip:hidden2:></option>
+	</select>
+<label for="cfg_hmch"><:pgn4spip:pgnfocus:></label><input type="text" name="cfg_hmch" value="[(#CONFIG{pgn4spip/cfg_hmch, "E0E0E0"})]" size="5"/>
+<label for="cfg_d"><:pgn4spip:pgndelay:></label>	<input type="text" name="cfg_d" value="[(#CONFIG{pgn4spip/cfg_d, "3000"})]" size="5"/>
+</p>
+
+<p>
+
+<label for="cfg_bd"><:pgn4spip:ctrlbrowse:></label>
+	<select name="cfg_bd" > 
+		<option value="c" [(#CONFIG{pgn4spip/cfg_bd, "c"}|=={"c"}|?{selected="selected",''})]><:pgn4spip:custom:></option>
+		<option value="s" [(#CONFIG{pgn4spip/cfg_bd, "c"}|=={"s"}|?{selected="selected",''})]><:pgn4spip:standard:></option>
+		<option value="h" [(#CONFIG{pgn4spip/cfg_bd, "c"}|=={"h"}|?{selected="selected",''})]><:pgn4spip:hidden2:></option>
+	</select>
+<label for="cfg_ctch"><:pgn4spip:ctrlarrow:></label><input type="text" name="cfg_ctch" value="[(#CONFIG{pgn4spip/cfg_ctch, "696969"})]" size="5"/>	
+<label for="cfg_cbch"><:pgn4spip:ctrlbckgrnd:><input type="text" name="cfg_cbch" value="[(#CONFIG{pgn4spip/cfg_cbch, "E1E1E1"})]" size="5"/></td>
+	<select name="cfg_hm" > 
+		<option value="b" [(#CONFIG{pgn4spip/cfg_hm, "b"}|=={"b"}|?{selected="selected",''})]><:pgn4spip:focusborder:></option>
+		<option value="s" [(#CONFIG{pgn4spip/cfg_hm, "b"}|=={"s"}|?{selected="selected",''})]><:pgn4spip:focussquare:></option>
+		<option value="n" [(#CONFIG{pgn4spip/cfg_hm, "b"}|=={"n"}|?{selected="selected",''})]><:pgn4spip:none:></option>
+	</select>
+</p>
+
+<p>
+	<label for="cfg_am"><:pgn4spip:autoplay:></label>
+	<select name="cfg_am"> 
+		<option value="n" [(#CONFIG{pgn4spip/cfg_am, "n"}|=={"n"}|?{selected="selected",''})]><:pgn4spip:none:></option>
+		<option value="g" [(#CONFIG{pgn4spip/cfg_am, "n"}|=={"g"}|?{selected="selected",''})]><:pgn4spip:game:></option>
+		<option value="l" [(#CONFIG{pgn4spip/cfg_am, "n"}|=={"l"}|?{selected="selected",''})]><:pgn4spip:loop:></option>
+	</select>
+	<label for="cfg_rm"><:pgn4spip:liverate:></label>
+	<input type="text" name="cfg_rm" value="[(#CONFIG{pgn4spip/cfg_rm, "1.0"})]" size="5"/>
+</p>
+
+</fieldset>
+</div>
+
+<p class="boutons">
+	<input type="submit" name="enregistrer" class="submit" value="<:pgn4spip:ok:>" />
+	<input type="submit" name="reinit" class="submit" value="<:pgn4spip:reinit:>" />
+</p>
+</div>
+</form>
+</div>
+
+<div class="fieldset">
+<fieldset>
+
+<legend><:pgn4spip:conf_part_pgn:></legend>
+<fieldset><legend><:pgn4spip:syntaxe:></legend>
+<b><:pgn4spip:prm_example:></b> <i><:pgn4spip:algebric_notation:> <a href="<:pgn4spip:url_def_pgn:>" target="_blank">PGN</a> </i> <b>[<font color="red">/</font>pgn]</b>
+</fieldset>
+<br />
+ <a href="/pgn4web/board.html?help=true" target="_blank"><:pgn4spip:optional_param:></a>  (" | " = "<:pgn4spip:or:>"; [] = <:pgn4spip:by_default:>; () = <:pgn4spip:initial:>) :
+<table cellspacing="5">
+<tr><td><b><u>f</u></b>rame<b><u>H</u></b>eight=[""] | <i><:pgn4spip:nombre:></i><br />
+		fh=[""] | <i><:pgn4spip:nombre:></i><br />
+		<b>s</b>quare<b>S</b>ize=<i><:pgn4spip:nombre:></i><br />
+		<b>i</b>nitial<b>V</b>ariation=<i><:pgn4spip:nombre:></i>
+	</td>
+	<td><b>l</b>ayout=[<b>h</b>]orizontal | (<b>v</b>)ertical<br />
+		<b>i</b>nitial<b>G</b>ame=[<b>f</b>]irst | (<b>l</b>)ast | (<b>r</b>)andom | <i><:pgn4spip:nombre:></i><br />
+		<b>p</b>iece<b>S</b>ize=[<b>d</b>]efault | <i><:pgn4spip:nombre:></i><br />
+		<b>a</b>utoplay<b>M</b>ode=[<b>n</b>]one | (<b>g</b>)ame | (<b>l</b>)oop
+	</td>
+</tr>
+<tr><td colspan="2"><b>m</b>oves<b>D</b>isplay=[<b>f</b>]igurine | (<b>t</b>)ext | (<b>p</b>)uzzle | (<b>h</b>)idden | (<b>l</b>)ive<br />
+					<b>i</b>nitial<b>H</b>alfmove=[<b>s</b>]tart | (<b>e</b>)nd | (<b>r</b>)andom | (<b>c</b>)omment | <i><:pgn4spip:nombre:></i><br />
+	</td>
+</tr>
+</table>
+<:pgn4spip:in_article:><a href="http://fr.wikipedia.org/wiki/D%C3%A9fense_Alekhine" target="_blank"> <:pgn4spip:example:></a> :<br />
+<textarea rows=6 cols=55>
+<:pgn4spip:before:>
+[pgn frameHeight=500 squareSize=46 pieceSize=40 pf=m
+ movesDisplay=figurine layout=vertical am=loop]
+1. e4 Nf6 2.e5 Nd5 3.c4 Nb6
+[/pgn]
+<:pgn4spip:after:>
+</textarea>
+
+</fieldset>
+</div>
+</form>
+</div>

@@ -1,0 +1,72 @@
+Associate to each short name of options a long name that can be used as paramater of the [pgn prm=value] tag
+The two following examples, about moving automatically the pieces every second, are equivalent:
+
+[pgn autoplayMode=loop delay=1000] 1. e4 Nf6 [/pgn]
+
+[PGN am=l d=1000] 1. e4 Nf6 [/PGN]
+___________
+
+The two following examples, about puzzles in .pgn file knowing its URL, are equivalent:
+
+[pgn movesDisplay=puzzle 
+ extendedoptions=true
+ pgndata=http://localhost/spip/plugins/pgn4spip/pgn4web/tactics.pgn]
+[/pgn]
+
+[pgn md=p eo=t pd=http://localhost/spip/plugins/pgn4spip/pgn4web/tactics.pgn][/pgn]
+___________
+
+List of parameters: 
+
+    // the [value by default] is in square brackets in first position in the list after //
+    $optName = array( // of long names of options, an alternative to the short names
+    'am'    => 'autoplayMode',           // [n]one |(g)ame | (l)oop
+    'bbch'  => 'boardBorderColor',       // [E0E0E0] was 000000
+    'bd'    => 'buttonsDisplay',         // [c]ustom, (h)idden, (s)tandard
+    'bch'   => 'backgroundColorHex',     // [F6F6F6] was FFFFFF, (t)ransparent to use the parent's background color
+    'bsch'  => 'boardShadowColor',       // [t]ransparent no shadow | (b)order | nbr
+    'cbch'  => 'controlBackgroundColor', // [F0F0F0] was standard buttons
+    'cd'    => 'commentsDisplay',        // [n]ewline, (i)nline,(h)idden
+    'ctch'  => 'controlTextColor',       // [696969] was 000000
+    'd'     => 'delay',                  // [3000] was 1000 in ms
+    'dch'   => 'darkColor',              // [E0E0E0] was C6CEC3
+    'fcch'  => 'fontCommentsColor',      // [000080]
+    'fcs'   => 'fontCommentsSize',       // [m]oves <- fontMovesSize
+    'fh'    => 'frameHeight',            // [""], (p)age, (b)oard, nbr, overriding textHeight. See FrameHeightEval()
+    'fhch'  => 'fontHeaderColor',        // [000000]
+    'fhs'   => 'fontHeaderSize',         // [14] was 16
+    'fmch'  => 'fontMovesColor',         // [000000]
+    'fms'   => 'fontMovesSize',          // [14] was 16
+    'fp'    => 'framePadding',           // [13] was 0
+    'fw'    => 'frameWidth',             // [p]age, (b)oard, nbr, overriding textHeight
+    'hch'   => 'highlightColor',         // [ABABAB] was DAF4D7
+    'hd'    => 'headerDisplay',          // [j]ustified | (h)idden | (c)entered | (l)ive | (v)ariations
+    'hl'    => 'horizontalLayout',       // [t]rue, (f)alse
+    'hm'    => 'highlightMode',          // [b]order, (s)quare, (n)one
+    'hmch'  => 'highlightMovesColor',    // [E0E0E0] was DAF4D7 | (b)ackground for no highligh
+    'ig'    => 'initialGame',            // [f]irst | (l)ast | (r)andom
+    'ih'    => 'initialHalfmove',        // [s]tart | (e)nd | (r)andom | (c)omment | (v)ariation | nbr
+    'iv'    => 'initialVariation',       // [0]
+    'l'     => 'layout',                 // [h]orizontal, (v)ertical. See OptionParser()
+    'lch'   => 'lightColor',             // [F6F6F6] was EFF4EC. suffix 'h' stands for hex
+    'md'    => 'movesDisplay',           // [f]igurine | (t)ext | (p)uzzle | (h)idden | (l)ive
+    'pf'    => 'pieceFont',              // [d]efault based on pieceSize | (a)lpha | (m)erida | (u)scf | (s)vgchess
+    'ps'    => 'pieceSize',              // [d]efault <- squareSize
+    'rd'    => 'refreshDemo',            // [f]alse | (t)rue if md="t"
+    'rm'    => 'refreshMinutes',         // [1] minute if md="t"
+    'ss'    => 'squareSize',             // [26] was 28
+                                         // textHeight: nbr, optional if frameHeight
+    'tm'    => 'textMargin'              // [13] was 0. Set left/right margin width of the  textual section, header and/or moves text
+                                         // textWidth: nbr, optional if frameWidth
+                    );
+    $skipPrms = array( // of other options (extendedoptions, height) to be skiped
+    'eo'    => 'extendedoptions',        // [f]alse, (t)rue
+    'h'     => 'height'                  // [auto] = DEFAULT_HEIGHT. Height of the module
+                    );
+    $pgnPrms = array( // of pgn options to indicate alternative (remote) source
+    'fs'    => 'fenString',              // Initial position in format FEN 
+    'pd'    => 'pgnData',                // URL of the PGN file
+    'pe'    => 'pgnEncoded',             // PGN game encoded
+    'pi'    => 'pgnId',                  // id of the pgnText textarea 
+    'pt'    => 'pgnText'                 // PGN game
+                    );
