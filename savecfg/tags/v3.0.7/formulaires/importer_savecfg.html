@@ -1,0 +1,21 @@
+<div class="formulaire_spip formulaire_savecfg formulaire_#FORM">
+	<h3 class="titrem"><:savecfg:importer_savecfg:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}" enctype="multipart/form-data">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			#SET{fond, #SELF|match{(cfg=)(\w+?),2}}
+			<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+				<[(#VAL{li}|saisie_balise_structure_formulaire)] class="editer">
+					<label for="champ_fichier"><:savecfg:fichier_import:>[ (#ENV**{erreurs}|table_valeur{nom}|sinon{ <em><:ecrire:info_obligatoire_02:></em>})]</label>
+					<input type="file" size="8" name="fichier" class="form1" id="champ_fichier" />
+					[<p>(#ENV**{erreurs}|table_valeur{nom})</p>]
+				</[(#VAL{li}|saisie_balise_structure_formulaire)]>
+			</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+			<p class="boutons">
+				<input type="submit" value="<:savecfg:importer:>" />
+			</p>
+		</div>
+	</form>
+</div>

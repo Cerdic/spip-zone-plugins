@@ -1,0 +1,21 @@
+<div class="formulaire_spip formulaire_savecfg formulaire_#FORM">
+	<h3 class="titrem"><:savecfg:sauvegarder_savecfg:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<input type="hidden" name="fondcfg" value="[(#ENV{nom})]" />
+			<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+				<[(#VAL{li}|saisie_balise_structure_formulaire)] class="editer">
+					<label for="champ_nom"><:savecfg:titre_sauvegarde:>[ (#ENV**{erreurs}|table_valeur{nom}|sinon{ <em><:ecrire:info_obligatoire_02:></em>})]</label>
+					<input type="text" size="10" class="text" name="titre" id="champ_nom" value="" />
+					[<p>(#ENV**{erreurs}|table_valeur{nom})</p>]
+				</[(#VAL{li}|saisie_balise_structure_formulaire)]>
+			</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+			<p class="boutons">
+				<input type="submit" value="<:savecfg:sauvegarder:>" />
+			</p>
+		</div>
+	</form>
+</div>

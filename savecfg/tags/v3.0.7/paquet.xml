@@ -1,0 +1,27 @@
+<paquet
+	prefix="savecfg"
+	categorie="maintenance"
+	version="3.0.7"
+	etat="stable"
+	compatibilite="[3.0.20;3.2.*]"
+	logo="images/savecfg-32.png"
+	schema="0.2.0"
+	documentation="https://contrib.spip.net/SaveCFG"
+>
+
+	<nom>SaveCFG</nom>
+	<!-- Import/export des configurations de CFG -->
+
+	<auteur>Yohann Prigent (potter64)</auteur>
+	<auteur lien="https://contrib.spip.net/_Jacques-PYRAT_">Jacques</auteur>
+
+	<copyright>2009-2015</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
+
+	<pipeline nom="declarer_tables_principales" inclure="base/savecfg_install.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/savecfg_install.php" />
+	<pipeline nom="affiche_gauche" action="afficher_tout" inclure="savecfg_fonctions.php" />
+</paquet>
