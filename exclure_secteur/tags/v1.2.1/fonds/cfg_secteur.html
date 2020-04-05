@@ -1,0 +1,48 @@
+<div class="formulaire_spip">
+<!-- titre=Exclure Secteur -->
+
+
+			<form action="#SELF" method="post">
+[<div>(#ENV{_cfg_}|form_hidden)</div>]
+    <fieldset>
+	<ul>
+	<legend id="explication">Choisissez les secteurs &agrave; exclure</legend>
+	<BOUCLE_racine(RUBRIQUES){racine}{tout}>
+	<li>
+
+    #SET{checked, #CONFIG{secteur/exclure_sect, #ARRAY}}
+	<label for="rub_#ID_RUBRIQUE">#TITRE</label>	
+	<input type="checkbox" name="exclure_sect[]" value="#ID_RUBRIQUE" [(#ID_RUBRIQUE|in_array{#GET{checked}}|?{'checked="checked"'})] />
+	
+	</li>
+	
+	</BOUCLE_racine>
+	
+	</ul>
+	</fieldset>
+	<fieldset>
+	<ul>
+	<legend id="explication">R&eacute;glages avanc&eacute;s du plugin</legend>
+
+	<li>
+	<label for="tout">Est-ce que le crit&eacute;re <code>{tout}</code> est &eacute;quivalent au crit&eacute;re <code>{tout_voir}</code> ?</label>
+	<input type="checkbox" name="tout" value="oui"[(#ENV{tout}|=={oui}|oui) checked="checked"] />
+	</li>
+	
+    <li>
+	<label for="idexplicite">Ne pas appliquer aux les boucles sur lequel l'identifiant de l'objet est explicité ou pris dans le contexte. (Permet de ne pas modifier le squelette article.html)</label>
+	<input type="checkbox" name="idexplicite" value="oui"[(#ENV{idexplicite}|=={oui}|oui) checked="checked"] />
+	</li>
+	
+	
+    </ul>
+    </fieldset>
+	<p class="boutons">
+	<input type="submit" name="_cfg_ok" value="<:cfg:OK:>" />
+	<input type="submit" name="_cfg_delete" value="<:cfg:Supprimer:>" /></p>
+	
+    
+</form>
+</div>
+			
+			
