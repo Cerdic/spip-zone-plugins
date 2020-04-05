@@ -1,0 +1,49 @@
+[(#SET{defaut_tri,#ARRAY{
+	id_selection,1,
+	points,-1,
+	id_objet,1,
+	objet,1,
+}})
+]
+#SET{exclus,#ENV{objet_source}|roles_complets{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
+<div class="liste-objets liste-objets-associer selections">
+<span class="recherche">
+	<label for="recherche-#ENV{id}"><:info_rechercher_02:></label>
+	<input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" />
+	<input type="submit" class="tout_voir" name="tout_voir" value="<:info_tout_afficher:>" />
+</span>[(#ENV{recherche}|trim|intval|oui)
+[(#ENV{recherche}|trim|setenv{id_selection})]
+[(#REM|setenv{recherche})]]
+<B_liste_selections>
+#ANCRE_PAGINATION
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{selection:info_1_selection,selection:info_nb_selections}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='titre' scope='col'>[(#TRI{titre,<:selection:champ_titre_label:>,ajax})]</th>
+			<th class='nb_contenus' scope='col'><:selection:champ_nombre_contenus:></th>
+			<th class='id' scope='col'>[(#TRI{id_selection,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class='role' scope='col'><:roles:role_titre:></th>
+			<th class='action' scope='col'>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_selections(SELECTIONS){!id_selection IN #GET{exclus}}{id_selection ?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='titre principale'><a href="[(#ID_SELECTION|generer_url_entite{selection})]" title="<:info_numero_abbreviation|attribut_html:> #ID_SELECTION">[(#RANG). ]#TITRE</a></td>
+			<td class='nb_contenus id'><BOUCLE_contenus(SELECTIONS_CONTENUS){id_selection}> </BOUCLE_contenus>#TOTAL_BOUCLE</B_contenus>0<//B_contenus></td>
+			<td class='id'>[(#AUTORISER{modifier,selection,#ID_SELECTION}|?{
+				<a href="[(#URL_ECRIRE{selection_edit,id_selection=#ID_SELECTION})]">#ID_SELECTION</a>,
+				#ID_SELECTION
+			})]</td>
+			<td class='role'>[(#INCLURE{fond=formulaires/inc-editer_liens_roles,env,id=#ID_SELECTION,cle=selection-#ID_SELECTION-#OBJET-#ID_OBJET})]</td>
+			<td class='action'><button type="submit" class="button link" name="ajouter_lien[selection-#ID_SELECTION-#OBJET-#ID_OBJET]" value="+"><:selection:ajouter_lien_selection:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button></td>
+		</tr>
+	</BOUCLE_liste_selections>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</B_liste_selections>[
+<div class="liste-objets selections caption-wrap"><strong class="caption">(#ENV*{sinon,[(#ENV{recherche}|?{<:selection:info_aucun_selection:>,''})]})</strong></div>
+]<//B_liste_selections>
+</div>
