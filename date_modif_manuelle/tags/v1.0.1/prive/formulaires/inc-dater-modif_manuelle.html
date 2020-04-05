@@ -1,0 +1,18 @@
+<div class='editer-groupe'>
+
+	#SET{name,date_modif_manuelle}#SET{erreurs,#ENV{erreurs/#GET{name}}}
+	<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+		<label for="#GET{name}">[(#ENV{_label_date_modif_manuelle})]</label>[
+		<span class='erreur_message'>(#GET{erreurs})</span>
+		]
+		<span class="affiche"[(#ENV{_saisie_en_cours}|et{#ENV{_editer_date}}|oui)style="display:none;"]>
+		[(#ENV{aucune_date_modif_manuelle}|?{<:date_modif_manuelle:aucune_date_definie:>,[(#ENV*{afficher_#GET{name}}|affdate)]})]
+		</span>
+		[(#ENV{editable})
+		<span class="input[(#ENV{_editer_date}|oui)editable]"[(#ENV{_saisie_en_cours}|et{#ENV{_editer_date}}|non)style="display:none;"]>
+			<input type="text" class="text date" name="#GET{name}_jour" id="#GET{name}_jour" value="#ENV{#GET{name}_jour}" size="10"/>
+			<input type="text" class="text heure time" name="#GET{name}_heure" id="#GET{name}_heure" value="#ENV{#GET{name}_heure}" size="5"/>
+		</span>
+		]
+	</div>
+</div>

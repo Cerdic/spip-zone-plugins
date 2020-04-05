@@ -1,0 +1,26 @@
+<paquet
+	prefix="date_modif_manuelle"
+	categorie="date"
+	version="1.0.1"
+	etat="test"
+	compatibilite="[3.1.0;3.2.*]"
+	logo="prive/themes/spip/images/date_modif_manuelle-64.png"
+	documentation="https://contrib.spip.net/4899"
+	schema="1.0.0" 
+>
+
+	<nom>Date de modification manuelle</nom>
+	<!-- Ajoute une date de modification sur les articles à saisir -->
+
+	<auteur>Matthieu Marcillaud</auteur>
+	<credit lien='https://www.iconfinder.com/icons/66719/date_edit_icon'>Pawel Kadysz (logo)</credit>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="autoriser" inclure="date_modif_manuelle_autorisations.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/date_modif_manuelle.php" />
+	<pipeline nom="formulaire_fond"     inclure="date_modif_manuelle_pipelines.php" />
+	<pipeline nom="formulaire_charger"  inclure="date_modif_manuelle_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="date_modif_manuelle_pipelines.php" />
+	<pipeline nom="formulaire_traiter"  inclure="date_modif_manuelle_pipelines.php" />
+</paquet>
