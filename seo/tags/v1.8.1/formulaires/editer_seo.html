@@ -1,0 +1,46 @@
+<div class="formulaire_spip formulaire_editer formulaire_editer_seo formulaire_editer_seo-#ENV{objet}-#ENV{id_objet}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <input type='hidden' name='id_objet' value='#ENV{id_objet}' />
+	  <input type='hidden' name='objet' value='#ENV{objet}' />
+	  <ul>
+	    <li class="editer editer_title[ (#ENV**{erreurs}|table_valeur{title}|oui)erreur]">
+	    	<label for="title"><:seo:meta_title:></label>[
+		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{title})</span>
+		]<input type='text' class='text' name='title' id='title' value="[(#ENV**{title,''})]" />
+	    </li>
+	    [<li class="editer editer_description[ (#ENV**{erreurs}|table_valeur{description}|oui)erreur]">(#ENV**{description}|match{^=,Uis}|non)
+			<label for="description"><:seo:meta_description:></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{description})</span>
+			]<textarea name='description' id='description' rows='3' cols='40'>[(#ENV**{description})]</textarea>
+		</li>]
+	    <li class="editer editer_keywords[ (#ENV**{erreurs}|table_valeur{keywords}|oui)erreur]">
+	    	<label for="keywords"><:seo:meta_keywords:></label>[
+		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{keywords})</span>
+		]<input type='text' class='text' name='keywords' id='keywords' value="[(#ENV**{keywords,''})]" />
+	    </li>
+	    <li class="editer editer_copyright[ (#ENV**{erreurs}|table_valeur{copyright}|oui)erreur]">
+	    	<label for="copyright"><:seo:meta_copyright:></label>[
+		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{copyright})</span>
+		]<input type='text' class='text' name='copyright' id='copyright' value="[(#ENV**{copyright,''})]" />
+	    </li>
+	    <li class="editer editer_author[ (#ENV**{erreurs}|table_valeur{author}|oui)erreur]">
+	    	<label for="author"><:seo:meta_author:></label>[
+		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{author})</span>
+		]<input type='text' class='text' name='author' id='author' value="[(#ENV**{author,''})]" />
+	    </li>
+	  </ul>
+
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'>
+	  	<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+	  </p>
+	</div></form>
+	]
+</div>

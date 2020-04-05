@@ -1,0 +1,11 @@
+<traduction module="paquet-seo" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/seo/lang/" reference="fr">
+	<langue code="en" />
+	<langue code="fr" />
+	<langue code="ru" url="https://trad.spip.net/tradlang_module/paquet-seo?lang_cible=ru">
+		<traducteur nom="nazar" lien="https://trad.spip.net/auteur/nazar" />
+		<traducteur nom="Serge Markitanenko" lien="https://trad.spip.net/auteur/serge-markitanenko" />
+	</langue>
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/paquet-seo?lang_cible=sk">
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
+	</langue>
+</traduction>

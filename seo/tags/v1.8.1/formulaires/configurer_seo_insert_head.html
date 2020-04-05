@@ -1,0 +1,31 @@
+<div class="formulaire_spip formulaire_config formulaire_#FORM">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="fieldset">
+				<h3 class="legend"><:seo:insert_head:></h3>
+				<ul>
+					<li class="editer editer_insert_head_activate">
+						<p class="explication"><:seo:insert_head_descriptif:></p>
+						<label for="insert_head_activate"><:seo:insert_head_activate:></label>
+						<input type="checkbox" value="yes" name="activate" id="insert_head_activate"[(#ENV{activate}|=={yes}|oui)checked="checked"] />
+					</li>
+					<li class="editer editer_forcer_squelette">
+						<p class="explication"><:seo:forcer_squelette_descriptif:></p>
+						<label for="forcer_squelette"><:seo:forcer_squelette_label:></label>
+						<input type="checkbox" value="yes" name="forcer_squelette" id="forcer_squelette"[(#ENV{forcer_squelette}|=={yes}|oui)checked="checked"] />
+					</li>
+				</ul>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" value="<:bouton_valider:>" class="submit" />
+		</p>
+	</div>
+</form>
+</div>
