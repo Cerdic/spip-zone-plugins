@@ -1,0 +1,19 @@
+<paquet
+	prefix="onglets_texte"
+	categorie="edition"
+	version="2.0.8"
+	etat="dev"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/onglets_texte.png"
+	documentation="https://contrib.spip.net/article1548"
+>
+	<nom>Onglets dans le texte</nom>
+	<auteur lien="https://contrib.spip.net/?auteur214">Pi R</auteur>
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="insert_head" action="insert_head" inclure="onglets_texte_pipelines.php" />
+	<pipeline nom="insert_head_css" action="insert_head_css" inclure="onglets_texte_pipelines.php" />
+	<pipeline nom="porte_plume_barre_pre_charger" inclure="onglets_texte_pipelines.php" />
+	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="onglets_texte_pipelines.php" />
+
+</paquet>
