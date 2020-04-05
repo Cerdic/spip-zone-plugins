@@ -1,0 +1,17 @@
+<paquet
+	prefix="bonux_logo"
+	categorie="outil"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.1.6;3.1.*]"
+	logo="prive/themes/spip/images/bonux_logo-64.png"
+	documentation=""
+>
+
+	<nom>Bonux des logo</nom>
+	<!-- Des fonctions additionnelles pour gérer les logos de SPIP -->
+
+	<auteur lien='http://p.henix.be'>Phenix</auteur>
+
+	<licence>GNU/GPL</licence>
+</paquet>
