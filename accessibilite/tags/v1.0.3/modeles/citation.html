@@ -1,0 +1,16 @@
+[(#REM) Modele citation.html
+On test présence du paramètre type pour choisir entre blockquote et q
+][(#ENV*{type}|=={'courte'}|oui)
+[(#REM) On récupère la valeur du paramètre cite et du parametre langue ]
+[<q[ cite="(#ENV*{cite})"][ lang="(#ENV*{langue})"]>(#ENV*{texte})</q>]
+]
+[(#ENV*{type}|=={'courte'}|non)
+[(#REM) <div class="clearer"><!-- ie bug --></div> ]
+<blockquote[ cite="(#ENV*{cite})"][ lang="(#ENV*{langue})"]>
+[(#REM) On récupère la valeur du paramètre texte (le texte cité) ]
+[<div class="citation">(#ENV*{texte}|propre|paragrapher)</div>]
+[(#REM) On genere un paragraphe avec une balise cite pour indiquer la source de la citation qui créé un lien clicable zi il y a un titre et un cite qui pointe vers le cite
+ avec le titre comme intitule du lien, sinon juste le titre. Si l'auteur est renseigné il est également indiqué ]
+[<p><cite>(#ENV*{auteur}|?{' ',#ENV*{titre}|oui})[Source&nbsp;: [<a href="(#ENV*{cite})">](#ENV*{titre})[(#ENV*{cite}|?{</a>.})]][ Auteur&nbsp;: (#ENV*{auteur}).]</cite></p>]
+</blockquote>
+]
