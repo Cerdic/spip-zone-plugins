@@ -1,0 +1,20 @@
+<!-- titre=<:gcalendar:gcalendar:>-->
+<!-- icone=img_pack/logo_gc.png-->
+<!-- descriptif=<img style="float:right;" src="#CHEMIN{img_pack/logo_gc.gif}" /><:gcalendar:descriptif:> -->
+#CACHE{0}
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]
+<p>
+<label><:gcalendar:adresse_mail:><input type="text" name="agenda" size=30 maxlength=40 value="#ENV{agenda}" />
+</label>
+</p>
+<p>
+<label><:gcalendar:nombre_evenements:><input type="text" name="nbev" size=2 maxlength=2 value="#ENV{nbev}" />
+</label>
+</p>
+<fieldset><legend><:gcalendar:affichage_agenda:></legend>
+	<input type="radio" name="affich_agenda" value="oui" [checked="(#ENV{affich_agenda,oui}|=={oui}|?{checked})"]/><:gcalendar:oui:>
+	<input type="radio" name="affich_agenda" value="" [checked="(#ENV{affich_agenda,""}|=={""}|?{checked})"]/><:gcalendar:non:>
+</fieldset>
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</div></form>

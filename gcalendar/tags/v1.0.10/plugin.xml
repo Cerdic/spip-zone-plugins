@@ -1,0 +1,21 @@
+<plugin>
+	<nom>GCalendar</nom>
+	<slogan>Utiliser un calendrier Google</slogan>
+	<auteur>[Gilles Quiniou->mailto:gilles@quiniou.net], [Mehdi Cherifi (Superyms)->mailto:superyms@gmail.com]</auteur>
+	<categorie>date</categorie>
+	<licence>GNU/GPL</licence>
+	<version>1.0.10</version>
+	<etat>stable</etat>
+	<lien>https://contrib.spip.net/Plugin-Agenda-Google-pour-SPIP</lien>
+    <description>
+		<multi>
+			[fr]Ce plugin int&egrave;gre Google Calendar &agrave; SPIP.
+			[en]This plugin integrates Google Calendar to SPIP.
+			[ar]&#1610;&#1583;&#1605;&#1580; &#1607;&#1584;&#1575; &#1575;&#1604;&#1576;&#1585;&#1606;&#1575;&#1605;&#1580; &#1575;&#1604;&#1605;&#1587;&#1575;&#1593;&#1583; Google Calendar &#1604; SPIP.
+		</multi>
+	</description>
+	<prefix>gcalendar</prefix>
+	<icon>img_pack/logo_gc.gif</icon>
+	<necessite id='SPIP' version='[1.9.2;2.1.99]' />
+	<necessite id='cfg' version='[1.4;]' />
+</plugin>
