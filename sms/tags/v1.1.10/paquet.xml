@@ -1,0 +1,21 @@
+<paquet
+	prefix="sms"
+	categorie="communication"
+	version="1.1.10"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/sms-64.png"
+	documentation="https://contrib.spip.net/SMS"
+	schema="1.0.4"
+>
+	<nom>SMS</nom>
+
+	<auteur>tofulm</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="autoriser" inclure="sms_autorisations.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/sms.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/sms.php" />
+
+</paquet>
