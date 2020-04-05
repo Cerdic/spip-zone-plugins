@@ -1,0 +1,20 @@
+<paquet
+	prefix="levenshtein"
+	categorie="navigation"
+	version="1.0.1"
+	etat="dev"
+	compatibilite="[3.1.0;3.1.*]"
+	logo="prive/themes/spip/images/levenshtein-64.png"
+	documentation=""
+	schema="1.0.0"
+>
+	<nom>Levenshtein</nom>
+
+	<auteur lien='http://p.henix.be'>Phenix</auteur>
+
+	<licence>GNU/GPL</licence>
+
+  <pipeline nom="levenshtein_calculer" />
+
+  <utilise nom="vocabulaire" compatibilite="[1.0.1;]" />
+</paquet>
