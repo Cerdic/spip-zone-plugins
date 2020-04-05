@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_livraison_zones_selectionnes>
+	<ul>
+	<BOUCLE_livraison_zones_selectionnes(LIVRAISON_ZONES){id_livraison_zone IN #GET*{valeur}}
+		{par num nom, nom}{tout}>
+		<li class="choix">#NOM (#ID_LIVRAISON_ZONE)</li>
+	</BOUCLE_livraison_zones_selectionnes>
+	</ul>
+	</B_livraison_zones_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_livraison_zones_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_livraison_zone_selectionne(LIVRAISON_ZONES){id_livraison_zone=#ENV{valeur}}
+		{par num nom, nom}{tout}>
+	  	<p>#NOM (#ID_LIVRAISON_ZONE)</p>
+	</BOUCLE_livraison_zone_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_livraison_zone_selectionne>
+<//B_test_multiple>

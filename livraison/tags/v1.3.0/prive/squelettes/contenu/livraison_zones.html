@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/livraison_zones, par=nom, env, ajax, sinon=<:livraison_zone:info_aucun_livraison_zone:>}>
+
+[(#AUTORISER{creer,livraison_zone})
+	[(#URL_ECRIRE{livraison_zone_edit,new=oui}|icone_verticale{<:livraison_zone:icone_creer_livraison_zone:>,livraison_zone,new,right})]
+]

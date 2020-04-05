@@ -1,0 +1,12 @@
+#SET{self,#SELF|parametre_url{debut_zones,#EVAL{_request('debut_zones')}}}
+<B_zones>
+[(#BOITE_OUVRIR{[<:livraison_zone:titre_livraison_zones:>(#CHEMIN_IMAGE{livraison_zone-24.png}|balise_img{'',cadre-icone})],simple})]
+[(#REM) Les zonas]
+[<p class='pagination'>(#PAGINATION{page})</p>]
+<ul class='liste_items'>
+<BOUCLE_zones(LIVRAISON_ZONES){par num nom, nom}{pagination 10}>
+<li class='item[ (#EXPOSE)]'>[(#GET{self}|parametre_url{id_livraison_zone,#ID_LIVRAISON_ZONE}|lien_ou_expose{#NOM|supprimer_numero{},#ENV{id_livraison_zone}|=={#ID_LIVRAISON_ZONE}})]</li>
+</BOUCLE_zones>
+</ul>
+#BOITE_FERMER
+</B_zones>

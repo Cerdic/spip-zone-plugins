@@ -1,0 +1,15 @@
+<B_livraison_montant>
+[(#BOITE_OUVRIR{
+    [(#CHEMIN_IMAGE{livraisons_montant-32.png}|balise_img{'','cadre-icone'})]
+    
+,'simple personnel'})]
+<BOUCLE_livraison_montant(LIVRAISON_MONTANTS){id_livraison_montant}>
+<div class='infos'>
+[(#SET{texte_objet,<:livraison_montant:titre_livraison_montant:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_LIVRAISON_MONTANT</p></div>
+
+</div>
+</BOUCLE_livraison_montant>
+[(#PIPELINE{shop_affiche_gauche_shortcuts})]
+#BOITE_FERMER
+</B_livraison_montant>

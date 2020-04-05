@@ -1,0 +1,33 @@
+[(#SET{defaut_tri,#ARRAY{
+    nom,1, 
+    id_pays,1,
+}})]
+
+<B_p>
+<div class="nettoyeur"></div>
+<div class="liste-objets pays">
+#ANCRE_PAGINATION
+    [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{pays:info_1_pays,pays:info_nb_pays}})</strong></caption>]
+<table class="spip" width="100%">
+	<thead>
+	<tr class="row_first">
+		<th><:pays:label_id_pays:></th>
+		<th><:pays:label_code:></th>
+		<th><:pays:label_nom:></th>
+		<th><:continents:continent_titre:></th>		
+	</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_p(PAYS){id_continent ?}{id_livraison_zone ?}{par nom}{pagination 20}>
+	<tr[ class="(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})"]>
+		<td>#ID_PAYS</td>
+		<td>#CODE</td>
+		<td>#NOM</td>
+		<td>#INFO_NOM{continent,#ID_CONTINENT}</td>		
+	</tr>
+	</BOUCLE_p>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_p>

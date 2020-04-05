@@ -1,0 +1,46 @@
+[(#SET{defaut_tri,#ARRAY{
+	nom,1, 
+	id_livraison_zone,1,
+	points,-1
+}})]<B_liste_livraison_zones>
+#ANCRE_PAGINATION
+<div class="liste-objets livraison_zones">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{livraison_zone:info_1_livraison_zone,livraison_zone:info_nb_livraison_zones}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='nom' scope='col'>[(#TRI{nom,<:livraison_zone:label_nom:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_livraison_zone,<:info_numero_abbreviation:>,ajax})]</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_livraison_zones(LIVRAISON_ZONES){id_mot?}{id_auteur?}{recherche?}{tri #ENV{par,num nom},#GET{defaut_tri}}{par nom}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{livraison_zone-16.png}|balise_img)]</td>
+			<td class='nom principale'>[(#LOGO_LIVRAISON_ZONE|image_reduire{20,26})]<a href="[(#ID_LIVRAISON_ZONE|generer_url_entite{livraison_zone})]" title="<:info_numero_abbreviation|attribut_html:> #ID_LIVRAISON_ZONE">[(#RANG). ][(#NOM)]</a></td>
+			<td class='id'>[(#AUTORISER{modifier,livraison_zone,#ID_LIVRAISON_ZONE}|?{
+				<a href="[(#URL_ECRIRE{livraison_zone_edit,id_livraison_zone=#ID_LIVRAISON_ZONE})]">#ID_LIVRAISON_ZONE</a>,
+				#ID_LIVRAISON_ZONE
+			})]</td>
+			<td><a class="ajax" href="[(#URL_ACTION_AUTEUR{gestion_zones,eliminer_zone-#ID_LIVRAISON_ZONE,#SELF})]" title="<:livraison_zone:eliminer_livraison_zone:>"><img src="[(#CHEMIN_IMAGE{del-16.png})]" alt="moins"/></a></td>
+		</tr>
+	</BOUCLE_liste_livraison_zones>
+        <tr class='[(#TOTAL_BOUCLE|plus{1}|alterner{row_odd,row_even})]'>
+            <td class='picto'>[(#CHEMIN_IMAGE{livraison_zone-16.png}|balise_img)]</td>
+            <td class='nom principale'>[(#LOGO_LIVRAISON_ZONE|image_reduire{20,26})]
+                #SET{montant,#CONFIG{shop_livraison/montant_defaut}}
+                [(#GET{montant}|oui)<:livraison:label_montant_defaut:> [(#GET{montant}|devise_defaut_prix)]]
+                [(#GET{montant}|non)<p class="error"><:livraison:texte_montant_defaut_non_definit{url=#URL_ECRIRE{configuer_shop_livraison}}:></p>]
+            </td>
+            <td class='id'></td>
+                        <td></td>
+        </tr>	
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_livraison_zones>[
+<div class="liste-objets livraison_zones caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_livraison_zones>

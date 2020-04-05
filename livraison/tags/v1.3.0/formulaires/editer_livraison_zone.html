@@ -1,0 +1,28 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_livraison_zone,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_livraison_zone' value='#ENV{id_livraison_zone}' />
+		<ul>
+
+			[(#SAISIE{input, nom, obligatoire=oui,
+				label=<:livraison_zone:label_nom:>})]
+
+			[(#SAISIE{textarea, descriptif,
+				label=<:livraison_zone:label_descriptif:>})]
+
+			[(#SAISIE{selection, unite,
+				label=<:livraison_zone:label_unite:>,
+				explication=<:livraison_zone:explication_unite:> ,
+				datas=[(#ARRAY{'',<:livraison:label_unite_rien:>,g,<:livraison:label_unite_g:>,kg,<:livraison:label_unite_kg:>,cm3,<:livraison:label_unite_cm3:>,m3,<:livraison:label_unite_m3:>,cl,<:livraison:label_unite_cl:>,l,<:livraison:label_unite_l:>})]})]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

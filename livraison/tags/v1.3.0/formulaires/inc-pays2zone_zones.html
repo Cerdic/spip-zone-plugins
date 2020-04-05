@@ -1,0 +1,6 @@
+<select name="_id_livraison_zone[#ID_PAYS]">
+        <option value=""><:livraison_zone:info_aucun_livraison_zone:></option>
+    <BOUCLE_livraison_zones(LIVRAISON_ZONES){par num nom, nom}{tout}>
+        <option value="#ID_LIVRAISON_ZONE"[(#ENV{id_livraison_zone}|=={#ID_LIVRAISON_ZONE}|oui) selected="selected"]>#NOM</option>
+    </BOUCLE_livraison_zones>
+</select>

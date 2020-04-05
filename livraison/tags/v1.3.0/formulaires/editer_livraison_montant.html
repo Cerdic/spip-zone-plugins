@@ -1,0 +1,29 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_livraison_montant,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_livraison_montant' value='#ENV{id_livraison_montant}' />
+		<ul>
+		    
+		    [(#SAISIE{livraison_zones,id_livraison_zone, obligatoire=oui,
+				label=<:livraison_zone:titre_livraison_zone:>})]
+
+			[(#SAISIE{input, montant, obligatoire=oui,
+				label=<:livraison_montant:label_montant:>})]
+			[(#SAISIE{input, mesure_min,
+				label=[(#VAL{livraison_montant:label_mesure_min[_(#MESURE_DEFAUT)]}|_T)],
+				explication=<:livraison_montant:explication_mesure_min{unite=#UNITE}:>,
+				defaut=0})]
+
+			[(#SAISIE{input, mesure_max, obligatoire=oui,
+				label=[(#VAL{livraison_montant:label_mesure_max[_(#MESURE_DEFAUT)]}|_T)],
+				explication=<:livraison_montant:explication_mesure_max{unite=#UNITE}:> })]
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

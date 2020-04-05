@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/livraison_montants, par=montant, env, ajax, sinon=<:livraison_montant:info_aucun_livraison_montant:>}>
+
+[(#AUTORISER{creer,livraison_montant})
+	[(#URL_ECRIRE{livraison_montant_edit,new=oui}|icone_verticale{<:livraison_montant:icone_creer_livraison_montant:>,livraison_montant,new,right})]
+]

@@ -1,0 +1,7 @@
+<BOUCLE_livraison_zone(LIVRAISON_ZONES){id_livraison_zone=#ENV{id}}>
+<div class='infos'>
+[(#SET{texte_objet,<:livraison_zone:titre_livraison_zone:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_LIVRAISON_ZONE</p></div>
+
+</div>
+</BOUCLE_livraison_zone>

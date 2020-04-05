@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,livraison_montant,#ID_LIVRAISON_MONTANT}|sinon_interdire_acces)]
+<BOUCLE_livraison_montant(LIVRAISON_MONTANTS){id_livraison_montant}{si #ENV{exec}|=={livraison_montant}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,livraison_montant,#ID_LIVRAISON_MONTANT})
+		[(#ID_LIVRAISON_MONTANT|afficher_qui_edite{livraison_montant}|non)
+			[(#URL_ECRIRE{livraison_montant_edit,id_livraison_montant=#ID_LIVRAISON_MONTANT}|icone_verticale{<:livraison_montant:icone_modifier_livraison_montant:>,livraison_montant,edit,right ajax preload})]
+		]
+		[(#ID_LIVRAISON_MONTANT|afficher_qui_edite{livraison_montant}|oui)
+			[(#URL_ECRIRE{livraison_montant_edit,id_livraison_montant=#ID_LIVRAISON_MONTANT}|icone_verticale{#ID_LIVRAISON_MONTANT|afficher_qui_edite{livraison_montant},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#MONTANT|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{livraison_montant-24.png}|balise_img{livraison_montant,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{livraison_montant,#ID_LIVRAISON_MONTANT}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/livraison_montant,id=#ID_LIVRAISON_MONTANT,id_livraison_montant=#ID_LIVRAISON_MONTANT,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,livraison_montant,#ID_LIVRAISON_MONTANT})
+	[(#ID_LIVRAISON_MONTANT|afficher_qui_edite{livraison_montant}|non)
+		[(#URL_ECRIRE{livraison_montant_edit,id_livraison_montant=#ID_LIVRAISON_MONTANT}|icone_verticale{<:livraison_montant:icone_modifier_livraison_montant:>,livraison_montant,edit,right ajax preload})]
+	]
+	[(#ID_LIVRAISON_MONTANT|afficher_qui_edite{livraison_montant}|oui)
+		[(#URL_ECRIRE{livraison_montant_edit,id_livraison_montant=#ID_LIVRAISON_MONTANT}|icone_verticale{#ID_LIVRAISON_MONTANT|afficher_qui_edite{livraison_montant},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,livraison_montant,id,#ID_LIVRAISON_MONTANT},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_livraison_montant>
+[(#ENV**{exec}|=={livraison_montant_edit}|?{#INCLURE{fond=prive/squelettes/contenu/livraison_montant_edit,redirect=#ENV{redirect,''},env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_livraison_montant>
