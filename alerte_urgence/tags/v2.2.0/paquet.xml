@@ -1,0 +1,19 @@
+<paquet
+	prefix="alerte_urgence"
+	categorie="edition"
+	version="2.2.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="alerte_urgence.png"
+	documentation="https://contrib.spip.net/4606"
+	schema="1.0.0" 
+>
+	<nom>Alerte d'urgence</nom>
+	
+	<auteur>Cerdic</auteur>
+	<auteur lien='http://www.ldd.fr'>Les Développements Durables</auteur>
+	<licence>GNU/GPL v3</licence>
+	
+	<pipeline nom="autoriser" inclure="alerte_urgence_autorisations.php" />
+	<pipeline nom="affichage_final" inclure="alerte_urgence_pipelines.php" />
+</paquet>

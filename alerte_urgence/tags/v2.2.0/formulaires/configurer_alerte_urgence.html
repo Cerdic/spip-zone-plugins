@@ -1,0 +1,37 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		<ul>
+			<li class="editer editer_texte">
+				<label for="champ_texte"><:alerte:configurer_texte_label:></label>
+				<textarea id="champ_texte" cols="40" rows="10" name="texte">#ENV{texte}</textarea>
+			</li>
+			<li class="editer editer_limiter_accueil pleine_largeur">
+				<div class="choix">
+					<input type="checkbox" name="limiter_accueil" id="limiter_accueil"[ (#CONFIG{alerte_urgence/limiter_accueil}|oui)checked="checked"]>
+					<label for="limiter_accueil"><:alerte:configurer_limiter_accueil_label:></label>
+				</div>
+			</li>
+			<B_utilisateurs>
+			<li>
+				<label for="champ_utilisateurs"><:alerte:configurer_utilisateurs_label:></label>
+				<p class="explication"><:alerte:configurer_utilisateurs_explication:></p>
+				<select name="utilisateurs\[\]" id="champ_utilisateurs" multiple="multiple" size="10">
+					<BOUCLE_utilisateurs(AUTEURS){si #AUTORISER{configurer}}{statut IN #LISTE{0minirezo,1comite,6forum}}{statut != 5poubelle}{par num nom,nom}{tout}>
+						<option value="#ID_AUTEUR"[(#ID_AUTEUR|in_array{#ENV{utilisateurs,#LISTE}}|oui) selected="selected"] [style="background:url((#CHEMIN_IMAGE{auteur-#STATUT-16})) no-repeat left; padding-left: 20px;"]>#NOM</option>
+					</BOUCLE_utilisateurs>
+				</select>
+			</li>
+			</B_utilisateurs>
+		</ul>
+
+		<input type="hidden" name="_meta_casier" value="alerte_urgence" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>

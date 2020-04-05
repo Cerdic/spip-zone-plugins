@@ -1,0 +1,9 @@
+<traduction
+	module="paquet-alerte_urgence"
+	id="paquet-alerte_urgence--alerte_urgence-0b58f"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip-contrib-extensions/alerte_urgence.git"
+	reference="fr">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-alerte_urgence?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+</traduction>
