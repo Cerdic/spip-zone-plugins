@@ -1,0 +1,30 @@
+[(#AUTORISER{configurer,champs_extras}|sinon_interdire_acces)]
+
+<h1><:iextras:titre_iextras:></h1>
+
+<div class='cadre-formulaire-editer'>
+#SET{retour,#ENV{redirect}|sinon{#URL_ECRIRE{champs_extras}}}
+<div class="entete-formulaire">
+	[(#GET{retour}|icone_verticale{<:icone_retour:>,iextras-24,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	<h1><:iextras:champs_extras_de{objet=#ENV{objet}}:></h1>
+</div>
+#FORMULAIRE_EDITER_CHAMPS_EXTRAS{#ENV{objet}, #GET{retour}}
+</div>
+
+[(#REM) utilitaire pour l'affichage des noms des champs ]
+<script type="text/javascript">
+jQuery(function() {
+	jQuery(".formulaire_editer_champs_extras input[name][type!='hidden'],"
+		+ ".formulaire_editer_champs_extras textarea[name],"
+		+ ".formulaire_editer_champs_extras select[name]").each(function() {
+		jQuery(this).after('<span class="affname none">' + jQuery(this).attr('name') + '</span>');
+	});
+	jQuery(".entete-formulaire").append('<span class="aff_noms" title="<:iextras:afficher_noms:>">[+]</span>'
+		+ '<span class="aff_noms none" title="<:iextras:masquer_noms:>">[-]</span>');
+	jQuery(".entete-formulaire").on("click", ".aff_noms", function() { jQuery(".aff_noms, .affname").toggleClass("none"); });
+});
+</script>
+<style type="text/css">
+.aff_noms { color: #DDD; float: right; font-size: 10px; cursor: pointer;}
+.affname { background-color: #f1ff0066; float: right;}
+</style>
