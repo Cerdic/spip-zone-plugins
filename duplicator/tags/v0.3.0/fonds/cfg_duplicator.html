@@ -1,0 +1,35 @@
+<!-- titre=duplicator-->
+<!-- icone=images/duplicator.gif-->
+<!-- descriptif=Configurez quelques parametres-->
+#CACHE{0}
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+  <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+  <fieldset>
+  	<legend>
+    Duplicator
+  	</legend>
+    <ul>
+      <li>
+        <p class="explication">Champs sql séparés par une ,</p>
+        <label for="art_champs_1">Liste des champs à dupliquer pour chaque article  :</label>
+        <textarea name="art_champs" id="art_champs" cols="60" rows="10">[(#CONFIG{duplicator/art_champs})]</textarea> 
+      </li>
+
+      <li>
+        <p class="explication">Champs sql séparés par une ,</p>
+        <label for="rub_champs_1">Liste des champs à dupliquer pour chaque rubrique  :</label>
+        <textarea name="rub_champs" id="rub_champs" cols="60" rows="10">[(#CONFIG{duplicator/rub_champs})]</textarea> 
+      </li>
+    </ul>
+
+    
+
+  </fieldset>
+
+  [(#REM) ------------------------ BOUTON OK ------------------------ ]
+  <div>
+  	<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+  </div>
+  </form>
+</div>
