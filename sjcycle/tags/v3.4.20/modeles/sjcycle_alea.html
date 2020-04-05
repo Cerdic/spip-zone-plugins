@@ -1,0 +1,9 @@
+[(#REM) Diaporama d'images aleatoires : preserve (simplifie ?) dans la version 3 pour compatibilite avec la version 2 ]
+
+[(#SET{nb,[(#ENV{nb,10})]})]
+[(#SET{fx,[(#ENV{fx,fade})]})]
+[(#SET{duree,[(#ENV{duree,5000})]})]
+[(#SET{largeur,[(#ENV{largeur,200})]})]
+[(#SET{hauteur,[(#ENV{hauteur,0})]})]
+
+[(#MODELE{article_cycle}{id_article=#ENV{id_sjcycle_alea}}{random=oui}{limite=#GET{nb}}{fx=#GET{fx}}{timeout=#GET{duree}}{largeurmax=#GET{largeur}}{hauteurmax=#GET{hauteur}})]

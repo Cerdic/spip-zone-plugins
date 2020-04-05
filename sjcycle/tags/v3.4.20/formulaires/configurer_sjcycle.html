@@ -1,0 +1,358 @@
+<div class="formulaire_spip formulaire_cfg formulaire_#FORM">
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		
+		<h3 class="legend"><:sjcycle:parametres_diaporama:></h3>
+		<ul>
+		#SET{cc,sjcycle}
+			
+			#SET{name,largeurmax}
+			<li class="editer editer_[(#GET{name})]">
+				<label for="#GET{name}">[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+			</li>
+			
+			#SET{name,hauteurmax}
+			<li class="editer editer_[(#GET{name})]">
+				<label for="#GET{name}">[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+			</li>
+			
+			#SET{name,autoheight}
+			<li class="editer editer_[(#GET{name})]">
+				<label for="#GET{name}">[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+			</li>
+			
+			#SET{name,timeout}
+			<li class="editer editer_[(#GET{name})]">
+				<label for="#GET{name}">[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+			</li>
+			
+			#SET{name,speed}
+			<li class="editer editer_[(#GET{name})]">
+				<label for="#GET{name}">[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+			</li>
+			
+			#SET{name,delay}
+			<li class="editer editer_[(#GET{name})]">
+				<label for="#GET{name}">[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+			</li>
+			
+			#SET{name,fx}
+			<li class="editer editer_[(#GET{name})]">
+				<label for="#GET{name}">[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				<select name="#GET{name}" class="select" id="#GET{name}">
+					#SET{val,fade}
+					<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</option>
+					#SET{val,fadeout}
+					<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</option>
+					#SET{val,scrollHorz}
+					<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</option>
+					#SET{val,scrollVert}
+					<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</option>
+					#SET{val,flipHorz}
+					<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</option>
+					#SET{val,flipVert}
+					<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</option>
+					#SET{val,shuffle}
+					<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</option>
+					#SET{val,tileSlide}
+					<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</option>
+					#SET{val,tileBlind}
+					<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</option>
+					#SET{val,carousel}
+					<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</option>
+					#SET{val,none}
+					<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</option>
+				</select>
+				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+			</li>
+
+			<li class="editer editer_tile tileSlide tileBlind option">
+				<ul>
+					#SET{name,tilevertical}
+					<li class="editer editer_[(#GET{name})]">
+						<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+						#SET{val,false}
+						<div class="choix">
+							<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+							<label for="#GET{name}_#GET{val}"><:sjcycle:non:></label>
+							<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+						</div>
+					</li>
+				</ul>
+			</li>
+			
+			<li class="editer editer_carousel carousel option">
+			<h3 class="legend"><:sjcycle:explication_option_carousel:></h3>
+				<ul>
+				
+					#SET{name,carouselvisible}
+					<li class="editer editer_[(#GET{name})]">
+						<label for="#GET{name}">[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+						<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+						<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+					</li>
+					
+					#SET{name,carouseloffset}
+					<li class="editer editer_[(#GET{name})]">
+						<label for="#GET{name}">[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+						<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+						<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+					</li>
+					
+					#SET{name,carouselslidedimension}
+					<li class="editer editer_[(#GET{name})]">
+						<label for="#GET{name}">[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+						<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+						<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+					</li>
+					
+					#SET{name,carouselvertical}
+					<li class="editer editer_[(#GET{name})]">
+						<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+						#SET{val,true}
+						<div class="choix">
+							<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+							<label for="#GET{name}_#GET{val}"><:sjcycle:oui:></label>
+							<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+						</div>
+					</li>
+					
+					#SET{name,carouselfluid}
+					<li class="editer editer_[(#GET{name})]">
+						<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+						#SET{val,true}
+						<div class="choix">
+							<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+							<label for="#GET{name}_#GET{val}"><:sjcycle:oui:></label>
+							<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+						</div>
+					</li>
+					
+				</ul>
+			</li>
+			
+			#SET{name,reverse}
+			<li class="editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				#SET{val,true}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}"><:sjcycle:oui:></label>
+					<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+				</div>
+			</li>
+			
+			#SET{name,sync}
+			<li class="editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				#SET{val,true}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}"><:sjcycle:oui:></label>
+					<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+				</div>
+			</li>
+			
+			#SET{name,pauseonhover}
+			<li class="editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				#SET{val,true}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}"><:sjcycle:oui:></label>
+					<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+				</div>
+			</li>
+			
+			#SET{name,pauseonhovercontent}
+			<li class="editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+			</li>
+			
+			#SET{name,random}
+			<li class="editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				#SET{val,true}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}"><:sjcycle:oui:></label>
+					<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+				</div>
+			</li>
+			
+			#SET{name,next}
+			<li class="editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+			</li>
+			
+			#SET{name,prev}
+			<li class="editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+			</li>
+			
+			#SET{name,allowwrap}
+			<li class="editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				#SET{val,false}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}"><:sjcycle:non:></label>
+					<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+				</div>
+			</li>
+			
+			#SET{name,paused}
+			<li class="editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				#SET{val,true}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}"><:sjcycle:oui:></label>
+					<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+				</div>
+			</li>
+			
+			#SET{name,pager}
+			<li class="editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+			</li>
+			
+			#SET{name,caption}
+			<li class="editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+			</li>
+			
+			#SET{name,captiontemplate}
+			<li class="editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+			</li>
+			
+			#SET{name,overlay}
+			<li class="editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+			</li>
+			
+			#SET{name,overlaytemplate}
+			<li class="editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+			</li>
+			
+			#SET{name,backgroundcolor}
+			<li class="editer editer_[(#GET{name})]">
+				<label for="#GET{name}">[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				<input type="text" name="#GET{name}" class="palette"[ value="(#ENV{backgroundcolor})"] id="#GET{name}" />
+				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>[(#PLUGIN{palette}|oui)
+				<p class="explication"><:sjcycle:explication_palette:></p>]
+			</li>
+			
+		</ul>
+		<fieldset>
+		<h3 class="legend"><:sjcycle:legend_tooltip_box:></h3>
+		<ul>
+			
+			#SET{name,tooltip}
+			<li class="editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				#SET{val,oui}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}"><:sjcycle:oui:></label>
+					<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+				</div>
+			</li>
+			
+			#SET{name,tooltip_carac}
+			<li class="editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				#SET{val,oui}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}"><:sjcycle:oui:></label>
+					<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+				</div>
+			</li>
+			
+			#SET{name,mediabox}
+			<li class="editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				#SET{val,oui}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}"><:sjcycle:oui:></label>
+					<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+				</div>
+			</li>
+			
+		</ul>
+		</fieldset>
+		
+		<fieldset>
+		<h3 class="legend"><:sjcycle:legend_parametres_suplementaires:></h3>
+		<ul>
+			#SET{name,afficher_aide}
+			<li class="long_label editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				#SET{val,oui}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}"><:sjcycle:oui:></label>
+				</div>
+			</li>
+		</ul>
+		</fieldset>
+		
+		<p class="boutons">
+			<input type="submit" value="<:bouton_valider:>" class="submit" />
+		</p>
+	</div>
+	</form>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	// afficher_si = afficher option si un bloc de la class = valeur de fx existe
+	$('.option').css({display:'none'});
+	$('#fx').change(function () {
+		var option = "";
+		$('#fx option:selected').each(function() {
+			option += $( this ).val();
+		});
+		$('.option').hide().siblings('.'+option).show(300);
+		
+	}).change();
+	
+});
+</script>

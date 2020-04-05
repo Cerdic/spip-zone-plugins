@@ -1,0 +1,32 @@
+<paquet
+	prefix="sjcycle"
+	categorie="multimedia"
+	version="3.4.20"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/sjcycle-32.png"
+	schema="1.0.0"
+	documentation="https://contrib.spip.net/Cycle2"
+>
+
+	<nom>Cycle2</nom>
+	<!--  Un diaporama paramétrable pour Spip  -->
+
+	<auteur>chankalan</auteur>
+	<credit>Minimalteck</credit><!-- pour les versions precedentes -->
+        <credit>Yffic</credit><!-- pour les versions precedentes -->
+	<credit lien="http://jquery.malsup.com/cycle2/">Cycle2</credit><!-- la librairie -->
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="insert_head_css" inclure="sjcycle_pipelines.php" />
+	<pipeline nom="insert_head" inclure="sjcycle_pipelines.php" />
+	<pipeline nom="header_prive" action="insert_head" inclure="sjcycle_pipelines.php" />
+	<pipeline nom="affiche_gauche" inclure="sjcycle_prive_pipelines.php" />
+	<pipeline nom="ieconfig_metas" inclure="sjcycle_ieconfig_metas.php" />
+	<pipeline nom="autoriser" inclure="sjcycle_autoriser.php" />
+
+	<utilise nom="palette" compatibilite="[3.0.5;[" />
+
+	<menu nom="sjcycle" titre="sjcycle:titre_menu" parent="menu_squelette" icone="images/sjcycle-16.png" action="configurer_sjcycle" />
+
+</paquet>

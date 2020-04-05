@@ -1,0 +1,5 @@
+<BOUCLE_article(ARTICLES){id_document}{!par date}{0,1}>#SET{url_parent,#URL_ARTICLE}</BOUCLE_article>
+<BOUCLE_rubrique(RUBRIQUES){id_document}{!par date}{0,1}>#SET{url_parent,#URL_RUBRIQUE}</BOUCLE_rubrique>
+<BOUCLE_doc(DOCUMENTS){id_document}>[(#REM) boucle document inévitable ]
+	<a href="#GET{url_parent}" data-cycle-title="#TITRE" data-cycle-desc="#DESCRIPTIF">
+</BOUCLE_doc>

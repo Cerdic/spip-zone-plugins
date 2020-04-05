@@ -1,0 +1,70 @@
+[(#SET{largeurmax,	[(#ENV{largeurmax,     	#CONFIG{sjcycle/largeurmax}})]})]
+[(#SET{hauteurmax,	[(#ENV{hauteurmax,     	#CONFIG{sjcycle/hauteurmax}})]})]
+[(#SET{autoheight,	[(#ENV{autoheight,     	#CONFIG{sjcycle/autoheight}})]})]
+[(#SET{timeout,      	[(#ENV{timeout,     	#CONFIG{sjcycle/timeout}})]})]
+[(#SET{speed,      	[(#ENV{speed,     	#CONFIG{sjcycle/speed}})]})]
+[(#SET{delay,      	[(#ENV{delay,     	#CONFIG{sjcycle/delay}})]})]
+[(#SET{pauseonhover,    [(#ENV{pauseonhover,    #CONFIG{sjcycle/pauseonhover}})]})]
+[(#SET{reverse,		[(#ENV{reverse,		#CONFIG{sjcycle/reverse}})]})]
+[(#SET{random,		[(#ENV{random,		#CONFIG{sjcycle/random}})]})]
+[(#SET{fx,		[(#ENV{fx,		#CONFIG{sjcycle/fx}})]})]
+[(#SET{tilevertical,	[(#ENV{tilevertical,	#CONFIG{sjcycle/tilevertical}})]})]
+[(#SET{backgroundcolor, [(#ENV{backgroundcolor,	#CONFIG{sjcycle/backgroundcolor}})]})]
+[(#SET{prev, 		[(#ENV{prev,		#CONFIG{sjcycle/prev}})]})]
+[(#SET{next, 		[(#ENV{next,		#CONFIG{sjcycle/next}})]})]
+[(#SET{allowwrap, 	[(#ENV{allowwrap,	#CONFIG{sjcycle/allowwrap}})]})]
+[(#SET{sync,		[(#ENV{sync,		#CONFIG{sjcycle/sync}})]})]
+[(#SET{paused,		[(#ENV{paused,		#CONFIG{sjcycle/paused}})]})]
+[(#SET{pager,		[(#ENV{pager,		#CONFIG{sjcycle/pager}})]})]
+[(#SET{caption,		[(#ENV{caption,		#CONFIG{sjcycle/caption}})]})]
+[(#SET{captiontemplate,	[(#ENV{captiontemplate,	#CONFIG{sjcycle/captiontemplate}})]})]
+[(#SET{overlay,			[(#ENV{overlay,			#CONFIG{sjcycle/overlay}})]})]
+[(#SET{overlaytemplate,	[(#ENV{overlaytemplate,	#CONFIG{sjcycle/overlaytemplate}})]})]
+[(#SET{pauseonhovercontent,	[(#ENV{pauseonhovercontent,	#CONFIG{sjcycle/pauseonhovercontent}})]})]
+[(#SET{carouselvisible,		[(#ENV{carouselvisible,		#CONFIG{sjcycle/carouselvisible}})]})]
+[(#SET{carouseloffset,		[(#ENV{carouseloffset,		#CONFIG{sjcycle/carouseloffset}})]})]
+[(#SET{carouselslidedimension,	[(#ENV{carouselslidedimension,	#CONFIG{sjcycle/carouselslidedimension}})]})]
+[(#SET{carouselvertical,	[(#ENV{carouselvertical,	#CONFIG{sjcycle/carouselvertical}})]})]
+[(#SET{carouselfluid,		[(#ENV{carouselfluid,		#CONFIG{sjcycle/carouselfluid}})]})]
+[(#SET{mediabox,		[(#ENV{mediabox,		#CONFIG{sjcycle/mediabox}})]})]
+
+
+<B_sites>   
+<div class="cycle-slideshow"[ style="(#GET{style})"]
+	data-cycle-slides="a"[ 
+	data-cycle-speed="(#GET{speed})"][ 
+	data-cycle-timeout="(#GET{timeout})"][ 
+	data-cycle-delay="(#GET{delay})"][ 
+	data-cycle-pause-on-hover="(#GET{pauseonhover})"][ 
+	data-cycle-allow-wrap="(#GET{allowwrap})"][ 
+	data-cycle-reverse="(#GET{reverse})"][ 
+	data-cycle-random="(#GET{random})"][ 
+	data-cycle-sync="(#GET{sync})"][ 
+	data-cycle-paused="(#GET{paused})"][ 
+	data-cycle-prev="(#GET{prev})"][ 
+	data-cycle-next="(#GET{next})"][ 
+	data-cycle-fx="(#GET{fx})"][(#GET{fx}|=={tileSlide}|oui|ou{#GET{fx}|=={tileBlind}|oui})[
+	data-cycle-tile-vertical="(#GET{tilevertical})"]][ 
+	data-cycle-carousel-visible="(#GET{carouselvisible})"][ 
+	data-cycle-carousel-offset="(#GET{carouseloffset})"][ 
+	data-cycle-carousel-slide-dimension="(#GET{carouselslidedimension})"][ 
+	data-cycle-carousel-vertical="(#GET{carouselvertical})"][ 
+	data-cycle-carousel-fluid="(#GET{carouselfluid})"][
+	data-cycle-pager="(#GET{pager})"][
+	data-cycle-caption="(#GET{caption})"][
+	data-cycle-caption-template="(#GET{captiontemplate})"][
+	data-cycle-overlay="(#GET{overlay})"][
+	data-cycle-overlay-template="(#GET{overlaytemplate})"][
+	data-cycle-auto-height="(#GET{autoheight})"]]]
+	>[(#GET{prev}|=={.cycle-prev}|oui)
+	<div class="cycle-prev"></div>][(#GET{next}|=={.cycle-next}|oui)
+	<div class="cycle-next"></div>][(#GET{pager}|=={.cycle-pager}|oui)
+	<div class="cycle-pager"></div>][(#GET{caption}|=={.cycle-caption}|oui)
+	<div class="cycle-caption"></div>]
+	
+	<BOUCLE_sites(SITES)>
+		[<a href="#URL_SITE" data-cycle-title="#TITRE" data-cycle-desc="#DESCRIPTION"><img class="no_image_filtrer" src="(#LOGO_SITE|image_reduire{#GET{largeurmax},#GET{hauteurmax}}|image_recadre{#GET{largeurmax},#GET{hauteurmax},top center,#GET{backgroundcolor}}|extraire_attribut{src})"[ alt="(#TITRE)"] /></a>]
+	</BOUCLE_sites>
+	
+</div>
+</B_sites>

@@ -1,0 +1,6 @@
+#SET{docs,#ARRAY}
+<BOUCLE_docs(DOCUMENTS){id_album}>
+[(#SET{docs,#GET{docs}|push{#ID_DOCUMENT}})]
+</BOUCLE_docs>
+[(#SET{lesdocs,[(#GET{docs}|implode{','})]})]
+<INCLURE{fond=modeles/article_cycle,docs=#GET{lesdocs}, env} />
