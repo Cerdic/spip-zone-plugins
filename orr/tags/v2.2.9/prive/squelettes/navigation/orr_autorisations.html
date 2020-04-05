@@ -1,0 +1,20 @@
+<div class="liste-objets autorisations">
+<table class='spip liste'>
+<caption><strong class="caption"><:orr:titre_types_autorisations:>:</strong></caption>
+	<thead>
+		<tr class='first_row'>
+			<th class='titre principale' scope='col'><:orr:type:></th>
+			<th class='id' scope='col'><:orr:droit:></th>
+		</tr>
+	</thead>
+	<tbody>
+	#SET{droits, #ARRAY{V,Voir,M,Modifier,C,Créer,S,Supprimer}}
+	<BOUCLE_for(DATA){source tableau,#GET{droits}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='titre'>#CLE</td>
+			<td class=''>#VALEUR</td>
+		</tr>
+	</BOUCLE_for>
+	</tbody>
+</table>
+</div>

@@ -1,0 +1,37 @@
+[(#REM) Affichage des réservations d'une journée #ENV{jour} pour une ressource #ENV{idressource} ]
+#SET{jour,#ENV{jour}} 
+#SET{jourplusun,#ENV{jour}|orr_plusunjour}
+#SET{couleur,#INFO_ORR_RESSOURCE_COULEUR{orr_ressource,#ENV{idressource}}}
+
+<BOUCLE_affichreserv(ORR_RESERVATIONS)
+	{id_orr_ressource=#ENV{idressource}}
+	{orr_date_debut <= #ENV{jour}|affdate{Y-m-d 23:59:59}}
+	{orr_date_fin >= #ENV{jour}|affdate{Y-m-d 00:00:00}}
+	{par orr_date_debut}>
+	[(#REM) determiner le type de resa: jour unique ou plusieurs jours ]
+	[(#ORR_DATE_DEBUT|>={#GET{jour}}|et{#ORR_DATE_FIN|<{#GET{jourplusun}}}|oui) #SET{position,unique}]
+	[(#REM) si resa plusieurs jours: position du jour premier/milieu/dernier ]
+	[(#ORR_DATE_DEBUT|>={#GET{jour}}|et{ #ORR_DATE_DEBUT|<{#GET{jourplusun}} }|et{ #ORR_DATE_FIN|>={#GET{jourplusun}} }|oui) #SET{position,premier}]
+	[(#ORR_DATE_DEBUT|<{#GET{jour}}|et{ #ORR_DATE_FIN|>{#GET{jour}} }|et{ #ORR_DATE_FIN|>={#GET{jourplusun}} }|oui) #SET{position,milieu}]
+	[(#ORR_DATE_DEBUT|<{#GET{jour}}|et{ #ORR_DATE_FIN|>={#GET{jour}} }|et{ #ORR_DATE_FIN|<{#GET{jourplusun}} }|oui) #SET{position,dernier}]
+	<BOUCLE_aut(AUTEURS){id_orr_reservation}>#SET{auteur,#NOM} </BOUCLE_aut>
+
+		<div class="tooltip #GET{position}" style="background-color:#GET{couleur}" onclick="javascript:jQuery(this).children('span').toggle('fast');">
+			<span>
+				<strong><:orr:date_debut:></strong>: [(#ORR_DATE_DEBUT|affdate)] à [(#ORR_DATE_DEBUT|affdate{"H:i"})]<br/>
+				<strong><:orr:date_fin:></strong>: [(#ORR_DATE_FIN|affdate)] à [(#ORR_DATE_FIN|affdate{"H:i"})]<br/>
+				[(#CONFIG*{champs_extras_spip_orr_reservations}|oui)
+				<INCLURE{fond=inc/affichage_champs_extra}{id_resa=#ID_ORR_RESERVATION}>]
+				<strong><:orr:auteur_resa:></strong>:  #GET{auteur}				
+			</span>
+			[(#AUTORISER{modifier,orr_reservation,#ENV{idressource}}) 
+				<a href="[(#URL_PAGE{formulaire_reservation}
+					|parametre_url{'id_reservation',#ID_ORR_RESERVATION}
+					|parametre_url{'id_ressource',#ENV{idressource}}
+					|parametre_url{jourj,#ENV{jourj}}
+					|parametre_url{vue,#ENV{vue}})]" class="mediabox lien_reserver">
+				<img class="orr_stylo" src="#CHEMIN{img/crayon-16.png}" alt="orr_stylo" /></a>
+			]
+			#ORR_RESERVATION_NOM 
+		</div>
+</BOUCLE_affichreserv>	
