@@ -1,0 +1,54 @@
+<?php
+
+if (!empty($_FILES)) {
+	// if (!defined('_ECRIRE_INC_VERSION')) return;
+	
+	$id_document='new';
+	if (_request('id_objet')) {
+		$id_objet=_request('id_objet');
+	}else{
+		$id_objet=0;
+	}
+	if (_request('objet')) {
+		$objet=_request('objet');
+	}else{
+		$objet='';
+	}
+
+	$mode = 'auto';
+	$galerie = false;
+	$proposer_media=true;
+	$proposer_ftp=true;
+	
+	$files = $_FILES["Filedata"];
+	
+	$ajouter_documents = charger_fonction('ajouter_documents', 'action');
+	include_spip('inc/joindre_document');
+	$mode = joindre_determiner_mode($mode,$id_document,$objet);
+	$ajouter_un_document = charger_fonction('ajouter_un_document','action');
+	$nouveaux_doc = $ajouter_un_document($id_document, $files, $objet, $id_objet, $mode);
+
+	if (defined('_tmp_dir'))
+		effacer_repertoire_temporaire(_tmp_dir);
+	
+	// Ligne echo obligatoire pour le script Uploadify : c'est sa détection de bonne fin
+	// echo str_replace($_SERVER['DOCUMENT_ROOT'],'',$targetFile);
+	echo $nouveaux_doc;
+	
+	spip_log("Upload document : $nouveaux_doc");
+	return $nouveaux_doc;
+}
+
+// Copie/Conforme de medias/formulaires/joindre_document.php TODO => ne pourrait-on pas l'inclure directement ??
+function joindre_determiner_mode($mode,$id_document,$objet){
+	if ($mode=='auto'){
+		if (intval($id_document))
+			$mode = sql_getfetsel('mode','spip_documents','id_document='.intval($id_document));
+		if (!in_array($mode,array('choix','document','image'))){
+			$mode='choix';
+			if ($objet AND !in_array(table_objet_sql($objet),explode(',',$GLOBALS['meta']["documents_objets"])))
+				$mode = 'image';
+		}
+	}
+	return $mode;
+}

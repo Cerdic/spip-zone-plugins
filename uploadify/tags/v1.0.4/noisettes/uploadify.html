@@ -1,0 +1,67 @@
+#CACHE{0}
+[<script type="text/javascript" src="(#CHEMIN{theme/uploadify/jquery.uploadify-3.1.min.js})"></script>]
+
+<div id="conteneur-uploadify">
+	<input id="custom_file_upload" class='boutons' type="file" name="Filedata" />
+</div><!-- #conteneur-uploadify -->
+
+<script type="text/javascript" charset="utf-8">
+	jQuery(function() {
+	    jQuery('#custom_file_upload').uploadify({
+	        'swf'      	: '#CHEMIN{theme/uploadify/uploadify.swf}',
+	        'uploader' 	: '[(#URL_PAGE{uploadify})]',
+			'formData'	: {'id_objet':'#ENV{id_objet}','objet':'#ENV{objet}'},
+			'buttonText': 'Parcourir...',
+			'fileObjName' : 'Filedata',
+	        'fileTypeExts' : '*.*',
+	        'removeCompleted' : true,
+			/*
+				TODO Brancher en onAllComplete => action de rechargement de la <div id="listing_fichiers">
+			*/
+			// 'onUploadSuccess' : function(file, data, response){ /* Un fichier est fini, on recharge le listing des fichiers */ 
+			// 	alert('Fichier ' + file.name + ' bien uploadé : ' + response + ':' + data);
+			// },
+			// 'onQueueComplete'  : function(queueData) {
+			// 	alert(queueData.uploadsSuccessful + ' files were successfully uploaded.');
+			// 	// alert("Fin de l'upload des documents, ==> mise à jour #listing_fichiers");
+			// },
+	/* Voici toutes les fonctions à dispo, au cas Zou */
+	        // 'removeTimeout' : 10,
+	        // 'uploadLimit' : 1
+			// 'fileSizeLimit' : '100KB',
+	        // 'fileTypeDesc' : 'Any old file you want...',
+	        // 'formData'      : {'someKey' : 'someValue', 'someOtherKey' : 1},
+	        // 'onUploadStart' : function(file) {
+	        //     $("#file_upload").uploadify("settings", "someOtherKey", 2);
+	        // }
+	        // 'queueSizeLimit' : 1,
+			// 'onAllComplete'  : function(event,data) {
+			// 	jQuery('#leRefresh_sortie').click();
+			// 	var comp = document.getElementById('leRefresh_sortie');
+			// 	try { //in firefox
+			// 	    comp.click();
+			// 	    return;
+			// 	} catch(ex) {}
+			// 	try { // in chrome
+			// 	    if(document.createEvent) {
+			// 	        var e = document.createEvent('MouseEvents');
+			// 	        e.initEvent( 'click', true, true );
+			// 	        comp.dispatchEvent(e);
+			// 	        return;
+			// 	    }
+			// 	} catch(ex) {}
+			// 	try { // in IE
+			// 	    if(document.createEventObject) {
+			// 	         var evObj = document.createEventObject();
+			// 	         comp.fireEvent("onclick", evObj);
+			// 	         return;
+			// 	    }
+			// 	} catch(ex) {}			
+			// }
+			// 'onSelectOnce'   : function(event,data) {
+			// 	jQuery('#status-message').text(data.filesSelected + ' files have been added to the queue.');
+			// },
+
+	    });
+	});
+</script>
