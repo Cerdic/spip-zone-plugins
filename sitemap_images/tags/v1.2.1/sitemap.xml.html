@@ -1,0 +1,23 @@
+[(#REM)
+
+	Surcharge du Sitemap fournit en défaut par SPIP pour integrer les images
+
+	Intégration des images
+	https://support.google.com/webmasters/answer/178636?hl=fr
+
+	Inspire du travail d'orsal
+	https://www.orsal.fr/Sitemap-avec-images-pour-SPIP
+
+	Exemple tres simple de sitemap.xml accessible via URL_SITE_SPIP/sitemap.xml
+	(copier htaccess.txt en .htaccess pour en beneficier)
+
+	Parametre facultatif: annee
+	Sur les sites avec beaucoup de contenus permet de depasser le limite de 2000 items par sitemap
+	on appellera les sitemaps par annee URL_SITE_SPIP/sitemap.xml?annee=2015
+
+	(On pose un cache a zero pour echapper au test _IS_BOT)
+
+
+]#CACHE{0}
+#HTTP_HEADER{Content-Type: text/xml; charset=utf-8}
+<INCLURE{fond=sitemap-images.xml,annee}>

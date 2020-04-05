@@ -1,0 +1,84 @@
+[(#REM)
+
+	Surcharge du Sitemap fournit en défaut par SPIP pour integrer les images
+
+	Intégration des images
+	https://support.google.com/webmasters/answer/178636?hl=fr
+
+	Inspire du travail d'orsal
+	https://www.orsal.fr/Sitemap-avec-images-pour-SPIP
+
+	Exemple tres simple de sitemap.xml accessible via URL_SITE_SPIP/sitemap.xml
+	(copier htaccess.txt en .htaccess pour en beneficier)
+
+	Parametre
+	- annee (facultatif)  permet de lister les items par annee
+
+	(On pose un cache a zero pour echapper au test _IS_BOT)
+
+
+]#CACHE{0}
+#HTTP_HEADER{Content-Type: text/xml; charset=utf-8}
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+		xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+[(#REM) Accueil]
+<url>
+	<loc>#URL_SITE_SPIP</loc>
+	<BOUCLE_maj(ARTICLES){tout}{par date_modif}{inverse}{0,1}>[(#DATE_MODIF|?{[<lastmod>(#DATE_MODIF|date_iso)</lastmod>]})]</BOUCLE_maj>
+	<changefreq>hourly</changefreq>
+	<priority>1.0</priority>
+</url>
+
+[(#REM) Rubriques]
+<BOUCLE_r(RUBRIQUES){si #ENV{annee}|non}{!par date}{0,1000}>
+<url>
+	[<loc>(#URL_RUBRIQUE|url_absolue)</loc>]
+	[<image:image>
+		<image:loc>#URL_SITE_SPIP/(#LOGO_RUBRIQUE|extraire_attribut{src}|supprimer_timestamp)</image:loc>
+		[<image:title>(#TITRE|trim|textebrut)</image:title>]
+	</image:image>]
+</url>
+</BOUCLE_r>
+
+[(#REM) Articles]
+<BOUCLE_a(ARTICLES){annee?}{!par date_modif}{!par date}{0,2000}>
+<url>
+	<loc>[(#URL_ARTICLE|url_absolue)]</loc>
+	<lastmod>[(#DATE_MODIF|date_iso)]</lastmod>
+	<changefreq>weekly</changefreq>
+	<priority>[(#POPULARITE|div{100})]</priority>
+	[<image:image>
+		<image:loc>#URL_SITE_SPIP/(#LOGO_ARTICLE|extraire_attribut{src}|supprimer_timestamp)</image:loc>
+		[<image:title>(#TITRE|trim|textebrut)</image:title>]
+	</image:image>]
+	<BOUCLE_mesimages(DOCUMENTS){id_article}{doublons}{extension IN jpg,gif,png}{0,1000}><image:image>
+		<image:loc>[(#URL_DOCUMENT|url_absolue)]</image:loc>
+		[<image:caption>(#DESCRIPTIF|trim|textebrut)</image:caption>]
+		[<image:title>(#TITRE|trim|sinon{#FICHIER|basename|titre_naturel}|textebrut)</image:title>]
+	</image:image></BOUCLE_mesimages>
+</url>
+</BOUCLE_a>
+
+[(#REM) Breves]
+<BOUCLE_b(BREVES){annee?}{!par date}{0,1000}>[
+<url><loc>(#URL_BREVE|url_absolue)</loc></url>]</BOUCLE_b>
+
+[(#REM) Sites]
+<BOUCLE_s(SITES) {annee?} {par date}{inverse} {0,50} >
+<url>
+	[<loc>(#ID_SYNDIC|generer_url_entite{site}|url_absolue)</loc>]
+	[<image:image>
+		<image:loc>#URL_SITE_SPIP/(#LOGO_SITE|extraire_attribut{src}|supprimer_timestamp)</image:loc>
+		[<image:title>(#NOM_SITE|trim|textebrut)</image:title>]
+	</image:image>]
+</url>
+</BOUCLE_s>
+
+[(#REM) Extensions de sitemap par des plugins ]
+<BOUCLE_objets(DATA){source table,#REM|lister_tables_objets_sql}{si #ENV{annee}|non}>
+	#SET{fond,#VAL{sitemap-}|concat{#VALEUR{table_objet}}}
+	[(#GET{fond}|trouver_fond|oui)#INCLURE*{fond=#GET{fond}}]
+</BOUCLE_objets>
+
+</urlset>
