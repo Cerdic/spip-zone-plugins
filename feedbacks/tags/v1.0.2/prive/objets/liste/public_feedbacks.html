@@ -1,0 +1,50 @@
+<h2><:feedback:liste_feedback:></h2>
+
+[(#SET{defaut_tri,#ARRAY{
+	date,#ENV{date_sens,-1},
+	date_heure,#ENV{date_sens,-1},
+	titre,1,
+	id_feedback,1,
+	points,-1
+}})
+]<B_liste_minifee>
+#ANCRE_PAGINATION
+<div class="liste-objets feedback">
+	<BOUCLE_liste_minifee(FEEDBACKS){id_feedback?}{id_secteur?}{id_mot?}{id_rubrique?}{where?}{recherche?}{statut='publie'}{tri #ENV{par,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+	<ul>
+      <li class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+      <h3 class="type praise #TITRE"
+        title="#TITRE">
+        <span>#TITRE</span>
+      </h3>
+      
+      #TEXTE
+      
+      <ul class="meta">
+        <li>
+            <time datetime="[(#DATE|affdate{'Y-m-d'})]T[(#DATE|affdate{'h:i:s'})]Z" title="[(#DATE|affdate{'d M Y h:i:s'})]">[(#DATE|affdate_jourcourt)]</time>
+        </li>
+       
+      </ul>
+
+      <div class="options">
+        <a href="#"><span><:feedback:plus_options:></span></a>
+        <ul>
+          <li><a href="http://twitter.com/share?url=#URL_SITE_SPIP&amp;text=[(#TEXTE|supprimer_tags|replace{' ','+'})]+%23[(#NOM_SITE_SPIP|=={SPIP feedback}|?{#NOM_SITE_SPIP|replace{' ','+%23'},'SPIP'})]"
+            class="twitter" target="_blank"><span><:feedback:twitter_feedback:></span></a></li>
+        </ul>
+      </div>
+    </li>	
+    </ul>	
+	<hr />
+	</BOUCLE_liste_minifee>
+
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+
+<INCLURE{fond=prive/objets/liste/menu_feedbacks} />
+</div>
+</B_liste_minifee>
+<p><:feedback:info_aucun_feedback:></p>
+[<div class="liste-objets feedback caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong>
+</div>
+]<//B_liste_minifee>

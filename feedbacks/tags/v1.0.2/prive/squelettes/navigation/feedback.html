@@ -1,0 +1,13 @@
+<BOUCLE_nav(FEEDBACKS){id_feedback}{statut?}{si #ENV{exec}|=={feedback}}>
+#BOITE_OUVRIR{'','info'}
+#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','feedback','id',#ENV{id_feedback}}}}
+#BOITE_FERMER
+
+<div class="ajax">
+#FORMULAIRE_EDITER_LOGO{feedback,#ID_FEEDBACK,'',#ENV**}
+</div>
+
+#PIPELINE{afficher_config_objet,#ARRAY{args,#ARRAY{type,feedback,id,#ID_FEEDBACK},data,''}}
+</BOUCLE_nav>
+[(#ENV{exec}|=={feedback_edit}|oui)<INCLURE{fond=prive/squelettes/navigation/feedback_edit,env} />]
+<//B_nav>

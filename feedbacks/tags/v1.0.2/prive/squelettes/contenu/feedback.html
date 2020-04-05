@@ -1,0 +1,34 @@
+<BOUCLE_feedback(FEEDBACKS){id_feedback}{statut?}{si #ENV{exec}|=={feedback}}>
+[(#BOITE_OUVRIR{[
+				
+	[(#AUTORISER{modifier,feedback,#ID_FEEDBACK})
+				
+		[(#ID_FEEDBACK|afficher_qui_edite{feedback}|non)
+			[(#URL_ECRIRE{feedback_edit,id_feedback=#ID_FEEDBACK}|icone_verticale{<:feedback:icone_modifier_feedback:>,feedback,edit,right ajax preload})]
+		]
+		[(#ID_FEEDBACK|afficher_qui_edite{feedback}|oui)
+			[(#URL_ECRIRE{feedback_edit,id_feedback=#ID_FEEDBACK}|icone_verticale{#ID_FEEDBACK|afficher_qui_edite{feedback},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{feedback-24.png}|balise_img{feedback,cadre-icone})]</h1>
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{feedback,#ID_FEEDBACK}
+</div>
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/feedback,id=#ID_FEEDBACK,id_feedback=#ID_FEEDBACK,wysiwyg=1} />
+</div>
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,feedback,id,#ID_FEEDBACK},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+<script type="text/javascript">if (window.jQuery)
+jQuery(function(){jQuery('#navigation>div').ajaxReload({args:{exec:'feedback'}});})
+</script>
+]
+</BOUCLE_feedback>
+[(#ENV**{exec}|=={feedback_edit}|?{#INCLURE{fond=prive/squelettes/contenu/feedback_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_feedback>

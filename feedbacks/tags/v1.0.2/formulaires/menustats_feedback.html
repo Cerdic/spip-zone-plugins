@@ -1,0 +1,25 @@
+			<div class="menu">
+				<h2>
+				<BOUCLE_feedback(FEEDBACKS){id_rubrique=1}>
+				[(#TOTAL_BOUCLE|oui) <:feedback:feedback_statistiques:>]</h2>
+				</BOUCLE_feedback>
+				<ul>
+					<li>
+						<BOUCLE_feedbackpositif(FEEDBACKS){id_rubrique=1}{titre='positif'}>
+						[<span class="first_feedback_positif">#TOTAL_BOUCLE</span> <span class="feedback_positif">
+						(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{feedback:feedback_positif,feedback:feedback_nb_positif}})</span>]
+						</BOUCLE_feedbackpositif>					
+					</li>
+					<li>
+						<BOUCLE_feedbacknegatif(FEEDBACKS){id_rubrique=1}{titre='negatif'}>
+						[<span class="first_feedback_negatif">#TOTAL_BOUCLE</span> <span class="feedback_negatif">
+						(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{feedback:feedback_negatif,feedback:feedback_nb_negatif}})</span>]
+						</BOUCLE_feedbacknegatif>							
+					</li>
+					<li>
+						<BOUCLE_feedbackidee(FEEDBACKS){id_rubrique=1}{titre='idee'}>
+						[<span class="first_feedback_idee">#TOTAL_BOUCLE</span> <span class="feedback_idee">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{feedback:feedback_idee,feedback:feedback_nb_idee}})</span>]
+						</BOUCLE_feedbackidee>					
+					</li>
+				</ul>
+			</div>
