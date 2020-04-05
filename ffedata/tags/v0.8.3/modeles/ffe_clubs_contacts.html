@@ -1,0 +1,29 @@
+[(#REM)
+	Un modèle pour afficher seulement les contacts des clubs d'un département disponibles sur le webservice 
+	Quelques partis pris :
+	- le nom renvoie sur la fiche du club sur le site FFE
+	- les mails protégés par mailcrypt
+		]
+<B_lecture_wsdl2>
+<table class="spip">
+	<thead>
+		<tr>
+			<th>Nom</th>
+			<th>Commune</th>
+			<th>Président</th>
+			<th>Correspondant</th>
+		</tr>
+	</thead>
+<BOUCLE_lecture_wsdl2(DATA){source echecs, http://service.echecs.asso.fr/Clubs.asmx/GetClubs?Ref=#ENV{Ref}}>
+	<BOUCLE_donnees2(DATA){source table, #VALEUR**}{par Commune}{pagination 30}>
+	<tr>
+		<td><a href="http://echecs.asso.fr/FicheClub.aspx?Ref=#VALEUR{Ref}"#VALEUR{ClubId}>#VALEUR{Nom}</a></td>
+		<td>#VALEUR{Commune}</td>
+		<td>[(#VAL{[<a href="mailto:(#VALEUR{PdtEmail})">][(#VALEUR{PdtPrenom})]&nbsp;[(#VALEUR{PdtNom})]</a>}|mailcrypt)]</td>
+		<td>[(#VAL{[<a href="mailto:(#VALEUR{CorrEmail})">][(#VALEUR{CorrPrenom})]&nbsp;[(#VALEUR{CorrNom})]</a>}mailcrypt)]</td>
+	</tr>#PAGINATION	
+	</BOUCLE_donnees2>
+	
+</BOUCLE_lecture_wsdl2>
+</table>
+</B_lecture_wsdl2>

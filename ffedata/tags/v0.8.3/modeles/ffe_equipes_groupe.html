@@ -1,0 +1,34 @@
+<B_lecture_wsdl2>
+
+<table class="ffedata">
+	<thead>
+		<tr>
+			<th>Place</th>
+			<th>Nom</th>
+			<th>Pts</th> 
+			<th>J</th>
+			<th>Diff</th>
+			<th>PtsP</th>
+			<th>PtsC</th>
+		</tr>
+	</thead>
+<BOUCLE_lecture_wsdl2(DATA){source echecs, http://service.echecs.asso.fr/Equipes.asmx/GetEquipesDuGroupe?saison=#ENV{saison}&Ref=#ENV{Ref}}>
+	<BOUCLE_titreg(DATA){source table, #VALEUR} {0,1}>
+	<h3> #VALEUR{CompetitionNom} , #VALEUR{DivisionNom} , #VALEUR{GroupeNom} </h3>
+	</BOUCLE_titreg>	
+	<BOUCLE_donnees2(DATA){source table, #VALEUR**}{par Place}>
+		 <tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
+			<td>[(#VALEUR{Place}|round)] </td>
+			<td>[(#VALEUR{EquipeNom})] </td>
+			<td>[(#VALEUR{PtsMatch}|round)] </td> 
+			<td>[(#VALEUR{Joue}|round)] </td>
+			<td>[(#VALEUR{PtsDiff}|round)] </td>
+			<td>[(#VALEUR{PtsPour}|round)] </td>
+			<td>[(#VALEUR{PtsContre}|round)] </td> 
+		</tr>	
+	</BOUCLE_donnees2>
+
+	</B_donnees2>
+</BOUCLE_lecture_wsdl2>
+</table>
+</B_lecture_wsdl2>

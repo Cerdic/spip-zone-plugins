@@ -1,0 +1,33 @@
+[(#REM)
+	Un modèle pour afficher la liste des joueurs d'un club.
+	Paramètres à saisir au modèle : simplement le numéro du club tel qu'il existe dans la base fédérale.
+	On récupère le numéro du club sur le site echecs.asso.fr. C’est le numéro qui apparait à la fin de l’URL dans la fiche du club : http://echecs.asso.fr/FicheClub.aspx?Ref=2569
+	Ici les joueurs du club numéro 2569, le club de Blagnac.
+	<ffe_joueurs|Ref=2569>
+	]
+
+<B_lecture_wsdl2>
+<table class="spip echecs_joueurs">
+	<thead>
+		<tr>
+			<th>Prénom Nom</th>
+			<th>Catégorie</th>
+			<th>Elo</th>
+			<th>Rapide</th>
+		</tr>
+	</thead>
+<BOUCLE_lecture_wsdl2(DATA){source echecs, http://service.echecs.asso.fr/Joueurs.asmx/GetJoueurs?Ref=#ENV{Ref}}>
+<B_donnees2>
+	<BOUCLE_donnees2(DATA){source table,#VALEUR}{!par Elo}{pagination #ENV{pagination,40}}>
+		<tr>
+			<td>[(#VAL{[<a href="mailto:(#VALEUR{EMail})">][(#VALEUR{Prenom})]&nbsp;[(#VALEUR{Nom})]</a>}|mailcrypt)]</td>
+			<td>#VALEUR{Cat}</td>
+			<td>#VALEUR{Elo}</td>
+			<td>#VALEUR{Rapide}</td>
+		</tr>	
+	</BOUCLE_donnees2>
+	<div class='pagination'></tr>#PAGINATION{page_precedent_suivant}</div>		
+</B_donnees2>
+</BOUCLE_lecture_wsdl2>
+</table>
+</B_lecture_wsdl2>

@@ -1,0 +1,29 @@
+nom: '<:ffedata:modele_ffe_data:>'
+logo: 'css/ffedata-16.png'
+icone_barre: 'ffedata.png'
+parametres:
+  -
+    saisie: 'selection'
+    options:
+      nom: 'modele'
+      label: '<:inserer_modeles:ffedata:>'
+      defaut: 'ffe_joueurs'
+      obligatoire: 'oui'
+      cacher_option_intro: 'oui'
+      defaut: 'liste_joueurs'
+      datas:
+        ffe_joueurs: 'liste joueurs d&rsquo;un club'
+        ffe_clubs_classement: 'classement des clubs'
+        ffe_fiche_joueur: 'La fiche  d&rsquo;un joueur'
+        ffe_graph_joueur: 'Le graphique du &eacute;lo'
+        ffe_clubs_departement: 'les clubs du d&eacute;partement'
+        ffe_clubs_contacts: 'les contacts des clubs'
+        ffe_equipes_club&#124;saison&#61;: 'les &eacute;quipes d&rsquo;un club'
+        ffe_equipes_groupe&#124;saison&#61;: 'les r&eacute;sultats d&rsquo;un groupe'
+        ffe_ligue: 'les responsable d&rsquo;une Ligue'
+        ffe_joueurs_detail: 'joueurs club avec d&eacute;tail &eacute;lo'
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'variante'
+      defaut: 'Ref='

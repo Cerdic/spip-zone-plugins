@@ -1,0 +1,57 @@
+[<!--(#REM) 
+
+	La saisie nrffe est basée sur un input de type text,
+	agrémentée d'un bouton et d'un inclure ajaxé
+
+	Si la valeur saisie est une lettre suivie de 5 chiffres, le bouton est cliquable.
+	Il déclenche un AjaxReload de l'inclure avec la valeur saisie.
+
+
+ -->]
+
+[<!--(#REM) Identifiant unique  -->]
+[(#ENV{id_saisie,#ENV**|md5}|substr{1,6}|set{id})]
+
+[<!--(#REM) Completer l'attribut class avec l'id -->]
+[(#ENV{class}|concat{ nrffe_#GET{id}}|setenv{class})]
+
+[<!--(#REM) Placeholder par defaut -->]
+[(#ENV{placeholder,D12345}|setenv{placeholder})]
+
+[<!--(#REM) Appel saisie text -->]
+[(#INCLURE{fond=saisies/input,type=text,env})]
+
+[<!--(#REM) Bouton -->]
+ <p class="boutons">
+ 	<input type="submit" class="btn submit" name="btn_nrffe_#GET{id}" value="[(#VAL{Récupérer les données}|_L)]">
+ </p>
+
+[<!--(#REM) Déclencher le AjaxReload -->]
+<script type="text/javascript">
+ 	
+	var saisie_nrffe_#GET{id} = function() {
+
+		var $champ = jQuery('.nrffe_#GET{id}');
+		var $btn = $champ.closest('.saisie_nrffe').find('input[type="submit"]').prop('disabled', true);
+		var re = /[A-Za-z]{1}\d{5}/; // valeur valide : 1 lettre + 5 chiffres
+		$champ.on('keyup keypress blur change', function() {
+			$btn.prop('disabled', !re.test( $(this).val() ) );
+		});
+
+		$btn.on('click', function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			ajaxReload('action_nrffe_#GET{id}',{
+				args:{
+					ref:$champ.val()
+				}
+			});
+		});
+
+	}
+	saisie_nrffe_#GET{id}();
+
+ </script>
+
+[<!--(#REM) Les actions  -->]
+ <INCLURE{fond=formulaires/inc-saisie-nrffe,ajax=action_nrffe_#GET{id},id=#GET{id}}/>

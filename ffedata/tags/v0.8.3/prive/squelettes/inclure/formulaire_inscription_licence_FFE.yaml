@@ -1,0 +1,98 @@
+id_formulaire: ""
+identifiant: inscription_licence_FFE
+titre: 'Inscription à partir du numéro de licence'
+descriptif: ""
+css: ""
+message_retour: 'Merci pour votre inscription'
+saisies:
+    -
+        options:
+            label: 'Numéro de licence FFE'
+            type: text
+            maxlength: '6'
+            size: '10'
+            obligatoire: '1'
+            nom: NrFFE
+        identifiant: ""
+        saisie: nrffe
+    -
+        options:
+            label: Nom
+            type: text
+            size: '40'
+            autocomplete: defaut
+            nom: Nom
+        identifiant: ""
+        saisie: input
+    -
+        options:
+            label: Prénom
+            type: text
+            size: '40'
+            nom: Prenom
+        identifiant: ""
+        saisie: input
+    -
+        options:
+            label: Catégorie
+            type: text
+            size: '40'
+            nom: Cat
+        identifiant: ""
+        saisie: input
+    -
+        options:
+            label: 'Type de licence'
+            type: text
+            maxlength: '1'
+            size: '3'
+            nom: AffType
+        identifiant: ""
+        saisie: input
+    -
+        options:
+            label: Elo
+            type: text
+            maxlength: '4'
+            size: '4'
+            nom: Elo
+        identifiant: ""
+        saisie: input
+    -
+        options:
+            label: Club
+            type: text
+            size: '40'
+            nom: ClubNom
+        identifiant: ""
+        saisie: input
+    -
+        options:
+            texte: "Les champs \"Nom, Prénom, Catégorie, Type de licence, Elo, Déplacer, Club\" sont remplis automatiquement une fois le numéro de licence saisi.\r\n(saisir le numéro de licence puis cliquer sur récupérer les données ou faire entrée)"
+            nom: explication_1
+        identifiant: ""
+        saisie: explication
+traitements:
+    enregistrement:
+        resume_reponse: '@NrFFE@ | @Nom@ | @Prenom@ | @Cat@'
+        multiple: on
+        unicite: NrFFE
+        message_erreur_unicite: ""
+        modifiable: ""
+        identification: cookie
+        anonymiser: ""
+        anonymiser_variable: ""
+        ip: on
+        moderation: posteriori
+        analyse_exclure_champs: ""
+        effacement: ""
+        effacement_delai: ""
+        invalider: ""
+public: non
+apres: formulaire
+url_redirect: ""
+statut: publie
+date_creation: '2018-10-01 00:00:00'
+maj: '2018-10-01 00:00:00'
+composition: ""
+composition_lock: '0'

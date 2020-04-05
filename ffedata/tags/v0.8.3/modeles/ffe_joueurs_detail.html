@@ -1,0 +1,32 @@
+<B_lecture_wsdl2>
+<table class="spip echecs_joueurs">
+	<thead>
+		<tr>
+			<th>Prénom Nom</th>
+			<th>Catégorie</th>
+			<th>Elo</th>
+			<th>Rapide</th>
+			<th>Détail</th>
+		</tr>
+	</thead>
+	
+	<BOUCLE_lecture_wsdl2(DATA){source echecs, http://service.echecs.asso.fr/Joueurs.asmx/GetJoueurs?Ref=#ENV{Ref}}>
+
+	<B_donnees2>
+	<BOUCLE_donnees2(DATA){source table,#VALEUR}{!par Elo}{pagination #ENV{pagination,40}}>
+
+#SET{histo,#VALEUR{Ref}}
+	<tr>
+		<td>[(#VAL{[<a href="mailto:(#VALEUR{EMail})">][(#VALEUR{Prenom})]&nbsp;[(#VALEUR{Nom})]</a>}|mailcrypt)]</td>
+		<td>#VALEUR{Cat}</td>
+		<td>#VALEUR{Elo}</td>
+		<td>#VALEUR{Rapide}</td>
+		<td><a href="#URL_PAGE{detail_joueur}&Ref=#GET{histo}" class='mediabox boxIframe boxWidth-920px boxHeight-1000px'>Détail</a></td>
+	</BOUCLE_donnees2>
+	<div class='pagination'>
+	</tr>
+	#PAGINATION{page_precedent_suivant}</div>
+   </B_donnees2>
+</BOUCLE_lecture_wsdl2>
+</table>
+</B_lecture_wsdl2>

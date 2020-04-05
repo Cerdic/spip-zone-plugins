@@ -1,0 +1,2 @@
+
+Corriger l'affichage des équipes jeunes, où le résultat des premiers échiquiers compte deux points (voir ffedata_fonctions.php)

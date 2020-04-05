@@ -1,0 +1,44 @@
+[(#REM)
+	Un modèle pour afficher le nombre de licenciés A, B puis d'en faire la somme
+	- le nom renvoie sur la fiche du club sur le site FFE
+	- un total général est affiché 
+	]
+<B_lecture_wsdl2>
+<table class="spip">
+	<thead>
+		<tr>
+			<th>Nom</th>
+			<th>Commune</th>
+			<th>A</th>
+			<th>B</th>
+			<th>total</th>
+		</tr>
+	</thead>
+#SET{TotA,0}
+#SET{TotB,0}
+#SET{TotAB,0}
+<BOUCLE_lecture_wsdl2(DATA){source echecs, http://service.echecs.asso.fr/Clubs.asmx/GetClubs?Ref=#ENV{Ref}}>
+
+	<BOUCLE_donnees2(DATA){source table, #VALEUR**}{!par NbrAffA}{pagination 30}>
+		<tr>
+			<td><a href="http://echecs.asso.fr/FicheClub.aspx?Ref=#VALEUR{Ref}"#VALEUR{ClubId}>#VALEUR{Nom}</a></td>
+			<td>#VALEUR{Commune}</td>
+			<td>#VALEUR{NbrAffA}</td>
+			<td>#VALEUR{NbrAffB}</td>
+				#SET{TotA, #GET{TotA}|plus{#VALEUR{NbrAffA}}}  
+				#SET{TotB, #GET{TotB}|plus{#VALEUR{NbrAffB}}}
+				#SET{TempAB,#VALEUR{NbrAffA}|plus{#VALEUR{NbrAffB}}}
+			<td>#GET{TempAB}</td>
+				#SET{TotAB, #GET{TotAB}|plus{#GET{TempAB}}}
+		</tr>#PAGINATION	
+	</BOUCLE_donnees2>
+		<tr>
+			<td></td>
+			<td>Total</td>
+			<td>#GET{TotA}</td>
+			<td>#GET{TotB}</td>
+			<td>#GET{TotAB}</td>
+		</tr>
+</BOUCLE_lecture_wsdl2>
+</table>
+</B_lecture_wsdl2>
