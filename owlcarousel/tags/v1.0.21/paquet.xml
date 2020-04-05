@@ -1,0 +1,25 @@
+<paquet
+	prefix="owlcarousel"
+	categorie="multimedia"
+	version="1.0.21"
+	schema="0.0.1"
+	etat="stable"
+	compatibilite="[3.0.5;3.2.*]"
+	logo="prive/themes/spip/images/owlcarousel-64.png"
+	documentation="https://contrib.spip.net/Owl-Carousel-2"
+>
+	<nom>OwlCarousel</nom>
+	<auteur lien="https://www.mister-graphx.com">Arnaud B. (Mist. GraphX)</auteur>
+	<auteur>Chankalan</auteur>
+	<credit lien="https://owlcarousel2.github.io/OwlCarousel2/">Owl Carousel</credit>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="insert_head_css" inclure="owlcarousel_pipelines.php" />
+	<pipeline nom="insert_head" inclure="owlcarousel_pipelines.php" />
+	<pipeline nom="header_prive" inclure="owlcarousel_pipelines.php" />
+
+	<!-- Import export  de config-->
+	<pipeline nom="ieconfig_metas" inclure="owlcarousel_pipelines.php" />
+
+</paquet>

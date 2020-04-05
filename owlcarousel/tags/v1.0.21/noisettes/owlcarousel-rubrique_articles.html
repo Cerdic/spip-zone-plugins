@@ -1,0 +1,70 @@
+[(#REM)<!-- # Owl Rubrique Articles
+
+Liste d'articles d'une rubrique sous forme de carousel
+
+Usage:
+```html
+
+  <INCLURE{fond=noisettes/owlcarousel-rubrique_articles,id_rubrique=7,env,ajax} />
+
+```
+
+@param id_rubrique - id de la brubrique a afficher
+@param css -
+@param tri -
+@param navigation -
+@param autoplay -
+@param autoplayHoverPause -
+@param lazyLoad -
+
+ -->]
+ #SET{container,#ENV{container,}}
+<BOUCLE_kelRub(RUBRIQUES){id_rubrique=#ENV{id_rubrique}}>
+#SET{id_owl,#ENV{id-carousel,owl-rub-art-#ID_RUBRIQUE}}
+<div class="#GET{container}">
+    [<h2>(#TITRE)</h2>]
+    <B_listArticles>
+    <div[ id="(#GET{id_owl})" ]class="rubrique owl-carousel owl-theme[ (#ENV{css}|attribut_html)]">
+        <BOUCLE_listArticles(ARTICLES){id_rubrique}{par #ENV{tri}}>
+            <article class="contenu">
+                [<div class="contenu-thumbnail">(#LOGO_ARTICLE)</div>]
+                <div class="contenu-content">
+                    <h2 class="title[ (#EDIT{titre})]">[(#TITRE)]</h2>
+                    [<div class="descriptif">(#DESCRIPTIF)</div>]
+                    <a href="#URL_ARTICLE" class="btn">#TITRE</a>
+                </div>
+            </article>
+        </BOUCLE_listArticles>
+    </div>
+</B_listArticles>
+</div>
+<script>
+jQuery(function($){
+    $("[#(#GET{id_owl})]").owlCarousel({
+      loop:true,[
+      items: (#ENV{items, 1}),][
+      margin:(#ENV{margin}),][
+      dots:(#ENV{dots, true}),][
+      nav:(#ENV{navigation, false}),][
+      autoplay: (#ENV{autoplay}),][
+      autoplayHoverPause: (#ENV{autoplayHoverPause}),][
+      lazyLoad: (#ENV{lazyLoad}),][
+      animateIn:'(#ENV{animateIn})',][
+      animateOut:'(#ENV{animateOut})',][
+      autoplayTimeout: (#ENV{autoplayTimeout}),][
+      autoHeight: (#ENV{autoHeight}),][
+      URLhashListener:(#ENV{URLhashListener}),
+      startPosition: 'URLHash',]
+      navText : ["<:owlcarousel:prec:>","<:owlcarousel:suiv:>"],
+      responsive:{
+        0:{
+         items:1
+        }[,
+          640:{
+           items:(#ENV{items})
+        }]
+      }
+    });
+});
+</script>
+</BOUCLE_kelRub>

@@ -1,0 +1,70 @@
+[(#REM)<!--
+
+Owl-carousel Full-with
+
+Carousel avec des images responsive s'adaptant a la largeur complète.
+La sélection des articles se fait via un mot-clef technique
+
+@param : id-carousel : id unique du carousel
+@param : titre_mot : le titre du mot clef technique qui sélectionne les articles
+@param : caption : oui : Affiche la description de l'image.
+@param : lien : oui : lien sur l'image.
+@param : navigation : true par defaut : affiche les boutons précédents suivants
+@param : caption_css : ajouter des css sur la description (par exemple : invisible).
+@param : autoPlay : true (false par défaut) : le carousel démarre automatiquement.
+@param : autoplayHoverPause : true (false par défaut) : pause sur le rollHover
+@param : lazyLoad : true (false par défaut) : ne charge que les images visibles pour optimiser le chargement sur périphériques mobiles.
+
+-->]
+<style>
+    [#(#ENV{id-carousel,demo})] .owl-slide > .caption{
+        z-index: 100;
+        position: absolute;
+        left:55%;
+        width: 40%;
+        bottom:5%;
+    }
+    [#(#ENV{id-carousel,demo})] .owl-slide > .caption > .title{
+        background: #000;
+        color : #FFF;
+        padding: 5px;
+        width: auto;
+    }
+    [#(#ENV{id-carousel,demo})] .owl-slide > .caption > p {
+        background-color: rgba(88, 88, 88, 0.75) ;
+        /*float: right;*/
+        color: #FFF;
+        padding: 5px;
+    }
+
+    [#(#ENV{id-carousel,demo})] .owl-slide img{
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+</style>
+<div id="#ENV{id-carousel,demo}" class="owl-carousel owl-theme">
+    <BOUCLE_listItems(ARTICLES){titre_mot=#ENV{titre_mot}}>
+        <div class="owl-slide">
+            [(#ENV{caption,oui}|=={oui}|oui)
+            <div class="caption[ (#ENV{caption_css})]">[<h3 class="title">(#TITRE)</h3>][<p class="description">(#INTRODUCTION|couper{200}|textebrut)</p>]</div>]
+            [(#ENV{lien,oui}|=={oui}|oui)<a href="#URL_ARTICLE">]
+            <img [(#ENV{lazyLoad}|=={true}|oui)class="owl-lazy" data-]src="[(#LOGO_ARTICLE||extraire_attribut{src})]" alt="[(#TITRE|textebrut)]">
+            [(#ENV{lien,oui}|=={oui}|oui)</a>]
+        </div>
+    </BOUCLE_listItems>
+</div>
+<script>
+jQuery(function($){
+    $("[#(#ENV{id-carousel,demo})]").owlCarousel({
+        [navigation : (#ENV{navigation,true}),]
+        slideSpeed : 300,
+        paginationSpeed : 400,
+        items : 1[,
+        autoplay :(#ENV{autoplay,false}),][
+        autoplayHoverPause : (#ENV{autoplayHoverPause,false}),][
+        lazyLoad : (#ENV{lazyLoad,false}),]
+        navText : ["<:owlcarousel:prec:>","<:owlcarousel:suiv:>"]
+    });
+});
+</script>

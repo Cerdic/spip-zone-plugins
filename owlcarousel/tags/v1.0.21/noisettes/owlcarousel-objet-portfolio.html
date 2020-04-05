@@ -1,0 +1,102 @@
+[(#REM)<!-- # OwlCarousel - Portfolio Objet
+
+
+Gallerie portfolio avec Owl Carousel
+@see - http://owlgraphic.com/owlcarousel/index.html#customizing
+
+Usage:
+```html
+  <INCLURE{fond=noisettes/owlcarousel-objet-portfolio,
+          objet=article,
+          id_objet=28,
+          animateOut=fadeOut, env, ajax }/>
+```
+
+@param id-carousel - id unique du carousel, si on en utilise plusieurs dans la page
+@param nb_thumbnails - nombre de vignettes
+@param caption (oui !) - Affiche la description de l'image.
+@param navigation (true !) - affiche les boutons précédents suivants
+@param caption_css (false !) - ajouter des css sur la description (par exemple : invisible).
+@param autoPlay (false !) - le carousel démarre automatiquement.
+@param stopOnHover (false !)- pause sur le rollHover
+@param lazyLoad (false !) - ne charge que les images visibles pour optimiser le chargement.
+@param animateIn - une animation css3 , `fadeOut` est la seul fournie par owl, sinon ajouter animate.css
+@param animateOut - une animation css3 , `fadeOut` est la seul fournie par owl, sinon ajouter animate.css
+
+
+-->]
+#SET{id-carousel, #ENV{id-carousel, owl-objet-portfolio}}
+[(#REM)<!-- Visuel Grand -->]
+<div id="[(#GET{id-carousel})]" class="owl-carousel owl-theme">
+    <BOUCLE_listDocs(DOCUMENTS spip_documents_liens){objet ?}{id_objet ?}
+                                                  {par rang_lien,num titre, date}
+                                                  {mode=document}{extension==jpg|png|gif}>
+    <div class="owl-slide" data-hash="[(#GET{id-carousel})]_#ID_DOCUMENT">
+        [(#ENV{caption,oui}|=={oui}|oui)
+        <div class="caption[ (#ENV{caption_css})]">[<h3 class="title">(#TITRE)</h3>][<p class="hidden-phone">(#DESCRIPTIF|textebrut)</p>]</div>]
+            <a href="#FICHIER" class="mediabox" rel="diaporama"[ title="(#TITRE|attribut_html|couper{80})"]>
+                <img [(#ENV{lazyLoad}|=={true}|oui)class="owl-lazy" data-]src="[(#FICHIER|image_reduire{600,400}|extraire_attribut{src})]" alt="[(#TITRE|textebrut)]">
+            </a>
+    </div>
+    </BOUCLE_listDocs>
+</div>
+[(#REM)<!-- Vignettes -->]
+<B_docs>
+<div class="diapo_vignettes">
+    <ul id="list-thumbnails" class="diapo_thumbnails owl-carousel">
+    <BOUCLE_docs(DOCUMENTS spip_documents_liens){objet ?}{id_objet ?}
+                                  {par rang_lien,num titre, date}
+                                  {mode=document}{extension==jpg|png|gif}>
+        [<li class="owl-slide">
+            <a class="diapo_thumbnail[ (#ENV{doc}|=={#ID_DOCUMENT}|oui)active]"
+               href="[#(#GET{id-carousel})]_[(#ID_DOCUMENT)]"
+               [ title="(#TITRE|couper{80}|texte_backend)"]>
+            (#LOGO_DOCUMENT||image_recadre{100,100,'center','transparent'}|image_reduire{100,100}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})
+            </a>
+        </li>]
+    </BOUCLE_docs>
+    </ul>
+</div>
+</B_docs>
+
+<script>
+jQuery(function($){
+    var mainCarousel = $("[#(#GET{id-carousel})]");
+    mainCarousel.owlCarousel({
+        loop:true,
+        margin:0,
+        items: 1,
+        dots: true,[
+        autoHeight:(#ENV{autoHeight, false}),][
+        nav:(#ENV{navigation, false}),][
+        autoplay: (#ENV{autoplay}),][
+        autoplayHoverPause: (#ENV{autoplayHoverPause}),][
+        lazyLoad: (#ENV{lazyLoad}),][
+        animateIn:'(#ENV{animateIn})',][
+        animateOut:'(#ENV{animateOut})',]
+        navText : ["<:owlcarousel:prec:>","<:owlcarousel:suiv:>"],
+        responsive:{
+					0:{
+						items:1
+					}
+				},
+        URLhashListener:true,
+        startPosition: 'URLHash'
+    });
+    [(#REM)/* exemple d'utilisation d'évenements
+
+    mainCarousel.on('changed.owl.carousel', function(event) {
+        //console.log(event.target);
+    });
+    */]
+    $("#list-thumbnails").owlCarousel({
+        items: 6,
+        navigation:false,
+        navText : ["<:owlcarousel:prec:>","<:owlcarousel:suiv:>"],
+        pagination:true,
+        paginationNumbers:true,
+        responsive: #ENV*{thumbnails_responsive, false}
+    });
+
+});
+</script>

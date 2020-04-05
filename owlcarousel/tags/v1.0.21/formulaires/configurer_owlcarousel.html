@@ -1,0 +1,44 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:owlcarousel:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<div class="editer-groupe">
+			<div class="editer editer_css editer_radio">
+				<h2 class="legend"><:owlcarousel:cfg_label_css:></h2>
+				<p class="explication"><:owlcarousel:cfg_explication_css:></p>
+				<div class="choix">
+					<input type="checkbox" name="css" class="checkbox" value='on' id='cssn'[(#ENV{css}|oui)checked="checked" ]/>
+					<label for='cssn'>
+						<:owlcarousel:cfg_label_css:>
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="editer-groupe">
+			<div class="editer editer_header_prive editer_radio">
+				<h2 class="legend"><:owlcarousel:cfg_label_header_prive:></h2>
+				<p class="explication"><:owlcarousel:cfg_explication_header_prive:></p>
+				<div class="choix">
+					<input type="checkbox" name="header_prive" class="checkbox" value='on' id='header_prive'[(#ENV{header_prive}|oui)checked="checked" ]/>
+					<label for='header_prive'>
+						<:owlcarousel:cfg_label_header_prive:>
+					</label>
+				</div>
+			</div>
+		</div>
+
+		<input type="hidden" name="_meta_casier" value="owlcarousel" />
+		<p class="boutons">
+			<span class="image_loading">&nbsp;</span>
+			<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
+	</div>
+	</form>
+</div>

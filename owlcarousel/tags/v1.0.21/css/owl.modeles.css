@@ -1,0 +1,45 @@
+/* Modele article_owl */
+.article_owl .owl-slide > .caption{
+    z-index: 100;
+    position: absolute;
+    left:55%;
+    width: 40%;
+    bottom:5%;
+}
+.article_owl .owl-slide > .caption > .title{
+    background: #000;
+    color : #FFF;
+    padding: 5px;
+    width: auto;
+}
+.article_owl .owl-slide > .caption > p {
+    background-color: rgba(88, 88, 88, 0.75) ;
+    color: #FFF;
+    padding: 5px;
+}
+/* Owl VideoPlayer */
+.owl-video-player .owl-main_player,
+.owl-video-player .owl-video_thumbs {
+  max-width: 960px;
+  margin: 0 auto;
+}
+.owl-video-player .owl-slide {
+	display: block;
+	width: 100%; /* 1 */
+	margin: 0 auto;
+}
+.owl-video-player .owl-video_thumbs .owl-slide {
+	display: inline-block;
+  width: auto; /* 1- laisse de l'espace entre les vignettes */
+	padding:.5em;
+	border: 1px solid black;
+	border-radius: 3px;
+	margin-right: .5em;
+}
+.owl-video-player .owl-video_thumbs .owl-slide:hover,
+.owl-video-player .owl-video_thumbs .owl-slide.active {
+	border: 1px solid silver;
+}
+.owl-video-player .owl-video_thumbs .owl-slide > a {
+	display: block;
+}

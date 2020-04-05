@@ -1,0 +1,70 @@
+[(#REM) <!-- OwlCarousel : Selection editoriale
+
+Un composant de type slider, a utiliser plutot en sommaire
+
+
+Usage:
+```html
+  <INCLURE{fond=noisettes/owlcarousel-selections_editoriales,
+          objet=article,
+          id_objet=28,
+          animateOut=fadeOut, env, ajax }/>
+```
+
+
+@param identifiant - identifiant textuel de la selection a afficher
+@param link_title {bool} - le lien est placé sur le titre, sinon on affiche un bouton/lien en fin de contenu
+@param link_txt         - personaliser le texte du lien quand il n'est pas placé sur le titre
+@param link_class       - class css supplémentaire pour le lien ex: btn btn-primary
+@param selection_tri    - hasard, titre, num, rang
+@param animateIn - une animation css3 , `fadeOut` est la seul fournie par owl, sinon ajouter animate.css
+@param animateOut - une animation css3 , `fadeOut` est la seul fournie par owl, sinon ajouter animate.css
+
+-->]
+[(#SET{identifiant, #ENV{identifiant, sommaire_hero}})]
+[(#SET{link_title, #ENV{link_title}})]
+[(#SET{link_txt, #ENV{link_txt}})]
+[(#SET{link_class, #ENV{link_class}})]
+[(#SET{tri, #ENV{selection_tri,'rang'}})]
+<BOUCLE_listSelections(SELECTIONS){identifiant=#GET{identifiant}}>
+    <B_listContenus>
+    <div class="selection js-cover-carousel owl-carousel owl-theme[ (#CHAMP_SQL{css}|attribut_html)]">
+        <BOUCLE_listContenus(SELECTIONS_CONTENUS){id_selection}{par #GET{tri}}>
+            <article  class="contenu[ (#CHAMP_SQL{css}|attribut_html)]">
+                    [<div class="contenu-thumbnail">(#LOGO_SELECTIONS_CONTENU)</div>]
+                    <div class="contenu-content entry article hentry">
+                        <div class="title entry-title">
+                            [(#GET{link_title}|=={true}|oui)<a href="#URL"]
+                            <h2[ class="(#EDIT{titre})"]>[(#TITRE)]</h2>
+                            [(#GET{link_title}|=={true}|oui)</a>]
+                        </div>
+                        [<div class="descriptif [(#EDIT{descriptif}) ]entry-content">
+                            (#DESCRIPTIF)
+                        </div>][(#GET{link_title}|!={true}|oui)
+                        <a href="#URL" class="#GET{link_class, cover-link}">
+                            <span>#GET{link_txt, voir : #TITRE }</span>
+                        </a>]
+                    </div>
+            </article>
+        </BOUCLE_listContenus>
+    </div>
+</B_listContenus>
+</BOUCLE_listSelections>
+
+<script>
+jQuery(function($){
+    $('.js-cover-carousel').owlCarousel({
+        loop:true,
+        margin:0,
+        items: 1,
+        dots: true,[
+        nav:(#ENV{navigation, false}),][
+        autoplay: (#ENV{autoplay}),][
+        autoplayHoverPause: (#ENV{autoplayHoverPause}),][
+        lazyLoad: (#ENV{lazyLoad}),][
+        animateIn:'(#ENV{animateIn})',][
+        animateOut:'(#ENV{animateOut})',]
+        responsive:false
+    });
+});
+</script>
