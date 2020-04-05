@@ -1,0 +1,31 @@
+<paquet
+	prefix="foundation_6"
+	categorie="outil"
+	version="6.7.6"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/foundation_6-64.png"
+	schema="1.0"
+	documentation="https://contrib.spip.net/Foundation-4-Spip"
+>
+	<nom>Foundation 6</nom>
+	<!-- Plugin qui intégre le framework Foundation à l'interface public de SPIP. -->
+
+	<auteur lien="http://p.henix.be">Phenix</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+
+	<!-- On active le pipeline pour modifier le header -->
+	<pipeline nom="insert_head_css" inclure="foundation_6_pipelines.php" />
+	<pipeline nom="affichage_final" inclure="foundation_6_pipelines.php" />
+
+	<!-- On ajoute un bouton pour la configuration -->
+	<!-- Bouton pour la configuration -->
+	<menu nom="foundation_6_titre" titre="foundation_6:foundation_6_titre" parent="menu_configuration" icone="images/foundation_6-16.png" action="configurer_foundation_6" />
+
+	<!-- Les plugins indispensable -->
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
+	<necessite nom="jquery" compatibilite="[1.11.3;[" />
+	<necessite nom="compresseur" compatibilite="[1.6.4;[" />
+
+</paquet>

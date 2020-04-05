@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+// Afficher correctement les datepickers
+input.hasDatepicker {
+	display: inline;
+}
+
+// Pour les formulaire spip qui sont encore en ul/li
+.formulaire_spip {
+	ul {
+		list-style-type: none;
+		margin-left: 0;
+	}
+}
+
+// Cosmetique sur la page de login
+.page_login #minipres {
+	margin: 5% auto;
+	width: 30rem;
+
+	h1 {
+		margin: 0 auto 1.5em;
+		font-size: 1.3em;
+		font-weight: 700;
+		text-align: center;
+		color: #5c3566;
+	}
+
+	h3 {
+		font-size: 1em;
+		font-weight: 700;
+	}
+
+	.formulaire_menu_lang {
+		padding: 0 3em;
+	}
+
+	.choix label {
+		position: relative;
+		top: -4px;
+	}
+
+	input[type="submit"] {
+		border-radius: inherit;
+	}
+}
+
+.spip_documents {
+  max-width:100%;
+}
+
+// Corriger le conflit entre la top-bar et orbit
+.top-bar {
+  z-index: 1;
+}

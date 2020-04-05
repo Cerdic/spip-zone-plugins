@@ -1,0 +1,32 @@
+<div class="orbit" role="region" aria-label="Favorite Space Pictures" data-orbit data-animate="[(#ENV{data-animate})]">
+	<ul class="orbit-container">
+		<B_doc>
+			#SET{total_doc,#TOTAL_BOUCLE}
+			[(#ENV{button}|!={non}|et{#GET{total_doc}|>={2}}|oui)
+			<button class="orbit-previous"><span class="show-for-sr"><:foundation_6:suivant:></span>&#9664;&#xFE0E;</button>
+			<button class="orbit-next"><span class="show-for-sr"><:foundation_6:precedent:></span>&#9654;&#xFE0E;</button>
+			]
+			<BOUCLE_doc(DOCUMENTS){id_objet?}{objet?}{id_document?}{mode?}{extension IN png,jpg,gif}{par num titre,titre}{doublons}{vu?} {0,#ENV{limite,1000}}>
+				<li class="[(#EXPOSE{is-active}) ]orbit-slide">
+					<figure class="orbit-figure">
+						<a href="[(#CREDITS|url_absolue|sinon{#INFO_URL{#ENV{objet},#ENV{id_objet}}})]">
+							[(#FICHIER|image_passe_partout{#ENV{width},#ENV{height}}|image_recadre{#ENV{width},#ENV{height},#ENV{imageAlign},#ENV{imageBackcolor}}|inserer_attribut{title,#DESCRIPTIF})]
+							[<figcaption class="orbit-caption">(#TITRE)</figcaption>]
+							[<div class="calque_image calque_image_#ID_DOCUMENT"><img src="(#ENV{chemin_calque})" /></div>]
+						</a>
+					</figure>
+				</li>
+			</BOUCLE_doc>
+	</ul>
+	<B_doc1>
+		<nav class="orbit-bullets">
+			<BOUCLE_doc1(DOCUMENTS){si #ENV{bullets}|!={non}|et{#GET{total_doc}|>={2}}}{id_objet?}{objet?}{id_document?}{mode?}{extension IN png,jpg,gif}{par num titre,titre} {0,#ENV{limite,1000}}>
+				<button[(#COMPTEUR_BOUCLE|=={1}|oui)class="is-active"] data-slide="[(#COMPTEUR_BOUCLE|moins{1})]">
+					<span class="show-for-sr">#TITRE</span>
+					[(#COMPTEUR_BOUCLE|=={1}|oui)
+					<span class="show-for-sr"><:zoundation:slide_affiche:></span>]
+				</button>
+			</BOUCLE_doc1>
+		</nav>
+	</B_doc1>
+</div>

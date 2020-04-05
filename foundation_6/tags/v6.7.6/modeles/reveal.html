@@ -1,0 +1,45 @@
+[(#REM)
+	Modèle pour créer facilement des boites modale Reveal (http://foundation.zurb.com/docs/components/reveal.html)
+
+	Paramètre:
+
+	href = la page à appeler.
+	data-id = Identifiant unique pour la boite reveal
+	zajax = l'id var_zajax
+	titre = le titre du lien
+	class = la class du lien
+	class_reveal = la class pour la reveal (http://foundation.zurb.com/sites/docs/reveal.html#sizing)
+	content = contenu de la reveal. Utile si on ne charge rien via ajax
+	animation-in = Animation d'entrée (http://foundation.zurb.com/sites/docs/motion-ui.html)
+	animation-out = Animation de sortie (http://foundation.zurb.com/sites/docs/motion-ui.html)
+]
+
+[(#CONFIG{foundation_6/javascript}|non)
+	<:foundation_6:erreur_js{squelette=#SQUELETTE}|erreur_squelette:>
+]
+
+[(#SET{data-id, [(#ENV{data-id})][(#REM|uniqid)]})]
+
+[(#ENV{href}|oui)
+	[(#SET{href_zajax, [(#ENV{href}|parametre_url{var_zajax,#ENV{zajax, content}})]})]
+]
+
+[(#SET{animation-in, #LIRE_CONSTANTE{_REVEAL_ANIMATION_IN}|?{#LIRE_CONSTANTE{_REVEAL_ANIMATION_IN}, #ENV{animation-in}}})]
+
+[(#SET{animation-out, #LIRE_CONSTANTE{_REVEAL_ANIMATION_OUT}|?{#LIRE_CONSTANTE{_REVEAL_ANIMATION_OUT}, #ENV{animation-out}}})]
+
+[<a [href="(#ENV{href})"]
+	[data-toggle="reveal-(#GET{data-id})"]
+	[(#ENV{href}|oui)data-reveal-ajax="#GET{href_zajax}"]
+	class="[(#ENV{href}|oui)reveal-ajax][ (#ENV{class})]">
+	(#ENV*{titre})
+</a>]
+
+<div [id="reveal-(#GET{data-id})"]
+	class="reveal[ (#ENV{class_reveal, large})]"
+	[(#GET{animation-in}|oui)data-animation-in="#GET{animation-in}"]
+	[(#GET{animation-out}|oui)data-animation-out="#GET{animation-out}"]
+	data-reveal>
+	[(#ENV**{content})
+	<INCLURE{fond=inclure/reveal-close, content=oui} />]
+</div>

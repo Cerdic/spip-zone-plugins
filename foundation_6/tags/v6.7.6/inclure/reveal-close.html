@@ -1,0 +1,9 @@
+[(#REM)
+	Fichier pour gérer la fermeture des reveal-modal de foundation
+]
+
+[(#LIRE_CONSTANTE{_AJAX}|oui|ou{#ENV{content}|oui})
+	<button class="close-button" data-close aria-label="Close reveal" type="button">
+		<span aria-hidden="true">&times;</span>
+	</button>
+]

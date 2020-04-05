@@ -1,0 +1,19 @@
+/**
+ * Fichier de lien entre les éléments css de spip et foundation
+ */
+
+// Les boutons de SPIP utilise le style de foundation
+input.submit {
+	@include button(false, $primary-color, scale-color($primary-color, $lightness: -15%), $button-color, solid);
+}
+
+.explication {
+	// Récupérer le code des help-text
+	@extend .help-text;
+
+	// Les explications sont placer autrement que
+	// ce que préconise Foundation.
+	// On supprime les marges pour un meilleur rendu
+	margin-bottom: 0;
+	margin-top: 0;
+}

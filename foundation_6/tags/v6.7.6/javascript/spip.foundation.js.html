@@ -1,0 +1,93 @@
+
+[(#CONFIG{foundation_6/javascript}|oui)
+
+[(#LIRE_CONSTANTE{_FOUNDATION_SASS}|non)
+/* Foundation du plugin */
+
+/* what-input.js */
+#INCLURE{lib/foundation-6/js/vendor/what-input.js}
+/* Foundation.js */
+#INCLURE{lib/foundation-6/js/vendor/foundation.js}
+]
+
+[(#LIRE_CONSTANTE{_FOUNDATION_SASS}|oui)
+
+/* Foundation SASS */
+
+/* what-input.js */
+[(#CHEMIN{bower_components/what-input/what-input.min.js}|?{
+	#INCLURE{bower_components/what-input/what-input.min.js},
+	#INCLURE{bower_components/what-input/dist/what-input.min.js}
+ })]
+
+/* Foundation.js */
+[(#CHEMIN{bower_components/foundation-sites/dist/js/foundation.js}|?{
+	#INCLURE{bower_components/foundation-sites/dist/js/foundation.js},
+	#INCLURE{bower_components/foundation-sites/dist/foundation.js}
+ })]
+]
+
+]
+
+/* Foundation app.js */
+#INCLURE{lib/foundation-6/js/app.js}
+
+function spip_foundation() {
+    // Support Ajax pour les reveal-modal
+    // Cela passe par une class .reveal-ajax
+    $(".reveal-ajax").on("click", function(e) {
+        // bloquer l'événement click
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Récupérer le lien ciblé par la requête ajax
+        var href = $(this).data("reveal-ajax");
+        // On a besoin de savoir sur quel modal il faut agir
+        var modal = $(this).data("toggle");
+
+        // Dans le cas ou la modal est vide sur toggle,
+        // on vérifie que ce n'est pas data-open qui est utilisé
+        if (!modal) {
+            modal = $(this).data("open");
+        }
+
+        // On charge la page dans la reveal
+
+        $("#" + modal).load(href, function() {
+            $(this).foundation("open");
+        });
+    });
+
+    // Invalider les tailles de toutes les map GIS quand on change de tab
+    $(".tabs").on("change.zf.tabs", function () {
+        $(".carte_gis").each(function () {
+            $(this).get(0).map.invalidateSize();
+        });
+    });
+
+    // Restaurer le deeplinking des tab Foundation (pour les version < 6.3.1)
+    // En attendant que la fonction soit de retour officiellement
+    var version = Foundation.version.split(".");
+    if (!(version[0] >= 6 && version[1] >= 3 && version[2] >= 1)) {
+        var link_tab = window.location.hash.substr(1);
+        if (link_tab) {
+            $("[data-tabs]")
+                .eq(0)
+                .foundation("selectTab", $("#" + link_tab));
+        }
+    }
+}
+
+spip_foundation();
+onAjaxLoad(function() {
+    spip_foundation();
+    // Restaurer les reveal modal après un chargement ajax
+    $(document).foundation();
+});
+
+[(#CHEMIN{javascript/foundation_perso.js.html}|oui)
+[(#PRODUIRE{fond=javascript/foundation_perso.js}|appliquer_filtre{supprimer_timestamp}|file_get_contents)]
+]
+
+[(#PLUGIN{crayons}|non)
+#FILTRE{minifier_js}]

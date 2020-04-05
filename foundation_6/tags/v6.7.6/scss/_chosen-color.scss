@@ -1,0 +1,108 @@
+$gradient: linear-gradient(
+  $white 20%,
+  darken($white, 5%) 50%,
+  darken($white, 7%) 52%,
+  darken($white, 8%) 100%
+);
+
+.chosen-container {
+  .chosen-drop {
+    background: $white;
+  }
+  .search-choice, .chosen-single{
+    .group-name{
+      color: $medium-gray;
+    }
+  }
+}
+
+.chosen-container-single{
+  .chosen-single {
+    background-color: $white;
+    background: $gradient;
+    background-clip: padding-box;
+    box-shadow: 0 0 3px $white inset, 0 1px 1px rgba($black,.1);
+    color: $black;
+  }
+  .chosen-default {
+    color: $black;
+  }
+  .chosen-search {
+    input[type="text"] {
+      border: 1px solid $medium-gray;
+    }
+  }
+}
+
+.chosen-container .chosen-results {
+  color: $black;
+  li {
+    &.disabled-result {
+      color: $light-gray;
+    }
+    &.highlighted {
+      background-color: $primary-color;
+      background-image: linear-gradient($primary-color 20%, darken($primary-color, 20) 90%);
+      color: $white;
+    }
+    &.no-results {
+      color: $dark-gray;
+      background: $white;
+    }
+  }
+}
+
+.chosen-container-multi{
+  .chosen-choices {
+    border: 1px solid $medium-gray;
+    background-color: $white;
+    background-image: linear-gradient($light-gray 1%, $white 15%);
+  }
+  .chosen-choices li {
+    &.search-field {
+      input[type="text"] {
+        color: $dark-gray;
+      }
+    }
+    &.search-choice {
+      border: 1px solid $light-gray;
+      background-color: $white;
+      background-image: $gradient;
+      box-shadow: 0 0 2px $white inset, 0 1px 0 rgba($black,.05);
+      color: $black;
+    }
+    &.search-choice-disabled {
+      border: 1px solid $medium-gray;
+      background-color: #e4e4e4;
+      background-image: $gradient;
+      color: $medium-gray;
+    }
+    &.search-choice-focus {
+      background: $medium-gray;
+    }
+  }
+  .chosen-drop .result-selected {
+    color: $medium-gray;
+  }
+}
+
+.chosen-container-active{
+  .chosen-single {
+    border: 1px solid $primary-color;
+    box-shadow: 0 0 5px rgba($black,.3);
+  }
+  &.chosen-with-drop{
+    .chosen-single {
+      border: 1px solid $medium-gray;
+      background-image: linear-gradient($light-gray 20%, $white 80%);
+      box-shadow: 0 1px 0 $white inset;
+    }
+  }
+  .chosen-choices {
+    border: 1px solid $primary-color;
+    box-shadow: 0 0 5px rgba($black,.3);
+    li.search-field input[type="text"] {
+      color: $black !important;
+    }
+  }
+}

@@ -1,0 +1,34 @@
+nom: '<:foundation_6:grille:>'
+logo: 'icones_barre/fi-layout.png'
+icone_barre: 'fi-layout.png'
+traiter: 'modele_grille_foundation'
+parametres:
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'modele'
+      defaut: 'grille'
+  -
+    saisie: 'input'
+    options:
+      nom: 'large-up'
+      label: '<:foundation_6:grille_large_up:>'
+      defaut: '4'
+  -
+    saisie: 'input'
+    options:
+      nom: 'medium-up'
+      label: '<:foundation_6:grille_medium_up:>'
+      defaut: '4'
+  -
+    saisie: 'input'
+    options:
+      nom: 'small-up'
+      label: '<:foundation_6:grille_small_up:>'
+      defaut: '2'
+  -
+    saisie: 'input'
+    options:
+      nom: 'class'
+      label: '<:foundation_6:modele_grille_class:>'
+      defaut: ''
