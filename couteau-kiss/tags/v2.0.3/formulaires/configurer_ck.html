@@ -1,0 +1,196 @@
+[(#REM)
+
+  Squelette #FORMULAIRE_CONFIGURER_CK
+  (c) 2010 Cedric Morin
+  Distribue sous licence GPL
+
+]
+<div class="formulaire_spip formulaire_editer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action},#FORM}
+	  <fieldset>
+			<legend><:ck:legend_site_public:></legend>
+			<div class="editer-groupe">
+				<div class="editer editer_dossier_squelettes obligatoire[ (#ENV**{erreurs}|table_valeur{dossier_squelettes}|oui)erreur]">
+					<label for="dossier_squelettes"><:ck:label_dossier_squelettes:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{dossier_squelettes})</span>
+					][<tt>(#ENV{_dossier_squelettes_sav,''}):</tt>]
+					<input type='text' class='text' name='dossier_squelettes' id='dossier_squelettes' value="#ENV{dossier_squelettes}" />
+					<p class="explication"><:ck:explication_dossier_squelettes:></p>
+				</div>
+				<div class="editer editer_options_typo[ (#ENV**{erreurs}|table_valeur{options_typo}|oui)erreur]">
+					<label><:ck:label_options_typo:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{options_typo})</span>
+					]
+					<div class="choix"><input type="checkbox" name="supprimer_numero" id="supprimer_numero" value="1"[(#ENV{supprimer_numero}|=={'1'}|oui)checked="checked"][(#EVAL{$GLOBALS}|table_valeur{spip_version_branche}|intval|<{3}|non)disabled="disabled"] /><label for="supprimer_numero"><:ck:label_supprimer_numero:></label></div>
+					<div class="choix"><input type="checkbox" name="toujours_paragrapher" id="toujours_paragrapher" value="1"[(#ENV{toujours_paragrapher}|=={'1'}|oui)checked="checked"] /><label for="toujours_paragrapher"><:ck:label_toujours_paragrapher:></label></div>
+					[(#EVAL{$GLOBALS}|table_valeur{spip_version_branche}|intval|<{3}|non)
+					<div class="choix"><input type="checkbox" name="no_autobr" id="no_autobr" value="1"[(#ENV{no_autobr}|=={'1'}|oui)checked="checked"] /><label for="no_autobr"><:ck:label_no_autobr:></label></div>
+					]
+				</div>
+				<div class="editer editer_introduction_suite [ (#ENV**{erreurs}|table_valeur{introduction_suite}|oui)erreur]">
+					<label><:ck:label_introduction_suite:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{introduction_suite})</span>
+					]<input type='text' class='text' name='introduction_suite' id='introduction_suite' value="#ENV{introduction_suite}" />
+					<p class="explication"><:ck:explication_introduction_suite:></p>
+				</div>
+				<div class="editer editer_options_skel[ (#ENV**{erreurs}|table_valeur{options_skel}|oui)erreur]">
+					<label><:ck:label_options_skel:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{options_skel})</span>
+					]
+					<div class="choix"><input type="checkbox" name="forcer_lang" id="forcer_lang" value="1"[(#ENV{forcer_lang}|=={'1'}|oui)checked="checked"] /><label for="forcer_lang"><:ck:label_forcer_lang:></label></div>
+					<div class="choix"><input type="checkbox" name="no_set_html_base" id="no_set_html_base" value="1"[(#ENV{no_set_html_base}|=={'1'}|oui)checked="checked"] /><label for="no_set_html_base"><:ck:label_no_set_html_base:></label></div>
+				</div>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend><:ck:legend_cache_controle:></legend>
+			<div class="editer-groupe">
+				<div class="editer editer_cache_strategie[ (#ENV**{erreurs}|table_valeur{cache_strategie}|oui)erreur]">
+					<label><:ck:label_cache_strategie:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{cache_strategie})</span>
+					]
+					<div class="choix"><input type="radio" name="cache_strategie" id="cache_strategie_jamais" value="-1"[(#ENV{cache_strategie}|=={-1}|oui)checked="checked"] /><label for="cache_strategie_jamais"><:ck:label_cache_strategie_jamais:></label></div>
+					<div class="choix"><input type="radio" name="cache_strategie" id="cache_strategie_permanent" value="0"[(#ENV{cache_strategie}|=={'0'}|oui)checked="checked"] /><label for="cache_strategie_permanent"><:ck:label_cache_strategie_permanent:></label></div>
+					<div class="choix"><input type="radio" name="cache_strategie" id="cache_strategie_normale" value=""[(#ENV{cache_strategie}|=={''}|oui)checked="checked"] /><label for="cache_strategie_normale"><:ck:label_cache_strategie_normale:></label></div>
+					<div class="choix derniere_modif_invalide"><input type="checkbox" name="derniere_modif_invalide" id="derniere_modif_invalide" value="1"[(#ENV{derniere_modif_invalide}|=={'1'}|oui)checked="checked"] /><label for="derniere_modif_invalide"><:ck:label_derniere_modif_invalide:></label></div>
+				</div>
+				[(#ENV{_no_quota_cache,0}|non)
+				<div class="editer editer_cache_taille obligatoire[ (#ENV**{erreurs}|table_valeur{cache_taille}|oui)erreur]">
+					<label><:ck:label_cache_taille:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{cache_taille})</span>
+					]<input type='text' class='text' name='cache_taille' id='cache_taille' value="#ENV{cache_taille}" />
+				</div>]
+				<div class="editer editer_cache_duree_defaut obligatoire[ (#ENV**{erreurs}|table_valeur{cache_duree}|oui)erreur]">
+					<label><:ck:label_cache_duree:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{cache_duree})</span>
+					]<input type='text' class='text' name='cache_duree' id='cache_duree' value="#ENV{cache_duree}" />
+				</div>
+				<div class="editer editer_cache_duree_recherche obligatoire[ (#ENV**{erreurs}|table_valeur{cache_duree_recherche}|oui)erreur]">
+					<label><:ck:label_cache_duree_recherche:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{cache_duree_recherche})</span>
+					]<input type='text' class='text' name='cache_duree_recherche' id='cache_duree_recherche' value="#ENV{cache_duree_recherche}" />
+				</div>
+			</div>
+		</fieldset>
+
+
+
+		<fieldset>
+			<legend><:ck:legend_image_documents:></legend>
+			<div class="editer-groupe">
+				<div class="editer editer_logo_seuils[ (#ENV**{erreurs}|table_valeur{logo_seuils}|oui)erreur]">
+					<label><:ck:label_logo_seuils:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo_seuils})</span>
+					]
+					<div class="choix">
+						<label for="logo_max_size"><:ck:label_max_size:></label>
+						<input type='text' class='text' name='logo_max_size' id='logo_max_size' value="#ENV{logo_max_size}" />
+					</div>
+					<div class="choix">
+						<label for="logo_max_width"><:ck:label_max_width:></label>
+						<input type='text' class='text' name='logo_max_width' id='logo_max_width' value="#ENV{logo_max_width}" />
+					</div>
+					<div class="choix">
+						<label for="logo_max_height"><:ck:label_max_height:></label>
+						<input type='text' class='text' name='logo_max_height' id='logo_max_height' value="#ENV{logo_max_height}" />
+					</div>
+				</div>
+				<div class="editer editer_imgs_seuils[ (#ENV**{erreurs}|table_valeur{imgs_seuils}|oui)erreur]">
+					<label><:ck:label_imgs_seuils:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{label_imgs_seuils})</span>
+					]
+					<div class="choix">
+						<label for="imgs_max_size"><:ck:label_max_size:></label>
+						<input type='text' class='text' name='imgs_max_size' id='imgs_max_size' value="#ENV{imgs_max_size}" />
+					</div>
+					<div class="choix">
+						<label for="imgs_max_width"><:ck:label_max_width:></label>
+						<input type='text' class='text' name='imgs_max_width' id='imgs_max_width' value="#ENV{imgs_max_width}" />
+					</div>
+					<div class="choix">
+						<label for="imgs_max_height"><:ck:label_max_height:></label>
+						<input type='text' class='text' name='imgs_max_height' id='imgs_max_height' value="#ENV{imgs_max_height}" />
+					</div>
+				</div>
+				<div class="editer editer_docs_seuils[ (#ENV**{erreurs}|table_valeur{docs_seuils}|oui)erreur]">
+					<label><:ck:label_docs_seuils:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{label_docs_seuils})</span>
+					]
+					<div class="choix">
+						<label for="docs_max_size"><:ck:label_max_size:></label>
+						<input type='text' class='text' name='docs_max_size' id='docs_max_size' value="#ENV{docs_max_size}" />
+					</div>
+				</div>
+				<div class="editer editer_image_seuil_document[ (#ENV**{erreurs}|table_valeur{image_seuil_document}|oui)erreur]">
+					<label><:ck:label_image_seuil_document:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{image_seuil_document})</span>
+					]<input type='text' class='text' name='image_seuil_document' id='image_seuil_document' value="#ENV{image_seuil_document}" />
+					<p class="explication"><:ck:explication_image_seuil_document:></p>
+				</div>
+			</div>
+		</fieldset>
+
+		<fieldset>
+			<legend><:ck:legend_espace_prive:></legend>
+			<div class="editer-groupe">
+				<div class="editer editer_longueur_login_mini obligatoire[ (#ENV**{erreurs}|table_valeur{longueur_login_mini}|oui)erreur]">
+					<label for="nom"><:ck:label_longueur_login_mini:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{longueur_login_mini})</span>
+					]<input type='text' class='text' name='longueur_login_mini' id='longueur_login_mini' value="#ENV{longueur_login_mini}" />
+				</div>
+				<div class="editer editer_nb_objets_tranches obligatoire[ (#ENV**{erreurs}|table_valeur{nb_objets_tranches}|oui)erreur]">
+					<label for="nom"><:ck:label_nb_objets_tranches:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nb_objets_tranches})</span>
+					]<input type='text' class='text' name='nb_objets_tranches' id='nb_objets_tranches' value="#ENV{nb_objets_tranches}" />
+				</div>
+				<div class="editer editer_options_ecrire_perfo[ (#ENV**{erreurs}|table_valeur{options_ecrire_perfo}|oui)erreur]">
+					<label><:ck:label_options_ecrire_perfo:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{options_ecrire_perfo})</span>
+					]
+					<div class="choix"><input type="checkbox" name="compacte_head_ecrire" id="compacte_head_ecrire" value="1"[(#ENV{compacte_head_ecrire}|=={'1'}|oui)checked="checked"] /><label for="compacte_head_ecrire"><:ck:label_compacte_head_ecrire:></label></div>
+				</div>
+				<div class="editer editer_options_ecrire_secu[ (#ENV**{erreurs}|table_valeur{options_ecrire_secu}|oui)erreur]">
+					<label><:ck:label_options_ecrire_secu:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{options_ecrire_secu})</span>
+					]
+					<div class="choix"><input type="checkbox" name="inhiber_javascript_ecrire" id="inhiber_javascript_ecrire" value="1"[(#ENV{inhiber_javascript_ecrire}|=={'1'}|oui)checked="checked"] /><label for="inhiber_javascript_ecrire"><:ck:label_inhiber_javascript_ecrire:></label></div>
+				</div>
+			</div>
+		</fieldset>
+
+
+	  </div>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>
+<script type="text/javascript">
+function actualiser_saisie_cache(){
+	if (jQuery('#cache_strategie_permanent').attr('checked')){
+		jQuery('li.editer_cache_duree_defaut:visible').slideUp('fast');
+		jQuery('li.editer_cache_strategie .derniere_modif_invalide:visible').slideUp('fast');
+		jQuery('li.editer_cache_taille:hidden').slideDown('fast');
+	}
+	else{
+		if (jQuery('#cache_strategie_jamais').attr('checked')){
+			jQuery('li.editer_cache_taille:visible,li.editer_cache_duree_defaut:visible').slideUp('fast');
+			jQuery('li.editer_cache_strategie .derniere_modif_invalide:visible').slideUp('fast');
+		}
+		else{
+			jQuery('li.editer_cache_taille:hidden,li.editer_cache_duree_defaut:hidden').slideDown('fast');
+			jQuery('li.editer_cache_strategie .derniere_modif_invalide:hidden').slideDown('fast');
+		}
+	}
+}
+
+jQuery(function(){actualiser_saisie_cache();jQuery('li.editer_cache_strategie input').change(actualiser_saisie_cache);});
+onAjaxLoad(function(){jQuery('li.editer_cache_strategie input').change(actualiser_saisie_cache);});
+</script>

@@ -1,0 +1,18 @@
+<paquet
+	prefix="ck"
+	categorie="maintenance"
+	version="2.0.3"
+	etat="stable"
+	compatibilite="[3.1.0;3.3.*]"
+	logo="prive/themes/spip/images/pocket-knife-64.png"
+	documentation="https://contrib.spip.net/Couteau-KISS"
+>
+
+	<nom>Couteau Kiss</nom>
+
+	<auteur>C&#233;dric MORIN</auteur>
+	<licence>GPL</licence>
+	<credit lien="https://www.flaticon.com/authors/srip">Icon made by srip from www.flaticon.com</credit>
+
+	<menu nom="configurer_ck" titre="ck:titre_page_couteau" parent="menu_configuration" icone="images/pocket-knife-16.png" />
+</paquet>
