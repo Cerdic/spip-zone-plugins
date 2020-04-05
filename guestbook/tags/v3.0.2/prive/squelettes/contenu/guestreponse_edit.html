@@ -1,0 +1,30 @@
+[(#ID_OBJET|oui)
+	[(#AUTORISER{modifier,guestreponse,#ID_GUESTREPONSE}|sinon_interdire_acces)]
+][(#ID_OBJET|non)
+	[(#AUTORISER{creer,guestreponse}|sinon_interdire_acces)]
+]
+ 
+#SET{redirect,#ENV{redirect}|sinon{#ID_GUESTREPONSE|?{#ID_GUESTREPONSE|generer_url_entite{guestreponse},#URL_ECRIRE{guestreponses}}}}
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#ID_GUESTREPONSE|oui)
+	[(#GET{redirect}|icone_verticale{Retour,guestreponse,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_GUESTREPONSE|?{<:guestreponse:icone_modifier_guestreponse:>,<:guestreponse:icone_creer_guestreponse:>})]
+		<h1>(#ENV{titre,#INFO_ID_GUESTREPONSE{guestreponse,#ID_GUESTREPONSE}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_GUESTREPONSE|generer_url_entite{guestreponse}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_GUESTREPONSE{#ENV{id_guestreponse,oui}, #GET{redirect}, #ENV{associer_objet}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>

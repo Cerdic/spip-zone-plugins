@@ -1,0 +1,39 @@
+[(#SET{defaut_tri,#ARRAY{
+	id_guestreponse,1, 
+	date,-1, 
+	id_guestreponse,1,
+	points,-1
+}})]<B_liste_guestreponses>
+#ANCRE_PAGINATION
+<div class="liste-objets guestreponses">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{guestreponse:info_1_guestreponse,guestreponse:info_nb_guestreponses}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class='id_guestreponse' scope='col'>[(#TRI{id_guestreponse,<:guestreponse:label_id_guestreponse:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class='id' scope='col'>[(#TRI{id_guestreponse,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_guestreponses(GUESTREPONSES){id_guestmessage?}{id_auteur?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num id_guestreponse},#GET{defaut_tri}}{par id_guestreponse}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{guestreponse-16.png}|balise_img)]</td>
+			<td class='statut'>[(#STATUT|puce_statut{guestreponse,#ID_GUESTREPONSE})]</td> 
+			<td class='id_guestreponse principale'>[(#LOGO_GUESTREPONSE|image_reduire{20,26})]<a href="[(#ID_GUESTREPONSE|generer_url_entite{guestreponse})]" title="<:info_numero_abbreviation|attribut_html:> #ID_GUESTREPONSE">[(#RANG). ]#ID_GUESTREPONSE</a></td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
+			<td class='id'>[(#AUTORISER{modifier,guestreponse,#ID_GUESTREPONSE}|?{
+				<a href="[(#URL_ECRIRE{guestreponse_edit,id_guestreponse=#ID_GUESTREPONSE})]">#ID_GUESTREPONSE</a>,
+				#ID_GUESTREPONSE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_guestreponses>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_guestreponses>[
+<div class="liste-objets guestreponses caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_guestreponses>

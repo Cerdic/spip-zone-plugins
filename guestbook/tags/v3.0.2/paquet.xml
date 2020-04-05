@@ -1,0 +1,37 @@
+<paquet
+	prefix="guestbook"
+	categorie="communication"
+	version="3.0.2"
+	etat="test"
+	compatibilite="[3.0.5;3.0.*]"
+	logo=""
+	documentation=""
+	schema="3.0.0"
+>
+	<nom>Guestbook</nom>
+
+	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs --> 
+	<auteur>Yohann Prigent (potter64), Stephane Santon</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
+	
+	<!-- nospam 2.0 préfixe compter_caracteres_utiles par nospam_ mais n'est compatible qu'avec spip 3.1 -->
+	<utilise nom="nospam" compatibilite="[1.0.0;1.*.*]" />
+	
+
+	<pipeline nom="autoriser" inclure="guestbook_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/guestbook.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/guestbook.php" /> 
+	<pipeline nom="affiche_milieu" inclure="guestbook_pipelines.php" /> 
+	<pipeline nom="affiche_auteurs_interventions" inclure="guestbook_pipelines.php" /> 
+
+	<pipeline nom="insert_head_css" inclure="guestbook_pipelines.php" />
+
+	<menu nom="guestmessages" titre="guestmessage:titre_guestmessages" parent="menu_edition" icone="images/guestmessage-16.png" action="guestmessages" /> 
+	<menu nom="guestmessage_creer" titre="guestmessage:icone_creer_guestmessage" parent="outils_rapides" icone="images/guestmessage-new-16.png" action="guestmessage_edit" parametres="new=oui" /> 
+	<menu nom="guestreponses" titre="guestreponse:titre_guestreponses" parent="menu_edition" icone="images/guestreponse-16.png" action="guestreponses" /> 
+	<menu nom="guestreponse_creer" titre="guestreponse:icone_creer_guestreponse" parent="outils_rapides" icone="images/guestreponse-new-16.png" action="guestreponse_edit" parametres="new=oui" />
+</paquet>

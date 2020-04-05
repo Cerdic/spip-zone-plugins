@@ -1,0 +1,47 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_guestmessage,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_guestmessage' value='#ENV{id_guestmessage}' />
+		<ul>
+
+			[(#SAISIE{textarea, guestmessage,
+				label=<:guestmessage:label_guestmessage:>,
+				explication=<:guestmessage:explication_guestmessage:> })]
+
+			[(#SAISIE{input, email,
+				label=<:guestmessage:label_email:>})]
+
+			[(#SAISIE{input, nom,
+				label=<:guestmessage:label_nom:>})]
+
+			[(#SAISIE{input, prenom,
+				label=<:guestmessage:label_prenom:>})]
+
+			[(#SAISIE{input, pseudo,
+				label=<:guestmessage:label_pseudo:>})]
+
+			[(#SAISIE{input, ville,
+				label=<:guestmessage:label_ville:>})]
+
+			[(#SAISIE{input, ip,
+				label=<:guestmessage:label_ip:>,
+				explication=<:guestmessage:explication_ip:> })]
+
+			[(#SAISIE{input, note,
+				label=<:guestmessage:label_note:>,
+				explication=<:guestmessage:explication_note:> })]
+
+			[(#SAISIE{date, date,
+				label=<:guestmessage:label_date:>})]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

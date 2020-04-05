@@ -1,0 +1,9 @@
+[(#ENV{form_sign}|non)
+<div class='lien_guestbooksign'>
+	<a href='[(#SELF|parametre_url{form_sign,oui})]' class='ajax'><:guestbook:texte_laisser_message:></a>
+</div>
+]
+[(#ENV{form_sign}|oui)
+<h2><:guestbook:titre_formulaire_livredor:></h2>
+#FORMULAIRE_GUESTBOOKSIGN
+]

@@ -1,0 +1,11 @@
+[(#ENV{form_pos}|=={haut}|oui)
+	<INCLURE{fond=inc/inc-guestbooksign,env,ajax}>
+]
+<h2><:guestbook:titre_messages_livredor:></h2>
+<div class='ajax'>
+	<INCLURE{fond=inc/inc-guestbookmessages,env,ajax}>
+</div>
+
+[(#ENV{form_pos}|!={non}|et{#ENV{form_pos}|!={haut}}|oui)
+	<INCLURE{fond=inc/inc-guestbooksign,env,ajax}>
+]

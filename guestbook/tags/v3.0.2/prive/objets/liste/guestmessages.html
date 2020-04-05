@@ -1,0 +1,118 @@
+	#SET{couleurs,#ARRAY{'prop', '#f1dec0', 'publie', '#cce7b9', 'refuse', '#e7a1a1', 'poubelle', '#888'}}
+	<table class='guestmessage_legende'>
+		<tr>
+			<td class='guestmessage_publie'><:guestmessage:texte_statut_publie:></td>
+			<td class='guestmessage_prop'><:guestmessage:texte_statut_propose:></td>
+			<td class='guestmessage_refuse'><:guestmessage:texte_statut_refuse:></td>
+			<td class='guestmessage_poubelle'><:guestmessage:texte_statut_poubelle:></td>
+		</tr>
+	</table>
+
+	[(#REM) Calcul des moyennes ]
+	<BOUCLE_moyenne(GUESTMESSAGES){tout}{statut IN #LISTE{prop,publie}}>
+		[(#STATUT|=={publie}|oui)
+			#SET{moyenne_publie, #GET{moyenne_publie}|plus{#NOTE}}
+			#SET{nombre_publie, #GET{nombre_publie}|plus{1}}
+		]
+		#SET{moyenne_tous, #GET{moyenne_tous}|plus{#NOTE}}
+	</BOUCLE_moyenne>
+		#SET{moyenne_publie, #GET{moyenne_publie}|div{#GET{nombre_publie}}}
+		#SET{moyenne_tous, #GET{moyenne_tous}|div{#TOTAL_BOUCLE}}
+	</B_moyenne>
+
+[(#SET{defaut_tri,#ARRAY{
+	pseudo,1, 
+	date,-1, 
+	id_guestmessage,1,
+	points,-1
+}})]
+<B_liste_guestmessages>
+	[(#GET{nombre_publie}|>={1}|oui)
+		[<:guestmessage:texte_moyenne_publie:> : <b>(#GET{moyenne_publie}|round{2})</b><br />]	]
+	[<:guestmessage:texte_moyenne_tous:> : <b>(#GET{moyenne_tous}|round{2})</b>]
+	[(#GET{nombre_publie}|<{#GRAND_TOTAL}|oui) #SET{total_publie, #GET{nombre_publie}}]
+	[<h2>(#GRAND_TOTAL|=={0}|oui)
+		<:guestmessage:aucun_message_livre:></h2>]
+	[<h2>(#GRAND_TOTAL|=={1}|oui)
+		<:guestmessage:un_message_livre:></h2>]
+	[<h2>(#GRAND_TOTAL|>{1}|oui)
+		#GRAND_TOTAL <:guestmessage:texte_nombre_messages_livre:>
+		[, <:guestbook:dont:> (#GET{total_publie})  [(#GET{total_publie}|>{1}|?{<:guestbook:publies:>,<:guestbook:publie:>})]]</h2>]
+
+#ANCRE_PAGINATION
+<div class="liste-objets guestmessages">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{guestmessage:info_1_guestmessage,guestmessage:info_nb_guestmessages}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_guestmessage,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class='note' scope='col'>[(#TRI{note,<:guestmessage:label_note:>,ajax})]</th>
+			<th class='pseudo' scope='col'>[(#TRI{pseudo,<:guestmessage:label_pseudo:>,ajax})]</th>
+			<th class='nom' scope='col'>[(#TRI{nom,<:guestmessage:label_nom:>,ajax})]</th>
+			<th class='prenom' scope='col'>[(#TRI{prenom,<:guestmessage:label_prenom:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='ville' scope='col'>[(#TRI{ville,<:guestmessage:label_ville:>,ajax})]</th>
+			<th class='statut' scope='col'><:guestbook:statut:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_guestmessages(GUESTMESSAGES){id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num pseudo},#GET{defaut_tri}}{par pseudo}{pagination #ENV{nb,10}}>
+		<tr class='guestmessage_#STATUT guestsuivant'>
+			<td class='statut' rowspan='2'>[(#STATUT|puce_statut{guestmessage,#ID_GUESTMESSAGE})]</td>
+			<td class='id'>[(#AUTORISER{modifier,guestmessage,#ID_GUESTMESSAGE}|?{
+				<a href="[(#URL_ECRIRE{guestmessage_edit,id_guestmessage=#ID_GUESTMESSAGE})]">#ID_GUESTMESSAGE</a>,
+				#ID_GUESTMESSAGE
+			})]</td>
+			<td class='note principale'>#NOTE</td>
+			<td class='pseudo principale'>#PSEUDO</td>
+			<td class='nom principale'>#NOM</td>
+			<td class='prenom principale'>#PRENOM</td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
+			<td class='ville principale'>#VILLE</td>
+			<td class='statut principale' rowspan='2'>
+				[(#STATUT|=={prop}|non)
+					<a class='ajax' href="#URL_ACTION_AUTEUR{'instituer_guestbook',#ID_GUESTMESSAGE-prop, #SELF|ancre_url{guestmessage#ID_GUESTMESSAGE}}">
+						<:guestmessage:action_proposer_message:>
+					</a>]
+				[(#STATUT|=={publie}|non)
+					<a class='ajax' href="#URL_ACTION_AUTEUR{'instituer_guestbook',#ID_GUESTMESSAGE-publie, #SELF|ancre_url{guestmessage#ID_GUESTMESSAGE}}">
+						<:guestmessage:action_publier_message:>
+					</a>]
+				[(#STATUT|=={refuse}|non)
+					<a class='ajax' href="#URL_ACTION_AUTEUR{'instituer_guestbook',#ID_GUESTMESSAGE-refuse, #SELF|ancre_url{guestmessage#ID_GUESTMESSAGE}}">
+						<:guestmessage:action_refuser_message:>
+					</a>]
+				[(#STATUT|=={refuse}|oui)
+					<a class='ajax' href="#URL_ACTION_AUTEUR{'instituer_guestbook',#ID_GUESTMESSAGE-poubelle, #SELF|ancre_url{guestmessage#ID_GUESTMESSAGE}}">
+						<:guestmessage:action_supprimer_message:>
+					</a>]
+				[(#STATUT|=={refuse}|non)
+					<br /><br />
+					<a href="[(#URL_ECRIRE{guestreponse_edit,new=oui&id_guestmessage=#ID_GUESTMESSAGE})]">
+						<strong><:guestmessage:lien_repondre_message:></strong>
+					</a>]
+			</td>
+		</tr>
+		<tr class='guestmessage_#STATUT'>
+			<td class='guestmessage' colspan='2'><i><:guestmessage:label_guestmessage:>&nbsp;:</i></td>
+			<td class='guestmessage principale' colspan='5'>#GUESTMESSAGE</td>
+		</tr>
+		
+		<BOUCLE_rep(GUESTREPONSES auteurs){tout}{id_guestmessage}{par statut,date}>
+		<tr class='guestmessage_#_liste_guestmessages:STATUT'>
+			<td class='statut principale'>R&nbsp;:</td>
+			<td class='guestreponse principale' colspan='2'>[<i>[(#STATUT|puce_statut{guestreponse,#ID_GUESTREPONSE})]&nbsp;(#NOM)</i>]</td>
+			<td class='guestreponse principale' colspan='5'><em>#GUESTREPONSE</em></td>
+			<td class='guestreponse principale'><a href="[(#URL_ECRIRE{guestreponse_edit,id_guestreponse=#ID_GUESTREPONSE})]">Editer</a></td>
+		</tr>
+		</BOUCLE_rep>
+
+	</BOUCLE_liste_guestmessages>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_guestmessages>[
+<div class="liste-objets guestmessages caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_guestmessages>

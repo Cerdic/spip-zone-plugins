@@ -1,0 +1,57 @@
+[(#REM)
+
+    Ce squelette definit les styles de l'espace prive
+
+    Note: l'entete "Vary:" sert a repousser l'entete par
+    defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+    genant en cas de "rotation du cookie de session" apres
+    un changement d'IP (effet de clignotement).
+
+    ATTENTION: il faut absolument le charset sinon Firefox croit que
+    c'est du text/html !
+    <style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+/* Styles specifiques au plugin GuestBook */
+
+.guestmessage_legende {
+	/* width: 20%; */
+	margin: 10px auto;
+}
+.guestmessage_legende td {
+	text-align: center;
+}
+.guestmessages {
+}
+.liste-objets tr.guestsuivant {
+ border-top: 2px solid #fff;
+}
+.liste-objets tbody tr td {
+	background-color: transparent;
+}
+.liste-objets tbody tr td.guestmessage {
+	background-color: #fff;
+}
+.liste-objets tbody tr td.guestreponse {
+	background-color: #EEE;
+}
+
+.guestmessage_prop, .liste-objets tr.guestmessage_prop {
+	background-color: #f1dec0;
+}
+.guestmessage_publie, .liste-objets tr.guestmessage_publie {
+	background-color: #cce7b9;
+}
+.guestmessage_refuse, .liste-objets tr.guestmessage_refuse {
+	background-color: #e7a1a1;
+}
+.guestmessage_poubelle, .liste-objets tr.guestmessage_poubelle {
+	background-color: #888;
+}
+
+.d, .note, .statut {
+	text-align: center;
+}

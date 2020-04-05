@@ -1,0 +1,42 @@
+<B_message>
+<div class='liste guestmessages'>
+	[(#ENV{selection}|=={pagination}|oui) #ANCRE_PAGINATION]
+	[<p class="pagination">(#AVELINE_PAGINATION{'debut'})</p>]
+	<ul class='liste-items guestbookmessages'>
+<BOUCLE_message(GUESTMESSAGES){tri #ENV{tri,date},#ENV{senstri,-1}}{aveline_pagination}{aveline_exclure_objet_encours}{pagination #ENV{pas_pagination,10}}>
+		<li class='item hentry'>
+			<h2>
+			  [(#ENV{afficher_pseudo}|oui)
+				  [<span class="#EDIT{pseudo}">(#PSEUDO)</span>]]
+			  [(#ENV{afficher_prenom}|oui)
+					[: <span class="#EDIT{prenom}">(#PRENOM)</span>]]
+			  [(#ENV{afficher_nom}|oui)
+					[<span class="#EDIT{nom}">(#NOM)</span> ]]
+			  [(#ENV{afficher_ville}|oui)
+					[ (<span class="#EDIT{ville}">(#VILLE)</span>)]]
+			  [(#ENV{afficher_date}|oui)
+					[ - <span class="#EDIT{date}">(#DATE|affdate_court)</span>]]
+			  [(#ENV{afficher_note}|oui)
+	        [:: <span class="#EDIT{note}">(#NOTE) /10</span>]]
+			</h2>
+			[<div class="[(#EDIT{guestmessage}) ]texte">(#GUESTMESSAGE)</div>]
+		<B_rep>
+			#ANCRE_PAGINATION
+			<ul>
+		<BOUCLE_rep(GUESTREPONSES auteurs){si #ENV{afficher_reponses}|oui}{id_guestmessage}{par date}{pagination #ENV{pagin_guestreponses,5}}>
+		    <li>
+						[<i>(#NOM)</i>] : [<em>(#GUESTREPONSE)</em>]
+				</li>
+		</BOUCLE_rep>
+		  </ul>
+			<div class='pagination'>#PAGINATION</div>
+		</B_rep>
+		</li>
+</BOUCLE_message>
+	</ul>
+	[<p class="pagination">(#AVELINE_PAGINATION{'fin'})</p>]
+	[<p class="pagination choix_tri">(#AVELINE_CHOIX_TRI{'article','fin'})</p>]
+</div>
+</B_message>
+ <:guestbook:texte_aucun_message_publie:>
+<//B_message>

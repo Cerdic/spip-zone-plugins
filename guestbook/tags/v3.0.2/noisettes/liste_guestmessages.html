@@ -1,0 +1,4 @@
+[(#SET{titre,[(#ENV{titre_liste}|=={titre_perso}|?{[(#ENV**{titre_liste_perso}|typo)],[(#ENV{titre_liste}|_T)]})]})]
+[(#ENV{afficher_titre_liste}|oui)[<h2 class="h2">(#GET{titre})[ ((#ENV{archives}|affdate|sinon{#ENV{archives}}))]</h2>]]
+
+<INCLURE{fond=inc/inc-guestbookmessages,env}>

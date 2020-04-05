@@ -1,0 +1,63 @@
+<div class='formulaire_spip formulaire_#FORM formulaire_#FORM-nouveau ajax'>
+	[<p class="reponse_formulaire reponse_formulaire_ok message_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur message_erreur">(#ENV*{message_erreur})</p>]
+
+[(#EDITABLE|oui)
+	<form action='#ENV{action}' method='post'>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<fieldset>
+		<legend><:guestbook:infos_perso:></legend>
+		<p><:guestbook:action_saisir_infos_perso:></p>
+		<ul>
+			[(#SAISIE{input, email,
+				label=<:guestmessage:label_email:>,
+				obligatoire=oui})]
+
+			[(#SAISIE{input, ville,
+				label=<:guestmessage:label_ville:>,
+				obligatoire=oui})]
+
+			[(#SAISIE{input, pseudo,
+				label=<:guestmessage:label_pseudo:>,
+				obligatoire=oui})]
+
+			[(#SAISIE{input, nom,
+				label=<:guestmessage:label_nom:>})]
+
+			[(#SAISIE{input, prenom,
+				label=<:guestmessage:label_prenom:>})]
+
+			</ul>
+	</fieldset>
+	<fieldset>
+		<legend><:guestbook:note_message:></legend>
+		<ul>
+			<li class="note [(#ENV**{erreurs}|table_valeur{note-erreur})]">
+				<label for="note"><:guestbook:note:> <em><:info_obligatoire_02:></em></label>
+				<select id="note" name="note">
+					<option value="10"[ (#ENV{note}|=={10}|oui)selected="selected"]>10</option>
+					<option value="9"[ (#ENV{note}|=={9}|oui)selected="selected"]>9</option>
+					<option value="8"[ (#ENV{note}|=={8}|oui)selected="selected"]>8</option>
+					<option value="7"[ (#ENV{note}|=={7}|oui)selected="selected"]>7</option>
+					<option value="6"[ (#ENV{note}|=={6}|oui)selected="selected"]>6</option>
+					<option value="5"[ (#ENV{note}|=={5}|oui)selected="selected"]>5</option>
+					<option value="4"[ (#ENV{note}|=={4}|oui)selected="selected"]>4</option>
+					<option value="3"[ (#ENV{note}|=={3}|oui)selected="selected"]>3</option>
+					<option value="2"[ (#ENV{note}|=={2}|oui)selected="selected"]>2</option>
+					<option value="1"[ (#ENV{note}|=={1}|oui)selected="selected"]>1</option>
+					<option value="0"[ (#ENV{note}|=={0}|oui)selected="selected"]>0</option>
+				</select>
+			</li>
+			
+			[(#SAISIE{textarea, guestmessage,
+				label=<:guestmessage:label_guestmessage:>,
+				explication=<:guestmessage:explication_guestmessage:> })]
+		</ul>
+	</fieldset>
+	
+	<p class="boutons">
+		<input type="submit" class="submit" value="<:guestbook:poster:>" />
+	</p>
+</form>]
+
+</div>

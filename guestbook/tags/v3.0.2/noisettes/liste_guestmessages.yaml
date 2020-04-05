@@ -1,0 +1,136 @@
+nom: '<:guestbook:nom_liste_guestmessages:>'
+description: '<:aveline:description_liste_guestmessages:>'
+icon: 'guestbook-24.png'
+necessite:
+  - 'aveline'
+parametres:
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'afficher_pseudo'
+      label: '<:guestbook:label_afficher_pseudo:>'
+      defaut: 'on'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'afficher_prenom'
+      label: '<:guestbook:label_afficher_prenom:>'
+      defaut: 'on'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'afficher_nom'
+      label: '<:guestbook:label_afficher_nom:>'
+      defaut: 'on'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'afficher_ville'
+      label: '<:guestbook:label_afficher_ville:>'
+      defaut: 'on'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'afficher_date'
+      label: '<:guestbook:label_afficher_date:>'
+      defaut: 'on'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'afficher_note'
+      label: '<:guestbook:label_afficher_note:>'
+      defaut: 'on'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'afficher_reponses'
+      label: '<:guestbook:label_afficher_reponses:>'
+      defaut: ''
+  -
+    saisie: 'selection_selon_plugin'
+    options:
+      nom: 'tri'
+      label: '<:aveline:label_tri:>'
+      defaut: 'date'
+      cacher_option_intro: 'oui'
+      datas-necessite:
+        moyenne: 'notation'
+      datas:
+        titre: '<:aveline:item_titre:>'
+        date: '<:aveline:item_date:>'
+        compteur_forum: '<:aveline:item_nbre_commentaires:>'
+        moyenne: '<:aveline:item_note:>'
+        hasard: '<:aveline:item_hasard:>'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'senstri'
+      label: '<:aveline:label_senstri:>'
+      defaut: 'inverse'
+      cacher_option_intro: 'oui'
+      datas:
+        '': '<:aveline:item_ascendant:>'
+        inverse: '<:aveline:item_descendant:>'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'selection'
+      label: '<:aveline:label_selection:>'
+      defaut: 'pagination'
+      cacher_option_intro: 'oui'
+      datas:
+        tout: '<:aveline:item_tout:>'
+        limite: '<:aveline:item_limite:>'
+        pagination: '<:aveline:item_pagination:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'limite'
+      label: '<:aveline:label_limite:>'
+      defaut: 10
+      afficher_si: '@selection@ == "limite"'
+    verifier:
+      type: 'entier'
+      options:
+        min: 1
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'si_pagination'
+      label: '<:aveline:label_si_pagination:>'
+      afficher_si: '@selection@ == "pagination"'
+    saisies:
+      -
+        saisie: 'input'
+        options:
+          nom: 'pas_pagination'
+          label: '<:aveline:label_pas_pagination:>'
+          defaut: 5
+        verifier:
+          type: 'entier'
+          options:
+            min: 1
+      -
+        saisie: 'selection'
+        options:
+          nom: 'position_pagination'
+          label: '<:aveline:label_position_pagination:>'
+          defaut: 'fin'
+          cacher_option_intro: 'oui'
+          datas:
+            debut: '<:aveline:item_debut:>'
+            fin: '<:aveline:item_fin:>'
+            deux: '<:aveline:item_deux:>'
+      -
+        saisie: 'selection'
+        options:
+          nom: 'style_pagination'
+          label: '<:aveline:label_style_pagination:>'
+          defaut: ''
+          cacher_option_intro: 'oui'
+          datas:
+            '': '<:aveline:item_pagination_defaut:>'
+            precedent_suivant: '<:aveline:item_pagination_precedent_suivant:>'
+            page: '<:aveline:item_pagination_page:>'
+            page_precedent_suivant: '<:aveline:item_pagination_page_precedent_suivant:>'
+            simple: '<:aveline:item_pagination_simple:>'
