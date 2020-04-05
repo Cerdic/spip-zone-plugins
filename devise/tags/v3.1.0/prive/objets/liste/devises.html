@@ -1,0 +1,32 @@
+[(#REM)
+
+	Liste des devises
+
+	Nb : il ne s'agit pas d'un objet SPIP
+
+]
+<B_liste_devises>
+#ANCRE_PAGINATION
+<div class="liste-objets devises">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{devise:info_1_devise,devise:info_nb_devises}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='code' scope='col'><:devise:champ_code_label:></th>
+			<th class='nom' scope='col'><:devise:champ_nom_label:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_devises(DATA) {source table, #VAL{'%N'}|devises_codes} {pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='code principale'><code>#CLE</code></td>
+			<td class='nom'>#VALEUR</td>
+		</tr>
+	</BOUCLE_liste_devises>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_devises>[
+<div class="liste-objets pays caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_devises>
