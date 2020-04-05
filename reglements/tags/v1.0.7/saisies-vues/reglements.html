@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_reglements_selectionnes>
+	<ul>
+	<BOUCLE_reglements_selectionnes(REGLEMENTS){id_reglement IN #GET*{valeur}}
+		{par num , }{tout}>
+		<li class="choix"># (#ID_REGLEMENT)</li>
+	</BOUCLE_reglements_selectionnes>
+	</ul>
+	</B_reglements_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_reglements_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_reglement_selectionne(REGLEMENTS){id_reglement=#ENV{valeur}}
+		{par num , }{tout}>
+	  	<p># (#ID_REGLEMENT)</p>
+	</BOUCLE_reglement_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_reglement_selectionne>
+<//B_test_multiple>

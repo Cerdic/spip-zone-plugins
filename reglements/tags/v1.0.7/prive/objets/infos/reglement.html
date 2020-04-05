@@ -1,0 +1,7 @@
+<BOUCLE_reglement(REGLEMENTS){id_reglement=#ENV{id}}>
+<div class='infos'>
+[(#SET{texte_objet,<:reglement:titre_reglement:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_REGLEMENT</p></div>
+
+</div>
+</BOUCLE_reglement>

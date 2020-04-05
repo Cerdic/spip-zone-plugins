@@ -1,0 +1,23 @@
+<BOUCLE_reglement(REGLEMENTS){id_reglement}>
+
+[<div class="champ contenu_id_facture[ (#ID_FACTURE*|strlen|?{'',vide})]">
+	<label><:reglement:label_id_facture:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{id_facture} id_facture'>(#ID_FACTURE)</span>
+</div>]
+
+[<div class="champ contenu_date_reglement[ (#DATE_REGLEMENT*|strlen|?{'',vide})]">
+	<label><:reglement:label_date_reglement:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{date_reglement} date_reglement'>(#DATE_REGLEMENT)</span>
+</div>]
+
+[<div class="champ contenu_montant[ (#MONTANT*|strlen|?{'',vide})]">
+	<label><:reglement:label_montant:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{montant} montant'>(#MONTANT)</span>
+</div>]
+
+[<div class="champ contenu_commentaires[ (#COMMENTAIRES*|strlen|?{'',vide})]">
+	<label><:reglement:label_commentaires:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{commentaires} commentaires'>(#COMMENTAIRES)</span>
+</div>]
+
+</BOUCLE_reglement>

@@ -1,0 +1,28 @@
+<paquet
+	prefix="reglements"
+	categorie="divers"
+	version="1.0.7"
+	etat="dev"
+	compatibilite="[3.0.7;3.0.*]"
+	logo="prive/themes/spip/images/reglements-64.png"
+	documentation=""
+	schema="1.0.0" 
+>
+
+	<nom>Règlements</nom>
+
+	<auteur lien="http://www.cym.fr/">Cyril MARION</auteur>
+	<auteur lien="http://www.teddypayet.com/">Teddy Payet</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="saisies" compatibilite="[3.23.2;]" /> 
+    <necessite nom="factures" compatibilite="[1.0.14;]" />
+
+	<pipeline nom="autoriser" inclure="reglements_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/reglements.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/reglements.php" /> 
+
+	<menu nom="reglements" titre="reglement:titre_reglements" parent="menu_edition" icone="images/reglement-16.png" action="reglements" /> 
+	<menu nom="reglement_creer" titre="reglement:icone_creer_reglement" parent="outils_rapides" icone="images/reglement-new-16.png" action="reglement_edit" parametres="new=oui" /> 
+</paquet>
