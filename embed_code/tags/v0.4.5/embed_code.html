@@ -1,0 +1,16 @@
+#HTTP_HEADER{Content-Type: text/html}
+<BOUCLE_document(DOCUMENTS){si #ENV{objet}|non}{id_document=#ENV{id_objet,#ENV{id_document}}}{mode IN document,image}>
+[(#CHEMIN{embed/#EXTENSION.html}|oui)
+[(#SET{done,oui})]
+#INCLURE{fond=embed/#EXTENSION,id_document=#ENV{id_objet,#ENV{id_document}},env}]
+[(#GET{done,non}|!={oui}|et{#CHEMIN{embed/#MEDIA.html}|oui}|oui)
+[(#SET{done,oui})]
+#INCLURE{fond=embed/#MEDIA,id_document=#ENV{id_objet,#ENV{id_document}},env}]
+[(#GET{done,non}|!={oui}|oui)
+[(#SET{done,oui})]
+#INCLURE{fond=embed/document,id_document=#ENV{id_objet,#ENV{id_document}},env}]
+</BOUCLE_document>
+</B_document>
+#INCLURE{fond=embed/#ENV{objet,document},env}
+<//B_document>
+#FILTRE{trim}
