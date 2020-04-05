@@ -1,0 +1,20 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:elasticsearch:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="_meta_casier" value="elasticsearch_config" />	
+		[(#CONFIG{elasticsearch_config/nom_index}?
+		{#SAISIE{input,url_serveur,label=URL et port du serveur Elasticsearch,obligatoire=oui,explication="Vous devez supprimer l'index pour changer de serveur",disable=oui}
+		,
+		[(#SAISIE{input,url_serveur,label=URL et port du serveur Elasticsearch,obligatoire=oui,explication="saisir sous la forme http://urlduserveur.tld:9200"})]
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+		})]
+	</div>
+	</form>
+</div>

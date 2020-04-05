@@ -1,0 +1,28 @@
+<paquet
+	prefix="elasticsearch"
+	categorie="navigation"
+	version="2.0.3"
+	etat="dev"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/elasticsearch-64.png"
+	documentation="https://contrib.spip.net/Elasticsearch"
+	schema="1.0.1" 
+>
+
+	<nom>Elasticsearch</nom>
+
+	<auteur>Guy Cesaro</auteur>
+	<auteur>Joachim Guedj</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="phpcurl" compatibilite="[1.0.0;]" />
+
+	<utilise nom="extrairedoc" compatibilite="[1.2.2;]" />
+
+	<pipeline nom="post_edition" inclure="elasticsearch_pipelines.php" />
+	<pipeline nom="post_edition_lien" inclure="elasticsearch_pipelines.php" />
+	<pipeline nom="boite_infos" inclure="elasticsearch_pipelines.php" />
+	<pipeline nom="autoriser" inclure="elasticsearch_autorisations.php" /> 
+</paquet>

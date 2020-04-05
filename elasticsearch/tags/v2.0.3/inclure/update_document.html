@@ -1,0 +1,37 @@
+#CACHE{0}
+<BOUCLE_doc(DOCUMENTS documents_liens){statut=publie}{id_document=#ENV{id_document,#ENV{id_objet}}}>
+#SET{put,''}
+<BOUCLE_documents_liens(documents_liens){id_document}>
+[(#OBJET|objet_test_si_publie{#ID_OBJET}|=={1}|oui)#SET{put,' '}]
+</BOUCLE_documents_liens>
+[(#EXTENSION|in_array{#LISTE{doc,docm,docx,html,odp,odt,ots,pdf,pps,ppsx,ppt,pptx,txt,xml,xls,xlsm,xlsx}}|non)
+#SET{put,''}
+]
+[(#GET{put}|oui)
+
+#SET{url,#CONFIG{elasticsearch_config/url_serveur}/#CONFIG{elasticsearch_config/nom_index_ecriture}/document/#ID_DOCUMENT/_update}
+
+[(#SET{title,[(#TITRE)]})]
+[(#SET{json,[(#ARRAY{
+document_logo,[(#LOGO_DOCUMENT{auto}|extraire_attribut{src})],
+document_extension, #EXTENSION,
+document_url, [(#URL_DOCUMENT)],
+date, #DATE})]})]
+
+[(#GET{title}|oui)
+[(#SET{json,#GET{json}|array_merge{#ARRAY{document_title, #TITRE}}})]]
+#SET{json,#ARRAY{doc,#GET{json}}}
+]
+[(#GET{put}|non)
+	#SET{url,#CONFIG{elasticsearch_config/url_serveur}/#CONFIG{elasticsearch_config/nom_index_ecriture}/document/#ID_DOCUMENT}
+]
+</BOUCLE_doc>
+[(#GET{put}|oui)
+	[(#SET{json,#GET{json}|json_encode})]
+	[(#GET{url}|phpcurl_post{#GET{json}})]
+]
+[(#GET{put}|non)
+	[(#GET{url}|phpcurl_delete)]
+]
+</B_doc>
+#GET{json}

@@ -1,0 +1,30 @@
+#CACHE{0}
+<BOUCLE_doc(DOCUMENTS documents_liens){statut=publie}{extension IN #LISTE{doc,docm,docx,html,odp,odt,ots,pdf,pps,ppsx,ppt,pptx,txt,xml,xls,xlsm,xlsx}}{id_document=#ENV{id_document,#ENV{id_objet}}}>
+#SET{put,''}
+<BOUCLE_documents_liens(documents_liens){id_document}>
+[(#OBJET|objet_test_si_publie{#ID_OBJET}|oui)#SET{put,' '}]
+</BOUCLE_documents_liens>
+[(#GET{put}|oui)
+#SET{url,#CONFIG{elasticsearch_config/url_serveur}/#CONFIG{elasticsearch_config/nom_index_ecriture}/document/#ID_DOCUMENT}
+#SET{doc,#ARRAY{id_document, #ID_DOCUMENT, fichier, #FICHIER}}
+[(#SET{doc,[(#GET{doc}|extraire_un_document)]})]
+
+[(#REM) si on n'arrive pas à récupérer le contenu du document, inutile d'indexer le document]
+[(#GET{doc/contenu}|oui)
+[(#REM) si le titre est renseigné en base, on le prend, sinon le titre extrait par tika, sinon le nom du fichier]
+#SET{title,#TITRE|sinon{#GET{doc/title}|sinon{#FICHIER|basename}}}
+[(#SET{json,[(#ARRAY{
+document_logo,[(#LOGO_DOCUMENT{auto}|extraire_attribut{src})],
+document_extension, #EXTENSION,
+document_url, [(#URL_DOCUMENT)],
+date, #DATE,
+document_title,[(#GET{title}|textebrut)],
+document_body,[(#GET{doc/contenu})][ (#DESCRIPTIF|textebrut)]})]})]
+]
+]
+</BOUCLE_doc>
+[(#GET{doc/body}|oui)
+[([(#SET{json,#GET{json}|json_encode})]
+[(#GET{url}|phpcurl_put{#GET{json}})]]
+]
+</B_doc>

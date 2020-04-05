@@ -1,0 +1,8 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type: application/json; charset=#CHARSET}
+{
+    "actions" : [
+        { "remove" : { "index" : "#CONFIG{elasticsearch_config/nom_index}*", "alias" : "#CONFIG{elasticsearch_config/nom_index}alias" } },
+        { "add" : { "index" : "#CONFIG{elasticsearch_config/nom_index_ecriture}", "alias" : "#CONFIG{elasticsearch_config/nom_index}alias" } }
+    ]
+}

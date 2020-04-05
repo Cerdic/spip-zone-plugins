@@ -1,0 +1,41 @@
+#CACHE{0}
+<BOUCLE_a (ARTICLES) {id_article=#ENV{id_article,#ENV{id_objet}}}>
+#SET{url,#CONFIG{elasticsearch_config/url_serveur}/#CONFIG{elasticsearch_config/nom_index_ecriture}/article/#ID_ARTICLE}
+	[(#SET{h,#ARRAY})]
+	[(#SET{t,#ARRAY})]
+	[(#SET{d,#ARRAY})]
+	[(#SET{o,#ARRAY})]
+	<BOUCLE_h (HIERARCHIE) {id_article}>
+		[(#SET{h,#GET{h}|array_merge{#LISTE{#ARRAY{
+			id,#ID_RUBRIQUE,
+			titre,#TITRE,
+			level,#COMPTEUR_BOUCLE}}}
+			})]
+	</BOUCLE_h>
+	<BOUCLE_t (MOTS) {id_article}>
+		[(#SET{t,
+		#GET{t}|array_merge{#LISTE{#ARRAY{title,#TITRE}}}
+		})]
+	</BOUCLE_t>
+	<BOUCLE_d (DOCUMENTS) {id_article}>
+		[(#SET{d,#GET{d}|array_merge{#LISTE{#ARRAY{
+			id,#ID_DOCUMENT,
+			titre, #TITRE|sinon{#FICHIER|basename} ,
+			url, #URL_DOCUMENT,
+			type, #TYPE_DOCUMENT}}
+			}})]
+	</BOUCLE_d>
+[(#SET{o, [(#ARRAY{
+	article_url,[(#URL_ARTICLE)],
+	article_logo,[(#LOGO_ARTICLE_NORMAL|extraire_attribut{src})],
+	article_title,[(#TITRE|textebrut)],
+	article_body,[(#DESCRIPTIF|textebrut)] [(#CHAPEAU|textebrut)] [(#TEXTE|textebrut)] [(#PS)],
+	date,#DATE,
+	article_authors,[(#LESAUTEURS|textebrut|explode{',  '})],
+	article_hierarchie,[(#GET{h})],
+	article_mots,[(#GET{t})],
+	article_documents,[(#GET{d})]})]})]
+
+	#SET{json,#GET{o}|json_encode}
+	[(#GET{url}|phpcurl_put{#GET{json}})]
+</BOUCLE_a>
