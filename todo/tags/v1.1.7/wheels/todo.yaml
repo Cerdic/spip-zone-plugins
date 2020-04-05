@@ -1,0 +1,9 @@
+--- # Syntaxe des raccourcis SPIP, version 0.0.1
+    #
+    # Si on nomme une regle, elle devient surchargeable
+
+todos:
+  match: "%(^|\n)([+][+][+]|<todo[^>]*>)\n(.*?)\n([+][+][+]|</todo>)(\n|$)%s"
+  is_callback: Y
+  replace: tw_todo
+  priority: -40

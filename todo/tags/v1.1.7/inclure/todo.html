@@ -1,0 +1,34 @@
+<B_todo>
+<table class="todolist">
+	<thead>
+		<tr class="row_first">
+			<th class="statut">
+				<a class="ajax" href="[(#SELF|parametre_url{tri_todo,statut})]" title="<:todo:tri_statut:>">
+					<img src="#CHEMIN{images/todo-statut-16.png}" alt="<:todo:label_statut:>" />
+				</a>
+			</th>
+			<th class="titre">
+				<a class="ajax" href="[(#SELF|parametre_url{tri_todo,titre})]" title="<:todo:tri_titre:>"><:todo:label_titre:></a>
+			</th>
+			<th class="rang">
+				<a class="ajax" href="[(#SELF|parametre_url{tri_todo,cle})]" title="<:todo:tri_cle:>">#</a>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<BOUCLE_todo(POUR){tableau #ENV{liste}}{par #ENV{tri_todo,cle}}>
+		<tr class="[(#VALEUR|table_valeur{statut})][ (#COMPTEUR_BOUCLE|alterner{row_odd odd,row_even even})]">
+			<td class="statut">
+				[<img src="(#CHEMIN{[(#VAL{images/todo-}|concat{#VALEUR|table_valeur{statut}}|concat{-16.png})]})" alt="" title="[(#VAL{todo:statut_}|concat{#VALEUR|table_valeur{statut}}|_T)]" />]
+			</td>
+			<td class="titre">
+				[(#VALEUR|table_valeur{statut}|=={termine}|oui)<del>] [(#VALEUR|table_valeur{titre})][(#VALEUR|table_valeur{statut}|=={termine}|oui)</del>]
+			</td>
+			<td class="rang">
+				[#(#CLE|plus{1})]
+			</td>
+		</tr>
+		</BOUCLE_todo>
+	</tbody>
+</table>
+</B_todo>
