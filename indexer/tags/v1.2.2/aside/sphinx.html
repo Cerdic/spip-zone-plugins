@@ -1,0 +1,36 @@
+
+
+
+
+
+[(#INCLURE{fond=inclure/liste_sphinx_facette, env,
+    critere=properties.authors,
+    cle=auteur,
+    titre=Liste des auteurs,
+    texte_vide=Aucun auteur
+})]
+
+
+[(#INCLURE{fond=inclure/liste_sphinx_facette, env,
+    critere=properties.tags,
+    cle=tag,
+    titre=Liste des tags,
+    texte_vide=Aucun tag
+})]
+
+[(#INCLURE{fond=inclure/liste_sphinx_facette, env,
+    critere=YEAR(date),
+    cle=annee,
+    titre=Par année,
+    texte_vide=Non renseignée,
+    tri=date,
+    sens_tri=-1
+})]
+
+
+[(#INCLURE{fond=inclure/liste_sphinx_facette, env,
+    critere=properties.objet,
+    cle=objet,
+    titre=Par objet
+    texte_vide=Non renseignée,
+})]

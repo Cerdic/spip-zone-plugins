@@ -1,0 +1,38 @@
+<div class='liste'>
+    <ul class='liste-items'>
+        <li class='item'><a href="[(#SELF|parametre_url{continue,''}|parametre_url{run,1})]">Démarrer l’indexation</a></li>
+        [(#CONFIG{indexer/indexing/stats}|oui)
+        <li class='item'><a href="[(#SELF|parametre_url{continue,1}|parametre_url{run,''})]">Continuer</a></li>]
+    </ul>
+</div>
+
+
+<dl>
+<dt>Connexion</dt>
+<dd>#EVAL{SPHINX_SERVER_HOST}:#EVAL{SPHINX_SERVER_PORT}</dd>
+<dt>Index</dt>
+<dd>#EVAL{SPHINX_DEFAULT_INDEX}</dd>
+<B_test_sphinx>
+<dt>Contenus indexés</dt>
+<dd>
+[(#SPHINX_FACETS|print)]
+<BOUCLE_test_sphinx(SPHINX)
+	{facet source, properties.source ORDER BY COUNT(*) DESC}
+	{facet objet, properties.objet ORDER BY COUNT(*) DESC}
+	{facet lang, properties.lang ORDER BY COUNT(*) DESC}
+	{facet secteur, properties.secteur ORDER BY COUNT(*) DESC}
+	{facet statut, properties.statut ORDER BY COUNT(*) DESC}
+	{facet authors, properties.authors ORDER BY COUNT(*) DESC}
+	{facet tags, properties.tags ORDER BY COUNT(*) DESC}
+	{0,1}
+	{!par date_indexation}
+> </BOUCLE_test_sphinx>
+
+[<hr>(#SPHINX_META|print)]
+</B_test_sphinx>
+</dd>
+<dd class="error">Base d'indexation vide ou en erreur.</dd>
+
+[(#SPHINX_META|print)]
+<//B_test_sphinx>
+</dl>
