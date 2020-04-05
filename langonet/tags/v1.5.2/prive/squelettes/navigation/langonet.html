@@ -1,0 +1,15 @@
+[(#REM) <!-- Navigation dans les operations de langonet --> ]
+#SET{operations, #REM|langonet_lister_operations}
+<BOUCLE_menus(DATA){source table, #GET{operations}}>
+[<h3 style="margin-top: 2.0775em;">(#VAL{langonet:menu_}|concat{#CLE}|_T|unique)</h3>]
+<ul class="liste-items sous_navigation">
+	<BOUCLE_navigation_operations(DATA){source table, #VALEUR}>
+	[<li class="item">
+		(#URL_ECRIRE{#ENV{exec}}|parametre_url{operation, #VALEUR}
+			|lien_ou_expose{
+				[(#VAL{langonet:onglet_}|concat{#VALEUR}|_T)],
+				[(#ENV{operation, verifier_item}|=={#VALEUR})]})
+	</li>]
+	</BOUCLE_navigation_operations>
+</ul>
+</BOUCLE_menus>

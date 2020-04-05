@@ -1,0 +1,45 @@
+<B_liste_items>
+<div class="liste-objets items_langue fonction_l">
+	<table class="spip liste">
+		<caption class="notice">
+			<strong class="caption">
+				[(#CHEMIN_IMAGE{warning-24.png}|balise_img{'',cadre-icone})]
+				[(#ENV{total}|singulier_ou_pluriel{langonet:message_ok_fonction_l_1, langonet:message_ok_fonction_l_n, nberr})]
+			</strong>
+		</caption>
+		<tbody>
+<BOUCLE_liste_items(DATA) {source table, #ENV{items}}{where?}{par cle}>
+			<tr class="row_odd">
+				<td colspan="3" class="soustitre">
+					[<strong>(#CLE)</strong>]
+				</td>
+			</tr>
+	<BOUCLE_fichiers(DATA) {source table, #VALEUR}{par cle}>
+		#SET{fichier, #CLE}
+		<B_lignes>
+			<tr class="row_even">
+				<td class="fichier" colspan="3">[(#GET{fichier})]</td>
+			</tr>
+		<BOUCLE_lignes(DATA) {source table, #VALEUR}{par cle}>
+			#SET{ligne, #CLE}
+			<BOUCLE_occurrences(DATA) {source table, #VALEUR}{par cle}>
+			<tr class="row_even">
+				<td class="ligne">[L(#GET{ligne}|plus{1})]</td>
+				<td class="colonne">[C(#CLE|plus{1})]</td>
+				<td class="occurrence">
+					[(#VALEUR|table_valeur{0}
+						|langonet_cadrer_expression{#CLE, #VALEUR|table_valeur{3}, #GET{fichier}, 8})]
+				</td>
+			</tr>
+			</BOUCLE_occurrences>
+		</BOUCLE_lignes>
+	</BOUCLE_fichiers>
+</BOUCLE_liste_items>
+		</tbody>
+	</table>
+</div>
+</B_liste_items>
+#BOITE_OUVRIR{'', success}
+<:langonet:message_ok_fonction_l_0:>
+#BOITE_FERMER
+<//B_liste_items>

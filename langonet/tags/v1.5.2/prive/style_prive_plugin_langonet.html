@@ -1,0 +1,48 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+table.legende {margin-#GET{left}: 0; width: 100%;}
+table.legende tr {background: none;}
+table.legende td, table.legende tr:nth-child(2n) td {padding: 0; background: none;}
+
+.items_langue table caption {padding: 0;}
+.items_langue .caption {[background-color: #(#GET{claire}|couleur_eclaircir);]}
+.items_langue .notice .caption {background-color: #fff6bf;}
+.items_langue .error .caption {background-color: #fbe3e4;}
+.items_langue tr:nth-child(2n) {background: none;}
+.items_langue td.soustitre {[background-color: #(#GET{claire}|couleur_eclaircir|couleur_eclaircir);]}
+.items_langue td.fichier {font-size: 80%;width:40%;}
+.items_langue td.traduction {}
+.items_langue td.occurrence {font-size: 0.9em;}
+.items_langue td.occurrence .complement {font-style: italic; margin-top: 1em;}
+.items_langue span.guillemet {font-size: 140%;[color: (#GET{foncee});]}
+.items_langue .commentaire {margin-top: 0.5em;}
+.items_langue .commentaire span {color: #8A1F11;}
+.items_langue .commentaire ul {list-style: inside none disc; padding-left: 1em;}
+
+.liste-objets tr td.occurrence > span.coloration_code { font-size: 1em; }
+
+.langonet-champ-source {background:#eee;color:#999;}
+.langonet-champ-identique {border-left:6px solid #FFA768 !important;}
+.langonet-champ-ok {border-left:6px solid #74C924 !important;}
+
+[(#REM)	</style>]

@@ -1,0 +1,49 @@
+<div class="formulaire_spip formulaire_#FORM" id="formulaire_#FORM">
+	<h3 class="titrem">[(#CHEMIN_IMAGE{#FORM.png}|balise_img{'',cadre-icone})]<:langonet:titre_form_lister:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<!-- <br class='bugajaxie' /> -->
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action --> ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<p class="explication"><:langonet:info_lister:></p>
+		<ul class="editer-groupe">
+			<li class="editer editer_fichier_langue obligatoire[(#ENV{erreurs}|table_valeur{fichier_langue}|oui) erreur]">
+				<label for="fichier_langue"><:langonet:label_fichier_liste:></label>
+				<p class="explication"><:langonet:info_fichier_liste:></p>
+				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{fichier_langue})</span>]
+				[(#ENV{fichier_langue, 0}|langonet_creer_select_langues)]
+			</li>
+			<li class="editer editer_affichage[(#ENV{erreurs}|table_valeur{affichage}|oui) erreur]">
+				<label><:langonet:label_affichage:></label>
+				<p class="explication"><:langonet:info_affichage:></p>
+				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{affichage})</span>]
+				<div class="choix">
+					<input type="radio" name="affichage" value="final" id="affichage_final" class="radio"[ (#ENV{affichage, final}|=={final}|oui)checked="checked"] />
+					<label for="affichage_final"><:langonet:option_affichage_final:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="affichage" value="brut" id="affichage_brut" class="radio"[ (#ENV{affichage, final}|=={brut}|oui)checked="checked"] />
+					<label for="affichage_brut"><:langonet:option_affichage_brut:></label>
+				</div>
+			</li>
+		</ul>
+
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:langonet:bouton_lister:>" />
+		</p>
+	</div></form>]
+</div>
+
+[(#REM) <!-- Affichage des resultats --> ]
+[(#ENV*{message_ok}|oui)
+	<INCLURE{fond=formulaires/inc-resultats_lister,
+		tradlang=#ENV*{message_ok}|table_valeur{tradlang},
+		reference=#ENV*{message_ok}|table_valeur{reference},
+		affichage=#ENV*{message_ok}|table_valeur{affichage},
+		titre=#ENV*{message_ok}|table_valeur{titre},
+		items=#ENV*{message_ok}|table_valeur{items},
+		env} />
+]

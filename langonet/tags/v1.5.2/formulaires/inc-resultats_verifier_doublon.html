@@ -1,0 +1,8 @@
+[(#REM) <!-- Affichage des resultats --> ]
+<h3><:langonet:legende_resultats:></h3>
+<p>
+	[(#VAL{langonet:info_doublon_}|concat{#ENV{verification}}|_T)]
+</p>
+[(#INCLURE{fond=prive/squelettes/liste/items_doublon,
+	verification=#ENV{verification},
+	env})]

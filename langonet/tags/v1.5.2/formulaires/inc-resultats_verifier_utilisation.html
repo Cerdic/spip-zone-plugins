@@ -1,0 +1,25 @@
+[(#REM) <!-- Affichage des resultats --> ]
+<h3><:langonet:legende_resultats:></h3>
+#SET{arborescence, #ENV{resultats/ou_fichier}}
+<p>
+	[(#GET{arborescence}|count
+		|singulier_ou_pluriel{langonet:info_verification_utilisation_arbo_1, langonet:info_verification_utilisation_arbo_n,	nb, #ARRAY{module, #ENV{resultats/module}}})]
+</p>
+<B_arborescences>
+<ul class="liste arborescence">
+<BOUCLE_arborescences(DATA) {source table, #GET{arborescence}}>
+	<li><code>#VALEUR</code></li>
+</BOUCLE_arborescences>
+</ul>
+</B_arborescences>
+
+#SET{colspan, #ARRAY{non, 0, non_mais, 4, peut_etre, 3}}
+<BOUCLE_pertinences(DATA) {liste non,non_mais,peut_etre}{par cle}>
+	[(#INCLURE{fond=prive/squelettes/liste/items_utilisation,
+		items=#ENV{resultats/occurrences_#VALEUR},
+		corrections=#ENV{corrections},
+		pertinence=#VALEUR,
+		colspan=#GET{colspan}|table_valeur{#VALEUR},
+		module=#ENV{resultats/module},
+		env})]
+</BOUCLE_pertinences>

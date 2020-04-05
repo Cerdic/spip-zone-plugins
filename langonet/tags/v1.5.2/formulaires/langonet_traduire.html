@@ -1,0 +1,52 @@
+<div class="formulaire_spip formulaire_#FORM" id="formulaire_#FORM">
+	<h3 class="titrem">[(#CHEMIN_IMAGE{#FORM.png}|balise_img{'',cadre-icone})]<:langonet:titre_form_traduire:></h3>
+
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok}|table_valeur{resume})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+
+	#SET{items,''}
+	[(#ENV*{message_ok}|table_valeur{items}|oui)
+		[(#SET{items,#ENV*{message_ok}|table_valeur{items}})]
+	]
+
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<p class="explication"><:langonet:info_traduire:></p>
+		<ul class="editer-groupe">
+			<li class="editer editer_fichier_langue obligatoire[(#ENV{erreurs}|table_valeur{fichier_langue}|oui) erreur]">
+				<label for="fichier_langue"><:langonet:label_fichier_liste:></label>
+				<p class="explication"><:langonet:info_fichier_liste_editer:></p>
+				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{fichier_langue})</span>]
+				[(#ENV{fichier_langue, 0}|langonet_creer_select_langues)]
+			</li>
+			<li class="editer editer_langue_cible obligatoire[(#ENV{erreurs}|table_valeur{langue_cible}|oui) erreur]">
+				<label for="langue_cible"><:langonet:label_langue_cible:></label>
+				<p class="explication"><:langonet:info_langue:></p>
+				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{langue_cible})</span>]
+				<input type="text" class="text" name="langue_cible" id="langue_cible" value="#ENV{langue_cible}" />
+			</li>
+		</ul>
+
+	<B_items>
+		<input type="hidden" name="etape_edition" value="[(#ENV{langue_cible})]-[(#ENV{fichier_langue, 0})]" />
+		<table class="langonet-edition">
+	<BOUCLE_items(DATA){source tableau,#GET{items}}>
+			<tr>
+				<td>
+					<div class="langonet-champ"><strong>::&nbsp;#CLE&nbsp;::</strong></div>
+					[(#SET{source,[(#VALEUR**|table_valeur{source}|entites_html)]})]
+					[(#SET{cible,[(#VALEUR**|table_valeur{traduction}|entites_html)]})]
+					<textarea name="source-#CLE" class="langonet-champ-source">[(#GET{source})]</textarea>
+					[(#GET{cible}|=={""}|oui)[(#SET{cible,#GET{source}})]]
+					<textarea name="champ-#CLE" class="langonet-champ-edit [(#GET{cible}|=={#GET{source}}|?{langonet-champ-identique,langonet-champ-ok})]">[(#GET{cible})]</textarea>
+				</td>
+			</tr>
+	</BOUCLE_items>
+		</table>
+	</B_items>
+
+		<p class='boutons'>
+			<input type='submit' class='submit' value='<:langonet:bouton_editer:>' />
+		</p>
+	</div></form>
+</div>

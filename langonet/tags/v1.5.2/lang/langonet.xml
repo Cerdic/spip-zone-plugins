@@ -1,0 +1,10 @@
+<traduction module="langonet" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/langonet/branches/v0/lang/" reference="fr">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/langonet?lang_cible=en">
+		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
+		<traducteur nom="Martin McCaffery" lien="https://trad.spip.net/auteur/martin-mccaffery" />
+	</langue>
+	<langue code="fr" />
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/langonet?lang_cible=sk">
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
+	</langue>
+</traduction>

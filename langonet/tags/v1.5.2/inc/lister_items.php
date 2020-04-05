@@ -1,0 +1,88 @@
+<?php
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+if (!defined('_LANGONET_PATTERN_ETAT_ITEM'))
+	define('_LANGONET_PATTERN_ETAT_ITEM', '%\s[\'"]([^\'"]*)[\'"].+[\'"](?:[^\'"]*)[\'"]\s*,?(?:\s*#\s*(NEW|MODIF))?$%Uims');
+
+/**
+ * Creation du tableau des items de langue d'un fichier donne trie par ordre alphabetique
+ *
+ * @param string $module
+ * 		Nom du module de langue
+ * @param string $langue
+ * 		Code SPIP de la langue
+ * @param string $ou_langue
+ * 		Chemin vers le fichier de langue à vérifier
+ * @return array
+ */
+function inc_lister_items($module, $langue, $ou_langue) {
+
+	// Initialisation du tableau des resultats
+	// Si une erreur se produit lors du deroulement de la fonction, le tableau contient le libelle
+	// de l'erreur dans $resultats['erreur'].
+	// Sinon, cet index n'existe pas
+	$resultats = array();
+
+	// On sauvegarde l'index de langue global si il existe car on va le modifier pendant le traitement.
+	include_spip('inc/outiller');
+	sauvegarder_index_langue_global();
+
+	// On charge le fichier de langue a lister
+	// si il existe dans l'arborescence $ou_langue
+	// (evite le mecanisme standard de surcharge SPIP)
+	list($traductions,$fichier_langue) = charger_module_langue($module, $langue, $ou_langue);
+
+	// On restaure l'index de langue global si besoin
+	restaurer_index_langue_global();
+
+	if ($traductions) {
+		// Recherche du gestionnaire de traduction TradLang par l'existence du rapport XML.
+		// Si le module est traduit avec ce gestionnaire, on peut identifier les états de traduction
+		// de chaque item. On peut aussi identifier la langue de référence
+		include_spip('inc/outiller');
+		list($est_langue_reference, $utilise_tradlang) = verifier_reference_tradlang($module, $langue, $ou_langue);
+
+		// Créer le tableau des items NEW et MODIF si le module est sous TradLang
+		$items_taggues = array();
+		if ($utilise_tradlang AND !$est_langue_reference) {
+			if ($contenu = spip_file_get_contents($fichier_langue)) {
+				// la langue de référence ne possède pas les tags NEW ou MODIF
+				preg_match_all(_LANGONET_PATTERN_ETAT_ITEM, $contenu, $items_taggues);
+			}
+		}
+
+		// On range la table des items en y ajoutant l'état
+		ksort($traductions);
+		$liste = array();
+		foreach ($traductions as $_item => $_traduction) {
+			$liste[$_item]['traduction'] = $_traduction;
+			if ($utilise_tradlang) {
+				if ($est_langue_reference)
+					$liste[$_item]['etat'] = 'ok';
+				else {
+					$cle = array_search($_item, $items_taggues[1]);
+					if ($cle !== false)
+						$liste[$_item]['etat'] = $items_taggues[2][$cle] ? strtolower($items_taggues[2][$cle]) : 'ok';
+					else
+						$liste[$_item]['etat'] = 'nok';
+				}
+			}
+			else
+				$liste[$_item]['etat'] = 'nok';
+		}
+
+		// On prepare le tableau des resultats
+		$resultats['items'] = $liste;
+		$resultats['total'] = count($traductions);
+		$resultats['tradlang'] = $utilise_tradlang;
+		$resultats['reference'] = $est_langue_reference;
+		$resultats['langue'] = $ou_langue . $module . '_' . $langue . '.php';
+	}
+	else {
+		$resultats['erreur'] = _T('langonet:message_nok_lecture_fichier', array('langue' => $langue, 'module' => $module));
+	}
+
+	return $resultats;
+}
+
