@@ -1,0 +1,22 @@
+[(#REM) 
+  Parametres :
+  - class : classe(s) css ajoutes au select
+]
+<select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>
+	<option value=""[(#ENV{valeur,#ENV{defaut}}|=={default}|oui)selected="selected"]>AnythingSlider (base)</option>
+	<option value="theme-construction"[(#ENV{valeur,#ENV{defaut}}|=={theme-construction}|oui)selected="selected"]>Construction</option>
+	<option value="theme-cs-portfolio"[(#ENV{valeur,#ENV{defaut}}|=={theme-cs-portfolio}|oui)selected="selected"]>CS Portfolio</option>
+	<option value="theme-default1"[(#ENV{valeur,#ENV{defaut}}|=={theme-default1}|oui)selected="selected"]>Default 1 (no image/CSS3)</option>
+	<option value="theme-default2"[(#ENV{valeur,#ENV{defaut}}|=={theme-default2}|oui)selected="selected"]>Default 2 (images/CSS3)</option>
+	<option value="theme-metallic"[(#ENV{valeur,#ENV{defaut}}|=={theme-metallic}|oui)selected="selected"]>Metallic</option>
+	<option value="theme-mini-dark"[(#ENV{valeur,#ENV{defaut}}|=={theme-mini-dark}|oui)selected="selected"]>Mini (dark)</option>
+	<option value="theme-mini-light"[(#ENV{valeur,#ENV{defaut}}|=={theme-mini-light}|oui)selected="selected"]>Mini (light)</option>
+	<option value="theme-minimalist-round"[(#ENV{valeur,#ENV{defaut}}|=={theme-minimalist-round}|oui)selected="selected"]>Minimalist (round)</option>
+	<option value="theme-minimalist-square"[(#ENV{valeur,#ENV{defaut}}|=={theme-minimalist-square}|oui)selected="selected"]>Minimalist (square)</option>
+	<option value="theme-office"[(#ENV{valeur,#ENV{defaut}}|=={theme-office}|oui)selected="selected"]>Office</option>
+	<option value="theme-ribbon"[(#ENV{valeur,#ENV{defaut}}|=={theme-ribbon}|oui)selected="selected"]>Ribbon</option>
+	<option value="theme-shiny"[(#ENV{valeur,#ENV{defaut}}|=={theme-shiny}|oui)selected="selected"]>Shiny</option>
+	<option value="theme-simple"[(#ENV{valeur,#ENV{defaut}}|=={theme-simple}|oui)selected="selected"]>Simple</option>
+	<option value="theme-tabs-dark"[(#ENV{valeur,#ENV{defaut}}|=={theme-tabs-dark}|oui)selected="selected"]>Tabs (dark)</option>
+	<option value="theme-tabs-light"[(#ENV{valeur,#ENV{defaut}}|=={theme-tabs-light}|oui)selected="selected"]>Tabs (light)</option>
+</select>

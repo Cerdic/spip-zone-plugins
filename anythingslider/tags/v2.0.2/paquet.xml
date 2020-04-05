@@ -1,0 +1,24 @@
+<paquet
+	prefix="anythingslider"
+	categorie="multimedia"
+	version="2.0.2"
+	etat="dev"
+	compatibilite="[2.1.0;3.2.*]"
+	logo="prive/themes/spip/images/anythingslider.png"
+	documentation="https://contrib.spip.net/AnythingSlider-version-2-x-x"
+>
+
+	<nom>AnythingSlider</nom>
+	<!-- Faire d&#233; filer du contenu dans vos squelettes -->
+
+	<auteur lien="http://css-tricks.com">Chris Coyier</auteur>
+	<auteur lien="https://github.com/CSS-Tricks/AnythingSlider-Themes">AnythingSlider-Themes</auteur>
+	<auteur lien="https://contrib.spip.net/Joseph">Joseph</auteur>
+	<auteur lien="http://www.yterium.com">Cedric Morin Yterium</auteur>
+	<auteur lien="http://spip.tetue.net">Tetue</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="affichage_final" inclure="anythingslider_pipelines.php" />
+	<pipeline nom="header_prive" inclure="anythingslider_pipelines.php" />
+</paquet>
