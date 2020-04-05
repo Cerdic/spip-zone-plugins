@@ -1,0 +1,27 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	<h3 class="titrem"><:zotspip:maj_zotspip:></h3>
+	[(#ENV{forcer}|oui)<p class="notice" style="margin:10px;"><:zotspip:sync_complete_demandee:></p>]
+	[(#ENV{sync}|oui)<p class="notice" style="margin:10px;"><:zotspip:sync_en_cours:></p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		[(#ENV{sync}|non)<input type="hidden" name="nettoyer" value="oui" />]
+		<ul>
+			<li>
+				<:zotspip:explication_maj_zotspip:>
+			</li>
+		</ul>
+		<p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:zotspip:bouton_synchroniser:>' name="sync_normale" />
+			[(#ENV{forcer}|non)<input type='submit' class='submit' value='<:zotspip:bouton_forcer_maj_complete:>' name="sync_complete" />]
+		</p>
+	</div></form>
+[(#ENV{sync}|oui)
+<script type="text/javascript">// <![(#EVAL**{chr(91)})]CDATA[(#EVAL**{chr(91)})]
+	jQuery('.formulaire_#FORM').ajaxComplete (function(){
+		jQuery('.formulaire_#FORM form').delay(3000).submit();
+	});
+ //#EVAL**{chr(93)}#EVAL**{chr(93)}></script>
+]
+</div>

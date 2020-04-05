@@ -1,0 +1,59 @@
+#CACHE{0}
+
+<h1 class="grostitre"><:zotspip:liste_references:></h1>
+
+
+[(#SET{defaut_tri,#ARRAY{
+	auteurs,1,
+	annee,-1,
+	type,1,
+	volume,-1,
+	numero,-1
+}})]
+
+<B_biblio>
+<p class="pagination">[(#TRI{auteurs,<:zotspip:item_premier_auteur:>})] | [(#TRI{annee,<:zotspip:item_annee:>})] | [(#TRI{type,<:zotspip:item_type:>})]<br />[(#TRI{volume,<:zotspip:item_volume:>})] | [(#TRI{numero,<:zotspip:item_numero:>})]</p>
+<div class="liste">
+<ul class="liste-items">
+<BOUCLE_biblio(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{json LIKE %#ENV{recherche}%}{zotsip_depuis}{0,#ENV{max,100000}}{tri #ENV{par,auteurs},#GET{defaut_tri}}{pagination 25}>
+<li class="item"><p><ul>#INCLURE{fond=inclure/zitem,id_zitem,liste=oui,icones=oui,details=complet,export=oui,liens=oui,souligne=#ENV{auteur},lien_voir=oui,afficher_id=oui}</ul></p></li>
+</BOUCLE_biblio>
+</ul></div>
+[<p class="pagination">(#PAGINATION)</p>]
+</B_biblio>
+<:zotspip:aucune_reference:>
+<//B_biblio>
+
+<!--#navigation-->
+
+<div class="cadre-info">
+	<a href="#URL_ECRIRE{zcreators}"><:zotspip:liste_createurs:></a><br />
+	<a href="#URL_ECRIRE{ztags}"><:zotspip:liste_tags:></a><br />
+</div>
+<p />
+<div class="formulaire_spip">
+<form action="." method="get"><div>
+	<input type="hidden" name="exec" value="zitems" />
+	<ul>
+		[(#SAISIE{zotspip_creator,auteur,label=<:zotspip:label_auteur:>})]
+		[(#SAISIE{zotspip_annee,annee,label=<:zotspip:label_annee:>})]
+		[(#SAISIE{input,recherche,label=<:zotspip:label_recherche_libre:>})]
+		[(#SAISIE{zotspip_type,type_ref,label=<:zotspip:label_type_ref:>})]
+		[(#SAISIE{zotspip_tag,tag,label=<:zotspip:label_tag:>})]
+		[(#SAISIE{zotspip_zcollection,zcollection,label=<:zotspip:label_zcollection:>})]
+		[(#SAISIE{zotspip_publication,publication,label=<:zotspip:label_publication:>})]
+		[(#SAISIE{zotspip_editeur,editeur,label=<:zotspip:label_editeur:>})]
+		[(#SAISIE{zotspip_conference,conference,label=<:zotspip:label_conference:>})]
+		[(#SAISIE{zotspip_collection,collection,label=<:zotspip:label_collection:>})]
+		[(#SAISIE{zotspip_type_doc,type_doc,label=<:zotspip:label_type_doc:>})]
+		[(#SAISIE{csl,csl,label=<:zotspip:label_csl:>,cacher_option_intro=on,defaut=#CONFIG{zotspip/csl_defaut}})]
+	</ul>
+	<p class="boutons"><input type="submit" class="submit" value="<:zotspip:filtrer:>" /></p>
+</div></form>
+</div>
+
+<!--/#navigation-->
+
+<!--#extra-->
+<div class="ajax">#FORMULAIRE_MAJ_ZOTSPIP</div>
+<!--/#extra-->

@@ -1,0 +1,89 @@
+<plugin>
+	<nom>ZotSpip</nom>
+	<slogan>La puissance de Zotero dans votre Spip</slogan>
+	<auteur>[Joseph Larmarange->https://contrib.spip.net/Joseph]</auteur>
+	<licence>GPL v3</licence>
+	<version>1.4.1</version>
+	<version_base>0.2</version_base>
+	<etat>stable</etat>
+	<description>Synchronise Spip avec une bibliothèque (personnelle ou collective) de références bibliographiques Zotero. Utilisez Zotero pour gérer / importer / rédiger vos références bibliographiques, puis incorporez vos références bibliographiques dans votre Spip avec ZotSpip au travers de modèles dédiés.</description>
+	<lien>https://contrib.spip.net/spip.php?article4161</lien>
+	<icon>images/zotspip-48.png</icon>
+	<prefix>zotspip</prefix>
+	<fonctions>zotspip_fonctions.php</fonctions>
+	<install>zotspip_administrations.php</install>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/zotspip.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/zotspip.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/zotspip.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ieconfig_metas</nom>
+		<inclure>zotspip_ieconfig.php</inclure>
+	</pipeline>
+		<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>zotspip_cron.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>zotspip_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>zotspip_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>jqueryui_forcer</nom>
+		<inclure>zotspip_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_propre</nom>
+		<inclure>zotspip_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>zotspip_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>porte_plume_barre_pre_charger</nom>
+		<inclure>zotspip_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>porte_plume_lien_classe_vers_icone</nom>
+		<inclure>zotspip_pipelines.php</inclure>
+	</pipeline>
+
+	<bouton id='zotspip' parent="configuration">
+		<url>configurer_zotspip</url>
+		<titre>zotspip:zotspip</titre>
+		<icone>images/zotspip-24.png</icone>
+	</bouton>
+	<bouton id='bando_zotspip' parent="bando_configuration">
+		<url>configurer_zotspip</url>
+		<titre>zotspip:zotspip</titre>
+		<icone>images/zotspip-16.png</icone>
+	</bouton>
+	<bouton id='zitems' parent="naviguer">
+		<url>zitems</url>
+		<titre>zotspip:items_zotero</titre>
+		<icone>images/zotspip-24.png</icone>
+	</bouton>
+	<bouton id='bando_zitems' parent="bando_edition">
+		<url>zitems</url>
+		<titre>zotspip:items_zotero</titre>
+		<icone>images/zotspip-16.png</icone>
+	</bouton>
+	<categorie>edition</categorie>
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="spip_bonux" />
+	<necessite id="jqueryui" />
+	<necessite id="saisies" version="[1.42.11;]" />
+</plugin>
