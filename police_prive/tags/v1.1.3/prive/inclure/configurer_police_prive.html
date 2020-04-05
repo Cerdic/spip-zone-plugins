@@ -1,0 +1,30 @@
+<ul>
+#SET{name,police_prive}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+		<label><:polpriv:label_police_prive:></label>[
+		<span class='erreur_message'>(#GET{erreurs})</span>
+		]
+		<p class='explication'><:polpriv:label_police_fontface_prive:></p>
+		<div class="choix">
+			<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_0'[(#ENV{#GET{name},defaut}|=={defaut}|oui)checked="checked" ]value='defaut'
+			onchange='if (this.checked) jQuery("body").css("font-family","Helvetica, Arial, sans-serif");'/>
+			<label for="[(#GET{name})]_0" style='font-family: Helvetica, Arial, sans-serif;'>Helvetica / Arial</label>
+		</div>
+		<BOUCLE_polices(DATA){source table, #ENV{_polices}}>
+		<div class="choix">
+			<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_#COMPTEUR_BOUCLE'[(#ENV{#GET{name}}|=={#CLE}|oui)checked="checked" ]value='#CLE'
+			onchange='if (this.checked) jQuery("body").css("font-family","[(#VALEUR|replace{'"','\"'})]");' />
+			<label for="[(#GET{name})]_#COMPTEUR_BOUCLE" style='font-family: #VALEUR;'>#CLE</label>
+		</div>
+		</BOUCLE_polices>
+		<BOUCLE_polices_fontface(DATA){source table, #ENV{_polices_fontface}}>
+		<div class="choix">
+			<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_#COMPTEUR_BOUCLE'[(#ENV{#GET{name}}|=={#VALEUR}|oui)checked="checked" ]value='#VALEUR'
+			onchange='if (this.checked) jQuery("body").css("font-family","[(#VALEUR|replace{'"','\"'})]");' />
+			<label for="[(#GET{name})]_#COMPTEUR_BOUCLE" style='font-family: "#VALEUR";'>#CLE</label>
+		</div>
+		</BOUCLE_polices_fontface>
+	</li>
+</ul>
+[(#REM) styles des polices fontface ]
+[(#ENV*{_style_fontface})]

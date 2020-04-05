@@ -1,0 +1,23 @@
+<paquet
+	prefix="polpriv"
+	categorie="maintenance"
+	version="1.1.3"
+	etat="test"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/polpriv-32.png"
+	schema="0.4"
+	documentation="https://contrib.spip.net/?article4270"
+>	
+
+	<nom>Police de l'espace priv&#233;</nom>
+	<!-- Personnalisez la police de caractères de l'espace privé -->
+
+	<auteur lien="https://contrib.spip.net/Joseph">Joseph</auteur>
+	
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="formulaire_charger" inclure="polpriv_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="polpriv_pipelines.php" />
+	<pipeline nom="recuperer_fond" inclure="polpriv_pipelines.php" />
+	<pipeline nom="header_prive" inclure="polpriv_pipelines.php" />
+</paquet>
