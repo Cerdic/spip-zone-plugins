@@ -1,0 +1,18 @@
+# Template de fichier descriptif d'une page ou plutôt d'un type de page explicite du noiZetier
+# - fichier : type_page.template.yaml
+
+# Titre de la page
+# - obligatoire
+# - texte ou item de langue
+nom: '<:noizetier:type_page_xxxx_nom:>'
+# Description du rôle de la page
+# - facultatif, vide si absent
+# - texte ou item de langue
+description: '<:noizetier:type_page_xxxx_description:>'
+# Nom de l'icone représentant le type de noisette sans chemin
+# - facultatif, 'page-24.png' si absent
+icon: 'xxxx-24.png'
+# Liste des plugins nécessités pour le fonctionnement de la page
+# - facultatif, [] si absent
+# - tableau des préfixes de plugin
+necessite: ['prefixe1', 'prefixe2']

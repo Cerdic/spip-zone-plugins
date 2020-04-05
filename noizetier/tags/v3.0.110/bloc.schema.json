@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "title": "Bloc Z du noiZetier",
+  "description": "Règles de validation du fichier YAML de description d'un bloc Z du noiZetier",
+  "definitions": {
+    "texte_ou_item": {
+      "anyOf": [
+        {
+          "item_langue": {
+            "type": "string",
+            "pattern": "^<:(?:([a-z0-9_]+):)?([a-z0-9_]+):>$"
+          }
+        },
+        {
+          "texte_libre": {
+            "type": "string"
+          }
+        }
+      ]
+    }
+  },
+  "type": "object",
+  "required": [
+    "nom"
+  ],
+  "properties": {
+    "nom": {
+      "$ref": "#/definitions/texte_ou_item"
+    },
+    "description": {
+      "$ref": "#/definitions/texte_ou_item"
+    },
+    "icon": {
+      "type": "string",
+      "pattern": "^[a-z0-9_-]+.(png|jpg|jpeg|gif)$"
+    }
+  }
+}

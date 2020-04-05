@@ -1,0 +1,9 @@
+#BOITE_OUVRIR{'','raccourcis'}
+	[(#REM) <!-- Inutile d'utiliser l'autorisation noizetier car l'autorisation des pages qui affichent
+	             ces boutons l'inclut déjà -->
+	]
+	[(#URL_ACTION_AUTEUR{recharger_pages, '', #SELF}
+		|icone_horizontale{<:noizetier:recharger_pages:>, page-maj-24, '', #LANG_LEFT})]
+	[(#URL_ACTION_AUTEUR{recharger_types_noisette, '', #SELF}
+		|icone_horizontale{<:noizetier:recharger_noisettes:>, noisette-maj-24, '', #LANG_LEFT})]
+#BOITE_FERMER

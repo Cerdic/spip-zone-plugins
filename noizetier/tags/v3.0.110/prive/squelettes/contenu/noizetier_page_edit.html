@@ -1,0 +1,47 @@
+[(#REM) On teste l'autorisation en fonction du type d'édition ]
+[(#ENV{edition}|=={modifier}|et{#AUTORISER{modifierpage, noizetier, '', '', #ARRAY{page, #ENV{page}}}}
+	|ou{#ENV{edition}|=={creer}|et{#AUTORISER{creercomposition, noizetier, '', '', #ARRAY{page, #ENV{source}}}}}
+	|ou{#ENV{edition}|=={dupliquer}|et{#AUTORISER{dupliquercomposition, noizetier, '', '', #ARRAY{page, #ENV{source}}}}}
+	|sinon_interdire_acces)]
+#SET{page_concernee, #ENV{page}|?{#ENV{page}, #ENV{source}}}
+
+<BOUCLE_page_concernee(NOIZETIER_PAGES) {page=#GET{page_concernee}}>
+[(#ENV{edition}|=={modifier}|oui)
+	#SET{redirect, #URL_ECRIRE{noizetier_page}|parametre_url{page, #ENV{page}}}
+	#SET{retour, #URL_ECRIRE{noizetier_page}|parametre_url{page, #ENV{page}}}
+	#SET{icone_retour, #ICON}
+]
+[(#ENV{edition}|=={modifier}|non)
+	#SET{redirect, ''}
+	#SET{retour, #URL_ECRIRE{noizetier_pages}|parametre_url{est_page_objet, #EST_PAGE_OBJET}}
+	#SET{icone_retour, noizetier-24.png}
+]
+#SET{redirect, #ENV{redirect}|sinon{#GET{redirect}}}
+
+<div class="cadre-formulaire-editer">
+	<div class="entete-formulaire">
+		[(#GET{retour}|icone_verticale{<:noizetier:retour:>, #GET{icone_retour}, '', left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+		[(#ENV{edition}|=={modifier}|oui)<:noizetier:formulaire_modifier_page:>]
+		[(#ENV{edition}|=={creer}|oui)<:noizetier:formulaire_creer_composition:>]
+		[(#ENV{edition}|=={dupliquer}|oui)<:noizetier:formulaire_dupliquer_page_entete:>]
+		<h1>
+			[(#ENV{edition}|=={modifier}|oui)[(#NOM)]]
+			[(#ENV{edition}|=={creer}|oui)<:info_sans_titre:>]
+			[(#ENV{edition}|=={dupliquer}|oui)<:noizetier:copie_de{source=#NOM}:>]
+		</h1>
+	</div>
+
+	[(#ENV{retourajax,''}|oui)
+		#SET{retour,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	]
+	<div class="ajax">
+		[(#FORMULAIRE_EDITER_PAGE{#ENV{edition}, #GET{page_concernee}, #GET{redirect}})]
+	</div>
+	[(#EVAL{_AJAX}|oui)
+		<script type="text/javascript">/*<!\[CDATA\[*/
+			jQuery('#chemin').find('>div').ajaxReload({'args':{'exec':'noizetier_page_edit','page':'#ENV{page}','edition':'#ENV{edition}'}});
+			jQuery('#navigation').find('>div').ajaxReload({'args':{'exec':'noizetier_page_edit','page':'#ENV{page}','edition':'#ENV{edition}'}});
+		/*\]\]>*/</script>
+	]
+</div>
+</BOUCLE_page_concernee>

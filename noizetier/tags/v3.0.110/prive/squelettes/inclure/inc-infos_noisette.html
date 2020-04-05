@@ -1,0 +1,10 @@
+#BOITE_OUVRIR{'','info'}
+<div class='infos'>
+	<div class='numero'>
+		<:noizetier:noisette_numero:>
+		<p>#ENV{id_noisette}</p>
+	</div>
+	<p class="explication"><:noizetier:explication_noisette{noisette=#ENV{type_noisette}}:></p>
+	[<p class="explication">(#ENV{explication})</p>]
+</div>
+#BOITE_FERMER

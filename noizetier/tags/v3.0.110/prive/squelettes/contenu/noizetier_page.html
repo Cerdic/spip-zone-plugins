@@ -1,0 +1,59 @@
+[(#AUTORISER{configurerpage, noizetier, '', '', #ENV{page}|?{#ARRAY{page, #ENV{page}}, #ARRAY{objet,#OBJET,id_objet,#ID_OBJET}}}|sinon_interdire_acces)]
+<BOUCLE_page_contenu(CONDITION) {si #ENV{exec}|=={noizetier_page}|et{#ENV{page}|ou{#OBJET|et{#ID_OBJET}}}}>
+	<BOUCLE_si_page(NOIZETIER_PAGES) {page}>
+	[(#BOITE_OUVRIR{
+		[(#AUTORISER{modifierpage, noizetier, '', '', #ARRAY{page, #PAGE}})
+			[(#URL_ECRIRE{noizetier_page_edit}
+				|parametre_url{edition, modifier}
+				|parametre_url{page,#PAGE}
+				|icone_verticale{[(#COMPOSITION|?{<:noizetier:formulaire_modifier_composition:>, <:noizetier:formulaire_modifier_page:>})],page,edit,right ajax preload})]
+		]
+
+		<h1>
+			[(#NOM)]
+			[(#CHEMIN_IMAGE{#ICON}|balise_img{page,cadre-icone})]
+		</h1>
+	,simple fiche_objet})]
+		<br class="clear" />
+		<div id="wysiwyg">
+			[<div class="champ contenu_description[ (#DESCRIPTION|strlen|?{'',vide})]">
+				<div dir='#LANG_DIR' class="texte">(#DESCRIPTION)</div>
+			</div>]
+		</div>
+	</BOUCLE_si_page>
+	#SET{informations, #OBJET_NOIZETIER_INFOS{#OBJET, #ID_OBJET}}
+	[(#BOITE_OUVRIR{
+		<h1>
+			<a[ href="(#ID_OBJET|generer_url_entite{#OBJET})"]>[(#GET{informations/titre})]</a>
+			[(#GET{informations/logo}|image_reduire{24}|extraire_attribut{src}|balise_img{page,cadre-icone})]
+		</h1>
+	,simple fiche_objet})]
+	<//B_si_page>
+	#BOITE_FERMER
+
+	[(#REM) <!-- Liste des blocs configurables pour la page en cours --> ]
+	<br class="clear" />
+	<h3><:noizetier:menu_blocs:></h3>
+	#SET{blocs, #PAGE_NOIZETIER_INFOS{#ENV{page, #OBJET}}|table_valeur{blocs}}
+	#SET{bloc_affiche, #ENV{bloc}|sinon{#GET{blocs}|reset}}
+	<INCLURE{fond=prive/squelettes/inclure/inc-nav_blocs,
+		blocs=#GET{blocs},
+		bloc_affiche=#GET{bloc_affiche},
+		env} />
+
+	[(#REM) <!-- Liste configurable des noisettes du bloc affiché --> ]
+	<div class="ajax">
+		#FORMULAIRE_LISTER_NOISETTES_BLOC{#ENV{page, #ARRAY{objet, #OBJET, id_objet, #ID_OBJET}}, #GET{bloc_affiche}}
+	</div>
+
+	[(#CONST{_AJAX}|oui)
+		<script type="text/javascript">/*<!\[CDATA\[*/
+			reloadExecPage('#ENV{exec}','#navigation,#chemin');
+		/*\]\]>*/</script>
+	]
+</BOUCLE_page_contenu>
+	[(#ENV**{exec}|=={noisette_edit}|oui)#INCLURE{fond=prive/squelettes/contenu/noisette_edit,redirect='',env,retourajax=oui}]
+	[(#ENV**{exec}|=={noisette_add}|oui)#INCLURE{fond=prive/squelettes/contenu/noisette_add,redirect='',env,retourajax=oui}]
+	[(#ENV**{exec}|=={noizetier_page_edit}|oui)#INCLURE{fond=prive/squelettes/contenu/noizetier_page_edit,redirect='',env,retourajax=oui}]
+	[(#ENV**{exec}|=={noisette_edit}|ou{#ENV**{exec}|=={noisette_add}}|ou{#ENV**{exec}|=={noizetier_page_edit}}|non)[(#REM|sinon_interdire_acces)]]
+<//B_page_contenu>
