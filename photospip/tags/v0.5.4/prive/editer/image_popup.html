@@ -1,0 +1,7 @@
+<div class="entete-formulaire">
+	[[(#ENV{mode}|=={vignette}|?{[(#VAL{photospip:info_modifier_vignette}|_T{#ARRAY{id_document,#ENV{new}}})],<:photospip:info_modifier_image:>})]
+	<h1>(#ENV{titre})</h1>]
+</div>
+<div class="ajax">
+	#FORMULAIRE_EDITER_IMAGE{#ENV{new},#ENV{mode},#ENV{retour},#ENV{modale}}
+</div>

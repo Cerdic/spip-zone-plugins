@@ -1,0 +1,62 @@
+<plugin>
+	<nom>PhotoSPIP</nom>
+	<auteur>[kent1->http://www.kent1.info/]
+_ © 2008-2012 - Distribué sous licence GNU/GPL
+	</auteur>
+	<version>0.5.4</version>
+	<version_base>0.4</version_base>
+	<prefix>photospip</prefix>
+	<etat>stable</etat>
+	<slogan>Modification d'images dans SPIP</slogan>
+	<description>Modifier les images ins&eacute;r&eacute;es dans SPIP en leur appliquant différents filtres</description>
+	<lien>http://photospip.arscenic.org/</lien>
+	<install>base/photospip_upgrade.php</install>
+	<options>photospip_options.php</options>
+	<fonctions>photospip_fonctions.php</fonctions>
+	<icon>images/photospip_logo.png</icon>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>photospip_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>jqueryui_forcer</nom>
+		<inclure>photospip_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>jquery_plugins</nom>
+		<inclure>photospip_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>document_desc_actions</nom>
+		<inclure>photospip_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/photospip.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/photospip.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_verifier</nom>
+		<inclure>photospip_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>boite_infos</nom>
+		<inclure>photospip_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="palette" version='[1.3.4;]' />
+	<necessite id="medias" version='[1.6.12;]' />
+	<necessite id="jqueryui" version='[1.8.19;]' />
+	<necessite id="spip_bonux" version='[2.3.0;]' />
+	<necessite id="images" version='[1.0.1;]' />
+	<necessite id="verifier" version='[0.1.14;]' />
+	<necessite id="ancresdouces" version='[1.4;]' />
+	<necessite id="SPIP" version='[2.1.10;2.1.99]' />
+	<necessite id="mediabox" version='[0.6.10;]' />
+	<utilise id='cfg' version='[1.10.1;]' />
+	<utilise id='Fonctions_images' version='[0.5.2;]' />
+	<necessite id="lib:jquery.imgareaselect-0.9.8" src="http://odyniec.net/projects/imgareaselect/jquery.imgareaselect-0.9.8.zip" />
+	<categorie>multimedia</categorie>
+</plugin>
