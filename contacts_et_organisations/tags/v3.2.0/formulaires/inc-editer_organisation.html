@@ -1,0 +1,55 @@
+[(#CONFIG{contacts_et_organisations/utiliser_annuaires}|oui)
+[(#SAISIE{annuaires,#ENV{prefixe,''}id_annuaire,
+	defaut=#ENV{id_annuaire},
+	label=<:contacts:annuaire:>,
+	option_intro=<:contacts:annuaire_aucun:>})]
+]
+
+[(#SAISIE{input,#ENV{prefixe,''}nom,
+	label=<:contacts:label_nom:>})]
+
+[(#CONFIG{contacts_et_organisations/utiliser_organisations_arborescentes}|oui)
+[(#SAISIE{organisations,#ENV{prefixe,''}id_parent,
+	id_organisation=#ENV{id_organisation},
+	label=<:contacts:label_organisation_parente:>})]
+]
+
+[(#SAISIE{input,#ENV{prefixe,''}statut_juridique,
+	label=<:contacts:label_statut_juridique:>,
+	explication=<:contacts:explication_statut_juridique:>})]
+
+[(#SAISIE{input,#ENV{prefixe,''}identification,
+	label=<:contacts:label_identification:>,
+	explication=<:contacts:explication_identification:>})]
+
+[(#SET{liste_activite,#ARRAY})]<BOUCLE_activite(ORGANISATIONS){par activite} {fusion activite}>[(#SET{liste_activite, #GET{liste_activite}|push{#ACTIVITE}})]</BOUCLE_activite>
+[(#SAISIE{input,#ENV{prefixe,''}activite,
+	label=<:contacts:label_activite:>,
+	explication=<:contacts:explication_activite:>,
+	datas=#GET{liste_activite}})]
+
+[(#SAISIE{input,#ENV{prefixe,''}url_site,
+	label=<:contacts:label_url_site:>,
+	placeholder="http://…"})]
+
+[(#SAISIE{date_jour_mois_annee,#ENV{prefixe,''}date_creation,
+	label=<:contacts:label_date_creation:>})]
+
+[(#SAISIE{textarea,#ENV{prefixe,''}descriptif,
+	label=<:contacts:label_descriptif:> <em class="aide">[(#AIDER{raccourcis})]</em>,
+	rows=10,
+	class='inserer_barre_edition inserer_previsualisation',
+	li_class=pleine_largeur})]
+
+[(#SAISIE{textarea,#ENV{prefixe,''}ouvertures,
+	label=<:contacts:label_ouvertures:>,
+	explication=<:contacts:explication_ouvertures:>,
+	rows=5,
+	class='inserer_barre_edition inserer_previsualisation',
+	li_class=pleine_largeur})]
+
+[(#SAISIE{textarea,#ENV{prefixe,''}tarifs,
+	label=<:contacts:label_tarifs:>,
+	rows=5,
+	class='inserer_barre_edition inserer_previsualisation',
+	li_class=pleine_largeur})]

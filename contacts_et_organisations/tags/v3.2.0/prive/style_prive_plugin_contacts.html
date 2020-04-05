@@ -1,0 +1,146 @@
+[(#REM)<style>
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+/* #SQUELETTE */
+/*
+Valeurs par defaut :
+#SET{claire,##ENV{couleur_claire,edf3fe}} [claire: (#GET{claire});]
+#SET{foncee,##ENV{couleur_foncee,3874b0}} [foncee: (#GET{foncee});]
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}} [left: (#GET{left});]
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}} [right: (#GET{right});]
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}} [rtl: (#GET{rtl});]
+#SET{dir,#ENV{ltr}|choixsiegal{left,ltr,rtl}} [dir: (#GET{dir});]
+
+#SET{font-size,#ENV{font-size,0.8125em}} [font-size: (#GET{font-size});]
+#SET{line-height,#ENV{line-height,1.385em}} [line-height: (#GET{line-height});]
+#SET{margin-bottom,#ENV{margin-bottom,#GET{line-height}}} [margin-bottom: (#GET{margin-bottom});]
+#SET{text-indent,#ENV{text-indent,50px}} [text-indent: (#GET{text-indent});]
+#SET{font-family,#ENV*{font-family,'Helvetica, Arial, sans-serif'}} [font-family: (#GET{font-family});]
+#SET{background-color,#ENV{background-color,#F8F7F3}} [background-color : (#GET{background-color});]
+#SET{color,#ENV{color,#000000}} [color: (#GET{color});]
+*/
+
+
+img.co_middle {vertical-align:middle;}
+
+/* remettre la colonne d'action cachee par defaut en colonne laterale */
+.contact .lat .liste-objets tr > .action,
+.contact .lat .liste-objets tr > .spip_logos,
+.organisation .lat .liste-objets tr > .action,
+.organisation .lat .liste-objets tr > .spip_logos
+ {
+	display: table-cell;
+}
+
+/* reduire le formulaire de recherche en colonne laterale */
+.lat .formulaire_spip.formulaire_recherche .text { width: 140px; }
+
+/* ne pas ecrire en majuscule sur les actions des boites infos */
+.contact .numero .delier,
+.organisation .numero .delier {text-transform:none;}
+
+/* sur les auteurs, deplacer l'icone d'info du type d'auteur */
+.contact_logo {padding-#LANG_RIGHT:6px; float:#LANG_LEFT;}
+
+
+.liste-objets.organisations.sans-filiales .nb_filiales {display: none;}
+
+
+.crayon-icones em.crayon-contactliaison {
+    background:transparent url([(#CHEMIN{images/crayon20.png})]) no-repeat;
+    height: 20px;
+    width: 20px;
+}
+.crayon-changed em.crayon-contactliaison { display: none; }
+em.crayon-contactliaison { display: none; }
+em.crayon-contactliaison { cursor: pointer; border:0; }
+
+/* manque dans spip ? eviter que le formulaire d'ajout de document soit mal place */
+#contenu #wysiwyg {
+	clear: both;
+}
+
+#navigation .numero .delier {
+	margin-top:1em;
+	font-size:80%;
+	position:relative; left:-3000em;
+}
+#navigation .numero:hover .delier,
+#navigation .numero:focus .delier {
+	left:0;
+}
+
+#navigation .info .icone.horizontale.contact-24,
+#navigation .info .icone.horizontale.organisation-24 {
+	text-transform: uppercase;
+	background: [#(#GET{claire}|couleur_eclaircir)];
+}
+
+.changer_selection_organisation {float:right;}
+
+#contenu .fiche_objet #wysiwyg .contenu-contact .champ,
+#contenu .fiche_objet #wysiwyg .contenu-organisation .champ {
+	display:block;
+  margin-bottom: 1em;
+  overflow: hidden;
+  padding-top: 0.5em;
+  border-top: 1px solid #GET{claire};
+}
+#contenu .fiche_objet #wysiwyg .contenu-contact .champ .label.visible,
+#contenu .fiche_objet #wysiwyg .contenu-organisation .champ .label.visible {
+  display: block;
+  width: 30%;
+  margin-top:0;
+  float: left;
+  font-weight: bold;
+  color: #GET{color};
+}
+#contenu .fiche_objet #wysiwyg .contenu-organisation .champ.contenu_nom {
+	display: none;
+}
+
+#contenu .fiche_objet #wysiwyg .contenu-contact .champ .span,
+#contenu .fiche_objet #wysiwyg .contenu-organisation .champ .span {
+  display:block;
+  width: 69%;
+  float: right;
+}
+#contenu .fiche_objet #wysiwyg .contenu-contact .fieldset,
+#contenu .fiche_objet #wysiwyg .contenu-organisation .fieldset {
+  margin-top: 2em;
+}
+#contenu .fiche_objet #wysiwyg .contenu-contact .fieldset + .liste-objets,
+#contenu .fiche_objet #wysiwyg .contenu-organisation .fieldset + .liste-objets {
+  margin-top: 1em;
+}
+#contenu .fiche_objet #wysiwyg .contenu-contact .fieldset .titrem,
+#contenu .fiche_objet #wysiwyg .contenu-organisation .fieldset .titrem {
+  display: block;
+  font-weight: bold;
+  padding: 7px 5px 7px 10px;
+  border-top: 1px solid #GET{color};
+  background-color: #GET{background-color};
+  color: #GET{foncee};
+}
+
+.formulaire_editer_auteur .editer_contact,
+.formulaire_editer_auteur .editer_organisation {
+	background: [#(#GET{claire}|couleur_eclaircir{0.66})];
+	border-bottom: 1px solid #ddd;
+}
+.formulaire_editer_auteur .editer_contact legend,
+.formulaire_editer_auteur .editer_organisation legend {
+	background: [#(#GET{claire}|couleur_eclaircir{0.66})];
+}

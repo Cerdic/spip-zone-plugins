@@ -1,0 +1,7 @@
+<[(#ENV{tag,li})] class='fieldset editer_contact'>
+<input type="hidden" name="id_contact" value="#ENV{id_contact}" />
+<fieldset>
+	<legend><:contacts:contact:></legend>
+	<INCLURE{fond=formulaires/inc-editer_contact,env} />
+</fieldset>
+</[(#ENV{tag,li})]>
