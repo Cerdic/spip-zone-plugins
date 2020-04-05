@@ -1,0 +1,12 @@
+[(#AUTORISER{configurer,_traduiretexte}|sinon_interdire_acces)]
+
+<h1 class="grostitre"><:traduiretexte:tester_traduire_texte:></h1>
+
+<div class="ajax">
+	#FORMULAIRE_TRADUIRE_TEXTE
+</div>
+
+
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<span class="clearfix"></span>
+<INCLURE{fond=prive/objets/liste/traduiretexte_traductions, env, ajax=tt_traductions} />

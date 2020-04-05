@@ -1,0 +1,36 @@
+<B_traductions>
+	#ANCRE_PAGINATION
+	<div class="liste-objets traductions">
+		<table class='spip liste'>
+			[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{traduiretexte:info_1_traduction,traduiretexte:info_nb_traductions}})</strong></caption>]
+			<thead>
+			<tr class='first_row'>
+				<th class='hash' scope='col'>Hash</th>
+				<th class='langue' scope='col'><:traduiretexte:langue:></th>
+				<th class='texte' scope='col'><:info_texte:></th>
+				<th class="action"></th>
+			</tr>
+			</thead>
+			<tbody>
+			<BOUCLE_traductions(spip_traductions)
+				{hash?}{langue?}
+				{texte == #ENV{recherche,.*}}
+				{pagination #ENV{nb,50}}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<td class='hash principale'><abbr title="#HASH">[(#HASH|substr{0,7})]</abbr></td>
+				<td class='langue secondaire'>#LANGUE</td>
+				<td class='texte secondaire'>[(#TEXTE|couper{200})]</td>
+				<td class='action'>
+					[(#AUTORISER{supprimer,traductions,#HASH}|oui)
+						[(#BOUTON_ACTION{<:lien_supprimer:>,#URL_ACTION_AUTEUR{traduiretexte_supprimer_trad,#HASH,#SELF},ajax})]
+					]
+				</td>
+			</tr>
+			</BOUCLE_traductions>
+			</tbody>
+		</table>
+		[<p class='pagination'>(#PAGINATION{prive})</p>]
+	</div>
+</B_traductions>[
+<div class="liste-objets traductions caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_traductions>

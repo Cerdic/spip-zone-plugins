@@ -1,0 +1,20 @@
+<paquet
+	prefix="traduiretexte"
+	categorie="outil"
+	version="0.8.0"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/traduire-texte-32.png"
+	documentation="https://contrib.spip.net/Traduire-texte"
+	schema="1.0.0"
+>
+	<nom>Traduire Texte</nom>
+
+	<auteur>ARNO*</auteur>
+
+	<credit lien="http://www.languageicon.org/">The language icon</credit>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="declarer_tables_auxiliaires" inclure="traduiretexte_administrations.php" />
+</paquet>

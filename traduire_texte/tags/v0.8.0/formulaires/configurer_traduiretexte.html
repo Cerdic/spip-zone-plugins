@@ -1,0 +1,56 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:traduiretexte:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#VAL{_TRANSLATESHELL_CMD}|defined|oui)
+		#BOITE_OUVRIR{Commande machine,info}
+		<p>
+			Une commande machine est définie dans la constante <code>_TRANSLATESHELL_CMD</code>.
+			Cet outil sera utilisé si aucune clé d’API n’est déclaré.
+			Utiliser de préférence une clé.
+		</p>
+		#BOITE_FERMER
+	]
+
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE
+
+			<div class="editer-groupe">
+				[(#SAISIE{input, cle_bing,
+					label=<:traduiretexte:label_cle_bing:>,
+					conteneur_class=pleine_largeur,
+					attention=[(#VAL{_BING_APIKEY}|defined|?{<:traduiretexte:une_constante_surcharge:>,''})],
+					placeholder=Izef5CnvCBhkNd15cvgM61Lpn2Y4d2hf})]
+
+				[(#SAISIE{input, cle_deepl,
+					label=<:traduiretexte:label_cle_deepl:>,
+					conteneur_class=pleine_largeur,
+					attention=[(#VAL{_DEEPL_APIKEY}|defined|?{<:traduiretexte:une_constante_surcharge:>,''})],
+					placeholder=a1b2c3d4-1234-abcd-c782-e5f6a7b8c9d0})]
+
+				[(#SAISIE{input, cle_google,
+					label=<:traduiretexte:label_cle_google:>,
+					conteneur_class=pleine_largeur,
+					attention=[(#VAL{_GOOGLETRANSLATE_APIKEY}|defined|?{<:traduiretexte:une_constante_surcharge:>,''})],
+					placeholder=Izef5CnvCBhkNd15cvgM61Lpn2Y4d2hfW4ht9aO})]
+					
+				[(#SAISIE{input, cle_yandex,
+					label=<:traduiretexte:label_cle_yandex:>,
+					conteneur_class=pleine_largeur,
+					attention=[(#VAL{_YANDEX_APIKEY}|defined|?{<:traduiretexte:une_constante_surcharge:>,''})],
+					placeholder=Izef5CnvCBhkNd15cvgM61Lpn2Y4d2hfW4ht9aO})]
+
+			</div>
+
+			<input type="hidden" name="_meta_casier" value="traduiretexte" />
+			<p class="boutons">
+				<span class="image_loading">&nbsp;</span>
+				<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+			</p>
+		</div>
+	</form>
+</div>

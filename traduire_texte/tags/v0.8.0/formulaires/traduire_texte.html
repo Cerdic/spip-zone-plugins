@@ -1,0 +1,41 @@
+<div class="formulaire_spip formulaire_#FORM">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE
+
+			<div class="editer-groupe">
+				[(#SAISIE{textarea, source,
+					label=<:traduiretexte:label_texte_source:>,
+					conteneur_class=pleine_largeur,
+					rows=4})]
+
+				[(#SAISIE{selecteur_langue, langue_source,
+					label=<:traduiretexte:label_langue_source:>,
+					conteneur_class=pleine_largeur})]
+
+				[(#SAISIE{selecteur_langue, langue_traduction,
+					label=<:traduiretexte:label_langue_traduction:>,
+					conteneur_class=pleine_largeur})]
+
+			</div>
+
+			<p class="boutons">
+				<input type="submit" class="submit" value="<:traduiretexte:bouton_traduire|attribut_html:>" />
+			</p>
+		</div>
+	</form>
+	[
+	<div class="editer-groupe">
+		<div class="editer pleine_largeur">
+			<label><:traduiretexte:label_traduction:></label>
+			<textarea rows="4" readonly="readonly">(#ENV{traduction})
+</textarea>
+		</div>
+	</div>
+	]
+
+</div>
