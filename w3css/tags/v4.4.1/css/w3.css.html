@@ -1,0 +1,17 @@
+[(#HTTP_HEADER{Content-type:text/css[; charset=(#CHARSET)]})]
+
+[/* (#REM) lib principale */]
+#INCLURE{fond=css/w3css/vendor.css}
+
+[/* (#REM) Le theme généré avec la couleur choisie */]
+#INCLURE{fond=css/w3css/theme.css}
+
+[(#CONFIG{w3css/extend}|oui)
+  [/* (#REM) Le fichier déclaratif des @extend SCSS pour styliser les éléments natifs de SPIP */]
+  #INCLURE{fond=css/w3css/extend2spip.scss}
+  [/* (#REM) Un inclure optionnel si besoin pour compléter  */]
+  #INCLURE{fond=css/w3css/perso.scss}
+]
+
+[/* (#REM) Les post-traitements  */]
+#FILTRE{w3css_namespace}

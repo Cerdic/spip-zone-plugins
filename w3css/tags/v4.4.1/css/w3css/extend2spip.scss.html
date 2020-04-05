@@ -1,0 +1,309 @@
+[(#HTTP_HEADER{Content-type:text/css[; charset=(#CHARSET)]})]
+
+[/* (#REM) Associer des class w3css aux éléments SPIP via des @extend  */]
+%unstyled {
+	list-style-type: none;
+	padding-left: 0;
+}
+%fieldset--alt {
+	/* padding-top: 2em !important; */
+	legend {	
+		display: inline-block;
+		width: 100%;
+		position: relative;
+		top: 0;
+		left: -10px;
+		right: 0;
+		margin: 0;
+		text-transform: uppercase;
+		font-variant: small-caps;
+		font-size: 13px;
+		z-index: 10;
+		font-weight: bold;
+		&:before {
+				content: '';
+				display: inline-block;
+				width: calc(100% + 34px);
+				position: absolute;
+				height: 30px;
+				background: #CONFIG{w3css/theme};
+				left: -7px;
+				top:-5px;
+				z-index: -5;
+			}		
+		}
+}
+
+.formulaire_spip {
+	@extend .w3-padding; 
+	/* @extend .w3-white; */
+	position: relative;		
+}
+fieldset {
+	@extend .w3-padding;
+	@extend .w3-section;
+	position: relative;
+	@extend %fieldset--alt;
+}
+.nolegend legend
+legend.nolegend {
+	display: none;
+}
+fieldset > ul {
+	@extend %unstyled;	
+}
+fieldset:last-of-type{
+	margin-bottom: 0 !important;
+}
+legend {
+	@extend .w3-container;
+	@extend .w3-theme;
+}
+label {
+	@extend .w3-padding-small;
+	@extend .w3-theme-l4;
+	display: block;
+}
+/*
+input[type=checkbox] ~ label,
+input[type=radio] ~ label,  
+*/
+.choix > label {
+	background-color: unset !important;
+	display: inline-block;
+}
+label .obligatoire {
+	@extend .w3-small;
+	float: right;
+}
+
+input[type=checkbox] {
+	@extend .w3-check;
+}
+
+input[type=text],
+input[type=email],
+input[type=password],
+input[type=search],
+input[type=url],
+textarea {
+	@extend .w3-input;
+	@extend .w3-border;
+	@extend .w3-light-grey;
+	&:focus {
+		@extend .w3-border-grey;
+	}
+}
+input[type=submit],
+form button,
+.btn {
+	@extend .w3-btn;
+	@extend .w3-large;
+	@extend .w3-theme-d2;
+}
+select {
+	@extend .w3-select;
+	border-bottom: 1px solid #CONFIG{w3css/theme, #EEE};
+}
+p.boutons {
+	@extend .w3-theme-l4;
+	@extend .w3-right-align;
+	@extend .w3-padding-large;
+	@extend .w3-border-grey;
+	@extend .w3-border-bottom;
+}
+/* Cas normal : p.boutons à la suite  du fieldset */
+fieldset ~ p.boutons {
+	margin: 0 0 16px 0;	
+}
+/* Cas anormal p.boutons à l'intéreur du fieldset */
+fieldset > p.boutons {
+ 	margin: 24px -25px -14px;
+}
+
+.editer-groupe {
+	@extend .w3-section;
+}
+.editer {
+	@extend .w3-margin-top;
+}
+.editer.erreur {
+	@extend .w3-panel;
+	@extend .w3-pale-red;
+	@extend .w3-leftbar;
+	@extend .w3-border-red;
+	@extend .w3-display-container;
+	margin-left: -16px;
+	margin-right: -16px; /* +10px pour compenser le border left */
+	padding: 2.5em 16px 8px 11px !important
+}
+.erreur_message {
+}
+.editer .erreur_message {
+	@extend .w3-padding;
+	@extend .w3-text-red;
+	@extend .w3-display-topright;
+	@extend .w3-small;
+	margin-right: 10px;
+}
+.explication {
+	@extend .w3-panel;
+	@extend .w3-padding-large;
+	/* @extend .w3-theme-l5; */
+	@extend .w3-pale-yellow;
+	@extend .w3-leftbar;
+	@extend .w3-border-yellow;
+}
+.reponse_formulaire {
+	@extend .w3-panel;
+	@extend .w3-medium;
+	@extend .w3-padding-large;
+	h2 {
+		padding-bottom: 8px;
+	}
+}
+.notice, .warning {
+	@extend .w3-amber;
+}
+.reponse_formulaire_erreur, .error {
+	@extend .w3-red;
+}
+.reponse_formulaire_ok, .succes {
+	@extend .w3-green;
+}
+/* cas particulier */
+p.error,p.ajax-error {
+	@extend .w3-padding-large;
+}
+
+[/* (#REM)
+
+=== Autres suggestions ===
+
+table {
+  @extend .w3-table;
+  @extend .w3-border;
+  @extend .w3-bordered;
+  @extend .w3-striped
+}
+table caption {
+  @extend .w3-theme-l1;
+  @extend .w3-padding;
+}
+
+.spip_cadre {
+	@extend .w3-code;
+}
+.spip_code {
+	@extend .w3-codespan;
+}
+
+.spip_note_ref {
+	@extend sup;
+}
+ul.spip {
+	@extend ul.w3-ul;
+}
+blockquote {
+	@extend .w3-panel;
+	@extend .w3-leftbar; 
+	@extend .w3-light-grey;
+}
+.comments-items {
+	@extend %unstyled;
+	padding-left: 0;
+	@extend .w3-padding-large;
+}
+.comment-item {
+	@extend .w3-card-2;
+	@extend .w3-margin-bottom;
+}
+.comment-meta {	
+	@extend .w3-container;
+	@extend .w3-padding-16;
+	@extend .w3-theme-l5;
+	margin: 0;
+}
+.comment-item:nth-child(2n) .comment-meta {
+	@extend .w3-theme-l4;
+}
+.comment-content {
+	@extend .w3-container;
+	@extend .w3-padding-16;
+	> p {
+		margin: 0;
+	}
+}
+html,body {
+	@extend .w3-theme-l3;
+}
+.page {
+	@extend .w3-white;
+	padding: 2%;
+	max-width: 1440px;
+	margin: 2em auto;
+}
+.header {
+	min-height: 120px;
+	text-align: center;
+	@extend .w3-display-container;
+}
+#slogan {
+	@extend .w3-display-bottomright;
+}
+
+.header .spip_logo_site > * {
+	text-align:  center;
+	@extend .w3-display-topmiddle;
+	@extend .w3-btn;
+	@extend .w3-white;
+	@extend .w3-padding-xlarge;
+}
+.header .spip_logo_site img {
+	display: block;
+	height: auto;
+}
+.arbo {
+}
+.footer .colophon {
+	text-align: center;
+}
+
+.menu {
+	ul {
+		@extend %unstyled;
+	}
+	h2 {
+		margin-bottom: 0;
+	}
+}
+.aside .menu {
+	h2 {
+		@extend .w3-border-bottom;
+		@extend .w3-border-grey;
+	}
+	ul {
+		@extend ul.w3-ul;
+	}
+	 li:hover {
+		@extend .w3-hover-theme;
+	}
+}
+.nav {
+	ul {
+		@extend .w3-navbar;
+		@extend .w3-border;
+		@extend .w3-light-grey;
+	}
+	.on {
+		@extend .w3-theme-d2;
+	}
+	a {
+		@extend .w3-navitem;
+		&:hover {
+			@extend .w3-theme-d3;
+		}
+	}
+}
+
+*/]

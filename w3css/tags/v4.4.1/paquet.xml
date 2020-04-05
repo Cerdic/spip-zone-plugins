@@ -1,0 +1,29 @@
+<paquet
+	prefix="w3css"
+	categorie="outil"
+	version="4.4.1"
+	etat="test"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="images/w3css-64.png"
+	schema="1.0"
+	documentation="https://contrib.spip.net/article4852"
+>
+	<nom>Framework W3.CSS</nom>
+
+	<auteur lien="//blog.roxing.net/contact">placido</auteur>
+	<credit lien="//www.w3schools.com/w3css/default.asp">Jan Egil and Borge Refsnes (w3css)</credit>
+
+	<licence>GNU/GPL</licence>
+
+	<!-- Gestion des dépendances -->
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
+	<necessite nom="scssphp" compatibilite="[1.3.3;[" />
+<!-- 	
+	<necessite nom="palette" compatibilite="[3.0.8;[" /> 
+-->
+
+	<menu nom="configurer_w3css" titre="w3css:framework_w3css" parent="menu_squelette" icone="images/w3css-16.png" />
+
+	<pipeline nom="insert_head_css" inclure="w3css_pipelines.php" />
+
+</paquet>

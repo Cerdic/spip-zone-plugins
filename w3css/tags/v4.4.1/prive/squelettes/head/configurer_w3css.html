@@ -1,0 +1,20 @@
+[(#REM) Si pas de title, celui ci sera mis automatiquement par f_title_auto
+en capturant le premier <h1> de la page]
+#SET{paramcss,#REM|parametres_css_prive}
+#PIPELINE{header_prive,#INCLURE{fond=prive/squelettes/inclure/head,titre,minipres,paramcss=#GET{paramcss},espace_prive}}
+
+<script type="text/javascript">
+function w3css_picker () {
+	$('.js-picker').on('click',  function(event) {
+		event.preventDefault();
+		var couleur = $(this).data('couleur') || '';
+		$('#champ_theme').val(couleur).focus();
+	});
+};
+
+jQuery(window).on("load", function() {
+	w3css_picker();
+	onAjaxLoad(w3css_picker);
+});
+
+</script>

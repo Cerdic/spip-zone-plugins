@@ -1,0 +1,36 @@
+[(#REM) Générer une déclinaisons depuis la couleur choisie pour le thème]
+[(#CONFIG{w3css/theme}|substr{1}|set{t})]
+
+[(#REM) palette de luminance ]
+[(#ARRAY{
+l5,-0.4,
+l4,-0.35,
+l3,-0.25,
+l2,-0.15,
+l1,-0.05,
+d1,0.05,
+d2,0.15,
+d3,0.25,
+d4,0.35,
+d5,0.45,
+light,-0.4,
+dark,0.45,
+action,0.30,
+}|set{palette})]
+
+<BOUCLE_luminance(DATA){source table, #GET{palette} }>
+[(#GET{t}|couleur_luminance{ [(#VAL{0.5}|plus{#VALEUR})] }|set{l})]
+.w3-theme-#CLE {  color:[#(#GET{l}|couleur_extreme|couleur_inverser)] !important; background-color:[#(#GET{l})] !important}
+</BOUCLE_luminance>
+
+.w3-theme {color:#fff !important; background-color:[#(#GET{t})] !important}
+.w3-text-theme {color:[#(#GET{t})] !important}
+.w3-border-theme {border-color:[#(#GET{t})] !important}
+
+.w3-hover-theme:hover {color:#fff !important; background-color:[#(#GET{t})] !important}
+.w3-hover-text-theme {color:[#(#GET{t})] !important}
+.w3-hover-border-theme:hover {border-color:[#(#GET{t})] !important}
+
+.w3-theme-gradient {
+  color: #000 !important;
+  background: linear-gradient(top, [#(#GET{t}|couleur_luminance{0.35})] 25%, [#(#GET{t}|couleur_luminance{0.45})] 75%)}
