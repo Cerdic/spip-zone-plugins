@@ -1,0 +1,34 @@
+[(#REM)
+<template><:info_spip:liste_auteurs_webmestre_nom:></template>
+]
+
+<B_webmestre>
+<!-- <:info_spip:liste_auteurs_webmestre_nom:> -->
+<div class="fieldset webmestre_fieldset" id="[(#SQUELETTE|explode{'/'}|array_pop|replace{'.html',''})]">
+	<h3 class="legend titrem">[(#TOTAL_BOUCLE|singulier_ou_pluriel{<:info_spip:info_1_webmestre:>,<:info_spip:info_nb_webmestres:>})]</h3>
+</div>
+
+<div class="liste-objets">
+	<table class="spip liste">
+		<thead>
+			<tr>
+				<th class="id secondaire"><:info_spip:auteur_id_label:></th>
+				<th class="login secondaire"><:info_spip:auteur_login_label:></th>
+				<th class="email secondaire"><:info_spip:auteur_email_label:></th>
+				<th class="nom principal"><:info_spip:auteur_nom_label:></th>
+			</tr>
+		</thead>
+		<tbody>
+		<BOUCLE_webmestre (AUTEURS) {webmestre='oui'} {par id_auteur} {tout}>
+		<tr>
+			<td class="id secondaire">[(#ID_AUTEUR)]</td>
+			<td class="login secondaire">[(#LOGIN|sinon{'-'})]</td>
+			<td class="email secondaire">[(#EMAIL|sinon{'-'})]</td>[(#SET{url_auteur,[(#SPIP_VERSION|intval|=={2}|?{'auteur_infos','auteur'})]})]
+			<td class="nom principal"><a href="#URL_ECRIRE{#GET{url_auteur},id_auteur=#ID_AUTEUR}">[(#NOM|sinon{'-'})]</a></td>
+		</tr>
+		</BOUCLE_webmestre>
+		</tbody>
+	</table>
+</div>
+</B_webmestre>
+

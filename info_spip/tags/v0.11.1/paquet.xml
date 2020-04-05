@@ -1,0 +1,26 @@
+<paquet
+	prefix="info_spip"
+	categorie="outil"
+	version="0.11.1"
+	etat="stable"
+	compatibilite="[2.1.0;3.2.*]"
+	logo="prive/themes/spip/images/info_spip-64.png"
+	documentation="https://contrib.spip.net/Plugin-Info-SPIP"
+	schema="0.1.0"
+>
+
+	<nom>Info SPIP</nom>
+
+	<auteur lien='http://www.teddypayet.com/'>Teddy Payet</auteur>
+
+	<licence>GNU/GPL</licence>
+	<pipeline nom="autoriser" inclure="info_spip_autorisations.php" />
+	<pipeline nom="affiche_gauche" inclure="info_spip_pipelines.php" />
+
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="spip_bonux" compatibilite="[3.0.0;]" />
+
+	<menu nom="configurer_info_spip" parent="menu_configuration" icone="images/info_spip-16.png" action="configurer_info_spip" titre="info_spip:titre_configurer_info_spip" />
+	<menu nom="info_config" parent="menu_administration" icone="images/info_spip-16.png" action="info_config" titre="info_spip:titre_info_config" />
+
+</paquet>

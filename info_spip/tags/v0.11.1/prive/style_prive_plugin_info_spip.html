@@ -1,0 +1,142 @@
+[(#REM)<style>/*
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+*/]#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+/*
+Valeurs par defaut :
+#SET{claire,##ENV{couleur_claire,edf3fe}} [claire: (#GET{claire});]
+#SET{foncee,##ENV{couleur_foncee,3874b0}} [foncee: (#GET{foncee});]
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}} [left: (#GET{left});]
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}} [right: (#GET{right});]
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}} [rtl: (#GET{rtl});]
+#SET{dir,#ENV{ltr}|choixsiegal{left,ltr,rtl}} [dir: (#GET{dir});]
+
+#SET{font-size,#ENV{font-size,0.8125em}} [font-size: (#GET{font-size});]
+#SET{line-height,#ENV{line-height,1.385em}} [line-height: (#GET{line-height});]
+#SET{margin-bottom,#ENV{margin-bottom,#GET{line-height}}} [margin-bottom: (#GET{margin-bottom});]
+#SET{text-indent,#ENV{text-indent,50px}} [text-indent: (#GET{text-indent});]
+#SET{font-family,#ENV*{font-family,'Helvetica, Arial, sans-serif'}} [font-family: (#GET{font-family});]
+#SET{background-color,#ENV{background-color,#F8F7F3}} [background-color : (#GET{background-color});]
+#SET{color,#ENV{color,#000000}} [color: (#GET{color});]
+#SET{color_success,#c6d880}
+#SET{color_notice,#ffd83f}
+#SET{color_warning,#df454f}
+#SET{color_info,#c5e41c}
+*/
+body.info_config #contenu table {
+	width: 100%;
+}
+body.info_config #contenu .fiche_objet #wysiwyg .champ {
+	margin-bottom: 1em;
+	overflow: hidden;
+	padding-top: 0.5em;
+	border-top: 1px solid #GET{claire};
+}
+body.info_config #contenu .fiche_objet #wysiwyg .champ .label.visible {
+	display: block;
+	width: 30%;
+	margin-top:0;
+	float: left;
+	font-weight: bold;
+	color: #GET{color};
+}
+body.info_config #contenu .fiche_objet #wysiwyg .champ .span {
+	display:block;
+	width: 69%;
+	float: right;
+}
+body.info_config #contenu .fiche_objet #wysiwyg .fieldset {
+	margin-top: 2em;
+}
+body.info_config #contenu .fiche_objet #wysiwyg .fieldset + .liste-objets {
+	margin-top: 1em;
+}
+body.info_config #contenu .fiche_objet #wysiwyg .fieldset .titrem {
+	display: block;
+	font-weight: bold;
+	padding: 7px 5px 7px 10px;
+	border-top: 1px solid #GET{color};
+	background-color: #GET{background-color};
+	color: #GET{foncee};
+}
+
+[(#REM)
+	ça c'est juste pour le fun.
+]
+body.accueil #navigation .box.type_site .inner {
+	background-color: #ffffff;
+	border: 1px solid #cccccc;
+}
+body.accueil #navigation .box.type_site.type_site_07prod .inner,
+body.accueil #navigation .box.type_site.type_site_06prep .inner {
+	background-color: [#(#GET{color_success}|replace{"#",""}|couleur_saturation{1})];
+	color: [#(#GET{color_success}|replace{"#",""}|couleur_saturation{1}|couleur_extreme)];
+}
+body.accueil #navigation .box.type_site.type_site_05rec .inner,
+body.accueil #navigation .box.type_site.type_site_04test .inner {
+	background-color: [#(#GET{color_notice}|replace{"#",""}|couleur_saturation{1})];
+	color: [#(#GET{color_notice}|replace{"#",""}|couleur_saturation{1}|couleur_extreme)];
+}
+body.accueil #navigation .box.type_site.type_site_03inte .inner,
+body.accueil #navigation .box.type_site.type_site_02dev .inner {
+	background-color: [#(#GET{color_warning}|replace{"#",""}|couleur_saturation{1})];
+	color: [#(#GET{color_warning}|replace{"#",""}|couleur_saturation{1}|couleur_extreme)];
+}
+body.accueil #navigation .box.type_site.type_site_01local .inner {
+	background-color: [#(#GET{color_info}|replace{"#",""}|couleur_saturation{1})];
+	color: [#(#GET{color_info}|replace{"#",""}|couleur_saturation{1}|couleur_extreme)];
+}
+.box.type_site .inner .bd {
+	display: none;
+}
+
+[(#REM)
+/*
+	Et là, on fait vraiment ce qu'on va avoir à l'affichage.
+	C'est une boite d'information, alors, on reprend le style de la boite .simple.info
+	de SPIP 3.0
+ */
+]
+body.accueil #navigation .box.info.type_site {
+	margin: 2em 0;
+}
+body.accueil #navigation .box.info.type_site .inner {
+	background: none repeat scroll 0 0 #fcfcfc;
+	position: relative;
+	border: 2px solid #GET{claire};
+	color: #GET{color};
+}
+body.accueil #navigation .box.info.type_site .inner .hd {
+	padding: 0.7em 10px;
+}
+body.accueil #navigation .box.info.type_site .inner .hd h3 {
+	margin-bottom: 0;
+	padding: 0;
+}
+
+body.accueil #navigation .box.info.type_site .cadre-icone {
+	left: 10px;
+	position: absolute;
+	top: -16px;
+	z-index: 1;
+	border:0 none;
+	margin: 0;
+	padding: 0;
+}
+[(#SET{info_config,[(#CONFIG{'info_spip/modules'})]})]
+<B_module_info>
+<BOUCLE_module_info (DATA) {source table, (#VAL{'html'}|lister_noisettes_info_spip)}>[(#VALEUR|in_array{#GET{info_config}}|oui)
+.navigation_avec_icones .bando2_[(#VALEUR)] \{
+	background-image: url\([(#CHEMIN_IMAGE{[(#VALEUR|concat{'-16.png'})]}|sinon{[(#CHEMIN_IMAGE{'info_spip-16.png'})]})]\);
+\}]
+</BOUCLE_module_info>
+</B_module_info>

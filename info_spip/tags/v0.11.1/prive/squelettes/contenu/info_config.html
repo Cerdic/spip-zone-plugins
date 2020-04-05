@@ -1,0 +1,15 @@
+﻿[(#AUTORISER{voir,infospip}|sinon_interdire_acces)]
+<div class="cartouche">
+	<h1 class="grostitre"><:info_spip:titre_page_config:></h1>
+[(#CONFIG{'info_spip/actif'}|=={'oui'}|oui)
+	<p class="explication"><a href="[(#URL_PAGE{info_config}|parametre_url{cle,#CONFIG{'info_spip/cle'}})]">[(#URL_PAGE{info_config}|parametre_url{cle,#CONFIG{'info_spip/cle'}})]</a></p>
+]
+</div>
+<div class="nettoyeur"></div>
+
+[(#BOITE_OUVRIR{'',simple fiche_objet})]
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/info_config,env} />
+</div>
+
+[(#BOITE_FERMER)]

@@ -1,0 +1,19 @@
+﻿#HTTP_HEADER{Content-Type: application/xml; charset=#CHARSET}
+<config>
+<BOUCLE_cle (CONDITION){si #ENV{cle}|=={#CONFIG{'info_spip/cle'}}} {si #CONFIG{'info_spip/actif'}|=={'oui'}}> </BOUCLE_cle>
+<nom_site value="[(#NOM_SITE_SPIP|attribut_html)]" />
+<logiciel nom="SPIP" version="[(#SPIP_VERSION|explode{' '}|table_valeur{0})]" revision="[(#SPIP_VERSION|explode{' '}|table_valeur{1})]" charset="#CHARSET" />
+<date_creation value="[(#VAL{'Y-m-d H:i:s'}|date{#EVAL{'_FILE_CONNECT'}|filemtime})]" />
+<fo url="[(#URL_SITE_SPIP)]" />
+<bo url="[(#CONFIG{'info_spip/bo_url'})]" />
+[<type_site value="(#CONFIG{'info_spip/type_site'}|attribut_html)" />]
+<!-- Informations complémentaires qui peuvent être ajoutées par des plugins -->
+<BOUCLE_module_info (POUR) {tableau #CONFIG{'info_spip/modules'}}>
+[(#CHEMIN{#VAL{'infos_spip/xml/'}|concat{#VALEUR,'.html'}}|oui)
+<INCLURE{fond=infos_spip/xml/#VALEUR, env} />
+]</BOUCLE_module_info>
+
+</B_cle>
+<error>Accès interdit</error>
+<//B_cle>
+</config>

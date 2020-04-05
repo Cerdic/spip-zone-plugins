@@ -1,0 +1,58 @@
+<plugin>
+	<nom><multi>[fr]Info SPIP</multi></nom>
+	<icon>prive/themes/spip/images/info_spip-32.png</icon>
+	<auteur>Teddy Payet</auteur>
+	<version>0.11.1</version>
+	<version_base>0.1.0</version_base>
+	<etat>stable</etat>
+	<description><multi>
+	[fr]Ce plugin ne fait qu'afficher la configuration du site sur lequel il est actif.
+Il faut renseigner une clé dans la page de configuration pour que la page de config puisse être active.
+On affiche les informations équivalentes au plugin "Sites pour projets" avec qui il va de pair. Ce plugin est toutefois autonome.
+	</multi></description>
+	<lien>https://contrib.spip.net/Plugin-Info-SPIP</lien> <!-- URI de documentation -->
+	<fonctions>info_spip_fonctions.php</fonctions>
+	<prefix>info_spip</prefix>
+
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>info_spip_autorisations.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>info_spip_pipelines.php</inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version="[2.1.0;3.2.99]" />
+	<necessite id="spip_bonux" version="[2.2.0;]" />
+	<necessite id="Iterateurs" version="[1.0.1;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
+
+	<categorie>outil</categorie>
+
+	<bouton id='configurer_info_spip' parent='configuration'>
+		<icone>prive/themes/spip/images/info_spip-32.png</icone>
+		<titre>info_spip:titre_configurer_info_spip</titre>
+		<url>configurer_info_spip</url>
+	</bouton>
+
+	<bouton id='info_config' parent='statistiques_visites'>
+		<icone>prive/themes/spip/images/info_spip-32.png</icone>
+		<titre>info_spip:titre_info_config</titre>
+		<url>info_config</url>
+	</bouton>
+
+	<!-- Boutons pour plugin Bandeau -->
+	<bouton id='configurer_info_spip_bando' parent='bando_configuration'>
+		<icone>prive/themes/spip/images/info_spip-16.png</icone>
+		<titre>info_spip:titre_configurer_info_spip</titre>
+		<url>configurer_info_spip</url>
+	</bouton>
+
+	<bouton id='info_config_bando' parent='bando_administration'>
+		<icone>prive/themes/spip/images/info_spip-16.png</icone>
+		<titre>info_spip:titre_info_config</titre>
+		<url>info_config</url>
+	</bouton>
+
+</plugin>

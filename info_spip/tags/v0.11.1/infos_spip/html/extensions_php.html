@@ -1,0 +1,37 @@
+[(#REM)
+<template><:info_spip:extensions_php_nom:></template>
+]
+
+<div class="fieldset php_fieldset" id="[(#SQUELETTE|explode{'/'}|array_pop|replace{'.html',''})]">
+	<h3 class="legend titrem"><:info_spip:php_fieldset_label:></h3>
+</div>
+
+[<div class="champ contenu_php_version">
+	<div class="label visible"><:info_spip:php_version_label:></div>
+	<div dir='#LANG_DIR' class='php_version span'>(#EVAL{phpversion()})</div>
+</div>]
+
+[<div class="champ contenu_php_memory">
+	<div class="label visible"><:info_spip:php_memory_label:></div>
+	<div dir='#LANG_DIR' class='php_memory span'>(#EVAL{ini_get('memory_limit')})</div>
+</div>]
+
+[<div class="champ contenu_php_timezone">
+	<div class="label visible"><:info_spip:php_timezone_label:></div>
+	<div dir='#LANG_DIR' class='php_timezone span'>(#EVAL{date_default_timezone_get()})</div>
+</div>]
+
+<B_extensions>
+<!-- <:info_spip:extensions_php_nom:> -->
+<div class="fieldset extensions_php_fieldset">
+	<h3 class="legend titrem">[(#TOTAL_BOUCLE|singulier_ou_pluriel{<:info_spip:info_1_extension_php:>,<:info_spip:info_nb_extensions_php:>})]</h3>
+</div>
+
+<div class="champ contenu_extensions_php">
+	<div class="label visible"><:info_spip:extensions_php_label:></div>
+	<div dir='#LANG_DIR' class='applicatif_port span'>
+	<BOUCLE_extensions (DATA) {source table, (#REM|lister_extensions_php)} {', '}><span class="item">[(#VALEUR|trim)]</span></BOUCLE_extensions>
+	</div>
+</div>
+</B_extensions>
+

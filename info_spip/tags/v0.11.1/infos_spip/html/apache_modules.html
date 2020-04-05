@@ -1,0 +1,17 @@
+[(#REM)
+<template><:info_spip:apache_modules_nom:></template>
+]
+
+<B_modules>
+<!-- <:info_spip:apache_modules_nom:> -->
+<div class="fieldset apache_modules_fieldset" id="[(#SQUELETTE|explode{'/'}|array_pop|replace{'.html',''})]">
+	<h3 class="legend titrem">[(#TOTAL_BOUCLE|singulier_ou_pluriel{<:info_spip:info_1_module_apache:>,<:info_spip:info_nb_modules_apache:>})]</h3>
+</div>
+
+<div class="champ contenu_apache_modules">
+	<div class="label visible"><:info_spip:apache_modules_label:></div>
+	<div dir='#LANG_DIR' class='applicatif_port span'>
+<BOUCLE_modules (DATA) {source table, (#REM|lister_modules_apache)} {par valeur} {', '}><span class="item">[(#VALEUR|trim)]</span></BOUCLE_modules>
+	</div>
+</div>
+</B_modules>

@@ -1,0 +1,10 @@
+<plugins><B_dist>
+<BOUCLE_dist (PAQUETS) {constante="_DIR_PLUGINS_DIST"}{par prefixe}{tout}{doublons}>
+	<plugin prefixe="#PREFIXE" version="#VERSION" version_base="#VERSION_BASE" nom="<BOUCLE_nom_dist(PLUGINS){prefixe}{tout}>[(#NOM|attribut_html)]</BOUCLE_nom_dist>" statut="<:info_spip:plugins_statut_dist_label|attribut_html:>" /></BOUCLE_dist>
+</B_dist><B_actif>
+<BOUCLE_actif (PAQUETS) {actif=oui}{doublons}{par prefixe}{tout}>
+	<plugin prefixe="#PREFIXE" version="#VERSION" version_base="#VERSION_BASE" nom="<BOUCLE_nom_actif (PLUGINS){prefixe}{tout}>[(#NOM|attribut_html)]</BOUCLE_nom_actif>" statut="<:info_spip:plugins_statut_actif_label|attribut_html:>" /></BOUCLE_actif>
+</B_actif><B_inactif>
+<BOUCLE_inactif (PAQUETS) {actif=non}{constante="_DIR_PLUGINS"}{tout}>
+	<plugin prefixe="#PREFIXE" version="#VERSION" version_base="#VERSION_BASE" nom="<BOUCLE_nom_inactif (PLUGINS){prefixe}{tout}>[(#NOM|attribut_html)]</BOUCLE_nom_inactif>" statut="<:info_spip:plugins_statut_inactif_label|attribut_html:>"/></BOUCLE_inactif>
+</B_inactif></plugins>

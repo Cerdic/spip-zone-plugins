@@ -1,0 +1,9 @@
+<!-- [(#EVAL{include_spip('inc/plugin')})] [(#EVAL{include_spip('plugins/get_infos')})] -->
+[(#SET{plugins,#EVAL{liste_chemin_plugin_actifs(_DIR_EXTENSIONS)}})]
+<plugins><B_dist>
+<BOUCLE_dist (DATA) {source table, #GET{plugins}}>#SET{texte,plugins_get_infos_dist('#VALEUR','false',_DIR_EXTENSIONS)}[(#SET{plugin,#EVAL{#GET{texte}}})]
+	<plugin prefixe="#CLE" version="[(#GET{plugin}|table_valeur{version})]" version_base="[(#GET{plugin}|table_valeur{version_base}|sinon{'-'})]" nom="[(#GET{plugin}|table_valeur{nom}|extraire_multi|attribut_html)]" statut="<:info_spip:plugins_statut_dist_label|attribut_html:>" /></BOUCLE_dist>
+</B_dist>[(#SET{plugins,#EVAL{liste_chemin_plugin_actifs()}})]<B_actif>
+<BOUCLE_actif (DATA) {source table, #GET{plugins}}>#SET{texte,plugins_get_infos_dist('#VALEUR')}[(#SET{plugin,#EVAL{#GET{texte}}})]
+	<plugin prefixe="#CLE" version="[(#GET{plugin}|table_valeur{version})]" version_base="[(#GET{plugin}|table_valeur{version_base}|sinon{'-'})]" nom="[(#GET{plugin}|table_valeur{nom}|extraire_multi|attribut_html)]" statut="<:info_spip:plugins_statut_actif_label|attribut_html:>" /></BOUCLE_actif>
+</B_actif></plugins>
