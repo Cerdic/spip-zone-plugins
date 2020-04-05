@@ -1,0 +1,156 @@
+AED Dirham des émirats arabes unis
+AFN Afghani
+ALL Lek
+AMD Dram arménien
+ANG Florin des Antilles
+AOA Kwanza
+ARS Peso argentin
+AUD Dollar australien
+AWG Florin d'Aruba
+AZN Manat
+BAM Mark convertible
+BBD Dollar de Barbade
+BDT Taka
+BGN Lev de Bulgarie
+BHD Dinar de Bahreïn
+BIF Franc du Burundi
+BMD Dollar des Bermudes
+BND Dollar de Brunei
+BOB Boliviano
+BRL Real de Brésil
+BSD Dollar des Bahamas
+BTN Ngultrum
+BWP Pula
+BYR Rouble bélorusse
+BZD Dollar de Belize
+CAD Dollar canadien
+CDF Franc Congolais
+CHF Franc suisse
+CLP Peso chilien
+CNY Yuan Ren-Min-Bi
+COP Peso colombien
+CRC Colon de Costa Rica
+CUC Peso cubain Convertible
+CUP Peso cubain
+CVE Escudo du Cap-Vert
+CZK Couronne tchèque
+DJF Franc de Djibouti
+DKK Couronne danoise
+DOP Peso dominicain
+DZD Dinar algérien
+EEK Couronne estonienne
+EGP Livre égyptienne
+ERN Nakfa
+ETB Birr éthiopien
+EUR Euro
+FJD Dollar de Fidji
+FKP Livre de Falkland
+GBP Livre Sterling
+GEL Lari
+GHS Ghana Cedi
+GIP Livre de Gibraltar
+GMD Dalasi
+GNF Franc guinéen
+GTQ Quetzal
+GWP Peso de Guinée-Bissau
+GYD Dollar de Guyane
+HKD Dollar de Hong-Kong
+HNL Lempira
+HRK Kuna
+HTG Gourde
+HUF Forint
+IDR Rupiah
+ILS Nouvel israëli sheqel
+INR Roupie indienne
+IQD Dinar iraquien
+IRR Rial iranien
+ISK Couronne islandaise
+JMD Dollar jamaïcain
+JOD Dinar jordanien
+JPY Yen
+KES Shilling du Kenya
+KGS Som
+KHR Riel
+KMF Franc des Comores
+KPW Won de la Corée du Nord
+KRW Won
+KWD Dinar koweïtien
+KYD Dollar des Iles Caïmanes
+KZT Tenge
+LAK Kip
+LBP Livre libanaise
+LKR Roupie de Sri Lanka
+LRD Dollar libérien
+LSL Loti
+LTL Litas lituanien
+LVL Lats letton
+LYD Dinar libyen
+MAD Dirham marocain
+MDL Leu de Moldovie
+MGA Malagasy Ariary
+MKD Denar
+MMK Kyat
+MNT Tugrik
+MOP Pataca
+MRO Ouguija
+MUR Roupie de Maurice
+MVR Rufiyaa
+MWK Kwacha de Malawi
+MXN Peso mexicain
+MYR Ringgit de Malaisie
+MZN Metical
+NAD Dollar namibien
+NGN Naira
+NIO Cordoba Oro
+NOK Couronne norvégienne
+NPR Roupie du Népal
+NZD Dollar néo-zélandais
+OMR Rial Omani
+PAB Balboa
+PEN Nouveau Sol
+PGK Kina
+PHP Peso philippin
+PKR Roupie du Pakistan
+PLN Zloty
+PYG Guarani
+QAR Riyal du Qatar
+RON Nouveau Leu
+RSD Dinar de Serbie
+RUB Rouble russe
+RWF Franc du Rwanda
+SAR Riyal saoudien
+SBD Dollar de Salomon
+SCR Roupie des Seychelles
+SDG Livre soudanaise
+SEK Couronne suédoise
+SGD Dollar de Singapour
+SHP Livre de Sainte-Hélène
+SLL Leone
+SOS Shilling de Somalie
+SRD Dollar de Suriname
+STD Dobra
+SYP Livre syrienne
+SZL Lilangeni
+THB Baht
+TJS Somoni
+TMT Manat
+TND Dinar tunisien
+TOP Pa'anga
+TRY Nouvelle Livre
+TTD Dollar de la Trinité et de Tobago
+TWD Nouveau dollar de Taïwan
+TZS Shilling de Tanzanie
+UAH Hryvnia
+UGX Nouveau Shilling ougandais
+USD Dollar des États-Unis
+UYI Peso Urugyayo en Unidades Indexadas
+UYU Peso Uruguayo
+UZS Soum d'Ouzbékistan
+VEF Bolivar Fuerte
+VND Dong
+VUV Vatu
+WST Tala
+YER Riyal du Yémen
+ZAR Rand
+ZMK Kwacha de Zambie
+ZWL Dollar du Zimbabwe
