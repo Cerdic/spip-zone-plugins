@@ -1,0 +1,91 @@
+[(#REM)
+    On liste les tables principales qui ne sont pas des objets éditoriaux
+][
+(#SET{exclus,#LISTE{spip_jobs,spip_menus,spip_menus_entrees,spip_types_documents,spip_documents,spip_forum,spip_messages,spip_paquets,spip_plugins}})]
+
+[(#REM)
+on liste les types de logos des objets principaux de SPIP en prenant en compte les cas spéciaux
+][
+(#SET{tables_principales, [(#VAL|lister_tables_principales|array_keys|array_diff{#GET{exclus}})]})]
+<div class="formulaire_spip formulaire_editer formulaire_editer_logo">
+    <form action="#SELF" role="form">
+    <ul>
+        [(#SELF
+        |parametre_url{logo,''}
+        |form_hidden)]
+        <B_objets>
+        <li class="editer editer_logo">
+            <label for="champ_logo"><:lister_logos:objets_label:></label>
+            <select name="logo" id="champ_logo" class="form-control">
+                <BOUCLE_objets (DATA) {source table, #GET{tables_principales}} {par valeur}>
+                <option value="[(#VALEUR)]"[ (#ENV{logo}|=={#VALEUR}|oui)selected="selected"]>[(#VAL|lister_tables_objets_sql|table_valeur{#VALEUR/texte_objets}|_T|sinon{#VALEUR})]</option></BOUCLE_objets>
+            </select>
+        </li>
+        </B_objets>
+        </ul>
+        <p class="boutons">
+            <button type="submit" class="btn btn-default"><:bouton_valider:></button>
+        </p>
+    </form>
+</div>
+
+[(#REM)
+Maintenant qu'on a les types de logos de tous les objets éditoriaux de SPIP
+On scanne objet par objet les logos contenus dans le répertoire IMG/
+][(#SET{regex,[(#EVAL{_DIR_IMG}|concat{'{',[(#ENV{logo,spip_articles}|id_table_objet|type_du_logo)],'}{on,off}*.*'})]})]
+[(#SET{logo_max_size,[(#EVAL{_LOGO_MAX_SIZE})]})][(#SET{logo_max_height,[(#EVAL{_LOGO_MAX_HEIGHT})]})][(#SET{logo_max_width,[(#EVAL{_LOGO_MAX_WIDTH})]})]
+<B_ls2>
+<div class="galerie[ media-(#ENV{logo,spip_articles})]">
+    <h2>[(#VAL|lister_tables_objets_sql|table_valeur{#ENV{logo,spip_articles}/texte_objets}|_T)][<br/><em><small>(#GRAND_TOTAL|singulier_ou_pluriel{lister_logos:info_1_logo,lister_logos:info_nb_logos})</small></em>]</h2>
+    [(#ANCRE_PAGINATION)]
+    [<div class="pagination">(#PAGINATION{prive})</div>]
+    <table>
+        <thead>
+            <tr>
+                <th class="id"><:medias:id:></th>
+                <th></th>
+                <th><:medias:logo:></th>
+                <th><:medias:infos:></th>
+                <th><:medias:descriptif:></th>
+            </tr>
+        </thead>
+        <tbody>
+        <BOUCLE_ls2 (DATA){source glob, #GET{regex}} {pagination 5 #ENV{logo,spip_articles}}>[(#SET{pathinfo,[(#VALEUR|pathinfo)]})][(#SET{brise,[(#ENV{logo,spip_articles}|id_table_objet|sql_getfetsel{[(#ENV{logo,spip_articles})],[(#ENV{logo,spip_articles}|id_table_objet|concat{'=',[(#VALEUR|logo_infos{3}|sql_quote)]})]}|?{0,1})]})]
+            <tr id="[(#GET{pathinfo/filename})]">
+                <td class="id">
+                    <strong>[(#GET{brise}|non)<a href="[(#VALEUR|logo_infos{3}|generer_url_entite{[(#ENV{logo,spip_articles}|table_objet)]})]">][(#VALEUR|logo_infos{3})][(#GET{brise}|non)</a>]</strong>
+                </td>
+                <td class='statut'>
+                    [(#GET{brise,0}|oui)<img src='#CHEMIN_IMAGE{document-manquant-24.png}' width='24' height='24' alt='<:lister_logos:objet_supprime:>' />]
+                </td>
+                <td class="logo">
+                    <a href="[(#VALEUR)]"[ title='(#GET{pathinfo/basename}|attribut_html)'][ type="(#VALEUR|getimagesize|table_valeur{mime})"]>[(#VALEUR|balise_img|image_reduire{250,100}|inserer_attribut{alt,#VALEUR}|inserer_attribut{class,spip_logos})]</a>
+                    [<div class="fichier">(#GET{pathinfo/basename})</div>]
+                </td>
+                <td class="exif">
+                    <div class="constante_logo">
+                        <div class="[(#GET{logo_max_size}|oui)[(#VALEUR|filesize|div{1024}|>{#GET{logo_max_size}}|?{'logo_max_size_ko','logo_max_size_ok'})]]" title="[(#GET{logo_max_size}|oui)logo_max_size]"> </div>
+                        <div class="[(#GET{logo_max_width}|oui)[(#VALEUR|largeur|>{#GET{logo_max_width}}|?{'logo_max_width_ko','logo_max_width_ok'})]]" title="[(#GET{logo_max_width}|oui)logo_max_width]"> </div>
+                        <div class="[(#GET{logo_max_height}|oui)[(#VALEUR|hauteur|>{#GET{logo_max_height}}|?{'logo_max_height_ko','logo_max_height_ok'})]]" title="[(#GET{logo_max_height}|oui)logo_max_height]"> </div>
+                    </div>
+                    [<strong class="extension">(#GET{pathinfo/extension})</strong>]
+                    <div class="dimensions">[(#VALEUR|largeur)] x [(#VALEUR|hauteur)] pixels </div>
+                    [<div class="taille">(#VALEUR|filesize|taille_en_octets)</div>]
+                    [<div class="date">(#VAL{Y-m-d h:i:s}|date{#VALEUR|filemtime}|affdate{d/m/Y})</div>]
+                    [<a class="[(#ENV{logo,spip_articles}|table_objet)]" href="[(#VALEUR|logo_infos{3}|generer_url_entite{[(#ENV{logo,spip_articles}|table_objet)]})]">(#INFO_TITRE{[(#ENV{logo,spip_articles}|table_objet)],[(#VALEUR|logo_infos{3})]})</a>]
+                    [(#INFO_TITRE{[(#ENV{logo,spip_articles}|table_objet)],[(#VALEUR|logo_infos{3})]}|non)<em><:lister_logos:objet_supprime:></em>]
+                </td>
+                <td class="descriptif">
+                    [<strong>(#VALEUR|logo_etat)</strong>]
+                </td>
+            </tr>
+        </BOUCLE_ls2>
+        </tbody>
+    </table>
+    [<div class="pagination">(#PAGINATION{prive})</div>]
+</div>
+</B_ls2>
+    <h2>[(#VAL|lister_tables_objets_sql|table_valeur{#ENV{logo,spip_articles}/texte_objets}|_T)]</h2>
+    <p><:lister_logos:pas_de_logos:></p>
+<//B_ls2>
+
