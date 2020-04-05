@@ -1,0 +1,19 @@
+.lazyload {
+    opacity: 0;
+}
+/* [1] utilisation de body pour surpasser un block ayant la propriété cover */
+body .lazyloading {/* 1 */
+  opacity: .5;
+  background: #f7f7f7 url(../images/loader.gif) no-repeat center;
+  background-size: 32px;/* 1 */
+}
+
+.lazyloaded {
+  opacity: 1;
+  -webkit-transition: opacity 2s linear;
+  transition: opacity 2s linear;
+}
+
+.no-js img.lazyload {
+  display: none;
+}

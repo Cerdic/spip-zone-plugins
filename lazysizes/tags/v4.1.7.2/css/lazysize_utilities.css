@@ -1,0 +1,104 @@
+/* Animations */
+@-webkit-keyframes pulse {
+  0% {
+    opacity: .5;
+  }
+  25%{
+    opacity: .8;
+  }
+  50% {
+    opacity: .5;
+  }
+  75%{
+    opacity: .8;
+  }
+  80% {
+    opacity: .5;
+  }
+  100% {
+    opacity: .8;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: .5;
+  }
+  25%{
+    opacity: .8;
+  }
+  50% {
+    opacity: .5;
+  }
+  75%{
+    opacity: .8;
+  }
+  80% {
+    opacity: .5;
+  }
+  100% {
+    opacity: .8;
+  }
+}
+
+.animate-pulse.lazyloading {
+  background: none transparent;
+  -webkit-animation: pulse 8s infinite;
+  animation: pulse 8s infinite;
+}
+
+/* Preserve ratio utilities
+
+.ratio-box          -    preserve le ratio/proportions d'une image via la technique css du ratio intrinseque et le padding
+                        le padding est calcullé dans le markup
+
+.ratio-container    -   preserve le ratio en imposant par défaut le 16:9
+
+@see - https://github.com/aFarkas/lazysizes#tip-specifying-image-dimensions-minimizing-reflows-and-avoiding-page-jumps
+
+*/
+.ratio-box {
+	position: relative;
+	height: 0;
+	display: block;
+	width: 100%;
+	/* padding-bottom is calculated and rendered in to HTML */
+}
+
+.ratio-box img,
+.ratio-box iframe,
+.ratio-box video {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+.ratio-container {
+    position: relative;
+}
+.ratio-container:after {
+    content: '';
+    display: block;
+    height: 0;
+    width: 100%;
+    /* 16:9 = 56.25% = calc(9 / 16 * 100%) */
+    padding-bottom: 56.25%;
+}
+.ratio-container > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* unknown ratio variation */
+.unknown-ratio > * {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+}
