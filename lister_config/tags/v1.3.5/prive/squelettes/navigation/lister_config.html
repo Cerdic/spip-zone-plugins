@@ -1,0 +1,9 @@
+[(#SET{menus,[(#PIPELINE{listermenu,#ARRAY{args,#ARRAY,data,#ARRAY}})]})]
+
+<div class="navigation">
+	<ul class="liste_items sous_navigation">
+		<BOUCLE_menu_lister (DATA) {source table, #GET{menus}} {par cle}>
+		[(#AUTORISER{voir,#CLE}|oui)<li class="item[ (#ENV{exec}|=={#CLE}|oui)on execfound]"><a href="[(#URL_ECRIRE{#CLE})]" class="bando2_#CLE">[(#VALEUR{titre})]</a></li>]
+		</BOUCLE_menu_lister>
+	</ul>
+</div>
