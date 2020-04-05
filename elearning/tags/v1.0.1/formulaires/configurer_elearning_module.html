@@ -1,0 +1,26 @@
+[(#REM)
+	Ce formulaire sert à configurer les conditions d'accès à chaque module
+	C'est-à-dire quel jeu et quel score minimum à atteindre
+]
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+<form method="post" action="#ENV{action}"><div>
+	[(#REM) declarer les hidden qui declencheront le service du formulaire
+	parametre : url d'action ]
+	#ACTION_FORMULAIRE{#ENV{action}}
+	
+	<B_jeux>
+	<label><:elearning:configuration_test:></label> 
+	<select name="modules[#ENV{_id_rubrique}][jeu]">
+		<option value="0"><:elearning:configuration_selectionnez_test:></option>
+		<option value="0" [(#ENV{modules/#ENV{_id_rubrique}/jeu}|=={0}|?{'selected="selected"'})]><:elearning:configuration_test_aucun:></option>
+		<BOUCLE_jeux(JEUX){tout}>
+		<option value="#ID_JEU" [(#ENV{modules/#ENV{_id_rubrique}/jeu}|=={#ID_JEU}|?{'selected="selected"'})]>#TITRE_PRIVE</option>
+		</BOUCLE_jeux>
+	</select>
+	<label><:elearning:configuration_score:></label>
+	<input type="text" name="modules[#ENV{_id_rubrique}][score]" value="#ENV{modules/#ENV{_id_rubrique}/score, 0}" maxlength="3" style="width:3em;" />
+	</B_jeux>
+	
+	<input type="submit" value="<:oK:>" />
+</div></form>
+</div>

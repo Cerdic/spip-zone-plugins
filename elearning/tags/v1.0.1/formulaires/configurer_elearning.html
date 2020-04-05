@@ -1,0 +1,27 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	<BOUCLE_editable(CONDITION){si #ENV{editable}}>
+	<form method="post" action="#ENV{action}"><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		<fieldset>
+			<legend><:elearning:configuration_rubrique_titre:></legend>
+			
+			<div class="editer-groupe">
+				<div class="explication">Choisissez la rubrique qui va contenir les modules de cours.</div>
+				[(#VAL|elearning_chercher_rubrique{#CONFIG{elearning/rubrique_elearning,0}, 'rubrique_elearning'})]
+			</div>
+			
+			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+			<!--extra-->
+		</fieldset>
+		<p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+		</p>
+	</div></form>
+	</BOUCLE_editable>
+</div>

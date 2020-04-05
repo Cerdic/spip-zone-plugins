@@ -1,0 +1,52 @@
+
+#SET{scores, #ARRAY}
+#SET{jeux, #ARRAY}
+<BOUCLE_scores(JEUX_RESULTATS){!par date}{total!=0}>
+	[(#VAL{#ID_JEU-#ID_AUTEUR}|unique|oui)
+		#SET{score,#RESULTAT_COURT|div{#TOTAL}|mult{100}|round{2}}
+		#SET{
+			scores,
+			#GET{scores}|array_merge{
+				#ARRAY{
+					jeu#ID_JEU,
+					#GET{scores}|table_valeur{jeu#ID_JEU,#ARRAY}|array_merge{
+						#ARRAY{
+							aut#ID_AUTEUR,
+							#GET{score}
+						}
+					}
+				}
+			}
+		}
+		[(#REM) On ajoute le jeu à afficher seulement si l'auteur l'a déjà fait ]
+		[(#ID_AUTEUR|=={#ENV{id_auteur}}|oui)
+			#SET{jeux,#GET{jeux}|push{#ID_JEU}}
+		]
+	]
+</BOUCLE_scores>
+#SET{jeux,#GET{jeux}|array_unique}
+
+<B_affichage>
+#ANCRE_PAGINATION
+<table class="bigbrother">
+	<thead>
+		<tr class="row_first">
+			<th>Id</th>
+			<th><:elearning:test:></th>
+			<th class="temps"><:jeux:resultat:></th>
+			<th class="temps"><:elearning:moyenne:></th>
+		</tr>
+	</thead>
+	<tbody>
+<BOUCLE_affichage(JEUX){id_jeu IN #GET{jeux}}{par titre_prive}{pagination #ENV{pagination,0}}>
+	<tr class="tr_liste">
+		<td>N°#ID_JEU</td>
+		<td>#TITRE_PRIVE</td>
+		[<td class="temps">(#GET{scores}|table_valeur{jeu#ID_JEU}|table_valeur{aut#ENV{id_auteur}})%</td>]
+		[<td class="temps">(#GET{scores}|table_valeur{jeu#ID_JEU}|array_sum|div{#GET{scores}|table_valeur{jeu#ID_JEU}|count})%</td>]
+	</tr>
+</BOUCLE_affichage>
+	</tbody>
+</table>
+[<div class="pagination pagination_bigbrother">(#PAGINATION{page_precedent_suivant})</div>]
+</B_affichage>

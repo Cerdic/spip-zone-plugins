@@ -1,0 +1,23 @@
+<paquet
+	prefix="elearning"
+	categorie="divers"
+	version="1.0.1"
+	etat="test"
+	compatibilite="[3.0.0;3.1.*]"
+	schema="1.0.0"
+	documentation="https://contrib.spip.net/Plugin-E-learning"
+>	
+	<nom>E-Learning</nom>
+	<!-- Plate-forme simple de E-Learning -->
+
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="jeux_caracteristiques" action="jeux_caracteristiques" inclure="elearning_pipelines.php" />
+	<pipeline nom="accesrestreint_liste_zones_autorisees" action="liste_zones_autorisees" inclure="inc/elearning_zones.php" />
+
+	<necessite nom="accesrestreint" compatibilite="[3.15.4;[" />
+	<necessite nom="jeux" compatibilite="[3.4.0;[" />
+	<utilise nom="bigbrother" compatibilite="[0.3.9;[" />
+</paquet>
