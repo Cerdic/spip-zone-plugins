@@ -1,0 +1,44 @@
+<plugin>
+	<nom>Activit&#233; &#233;ditoriale</nom>
+	<slogan>Un site, c'est bien ! Un site &#224; jour, c'est mieux !</slogan>
+	<auteur>[St&#233;phanie Caron de Clever Age->http://www.clever-age.com/], [Ma&#239;eul ROUQUETTE (am&#233;lioration)->http://www.maieul.net]</auteur>
+	<licence>GNU/GPL</licence>
+	<version>1.0.1</version>
+	<version_base>0.1</version_base>
+	<description>Ce plugin a pour objectif de compl&#233;ter les fonctionnalit&#233;s de suivi de l'activit&#233; &#233;ditoriale de SPIP.
+
+Sont d&#233;j&#224; propos&#233;s :
+-* l'ajout de deux champs aux rubriques pour indiquer un d&#233;lai en jour au del&#224; duquel elle doivent &#234;tre aliment&#233;es, ainsi que les personnes &#224; pr&#233;venir
+-* des alertes par e-mail selon ces deux param&#232;tres
+-* un tableau de bord pr&#233;sentant les m&#234;mes informations
+
+	</description>
+	<lien>https://contrib.spip.net/Activite-editoriale</lien>
+	<etat>stable</etat>
+	<icon>activite_editoriale.png</icon>
+	<prefix>activite_editoriale</prefix>
+	<install>base/activite_editoriale_install.php</install>
+	<pipeline>
+		<nom>declarer_champs_extras</nom>
+		<inclure>base/activite_editoriale.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>activite_editoriale_pipelines.php</inclure>
+	</pipeline>
+	<fonctions>activite_editoriale_fonctions.php</fonctions>
+	<bouton id='activite_editoriale' parent='naviguer'>
+		<titre>activite_editoriale:activite_editoriale</titre>
+		<icone>activite_editoriale.png</icone>
+	</bouton>
+	<bouton id='activite_editoriale2' parent='bando_publication'>
+		<titre>activite_editoriale:activite_editoriale</titre>
+		<icone>activite_editoriale.png</icone>
+		<url>activite_editoriale</url>
+	</bouton>
+	<categorie>edition</categorie>
+	<necessite id="SPIP" version='[2.0.0;2.1.99]' />
+	<necessite id="cextras" version="[1.0.0;]" />
+	<necessite id='spip_bonux' version='[1.9.1;]' />
+	<necessite id='cfg' version='[1.9.1;]' />
+</plugin>
