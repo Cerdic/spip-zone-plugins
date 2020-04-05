@@ -1,0 +1,30 @@
+<paquet
+	prefix="doc2img"
+	categorie="multimedia"
+	version="1.5.1"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="images/doc2img-128.png"
+	schema="0.94"
+	documentation="https://contrib.spip.net/doc2img"
+>
+
+	<nom>Documents en Images</nom>
+	<!-- Convertir des documents textuels à la vol&#233;e -->
+
+	<auteur>Camille Lafitte</auteur>
+	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_principales" inclure="base/doc2img.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/doc2img.php" />
+	<pipeline nom="post_edition" inclure="doc2img_pipelines.php" />
+	<pipeline nom="document_desc_actions" inclure="doc2img_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="doc2img_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="doc2img_pipelines.php" />
+	<pipeline nom="recuperer_fond" inclure="doc2img_pipelines.php" />
+	<pipeline nom="medias_documents_visibles" inclure="doc2img_pipelines.php" />
+
+	<necessite nom="medias" compatibilite="[2.7.27;[" />
+	<necessite nom="facd" compatibilite="[0.1.0;[" />
+</paquet>

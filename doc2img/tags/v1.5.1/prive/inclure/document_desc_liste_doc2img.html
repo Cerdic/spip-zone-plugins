@@ -1,0 +1,51 @@
+[(#REM)
+	
+	Options personnalisées :
+	- pagination int : nombre d'éléments par pagination (défaut 5)
+	- type_pagination string : le type de pagination (défaut prive)
+
+]
+<B_facd_attentes>
+	<BOUCLE_facd_attentes(FACD_CONVERSIONS){id_document=#ID_DOCUMENT}{statut IN "en_cours","non","erreur"}{0,1}>
+	#BOITE_OUVRIR{'',#STATUT|=={erreur}|?{error,notice}}
+	<p id="em_attentes_[(#ENV{id_document})]">
+		[(#STATUT|=={non}|oui)<:facd:info_document_dans_file_attente:>]
+		[(#STATUT|=={erreur}|oui)<:facd:info_document_conversion_erreur:>]
+		[(#STATUT|in_array{#LISTE{non,erreur}}|non)<:facd:info_document_conversion:>]
+	</p>
+	[(#STATUT|=={erreur}|non)
+	[(#BOITE_PIED)]
+	<a href="[(#SELF|parametre_url{relance,''}|parametre_url{hasard,[(#VAL{0}|rand{10000000000})]})]" id="facd_recharge_#ID_DOCUMENT" class="bouton ajax"><:facd:lien_recharger:></a>
+	[(#BOITE_FERMER)]
+	<script type="text/javascript">
+	if(jQuery('#em_attentes_#ENV{id_document}').size() > 0){
+		var refresh_#ID_DOCUMENT = function(){
+			jQuery('#facd_recharge_#ID_DOCUMENT').click();
+		}
+		if(typeof(t_#ENV{id_document}) != 'undefined')
+			clearTimeout(t_#ENV{id_document});
+		t_#ID_DOCUMENT = setTimeout(refresh_#ENV{id_document},30000);
+	}else if(typeof(t_#ENV{id_document}) != 'undefined'){
+		clearTimeout(t_#ENV{id_document});
+	}
+	</script>]
+	[(#STATUT|=={erreur}|oui)
+		[(#AUTORISER{relancerconversion,facd,#ID_FACD_CONVERSION}|oui)
+			[(#BOUTON_ACTION{[(#VAL{facd:info_statut_conversion_#STATUT}|_T)],[(#URL_ACTION_AUTEUR{facd_relancer_conversion,#ID_FACD_CONVERSION,[(#SELF|parametre_url{log,''}|parametre_url{relance,''})]})],ajax,'',<:facd:label_relancer_conversion|attribut_html:>})]
+		]
+		#BOITE_FERMER
+	]
+	</BOUCLE_facd_attentes>
+</B_facd_attentes>
+<B_d2c>
+<div class="doc2img_liste">
+	#ANCRE_PAGINATION
+	<strong>[(#GRAND_TOTAL|singulier_ou_pluriel{doc2img:info_une_page_convertie,doc2img:info_nb_pages_converties})]</strong>
+	<BOUCLE_d2c(DOCUMENTS){mode=doc2img}{objet=document}{id_objet=#ENV{id_document,#ENV{id}}}{par id_document} {statut==.*}{pagination #ENV{pagination,5} doc#ID_DOCUMENT}>
+	<div>
+		#MODELE{document_desc,id_document,objet=document,id_objet=#ENV{id_document}}
+	</div>
+	</BOUCLE_d2c>
+	[<p class="pagination">(#PAGINATION{#ENV{type_pagination,prive}})</p>]
+</div>
+</B_d2c>

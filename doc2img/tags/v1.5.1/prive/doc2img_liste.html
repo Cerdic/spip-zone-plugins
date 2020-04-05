@@ -1,0 +1,9 @@
+#CACHE{0}
+
+<B_listed2c>
+Liste des #GRAND_TOTAL documents
+<BOUCLE_listed2c(DOCUMENTS){objet=document}{mode=doc2img}{fusion id_objet}>
+    <a href=[(#SELF|parametre_url{id_document=#ID_DOCUMENT})]> #ID_DOCUMENT </a>
+</BOUCLE_listed2c>
+<//B_listed2c>
+[(#MODELE{doc_img,id_document,env})]

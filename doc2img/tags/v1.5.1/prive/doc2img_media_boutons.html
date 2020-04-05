@@ -1,0 +1,8 @@
+<BOUCLE_document(DOCUMENTS){id_document}{tout}>
+<BOUCLE_compte(documents_liens){id_document}{0,1} />
+[(#AUTORISER{modifier,#OBJET,#ID_OBJET}|oui)
+[(#INCLURE{fond=inclure/facd_info_conversion,id_document=#ID_DOCUMENT}|trim|non)
+	<span class="sep"> | </span>[(#BOUTON_ACTION{<:doc2img:bouton_convertir_serie:>,#URL_ACTION_AUTEUR{doc2img_convert,#ID_DOCUMENT-full,#SELF},ajax})]
+	<span class="sep"> | </span>[(#BOUTON_ACTION{<:doc2img:bouton_convertir_vignette:>,#URL_ACTION_AUTEUR{doc2img_convert,#ID_DOCUMENT-vignette,#SELF},ajax})]]
+]
+<//B_compte></BOUCLE_document>
