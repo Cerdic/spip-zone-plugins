@@ -1,0 +1,11 @@
+#SET{exclus,#ENV{id}|roles_presents_sur_id{#ENV{objet_source},#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
+<B_roles>
+<select class="selection_roles chosen" name="qualifier_lien\[#ENV{cle}\]\[#ENV{_roles/colonne}\]\[\]" title="<:roles:selectionner_roles|attribut_html:>"
+	multiple="multiple" data-placeholder="<:roles:choisir_role|attribut_html:>">
+<BOUCLE_roles(DATA){source table,#ENV{_roles/roles/choix}}{valeur !IN #GET{exclus}}>
+	<option value="#VALEUR"[ (#VALEUR|in_any{#ENV{definir_roles/#ENV{cle}}})selected='selected']>
+		[(#VALEUR|role{#ENV{table_source}})]
+	</option>
+</BOUCLE_roles>
+</select>
+</B_roles>

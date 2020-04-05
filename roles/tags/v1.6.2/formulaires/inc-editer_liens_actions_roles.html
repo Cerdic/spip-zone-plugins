@@ -1,0 +1,32 @@
+#SET{presents,#ENV{id}|roles_presents_sur_id{#ENV{objet_source},#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
+
+<div class="btn-group">
+<a data-toggle="dropdown" href="#" title="<:roles:modifier_roles_title:>" class="btn btn-mini dropdown-toggle">[(#ENV{libelle,<:roles:modifier_roles:>})]
+	<span class="caret"></span>
+</a>
+	<ul class="dropdown-menu">
+<B_roles_presents>
+	<li class='dropdown-header'><:roles:enlever_role:></li>
+<BOUCLE_roles_presents(DATA){source table,#ENV{_roles/roles/choix}}{valeur IN #GET{presents}}>
+	<li>
+		<button type="submit" name="supprimer_lien\[#ENV{cle}-#VALEUR\]" class="link btn btn-mini delete">
+		[(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})] [(#VALEUR|role{#ENV{table_source}})]
+		</button>
+	</li>
+</BOUCLE_roles_presents>
+	<li class="divider"></li>
+</B_roles_presents>
+
+<B_roles_absents>
+	<li class='dropdown-header'><:roles:ajouter_role:></li>
+<BOUCLE_roles_absents(DATA){source table,#ENV{_roles/roles/choix}}{valeur !IN #GET{presents}}>
+	<li>
+		<button type="submit" name="ajouter_lien\[#ENV{cle}-#VALEUR\]" class="link btn btn-mini delete">
+		[(#CHEMIN_IMAGE{inserer-8.png}|balise_img{'+'})] [(#VALEUR|role{#ENV{table_source}})]
+		</button>
+	</li>
+</BOUCLE_roles_absents>
+
+</li>
+</ul>
+</div>

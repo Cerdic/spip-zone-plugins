@@ -1,0 +1,23 @@
+<paquet
+	prefix="roles"
+	categorie="outil"
+	version="1.6.2"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/roles-64.png"
+	documentation="https://contrib.spip.net/?article4199"
+>
+
+	<nom>Rôles</nom>
+
+	<auteur lien='http://www.magraine.net/'>Marcillaud Matthieu</auteur>
+
+	<credit lien="Freeiconsweb.com">Freeiconsweb (logo)</credit>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="jquery_plugins"       inclure="roles_pipelines.php" />
+	<pipeline nom="header_prive_css"     inclure="roles_pipelines.php" />
+
+	<necessite nom="chosen" compatibilite="[1.0.0;]" />
+</paquet>
