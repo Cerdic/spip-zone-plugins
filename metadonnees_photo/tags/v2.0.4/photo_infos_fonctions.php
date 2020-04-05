@@ -1,0 +1,407 @@
+<?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+/**
+ * Afficher les infos exif dans les differents endroits de l'interface
+ * @param string $flux
+ * @return string
+ */
+function photo_infos_afficher_metas_document($flux){
+	if ($id_document = $flux['args']['id_document']){
+		$flux["data"] .= recuperer_fond("prive/squelettes/inclure/image_pave_exif",array(
+			'id_document' => $id_document,
+			'quoi'=>$flux['args']['quoi']
+		));
+	}
+	return $flux;
+}
+
+
+// Lire aux:Lens, qui n'est pas du Exif standard
+function lire_aux_lens ($filename) {
+
+    ob_start();
+    readfile($filename);
+    $source = ob_get_contents();
+    ob_end_clean();
+    
+    $xmpdata_start = strpos($source,"<x:xmpmeta");
+    $xmpdata_end = strpos($source,"</x:xmpmeta>");
+    $xmplenght = $xmpdata_end-$xmpdata_start;
+    $xmpdata = substr($source,$xmpdata_start,$xmplenght+12);
+    
+    if (mb_eregi("aux:Lens=\"([^\"]*)\"", $xmpdata, $regs)) {
+		return $regs[1];
+    }
+    if (mb_eregi("<aux:Lens>([^<]*)<\/aux:Lens>", $xmpdata, $regs)) {
+		return $regs[1];
+    }
+}
+
+/**
+ * Lire toutes les exifs d'une image
+ * et les memoriser en static pour optimisation
+ *
+ * @param string $fichier
+ * @return array
+ */
+function extraire_exif($fichier) {
+	static $mem_exif;
+	
+	if (isset($mem_exif[$fichier]) AND $mem_exif[$fichier]) return $mem_exif[$fichier];
+
+	if (!file_exists($fichier))
+		return array();
+
+	$time = filemtime($fichier);
+
+	$fichier_exif = sous_repertoire(_DIR_VAR, 'cache-exif') . md5($fichier.$time).".php";
+
+	// Systeme de cache pour les variables exif
+	if (file_exists($fichier_exif)) {
+		lire_fichier($fichier_exif, $cache);
+		if ($mem_exif[$fichier] = unserialize($cache))
+			return $mem_exif[$fichier];
+	}
+
+
+	include_spip("inc/exifReader");
+
+	$er = new phpExifReader($fichier);
+	$er->processFile();
+	$mem_exif[$fichier] = $er->getImageInfo();
+
+	// Essayer de trouver aux:Lens
+	$mem_exif[$fichier]["auxLens"] = str_replace(" mm", "&nbsp;", lire_aux_lens($fichier));
+
+
+
+	// Completer GPS
+	if (function_exists('exif_read_data')) {
+		$exif_direc = @exif_read_data($fichier);
+
+		// Si Latitude deja fixee, la traiter
+		// Si la ref n'est ni N ni S, c'est une erreur (j'en trouve sur Flickr)
+		if (empty($exif_direc["GPSLatitudeRef"]) or !($exif_direc["GPSLatitudeRef"] == "N" || $exif_direc["GPSLatitudeRef"] == "S")) {
+			unset($mem_exif[$fichier]["GPSLatitude"]);
+		}
+		if (!empty($mem_exif[$fichier]["GPSLatitude"])) {
+			$exif_direc["GPSLatitude"][0] = $mem_exif[$fichier]["GPSLatitude"]["Degrees"];
+			$exif_direc["GPSLatitude"][1] = ($mem_exif[$fichier]["GPSLatitude"]["Minutes"] * 100 + round($mem_exif[$fichier]["GPSLatitude"]["Seconds"] / 60 * 100)) . "/100";
+
+			$exif_direc["GPSLatitudeRef"] = $mem_exif[$fichier]["GPSLatitudeRef"];
+		}
+		// Traiter la Latitude
+		// Retourne GPSLatitude en degres, minutes, secondes
+		// Retour GPSLatitudeInt en valeur entiere pour Google
+		if (isset($exif_direc["GPSLatitude"])) {
+
+			$deg = $exif_direc["GPSLatitude"][0];
+			if ( strpos($deg, "/") > 0) {
+				$deg = substr($deg, 0, strpos($deg, "/"));
+			}
+
+			$min = $exif_direc["GPSLatitude"][1];
+			if ( strpos($min, "/") > 0) {
+				$minutes = substr($min, 0, strpos($min, "/"));
+				$rap = substr($min, strpos($min, "/")+1, 12);
+
+				$minutes = $minutes / $rap;
+
+				$secondes = ($minutes - floor($minutes)) * 60 ;
+				$minutes = floor($minutes);
+			}
+
+			$N_S = $exif_direc["GPSLatitudeRef"];
+			$mem_exif[$fichier]["GPSLatitude"] = $deg."°&nbsp;$minutes"."’"."&nbsp;$secondes"."”&nbsp;$N_S";
+
+			// Retourne aussi une valeur entiere pour Google Maps
+			$GPSLatitudeInt = floatval($deg) + (floatval($min) / 6000) ;
+			if ($N_S == "S") $GPSLatitudeInt = -1 * $GPSLatitudeInt;
+			$mem_exif[$fichier]["GPSLatitudeInt"] = $GPSLatitudeInt ;
+		}
+
+		// Verifier que la precedente ref est E/W, sinon ne pas traiter
+		if (empty($exif_direc["GPSLongitudeRef"]) or !($exif_direc["GPSLongitudeRef"] == "E" || $exif_direc["GPSLongitudeRef"] == "W")) {
+			unset($mem_exif[$fichier]["GPSLongitude"]);
+		}
+		if (!empty($mem_exif[$fichier]["GPSLongitude"])) {
+			$exif_direc["GPSLongitude"][0] = $mem_exif[$fichier]["GPSLongitude"]["Degrees"];
+			$exif_direc["GPSLongitude"][1] = ($mem_exif[$fichier]["GPSLongitude"]["Minutes"] * 100 + round($mem_exif[$fichier]["GPSLongitude"]["Seconds"] / 60 * 100)) . "/100";
+
+			$exif_direc["GPSLongitudeRef"] = $mem_exif[$fichier]["GPSLongitudeRef"];
+		}
+		// Traiter longitude
+		if (isset($exif_direc["GPSLongitude"])) {
+			$deg = $exif_direc["GPSLongitude"][0];
+			if ( strpos($deg, "/") > 0) {
+				$deg = substr($deg, 0, strpos($deg, "/"));
+			}
+
+			$min = $exif_direc["GPSLongitude"][1];
+			if ( strpos($min, "/") > 0) {
+				$minutes = substr($min, 0, strpos($min, "/"));
+				$rap = substr($min, strpos($min, "/")+1, 12);
+
+				$minutes = $minutes / $rap;
+
+				$secondes = ($minutes - floor($minutes)) * 60 ;
+				$minutes = floor($minutes);
+			}
+
+			$W_E = $exif_direc["GPSLongitudeRef"];
+			$mem_exif[$fichier]["GPSLongitude"] =  $deg."°&nbsp;$minutes"."’"."&nbsp;$secondes"."”&nbsp;$W_E";
+
+			// Retourne aussi une valeur entiere pour Google Maps
+			$GPSLongitudeInt = floatval($deg) + (floatval($min) / 6000) ;
+			if ($W_E == "W") $GPSLongitudeInt = -1 * $GPSLongitudeInt;
+			$mem_exif[$fichier]["GPSLongitudeInt"] = $GPSLongitudeInt ;
+		}
+
+
+	}
+	
+	ecrire_fichier($fichier_exif, serialize($mem_exif[$fichier]));
+	return $mem_exif[$fichier];
+}
+
+/**
+ * Lire une valeur exif d'une umage
+ * @param string $fichier
+ * @param string $type
+ * @return array
+ */
+function lire_exif($fichier, $type=null) {
+	$exif = extraire_exif($fichier);
+	if (!$type) {
+		return $exif;
+	} else {
+		return isset($exif[$type]) ? $exif[$type] : null;
+	}
+}
+
+
+function extraire_iptc($fichier) {
+	global $pb_iptc;
+	
+	if (!empty($pb_iptc["$fichier"])) {
+		return $pb_iptc["$fichier"];
+	}
+
+
+	if (!file_exists($fichier)) return;
+	
+
+		$time = filemtime($fichier);
+
+		$fichier_iptc = sous_repertoire(_DIR_VAR, 'cache-iptc') . md5($fichier.$time).".php";
+
+		// Systeme de cache pour les variables iptc								
+		if (file_exists($fichier_iptc)) {
+			lire_fichier($fichier_iptc, $pb_ecrire);
+			$pb_iptc["$fichier"] = unserialize($pb_ecrire);
+
+			return $pb_iptc["$fichier"];
+		}
+	
+		include_spip("inc/iptc");
+
+		$er = new class_IPTC($fichier);
+		$iptc = $er->fct_lireIPTC();
+		$codesiptc = $er->h_codesIptc;
+		
+		$pb_iptc["$fichier"] = $iptc;	
+	
+		$pb_ecrire = serialize($pb_iptc["$fichier"]);
+		ecrire_fichier($fichier_iptc, $pb_ecrire);
+	
+	
+		return $pb_iptc["$fichier"];
+}
+
+
+function lire_iptc ($fichier, $type=false) {
+	if (!function_exists('iptcparse')) return;
+
+	$iptc = extraire_iptc($fichier);
+
+	if ($iptc["copyright"]) {
+		$iptc["copyright"] = mb_eregi_replace("\(c\)", "©", $iptc["copyright"]);
+	}
+
+	if ($type) {
+		return isset($iptc[$type]) ? $iptc[$type] : null;
+	} else {
+		return $iptc;
+	}
+}
+
+/**
+ * Tester si on peut traiter l'image compte tenu de la limite de memoire de GD2
+ * @param string $fichier
+ * @param int $largeur
+ * @param int $hauteur
+ * @return string
+ */
+function test_traiter_image($fichier, $largeur, $hauteur) {
+	$surface = $largeur * $hauteur;
+
+	if ($surface > $GLOBALS["meta"]["max_taille_vignettes"])
+		return '';
+	if (!file_exists($fichier))
+		return '';
+
+	return ' ';
+}
+
+/**
+ * Generer un histrogramme des couleurs RVB de l'image
+ * 
+ * @param object $im
+ * @return string
+ */
+function image_histogramme($im) {
+	include_spip("inc/filtres_images_lib_mini");
+
+	$fonction = array('image_histo', func_get_args());
+	$image = _image_valeurs_trans($im, "histo","png",$fonction);
+
+	if (!$image) return("");
+
+	$x_i = $image["largeur"];
+	$y_i = $image["hauteur"];
+	$surface = $x_i * $y_i;
+
+	if (!test_traiter_image($image["fichier"], $x_i, $y_i) ) return;
+
+	$im = $image["fichier"];
+
+	$dest = $image["fichier_dest"];
+	$creer = $image["creer"];
+
+	if ($creer) {
+		$im = $image["fonction_imagecreatefrom"]($im);
+		$im_ = imagecreatetruecolor(258, 130);
+		@imagealphablending($im_, false);
+		@imagesavealpha($im_,true);
+		$color_t = ImageColorAllocateAlpha( $im_, 255, 255, 255 , 50);
+		imagefill ($im_, 0, 0, $color_t);
+		$col_poly = imagecolorallocate($im_,60,60,60);
+		imagepolygon($im_, array ( 0, 0, 257, 0, 257, 129, 0,129 ), 4, $col_poly);
+
+		$val_gris = $val_r = $val_g = $val_b = array();
+		for ($x = 0; $x < $x_i; $x++) {
+			for ($y=0; $y < $y_i; $y++) {
+
+				$rgb = ImageColorAt($im, $x, $y);
+				$a = ($rgb >> 24) & 0xFF;
+				$r = ($rgb >> 16) & 0xFF;
+				$g = ($rgb >> 8) & 0xFF;
+				$b = $rgb & 0xFF;
+
+				$a = (127-$a) / 127;
+				$a=1;
+
+				$gris = round($a*($r+$g+$b) / 3);
+				$r = round($a*$r);
+				$g = round($a*$g);
+				$b = round($a*$b);
+
+				if (!isset($val_gris[$gris])) {
+					$val_gris[$gris] = 0;
+				}
+				if (!isset($val_r[$r])) {
+					$val_r[$r] = 0;
+				}
+				if (!isset($val_g[$g])) {
+					$val_g[$g] = 0;
+				}
+				if (!isset($val_b[$b])) {
+					$val_b[$b] = 0;
+				}
+				$val_gris[$gris] ++;
+				$val_r[$r] ++;
+				$val_g[$g] ++;
+				$val_b[$b] ++;
+			} 
+		}
+		$max = max( max($val_gris), max($val_r), max($val_g), max($val_b));
+		
+		// Limiter Max si trop concentr'e
+		$max = min ($max, round($surface*0.03));
+
+		$rapport = (127/$max);
+
+		$gris_50 = imagecolorallocate($im_, 170,170,170);
+		$gris_70 = imagecolorallocate($im_, 60,60,60);
+		for ($i = 0; $i < 256; $i++) {
+			if (!isset($val_gris[$i])) {
+				$val_gris[$i] = 0;
+			}
+			$val = 127 - round(max(0,$val_gris[$i]) * $rapport);
+			imageline ($im_, $i+1, 128, $i+1, $val+1, $gris_50);
+			imagesetpixel ($im_, $i+1, $val+1, $gris_70);
+		}
+		$bleu = imagecolorallocate($im_, 0, 0, 255);
+		for ($i = 0; $i < 256; $i++) {
+			if (!isset($val_b[$i])) {
+				$val_b[$i] = 0;
+			}
+			$val = 127 - round(max(0,$val_b[$i]) * $rapport);
+			if ($i==0) imagesetpixel ($im_, $i+1, $val+1, $bleu);
+			else imageline($im_, $i, $val_old+1, $i+1, $val+1, $bleu);
+
+			$val_old = $val;
+		}
+		$green = imagecolorallocate($im_, 0, 255, 0);
+		for ($i = 0; $i < 256; $i++) {
+			if (!isset($val_g[$i])) {
+				$val_g[$i] = 0;
+			}
+			$val = 127 - round(max(0,$val_g[$i]) * $rapport);
+			if ($i==0) imagesetpixel ($im_, $i+1, $val+1, $green);
+			else imageline($im_, $i, $val_old+1, $i+1, $val+1, $green);
+			$val_old = $val;
+		}
+		$rouge = imagecolorallocate($im_, 255, 0, 0);
+		for ($i = 0; $i < 256; $i++) {
+			if (!isset($val_r[$i])) {
+				$val_r[$i] = 0;
+			}
+			$val = 127 - round(max(0,$val_r[$i]) * $rapport);
+			if ($i==0) imagesetpixel ($im_, $i+1, $val+1, $rouge);
+			else imageline($im_, $i, $val_old+1, $i+1, $val+1, $rouge);
+			$val_old = $val;
+		}
+
+		$image["fonction_image"]($im_, "$dest");
+		imagedestroy($im_);
+		imagedestroy($im);
+	}
+
+	return _image_ecrire_tag($image,array('src'=>$dest,'width'=>258,'height'=>130));
+}
+
+function position_carte ($latitude, $longitude, $taille) {
+	if (strlen($latitude) == 0 && strlen($longitude) == 0) return;
+
+	$img = find_in_path("imgs_photo/earth-map-$taille.jpg");
+	$img = "<img src='$img' alt='carte' />";
+	
+	
+	$n = round(($taille / 4) - (($latitude / 90) * ($taille / 4)));
+	$l = round(($taille / 2) + (($longitude / 180) * ($taille / 2)));
+	
+	$n = ($n - 4)."px";
+	$l = ($l - 4)."px";
+	
+	$croix = find_in_path("imgs_photo/croix-gps.gif");
+	$croix = "<img src='$croix' alt='+' />";
+
+	
+	return "<div style='position: relative; text-align: left;'><div>$img</div><div style='position: absolute; top: $n; left: $l;'>$croix</div></div>";
+}
+
+
+?>

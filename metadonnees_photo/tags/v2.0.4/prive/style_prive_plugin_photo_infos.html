@@ -1,0 +1,46 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+
+.exif_pave {background-color: [#(#ENV{claire}|couleur_eclaircir)]; padding: 5px; -webkit-border-radius: 10px;-moz-border-radius: 10px; margin-bottom: 5px; margin-top: 5px;}
+.exif_pave_small {background-color: [#(#ENV{claire}|couleur_eclaircir)]; cursor: pointer; font-size: 90%; text-align: #ENV{left};}
+
+.exif_pave .toggle_link {display: block;float: #ENV{right};margin-top:-2px;}
+.exif_pave .logos_infos {position: relative; height: 11px; margin-top: 2px;}
+.exif_pave .logo_exif {position: absolute; #ENV{left}: 0px; top: 0px;}
+.exif_pave .logo_iptc {position: absolute; #ENV{left}: 32px; top: 0px;}
+.exif_pave .logo_hist {position: absolute; #ENV{left}: 64px; top: 0px;}
+.exif_pave .logo_gps {position: absolute; #ENV{left}: 96px; top: 0px;}
+
+.exif_pave_small .camera {clear: #ENV{right};padding-#ENV{left}:30px;}
+.exif_pave_small .camera img {float: #ENV{left};margin-#ENV{left}:-30px;position:relative;display:inline;}
+.exif_pave_small .exif_resume {padding-#ENV{left}:30px;}
+.exif_pave_small .exif_resume table {width: 100%; border: 0px;}
+.exif_pave_small .exif_resume .label_iso {font-size: 80%; font-weight: bold;}
+
+.exif_pave_small .exif_resume {display: none;}
+.exif_pave_small.hover .exif_resume {display: block;}
+
+.exif_pave_document_desc.mini {background: #eee;margin: 0;}
+.exif_pave_document_desc .camera {display: none;}
+.exif_pave_document_desc.hover .camera {display: block;}
+
+.exif_pave_details .camera {text-align: center; font-size: 90%; font-weight: bold;}
+.exif_pave_details .histogramme {text-align: center; padding-top: 5px;}
+.exif_pave_details .exif_resume table	{width: 100%; border: 0px;}
+.exif_pave_details .exif_resume .label_info {width: 40%; font-size: 80%; color: #4d6110; text-align: #ENV{right}; padding-#ENV{right}: 5px;}
+.exif_pave_details .gpsmap {margin-#ENV{left}: 15px;}

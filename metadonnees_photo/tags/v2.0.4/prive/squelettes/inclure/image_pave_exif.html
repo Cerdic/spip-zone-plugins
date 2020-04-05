@@ -1,0 +1,228 @@
+<BOUCLE_d(DOCUMENTS){id_document}{tout}{extension=jpg}{distant=non}{statut==.*}>
+
+#SET{fichier,#FICHIER}
+[(#SET{afficher,[(#GET{fichier}|lire_exif{make}|sinon{#GET{fichier}|lire_exif{model}}|sinon{[(#GET{fichier}|test_traiter_image{[(#GET{fichier}|largeur)], [(#GET{fichier}|hauteur)]})]}|sinon{[(#GET{fichier}|lire_iptc)]})]})]
+
+[(#GET{afficher}|oui)
+
+	<div
+			class="exif_pave exif_pave_small exif_pave[_(#ENV{quoi,''})] mini"
+			onclick="$(this).hide().siblings('.exif_pave_details').show().find('.histogramme:not(.loaded)').load('#URL_ECRIRE{pave_histogramme,id_document=#ID_DOCUMENT}').addClass('loaded');"
+			onmouseover="$(this).addClass('hover').removeClass('mini');"
+			onmouseout="$(this).removeClass('hover').addClass('mini');"
+			>
+
+		<a href="#" class="toggle_link"
+				onclick="$(this).closest('.exif_pave').hide().siblings('.exif_pave_details').show(); return false;">[<img src="(#CHEMIN{images/noeud_plus.gif})" alt="-" />]</a>
+
+		<div class="logos_infos">
+			[(#GET{fichier}|lire_exif{make}|sinon{#GET{fichier}|lire_exif{model}}|oui)
+				[(#CHEMIN{imgs_photo/indicateur-exif.png}|balise_img{exif,logo_exif})]
+			]
+			[(#GET{fichier}|lire_iptc|oui)
+				[(#CHEMIN{imgs_photo/indicateur-iptc.png}|balise_img{iptc,logo_iptc})]
+			]
+			[(#GET{fichier}|test_traiter_image{[(#GET{fichier}|largeur)],[(#GET{fichier}|hauteur)]}|oui)
+				[(#CHEMIN{imgs_photo/indicateur-hist.png}|balise_img{hist,logo_hist})]
+			]
+			[(#GET{fichier}|lire_exif{GPSLatitudeInt}|position_carte{[(#GET{fichier}|lire_exif{GPSLongitudeInt})],128}|oui)
+				[(#CHEMIN{imgs_photo/indicateur-gps.png}|balise_img{gps,logo_gps})]
+			]
+		</div>
+
+		[(#SET{logo,#CHEMIN{appareils/#GET{fichier}|lire_exif{logoAppareil}}})]
+
+		<div class="camera clearfix">
+			[(#GET{fichier}|lire_exif{logoAppareil}|?{" ",""})
+				[(#GET{logo}|image_reduire{24})]
+			]
+			<div>[(#GET{fichier}|lire_exif{make})] [(#GET{fichier}|lire_exif{model})]</div>
+			[<div><strong>(#GET{fichier}|lire_iptc{objectName}|typo)</strong></div>]
+			[<div>(#GET{fichier}|lire_iptc{caption}|couper{100}|typo)</div>]
+		</div>
+
+		<div class="exif_resume">
+			<table cellspacing='2' cellpadding='0'>
+				<tr>
+					<td>[
+						<span class='label_iso'>ISO</span>
+						(#GET{fichier}|lire_exif{isoEquiv})
+						]</td>
+					<td>[
+						(#GET{fichier}|lire_exif{exposureTime}) s
+						]</td>
+				</tr>
+				<tr>
+					<td>[
+						<i>f</i>/(#GET{fichier}|lire_exif{fnumber})
+						]</td>
+					<td>[
+						(#GET{fichier}|lire_exif{focalLength})&nbsp;mm
+						]</td>
+				</tr>
+				[<tr>
+					<td colspan="2">
+					(#GET{fichier}|lire_iptc{copy#LANG_RIGHT})
+					</td>
+				</tr>]
+			</table>
+		</div>
+	</div>
+
+	<div
+			 class="exif_pave exif_pave_details exif_pave[_(#ENV{quoi,''})] none"
+			 style=''>
+
+
+		<a href="#" class="toggle_link"
+			 onclick="$(this).closest('.exif_pave').hide().siblings('.exif_pave_small').show(); return false;">[<img src="(#CHEMIN{images/noeud_moins.gif})" alt="-" />]</a>
+
+		<div class='camera'>
+			[(#GET{fichier}|lire_exif{logoAppareil}|?{" ",""})
+				[<a class='logo_camera small' onclick="$(this).hide().siblings('.logo_camera').show(); return false;" href="#">(#GET{logo}|image_reduire{64})</a>]
+				[<a class='logo_camera big none' onclick="$(this).hide().siblings('.logo_camera').show(); return false;" href="#">(#GET{logo}|image_reduire{120})</a>]
+			]
+			<div>[(#GET{fichier}|lire_exif{make})]
+				[(#GET{fichier}|lire_exif{model})]
+			</div>
+		</div>
+		[(#GET{fichier}|test_traiter_image{[(#GET{fichier}|largeur)],[(#GET{fichier}|hauteur)]}|oui)
+		<div class='histogramme'><img src="#CHEMIN{images/loader.gif}" alt="Loading..." /></div>
+		]
+
+		<div class="exif_resume">
+			<table cellspacing='3' cellpadding='0'>
+
+				[(#REM) IPTC simples]
+
+				[<tr>
+					<td class='label_info'><:photo_infos_fonctions:titre:></td>
+					<td><strong>(#GET{fichier}|lire_iptc{objectName}|typo)</strong></td>
+				</tr>]
+
+				[<tr>
+					<td class='label_info'><:photo_infos_fonctions:legende:></td>
+					<td>(#GET{fichier}|lire_iptc{caption}|typo)</td>
+				</tr>]
+
+				[<tr>
+					<td class='label_info'><:photo_infos_fonctions:copyright:></td>
+					<td>(#GET{fichier}|lire_iptc{copyright})</td>
+				</tr>]
+
+				[<tr>
+					<td class='label_info'><:photo_infos_fonctions:credits:></td>
+					<td>(#GET{fichier}|lire_iptc{credit})</td>
+				</tr>]
+
+				[<tr>
+					<td class='label_info'><:photo_infos_fonctions:motscles:></td>
+					<td><div>(#GET{fichier}|lire_iptc{keywords}|replace{"\n","</div><div>"})</div></td>
+				</tr>]
+
+
+				[(#REM) EXIF ]
+
+				[<tr>
+					<td class='label_info'><:photo_infos_fonctions:sensibilite:></td>
+					<td>[<img src="(#CHEMIN{imgs_photo/iso-16.png})" alt="ISO" align="top" />]
+						(#GET{fichier}|lire_exif{isoEquiv})</td>
+				</tr>]
+
+				[<tr>
+					<td class='label_info'><:photo_infos_fonctions:vitesse:></td>
+					<td>(#GET{fichier}|lire_exif{exposureTime}) s</td>
+				</tr>]
+
+				[<tr>
+					<td class='label_info'><:photo_infos_fonctions:ouverture:></td>
+					<td>[<img src="(#CHEMIN{imgs_photo/ouverture-16.png})" alt="ISO" align="top" />]
+					  <i>f</i>/(#GET{fichier}|lire_exif{fnumber})</td>
+				</tr>]
+
+				[<tr>
+					<td class='label_info'><:photo_infos_fonctions:focale:></td>
+					<td>(#GET{fichier}|lire_exif{focalLength})&nbsp;mm</td>
+				</tr>]
+
+				[<tr>
+					<td class='label_info'><:photo_infos_fonctions:focale35mm:></td>
+					<td>(#GET{fichier}|lire_exif{focalLength35mm})&nbsp;mm</td>
+				</tr>]
+
+				[<tr>
+					<td class='label_info'><:photo_infos_fonctions:flash:></td>
+					<td>[<img src="(#CHEMIN{imgs_photo/flash-[(#GET{fichier}|lire_exif{flashUsed})]-16.png})" alt="ISO" align="top" />]
+						(#GET{fichier}|lire_exif{flashUsed})</td>
+				</tr>]
+
+				[<tr>
+					<td class='label_info'><:photo_infos_fonctions:distance:></td>
+					<td>(#GET{fichier}|lire_exif{focusDistance})[(#GET{fichier}|lire_exif{focusDistance}|=={infini}|?{'','&nbsp;m'})]</td>
+				</tr>]
+
+				[<tr>
+					<td class='label_info'><:photo_infos_fonctions:ouverturemax:></td>
+					<td>[<img src="(#CHEMIN{imgs_photo/ouverture-max-16.png})" alt="ISO" align="top" />]
+						<i>f</i>/(#GET{fichier}|lire_exif{maxAperture})</td>
+				</tr>]
+
+				[<tr>
+					<td class='label_info'><:photo_infos_fonctions:objectif:></td>
+					<td>(#GET{fichier}|lire_exif{auxLens})</td>
+				</tr>]
+
+				[(#REM) IPTC complementaires]
+
+				[<tr>
+					<td class='label_info'><:photo_infos_fonctions:intitule:></td>
+					<td>(#GET{fichier}|lire_iptc{headline})</td>
+				</tr>]
+
+				[<tr>
+					<td class='label_info'><:photo_infos_fonctions:categorie:></td>
+					<td>(#GET{fichier}|lire_iptc{category})</td>
+				</tr>]
+
+				[<tr>
+					<td class='label_info'><:photo_infos_fonctions:datecreation:></td>
+					<td>(#GET{fichier}|lire_iptc{createdDate}|affdate)</td>
+				</tr>]
+
+				[<tr>
+					<td class='label_info'><:photo_infos_fonctions:ville:></td>
+					<td>(#GET{fichier}|lire_iptc{city})</td>
+				</tr>]
+
+				[<tr>
+					<td class='label_info'><:photo_infos_fonctions:provinceetat:></td>
+					<td>(#GET{fichier}|lire_iptc{provinceState})</td>
+				</tr>]
+
+				[<tr>
+					<td class='label_info'><:photo_infos_fonctions:pays:></td>
+					<td>(#GET{fichier}|lire_iptc{country})</td>
+				</tr>]
+
+				[<tr>
+					<td class='label_info'><:photo_infos_fonctions:auteur:></td>
+					<td>(#GET{fichier}|lire_iptc{byline})</td>
+				</tr>]
+
+				[<tr>
+					<td class='label_info'><:photo_infos_fonctions:latitude:></td>
+					<td>(#GET{fichier}|lire_exif{GPSLatitude})</td>
+				</tr>]
+
+				[<tr>
+					<td class='label_info'><:photo_infos_fonctions:longitude:></td>
+					<td>(#GET{fichier}|lire_exif{GPSLongitude})</td>
+				</tr>]
+
+			</table>
+		</div>
+		[<div class="gpsmap">(#GET{fichier}|lire_exif{GPSLatitudeInt}|position_carte{[(#GET{fichier}|lire_exif{GPSLongitudeInt})],128})</div>]
+
+	</div>
+]
+</BOUCLE_d>

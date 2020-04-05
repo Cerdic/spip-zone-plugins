@@ -1,0 +1,22 @@
+<paquet
+	prefix="photo_infos"
+	categorie="multimedia"
+	version="2.0.4"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="imgs_photo/logo-pb_plugin.png"
+	documentation="https://contrib.spip.net/Metadonnees-Photo"
+>	
+
+	<nom>Metadonnées photo</nom>
+	<!-- Afficher les infos EXIF, GPS et IPTC d'un fichier JPEG -->
+
+	<auteur>ARNO*</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/lgpl-3.0.html">LGPL 3</licence>
+
+	<pipeline nom="afficher_metas_document" inclure="photo_infos_fonctions.php" />
+
+	<necessite nom="medias" compatibilite="[2.7.27;]" />
+
+</paquet>
