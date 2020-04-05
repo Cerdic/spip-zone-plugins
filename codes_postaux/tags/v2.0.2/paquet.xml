@@ -1,0 +1,27 @@
+<paquet
+	prefix="codes_postaux"
+	categorie="divers"
+	version="2.0.2"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/codes_postaux-32.png"
+	schema="1.0"
+	documentation="https://contrib.spip.net/Codes-postaux"
+>	
+
+	<nom>Codes postaux</nom>
+	<!-- Ajouter à la base de données les codes postaux récuperer sur le site geonames -->
+
+	<auteur lien="http://www.declic3000.com">GuillaumeW</auteur>
+	<copyright>2012</copyright>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/codes_postaux.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/codes_postaux.php" />
+	<pipeline nom="rechercher_liste_des_champs" inclure="codes_postaux_pipeline.php" />
+	<pipeline nom="jqueryui_plugins" inclure="codes_postaux_pipeline.php" />
+	<pipeline nom="declarer_tables_objets_surnoms" inclure="codes_postaux_pipeline.php" />
+	<pipeline nom="autoriser" inclure="codes_postaux_autoriser.php" />
+
+	<menu nom="codes_postaux" titre="codes_postaux:codes_postaux" parent="menu_edition" icone="images/codes_postaux-16.png" action="codes_postaux" />
+</paquet>
