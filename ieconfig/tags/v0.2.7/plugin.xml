@@ -1,0 +1,47 @@
+<plugin>
+	<nom>Import-Export</nom>
+	<slogan>Importer, exporter des configurations de plugins</slogan>
+	<auteur>Joseph</auteur>
+	<licence>GPL v3</licence>
+	<version>0.2.7</version>
+	<etat>stable</etat>
+	<description>Ce plugin permet d'exporter la configuration de SPIP et des plugins compatibles dans un seul et unique fichier au format YAML. Ces fichiers de configuration peuvent ensuite &#234;tre import&#233;s.</description>
+	<lien>https://contrib.spip.net/spip.php?article3703</lien>
+	<icon>img/ieconfig-128.png</icon>
+	<prefix>ieconfig</prefix>
+	<options>ieconfig_options.php</options>
+	<onglet id='ieconfig_export' parent="ieconfig">
+		<url>ieconfig_export</url>
+		<titre>ieconfig:titre_export</titre>
+		<icone>img/ieconfig-export.png</icone>
+	</onglet>
+	<onglet id='ieconfig_import' parent="ieconfig">
+		<url>ieconfig_import</url>
+		<titre>ieconfig:titre_import</titre>
+		<icone>img/ieconfig-import.png</icone>
+	</onglet>
+	<bouton id='ieconfig' parent="configuration">
+		<url>ieconfig_export</url>
+		<titre>ieconfig:titre_ieconfig</titre>
+		<icone>img/ieconfig-24.png</icone>
+	</bouton>
+	<bouton id='bando_ieconfig' parent="bando_administration">
+		<url>ieconfig_export</url>
+		<titre>ieconfig:titre_ieconfig</titre>
+		<icone>images/ieconfig-16.png</icone>
+	</bouton>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>ieconfig_autoriser.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>mes_fichiers_a_sauver</nom>
+		<inclure>ieconfig_mes_fichiers_a_sauver.php</inclure>
+	</pipeline>
+	<categorie>maintenance</categorie>
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="spip_bonux" version="[1.8.10;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
+	<necessite id="verifier" />
+	<necessite id="YAML" version="[1.5.2;]" />
+</plugin>
