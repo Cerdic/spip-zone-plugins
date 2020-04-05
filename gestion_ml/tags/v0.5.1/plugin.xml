@@ -1,0 +1,51 @@
+<plugin>
+	<nom>Gestion ML avec SOAP</nom>
+	<slogan>G&#233;rer les mailing lists chez votre h&#233;bergeur avec le protocole SOAP</slogan>
+	<auteur>Yffic</auteur>
+	<version>0.5.1</version>
+	<version_base>0.2</version_base>
+	<etat>test</etat>
+	<description>
+		<multi>
+			[fr]Ce plugin permet de d&#233;l&#233;guer la gestion de mailing lists &#224; certains administrateurs du site. L'interface avec les ML chez votre h&#233;bergeur se fait gr&#226;ce au protocole SOAP. Il ne fonctionne actuellement qu’avec les listes ezmlm de l’h&#233;bergeur OVH.
+		</multi>
+	</description>
+	<prefix>gestionml</prefix>
+	<install>base/gestionml_install.php</install>
+	<icon>images/gestionml-32.png</icon>
+	<lien>https://contrib.spip.net/Gestion-ML-avec-Soap</lien>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>inc/gestionml_autoriser.php</inclure>
+	</pipeline>
+	<bouton id='gestionml1' parent='naviguer'>
+		<titre>gestionml:titre_menu_gerer</titre>
+		<icone>images/gestionml-24.png</icone>
+		<url>gestionml</url>
+	</bouton>
+	<bouton id='gestionml21' parent='bando_edition'>
+		<titre>gestionml:titre_menu_gerer</titre>
+		<icone>images/gestionml-16.png</icone>
+		<url>gestionml</url>
+	</bouton>
+	<pipeline>
+		<nom>ieconfig_metas</nom>
+		<inclure>gestionml_ieconfig_metas.php</inclure>
+	</pipeline>
+	<bouton id='gestionml' parent='configuration'>
+		<icone>images/gestionml-24.png</icone>
+		<titre>gestionml:titre_menu_configurer</titre>
+		<url>configurer_gestionml</url>
+	</bouton>
+	<bouton id='gestionml2' parent='bando_configuration'>
+		<icone>images/gestionml-16.png</icone>
+		<titre>gestionml:titre_menu_configurer</titre>
+		<url>configurer_gestionml</url>
+	</bouton>
+	<fonctions>inc/gestionml_api.php</fonctions>
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="saisies" version="[1.42.11;]" />
+	<necessite id="YAML" version="[1.5.2;]" />
+	<necessite id="spip_bonux" version="[1.8.0;]" />
+	<categorie>communication</categorie>
+</plugin>
