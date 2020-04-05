@@ -1,0 +1,52 @@
+<plugin>
+	<nom>Sitra Exports</nom>
+	<auteur>[Dominique Wojylac (Sivu Inforoutes de l'Ard&#232;che)->http://www.inforoutes.fr]</auteur>
+	<version>0.9.1</version>
+	<etat>test</etat>
+	<description>
+R&#233;cup&#233;ration et mise en base des exports SITRA, gestion des exports multilingues en un seul fichier compress&#233;s ou non. Importation des images principales, r&#233;cup&#233;ration des images distantes (principales, secondaires ou logos). R&#233;cup&#233;ration des s&#233;lections SITRA, des cat&#233;gories et sous-cat&#233;gories des objets, des crit&#232;res internes affect&#233;s.
+	</description>
+	<lien>https://contrib.spip.net/spip.php?article3917</lien>
+	<slogan>Importer des donn&#233;es touristiques SITRA dans SPIP</slogan>
+	<icon>images/sitra-64.png</icon>
+	<licence>GPL 3 - &#169; 2011</licence>
+	<prefix>sitra</prefix>
+	<!-- fonctions et options -->
+	<options>sitra_options.php</options>
+	<fonctions>sitra_fonctions.php</fonctions>
+	<!-- menu configuration -->
+	<bouton id="sitra_admin" parent="naviguer">
+		<icone>images/sitra-24.png</icone>
+		<titre>sitra:sitra</titre>
+		<url>admin_sitra</url>
+	</bouton>
+	<bouton id="bando_sitra_admin" parent="bando_edition">
+		<icone>images/sitra-24.png</icone>
+		<titre>sitra:sitra</titre>
+		<url>admin_sitra</url>
+	</bouton>
+	<!-- base -->
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/tables_sitra.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/tables_sitra.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_url_objets</nom>
+		<inclure>sitra_pipelines.php</inclure>
+	</pipeline>
+	<!-- autorisations -->
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>sitra_autoriser.php</inclure>
+	</pipeline>
+	<version_base>1.0</version_base>
+	<install>sitra_installations.php</install>
+
+	<categorie>divers</categorie>
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="cfg" version="[1.16.0;]" />
+</plugin>

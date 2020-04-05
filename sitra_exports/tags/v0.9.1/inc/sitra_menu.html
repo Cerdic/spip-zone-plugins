@@ -1,0 +1,18 @@
+<ul id="sitra_menu">
+[(#ENV{fonction,sitra_selections}|=={sitra_selections}|?{
+	<li class="en_cours"><:sitra:selections:></li>,
+	[<li><a href="(#URL_ECRIRE{admin_sitra}|parametre_url{fonction,sitra_selections})"><:sitra:selections:></a></li>]
+	})]
+[(#ENV{fonction}|=={sitra_categories}|?{
+	<li class="en_cours"><:sitra:categories:></li>,
+	[<li><a href="(#URL_ECRIRE{admin_sitra}|parametre_url{fonction,sitra_categories})"><:sitra:categories:></a></li>]
+	})]
+[(#ENV{fonction}|=={sitra_criteres}|?{
+	<li class="en_cours"><:sitra:criteres:></li>,
+	[<li><a href="(#URL_ECRIRE{admin_sitra}|parametre_url{fonction,sitra_criteres})"><:sitra:criteres:></a></li>]
+	})]
+[(#ENV{fonction}|=={sitra_recherche}|?{
+	<li class="en_cours"><:sitra:rechercher:></li>,
+	[<li><a href="(#URL_ECRIRE{admin_sitra}|parametre_url{fonction,sitra_recherche})"><:sitra:rechercher:></a></li>]
+	})]
+</ul>

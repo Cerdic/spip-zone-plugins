@@ -1,0 +1,24 @@
+<a name="#FORM"></a>
+<div class="formulaire_spip formulaire_#FORM" id="formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV{message_erreur})</p>]
+	[(#ENV{editable}|oui)
+	<form name="#FORM" id="#FORM" method="get" action="#ENV{action}" enctype="multipart/form-data">
+	[<!--(#REM) declarer les hidden -->]
+	[(#ENV{action}|form_hidden)]
+	<ul>
+		<li class="editer_titre obligatoire erreur">
+			<label for="titre"><:sitra:titre_objet:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
+			<input type="text" class="text" name="titre" id="titre" value="#ENV{titre}" />
+		</li>
+		<li class="editer_titre obligatoire erreur">
+			<label for="id_sitra"><:sitra:identifiant_sitra:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_sitra})</span>]
+			<input type="text" class="text" name="id_sitra" id="id_sitra" value="#ENV{id_sitra}" />
+		</li>
+	</ul>
+	<p class="boutons"><input type="submit" class="submit" name="valider" id="valider" value="Rechercher" /></p>
+	</form>
+	]
+</div>
