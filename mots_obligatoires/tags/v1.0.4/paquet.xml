@@ -1,0 +1,22 @@
+<paquet
+	prefix="mots_obligatoires"
+	categorie="edition"
+	version="1.0.4"
+	etat="test"
+	compatibilite="[3.1.0;3.2.*]"
+	logo="prive/themes/spip/images/mots_obligatoires-32.png"
+	documentation="https://contrib.spip.net/4837"
+>
+	<nom>Mots obligatoires</nom>
+
+	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
+	<licence>GNU/GPL</licence>
+	
+
+	<traduire module="mots_obligatoires" reference="fr" />
+	<traduire module="paquet-mots_obligatoires" reference="fr" />
+	
+	<necessite nom="mots" compatibilite="[2.7.8;]" />
+	<utilise nom="motus" compatibilite="[1.1.4;]" />
+	<pipeline nom="formulaire_verifier" inclure="mots_obligatoires_pipelines.php" />
+</paquet>
