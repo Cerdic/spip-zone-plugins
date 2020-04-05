@@ -1,0 +1,8 @@
+[(#ENV{passage}|?{#SET{url,bible},#SET{url,bible_traduction}})]
+
+<table class="spip"><caption lang="#INFO_BIBLE_TRADUCTION{#ENV{traduction},lang_abrev}"><a href="#URL_PAGE{#GET{url},traduction=#ENV{traduction}}&passage=[(#ENV{passage}|bible_traduire_abreviation{#LANG,#INFO_BIBLE_TRADUCTION{#ENV{traduction},lang_abrev}})]">#INFO_BIBLE_TRADUCTION{#ENV{traduction},traduction}</a></caption>
+<tr class="row_even"><td><:bible:langue:></td><td>#INFO_BIBLE_TRADUCTION{#ENV{traduction},lang}</td></tr>
+<tr  class="row_odd"><td><:bible:at:></td><td>#INFO_BIBLE_TRADUCTION{#ENV{traduction},at}</td></tr>
+<tr class="row_even"><td><:bible:deutero:></td><td>#INFO_BIBLE_TRADUCTION{#ENV{traduction},deutero}</td></tr>
+<tr class="row_odd"><td><:bible:nt:></td><td lang="#INFO_BIBLE_TRADUCTION{#ENV{traduction},lang_abrev}">#INFO_BIBLE_TRADUCTION{#ENV{traduction},nt}</td></tr>
+[<tr class="row_even"><td><:bible:historique:></td><td>(#INFO_BIBLE_TRADUCTION{#ENV{traduction},historique})</td></tr>]</table>

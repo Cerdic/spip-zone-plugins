@@ -1,0 +1,23 @@
+<blockquote class="spip"[(#ENV{spip_lang}|!={#ENV{lang}}|oui)lang="#ENV{lang}"]>
+[<div dir="(#VAL{original}|bible_tableau|table_valeur{#ENV{lang_original}})" lang="#ENV{lang_original}">]
+<INCLURE{fond=bible_affichage/texte_standard}{passage_texte=#ENV{passage_texte}}{retour=#ENV{retour}}{numeros=#ENV{numeros}}{propre=#ENV{propre}}>
+[(#VAL{original}|bible_tableau|table_valeur{#ENV{lang_original}}|oui)</div>]
+
+#SET{param,
+#ARRAY{
+    livre,#ENV{passage}|table_valeur{0},
+    cd,#ENV{passage}|table_valeur{1},
+    vd,#ENV{passage}|table_valeur{2},
+    cf,#ENV{passage}|table_valeur{3},
+    vf,#ENV{passage}|table_valeur{4},
+    trad,#ENV{traduction},
+    separateur,#ENV{separateur},
+    nommer_trad,#ENV{nommer_trad},
+    lang,#ENV{lang},
+    url,#ENV{url},
+    forme_livre,#ENV{forme_livre}
+}}
+[(#ENV{ref}|=={oui}|oui)
+[(#GET{param}|afficher_references)]	
+][(#ENV{propre}|=={non}|non)#FILTRE{propre}]
+</blockquote>
