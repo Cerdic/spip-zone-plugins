@@ -1,0 +1,14 @@
+<script>
+function init_autoformatteur() {
+    $('.autoformat-numero').keyup(function (e) {
+        if (e.keyCode !== 8) {
+            $(this).val(formatInternational("#EVAL{FORMAT_PHONE_PAYS}", $(this).val()));
+        }
+    });
+}
+
+// DOM ready
+$(init_autoformatteur);
+// chargements ajax
+onAjaxLoad(init_autoformatteur);
+</script>
