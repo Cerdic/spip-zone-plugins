@@ -1,0 +1,17 @@
+<paquet
+	prefix="rsspropose"
+	categorie="communication"
+	version="1.0.2"
+	etat="dev"
+	compatibilite="[3.1.4;3.1.*]"
+	logo="prive/themes/spip/images/rsspropose-64.png"
+	documentation="https://contrib.spip.net/Flux-RSS-des-contenus-en-attente-de-validation"
+>
+	
+	<nom>RSS pour publications en attente de validation</nom>
+	
+	<auteur mail='yves.costiou@gmail.com'>Yves Costiou</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+	
+</paquet>
