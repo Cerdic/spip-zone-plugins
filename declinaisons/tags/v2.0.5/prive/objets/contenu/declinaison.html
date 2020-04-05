@@ -1,0 +1,18 @@
+<BOUCLE_declinaison(DECLINAISONS){id_declinaison}{statut?}>
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:declinaison:label_titre:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{titre} titre'>(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<label><:declinaison:label_descriptif:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>(#DESCRIPTIF)</span>
+</div>]
+
+[<div class="champ contenu_id_parent[ (#ID_PARENT*|strlen|?{'',vide})]">
+	<label><:declinaison:label_id_parent:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{id_parent} id_parent'>(#ID_PARENT)</span>
+</div>]
+
+</BOUCLE_declinaison>

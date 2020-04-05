@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_declinaisons_selectionnes>
+	<ul>
+	<BOUCLE_declinaisons_selectionnes(DECLINAISONS){id_declinaison IN #GET*{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+		<li class="choix">#TITRE (#ID_DECLINAISON)</li>
+	</BOUCLE_declinaisons_selectionnes>
+	</ul>
+	</B_declinaisons_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_declinaisons_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_declinaison_selectionne(DECLINAISONS){id_declinaison=#ENV{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+	  	<p>#TITRE (#ID_DECLINAISON)</p>
+	</BOUCLE_declinaison_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_declinaison_selectionne>
+<//B_test_multiple>

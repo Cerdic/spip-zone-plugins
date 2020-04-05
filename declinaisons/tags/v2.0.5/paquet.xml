@@ -1,0 +1,31 @@
+<paquet
+	prefix="declinaisons"
+	categorie="communication"
+	version="2.0.5"
+	etat="test"
+	compatibilite="[3.0.5;3.3.*]"
+	logo="prive/themes/spip/images/declinaisons-64.png"
+	documentation="https://contrib.spip.net/Declinaisons-Prix"
+	schema="1.0.2"
+>
+
+	<nom>Déclinaisons Prix</nom>
+
+	<auteur lien='https://web-simple.eu'>Rainer Müller</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="saisies" compatibilite="[3.32.1;]" />
+	<necessite nom="prix_objets" compatibilite="[2.4.2;]" />
+	<utilise nom="shop" compatibilite="[1.1.0;]" />
+
+	<pipeline nom="autoriser" inclure="declinaisons_autorisations.php" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/declinaisons.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/declinaisons.php" />
+	<pipeline nom="shop_objets" inclure="declinaisons_pipelines.php" />
+	<pipeline nom="prix_objets_extensions" inclure="declinaisons_pipelines.php" />
+
+	<menu nom="declinaisons" titre="declinaison:titre_declinaisons" parent="menu_edition" icone="images/declinaison-16.png" action="declinaisons" />
+	<menu nom="declinaison_creer" titre="declinaison:icone_creer_declinaison" parent="outils_rapides" icone="images/declinaison-new-16.png" action="declinaison_edit" parametres="new=oui" />
+</paquet>
