@@ -1,0 +1,32 @@
+<B_dossiers>
+<div class="liste dossiers">
+[<h2><:lister_dossiers:dossiers_taille_total:> (#EVAL{_DIR_RACINE}|dossiers_taille|taille_en_octets)</h2>]
+<div class="boutons right">
+	[(#ENV{sous_dossiers}|=={oui}|?{
+		<a href="[(#SELF|parametre_url{sous_dossiers,non})]" class="bouton"><:lister_dossiers:sous_dossiers_masquer:></a>,
+		<a href="[(#SELF|parametre_url{sous_dossiers,oui})]" class="bouton"><:lister_dossiers:sous_dossiers_afficher:></a>
+	})]
+</div>
+<div class="nettoyeur"> </div>
+	<ul>
+	<BOUCLE_dossiers (DATA) {source table, (#EVAL{_DIR_RACINE}|lister_dossiers)} {par cle}>
+		<B_sous_dossiers>
+		[(#SET{chemin,[(#CLE|replace{'\\','/'})]})]
+		[(#SET{poids,[(#CLE|dossiers_taille|taille_en_octets)]})]
+		<li><a href="[(#GET{chemin})]" class="repertoire[(#GET{poids}|non) vide]" title="[(#GET{chemin})] [((#GET{poids}|sinon{0 octet}))]">[(#GET{chemin}|explode{"/"}|array_pop)]</a> [<span class="compteur">((#TOTAL_BOUCLE))</span>]
+			<ul>
+			<BOUCLE_sous_dossiers (DATA) {source table, #VALEUR} {par cle} {si #VALEUR|is_array} {si #VALEUR|count|>{0}} {si #ENV{sous_dossiers,non}|=={oui}}>
+					<BOUCLE_sous_sous_dossiers (BOUCLE_sous_dossiers)>
+					</BOUCLE_sous_sous_dossiers>
+			</BOUCLE_sous_dossiers>
+			</ul>
+		</li>
+		</B_sous_dossiers>
+		[(#SET{chemin,[(#CLE|replace{'\\','/'})]})]
+		[(#SET{poids,[(#CLE|dossiers_taille|taille_en_octets)]})]
+		<li><a href="[(#GET{chemin})]" class="repertoire[(#GET{poids}|non) vide]" title="[(#GET{chemin})] [((#GET{poids}|sinon{0 octet}))]">[(#GET{chemin}|explode{"/"}|array_pop)]</a></li>
+		<//B_sous_dossiers>
+	</BOUCLE_dossiers>
+	</ul>
+</div>
+</B_dossiers>
