@@ -1,0 +1,14 @@
+[(#REM)
+
+  Squelette Presentation resumee d'un syndic dans une liste
+  Distribue sous licence GPL
+
+]
+<BOUCLE_resume_syndic(SYNDIC) {id_syndic} {statut?}>
+<article class="entry site">
+	<strong class="h3-like entry-title"><a href="#ENV{url,#URL_SITE}" rel="bookmark">[(#LOGO_SYNDIC_RUBRIQUE|image_reduire{#ENV{largeur_logo,-1},#ENV{hauteur_logo,-1}}|responsive_logo)]#NOM_SITE<span
+		class="read-more hide">[(#ICON{chevron-right,icon-heavy,[<:zcore:lire_la_suite:><:zcore:lire_la_suite_de:>&laquo;(#TITRE)&raquo;]})]</span></a></strong>
+	<p class="publication">[<time pubdate="pubdate" datetime="[(#DATE|date_iso)]">#ICON{calendar} (#DATE|affdate_jourcourt)</time>][<span class="authors"><span class="sep">, </span>#ICON{user} <:par_auteur:> (#LESAUTEURS)</span>]</p>
+	[<div class="#EDIT{intro} introduction entry-content">(#DESCRIPTIF|couper{#ENV{coupe,300}})</div>]
+</article>
+</BOUCLE_resume_syndic>

@@ -1,0 +1,13 @@
+[(#REM)
+
+  Squelette Presentation resumee d'un mot dans une liste
+  Distribue sous licence GPL
+
+]
+<BOUCLE_resume_mot(MOTS) {id_mot} {statut?}>
+<section class="entry mot">
+	<strong class="h3-like entry-title"><a href="#URL_MOT" rel="bookmark">[(#LOGO_MOT|image_reduire{#ENV{largeur_logo,-1},#ENV{hauteur_logo,-1}}|responsive_logo)]#TITRE<span
+		class="read-more hide">[(#ICON{chevron-right,icon-heavy,[<:zcore:lire_la_suite:><:zcore:lire_la_suite_de:>&laquo;(#TITRE)&raquo;]})]</span></a></strong>
+	[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION{#ENV{coupe,300}})</div>]
+</section>
+</BOUCLE_resume_mot>

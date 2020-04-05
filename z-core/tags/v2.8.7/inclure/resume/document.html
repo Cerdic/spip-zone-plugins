@@ -1,0 +1,16 @@
+[(#REM)
+
+  Squelette Presentation resumee d'un document dans une liste
+  Distribue sous licence GPL
+
+]
+<BOUCLE_resume_document(DOCUMENTS) {id_document} {statut?}>
+<article class="entry document spip_doc[ (#EXTENSION|attribut_html)]">
+	<strong class="h3-like entry-title"><a href="#URL_DOCUMENT" rel="bookmark" type="#MIME_TYPE" title="<:bouton_download:> [(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]" >[(#LOGO_DOCUMENT|image_reduire{#ENV{largeur_logo,-1},#ENV{hauteur_logo,-1}}|responsive_logo)][(#TITRE|sinon{#FICHIER|basename|couper{80}})]<span
+		class="read-more hide">[(#ICON{chevron-right,icon-heavy,<:bouton_download:>})]</span></a></strong>
+	<p class="publication">[<time pubdate="pubdate" datetime="[(#DATE|date_iso)]">#ICON{calendar} (#DATE|affdate_jourcourt)</time>]
+	<span class="type"><span class="sep"> - </span>[(#TYPE_DOCUMENT)]</span><span class="poids"><span class="sep"> - </span>[(#TAILLE|taille_en_octets)]</span>
+	</p>
+	[<div class="#EDIT{descriptif} introduction entry-content">(#DESCRIPTIF|couper{#ENV{coupe,300}})</div>]
+</article>
+</BOUCLE_resume_document>

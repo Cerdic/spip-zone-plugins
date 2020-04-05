@@ -1,0 +1,14 @@
+[(#REM)
+
+  Squelette Presentation resumee d'un commentaire dans une liste
+  Distribue sous licence GPL
+
+]
+<BOUCLE_resume_forum(FORUMS) {id_forum} {statut?}>
+<article class="entry comment hentry">
+	<strong class="h3-like entry-title"><a href="#URL_FORUM" rel="bookmark">#TITRE<span
+		class="read-more hide">[(#ICON{chevron-right,icon-heavy,[<:zcore:lire_la_suite:><:zcore:lire_la_suite_de:>&laquo;(#TITRE)&raquo;]})]</span></a></strong>
+	<p class="publication">[<time pubdate="pubdate" datetime="[(#DATE|date_iso)]">#ICON{calendar} (#DATE|affdate_jourcourt)</time>][<span class="authors"><span class="sep">, </span>#ICON{user} <:par_auteur:> (#NOM)</span>]</p>
+	[<div class="#EDIT{intro} introduction entry-content"><p>(#TEXTE|couper{#ENV{coupe,300}}|PtoBR)</p></div>]
+</article>
+</BOUCLE_resume_forum>

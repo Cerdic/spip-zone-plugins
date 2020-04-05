@@ -1,0 +1,49 @@
+.icon {
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	margin-bottom: -0.15em;
+	vertical-align: baseline;
+}
+
+.icon svg {
+	display: block;
+	width: 100%;
+	height: 100%;
+	stroke: currentColor;
+	stroke-width: 2px;
+	stroke-linejoin: round;
+	stroke-linecap: round;
+	fill: none;
+}
+.icon svg, .icon svg symbol {
+    overflow: visible;
+}
+
+.icon-sm {
+	font-size: 0.8em;
+}
+.icon-lg {
+	font-size: 1.5em;
+}
+
+.icon-round svg {
+	stroke-linejoin: round;
+	stroke-linecap: round;
+}
+.icon-bevel svg {
+	stroke-linejoin: bevel;
+	stroke-linecap: butt;
+}
+.icon-miter svg {
+	stroke-linejoin: miter;
+	stroke-linecap: butt;
+}
+
+.icon-ulight svg {stroke-width: 0.5px;}
+.icon-thin svg {stroke-width: 1px;}
+.icon-light svg {stroke-width: 1.5px;}
+.icon-regular svg {stroke-width: 2px;}
+.icon-medium svg {stroke-width: 2.5px;}
+.icon-bold svg {stroke-width: 3px;}
+.icon-heavy svg {stroke-width: 3.5px;}
