@@ -1,0 +1,21 @@
+<paquet
+	prefix="svpapi"
+	categorie="outil"
+	version="0.9.0"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="svpapi_logo-64.png"
+>
+
+	<nom>SVP API HTTP</nom>
+	<!-- Une API REST pour interroger un serveur de plugins SVP -->
+
+	<auteur lien="http://blog.smellup.net/">Eric Lupinacci</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+
+	<pipeline nom="liste_ezcollection" inclure="svpapi_pipelines.php" />
+
+	<necessite nom="svp" compatibilite="[2.0.7;[" />
+	<necessite nom="ezrest" compatibilite="[0.1.0;]" />
+</paquet>
