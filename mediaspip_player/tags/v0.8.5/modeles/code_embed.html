@@ -1,0 +1,12 @@
+[(#REM)
+	Affiche le code d'embed d'un document mp3, mp4 ou flv
+	
+	Paramètres d'environnement :
+	-* id_document (int) : l'identifiant numérique du document
+]
+<div class="info info-embed" id="embed_#ENV{id_document}">
+	<p><span class="title"><:mediaspip_player:info_embed_code:></span></p>
+	<div class="ajax">
+	#FORMULAIRE_EMBED_CODE{#ENV{id_document}}
+	</div>
+</div>

@@ -1,0 +1,103 @@
+[(#REM)
+	
+	Modele html audio
+	
+	Les paramètres possibles :
+	-* controls "non"	N'affichera pas les controles si la valeur est non ou false
+	-* autoplay "tout sauf non ou false"	La video se lira dès qu'elle le pourra si la valeur est autre que non ou false
+	-* autobuffer|preload non|auto|metadata La méthode de preload : auto chargera l'ensemble de la video, metadatas s'arrêtera aux metadatas, non ne chargera rien
+	-* loop "tout sauf non ou false" La video se lira en boucle
+	-* largeur int La largeur par défaut (défaut 350)
+	-* hauteur int La hauteur par défaut (défaut 40)
+	-* align left|right|center	L'alignement par défaut
+]
+<BOUCLE_tous(DOCUMENTS types_documents){id_document=#ID}{tout}>
+#SET{hauteur,#ENV{hauteur,#HAUTEUR|sinon{40}}}
+#SET{largeur,#ENV{largeur,#LARGEUR|sinon{350}}}
+[(#GET{largeur}|=={0}|oui)#SET{largeur,350}]
+[(#ENV{largeur}
+	|et{#ENV{hauteur}|=={''}}
+	|et{#HAUTEUR|>{0}}
+	|et{#LARGEUR|>{0}}
+	|et{#LARGEUR|>{#ENV{largeur}}}|oui)
+	#SET{ratio,#LARGEUR|div{#ENV{largeur}}}
+	#SET{hauteur,#HAUTEUR|div{#GET{ratio}}}
+][(#ENV{hauteur}
+	|et{#ENV{largeur}|=={''}}
+	|et{#HAUTEUR|!={0}}
+	|et{#LARGEUR|sinon{350}}
+	|et{[(#HAUTEUR|sinon{40}|>{#ENV{hauteur}})]}|oui)
+	[(#SET{ratio,[(#HAUTEUR|sinon{40}|div{#ENV{hauteur}})]})]
+	#SET{largeur,#LARGEUR|sinon{350}|div{#GET{ratio}}}
+]
+
+[(#SET{logo,[(#LOGO_DOCUMENT|image_passe_partout{#GET{largeur},#GET{hauteur}}|inserer_attribut{class,''})]})]
+
+[(#GET{hauteur}|=={0}|oui)
+	#SET{hauteur,#GET{logo}|extraire_attribut{height}}
+]
+[(#GET{largeur}|=={0}|oui)
+	#SET{largeur,#GET{logo}|extraire_attribut{largeur}}
+]
+<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})]'[
+	style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})[width:(#GET{largeur})px][height:(#GET{hauteur})px]']>
+	<div class="media audio">
+		<div>
+		#GET{logo}
+		<audio id="audio_#ID_DOCUMENT"[
+			(#ENV{controls,false}|in_array{#ARRAY{0,false,1,non}}|non)controls="controls"][
+			(#ENV{autoplay,non}|in_array{#ARRAY{0,false,1,non}}|non)autoplay="autoplay"][(#ENV{autobuffer,#ENV{preload,metadata}}|in_array{#ARRAY{0,false,1,non}}|non)[
+			(#ENV{autobuffer,#ENV{preload,metadata}}|in_array{#ARRAY{0,auto,1,metadata}}|?{[preload="(#ENV{autobuffer,#ENV{preload,metadata}})"],preload="metadata"})]][(#ENV{loop,non}|in_array{#ARRAY{0,false,1,non}}|non)
+			loop="loop"][
+			poster="(#GET{logo}|extraire_attribut{src}|url_absolue)"
+			] style="width:#GET{largeur}px;">
+				#SET{variantes,#ARRAY}
+				<BOUCLE_variantes(DOCUMENTS){id_orig=#ID_DOCUMENT}>#SET{variantes,#GET{variantes}|push{#EXTENSION}}</BOUCLE_variantes>
+				[(#EXTENSION|=={mp3}|et{#EXTENSION|in_array{#GET{variantes}}|non}|oui)
+				<source type="#MIME_TYPE" src="[(#URL_DOCUMENT|url_absolue)]" />
+				]
+				<BOUCLE_ssdoc_mp3(DOCUMENTS){id_orig=#ID_DOCUMENT}{extension IN mp3}{tout}>
+				<source type="#MIME_TYPE" src="[(#URL_DOCUMENT|url_absolue)]" />
+				</BOUCLE_ssdoc_mp3>
+				<BOUCLE_ssdoc(DOCUMENTS){id_orig=#ID_DOCUMENT}{extension IN ogg}{tout}>
+				<source type="#MIME_TYPE" src="[(#URL_DOCUMENT|url_absolue)]" />
+				</BOUCLE_ssdoc>
+				[(#EXTENSION|in_array{[(#ARRAY|push{ogg}|push{mp3})]}|et{[(#EXTENSION|in_array{#GET{variantes}}|non)]}|oui)
+					<source type="#MIME_TYPE" src="[(#URL_DOCUMENT|url_absolue)]" />
+				]
+				[(#EXTENSION|in_array{[(#ARRAY|push{ogg}|push{mp3}|push{flac})]}|non)
+				<object width='#GET{largeur}' height='#GET{hauteur}' type="#MIME_TYPE">
+					<param name='movie' value='#URL_DOCUMENT' />
+					<param name='src' value='[(#URL_DOCUMENT|url_absolue)]' />
+					[(#ENV*|env_to_params)]
+					<embed src='#URL_DOCUMENT' [(#ENV*|env_to_attributs)] width='#GET{largeur}' height='#GET{hauteur}'></embed>
+				</object>]
+				
+		</audio>
+		</div>
+		[(#ENV{infos}|=={non}|non)
+			[<div class='#EDIT{titre} spip_doc_titre'><strong>(#TITRE)</strong></div>]
+			[<div class='#EDIT{descriptif} spip_doc_descriptif'>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</div>]
+		]
+	</div>
+</div>
+<script type="text/javascript">
+	var mediaspip_player_init_#ID_DOCUMENT = function(){
+		$('#audio_#ID_DOCUMENT').each(function(){
+			if($(this).parent('.media_wrapper').size() == 0){
+				$(this).mediaspip_player_init({
+					flowurl:'[(#CHEMIN{flash/flowplayer.swf}|url_absolue)]',
+					flasherror:erreur_flash,
+					movieSize:'adapt'[(#CONFIG{mediaspip_player/cookie_volume}|=={oui}|oui),
+					cookie_volume:true][(#CONFIG{mediaspip_player/slider_volume_orientation}|=={horizontal}|oui),
+					volume_slider_orientation:'horizontal']
+				});
+			}
+		});
+	}
+	$(document).ready(function(){
+		mediaspip_player_init_#ID_DOCUMENT();
+		onAjaxLoad(function(){setTimeout(function(){mediaspip_player_init_#ID_DOCUMENT();},500)});
+	});
+</script>
+</BOUCLE_tous>

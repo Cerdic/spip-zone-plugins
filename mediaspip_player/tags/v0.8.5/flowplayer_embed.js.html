@@ -1,0 +1,18 @@
+#CACHE{24*3600}
+#HTTP_HEADER{Content-Type: text/javascript; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+<BOUCLE_document(DOCUMENTS){id_document}{extension IN flv,mp3,mp4}>
+{
+	'playlist':['[(#LOGO_DOCUMENT|extraire_attribut{src}|url_absolue)]',{'url':'[(#URL_DOCUMENT|url_absolue)]','autoPlay':false}],
+	'canvas':{'backgroundColor':'[(#ENV{backgroundcolor,#000000})]','backgroundGradient':'none'},
+	'plugins': {
+		'controls':{
+			[(#EXTENSION|=={mp3}|oui)'autoHide': false,'fullscreen':false,'mute':false,]
+			'tooltips':{
+				'buttons': true
+			}
+		}
+	}
+}
+</BOUCLE_document>
+#FILTRE{trim}

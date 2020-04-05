@@ -1,0 +1,10 @@
+<BOUCLE_doc(DOCUMENTS){id_document}>
+<div style="[width:(#ENV{width,200})px;][height:(#ENV{height,20})px]">
+<object id="audioplayer#ID_DOCUMENT" type="application/x-shockwave-flash" data="[(#CHEMIN{flash/neoplayer_maxi.swf}|url_absolue)]" height="[(#ENV{height,20})]" width="[(#ENV{width,200})]">
+<param name="wmode" value="transparent" />
+<param name="movie" value="#CHEMIN{flash/neoplayer_maxi.swf}" />
+<param name="FlashVars" value="mp3=#URL_DOCUMENT&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;loadingcolor=ffff00&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;showinfo=0&amp;width=200&amp;height=20[&amp;autoplay=(#ENV{autostart,0})]" />
+[<span><a href="(#URL_DOCUMENT|url_absolue)" rel="enclosure">[(#URL_DOCUMENT|url_absolue)]</a></span>]
+</object>
+</div>
+</BOUCLE_doc>

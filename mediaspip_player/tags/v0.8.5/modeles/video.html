@@ -1,0 +1,123 @@
+[(#REM)
+	
+	Modele html video
+	
+	Les paramètres possibles :
+	-* controls "non"	N'affichera pas les controles si la valeur est non ou false
+	-* autoplay "tout sauf non ou false"	La video se lira dès qu'elle le pourra si la valeur est autre que non ou false
+	-* autobuffer|preload non|auto|metadata La méthode de preload : auto chargera l'ensemble de la video, metadatas s'arrêtera aux metadatas, non ne chargera rien
+	-* loop "tout sauf non ou false" La video se lira en boucle
+	-* largeur int La largeur par défaut (défaut 320)
+	-* hauteur int La hauteur par défaut (défaut 240)
+	-* align left|right|center	L'alignement par défaut
+]
+
+<BOUCLE_tous(DOCUMENTS types_documents){id_document}{tout}>[
+(#REM) on trouvera plusieurs variable de hauteur/largeur
+- les balises #HAUTEUR et #LARGEUR
+- #ENV{hauteur} et {largeur} correspondant <emb|hauteur=xx...>
+- #GET{hauteur} et #GET{largeur} correspondent prioritairement a #ENV,
+  puis #LARGEUR/HAUTEUR sauf si il y a un controleur
+]
+[
+(#SET{hauteur,#ENV{hauteur,#HAUTEUR}})][
+(#SET{largeur,#ENV{largeur,#LARGEUR}})][
+(#LARGEUR|!={0}|et{[(#LARGEUR|<{#ENV{largeur}})]}|oui)
+	#SET{largeur,#LARGEUR}
+][(#HAUTEUR|!={0}|et{#HAUTEUR<#ENV{hauteur}}|oui)
+	#SET{hauteur,#HAUTEUR}
+][(#ENV{largeur}
+	|et{#ENV{hauteur}|=={''}}
+	|et{#HAUTEUR}
+	|et{#LARGEUR}
+	|et{[(#LARGEUR|>{#ENV{largeur}})]}|oui)
+	[(#SET{ratio,[(#LARGEUR|div{#ENV{largeur}})]})]
+	#SET{hauteur,#HAUTEUR|div{#GET{ratio}}|floor}
+][(#ENV{hauteur}
+	|et{#ENV{largeur}|=={''}}
+	|et{#HAUTEUR}
+	|et{#LARGEUR}
+	|et{#GET{ratio}|=={''}}
+	|et{[(#HAUTEUR|>{#ENV{hauteur}})]}|oui)
+	[(#SET{ratio,[(#HAUTEUR|div{#ENV{hauteur}})]})]
+	#SET{largeur,#LARGEUR|div{#GET{ratio}}|floor}
+][(#ENV{hauteur}|>{#ENV{hauteur}}|>{0}|<{#ENV{hauteur}}
+	|et{[(#HAUTEUR|>{#ENV{hauteur}})]}|oui)
+	[(#SET{ratio,[(#HAUTEUR|div{#ENV{hauteur}})]})]
+	#SET{largeur,#LARGEUR|div{#GET{ratio}}|floor}
+	#SET{hauteur,#ENV{hauteur}}
+]
+[(#ROTATION|=={90}|oui)
+	#SET{largeur2,#GET{hauteur}}
+	#SET{hauteur,#GET{largeur}}
+	#SET{largeur,#GET{largeur2}}
+]
+[(#REM)
+
+	Si la taille est zero, mettre une valeur par defaut 320x240
+
+][(#GET{hauteur}|et{#GET{largeur}}|?{'',
+	[(#SET{largeur,320})][(#SET{hauteur,240})]
+})][
+(#REM)
+	Pour quicktime il faut ajouter 16 pixels en hauteur
+	cf. http://article.gmane.org/gmane.comp.web.spip.zone/9231/match=quicktime
+][
+(#EXTENSION|=={mov}|?{#SET{hauteur,#GET{hauteur}|plus{16}}})
+]
+
+[(#SET{logo,[(#ENV{poster,[(#LOGO_DOCUMENT|image_passe_partout{#GET{largeur},#GET{hauteur}}|extraire_attribut{src})]}|url_absolue)]})]
+
+<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] video'[
+	style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})[width:(#GET{largeur}|max{120})px;][height:(#GET{hauteur}|max{100})px;]'] id="media_#ID_DOCUMENT">
+	<div class="media video">
+		<div>	
+		<video id="video_#ID_DOCUMENT"[
+			(#ENV{controls,true}|in_array{#ARRAY{0,false,1,non}}|non)controls="controls"][
+			(#ENV{autoplay,non}|in_array{#ARRAY{0,false,1,non}}|non)autoplay="autoplay"][(#ENV{autobuffer,#ENV{preload,metadata}}|in_array{#ARRAY{0,false,1,non}}|non)[
+			(#ENV{autobuffer,#ENV{preload,metadata}}|in_array{#ARRAY{0,auto,1,metadata}}|?{[preload="(#ENV{autobuffer,#ENV{preload,metadata}})"],preload="metadata"})]][(#ENV{loop,non}|in_array{#ARRAY{0,false,1,non}}|non)
+			loop="loop"][(#ENV{noresize}?{' class="noresize" ',''})][
+			width="(#GET{largeur})"][
+			height="(#GET{hauteur})"][
+			poster="(#GET{logo})"
+			]>
+			#SET{variantes,#ARRAY}
+			<BOUCLE_variantes(DOCUMENTS){id_orig=#ID_DOCUMENT}>#SET{variantes,#GET{variantes}|push{#EXTENSION}}</BOUCLE_variantes>[
+			(#EXTENSION|=={mp4}|et{#EXTENSION|in_array{#GET{variantes}}|non}|oui)
+				<source[ type="(#EXTENSION|=={mp4}|?{'video/mp4',#MIME_TYPE}|trim)"] src="[(#URL_DOCUMENT|url_absolue)]" />
+			]<BOUCLE_ssdoc_mp4(DOCUMENTS){id_orig=#ID_DOCUMENT}{extension IN m4v,mp4,mov}{par extension}{tout}>
+				<source[ type="(#EXTENSION|=={mp4}|?{'video/mp4',#MIME_TYPE}|trim)"] src="[(#URL_DOCUMENT|url_absolue)]" />
+			</BOUCLE_ssdoc_mp4>
+			<BOUCLE_ssdoc(DOCUMENTS){id_orig=#ID_DOCUMENT}{extension IN flv,ogv,ogg,webm}{par extension}{tout}>
+				<source[ type="(#EXTENSION|=={mp4}|?{'video/mp4',#MIME_TYPE}|trim)"] src="[(#URL_DOCUMENT|url_absolue)]" />
+			</BOUCLE_ssdoc>[
+			(#EXTENSION|in_array{[(#ARRAY|push{ogg}|push{ogv}|push{flv}|push{webm})]}|et{[(#EXTENSION|in_array{#GET{variantes}}|non)]}|oui)
+				<source[ type="(#EXTENSION|=={mp4}|?{'video/mp4',#MIME_TYPE}|trim)"] src="[(#URL_DOCUMENT|url_absolue)]" />]
+		</video>
+		</div>
+		[(#ENV{infos}|=={non}|non)
+			[<div class='#EDIT{titre} spip_doc_titre'><strong>(#TITRE)</strong></div>]
+			[<div class='#EDIT{descriptif} spip_doc_descriptif'>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</div>]
+		]
+	</div>
+</div>
+<script type="text/javascript">
+	var mediaspip_player_init_#ID_DOCUMENT = function(){
+		$('#video_#ID_DOCUMENT').each(function(){
+			if($(this).parent('.media_wrapper').size() == 0){
+				$(this).mediaspip_player_init({
+					flowurl:'[(#CHEMIN{flash/flowplayer.swf}|url_absolue)]',
+					flasherror:erreur_flash,
+					movieSize:'adapt'[(#CONFIG{mediaspip_player/cookie_volume}|=={oui}|oui),
+					cookie_volume:true][(#CONFIG{mediaspip_player/slider_volume_orientation}|=={horizontal}|oui),
+					volume_slider_orientation:'horizontal']
+				});
+			}
+		});
+	}
+	$(document).ready(function(){
+		mediaspip_player_init_#ID_DOCUMENT();
+		onAjaxLoad(function(){setTimeout(function(){mediaspip_player_init_#ID_DOCUMENT();},500)});
+	});
+</script>
+</BOUCLE_tous>

@@ -1,0 +1,60 @@
+<plugin>
+	<nom>
+		<multi>
+			[fr]Lecteur de m&#233;dias de MediaSPIP
+			[en]MediaSPIP media player
+		</multi>
+	</nom>
+	<slogan>
+		<multi>
+			[fr]Lecteur multim&#233;dia HTML5 pour MediaSPIP
+			[en]HTML5 Media player made for MediaSPIP
+		</multi>
+	</slogan>
+	<auteur>[kent1->http://www.kent1.info]</auteur>
+	<licence>© 2010-2012 GNU/GPL v3</licence>
+	<version>0.8.5</version>
+	<version_base>0.1</version_base>
+	<install>base/mediaspip_player_upgrade.php</install>
+	<etat>
+		stable
+	</etat>
+	<description>
+		<multi>
+			[fr]Lecteur multim&#233;dia HTML5 s'appuyant sur les balises audio et video et disposant d'une solution de repli en flash (via [Flowplayer->http://flowplayer.org]) pour les navigateurs anciens
+			[en]HTML5 Media player based on the audio and video tag with a flash fallback for old browsers (via [Flowplayer->http://flowplayer.org])
+		</multi>
+	</description>
+	<lien>https://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/html5-player-video-sound-media/</lien>
+	<icon>images/html5_player_logo.png</icon>
+	<prefix>mediaspip_player</prefix>
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>mediaspip_player_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>mediaspip_player_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>mediaspip_player_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>jqueryui_forcer</nom>
+		<inclure>mediaspip_player_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>jquery_plugins</nom>
+		<inclure>mediaspip_player_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/mediaspip_player_base.php</inclure>
+	</pipeline>
+	<options>mediaspip_player_options.php</options>
+	<necessite id="SPIP" version="[2.1.1;2.1.99]" />
+	<necessite id="lib:jquery-mousewheel-3.0.6" src="https://github.com/downloads/brandonaaron/jquery-mousewheel/jquery-mousewheel-3.0.6.zip" />
+	<utilise id="jqueryui" version="[1.8.4;]" />
+	<categorie>multimedia</categorie>
+</plugin>
