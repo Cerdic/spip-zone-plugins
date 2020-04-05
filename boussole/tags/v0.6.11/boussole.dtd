@@ -1,0 +1,24 @@
+<!ENTITY % NAME "CDATA"> <!-- identificateur -->
+<!ENTITY % URI "CDATA"> <!-- lien sur le Web -->
+<!ENTITY % VNUM "CDATA"> <!-- 3 entiers naturels separes par un point: x.y.z -->
+<!ENTITY % GROUP "(reference|aide|extension|decouverte|actualite)">
+<!ENTITY % ACTIVITY "(oui|non)"> <!-- indicateur d'activite du site : permet de retirer temporairement un site de la boussole sans perdre sa definition -->
+
+<!ELEMENT boussole groupe+>
+<!ATTLIST boussole
+	alias %NAME; #REQUIRED
+	version %VNUM; #REQUIRED
+	demo %URI; #IMPLIED
+>
+
+<!ELEMENT groupe site+>
+<!ATTLIST groupe
+	type %GROUP; #REQUIRED
+>
+
+<!ELEMENT site EMPTY>
+<!ATTLIST site
+	alias %NAME; #REQUIRED
+	src %URI; #REQUIRED
+	actif %ACTIVITY; #REQUIRED
+>

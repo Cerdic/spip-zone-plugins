@@ -1,0 +1,75 @@
+<plugin>
+	<nom>
+		<multi>
+			[fr]Boussole
+			[en]Compass
+		</multi>
+	</nom>
+	<auteur>Eric Lupinacci</auteur>
+	<licence>GPL</licence>
+	<version>0.6.11</version>
+	<version_base>0.1</version_base>
+	<icon>boussole_logo-64.png</icon>
+	<etat>stable</etat>
+    <slogan>
+    	<multi>
+    		[fr]Les bonnes adresses de la galaxie SPIP ou d'ailleurs !
+    		[en]The favorite places of the SPIP galaxy or out there!
+    	</multi>
+    </slogan>
+    <description>
+    	<multi>
+    		[fr]Installez ce plugin sur votre site et vous aurez acc&#232;s, dans vos squelettes, &#224; l'ensemble des sites de la Galaxie SPIP en utilisant
+les mod&#232;les, les noisettes ou la page Z propos&#233;s.
+_ Pour les bricoleurs, vous pouvez aussi utiliser ce plugin pour afficher votre propre liste de sites et concevoir vos propres affichages.
+			[en]Install this plugin on your site and you will have access, in your skeletons, to all the sites of the SPIP Galaxy using 
+models, noisettes or the Z page provided.
+_ For DIYers, you can also use this plugin to display your own list of sites and design your own displays.
+		</multi>
+	</description>
+	<lien>https://contrib.spip.net/Boussole</lien>
+	<prefix>boussole</prefix>
+	<categorie>navigation</categorie>
+
+	<fonctions>boussole_fonctions.php</fonctions>
+	<install>boussole_administrations.php</install>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/boussole_declarer.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/boussole_declarer.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>boussole_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>boussole_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>genie/boussole_taches_generales_cron.php</inclure>
+	</pipeline>
+
+	<bouton id="boussole" parent="configuration">
+		<icone>prive/themes/spip/images/boussole_gerer-24.png</icone>
+		<titre>boussole:bouton_boussole</titre>
+		<url>boussoles_gerer</url>
+	</bouton>
+	<bouton id='boussole_21' parent='bando_squelette'>
+		<icone>images/boussole_icone-16.png</icone>
+		<titre>boussole:bouton_boussole</titre>
+		<url>boussoles_gerer</url>
+	</bouton>
+
+	<onglet id='gerer' parent='boussoles'>
+		<icone>prive/themes/spip/images/boussole_gerer-24.png</icone>
+		<titre>boussole:onglet_boussoles</titre>
+		<url>boussoles_gerer</url>
+	</onglet>
+
+	<necessite id="SPIP" version='[2.0.0;2.1.99]' />
+</plugin>
