@@ -1,0 +1,27 @@
+<div class="ajax formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	<h3 class="titrem">
+		<:versioning:reglage_wokflow:>
+	</h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	
+	<form action='#ENV{action}' method='post'>
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+						
+			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="workflow"><:versioning:workflow:></label>
+			<div class="choix">
+			<input type='radio' id='r1' name='workflow' value='1' [(#ENV{workflow}|=={1}|oui)checked]/>
+			<label for="r1"><b>Workflow 1</b> : <i>Par défaut</i> L'auteur de la modification est le seul mentionné dans la liste des auteurs</label>
+			<br/>
+			<input type='radio' id='r2' name='workflow' value='2' [(#ENV{workflow}|=={2}|oui)checked]/>
+			<label for="r2"><b>Workflow 2</b> : Les auteurs des modifications successives sont tous maintenus en auteurs de l'article</label>
+
+			</div>
+			</li>
+			<input type='submit' name='ok' value='ok' />
+		</div>
+	</form>
+<div>

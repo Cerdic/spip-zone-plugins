@@ -1,0 +1,17 @@
+[<div style='color:red; text-align: center;padding:10px; border: 1px solid red; font-weight: bold'>
+	<p><strong>(#ENV*{message_ok}|table_valeur{message})</strong></p>
+	<p><a href="[(#URL_ECRIRE{article}|parametre_url{'id_article',[(#ENV*{message_ok}|table_valeur{cible})]})]" title="Rafraichir">[(#ENV*{message_ok}|table_valeur{type_retour})]</a></p>
+</div>]
+
+[(#EDITABLE)
+<div style='color:red; text-align: center;padding:10px; border: 1px solid red; font-weight: bold'>
+	<h2>/!\ ATTENTION /!\</h2>
+
+	<p>L'article et ses mots clefs seront dupliqués dans la même rubrique.</p>
+
+	<form action="[(#ENV{action})]" method="post" accept-charset="utf-8">
+	 	#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="submit" value="<:versioning:message_annuler:>" name='annuler' /> <input type="submit" value="<:versioning:message_confirmer:>" name='confirmer' />
+	</form>
+</div>
+]
