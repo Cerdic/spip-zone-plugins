@@ -1,0 +1,27 @@
+[(#AUTORISER{sauvegarder}|sinon_interdire_acces)]
+<h1><:mes_fichiers:titre_page_mes_fichiers:></h1>
+
+[(#REM) <!-- Information sur la sauvegarde --> ]
+#SET{prefixe, #CONFIG{mes_fichiers/prefixe, mf2}}
+#SET{frequence, #CONFIG{mes_fichiers/frequence, 1}}
+#BOITE_OUVRIR{'', info}
+	<p><:mes_fichiers:info_sauver_1:></p>
+	<p><:mes_fichiers:info_sauver_2{prefixe=#GET{prefixe}}:></p>
+	[(#CONFIG{mes_fichiers/sauvegarde_reguliere, non}|=={oui}|oui)
+		<p><:mes_fichiers:info_sauver_3{frequence=#GET{frequence}}:></p>
+	]
+#BOITE_FERMER
+
+[(#REM) <!-- Formulaire de sauvegarde dans une archive --> ]
+<div class="noajax">
+	#FORMULAIRE_MES_FICHIERS_SAUVER
+</div>
+
+
+[(#REM) <!-- Affichage de l'erreur eventuelle de telechargement --> ]
+[#BOITE_OUVRIR{'', error}
+	(#ENV{etat}|=={nok_tele}|oui)<:mes_fichiers:message_telechargement_nok:>
+#BOITE_FERMER]
+
+[(#REM) <!-- Liste des archives disponibles --> ]
+<INCLURE{fond=prive/squelettes/inclure/inc-liste_mes_fichiers, env, ajax} />

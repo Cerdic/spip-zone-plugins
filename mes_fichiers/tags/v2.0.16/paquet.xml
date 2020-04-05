@@ -1,0 +1,25 @@
+<paquet
+	prefix="mes_fichiers"
+	categorie="maintenance"
+	version="2.0.16"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/mes_fichiers-64.png"
+	documentation="https://contrib.spip.net/Mes-Fichiers-2"
+>	
+
+	<nom>Mes fichiers</nom>
+	<!-- Archiver ses fichiers et dossiers de personnalisation -->
+
+	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
+	<auteur>kent1</auteur>
+	<credit>James (version initiale pour SPIP 1.9)</credit>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="post_sauvegarde" action="" />
+	<pipeline nom="taches_generales_cron" inclure="genie/mes_fichiers_cron.php" />
+	<pipeline nom="mes_fichiers_a_sauver" action="" />
+
+	<menu nom="mes_fichiers" titre="mes_fichiers:bouton_mes_fichiers" parent="menu_administration" icone="images/mes_fichiers-24.png" />
+</paquet>
