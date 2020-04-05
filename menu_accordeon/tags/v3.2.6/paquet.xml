@@ -1,0 +1,28 @@
+<paquet
+	prefix="accordeon"
+	categorie="navigation"
+	version="3.2.6"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/accordeon-32.png"
+	documentation="https://contrib.spip.net/?article3763"
+>	
+
+	<nom>Menu accord&#233;on</nom>
+	<!-- Animer un menu avec effet d'accordéon -->
+
+	<auteur>Maïeul Rouquette d'après b_b</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="jqueryui_plugins" inclure="accordeon_pip.php" />
+	<pipeline nom="insert_head" inclure="accordeon_pip.php" />
+	<pipeline nom="autoriser" inclure="inc/accordeon_autoriser.php" />
+	<pipeline nom="ieconfig_metas" inclure="accordeon_ieconfig_metas.php" />
+
+	<necessite nom="jqueryui" compatibilite="[1.8.20;]" />
+
+	<utilise nom="menus" compatibilite="[0.8.19;[" />
+
+	<menu nom="accordeon" titre="accordeon:titre_menu" parent="bando_squelette" icone="images/accordeon-16.png" action="configurer_accordeon" />
+</paquet>
