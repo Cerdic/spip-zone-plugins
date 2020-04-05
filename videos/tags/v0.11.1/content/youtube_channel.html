@@ -1,0 +1,45 @@
+[(#REM) <!--
+
+Chaine Youtube 
+
+<https://contrib.spip.net/Boucle-DATA-avec-l-API-Youtube>
+
+Trouver l'id de la chaine Youtube :
+<https://support.google.com/youtube/answer/3250431?hl=fr>
+
+Youtube API Tutorial :
+http://www.w3resource.com/API/youtube/tutorial.php
+
+Client API php :
+<https://github.com/google/google-api-php-client>
+
+-->]
+[(#SET{youtube_api_key, #CONFIG{videos/youtube_api_key}})]
+[(#SET{youtube_channel, #ENV{channel_id, #CONFIG{videos/youtube_channel}})]
+[(#SET{video, #ENV{video}})]
+
+[(#SET{req, 'https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails' })]
+[(#SET{req, #GET{req}|concat{"&id="#GET{video},"&key="#GET{youtube_api_key} } })]
+
+<B_youtube>
+<ul>
+    <BOUCLE_youtube(DATA)
+     {source json, #GET{req} }
+     {datapath /items}
+     {0,2}
+    >
+		[(#VALEUR{snippet/title})] <br>
+		[(#VALEUR{snippet/description})]
+    </BOUCLE_youtube>
+</ul>
+</B_youtube>
+Pas de résultats pour
+
+<pre><code>
+	
+	#GET{youtube_api_key}
+	<br>
+	#GET{youtube_channel}
+	
+</code></pre>
+<//B_youtube>
