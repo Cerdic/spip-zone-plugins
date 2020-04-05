@@ -1,0 +1,29 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem">[(#CHEMIN_IMAGE{vacances-32.png}|image_reduire{24}|inserer_attribut{class,cadre-icone}|inserer_attribut{alt,''})]<:vacances:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<div class="editer-groupe">
+			[(#SAISIE{oui_non, mode_vacances,
+				label=<:vacances:cfg_mode_vacances:>})]
+
+			<div class="editer"><:vacances:cfg_dates_explication:></div>
+
+			[(#SAISIE{date, date_debut,
+				label=<:vacances:cfg_date_debut:>})]
+
+			[(#SAISIE{date, date_fin,
+				label=<:vacances:cfg_date_fin:>})]
+		</div>
+
+		<input type="hidden" name="_meta_casier" value="vacances" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>

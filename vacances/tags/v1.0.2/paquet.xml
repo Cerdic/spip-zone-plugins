@@ -1,0 +1,23 @@
+<paquet
+	prefix="vacances"
+	categorie="maintenance"
+	version="1.0.2"
+	etat="stable"
+	compatibilite="[3.1.6;3.2.*]"
+	logo="prive/themes/spip/images/vacances-64.png"
+	documentation="https://contrib.spip.net/4921"
+>
+
+	<nom>Vacances</nom>
+	<!-- Permet d&#039;activer un mode vacances -->
+
+	<auteur lien='https://www.erational.org'>erational</auteur>
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+
+	<pipeline nom="alertes_auteur" inclure="vacances_pipelines.php" />
+
+	<menu nom="vacances" titre="vacances:mode_vacances" parent="menu_administration" icone="images/vacances-16.png" action="configurer_vacances"/>
+
+</paquet>
