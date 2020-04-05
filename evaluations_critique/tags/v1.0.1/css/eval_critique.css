@@ -1,0 +1,46 @@
+/* formatter la page */
+.composition_eval_critique #content {
+	width:auto}
+.composition_eval_critique #extra1,
+.composition_eval_critique #extra2 {display:none}
+
+/* un bloc dl */
+.planche-contact dl.liste-items {
+	width:18.8%;
+	height:10em;
+	float:left; 
+	border:1px solid gray;
+	position:relative;
+	margin-bottom:0.5em;
+	margin-right:0.5em;
+}
+
+/* le clearfix  sur les dl */
+.planche-contact dl.liste-items:after {content:"."; display:block; clear:both; height:0; visibility:hidden;}
+
+/* les dd */
+.planche-contact dl.liste-items dd {}
+.planche-contact dl.liste-items dd.vignette {}
+.planche-contact dl.liste-items dd.texte {}
+
+/* on centre les images dans les dd */
+.planche-contact dl.liste-items dd.vignette {
+	text-align:center;
+}
+
+/* on descend le titre dans le bas du dl */
+.planche-contact dl.liste-items dd.texte {
+	position:absolute;
+	bottom:-1.5em;
+	display:block;
+	width:92%;
+	background-color:rgba(128, 128, 128, 0.6);
+	color:white;
+	padding: 0.5em;
+	font-size: 0.9em;
+}
+
+/* on traite spécialement les textes de liens */
+.planche-contact dl.liste-items dd.texte a {
+	color: white;
+}

@@ -1,0 +1,22 @@
+<paquet
+	prefix="eval_critique"
+	categorie="squelette"
+	version="1.0.1"
+	etat="dev"
+	compatibilite="[3.0.5;3.1.*]"
+	logo="img/eval_critique-48.png"
+	documentation=""
+>
+
+	<nom>Critique d'articles</nom>
+
+	<auteur>Cyril Marion, [Ateliers CYM->http://cym.fr]</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="insert_head_css" inclure="eval_critique_pipelines.php" />
+
+	<necessite nom="evaluations" compatibilite="[1.1.0;[" />
+	<necessite nom="compositions" compatibilite="[3.0.0;[" />
+
+</paquet>

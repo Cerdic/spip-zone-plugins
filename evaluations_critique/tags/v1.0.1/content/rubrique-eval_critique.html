@@ -1,0 +1,17 @@
+<BOUCLE_content(RUBRIQUES){id_rubrique}>
+
+<section>
+[(#REM) Fil d'Ariane ]
+
+	<header class="cartouche">
+		[(#LOGO_RUBRIQUE|image_reduire{200,200})]
+		<h1 class="#EDIT{titre}">#TITRE</h1>
+		[<p class="publication"><time pubdate="pubdate" datetime="[(#DATE|date_iso)]"><:dernier_ajout:> : (#DATE|affdate_jourcourt).</time></p>]
+	</header>
+
+[(#REM) Les articles à analyser ]
+<INCLURE{fond=liste/articles-critique,env,ajax,titre=<:eval_critique:articles_critique:>,id_article_accueil=#ID_ARTICLE_ACCUEIL} />
+<div class="nettoyeur"></div>
+
+</section>
+</BOUCLE_content>
