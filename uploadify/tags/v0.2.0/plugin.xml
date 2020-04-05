@@ -1,0 +1,22 @@
+<plugin>
+	<nom>Uploadify</nom>
+	<slogan>T&#233;l&#233;charger des fichiers par lots</slogan>
+	<auteur>Phil</auteur>
+	<version>0.2.0</version>
+	<etat>dev</etat>
+	<description>Ce plugin permet aux r&#233;dacteurs de s&#233;lectionner et t&#233;l&#233;charger plusieurs fichiers en une seule fois.</description>
+	<icon>images/uploadify-24.png</icon>
+	<lien>https://contrib.spip.net/article3045</lien>
+	<prefix>uploadify</prefix>
+
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>uploadify_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>uploadify_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.0.10;2.1.99]" />
+	<categorie>multimedia</categorie>
+</plugin>
