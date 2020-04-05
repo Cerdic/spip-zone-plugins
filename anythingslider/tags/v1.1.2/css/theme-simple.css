@@ -1,0 +1,119 @@
+/*
+    Theme simple pour AnythingSlider
+    par Joseph Larmarange
+*/
+
+/* Default State */
+div.anythingSlider-simple {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+div.anythingSlider-simple .anythingWindow {
+	border: none;
+}
+
+/* Active State */
+div.anythingSlider-simple.activeSlider .anythingWindow {
+	border: none;
+}
+
+/* Navigation Arrows */
+div.anythingSlider-simple .arrow {
+	top: 50%;
+	position: absolute;
+	display: block;
+}
+div.anythingSlider-simple .arrow a {
+	display: block;
+	height: 20px;
+	margin-top: -20px; /* half height of image */
+	margin-left:5px;
+	margin-right:5px;
+	width: 20px;
+	text-align: center;
+	outline: 0;
+	background: url(../images/arrows-simple.png) no-repeat;
+	text-indent: -9999px;
+}
+div.anythingSlider-simple .forward { right: 0; }
+div.anythingSlider-simple .back { left: 0; }
+div.anythingSlider-simple .forward a { background-position: left bottom; }
+div.anythingSlider-simple .back a { background-position: left top; }
+div.anythingSlider-simple .forward a:hover, div.anythingSlider-simple .forward a.hover { background-position: right bottom; }
+div.anythingSlider-simple .back a:hover, div.anythingSlider-simple .back a.hover { background-position: right top; }
+
+/* Navigation Links */
+div.anythingSlider-simple .anythingControls {
+	margin-top: 10px;
+	text-align: center;
+	opacity: 0.75;
+	filter: alpha(opacity=75);
+	width:100%;
+}
+div.anythingSlider-simple .thumbNav {
+	float: none;
+	margin: 0 auto;
+	width: 100%;
+	text-align: center;
+	margin-left: 50px;
+}
+div.anythingSlider-simple  ul.thumbNav, div.anythingSlider-simple.activeSlider  ul.thumbNav { list-style: none; }
+div.anythingSlider-simple .thumbNav li {
+	display: inline;
+}
+div.anythingSlider-simple .thumbNav a, 
+div.anythingSlider-simple.activeSlider .thumbNav a, 
+div.anythingSlider-simple .thumbNav a.cur, 
+div.anythingSlider-simple.activeSlider .thumbNav a.cur, 
+div.anythingSlider-simple .thumbNav a:hover,
+div.anythingSlider-simple.activeSlider .thumbNav a:hover {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	margin: 0px 3px;
+	padding: 0;
+	text-indent: -9999px;
+	outline: 0;
+	border: 0;
+	background-image: url(../images/nav-simple.png);
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-color: transparent;
+}
+
+div.anythingSlider-simple .thumbNav a.cur,
+div.anythingSlider-simple.activeSlider .thumbNav a.cur {
+	background-position: center bottom;
+}
+
+div.anythingSlider-simple .thumbNav a:hover,
+div.anythingSlider-simple.activeSlider .thumbNav a:hover {
+	background-position: center center;
+}
+
+/* Autoplay Start/Stop button */
+div.anythingSlider-simple .start-stop, div.anythingSlider-simple .start-stop, div.anythingSlider-simple .start-stop.playing, div.anythingSlider-simple .start-stop:hover, div.anythingSlider-simple .start-stop.hover {
+	position: absolute;
+	right: 0px;
+	background-color: #fff;
+	color: #666;
+}
+
+/* Extra - replace defaults */
+div.anythingSlider-simple {
+	padding-top: 5px;
+	padding-right: 30px;
+	padding-bottom: 30px;
+	padding-left: 30px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px; 
+	box-shadow: 0 0 6px #888;
+	-moz-box-shadow: 0 0 6px #888;  
+	-webkit-box-shadow: 0 0 6px #888;
+	border: solid 1px #ccc;
+}
+
+div.anythingSlider-simple.activeSlider .anythingControls ul a.cur, div.anythingSlider-simple.activeSlider .anythingControls ul a {
+	background-color: transparent;
+}

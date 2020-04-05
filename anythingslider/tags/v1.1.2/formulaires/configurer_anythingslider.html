@@ -1,0 +1,70 @@
+<div class='formulaire_spip formulaire_configurer formulaire_configurer_anythingslider' id='formulaire_configurer_anythingslider'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form action="#ENV{action}#formulaire_configurer_media" method="post" enctype='multipart/form-data'><div>
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+		
+		<div class='explication'><:anythingslider:explication_configurer_anythingslider:></div>
+		<ul>
+		<li class="editer_themes[ (#ENV**{erreurs}|table_valeur{themes}|oui)erreur]">
+			<label><:anythingslider:label_themes:></label>
+			<div class="choix">
+				#SET{choix,theme-construction.css}
+				<input type="checkbox" name="themes[]" class="checkbox" id="themes_#GET{choix}" [(#GET{choix}|in_array{#ENV{_config}}|oui)checked="checked"] value="#GET{choix}"[(#GET{choix}|in_array{#ENV{_lock}}|oui)disabled="disabled"] />
+				<label for="themes_#GET{choix}">#GET{choix}</label>
+			</div>
+			<div class="choix">
+				#SET{choix,theme-cs-portfolio.css}
+				<input type="checkbox" name="themes[]" class="checkbox" id="themes_#GET{choix}" [(#GET{choix}|in_array{#ENV{_config}}|oui)checked="checked"] value="#GET{choix}"[(#GET{choix}|in_array{#ENV{_lock}}|oui)disabled="disabled"] />
+				<label for="themes_#GET{choix}">#GET{choix}</label>
+			</div>
+			<div class="choix">
+				#SET{choix,theme-metallic.css}
+				<input type="checkbox" name="themes[]" class="checkbox" id="themes_#GET{choix}" [(#GET{choix}|in_array{#ENV{_config}}|oui)checked="checked"] value="#GET{choix}"[(#GET{choix}|in_array{#ENV{_lock}}|oui)disabled="disabled"] />
+				<label for="themes_#GET{choix}">#GET{choix}</label>
+			</div>
+			<div class="choix">
+				#SET{choix,theme-minimalist-round.css}
+				<input type="checkbox" name="themes[]" class="checkbox" id="themes_#GET{choix}" [(#GET{choix}|in_array{#ENV{_config}}|oui)checked="checked"] value="#GET{choix}"[(#GET{choix}|in_array{#ENV{_lock}}|oui)disabled="disabled"] />
+				<label for="themes_#GET{choix}">#GET{choix}</label>
+			</div>
+			<div class="choix">
+				#SET{choix,theme-minimalist-square.css}
+				<input type="checkbox" name="themes[]" class="checkbox" id="themes_#GET{choix}" [(#GET{choix}|in_array{#ENV{_config}}|oui)checked="checked"] value="#GET{choix}"[(#GET{choix}|in_array{#ENV{_lock}}|oui)disabled="disabled"] />
+				<label for="themes_#GET{choix}">#GET{choix}</label>
+			</div>
+			<div class="choix">
+				#SET{choix,theme-simple.css}
+				<input type="checkbox" name="themes[]" class="checkbox" id="themes_#GET{choix}" [(#GET{choix}|in_array{#ENV{_config}}|oui)checked="checked"] value="#GET{choix}"[(#GET{choix}|in_array{#ENV{_lock}}|oui)disabled="disabled"] />
+				<label for="themes_#GET{choix}">#GET{choix}</label>
+			</div>
+		</li>
+		<li class="editer_scripts[ (#ENV**{erreurs}|table_valeur{scripts}|oui)erreur]">
+			<label><:anythingslider:label_scripts:></label>
+			<div class="choix">
+				#SET{choix,jquery.anythingslider.video.min.js}
+				<input type="checkbox" name="scripts[]" class="checkbox" id="scripts_#GET{choix}" [(#GET{choix}|in_array{#ENV{_config}}|oui)checked="checked"] value="#GET{choix}"[(#GET{choix}|in_array{#ENV{_lock}}|oui)disabled="disabled"] />
+				<label for="scripts_#GET{choix}">#GET{choix}</label>
+			</div>
+			<div class="choix">
+				#SET{choix,jquery.anythingslider.fx.min.js}
+				<input type="checkbox" name="scripts[]" class="checkbox" id="scripts_#GET{choix}" [(#GET{choix}|in_array{#ENV{_config}}|oui)checked="checked"] value="#GET{choix}"[(#GET{choix}|in_array{#ENV{_lock}}|oui)disabled="disabled"] />
+				<label for="scripts_#GET{choix}">#GET{choix}</label>
+			</div>
+			<div class="choix">
+				#SET{choix,swfobject.js}
+				<input type="checkbox" name="scripts[]" class="checkbox" id="scripts_#GET{choix}" [(#GET{choix}|in_array{#ENV{_config}}|oui)checked="checked"] value="#GET{choix}"[(#GET{choix}|in_array{#ENV{_lock}}|oui)disabled="disabled"] />
+				<label for="scripts_#GET{choix}">#GET{choix}</label>
+			</div>
+			<div class="choix">
+				#SET{choix,jquery.easing.1.2.js}
+				<input type="checkbox" name="scripts[]" class="checkbox" id="scripts_#GET{choix}" [(#GET{choix}|in_array{#ENV{_config}}|oui)checked="checked"] value="#GET{choix}"[(#GET{choix}|in_array{#ENV{_lock}}|oui)disabled="disabled"] />
+				<label for="scripts_#GET{choix}">#GET{choix}</label>
+			</div>
+		</li>
+		</ul>
+		<p class='boutons'><input class='submit' type="submit" name="ok" value="<:bouton_enregistrer:>"/></p>
+	</div></form>
+
+</div>
