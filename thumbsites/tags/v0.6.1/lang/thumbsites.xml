@@ -1,0 +1,19 @@
+<traduction module="thumbsites" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/thumbsites/lang/" reference="fr">
+	<langue code="ast" url="https://trad.spip.net/tradlang_module/thumbsites?lang_cible=ast">
+		<traducteur nom="Xuacu" lien="https://trad.spip.net/auteur/xuacu" />
+	</langue>
+	<langue code="ca" />
+	<langue code="de" />
+	<langue code="en" />
+	<langue code="fa" url="https://trad.spip.net/tradlang_module/thumbsites?lang_cible=fa">
+		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
+	</langue>
+	<langue code="fr" />
+	<langue code="fr_tu" />
+	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/thumbsites?lang_cible=pt_br">
+		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
+	</langue>
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/thumbsites?lang_cible=sk">
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
+	</langue>
+</traduction>

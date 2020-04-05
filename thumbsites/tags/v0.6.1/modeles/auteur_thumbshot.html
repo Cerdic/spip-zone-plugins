@@ -1,0 +1,10 @@
+<BOUCLE_auteur_thumbshot(AUTEURS) {id_auteur}>
+[(#URL_SITE|oui)
+<div>
+	<a href="#URL_SITE" class="spip_out">#THUMBSHOT{#URL_SITE}</a>
+	[<p><strong>(#ENV{nom})</strong>]
+	[[(#ENV{nom}|oui) &mdash; ]<span>(#ENV{descriptif}|PtoBR|couper{110})</span>]
+	[(#ENV{nom}|oui)</p>]
+</div>
+]
+</BOUCLE_auteur_thumbshot>
