@@ -1,0 +1,89 @@
+[(#SET{contexte,#ENV**|definir_barre_contexte|minibando_definir_rubrique_contexte})][(#SET{boutons,#GET{contexte}|definir_barre_boutons{0}})
+]<div[ class="(#ENV{divclass,spip-admin-bloc})"] id="spip-admin" dir="#LANG_DIR"><ul id="minibando"[ class="(#CONFIG{minibando/disposition})"]>
+	<BOUCLE_accueil(POUR)
+		{tableau #GET{boutons}}
+		{cle=menu_accueil}><li [class="(#VAL{first}|unique)"]><a
+			href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
+			id="bando1_#CLE">[(#VALEUR{libelle}|_T)]</a><span>&nbsp;</span>
+	<ul>
+		<li><p><:espace_prive:></p></li>[(#SESSION{id_auteur}|oui)
+		<li><a href="[(#VAL{logout}|generer_url_action{logout=public})]"><:icone_deconnecter:></a></li>]
+	</ul>
+	</li></BOUCLE_accueil>
+	<li class="minibando_sep">&nbsp;</li>
+	<B_creer>
+	<li id="minibando_outils_rapides">
+		<a href="#"><:minibando:titre_outils_rapides:></a><span>&nbsp;</span>
+		<ul>
+			<li><p><:minibando:titre_outils_rapides:></p></li>
+			<BOUCLE_creer(POUR)
+				{tableau #GET{boutons}}
+				{cle=outils_rapides}><BOUCLE_creersous(POUR){tableau #VALEUR{sousmenu}}>[<li><a
+				href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
+				title="[(#VALEUR{libelle}|_T|attribut_html)]"
+				class="bando2_#CLE">(#VALEUR{libelle}|_T)</a></li>]</BOUCLE_creersous></BOUCLE_creer>
+		</ul>
+	</li>
+	</B_creer>
+	<li class="minibando_sep">&nbsp;</li>
+	<BOUCLE_boutons(POUR)
+		{tableau #GET{boutons}}
+		{cle!=menu_accueil}
+		{cle!=outils_rapides}
+		{cle!=outils_collaboratifs}>[<li (#CLE|=={menu_accueil}|ou{#VALEUR{sousmenu}}|?{' ',#SET{li,''}}) #SET{li,'</li>'}
+			[class="(#VAL{first}|unique)"]><a
+			href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
+			id="bando1_#CLE">[(#VALEUR{libelle}|_T)]</a><span>&nbsp;</span>]<B_sous><ul><li><p>[(#VALEUR{libelle}|_T)]</p></li><BOUCLE_sous(POUR)
+			{tableau #VALEUR{sousmenu}}>[<li><a
+					href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
+					class="bando2_#CLE">(#VALEUR{libelle}|_T)</a></li>]</BOUCLE_sous></ul></B_sous>#GET{li}</BOUCLE_boutons>
+	<li class="minibando_sep">&nbsp;</li>
+	[(#ENV{objet}|oui)
+		[<li id="minibando_bouton_modifier"><a href="[(#ENV{voir_#ENV{objet}})]" id="voir_#ENV{objet}">
+			[(#ENV{objet}|objet_info{texte_objet}|_T)]((#ENV{id_objet}))</a><span>&nbsp;</span><ul><li><p>[(#ENV{objet}|objet_info{texte_objet}|_T)] [((#ENV{id_objet}))]</p></li>
+			<li><a href="[(#ENV{id_objet}|generer_url_ecrire_entite_edit{#ENV{objet}})]">[(#ENV{objet}|objet_info{texte_modifier}|_T)]</a></li></ul></li>]
+	]<li id="minibando_bouton_recalcul"><a href="[(#SELF|parametre_url{var_mode,#ENV{calcul}})]" id="var_mode">
+		<:admin_recalculer:>[(#ENV{use_cache})]</a><span>&nbsp;</span><ul><li><p><:admin_recalculer:></p></li></ul></li>
+	<!--extra-->[<li id="minibando_bouton_preview"><a href="(#ENV{preview})" id="preview"><:previsualisation:></a><span>&nbsp;</span><ul><li><p><:previsualisation:></p></li></ul></li>][(#SESSION{statut}|=={0minirezo}|oui)
+	<li class="minibando_sep">&nbsp;</li>
+	<li id="minibando_bouton_debug"><a href="#">
+		<:minibando:titre_debug:></a><span>&nbsp;</span><ul><li><p><:minibando:titre_debug:></p></li>[
+	<li><a href="(#ENV{debug})" id="debug"><:admin_debug:></a></li>][
+	<li><a href="(#ENV{analyser})" id="analyser"><:analyse_xml:>[ ((#ENV{xhtml_error}))]</a></li>]
+		<li><a href="[(#SELF|parametre_url{var_mode,debug})]"><:minibando:mode_debug:></a></li>
+		<li><a href="[(#SELF|parametre_url{var_profile,1}|parametre_url{var_mode,recalcul})]"><:minibando:mode_profile:></a></li>
+		<li><a href="[(#SELF|parametre_url{var_mode,inclure})]"><:minibando:mode_inclure:></a></li>
+		<li><a href="[(#SELF|parametre_url{var_mode,traduction})]"><:minibando:mode_traduction:></a></li>
+		[(#PLUGIN{scssphp}|ou{#PLUGIN{lesscss}}|oui)<li><a
+href="[(#SELF|parametre_url{var_mode,css})]"><:minibando:mode_css:></a></li>]
+	</ul></li>]
+</ul></div>
+
+<script type="text/javascript">
+;if (window.jQuery)
+$(function() {
+	var li_deroulants = $('#minibando > li');
+
+	function afficherSousMenu (lien) {
+		li_deroulants.removeClass('afficher');
+		$(lien).parents('#minibando > li').addClass('afficher');
+	}
+
+	function masquerSousMenu (lien) {
+		$(lien).parents('#minibando > li').removeClass('afficher');
+	}
+
+	$('#minibando a')
+		.focusin(function () {
+			afficherSousMenu(this);
+		})
+		.focusout(function () {
+			masquerSousMenu(this);
+		})
+		.hover(function () {
+			afficherSousMenu(this);
+		}, function () {
+			masquerSousMenu(this);
+		});
+});
+</script>

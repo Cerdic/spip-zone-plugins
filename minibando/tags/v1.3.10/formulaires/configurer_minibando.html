@@ -1,0 +1,41 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:minibando:cfg_titre_minibando:></h3>
+	
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+	
+				<ul>
+					<li class="editer editer_methode">
+						<label><:minibando:label_disposition:></label>
+
+						<div class="choix">
+							<input type="radio" name="disposition" class="radio" id="disposition_horizontal" [(#ENV{disposition}|=={horizontal}|oui)checked="checked"] value="horizontal">
+							<label for="disposition_horizontal"><:minibando:label_disposition_horizontale:></label>
+						</div>	
+						<div class="choix">
+							<input type="radio" name="disposition" class="radio" id="disposition_vertical" [(#ENV{disposition}|=={vertical}|oui)checked="checked"] value="vertical">
+							<label for="disposition_vertical"><:minibando:label_disposition_verticale:></label>
+						</div>
+					</li>
+					<li class="editer editer_methode">
+					  <label><:minibando:label_limite:></label>
+
+					  <div class="choix">
+						<input type="checkbox" name="limite_webmestre" class="checkbox" [(#ENV{limite_webmestre}|=={on}|oui)checked="checked"] id="limite_webmestre">
+						<label for="limite_webmestre"><:minibando:label_limite_webmestre:></label>
+					  </div>
+					</li>
+				</ul>
+	
+			<p class="boutons">
+				<span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_valider:>" />
+			</p>
+	
+		</div>
+	</form>
+</div>
