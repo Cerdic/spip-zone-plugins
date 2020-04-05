@@ -1,0 +1,76 @@
+[(#REM)
+	On liste les tables principales qui ne sont pas des objets éditoriaux
+][
+(#SET{exclus,#LISTE{spip_jobs,spip_menus,spip_menus_entrees,spip_types_documents,spip_documents,spip_forum,spip_messages,spip_paquets,spip_plugins}})]
+[(#SET{etats,#LISTE{on,off,bad}})]
+[(#SET{controles,#LISTE{max_size,max_width,max_height}})]
+<div class="onglets_simple second clearfix">
+	<B_etats>
+	<ul class="voir">
+		<li class="first">[(#ENV{etat}|?{
+			<a href="[(#SELF|parametre_url{etat,''})]"><:info_tout_afficher:></a>,
+			<strong class="on active"><:info_tout_afficher:></strong>
+			})]</li>
+		<BOUCLE_etats (DATA) {source table, #GET{etats}}>
+		<li>[(#ENV{etat}|=={#VALEUR}|?{
+			<strong class="on active">[(#VAL{lister_logos:logo_}|concat{#VALEUR}|_T)]</strong>,
+			<a href="[(#SELF|parametre_url{etat,#VALEUR})]">[(#VAL{lister_logos:logo_}|concat{#VALEUR}|_T)]</a>
+		})]</li></BOUCLE_etats>
+	</ul>
+	</B_etats>
+	<B_controles>
+	<ul class="verrouille">
+		<li class="first">[(#ENV{controle}|?{
+			<a href="[(#SELF|parametre_url{controle,''})]"><:info_tout_afficher:></a>,
+			<strong class="on active"><:info_tout_afficher:></strong>
+			})]</li>
+		<BOUCLE_controles(DATA){source table, #GET{controles}} {si #EVAL{_LOGO_MAX_SIZE}|ou{#EVAL{_LOGO_MAX_WIDTH}}|ou{#EVAL{_LOGO_MAX_HEIGHT}}}>
+		[(#EVAL{[(#VAL{'_LOGO_'}|concat{#VALEUR|strtoupper})]}|oui)<li>[(#ENV{controle}|=={#VALEUR}|?{
+			<strong class="on active">[(#VAL{lister_logos:controle_}|concat{#VALEUR}|_T)]</strong>,
+			<a href="[(#SELF|parametre_url{controle,#VALEUR})]">[(#VAL{lister_logos:controle_}|concat{#VALEUR}|_T)]</a>
+		})]</li>]</BOUCLE_controles>
+	</ul>
+	</B_controles>
+</div>
+<div class="pagination">
+	<:medias:label_paginer_par:> 
+	[(#SELF|parametre_url{pagination,''}|lien_ou_expose{10,#ENV{pagination,10}|=={10},ajax})]
+	[<span class="sep">|</span> (#SELF|parametre_url{pagination,50}|lien_ou_expose{50,#ENV{pagination,10}|=={50},ajax})]
+	[<span class="sep">|</span> (#SELF|parametre_url{pagination,100}|lien_ou_expose{100,#ENV{pagination,10}|=={100},ajax})]
+</div>
+
+[(#ENV{controle}|oui)
+[(#SET{nb,[(#EVAL{[(#VAL{'_LOGO_'}|concat{#ENV{controle}|strtoupper})]})]})]
+[(#GET{nb}|oui)
+<p>[(#VAL{lister_logos:controle_}|concat{#ENV{controle},'_explication'}|_T{#ARRAY{nb,#GET{nb}}})]</p>]
+]
+[(#REM)
+
+on liste les types de logos des objets principaux de SPIP en prenant en compte les cas spéciaux
+
+][
+(#SET{tables_principales, [(#VAL|lister_tables_principales|array_keys|array_diff{#GET{exclus}})]})]
+<div class="formulaire_spip formulaire_editer formulaire_editer_logo">
+	<form action="#SELF" role="form">
+	<ul class="editer-groupe">
+		[(#SELF
+			|parametre_url{logo,''}
+			|form_hidden)]
+		<B_objets>
+		<li class="editer editer_logo">
+			<label for="champ_logo"><:lister_logos:objets_label:></label>
+			<select name="logo" id="champ_logo" class="form-control">
+				<option value=""> - </option>
+				<BOUCLE_objets(DATA){source table, #GET{tables_principales}} {par valeur}>
+				<option value="[(#VALEUR)]"[ (#ENV{logo}|=={#VALEUR}|oui)selected="selected"]>[(#VALEUR|objet_info{texte_objets}|_T|sinon{#VALEUR})]</option></BOUCLE_objets>
+			</select>
+		</li>
+		</B_objets>
+		</ul>
+		<p class="boutons">
+			<button type="submit" class="btn btn-default"><:bouton_valider:></button>
+		</p>
+	</form>
+</div>
+
+<INCLURE{fond=prive/objets/liste/logos,env} />

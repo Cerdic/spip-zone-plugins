@@ -1,0 +1,18 @@
+<paquet
+	prefix="lister_logos"
+	categorie="multimedia"
+	version="2.2.5"
+	etat="test"
+	compatibilite="[3.0.9;3.2.*]"
+	logo="prive/themes/spip/images/lister_logos-64.png"
+	documentation="https://contrib.spip.net/4600"
+>
+	<nom>Lister les logos</nom>
+
+	<auteur>Teddy Payet</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<menu nom="lister_logos" titre="lister_logos:info_logos" parent="menu_edition" icone="images/lister_logos-16.png" />
+
+</paquet>
