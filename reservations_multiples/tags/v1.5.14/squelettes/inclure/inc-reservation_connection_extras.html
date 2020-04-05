@@ -1,0 +1,13 @@
+
+[(#SAISIE{input,nom_#NUMERO,label=<:reservation:label_nom:>,obligatoire=oui})]
+
+[(#SAISIE{input,email_#NUMERO,label=<:reservation:label_email:>,obligatoire=oui})]
+
+[(#REM)Géneration des champs extras auteurs]
+[(#ENV{champs_extras_auteurs}|oui)
+	#SET{champs_extras_auteurs,#ENV{champs_extras_auteurs}|champs_extras_multiples{#NUMERO}}
+
+	#GENERER_SAISIES{#GET{champs_extras_auteurs}}
+]
+
+

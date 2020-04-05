@@ -1,0 +1,7 @@
+<div class="choix quantite">
+	<label for="quantite_#ID_EVENEMENT">
+		<:reservations_detail:label_quantite:>
+	</label>
+	<input id="quantite_#ID_EVENEMENT" type="text" class="number" name="quantite[#ID_EVENEMENT]" value="[(#ENV{quantite}|table_valeur{#ID_EVENEMENT}|sinon{1})]"/>
+	<p class="explication"><:reservations_multiples:explication_quantite:></p>
+</div>

@@ -1,0 +1,82 @@
+<div class="auteurs_multiples" id="auteurs_multiples">
+	<div class="editer label">
+		<label><:reservations_multiples:label_reserver_amie:></label>
+	</div>
+	<B_auteurs_multiples>
+	<div class="editer multiples_personnes">
+		<BOUCLE_auteurs_multiples(DATA){enum 1, #ENV{nr_auteurs,0}} {si #ENV{nr_auteurs}|>{0}}>
+		<div id="auteurs_multiples_#COMPTEUR_BOUCLE">
+			<INCLURE
+				{fond=inclure/inc-reservation_connection_extras,
+				numero=#COMPTEUR_BOUCLE,
+				env} />
+		</div>
+		</BOUCLE_auteurs_multiples>
+		#SET{nr,#TOTAL_BOUCLE|=={1}|?{'',#TOTAL_BOUCLE|moins{1}}}
+		<div class="editer action enlever">
+			<div class="choix">
+				<input
+					id="nr_auteurs_#GET{nr}"
+					type="image"
+					name="nr_auteurs"
+					value="#GET{nr}"
+					src="#CHEMIN_IMAGE{auteur-del-24.png}"
+					[ (#HTML5)formnovalidate] alt="moins" /> <label for="nr_auteurs_#GET{nr}"><:reservations_multiples:label_enlever:></label>
+				</div>
+			</div>
+			[(#GET{limit}|>{#TOTAL_BOUCLE}|oui|ou{#ENV{nombre_limite}|non})
+			#SET{nr,#TOTAL_BOUCLE|plus{1}}
+			<div class="editer action ajouter">
+				<div class="choix">
+					<input
+						id="nr_auteurs_#GET{nr}"
+						type="image"
+						name="nr_auteurs"
+						value="#GET{nr}"
+						src="#CHEMIN_IMAGE{auteur-new-24.png}"
+						[(#HTML5)formnovalidate] alt="plus" /> <label for="nr_auteurs_#GET{nr}"><:reservations_multiples:label_ajouter:></label>
+				</div>
+			</div>]
+		</div>
+	</B_auteurs_multiples>
+		<div class="editer action ajouter">
+			<div class="choix">
+				<input
+					id="nr_auteurs"
+					type="image"
+					value="1"
+					name="nr_auteurs"
+					src="#CHEMIN_IMAGE{auteur-new-24.png}"
+					[ (#HTML5)formnovalidate] alt="plus" /> <label for="nr_auteurs"> <:reservations_multiples:label_ajouter:></label>
+			</div>
+		</div>
+	<//B_auteurs_multiples>
+</div>
+
+[(#SAISIE{hidden,nr_auteurs,defaut=#ENV{nr_auteurs,0}})]
+
+<script type="text/javascript">
+//<![CDATA[
+
+	$('.editer.action').on("click", "input[name='nr_auteurs']", function(){
+		var data = {}
+
+		// Les valeurs des champs multiples
+		var champs_multiple = $('#auteurs_multiples').find('[id*=champ]');
+
+		champs_multiple.each(function() {
+			data[this.name] = this.value;
+		});
+
+		data.nr_auteurs = $(this).val()
+
+		// Recharger les champs
+		ajaxReload('auteurs_multiples', {
+			args : data
+
+		});
+		return false;
+	});
+
+//]]>
+</script>

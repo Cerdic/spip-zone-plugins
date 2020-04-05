@@ -1,0 +1,16 @@
+.choix.quantite label, .choix.quantite .explication, .choix.quantite label, .choix.quantite input {
+	float:left;
+	margin-right: 0.5em;
+	}
+.auteurs_multiples label{
+	display: inline-block;
+	cursor: pointer;
+}
+
+.auteurs_multiples input[type="image"] {
+	vertical-align: middle;
+}
+
+.evenements .choix {
+	clear: both;
+}
