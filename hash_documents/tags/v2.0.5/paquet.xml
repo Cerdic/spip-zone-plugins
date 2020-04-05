@@ -1,0 +1,19 @@
+<paquet
+	prefix="hasher"
+	categorie="performance"
+	version="2.0.5"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/hasher-32.png"
+	documentation="https://contrib.spip.net/Le-plugin-hash_documents"
+>
+
+	<nom>Hash documents</nom>
+	<!-- Enregistrer les documents dans <code>IMG/mp3/a/b/c/fichier.mp3</code> -->
+
+	<auteur>Fil</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="post_edition" inclure="hasher_fonctions.php" />
+</paquet>

@@ -1,0 +1,39 @@
+<div class="ajax formulaire_spip formulaire_hasher">
+	<h3 class="titrem"><:hasher:bilan_titre:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+
+	<p><:hasher:bilan{oui=#ENV{oui},non=#ENV{non}}:></p>
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		<ul>
+		<li class="editer editer_choix_action[ (#GET{erreurs}|oui)erreur]">
+			<label><:hasher:choix_action:></label>
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			[(#ENV{nb_oui}|oui)
+	  			<input type='hidden' name='nb_a_hasher' value='#ENV{nb_oui}' />
+				<div class="choix">
+					<input type="radio" name="choix_action" class="radio" id="choix_action_hasher" value="hasher" />
+					<label for="choix_action_hasher"><:hasher:action_hasher{n=#ENV{nb_oui}}:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="choix_action" class="radio" id="choix_action_corriger" value="corriger" />
+					<label for="choix_action_hasher"><:hasher:action_corriger{n=#ENV{nb_oui}}:></label>
+				</div>
+			]
+			[(#ENV{nb_non}|oui)
+	  			<input type='hidden' name='nb_a_dehasher' value='-#ENV{nb_non}' />
+				<div class="choix">
+					<input type="radio" name="choix_action" class="radio" id="choix_action_dehasher" value="dehasher" />
+					<label for="choix_action_hasher"><:hasher:action_dehasher{n=#ENV{nb_non}}:></label>
+				</div>
+			]
+		</li>
+	</ul>
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:bouton_valider:>' /></p>
+
+	</div></form>
+</div>

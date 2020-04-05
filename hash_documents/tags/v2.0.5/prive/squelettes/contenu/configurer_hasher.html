@@ -1,0 +1,26 @@
+[(#AUTORISER{webmestre}|sinon_interdire_acces)]
+
+<h1 class="grostitre"><:hasher:titre:></h1>
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_HASHER
+</div>
+
+#SET{chemin,#CHEMIN{IMG/.htaccess}}
+#SET{htaccess_est_installe,#GET{chemin}|htaccess_est_installe}
+[(#GET{htaccess_est_installe}|non)
+	[(#BOITE_OUVRIR{[(#VAL{hasher:redirections}|_T)],'error'})]
+	<:hasher:htaccess_a_installer{htaccess=#CHEMIN{IMG}/.htaccess}:>
+]
+
+[(#GET{htaccess_est_installe}|oui)
+	[(#BOITE_OUVRIR{[(#VAL{hasher:redirections}|_T)],'notice'})]
+	<:hasher:htaccess_installe{htaccess=#GET{chemin}}:>
+]
+
+[(#VAL{<cadre>
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule .* ../index.php?action=hash_404 #EVAL{chr(91)}L#EVAL{chr(93)}
+</cadre>}|propre)]
+
+#BOITE_FERMER
