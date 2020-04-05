@@ -1,0 +1,67 @@
+[(#REM) modèle <rubrique1|timelineme> affiche sur une ligne du temps les articles de la rubrique 1
+le titre des articles est affiché
+le champ "chapeau" des articles est visible au chargement
+si le champ "texte" est utilisé, un bouton "voir plus" permet de le lire à la place du chapeau, un bouton "voir moins" permet de retrouver le chapeau
+parametres d'appel du modèle
+	|background=#8DD8DD (détermine la couleur d'arrière-plan)
+	si on utilise
+	|orientation=horizontal
+	alors on peut ajouter au choix
+	|scrollArrows=true (false par défaut)
+	|scrollBar=false (true par défaut)
+	|scrollZones=true (false par défaut)
+	
+]<div id="timeline-container"></div>
+
+[<link rel="stylesheet" type="text/css" href="(#CHEMIN{src/jquery.timelineMe.css})" media="all" />]
+[<script src="(#CHEMIN{src/jquery.timelineMe.js})" type="text/javascript"></script>]
+<script type="text/javascript">/*<![CDATA[*/
+$(document).ready(function() {
+
+	$('#timeline-container').timelineMe({[
+		orientation: '(#ENV{orientation})',][
+		scrollArrows: (#ENV{scrollArrows}),][
+		scrollBar: (#ENV{scrollBar}),][
+		scrollZones: (#ENV{scrollZones}),]
+		items: [
+		// Put your timeline items here
+		[(#ENV{sens}|=={inverse}|non)<INCLURE{fond=inclure/timelineme,id_rubrique} />]
+		[(#ENV{sens}|=={inverse}|oui)<INCLURE{fond=inclure/timelineme_sens_inverse,id_rubrique} />]
+		]
+	});
+
+});
+/*]]>*/</script>
+
+<style type="text/css">[(#REM) ]
+#SET{bkg,#ENV{background,#8DD8DD}}
+[#timeline-container { background-color:(#GET{bkg}); }]
+[(#ENV{orientation}|=={horizontal}|oui)
+	#timeline-container.timeline-me-horizontal { padding:10px; }]
+.timeline-me-rightscroll {
+	background-image: -webkit-gradient(linear, left top, right top, from(rgba(141, 216, 221, 0)), to (#GET{bkg}));
+	background-image: -webkit-linear-gradient(left, rgba(141, 216, 221, 0), #GET{bkg});
+	background-image: -moz-linear-gradient(left, rgba(141, 216, 221, 0), #GET{bkg});
+	background-image: -ms-linear-gradient(left, rgba(141, 216, 221, 0), #GET{bkg});
+	background-image: -o-linear-gradient(left, rgba(141, 216, 221, 0), #GET{bkg});
+	background-image: linear-gradient(left, rgba(141, 216, 221, 0), #GET{bkg});
+	filter: progid:DXImageTransform.Microsoft.gradient(start-colourStr='rgba(141, 216, 221, 0)', end-colourStr='#GET{bkg}', gradientType='1');
+}
+.timeline-me-leftscroll {
+	background-image: -webkit-gradient(linear, left top, right top, from (#GET{bkg}), to(rgba(141, 216, 221, 0)));
+	background-image: -webkit-linear-gradient(left, #GET{bkg}, rgba(141, 216, 221, 0));
+	background-image: -moz-linear-gradient(left, #GET{bkg}, rgba(141, 216, 221, 0));
+	background-image: -ms-linear-gradient(left, #GET{bkg}, rgba(141, 216, 221, 0));
+	background-image: -o-linear-gradient(left, #GET{bkg}, rgba(141, 216, 221, 0));
+	background-image: linear-gradient(left, #GET{bkg}, rgba(141, 216, 221, 0));
+	filter: progid:DXImageTransform.Microsoft.gradient(start-colourStr='#GET{bkg}', end-colourStr='rgba(141, 216, 221, 0)', gradientType='1');
+}
+/* arrangements pour les boutons "voir plus" et "voir moins" */
+.timeline-me-showmore, .timeline-me-showless {
+	cursor:pointer;
+	margin-top:4px;
+	border-top: 1px solid #ddd;
+	font-size: 80%;
+	text-align: center;
+}
+</style>

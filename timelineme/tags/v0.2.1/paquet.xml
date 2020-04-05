@@ -1,0 +1,18 @@
+<paquet
+	prefix="timelineme"
+	categorie="edition"
+	version="0.2.1"
+	etat="test"
+	compatibilite="[3.2.0;3.2.*]"
+	documentation="https://contrib.spip.net?article4958"
+	logo="prive/themes/spip/images/timelineme-32.png"
+>
+
+	<nom>Timeline Me</nom>
+	<!--  Les articles d'une rubrique sur une frise des temps -->
+
+	<auteur>chankalan</auteur>
+	<credit lien="http://mickaelr.github.io/jquery-timelineMe/">TimelineMe</credit>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+</paquet>
