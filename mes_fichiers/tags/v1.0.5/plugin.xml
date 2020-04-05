@@ -1,0 +1,51 @@
+<plugin>
+	<nom>
+		<multi>
+			[fr]Mes fichiers
+			[en]My files
+		</multi>
+	</nom>
+	<slogan>
+		<multi>
+			[fr]Archiver ses fichiers dump, IMG, squelettes...
+			[en]Archive files dump, IMG, squelettes...
+		</multi>
+	</slogan>
+	<auteur>Eric Lupinacci, kent1, d'apr&#232;s la version initiale de James</auteur>
+	<version>1.0.5</version>
+	<etat>stable</etat>
+	<licence>GPL v3</licence>
+	<icon>prive/themes/spip/images/mes_fichiers-64.png</icon>
+	<description><multi>
+[fr]Ce plugin fabrique un fichier d'archives contenant les donn&#233;es de personnalisation du site comme le dernier dump de sauvegarde de la base, le(s) dossier(s) des squelettes nomm&#233;s, le dossier images...
+Le fichier d'archives est cr&#233;&#233; dans <code>tmp/mes_fichiers/</code> et se nomme <code>mf2_aaaammjj_hhmmss.zip</code>.
+
+Il est aussi possible de lancer une sauvegarde journali&#232;re automatique de tous les fichiers de personnalisation.
+[en]This plugin makes an archive file containing the customization datas of the site as the last database dump, the skeleton(s) file(s), the images folder...
+The archive file is created in <code>tmp/mes_fichiers/</code> and is called <code>mf2_aaaammjj_hhmmss.zip</code>.
+
+It is also possible to initiate an automatic daily backup of all customization files.</multi>
+	</description>
+	<lien>https://contrib.spip.net/Mes-Fichiers-2</lien>
+
+	<prefix>mes_fichiers</prefix>
+	<options>mes_fichiers_options.php</options>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>genie/mes_fichiers.php</inclure>
+	</pipeline>
+	<bouton id='mes_fichiers' parent='configuration'>
+		<icone>prive/themes/spip/images/mes_fichiers-24.png</icone>
+		<titre>mes_fichiers:bouton_mes_fichiers</titre>
+		<url>mes_fichiers</url>
+	</bouton>
+	<bouton id='mes_fichiers21' parent='bando_administration'>
+		<icone>images/mes_fichiers-16.png</icone>
+		<titre>mes_fichiers:bouton_mes_fichiers</titre>
+		<url>mes_fichiers</url>
+	</bouton>
+	<necessite id="SPIP" version='[2.1.0;2.1.99]' />
+	<necessite id='spip_bonux' version='[1.8.1;]' />
+	<necessite id='cfg' version='[1.14.4;]' />
+	<categorie>maintenance</categorie>
+</plugin>
