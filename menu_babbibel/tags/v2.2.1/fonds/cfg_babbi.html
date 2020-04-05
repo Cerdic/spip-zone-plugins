@@ -1,0 +1,60 @@
+#CACHE{0}
+[(#REM) icone=img/logo_menu-27-24.png]
+[(#SET{logo,
+<img src='#DOSSIER_SQUELETTE/../img/logo_menu_50_47.png' width='50' height='47' alt='Logo roule roule' style="float:#LANG_RIGHT;" />
+})]
+<!-- descriptif=
+<multi>[fr]<h4>Configuration du Menu d&eacute;roulant de Babbibel</h4>
+#GET{logo}Ici vous pouvez choisir le type de menu que vous souhaitez afficher, l'ordre d'affichage des items, et le nombre d'articles des menus.<br />
+<br /><a href="../spip.php?page=test_menu&var_mode=recalcul">Tester la config</a>
+<br /><a href="../spip.php?page=test_menu_multi&var_mode=recalcul">Tester la config multilangue par secteur</a>
+<br /><a href="https://contrib.spip.net/Le-menu-deroulant-Babbibel" class="spip_out">Cf. Documentation</a>  [en]<h4>Menu configuration</h4></multi>
+-->
+<!-- titre=<multi>[fr]Menu d&eacute;roulant Babbibel [en]Babbibel dropdown menu</multi>-->
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+<fieldset><legend>Afficher l&rsquo;item &quot;Accueil&quot;</legend>
+   <br />
+   <input type="radio" name="accueil" value="sans"[ checked="(#ENV{accueil}|=={sans}|?{checked})"]/><label>Supprimer l&rsquo;item &quot;<b>Accueil</b>&quot;</label>
+   <br /><br />
+   <input type="radio" name="accueil" value="avec"[ checked="(#ENV{accueil}|=={avec}|?{checked})"]/><label>Afficher l&rsquo;item &quot;<b>Accueil</b>&quot;</label>
+</fieldset><br />
+<fieldset><legend>Type de menu</legend>
+<p>
+<label>S&eacute;lectionner le type de menu d&eacute;roulant</label>
+<select name="type_menu">
+     <option value="inc_menu"[ selected="(#ENV{type_menu}|=={inc-menu}|?{selected})"]>Secteurs >>> Sous-rubriques</option>
+     <option value="inc_menu_articles" [ selected="(#ENV{type_menu}|=={inc_menu_articles}|?{selected})"]>Secteurs >>> Articles</option>
+     <option value="inc_menu_laur" [ selected="(#ENV{type_menu}|=={inc_menu_laur}|?{selected})"]>Secteurs >>> Sous-rubriques + articles</option>
+     <option value="inc_menu_mot_cle" [ selected="(#ENV{type_menu}|=={inc_menu_mot_cle}|?{selected})"]>Rubriques par mot cl&eacute; >>> Sous rubriques</option>
+     <option value="inc_menu_mot_cle2" [ selected="(#ENV{type_menu}|=={inc_menu_mot_cle2}|?{selected})"]>Rubriques par mot cl&eacute; >>> Articles</option>
+     <option value="inc_menu_mot_cle3" [ selected="(#ENV{type_menu}|=={inc_menu_mot_cle3}|?{selected})"]>Rubriques par mot cl&eacute; >>> Sous rubriques + articles</option>
+</select>
+</p>
+</fieldset><br />
+<fieldset><legend>Saisissez le nombre d&acute;articles maximum &agrave; afficher (Laisser vide pour tout afficher)</legend>
+<p>
+<label>Le menu d&eacute;roulera au maximum <input type="text" name="nb_articles" [value="(#CONFIG{babbi/nb_articles}|sinon{''})"] size="3" class="fondl" /> article(s)</label>
+</p>
+</fieldset><br />
+<fieldset><legend>Classement des articles affich&eacute;s</legend>
+   <br />
+   <input type="radio" name="tri" value="date"[ checked="(#ENV{tri}|=={date}|?{checked})"]/><label>Par date</label>
+   <br /><br />
+   <input type="radio" name="tri" value="maj"[ checked="(#ENV{tri}|=={maj}|?{checked})"]/><label>Par date de mise &agrave; jour</label>
+   <br /><br />
+   <input type="radio" name="tri" value="titre" [ checked="(#ENV{tri}|=={titre}|?{checked})"]/><label>Par ordre alphab&eacute;tique</label>	 
+   <br /><br />
+   <input type="radio" name="tri" value="popularite" [ checked="(#ENV{tri}|=={popularite}|?{checked})"]/><label>Par popularit&eacute;</label>	 
+   <br /><br />
+   <input type="radio" name="tri" value="hasard" [ checked="(#ENV{tri}|=={hasard}|?{checked})"]/><label>Classement al&eacute;atoire <i>(pour rendre fous les visiteurs du site)</i></label>	 
+<br />
+<br />
+<br />
+
+<label><input type="checkbox" name="inverse" [checked="(#ENV{inverse}|!={''}|?{'checked'})"] class="fondl" />Inverser le tri ?</label>
+</fieldset><br />
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>
