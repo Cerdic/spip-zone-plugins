@@ -1,0 +1,20 @@
+<paquet
+	prefix="switchcase"
+	categorie="outil"
+	version="0.4.0"
+	etat="stable"
+	compatibilite="[2.1.0;3.3.*]"
+	logo="images/switchcase-32.png"
+	documentation="https://contrib.spip.net/4800"
+>
+
+	<nom>Balises #SWITCH #CASE</nom>
+	<!-- Définition de balises #SWITCH, #CASE et et #CASE_DEFAULT pour les créateurs de squelette, pour comparer une valeur à plusieurs autres.
+ -->
+
+	<auteur lien="https://contrib.spip.net/JLuc">JLuc</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+
+	<credit lien="https://thenounproject.com/term/flow-chart/49063/">Inspiration pour l'icone : flowchart by Piotr Kołodziejski, Licence Creative Commons</credit>
+
+</paquet>

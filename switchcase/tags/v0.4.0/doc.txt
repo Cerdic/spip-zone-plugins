@@ -1,0 +1,11 @@
+Usage :
+Après un appel à #SWICH{valeur comparée}, #CASE{valeur calculée} est vide si la valeur calculée est différente de la valeur comparée, et vaut ' ' en cas d'égalité.
+
+Exemple :
+#SWITCH{#ENV{code_erreur}}
+[(#CASE{0}) Tout va bien, on passe à la suite]
+[(#CASE{1}) Ah faudrait il faire attention  ?]
+[(#CASE{2}) Oulalala ça va pas du tout là !]
+
+On ne peut pas emboiter plusieurs #SWITCH dans un même squelette
+
