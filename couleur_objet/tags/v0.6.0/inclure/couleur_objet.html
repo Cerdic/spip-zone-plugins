@@ -1,0 +1,11 @@
+[(#REM)
+	Afficher le formulaire de choix de couleur sur un objet
+][(#REM)
+	Utilise :
+		formulaires/couleur_objet.html
+	Inclus dans :
+		colonne droite espace privé pour les objets sélectionnés dans la configuration du plugin : cf couleur_objet_pipelines.php
+]
+<div class="ajax">
+[(#FORMULAIRE_COULEUR_OBJET{#ENV{objet},#ENV{id_objet},#ENV{couleur_objet}})]
+</div>

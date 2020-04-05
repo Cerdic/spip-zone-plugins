@@ -1,0 +1,42 @@
+[(#REM)
+	Formulaire de configuration de choix de couleur sur un objet
+][(#REM)
+	Action (CVT) :
+		automatique
+	Inclus dans :
+		prive/squelettes/contenu/configurer_couleur_objet.html sans paramètre
+		
+]<div class="formulaire_spip formulaire_config formulaire_#FORM">
+	
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE
+			[(#SET{co,couleur_objet})]
+			<ul>
+				[(#REM) choix des objets sur lesquels l'ajout d'une couleur est possible ]
+				#SET{name,objets} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label>[(#GET{co}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]#INCLURE{fond=formulaires/inc-choisir-objets, name=#GET{name}, selected=#ENV**{#GET{name}}, exclus=#LISTE{spip_documents}}
+				</li>
+				[(#REM) bloquer le changement de couleur ]
+				#SET{name,bloquer} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{co}|concat{':label_',#GET{name}}|_T)]</label>
+					<div class="choix">
+						<input type="checkbox" id="#GET{name}" name='#GET{name}' value='oui'[(#CONFIG{couleur_objet/bloquer}|=={oui}|oui) checked="checked"] />
+						<label for="#GET{name}">[(#GET{co}|concat{':label_',#GET{name},'_oui'}|_T)]</label>
+						<p class="explication">[(#GET{co}|concat{':explication_',#GET{name}}|_T)]</p>
+					</div>
+				</li>
+			</ul>
+			<div class="boutons">
+				<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+			</div>
+		</div>
+	</form>
+</div>
