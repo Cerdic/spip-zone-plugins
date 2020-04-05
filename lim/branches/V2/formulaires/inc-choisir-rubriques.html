@@ -1,8 +1,6 @@
 [(#REM) Récupérer les objets sélectionnés et la chaine de langue correspondante traduite.]
 #SET{traductions, #REM|lim_get_rubriques_objets}
 
-
-
 <div class="grid_rub">
 	<div></div>
 	<BOUCLE_entete2(DATA){source tableau,#GET{traductions}}{par valeur}>
@@ -39,21 +37,12 @@
 </BOUCLE_titre_rubrique>
 
 <style type="text/css">
-	.grid_rub{
-		display:grid;
-		grid-template-columns: 3fr repeat(#GET{nbre_objets}, 1fr);
-		justify-items: center;
-		align-items: center;
-	}
-
-	.grid_rub .titre_rub {
-		justify-self: start;
-	}
-
-	.grid_rub.sousrub:hover {
-		background-color: #ffffef;
-	}
-
+.grid_rub {
+	display:grid;
+	grid-template-columns: 3fr repeat(#GET{nbre_objets}, 1fr);
+	justify-items: center;
+	align-items: center;
+}
 </style>
 
 <script type="text/javascript">
@@ -99,7 +88,6 @@
 
 			$.post(url, {objet: type_objet, quoi: action})
 				.done(function(data){
-					$me.ajaxReload();
 			});
 		});
 	});
