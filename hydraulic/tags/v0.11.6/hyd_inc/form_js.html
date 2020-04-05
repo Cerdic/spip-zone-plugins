@@ -1,0 +1,74 @@
+<script language="javascript">
+	// Retourne sous forme de tableau tous les élèments de la Class classe et de type tagName
+	function elementsParClasse(classe, tagName) {
+		var divs = document.getElementsByTagName(tagName);
+		var resultats = new Array();
+		for(var i=0; i<divs.length; i++){
+			if(divs[i].className == classe){
+				resultats.push(divs[i]);
+			}
+		}
+		return resultats;
+	}
+
+	// Tableau contenant tous les choix des groupes de boutons radios
+	var glob = {};
+
+
+	// Mise a jour des variables globales
+	function setVarGlob() {
+		// On récupère le choix effectué parmis les groupes de champs radios.
+		<BOUCLE_setVarGlob(POUR){tableau #ENV{champs_fvc}}>
+			//glob['#VALEUR'] = $("input[name=choix_champs_#VALEUR]:checked").val();
+			glob['#VALEUR'] = getRadioValue('choix_champs_#VALEUR');
+		</BOUCLE_setVarGlob>
+	}
+
+
+	function gestion_radios(nom,valeur) {
+
+		function affichageChamp(nom, valeur) {
+			var display;
+			if(valeur=='fix') {
+				document.getElementById('champ_'+nom).disabled=false;
+			} else {
+				document.getElementById('champ_'+nom).disabled=true;
+			}
+			if(valeur=='var') {
+				display = 'table-row';
+			} else {
+				display = 'none';
+			}
+			var cacher = elementsParClasse('champs_var_'+nom, 'tr');
+			for(var i in cacher){
+				cacher[i].style.display=display;
+			}
+		}
+
+		// On gère l'affichage du champ sélectionné
+		affichageChamp(nom,valeur);
+
+		// Pour var et cal, on bascule en fix l'ancien champ en var ou cal
+		if(valeur != 'fix') {
+			for (var cle in glob){
+				if(glob[cle]==valeur && cle != nom) {
+					document.getElementById('fix_'+cle).checked=true;
+					affichageChamp(cle,'fix');
+				}
+			}
+		}
+
+		// Si l'action est sur un ancien cal, on bascule le champ cal par défaut
+		if(glob[nom]=='cal' && valeur != 'cal') {
+			document.getElementById('cal_#ENV{sVarCal}').checked=true;
+			affichageChamp('#ENV{sVarCal}','cal');
+		}
+		setVarGlob();
+
+		// Exécution d'actions complémentaires pour certains formulaires
+		if(typeof gestion_radios_extra === "function") {
+			gestion_radios_extra(nom,valeur);
+		}
+	}
+
+</script>

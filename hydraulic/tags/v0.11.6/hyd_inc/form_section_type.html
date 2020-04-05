@@ -1,0 +1,31 @@
+<script language="javascript">
+	//Permet d'afficher ou cacher les champs correspondant à une section.
+	function sectionDisplayFieldset() {
+		var section = getSelectValue('choix_section');
+		section = 'tr_'+section;
+		var ttr = document.getElementsByTagName("tr");
+		for (var i=0; i < ttr.length; i++) {
+			if(ttr[i].getAttribute("id") != null && ttr[i].id.substr(0,section.length) == section){
+				// Cette ligne correspond au type de section sélectionné
+				document.getElementById(ttr[i].id).style.display='table-row';
+			}
+			else if(ttr[i].getAttribute("id") != null && ttr[i].id.substr(0,4) == 'tr_F') {
+				// Cette ligne correspond à un autre type de section
+				document.getElementById(ttr[i].id).style.display='none';
+			}
+		}
+	}
+</script>
+
+<td colspan="[(#ENV{nb_col}|moins{2})]">
+	<select name="choix_section" id="choix_section" onChange="sectionDisplayFieldset();">
+		<BOUCLE_selectOptions(POUR){tableau #ENV{saisies}}>
+			#SET{test, #VALEUR|table_valeur{0}|substr{4,100}|traduction_hydraulic}
+			<BOUCLE_choixSection(CONDITION){si #CLE|substr{0,1}|== {'F'}}>
+				<option value="#CLE" [(#ENV{choix_section}|=={#CLE}|?{'selected',''})]>#GET{test}</option>
+			</BOUCLE_choixSection>
+		</BOUCLE_selectOptions>
+	</select>
+	[<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{choix_section})</div>]
+</td>
+</tr>

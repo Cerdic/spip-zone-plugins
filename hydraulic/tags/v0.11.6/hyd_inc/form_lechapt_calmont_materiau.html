@@ -1,0 +1,39 @@
+<script language="javascript">
+	// Permet de switcher les valeur de L, M et N en fonction du matériau choisis
+	function change_valeur() {
+		/*
+		* Le select commence à 1 donc on diminue son indice de 1 vu qu'on utilise un tableau pour stocker
+		* les valeurs (on commence a 0)
+		*/
+		var choix_mat = getSelectValue('choix_materiau')-1;
+		var materiau = new Array();
+
+		<BOUCLE_mat1(POUR){tableau #ENV{mes_saisies_materiaux}}>
+			<BOUCLE_mat2(POUR){tableau #VALEUR}>
+				materiau.push('#VALEUR');
+			</BOUCLE_mat2>
+		</BOUCLE_mat1>
+
+		document.getElementById('champ_L').value=materiau[choix_mat*3];
+		document.getElementById('champ_M').value=materiau[(choix_mat*3)+1];
+		document.getElementById('champ_N').value=materiau[(choix_mat*3)+2];
+	}
+</script>
+
+<td colspan="4">
+	<select name="typeMateriau" id="choix_materiau" onChange="change_valeur();">
+		<option value="1" [(#ENV{typeMateriau}|=={'1'}|?{'selected',''})]><:hydraulic:fonte_beton_corrosive:></option>
+		<option value="2" [(#ENV{typeMateriau}|=={'2'}|?{'selected',''})]><:hydraulic:fonte_beton_ncorrosive:></option>
+		<option value="3" [(#ENV{typeMateriau}|=={'3'}|?{'selected',''})]><:hydraulic:fonte_revt_ciment:></option>
+		<option value="4" [(#ENV{typeMateriau}|=={'4'}|?{'selected',''})]><:hydraulic:fonte_revt_bitume:></option>
+		<option value="5" [(#ENV{typeMateriau}|=={'5'}|?{'selected',''})]><:hydraulic:acier_lamine:></option>
+		<option value="6" [(#ENV{typeMateriau}|=={'6'}|?{'selected',''})]><:hydraulic:fonte_revt_centrifuge:></option>
+		<option value="7" [(#ENV{typeMateriau}|=={'7'}|?{'selected',''})]><:hydraulic:pvc:></option>
+		<option value="8" [(#ENV{typeMateriau}|=={'8'}|?{'selected',''})]><:hydraulic:tuyau_lisse1:></option>
+		<option value="9" [(#ENV{typeMateriau}|=={'9'}|?{'selected',''})]><:hydraulic:tuyau_lisse2:></option>
+	</select>
+
+	[<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{[(#VALEUR|table_valeur{0})]})</div>]
+
+</td>
+</tr>

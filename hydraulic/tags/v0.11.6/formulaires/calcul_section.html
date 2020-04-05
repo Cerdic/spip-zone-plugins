@@ -1,0 +1,23 @@
+<script>
+	function gestion_radios_extra(nom,valeur) {
+		// Gestion de l'affichage du choix du calcul à effectuer (affichage seulement si une valeur varie)
+		var ttr = ['tr_val_a_cal_fs','tr_val_a_cal'];
+		var bDisplay = 'none';
+		for(var cle in glob) {
+			if(glob[cle]=='var') {
+				bDisplay = 'table-row';
+				break;
+			}
+		}
+		for(var i in ttr) {
+			document.getElementById(ttr[i]).style.display=bDisplay;
+		}
+	}
+</script>
+
+<INCLURE{fond=formulaires/hydraulic,env}>
+
+<script>
+	// Affichage des champs du type de section sélectionné uniquement
+	sectionDisplayFieldset();
+</script>

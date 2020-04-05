@@ -1,0 +1,11 @@
+[(#REM) Liste déroulante de choix de la variable à calculer pour le formulaire de calcul sur les sections paramétrées]
+<td colspan="3">
+	<select name="val_a_cal" id="val_a_cal">
+		<BOUCLE_champs_select_cal(POUR){tableau #ENV{choix_champs_select}}>
+			<option value="#CLE" [(#ENV{val_a_cal}|=={#CLE}|?{'selected',''})]>[(#VALEUR|traduction_hydraulic)]</option>
+		</BOUCLE_champs_select_cal>
+	</select>
+	[<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{[(#VALEUR|table_valeur{0})]})</div>]
+</td>
+
+	</tr>

@@ -1,0 +1,17 @@
+[(#REM) Liste déroulante de choix de la variable à calculer pour le formulaire de calcul sur les sections paramétrées]
+
+<td colspan="3">
+		<select name="Methode" id="champ_Methode">
+			<option value="Trapez" [(#ENV{choix_resolution}|=={Trapez}|?{'selected',''})]>
+				<:hydraulic:integration_trapez:>
+			</option>
+			<option value="RK4" [(#ENV{choix_resolution}|=={RK4}|?{'selected',''})]>
+				<:hydraulic:runge_kutta:>
+			</option>
+			<option value="Euler" [(#ENV{choix_resolution}|=={Euler}|?{'selected',''})]>
+				<:hydraulic:euler_explicite:>
+			</option>
+		</select>
+		[<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{choix_resolution})</div>]
+	</td>
+</tr>

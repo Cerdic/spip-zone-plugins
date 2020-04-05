@@ -1,0 +1,59 @@
+[(#REM)
+	Affichage des champs du formulaire
+]
+
+[(#ENV{nb_col}|>{2}|oui)
+	<INCLURE{fond=hyd_inc/form_js,env}>
+]
+
+<BOUCLE_fieldset(POUR) {tableau #ENV{saisies}}>
+
+	<tr id="tr_[(#CLE)]_fs">
+		<td colspan="#ENV{nb_col}">
+			<div class="hyd_formulaire_chapitre">[(#VALEUR|table_valeur{0}|traduction_hydraulic)]</div>
+		</td>
+	</tr>
+	[(#VALEUR|table_valeur{2}|!={fix}|oui)
+		<tr id="tr_[(#CLE)]_header">
+			<td colspan="2"></td>
+			<td align="center"><:hydraulic:fixer_val:></td>
+			<td align="center"><:hydraulic:varier_val:></td>
+			[(#VALEUR|table_valeur{2}|=={cal}|oui)
+				<td align="center"><:hydraulic:calcul_val:></td>
+			]
+		</tr>
+	]
+	#SET{fixvarcal,#VALEUR}
+
+
+	<BOUCLE_caract(POUR) {tableau #VALEUR|table_valeur{1}}>
+
+		<tr id="tr_#CLE">
+			<td align="right">
+				[(#VALEUR|table_valeur{0}|traduction_hydraulic)]
+			</td>
+
+			#SET{inclure,#VALEUR}
+			[(#GET{inclure/1}|couper{5}|=={form_}|oui)
+				<INCLURE{fond=hyd_inc/#GET{inclure/1},env}>
+			]
+			[(#GET{inclure/1}|couper{5}|!={form_}|oui)
+				<INCLURE{fond=hyd_inc/form_champ_fixvarcal,
+					env,
+					cle=#CLE,
+					valeur=#valeur,
+					fixvarcal=#GET{fixvarcal/2}
+				}>
+			]
+
+	</BOUCLE_caract>
+
+</BOUCLE_fieldset>
+
+<script language="javascript">
+	// Initialisation de l'affichage des champs
+	setVarGlob();
+	for(var cle in glob) {
+		gestion_radios(cle,glob[cle]);
+	}
+</script>

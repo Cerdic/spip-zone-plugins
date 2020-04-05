@@ -1,0 +1,22 @@
+[<div class='hyd_formulaire_erreur '><span>(#ENV*{message_erreur})</span></div>]
+<script language="javascript" type="text/javascript" src="#CHEMIN{js/hyd_fonctions.js}"></script>
+
+<form method="post" action="#ENV{action}#VAL{#hyd_resultat}" id="form_hydraulic">
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<table class="hyd_formulaire">
+		<tbody>
+
+			<!-- On génère les champs du formulaire en suivant le tableau saisies -->
+			<INCLURE{fond=hyd_inc/formulaire_champs,env}>
+
+			<tr>
+				<td colspan="5" class="hyd_bouton_submit">
+					<input type="submit" value="<:hydraulic:calculer:>">
+				</td>
+			</tr>
+
+		</tbody>
+	</table>
+</form>
+
+[<div id="hyd_resultat">(#ENV*{message_ok})</div>]
