@@ -1,0 +1,38 @@
+<div class="formulaire_spip formulaire_editer formulaire_sympatic_editer_liste[_(#ENV{id_liste})] ajax">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[(#ENV{editable})
+<form method="post" action="#ENV{action}"><div>
+#ACTION_FORMULAIRE{#ENV{action}}
+<div class="editer-groupe">
+	[(#SAISIE{input,titre,
+		obligatoire=oui,
+		label=<:sympatic:label_titre:>})]
+	[(#SAISIE{textarea,descriptif,
+		label=<:sympatic:label_descriptif:>,
+		rows=2})]
+	[(#SAISIE{statuts_auteurs,visible,
+		obligatoire=oui,
+		cacher_option_intro=oui,
+		defaut=1comite,
+		label=<:sympatic:label_visible:>,
+		explication=<:sympatic:explication_visible:>})]
+	<div class="fieldset">
+	<fieldset>
+		<h3 class="legend"><:sympatic:legend_emails:></h3>
+		<div class="editer-groupe">
+			[(#SAISIE{email,email_liste,
+				obligatoire=oui,
+				label=<:sympatic:label_email_liste:>})]
+			[(#SAISIE{email,email_robot,
+				obligatoire=oui,
+				label=<:sympatic:label_email_robot:>})]
+		</div>
+	</fieldset>
+	</div>
+</div>
+<p class="boutons">
+	<input type="submit" class="submit" name="valider" value="<:bouton_enregistrer:>" />
+</p>
+</div></form>]
+</div>
