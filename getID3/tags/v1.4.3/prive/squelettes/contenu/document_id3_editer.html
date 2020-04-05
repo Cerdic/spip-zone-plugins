@@ -1,0 +1,22 @@
+[(#REM)
+
+	Squelette d'édition des tags ID3 dans le privé
+	
+]
+[(#ID_DOCUMENT|sinon_interdire_acces)]
+<BOUCLE_document(DOCUMENTS){id_document=#ENV{id_document,#VAL{id_document}|_request}}{tout}>
+<div class="cadre-formulaire-editer[(#ENV{popin,''}|oui)popin]">
+	<div class="entete-formulaire">
+		[(#ENV{popin,''}|non)
+		[(#ENV{redirect,#URL_ECRIRE{documents}}|icone_verticale{<:retour:>,document-24,rien.gif,left})]
+		]
+		<:getid3:formulaire_modifier_id3:>
+		<h1>
+			[(#TITRE|sinon{[(#FICHIER|basename)]})]
+		</h1>
+	</div>
+	<div class="ajax">
+	#FORMULAIRE_EDITER_ID3{#ID_DOCUMENT,#ENV{redirect}}
+	</div>
+</div>
+</BOUCLE_document>

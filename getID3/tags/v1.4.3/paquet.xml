@@ -1,0 +1,33 @@
+<paquet
+	prefix="getid3"
+	categorie="multimedia"
+	version="1.4.3"
+	etat="stable"
+	compatibilite="[3.0.2;3.2.*]"
+	logo="images/id3v2.png"
+	schema="0.5.0"
+	documentation="https://www.mediaspip.net/?article32"
+	developpement="https://www.mediaspip.net/spip.php?page=tickets&amp;composant=plugins%20-%20getID3"
+>
+
+	<nom>GetID3</nom>
+	<!-- Lire et écrire les tags audio -->
+
+	<auteur mail="booz@rezo.net">BoOz</auteur>
+	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
+
+	<copyright>2008-2017</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_principales" inclure="base/getid3_base.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/getid3_base.php" />
+	<pipeline nom="document_desc_actions" inclure="getid3_pipelines.php" />
+	<pipeline nom="post_edition" action="post_edition" inclure="getid3_pipelines.php" />
+	<pipeline nom="recuperer_fond" inclure="getid3_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="getid3_pipelines.php" />
+
+	<necessite nom="medias" compatibilite="[2.7.30;[" />
+	<utilise nom="licence" compatibilite="[0.4.0;[" />
+	<utilise nom="gis" compatibilite="[3.0.8;[" />
+</paquet>

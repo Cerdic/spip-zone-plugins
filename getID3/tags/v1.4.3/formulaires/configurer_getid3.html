@@ -1,0 +1,44 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+<ul>
+	<li class="fieldset">
+		<fieldset>
+		<legend><:getid3:legende_ecriture_tags:></legend>
+		<ul>
+			<li class="editer editer_ecriture_tags">
+				<label><:getid3:label_reecriture_tags:></label>
+				<div class="choix">
+					<input type="checkbox" name="reecriture_tags[]" value="titre" id="reecriture_tags_titre"[(#VAL{titre}|in_array{#ENV**{reecriture_tags,#ARRAY}}|oui)checked="checked"] />
+					<label for="reecriture_tags_titre"><:getid3:label_reecriture_tags_titre:></label>
+				</div>
+				<div class="choix">
+					<input type="checkbox" name="reecriture_tags[]" value="descriptif" id="reecriture_tags_descriptif"[(#VAL{descriptif}|in_array{#ENV**{reecriture_tags,#ARRAY}}|oui)checked="checked"] />
+					<label for="reecriture_tags_descriptif"><:getid3:label_reecriture_tags_descriptif:></label>
+				</div>
+				<div class="choix">
+					<input type="checkbox" name="reecriture_tags[]" value="logo" id="reecriture_tags_logo"[(#VAL{logo}|in_array{#ENV**{reecriture_tags,#ARRAY}}|oui)checked="checked"] />
+					<label for="reecriture_tags_logo"><:getid3:label_reecriture_tags_logo:></label>
+				</div>
+			</li>
+			<li class="editer editer_cover_defaut">
+				<label><:getid3:label_cover_defaut:></label>
+				[<div>(#ENV{cover_defaut}|image_reduire{150,150}|inserer_attribut{alt,""})</div>]
+				<p class="explication"><:getid3:explication_cover_defaut:></p>
+				<input type="text" name="cover_defaut" id="cover_defaut" value="#ENV{cover_defaut}" class="text" />
+			</li>
+		</ul>
+		</fieldset>
+	</li>
+</ul>
+<p class="boutons">
+	<input type="submit" value="<:bouton_valider:>" class="submit" />
+</p>
+</div>
+</form>
+</div>
