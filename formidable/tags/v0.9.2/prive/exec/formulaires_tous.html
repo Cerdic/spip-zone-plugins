@@ -1,0 +1,29 @@
+
+<div class="fiche_objet">
+	<h1>
+		<:formidable:bouton_formulaires:>
+	</h1>
+	
+	<p><:formidable:formulaires_introduction:></p>
+</div>
+
+<INCLURE{fond=prive/liste/formulaires}{titre=<:formidable:bouton_formulaires:>}{ajax}>
+
+[(#AUTORISER{editer, formulaire}|oui)
+<a href="[(#URL_ECRIRE{formulaires_editer}|parametre_url{nouveau,oui})]" class="icone36" style="display:block; margin:1em auto;">
+	<img width="48" height="48" src="#CHEMIN{images/formulaire-nouveau-48.png}" />
+	<span><:formidable:formulaires_nouveau:></span>
+</a>
+]
+
+<!--#navigation-->
+<!--/#navigation-->
+
+<!--#extra-->
+[(#AUTORISER{editer, formulaire}|oui)
+<div class="cadre cadre-e cadre_padding">
+	<strong><:formidable:importer_formulaire:></strong>
+	#FORMULAIRE_IMPORTER_FORMULAIRE
+</div>
+]
+<!--/#extra-->
