@@ -1,0 +1,15 @@
+[(#SET{saisies, #ENV{type_restriction}
+	|lor_definition_saisies{
+		#ENV**
+	}
+})]
+
+[(#REM) mettre les valeurs des champs spécifiques dans le contexte]
+<BOUCLE_saisies(DATA){source tableau, #GET{saisies}|saisies_lister_par_nom}>
+	#SET{nom,#OPTIONS|table_valeur{nom}}
+	[(#ENV{#GET{nom},#ENV{_valeurs_restriction}|table_valeur{#GET{nom}}}|setenv{#GET{nom}})]
+</BOUCLE_saisies>
+
+#GENERER_SAISIES{#GET{saisies}}
+
+<!-- champs_specifiques -->

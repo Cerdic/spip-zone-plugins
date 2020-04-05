@@ -1,0 +1,39 @@
+<BOUCLE_restriction(RESTRICTIONS){id_restriction}>
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:ecrire:info_titre:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{titre} titre">(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<label><:ecrire:info_descriptif:></label>
+	<span dir="#LANG_DIR" class="#EDIT{descriptif} descriptif">(#DESCRIPTIF)</span>
+</div>]
+
+[<div class="champ contenu_type_restriction[ (#TYPE_RESTRICTION*|strlen|?{'',vide})]">
+	<label><:restriction:champ_type_restriction_label:></label>
+	<span dir="#LANG_DIR" class="#EDIT{type_restriction} type_restriction">(#TYPE_RESTRICTION)</span>
+</div>]
+
+	[(#REM) Les valeurs spécifique de la restriction]
+
+	[(#SET{saisies,#TYPE_RESTRICTION|lor_definition_saisies})]
+
+	#SET{valeurs_restrictions, #VALEURS_RESTRICTION|json_decode{TRUE}}
+
+	<BOUCLE_valeurs_restriction(DATA){source tableau, #GET{saisies}|saisies_lister_par_nom}>
+	[(#SET{valeur,#GET{valeurs_restrictions}|table_valeur{#VALEUR{options/nom}}})]
+	[(#GET{valeur}|oui)
+		[(#SET{chemin, #VAL{restrictions/}|concat{#CLE}})]
+		<div class="champ contenu_[(#CLE)]">
+			[<label>(#VALEUR{options/label}) </label>]
+			[(#REM) regarde si un suelette existe pour la valeur, sino afficher tel quel]
+			[<span dir='#LANG_DIR' class='#CLE'>
+				(#CHEMIN{[(#GET{chemin}|concat{.html})]}|?{
+				[(#INCLURE{fond=#GET{chemin},valeur=#GET{valeur}}|implode{','})],
+				[(#GET{valeur}|implode{','})]
+				})
+			</span>]
+		</div>
+	]
+	</BOUCLE_valeurs_restriction>
+</BOUCLE_restriction>

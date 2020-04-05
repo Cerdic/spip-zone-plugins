@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_restrictions_selectionnes>
+	<ul>
+	<BOUCLE_restrictions_selectionnes(RESTRICTIONS){id_restriction IN #GET*{valeur}}
+		{par num titre, titre}{tout}>
+		<li class="choix">#TITRE (#ID_RESTRICTION)</li>
+	</BOUCLE_restrictions_selectionnes>
+	</ul>
+	</B_restrictions_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_restrictions_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_restriction_selectionne(RESTRICTIONS){id_restriction=#ENV{valeur}}
+		{par num titre, titre}{tout}>
+	  	<p>#TITRE (#ID_RESTRICTION)</p>
+	</BOUCLE_restriction_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_restriction_selectionne>
+<//B_test_multiple>
