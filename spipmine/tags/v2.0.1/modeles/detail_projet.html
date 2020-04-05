@@ -1,0 +1,53 @@
+#CACHE{0}
+<!-- #SQUELETTE -->
+
+[(#REM)
+
+	Pour un projet donne, affiche le detail du projet.
+]
+<BOUCLE_projet(PROJETS){id_projet}>
+
+<h1 class="#EDIT{nom}">[(#NOM|textebrut)] - [#ID_PROJET]</h1>
+[(#MODELE{navigateur_projet})]
+
+<div id="entete_projet">
+
+
+	[(#REM) Le bloc avec les liens vers les documents SPIPMINE ]
+	<INCLURE{fond=inclure/voir_en_ligne}{id_projet=#ID_PROJET}>
+
+	<div id="objectifs" class="descriptif">
+		<h3 class="h3"><:spipmine:objectifs:></h3>
+		[<div class="#EDIT{objectif}">(#OBJECTIF|sinon{<em><:projet:info_ajouter_objectif:></em>})</div>]
+        <hr />
+	</div>
+
+	<div id="enjeux" class="descriptif">
+		<h3 class="h3"><:spipmine:enjeux_client:></h3>
+		[<div class="#EDIT{enjeux}">(#ENJEUX|sinon{<em><:projet:info_ajouter_enjeux:></em>})</div>]
+        <hr />
+	</div>
+
+	<div id="methodes" class="descriptif">
+		<h3 class="h3"><:spipmine:methode:></h3>
+		[<div class="#EDIT{methode}">(#METHODE|sinon{<em><:projet:info_ajouter_methode:></em>})</div>]
+        <hr />
+	</div>
+
+	<div id="commentaires" class="descriptif">
+		<h3 class="h3"><:spipmine:commentaires:></h3>
+		[<div class="#EDIT{commentaires}">(#COMMENTAIRES|sinon{<em><:projet:info_ajouter_commentaires:></em>})</div>]
+        <hr />
+	</div>
+
+	<div id="factures" class="descriptif">
+		<h3 class="h3"><:spipmine:label_factures_liees:></h3>
+		<INCLURE{fond=inclure/liste_factures_projet,id_projet,env}/>
+        <hr />
+	</div>
+
+</div>
+
+[(#MODELE{tableau_actions}{id_projet})]
+
+</BOUCLE_projet>

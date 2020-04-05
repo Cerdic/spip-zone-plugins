@@ -1,0 +1,79 @@
+<!-- #SQUELETTE -->
+
+[(#REM)
+
+	Suite demande Claire.
+	Rend un tableau avec les actions les plus r�centes pour un client donn�.
+	Permet de trier selon la personne.
+
+	23/10/2010 : cr�a
+    24/03/2011 : correction p�touille tableau
+
+        @path
+        @params
+
+]
+
+
+[(#REM) On construit un tableau avec tous les users ; clause "id_user IN" de la boucle ]
+	#SET{user,#ARRAY}
+	<BOUCLE_users(USERS)>
+	#SET{user, #GET{user}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_USER}}}
+	</BOUCLE_users>
+
+[(#REM) On r�cup�re les valeurs de personnes �ventuellement pass�s dans l'url ]
+	[(#EVAL{_request('id_user')}|?{' ',''})
+		#SET{user, #EVAL{_request('id_user')} }
+	]
+
+[(#REM) On d�termine quels sont les projets li�s au client ]
+	#SET{projets,#ARRAY}
+	<BOUCLE_projets(PROJETS){id_organisation}>
+	#SET{projets, #GET{projets}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_PROJET}}}
+	</BOUCLE_projets>
+
+
+<fieldset class="liste_actions">
+<legend>Derni&egrave;res actions</legend>
+
+<B_actions>
+#PAGINATION
+<table class="spip tablesorter" summary="<:projets:liste_actions_client">
+	<thead>
+	<tr>
+		<th>ID</th>
+		<th>Date</th>
+		<th>Personne</th>
+		<th>Client</th>
+		<th>Projet</th>
+		<th>Type d'action</th>
+		<th>Libell&eacute;</th>
+		<th>Pass&eacute;es</th>
+		<th>D&eacute;compt&eacute;es</th>
+		<th>X</th>
+	</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_actions(ACTIONS){!par date_action}{id_user IN #GET{user}}{id_projet IN #GET{projets}}{pagination 12}>
+	<tr>
+		<td class="#EDIT{id_action}id ">#ID_ACTION</td>
+		<td class="#EDIT{date_action}date ">[(#DATE_ACTION|affdate{'d/m/Y'}|sinon{'<em>saisir date</em>'})]</td>
+		<td class="#EDIT{id_user} user"><BOUCLE_u(USERS){id_user}>#INITIALES</BOUCLE_u></td>
+		<td><BOUCLE_p1(PROJETS){id_projet}><BOUCLE_c(ORGANISATIONS){id_organisation}>[<a href="[(#URL_ORGANISATION)]">(#NOM|couper{30})</a>]</BOUCLE_c></BOUCLE_p1></td>
+		<td class="#EDIT{id_projet_action} projet"><BOUCLE_p(PROJETS){id_projet}><a href="[(#URL_PAGE{'fiche_projet'}|parametre_url{'id_projet',#ID_PROJET})]">[(#NOM_PROJET|couper{30})]</a></BOUCLE_p></td>
+		<td class="#EDIT{id_type_action}"><BOUCLE_ta(TYPES_ACTIONS){id_type_action}>[(#NOM_TYPE_ACTION|supprimer_numero)]</BOUCLE_ta></td>
+		<td class="libelle #EDIT{action}">#ACTION</td>
+		<td class="temps #EDIT{nb_heures_passees}">[(#NB_HEURES_PASSEES|horaire)]</td>
+		<td class="temps #EDIT{nb_heures_decomptees}">[(#NB_HEURES_DECOMPTEES|horaire)]</td>
+		<td><a href="[(#SELF|parametre_url{id_action,#ID_ACTION})]">X</a></td>
+	</tr>
+	</BOUCLE_actions>
+	</tbody>
+</table>
+
+
+</B_actions>
+<BOUCLE_client(ORGANISATIONS){id_organisation}><a href="[(#URL_ORGANISATION)]" title="Acc&egrave;s &agrave; la fiche #NOM">#NOM</a></BOUCLE_client>
+<//B_actions>
+
+</fieldset>

@@ -1,0 +1,43 @@
+
+<!-- #SQUELETTE -->
+
+[(#REM)
+
+	Chercher parmi toutes les rubriques
+	liées à tous les projets liés à CETTE rubrique
+	celles qui sont de type "maquette" càd :
+	- soit dont le parent le plus proche possédant un mot clé du groupe "type_objet" et donc ce mot soit "cahierDeDeveloppement"
+	- soit sont LE parent a l'id_rubrique 43
+
+]
+#SET{objet,''}
+<B_projet>
+[(#REM) Les projets liés à la rubrique ]
+<BOUCLE_projet(spip_projets_liens){id_objet=#ID_RUBRIQUE}>
+	<!-- la rubrique #ID_RUBRIQUE est liée au projet #ID_PROJET -->
+
+	[(#REM) Toutes les rubriques liées aux projets ]
+	<BOUCLE_lesObjetsLies(spip_projets_liens){id_projet}>
+	<!-- Le projet #ID_PROJET est lié à l'objet #ID_OBJET -->
+	[(#REM) Les objets de type MAQUETTES liés aux projets ]
+	<BOUCLE_objets(RUBRIQUES){id_rubrique=#ID_OBJET}>
+	<a href="#URL_RUBRIQUE{#ID_RUBRIQUE}" title="<:spipmine:voir_maquette_num|attribut_html:>#ID_RUBRIQUE <INCLURE{fond=inclure/titre_rubrique}{id_rubrique}/>">
+	<img src="#URL_SITE_SPIP/[(#LOGO_RUBRIQUE{30,30}|extraire_attribut{src})]" alt="<:spipmine:voir_maquette_num|attribut_html:>#ID_RUBRIQUE <INCLURE{fond=inclure/titre_rubrique}{id_rubrique}/>" width="30" height="30" /></a>
+	<span class="#EDIT{choix_maquette}">&nbsp;&nbsp;</span>
+	</BOUCLE_objets>#SET{objet,oui}
+	</B_objets>
+	<!-- l'objet #ID_OBJET n'est pas un objet de type CDEV -->
+	<//B_objets>
+	</BOUCLE_lesObjetsLies>
+
+</BOUCLE_projet>
+</B_projet>
+<!-- la rubrique #ID_RUBRIQUE n'est liée à aucun projet -->
+<//B_projet>
+[(#GET{objet}|non)
+	<img class="#EDIT{choix_maquette}"
+		src="#URL_SITE_SPIP/[(#LOGO_RUBRIQUE{30,30}|extraire_attribut{src})]"
+		alt="<:spipmine:attribuer_maquette_objet|attribut_html:> [(#ID_RUBRIQUE)]"
+		title="<:spipmine:attribuer_maquette_objet|attribut_html:> [(#ID_RUBRIQUE)]"
+		width="30" height="30" /><span class="#EDIT{choix_maquette}">&nbsp;&nbsp;</span>
+]

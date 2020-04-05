@@ -1,0 +1,80 @@
+#CACHE{0}
+<!-- #SQUELETTE -->
+[(#REM)
+
+	Liste des factures pour un projet.
+
+    La liste des factures desquelles on a décompté des heures pour ce projet;
+    il peut y en avoir plusieurs (voir plus haut)
+
+    06/06/2011 : création
+
+]
+
+[(#SET{depassement,[<img src="(#CHEMIN{./images/png/stop-16.png})" width="16" height="16" alt="<:projets:depassement:>" />]})]
+
+[(#SET{defaut_tri,#ARRAY{
+	date_facture,1,
+	num_facture,1
+}})
+]
+<B_ff>
+#ANCRE_PAGINATION
+
+<table class="spip factures_projet" summary="<:projets:tableau_factures_projet:>">
+
+    <thead>
+	<tr>
+    	<th>Id</th>
+        <th>[(#TRI{num_facture,Num,ajax})]</th>
+        <th>[(#TRI{date_facture,Date,ajax})]</th>
+        <th class="designation">[(#TRI{libelle_facture,Libellé,ajax})]</th>
+        <th class="montant">HT</th>
+        <th class="montant">TTC</th>
+        <th class="montant">Réglé</th>
+        <th class="temps">H. ven.</th>
+        <th class="temps">H. brut</th>
+        <th class="temps">H. affi.</th>
+        <th class="temps">H. rest.</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+	    [(#REM) Toutes les factures impactées par des actions liées au projet ]
+        <BOUCLE_ff(FACTURES actions)
+        	{actions.id_projet}
+            {date_facture?}
+            {num_facture?}
+            {libelle_facture?}
+            {doublons}
+            {tri #ENV{order,date_facture},#GET{defaut_tri}}
+            {pagination 10}>
+        <tr>
+            <td>
+            <a href="#URL_PAGE{fiche_facture, id_facture=#ID_FACTURE}" title="Facture #NUM_FACTURE (#TOTAL_HEURES_RESTANTES heures restantes)"><img src="#CHEMIN{img_pack/factures-16.png}" alt="Facture N°#NUM_FACTURE" /></a>
+            </td>
+            <td>#NUM_FACTURE</td>
+            <td>[(#DATE_FACTURE|affdate{'d/m/Y'})]</td>
+            <td class="designation">[(#LIBELLE_FACTURE|ptobr)]</td>
+            <td class="montant">[(#MONTANT|monetaire)]</td>
+            <td class="montant">[(#MONTANT|ttc|monetaire)]</td>
+            <td class="montant">#DATE_REGLEMENT</td>
+            <td class="temps">[(#NB_HEURES_VENDUES|horaire)]</td>
+            <td class="temps">[(#TOTAL_HEURES_BRUTES|horaire)]</td>
+            <td class="temps">[(#TOTAL_HEURES_UTILISEES|horaire)]</td>
+            <td class="temps">[(#TOTAL_HEURES_RESTANTES|horaire)][(#TOTAL_HEURES_RESTANTES|<{0}|?{[(#GET{depassement})],''})]</td>
+        </tr>
+        </BOUCLE_ff>
+
+	</tbody>
+
+</table>
+</B_ff>
+
+<!-- form name="factures_concernees" action="spip.php" method="get">
+    <input type="hidden" name="page" value="fiche_facture" />
+    <select name="id_facture" onchange="this.form.submit()">
+        <option value="#ID_FACTURE">#NUM_FACTURE</option>
+    </select>
+</form -->

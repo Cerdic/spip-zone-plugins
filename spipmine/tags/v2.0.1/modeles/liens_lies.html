@@ -1,0 +1,17 @@
+
+<!-- #SQUELETTE -->
+
+[(#REM) Le projet en ligne le cas �ch�ant ]
+[(#SITE_PROJET|!={''}|?{'',' '})
+<img class="#EDIT{site_projet}"
+	src="#URL_SITE_SPIP/IMG/png/deroulement_projet_web_off.png"
+	alt="Indiquer une url pour le projet [(#NOM_PROJET|entites_html)]"
+	title="Indiquer une url pour le projet [(#NOM_PROJET|entites_html)]"
+	width="30" height="30" />
+]
+[(#SITE_PROJET|!={''}|?{' ',''})
+<a href="#SITE_PROJET" title="Voir en ligne le projet [(#NOM_PROJET|entites_html)]">
+<img src="#URL_SITE_SPIP/IMG/rubon82.png" alt="Voir en ligne le projet [(#NOM_PROJET|entites_html)]" width="30" height="30" /></a>
+<span class="#EDIT{site_projet}">&nbsp;</span>
+]
+

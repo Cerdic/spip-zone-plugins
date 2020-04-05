@@ -1,0 +1,40 @@
+
+<h3><:projets:tous_clients:></h3>
+
+<B_clients>
+<table summary="<:projets:tableau_clients:>" class='spip'>
+	<thead>
+	<tr>
+		<th><:projets:num_client:></th>
+		<th><:projets:nom_client:></th>
+		<th><:projets:nom_court:></th>
+		<th><:projets:code_postal:></th>
+		<th><:projets:ville:></td>
+		<th>Actions</td>
+	</tr>
+	</thead>
+	<tbody>
+<BOUCLE_clients(CLIENTS){par nom_client}{pagination 10}>
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+		<td>#ID_CLIENT</td>
+		<td class="#EDIT{nom_client}">#NOM_CLIENT</td>
+		<td class="#EDIT{nom_court}">#NOM_COURT</td>
+		<td class="#EDIT{code_postal}">#CODE_POSTAL</td>
+		<td class="#EDIT{ville}">#VILLE</td>
+		<td>
+			[(#AUTORISER{voir,client,#ID_CLIENT})
+				<a href='[(#URL_ECRIRE{client_voir}|parametre_url{id_client,#ID_CLIENT})]'><:projets:action_voir:></a>
+			]
+			[(#AUTORISER{modifier,client,#ID_CLIENT})
+				|
+				<a href='[(#URL_ECRIRE{client_edit}|parametre_url{id_client,#ID_CLIENT})]'><:projets:action_modifier:></a>
+				|
+				<a href='[(#URL_ACTION_AUTEUR{supprimer_client,#ID_CLIENT,#SELF})]'><:projets:action_supprimer:></a>
+			]
+		</td>
+	</tr>
+</BOUCLE_clients>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION)</p>]
+</B_clients>

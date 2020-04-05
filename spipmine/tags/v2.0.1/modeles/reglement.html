@@ -1,0 +1,49 @@
+
+<!-- projets/squelettes/modeles/reglement.html -->
+
+[(#REM)
+	Affiche pour une facture donnée, la ou les dates et le montant(s) réglé(s).
+	Distinction entre :
+	- non réglée (aucun règlement)
+	- partiellement réglée (total réglé > 0 mais < total du)
+	- réglée (total réglé = total du)
+]
+
+<BOUCLE_f(FACTURES){id_facture}>
+#SET{total,0}
+<B_r>
+	<div class="spip reglements">
+	<BOUCLE_r(REGLEMENTS){id_facture}>
+	[(#SET{total, [(#EVAL{[(#MONTANT)]+[(#GET{total})]})]})]
+	<dl>
+		<dd class="col1">[(#DATE_REGLEMENT|affdate{'d/m/Y'})]&nbsp;</dd>
+		<dd class="col2">[(#MONTANT|monetaire)]</dd>
+		<dd class="col3">[(#ID_TYPE_REGLEMENT|=={1}|oui)C][(#ID_TYPE_REGLEMENT|=={2}|oui)V]</dd>
+	</dl>
+	</BOUCLE_r>
+	<dl>
+		<dd class="col1"><:projets:total_regle:></dd>
+		<dd class="col2">[(#GET{total}|monetaire)]</dd>
+        <dd class="col3">&nbsp;</dd>
+	</dl>[(#SET{solde,[(#EVAL{[(#GET{total})]-[(#TOTAL_HT|ttc)]})]})]
+	<dl[(#GET{solde}|<{0}|oui) class="hachure alert"]>
+		<dd class="col1"><:projets:reste_du:></dd>
+		<dd class="col2">[(#GET{solde}|monetaire)]</dd>
+        <dd class="col3">&nbsp;</dd>
+	</dl>
+    </div>
+
+</B_r>
+
+<div class="spip reglements">
+	<dl class="hachure alert">
+		<dd class="col1"><:projets:reste_du:></dd>
+		<dd class="col2">[(#EVAL{[(#GET{total})]-[(#TOTAL_HT|ttc)]}|monetaire)]</dd>
+        <dd class="col3"><:projets:non_regle:></dd>
+	</dl>
+</div>
+<//B_r>
+</BOUCLE_f>
+</B_f>
+Aucune facture.
+<//B_f>

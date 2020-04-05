@@ -1,0 +1,42 @@
+
+<!-- projets/inclure/voir_en_ligne.html -->
+
+[(#REM)
+
+	Affiche une ligne avec des icones pour chaque élément du gestionnaire pouvant être lié au projet;
+	cela peut être par exemple :
+	- un cahier des charges détaillé
+	- un comparatif (benchmark) de sites
+	- une maquette graphique
+	- un cahier de développement
+	- une documentation en ligne
+	
+	Cela ne peut pas être une formation.
+]
+
+<BOUCLE_p(PROJETS){id_projet=#ENV{id_projet}}>
+
+<div id="voir_en_ligne" class="bouton">
+
+	<h3 class="h3"><:projet:voir_en_ligne:></h3>
+	
+   [(#MODELE{projets_lies}{id_projet}{id_rubrique=#ENV{id_rubrique}})]
+    [(#PLUGIN{benchmark}|oui)
+    [(#MODELE{benchmark_lies}{id_projet})]
+    ]
+   [(#MODELE{maquettes_liees}{id_projet})]
+   [(#MODELE{cdc_lies}{id_projet})]
+    [(#PLUGIN{factures}|oui)
+    [(#MODELE{devis_lies}{id_projet})]
+    ]
+   [(#MODELE{cdev_lies}{id_projet})]
+   [(#MODELE{docs_liees}{id_projet})]
+   [(#MODELE{liens_lies}{id_projet})]
+	
+<hr />
+</div>
+
+</BOUCLE_p>
+</B_p>
+[Impossible de déterminer les icones pour le projet (#ENV{id_projet}).]
+<//B_p>

@@ -1,0 +1,45 @@
+<!-- #SQUELETTE -->
+
+[(#REM)
+	@path
+]
+<B_c>
+
+<BOUCLE_c(ORGANISATIONS){id_organisation}>
+
+	<fieldset class="info_client">
+
+		<legend class="#EDIT{nom}"><a href="[(#URL_ECRIRE{organisation}|parametre_url{id_organisation,#ID_ORGANISATION})]">#NOM</a></legend>
+
+		<table summary="<:projets:tableau_coordonnees:>">
+			<tr>
+
+				<td>
+				<fieldset><legend>Adresse</legend>
+
+				<BOUCLE_adr(ADRESSES){id_auteur}>
+				[<span class="#EDIT{adresse_1}">(#VOIE)</span>]
+				[<br /><span class="#EDIT{adresse_2}">(#COMPLEMENT)</span>]
+				[<br /><span class="#EDIT{boite_postale}">(#BOITE_POSTALE)</span>]
+				[<p><span class="#EDIT{code_postal}">(#CODE_POSTAL)</span>] [<span class="#EDIT{ville}">(#VILLE)</span></p>]
+				</BOUCLE_adr>
+                </fieldset>
+				</td>
+
+				<td>
+				<fieldset><legend>Contacts</legend>
+				<INCLURE{fond=tableaux/tableau_contacts}{id_organisation}>
+				</fieldset>
+				</td>
+			</tr>
+		</table>
+
+
+	</fieldset>
+
+</BOUCLE_c>
+
+</B_c>
+
+Client non trouv&eacute;.
+<//B_c>

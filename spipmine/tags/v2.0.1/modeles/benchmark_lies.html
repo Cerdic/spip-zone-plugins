@@ -1,0 +1,19 @@
+
+<!-- #SQUELETTE -->
+
+[(#REM)
+	Le BENCHMARK (une des rubriques dont le parent est la rubrique 73
+    liées au projet dont l'id_projet est passé en paramètre.
+]
+[(#NUM_BENCHMARK|!={0}|?{'',' '})
+<img class="#EDIT{choix_benchmark}"
+    src="#URL_SITE_SPIP/[(#LOGO_RUBRIQUE{30,30}|extraire_attribut{src})]"
+    alt="<:spipmine:choisir_benchmark_projet:> [(#NOM_PROJET|entites_html)]"
+    title="<:spipmine:choisir_benchmark_projet:> [(#NOM_PROJET|entites_html)]"
+    width="30" height="30" />
+]
+[(#NUM_BENCHMARK|!={0}|?{' ',''})
+<a href="#URL_RUBRIQUE{#NUM_BENCHMARK}" title="<:spipmine:voir_benchmark_projet|attribut_html:> [(#NOM_PROJET|entites_html)]">
+<img src="#URL_SITE_SPIP/[(#LOGO_RUBRIQUE{30,30}|extraire_attribut{src})]" alt="<:spipmine:voir_benchmark_projet|attribut_html:> [(#NOM_PROJET|entites_html)]" width="30" height="30" /></a>
+<span class="#EDIT{choix_benchmark} sep">&nbsp;</span>
+]

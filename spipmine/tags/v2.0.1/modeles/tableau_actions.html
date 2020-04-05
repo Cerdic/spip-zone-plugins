@@ -1,0 +1,80 @@
+
+<!-- #SQUELETTE -->
+
+[(#REM)
+
+    Package : plugin Actions (ou DayFill)
+
+	Cree un tableau avec la liste des actions relatives a un projet.
+	On passe le id_projet dans l'url ou dans le formulaire
+	La mise en forme s'effectue dans les CSS dans la partie "tableau_actions"
+
+	Devrait à terme etre sorti dans le plugin "Dayfill"
+
+    ToDo
+    ----
+        - supprimer le php en ligne 44
+        - utiliser un formulaire SPIP en ligne 79
+]
+
+<?php
+
+if( isset($_GET['traitement']) ) {
+
+	if(isset($_GET['table'])  && isset($_GET['condition']) && isset($_GET['id_table']) ) {
+
+		$table		=	$_GET['table'];
+		$condition	=	$_GET['condition'];
+		$where		=	$_GET['id_table'];
+
+		traitement_bdd($table,$condition,$where);
+	}
+}
+
+?>
+
+<B_a>
+<p style="color:#FF0000; clear:both">
+<?php if( isset($_GET['message'])) { if ($_GET['message'] == 'ok') { echo "_T('projets:message_action_supprime_ok')"; } else { echo _T('projets:message_action_supprime_nok'); } } ?>
+</p>
+<table class="spip tableau_actions" summary="<:projets:titre_tableau_actions:>">
+<tr class="row_first">
+	<th class="id"><:dayfill:label_id_projet:></th>
+	<th class="date_action"><:dayfill:label_date_action:></th>
+	<th class="heure_debut"><:dayfill:label_heure_debut:></th>
+	<th class="heure_fin"><:dayfill:label_heure_fin:></th>
+	<th class="type_action"><:dayfill:label_type_action:></th>
+	<th class="action">Description</th>
+	<th class="initiales">ID</th>
+	<th class="heures_passees">hp</th>
+	<th class="heures_facturees">hf</th>
+	<th class="facture">N&deg; facture</th>
+	<th>&nbsp;</th>
+</tr>
+<BOUCLE_a(PROJETS_ACTIVITES){id_projet}{par date_debut}>
+<tr[ class="(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})"]>
+	<td class="#EDIT{id_projet} id"><a name="action_#ID_ACTION">[(#ID_PROJETS_ACTIVITE)]</a></td>
+	<td class="#EDIT{date_action} date_action">[(#DATE_ACTION|affdate{'d/m/Y'})]</td>
+	<td class="#EDIT{heure_debut} heure_debut">#HEURE_DEBUT</td>
+	<td class="#EDIT{heure_fin} heure_fin">#HEURE_FIN</td>
+	<td class="#EDIT{id_type_action}"><BOUCLE_ta(TYPES_ACTIONS){id_type_action}>[(#NOM_TYPE_ACTION|supprimer_numero)]</BOUCLE_ta></td>
+	<td class="#EDIT{action} action">#ACTION</td>
+	<td class="#EDIT{id_user} initiales"><BOUCLE_u(USERS){id_user}>#INITIALES</BOUCLE_u></td>
+	<td class="#EDIT{nb_heures_passees} heures_passees">[(#NB_HEURES_PASSEES|horaire)]</td>
+	<td class="#EDIT{nb_heures_decomptees} heures_facturees">[(#NB_HEURES_DECOMPTEES|horaire)]</td>
+	<td class="facture">
+		[(#REM) on affiche la facture avec un lien au cas ou il y a une facture affectee a cette action ]
+		<span class="#EDIT{liste_factures}"><B_f><BOUCLE_f(FACTURES){id_facture}><a href="[(#URL_PAGE{fiche_conso}|parametre_url{'id_facture',#ID_FACTURE})]">#NUM_FACTURE</a></BOUCLE_f></B_f>
+		<em>choisir...</em>
+		<//B_f></span>
+	</td>
+	<td class="sup"><div class="survol">
+		<a href="[(#SELF|parametre_url{traitement,'delete'}|parametre_url{table,'spip_actions'}|parametre_url{condition,'id_action'}|parametre_url{id_table,#ID_ACTION})]" onclick="return confirm('Etes vous sur de vouloir supprimer cette action?');" ></a></div>
+	</td>
+
+</tr>
+</BOUCLE_a>
+</table>
+</B_a>
+<p class="erreur">pas d'action pour le projet #ENV{id_projet}</p>
+<//B_a>
