@@ -1,0 +1,22 @@
+<paquet
+	prefix="rubriques_virtuelles"
+	categorie="navigation"
+	version="0.1.2"
+	etat="stable"
+	compatibilite="[3.1.0;3.2.*]"
+	logo="images/rubriques_virtuelles-32.png"
+	schema="0.0.3"
+>
+
+	<nom>Rubriques virtuelles</nom>
+
+	<auteur lien="http://www.kent1.info/">kent1</auteur>
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/rubriques_virtuelles.php" />
+	<pipeline nom="affiche_gauche" inclure="rubriques_virtuelles_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="rubriques_virtuelles_pipelines.php" />
+	<pipeline nom="autoriser" inclure="rubriques_virtuelles_pipelines.php" />
+	<pipeline nom="styliser" inclure="rubriques_virtuelles_pipelines.php" />
+	<pipeline nom="objet_compte_enfants" inclure="rubriques_virtuelles_pipelines.php" />
+	<pipeline nom="calculer_rubriques" inclure="rubriques_virtuelles_pipelines.php" />
+</paquet>
