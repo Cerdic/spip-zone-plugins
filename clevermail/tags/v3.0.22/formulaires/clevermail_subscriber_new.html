@@ -1,0 +1,64 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM" id="formulaire_#FORM-#ENV{id,new}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form action="#ENV{action}" method="post" enctype="multipart/form-data"><div>
+	  #ACTION_FORMULAIRE{#ENV{action}}
+	  <fieldset>
+	    <legend><:clevermail:source_des_abonnes:></legend>
+			<ul>
+				#SET{name,cm_file}
+				#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				#SET{obli,''}
+				<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}"><:clevermail:a_partir_csv:></label>
+					[<span class='erreur_message'>(#GET{erreurs})</span>]
+					<input type="file" class="file" name="#GET{name}" id="#GET{name}" size="25" maxlength="255" value="#ENV{#GET{name}}" />
+				</li>
+				#SET{name,cm_subs}
+				#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				#SET{obli,''}
+				<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}"><:clevermail:emails:></label>
+					[<span class='erreur_message'>(#GET{erreurs})</span>]
+					<textarea name="#GET{name}" id="#GET{name}" cols="80" rows="10" wrap="virtual" class="textarea">#ENV{#GET{name}}</textarea>
+				</li>
+			</ul>
+    </fieldset>
+    <fieldset>
+      <legend><:clevermail:selection_des_listes:></legend>
+      <ul>
+         #SET{name,cm_lists}
+         #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+         #SET{obli,'obligatoire'}
+         <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+           <label for="#GET{name}"><:clevermail:abonne_lettres:></label>
+           [<span class='erreur_message'>(#GET{erreurs})</span>]
+           <select name="#GET{name}[]" id="#GET{name}" class="select" multiple="multiple" size="4">
+             <BOUCLE_lists(CM_LISTS){par lst_name}>
+[(#REM) TODO   <option value="#LST_ID"[(#ENV{#GET{name}}|array_intersect{#ARRAY{#LST_ID}}|sizeof|>{0}|oui) selected="selected"]>#LST_NAME</option>]
+               <option value="#LST_ID">#LST_NAME</option>
+             </BOUCLE_lists>
+           </select>
+         </li>
+         #SET{name,cm_mode}
+         #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+         #SET{obli,''}
+         <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+           <label for="#GET{name}"><:clevermail:mode:></label>
+           [<span class='erreur_message'>(#GET{erreurs})</span>]
+           #SET{value,1}
+	         <div class="choix">
+	           <input type="radio" name="#GET{name}" id="#GET{name}#GET{value}" class="radio" value="#GET{value}"[ (#ENV{#GET{name}}|=={#GET{value}}|oui)checked="checked"] />
+	           <label for="#GET{name}#GET{value}"><:clevermail:choix_version_html:></label>
+	         </div>
+           #SET{value,0}
+           <div class="choix">
+	           <input type="radio" name="#GET{name}" id="#GET{name}#GET{value}" class="radio" value="#GET{value}"[ (#ENV{#GET{name}}|=={#GET{value}}|oui)checked="checked"] />
+	           <label for="#GET{name}#GET{value}"><:clevermail:choix_version_texte:></label>
+	         </div>
+         </li>
+	     </ul>
+	   </fieldset> 
+	    <p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+</div>

@@ -1,0 +1,57 @@
+<BOUCLE_list(CM_LISTS){lst_id}>
+  #SET{nbPosts,0}
+  #SET{posts,#ARRAY}
+  <BOUCLE_posts(CM_POSTS){lst_id}>
+    #SET{posts,#GET{posts}|push{#PST_ID}}
+  </BOUCLE_posts>
+    #SET{nbPosts,#TOTAL_BOUCLE}
+  </B_posts>
+  <BOUCLE_subscribers(CM_LISTS_SUBSCRIBERS){lst_id} />#SET{nbSubs,#TOTAL_BOUCLE}<//B_subscribers>
+  <BOUCLE_posts_new(CM_POSTS){lst_id}{pst_date_sent=0} />#SET{nbPostsNew,#TOTAL_BOUCLE}<//B_posts_new>
+  <BOUCLE_posts_queued(CM_POSTS_QUEUED){pst_id IN #GET{posts}}{fusion pst_id} />#SET{nbPostsQueued,#TOTAL_BOUCLE}<//B_posts_queued>
+  #SET{nbPostsSent,#GET{nbPosts}|moins{#GET{nbPostsNew}}|moins{#GET{nbPostsQueued}}}
+
+  <li class="item" id="lst#LST_ID">
+    <h3>[(#LST_NAME|replace{"^.*/", ""})]</h3>
+    [<div class="description">(#LST_COMMENT)</div>]
+    <ul>
+      <li><:clevermail:moderation:> : [(#VAL{clevermail:mod_#LST_MODERATION}|_T)]</li>
+      <li><:clevermail:automatisation:> : [(#VAL{clevermail:auto_mode_#LST_AUTO_MODE}|_T)]</li>
+      <li>
+        [(#GET{nbSubs}|>{0}|oui)
+          <a href="[(#URL_ECRIRE{clevermail_subscribers}|parametre_url{lst_id,#LST_ID})]">#GET{nbSubs}[ (#GET{nbSubs}|singulier_ou_pluriel{clevermail:abonne,clevermail:abonnes})]</a>
+          &nbsp;|&nbsp;
+          <a href="#URL_ACTION_AUTEUR{clevermail_list_subscribers_export,#LST_ID}" target="_blank"><:clevermail:exporter:></a>
+        ]
+        [(#GET{nbSubs}|>{0}|non)
+          <:clevermail:aucun_abonne:>
+        ]
+      </li>
+      <li>
+        [(#GET{nbPosts}|>{0}|oui)
+          <a href="[(#URL_ECRIRE{clevermail_posts}|parametre_url{lst_id,#LST_ID})]">#GET{nbPosts} [
+            (#GET{nbPosts}|singulier_ou_pluriel{clevermail:message,clevermail:messages})]</a> :
+            [(#GET{nbPostsNew}|aucun_ou_un_ou_plusieurs{clevermail:aucun_message_en_attente,clevermail:un_message_en_attente,clevermail:plusieurs_messages_en_attente})],
+            [(#GET{nbPostsQueued}|aucun_ou_un_ou_plusieurs{clevermail:aucun_message_en_cours_envoi,clevermail:un_message_en_cours_envoi,clevermail:plusieurs_messages_en_cours_envoi})],
+            [(#GET{nbPostsSent}|aucun_ou_un_ou_plusieurs{clevermail:aucun_message_envoye,clevermail:un_message_envoye,clevermail:plusieurs_messages_envoyes})]
+        ]
+        [(#GET{nbPosts}|>{0}|non)
+          <:clevermail:aucun_message:>
+        ]
+      </li>
+    </ul>
+    #ENV{err_msg}
+    [(#ENV{err_msg}|!={''}|oui)
+      [(#ENV{err_lst}|=={#LST_ID}|oui)
+        <p class="error">[(#VAL{clevermail:#ENV{err_msg}}|_T)]</p>
+      ]
+    ]
+    <ul class="actions">
+      <li class="lettre_modifier"><a href="[(#URL_ECRIRE{clevermail_list_edit}|parametre_url{lst_id,#LST_ID})]"><:clevermail:modifier:></a></li>
+      [(#GET{nbSubs}|>{0}|non)
+        <li class="lettre_supprimer">[(#BOUTON_ACTION{<:clevermail:supprimer:>,#URL_ACTION_AUTEUR{clevermail_list_remove,#LST_ID,#SELF},ajax,<:clevermail:supprimer_confirmer:>})]</li>
+      ]
+      <li class="message_creer">[(#BOUTON_ACTION{<:clevermail:nouveau_message:>,#URL_ACTION_AUTEUR{clevermail_post_create,#LST_ID,#URL_ECRIRE{clevermail_posts,lst_id=#LST_ID}}})]</li>
+    </ul>
+  </li>
+</BOUCLE_list>

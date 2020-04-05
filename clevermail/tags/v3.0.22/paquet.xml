@@ -1,0 +1,34 @@
+<paquet
+	prefix="clevermail"
+	categorie="communication"
+	version="3.0.22"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/fatcow/32/email_open.png"
+	schema="0.9.1"
+	documentation="https://contrib.spip.net/CleverMail"
+	
+>	
+
+	<nom>CleverMail</nom>
+
+	<auteur>Thomas Beaumanoir</auteur>
+	<auteur>Nicolas Hoizey</auteur>
+	<auteur>Stéphanie Caron</auteur>
+	<auteur lien="http://www.clever-age.com/">Clever Age</auteur>
+	<credit lien="http://www.fatcow.com/free-icons">Ic&#244;nes issues de la collection FatCow.</credit>
+
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/clevermail.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/clevermail.php" />
+	<pipeline nom="header_prive" inclure="clevermail_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="clevermail_pipelines.php" />
+  
+
+	<necessite nom="facteur" compatibilite="[3.6.2;]" />
+
+
+	<menu nom="clevermail" titre="clevermail:clevermail" parent="bando_publication" icone="images/fatcow/16/email_open.png" position="1" action="clevermail_lists" />
+	<menu nom="clevermail2" titre="clevermail:clevermail" parent="naviguer" icone="images/fatcow/32/email_open.png" action="clevermail_lists" />
+
+</paquet>

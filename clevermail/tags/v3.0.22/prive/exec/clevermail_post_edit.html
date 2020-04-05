@@ -1,0 +1,26 @@
+<BOUCLE_post(CM_POSTS){pst_id=#ENV{pst_id}}>
+  <BOUCLE_list(CM_LISTS){lst_id}>
+<!--#hierarchie-->
+<div id=haut">
+	<div id="chemin">
+		<a href="#URL_ECRIRE{clevermail_lists}"><:clevermail:administration:></a>
+		&gt; <a href="#URL_ECRIRE{clevermail_posts,lst_id=#LST_ID}">#LST_NAME</a>
+		<strong class="on">&gt; <:clevermail:modifier_message:></strong>
+	</div>
+</div>
+<!--/#hierarchie-->
+    <h1>Liste « #LST_NAME »</h1>
+  <h2><:clevermail:modifier_message:></h2>
+  [(#REM)<div class="ajax">]
+    #FORMULAIRE_CLEVERMAIL_POST_EDIT{#ENV{pst_id}}
+  [(#REM)</div>]
+	<!--#navigation-->
+  	<INCLURE{fond=prive/menu}>
+	<!--/#navigation-->
+	<!--#extra-->
+	<!--/#extra-->
+  </BOUCLE_list>
+</BOUCLE_post>
+</B_post>
+  Impossible, ce message n'existe pas.
+<//B_post>

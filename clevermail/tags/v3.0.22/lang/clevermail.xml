@@ -1,0 +1,26 @@
+<traduction
+	module="clevermail"
+	id="clevermail--clevermail-d62c0"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip-contrib-extensions/clevermail.git"
+	reference="fr">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/clevermail?lang_cible=de" total="222" traduits="222" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="kennethkeen" lien="https://trad.spip.net/auteur/kennethkeen" />
+		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
+		<traducteur nom="RealET" lien="https://trad.spip.net/auteur/realet" />
+		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
+	</langue>
+	<langue code="en" url="https://trad.spip.net/tradlang_module/clevermail?lang_cible=en" total="222" traduits="222" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
+		<traducteur nom="EScott" lien="https://trad.spip.net/auteur/escott" />
+		<traducteur nom="Gilles" lien="https://trad.spip.net/auteur/gilles" />
+		<traducteur nom="Nicolas Hoizey" lien="https://trad.spip.net/auteur/nicolas-hoizey" />
+		<traducteur nom="RealET" lien="https://trad.spip.net/auteur/realet" />
+	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/clevermail?lang_cible=fr" total="222" traduits="222" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/clevermail?lang_cible=sk" total="222" traduits="222" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
+		<traducteur nom="RealET" lien="https://trad.spip.net/auteur/realet" />
+	</langue>
+</traduction>

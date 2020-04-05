@@ -1,0 +1,334 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM" id="formulaire_#FORM-#ENV{id,new}">
+  [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+  [(#ENV{editable})
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    <form action="#ENV{action}" method="post"><div>
+      #ACTION_FORMULAIRE{#ENV{action}}
+      <input type="hidden" name="lst_id" value="#ENV{lst_id}" />
+      <fieldset>
+        <legend><:clevermail:configuration_generale:></legend>
+        <ul>
+          #SET{name,lst_name}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,'obligatoire'}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:nom:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" />
+          </li>
+          #SET{name,lst_comment}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,''}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:description:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <textarea name="#GET{name}" id="#GET{name}" cols="50" rows="5" wrap="virtual" class="textarea">#ENV{#GET{name}}</textarea>
+          </li>
+          #SET{name,lst_moderation}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,''}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:moderation:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <p class="explication"><:clevermail:mod_explication:></p>
+            <select name="#GET{name}" id="#GET{name}" class="select">
+              #SET{mode,open}
+              <option value="#GET{mode}"[(#GET{mode}|=={#ENV{lst_moderation}}|oui) selected="selected"]><:clevermail:mod_open:></option>
+              #SET{mode,email}
+              <option value="#GET{mode}"[(#GET{mode}|=={#ENV{lst_moderation}}|oui) selected="selected"]><:clevermail:mod_email:></option>
+              #SET{mode,mod}
+              <!-- pas encore géré <option value="#GET{mode}"[(#GET{mode}|=={#ENV{lst_moderation}}|oui) selected="selected"]><:clevermail:mod_mod:></option> -->
+              #SET{mode,closed}
+              <option value="#GET{mode}"[(#GET{mode}|=={#ENV{lst_moderation}}|oui) selected="selected"]><:clevermail:mod_closed:></option>
+            </select>
+          </li>
+          #SET{name,lst_moderator_email}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,'obligatoire'}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:email_moderateur:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" />
+          </li>
+          #SET{name,lst_subject_tag}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,''}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:prefixer_messages:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <p class="explication"><:clevermail:prefixer_messages_explication:></p>
+            <input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}" value="1" [(#ENV{#GET{name}}|=={1}|oui) checked="checked"] />
+          </li>
+        </ul>
+      </fieldset>
+      <fieldset>
+        <legend><:clevermail:confirmation_inscription:></legend>
+        <ul>
+          #SET{name,lst_subscribe_subject}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,''}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:sujet:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" />
+          </li>
+          #SET{name,lst_subscribe_text}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,''}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:description:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <textarea name="#GET{name}" id="#GET{name}" cols="50" rows="5" wrap="virtual" class="textarea">#ENV{#GET{name}}</textarea>
+          </li>
+        </ul>
+      </fieldset>
+      <fieldset>
+        <legend><:clevermail:confirmation_desinscription:></legend>
+        <ul>
+          #SET{name,lst_unsubscribe_subject}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,''}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:sujet:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" />
+          </li>
+          #SET{name,lst_unsubscribe_text}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,''}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:description:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <textarea name="#GET{name}" id="#GET{name}" cols="50" rows="5" wrap="virtual" class="textarea">#ENV{#GET{name}}</textarea>
+          </li>
+        </ul>
+      </fieldset>
+      <fieldset>
+        <legend><:clevermail:url_templates:></legend>
+        <ul>
+          #SET{name,lst_url_html}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,'obligatoire'}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:version_html:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <p class="explication"><:clevermail:url_templates_explication:></p>
+            <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" />
+          </li>
+          #SET{name,lst_url_text}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,''}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:version_txt:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <p class="explication"><:clevermail:version_txt_explication:></p>
+            <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" />
+          </li>
+        </ul>
+      </fieldset>
+      <fieldset>
+        <legend><:clevermail:automatisation:></legend>
+        <ul>
+          #SET{name,lst_auto_mode}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,''}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:auto_mode:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <select name="#GET{name}" id="#GET{name}" class="select">
+              #SET{mode,none}
+              <option value="#GET{mode}"[(#GET{mode}|=={#ENV{lst_auto_mode}}|oui) selected="selected"]><:clevermail:auto_mode_none:></option>
+              #SET{mode,day}
+              <option value="#GET{mode}"[(#GET{mode}|=={#ENV{lst_auto_mode}}|oui) selected="selected"]><:clevermail:auto_mode_day:></option>
+              #SET{mode,week}
+              <option value="#GET{mode}"[(#GET{mode}|=={#ENV{lst_auto_mode}}|oui) selected="selected"]><:clevermail:auto_mode_week:></option>
+              #SET{mode,month}
+              <option value="#GET{mode}"[(#GET{mode}|=={#ENV{lst_auto_mode}}|oui) selected="selected"]><:clevermail:auto_mode_month:></option>
+            </select>
+          </li>
+          #SET{name,lst_auto_hour}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,''}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:auto_heure_creation:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <p class="explication"><:clevermail:auto_heure_creation_explication:></p>
+            <select name="#GET{name}" id="#GET{name}" class="select">
+              #SET{hour,0}
+              <option value="#GET{hour}"[(#GET{hour}|=={#ENV{lst_auto_hour}}|oui) selected="selected"]>#GET{hour}<:clevermail:auto_heure_creation_minutes:></option>
+              #SET{hour,1}
+              <option value="#GET{hour}"[(#GET{hour}|=={#ENV{lst_auto_hour}}|oui) selected="selected"]>#GET{hour}<:clevermail:auto_heure_creation_minutes:></option>
+              #SET{hour,2}
+              <option value="#GET{hour}"[(#GET{hour}|=={#ENV{lst_auto_hour}}|oui) selected="selected"]>#GET{hour}<:clevermail:auto_heure_creation_minutes:></option>
+              #SET{hour,3}
+              <option value="#GET{hour}"[(#GET{hour}|=={#ENV{lst_auto_hour}}|oui) selected="selected"]>#GET{hour}<:clevermail:auto_heure_creation_minutes:></option>
+              #SET{hour,4}
+              <option value="#GET{hour}"[(#GET{hour}|=={#ENV{lst_auto_hour}}|oui) selected="selected"]>#GET{hour}<:clevermail:auto_heure_creation_minutes:></option>
+              #SET{hour,5}
+              <option value="#GET{hour}"[(#GET{hour}|=={#ENV{lst_auto_hour}}|oui) selected="selected"]>#GET{hour}<:clevermail:auto_heure_creation_minutes:></option>
+              #SET{hour,6}
+              <option value="#GET{hour}"[(#GET{hour}|=={#ENV{lst_auto_hour}}|oui) selected="selected"]>#GET{hour}<:clevermail:auto_heure_creation_minutes:></option>
+              #SET{hour,7}
+              <option value="#GET{hour}"[(#GET{hour}|=={#ENV{lst_auto_hour}}|oui) selected="selected"]>#GET{hour}<:clevermail:auto_heure_creation_minutes:></option>
+              #SET{hour,8}
+              <option value="#GET{hour}"[(#GET{hour}|=={#ENV{lst_auto_hour}}|oui) selected="selected"]>#GET{hour}<:clevermail:auto_heure_creation_minutes:></option>
+              #SET{hour,9}
+              <option value="#GET{hour}"[(#GET{hour}|=={#ENV{lst_auto_hour}}|oui) selected="selected"]>#GET{hour}<:clevermail:auto_heure_creation_minutes:></option>
+              #SET{hour,10}
+              <option value="#GET{hour}"[(#GET{hour}|=={#ENV{lst_auto_hour}}|oui) selected="selected"]>#GET{hour}<:clevermail:auto_heure_creation_minutes:></option>
+              #SET{hour,11}
+              <option value="#GET{hour}"[(#GET{hour}|=={#ENV{lst_auto_hour}}|oui) selected="selected"]>#GET{hour}<:clevermail:auto_heure_creation_minutes:></option>
+              #SET{hour,12}
+              <option value="#GET{hour}"[(#GET{hour}|=={#ENV{lst_auto_hour}}|oui) selected="selected"]>#GET{hour}<:clevermail:auto_heure_creation_minutes:></option>
+              #SET{hour,13}
+              <option value="#GET{hour}"[(#GET{hour}|=={#ENV{lst_auto_hour}}|oui) selected="selected"]>#GET{hour}<:clevermail:auto_heure_creation_minutes:></option>
+              #SET{hour,14}
+              <option value="#GET{hour}"[(#GET{hour}|=={#ENV{lst_auto_hour}}|oui) selected="selected"]>#GET{hour}<:clevermail:auto_heure_creation_minutes:></option>
+              #SET{hour,15}
+              <option value="#GET{hour}"[(#GET{hour}|=={#ENV{lst_auto_hour}}|oui) selected="selected"]>#GET{hour}<:clevermail:auto_heure_creation_minutes:></option>
+              #SET{hour,16}
+              <option value="#GET{hour}"[(#GET{hour}|=={#ENV{lst_auto_hour}}|oui) selected="selected"]>#GET{hour}<:clevermail:auto_heure_creation_minutes:></option>
+              #SET{hour,17}
+              <option value="#GET{hour}"[(#GET{hour}|=={#ENV{lst_auto_hour}}|oui) selected="selected"]>#GET{hour}<:clevermail:auto_heure_creation_minutes:></option>
+              #SET{hour,18}
+              <option value="#GET{hour}"[(#GET{hour}|=={#ENV{lst_auto_hour}}|oui) selected="selected"]>#GET{hour}<:clevermail:auto_heure_creation_minutes:></option>
+              #SET{hour,19}
+              <option value="#GET{hour}"[(#GET{hour}|=={#ENV{lst_auto_hour}}|oui) selected="selected"]>#GET{hour}<:clevermail:auto_heure_creation_minutes:></option>
+              #SET{hour,20}
+              <option value="#GET{hour}"[(#GET{hour}|=={#ENV{lst_auto_hour}}|oui) selected="selected"]>#GET{hour}<:clevermail:auto_heure_creation_minutes:></option>
+              #SET{hour,21}
+              <option value="#GET{hour}"[(#GET{hour}|=={#ENV{lst_auto_hour}}|oui) selected="selected"]>#GET{hour}<:clevermail:auto_heure_creation_minutes:></option>
+              #SET{hour,22}
+              <option value="#GET{hour}"[(#GET{hour}|=={#ENV{lst_auto_hour}}|oui) selected="selected"]>#GET{hour}<:clevermail:auto_heure_creation_minutes:></option>
+              #SET{hour,23}
+              <option value="#GET{hour}"[(#GET{hour}|=={#ENV{lst_auto_hour}}|oui) selected="selected"]>#GET{hour}<:clevermail:auto_heure_creation_minutes:></option>
+            </select>
+          </li>
+          #SET{name,lst_auto_week_days}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,'obligatoire'}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:auto_week_days:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <p class="explication"><:clevermail:auto_jours_semaine_explication:></p>
+            <select name="#GET{name}&#91;&#93;" multiple="multiple" size="7" id="#GET{name}">
+              #SET{day,1}
+              <option value="#GET{day}"[(#GET{day}|in_array{#ENV{#GET{name}}}|oui) selected="selected"]><:clevermail:auto_week_day_monday:></option>
+              #SET{day,2}
+              <option value="#GET{day}"[(#GET{day}|in_array{#ENV{#GET{name}}}|oui) selected="selected"]><:clevermail:auto_week_day_tuesday:></option>
+              #SET{day,3}
+              <option value="#GET{day}"[(#GET{day}|in_array{#ENV{#GET{name}}}|oui) selected="selected"]><:clevermail:auto_week_day_wednesday:></option>
+              #SET{day,4}
+              <option value="#GET{day}"[(#GET{day}|in_array{#ENV{#GET{name}}}|oui) selected="selected"]><:clevermail:auto_week_day_thursday:></option>
+              #SET{day,5}
+              <option value="#GET{day}"[(#GET{day}|in_array{#ENV{#GET{name}}}|oui) selected="selected"]><:clevermail:auto_week_day_friday:></option>
+              #SET{day,6}
+              <option value="#GET{day}"[(#GET{day}|in_array{#ENV{#GET{name}}}|oui) selected="selected"]><:clevermail:auto_week_day_saturday:></option>
+              #SET{day,0}
+              <option value="#GET{day}"[(#GET{day}|in_array{#ENV{#GET{name}}}|oui) selected="selected"]><:clevermail:auto_week_day_sunday:></option>
+            </select>
+          </li>
+          #SET{name,lst_auto_month_day}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,''}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:auto_month_day:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <p class="explication"><:clevermail:auto_month_day_explication:></p>
+            <select name="#GET{name}" id="#GET{name}">
+              #SET{day,1}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,2}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,3}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,4}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,5}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,6}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,7}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,8}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,9}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,10}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,11}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,12}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,13}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,14}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,15}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,16}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,17}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,18}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,19}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,20}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,21}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,22}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,23}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,24}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,25}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,26}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,27}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+              #SET{day,28}
+              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_month_day}}|oui) selected="selected"]>#GET{day}</option>
+            </select>
+          </li>
+        </ul>
+      </fieldset>
+      <fieldset>
+        <legend><:clevermail:auto_subscribers:></legend>
+        <ul>
+          #SET{name,lst_auto_subscribers}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,''}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:auto_subscribers_url:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <p class="explication"><:clevermail:auto_subscribers_explication:></p>
+            <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" />
+          </li>
+          #SET{name,lst_auto_subscribers_mode}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,''}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label><:clevermail:auto_subscribers_mode:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+             #SET{value,1}
+             <div class="choix">
+               <input type="radio" name="#GET{name}" id="#GET{name}#GET{value}" class="radio" value="#GET{value}"[ (#ENV{#GET{name}}|=={#GET{value}}|oui)checked="checked"] />
+               <label for="#GET{name}#GET{value}"><:clevermail:choix_version_html:></label>
+             </div>
+             #SET{value,0}
+             <div class="choix">
+               <input type="radio" name="#GET{name}" id="#GET{name}#GET{value}" class="radio" value="#GET{value}"[ (#ENV{#GET{name}}|=={#GET{value}}|oui)checked="checked"] />
+               <label for="#GET{name}#GET{value}"><:clevermail:choix_version_texte:></label>
+             </div>
+          </li>
+        </ul>
+      </fieldset>
+      <p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+    </div></form>
+    <script language="javascript" type="text/javascript" src="[(#CHEMIN{js/clevermail_list_edit.js}|timestamp)]"></script>
+  ]
+</div>
