@@ -1,0 +1,27 @@
+<plugin>
+	<nom>jQuery Lazy Load</nom>
+	<auteur>b_b</auteur>
+	<version>1.1.0</version>
+	<etat>test</etat>
+	<description>
+	Ce plugin permet d'utiliser le script jQuery Lazy Load dans les pages publiques de votre site.
+_ http://www.appelsiini.net/projects/lazyload
+_ Ic&ocirc;ne de www.iconshock.com
+	</description>
+	<lien>https://contrib.spip.net/3130</lien>
+	<prefix>lazyload</prefix>
+	<icon>lazyload-64.png</icon>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>lazyload_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head_prive</action>
+		<inclure>lazyload_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.1.0;3.2.99]" />
+	<utilise id="spip_bonux" version="[2.3.1;]" />
+	<utilise id="medias" version="[1.0.1;[" />
+	<categorie>multimedia</categorie>
+</plugin>

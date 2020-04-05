@@ -1,0 +1,21 @@
+<paquet
+	prefix="lazyload"
+	categorie="multimedia"
+	version="1.1.0"
+	etat="test"
+	compatibilite="[2.1.0;3.2.*]"
+	logo="lazyload-64.png"
+	documentation="https://contrib.spip.net/3130"
+>	
+
+	<nom>jQuery Lazy Load</nom>
+	<!-- Ce plugin permet d'utiliser le script jQuery Lazy Load dans les pages publiques de votre site -->
+
+	<auteur>b_b</auteur>
+
+	<pipeline nom="insert_head" inclure="lazyload_pipelines.php" />
+	<pipeline nom="header_prive" action="insert_head_prive" inclure="lazyload_pipelines.php" />
+
+	<utilise nom="spip_bonux" compatibilite="[2.3.1;[" />
+	<utilise nom="medias" compatibilite="[1.0.1;[" />
+</paquet>
