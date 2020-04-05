@@ -1,0 +1,22 @@
+<div id="nav-container">
+	<B_rubriques>
+	<ul id="nav" class="menuder">
+		<ul>
+			<BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre}>
+			<li>
+				<a href="#URL_RUBRIQUE" class="intitule">[(#TITRE|supprimer_numero|couper{80})]</a>
+
+				<B_sous_rubriques>
+				<ul>
+					<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}>
+					<li><a href="#URL_RUBRIQUE" <BOUCLE_test_sousrub(RUBRIQUES){id_parent}{0,1}>class="daddy"</BOUCLE_test_sousrub>>[(#TITRE|supprimer_numero|couper{80})]</a><BOUCLE_re(BOUCLE_sous_rubriques)></BOUCLE_re>	</li>
+					</BOUCLE_sous_rubriques>
+				</ul>
+				</B_sous_rubriques>
+
+			</li>
+			</BOUCLE_rubriques>
+		</ul>
+	</ul>
+	</B_rubriques>
+</div>
