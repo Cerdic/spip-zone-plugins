@@ -1,0 +1,3 @@
+$(function() {
+    $('.quickflip-wrapper').quickFlipper();
+});
