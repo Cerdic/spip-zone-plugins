@@ -1,0 +1,8 @@
+<BOUCLE_trans(TRANSACTIONS){id_transaction}{transaction_hash}>
+	<h2><:formidablepaiement:titre_reglement:></h2>
+	#SET{montant,#MONTANT|affiche_monnaie}
+	<p><:formidablepaiement:titre_reglement_montant{montant=#GET{montant}}:>
+	[(#REM)
+	passer title='...' pour changer le titre 'Je choisis mon mode de paiement securise']
+	<INCLURE{fond=modeles/payer_acte,id_transaction,transaction_hash}>
+</BOUCLE_trans>

@@ -1,0 +1,28 @@
+<paquet
+	prefix="formidablepaiement"
+	categorie="communication"
+	version="1.1.3"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/formidablepaiement-64.png"
+	documentation="https://contrib.spip.net/4614"
+	schema="1.0.0"
+>
+
+	<nom>Formulaires de paiement</nom>
+
+	<auteur lien='https://nursit.com'>Cédric Morin</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="formulaire_charger" inclure="formidablepaiement_pipelines.php" />
+	<pipeline nom="formulaire_fond" inclure="formidablepaiement_pipelines.php" />
+	<pipeline nom="bank_dsp2_renseigner_facturation" inclure="formidablepaiement_pipelines.php" />
+	<pipeline nom="bank_traiter_reglement" inclure="formidablepaiement_pipelines.php" />
+	<pipeline nom="affiche_enfants" inclure="formidablepaiement_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="formidablepaiement_pipelines.php" />
+
+	<necessite nom="bank" compatibilite="[2.8.3;4.*.*]" />
+	<necessite nom="formidable" compatibilite="[2.5.11;4.*.*]" />
+
+</paquet>
