@@ -1,0 +1,59 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=cog -->
+
+<div class='formulaire_spip formulaire_configurer formulaire_configurer_cog'>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+#SET{wichrub,#CONFIG{cog/rubriques_cog,#ARRAY{0,-1}}}
+
+
+		<ul>
+			<li class='configurer_chemin_donnee'>
+				<label for="chemin_donnee"><:cog:label_chemin_cog:></label>
+				<div class='explication'><:cog:label_chemin_cog_details:></div>
+				<input type="text" name="chemin_donnee" value="[(#ENV{chemin_donnee})]" id="chemin_donnee" class="text" />
+			</li>
+
+
+
+
+	[(#REM) choix des objets sur lesquels l'ajout de liens avec une ou plusieurs communes est possible ]
+	#SET{name,objets} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+		<label><:cog:label_activer_cog_objets:></label>
+		<p class="explication"><:cog:explication_activer_cog_objets:></p>[
+		<span class='erreur_message'>(#GET{erreurs})</span>
+		]#INCLURE{fond=formulaires/inc-choisir-objets, name=#GET{name}, selected=#ENV**{#GET{name}}, exclus=#LISTE{spip_cog_communes}}
+	</li>
+
+	<li class="editer_rubriques_cog">
+			<label for="rubriques_cog"><:cog:limitation_rubriques_cog:></label>
+			<p class="explication"><:cog:explication_limitation_rubriques_cog:></p>
+			<select name="rubriques_cog[]" id="rubriques_cog" multiple="multiple" size="9">
+				<option value="-1"[ (#EVAL{-1}|in_array{#GET{wichrub}}|?{' selected="selected"'})]>Toutes</option>
+				<BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}{tout}>
+				<option value="#ID_RUBRIQUE"[ (#ID_RUBRIQUE|in_array{#GET{wichrub}}|?{' selected="selected"'})]>
+				Secteur #ID_RUBRIQUE : #TITRE
+				</option>
+				<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}{tout}>
+				<option value="#ID_RUBRIQUE"[ (#ID_RUBRIQUE|in_array{#GET{wichrub}}|?{' selected="selected"'})]>
+				&rarr; Rubrique #ID_RUBRIQUE : #TITRE
+				</option>
+				<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+				</BOUCLE_rubriques>
+				</BOUCLE_secteurs>
+			</select>
+		</li>
+
+		</ul>
+
+
+		<p class='boutons'><input class='submit' type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" /></p>
+
+	</div></form>
+
+</div>

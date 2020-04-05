@@ -1,0 +1,53 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_cog_commune,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_cog_commune' value='#ENV{id_cog_commune}' />
+		<ul>
+
+			[(#SAISIE{case, decoupage_cantons,
+				label=<:cog_commune:label_decoupage_cantons:>,
+				explication=<:cog_commune:explication_decoupage_cantons:> ,
+				valeur_oui='1'})]
+
+			[(#SAISIE{input, chef_lieu,
+				label=<:cog_commune:label_chef_lieu:>,
+				explication=<:cog_commune:explication_chef_lieu:> })]
+
+			[(#SAISIE{input, departement,
+				label=<:cog_commune:label_departement:>})]
+
+			[(#SAISIE{input, code, obligatoire=oui,
+				label=<:cog_commune:label_code:>})]
+
+			[(#SAISIE{input, arrondissement, obligatoire=oui,
+				label=<:cog_commune:label_arrondissement:>})]
+
+			[(#SAISIE{input, canton, obligatoire=oui,
+				label=<:cog_commune:label_canton:>})]
+
+			[(#SAISIE{input, type_charniere, obligatoire=oui,
+				label=<:cog_commune:label_type_charniere:>})]
+
+			[(#SAISIE{input, article_majuscule, 
+				label=<:cog_commune:label_article_majuscule:>})]
+
+			[(#SAISIE{input, nom_majuscule, obligatoire=oui,
+				label=<:cog_commune:label_nom_majuscule:>})]
+
+			[(#SAISIE{input, article,
+				label=<:cog_commune:label_article:>})]
+
+			[(#SAISIE{input, nom,
+				label=<:cog_commune:label_nom:>})]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

@@ -1,0 +1,50 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_cog_canton,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_cog_canton' value='#ENV{id_cog_canton}' />
+		<ul>
+
+			[(#SAISIE{input, region, obligatoire=oui,
+				label=<:cog_canton:label_region:>})]
+
+			[(#SAISIE{input, departement, obligatoire=oui,
+				label=<:cog_canton:label_departement:>})]
+
+			[(#SAISIE{input, arrondissement, obligatoire=oui,
+				label=<:cog_canton:label_arrondissement:>})]
+
+			[(#SAISIE{input, code, obligatoire=oui,
+				label=<:cog_canton:label_code:>})]
+
+			[(#SAISIE{input, type_canton, obligatoire=oui,
+				label=<:cog_canton:label_type_canton:>})]
+
+			[(#SAISIE{input, chef_lieu, obligatoire=oui,
+				label=<:cog_canton:label_chef_lieu:>})]
+
+			[(#SAISIE{input, type_charniere, obligatoire=oui,
+				label=<:cog_canton:label_type_charniere:>})]
+
+			[(#SAISIE{input, article_majuscule, 
+				label=<:cog_canton:label_article_majuscule:>})]
+
+			[(#SAISIE{input, nom_majuscule, obligatoire=oui,
+				label=<:cog_canton:label_nom_majuscule:>})]
+
+			[(#SAISIE{input, article, 
+				label=<:cog_canton:label_article:>})]
+
+			[(#SAISIE{input, nom, obligatoire=oui,
+				label=<:cog_canton:label_nom:>})]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

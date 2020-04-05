@@ -1,0 +1,56 @@
+[(#SET{defaut_tri,#ARRAY{	
+	multi nom,1, 	
+	id_cog_commune,1,	
+	points,-1 
+	}})]
+
+<B_liste_cog_communes>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{afficher_lettres,#TRI|=={'multi nom'}|oui}
+#SET{debut,#ENV{debutcom,#EVAL{_request("debutcom");}}}
+#ANCRE_PAGINATION
+<div class="liste-objets cog_communes">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{cog_commune:info_1_cog_commune,cog_commune:info_nb_cog_communes}})</strong></caption>]
+	<thead>
+		#SET{p,''}
+		<BOUCLE_lettre(COG_COMMUNES){id_cog_commune?}{where?}{statut?}{recherche?}{par multi nom}{id_cog_commune==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#NOM**|initiale|unique|oui)
+		[(#SET{p,#GET{p}|concat{
+		#SELF|parametre_url{debutcom,@#ID_COG_COMMUNE}|ancre_url{paginationcom}|afficher_initiale{#NOM**|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		}})]
+		]#SAUTER{#ENV{nb,50}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
+		(#SET{p,
+			#GET{p}|concat{
+				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,50}}
+			}
+		})]</B_lettre>
+		[<tr><td colspan="3"><p class='pagination'>(#GET{p})</p></td></tr>]
+
+
+		[<tr><td colspan="3"><p class='pagination'>(#PAGINATION{prive})</p></td></tr>]
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='nom' scope='col'>[(#TRI{multi nom,<:cog_commune:label_nom:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_cog_commune,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_cog_communes(COG_COMMUNES){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{par nom}{pagination #ENV{nb,50} com}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{cog_commune-16.png}|balise_img)]</td>
+			<td class='nom principale'>[(#LOGO_COG_COMMUNE|image_reduire{20,26})]<a href="[(#ID_COG_COMMUNE|generer_url_entite{cog_commune})]" title="<:info_numero_abbreviation|attribut_html:> #ID_COG_COMMUNE">[(#RANG). ]#NOM</a></td>
+			<td class='id'>[(#AUTORISER{modifier,cog_commune,#ID_COG_COMMUNE}|?{
+				<a href="[(#URL_ECRIRE{cog_commune_edit,id_cog_commune=#ID_COG_COMMUNE})]">#ID_COG_COMMUNE</a>,
+				#ID_COG_COMMUNE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_cog_communes>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_cog_communes>[
+<div class="liste-objets cog_communes caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_cog_communes>

@@ -1,0 +1,22 @@
+
+[(#BOITE_OUVRIR{'',info})]
+[<img src="(#CHEMIN_IMAGE{cog-64.png})"  class="icone right" />]
+<div class="titre_boite"><:cog:cog:></div>
+<:cog:texte_presentation_cog:>
+[(#BOITE_FERMER)]
+
+
+
+[(#AUTORISER{modifier, cog})
+[(#BOITE_OUVRIR{'','raccourcis'})]
+	[(#URL_ECRIRE{cog_import}|icone_horizontale{<:cog:importer_les_cog:>, #CHEMIN_IMAGE{cog-24.png},''})]
+	[(#AUTORISER{modifier, congigurer_cog})
+		[(#URL_ECRIRE{configurer_cog}|icone_horizontale{<:cog:titre_page_configurer:>, #CHEMIN_IMAGE{cog-24.png},''})]
+	]	
+	
+[(#BOITE_FERMER)]
+]
+
+
+
+

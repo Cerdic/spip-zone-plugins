@@ -1,0 +1,29 @@
+[(#ID_OBJET|oui)
+	[(#AUTORISER{modifier,cog_commune,#ID_COG_COMMUNE}|sinon_interdire_acces)]
+][(#ID_OBJET|non)
+	[(#AUTORISER{creer,cog_commune}|sinon_interdire_acces)]
+]
+ 
+#SET{redirect,#ENV{redirect}|sinon{#ID_COG_COMMUNE|?{#ID_COG_COMMUNE|generer_url_entite{cog_commune},#URL_ECRIRE{cog_communes}}}}
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#ID_COG_COMMUNE|oui)
+	[(#GET{redirect}|icone_verticale{Retour,cog_commune,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	
+		[(#ID_COG_COMMUNE|?{<:cog_commune:icone_modifier_cog_commune:>,<:cog_commune:icone_creer_cog_commune:>})]
+	[	<h1>(#ENV{titre,#INFO_NOM{cog_commune,#ID_COG_COMMUNE}|sinon{<:cog:info_sans_titre:>}})</h1>]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_COG_COMMUNE|generer_url_entite{cog_commune}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_COG_COMMUNE{#ENV{id_cog_commune,oui}, #GET{redirect}, #ENV{associer_objet}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>

@@ -1,0 +1,36 @@
+<B_communes>
+<div class="titrem"><:cog:liste_des_communes_attachees:></div>
+<ul>
+	<BOUCLE_communes(COG_COMMUNES){id_cog_commune IN #ENV{tab_commune}}{par nom}>
+		#SET{id_cog_commune,#ID_COG_COMMUNE}
+		<li>#NOM <span><a href="#URL_ACTION_AUTEUR{supprimer_commune_lien,#GET{id_cog_commune}-#ENV{type}-#ENV{id},#SELF}"><:cog:bouton_supprimer:></a></li>
+	</BOUCLE_communes>
+</ul>
+</B_communes>
+
+<div class="formulaire_spip formulaire_editer formulaire_#FORM">
+	<!-- <br class='bugajaxie' /> -->
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur}) <:info_recommencer:></p>]
+
+<form method='post' action='#ENV{action}'><div>
+	[(#REM) declarer les hidden qui declencheront le service du formulaire
+	parametre : url d'action ]
+	#ACTION_FORMULAIRE{#ENV{action}}
+
+<ul>
+<li>
+<label for="nom_commune" class="oblig"><:cog:attacher_une_commune:></label>
+<input name="nom_commune" id="nom_commune" class="autocomplete_cog" />
+</li>
+</ul>
+<p class='boutons'><input type='submit' class='submit' value='<:cog:bouton_ajouter:>' /></p>
+<script type="text/javascript">
+$(document).ready(function(){
+cog_commune_autocomplete();
+});
+</script>
+
+</div>
+</form>
+</div>

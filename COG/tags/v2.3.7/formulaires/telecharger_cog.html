@@ -1,0 +1,30 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<BOUCLE_editable(CONDITION){si #ENV{editable}}>
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+	<ul>
+	<li class="editer_fichier obligatoire[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
+		<label for="champs_fichier"><:cog:fichiers_a_telecharger:></label>[
+		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier})</span>
+		]<p class='explication'><:cog:choississez_le_fichier_a_telecharger:></p>
+
+
+		<select name='objet[]' multiple="multiple" id="champs_fichier" >
+
+		<BOUCLE_fichier(POUR){tableau #ENV{tab_objet}}>
+
+		<option value="#CLE"[ (#ENV{objet}|=={#CLE}|oui) selected="selected"]>
+
+			[(#VALEUR|table_valeur{nom})]
+		</option>
+		</BOUCLE_fichier>
+		</select>
+	</li>
+	</ul>
+	<p class='boutons'><input type='submit' class='submit' value='<:cog:bouton_telecharger:>' /></p>
+	</div></form>
+</BOUCLE_editable>
+</div>

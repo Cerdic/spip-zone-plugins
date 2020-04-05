@@ -1,0 +1,31 @@
+[(#SET{defaut_tri,#ARRAY{nom_majuscule,1,id_cog_canton,1,points,-1
+}})]<B_liste_cog_cantons>
+#ANCRE_PAGINATION
+<div class="liste-objets cog_cantons">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{cog_canton:info_1_cog_canton,cog_canton:info_nb_cog_cantons}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='nom' scope='col'>[(#TRI{nom_majuscule,<:cog_canton:label_nom:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_cog_canton,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_cog_cantons(COG_CANTONS){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num nom},#GET{defaut_tri}}{par nom}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{cog_canton-16.png}|balise_img)]</td>
+			<td class='nom_majuscule principale'>[(#LOGO_COG_CANTON|image_reduire{20,26})]<a href="[(#ID_COG_CANTON|generer_url_entite{cog_canton})]" title="<:info_numero_abbreviation|attribut_html:> #ID_COG_CANTON">[(#RANG). ]#NOM_MAJUSCULE</a></td>
+			<td class='id'>[(#AUTORISER{modifier,cog_canton,#ID_COG_CANTON}|?{
+				<a href="[(#URL_ECRIRE{cog_canton_edit,id_cog_canton=#ID_COG_CANTON})]">#ID_COG_CANTON</a>,
+				#ID_COG_CANTON
+			})]</td>
+		</tr>
+	</BOUCLE_liste_cog_cantons>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_cog_cantons>[
+<div class="liste-objets cog_cantons caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_cog_cantons>

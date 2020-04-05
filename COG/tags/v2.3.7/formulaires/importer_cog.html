@@ -1,0 +1,45 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+<ul>
+<li class="editer_fichier obligatoire[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
+		<label for="select_objet"><:cog:fichiers:></label>[
+		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier})</span>
+		]<p class='explication'><:cog:choississez_le_fichier_a_importer:></p>
+	<select id='select_objet' name='objet' [(#ENV{objet,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]>
+	<BOUCLE_fichier(POUR){tableau #ENV**{tab_objet}}>
+		<option value="#CLE"[(#ENV{objet}|=={#CLE}) selected="selected"] [(#VALEUR|table_valeur{fichier_manquant}|oui) disabled="disabled"]>[(#VALEUR|table_valeur{nom})] [(#VALEUR|table_valeur{fichier_manquant}|oui) (Fichier manquant)]</option>
+	</BOUCLE_fichier>
+	</select>
+</li>
+<li class="editer_option">
+  <div class="choix">
+	  <input type='checkbox' class="checkbox" name='option_ecraser' value='1' id='option_ecraser'[ (#ENV{option_ecraser}|=={non}|oui)checked="checked"] />
+	  <label for='option_ecraser'><:cog:ecraser_enregistrement:></label>
+  </div>
+  <div class="choix">
+	  <input type='checkbox' class="checkbox" name='option_truncate' value='1' id='option_truncate'[ (#ENV{option_truncate}|=={oui}|oui)checked="checked"] />
+	  <label for='option_truncate'><:cog:vider_la_table:></label>
+  </div>
+  <div class="choix">
+	  <label for='option_truncate'><:cog:filtre_d_importation:></label>
+	  <input type='text' name='option_filtre'  id='option_filtre' value="#ENV{option_filtre}" />
+  </div>
+</li>
+</ul>
+
+
+
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+  <p class='boutons'><input type='submit' class='submit' value='<:cog:bouton_importer:>' /></p>
+</div></form>
+
+
+</div>

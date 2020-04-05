@@ -1,0 +1,35 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_cog_departement,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_cog_departement' value='#ENV{id_cog_departement}' />
+		<ul>
+
+			[(#SAISIE{input, region, obligatoire=oui,
+				label=<:cog_departement:label_region:>})]
+
+			[(#SAISIE{input, code, obligatoire=oui,
+				label=<:cog_departement:label_code:>})]
+
+			[(#SAISIE{input, chef_lieu, obligatoire=oui,
+				label=<:cog_departement:label_chef_lieu:>})]
+
+			[(#SAISIE{input, type_charniere, obligatoire=oui,
+				label=<:cog_departement:label_type_charniere:>})]
+
+			[(#SAISIE{input, nom_majuscule, obligatoire=oui,
+				label=<:cog_departement:label_nom_majuscule:>})]
+
+			[(#SAISIE{input, nom, obligatoire=oui,
+				label=<:cog_departement:label_nom:>})]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

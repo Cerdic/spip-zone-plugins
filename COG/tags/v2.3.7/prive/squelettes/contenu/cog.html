@@ -1,0 +1,9 @@
+<h1><:cog:liste_des_tables_du_cog:></h1>
+[(#SET{tab_table,#COG_TABLE})]
+<table>
+<BOUCLE_table(POUR){tableau #GET{tab_table}}>
+<tr>
+<td><a href="[(#URL_ECRIRE{#CLE})s]">[(#VALEUR|table_valeur{nom})]</a></td>
+</tr>
+</BOUCLE_table>
+</table>

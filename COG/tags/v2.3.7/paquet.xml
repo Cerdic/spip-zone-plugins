@@ -1,0 +1,36 @@
+<paquet
+	prefix="cog"
+	categorie="outil"
+	version="2.3.7"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/cog-32.png"
+	schema="1.4"
+	documentation="https://contrib.spip.net/COG-Toutes-les-communes-departements-regions"
+>
+
+	<nom>Code Officiel Géographique</nom>
+	<!-- Ajouter à la base de données les codes officiels géographiques définis par l'Institut national de la statistique et des études économiques -->
+
+	<auteur>Guillaume Wauquier</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>	
+	<copyright>2012</copyright>
+
+	<pipeline nom="autoriser" inclure="cog_autorisations.php" /> 	
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/cog.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/cog.php" /> 
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/cog.php" />
+	<pipeline nom="affiche_milieu" inclure="cog_pipeline.php" />
+	<pipeline nom="rechercher_liste_des_champs" inclure="cog_pipeline.php" />
+	<pipeline nom="declarer_tables_objets_surnoms" inclure="cog_pipeline.php" />
+	<pipeline nom="header_prive" inclure="cog_pipeline.php" />
+	<pipeline nom="jqueryui_plugins" inclure="cog_pipeline.php" />
+
+	<necessite nom="spip_bonux" compatibilite="[3.0.5;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" /> 
+
+	<lib nom="PHPExcel" lien="https://github.com/PHPOffice/PHPExcel/archive/master.zip" />
+
+	<menu nom="cog" titre="C.O.G." parent="menu_edition" icone="images/cog-24.png" action="cog" />
+</paquet>

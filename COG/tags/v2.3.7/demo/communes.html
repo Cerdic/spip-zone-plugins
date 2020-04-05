@@ -1,0 +1,49 @@
+<html>
+<body>
+<h3><:cog:titre_page_test:></h3>
+
+
+
+<B_c>
+Nombre total de commune : #GRAND_TOTAL
+<table class="spip" width="100%">
+	<thead>
+	<tr class="row_first">
+		<th><:cog:code_insee:></th>
+		<th><:cog:ville_nom_article:></th>
+		<th><:cog:nom_article:></th>
+		<th><:cog:nom:></th>
+		<th><:cog:nom_majuscule:></th>
+		<th><:cog:region:></th>
+		<th><:cog:departement:></th>
+		<th><:cog:arrondissement:></th>
+		<th><:cog:canton:></th>
+		<th><:cog:decoupage_cantons:></th>
+		<th><:cog:chef_lieu:></th>
+	</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_c(COG_COMMUNES){par nom}{pagination 50}>
+	<tr[ class="(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})"]>
+		<td>#DEPARTEMENT#CODE</td>
+		<td>La ville de #NOM</td>
+		<td>#ARTICLE #NOM</td>
+		<td>#NOM</td>
+		<td>#ARTICLE</td>
+		<td>#ARTICLE_MAJUSCULE #NOM_MAJUSCULE</td>
+		<td>#REGION</td>
+		<td>#DEPARTEMENT</td>
+		<td>#ARRONDISSEMENT</td>
+		<td>#CANTON</td>
+		<td>#DECOUPAGE_CANTONS</td>
+		<td>[(#CHEF_LIEU|=={1}|oui) est le chef lieu]</td>
+	</tr>
+	</BOUCLE_c>
+	</tbody>
+</table>
+</B_c>
+<p>Encore aucune commune n'a été importé dans la base.</p>
+
+<//B_c>
+</body>
+</html>
