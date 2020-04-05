@@ -1,0 +1,150 @@
+#CACHE{0}
+<style type='text/css'>
+.espacer_tableaux {margin-top:2em; margin-bottom:4em;}
+.petite_colonne {style:width:10%;}
+</style>
+
+<B_notes_aut>
+<div class='espacer_tableaux'>
+<table class='spip'>
+	<caption><:notation:vos_notes:></caption>
+	<thead>
+		<tr>
+			<th><:notation:objets:></th>
+			<th class='petite_colonne'><:notation:votre_note:></th>
+			<th class='petite_colonne'><:notation:moyennep:></th>
+			<th class='petite_colonne'><:notation:moyenne:></th>
+			<th class='petite_colonne'><:notation:nbvotes:></th>
+		</tr>
+	</thead>
+	<tbody>
+		<BOUCLE_notes_aut(NOTATIONS){!par note}{id_auteur=#SESSION{id_auteur}}{0,10}>
+		<tr>
+			<td>
+				<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">
+					[(#OBJET|objet_icone{16}) ][(#INFO_TITRE{#OBJET,#ID_OBJET}|sinon{[(#OBJET|objet_info{texte_objet}|_T) ##ID_OBJET]})]
+				</a>
+			</td>
+			<td>#NOTE</td>
+			<BOUCLE_note_obj(NOTATIONS_OBJETS){objet}{id_objet}>
+				<td>#NOTE_PONDEREE</td><td>#NOTE</td><td>#NOMBRE_VOTES</td>
+			</BOUCLE_note_obj>
+		</tr>
+		</BOUCLE_notes_aut>
+	</tbody>
+</table>
+</div>
+</B_notes_aut>
+
+
+<BOUCLE_nbobjets(NOTATIONS){fusion objet}{fusion id_objet}></BOUCLE_nbobjets>
+#SET{nb_objets,#TOTAL_BOUCLE}
+<//B_nbobjets>
+<BOUCLE_nbvotes(NOTATIONS)></BOUCLE_nbvotes>
+#SET{nb_votes,#TOTAL_BOUCLE}
+<//B_nbvotes>
+
+[(#GET{nb_objets}|ou{#GET{nb_votes}}|oui)
+<div class='espacer_tableaux'>
+<table class='spip'>
+	<caption><:notation:totaux:></caption>
+	<tbody>
+		[<tr>
+			<th><:notation:nbobjets_note:></th>
+			<td class='petite_colonne'>(#GET{nb_objets})</td>
+		</tr>]
+		[<tr>
+			<th><:notation:nbvotes_total:></th>
+			<td class='petite_colonne'>(#GET{nb_votes})</td>
+		</tr>]
+	</tbody>
+</table>
+</div>
+]
+
+
+<B_notes_pond>
+<div class='espacer_tableaux'>
+<table class='spip'>
+	<caption><:notation:toptenp:></caption>
+	<thead>
+		<tr>
+			<th><:notation:objets:></th>
+			<th class='petite_colonne'><:notation:moyennep:></th>
+			<th class='petite_colonne'><:notation:moyenne:></th>
+			<th class='petite_colonne'><:notation:nbvotes:></th>
+		</tr>
+	</thead>
+	<tbody>
+		<BOUCLE_notes_pond(NOTATIONS_OBJETS){0,10}{!par note_ponderee}>
+		<tr>
+			<td>
+				<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">
+					[(#OBJET|objet_icone{16}) ][(#INFO_TITRE{#OBJET,#ID_OBJET}|sinon{[(#OBJET|objet_info{texte_objet}|_T) ##ID_OBJET]})]
+				</a>
+			</td>
+			<td>#NOTE_PONDEREE</td><td>#NOTE</td><td>#NOMBRE_VOTES</td>
+		</tr>
+		</BOUCLE_notes_pond>
+	</tbody>
+</table>
+</div>
+</B_notes_pond>
+
+<B_nombre_votes>
+<div class='espacer_tableaux'>
+<table class='spip'>
+	<caption><:notation:topnb:></caption>
+	<thead>
+		<tr>
+			<th><:notation:objets:></th>
+			<th class='petite_colonne'><:notation:moyennep:></th>
+			<th class='petite_colonne'><:notation:moyenne:></th>
+			<th class='petite_colonne'><:notation:nbvotes:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_nombre_votes(NOTATIONS_OBJETS){0,10}{!par nombre_votes}>
+	<tr>
+		<td>
+			<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">
+				[(#OBJET|objet_icone{16}) ][(#INFO_TITRE{#OBJET,#ID_OBJET}|sinon{[(#OBJET|objet_info{texte_objet}|_T) ##ID_OBJET]})]
+			</a>
+		</td>
+		<td>#NOTE_PONDEREE</td><td>#NOTE</td><td>#NOMBRE_VOTES</td>
+	</tr>
+	</BOUCLE_nombre_votes>
+	</tbody>
+</table>
+</div>
+</B_nombre_votes>
+
+
+
+<B_derniers_votes>
+<div class='espacer_tableaux'>
+<table class='spip'>
+	<caption><:notation:derniers_votes:></caption>
+	<thead>
+		<tr>
+			<th><:notation:objets:></th>
+			<th><:notation:date:></th>
+			<th style='width:10%;'><:notation:vote:></th>
+		</tr>
+	</thead>
+	<tbody>
+		<BOUCLE_derniers_votes(NOTATIONS){0,10}{!par maj}>
+		<tr>
+			<td>
+				<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">
+					[(#OBJET|objet_icone{16}) ][(#INFO_TITRE{#OBJET,#ID_OBJET}|sinon{[(#OBJET|objet_info{texte_objet}|_T) ##ID_OBJET]})]
+				</a>
+			</td>
+			<td>[(#MAJ|affdate_court)]</td>
+			<td>#NOTE</td>
+		</tr>
+		</BOUCLE_derniers_votes>
+	</tbody>
+</table>
+</div>
+</B_derniers_votes>

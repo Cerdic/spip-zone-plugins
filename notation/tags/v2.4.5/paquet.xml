@@ -1,0 +1,40 @@
+<paquet
+	prefix="notation"
+	categorie="communication"
+	version="2.4.5"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/notation-32.png"
+	schema="0.7.0"
+	documentation="https://contrib.spip.net/Notation-d-elements-SPIP"
+>
+
+	<nom>Notation</nom>
+	<!-- Attribuer une note aux éléments de SPIP -->
+
+	<auteur>JEM</auteur>
+	<auteur>b_b</auteur>
+	<auteur>Matthieu Marcillaud</auteur>
+
+	<copyright>2008-2012</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/notation.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/notation.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/notation.php" />
+	<pipeline nom="affichage_final" action="affichage_final" inclure="notation_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="notation_pipelines.php" />
+	<pipeline nom="header_prive_css" action="insert_head_css" inclure="notation_pipelines.php" />
+	<pipeline nom="afficher_config_objet" inclure="notation_pipelines.php" />
+	<pipeline nom="pre_insertion" inclure="notation_pipelines.php" />
+	<pipeline nom="configurer_liste_metas" inclure="notation_pipelines.php" />
+	<pipeline nom="indexer_document" inclure="notation_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="notation_pipelines.php" />
+
+	<utilise nom="indexer" compatibilite="[2.10.0;[" />
+	<menu nom="notation" titre="notation:notation" parent="menu_activite" icone="images/notation-16.png" />
+
+	<onglet nom="notation" titre="notation:afficher_tables" parent="notation" icone="images/notation-24.png" />
+	<onglet nom="configurer_notation" titre="notation:param" parent="notation" icone="images/notation-24.png" />
+</paquet>

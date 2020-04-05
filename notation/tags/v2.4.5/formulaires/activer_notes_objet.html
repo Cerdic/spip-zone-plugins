@@ -1,0 +1,28 @@
+<BOUCLE_formulaire_non_vide(CONDITION)
+	{si #ENV{editable,#ENV{_suivi_notes,#ENV{message_ok,#ENV{message_erreur}}}}}>
+<div class='formulaire_spip formulaire_#FORM' id='formulaire_#FORM-#ID'>
+[(#REM)
+[(#ENV{_suivi_notes}|oui)
+[(#URL_ECRIRE{controle_notes,objet=#ENV{objet}&id_objet=#ENV{id_objet}}|icone_horizontale{#ENV{_suivi_notes},note-24.png,'',''})]
+]]
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[(#ENV{editable})
+	<form action="#ENV{action}#formulaire_configurer_forums_article_moderation" method="post" enctype='multipart/form-data'><div>
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+		<ul>
+			<li class='editer configurer_accepter_note[ (#ENV**{erreurs}|table_valeur{accepter_note}|oui)erreur]'>
+				<label for='accepter_note'><:notation:info_fonctionnement_note:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{accepter_note})</span>
+				]<select name='accepter_note' id='accepter_note'>
+					<option value='oui'[ (#ENV{accepter_note}|=={oui}|oui)selected='selected']><:notation:bouton_radio_ouvert:></option>
+					<option value='non'[ (#ENV{accepter_note}|=={non}|oui)selected='selected']><:notation:bouton_radio_fermee:></option>
+				</select>
+			</li>
+		</ul>
+		<p class='boutons'><input class='submit' type="submit" name="ok" value="<:bouton_enregistrer:>"/></p>
+	</div></form>
+]
+</div>
+</BOUCLE_formulaire_non_vide>
