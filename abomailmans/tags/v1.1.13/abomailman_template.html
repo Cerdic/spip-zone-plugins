@@ -1,0 +1,6 @@
+#CACHE{0}
+[(#ENV{envoi_txt}|non)
+	<INCLURE{fond=templates/#ENV{template},env}>]
+[(#ENV{envoi_txt}|oui|et{#CHEMIN{templates/#ENV{template}.txt.html}|oui})
+	<INCLURE{fond=templates/#ENV{template}.txt,env}>
+]

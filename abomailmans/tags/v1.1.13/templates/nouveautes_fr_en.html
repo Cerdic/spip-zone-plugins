@@ -1,0 +1,98 @@
+#CACHE{0}[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+[(#REM)
+/**********************************************************
+* Ce squelette pour Abomailmains
+* Attention a :
+* - ne pas envoyer des gabarits de plus de 10Ko
+* - ne pas placer de balises d'ouverture ou de fermeture html et body
+* ils seront ajoutes automatiquement a l'envoi du mail
+* - mettre les style  CSS directement dans les balises pour etre sur qu'ils seront interpretes (meme par les webmails)
+* - les urls et liens images seront automatiquement converties en absolues
+*  ex. rubrique5.html -> http://www.monsite.org/rubrique5.html
+* Inspire du plugin Spip-Listes
+* $Id: nouveautes.html 44651 2011-02-14 10:33:12Z yffic@lefourneau.com $
+***********************************************************/]
+#SET{tableau_nouveautes,#ARRAY}
+<BOUCLE_articles(ARTICLES){id_rubrique ?}{id_mot ?}{age_relatif<0}>
+	#SET{tableau_nouveautes, #GET{tableau_nouveautes}|push{#ID_ARTICLE}}
+</BOUCLE_articles>
+
+<style>
+.nl_container a {
+	text-decoration:none;
+	color:#3996BB;}
+.nl_container a:hover {
+	color: #46839B;
+	text-decoration: underline;}
+</style>
+
+<div class="nl_container" style='width:100%;padding:5px;background-color:#FFF;color:#333333;font-size:10px;font-family:Arial, Helvetica, sans-serif'>
+<table width="800" border="0" align="center" cellpadding="0" cellspacing="5" bgcolor="#FFF">
+   <tr>
+      <td>
+      	<h1><a href="#URL_SITE_SPIP">
+         	[(#LOGO_SITE_SPIP||image_reduire{100,100}|inserer_attribut{style,'border:0;'}|sinon{#NOM_SITE_SPIP})]
+         </a></h1>
+      </td>
+   </tr>
+   <tr>
+      <td>
+         <table width="100%" border="0" cellspacing="10"><tr>
+            <td width="340" align="right" valign="top">
+               <BOUCLE_abomailman_fr(ABOMAILMANS){id_abomailman}>[(#DESCRIPTIF*|extraire_multi{fr}|propre)]</BOUCLE_abomailman_fr>
+               </B_abomailman_fr>
+                  [<h2>(#ENV*{sujet}|extraire_multi{fr})</h2>]
+                  [<p><b>(#ENV*{message}|extraire_multi{fr})</b></p>]
+               <//B_abomailman_fr>
+            </td>
+            <td width="100">&nbsp;</td>
+            <td valign="top" width="340">
+               <BOUCLE_abomailman_en(ABOMAILMANS){id_abomailman}>[(#DESCRIPTIF*|extraire_multi{en}|propre)]</BOUCLE_abomailman_en>
+               </B_abomailman_en>
+                  [<h2>(#ENV*{sujet}|extraire_multi{en})</h2>]
+                  [<p><b>(#ENV*{message}|extraire_multi{en})</b></p>]
+               <//B_abomailman_en>
+            </td>
+         </tr></table>
+         <div style="border-bottom:1px solid #E00000;margin-bottom:1em;">&nbsp;</div>
+      </td>
+   </tr>
+   <BOUCLE_articlesDate(ARTICLES){id_rubrique ?}{id_mot ?}{age_relatif<0}{par date}{inverse}>
+   <BOUCLE_test(CONDITION){si #ID_ARTICLE|=={#ID_TRAD}|ou{#GET{tableau_nouveautes}|find{#ID_TRAD}|non}}>
+   <tr>
+   	<td>
+         <table width="100%" border="0" cellspacing="10"><tr>
+            <td valign="top" align="right" width="340">
+            	<BOUCLE_traduction_fr(ARTICLES){traduction}{lang=fr}{doublons}>
+                  [<h3>(#TITRE|textebrut|supprimer_numero)</h3>]
+                  <div style="padding:0.2em;font-style:italic;">[(#DATE|affdate)]</div>
+                  <div>
+                     <BOUCLE_ariane_fr(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE*|extraire_multi{fr}|supprimer_numero|couper{80})]</a></BOUCLE_ariane_fr>
+                  </div>
+                  [<p style="text-align:justify;margin-top:0">(#INTRODUCTION{150}|textebrut|liens_absolus)</p>
+                  <p><a href="[(#URL_ARTICLE|url_absolue)]">Lire l'article</a></p>]
+                  [(#SET{logo,#LOGO_ARTICLE||image_reduire{100,100}|liens_absolus})]
+               </BOUCLE_traduction_fr>
+            </td>
+            <td width="100" valign="top">
+               [(#GET{logo})]
+            </td>
+            <td valign="top" width="340">
+            	<BOUCLE_traduction_en(ARTICLES){traduction}{lang=en}{doublons}>
+                  [<h3>(#TITRE|textebrut|supprimer_numero)</h3>]
+                  <div style="padding:0.2em;font-style:italic;">[(#DATE|affdate)]</div>
+                  <div>
+                     <BOUCLE_ariane_en(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE*|extraire_multi{en}|supprimer_numero|couper{80})]</a></BOUCLE_ariane_en>
+                  </div>
+                  [<p style="text-align:justify;margin-top:0">(#INTRODUCTION{150}|textebrut|liens_absolus)</p>
+                  <p><a href="[(#URL_ARTICLE|url_absolue)]">Read the article</a></p>]
+               </BOUCLE_traduction_en>
+            </td>
+         </tr></table>
+         <div style="border-bottom:1px solid #E00000;margin-bottom:1em;">&nbsp;</div>
+      </td>
+   </tr>
+   </BOUCLE_test>
+   </BOUCLE_articlesDate>
+</table>
+</div>

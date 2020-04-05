@@ -1,0 +1,13 @@
+[(#REM)
+
+	Controleur pour le crayon 'abomailman_descriptif' , uniquement html
+	
+	Permet de bénéficier du plugin multilang
+
+]
+#CACHE{0}
+<BOUCLE_a(ABOMAILMANS){id_abomailman}>
+<textarea class="crayon-active multilang" name="#ENV{name_descriptif}"
+ style="width:#ENV{largeur}px; height:#ENV{hauteur}px;#ENV{style}">
+[(#DESCRIPTIF**|entites_html)]</textarea>
+</BOUCLE_a>

@@ -1,0 +1,67 @@
+#CACHE{0}[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+[(#REM)
+/**********************************************************
+* Ce squelette pour Abomailmains
+* Attention a :
+* - ne pas envoyer des gabarits de plus de 10Ko
+* - ne pas placer de balises d'ouverture ou de fermeture html et body
+* ils seront ajoutes automatiquement a l'envoi du mail
+* - mettre les style  CSS directement dans les balises pour etre sur qu'ils seront interpretes (meme par les webmails)
+* - les urls et liens images seront automatiquement converties en absolues
+*  ex. rubrique5.html -> http://www.monsite.org/rubrique5.html
+* Inspire du plugin Spip-Listes
+* $Id$
+***********************************************************/]
+<B_articlesDate>
+<style>
+.nl_container a {
+	text-decoration:none;
+	color:#3996BB;}
+.nl_container a:hover {
+	color: #46839B;
+	text-decoration: underline;}
+</style>
+
+<div class="nl_container" style='width:100%;padding:10px;background-color:#FFF;color:#333333;font-size:12px;font-family:Georgia,"Times New Roman",Times,serif;'>
+<table width="690" border="0" align="center" cellpadding="0" cellspacing="5" bgcolor="#FFF">
+   <tr>
+      <td>
+      	<h1><a href="#URL_SITE_SPIP">
+         	[(#LOGO_SITE_SPIP||image_reduire{100,100}|inserer_attribut{style,'border:0;'}|sinon{#NOM_SITE_SPIP})]
+         </a></h1>
+         <BOUCLE_abomailman(ABOMAILMANS){id_abomailman}>#DESCRIPTIF</BOUCLE_abomailman>
+         </B_abomailman>
+            [<h2>(#ENV{sujet})</h2>]
+            [<p><b>(#ENV{message})</b></p>]
+         <//B_abomailman>
+			<div style="border-bottom:1px solid #E00000;margin-bottom:1em;">&nbsp;</div>
+      </td>
+   </tr>
+   <BOUCLE_articlesDate(ARTICLES){age_relatif< 0}{id_rubrique ?}{id_mot ?}{par date}{inverse}>
+   <BOUCLE_agenda(MOTS){titre=AGENDA}{id_article}>#SET{type, agenda}</BOUCLE_agenda>
+   <tr>
+   	<td>
+         [(#GET{type}|!={'agenda'}|?{'',' '}) <!-- SI agenda -->
+            [<div style="padding:0.2em;font-style:italic;">
+            	[(#DATE_REDAC|nom_jour)] (#DATE_REDAC|affdate_jourcourt)[ - (#DATE_REDAC|affdate{'H:i'})]
+            </div>]
+         ]
+         [<h3>(#TITRE|textebrut|supprimer_numero)</h3>]
+         <!-- SI PAS agenda -->
+         [(#GET{type}|=={'agenda'}|?{'',' '})<p style="padding:0.2em;font-style:italic;">[(#DATE|affdate)]</p>]
+         <div><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane></div>
+         <table width="100%" border="0" cellspacing="10"><tr>
+            <td valign="top">[<p style="text-align:justify;margin-top:0">(#INTRODUCTION|textebrut|liens_absolus)</p>]</td>
+            <td width="100" valign="top">
+               [(#LOGO_ARTICLE||image_reduire{100,100}|liens_absolus)]
+            </td>
+         </tr></table>
+         <a href="[(#URL_ARTICLE|url_absolue)]" style="float:right;padding:0 0 0 1em;margin:0.5em 0 0 0;"><:abomailmans:lire_article:></a>
+         <br style="clear: both; margin: 0; padding: 0; border: none; height: 0; line-height: 1px; font-size: 1px;" />
+         <div style="border-bottom:1px solid #E00000;margin-bottom:1em;">&nbsp;</div>
+      </td>
+   </tr>
+   </BOUCLE_articlesDate>
+</table>
+</div>
+</B_articlesDate>

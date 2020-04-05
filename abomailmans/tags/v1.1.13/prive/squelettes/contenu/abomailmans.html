@@ -1,0 +1,12 @@
+#CACHE{0}
+<h1><:abomailmans:les_listes_mailmans:></h1>
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/abomailmans, par=titre, env, ajax, sinon=<:abomailmans:info_aucun_abomailman:>}>
+
+[(#AUTORISER{creer,abomailman})
+	[(#URL_ECRIRE{abomailman_edit,new=oui}|icone_verticale{<:abomailmans:icone_ajouter_liste:>,abomailmans-24,new,right})]
+]
+<div class="nettoyeur"></div>
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>

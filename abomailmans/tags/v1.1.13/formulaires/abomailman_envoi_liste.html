@@ -1,0 +1,72 @@
+<div class="formulaire_spip formulaire_abomailman_envoi_liste ajax" id="formulaire_abomailman_envoi_liste">
+[(#REM) pour IE qui sinon se perd dans l'ajax !, ne pas retirer]<br class='bugajaxie' />
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	[(#REM)
+		Bloc de previsualisation
+
+		Si on valide la previsu, on n'envoie pas en ajax
+
+	][<form action="#ENV{action}#formulaire_abomailman_envoi_liste" method="post" class="noajax">
+		<div>
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+		<input type="hidden" name="template" value="#ENV*{template}" />
+		<input type="hidden" name="sujet" value="#ENV*{sujet}" />
+		<input type="hidden" name="message" value="#ENV*{message}" />
+		<input type="hidden" name="date" value="#ENV*{date}" />
+		<input type="hidden" name="id_rubrique" value="#ENV*{id_rubrique}" />
+		<input type="hidden" name="id_mot" value="#ENV*{id_mot}" />
+		(#ENV*{erreurs}|table_valeur{previsu})
+		</div>
+	</form>]
+	<form action="#ENV{action}#formulaire_abomailman_envoi_liste" method="post" enctype='multipart/form-data'><div>
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+		<ul>
+			<li class="choisir_template[ (#ENV**{erreurs}|table_valeur{template}|oui)erreur]">
+				<label for="template"><:abomailmans:template:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{template})</span>]
+				<select name="template" id="template">
+					<INCLURE{fond=prive/listes/abomailman_templates}{id_abomailman}{erreurs}{env}>
+				</select>
+			</li>
+			<li class="editer_date choisir_date[ (#ENV**{erreurs}|table_valeur{date}|oui)erreur]" style="overflow:visible">
+				<label for="date"><:abomailmans:contenu_date:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date})</span>]
+				<input name="date" id="date" class="text date" value="[(#ENV{date}|affdate{'d/m/Y'})]"/>
+				#INCLURE{fond=formulaires/dateur/inc-dateur}
+			</li>
+			<li class="choisir_rubrique[ (#ENV**{erreurs}|table_valeur{id_rubrique}|oui)erreur]">
+				<label for="id_rubrique"><:abomailmans:rubrique:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_rubrique})</span>]
+				<select name="id_rubrique" id="id_rubrique">
+					<option value=""></option>
+					[(#INCLURE{fond=prive/listes/abomailman_rubriques}{id_rubrique_env=#ENV{id_rubrique}})]
+				</select>
+			</li>
+			<li class="choisir_mot[ (#ENV**{erreurs}|table_valeur{id_mot}|oui)erreur]">
+				<label for="id_mot"><:abomailmans:mot:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_mot})</span>]
+				<select name="id_mot" id="id_mot">
+					<option value=""></option>
+					[(#INCLURE{fond=prive/listes/abomailman_mots}{id_mot=#ENV{id_mot}})]
+				</select>
+			</li>
+			<li class="obligatoire choisir_sujet [ (#ENV**{erreurs}|table_valeur{sujet}|oui)erreur]">
+				<label for='sujet'><:abomailmans:sujet:> <:info_obligatoire_02:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{sujet})</span>]
+				<input type='text' name='sujet' id='sujet' class="text multilang" value="#ENV*{sujet}" size='40' />
+			</li>
+			<li class="choisir_message[ (#ENV**{erreurs}|table_valeur{message}|oui)erreur]">
+				<label for="message"><:abomailmans:message:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{message})</span>]
+				<textarea id="message" name="message" class="text porte_plume_partout multilang" rows="5" cols="40">#ENV*{message}</textarea>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type='submit' name='previsu_abomailman' value='<:abomailmans:envoi_apercu:>' class='submit' />
+		</p>
+		</div>
+	</form>]
+</div>

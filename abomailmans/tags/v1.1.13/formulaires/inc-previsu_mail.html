@@ -1,0 +1,30 @@
+<ul>
+	<li class="fieldset">
+		<fieldset class="previsu">
+         <h3 class="legend"><:previsualisation:> <:abomailmans:previsu_html:></h3>
+         <div class="abo_message">
+            #ENV*{template_html}
+         </div>
+         <h3 class="legend"><:previsualisation:> <:abomailmans:previsu_txt:></h3>
+         <div class="abo_message">
+            <pre width="80">#ENV*{template_txt, #VAL{abomailmans:pas_template_txt}|_T}</pre>
+         </div>
+         <h3 class="legend"><:abomailmans:destinataire:></h3>
+         <ul>
+            <li>
+               <label><:abomailmans:envoyer_courier_liste:></label>
+               <B_listes>
+               <select name="email_liste" id="email_liste" >
+               <BOUCLE_listes(ABOMAILMANS){par titre}>
+               <option value="#EMAIL">#TITRE -> #EMAIL</option>
+               </BOUCLE_listes>
+               </select>
+               </B_listes>
+            </li>
+      	</ul>
+      </fieldset>
+	</li>
+</ul>
+[<p class="boutons">
+	<input name="confirmer_previsu_abomailman" type="submit" value="(#ENV{bouton})" />
+</p>]

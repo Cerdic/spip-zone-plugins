@@ -1,0 +1,30 @@
+[(#ID_ABOMAILMAN|intval|oui)
+	[(#AUTORISER{modifier,abomailman,#ID_ABOMAILMAN}|sinon_interdire_acces)]
+][(#ID_ABOMAILMAN|intval|non)
+	[(#AUTORISER{creer,abomailman}|sinon_interdire_acces)]
+]
+#SET{retour,#ENV{redirect}|sinon{#ID_ABOMAILMAN|intval|?{#URL_ECRIRE{abomailman,id_abomailman=#ID_ABOMAILMAN},#URL_ECRIRE{abomailmans}}}}
+
+<div class='cadre-formulaire-editer'>
+	<BOUCLE_liste(ABOMAILMANS){id_abomailman}>
+	<div class="entete-formulaire">
+		[(#GET{retour}|icone_verticale{<:icone_retour:>,abomailmans-24,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+		<h1>[(#TITRE|supprimer_numero)]</h1>
+	</div>
+	</BOUCLE_liste>
+	<div class="entete-formulaire">
+		[(#GET{retour}|icone_verticale{<:icone_retour:>,abomailmans-24,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+		<h1><:abomailmans:icone_ajouter_liste:></h1>
+	</div>
+	<//B_liste>
+	#SET{redirect,#ENV{redirect,#ID_ABOMAILMAN|generer_url_entite{abomailman}}}
+	[(#ENV{retourajax,''}|oui)
+		#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+		<div class="ajax">
+	]
+	#FORMULAIRE_EDITER_ABOMAILMAN{#ENV{id_abomailman,oui},#GET{redirect}}
+	[(#ENV{retourajax,''}|oui)
+		</div>
+		<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#extra');/*\]\]>*/</script>
+	]
+</div>

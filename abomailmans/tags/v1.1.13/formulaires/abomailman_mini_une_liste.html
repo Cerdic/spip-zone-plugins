@@ -1,0 +1,27 @@
+#CACHE{0}
+<div class="formulaire_spip formulaire_#FORM" id="formulaire_#FORM[_(#ENV{id_abomailman})]">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+   [(#ENV*{editable}|oui)
+      <form method='post' action='#ENV{action}'>
+         <div class="abonnement">
+            #ACTION_FORMULAIRE{#ENV{action}}
+            <ul>
+               #SET{erreurs,#ENV**{erreurs}|table_valeur{la_demo}}
+               <li class="editer_email obligatoire[ (#GET{erreurs}|oui)erreur]">
+                  [<span class='erreur_message'>(#GET{erreurs})</span>]
+                  <input name="email" id="email" type="text" value="<:abomailmans:votre_email:>" onclick="this.value=''" />
+               </li>
+            </ul>
+            [(#REM) Piege a robots spammeurs, du moins on essaie]
+			<p style="display:none;">
+				<label for="nobot_abomailman"><:antispam_champ_vide:></label>
+				<input type="text" class="text" name="nobot" id="nobot_abomailman" value="#ENV{nobot}" size="10" />
+			</p>
+            <p class="boutons"><input type="submit" class="submit" value="<:bouton_valider:>" /></p>
+         </div>
+      </form>
+   ]
+</div>

@@ -1,0 +1,34 @@
+<paquet
+	prefix="abomailmans"
+	categorie="communication"
+	version="1.1.13"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/abomailmans-32.png"
+	schema="0.34.0"
+	documentation="https://contrib.spip.net/Abomailmans-pour-s-abonner-a-des-listes-de-diffusion"
+>
+
+	<nom>Abonnement à des listes de diffusion</nom>
+	<!-- Interfacer vos listes de diffusions mailman, ezmlm ou sympa avec votre SPIP -->
+
+	<auteur lien="http://www.netaktiv.com">NetAktiv</auteur>
+	<auteur lien="http://www.elastick.net">Anne-lise Martenot</auteur>
+	<auteur>Yffic</auteur>
+	<auteur lien="http://www.kent1.info">kent1</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<traduire module="abomailmans" reference="fr" gestionnaire="salvatore" />
+	<traduire module="paquet-abomailmans" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/abomailmans_install.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/abomailmans_install.php" />
+	<pipeline nom="taches_generales_cron" inclure="abomailmans_pipelines.php" />
+	<pipeline nom="abomailmans" action="go" inclure="abomailmans_pipelines.php" />
+	<pipeline nom="autoriser" inclure="abomailmans_autoriser.php" />
+
+	<necessite nom="facteur" compatibilite="[3.6.2;[" />
+
+	<menu nom="abomailmans" titre="abomailmans:bouton_listes_diffusion" parent="bando_edition" icone="images/abomailmans-16.png" />
+	<menu nom="abomailman_edit" parametres="new=oui" titre="abomailmans:icone_ajouter_liste" parent="outils_rapides" icone="images/abomailmans-new-16.png" />
+</paquet>

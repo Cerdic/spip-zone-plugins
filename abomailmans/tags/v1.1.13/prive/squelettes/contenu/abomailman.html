@@ -1,0 +1,23 @@
+<BOUCLE_afficher_contenu(ABOMAILMANS){id_abomailman=#ENV{id_abomailman}}{si #ENV{exec}|=={abomailman}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,abomailman,#ID_ABOMAILMAN})
+		[(#ID_ABOMAILMAN|afficher_qui_edite{abomailman}|non)
+			[(#URL_ECRIRE{abomailman_edit,id_abomailman=#ID_ABOMAILMAN}|icone_verticale{<:abomailmans:icone_modifier_abomailman:>,abomailmans-24,edit,right ajax preload})]
+		]
+		[(#ID_ABOMAILMAN|afficher_qui_edite{abomailman}|oui)
+			[(#URL_ECRIRE{abomailman_edit,id_abomailman=#ID_ABOMAILMAN}|icone_verticale{#ID_ABOMAILMAN|afficher_qui_edite{abomailmans-24},warning-24,'',right ajax preload})]
+		]
+	]
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{abomailmans-24.png}|balise_img{article,cadre-icone})]</h1>
+],simple fiche_objet})]
+<div id="wysiwyg">
+#INCLURE{fond=prive/objets/contenu/abomailman,env}
+</div>
+#BOITE_FERMER
+<div class="nettoyeur"></div>
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation');/*\]\]>*/</script>
+]
+</BOUCLE_afficher_contenu>
+[(#ENV**{exec}|=={abomailman_edit}|?{#INCLURE{fond=prive/squelettes/contenu/abomailman_edit,env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_afficher_contenu>

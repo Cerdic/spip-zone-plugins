@@ -1,0 +1,72 @@
+<div class="formulaire_spip formulaire_#FORM" id="formulaire_#FORM">
+	[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</div>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
+	<B_listes>
+	#SET{abo_types,#ARRAY}
+	<BOUCLE_types(ABOMAILMANS){id_abomailman?}{desactive=0}{fusion abo_type}>
+	[(#SET{abo_types,[(#GET{abo_types}|push{#ABO_TYPE})]})]
+	</BOUCLE_types>
+	[(#GET{abo_types}|count|>{1}|oui)
+		[(#SET{legende,<:abomailmans:inscription_lettres_legende:>})]
+	]
+	[(#GET{abo_types}|count|=={1}|oui)
+		[(#GRAND_TOTAL|>{1}|oui)
+			[(#SET{legende,[(#VAL{abomailmans:legende_inscriptions_}|concat{#GET{abo_types}|table_valeur{0}}|_T)]})]
+		]
+		[(#GRAND_TOTAL|>{1}|non)
+			[(#SET{legende,[(#VAL{abomailmans:legende_inscription_}|concat{#GET{abo_types}|table_valeur{0}}|_T)]})]
+		]
+	]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data' id='abomailmansListes'>
+		<div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend>#GET{legende}</legend>
+				<ul class="editer-groupe">
+					<li class="editer abomailman_nom[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
+						<label for="nom"><:abomailmans:nom:></label>
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</span>]
+						<input name="nom" id="nom" type="text" class="text" value="#ENV{nom}" />
+					</li>
+					<li class="editer obligatoire abomailman_email[ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
+						<label for="email_listes"><:abomailmans:email_abonnement:></label>
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</span>]
+						<input name="email" id="email_listes" type="text" class="text" value="#ENV{email}" />
+					</li>
+
+					<li class="editer abomailman_listes[ (#ENV**{erreurs}|table_valeur{listes}|oui)erreur]">
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{listes})</span>]
+						<ul class="editer-groupe">
+							<li class="editer editer_listes">
+							<BOUCLE_listes(ABOMAILMANS){id_abomailman ?}{desactive=0}{par num titre,titre}>
+							<div class="choix">
+								[<p class="explication #EDIT{descriptif}">
+								(#DESCRIPTIF|PtoBR)
+								</p>]
+								<input name="listes[]" type="checkbox" id="liste_#ID_ABOMAILMAN" value="#ID_ABOMAILMAN"[(#GRAND_TOTAL|=={1}|oui) checked="checked"] />
+								<label for="liste_#ID_ABOMAILMAN" class="#EDIT{titre}} #LANG" lang="#LANG"[ title="(#LANG|traduire_nom_langue)"]>#TITRE</label>
+							</div>
+							</BOUCLE_listes>
+							</li>
+						</ul>
+					</li>
+
+				</ul>
+				[(#REM) Piege a robots spammeurs, du moins on essaie]
+				<p style="display:none;">
+					<label for="nobot_abomailman"><:antispam_champ_vide:></label>
+					<input type="text" class="text" name="nobot" id="nobot_abomailman" value="#ENV{nobot}" size="10" />
+				</p>
+				<p class="boutons">
+                	<input name="abonnement" type="submit" value="<:abomailmans:btn_abonnement:>" class="submit" />
+					<input name="desabonnement" type="submit" value="<:abomailmans:btn_desabonnement:>" class="submit" />
+                </p>
+		</fieldset>
+		</div>
+	</form>
+	</B_listes>
+	</BOUCLE_editable>
+</div>

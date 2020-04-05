@@ -1,0 +1,58 @@
+#CACHE{0}[(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+[(#REM)
+/**********************************************************
+* Ce squelette pour Abomailmains
+* Attention a :
+* - ne pas envoyer des gabarits de plus de 10Ko
+* - les urls et liens images seront automatiquement converties en absolues
+*  ex. rubrique5.html -> http://www.monsite.org/rubrique5.html
+* Inspire du plugin Spip-Listes
+* $Id: nouveautes.html 44651 2011-02-14 10:33:12Z yffic@lefourneau.com $
+***********************************************************/]
+<B_articlesDateFr>
+
+<BOUCLE_abomailman_fr(ABOMAILMANS){id_abomailman}>[(#DESCRIPTIF*|extraire_multi{fr}|propre)]</BOUCLE_abomailman_fr>
+</B_abomailman_fr>
+[(#ENV*{sujet}|extraire_multi{fr})]
+[(#ENV*{message}|extraire_multi{fr})]
+<//B_abomailman_fr>
+
+------------------------------------------------------------------------------
+
+<BOUCLE_articlesDateFr(ARTICLES){id_rubrique ?}{id_mot ?}{age_relatif< 0}{lang=fr}{par date}{inverse}>
+[(#SURTITRE|textebrut|supprimer_numero) :]
+[(#TITRE|textebrut|supprimer_numero)]
+[(#DATE|affdate)]
+<BOUCLE_arianeFr(HIERARCHIE){id_article}> > [(#TITRE*|extraire_multi{fr}|couper{80})]</BOUCLE_arianeFr>
+[(#INTRODUCTION|textebrut|liens_absolus)]
+Lire l'article : [(#URL_ARTICLE|url_absolue)]
+------------------------------------------------------------------------------
+</BOUCLE_articlesDateFr>
+
+[(#NOM_SITE_SPIP*|extraire_multi{fr}|textebrut)] (#URL_SITE_SPIP)
+</B_articlesDateFr>
+
+##############################################################################
+<B_articlesDateEn>
+
+<BOUCLE_abomailman_en(ABOMAILMANS){id_abomailman}>[(#DESCRIPTIF*|extraire_multi{en}|propre)]</BOUCLE_abomailman_en>
+</B_abomailman_en>
+[(#ENV*{sujet}|extraire_multi{en})]
+[(#ENV*{message}|extraire_multi{en})]
+<//B_abomailman_en>
+
+------------------------------------------------------------------------------
+
+<BOUCLE_articlesDateEn(ARTICLES){id_rubrique ?}{id_mot ?}{age_relatif< 0}{lang=en}{par date}{inverse}>
+[(#SURTITRE|textebrut|supprimer_numero) :]
+[(#TITRE|textebrut|supprimer_numero)]
+[(#DATE|affdate)]
+<BOUCLE_arianeEn(HIERARCHIE){id_article}> > [(#TITRE*|extraire_multi{en}|couper{80})]</BOUCLE_arianeEn>
+[(#INTRODUCTION|textebrut|liens_absolus)]
+Read the article : [(#URL_ARTICLE|url_absolue)]
+------------------------------------------------------------------------------
+</BOUCLE_articlesDateEn>
+
+[(#NOM_SITE_SPIP*|extraire_multi{en}|textebrut)] (#URL_SITE_SPIP)
+</B_articlesDateEn>
+[(#FILTRE{supprimer_tags|filtrer_entites|trim})]
