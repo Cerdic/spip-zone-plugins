@@ -1,0 +1,22 @@
+<paquet
+	prefix="hashtags"
+	categorie="edition"
+	version="0.0.27"
+	etat="dev"
+	documentation="https://contrib.spip.net/Hashtags"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/hashtags-64.png"
+>
+
+	<nom>Hashtags</nom>
+
+	<auteur lien="http://blog.roxing.net/pierrox">Pierre LASZCZAK</auteur>
+	<credit>roxing.net</credit>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="post_edition" inclure="hashtags_pipelines.php" />
+	<pipeline nom="post_typo" inclure="hashtags_pipelines.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="hashtags_pipelines.php" />
+
+</paquet>

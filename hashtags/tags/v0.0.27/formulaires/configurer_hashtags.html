@@ -1,0 +1,72 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><img src="#CHEMIN_IMAGE{hashtags-24.png}" class="cadre-icone" /><:hashtags:titre_configurer_hashtags:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV{erreurs}|count|oui)<:hashtags:verifier_configuration_des_objets:></p>]
+
+	<form method="post" action="#ENV{action}">
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<B_data>
+
+			#BOITE_OUVRIR{'','info'}
+			<p class='info'><:hashtags:info_formulaire_configurer_hashtags:></p>
+			#BOITE_FERMER
+
+			<BOUCLE_data(DATA){source table, #ENV{objets}}{groupes != ''}{titre != ''}{par titre}>
+				<fieldset>
+					<h3 class="legend">[<img src="(#CHEMIN_IMAGE{#CLE|concat{-16.png}})" /> ]#TITRE</h3>
+					<div>
+						<input type="checkbox"
+								name="cfg_hashtags[#_data:CLE][active]"
+								value="oui"
+								[(#ENV{cfg_hashtags/#_data:CLE/active}|=={oui}|oui)checked="checked" ]/>
+						<label>[(#VAL{hashtags:activer_hashtags_sur}|_T{#ARRAY{objet,#TITRE}})]</label>
+					</div>
+					<ul class="editer-groupe">
+						<B_champs>
+							<li class="editer[ (#ENV{erreurs/#CLE/champs}|oui)erreur]">
+								<label><:ecrire:config_activer_champs:></label>
+								<BOUCLE_champs(DATA){source table, #CHAMPS}>
+									<div class="choix">
+										<input type="checkbox"
+												name="cfg_hashtags[#_data:CLE][champs][]"
+												value="#VALEUR"
+												[(#VALEUR|in_array{#ENV{cfg_hashtags/#_data:CLE/champs, #ARRAY}}|oui)checked="checked"]>
+										<label>[(#VAL{info_}|concat{#VALEUR}|_T)]</label>
+									</div>
+								</BOUCLE_champs>
+							</li>
+						</B_champs>
+						<B_groupes>
+							<li class="editer[ (#ENV{erreurs/#CLE/groupes}|oui)erreur]">
+								<label><:mots:titre_groupes_mots:></label>
+								<BOUCLE_groupes(DATA){source table, #GROUPES}>
+									<div class="choix">
+										<input type="radio"
+												name="cfg_hashtags[#_data:CLE][groupes]"
+												[(#ENV{cfg_hashtags/#_data:CLE/groupes}|=={#CLE}|oui)checked="checked"]
+												value="#CLE" />
+										<label><img src="#CHEMIN_IMAGE{groupe_mots-16}"/>[ (#VALEUR)]</label>
+									</div>
+								</BOUCLE_groupes>
+							</li>
+						</B_groupes>
+					</ul>
+				</fieldset>
+			</BOUCLE_data>
+			<p class="boutons">
+				<span class="image_loading">&nbsp;</span>
+				<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+			</p>
+		</B_data>
+			<p class="notice">
+				<:hashtags:err_activer_utilisation_mots_cles{
+								url1=#URL_ECRIRE{configurer_contenu},
+								url2=#URL_ECRIRE{mots}}:>
+			</p>
+		<//B_data>
+	</form>
+</div>
