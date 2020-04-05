@@ -1,0 +1,183 @@
+#CACHE{1800}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xml:lang="#LANG" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv='Content-Type' content='text/html; charset=#CHARSET' />
+	<title>Rainette - Demo</title>
+	[<link rel="stylesheet" href="(#CSS{demo/demo.css})" type="text/css" />]
+	#INSERT_HEAD
+</head>
+
+#SET{service, #ENV{service, #VAL|rainette_service_defaut}}
+#SET{mode, #ENV{mode, conditions}}
+#SET{jeu, #VAL|rainette_debug_jeu_defaut}
+#SET{lieu, #ENV{ville, #GET{jeu/#GET{service}}}}
+
+<body>
+	<div id="container">
+	<div id="header">
+		<h1>
+			<img height="48" width="48" title="Plugin Rainette" alt="Plugin Rainette" src="#CHEMIN{rainette_logo-64.png}"/>
+			PLUGIN RAINETTE[&nbsp;((#PLUGIN{RAINETTE, version}))]
+		</h1>
+	</div>
+
+	<div id="wrapper">
+		<div id="content">
+			<h2 class="h2">1.1 - UTILISATIONS DES INFORMATIONS METEO</h2>
+			<a name="infos" href="#"></a>
+			<div class="clearfix">
+				<div class="clearfix">
+					<h3 class="h3">Utilisation du mod&eacute;le <strong>rainette_infos</strong></h3>
+					[(#MODELE{rainette_infos,lieu=#GET{lieu},sous_modele=infos_ville, service=#GET{service}})]
+					[<div class="clearfix">
+						<br />
+						<h3 class="h3">Affichage debug du tableau des informations</h3>
+						(#GET{lieu}|rainette_debug_afficher_cache{infos, #GET{service}})
+					</div>]
+				</div>
+				<div class="clearfix">
+					<h3 class="h3">Utilisation de la balise <strong>RAINETTE_INFOS</strong></h3>
+					<ul>
+						<li>Ville observ&eacute;e:&nbsp;[<strong>(#RAINETTE_INFOS{#GET{lieu}, ville, #GET{service}})</strong>]</li>
+						<li>Longitude, appel sans filtre unit&eacute;:&nbsp;[<strong>(#RAINETTE_INFOS{#GET{lieu}, longitude, #GET{service}})</strong>]</li>
+						<li>Latitude, appel avec filtre unit&eacute;:&nbsp;[<strong>(#RAINETTE_INFOS{#GET{lieu}, latitude, #GET{service}}|rainette_afficher_unite{angle, -1, #GET{service}})</strong>]</li>
+						<li>Appel sans type d'info pr&eacute;cis&eacute;e, on renvoie le tableau s&eacute;rialis&eacute;:&nbsp;[<strong>(#RAINETTE_INFOS{#GET{lieu}, '', #GET{service}})</strong>]</li>
+						<li>Appel sans argument, on renvoie une chaine vide:&nbsp;[<strong>(#RAINETTE_INFOS)</strong>]</li>
+					</ul>
+				</div>
+			</div>
+
+			<h2 class="h2">1.2 - UTILISATIONS DES CONDITIONS METEO</h2>
+			<a name="conditions" href="#"></a>
+			<div class="clearfix">
+				<h3 class="h3">Utilisation du mod&eacute;le <strong>rainette_conditions</strong></h3>
+				[(#MODELE{rainette_conditions,lieu=#GET{lieu},sous_modele=conditions_tempsreel, service=#GET{service}})]
+				[<div class="clearfix">
+					<br />
+					<h3 class="h3">Affichage debug du tableau des conditions</h3>
+					(#GET{lieu}|rainette_debug_afficher_cache{conditions, #GET{service}})
+				</div>]
+			</div>
+
+
+			<h2 class="h2">1.3 - UTILISATIONS DES PREVISIONS METEO</h2>
+			<a name="previsions" href="#"></a>
+			<div class="clearfix">
+				<div class="clearfix">
+					<h3 class="h3">Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour les 5 jours suivants le jour courant (premier_jour=1, nombre_jours=5)</h3>
+					[(#MODELE{rainette_previsions,lieu=#GET{lieu},premier_jour=1,nombre_jours=5,sous_modele=previsions_24h, service=#GET{service}})]
+				</div>
+				<div class="clearfix">
+					[(#MODELE{rainette_previsions,lieu=#GET{lieu},premier_jour=1,nombre_jours=5,sous_modele=previsions_24h_table, service=#GET{service}})]
+				</div>
+				<div class="clearfix">
+					<h3 class="h3">Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour du jour courant au maximum des pr&eacute;visions (premier_jour=0)</h3>
+					[(#MODELE{rainette_previsions,lieu=#GET{lieu},premier_jour=0,sous_modele=previsions_24h, service=#GET{service}})]
+				</div>
+				[<div class="clearfix">
+					<h3 class="h3">Affichage debug du tableau des pr&eacute;visions</h3>
+					<p>Seul le jour suivant le jour courant est affich&eacute; \(index \[1\] du sous-tableau \[donnees\]\). La p&eacute;riodicit&eacute; utilis&eacute;e est celle par d&eacute;faut pour le service concern&eacute;.</p>
+					<br />
+					(#GET{lieu}|rainette_debug_afficher_cache{previsions, #GET{service}})
+				</div>]
+			</div>
+
+			<h2 class="h2">2.0 - COMPARAISON DES DONNEES DE CHAQUE SERVICE</h2>
+			<a name="comparaison" href="#"></a>
+			<p>
+				L&eacute;gende du tableau :
+				<ul>
+					<li><strong><del>API</del></strong>&nbsp;: indique que la donn&eacute;e ne fait pas partie des informations fournies par le service</li>
+					<li><strong>Indisponible</strong>&nbsp;: indique que la donn&eacute;e est fournie par le service mais indisponible pour le moment</li>
+				[(#GET{mode}|=={previsions}|oui)
+					<li><strong>Pr&eacute;visions</strong>&nbsp;: les donn&eacute;es affich&eacute;es correspondent &agrave; celles de demain</li>
+				]
+				</ul>
+			</p>
+			<div class="clearfix">
+				<br />
+				#SET{donnees, #GET{mode}|rainette_debug_comparer_services{#GET{jeu}}}
+				#INCLURE{fond=demo/inc-comparer_services,
+					jeu=#GET{jeu},
+					donnees=#GET{donnees},
+					mode=#GET{mode}}
+			</div>
+
+
+			<h2 class="h2">3 - ETAT D'EXECUTION DES SERVICES</h2>
+			<a name="execution" href="#"></a>
+			<div class="clearfix">
+				#SET{execution, #VAL|rainette_debug_afficher_execution}
+				#INCLURE{fond=demo/inc-afficher_execution, execution=#GET{execution}}
+			</div>
+
+
+			<h2 class="h2">4. - LANGUES SPIP NON INTEGREES</h2>
+			<a name="langues" href="#"></a>
+			<div class="clearfix">
+				[(#VAL|rainette_debug_verifier_langue_manquante|sinon{'Aucune langue SPIP manque'})]
+			</div>
+		</div>
+	</div>
+
+	<div id="navigation">
+	</div>
+
+	<div id="extra">
+		<div class="menu" id="services">
+			<h2 class="h2">M&eacute;t&eacute;o d'un service</h2>
+			<p>Choisissez un service pour afficher les mod&egrave;les informations, conditions et pr&eacute;visions (1.1, 1.2, 1.3)</p>
+			<ul class="menu-items">
+			<BOUCLE_services(DATA) {source table, #VAL{tableau}|rainette_lister_services}>
+				[<li class="item">
+				(#SELF|parametre_url{service, #CLE}
+					|lien_ou_expose{
+						[(#VALEUR)],
+						[(#GET{service}|=={#CLE})]})
+				</li>]
+			</BOUCLE_services>
+			</ul>
+		</div>
+
+		<div class="menu" id="modes">
+			<h2 class="h2">Comparaison des services</h2>
+			<p>Choisissez un mode pour comparer les donn&eacute;es fournies par chaque service (2.0)</p>
+			<ul class="menu-items">
+			<BOUCLE_modes(DATA) {source table, #LISTE{infos, conditions, previsions}}>
+				[<li class="item">
+				(#SELF|parametre_url{mode, #VALEUR}
+					|lien_ou_expose{
+						[(#VALEUR|ucfirst)],
+						[(#GET{mode}|=={#VALEUR})]})
+				</li>]
+			</BOUCLE_modes>
+			</ul>
+		</div>
+
+		<div class="menu" id="configuration">
+			<h2 class="h2">Configuration des services</h2>
+			<p>Choisissez un service pour vous rendre sur sa page de configuration</p>
+			<ul class="menu-items">
+			<BOUCLE_configurations(DATA) {source table, #VAL{tableau}|rainette_lister_services}>
+				[<li class="item">
+				(#URL_ECRIRE{configurer_rainette}|parametre_url{service, #CLE}
+					|lien_ou_expose{
+						[(#VALEUR)]})
+				</li>]
+			</BOUCLE_configurations>
+			</ul>
+		</div>
+
+	</div>
+
+	<div id="footer">
+		<p>Pour appeler la page de demo:</p>
+		<ul>
+			<li><strong>http://monsite/spip.php?page=demo/rainette</strong> (Paris par d&eacute;faut) ou</li>
+			<li><strong>http://monsite/spip.php?page=demo/rainette&amp;ville=FRXXnnnn&amp;service=xxx</strong> pour pr&eacute;ciser la ville voire le service</li>
+		</ul>
+	</div>
+</div>
+</body>
+</html>

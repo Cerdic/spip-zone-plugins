@@ -1,0 +1,52 @@
+[(#REM) <!--
+	Afficher les données de chaque service concerné dans un tableau permettant de comparer les valeurs et les types.
+	Arguments :
+	- mode : infos, conditions ou prévisions
+	- jeu : tableau du jeu de données service => lieu
+	- donnees : tableau global des données du mode pour chaque service concerné par le jeu
+-->]
+
+<B_comparer>
+<table class="spip">
+	<caption><strong>Comparaisons des donn&#233;es de #ENV{mode}</strong></caption>
+	<thead>
+		<tr>
+			<th>Donn&#233;es</th>
+		<BOUCLE_head(DATA) {source table, #ENV{jeu}}>
+			<th>#CLE</th>
+		</BOUCLE_head>
+		</tr>
+	</thead>
+	<tbody>
+<BOUCLE_comparer(DATA) {source table, #ENV{donnees}}>
+	<BOUCLE_valeur(DATA) {source table, #ENV{jeu}}>
+	[(#_comparer:VALEUR|table_valeur{#CLE/groupe}|unique|oui)
+		<tr>
+			<td[ colspan=(#ENV{jeu}|count|plus{1})] class="groupe">
+				[-- (#VAL{rainette:groupe_}|concat{#_comparer:VALEUR|table_valeur{#CLE/groupe}}|_T) --]
+			</td>
+		</tr>
+	]
+	[(#COMPTEUR_BOUCLE|=={1}|oui)
+		<tr>
+			<td>
+				<strong>#_comparer:CLE</strong>
+				[<br :><i>(#_comparer:VALEUR|table_valeur{#CLE/rangement})</i>]
+			</td>
+	]
+			<td[ class="(#_comparer:VALEUR|table_valeur{#CLE/erreur})"]>
+				[(#_comparer:CLE|rainette_debug_afficher_donnee{
+					#_comparer:VALEUR|table_valeur{#CLE/valeur},
+					#_comparer:VALEUR|table_valeur{#CLE/type_php},
+					#_comparer:VALEUR|table_valeur{#CLE/type_unite},
+					#CLE})]
+			</td>
+	[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)
+		</tr>
+	]
+	</BOUCLE_valeur>
+</BOUCLE_comparer>
+	</tbody>
+</table>
+</B_comparer>
+<//B_comparer>

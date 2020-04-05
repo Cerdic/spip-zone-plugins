@@ -1,0 +1,15 @@
+<traduction module="rainette" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/rainette/lang/" reference="fr">
+	<langue code="ca" />
+	<langue code="de" />
+	<langue code="en" />
+	<langue code="es" url="https://trad.spip.net/tradlang_module/rainette?lang_cible=es">
+		<traducteur nom="_Eric_" lien="https://trad.spip.net/auteur/_eric_" />
+	</langue>
+	<langue code="fa" url="https://trad.spip.net/tradlang_module/rainette?lang_cible=fa">
+		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
+	</langue>
+	<langue code="fr" />
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/rainette?lang_cible=sk">
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
+	</langue>
+</traduction>

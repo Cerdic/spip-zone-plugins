@@ -1,0 +1,70 @@
+[(#REM)<!-- 
+	Ce sous-modele est celui utilise par defaut par Rainette pour presenter les previsions d'une ville
+	Il est appelee par le filtre rainette_coasser
+
+	Ce modèle ne peut être utiliser qu'avec un service fournissant des données horaires jour et nuit (periodicité 12h).
+ -->]
+
+<BOUCLE_previsions_12h(DATA) {source table, #ENV{donnees}}{par cle}{#ENV{premier_jour}, #ENV{nombre_jours}}>
+<div class="rainette_previsions_12h">
+	<div class="entete">
+		[(#VALEUR{date}|nom_jour|ucfirst)][ (#VALEUR{date}|affdate_jourcourt)][ - (#VALEUR{heure/0/heure})]
+	</div>
+	<div class="entete">
+		<:rainette:nuit|ucfirst:>[ - (#VALEUR{heure/1/heure})]
+	</div>
+	<div class="cadre">
+	<BOUCLE_cellules(DATA) {source table, #VALEUR{heure}}{par cle}>
+		<div class="cellule[ (#CLE|=={0}|?{gauche, droite})]">
+			<div class="contenu">
+				<div class="icone">[(#VALEUR{icone}|rainette_afficher_icone{grand}|image_reduire{95})]</div>
+				<div class="t_reelle">
+					[(#CLE|=={0}|?{<:rainette:temperature_max:>, <:rainette:temperature_min:>}|ucfirst)<br/>]
+					<span>
+						[(#VALEUR{temperature}|oui)
+							[(#VALEUR{temperature}|rainette_afficher_unite{temperature, -1, #ENV{extras/service}})]
+						]
+						[(#VALEUR{temperature}|non)
+							[(#CLE|=={0}|?{
+								#_previsions_12h:VALEUR{temperature_max}|rainette_afficher_unite{temperature, -1, #ENV{extras/service}},
+								#_previsions_12h:VALEUR{temperature_min}|rainette_afficher_unite{temperature, -1, #ENV{extras/service}}
+							})]
+						]
+					</span>
+					<br/>
+					[(#VALEUR{resume}|rainette_afficher_resume)]
+				</div>
+				<div class="details">
+					<ul>
+						<li>
+							<span><:rainette:vent|ucfirst:></span>
+							[(#VALEUR{vitesse_vent}|rainette_afficher_unite{vitesse, -1, #ENV{extras/service}})]
+							[ - (#VALEUR{direction_vent}|rainette_afficher_direction)]
+						</li>
+						<li>
+							<span><:rainette:humidite|ucfirst:></span>
+							[(#VALEUR{humidite}|rainette_afficher_unite{pourcentage, -1, #ENV{extras/service}})]
+						</li>
+						<li>
+							<span><:rainette:risque_precipitation|ucfirst:></span>
+							[(#VALEUR{risque_precipitation}|rainette_afficher_unite{pourcentage, -1, #ENV{extras/service}})]
+						</li>
+						<li>
+							<span>[(#CLE|=={0}|?{<:rainette:lever_soleil:>, <:rainette:coucher_soleil:>}|ucfirst)]</span>
+							[(#CLE|=={0}|?{#_previsions_12h:VALEUR{lever_soleil}, #_previsions_12h:VALEUR{coucher_soleil}}|affdate{'H\hi'})]
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</BOUCLE_cellules>
+	</div>
+	<div class="maj">
+		<:rainette:derniere_maj|ucfirst:>&nbsp;:
+		[&nbsp;(#VALEUR{derniere_maj}|nom_jour)][&nbsp;(#VALEUR{derniere_maj}|affdate_heure)]
+		<INCLURE{fond=modeles/inc-credits,
+			classe_div=prev2x12h,
+			env} />
+	</div>
+</div>
+</BOUCLE_previsions_12h>

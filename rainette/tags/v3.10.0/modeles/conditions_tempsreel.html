@@ -1,0 +1,49 @@
+[(#REM)<!-- 
+	Ce sous-modele est celui utilise par defaut par Rainette pour presenter les conditions temps reel d'une ville
+	Il est appelee par le modèle rainette_conditions.
+
+	Pour les valeurs devant être afficher avec une unité (filtre |rainette_afficher_unite) il est nécessaire
+	d'utiliser la fonction table_valeur avec l'option de conservation de la valeur null sur l'index le plus
+	profond.
+ -->
+]
+<div class="rainette_conditions">
+	<div class="statut">
+		<div class="cadre">
+			<div class="icone">[(#ENV{donnees/icone}|rainette_afficher_icone{grand})]</div>
+			<div class="t_reelle">[(#ENV{donnees}|table_valeur{temperature_reelle, '', #EVAL{true}}|rainette_afficher_unite{temperature, -1, #ENV{extras/service}})]</div>
+			<div class="t_ressentie"><:rainette:temperature_ressentie:>&nbsp;:[&nbsp;(#ENV{donnees}|table_valeur{temperature_ressentie, '', #EVAL{true}}|rainette_afficher_unite{temperature, -1, #ENV{extras/service}})]<br/></div>
+			<br class="clear" />
+			<div class="resume">[(#ENV{donnees/resume}|rainette_afficher_resume)]</div>
+		</div>
+		<div class="maj">
+			<:rainette:derniere_maj|ucfirst:>&nbsp;:[&nbsp;(#ENV{donnees/derniere_maj, #VAL{Y-m-d H:i:s}|date}|affdate_heure)]<br/>
+			[<:rainette:station_observation|ucfirst:>&nbsp;:&nbsp;(#ENV{donnees/station})]
+			[(#ENV{donnees/station}|non)
+				[<:rainette:lieu|ucfirst:>&nbsp;:&nbsp;
+					(#RAINETTE_INFOS{#ENV{extras/lieu}, ville, #ENV{extras/service}})[,
+					(#RAINETTE_INFOS{#ENV{extras/lieu}, pays, #ENV{extras/service}})]
+				]
+			]
+		</div>
+	</div>
+
+	<ul class="details">
+		<li><span><:rainette:vent|ucfirst:></span>
+		[(#ENV{donnees}|table_valeur{vitesse_vent, '', #EVAL{true}}|rainette_afficher_unite{vitesse, -1, #ENV{extras/service}})]
+		[ - (#ENV{donnees}|table_valeur{direction_vent}|rainette_afficher_direction)]</li>
+		<li><span><:rainette:humidite|ucfirst:></span>
+		[(#ENV{donnees}|table_valeur{humidite, '', #EVAL{true}}|rainette_afficher_unite{pourcentage, -1, #ENV{extras/service}})]</li>
+		<li><span><:rainette:pression|ucfirst:></span>
+		[(#ENV{donnees}|table_valeur{pression, '', #EVAL{true}}|rainette_afficher_unite{pression, -1, #ENV{extras/service}})]
+		[ (#ENV{donnees/tendance_pression}|rainette_afficher_tendance{symbole})]</li>
+		[<li><span><:rainette:point_rosee|ucfirst:></span>
+		(#ENV{donnees}|table_valeur{point_rosee, '', #EVAL{true}}|rainette_afficher_unite{temperature, -1, #ENV{extras/service}})</li>]
+		[<li><span><:rainette:visibilite|ucfirst:></span>
+		(#ENV{donnees}|table_valeur{visibilite, '', #EVAL{true}}|rainette_afficher_unite{distance, -1, #ENV{extras/service}})</li>]
+	</ul>
+
+	<INCLURE{fond=modeles/inc-credits,
+		classe_div=condtr,
+		env} />
+</div>

@@ -1,0 +1,10 @@
+[(#REM) <!-- Boite d'information sur la page de configuration affichee --> ]
+#BOITE_OUVRIR{#CHEMIN_IMAGE{rainette-24.gif}|balise_img{'',cadre-icone}, info}
+	<p><:rainette:info_page_configurer:></p>
+#BOITE_FERMER
+
+[(#REM) <!-- Menu des services --> ]
+<INCLURE{fond=prive/squelettes/inclure/inc-rainette_navigation, env} />
+
+[(#REM) <!-- Raccourci d'administration --> ]
+<INCLURE{fond=prive/squelettes/inclure/inc-rainette_raccourcis_admin, env} />

@@ -1,0 +1,6 @@
+[(#REM) Prévisualisation de la noisette des conditions météorologiques d'un lieu donné ]
+#SET{url_config, ''}
+[(#PLUGIN{RAINETTE}|oui)
+	#SET{url_config, #URL_ECRIRE{configurer_rainette, service=#ENV{service}}}
+]
+[[<a href="(#GET{url_config})">](#ENV{service}|rainette_afficher_service)[(#GET{url_config}|oui)</a>]][ - (#ENV{lieu}|typo)<br />]

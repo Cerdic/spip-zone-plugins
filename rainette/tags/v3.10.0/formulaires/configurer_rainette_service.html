@@ -1,0 +1,158 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	<h3 class="titrem"><:rainette:titre_form_configuration:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:rainette:legende_configurer_inscription:></legend>
+			[(#REM) <!-- Configuration de la clé d'inscription si requise --> ]
+			[(#ENV{service}|=={weather}|oui)
+				<p><:rainette:explication_configurer_cle_aucune:></p>
+			]
+			[(#ENV{service}|=={weather}|non)
+			<div class="editer-groupe">
+				#SET{type_cle, obligatoire}
+				[(#SET{url, [<a class="spip_out"[ href="(#ENV{_configuration/enregistrement/lien})"] target="_blank">(#ENV{_configuration/enregistrement/titre})</a>]})]
+				[(#SET{explication, #VAL{rainette:explication_configurer_cle_}
+					|concat{#GET{type_cle}}
+					|_T{#ARRAY{url,#GET{url}}}})]
+				[(#SAISIE{input, inscription,
+					explication=#GET{explication},
+					label=<:rainette:label_cle:>,
+					obligatoire=oui,
+					size=#ENV{_configuration/enregistrement/taille_cle},
+					maxlength=#ENV{_configuration/enregistrement/taille_cle}
+				})]
+			</div>
+			]
+		</fieldset>
+
+		<fieldset>
+			<legend><:rainette:legende_configurer_affichage:></legend>
+			<div class="editer-groupe">
+				[(#REM) <!-- Configuration du système d'unité à utiliser pour les données météo --> ]
+				[(#SAISIE{radio, unite,
+					datas=#ARRAY{m, <:rainette:label_unite_metrique:>, s, <:rainette:label_unite_standard:>},
+					explication=<:rainette:explication_configurer_unite:>,
+					label=<:rainette:label_unite:>,
+				})]
+
+				[(#ENV{service}|=={weather}|non)
+					[(#REM) <!-- Configuration du système d'icônes à utiliser (sauf pour weather) --> ]
+					[(#SET{data,
+						[(#ARRAY{#ENV{service}, <:rainette:label_icone_natif:>,
+						[(#ENV{service})_local], <:rainette:label_icone_local:>,
+						weather, <:rainette:label_icone_weather:>})]})]
+					[(#SET{disable,
+						[(#ARRAY{#ENV{service}, [(#ENV{_themes/icone_api}|non)],
+						[(#ENV{service})_local], [(#ENV{_themes/locaux}|non)],
+						weather, [(#ENV{_themes/weather}|non)]})]})]
+					[(#SAISIE{radio, condition,
+						datas=#GET{data},
+						disable=#GET{disable},
+						explication=<:rainette:explication_configurer_icone:>,
+						label=<:rainette:label_icone:>,
+					})]
+				]
+
+				[(#REM) <!-- Configuration du thème d'icônes distant à utiliser pour le service --> ]
+				[(#ENV{_themes/distants}|oui)
+					[(#SAISIE{radio, theme,
+						datas=#ENV{_themes/distants},
+						explication=<:rainette:explication_configurer_theme:>,
+						label=<:rainette:label_theme:>,
+					})]
+				]
+
+				[(#REM) <!-- Configuration du thème d'icônes local à utiliser pour le service --> ]
+				[(#ENV{_themes/locaux}|oui)
+					[(#SAISIE{radio, theme_local,
+						datas=#ENV{_themes/locaux},
+						explication=<:rainette:explication_configurer_theme:>,
+						label=<:rainette:label_theme:>,
+					})]
+				]
+
+				[(#REM) <!-- Configuration du thème d'icônes local du service weather à utiliser pour le service --> ]
+				[(#ENV{_themes/weather}|oui)
+					[(#SAISIE{radio, theme_weather,
+						datas=#ENV{_themes/weather},
+						explication=<:rainette:explication_configurer_theme:>,
+						label=<:rainette:label_theme:>,
+					})]
+				]
+			</div>
+		</fieldset>
+
+		<fieldset>
+			<legend><:rainette:legende_configurer_utilisation:></legend>
+			[(#SET{url, [<a class="spip_out"[ href="(#ENV{_configuration/offres/lien})"] target="_blank">(#ENV{_configuration/offres/titre})</a>]})]
+			[<p>(#VAL{rainette:explication_utilisation_}|concat{#ENV{service}}|_T{#ARRAY{url, #GET{url}}})</p>]
+			[(#ENV{_configuration/offres/limites}|oui)<p><:rainette:explication_utilisation_rainette:></p>]
+			<table>
+				<tbody>
+					<tr>
+						<td><:rainette:label_dernier_appel:></td>
+						<td>[(#ENV{_utilisation/dernier_appel})]</td>
+					</tr>
+				<BOUCLE_compteurs(DATA) {source table, #ENV{_configuration/offres/limites}}>
+					<tr>
+						<td>[(#VAL{rainette:label_compteur_}|concat{#CLE}|_T)]</td>
+						<td>[<strong>#ENV{_utilisation/compteurs/#CLE}</strong> / (#VALEUR)]</td>
+					</tr>
+				</BOUCLE_compteurs>
+				</tbody>
+			</table>
+		</fieldset>
+
+		<fieldset>
+			<legend><:rainette:legende_configurer_credit:></legend>
+			[(#SET{url, [<a class="spip_out"[ href="(#ENV{_configuration/termes/lien})"] target="_blank">(#ENV{_configuration/termes/titre})</a>]})]
+			[<p>(#VAL{rainette:explication_credit_}|concat{#ENV{service}}|_T{#ARRAY{url, #GET{url}}})</p>]
+			<p><:rainette:explication_credit_rainette:></p>
+		</fieldset>
+
+		<input type="hidden" name="_meta_casier" value="#ENV{_meta_casier}" />
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div></form>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		[(#ENV{condition}|=={weather}|oui)
+			jQuery(".editer_theme").hide();
+			jQuery(".editer_theme_local").hide();
+		]
+		[(#ENV{condition}|=={#ENV{service}}|oui)
+			jQuery(".editer_theme_local").hide();
+			jQuery(".editer_theme_weather").hide();
+		]
+		[(#ENV{condition}|=={[(#ENV{service})_local]}|oui)
+			jQuery(".editer_theme").hide();
+			jQuery(".editer_theme_weather").hide();
+		]
+		jQuery("input[name='condition']").change(function() {
+			if (jQuery("input[name='condition']:checked").val() == ['(#ENV{service})']) {
+				jQuery(".editer_theme_local").hide();
+				jQuery(".editer_theme_weather").hide();
+				jQuery(".editer_theme").show();
+			} else if (jQuery("input[name='condition']:checked").val() == 'weather') {
+				jQuery(".editer_theme").hide();
+				jQuery(".editer_theme_local").hide();
+				jQuery(".editer_theme_weather").show();
+			} else {
+				jQuery(".editer_theme").hide();
+				jQuery(".editer_theme_weather").hide();
+				jQuery(".editer_theme_local").show();
+			}
+			jQuery(this).blur();
+		});
+	});
+//]]>
+</script>

@@ -1,0 +1,65 @@
+[(#REM)<!-- 
+	Ce sous-modele est celui utilise par defaut par Rainette pour presenter les previsions 24h d'une ville.
+	Il est appelee par le modèle rainette_previsions.
+
+	Pour les valeurs devant être afficher avec une unité (filtre |rainette_afficher_unite) il est nécessaire
+	d'utiliser la fonction table_valeur avec l'option de conservation de la valeur null sur l'index le plus
+	profond.
+
+	Les données heure sont en général rangées dans l'index horaire 0 car on utilise la plupart du temps
+	une périodicité de 24h (soit une valeur par jour). Pour weather, la périodicité est toujours 12h (soit
+	deux valeurs par jour, jour et nuit) et donc il arrive que la valeur jour devienne obsolète pour le
+	jour courant. A ce moment on bascule sur la valeur nuit (index 1).
+
+	En outre, quand la période passe en nuit pour le jour courant et cela pour tous les services, la valeur
+	max de la température est ignorée et remplacée par l'indication nuit.
+ -->]
+<BOUCLE_previsions_24h(DATA) {source table, #ENV{donnees}}{par cle}{#ENV{premier_jour}, #ENV{nombre_jours}}>
+#SET{index_heure, 0}
+[(#ENV{extras/service}|=={weather}|et{#CLE|=={0}}|et{#VALEUR{heure/#GET{index_heure}/icone}|=={''}}|oui) #SET{index_heure, 1}]
+#SET{periode, #VALEUR{heure/#GET{index_heure}/periode}}
+<div class="rainette_previsions_24h">
+	<div class="jour">[(#VALEUR{date}|nom_jour|ucfirst)]</div>
+	<div class="date">[(#VALEUR{date}|affdate_jourcourt)]</div>
+	<div class="contenu">
+		<div class="icone">[(#VALEUR{heure/#GET{index_heure}/icone}|rainette_afficher_icone{petit})]</div>
+		<div class="resume">[(#VALEUR{heure/#GET{index_heure}/resume}|rainette_afficher_resume)]</div>
+		<div class="t_reelle">
+			[(#GET{periode}|=={0}|oui)
+			[<:rainette:temperature_max|ucfirst:>
+			&nbsp;(#VALEUR|table_valeur{temperature_max, '', #EVAL{true}}|rainette_afficher_unite{temperature, -1, #ENV{extras/service}})]]
+			[(#GET{periode}|=={1}|oui)<:rainette:nuit|ucfirst:>]
+			[<br/><:rainette:temperature_min|ucfirst:>
+			&nbsp;(#VALEUR|table_valeur{temperature_min, '', #EVAL{true}}|rainette_afficher_unite{temperature, -1, #ENV{extras/service}})<br/>]
+		</div>
+		<div class="details">
+			<ul>
+				[<li>
+					<span><:rainette:vent|ucfirst:></span><br />
+					(#VALEUR{heure/#GET{index_heure}}|table_valeur{vitesse_vent, '', #EVAL{true}}|rainette_afficher_unite{vitesse, -1, #ENV{extras/service}})
+				</li>]
+				[(#REM) <!-- On affiche les précipitations si elle existe sinon le risque de précipitations à minima -->]
+				#SET{pluie, ''}
+				[<li>
+					<span><:rainette:precipitation|ucfirst:></span><br />
+					(#VALEUR{heure/#GET{index_heure}}|table_valeur{precipitation, '', #EVAL{true}}|rainette_afficher_unite{precipitation, -1, #ENV{extras/service}})
+				</li>
+				#SET{pluie, oui}]
+				[(#GET{pluie}|non)
+				[<li>
+					<span><:rainette:risque_precipitation|ucfirst:></span><br />
+					(#VALEUR{heure/#GET{index_heure}}|table_valeur{risque_precipitation, '', #EVAL{true}}|rainette_afficher_unite{pourcentage, -1, #ENV{extras/service}})
+				</li>]]
+				[<li>
+					<span><:rainette:humidite|ucfirst:></span><br />
+					(#VALEUR{heure/#GET{index_heure}}|table_valeur{humidite, '', #EVAL{true}}|rainette_afficher_unite{pourcentage, -1, #ENV{extras/service}})
+				</li>]
+			</ul>
+		</div>
+	</div>
+	<INCLURE{fond=modeles/inc-credits,
+		texte=service,
+		classe_div=prev24h,
+		env} />
+</div>
+</BOUCLE_previsions_24h>

@@ -1,0 +1,113 @@
+[(#REM)<!--
+	Ce sous-modele est celui utilise par defaut par Rainette pour presenter les previsions 24h d'une ville sous forme
+	tabulaire.
+	Il est appelee par le modèle rainette_previsions.
+
+	Pour les valeurs devant être afficher avec une unité (filtre |rainette_afficher_unite) il est nécessaire
+	d'utiliser la fonction table_valeur avec l'option de conservation de la valeur null sur l'index le plus
+	profond.
+
+	Les données heure sont en général rangées dans l'index horaire 0 car on utilise la plupart du temps
+	une périodicité de 24h (soit une valeur par jour). Pour weather, la périodicité est toujours 12h (soit
+	deux valeurs par jour, jour et nuit) et donc il arrive que la valeur jour devienne obsolète pour le
+	jour courant. A ce moment on bascule sur la valeur nuit (index 1).
+
+	En outre, quand la période passe en nuit pour le jour courant et cela pour tous les services, la valeur
+	max de la température est ignorée et remplacée par l'indication nuit.
+ -->]
+#SET{entete, #ARRAY{
+	jour, 2,
+	description, 1,
+	temperature_max, 1,
+	temperature_min, 1,
+	vent, 2,
+	humidite, 1}}
+#SET{precipitation, ''}
+#SET{indice_uv, ''}
+[(#ENV{extras/config/source/precipitation}|oui)
+	#SET{entete, #GET{entete}|array_merge{#ARRAY{precipitation, 1}}}
+	#SET{precipitation, oui}
+]
+[(#ENV{extras/config/source/precipitation}|non)
+	#SET{entete, #GET{entete}|array_merge{#ARRAY{risque_precipitation, 1}}
+]
+[(#ENV{extras/config/source/indice_uv}|oui)
+	#SET{entete, #GET{entete}|array_merge{#ARRAY{indice_uv, 2}}}
+	#SET{indice_uv, oui}
+]
+#SET{entete, #GET{entete}|array_merge{#ARRAY{nebulosite, 1}}}
+#SET{nb_colonnes, 0}
+<B_previsions_table_24h>
+<table class="table rainette_previsions_table_24h">
+	<thead>
+		<tr>
+		<BOUCLE_head(DATA) {source table, #GET{entete}}>
+			#SET{nb_colonnes, #GET{nb_colonnes}|plus{#VALEUR}}
+			<th scope="col"[ colspan="(#VALEUR)"]>[(#VAL{rainette:}|concat{#CLE}|_T|ucfirst)]</th>
+		</BOUCLE_head>
+		</tr>
+	</thead>
+	<tfoot>
+		<tr>
+			<td[ colspan="(#GET{nb_colonnes})"] class="credits">
+				<INCLURE{fond=modeles/inc-credits,
+					texte=info,
+					classe_div=prev24h,
+					env}/>
+			</td>
+		</tr>
+	</tfoot>
+	<tbody>
+<BOUCLE_previsions_table_24h(DATA) {source table, #ENV{donnees}}{par cle}{#ENV{premier_jour}, #ENV{nombre_jours}}>
+		#SET{index_heure, 0}
+		[(#ENV{extras/service}|=={weather}|et{#CLE|=={0}}|et{#VALEUR{heure/#GET{index_heure}/icone}|=={''}}|oui) #SET{index_heure, 1}]
+		#SET{periode, #VALEUR{heure/#GET{index_heure}/periode}}
+		<tr[ class="(#COMPTEUR_BOUCLE|alterner{odd, even})"]>
+			<td class="jour">
+				[(#VALEUR{date}|nom_jour|ucfirst)]
+				[<br />(#VALEUR{date}|affdate_jourcourt)]
+			</td>
+			<td class="icone">
+				[(#VALEUR{heure/#GET{index_heure}/icone}|rainette_afficher_icone{petit})]
+			</td>
+			<td class="resume">
+				[(#VALEUR{heure/#GET{index_heure}/resume}|rainette_afficher_resume)]
+			</td>
+			<td class="t_reelle">
+				[(#VALEUR|table_valeur{temperature_max, '', #EVAL{true}}|rainette_afficher_unite{temperature, -1, #ENV{extras/service}})]
+			</td>
+			<td class="t_reelle">
+				[(#VALEUR|table_valeur{temperature_min, '', #EVAL{true}}|rainette_afficher_unite{temperature, -1, #ENV{extras/service}})]
+			</td>
+			<td class="vent">
+				[(#VALEUR{heure/#GET{index_heure}/direction_vent}|rainette_afficher_direction)]
+			</td>
+			<td class="vent">
+				[(#VALEUR{heure/#GET{index_heure}}|table_valeur{vitesse_vent, '', #EVAL{true}}|rainette_afficher_unite{vitesse, -1, #ENV{extras/service}})]
+			</td>
+			<td class="humidite">
+				[(#VALEUR{heure/#GET{index_heure}}|table_valeur{humidite, '', #EVAL{true}}|rainette_afficher_unite{pourcentage, -1, #ENV{extras/service}})]
+			</td>
+			[(#GET{precipitation}|oui)
+			<td class="precipitation">
+				[(#VALEUR{heure/#GET{index_heure}}|table_valeur{precipitation, '', #EVAL{true}}|rainette_afficher_unite{precipitation, -1, #ENV{extras/service}})]
+			</td>]
+			[(#GET{precipitation}|non)
+			<td class="risque_precipitation">
+				[(#VALEUR{heure/#GET{index_heure}}|table_valeur{risque_precipitation, '', #EVAL{true}}|rainette_afficher_unite{pourcentage, -1, #ENV{extras/service}})]
+			</td>]
+			[(#GET{indice_uv}|oui)
+			<td class="indice_uv">
+				[(#VALEUR{heure/#GET{index_heure}}|table_valeur{indice_uv, '', #EVAL{true}}|rainette_afficher_unite{indice, -1, #ENV{extras/service}})]
+			</td>
+			<td class="indice_uv">
+				[(#VALEUR{heure/#GET{index_heure}/risque_uv})]
+			</td>]
+			<td class="nebulosite">
+				[(#VALEUR{heure/#GET{index_heure}/nebulosite})]
+			</td>
+		</tr>
+</BOUCLE_previsions_table_24h>
+	</tbody>
+</table>
+</B_previsions_table_24h>

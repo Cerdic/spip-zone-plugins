@@ -1,0 +1,9 @@
+[(#REM)<!-- 
+	Ce sous-modele est celui utilise par defaut par Rainette pour avertir d'une erreur de chargement des données
+ -->
+]
+<div class="notice">
+	[(#ENV{erreur/texte/principal})]
+	[<br />(#ENV{erreur/texte/conseil})]
+	[<br /><i>\((#ENV{erreur/texte/service})\)</i>]
+</div>

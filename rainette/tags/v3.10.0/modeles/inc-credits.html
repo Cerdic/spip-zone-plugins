@@ -1,0 +1,15 @@
+[(#REM)<!-- 
+	Cette inclusion permet d'insérer de façon standard les crédits de chaque service dans les modèles de Rainette
+ -->
+]
+<div class="rainette_credits[ (#ENV{classe_div})]">
+	[<a href="(#ENV{extras/credits/lien})"[ title=(#ENV{extras/credits/titre})][ class=(#ENV{classe})] target="_blank">
+	[(#ENV{extras/credits/logo}|oui)
+		[(#CHEMIN_IMAGE{#ENV{extras/credits/logo}}|balise_img{'logo service'})]
+	]
+	[(#ENV{extras/credits/logo}|non)
+		[(#ENV{texte, info}|=={info}|oui)<:rainette:credits{service=#ENV{extras/config/nom_service}}:>]
+		[(#ENV{texte, info}|=={service}|oui)#ENV{extras/config/nom_service}]
+	]
+	</a>]
+</div>

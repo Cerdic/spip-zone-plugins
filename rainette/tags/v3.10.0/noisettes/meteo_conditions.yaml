@@ -1,0 +1,28 @@
+nom: '<:rainette:noisette_titre_conditions:>'
+description: '<:rainette:noisette_description_conditions:>'
+icon: 'rainette.png'
+contexte: 'aucun'
+ajax: 'non'
+parametres:
+  -
+    saisie: 'input'
+    options:
+      nom: 'lieu'
+      label: '<:rainette:noisette_label_lieu:>'
+      explication: '<:rainette:noisette_explication_lieu:>'
+  -
+    saisie: 'service_meteo'
+    options:
+      nom: 'service'
+      label: '<:rainette:noisette_label_service:>'
+      defaut: ''
+      cacher_option_intro: 'oui'
+  -
+    saisie: 'radio'
+    options:
+      nom: 'titre'
+      label: '<:rainette:noisette_label_titre_conditions:>'
+      defaut: 'non'
+      datas:
+        oui: '<:item_oui:>'
+        non: '<:item_non:>'
