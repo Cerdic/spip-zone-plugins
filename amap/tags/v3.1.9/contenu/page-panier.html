@@ -1,0 +1,24 @@
+[(#REM)
+
+  Squelette Amap
+  Auteur	Stephane Moulinet
+  Auteur	E-cosystems
+  Auteur	Pierre KUHN 
+  Copyright 2010 - 2014
+  Distribue sous licence GPL
+
+]
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><strong class="on"><:amap:panier:></strong></p>
+
+<div class="contenu-principal">
+<div class="cartouche">
+	<h1 class="h1"><:amap:panier:></h1>
+</div>
+
+<:amap:qui_recupere_panier_disponible:>
+<p></p>
+	<BOUCLE_form(AMAP_PANIERS) {id_amap_panier}>
+		[(#FORMULAIRE_EDITER_AMAP_RECUPEREMAIL{#ID_AMAP_PANIER,#ID_AUTEUR,#ID_PRODUCTEUR,#DATE_DISTRIBUTION})]
+	</BOUCLE_form>
+</div>

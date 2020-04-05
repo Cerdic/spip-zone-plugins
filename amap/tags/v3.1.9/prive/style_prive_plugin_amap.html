@@ -1,0 +1,62 @@
+[(#REM)
+
+  Squelette Amap
+  Auteur	Stephane Moulinet
+  Auteur	E-cosystems
+  Auteur	Pierre KUHN 
+  Copyright 2010 - 2014
+  Distribue sous licence GPL
+
+]
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+/*  ------------------------------------------
+/*  Colonne de navigation
+/*  ------------------------------------------ */
+
+/*  Images de la colonne de navigation  */
+.bando2_amap_page_accueil
+{ background-image:url(#CHEMIN_IMAGE{amap-accueil.png}); }
+
+.bando2_amap_page_options
+{ background-image:url(#CHEMIN_IMAGE{amap-options.png}); }
+
+/*  ------------------------------------------
+/*  Surcharge formulaire_spip
+/*  ------------------------------------------ */
+.formulaire_amap input.text,
+.formulaire_amap input.password,
+.formulaire_amap textarea,
+.formulaire_amap select
+{ width:auto; }
+
+/*  ------------------------------------------
+/*  Page auteur prive
+/*  ------------------------------------------ */
+#auteur_infos_voir .type_adherent,
+#auteur_infos_voir .adhesion,
+#auteur_infos_voir .type_panier
+{margin-top:10px; }
+
+/*  ------------------------------------------
+/*  Page impression
+/*  ------------------------------------------ */
+.impression td.center {text-align:center; }
+.impression ul {padding:0}
+
+[(#REM)</style>]

@@ -1,0 +1,17 @@
+[(#REM)
+
+  Squelette Amap
+  Auteur	Stephane Moulinet
+  Auteur	E-cosystems
+  Auteur	Pierre KUHN 
+  Copyright 2010 - 2014
+  Distribue sous licence GPL
+
+]
+
+<h1 class="grostitre"><:amap:liste_responsables:></h1>
+
+[(#BOITE_OUVRIR{#CHEMIN_IMAGE{tabledata.gif}|balise_img{'',cadre-icone}|concat{#VAL{amap:liste_responsables}|_T}, 'simple'})]
+	<p><:amap:utiliser_entete_colone_tri:></p>
+	<INCLURE{fond=prive/squelettes/inclure/liste_responsables,env,ajax}>
+#BOITE_FERMER

@@ -1,0 +1,29 @@
+[(#REM)
+
+  Squelette Amap
+  Auteur	Stephane Moulinet
+  Auteur	E-cosystems
+  Auteur	Pierre KUHN 
+  Copyright 2010 - 2014
+  Distribue sous licence GPL
+
+]
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><strong class="on"><:amap:panier_dispo{date_distribution=#DATE_DISTRIBUTION}:></strong></p>
+
+<div class="contenu-principal">
+<div class="cartouche">
+	<h1 class="h1"><:amap:panier_dispo{date_distribution=#DATE_DISTRIBUTION}:></h1>
+</div>
+<BOUCLE_aut(AUTEURS){id_auteur}>#SET{nom_adherent,#NOM}</BOUCLE_aut>
+	<!-- envoie du panier par mail -->
+	[(#ENV{mail}|=={oui}|oui)[(#CONFIG{amap/email}|=={oui}|oui)
+		<:amap:panier_dispo_auteur{date_distribution=#DATE_DISTRIBUTION, nom_adherent=#NOM_ADHERENT}:>
+		#FORMULAIRE_EDITER_AMAP_DISPOMAIL{#NOM_ADHERENT, #DATE_DISTRIBUTION, #ID_AUTEUR, #ID_PRODUCTEUR, #DATE_DISTRIBUTION2}
+	]]
+	<!-- envoie du panier par interface -->
+	[(#ENV{mail}|=={non}|oui)
+		<:amap:panier_dispo_auteur{date_distribution=#DATE_DISTRIBUTION, nom_adherent=#NOM_ADHERENT}:>
+		#FORMULAIRE_EDITER_AMAP_DISPOINTERFACE{#NOM_ADHERENT, #DATE_DISTRIBUTION, #ID_AUTEUR, #ID_PRODUCTEUR, #DATE_DISTRIBUTION2}
+	]
+</div>

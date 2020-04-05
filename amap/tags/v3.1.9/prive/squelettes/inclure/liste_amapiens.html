@@ -1,0 +1,46 @@
+[(#REM)
+
+  Squelette Amap
+  Auteur	Stephane Moulinet
+  Auteur	E-cosystems
+  Auteur	Pierre KUHN 
+  Copyright 2010 - 2014
+  Distribue sous licence GPL
+  
+  Appeler depuis /ecrire/?exec=amapiens
+
+]
+<B_auteurs>
+<div class="liste-objets">
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+<table class="spip liste">
+	<thead>
+	<tr class="first_row">
+		<th class='statut' scope='col'>[(#TRI{statut,#CHEMIN_IMAGE{auteur-16.png}|balise_img{<:lien_trier_statut|attribut_html:>},ajax})]</th>
+		<th class='nom' scope='col'>[(#TRI{nom,<:info_nom:>,ajax})]</th>
+		<th class='adhesion' scope='col'>[(#TRI{adhesion,<:amap:adhesion:>,ajax})]</th>
+		<th class='type_panier' scope='col'>[(#TRI{type_panier,<:amap:type_panier:>,ajax})]</th>
+		<th class='type_adherent' scope='col'>[(#TRI{type_adherent,<:amap:type_adherent:>,ajax})]</th>
+	</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_auteurs(AUTEURS) {tri nom} {tous} {pagination 20}>
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
+		<td class='statut'>[(#STATUT|puce_statut{auteur})]</td>
+		<td class='nom[ (#NOM|non)vide]'><a href="[(#URL_ECRIRE{auteur}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a></td>
+		<td class='adhesion'>#ADHESION</td>
+		<td class='type_panier'>
+			[(#TYPE_PANIER|=={'petit'}|oui)<:amap:petit:>]
+			[(#TYPE_PANIER|=={'grand'}|oui)<:amap:grand:>]
+		</td>
+		<td class='type_adherent'>
+			[(#TYPE_ADHERENT|=={'adherent'}|oui)<:amap:adherent:>]
+			[(#TYPE_ADHERENT|=={'producteur'}|oui)<:amap:producteur:>]
+		</td>
+	</tr>
+	</BOUCLE_auteurs>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_auteurs>

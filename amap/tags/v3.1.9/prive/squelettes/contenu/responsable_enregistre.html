@@ -1,0 +1,17 @@
+[(#REM)
+
+  Squelette Amap
+  Auteur	Stephane Moulinet
+  Auteur	E-cosystems
+  Auteur	Pierre KUHN 
+  Copyright 2010 - 2014
+  Distribue sous licence GPL
+
+]
+
+<h1 class="grostitre"><:amap:enregistrement_responsable:></h1>
+
+[(#BOITE_OUVRIR{#CHEMIN_IMAGE{tabledata.gif}|balise_img{'',cadre-icone}|concat{#VAL{amap:enregistrement_responsable}|_T}, 'simple'})]
+	<p><:amap:enregistrement_responsable_explication:></p>
+        #FORMULAIRE_EDITER_AMAP_RESPONSABLE{#ID_AMAP_RESPONSABLE,#ENV{redirect,#URL_ECRIRE{responsable_liste}}}
+#BOITE_FERMER

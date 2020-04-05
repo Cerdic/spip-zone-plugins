@@ -1,0 +1,32 @@
+[(#REM)
+
+  Squelette Amap
+  Auteur	Stephane Moulinet
+  Auteur	E-cosystems
+  Auteur	Pierre KUHN 
+  Copyright 2010 - 2014
+  Distribue sous licence GPL
+
+]
+<B_evenements>
+<table class="amap spip">
+	<thead>
+	<tr>
+		<th><:amap:date_distribution:></th>
+		<th><:amap:responsables:></th>
+	</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_evenements(EVENEMENTS) {par date_debut}{age<0}>
+	<tr>
+		<td>[(#DATE_DEBUT|affdate{'d/m/Y'})]</td>
+		<td><BOUCLE_prod(AMAP_RESPONSABLES auteurs){tous}{date_distribution=#DATE_DEBUT}{', '}>#NOM</BOUCLE_prod></td>
+	</tr>
+	</BOUCLE_evenements>
+	</tbody>
+</table>
+</B_evenements>
+	<p style="text-align: justify;">
+		<:amap:table_vide_aucun_enregistrement:>
+	</p>
+<//B_evenements>

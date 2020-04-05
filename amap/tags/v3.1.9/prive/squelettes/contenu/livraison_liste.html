@@ -1,0 +1,16 @@
+[(#REM)
+
+  Squelette Amap
+  Auteur	Stephane Moulinet
+  Auteur	E-cosystems
+  Auteur	Pierre KUHN 
+  Copyright 2010 - 2014
+  Distribue sous licence GPL
+
+]
+
+<h1 class="grostitre"><:amap:liste_livraisons:></h1>
+
+[(#BOITE_OUVRIR{#CHEMIN_IMAGE{tabledata.gif}|balise_img{'',cadre-icone}|concat{#VAL{amap:liste_livraisons}|_T}, 'simple'})]
+	<INCLURE{fond=prive/squelettes/inclure/liste_livraisons,env,ajax}>
+#BOITE_FERMER

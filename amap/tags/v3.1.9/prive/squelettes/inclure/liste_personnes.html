@@ -1,0 +1,43 @@
+[(#REM)
+
+  Squelette Amap
+  Auteur	Stephane Moulinet
+  Auteur	E-cosystems
+  Auteur	Pierre KUHN 
+  Copyright 2010 - 2014
+  Distribue sous licence GPL
+  
+  Appeler depuis ????
+
+]
+<B_personnes>
+<div class="liste-objets">
+[<p class="pagination">(#PAGINATION{prive})</p>]
+<table class="spip liste">
+	<thead>
+	<tr class="first_row">
+		<th class='statut' scope='col'></th>
+		<th class='nom' scope='col'><:nom:></th>
+		<th class='adhesion' scope='col'><:amap:adhesion:></th>
+		<th class='type_panier' scope='col'><:amap:type_panier:></th>
+	</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_personnes(AUTEURS) {tous} {pagination 20}>
+	<tr>
+		<td class='statut'>[(#STATUT|puce_statut{auteur})]</td>
+		<td class='nom'><a href="[(#URL_ECRIRE{auteur_infos}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a></td>
+		<td class='adhesion'>#ADHESION</td>
+		<td class='type_panier'>
+			[(#TYPE_PANIER|=={'petit'}|oui)<:amap:petit:>]
+			[(#TYPE_PANIER|=={'grand'}|oui)<:amap:grand:>]
+		</td>
+	</tr>
+	</BOUCLE_personnes>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_personnes>
+<:amap:table_vide_aucun_enregistrement:>
+<//B_personnes>

@@ -1,0 +1,46 @@
+[(#REM)
+
+  Squelette Amap
+  Auteur	Stephane Moulinet
+  Auteur	E-cosystems
+  Auteur	Pierre KUHN 
+  Copyright 2010 - 2014
+  Distribue sous licence GPL
+  
+  Appeler depuis /ecrire/?exec=panier_liste
+
+]
+<B_paniers>
+<div class="liste-objets">
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+<table class="spip liste">
+	<thead>
+	<tr class="first_row">
+		<th class='adherent' scope='col'>[(#TRI{nom,<:amap:adherent:>,ajax})]</th>
+		<th class='producteurs' scope='col'>[(#TRI{id_producteur,<:amap:producteurs:>,ajax})]</th>
+		<th class='date_distribution' scope='col'>[(#TRI{date_distribution,<:amap:date_distribution:>,ajax})]</th>
+		<th class='type_panier' scope='col'>[(#TRI{type_panier,<:amap:type_panier:>,ajax})]</th>
+		<th class='action' scope='col'><:amap:action:></th>
+	</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_paniers(AMAP_PANIERS auteurs) {tri date_distribution}{pagination 20}{age<0}>
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
+		<td class='nom'>#NOM</td>
+		<td class='producteur'><BOUCLE_prod(AUTEURS){tous}{id_auteur=#ID_PRODUCTEUR}>#NOM</BOUCLE_prod></td>
+		<td class='date_distribution'>[(#DATE_DISTRIBUTION|affdate{'d/m/Y'})]</td>
+		<td class='type_panier'>[(#TYPE_PANIER|=={petit}|oui)<:amap:petit:>] [(#TYPE_PANIER|=={grand}|oui)<:amap:grand:>]</td>
+		<td class='action'><a href='[(#URL_PAGE{panier}|parametre_url{id_amap_panier,#ID_AMAP_PANIER})]'><:amap:action_modifier:></a>
+		|	<a href='[(#URL_ACTION_AUTEUR{supprimer_amap_panier,#ID_AMAP_PANIER,#SELF})]'><:amap:action_supprimer:></a>
+		</td>
+	</tr>
+	</BOUCLE_paniers>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_paniers>
+	<p style="text-align: justify;">
+		<:amap:table_vide_aucun_enregistrement:>
+	</p>
+<//B_paniers>

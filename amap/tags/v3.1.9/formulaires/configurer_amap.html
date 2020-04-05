@@ -1,0 +1,32 @@
+[(#REM)
+
+  Squelette Amap
+  Auteur	Stephane Moulinet
+  Auteur	E-cosystems
+  Auteur	Pierre KUHN 
+  Copyright 2010 - 2014
+  Distribue sous licence GPL
+
+  Appeler depuis /ecrire/?exec=mini_doc
+
+]
+<div class="formulaire_spip formulaire_cfg formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+		
+	<form method="post" action="#ENV{action}">
+		<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			[(#SAISIE{radio, email, label=<:amap:autorise_envoie_email_label:>,
+					explication=<:amap:autorise_envoie_email_explication:>,
+					datas=#ARRAY{
+					oui,<:amap:envoyez_email_oui:>,
+					non,<:amap:envoyez_email_non:>}})]
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
+		</p>
+		</div>
+	</form>
+</div>
