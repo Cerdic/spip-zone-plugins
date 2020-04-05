@@ -1,0 +1,18 @@
+<paquet
+	prefix="phpcurl"
+	categorie="outil"
+	version="1.0.1"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/phpcurl-64.png"
+	documentation=""
+>
+
+	<nom>PHP cURL</nom>
+
+	<auteur>Guy Cesaro</auteur>
+	
+	<licence>GNU/GPL</licence>
+<!-- <necessite nom="php:curl" /> (seul spip 3.2 supporte cette syntaxe :() https://core.spip.net/issues/3819 -->
+
+</paquet>
