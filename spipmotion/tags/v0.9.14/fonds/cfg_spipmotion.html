@@ -1,0 +1,26 @@
+<!-- titre=Spipmotion -->
+
+<!-- boite=<:spipmotion:spipmotion_boite:> -->
+<!-- icone=images/spipmotion-24.png -->
+<!-- logo=images/spipmotion.png -->
+<!-- descriptif= <p><:spipmotion:spipmotion_descriptif:></p>
+<B_profils_reencoder>
+<h4><:spipmotion:info_reencoder:></h4>
+<ul class="menu-liste liste-item">
+	<li class="menu-entree">
+		[(#AUTORISER{configurer}|oui)
+		[(#BOUTON_ACTION{<:spipmotion:bouton_reencoder_tout:>,#URL_ACTION_AUTEUR{spipmotion_ajouter_file_encodage_tout,'',#SELF},'',<:spipmotion:bouton_reencoder_tout_message:>})]]
+	</li class="menu-entree">
+	<BOUCLE_profils_reencoder(POUR){tableau #CONFIG{spipmotion/fichiers_videos_sortie,#ARRAY}|array_merge{#CONFIG{spipmotion/fichiers_audios_sortie,#ARRAY}}}>
+		<li class="menu-entree">
+			[(#AUTORISER{configurer}|oui)
+			[(#BOUTON_ACTION{<:spipmotion:bouton_reencoder_tout_format{format=#VALEUR}:>,#URL_ACTION_AUTEUR{spipmotion_ajouter_file_encodage_tout,#VALEUR,#SELF},'',<:spipmotion:bouton_reencoder_tout_message_format{format=#VALEUR}:>})]]
+		</li class="menu-entree">
+	</BOUCLE_profils_reencoder>
+</ul>
+</B_profils_reencoder>
+-->
+
+<div class="ajax">
+#FORMULAIRE_CONFIG_SPIPMOTION
+</div>

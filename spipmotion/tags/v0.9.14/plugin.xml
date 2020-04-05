@@ -1,0 +1,122 @@
+<plugin>
+	<nom>SPIPMotion</nom>
+	<slogan>
+		<multi>
+			[fr]Encodage de documents multimedia
+			[en]Encoding media documents
+		</multi>
+	</slogan>
+	<icon>images/spipmotion.png</icon>
+	<auteur>[kent1->http://www.kent1.info]</auteur>
+	<licence>GNU/GPL v3</licence>
+	<description>
+		<multi>
+			[fr] Faire un site à la Youtube ou Dailymotion ...
+			[en] Create a Youtube or Dailymotion like website...
+		</multi>
+	</description>
+	<lien>https://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/spipmotion/</lien>
+
+	<version>0.9.14</version>
+	<version_base>0.8.2</version_base>
+	<etat>test</etat>
+	<prefix>spipmotion</prefix>
+
+	<options>spipmotion_options.php</options>
+	<fonctions>spipmotion_fonctions.php</fonctions>
+
+	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<action>editer_contenu_objet</action>
+		<inclure>spipmotion_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<action>post_edition</action>
+		<inclure>spipmotion_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/spipmotion.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/spipmotion.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/spipmotion.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>spipmotion_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>jquery_plugins</nom>
+		<inclure>spipmotion_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>jqueryui_forcer</nom>
+		<inclure>spipmotion_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>spipmotion_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>spipmotion_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_spipmotion_encodage</nom>
+		<inclure>spipmotion_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>spipmotion_autoriser.php</inclure>
+    </pipeline>
+	<pipeline>
+		<nom>document_desc_actions</nom>
+		<inclure>spipmotion_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_boucle</nom>
+		<inclure>spipmotion_pipelines.php</inclure>
+	</pipeline>
+	
+	<bouton id='spipmotion_file' parent='naviguer'>
+		<titre>spipmotion:titre_page_file</titre>
+		<icone>images/spipmotion-24.png</icone>
+		<url>spipmotion_file</url>
+	</bouton>
+	<bouton id='bando_spipmotion_file' parent='bando_edition'>
+		<titre>spipmotion:titre_page_file</titre>
+		<icone>images/spipmotion-16.png</icone>
+		<url>spipmotion_file</url>
+	</bouton>
+	<bouton id='ffmpeg_infos' parent='configuration'>
+		<titre>spipmotion:titre_page_ffmpeg_infos</titre>
+		<icone>images/spipmotion-24.png</icone>
+		<url>ffmpeg_infos</url>
+	</bouton>
+	<bouton id='bando_ffmpeg_infos' parent="bando_configuration">
+		<titre>spipmotion:titre_page_ffmpeg_infos</titre>
+		<icone>images/spipmotion-16.png</icone>
+		<url>ffmpeg_infos</url>
+	</bouton>
+	
+	<install>base/spipmotion_upgrade.php</install>
+
+	<necessite id="SPIP" version="[2.1.1;2.1.99]" />
+	<necessite id="cfg" version="[1.13.0;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
+	<necessite id="spip_bonux" version="[2.3.6;]" />
+	<necessite id="getid3" version="[0.2.0;]" />
+	<necessite id="queue" version="[0.3.1;]" />
+	<necessite id="jqueryui" version="[1.8.5;]" />
+	<necessite id="lib:flot" src="http://flot.googlecode.com/files/flot-0.7.zip" />
+	
+	<utilise id="podcast" />
+	<utilise id="fonctions_images" version="[0.5.1;]" />
+	<categorie>multimedia</categorie>
+</plugin>
