@@ -1,0 +1,27 @@
+<plugin>
+	<nom>Base CSS</nom>
+	<prefix>basecss</prefix>
+	<icon>prive/img/petronille.png</icon>
+	
+	<version>2.3.8</version>
+	<etat>stable</etat>
+	<categorie>outil</categorie>
+	
+	<slogan>Framework CSS pour SPIP</slogan>
+	<description>Ce framework CSS pour SPIP fournit une base de travail pour l'int&#233;gration, sous la forme d'un jeu de feuilles de style dynamiques et param&#233;trables, proposant les pr&#233;r&#233;glages fondamentaux.</description>
+	<lien>https://contrib.spip.net/3752</lien>
+	<auteur>[Tetue->http://spip.tetue.net] - 2010</auteur>
+	
+	<necessite id="SPIP" version="[2.1.0;2.1.99]"/>
+	<necessite id="spip_bonux" version="[2.2.19;]"/>
+	<bouton id='basecss' parent='bando_squelette'>
+		<icone>prive/img/petronille-16.png</icone>
+		<titre>Base&nbsp;CSS</titre>
+		<url>configurer_basecss</url>
+	</bouton>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>basecss_pipelines.php</inclure>
+	</pipeline>
+	<utilise id="typoenluminee" />
+</plugin>
