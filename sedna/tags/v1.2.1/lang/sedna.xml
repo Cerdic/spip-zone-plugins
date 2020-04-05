@@ -1,0 +1,38 @@
+<traduction module="sedna" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/sedna/lang/" reference="fr">
+	<langue code="ast" />
+	<langue code="bg" />
+	<langue code="br" />
+	<langue code="ca" />
+	<langue code="cpf" />
+	<langue code="cpf_hat" />
+	<langue code="cs" />
+	<langue code="de" />
+	<langue code="en" url="https://trad.spip.net/tradlang_module/sedna?lang_cible=en">
+		<traducteur nom="Mark" lien="https://trad.spip.net/auteur/mark" />
+	</langue>
+	<langue code="eo" />
+	<langue code="es" />
+	<langue code="eu" />
+	<langue code="fa" />
+	<langue code="fr" />
+	<langue code="fr_tu" />
+	<langue code="gl" />
+	<langue code="hu" />
+	<langue code="it" />
+	<langue code="it_fem" />
+	<langue code="ja" />
+	<langue code="km" />
+	<langue code="lb" />
+	<langue code="nl" />
+	<langue code="oc_lnc" />
+	<langue code="oc_ni" />
+	<langue code="oc_ni_la" />
+	<langue code="pt" />
+	<langue code="pt_br" />
+	<langue code="ro" />
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/sedna?lang_cible=sk">
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
+	</langue>
+	<langue code="sv" />
+	<langue code="tr" />
+</traduction>
