@@ -1,0 +1,44 @@
+<h1 class="grostitre"><:geoip:titre_geoip:></h1>
+
+[(#SET{ip, [(#REM|recuperer_ip_local)]})]
+[(#SET{domaine, www.spip.net})]
+
+<p><:geoip:ip_code_pays{ip=#GET{ip}}:> <strong>[(#GET{ip}|geoip_informations)]</strong></p>
+
+<p><:geoip:ip_code_pays{ip=#GET{ip}}:> <strong>[(#GET{ip}|geoip_informations{geoip_country_name_by_addr})]</strong></p>
+
+<p><:geoip:domaine_country_code_by_name{domaine=#GET{domaine}}:> <strong>[(#GET{domaine}|geoip_informations{geoip_country_code_by_name})]</strong></p>
+
+<p><:geoip:domaine_country_code_by_name{domaine=#GET{domaine}}:> <strong>[(#GET{domaine}|geoip_informations{geoip_country_name_by_name})]</strong></p>
+
+#BOITE_OUVRIR{'Aide mémoire - HTML','info'}
+	<h2>Dans les squelettes de SPIP</h2>
+	<h3>Récupérer le code pays d'après une adresse IP</h3>
+	<div class="spip_code">
+		[(&#35;GET{ip}|geoip_informations{geoip_country_name_by_addr})]
+	</div>
+	<h3>Récupérer le nom du pays d'après une adresse IP</h3>
+	<div class="spip_code">
+		[(&#35;GET{domaine}|geoip_informations{geoip_country_code_by_name})]
+	</div>
+#BOITE_FERMER
+
+#BOITE_OUVRIR{'Aide mémoire - PHP','info'}
+	<h2>Dans les fichiers PHP</h2>
+	<h3>Récupérer le code pays d'après une adresse IP</h3>
+	<div class="spip_code">
+		geoip_informations($ip);
+	</div>
+	<h3>Récupérer le nom du pays d'après une adresse IP</h3>
+	<div class="spip_code">
+		geoip_informations($ip, 'geoip_country_code_by_name');
+	</div>
+#BOITE_FERMER
+
+#BOITE_OUVRIR{'Documentation','info'}
+
+	<ul>
+		<li><a href="http://php.net/manual/en/function.geoip-country-code-by-name.php" title="Affiche les deux lettres du code pays">geoip_country_code_by_name</a> - Affiche les deux lettres du code pays</li>
+		<li><a href="http://php.net/manual/en/function.geoip-country-name-by-name.php" title="Affiche le nom complet du pays">geoip_country_name_by_name</a> - Affiche le nom complet du pays</li>
+	</ul>
+#BOITE_FERMER
