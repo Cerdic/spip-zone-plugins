@@ -1,0 +1,18 @@
+<paquet
+	prefix="ajaxfiltre"
+	categorie="outil"
+	version="1.0.6"
+	etat="stable"
+	compatibilite="[3.1.0;3.2.*]"
+	logo="prive/themes/spip/images/ajaxfiltre-64.png"
+	documentation=""
+>
+	<nom>Filtres rapides dans le privé</nom>
+	<!-- Des filtres de recherche sur les listes d'objets -->
+	
+	<auteur lien='https://contrib.spip.net/nicod_'>nicod_</auteur>
+	<licence>GNU/GPL</licence>
+	
+	<script source="prive/javascript/ajaxfiltre_prive.js" type="prive" />
+
+</paquet>
