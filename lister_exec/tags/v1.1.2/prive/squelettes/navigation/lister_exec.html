@@ -1,0 +1,6 @@
+[(#REM)
+ On va inclure la navigation de la page lister_config
+][(#PLUGIN{'lister_config'}|?{
+	[(#INCLURE{fond=prive/squelettes/navigation/lister_config, env})],
+	[(#INCLURE{fond=prive/squelettes/navigation/configurer,exec=lister_exec})]
+})]
