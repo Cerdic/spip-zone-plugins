@@ -1,0 +1,63 @@
+<BOUCLE_transaction(TRANSACTIONS){id_transaction}>
+<BOUCLE_commande(COMMANDES){id_commande}{tout}>
+<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+[(#REM) Contact ou Orga ou Utilisateur ]
+<BOUCLE_contact(CONTACTS?){id_auteur}>
+<strong>#NOM #PRENOM</strong> #SET{id_contact,#ID_CONTACT}
+</BOUCLE_contact>
+	<BOUCLE_orga(ORGANISATIONS?){id_auteur}>
+	<strong>#NOM</strong> #SET{id_organisation,#ID_ORGANISATION}
+	</BOUCLE_orga>
+	<strong>#NOM</strong>
+	<//B_orga>
+<//B_contact>
+
+[(#REM) On cherche en priorité des adresses pour la commande, sinon contact, sinon orga, sinon utilisateur ]
+<BOUCLE_adresses_comande(ADRESSES adresses_liens?){id_commande}>
+[(#TYPE|=={facturation}|oui)<em><:commandes:type_adresse_facturation:> :</em>]
+[(#TYPE|=={livraison}|oui)<em><:commandes:type_adresse_livraison:></em :>]
+<br />
+<span class="adresse">
+	[(#VOIE)<br />]
+	[(#CODE_POSTAL) ][ (#VILLE)]<br />
+	<BOUCLE_pays(PAYS?){code=#PAYS*}>#NOM</BOUCLE_pays>
+</span>
+</BOUCLE_adresses_comande>
+	<BOUCLE_adresse_contact(ADRESSES?){id_contact=#GET{id_contact}}{0,1}>
+	<br />
+	<span class="adresse">
+		[(#VOIE)<br />]
+		[(#CODE_POSTAL) ][ (#VILLE)]<br />
+		<BOUCLE_pays_contact(PAYS?){code=#PAYS*}>#NOM</BOUCLE_pays_contact>
+	</span>
+	</BOUCLE_adresse_contact>
+		<BOUCLE_adresse_orga(ADRESSES?){id_organisation=#GET{id_organisation}}{0,1}>
+		<br />
+		<span class="adresse">
+			[(#VOIE)<br />]
+			[(#CODE_POSTAL) ][ (#VILLE)]<br />
+			<BOUCLE_pays_orga(PAYS?){code=#PAYS*}>#NOM</BOUCLE_pays_orga>
+		</span>
+		</BOUCLE_adresse_orga>
+			<BOUCLE_adresse_auteur(ADRESSES?){id_auteur}{0,1}>
+			<br />
+			<span class="adresse">
+				[(#VOIE)<br />]
+				[(#CODE_POSTAL) ][ (#VILLE)]<br />
+				<BOUCLE_pays_auteur(PAYS?){code=#PAYS*}>#NOM</BOUCLE_pays_auteur>
+			</span>
+			</BOUCLE_adresse_auteur>
+		<//B_adresse_orga>
+	<//B_adresse_contact>
+<//B_adresses_comande>
+
+<B_telephones>
+<span class="telephone">
+<BOUCLE_telephones(NUMEROS numeros_liens?){id_auteur}{'<br />'}>
+<strong>Tel</strong> #NUMERO
+</BOUCLE_telephones>
+</span>
+</B_telephones>
+</BOUCLE_auteur>
+</BOUCLE_commande>
+</BOUCLE_transaction>

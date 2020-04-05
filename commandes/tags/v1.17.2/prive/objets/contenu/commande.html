@@ -1,0 +1,72 @@
+<BOUCLE_afficher_contenu(COMMANDES){id_commande=#ENV{id}}{tout}>
+<div class="commandes">
+
+	[(#REM) date de la dernière mise à jour ]
+	[<div class="champ contenu_maj[ (#MAJ*|intval|>{0}|?{'',vide})]">
+		<label><:commandes:date_maj_label:> :</label>
+		<span dir='#LANG_DIR'>(#MAJ|affdate)[ à (#MAJ|affdate{'H:i'})]</span>
+	</div>]
+	
+	[(#REM) mode de règlement choisi ]
+	[<div class="champ contenu_mode[ (#MODE|non)vide]">
+		<label><:commandes:label_filtre_paiement:> : </label><span dir='#LANG_DIR'>(#MODE)</span>
+	</div>]
+
+	[(#REM) Numéro d'abonnement bancaire ]
+	[<div class="champ contenu_bank_uid[ (#BANK_UID|non)vide]">
+		<label><:commandes:label_bank_uid:> : </label><span dir='#LANG_DIR'>(#BANK_UID)</span>
+	</div>]
+
+	[(#REM) Contenu détaillé de la commande ]
+	<INCLURE{fond=prive/squelettes/inclure/commande_contenu, id_commande, ajax}>
+	[(#AUTORISER{ajouterdetail, commande, #ID_COMMANDE}|oui)
+		[(#URL_ECRIRE{commandes_detail_edit}|parametre_url{reference,#REFERENCE}|parametre_url{redirect,#ID_COMMANDE|generer_url_entite{commande}}|icone_verticale{<:commandes:detail_ajouter:>, commandes_detail-24.png, edit, right})]
+		<div class="nettoyeur"></div>
+	]
+	
+	[(#REM) Informations sur l'utilisateur.trice ]
+	<INCLURE{fond=prive/squelettes/inclure/commande_client, id_commande}>
+
+	<!--afficher_fiche_objet-->
+
+	[(#REM) Échéances ]
+	<BOUCLE_test_echeances(CONDITION){si #ECHEANCES|et{#ECHEANCES_TYPE}}>
+	<div class="champ contenu_descriptif contenu_echeances">
+		<h3><:commandes:commande_echeances_paiements_previsions:></h3>
+		<p>[(#VAL{commandes:commande_echeances_type_}|concat{#ECHEANCES_TYPE}|_T)]
+		[(#ECHEANCES_DATE_DEBUT|intval|oui)
+		[<br /><:commandes:commande_echeances_date_debut:> (#ECHEANCES_DATE_DEBUT|affdate)]
+		]</p>
+		<B_echeances_multiples>
+		<ol class="spip">
+			<BOUCLE_echeances_multiples(DATA){source table,#_afficher_contenu:ECHEANCES}{si #_afficher_contenu:ECHEANCES|is_array}>
+			<BOUCLE_enum(DATA){enum 1,#VALEUR{nb}|sinon{1}}>
+			<li>
+				[(#_echeances_multiples:COMPTEUR_BOUCLE|=={#_echeances_multiples:TOTAL_BOUCLE}|non)
+				[(#_echeances_multiples:VALEUR{montant}|prix_formater)]
+				]
+				[(#_echeances_multiples:COMPTEUR_BOUCLE|=={#_echeances_multiples:TOTAL_BOUCLE}|oui)
+				<:commandes:commande_echeances_paiements_infini:> : [(#_echeances_multiples:VALEUR{montant}|prix_formater)]
+				]
+			</li>
+			</BOUCLE_enum>
+			</BOUCLE_echeances_multiples>
+		</ol>
+		</B_echeances_multiples>
+		<BOUCLE_echeance_unique(CONDITION){si #_afficher_contenu:ECHEANCES|is_numeric}>
+		<p><:commandes:commande_echeances_paiements_tous:> : [(#_afficher_contenu:ECHEANCES|prix_formater)]</p>
+		</BOUCLE_echeance_unique>
+	</div>
+	</BOUCLE_test_echeances>
+	
+	[(#REM) Transactions liées ]
+	[(#PLUGIN{bank}|oui)
+	<INCLURE{fond=prive/objets/liste/transactions, id_commande}>
+	<style type="text/css">
+		#wysiwyg .liste-objets.transactions th.id_commande,
+		#wysiwyg .liste-objets.transactions td.id_commande {display: none}
+	</style>
+	]
+
+</div>
+</BOUCLE_afficher_contenu>

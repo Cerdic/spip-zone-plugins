@@ -1,0 +1,78 @@
+
+[(#REM) On peut donner soit un id_commande, soit un tableau contenant la commande]
+<BOUCLE_commande(COMMANDES){tous}{id_commande=#ENV{id_commande}}{statut?}>
+	[(#REM) Si on trouve une commande on prend ça comme base ]
+	#SET{details, #ARRAY}
+	<BOUCLE_commande_details(COMMANDES_DETAILS){id_commande}{par id_commandes_detail}>
+	#SET{details, #GET{details}|push{#ARRAY{
+		objet,#OBJET,
+		id_objet,#ID_OBJET,
+		descriptif,#QUANTITE|commandes_afficher_quantite_descriptif|concat{#DESCRIPTIF|ptobr|supprimer_numero},
+		quantite, #QUANTITE,
+		prix, #PRIX*,
+    prix_ht, #PRIX_HT*}}}
+	</BOUCLE_commande_details>
+	#SET{commande, #ARRAY{details, #GET{details}}}
+	#SET{commande_ref,#REFERENCE}
+</BOUCLE_commande>
+#SET{commande,#ENV{commande}}
+<//B_commande>
+
+[(#REM) Affichage du detail dans une table si format html demande]
+
+<BOUCLE_test(CONDITION){si #GET{commande}|et{#GET{commande}|is_array}}>
+[(#REM) Version texte ]
+<BOUCLE_test_format_texte(CONDITION){si #ENV{format_envoi}|=={plain}|oui}>
+#SET{total,0}
+<BOUCLE_details_texte(POUR){tableau #GET{commande}|table_valeur{details}}>[
+- (#VALEUR{descriptif}|trim|supprimer_tags)] : [(#VALEUR{prix}|prix_formater)][
+(#SET{total,[(#GET{total}|plus{[(#VALEUR{prix})]})]})
+]</BOUCLE_details_texte>
+
+<:prix:label_total_ttc:> : [(#GET{total}|prix_formater)]
+</BOUCLE_test_format_texte>
+	<table class="commande[ (#REM|test_espace_prive|oui)liste-objets contenu-commande]"[ (#REM|test_espace_prive|non)cellspacing="0"]>
+		[<caption><:commandes:commande_numero:> (#GET{commande_ref})</caption>]
+		<thead>
+			<tr>
+				<th class="description"><:commandes:designation:></th>
+				<th class="montant"><:commandes:montant:></th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			#SET{total,0}
+			#SET{total_ht,0}
+			<BOUCLE_details(POUR){tableau #GET{commande}|table_valeur{details}}>
+			<tr class="detail [(#VALEUR{quantite}|>{0}|?{avec_quantite,sans_quantite})]">
+				<td class="description">
+					[(#ENV{qui}|=={client}|non)
+					<a href="[(#VALEUR{id_objet}|generer_url_entite{#VALEUR{objet}})]">
+					]
+						[(#VALEUR{descriptif})]
+					[(#ENV{qui}|=={client}|non)
+					</a>
+					]
+				</td>
+				<td class="montant">[(#VALEUR{prix}|prix_formater)]</td>
+			</tr>
+			[(#SET{total,[(#GET{total}|plus{[(#VALEUR{prix})]})]})]
+			[(#VALEUR{prix_ht}|commande_totalise_taxes{#VALEUR{prix}})]
+			</BOUCLE_details>
+		</tbody>
+		
+		<tfoot>
+			<tr class="total_ttc">
+				<td class="descriptif"><:prix:label_total_ttc:></td>
+				<td class="montant">[(#GET{total}|prix_formater)]</td>
+			</tr>
+			<BOUCLE_total_taxes(POUR){tableau #REM|commande_totalise_taxes}>
+			<tr class="total_taxe">
+				<td class="descriptif"><:commandes:label_dont_taxe:> [(#CLE)%]</td>
+				<td class="montant">[(#VALEUR|prix_formater)]</td>
+			</tr>
+			</BOUCLE_total_taxes>
+		</tfoot>
+	</table>
+<//B_test_format_texte>
+</BOUCLE_test>

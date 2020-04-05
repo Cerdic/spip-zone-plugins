@@ -1,0 +1,235 @@
+[(#BOITE_OUVRIR{'','simple facettes facettes-commandes'})]
+
+[(#REM) Modes de paiement ]
+<B_commandes_modes_paiements>
+<div class="facette facette-modes-paiements">
+	<h3 class="titre-facette"><:commandes:label_filtre_paiement:></h3>
+	<ul class='liste-items'>
+		[<li class="item">
+			(#SELF
+				|parametre_url{mode,''}
+				|lien_ou_expose{
+					<:commandes:label_filtre_tous:>,
+					#ENV{mode}|=={''},
+					ajax}
+				|inserer_attribut{data-ajaxreload_args,\{"mode":""\}})
+		</li>]
+		<BOUCLE_commandes_modes_paiements(COMMANDES){tout}{mode != ''}{fusion mode}>
+		[<li class="item">
+			(#SELF|parametre_url{mode,#MODE}
+				|lien_ou_expose{
+					[(#MODE|appliquer_filtre{bank_titre_type_paiement})][(#PLUGIN{bank}|oui) <small>\(#MODE\)</small>],
+					#ENV{mode}|=={#MODE},
+					ajax}
+				|inserer_attribut{data-ajaxreload_args,\{"mode":"#MODE"\}})
+		</li>]
+	</BOUCLE_commandes_modes_paiements>
+	</ul>
+</div>
+</B_commandes_modes_paiements>
+
+
+[(#REM) Échéances ]
+<B_commandes_echeances>
+<div class="facette facette-echeances">
+	<h3 class="titre-facette"><:commandes:label_filtre_echeances_type:></h3>
+	<ul class='liste-items'>
+		[<li class="item">
+			(#SELF
+				|parametre_url{echeances_type,''}
+				|lien_ou_expose{
+					<:commandes:label_filtre_tous:>,
+					#ENV{echeances_type}|=={''},
+					ajax}
+				|inserer_attribut{data-ajaxreload_args,\{"echeances_type":""\}})
+		</li>]
+		<BOUCLE_commandes_echeances(COMMANDES){tout}{fusion echeances_type}{echeances_type != ''}>
+		[<li class="item">
+			(#SELF
+				|parametre_url{echeances_type,#ECHEANCES_TYPE}
+				|lien_ou_expose{
+					[(#VAL{commandes:commande_echeances_type_}|concat{#ECHEANCES_TYPE}|_T)],
+					#ENV{echeances_type}|=={#ECHEANCES_TYPE},
+					ajax}
+				|inserer_attribut{data-ajaxreload_args,\{"echeances_type":"#ECHEANCES_TYPE"\}})
+		</li>]
+		</BOUCLE_commandes_echeances>
+	</ul>
+</div>
+</B_commandes_echeances>
+
+
+[(#REM) Statuts ]
+<B_commandes_statuts>
+<div class="facette facette-statuts">
+	<h3 class="titre-facette"><:commandes:label_filtre_etats:></h3>
+	<ul class='liste-items'>
+		[<li class="item">
+			(#SELF
+				|parametre_url{statut,''}
+				|lien_ou_expose{
+					<:commandes:label_filtre_tous:>,
+					#ENV{statut}|=={''},
+					ajax}
+				|inserer_attribut{data-ajaxreload_args,\{"statut":""\}})
+		</li>]
+		<BOUCLE_commandes_statuts(COMMANDES){tout}{fusion statut}>
+		[<li class="item statut-#STATUT">
+			(#SELF
+				|parametre_url{statut,#STATUT}
+				|lien_ou_expose{
+					[(#STATUT|commandes_lister_statuts)],
+					#ENV{statut}|=={#STATUT},
+					ajax}
+				|inserer_attribut{data-ajaxreload_args,\{"statut":"#STATUT"\}})
+		</li>]
+		</BOUCLE_commandes_statuts>
+	</ul>
+</div>
+</B_commandes_statuts>
+
+
+[(#REM) Dates ]
+#SET{type_date,   #VAL{"/^(mois|annee)/"}|preg_grep{#ENV**|unserialize|array_keys}|reset}
+#SET{type_date,   #GET{type_date}|match{_}|?{#GET{type_date}|substr{#GET{type_date}|strpos{_}},''}}
+#SET{param_date,  #VAL{date}|concat{#GET{type_date}}}
+#SET{param_mois,  #VAL{mois}|concat{#GET{type_date}}}
+#SET{param_annee, #VAL{annee}|concat{#GET{type_date}}}
+#SET{mois_env,    #ENV{#GET{param_mois}}}
+#SET{annee_env,   #ENV{#GET{param_annee}}}
+<B_commandes_annees>
+<div class="facette facette-dates">
+	<h3 class="titre-facette"><:commandes:label_filtre_dates:></h3>
+	[(#REM) Menu des années ]
+	<div class="menu-annees">
+		[(#SELF
+			|parametre_url{mois|mois_paiement|mois_envoi|annee|annee_paiement|annee_envoi,''}
+			|lien_ou_expose{
+				<:commandes:label_filtre_toutes:>,
+				#GET{mois_env}|non|et{#GET{annee_env}|non},
+				ajax}
+			|inserer_attribut{data-ajaxreload_args,'\{"mois":"","mois_paiement":"","mois_envoi":"","annee":"","annee_paiement":"","annee_envoi":""\}'})]
+		<span class='sep'>|</span>
+		<BOUCLE_commandes_annees(COMMANDES){tout}{fusion YEAR(date)}{!par date}{"<span class='sep'>|</span>"}>
+		[(#SELF
+			|parametre_url{#GET{param_annee},#DATE|annee}
+			|lien_ou_expose{
+				[(#DATE|annee)],
+				#GET{annee_env}|=={#DATE|annee},
+				ajax}
+			|inserer_attribut{data-ajaxreload_args,\{"[(#GET{param_annee})]":"[(#DATE|annee)]"\}})]
+		</BOUCLE_commandes_annees>
+	</div>
+
+	[(#REM) Calendrier ]
+	#SET{mois,#ARRAY}
+	<BOUCLE_set_mois(COMMANDES){tout}{fusion MONTH(date)}{annee?}{annee_paiement?}{annee_envoi?}{si #GET{annee_env}}>
+	#SET{mois,#GET{mois}|push{#DATE|mois}}
+	</BOUCLE_set_mois>
+	<table class="spip calendrier">
+		<tbody>
+			<BOUCLE_commandes_mois(DATA){enum 1,12}>
+			#SET{lemois,#VAL{%02d}|sprintf{#VALEUR}}
+			[(#COMPTEUR_BOUCLE|modulo{3}|=={1}|oui)<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,'','','',row_even,'','',''})]">]
+				#SET{nom_mois,#VAL{1970-}|concat{#VALEUR,'-1'}|nom_mois{abbr}|ucfirst}
+				[(#VALEUR|in_array{#GET{mois}}|oui)
+				<td>
+					[(#SELF
+						|parametre_url{#GET{param_mois},#GET{lemois}}
+						|lien_ou_expose{
+							#GET{nom_mois},
+							#GET{mois_env}|=={#GET{lemois}},
+							ajax}
+						|inserer_attribut{data-ajaxreload_args,\{"[(#GET{param_mois})]":"[(#GET{lemois})]"\}})]
+				</td>
+				][(#VALEUR|in_array{#GET{mois}}|non)
+				<td class="inactif"><span>#GET{nom_mois}</span></td>
+				]
+			[(#COMPTEUR_BOUCLE|modulo{3}|=={0}|oui)</tr>]
+			</BOUCLE_commandes_mois>
+		</tbody>
+		[(#REM) Menu des types de dates ]
+		#SET{types_dates,#ARRAY{'',#VAL{commandes:date_commande_label_court}|_T}}
+		<BOUCLE_date_paiement(COMMANDES){tout}{!date_paiement LIKE 0%}{0,1}>#SET{types_dates,#GET{types_dates}|array_merge{#ARRAY{paiement,#VAL{commandes:date_paiement_label_court}|_T}}}</BOUCLE_date_paiement>
+		<BOUCLE_date_envoi(COMMANDES){tout}{!date_envoi LIKE 0%}{0,1}>#SET{types_dates,#GET{types_dates}|array_merge{#ARRAY{envoi,#VAL{commandes:date_envoi_label_court}|_T}}}</BOUCLE_date_envoi>
+		<B_types_dates>
+		<tfoot>
+			<tr>
+				<td colspan="3">
+					<BOUCLE_types_dates(DATA)
+						{source table, #GET{types_dates}}
+						{"<span class='sep'>|</span>"}
+						{si #GET{mois_env}|ou{#GET{annee_env}}|oui}
+					>
+					#SET{param_mois_menu,#VAL{mois}|concat{#CLE|?{_#CLE,''}}}
+					#SET{param_annee_menu,#VAL{annee}|concat{#CLE|?{_#CLE,''}}}
+					[(#SELF
+						|parametre_url{mois|mois_paiement|mois_envoi|annee|annee_paiement|annee_envoi,''}
+						|parametre_url{#GET{param_mois_menu},#GET{mois_env}}
+						|parametre_url{#GET{param_annee_menu},#GET{annee_env}}
+						|lien_ou_expose{
+							#VALEUR,
+							#ENV{#GET{param_mois_menu}}|ou{#ENV{#GET{param_annee_menu}}}})]
+				</BOUCLE_types_dates>
+				</td>
+			</tr>
+		</tfoot>
+		</B_types_dates>
+	</table>
+</div>
+</B_commandes_annees>
+
+
+[(#REM) Auteurs ]
+<B_commandes_auteurs>
+<div class="facette facette-auteurs">
+	#ANCRE_PAGINATION
+	<h3 class="titre-facette"><:commandes:label_filtre_clients:></h3>
+	<ul class='liste-items'>
+		[<li class="item">
+			(#SELF
+				|parametre_url{id_auteur,''}
+				|lien_ou_expose{
+					<:commandes:label_filtre_tous:>,
+					#ENV{id_auteur}|=={''},
+					ajax}
+				|inserer_attribut{data-ajaxreload_args,\{"id_auteur":""\}})
+		</li>]
+		<BOUCLE_commandes_auteurs(COMMANDES auteurs){tout}{fusion id_auteur}{par auteurs.nom}{pagination 15}>
+		[<li class="item">
+			(#SELF
+				|parametre_url{id_auteur,#ID_AUTEUR}
+				|lien_ou_expose{
+					#NOM,
+					#ENV{id_auteur}|=={#ID_AUTEUR},
+					ajax}
+				|inserer_attribut{data-ajaxreload_args,\{"id_auteur":"#ID_AUTEUR"\}}
+				|inserer_attribut{id,auteur#ID_AUTEUR})
+		</li>]
+		</BOUCLE_commandes_auteurs>
+	</ul>
+	<B_alphabet>
+	<div class='pagination alphabet'>
+		<BOUCLE_alphabet(COMMANDES auteurs){tout}{fusion LOWER(SUBSTR(nom,1,1))}{nom != ''}{par nom}>
+		#SET{lettre,#NOM|mb_substr{0,1}|strtolower}
+		[(#SELF|parametre_url{lettre,#GET{lettre}}|parametre_url{debut_commandes_auteurs,@#ID_COMMANDE}|ancre_url{auteur#ID_AUTEUR}
+			|lien_ou_expose{#GET{lettre},#VAL{debut_commandes_auteurs}|_request|=={@#ID_COMMANDE}})]
+		</BOUCLE_alphabet>
+	</div>
+	</B_alphabet>
+</div>
+</B_commandes_auteurs>
+
+#BOITE_FERMER
+
+<script type="text/javascript">
+;(function($){
+$(function(){
+	$(".facettes-commandes [data-ajaxreload_args]").click(function(event){
+		event.preventDefault();
+		var parametres = $(this).data("ajaxreload_args");
+		ajaxReload('commandes', {args:parametres});
+	});
+});
+})(jQuery);
+</script>

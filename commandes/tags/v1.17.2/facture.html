@@ -1,0 +1,8 @@
+[(#ENV{id_commande}|oui)
+	[(#AUTORISER{voir_facture,commande,#ID_COMMANDE}|sinon_interdire_acces)]
+	#INCLURE{fond=inclure/facture,env}
+]
+
+[(#ENV{id_facture}|oui)
+	#INCLURE{fond=#EVAL{_DIR_PLUGIN_FACTURES}/facture,env}
+]

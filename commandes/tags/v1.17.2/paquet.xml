@@ -1,0 +1,54 @@
+<paquet
+	prefix="commandes"
+	categorie="divers"
+	version="1.17.2"
+	schema="0.8.0"
+	etat="stable"
+	compatibilite="[3.0.5;3.2.*]"
+	logo="prive/themes/spip/images/commande.png"
+	documentation="https://contrib.spip.net/Commandes-4527"
+>
+	<nom>Commandes</nom>
+	<auteur lien="http://www.cym.fr">Ateliers CYM</auteur>
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<auteur lien="http://magraine.net">Matthieu Marcillaud</auteur>
+	<auteur lien="https://bravecassine.com">Charles Razack</auteur>
+	<auteur lien="http://www.elastick.net">Anne-lise Martenot</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<traduire module="commandes" reference="fr" gestionnaire="salvatore" />
+
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="prix" compatibilite="[0.1.19;]" />
+	<utilise nom="coordonnees" compatibilite="[2.2.2;]" />
+	<utilise nom="notifavancees" compatibilite="[0.3.1;]" />
+	<utilise nom="bank" compatibilite="[3.0.0;]" />
+
+	<pipeline nom="commandes_pre_distribuer_commande" action="" />
+
+	<pipeline nom="affiche_milieu" inclure="commandes_pipelines.php" />
+	<pipeline nom="accueil_encours" inclure="commandes_pipelines.php" />
+	<pipeline nom="affiche_auteurs_interventions" inclure="commandes_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="commandes_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="commandes_pipelines.php" />
+	<pipeline nom="types_coordonnees" inclure="commandes_pipelines.php" />
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/commandes.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/commandes.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/commandes.php" />
+
+	<pipeline nom="bank_traiter_reglement" inclure="commandes_pipelines.php" />
+	<pipeline nom="trig_bank_reglement_en_attente" inclure="commandes_pipelines.php" />
+	<pipeline nom="trig_bank_reglement_en_echec" inclure="commandes_pipelines.php" />
+	<pipeline nom="bank_abos_decrire_echeance" inclure="commandes_pipelines.php" />
+	<pipeline nom="bank_abos_activer_abonnement" inclure="commandes_pipelines.php" />
+	<pipeline nom="bank_abos_preparer_echeance" inclure="commandes_pipelines.php" />
+	<pipeline nom="bank_abos_resilier" inclure="commandes_pipelines.php" />
+	<pipeline nom="pre_edition" inclure="commandes_pipelines.php" />
+
+	<pipeline nom="autoriser" inclure="commandes_autorisations.php" />
+
+	<menu nom="commandes" titre="commandes:nom_bouton_plugin" parent="menu_activite" icone="images/commande-16.png" action="commandes" />
+	<menu nom="configurer_commandes" titre="commandes:commandes_titre" parent="menu_configuration" icone="images/commande-16.png" />
+</paquet>

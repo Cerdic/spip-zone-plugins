@@ -1,0 +1,84 @@
+[(#REM)<style>
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+#SET{claire,##ENV{couleur_claire,c5e41c}}
+#SET{foncee,##ENV{couleur_foncee,9dba00}}
+
+
+#navigation .infos .reference p {font-size:1.5em;}
+
+
+/* ---------------
+   PAGE COMMANDES 
+   --------------- */
+
+/* liste des commandes */
+.liste-commandes table td               { padding-top: 1em; padding-bottom: 1em; vertical-align: top; }
+.liste-commandes .dates .label          { color: #888; color: rgba(0,0,0,.66); }
+.liste-commandes .montant               { white-space: pre; text-align: right; }
+.liste-commandes .envoye,
+.liste-commandes .envoye td             { background-color: [#(#VAL{c5e41d}|couleur_eclaircir|couleur_eclaircir)]; }
+
+/* navigation latérale */
+.facettes-commandes .facette            { margin-bottom: 1.5em; }
+.facettes-commandes .titre-facette      { font-size: 1.1em; margin-bottom: 0.25em; padding-bottom: 0.25em; border-bottom: 1px solid #ddd; }
+.facettes-commandes .sep                { color: #aaa; }
+.facettes-commandes .liste-items        { margin: 0; border: 0 none; }
+.facettes-commandes .liste-items .item  { padding: 0; border: 0 none; }
+.facettes-commandes .pagination         { padding: 0; margin: 0.5em 0 0; border-width: 0; }
+.facettes-commandes .pagination+.pagination { border-top-width: 1px; }
+.facettes-commandes .alphabet           { font-size: 0.7em; margin: 0; white-space: normal;}
+.facettes-commandes .alphabet img       { vertical-align: middle;}
+.facettes-commandes .menu-annees        { margin-bottom: 0.5em; }
+.facettes-commandes .calendrier         { margin: 0; font-size: 0.9em; }
+.facettes-commandes .calendrier caption { padding: 0.2em; margin: 0; font-weight: normal;}
+.facettes-commandes .calendrier td      { padding: 0.5em; border-color: #efefef; text-align: center; }
+.facettes-commandes .calendrier tr:nth-child(2n) td:not(.inactif) { background-color: transparent; }
+.facettes-commandes .calendrier .inactif { background-color: #efefef; }
+.facettes-commandes .calendrier .inactif:hover { cursor: not-allowed; }
+.facettes-commandes .calendrier .inactif span { opacity: 0.33; }
+.facettes-commandes .calendrier tfoot td { border: 0 none; font-size: 0.75em; font-style: normal; }
+
+<BOUCLE_icones_statuts(DATA){source table, #REM|commandes_lister_statuts|array_keys}>
+.facettes-commandes .statut-[(#VALEUR)]>*:before {content:""; display: inline-block; width:12px; height:12px; margin-right: 0.2em; background: transparent url('[(#CHEMIN{#VAL{prive/themes/spip/images/puce-commande-}|concat{#VALEUR,'.png'}})]') no-repeat center center;}
+</BOUCLE_icones_statuts>
+
+/* --------------
+   FICHE COMMANDE 
+   -------------- */
+.infos .formulaire_instituer_objet-commandes .statut_envoye .show { background-color: #GET{foncee}; }
+.infos .formulaire_instituer_objet-commandes .statut_paye .show { background-color: [#(#GET{foncee}|couleur_eclaircir|couleur_eclaircir)]; }
+.fiche_objet .formulaire_dater_commande	{ margin-top: 1em; margin-bottom: 1em; }
+
+/* bordereau récapitulant le contenu d'une commande */
+table.bordereau                         { border: 1px solid #ccc; margin: 1.385em 0; }
+table.bordereau th,
+table.bordereau tfoot td                { background-color: #eee; }
+table.bordereau th,
+table.bordereau td                      { vertical-align: middle; border: 0 none; }
+table.bordereau tbody td                { background-color: transparent; font-size: .9em; }
+table.bordereau tbody tr:not(:last-child) td { border-bottom: 1px dotted #ccc; }
+table.bordereau tfoot td                { font-style: normal; }
+table.bordereau tfoot .total_ttc td,
+table.bordereau tfoot tr:last-child td  { font-weight: bold; }
+table.bordereau td.prix                 { white-space: pre; }
+table.bordereau .prix,
+table.bordereau tfoot .description:not([colspan="1"]) { text-align: right; }
+table.bordereau tbody td.prix.ttc       { font-size: unset; }
+
+/* client */
+.client-commande td                     { vertical-align: top; }
+.client-commande .nom                   { margin: 0; }
+.client-commande .logo                  { width: 10px; }

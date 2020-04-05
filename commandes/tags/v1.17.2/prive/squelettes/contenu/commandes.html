@@ -1,0 +1,10 @@
+<h1 class="grostitre"><:commandes:commandes_titre:></h1>
+
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+
+<INCLURE{fond=prive/objets/liste/commandes, titre_dehors=oui, statut=#ENV{statut,#LISTE{encours,attente,partiel,paye,envoye,retour,retour_partiel}}, sinon=<:commandes:info_aucun_commande:>, ajax=commandes, env}>
+
+[(#AUTORISER{creer,commande}|oui)
+	[(#URL_ECRIRE{commande_edit}|icone_verticale{<:commandes:commande_creer:>,commande-24.png,edit,right})]
+	<div class="nettoyeur"></div>
+]

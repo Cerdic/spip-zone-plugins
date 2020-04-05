@@ -1,0 +1,64 @@
+<BOUCLE_transaction(TRANSACTIONS){id_transaction}>
+[(#REM)
+  Montant total de la facture : si c'est le montant de la transaction
+   ce qui couvre tous les cas d'usage : 1ere transaction d'une facture ou Xeme transaction (paiement en plusieurs fois, paiements recurrents)
+	Sur la premiere transaction d'une commande on detail les prix unitaires car ils sont OK, sur les transactions suivantes on ne mets pas de detail, uniquement le prix total
+   en general on a 1 seul article (abonnement) donc ca va, sinon tant pis...
+]
+#SET{ttc,#MONTANT}
+#SET{ht,#MONTANT_HT}
+#SET{afficher_prix_detail,' '}
+#SET{afficher_reduction,''}
+<BOUCLE_ligne_avec_reduction(COMMANDES_DETAILS){id_commande}{reduction>0.0}{0,1}>#SET{afficher_reduction,' '}</BOUCLE_ligne_avec_reduction>
+<BOUCLE_nbtrans(TRANSACTIONS){id_commande}{statut=ok}{1,1}>#SET{afficher_prix_detail,''}</BOUCLE_nbtrans>
+<BOUCLE_commande(COMMANDES){id_commande}{tout}>
+<B_liste>
+<table>
+	<thead>
+		<tr>
+			<th class="descriptif"><:commandes:designation:></th>
+			<th class="quantite"><abbr title="<:commandes:label_quantite|attribut_html:>"><:commandes:abbr_quantite:></abbr></th>
+			<th class="prix_unitaire"><abbr title="<:commandes:label_prix_unitaire|attribut_html:>"><:commandes:abbr_prix_unitaire:></abbr></th>
+			[(#GET{afficher_reduction}|oui)
+			<th class="reduction"><:commandes:label_reduction:></th>]
+			<th class="taxe"><:commandes:label_taxe:></th>
+			<th class="montant"><abbr title="<:commandes:label_total_ht|attribut_html:>"><:commandes:abbr_total_ht:></abbr></th>
+		</tr>
+		</thead>
+	<tbody>
+		<BOUCLE_liste(COMMANDES_DETAILS)
+			{id_commande}{par id_commandes_detail}
+		>
+		#SET{taxe,#TAXE_EXONEREE_RAISON|?{0,#TAXE*}}
+		<tr>
+			<td class="descriptif">[(#DESCRIPTIF*|typo|supprimer_numero)]</td>
+			<td class="quantite[ (#QUANTITE*|>{0}|non)null]">[(#QUANTITE)]</td>
+			<td class="prix_unitaire">[(#GET{afficher_prix_detail}|oui) [(#PRIX_UNITAIRE_HT*|round{2}|prix_formater)] ]</td>
+			[(#GET{afficher_reduction}|oui)
+			<td class="reduction">[(#REDUCTION|commandes_afficher_reduction_si)]</td>]
+			<td class="taxe[ (#GET{taxe}|floatval|>{0.0}|non)null]">[(#GET{afficher_prix_detail}|oui) [(#GET{taxe}|mult{100}|number_format{1})%] ]</td>
+			<td class="montant">[(#GET{afficher_prix_detail}|oui) #PRIX_HT]</td>
+			[(#PRIX_HT|commande_totalise_taxes{#PRIX})]
+		</tr>
+		</BOUCLE_liste>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td class="def" colspan="[(#GET{afficher_reduction}|?{5,4})]"><:prix:label_total_ht:></td>
+			<td class="montant">[(#GET{ht}|sinon{#PRIX_HT*}|prix_formater)]</td>
+		</tr>
+		<BOUCLE_total_taxes(POUR){tableau #REM|commande_totalise_taxes}>
+		<tr>
+			<td class="def" colspan="[(#GET{afficher_reduction}|?{5,4})]"><:prix:label_taxes:> [(#CLE)%]</td>
+			<td class="montant">[(#VALEUR|prix_formater)]</td>
+		</tr>
+		</BOUCLE_total_taxes>
+		<tr class="total_ttc">
+			<td class="def" colspan="[(#GET{afficher_reduction}|?{5,4})]"><:prix:label_total_ttc:></td>
+			<td class="montant">[(#GET{ttc}|sinon{#PRIX*}|prix_formater)]</td>
+		</tr>
+	</tfoot>
+</table>
+</B_liste>
+</BOUCLE_commande>
+</BOUCLE_transaction>
