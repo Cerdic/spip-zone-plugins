@@ -1,0 +1,22 @@
+<paquet
+	prefix="vocabulaire"
+	categorie="divers"
+	version="1.0.1"
+	etat="dev"
+	compatibilite="[3.1.0;3.1.*]"
+	logo="prive/themes/spip/images/vocabulaire-64.png"
+	documentation=""
+	schema="1.0.0"
+>
+
+	<nom>Vocabulaire</nom>
+	<!-- Liste des mots français -->
+
+	<auteur lien='http://p.henix.be'>Phenix</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/vocabulaire.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/vocabulaire.php" />
+	<pipeline nom="levenshtein_calculer" inclure="vocabulaire_pipelines.php" />
+</paquet>

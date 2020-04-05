@@ -1,0 +1,12 @@
+[(#BOITE_OUVRIR{<:vocabulaire:installer:>,'simple'})]
+
+[(#REM) On va faire une boucle sur les fichiers de vocabulaires ]
+#SET{chemin_vocabulaire, #EVAL{_DIR_PLUGIN_VOCABULAIRE}vocabulaires/*.txt}
+<B_fichier>
+    <BOUCLE_fichier(DATA){source glob, #GET{chemin_vocabulaire}}>
+        [(#REM) Créer un bouton d'installation par fichier de vocabulaire ]
+        [(#BOUTON_ACTION{installer #VALEUR, #URL_ACTION_AUTEUR{installer_vocabulaire, #VALEUR|concat{|0}, #SELF}})]
+    </BOUCLE_fichier>
+</B_fichier>
+
+[(#BOITE_FERMER)]
