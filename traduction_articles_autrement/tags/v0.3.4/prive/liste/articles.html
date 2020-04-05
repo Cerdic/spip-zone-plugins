@@ -1,0 +1,11 @@
+[(#CONFIG{taa/liste_compacte}|oui)
+	#SET{type,_compacte}
+	[(#PLUGIN{tradrub}|ou{#PLUGIN{trad_rub}}|oui)
+		[(#ENV{id_rubrique}|oui)
+			#SET{type,#GET{type}_sections}
+			]
+		]
+	]
+[(#CONFIG{taa/edition_seule}|oui)#SET{mode,edition_seule}]
+
+<INCLURE{fond=prive/liste/inc-articles#GET{type}}{ajax}{mode=#GET{mode}}{env}/>
