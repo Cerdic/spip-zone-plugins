@@ -1,0 +1,59 @@
+Before
+[pgn buttonsDisplay=standard]
+[Event "Tilburg Fontys"]
+[Site "Tilburg"]
+[Date "1998.10.24"]
+[Round "2"]
+
+[White "Anand, Viswanathan"]
+[Black "Kramnik, Vladimir"]
+[Result "1-0"]
+[ECO "C42"]
+[Opening "Petrov"]
+
+[Variation "classical attack, Chigorin variation"]
+[Annotator "pgn4web with notes from http://www.chessgames.com"]
+[WhiteElo "2825"]
+[BlackElo "2810"]
+[WhiteFideId "5000017"]
+[BlackFideId "4101588"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+
+{ pgn4web personal account on Kramnik and the Petrov, part 1: in October
+1998, I watched this game live from the tournament hall in Tilburg. At some
+point I was hoping to witness a masterpiece sacrifice win from Kramnik, but
+apparently Anand was well prepared. }
+
+1. e4 e5 2. Nf3 Nf6 3. Nxe5 d6 4. Nf3 Nxe4 5. d4 d5 6. Bd3 Nc6 7. O-O Be7
+8. Re1 Bg4 9. c3 f5 { This is a very old line, with games from Lasker and
+Capablanca's times. } 10. Qb3 O-O 11. Nbd2 Na5 12. Qa4 { Later White tried
+an alternative plan with Qc2 followed by b4 and rapid expansion on the
+queenside, often preceeded by a repetition, as in } (12. Qa4 Nc6 13. Qb3
+Na5 14. Qc2 Nc6 15. b4 { see Anand-Leko, Leon 2001 and the next game of
+this PGN file }) 12... Nc6 13. Bb5 Nxd2 { After this game Black tried to
+improve with } (13... Bh4 14. g3 Bf6 15. Bxc6 bxc6 16. Qxc6 Re8 { as in
+Anand-Kamnik at Wijk An Zee 1999 and in Shirov-Kramnik, Belgrade 1999 })
+14. Nxd2 Qd6 { So far following Anand-Yusupov, Linares 1993, where 15. Nb3
+ensued, eventually a draw. } 15. h3 { $1 This novelty was suggested by
+Anand's second Ubilava after the game in Linares. 15. h3 diverts Black's
+Bishop control of the e6 square and makes sure the h Pawn will not be
+captured when the Black's Queen arrives on h2. This move was voted the 4th
+most important novelty in Informant 74. } 15... Bh5 
+
+16. Nb3 Bh4 17. Nc5
+Bxf2+ { A thematic sacrifice for the variation, but Anand was well
+prepared. } 18. Kxf2 Qh2 19. Bxc6 
+
+bxc6 20. Qxc6 f4 21. Qxd5+ Kh8 22. Qxh5
+f3 23. Qxf3 { Apparently Anand's home analysis already assessed this
+position as won for White. } 23... Rxf3+ 24. Kxf3 Rf8+ 25. Ke2 Qxg2+ 26.
+Kd3 Qxh3+ 27. Kc2 Qg2+ 28. Bd2 Qg6+ 29. Re4 h5 30. Re1 Re8 
+
+31. Kc1 Rxe4 32.
+Nxe4 h4 33. Ng5 Qh5 34. Re3 Kg8 35. c4 { Sadly, it was not the day for a
+masterpiece sacrifice win from Kramnik, but look at the next game to see
+what happened more than 10 years later. } 1-0
+[/pgn]
+After
+
