@@ -1,0 +1,17 @@
+#BOITE_OUVRIR{'',info}
+<div><:spipcatchat:info_en_ligne:></div>
+<div id="users" style="height:400px;overflow-y: auto;"><:spipcatchat:catchat_chargement:></div>
+#BOITE_FERMER
+#BOITE_OUVRIR{'',info}
+<img id="spipcatchatpatientez" align="right" style="display:none" src="[(#CHEMIN{prive/images/searching.gif})]">
+<div id="catchatprivestatut">
+<label for="SpipCatChatStatus"><:spipcatchat:info_statut:></label><br/>
+<select name="status" id="SpipCatChatStatus" title="<:spipcatchat:title_status:>" style="float:left">
+	<option id="un" title="<:spipcatchat:status_absent:>" value="1"><:spipcatchat:status_absent:></option>
+	<option id="deux" title="<:spipcatchat:status_occupe:>" value="2"><:spipcatchat:status_occupe:></option>
+	<option id="trois" title="<:spipcatchat:status_ligne:>" value="3" selected><:spipcatchat:status_ligne:></option>
+</select>
+</div>
+#BOITE_PIED
+<input class="submit" title="<:spipcatchat:title_status:>" type="submit" onclick="SpipCatChatsetStatus(document.getElementById('SpipCatChatStatus').value,'[(#ID_AUTEUR|trim)]',['(#ENV{url_plugin}|trim)']);spipcatchatrestartstatut();" value="Envoyer">
+#BOITE_FERMER

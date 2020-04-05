@@ -1,0 +1,89 @@
+/* Mise en forme générale du formulaire login (container) et mise en forme plus générale du formulaire du salon (container)*/
+#spipcatchat, #spipcatchatcontainerlogin{
+	font: 1em/1.5em Georgia, Cambria, Times New Roman, Times, serif; 
+	color: #222222;  
+	padding:2%;
+	text-align: left;
+	width:45%;
+}  /* Les ID cachés en début de chargement de page */
+#spipcatchatmembreajout , #spipcatchatsalonprive, #spipcatchatselectsalon, #BoxUsers{
+	display:none;
+	padding:2%;
+} /* Mise en forme fieldset du formulaire du salon */
+#spipcatchat fieldset{	
+	padding:1%;
+}
+#spipcatchat input[type="text"]{
+	height:25px;
+	font-size:1.2em;
+} /* Mise en forme des titres du formulaire du salon */
+#spipcatchat p{  
+	font-size:1.1em;
+	text-align: left;
+	font-weight: bold;
+	margin-left:2%;
+	margin-right:2%;
+}
+#BoxUsers li:hover{
+	cursor:pointer;
+}
+#BoxUsers{
+	width:71%;
+	margin-top:1%;	
+	margin-bottom:1%;
+	margin-left:11%;
+}
+#newSalon, #auto{
+	margin-top:1%;	
+	margin-bottom:1%;
+	margin-left:11%;
+	width:75%;
+} 
+#spipcatchat label{
+	margin-left:7%;
+	border:none;
+}
+#spipcatchat fieldset, #submit{
+	float:right;
+	margin:2%;
+} /* Mise en forme du select du formulaire des choix des salons*/
+#spipcatchat select{
+	width:260px;
+	border:none;
+	background:#fefaf2;
+	padding:1px;
+} /* Cache du selecteur du formulaire des choix des salons (pour ne pas voir le bouton de défilement)*/
+#spipcatchat .spipcatchatcache{
+	overflow:hidden;
+	width:240px;
+	-moz-border-radius:20px;
+	-webkit-border-radius:20px;
+	border-radius:20px;
+	background:#fefaf2;
+} /* Option du selecteur du formulaire des choix de salons - cadenas rouge */
+#spipcatchat .spipcatchatselecsalonlock{
+	color:red;
+	padding:2px;
+	font-weight:bold;
+	background:url('../images/lock-26.png') right top no-repeat;
+	border:solid 1px #eee; 
+} /* Option du selecteur du formulaire des choix de salons - cadenas vert */
+#spipcatchat .spipcatchatselecsalonunlock{
+	font-weight:bold;
+	color:green;
+	padding:2px;
+	background:url('../images/unlock-user-26.png') right top no-repeat;
+	border: solid 1px #eee; 
+} /* Option du selecteur du formulaire des choix de salons - cadenas orange */
+#spipcatchat .spipcatchatselecsalonunlockadmin{
+	font-weight:bold;
+	color: #FFA500;
+	padding:2px;
+	background:url('../images/unlock-admin-26.png') right top no-repeat;
+	border:solid 1px #eee; 
+} 
+ /* Logo SpipCatChat bas de formulaire */
+.logochat{ 
+	width:70px;
+ 	border:none;
+}

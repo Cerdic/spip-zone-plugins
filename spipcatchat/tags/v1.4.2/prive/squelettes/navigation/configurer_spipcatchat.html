@@ -1,0 +1,14 @@
+[(#REM) <!-- Navigation dans les pages de configuration --> ]
+#SET{textlien,spipcatchat}
+<div class="sous_navigation">
+	<div class="liste">
+		<h4><:spipcatchat:config:></h4>
+		<ul class="liste-items">
+		<BOUCLE_navigation(POUR){tableau #LISTE{accueil,public,prive,commun}}>
+			[<li class="item[(#ENV{cfg, accueil}|=={#VALEUR|trim}|oui)on]">
+				(#URL_ECRIRE{#ENV{exec}}|parametre_url{cfg,#VALEUR|trim}|lien_ou_expose{[(#GET{textlien}|concat{':config_',#VALEUR}|trim|_T)]})
+			</li>]
+		</BOUCLE_navigation>
+		</ul>
+	</div>
+</div>

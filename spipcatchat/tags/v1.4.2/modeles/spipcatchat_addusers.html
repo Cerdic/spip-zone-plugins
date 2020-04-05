@@ -1,0 +1,60 @@
+<script type="text/javascript">
+$(document).ready(function()
+{ spipcatchatrest(['(#ENV{url_plugin}|trim)']);});
+$(document).keypress
+(function(e){if(e.keyCode==13)return false;});
+$(function() 
+	{
+var name=[<BOUCLE_LISTES_AUTEURS_CHAT(AUTEURS){tout}{id_auteur!=#ID_AUTEUR}>[{"value":(#NOM|trim|json_encode|sinon{#LOGIN|trim|json_encode}),["id":"(#ID_AUTEUR|trim)"},]]</BOUCLE_LISTES_AUTEURS_CHAT>];
+$( "#auto" ).autocomplete({
+source: name,
+select: function(event, ui){$('#selectUser').val(ui.item.id); },
+});
+});
+</script>	
+<div align="center">				
+<div id="spipcatchat"> <!-- container -->
+<fieldset>
+		<!-- Form Quitter -->
+	<form action="#SELF" method="post">
+		<input type="hidden" name="chat" value="oui"/>
+		<input type="hidden" name="spipsalon" value="[(#ENV{salon}|trim)]" />
+		<input id="submit" class="spipcatchatcancel" type="submit" title="<:spipcatchat:title_retour_salon:>" value=""/>
+	</form>
+		<!-- Fin Quitter -->
+	<p><:spipcatchat:formulaire_addusers:></p>		
+			<br /><label for="newSalon"><:spipcatchat:formulaire_recherche_users:></label><br/>
+			<div class="ui-widget">
+			<!-- Champ autocomplétion-->
+			<input id="auto"  class="ui-widget ui-widget-content" type="text" name="addAuteur" autocomplete="off" placeholder="<:spipcatchat:placeholder_user:>" value="">
+			</div>
+			<input id="selectUser" type="hidden" value=""/>
+			<br />
+			<div style="float:right;margin-right:5%">
+			<!-- Supprimer auteurs-->
+			<input type="submit"  class="spipcatchatplus" width="22px" id="plus" name="add" title="<:spipcatchat:title_add_user:>" onclick="spipcatchatadduser('plus',['(#ENV{url_plugin}|trim)'],['(#ID_AUTEUR|trim)']);return false;" value=""/>
+			<!-- Ajouter auteurs-->
+			<input type="submit" class="spipcatchatmoins" width="22px" id="moins" name="add" title="<:spipcatchat:title_del_user:>" onclick="spipcatchatadduser('moins',['(#ENV{url_plugin}|trim)'],['(#ID_AUTEUR|trim)']);return false;"  value=""/>
+			</div>
+			<br />
+			<div id="BoxUsers"> <!-- Boucle liste des auteurs spip -->
+				<B_MEMBRES_AUTEURS_CHAT>
+				 <ul>
+					<BOUCLE_MEMBRES_AUTEURS_CHAT (AUTEURS){tout} {id_auteur!=#ID_AUTEUR}>      
+					   [<li id="idauteurcatchat#ID_AUTEUR" class="spipcatchatmembreschat" title="<:spipcatchat:title_select_users:>" onclick="spipcatchatrestartmenu('[(#ID_AUTEUR|trim)]','[(#NOM|trim|sinon{#LOGIN|trim})]');return false;" style="cursor:pointer;display:none;margin-bottom:30px;">
+						[(#LOGO_AUTEUR|non)<img src="#CHEMIN{images/spipcatchat-64.png}" class="spip_logo spip_logo_left spip_logos" width="30">]
+						[(#LOGO_AUTEUR|left|image_reduire{30})]
+					    (#NOM|sinon{#LOGIN})
+					    </li> ]
+					</BOUCLE_MEMBRES_AUTEURS_CHAT>
+				</ul>
+				</B_MEMBRES_AUTEURS_CHAT>
+			</div>
+			<div id="proposition"></div>
+			<!-- Label Copy -->
+			[(#ENV{label}|=={non}|oui)
+			<img src="[(#CHEMIN{images/catchat.png})]" class="logochat" title="<:spipcatchat:title_copy:>"/><:spipcatchat:catchat_label:>
+			]
+</fieldset>
+</div> <!-- fin container -->
+</div>

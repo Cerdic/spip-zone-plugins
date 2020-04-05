@@ -1,0 +1,102 @@
+#CACHE{0} 
+<script type="text/javascript">
+function spipcatchatmessage()
+{t=[(#ENV{refresh}|div{1000})];
+if(""==$("#message").val())$("#spipcatchatvide").css("display","block"),
+setTimeout(function(){$("#spipcatchatvide").css("display","none")},1E3);
+else if(timer)
+{$("#spipcatchattimer").css("display","block");$("#spipcatchatcompt").html(t);
+var a=setInterval(function(){t--;if(t<0){t=0;}$("#spipcatchatcompt").html(t)},800);setTimeout(function(){$("#spipcatchattimer").css("display","none");
+clearTimeout(a)},[(#ENV{refresh}|trim)])}
+else if(120<$("#message").val().length)
+{$("#spipcatchatroman").css("display","block");
+setTimeout(function(){$("#spipcatchatroman").css("display","none");},1E3);}
+else
+{timer=1, setTimeout(function(){timer=0},[(#ENV{refresh}|trim)]),
+$("#spipcatchatpostmessage").submit(spipcatchatsetmessage(["(#ENV{url_plugin}|trim)"], "[(#ID_AUTEUR|trim)]","[(#CHARSET|trim)]","[(#ENV{refresh}|div{1000})]"))}}
+var timer;
+$(document).keypress(function(a)
+{13==a.keyCode&&spipcatchatmessage()});$(document).keypress(function(a){if(13==a.keyCode)return!1});
+</script>
+<center>
+<div id="spipcatchatcontainer" align="left"> <!-- div container -->
+<div style="width:100%;padding-bottom:20px;padding-top:5px;"> <!-- div contenaire bouton -->
+<input type="submit" class="spipcatchatquit"   title="<:spipcatchat:title_quit_salon:>"   onclick="quit(['(#URL_PAGE)']);" value=""> <!-- Bouton submit quitter -->
+<input type="submit" id="pepoletrash" class='spipcatchatpepole' title='<:spipcatchat:title_trash_salon:>'  onclick="document.getElementById('spipcatchatinfodel').style.display='block';document.getElementById('spipcatchatcontainer').style.display='none'; return false;" value=""/> <!-- Bouton submit peupler -->
+<form method="POST" action="" >
+<input type="hidden" name="logad" value="oui">
+<input type="hidden" name="adduser" value="[(#ENV{salon}|trim)]"> <!-- identité salon-->
+<input type="submit" id="pepoleadd" class='spipcatchatpepole' title='<:spipcatchat:title_add_pepole:>'  value="" > <!-- Bouton submit peupler -->
+</form>
+</div> <!-- fin div contenaire bouton haut-->	
+    	<!-- titre du salon -->
+     <h2 id="spipcatchatannonce" style="position:absolute;margin-top:-20px"></h2>
+	<table class="chat"><tr>		
+	<!-- zone des messages -->
+	<td valign="top" id="text-td">
+     	<!-- les messages -->
+		<div id="text">
+			<div id="loading"> <!-- logo loading -->
+				<center>
+				<span class="SpipCatChatinfo" id="SpipCatChatAttente"><:spipcatchat:index_attent:></span>
+				<div class="SpipCatChatTux-loading-indicator" alt="patientez..."></div>
+				</center>
+			</div> <!-- fin logo loading -->
+		</div> <!-- fin des messages -->
+	</td>	
+	<!-- colonne avec les membres connectés au chat -->
+	<td valign="top" id="users-td">
+	<div id="users"><:spipcatchat:chargement:></div>
+	</td>
+	</tr>
+	</table>
+	<!-- Zone de texte -->
+	<table class="post_message">
+	 <tr>
+		<td>
+			[(#CONFIG{spipcatchat_public/emoticon_public}|=={oui}|oui) [<div style="max-width:80% ">(#FORMULAIRE_SPIPCATCHAT_EMOTICONS{#ENV{theme_emo},public})</div>]]
+			<input type="text" id="message" maxlength="255" autocomplete="off" /> <!-- champ message -->
+			<input type="submit"  onclick="spipcatchatmessage(); return false;" value="" id="ok" title="<:spipcatchat:title_valid_message:>" />	<!-- bouton submit message -->	
+		<!-- Les messages d'alert du chat -->
+		<div id="spipcatchatroman" style='display:none'><br/><img src="[(#CHEMIN{images/roman-50.png})]" width="25px">&nbsp;<:spipcatchat:texte_roman:></div> <!-- texte trop long -->
+		<div id="spipcatchattimer" style='display:none'><br/><img src="[(#CHEMIN{images/horloge-50.png})]" width="25px">&nbsp;<span id="spipcatchatcompt" style="font-size:1.2em;"></span>&nbsp;&nbsp;<:spipcatchat:texte_recent:></div> <!-- texte trop recent -->
+		<div id="spipcatchatvide" style='display:none' ><br/><img src="[(#CHEMIN{images/vide-50.png})]" width="25px">&nbsp;<:spipcatchat:texte_vide:></div> <!-- texte vide -->
+		<!-- Select Statut -->
+		<div class="cache" align="center"> <!-- cache du select -->
+		<!-- loading statut -->
+			 <div  id="statutattentechange" style="display:none;position:absolute;margin-left:40px;margin-top:-4px" >
+			 <div id="statusResponse" style="background:url('[(#CHEMIN{images/status-bani.png})]') center center no-repeat;width:34px;height:34px;"></div></div>
+		<!-- fin loading statut -->
+	<select name="status" id="SpipCatChatStatus" onchange="SpipCatChatsetStatus(this.value,'[(#ID_AUTEUR|trim)]',['(#ENV{url_plugin}|trim)']);spipcatchatrestartstatut();" title="<:spipcatchat:title_status:>" >
+	<option title="<:spipcatchat:status_absent:>" value="1"><:spipcatchat:status_absent:></option>
+	<option title="<:spipcatchat:status_occupe:>" value="2"><:spipcatchat:status_occupe:></option>
+	<option title="<:spipcatchat:status_ligne:>" value="3" selected><:spipcatchat:status_ligne:></option>
+	</select>
+	 </div>								<!-- fin cache du select -->
+        <div id="responsePost" style="display:none"></div>
+	  </td>
+	 </tr>
+	</table>
+			[(#CONFIG{spipcatchat_commun/cache}|=={non}|oui)<img  id="spipcatchatpointpublic" src="#CHEMIN{images/point.png}" style="display:none;float:left;" >]
+			[(#CONFIG{spipcatchat_commun/cache}||non)<img  id="spipcatchatpointpublic" src="#CHEMIN{images/point.png}" style="display:none;float:left;" >]
+</div>  <!-- fin div container -->
+</center>
+<!-- Media audio-->
+<audio style="display:none" id="soundGet">
+	[(#ENV{sound_public}|=={oui}|oui)
+	<source src="#CHEMIN{images/get-sound.ogg}" type="audio/ogg" />
+	<source src="#CHEMIN{images/get-sound.mp3}" type="audio/mp3" />
+	]
+</audio>
+<audio style="display:none" id="soundPost">
+	[(#ENV{sound_public}|=={oui}|oui)
+	<source src="#CHEMIN{images/post-sound.ogg}" type="audio/ogg" />
+	<source src="#CHEMIN{images/post-sound.mp3}" type="audio/mp3" />
+	]
+</audio>
+<audio style="display:none" id="emoticon">
+	[(#ENV{sound_public}|=={oui}|oui)
+	<source src="#CHEMIN{images/emoticon.ogg}" type="audio/ogg" />
+	<source src="#CHEMIN{images/emoticon.mp3}" type="audio/mp3" />
+	]
+</audio>

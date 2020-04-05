@@ -1,0 +1,59 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+<h3 class="titrem"><:spipcatchat:commun:></h3>
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+#SET{cac,spipcatchat}
+		<ul>
+		#SET{name,history}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{cac}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<p class="explication"><:spipcatchat:explication_history:></p>
+						<div class="choix">
+							<input name="#GET{name}"  class="radio" id="#GET{name}_oui" type="radio" [(#ENV{#GET{name}}|=={5500}|oui)checked="checked"] value="5500"><label for="#GET{name}_oui"><:item_oui:></label>
+						</div>
+						<div class="choix">
+							<input name="#GET{name}"  class="radio" id="#GET{name}_non" type="radio" [(#ENV{#GET{name}}|=={0}|oui)checked="checked"][(#ENV{#GET{name}}||non)checked="checked"] value="0"><label for="#GET{name}_non"><:item_non:></label>
+						</div>
+				</li>
+			</ul>
+		<ul>
+		#SET{name,cache}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{cac}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<p class="explication"><:spipcatchat:cache:></p>
+						<div class="choix">
+							<input name="#GET{name}"  class="radio" id="#GET{name}_oui" type="radio" [(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] value="oui"><label for="#GET{name}_oui"><:item_oui:></label>
+						</div>
+						<div class="choix">
+							<input name="#GET{name}"  class="radio" id="#GET{name}_non" type="radio" [(#ENV{#GET{name}}|=={non}|oui)checked="checked"][(#ENV{#GET{name}}||non)checked="checked"] value="non"><label for="#GET{name}_non"><:item_non:></label>
+						</div>
+				</li>
+			</ul>
+		<ul>		
+		#SET{name,theme_emoticons}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{cac}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]
+					<select name="#GET{name}" class="select" id="#GET{name}">
+						 <BOUCLE_REPERTOIRE_EMOTICONS(php:DirectoryIterator){args #EVAL{_DIR_PLUGIN_SPIPCATCHAT}/images/emoticons/}{valeur!==\.}>
+						 <option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"]  [(#CONFIG{spipcatchat_commun/theme_emoticons}||non)[(#VALEUR|=={classic}|oui)selected="selected"] ] style="text-transform:capitalize">#VALEUR</option>
+						 </BOUCLE_REPERTOIRE_EMOTICONS>
+					</select>
+					<center>
+					[(#CHEMIN{images/emoticons/#CONFIG{spipcatchat_commun/theme_emoticons,classic}/etiquette.png}||oui)
+					<img src="#CHEMIN{images/emoticons/#CONFIG{spipcatchat_commun/theme_emoticons,classic}/etiquette.png}" style="width:350px;"/>
+					]
+					</center>
+				</li>
+			</ul>
+<input type="hidden" name="_meta_casier" value="#EVAL{spipcatchat_commun}" />
+<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+</div>
+</form>
+</div>

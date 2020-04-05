@@ -1,0 +1,14 @@
+#BOITE_OUVRIR{'','info'}
+	<div id="salonadminpatientez" style="display:none" > 
+		<:spipcatchat:catchat_chargement:>
+		<img  align="right" src="[(#CHEMIN{prive/images/searching.gif})]">
+    </div>
+    <div id="salonadmin">
+      <div  style="float:right;">
+       <img id="occuper" style="display:none;position:absolute;margin-left:-20px;" onclick="spipcatchatShowChatAdmin('0');" src="#CHEMIN{images/lock-26.png}">
+       <img id="libre" style="position:absolute;margin-left:-20px;" onclick="spipcatchatShowChatAdmin('1');" src="#CHEMIN{images/unlock-user-26.png}">
+      </div>
+     <span id="public" style="cursor:pointer" onclick="spipcatchatShowChatAdmin('1');">&nbsp;<:spipcatchat:title_public:></span>
+     <span id="prive" style="cursor:pointer;display:none" onclick="spipcatchatShowChatAdmin('0');">&nbsp;<:spipcatchat:title_prive:></span>
+    </div>
+#BOITE_FERMER

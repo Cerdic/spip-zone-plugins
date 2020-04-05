@@ -1,0 +1,246 @@
+var URLplugin='[(#ENV{url_plugin}|trim)]';
+var idAuteur=encodeURIComponent('[(#ID_AUTEUR|trim)]');
+var charset=encodeURIComponent('[(#CHARSET|trim)]');
+var nom=encodeURIComponent('[(#ENV{nom}|trim)]'); 
+var langShowChat = new Array("<:spipcatchat:catchat_message:>");
+[var catchatrefresh=(#CONFIG{spipcatchat_prive/refreshprive,1000}|trim);]
+[var catcache="(#CONFIG{spipcatchat_commun/cache,non}|trim)";]
+[var hist=(#CONFIG{spipcatchat_commun/history,0}|trim);]
+[(#CONFIG{spipcatchat_commun/theme_emoticons}||non)var pack="classic"; #SET{catchatthememoti,classic}]
+[(#CONFIG{spipcatchat_commun/theme_emoticons}||oui)[var pack="(#CONFIG{spipcatchat_commun/theme_emoticons}|trim)";] #SET{catchatthememoti,#CONFIG{spipcatchat_commun/theme_emoticons}}]
+var catchatrefreshstatut=125000;
+var scrollBar = false;
+var nombreMessage;
+var emosta = 'status';
+
+function spipcatchattypo(texte,url,pack)
+{	
+#SET{spipcatchatregex2, [a-z A-Z 0-9]+.png$}
+<BOUCLE_EMOTICONS2(DATA){source glob, #ENV{url_plugin}images/emoticons/#GET{catchatthememoti}/*.png}{valeur!==etiquette.png}>#SET{grommeler2,#VALEUR|match{#GET{spipcatchatregex2}, Uims }|replace{\.png$,'',S} }
+[texte = texte.replace(/[:(#GET{grommeler2}|trim):]/g,' <img src="(#CHEMIN{#VALEUR}|replace{../squelettes-dist/,'',S}|trim)" alt="#GET{grommeler2}" style="width:20px"/> ');]
+</BOUCLE_EMOTICONS2>	
+        texte = texte.replace(/[\W]{1}lol[^\S]{1}/g,' <img src="#ENV{url_plugin}images/emoticons/#GET{catchatthememoti}/smile.png" alt="Sourire" style="width:20px"/> ');
+        texte = texte.replace(/[\W]{1}mdr[^\S]{1}/g,' <img src="#ENV{url_plugin}images/emoticons/#GET{catchatthememoti}/heureux.png" alt="MDR" style="width:20px"/> ');
+        texte = texte.replace(/[\W]{1}[p]+tdr[^\S]{1}/g,' <img src="#ENV{url_plugin}images/emoticons/#GET{catchatthememoti}/bigrire.png" alt="PTDR" style="width:20px"/> ');		
+		texte = texte.replace(/_/gi,'<br />');
+		texte = texte.replace(/{{{/gi,'<span style="padding-left:20px;">');
+		texte = texte.replace(/}}}/gi,'</span>');
+		texte = texte.replace(/{{/gi,'<b>');
+		texte = texte.replace(/}}/gi,'</b>');
+		texte = texte.replace(/{/gi,'<i>');
+		texte = texte.replace(/}/gi,'</i>');
+		texte = texte.replace(/{/gi,'<i>');
+		texte = texte.replace(/}/gi,'</i>');
+		return texte;				
+	}
+
+
+function spipcatchatemoticonprive(emoticon)
+{
+	$('#message').val($('#message').val()+''+emoticon);	
+	$('#emoticon').trigger("play");
+}
+
+function spipcatchatmessage()
+{	// l'utilisation de cette fonction a pour but d'afficher les messages d'erreur et d'éviter les appels inutiles au script PHP pour les motifs suivant
+ t=[(#CONFIG{spipcatchat_prive/refreshprive}|div{1000})];
+ 
+  if(""==$("#message").val())
+	$("#spipcatchatvide").css("display","block"), // Message d'erreur -> affichage le message: Vide
+	setTimeout(function(){$("#spipcatchatvide").css("display","none")},1E3); // Le message est de nouveau caché
+  else if(timer) // Si le message n'est pas vide et que la variable TIMER est égale à TRUE -> batteries de test 
+  		{
+	  		$("#spipcatchattimer").css("display","block"); // Message d'erreur -> affichage message: temporisation 
+	  		$("#spipcatchatcompt").html(t); // Initier le compte à rebours avec la variable T et premier affichage.
+	  		var a=setInterval(function(){t--;if(t<0){t=0;}$("#spipcatchatcompt").html(t)},800); // Contenu de la variable A -> fonction : On incrémente de -1 la variable T toutes les 800 millisecondes et on affiche et si elle est inférieure à zero la variable T prend la valeur 0.
+	  		setTimeout( // Retour à la normale après X millisecondes de la variable CATCHATREFRESH
+	  			function(){$("#spipcatchattimer").css("display","none"); // Le message est de nouveau caché
+		  		clearTimeout(a)},catchatrefresh
+		  		)
+	  		}
+  		else if(120<$("#message").val().length)
+  		{
+	  		$("#spipcatchatroman").css("display","block"); // Message d'erreur -> affichage message: message jugé trop long
+	  		setTimeout(function(){$("#spipcatchatroman").css("display","none");},1E3); // Le message est de nouveau caché
+	  		}
+	  	else
+	  	{ // le message a rempli toutes les conditions
+		  	timer=1, 
+		  	setTimeout(function(){timer=0},catchatrefresh), //Après X millisecondes la variable TIMER passe à FALSE
+		  	$("#spipcatchatpostmessage").submit(spipcatchatsetmessage(URLplugin, idAuteur,charset,catchatrefresh/1000)) // Le message est envoyer a la fonction javascript spipcatchatsetmessage pour la suite
+		  	}
+}
+var timer;
+$(document).keypress( // l'utilisateur presse la touche ENTER -> action de la fonction spipcatchatmessage 
+function(a)
+	{	13==a.keyCode&&spipcatchatmessage()	});
+
+$(document).keypress( // Dans d'autres cas la touche ENTER ne produit pas d'action
+function(a)
+	{	if(13==a.keyCode)return!1}	);
+
+function spipcatchatShowChat()
+{ // Cette fonction permet d'initialiser le chat dans le bon environnement. En assignant les valeurs utiles au déroulement du chat, le time-code, les autorisations, les statuts etc... dans des variables de sessions.
+$.ajax({
+	url:URLplugin+"phpscripts/get-prive-autorisation.php", // Pour ne pas interférer avec le chat public les script sont différent mais globalement les contenus sont les mêmes à part le nom des variables de sessions. 
+	type:"POST",
+	data:"id_auteur="+idAuteur+"&nom="+nom+"&url="+URLplugin+"&char="+charset+"&historique="+hist,
+	success:function(e)
+		{ // Après l'exécution du script on lance la fonction STARTCHAT
+		    	if(e==3)
+		    {
+		    		$("#spipcatchatacces2").css('display','block');
+		    		$(".formulaire_spip").css('display','none');
+		    }
+		    else
+		    {
+			    emosta = 'status';
+				startchat(catchatrefresh,catchatrefreshstatut,idAuteur,URLplugin,langShowChat,charset);
+			}
+		}
+	})
+}
+
+function spipcatchatShowChatAdmin(admin)
+{ // Cette fonction permet d'initialiser le chat dans le bon environnement. En assignant les valeurs utiles au déroulement du chat, le time-code, les autorisations, les statuts etc... dans des variables de sessions.
+spipcatchatrestartstatut();
+$.ajax({
+	url:URLplugin+"phpscripts/get-prive-autorisation.php", // Pour ne pas interférer avec le chat public les scripts sont différent mais globalement les contenus sont les mêmes à part le nom des variables de sessions. 
+	type:"POST",
+	data:"id_auteur="+idAuteur+"&nom="+nom+"&url="+URLplugin+"&char="+charset+"&admin="+admin+"&historique="+hist,
+	success:function(e)
+		{ 
+				if(e==1)
+				{
+					$('#libre').css('display','none');
+					$('#occuper').css('display','block');
+					$('#public').css('display','none');
+					$('#prive').css('display','block');
+					$('#spipcatchattitreprive').css('display','block');
+					$('#spipcatchattitrepublic').css('display','none');
+					 emosta = 'admin';
+				}
+				if(e==0){
+					$('#libre').css('display','block');
+					$('#occuper').css('display','none');
+					$('#public').css('display','block');
+					$('#prive').css('display','none');
+					$('#spipcatchattitreprive').css('display','none');
+					$('#spipcatchattitrepublic').css('display','block');
+					 emosta = 'status';
+				}
+				if(e==3)
+			    {
+			    $("#spipcatchatacces2").css('display','block');
+			    $(".formulaire_spip").css('display','none');
+			    }
+			$('#salonadmin').css('display','none');
+			$('#salonadminpatientez').css('display','block');
+			$('#switch').trigger("play");
+			setTimeout(function(){ $('#salonadmin').css('display','block');$('#salonadminpatientez').css('display','none');},6e3);
+		}
+	})
+}
+
+function getMessages(e,t,n,r,i)
+{ // Cette fonction permet le retour des messages du chat
+	$.getJSON(n+"phpscripts/get-prive-message.php",  
+	{auteur:t,ref:e/1e3,aucunmessage:r[0],"char":i,"historique":hist,"cache":catcache}, // On passe dans l'URL un tableau en format JSON
+	function(e)
+		{
+		var t=$("#text");
+		$("#text").html(spipcatchattypo(e.messages)); // On passe en revue avant l'affichage du tableau des messages du chat avec la fonction SPIPCATCHATTYPO pour les émoticons et la typo SPIP
+		1!=scrollBar&&(t[0].scrollTop=t[0].scrollHeight,scrollBar=!0);
+		void 0!==t&&t[0].childNodes.length>nombreMessage&&(t[0].scrollTop=t[0].scrollHeight, // Ici le nombre de ligne du tableau est passé à plus un, donc on descend la scroll bar
+		$("#soundGet").trigger("play")); // et comme tout chat qui se respecte on joue un son d'avertissement
+		void 0!==t&&(nombreMessage=t[0].childNodes.length) // ensuite on compte le nombre de ligne du tableau et on rafraîchi notre variable
+		if(e.cache=="oui"){$("#spipcatchatpointprive").css('display','block');}else{$("#spipcatchatpointprive").css('display','none');}
+		}
+	  )
+}
+
+function spipcatchatsetmessage(e,t,n,r)
+{ // Cette fonction permet d'enregistrer les messages du chat
+	var i=encodeURIComponent($("#message").val()); // On enregistre le message en l'encodant
+	$("#message").val(""); // et ensuite on vide le champ MESSAGE
+ $.ajax({
+	 type:"POST",
+	 url:e+"phpscripts/set-prive-message.php", // Pour ne pas interférer avec le chat public les script sont différent mais globalement les contenus sont les mêmes à part le nom des variables de sessions. 
+	 data:"message="+i+"&auteur="+t+"&char="+encodeURIComponent(n)+"&ref="+encodeURIComponent(r), 
+	 success:function(e)
+	 {
+		 $("#soundPost").trigger("play");// On joue un son d'avertissement
+		 $("#soundGet").trigger("stop");// et on stop le son d'avertissement du get sinon c'est la cacophonie assurée! 
+		 1!=e&&$("#responsePost").html(e).slideDown("slow"); // si de retour on a un FALSE alors on l'affiche -> auto commentaire perso(mais je crois que celà n'a plus sa raison d'être avec la version plugin...à vérifier)
+		 $("#message").focus()
+		 },
+  error:function(e)
+  	{alert("Erreur - Set-Message")}
+  })
+}
+
+function startchat(e,t,r,i,s,o)
+{ // Cette fonction permet de démarrer les deux autres fonctions des statuts des auteurs et le retour des messages à des intervalles programmés par les variables -> T&E 
+document.getElementById("message")&&(getOnlineUsers(r,i,s,o),statusStart=window.setInterval(function(){getOnlineUsers(r,i,s,o)},t),window.setInterval(function(){getMessages(e,r,i,s,o)},e),$("#message").focus())
+}
+
+function getOnlineUsers(t,n,r,i)
+{ 
+	$.getJSON(n+"phpscripts/get-prive-online.php", // Pour ne pas interférer avec le chat public les scripts sont différent mais globalement les contenus sont les mêmes à part le nom des variables de sessions. 
+	{auteur:t},
+	function(e)
+	{ $('#SpipCatChatStatus option[value=1]').removeProp("selected"); $('#SpipCatChatStatus option[value=2]').removeProp("selected"); $('#SpipCatChatStatus option[value=3]').removeProp("selected");
+	  $('#un').removeAttr("selected");$('#deux').removeAttr("selected");$('#trois').removeAttr("selected");
+	 var r="",i,s;
+		for(s in e.list){
+	    if(e.list[s].id==t){
+	    if("busy"==e.list[s].status)
+	    		{$('#deux').attr("selected","selected");$('#SpipCatChatStatus option[value=2]').prop("selected",true);}
+	    else if("inactive"==e.list[s].status)
+	    		{$('#un').attr("selected","selected");$('#SpipCatChatStatus option[value=1]').prop("selected",true);}
+	    else if("active"==e.list[s].status)
+	    		{$('#trois').attr("selected","selected");$('#SpipCatChatStatus option[value=3]').prop("selected",true);}
+	    }
+		"busy"==e.list[s].status?(texte="Occupé(e) [X]",
+		i="inactive"):"inactive"==e.list[s].status?(texte=" Absent(e) [-] ",
+		i="neutral"):(texte="En ligne [&radic;]",
+		i="active"),
+		r+='<span title="'+emosta+" - "+texte+'"><img src="'+n+"/images/"+emosta+"-"+i+'.png" /> '+e.list[s].login+"</span><br/>";
+		$("#users").html(r)
+		}	
+	}
+  )
+  
+}
+
+function SpipCatChatsetStatus(e,t,n)
+{ // Cette fonction permet d'enregistrer le statut des auteurs 
+	$.ajax({type:"POST",url:n+"phpscripts/set-prive-status.php", // Pour ne pas interférer avec le chat public les script sont différent mais globalement les contenus sont les mêmes à part le nom des variables de sessions. 
+		data:"status="+e+"&auteur="+t,
+		success:function(e)
+		{
+			$("#catchatprivestatut").addClass("spipcatchatpause"); // On opacifie le conteneur 
+			$("#spipcatchatpatientez").css("display","block"); // et un petit gif animé pour faire joli
+			setTimeout(rmResponse,15e3); // Mais à un moment donné il faut que ça s'arrête, alors on passe la fonction RemoveResponse
+		},
+		error:function(e)
+		{
+			alert("Erreur - Status");
+			setTimeout(rmResponse,15e3)
+			}
+		}
+	)
+}
+
+function rmResponse()
+{ // Cette fonction permet un retour à la normale après un changement de statut
+	$("#catchatprivestatut").removeClass("spipcatchatpause");
+	$("#spipcatchatpatientez").css("display","none");
+}
+
+function spipcatchatrestartstatut()
+{ // Cette fonction permet de forcer l'actualisation du statut avant les deux minutes en deux passes
+setTimeout(function(){getOnlineUsers(idAuteur,URLplugin,langShowChat,charset)},6e3);
+setTimeout(function(){getOnlineUsers(idAuteur,URLplugin,langShowChat,charset)},12e3);
+}
+spipcatchatShowChat();

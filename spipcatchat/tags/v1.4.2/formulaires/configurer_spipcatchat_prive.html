@@ -1,0 +1,100 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+<h3 class="titrem"><:spipcatchat:prive:></h3>
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+#SET{cap,spipcatchat}
+		<ul>
+		#SET{name,name_auteur}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{cap}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<p class="explication"><:spipcatchat:explication_name_auteur:></p>
+					<input type="text" class="text"  name="#GET{name}" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+		</ul>
+		<ul>
+		#SET{name,name_omnizero}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{cap}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<p class="explication"><:spipcatchat:explication_name_omnizero:></p>
+					<input type="text" class="text"  name="#GET{name}" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+		</ul>
+		<ul>
+		#SET{name,refreshprive}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{cap}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<p class="explication"><:spipcatchat:explication_refesh_prive:></p>
+					<select name="#GET{name}" class="select" id="#GET{name}">
+						<BOUCLE_options_effect3(POUR){tableau #LISTE{1000,2000,3000,4000,5000,6000,7000,8000}}>
+							<option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option>
+						</BOUCLE_options_effect3>
+					</select>
+				</li>
+		</ul>
+		<ul>
+		#SET{name,admin}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{cap}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<p class="explication"><:spipcatchat:explication_admin:></p>
+					<div class="choix">
+							<input name="#GET{name}"  class="radio" id="#GET{name}_non" type="radio" [(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] value="oui"><label for="#GET{name}_non"><:item_oui:></label>
+						</div>
+						<div class="choix">
+							<input name="#GET{name}"  class="radio" id="#GET{name}_oui" type="radio" [(#ENV{#GET{name}}|=={non}|oui)checked="checked"][(#ENV{#GET{name}}||non)checked="checked"] value="non"><label for="#GET{name}_oui"><:item_non:></label>
+						</div>
+				</li>
+		</ul>
+		<ul>
+		#SET{name,emoticon}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{cap}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<p class="explication"><:spipcatchat:explication_emoticon:></p>
+						<div class="choix">
+							<input name="#GET{name}"  class="radio" id="#GET{name}_non" type="radio" [(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] value="oui"><label for="#GET{name}_non"><:item_oui:></label>
+						</div>
+						<div class="choix">
+							<input name="#GET{name}"  class="radio" id="#GET{name}_oui" type="radio" [(#ENV{#GET{name}}|=={non}|oui)checked="checked"][(#ENV{#GET{name}}||non)checked="checked"] value="non"><label for="#GET{name}_oui"><:item_non:></label>
+						</div>
+				</li>
+		</ul>
+		<ul>
+		#SET{name,historique}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{cap}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<p class="explication"><:spipcatchat:explication_historique:></p>
+					<div class="choix">
+							<input name="#GET{name}"  class="radio" id="#GET{name}_non" type="radio" [(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] value="oui"><label for="#GET{name}_non"><:item_oui:></label>
+						</div>
+						<div class="choix">
+							<input name="#GET{name}"  class="radio" id="#GET{name}_oui" type="radio" [(#ENV{#GET{name}}|=={non}|oui)checked="checked"][(#ENV{#GET{name}}||non)checked="checked"] value="non"><label for="#GET{name}_oui"><:item_non:></label>
+						</div>
+				</li>
+		</ul>
+		<ul>
+		#SET{name,bruitage_prive}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{cap}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<p class="explication"><:spipcatchat:bruitage_prive:></p>
+					<div class="choix">
+							<input name="#GET{name}"  class="radio" id="#GET{name}_non" type="radio" [(#ENV{#GET{name}}|=={oui}|oui)checked="checked"][(#ENV{#GET{name}}||non)checked="checked"] value="oui"><label for="#GET{name}_non"><:item_oui:></label>
+						</div>
+						<div class="choix">
+							<input name="#GET{name}"  class="radio" id="#GET{name}_oui" type="radio" [(#ENV{#GET{name}}|=={non}|oui)checked="checked"] value="non"><label for="#GET{name}_oui"><:item_non:></label>
+						</div>
+				</li>
+				</ul>
+<input type="hidden" name="_meta_casier" value="#EVAL{spipcatchat_prive}" />
+<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+</div>
+</form>
+</div>

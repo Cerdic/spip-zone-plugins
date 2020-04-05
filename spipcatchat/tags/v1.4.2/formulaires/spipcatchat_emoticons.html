@@ -1,0 +1,5 @@
+#SET{spipcatchatregex, [a-z A-Z 0-9]+.png$}
+<BOUCLE_EMOTICONS(DATA){source glob, #EVAL{_DIR_PLUGIN_SPIPCATCHAT}images/emoticons/#ENV{emoticon}/*.png}{valeur!==etiquette.png}>
+#SET{grommeler,#VALEUR|match{#GET{spipcatchatregex}, Uims }|replace{\.png$,'',S} }
+[<img onclick="spipcatchatemoticon[(#ENV{fonction}|trim)]('[:(#GET{grommeler}|trim):]');" src="(#CHEMIN{#VALEUR})" alt="[(#GET{grommeler}|trim)]" style="cursor: wait;width:20px;"/> ]
+</BOUCLE_EMOTICONS>	

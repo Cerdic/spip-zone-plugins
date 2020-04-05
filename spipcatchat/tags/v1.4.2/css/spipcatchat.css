@@ -1,0 +1,185 @@
+/* Mise en forme générale du chat (container)*/
+#spipcatchatcontainer{ 
+	padding: 0px 20px 20px 20px;
+	font: 1em/1.5em Georgia, Cambria, Times New Roman, Times, serif; 
+	color: #222222;  
+	padding:2%;
+	text-align: left;
+	}/* Couleur des tableaux et de la fenêtre du chat*/
+#spipcatchatcontainer  .TEXTOCAT{
+	width:450px;
+	word-wrap: break-word;
+	overflow-wrap:break-word;
+	}/* Couleur des noms d'auteurs dans la fenêtre du chat*/
+#spipcatchatcontainer .ego{
+	color:#666;
+	}/* Couleur des noms d'auteurs dans la fenêtre du chat*/
+#spipcatchatcontainer .alter{
+	color:#077692;
+	}/* Couleur des tableaux de la fenêtre du chat*/
+#spipcatchatcontainer .TDCATTEXT{
+	margin-left:30px;
+	margin-top:0px;
+	top:0px;
+}
+#spipcatchatcontainer .logouser{
+	width:90px;
+	height:90px;
+		} 
+#cadre{
+	width:90px;
+	height:90px;
+	-moz-box-shadow: 0px 0px 5px 1px #656565;
+	-webkit-box-shadow: 0px 0px 5px 1px #656565;
+	-o-box-shadow: 0px 0px 5px 1px #656565;
+	box-shadow: 0px 0px 5px 1px #656565;
+	filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=NaN, Strength=5);
+	-moz-border-radius: 100px;
+	-webkit-border-radius: 100px;
+	border-radius: 100px;
+	overflow:hidden;
+	position:absolute;
+	background:#fefaf2;
+	}
+#spipcatchatcontainer input[type="text"]{
+	height:20px;
+	font-size:1em;
+}
+.CloCk{
+	color:#7a81ff;
+	font-size:1em;	
+}
+#spipcatchatcontainer .userconnect{
+		color:#808080;
+		}
+#spipcatchatcontainer .spipcatchatquit {
+	float:right;
+}
+#spipcatchatcontainer .spipcatchatpepole{
+	float:right;
+	right;
+	margin-right:1%;
+	display:none;
+}/* Bloc contenant la zone de texte et des boutons */
+.post_message{
+	width: 95%;
+	margin: auto;
+	padding-left: 10px;
+	padding-top: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}/* Zone de texte */
+.post_message #message {
+	width: 80%;
+	margin-top:-3%;
+	background:#fefaf2;
+}/* Bouton d'envoi */
+.post_message #ok {
+	margin-left:3%;	
+}/* La zone où sont affichés les messages et utilisateurs connectés */
+.chat {
+	width: 95%;
+	margin: 10px auto;
+	padding: 0px;
+} /* Bloc de chargement */
+.chat #loading {
+	margin-top: 0px;
+} /* Annonce */
+.chat #spipcatchatannonce {
+	margin-top:0px;
+	top:0px;
+	padding: 5px;
+	height:20px;
+} /* Zone des messages */
+.chat #text-td {
+	margin: 0px; 
+	padding: 5px; 
+	width: 80%; 
+	background: #fff; 
+}/* Zone des utilisateurs connectés */
+.chat #users-td, .chat #users-chat-td {
+	margin: 0px; 
+	padding: 5px; 
+	width: 20%; 
+}
+.chat #users-td img, .chat #users-chat-td{
+	width:15px;
+	
+}
+.chat #text, .chat #users-chat {
+	height:500px; 
+	overflow-y: auto;
+} * Modification du statut */
+.SpipCatChatStatus{
+	width: 95%;
+	border: none;
+	background: #fff;
+	margin: auto;
+	text-align: right;
+}
+.spipcatchatinfo{
+	font-weight: bold;
+}
+.spipcatchatpause{
+	-moz-opacity: 0.08;
+	opacity: 0.08;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha"(Opacity=0.8);
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0.8);
+	filter:alpha(opacity=0.8);
+	}
+.spipcatselectpause{
+	-moz-opacity: 0.00;
+	opacity: 0.00;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha"(Opacity=0.0);
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0.0);
+	filter:alpha(opacity=0.0);
+	}
+#users {
+	margin-top:0px;	
+}
+#SpipCatChatStatus{
+	width:130px;
+	border:none;
+	background:#fefaf2;
+	padding:1px;
+}/* Cache du selecteur du chat des choix du statut (pour ne pas voir le bouton de défilement)*/
+#spipcatchatcontainer .cache{
+	float:right;
+	overflow:hidden;
+	width:110px;
+	padding-top:4px;
+	padding-bottom:4px;
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	border-radius: 20px;
+	background:#fefaf2;
+	right;
+} 
+#spipcatchatcontainer .cache :hover{
+	cursor:wait;
+} /* Option du selecteur du statut chat - neutre */
+#spipcatchatcontainer option[value="1"]{
+	color:gray;
+	margin-left:15px;
+	padding:2px;
+	font-weight:bold;
+	cursor:progress;
+	background:url(../images/neutral.png) no-repeat;
+} /* Option du selecteur du statut chat - inactive */
+#spipcatchatcontainer option[value="2"]{
+	color:red;
+	margin-left:15px;
+	padding:2px;
+	font-weight:bold;
+	cursor:progress;
+	background:url(../images/inactive.png) no-repeat;
+} /* Option du selecteur du statut chat - active */
+#spipcatchatcontainer option[value="3"]{
+	color:green;
+	margin-left:15px;
+	padding:2px;
+	font-weight:bold;
+	cursor:progress;
+	background:url(../images/active.png) no-repeat;
+} 

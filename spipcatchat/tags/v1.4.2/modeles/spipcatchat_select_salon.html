@@ -1,0 +1,44 @@
+#CACHE{0}
+ <!-- Ici nous bloquons la touche enter -->
+<script type="text/javascript">
+$(document).keypress(function(e){if(e.keyCode==13)return false;}); 
+</script>
+<div align="center" >
+<div id="spipcatchat"> <!-- container -->
+<form action="#SELF" method="post"> 
+<input type="hidden" name="chat" value="oui"/>
+<fieldset>
+	<!-- Bouton Submit Aide-->
+	<div id="submit" class="spipcatchataide" title="<:spipcatchat:title_aide:>" onclick="spipcatchathelp(['(#ENV{url_plugin}|trim)']);return false;"></div>
+	<p><:spipcatchat:formulaire_salon:></p>		
+	<div class="spipcatchatcache" align="center"> <!-- Cache Select -->
+	<div><:spipcatchat:formulaire_select_salon:></div> 
+	<!-- Menu Select Salon -->
+	<select id="spipcatchatselectedsalonchat" name="spipsalon" onchange="submit();"> <!-- Selection des salons -->
+	<option  selected><:spipcatchat:chargement:></option>
+	</select>
+	</div>		<!-- Fin cache Select -->
+			<br /> 
+			<label for="newSalon"><:spipcatchat:formulaire_nouveau_salon:></label>
+			<br/>
+			<!-- Champ Texte Salon--> 
+			<input id="newSalon"  type="text" name="newsalon" placeholder="<:spipcatchat:placeholder_salon:>" />
+			<!-- Bouton Submit Lock UnLock-->
+			<input id="public" type="image" src="[(#CHEMIN{images/unlock-user-26.png})]" onclick="unlocked('[(#CHEMIN{images/lock-26.png}|trim)]','[(#CHEMIN{images/unlock-user-26.png}|trim)]');return false;" title="Prive-Public" name="public" value="true"/>
+			<input type="hidden" id="public" name="public" value="false"/>
+			<br />
+			<!-- Bouton Submit Valider-->
+			<div id="submit" title="<:spipcatchat:title_record_salon:>" class="spipcatchatok" onclick="var addsalon= new Array('<:spipcatchat:success_ajout_salon:>','<:spipcatchat:error_ajout_salon:>','[(#ID_AUTEUR)]','[(#CHARSET)]'); var langsalon= new Array('<:spipcatchat:select_option:>','<:spipcatchat:title_public:>','<:spipcatchat:title_prive_invite:>','<:spipcatchat:title_prive:>'); spipcatchataddsalon(['(#ENV{url_plugin}|trim)'],langsalon,addsalon);return false;"></div>
+			<!-- Bouton Submit Cancel-->
+			<div id="submit" class="spipcatchatcancel" onclick="session();return false; "  title="<:spipcatchat:title_fin_session:>"></div>
+			<!-- Label Copy -->
+			[(#ENV{label}|=={non}|oui)
+			<img src="[(#CHEMIN{images/catchat.png})]" class="logochat" title="<:spipcatchat:title_copy:>"/><:spipcatchat:catchat_label:>
+			]
+</fieldset>
+</form>
+[(#ENV{label}|=={non}|oui)
+<div style="float:right;"><:spipcatchat:copy:></div>
+]
+</div> <!-- fin container -->
+</div>

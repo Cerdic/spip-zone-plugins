@@ -1,0 +1,24 @@
+<div align="center">
+	<div id="spipcatchatcontainerlogin"> <!-- div container -->
+		<fieldset id="spipcatchatlogin">
+		<!-- Bouton Submit Aide -->
+		<div id="submit" class="spipcatchataide"  title="<:spipcatchat:title_aide:>" onclick="spipcatchathelp(['(#ENV{url_plugin}|trim)']);return false;" style="float:right;margin-right:2%;" ></div><br/>
+		<p><:spipcatchat:formulaire_log:></p>
+		<!-- Formulaire de login Spip --->
+		[(#LOGIN_PUBLIC)] 
+		<!-- Label Copy -->
+		[(#ENV{label}|=={non}|oui)
+		<img src="[(#CHEMIN{images/catchat.png})]" class="logochat" title="<:spipcatchat:title_copy:>"/><:spipcatchat:catchat_label:>
+		]
+		<p>&nbsp;<p/>
+		</fieldset> 
+	<!-- Formulaire de login Spip ---> 
+	</div> <!-- fin div container -->
+</div>
+<!--Bidouillage du bouton formuaire spip--> 
+<script type="text/javascript">
+$(".boutons").children(".submit").val("");
+$(".boutons").children(".submit").addClass("spipcatchatok");
+$(".boutons").children(".submit").removeClass("submit");
+$(".boutons").css("margin-bottom","-65px");
+</script>

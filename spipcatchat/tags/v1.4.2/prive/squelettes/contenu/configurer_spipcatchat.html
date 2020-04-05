@@ -1,0 +1,21 @@
+[(#AUTORISER{configurer}|sinon_interdire_acces)]
+[(#ENV{page}|non)
+	[(#ENV{cfg, accueil}|=={accueil}|oui)
+		#BOITE_OUVRIR{#CHEMIN_IMAGE{spipcatchat-64.png}|balise_img{'formulaire',cadre-icone}, basic}
+		<h3 align="center" class="titrem" style="font-size:1.5em"><:spipcatchat:config_catchat:></h3>
+		<div class="formulaire_spip" style="padding:4%">
+			<p><:spipcatchat:info_configuration:><p>
+			<p><:spipcatchat:parametre_commun:></p>
+			<p><:spipcatchat:parametre_public:></p>
+			<p><:spipcatchat:parametre_prive:></p>
+			<p><:spipcatchat:info_configuration2:><p>
+			<p><:spipcatchat:info_gnu:></p>
+		</div>
+		[<p><:spipcatchat:catchat_label:> ver : (#PLUGIN{SPIPCATCHAT,version}) <:spipcatchat:copy:> #PLUGIN{SPIPCATCHAT,compatibilite}</p>]
+		#BOITE_FERMER
+	]
+	[(#ENV{cfg, accueil}|=={accueil}|non)
+		[(#SET{configurer, [(#ENV{type-page})[_(#ENV{cfg})]]})]
+		[<div class='ajax'>(#FORMULAIRE_{#GET{configurer}})</div>]
+	]
+]

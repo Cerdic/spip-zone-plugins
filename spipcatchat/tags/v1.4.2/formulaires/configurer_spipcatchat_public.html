@@ -1,0 +1,218 @@
+<div class="ariaformprop" aria-relevant="additions" aria-atomic="true" aria-live="polite" >
+<div class="ajax formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+<h3 class="titrem"><:spipcatchat:public:></h3>
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) Ici l’ont déclaré les hiddens qui déclencheront le service du formulaire paramètre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		#SET{fl,spipcatchat}
+		<ul>
+		#SET{name,width}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
+				<p class="explication"><:spipcatchat:explication_largeur:></p>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},100%}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+		</ul>
+		<ul>		
+		#SET{name,catchat_theme_colorThumbs}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
+					<p class="explication"><:spipcatchat:explication_theme:></p>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<select name="#GET{name}" class="select" id="#GET{name}">
+						#SET{val,false}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{fl}|concat{':label_',#GET{val}}|_T)]</option>
+						#SET{val,true}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{fl}|concat{':label_',#GET{val}}|_T)]</option>
+					</select>
+				</li>
+		</ul>
+		<ul>
+		#SET{name,catchat_theme_color}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]" >
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<select name="#GET{name}" class="select" id="#GET{name}">
+						<BOUCLE_options_effect(POUR){tableau #LISTE{orange, bleu, noir, brun, jaune, rose, vert, pourpre, gris, rouge, lavande, bleu_ciel, blanc, vert_aubergine}}>
+							<option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"][(#CONFIG{spipcatchat_public/catchat_theme_color}||non)[(#VALEUR|=={orange}|oui)selected="selected"]]>#VALEUR</option>
+						</BOUCLE_options_effect>
+					</select>
+				</li>
+		</ul>
+		<ul>				
+		#SET{name,catchat_theme_colorprimaire}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}"><:spipcatchat:label_primaire:></label>
+					<p class="explication"><:spipcatchat:explication_color_primaire:></p>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},ffa500}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+		</ul>
+		<ul>
+		#SET{name,catchat_theme_colorsecondaire}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}"><:spipcatchat:label_secondaire:></label>
+					<p class="explication"><:spipcatchat:explication_color_secondaire:></p>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},fcf2d8}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+		</ul>
+		<ul>		
+		#SET{name,catchat_theme_coloricone}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
+					<p class="explication"><:spipcatchat:explication_color_icon:></p>
+					[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<select name="#GET{name}" class="select" id="#GET{name}">
+					  <BOUCLE_REPERTOIRE_THEMES(php:DirectoryIterator){args #EVAL{_DIR_PLUGIN_SPIPCATCHAT}/images/theme/}{valeur!==\.}>
+						 <option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"][(#CONFIG{spipcatchat_public/catchat_theme_coloricone}||non)[(#VALEUR|=={orange}|oui)selected="selected"]] style="text-transform:capitalize">#VALEUR</option>
+					  </BOUCLE_REPERTOIRE_THEMES>
+					</select>
+					<center>
+					<legend>
+					<img src="#CHEMIN{images/theme/#CONFIG{spipcatchat_public/catchat_theme_coloricone,orange}/aide-26.png}">&nbsp;
+					<img src="#CHEMIN{images/theme/#CONFIG{spipcatchat_public/catchat_theme_coloricone,orange}/cancel-26.png}">&nbsp;
+					<img src="#CHEMIN{images/theme/#CONFIG{spipcatchat_public/catchat_theme_coloricone,orange}/moins-26.png}">&nbsp;
+					<img src="#CHEMIN{images/theme/#CONFIG{spipcatchat_public/catchat_theme_coloricone,orange}/ok-26.png}">&nbsp;
+					<img src="#CHEMIN{images/theme/#CONFIG{spipcatchat_public/catchat_theme_coloricone,orange}/plus-26.png}">&nbsp;
+					<img src="#CHEMIN{images/theme/#CONFIG{spipcatchat_public/catchat_theme_coloricone,orange}/trash-26.png}">&nbsp;
+					</legend>
+					</center>
+				</li>
+		</ul>
+		<ul>
+		#SET{name,refresh}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<p class="explication"><:spipcatchat:explication_refesh_pub:></p>
+					 <select name="#GET{name}" class="select" id="#GET{name}">
+						<BOUCLE_options_effect2(POUR){tableau #LISTE{1000,2000,3000,4000,5000,6000,7000,8000}}>
+							<option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option>
+						</BOUCLE_options_effect2>
+					</select>
+				</li>
+		</ul>
+		<ul>
+		#SET{name,fond_color}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<p class="explication"><:spipcatchat:explication_color_fond:></p>
+					<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},ffffff}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+		</ul>
+		<ul>		
+		#SET{name,smoke}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<p class="explication"><:spipcatchat:explication_smoke:></p>
+					   <div class="choix">
+							<input name="#GET{name}"  class="radio" id="#GET{name}_non" type="radio" [(#ENV{#GET{name}}|=={o}|oui)checked="checked"][(#ENV{#GET{name}}||non)checked="checked"]  value="o"><label for="#GET{name}_non"><:item_oui:></label>
+						</div>
+						<div class="choix">
+							<input name="#GET{name}"  class="radio" id="#GET{name}_oui" type="radio" [(#ENV{#GET{name}}|=={n}|oui)checked="checked"]value="n"><label for="#GET{name}_oui"><:item_non:></label>
+						</div>
+				</li>
+		</ul>
+		<ul>
+		#SET{name,corner}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<p class="explication"><:spipcatchat:explication_corner:></p>
+					   <div class="choix">
+							<input name="#GET{name}"  class="radio" id="#GET{name}_non" type="radio" [(#ENV{#GET{name}}|=={o}|oui)checked="checked"][(#ENV{#GET{name}}||non)checked="checked"]  value="o"><label for="#GET{name}_non"><:item_oui:></label>
+						</div>
+						<div class="choix">
+							<input name="#GET{name}"  class="radio" id="#GET{name}_oui" type="radio" [(#ENV{#GET{name}}|=={n}|oui)checked="checked"]value="n"><label for="#GET{name}_oui"><:item_non:></label>
+						</div>
+				</li>
+		</ul>
+		<ul>
+		#SET{name,emoticon_public}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<p class="explication"><:spipcatchat:explication_emoticon_public:></p>
+						<div class="choix">
+							<input name="#GET{name}"  class="radio" id="#GET{name}_non" type="radio" [(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] value="oui"><label for="#GET{name}_non"><:item_oui:></label>
+						</div>
+						<div class="choix">
+							<input name="#GET{name}"  class="radio" id="#GET{name}_oui" type="radio" [(#ENV{#GET{name}}|=={non}|oui)checked="checked"][(#ENV{#GET{name}}||non)checked="checked"] value="non"><label for="#GET{name}_oui"><:item_non:></label>
+						</div>
+				</li>
+		</ul>
+		<ul>
+		#SET{name,spicatchat_label}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<p class="explication"><:spipcatchat:explication_label:></p>
+					    <div class="choix">
+							<input name="#GET{name}"  class="radio" id="#GET{name}_non" type="radio" [(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] value="oui"><label for="#GET{name}_non"><:item_oui:></label>
+						</div>
+						<div class="choix">
+							<input name="#GET{name}"  class="radio" id="#GET{name}_oui" type="radio" [(#ENV{#GET{name}}|=={non}|oui)checked="checked"][(#ENV{#GET{name}}||non)checked="checked"] value="non"><label for="#GET{name}_oui"><:item_non:></label>
+						</div>
+				</li>
+		</ul>
+		<ul>
+		#SET{name,bruitage_public}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<p class="explication"><:spipcatchat:bruitage_public:></p>
+					    <div class="choix">
+							<input name="#GET{name}"  class="radio" id="#GET{name}_non" type="radio" [(#ENV{#GET{name}}|=={oui}|oui)checked="checked"][(#ENV{#GET{name}}||non)checked="checked"] value="oui"><label for="#GET{name}_non"><:item_oui:></label>
+						</div>
+						<div class="choix">
+							<input name="#GET{name}"  class="radio" id="#GET{name}_oui" type="radio" [(#ENV{#GET{name}}|=={non}|oui)checked="checked"] value="non"><label for="#GET{name}_oui"><:item_non:></label>
+						</div>
+				</li>
+		</ul>
+		[(#REM) ajouter les saisies supplémentaires : extra et autre, à cet endroit ]
+		<!--extra-->
+		<p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div>
+</form>
+</div>
+</div>
+<script type="text/javascript">
+function CheckThumb(t){
+	if(t=='true'){
+		$("select#catchat_theme_color").val('false');
+		$(".editer_catchat_theme_color").hide('slow');
+		$(".editer_catchat_theme_colorprimaire").show('slow');
+		$(".editer_catchat_theme_colorsecondaire").show('slow');
+		$(".editer_catchat_theme_coloricone").show('slow');
+	}else{
+		$(".editer_catchat_theme_color").show('slow');
+		$(".editer_catchat_theme_colorprimaire").hide('slow');
+		$(".editer_catchat_theme_colorsecondaire").hide('slow');
+		$(".editer_catchat_theme_coloricone").hide('slow');
+	}
+	return false;
+}
+function CheckNav(t){
+	if(t=='false')
+		$(".editer_directionNavHide").hide('slow');
+	else
+		$(".editer_directionNavHide").show('slow');
+	return false;
+}
+function spipcatchat_forminit(){
+	CheckThumb($("select#catchat_theme_colorThumbs option:selected").val());
+	CheckNav($("select#directionNav option:selected").val());
+	$('select#catchat_theme_colorThumbs').change(function() { CheckThumb($("select#catchat_theme_colorThumbs option:selected").val()); });
+	$('select#directionNav').change(function() { CheckNav($("select#directionNav option:selected").val()); });
+}
+jQuery(document).ready(spipcatchat_forminit);
+onAjaxLoad(spipcatchat_forminit);
+</script>

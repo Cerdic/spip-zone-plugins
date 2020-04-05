@@ -1,0 +1,17 @@
+		<!-- Menu du raccourci de configuration -->
+<div class="navigation">
+	<ul class="liste_items sous_navigation">
+		[<li class="item">(#SESSION{statut}|=={0minirezo}|oui)
+			<a class="bando2_configurer_avancees" href="?exec=configurer_spipcatchat&cfg=accueil"><:spipcatchat:config_catchat:></a>
+		</li>]
+
+		[<li class="item">(#SESSION{statut}|=={webmaster}|oui)
+			<a class="bando2_configurer_avancees" href="?exec=configurer_spipcatchat&cfg=accueil"><:spipcatchat:config_catchat:></a>
+		</li>]
+		<!-- Menu Historique du salon -->
+		[<li class="item">(#CONFIG{spipcatchat_prive/historique}|=={oui}|oui)
+			<a class="bando2_configurer_revisions" href='#ENV{url_plugin}phpscripts/get-prive-historique.php?nomsite=[(#NOM_SITE_SPIP||texte_script)]&url=[(#URL_SITE_SPIP ||texte_script)]&desc=[(#DESCRIPTIF_SITE_SPIP|attribut_html|texte_script)]&historique=[(#CONFIG{spipcatchat/history}||oui)#CONFIG{spipcatchat/history}]'><:spipcatchat:recup_chat:></a>
+		</li>]
+	</ul>
+</div>
+	

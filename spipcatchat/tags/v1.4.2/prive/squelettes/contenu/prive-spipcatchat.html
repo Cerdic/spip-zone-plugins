@@ -1,0 +1,59 @@
+[(#CONFIG{spipcatchat_commun/theme_emoticons}|oui) #SET{theme_emo,#CONFIG{spipcatchat_commun/theme_emoticons}}]
+[(#CONFIG{spipcatchat_commun/theme_emoticons}|non) #SET{theme_emo,classic}]
+[(#CONFIG{spipcatchat_prive/bruitage_prive}|oui)  #SET{sound_prive,#CONFIG{spipcatchat_prive/bruitage_prive}}]
+[(#CONFIG{spipcatchat_prive/bruitage_prive}|non)  #SET{sound_prive,oui}]
+<div class="ariaformprop" aria-relevant="additions" aria-atomic="true" aria-live="polite" >
+	<div id="spipcatchatacces2" style="display:none">#BOITE_OUVRIR{'','notice'}<:spipcatchat:texte_acces:>#BOITE_FERMER</div>
+ <div class="formulaire_spip" >     
+   <h3 class="titrem" id="spipcatchattitreprive" style="display:none">
+	  [(#CONFIG{spipcatchat_prive/name_omnizero}||non)<:spipcatchat:salon_discussion:><span style="float:right"><:spipcatchat:info_admin:></span>]
+	  [(#CONFIG{spipcatchat_prive/name_omnizero}||oui)#CONFIG{spipcatchat_prive/name_omnizero}<span style="float:right"><:spipcatchat:info_admin:></span>]
+   </h3>
+    <h3 class="titrem" id="spipcatchattitrepublic">
+	  [(#CONFIG{spipcatchat_prive/name_auteur}||non)<:spipcatchat:salon_discussion:><span style="float:right"><:spipcatchat:info_auteur:></span>]
+	  [(#CONFIG{spipcatchat_prive/name_auteur}||oui)#CONFIG{spipcatchat_prive/name_auteur}<span style="float:right"><:spipcatchat:info_auteur:></span>]
+   </h3>
+   <div id="text" style="height:500px;overflow-y: auto;">
+	 <p align="center"><:spipcatchat:index_attent:></p>
+   </div>
+	   <!-- La barre des émoticons -->
+	   [(#CONFIG{spipcatchat_prive/emoticon}|=={oui}|oui)[
+	   <div align="center" class="formulaire_spip" style="padding-top:3px;">
+	   (#FORMULAIRE_SPIPCATCHAT_EMOTICONS{#GET{theme_emo},prive})
+	   </div>
+	   ]]
+    <p class="boutons" style="padding:3%" >
+	   <!-- Le champ d'édition des messages -->
+      <input type="text" id="message" class="text" style="margin-bottom:1%" value="" autocomplete="off">
+      [(#CONFIG{spipcatchat_commun/cache}|=={non}|oui)<img  id="spipcatchatpointprive" src="#CHEMIN{images/point.png}" style="display:none;float:left;margin-top:5px;" >]
+      [(#CONFIG{spipcatchat_commun/cache}||non)<img  id="spipcatchatpointprive" src="#CHEMIN{images/point.png}" style="display:none;float:left;margin-top:5px;" >]
+      <!-- Le bouton d'envoi -->
+      <input class="submit" title="<:spipcatchat:title_valid_message:>" type="submit" onclick="spipcatchatmessage();" value="Envoyer">
+    </p>
+ </div>
+</div>
+<!-- Media audio-->
+<audio style="display:none" id="soundGet">
+	[(#GET{sound_prive}|=={oui}|oui)
+	<source src="#CHEMIN{images/get-sound.ogg}" type="audio/ogg" />
+	<source src="#CHEMIN{images/get-sound.mp3}" type="audio/mp3" />
+	]
+</audio>
+<audio style="display:none" id="soundPost">
+	[(#GET{sound_prive}|=={oui}|oui)
+	<source src="#CHEMIN{images/post-sound.ogg}" type="audio/ogg" />
+	<source src="#CHEMIN{images/post-sound.mp3}" type="audio/mp3" />
+	]
+</audio>
+<audio style="display:none" id="switch">
+	[(#GET{sound_prive}|=={oui}|oui)
+	<source src="#CHEMIN{images/buc.ogg}" type="audio/ogg" />
+	<source src="#CHEMIN{images/buc.mp3}" type="audio/mp3" />
+	]
+</audio>
+<audio style="display:none" id="emoticon">
+	[(#GET{sound_prive}|=={oui}|oui)
+	<source src="#CHEMIN{images/emoticon.ogg}" type="audio/ogg" />
+	<source src="#CHEMIN{images/emoticon.mp3}" type="audio/mp3" />
+	]
+</audio>

@@ -1,0 +1,46 @@
+<paquet
+	prefix="SpipCatChat"
+	categorie="communication"
+	version="1.4.2"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="images/spipcatchat-64.png"
+	documentation="https://contrib.spip.net/SpipCatChat-2"
+	demonstration="http://belgologie.be/spip.php?page=spipcatchat"
+	developpement="https://zone.spip.org/trac/spip-zone/browser/_plugins_/spipcatchat"
+>
+	<nom>SpipCatChat</nom>
+	<!-- Système de communication instantanée -->
+	<auteur lien="http://www.nic-nac.org">Claude Codden</auteur>
+	<credit lien="http://www.blane-est.net/ehma/">Traduction anglaise : Ehma</credit>
+	<credit lien="http://www.nic-nac.org">Theme : Codden.C sous licence CC BY-NC-SA-4.0</credit>
+	<credit >Emoticons: The Full Monty Copyright (C) 2001-Infinity, Oscar Gruno et Andy Fedosjeenko</credit>
+	<copyright>2014-2015</copyright>
+	<licence>GNU/GPL</licence>
+	<traduire module="spipcatchat" reference="fr" gestionnaire="salvatore" />
+	<traduire module="paquet-spipcatchat" reference="fr" gestionnaire="salvatore" />
+	<pipeline 
+		nom="jqueryui_plugins"
+		inclure="spipcatchat_pipelines.php" 
+	/>
+	<pipeline 
+		nom="insert_head" 
+		inclure="spipcatchat_pipelines.php" 
+	/>
+	<pipeline 
+		nom="insert_head_css" 
+		inclure="spipcatchat_pipelines.php" 
+	/>
+	<pipeline
+	 	nom="header_prive"
+		inclure="spipcatchat_pipelines.php"
+	/>
+	<menu
+		nom="spipcatchat"
+		titre="spipcatchat:catchat_label"
+		parent="menu_publication"
+		icone="images/spipcatchat-16.png"
+		action="?exec=spipcatchat" 
+		parametres="cfg=accueil"
+	/>
+</paquet>

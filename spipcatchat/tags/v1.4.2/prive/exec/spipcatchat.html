@@ -1,0 +1,21 @@
+#SET{url_plugin,#EVAL{str_replace('../ecrire/','',_DIR_PLUGIN_SPIPCATCHAT)}}
+<BOUCLE_AUTEUR_SESSION (AUTEURS){tout}{id_auteur=#SESSION{id_auteur}}>
+	<script type="text/javascript">
+		<INCLURE{fond=prive/javascript/prive-spipcatchat.js}{url_plugin=#GET{url_plugin}|trim}{id_auteur=#ID_AUTEUR|trim}{nom=#NOM|trim|sinon{#LOGIN|trim}}>
+	</script>   
+	    	<INCLURE{fond=prive/squelettes/contenu/prive-spipcatchat}{id_auteur=#ID_AUTEUR}{url_plugin=#GET{url_plugin}}>
+	    <!--#navigation--> 
+	    [(#CONFIG{spipcatchat_prive/admin}|=={oui}|oui) [(#SESSION{statut}|=={0minirezo}|oui)
+	   		<INCLURE{fond=prive/squelettes/navigation/prive-spipcatchat-selecteur-ominizero}{id_auteur=#ID_AUTEUR}{url_plugin=#GET{url_plugin}}>
+	    ]]
+	     [(#CONFIG{spipcatchat_prive/admin}|=={oui}|oui) [(#SESSION{statut}|=={webmestre}|oui)
+		 	<INCLURE{fond=prive/squelettes/navigation/prive-spipcatchat-selecteur-ominizero}{id_auteur=#ID_AUTEUR}{url_plugin=#GET{url_plugin}}>
+	    ]]
+	    	<INCLURE{fond=prive/squelettes/navigation/prive-spipcatchat-statut}{id_auteur=#ID_AUTEUR}{url_plugin=#GET{url_plugin}}>  
+	    <!--/#navigation-->
+	    <!--#extra-->
+	    	<INCLURE{fond=prive/squelettes/extra/prive-spipcatchat-config}{url_plugin=#GET{url_plugin}}>
+			<INCLURE{fond=prive/squelettes/extra/prive-spipcatchat-statut-erreur}{id_auteur=#ID_AUTEUR}>
+			</INCLURE{fond=prive/squelettes/extra/prive-spipcatchat-statut-erreur}{id_auteur=#ID_AUTEUR}>
+	    <!--/#extra-->
+ </BOUCLE_AUTEUR_SESSION>
