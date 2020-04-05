@@ -1,0 +1,30 @@
+[(#ID_AUTEUR|intval|oui)
+	[(#AUTORISER{modifier,auteur,#ID_AUTEUR}|sinon_interdire_acces)]
+	#SET{id_profil, #INFO_ID_PROFIL{auteur, #ID_AUTEUR}}
+]
+[(#ID_AUTEUR|intval|non)
+	[(#AUTORISER{creer,auteur}|sinon_interdire_acces)]
+	#SET{id_profil, #ID_PROFIL}
+]
+
+#SET{retour,#ENV{redirect}|sinon{#GET{id_profil}|intval|?{#URL_ECRIRE{profil,id_profil=#GET{id_profil}},#URL_ECRIRE{auteurs}}}}
+
+<div class='cadre-formulaire-editer'>
+	<div class="entete-formulaire">
+		[(#ID_AUTEUR|oui)
+		[(#GET{retour}|icone_verticale{<:icone_retour:>,auteur,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+		]
+		[[(#ID_AUTEUR|?{<:profil:comptes_modifier:>,<:profil:comptes_creer:>})]
+		<h1>(#ENV{titre,#INFO_NOM{auteur,#ID_AUTEUR}|sinon{<:info_sans_titre:>}})</h1>]
+	</div>
+
+	[(#ENV{retourajax,''}|oui)
+		<div class="ajax">
+	]
+	#FORMULAIRE_PROFIL{#ENV{id_auteur,oui}, #GET{id_profil}, #GET{retour}}
+	[(#ENV{retourajax,''}|oui)
+		</div>
+		<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#extra');/*\]\]>*/</script>
+	]
+
+</div>

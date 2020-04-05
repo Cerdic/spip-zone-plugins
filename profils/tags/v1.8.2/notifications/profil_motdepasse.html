@@ -1,0 +1,14 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 SPIP
+  Distribue sous licence GPL
+
+][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+[\[(#NOM_SITE_SPIP|concat{'\] ',<:profil:notification_motdepasse_titre:>}|nettoyer_titre_email)]
+
+<:form_forum_message_auto:>
+
+<:form_forum_bonjour{nom=#ENV{nom}}:>
+
+<:profil:notification_motdepasse_texte{nom_site_spip=#NOM_SITE_SPIP,adresse_site=#URL_SITE_SPIP,sendcookie=#ENV{sendcookie}, email=#ENV{email}}:>

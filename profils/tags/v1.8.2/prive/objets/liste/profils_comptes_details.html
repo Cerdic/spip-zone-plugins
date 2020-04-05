@@ -1,0 +1,45 @@
+#SET{self,#SELF|parametre_url{debut_liste_comptes,''}}
+#SET{config, #INFO_CONFIG{profil,#ID_PROFIL}|unserialize}
+
+#FORMULAIRE_RECHERCHE_ECRIRE{#GET{self},ajax}
+<div class='nettoyeur'></div>
+
+[(#SET{defaut_tri,#ARRAY{
+	nom,1,
+	email,1,
+	id_profil,1,
+	points,-1
+}})]
+<B_liste_comptes>
+#ANCRE_PAGINATION
+<div class="liste-objets profils">
+<table class="spip liste">
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{profil:info_1_profil,profil:info_nb_profils}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class="nom" scope="col">[(#TRI{multi nom,<:info_nom:>,ajax})]</th>
+			<th class="email" scope="col">[(#TRI{email,<:email:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_comptes(AUTEURS){id_profil?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{par nom}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="statut">[(#STATUT|puce_statut{auteur,#ID_AUTEUR})]</td> 
+			<td class="nom principale">
+				[(#LOGO_AUTEUR|image_reduire{20,26})]
+				[(#AUTORISER{modifier,auteur,#ID_AUTEUR}|?{
+					<a href="[(#URL_ECRIRE{auteur_profil_edit, id_auteur=#ID_AUTEUR})]" title="<:info_numero_abbreviation|attribut_html:> #ID_AUTEUR">[(#RANG). ]#NOM</a>,
+					[(#RANG). ]#NOM
+				})]
+			</td>
+			<td class='email'>[<a href='mailto:(#EMAIL)'>[(#EMAIL|couper{30})]</a>]</td>
+		</tr>
+	</BOUCLE_liste_comptes>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_comptes>[
+<div class="liste-objets profils caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_comptes>

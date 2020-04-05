@@ -1,0 +1,46 @@
+<table>
+	[<caption>
+		(#ENV{caption})
+		[<br><small style="font-weight:normal">(#ENV{caption_explication})</small>]
+	</caption>]
+	<thead>
+		<tr>
+			<th scope="col"><:profil:champ_config_coordonnees_type_label:></th>
+			<th scope="col"><:profil:champ_config_colonne_inscription_label:></th>
+			<th scope="col"><:profil:champ_config_colonne_edition_label:></th>
+			<th scope="col"><:profil:champ_config_colonne_obligatoire_label:></th>
+			<th scope="col"><:profil:champ_config_coordonnees_label_label:></th>
+		</tr>
+	</thead>
+	<tbody>
+		<BOUCLE_coordonnees (DATA) {source table, #LISTE{numeros, emails, adresses}}>
+		<tr>
+			<th colspan="5">[(#VALEUR|table_objet_sql|objet_info{texte_objets}|_T)]</th>
+		</tr>
+		<BOUCLE_deja_la (DATA) {source table, #VAL{0}|range{#ENV{valeur/#VALEUR,#LISTE}|count}}>
+		<tr>
+			<td>
+				<select name="#ENV{nom}[#_coordonnees:VALEUR][#VALEUR][type]">
+					<option value=""[ (#ENV{valeur/#_coordonnees:VALEUR/#VALEUR/type}|=={""}|oui)selected="selected"]><:profil:champ_config_coordonnees_choix_sans_type:></option>
+					<BOUCLE_numeros_types (DATA) {source table, #_coordonnees:VALEUR|objet_type|coordonnees_lister_types_coordonnees}{par valeur}>
+					<option value="#CLE"[ (#ENV{valeur/#_coordonnees:VALEUR/#_deja_la:VALEUR/type}|=={#CLE}|oui)selected="selected"]>#VALEUR</option>
+					</BOUCLE_numeros_types>
+				</select>
+			</td>
+			<td>
+				<input type="checkbox" name="#ENV{nom}[#_coordonnees:VALEUR][#VALEUR][inscription]" value="on"[ (#ENV{valeur/#_coordonnees:VALEUR/#VALEUR/inscription}|oui)checked="checked"] />
+			</td>
+			<td>
+				<input type="checkbox" name="#ENV{nom}[#_coordonnees:VALEUR][#VALEUR][edition]" value="on"[ (#ENV{valeur/#_coordonnees:VALEUR/#VALEUR/edition}|oui)checked="checked"] />
+			</td>
+			<td>
+				<input type="checkbox" name="#ENV{nom}[#_coordonnees:VALEUR][#VALEUR][obligatoire]" value="on"[ (#ENV{valeur/#_coordonnees:VALEUR/#VALEUR/obligatoire}|oui)checked="checked"] />
+			</td>
+			<td>
+				<input type="text" class="text" name="#ENV{nom}[#_coordonnees:VALEUR][#VALEUR][label]" value="#ENV{valeur/#_coordonnees:VALEUR/#VALEUR/label}" />
+			</td>
+		</tr>
+		</BOUCLE_deja_la>
+		</BOUCLE_coordonnees>
+	</tbody>
+</table>

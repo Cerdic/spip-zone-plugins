@@ -1,0 +1,128 @@
+<BOUCLE_profil(PROFILS){id_profil}{statut?}>
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:profil:champ_titre_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{titre} titre">(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_identifiant[ (#IDENTIFIANT*|strlen|?{'',vide})]">
+	<label><:profil:champ_identifiant_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{identifiant} identifiant">(#IDENTIFIANT)</span>
+</div>]
+
+[(#REM)
+	Aperçu de la configuration
+	Affichage des champs et coordonnées regroupés par type d'objet principal, selon ceux présents dans la config
+]
+#SET{config,#CHAMP_SQL**{config}|unserialize}
+#SET{objets, #LISTE{auteur}
+	|push{#PLUGIN{contacts}|et{#GET{config/organisation}}|?{organisation}}
+	|push{#PLUGIN{contacts}|et{#GET{config/contact}}|?{contact}}
+	|array_filter
+}
+<table class="apercu_config">
+	<thead>
+		<tr>
+			<th class="config_objet"><:profil:champ_config_objet_label:></th>
+			<th class="config_champ"><:profil:champ_config_champ_label:></th>
+			<th class="config_form config_form_inscription"><:profil:champ_config_colonne_inscription_label:></th>
+			<th class="config_form config_form_edition"><:profil:champ_config_colonne_edition_label:></th>
+			<th class="config_form config_form_obligatoire"><:profil:champ_config_colonne_obligatoire_label:></th>
+		</tr>
+	</thead>
+	<tbody>
+		<BOUCLE_config(DATA) {source table, #GET{objets}}>
+		#SET{objet,                    #VALEUR}
+		#SET{config_champs_objet,      #GET{config/#GET{objet}}}
+		#SET{config_coordonnees_objet, #GET{config/coordonnees/#GET{objet}}}
+		#SET{config_label_groupe,      #GET{config/activer_groupe_#GET{objet}}}
+		#SET{texte_objet,              #GET{objet}|objet_info{texte_objet}|_T}
+		#SET{texte_auteur,             #VAL{profil:champ_groupe_auteur_label}|_T}
+
+		[(#REM) Compter le nb de coordonnees pour le rowspan de ses morts ]
+		#SET{nb_coordonnees,0}
+		<BOUCLE_nb_coordonnees(DATA) {source table, #GET{config_coordonnees_objet}} {si #PLUGIN{coordonnees}}>
+		#SET{nb_coordonnees,#GET{nb_coordonnees}|plus{#VALEUR|count}}
+		</BOUCLE_nb_coordonnees>
+
+		[(#REM) Les champs de l'objet ]
+		<BOUCLE_champs(DATA) {source table, #GET{config_champs_objet}}>
+		#SET{champ,#CLE}
+		[(#REM) Récupérer le label du champ ]
+		#SET{label,''}
+		<BOUCLE_label(DATA) {source table, #GET{objet}|profils_chercher_saisies_objet}>
+		[(#VALEUR{options/nom}|=={#GET{champ}}|oui)
+		#SET{label,#VALEUR{options/label}}
+		]
+		</BOUCLE_label>
+		<tr>
+			[<td class="config_objet" rowspan="[(#TOTAL_BOUCLE|plus{#GET{nb_coordonnees}})]" title="[(#GET{texte_objet}|attribut_html)]">
+				(#GET{objet}|objet_icone{32}|unique)
+				<label class="label">
+					[(#GET{config_label_groupe}|sinon{
+						#GET{objet}|=={auteur}|?{#GET{texte_auteur},#GET{texte_objet}}
+					})]
+				</label>
+			</td>]
+			<td class="config_champ">
+				#GET{label}
+			</td>
+			<td class="config_form config_form_inscription">
+				[(#VAL{inscription}|in_array{#VALEUR}|oui)
+				[(#CHEMIN_IMAGE{ok-16}|balise_img)]
+				]
+			</td>
+			<td class="config_form config_form_edition">
+				[(#VAL{edition}|in_array{#VALEUR}|oui)
+				[(#CHEMIN_IMAGE{ok-16}|balise_img)]
+				]
+			</td>
+			<td class="config_form config_form_obligatoire">
+				[(#VAL{obligatoire}|in_array{#VALEUR}|oui)
+				[(#CHEMIN_IMAGE{ok-16}|balise_img)]
+				]
+			</td>
+		</tr>
+		</BOUCLE_champs>
+
+		[(#REM) Coordonnées ]
+		<BOUCLE_coordonnees_objets(DATA) {source table, #GET{config_coordonnees_objet}} {si #PLUGIN{coordonnees}}>
+		#SET{texte_objet_coordonnee,#CLE|objet_type|objet_info{texte_objet}|_T}
+		<BOUCLE_coordonnees(DATA) {source table, #VALEUR}>
+		#SET{type,#VALEUR{type}|?{#_coordonnees:CLE|objet_type|appliquer_filtre{coordonnees_lister_types_coordonnees,#VALEUR{type}}}}
+		<tr>
+			[(#GET{config_champs_objet}|non)
+			[<td class="config_objet" rowspan="[(#GET{nb_coordonnees})]" title="[(#GET{texte_objet}|attribut_html)]">
+					(#GET{objet}|objet_icone{32}|unique)
+				<label class="label">
+					[(#GET{config_label_groupe}|sinon{
+						#GET{objet}|=={auteur}|?{#GET{texte_auteur},#GET{texte_objet}}
+					})]
+				</label>
+			</td>]
+			]
+			<td class="config_champ" title="[(#GET{texte_objet_coordonnee}|attribut_html)]">
+				⤷ [(#VALEUR{label}|sinon{#GET{texte_objet_coordonnee}})][ <small>\((#GET{type})\)</small>]
+			</td>
+			<td class="config_form config_form_inscription">
+				[(#VALEUR{inscription}|oui)
+				[(#CHEMIN_IMAGE{ok-16}|balise_img)]
+				]
+			</td>
+			<td class="config_form config_form_edition">
+				[(#VALEUR{edition}|oui)
+				[(#CHEMIN_IMAGE{ok-16}|balise_img)]
+				]
+			</td>
+			<td class="config_form config_form_obligatoire">
+				[(#VALEUR{obligatoire}|oui)
+				[(#CHEMIN_IMAGE{ok-16}|balise_img)]
+				]
+			</td>
+		</tr>
+		</BOUCLE_coordonnees>
+		</BOUCLE_coordonnees_objets>
+		</BOUCLE_config>
+	</tbody>
+</table>
+
+</BOUCLE_profil>
