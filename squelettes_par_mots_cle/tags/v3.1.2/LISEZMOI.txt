@@ -1,0 +1,34 @@
+Ce plugin permet de specifier le squelette d'un élément (article,
+breves, etc...) ou de tous les éléments d'une rubrique en utilisant
+les mots clefs. 
+
+Le plugin marche sous forme de "règles" de sélection. Une règle
+spécifie:
+- un fond de base (le fichier de squelette de base, par exemple
+rubrique.html ou article.html)
+- un groupe de mot clef (le groupe qui contient les mots clefs qui
+spécifient quel squelette utiliser)
+- un type d'éléments (le type d'élément affiché par le squelette en
+question) 
+
+Le plugin permet de sélectionner des squelettes nommés:
+- fond=motclef.html pour le squelette d'un élément spécifique
+- fond-motclef.html pour le squelette de tous les éléments d'une
+rubrique
+
+Un exemple d'utilisation:
+1- créer un groupe de mot clef associable aux articles et rubriques, par exemple
+"squelettes articles",
+2- aller sur la page de configuration du plugin (Configuration, puis
+onglets "Configurer Squelettes Mots",
+3- créer une règle qui associe:
+ o le fond article
+ o le groupe "squelettes articles"
+ o le type d'élément "articles"
+4- créer, par exemple, un mot clef "galerie"
+5- vous pouvez alors:
+  o soit créer un fichier article=galerie.html et associer le mot clef
+    galerie à des articles individuels
+  o soit créer un fichier article-galerie.html et associer le mot clef
+    à une rubrique qui contiendra tous vos articles de galerie.
+ 

@@ -1,0 +1,21 @@
+<paquet
+	prefix="squelettesmots"
+	categorie="outil"
+	version="3.1.2"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/squelettesmots-32.png"
+	documentation="https://contrib.spip.net/SPMC-Squelette-par-mot-cle-V2-0"
+>	
+
+	<nom>Squelette par mot clef</nom>
+	<!-- Permet de choisir le squelette en fonction d'un mot clef -->
+
+	<auteur>Pierre Andrews (Mortimer)</auteur>
+	<auteur>Florent Cavard</auteur>
+	<credit>d'après un code proposé par Déesse A.</credit>
+
+	<pipeline nom="styliser" inclure="squelettesmots.php" />
+
+	<menu nom="configurer_squelettesmots" titre="squelettesmots:titre_onglet" parent="menu_squelette" icone="images/squelettesmots-16.png" />
+</paquet>
