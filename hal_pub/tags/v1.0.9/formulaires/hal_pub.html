@@ -1,0 +1,80 @@
+[(#REM)
+	Formulaire de recherche HAL PUB
+
+	parametre:
+	- (env)     la requete pour generer les facette
+]
+[(#SET{url_depot,#CONFIG{hal_pub/url_depot}|sinon{https://api.archives-ouvertes.fr/search/}})]
+
+<!-- annee -->
+[(#ENV{q}|oui)  	 	#SET{hal_annee,#GET{url_depot}|concat{?q=#ENV*{q}|urlencode} ]
+[(#ENV{q}|non)  	 	#SET{hal_annee,#GET{url_depot}|concat{?q=*} ]
+[(#CONFIG{hal_pub/types_document}|oui) #SET{hal_annee,#GET{hal_annee}|concat{&fq=docType_s%3A%28}|concat {#CONFIG{hal_pub/types_document}|replace{',',' OR '}|urlencode}|concat{%29}}]
+[(#ENV{equipe}|oui) 	#SET{hal_annee,#GET{hal_annee}|concat{&fq=rteamStructId_i:#ENV{equipe}|urlencode} ]
+[(#SET{hal_annee,#GET{hal_annee}|concat{&rows=0&facet=true&facet.field=producedDateY_i}})]
+
+#SET{annee,#ARRAY}
+
+<BOUCLE_json_annee(DATA){source json,#GET{hal_annee}}{cle=facet_counts}>
+		#SET{annee_json,#VALEUR{facet_fields/producedDateY_i}}
+
+		<BOUCLE_annee(DATA){source tableau,#GET{annee_json}}>
+		#SET{nom_cle,#VAL{k}|concat{#COMPTEUR_BOUCLE,"_",#VALEUR}}
+		[(#SET{annee,#GET{annee}|array_merge{#ARRAY{#GET{nom_cle},#VALEUR}}})]
+		</BOUCLE_annee>
+		[(#SET{annee, #GET{annee}|hal_pub_traite_tableau})]
+		[(#SET{annee, #GET{annee}|hal_pub_spip_sort{krsort}})]
+		[(#SET{annee, #GET{annee}|hal_supprime_prefixe})]
+		[(#SET{annee, #GET{annee}|hal_nettoie_annee_invalide})]
+</BOUCLE_json_annee>
+
+
+<!-- type de publication -->
+[(#ENV{q}|oui)  	 	#SET{hal_pub,#GET{url_depot}|concat{?q=#ENV*{q}|urlencode} ]
+[(#ENV{q}|non)  	 	#SET{hal_pub,#GET{url_depot}|concat{?q=*} ]
+[(#CONFIG{hal_pub/types_document}|oui) #SET{hal_pub,#GET{hal_pub}|concat{&fq=docType_s%3A%28}|concat {#CONFIG{hal_pub/types_document}|replace{',',' OR '}|urlencode}|concat{%29}}]
+[(#ENV{equipe}|oui) 	#SET{hal_pub,#GET{hal_pub}|concat{&fq=rteamStructId_i:#ENV{equipe}|urlencode} ]
+[(#ENV{annee}|oui)  	#SET{hal_pub,#GET{hal_pub}|concat{&fq=producedDateY_i:#ENV{annee}|urlencode} ]
+[(#SET{hal_pub,#GET{hal_pub}|concat{&rows=0&facet=true&facet.field=docType_s}})]
+
+#SET{pub,#ARRAY}
+
+<BOUCLE_json_pub(DATA){source json,#GET{hal_pub}}{cle=facet_counts}>
+		#SET{pub_json,#VALEUR{facet_fields/docType_s}}
+
+		<BOUCLE_pub(DATA){source tableau,#GET{pub_json}}>
+		#SET{nom_cle,#VAL{k}|concat{#COMPTEUR_BOUCLE,"_",#VALEUR}}
+		[(#SET{pub,#GET{pub}|array_merge{#ARRAY{#GET{nom_cle},#VALEUR}}})]
+		</BOUCLE_pub>
+		[(#SET{pub, #GET{pub}|hal_pub_traite_tableau})]
+		[(#SET{pub, #GET{pub}|hal_pub_spip_sort{ksort}})]
+		[(#SET{pub, #GET{pub}|hal_supprime_prefixe})]
+</BOUCLE_json_pub>
+
+
+<!-- formulaire de recherche HAL -->
+<div class="hal-form-recherche-wrapper">
+			<form action="#SELF" method="get" class="hal-form-recherche"><div>
+				[(#SELF|parametre_url{q|start|annee|pub,''}|form_hidden)]
+				<input type="hidden" value="[(#ENV{start}|intval)]" name="start"  />
+
+				[(#ENV{cacher_q}|non)
+					<input type="text" value="[(#ENV{q}|sinon{*})]"  name="q" class="hal-recherche" />
+					<input type="submit" value="<:hal_pub:but_rechercher:>" />
+				]
+
+				<div class="hal-filtre">
+						<ul>
+							[(#ENV{cacher_annee}|non)
+								   [(#GET{annee}|count|>{1}|oui)<li class="hal-filtre-annee">[(#SAISIE{selection,annee,option_intro=<:hal_pub:filtre_annee_intro:>,label=<:hal_pub:filtre_annee:>,datas=#GET{annee}})]</li>]
+							]
+							[(#ENV{cacher_pub}|non)
+								[(#GET{pub}|count|>{1}|oui)<li class="hal-filtre-pub">[(#SAISIE{selection,pub,option_intro=<:hal_pub:filtre_pub_intro:>,label=<:hal_pub:filtre_pub:>,datas=#GET{pub}})]</li>]
+							]
+							[(#ENV{cacher_equipe}|non)
+								[(#GET{equipe}|count|>{1}|oui)<li class="hal-filtre-equipe">[(#SAISIE{selection,equipe,option_intro=<:hal_pub:filtre_equipe_intro:>,label=<:hal_pub:filtre_equipe:>,datas=#GET{equipe}})]</li>]
+							]
+						</ul>
+				</div>
+			</div></form>
+</div>

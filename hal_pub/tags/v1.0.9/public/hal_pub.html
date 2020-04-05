@@ -1,0 +1,124 @@
+[(#REM)
+	Listing des publications HALs
+
+	parametres :
+	- q (facultatif)    			requete de recherche  sur l'API HAL
+									https://api.archives-ouvertes.fr/docs/search
+	- pub  (facultatif)             ajout un filtre sur le champs docType_s
+	- annee (facultatif)            ajout un filtre sur le champs producedDateY_i
+	- cacher_formulaire (facultatif)) si renseigne on cache formulaire
+]
+
+[(#SET{url_depot,#CONFIG{hal_pub/url_depot}|sinon{https://api.archives-ouvertes.fr/search/}})]
+[(#SET{pagination,#CONFIG{hal_pub/pagination}|sinon{10}|intval})]
+
+<div class="hal-wrapper no-ajax">
+[(#REM)<!-- etape 1: construction de la requete vers l'API HAL -->]
+[(#ENV{q}|oui)  	 	#SET{url_depot,#GET{url_depot}|concat{?q=#ENV*{q}|urlencode} ]
+[(#ENV{q}|non)  	 	#SET{url_depot,#GET{url_depot}|concat{?q=*} ]
+[(#ENV{pub}|?{
+	#SET{url_depot,#GET{url_depot}|concat{&fq=docType_s:#ENV{pub}|urlencode}},
+	[(#CONFIG{hal_pub/types_document}|oui) #SET{url_depot,#GET{url_depot}|concat{&fq=docType_s%3A%28}|concat {#CONFIG{hal_pub/types_document}|replace{',',' OR '}|urlencode}|concat{%29}}]
+})]
+[(#ENV{annee}|oui)  	#SET{url_depot,#GET{url_depot}|concat{&fq=producedDateY_i:#ENV{annee}|urlencode} ]
+
+[(#SET{start,#ENV{start}|sinon{0}|intval})]
+[(#SET{url_depot,#GET{url_depot}|concat{&start=#GET{start}&rows=#GET{pagination}}})]
+
+
+[(#REM)<!-- etape 2: construction du formulaire avec ces facettes -->]
+[(#ENV{cacher_formulaire}|non)
+	[(#REM|test_espace_prive|non)
+		<INCLURE{fond=formulaires/hal_pub,env}>
+	]
+]
+
+[(#REM)<!-- etape 3: quel tri ? -->]
+#SET{url_depot,#GET{url_depot}|concat{&sort=producedDate_tdate%20desc}
+
+[(#REM))<!-- etape 4: ajout des champs que l'on souhaite lister -->]
+#SET{fields, #CONFIG{hal_pub/champs}|sinon{'title_s,authFullName_s,docid,label_xml,arxivId_s,halId_s,doiId_s,uri_s,docType_s,submittedDateY_i'}}
+[(#SET{url_depot,#GET{url_depot}|concat{&fl=#GET{fields}}})]
+
+<!-- Requete generee:  #GET{url_depot} -->
+
+<BOUCLE_json(DATA){source json,#GET{url_depot}}>
+
+	[(#REM) pagination]
+	#SET{nb_pages,#VALEUR{numFound}|div{#GET{pagination}}|floor}
+	#SET{page_courante,#ENV{start}|sinon{0}|div{#GET{pagination}}|floor}
+	#SET{page_debut,#GET{page_courante}|moins{3}}
+	[(#GET{page_debut}|<{0}|oui) #SET{page_debut,0}]
+
+	<div class="hal-nb-resultats-wrapper">
+		<div class="hal-nb-resultats">
+			[(#VALEUR{numFound}|non) <span class="hal-nomatch"><:hal_pub:recherche_0:></span>]
+			[<span class="hal-match">(#VALEUR{numFound}|singulier_ou_pluriel{hal_pub:recherche_1, hal_pub:recherche_plus})</span>]
+		</div>
+
+		<B_pagination>
+		<ul class="hal-pagination">
+		[(#GET{page_courante}|>{1}|oui)
+			<li class="hal-fast-backward">
+			<a href="[(#SELF|parametre_url{start,0})]">&lt;&lt;</a>
+			</li>
+		]
+		[(#GET{page_courante}|>{0}|oui)
+			#SET{start,#GET{page_courante}|moins{1}|mult{#GET{pagination}}}
+			<li class="hal-backward">
+			<a href="[(#SELF|parametre_url{start,#GET{start}})]">&lt;</a>
+			</li>
+		]
+		<BOUCLE_pagination(DATA){enum #GET{page_debut},#GET{page_debut}|plus{10}}{si #VALEUR{numFound}|oui}{si #GET{nb_pages}|>{0}|oui}>
+		[(#VALEUR|<={#GET{nb_pages}}|oui)
+			#SET{start,#VALEUR|mult{#GET{pagination}}}
+			<li[(#VALEUR|=={#GET{page_courante}}|oui) class="active"]><a href="[(#SELF|parametre_url{start,#GET{start}})]">[(#VALEUR|plus{1})]</a></li>
+		]
+		</BOUCLE_pagination>
+		[(#GET{page_courante}|<{#GET{nb_pages}}|oui)
+			#SET{start,#GET{page_courante}|plus{1}|mult{#GET{pagination}}}
+			<li class="hal-forward">
+			<a href="[(#SELF|parametre_url{start,#GET{start}})]">&gt;</a>
+			</li>
+		]
+		[(#GET{page_courante}|plus{1}|<{#GET{nb_pages}}|oui)
+			#SET{start,#GET{nb_pages}|mult{#GET{pagination}}}
+			<li class="hal-fast-forward">
+			<a href="[(#SELF|parametre_url{start,#GET{start}})]">&gt;&gt;</a>
+			</li>
+		]
+		</ul>
+		   </B_pagination>
+	</div>
+
+	<B_doc>
+	<div class="hal-resultats">
+	<BOUCLE_doc(DATA){source tableau,#VALEUR{docs}}>
+	 <div class="hal-resultat hal-resultat-#VALEUR{docid}">
+	  [ #SET{type_pub,type_pub_#VALEUR{docType_s}}
+		  <div class="hal-type-pub hal-type-pub-(#VALEUR{docType_s}|strtolower)"><span><:hal_pub:{=#GET{type_pub}}:></span></div>
+	  ]
+	  <B_auteur><div class="hal-auteur">
+	  <BOUCLE_auteur(DATA){source tableau,#VALEUR{authFullName_s}}{", "}><span>#VALEUR</span></BOUCLE_auteur></div></B_auteur>
+
+	  <BOUCLE_titre(DATA){source tableau,#VALEUR{title_s}}{n-1,n}>
+	  <div class="hal-titre">#VALEUR</div>
+	  </BOUCLE_titre>
+	  [(#VALEUR{docType_s}|=={UNDEFINED}|non)
+			  [<div class="hal-ref-pub">(#VALEUR{label_xml}|hal_extraire_pub)</div>]
+	  ]
+	  [(#VALEUR{docType_s}|=={UNDEFINED}|oui)
+			  [<div class="hal-depot-annee">(#VALEUR{submittedDateY_i})</div>]
+	  ]
+	  <div class="hal-ref">
+		  [<div class="hal-hal"><a href="(#VALEUR{uri_s})"><span>HAL</span></a></div>]
+		  [<div class="hal-doi"><a href="http://dx.doi.org/(#VALEUR{doiId_s})"><span>DOI</span></a></div>]
+		  [<div class="hal-arxiv"><a href="http://arxiv.org/abs/(#VALEUR{arxivId_s})"><span>arXiv</span></a></div>]
+	  </div>
+	</div>
+	</BOUCLE_doc>
+	</div>
+	</B_doc>
+
+</BOUCLE_json>
+</div>

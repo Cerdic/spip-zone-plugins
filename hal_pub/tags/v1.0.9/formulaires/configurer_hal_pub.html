@@ -1,0 +1,50 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:hal_pub:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<ul>
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{url_depot}}
+			<li class="editer editer_url_depot[ (#GET{erreurs}|oui)erreur]">
+				<label><:hal_pub:label_url_depot:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<p class='explication'><:hal_pub:explication_url_depot:></p>
+				<input type="text" name="url_depot" class="text"  value="[(#ENV{url_depot}|sinon{https://api.archives-ouvertes.fr/search/}|trim)]" />
+			</li>
+
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{pagination}}
+			<li class="editer editer_pagination[ (#GET{erreurs}|oui)erreur]">
+				<label><:hal_pub:label_pagination:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<p class='explication'><:hal_pub:explication_pagination:></p>
+				<input type="text" name="pagination" class="text"  value="[(#ENV{pagination}|sinon{10}|intval)]" />
+			</li>
+
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{champs}}
+			<li class="editer editer_champs[ (#GET{erreurs}|oui)erreur]">
+				<label><:hal_pub:label_champs:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<p class='explication'><:hal_pub:explication_champs:></p>
+				<input type="text" name="champs" class="text"  value="#ENV{champs}" />
+			</li>
+
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{types_document}}
+			<li class="editer editer_types_document[ (#GET{erreurs}|oui)erreur]">
+				<label><:hal_pub:label_types_document:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<p class='explication'><:hal_pub:explication_types_document:></p>
+				<input type="text" name="types_document" class="text"  value="#ENV{types_document}" />
+			</li>
+		</ul>
+
+		<input type="hidden" name="_meta_casier" value="hal_pub" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>
