@@ -1,0 +1,44 @@
+<!-- autoriser=configurer -->
+<!-- refus=<:cfg:refus_configuration_administrateur:> -->
+<!-- nom=<:mesfavoris:mesfavoris:> -->
+
+<style type="text/css">
+div.choix img { vertical-align: top; margin: 0 5px 10px; }
+</style>
+
+<div class="formulaire_spip formulaire_cfg formulaire_#FORM">
+<h3 class="titrem">[(#CHEMIN{images/favoris-32.png}|image_reduire{24}|inserer_attribut{class,cadre-icone}|inserer_attribut{alt,''})]<:mesfavoris:legend_formulaire_public:></h3>
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{espaceprive}}
+		<li class="editer editer_style_formulaire[ (#GET{erreurs}|oui)erreur]">
+			<label><:mesfavoris:legend_style_formulaire:></label>
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<div class="choix">
+				<input type="radio" name="style_formulaire" class="radio"  value='32' id='form32'[ (#ENV{style_formulaire,32}|=={32}|oui)checked="checked"] />
+				<label for='form32'><:mesfavoris:label_style_formulaire32:>[<img src="(#CHEMIN{images/favoris-grey-add-32.png})" alt="" width="32" height="32" />]</label>
+				
+			</div>
+			<div class="choix">
+				<input type="radio" name="style_formulaire" class="radio"  value='24' id='form24'[ (#ENV{style_formulaire,32}|=={24}|oui)checked="checked"] />
+				<label for='form24'><:mesfavoris:label_style_formulaire24:>[<img src="(#CHEMIN{images/bookmark-grey-add-24.png})" alt="" width="24" height="24" />]</label>
+				
+			</div>
+			<div class="choix">
+				<input type="radio" name="style_formulaire" class="radio"  value='16' id='form16'[ (#ENV{style_formulaire,32}|=={16}|oui)checked="checked"] />
+				<label for='form16'><:mesfavoris:label_style_formulaire16:>[<img src="(#CHEMIN{images/favoris-grey-add-16.png})" alt="" width="16" height="16" />]</label>
+				
+			</div>
+		</li>
+	</ul>		
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
+	</p>
+</div>
+</form>
+</div>
