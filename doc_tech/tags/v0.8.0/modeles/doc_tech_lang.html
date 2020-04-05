@@ -1,0 +1,29 @@
+<B_tables>
+<BOUCLE_tables(DATA) {source table, #ENV{tables}} {si #SESSION{webmestre}|=={oui}}>
+[(#SET{spip_table,[(#VALEUR|table_objet_sql)]})] [(#SET{tables_infos,[(#VAL|lister_tables_principales|table_valeur{#GET{spip_table}})]})]
+#SET{prefixe_lang,#LISTE{label,documentation,explication}}
+#SET{prefixe_lang,#GET{prefixe_lang}|array_merge{#ENV{label_perso}|explode{','}}}
+#SET{prefixe_lang,#GET{prefixe_lang}|array_unique|array_filter}
+[(#SET{chaines_langue,#ARRAY})]
+<B_info_table>
+<textarea rows="20" cols="40" class="doc_tech_lang">
+<BOUCLE_info_table(DATA) {source table, #GET{tables_infos}} {cle='field'}>// ----------
+// [Objet : (#_tables:GET{spip_table}|objet_type)]
+// [Table sql : (#_tables:GET{spip_table})]
+// <:doc_tech:chaines_a_placer_dans:> [(#_tables:VALEUR|table_objet)]/lang/[(#_tables:VALEUR|concat{'_',#LANG,'.php'})]
+// La chaine de langue 'explication' peut être utile sur les # SAISIES des pages d'édition de l'objet.
+// ----------
+<BOUCLE_prefixe_lang(DATA) {source table, #GET{prefixe_lang}} {par valeur}><B_champs><BOUCLE_champs(DATA) {source table, #_info_table:VALEUR} {par cle}>
+['(#VAL{'champ_'}|concat{#_champs:CLE,'_',#_prefixe_lang:VALEUR})'] => '[(#_tables:VALEUR|doc_tech_chaine_langue{#_champs:CLE,#_prefixe_lang:VALEUR}|texte_script)]', </BOUCLE_champs></B_champs>
+</BOUCLE_prefixe_lang>
+</BOUCLE_info_table>
+// ----------
+// ----------</textarea>
+	</B_info_table>
+	[(#BOITE_OUVRIR{'','notice'})]
+	<:doc_tech:pas_de_tables_nom:>
+	[(#BOITE_FERMER)]
+	<//B_info_table>
+</BOUCLE_tables>
+</B_tables>
+<//B_tables>
