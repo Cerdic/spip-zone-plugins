@@ -1,0 +1,33 @@
+<paquet
+	prefix="cextras"
+	categorie="outil"
+	version="3.12.4"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="images/cextras-64.png"
+	documentation="https://contrib.spip.net/?article4068"
+>
+
+	<nom>Champs Extras</nom>
+
+	<auteur>Matthieu Marcillaud</auteur>
+	<auteur>Fil</auteur>
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="declarer_champs_extras" action="" />
+
+	<pipeline nom="autoriser" inclure="inc/cextras_autoriser.php" />
+	<pipeline nom="editer_contenu_objet" inclure="cextras_pipelines.php" />
+	<pipeline nom="afficher_contenu_objet" inclure="cextras_pipelines.php" />
+	<pipeline nom="crayons_controleur" inclure="cextras_pipelines.php" />
+	<pipeline nom="crayons_verifier" inclure="cextras_pipelines.php" />
+	<pipeline nom="pre_edition" inclure="cextras_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="cextras_pipelines.php" />
+	<pipeline nom="formulaire_fond" inclure="cextras_pipelines.php" />
+	<pipeline nom="revisions_chercher_label" inclure="cextras_pipelines.php" />
+
+	<necessite nom="saisies" compatibilite="[3.28.15;]" />
+	<utilise nom="verifier" compatibilite="[0.1.12;]" />
+	<utilise nom="crayons" compatibilite="[1.26.1;]" />
+
+</paquet>
