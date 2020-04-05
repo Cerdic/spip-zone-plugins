@@ -1,0 +1,762 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_photospip formulaire_#FORM-#ENV{id_document}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
+	<BOUCLE_document(DOCUMENTS){id_document = #ENV{id_vignette,#ENV{id_document}}}{extension IN gif,png,jpg}{tout}>
+	[(#REM)
+		Calcul du ratio entre notre image originale et la prévisualisation
+		Utile pour les opération de recadrage notamment
+	]
+	[(#SET{largeur_max,#ENV{largeur_previsu,#ENV{erreurs}|table_valeur{largeur_previsu}|sinon{548}}})]
+	[(#SET{hauteur_max,#CONFIG{photospip/hauteur_previsu,#ENV{erreurs}|table_valeur{hauteur_previsu}|sinon{450}}})]
+	[(#SET{largeur_reduit,[(#FICHIER|image_reduire{#GET{largeur_max},0}|extraire_attribut{width})]})]
+	[(#SET{ratio,[(#LARGEUR|div{#GET{largeur_reduit}})]})]
+	[(#SET{ratio_image,[(#LARGEUR|div{#HAUTEUR})]})]
+	[(#SET{largeur_image,#LARGEUR})]
+	[(#SET{hauteur_image,#HAUTEUR})]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[<div class="reponse_formulaire_notice notice">
+			<strong><:previsualisation:></strong><br />
+			(#ENV{message_previsu})
+			<br />
+			<input type="submit" class="submit" name="supprimer_previsu" value="<:photospip:bouton_supprimer_previsu:>" />
+		</div>]
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_document' value='#ENV{id_document}' />
+		<input type="submit" class="submit" name="tester" style="display:none;" value="<:photospip:bouton_tester:>" />
+		<div id="modifier_image">
+			<div id="image-container">
+				<div id="image_modifier" class="spip_documents spip_documents_center" style="position:relative">
+					[(#ENV{filtre_tmp,#ENV{filtre}}|oui)
+					[(#_document:FICHIER|photospip_appliquer_filtre{[(#ENV{filtre_tmp,#ENV{filtre}})],[(#ENV{param1})],[(#ENV{param2})],[(#ENV{param3})],[(#ENV{param})]}|image_reduire{#GET{largeur_max},0}|inserer_attribut{alt,' '}|inserer_attribut{width,''}|inserer_attribut{height,''})]]
+					[(#ENV{filtre_tmp,#ENV{filtre}}|non)
+					[(#_document:FICHIER|image_reduire{#GET{largeur_max},*}|inserer_attribut{alt,' '}|inserer_attribut{width,''}|inserer_attribut{height,''})]]
+				</div>
+			</div>
+		</div>
+		<div class="editer_image_inputs">
+			<BOUCLE_si_versions_et_vignettes(CONDITION){si #ENV{mode}|!={vignette}|ou{#ENV{mode}|=={vignette}|et{#ENV{vignette}|=={oui}}}|oui}>
+			<B_interd_nb>
+			<ul class="liste-versions">
+				<li class="fieldset">
+					<legend>[(#GRAND_TOTAL|singulier_ou_pluriel{photospip:info_nb_versions_une,photospip:info_nb_versions})]</legend>
+					<BOUCLE_interd_nb(DOCUMENTS_INTERS){id_document}{!par version}> </BOUCLE_interd_nb>
+					<ul>
+					<B_interd>
+						<li class="editer editer_version">
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{version})</span>]
+						<div id="image-versions">
+						<BOUCLE_interd(DOCUMENTS_INTERS){id_document}{!par version}>
+						<div class="photospip_version choix">
+						<label for="version_#VERSION" title="<:photospip:title_version{version=#VERSION}:>">
+							[(#HAUTEUR|>{#LARGEUR}|non)
+							[(#SET{fichier,[(#FICHIER|get_spip_doc)]})]
+							[(#SET{miniature,[(#FICHIER|get_spip_doc|image_reduire{80,80}|inserer_attribut{alt,Version #VERSION})]})]]
+							[(#HAUTEUR|>{#LARGEUR}|oui)
+							[(#SET{fichier,[(#FICHIER|get_spip_doc)]})]
+							[(#SET{miniature,[(#FICHIER|get_spip_doc|image_reduire{80,80}|inserer_attribut{alt,Version #VERSION}|inserer_attribut{style,'vertical-align:bottom;'})]})]]
+							#GET{miniature}
+						</label>
+						<input type="radio" name="version" id="version_#VERSION" value="#VERSION" />
+						</div>
+						</BOUCLE_interd>
+						</div>
+						</li>
+						<li class="boutons">
+							<input type="submit" class="submit" name="revenir_version" value="<:photospip:bouton_revenir_version:>" />
+							<input type="submit" class="submit" name="supprimer_version" value="<:photospip:bouton_supprimer_version:>" />
+						</li>
+					</B_interd>
+					</ul>
+				</li>
+			</ul>
+			</B_interd_nb>
+			</BOUCLE_si_versions_et_vignettes>
+			<BOUCLE_modifiable(CONDITION){si #ENV{modifiable,oui}|oui}>
+			<ul>
+				[<li class="fieldset" id="fragment-format">
+					<fieldset>
+					<legend><:photospip:legende_filtres_format:></legend>
+					<ul>
+					(#INCLURE{fond=formulaires/editer_image_format,env}|trim)
+					</ul>
+					</fieldset>
+				</li>]
+				
+				[<li class="fieldset" id="fragment-couleurs">
+					<fieldset>
+					<legend><:photospip:legende_filtres_de_couleur:></legend>
+					<ul>
+						(#INCLURE{fond=formulaires/editer_image_couleurs,env}|trim)
+					</ul>
+					</fieldset>
+				</li>]
+				<BOUCLE_resultats_sup_un(CONDITION){si #ENV{mode}|!={vignette}|et{#CONFIG{photospip/resultats,#ARRAY{0,remplacer_image,1,creer_nouvelle_image,2,creer_version_image}}|count|>{1}}|oui}>
+				<li>
+					<label><:photospip:label_type_modification:></label>
+					<BOUCLE_resultats(POUR){tableau #CONFIG{photospip/resultats,#ARRAY{0,remplacer_image,1,creer_nouvelle_image,2,creer_version_image}}}>
+					<div class="choix">
+						<input type="radio" id="#VALEUR" name="type_modification" value="#VALEUR"[(#ENV{type_modification,#CONFIG{photospip/resultats_defaut,creer_version_image}}|=={#VALEUR}|oui)checked="checked"] />
+						<label for="#VALEUR">[(#VAL{photospip:label_modif_}|concat{#VALEUR}|_T)]</label>
+					</div>
+					</BOUCLE_resultats>
+				</li>
+				</BOUCLE_resultats_sup_un>
+				[(#REM)
+				
+					Les résultats possible dans le cas d'une vignette.
+					
+					On affiche ce choix de résultat uniquement lorsque la vignette existe réellement
+					
+					Contrairement aux résultats du travail sur le document, seuls 2 résultats sont possibles :
+					-* Le remplacement de la vignette purement et simplement;
+					-* La création de versions de la vignette
+				]
+				<BOUCLE_resultats_sup_vignette_un(CONDITION){si #ENV{mode}|=={vignette}|et{#ENV{vignette}|=={oui}}|et{#CONFIG{photospip/resultats_vignette,#ARRAY{0,remplacer_image,1,creer_version_image}}|count|>{1}}|oui}>
+				<li>
+					<label><:photospip:label_type_modification:></label>
+					<BOUCLE_resultats_vignette(POUR){tableau #CONFIG{photospip/resultats_vignette,#ARRAY{0,remplacer_image,1,creer_version_image}}}>
+					<div class="choix">
+						<input type="radio" id="#VALEUR" name="type_modification" value="#VALEUR"[(#ENV{type_modification,#CONFIG{photospip/resultats_defaut_vignette,creer_version_image}}|=={#VALEUR}|oui)checked="checked"] />
+						<label for="#VALEUR">[(#VAL{photospip:label_modif_vignette_}|concat{#VALEUR}|_T)]</label>
+					</div>
+					</BOUCLE_resultats_vignette>
+				</li>
+				</BOUCLE_resultats_sup_vignette_un>
+			</ul>
+		</div>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class="boutons">
+	  	<input type="submit" class="submit" name="tester" value="<:photospip:bouton_tester:>" />
+	  	[(#ENV{mode}|=={vignette}|et{#ENV{vignette}|=={oui}}|oui)
+	  	<input type="submit" class="submit" name="supprimer_vignette" value="<:photospip:bouton_supprimer_vignette:>" />
+	  	]
+	  	<input type="submit" class="submit" name="validation_continuer" value="<:photospip:bouton_valider_continuer:>" />
+	  	<input type="submit" class="submit" name="validation_fermer" value="<:photospip:bouton_valider_fermer:>" />
+	  </p>
+		<script type="text/javascript"><!--
+			var ratio,
+				ratio_image = parseFloat([(#GET{ratio_image})]),
+				largeur=parseFloat(#GET{largeur_image}),
+				hauteur=parseFloat(#GET{hauteur_image});
+			[(#CONFIG{photospip/image_recadre,on}|=={on}|oui)
+				var x1, y1, x2, y2, w, h, ias;
+				function image_crop_selectchange(img, selection){
+					/**
+					 *  Le ratio est la relation entre notre image normale et la prévisualisation
+					 */
+					if(!isNaN(parseFloat(selection.x1*ratio))){
+						x1.val(parseFloat(selection.x1*ratio).toFixed(0));
+						y1.val(parseFloat(selection.y1*ratio).toFixed(0));
+						x2.val(parseFloat(selection.x2*ratio).toFixed(0));
+						y2.val(parseFloat(selection.y2*ratio).toFixed(0));
+						w.val(parseFloat(selection.width*ratio).toFixed(0));
+						h.val(parseFloat(selection.height*ratio).toFixed(0));
+					}
+				}
+
+				var image_crop = function(){
+					if(typeof(ias) == 'object')
+						image_crop_close();
+
+					ias = jQuery('#image_modifier img').imgAreaSelect(
+						{
+							parent:jQuery('#modifier_image'),
+							x1:[(#ENV{recadre_x1}|>{0}|?{[(#ENV{recadre_x1}|div{#GET{ratio}}|intval)],10})],
+							y1:[(#ENV{recadre_y1}|>{0}|?{[(#ENV{recadre_y1}|div{#GET{ratio}}|intval)],10})],
+							x2:[(#ENV{recadre_x2}|>{0}|?{[(#ENV{recadre_x2}|div{#GET{ratio}}|intval)],60})],
+							y2:[(#ENV{recadre_y2}|>{0}|?{[(#ENV{recadre_y2}|div{#GET{ratio}}|intval)],60})],
+							show:true,
+							instance: true,
+							handles: true,
+							keys: true,
+							fadeSpeed:400,
+							enable:true,
+							onInit: function(img, c) {
+								image_crop_selectchange(img,c);
+							},
+							onSelectStart: function(img, c) {},
+							onSelectEnd: function(img, c) {},
+							onSelectChange: function(img, c) {
+								image_crop_selectchange(img,c);
+							}
+						}
+					);
+				}
+				
+				var image_crop_close = function(){
+					if(typeof(ias) == 'object')
+						ias.remove();
+				}
+			]
+			var activatesliders = function(){
+				if(typeof(jQuery.fn.slider) == 'function'){
+					if(jQuery('#sliderrotation').size() > 0){
+						var slider_image_rotation = jQuery('#sliderrotation').slider({
+							min: -180,
+							max: 180,
+							value: [(#ENV{params_image_rotation}|intval|sinon{45})],
+							slide: function( event, ui ) {
+								jQuery(this).parent().find('input').val(ui.value.toFixed(0));
+							}
+						});
+						jQuery("#param_image_rotation").change(function() {
+							var val = parseInt(jQuery(this).val());
+							slider_image_rotation.slider("value", val);
+						});
+					}
+					if(jQuery('#slidergamma').size() > 0){
+						var slider_image_gamma = jQuery('#slidergamma').slider({
+							min: -254,
+							max: 254,
+							value: [(#ENV{params_image_gamma}|sinon{10}|intval)],
+							slide: function(event, ui) {
+								jQuery(this).parent().find('input').val(ui.value.toFixed(0));
+							}
+						});
+						jQuery("#param_image_gamma").change(function() {
+							var val = parseInt(jQuery(this).val());
+							slider_image_gamma.slider("value", val);
+						});
+					}
+					if(jQuery('#sliderflou').size() > 0){
+						var slider_image_flou = jQuery('#sliderflou').slider({
+							min: 1,
+							max: 11,
+							value: [(#ENV{param_image_flou}|sinon{3}|intval)],
+							slide: function(event, ui) {
+								jQuery(this).parent().find('input').val(ui.value.toFixed(0));
+							}
+						});
+						jQuery("#param_image_flou").change(function() {
+							var val = parseInt(jQuery(this).val());
+							slider_image_flou.slider("value", val);
+						});
+					}
+					if(jQuery('#slider_image_reduire').size() > 0){
+						/**
+						 * On utilise qu'un slider pour les deux valeurs 
+						 * car on fait dans le proportionnel ici
+						 */
+						var slider_image_reduire = jQuery('#slider_image_reduire').slider({
+							min: 5,
+							max: 100,
+							value: [(#ENV{reduire_width,#LARGEUR}|div{#LARGEUR}|mult{100}|intval)],
+							slide: function(event, ui) {
+								jQuery(this).parent().find('input#reduire_width').val(((ui.value.toFixed(0)*#LARGEUR)/100).toFixed(0));
+								jQuery(this).parent().find('input#reduire_height').val(((ui.value.toFixed(0)*#HAUTEUR)/100).toFixed(0));
+							}
+						});
+						jQuery("#reduire_width").change(function() {
+							var val = (parseInt(jQuery(this).val())/parseInt(#LARGEUR))*100;
+							slider_image_reduire.slider("value", val);
+							var height = ((parseInt(#HAUTEUR)*val)/100).toFixed(0);
+							jQuery("#reduire_height").val(height);
+						});
+						jQuery("#reduire_height").change(function() {
+							var val = (parseInt(jQuery(this).val())/parseInt(#HAUTEUR))*100;
+							slider_image_reduire.slider("value", val);
+							var height = ((parseInt(#LARGEUR)*val)/100).toFixed(0);
+							jQuery("#reduire_width").val(height);
+						});
+					}
+				}
+			}
+
+			if(typeof($) == 'function' && typeof(jQuery) == 'function'){
+				jQuery(document).ready(function() {
+					console.log($('.visible'));
+					var cbox = '[(#EVAL{_AJAX}|?{oui,non})]',
+						conteneur = jQuery('#image-container'),
+						conteneur_img = jQuery('#image-container img');
+
+					/**
+					 * Cas où l'on se trouve dans une mediabox
+					 */
+					if((cbox == 'oui') || (conteneur.parents('#cboxLoadedContent').size()>0)){
+						var boxoffset,
+							boxmargins,container_offset;
+						var init_box = function(cbox_complete){
+							if((conteneur.parents('#cboxLoadedContent').size()>0)){
+								var container_offset = conteneur.offset().top;
+								if(jQuery.fn.spinner){
+									jQuery('input[type=number],input.nombre').spinner().parents('li').addClass('has_spinner');
+									$('.ui-spinner-button').unbind('click.change').on('click.change',function(event,ui){$('input.nombre').change();});
+								}
+								if(cbox_complete && jQuery('#modifier_image img').width() > jQuery('#modifier_image').width()){
+									conteneur_img.attr('width','').attr('height','').width('100%').height('auto');
+								}
+
+								/**
+								 * Si on est en modal et si la hauteur de l'image affichée est inférieure à la hauteur
+								 * de la div de la modale, on fait scroller l'image lors du scroll dans la modale
+								 * jusqu'aux boutons au maximum 
+								 */
+								if(conteneur.size()>0){
+									ratio = largeur/parseFloat(conteneur_img.width());
+									jQuery('.cache').not('.visible').hide();
+									boxoffset = jQuery('#cboxLoadedContent').offset();
+									boxmargins = jQuery('#cboxContent').height() - jQuery('#cboxLoadedContent').height();
+									container_offset = parseInt(conteneur.offset().top)-parseInt(jQuery('#cboxContent').offset().top);
+									var container_size = conteneur.outerHeight();
+									var boutons_height = jQuery('#cboxContent .boutons').last().outerHeight();
+									
+									if(container_size < parseInt(jQuery('#cboxLoadedContent').height())){
+										jQuery('#cboxLoadedContent').off('scroll').on('scroll',function() {
+											var limite_bas = jQuery('.formulaire_#FORM-#ENV{id_document}').height()-boutons_height-10,
+												limite_image = boxoffset.top,
+												pos_bas = conteneur.offset().top+container_size;
+											if((parseInt(jQuery('#cboxLoadedContent').scrollTop()) >= container_offset) && ((parseInt(conteneur.offset().top)-parseInt(jQuery('.formulaire_#FORM-#ENV{id_document}').offset().top)+container_size) < limite_bas)){
+												var margintop = jQuery('#cboxLoadedContent').scrollTop()-container_offset+boxmargins;
+												conteneur.addClass("image_flottant").animate({"margin-top": margintop+"px"},1,'',function(){
+													if((parseInt(conteneur.offset().top)-parseInt(jQuery('.formulaire_#FORM-#ENV{id_document}').offset().top)+container_size) >= limite_bas){
+														margintop = jQuery('.formulaire_#FORM-#ENV{id_document}').height()-boutons_height-20-container_size;
+														limite_bas = limite_bas-10;
+														conteneur.addClass("image_flottant").animate({"margin-top": margintop+"px"},1,'',function(){
+															if(typeof(ias) == 'object')
+																ias.update();
+														});
+													}
+													if(typeof(ias) == 'object')
+														ias.update();
+												});
+											}
+											else if(conteneur.is(".image_flottant") && (jQuery('#cboxLoadedContent').scrollTop() < container_offset)){
+												conteneur.removeClass("image_flottant").animate({'margin-top':'1px'},1,'',function(){
+													if(typeof(ias) == 'object')
+														ias.update();
+												});
+											}
+										});
+									}
+								}
+								if(parseInt(jQuery('#cboxLoadedContent').width()) > 0){
+									if(jQuery('#modifier_image img').width() > jQuery('#modifier_image').width()){
+										conteneur_img.attr('width','').attr('height','').width('100%').height('auto');
+									}
+								}
+							}
+						}
+						/**
+						 * On initialise les js de la box qui si la box est complete
+						 */
+						init_box(false);
+						jQuery(document).unbind('cbox_complete').bind('cbox_complete', function(){
+							init_box(true);
+						});
+					}
+					else {
+						if(jQuery('#modifier_image img').width() > jQuery('#modifier_image').width()){
+							conteneur_img.attr('width','').attr('height','').width('100%').height('auto');
+						}
+						ratio = largeur/parseFloat(conteneur_img.width());
+						if(jQuery.fn.spinner){
+							jQuery('input[type=number],input.nombre').spinner().parents('li').addClass('has_spinner');
+							$('.ui-spinner-button').unbind('click.change').on('click.change',function(event,ui){$('input.nombre').change();});
+						}
+					}
+					jQuery('.cache').not('.visible').hide();
+					activatesliders();
+					
+					/**
+					 * On affiche les options du filtre sélectionné
+					 */
+					jQuery('.formulaire_photospip input[type=radio][name=filtre]').off('click').on('click',function(){
+						cache = jQuery(this).parents('.editer').find('.cache');
+						if(!cache.is(':visible')){
+							jQuery(".visible").slideUp().removeClass('visible');
+							jQuery(this).parent().find('.cache').slideDown('fast',function(){
+								if(jQuery.fn.spinner){
+									jQuery(this).find('input[type=number],input.nombre').spinner().parents('li').addClass('has_spinner');
+									$('.ui-spinner-button').unbind('click.change').on('click.change',function(event,ui){$('input.nombre').change();});
+								}
+								jQuery(this).addClass('visible');
+							});
+							if(jQuery(this).attr('id') == 'image_recadre')
+								image_crop();
+							else
+								image_crop_close();
+						}
+					});
+					<BOUCLE_si_image_recadre(CONDITION){si #CONFIG{photospip/image_recadre,on}|oui}>
+						x1 = jQuery('#recadre_x1');
+						y1 = jQuery('#recadre_y1');
+						x2 = jQuery('#recadre_x2');
+						y2 = jQuery('#recadre_y2');
+						w = jQuery('#recadre_width');
+						h = jQuery('#recadre_height');
+						
+						if(jQuery('#image_recadre').is(':checked'))
+							image_crop();
+						
+						jQuery('#recadre_width,#recadre_height,#recadre_x1,#recadre_y1,#recadre_x2,#recadre_y2').on('change',function(){
+							if(typeof(ias) == 'object'){
+								var ias_selection = ias.getSelection(),
+									ratio_selected = jQuery('input[name=ratio]:checked').val();
+								if(jQuery(this).is('#recadre_width')){
+									if(jQuery(this).val() <= largeur){
+										var width_ratio = parseInt(parseInt(jQuery(this).val())/ratio);
+										ias_selection.x2 = parseInt(ias_selection.x1)+width_ratio;
+										var height_new = jQuery('#resize_height').val();
+										/**
+										 * Faire attention aux ratios
+										 */
+										if(ratio_selected == '1:1'){
+											/**
+											 * Ratio 1:1
+											 * largeur = hauteur
+											 */
+											height_new = parseInt(jQuery(this).val());
+											jQuery('#recadre_height').val(height_new);
+											ias_selection.y2 = parseInt(ias_selection.y1)+width_ratio;
+										}else if(ratio_selected == '4:3'){
+											/**
+											 * Ratio 4:3
+											 * largeur = hauteur
+											 */
+											height_new = parseInt((parseInt(jQuery(this).val())*3)/4);
+											jQuery('#recadre_height').val(height_new);
+											var height_ratio = parseInt((width_ratio*3)/4);
+											ias_selection.y2 = parseInt(ias_selection.y1)+height_ratio;
+										}else if(ratio_selected == '16:9'){
+											/**
+											 * Ratio 16:9
+											 * largeur = hauteur
+											 */
+											height_new = parseInt((jQuery(this).val()*9)/16);
+											jQuery('#recadre_height').val(height_new);
+											var height_ratio = parseInt((width_ratio*9)/16);
+											ias_selection.y2 = parseInt(ias_selection.y1)+height_ratio;
+										}
+										if(height_new <= hauteur){
+											/**
+											 * La nouvelle hauteur en prenant compte du ratio est inférieur
+											 * à la hauteur maximale
+											 * Sinon on ne fait rien car on ne peut augmenter la taille
+											 */
+											if((parseInt(jQuery('#recadre_x1').val())+parseInt(jQuery(this).val())) > parseInt(largeur)){
+												/**
+												 * Là on doit déplacer x2 à fond et x1 un petit peu 
+												 * sinon x2 se retrouverait hors zone
+												 */
+												jQuery('#recadre_x2').val(largeur);
+												ias_selection.x2 = parseInt(largeur/ratio);
+												jQuery('#recadre_x1').val(largeur-parseInt(jQuery(this).val()));
+												ias_selection.x1 = (parseInt(largeur)-parseInt(jQuery(this).val()))/ratio;
+											}else{
+												/**
+												 * Là on doit déplacer seulement x2
+												 */
+												var width = (parseInt(jQuery('#recadre_x1').val())+parseInt(jQuery(this).val()));
+												jQuery('#recadre_x2').val(width);
+											}
+											if(ratio_selected != ''){
+												if((parseInt(jQuery('#recadre_y1').val())+height_new) > parseInt(hauteur)){
+													/**
+													 * Là on doit déplacer y2 à fond et y1 un petit peu 
+													 * sinon y2 se retrouverait hors zone
+													 */
+													jQuery('#recadre_y2').val(hauteur);
+													ias_selection.y2 = parseInt(hauteur/ratio);
+													jQuery('#recadre_y1').val(hauteur-height_new);
+													ias_selection.y1 = (parseInt(hauteur)-parseInt(height_new))/ratio;
+												}else{
+													/**
+													 * Là on doit déplacer seulement y2
+													 */
+													var height = (parseInt(jQuery('#recadre_y1').val())+parseInt(height_new));
+													jQuery('#recadre_y2').val(height);
+												}
+											}
+										}
+									}else{
+										/**
+										 * On occupe toute la largeur
+										 */
+										jQuery(this).val(largeur);
+										ias_selection.x1 = 0;
+										jQuery('#recadre_x1').val(0);
+										ias_selection.x2 = parseInt(largeur/ratio);
+										jQuery('#recadre_x2').val(largeur);
+									}
+								}
+								else if(jQuery(this).is('#recadre_height')){
+									if(jQuery(this).val() < hauteur){
+										var height_ratio = parseInt(parseInt(jQuery(this).val())/ratio);
+										ias_selection.y2 = parseInt(ias_selection.y1)+height_ratio;
+										var width_new = jQuery('#resize_width').val();
+										/**
+										 * Faire attention aux ratios
+										 */
+										if(ratio_selected == '1:1'){
+											/**
+											 * Ratio 1:1
+											 * largeur = hauteur
+											 */
+											width_new = parseInt(jQuery(this).val());
+											jQuery('#recadre_width').val(width_new);
+											ias_selection.x2 = parseInt(ias_selection.x1)+height_ratio;
+										}else if(ratio_selected == '4:3'){
+											/**
+											 * Ratio 4:3
+											 * largeur = hauteur
+											 */
+											width_new = parseInt((parseInt(jQuery(this).val())*4)/3);
+											jQuery('#recadre_width').val(width_new);
+											var width_ratio = parseInt((height_ratio*4)/3);
+											ias_selection.x2 = parseInt(ias_selection.x1)+width_ratio;
+										}else if(ratio_selected == '16:9'){
+											/**
+											 * Ratio 16:9
+											 * largeur = hauteur
+											 */
+											width_new = parseInt((jQuery(this).val()*16)/9);
+											jQuery('#recadre_width').val(width_new);
+											var width_ratio = parseInt((height_ratio*16)/9);
+											ias_selection.x2 = parseInt(ias_selection.x1)+width_ratio;
+										}
+										if(width_new <= largeur){
+											if(parseInt(jQuery('#recadre_y2').val()) >= parseInt(hauteur)){
+												/**
+												 * Là on doit déplacer y2 à fond et y1 un petit peu 
+												 * sinon y2 se retrouverait hors zone
+												 */
+												jQuery('#recadre_y2').val(hauteur);
+												ias_selection.y2 = parseInt(hauteur/ratio);
+												jQuery('#recadre_y1').val(hauteur-parseInt(jQuery(this).val()));
+												ias_selection.y1 = (parseInt(hauteur)-parseInt(jQuery(this).val()))/ratio;
+											}else{
+												/**
+												 * Là on doit déplacer seulement y2
+												 */
+												var height = (parseInt(jQuery('#recadre_y1').val())+parseInt(jQuery(this).val()));
+												jQuery('#recadre_y2').val(height);
+											}
+											if(ratio_selected != ''){
+												if((parseInt(jQuery('#recadre_x1').val())+width_new) > parseInt(largeur)){
+													/**
+													 * Là on doit déplacer x2 à fond et x1 un petit peu 
+													 * sinon x2 se retrouverait hors zone
+													 */
+													jQuery('#recadre_x2').val(largeur);
+													ias_selection.x2 = parseInt(largeur/ratio);
+													jQuery('#recadre_x1').val(largeur-width_new);
+													ias_selection.x1 = (parseInt(largeur)-parseInt(width_new))/ratio;
+												}else{
+													/**
+													 * Là on doit déplacer seulement x2
+													 */
+													var width = (parseInt(jQuery('#recadre_x1').val())+parseInt(width_new));
+													jQuery('#recadre_x2').val(width);
+												}
+											}
+										}
+									}else{
+										/**
+										 * On occuper toute la hauteur
+										 */
+										jQuery(this).val(hauteur);
+										ias_selection.y1 = 0;
+										jQuery('#recadre_y1').val(0);
+										ias_selection.y2 = parseInt(hauteur/ratio);
+										jQuery('#recadre_y2').val(hauteur);
+									}
+								}
+								else{
+									var largeur_image = parseFloat(conteneur_img.width());
+									var width = parseInt(jQuery('#recadre_width').val());
+									var height = parseInt(jQuery('#recadre_height').val());
+									if(jQuery(this).is('#recadre_x1')){
+										var width_left = parseInt(jQuery(this).val()) + parseInt(width);
+										if(width_left >= largeur){
+											jQuery('#recadre_x2').val(largeur);
+											ias_selection.x2 = parseInt(largeur)/ratio;
+											jQuery('#recadre_x1').val(largeur-width);
+											ias_selection.x1 = parseInt(ias_selection.x2)-parseInt(width/ratio);
+										}else{
+											var x1_ratio = (parseInt(jQuery(this).val())/ratio);
+											ias_selection.x1 = x1_ratio;
+											ias_selection.x2 = parseInt(x1_ratio)+parseInt(width/ratio);
+											jQuery('#recadre_x2').val(parseInt(jQuery(this).val())+width);
+										}
+									}
+									else if(jQuery(this).is('#recadre_y1')){
+										var height_top = parseInt(jQuery(this).val()) + parseInt(height);
+										if(height_top >= hauteur){
+											jQuery('#recadre_y2').val(hauteur);
+											ias_selection.y2 = parseInt(hauteur)/ratio;
+											jQuery('#recadre_y1').val(hauteur-width);
+											ias_selection.y1 = parseInt(ias_selection.y2)-parseInt(height/ratio);
+										}else{
+											var y1_ratio = (parseInt(jQuery(this).val())/ratio);
+											ias_selection.y1 = y1_ratio;
+											ias_selection.y2 = y1_ratio+parseInt(height/ratio);
+											jQuery('#recadre_y2').val(parseInt(jQuery(this).val())+height);
+										}
+									}
+									else if(jQuery(this).is('#recadre_x2')){
+										var x2_ratio = (parseFloat(jQuery(this).val())/ratio).toFixed(0);
+										ias_selection.x2 = parseInt(x2_ratio);
+									}
+									else if(jQuery(this).is('#recadre_y2')){
+										var y2_ratio = (parseFloat(jQuery(this).val())/ratio).toFixed(0);
+										ias_selection.y2 = parseInt(y2_ratio);
+									}
+								}
+								/**
+								 * On met à jour la sélection visuelle
+								 */
+								ias.setSelection(ias_selection.x1,ias_selection.y1,ias_selection.x2,ias_selection.y2);
+								ias.update();
+							}
+						});
+						jQuery('.image_recadre input[type=radio][name=ratio]').off('click').on('click',function(){
+							if(typeof(ias) == "object"){
+								if (jQuery(this).val() != ''){
+									/**
+									 * On met l'option correct à l'objet
+									 */
+									ias.setOptions({aspectRatio: jQuery(this).val()});
+									var ias_selection = ias.getSelection();
+
+									/**
+									 * On redimentionne la sélection en fonction du nouveau ratio
+									 */
+									var largeur_image = #LARGEUR;
+									var hauteur_image = #HAUTEUR;
+									var largeur_actuelle = (parseInt(jQuery('#recadre_x2').val()) - parseInt(jQuery('#recadre_x1').val()));
+									var hauteur_actuelle = (parseInt(jQuery('#recadre_y2').val()) - parseInt(jQuery('#recadre_y1').val()));
+									var largeur_cadre = (ias_selection.x2 - ias_selection.x1);
+									var hauteur_cadre = (ias_selection.y2 - ias_selection.y1);
+									
+									if(jQuery(this).val() == '1:1'){
+										if(hauteur_image >= largeur_actuelle){
+											/**
+											 * On transforme la hauteur en largeur
+											 */
+											if((parseInt(jQuery('#recadre_y1').val()) + largeur_actuelle) > hauteur_image){
+												/**
+												 * On va devoir remonter l'image pour qu'elle rentre dans le cadre
+												 */
+												var y1 = hauteur_image - largeur_actuelle;
+												var y2 = hauteur_image;
+												jQuery('#recadre_y1').val(y1)
+												jQuery('#recadre_y2').val(y2);
+												ias_selection.y2 = jQuery('#image_modifier img').height();
+												ias_selection.y1 = ias_selection.y2-largeur_cadre;
+											}else{
+												/**
+												 * L'image reste en place, on change les dimensions seulement
+												 */
+												var y2 = parseInt(jQuery('#recadre_y1').val()) + largeur_actuelle;
+												jQuery('#recadre_y2').val(y2);
+												ias_selection.y2 = parseInt(ias_selection.y1)+largeur_cadre;
+											}
+											jQuery('#recadre_height').val(jQuery('#recadre_width').val());
+										}else{
+											/**
+											 * On transforme la largeur en hauteur
+											 */
+											if((parseInt(jQuery('#recadre_x1').val()) + hauteur_actuelle) > largeur_image){
+												/**
+												 * On va devoir déplacer l'image 
+												 * pour qu'elle rentre dans le cadre
+												 */
+												var x1 = largeur_image - hauteur_actuelle,
+													x2 = largeur_image;
+												jQuery('#recadre_x1').val(x1)
+												jQuery('#recadre_x2').val(x2);
+												ias_selection.x2 = jQuery('#image_modifier img').width();
+												ias_selection.x1 = ias_selection.x2-hauteur_cadre;
+											}else{
+												/**
+												 * L'image reste en place, on change les dimensions seulement
+												 */
+												var x2 = parseInt(jQuery('#recadre_x1').val()) + hauteur_actuelle;
+												jQuery('#recadre_x2').val(x2);
+												ias_selection.x2 = parseInt(ias_selection.x1)+hauteur_cadre;
+											}
+											jQuery('#recadre_width').val(jQuery('#recadre_height').val());
+										}
+									}
+									else if((jQuery(this).val() == '4:3') || (jQuery(this).val() == '16:9')){
+										if(jQuery(this).val() == '4:3'){
+											var ratio_l = 4,
+												ratio_h = 3;
+										}else if(jQuery(this).val() == '16:9'){
+											var ratio_l = 16,
+											ratio_h = 9;
+										}
+										var largeur_ratio = largeur_actuelle,
+											hauteur_ratio = ((largeur_actuelle*ratio_h)/ratio_l),
+											largeur_cadre_ratio = (ias_selection.x2 - ias_selection.x1),
+											hauteur_cadre_ratio = (((ias_selection.x2 - ias_selection.x1)*ratio_h)/ratio_l);
+										if(parseInt(hauteur_ratio) <= hauteur_image){
+											/**
+											 * On redimentionne la hauteur
+											 */
+											if(parseInt(hauteur_ratio) > hauteur_image){
+												/**
+												 * On va devoir remonter l'image pour qu'elle rentre dans le cadre
+												 */
+												var y1 = hauteur_image - hauteur_ratio.toFixed(0),
+													y2 = hauteur_image.toFixed(0);
+												jQuery('#recadre_y1').val(y1)
+												jQuery('#recadre_y2').val(y2);
+												ias_selection.y2 = jQuery('#image_modifier img').height();
+												ias_selection.y1 = (ias_selection.y2-hauteur_cadre_ratio).toFixed(0);
+											}else{
+												/**
+												 * L'image reste en place, on change les dimensions seulement
+												 */
+												var y2 = (parseInt(jQuery('#recadre_y1').val()) + hauteur_ratio).toFixed(0);
+												jQuery('#recadre_y2').val(y2);
+												ias_selection.y2 = (parseInt(ias_selection.y1)+hauteur_cadre_ratio).toFixed(0);
+											}
+											jQuery('#recadre_height').val(((parseInt(jQuery('#recadre_width').val())*ratio_h)/ratio_l).toFixed(0));
+										}else{
+											/**
+											 * On transforme la largeur car la hauteur sera trop grande
+											 */
+											if((parseInt(jQuery('#recadre_x1').val()) + hauteur_ratio) > largeur_image){
+												/**
+												 * On va devoir déplacer l'image 
+												 * pour qu'elle rentre dans le cadre
+												 */
+												var x1 = largeur_image - hauteur_ratio,
+													x2 = largeur_image;
+												jQuery('#recadre_x1').val(x1)
+												jQuery('#recadre_x2').val(x2);
+												ias_selection.x2 = jQuery('#image_modifier img').width();
+												ias_selection.x1 = (ias_selection.x2-hauteur_cadre_ratio).toFixed(0);
+											}else{
+												/**
+												 * L'image reste en place, on change les dimensions seulement
+												 */
+												var x2 = parseInt(jQuery('#recadre_x1').val()) + hauteur_ratio;
+												jQuery('#recadre_x2').val(x2);
+												ias_selection.x2 = (parseInt(ias_selection.x1)+hauteur_cadre_ratio).toFixed(0);
+											}
+											jQuery('#recadre_width').val(((parseInt(jQuery('#recadre_width').val())*ratio_l)/ratio_h).toFixed(0));
+										}
+									}
+									ias.setSelection(ias_selection.x1,ias_selection.y1,ias_selection.x2,ias_selection.y2);
+									ias.update();
+								}
+								else{
+									ias.setOptions({aspectRatio:''});
+								}
+							}
+						});
+					</BOUCLE_si_image_recadre>
+				});
+			}
+	// --></script>
+	</BOUCLE_modifiable>
+	</div></form>
+	</BOUCLE_document>
+	</BOUCLE_editable>
+</div>

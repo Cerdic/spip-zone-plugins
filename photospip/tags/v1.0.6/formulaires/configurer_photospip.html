@@ -1,0 +1,147 @@
+<div class="formulaire_spip formulaire_editer formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{SELF}
+		<ul>
+			<li class="fieldset">
+				<fieldset>
+				<legend><:photospip:legend_configuration:></legend>
+				<ul>
+					<li class="editer editer_limite_version">
+						<label for="limite_version"><:photospip:label_limiter_version:></label>
+						<input type="text" name="limite_version" class="text" id="limite_version" value="#ENV{limite_version,10}" maxlength="3" style="width:3em;" />
+					</li>
+				</ul>
+				</fieldset>
+			</li>
+			<li class="fieldset">
+				<fieldset>
+				<legend><:photospip:legend_filtres_a_disposition:></legend>
+				<ul>
+					<li class="editer editer_filtres">
+						<label><:photospip:label_choisir_filtres:></label>
+						<div class="choix">
+							<input type="checkbox" name="image_reduire" id="image_reduire"[(#ENV{image_reduire}|=={on}|oui) checked="checked"] />
+							<label for="image_reduire"><:photospip:label_image_reduire:></label>
+						</div>
+						<div class="choix">
+							<input type="checkbox" name="image_passe_partout" id="image_passe_partout"[(#ENV{image_passe_partout}|=={on}|oui) checked="checked"] />
+							<label for="image_passe_partout"><:photospip:label_image_passe_partout:></label>
+						</div>
+						<div class="choix">
+							<input type="checkbox" name="image_recadre" id="image_recadre"[(#ENV{image_recadre}|=={on}|oui) checked="checked"] />
+							<label for="image_recadre"><:photospip:label_image_recadre:></label>
+						</div>
+						<div class="choix">
+							<input type="checkbox" name="tourner" id="tourner"[(#ENV{tourner}|=={on}|oui) checked="checked"] />
+							<label for="tourner"><:photospip:label_tourner:></label>
+						</div>
+						<div class="choix">
+							<input type="checkbox" name="image_rotation" id="image_rotation"[(#ENV{image_rotation}|=={on}|oui) checked="checked"] />
+							<label for="image_rotation"><:photospip:label_image_rotation:></label>
+						</div>
+						<div class="choix">
+							<input type="checkbox" name="image_flip_vertical" id="image_flip_vertical"[(#ENV{image_flip_vertical}|=={on}|oui) checked="checked"] />
+							<label for="image_flip_vertical"><:photospip:label_image_flip_vertical:></label>
+						</div>
+						<div class="choix">
+							<input type="checkbox" name="image_flip_horizontal" id="image_flip_horizontal"[(#ENV{image_flip_horizontal}|=={on}|oui) checked="checked"] />
+							<label for="image_flip_horizontal"><:photospip:label_image_flip_horizontal:></label>
+						</div>
+						[(#REM)
+						<div class="choix">
+							<input type="checkbox" name="image_aplatir" id="image_aplatir"[(#ENV{image_aplatir}|=={on}|oui) checked="checked"] />
+							<label for="image_aplatir"><:photospip:label_image_aplatir:></label>
+						</div>]
+						<div class="choix">
+							<input type="checkbox" name="image_sepia" id="image_sepia"[(#ENV{image_sepia}|=={on}|oui) checked="checked"] />
+							<label for="image_sepia"><:photospip:label_image_sepia:></label>
+						</div>
+						<div class="choix">
+							<input type="checkbox" name="image_nb" id="image_nb"[(#ENV{image_nb}|=={on}|oui) checked="checked"] />
+							<label for="image_nb"><:photospip:label_image_nb:></label>
+						</div>
+						<div class="choix">
+							<input type="checkbox" name="image_gamma" id="image_gamma"[(#ENV{image_gamma}|=={on}|oui) checked="checked"] />
+							<label for="image_gamma"><:photospip:label_image_gamma:></label>
+						</div>
+						<div class="choix">
+							<input type="checkbox" name="image_flou" id="image_flou"[(#ENV{image_flou}|=={on}|oui) checked="checked"] />
+							<label for="image_flou"><:photospip:label_image_flou:></label>
+						</div>
+						[(#PLUGIN{Fonctions_images}|oui)
+						[(#REM)
+						<div class="choix">
+							<input type="checkbox" name="image_sincity" id="image_sincity"[(#ENV{image_sincity}|=={on}|oui) checked="checked"] />
+							<label for="image_sincity"><:photospip:label_image_sincity:></label>
+						</div>]
+						[(#REM)
+						<div class="choix">
+							<input type="checkbox" name="image_saturer" id="image_saturer"[(#ENV{image_saturer}|=={on}|oui) checked="checked"] />
+							<label for="image_saturer"><:photospip:label_image_saturation_desaturation:></label>
+						</div>]
+						<div class="choix">
+							<input type="checkbox" name="image_niveau_de_gris_auto" id="image_niveau_de_gris_auto"[(#ENV{image_niveau_de_gris_auto}|=={on}|oui) checked="checked"] />
+							<label for="image_niveau_de_gris_auto"><:photospip:label_image_niveau_de_gris_auto:></label>
+						</div>]
+					</li>
+				</ul>
+				</fieldset>
+			</li>
+			<li class="fieldset">
+				<fieldset>
+				<legend><:photospip:legend_configuration_resultats:></legend>
+				<ul>
+					<li class="editer editer_resultats[ (#ENV**{erreurs}|table_valeur{resultats}|oui)erreur]">
+						<label><:photospip:label_resultats:></label>
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{resultats})</span>]
+						<p class="explication"><:photospip:explication_resultats:></p>
+						<div class="choix">
+							<input type="checkbox" name="resultats[]" id="remplacer_image" value="remplacer_image"[(#VAL{remplacer_image}|in_array{#ENV{resultats,#ARRAY{0,remplacer_image,1,creer_nouvelle_image,2,creer_version_image}}}|oui) checked="checked"] />
+							<label for="remplacer_image"><:photospip:label_modif_remplacer_image:></label>
+						</div>
+						<div class="choix">
+							<input type="checkbox" name="resultats[]" id="creer_nouvelle_image" value="creer_nouvelle_image"[(#VAL{creer_nouvelle_image}|in_array{#ENV{resultats,#ARRAY{0,remplacer_image,1,creer_nouvelle_image,2,creer_version_image}}}|oui) checked="checked"] />
+							<label for="creer_nouvelle_image"><:photospip:label_modif_creer_nouvelle_image:></label>
+						</div>
+						<div class="choix">
+							<input type="checkbox" name="resultats[]" id="creer_version_image" value="creer_version_image"[(#VAL{creer_version_image}|in_array{#ENV{resultats,#ARRAY{0,remplacer_image,1,creer_nouvelle_image,2,creer_version_image}}}|oui) checked="checked"] />
+							<label for="creer_version_image"><:photospip:label_modif_creer_version_image:></label>
+						</div>
+					</li>
+					<li class="editer editer_resultats_defaut">
+						<label for="resultats_defaut"><:photospip:label_resultats_defaut:></label>
+						<p class="explication"><:photospip:explication_resultats_defaut:></p>
+						<select name="resultats_defaut" id="resultats_defaut">
+							<BOUCLE_resultats_autorises(POUR){tableau #ENV{resultats,#ARRAY{0,remplacer_image,1,creer_nouvelle_image,2,creer_version_image}}}>
+							<option value="#VALEUR"[(#ENV{resultats_defaut,creer_version_image}|=={#VALEUR}|oui)selected="selected"]>[(#VAL{photospip:label_modif_}|concat{#VALEUR}|_T)]</option>
+							</BOUCLE_resultats_autorises>
+						</select> 
+					</li>
+				</ul>
+				</fieldset>
+			</li>
+			[(#REM)
+			<li class="fieldset">
+				<fieldset>
+				<legend><:photospip:legend_configuration_publique:></legend>
+				<ul>
+					<li class="editer editer_largeur_previsu">
+						<label for="largeur_previsu"><:photospip:label_largeur_previsu:></label>
+						<input type="text" name="largeur_previsu" id="largeur_previsu" value="#ENV{largeur_previsu,450}" class="text" maxlength="4" />
+					</li>
+					
+					<li class="editer editer_hauteur_previsu">
+						<label for="hauteur_previsu"><:photospip:label_hauteur_previsu:></label>
+						<input type="text" name="hauteur_previsu" id="hauteur_previsu" value="#ENV{hauteur_previsu,450}" class="text" maxlength="4" />
+					</li>
+				</ul>
+				</fieldset>
+			</li>]
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div></form>
+</div>

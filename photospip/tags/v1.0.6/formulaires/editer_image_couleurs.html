@@ -1,0 +1,103 @@
+[(#CONFIG{photospip/image_nb}|=={on}|oui)
+<li class="editer editer_nb[ (#ENV**{erreurs}|table_valeur{image_nb}|oui)erreur]">
+	<label for="filtre_nb"><:photospip:label_image_nb:></label>
+	<input type="radio" name="filtre" id="filtre_nb" value="image_nb"[(#ENV{filtre}|=={image_nb}|oui)checked="checked"] />
+	<div class="cache params_filtre[(#ENV{filtre}|=={image_nb}|oui)visible]">
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{image_nb})</span>]
+		<p class="explication"><:photospip:explication_image_nb:></p>
+	</div>
+</li>]
+[(#CONFIG{photospip/image_sepia}|=={on}|oui)
+<li class="editer editer_image_sepia[ (#ENV**{erreurs}|table_valeur{image_sepia}|oui)erreur]">
+	<label for="filtre_sepia"><:photospip:label_image_sepia:></label>
+	<input type="radio" name="filtre" id="filtre_sepia" value="image_sepia"[(#ENV{filtre}|=={image_sepia}|oui)checked="checked"] />
+	<div class="cache params_filtre[(#ENV{filtre}|=={image_sepia}|oui)visible]">
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{image_sepia})</span>]
+		<ul>
+			<li class="editer_param_image_sepia">
+				<label for="param_image_sepia"><:photospip:label_couleur_sepia:></label>
+				<input type="color" name="params_image_sepia" class="text palette couleur" id="param_image_sepia" value="#ENV{params_image_sepia,#896f5e}" maxlength="7" />
+			</li>
+		</ul>
+	</div>
+</li>]
+[(#CONFIG{photospip/image_gamma}|=={on}|oui)
+<li class="editer editer_gamma[ (#ENV**{erreurs}|table_valeur{image_gamma}|oui)erreur]">
+	<label for="filtre_gamma"><:photospip:label_image_gamma:></label>
+	<input type="radio" name="filtre" id="filtre_gamma" value="image_gamma"[(#ENV{filtre}|=={image_gamma}|oui)checked="checked"] />
+	<div class="cache params_filtre[(#ENV{filtre}|=={image_gamma}|oui)visible]">
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{image_gamma})</span>]
+		<p class="explication"><:photospip:explication_image_gamma:></p>
+		<div id='slidergamma'> </div>
+		<ul>
+			<li class="editer_params_image_gamma">
+				<label for="param_image_gamma"><:photospip:label_niveau_gamma:></label>
+				<input type="number" max="254" min="-254" step="1" class="text nombre" name="params_image_gamma" id="param_image_gamma" value="#ENV{params_image_gamma,10}" maxlength="4" />
+			</li>
+		</ul>
+	</div>
+</li>]
+[(#CONFIG{photospip/image_flou}|=={on}|oui)
+<li class="editer editer_flou[ (#ENV**{erreurs}|table_valeur{image_flou}|oui)erreur]">
+	<label for="filtre_flou"><:photospip:label_image_flou:></label>
+	<input type="radio" name="filtre" id="filtre_flou" value="image_flou"[(#ENV{filtre}|=={image_flou}|oui)checked="checked"] />
+	<div class="cache params_filtre[(#ENV{filtre}|=={image_flou}|oui)visible]">
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{image_flou})</span>]
+		<p class="explication"><:photospip:explication_image_flou:></p>
+		<div id='sliderflou'> </div>
+		<ul>
+			<li class="editer_param_image_flou">
+				<label for="param_image_flou"><:photospip:label_niveau_flou:></label>
+				<input type="number" max="11" min="1" step="1" class="text nombre" name="params_image_flou" id="param_image_flou" value="#ENV{params_image_flou,3}" maxlength="2" />
+			</li>
+		</ul>
+	</div>
+</li>]
+
+[(#CONFIG{photospip/image_niveau_de_gris_auto}|=={on}|oui)
+<li class="editer editer_niveaux_auto[ (#ENV**{erreurs}|table_valeur{image_niveaux_gris_auto}|oui)erreur]">
+	<label for="filtre_niveaux_auto"><:photospip:label_image_niveau_de_gris_auto:></label>
+	<input type="radio" name="filtre" id="filtre_niveaux_auto" value="image_niveaux_gris_auto"[(#ENV{filtre}|=={image_niveaux_gris_auto}|oui)checked="checked"] />
+	<div class="cache params_filtre explications[(#ENV{filtre}|=={image_niveaux_gris_auto}|oui)visible]">
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{image_niveaux_gris_auto})</span>]
+		<p class="explication"><:photospip:explication_image_niveau_de_gris_auto:></p>
+	</div>
+</li>]
+[(#GET{fonctions_images}|=={on}|oui)
+[(#REM)
+[(#CONFIG{photospip/image_sincity}|=={on}|oui)
+<li class="editer editer_sincity[ (#ENV**{erreurs}|table_valeur{image_sincity}|oui)erreur]">
+	<label for="filtre_sincity"><:photospip:label_image_sincity:></label>
+	<input type="radio" name="filtre" id="filtre_sincity" value="image_sincity"[(#ENV{filtre}|=={image_sincity}|oui)checked="checked"] />
+	<div class="cache params_filtre explications[(#ENV{filtre}|=={image_sincity}|oui)visible]">
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{image_sincity})</span>]
+		<p class="explication"><:photospip:explication_image_sincity:></p>
+	</div>
+</li>]]
+[(#REM)
+[(#CONFIG{photospip/image_contour_alpha}|=={on}|oui)
+<li class="editer editer_contour_alpha[ (#ENV**{erreurs}|table_valeur{image_contour_alpha}|oui)erreur]">
+	<label for="filtre_contour_alpha"><:photospip:label_image_contour_alpha:></label>
+	<input type="radio" name="filtre" id="filtre_contour_alpha" value="image_contour_alpha"[(#ENV{filtre}|=={image_contour_alpha}|oui)checked="checked"] />
+	<div class="cache params_filtre explications[(#ENV{filtre}|=={image_contour_alpha}|oui)visible]">
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{image_contour_alpha})</span>]
+		<p class="explication"><:photospip:explication_image_contour_alpha:></p>
+	</div>
+</li>]]
+[(#REM)
+[(#CONFIG{photospip/image_saturer}|=={on}|oui)
+<li class="editer editer_saturer[ (#ENV**{erreurs}|table_valeur{image_saturer}|oui)erreur]">
+	<label for="filtre_saturer"><:photospip:label_image_saturation_desaturation:></label>
+	<input type="radio" name="filtre" id="filtre_saturer" value="image_saturer"[(#ENV{filtre}|=={image_saturer}|oui)checked="checked"] />
+	<div class="cache params_filtre explications[(#ENV{filtre}|=={image_saturer}|oui)visible]">
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{image_saturer})</span>]
+		<p class="explication"><:photospip:explication_image_saturation_desaturation:></p>
+		<div id='slidersaturer'> </div>
+		<ul>
+			<li class="editer editer_param_image_saturer">
+				<label for="param_image_saturer"><:photospip:label_niveau_saturation_desaturation:></label>
+				<input type="text" class="text" name="params_image_saturer" id="param_image_saturer" value="#ENV{params_image_saturer,1}" maxlength="3" />
+			</li>
+		</ul>
+	</div>
+</li>]]]

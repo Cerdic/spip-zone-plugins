@@ -1,0 +1,117 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+#modifier_image{
+	margin:0 -10px;
+	overflow:hidden;
+	position: relative;
+}
+#image-container{
+	margin:0px;
+	text-align:center;
+}
+
+#image_modifier img{
+	vertical-align:bottom;
+}
+
+.formulaire_spip li.editer_version{
+	padding:10px 0;
+	margin:0;
+	overflow:auto;
+	overflow-x:scroll;
+}
+#image-versions{
+	margin: 0;
+    padding: 0;
+    border-spacing:6px 0;
+    width: 10000px;
+}
+
+#image-versions .photospip_version{
+	float:left;
+	width:80px;
+}
+
+#image-versions .photospip_version label{
+	width:80px;
+	height:80px;
+	display:block;
+	margin:0;
+	text-align:center;
+}
+
+#image-versions .photospip_version label img{
+	margin:0 auto;
+}
+
+.photospip_version{
+	border:1px solid #ccc;
+	width:80px;
+	margin:1px;
+	text-align:center;
+	background:#fff;
+}
+
+button{
+	cursor:pointer;	
+}
+
+.cache {
+	display:block;
+}
+
+.nocache{
+	color:#000;
+	border:none;
+}
+
+#cboxLoadedContent #modifier_image{
+	position:relative;
+	float:left;
+	width:48%;
+	padding:0;
+}
+
+#cboxLoadedContent .editer_image_inputs{
+	float:right;
+	width:49%;margin-left:1%;
+}
+
+.editer_tourner .tourner_90{
+	padding-left:15px;
+	background:url(#CHEMIN_IMAGE{tourner-droite-12.png}) no-repeat left center;
+}
+.editer_tourner .tourner_180{
+	padding-left:15px;
+	background:url(#CHEMIN_IMAGE{tourner-180-12.png}) no-repeat left center;
+}
+.editer_tourner .tourner_270{
+	padding-left:15px;
+	background:url(#CHEMIN_IMAGE{tourner-gauche-12.png}) no-repeat left center;
+}
+
+#modifier_image .spip_documents{
+	margin:0;
+	padding:0;
+}
+[(#REM)	</style>]

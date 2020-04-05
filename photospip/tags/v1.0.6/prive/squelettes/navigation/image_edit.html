@@ -1,0 +1,68 @@
+#BOITE_OUVRIR{'','info'}
+#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','document','id',#ENV{id_document}}}}
+#BOITE_FERMER
+
+<BOUCLE_doc(DOCUMENTS){id_document}{tout}>
+
+#BOITE_OUVRIR
+<div class='document_utilisations'>
+<B_liens>
+		<h3>[(#TOTAL_BOUCLE|singulier_ou_pluriel{medias:une_utilisation,medias:des_utilisations})]</h3>
+		<ul class='liste_items'>
+			<BOUCLE_liens(documents_liens){id_document}>
+			<li class='item #OBJET'>[(#CHEMIN_IMAGE{#OBJET|objet_info{icone_objet}|concat{-16.png}}|balise_img) ][(#ID_OBJET|generer_lien_entite{#OBJET})]
+			[(#VU|=={oui}|oui)
+			[<span class='vu'>(#CHEMIN_IMAGE{document-vu-24.png}|balise_img|inserer_attribut{title,<:medias:document_vu:>}|inserer_attribut{alt,<:medias:document_vu:>})</span>]
+			]
+			[(#AUTORISER{dissocierdocuments,#OBJET,#ID_OBJET}|oui)
+				[(#BOUTON_ACTION{<:medias:bouton_enlever_document:>,[(#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-#ID_DOCUMENT--safe,#SELF})],ajax,'',''})]
+			]
+			</li>
+			</BOUCLE_liens>
+		</ul>
+</B_liens>
+<h3><:medias:aucune_utilisation:></h3>
+<//B_liens>
+</div>
+#BOITE_FERMER
+
+<BOUCLE_vignette(DOCUMENTS){si #ENV{mode}|=={vignette}|oui}{id_document=#ID_VIGNETTE}{tout}>
+#BOITE_OUVRIR{'','info'}
+<div class="infos">
+	<h3><:photospip:titre_informations_vignette:></h3>
+	<div id="infos_doc_sup">
+		<p><:photospip:id_document:>#ID_DOCUMENT</p>
+		<p><:photospip:type_original:>[(#MIME_TYPE|sinon{inconnu})]</p>
+		<p><:photospip:date_doc:>#DATE</p>
+		<p><:photospip:date_modif_doc:>#MAJ</p>
+		<p><:photospip:taille_fichier:><br />
+		#LARGEUR x #HAUTEUR px[ - (#TAILLE|taille_en_octets)]
+		</p>
+	</div>
+</div>
+#BOITE_FERMER
+</BOUCLE_vignette>
+
+#BOITE_OUVRIR{'','info'}
+<div id="versions">
+	<h3><:photospip:titre_informations_images:></h3>
+	<div class="infos">
+		<div id="infos_doc_sup">
+			<p><:photospip:id_document:>#ID_DOCUMENT</p>
+			<p><:photospip:type_original:>[(#MIME_TYPE|sinon{inconnu})]</p>
+			<p><:photospip:date_doc:>#DATE</p>
+			<p><:photospip:date_modif_doc:>#MAJ</p>
+			<p><:photospip:taille_fichier:><br />
+			#LARGEUR x #HAUTEUR px[ - (#TAILLE|taille_en_octets)]
+			</p>
+		</div>
+	</div>
+	[(#CONFIG{plugin/PHOTO_INFOS}|oui)
+	[<h4><:photospip:donnees_exif:></h4>
+	<div class="infos">
+		(#INCLURE{fond=inc_exif,fichier=#FICHIER}|trim)
+		<INCLURE{fond=inc_histogramme,fichier=#FICHIER}>
+	</div>]]
+</div>
+#BOITE_FERMER
+</BOUCLE_doc>

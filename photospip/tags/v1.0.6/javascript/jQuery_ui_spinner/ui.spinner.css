@@ -1,0 +1,9 @@
+.ui-spinner {position: relative; border: 0px solid white;display:inline; }
+.ui-spinner-buttons {position: absolute}
+.ui-spinner-button {overflow: hidden}
+
+.has_spinner input::-webkit-outer-spin-button,
+.has_spinner input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}

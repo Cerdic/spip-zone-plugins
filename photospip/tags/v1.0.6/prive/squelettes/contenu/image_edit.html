@@ -1,0 +1,14 @@
+[(#ID_DOCUMENT|sinon_interdire_acces)]
+[(#AUTORISER{modifier,document,#ID_DOCUMENT}|sinon_interdire_acces)]
+<div class="cadre-formulaire-editer[(#ENV{popin,''}|oui)popin]">
+<div class="entete-formulaire">
+	[(#ENV{popin,''}|non)
+	[(#ENV{retour}|sinon{#URL_ECRIRE{documents}}|icone_verticale{<:icone_retour:>,document,'',left})]
+	]
+	[[(#ENV{mode}|=={vignette}|?{[(#VAL{photospip:info_modifier_vignette}|_T{#ARRAY{id_document,#ENV{id_document}}})],<:photospip:info_modifier_image:>})]
+	<h1>(#INFO_TITRE{document,#ID_DOCUMENT}|sinon{#INFO_FICHIER*{document,#ID_DOCUMENT}|basename})</h1>]
+</div>
+<div class="ajax">
+	#FORMULAIRE_EDITER_IMAGE{#ENV{id_document,new},#ENV{mode},#ENV{retour},#ENV{popin,#ENV{modale}}}
+</div>
+</div>
