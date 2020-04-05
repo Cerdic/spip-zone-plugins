@@ -1,0 +1,22 @@
+[(#REM)
+	Dans le pipeline alertes_affiche_droite(), on a vérifié que le présent article faisait parti des rubriques ou des secteurs abonnables, donc éditable.
+Puis, on regarde s'il y a des abonnés à la rubrique et/ou au secteur. Enfin, on vérifie si l'article a été modifié depuis sa mise en ligne.
+Si tous ces critères sont remplis, on affiche le bouton pour ajouter l'article aux envois d'alertes.
+][(#SET{abonnement,0})]
+<BOUCLE_editable (CONDITION) {si #ENV{editable}}>
+	<BOUCLE_compteur_rubrique (ALERTES) {id_objet=#ENV{id_rubrique}} {objet='rubrique'}/>[(#SET{abonnement,#GET{abonnement}|plus{#TOTAL_BOUCLE}})]<//B_compteur_rubrique>
+<BOUCLE_compteur_secteur (ALERTES) {id_objet=#ENV{id_secteur}} {objet='secteur'}/>[(#SET{abonnement,#GET{abonnement}|plus{#TOTAL_BOUCLE}})]<//B_compteur_secteur>
+	<BOUCLE_principal (ARTICLES) {id_article}>
+		<BOUCLE_modif (CONDITION) {si #DATE|affdate{'Ymd'}|<{#DATE_MODIF|affdate{'Ymd'}}|oui} {si #GET{abonnement}|>{0}|oui}>
+		[(#BOITE_OUVRIR{<:alerte:titre_alertes:>})]
+			[(#BOUTON_ACTION{[(#CHEMIN{images/alerte-add-32.png}
+				|balise_img{<:alerte:add_article_to:>}|inserer_attribut{class,co_middle}
+				|image_reduire{24,24}
+				|concat{' <b>',<:alerte:add_article_to:>,'</b>'})],
+				[(#URL_ACTION_AUTEUR{ajouter_alerte_article,#ID_ARTICLE-[(#ENV{editable_rubrique}|?{#ID_RUBRIQUE,0})]-[(#ENV{editable_secteur}|?{#ID_SECTEUR,0})],#SELF})],
+				icone s24 horizontale alerte-24,<:alerte:confirmer_add_article_to:>})]
+		#BOITE_FERMER
+		</BOUCLE_modif>
+	</BOUCLE_principal>
+</BOUCLE_editable>
+[(#FILTRE{trim})]

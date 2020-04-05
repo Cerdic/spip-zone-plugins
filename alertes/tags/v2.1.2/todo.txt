@@ -1,0 +1,9 @@
+Plugin Alertes : A faire :
+
+- Rendre plus "sexy" les formulaires de configurations, de choix d'abonnements et les exemples d'email envoyé.
+- Voir s'il est possible de simplifier le code, notamment dans le pipeline de notification pour ne pas rendre le mécanisme de publication trop lourd.
+- Tester les cas extrèmes et la charge.
+- Voir s'il est possible d'appliquer le système à d'autres objets éditoriaux : les brèves par exemple. Il faudra pour cela revoir la structure des données… En effet, actuellement, le couple se fait par id_auteur + objet + id_objet. Il faudra donc rendre une alerte plus générique, cf. "rubriques", "articles", "auteurs", "breves", etc. Une table spip_alertes_objets ?
+- Consulter les alertes en court et celles qui devront être envoyées par spip_alertes_cron ;
+- Avoir un compteur d'alertes sur une page rubrique ;
+- Sur la page de consultation des alertes enregistrées, pouvoir filtrer par objet et id_objet.

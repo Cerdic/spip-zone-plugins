@@ -1,0 +1,112 @@
+[(#REM) 
+	Formulaire d'enregistrement des abonnements.
+	Nous vous recommandons de réaliser le votre à partir de cet exemple et de le surcharger dans squelettes/formulaires/
+]
+
+<BOUCLE_autorise (CONDITION){si #CONFIG{config_alertes/activer_alertes}|=={oui}}>
+<div class="formulaire_spip formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	<form action="#ENV{action}" method="post">
+		<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul class="editer-groupe">
+		[(#REM) Abonnement aux secteurs]
+		<BOUCLE_editable_secteurs (CONDITION) {si #ENV{editable_secteurs}}> </BOUCLE_editable_secteurs>
+		<B_alertes_secteurs>
+		<li class="fieldset secteurs">
+			<fieldset>
+				<h3 class="legend"><:alerte:abo_sectors:></h3>
+				<ul class="editer-groupe">
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{secteurs}}
+					<li class="editer editer_secteurs[ (#GET{erreurs}|oui)erreur]">
+					<BOUCLE_alertes_secteurs (RUBRIQUES) {racine} {id_rubrique IN #CONFIG{config_alertes/secteurs}|to_array}>
+					<div class="choix">
+						<input type="checkbox" class="checkbox" name="secteurs[]" id="secteur-#ID_RUBRIQUE" value="#ID_RUBRIQUE"[ (#ENV{secteurs}|find{#ID_RUBRIQUE}|oui)checked="checked"]/>
+						<label for="secteur-#ID_RUBRIQUE">#TITRE</label>
+					</div>
+					</BOUCLE_alertes_secteurs>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+		</B_alertes_secteurs>
+		</B_editable_secteurs>
+
+		[(#REM) Abonnements aux rubriques spécifiques]
+		<BOUCLE_editable_rubriques (CONDITION) {si #ENV{editable_rubriques}}> </BOUCLE_editable_rubriques>
+		<B_alertes_rubriques>
+		<li class="fieldset rubriques">
+			<fieldset>
+				<h3 class="legend"><:alerte:abo_topics:></h3>
+				<ul class="editer-groupe">
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{rubriques}}
+					<li class="editer editer_rubriques[ (#GET{erreurs}|oui)erreur]">
+					<BOUCLE_alertes_rubriques (RUBRIQUES) {id_rubrique IN #CONFIG{config_alertes/rubriques}|to_array}>
+						<div class="choix">
+							<input type="checkbox" class="checkbox" name="rubriques[]" id="rubrique-#ID_RUBRIQUE" value="#ID_RUBRIQUE"[(#ENV{rubriques}|find{#ID_RUBRIQUE}|oui)checked="checked"]/>
+							<label for="rubrique-#ID_RUBRIQUE">#TITRE</label>
+						</div>
+					</BOUCLE_alertes_rubriques>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+		</B_alertes_rubriques>
+		</B_editable_rubriques>
+
+		[(#REM) Abonnements aux mots-clès, par groupes de mots autorisés]
+		<BOUCLE_editable_groupes (CONDITION) {si #ENV{editable_groupes}}> </BOUCLE_editable_groupes>
+		<B_groupes_mots>
+			<li><h3 class="legend"><:alerte:abo_keywords:></h3></li>
+			<BOUCLE_groupes_mots (GROUPES_MOTS){tout}{id_groupe IN #CONFIG{config_alertes/groupes}|to_array}>
+			<B_mots>
+			<li class="fieldset">
+				<fieldset>
+					<h4 class="legend">#TITRE</h4>
+					<ul class="editer-groupe">
+						#SET{erreurs,#ENV**{erreurs}|table_valeur{mots}}
+						<li class="editer editer_mots[ (#GET{erreurs}|oui)erreur]">
+							<BOUCLE_mots(MOTS){tout}{id_groupe}>
+							<div class="choix">
+								<input type="checkbox" class="checkbox" name="mots[]" id="mot-#ID_MOT" value="#ID_MOT"[ (#ENV{mots}|find{#ID_MOT}|oui)checked="checked"]/>
+								<label for="mot-#ID_MOT">#TITRE</label>
+							</div>
+							</BOUCLE_mots>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			</B_mots>
+			</BOUCLE_groupes_mots>
+		</B_groupes_mots>
+		</B_editable_groupes>
+
+		[(#REM) Abonnements aux auteurs]
+		<BOUCLE_editable_auteurs (CONDITION) {si #ENV{editable_auteurs}}> </BOUCLE_editable_auteurs>
+		<B_alertes_auteurs>
+		<li class="fieldset auteurs">
+			<fieldset>
+				<h3 class="legend"><:alerte:abo_authors:></h3>
+				<ul class="editer-groupe">
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{auteurs}}
+					<li class="editer editer_auteurs">
+						<BOUCLE_alertes_auteurs (AUTEURS) {tout}{id_auteur IN #CONFIG{config_alertes/auteurs}|to_array}>
+						<div class="choix">
+							<input type="checkbox" class="checkbox" name="auteurs[]" id="auteur-#ID_AUTEUR" value="#ID_AUTEUR"[ (#ENV{auteurs}|find{#ID_AUTEUR}|oui)checked="checked"]/>
+							<label for="auteur-#ID_AUTEUR">[(#NOM|sinon{#LOGIN})]</label>
+						</div>
+						</BOUCLE_alertes_auteurs>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+		</B_alertes_auteurs>
+		</B_editable_auteurs>
+
+		</ul>
+		<p class="boutons"><input type="submit" name="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+		</div>
+	</form>
+</div>
+</BOUCLE_autorise>

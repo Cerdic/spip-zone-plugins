@@ -1,0 +1,56 @@
+#SET{config_objet,#CONFIG{config_alertes/#ENV{objet}|table_objet}|to_array}
+<BOUCLE_editable (CONDITION){si #ENV{editable}|oui}>
+[(#BOITE_OUVRIR{<:alerte:titre_alertes:>})]
+<BOUCLE_compteur_objet (ALERTES) {objet} {id_objet} />
+	[<div class="nb_elements">
+		<div><a href="[(#URL_ECRIRE{alertes}|parametre_url{objet,#OBJET}|parametre_url{id_objet,#ID_OBJET})]">(#TOTAL_BOUCLE|singulier_ou_pluriel{alerte:info_1_alerte_#OBJET,alerte:info_nb_alertes_#OBJET})</a></div>
+	</div>]<//B_compteur_objet>
+
+[(#ID_OBJET|alertes_trouver{#OBJET,#SESSION{id_auteur}}|non)
+	[(#BOUTON_ACTION{[(#CHEMIN{images/alerte-add-32.png}
+		|balise_img{<:alerte:add_to:>}|inserer_attribut{class,co_middle}
+		|image_reduire{24,24}
+		|concat{' <b>',<:alerte:add_to:>,'</b>'})],
+		[(#URL_ACTION_AUTEUR{ajouter_alerte,#OBJET-#ID_OBJET,#SELF})],
+		icone s24 horizontale alerte-24,<:alerte:confirmer_add_to:>})]
+]
+[(#ID_OBJET|alertes_trouver{#OBJET,#SESSION{id_auteur}}|oui)
+	[(#BOUTON_ACTION{[(#CHEMIN{images/alerte-remove-32.png}
+		|balise_img{<:alerte:remove_from:>}|inserer_attribut{class,co_middle}
+		|image_reduire{24,24}
+		|concat{' <b>',<:alerte:remove_from:>,'</b>'})],
+		[(#URL_ACTION_AUTEUR{retirer_alerte,#OBJET-#ID_OBJET,#SELF})],
+		icone s24 horizontale alerte-24,<:alerte:confirmer_remove_from:>})]
+]
+[(#REM)
+	Si on est sur un objet rubrique, il faut permettre de s'abonner au secteur.
+]
+[(#SET{secteur,[(#ID_OBJET|trouver_secteur)]})]
+<BOUCLE_objet_secteur (CONDITION) {si #ENV{editable_secteur}|oui}>
+	<hr class="nettoyeur"/>
+	<BOUCLE_compteur_secteur (ALERTES) {objet="secteur"} {id_objet=#GET{secteur}} />
+	[<div class="nb_elements">
+		<div><a href="[(#URL_ECRIRE{alertes}|parametre_url{objet,secteur}|parametre_url{id_objet,#GET{secteur}})]">(#TOTAL_BOUCLE|singulier_ou_pluriel{alerte:info_1_alerte_secteur,alerte:info_nb_alertes_secteur})</a></div>
+	</div>]<//B_compteur_secteur>
+	[(#GET{secteur}|>{0}|oui)
+		[(#GET{secteur}|alertes_trouver{secteur,#SESSION{id_auteur}}|non)
+			[(#BOUTON_ACTION{[(#CHEMIN{images/alerte-add-32.png}
+				|balise_img{<:alerte:add_sector_to:>}|inserer_attribut{class,co_middle}
+				|image_reduire{24,24}
+				|concat{' <b>',<:alerte:add_sector_to:>,'</b>'})],
+				[(#URL_ACTION_AUTEUR{ajouter_alerte,secteur-[(#GET{secteur})],#SELF})],
+				icone s24 horizontale alerte-24,<:alerte:confirmer_add_to:>})]
+		]
+		[(#GET{secteur}|alertes_trouver{secteur,#SESSION{id_auteur}}|oui)
+			[(#BOUTON_ACTION{[(#CHEMIN{images/alerte-remove-32.png}
+				|balise_img{<:alerte:remove_sector_from:>}|inserer_attribut{class,co_middle}
+				|image_reduire{24,24}
+				|concat{' <b>',<:alerte:remove_sector_from:>,'</b>'})],
+				[(#URL_ACTION_AUTEUR{retirer_alerte,secteur-[(#GET{secteur})],#SELF})],
+				icone s24 horizontale alerte-24,<:alerte:confirmer_remove_from:>})]
+		]
+	]
+</BOUCLE_objet_secteur>
+
+#BOITE_FERMER
+</BOUCLE_editable>

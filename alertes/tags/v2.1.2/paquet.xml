@@ -1,0 +1,32 @@
+<paquet
+	prefix="alertes"
+	categorie="communication"
+	version="2.1.2"
+	schema="1.1.1"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/alertes-128.png"
+	documentation="http://www.kokmoka.com/plugins-spip-alertes/"
+>
+	<nom>Alertes</nom>
+	<licence>GNU</licence>
+
+	<auteur lien="https://contrib.spip.net/Gael-Chareyre">Gael Chareyre</auteur>
+	<auteur>Teddy Payet</auteur>
+
+	<menu nom="configurer_alertes" titre="alerte:title_menu_configuration" parent="menu_configuration" icone="images/alertes-16.png" />
+	<menu nom="alertes" titre="alerte:titre_alertes" parent="menu_activite" icone="images/alertes-16.png" />
+
+	<pipeline nom="declarer_tables_principales" inclure="base/alertes.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/alertes.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/alertes.php" />
+
+	<pipeline nom="notifications_destinataires" inclure="alertes_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="alertes_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="alertes_pipelines.php" />
+	<pipeline nom="affiche_droite" inclure="alertes_pipelines.php" />
+	<pipeline nom="afficher_complement_objet" inclure="alertes_pipelines.php" />
+
+	<necessite nom="facteur" compatibilite="[3.6.2;]" />
+	<utilise nom="accesrestreint" compatibilite="[3.0.0;]" />
+</paquet>

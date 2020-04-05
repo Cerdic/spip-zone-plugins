@@ -1,0 +1,46 @@
+[(#SET{defaut_tri,#ARRAY{
+	id_alerte,1,
+	objet,1,
+	points,-1
+}})][(#SET{img_ok,[(#CHEMIN_IMAGE{ok-16.png}|balise_img)]})][(#SET{img_ko,[(#CHEMIN_IMAGE{supprimer-16.png}|balise_img)]})]<B_liste_alertes>
+#ANCRE_PAGINATION
+<div class="liste-objets alertes">
+<table class="spip liste">
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{alerte:info_1_alerte_#OBJET,alerte:info_nb_alertes_#OBJET}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="id" scope="col">[(#TRI{id_alerte,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class="picto" scope="col"></th>
+			<th class="objet principale" scope="col">[(#TRI{objet,<:alerte:champ_objet_label:>,ajax})]</th>
+			<th class="statut" scope="col"><:alerte:en_ligne:></th>
+			<th class="id_auteur secondaire" scope="col">[(#TRI{id_auteur,<:alerte:champ_id_auteur_label:>,ajax})]</th>
+			<th class="maj" scope="col">[(#TRI{maj,<:alerte:maj:>,ajax})]</th>
+			<th class="actions" scope="col"><:alerte:actions_label:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_alertes(ALERTES) {id_alerte?} {id_objet?} {objet?} {id_auteur?} {where?} {recherche?} {tri #ENV{par,objet},#GET{defaut_tri}} {par objet} {pagination #ENV{nb,10}}>[(#SET{_objet,[(#OBJET|=={secteur}|?{rubrique,#OBJET})]})]
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="id">#ID_ALERTE</td>
+			<td class="picto">[(#CHEMIN_IMAGE{alerte-16.png}|balise_img)]</td>
+			<td class="objet principale">[(#OBJET|=={secteur}|?{<:alerte:secteur:>,[(#OBJET|objet_info{texte_objet}|_T)]}) :] <a href="[(#URL_ECRIRE{#GET{_objet}}|parametre_url{[(#GET{_objet}|id_table_objet)],#ID_OBJET})]">[(#INFO_TITRE{#GET{_objet},#ID_OBJET})]</a></td>
+			<td class="statut">[(#GET{_objet}|objet_test_si_publie{#ID_OBJET}|?{#GET{img_ok},#GET{img_ko}})]</td>
+			<td class="id_auteur secondaire"><a href="[(#URL_ECRIRE{auteur}|parametre_url{id_auteur,#ID_AUTEUR})]">[(#ID_AUTEUR). ][(#INFO_NOM{auteur,#ID_AUTEUR})]</a></td>
+			<td class="maj secondaire">[(#MAJ|date_interface)]</td>
+			<td class="actions">[(#AUTORISER{supprimer,alerte,#ID_ALERTE}|oui)
+				[(#BOUTON_ACTION{[(#CHEMIN{images/alerte-remove-32.png}
+					|balise_img{<:alerte:remove:>}|inserer_attribut{class,co_middle}
+					|image_reduire{24,24}
+					|concat{' <b>',<:alerte:remove:>,'</b>'})],
+					[(#URL_ACTION_AUTEUR{supprimer_alerte,#ID_ALERTE,#SELF})],
+					icone s24 danger horizontale alerte-24,<:alerte:confirmer_remove_from:>})]
+				]</td>
+		</tr>
+	</BOUCLE_liste_alertes>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_alertes>[
+<div class="liste-objets alertes caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_alertes>
