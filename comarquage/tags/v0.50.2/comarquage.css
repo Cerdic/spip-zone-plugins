@@ -1,0 +1,171 @@
+h2:before {
+	display: table;
+	content: " ";
+}
+
+h2:after {
+	clear: both;
+	display: block;
+	content: " ";
+}
+
+.spArborescenceItem2Col {
+	width: 48%;
+	margin-bottom: 2em;
+	float: left;
+	padding-right: 2%;
+}
+
+.spArborescenceItem2Col ul.spPublicationNoeud li.spPublicationNoeud {
+	display: inline;
+	background: none;
+	padding: 0;
+}
+
+.spArborescenceItem2Col .spPublicationNoeud h4 {
+	display: inline;
+	margin-bottom: 0;
+	margin-right: 0.2em;
+	font-size: 16px;
+}
+
+.entiteImageFloatLeft {
+	float: left;
+	margin-right: 0.5em;
+}
+
+.spArborescenceItem2Col h3 {
+	font-weight: bold;
+}
+
+.spArborescenceItem2Col h3 .entiteImageFloatLeft {
+	vertical-align: -14px;
+	margin-right: 0.5em;
+}
+
+.spBarreThemesFils {
+	border: 1px solid #C8C8C8;
+	float: left;
+	margin: 5px;
+	min-height: 7em;
+	padding: 8px 0px 0px;
+	text-align: center;
+	width: 17%;
+}
+
+.spBarreThemesFils img {
+	display: block;
+	margin: 0px auto;
+}
+
+.spFilDAriane {
+	clear: both;
+}
+
+ul.spPublicationSommaire > li.spPublicationSommaire {
+	background: #F5F5F5 none repeat scroll 0% 0%;
+	margin: 2px 0px;
+	padding: 2px 15px;
+	border: 1px solid #FFF;
+	list-style-type: none;
+}
+
+ul.spPublicationSommaire > li.spPublicationSommaire h3 {
+	font-size: 1.25em;
+	line-height: 1.2;
+	margin-bottom: 0em;
+}
+
+ul.spPublicationSommaire > li.spPublicationSommaire:hover {
+	border: 1px solid #75736E;
+}
+
+div.spTousDossiersAZ {
+	margin: 1em 0;
+}
+
+ul.spPublicationNoeud li.spPublicationNoeud,
+ul.spPublicationSEL li.spPublicationSEL,
+ul.spPublicationSIP li.spPublicationSIP {
+	background: transparent url("images/pictos/puce.gif") no-repeat scroll 0.6em 0.2em;
+	padding-left: 2em;
+	display: block;
+}
+
+ul.spPublicationNoeud, ul.spPublicationSEL, ul.spPublicationSIP,
+ul.spLienWeb {
+	margin-bottom: 1.5em;
+}
+
+ul.spPublicationNoeud li.spPublicationNoeud h3,
+ul.spPublicationSEL li.spPublicationSEL h3,
+ul.spPublicationSIP li.spPublicationSIP h3 {
+	display: inline;
+	margin-bottom: 0;
+}
+
+div.spPublicationNoeud h2 img {
+	vertical-align: -14px;
+	margin-right: 0.5em;
+}
+
+/*
+.spPublicationQR img, .spPublicationSEL img, .spPublicationSIP img,
+.spPublicationPESP img, .spPublicationOSA img, .spPublicationSommaire img,
+.spFilDAriane img, .spTousDossiersAZ img{
+    display:none;
+}
+*/
+
+ul.spListe li.spItemChapitre,
+ul.spListe li.spItemListe {
+	background: transparent url("images/pictos/puce.gif") no-repeat scroll 0.6em 0.2em;
+	padding-left: 2em;
+	display: block;
+}
+
+ul.spPublicationActualite li.spPublicationActualite h3 {
+	display: inline;
+}
+
+ul.spLienWeb li.spLienWeb {
+	background: transparent url("images/pictos/puce.gif") no-repeat scroll 0.6em 0.2em;
+	padding-left: 2em;
+	display: block;
+}
+
+.spLetters ul li {
+	display: inline;
+}
+
+.spLetters ul {
+	margin-bottom: 1em;
+}
+
+.spIndex ul.spPublicationNoeud li.spPublicationNoeud {
+	background: none;
+	padding: 0;
+	display: inline;
+}
+
+.sp-letter- * {
+	margin-bottom: 0.5em;
+}
+
+.entiteImageFloatRight {
+	float: right;
+	margin-left: 0.5em;
+}
+
+.clearall, .spIndex {
+	clear: both;
+}
+
+h2[id^='sp-letter-'] {
+	margin-bottom: 0.2em;
+}
+
+.spIndex ul.spPublicationNoeud li.spPublicationNoeud h3 {
+	font-size: 95%;
+	padding: 0 0.5em;
+}
