@@ -1,0 +1,26 @@
+nom: '<:ncore:type_noisette_conteneur_nom:>'
+description: '<:ncore:type_noisette_conteneur_description:>'
+icon: 'conteneur-24.png'
+conteneur: 'oui'
+contexte: 'aucun'
+ajax: 'non'
+parametres:
+  -
+    saisie: 'selection'
+    options:
+      nom: 'conteneur_balise'
+      label: '<:ncore:label_conteneur_balise:>'
+      defaut: 'div'
+      cacher_option_intro: 'oui'
+      datas:
+        div: 'div'
+        section: 'section'
+        article: 'article'
+        aside: 'aside'
+        nav: 'nav'
+        p: 'p'
+  -
+    saisie: 'input'
+    options:
+      nom: 'conteneur_css'
+      label: '<:ncore:label_conteneur_css:>'

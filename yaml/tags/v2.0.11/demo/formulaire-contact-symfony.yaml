@@ -1,0 +1,95 @@
+id_formulaire: '1'
+identifiant: contact_symfony
+titre: 'Contact form'
+descriptif: ''
+css: ''
+message_retour: '<multi>[en]Thank you for contacting us![fr]Merci de nous avoir contactés !</multi>'
+saisies:
+  -
+    options: { label: '<multi>[en]Your Name[fr]Votre nom</multi>', placeholder: '<multi>[en]First Last[fr]Prénom Nom</multi>', type: text, info_obligatoire: '*', size: '40', autocomplete: defaut, obligatoire: 'on', nom: input_1 }
+    identifiant: '@57ced83ce37ea'
+    saisie: input
+  -
+    options: { label: '<multi>[en]Job Function[fr]Fonction</multi>', type: text, info_obligatoire: '*', size: '40', autocomplete: defaut, obligatoire: 'on', nom: input_2 }
+    identifiant: '@57ced8cf52849'
+    saisie: input
+  -
+    options: { label: '<multi>[en]Company[fr]Société</multi>', type: text, info_obligatoire: '*', size: '40', autocomplete: defaut, obligatoire: 'on', nom: input_4 }
+    identifiant: '@57cf3f816910f'
+    saisie: input
+  -
+    options: { label: '<multi>[en]Address[fr]Adresse</multi>', rows: '5', cols: '40', nom: textarea_2 }
+    identifiant: '@57cfc1acd01ac'
+    saisie: textarea
+  -
+    options: { label: '<multi>[en]City[fr]Ville</multi>', type: text, info_obligatoire: '*', size: '40', autocomplete: defaut, obligatoire: 'on', nom: input_6 }
+    identifiant: '@57cf4126e26f0'
+    saisie: input
+  -
+    options: { label: '<multi>[en]Zip code[fr]Code Postal</multi>', type: text, info_obligatoire: '*', size: '40', autocomplete: defaut, obligatoire: 'on', nom: input_7 }
+    verifier: { type: code_postal, options: {  } }
+    identifiant: '@57cf42039c1c0'
+    saisie: input
+  -
+    options: { label: '<multi>[en]Country[fr]Pays</multi>', datas: "|Please Select...\r\nAfganistan|Afghanistan\r\nAlbania|Albania\r\nAlgeria|Algeria\r\nAmerican Samoa|American Samoa\r\nAndorra|Andorra\r\nAngola|Angola\r\nAnguilla|Anguilla\r\nAntigua & Barbuda|Antigua & Barbuda\r\nArgentina|Argentina\r\nArmenia|Armenia\r\nAruba|Aruba\r\nAustralia|Australia\r\nAustria|Austria\r\nAzerbaijan|Azerbaijan\r\nBahamas|Bahamas\r\nBahrain|Bahrain\r\nBangladesh|Bangladesh\r\nBarbados|Barbados\r\nBelarus|Belarus\r\nBelgium|Belgium\r\nBelize|Belize\r\nBenin|Benin\r\nBermuda|Bermuda\r\nBhutan|Bhutan\r\nBolivia|Bolivia\r\nBonaire|Bonaire\r\nBosnia & Herzegovina|Bosnia & Herzegovina\r\nBotswana|Botswana\r\nBrazil|Brazil\r\nBritish Indian Ocean Ter|British Indian Ocean Ter\r\nBrunei|Brunei\r\nBulgaria|Bulgaria\r\nBurkina Faso|Burkina Faso\r\nBurundi|Burundi\r\nCambodia|Cambodia\r\nCameroon|Cameroon\r\nCanada|Canada\r\nCanary Islands|Canary Islands\r\nCape Verde|Cape Verde\r\nCayman Islands|Cayman Islands\r\nCentral African Republic|Central African Republic\r\nChad|Chad\r\nChannel Islands|Channel Islands\r\nChile|Chile\r\nChina|China\r\nChristmas Island|Christmas Island\r\nCocos Island|Cocos Island\r\nColombia|Colombia\r\nComoros|Comoros\r\nCongo|Congo\r\nCook Islands|Cook Islands\r\nCosta Rica|Costa Rica\r\nCote DIvoire|Cote D'Ivoire\r\nCroatia|Croatia\r\nCuba|Cuba\r\nCuraco|Curacao\r\nCyprus|Cyprus\r\nCzech Republic|Czech Republic\r\nDenmark|Denmark\r\nDjibouti|Djibouti\r\nDominica|Dominica\r\nDominican Republic|Dominican Republic\r\nEast Timor|East Timor\r\nEcuador|Ecuador\r\nEgypt|Egypt\r\nEl Salvador|El Salvador\r\nEquatorial Guinea|Equatorial Guinea\r\nEritrea|Eritrea\r\nEstonia|Estonia\r\nEthiopia|Ethiopia\r\nFalkland Islands|Falkland Islands\r\nFaroe Islands|Faroe Islands\r\nFiji|Fiji\r\nFinland|Finland\r\nFrance|France\r\nFrench Guiana|French Guiana\r\nFrench Polynesia|French Polynesia\r\nFrench Southern Ter|French Southern Ter\r\nGabon|Gabon\r\nGambia|Gambia\r\nGeorgia|Georgia\r\nGermany|Germany\r\nGhana|Ghana\r\nGibraltar|Gibraltar\r\nGreat Britain|Great Britain\r\nGreece|Greece\r\nGreenland|Greenland\r\nGrenada|Grenada\r\nGuadeloupe|Guadeloupe\r\nGuam|Guam\r\nGuatemala|Guatemala\r\nGuinea|Guinea\r\nGuyana|Guyana\r\nHaiti|Haiti\r\nHawaii|Hawaii\r\nHonduras|Honduras\r\nHong Kong|Hong Kong\r\nHungary|Hungary\r\nIceland|Iceland\r\nIndia|India\r\nIndonesia|Indonesia\r\nIran|Iran\r\nIraq|Iraq\r\nIreland|Ireland\r\nIsle of Man|Isle of Man\r\nIsrael|Israel\r\nItaly|Italy\r\nJamaica|Jamaica\r\nJapan|Japan\r\nJordan|Jordan\r\nKazakhstan|Kazakhstan\r\nKenya|Kenya\r\nKiribati|Kiribati\r\nKorea North|Korea North\r\nKorea Sout|Korea South\r\nKuwait|Kuwait\r\nKyrgyzstan|Kyrgyzstan\r\nLaos|Laos\r\nLatvia|Latvia\r\nLebanon|Lebanon\r\nLesotho|Lesotho\r\nLiberia|Liberia\r\nLibya|Libya\r\nLiechtenstein|Liechtenstein\r\nLithuania|Lithuania\r\nLuxembourg|Luxembourg\r\nMacau|Macau\r\nMacedonia|Macedonia\r\nMadagascar|Madagascar\r\nMalaysia|Malaysia\r\nMalawi|Malawi\r\nMaldives|Maldives\r\nMali|Mali\r\nMalta|Malta\r\nMarshall Islands|Marshall Islands\r\nMartinique|Martinique\r\nMauritania|Mauritania\r\nMauritius|Mauritius\r\nMayotte|Mayotte\r\nMexico|Mexico\r\nMidway Islands|Midway Islands\r\nMoldova|Moldova\r\nMonaco|Monaco\r\nMongolia|Mongolia\r\nMontserrat|Montserrat\r\nMorocco|Morocco\r\nMozambique|Mozambique\r\nMyanmar|Myanmar\r\nNambia|Nambia\r\nNauru|Nauru\r\nNepal|Nepal\r\nNetherland Antilles|Netherland Antilles\r\nNetherlands|Netherlands (Holland, Europe)\r\nNevis|Nevis\r\nNew Caledonia|New Caledonia\r\nNew Zealand|New Zealand\r\nNicaragua|Nicaragua\r\nNiger|Niger\r\nNigeria|Nigeria\r\nNiue|Niue\r\nNorfolk Island|Norfolk Island\r\nNorway|Norway\r\nOman|Oman\r\nPakistan|Pakistan\r\nPalau Island|Palau Island\r\nPalestine|Palestine\r\nPanama|Panama\r\nPapua New Guinea|Papua New Guinea\r\nParaguay|Paraguay\r\nPeru|Peru\r\nPhillipines|Philippines\r\nPitcairn Island|Pitcairn Island\r\nPoland|Poland\r\nPortugal|Portugal\r\nPuerto Rico|Puerto Rico\r\nQatar|Qatar\r\nRepublic of Montenegro|Republic of Montenegro\r\nRepublic of Serbia|Republic of Serbia\r\nReunion|Reunion\r\nRomania|Romania\r\nRussia|Russia\r\nRwanda|Rwanda\r\nSt Barthelemy|St Barthelemy\r\nSt Eustatius|St Eustatius\r\nSt Helena|St Helena\r\nSt Kitts-Nevis|St Kitts-Nevis\r\nSt Lucia|St Lucia\r\nSt Maarten|St Maarten\r\nSt Pierre & Miquelon|St Pierre & Miquelon\r\nSt Vincent & Grenadines|St Vincent & Grenadines\r\nSaipan|Saipan\r\nSamoa|Samoa\r\nSamoa American|Samoa American\r\nSan Marino|San Marino\r\nSao Tome & Principe|Sao Tome & Principe\r\nSaudi Arabia|Saudi Arabia\r\nSenegal|Senegal\r\nSeychelles|Seychelles\r\nSierra Leone|Sierra Leone\r\nSingapore|Singapore\r\nSlovakia|Slovakia\r\nSlovenia|Slovenia\r\nSolomon Islands|Solomon Islands\r\nSomalia|Somalia\r\nSouth Africa|South Africa\r\nSpain|Spain\r\nSri Lanka|Sri Lanka\r\nSudan|Sudan\r\nSuriname|Suriname\r\nSwaziland|Swaziland\r\nSweden|Sweden\r\nSwitzerland|Switzerland\r\nSyria|Syria\r\nTahiti|Tahiti\r\nTaiwan|Taiwan\r\nTajikistan|Tajikistan\r\nTanzania|Tanzania\r\nThailand|Thailand\r\nTogo|Togo\r\nTokelau|Tokelau\r\nTonga|Tonga\r\nTrinidad & Tobago|Trinidad & Tobago\r\nTunisia|Tunisia\r\nTurkey|Turkey\r\nTurkmenistan|Turkmenistan\r\nTurks & Caicos Is|Turks & Caicos Is\r\nTuvalu|Tuvalu\r\nUganda|Uganda\r\nUkraine|Ukraine\r\nUnited Arab Erimates|United Arab Emirates\r\nUnited Kingdom|United Kingdom\r\nUnited States of America|United States of America\r\nUraguay|Uruguay\r\nUzbekistan|Uzbekistan\r\nVanuatu|Vanuatu\r\nVatican City State|Vatican City State\r\nVenezuela|Venezuela\r\nVietnam|Vietnam\r\nVirgin Islands (Brit)|Virgin Islands (Brit)\r\nVirgin Islands (USA)|Virgin Islands (USA)\r\nWake Island|Wake Island\r\nWallis & Futana Is|Wallis & Futana Is\r\nYemen|Yemen\r\nZaire|Zaire\r\nZambia|Zambia\r\nZimbabwe|Zimbabwe", info_obligatoire: '*', obligatoire: 'on', nom: selection_1 }
+    identifiant: '@57ceda5356004'
+    saisie: selection
+  -
+    options: { label: '<multi>[en]Email address[fr]Adresse Mail</multi>', defaut: '@', type: text, info_obligatoire: '*', size: '40', autocomplete: defaut, obligatoire: 'on', nom: input_3 }
+    identifiant: '@57cedae3b025d'
+    saisie: input
+  -
+    options: { label: '<multi>[en]Telephone[fr]Téléphone</multi>', type: text, info_obligatoire: '*', size: '40', autocomplete: defaut, obligatoire: 'on', nom: input_8 }
+    verifier: { type: telephone, options: '' }
+    identifiant: '@57cf42c3eae9c'
+    saisie: input
+  -
+    options: { label: '<multi>[en]Interested by[fr]Intérêt</multi>', explication: '<multi>[en]Check the items of interest[fr]Indiquez les choix qui vous intéressent</multi>', datas: "IPs|<multi>[en]Intellectual Property blocks[fr]Blocs IP</multi>\r\nTrainings|<multi>[en]Training Courses[fr]Formations</multi>\r\nDesign|<multi>[en]Design Services[fr]Services de Conception</multi>\r\nBoards|<multi>[en]Board & Kits[fr]Cartes et Kits</multi>\r\nLicensing|<multi>[en]IP Licensing[fr]Licence IP</multi>\r\nIP_Eval|<multi>[en]IP Evaluation[fr]Evaluation IP</multi>\r\nOther|<multi>[en]Other (specify below)[fr]Autres (préciser ci-dessous)</multi>", choix_alternatif_label: 'Autre choix', nom: checkbox_1 }
+    identifiant: '@57cedbb1d7557'
+    saisie: checkbox
+  -
+    options: { label: '<multi>[en]Your message[fr]Votre message</multi>', rows: '5', cols: '40', nom: textarea_1 }
+    identifiant: '@57cedb444e085'
+    saisie: textarea
+traitements:
+  email:
+    champ_sujet: ''
+    champ_sujet_valeurs_brutes: ''
+    exclure_champs_email: ''
+    pj: ''
+    masquer_liens: ''
+    activer_ip: 'on'
+    champ_destinataires: ''
+    destinataires_plus: jojo@toto.net
+    destinataires_selon_champ: ''
+    champ_courriel_destinataire_form: ''
+    champ_courriel: input_3
+    activer_vrai_envoyeur: 'on'
+    champ_nom: '@input_1@'
+    activer_accuse: 'on'
+    sujet_accuse: ''
+    courriel_envoyeur_accuse: ''
+    nom_envoyeur_accuse: ''
+  enregistrement:
+    resume_reponse: ''
+    multiple: 'on'
+    modifiable: ''
+    identification: cookie
+    anonymiser: ''
+    anonymiser_variable: ''
+    ip: 'on'
+    moderation: posteriori
+    analyse_exclure_champs: ''
+    effacement: ''
+    effacement_delai: ''
+    invalider: ''
+public: non
+apres: valeurs
+unicite: ''
+message_erreur_unicite: ''
+url_redirect: ''
+statut: publie
+date_creation: '2016-09-06 17:10:15'
+maj: '2018-06-13 20:43:20'
+composition: ''
+composition_lock: '0'

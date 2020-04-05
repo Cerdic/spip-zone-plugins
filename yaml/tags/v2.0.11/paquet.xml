@@ -1,0 +1,29 @@
+<paquet
+	prefix="yaml"
+	categorie="outil"
+	version="2.0.11"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="yaml.png"
+	documentation="https://contrib.spip.net/Le-plugin-YAML-v2"
+>
+
+	<nom>YAML</nom>
+	<!-- Un format de fichier simple pour éditer des listes de données -->
+
+	<auteur>Fil</auteur>
+	<auteur lien="http://blog.smellup.net/">Eric Lupinacci</auteur>
+
+	<credit lien="http://yaml.org/">yaml.org</credit>
+	<credit lien="https://github.com/mustangostang/spyc/">Spyc</credit>
+	<credit lien="https://github.com/fabpot-graveyard/yaml">Symfony YAML v1 - Fabien Potencier</credit>
+	<credit lien="https://symfony.com/doc/current/components/yaml.html">Symfony YAML v4 - Fabien Potencier</credit>
+	<credit lien="https://pecl.php.net/package/yaml">PECL YAML - The PHP Group</credit>
+	<credit lien="https://github.com/yaml/libyaml">LibYAML </credit>
+
+	<licence lien="http://opensource.org/licenses/mit-license.php">MIT</licence>
+
+	<spip compatibilite="[3.1.0;[">
+		<necessite nom="php" compatibilite="[5.3.0;[" />
+	</spip>
+</paquet>

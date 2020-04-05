@@ -1,0 +1,49 @@
+-
+  saisie: 'selection_selon_plugin'
+  options:
+    nom: 'branche'
+    label: '<:aveline:label_liste_articles:>'
+    defaut: 'tous'
+    cacher_option_intro: 'oui'
+    datas:
+      tous: '<:aveline:item_articles_tous:>'
+      meme_rubrique: '<:aveline:item_meme_rubrique:>'
+      meme_rubrique_indirects: '<:aveline:item_meme_rubrique_indirects:>'
+      meme_rubrique_complete: '<:aveline:item_meme_rubrique_complete:>'
+      rubrique_specifique: '<:aveline:item_rubrique_specifique:>'
+      rubrique_specifique_indirects: '<:aveline:item_rubrique_specifique_indirects:>'
+      rubrique_specifique_complete: '<:aveline:item_rubrique_specifique_complete:>'
+      branche_actuelle: '<:aveline:item_branche_actuelle:>'
+      branche_complete: '<:aveline:item_branche_complete:>'
+      branche_specifique: '<:aveline:item_branche_specifique:>'
+      branche_specifique_complete: '<:aveline:item_branche_specifique_complete:>'
+      meme_secteur: '<:aveline:item_meme_secteur:>'
+      secteur_specifique: '<:aveline:item_secteur_specifique:>'
+    datas-necessite:
+      meme_rubrique_indirects: 'polyhier'
+      meme_rubrique_complete: 'polyhier'
+      rubrique_specifique_indirects: 'polyhier'
+      rubrique_specifique_complete: 'polyhier'
+      branche_complete: 'polyhier'
+      branche_specifique_complete: 'polyhier'
+-
+  saisie: 'selecteur_rubrique'
+  options:
+    nom: 'rubrique_specifique'
+    label: '<:aveline:label_rubrique_specifique:>'
+    multiple: 'oui'
+    afficher_si: '@branche@ == "rubrique_specifique" | @branche@ == "rubrique_specifique_complete" | @branche@ == "rubrique_specifique_indirects"'
+-
+  saisie: 'selecteur_rubrique'
+  options:
+    nom: 'branche_specifique'
+    label: '<:aveline:label_branche_specifique:>'
+    multiple: 'oui'
+    afficher_si: '@branche@ == "branche_specifique" | @branche@ == "branche_specifique_complete"'
+-
+  saisie: 'secteur'
+  options:
+    nom: 'secteur_specifique'
+    label: '<:aveline:label_secteur_specifique:>'
+    multiple: 'oui'
+    afficher_si: '@branche@ == "secteur_specifique"'
