@@ -1,0 +1,58 @@
+<BOUCLE_doc (DOCUMENTS) {id_document} {tout}>
+[<!--(#REM)
+
+	Modele pour <doc> en dl/dt/dd
+	cf. http://pompage.net/pompe/listesdefinitions/
+
+	La largeur de la legende est egale a la largeur de l'image
+	avec un minimum de 120px, et un maximum de 350px.
+
+	Dans le cas d'une simple image (mode=image), on affiche
+	le document lui-meme, sans lien de telechargement
+-->]
+[(#ENV{mode_force,#MODE}|=={image}|oui)
+	#SET{fichier,#URL_DOCUMENT}
+	#SET{width,#LARGEUR}
+	#SET{height,#HAUTEUR}
+	#SET{url,#ENV{lien}}
+]
+[(#ENV{mode_force,#MODE}|=={image}|non)
+	[(#SET{fichier,[(#LOGO_DOCUMENT|extraire_attribut{src})]})]
+	[(#SET{width,[(#LOGO_DOCUMENT|extraire_attribut{width})]})]
+	[(#SET{height,[(#LOGO_DOCUMENT|extraire_attribut{height})]})]
+	#SET{url,#ENV{lien,#URL_DOCUMENT}}
+][<!--(#REM)
+
+
+	Si largeur ou hauteur fournit en parametre, redimensionner
+
+-->][
+(#ENV{largeur,0}|ou{#ENV{hauteur,0}})
+	#SET{fichier,#GET{fichier}|image_reduire{#ENV{largeur,0},#ENV{hauteur,0}}}
+	#SET{width,#GET{fichier}|largeur}
+	#SET{height,#GET{fichier}|hauteur}
+	#SET{fichier,#GET{fichier}|extraire_attribut{src}}
+][(#ENV{mode_force,#MODE}|=={image}|non)
+	[(#SET{alternative,[(#ENV{alt}|sinon{#TITRE|sinon{#ENV{lien}|sinon{<:info_document:>}}}|attribut_html)[(#ENV{lien}|?{'',' - '})][(#MIME_TYPE|match{^image/(gif|jpg|jpeg|png)}|non)[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]][(#MIME_TYPE|match{^image/(gif|jpg|jpeg|png)}|oui)<:accessibilite:voir_grand:>]]})]
+]
+[(#ENV{mode_force,#MODE}|=={image}|oui)
+	[(#SET{alternative,[(#ENV{alt}|sinon{#TITRE|sinon{#ENV{lien}}}|attribut_html)]})]
+]
+<dl class="spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok"[
+	style="float:(#ENV{align}|match{left|right});"]>
+<dt>[<a href="(#GET{url})"[
+	class="(#ENV{lien_class})"]
+	[ title="(#GET{alternative})"
+	][ type="(#ENV{lien}|?{#ENV{lien_mime},#MIME_TYPE})"][ lang="(#ENV{langue})"]>]
+	<img [(#INCLURE{fond=modeles/doc_alternative,alt=#GET{alternative}})] src="[(#GET{fichier})]" width="[(#GET{width})]" height="[(#GET{height})]"[(#DESCRIPTIF|oui) [(#ENV{legende}|?{longdesc="[(#URL_PAGE{longdesc,id=#ID_DOCUMENT}|parametre_url{'lang',#ENV{langue,#LANG}})]",longdesc="#desc-#ID_DOCUMENT"})]][ lang="(#ENV{langue})"] />
+	[(#GET{url}|?{</a>})]</dt>
+[(#DESCRIPTIF|oui)
+[<dt class="#EDIT{titre} spip_doc_titre"[ style="width:(#GET{width}|min{350}|max{120})px;"]><strong>(#ENV*{titre}|propre|PtoBR|sinon{#TITRE})</strong></dt>]
+]
+[(#DESCRIPTIF|non)
+[<dd class="#EDIT{titre} spip_doc_titre"[ style="width:(#GET{width}|min{350}|max{120})px;"]><strong>(#ENV*{titre}|propre|PtoBR|sinon{#TITRE})</strong></dd>]
+]
+[<dd id="desc-#ID_DOCUMENT" class="#EDIT{descriptif} spip_doc_descriptif"[ style="width:(#GET{width}|min{350}|max{120})px;"]>(#ENV*{legende}|propre|PtoBR|sinon{#DESCRIPTIF|PtoBR})[(#NOTES|PtoBR)]</dd>]
+</dl>
+
+</BOUCLE_doc>
