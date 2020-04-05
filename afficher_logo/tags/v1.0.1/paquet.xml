@@ -1,0 +1,18 @@
+<paquet
+	prefix="afficher_logo"
+	categorie="multimedia"
+	version="1.0.1"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="images/afficher_logo-32.png"
+	documentation="https://contrib.spip.net/?article4758"
+>	
+
+	<nom>Afficher logo</nom>
+	<!-- ce plugin offre des modèles pour afficher simplement des logos dans un texte -->
+
+	<auteur>chankalan</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	
+</paquet>
