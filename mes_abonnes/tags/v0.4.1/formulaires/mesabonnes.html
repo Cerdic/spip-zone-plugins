@@ -1,0 +1,43 @@
+<div class="formulaire_spip formulaire_mesabonnes ajax">
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[(#EDITABLE|oui)
+<form action="#ENV{action}" method="post"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+	  #SET{erreurs,#ENV**{erreurs}|table_valeur{mesabos_nom}}
+		<li class="editer editer_mesabos_nom[ (#GET{erreurs}|oui)erreur]">
+			<label for="mesabos_nom"><:nom:></label>
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<input type='text' name='mesabos_nom' id='mesabos_nom' value="#ENV{mesabos_nom}" class="text" />
+		</li>
+		
+    #SET{erreurs,#ENV**{erreurs}|table_valeur{mesabos_email}}
+		<li class="editer editer_mesabos_email obligatoire[ (#GET{erreurs}|oui)erreur]">
+			<label for="mesabos_email"><:email:></label>
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<input type='text' name='mesabos_email' id='mesabos_email' value="#ENV{mesabos_email}" class="text" />
+		</li>
+		
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{mesabos_subscribe}}
+		<li class="editer editer_mesabos_sub">
+      	[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<div class="choix">
+				<input type='radio' name='mesabos_subscribe' id='mesabos_subscribe' value="subscribe" class="radio"[(#ENV{type_abonnement}|=={subscribe}|oui) checked="checked"]/>
+				<label for="mesabos_subscribe"><:mesabonnes:subscribe:></label>
+			</div>
+			<div class="choix">
+				<input type='radio' name='mesabos_subscribe' id='mesabos_unsubscribe' value="unsubscribe" class="radio"[(#ENV{type_abonnement}|=={unsubscribe}|oui) checked="checked"]/>
+				<label for="mesabos_unsubscribe"><:mesabonnes:unsubscribe:></label>
+			</div>
+		</li>	
+	</ul>
+  [(#REM) Piege a robots spammeurs ]
+	<p style="display: none;">
+		<label for="nobot"><:antispam_champ_vide:></label>
+		<input type="text" class="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" />
+	</p>
+	<input type="hidden" name="mesabos_lang" value="#LANG" />	
+	<p class="boutons"><input type="submit" class="submit" value="<:mesabonnes:bouton_ok:>" /></p>
+</div></form>]
+</div>
