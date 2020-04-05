@@ -1,0 +1,21 @@
+<!-- Filtrer par listes de diffusion -->
+<B_listes>
+	[(#BOITE_OUVRIR{<h3><:mailsubscriber:titre_listes_de_diffusion:></h3>,simple})]
+	<ul class="liste-items">
+		<li class="item[(#ENV{id_mailsubscribinglist}|intval|non)on]">[(#SELF|parametre_url{id_mailsubscribinglist|s,''}|lien_ou_expose{<:mailsubscriber:label_toutes_les_listes:>,#ENV{id_mailsubscribinglist}|intval|non})]</li>
+	<BOUCLE_listes(MAILSUBSCRIBINGLISTS){statut!=poubelle}{par num titre,titre}>
+		<li class="item[(#ENV{id_mailsubscribinglist}|=={#ID_MAILSUBSCRIBINGLIST}|oui)on]">[(#SELF|parametre_url{s,''}|parametre_url{id_mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST}|lien_ou_expose{#TITRE,#ENV{id_mailsubscribinglist}|=={#ID_MAILSUBSCRIBINGLIST}})]
+		([(#IDENTIFIANT|mailsubscribers_compte_inscrits)])
+			[(#ENV{id_mailsubscribinglist}|=={#ID_MAILSUBSCRIBINGLIST}|oui)
+				[(#PLUGIN{spip_bonux}|oui)
+					[(#URL_ACTION_AUTEUR{mailsubscribers_export,valide-#ID_MAILSUBSCRIBINGLIST}|icone_horizontale{<:mailsubscriber:titre_export_mailsubscribers:>,mailsubscriber-24,export})]
+				]
+			]
+		</li>
+	</BOUCLE_listes>
+	</ul>
+
+	[(#URL_ECRIRE{mailsubscribinglists}|icone_horizontale{<:mailsubscribinglist:titre_mailsubscribinglists:>,mailsubscribinglist-24})]
+
+	#BOITE_FERMER
+</B_listes>

@@ -1,0 +1,28 @@
+[(#ID_MAILSUBSCRIBINGLIST|et{#AUTORISER{segmenter,mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST}}|sinon_interdire_acces)]
+#SET{redirect,#ENV{redirect}|sinon{#ID_MAILSUBSCRIBINGLIST|generer_url_entite{mailsubscribinglist}}}
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#GET{redirect}|icone_verticale{[(#VAL{mailsubscribinglist}|objet_info{texte_retour}|_T)],#VAL{mailsubscribinglist}|objet_info{icone_objet},'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	[
+		<:mailsubscribinglist:titre_mailsubscribinglist:>
+		<h1>(#INFO_TITRE{mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST})</h1>
+		[(#ID_SEGMENT|intval|?{mailsubscribinglist:icone_modifier_segment,mailsubscribinglist:icone_creer_segment}|_T)[(#ID_SEGMENT|intval|oui)<:info_numero_abbreviation:>#ID_SEGMENT]]
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_MAILSUBSCRIBINGLIST|generer_url_entite{mailsubscribinglist}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_MAILSUBSCRIBINGLIST_SEGMENT{#ID_MAILSUBSCRIBINGLIST,#ID_SEGMENT,#GET{redirect}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\]\]>*/</script>
+]
+</div>
+
+<div class="nettoyeur"></div>
+<INCLURE{fond=prive/squelettes/inclure/mailsubscribers-filtre,env,id_mailsubscribinglist=#ID_MAILSUBSCRIBINGLIST,id_segment=#ID_SEGMENT,ajax,retour=#SELF} />
+

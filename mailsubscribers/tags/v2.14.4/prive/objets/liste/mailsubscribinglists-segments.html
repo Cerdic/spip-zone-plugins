@@ -1,0 +1,48 @@
+<BOUCLE_mailsubscribinglist(MAILSUBSCRIBINGLISTS){id_mailsubscribinglist}{statut==.*}>
+<B_segments>
+<div class="liste-objets mailsubscribinglists-segments">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{mailsubscribinglist:info_1_segment,mailsubscribinglist:info_nb_segments}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='titre' scope='col'><:info_titre:></th>
+			<th class='criteres' scope='col'><:mailsubscribinglist:info_segment_filtres:></th>
+			<th class='update' scope='col'></th>
+			<th class='inscrits' scope='col'><:mailsubscriber:mailsubscribers_valide:></th>
+			<th class='id' scope='col'><:info_numero_abbreviation:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_segments(POUR){tableau #SEGMENTS**|unserialize}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='titre principale'>[(#AUTORISER{modifier,mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST}|?{[
+				<a href="(#URL_ECRIRE{mailsubscribinglist-segment_edit}
+				|parametre_url{id_mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST}|parametre_url{id_segment,#CLE})">#VALEUR{titre}</a>]
+				,#VALEUR{titre}})]
+			</td>
+			<td class='criteres'>[(#VALEUR**|mailsubscriber_afficher_filtre_segment)]</td>
+			<td class="update">
+				#SET{updating_progress,#ID_MAILSUBSCRIBINGLIST|mailsubscribers_is_updating_segment{#CLE}}
+				[(#GET{updating_progress}|oui)
+					[(#CHEMIN_IMAGE{resyncing-16.gif}|balise_img{[<:mailsubscribinglist:info_updating:> (#GET{updating_progress})]}|inserer_attribut{title,[<:mailsubscribinglist:info_updating:> (#GET{updating_progress})]})]
+				][(#GET{updating_progress}|non)
+				[(#VALEUR{auto_update}|oui)
+					[(#CHEMIN_IMAGE{resync-16.gif}|balise_img{<:mailsubscribinglist:label_auto_update_oui:>}|inserer_attribut{title,<:mailsubscribinglist:label_auto_update_oui:>})]
+				]
+				]
+			</td>
+			<td class='inscrits secondaire'>[(#IDENTIFIANT|mailsubscribers_compte_inscrits{valide,#CLE})]
+			</td>
+			<td class='id'>[(#AUTORISER{modifier,mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST}|?{[
+				<a href="(#URL_ECRIRE{mailsubscribinglist-segment_edit}
+				|parametre_url{id_mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST}|parametre_url{id_segment,#CLE})">#CLE</a>]
+				,#CLE})]</td>
+		</tr>
+	</BOUCLE_segments>
+	</tbody>
+</table>
+</div>
+</B_segments>[
+<div class="liste-objets mailsubscribinglists caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_segments>
+</BOUCLE_mailsubscribinglist>

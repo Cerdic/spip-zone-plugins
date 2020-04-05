@@ -1,0 +1,16 @@
+[(#AUTORISER{voir,mailsubscriber}|sinon_interdire_acces)]
+<h1 class="grostitre"><:mailsubscribinglist:titre_mailsubscribinglists:></h1>
+
+<INCLURE{fond=prive/objets/liste/mailsubscribinglists, env, ajax, sinon=<:mailsubscribinglist:info_aucun_mailsubscribinglist:>,statut=#LISTE{ouverte,fermee},nb=50}>
+
+[(#AUTORISER{creer,mailsubscribinglist})
+	[(#URL_ECRIRE{mailsubscribinglist_edit,new=oui}|icone_verticale{<:mailsubscribinglist:icone_creer_mailsubscribinglist:>,mailsubscribinglist,new,right})]
+]
+
+
+[(#ENV{importer,''}|oui)
+<div class="nettoyeur"></div>
+<div class="ajax">
+	#FORMULAIRE_IMPORTER_MAILSUBSCRIBERS
+</div>
+]

@@ -1,0 +1,13 @@
+<BOUCLE_mailsubscribinglist(MAILSUBSCRIBINGLISTS){id_mailsubscribinglist=#ENV{id}}{statut?}>
+<div class='infos'>
+#SET{texte_objet,#VAL{mailsubscribinglist}|objet_info{texte_objet}|_T}
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_MAILSUBSCRIBINGLIST</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST,'',#VAL{mailsubscribinglist}|objet_info{editable}})]
+
+[(#AUTORISER{creer,mailsubscribinglist})
+	[(#URL_ACTION_AUTEUR{dupliquer_mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST,#SELF}|icone_horizontale{<:mailsubscribinglist:icone_dupliquer_mailsubscribinglist:>,mailsubscribinglist-add})]
+]
+
+</div>
+</BOUCLE_mailsubscribinglist>

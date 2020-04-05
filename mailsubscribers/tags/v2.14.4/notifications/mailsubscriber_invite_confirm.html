@@ -1,0 +1,39 @@
+<BOUCLE_susc(MAILSUBSCRIBERS){id_mailsubscriber}{statut?}{tout}>
+<title>[(#VAL{mailsubscriber:confirmsubscribe_sujet_email}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP,titre,#TITRE}}|nettoyer_titre_email)]</title>
+<body>
+<div class="header">
+	<BOUCLE_titreliste(MAILSUBSCRIBINGLISTS){id_mailsubscribinglist}>
+	<p><:mailsubscriber:confirmsubscribe_titre_email_liste{titre_liste=#TITRE}:></p>
+	</BOUCLE_titreliste>
+	<p><:mailsubscriber:confirmsubscribe_titre_email:></p>
+	<//B_titreliste>
+</div>
+<p><:mailsubscriber:titre_bonjour:>[ (#NOM)],</p>
+
+[(#SET{email,<b>#EMAIL</b>})]
+[(#SET{invite_email_from,<b>#ENV{invite_email_from}</b>})]
+[(#SET{nom_site_spip,[<a href="[(#URL_SITE_SPIP|url_absolue)]">(#NOM_SITE_SPIP)</a>]})]
+<BOUCLE_titreliste2(MAILSUBSCRIBINGLISTS){id_mailsubscribinglist}>
+#SET{titre_liste, #TITRE_PUBLIC|sinon{##ID_MAILSUBSCRIBINGLIST}}
+<p><:mailsubscriber:confirmsubscribe_invite_texte_email_liste_1{invite_email_from=#GET{invite_email_from},email=#GET{email},nom_site_spip=#GET{nom_site_spip},titre_liste=#GET{titre_liste}}:></p>
+</BOUCLE_titreliste2>
+<p><:mailsubscriber:confirmsubscribe_invite_texte_email_1{invite_email_from=#GET{invite_email_from},email=#GET{email},nom_site_spip=#GET{nom_site_spip}}:></p>
+<//B_titreliste2>
+
+[<blockquote>
+(#INVITE_EMAIL_TEXT)
+[<br /> &mdash; (#INVITE_EMAIL_FROM)]
+</blockquote>]
+
+[(#SET{url,[<br><center>(#INCLURE{fond=emails/inc-button,url=[(#EMAIL*|mailsubscriber_url_confirm{#JETON*,#ID_MAILSUBSCRIBINGLIST}|url_absolue)],label=<:newsletter:bouton_subscribe:>,width=250px})</center><br>]})]
+<p>[(#VAL{mailsubscriber:confirmsubscribe_texte_email_2}|_T{#ARRAY{url_confirmsubscribe,#GET{url}},#ARRAY{sanitize,0}})]</p>
+
+
+<br />
+<br />
+<p><small><:mailsubscriber:confirmsubscribe_invite_texte_email_3{nom_site_spip=#GET{nom_site_spip}}:></small></p>
+
+
+</body>
+</BOUCLE_susc>
+#FILTRE{facteur_email_wrap_to_html}

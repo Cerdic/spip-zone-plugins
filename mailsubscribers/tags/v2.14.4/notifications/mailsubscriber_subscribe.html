@@ -1,0 +1,32 @@
+<BOUCLE_susc(MAILSUBSCRIBERS){id_mailsubscriber}{statut?}{tout}>
+<title>[(#VAL{mailsubscriber:subscribe_sujet_email}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP,titre,#TITRE}}|nettoyer_titre_email)]</title>
+<body>
+<div class="header">
+	<BOUCLE_titreliste(MAILSUBSCRIBINGLISTS){id_mailsubscribinglist}>
+	#SET{titre_liste, #TITRE_PUBLIC|sinon{##ID_MAILSUBSCRIBINGLIST}}
+	<p><:mailsubscriber:subscribe_titre_email_liste{titre_liste=#GET{titre_liste}}:></p>
+	</BOUCLE_titreliste>
+	<p><:mailsubscriber:subscribe_titre_email:></p>
+	<//B_titreliste>
+</div>
+<p><:mailsubscriber:titre_bonjour:>[ (#NOM)],</p>
+
+[(#SET{email,<b>#EMAIL</b>})]
+<BOUCLE_titreliste2(MAILSUBSCRIBINGLISTS){id_mailsubscribinglist}>
+<p><:mailsubscriber:subscribe_texte_email_liste_1{email=#GET{email},nom_site_spip=#GET{nom_site_spip},titre_liste=#GET{titre_liste}}:></p>
+</BOUCLE_titreliste2>
+<p><:mailsubscriber:subscribe_texte_email_1{email=#GET{email}}:></p>
+<//B_titreliste2>
+
+
+[(#SET{nom_site_spip,[<a href="[(#URL_SITE_SPIP|url_absolue)]">(#NOM_SITE_SPIP)</a>]})]
+<p><:mailsubscriber:subscribe_texte_email_2{nom_site_spip=#GET{nom_site_spip}}:></p>
+
+<br />
+<br />
+[(#SET{url,[<br><center>(#INCLURE{fond=emails/inc-button,url=[(#EMAIL*|mailsubscriber_url_unsubscribe{#JETON*,#ID_MAILSUBSCRIBINGLIST}|url_absolue)],label=<:newsletter:bouton_unsubscribe:>,width=250px,bgcolor=#aaaaaa,bordercolor=#888888})</center>]})]
+<p><small>[(#VAL{mailsubscriber:subscribe_texte_email_3}|_T{#ARRAY{url_unsubscribe,#GET{url}},#ARRAY{sanitize,0}})]</small></p>
+
+</body>
+</BOUCLE_susc>
+#FILTRE{facteur_email_wrap_to_html}

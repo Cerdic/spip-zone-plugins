@@ -1,0 +1,44 @@
+#BOITE_OUVRIR{'','raccourcis'}
+[(#URL_ECRIRE{mailsubscribers}|icone_horizontale{<:mailsubscriber:titre_mailsubscribers:>,mailsubscriber-24})]
+
+[(#AUTORISER{configurer,_mailsubscribers}|oui)
+[(#URL_ECRIRE{configurer_mailsubscribers}|icone_horizontale{<:mailsubscriberscfg:cfg_titre_parametrages:>,mailsubscribinglist-24})]
+]
+#BOITE_FERMER
+
+<B_statuts>
+[(#BOITE_OUVRIR{<:mailsubscriberscfg:legend_listes_automatiques:>,'raccourcis'})]
+
+	[(#URL_ACTION_AUTEUR{mailsubscribers_synchro_lists,all,#SELF}|icone_horizontale{<:mailsubscriber:force_synchronisation:>,mailsubscribinglist-synchro-24})]
+
+<BOUCLE_statuts(POUR)
+	{tableau #REM|mailsubscribers_liste_statut_auteur_possibles}
+	{si #AUTORISER{creer,mailsubscribinglist}}>
+
+	[(#URL_ACTION_AUTEUR{mailsubscribers_creer_liste,#CLE,#SELF}
+		|icone_horizontale{[<:mailsubscribinglist:icone_creer_mailsubscribinglist:> &laquo;(#VALEUR)&raquo;],mailsubscribinglist-24,new})]
+
+
+</BOUCLE_statuts>
+
+#BOITE_FERMER
+</B_statuts>
+
+
+[(#AUTORISER{exporter,_mailsubscribers}|oui)
+#BOITE_OUVRIR{'','raccourcis'}
+
+[(#PLUGIN{spip_bonux}|non)
+<p><:mailsubscriber:texte_import_export_bonux:></p>
+]
+[(#PLUGIN{spip_bonux}|oui)
+[(#URL_ACTION_AUTEUR{mailsubscribers_export,valide}|icone_horizontale{<:mailsubscriber:titre_export_mailsubscribers:>,mailsubscriber-24,export})]
+[(#URL_ACTION_AUTEUR{mailsubscribers_export,all}|icone_horizontale{<:mailsubscriber:titre_export_mailsubscribers_all:>,mailsubscriber-24,export})]
+
+[(#AUTORISER{importer,mailsubscriber}|oui)
+[(#SELF|parametre_url{importer,oui}|icone_horizontale{<:mailsubscriber:titre_import_mailsubscribers:>,mailsubscriber-24,import})]
+]
+]
+#BOITE_FERMER
+]
+

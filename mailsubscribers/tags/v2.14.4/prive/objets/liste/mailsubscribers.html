@@ -1,0 +1,41 @@
+[(#SET{defaut_tri,#ARRAY{
+	email,1, 
+	date,-1, 
+	id_mailsubscriber,1,
+	points,-1
+}})]<B_mailsubscribers>
+#ANCRE_PAGINATION
+[<h3>(#ENV*{titre_liste})</h3>]
+<div class="liste-objets mailsubscribers">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{mailsubscriber:info_1_mailsubscriber,mailsubscriber:info_nb_mailsubscribers}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class='email' scope='col'>[(#TRI{num email,<:mailsubscriber:label_email:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class='id' scope='col'>[(#TRI{id_mailsubscriber,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_mailsubscribers(MAILSUBSCRIBERS){id_mailsubscriber?}{id_mot?}{id_auteur?}{where?}{email?}{id_mailsubscribinglist?}{id_segment?}{filtre_statut_subscription?}{recherche?}{tri #ENV{par,num email},#GET{defaut_tri}}{par email}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{mailsubscriber-16.png}|balise_img)]</td>
+			<td class='statut'>[(#ENV{id_mailsubscribinglist}|?{#STATUT_SUBSCRIPTION|puce_statut{mailsubscriber},#STATUT|puce_statut{mailsubscriber,#ID_MAILSUBSCRIBER}})]</td>
+			<td class='email principale'>[(#LOGO_MAILSUBSCRIBER|image_reduire{20,26})]<a href="[(#ID_MAILSUBSCRIBER|generer_url_entite{mailsubscriber}|parametre_url{email,#ENV{email}})]" title="<:info_numero_abbreviation|attribut_html:> #ID_MAILSUBSCRIBER">[(#RANG). ]#EMAIL</a></td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
+			<td class='id'>[(#AUTORISER{modifier,mailsubscriber,#ID_MAILSUBSCRIBER}|?{
+				<a href="[(#URL_ECRIRE{mailsubscriber_edit,id_mailsubscriber=#ID_MAILSUBSCRIBER})]">#ID_MAILSUBSCRIBER</a>,
+				#ID_MAILSUBSCRIBER
+			})]</td>
+		</tr>
+	</BOUCLE_mailsubscribers>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_mailsubscribers>[
+[<h3>(#ENV*{titre_liste})</h3>]
+<div class="liste-objets mailsubscribers caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_mailsubscribers>

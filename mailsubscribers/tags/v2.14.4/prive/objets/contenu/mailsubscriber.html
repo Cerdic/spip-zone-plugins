@@ -1,0 +1,65 @@
+<BOUCLE_mailsubscriber(MAILSUBSCRIBERS){id_mailsubscriber}{statut?}>
+
+[<div class="champ contenu_email[ (#EMAIL*|strlen|?{'',vide})]">
+	<div class='label'><:mailsubscriber:label_email:> : </div>
+	<span dir='#LANG_DIR' class='#EDIT{email} email'>(#EMAIL)</span>
+</div>]
+
+[<div class="champ contenu_nom[ (#NOM*|strlen|?{'',vide})]">
+	<div class='label'><:mailsubscriber:label_nom:> : </div>
+	<span dir='#LANG_DIR' class='#EDIT{nom} nom'>(#NOM)</span>
+</div>]
+
+[<div class="champ contenu_lang[ (#LANG*|strlen|?{'',vide})]">
+	<div class='label'><:mailsubscriber:label_lang:> : </div>
+	<span dir='#LANG_DIR' class='#EDIT{lang} lang'>(#LANG|traduire_nom_langue)</span>
+</div>]
+
+#SET{segments_possibles,''}
+<B_sub>
+<div class="liste-objets mailsubscriptions">
+<table class="spip">
+	<thead>
+	<tr>
+		<th><:mailsubscriber:label_listes:></th>
+		<th></th>
+		<th><:mailsubscriber:label_inscription:></th>
+	</tr>
+	</thead>
+	<tbody>
+<BOUCLE_sub(mailsubscriptions){id_mailsubscriber}{par id_mailsubscribinglist,id_segment}>
+	[(#GET{segments_possibles}|non)
+		[(#ID_MAILSUBSCRIBINGLIST|unique{segments_possibles}|oui)
+			[(#AUTORISER{segmenter,mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST}) #SET{segments_possibles,' '}]
+		]
+	]
+	<tr>
+		<td><a href="[(#ID_MAILSUBSCRIBINGLIST|generer_url_entite{mailsubscribinglist})]">[(#INFO_IDENTIFIANT{mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST}|mailsubscribers_titre_segment{#ID_SEGMENT})]</a>[ \(<tt>(#ID_SEGMENT|non|?{#INFO_IDENTIFIANT{mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST}})</tt>\)]</td>
+		<td></td>
+		<td>[(#STATUT|puce_statut{mailsubscriber}) ][(#VAL{mailsubscriber}|statut_titre{#STATUT})]</td>
+	</tr>
+</BOUCLE_sub>
+	</tbody>
+</table>
+</div>
+</B_sub>
+
+[(#ID_MAILSUBSCRIBER|mailsubscriber_afficher_informations_liees{#EMAIL*}) #SET{segments_possibles,' '}]
+[(#GET{segments_possibles})
+	<div class="center">
+	[(#BOUTON_ACTION{<:mailsubscriber:bouton_actualiser_segments:>,#URL_ACTION_AUTEUR{actualiser_segments_mailsubscriber,#ID_MAILSUBSCRIBER,#SELF}})]
+	</div>
+]
+[<div class="champ contenu_optin[ (#OPTIN*|strlen|?{'',vide})]">
+	<div class='label'><:mailsubscriber:label_optin:> : </div>
+	<span dir='#LANG_DIR' class='#EDIT{optin} optin'><pre>(#OPTIN|nl2br)</pre></span>
+</div>]
+
+
+<h3>Envois</h3>
+
+<div class="dest_un_destinataire">
+<INCLURE{fond=prive/objets/liste/mailshots_destinataires,email=#ENV{email}|sinon{#EMAIL},nb=100,par=date,env,sinon=<:mailshot:info_aucun_envoi:>}>
+</div>
+
+</BOUCLE_mailsubscriber>

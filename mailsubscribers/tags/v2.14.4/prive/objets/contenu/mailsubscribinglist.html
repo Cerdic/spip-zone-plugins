@@ -1,0 +1,48 @@
+<BOUCLE_mailsubscribinglist(MAILSUBSCRIBINGLISTS){id_mailsubscribinglist}{statut?}>
+[(#IDENTIFIANT|mailsubscribers_liste_synchronisee|oui)
+<p class="success">
+	<:mailsubscriberscfg:info_liste_synchronisee_automatiquement:>
+</p>
+]
+
+[<div class="champ contenu_identifiant[ (#IDENTIFIANT*|strlen|?{'',vide})]">
+	<div class='label'><:mailsubscribinglist:label_identifiant:> : </div>
+	<span dir='#LANG_DIR' class='#EDIT{identifiant} identifiant'><tt>(#IDENTIFIANT)</tt></span>
+</div>]
+
+<div class="champ contenu_descriptif[ (#TITRE_PUBLIC*|strlen|?{'',vide})]">
+	<div class='label'><:mailsubscribinglist:label_titre_public:></div>
+	<div dir='#LANG_DIR' class='#EDIT{titre_public} titre_public'>[(#TITRE_PUBLIC)]</div>
+</div>
+
+<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+<div class='label'><:info_descriptif:></div>
+<div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>[(#DESCRIPTIF|image_reduire{500,0})]</div>
+</div>
+
+[(#ADRESSE_ENVOI_NOM|ou{#ADRESSE_ENVOI_EMAIL}|oui)
+[(#BOITE_OUVRIR{<:mailsubscribinglist:legend_configuration_adresse_envoi:>,simple})]
+]
+<div class="champ contenu_adresse_envoi_nom[ (#ADRESSE_ENVOI_NOM*|strlen|?{'',vide})]">
+	<div class='label'><:facteur:facteur_adresse_envoi_nom:></div>
+	<span dir='#LANG_DIR' class='#EDIT{adresse_envoi_nom} adresse_envoi_nom'>#ADRESSE_ENVOI_NOM</span>
+</div>
+<div class="champ contenu_adresse_envoi_email[ (#ADRESSE_ENVOI_EMAIL*|strlen|?{'',vide})]">
+	<div class='label'><:facteur:facteur_adresse_envoi_email:></div>
+	<span dir='#LANG_DIR' class='#EDIT{adresse_envoi_email} adresse_envoi_email'>#ADRESSE_ENVOI_EMAIL</span>
+</div>
+[(#ADRESSE_ENVOI_NOM|ou{#ADRESSE_ENVOI_EMAIL}|oui)
+#BOITE_FERMER
+]
+
+<div class="nettoyeur"></div>
+<INCLURE{fond=prive/objets/liste/mailsubscribinglists-segments,id_mailsubscribinglist=#ID_OBJET,env,ajax} />
+[(#AUTORISER{segmenter,mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST})
+	[(#URL_ECRIRE{mailsubscribinglist-segment_edit}
+		|parametre_url{id_mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST}
+		|parametre_url{id_segment,new}
+		|icone_verticale{<:mailsubscribinglist:icone_creer_segment:>,[(#VAL{mailsubscribinglist}|objet_info{icone_objet})],new,left})]
+]
+
+
+</BOUCLE_mailsubscribinglist>

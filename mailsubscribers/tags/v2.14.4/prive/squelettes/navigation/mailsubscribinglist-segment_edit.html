@@ -1,0 +1,10 @@
+[(#ID_MAILSUBSCRIBINGLIST|et{#ID_SEGMENT|intval}|et{#AUTORISER{segmenter,mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST}})
+#BOITE_OUVRIR{'',raccourcis}
+
+[(#URL_ACTION_AUTEUR{supprimer_mailsubscribinglist_segment,#ID_MAILSUBSCRIBINGLIST-#ID_SEGMENT,#ID_MAILSUBSCRIBINGLIST|generer_url_entite{mailsubscribinglist}}
+		|icone_horizontale{<:mailsubscribinglist:icone_supprimer_segment:>,[(#VAL{mailsubscribinglist}|objet_info{icone_objet})],del,danger})
+]
+
+
+#BOITE_FERMER
+]

@@ -1,0 +1,6 @@
+[(#REM) On réutilise la saisie checkbox ]
+#SET{datas,#ARRAY}
+<BOUCLE_datas(DATA){source table, #GET{options}|mailsubscribers_listes}>
+#SET{datas, #GET{datas}|array_merge{#ARRAY{#ID,#TITRE}}}
+</BOUCLE_datas>
+<INCLURE{fond=saisies-vues/checkbox, data=#GET{datas}, env} />

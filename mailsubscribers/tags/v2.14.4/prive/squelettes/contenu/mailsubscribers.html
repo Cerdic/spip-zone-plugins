@@ -1,0 +1,20 @@
+[(#AUTORISER{voir,mailsubscriber}|sinon_interdire_acces)]
+<h1 class="grostitre"><:mailsubscriber:titre_mailsubscribers:></h1>
+
+<BOUCLE_haslistes(MAILSUBSCRIBINGLISTS){statut==.*}{0,1}>
+<INCLURE{fond=prive/squelettes/inclure/mailsubscribers-filtre,env,ajax} />
+
+</BOUCLE_haslistes>
+<INCLURE{fond=prive/objets/liste/mailsubscribinglists, env, ajax, sinon=<:mailsubscribinglist:info_aucun_mailsubscribinglist:>}>
+
+[(#AUTORISER{creer,mailsubscribinglist})
+	[(#URL_ECRIRE{mailsubscribinglist_edit,new=oui}|icone_verticale{<:mailsubscribinglist:icone_creer_mailsubscribinglist:>,mailsubscribinglist,new,right})]
+]
+<//B_haslistes>
+
+[(#ENV{importer,''}|oui)
+<div class="nettoyeur"></div>
+<div class="ajax">
+	#FORMULAIRE_IMPORTER_MAILSUBSCRIBERS
+</div>
+]

@@ -1,0 +1,51 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1, 
+	identifiant,1, 
+	date,-1, 
+	id_mailsubscribinglist,1,
+	points,-1
+}})][(#SET{listes,[(#ENV{liste,''}|trim|?{[(^|,)(#ENV{liste})($|,)],'.*'})]})]<B_mailsubscribinglists>
+#ANCRE_PAGINATION
+<div class="liste-objets mailsubscribinglists">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{mailsubscribinglist:info_1_mailsubscribinglist,mailsubscribinglist:info_nb_mailsubscribinglists}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='titre' scope='col'>[(#TRI{num titre,<:info_titre:>,ajax})]</th>
+			<th class='identifiant' scope='col'>[(#TRI{identifiant,<:mailsubscribinglist:label_identifiant:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='inscrits' scope='col'><:mailsubscriber:mailsubscribers_valide:></th>
+			<th class='id' scope='col'>[(#TRI{id_mailsubscribinglist,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_mailsubscribinglists(MAILSUBSCRIBINGLISTS){id_mailsubscribinglist?}{identifiant?}{id_mot?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='statut'>[(#STATUT|puce_statut{mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST})]</td>
+			<td class='titre principale'>[(#LOGO_MAILSUBSCRIBINGLIST|image_reduire{20,26})]<a href="[(#ID_MAILSUBSCRIBINGLIST|generer_url_entite{mailsubscribinglist})]" title="<:info_numero_abbreviation|attribut_html:> #ID_MAILSUBSCRIBINGLIST">[(#RANG). ]#TITRE</a>
+			[<span class="soustitre">(#DESCRIPTIF|PtoBR)</span>]
+				[(#SEGMENTS**|unserialize|oui)
+				[<div class="small"><i>(#SEGMENTS**|unserialize|count|singulier_ou_pluriel{mailsubscribinglist:info_1_segment,mailsubscribinglist:info_nb_segments})</i></div>]
+				]
+			</td>
+			<td class='identifiant secondaire'>[<tt>(#IDENTIFIANT)</tt>]</td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
+			<td class='inscrits secondaire'>[(#IDENTIFIANT|mailsubscribers_compte_inscrits)]
+				[(#IDENTIFIANT|mailsubscribers_liste_synchronisee|oui)
+				[(#CHEMIN_IMAGE{resync-10.png}|balise_img{<:mailsubscriberscfg:info_liste_synchronisee_automatiquement:>}|inserer_attribut{title,<:mailsubscriberscfg:info_liste_synchronisee_automatiquement:>})]
+				]
+			</td>
+			<td class='id'>[(#AUTORISER{modifier,mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST}|?{
+				<a href="[(#URL_ECRIRE{mailsubscribinglist_edit,id_mailsubscribinglist=#ID_MAILSUBSCRIBINGLIST})]">#ID_MAILSUBSCRIBINGLIST</a>,
+				#ID_MAILSUBSCRIBINGLIST
+			})]</td>
+		</tr>
+	</BOUCLE_mailsubscribinglists>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_mailsubscribinglists>[
+<div class="liste-objets mailsubscribinglists caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_mailsubscribinglists>

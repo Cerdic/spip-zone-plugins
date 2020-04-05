@@ -1,0 +1,21 @@
+<BOUCLE_checkable(CONDITION){si #ENV{_listes_choix}}>
+#SET{name,listes}#SET{obli,'obligatoire'}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	[<label>(#ENV{label})</label>][
+	<span class='erreur_message'>(#GET{erreurs})</span>
+	]
+	<div class="row-fluid">
+	<BOUCLE_listes(MAILSUBSCRIBINGLISTS){identifiant IN #ENV{_listes_choix}}{statut=ouverte}>
+	#SET{val,#IDENTIFIANT}
+	<div class="choix span6">
+		[(#ENV{_checkable}|oui)
+		<input type="checkbox" name="#GET{name}#EVAL{chr(91)}#EVAL{chr(93)}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|in_any{#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+		]
+		<label for="#GET{name}_#GET{val}">[(#TITRE_PUBLIC|sinon{#TITRE})]</label>
+		[<div class="small">(#DESCRIPTIF|PtoBR)</div>]
+	</div>
+	[(#COMPTEUR_BOUCLE|alterner{'','<div class="clear"></div>'})]
+	</BOUCLE_listes>
+	</div>
+</li>
+</BOUCLE_checkable>

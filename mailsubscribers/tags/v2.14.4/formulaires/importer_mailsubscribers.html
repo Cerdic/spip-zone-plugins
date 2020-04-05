@@ -1,0 +1,86 @@
+<div class='formulaire_spip formulaire_importer formulaire_#FORM'>
+	<h3 class="titrem"><:mailsubscriber:titre_import_mailsubscribers:></h3>
+	[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</div>]
+	[<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</div>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype="multipart/form-data"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul class="editer-groupe">
+			#SET{fl,mailsubscriber}
+			#SET{name,file_import}#SET{obli,#ENV**{erreurs/test,''}|?{'',obligatoire}}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="file" name="#GET{name}" class="file text" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+			</li>
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:mailsubscriber:bouton_previsu_importer|attribut_html:>' /></p>
+
+		[
+		<ul class="editer-groupe">
+			<li class="fieldset">
+				<div style="width: 100%;overflow:auto;">
+				(#ENV**{erreurs/test}|propre)
+				</div>
+				<style>
+					.fieldset table.spip {width:100%;max-width: 100%;}
+				</style>
+			</li>
+			[(#ENV{erreurs/demander_listes}|oui)
+			#SET{name,listes_import_subscribers}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				<INCLURE{fond=formulaires/inc-check-subscribinglists,name=#GET{name},choix_listes=#ENV{_listes_dispo},env} />
+			</li>
+			]
+			[(#ENV{erreurs/demander_statut}|oui)
+			#SET{name,valid_subscribers}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				#SET{val,0}
+				<input type="hidden" name="#GET{name}" value="#GET{val}" />
+				#SET{val,1}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+				</div>
+			</li>
+			]
+			#SET{name,desactiver_notif}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				#SET{val,0}
+				<input type="hidden" name="#GET{name}" value="#GET{val}" />
+				#SET{val,1}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+				</div>
+			</li>
+			[(#AUTORISER{detruire}|oui)
+			#SET{name,vider_table}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				#SET{val,0}
+				<input type="hidden" name="#GET{name}" value="#GET{val}" />
+				#SET{val,1}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+				</div>
+			</li>
+			]
+		</ul>
+		<p class="boutons"><input type='submit' class='submit' name='go' value='<:mailsubscriber:bouton_importer|attribut_html:>' /></p>
+		]
+	</div></form>
+	]
+</div>

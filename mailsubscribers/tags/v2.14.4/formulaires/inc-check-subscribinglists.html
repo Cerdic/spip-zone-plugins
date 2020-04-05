@@ -1,0 +1,13 @@
+#SET{name,#ENV{name}}#SET{defaut,''}
+<BOUCLE_listes(POUR){tableau #ENV{choix_listes}}>
+	#SET{val,#CLE}
+	[(#ENV{status,''}|non
+	  |ou{#ENV{status,''}|=={#VALEUR{status}}}
+	  |ou{#GET{val}|in_any{#ENV{#GET{name},#GET{defaut}}}})
+	<div class="choix">
+		<input type="checkbox" name="#GET{name}#EVAL{chr(91)}#EVAL{chr(93)}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|in_any{#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+		<label for="#GET{name}_#GET{val}">[(#VALEUR{titre}|typo)][ <i><small>((#VAL{}|concat{'mailsubscribinglist:texte_statut_',#VALEUR{status}|replace{open,ouverte}|replace{close,fermee}}|_T))</small></i>]</label>
+		[<p class="small">(#VALEUR{descriptif}|propre|PtoBR)</p>]
+	</div>
+	]
+</BOUCLE_listes>
