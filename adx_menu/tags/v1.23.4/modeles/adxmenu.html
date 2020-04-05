@@ -1,0 +1,45 @@
+<ul class="adxm adxmenu">
+<BOUCLE_adxm_secteurs(RUBRIQUES) 
+	{par num titre, titre} 
+	{id_rubrique IN (#ENV{adx_rub})}
+>
+	<li><a href="#URL_RUBRIQUE" title="[(#INTRODUCTION|supprimer_tags|sinon{#TITRE})]"[ class="(#EXPOSE)"]>[(#TITRE|couper{#ENV{couper},#ENV{couper_car}})]</a>
+		<B_adxm_articles_racine>
+		<ul>
+			<BOUCLE_adxm_articles_racine(ARTICLES) {id_rubrique} {par titre}>
+				<li><a href="#URL_ARTICLE" title="[(#SURTITRE|supprimer_tags|sinon{#TITRE})]"[ class="(#EXPOSE)"]>[(#TITRE|couper{#ENV{couper},#ENV{couper_car}})]</a></li>
+			</BOUCLE_adxm_articles_racine>
+			<BOUCLE_adxm_rubriques(RUBRIQUES) {id_parent} {par titre}>
+				<li><a href="#URL_RUBRIQUE" title="[(#INTRODUCTION|supprimer_tags|sinon{#TITRE})]"[ class="(#EXPOSE)"] <BOUCLE_adxm_a(ARTICLES) {id_rubrique} {par titre}></BOUCLE_adxm_a>[(#_adxm_a:TOTAL_BOUCLE|!={''}|oui) class="adxm_on"]<//B_adxm_a> >[(#TITRE|couper{#ENV{couper},#ENV{couper_car}})]</a>
+				<B_adxm_articles>
+				<ul>
+					<BOUCLE_adxm_articles(ARTICLES) {id_rubrique} {par titre}>
+						<li><a href="#URL_ARTICLE" title="[(#SURTITRE|supprimer_tags|sinon{#TITRE})]"[ class="(#EXPOSE)"]>[(#TITRE|couper{#ENV{couper},#ENV{couper_car}})]</a></li>
+					</BOUCLE_adxm_articles>
+				</ul>
+				</B_adxm_articles>
+				</li>
+			</BOUCLE_adxm_rubriques>
+		</ul>
+		</B_adxm_articles_racine>
+
+		<B_adxm_rubriques_secteur_vide>
+		<ul>
+			<BOUCLE_adxm_rubriques_secteur_vide(RUBRIQUES) {id_parent} {par titre}>
+				<li><a href="#URL_RUBRIQUE" title="[(#INTRODUCTION|supprimer_tags|sinon{#TITRE})]"[ class="(#EXPOSE)"] <BOUCLE_adxm_a_bis(ARTICLES) {id_rubrique} {par titre}></BOUCLE_adxm_a_bis>[(#_adxm_a_bis:TOTAL_BOUCLE|!={''}|oui) class="adxm_on"]<//B_adxm_a_bis> >[(#TITRE|couper{#ENV{couper},#ENV{couper_car}})]</a>
+				<B_adxm_articles_bis>
+				<ul>
+					<BOUCLE_adxm_articles_bis(ARTICLES) {id_rubrique} {par titre}>
+						<li><a href="#URL_ARTICLE" title="[(#SURTITRE|supprimer_tags|sinon{#TITRE})]"[ class="(#EXPOSE)"]>[(#TITRE|couper{#ENV{couper},#ENV{couper_car}})]</a></li>
+					</BOUCLE_adxm_articles_bis>
+				</ul>
+				</B_adxm_articles_bis>
+				</li>
+			</BOUCLE_adxm_rubriques_secteur_vide>
+		</ul>
+		</B_adxm_rubriques_secteur_vide>
+
+		<//B_adxm_articles_racine>
+	</li>
+</BOUCLE_adxm_secteurs>
+</ul>

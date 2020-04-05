@@ -1,0 +1,31 @@
+<plugin>
+	<nom>ADX menu</nom>
+	<auteur>[Aleksandar Vacic->http://aplus.rs/adxmenu/] pour le script original - 
+	Mis en plugin pour SPIP par [Piero Wbmstr->https://contrib.spip.net/PieroWbmstr]</auteur>
+	<version>1.23.4</version>
+	<licence>[Creative Commons BY 3.0 Attribution->http://creativecommons.org/licenses/by/3.0/]</licence>
+	<lien>https://contrib.spip.net/ADX-Menu-un-joli-menu-deroulant</lien>
+	<icon>prive/themes/spip/images/adxmenu_36.png</icon>
+	<etat>stable</etat>
+	<description><multi>
+{{Multilevel opening menu type 'fly-out' in CSS/Javacript}}
+
+The plugin adds the new tag {{&#035;ADXMENU&#123;options&#125;}} and the "{{adxmenu.html}}" model for your SPIP skeletons, which brings up an elegant menu type '{fly-out}'. The generated menu style is customizable using CSS through class "{adxm adxmenu}" usable outside the model.
+
+An internal documentation page is available if the plugin is enabled : [->../?page=adxmenu_documentation_spip2].
+[fr]{{Menu ouvrant multi-niveaux type 'fly-out' en CSS/javascript}}
+
+Ce plugin ajoute la balise {{&#035;ADXMENU&#123;options&#125;}} et le mod&#232;le "{{adxmenu.html}}" pour vos squelettes SPIP, qui fait appara&#238;tre un menu &#233;l&#233;gant type '{fly-out}'. Le style du menu g&#233;n&#233;r&#233; est personnalisable par CSS, via la classe "{adxm adxmenu}" utilisable en dehors du mod&#232;le.
+
+Une documentation interne est disponible lorsque le plugin est actif sur la page publique [adxmenu_documentation->../?page=adxmenu_documentation_spip2].
+	</multi></description>
+	<options>adxmenu_options.php</options>
+	<prefix>adxmenu</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>adxmenu_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.0.0;3.2.99]" />
+	<utilise id="cfg" version="[1.11.0;]" />
+	<categorie>navigation</categorie>
+</plugin>

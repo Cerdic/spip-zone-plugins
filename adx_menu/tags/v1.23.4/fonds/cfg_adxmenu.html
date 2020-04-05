@@ -1,0 +1,77 @@
+<!-- titre=<:adxmenu:adxmenu:>-->
+<!-- icone=prive/themes/spip/images/adxmenu_16.png-->
+[(#SET{logo,
+<img src="#DOSSIER_SQUELETTE/../prive/themes/spip/images/adxmenu_36.png" width="36" height="37" alt="Logo <:adxmenu:adxmenu:>" style="float:#LANG_RIGHT;" />
+})]
+<!-- descriptif=
+#GET{logo}
+<h4><:adxmenu:titre_descr_cfg:></h4>
+<p><:adxmenu:descr_cfg|propre:></p>
+<br />
+<table class='cellule-h-table' cellpadding='0' style='vertical-align: middle'>
+<tr><td>
+<a href='#EVAL{ADXMENU_DOC_CONTRIB}' class='cellule-h'>
+	<span class='cell-i'>
+		<img src='#CHEMIN{prive/themes/spip/images/spip_contrib-24.gif}' alt="Contrib"  style='background: url(#CHEMIN{spip_contrib-24.gif}) center center no-repeat;' />
+	</span>
+</a>
+</td>
+<td class='cellule-h-lien'>
+	<a href='#EVAL{ADXMENU_DOC_CONTRIB}' class='cellule-h'><:adxmenu:doc_en_ligne:></a>
+</td></tr>
+<tr><td>
+<a href='#URL_PAGE{#EVAL{ADXMENU_DOC_SPIP2}}' class='cellule-h'>
+	<span class='cell-i'>
+		<img src='#CHEMIN{images/article-24.gif}' alt="Test"  style='background: url(#CHEMIN{images/article-24.gif}) center center no-repeat;' />
+	</span>
+</a>
+</td>
+<td class='cellule-h-lien'>
+	<a href='#URL_PAGE{#EVAL{ADXMENU_DOC_SPIP2}}' class='cellule-h'><:adxmenu:page_test:></a>
+</td></tr>
+</table>
+[<a href='#URL_PAGE{#EVAL{ADXMENU_DOC_SPIP2}}' target='_blank' title='<:adxmenu:page_test_in_new_window:>'><:adxmenu:new_window:></a>]
+<br />
+-->
+<!-- boite=<:adxmenu:titre_descr_cfg:>-->
+#CACHE{0}
+
+<div class="ajax formulaire_spip formulaire_configurer formulaire_configurer_adxmenu">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#SELF" id="top_tb_form"><div>
+	<div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+	<fieldset>
+	<legend>&nbsp;<b><:adxmenu:legend_cfg:></b>&nbsp;:</legend>
+
+		<br />
+	<p class="forml" style="width:98%">
+		<label for="adx"><strong><:adxmenu:cfgform_titre_adx:>&nbsp;:</strong></label>
+		<select name="adx" id="adx" class="forml">
+			<option value="htb"[ selected="(#ENV{adx,#EVAL{ADXMENU_OUVERTURE_DEFAUT}}|=={htb}|?{selected})"]><:adxmenu:htb:></option>
+			<option value="hbt"[ selected="(#ENV{adx,#EVAL{ADXMENU_OUVERTURE_DEFAUT}}|=={hbt}|?{selected})"]><:adxmenu:hbt:></option>
+			<option value="vlr"[ selected="(#ENV{adx,#EVAL{ADXMENU_OUVERTURE_DEFAUT}}|=={vlr}|?{selected})"]><:adxmenu:vlr:></option>
+			<option value="vrl"[ selected="(#ENV{adx,#EVAL{ADXMENU_OUVERTURE_DEFAUT}}|=={vrl}|?{selected})"]><:adxmenu:vrl:></option>
+		</select>
+	</p>
+
+	<p class="forml" style="width:98%">
+		<label for="liste_rub"><strong><:adxmenu:cfgform_titre_liste_rubriques:>&nbsp;:</strong></label>
+		<input type="text" class="text" name="liste_rub" id="liste_rub" value="#ENV{liste_rub,#EVAL{ADXMENU_RUB_DEFAUT}}" />
+		<br /><span style="font-size:.8em"><:adxmenu:cfgform_comment_liste_rubriques|traiter_raccourcis:></span>
+	</p>
+
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="fondo" title="<:adxmenu:enregistrer_les_modifications:>" />
+		<input type="reset" value="<:adxmenu:bouton_reset:>" class="fondo" title="<:adxmenu:effacer_les_modifications:>" />
+		<input type="submit" name="_cfg_delete" value="<:adxmenu:bouton_effacer:>" class="fondo" title="<:adxmenu:effacer_config_courante:>" />
+	</p>
+
+	</fieldset>
+
+</div></form>
+#CFG_ARBO{adxmenu}
+</div>

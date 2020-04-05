@@ -1,0 +1,107 @@
+[(#REM)
+	Les commentaires sont ceux de l'auteur
+	
+	Les styles du menu sont editables le fichier "adxmenu_css_styles.css.html"
+
+]#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=utf8}
+#HTTP_HEADER{Vary: Accept-Encoding}[
+(#SET{style,#ENV{type_menu,#EVAL{ADXMENU_OUVERTURE_DEFAUT}}})
+][(#SET{ouverture,[(#GET{style}|=={vlr}|sinon{#GET{style}|=={vrl}}|?{vertical,horizontal})]})
+]
+/* - - - Reset des styles Zpip - - - */
+/* => on retire les defs CSS sur les .menu-liste et .menu-entree si .adxmenu */
+.adxmenu .menu-liste,
+.adxmenu .menu-liste .menu-entree,
+.adxmenu .menu-liste .menu-entree .menu-liste,
+.adxmenu .menu-liste .menu-entree .menu-entree, 
+#nav .adxmenu .menu-liste .menu-entree {margin:0;padding:0;border:0;}
+#nav .adxmenu li li.menu-entree {width: inherit;}
+
+/* - - - ADxMenu: BASIC styles [ MANDATORY ] - - - */
+/*<![CDATA[*/
+/* remove all list stylings */
+[(#GET{ouverture}|=={vertical}|oui)
+.adxmenu{ /* VERY IMPORTANT! Set this to appropriate value, either here on down in the design section */
+	width:10em;
+}]
+.adxmenu, .adxmenu ul, .adxmenu ul.menu-liste {
+	margin:0;
+	padding:0;
+	border:0;
+	list-style-type:none;
+	display:block;
+}
+.adxmenu li, .adxmenu li.menu-entree {
+	margin:0;
+	padding:0;
+	border:0;
+	display:block;[(#GET{ouverture}|=={horizontal}|oui)
+	float:left; /* move all main list items into one row, by floating them */]
+	position:relative; /* position each LI, thus creating potential IE.win overlap problem */
+	z-index:5; /* thus we need to apply explicit z-index here... */
+}
+.adxmenu li:hover, .adxmenu li.menu-entree:hover {
+	z-index:10000; /* ...and here. this makes sure active item is always above anything else in the menu */
+	white-space:normal; /* required to resolve IE7 :hover bug (z-index above is ignored if this is not present)
+		see http://www.tanfa.co.uk/css/articles/pure-css-popups-bug.asp for other stuff that work */
+}[(#GET{ouverture}|=={horizontal}|oui)
+
+.adxmenu li li{
+	float:none; /* items of the nested menus are kept on separate lines */
+}]
+.adxmenu ul, .adxmenu ul.menu-liste {
+	visibility: hidden; /* initially hide all submenus. */
+	position:absolute;
+	z-index:10;
+	[(#GET{style}|=={vrl}|?{right,left})]:0; /* while hidden, always keep them at the top left corner */
+	[(#GET{style}|=={hbt}|?{bottom,top})]:0; /* to avoid scrollbars as much as possible */
+}
+.adxmenu li:hover>ul, .adxmenu li:hover>ul.menu-liste {
+	visibility:visible; /* display submenu them on hover */
+	[(#GET{ouverture}|=={horizontal}|?{[(#GET{style}|=={hbt}|?{bottom,top})],[(#GET{style}|=={vrl}|?{right,left})]})]:100%; /* 1st level go below their parent item */
+}[(#GET{ouverture}|=={horizontal}|oui)
+.adxmenu li li:hover>ul, .adxmenu li li:hover>ul.menu-liste { /* 2nd+ levels go on the right side of the parent item */
+	[(#GET{style}|=={hbt}|?{bottom,top})]:0;
+	left:100%;
+}]
+
+/* -- float.clear --
+	force containment of floated LIs inside of UL */
+.adxmenu:after, .adxmenu ul:after {
+	content:".";
+	height:0;
+	display:block;
+	visibility:hidden;
+	overflow:hidden;
+	clear:both;
+}
+.adxmenu, .adxmenu ul { /* IE7 float clear: */
+	min-height:0;
+}
+/* -- float.clear.END --  */
+
+/* -- sticky.submenu --
+	it should not disappear when your mouse moves a bit outside the submenu
+	YOU SHOULD NOT STYLE the background of the ".adxmenu UL" or this feature may not work properly!
+	if you do it, make sure you 110% know what you do */
+.adxmenu ul {
+	background-image: url([(#CHEMIN{empty.gif}|url_absolue)]); /* required for sticky to work in IE6 and IE7 - due to their (different) hover bugs */
+	padding: [(#GET{style}|=={htb}|?{10,30})px] [(#GET{style}|=={vrl}|?{10,30})px] [(#GET{style}|=={hbt}|?{10,30})px] [(#GET{style}|=={vlr}|?{10,30})px];
+	margin: [(#GET{ouverture}|=={vertical}|?{-30px,[(#GET{style}|=={htb}|?{-10px,0})]})] [(#GET{style}|=={vrl}|?{-10px,0})] [(#GET{style}|=={hbt}|?{-10px,0})] [(#GET{ouverture}|=={horizontal}|?{-30px,[(#GET{style}|=={vlr}|?{-10px,0})]})];
+	/* background: #f00; */ /* uncomment this if you want to see the "safe" area.
+		you can also use to adjust the safe area to your requirement */
+}[(#GET{ouverture}|=={horizontal}|oui)
+.adxmenu ul ul {
+	padding: 30px 30px 30px 10px;
+	margin: [(#GET{style}|=={htb}|?{-30px,0})] 0 [(#GET{style}|=={hbt}|?{-30px,0})] -10px;
+}]
+/* -- sticky.submenu.END -- */
+
+[(#GET{ouverture}|=={horizontal}|oui)
+/* Fix for IE5/Mac \*//*/
+.adxmenu a {float:left;}
+/* End Fix */
+]
+
+/*]]>*/

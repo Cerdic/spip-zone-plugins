@@ -1,0 +1,40 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	
+<h3 class="titrem"><:adxmenu:adxmenu:></h3>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+
+<ul>
+
+	#SET{name,adx}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="#GET{name}"><:adxmenu:cfgform_titre_adx:></label>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<select name="adx" id="adx" class="forml verdana1">
+			<option value="htb"[ selected="(#ENV{adx,#EVAL{ADXMENU_OUVERTURE_DEFAUT}}|=={htb}|?{selected})"]><:adxmenu:htb:></option>
+			<option value="hbt"[ selected="(#ENV{adx,#EVAL{ADXMENU_OUVERTURE_DEFAUT}}|=={hbt}|?{selected})"]><:adxmenu:hbt:></option>
+			<option value="vlr"[ selected="(#ENV{adx,#EVAL{ADXMENU_OUVERTURE_DEFAUT}}|=={vlr}|?{selected})"]><:adxmenu:vlr:></option>
+			<option value="vrl"[ selected="(#ENV{adx,#EVAL{ADXMENU_OUVERTURE_DEFAUT}}|=={vrl}|?{selected})"]><:adxmenu:vrl:></option>
+		</select>
+	</li>	
+
+	#SET{name,liste_rub}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="liste_rub"><:adxmenu:cfgform_titre_liste_rubriques:></label>
+		<div class="explication"><:adxmenu:cfgform_comment_liste_rubriques|propre:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<input type="text" name="liste_rub" id="liste_rub" class="text" value="#ENV{liste_rub,#EVAL{ADXMENU_RUB_DEFAUT}}" />
+	</li>	
+
+</ul>
+
+<input type="hidden" name="_meta_casier" value="adxmenu" />
+<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+
+</div>
+</form>
+</div>

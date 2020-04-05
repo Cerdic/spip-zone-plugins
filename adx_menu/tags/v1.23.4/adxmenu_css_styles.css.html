@@ -1,0 +1,71 @@
+[(#REM)
+	Les commentaires sont ceux de l'auteur original
+	
+	PERSONNALISATION des styles du plugin ADX Menu pour SPIP ci-dessous 
+
+]#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=utf8}
+#HTTP_HEADER{Vary: Accept-Encoding}[
+(#SET{style,#ENV{type_menu,#EVAL{ADXMENU_OUVERTURE_DEFAUT}}})
+][(#SET{ouverture,[(#GET{style}|=={vlr}|sinon{#GET{style}|=={vrl}}|?{vertical,horizontal})]})
+]
+/*<![CDATA[*/
+
+/* - - - ADxMenu: DESIGN styles [ OPTIONAL, design your heart out :) ] - - - */
+
+.adxmenu, .adxmenu ul li {
+	color:#604a7f;
+	background:#eee;
+}[(#GET{ouverture}|=={vertical}|oui)
+
+.adxmenu {
+	width:8em;[
+	(#GET{style}|=={vrl}|oui)float:right;]
+}]
+
+.adxmenu ul {
+	width: 11em;
+}
+
+.adxmenu a {
+	text-decoration:none;
+	color:#604a7f;
+	padding: .4em 1em;
+	display:block;[
+	(#GET{ouverture}|=={horizontal}|oui)position: relative;]
+}
+
+.adxmenu a:hover, .adxmenu li:hover>a {
+	color:#f57900;
+}
+
+[(#GET{ouverture}|=={vertical}|?{.adxmenu li,.adxmenu li li})] { /* create borders around each item */
+	border: 1px solid #ddd;
+}[(#GET{ouverture}|=={vertical}|oui)
+
+.adxmenu>li + li {
+	border-top: 0;
+}]
+
+.adxmenu ul>li + li { /* and remove the top border on all but first item in the list */
+	border-top: 0;
+}
+
+.adxmenu li li:hover>ul { /* inset 2nd+ submenus, to show off overlapping */
+	[(#GET{style}|=={hbt}|?{bottom,top}): 5px;]
+	[(#GET{style}|=={vrl}|?{right,left}): 90%;]
+}
+
+/* special colouring for "Main menu:", and for "xx submenu" items in ADxMenu
+	placed here to clarify the terminology I use when referencing submenus in posts */
+[(#REM) 
+	Retire pour SPIP | Decommentez pour remettre cette option :
+		=> le premier item de chaque bloc n'a pas d'effet 'onMouseOver'
+]
+/*
+.adxmenu>li:first-child>a, .adxmenu li + li + li li:first-child>a {
+	color: #604a7f;
+}
+*/
+
+/*]]>*/
