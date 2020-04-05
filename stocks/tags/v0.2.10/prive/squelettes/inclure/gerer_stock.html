@@ -1,0 +1,21 @@
+<h2><:stocks:stock_gestion:></h2>
+<p class="explication">
+Gérez votre stock
+</p>
+
+[<div class="ajax">(#FORMULAIRE_GERER_STOCK{produit, #ID_PRODUIT, ajax=gestion_stock, env})</div>]
+
+<script>
+jQuery(function($){
+  $('form[name="formulaire_gerer_stock"]').on('submit',function(){
+      $(this).ajaxReload('gestion_stock', {
+          args:{objet:'produit',id_objet:#ID_PRODUIT}
+      });
+  });
+  $('form.btn_supprimer_stock').on('submit',function(){
+    $(this).ajaxReload('gestion_stock',{
+        args:{objet:'produit',id_objet: #ID_PRODUIT}
+      });
+  });
+});
+</script>

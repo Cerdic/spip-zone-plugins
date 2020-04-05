@@ -1,0 +1,131 @@
+<style type="text/css">
+table {
+	position: relative;
+}
+.txt-right {
+	text-align: right;
+}
+.txt-right input {
+	text-align: end;
+}
+td.actions {
+	padding:0;
+}
+.product-preview {
+	position: absolute;
+	max-width: 400px;
+	height: auto;
+	left: 15rem;
+	margin-top: -15rem;
+	z-index: 5000;
+	box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2)
+}
+.formulaire_gerer_stock {
+	padding-bottom: 8px;
+}
+
+.formulaire_gerer_stock .reponse_formulaire {
+	position: absolute;
+    display: block;
+    z-index: 100;
+    padding: 8px;
+    border: 1px solid;
+    margin-left: -50%;
+
+	text-align: center;
+}
+
+.formulaire_gerer_stock .reponse_formulaire_ok {
+	border-color: #22ff5d;
+	background-color: rgba(156, 237, 149, 0.4);
+}
+.formulaire_gerer_stock .reponse_formulaire_erreur {
+	border-color: #fc2729;
+	background-color: rgba(255, 15, 17, 0.4);
+}
+.formulaire_gerer_stock label {
+	display: block;
+	width: 100%;
+}
+.new,.edit {
+	border-right: 8px solid;
+	padding-right: 8px;
+}
+.new {
+	border-color: #6fd3ff;
+}
+.edit {
+	border-color: #89ebb6;
+}
+</style>
+
+<h1 class="grostitre">Gestion du stock</h1>
+
+<B_listProduits>
+#ANCRE_PAGINATION
+[<p class="pagination">(#PAGINATION{prive})</p>]
+<table>
+	<tr>
+		<th>Statut</th>
+		<th>Titre</th>
+		<th>Parent</th>
+		<th>Livrable</th>
+		<th>Ref.</th>
+		<th class="txt-right">Stock</th>
+	</tr>
+</thead>
+<tbody>
+<BOUCLE_listProduits(PRODUITS){!statut IN poubelle}{par date}{inverse}{pagination 50}>
+	<tr>
+		<td>
+				[(#STATUT|puce_statut{produit,#ID_PRODUIT,#ID_RUBRIQUE})]
+		</td>
+		<td>
+			<a href="#URL_ECRIRE{'produit',id_produit=#ID_PRODUIT}" class="js-product-preview" data-preview="[(#LOGO_PRODUIT|image_reduire{500,500}|extraire_attribut{src})]">#TITRE</a>
+		</td>
+		<td>
+			<a href="#URL_ECRIRE{'rubrique',id_rubrique=#ID_RUBRIQUE}">#INFO_TITRE{'rubrique',#ID_RUBRIQUE}</a>
+		</td>
+		<td>
+			[(#IMMATERIEL|?{'Immatériel','Livrable'})<br>]
+			<BOUCLE_livraison(CONDITION){si #PLUGIN{livraison}|et{#IMMATERIEL|=={0}}}>
+					<BOUCLE_modLivraison(LIVRAISONMODES spip_livraisonmodes_liens){objet=produit}{id_objet=#ID_PRODUIT}>
+					#TITRE<br>
+				</BOUCLE_modLivraison>livraison classique<//B_modLivraison>
+			</BOUCLE_livraison><//B_livraison>
+		</td>
+		<td>#REFERENCE</td>
+		<td class="txt-right actions">
+			<div class="ajax">
+				#FORMULAIRE_GERER_STOCK{'produit', #ID_PRODUIT}
+			</div>
+		</td>
+	</tr>
+</BOUCLE_listProduits>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</B_listProduits>
+<//B_listProduits>
+
+
+<script>
+jQuery(function($){
+	$('.formulaire_gerer_stock form').on('submit',function(){
+    	$(this).ajaxReload();
+  });
+	$('.js-product-preview').hover(
+		function(){
+			var preview = $('<img class="product-preview" src="'+$(this).data('preview')+'" style="opacity:0" />');
+			$(this).append(preview);
+			preview.animate({
+					opacity: 1
+				  }, 700 );
+		},
+		function(){
+			$(this).find('img').remove();
+		}
+	);
+
+});
+</script>
