@@ -1,0 +1,38 @@
+<h1>Liste l'arborescence des mots</h1>
+
+<p>
+	Pour tous les groupes de mots acceptant des mots arborescents,
+	ça suffira pour le test
+</p>
+
+<style>
+h1 { margin-top:2em; }
+h2 { border-bottom:2px solid black; }
+</style>
+
+
+<BOUCLE_groupes_arbos(GROUPES_MOTS){par num titre, titre}{mots_arborescents=oui}>
+<h2>#TITRE</h2>
+
+	<B_mots>
+		<ul>
+	<BOUCLE_mots(MOTS){racine}{id_groupe}{par num titre, titre}>
+		<li>
+			<strong>#TITRE</strong>
+			<B_enfants>
+				<ul>
+			<BOUCLE_enfants(MOTS){id_parent}{par num titre, titre}>
+					<li>
+						#TITRE
+					<BOUCLE_recursif(BOUCLE_enfants) />
+					</li>
+			</BOUCLE_enfants>
+			</ul>
+			</B_enfants>
+		</li>
+	</BOUCLE_mots>
+		</ul>
+	</B_mots>
+
+</BOUCLE_groupes_arbos>
+
