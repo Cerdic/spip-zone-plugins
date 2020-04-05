@@ -1,0 +1,47 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=xmlrpc -->
+#CACHE{0}
+<div class="formulaire_spip formulaire_config">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<ul>
+				<li class="editer_ferme[ (#ENV**{erreurs}|table_valeur{ferme}|oui)erreur]">
+					<label for="ferme"><:xmlrpc:label_ferme:></label>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ferme})</span>]
+					<div class="choix">
+						<input type="checkbox" name="ferme" class="checkbox" id="ferme"[(#ENV{ferme}|=={on}|oui)checked="checked"] />
+					</div>
+				</li>
+				<li class="editer_desactiver_rsd[ (#ENV**{erreurs}|table_valeur{desactiver_rsd}|oui)erreur]">
+					<label for="desactiver_rsd"><:xmlrpc:label_desactiver_rsd:></label>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{desactiver_rsd})</span>]
+					<div class="choix">
+						<input type="checkbox" name="desactiver_rsd" class="checkbox" id="desactiver_rsd"[(#ENV{desactiver_rsd}|=={on}|oui)checked="checked"] />
+						<label for="desactiver_rsd"><:xmlrpc:label_desactiver_rsd_long:></label>
+					</div>
+				</li>
+				<BOUCLE_si_plusieurs_apis(CONDITION){si #PIPELINE{xmlrpc_apis}|count|>{1}|oui}>
+				<li class="editer_api_preferee[ (#ENV**{erreurs}|table_valeur{api_preferee}|oui)erreur]">
+					<label for="api_preferee"><:xmlrpc:label_api_preferee:></label>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{api_preferee})</span>]
+					<B_apis>
+					<select name="api_preferee" id="api_preferee" class="texte">
+						<BOUCLE_apis(POUR){tableau #PIPELINE{xmlrpc_apis}}>
+						<option value="#VALEUR"[(#VALEUR|=={#ENV{api_preferee}}|oui)selected="selected"]>#VALEUR</option>
+						</BOUCLE_apis>
+					</select>
+					</B_apis>
+				</li>
+				</BOUCLE_si_plusieurs_apis>
+			</ul>
+			<p class="boutons">
+				<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />
+			</p>
+		</div>
+	</form>
+</div>
