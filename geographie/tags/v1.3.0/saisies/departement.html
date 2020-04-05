@@ -1,0 +1,55 @@
+[(#REM) 
+
+
+	Adaptation pour fonctionner avec le plugin pays.
+	
+	Parametres :
+	- class : classe(s) css ajoutes au select
+	- option_intro : chaine de langue de la premiere ligne vide ? (defaut:<:departement:label_selectionnez:>)
+	- cacher_option_intro : pas de premier option vide  (defaut:"")
+	- multiple : si oui, select multiple
+	- champ_valeur : quel champ utiliser pour remplir la valeur
+	
+	Exemple d'appel :
+	[(#SAISIE{departement, departement,
+		label=<:plugin:info_departement:>})]
+]
+<select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ (#ENV*{attributs})] >
+[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro,<:departement:label_selectionnez:>})]</option>]
+<BOUCLE_dept1(geo_departements){id_departement?}{par abbr}{abbr<21}{doublons}>
+	#SET{dept,#ABBR}
+	[(#ENV{champ_valeur}|=={id_departement}|oui)
+	#SET{dept,#ID_DEPARTEMENT}
+	]
+	[(#ENV{multiple}|non)
+	<option value="#GET{dept}"[(#GET{dept}|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]>#ABBR. #NOM</option>
+	]
+	[(#ENV{multiple}|oui)
+	<option value="#GET{dept}"[(#GET{dept}|in_array{#ENV{valeur,#ENV{defaut,#ARRAY}}}|oui) selected="selected"]>#ABBR. #NOM</option>
+	]
+</BOUCLE_dept1>
+<BOUCLE_dept2(geo_departements){id_departement?}{par abbr}{abbr IN 2A,2B}{doublons}>
+	#SET{dept,#ABBR}
+	[(#ENV{champ_valeur}|=={id_departement}|oui)
+	#SET{dept,#ID_DEPARTEMENT}
+	]
+	[(#ENV{multiple}|non)
+	<option value="#GET{dept}"[(#GET{dept}|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]>#ABBR. #NOM</option>
+	]
+	[(#ENV{multiple}|oui)
+	<option value="#GET{dept}"[(#GET{dept}|in_array{#ENV{valeur,#ENV{defaut,#ARRAY}}}|oui) selected="selected"]>#ABBR. #NOM</option>
+	]
+</BOUCLE_dept2>
+<BOUCLE_dept3(geo_departements){id_departement?}{par abbr}{doublons}>
+	#SET{dept,#ABBR}
+	[(#ENV{champ_valeur}|=={id_departement}|oui)
+	#SET{dept,#ID_DEPARTEMENT}
+	]
+	[(#ENV{multiple}|non)
+	<option value="#GET{dept}"[(#GET{dept}|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]>#ABBR. #NOM</option>
+	]
+	[(#ENV{multiple}|oui)
+	<option value="#GET{dept}"[(#GET{dept}|in_array{#ENV{valeur,#ENV{defaut,#ARRAY}}}|oui) selected="selected"]>#ABBR. #NOM</option>
+	]
+</BOUCLE_dept3>
+</select>

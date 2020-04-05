@@ -1,0 +1,50 @@
+<html>
+<head>
+  <title>Geo Autocomplete SPIP</title>
+  #INSERT_HEAD
+  
+<style type="text/css" >
+body{font-family:Verdana,Geneva,Sans,sans-serif;}
+</style>
+
+<script type="text/javascript">
+$(document).ready(function(){
+$("#codepostal").focus().autocomplete('#URL_PAGE{inc-codepostaux}');
+
+//on envoi le code postal dans l'url
+//le pays est france si une ville est entrée
+$("#ville").focus().autocomplete('#URL_PAGE{inc-villes}', {
+   extraParams: {
+       code_postal: function() { return $("#codepostal").val(); }
+   }
+}).result(function() {
+		$("#pays").val("France");
+	});
+
+$("#pays").focus().autocomplete('#URL_PAGE{inc-pays}', {
+   selectFirst: true,
+});
+
+
+  });
+</script>
+
+</head>
+<body>
+
+<div class="formulaire_spip">
+<form>
+			<label>Code postal:</label>
+			<input type="text" id="codepostal" />
+			<label>Ville:</label>
+			<input type="text" id="ville" />
+			<label>Pays:</label>
+			<input type="text" id="pays" />
+</form>
+</div>
+
+<h4>necessite le plugin selecteur generique SPIP</h4>
+
+</body>
+</html>
+

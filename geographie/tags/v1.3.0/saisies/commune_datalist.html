@@ -1,0 +1,26 @@
+[(#REM)
+
+	Selecteur de communes, sous forme de datalist.
+
+	Parametres :
+	- class : classe(s) css ajoutes au select
+	- option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+	- defaut : valeur par defaut si pas présente dans l'environnement
+	- valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+	- size : la taille du sélecteur (seulement si multiple)
+	- par : tri des communes
+	- id_departement : 1 un plusieurs IDs de départements
+	- id_pays : 1 ou plusieurs IDs de pays
+
+	Exemple d'appel :
+	[(#SAISIE{commune_datalist, commune,
+		label=<:plugin:info_commune:>})]
+]
+<input list="commune" name="#ENV{nom}" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"][ (#ENV*{attributs})]
+[value="(#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}})"]
+/>
+		<datalist id="commune">
+	<BOUCLE_geo_communes(GEO_COMMUNES){par #ENV{par, nom}, code_postal}{id_commune?}{id_departement?}{id_pays?}{recherche?}{tout}>
+		<option value="#ID_COMMUNE">#NOM \(#CODE_POSTAL\)</option>
+	</BOUCLE_geo_communes>
+		</datalist>
