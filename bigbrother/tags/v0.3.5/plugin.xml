@@ -1,0 +1,92 @@
+<plugin>
+	<nom>
+		Big Brother
+	</nom>
+	<auteur>
+ 		Les Développements Durables, kent1
+	</auteur>
+	<licence>GNU/GPL</licence>
+	<version>
+		0.3.5
+	</version>
+	<version_base>
+		0.2
+	</version_base>
+	<etat>
+		dev
+	</etat>
+	<icon>images/bigbrother.png</icon>
+	<description>
+		<multi>
+			[fr]Ce plugin permet de stocker en base de donn&#233;e la r&#233;alisation d'actions pr&#233;d&#233;finies 
+		(ex: visites de personnes, dur&#233; des visites, cr&#233;ation et modifications d'objets ...)
+			[en]This plugin allows you to store in a database the achievement of predefined actions 
+		(eg: visits of persons, length of visits, creation and modification of objects ...)
+		</multi>
+	</description>
+	<lien>https://contrib.spip.net/Plugin-Big-Brother</lien>
+	<prefix>
+		bigbrother
+	</prefix>
+	<options>bigbrother_options.php</options>
+	<fonctions>bigbrother_fonctions.php</fonctions>
+	<install>base/bigbrother_installation.php</install>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/bigbrother_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/bigbrother_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<inclure>bigbrother_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>bigbrother_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>bigbrother_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>bigbrother_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_insertion</nom>
+		<inclure>bigbrother_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>jquery_plugins</nom>
+		<inclure>bigbrother_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>bigbrother_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>bigbrother_autoriser.php</inclure>
+	</pipeline>
+
+	<bouton id='journal_stats' parent="statistiques_visites">
+		<icone>images/bigbrother-24.png</icone>
+		<titre>bigbrother:naviguer_journal_stats</titre>
+		<url>journal_stats</url>
+	</bouton>
+	<bouton id="journal_stats_21" parent="bando_reactions">
+		<icone>images/bigbrother-24.png</icone>
+		<titre>bigbrother:naviguer_journal_stats</titre>
+		<url>journal_stats</url>
+	</bouton>
+
+	<necessite id="cfg" version="[1.16.1;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
+	<necessite id="spip_bonux" version='[2.3.1;]' />
+	<necessite id="SPIP" version="[2.0.10;2.1.99]" />
+	<necessite id="lib:flot" src="http://www.flotcharts.org/downloads/flot-0.6.zip" />
+	<categorie>statistique</categorie>
+</plugin>
