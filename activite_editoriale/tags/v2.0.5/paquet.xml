@@ -1,0 +1,26 @@
+<paquet
+	prefix="activite_editoriale"
+	categorie="edition"
+	version="2.0.5"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="activite_editoriale.png"
+	schema="0.1"
+	documentation="https://contrib.spip.net/Activite-editoriale"
+>	
+
+	<nom>Activit&#233; &#233;ditoriale</nom>
+	
+
+	<auteur lien="http://www.clever-age.com/">Stéphanie Caron de Clever Age</auteur>
+	<auteur lien="http://www.maieul.net">Maïeul ROUQUETTE (amélioration)</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_champs_extras" inclure="base/activite_editoriale.php" />
+	<pipeline nom="taches_generales_cron" inclure="activite_editoriale_pipelines.php" />
+
+	<necessite nom="cextras" compatibilite="[3.4.1;[" />
+
+	<menu nom="activite_editoriale" titre="activite_editoriale:activite_editoriale" parent="menu_configuration" icone="activite_editoriale.png" />
+</paquet>
