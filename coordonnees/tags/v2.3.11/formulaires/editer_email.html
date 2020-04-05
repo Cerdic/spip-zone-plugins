@@ -1,0 +1,21 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_email,nouveau}'>
+	[(#CHEMIN_IMAGE{email-24.png}|balise_img{<:coordonnees:emails:>,cadre-icone})]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_email' value='#ENV{id_email}' />
+		<ul>
+			#GENERER_SAISIES{#ENV{_saisies}}
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>
+[(#ENV**{message_ok}|oui)
+<script type="text/javascript">jQuery(document).ready(function($) { ajaxReload('coordonnees', {args:{coordonnee:'', id_coordonnee:''}}); });</script>
+]

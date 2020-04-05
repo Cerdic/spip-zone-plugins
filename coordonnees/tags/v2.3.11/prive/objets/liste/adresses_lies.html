@@ -1,0 +1,58 @@
+#SET{id_adresse_exclue, #ENV{coordonnee}|=={adresse}|?{#ENV{id_coordonnee}}}
+<B_liste_adresses>
+#ANCRE_PAGINATION
+<div class="liste-objets adresses coordonnees lies">
+<table class='spip liste'>
+	<tbody>
+	<BOUCLE_liste_adresses(adresses_liens){id_adresse != #GET{id_adresse_exclue}}{objet}{id_objet}{pagination #ENV{nb,10}}>
+	<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+		[(#COMPTEUR_BOUCLE|=={1}|oui)<td class='picto' rowspan='#TOTAL_BOUCLE'></td>]
+		<BOUCLE_adresse(ADRESSES){id_adresse}>
+		<td class='titre principale'>
+			<div>
+				[<a href="[(#URL_ECRIRE{adresse_edit,id_adresse=#ID_ADRESSE})]">
+					<span><small><:info_numero_abbreviation:>(#ID_ADRESSE)</small></span>
+				</a>]
+				[ - <a href="[(#INFO_URL{adresse,#ID_ADRESSE})]">
+					<span class="#EDIT{titre} titre">(#TITRE)</span>
+				</a>]
+			</div>
+			<div>[(#TYPE|logo_type_adresse) ][(#TYPE|coordonnees_lister_types_adresses)]</div>
+		</td>
+		<td class='adresse'>
+			[<div class="#EDIT{voie} voie">(#VOIE)</div>]
+			[<div class="#EDIT{complement} complement">(#COMPLEMENT)</div>]
+			[<div class="#EDIT{boite_postale} boite_postale">(#BOITE_POSTALE)</div>]
+			[<div class="#EDIT{region} region">(#REGION)</div>]
+			<div>
+				[<span class="#EDIT{code_postal} code_postal">(#CODE_POSTAL)</span>]
+				[<span class="#EDIT{ville} ville">(#VILLE)</span>]
+			</div>
+			<B_pays><div class='pays nom_pays'><BOUCLE_pays(PAYS){code=#PAYS}>#NOM</BOUCLE_pays></div></B_pays>
+		</td>
+		[(#REM) Un coup pour les champs extras ]
+		[<td class="extra">(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{type,adresse,id_objet,#ID_ADRESSE,contexte,[(#ENV**|unserialize)]})],data,''})]})</td>]
+		[(#AUTORISER{modifier,adresse,#ID_ADRESSE}|et{#ENV{boutons_actions}}|oui)
+		<td class='action'>
+			<a onclick="ajaxReload('coordonnees', {args:{coordonnee:'adresse', id_coordonnee:'[(#ID_ADRESSE)]'}});" href="#coordonnees" title="<:coordonnees:modifier_adresse:>">
+			[(#CHEMIN_IMAGE{edit-16.png}|balise_img)]
+			</a>
+			[(#AUTORISER{associeradresse,#ID_ADRESSE}|oui)
+				[(#BOUTON_ACTION{
+					[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img)],
+					#URL_ACTION_AUTEUR{dissocier_adresse,#ID_ADRESSE/#OBJET/#ID_OBJET,#SELF},
+					'button link ajax','',
+					<:coordonnees:bouton_dissocier_adresse:>}
+				)]
+			]
+		</td>]
+		</BOUCLE_adresse>
+	</tr>
+	</BOUCLE_liste_adresses>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_adresses>[
+<div class="liste-objets adresses coordonnees caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_adresses>

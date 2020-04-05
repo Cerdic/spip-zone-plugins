@@ -1,0 +1,58 @@
+[(#SET{defaut_tri,#ARRAY{
+	numero,1, 
+	id_numero,1,
+	points,-1
+}})]
+#SET{id_numero_exclu, #ENV{coordonnee}|=={numero}|?{#ENV{id_coordonnee}}}
+<B_liste_numeros>
+#ANCRE_PAGINATION
+<div class="liste-objets numeros coordonnees lies">
+<table class='spip liste'>
+	<tbody>
+	<BOUCLE_liste_numeros(numeros_liens){id_numero != #GET{id_numero_exclu}}{objet}{id_objet}{pagination #ENV{nb,10}}>
+	<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+		[(#COMPTEUR_BOUCLE|=={1}|oui)<td class='picto' rowspan='#TOTAL_BOUCLE'></td>]
+		<BOUCLE_numero(NUMEROS){id_numero}>
+		<td class='titre principale'>
+			<div>
+				[<a href="[(#URL_ECRIRE{numero_edit,id_numero=#ID_NUMERO})]">
+					<span><small><:info_numero_abbreviation:>(#ID_NUMERO)</small></span>
+				</a>]
+				[ - <a href="[(#INFO_URL{numero,#ID_NUMERO})]">
+					<span class="#EDIT{titre} titre">(#TITRE)</span>
+				</a>]
+			</div>
+			<div>[(#TYPE|logo_type_numero) ][(#TYPE|coordonnees_lister_types_numeros)]</div>
+		</td>
+		<td class='numero'>
+			[<div class="#EDIT{numero}">(#NUMERO)</div>]
+		</td>
+		[(#REM) Un coup pour les champs extras ]
+		[<td class="extras">
+			(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{type,numero,id_objet,#ID_NUMERO,contexte,[(#ENV**|unserialize)]})],data,''})]})
+		</td>]
+		[(#AUTORISER{modifier,numero,#ID_NUMERO}|et{#ENV{boutons_actions}}|oui)
+		<td class='action'>
+			<a onclick="ajaxReload('coordonnees', {args:{coordonnee:'numero', id_coordonnee:'[(#ID_NUMERO)]'}});" href="#coordonnees" title="<:coordonnees:modifier_numero:>">
+			[(#CHEMIN_IMAGE{edit-16.png}|balise_img)]
+			</a>
+			[(#AUTORISER{associernumero,#ID_NUMERO}|oui)
+				[(#BOUTON_ACTION{
+					[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img)],
+					#URL_ACTION_AUTEUR{dissocier_numero,#ID_NUMERO/#OBJET/#ID_OBJET,#SELF},
+					'button link ajax','',
+					<:coordonnees:bouton_dissocier_numero:>}
+				)]
+			]
+		</td>
+		]
+		</BOUCLE_numero>
+	</tr>
+	</BOUCLE_liste_numeros>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_numeros>[
+<div class="liste-objets coordonnees numeros caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_numeros>

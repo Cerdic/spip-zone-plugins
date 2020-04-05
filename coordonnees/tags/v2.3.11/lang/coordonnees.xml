@@ -1,0 +1,28 @@
+<traduction
+	module="coordonnees"
+	id="coordonnees--coordonnees@v2-9532c"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip-contrib-extensions/coordonnees.git"
+	reference="fr">
+	<langue code="ar" url="https://trad.spip.net/tradlang_module/coordonnees?lang_cible=ar" total="110" traduits="25" relire="0" modifs="1" nouveaux="84" pourcent="22.73">
+		<traducteur nom="SuperYMS" lien="https://trad.spip.net/auteur/superyms" />
+	</langue>
+	<langue code="de" url="https://trad.spip.net/tradlang_module/coordonnees?lang_cible=de" total="110" traduits="110" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
+	</langue>
+	<langue code="en" url="https://trad.spip.net/tradlang_module/coordonnees?lang_cible=en" total="110" traduits="98" relire="0" modifs="0" nouveaux="12" pourcent="89.09">
+		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
+		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
+		<traducteur nom="Gilles" lien="https://trad.spip.net/auteur/gilles" />
+		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
+		<traducteur nom="stefdn" lien="https://trad.spip.net/auteur/stefdn" />
+	</langue>
+	<langue code="fa" url="https://trad.spip.net/tradlang_module/coordonnees?lang_cible=fa" total="110" traduits="47" relire="0" modifs="2" nouveaux="61" pourcent="42.73">
+		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
+	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/coordonnees?lang_cible=fr" total="110" traduits="110" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/coordonnees?lang_cible=sk" total="110" traduits="81" relire="0" modifs="0" nouveaux="29" pourcent="73.64">
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
+	</langue>
+</traduction>
