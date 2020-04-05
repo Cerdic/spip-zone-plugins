@@ -1,0 +1,11 @@
+<BOUCLE_messages(MESSAGES){id_message=#ENV{id}}>
+<div class="champ contenu_expediteur[ (#ID_AUTEUR*|strlen|?{'',vide})]">
+	<BOUCLE_auteur(AUTEURS){id_auteur}>
+	<div dir='#LANG_DIR'><:contact:msg_expediteur:> <a href="#URL_ECRIRE{auteur_infos,id_auteur=#ID_AUTEUR}">[(#NOM|sinon{#EMAIL})]</a></div>
+	</BOUCLE_auteur>
+</div>
+<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+	<div class='label'><:info_texte:></div>
+	<div dir='#LANG_DIR' class='#EDIT{texte} texte'>[(#TEXTE|image_reduire{500,0}|replace{'\n\n','<br />'}|replace{'\n','<br />'})]</div>
+</div>
+</BOUCLE_messages>
