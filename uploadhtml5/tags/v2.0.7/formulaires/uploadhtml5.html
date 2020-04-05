@@ -1,0 +1,18 @@
+<div class="formulaire_spip formulaire_#FORM">
+
+	[(#ENV*{_header})]
+
+	[(#EDITABLE|oui)
+	<form action="#ENV{action}" method="post" class="dropzone" id="#ENV{id}">
+		#ACTION_FORMULAIRE
+		<div class="fallback">
+			<input name="#ENV{paramName}" type="file" multiple />
+		</div>
+	</form>
+
+	#INCLURE{fond=javascript/spip.dropzone.js, env}
+	]
+
+	[(#ENV*{_footer})]
+
+</div>

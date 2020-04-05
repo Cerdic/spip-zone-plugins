@@ -1,0 +1,52 @@
+[(#REM) Si env contient un maxFiles il surpasse la configuration ]
+[(#SET{maxFiles, [(#ENV{maxFiles, [(#CONFIG{uploadhtml5/max_file}|>{0}|?{#CONFIG{uploadhtml5/max_file},null})]})]})]
+
+<script type="text/javascript">
+
+	var processSaisieUpload = function (event) {
+		// Activer l'autoProcess
+		event.data.dropzone.options.autoProcessQueue = true;
+		// Lancer l'upload
+		event.data.dropzone.processQueue();
+		// Ne pas submit vraiment le formulaire
+		event.preventDefault();
+	}
+
+	 var options = {
+		[url: "(#ENV*{url})",]
+		paramName: ["(#ENV{paramName, file})"],
+		maxFilesize: #CONFIG{uploadhtml5/max_file_size},
+		maxFiles: #GET{maxFiles},
+		[resizeWidth: (#ENV{resizeWidth,#CONFIG{uploadhtml5/resizeWidth}}),]
+		[resizeHeight: (#ENV{resizeHeight,#CONFIG{uploadhtml5/resizeHeight}}),]
+
+		[(#CONFIG{uploadhtml5/resizeHeight}|oui|ou{#CONFIG{uploadhtml5/resizeWidth}|oui})
+		[resizeQuality: (#CONFIG{uploadhtml5/resizeQuality, 80}|div{100}),]
+		]
+
+		[(#CONFIG{uploadhtml5/resizeHeight}|oui|et{#CONFIG{uploadhtml5/resizeWidth}|oui})
+		[resizeMethod: "(#CONFIG{uploadhtml5/resizeMethod, contain})",]
+		]
+
+		[acceptedFiles: "(#ENV{acceptedFiles})",]
+
+		[success: function(file, response) {
+			ajaxReload("(#ENV{ajaxReload})");
+		},]
+
+
+		[complete: function (file, response) {
+			window.location = "(#ENV{redirect})";
+		},]
+
+		// Traduire dropzone
+		#INCLURE{fond=javascript/traduire_dropzone/#ENV{paramName, file}, env}
+
+	 };
+
+	 // Désactiver la découverte automatique de dropzone
+	 Dropzone.autoDiscover = false;
+
+	 $("\##ENV{id}").dropzone(options);
+
+</script>

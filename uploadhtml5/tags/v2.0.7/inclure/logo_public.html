@@ -1,0 +1,27 @@
+[(#REM) Squelette dédié à l'affichage coté publique d'un formulaire de logo "ergonomique" :
+S'il y a un logo, on l'affiche avec un bouton de supression. Sinon on affiche le formulaire uploadhtml5 pour mettre à jour le logo
+
+Paramètre :
+objet = le nom de l'objet du logo
+id_objet = l'id de l'objet du logo
+
+Exemple d'inclusion : 
+```
+<INCLURE{fond=inclure/logo_public, objet=produit, titre=Logo de l'article, id_objet=#ID_PRODUIT, ajax=logo_public, resizeWidth=300, resizeHeight=300} />
+```
+]
+
+[(#SET{logo, #CHERCHER_LOGO{#ENV{objet}, #ENV{id_objet}}})]
+
+[(#GET{logo}|non)
+<div class="ajax">
+	#FORMULAIRE_UPLOADHTML5{#ENV{objet},#ENV{id_objet}, auto, logo_public, #ARRAY{logo, oui, resizeWidth, #ENV{resizeWidth}, resizeHeight, #ENV{resizeHeight}}}
+</div>]
+
+[<h3>#ENV{titre, Affiche actuelle}</h3>
+<a href="[(#GET{logo}|extraire_attribut{src})]" class="mediabox">
+	(#GET{logo}|image_reduire{450}|inserer_attribut{class, thumbnail})
+</a>
+
+[(#BOUTON_ACTION{Supprimer, #URL_ACTION_AUTEUR{supprimer_logo, #ENV{objet}-#ENV{id_objet}, #SELF}, button expanded alert ajax})]
+]
