@@ -1,0 +1,45 @@
+<BOUCLE_doc (DOCUMENTS types_documents) {id_document=#ENV{id}} {tout}>
+[(#REM) Existe-il un modèle spécifique à cette extension ?]
+[(#CHEMIN{modeles/media_audio_#EXTENSION.html}|oui)
+	<INCLURE{fond=modeles/media_audio_#EXTENSION, id=#ID_DOCUMENT, env, connect}>
+]
+[(#CHEMIN{modeles/media_audio_#EXTENSION.html}|non)
+	[(#SET{alt,#ENV{alt}|sinon{#ENV{titre}}|sinon{titre}})]
+	[(#SET{alt,#GET{alt}|=={titre}|?{#TITRE|sinon{#TYPE_DOCUMENT|concat{' - '}|concat{#TAILLE|taille_en_octets}},#GET{alt}}})]
+	[(#SET{obj,[<object data='(#URL_DOCUMENT)' type='#MIME_TYPE' >
+		<param name='src' value='#URL_DOCUMENT' />
+		[(#ID_DOCUMENT|appliquer_filtre{#MIME_TYPE})]
+		[(#ENV*|env_to_params{#MEDIA_IGNORE_PARAMS})]
+		<!--#EVAL**{chr(91)}if lte IE 6 #EVAL**{chr(93)}>
+		<embed src='#URL_DOCUMENT' [(#ENV*|env_to_attributs{#MEDIA_IGNORE_PARAMS})] ></embed>
+		<!#EVAL**{chr(91)}endif#EVAL**{chr(93)}-->
+		#GET{alt}
+	</object>]})]
+	[(#MEDIA_AFFICHER_LEGENDE|et{#HTML5|non})
+		<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_audio media_audio_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+		<dt>#GET{obj}</dt>
+		#MEDIA_LEGENDE{'dl',''}
+		</dl>
+	]
+	[(#MEDIA_AFFICHER_LEGENDE|non|et{#HTML5|non})
+		<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_audio media_audio_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>#GET{obj}</span>
+	]
+	[(#MEDIA_AFFICHER_LEGENDE|et{#HTML5})
+		<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_audio media_audio_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+		<audio [(#ENV*|env_to_attributs{#MEDIA_IGNORE_PARAMS})] >
+		<source src="#URL_DOCUMENT" type="#MIME_TYPE" />
+		#GET{obj}
+		</audio>
+		<figcaption>#MEDIA_LEGENDE{'div',''}</figcaption>
+		</figure>
+	]
+	[(#MEDIA_AFFICHER_LEGENDE|non|et{#HTML5})
+		<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_audio media_audio_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+		<audio [(#ENV*|env_to_attributs{#MEDIA_IGNORE_PARAMS})] >
+		<source src="#URL_DOCUMENT" type="#MIME_TYPE" />
+		#GET{obj}
+		</audio>
+		</figure>
+	]
+]
+</BOUCLE_doc>

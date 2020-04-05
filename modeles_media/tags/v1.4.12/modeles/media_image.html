@@ -1,0 +1,73 @@
+<BOUCLE_doc (DOCUMENTS types_documents) {id_document=#ENV{id}} {tout}>
+[(#REM)
+	Modele en dl/dt/dd si affichage de la légende (HTML4)
+	cf. http://pompage.net/pompe/listesdefinitions/
+	Sinon, utilisation d'un span.
+	Si HTML5, utilisation de figure.
+]
+[(#REM) Existe-il un modèle spécifique à cette extension ?]
+[(#CHEMIN{modeles/media_image_#EXTENSION.html}|oui)
+	<INCLURE{fond=modeles/media_image_#EXTENSION, id=#ID_DOCUMENT, env, connect}>
+]
+[(#CHEMIN{modeles/media_image_#EXTENSION.html}|non)
+	[(#REM) Cas d'une inclusion avec <img>.]
+	[(#INCLUS|=={image}|oui)
+		[(#SET{img,#MEDIA_IMAGE_RETAILLEE{#URL_DOCUMENT}})]
+		[(#SET{width,[(#GET{img}|extraire_attribut{width})]})]
+		[(#MEDIA_AFFICHER_LEGENDE|et{#HTML5|non})
+			<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_image_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+			<dt>#MEDIA_LIEN{#GET{img}}</dt>
+			#MEDIA_LEGENDE{'dl',#GET{width}}
+			</dl>
+		]
+		[(#MEDIA_AFFICHER_LEGENDE|non|et{#HTML5|non})
+			<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_image_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>#MEDIA_LIEN{#GET{img}}</span>
+		]
+		[(#MEDIA_AFFICHER_LEGENDE|et{#HTML5})
+			<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_image_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+			#MEDIA_LIEN{#GET{img}}
+			<figcaption>#MEDIA_LEGENDE{'dl',#GET{width}}</figcaption>
+			</figure>
+		]
+		[(#MEDIA_AFFICHER_LEGENDE|non|et{#HTML5})
+			<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_image_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>#MEDIA_LIEN{#GET{img}}</figure>
+		]
+	]
+	[(#REM) Cas d'une inclusion avec <object>.]
+	[(#INCLUS|=={embed}|oui)
+		[(#SET{alt,#ENV{alt}|sinon{#ENV{titre}}|sinon{titre}})]
+		[(#SET{alt,#GET{alt}|=={titre}|?{#TITRE|sinon{#TYPE_DOCUMENT|concat{' - '}|concat{#TAILLE|taille_en_octets}},#GET{alt}}})]
+		[(#SET{obj,[<object data='(#URL_DOCUMENT)' type='#MIME_TYPE'[ width='(#MEDIA_TAILLE{largeur})'][ height='(#MEDIA_TAILLE{hauteur})'] >
+			<param name='src' value='#URL_DOCUMENT' />
+			[(#ID_DOCUMENT|appliquer_filtre{#MIME_TYPE})]
+			[(#ENV*|env_to_params{#MEDIA_IGNORE_PARAMS})]
+			<!--#EVAL**{chr(91)}if lte IE 6 #EVAL**{chr(93)}>
+			<embed src='#URL_DOCUMENT' [(#ENV*|env_to_attributs{#MEDIA_IGNORE_PARAMS})][ width='(#MEDIA_TAILLE{largeur})'][ height='(#MEDIA_TAILLE{hauteur})'] ></embed>
+			<!#EVAL**{chr(91)}endif#EVAL**{chr(93)}-->
+			#GET{alt}
+		</object>]})]
+		[(#MEDIA_AFFICHER_LEGENDE|et{#HTML5|non})
+			<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_image_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+			<dt>#GET{obj}</dt>
+			#MEDIA_LEGENDE{'dl',#GET{width}}
+			</dl>
+		]
+		[(#MEDIA_AFFICHER_LEGENDE|non|et{#HTML5|non})
+			<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_image_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>#GET{obj}</span>
+		]
+		[(#MEDIA_AFFICHER_LEGENDE|et{#HTML5})
+			<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_image_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+			#GET{obj}
+			<figcaption>#MEDIA_LEGENDE{'dl',#GET{width}}</figcaption>
+			</figure>
+		]
+		[(#MEDIA_AFFICHER_LEGENDE|non|et{#HTML5})
+			<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_image_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>#GET{obj}</figure>
+		]
+	]
+	[(#REM) Cas d'un type de fichier ne pouvant être inclu : on renvoie la vignette.]
+	[(#INCLUS|=={non}|oui)
+		<INCLURE{fond=modeles/media_vignette, id=#ID_DOCUMENT, env, connect}>
+	]
+]
+</BOUCLE_doc>

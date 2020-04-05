@@ -1,0 +1,31 @@
+[(#REM) Si on fait <media12|legende>, legende est passé à la variable d'environnement class et la variable legende est vide. ]
+#SET{legende,#ENV{class}|=={legende}|?{legende,#ENV{legende}}}
+#SET{lien,#ENV{class}|=={lien}|?{lien,#ENV{lien}}}
+#SET{titre,#ENV{class}|=={titre}|?{titre,#ENV{titre}}}
+#SET{descriptif,#ENV{class}|=={descriptif}|?{descriptif,#ENV{descriptif}}}
+#SET{credits,#ENV{class}|=={credits}|?{credits,#ENV{credits}}}
+#SET{type,#ENV{class}|=={type}|?{type,#ENV{type}}}
+#SET{poids,#ENV{class}|=={poids}|?{poids,#ENV{poids}}}
+
+[(#REM) Le cas échéant, il faut donc vider la variable class.]
+#SET{class,#ENV{class}}
+#SET{class,#ENV{class}|=={legende}|?{'',#GET{class}}}
+#SET{class,#ENV{class}|=={lien}|?{'',#GET{class}}}
+#SET{class,#ENV{class}|=={titre}|?{'',#GET{class}}}
+#SET{class,#ENV{class}|=={descriptif}|?{'',#GET{class}}}
+#SET{class,#ENV{class}|=={credits}|?{'',#GET{class}}}
+#SET{class,#ENV{class}|=={type}|?{'',#GET{class}}}
+#SET{class,#ENV{class}|=={poids}|?{'',#GET{class}}}
+
+[(#REM) Au cas où la variante a été appelée mais pas positionnée en première place. Par exemple : <media12|titre|icone>. Sinon, on appelle vignette.]
+#SET{variante,vignette}
+#SET{variante,#ENV{icone}|=={icone}|?{icone,#GET{variante}}}
+#SET{variante,#ENV{emb}|=={emb}|?{icone,#GET{variante}}}
+#SET{variante,#ENV{logo}|=={logo}|?{icone,#GET{variante}}}
+#SET{variante,#ENV{video}|=={video}|?{video,#GET{variante}}}
+#SET{variante,#ENV{audio}|=={audio}|?{audio,#GET{variante}}}
+#SET{variante,#ENV{image}|=={image}|?{image,#GET{variante}}}
+#SET{variante,#ENV{text}|=={text}|?{text,#GET{variante}}}
+#SET{variante,#ENV{application}|=={application}|?{application,#GET{variante}}}
+
+<INCLURE{fond=modeles/media_#GET{variante},legende=#GET{legende},lien=#GET{lien},titre=#GET{titre},descriptif=#GET{descriptif},credits=#GET{credits},type=#GET{type},poids=#GET{poids},class=#GET{class},env,connect}>

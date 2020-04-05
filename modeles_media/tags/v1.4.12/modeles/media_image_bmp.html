@@ -1,0 +1,28 @@
+<BOUCLE_doc (DOCUMENTS types_documents) {id_document=#ENV{id}} {tout}>
+[(#REM)
+	Une image bmp n'est pas retaillable par les fonctions usuelles de SPIP.
+	On modifie seulement les paramètres height et width et on laisse le navigateur se débrouiller.
+]
+[(#SET{alt,#ENV{alt}|sinon{#ENV{titre}}|sinon{titre}})]
+[(#SET{alt,#GET{alt}|=={titre}|?{#TITRE|sinon{#TYPE_DOCUMENT|concat{' - '}|concat{#TAILLE|taille_en_octets}},#GET{alt}}})]
+[(#SET{img,[<img src="(#URL_DOCUMENT)" style="height: #MEDIA_TAILLE{hauteur} px; width: #MEDIA_TAILLE{largeur} px;" height="#MEDIA_TAILLE{hauteur}" width="#MEDIA_TAILLE{largeur}" alt="#GET{alt}" />]})]
+[(#SET{width,#MEDIA_TAILLE{largeur}})]
+[(#MEDIA_AFFICHER_LEGENDE|et{#HTML5|non})
+	<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_image_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+	<dt>#MEDIA_LIEN{#GET{img}}</dt>
+	#MEDIA_LEGENDE{'dl',#GET{width}}
+	</dl>
+]
+[(#MEDIA_AFFICHER_LEGENDE|non|et{#HTML5|non})
+	<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_image_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>#MEDIA_LIEN{#GET{img}}</span>
+]
+[(#MEDIA_AFFICHER_LEGENDE|et{#HTML5})
+	<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_image_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+	#MEDIA_LIEN{#GET{img}}
+	<figcaption>#MEDIA_LEGENDE{'dl',#GET{width}}</figcaption>
+	</figure>
+]
+[(#MEDIA_AFFICHER_LEGENDE|non|et{#HTML5})
+	<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_image_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>#MEDIA_LIEN{#GET{img}}</figure>
+]
+</BOUCLE_doc>

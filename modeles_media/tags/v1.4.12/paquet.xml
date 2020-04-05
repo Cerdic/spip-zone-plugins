@@ -1,0 +1,28 @@
+<paquet
+	prefix="media"
+	categorie="edition"
+	version="1.4.12"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="images/media-24.png"
+	documentation="https://contrib.spip.net/Plugin-Modeles-media"
+>
+
+	<nom>Mod&#232;les media</nom>
+	<!-- Modèles alternatifs pour l'insertion des documents -->
+
+	<auteur lien="https://contrib.spip.net/Joseph">Joseph</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="affiche_milieu" inclure="media_pipelines.php" />
+	<pipeline nom="configurer_liste_metas" inclure="media_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="media_pipelines.php" />
+	<pipeline nom="header_prive" inclure="media_pipelines.php" />
+	<pipeline nom="pre_liens" inclure="media_pipelines.php" />
+	<pipeline nom="ieconfig_metas" inclure="media_pipelines.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="media_pipelines.php" />
+
+	<necessite nom="medias" compatibilite="[2.7.27;]" />
+	<utilise nom="inserer_modeles" compatibilite="[1.1.11;]" />
+</paquet>

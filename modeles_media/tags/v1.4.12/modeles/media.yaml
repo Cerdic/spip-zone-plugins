@@ -1,0 +1,162 @@
+nom: '<:media:nom_media:>'
+logo: 'images/media-24.png'
+icone_barre: 'media.png'
+traiter: 'media_inserer_modeles_traiter'
+parametres:
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'modele'
+      defaut: 'media'
+  -
+    saisie: 'selecteur_document'
+    options:
+      nom: 'id_modele'
+      label: '<:media:label_id_document:>'
+      defaut: ''
+      env: 'oui'
+      id: ''
+      obligatoire: 'oui'
+    verifier:
+      type: 'id_document'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'variante'
+      label: '<:media:label_variante:>'
+      obligatoire: 'oui'
+      cacher_option_intro: 'oui'
+      defaut: 'icone'
+      datas:
+        icone: '<:media:item_icone:>'
+        vignette: '<:media:item_vignette:>'
+        insert: '<:media:item_insert:>'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'align'
+      label: '<:inserer_modeles:label_alignement:>'
+      defaut: ''
+      datas:
+        left: '<:inserer_modeles:item_left:>'
+        center: '<:inserer_modeles:item_center:>'
+        right: '<:inserer_modeles:item_right:>'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'legende'
+      label: '<:media:label_legende:>'
+      option_intro: '<:media:item_ne_pas_afficher:>'
+      datas:
+        legende: '<:media:item_legende_simple:>'
+        complete: '<:media:item_legende_complete:>'
+        personnalisee: '<:media:item_personnaliser:>'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'legende_personnalisee'
+      label: '<:media:label_legende_personnalisee:>'
+      afficher_si: '@legende@ == "personnalisee"'
+    saisies:
+      -
+        saisie: 'param_modele'
+        options:
+          nom: 'titre'
+          label: '<:media:label_titre:>'
+          option_vide: '<:media:item_ne_pas_afficher:>'
+          option_identique: '<:media:item_afficher:>'
+          option_personnalise: '<:media:item_personnaliser:>'
+      -
+        saisie: 'param_modele'
+        options:
+          nom: 'descriptif'
+          label: '<:media:label_descriptif:>'
+          option_vide: '<:media:item_ne_pas_afficher:>'
+          option_identique: '<:media:item_afficher:>'
+          option_personnalise: '<:media:item_personnaliser:>'
+          explication_personnalise: '<:media:explication_descriptif:>'
+      -
+        saisie: 'param_modele'
+        options:
+          nom: 'credits'
+          label: '<:media:label_credits:>'
+          option_vide: '<:media:item_ne_pas_afficher:>'
+          option_identique: '<:media:item_afficher:>'
+          option_personnalise: '<:media:item_personnaliser:>'
+      -
+        saisie: 'selection'
+        options:
+          nom: 'type'
+          label: '<:media:label_type:>'
+          option_intro: '<:media:item_ne_pas_afficher:>'
+          datas:
+            type: '<:media:item_afficher:>'
+      -
+        saisie: 'selection'
+        options:
+          nom: 'poids'
+          label: '<:media:label_poids:>'
+          option_intro: '<:media:item_ne_pas_afficher:>'
+          datas:
+            poids: '<:media:item_afficher:>'
+  -
+    saisie: 'param_modele'
+    options:
+      nom: 'lien'
+      label: '<:media:label_lien:>'
+      option_vide: '<:media:item_pas_de_lien:>'
+      option_identique: '<:media:item_lien_document:>'
+      option_personnalise: '<:media:item_personnaliser:>'
+      explication_personnalise: '<:media:explication_lien:>'
+  -
+    saisie: 'input'
+    options: 
+      nom: 'titre_lien'
+      label: '<:media:label_titre_lien:>'
+      explication: '<:media:explication_titre_lien:>'
+      afficher_si: '@select_lien@ !=""'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'taille'
+      label: '<:media:label_taille:>'
+      option_intro: '<:media:item_ne_pas_redimensionner:>'
+      datas:
+        icone: '<:media:item_taille_icone:>'
+        petit: '<:media:item_taille_petit:>'
+        moyen: '<:media:item_taille_moyen:>'
+        grand: '<:media:item_taille_grand:>'
+        personnalisee: '<:media:item_personnaliser:>'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'taille_personnalisee'
+      label: '<:media:label_taille_personnalisee:>'
+      afficher_si: '@taille@ == "personnalisee"'
+    saisies:
+      -
+        saisie: 'input'
+        options:
+          nom: 'largeur'
+          label: '<:media:label_largeur:>'
+          size: 5
+        verifier:
+          type: 'entier'
+          options:
+            min: 1
+      -
+        saisie: 'input'
+        options:
+          nom: 'hauteur'
+          label: '<:media:label_hauteur:>'
+          size: 5
+        verifier:
+          type: 'entier'
+          options:
+            min: 1
+  -
+    saisie: 'input'
+    options: 
+      nom: 'alt'
+      label: '<:media:label_alt:>'
+      explication: '<:media:explication_alt:>'

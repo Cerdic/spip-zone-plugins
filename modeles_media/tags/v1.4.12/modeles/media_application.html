@@ -1,0 +1,52 @@
+<BOUCLE_doc (DOCUMENTS types_documents) {id_document=#ENV{id}} {tout}>
+[(#REM) Existe-il un modèle spécifique à cette extension ?]
+[(#CHEMIN{modeles/media_application_#EXTENSION.html}|oui)
+	<INCLURE{fond=modeles/media_application_#EXTENSION, id=#ID_DOCUMENT, env, connect}>
+]
+[(#CHEMIN{modeles/media_application_#EXTENSION.html}|non|et{#INCLUS|=={embed}|oui})
+	#SET{hauteur,#MEDIA_TAILLE{hauteur}} #SET{largeur,#MEDIA_TAILLE{largeur}}
+	[(#ENV{controls}=={PlayButton}|?{#SET{hauteur,25},''})][
+	 (#ENV{controls}=={PlayButton}|?{#SET{largeur,40},''})][
+	 (#ENV{controls}=={PositionSlider}|?{#SET{hauteur,25},''})][
+	 (#ENV{controls}=={PositionSlider}|?{#SET{largeur,#GET{largeur}|moins{40}},''})
+	]
+	[(#SET{alt,#ENV{alt}|sinon{#ENV{titre}}|sinon{titre}})]
+	[(#SET{alt,#GET{alt}|=={titre}|?{#TITRE|sinon{#TYPE_DOCUMENT|concat{' - '}|concat{#TAILLE|taille_en_octets}},#GET{alt}}})]
+	[(#SET{obj,[<object data='(#URL_DOCUMENT)' type='#MIME_TYPE'[ width='(#GET{largeur})'][ height='(#GET{hauteur})'] >
+		<param name='movie' value='#URL_DOCUMENT' />
+		<param name='src' value='#URL_DOCUMENT' />
+		[(#ID_DOCUMENT|appliquer_filtre{#MIME_TYPE})]
+		[(#ENV*|env_to_params{#MEDIA_IGNORE_PARAMS})]
+		<!--#EVAL**{chr(91)}if lte IE 6 #EVAL**{chr(93)}>
+		<embed src='#URL_DOCUMENT' [(#ENV*|env_to_attributs{#MEDIA_IGNORE_PARAMS})][ width='(#GET{largeur})'][ height='(#GET{hauteur})'] ></embed>
+		<!#EVAL**{chr(91)}endif#EVAL**{chr(93)}-->
+		#GET{alt}
+	</object>]})]
+	[(#MEDIA_AFFICHER_LEGENDE|et{#HTML5|non})
+		<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_application media_application_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+		<dt>#GET{obj}</dt>
+		#MEDIA_LEGENDE{'dl',#GET{largeur}}
+		</dl>
+	]
+	[(#MEDIA_AFFICHER_LEGENDE|non|et{#HTML5|non})
+		<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_application media_application_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>#GET{obj}</span>
+	]
+	[(#MEDIA_AFFICHER_LEGENDE|et{#HTML5})
+		<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_application media_application_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+		<video [(#ENV*|env_to_attributs{#MEDIA_IGNORE_PARAMS})][ width='(#MEDIA_TAILLE{largeur})'][ height='(#MEDIA_TAILLE{hauteur})'] >
+		<source src="#URL_DOCUMENT" type="#MIME_TYPE" />
+		#GET{obj}
+		</video>
+		<figcaption>#MEDIA_LEGENDE{'div',#GET{largeur}}</figcaption>
+		</figure>
+	]
+	[(#MEDIA_AFFICHER_LEGENDE|non|et{#HTML5})
+		<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_application media_application_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+		<video [(#ENV*|env_to_attributs{#MEDIA_IGNORE_PARAMS})][ width='(#MEDIA_TAILLE{largeur})'][ height='(#MEDIA_TAILLE{hauteur})'] >
+		<source src="#URL_DOCUMENT" type="#MIME_TYPE" />
+		#GET{obj}
+		</video>
+		</figure>
+	]
+]
+</BOUCLE_doc>

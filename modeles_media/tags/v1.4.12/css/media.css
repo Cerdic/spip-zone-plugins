@@ -1,0 +1,8 @@
+.spip_doc_descriptif , .spip_doc_credits, .spip_doc_infos {
+	clear: both;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 0;
+	margin-bottom: 0;
+	font-size: 0.9em;
+}

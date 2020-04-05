@@ -1,0 +1,18 @@
+<traduction
+	module="media"
+	id="media--modeles_media-d91e5"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip-contrib-extensions/modeles_media.git"
+	reference="fr">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/media?lang_cible=en" total="60" traduits="57" relire="0" modifs="0" nouveaux="3" pourcent="95.00">
+		<traducteur nom="raphael" lien="https://trad.spip.net/auteur/raphael-7042" />
+	</langue>
+	<langue code="es" url="https://trad.spip.net/tradlang_module/media?lang_cible=es" total="60" traduits="53" relire="4" modifs="0" nouveaux="3" pourcent="88.33">
+		<traducteur nom="Daniel Quisbert" lien="https://trad.spip.net/auteur/daniel-7022" />
+	</langue>
+	<langue code="fa" url="https://trad.spip.net/tradlang_module/media?lang_cible=fa" total="60" traduits="57" relire="0" modifs="0" nouveaux="3" pourcent="95.00">
+		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
+	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/media?lang_cible=fr" total="60" traduits="60" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+</traduction>
