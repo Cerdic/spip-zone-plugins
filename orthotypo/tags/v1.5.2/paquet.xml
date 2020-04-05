@@ -1,0 +1,28 @@
+<paquet
+	prefix="orthotypo"
+	categorie="edition"
+	version="1.5.1"
+	etat="stable"
+	compatibilite="[3.0.0;3.3.*]"
+	logo="prive/themes/spip/images/orthotypo-32.png"
+	documentation="https://contrib.spip.net/Ortho-typographie"
+>
+
+	<nom>Ortho-Typographie</nom>
+
+	<auteur lien="https://contrib.spip.net/auteur7639">Vincent Ramos</auteur>
+	<auteur lien="https://contrib.spip.net/auteur5053">Raphaël Meyssan</auteur>
+	<auteur lien="https://contrib.spip.net/auteur4">Fil</auteur>
+	<auteur lien="https://contrib.spip.net/auteur5714">Patrice Vanneufville</auteur>
+	<auteur lien="https://contrib.spip.net/auteur6809">tetue</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="insert_head_css" inclure="orthotypo_fonctions.php" />
+	<pipeline nom="post_typo" inclure="orthotypo_fonctions.php" />
+	<pipeline nom="pre_propre" inclure="orthotypo_fonctions.php" />
+	<pipeline nom="ieconfig_metas" inclure="orthotypo_ieconfig_metas.php" />
+
+	<procure nom="typo_guillemets" version="1.5.2" />
+
+</paquet>
