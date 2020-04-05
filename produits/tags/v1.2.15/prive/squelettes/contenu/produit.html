@@ -1,0 +1,50 @@
+[(#AUTORISER{voir,produit,#ID_PRODUIT}|sinon_interdire_acces)]
+<BOUCLE_produit(PRODUITS){id_produit}{statut==.*}{si #ENV{exec}|=={produit}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,produit,#ID_PRODUIT})
+		[(#ID_PRODUIT|afficher_qui_edite{produit}|non)
+			[(#URL_ECRIRE{produit_edit,id_produit=#ID_PRODUIT}|icone_verticale{<:produit:icone_modifier_produit:>,produit,edit,right preload})]
+		]
+		[(#ID_PRODUIT|afficher_qui_edite{produit}|oui)
+			[(#URL_ECRIRE{produit_edit,id_produit=#ID_PRODUIT}|icone_verticale{#ID_PRODUIT|afficher_qui_edite{produit},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{produit-24.png}|balise_img{produit,cadre-icone})]</h1>
+	<h2 class="prix_ht"><:produits:produit_champ_prix_ht_label:> : [(#PRIX_HT*|appliquer_filtre{prix_formater,true})]</h2>
+	[(#CONFIG{produits/editer_ttc}|oui)<h2 class="prix_ttc"><:produits:produit_champ_prix_ttc_label:> : [(#PLUGIN{prix}|?{#PRIX,#PRIX_HT|plus{#PRIX_HT|mult{#TAXE}}}|floatval|appliquer_filtre{prix_formater,true})]</h2>]
+	<h4>[(#TAXE|floatval|>{0}|?{<:produits:produit_champ_taxe_label:>,<:produits:configurer_taxe_defaut_label:>}) : ][(#TAXE|floatval|>{0}|?{#TAXE,#CONFIG{produits/taxe,0}}|mult{100})&nbsp;&#37;]</h4>
+	[(#REFERENCE|strlen|oui)<h4 class="reference"><:produits:produit_reference{reference=#REFERENCE}:></h4>]
+	<!--afficher_fiche_objet-->
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{produit,#ID_PRODUIT}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/produit,id=#ID_PRODUIT,id_produit=#ID_PRODUIT,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,produit,#ID_PRODUIT})
+	[(#ID_PRODUIT|afficher_qui_edite{produit}|non)
+		[(#URL_ECRIRE{produit_edit,id_produit=#ID_PRODUIT}|icone_verticale{<:produit:icone_modifier_produit:>,produit,edit,right preload})]
+	]
+	[(#ID_PRODUIT|afficher_qui_edite{produit}|oui)
+		[(#URL_ECRIRE{produit_edit,id_produit=#ID_PRODUIT}|icone_verticale{#ID_PRODUIT|afficher_qui_edite{produit},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,produit,id,#ID_PRODUIT},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_produit>
+[(#ENV**{exec}|=={produit_edit}|?{#INCLURE{fond=prive/squelettes/contenu/produit_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_produit>
