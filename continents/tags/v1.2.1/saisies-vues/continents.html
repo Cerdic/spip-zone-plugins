@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_continents_selectionnes>
+	<ul>
+	<BOUCLE_continents_selectionnes(CONTINENTS){id_continent IN #GET*{valeur}}
+		{par num nom, nom}{tout}>
+		<li class="choix">#NOM (#ID_CONTINENT)</li>
+	</BOUCLE_continents_selectionnes>
+	</ul>
+	</B_continents_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_continents_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_continent_selectionne(CONTINENTS){id_continent=#ENV{valeur}}
+		{par num nom, nom}{tout}>
+	  	<p>#NOM (#ID_CONTINENT)</p>
+	</BOUCLE_continent_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_continent_selectionne>
+<//B_test_multiple>
