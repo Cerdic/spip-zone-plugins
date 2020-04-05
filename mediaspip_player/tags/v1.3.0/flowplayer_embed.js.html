@@ -1,0 +1,61 @@
+#CACHE{24*3600}
+#HTTP_HEADER{Content-Type: application/json; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+<BOUCLE_document(DOCUMENTS){id_document}{extension IN flv,mp3,mp4}{tout}>
+<BOUCLE_docorig(spip_documents_liens){objet=document}{id_document=#ID_DOCUMENT}{0,1}{tout}>
+<BOUCLE_article(ARTICLES){id_document=#ID_OBJET}>
+#SET{titre_article,#TITRE}
+</BOUCLE_article>
+</BOUCLE_docorig>
+</B_docorig>
+<BOUCLE_article_bis(ARTICLES){id_document}{0,1}{tout}>
+#SET{titre_article,#TITRE}
+</BOUCLE_article_bis>
+<//B_docorig>
+[(#SET{plugins,[(#ARRAY{controls,
+	[(#ARRAY{
+		autoHide,[(#EXTENSION|=={mp3}|?{fullscreen,true})],
+		fullscreen,[(#EXTENSION|=={mp3}|?{false,true})],
+		tooltips,[(#ARRAY{
+			buttons,true,
+			play,<:mediaspip_player:bouton_lire:>,
+			fullscreen,<:mediaspip_player:bouton_fullscreen:>,
+			fullscreenExit,<:mediaspip_player:bouton_fullscreen_full:>,
+			mute,<:mediaspip_player:bouton_mute:>,
+			unmute,<:mediaspip_player:bouton_unmute:>,
+			pause,<:mediaspip_player:bouton_pause:>})]})]})]})]
+
+[(#CONFIG{mediaspip_player/infos_embed}|=={on}|oui)
+[(#SET{plugins,[(#GET{plugins}|array_merge{[(#ARRAY{title,
+[(#ARRAY{
+	url,[(#CHEMIN{flash/flowplayer.content.swf}|url_absolue)],
+	top,0,
+	closeButton,true,
+	left,0,
+	height,30,
+	padding,5,
+	width,100%,
+	background,#000000,
+	border,0px,
+	backgroundGradient,none,
+	borderRadius,0,
+	opacity,0.8,
+	stylesheet,[(#CHEMIN{css/flowplayer_content-plugin.css}|url_absolue)],
+	html,[(#VAL{<span class="title">[(#TITRE|sinon{#GET{titre_article}}|sinon{[(#FICHIER|basename)]}|replace{"'",'"'})]</span>}|concat{[ - <span class="desc">(#CREDITS|replace{"'",'"'}|liens_absolus|replace{'<a ','<a target="_blank" '})</span>]}|concat{[ - <span class="url"><a href="#URL_SITE_SPIP" target="_blank">(#NOM_SITE_SPIP|replace{"'",'"'})</a></span>]})]})]})]})]})]]
+
+[(#SET{canvas,[(#ARRAY{
+				backgroundColor,[(#ENV{backgroundcolor,#000000})],
+				backgroundGradient,none})]})]
+
+[(#SET{playlist,[(#ARRAY{
+	0,[(#LOGO_DOCUMENT|extraire_attribut{src}|url_absolue)],
+	1,[(#ARRAY{
+		url,[(#URL_DOCUMENT|url_absolue)],
+		autoPlay,false,
+		scaling,fit})]})]})]
+
+#SET{json,#ARRAY{playlist,#GET{playlist},canvas,#GET{canvas},plugins,#GET{plugins}}}
+[(#SET{json,[(#PIPELINE{mediaspip_player_flowjs,[(#ARRAY{args,[(#ENV*|unserialize)],data,#GET{json}})]})]})]
+[(#GET{json}|json_encode|replace{'"true"','true'}|replace{'"false"','false'})]
+</BOUCLE_document>
+#FILTRE{trim}
