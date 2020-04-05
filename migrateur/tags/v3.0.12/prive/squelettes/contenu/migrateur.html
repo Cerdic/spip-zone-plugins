@@ -1,0 +1,16 @@
+[(#AUTORISER{webmestre}|sinon_interdire_acces)]
+
+<h1><:migrateur:migrateur_titre:></h1>
+
+[(#REM)
+	Si aucune configuration n'a été faite, on affiche un message
+]
+[(#CONFIG{migrateur/type}|non)
+	<div class='notice'>
+		<p><:migrateur:conf_verification_visuelle:></p>
+	</div>
+]
+
+[(#CONFIG{migrateur/type}|in_any{#LISTE{source,destination}}|oui)
+	[(#INCLURE{fond=prive/squelettes/inclure/migrateur-[(#CONFIG{migrateur/type})], env})]
+]

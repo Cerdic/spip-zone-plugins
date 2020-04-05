@@ -1,0 +1,23 @@
+<paquet
+	prefix="migrateur"
+	categorie="outil"
+	version="3.0.12"
+	etat="dev"
+	compatibilite="[2.1.0;3.2.*]"
+	logo="prive/themes/spip/images/migrateur-64.png"
+	documentation="https://contrib.spip.net/4477"
+>
+
+	<nom>Migrateur</nom>
+
+	<auteur>Cyril Marion</auteur>
+	<auteur>Matthieu Marcillaud</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<menu nom="migrateur"
+		titre="migrateur:migrateur_titre"
+		parent="menu_administration"
+		icone="images/migrateur-16.png" />
+
+</paquet>

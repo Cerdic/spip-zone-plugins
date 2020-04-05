@@ -1,0 +1,88 @@
+<div class='formulaire_spip formulaire_configurer formulaire_configurer_#FORM' id='formulaire_configurer_#FORM'>
+	<h3 class='titrem'>[(#CHEMIN{images/migrateur-24.png}|balise_img{'',cadre-icone})]<:migrateur:migrateur_configurer:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form action="#ENV{action}#formulaire_configurer_#FORM" method="post"><div>
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+		<input type="hidden" name="_meta_casier" value="migrateur" />
+
+		<p class='explication'><:migrateur:explication_configuration_migrateur:></p>
+
+		<ul>
+			#SET{champ,type}
+			<li class='configurer_#GET{champ}[ (#ENV**{erreurs/#GET{champ}}|oui)erreur]'>
+				<label><:migrateur:conf_ce_site_est:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs/#GET{champ}})</span>]
+				<div class='choix'>
+					<input class='radio' type="radio" name="#GET{champ}" value='source'[ (#ENV{#GET{champ}}|=={source}|oui)checked="checked"] id="#GET{champ}_source"/>
+					<label for="#GET{champ}_source"><:migrateur:conf_source:></label>
+				</div>
+				<div class='choix'>
+					<input class='radio' type="radio" name="#GET{champ}" value='destination'[ (#ENV{#GET{champ}}|=={destination}|oui)checked="checked"] id="#GET{champ}_destination"/>
+					<label for="#GET{champ}_destination"><:migrateur:conf_destination:></label>
+				</div>
+			</li>
+
+			#SET{champ,aes_key}
+			<li class='configurer_#GET{champ}[ (#ENV**{erreurs/#GET{champ}}|oui)erreur]'>
+				<label for="#GET{champ}"><:migrateur:conf_aes_key:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs/#GET{champ}})</span>]
+				<input type="text" name="#GET{champ}" value="#ENV{#GET{champ}}" id="#GET{champ}" class="text"[ (#ENV{type}|=={source}|oui)readonly="readonly"] />
+			</li>
+
+			#SET{champ,auth_key}
+			<li class='configurer_#GET{champ}[ (#ENV**{erreurs/#GET{champ}}|ou{#ENV{erreur_auth_key}}|oui)erreur]'>
+				<label for="#GET{champ}"><:migrateur:conf_auth_key:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs/#GET{champ}}|sinon{#ENV{erreur_auth_key}})</span>]
+				<input type="text" name="#GET{champ}" value="#ENV{#GET{champ}}" id="#GET{champ}" class="text"[ (#ENV{type}|=={source}|oui)readonly="readonly"] />
+			</li>
+
+			#SET{champ,url_source}
+			<li class='configurer_#GET{champ}[ (#ENV**{erreurs/#GET{champ}}|oui)erreur][ (#ENV{type}|!={destination}|oui)none]'>
+				<label for="#GET{champ}"><:migrateur:conf_url_source:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs/#GET{champ}})</span>]
+				<input type="text" name="#GET{champ}" value="#ENV{#GET{champ}}" id="#GET{champ}" class="text"[ (#ENV{type}|=={source}|oui)disabled="disabled"] />
+			</li>
+
+		</ul>
+		<p class='boutons'>
+			[(#ENV{type}|=={source}|oui)
+				<input class='submit[(#ENV{erreur_auth_key}|oui) regenerer]' type="submit" name="generer_auth" value="<:migrateur:generer_cle_auth:>"/>
+				<input class='submit' type="submit" name="generer_cles" value="<:migrateur:generer_cles:>"/>
+			]
+			<input class='submit' type="submit" name="ok" value="<:bouton_enregistrer:>"/>
+		</p>
+	</div></form>
+
+</div>
+
+<style type='text/css'>
+.formulaire_spip .boutons input.submit.regenerer {
+	font-weight:bold;
+}
+</style>
+
+<script type="text/javascript">
+//<![CDATA[
+	(function($){
+		$("#formulaire_configurer_#FORM input[name=type]").change(function(){
+			type = $(this).val();
+			$form = $("#formulaire_configurer_#FORM");
+			if (type == 'source') {
+				$form.find("#aes_key").prop('readonly', true);
+				$form.find("#auth_key").prop('readonly', true);
+				$form.find(".boutons input[name^=generer]").show();
+				$form.find("li.configurer_url_source").addClass('none').find("input.text").prop('disabled', true);
+			} else {
+				$form.find("#aes_key").prop('readonly', false);
+				$form.find("#auth_key").prop('readonly', false);
+				$form.find(".boutons input[name^=generer]").hide();
+				$form.find("li.configurer_url_source").removeClass('none').find("input.text").prop('disabled', false);
+			}
+		});
+
+	})(jQuery);
+//]]>
+</script>

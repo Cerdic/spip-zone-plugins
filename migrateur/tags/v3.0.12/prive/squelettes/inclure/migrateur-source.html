@@ -1,0 +1,78 @@
+
+
+[(#SET{logfile,#EVAL{_DIR_TMP}/migrateur/serveur.log})]
+
+[(#VAL{Logs du serveur de migration}|boite_ouvrir{simple,'',boite_logs})]
+	<button id="logs_play"><i class='icon-play'></i> Actualise automatiquement les logs</button>
+	<button id="logs_stop" class='none'><i class='icon-pause'></i> Stoppe l'actualisation automatique</button>
+	[(#BOUTON_ACTION{Supprimer le fichier de log,[(#URL_ACTION_AUTEUR{migrateur_serveur_log,delete,#SELF})],supprimer})]
+
+<pre id="logs" data-get-log="#URL_ACTION_AUTEUR{migrateur_serveur_log,get_last}">
+[(#GET{logfile}|file_exists|?{#GET{logfile}|file_get_contents})]
+</pre>
+#BOITE_FERMER
+
+
+<style type='text/css'>
+form.supprimer { float:right; }
+form.supprimer button { color:#D91210; }
+#boite_logs.actif .inner .hd { background-color: #FFBB42; }
+
+#logs { max-height: 500px; overflow-y: scroll; }
+#logs code { color:#A37247; }
+#logs em { color:#1490CB; font-style:normal; }
+/* balises non html… mais pratique dans ce cas là */
+#logs error { color:#D60500; }
+#logs warning { color:#E29800; }
+</style>
+
+<script type='text/javascript'>
+;(function($){
+$(document).ready(function() {
+	$('#logs_play').click(function(){
+		$("#logs_play").hide();
+		$("#logs_stop").show();
+		$("#boite_logs").addClass('actif');
+		$("#logs").empty();
+
+		$.migrateur_loop = setInterval(function(){
+			$logs = $("#logs");
+			url = $logs.data('get-log');
+
+			//$.spip.intercepted.ajax(url)
+			$.get(url)
+				.done(function(data) {
+					if (data.length) {
+						// on ne conserve que l'heure et minutes dans les logs js
+						var texte = data.split("\n");
+						$.each(texte, function(i, line) {
+							var heure = line.substring(11, 16);
+							var log = line.substring(26);
+							texte[i] = heure + log;
+						});
+						data = texte.join("\n");
+
+						$logs.append(data);
+						if ($logs.length) {
+							$logs.scrollTop($logs.eq(0).scrollHeight - $logs.height());
+						}
+					}
+				})
+				.fail(function(data) {
+					$logs.append(data);
+					if ($logs.length) {
+						$logs.scrollTop($logs.eq(0).scrollHeight - $logs.height());
+					}
+				});
+		}, 1000);
+	});
+
+	$('#logs_stop').click(function(){
+		$("#logs_stop").hide();
+		$("#logs_play").show();
+		clearInterval($.migrateur_loop);
+		$("#boite_logs").removeClass('actif');
+	});
+});
+})(jQuery);
+</script>

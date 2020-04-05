@@ -1,0 +1,71 @@
+
+<div class="logo_navigation">
+<a href="#URL_ECRIRE{migrateur}">
+	<img src="[(#CHEMIN_IMAGE{migrateur-128.png})]" alt="Logo migrateur" />
+</a>
+<h1><:migrateur:migrateur_titre_court:></h1>
+</div>
+
+#BOITE_OUVRIR{'',simple}
+<div id='goto_migration'>
+<a href='[(#URL_ECRIRE{migrateur})]'>
+	[(#CHEMIN_IMAGE{migration_suivante.png}|image_reduire{16})]
+	<:migrateur:migrateur_page:>
+</a>
+</div>
+#BOITE_FERMER
+
+
+
+<div id="dependances_php" class='liste'>
+	<h4>Dépendances nécessaires</h4>
+	<ul class='liste-items'>
+		[(#SET{ok,#VAL{PHP_VERSION}|constant|version_compare{5.4.0, >=}})]
+		<li class="item[ (#GET{ok}|?{item_ok,item_erreur})]">
+			[(#GET{ok}|?{
+				[(#CHEMIN_IMAGE{ok-16.png}|balise_img{OK})],
+				[(#CHEMIN_IMAGE{erreur-16.png}|balise_img{Erreur})],
+			})]
+			PHP >= 5.4.0
+		</li>
+		[(#GET{ok}|non)
+			[(#SET{ok,#VAL{PHP_VERSION}|constant|version_compare{5.3.0}})]
+			<li class="item[ (#GET{ok}|>{0}|?{item_ok,item_erreur})]">
+				[(#GET{ok}|?{
+					[(#CHEMIN_IMAGE{ok-16.png}|balise_img{OK})],
+					[(#CHEMIN_IMAGE{erreur-16.png}|balise_img{Erreur})],
+				})]
+				PHP >= 5.3.0<br />
+				+ compatibilité (fonctionnement théorique)
+			</li>
+		]
+
+		<BOUCLE_functions(DATA){source tableau,#ARRAY{
+			Curl,#LISTE{curl_init},
+			MCrypt,#LISTE{mcrypt_create_iv},
+			OpenSSL,#LISTE{openssl_get_cipher_methods,openssl_encrypt},
+			hex2bin,#LISTE{hex2bin,bin2hex},
+		}}>
+		#SET{ok,1}
+		<BOUCLE_func(DATA){source tableau,#VALEUR}>
+			[(#VALEUR|function_exists|non)#SET{ok,0}]
+		</BOUCLE_func>
+
+		<li class="item[ (#GET{ok}|?{item_ok,item_erreur})]">
+			[(#GET{ok}|?{
+				[(#CHEMIN_IMAGE{ok-16.png}|balise_img{OK})],
+				[(#CHEMIN_IMAGE{erreur-16.png}|balise_img{Erreur})],
+			})]
+			#CLE
+		</li>
+		</BOUCLE_functions>
+
+	</ul>
+</div>
+
+<style type='text/css'>
+.logo_navigation {text-align:center;}
+#goto_migration img { vertical-align:middle; }
+#dependances_php .item_erreur { background-color:#FFE4DE; }
+#dependances_php .item img { margin-right:.5em; margin-left:.5em; vertical-align:middle; }
+</style>

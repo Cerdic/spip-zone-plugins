@@ -1,0 +1,73 @@
+
+<div class="logo_navigation">
+<a href="#URL_ECRIRE{migrateur}">
+	<img src="[(#CHEMIN_IMAGE{migrateur-128.png})]" alt="Logo migrateur" />
+</a>
+<h1><:migrateur:migrateur_titre_court:></h1>
+</div>
+
+
+[(#SET{key_ok,#CONFIG{migrateur/auth_key}|migrateur_verifier_peremption_auth_key})]
+
+#BOITE_OUVRIR{'',simple}
+<div id='goto_config_migrateur'>
+<a href='[(#URL_ECRIRE{configurer_migrateur})]'>
+	[(#CHEMIN_IMAGE{cfg-16.png}|balise_img)]
+	<:migrateur:migrateur_configurer:>
+</a>
+</div>
+#BOITE_FERMER
+
+
+[(#CONFIG{migrateur/type}|=={source}|oui)
+	#BOITE_OUVRIR{'',simple}
+	<:migrateur:conf_ce_site_est:><br /><strong><:migrateur:conf_source:></strong>
+	#BOITE_FERMER
+]
+
+[(#CONFIG{migrateur/type}|=={destination}|oui)
+	#BOITE_OUVRIR{'',simple}
+	<:migrateur:conf_ce_site_est:><br /><strong><:migrateur:conf_destination:></strong>
+	#BOITE_FERMER
+]
+
+
+[(#CONFIG{migrateur/type}|non)
+	#BOITE_OUVRIR{'',error}
+	<:migrateur:conf_ce_site_est:><br /><strong><:migrateur:conf_non_configure:></strong>
+	#BOITE_FERMER
+]
+
+[(#CONFIG{migrateur/type}|in_any{#LISTE{source,destination}}|oui)
+	[(#GET{key_ok}|oui)
+		#BOITE_OUVRIR{'',success}
+		[(#GET{key_ok}|singulier_ou_pluriel{migrateur:cle_valide_une_heure,migrateur:cle_valide_nb_heures}|_T)]
+		#BOITE_FERMER
+	]
+	[(#GET{key_ok}|non)
+		#BOITE_OUVRIR{'',error}
+		<:migrateur:cle_authentification_perimee:>
+		#BOITE_FERMER
+	]
+]
+
+[(#CONFIG{migrateur/type}|=={destination}|oui)
+	#BOITE_OUVRIR{'',simple}
+	[(#SELF|parametre_url{stream,''}|lien_ou_expose{Mode normal,#ENV{stream}|non})]
+	| [(#SELF|parametre_url{stream,1}|lien_ou_expose{Mode stream,#ENV{stream}|oui})]
+	#BOITE_FERMER
+]
+
+<style type='text/css'>
+.logo_navigation {text-align:center;}
+#goto_config_migrateur img { vertical-align:middle; }
+</style>
+
+
+[(#REM)
+	Afficher un lien vers l'étape suivante,
+	uniquement si le site est configuré comme destination
+]
+[(#CONFIG{migrateur/type}|=={destination}|oui)
+	[(#INCLURE{fond=prive/squelettes/inclure/migrateur-destination-colonne, env})]
+]
