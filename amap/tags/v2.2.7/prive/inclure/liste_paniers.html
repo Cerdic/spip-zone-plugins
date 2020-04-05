@@ -1,0 +1,39 @@
+[(#REM)
+
+  Squelette
+  (c) 2011 - 2013 Amap
+  Distribue sous licence GPL
+
+]
+<B_paniers>
+[<p class="pagination">(#PAGINATION)</p>]
+<table class="amap spip">
+	<thead>
+	<tr>
+		<th>[(#TRI{nom,<:nom:>})]</th>
+		<th>[(#TRI{id_producteur,<:amap:producteurs:>})]</th>
+		<th>[(#TRI{date_distribution,<:amap:date_distribution:>})]</th>
+		<th><:amap:type_panier:></th>
+		<th><:amap:action:></th>
+	</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_paniers(AMAP_PANIERS auteurs) {tri date_distribution}{pagination 20}{age<0}>
+	<tr>
+		<td>#NOM</td>
+		<td><BOUCLE_prod(AUTEURS){tous}{id_auteur=#ID_PRODUCTEUR}>#NOM</BOUCLE_prod></td>
+		<td>[(#DATE_DISTRIBUTION|affdate{'d/m/Y'})]</td>
+		<td>[(#TYPE_PANIER|=={petit}|oui)<:amap:petit:>] [(#TYPE_PANIER|=={grand}|oui)<:amap:grand:>]</td>
+		<td><a href='[(#URL_PAGE{panier}|parametre_url{id_amap_panier,#ID_AMAP_PANIER})]'><:amap:action_modifier:></a>
+		|	<a href='[(#URL_ACTION_AUTEUR{supprimer_amap_panier,#ID_AMAP_PANIER,#SELF})]'><:amap:action_supprimer:></a>
+		</td>
+	</tr>
+	</BOUCLE_paniers>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION)</p>]
+</B_paniers>
+	<p style="text-align: justify;">
+		<:amap:table_vide_aucun_enregistrement:>
+	</p>
+<//B_paniers>

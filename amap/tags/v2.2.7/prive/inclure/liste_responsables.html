@@ -1,0 +1,36 @@
+[(#REM)
+
+  Squelette
+  (c) 2011 - 2013 Amap
+  Distribue sous licence GPL
+
+]
+#CACHE{0}
+<B_responsables>
+[<p class="pagination">(#PAGINATION)</p>]
+<table class="amap spip">
+	<thead>
+	<tr>
+		<th>[(#TRI{date_distribution,<:amap:date_distribution:>})]</th>
+		<th>[(#TRI{nom,<:amap:responsables:>})]</th>
+		<th><:amap:action:></th>
+	</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_responsables(AMAP_RESPONSABLES auteurs) {tri date_distribution}{pagination 20}>
+	<tr>
+		<td>[(#DATE_DISTRIBUTION|affdate{'d/m/Y'})]</td>
+		<td><BOUCLE_prod(AUTEURS){tous}{id_auteur}><a href="[(#URL_ECRIRE{auteur_infos}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a></BOUCLE_prod></td>
+		<td><a href='[(#URL_ECRIRE{responsable_enregistre}|parametre_url{id_amap_responsable,#ID_AMAP_RESPONSABLE})]'><:amap:action_modifier:></a>
+		|	<a href='[(#URL_ACTION_AUTEUR{supprimer_amap_responsable,#ID_AMAP_RESPONSABLE,#SELF})]'><:amap:action_supprimer:></a>
+		</td>
+	</tr>
+	</BOUCLE_responsables>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION)</p>]
+</B_responsables>
+	<p style="text-align: justify;">
+		<:amap:table_vide_aucun_enregistrement:>
+	</p>
+<//B_responsables>

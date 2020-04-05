@@ -1,0 +1,70 @@
+<plugin>
+	<nom>AMAP</nom>
+	<slogan>Gestion des paniers et adh&#233;rents pour les AMAP</slogan>
+
+	<description>
+		Le plugin est d&#233;velopp&#233; pour g&#233;r&#233; les paniers et adh&#233;rents (dit amapiens). 
+		Les paniers sont cr&#233;&#233;s et attribu&#233;s &#224; un amapien, ce dernier pourra mettre &#224; disposition un panier si il n'est pas pr&#233;sent 
+		pour le r&#233;cup&#233;rer le jour pr&#233;vu.
+	</description>
+
+	<auteur>St&#233;phane Moulinet, E-cosystems, [Pierre KUHN->http://www.pierre-kuhn.org] </auteur>
+	<version>2.2.7</version>
+	<version_base>1.2</version_base>
+
+	<licence>GNU/GPL - &copy; 2010-2013</licence>
+	<etat>stable</etat>
+
+	<prefix>amap</prefix>
+
+	<icon>prive/themes/spip/images/amapconfig-64.png</icon>
+	<lien>https://contrib.spip.net/Plugin-AMAP-Version-2</lien>
+
+	<install>base/amap_installation.php</install>
+	<options>amap_options.php</options>
+
+	<bouton id="amap" parent="configuration">
+		<icone>prive/themes/spip/images/amapconfig-24.gif</icone>
+		<titre>amap:gestion_amap</titre>
+		<url>mini_doc</url>
+	</bouton>
+	<bouton id="amap_bandeau" parent="bando_configuration">
+		<icone>prive/themes/spip/images/amapconfig-16.gif</icone>
+		<titre>amap:gestion_amap</titre>
+		<url>mini_doc</url>
+	</bouton>
+
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>amap_autoriser.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/amap_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/amap_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_champs_extras</nom>
+		<inclure>base/amap_tables.php</inclure>
+	</pipeline>
+    <pipeline>
+        <nom>affiche_gauche</nom>
+        <inclure>amap_pipelines.php</inclure>
+    </pipeline>
+
+	<necessite id="SPIP" version="[2.0.10;2.1.99]" />
+	<necessite id="agenda" version="[2.2.1;]" />
+	<necessite id="cextras" version="[1.9.0;]" />
+	<necessite id="facteur" version="[1.6.2;]" />
+	<necessite id="Iterateurs" version="[0.4.0;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
+	<necessite id="spip_bonux" version="[2.2.21;]" />
+	<necessite id="verifier" version="[0.1.0;]" />
+	<necessite id="z" version="[1.5.1;]" />
+	<utilise id="fpdf" version="[0.0.1;]" />
+	<categorie>divers</categorie>
+</plugin>
