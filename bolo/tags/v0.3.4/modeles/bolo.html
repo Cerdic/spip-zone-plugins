@@ -1,0 +1,13 @@
+[(#REM)
+
+	Modèle Bolo pour afficher du faux texte.
+
+	Paramètres :
+	- id_bolo : nombre pour couper le texte.
+	- suite   : points de suite après la coupe.
+              «null» pour utiliser la valeur par défaut : «&nbsp;(...)»
+ - type     : type de texte utilisé, 'latin' par défaut.
+
+]
+<!-- modele bolo -->
+[(#BOLO{#ENV{id_bolo},#ENV{suite,null},#ENV{type,latin}})]
