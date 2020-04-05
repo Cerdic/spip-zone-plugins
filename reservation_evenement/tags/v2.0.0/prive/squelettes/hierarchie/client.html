@@ -1,0 +1,12 @@
+<!-- hierarchie -->
+<a href="#URL_ECRIRE{clients}"><:reservation:titre_clients:></a> &gt;
+[(#INFO_LANG{#ENV{objet},#ENV{id_objet}}|changer_typo)]
+<BOUCLE_auteur(AUTEURS reservations){spip_reservations.id_auteur>0}{email}{tout}>
+  #SET{nom,#NOM}
+</BOUCLE_auteur>
+  <BOUCLE_auteur_reservation(RESERVATIONS){email}{tout}{0,1}{!par id_reservation}>
+    #SET{nom,#NOM}
+  </BOUCLE_auteur_reservation>
+<//B_auteur>
+  <strong class="on">[(#GET{nom}|couper{80}|sinon{<:ecrire:info_sans_titre:>})]</strong>
+[(#REM|changer_typo)]

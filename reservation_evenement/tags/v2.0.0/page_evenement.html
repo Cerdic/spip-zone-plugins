@@ -1,0 +1,61 @@
+<BOUCLE_principale(EVENEMENTS) {id_evenement}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#TITRE|couper{80}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION{150}|attribut_html)" />]
+[<link rel="canonical" href="(#URL_EVENEMENT|url_absolue)" />]
+<INCLURE{fond=inclure/head} />
+</head>
+
+<body class="pas_surlignable page_article">
+<div class="page">
+
+	<INCLURE{fond=inclure/header} />
+	<INCLURE{fond=inclure/nav,env} />
+	
+	<div class="main">
+		[(#REM) Contenu principal : contenu de l'article ]
+		<div class="wrapper hfeed">
+		<div class="content hentry" id="content">
+			<INCLURE{fond=content/evenement,id_evenement,env}/>
+	
+		</div><!--.content-->
+		</div><!--.wrapper-->
+	
+	
+		<div class="aside">
+		
+			<INCLURE{fond=inclure/navsub, id_rubrique} />
+			#FORMULAIRE_RECHERCHE
+	
+			[(#REM) Evenements du même article]
+			<B_evenements_article>
+			<div class="menu">
+				<h2><:agenda:evenements:></h2>
+				<ul>
+					<BOUCLE_evenements_article(EVENEMENTS) {id_article} {!par date} {0,10}>
+					<li><a href="#URL_EVENEMENT"[ class="(#EXPOSE)"]>#TITRE</a></li>
+					</BOUCLE_evenements_article>
+				</ul>
+			</div>
+			</B_evenements_article>
+	
+			[(#REM) Menu de navigation mots-cles ]
+			#MODELE{article_mots}
+			
+		</div><!--.aside-->
+	</div><!--.main-->
+
+	<INCLURE{fond=inclure/footer,self=#SELF} />
+
+</div><!--.page-->
+</body>
+</html>
+</BOUCLE_principale>

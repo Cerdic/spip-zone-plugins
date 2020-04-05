@@ -1,0 +1,6 @@
+[(#ENV{total}|>{0}|oui)
+	<div class="champ contenu_montant">
+		<label><:reservation:montant:> : </label>
+		<span>[(#ENV{total}|appliquer_filtre{prix_formater,#GET{total}|})]</span>
+	</div>
+]

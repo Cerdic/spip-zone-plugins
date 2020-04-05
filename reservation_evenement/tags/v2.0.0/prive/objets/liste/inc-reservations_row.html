@@ -1,0 +1,20 @@
+<td class='picto'>[(#CHEMIN_IMAGE{reservation-16.png}|balise_img)]</td>
+<td class='statut'>[(#STATUT|puce_statut{reservation,#ID_RESERVATION})]</td>
+<td class='reference principale'><a href="[(#ID_RESERVATION|generer_url_entite{reservation})]" title="<:info_numero_abbreviation|attribut_html:> #ID_RESERVATION">#REFERENCE </a></td>
+<td class='client'>
+<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+	<a href="#URL_ECRIRE{client,email=#EMAIL}" title="#NOM">#NOM</a> - <a href="mailto:#EMAIL">#EMAIL</a>
+</BOUCLE_auteur>
+	<a href="#URL_ECRIRE{client,email=#EMAIL}" title="#NOM">#NOM</a> - <a href="mailto:#EMAIL">#EMAIL</a>
+<//B_auteur>
+</td>
+
+<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
+<td class='id'>[(#AUTORISER{modifier,reservation,#ID_RESERVATION}|?{ <a href="[(#URL_ECRIRE{reservation_edit,id_reservation=#ID_RESERVATION})]">#ID_RESERVATION</a>,
+#ID_RESERVATION
+})][(#ID_RESERVATION_SOURCE|>{0}|oui)
+#SET{reference,#INFO_REFERENCE{reservation,#ID_RESERVATION_SOURCE}}
+#SET{chaine,#ORIGINE_LIEN|concat{:type_lien_#TYPE_LIEN}{reference=#GET{reference}}}
+[(#SET{chaine_traduite,#GET{chaine}|_T{#ARRAY{reference,#GET{reference}},#ARRAY{force,''}}|sinon{#GET{chaine_defaut}|_T{#ARRAY{reference,#GET{reference}}}}})]
+<br />
+<img src="[(#CHEMIN_IMAGE{lien-#TYPE_LIEN-16.png}|sinon{#CHEMIN_IMAGE{lien-16.png}})]" alt="#GET{chaine_traduite}" title="#GET{chaine_traduite}" />] </td>
