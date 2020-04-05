@@ -1,0 +1,19 @@
+<paquet
+	prefix="jquery"
+	categorie="outil"
+	version="1.11.3"
+	etat="test"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="img/jquery-32.png"
+	documentation="https://jquery.com/"
+>
+
+	<nom>jQuery</nom>
+
+	<credit lien='http://jquery.com/'>jQuery 1.11.3</credit>
+
+	<licence>GNU/GPL</licence>
+
+	<chemin path="squelettes" type="public" />
+
+</paquet>
