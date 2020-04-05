@@ -1,0 +1,18 @@
+<traduction
+	module="paquet-critere_mots"
+	id="paquet-critere_mots--critere_mots-55031"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip-contrib-extensions/critere_mots.git"
+	reference="fr">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-critere_mots?lang_cible=en" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
+	</langue>
+	<langue code="es" url="https://trad.spip.net/tradlang_module/paquet-critere_mots?lang_cible=es" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="severo" lien="https://trad.spip.net/auteur/severo" />
+	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-critere_mots?lang_cible=fr" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="nl" url="https://trad.spip.net/tradlang_module/paquet-critere_mots?lang_cible=nl" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
+	</langue>
+</traduction>

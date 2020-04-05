@@ -1,0 +1,21 @@
+<paquet
+	prefix="critere_mots"
+	categorie="navigation"
+	version="4.3.2"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="img_pack/stock_filter-data-by-criteria-24.png"
+	documentation="https://contrib.spip.net/Critere-mots"
+>
+
+	<nom>Critère mots</nom>
+	<!-- Sélectionner des objets ayant des mots clés en communs -->
+
+	<auteur>Fil</auteur>
+	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
+	<auteur lien="https://contrib.spip.net/RealET">RealET (Formulaires)</auteur>
+
+	<copyright>2017</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+</paquet>
