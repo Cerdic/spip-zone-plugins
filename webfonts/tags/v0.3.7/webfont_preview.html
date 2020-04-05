@@ -1,0 +1,34 @@
+[(#HTTP_HEADER{Content-Type: text/html; charset=#CHARSET})]
+#SET{webfonts, #ENV{font-family}|replace{' ','+'}}
+#SET{font-weight, #ENV{font-variant}|match{\d+?}|sinon{400}}
+#SET{font-style, #ENV{font-variant}|match{(\D+?)}|=={italic}|?{'italic','normal'}}
+
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=#GET{webfonts}:#ENV{font-variant}&text=[(#ENV{preview_text,Making the Web Beautiful!}|urlencode)]">
+    <style>
+      .preview_infos {
+        float:right;
+        position: absolute;
+        top: O;
+        right: 0;
+        padding: 5px;
+        background-color: black;
+        color: white;
+        font-size: 14px;
+        font-family: sans-serif;    
+      }
+      .preview_block {
+        font-family: '#ENV{font-family}', #ENV{font-category, sans-serif};
+        font-size: #ENV{preview_font_size, 16px};
+        font-weight: #GET{font-weight};
+        font-style: [(#GET{font-style})]; 
+      }
+    </style>
+  </head>
+  <body>
+    <div class="preview_infos">#GET{webfonts}:#ENV{font-variant} :  #ENV{font-family} - #GET{font-weight} - #GET{font-style} - #ENV{font-category}</div>
+    <div class="preview_block">[(#ENV{preview_text, Grumpy wizards make toxic brew for the evil Queen and Jack. })]</div>
+  </body>
+</html>

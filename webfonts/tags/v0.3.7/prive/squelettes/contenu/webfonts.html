@@ -1,0 +1,82 @@
+[(#REM)<!--
+
+Webfonts2
+Distribue sous licence GPL
+
+
+https://developers.google.com/fonts/docs/getting_started#specifying_font_families_and_styles_in_a_stylesheet_url
+
+-->]
+<h1 class="grostitre"><:webfonts2:titre:></h1>
+<div class='onglets_simple clearfix'>
+	<ul>
+		<li>[(#SELF|parametre_url{webfonts2,''}|lien_ou_expose{<:webfonts2:cfg_titre:>, [(#ENV{webfonts2}|non)],ajax})]</li>
+		<li>[(#SELF|parametre_url{webfonts2,'googlefonts'}|lien_ou_expose{'Recherche GoogleFonts',[(#ENV{webfons2}|=={googlefonts})],ajax})]</li>
+	</ul>
+</div>
+
+<BOUCLE_test(CONDITION){si #ENV{webfonts2}|=={'googlefonts'}}>
+	[<div class="ajax">(#FORMULAIRE_SELECTIONNER_WEBFONTS)</div>]
+</BOUCLE_test>
+	<div class="ajax">
+		#FORMULAIRE_CONFIGURER_WEBFONTS2
+	</div>
+
+
+	<h2>Liste des webfonts insérées via la pipeline</h2>
+
+	<form action="#SELF" class="formulaire_spip preview_params">
+		<div class="editer-group">
+			<div class="editer">
+				<label for="specimen">Spécimen</label>
+				<p>
+					[<a class="spip_out" href="(#PIPELINE{fonts_list}|googlefont_url_specimen)" target="_blank">Voir le spécimen</a>]
+				</p>
+			</div>
+
+		</div>
+		<div class="editer-group">
+			<div class="editer">
+					<label for="preview_text">Texte pour la preview</label>
+					<input type="text" id="preview_text" name="preview_text" value='#ENV{preview_text, '<:webfonts2:default_preview_text:>' }'>
+				</div>
+			<div class="editer">
+				<label for="preview_font_size">preview_font_size</label>
+				<p class="explication">Une valeur en pixel, em, rem</p>
+				<input type="text" name="preview_font_size" id="preview_font_size"
+					   value="#ENV{preview_font_size,16px}"/>
+
+			</div>
+		</div>
+		<div class="editer-group">
+				<div class="editer">
+					<div class="choix">
+						<input type='checkbox' class="checkbox" name='preview' value='oui' id='preview' />
+						<label for='preview'>Afficher la preview</label>
+					</div>
+				</div>
+			</div>
+			<p class='boutons'>
+				<input type='submit' class='submit' value='Recharger' />
+			</p>
+	</form>
+	<INCLURE{fond=inclure/font_list,ajax=fonts,env} />
+	<script>
+	jQuery(function($){
+		$('form.preview_params').on('submit', function(e){
+			var previewTxt = $('#preview_text').val();
+			var previewFontSize = $('#preview_font_size').val();
+			var preview = $('.preview_params #preview');
+			ajaxReload('fonts', {
+				args:{
+					preview_text: previewTxt,
+					preview_font_size: previewFontSize,
+					preview: (preview[0].checked ? 'oui' : 'non')
+				},
+				history:false
+			});
+			e.preventDefault();
+		});
+	});
+	</script>
+<//B_test>

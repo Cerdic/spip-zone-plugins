@@ -1,0 +1,69 @@
+
+<B_listResults>
+<h2>Resultats</h2>
+#ANCRE_PAGINATION
+<BOUCLE_listResults(DATA){source table, #FONT_INDEX|google_font_search{#ENV{font_search}}}
+						{category ?= #ENV{category}}
+						{pagination 10}>
+
+<h3>#VALEUR{family}</h3>
+
+<BOUCLE_fontInfosCond(CONDITION){si #ENV{infos}|=={oui}}>
+<table>
+	<thead>
+		<tr>
+			<th>Famille</th>
+			<th>Version</th>
+			<th>Catégorie</th>
+			<th>Subsets</th>
+			<th>Variantes</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<a href="https://fonts.google.com/specimen/#VALEUR{family}" title="Voir le spécimen de #VALEUR{family} sur GoogleFont" target="_blank" rel="noreferrer noopener">
+					#VALEUR{family}
+					#SET{family,#VALEUR{family} }
+				</a>
+			</td>
+			<td>#VALEUR{version}</td>
+			<td>#VALEUR{category}</td>
+			<td>[(#VALEUR{subsets}|foreach)]</td>
+			<td>
+			<BOUCLE_downloads(POUR){tableau #VALEUR{files}}>
+				[(#SET{file_name, #VAL{#GET{family}_#CLE}|slugify})]
+				<b>#GET{family}</b> - #CLE <br>
+				[<a href="(#URL_PAGE{download_font}|parametre_url{filename,#GET{file_name}}|parametre_url{src,#VALEUR})"
+				title="#VALEUR">Télécharger</a><br>]
+			</BOUCLE_downloads>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</BOUCLE_fontInfosCond><//B_fontInfosCond>
+
+#SET{family,#VALEUR{family}}
+#SET{font-category,#VALEUR{category}}
+<BOUCLE_previewCond(CONDITION){si #ENV{preview}|=={oui}}>
+
+<BOUCLE_loop(POUR){tableau #VALEUR{variants}}>
+<iframe src="[(#URL_PAGE{webfont_preview}|parametre_url{font-family,#GET{family}}
+											|parametre_url{font-category,#GET{font-category}}
+											|parametre_url{font-variant,#VALEUR}
+											|parametre_url{preview_font_size,#ENV{preview_font_size,16}}
+											|parametre_url{preview_text,#ENV{preview_text}})]"
+		frameborder="0"
+		[(#SET{frame_id,preview_#GET{family}-#VALEUR-#COMPTEUR_BOUCLE}|slugify)]
+		id="#GET{frame_id}"
+		onLoad="autoResize('#GET{frame_id}');"
+		class="webfont_preview lazyload"></iframe>
+</BOUCLE_loop>
+
+</BOUCLE_previewCond><//B_previewCond>
+
+
+</BOUCLE_listResults>
+
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</B_listResults><//B_listResults>

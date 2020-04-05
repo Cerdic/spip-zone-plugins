@@ -1,0 +1,24 @@
+<B_insertedFonts>
+<div class="font-list">
+<BOUCLE_insertedFonts(DATA){source table, #PIPELINE{fonts_list}}>
+	<h3>[(#CLE) -][ (#VALEUR{family})]</h3>
+	#SET{family,#VALEUR{family}
+	<BOUCLE_variants(POUR){tableau #VALEUR{variants}}>
+		<BOUCLE_previewCond(CONDITION){si #ENV{preview}|=={oui}}>
+		<iframe src="[(#URL_PAGE{webfont_preview}|parametre_url{font-family,#GET{family}}
+										|parametre_url{font-variant,#VALEUR}
+										|parametre_url{preview_font_size,#ENV{preview_font_size,16px}}
+										|parametre_url{preview_text,#ENV{preview_text}})]"
+						frameborder="0"
+						[(#SET{frame_id,preview_#GET{family}-#VALEUR-#COMPTEUR_BOUCLE}|slugify)]
+						id="#GET{frame_id}"
+						onLoad="autoResize('#GET{frame_id}');"
+						class="webfont_preview lazyload"></iframe>
+		</BOUCLE_previewCond>
+			<h4>#VALEUR</h4>
+		<//B_previewCond>
+	</BOUCLE_variants>
+</BOUCLE_insertedFonts>
+</div>
+</B_insertedFonts>
+<//B_insertedFonts>

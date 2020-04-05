@@ -1,0 +1,36 @@
+
+
+
+<h2>Liste des webfonts inssérées via la pipeline</h2>
+
+
+<B_insertedFonts>
+	<div class="font-list">
+	<BOUCLE_insertedFonts(DATA){source table, #PIPELINE{fonts_list}}>
+		<h3>[(#VALEUR{family})]</h3>
+		<ul>
+			<BOUCLE_variants(POUR){tableau #VALEUR{variants}}>
+				<li>#VALEUR</li>
+			</BOUCLE_variants>	
+		</ul>
+	</BOUCLE_insertedFonts>
+	</div>
+</B_insertedFonts>
+<//B_insertedFonts>
+
+
+<hr>
+
+<h2>Liste des fonts disponible </h2>
+
+<ul>
+	<BOUCLE_police(POUR){tableau #VAL{polices/}|find_all_in_path{\w+\.ttf|.woff}}{par cle}>
+		<li>#CLE - #VALEUR</li>
+	</BOUCLE_police>
+</ul>
+
+
+<pre><code>
+[(#VAL{#ARRAY{family,'Open Sans', file, 'polices/opensans' }}|fontface_declaration{#ARRAY{'.ttf','truetype'}})]
+</code></pre>
+

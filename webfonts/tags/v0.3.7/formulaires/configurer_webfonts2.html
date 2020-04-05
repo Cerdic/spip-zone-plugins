@@ -1,0 +1,95 @@
+[(#REM)<!--
+
+
+
+-->]
+<style>
+input#webfonts_selector,
+input#googlefonts_api_key{
+	width: 100%;
+	font-size: 1em;
+}
+</style>
+<div class="formulaire_spip formulaire_editer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'>
+		<div>
+			[(#REM) <!--declarer les hidden qui declencheront le service du formulaire
+			parametre : url d'action -->]
+			#ACTION_FORMULAIRE{#ENV{action},#FORM}
+			<fieldset>
+				<legend>Configuration</legend>
+				<div class="editer-group">
+					  <div class="editer googlefonts_api_key[ (#ENV**{erreurs}|table_valeur{googlefonts_api_key}|oui)erreur]">
+						  <label for="nom"><:webfonts2:label_googlefonts_api:></label>[
+						  <span class='erreur_message'>(#ENV**{erreurs}|table_valeur{googlefonts_api_key})</span>
+						  ]<p class="explication"><:webfonts2:explication_googlefonts_api:></p>
+						  <input type="text" name='googlefonts_api_key' id='googlefonts_api_key' value="#ENV{googlefonts_api_key}" />
+					  </div>
+				</div>
+				<div class="editer-group">
+					  [(#REM)<!-- méthodes d'insertion standard (balise link ) | @import (balise style) -->]
+					  <div class="editer methode_insert">
+						<label for="methode_insert"><:webfonts2:label_methode_insert:></label>
+						<select name="methode_insert" id="methode_insert">
+							<option value=""> Choisissez une méthode d'insertion</option>
+							<option value="standard"[(#ENV{methode_insert}|=={standard}|?{'selected="selected"',''})]>Standard</option>
+							<option value="at_import"[(#ENV{methode_insert}|=={at_import}|?{'selected="selected"',''})]>@import</option>
+						</select>
+					  </div>
+						[(#REM)<!-- inserer dans l'espace privé -->]
+					  <div class="editer insertion_prive">
+								<label for="insertion_prive"><:webfonts2:label_insertion_prive:></label>
+								<p class="explication"><:webfonts2:explication_insertion_prive:></p>
+								<input class="checkbox" type="checkbox" id="insertion_prive" name="insertion_prive" value="#ENV{insertion_prive,1}"[(#ENV{insertion_prive}|oui) checked="checked"]>
+					  </div>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend>Webfonts</legend>
+				<div class="editer-group">
+					<div class="editer">
+						<label for="webfonts">webfonts</label>
+						<input name="webfonts"
+							   data-selecteur="webfonts"
+							   multiple="multiple"
+							   id="webfonts_selector"
+							   type="text" value="#ENV{webfonts}"/>
+					</div>
+				</div>
+			</fieldset>
+			<!--extra-->
+			<input type="hidden" name="_meta_casier" value="webfonts2"/>
+			<p class='boutons'>
+			  <input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+			</p>
+		</div>
+	</form>]
+</div>
+
+<script>
+function split( val ) {
+ return val.split( /,\s*/ );
+}
+
+jQuery(function($){
+	var input = $('#webfonts_selector');
+	$(input).autocomplete({
+		select: function(event,ui){
+			var terms = split( this.value );
+			// remove the current input
+			terms.pop();
+			// add the selected item
+			terms.push( ui.item.value );
+			// add placeholder to get the comma-and-space at the end
+			terms.push( "" );
+			this.value = terms.join( ", " );
+			return false;
+		}
+	});
+});
+
+
+</script>

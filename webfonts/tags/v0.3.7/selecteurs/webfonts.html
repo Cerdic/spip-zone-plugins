@@ -1,0 +1,17 @@
+#HTTP_HEADER{Content-Type: text/plain; charset=#CHARSET}
+[(#REM)<!--
+
+Liste de selection d'une webfont depuis le fichier index google_font
+a partir d'une valeur passee en parametre
+nom lisible : family : variant-->]
+#CACHE{0}
+#SET{resultats, #LISTE}
+[(#REM) Chercher les fonts correspondant a la requete ]
+<BOUCLE_s(DATA){source table, #FONT_INDEX}{family LIKE %(#ENV*{q})%}{0,20}>
+#SET{family,#VALEUR{family}}
+<BOUCLE_listVariantes(POUR){tableau #VALEUR{files}}>
+[(#SET{resultats, [(#GET{resultats}|push{#ARRAY{label,#GET{family} - #CLE,value, #GET{family}:#CLE}})]})]
+</BOUCLE_listVariantes>
+</BOUCLE_s>
+[(#GET{resultats}|json_encode)]
+#FILTRE{trim}

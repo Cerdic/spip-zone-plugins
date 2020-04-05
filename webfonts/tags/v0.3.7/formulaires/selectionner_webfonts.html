@@ -1,0 +1,116 @@
+[(#REM)<!--
+formulaire_selectionner_webfonts
+
+Squelette
+(c) 2016
+Distribue sous licence GPL
+
+font
+	family
+	subset
+	variants
+
+-->]
+<BOUCLE_apiKey(CONDITION){si  #CONFIG{webfonts2/googlefonts_api_key}|oui }>
+<h2>Index des polices</h2>
+<p class="explication">
+	Re-génère le fichier index qui peut être utilisé ensuite
+</p>
+[(#BOUTON_ACTION{'Mettre a jour',#URL_ACTION_AUTEUR{webfonts_index,#ID_AUTEUR},''})]
+</BOUCLE_apiKey><//B_apiKey>
+<div class="formulaire_spip formulaire_editer formulaire_#FORM">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<BOUCLE_test(CONDITION){si #ENV{editable}|oui}>
+<form action="#ENV{action}" method="post">
+        <div>
+		[(#REM)<!-- declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action -->]
+		#ACTION_FORMULAIRE{#ENV{action},#FORM}
+
+		<div class="editer-group">
+			<div class="editer">
+				<label for="font_search">Rechercher une typo</label>
+				<input name="font_search" type="text" value="#ENV{font_search}">
+			</div>
+        </div>
+
+		<div class="editer-group">
+			[(#REM)<!--
+			Pour le moment on désactive le tri, car il necessite un appel a l'api
+			a chaque validation du form, on utilisera plutot les tri sur la boucle data d'affichage
+
+			<div class="editer">
+				<label for="sort">Trier par</label>
+				<select name="sort" id="sort">
+				  <option value="popularity"[(#ENV{sort}|=={popularity}|?{' selected="selected"',''})]>Popularité</option>
+				  <option value="alpha"[(#ENV{sort}|=={alpha}|?{' selected="selected"',''})]>Alphabétique</option>
+				</select>
+			</div>-->]
+			<div class="editer">
+				<label for="category">Catégories</label>
+				<select name="category" id="category">
+					<option value=""> Choisissez une catégorie</option>
+					<option value="serif"[(#ENV{category}|=={serif}|?{'selected="selected"',''})]>Sérif</option>
+					<option value="sans-serif"[(#ENV{category}|=={sans-serif}|?{'selected="selected"',''})]>Sans sérif</option>
+					<option value="display"[(#ENV{category}|=={display}|?{'selected="selected"',''})]>Display</option>
+					<option value="handwriting"[(#ENV{category}|=={handwriting}|?{'selected="selected"',''})]>Handwritting</option>
+					<option value="monospace"[(#ENV{category}|=={monospace}|?{'selected="selected"',''})]>Monospace</option>
+				</select>
+			</div>
+			<div class="editer">
+				<label for="preview_text">Texte pour la preview</label>
+				<input type="text" name="preview_text" value='#ENV{preview_text, '<:webfonts2:default_preview_text:>'}'>
+			</div>
+			<div class="editer">
+				<label for="preview_font_size">preview_font_size</label>
+				<p class="explication">Une valeur en pixel, em, rem</p>
+				<input type="text" name="preview_font_size" id="preview_font_size"
+					   value="#ENV{preview_font_size,16px}"/>
+
+			</div>
+		</div>
+        <div class="editer-group">
+			<div class="editer">
+				<div class="choix">
+					<input type='checkbox' class="checkbox" name='preview' value='oui' id='preview'[ (#ENV{preview}|=={oui}|?{'checked="checked"'})] />
+					<label for='preview'>Afficher la preview</label>
+				</div>
+				<div class="choix">
+					<input type='checkbox' class="checkbox" name='infos' value='oui' id='infos'[ (#ENV{infos}|=={oui}|?{'checked="checked"'})] />
+					<label for='infos'>Afficher les infos</label>
+				</div>
+			</div>
+		</div>
+      [(#REM)<!-- ajouter les saisies supplementaires : extra et autre, a cet endroit -->]
+	  <!--extra-->
+	  <p class='boutons'>
+        <input type='submit' class='submit' value='Rechercher' />
+      </p>
+	</div>
+</form>
+</BOUCLE_test><//B_test>
+</div>
+
+<INCLURE{fond=inclure/google_font_list}{ajax=fonts}{env}/>
+
+<script>
+
+
+jQuery(function($){
+	$('.formulaire_selectionner_webfonts form').on('submit', function(e){
+
+			ajaxReload('fonts', {
+				args:{
+					category: '#ENV{category}',
+					search: '#ENV{font_search}',
+					infos: '#ENV{infos, non}',
+					preview: '#ENV{preview, non}'
+				},
+				history:false
+			});
+	});
+
+});
+</script>
