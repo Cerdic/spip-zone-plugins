@@ -1,0 +1,19 @@
+<paquet
+	prefix="oai"
+	categorie="divers"
+	version="1.1.7"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="oai_logo.png"
+>
+	<nom>Entrepôt OAI</nom>
+	<!-- Fournir un entrepôt OAI pouvant répondre à un moissonneur -->
+
+	<auteur lien="http://ldd.fr">Les Développements Durables</auteur>
+	<credit lien="http://www.openarchives.org">Open Archives Initiative</credit>
+	<credit lien="http://wiki.eprints.org/w/OAI_XSLT">Christopher Gutteridge, University of Southampton</credit>
+	
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+	
+	<menu nom="depots_oai" titre="oai:icone_voir_depots" parent="menu_publication" icone="images/oai-16.png" action="depots_oai" />
+</paquet>

@@ -1,0 +1,30 @@
+[(#REM)
+
+	Listes des articles, version complète.
+
+	https://www.openarchives.org/OAI/openarchivesprotocol.html#ListRecords
+	This verb is used to harvest records from a repository.
+	Optional arguments permit selective harvesting of records based on set membership and/or datestamp.
+	
+	Ce dépôt gère les identifiants de rubriques sous la forme "rubrique123"
+
+	Paramètres :
+	** obligatoire
+	* recommandé
+	
+	- **depot : type du dépôt (dist)
+	- from    : date de publication minimale au format UTC
+	- until   : date de publication maximale au format UTC
+	- set     : hiérarchie de rubriques sous la forme rubrique1:rubrique2:rubriqueN
+
+]
+#SET{set,#ENV{set}|?{#ENV{set}|replace{rubrique,''}}}
+
+<BOUCLE_articles(ARTICLES){statut IN publie,poubelle}{oaifromuntil date,maj,#ENV{from,0},#ENV{until,0}}{pagination 200}>
+[(#SET{identifier, oai:[(#CONFIG{adresse_site}|parse_url{#EVAL{PHP_URL_HOST}})]:article/#ID_ARTICLE})]
+<INCLURE{fond=oai/#ENV{depot}/GetRecord.oai_dc, identifier=#GET{identifier}} />
+</BOUCLE_articles>
+#PAGINATION{oai}
+</B_articles>
+<error code="noRecordsMatch"><:oai:erreur_norecordsmatch:></error>
+<//B_articles>

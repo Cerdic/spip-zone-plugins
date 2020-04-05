@@ -1,0 +1,16 @@
+#SET{bornes,#ENV{page_courante}|bornes_pagination{#ENV{nombre_pages},10}}
+#SET{premiere, #GET{bornes}|reset}
+#SET{derniere, #GET{bornes}|end}
+#SET{i,#ENV{page_courante}|moins{1}}
+
+[(#ENV{page_courante}|<{#ENV{nombre_pages}}|oui)
+	[(#SET{item, #ENV{page_courante}|mult{#ENV{pas}} })]
+	
+	[(#REM) Si on trouve un resumptionToken c'est lui qu'il faut prendre, sinon l'URL ]
+	#SET{resumptionToken, #ENV{url}|parametre_url{resumptionToken}}
+	[(#GET{resumptionToken}|?{
+		#SET{base, #VAL{oai?}|concat{#GET{resumptionToken}|rawurldecode}},
+		#SET{base,#ENV{url}}
+	})]
+	[<resumptionToken completeListSize="#ENV{total}" cursor="[(#ENV{page_courante}|mult{#ENV{pas}})]">(#GET{base}|parametre_url{verb,''}|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}|parse_url{#EVAL{PHP_URL_QUERY}})</resumptionToken>]
+]

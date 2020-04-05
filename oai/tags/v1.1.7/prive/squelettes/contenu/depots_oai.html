@@ -1,0 +1,45 @@
+[(#REM)
+
+	Liste des dépôts OAI détectés
+
+	On repère les dépôts en cherchant oai/nom_du_depot/Identify.html
+	Les tableaux affichent le contenu de ces squelettes.
+	Pas glop : on doit faire une copie locale du xml dans /tmp pour éviter un 404 dans la boucle data :/
+
+]
+<h1 class="grostitre"><:oai:titre_page_depots:></h1>
+
+[(#REM) On cherche les dépôts en collectant les fichiers oai/***/Identify.html ]
+#SET{chemins_depots,#ARRAY}
+<BOUCLE_chemins(DATA){source table, #REM|creer_chemin}>
+<BOUCLE_fichiers(DATA){source pregfiles, #VALEUR, Identify.html}>
+[(#REM) Si le dossier grand parent est "oai", bingo ]
+[(#VALEUR|explode{/}|table_valeur{#VALEUR|explode{/}|count|moins{3}}|=={oai}|et{#VALEUR|in_array{#GET{chemins_depots}}|non}|oui)
+#SET{chemins_depots,#GET{chemins_depots}|push{#VALEUR}}
+]
+</BOUCLE_fichiers>
+</BOUCLE_chemins>
+
+<BOUCLE_afficher_depots(DATA){source table, #GET{chemins_depots}}>
+#SET{depot,#VALEUR|explode{/}|table_valeur{#VALEUR|explode{/}|count|moins{2}}}
+#SET{url_depot,#URL_SITE_SPIP|rtrim{/}|concat{/oai.api/,#GET{depot}}}
+#SET{xml_identify,#VAL{_DIR_RACINE}|constant|concat{#GET{url_depot}|parametre_url{verb,Identify}|copie_locale{auto,#VAL{tmp/oai_}|concat{#GET{depot},_identify.xml}}}}
+
+<div class="liste-objets">
+	<table class="spip liste">
+		<tbody>
+			<caption>
+				[<strong class="caption">(#GET{url_depot}|parametre_url{verb,Identify}|lien_ou_expose)</strong>]
+			</caption>
+			<BOUCLE_identify(DATA){source xml, #GET{xml_identify}}{datapath Identify}>
+			<BOUCLE_valeurs(DATA){source table, #VALEUR}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<td><strong>#CLE</strong></td>
+				<td>[(#VALEUR{0})]</td>
+			</tr>
+			</BOUCLE_valeurs>
+			</BOUCLE_identify>
+		</tbody>
+	</table>
+</div>
+</BOUCLE_afficher_depots>
