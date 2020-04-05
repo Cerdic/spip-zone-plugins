@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/factures_lignes, par=designation, env, ajax, sinon=<:factures_ligne:info_aucun_factures_ligne:>}>
+
+[(#AUTORISER{creer,factures_ligne})
+	[(#URL_ECRIRE{factures_ligne_edit,new=oui}|icone_verticale{<:factures_ligne:icone_creer_factures_ligne:>,factures_ligne,new,right})]
+]

@@ -1,0 +1,10 @@
+<BOUCLE_nav(FACTURES_LIGNES){id_factures_ligne}{si #ENV{exec}|=={factures_ligne}}>
+#BOITE_OUVRIR{'','info'}
+#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{type,factures_ligne,id,#ENV{id_factures_ligne}}}}
+#BOITE_FERMER
+
+#PIPELINE{afficher_config_objet,#ARRAY{args,#ARRAY{type,factures_ligne,id,#ID_FACTURES_LIGNE},data,''}}
+
+</BOUCLE_nav>
+[(#ENV{exec}|=={factures_ligne_edit}|oui)<INCLURE{fond=prive/squelettes/navigation/factures_ligne_edit,env}>]
+<//B_nav>

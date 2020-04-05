@@ -1,0 +1,10 @@
+<BOUCLE_ariane(FACTURES_LIGNES){id_factures_ligne}>
+<a href="#URL_ECRIRE{factures}"><:facture:titre_factures:></a>
+<BOUCLE_facture(FACTURES){id_facture}>
+&gt; <a href="[(#ID_FACTURE|generer_url_entite{facture})]">#NUM_FACTURE : [(#LIBELLE_FACTURE|couper{80})]</a>
+</BOUCLE_facture>
+&gt; <strong>[(#DESIGNATION|couper{80})]</strong>
+</BOUCLE_ariane>
+<a href="#URL_ECRIRE{factures}"><:facture:titre_factures:></a> &gt;
+<strong>Ligne de facture inconnue…</strong>
+<//B_ariane>

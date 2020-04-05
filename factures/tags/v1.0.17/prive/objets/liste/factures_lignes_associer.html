@@ -1,0 +1,69 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi designation,1,
+	id_factures_ligne,1
+}})
+]
+#SET{exclus,#ENV**{exclus,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
+#SET{debut,#ENV{debutfaca,#EVAL{_request("debutfaca");}}}
+<B_liste_factures_lignes>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutfaca,#EVAL{_request("debutfaca");}}}
+#SET{afficher_lettres,#TRI|=={'multi designation'}|oui}
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-associer factures_lignes">
+<table class='spip liste'>
+[<caption><span class="caption"><strong>(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{factures_ligne:info_1_factures_ligne,factures_ligne:info_nb_factures_lignes}})</strong>
+<span class="recherche">
+	<label for="recherche-#ENV{id}"><:info_rechercher_02:></label>
+	<input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" />
+	<input type="submit" class="tout_voir" name="tout_voir" value="<:info_tout_afficher:>" />
+</span>
+</span>
+</caption>]
+	<thead>
+		#SET{p,''}
+		<BOUCLE_lettre(FACTURES_LIGNES){tout}{!id_factures_ligne IN #GET{exclus}}{where?}{recherche?}
+			{tri #ENV{par,multi designation},#GET{defaut_tri}}{id_factures_ligne==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#DESIGNATION**|extraire_multi|initiale|unique|oui)
+		[(#SET{p,#GET{p}|concat{
+		#SELF|parametre_url{debutfaca,@#ID_FACTURES_LIGNE}|ancre_url{paginationfaca}|afficher_initiale{#DESIGNATION**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		}})]
+		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
+		(#SET{p,
+			#GET{p}|concat{
+				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
+			}
+		})]</B_lettre>
+		[<tr><td colspan="3"><p class='pagination'>(#GET{p})</p></td></tr>]
+	
+		<tr class='first_row'>
+			<th class='designation' scope='col'>[(#TRI{multi designation,<:factures_ligne:label_designation:>,ajax})]</th>
+			<th class='action' scope='col'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_factures_lignes(FACTURES_LIGNES){!id_factures_ligne IN #GET{exclus}}{where?}{recherche?}
+		{tri #ENV{par,multi designation},#GET{defaut_tri}}{pagination #ENV{nb,10} faca}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#DESIGNATION**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
+			<td class='designation'>[(#LOGO_FACTURES_LIGNE|image_reduire{20,20})]<a href="[(#ID_FACTURES_LIGNE|generer_url_entite{factures_ligne})]">#DESIGNATION</a></td>
+			<td class='action'>
+				<button class="button link add" name="ajouter_lien\[factures_ligne-#ID_FACTURES_LIGNE-#OBJET-#ID_OBJET\]" value="+"><:factures_ligne:ajouter_lien_factures_ligne:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
+			</td>
+		</tr>
+	</BOUCLE_liste_factures_lignes>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_factures_lignes>[(#ENV{recherche}|oui)
+<div class="liste-objets liste-objets-associer factures_lignes caption-wrap">
+<span class="caption"><strong>[(#VAL{info_recherche_auteur_zero}|_T{#ARRAY{cherche_auteur,#ENV{recherche}}})]</strong>
+<span class="recherche">
+	<label for="recherche-#ENV{id}"><:info_rechercher_02:></label>
+	<input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" />
+	<input type="submit" class="tout_voir" name="tout_voir" value="<:info_tout_afficher:>" />
+</span>
+</span>
+</div>
+]<//B_liste_factures_lignes>

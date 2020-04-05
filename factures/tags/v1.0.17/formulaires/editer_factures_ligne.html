@@ -1,0 +1,45 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_factures_ligne,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_factures_ligne' value='#ENV{id_factures_ligne}' />
+		<ul>
+
+			[(#SAISIE{factures, id_facture, obligatoire=oui,
+				label=<:factures_ligne:label_id_facture:>})]
+
+			[(#SAISIE{input, position,
+				label=<:factures_ligne:label_position:>,
+				explication=<:factures_ligne:explication_position:> })]
+
+			[(#SAISIE{input, quantite, obligatoire=oui,
+				label=<:factures_ligne:label_quantite:>,
+				explication=<:factures_ligne:explication_quantite:> })]
+
+			[(#SAISIE{input, unite, obligatoire=oui,
+				label=<:factures_ligne:label_unite:>,
+				explication=<:factures_ligne:explication_unite:> })]
+
+			[(#SAISIE{textarea, designation, obligatoire=oui,
+				label=<:factures_ligne:label_designation:>,
+				explication=<:factures_ligne:explication_designation:> })]
+
+			[(#SAISIE{input, prix_unitaire_ht,
+				label=<:factures_ligne:label_prix_unitaire_ht:>,
+				explication=<:factures_ligne:explication_prix_unitaire_ht:> ,
+				type=number,attributs='step=0.01'})]
+
+			[(#SAISIE{textarea, commentaire,
+				label=<:factures_ligne:label_commentaire:>,
+				explication=<:factures_ligne:explication_commentaire:> })]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

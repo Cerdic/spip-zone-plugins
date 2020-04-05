@@ -1,0 +1,59 @@
+[(#AUTORISER{voir,facture,#ID_FACTURE}|sinon_interdire_acces)]
+<BOUCLE_facture(FACTURES){id_facture}{si #ENV{exec}|=={facture}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,facture,#ID_FACTURE})
+		[(#ID_FACTURE|afficher_qui_edite{facture}|non)
+			[(#URL_ECRIRE{facture_edit,id_facture=#ID_FACTURE}|icone_verticale{<:facture:icone_modifier_facture:>,facture,edit,right ajax preload})]
+		]
+		[(#ID_FACTURE|afficher_qui_edite{facture}|oui)
+			[(#URL_ECRIRE{facture_edit,id_facture=#ID_FACTURE}|icone_verticale{#ID_FACTURE|afficher_qui_edite{facture},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#LIBELLE_FACTURE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{facture-24.png}|balise_img{facture,cadre-icone})]</h1>
+	[<h2><:facture:label_reference_abbr:> (#NUM_FACTURE)</h2>]
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{facture,#ID_FACTURE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/facture,id=#ID_FACTURE,id_facture=#ID_FACTURE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+
+[(#REM) Affiche les lignes de factures ]
+[(#INCLURE{fond=prive/objets/liste/factures_lignes,titre=<:factures:info_detail_lignes_facture:>,id_parent=#ID_FACTURE,par=position,ajax,env})]
+
+[(#AUTORISER{creerlignefacturedans,facture,#ID_FACTURE}|oui)
+[(#ID_FACTURE|?{
+[(#URL_ECRIRE{factures_ligne_edit,new=oui&id_parent=#ID_FACTURE}|icone_verticale{<:factures_ligne:icone_creer_factures_ligne:>,factures_ligne,new,right clearright})]
+,
+[(#URL_ECRIRE{factures_ligne_edit,new=oui}|icone_verticale{<:factures_ligne:icone_creer_factures_ligne:>,factures_ligne,new,right clearright})]
+	})]
+]
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,facture,#ID_FACTURE})
+	[(#ID_FACTURE|afficher_qui_edite{facture}|non)
+		[(#URL_ECRIRE{facture_edit,id_facture=#ID_FACTURE}|icone_verticale{<:facture:icone_modifier_facture:>,facture,edit,right ajax preload})]
+	]
+	[(#ID_FACTURE|afficher_qui_edite{facture}|oui)
+		[(#URL_ECRIRE{facture_edit,id_facture=#ID_FACTURE}|icone_verticale{#ID_FACTURE|afficher_qui_edite{facture},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,facture,id,#ID_FACTURE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_facture>
+[(#ENV**{exec}|=={facture_edit}|?{#INCLURE{fond=prive/squelettes/contenu/facture_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_facture>

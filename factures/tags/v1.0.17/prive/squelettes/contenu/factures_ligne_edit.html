@@ -1,0 +1,30 @@
+[(#ID_OBJET|oui)
+	[(#AUTORISER{modifier,factures_ligne,#ID_FACTURES_LIGNE}|sinon_interdire_acces)]
+][(#ID_OBJET|non)
+	[(#AUTORISER{creer,factures_ligne}|sinon_interdire_acces)]
+]
+ 
+#SET{redirect,#ENV{redirect}|sinon{#ID_FACTURES_LIGNE|?{#ID_FACTURES_LIGNE|generer_url_entite{factures_ligne},#URL_ECRIRE{factures_lignes}}}}
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#ID_FACTURES_LIGNE|oui)
+	[(#GET{redirect}|icone_verticale{Retour,factures_ligne,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_FACTURES_LIGNE|?{<:factures_ligne:icone_modifier_factures_ligne:>,<:factures_ligne:icone_creer_factures_ligne:>})]
+		<h1>(#ENV{titre,#INFO_DESIGNATION{factures_ligne,#ID_FACTURES_LIGNE}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_FACTURES_LIGNE|generer_url_entite{factures_ligne}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_FACTURES_LIGNE{#ENV{id_factures_ligne,oui}, #GET{redirect}, #ENV{associer_objet}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>
