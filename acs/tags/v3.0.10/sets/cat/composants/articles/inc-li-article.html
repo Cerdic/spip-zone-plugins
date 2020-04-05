@@ -1,0 +1,31 @@
+[(#CACHE{0})][(#REM)
+
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2015
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Un article dans une liste d'articles
+
+]<li>
+  <div class="entete">
+    [(#PLUGIN{notation}|oui)<div style="float:#LANG_RIGHT; text-align: #LANG_LEFT; margin-left: 0.5em; margin-right:0.5em">[(#NOTATION_ETOILE{#ENV{note}})]</div>]
+    <div class="titres">
+      <span class="infos_article nav nsize">
+      [(#VAR{acsArticlesDates}|=={oui}|?{[(#DATE_REDAC|?{[(#DATE_REDAC|affdate)],[(#DATE|affdate)]})]})]
+      [(#VAR{acsArticlesAut}|=={oui}|?{' '})[(#AUTEURS)]][ &mdash; <em>(#TAGS|afficher_tags)</em>]
+      [(#ENV{aff_rubrique}|!={non}|oui)<INCLURE{fond=composants/articles/inc-li-article-rub}{id_rubrique}>]
+      </span>
+      [<p class="surtitre stsize">(#SURTITRE|coupe{80,...})</p>]
+      <h3 class="titre tsize"><a href="#URLA">[(#TITRE|supprimer_numero)]</a></h3>
+      [<p class="soustitre stsize">(#SOUSTITRE|coupe{80,...})</p>]
+      [<div class="enclosures">(#TAGS|afficher_enclosures)</div>]
+    </div>
+  </div>
+  <div class="nettoyeur" ></div>
+  [<div class="extrait">[<a href="#URLA">(#LOGO_ARTICLE_RUBRIQUE|image_reduire{#VAR{acsArticlesLogoTailleMax,50},#VAR{acsArticlesLogoTailleMax,50}})</a>](#TEXTE|coupe{#ENV{coupe,200}, ... <i><a href="#URLA" class="nsize">(<:suite:>)</a></i>})</div>]
+  <div class="nettoyeur" ></div>
+</li>

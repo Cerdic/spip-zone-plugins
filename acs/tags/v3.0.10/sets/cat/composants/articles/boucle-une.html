@@ -1,0 +1,22 @@
+[(#CACHE{0})][(#REM)
+
+Les articles par date, sans doublons, pour la langue en cours,
+dont la date de publication est passée.
+
+Les articles dotés d'une date de publication future ne sont donc pas affichés.
+Ils sont néanmoins affichés dans l'agenda.
+
+Les articles dont le titre commence par "_" ou dont le titre d'un un mot-clé 
+commence par "_" ne sont pas affichés.
+
+]<B_articles>[(#ANCRE_PAGINATION)]
+  <div class="liste-articles">[<span class="pagination screen_only"><:derniers_articles:> : (#PAGINATION)</span>][(#ENV{debut_articles}|?{'',' '})]
+      <ul>
+        <BOUCLE_articles(ARTICLES){titre!==^_}{!mots.titre==^_}{par date}{inverse}{age_relatif>=0}{lang ?}{pagination #VAR{#EVAL{'acsArticles'.'#NIC'.'Pagination'},10}}>
+          <INCLURE{fond=composants/articles/li-article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{urla=#URL_ARTICLE}{coupe=#VAR{#EVAL{'acsArticles'.'#NIC'.'NbLettres'},200}}{aff_rubrique=#VAR{#EVAL{'acsArticles'.'#NIC'.'Rubrique'},oui}}>
+        </BOUCLE_articles>
+      </ul>
+  </div>
+</B_articles>
+<:ecrire:info_aucun_article:>
+<//B_articles>

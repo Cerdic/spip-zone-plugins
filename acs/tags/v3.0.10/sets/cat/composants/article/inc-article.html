@@ -1,0 +1,72 @@
+[(#CACHE{0})][(#REM)
+
+Article
+
+Variables:
+- acsArticleLogoTailleMax: en pixels, sans les caractères "px"
+- acsArticleStats: oui/non
+- acsDiapoUse: oui/non
+
+Paramètres:
+id_article: id de l'article
+
+]<div class="[id_article-(#ID_ARTICLE) ]#PINCEAU{article}">[
+(#ENV{id_version}|oui)[<div class="cArticle" dir="#LANG_DIR">(#INCLURE{fond=composants/article/inc-article_diff}{id_version=#ENV{id_version}}{objet=article}{id_article=#ENV{id_article}})</div>]]
+<BOUCLE_article(ARTICLES){id_article}{statut==[publie|propose|refuse]}>
+  <div class="cArticle">[(#ENV{id_version}|?{""," "})
+  <div class="entete">
+    <span class="infos_article nav nsize">[
+      (#MODELE{article_traductions})][
+      (#VAR{acsArticleDates}|=={oui}|?{[(#DATE_REDAC|?{[(#DATE_REDAC|affdate)],[(#DATE|affdate)]})]})][
+      (#VAR{acsArticleAut}|=={oui}|oui)[(#AUTEURS)]][ &mdash; <em>(#TAGS|afficher_tags)</em>]
+    </span>#DEBUT_SURLIGNE
+    [<p class="#EDIT{surtitre} surtitre stsize">(#SURTITRE|safehtml)</p>]
+    <h1 class="#EDIT{titre} titre tsize">[(#STATUT|=={refuse}|?{'<a href="" class="refus">Article refusé</a>', ''}) ][(#TITRE|supprimer_numero)]</h1>
+    [<p class="#EDIT{soustitre} soustitre stsize">(#SOUSTITRE|safehtml)</p>]#FIN_SURLIGNE
+    [(#VAR{acsArticleLogoTailleMax}|is_numeric|?{" "})[(#LOGO_ARTICLE|image_reduire{#VAR{acsArticleLogoTailleMax,100}})]]
+  </div>
+  <div class="article">#DEBUT_SURLIGNE
+  [<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{#VAR{acsFondImgMax,600}})</div>]
+  [<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+  [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{#VAR{acsFondImgMax,600}})</div>
+  [<div class="notes"><h2><:info_notes:></h2>(#NOTES|safehtml)</div>]
+  #FIN_SURLIGNE][
+  <div class="#EDIT{ps}">#DEBUT_SURLIGNE(#PS|safehtml)#FIN_SURLIGNE</div>]
+
+  [(#REM) Gestion du portfolio et des documents
+    Le critere {env} permet de passer d'autres arguments de la page
+    par exemple l'id_document choisi pour un affichage complet.
+    INACTIF quand le composant Diapo est utilisé. Dans ce cas, le composant Diapo DOIT 
+    être inséré dans la page (soit dans le squelette, soit directement dans l'article ou la rubrique) pour 
+    que les documents associés soient visibles.
+  ][(#VAR{acsDiapoUse}|!={oui}|?{" "})[(#INCLURE{fond=inclure/documents}{id_article}{env})]]
+
+  [(#VAR{acsArticleStats}|=={oui}|?{[(#CONFIG{activer_statistiques}|=={oui}|oui) <div class="stats nsize">[Lu par (#VISITES) personnes depuis le ] [(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</div>]})]
+  [(#REM)
+  
+fin div article
+
+  ]</div>]
+  
+  [(#REM)
+  
+Petition : la petition ayant une PAGINATION il faut absolument lui passer SELF
+
+][(#PETITION|?{' '})<INCLURE{fond=inc-petition}{env=#ENV}{id_article}{self=#SELF}>]
+<div class="nettoyeur" ></div>
+[(#REM)
+
+Forum de l'article
+
+][(#STATUT|=={refuse}|?{' ', ''})
+  <a href="" class="refus">Article refusé</a>
+  <a href="#forum" name="forum" id="forum"></a><span class="nav nsize" style="float: #LANG_RIGHT"><a href="#URL_ARTICLE&ouvrir=oui#forum" id="forum_lire_tous"><small><:lire_tous_les_messages:></small></a></span>
+  <INCLURE{fond=composants/forums/forum}{id_article}{ouvrir=#OUVRIR}{debut_forums}{statut=prive}{env}{self}{ajax}>
+][(#STATUT|=={publie}|?{' ', ''})
+  [(#PLUGIN{notation}|?{' '})<div class="notation nsize">#FORMULAIRE_NOTATION</div><div class="nettoyeur" ></div>]
+  [(#PLUGIN{recommander}|?{' '})#RECOMMANDER{#TITRE,#URL_ARTICLE,#INTRODUCTION}]
+  [<a id="forum_repondre" class="repondreaufil nsize" href="spip.php?page=forum&amp;id_article=#ID_ARTICLE"><:form_pet_message_commentaire:></a><br/>(#FORMULAIRE_FORUM)]
+  <INCLURE{fond=composants/forums/forum}{ajax}{id_article}{ouvrir=#OUVRIR}{debut_forums}>
+]</div>
+</BOUCLE_article>
+</div>

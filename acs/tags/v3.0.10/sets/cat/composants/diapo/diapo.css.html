@@ -1,0 +1,54 @@
+[(#CACHE{0})][(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2012
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+].cDiapo {
+  text-align: center;
+}
+.cDiapo div.diaporama {
+  display: inline-block;
+}
+.cDiapo div.diapo, .cDiapo div.diapog, .cDiapo div.diapod {
+  float: left;
+}
+.cDiapo div.diapo {
+  position:relative;
+  text-align: center;
+}
+.cDiapo a.vignette:link {
+  display: block;
+  outline: none;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.cDiapo a.vignette:hover {
+  outline: none;
+}
+.cDiapo div.titreDiapo {
+  position: absolute;
+  text-align: center;
+}
+.cDiapo .diapog, .cDiapo .diapod {
+  display: block;
+  width: 25px;
+  text-align: center;
+}
+.cDiapo a.ajax:link {
+  display: block;
+  outline: none;
+  width: 25px;
+}
+.cDiapo a.ajax span {
+  display: block;
+  width: 25px;
+  text-indent: -10000px;
+}
+#cboxLoadedContent .spip_documents {
+  margin: 0;
+  padding: 0;
+}

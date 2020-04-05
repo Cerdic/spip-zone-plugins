@@ -1,0 +1,36 @@
+[(#REM)
+
+Liste des sites (de la rubrique si id_rubrique est defini),
+style hérité du composant Rubrique et du composant Articles
+
+]<B_sites>[(#ID_RUBRIQUE|oui)
+<div class="cRubrique">
+  <div class="entete">[(#LOGO_RUBRIQUE|image_reduire{#VAR{acsArticlesListesLogoTailleMax,50},#VAR{acsArticlesListesLogoTailleMax,50}})][
+    <div class="titres">
+      <h3 class="titre tsize">(#TITRE|supprimer_numero)<h3>
+    </div>
+  </div>]
+</div>
+<div class="nettoyeur"></div>
+<div class="spacer"></div>]
+#ANCRE_PAGINATION
+<div class="liste-articles">
+  <ul>
+  <BOUCLE_sites(SITES) {id_rubrique ?} {par nom_site} {pagination #VAR{acsArticlesPagination,10}}>
+    <li>
+      <div class="entete">
+        <div class="titres">
+          <h3 class="titre tsize"><a href="#URL_PAGE{site,id_syndic=#ID_SYNDIC}">[(#NOM_SITE|supprimer_numero)]</a>
+            <span class="nav nsize screen_only">
+              <a href="#URL_SITE" target="_new" title="<:acces_direct:>: #URL_SITE" class="spip_out"><img src="#CHEMIN{composants/articles/images/goto.gif}" alt="&uaArr;"  title="<:acces_direct:>: #URL_SITE" /></a>
+            </span>
+          </h3>
+        </div>
+      </div>[(#VAR{acsArticlesLogoTailleMax}|is_numeric|?{" "})[(#LOGO_SITE|image_reduire{#VAR{acsArticleLogoTailleMax,75}})]]
+      [<div class="extrait">(#DESCRIPTIF|coupe{#VAR{acsSitesNbLettres,500},... <small><i><a href="#URL_ARTICLE"><:suite:></a></i></small>}
+                                        |image_reduire{#VAR{acsFondImgMax,600}})</div>]
+    <li>
+  </BOUCLE_sites>
+  </ul>
+</div>
+</B_sites>

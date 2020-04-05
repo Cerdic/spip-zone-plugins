@@ -1,0 +1,28 @@
+[(#REM) 
+
+Sites de la rubrique
+
+]<B_sites>
+<div class="cSyndic">
+  <div class="bloc-title">
+    <div class="bsize"><a href="?page=sites"><:sur_web:></a></div>
+    [<div class="pagination">(#PAGINATION)</div>]
+  </div>
+  <ul>
+  <BOUCLE_sites(SITES) {id_rubrique} {par nom_site}{pagination #VAR{acsSyndicNbSites,5}}>
+      <li>
+        <div class="bloc-title bsize"><a href="[(#ID_SYNDIC|generer_url_entite{'site'})]">#NOM_SITE</a></div>
+        <B_syndic>
+        <ul>
+          <BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {0,5}>
+            <li class="menu-item"><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></li>
+          </BOUCLE_syndic>
+        </ul>
+        </B_syndic>
+      </li>
+  </BOUCLE_sites>
+  </ul>
+</div>
+</B_sites>
+[(#REM) Proposer un site ]
+#FORMULAIRE_SITE

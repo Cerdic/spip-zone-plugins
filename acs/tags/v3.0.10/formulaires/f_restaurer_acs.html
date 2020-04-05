@@ -1,0 +1,31 @@
+<div class='formulaire_spip formulaire_configurer formulaire_configurer_#FORM' id='formulaire_configurer_#FORM'>
+  <h3 class='titrem'>[(#CHEMIN_IMAGE{base-restore-24.png}|balise_img{'',cadre-icone})]<:acs:restore:></h3>
+  
+  [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+  [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+  [(#ENV{editable})
+  <form action="#ENV{action}#formulaire_configurer_#FORM" method="post">
+    <div>[(#ACTION_FORMULAIRE{#ENV{action}})][(#SET{dir_dump_acs,#VAL{'"<b><i>'}|concat{#ENV{_dir_dump_acs}|joli_repertoire|concat{'</i></b>"'}}})]
+      [(#BOITE_OUVRIR{'','notice'})]<p><:dump:texte_restaurer_sauvegarde{dossier=#GET{dir_dump_acs}}:></p>[(#BOITE_FERMER)]
+      <ul>
+        #SET{name,choisi}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
+        [<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+          <label for="#GET{name}"><:dump:label_nom_fichier_sauvegarde:></label>
+          (#ENV{choisi})
+          &#91;<a href="#" onclick="jQuery('li.editer_fichier,li.editer_nom_sauvegarde').show('fast');jQuery('li.editer_choisi').hide('fast');return false;"
+          ><:bouton_changer:></a>&#93;
+        </li>]
+        #SET{name,fichier}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
+        <li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]"[(#ENV{choisi}|oui)style='display:none;']>
+          <label for="#GET{name}"><:dump:label_selectionnez_fichier:></label>
+          [<span class='erreur_message'>(#GET{erreurs})</span>]
+          [<div class="choix">
+            (#INCLURE{fond=formulaires/f_inc-lister-sauvegardes_acs,env,ajax,name=fichier,id=sauvegarde_acs,titre=<:dump:sauvegardes_existantes:>,download=#AUTORISER{webmestre}}
+            |sinon{<:dump:info_aucune_sauvegarde_trouvee:>})
+          </div>]
+        </li>
+      </ul>
+      <p class='boutons'><input class='submit' type="submit" name="ok" value="<:acs:restore:>"/></p>
+    </div>
+  </form>]
+</div>

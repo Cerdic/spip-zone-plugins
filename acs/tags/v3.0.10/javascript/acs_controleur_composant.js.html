@@ -1,0 +1,187 @@
+[(#HTTP_HEADER{'Content-Type: text/javascript'})][(#REM)
+               ACS
+           (Plugin Spip)
+      http://acs.geomaticien.org
+
+  Copyright Daniel FAIVRE, 2007-2015
+  Copyleft: licence GPL - Cf. LICENCES.txt
+
+  JS interface d'admin d'ACS - ACS admin GUI
+
+  Active les controleurs de composants sur la partie publique du site et gere les drag/drop de composants
+
+][(#INCLURE{fond=javascript/acs_lib.js})]
+
+
+function init_controleur_composant() { /*test*/
+  [(#INCLURE{javascript/acs_dragdrop.js})]
+  jQuery(".edit_composant").each(
+  	function(i, composant) {
+    	jQuery(this)
+        .draggable({handle: ".acs_box_titre"})
+        .find(".acs_box_titre").css("cursor", "move");
+  	}
+  );
+  jQuery(".btn_show_widgets, .edit_composant .ctlWidget").each(
+    function(i, btn) {
+      btn.onclick = function(e) {
+        e.preventDefault();
+        var editeur = jQuery(btn).parents(".editeur_composant");
+        editeur.find(".acs_box_composants_hidden")
+          .css("top", e.pageY - editeur.offset().top)
+          .css("left", e.pageX - editeur.offset().left)
+          .css("z-index", 99999002)
+          .css("display", ((editeur.find(".acs_box_composants_hidden").css("display") == "none") ? "block" : "none"));
+        return false;
+      };
+    }
+  );
+  
+
+  jQuery(".type_pinceau").each(
+  	function(i, composant) {
+    	jQuery(this).draggable({
+    		helper: "clone",
+    		delay: 100,
+    		distance: 20,
+    		ghosting: true,
+    		opacity:	0.9,
+        cursor: "move",
+        zIndex: 99999999
+			});
+  	}
+  );
+  jQuery(".cadre-composant").droppable({
+  	accept: ".type_pinceau",
+    greedy: true,
+    tolerance: "pointer",
+		activeClass: "ctlWidget_droppable_active",
+		hoverClass: "ctlWidget_droppable_over",
+		over: function(e, cc) {
+      var dropid = jQuery(this).attr("id");
+      var current = jQuery(this).find(".type_pinceau");
+      if (!current) return false;
+      if (!current.attr("class")) return false;
+      var current_i = current.attr("class").match(/\b\w+-(\w+)-(\d+)\b/);
+      var current_c = current_i[1];
+      var current_nic = current_i[2];
+      var from = cc.draggable.parent();
+      var new_i = cc.draggable.attr("class").match(/\b\w+-(\w+)-(\d+)\b/);
+      var new_c = new_i[1];
+      var new_nic = new_i[2];
+      window.status = dropid + ' = ' + current_c + '-' + current_nic + ' => ' + new_c + '-' + new_nic + ' (' + from.attr("id") +')';
+		},
+    out: function() {
+      window.status = '';
+    },
+    drop: function(e, cc) {
+      jQuery(".cadre-composant").removeClass("ctlWidget_droppable_over");
+      jQuery(this).addClass("ctlWidget_droppable_drop");
+      var dropid = jQuery(this).attr("id");
+      var current = jQuery(this).find(".type_pinceau");
+      var current_i = current.attr("class").match(/\b\w+-(\w+)-(\d+)\b/);
+      var current_c = current_i[1];
+      var current_nic = current_i[2];
+      var current_value = current_c + ((current_nic != "0") ? '-' + current_nic : '');
+      
+      var from = cc.draggable.parent();
+      var new_i = cc.draggable.attr("class").match(/\b\w+-(\w+)-(\d+)\b/);
+      var new_c = new_i[1];
+      var new_nic = new_i[2];
+      var new_value = new_c + ((new_nic != "0") ? '-' + new_nic : '');
+
+      [(#REM) Reste à ouvrir les controleurs des deux composants concernes, pour valider les changements
+      On recupere ou on ouvre le controleur du composant "cFrom", qui contient le composant avec la variable de type widget "from"
+      
+      ]var cFrom = from.parents('.crayon:eq(0)');
+      [(#REM) Si le parent n'a pas de pinceau, prendre le grand-parent 
+      ]if (!cFrom.hasClass("type_pinceau")) {
+        cFrom = from.parent().parents('.crayon:eq(0)');
+        [(#REM) Si le grand-parent non plus n'a pas de pinceau, echec
+        ]if (!cFrom.hasClass("type_pinceau")) return false;
+      }
+      var cFrom_i = cFrom.attr("class").match(/\b\w+-(\w+)-(\d+)\b/);
+      var cFrom_c = cFrom_i[1];
+      var cFrom_nic = cFrom_i[2];
+      [(#REM) on cherche si le controleur du pinceau du composant est déjà ouvert
+      ]var ccf = jQuery("#composant-" + cFrom_c + "-" + cFrom_nic + " .edit_composant");
+      if (ccf.length == 0) {
+        cQuery(cFrom).opencrayon(e);
+      }
+      setSelectValueThreaded(from.attr("id"), current_value, cc.draggable.parent(), current, '#composant-' + cFrom_c + '-' + cFrom_nic);
+
+      [(#REM) On recupere ou on ouvre le controleur du composant "cTo", qui contient le composant avec la variable de type widget "dropid"
+      ]var cTo = jQuery(this).parents('.crayon:eq(0)');
+      [(#REM)  Si le parent n'a pas de pinceau, prendre le grand-parent 
+      ]if (!cTo.hasClass("type_pinceau")) {
+        cTo = jQuery(this).parent().parents('.crayon:eq(0)');
+        [(#REM) Si le grand-parent non plus n'a pas de pinceau, echec 
+        ]if (!cTo.hasClass("type_pinceau")) return false;
+      }
+      var cTo_i = cTo.attr("class").match(/\b\w+-(\w+)-(\d+)\b/);
+      var cTo_c = cTo_i[1];
+      var cTo_nic = cTo_i[2];
+      var cct = jQuery("#composant-" + cTo_c + "-" + cTo_nic + " .edit_composant");
+      if ((cTo_i.toString() != cFrom_i.toString()) && (cct.length == 0)) {
+        cQuery(cTo).opencrayon(e);
+      }
+      setSelectValueThreaded(dropid, new_value, jQuery(this), cc.draggable, '#composant-' + cTo_c + '-' + cTo_nic);
+      
+      window.status = dropid + ' = ' + current_value + ' => ' + new_value + ' (' + from.attr("id") +')';
+    }
+	});
+  initWidgets();
+}
+
+function ucfirst(txt) {
+  txt += '';
+  var cap = txt.charAt(0).toUpperCase();
+  return cap + txt.substr(1);
+}
+
+[(#REM) La mise à jour de valeurs dans les controleurs de composants utilise un systeme threaded
+car le chargement en ajax des controleurs de composants est asynchrone.
+
+]var todo = new Array();
+var ccUpdateDelay = 50; // ms
+
+function setSelectValueThreaded(acsvarname, value, widget_cible, c, crayon_composant) {
+  todo[acsvarname] = new Array(value, widget_cible, c, crayon_composant);
+  todo.length++;
+  setSelectValueDoThreads();
+}
+
+function setSelectValueDoThreads() {
+  if (todo.length == 0) return;
+  var try_again = false;
+  for(var avar in todo) {
+    var value = todo[avar][0]; // nouvelle valeur
+    if (setSelectValue(avar, value)) {
+      var widget_cible = todo[avar][1];
+      var c = todo[avar][2];
+      var crayon_composant = todo[avar][3];
+      jQuery(crayon_composant).css('visibility', 'visible').css('opacity', '0.1');
+      widget_cible.append(c);
+      [(#REM) widget_cible.parent() est la vue du composant puisque le controleur du composant est ouvert,
+        et son parent est donc le crayon du composant qui contient ce controle de type widget
+
+      ]widget_cible.parent().parent().css('visibility', 'visible').css('opacity', '1');
+      widget_cible.removeClass("ctlWidget_droppable_drop");
+      delete todo[avar];
+      initWidgets();
+      todo.length--;
+    }
+    else
+      try_again = true;
+  }
+  if (try_again)
+    window.setTimeout(setSelectValueDoThreads, ccUpdateDelay);
+}
+
+function setSelectValue(acsvarname, value) {
+  var select =  jQuery("select[id^='select_" + acsvarname + "_']");
+  select.val(value);
+  if (select.val() == value)
+    return true;
+  return false;
+}

@@ -1,0 +1,23 @@
+[(#CACHE{0})][(#REM)
+
+  Charge les javascripts du composant Fond
+
+]
+/* ACS-Cat override for swap_couche() dist, configurable from component Fond */
+function swap_couche(couche, rtl, dir, no_swap) {
+  var layer;
+  var triangle = document.getElementById('triangle' + couche);
+  if (!(layer = findObj('Layer' + couche))) return;
+  if (layer.style.display == "none"){
+    if (!no_swap && triangle) triangle.src = dir + "#VAR{acsRubnavDeplierBas,deplierbas.gif}";
+    layer.style.display = 'block';
+  } else {
+    if (!no_swap && triangle) {
+      if (rtl)
+        triangle.src = dir + "#VAR{acsRubnavDeplierHaut_rtl,deplierhaut_rtl.gif}";
+      else
+        triangle.src = dir + "#VAR{acsRubnavDeplierHaut,deplierhaut.gif}";
+    }
+    layer.style.display = 'none';
+  }
+}

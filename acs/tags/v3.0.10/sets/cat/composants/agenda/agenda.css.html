@@ -1,0 +1,74 @@
+[(#CACHE{0})][(#REM)
+Feuille de style Agenda, par Daniel Faivre, 2007-2012
+]
+.cAgenda {
+  color: #VAR{acsFondText,#000};
+  text-align:center;
+  font-style:normal;
+}
+.cAgenda td {
+  padding: 2px;
+}
+.cAgenda .title .chelp {
+  float: #LANG_RIGHT;
+  margin: 2px;
+}
+
+.cAgenda .calendar_head_mini {
+  text-align: center;
+  font-size: #VAR{acsFondNavSize,0.65em};
+  color: #VAR{acsFondText,000};
+  font-family: Verdana, Arial, Helvatica, sans-serif;
+  font-style:normal;
+}
+
+.cAgenda .calendar_not_this_month {
+  color:#aaa;
+}
+
+.cAgenda .calendar_this_month {
+  padding: 2px;
+  color:#aaa;
+}
+
+.cAgenda .calendar_this_day a {
+  text-align: center;
+  font-weight:bold;
+  font-style: italic;
+  padding: 2px;
+  padding-bottom: 0;[
+  (#MODELE{c_css_border-radius}{r=5px})]
+}
+.cAgenda a.unjour:hover {[
+  (#MODELE{c_css_border-radius}{r=5px})]
+}
+
+[(#REM) info-bulle ]
+* html .cAgenda div.bulle {
+  width: 250px; [(#REM) Hack IE : IE exige une largeur définie ]
+}
+.cAgenda .bulle{
+position: absolute;
+min-width: 200px;
+display: none;
+z-index : 999;
+padding: 0;
+margin: 0;
+line-height:normal;
+text-align: #LANG_LEFT;
+}
+.cAgenda .bulle .publie a, .bulle .modifie a, .bulle .breve a {
+  color: #VAR{acsFondLink, #df0000};
+	font-weight: normal;
+	display: block;
+	width: 100%;
+	border:0;
+	padding:0;
+	text-align: #LANG_LEFT;
+	font-style: normal;
+  -moz-border-radius: 0;
+}
+[(#REM) overide du style spip standard car il impose une largeur fixe ]
+.calendrier-table-large {
+  width: 100%;
+}

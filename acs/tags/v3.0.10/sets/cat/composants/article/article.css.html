@@ -1,0 +1,78 @@
+[(#CACHE{0})][(#REM)
+
+***** Mise en page d'un article *****
+
+][(#SET{marge,5px})][
+.cArticle {
+  position: relative;
+  border: (#VAR{acsArticleBord/Width})[ (#VAR{acsArticleBord/Style})][ (#VAR{acsArticleBord/Color})];
+}]
+.cArticle .entete {[
+  background-color: (#VAR{acsArticleTitreFond});][
+  background: url('(#ACS_CHEMIN{trame/#VAR{acsArticleTitreFondImage}})') repeat top left;][
+  border-bottom: (#VAR{acsArticleBord/Width,thin})[ (#VAR{acsArticleBord/Style,dotted})][ (#VAR{acsArticleBord/Color})];]
+  padding: #GET{marge};
+  padding-top: 0;
+}
+.cArticle .entete p {
+  margin:0;
+}
+[.cArticle .titre, .cArticle .surtitre, .cArticle .soustitre {
+  text-align: (#VAR{acsArticleTitreAlign});
+}]
+.cArticle .entete .infos_article {
+  float: #LANG_RIGHT;
+  margin-#LANG_LEFT: #GET{marge};
+}
+.cArticle .entete .spip_logos {
+  float: #VAR{acsArticleLogoAlign,#LANG_RIGHT};
+}
+.cArticle .texte, .cArticle .chapo {
+  text-align: justify;
+}[(#VAR{acsArticleChapoGras}|!={non}|?{" "})
+.cArticle .chapo {
+  font-weight: bold;
+}
+.cArticle .article {
+  padding-left: #GET{marge};
+  padding-right: #GET{marge};
+  margin-bottom: #GET{marge};
+}
+].cArticle .sommaire {
+  float:  #LANG_RIGHT;
+  margin: #GET{marge};
+  border: #VAR{acsArticleBord/Width,thin}[ (#VAR{acsArticleBord/Style,dotted})][ (#VAR{acsArticleBord/Color})];
+}
+.cArticle .titresommaire {
+  text-align: center;
+}
+.cArticle .stats {
+  float: #LANG_RIGHT;
+}
+[(#CONFIG{articles_versions}|=={oui}|?{" "})
+.cArticle .diff-para-ajoute, .cArticle .diff-ajoute {
+  background-color: #VAR{acsArticleAdded};
+}
+.cArticle .diff-para-supprime, .cArticle .diff-supprime {
+  background-color: #VAR{acsArticleDeleted};
+  text-decoration: line-through;
+}
+.cArticle .version a {
+  float: left;
+  display: block;
+  padding-left: #GET{marge};
+  padding-right: #GET{marge};
+  border: #VAR{acsArticleBord/Width,thin}[ (#VAR{acsArticleBord/Style,dotted})][ (#VAR{acsArticleBord/Color})];
+  border-bottom: 0;
+}
+.cArticle .version a.actif, .cArticle .version a:hover {
+  [background-color: (#VAR{acsArticleTitreFond});]
+  [background: url('(#ACS_CHEMIN{trame/#VAR{acsArticleTitreFondImage}})') repeat top left;]
+}
+.cArticle .version a.actif {
+  font-weight: bold;
+}
+].cArticle #forum_lire_tous, #forum_repondre {
+  margin-left: #GET{marge};
+  margin-right: #GET{marge};
+}

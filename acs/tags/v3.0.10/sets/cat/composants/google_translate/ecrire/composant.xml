@@ -1,0 +1,13 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>google_translate</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2015 - licence GPL</auteur>
+  <version>1.0.0</version>
+  <necessite id='acs' version='[3.0.7;]' />
+  
+  <variable>
+    <nom>GTC</nom>
+    <type>text</type>
+  </variable>
+</composant> 

@@ -1,0 +1,69 @@
+[(#CACHE{0})][(#REM)
+
+Listes d'articles
+Styles héritables, utilisés par les pages sommaire, recherche, resume, plan, sites ...
+
+].liste-articles ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.liste-articles .entete {
+  clear: both;
+  float: #LANG_LEFT;
+  text-align: #LANG_LEFT;
+  width: 100%;
+}
+.liste-articles .entete .titres {
+  padding: 2px;
+}
+* html .liste-articles .entete { /* IE */
+  margin-right: 3px;
+  position: relative;
+  z-index: 2;
+}
+.liste-articles li .titres p { margin: 0; padding: 0;}
+.liste-articles .nav {
+  float: #LANG_RIGHT;
+}
+.liste-articles .titre, .liste-articles .surtitre, .liste-articles .soustitre {
+  font-weight: bold;
+}
+.liste-articles li .titre {
+  font-weight: bold;
+}
+.liste-articles li .spip_logos {
+  float: #LANG_RIGHT;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 2px;
+}
+.liste-articles li .enclosures {
+  float: #LANG_RIGHT;
+  text-align: #LANG_RIGHT;
+  max-width: 60%;
+  margin: 0;
+}
+.liste-articles li .texte, .liste-articles li .extrait {
+  padding: 0.1em;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-top: 2px;
+  margin-bottom: 0.1em;
+  text-align: justify;
+}
+.liste-articles .infos_article, .liste-articles .nav, .liste-articles .pagination {
+  margin: 0;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.liste-articles .pagination {
+  display: inline-block;
+  min-width: 150px;
+}
+.liste-articles .infos_article, .liste-articles .nav {
+  text-align: center;
+}
+.liste-articles .spip_surligne {
+  color: black;
+}

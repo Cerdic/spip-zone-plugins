@@ -1,0 +1,28 @@
+[(#CACHE{0})]
+#banniere {
+  height: #VAR{acsBanniereHauteur,60px};
+  line-height: #VAR{acsBanniereHauteur,60px};
+  font-family: [(#VAR{acsBanniereFont}), ]#VAR{acsBanniereFontFamily};
+  text-align: #VAR{acsBanniereAlign,center};
+  [(#VAR{acsBanniereLogo}|=={oui}|oui)padding: [(#LOGO_SITE|largeur|plus{#VAR{acsBanniereMarge,0}}|plus{#VAR{acsBanniereMarge,0}})px]; padding-top:0;padding-bottom:0]
+}
+#banniere .logo {
+  position: absolute;
+  border: 0;[
+  margin: (#VAR{acsBanniereMarge});][
+  (#VAR{acsBanniereLogoAlign,left}|=={left}|?{left: 0,right: 0});]
+  top: 0;
+}
+#banniere a.nom_site {
+  position: relative;
+  z-index: 9;
+  font-size: #VAR{acsBanniereFontSize,40px};
+  line-height:normal;
+  vertical-align: #VAR{acsBanniereValign};[
+  color: (#VAR{acsBanniereTextColor});][
+  text-shadow: 0px 0px 8px (#VAR{acsBanniereTextColorOver});]
+}
+[#banniere a.nom_site:hover {
+  color: (#VAR{acsBanniereTextColorOver});[
+  text-shadow: 0px 0px 8px (#VAR{acsBanniereTextColor});]
+}]

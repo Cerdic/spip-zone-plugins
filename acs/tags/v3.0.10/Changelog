@@ -1,0 +1,74 @@
+Suivi des principales révisions - Version ACS actuelle : 3.0.9
+
+- ameliorations du controleur de composant et du controle ctlColor.
+- cat: correction preview composant Encart. Ajout de la classe "nohistory" sur les liens ajax,
+      et les boutons de controle des composants Encart animés n'apparaissent desromais qu'au survol.
+- cat: le composant Cadre transmet désormais le contexte (id_article, id_rubrique, ...),
+       ce qui permet de voir directement le résultat, sans recharger la page.
+- cat: surlignage SPIP des resultats de recherche.
+- cat: meilleure gestion de l'image de fond des composants Cadres.
+- cat: suppression de l'image de fond du composant banniere pour accroitre le nombre de 
+       possibilités de mises en page. (pour mettre une image de fond à la banniere on
+       utilise desormais un cadre avec une image de fond).
+- cat: cacher l'overflow sur le composant google-translate
+- cat: debug du jQuery et améliorations css du composant Rubnav.
+- cat: petit nettoyage des css de quelques composants (Recherche, ...).
+
+ACS version 3.0.8
+- cat : modernisation du composant Banniere.
+- cat: nouveau composant google_translate.
+- cat: suppression du composant "Edito", avantageusement remplacé par "Encart", bien plus polyvalent.
+- cat: fondu sur les changements d'encarts animes.
+- cat: nouveau composant "tipafriend" (nécessite le plugin "tip a friend").
+- cat: nouvelle propriété du composant Fond pour modifier des propriétés CSS du tag body.
+
+ACS version 3.0.7
+- gestion simplifiee des inclusions speciales des composants (headers, css, js, ...)
+- Cat: suppression du "lien extra" du compsoant banniere, avantageusement remplacé par n'importe quel composant du set au choix.
+
+ACS version 3.0.6
+- simplification de l'intégration des librairies javascripts de composants.
+- lecture de la liste des composants : si un composant "fond" existe on le met en premier dans la liste pour permettre son override
+- Cat : composant "Encart" étendu aux documents et animable façon diaporama, 
+
+ACS version 3.0.5
+- separation des modeles ACS et des modeles du set Cat
+- securisation de tout le php inclus.
+- variables de couleurs de texte et de lien pour certains titres de composants (Articles, Encart, Identite), héritées par Rubrique, Sites, ...
+- nombreuses petites améliorations de composants.
+
+ACS version 3.0.4
+- passage du plugin en test.
+- validation HTML 5 (pas finie)
+- suppression des anciennes actions (dossier action) devenues inutiles avec SPIP 3.
+- suppression de quelques vieux overrides pour anciennes versions de SPIP et de ses plugins.
+- limitation de la taille maxi des images dans les mises en page (composants Fond, Article, Edito, Sites, ...)
+- suppression du système complexe de droits ACS. Désormais le droit webmestre suffit.
+- creation des fichiers de langue paquet-acs_fr et paquet-acs_en
+- 3 nouveaux drapeaux de langues : he, jp, it.
+- configuration en SPIP 3 désormais complète.
+- améliorations de composants.
+
+ACS version 3.0.3
+- améliorations diverses de quelques composants : Encart, Edito, Recherche, Article, Articles, Keys, ...
+- class "screen_only" aux composants de navigation.
+- modernisation de composant_infos()
+- creation d'un composant identite (du site)
+
+ACS version 3.0.2
+- suppression du set de composants "dist".
+- suppression du composant "démocratie" et de ses dépendances (sera remplacé par un plugin indépendant).
+- suppression de la page "articles proposés".
+- modification du comportement de la fonction coupe() du jeu de composants Cat (valeur négative au lieu de 0 pour ne rien couper)
+- mise à jour du modèle c_css_border-radius (la syntaxe CSS a changé)
+- remise en service des pinceaux
+- améliorations diverses sur les composants Encart, Recherche, Rubnav ...
+
+ACS version 3.0.1
+- nouvelle version optimisée pour SPIP 3. Abandon de la compatibilité avec SPIP 1.9.n, et création d'une branche v2 pour les SPIP 1.9 et 2.
+- création d'un fichier paquet.xml pour SPIP 3.
+- les fonctions sauvegarder/restaurer les paramètres d'ACS sont maintenant intégrées au menu "maintenance" et permettent le téléchargement des sauvegardes.
+- balise #ACS_DERNIERE_MODIF supprimée (#CONFIG{acsDerniereModif} fait le job)
+- suppression de la fonction acs_autorise() et de la balise #ACS_AUTORISE, remplacée par un appel à l'API autoriser de SPIP.
+_______________________________________
+ACS versions antérieures : voir le Changelog d'ACS pour version SPIP < 3.0.0

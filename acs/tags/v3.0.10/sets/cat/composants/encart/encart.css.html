@@ -1,0 +1,42 @@
+[(#CACHE{0})]
+.cEncartClass .entete_rub .titre {
+  vertical-align: middle;
+  font-weight: bold;
+}
+.cEncartClass .entete_rub .soulignement {
+  clear: both;
+  margin: 0;
+  height: 10px;
+  margin-left:5px;
+  margin-right:5px;
+}
+.cEncartClass .entete .surtitre, .cEncartClass .entete .titre, .cEncartClass .entete .soustitre, .cEncartClass .chapo, .cEncartClass .texte, .cEncartClass .nav {
+  margin: 0;
+}
+.cEncartClass .entete .surtitre, .cEncartClass .entete .titre, .cEncartClass .entete .soustitre, .cEncartClass .chapo, .cEncartClass .texte {
+  padding: 4px;
+}
+.cEncartClass .entete .titre, .cEncartClass .entete .surtitre, .cEncartClass .entete .soustitre {
+  text-align: center;
+}
+.cEncartClass .chapo {
+  font-weight: bold;
+}
+.cEncartClass .chapo, .cEncartClass .texte {
+  text-align: justify;
+}
+.cEncartClass .nav {
+  margin-left:5px;
+  margin-right:5px;
+  text-align: [(#ENV{ltr}|choixsiegal{left,left,right})];
+  vertical-align:center;
+}
+.cEncartClass .entete .spip_logos {
+  vertical-align: top; [(#REM) avoid a blank line bug under img in firefox]
+}
+.cEncartClass .hidden {
+  display:none;
+}
+.cEncartClass:hover>span.hidden {
+  display:block;
+}

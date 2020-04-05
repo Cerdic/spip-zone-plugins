@@ -1,0 +1,44 @@
+[(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2015
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+   Le fichier est en cache dans SPIP, mais les navigateurs ne doivent pas
+   conserver cette page en memoire
+]
+#CACHE{24 * 3600}
+#HTTP_HEADER{Content-Type: text/html; charset=#CHARSET}
+<style>
+.divLogin {
+  width: 480px;
+  margin: auto;
+}
+.divLogin .formulaire_menu_lang {
+  margin: 1em;
+  margin-#LANG_RIGHT: 0;
+  text-align: #LANG_RIGHT;
+}
+.divLogin .bloc-title {
+  color: #df0000;
+  text-shadow: 0 0 1px #000;
+  font-weight: bold;
+  text-align: center;
+  padding: 0.5em;
+}
+.divLogin p {
+  text-align: center;
+}
+</style>
+<INCLURE{fond=composants/fond/entete}{env=#ENV}{page=login}{title=<:login_acces_prive:>}>
+<div class="divLogin">[(#MENU_LANG_ECRIRE)]
+  <INCLURE{fond=composants/login/login}{titre=<:login_acces_prive|ucfirst:>}>
+  <p><a href="#URL_SITE_SPIP/"><:login_retoursitepublic|ucfirst:></a></p>
+	[(#CONFIG{accepter_inscriptions}|=={oui}|?{' '})<div class="form_inscription"><big><:inscription_html:></big></div><br />]
+	<p><:contact:>: <a href="mailto:[(#EMAIL_WEBMASTER|cm)]" title="<:contact:>">[(#EMAIL_WEBMASTER|cm)]</a></p>
+</div>
+<INCLURE{fond=composants/fond/pied}>
+

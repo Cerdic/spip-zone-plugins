@@ -1,0 +1,31 @@
+[(#CACHE{0})][(#REM)
+
+Configuration d'ACS
+
+]<div class='formulaire_spip formulaire_configurer formulaire_#FORM-#ENV{id,nouveau}' id='formulaire_configurer_#FORM'>
+  <h3 class='titrem'>[(#CHEMIN_IMAGE{acs_32x32.gif}|balise_img{'',cadre-icone})]<:acs:acs:></h3>
+  [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+  [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+  <form action="#ENV{action}#formulaire_configurer_#FORM" method="post" style="text-align: #LANG_RIGHT">[(#REM) 
+declaration des hidden qui declencheront le service du formulaire
+parametre : url d'action ][(#ACTION_FORMULAIRE{#ENV{action}})]
+    <br />
+    <label for="colorPREVIEW" title="ACS_PREVIEW_BACKGROUND" class="label"><:acs:preview_background:></label>
+    <input id="colorPREVIEW" name="ACS_PREVIEW_BACKGROUND" type="text" class="palette forml" value="#CONFIG{ACS_PREVIEW_BACKGROUND}"  style="width:60px;" title="<:acs:preview_background_help|attribut_html:>"/>
+    <br />
+    <label for="cbVARS" title="ACS_VOIR_ONGLET_VARS" class="label"><:acs:voir_onglet_vars:></label>
+    <input id="cbVARS" name="ACS_VOIR_ONGLET_VARS" type="checkbox"[(#CONFIG{ACS_VOIR_ONGLET_VARS}|oui) checked] title="<:acs:voir_onglet_vars_help|attribut_html:>" />
+    <br />
+    <label for="cbCOMPOSANTS" title="ACS_VOIR_PAGES_COMPOSANTS" class="label"><:acs:voir_pages_composants:></label>
+    <input id="cbCOMPOSANTS" name="ACS_VOIR_PAGES_COMPOSANTS" type="checkbox"[(#CONFIG{ACS_VOIR_PAGES_COMPOSANTS}|oui) checked]  title="<:acs:voir_pages_composants_help|attribut_html:>" />
+    <br />
+    <label for="cbPAGES_PREVIEW" title="ACS_VOIR_PAGES_PREVIEW" class="label"><:acs:voir_pages_preview_composants:></label>
+    <input id="cbPAGES_PREVIEW" name="ACS_VOIR_PAGES_PREVIEW" type="checkbox"[(#CONFIG{ACS_VOIR_PAGES_PREVIEW}|oui) checked] title="<:acs:voir_pages_preview_composants_help|attribut_html:>" />
+    <br />
+    <label for="styleSPIP_ADMIN" title="ACS_SPIP_ADMIN_FORM_STYLE" class="label"><:acs:spip_admin_form_style:></label>
+    <input id="styleSPIP_ADMIN" name="ACS_SPIP_ADMIN_FORM_STYLE" type="text" class="forml" value="#CONFIG{ACS_SPIP_ADMIN_FORM_STYLE}"  style="width:300px;" title="<:acs:spip_admin_form_style_help|attribut_html:>"/>
+    <br />
+    <br />
+    <p class='boutons'><input class='submit' type="submit" name="ok" value="<:bouton_valider:>"/></p>
+  </form>
+</div>

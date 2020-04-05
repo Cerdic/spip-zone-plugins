@@ -1,0 +1,15 @@
+[(#CACHE{0})][(#REM)
+
+  Ecrit un arrondi de bordure css, pour la variable BordRond de l'instance nic du composant c,
+  ou pour sa variable var si elle est passée en paramètre au modèle, ou de taille r.
+  
+  On peut passer un parametre "sauf" qui si il vaut "top" ou "bottom" garde des bords bas droits, non arrondis
+  
+  Examples de syntaxe d'insertion dans une CSS :
+  [(#MODELE{c_css_border-radius}{c=MonComposant}{nic=#NIC}{var=BordRond}{sauf=bottom})]
+  [(#MODELE{c_css_border-radius}{r=15px})]
+
+]#SET{arrondi,#VAR{acs#ENV{c}#ENV{nic}#ENV{var},#ENV{r,0}}}[
+  border-radius: (#GET{arrondi});][(#ENV{sauf}|match{(bottom|top)}|?{" "})[
+  border-(#ENV{sauf})-left-radius: 0;][
+  border-(#ENV{sauf})-right-radius: 0;]]

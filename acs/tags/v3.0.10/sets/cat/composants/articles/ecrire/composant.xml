@@ -1,0 +1,124 @@
+<composant>
+  <nom>Articles</nom>
+  <version>1.0.5</version>
+  <auteur>Daniel FAIVRE &copy; 2008-2015 - licence GPL</auteur>
+	<necessite id='acs' version='[0.8.8;]' />
+  <necessite_composant set='cat' nom='fond' compatibilite='[0.8.9;]' />
+  <necessite_composant set='cat' nom='plan' compatibilite='[0.8.9;]' />
+
+  <group>content</group>
+
+  <param>
+    <nom>instanciable</nom>
+  </param>
+  <param>
+    <nom>preview</nom>
+    <valeur>250</valeur>
+  </param>
+  <param>
+    <nom>optionnel</nom>
+    <valeur>no</valeur>
+  </param>
+
+  <variable>
+    <nom>Nom</nom>
+    <type>text</type>
+  </variable>
+
+  <variable>
+    <nom>TitreFond</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>TitreFondImage</nom>
+    <type>img</type>
+    <chemin>trame</chemin>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>TitreSize</nom>
+    <type>text</type>
+  </variable>
+  <variable>
+    <nom>TitreText</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>TitreLink</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>TitreLinkHover</nom>
+    <type>color</type>
+  </variable>
+
+  <variable>
+    <nom>Fond</nom>
+    <type>color</type>
+  </variable>
+
+  <variable>
+    <nom>Popularite</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+  <variable>
+    <nom>DateRedac</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+  <variable>
+    <nom>Rubrique</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+
+  <variable>
+    <nom>Bord</nom>
+    <type>bord</type>
+  </variable>
+  <variable>
+    <nom>BordRond</nom>
+    <type>text</type>
+  </variable>
+
+  <variable>
+    <nom>Shadow</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>ShadowSize</nom>
+    <type>text</type>
+  </variable>
+  <variable>
+    <nom>ShadowBlur</nom>
+    <type>text</type>
+  </variable>
+
+  <variable>
+    <nom>MargeBas</nom>
+    <type>text</type>
+    <valeur>5</valeur>
+  </variable>
+  <variable>
+    <nom>Pagination</nom>
+    <type>text</type>
+    <valeur>10</valeur>
+  </variable>
+  <variable>
+    <nom>NbLettres</nom>
+    <type>text</type>
+    <valeur>200</valeur>
+  </variable>
+  <variable>
+    <nom>LogoTailleMax</nom>
+    <type>text</type>
+    <valeur>100</valeur>
+  </variable>
+</composant>
