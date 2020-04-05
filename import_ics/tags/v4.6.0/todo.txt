@@ -1,0 +1,3 @@
+[ ] gérer correctement la suppression des almanachs, puisqu'il ne suffit pas d'avoir un statut poubelle pour que cela soit effacé régulièrement (prendre aussi en compte le cas où on aurait le plugin corbeille
+[ ] gérer les répetitions d'evt. C'est complexe. cf http://www.kanzaki.com/docs/ical/recur.html
+[x] gérer les événements ayant une durée (duration) à la plac d'une date de fin

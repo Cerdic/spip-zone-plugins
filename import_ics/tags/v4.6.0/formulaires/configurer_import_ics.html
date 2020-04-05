@@ -1,0 +1,34 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM'>
+<h3 class="titrem"><:import_ics:titre_configuration:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+	<p class="explication">
+		<em class="attention"><:import_ics:cfg_attention:></em>
+	</p>
+	<form method="post" action="#ENV{action}">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		[<(#DIV|sinon{ul})>]
+
+		[(#SAISIE{input,articlepardefaut,
+		  	label=<:configureragenda:label_articlepardefaut:>,
+			})] 
+			
+		[(#EVAL{_IMPORT_ICS_DEPUBLIER_ANCIENS_EVTS}|in_array{#LISTE{on,off}}|?{
+			#SAISIE{case,depublier_anciens_evts,
+				label=<:import_ics:depublier_anciens_evts:>,
+				valeur_forcee=#EVAL{_IMPORT_ICS_DEPUBLIER_ANCIENS_EVTS},
+				explication=<:import_ics:depublier_anciens_evts_explication:> <:import_ics:v_php:>,
+				label_case=<:import_ics:depublier_anciens_evts:>
+				disable=disabled},
+			#SAISIE{case, depublier_anciens_evts,
+					label=<:import_ics:depublier_anciens_evts:>,
+					explication=<:import_ics:depublier_anciens_evts_explication:>,
+					label_case=<:import_ics:depublier_anciens_evts:>}
+			}
+			)]
+		[</(#DIV|sinon{ul})>]
+		<p class="boutons">
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+		</p>	
+	</form>
+</div>

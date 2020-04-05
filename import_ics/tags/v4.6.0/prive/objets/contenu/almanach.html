@@ -1,0 +1,82 @@
+<BOUCLE_almanach(ALMANACHS){id_almanach}{statut?}>
+[(#SET{defaut_tri,#ARRAY{
+	date_debut,#ENV{date_sens,-1},
+	num titre,1,
+}})]
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:almanach:label_titre:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{titre} titre'>(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_url[ (#URL*|strlen|?{'',vide})]">
+	<label><strong><:almanach:label_url:> : </strong></label>
+	<span dir='#LANG_DIR' class='#EDIT{url} url'>(#URL)</span>
+</div>]
+
+<div class="champ contenu_id_article[ (#ID_ARTICLE*|strlen|?{'',vide})]">
+<label><strong><:almanach:label_id_article:> :</strong> </label>
+<span dir='#LANG_DIR' class='#EDIT{id_article} id_article'>
+	<a href="#URL_ECRIRE{article,id_article=#ID_ARTICLE}">#INFO_TITRE{article,#ID_ARTICLE}&nbsp;(#ID_ARTICLE)</a>
+</span>
+</div>
+
+<div class="champ contenu_decalage_ete[ (#DECALAGE_ETE*|strlen|?{'',vide})]">
+	<label><strong><:almanach:decalage_ete:> : </strong></label>
+	<span dir='#LANG_DIR' class='#EDIT{decalage_ete} decalage'>[ [(#DECALAGE_ETE|>={0}|?{+})](#DECALAGE_ETE|singulier_ou_pluriel{almanach:heure,almanach:heures})][(#DECALAGE_ETE|=={0}|?{<:almanach:pas_de_decalage:>})]</span>
+</div>
+
+<div class="champ contenu_decalage_hiver[ (#DECALAGE_HIVER*|strlen|?{'',vide})]">
+	<label><strong><:almanach:decalage_hiver:> : </strong></label>
+	<span dir='#LANG_DIR' class='#EDIT{decalage_hiver} decalage'>[ [(#DECALAGE_HIVER|>={0}|?{+})](#DECALAGE_HIVER|singulier_ou_pluriel{almanach:heure,almanach:heures})][(#DECALAGE_HIVER|=={0}|?{<:almanach:pas_de_decalage:>})]</span>
+</div>
+
+[<div class="champ contenu_dtend_inclus[ (#URL*|strlen|?{'',vide})]">
+	<label><strong><:almanach:dtend_inclus:> : </strong></label>
+	<span dir='#LANG_DIR' class='#EDIT{dtend_inclus} url'>(#DTEND_INCLUS)</span>
+</div>]
+
+  #INCLURE{fond=prive/objets/liste/evenements_almanach,env,ajax}
+
+
+
+	[<div class='maj'>
+	(#DERNIERE_SYNCHRO|!={"0000-00-00 00:00:00"}|?{
+		<:almanach:info_derniere_synchronisation:>&nbsp;[(#DERNIERE_SYNCHRO|affdate_heure)],
+		<:almanach:info_jamais_synchro:>
+	})
+</div>]
+[(#DERNIERE_SYNCHRO|strtotime|<{#DERNIERE_ERREUR|strtotime}|oui)
+<div class="error">
+	#SET{date,#DERNIERE_ERREUR|affdate_heure}
+<:almanach:info_erreur_synchronisation{date=#GET{date}}:>
+</div>
+]
+
+	<div class='synchro_almanach'>
+		[(#BOUTON_ACTION{<:almanach:lien_synchro_almanach:>,#URL_ACTION_AUTEUR{synchro_almanach,#ID_ALMANACH,#SELF},ajax,<:almanach:confirmation_mise_a_jour_evenements{titre_almanach=#TITRE}:>,})]
+	</div>
+
+
+	<BOUCLE_nb_evenement(spip_almanachs_liens){id_almanach=#ID_ALMANACH}{objet=evenement}>
+	</BOUCLE_nb_evenement>
+	<div class='purger_almanach'><:almanach:purger_almanach:></div>
+	[(#AUTORISER{supprimer, almanach, #ID_ALMANACH}|oui)
+		[(#BOUTON_ACTION{<:almanach:info_supprimer_evenements:>,#URL_ACTION_AUTEUR{supprimer_evenements_almanach,#ID_ALMANACH,#SELF},ajax,<:almanach:confirmation_suppression_evenements{titre_almanach=#TITRE}:>,'','(function(me){$(me).parents("tr").animateRemove();return true;})(this)'})]
+	]
+	</B_nb_evenement>
+
+	[(#REM) tenter une réparation si aucun évènement, peut-être du à une désinstallation du plugin agenda]
+	<BOUCLE_aucun_evenement(EVENEMENTS){tout}{0,1}>
+	</BOUCLE_aucun_evenement>
+	[(#CONFIG{import_ics_forcer_deja}|=={'oui'}|oui)
+		[(#AUTORISER{webmestre}|oui)
+		<hr>
+		<div class="forcer_install_import_ics"><p class="explication"><:almanach:forcer_install_import_ics_explication:></p>
+			[(#BOUTON_ACTION{<:almanach:forcer_install_import_ics:>,#URL_ACTION_AUTEUR{forcer_install_import_ics,#ID_ALMANACH,#URL_ECRIRE{admin_plugin}},noajax,<:almanach:confirmation_forcer_install_import_ics:>})]
+		</div>
+		]
+	]
+	<//B_aucun_evenement>
+
+</BOUCLE_almanach>

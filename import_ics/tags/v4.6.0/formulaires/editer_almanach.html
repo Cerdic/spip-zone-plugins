@@ -1,0 +1,47 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_almanach,nouveau}'>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_almanach' value='#ENV{id_almanach}' />
+		[<(#DIV|sinon{ul})>]
+
+			[(#SAISIE{input, titre, obligatoire=oui,
+				label=<:almanach:label_titre:>,
+				explication=<:almanach:explication_titre:> })]
+
+			[(#SAISIE{url, url, obligatoire=oui,
+				label=<:almanach:label_url:>,
+				explication=<:almanach:explication_url:>,
+				verifier=#ARRAY{'type','url'}
+			})]
+			[(#SAISIE{selecteur_article, le_id_article, obligatoire=oui,
+				label=<:agenda:evenement_article:>,
+				li_class=editer_parent,
+				defaut=#LISTE{article|#ID_ARTICLE|sinon{#CONFIG{import_ics/articlepardefaut}}},
+				explication=<:almanach:explication_id_article:>
+			})]
+			[(#SAISIE{selection,decalage_ete,
+				label=<:almanach:decalage_ete:>,
+				explication=<:almanach:decalage_ete_explication:>,
+				datas=#ENV{tableau_decalage}
+			})]
+			[(#SAISIE{selection,decalage_hiver,
+				label=<:almanach:decalage_hiver:>,
+				explication=<:almanach:decalage_hiver_explication:>,
+				datas=#ENV{tableau_decalage}
+			})]
+			[(#SAISIE{case,dtend_inclus,
+				label=<:almanach:dtend_inclus:>,
+				explication=<:almanach:dtend_inclus_explication:>,
+			})]
+		[</(#DIV|sinon{ul})>]
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</form>
+	]
+</div>

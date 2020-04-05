@@ -1,0 +1,43 @@
+#SET{defaut_tri,#ARRAY{
+statut,-1,
+titre,1,
+date_debut,-1
+}}
+<B_details_evenement>
+#ANCRE_PAGINATION
+<div class="liste-objets">
+	[(#REM) On boucle sur la table de liens pour récupérer l'id de l'objet evenement voulu puis on boucle sur la table evenement pour recuperer les détails de l'événement ]
+	<table class='spip liste'>
+	<caption><span class="image_loading"></span><strong class="caption"><:almanach:info_evenement_almanach:></strong></caption>
+	<thead>
+		<tr class='first_row'>
+			<th class="statut">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date_debut,<:date:>,ajax})]</th>
+			<th class='orateur' scope='col'><:almanach:attendee:></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+		<BOUCLE_details_evenement(EVENEMENTS){tout}{id_almanach}{tri #ENV{par,date_debut},#GET{defaut_tri},session_details_evenement}{pagination}>
+			<td class="statut">[(#STATUT|puce_statut{evenement,#ID_EVENEMENT,#ID_ARTICLE})]</td>
+			<td class='titre principale'>
+				[(#ATTENDEE|?{
+				 [<a href="#URL_ECRIRE{evenement,id_evenement=#ID_EVENEMENT}">(#TITRE|replace{#ATTENDEE\h-\h})</a>],
+				 [<a href="#URL_ECRIRE{evenement,id_evenement=#ID_EVENEMENT}">(#TITRE)</a>]
+				 }
+				)]
+				[<br /><strong><:almanach:lieu:> : </strong>(#LIEU)]
+
+			</td>
+			<td class='date secondaire'>[(#DATE_DEBUT|agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE,'hcal'})]</td>
+			<td class="orateur">#ATTENDEE</td>
+		</tr>
+		</BOUCLE_details_evenement>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_details_evenement>
+<p><:almanach:aucun_evenement:></p>
+<//B_details_evenement>

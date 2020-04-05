@@ -1,0 +1,47 @@
+<paquet
+	prefix="import_ics"
+	categorie="date"
+	version="4.6.0"
+	etat="stable"
+	compatibilite="[3.0.7;3.2.*]"
+	logo="prive/themes/spip/images/import_ics-64.png"
+	documentation="https://contrib.spip.net/4816"
+	schema="1.0.11"
+>
+	<nom>Import_ics</nom>
+
+	<auteur>Amaury</auteur>
+	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
+	<auteur>Touti</auteur>
+	<licence>GNU/GPL</licence>
+
+	<traduire module="almanach" reference="fr" />
+	<traduire module="import_ics" reference="fr" />
+	<traduire module="paquet-import_ics" reference="fr" />
+
+	<necessite nom="agenda" compatibilite="[3.16.0;[" />
+	<necessite nom="icalendar" compatibilite="[0.4.4;[" />
+	<necessite nom="cextras" compatibilite="[3.0.5;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
+	<necessite nom="verifier" compatibilite="[1.1.0;[" />
+
+	<utilise nom="corbeille" compatibilite="[3.1.1;[" />
+
+	<pipeline nom="affiche_milieu" inclure="import_ics_pipelines.php" />
+	<pipeline nom="autoriser" inclure="import_ics_autorisations.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/import_ics.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/import_ics.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/import_ics.php" />
+	<pipeline nom="declarer_champs_extras" inclure="base/import_ics.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="import_ics_pipelines.php" />
+	<pipeline nom="post_edition" inclure="import_ics_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="import_ics_pipelines.php" />
+	<pipeline nom="evenement_liaisons_colonne_gauche" inclure="import_ics_pipelines.php" />
+	<pipeline nom="post_edition_lien" inclure="import_ics_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="import_ics_pipelines.php" />
+	<pipeline nom="corbeille_table_infos" inclure="import_ics_pipelines.php" />
+	<pipeline nom="evenement_ical_to_sql" />
+
+	<menu nom="almanachs" titre="almanach:titre_almanachs" parent="menu_edition" icone="images/almanach-16.png" action="almanachs" />
+	<menu nom="almanach_creer" titre="almanach:icone_creer_almanach" parent="outils_rapides" icone="images/almanach-new-16.png" action="almanach_edit" parametres="new=oui" />
+</paquet>
