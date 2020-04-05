@@ -1,0 +1,7 @@
+<traduction module="selecteurgenerique" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/selecteur_generique/lang/" reference="fr">
+	<langue code="en" />
+	<langue code="fr" />
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/selecteurgenerique?lang_cible=sk">
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
+	</langue>
+</traduction>
