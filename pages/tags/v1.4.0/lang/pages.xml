@@ -1,0 +1,38 @@
+<traduction
+	module="pages"
+	id="pages--pages-080a7"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip-contrib-extensions/pages.git"
+	reference="fr">
+	<langue code="ar" url="https://trad.spip.net/tradlang_module/pages?lang_cible=ar" total="16" traduits="6" relire="0" modifs="2" nouveaux="8" pourcent="37.50">
+		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
+	</langue>
+	<langue code="de" url="https://trad.spip.net/tradlang_module/pages?lang_cible=de" total="16" traduits="12" relire="0" modifs="0" nouveaux="4" pourcent="75.00">
+		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
+	</langue>
+	<langue code="en" url="https://trad.spip.net/tradlang_module/pages?lang_cible=en" total="16" traduits="16" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
+		<traducteur nom="tcharlss" lien="https://trad.spip.net/auteur/drbouvierleduc" />
+	</langue>
+	<langue code="es" url="https://trad.spip.net/tradlang_module/pages?lang_cible=es" total="16" traduits="12" relire="0" modifs="0" nouveaux="4" pourcent="75.00">
+		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
+	</langue>
+	<langue code="fa" url="https://trad.spip.net/tradlang_module/pages?lang_cible=fa" total="16" traduits="6" relire="0" modifs="2" nouveaux="8" pourcent="37.50">
+		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
+	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/pages?lang_cible=fr" total="16" traduits="16" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="nl" url="https://trad.spip.net/tradlang_module/pages?lang_cible=nl" total="16" traduits="16" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
+	</langue>
+	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/pages?lang_cible=pt_br" total="16" traduits="12" relire="0" modifs="0" nouveaux="4" pourcent="75.00">
+		<traducteur nom="placido" lien="https://trad.spip.net/auteur/placido" />
+		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
+	</langue>
+	<langue code="ru" url="https://trad.spip.net/tradlang_module/pages?lang_cible=ru" total="16" traduits="6" relire="0" modifs="2" nouveaux="8" pourcent="37.50">
+		<traducteur nom="Serge Markitanenko" lien="https://trad.spip.net/auteur/serge-markitanenko" />
+	</langue>
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/pages?lang_cible=sk" total="16" traduits="12" relire="0" modifs="0" nouveaux="4" pourcent="75.00">
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
+	</langue>
+</traduction>

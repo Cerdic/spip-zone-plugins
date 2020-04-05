@@ -1,0 +1,39 @@
+<paquet
+	prefix="pages"
+	categorie="divers"
+	version="1.4.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/page-32.png"
+	documentation="https://contrib.spip.net/Pages-uniques"
+	schema="1.0.1"
+>
+
+	<nom>Pages</nom>
+	<!-- Gestion des pages sans rubrique -->
+
+	<auteur>RastaPopoulos</auteur>
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL v3</licence>
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/pages_tables.php" />
+	<pipeline nom="affiche_milieu" action="affiche_milieu_ajouter_page" inclure="pages_pipelines.php" />
+	<pipeline nom="affiche_milieu" action="affiche_milieu_identifiant" inclure="pages_pipelines.php" />
+	<pipeline nom="boite_infos" inclure="pages_pipelines.php" />
+	<pipeline nom="affiche_hierarchie" inclure="pages_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="pages_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="pages_pipelines.php" />
+	<pipeline nom="editer_contenu_objet" inclure="pages_pipelines.php" />
+	<pipeline nom="pre_edition" action="pre_edition_ajouter_page" inclure="pages_pipelines.php" />
+	<pipeline nom="autoriser" inclure="pages_autorisations.php" />
+	<pipeline nom="pre_boucle" inclure="pages_pipelines.php" />
+
+	<!-- Déclaration des pipelines du plugin -->
+	<pipeline nom="pages_uniques_utiles" action="" />
+
+	<utilise nom="polyhier" compatibilite="[2.0.1;]" /> 
+
+	<menu nom="pages" titre="pages:pages_uniques" parent="menu_edition" icone="images/page-16.png" />
+	<menu nom="page_creer" titre="pages:creer_page" parent="outils_rapides" icone="images/page-new-16.png" action="article_edit" parametres="new=oui&amp;modele=page&amp;id_rubrique=-1" />
+</paquet>
