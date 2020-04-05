@@ -1,0 +1,72 @@
+
+
+DESCRIPTION DU PLUGIN
+
+- Permet de lire et afficher une bdd joomla avec SPIP
+- Gère la convertion Joomla -> SPIP via un squelette
+
+
+UTILISATION
+
+1) installer un SPIP sur la même base de donnée que le joomla
+
+2) installer le plugin et se rendre sur la page ./spip.php?page=joomla2spip
+
+3) apres la migration. effacer le plugin
+
+
+REMARQUES
+
+Joomla propose des champs inexistants dans la table article de spip, ils sont disponibles via des plugins SPIP on les ignore ici
+- ordre
+- date de dépublication
+- id_parent (pour faire des articles liés)
+
+
+Joomla propose des features non gérées par SPIP ; ignoré.
+- menus
+
+
+les liens de jos_content
+index.php?option=com_content&task=view&id=43&Itemid=81
+
+sont transformés dans spip_articles en 
+spip.php?page=article&id_article=43
+
+Les id_article doivent êtres forcés pour correspondre à id.
+
+BoOz@rezo.net
+
+
+TODO
+Chopper les urls des rubriques, des articles des documents.
+jos_jv_page_url (url propres ?)
+jos_jv_a_page ?
+jos_redirection ?
+
+Chopper les utilisateurs : 
+les auteurs : jos_users
+les contacts : jos_contact_details
+les abonnés : jos_acajoom_subscribers
+
+Types d'utilisateurs : jos_usertypes
+ 	 
+1 	administrator 	 
+2 	editor 	 
+3 	user 	 
+4 	author 	 
+5 	publisher 	 
+6 	manager
+
+
+Pour lancer la convertion regler php.ini
+
+;;;;;;;;;;;;;;;;;;;
+; Resource Limits ;
+;;;;;;;;;;;;;;;;;;;
+
+max_execution_time = 18000     ; Maximum execution time of each script, in seconds
+max_input_time = 18000	; Maximum amount of time each script may spend parsing request data
+memory_limit = 64M      ; Maximum amount of memory a script may consume (8MB)
+
+-> erational: la pagination permet de limiter la consommation
