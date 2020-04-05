@@ -1,0 +1,19 @@
+[(#REM)<style>]
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,c5e41c}}
+#SET{foncee,##ENV{couleur_foncee,9dba00}}
+
+/*============================
+  === BOITE AFFICHE GAUCHE ===
+  ============================*/
+.choix.modele {margin-bottom: 0.25em;}
+.choix.modele img {vertical-align: middle;}
+.choix.modele .radio {margin-left: 0; margin-right: 0;}
+/* code balise */
+.code_modele {
+		background-color: [#(#GET{claire}|couleur_luminance{.1})];
+		border: 1px solid #GET{claire};
+		color: [#(#GET{foncee}|couleur_foncer)];;
+		}

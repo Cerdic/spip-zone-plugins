@@ -1,0 +1,21 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:inserer_modeles:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+			<ul>
+				[(#SAISIE{choisir_objets, objets,
+					label=<:inserer_modeles:choix_objets_editable:>,
+					defaut=#LISTE{spip_articles, spip_rubriques, spip_breves, spip_mots},
+					explication=<:inserer_modeles:choix_objets_editable_explication:>})]
+			</ul>
+		<input type="hidden" name="_meta_casier" value="inserer_modeles" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>

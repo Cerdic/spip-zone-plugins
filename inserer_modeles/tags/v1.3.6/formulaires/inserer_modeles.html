@@ -1,0 +1,58 @@
+<div class="ajax formulaire_spip formulaire_configurer formulaire_inserer_modeles">
+[(#ENV{formulaire_modele}|non)<h3 class="titrem">
+	<img src="[(#CHEMIN_IMAGE{modele-add-24.png}|url_absolue)]" class="cadre-icone" />
+	<:inserer_modeles:titre_inserer_modeles:>
+</h3>]
+[(#ENV{formulaire_modele}|oui)<h3 class="titrem">
+	<:inserer_modeles:titre_inserer{modele=#ENV{_nom}}:>
+</h3>]
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form action="#ENV{action}" method="post"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<BOUCLE_deja_choisi(CONDITION){si #ENV{formulaire_modele}}>
+		[<textarea readonly="readonly" class="code_modele" id="code_modele[(#ENV{modalbox}|?{'_modalbox',''})]"[ (#ENV{_code_modele}|et{#ENV{_js_inserer_code}}|oui)ondblclick="#ENV**{_js_inserer_code}"]>(#ENV{_code_modele})</textarea>]
+		<script>$(document).ready(function(){ autosize($('#code_modele')); });</script>
+		[(#REM) Insertion du code dans le texte après validation ]
+		[(#ENV{_code_modele}|et{#ENV{modalbox}|=={oui}}|oui)
+			<script>$(document).ready(function(){
+				[(#ENV{modalbox}|oui)
+					var code_modele = $("#code_modele_modalbox").text(); [(#REM) On distingue #code_modele (colonne de gauche) de #code_modele_modalbox pour car les deux peuvent exister.]
+					if (code_modele != '') {
+						parent.$.markItUp( { replaceWith: code_modele } );
+						jQuery.modalboxclose();
+					}
+				]
+				[(#ENV{modalbox}|non)
+					[(#ENV**{_js_inserer_code})]
+				]
+			});</script>
+		]
+		<input type="hidden" name="formulaire_modele" value="#ENV{formulaire_modele}" />
+		<ul>
+		#GENERER_SAISIES{#ENV{_saisies}}
+		</ul>
+		<p class="boutons">
+			<input type="submit" class="submit" name="inserer" value="<:inserer_modeles:bouton_inserer:>" />
+			[(#ENV{ne_pas_afficher_bouton_annuler}|non)<input type="submit" class="submit link" name="annuler" value="<:bouton_annuler:>" />]
+		</p>
+	</BOUCLE_deja_choisi>
+		<B_choix>
+		<strong><:inserer_modeles:choisir_modele:></strong>
+		<ul>
+		<li>
+		<BOUCLE_choix(POUR){tableau #ENV{_liste_formulaires_modeles}}{par valeur}>
+		<div class="choix modele">
+			<input type="radio" class="radio" name="formulaire_modele" id="#CLE" value="#CLE" style="vertical-align:top;" />
+			<label for="#CLE">[(#VALEUR|table_valeur{icone_barre}|balise_img)&nbsp;][(#VALEUR|table_valeur{nom}|_T_ou_typo)]</label>
+		</div>
+		</BOUCLE_choix>
+		</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" class="submit" name="choisir" value="<:inserer_modeles:bouton_choisir:>" />
+		</p>
+		</B_choix>
+	<//B_deja_choisi>
+</div></form>
+</div>
