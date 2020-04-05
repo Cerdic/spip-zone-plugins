@@ -1,0 +1,48 @@
+﻿Ce site utilise OpenID.
+
+{{{Pour vous connecter}}}
+
+Si vous êtes inscrit sur un site acceptant OpenID, vous pouvez vous connecter en indiquant votre adresse OpenID à la place de l'identifiant ou de l'email.
+
+Le site vous dirige alors vers votre fournisseur OpenID, lequel vérifie alors que vous êtes bien connecté et vous renvoie (immédiatement ou après confirmation) vers le site initial, en lui certifiant que vous êtes bien le propriétaire de cette adresse OpenID. Vous êtes alors connecté.
+
+[photo d'écran ?]
+
+{{{Pour vous inscrire}}}
+
+Lorsqu'un site permet de s'inscrire via OpenID, indiquez votre adresse OpenID dans le formulaire d'inscription. Vous pourrez alors vous connecter avec cette adresse.
+
+Si vous êtes déjà inscrit sur un site, et que vous souhaitez y ajouter votre adresse OpenID, rendez-vous sur ce site, et indiquez votre adresse OpenID dans vos informations personnelles ou dans vos préférences de connexion.
+
+[photo d'écran ?]
+
+
+{{{Comment obtenir une adresse OpenID}}}
+
+Il y a de fortes chances que vous possédiez déjà une adresse OpenID. La plupart des grands fournisseurs de services de type webmail en proposent. Si vous ne souhaitez pas utiliser l'un de ces fournisseurs OpenID, vous pouvez créer une adresse OpenID sur un site spécialisé, comme par exemple [->www.openidfrance.fr] (associatif)à ou [->www.myopenid.com] (??).
+
+[photo d'écran ?]
+
+
+{{{À prendre en compte}}}
+
+Une adresse OpenID ne révèle pas qui vous êtes, sauf vous l'indiquez explicitement. Ce qu'offre le sstème OpenID, c'est un mécanisme permettant à tout site Internet de confirmer instantanément -- et avec votre accord -- que vous êtes bien le propriétaire de cette adresse. De la même manière qu'une URL envoyée à votre votre adresse email permet de vérifier que vous en êtes bien le possesseur.
+
+Lorsque vous utilisez une adresse OpenID pour vous connecter à un site :
+
+-- la sécurité de votre accès à ce site dépend de la sécurisation de votre fournisseur d'adresse OpenID. Ainsi, si par exemple openidfrance.fr se fait pirater, il est possible que la connexion vers votre site SPIP soit compromise. Si vous vous connectez d'un cybercafé, pensez donc à bien vous déconnecter de votre serveur OpenID lorsque vous terminez votre session.
+
+-- à chaque demande de connexion, le site valide votre identité auprès de votre fournisseur OpenID. En termes de {privacy,} cela signifie que, si vous employez votre compte de webmail pour vous connecter, l'hébergeur de votre webmail est informé du fait que vous vous êtes connecté à tel et tel site, à tel moment et à partir de tel endroit. Choisissez donc un fournisseur en qui {vous} avez confiance.
+
+Si OpenID offre un confort certain en offrant un seul point de connexion pour de nombreux sites, il n'est pas interdit d'utiliser plusieurs adresses OpenID pour des activités différentes. Ainsi vous utiliserez l'adresse OpenID <code>http://ma-societe.biz/nom.prenom</code> pour vous connecter sur vos sites professionnels, <code>http://association-openid.org/pseudo</code> pour vous connecter sur vos sites persos, familiaux et associatifs, et <code>http://darknet-hax0r.net/x09</code> pour vos sites de piratage.
+
+
+{{{Arguments en faveur}}}
+
+Pour le webmestre :
+-- Sécurité (on ne diffuse plus le mot de passe sur une connexion http)
+-- Facilité pour l'ajout de contributeurs à un projet (on ne leur donne plus de mot de passe, on se contente d'ajouter leurs openid dans des fiches auteurs)
+
+Pour le rédacteur :
+-- Sécurité
+-- Confort
