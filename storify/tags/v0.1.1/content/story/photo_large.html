@@ -1,0 +1,14 @@
+#SET{logo,#ENV**{blocks/1}|propre|extraire_balise{img}|image_reduire{1360,0}|extraire_attribut{src}}
+<div class="inner-bg" style="background-image:url([(#GET{logo})])">
+	<span class="opacity"></span>
+	[<span class="div-bg" style="">(#ENV**{blocks/1}|propre)</span>]
+	<div class="bottom-side">
+		<div class="container-fluid padding-large">
+			<div class="row">
+				<div class="col-sm-6 right-side">
+					[(#ENV**{blocks/0}|propre)]
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

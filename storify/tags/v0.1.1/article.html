@@ -1,0 +1,4 @@
+<BOUCLE_principale_article(ARTICLES){id_article}>
+#SET{composition,#COMPOSITION}[(#TEXTE**|storify_is_story)#SET{composition,story}]
+<INCLURE{fond=structure,env,id_rubrique=#ENV{id_rubrique,#ID_RUBRIQUE},id_secteur=#ID_SECTEUR,type-page=article,composition=#GET{composition}} />
+</BOUCLE_principale_article>

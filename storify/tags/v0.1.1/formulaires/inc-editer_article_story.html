@@ -1,0 +1,48 @@
+<input name="storified" type="hidden" value="#ENV{_storified}" />
+<style type="text/css">
+	.btn-storify {  float: right;position: absolute;right: 0;margin: 5px 10px;font-weight: bold;font-size: 1.15em; }
+</style>
+[(#ENV{_storified}|non)
+<button name="storify" type="submit" value="1" class="btn-storify">Storify!</button>
+]
+[(#ENV{_storified}|oui)
+<button name="unstorify" type="submit" value="1" class="btn-storify">Unstorify</button>
+<style type="text/css">
+	.editer.editer_chapo,
+	.editer.editer_ps,
+	.editer.editer_is_important,
+	.editer.editer_is_action,
+	.editer.editer_is_action+.suite,
+	.editer.editer_texte {display: none;}
+	.story-lines .story_line-type-select {width: 50%;}
+	.story-lines .story_line-append_line {float: right;}
+	button.disabled {visibility: hidden}
+	.editer_story_line {border-bottom: 1px solid #ddd;}
+</style>
+]
+<B_story_lines>
+	<div class="fieldset">
+		<fieldset class="story-lines">
+			<legend><:storify:legend_story_lines:></legend>
+			<div class="editer-groupe">
+				<BOUCLE_story_lines(POUR){tableau #ENV{story_lines}}{si #ENV{_storified}}>
+				#SET{type,#VALEUR{type}|storify_safe_type}
+				<div class="editer editer_story_line editer_story_line_#GET{type}">
+					<div>
+						<select name="story_lines[#CLE][type]" class="story_line-type-select">
+							[(#GET{type}|storify_type_options)]
+						</select>
+						<input type="submit" name="story_line_change_type" value="<:storify:bouton_changer:>" />
+						<button type="submit" name="story_line_up[#CLE]" value="1"
+							[(#COMPTEUR_BOUCLE|=={1}|oui)disabled="disabled" class="disabled" ]>[(#CHEMIN{images/arrow-up-16.png}|balise_img{Up})]</button>
+						<button type="submit" name="story_line_down[#CLE]" value="1"
+			        [(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)disabled="disabled" class="disabled" ]>[(#CHEMIN{images/arrow-down-16.png}|balise_img{Up})]</button>
+					</div>
+					<INCLURE{fond=formulaires/story/#GET{type},k=#CLE,prefix=story_line_#CLE,env} />
+				</div>
+				</BOUCLE_story_lines>
+			</div>
+			<input type="submit" name="story_line_append_line" value="<:storify:bouton_ajouter:>" class="story_line-append_line" />
+		</fieldset>
+	</div>
+</B_story_lines>

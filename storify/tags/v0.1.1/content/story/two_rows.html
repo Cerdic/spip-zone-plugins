@@ -1,0 +1,15 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-[(#ENV{alt}|?{'5 aside','7 texte'})] left-side">
+			<div class="padding-large">
+				[(#ENV**{blocks/[(#ENV{alt}|?{1,0})]}|propre)]
+			</div>
+		</div>
+		<div class="col-sm-[(#ENV{alt}|?{'7 texte','5 aside'})] right-side">
+			<div class="padding-large">
+				[(#ENV**{blocks/[(#ENV{alt}|?{0,1})]}|propre)]
+			</div>
+		</div>
+	</div>
+
+</div>
