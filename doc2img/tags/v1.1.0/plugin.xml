@@ -1,0 +1,48 @@
+<plugin>
+	<nom><multi>[fr]Documents en Images[en]Documents to images</multi></nom>
+	<auteur>Camille Lafitte</auteur>
+	<version>1.1.0</version>
+	<etat>stable</etat>
+	<slogan>
+		<multi>
+			[fr]Convertir des documents textuels &#224; la vol&#233;e
+			[en]Convert text documents on the fly
+		</multi>
+	</slogan>
+	<description>
+		<multi>
+			[fr]Ce plugin permet de convertir &#224; la vol&#233;e des pdf, tiff et autres types de document en image ou s&#233;rie d'images. Ces images sont ensuite exploitables via une boucle sp&#233;cifique.
+			[en]This plugin will convert on the fly pdf, tiff and other kind of documents in image or serie of images. These images can then be used with a specific loop.
+		</multi>
+	</description>
+	<lien>https://contrib.spip.net/doc2img</lien>
+	<icon>images/doc2img-128.png</icon>
+	<prefix>doc2img</prefix>
+	<install>base/doc2img_install.php</install>
+	<fonctions>doc2img_fonctions.php</fonctions>
+	<version_base>0.93</version_base>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/doc2img.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/doc2img.php</inclure>
+	</pipeline>
+    <pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>doc2img_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>doc2img_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>document_desc_actions</nom>
+		<inclure>doc2img_pipeline.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="cfg" version="[1.9;]" />
+	<utilise id="medias" version="[1.6.12;]" />
+	<categorie>edition</categorie>
+</plugin>
