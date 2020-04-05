@@ -1,0 +1,20 @@
+<paquet
+	prefix="imagesactives"
+	categorie="multimedia"
+	version="1.0.1"
+	etat="test"
+	compatibilite="[2.0.0;3.1.*]"
+	logo="prive/themes/spip/images/images_actives-32.png"
+	documentation="https://contrib.spip.net/?article4159"
+	demonstration="http://images-actives.crdp-versailles.fr/"
+>
+
+	<nom>Images Actives</nom>
+	
+	<auteur mail="johan.pustoch@crdp.ac-versailles.fr" lien="https://contrib.spip.net/?auteur7949">Johan Pustoch</auteur>
+	
+	<credit lien="http://code.google.com/p/swfobject/">SWFObject</credit>
+	
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	
+</paquet>

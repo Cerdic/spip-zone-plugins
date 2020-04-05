@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd"
+    >
+<html lang="#LANG">
+<BOUCLE_doc (DOCUMENTS) {id_document}{tout}>
+<head>
+    <title>#TITRE</title>
+    <style type="text/css">
+        body{width:[(#ENV{largeur}|plus{10})]px;margin: 0 auto 0 auto;padding: 0;}
+        .spip_doc_descriptif{font-size: .8em;}
+        body div.insertion_swf {margin-bottom: 0;}
+
+    </style>
+    [<script src="(#CHEMIN{javascript/jquery.js})" type="text/javascript"></script>]
+</head>
+<body>
+[(#INCLURE{fond=inclure/imageactive_swf}{env}{largeur=#ENV{largeur}}{hauteur=#ENV{hauteur}})]
+</body>
+</BOUCLE_doc>
+</B_doc>
+<head>
+    <title><:imagesactives:sans_titre:></title>
+</head>
+<body>
+<:imagesactives:pas_d_images_actives:>
+</body>
+<//B_doc>
+</html>

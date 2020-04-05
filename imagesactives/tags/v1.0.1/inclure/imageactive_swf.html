@@ -1,0 +1,65 @@
+<BOUCLE_doc (DOCUMENTS) {id_document}{tout}>
+<style type="text/css">
+div.insertion_swf {
+    position: relative;
+    z-index: 0;
+    text-align: center;
+    width:#ENV{largeur}px;
+    margin-bottom: 1.5em;
+}
+#insertion_swfobject#ID_DOCUMENT {
+    width:#ENV{largeur}px;
+    height:#ENV{hauteur}px;
+    margin:0;
+    z-index: 0;
+    padding:0;
+}
+.preload_images_actives {
+    z-index: 99;
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:260px;
+    height:154px;
+    margin-left:-130px;
+    margin-top:-77px;
+}
+
+
+</style>
+<script type="text/javascript" src="#CHEMIN{swfobject.js}"></script>
+<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/ 
+
+function stopPreload() {
+    jQuery(".preload_images_actives").css({'display':'none'}); 
+}
+
+function insererSwf#ID_DOCUMENT(nom) {
+    var swfVersionStr = "10.0.0";
+    var xiSwfUrlStr = "playerProductInstall.swf";
+    var flashvars = {};
+    var params = {};
+    params.quality = "high";
+    params.wmode = "opaque";
+    params.allowscriptaccess = "always";
+    params.allowfullscreen = "true";
+    var attributes = {};
+    attributes.id = "flashContent#ID_DOCUMENT";
+    attributes.name = nom;
+    attributes.align = "middle";
+    swfobject.embedSWF( nom, "insertion_swfobject#ID_DOCUMENT", "#ENV{largeur}", "#ENV{hauteur}", swfVersionStr, xiSwfUrlStr, flashvars, params, attributes);
+    swfobject.createCSS("#flashContent#ID_DOCUMENT", "display:block;text-align:left;position:relative;z-index:0;");
+}
+jQuery(document).ready(function(){
+    insererSwf#ID_DOCUMENT('#FICHIER');
+});
+/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/
+</script>
+<div id="insertion_swf#ID_DOCUMENT" class="insertion_swf spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})]" >
+    <div class="preload_images_actives" id="preload#ID_DOCUMENT"><img src="#CHEMIN{img/chargement_images_actives.gif}" alt="<:imagesactives:chargement:>"/></div>
+    <div id="insertion_swfobject#ID_DOCUMENT" class="insertion_swfobject"> </div>[
+    <div class='#EDIT{titre}'><strong>(#TITRE)</strong></div>][
+    <div class='#EDIT{descriptif} spip_doc_descriptif'>(#DESCRIPTIF|PtoBR)</div>]
+    <div><small>#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]</small></div>
+</div>
+</BOUCLE_doc>

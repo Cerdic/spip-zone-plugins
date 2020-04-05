@@ -1,0 +1,20 @@
+<BOUCLE_doc (DOCUMENTS) {id_document}{tout}>
+<style type="text/css">
+.image_active_lien_popin{
+    width: 200px;
+    text-align: center;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    padding: 0;
+}
+</style>
+<div class="image_active_lien_popin spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})]">
+    <a href="[(#URL_PAGE{image_active}|parametre_url{id_document,#ID_DOCUMENT}|parametre_url{largeur,#ENV{largeur}}|parametre_url{hauteur,#ENV{hauteur}})][(#PLUGIN{ThickBox1}|?{&amp;KeepThis=true&amp;TB_iframe=true&amp;height=[(#ENV{hauteur}|plus{50})]&amp;width=[(#ENV{largeur}|plus{10})]})]"
+        class="[(#PLUGIN{ThickBox1}|?{thickbox})][ (#PLUGIN{mediabox}|?{mediabox  boxIframe boxWidth-[(#ENV{largeur}|plus{100})]px boxHeight-[(#ENV{hauteur}|plus{130})]px})]">
+        [(#LOGO_DOCUMENT|fichier|strpos{swf.png}|>{0}|?{<img src="[(#CHEMIN{img/images_actives.png})]" alt="<:imagesactives:images_actives:>" />, #LOGO_DOCUMENT|image_reduire{200,0}}) ]
+    </a>[
+    <div class='#EDIT{titre}'><strong>(#TITRE)</strong></div>][
+    <div class='#EDIT{descriptif} spip_doc_descriptif'>(#DESCRIPTIF|PtoBR)</div>]
+    <div><small>#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets|texte_backend)]</small></div>
+</div>
+</BOUCLE_doc>
