@@ -1,0 +1,20 @@
+<div class='formulaire_spip formulaire_#FORM'>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable}|oui)
+		<form method='post' action='[(#ENV{action})]'><div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<ul>
+				[(#SAISIE{input, recherche_contact, label=<:contacts:label_recherche_contacts:>})]
+			</ul>
+			<p class='boutons'>
+				<input type='submit' name='rechercher' value='<:contacts:bouton_rechercher:>' />
+			</p>
+		</div></form>
+	]
+
+	[(#INCLURE{fond=formulaires/inc-lier_concact_resultats_recherche, env, ajax})]
+</div>
+

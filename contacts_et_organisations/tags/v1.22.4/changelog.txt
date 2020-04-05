@@ -1,0 +1,49 @@
+
+
+1.3.5 (2010-08-24) :
+	ajout picto auteur par défaut dans les listes;
+	ajout picto "délier";
+	modif base 1.2.1 :
+		ajout champ organisations.secteur;
+		remplacement champ organisations.type par organisations.statut_juridique;
+		remplacement champ organisations.siret par organisations.identification;
+
+1.3.7 (2010-09-23) :
+	suite remarque Aurélie sur le forum, changement du type de champ descriptif;
+
+1.3.9 (2010-12-21) :
+	ajout d'une proto-v-card avec feuille de style, appelée par le modele <auteur123>
+
+1.13.7 (2012-11-29)
+	Correction d'un bug d'affichage dans affiche gauche lors de la création d'un nouvel auteur (affichage de tous les contacts dont le id_auteur=0);
+
+1.13.8 (2013-02-02)
+	Correction du non affichage des infos de contacts sur la vue des auteurs
+
+1.20.0 (2013-02-02)
+	Report des améliorations depuis le trunk (version 2.5.0) pour SPIP 3
+	et adaptations de ceux-ci pour SPIP 2.1 :
+	Nettoyages & gestion plus précise des jointures
+	- Squelettes de démo réécrits et complétés (?page=test/co)
+	- Critère {branche_organisation} équivalent à {branche} mais pour id_organisation
+	- Critère (ORGANISATIONS){compteur_contacts} et balise #COMPTEUR_CONTACTS
+	- Critère (AUTEURS){contacts_auteurs} et (CONTACTS){contacts_auteurs}
+	  pour créer la jointure entre ces tables et pouvoir attraper
+	  #NOM_CONTACT, #PRENOM_CONTACT, #CIVILITE_CONTACT depuis la table AUTEURS et
+	  #NOM_AUTEUR depuis la table CONTACTS
+	- Balise #LESORGANISATIONS comme #LESAUTEURS pour charger le modèle lesorganisations.
+	  On déprécie #ORGANISATIONS qui faisait cela.
+
+	Report (version 2.6.0) du critère (AUTEURS){organisations_auteurs}
+	et (ORGANISATIONS){organisations_auteurs} avec balise #NOM_ORGANISATION
+
+1.21.0 (2013-08-01)
+    Report des améliorations depuis le trunk (version 2.7.0) :
+    - Lors de la création d'un auteur depuis la fiche contact, passer par l'API d'édition
+      pour que les pipelines soient appelés.
+
+1.22.0 (2013-08-03)
+    Report des améliorations depuis le trunk (version 2.8.0) :
+    - Define à activer pour supprimer les contacts/organisations si un auteur passe à la poubelle, et réciproquement.
+
+

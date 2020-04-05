@@ -1,0 +1,149 @@
+<plugin>
+	<nom>Contacts &#38; Organisations</nom>
+	<auteur>Cyril MARION - [Ateliers CYM->http://www.cym.fr] - Matthieu Marcillaud - [Ma Graine->http://magraine.net]</auteur>
+	<etat>test</etat>
+	<slogan>
+		<multi>
+		[fr]Ajouter un gestionnaire de contacts &#224; SPIP
+		[en]Enhance SPIP with a contact management system
+		</multi>
+	</slogan>
+	<description>
+		<multi>
+[fr] Ajoute &#224; SPIP les fonctionnalit&#233;s d'un gestionnaire de contacts.
+Distingue les personnes pysiques (contacts) des personnes morales (organisations) en conservant tous les attributs des auteurs SPIP.
+_ Permet d'attribuer des droits d'acc&#232;s &#224; des organisations avec un mot de passe unique et d'&#233;tendre &#224; la fois les champs unitaires (pr&#233;nom, date de naissance...) et les champs multipes (num&#233;ros de t&#233;l&#233;phone, adresses mail...).
+
+Plugin d&#233;velopp&#233; dans le cadre du gestionnaire de projets [SPIPMINE->https://contrib.spip.net/Plugin-Spipmine] et du plugin [Catalogue->https://contrib.spip.net/Plugin-Catalogue].
+
+[en] Enhances SPIP with the functionnalities of a contact management system. Makes a difference between companies (organisations) and persons (contacts) while keeping all the SPIP author's attributes. Allows to give access rights to accounts with unique password. Allows to extend unique fields (such as frist name, date of birth...) together with multiple fields (phone numbers, mail addresses...).
+
+This plugin has been developped inside the [SPIPMINE->https://contrib.spip.net/Plugin-Spipmine] and [Catalogue->https://contrib.spip.net/Plugin-Catalogue] projects.
+		</multi>
+	</description>
+
+	<lien>https://contrib.spip.net/Plugin-Contacts-Organisations</lien>
+	<icon>images/contacts-128.png</icon>
+	<traduire gestionnaire="salvatore" module="contacts" reference="fr" />
+
+	<prefix>contacts</prefix>
+
+	<version>1.22.4</version>
+	<version_base>1.7.2</version_base>
+
+	<install>base/contacts_upgrade.php</install>
+
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/contacts.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/contacts.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/contacts.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>insert_head</nom>
+		<action>insert_head</action>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>afficher_contenu_objet</nom>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>boite_infos</nom>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>contacts_autorisations.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>rechercher_liste_des_champs</nom>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>declarer_url_objets</nom>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>optimiser_base_disparus</nom>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+
+	<!-- pour charger les nouvelles balises #PSEUDO et #ORGANISATIONS -->
+	<fonctions>contacts_fonctions.php</fonctions>
+
+	<!-- generer_url (vivement la 3.0) -->
+	<options>contacts_options.php</options>
+
+	<!-- des boutons pour un acces direct aux contacts / organsations (CRM) -->
+	<bouton id='contacts_organisations' parent='auteurs'>
+			<icone>images/contacts-24.png</icone>
+			<titre>contacts:bouton_contacts_organisations</titre>
+			<url>repertoire</url>
+	</bouton>
+	<bouton id='contacts_organisations21' parent='bando_edition'>
+			<icone>prive/themes/spip/images/contacts-16.png</icone>
+			<titre>contacts:bouton_contacts_organisations</titre>
+			<url>repertoire</url>
+	</bouton>
+
+
+	<onglet id='repertoire' parent="contacts">
+		<icone>images/contacts-24.png</icone>
+		<titre>contacts:bouton_repertoire</titre>
+	</onglet>
+	<onglet id='organisations' parent="contacts">
+		<icone>images/co_organisation-24.png</icone>
+		<titre>contacts:bouton_organisations</titre>
+	</onglet>
+	<onglet id='contacts' parent="contacts">
+		<icone>images/co_contact-24.png</icone>
+		<titre>contacts:bouton_contacts</titre>
+	</onglet>
+
+	<!--
+	avec plugin champs extras 2
+	-->
+	<pipeline>
+		<nom>objets_extensibles</nom>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="saisies" version="[1.42.11;]" />
+	<necessite id="spip_bonux" version="[2;]" />
+	<necessite id="medias" version="[1.6.0;]" />
+	<!-- listes plus jolies avec le plugin "afficher_objet" -->
+	<utilise id="coordonnees" version="[1.2.0;]" />
+	<utilise id="crayons" version="[1.10.0;]" />
+
+	<categorie>auteur</categorie>
+</plugin>
