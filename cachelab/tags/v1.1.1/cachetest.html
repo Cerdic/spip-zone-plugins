@@ -1,0 +1,98 @@
+<html>
+<head>
+	#INSERT_HEAD_CSS
+	<style>
+		.decale {margin-left: 2em;}
+	</style>
+</head>
+
+<body>
+[(#UNIT|non)
+<p>On peut tester logé administrateur sur un navigateur, et non identifié sur un autre navigateur : ça permet de comparer les résultats. Pour tester non identifié, il faut mettre un define('CACHELAB_DATE_TESTS','2018-12-12') à la date du jour de test ou à 'TOUJOURS' dans votre fichier d'options</p>
+<p>Dans le menu de chaque test, «<code>recalcul et assert</code>» active les assertions, et «<code>recalcul et var_cache</code>» active la visualisation des infos de sessionnement des caches</p>
+<p>Dans les noisette testée*, il y a une assertion sur le sessionnement qui affiche une erreur si le sessionnement n'est pas comme attendu <small>(* Certaines des inclusions de cachetests/inclure ne le sont pas.)</small> Dans le "test des tests", 2 erreurs sont commises intentionnellement : elles permettent de tester les assertions. La version buguée de SPIP n'en détecte qu'une seule.</p>
+<p>Avec Memoization par APC ou APCu, XRay permet visualiser les contenus des caches et leurs métadonnées. On trouve les caches concernés en cherchant 'cachetests/'. La sélection "Caches sessionnés" et l'option d'affichage "Squelettes" (<a href="#URL_ECRIRE{xray,OB=2&S_KEY=H&TYPELISTE=squelettes&COUNT=20&TYPECACHE=SESSIONS}">Liste XRay des caches sessionnés</a>) donne la liste des squelettes sessionnés. Aprés être passé sur tous les tests sans recalculer (sinon ça vide les caches !), ces listes sont les suivantes :
+<ul>
+<li>Avec le fix : \[ statique_B.html, dynamique_B.html, emboite_A.html, emboite_C.html, inclure/erreur_sessionne.html, suite_statique.html, suite_modele.html, emboite_B.html  \]</li> 
+<li>Sans le fix : les mêmes plus \[ dynamique_C.html, dynamique_D.html, inclure/dyn_B.html, inclure/dyn_C.html, inclure/erreur_non_sessionne.html, inclure/stat_C.html, statique_C.html, statique_D.html \] qui sont induement sessionnés.
+</li>
+</ul>
+</p>
+]
+<?php
+if (!defined('CACHELAB_DATE_TESTS'))
+	define ('CACHELAB_DATE_TESTS', '2018-01-01');
+
+include_spip('inc/autoriser');
+if (!autoriser('configurer') 
+	and (CACHELAB_DATE_TESTS != 'TOUJOURS') 
+	and (CACHELAB_DATE_TESTS != date('Y-m-d')))
+	die ('Nada. Walou. Que’tchi. Peau de balle, c’est pas le moment pour toi.');
+?>
+[(#UNIT|non)
+<h3>Tests</h3>
+<ul>
+<li><a href="[(#SELF|parametre_url{unit,test_des_tests})]">test des tests</a>
+	<div class='decale'>
+		Vérifie le bon fonctionnement des assertions : produit 2 asserts intentionnels.
+		<xmp>test_des_tests(erreur_sessionne dyn_B erreur_non_sessionne dyn_C)</xmp>
+	</div>
+</li>	
+<li><a href="[(#SELF|parametre_url{unit,emboite_A})]">emboite_A</a>
+	<div class='decale'>
+		Sessionnement des inclure mixtes gigognes : A inclue statiquement B qui inclue dynamiquement C qui est sessionné
+		<xmp>emboite_A(#emboite_B(<emboite_C sessionné>))</xmp>
+	</div>
+</li>	
+<li><a href="[(#SELF|parametre_url{unit,suite_statique})]">suite_statique</a>
+	<div class='decale'>
+		Sessionnement d'une suite de 4 inclusions statiques. 
+		La 2eme est sessionnée.
+		La 2eme et la 3eme font 1 inclusion statique et 1 dynamique
+		<xmp>suite_statique( #statique_A, 
+		#statique_B SESSIONNÉ( #include/statB, <include/dynB> )
+		#statique_C(#include/statC, <include/dynC>)
+		#statique_D )</xmp>
+	</div>
+</li>
+
+<li><a href="[(#SELF|parametre_url{unit,suite_dynamique})]">suite_dynamique</a></li>
+	<div class='decale'>
+		Sessionnement d'une suite de 4 inclusions dynamiques. 
+		La 2eme est sessionnée.
+		La 2eme et la 3eme font 1 inclusion statique et 1 dynamique
+		<xmp>suite_dynamique( #dynamique_A
+		#dynamique_B SESSIONNÉ( #include/statB, <include/dynC>) 
+		#dynamique_C(#include/statC, <include/dynB>)
+		#dynamique_D )</xmp>
+	</div>
+</li>
+<li><a href="[(#SELF|parametre_url{unit,suite_modele})]">suite_modele</a></li>
+	<div class='decale'>
+		Sessionnement d'une suite de 4 inclusions de modeles dans le squelette. 
+		Le 2eme modèle est sessionné.
+		Le 2eme et le 3eme font 1 inclusion statique et 1 dynamique
+		<xmp>suite_modele( MODELE test_modele_A
+		MODELE test_modele_B SESSIONNÉ( #include/statB, <include/dynB>) 
+		MODELE test_modele_C(#include/statC, <include/dynC>)
+		MODELE test_modele_D )</xmp>
+	</div>
+</li>
+</ul>
+]
+
+[(#ENV{unit}|oui)
+	#SET{var_recalcul,#ENV{var_mode}|=={recalcul}}
+	<div>
+		<a href="[(#SELF|parametre_url{unit,''})]">Menu</a> - | -
+		<a href="#SELF">sans recalcul</a> - 
+		<a href="#SELF&var_mode=recalcul">recalcul et assert</a> -
+		<a href="#SELF&var_mode=recalcul&var_cache=oui">recalcul et var_cache</a>
+	</div>
+
+	<h1>test : #UNIT</h1>
+	<INCLURE{fond=cachetests/#UNIT}>
+]
+
+</body>
+</html>
