@@ -1,0 +1,68 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE
+
+		<ul class="editer-groupe">
+			<li class="fieldset">
+				<fieldset>
+					<h3 class="legend"><:multilang:cfg_activer:></h3>
+					<ul class="editer-groupe">
+
+						[(#REM) Formulaires à prendre en compte ]
+						[(#SET{data,#ARRAY{siteconfig,<:multilang:cfg_lbl_siteconfig:>}})]
+						<BOUCLE_objets(DATA){source tableau,#REM|lister_tables_objets_sql}{editable=oui}>
+						#SET{objet,#CLE|objet_type}
+						#SET{objet_nom,#VALEUR{texte_objets}|_T}
+						#SET{data,#GET{data}|array_merge{#ARRAY{#GET{objet},#GET{objet_nom}}}}
+						</BOUCLE_objets>
+
+						[(#SAISIE{checkbox,formulaires,
+							label=<:multilang:cfg_formulaires_label:>,
+							data=#GET{data},
+							conteneur_class=pleine_largeur
+						})]
+
+						[(#SAISIE{textarea,formulaires_autres,
+							label=<:multilang:cfg_formulaires_autres_label:>,
+							explication=<:multilang:cfg_formulaires_autres_explication:>,
+							rows=2,
+						})]
+
+						[(#SAISIE{case,multilang_public,
+							label_case=<:multilang:cfg_lbl_espace_public:>,
+							defaut=''})]
+
+						[(#SAISIE{case,multilang_crayons,
+							label_case=<:multilang:cfg_lbl_crayons:>,
+							explication=<:multilang:cfg_explication_crayons:>,
+							afficher_si='@multilang_public@',
+							defaut=''})]
+					</ul>
+				</fieldset>
+			</li>
+			<li class="fieldset">
+				<fieldset>
+					<h3 class="legend"><:multilang:cfg_langues:></h3>
+					<ul class="editer-groupe">
+					[(#SET{langues,[(#CONFIG{langues_multilingue}|explode{','}|multilang_nommer_langues)]})]
+					[(#SAISIE{selection_multiple,langues_utilisees,
+						label=<:multilang:label_langues_utilisees:>,
+						explication=<:multilang:explication_langues_utilisees:>,
+						cacher_option_intro=oui,
+						datas=#GET{langues},
+						size=[(#GET{langues}|count|>{10}|?{10,#GET{langues}|count})]})]
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
+	</div>
+	</form>
+</div>
