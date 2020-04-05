@@ -1,0 +1,32 @@
+<plugin>
+	<nom>Geographie</nom>
+	<auteur>Cedric Morin [yterium.net->http://www.yterium.net]</auteur>
+	<version>0.6.3</version>
+	<version_base>0.4.2</version_base>
+	<etat>stable</etat>
+	<slogan>Bases g&eacute;ographiques de pays, r&eacute;gions, d&eacute;partements et communes'</slogan>
+	<description>Bases g&#233;ographiques Pays, et pour la France : R&#233;gion, d&#233;partement, communes g&#233;olocalis&#233;es</description>
+	<lien>https://contrib.spip.net/Geographie</lien>
+	<categorie>divers</categorie>
+	<prefix>geographie</prefix>
+	<install>base/geographie_install.php</install>
+	<icon>prive/themes/spip/images/geographie-32.png</icon>
+	<fonctions>base/geographie.php</fonctions>
+	<pipeline>
+		<nom>lister_tables_noexport</nom>
+		<inclure>base/geographie.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>rechercher_liste_des_champs</nom>
+		<inclure>geographie_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/geographie.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/geographie.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
+</plugin>
