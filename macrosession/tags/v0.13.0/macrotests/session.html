@@ -1,0 +1,23 @@
+<h1>\#_SESSION sans extension ni filtre</h1>
+
+<ul>
+    <li>_session : #_SESSION</li>
+    <li>_session nom : #_SESSION{nom}</li>
+    <li>_session statut : #_SESSION{statut}</li>
+    <li>_session email : #_SESSION{email}</li>
+</ul>
+
+<h4>Filtres sans arguments </h4>
+<ul>
+    <li>_session{nom,strlen}:#_SESSION{nom,strlen}</li>
+    <li>_session{nom, strlen } avec espaces à strlen : #_SESSION{nom, strlen }</li>
+    <li>_session{ nom,strlen} avec espaces avant nom : #_SESSION{ nom,strlen}</li>
+    <li>_session{nom ,strlen} avec espaces après nom : #_SESSION{nom ,strlen}</li>
+    <li>_session{nom,filtre_inexistant} : #_SESSION{nom,filtre_inexistant}</li>
+    <li>_session{nom,mb_strtoupper}:#_SESSION{nom,mb_strtoupper}</li>
+</ul>
+
+<h4>Filtres avec argument constant</h4>
+<ul>
+    <li>_session{nom,concat,_plof}:#_SESSION{nom,concat,_plof}</li>
+</ul>

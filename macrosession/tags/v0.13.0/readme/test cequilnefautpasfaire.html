@@ -1,0 +1,27 @@
+<h4>Explications</h4>
+
+voir http://contrib.spip.net/4823
+
+<h4>filtres et partie conditionnelle avant après sur une balise _SESSION_etc</h4>
+
+Par exemple [(# _SESSION{nom}|strlen)] renvoie une valeur constante quel que soit le nom de la personne connectée.
+
+<br><br>
+<ul><li>nom = #_SESSION{nom} <li>
+ <li>filtre strlen : [(#_SESSION{nom}|strlen)] (indique toujours la même longueur de chaine, 33, quelque soit le nom de la _session, car ça s'applique sur le source php et non sur le résultat php : il ne faut PAS appeler de filtre sur # _SESSION)</li>
+<li>les parties conditionnelles avant après sur balise s'affichent toujours, même si le résultat php est vide car il n'y a pas de _session, car le source php n'est pas vide :  [avant si non vide (#_SESSION{nom}) apres si non vide]  
+Effets de bords
+
+<h4>Effets de bord</h4>
+
+Les morceaux de squelettes SPIP présents dans des zones conditionnelles non affichées à cause d’un #_SESSION_SI sont quand mêmes calculées.
+
+	<h4>Ce qu'il ne faut pas faire</h4>
+	#SET{var,var} var vaut var<br>
+	_SESSION_SI{nom} : 
+	#_SESSION_SI{nom} 
+		/ #SET{var,oui_visiteur} IL Y A UNE_SESSION var vaut oui_visiteur : #GET{var}<br>
+	#_SESSION_SINON{nom} 
+		/ #SET{var,pas_de_visiteur} IL Y A UNE_SESSION var vaut pas_de_visiteur : #GET{var}<br>
+	#_SESSION_FINSI 
+		/ après_SESSION_finsi var vaut : #GET{var}<br>

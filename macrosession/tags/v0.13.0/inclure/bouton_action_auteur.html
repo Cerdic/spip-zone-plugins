@@ -1,0 +1,10 @@
+[(#REM) Exemple d'usage
+<INCLURE{fond=inclure/bouton_action_auteur,
+	libelle=un joli libelle,
+	action=une_action,
+	arg=un|arg,
+	redirect=#SELF,
+	class=btn btn-magic,
+	confirm=voulez vous vraiment ?}>
+]
+#BOUTON_ACTION{#LIBELLE, #INCLURE{fond=inclure/url_action_auteur,action,arg,redirect}, #CLASS, #CONFIRM}

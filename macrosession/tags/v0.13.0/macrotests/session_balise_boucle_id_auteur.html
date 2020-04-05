@@ -1,0 +1,10 @@
+<i>Il n'y a pas de 'traitement' pour le champ de boucle \#ID_AUTEUR. La réinjection de code se fait bien.</i>
+<h1>\#_SESSION{id_auteur,==,\#ID_AUTEUR} dans une BOUCLE</h1>
+<BOUCLE_test(AUTEURS){tous}{0,10}{par id_auteur}{'<br><hr><br>'}>
+#ID_AUTEUR) #NOM<br>
+#_SESSION_SI{id_auteur,==,#ID_AUTEUR}
+C'est lui !
+#_SESSION_SINON
+C'est pas lui !
+#_SESSION_FIN
+</BOUCLE_test>

@@ -1,0 +1,76 @@
+#SQUELETTE<br>
+Pour tester ce squelette on peut ajouter debug=oui dans l'url pour voir plus d'infos<br>
+Environnement reçu  # ID_ARTICLE=#ID_ARTICLE<br>
+<a href="[(#SELF|parametre_url{id_article,1}">Ajouter id_article=1 à l'url</a><br>
+
+<h1># _AUTORISER_SI avec valeurs calculées d'id - dans une BOUCLE</h1>
+
+<br>
+<h3>\#_AUTORISER_SI{modifier,article,...} dans BOUCLE(ARTICLE){id_article=1}</h3>
+<BOUCLE_ar(ARTICLES){id_article=1}>
+	<br>
+	Avec \#ID_ARTICLE = #ID_ARTICLE :
+	#_AUTORISER_SI{modifier,article,#ID_ARTICLE} OUI
+	#_AUTORISER_SINON NON
+	#_AUTORISER_FIN
+	<br>
+	Avec env :
+	#_AUTORISER_SI{modifier,article,env} OUI
+	#_AUTORISER_SINON NON
+	#_AUTORISER_FIN
+	<br>
+	Avec boucle :
+	#_AUTORISER_SI{modifier,article,boucle} OUI
+	#_AUTORISER_SINON NON
+	#_AUTORISER_FIN
+	<br>
+	Avec debug :
+	#_AUTORISER_SI{modifier,article,debug} OUI
+	#_AUTORISER_SINON NON
+	#_AUTORISER_FIN
+	<br>
+</BOUCLE_ar>
+
+<h3>Dans une boucle (ARTICLES){0,3} avec env</h3>
+
+<BOUCLE_b(ARTICLES){0,3}{' - '}>
+	#_AUTORISER_SI{modifier,article,env}
+		OUI
+	#_AUTORISER_SINON
+		NON
+	#_AUTORISER_FIN
+	pour article #ID_ARTICLE
+</BOUCLE_b>
+
+<H3>Dans une boucle (DOCUMENTS){0,3} avec env</H3>
+
+<BOUCLE_bb(DOCUMENTS){0,3}{' - '}>
+	#_AUTORISER_SI{modifier,document,env}
+		OUI
+	#_AUTORISER_SINON
+		NON
+	#_AUTORISER_FIN
+	pour doc #ID_DOCUMENT
+</BOUCLE_bb>
+
+<H3>Dans une boucle ARTICLES avec boucle</H3>
+
+<BOUCLE_bou(ARTICLES){0,3}{' - '}>
+	#_AUTORISER_SI{modifier,article,boucle}
+		OUI
+	#_AUTORISER_SINON
+		NON
+	#_AUTORISER_FIN
+	pour article #ID_ARTICLE
+</BOUCLE_bou>
+
+<H3>Dans une boucle DOCUMENTS avec boucle</H3>
+
+<BOUCLE_bbou(DOCUMENTS){0,3}{' - '}>
+	#_AUTORISER_SI{modifier,document,boucle}
+		OUI
+	#_AUTORISER_SINON
+		NON
+	#_AUTORISER_FIN
+	pour doc #ID_DOCUMENT
+</BOUCLE_bbou>

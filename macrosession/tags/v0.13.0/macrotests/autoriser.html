@@ -1,0 +1,31 @@
+#SQUELETTE<br>
+id : #_SESSION{id_auteur}<br>
+nom : #_SESSION{nom}<br>
+statut : #_SESSION{statut}<br>
+
+<h4>\#_AUTORISER_SI{webmestre}</h4>
+
+#_AUTORISER_SI{webmestre}
+OUI webmestre
+#_AUTORISER_SINON
+NON, pas webmestre
+#_AUTORISER_FIN
+
+<h4>\#_AUTORISER_SI{modifier,article,2}</h4>
+
+#_AUTORISER_SI{modifier,article,2}
+OUI modifier article 2
+#_AUTORISER_SINON
+NON, pas modifier article 2
+#_AUTORISER_FIN
+
+<h4>\#_AUTORISER_SI{testotor,article,2}</h4>
+
+#_AUTORISER_SI{testotor,article,2}
+OUI testotor article 2
+#_AUTORISER_SINON
+NON, pas testotor article 2
+#_AUTORISER_FIN
+
+
+<br><br>Fin

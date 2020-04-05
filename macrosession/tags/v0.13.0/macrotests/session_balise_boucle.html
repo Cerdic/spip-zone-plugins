@@ -1,0 +1,10 @@
+<i>FIXME : Les 'traitements' de la balise \#TITRE provoquent une erreur de syntaxe PHP quand le code est réinjecté. <br>
+    Il faudrait améliorer le décompilateur-réinjecteur... <br>
+    ou appeler avec une étoile : \#TITRE*</a>, pour ne pas ajouter les traitements (voir autre test)</i>
+
+<h1>\#_SESSION{nom,concat,\#TITRE} dans une BOUCLE</h1>
+
+<BOUCLE_test(ARTICLES){0,3}{'<br><hr><hr><br>'}>
+#ID_ARTICLE) #TITRE<br>
+#_SESSION{nom,concat,#TITRE}
+</BOUCLE_test>

@@ -1,0 +1,23 @@
+<paquet
+	prefix="macrosession"
+	categorie="outil"
+	version="0.13.0"
+	etat="stable"
+	compatibilite="[2.1.0;3.3.*]"
+	documentation="https://contrib.spip.net/4823"
+	logo="images/macrosession-128.png"
+>
+	<nom>Macro session étendue</nom>
+	<!-- 
+	webperf de l'accés aux données de sesssions et sessions étendues :
+	macros SPIP : #_SESSION, #_SESSION_SI, #_AUTORISER_SI, etc
+	pour accéder aux données de la session de la _session courant
+	ou à des données de sessions étendues, d'une autre origine que la session SPIP
+	et les tester ainsi que les autorisations 
+	sans multiplier les caches sessionnés
+	-->
+	<auteur lien="https://contrib.spip.net/JLuc">JLuc</auteur>
+	<credit lien="https://contrib.spip.net/Matthieu-Marcillaud">marcimat</credit>
+	<credit lien="https://thenounproject.com/leremy/collection/superhero/?i=690777">Gan Khoon Lay</credit>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+</paquet>

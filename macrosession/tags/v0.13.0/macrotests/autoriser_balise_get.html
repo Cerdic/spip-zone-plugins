@@ -1,0 +1,40 @@
+#SQUELETTE<br>
+
+Environnement reçu  # ID_ARTICLE=«#ID_ARTICLE»<br>
+[(#ID_ARTICLE|non)
+Il faut un id_article existant dans l'url.<br>
+<a href="[(#SELF|parametre_url{id_article,1})]">Ajouter id_article=1 à l'url</a><br>]
+<br>
+_SESSION : nom=#_SESSION{nom} - statut=#_SESSION{statut}
+<br>
+
+<h1>\#_AUTORISER_SI avec id calculé par balise  \#GET</h1>
+#SET{id_article,2}
+Aprés SET, \#GET{id_article}=#GET{id_article}
+<br>
+<hr>
+
+<h3>\#_AUTORISER_SI{testotor,article,\#GET{id_article}}</h3>
+Avec testotor : trace bleue + OUI / article #GET{id_article} :
+#_AUTORISER_SI{testotor,article,#GET{id_article}}
+OUI
+#_AUTORISER_SINON
+NON
+#_AUTORISER_FIN
+<br>
+<hr>
+<i>Avec modifier</i><br>
+
+<h3>\#_AUTORISER_SI{modifier,article,\#GET{id_article}</h3>
+modifier article #GET{id_article} :
+#_AUTORISER_SI{modifier,article,#GET{id_article}}
+OUI
+#_AUTORISER_SINON
+NON
+#_AUTORISER_FIN
+<br>
+<br>
+
+Et voilà
+<br>
+<br>

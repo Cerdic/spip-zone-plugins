@@ -1,0 +1,21 @@
+## Gestion des erreurs ##
+
+détection par le compilateur des usages impossibles de ces macros en tant que balise : appels de filtres et parties conditionnelles avant / après. Le compilateur doit les gèrer et refuser les filtres et affichages conditionnels en les sanctionnant d’une erreur.
+
+détection des mauvaises imbrications de SI SINON FINSI et signalement proprement par une erreur
+
+## Fonctionnalités ##
+
+élargir la gamme de tests 
+  * autres comparaisons de valeurs
+  * tester les autorisations ?
+  
+permettre d'afficher autre chose de plus complexe que juste la valeur du champ :
+  * avec appel d’un filtre
+  
+contrer le risque d'effet de bord (est ce possible?)
+
+une balise qui inclue toutes les parties, 
+	#_SESSION_SI{arg1, arg2, arg3}
+	bien pour petits morceaux de code
+	

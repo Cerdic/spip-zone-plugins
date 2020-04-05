@@ -1,0 +1,19 @@
+#SQUELETTE<br>
+<h1>Appel de _SESSION avec champ de session étendue</h1>
+
+nom : #_SESSION{nom}<br>
+
+<h4>champ étendu : nbreste</h4>
+<dl>
+	<dt>nbreste</dt><dd> #_SESSION{nbreste}</dd>
+</dl>
+<h4>avec filtres</h4>
+<dl>
+	<dt>nbreste |+ 3 </dt>
+		<dd>#_SESSION{nbreste,plus,3}</dd>
+	<dt>nbreste |choixsivide vide! pasvide </dt>
+		<dd> #_SESSION{nbreste,choixsivide,vide!,pasvide}</dd>
+	<dt>nbreste |? pasvide! vide </dt>
+		<dd> #_SESSION{nbreste,?,pas vide!,vide}</dd>
+</dl>
+</ul>
