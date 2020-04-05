@@ -1,0 +1,137 @@
+[(#REM)<style>/*
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+*/]#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+/*
+On recupere les valeurs des define pour ne pas casser la compatibilite
+#SET{config_petit_ecran,#CONFIG{spip_hop/petit_ecran}}
+#SET{config_grand_ecran,#CONFIG{spip_hop/grand_ecran}}
+#SET{petit_ecran,#GET{config_petit_ecran,#EVAL{_PETIT_ECRAN}|sinon{960px}}} [petit_ecran: (#GET{petit_ecran});]
+#SET{grand_ecran,#GET{config_grand_ecran,#EVAL{_GRAND_ECRAN}|sinon{1280px}}} [grand_ecran: (#GET{grand_ecran});]
+
+Gestion de la largeur du bandeau, par defaut (pour ne pas casser la compatibilite) il prend la dimension de la largeur de l'ecran
+[(#CONFIG{spip_hop/etendre_bandeau}|oui) #SET{largeur_bandeau,div#page}]
+
+Si on est en pourcentage, on donne une valeur min-width equivalent aux valeurs standards de SPIP
+[(#GET{petit_ecran}|match{'%'}|oui)
+	[(#SET{petit_minwidth, 780px})]
+][(#GET{grand_ecran}|match{'%'}|oui)
+	[(#SET{grand_minwidth, 974px})]
+]
+Si on est en px, on verifie que la valeur indiquee dans la constante n'est pas plus petite que les valeurs standards de SPIP.
+Si oui, on prend cette valeur pour min-width, sinon, on prend les valeurs standards de SPIP.
+[(#GET{petit_ecran}|match{'px'}|oui)
+	[(#SET{petit_minwidth, [(#GET{petit_ecran}|intval|<{780}|?{#GET{petit_ecran},780px})]})]
+][(#GET{grand_ecran}|match{'px'}|oui)
+	[(#SET{grand_minwidth, [(#GET{grand_ecran}|intval|<{974}|?{#GET{grand_ecran},974px})]})]
+]
+*/
+
+/* Layout */
+body { min-width: [(#GET{petit_minwidth})]; }
+body.large { min-width: [(#GET{grand_minwidth})]; }
+/* ecran etroit*/
+[(#GET{largeur_bandeau,''}) ].largeur,
+.ecrire #conteneur,
+.ecrire #page div table.centered,
+.ecrire #page .table_page { width: [(#GET{petit_ecran})]; }
+#conteneur,
+.table_page { width: 100%; }
+#navigation { width: 27.5%; }
+#extra { width: 27.5%; }
+#contenu { margin-left: 2.5%; width: 70%; }
+#pied {}
+div.messages-alertes { width: [(#GET{petit_ecran})]; }
+table.calendrier-large { width: 100%; }
+
+/* ecran large*/
+[(#GET{largeur_bandeau}) .largeur,
+][(#GET{largeur_bandeau}|non) .large .largeur,
+].ecrire #conteneur,
+.ecrire #page div table.centered,
+.ecrire #page .table_page { width: [(#GET{grand_ecran})]; }
+.large #conteneur,
+.large .table_page { width: 100%; }
+.large div.messages-alertes { width: [(#GET{grand_ecran})]; }
+.large #navigation { width: 20%; }
+.large #extra { width: 20%; }
+.large #contenu { margin-left: 2%; width: 56%; }
+
+/* les formulaires sont en 600px en config large */
+body.large.edition #contenu,
+.articles_edit.large #contenu,
+.mots_edit.large #contenu,
+.breves_edit.large #contenu,
+.rubriques_edit.large #contenu { width: 60%; }
+body.large.edition #extra,
+.articles_edit.large #extra,
+.mots_edit.large #extra,
+.breves_edit.large #extra,
+.rubriques_edit.large #extra { width: 16%; }
+
+@media (max-width: [(#GET{petit_minwidth})]) {
+	body { min-width: 98%; width: 98%; margin: 0 1%; }
+	body.large { min-width: 98%; width: 98%; margin: 0 1%; }
+	#navigation { min-height: 1px; }
+	/* ecran large*/
+	.ecrire #conteneur,
+	.ecrire #page div table.centered,
+	.ecrire #page .table_page,
+	[(#GET{largeur_bandeau}) ].largeur,
+	.ecrire #conteneur,
+	.ecrire #page div table.centered,
+	.ecrire #page .table_page { width: 100%; }
+
+	.large .largeur, .largeur {
+		width: 97.5%;
+		padding-right: 1.5%;
+		padding-left: 1.5%;
+	}
+
+	.large #conteneur,
+	.large .table_page,
+	#conteneur,
+	.table_page { width: 100%; }
+
+	.large div.messages-alertes,
+	div.messages-alertes { width: 95%; }
+	.large #navigation,
+	#navigation { width: 100%; float: none; }
+
+	.large #extra,
+	#extra { width: 100%; float: none; }
+
+	.large #contenu,
+	#contenu { margin-left: 0; width: 100%; }
+
+	body.large.edition #contenu,
+	.articles_edit.large #contenu,
+	.mots_edit.large #contenu,
+	.breves_edit.large #contenu,
+	.rubriques_edit.large #contenu { width: 100%; float: none; }
+
+	body.large.edition #extra,
+	.articles_edit.large #extra,
+	.mots_edit.large #extra,
+	.breves_edit.large #extra,
+	.rubriques_edit.large #extra { width: 100%; float: none; }
+
+}
+
+/* Bugfix CKeditor */
+#contenu .cadre-formulaire-editer {
+	width: 100% !important;
+}
+#contenu .cadre-formulaire-editer .cke_editor_text_area {
+	width: 100% !important;
+}
+[(#REM)</style>]

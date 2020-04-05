@@ -1,0 +1,75 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	#SET{spip_ecran,#EVAL{$GLOBALS['spip_ecran']}}
+	[(#SET{ecran,[(#GET{spip_ecran}|=={'large'}|?{<:info_grand_ecran:>,<:info_petit_ecran:>})]})]
+	[(#SET{constante_petit_ecran,#EVAL{_PETIT_ECRAN}|sinon{960px}})]
+	[(#SET{constante_grand_ecran,#EVAL{_GRAND_ECRAN}|sinon{1280px}})]
+	<h3 class="titrem"><:spip_hop:parametres{ecran=#GET{ecran}}:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<fieldset>
+			<legend><:spip_hop:titre_page_configurer_spip_hop:></legend>
+
+			<ul class="editer-groupe">
+
+				<li class="explication">
+					<p class='explication'><strong><:spip_hop:important:></strong> <:spip_hop:explications:></p>
+				</li>
+
+				<li class="editer">
+					<label for="petit_ecran"><:info_petit_ecran:></label>
+					[(#EVAL{_PETIT_ECRAN}|oui)<div class="explication"><:spip_hop:info_constante_definie:></div>]
+					<input type="text" name="petit_ecran" value="[(#ENV{petit_ecran,#GET{constante_petit_ecran}})]"[(#EVAL{_PETIT_ECRAN}|oui) disabled="disabled"]>
+				</li>
+				<li class="editer">
+					<label for="grand_ecran"><:info_grand_ecran:></label>
+					[(#EVAL{_GRAND_ECRAN}|oui)<div class="explication"><:spip_hop:info_constante_definie:></div>]
+					<input type="text" name="grand_ecran" value="[(#ENV{grand_ecran,#GET{constante_grand_ecran}})]"[(#EVAL{_GRAND_ECRAN}|oui) disabled="disabled"]>
+				</li>
+			</ul>
+		</fieldset>
+
+		<fieldset>
+			<legend><:spip_hop:options:></legend>
+			<ul class="editer-groupe">
+				<li class="editer editer_methode long_label">
+					<label><:spip_hop:etendre_selection_bandeau:></label>
+					<div class="choix">
+						<input type="radio" name="etendre_bandeau" class="radio" id="affichage_oui" [(#ENV{etendre_bandeau}|oui)checked="checked"] value="oui">
+						<label for="affichage_oui"><:item_oui:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="etendre_bandeau" class="radio" id="affichage_non" [(#ENV{etendre_bandeau}|non)checked="checked"] value="">
+						<label for="affichage_non"><:item_non:></label>
+					</div>
+				</li>
+				<li class='editer editer_gd long_label'>
+					<label><:spip_hop:forcer_grand_ecran:></label>
+					<div class="choix">
+						<input type="radio" name="forcer_grand_ecran" class="radio" id="gd_oui" [(#ENV{forcer_grand_ecran}|oui)checked="checked"] value="oui">
+						<label for="gd_oui"><:item_oui:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="forcer_grand_ecran" class="radio" id="gd_non" [(#ENV{forcer_grand_ecran}|non)checked="checked"] value="">
+						<label for="gd_non"><:item_non:></label>
+					</div>
+				</li>
+			</ul>
+		</li>
+		</fieldset>
+
+
+		<input type="hidden" name="_meta_casier" value="spip_hop" />
+		<p class="boutons">
+			<span class="image_loading">&nbsp;</span>
+			<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
+	</div>
+	</form>
+</div>

@@ -1,0 +1,13 @@
+<traduction
+	module="paquet-spip_hop"
+	id="paquet-spip_hop--spip_hop-78432"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip-contrib-extensions/spip_hop.git"
+	reference="fr">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-spip_hop?lang_cible=en" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-spip_hop?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/paquet-spip_hop?lang_cible=pt_br" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
+	</langue>
+</traduction>
