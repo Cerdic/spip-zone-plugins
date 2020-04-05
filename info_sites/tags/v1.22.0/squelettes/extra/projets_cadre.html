@@ -1,0 +1,27 @@
+<!-- extra -->
+<BOUCLE_extra (PROJETS_CADRES) {id_projets_cadre} {tout}>[
+	(#REM) On utilise une boucle pour afficher le contenu selon autorisation.
+	Le filtre sinon_interdire_access est à utiliser uniquement dans content/objet.html
+	]
+	<BOUCLE_autorisation (CONDITION) {si #AUTORISER{infositesvoir,projetscadre,#ID_PROJETS_CADRE}|oui}>
+		<div id="extra">
+			<h2 id="<:info_sites:titre_informations_annexes|trim|translitteration_rapide|replace{' ','_'}|strtolower:>" class="legend"><:info_sites:titre_informations_annexes:></h2>
+			<div class="clearfix"></div>
+
+			<B_auteurs>
+				<BOUCLE_auteurs (auteurs_liens) {id_objet=#ID_PROJETS_CADRE} {objet='projets_cadre'} {par role}>
+					<div class="champ">
+						<div class="label visible">[(#ROLE|role{auteurs}|sinon{[(#VAL{auteur}|objet_info{texte_objet}|_T)]})]</div>
+						<div class="span" dir="#LANG_DIR"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#INFO_TITRE{auteur,#ID_AUTEUR})]</a></div>
+					</div>
+				</BOUCLE_auteurs>
+				<div class="clearfix"></div>
+			</B_auteurs>
+
+			[(#REM) Lister les projets issus de ce cadre. ]
+			[(#INCLURE{fond=objets/liste/projets,id_projets_cadre=#ID_PROJETS_CADRE,env,ajax})]
+			<div class="nettoyeur"></div>
+
+		</div>
+	</BOUCLE_autorisation>
+</BOUCLE_extra>

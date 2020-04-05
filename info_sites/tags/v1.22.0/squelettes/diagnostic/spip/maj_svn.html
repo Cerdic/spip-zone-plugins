@@ -1,0 +1,46 @@
+<BOUCLE_principale (PROJETS_SITES) {id_projets_site}>[(#SET{lesmaj,#ARRAY})]
+<pre class="pre-scrollable create" id="textbox">#!/bin/bash
+# On stocke les variables d'environnement
+url_svn=$URL_SVN
+url_local=$URL_WORKING_COPY
+# On met à jour le dépôt local des plugins
+cd ${url_local}
+svn up ${url_local}
+<BOUCLE_plugins_site (DATA) {source table, (#LOGICIEL_PLUGINS**|formater_tableau{'plugins'})}>[(#SET{plugin,[(#ARRAY{prefixe,[(#VALEUR{prefixe})],titre,[(#VALEUR{titre})],statut,[(#VALEUR{statut})], version,[(#VALEUR{version})]})]})]<BOUCLE_paquet_meme_branche (PAQUETS) {tout} {prefixe=(#GET{plugin/prefixe})} {!par version} {branches_spip LIKE %(#_principale:LOGICIEL_VERSION|version2branche)%} {id_depot>0} {0,1} {si (#GET{plugin/statut}|=={dist}|non)}>[(#VERSION|=={#_plugins_site:GET{plugin/version}}|non)[(#SET{lesmaj,[(#GET{lesmaj}|push{<strong>[(#_plugins_site:GET{plugin/titre})]</strong> <em>\([(#PREFIXE)] [(#_plugins_site:GET{plugin/version})] -> [(#VERSION)]\)</em>})]})]]<B_archive_mm_branche>
+# Branche [(#_principale:LOGICIEL_NOM)] [(#_principale:LOGICIEL_VERSION|version2branche)]
+cd ${url_local}[(#PREFIXE|strtolower)]
+if [[ -d "tags/v[(#_plugins_site:GET{plugin/version})]" ]]; then
+	echo "Le tag v[(#_plugins_site:GET{plugin/version})] du plugin ['(#GET{plugin/titre})'] existe déjà. Le plugin n'a pas besoin d'être mis à jour sur la zone."
+	else
+		svn cp ${url_svn}[(#PREFIXE|strtolower)]/branches/v[(#_plugins_site:GET{plugin/version}|explode{'.'}|table_valeur{0})] ${url_svn}[(#PREFIXE|strtolower)]/tags/v[(#_plugins_site:GET{plugin/version})] -m "On pose un tag pour ['(#GET{plugin/titre})'] v[(#GET{plugin/version})]"
+		svn up
+		cd ${url_local}[(#PREFIXE|strtolower)]/branches
+		<BOUCLE_archive_mm_branche (DEPOTS) {id_depot} {si (#VERSION|=={#_plugins_site:GET{plugin/version}}|non)}>curl -LOk [(#URL_ARCHIVES)/#_paquet_meme_branche:NOM_ARCHIVE]
+		unzip [(#_paquet_meme_branche:NOM_ARCHIVE)]
+		folder=$(zipinfo -1 [(#_paquet_meme_branche:NOM_ARCHIVE)] | head -n 1)
+		rsync -avz --delete "$folder"/ "v[(#_plugins_site:GET{plugin/version}|explode{'.'}|table_valeur{0})]/"
+		rm -rf [(#_paquet_meme_branche:NOM_ARCHIVE)] "$folder"/
+		svn st
+		for new_element in $(svn st | grep "^?" | cut -c9-); do
+			svn add ${new_element};
+		done;
+		for delete_element in $(svn st | grep "^!" | cut -c9-); do
+			svn delete ${delete_element};
+		done;
+		svn ci -m "Mise à jour du plugin ['(#GET{plugin/titre})'] en v[(#_paquet_meme_branche:VERSION)]"
+</BOUCLE_archive_mm_branche>fi
+</B_archive_mm_branche></BOUCLE_paquet_meme_branche></BOUCLE_plugins_site>
+svn up ${url_local}
+</pre>
+	<div class="center-block">
+		<div class="pull-right">
+			<a download="[(#TITRE|info_sites_nom_machine)].sh" id="downloadlink" class="btn btn-default"><:info_sites:btn_telecharger:></a>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<B_lesmaj>
+		<ol><BOUCLE_lesmaj (DATA) {source table, #GET{lesmaj}}>
+			<li>#VALEUR</li></BOUCLE_lesmaj>
+		</ol>
+	</B_lesmaj>
+</BOUCLE_principale>

@@ -1,0 +1,42 @@
+<!-- extra -->
+<BOUCLE_extra (ORGANISATIONS) {id_organisation} {tout}>[
+	(#REM) On utilise une boucle pour afficher le contenu selon autorisation.
+	Le filtre sinon_interdire_access est à utiliser uniquement dans content/objet.html
+]<BOUCLE_autorisation (CONDITION) {si #AUTORISER{infositesvoir,organisation,#ID_ORGANISATION}|oui}>
+	<div id="extra">
+		<h2 id="<:info_sites:titre_informations_annexes|trim|translitteration_rapide|replace{' ','_'}|strtolower:>" class="legend"><:info_sites:titre_informations_annexes:></h2>
+		<div class="block">
+			<INCLURE{fond=objets/liste/organisations,
+			id_parent=#ID_ORGANISATION,
+			titre=<:contacts:info_organisations_filles:>,
+			ajax}>
+		</div>
+		[(#AUTORISER{infositesvoir, contacts}|oui)
+		<div class="block">
+			[(#INCLURE{fond=objets/liste/contacts,organisation,id_organisation,ajax,env})]
+		</div>
+		<div class="clearfix"></div>]
+
+		[(#AUTORISER{infositesvoir, projets}|oui)
+		<div class="block">
+			[(#INCLURE{fond=objets/liste/projets,organisation,id_organisation,ajax,env})]
+		</div>
+		<div class="clearfix"></div>]
+
+		<B_autresobjets>
+				<BOUCLE_autresobjets (spip_organisations_liens) {id_organisation} {fusion objet}{par objet} {objet !IN contact,projet}>
+					[(#AUTORISER{infositesvoir, #OBJET}|oui)
+					<div class="block">
+					#SET{table,#OBJET|table_objet}
+					[(#SET{titre,[#OBJET:info_(#GET{table})_liees_organisation]})]
+					[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},organisations_lies}})]
+					[(#INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_organisation,ajax,env})]
+					</div>
+					<div class="clearfix"></div>]
+				</BOUCLE_autresobjets>
+		</B_autresobjets>
+
+	</div>
+</BOUCLE_autorisation>
+</BOUCLE_extra>
+

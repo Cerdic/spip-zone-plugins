@@ -1,0 +1,9 @@
+<h2><:info_sites:controle_contacts_titre_page:></h2>
+
+[(#BOITE_OUVRIR{<h3 class="legend" id="contacts_orphelins_organisations_bloc"><:info_sites:controle_contacts_orphelins_organisations:></h3>, 'info'})]
+<div class="contacts_orphelins_organisations">
+	[(#SET{where,"contacts.id_contact NOT IN (SELECT id_objet FROM spip_organisations_liens WHERE objet='contact')"})]
+	<INCLURE{fond=objets/liste/contacts,where=#GET{where},pagination_id=_contacts_orphelins_organisations,sinon=<:info_sites:controle_ok:>,env}/>
+	<div class="nettoyeur"></div>
+</div>
+#BOITE_FERMER

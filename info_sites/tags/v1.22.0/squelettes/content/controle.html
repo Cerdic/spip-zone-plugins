@@ -1,0 +1,39 @@
+<h1>Contrôle</h1>
+[(#SET{contacts_liens,#ARRAY})]
+<BOUCLE_contacts_liens (spip_organisations_liens) {objet="contact"} {fusion id_objet}>[(#SET{contacts_liens,[(#GET{contacts_liens}|push{#ID_OBJET})]})] </BOUCLE_contacts_liens>
+<B_contacts>
+	<div class="liste-objets contacts">
+		<h3><:info_sites:controle_contacts_orphelins:></h3>
+		<ul>
+			<BOUCLE_contacts (CONTACTS) {tout} {id_contact !IN #GET{contacts_liens}}>
+				<li><a href="#URL_CONTACT">[(#ID_CONTACT)] - [(#NOM)] / [(#STATUT)]</a></li>
+			</BOUCLE_contacts>
+		</ul>
+	</div>
+</B_contacts>
+
+[(#SET{projets_liens,#ARRAY})]
+<BOUCLE_projets_liens (spip_projets_liens) {tout} {fusion id_projet}>[(#SET{projets_liens,[(#GET{projets_liens}|push{#ID_PROJET})]})] </BOUCLE_projets_liens>
+<B_projets>
+	<div class="liste-objets projets">
+		<h3><:info_sites:controle_projets_orphelins:></h3>
+		<ul>
+			<BOUCLE_projets (PROJETS) {tout} {id_projet !IN #GET{projets_liens}}>
+				<li><a href="#URL_PROJET">[(#ID_PROJET)] - [(#NOM)] / [(#STATUT)]</a></li>
+			</BOUCLE_projets>
+		</ul>
+	</div>
+</B_projets>
+
+[(#SET{projets_sites_liens,#ARRAY})]
+<BOUCLE_projets_sites_liens (spip_projets_sites_liens) {tout} {fusion id_projets_site}>[(#SET{projets_sites_liens,[(#GET{projets_sites_liens}|push{#ID_PROJETS_SITE})]})] </BOUCLE_projets_sites_liens>
+<B_projets_sites>
+	<div class="liste-objets projets_sites">
+		<h3><:info_sites:controle_projets_sites_orphelins:></h3>
+		<ul>
+			<BOUCLE_projets_sites (PROJETS_SITES) {id_projets_site !IN #GET{projets_sites_liens}}>
+				<li><a href="#URL_PROJETS_SITE">[(#ID_PROJETS_SITE)] - [(#TITRE)] / [(#VAL{projets_site:type_site_}|concat{#TYPE_SITE,'_court'}|_T)]</a></li>
+			</BOUCLE_projets_sites>
+		</ul>
+	</div>
+</B_projets_sites>

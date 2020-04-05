@@ -1,0 +1,14 @@
+Les rôles :
+'dir_projets', 'chef_projets', 'commercial', 'ref_tech', 'architecte', 'lead_developpeur', 'developpeur', 'integrateur'.
+
+
+Maintenant que les auteurs ont des rôles sur les projets, il faut mettre en place des autorisations en conséquence. Voici un début de hiérarchie de droits :
+- Par défaut, un auteur est visiteur (-> un développeur, commercial, référent technique) ;
+- Un CP, DP, Architecte, Lead Dev sont rédacteur.
+
+A partir du constat que le rôle est donné sur un projet
+- Si on n'a pas de rôle sur un projet (donc, par héritage les sites de projets), on prend les autorisations de base du plugin projets et pour projets_sites (rédacteur au minimum) ;
+- Les rôles sont attribués :
+-- tous les auteurs avec rôles voient les login/mdp ;
+-- un dev, un architecte, un lead, un DP, un CP peuvent créer/modifier des sites de projets ;
+-- un architecte, un lead, un DP, un CP peuvent supprimer des sites de projets.

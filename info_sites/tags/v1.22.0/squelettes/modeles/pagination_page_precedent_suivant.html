@@ -1,0 +1,27 @@
+#ENV*{bloc_ancre}
+#SET{bornes,#ENV{page_courante}|bornes_pagination{#ENV{nombre_pages},10}}
+#SET{premiere, #GET{bornes}|reset}
+#SET{derniere, #GET{bornes}|end}
+#SET{pages,#GET{premiere}|range{#GET{derniere}}}
+#SET{sep,#ENV{separateur,' | '}}
+<B_pages>
+	<nav>
+		[<span class='label'>(#ENV{label,''})</span>]
+		<ul class="pagination">[
+			(#SET{item, #ENV{page_courante}|moins{2}|mult{#ENV{pas}} })
+			]<!--
+			--><li class="prev[(#ENV{page_courante}|<={1}|oui)disabled]">[(#ENV{page_courante}|<={1}|non)<a href="[(#ENV{url}|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}|ancre_url{#ENV{ancre}})]" aria-label="[(#ENV{label_precedent,<:public:page_precedente:>}|attribut_html)]" rel="nofollow">]<span aria-hidden="true">&laquo;</span>[(#ENV{page_courante}|<={1}|non)</a>]</li>[<!--
+			--><li><a href="[(#ENV{url}|parametre_url{#ENV{debut},''})]##ENV{ancre}" rel="nofollow">(#GET{premiere}|>{1}|?{1})</a></li><!--
+			--><li><span aria-hidden="true">&hellip;</span></li>]<!--
+			--><BOUCLE_pages (POUR){tableau #GET{pages}}>[(#SET{item, #VALEUR|moins{1}|mult{#ENV{pas}} })]<li[(#VALEUR|=={#ENV{page_courante}}|oui)class="active"]><a href="[(#ENV{url}
+		|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}
+		|ancre_url{#ENV{ancre}})]" rel="nofollow">#VALEUR</a></li><!--
+			--></BOUCLE_pages>[<li><span aria-hidden="true">&hellip;</span></li><!--
+			--><li><a href="[(#ENV{url}|parametre_url{#ENV{debut},#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}})]##ENV{ancre}" rel="nofollow">(#GET{derniere}|<{#ENV{nombre_pages}}|?{#ENV{nombre_pages}})</a></li>][
+			(#SET{item, #ENV{page_courante}|mult{#ENV{pas}} })
+			]<li class="next[(#ENV{page_courante}|>={#ENV{nombre_pages}}|oui)disabled]">[(#ENV{page_courante}|>={#ENV{nombre_pages}}|non)<a href="[(#ENV{url}
+			|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}
+			|ancre_url{#ENV{ancre}})]" aria-label="[(#ENV{label_suivant,<:public:page_suivante:>}|attribut_html)]" rel="nofollow">]<span aria-hidden="true">&raquo;</span>[(#ENV{page_courante}|>={#ENV{nombre_pages}}|non)</a>]</li><!--
+		--></ul>
+	</nav>
+</B_pages>

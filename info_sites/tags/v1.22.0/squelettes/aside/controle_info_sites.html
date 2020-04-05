@@ -1,0 +1,7 @@
+<B_controle_fichiers>
+	<div class="list-group menu">
+		<BOUCLE_controle_fichiers (DATA) {source tableau, (#VAL{prive/squelettes/inclure/controle/}|find_all_in_path{'.html$'})}>[(#SET{controle,[(#CLE|replace{.html,''})]})]
+		<a href="[(#SELF|parametre_url{controle,#GET{controle}})]" class="list-group-item bouton voir bando2_[(#GET{controle})][(#GET{controle}|=={#ENV{controle,projets_projets_sites}|trim}|oui)active]">[(#VAL{info_sites:}|concat{'controle_',#GET{controle},'_menu'}|_T)]</a>
+		</BOUCLE_controle_fichiers>
+	</div>
+</B_controle_fichiers>

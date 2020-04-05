@@ -1,0 +1,16 @@
+<BOUCLE_projets_reference(PROJETS_REFERENCES){id_projets_reference=#ENV{id}}>
+<div class="infos">
+[(#SET{texte_objet,<:projets_reference:titre_projets_reference:>})]
+<div class="numero text-nowrap"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_PROJETS_REFERENCE</p></div>
+
+	<div class='nb_elements'><!--nb_elements--></div>
+
+	[(#AUTORISER{supprimer, projets_reference, #ID_PROJETS_REFERENCE}|oui)
+		[(#BOUTON_ACTION{
+			[(#CHEMIN_IMAGE{projets_reference-del-24.png}|balise_img{<:projets_reference:supprimer_projets_reference:>}|concat{' ',#VAL{<:projets_reference:supprimer_projets_reference:>}|wrap{<b>}}|trim)],
+			#URL_ACTION_AUTEUR{supprimer_projets_reference, #ID_PROJETS_REFERENCE, #URL_ECRIRE{projets_references}},
+			icone s24 horizontale danger projets_reference-del-24, <:projets_reference:confirmer_supprimer_projets_reference:>})]
+	]
+
+</div>
+</BOUCLE_projets_reference>

@@ -1,0 +1,18 @@
+[(#REM)
+	Un cache plus court, pour la boucle syndic_articles
+]#CACHE{3600}
+<?php if ($auteur_session) { ?>
+<BOUCLE_principale (SITES) {id_syndic}>
+<INCLURE{fond=structure,env,id_rubrique=#ENV{id_rubrique,#ID_RUBRIQUE},type-page=site,composition=#COMPOSITION} />
+</BOUCLE_principale>
+</B_principale>
+#HTTP_HEADER{#VAL{"HTTP/1.0 "}|concat{#ENV{code,"404 Not Found"}}}
+#HTTP_HEADER{"Cache-Control: no-store, no-cache, must-revalidate"}
+#HTTP_HEADER{Pragma: no-cache}
+<INCLURE{fond=structure,env,type-page=#ENV{status,404}} />
+<//B_principale>
+<?php } else { ?>
+[(#SET{url, [(#ENV{url}|?{#ENV{url},#SELF})]})]
+<INCLURE{fond=structure,env,type-page=login,composition=login,url=#GET{url}} />
+<?php } ?>
+[(#FILTRE{trim})]

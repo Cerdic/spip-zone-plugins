@@ -1,0 +1,52 @@
+<h2><:info_sites:controle_projets_titre_page:></h2>
+
+[(#SET{versioning,#LISTE{url_site,versioning_path,versioning_trac,versioning_type,versioning_rss}})]
+<BOUCLE_versioning (DATA) {source tableau, #GET{versioning}}>
+	[(#SET{titre,<h3 class="legend" id="[(#VALEUR)]_bloc">[(#VAL{info_sites:controle_projets_}|concat{#VALEUR,'_vide'}|_T)]</h3>})]
+	#BOITE_OUVRIR{#GET{titre}, 'info'}
+	<div class="#VALEUR">[(#SET{where,[(#VALEUR)='']})]
+		<INCLURE{fond=objets/liste/projets,where=#GET{where},sinon=<:info_sites:controle_ok:>,pagination_id=_#VALEUR,env}/>
+		<div class="nettoyeur"></div>
+	</div>
+	#BOITE_FERMER
+</BOUCLE_versioning>
+
+[(#SET{dates,#LISTE{date_debut,date_livraison_prevue,date_livraison}})]
+<BOUCLE_dates (DATA) {source tableau, #GET{dates}}>
+	[(#SET{titre,<h3 class="legend" id="[(#VALEUR)]_bloc">[(#VAL{info_sites:controle_projets_}|concat{#VALEUR,'_vide'}|_T)]</h3>})]
+	#BOITE_OUVRIR{#GET{titre}, 'info'}
+	<div class="#VALEUR">
+		[(#SET{where,[(#VALEUR) IS NULL]})]
+		<INCLURE{fond=objets/liste/projets,where=#GET{where},sinon=<:info_sites:controle_ok:>,pagination_id=_#VALEUR,env}/>
+		<div class="nettoyeur"></div>
+	</div>
+	#BOITE_FERMER
+</BOUCLE_dates>
+
+[(#BOITE_OUVRIR{<h3 class="legend" id="projets_organisations_bloc"><:info_sites:controle_projets_organisations_orphelins:></h3>, 'info'})]
+<div class="projets_organisations">
+	<p class="explication"><:info_sites:controle_projets_organisations_orphelins_explication:></p>
+	[(#SET{where,"id_projet NOT IN (SELECT id_projet FROM spip_projets_liens WHERE objet='organisation')"})]
+	<INCLURE{fond=objets/liste/projets,where=#GET{where},pagination_id=_projets_organisations,sinon=<:info_sites:controle_ok:>,env}/>
+	<div class="nettoyeur"></div>
+</div>
+#BOITE_FERMER
+
+[(#BOITE_OUVRIR{<h3 class="legend" id="projets_auteurs_bloc"><:info_sites:controle_projets_auteurs_orphelins:></h3>, 'info'})]
+<div class="projets_auteurs">
+	<p class="explication"><:info_sites:controle_projets_auteurs_orphelins_explication:></p>
+	[(#SET{where,"id_projet NOT IN (SELECT id_objet FROM spip_auteurs_liens WHERE objet='projet')"})]
+	<INCLURE{fond=objets/liste/projets,where=#GET{where},pagination_id=_projets_auteurs,sinon=<:info_sites:controle_ok:>,env}/>
+	<div class="nettoyeur"></div>
+</div>
+#BOITE_FERMER
+
+[(#BOITE_OUVRIR{<h3 class="legend" id="projets_orphelins_sites_bloc"><:info_sites:controle_projets_orphelins_sites:></h3>, 'info'})]
+<div class="projets_orphelins_sites">
+	[(#SET{where,"id_projet NOT IN (SELECT id_objet FROM spip_projets_sites_liens WHERE objet='projet')"})]
+	<INCLURE{fond=objets/liste/projets,where=#GET{where},pagination_id=_projets_orphelins_sites,sinon=<:info_sites:controle_ok:>,env}/>
+	<div class="nettoyeur"></div>
+</div>
+#BOITE_FERMER
+
+[(#REM|info_sites_lister_doublons_commits)]

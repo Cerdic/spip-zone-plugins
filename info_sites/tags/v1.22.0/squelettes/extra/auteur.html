@@ -1,0 +1,35 @@
+<!-- extra -->
+<BOUCLE_extra2_auteur (AUTEURS) {id_auteur} {tout}>
+	<div id="extra">[(#SET{projets_id,#ARRAY})]
+		<BOUCLE_autresobjets (auteurs_liens) {id_auteur} {objet !IN article, projets_site} {fusion objet} {par objet}>
+			#SET{ids_objet,#ARRAY}
+			<BOUCLE_where (auteurs_liens) {objet} {id_auteur}>
+				[(#SET{ids_objet,[(#GET{ids_objet}|push{#ID_OBJET})]})][(#OBJET|=={projet}|oui)[(#SET{projets_id,#GET{projets_id}|push{#ID_OBJET}})]]
+			</BOUCLE_where>
+			[(#SET{where,[(#OBJET|table_objet)].[(#OBJET|id_table_objet)] IN \([(#GET{ids_objet}|implode{','})]\)})]
+			</B_where>
+			#SET{table,#OBJET|table_objet}
+			[(#SET{titre,[#OBJET:info_(#GET{table})_liees_auteur]})]
+			[(#SET{liste,#VAL{objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_auteur}})]
+			<INCLURE{fond=objets/liste/#GET{liste}, objet, id_auteur, where=#GET{where,''}, ajax, env} />
+			<div class="clearfix"></div>
+		</BOUCLE_autresobjets>
+
+		<INCLURE{fond=objets/liste/projets_sites,par=titre,id_projet=#GET{projets_id,0}, env, ajax}>
+
+		[(#PLUGIN{RSS_COMMITS}|oui)
+		[(#EMAIL|oui)
+		[(#SET{email,[(#EMAIL|explode{'@'}|table_valeur{0})]})]
+		<INCLURE{fond=objets/liste/commits,where=commits.auteur LIKE '%#GET{email}%',ajax} />]
+		[(#CONFIG{'rss_commits/import_auto','non'}|=={'non'}|oui)
+		<INCLURE{fond=objets/liste/rss_commits, force=0, par=date_creation, auteur=^#GET{email}, env, ajax, titre=<:info_sites:auteur_commits_label:>}>]
+		]
+		<INCLURE{fond=liste/articles-auteur,id_auteur,env,ajax} />
+
+	[(#SESSION{id_auteur}|=={#ID_AUTEUR}|non)
+	<div class="block">
+		#FORMULAIRE_ECRIRE_AUTEUR
+	</div>]
+
+</div>
+</BOUCLE_extra2_auteur>

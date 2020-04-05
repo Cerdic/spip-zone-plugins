@@ -1,0 +1,13 @@
+[(#REM) Commits trouvees ]
+<B_commits>
+	<div class="liste resultats commits">
+		#ANCRE_PAGINATION
+		<h2 class="h2"><:commit:titre_commits:> (#GRAND_TOTAL)</h2>
+		<ul class="liste-items">
+			<BOUCLE_commits (COMMITS) {recherche} {!par points} {pagination}>
+			<li class="item"><a href="#URL_COMMIT">#TITRE</a></li>
+			</BOUCLE_commits>
+		</ul>
+		[<div class="block_pagination">(#PAGINATION{page_precedent_suivant})</div>]
+	</div>
+</B_commits>

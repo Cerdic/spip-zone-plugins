@@ -1,0 +1,6 @@
+[(#ID_PROJET|oui)
+	[(#AUTORISER{infositesmodifier,projet,#ID_PROJET}|sinon_interdire_acces{'',401,<:info_sites:zone_restreinte:>})]
+][(#ID_PROJET|non)
+	[(#AUTORISER{infositescreer,projet}|sinon_interdire_acces{'',401,<:info_sites:zone_restreinte:>})]
+]
+[(#INCLURE{fond=prive/squelettes/contenu/#ENV{page},exec=#ENV{page},env})]

@@ -1,0 +1,6 @@
+<div class="block boutons">
+	<div class="list-group menu" role="menu">
+	[(#AUTORISER{creer,organisation})
+		<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{organisation_edit,new=oui}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="list-group-item bouton creer" rel="nofollow"><span class="fa-stack text-success"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-plus-circle fa-stack-1x fa-inverse"></i></span> <:contacts:organisation_creer:></a>
+	]</div>
+</div>

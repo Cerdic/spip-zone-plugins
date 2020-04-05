@@ -1,0 +1,9 @@
+<B_controle_fichiers>
+	<div class="navigation">
+		<ul class="liste_items sous_navigation">
+	<BOUCLE_controle_fichiers (DATA) {source tableau, (#VAL{prive/squelettes/inclure/controle/}|find_all_in_path{'.html$'})}>[(#SET{controle,[(#CLE|replace{.html,''})]})]
+			<li class="item[(#ENV{controle}|=={#GET{controle}}|oui)on]"><a href="[(#SELF|parametre_url{controle,#GET{controle}})]" class="bando2_[(#GET{controle})]">[(#VAL{info_sites:}|concat{'controle_',#GET{controle},'_menu'}|_T)]</a></li>
+	</BOUCLE_controle_fichiers>
+		</ul>
+	</div>
+</B_controle_fichiers>

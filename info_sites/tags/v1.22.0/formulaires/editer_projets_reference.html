@@ -1,0 +1,65 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_projets_reference,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_projets_reference" value="#ENV{id_projets_reference}" />
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+
+			[(#SAISIE{input, url_site, obligatoire=oui,
+				label=<:projets_reference:champ_url_site_label:>,
+				datas=#VAL{url_site}|info_sites_lister_projets})]
+
+			[(#SAISIE{input, nom, obligatoire=oui,
+				label=<:projets_reference:champ_nom_label:>,
+				datas=#VAL{nom}|info_sites_lister_projets})]
+
+			[(#SAISIE{input, organisation, obligatoire=oui,
+				label=<:projets_reference:champ_organisation_label:>,
+				explication=<:projets_reference:champ_organisation_explication:>,
+				datas=#VAL{nom}|info_sites_lister_organisations})]
+
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+	]
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+	  $('.formulaire_#FORM input#champ_url_site').keyup(function(){
+		var url_projet = $(this).val();
+		console.log(url_projet);
+		var projet_info = "[(#URL_SITE_SPIP)]/get_title.api/?url=" + url_projet;
+        $.ajax({
+          url: projet_info,
+          async: true,
+          success: function(response) {
+            response = JSON.parse(response);
+            console.log(response);
+            if (response.title && response.title.length > 0) {
+              if ($('.formulaire_#FORM div.editer_nom input#champ_nom').val().length == 0) {
+                $('.formulaire_#FORM div.editer_nom input#champ_nom').val(response.title);
+              } else {
+                if ($('.formulaire_#FORM div.editer_nom div.explication').length) {
+                  $('.formulaire_#FORM div.editer_nom div.explication').html("Suggestion : \"" + response.title + "\"");
+                } else {
+                  $('.formulaire_#FORM div.editer_nom').append("<div class='explication'>Suggestion : \"" + response.title + "\"</div>")
+                }
+              }
+            }
+            if (response.title === null) {
+              $('.formulaire_#FORM div.editer_nom div.explication').remove();
+            }
+          },
+          error: function(e) {
+            // alert("error! " + e);
+          }
+        });
+	  });
+	});
+</script>

@@ -1,0 +1,10 @@
+[(#AUTORISER{infositesvoir,projets}|sinon_interdire_acces{'',401,<:info_sites:zone_restreinte:>})]
+<div class="row">
+	<div class="col-md-9"><h1 class="titre"><:projet:titre_projets:></h1></div>
+	<div class="col-md-3">[(#CHEMIN{selecteurs/#ENV{type-page}.html}|oui)
+		[(#INCLURE{fond=inclure/selecteur,quoi=#ENV{type-page},env})]
+	]</div>
+</div>
+<div class='clearfix'></div>
+
+<INCLURE{fond=objets/liste/projets,env,ajax,sinon=<:projet:info_aucun_projet:>} />

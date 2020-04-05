@@ -1,0 +1,4 @@
+[(#AUTORISER{inscrireauteur,6forum}|sinon_interdire_acces{#URL_SITE_SPIP})]
+[(#SET{url, [(#ENV{url}|?{#ENV{url},#SELF})]})]
+<INCLURE{fond=structure,env,type-page=inscription,composition=inscription,url=#GET{url}} />
+[(#FILTRE{trim})]

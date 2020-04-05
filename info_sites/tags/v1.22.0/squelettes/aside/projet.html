@@ -1,0 +1,32 @@
+<BOUCLE_extra (PROJETS) {id_projet} {tout}>
+	<BOUCLE_autoriser_voir (CONDITION) {si #AUTORISER{infositesvoir, projet, #ID_PROJET}|oui}>
+<div class="block boutons">
+	<div class="list-group menu" role="menu">
+		[(#AUTORISER{infositesmodifier,projet,#ID_PROJET})
+		<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{projet_edit,id_projet=#ID_PROJET}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="list-group-item bouton modifier" rel="nofollow"><span class="fa-stack text-info"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-pencil-square-o fa-stack-1x fa-inverse"></i></span> <:info_sites:icone_modifier_projet:></a>][
+		(#CONFIG{'rss_commits/import_auto','non'}|=={'oui'}|oui)[(#VERSIONING_RSS|oui)[(#AUTORISER{maj, commits}|oui)
+		<a href="[(#URL_ACTION_AUTEUR{maj_commits_projet, #ID_PROJET, #URL_SITE_SPIP/#SELF})]" class="list-group-item bouton maj" class="<:commit:maj_commits_projet|attribut_html:>" onmouseover="$(this).find('i.fa-refresh').addClass('fa-spin')" onmouseout="$(this).find('i.fa-refresh').removeClass('fa-spin')"><span class="fa-stack text-info"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-refresh fa-stack-1x fa-inverse"></i></span> <:commit:maj_commits_projet:></a>]]][(#AUTORISER{infositescreer,projetssite,'new',[(#SESSION|unserialize)],#ARRAY{projet,#ID_PROJET}}|oui)
+		<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{projets_site_edit,new=oui&associer_objet=projet|#ID_PROJET}|parametre_url{redirect,#SELF})]" class="list-group-item bouton creer" rel="nofollow"><span class="fa-stack text-success"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-plus-circle fa-stack-1x fa-inverse"></i></span> <:projets_site:icone_creer_projets_site:></a>
+		][(#AUTORISER{infositesassocier,projetssites,'',[(#SESSION|unserialize)],#ARRAY{projet,#ID_PROJET}}|oui)
+		<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{editer_liens}|parametre_url{table_source,projets_sites}|parametre_url{objet,projet}|parametre_url{id_objet,#ID_PROJET})]" class="list-group-item bouton editer_liens" rel="nofollow"><span class="fa-stack text-muted"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-link fa-stack-1x fa-inverse"></i></span> <:info_sites:editer_liens_projets_site:></a>
+		][(#AUTORISER{infositesassocier,contacts,'',[(#SESSION|unserialize)],#ARRAY{projet,#ID_PROJET}}|oui)
+		<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{editer_liens}|parametre_url{table_source,contacts}|parametre_url{objet,projet}|parametre_url{id_objet,#ID_PROJET})]" class="list-group-item bouton editer_liens" rel="nofollow"><span class="fa-stack text-muted"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-link fa-stack-1x fa-inverse"></i></span> <:info_sites:editer_liens_contact:></a>
+		][(#AUTORISER{infositesassocier,auteurs,'',[(#SESSION|unserialize)],#ARRAY{projet,#ID_PROJET}}|oui)
+		<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{editer_liens}|parametre_url{table_source,auteurs}|parametre_url{objet,projet}|parametre_url{id_objet,#ID_PROJET})]" class="list-group-item bouton editer_liens" rel="nofollow"><span class="fa-stack text-muted"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-link fa-stack-1x fa-inverse"></i></span> <:info_sites:editer_liens_auteur:></a>
+		]<BOUCLE_site_secu (PROJETS_SITES) {id_projet} {tout} {1,2}> </BOUCLE_site_secu>[(#AUTORISER{infositesmodifier,projetssite,'',[(#SESSION|unserialize)],#ARRAY{projet,#ID_PROJET}}|oui)<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{diagnostic_iso}|parametre_url{id_projet,#ID_PROJET})]" class="list-group-item bouton diagnostic"><span class="fa-stack text-primary"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-list fa-stack-1x fa-inverse"></i></span> <:info_sites:btn_diagnostic_iso:></a>]</B_site_secu>[
+		(#AUTORISER{infositessupprimer, projet, #ID_PROJET}|oui)
+		<a role="menuitem" tabindex="-1" href="[(#URL_ACTION_AUTEUR{supprimer_projet,#ID_PROJET,#URL_PAGE{projets}})]" class="list-group-item bouton website" onclick='return confirm("<:projet:confirmer_supprimer_projet:>\n\n<:projet:explication_supprimer_projet:>")'><span class="fa-stack text-danger"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-trash fa-stack-1x fa-inverse"></i></span>
+			<:projet:supprimer_projet:>
+		</a>]
+	</div>
+</div>
+	</BOUCLE_autoriser_voir>
+
+	[(#INCLURE{fond=objets/infos/projet,id_projet=#ID_PROJET})]
+
+	[(#AUTORISER{infositesinstituer,projet,#ID_PROJET})
+	<div class="block info">
+		[(#FORMULAIRE_INSTITUER_OBJET{projets,#ID_PROJET})]
+	</div>
+	]
+</BOUCLE_extra>

@@ -1,0 +1,26 @@
+<BOUCLE_contact(CONTACTS) {id_contact} {tous}>
+[(#AUTORISER{infositesvoir,contact,#ID_CONTACT}|sinon_interdire_acces{'',401,<:info_sites:zone_restreinte:>})]
+[(#BOITE_OUVRIR{[
+<h1 class="titre">(#NOM)[, (#PRENOM)]</h1>
+],simple fiche_objet})]
+
+[(#LOGO_CONTACT|image_reduire{150,0}|vider_attribut{style}|vider_attribut{width}|vider_attribut{height}|inserer_attribut{'class','img-responsive'})
+<div class="clearfix clear"></div>]
+
+<div id="wysiwyg">
+	<INCLURE{fond=prive/objets/contenu/contact, id=#ID_CONTACT, id_contact=#ID_CONTACT, ajax=wysiwyg} />
+	<div class="clearfix clear"></div>
+</div>
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,contact,id,#ID_CONTACT,exec,contact},data,'<div class="nettoyeur"></div>'}}
+
+[(#SET{exec,#ARRAY{exec,contact}})]
+[(#SET{contexte,#GET{exec}|array_merge{#ENV**|unserialize}})]
+#PIPELINE{afficher_fiche_objet,#ARRAY{args,#ARRAY{type,contact,id,#ID_CONTACT,contexte,#GET{contexte}},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{type-page}', '#navigation,#chemin');/*\]\]>*/</script>
+]
+</BOUCLE_contact>
+</B_contact>

@@ -1,0 +1,48 @@
+[(#SET{defaut_tri,#ARRAY{
+	date_publication,-1,
+	date_debut,-1,
+	nom,1,
+	url_site,1,
+	id_projet,1,
+	statut,1,
+	points,-1
+}})]
+<B_liste_projets>
+	#ANCRE_PAGINATION
+	<div class="liste-objets projets table-responsive">
+		<table class='spip liste table table-striped table-bordered'>
+			[<caption id="liste_objets_projets[_(#REM|uniqid)]" class="legend"><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{projet:info_1_projet,projet:info_nb_projets}})</strong></caption>]
+			<thead>
+			<tr class='first_row'>
+				<th class='nom' scope='col'>[(#TRI{nom,<:projet:label_nom:>,ajax})]</th>
+				<th class='statut' scope='col'>[(#TRI{statut,<:projet:label_statut:>,ajax})]</th>
+				[(#ENV{id_auteur}|oui)<th class="roles_auteur"><:roles:roles_titre:></th>]
+				<th class='url_site' scope='col'>[(#TRI{url_site,<:projet:label_url_site:>,ajax})]</th>
+				<th class='date' scope='col'>[(#TRI{date_debut,<:projet:label_date_debut:>,ajax})]</th>
+			</tr>
+			</thead>
+			<tbody>
+			<BOUCLE_liste_projets (PROJETS) {id_projet_parent?} {id_projets_cadre?} {id_organisation ?} {contacts_liens.id_contact ?} {id_mot?} {auteurs_liens.id_auteur?} {where?} {statut?} {recherche?} {tri #ENV{par,nom},#GET{defaut_tri}} {pagination #ENV{nb,10} #ENV{pagination_id,'_liste_projets'}}>
+			<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+				<td class='nom principale'>[(#LOGO_PROJET|image_reduire{20,26})]<a href="[(#ID_PROJET|generer_url_entite{projet})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PROJET">[(#RANG). ]#NOM</a></td>
+				<td class='statut'>[(#CHEMIN{prive/themes/spip/images/[(#VAL{projet}|objet_info{statut_images}|table_valeur{#STATUT**})]}|balise_img{[(#VAL{'projet:texte_statut_'}|concat{#STATUT**}|_T)]}) ][(#VAL{'projet:texte_statut_'}|concat{#STATUT**}|_T)]</td>
+				[(#ENV{id_auteur}|oui)
+				<td class="roles_auteur">[(#INCLURE{fond=inclure/roles_auteurs,id_auteur,objet=projet,id_objet=#ID_PROJET})]</td>
+				]
+				<td class='url_site secondaire'>[(#URL_SITE|oui)
+					<a href="#URL_SITE">#URL_SITE</a>
+					]
+				</td>
+				<td class='date_debut secondaire'>[(#DATE_DEBUT|affdate_jourcourt|sinon{-})]</td>
+			</tr>
+			</BOUCLE_liste_projets>
+			</tbody>
+		</table>
+		[(#REM|test_espace_prive|?{
+		[<div class="pagination">(#PAGINATION{prive})</div>],
+		[<div class="block_pagination">(#PAGINATION{page_precedent_suivant})</div>]
+		})]
+	</div>
+</B_liste_projets>[
+<div class="liste-objets projets caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_projets>

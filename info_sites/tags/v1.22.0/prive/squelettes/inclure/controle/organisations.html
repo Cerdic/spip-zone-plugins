@@ -1,0 +1,17 @@
+<h2><:info_sites:controle_organisations_titre_page:></h2>
+
+[(#BOITE_OUVRIR{<h3 class="legend" id="organisations_orphelins_contacts_bloc"><:info_sites:controle_organisations_orphelins_contacts:></h3>, 'info'})]
+<div class="organisations_orphelins_contacts">
+	[(#SET{where,"organisations.id_organisation NOT IN (SELECT id_organisation FROM spip_organisations_liens WHERE objet='contact')"})]
+	<INCLURE{fond=objets/liste/organisations,where=#GET{where},pagination_id=_organisations_orphelins_contacts,sinon=<:info_sites:controle_ok:>,env}/>
+	<div class="nettoyeur"></div>
+</div>
+#BOITE_FERMER
+
+[(#BOITE_OUVRIR{<h3 class="legend" id="organisations_orphelins_projets_bloc"><:info_sites:controle_organisations_orphelins_projets:></h3>, 'info'})]
+<div class="organisations_orphelins_projets">
+	[(#SET{where,"organisations.id_organisation NOT IN (SELECT id_objet FROM spip_projets_liens WHERE objet='organisation')"})]
+	<INCLURE{fond=objets/liste/organisations,where=#GET{where},pagination_id=_organisations_orphelins_projets,sinon=<:info_sites:controle_ok:>,env}/>
+	<div class="nettoyeur"></div>
+</div>
+#BOITE_FERMER

@@ -1,0 +1,44 @@
+<div class="liste-objets projets table-responsive">
+	<table class="spip liste table table-striped table-bordered" id="projets_dashboard_projets_sites">
+		<thead>
+			<tr class="first_row">
+				<th class="nom" scope="col"><:projet:label_nom:></th>
+				<th class="organisations" scope="col"><:contacts:organisations:></th>
+				<BOUCLE_types_sites_header (DATA) {source table, #VAL{'objet'}|sp_lister_type_sites} {!par cle}>
+				<th class="type_site [(#CLE)]" scope="col">[(#VALEUR)]</th>
+				</BOUCLE_types_sites_header>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr class="first_row">
+				<th class="nom" scope="col"><:projet:label_nom:></th>
+				<th class="organisations" scope="col"><:contacts:organisations:></th>
+				<BOUCLE_types_sites_footer (DATA) {source table, #VAL{'objet'}|sp_lister_type_sites} {!par cle}>
+				<th class="type_site [(#CLE)]" scope="col">[(#VALEUR)]</th>
+				</BOUCLE_types_sites_footer>
+			</tr>
+		</tfoot>
+		<tbody>
+		<BOUCLE_projets (PROJETS) {par id_projet}>
+			<tr id="projet_[(#ID_PROJET)]">
+				<td class="nom" scope="col"><a href="[(#URL_PROJET)]">[(#NOM)]</a></td>
+				<td class="organisations">
+					<BOUCLE_organisations (projets_liens) {id_projet} {objet='organisation'} {', '}><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[(#INFO_TITRE{#OBJET,#ID_OBJET})]</a></BOUCLE_organisations></B_organisations>-<//B_organisations>
+				</td>
+				<BOUCLE_types_sites (DATA) {source table, #VAL{'objet'}|sp_lister_type_sites} {!par cle}>
+				<B_projets_sites>
+				<BOUCLE_projets_sites (PROJETS_SITES) {id_projet=#_projets:ID_PROJET} {type_site=#CLE} {0,1}>
+				<td class="text-success text-center" scope="col" data-search="[(#VALEUR)] [(#CLE)] ok valid" data-order="[(#CLE)]_ok"><i class="fa fa-2x fa-check-circle"> </i><span class="hidden">ok</span> </td>
+				</BOUCLE_projets_sites>
+				</B_projets_sites>
+				<td class="text-danger text-center" scope="col" data-search="[(#VALEUR)] [(#CLE)] ko error" data-order="[(#CLE)]_ko"><i class="fa fa-2x fa-times-circle"> </i><span class="hidden">ko</span></td>
+				<//B_projets_sites>
+				</BOUCLE_types_sites>
+			</tr>
+		</BOUCLE_projets>
+		</tbody>
+	</table>
+</div>
+[(#CHEMIN{inclure/datable_script.html}|oui)
+[(#INCLURE{fond=inclure/datable_script,selector=projets_dashboard_projets_sites,env})]
+]

@@ -1,0 +1,21 @@
+[(#SET{objets_ecrire,#LISTE{organisations,contacts,projets,projets_cadres,projets_sites,commits,auteurs}})]
+<BOUCLE_session_auteur (CONDITION) {si #SESSION{id_auteur}|oui}>
+<div id="connexion" class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<ul class="list-inline pull-right">
+				[<li><a href="#URL_AUTEUR{#SESSION{id_auteur}}"><i class="fa fa-user fa-lg"></i> (#SESSION{nom})</a></li>]
+				<?php if (isset($GLOBALS['visiteur_session']['id_auteur']) AND $GLOBALS['visiteur_session']['id_auteur']) { ?>
+				<?php if (include_spip('inc/autoriser') AND autoriser('ecrire')){ ?>
+				<li><a href="[(#ENV{type-page}|in_array{#GET{objets_ecrire}}|?{[(#URL_ECRIRE{#ENV{type-page}})],#EVAL{_DIR_RESTREINT_ABS}})]" title="<:espace_prive:>"><i class="fa fa-lock fa-lg"></i> <:espace_prive:></a></li>
+				<li><a href="[(#URL_PAGE{controle_info_sites})]" title="<:info_sites:titre_controle_info_sites:>"><i class="fa fa-lock fa-lg"></i> <:info_sites:titre_controle_info_sites:></a></li>
+				<?php } ?>
+				<li><a href="#URL_LOGOUT" rel="nofollow" title="<:icone_deconnecter:>"><i class="fa fa-sign-out fa-lg"></i> <span class="sr-only"><:icone_deconnecter:></span></a></li>
+<?php } else { ?>
+				<li><i class="fa fa-sign-in fa-lg"></i><a href="[(#URL_PAGE{login}|parametre_url{url,#SELF|parametre_url{url,''}})]" rel="nofollow" class='login_modal' title="<:lien_connecter:>"><:lien_connecter:></a></li>
+				<?php } ?>
+			</ul>
+		</div>
+	</div>
+</div>
+</BOUCLE_session_auteur>

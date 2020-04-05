@@ -1,0 +1,10 @@
+<BOUCLE_content (AUTEURS) {id_auteur} {tout}>
+	[(#AUTORISER{infositesassocier,auteur,#ID_AUTEUR}|sinon_interdire_acces{'',401,<:info_sites:zone_restreinte:>})]
+	<header class="cartouche">
+		<h1 class="fn titre" itemprop="name">#NOM</h1>
+	</header>
+
+	<div class="ajax">
+		#FORMULAIRE_AUTEUR_PROJETS_ASSOCIER{#ID_AUTEUR}
+	</div>
+</BOUCLE_content>

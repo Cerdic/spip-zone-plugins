@@ -1,0 +1,19 @@
+<BOUCLE_extra (PROJETS_CADRES) {id_projets_cadre} {tout}>
+	<BOUCLE_autoriser_modifier (CONDITION) {si #AUTORISER{infositesmodifier,projetscadre,#ID_PROJETS_CADRE}|oui}>
+		<div class="block boutons">
+			<div class="list-group menu" role="menu">
+				<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{projets_cadre_edit,id_projets_cadre=#ID_PROJETS_CADRE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="list-group-item bouton modifier" rel="nofollow"><span class="fa-stack text-info"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-pencil-square-o fa-stack-1x fa-inverse"></i></span>
+					<:projets_cadre:icone_modifier_projets_cadre:>
+				</a>[
+				(#AUTORISER{infositesassocier, projets_cadre, #ID_PROJETS_CADRE}|oui)
+				<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{editer_liens}|parametre_url{table_source,auteurs}|parametre_url{objet,projets_cadre}|parametre_url{id_objet,#ID_PROJETS_CADRE})]" class="list-group-item bouton editer_liens" rel="nofollow" title="<:info_sites:editer_liens_auteur|attribut_html:>"><span class="fa-stack text-muted"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-link fa-stack-1x fa-inverse"></i></span>
+					<:info_sites:editer_liens_auteur:>
+				</a>][
+				(#AUTORISER{infositessupprimer, projets_cadre, #ID_PROJETS_CADRE}|oui)
+				<a role="menuitem" tabindex="-1" href="[(#URL_ACTION_AUTEUR{supprimer_projets_cadre,#ID_PROJETS_CADRE,#URL_PAGE{projets_cadres}})]" class="list-group-item bouton" onclick='return confirm("<:projets_cadre:confirmer_supprimer_projets_cadre:>\n\n<:projets_cadre:explication_supprimer_projets_cadre:>")'><span class="fa-stack text-danger"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-trash fa-stack-1x fa-inverse"></i></span>
+					<:projets_cadre:supprimer_projets_cadre:>
+				</a>]
+			</div>
+		</div>
+	</BOUCLE_autoriser_modifier>
+</BOUCLE_extra>

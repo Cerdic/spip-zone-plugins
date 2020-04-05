@@ -1,0 +1,12 @@
+<BOUCLE_projets_site (PROJETS_SITES){id_projets_site}>[(#SET{opt,#ARRAY})]
+<BOUCLE_projets (projets_sites_liens) {id_projets_site} {objet="projet"}>[(#SET{opt,#ARRAY{projet,#ID_OBJET}})]</BOUCLE_projets>
+	[(#AUTORISER{infositesvoir, projetssite, #ID_PROJETS_SITE, [(#SESSION|unserialize)], [(#GET{opt})]}|sinon_interdire_acces{'',401,<:info_sites:zone_restreinte:>})]
+[(#BOITE_OUVRIR{[
+    <h1 class="titre">[(#RANG). ](#TITRE|?{#TITRE,<:info_sans_titre:>})</h1>
+],simple fiche_objet})]
+
+[<div class="coloration_code cadre">
+<pre class="prettyprint xml">(#WEBSERVICE*|url_webservice_xml{#FO_LOGIN, #FO_PASSWORD}|sinon{<:info_sites:werbservice_inaccessible:>}|echapper_tags)</pre>
+</div>]
+[(#BOITE_FERMER)]
+</BOUCLE_projets_site>

@@ -1,0 +1,33 @@
+[(#ID_PROJETS_REFERENCE|oui)
+	[(#AUTORISER{modifier,projets_reference,#ID_PROJETS_REFERENCE}|sinon_interdire_acces)]
+]
+
+
+[(#ID_PROJETS_REFERENCE|non)
+	[(#AUTORISER{creer,projets_reference}|sinon_interdire_acces)]
+]
+
+#SET{redirect,#ENV{redirect}|sinon{#ID_PROJETS_REFERENCE|?{#ID_PROJETS_REFERENCE|generer_url_entite{projets_reference},#URL_ECRIRE{projets_references}}}}
+
+<div class="cadre-formulaire-editer">
+<div class="entete-formulaire">
+	[(#ID_PROJETS_REFERENCE|oui)
+	[(#GET{redirect}|icone_verticale{<:icone_retour:>,projets_reference,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_PROJETS_REFERENCE|?{<:projets_reference:icone_modifier_projets_reference:>,<:projets_reference:icone_creer_projets_reference:>})]
+		<h1>(#ENV{titre,#INFO_NOM{projets_reference,#ID_PROJETS_REFERENCE}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_PROJETS_REFERENCE|generer_url_entite{projets_reference}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_PROJETS_REFERENCE{#ENV{id_projets_reference,oui}, #GET{redirect}, #ENV{associer_objet}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>

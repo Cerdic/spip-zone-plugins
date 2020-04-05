@@ -1,0 +1,59 @@
+[(#REM)
+	On transforme la page d'un objet.
+	projets_site -> projets_sites
+	projet -> projets
+	organisation -> organisations
+	etc.
+]
+[(#SET{type-page,[(#ENV{type-page}|table_objet)]})]
+[(#GET{type-page}|in_ismenu|non)
+	[(#REM)
+		Si le type-page n'est pas dans un élément du menu,
+		on regarde quel id est présent pour ainsi retrouver l'élément du menu.
+		TODO : il faudrait rendre cela plus générique.
+	]
+	[(#ENV{id_projets_site}|oui)[(#SET{type-page,projets_sites})]]
+	[(#ENV{id_projet}|oui)[(#SET{type-page,projets})]]
+	[(#ENV{id_organisation}|oui)[(#SET{type-page,organisations})]]
+	[(#ENV{id_contact}|oui)[(#SET{type-page,contacts})]]
+	[(#ENV{id_projets_cadre}|oui)[(#SET{type-page,projets_cadres})]]
+	[(#ENV{id_auteur}|oui)[(#SET{type-page,auteurs})]]
+	[(#ENV{id_commit}|oui)[(#SET{type-page,commits})]]
+]
+<!-- Debut menu -->
+<nav id="menu" class="navbar navbar-default">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-content" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+		<div class="collapse navbar-collapse" id="menu-content">
+			<ul class="nav navbar-nav"><BOUCLE_menu (DATA) {source tableau, #CONFIG{"info_sites_menu"}}>[(#AUTORISER{infositesvoir,[(#CLE)]}|oui)<li[(#GET{type-page}|=={#CLE}|oui) class="active"]><a href="#URL_PAGE{#CLE}"[(#GET{type-page}|=={#CLE}|oui) class="active"]><i class="[(#VALEUR{icone})]"></i> [<span>(#VALEUR**{nom}|_T)</span>]</a></li>]
+			</BOUCLE_menu></ul>
+		</div>
+	</div>
+</nav>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var menu_items = $('#menu-content > ul > li');
+		if (menu_items.length > 5) {
+			var last_items = menu_items.length - 4;
+			var removed = menu_items.splice(5, last_items);
+			$('#menu-content > ul > li').slice(-last_items+1).remove();
+			var autres_items = new Array();
+			$.each(removed, function(key, value){
+				autres_items.push(value.outerHTML);
+			});
+
+			$('#menu-content > ul').append('<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><:info_sites:label_autres:> <span class="caret"></span></a><ul class="dropdown-menu"></ul></li>');
+			$('#menu-content > ul > li.dropdown > ul.dropdown-menu').append(autres_items.join(' '));
+		}
+	});
+</script>
+<!-- Fin menu -->
+[(#FILTRE{trim})]

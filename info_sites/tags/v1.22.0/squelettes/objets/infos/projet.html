@@ -1,0 +1,34 @@
+<BOUCLE_principal (PROJETS) {id_projet} {tout}>
+	<div class="block">
+		<div class="list-group">
+			<B_autresobjets>
+				<BOUCLE_autresobjets (projets_liens) {id_projet} {objet !IN projets_site} {fusion objet} {par objet}>
+				<div class="list-group-item">
+					<div class="list-group-item-heading"><strong>[(#OBJET|objet_info{texte_objet}|_T)]</strong></div>
+					<div class="list-group-item-text" dir="#LANG_DIR"><BOUCLE_objets_liens (projets_liens) {id_projet} {objet} {', '}><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[(#INFO_TITRE{#OBJET,#ID_OBJET})]</a></BOUCLE_objets_liens></div>
+				</div>
+				</BOUCLE_autresobjets>
+			</B_autresobjets>
+			<B_contacts>
+				<div class="list-group-item">
+					<div class="list-group-item-heading"><strong>[(#VAL{contact}|objet_info{texte_objet}|_T)]</strong></div>
+					<div class="list-group-item-text" dir="#LANG_DIR"><BOUCLE_contacts (CONTACTS) {id_projet} {par nom} {', '}><a href="[(#URL_CONTACT)]">[(#NOM)][, (#PRENOM)]</a></BOUCLE_contacts></div>
+				</div>
+			</B_contacts>
+			[(#ENV{titre_projet,non}|=={oui}|oui)
+			<div class="list-group-item">
+				<div class="list-group-item-heading"><strong>[(#VAL{projet}|objet_info{texte_objet}|_T)]</strong></div>
+				<div class="list-group-item-text" dir="#LANG_DIR"><a href="[(#URL_PROJET)]">[(#NOM)]</a></div>
+			</div>]
+
+			<B_auteurs>
+				<BOUCLE_auteurs (DATA) {source table, #ID_PROJET|info_sites_lister_projets_auteurs_roles} {par cle}>
+					<div class="list-group-item">
+						<div class="list-group-item-heading"><strong>[(#CLE|role{auteurs}|sinon{[(#VAL{auteur}|objet_info{texte_objet}|_T)]})]</strong></div>
+						<div class="list-group-item-text" dir="#DIR_LANG"><BOUCLE_roles (DATA) {source table, #VALEUR} {par valeur} {', '}><a href="[(#VALEUR|generer_url_entite{auteur})]">[(#INFO_TITRE{auteur,#VALEUR})]</a></BOUCLE_roles></div>
+					</div>
+				</BOUCLE_auteurs>
+			</B_auteurs>
+		</div>
+	</div>
+</BOUCLE_principal>

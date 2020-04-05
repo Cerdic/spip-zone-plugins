@@ -1,0 +1,13 @@
+<BOUCLE_extra (CONTACTS) {id_contact} {tout}>
+<div class="block boutons">
+	<div class="list-group menu" role="menu">
+	[(#AUTORISER{infositesmodifier,contact,#ID_CONTACT}|oui)
+		<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{contact_edit,id_contact=#ID_CONTACT}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="list-group-item bouton modifier" rel="nofollow"><span class="fa-stack text-primary"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-pencil-square-o fa-stack-1x fa-inverse"></i></span> <:info_sites:icone_modifier_contact:></a>][(#AUTORISER{infositesassocier,organisation}|oui)
+		<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{editer_liens}|parametre_url{table_source,organisations}|parametre_url{objet,contact}|parametre_url{id_objet,#ID_CONTACT})]" class="list-group-item bouton editer_liens" rel="nofollow"><span class="fa-stack text-muted"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-link fa-stack-1x fa-inverse"></i></span> <:info_sites:editer_liens_organisation:></a>
+		][(#AUTORISER{infositessupprimer, contact, #ID_CONTACT}|oui)
+		<a role="menuitem" tabindex="-1" href="[(#URL_ACTION_AUTEUR{supprimer_contact,contact/#ID_CONTACT,#URL_PAGE{contacts}})]" class="list-group-item bouton website" onclick='return confirm("<:contacts:confirmer_supprimer_contact|texte_script:>\n\n<:contacts:explication_supprimer_contact|texte_script:>")'><span class="fa-stack text-danger"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-trash fa-stack-1x fa-inverse"></i></span>
+			<:contacts:supprimer_contact:>
+		</a>]
+	</div>
+</div>
+</BOUCLE_extra>

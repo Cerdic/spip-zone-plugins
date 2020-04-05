@@ -1,0 +1,112 @@
+<div class="formulaire_spip formulaire_#FORM">
+
+	<div class="form-group">
+		<button data-toggle="collapse" href="#filtres" class="btn btn-info"><:info_sites:filtres_label:></button>
+		<div id="filtres" class="collapse">
+			<div class="form-group techno">
+				<h4><:info_sites:techno_label:></h4>
+				<button class="btn btn-default active" onclick="show_block($(this), '.techno', '')"><:info_sites:voir_tout:></button>
+				<BOUCLE_logiciels_sites (DATA) {source table, #REM|info_sites_lister_logiciels_sites} {par valeur}>
+					<button class="btn btn-default" onclick="show_block($(this), '.techno', ['.(#VALEUR|info_sites_nom_machine)'])">[(#VALEUR)]</button>
+				</BOUCLE_logiciels_sites>
+			</div>
+			<div class="form-group organisation">
+				<h4><:contacts:organisations:></h4>
+				<button class="btn btn-default active" onclick="show_block($(this), '.organisation', '')"><:info_sites:voir_tout:></button>
+				<BOUCLE_organisations (ORGANISATIONS) {where id_organisation IN (SELECT id_objet FROM spip_projets_liens WHERE objet='organisation')} {par nom}>
+					<button class="btn btn-default" onclick="show_block($(this), '.organisation', ['.organisation_(#ID_ORGANISATION)'])">[(#NOM)]</button>
+				</BOUCLE_organisations>
+			</div>
+			<div class="form-group autres">
+				<h4><:info_sites:autres_label:></h4>
+				<button class="btn btn-default active" onclick="show_block($(this), '.autres', '')"><:info_sites:voir_tout:></button>
+				<button class="btn btn-default" onclick="show_block($(this), '.autres', '.auteur_session')"><:info_sites:mes_projets_label:></button>
+				<button class="btn btn-default" onclick="show_block($(this), '.autres', '.auteurs_projets')"><:info_sites:auteur_projets_label:></button>
+			</div>
+		</div>
+		[(#REM)<!--
+			Attribuer un rôle à l’utilisateur sur tous les projets.
+		-->]
+		<B_parlot_roles>
+		<div class="form-group">
+			<div id="parlot" class="collapse">
+				<div class="form-group role">
+					<button class="btn btn-default active" onclick="definir_role($(this), '.role', '')"><:info_sites:voir_tout:></button>
+					<BOUCLE_parlot_roles (DATA) {source table, #REM|info_sites_lister_roles_auteurs}>
+						<button class="btn btn-default" onclick="definir_role($(this), '.role', ['(#CLE)'])">[(#VALEUR|_T)]</button>
+					</BOUCLE_parlot_roles>
+				</div>
+			</div>
+		</div>
+		</B_parlot_roles>
+	</div>
+	[<p class="reponse_formulaire reponse_formulaire_erreur">
+	(#ENV*{message_erreur})
+</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">
+	(#ENV*{message_ok})
+</p>]
+	<BOUCLE_editable (CONDITION) {si #EDITABLE|oui}>
+	<form action="#ENV{action}" method="post">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div class="form-group text-right">
+			<input type="submit" class="btn btn-default" value="<:bouton_enregistrer:>" />
+		</div>
+			<BOUCLE_projets (PROJETS) {tout} {par num projets.nom, projets.nom}>[(#SET{organisations,#ARRAY})][(#SET{projets_roles,[(#ENV*{projets_anciens}|table_valeur{#ID_PROJET})]})]
+				<BOUCLE_organisation (ORGANISATIONS) {where id_organisation IN (SELECT id_objet FROM spip_projets_liens WHERE objet='organisation' AND id_projet=#ID_PROJET)}>[(#SET{organisations,[(#GET{organisations}|push{organisation_[(#ID_ORGANISATION)]})]})] </BOUCLE_organisation>
+				<div id="projet_#ID_PROJET" class="form-group projet[ (#ID_PROJET|info_sites_lister_logiciels_projet{'oui'}|implode{' '})][(#ID_PROJET|in_array{[(#REM|info_sites_lister_projets_auteurs)]}|oui)auteur_session][(#ID_PROJET|in_array{[(#ID_AUTEUR|info_sites_lister_projets_auteurs)]}|oui)auteurs_projets][ (#GET{organisations,#LISTE{sans_organisation}}|join{' '})]">
+					<div class="control-label">[<strong>(#NOM)</strong>][ <em>\((#VAL{'projet:texte_statut_'}|concat{#STATUT**}|_T)\)</em>]</div>
+					<B_roles>
+						<div class="btn-group" data-toggle="buttons">
+							<BOUCLE_roles (DATA) {source table, #REM|info_sites_lister_roles_auteurs}>
+								<label class="btn btn-info[(#CLE|in_array{#GET{projets_roles,#ARRAY}}|oui)active]">
+									<input type="checkbox" autocomplete="off" name="projets[#_projets:ID_PROJET][]" value="#CLE"[(#CLE|in_array{#GET{projets_roles,#ARRAY}}|oui)checked]> [(#VALEUR|_T)]
+								</label>
+							</BOUCLE_roles>
+						</div>
+					</B_roles>
+				</div>
+			</BOUCLE_projets>
+		<div class="form-group text-right">
+			<input type="submit" class="btn btn-default" value="<:bouton_enregistrer:>" />
+		</div>
+	</form>
+	</BOUCLE_editable>
+</div>
+
+<script type='text/javascript'>
+	function show_block(element, group, filtre) {
+		if (filtre == null) {
+			$('.formulaire_#FORM form .form-group.projet').show();
+		} else {
+			$('.formulaire_#FORM form .form-group.projet').hide();
+			$('.formulaire_#FORM form .form-group.projet' + filtre).show();
+			//$('#filtres ' + group + ' button').removeClass('active');
+			$('#filtres button').removeClass('active');
+			element.addClass('active');
+		}
+	}
+	function definir_role(element, group, filtre) {
+		console.log(filtre);
+
+		$('.formulaire_#FORM form .form-group.projet').each(function(){
+			if ($(this).is(':visible')) {
+				$(this).find('input[type="checkbox"]').each(function(){
+					var role_value = $(this).val();
+					var role_label = $(this).parent('label');
+					if (filtre == null) {
+						if (role_label.hasClass('active')) {
+							role_label.removeClass('active');
+						} else {
+							role_label.addClass('active');
+						}
+					} else if(role_value == filtre) {
+						role_label.addClass('active');
+						$(this).attr('checked', 'checked');
+					}
+				});
+			}
+		});
+
+	}
+</script>

@@ -1,0 +1,85 @@
+[(#SET{redirect,#URL_PAGE{#ENV{page}}|parametre_url{controle,#ENV{controle}}})]
+[(#SET{nom_projets, [(#VAL{nom}|info_sites_lister_projets)]})]
+[(#SET{url_site_projets, [(#VAL{url_site}|info_sites_lister_projets)]})]
+[(#SET{nom_organisations, [(#VAL{nom}|info_sites_lister_organisations)]})]
+<div class="liste-objets projets table-responsive">
+	<table class="spip liste table table-striped table-bordered" id="projets_dashboard_projets_references">
+		<thead>
+			<tr class="first_row">
+				<th class="nom" scope="col"><:projets_reference:champ_nom_label:></th>
+				<th class="url_site" scope="col"><:projets_reference:champ_url_site_label:></th>
+				<th class="organisation" scope="col"><:projets_reference:champ_organisation_label:></th>
+				<th class="action" scope="col"><:projets_reference:colonne_actions:></th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr class="first_row">
+				<th class="nom" scope="col"><:projets_reference:champ_nom_label:></th>
+				<th class="url_site" scope="col"><:projets_reference:champ_url_site_label:></th>
+				<th class="organisation" scope="col"><:projets_reference:champ_organisation_label:></th>
+				<th class="action" scope="col"><:projets_reference:colonne_actions:></th>
+			</tr>
+		</tfoot>
+		<tbody>
+		<BOUCLE_projets_references (PROJETS_REFERENCES) {par nom}>
+			<tr id="projets_reference_[(#ID_PROJETS_REFERENCE)]">
+				<td class="nom" scope="col"><a href="[(#URL_PROJETS_REFERENCE)]">[(#NOM)]</a> [(#NOM|in_array{#GET{nom_projets}}|?{<span class="text-success"><i class="fa fa-check-circle"> </i></span>,<span class="text-danger"><i class="fa fa-times-circle"> </i></span>})]</td>
+				<td class="url_site" scope="col"><a href="[(#URL_SITE)]">[(#URL_SITE)]</a> [(#URL_SITE|in_array{#GET{url_site_projets}}|?{<span class="text-success"><i class="fa fa-check-circle"> </i></span>,<span class="text-danger"><i class="fa fa-times-circle"> </i></span>})]</td>
+				<td class="organisation" scope="col">[(#ORGANISATION)] [(#ORGANISATION|in_array{#GET{nom_organisations}}|?{<span class="text-success"><i class="fa fa-check-circle"> </i></span>,<span class="text-danger"><i class="fa fa-times-circle"> </i></span>})]</td>
+				<td class="action" scope="col">
+					<div class="btn-group">
+						<a href="[(#GET{redirect}|parametre_url{id_projets_reference,#ID_PROJETS_REFERENCE})]" class="btn btn-default btn-sm" data-toggle="tooltip" title="<:projets_reference:icone_modifier_projets_reference:>"><i class="fa fa-1x fa-pencil-square"></i> </a>[(#AUTORISER{supprimer,projets_reference,#ID_PROJETS_REFERENCE}|oui)
+						<a href="[(#URL_ACTION_AUTEUR{supprimer_projets_reference,#ID_PROJETS_REFERENCE}|parametre_url{redirect,#GET{redirect}})]" class="btn btn-default btn-sm" data-toggle="tooltip" title="<:projets_reference:supprimer_projets_reference:>" onclick="return confirm('<:projets_reference:confirmer_supprimer_projets_reference:>')"><i class="fa fa-1x fa-trash"></i> </a>]
+						<BOUCLE_projets (PROJETS) {tout} {url_site}>[(#AUTORISER{voir,projet,#ID_PROJET}|oui)<a href="[(#URL_PROJET)]" class="btn btn-default btn-sm" data-toggle="tooltip" title="<:projet:icone_voir_projet:>"><i class="fa fa-1x fa-eye"></i> </a>]</BOUCLE_projets>
+						</B_projets>[(#AUTORISER{creer,projet}|oui)
+						<a href="[(#URL_ACTION_AUTEUR{creer_fiche_projet,#ID_PROJETS_REFERENCE}|parametre_url{redirect,#GET{redirect}})]" class="btn btn-default btn-sm" data-toggle="tooltip" title="<:projet:icone_creer_projet:>"><i class="fa fa-1x fa-plus-square"></i> </a>] <//B_projets>
+					</div>
+				</td>
+			</tr>
+		</BOUCLE_projets_references>
+		</tbody>
+	</table>
+</div>
+[(#CHEMIN{inclure/datable_script.html}|oui)
+[(#INCLURE{fond=inclure/datable_script,selector=projets_dashboard_projets_references,env})]
+]
+
+
+[(#ID_PROJETS_REFERENCE|oui)
+	[(#AUTORISER{modifier,projets_reference,#ID_PROJETS_REFERENCE}|oui)
+<div class="panel panel-info"><a href="[(#GET{redirect})]" class="btn btn-default pull-right"><:bouton_annuler:></a>
+	<div class="panel-heading">
+		<div class="panel-title">
+			<:projets_reference:icone_modifier_projets_reference:>
+		</div>
+	</div>
+	<div class="panel-body">
+		<div class="nettoyeur"></div>
+		[(#FORMULAIRE_EDITER_PROJETS_REFERENCE{#ENV{id_projets_reference,oui}, #GET{redirect}, #ENV{associer_objet}})]
+		<div class="nettoyeur"></div>
+	</div>
+</div>
+	]
+]
+[(#ID_PROJETS_REFERENCE|non)
+	[(#AUTORISER{creer,projets_reference}|oui)
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<div class="panel-title">
+				<:projets_reference:icone_creer_projets_reference:>
+			</div>
+		</div>
+		<div class="panel-body">
+			<div class="nettoyeur"></div>
+			[(#FORMULAIRE_EDITER_PROJETS_REFERENCE{#ENV{id_projets_reference,oui}, #GET{redirect}, #ENV{associer_objet}})]
+			<div class="nettoyeur"></div>
+		</div>
+	</div>
+	]
+]
+
+<script>
+	$(document).ready(function(){
+		$('[data-toggle="tooltip"]').tooltip();
+	});
+</script>

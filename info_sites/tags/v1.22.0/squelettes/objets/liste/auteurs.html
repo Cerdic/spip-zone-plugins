@@ -1,0 +1,52 @@
+[(#SET{defaut_tri,#ARRAY{
+statut,1,
+multi nom,1,
+site,1,
+compteur_articles,-1,
+points,-1
+}})
+][(#SET{statut_color,#ARRAY{0minirezo,text-success,1comite,text-primary,6forum,text-muted,5poubelle,text-muted}})][(#SET{statut_fa,#ARRAY{0minirezo,fa-user,1comite,fa-user,6forum,fa-user,5poubelle,fa-ban}})]<B_liste_aut>
+	#SET{afficher_lettres,#TRI|=={'multi nom'}|oui}
+	#SET{debut,#ENV{debutaut,#EVAL{_request("debutaut");}}}
+	#ANCRE_PAGINATION
+	<div class="liste-objets auteurs">
+		<table class='spip liste table table-striped table-bordered'>
+			[<caption id="liste_objets_auteurs[_(#REM|uniqid)]" class="legend"><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_sites:info_1_auteur,info_sites:info_nb_auteurs}})</strong></caption>]
+			<thead>
+			<tr class='first_row'>
+				<th class='statut' scope='col'>[(#TRI{statut,<i class="fa fa-user"></i>,ajax})]</th>
+				<th class='messagerie' scope='col'></th>
+				<th class='nom' scope='col'>[(#TRI{multi nom,<:info_nom:>,ajax})]</th>
+				<th class='email' scope='col'>[(#TRI{email,<:email:>,ajax})]</th>
+			</tr>
+			</thead>
+			<tbody>
+			<BOUCLE_liste_aut (AUTEURS) {tout} {id_auteur?} {id_mot?} {where?} {statut?} {recherche?} {tri #ENV{par,multi nom},#GET{defaut_tri}} {pagination #ENV{nb,10} aut}>
+			[(#LANG|changer_typo)]
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|initiale|=={#ENV{i}}|et{#ENV{i}}|?{on}|unique)]">
+				<td class='statut'><span class="#GET{statut_color/#STATUT}" title="[(#WEBMESTRE|=={oui}|?{<:statut_webmestre:>,[(#VAL{auteurs}|statut_titre{[(#STATUT)]})]})]"><i class="fa fa-lg [(#WEBMESTRE|=={oui}|?{fa-user-md,#GET{statut_fa/#STATUT}})]"></i> </span> </td>
+				<td class="messagerie">[<a href="(#URL_AUTEUR)#formulaire_ecrire_auteur_[(#ID_AUTEUR)]">[(#CHEMIN{images/m_envoi.gif}|balise_img{<:info_envoyer_message_prive:>})]</a>]</td>
+				<td class='nom[ (#NOM|non)vide]'>[(#LOGO_AUTEUR|image_reduire{20,26})]<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#RANG). ][(#NOM|trim|sinon{#BIO*|couper{80}|trim}|sinon{<:info_numero_abbreviation:>#ID_AUTEUR})]</a></td>
+				<td class='email'>[<a href='mailto:(#EMAIL)'>[(#EMAIL)]</a>]</td>
+			</tr>
+			</BOUCLE_liste_aut>
+			[(#REM|changer_typo)]
+			</tbody>
+		</table>
+		[(#REM|test_espace_prive|?{
+			[<div class="pagination">(#PAGINATION{prive})</div>],
+			[<div class="block_pagination">(#PAGINATION{page_precedent_suivant})</div>]
+		})]
+	</div>
+	<div class="legendes">
+		<B_statut>
+			<ul class="list-inline">
+				<li class="list-item"><span class="#GET{statut_color/0minirezo}"><i class="fa fa-user-md"></i></span> <small><:statut_webmestre:></small></li>
+			<BOUCLE_statut (DATA) {source table, #GET{statut_color}}>
+				<li class="list-item"><span class="#GET{statut_color/#CLE}"><i class="fa #GET{statut_fa/#CLE}"></i></span> <small>[(#WEBMESTRE|=={oui}|?{<:statut_webmestre:>,[(#VAL{auteurs}|statut_titre{[(#CLE)]})]})]</small></li></BOUCLE_statut>
+			</ul>
+		</B_statut>
+	</div>
+</B_liste_aut>[
+<div class="liste-objets auteurs caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_aut>

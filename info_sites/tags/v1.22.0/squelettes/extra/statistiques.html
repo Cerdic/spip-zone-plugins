@@ -1,0 +1,82 @@
+<!-- extra -->
+[(#REM)
+il faudrait faire ici un évantail de tout ce qui est enregistré en BDD.
+]
+<div id="extra">
+
+[(#SET{exclus,#LISTE{spip_mots,spip_groupes_mots,spip_messages,spip_petitions,spip_signatures,spip_syndic,spip_syndic_articles,spip_depots,spip_plugins,spip_paquets,spip_pays,spip_adresses,spip_numeros,spip_emails,spip_breves,spip_annuaires}})]
+<B_tables>
+	<div class="liste enregistrements statistique">
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>Nom</th>
+					<th><:info_sites:label_total:></th>
+				</tr>
+			</thead>
+			<tbody>
+			<BOUCLE_tables (DATA) {source table, #REM|lister_tables_objets_sql|array_keys|array_diff{#GET{exclus}}} {par valeur}>
+				<tr class="#VALEUR">
+					<td>[(#VALEUR|=={spip_auteurs}|?{<:info_sites:info_auteurs:>,[(#VALEUR|objet_type|objet_info{texte_objets}|_T)]})]</td>
+					<td>[(#VALEUR|nb_elements)]</td>
+				</tr>
+			</BOUCLE_tables>
+			</tbody>
+		</table>
+	</div>
+</B_tables>
+	<h3>
+		<:projets_site:titre_projets_sites:>
+	</h3>
+
+	<B_types_sites>
+		<div class="liste projets_sites statistique">
+			<table class="table table-striped table-bordered">
+				<thead>
+				<tr>
+					<th><:projets_site:type_site_label:></th>
+					<th><:info_sites:label_valeur:></th>
+				</tr>
+
+				</thead>
+				<tbody>
+				<BOUCLE_types_sites (DATA) {source table, #VAL{'objet'}|sp_lister_type_sites}>
+				<tr>
+					<td>[(#VALEUR)]</td>
+					<td>[(#VAL{#CLE}|nb_projets_sites_types)]</td>
+				</tr>
+				</BOUCLE_types_sites>
+				<tr>
+					<td><:info_sites:label_total:></td>
+					<td>[(#REM|nb_projets_sites)]</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</B_types_sites>
+
+	<B_logiciels>
+		<div class="liste projets_sites logiciel">
+			<table class="table table-striped table-bordered">
+				<thead>
+				<tr>
+					<th><:projets_site:logiciel_nom_label:></th>
+					<th><:info_sites:stats_nb_logiciel_version:></th>
+					<th><:info_sites:label_total:></th>
+				</tr>
+				</thead>
+				<tbody>
+				<BOUCLE_logiciels (PROJETS_SITES) {fusion logiciel_nom}>
+					<tr>
+						<td>[(#LOGICIEL_NOM|sinon{-})]</td>
+						<td><BOUCLE_logiciel_version (PROJETS_SITES) {fusion logiciel_version} {logiciel_nom=#LOGICIEL_NOM}></BOUCLE_logiciel_version>
+							[(#TOTAL_BOUCLE)]<//B_logiciel_version></td>
+						<td>[(#VAL{spip_projets_sites}|sql_countsel{logiciel_nom="#LOGICIEL_NOM"})]</td>
+					</tr>
+				</BOUCLE_logiciels>
+				</tbody>
+			</table>
+		</div>
+	</B_logiciels>
+
+</div>

@@ -1,0 +1,13 @@
+<BOUCLE_extra (AUTEURS) {id_auteur} {tout}>
+	<BOUCLE_autoriser_modifier (CONDITION) {si #AUTORISER{infositesassocier, auteur, #ID_AUTEUR}|oui}>
+		<div class="block boutons">
+			<div class="list-group menu" role="menu">
+				[(#AUTORISER{infositesmodifier, auteur, #ID_AUTEUR}|oui)
+				<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{auteur_edit,id_auteur=#ID_AUTEUR}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="list-group-item bouton modifier" rel="nofollow"><span class="fa-stack text-primary"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-pencil-square-o fa-stack-1x fa-inverse"></i></span> <:info_sites:icone_modifier_auteur:></a>][
+				(#AUTORISER{infositesassocier, auteurs}|oui)
+				<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{auteur_projets}|parametre_url{id_auteur,#ID_AUTEUR})]" class="list-group-item bouton auteur_projets_attribuer" rel="nofollow"><span class="fa-stack text-muted"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-link fa-stack-1x fa-inverse"></i></span> <:info_sites:auteur_projets_attribuer:></a>]
+			</div>
+		</div>
+	</BOUCLE_autoriser_modifier>
+
+</BOUCLE_extra>

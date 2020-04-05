@@ -1,0 +1,83 @@
+<BOUCLE_projet (PROJETS) {id_projet} {tout}>
+[(#AUTORISER{infositesvoir,projet,#ID_PROJET}|sinon_interdire_acces{'',401,<:info_sites:zone_restreinte:>})]
+[(#BOITE_OUVRIR{[
+	<h1 class="titre">[(#RANG). ](#NOM|sinon{<:info_sans_titre:>})</h1>
+],simple fiche_objet})]
+
+[(#LOGO_PROJET|image_reduire{150,0}|vider_attribut{style}|vider_attribut{width}|vider_attribut{height}|inserer_attribut{'class','img-responsive'})
+<div class="clearfix"></div>]
+
+<div id="wysiwyg">
+	<div class="champ contenu_statut[ (#STATUT*|strlen|?{'',vide})]">
+		<div class="label visible"><:projet:label_statut:>&nbsp;: </div>
+		<div dir='#LANG_DIR' class='span statut'>[(#CHEMIN{prive/themes/spip/images/[(#VAL{projet}|objet_info{statut_images}|table_valeur{#STATUT**})]}|balise_img{[(#VAL{'projet:texte_statut_'}|concat{#STATUT**}|_T)]}) ][(#VAL{'projet:texte_statut_'}|concat{#STATUT**}|_T)]</div>
+	</div>
+
+	[<div class="champ contenu_date_publication[ (#DATE_PUBLICATION*|strlen|?{'',vide})]">
+		<div class="label visible"><:projet:label_date_publication:>&nbsp;: </div>
+		<div dir='#LANG_DIR' class='span #EDIT{date_publication} date_publication'>(#DATE_PUBLICATION|affdate)</div>
+	</div>]
+
+	<INCLURE{fond=prive/objets/contenu/projet,id=#ID_PROJET,id_projet=#ID_PROJET,ajax=wysiwyg} />
+[(#PLUGIN{RSS_COMMITS}|oui)
+	[<div class="champ contenu_versioning_path[ (#VERSIONING_PATH*|strlen|?{'',vide hidden})]">
+		<div class="label visible"><:commit:champ_versioning_path_label:>&nbsp;: </div>
+		<div dir='#LANG_DIR' class='span #EDIT{versioning_path} versioning_path'><a href="#VERSIONING_PATH">(#VERSIONING_PATH)</a></div>
+	</div>]
+
+	[<div class="champ contenu_versioning_trac[ (#VERSIONING_TRAC*|strlen|?{'',vide hidden})]">
+		<div class="label visible"><:commit:champ_versioning_trac_label:>&nbsp;: </div>
+		<div dir='#LANG_DIR' class='span #EDIT{versioning_trac} versioning_trac'><a href="#VERSIONING_TRAC">(#VERSIONING_TRAC)</a></div>
+	</div>]
+
+	[<div class="champ contenu_versioning_type[ (#VERSIONING_TYPE*|strlen|?{'',vide hidden})]">
+		<div class="label visible"><:commit:champ_versioning_type_label:>&nbsp;: </div>
+		<div dir='#LANG_DIR' class='span #EDIT{versioning_type} versioning_type'>(#VERSIONING_TYPE)</div>
+	</div>]
+
+	[<div class="champ contenu_versioning_rss[ (#VERSIONING_RSS*|strlen|?{'',vide hidden})]">
+		<div class="label visible"><:commit:champ_versioning_rss_label:>&nbsp;: </div>
+		<div dir='#LANG_DIR' class='span #EDIT{versioning_rss} versioning_rss'><a href="#VERSIONING_RSS">(#VERSIONING_RSS)</a></div>
+	</div>]
+]
+
+	[<div class="champ contenu_identifiant[ (#IDENTIFIANT*|strlen|?{'',vide hidden})]">
+		<div class="label visible"><:info_sites:champ_identifiant_label:>&nbsp;: </div>
+		<div dir='#LANG_DIR' class='span #EDIT{identifiant} identifiant'>(#IDENTIFIANT)</div>
+	</div>]
+
+	[<div class="champ contenu_url_bug_tracker[ (#URL_BUG_TRACKER*|strlen|?{'',vide hidden})]">
+		<div class="label visible"><:info_sites:champ_url_bug_tracker_label:>&nbsp;: </div>
+		<div dir='#LANG_DIR' class='span #EDIT{url_bug_tracker} url_bug_tracker'><a href="#URL_BUG_TRACKER">(#URL_BUG_TRACKER)</a></div>
+	</div>]
+
+	[<div class="champ contenu_url_ged[ (#URL_GED*|strlen|?{'',vide hidden})]">
+		<div class="label visible"><:info_sites:champ_url_ged_label:>&nbsp;: </div>
+		<div dir='#LANG_DIR' class='span #EDIT{url_ged} url_ged'><a href="#URL_GED">(#URL_GED)</a></div>
+	</div>]
+
+</div>
+<div class="clearfix"></div>
+
+<INCLURE{fond=objets/liste/projets,
+	id_projet_parent=#ID_PROJET,
+	titre=<:projet:info_tous_les_sous_projets:>,
+	env,ajax}>
+[(#INCLURE{fond=objets/liste/projets, id_projet_parent=#ID_PROJET}|strlen|>{0}|oui)<div class="clearfix"></div>]
+
+	<div class="afficher_complement_objet">
+	#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,projet,id,#ID_PROJET},data,'<div class="nettoyeur"></div>'}}
+	</div>
+	<div class="afficher_fiche_objet">
+	[(#SET{exec,#ARRAY{exec,projet}})]
+	[(#SET{contexte,#GET{exec}|array_merge{#ENV**|unserialize}})]
+	#PIPELINE{afficher_fiche_objet,#ARRAY{args,#ARRAY{type,projet,id,#ID_PROJET,contexte,#GET{contexte}},data,'<div class="nettoyeur"></div>'}}
+	</div>
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{type-page}','#navigation,#chemin');/*\]\]>*/</script>
+]
+</BOUCLE_projet>
+[(#ENV**{type-page}|=={projet_edit}|?{#INCLURE{fond=prive/squelettes/contenu/projet_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_projet>
