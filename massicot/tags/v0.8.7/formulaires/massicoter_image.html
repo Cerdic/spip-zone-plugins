@@ -1,0 +1,51 @@
+<form method="post" id="formulaire_massicoter_image" action="#ENV{action}" enctype="multipart/form-data">
+  <div>
+    [(#REM) declarer les hidden qui declencheront le service du
+            formulaire parametre : url d'action ]
+    #ACTION_FORMULAIRE{#ENV{action}}
+
+	<div class="zoom_wrap">
+      <label><:massicot:zoom:></label>
+      <div id="zoom-slider"></div>
+	</div>
+
+	<div class="wrap_dimensions">
+      <span class="label_dimensions"><:massicot:label_dimensions:></span>
+      <span class="dimensions"></span>
+	</div>
+
+    <ul>
+      #GENERER_SAISIES{#ENV{_saisies}}
+    </ul>
+
+    [(#REM) ajouter les saisies supplementaires : extra et autre, a
+            cet endroit ]
+    <!--extra-->
+
+    <p class="boutons">
+      <span class="image_loading"></span>
+      <a href="#" class="bouton_reset"><:massicot:reinitialiser:></a>
+      <input type="submit" class="submit" name="annuler" value="<:massicot:label_annuler:>" />
+      <input type="submit" class="submit" value="[(#ENV{saisies_texte_submit}|sinon{<:massicot:massicoter:>})]" />
+    </p>
+
+  </div>
+</form>
+
+
+<div class="image-massicot">
+  [(#ENV{objet}|massicot_chemin_image{#ENV{id_objet}, #ENV{role}}|balise_img{'', 'no-adapt-img'})]
+</div>
+
+
+<script type="text/javascript">
+ $(function () {
+   window.massicot = $('#formulaire_massicoter_image').formulaireMassicoterImage({
+     zoom: #ENV{zoom,1},
+     messages: {
+       'erreur_image_trop_petite': "<:massicot:erreur_image_trop_petite:>"
+     }[,
+	   forcer_dimensions: (#ENV{forcer_dimensions}|json_encode)]
+   });
+ });
+</script>

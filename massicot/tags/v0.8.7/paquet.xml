@@ -1,0 +1,40 @@
+<paquet
+	prefix="massicot"
+	categorie="multimedia"
+	version="0.8.7"
+	etat="stable"
+	compatibilite="[3.0.17;3.2.*]"
+	logo="prive/themes/spip/images/massicot-48.png"
+	documentation="https://contrib.spip.net/Massicot"
+	schema="1.1.0"
+>
+	<!-- crédit icône : http://ic8.link/1047 -->
+
+	<nom>Massicot</nom>
+
+	<auteur lien='http://vertige.org'>Michel @ Vertige ASBL</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<traduire module="massicot" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="declarer_tables_interfaces"  inclure="base/massicot.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/massicot.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/massicot.php" />
+
+	<pipeline nom="jquery_plugins"   inclure="massicot_pipelines.php" />
+	<pipeline nom="jqueryui_plugins" inclure="massicot_pipelines.php" />
+	<pipeline nom="header_prive"     inclure="massicot_pipelines.php" />
+	<pipeline nom="document_desc_actions" inclure="massicot_pipelines.php" />
+	<pipeline nom="post_edition" inclure="massicot_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="massicot_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="massicot_pipelines.php" />
+	<pipeline nom="editer_contenu_objet" inclure="massicot_pipelines.php" />
+
+	<!-- <lib nom="jquery.imgareaselect.js" lien="https://github.com/odyniec/imgareaselect/archive/master.zip" /> -->
+
+	<necessite nom="medias" compatibilite="[2.7.59;[" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
+
+	<utilise nom="roles_documents" compatibilite="[1.1.8;[" />
+</paquet>

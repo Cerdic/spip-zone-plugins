@@ -1,0 +1,630 @@
+<?php
+/**
+ * Fonctions utiles au plugin Massicot
+ *
+ * @plugin	   Massicot
+ * @copyright  2015
+ * @author	   Michel @ Vertige ASBL
+ * @licence	   GNU/GPL
+ * @package	   SPIP\Massicot\Fonctions
+ */
+
+/**
+ * Retrouver le chemin d'une image donnée par un couple objet, id_objet
+ *
+ * Si le type d'objet est un document, on retourne le chemin du
+ * fichier, sinon on cherche un éventuel logo pour l'objet
+ *
+ * @param string $objet : Le type d'objet
+ * @param integer $id_objet : L'identifiant de l'objet
+ *
+ * @return string : le chemin vers l'image, un string vide sinon
+ */
+function massicot_chemin_image($objet, $id_objet, $role = null) {
+
+	include_spip('base/abstract_sql');
+	include_spip('base/objets');
+
+	if (objet_type($objet) === 'document') {
+		$fichier = sql_getfetsel(
+			'fichier',
+			'spip_documents',
+			'id_document='.intval($id_objet)
+		);
+		return $fichier ?
+			find_in_path(_NOM_PERMANENTS_ACCESSIBLES . $fichier) : '';
+	} else {
+		if ($role === 'logo_survol') {
+			$type_logo = 'off';
+		} elseif ((! $role) or ($role === 'logo')) {
+			$type_logo = 'on';
+		} else {
+			$type_logo = $role;
+		}
+
+		$chercher_logo = charger_fonction('chercher_logo', 'inc');
+		$logo = $chercher_logo($id_objet, id_table_objet($objet), $type_logo);
+		if (is_array($logo)) {
+			return array_shift($logo);
+		}
+	}
+}
+
+/**
+ * Enregistre un massicotage dans la base de données
+ *
+ * @param string $objet : le type d'objet
+ * @param integer $id_objet : l'identifiant de l'objet
+ * @param array parametres : Un tableau de parametres pour le
+ *							 massicotage, doit contenir les clés
+ *							 'zoom', 'x1', 'x2', 'y1', et 'y2'
+ *
+ * @return mixed   Rien si tout s'est bien passé, un message d'erreur
+ *				   sinon
+ */
+function massicot_enregistrer($objet, $id_objet, $parametres) {
+
+	include_spip('action/editer_objet');
+	include_spip('action/editer_liens');
+
+	/* Tester l'existence des parametres nécessaires */
+	if (! isset($parametres['zoom'])) {
+		return _T('massicot:erreur_parametre_manquant', array('parametre' => 'zoom'));
+	} elseif (! isset($parametres['x1'])) {
+		return _T('massicot:erreur_parametre_manquant', array('parametre' => 'x1'));
+	} elseif (! isset($parametres['x2'])) {
+		return _T('massicot:erreur_parametre_manquant', array('parametre' => 'x2'));
+	} elseif (! isset($parametres['y1'])) {
+		return _T('massicot:erreur_parametre_manquant', array('parametre' => 'y1'));
+	} elseif (! isset($parametres['y2'])) {
+		return _T('massicot:erreur_parametre_manquant', array('parametre' => 'y2'));
+	}
+
+	/* le rôle est traité à part */
+	if (isset($parametres['role'])) {
+		$role = $parametres['role'];
+		unset($parametres['role']);
+	} else {
+		$role = '';
+	}
+
+	$chemin_image = massicot_chemin_image($objet, $id_objet);
+	list($width, $height) = getimagesize($chemin_image);
+
+	$id_massicotage = sql_getfetsel(
+		'id_massicotage',
+		'spip_massicotages_liens',
+		array(
+			'objet='.sql_quote($objet),
+			'id_objet='.intval($id_objet),
+			'role='.sql_quote($role),
+		)
+	);
+
+	if (! $id_massicotage) {
+		$id_massicotage = objet_inserer('massicotage');
+		objet_associer(
+			array('massicotage' => $id_massicotage),
+			array($objet => $id_objet),
+			array('role' => $role)
+		);
+
+		/* Le logo du site est un cas spécial. SPIP le traite comme le « site »
+		 * avec l'id 0, alors on fait pareil. */
+		if ($id_objet == 0) { // peut être le string '0'
+			sql_insertq(
+				'spip_massicotages_liens',
+				array(
+					'id_massicotage' => $id_massicotage,
+					'id_objet' => 0,
+					'objet' => 'site',
+					'role' => $role,
+				)
+			);
+		}
+	}
+
+	if ($err = objet_modifier(
+		'massicotage',
+		$id_massicotage,
+		array('traitements' => serialize($parametres))
+	)) {
+		return $err;
+	}
+}
+
+/**
+ * Supprimer le massicotage
+ *
+ * @param string $objet : le type d'objet
+ * @param integer $id_objet : l'identifiant de l'objet
+ * @param string $role : le rôle
+ *
+ * @return null|string : Rien, ou un message d'erreur
+ */
+function massicot_supprimer($objet, $id_objet, $role='') {
+
+	include_spip('base/abstract_sql');
+
+	$id_massicotage = massicot_get_id($objet, $id_objet, $role);
+
+	if (sql_delete(
+		'spip_massicotages',
+		'id_massicotage=' . intval($id_massicotage)
+	) === false) {
+		return "massicot_supprimer : erreur lors de la suppression";
+	}
+
+	if (sql_delete(
+		'spip_massicotages_liens',
+		'id_massicotage=' . intval($id_massicotage)
+	) === false) {
+		return "massicot_supprimer : erreur lors de la suppression";
+	}
+
+}
+
+/**
+ * Retourne l'identifiant du massicotage d'une image
+ *
+ * S'il n'y a pas de massicotage défini pour cet objet, on ne retourne rien.
+ *
+ * @param string $objet : le type d'objet
+ * @param integer $id_objet : l'identifiant de l'objet
+ * @param string $role : le rôle
+ *
+ * @return integer|null : L'identifiant du massicotage, rien sinon
+ */
+function massicot_get_id($objet, $id_objet, $role) {
+
+	include_spip('action/editer_liens');
+
+	$massicotages = objet_trouver_liens(
+		array('massicotage' => '*'),
+		array($objet => $id_objet)
+	);
+
+	foreach ($massicotages as $massicotage) {
+		if ($massicotage['role'] === $role) {
+			return intval($massicotage['id_massicotage']);
+		}
+	}
+}
+
+/**
+ * Retourne les paramètres de massicotage d'une image
+ *
+ * S'il n'y a pas de massicotage défini pour cet objet, on retourne
+ * un tableau vide.
+ *
+ * @param string $objet : le type d'objet
+ * @param integer $id_objet : l'identifiant de l'objet
+ * @param string $role : le rôle
+ *
+ * @return array : Un tableau avec les paramètres de massicotage
+ */
+function massicot_get_parametres($objet, $id_objet, $role = '') {
+
+	include_spip('base/abstract_sql');
+
+	$traitements = sql_getfetsel(
+		'traitements',
+		'spip_massicotages as M '
+		. 'INNER JOIN spip_massicotages_liens as L ON M.id_massicotage=L.id_massicotage',
+		array(
+			'L.objet='.sql_quote($objet),
+			'L.id_objet='.intval($id_objet),
+			'L.role='.sql_quote($role)
+		)
+	);
+
+	if ($traitements) {
+		return unserialize($traitements);
+	} else {
+		return array();
+	}
+}
+
+/**
+ * Trouver l'objet associé à un logo donné par son fichier
+ *
+ * Retourne un tableau avec des clés 'objet' et 'id_objet'
+ *
+ * @param String $fichier : Le fichier de logo
+ *
+ * @return mixed : Un tableau représentant l'objet, rien si on n'a pas
+ *				   réussi à deviner
+ */
+function massicot_trouver_objet_logo($fichier) {
+
+	$fichier = basename($fichier);
+
+	/* on retire l'extension */
+	$fichier = substr($fichier, 0, strpos($fichier, '.'));
+
+	$row = explode('on', $fichier);
+
+	if (is_array($row) and (count($row) === 2)) {
+		return array(
+			'objet' => objet_type(
+				array_search($row[0], $GLOBALS['table_logos'])
+			),
+			'id_objet' => $row[1],
+		);
+	}
+}
+
+/**
+ * Massicoter un fichier image
+ *
+ * La fonction générale qui d'occupe du recadrage des images
+ *
+ * @param string $fichier : Le fichier
+ * @param array $parametres : le tableau des paramètres de massicotage
+ *
+ * @return string : Un fichier massicoté
+ */
+function massicoter_fichier($fichier, $parametres) {
+
+	include_spip('inc/filtres');
+	include_spip('inc/filtres_images_mini');
+	include_spip('filtres/images_transforme');
+
+	$fichier_original = $fichier;
+
+	/* on vire un éventuel query string */
+	$fichier = parse_url($fichier);
+	$fichier = $fichier['path'];
+
+	/* la balise #FICHIER sur les boucles documents donne un chemin
+	   relatif au dossier IMG qu'on ne peut pas retourner tel quel,
+	   sous peine de de casser le portfolio de la dist.
+	   (constaté sur SPIP 3.1 RC1) */
+	if (! file_exists($fichier)) {
+		$fichier = _DIR_IMG . $fichier;
+		// Si on n'a toujours rien, c'est probablement un fichier distant
+		if (! file_exists($fichier)) {
+			return $fichier_original;
+		}
+	}
+
+	/* ne rien faire s'il n'y a pas de massicotage défini */
+	if (! $parametres) {
+		return $fichier;
+	}
+
+	list($width, $height) = getimagesize($fichier);
+
+	if ($parametres['zoom'] <= 1) {
+		$fichier = extraire_attribut(
+			image_reduire(
+				$fichier,
+				$parametres['zoom'] * $width,
+				$parametres['zoom'] * $height
+			),
+			'src'
+		);
+	} else {
+		$fichier = extraire_attribut(
+			image_recadre(
+				$fichier,
+				$parametres['zoom'] * $width,
+				$parametres['zoom'] * $height,
+				center
+			),
+			'src'
+		);
+	}
+
+	/* on vire un éventuel query string */
+	$fichier = parse_url($fichier);
+	$fichier = $fichier['path'];
+
+	list($width, $height) = getimagesize($fichier);
+
+	$fichier = extraire_attribut(
+		image_recadre(
+			$fichier,
+			$width	- $parametres['x1'],
+			$height - $parametres['y1'],
+			'bottom right'
+		),
+		'src'
+	);
+
+	$fichier = extraire_attribut(
+		image_recadre(
+			$fichier,
+			$parametres['x2'] - $parametres['x1'],
+			$parametres['y2'] - $parametres['y1'],
+			'top left'
+		),
+		'src'
+	);
+
+	return $fichier;
+}
+
+/**
+ * Massicoter un document
+ *
+ * À utiliser comme filtre sur les balises #FICHIER ou #URL_DOCUMENT
+ *
+ * @param string $fichier : Le fichier du document
+ *
+ * @return string : Un fichier massicoté
+ */
+function massicoter_document($fichier = false) {
+
+	if (! $fichier) {
+		return;
+	}
+
+	include_spip('base/abstract_sql');
+	include_spip('inc/documents');
+
+	$parametres = sql_getfetsel(
+		'traitements',
+		'spip_massicotages as M' .
+		' INNER JOIN spip_massicotages_liens as L ON L.id_massicotage = M.id_massicotage' .
+		' INNER JOIN spip_documents as D ON (D.id_document = L.id_objet AND L.objet="document")',
+		'D.fichier='.sql_quote(set_spip_doc($fichier))
+	);
+
+	return massicoter_fichier($fichier, unserialize($parametres));
+}
+
+/**
+ * Massicoter un logo donné par son nom de fichier
+ *
+ * Utilisé par formulaires/inc-apercu-logo
+ *
+ * @param string $fichier : Le fichier à massicoter
+ * @param string $objet : Le type d'objet
+ * @param string $id_obejt : L'identifiant de l'objet
+ *
+ * @return string : Un fichier massicoté
+ */
+function massicoter_objet($fichier, $objet, $id_objet, $role = null) {
+
+	return massicoter_fichier($fichier, massicot_get_parametres($objet, $id_objet, $role));
+}
+
+/**
+ * Massicoter un logo document
+ *
+ * Traitement automatique sur les balises #LOGO_DOCUMENT
+ *
+ * @param string $fichier : Le logo
+ *
+ * @return string : Un logo massicoté
+ */
+function massicoter_logo_document($logo, $doc = array()) {
+
+	include_spip('inc/filtres');
+	include_spip('inc/filtres_images_mini');
+	include_spip('base/abstract_sql');
+
+	$id_vignette = sql_getfetsel(
+		'id_vignette',
+		'spip_documents',
+		'id_document='.intval($doc['id_document'])
+	);
+
+	/* S'il y a un id_vignette, on l'utilise */
+	if ($id_vignette) {
+		$doc['id_document'] = $id_vignette;
+		unset($doc['fichier']);
+	}
+
+	/* S'il n'y a pas de fichier dans la pile, on va le chercher dans
+	   la table documents */
+	if (! isset($doc['fichier'])) {
+		$rows = sql_allfetsel(
+			'fichier, extension',
+			'spip_documents',
+			'id_document='.intval($doc['id_document'])
+		);
+
+		$doc['fichier']	  = $rows[0]['fichier'];
+		$doc['extension'] = $rows[0]['extension'];
+	}
+
+	/* Si le document en question n'est pas une image, on ne fait rien */
+	if ((! $logo)
+		or (preg_match('/^(jpe?g|png|gif)$/i', $doc['extension']) === 0)) {
+		return $logo;
+	}
+
+	/* S'il y a un lien sur le logo, on le met de côté pour le
+	   remettre après massicotage */
+	if (preg_match('#(<a.*?>)<img.*$#', $logo) === 1) {
+		$lien = preg_replace('#(<a.*?>)<img.*$#', '$1', $logo);
+	}
+
+	$fichier = extraire_attribut($logo, 'src');
+	/* On se débarasse d'un éventuel query string */
+	$fichier = preg_replace('#\?[0-9]+#', '', $fichier);
+
+	list($largeur_logo, $hauteur_logo) =
+		getimagesize($fichier);
+
+	$balise_img = charger_filtre('balise_img');
+
+	$fichier_massicote = massicoter_document(get_spip_doc($doc['fichier']));
+
+	/* Comme le logo reçu en paramètre peut avoir été réduit grâce aux
+	   paramètres de la balise LOGO_, il faut s'assurer que l'image
+	   qu'on renvoie fait bien la même taille que le logo qu'on a
+	   reçu. */
+	$balise = image_reduire(
+		$balise_img(
+			$fichier_massicote,
+			extraire_attribut($logo, 'alt'),
+			extraire_attribut($logo, 'class')
+		),
+		$largeur_logo,
+		$hauteur_logo
+	);
+
+	if (isset($lien)) {
+		$balise = $lien . $balise . '</a>';
+	}
+
+	return $balise;
+}
+
+/**
+ * Massicoter un logo
+ *
+ * Traitement automatique sur les balises #LOGO_*
+ *
+ * @param string $fichier : Le logo
+ *
+ * @return string : Un logo massicoté
+ */
+function massicoter_logo($logo, $objet_type = null, $id_objet = null, $role = null, $env = null) {
+
+	include_spip('inc/filtres');
+
+	if (! $logo) {
+		return $logo;
+	}
+
+	$src     = extraire_attribut($logo, 'src');
+	$alt     = extraire_attribut($logo, 'alt');
+	$classes = extraire_attribut($logo, 'class');
+	$onmouseover = extraire_attribut($logo, 'onmouseover');
+	$onmouseout  = extraire_attribut($logo, 'onmouseout');
+
+	/* S'il n'y a pas d'id_objet, on essaie de le deviner avec le nom du
+	   fichier, c'est toujours mieux que rien. Sinon on abandonne… */
+	if (is_null($id_objet) or is_null($objet_type)) {
+		$objet = massicot_trouver_objet_logo($src);
+
+		/* Si le plugin roles_documents est activé, l'objet n'est pas forcément
+		 * devinable via le nom de fichier (notamment avec la balise
+		 * LOGO_ARTICLE_RUBRIQUE). Dans ce cas on essaie de bidouiller un truc
+		 * avec l'environnement. */
+		if (test_plugin_actif('roles_documents') and $env) {
+			if (isset($env['id_article'])) {
+				$objet = array(
+					'objet' => 'article',
+					'id_objet' => $env['id_article'],
+				);
+			} elseif (isset($env['id_rubrique'])) {
+				$objet = array(
+					'objet' => 'rubrique',
+					'id_objet' => $env['id_rubrique'],
+				);
+			}
+		}
+
+		if (is_null($objet)) {
+			return $logo;
+		}
+
+		$objet_type = $objet['objet'];
+		$id_objet	= $objet['id_objet'];
+	}
+
+	$parametres = massicot_get_parametres($objet_type, $id_objet, $role);
+
+	$fichier = massicoter_fichier($src, $parametres);
+
+	if ($onmouseout) {
+		$onmouseout = str_replace($src, $fichier, $onmouseout);
+	}
+
+	if ($onmouseover) {
+		$src_off = preg_replace('/^.*[\']([^\']+)[\']/', '$1', $onmouseover);
+		$parametres_off = massicot_get_parametres($objet_type, $id_objet, 'logo_survol');
+		$fichier_off = massicoter_fichier($src_off, $parametres_off);
+		$onmouseover = str_replace($src_off, $fichier_off, $onmouseover);
+	}
+
+	$balise_img = charger_filtre('balise_img');
+
+	$balise = $balise_img($fichier, $alt, $classes);
+	$balise = inserer_attribut($balise, 'onmouseover', $onmouseover);
+	$balise = inserer_attribut($balise, 'onmouseout', $onmouseout);
+
+	return $balise;
+}
+
+/**
+ * Traitement auto sur les balises #LARGEUR
+ *
+ * @param string $largeur : La largeur renvoyée par la balise
+ *
+ * @return string : La largeur de l'image après massicotage
+ */
+function massicoter_largeur($largeur, $doc = array()) {
+
+	if ((! $largeur) or (! isset($doc['id_document']))) {
+		return $largeur;
+	}
+
+	$parametres = massicot_get_parametres('document', $doc['id_document']);
+
+	// Si les paramètre de l'image sont vide, on renvoie la largeur directement
+	if (empty($parametres)) {
+		return $largeur;
+	}
+
+	return (string) round(($parametres['x2'] - $parametres['x1']));
+}
+
+/**
+ * Traitement auto sur les balises #HAUTEUR
+ *
+ * @param string $hauteur : La hauteur renvoyée par la balise
+ *
+ * @return string : La hauteur de l'image après massicotage
+ */
+function massicoter_hauteur($hauteur, $doc = array()) {
+
+	if ((! $hauteur) or (! isset($doc['id_document']))) {
+		return $hauteur;
+	}
+
+	$parametres = massicot_get_parametres('document', $doc['id_document']);
+
+	// Si les paramètre de l'image sont vide, on renvoie la hauteur directement
+	if (empty($parametres)) {
+		return $hauteur;
+	}
+
+	return (string) round(($parametres['y2'] - $parametres['y1']));
+}
+
+/**
+ * Rétro-portage d'une fonction du plugin Médias qui apparaît dans SPIP 3.2 et
+ * qu'on utilise dans le squelettes modeles/document_desc.html
+ */
+if (! function_exists('duree_en_secondes')) {
+	function duree_en_secondes($duree, $precis = false) {
+		$out = '';
+		$heures = $minutes = 0;
+		if ($duree>3600) {
+			$heures = intval(floor($duree/3600));
+			$duree -= $heures * 3600;
+		}
+		if ($duree>60) {
+			$minutes = intval(floor($duree/60));
+			$duree -= $minutes * 60;
+		}
+
+		if ($heures>0 or $minutes>0) {
+			$out = _T('date_fmt_heures_minutes', array('h' => $heures, 'm' => $minutes));
+			if (!$heures) {
+				$out = preg_replace(',^0[^\d]+,Uims', '', $out);
+			}
+		}
+
+		if (!$heures or $precis) {
+			$out .= intval($duree).'s';
+		}
+		return $out;
+	}
+}
