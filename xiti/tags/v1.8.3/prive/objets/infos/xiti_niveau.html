@@ -1,0 +1,14 @@
+<BOUCLE_xiti_niveaux(XITI_NIVEAUX){id_xiti_niveau = #ENV{id}}>
+<div class='infos'>
+	<div class='numero'><:xiti_niveau:titre_xiti_niveau_numero:><p>#ID_XITI_NIVEAU</p></div>
+
+	[(#AUTORISER{supprimer,xiti_niveau,#ID_XITI_NIVEAU}|oui)
+		[(#URL_ACTION_AUTEUR{
+			supprimer_xiti_niveau,
+			#ID_XITI_NIVEAU,
+			#URL_ECRIRE{xiti_niveaux}
+			}|icone_horizontale{<:xiti_niveau:bouton_supprimer_xiti_niveau:>,xiti_niveau-24,del}
+		)]
+	]
+</div>
+</BOUCLE_xiti_niveaux>

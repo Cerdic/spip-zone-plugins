@@ -1,0 +1,48 @@
+#SET{picto,#VAL{xiti_niveau}|objet_icone{16}}
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	id_xiti_niveaux,1,
+	niveau,-1,
+	xtsite,-1,
+	points,-1
+}})]
+<B_xiti_niveaux>
+#ANCRE_PAGINATION
+<div class="liste-objets xiti_niveaux">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{#VAL{xiti_niveau}|objet_info{info_1_objet},#VAL{xiti_niveau}|objet_info{info_nb_objets}}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre principale' scope='col'>[(#TRI{num titre,<:info_titre:>,ajax})]</th>
+			<th class='niveau' scope='col'>[(#TRI{niveau,<:xiti_niveau:th_xiti_niveau:>,ajax})]</th>
+			<th class='xtsite' scope='col'>[(#TRI{xtsite,<:xiti_niveau:entree_xtsite:>,ajax})]</th>
+			<th class='utilisations' scope='col'></th>
+			<th class='id' scope='col'>[(#TRI{id_xiti_niveau,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_xiti_niveaux(XITI_NIVEAUX){xtsite?}{where?}{recherche ?}{pagination #ENV{nb,10}}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='picto'>#GET{picto}</td>
+			<td class='titre principale'><a
+							href="[(#ID_XITI_NIVEAU|generer_url_entite{xiti_niveau})]"
+							title="<:info_numero_abbreviation|attribut_html:> #VALEUR{id}">[(#RANG). ][(#TITRE|sinon{<:info_sans_titre:>})]</a>
+			</td>
+			<td class="niveau">#NIVEAU</td>
+			<td class="xtsite">#XTSITE</td>
+			<td class="utilisations">#SET{utilise,#ID_XITI_NIVEAU|objets_associes_xiti_niveau|implode{', '}}#GET{utilise}</td>
+			<td class='id'>[(#AUTORISER{modifier,xiti_niveau,#ID_XITI_NIVEAU}|?{
+				[<a href="[(#ID_XITI_NIVEAU|generer_url_ecrire_entite_edit{xiti_niveau})]">(#ID_XITI_NIVEAU)</a>],
+				[(#ID_XITI_NIVEAU)]
+			})]</td>
+		</tr>
+	</BOUCLE_xiti_niveaux>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_xiti_niveaux>[
+<div class="liste-objets xiti_niveaux caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_xiti_niveaux>
+#FILTRE{trim}
