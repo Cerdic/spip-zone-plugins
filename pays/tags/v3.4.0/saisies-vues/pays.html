@@ -1,0 +1,7 @@
+<BOUCLE_code(CONDITION){si #ENV{code_pays}|=={oui}}>
+	<BOUCLE_pays_code(PAYS){code IN #ENV*{valeur}|is_array|?{#ENV*{valeur},#LISTE{#ENV*{valeur}}}}{', '}>
+		#NOM</BOUCLE_pays_code>
+</BOUCLE_code>
+	<BOUCLE_pays_id(PAYS){id_pays IN #ENV*{valeur}|is_array|?{#ENV*{valeur},#LISTE{#ENV*{valeur}}}}{', '}>
+		#NOM</BOUCLE_pays_id>
+<//B_code>

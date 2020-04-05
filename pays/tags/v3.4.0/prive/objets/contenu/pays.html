@@ -1,0 +1,81 @@
+[(#REM) les informations ]
+<BOUCLE_info(PAYS){id_pays}>
+	<table class='spip info'>
+		<caption><:pays:label_infos:></caption>
+		<tbody>
+			<tr class="row_odd">
+				<th scope="row"><:pays:label_code:></th>
+				<td>#CODE</td>
+			</tr>
+			<tr class="row_even">
+				<th scope="row"><:pays:label_code_alpha3:></th>
+				<td>#CODE_ALPHA3</td>
+			</tr>
+			<tr class="row_odd">
+				<th scope="row"><:pays:label_code_num:></th>
+				<td>#CODE_NUM</td>
+			</tr>
+		</tbody>
+	</table>
+	[(#REM) <!-- alternative -->
+	<dl class='spip info'>
+		<dt class="row_odd"><:pays:label_code:></dt>
+		<dd class="row_odd">#CODE</dd>
+		<dt class="row_even"><:pays:label_code_alpha3:></dt>
+		<dd class="row_even">#CODE_ALPHA3</dd>
+		<dt class="row_odd"><:pays:label_code_num:></dt>
+		<dd class="row_odd">#CODE_NUM</dd>
+	</dl>
+	]
+	[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	<!--extras-->
+</BOUCLE_info>
+[(#REM) les associations ]
+<B_objets>
+<div class="nettoyeur"></div>
+[(#BOITE_OUVRIR{<:pays:info_pays_utilise_par:>,'liste-objets-lies pays utilisation'})]
+<BOUCLE_objets(pays_liens){id_pays}{fusion objet}{par objet}>
+	<B_liens>
+	[(#ANCRE_PAGINATION{#OBJET})]
+	[<p class='pagination'>(#PAGINATION{#OBJET})</p>]
+	<table class='spip liste ajax'>
+		<caption class="caption">[(#OBJET|objet_icone{16}) ][(#GRAND_TOTAL|objet_afficher_nb{#OBJET})]</caption>
+		<thead>
+			<tr class="first_row">
+				<th class="numero" scope="col"><:info_numero_abbreviation:></th>
+				<th class="titre" scope="col"><:info_titre:></th>
+				<th class="action" scope="col"> </th>
+			</tr>
+		</thead>
+		<tbody>
+			<BOUCLE_liens(pays_liens){objet}{fusion id_objet}{par id_objet}{pagination}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<td class="numero">
+					<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]" title="#OBJET <:info_numero_abbreviation:>#ID_OBJET">
+					#ID_OBJET
+					</a>
+				</td>
+				<td class="titre">
+					<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]" title="#OBJET <:info_numero_abbreviation:>#ID_OBJET">
+					[(#INFO_TITRE{#OBJET,#ID_OBJET})]
+					</a>
+				</td>
+				<td class="action">
+				[(#AUTORISER{associerpays,#ID_EMAIL}|oui)
+					[(#BOUTON_ACTION{
+						[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img)],
+						#URL_ACTION_AUTEUR{dissocier_email,#ID_EMAIL/#OBJET/#ID_OBJET,#SELF},
+						'button link delete ajax','',
+						<:pays:retirer_lien_objet:>}
+					)]
+				]
+				</td>
+			</tr>
+	</BOUCLE_liens>
+		</tbody>
+	</table>
+	[<p class='pagination'>(#PAGINATION{#OBJET})</p>]
+	</B_liens>
+</BOUCLE_objets>
+#BOITE_FERMER
+</B_objets>

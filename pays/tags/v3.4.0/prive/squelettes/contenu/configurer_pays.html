@@ -1,0 +1,9 @@
+[(#AUTORISER{configurer,_pays}|sinon_interdire_acces)]
+
+<h1 class="grostitre"><:pays:titre_page_configurer_pays:></h1>
+
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_PAYS
+</div>
+
+<INCLURE{fond=prive/objets/liste/pays, par=nom, env, ajax, sinon=<:pays:info_aucun_pays:>}>
