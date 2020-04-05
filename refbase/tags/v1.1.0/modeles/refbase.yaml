@@ -1,0 +1,185 @@
+nom: '<:refbase:biblio_refbase:>'
+logo: 'img_pack/refbase-24.png'
+icone_barre: 'refbase.png'
+parametres:
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'modele'
+      defaut: 'refbase'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'voir'
+      label: '<:refbase:label_voir:>'
+      option_intro: '<:refbase:item_selection:>'
+      datas:
+        tout: '<:refbase:item_tout:>'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'criteres_selection'
+      label: '<:refbase:label_criteres_selection:>'
+      afficher_si: '@voir@ == ""'
+    saisies:
+      -
+        saisie: 'input'
+        options:
+          nom: 'auteur'
+          label: '<:refbase:label_auteur:>'
+          explication: '<:refbase:explication_auteur:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'institution'
+          label: '<:refbase:label_institution:>'
+          explication: '<:refbase:explication_institution:>'
+      -
+        saisie: 'selection'
+        options:
+          nom: 'type'
+          label: '<:refbase:label_type:>'
+          option_intro: '<:refbase:item_tous_types:>'
+          cacher_option_intro: ''
+          datas:
+            'Book Whole': '<:refbase:item_book_whole:>'
+            'Book Chapter': '<:refbase:item_book_chapter:>'
+            'Journal Article': '<:refbase:item_journal_article:>'
+            'Conference Article': '<:refbase:item_conference_article:>'
+            'Magazine Article': '<:refbase:item_magazine_article:>'
+            'Newspaper Article': '<:refbase:item_newspaper_article:>'
+            'Report': '<:refbase:item_report:>'
+            'Thesis': '<:refbase:item_thesis:>'
+            'Manual': '<:refbase:item_manual:>'
+            'Software': '<:refbase:item_software:>'
+            'Abstract': '<:refbase:item_abstract:>'
+            'Manuscript': '<:refbase:item_manuscript:>'
+            'Patent': '<:refbase:item_patent:>'
+            'Map': '<:refbase:item_map:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'titre'
+          label: '<:refbase:label_titre:>'
+          explication: '<:refbase:explication_titre:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'motcle'
+          label: '<:refbase:label_motcle:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'journal'
+          label: '<:refbase:label_journal:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'identifiants'
+          label: '<:refbase:label_identifiants:>'
+          explication: '<:refbase:explication_identifiants:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'doi'
+          label: '<:refbase:label_doi:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'annee'
+          label: '<:refbase:label_annee:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'depuis'
+          label: '<:refbase:label_depuis:>'
+          explication: '<:refbase:explication_depuis:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'where'
+          label: '<:refbase:label_where:>'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'param_affichage'
+      label: '<:refbase:label_param_affichage:>'
+      pliable: 'oui'
+      plie: 'oui'
+    saisies:
+      -
+        saisie: 'explication'
+        options:
+          nom: 'explication_param_affichage'
+          texte: '<:refbase:explication_param_affichage:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'url_refbase'
+          label: '<:refbase:cfg_url_refbase:>'
+      -
+        saisie: 'selection'
+        options:
+          nom: 'vue'
+          label: '<:refbase:cfg_vue:>'
+          datas:
+            citations: '<:refbase:cfg_vue_citations:>'
+            liste: '<:refbase:cfg_vue_liste:>'
+            details: '<:refbase:cfg_vue_details:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'max'
+          label: '<:refbase:cfg_max:>'
+        verifier:
+          type: 'entier'
+          options:
+            min: 1
+      -
+        saisie: 'selection'
+        options:
+          nom: 'doublons'
+          label: '<:refbase:cfg_doublons:>'
+          datas:
+            oui: '<:refbase:oui:>'
+            non: '<:refbase:non:>'
+      -
+        saisie: 'selection'
+        options:
+          nom: 'tri'
+          label: '<:refbase:cfg_tri:>
+          datas:
+            annee: '<:refbase:cfg_tri_annee:>'
+            auteur: '<:refbase:cfg_tri_auteur:>'
+            type: '<:refbase:cfg_tri_type:>'
+            type-annee: '<:refbase:cfg_tri_typeannee:>'
+            date-creation: '<:refbase:cfg_datecreation:>'
+      -
+        saisie: 'selection'
+        options:
+          nom: 'style'
+          label: '<:refbase:cfg_style:>
+          datas:
+            APA: 'APA'
+            AMA: 'AMA'
+            MLA: 'MLA'
+            Chicago: 'Chicago'
+            'Harvard 1': 'Harvard 1'
+            'Harvard 2': 'Harvard 2'
+            'Harvard 3': 'Harvard 3'
+            'Deep Sea Res': 'Deep Sea Res'
+            'J Glaciol': 'J Glaciol'
+            'Mar Biol': 'Mar Biol'
+      -
+        saisie: 'selection'
+        options:
+          nom: 'liens_exports'
+          label: '<:refbase:cfg_liens_exports:>'
+          datas:
+            oui: '<:refbase:oui:>'
+            non: '<:refbase:non:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'css'
+          label: '<:refbase:label_css:>'

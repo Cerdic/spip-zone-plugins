@@ -1,0 +1,21 @@
+#HTTP_HEADER{Content-Type: text/javascript}
+// Show or hide the element with the given 'id':
+function refbase_toggleVisibilitySlide(id, imgid, txtid, txt, upd) {
+	var e = document.getElementById(id);
+	var i = document.getElementById(imgid);
+	//var t = document.getElementById(txtid);
+	//var upd;
+	//if (upd === undefined) upd = true;
+	if (e.style.display == 'block' || e.style.display == '') {
+		//if (upd) 
+		e.style.display = 'none';
+		i.src = '#URL_SITE_SPIP/#CHEMIN{img_pack/closed.gif}';
+		//t.innerHTML = txt;
+	}
+	else {
+		//if (upd)
+		e.style.display = 'block';
+		i.src = '#URL_SITE_SPIP/#CHEMIN{img_pack/open.gif}';
+		//t.innerHTML = '';
+	}
+}
