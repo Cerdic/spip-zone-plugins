@@ -1,0 +1,67 @@
+[(#REM) <style>]
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+.zengarden .theme-actif .item {padding:15px;padding-#GET{left}:242px;}
+.zengarden .theme-actif .item .spip_documents_left {background:#eee;padding:5px;border:1px solid #e1e1e1;margin-#GET{left}:-227px;position:relative;display:inline;}
+.zengarden .theme-actif .item .bandeau {margin-top:5px;font-style:italic;}
+.zengarden .theme-actif .item .squelette {margin-top: 1em;}
+
+.zengarden .liste_themes {list-style:none;margin:0;padding:0;font-size:11px;}
+.zengarden .liste_themes .theme {margin:0;padding:10px 5px;border-bottom:1px solid #e1e1e1;overflow:hidden;float:left;width:115px;height:150px;position:relative;}
+.zengarden .liste_themes .theme:hover {background-color:[#(#GET{claire}|couleur_eclaircir)];}
+.zengarden .liste_themes .theme img {margin:0;display:block;float:none;position:absolute;top:10px;left:5px;padding:5px;background:#eee;border:1px solid #e1e1e1;}
+.zengarden .liste_themes .theme h3 {margin-top:0;padding-top:95px;font-size:1.2em;}
+.zengarden .liste_themes .theme h3 span {font-size:0.9em;}
+.zengarden .liste_themes .theme .descriptif {display: none}
+
+.zengarden .liste_themes .theme .actions {text-align:#GET{right};font-size:0.9em;}
+.zengarden .liste_themes .theme .bandeau {margin-top:5px;font-style:italic;}
+.zengarden .liste_themes .theme .squelette {margin-top: 1em;}
+.zengarden .liste_themes .theme .qTipContent {display:none;}
+
+@supports (display:flex) {
+	.zengarden .liste_themes {
+		font-size:12px;
+		display: flex;
+		flex-wrap:wrap;
+	}
+	.zengarden .liste_themes .theme {
+		padding:1em;
+		height: auto;
+		width: auto;
+		box-sizing: border-box;
+		flex-basis: 25%;
+		max-width: 25%;
+		display: flex;
+		flex-direction: column;
+	}
+	.zengarden .liste_themes .theme img {
+		position: static;
+		padding: 0;
+		max-width: none !important;
+		width: 100%;
+		height: auto;
+		margin-bottom: 1em;
+	}
+	.zengarden .liste_themes .theme h3 {
+		padding: 0;
+		margin-bottom: 0.75em;
+	}
+	.zengarden .liste_themes .theme .descriptif {
+		display: block;
+		line-height: 1.25;
+		margin-bottom: 0.75em;
+	}
+	.zengarden .liste_themes .theme .descriptif>:last-child {
+		margin-bottom: 0;
+	}
+	.zengarden .liste_themes .theme .actions {
+		margin-bottom: 0;
+		margin-top: auto;
+		display: flex;
+		justify-content: space-between;
+	}
+}

@@ -1,0 +1,20 @@
+<B_sel>
+<div class='liste_items theme-actif'>
+<BOUCLE_sel(POUR){tableau #ENV{themes}}{cle=#ENV{selection}}>
+<div class='item on'>
+[(#EVAL{_DIR_RACINE}|concat{#CLE,'/',#VALEUR{logo}}
+	|image_reduire{400,300}
+	|inserer_attribut{style,"max-width:200px"}
+	|inserer_attribut{class,spip_documents_left}|inserer_attribut{alt,#VALEUR{nom}|typo|extraire_multi})]
+<h2><:zengarden:theme_actif:></h2>
+<h3>[(#VALEUR{nom}|typo|extraire_multi)]</h3>
+<div class='descriptif'>[(#VALEUR{description}|zengarden_T_si_besoin{#CLE,#VALEUR}|propre)]</div>
+<div class='auteur'>[(#VAL{info_les_auteurs_1}|_T{#ARRAY{les_auteurs,#VALEUR{auteur}|zengarden_affiche_info|propre|PtoBR}})]</div>
+<div class='licence'>[<:intitule_licence:> (#VALEUR{licence}|zengarden_affiche_info|propre|PtoBR)]</div>
+<div class='actions'>
+	[(#BOUTON_ACTION{<:zengarden:desactiver_ce_theme:>,#URL_ACTION_AUTEUR{zengarden_activer_theme,defaut:#CLE,#SELF},ajax})]
+</div>
+</div>
+</BOUCLE_sel>
+</div>
+</B_sel>

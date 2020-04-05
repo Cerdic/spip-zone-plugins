@@ -1,0 +1,13 @@
+[(#AUTORISER{administrer,theme}|sinon_interdire_acces)]
+
+#BOITE_OUVRIR{'',info}
+	[(#CHEMIN_IMAGE{themes-128.png}|balise_img)]
+	<:zengarden:info_page|propre:>
+
+	[(#CONFIG{zengarden_switcher}|oui)
+		[(#BOUTON_ACTION{<:zengarden:switcher_desactiver:>,#URL_ACTION_AUTEUR{zengarden_activer_switcher,off,#SELF},'switcher ajax'})]
+	]
+	[(#CONFIG{zengarden_switcher}|non)
+		[(#BOUTON_ACTION{<:zengarden:switcher_activer:>,#URL_ACTION_AUTEUR{zengarden_activer_switcher,on,#SELF},'switcher ajax'})]
+	]
+#BOITE_FERMER

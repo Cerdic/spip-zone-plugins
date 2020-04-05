@@ -1,0 +1,23 @@
+<paquet
+	prefix="zengarden"
+	categorie="maintenance"
+	version="2.9.1"
+	etat="stable"
+	compatibilite="[3.0.0;3.3.*]"
+	logo="images/themes-64.png"
+	documentation="https://contrib.spip.net/SPIP-Zen-Garden"
+>
+	<nom>Zen-Garden</nom>
+	<!-- Un jardin Zen pour les squelettes -->
+
+	<auteur lien='http://www.yterium.com'>Cedric Morin, Yterium</auteur>
+
+	<pipeline nom="zengarden_activer_theme" action="" />
+
+	<pipeline nom="affichage_final" />
+	<pipeline nom="filtrer_liste_plugins" inclure="zengarden_fonctions.php" />
+	<pipeline nom="header_prive" inclure="zengarden_pipelines.php" />
+
+	<menu nom='zengarden' parent='menu_squelette' titre="zengarden:themes" icone="images/themes-16.png" />
+
+</paquet>
