@@ -1,0 +1,37 @@
+<div class="formulaire_spip formulaire_demo">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>
+<div class="onglet" style="text-align:center; margin:0.5em auto; width:50%;"><a href="#URL_ECRIRE{adherents}"><:asso:menu2_titre_gestion_membres:></a></div>]
+[(#ENV{editable})
+<form method="post" action="#ENV{action}">
+<div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<h3 class="legend"><:asso:synchroniser_choix:></h3>
+		<li class="editer_tous">
+			<input type="checkbox" name="tous" id="tous" />
+			<label for="tous"><strong><:asso:synchroniser_tous:></strong></label>
+		</li>
+		<li class="editer_visiteurs">
+			<input type="checkbox" name="visiteurs" id="visiteurs" />
+			<label for="visiteurs"><strong><:asso:synchroniser_visiteurs:></strong></label>
+		</li>
+		<li class="editer_redacteurs">
+			<input type="checkbox" name="redacteurs" id="redacteurs" />
+			<label for="redacteurs"><strong><:asso:synchroniser_redacteurs:></strong></label>
+		</li>
+		<li class="editer_administrateurs">
+			<input type="checkbox" name="administrateurs" id="administrateurs" />
+			<label for="administrateurs"><strong><:asso:synchroniser_administrateurs:></strong></label>
+		</li>
+		<li class="editer_forcer">
+			<input type="checkbox" name="forcer" id="forcer" />
+			<label for="forcer"><strong><:asso:synchroniser_forcer:></strong></label>
+		</li>
+	</ul>
+
+<p class="boutons"><input type="submit" value="<:pass_ok:>" class="submit" /></p>
+
+</div>
+</form>
+]
+</div>

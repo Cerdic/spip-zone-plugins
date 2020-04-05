@@ -1,0 +1,37 @@
+<plugin>
+	<nom>Associaspip</nom>
+	<auteur>Bernard Blazin, Fran&#231;ois de Montlivault, Emmanuel Saint-James, Jeannolapin, Art-Logic, Nicolas Villa</auteur>
+	<version>2.1.18</version>
+	<version_base>47731</version_base>
+	<meta>association_metas</meta>
+	<etat>stable</etat>
+	<slogan>Gestion d'associations</slogan>
+	<description>Plugin de gestion de petites associations avec : gestion des adhérents et des cotisations et dons ; gestion des ventes associatives et des activités.</description>
+	<prefix>association</prefix>
+	<install>association_administrations.php</install>
+	<lien>https://contrib.spip.net/4275</lien>
+	<icon>img_pack/annonce.gif</icon>
+	<options>association_options.php</options>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/association.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/association.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>delete_tables</nom>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>inc/post_edition.php</inclure>
+	</pipeline>
+	<bouton id="association" parent="naviguer">
+		<icone>img_pack/annonce.gif</icone>
+		<titre>asso:titre_menu_gestion_association</titre>
+	</bouton>
+	<categorie>divers</categorie>
+	<necessite id="SPIP" version="[2.1.8;3.0.99]" />
+	<utilise id="agenda" version="[2.0.1;3.99.99]" />
+</plugin>

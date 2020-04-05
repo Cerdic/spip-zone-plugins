@@ -1,0 +1,112 @@
+<div class="formulaire_spip formulaire_demo">
+[<span class='erreur'>(#ENV*{message_erreur})</span>]
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<h3 class="legend"><:asso:adherent_titre_modifier_membre:></h3>
+
+		[(#ENV{meta_civilite}|oui)
+		<li class="editer_sexe">
+			<label for="sexe"><strong><:asso:adherent_libelle_sexe:></strong></label>
+			<input type="text" name="sexe" value="[(#ENV{sexe})]" id="sexe"  class='formo'/>
+		</li>
+		]
+
+		<li class="editer_nom_famille">
+			<label for="nom_famille"><strong><:asso:adherent_libelle_nom_famille:></strong></label>
+			<input type="text" name="nom_famille" value="[(#ENV{nom_famille})]" id="nom_famille"  class='formo'/>
+		</li>
+
+		[(#ENV{meta_prenom}|oui)
+		<li class="editer_prenom">
+			<label for="prenom"><strong><:asso:adherent_libelle_prenom:></strong></label>
+			<input type="text" name="prenom" value="[(#ENV{prenom})]" id="prenom"  class='formo'/>
+		</li>
+		]
+
+		<li class="editer_fonction">
+			<label for="fonction"><strong><:asso:adherent_libelle_fonction:></strong></label>
+			<input type="text" name="fonction" value="[(#ENV{fonction})]" id="fonction"  class='formo'/>
+		</li>
+
+		<li class="editer_categorie">
+			<label for="categorie"><strong><:asso:adherent_libelle_categorie:></strong></label>
+			<B_categorie>
+			<select name="categorie" id="categorie" class="formo" >
+			<BOUCLE_categorie(ASSO_CATEGORIES){par libelle}>
+			<option value="#ID_CATEGORIE" [(#ENV{categorie}|=={#ID_CATEGORIE}|?{selected="selected"})]>#LIBELLE</option>
+			</BOUCLE_categorie>
+			</select>
+			</B_categorie>
+			<span class="erreur_message"><:asso:erreur_pas_de_categorie:></span>
+			<//B_categorie>
+		</li>
+
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{validite}}
+		<li class="editer_validite">
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<label for="validite"><strong><:asso:adherent_libelle_validite:></strong></label>
+			<input type="text" name="validite" value="[(#ENV{validite}|affdate{Y-m-d})]" id="validite"  class='formo'/>
+		</li>
+
+		<!-- impossible de recuperer les valeurs des statuts dans le tableau global association_liste_des_statuts, re-entres a la main, il y apeut-etre moyen de faire mieux -->
+		<li class="editer_statut_interne">
+			<label for="statu_interne"><strong><:asso:adherent_libelle_statut:></strong></label>
+			<select name="statut_interne" id="statut_interne" class="formo" >
+				<option [(#ENV{statut_interne}|=={sorti}|?{selected="selected"})] value="sorti"><:asso:adherent_entete_statut_sorti:></option>
+				<option [(#ENV{statut_interne}|=={prospect}|?{selected="selected"})]  value="prospect"><:asso:adherent_entete_statut_prospect:></option>
+				<option  [(#ENV{statut_interne}|=={ok}|?{selected="selected"})] value="ok"><:asso:adherent_entete_statut_ok:></option>
+				<option  [(#ENV{statut_interne}|=={echu}|?{selected="selected"})] value="echu"><:asso:adherent_entete_statut_echu:></option>
+				<option  [(#ENV{statut_interne}|=={relance}|?{selected="selected"})] value="relance"><:asso:adherent_entete_statut_relance:></option>
+			</select>
+		</li>
+
+		[(#ENV{meta_id_asso}|oui)
+		<li class="editer_id_asso">
+			<label for="id_asso"><strong><:asso:adherent_libelle_reference_interne:></strong></label>
+			<input type="text" name="id_asso" value="[(#ENV{id_asso})]" id="id_asso"  class='formo'/>
+		</li>
+		]
+
+		<li class="editer_email">
+			<label for="email"><strong><:asso:adherent_libelle_email:></strong></label>
+			<input name="email" id="email"  class='formo' type="text" value="[(#ENV{email})]" />
+		</li>
+
+		<li class="editer_adresse">
+			<label for="adresse"><strong><:asso:adherent_libelle_adresse:></strong></label>
+			<textarea name="adresse" id="adresse"  class='formo' rows="3" cols="80">[(#ENV{adresse})]</textarea>
+		</li>
+
+		<li class="editer_code_postal">
+			<label for="code_postal"><strong><:asso:adherent_libelle_code_postal:></strong></label>
+			<input name="code_postal" id="code_postal"  class='formo' type="text" value="[(#ENV{code_postal})]" />
+		</li>
+
+		<li class="editer_ville">
+			<label for="ville"><strong><:asso:adherent_libelle_ville:></strong></label>
+			<input name="ville" id="ville"  class='formo' type="text" value="[(#ENV{ville})]" />
+		</li>
+
+		<li class="editer_telephone">
+			<label for="telephone"><strong><:asso:adherent_libelle_telephone:></strong></label>
+			<input name="telephone" id="telephone"  class='formo' type="text" value="[(#ENV{telephone})]" />
+		</li>
+
+		<li class="editer_mobile">
+			<label for="mobile"><strong><:asso:adherent_libelle_mobile:></strong></label>
+			<input name="mobile" id="mobile"  class='formo' type="text" value="[(#ENV{mobile})]" />
+		</li>
+
+		<li class="editer_commentaire">
+			<label for="commentaire"><strong><:asso:adherent_libelle_commentaires:></strong></label>
+			<textarea name="commentaire" id="commentaire"  class='formo' rows="3" cols="80">[(#ENV{commentaire})]</textarea>
+		</li>
+
+	</ul>
+
+<p class="boutons"><input type="submit" value="<:pass_ok:>" class="submit" /></p>
+
+</div>
+</form>
+</div>

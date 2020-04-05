@@ -1,0 +1,74 @@
+<div class="formulaire_spip formulaire_demo">
+[<span class='erreur'>(#ENV*{message_erreur})</span>]
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<h3 class="legend"><:asso:dons_titre_mise_a_jour:></h3>
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{date_don}}
+		<li class="editer_date_don">
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<label for="date_don"><strong><:asso:date_aaaa_mm_jj:></strong></label>
+			<input type="text" name="date_don" [value="(#ENV{date_don}|affdate{Y-m-d})"] id="date_don"  class='formo'/>
+		</li>
+
+		<li class="editer_bienfaiteur">
+			<label for="bienfaiteur"><strong><:asso:nom_du_bienfaiteur:></strong></label>
+			<input type="text" name="bienfaiteur" [value="(#ENV{bienfaiteur})"] id="bienfaiteur"  class='formo'/>
+		</li>
+
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{id_adherent}}
+		<li class="editer_id_adherent">
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<label for="id_adherent"><strong><:asso:nd_de_membre:></strong></label>
+			<input type="text" name="id_adherent" [value="(#ENV{id_adherent})"] id="id_adherent"  class='formo'/>
+		</li>
+		
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{argent}}
+		<li class="editer_argent">
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<label for="argent"><strong><:asso:don_financier_en_e__:></strong></label>
+			<input type="text" name="argent" [value="(#ENV{argent})"] id="argent"  class='formo'/>
+		</li>
+
+		[(#ENV{classe_banques}|oui) <!-- si il n'a pas de classe banques definie, on ne propose pas de mode de paiement -->
+		<li class="editer_journal">
+			<INCLURE{fond=inc/mode_de_paiement, journal, classe_banques}>
+		</li>
+		]
+
+		<!-- si la variable destinations est assignee, on insere l'editeur de destinations -->
+		[#SET{erreurs,#ENV**{erreurs}|table_valeur{destinations}}
+		<li [ class="(#GET{erreurs}|oui)erreur"]>
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			(#ENV{destinations_on}|oui)#EDITEUR_DESTINATIONS
+		</li>]
+
+		<li class="editer_colis">
+			<label for="colis"><strong><:asso:colis:></strong></label>
+			<input type="text" name="colis" [value="(#ENV{colis})"] id="colis"  class='formo'/>
+		</li>
+
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{valeur}}
+		<li class="editer_valeur">
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<label for="valeur"><strong><:asso:contre_valeur_en_e__:></strong></label>
+			<input type="text" name="valeur" [value="(#ENV{valeur})"] id="valeur"  class='formo'/>
+		</li>
+
+		<li class="editer_contrepartie">
+			<label for="contrepartie"><strong><:asso:geste_association:></strong></label>
+			<input type="text" name="contrepartie" [value="(#ENV{contrepartie})"] id="contrepartie"  class='formo'/>
+		</li>
+
+		<li class="editer_commentaire">
+			<label for="commentaire"><strong><:asso:remarques:></strong></label>
+			<input type="text" name="commentaire" [value="(#ENV{commentaire})"] id="commentaire"  class='formo'/>
+		</li>
+
+	</ul>
+
+<p class="boutons"><input type="submit" value="<:pass_ok:>" class="submit" /></p>
+
+</div>
+</form>
+</div>
