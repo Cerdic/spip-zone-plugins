@@ -1,0 +1,26 @@
+<paquet
+	prefix="abozones"
+	categorie="auteur"
+	version="1.0.7"
+	etat="stable"
+	compatibilite="[3.0.5;3.2.*]"
+	logo="abozones.png"
+	documentation="https://contrib.spip.net/4608"
+>
+	<nom>Abonnements à des zones restreintes</nom>
+	
+	<credit lien="https://contrib.spip.net/BoOz,502">BoOz</credit>
+	<credit lien="http://www.elastick.net">Anne-lise Martenot</credit>
+	<credit lien="http://www.magraine.net/">Matthieu Marcillaud</credit>
+	<credit lien="http://www.cym.net">Ateliers Cym</credit>
+	<credit lien="http://www.latribunedelart.com">La tribune de l'art</credit>
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+
+	<licence>GNU/GPL v3</licence>
+	<necessite nom="abonnements" compatibilite="[2.0.0;]" />
+	<necessite nom="accesrestreint" compatibilite="[3.6.1;]" />
+
+	<pipeline nom="afficher_complement_objet" inclure="abozones_pipelines.php" />
+	<pipeline nom="post_edition" inclure="abozones_pipelines.php" />
+	<pipeline nom="post_edition_lien" inclure="abozones_pipelines.php" />
+</paquet>
