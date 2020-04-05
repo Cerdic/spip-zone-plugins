@@ -1,0 +1,15 @@
+<paquet
+	prefix="motpassecomplexe"
+	categorie="auteur"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.21;3.0.*]"
+	logo="prive/themes/spip/images/motpassecomplexe-64.png"
+	documentation="https://contrib.spip.net/4754"
+> 
+
+	<nom>Mot de passe complexe</nom> 
+	<auteur lien='http://www.erational.org'>erational</auteur> 
+	<licence>GNU/GPL</licence>
+
+</paquet>
