@@ -1,0 +1,24 @@
+<paquet
+	prefix="mesabonnes"
+	categorie="communication"
+	version="1.0.0"
+	schema="1.0.0"
+	etat="stable"
+	compatibilite="[3.2.0;3.2.*]"
+	logo="images/logo_mesabonnes_48.png"
+	documentation="https://contrib.spip.net/Mes-abonnes"
+>	
+
+	<nom>Mes abonnés</nom>
+	<!-- Gestion d'abonnement pour logiciels de publipostages -->
+
+	<auteur lien="https://www.erational.org">erational</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/mesabonnes.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/mesabonnes.php" />
+	<pipeline nom="autoriser" inclure="mesabonnes_autoriser.php" />
+
+	<menu nom="mesabonnes2" titre="mesabonnes:mes_abonnes" parent="bando_activite" icone="images/mesabonnes-16.png" action="mesabonnes" />
+</paquet>
