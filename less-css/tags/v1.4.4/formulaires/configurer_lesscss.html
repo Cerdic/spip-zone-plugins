@@ -1,0 +1,31 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:lesscss:cfg_lesscss:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<div class="editer-groupe">
+			#SET{name,activer_sourcemaps}#SET{obli,'obligatoire'}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<div class="editer editer_activer_sourcemaps saisie_oui_non">
+				<label><:lesscss:cfg_activer_sourcemaps:></label>
+				<p class="explication" id="explication_activer_sourcemaps"><:lesscss:cfg_activer_sourcemaps_explication:></p>
+				<div class="choix">
+					<input type="radio" name="activer_sourcemaps" class="radio" id="champ_activer_sourcemaps_oui"[ (#ENV{activer_sourcemaps}|=={on}|oui)checked='checked'] value="on" aria-describedby="explication_activer_sourcemaps">
+					<label for="champ_activer_sourcemaps_oui"[ (#ENV{activer_sourcemaps}|=={on}|oui) class="on"]>Oui</label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="activer_sourcemaps" class="radio" id="champ_activer_sourcemaps_non"[ (#ENV{activer_sourcemaps}|=={on}|non)checked='checked'] value="" aria-describedby="explication_activer_sourcemaps">
+					<label for="champ_activer_sourcemaps_non"[ (#ENV{activer_sourcemaps}|=={on}|non) class="on"]>Non</label>
+				</div>
+			</div>
+		</div>
+		
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>

@@ -1,0 +1,18 @@
+<paquet
+	prefix="lesscss"
+	categorie="outil"
+	version="1.4.4"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="img/lesscss-32.png"
+	documentation="https://contrib.spip.net/CSS-facile-avec-LESSpip-Less-CSS"
+>
+	<nom>LESS CSS</nom>
+	<auteur>Jean-Baptiste Bourgoin</auteur>
+	<auteur lien='http://nursit.com'>Cédric Morin</auteur>
+	<credit lien="http://lessphp.typesettercms.com/">LESS.php</credit>
+
+	<licence>MIT</licence>
+
+	<pipeline nom="insert_head" />
+</paquet>
