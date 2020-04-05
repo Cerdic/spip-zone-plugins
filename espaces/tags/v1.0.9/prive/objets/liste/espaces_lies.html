@@ -1,0 +1,62 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi titre,1,
+	id_espace,1
+}})
+]
+#SET{selection,#ENV**{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
+#SET{debut,#ENV{debutespl,#EVAL{_request("debutespl");}}}
+<B_liste_espaces>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutespl,#EVAL{_request("debutespl");}}}
+#SET{afficher_lettres,#TRI|=={'multi titre'}|oui}
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies espaces">
+<table class="spip liste">
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{espace:info_1_espace,espace:info_nb_espaces}})</strong></caption>]
+	<thead>
+		#SET{p,''}
+		<BOUCLE_lettre(ESPACES){tout}{id_espace IN #GET{selection}}{where?}{statut?}
+			{tri #ENV{par,multi titre},#GET{defaut_tri}}{id_espace==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#TITRE**|extraire_multi|initiale|unique|oui)
+		[(#SET{p,#GET{p}|concat{
+		#SELF|parametre_url{debutespl,@#ID_ESPACE}|ancre_url{paginationespl}|afficher_initiale{#TITRE**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		}})]
+		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
+		(#SET{p,
+			#GET{p}|concat{
+				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
+			}
+		})]</B_lettre>
+		[<tr><td colspan="4"><p class="pagination">(#GET{p})</p></td></tr>]
+
+		<tr class="first_row">
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class="titre" scope="col">[(#TRI{multi titre,<:ecrire:info_titre:>,ajax})]</th>
+			<th class="action" scope="col"></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_espaces(ESPACES){id_espace IN #GET{selection}}{statut?}
+		{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} espl}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TITRE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_ESPACE|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class="statut">[(#STATUT|puce_statut{espace})]</td> 
+			<td class="titre">[(#LOGO_ESPACE|image_reduire{20,20})]<a href="[(#ID_ESPACE|generer_url_entite{espace})]">#TITRE</a></td>
+
+			<td class="action">
+				[(#ENV{editable}|oui)
+					<button type="submit" class="button link delete" name="supprimer_lien\[espace-#ID_ESPACE-#OBJET-#ID_OBJET\]" value="X"><:espace:retirer_lien_espace:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+				]
+			</td>
+		</tr>
+	</BOUCLE_liste_espaces>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien\[espace-*-#OBJET-#ID_OBJET\]" value="X"><:espace:retirer_tous_liens_espaces:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+</div>
+</B_liste_espaces>
+<div class="liste-objets liste-objets-lies espaces caption-wrap">
+	<strong class="caption">[(#ENV*{titre,<:espace:info_aucun_espace:>})]</strong>
+</div>
+<//B_liste_espaces>

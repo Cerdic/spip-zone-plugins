@@ -1,0 +1,68 @@
+[(#AUTORISER{voir,espace,#ID_ESPACE}|sinon_interdire_acces)]
+[(#SET{url_voir,#VAL{espace}|objet_info{url_voir}})]
+[(#SET{url_edit,#VAL{espace}|objet_info{url_edit}})]
+<BOUCLE_espace(ESPACES){id_espace}{statut==.*}{si #ENV{exec}|=={#GET{url_voir}}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,espace,#ID_ESPACE})
+		[(#ID_ESPACE|afficher_qui_edite{espace}|non)
+			[(#URL_ECRIRE{#GET{url_edit},id_espace=#ID_ESPACE}|icone_verticale{<:espace:icone_modifier_espace:>,espace,edit,right ajax preload})]
+		]
+		[(#ID_ESPACE|afficher_qui_edite{espace}|oui)
+			[(#URL_ECRIRE{#GET{url_edit},id_espace=#ID_ESPACE}|icone_verticale{#ID_ESPACE|afficher_qui_edite{espace},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{espace-24.png}|balise_img{espace,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{espace,#ID_ESPACE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/espace,id=#ID_ESPACE,id_espace=#ID_ESPACE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,espace,#ID_ESPACE})
+	[(#ID_ESPACE|afficher_qui_edite{espace}|non)
+		[(#URL_ECRIRE{#GET{url_edit},id_espace=#ID_ESPACE}|icone_verticale{<:espace:icone_modifier_espace:>,espace,edit,right ajax preload})]
+	]
+	[(#ID_ESPACE|afficher_qui_edite{espace}|oui)
+		[(#URL_ECRIRE{#GET{url_edit},id_espace=#ID_ESPACE}|icone_verticale{#ID_ESPACE|afficher_qui_edite{espace},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+<div class="nettoyeur"></div>
+<div class="liste">
+	<BOUCLE_objetslies(spip_espaces_liens){id_espace}{0,1}><h3><:espace:titre_objets_lies_espace:></h3></BOUCLE_objetslies>
+
+	<BOUCLE_listeobjets(spip_espaces_liens){id_espace}{fusion objet}{par objet}>
+		#SET{table,#OBJET|table_objet}
+		[(#SET{titre,[#OBJET:info_(#GET{table})_liees_espace]})]
+		[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_espace}})]
+		<INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_espace,ajax,env} />
+	</BOUCLE_listeobjets>
+</div>
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,espace,id,#ID_ESPACE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+
+#SET{enfants,''}
+[(#VAL{prive/objets/contenu/espace-enfants}|trouver_fond|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/espace-enfants,id_espace,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,espace,id_espace,#ID_ESPACE,objet,espace,id_objet,#ID_ESPACE},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_espace>
+[(#ENV**{exec}|=={#GET{url_edit}}|?{#INCLURE{fond=prive/squelettes/contenu/#GET{url_edit},redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_espace>

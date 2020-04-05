@@ -1,0 +1,13 @@
+[(#REM)
+
+  Squelette Presentation resumee d'un article dans une liste
+  Distribue sous licence GPL
+
+]
+<BOUCLE_resume_article(ESPACES) {id_espace} {statut?}>
+<article class="entry espace hentry">
+	<strong class="h3-like entry-title"><a href="#URL_ESPACE" rel="bookmark">[(#LOGO_ESPACE|image_reduire{#ENV{largeur_logo,-1},#ENV{hauteur_logo,-1}}|responsive_logo)]#TITRE<span
+		class="read-more hide">[(#ICON{chevron-right,icon-heavy,[<:zcore:lire_la_suite:><:zcore:lire_la_suite_de:>&laquo;(#TITRE)&raquo;]})]</span></a></strong>
+	[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION{#ENV{coupe,300}})</div>]
+</article>
+</BOUCLE_resume_article>

@@ -1,0 +1,30 @@
+<BOUCLE_espace(ESPACES){id_espace=#ENV{id}}{statut?}>
+<div class="infos">
+[(#SET{texte_objet,<:espace:titre_espace:>})]
+<div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_ESPACE</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{espaces,#ID_ESPACE})]
+
+<div class='nb_elements'><!--nb_elements--></div>
+
+[(#REM)
+
+	Bouton voir en ligne
+
+]
+<BOUCLE_publie(ESPACES){id_espace}>
+	[(#VAL{redirect}
+		|generer_url_action{type=espaces&id=#ID_ESPACE}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</BOUCLE_publie>
+	[(#AUTORISER{previsualiser,espaces,#ID_ESPACE,'',#ARRAY{statut,#STATUT}})
+		[(#VAL{redirect}
+			|generer_url_action{type=espaces&id=#ID_ESPACE}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{<:previsualiser:>,preview})]
+	]
+<//B_publie>
+
+</div>
+</BOUCLE_espace>
