@@ -1,0 +1,97 @@
+#SET{langues,#VAL{langues}|bible_tableau}
+
+[(#REM) accepte-t-on les langues morts ?]
+[(#CONFIG{bible_pp/lang_morte}|non)
+#SET{langues,#VAL{separateur}|bible_tableau|array_keys}
+]
+[(#REM) accepte-t-on les langues pas dans l'articles ?]
+[(#CONFIG{bible_pp/lang_pas_art}|non)
+#SET{langues,#ARRAY{0,#LANG}|array_merge{#GET{langues}|array_diff{#VAL{separateur}|bible_tableau|array_keys}}}
+]
+
+#SET{tableau_lang,#GET{langues}}
+
+
+[(#SET{tableau,#BIBLE_TRADUCTIONS{#GET{tableau_lang},oui}})]
+[(#SET{tableau,#GET{tableau}|array_intersect{#CONFIG{bible_pp/trad_prop}}})]
+
+[(#REM) on fait ici les test pour savoir ce qui doit être checké, selon qu'on soit au premier chargement ou au second)]
+[(#ENV{erreurs}|table_valeur{erreur}|oui)
+#SET{version,#ENV{erreurs}|table_valeur{version}}
+#SET{numeros,#ENV{erreurs}|table_valeur{numeros}}
+#SET{ref,#ENV{erreurs}|table_valeur{ref}}
+#SET{retour,#ENV{erreurs}|table_valeur{retour}}
+]
+[(#ENV{erreurs}|table_valeur{erreur}|non)
+#SET{version,#ENV{version}}
+#SET{numeros,#ENV{numeros}}
+#SET{ref,#ENV{ref}}
+#SET{retour,#ENV{retour}}
+]
+[(#ENV{message_ok}|oui)
+#SET{version,#ENV{message_ok}|table_valeur{version}}
+#SET{numeros,#ENV{message_ok}|table_valeur{numeros}}
+#SET{ref,#ENV{message_ok}|table_valeur{ref}}
+#SET{retour,#ENV{message_ok}|table_valeur{retour}}
+]
+
+<form action="#ENV{action}" method="post" style="border: 0px none ; margin: 0px;">
+<div class="cadre cadre-r formulaire_spip" style="margin-top: 20px;">
+    <div class="entete-formulaire titrem">
+    <:bible:presse_papier_titre:>
+    </div>
+    
+#ACTION_FORMULAIRE{#ENV{action}}
+    
+    <div class="formulaire_spip formulaire_editer">
+    <ul>
+    [<li> [(#ENV{cadre}|!={false}|oui)<textarea rows="10" name="bible_resultat" id="bible_resultat">](#ENV*{message_ok}|table_valeur{resultat})[(#ENV{cadre}|!={false}|oui)</textarea>]</li>]
+    
+    <li[ class="erreur"(#ENV{erreurs}|table_valeur{erreur}|oui)]>
+        <label for="passage"><:bible:form_passage:></label>
+        <input type="text" class="text" size="25" name="passage" id="passage" value="[(#ENV{erreurs}|table_valeur{erreur}|sinon{#ENV{message_ok}|table_valeur{passage}})]"/>
+        
+    </li>
+    <li>
+
+        <B_test20>
+        <label for="version"><:bible:form_version:></label>
+
+        <select name="version" id="version">
+        <BOUCLE_test20(POUR){tableau #GET{tableau} }>
+        <option value="#VALEUR" lang="#INFO_BIBLE_TRADUCTION{#VALEUR,lang_abrev}"[ selected="selected"(#GET{version}|=={#VALEUR}|oui)]>#INFO_BIBLE_TRADUCTION{#VALEUR,traduction}  &nbsp;&#091;#INFO_BIBLE_TRADUCTION{#VALEUR,lang_abrev}&#093;</option>
+        </BOUCLE_test20>
+        </select>
+        </B_test20>
+        </li>
+        [(#CONFIG{bible_pp/numeros}|oui)	
+        <li>
+					<label for="numeros"><:bible:form_numeros:></label>
+					<input type="checkbox" name="numeros"  id="numeros" [checked="(#GET{numeros})"]  value="oui" />
+				
+        </li>
+        ]
+		[(#CONFIG{bible_pp/retour}|oui)		
+        <li>
+					<label for="retour"><:bible:form_retour:></label>
+					<input type="checkbox" name="retour"  id="retour" [checked="(#GET{retour})"]  value="oui" />
+				
+        </li>
+		]
+		[(#CONFIG{bible_pp/ref}|oui)	
+        <li>
+					<label for="ref"><:bible:form_ref:></label>
+					<input type="checkbox" name="ref"  id="ref" [checked="(#GET{ref})"]  value="oui" />
+				
+        </li>
+        ]
+        
+        [(#REM) si on ne laisse pas le choix au rédacteur, prendre version par défaut)]
+        [(#CONFIG{bible_pp/numeros}|non)[(#CONFIG{bible/numeros}|oui)<input type="hidden" name="numeros" id="numeros" value="oui"/>]]
+        [(#CONFIG{bible_pp/ref}|non)[(#CONFIG{bible/ref}|oui)<input type="hidden" name="ref" id="ref" value="oui"/>]]
+[(#CONFIG{bible_pp/retour}|non)[(#CONFIG{bible/retour}|oui)<input type="hidden" name="retour" id="retour" value="oui"/>]]
+    </ul>
+            <p class="boutons"><input type="submit" name="ok" value="<:bible:ok:>" /></p>
+    </div>
+</div>
+</form>

@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title><:bible:version_dispo:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+<INCLURE{fond=inc-head}>
+<meta name="robots" content="none" />
+</head>
+<body>
+	<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	<div id="conteneur">
+    <div id="contenu">
+
+        
+
+        <div class="cartouche">
+        <h1><:bible:version_dispo:></h1>
+        
+        </div>
+        [<div class="texte">(#PLUGIN{SPIP_BONUX}|?{#INCLURE{fond=fonds/boucle_traductions}{lang_trad=#ENV{lang_trad,tout}},<:bible:neccessitesvn:>})</div>]
+
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+    [(#REM) Menu de navigation laterale ]
+    <div id="navigation">
+
+        [(#REM) Menu de navigation par rubriques ]
+        
+        <INCLURE{fond=inc-rubriques}>
+
+    </div><!--#navigation-->
+	
+	[(#REM) Menu de navigation laterale ]
+	<div id="extra">
+	&nbsp;
+	</div><!--#extra-->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+	</div><!--#page-->
+</body>
+</html>
+
+

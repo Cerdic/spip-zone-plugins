@@ -1,0 +1,46 @@
+<plugin>
+	<nom>Spip-Bible</nom>
+	<slogan>Pour faire rapidement des citations de la Bible</slogan>
+	<auteur>[Ma&#239;eul Rouquette->http://www.maieul.net] (Auteur originel), Teddy Payet (Auteur associ&#233;), Cerdic (Id&#233;e du presse-papier)</auteur>
+	<licence>GPL3</licence>
+	<version>2.3.0</version>
+	<etat>stable</etat>
+	<install>base/bible_install.php</install>
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
+	<necessite id='CFG' version="[1.0;]" />
+	<necessite id="spip_bonux" />
+	<icon>bible.jpg</icon>
+	
+	<description>
+Le plugin Spip-Bible permet de citer rapidement des extraits de la Bible dans le texte d&#8217;un article. Sous SPIP 2.0 avec SPIP-Bonux, propose un "presse-papier" biblique &#224; c&#244;t&#233; des formulaires d'&#233;ditions. Vous pouvez aussi utilisez un mod&#233;le, mais cette m&#233;thode est d&#233;su&#233;te et d&#233;conseill&#233;e.
+
+Ex : <code><bible|passage=Gn1,2-2,1></code> citera la Gen&#232;se du chapitre 1, verset 2 au chapitre 2, verset 1 inclu.
+
+On peut passer des options au mod&#233;le. La valeur des options est "non" ou "oui", sauf pour traduction.
+
+Ces options sont :
+-* numeros : Pour afficher les num&#233;ros de versets et de chapitre dans le corps de texte.
+-* retour : Pour faire des retours chariots entre les versets
+-* ref : Pour afficher les r&#233;f&#233;rences &#224; la suite du passage
+-* traduction : Pour choisir la traduction.
+
+La liste des traductions disponibles est sur [Spip-Contrib->https://contrib.spip.net/Spip-Bible-traductions-disponibles]
+	</description>
+	
+	<prefix>bible</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<action>insert_head</action>
+		<inclure>bible_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<action>affiche_droite</action>
+		<inclure>bible_pipelines.php</inclure>
+	</pipeline>
+	<options>bibles_options.php</options>
+	<fonctions>bible_fonctions.php</fonctions>
+	
+	<categorie>divers</categorie>
+	<lien>https://contrib.spip.net/Spip-Bible,1125</lien>
+</plugin>

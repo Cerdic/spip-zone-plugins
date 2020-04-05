@@ -1,0 +1,49 @@
+<form action="#SELF" method="post">
+[<div>(#ENV{_cfg_}|form_hidden)</div>]
+	
+	<ul>
+	<div id="explication"><bible:cfg_explication:></div>
+	
+			
+			#SET{langues,#VAL{separateur}|bible_tableau}
+			<BOUCLE_langues(POUR){tableau #GET{langues}}>
+				<li>
+					<label for="traduction_#CLE">[(#VAL{bible:cfg_traduction_#CLE}|_T)]</label>
+					#SET{traduction,#BIBLE_TRADUCTIONS{#CLE,tous}}
+					<select name="traduction_#CLE" id="traduction_#CLE">
+					<BOUCLE_traduction(POUR){tableau #GET{traduction}}>
+						<option value="#VALEUR" [selected="(#ENV{traduction_#_langues:CLE}|=={#VALEUR})"]>
+						[(#VALEUR|info_bible_version{traduction})]
+						</option>
+					</BOUCLE_traduction>
+					</select>
+				</li>
+			</BOUCLE_langues>
+			
+			<li>
+					<label for="numeros"><:bible:cfg_numeros:></label>
+					<input type="checkbox" name="numeros"  id="numeros" [checked="(#ENV{numeros})"]  value="oui" />
+				
+			</li>
+			
+			<li>
+					<label for="retour"><:bible:cfg_retour:></label>
+					<input type="checkbox" name="retour"  id="retour" [checked="(#ENV{retour})"]  value="oui" />
+				
+			</li>
+			
+			<li>
+					<label for="ref"><:bible:cfg_ref:></label>
+					<input type="checkbox" name="ref"  id="ref" [checked="(#ENV{ref})"]  value="oui" />
+				
+			</li>
+			
+			
+		
+	<li>
+				<label for="police_hbo"><:bible:police_hbo:></label><select name="police_hbo"><option value="" [selected="(#ENV{police_hbo}|=={non})"]><:item_non:></option><option value='DSiddur.ttf' [selected='(#ENV{police_hbo}|=={DSiddur.ttf})']>DSiddur.ttf</option><option value='HADASSAH.TTF' [selected='(#ENV{police_hbo}|=={HADASSAH.TTF})']>HADASSAH.TTF</option><option value='KSAVYADD.TTF' [selected='(#ENV{police_hbo}|=={KSAVYADD.TTF})']>KSAVYADD.TTF</option><option value='NACHLAOT.TTF' [selected='(#ENV{police_hbo}|=={NACHLAOT.TTF})']>NACHLAOT.TTF</option></li><p class="boutons"><input type="submit" name="_cfg_ok" value="<:bible:OK:>" />
+	<input type="submit" name="_cfg_delete" value="<:bible:supprimer:>" /></p>
+    </li>
+    </ul>
+</form>
+
