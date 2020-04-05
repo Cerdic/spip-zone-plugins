@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8">
+<markers id="gmap-marker-document">
+
+<icon type="shadow">
+	<image>images/gmap-shadow.png</image>
+	<size x="32" y="32" />
+	<anchor x="16" y="16" />
+</icon>
+
+<icon state="normal" type="simple">
+	<image>images/gmap-marker-photo-prise.png</image>
+	<size x="32" y="32" />
+	<anchor x="16" y="16" />
+	<offset x="16" y="16" />
+</icon>
+
+<icon state="normal" type="complete">
+	<image>images/gmap-marker-photo-prise-full.png</image>
+	<size x="32" y="32" />
+	<anchor x="16" y="16" />
+	<offset x="16" y="16" />
+</icon>
+
+<icon state="selected" type="simple">
+	<image>images/gmap-marker-photo-prise-high.png</image>
+	<size x="32" y="32" />
+	<anchor x="16" y="16" />
+	<offset x="16" y="16" />
+</icon>
+
+<icon state="selected" type="complete">
+	<image>images/gmap-marker-photo-prise-full-high.png</image>
+	<size x="32" y="32" />
+	<anchor x="16" y="16" />
+	<offset x="16" y="16" />
+</icon>
+
+</markers>

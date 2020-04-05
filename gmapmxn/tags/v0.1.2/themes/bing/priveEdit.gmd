@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8">
+<markers id="system">
+
+<icon type="shadow">
+	<image>images/shadow.png</image>
+	<size x="32" y="32" />
+	<anchor x="16" y="16" />
+</icon>
+
+<icon state="normal" type="simple">
+	<image>images/priveEdit.png</image>
+	<size x="32" y="32" />
+	<anchor x="16" y="16" />
+	<offset x="16" y="16" />
+</icon>
+
+<icon state="normal" type="complete">
+	<image>images/priveEdit-full.png</image>
+	<size x="32" y="32" />
+	<anchor x="16" y="16" />
+	<offset x="16" y="16" />
+</icon>
+
+</markers>

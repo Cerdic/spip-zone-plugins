@@ -1,0 +1,33 @@
+
+/* Styles pour les fenêtres d'information */
+.window_content {
+	width: 280px;
+}
+.window_content span {
+	font-size: 10px;
+	line-height: 16px;
+	width: 100%;
+}
+.window_content p.soustitre {
+	font-size: 10px;
+	text-align: left;
+}
+.window_content .texte {
+	font-size: 10px;
+	text-align: justify;
+}
+.window_content p {
+	font-size: 10px;
+	text-align: justify;
+}
+.window_content h3 {
+	line-height: 17px;
+	font-size: 12px;
+	margin: 5px 0;
+	padding-top: 2px;
+}
+.window_content img {
+	display: block;
+	margin: 10px auto 7px auto;
+	border: none;
+}
