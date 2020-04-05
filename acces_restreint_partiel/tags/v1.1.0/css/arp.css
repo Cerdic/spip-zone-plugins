@@ -1,0 +1,14 @@
+.liste_doc {
+display: inline-block;
+}
+
+.liste_doc ul{
+margin: 0 0 15px 0;
+padding: 0;
+}
+
+.liste_doc li{
+float: left;
+list-style: none;
+margin: 5px;
+}

@@ -1,0 +1,16 @@
+[(#REM) Liste tous les intertitres présents dans l'article courant.
+]
+#SET{tabintertitre,#ARRAY}
+<BOUCLE_INTERTITRE(ARTICLES){id_article}>
+	[(#SET{tabintertitre,[(#TEXTE*|liste_intertitre)]})]
+
+	<B_TABINTERTITRE>
+		<div class='liste_intertitre'>
+		<ul>
+	<BOUCLE_TABINTERTITRE(DATA){source tableau,#GET{tabintertitre}}>
+		<li>#VALEUR</li>
+	</BOUCLE_TABINTERTITRE>
+		</ul>
+		</div>
+	</B_TABINTERTITRE>
+</BOUCLE_INTERTITRE>
