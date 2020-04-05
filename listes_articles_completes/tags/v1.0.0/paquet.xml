@@ -1,0 +1,17 @@
+<paquet
+	prefix="listes_articles_completes"
+	categorie="navigation"
+	version="1.0.0"
+	etat="stable"
+	compatibilite="[2.0.0;3.2.*]"
+	logo="images/listes_articles_completes-32.png"
+	documentation="http://www.paris-beyrouth.org/Plugin-Listes-d-articles-completes"
+>
+	<nom>Listes d'articles compl&#232;tes</nom>
+	<auteur>ARNO*</auteur>
+	<licence>GPL v3</licence>
+
+	<credit lien="http://www.paris-beyrouth.org/">Paris Beyrouth</credit>
+
+	<pipeline nom="header_prive" inclure="listes_articles_completes.php" />
+</paquet>

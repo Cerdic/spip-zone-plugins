@@ -1,0 +1,25 @@
+<plugin>
+	<nom>Listes d'articles compl&#232;tes</nom>
+	<slogan>Modifier la pr&#233;sentation des listes d’articles dans l’espace priv&#233;</slogan>
+	<auteur>ARNO*</auteur>
+	<licence>GPL v3</licence>
+	<description>
+		Dans l'espace priv&#233;, les listes d'articles affich&#233;es sont compl&#233;t&#233;es : surtitre et titre, nombre de visites et popularit&#233;, logos plus gros.
+	</description>
+	<lien>http://www.paris-beyrouth.org/Plugin-Listes-d-articles-completes</lien>
+
+	<version>1.0.0</version>
+	<etat>stable</etat>
+
+	<prefix>listes_articles_completes</prefix>
+
+	<options>listes_articles_completes.php</options>
+
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>listes_articles_completes.php</inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version="[2.0.0;3.2.99]" />
+	<categorie>navigation</categorie>
+</plugin>
