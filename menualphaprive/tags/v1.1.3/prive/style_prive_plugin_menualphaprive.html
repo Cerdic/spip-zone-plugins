@@ -1,0 +1,44 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}} 
+#SET{foncee,##ENV{couleur_foncee,3874b0}} 
+
+#bando_haut ul.deroulant li ul.menu-2col,
+#bando_haut ul.deroulant li ul.menu-3col {
+	max-width: initial;
+	-moz-column-gap: 0;
+	-webkit-column-gap: 0;
+	-webkit-perspective:1;
+	column-gap: 0;
+}
+#bando_haut ul.deroulant li ul.menu-2col {
+	-moz-column-count: 2;
+	-webkit-column-count: 2;
+	column-count: 2;
+}
+#bando_haut ul.deroulant li ul.menu-3col {
+	-moz-column-count: 3;
+	-webkit-column-count: 3;
+	column-count: 3;
+}
+
+#bando_haut ul.deroulant li.non_favori {
+	background-color: #[(#GET{claire}|couleur_eclaircir{.9})];
+}
+#bando_haut ul.deroulant li.favori + li.non_favori {
+	border-top:1px solid #aaa;
+}

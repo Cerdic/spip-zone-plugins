@@ -1,0 +1,54 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	<h3 class='titrem'><:menualphaprive:configurer_menus_favoris:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE
+
+		<div class="editer-groupe">
+			<div class="editer menus_favoris pleine_largeur">
+				#SET{boutons,#ARRAY|definir_barre_boutons{0}|tri_menu_alpha}
+				<div class="colonnes_largeur">
+					<BOUCLE_menu(DATA)
+						{source tableau, #GET{boutons}}
+						{cle !IN #LISTE{outils_rapides, outils_collaboratifs, menu_accueil}}>
+					<div class="colonne_menu">
+						<h4 class="titre_menu">[(#LIBELLE|_T)]</h4>
+						<B_menusous>
+							<div class="sous_menu">
+						<BOUCLE_menusous(DATA){source tableau, #SOUSMENU}>
+								<div class="item choix">
+									<input type="checkbox" name="menus_favoris[]" value="#CLE" id="menu_fav_#CLE"[(#CLE|in_any{#ENV{menus_favoris}}|oui)checked="checked"]>
+									<label for="menu_fav_#CLE">[(#LIBELLE|_T)]</label>
+								</div>
+						</BOUCLE_menusous>
+							</div>
+						</B_menusous>
+					</div>
+					</BOUCLE_menu>
+				</div>
+			</div>
+		</div>
+
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+
+	<style>
+
+		.formulaire_#FORM .titre_menu {
+			margin-top:1em;
+			margin-bottom:0;
+		}
+		.formulaire_#FORM .colonne_menu:first-child .titre_menu {
+			margin-top:0em;
+		}
+		.formulaire_#FORM .colonnes_largeur {
+			-webkit-column-count: 2;
+			-moz-column-count: 2;
+			column-count: 2;
+		}
+	</style>
+</div>
