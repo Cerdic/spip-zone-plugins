@@ -1,0 +1,79 @@
+<plugin>
+	<nom><multi>[fr]Grappes [en]Bunches of grapes [es]Racimos[de]Trauben</multi></nom>
+	<slogan>Regrouper des objets Spip dans un m&#234;me univers</slogan>
+	<auteur>Matthieu Marcillaud</auteur>
+	<version>0.3.2</version>
+	<version_base>0.2.1</version_base>
+	<etat>test</etat>
+	<prefix>grappes</prefix>
+	<icon>images/grappe-24.gif</icon>
+	<lien>https://contrib.spip.net/Grappes,3278</lien>
+	<description><multi>
+	[fr]Permet de regrouper des &#233;l&#233;ments de SPIP
+	comme des auteurs, rubriques, articles (lorsque l'interface existe pour)...
+	dans un m&#234;me univers (une grappe)
+	[en]Allows to group together elements of SPIP
+        such as authors, sections, articles (when a dedicated interface exists)...
+        in a same universe (just like a bunch of grapes)
+	[es]Permite agrupar elementos de SPIP
+        como autores/as, secciones, art&#237;culos (cuando hay una interfaz que lo permite)...
+        en un mismo universo (un racimo)
+	[de]Neue Objekte (Trauben) k&#252;nnen aus SPIP-Objekten zusammengestellt werden,
+		wenn diese ein Interface haben.
+	</multi></description>
+	<options>grappes_options.php</options>
+	<fonctions>grappes_autorisations.php</fonctions>
+	<install>base/grappes_install.php</install>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/grappes.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/grappes.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/grappes.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<action>inserer_javascript</action>
+		<inclure>grappes_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>inserer_javascript</action>
+		<inclure>grappes_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>grappes_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>rechercher_liste_des_champs</nom>
+		<inclure>grappes_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_url_objets</nom>
+		<inclure>grappes_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>grappes_objets_lies</nom>
+		<inclure>grappes_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
+	<necessite id="SelecteurGenerique" version="[0.2;]" />
+	<necessite id="spip_bonux" version="[2.2.21;]" />
+	<bouton id='grappes2' parent="naviguer">
+		<icone>images/grappe-24.gif</icone>
+		<titre>Grappes</titre>
+		<url>grappes</url> <!-- nom de l'exec, facultatif, par defaut prend l'id -->
+		<args></args>
+	</bouton>
+	<bouton id='grappes' parent='bando_edition'>
+		<icone>images/grappe-16.png</icone>
+		<titre>grappes:titre_page_grappes</titre>
+	</bouton>
+	<categorie>divers</categorie>
+</plugin>
