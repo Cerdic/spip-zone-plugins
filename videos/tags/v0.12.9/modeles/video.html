@@ -1,0 +1,192 @@
+[(#REM)
+/** Valeurs communes surchargeables **/
+]
+#SET{document,#ENV{document}|sinon{#ID}}
+#SET{titre_descriptif,#ENV{titre_descriptif,#CONFIG{videos/titre_descriptif,'non'}}}
+#SET{wmode,#ENV{wmode,#CONFIG{videos/wmode,'opaque'}}}
+#SET{responsive,#ENV{responsive,#CONFIG{videos/responsive,'oui'}}}
+#SET{liste_definition,#ENV{liste_definition,#CONFIG{videos/liste_definition,'non'}}}
+#SET{afficher_suggestions,#ENV{afficher_suggestions,#CONFIG{videos/afficher_suggestions,'non'}}}
+#SET{afficher_commandes,#ENV{afficher_commandes,#CONFIG{videos/afficher_commandes,'oui'}}}
+#SET{afficher_titres_et_actions,#ENV{afficher_titres_et_actions,#CONFIG{videos/afficher_titres_et_actions,'oui'}}}
+#SET{mode_confidentialite,#ENV{mode_confidentialite,#CONFIG{videos/mode_confidentialite,'oui'}}}
+#SET{enablejsapi,#ENV{enablejsapi,#CONFIG{videos/enablejsapi,'oui'}}}
+
+[(#REM) "Extensions" gérées ou rajoutées par le plugin
+<!--
+	TODO Foutre ça dans une globale ou un autre truc histoire de pas oublier de le modifier...
+-->
+]
+[(#SET{lesExtensions,
+	#ARRAY{	1,dist_daily,
+			2,dist_youtu,
+			3,dist_vimeo}
+})]                     [(#REM) fermer l'accolade en fin de ligne sinon le retour à la ligne
+			                 est pris en compte dans la chaîne de caractère]
+[(#SET{lesExtensionsHtml5,
+	#ARRAY{ 1,m4v,
+			2,mp4,
+			3,webm,
+			4,ogv,
+			5,mkv}
+})]
+[(#SET{toutesExtensions, [(#GET{lesExtensions}|array_merge{#GET{lesExtensionsHtml5}})]})]
+<BOUCLE_LaVideo(DOCUMENTS){id_document=#GET{document}}{extension IN #GET{toutesExtensions}}{tout}>
+[(#SET{poster,[(#LOGO_DOCUMENT|fichier)]})]
+#SET{titre_video,#TITRE}
+
+[(#REM)
+	Si une dimension est fournie avec le modele on la prend,
+	sinon celle du document si elle n'est pas nulle,
+	sinon celle de la config,
+	sinon une valeur en dur
+]
+[(#LARGEUR|>{0}|oui) #SET{larg,#LARGEUR} ]
+#SET{largeur,#ENV{largeur,#ENV{width,#GET{larg,#CONFIG{videos/largeur,'560'}}}}}
+[(#HAUTEUR|>{0}|oui) #SET{haut,#HAUTEUR} ]
+#SET{hauteur,#ENV{hauteur,#ENV{height,#GET{haut,#CONFIG{videos/hauteur,'315'}}}}}
+
+[(#SET{fichier,#FICHIER*})]
+[(#GET{liste_definition}|=={oui}|oui)
+<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+<dt>
+]
+
+[(#REM)
+/** Traiter DailyMotion **/
+	http://www.dailymotion.com/fr/doc/api/player
+	- related			|| Values: 0 or 1. Default is 0. Determines if the player loads related videos when the current video begins playback.
+	- explicit			|| Values: 0 or 1. Default is 1. Determines if the player allows explicit content to be played. This parameter may be added to embed code by platforms which do not want explicit content to be posted by their users.
+	- autoPlay			|| Values: 0 or 1. Default is 0. Determines if the video will begin playing automatically when the player loads.
+	- autoMute			|| Values: 0 or 1. Default is 0. Determines if the video will begin muted.
+	- unmuteOnMouseOver	|| Values: 0 or 1. Default is 0. Determines if the video will unmuted on mouse over. Of course it works only if the player is on automute=1.
+	- start				|| Values: a number of seconds. Default is 0. Determines if the video will begin playing the video at a given time.
+	- enableApi			|| Values: 0 or 1. Default is 0. Enable the Javascript API by setting this parameter to 1. For more information and instructions on using the Javascript API, see the JavaScript API documentation.
+	- playerapiid		|| This value may be any alphanumeric string; it is used in conjunction with the JavaScript API. For details see the JavaScript API documentation.
+	- chromeless		|| Values: 0 or 1. Default is 0. Determines if the player should display controls or not during video playback.
+	- expendVideo		|| Values: 0 or 1. Default is 0. Determines if the video should be expended to fit the whole player's size.
+	- colors			|| Player color changes may be set using color codes. A color is described by its hexadecimal value (eg: FF0000 for red).
+							The player refers to 3 colors named :
+							- foreground
+							- background
+							- highlight
+]
+	[(#EXTENSION|=={dist_daily}|oui)
+		#SET{videosLiees,#ENV{videosLiees,#CONFIG{videos/videosLiees,'0'}}}
+
+		[(#GET{responsive}|=={oui}|oui)<div class="capsule-video"><div class="mini_capsule-video">]
+			<iframe[ title="(#GET{titre_video}|couper{80})"] width="#GET{largeur}" height="#GET{hauteur}" src="//www.dailymotion.com/embed/video/#GET{fichier}?width=#GET{largeur}&amp;theme=none&amp;foreground=%23F7FFFD&amp;highlight=%23FFC300&amp;background=%23171D1B&amp;start=[&amp;animatedTitle=(#GET{titre_video}|urlencode)]&amp;iframe=1&amp;additionalInfos=0&amp;autoPlay=#ENV{autoplay,0}&amp;hideInfos=0&amp;wmode=#GET{wmode}"></iframe>
+		[(#GET{responsive}|=={oui}|oui)</div></div> <!-- .capsule-video .mini_capsule-video -->]
+	]
+[(#REM)
+/** Traiter Vimeo **/
+	http://vimeo.com/api
+]
+	[(#EXTENSION|=={dist_vimeo}|oui)
+		[(#GET{responsive}|=={oui}|oui)<div class="capsule-video"><div class="mini_capsule-video">]
+			<iframe[ title="(#GET{titre_video}|couper{80})"] src="//player.vimeo.com/video/#GET{fichier}?byline=0&amp;autoplay=#ENV{autoplay,0}" width="#GET{largeur}" height="#GET{hauteur}"></iframe>
+		[(#GET{responsive}|=={oui}|oui)</div></div> <!-- .capsule-video .mini_capsule-video -->]
+	]
+
+
+[(#REM)
+/** Traiter Youtube **/
+	http://code.google.com/intl/fr-FR/apis/youtube/player_parameters.html
+	- rel 				|| Values: 0 or 1. Default is 1. Sets whether the player should load related videos once playback of the initial video starts. Related videos are displayed in the "genie menu" when the menu button is pressed. The player search functionality will be disabled if rel is set to 0.
+	- autoplay			|| Values: 0 or 1. Default is 0. Sets whether or not the initial video will autoplay when the player loads.
+	- loop				|| Values: 0 or 1. Default is 0. In the case of a single video player, a setting of 1 will cause the player to play the initial video again and again. In the case of a playlist player (or custom player), the player will play the entire playlist and then start again at the first video.
+	- enablejsapi		|| Values: 0 or 1. Default is 0. Setting this to 1 will enable the Javascript API. For more information on the Javascript API and how to use it, see the JavaScript API documentation.
+	- playerapiid		|| Value can be any alphanumeric string. This setting is used in conjunction with the JavaScript API. See the JavaScript API documentation for details.
+	- disablekb			|| Values: 0 or 1. Default is 0. Setting to 1 will disable the player keyboard controls. Keyboard controls are as follows:
+	     Spacebar: Play / Pause
+	     Arrow Left: Jump back 10% in the current video
+	     Arrow Right: Jump ahead 10% in the current video
+	     Arrow Up: Volume up
+	     Arrow Down: Volume Down
+	- egm				|| Values: 0 or 1. Default is 0. Setting to 1 enables the "Enhanced Genie Menu". This behavior causes the genie menu (if present) to appear when the user's mouse enters the video display area, as opposed to only appearing when the menu button is pressed.
+	- border			|| Values: 0 or 1. Default is 0. Setting to 1 enables a border around the entire video player. The border's primary color can be set via the color1 parameter, and a secondary color can be set by the color2 parameter.
+	- color1, color2	|| Values: Any RGB value in hexadecimal format. color1 is the primary border color, and color2 is the video control bar background color and secondary border color.
+	- start				|| Values: A positive integer. This parameter causes the player to begin playing the video at the given number of seconds from the start of the video. Note that similar to the seekTo function, the player will look for the closest keyframe to the time you specify. This means sometimes the play head may seek to just before the requested time, usually no more than ~2 seconds.
+	- fs				|| Values: 0 or 1. Default is 0. Setting to 1 enables the fullscreen button. This has no effect on the Chromeless Player. Note that you must include some extra arguments to your embed code for this to work. The bolded parts of the below example enable fullscreen functionality:
+	- hd				|| Values: 0 or 1. Default is 0. Setting to 1 enables HD playback by default. This has no effect on the Chromeless Player. This also has no effect if an HD version of the video is not available. If you enable this option, keep in mind that users with a slower connection may have an sub-optimal experience unless they turn off HD. You should ensure your player is large enough to display the video in its native resolution.
+	- showsearch		|| Values: 0 or 1. Default is 1. Setting to 0 disables the search box from displaying when the video is minimized. Note that if the rel parameter is set to 0 then the search box will also be disabled, regardless of the value of showsearch.
+	- showinfo			|| Values: 0 or 1. Default is 1. Setting to 0 causes the player to not display information like the video title and rating before the video starts playing.
+	- iv_load_policy	|| Values: 1 or 3. Default is 1. Setting to 1 will cause video annotations to be shown by default, whereas setting to 3 will cause video annotation to not be shown by default.
+	- cc_load_policy	|| Values: 1. Default is based on user preference. Setting to 1 will cause closed captions to be shown by default, even if the user has turned captions off.
+]
+	[(#EXTENSION|=={dist_youtu}|oui)
+		[(#GET{responsive}|=={oui}|oui)<div class="capsule-video"><div class="mini_capsule-video">]
+			#SET{url_youtube,//www.youtube-nocookie.com/embed}
+			[(#GET{mode_confidentialite}|=={non}|oui)#SET{url_youtube,//www.youtube.com/embed}]
+			[(#SET{url_separator,[(#GET{fichier}|match{\?}|?{&amp;,?})]})]
+			[(#SET{url_complete,
+				#GET{url_youtube}/#GET{fichier}#GET{url_separator}hd=1&amp;wmode=#GET{wmode}&amp;autoplay=#ENV{autoplay,0}[&amp;rel=0(#GET{afficher_suggestions}|=={non}|oui)][&amp;controls=0(#GET{afficher_commandes}|=={non}|oui)][&amp;enablejsapi=1(#GET{enablejsapi}|=={oui}|oui)][&amp;showinfo=0(#GET{afficher_titres_et_actions}|=={non}|oui)]})]
+			<iframe[ title="(#GET{titre_video}|couper{80})"] width="#GET{largeur}" height="#GET{hauteur}" src="[(#GET{url_complete}|replace{' ',''})]" allowfullscreen class="youtube-player"></iframe>
+		[(#GET{responsive}|=={oui}|oui)</div></div> <!-- .capsule-video .mini_capsule-video -->]
+	]
+
+
+[(#REM)
+/** Traiter les vidéos H264/WebM/Ogg/Mkv en HTML5 **/
+]
+	[(#EXTENSION|in_array{#GET{lesExtensionsHtml5}}|oui)
+	<div class="playerVideo">
+		<section>
+		<figure>
+			[(#SET{nomVideo,[(#FICHIER|basename|replace{\.#EXTENSION,''})]})]
+			[(#FICHIER|basename|pathinfo|table_valeur{filename}|oui) [(#SET{nomVideo,[(#FICHIER|basename|pathinfo|table_valeur{filename})]})] ]
+			<INCLURE{fond=noisettes/balise_video_html5,nomVideo=#GET{nomVideo},largeur=#GET{largeur},hauteur=#GET{hauteur},poster=#GET{poster},env} />
+			[(#GET{titre_descriptif}|=={oui}|oui)
+			[(#GET{liste_definition}|=={oui}|non)
+			<figcaption>
+				<p><strong>#GET{titre_video}</strong></p>
+				#DESCRIPTIF
+			</figcaption>
+			]]
+		</figure>
+		</section>
+	</div> <!-- Fermeture de ID : playerVideo -->
+	]
+
+
+[(#GET{liste_definition}|=={oui}|oui)
+</dt>
+]
+[(#REM)
+/** Titre et Descriptif **/
+]
+[(#GET{liste_definition}|=={oui}|oui)
+	[(#GET{titre_descriptif}|=={oui}|oui)
+	[<dt class='spip_doc_titre'><strong>(#GET{titre_video})</strong></dt>]
+	[<dd class='spip_doc_descriptif'[ style='width:(#GET{largeur})']>(#DESCRIPTIF|PtoBR)[<br/>(#CREDITS|PtoBR)]</dd>]
+	]
+</dl>
+]
+</BOUCLE_LaVideo>
+</B_LaVideo>
+[(#REM)
+/** CAS GENERAL == MODELE VIDEO DE DIST DE SPIP **/
+    On passe par le modele emb qui est plus évolué que le modele video.
+]
+    [(#REM) Pour le cas du type mime video, on appelle explicitement le modele de la
+            distribution sinon SPIP appelle le fichier du plugin en boucle
+            sauf si un modele spécifique emb_extension.html existe
+            ]
+    <BOUCLE_distVideo(DOCUMENTS){id_document=#GET{document}}{tout}>
+        [(#SET{modele_mime, [(#MIME_TYPE)] })]
+        [(#SET{modele_fond, [(#VAL**{emb_[(#EXTENSION)]}|trouver_fond{modeles/})] })]
+
+        #SET{modele_video, 0}
+        [(#GET{modele_mime}|trim|=={'video'}|oui)
+        [(#GET{modele_fond}|trim|=={''}|oui)
+            #SET{modele_video,1}
+        ]]
+
+        [(#GET{modele_video}|=={1}|oui)
+    	     [(#INCLURE{fond=plugins-dist/medias/modeles/video,id_document=#GET{document},env})]
+        ]
+        [(#GET{modele_video}|=={1}|non)
+           [(#MODELE{emb}{id=#ID_DOCUMENT}{env}{emb=' '})]
+        ]
+    </BOUCLE_distVideo>
+<//B_LaVideo>

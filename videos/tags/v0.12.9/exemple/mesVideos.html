@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<title>Plugin Vidéo(s) - Page de test</title>
+	<meta charset="utf-8">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <meta name="geo.placename" content="" />
+
+	#INSERT_HEAD
+</head>
+<body id="sommaire">
+	
+	<header id="header" role="banner">
+		<h1>Les vidéos - (spip.php?page=mesVideos)</h1>
+	</header>
+
+	<section id="main" role="main">
+		<h2>Liste de vos vidéos</h2>
+		<B_LesVideos>
+		<ul>
+		<BOUCLE_LesVideos(DOCUMENTS){extension IN (dist_daily,dist_vimeo,dist_youtu,dist_cubox)}>
+			<li><span style='text-transform:uppercase'>#EXTENSION</span> — #FICHIER<br />
+				#MODELE{video,
+					document=#ID_DOCUMENT}
+			</li>
+		</BOUCLE_LesVideos>
+		</ul>
+		</B_LesVideos>
+	</section>
+
+</body>
+</html>

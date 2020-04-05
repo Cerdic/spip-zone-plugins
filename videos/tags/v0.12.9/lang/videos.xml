@@ -1,0 +1,29 @@
+<traduction
+	module="videos"
+	id="videos--videos-50dfb"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip-contrib-extensions/videos.git"
+	reference="fr">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/videos?lang_cible=de" total="40" traduits="40" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
+	</langue>
+	<langue code="en" url="https://trad.spip.net/tradlang_module/videos?lang_cible=en" total="40" traduits="26" relire="0" modifs="1" nouveaux="13" pourcent="65.00">
+		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
+	</langue>
+	<langue code="es" url="https://trad.spip.net/tradlang_module/videos?lang_cible=es" total="40" traduits="39" relire="0" modifs="0" nouveaux="1" pourcent="97.50">
+		<traducteur nom="alf" lien="https://trad.spip.net/auteur/alf" />
+		<traducteur nom="dani" lien="https://trad.spip.net/auteur/dani" />
+		<traducteur nom="Daniel Quisbert" lien="https://trad.spip.net/auteur/daniel-7022" />
+	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/videos?lang_cible=fr" total="40" traduits="40" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="nl" url="https://trad.spip.net/tradlang_module/videos?lang_cible=nl" total="40" traduits="15" relire="0" modifs="0" nouveaux="25" pourcent="37.50">
+		<traducteur nom="Suske" lien="https://trad.spip.net/auteur/suske" />
+	</langue>
+	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/videos?lang_cible=pt_br" total="40" traduits="40" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
+	</langue>
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/videos?lang_cible=sk" total="40" traduits="28" relire="0" modifs="0" nouveaux="12" pourcent="70.00">
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
+	</langue>
+</traduction>

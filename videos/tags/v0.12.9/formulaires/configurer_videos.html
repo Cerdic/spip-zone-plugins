@@ -1,0 +1,169 @@
+#CACHE{0}
+
+[(#REM)
+/** Valeurs par défaut **/
+]
+[(#SET{hauteur_defaut,315})]
+[(#SET{largeur_defaut,560})]
+[(#SET{titre_descriptif_defaut,non})]
+[(#SET{liste_definition_defaut,non})]
+[(#SET{afficher_suggestions_defaut,non})]
+[(#SET{afficher_commandes_defaut,oui})]
+[(#SET{afficher_titres_et_actions_defaut,oui})]
+[(#SET{mode_confidentialite_defaut,oui})]
+[(#SET{enablejsapi_defaut,non})]
+
+<div class='formulaire_spip formulaire_configurer formulaire_configurer_#FORM' id='formulaire_configurer_#FORM'>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action=#ENV{action}><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="responsive" value="" />
+
+
+		<div class="fieldset">
+			<h3 class="legend"><:videos:cfg_titre_configurations_communes:></h3>
+
+			<div class='editer-groupe'>
+				<div class='editer'>
+					<label for="responsive"><:videos:cfg_label_responsive:></label>
+					<div class="choix">
+						<input type="checkbox"[ (#ENV{responsive}|=={oui}|oui)checked="checked"] name="responsive" value="oui" id="responsive" class="checkbox" />
+						<label for="responsive"><:videos:cfg_explication_responsive:></label>
+					</div>
+				</div>
+				<div class='editer'>
+					<label for="largeur"><:videos:cfg_label_largeur:></label>
+					<p class='explication'><:videos:cfg_explication_largeur:></p>
+					<input type="text" name="largeur" value="[(#ENV{largeur,#GET{largeur_defaut}})]" id="largeur" class="text" />
+				</div>
+				<div class='editer'>
+					<label for="hauteur"><:videos:cfg_label_hauteur:></label>
+					<p class='explication'><:videos:cfg_explication_hauteur:></p>
+					<input type="text" name="hauteur" value="[(#ENV{hauteur,#GET{hauteur_defaut}})]" id="hauteur" class="text" />
+				</div>
+				<div class='editer'>
+					<label for="wmode"><:videos:cfg_label_wmode:></label>
+					<div class='explication'><:videos:cfg_explication_wmode:></div>
+					[(#SET{wmode,[(#ENV{wmode}|sinon{opaque})]})]
+					<select name="wmode" id="wmode" size="1">
+						<option value="opaque"[(#ENV{wmode}|=={opaque}|oui) selected='selected']>Opaque</option>
+						<option value="transparent"[(#ENV{wmode}|=={transparent}|oui) selected='selected']>Transparent</option>
+						<option value="window"[(#ENV{wmode}|=={window}|oui) selected='selected']>Window</option>
+
+					</select>
+				</div>
+				<div class='editer'>
+					<label for="titre_descriptif"><:videos:cfg_label_titre_descriptif:></label>
+					<p class='explication'><:videos:cfg_explication_titre_descriptif:></p>
+					<div class="choix">
+						<input type="radio" name="titre_descriptif" class="radio" id="titre_descriptif_on" value="oui" [(#ENV{titre_descriptif,#GET{titre_descriptif_defaut}}|=={oui}|oui) checked="checked"] />
+						<label for='titre_descriptif_on'><:item_oui:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="titre_descriptif" class="radio" id="titre_descriptif_off" value="non" [(#ENV{titre_descriptif,#GET{titre_descriptif_defaut}}|=={non}|oui) checked="checked"] />
+						<label for='titre_descriptif_off'><:item_non:></label>
+					</div>
+				</div>
+				<div class='editer'>
+					<label for="liste_definition"><:videos:cfg_label_liste_definition:></label>
+					<p class='explication'><:videos:cfg_explication_liste_definition:></p>
+					<div class="choix">
+						<input type="radio" name="liste_definition" class="radio" id="liste_definition_on" value="oui" [(#ENV{liste_definition,#GET{liste_definition_defaut}}|=={oui}|oui) checked="checked"] />
+						<label for='liste_definition_on'><:item_oui:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="liste_definition" class="radio" id="liste_definition_off" value="non" [(#ENV{liste_definition,#GET{liste_definition_defaut}}|=={non}|oui) checked="checked"] />
+						<label for='liste_definition_off'><:item_non:></label>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		[(#REM) <!-- CFG Youtube -->]
+		<div class="fieldset">
+			<h3 class="legend"><:videos:cfg_titre_configurations_youtube:></h3>
+			<div class='editer-groupe'>
+				<div class='editer'>
+					<label for="youtube_api_key"><:videos:cfg_label_youtube_api_key:></label>
+					<p class='explication'><:videos:cfg_explication_youtube_api_key:></p>
+					<input type="text" name="youtube_api_key" id="youtube_api_key" value="#ENV{youtube_api_key}" class="text"/>
+				</div>
+				[(#REM) 
+				<!-- En cours : ajout de l'identifiant de chaine a diffuser, pour le skel youtube_channel
+				<div class='editer-groupe'>
+					<label for="youtube_channel"><:videos:cfg_label_youtube_channel:></label>
+					<p class='explication'><:videos:cfg_explication_youtube_channel:></p>
+					<input type="text" name="youtube_channel" id="youtube_channel" value="#ENV{youtube_channel}" class="text"/>
+				</div>
+				-->]
+				<div class='editer'>
+					<label for="liste_definition"><:videos:cfg_label_mode_confidentialite:></label>
+					<p class='explication'><:videos:cfg_explication_mode_confidentialite:></p>
+					<div class="choix">
+						<input type="radio" name="mode_confidentialite" class="radio" id="mode_confidentialite_on" value="oui" [(#ENV{mode_confidentialite,#GET{mode_confidentialite_defaut}}|=={oui}|oui) checked="checked"] />
+						<label for='mode_confidentialite_on'><:item_oui:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="mode_confidentialite" class="radio" id="mode_confidentialite_off" value="non" [(#ENV{mode_confidentialite,#GET{mode_confidentialite_defaut}}|=={non}|oui) checked="checked"] />
+						<label for='mode_confidentialite_off'><:item_non:></label>
+					</div>
+				</div>
+				<div class='editer'>
+					<label for="liste_definition"><:videos:cfg_label_afficher_commandes:></label>
+					<p class='explication'><:videos:cfg_explication_afficher_commandes:></p>
+					<div class="choix">
+						<input type="radio" name="afficher_commandes" class="radio" id="afficher_commandes_on" value="oui" [(#ENV{afficher_commandes,#GET{afficher_commandes_defaut}}|=={oui}|oui) checked="checked"] />
+						<label for='afficher_commandes_on'><:item_oui:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="afficher_commandes" class="radio" id="afficher_commandes_off" value="non" [(#ENV{afficher_commandes,#GET{afficher_commandes_defaut}}|=={non}|oui) checked="checked"] />
+						<label for='afficher_commandes_off'><:item_non:></label>
+					</div>
+				</div>
+				<div class='editer'>
+					<label for="liste_definition"><:videos:cfg_label_afficher_titres_et_actions:></label>
+					<p class='explication'><:videos:cfg_explication_afficher_titres_et_actions:></p>
+					<div class="choix">
+						<input type="radio" name="afficher_titres_et_actions" class="radio" id="afficher_titres_et_actions_on" value="oui" [(#ENV{afficher_titres_et_actions,#GET{afficher_titres_et_actions_defaut}}|=={oui}|oui) checked="checked"] />
+						<label for='afficher_titres_et_actions_on'><:item_oui:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="afficher_titres_et_actions" class="radio" id="afficher_titres_et_actions_off" value="non" [(#ENV{afficher_titres_et_actions,#GET{afficher_titres_et_actions_defaut}}|=={non}|oui) checked="checked"] />
+						<label for='afficher_titres_et_actions_off'><:item_non:></label>
+					</div>
+				</div>
+				<div class='editer'>
+					<label for="liste_definition"><:videos:cfg_label_afficher_suggestions:></label>
+					<p class='explication'><:videos:cfg_explication_afficher_suggestions:></p>
+					<div class="choix">
+						<input type="radio" name="afficher_suggestions" class="radio" id="afficher_suggestions_on" value="oui" [(#ENV{afficher_suggestions,#GET{afficher_suggestions_defaut}}|=={oui}|oui) checked="checked"] />
+						<label for='afficher_suggestions_on'><:item_oui:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="afficher_suggestions" class="radio" id="afficher_suggestions_off" value="non" [(#ENV{afficher_suggestions,#GET{afficher_suggestions_defaut}}|=={non}|oui) checked="checked"] />
+						<label for='afficher_suggestions_off'><:item_non:></label>
+					</div>
+				</div>
+				<div class='editer'>
+					<label for="liste_definition"><:videos:cfg_label_enablejsapi:></label>
+					<p class='explication'><:videos:cfg_explication_enablejsapi:></p>
+					<div class="choix">
+						<input type="radio" name="enablejsapi" class="radio" id="enablejsapi_on" value="oui" [(#ENV{enablejsapi,#GET{enablejsapi_defaut}}|=={oui}|oui) checked="checked"] />
+						<label for='enablejsapi_on'><:item_oui:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="enablejsapi" class="radio" id="enablejsapi_off" value="non" [(#ENV{enablejsapi,#GET{enablejsapi_defaut}}|=={non}|oui) checked="checked"] />
+						<label for='enablejsapi_off'><:item_non:></label>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<input type="hidden" name="_meta_casier" value="videos" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+</div>

@@ -1,0 +1,25 @@
+<traduction
+	module="paquet-videos"
+	id="paquet-videos--videos-50dfb"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip-contrib-extensions/videos.git"
+	reference="fr">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/paquet-videos?lang_cible=de" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
+	</langue>
+	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-videos?lang_cible=en" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="es" url="https://trad.spip.net/tradlang_module/paquet-videos?lang_cible=es" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="alf" lien="https://trad.spip.net/auteur/alf" />
+	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-videos?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="hac" url="https://trad.spip.net/tradlang_module/paquet-videos?lang_cible=hac" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Aku Marani" lien="https://trad.spip.net/auteur/akomarani" />
+	</langue>
+	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/paquet-videos?lang_cible=pt_br" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
+	</langue>
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/paquet-videos?lang_cible=sk" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
+	</langue>
+</traduction>
