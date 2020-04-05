@@ -1,0 +1,25 @@
+[(#REM)
+
+	Variante du modèle « album » : carrousel Nivoslider.
+
+	Utilisation :
+	- Depuis le texte d'un objet : <albumX|nivoslider>
+	- Dans un squelette : \#MODELE{album_nivoslider,id_album=X}
+
+][(#REM)
+
+	Paramètres : cf. nivoslider_base.html
+
+][(#SET{titre,#ENV{titre,''}|replace{^oui$,''}})]
+<BOUCLE_album(ALBUMS){id_album=#ENV{id_album,#ENV{id}}}{statut == #REM|test_espace_prive|?{.*,#ENV{statut,publie}}}>
+[
+	[(#GET{titre}|!={non}|oui)
+		[
+			[(#PLUGIN{albums,version}|intval|>{2}|oui)<div class="nivo titre">]
+			(#GET{titre}|sinon{#TITRE}|wrap{[<(#ENV*{balise_titre,'<h2>'}|replace{^<}|replace{>$})>]})
+			[(#PLUGIN{albums,version}|intval|>{2}|oui)</div>]
+		]
+	]
+	(#INCLURE{fond=modeles/nivoslider_base,env,id_objet=#ID_ALBUM,objet=album,doublons,limite=#ENV{limite,1000},manualAdvance=#ENV{manualAdvance,#ENV{manuel,non}}|=={oui}|?{true,false}})
+]
+</BOUCLE_album>

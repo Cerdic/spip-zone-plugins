@@ -1,0 +1,7 @@
+[(#REM) modèle Nivoslider pour un article : 
+ - Depuis un article : <article33|nivoslider>, alors affiche les images liees a l'article XX
+ - Selon le modele CROCHET(# MODELE{nivoslider}{id_article=XX})CROCHET
+]
+
+[(#SET{id_article,[(#ENV{id_article, #CONFIG{nivoslider/id_defaut, 0} })]} )]
+<INCLURE{fond=modeles/nivoslider_base,env,id_objet=#GET{id_article},objet=article,doublons,mode=#ENV{mode,document}} />

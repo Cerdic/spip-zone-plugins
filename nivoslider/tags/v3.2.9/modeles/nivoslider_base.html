@@ -1,0 +1,125 @@
+[(#REM) modele Nivoslider generique, utilise par les autres modeles
+	Parametres :
+	Selection des documents
+		id_objet
+	  objet
+	  id_document
+	  vu
+	  limite
+	Affichage du slider
+		width:			hauteur
+		height:			largeur
+		effect: random, sliceDownRight, sliceDownLeft, sliceUpRight, sliceUpLeft, sliceUpDown,
+            sliceUpDownLeft, fold, fade, boxRandom, boxRain, boxRainReverse, boxRainGrow, boxRainGrowReverse
+		slices:
+		animSpeed:
+		pauseTime:
+		directionNav:
+		directionNavHide:
+		controlNav:
+		keyboardNav:
+		pauseOnHover:
+		captionOpacity:
+		imageAlign:
+		imageBackcolor:
+		controlNavThumbs:
+		controlNavThumbsWidth:
+		controlNavThumbsHeight:
+    manualAdvance:
+]
+
+[(#SET{resize,[(#ENV{resize,oui})]})]
+[(#SET{width,[(#ENV{width, #CONFIG{nivoslider/width, 500} })]} )]
+[(#SET{height,[(#ENV{height, #CONFIG{nivoslider/height, 240} })]} )]
+[(#SET{effect,[(#ENV{effect, #CONFIG{nivoslider/effect, random} })]} )]
+[(#SET{slices,[(#ENV{slices, #CONFIG{nivoslider/slices,15} })]} )]
+[(#SET{animSpeed,[(#ENV{animSpeed, #CONFIG{nivoslider/animSpeed,500} })]} )]
+[(#SET{pauseTime,[(#ENV{pauseTime, #CONFIG{nivoslider/pauseTime,3000} })]} )]
+[(#SET{directionNav,[(#ENV{directionNav, #CONFIG{nivoslider/directionNav,true} })]} )]
+[(#SET{manualAdvance,[(#ENV{manualAdvance, #CONFIG{nivoslider/manualAdvance,false} })]} )]
+[(#SET{controlNav,[(#ENV{controlNav, #CONFIG{nivoslider/controlNav,true} })]} )]
+[(#SET{keyboardNav,[(#ENV{keyboardNav, #CONFIG{nivoslider/keyboardNav,false} })]} )]
+[(#SET{pauseOnHover,[(#ENV{pauseOnHover, #CONFIG{nivoslider/pauseOnHover,true} })]} )]
+[(#SET{imageAlign,[(#ENV{imageAlign, #CONFIG{nivoslider/imageAlign,'center'} })]} )]
+[(#SET{imageBackcolor,[(#ENV{imageBackcolor, #CONFIG{nivoslider/imageBackcolor,'transparent'} })]} )]
+[(#SET{controlNavThumbs,[(#ENV{controlNavThumbs, #CONFIG{nivoslider/controlNavThumbs,false} })]} )]
+[(#SET{controlNavThumbsWidth,[(#ENV{controlNavThumbsWidth, #CONFIG{nivoslider/controlNavThumbsWidth,50} })]} )]
+[(#SET{controlNavThumbsHeight,[(#ENV{controlNavThumbsHeight, #CONFIG{nivoslider/controlNavThumbsHeight,50} })]} )]
+
+[(#SET{uniqid,#ENV|md5|substr{0,8}})]
+#SET{nolazy,#ENV{nolazy,#GET{controlNavThumbs}|=={'true'}|oui}}
+<B_doc>
+<div class='nivoSlider-wrap[ nav-(#GET{controlNavThumbs}|=={'true'}|?{thumb,bullet})] p'
+	[(#GET{resize}|=={oui}|oui)style="[max-width:(#GET{width})px;][max-height:(#GET{height})px]"]>
+	<div id="slider_#GET{uniqid}"
+	     class="nivoSlider"
+		   data-slider="{
+				effect:'[(#GET{effect})]',
+				slices:[(#GET{slices}|intval)],
+				boxCols: 8,
+				boxRows: 4,
+				animSpeed:[(#GET{animSpeed}|intval)],
+				pauseTime:[(#GET{pauseTime}|intval)],
+				startSlide: 0,
+				directionNav:[(#GET{directionNav}|=={true}|?{true,false})],
+				[(#GET{controlNavThumbs}|=={'true'}|oui)
+				controlNav:true,
+				controlNavThumbs:true,
+				]
+				[(#GET{controlNavThumbs}|=={'true'}|non)
+				controlNav:[(#GET{controlNav}|=={true}|?{true,false})],
+				]
+				pauseOnHover: [(#GET{pauseOnHover}|=={true}|?{true,false})],
+				manualAdvance: [(#GET{manualAdvance}|=={true}|?{true,false})],
+				prevText: '<:precedent|ucfirst|attribut_html|texte_script:>',
+				nextText: '<:suivant|ucfirst|attribut_html|texte_script:>',
+				randomStart: false
+		   }">
+	<BOUCLE_doc(DOCUMENTS)
+		{id_objet?}{objet?}
+		{id_document?}
+		{mode?}
+		{extension IN png,jpg,gif}
+		{par num titre,titre}
+		{doublons}
+		{vu?}
+		{0,#ENV{limite,1000}}>
+
+		#SET{lien,''}
+		[(#DESCRIPTIF|oui)
+			[(#SET{lien,#VAL{'spip.php?'#DESCRIPTIF}|attribut_html|replace{' ',''}})]
+			[(#SET{fancyornot,''})]
+			[(#DESCRIPTIF|match{doc}|=={doc}|?{
+				[(#PLUGIN{FANCYBOX}|oui)
+					[(#SET{fancyornot, [(#CONFIG{fancybox/selecteur_commun,'.fancybox'}|replace{'\.',''})]})]
+				]
+				[(#SET{lien, #URL_DOCUMENT})]
+			})]
+			[(#DESCRIPTIF|match{http}|=={http}|?{
+				[(#SET{lien, [(#DESCRIPTIF|textebrut)]})]
+			})]
+		][
+		<a href="(#GET{lien})" [class="(#GET{fancyornot})"]>
+		][(#SET{img,[(#GET{resize}|=={oui}|?{
+				[(#FICHIER
+						|image_passe_partout{#GET{width},#GET{height}}
+						|image_recadre{#GET{width},#GET{height},#GET{imageAlign},#GET{imageBackcolor}}
+						|inserer_attribut{alt,''})]
+				,
+				[(#FICHIER|balise_img)]
+				})]
+				})][(#SET{img,[(#GET{img}
+				|inserer_attribut{title,#TITRE}
+		    |nivoslider_img_display_first_only{#COMPTEUR_BOUCLE,#GET{nolazy}}
+		    |inserer_attribut{class,'no_image_filtrer no-adapt-img'})]
+		})][(#GET{controlNavThumbs}|=={'true'}|?{
+			[(#GET{img}|inserer_attribut{data-thumb,#FICHIER|image_passe_partout{#GET{controlNavThumbsWidth},#GET{controlNavThumbsHeight}}|image_recadre{#GET{controlNavThumbsWidth},#GET{controlNavThumbsHeight},center,ffffff}|extraire_attribut{src}})]
+		,
+			[(#GET{img})]
+		})][</a>(#GET{lien}|oui)
+	]</BOUCLE_doc>
+	</div>
+	[<script>/*<!\[CDATA\[*/var nivosliderpath = '[(#CHEMIN{javascript/jquery.nivo.slider.pack.js}|timestamp)]';
+	(#INCLURE{javascript/nivoslider.init.js}|compacte{js})/*\]\]>*/</script>]
+</div>
+</B_doc>

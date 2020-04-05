@@ -1,0 +1,7 @@
+[(#REM) modèle Nivoslider pour une rubrique : 
+ - Depuis un article : < nivoslider_rubXX >, alors affiche les docs de la rubrique XX
+ - Selon le modele CROCHET(# MODELE{nivoslider_rub}{id_nivoslider_rub=XX})CROCHET
+]
+
+[(#SET{id_rubrique,[(#ENV{id_rubrique, #CONFIG{nivoslider/id_defaut, 0} })]} )]
+<INCLURE{fond=modeles/nivoslider_base,env,id_objet=#GET{id_rubrique},objet=rubrique} />
