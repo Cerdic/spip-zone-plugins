@@ -1,0 +1,27 @@
+#HTTP_HEADER{Content-type:text/javascript}
+if (!jQuery.fn.simplyCountable){
+#INCLURE{javascript/jquery.simplycountable.js}
+}
+
+var seo_init = function(){
+	jQuery('.countchars').each(function(){
+		var count =  $(this).attr('data-maxchar');
+		if(count){
+			var name = $(this).attr('name')+'_counter';
+			$(this).after('<p class="counter"><:seo:info_count_max:><span class="'+name+'"></span></p>')
+			$(this).simplyCountable({
+				counter:			'.'+name,
+			    maxCount:           count,
+			    strictMax:          false,
+			    safeClass:          'safecount',
+			    overClass:          'overcount',
+			    onOverCount:        function(count, countable, counter){
+			    	$('.'+name).parents('.counter').addClass('erreur_message');
+			    },
+			    onSafeCount:        function(count, countable, counter){
+			    	$('.'+name).parents('.counter').removeClass('erreur_message');
+			    },
+			});
+		}
+	});
+};

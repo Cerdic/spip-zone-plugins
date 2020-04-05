@@ -1,0 +1,37 @@
+<paquet
+	prefix="seo"
+	categorie="statistique"
+	version="2.1.7"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="seo.png"
+	schema="1.1.1"
+	documentation="https://contrib.spip.net/article3113"
+>	
+
+	<nom>SEO</nom>
+	<!-- Search Engine Optimisation -->
+
+	<auteur mail="p.rousset@gmail.com">Pierre ROUSSET</auteur>
+
+	<copyright>2009-2014</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-2.0.html">GPL 2</licence>
+
+	<pipeline nom="declarer_tables_principales" inclure="base/seo_tables.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/seo_tables.php" />
+
+	<pipeline nom="recuperer_fond" action="recuperer_fond" inclure="seo_pipelines.php" />
+	<pipeline nom="affichage_final" action="affichage_final" inclure="seo_pipelines.php" />
+	<pipeline nom="autoriser" inclure="seo_pipelines.php" />
+
+	<pipeline nom="affiche_milieu" action="affiche_milieu" inclure="seo_pipelines_ecrire.php" />
+	<pipeline nom="afficher_contenu_objet" action="afficher_contenu_objet" inclure="seo_pipelines_ecrire.php" />
+	<pipeline nom="formulaire_fond" action="formulaire_fond" inclure="seo_pipelines_ecrire.php" />
+	<pipeline nom="formulaire_charger" action="formulaire_charger" inclure="seo_pipelines_ecrire.php" />
+	<pipeline nom="formulaire_traiter" action="formulaire_traiter" inclure="seo_pipelines_ecrire.php" />
+
+	<pipeline nom="post_seo" action="" />
+
+	<menu nom="seo" titre="seo:seo" parent="menu_squelette" icone="images/seo-16.png" action="configurer_seo" />
+</paquet>
