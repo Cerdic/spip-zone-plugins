@@ -1,0 +1,40 @@
+#SET{self,#SELF|parametre_url{date_debut|id_evenement|debut_agenda,''}}#SET{yena,''}
+<h2><:agenda:agenda:></h2>
+<B_mots>
+<div class='pagination'>
+<div class='plier_deplier'><a href='#' onclick='jQuery("li.item.court").removeClass("court");return false;' class='noajax'><:seminaire:lien_tout_deplier:></a> | <a href='#' onclick='set_vevent();return false;' class='noajax'><:seminaire:lien_tout_replier:></a></div>
+[(#GET{self}|parametre_url{date_debut,1900-01-01}|aoustrong{<:seminaire:evenements_depuis_debut:>,#ENV{date_debut}|=={1900-01-01},noajax}) |]
+[(#GET{self}|aoustrong{<:agenda:evenements_a_venir:>,#ENV{date_debut}|=={#ENV{date}|affdate{Y-m-d}},noajax}) ]
+</div>
+
+<BOUCLE_mots(MOTS){type=Type}>
+<B_agenda>
+<h3>[(#DESCRIPTIF|attribut_html)]</h3>
+<ul class='liste_items evenements'>
+	<li>
+		<ul>
+			<BOUCLE_agenda(EVENEMENTS){par date_debut}{age_relatif_debut<=0}{id_evenement?}{id_article?}{id_rubrique?}{titre_mot=#TITRE}{id_evenement_source?}{pagination #ENV{pas,9}}>
+				<li class='item[ (#EXPOSE)][ (#ID_EVENEMENT_SOURCE|oui)repetition]'>
+					[(#MODELE{seminaire_acm}|trim|sinon{'?'})]
+				</li>
+				<hr>
+				<!--<INCLURE{fond=formulaires/participation_evenement}>-->
+			</BOUCLE_agenda>
+			[<p class='pagination'>(#PAGINATION{page})</p>]
+
+		</ul>
+	</li>	
+</ul>
+</B_agenda>
+</BOUCLE_mots>
+
+	<!-- On n'affiche le formulaire d'édition des événements que si la personne connectée est autorisée à modifier l'événement (edit, on verra les autorisations plus tard) (edit+ encore moins puisqu'il semblerait que ce ne soit pas nécessaire)-->
+
+<div class='espace'></div>
+<span class="bouton">[(#REM)bouton de création d'événement]
+<a href="#URL_ECRIRE{evenements_edit,new=oui&id_article=#ID_ARTICLE}" class='noajax creer'><:seminaire:creer_evenement:></a>
+</span>
+<!--<a class="google" href="http://www.google.com/calendar/render?cid=[(#URL_PAGE{seminaire_ical}|parametre_url{id_article, #ID_ARTICLE}|url_absolue|attribut_html)]" target="_blank"><img src="http://www.google.com/calendar/images/ext/gc_button1_fr.gif" border=0></a>-->
+<a class="google" href="http://www.google.com/calendar/render?cid=#URL_SITE_SPIP/%3Fpage%3Dseminaire_ical%26id_article%3D#ID_ARTICLE" target="_blank"><img src="http://www.google.com/calendar/images/ext/gc_button1_fr.gif" border=0></a>
+<a class="ical" href="[(#URL_PAGE{seminaire_ical}|parametre_url{id_article, #ID_ARTICLE}|url_absolue|replace{'http://','webcal://'})]" title="<:seminaire:abonnement:>"><img src="#CHEMIN{images/calendrier.png}"/><span class="texte">iCal</span></a>[(#REM)bouton d'abonnement au calendrier]
+<div class='espace'></div>

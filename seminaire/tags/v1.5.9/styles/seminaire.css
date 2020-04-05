@@ -1,0 +1,318 @@
+/* Gère l'affichage du calendrier hebdomadaire, le pliage/depliage des séminaires et le style des listes de séminaire */
+
+.pagination a.creer {float:left;}
+/* vevent présentation du modele des événements*/
+li.item div.vevent h3 {margin:0;font-size:1.1em;}
+li.item div.vevent p {margin:2px 0 0;}
+li.item div.vevent p.date {font-size: 0.98em; }
+ul.evenements li.item.court p { display: none; }
+li.item div.vevent p.category {font-size:0.9em;color:#999;}
+
+/* liste des evenements avec pliage dépliage*/
+.plier_deplier { float: right; font-size: 0.9em; }
+.evenements .liste_items ul{list-style-type:none;list-style-image:none;}
+.evenements li.item { padding-left: 20px;}
+.evenements li.item:hover {background:#edf3fe;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius:5px}
+.evenements li.court { border-width: 1px;}
+.evenements li.item .jour { width: 80px; margin-left: 0px; float: left; display: inline; position: relative; overflow: hidden; white-space: nowrap; font-size: 98%; }
+
+/*page aujour*/
+.categorie{
+	margin-left:-1em;
+	color:red;
+	}
+
+li.item .repetitions {margin-top:0.5em;font-size:0.9em;}
+li.court .repetitions {display: none;}
+li.item .repetitions ul,
+li.item .repetitions li {display:inline;margin:0;padding:0;}
+
+.evenements p.actions {text-align:right;font-size:0.9em;margin:5px 0 0;}
+
+/*pour que les listes n'aient pas de puces*/
+#seminaire {  
+	list-style-position: inside;
+	list-style-type:none !important;
+	list-style-image:none !important;
+	margin-bottom:30px;
+}
+
+#seminaire ul {
+  margin: 5px 0px 5px 0px;
+  list-style-position: inside;
+	list-style-type:none !important;
+	list-style-image:none !important;
+}
+
+#seminaire h4 {
+	font-weight: bold;
+	color: #4682B4;
+	}
+.navigation-seminaire{
+	width: 120px;
+	float: left;
+	}
+.agenda_navigation ul{
+	list-style-type: none;
+	list-style-image: none;
+	}
+
+.titre-categorie{
+	color: #4682B4;
+	font-weight: bold;
+	}
+/***********************************
+la partie graphique du calendrier
+************************************/
+
+.navigation-calendrier{
+	/*display:none;affichage du bandeau de navigation du calendrier*/
+	background: #969696;
+	}
+
+.calendrier-table-large{/*le calendrier fait toute la largeur dispo et a une bordure d'un pixel*/
+	width:100%;
+	border: 1px solid #969696;
+	background: #eee;
+	}
+/*les cellules avec les jours*/	
+.calendrier-table-large th{
+	background: #C0C0C0;
+	}
+.calendrier-table-large th a{
+	text-decoration: none;
+	}
+.calendrier-table-large th a:hover{
+	text-decoration: none;
+	color: #2E5B6B;
+	}
+/* pour que les numéro de jour et de semaine s'affichent en haut des cellules*/	
+.calendrier-table-large tr{
+	vertical-align: top;
+	}
+/*le style des numéros de jour et de semaine*/	
+.calendrier-evenement a, .calendrier-table-large tr table a{
+	text-decoration: none;
+	color: #2E5B6B;
+	}
+.calendrier-evenement a:hover, .calendrier-table-large tr table a:hover{
+	color: #000;
+	/*font-weight:bold;*/
+	text-shadow: 3px 3px 3px grey;
+	}
+/*largeur des colonnes*/	
+.calendrier-table-large td{/*pour la vue semaine et mois*/
+	width:14.27%;
+	}
+.calendrier-td-gauche{/*pour la vue par jour*/
+	display:none;}	
+.calendrier-td-centre{
+	text-align:center;
+	width:100%;}
+.calendrier-td-droit{
+	display:none;}	
+	
+.jour_encours{/*aujourd'hui*/
+	background:#B1C3D9;
+	font-weight:bold;
+	border: 1px solid black;
+	color: #000;
+	}
+
+.jour_dimanche { background: #ddd;color: #000; }
+
+.jour_gris { background: #eee;color: #000; }
+.jour_pris { background: #000;color: #000; }
+.calendrier-cadreagenda { background: #eee; } /* grille du calendrier pour espace public */
+
+.bordure_claire { border: 1px solid #666;}
+.bordure_foncee { border: 1px solid #000; }
+.bordure_claire_basse { 
+	border-bottom: 1px solid #666; 
+	border-top: 1px solid #666; 
+	}
+.bordure_claire_left { border-left: 1px solid #666; }
+.bordure_claire_right { border-right: 1px solid #666; }
+
+
+.calendrier-evenement{
+	padding: 2px;
+	margin-top: 2px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	background-color: #FFCC66;
+	border: 1px solid #CD006F;
+	color: #CD006F;	
+}
+
+/*calendrier verdana 10 td-gauche centre et droitpour la vue par jour, arial 10 et couleur 1 pour les evenements*/	
+	
+
+/*************************************/
+/*styler le triple calendrier (enfin, on essaye))*/
+/**************************************/
+#nav-agenda{display:none;}
+
+.calendrier-annee { background: #AAA; padding: 3px; margin: 1px; font-family: Verdana, Geneva, Sans, sans-serif; font-size: 10px; font-weight: bold; color: #FFF; }
+.calendrier-annee:hover { color: #000; background-color: #FFF; }
+
+.calendrier-cadreagenda { vertical-align: top; width: 33%; }
+
+.agenda_invisible_au_chargement {
+	visibility: hidden;
+}
+.agenda_visible_au_chargement {
+	visibility: hidden;
+}
+/***************************************/
+/* pour le bouton ajouter un événement*/
+
+.bouton{
+	background: silver;
+	color: black;
+	-webkit-box-shadow: 3px 3px 3px #888;	
+	-moz-box-shadow: 3px 3px 3px #888;	
+	box-shadow: 3px 3px 3px #888;	
+	padding: .3em .5em;
+	margin-top:10px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	}
+.bouton:hover{
+	background: #B1C3D9;
+	-webkit-box-shadow: 5px 5px 5px #888;	
+	-moz-box-shadow: 5px 5px 5px #888;	
+	box-shadow: 5px 5px 5px #888;	
+	}
+.bouton:active{
+	background: #808080;
+	-webkit-box-shadow: 1px 1px 1px #888;	
+	-moz-box-shadow: 1px 1px 1px #888;	
+	box-shadow: 1px 1px 1px #888;
+	}	
+.bouton a{
+	text-decoration: none;
+	color: #2E5B6B;
+	}
+/* classes utilitaires*/
+.nettoyeur { clear: both; margin: 0; padding: 0; height: 0; line-height: 1px; font-size: 1px; overflow: hidden; }
+.espace {
+	height: 1.5em;
+	line-height:0.5em;
+	font-size:2px;
+}
+/* pour le bouton d'abonnement à un calendrier*/
+a.google{
+	float:right;
+	margin-right:5px;
+}
+a.ical{
+	float:right;
+	width:45px;
+	text-decoration:none;
+	text-align:center;
+}
+a.ical img{
+	border:0;
+	width:100%;
+	margin-bottom:-28px;
+}
+a.ical img:hover{
+	/*box-shadow: 0 0 2px 2px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0 0 2px 2px rgba(0,0,0,0.5);
+	-moz-box-shadow: 0 0 2px 2px rgba(0,0,0,0.5);
+	-moz-border-radius:7px;
+	-webkit-border-radius:7px;
+	border-radius:7px;
+	pas d'ombres, en plus elles sont mal faites*/
+}
+a.ical img:active{
+	box-shadow: 0 0 2px 2px rgba(0,0,0,0.5),
+				0 0 2px 2px rgba(0,0,0,0.5) inset;
+	-webkit-box-shadow: 0 0 2px 2px rgba(0,0,0,0.5),
+						0 0 2px 2px rgba(0,0,0,0.5) inset;
+	-moz-box-shadow: 	0 0 2px 2px rgba(0,0,0,0.5),
+						0 0 2px 2px rgba(0,0,0,0.5) inset;
+	-moz-border-radius:7px;
+	-webkit-border-radius:7px;
+	border-radius:7px;
+}
+
+/*******************************/
+/***** cadre authentification **/
+/********************************/
+.formulaire_spip input.text,
+.formulaire_spip input.password,
+.formulaire_spip textarea,
+.formulaire_spip select {
+	font-size:1em;
+	margin:0;
+	width: 96%;
+	border: 1px solid #666;
+	padding: 0px;
+}
+
+.formulaire_spip ul  {
+list-style-type: none;
+text-align:left;
+	padding: 0;
+}
+
+/*  ------------------------------------------
+/*      Habillage specifique du calendrier
+/*  ------------------------------------------ */
+#entete-calendar {
+	text-align:center;
+	height: auto;
+	font-weight:bold;
+	font-size: 0.71em;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-shadow: 3px 3px 5px grey;
+}
+.calcell.today {border:1px solid #ffff00 ; background-color :#ffff00 ;}
+#calendar th { background-color: #82ADE2;}
+td.occupe {font-weight:bold;border:1px solid #666 ; background-color :#FFFFCC ;} /* quand il y a un article */
+td.occupe a{text-decoration:none;}
+td.horsperiode {background:#e0e0e0;color:#878787;} /* les jours qui ne sont pas dans le mois */
+td.today{background:#B1C3D9;font-weight:bold;}    /* comme son nom l'indique */
+
+/* Titre du cadre */
+#calendar #entete-calendar .cadre-titre{
+	display:block;
+	background:#82ADE2; 
+	border-left:1px solid #82ADE2;
+	border-right:1px solid #999;
+	text-align:center;
+	font-size: 10px;
+	font-weight:bold;
+	/*texte ombré dans safari*/
+	text-shadow: 3px 3px 5px grey;
+	/*spécification css3 pour les bords arrondis*/
+	border-top-right-radius: 0.5em; 
+	border-top-left-radius: 0.5em;
+	/*spécification css3 pour les bords arrondis adaptée pour Safari et tous les navigateurs basés sur webkit*/
+	-webkit-border-top-right-radius: 0.5em;
+	-webkit-border-top-left-radius: 0.5em;
+	/*spécification css3 pour les bords arrondis adaptée pour Firefox et tous les navigateurs basés sur gecko*/
+	-moz-border-radius-topright: 0.5em;
+	-moz-border-radius-topleft: 0.5em;
+}
+#calendrier caption{font-size: 1.5em;}
+#calendrier caption a{text-decoration:none;}
+/*Pour avoir un pointeur qui indique qu'on peut cliquer et avoir des renseignements*/
+.resume{
+	cursor:help;
+}
+/*Liste de la page séminaire*/
+#texteseminaire ul {
+  margin: 5px 0px 5px 0px;
+  list-style-position: inside;
+	list-style-type:none !important;
+	list-style-image:none !important;
+}
+.rouge{
+	text-align:center;
+	color:red;
+}

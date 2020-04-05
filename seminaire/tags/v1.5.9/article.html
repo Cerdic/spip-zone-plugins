@@ -1,0 +1,23 @@
+<INCLURE{fond=entete}{id_article}{type_page=article}{lang}>
+
+<BOUCLE_article_principal(ARTICLES){id_article}>
+
+<INCLURE{fond=article_corps}{id_article}{lang}{env}>
+
+<!-- A lire dans la meme rubrique -->
+<B_lire_rub>
+<div class="autres">
+  <p><:meme_rubrique:>&nbsp;:</p>
+  <ul class="liste-liens">
+    <BOUCLE_lire_rub(ARTICLES){lang ?}{id_rubrique}{exclus}{0,20}{par num titre}> 
+    [<li><a href="#URL_ARTICLE">(#TITRE|supprimer_numero)</a></li>]
+    </BOUCLE_lire_rub>
+  </ul>
+</div>
+</B_lire_rub>
+
+</BOUCLE_article_principal>
+<p><:aucun_article:></p>
+<//B_article_principal>
+
+<INCLURE{fond=pied}{lang}>

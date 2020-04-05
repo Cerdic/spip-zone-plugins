@@ -1,0 +1,30 @@
+#HTTP_HEADER{Content-type:text/xml; charset=#CHARSET}
+#CACHE{0}
+   <?xml version="1.0" encoding="utf-8"?>
+   <icalendar xmlns="urn:ietf:params:xml:ns:icalendar-2.0">
+    <vcalendar>
+     <properties>
+      <calscale>
+        <text>GREGORIAN</text>
+      </calscale>
+      <prodid>
+       <text>-//SPIP//NONSGML v1.0//FR</text>
+      </prodid>
+      <version>
+        <text>2.0</text>
+      </version>
+     </properties>
+ 
+ [(#REM)mettre ici l'inclure  pour l'appel du fichier contenant les components]
+<BOUCLE_evenement2(EVENEMENTS){branche ?}{id_article ?}{statut=publie}{par date_fin}{age_fin<=0}{0,50}{doublons}>
+	[(#INCLURE{fond=inc/evenement-xml}{evtitre=#TITRE}{id_evenement}{date_debut}{horaire}{date_fin}{id_article}{descriptif}{lieu}{name}{abstract})]
+</BOUCLE_evenement2> 
+<BOUCLE_evenement3(EVENEMENTS){branche ?}{id_article ?}{statut=publie}{par date_fin}{age_fin>=0}{inverse}{0,50}{doublons}>
+	[(#INCLURE{fond=inc/evenement-xml}{evtitre=#TITRE}{id_evenement}{date_debut}{horaire}{date_fin}{id_article}{descriptif}{lieu}{name}{abstract})]
+</BOUCLE_evenement3>
+<BOUCLE_evenement(EVENEMENTS){branche ?}{id_article ?}{statut=publie}{par date_fin}{inverse}{0,50}{doublons}>
+	[(#INCLURE{fond=inc/evenement-xml}{evtitre=#TITRE}{id_evenement}{date_debut}{horaire}{date_fin}{id_article}{descriptif}{lieu}{name}{abstract})]
+</BOUCLE_evenement>
+ 
+     </vcalendar>
+   </icalendar>
