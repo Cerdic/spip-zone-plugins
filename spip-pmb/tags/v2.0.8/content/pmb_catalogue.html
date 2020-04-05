@@ -1,0 +1,50 @@
+
+
+[(#REM) Fil d'Ariane un rien complexe ... ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+	&gt; <a href="#URL_PMB_CATALOGUE"><:pmb:catalogue:></a>
+  
+	<BOUCLE_ariane_lieu(PMB:LIEUX){id_location}>
+	[ &gt; <strong class="on">(#TITRE)</strong>]
+	</BOUCLE_ariane_lieu>
+
+	<BOUCLE_ariane_parent(PMB:LIEUX){id_location=#ENV{id_location_memo}}>
+	[ &gt; <a href="#URL_PMB_CATALOGUE{#ID_LOCATION}">(#TITRE)</a>]
+	</BOUCLE_ariane_parent>
+
+	<BOUCLE_ariane_section_parente(PMB:SECTIONS){id_section=#ENV{id_section_memo}}>
+	[ &gt; <a href="[(#URL_PMB_CATALOGUE
+		|parametre_url{id_location_memo,#ENV{id_location_memo}}
+		|parametre_url{id_section,#ENV{id_section_memo}})]">(#TITRE)</a>]
+	</BOUCLE_ariane_section_parente>
+	
+	<BOUCLE_ariane_section(PMB:SECTIONS){id_section}>
+	[ &gt; <strong class="on">(#TITRE)</strong>]
+	</BOUCLE_ariane_section>
+</p>
+
+<div class="cartouche">
+	#SET{titre_pour_recherche,''}
+	<BOUCLE_section_image(PMB:SECTIONS){id_section}>
+	[(#IMAGE|oui)
+		[(#IMAGE|copie_locale{force}
+			|image_reduire{200,200}
+			|inserer_attribut{class,spip_logos})]
+	]
+	#SET{titre_pour_recherche,#TITRE}
+	</BOUCLE_section_image>
+
+	<h1 class="h1">
+	<BOUCLE_titre_lieu(PMB:LIEUX){id_location}>#TITRE</BOUCLE_titre_lieu>
+		<BOUCLE_titre_location_parente(PMB:LIEUX){id_location=#ENV{id_location_memo}}>#TITRE</BOUCLE_titre_location_parente>
+		<BOUCLE_titre_section(PMB:SECTIONS){id_section}> / #TITRE</BOUCLE_titre_section>
+			<:pmb:catalogue:>
+		<//B_titre_section>
+	<//B_titre_lieu>
+	</h1>
+</div>
+
+
+
+<INCLURE{fond=inclure/inc-pmb_catalogue}{env}{titre_pour_recherche=#GET{titre_pour_recherche}}>
+

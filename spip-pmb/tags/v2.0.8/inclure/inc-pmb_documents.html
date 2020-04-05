@@ -1,0 +1,34 @@
+[(#REM) Portfolio : album d'images ]
+<B_portfolio>
+<div class="documents documents_portfolio">
+	<h2 class="h2"><:info_portfolio:></h2>
+<BOUCLE_portfolio(PMB:DOCUMENTS){id_notice}{image=oui}>
+	[<a href="(#SOURCE_TELECHARGEMENT)" type="#MIMETYPE"[ title="(#TITRE|attribut_html|couper{80})"]>
+		[(#SOURCE_TELECHARGEMENT|sinon{#SOURCE}
+			|image_reduire{0,100}
+			|inserer_attribut{class,spip_logos}
+			|inserer_attribut{alt,[(#NAME|attribut_html|couper{80})]})]
+	</a>]
+</BOUCLE_portfolio>
+</div>
+</B_portfolio>
+
+
+[(#REM) Liste des autres documents joints ]
+<B_docs>
+<div class="liste documents documents_joints">
+	<h2 class="h2"><:titre_documents_joints:></h2>
+	<ul class="liste-items items">
+	<BOUCLE_docs(PMB:DOCUMENTS){id_notice}{image=non}>
+		[<li class="item">
+			<strong>
+				<a href="(#SOURCE_TELECHARGEMENT)" title="<:bouton_telecharger:>" type="#MIMETYPE">
+					[(#TITRE|sinon{<:info_document:>})]
+				</a>
+			</strong>
+		</li>]
+	</BOUCLE_docs>
+	</ul>
+</div>
+</B_docs>
+

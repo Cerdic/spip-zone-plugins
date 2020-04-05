@@ -1,0 +1,16 @@
+<BOUCLE_auteur(PMB:AUTEURS){id_auteur}>
+
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+&gt; <a href="#URL_PMB_CATALOGUE"><:pmb:catalogue:></a>
+&gt; <:pmb:auteurs:>
+&gt; <strong class="on">[(#NOMCOMPLET|couper{80})]</strong></p>
+
+
+<div class="cartouche">
+	<h1 class="h1">#NOMCOMPLET</h1>
+</div>
+
+<INCLURE{fond=inclure/inc-pmb_auteur}{env}{id_auteur}>
+
+</BOUCLE_auteur>

@@ -1,0 +1,21 @@
+<BOUCLE_notice_resume(PMB:NOTICES){id_notice=#ENV{id}}>
+[(#SET{logo,[(#INCLURE{fond=inclure/inc-pmb-notice-logo,id_notice,largeur,hauteur}|trim)]})]
+<div class='modele notices notice_resume[ (#GET{logo}|oui)avec_logo]'>
+
+	[<div class="logo-encart">
+		<a href="#URL_PMB_NOTICE">(#GET{logo})</a>
+	</div>]
+	
+	<h3 class="h3 entry-title[ (#ENV{surlignable}|oui)surlignable]">
+		<a href="#URL_PMB_NOTICE"[ title="(#NOM_SITE|texte_backend)"]>#TITRE</a>
+	</h3>
+	
+	[<span class="auteurs[ (#ENV{surlignable}|oui)surlignable]">
+		<:par_auteur:> (#TOUSLIENSAUTEURS)
+	</span>]
+
+	[<div class="introduction entry-content[ (#ENV{surlignable}|oui)surlignable]">
+		(#RESUME|couper{#ENV{longueur_resume,120}})
+	</div>]
+</div>
+</BOUCLE_notice_resume>

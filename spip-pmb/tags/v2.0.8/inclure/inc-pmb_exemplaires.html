@@ -1,0 +1,43 @@
+#CACHE{0}
+
+[(#SESSION_SET{tab_noticesconsultees, [(#SESSION{tab_noticesconsultees,#ARRAY}
+	|array_reverse
+	|push{<a href='#URL_PMB_NOTICE'>
+		[(#ENV{titre_notice}|urldecode)]
+	</a>}|array_unique|array_reverse|array_slice{0,3})]})]
+
+
+<B_exemplaires>
+<div class="pmb-exemplaires">
+	<h2><:pmb:exemplaires:></h2>
+	<table class='spip exemplaires'>
+		<tr class="row_first">
+			<th class='expl_header_expl_cb'><:pmb:code_barre:></th>
+			<th class='expl_header_expl_cote'><:pmb:cote:> </th>
+			<th class='expl_header_tdoc_libelle'><:pmb:support:></th>
+			<th class='expl_header_location_libelle'><:pmb:localisation:></th>
+			<th class='expl_header_section_libelle'><:pmb:section:></th>
+			<th><abbr title="<:pmb:disponiblite:>"><:pmb:disponiblite_abbr:></abbr></th>
+		</tr>
+
+		<BOUCLE_exemplaires(PMB:EXEMPLAIRES){id_notice}>
+		<tr class="[(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})]">
+				<td class='expl_cb'>#CODE_BARRE</td>
+				<td class='expl_cote'>#COTE</td>
+				<td class='tdoc_libelle'>#SUPPORT</td>
+				<td class='location_libelle'>
+					<a href="#URL_PMB_CATALOGUE{#ID_LOCATION}">#TITRE_LOCATION</a>
+				</td>
+				<td class='section_libelle'>
+					<a href="[(#URL_PMB_CATALOGUE
+						|parametre_url{id_section,#ID_SECTION}
+						|parametre_url{id_location_memo,#ID_LOCATION})]">
+						#TITRE_SECTION
+					</a>
+				</td>
+				<td class='expl_situation'>#SITUATION</td>
+		</tr>
+		</BOUCLE_exemplaires>
+	</table>
+</div>
+</B_exemplaires>

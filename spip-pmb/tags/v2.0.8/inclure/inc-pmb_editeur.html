@@ -1,0 +1,19 @@
+<BOUCLE_editeur(PMB:EDITEURS){id_editeur}>
+<div class="corps-conteneur surlignable">
+	<div class="pmb-ouvrage-infos">	
+		<table class="spip pmb-tableau">
+			<tbody>
+				[<tr><td><strong><:pmb:publisher_address1:></strong></td><td>(#ADRESSE1)</td></tr>]
+				[<tr><td><strong><:pmb:publisher_address2:></strong></td><td>(#ADRESSE2)</td></tr>]
+				[<tr><td><strong><:pmb:publisher_zipcode:></strong></td><td>(#CODE_POSTAL)</td></tr>]
+				[<tr><td><strong><:pmb:publisher_city:></strong></td><td>(#VILLE)</td></tr>]
+				[<tr><td><strong><:pmb:publisher_country:></strong></td><td>(#PAYS)</td></tr>]
+				[<tr><td><strong><:pmb:publisher_web:></strong></td><td><a class="spip_out" href="#WEB">(#WEB)</a></td></tr>]
+			</tbody>
+		</table>
+	</div>
+	[<div class="texte entry-content">(#COMMENTAIRE|paragrapher)</div>]
+</div>
+
+[(#INCLURE{fond=inclure/inc-pmb-recherche-notices,env,id_editeur})]
+</BOUCLE_editeur>

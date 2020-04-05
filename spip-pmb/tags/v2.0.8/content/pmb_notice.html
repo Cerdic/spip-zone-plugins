@@ -1,0 +1,20 @@
+[(#REM) Fil d'Ariane ]
+<BOUCLE_notice(PMB:NOTICES){id_notice}>
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+	&gt; <a href="#URL_PMB_CATALOGUE"><:pmb:catalogue:></a>
+	&gt; <strong class="on">[(#TITRE|couper{80})]</strong></p>
+
+<div class="cartouche">
+	[(#SOURCE_LOGO|oui)
+		[(#SOURCE_LOGO
+			|image_reduire{200,0}
+			|inserer_attribut{class,spip_logos})]
+	]
+	<h1 class="h1">#TITRE</h1>
+	[<p class="soustitre">(#SOUSTITRE)</p>]
+</div>
+
+<INCLURE{fond=inclure/inc-pmb_notice}{env}{id_notice}
+	{afficher_logo=non}{afficher_resume=oui}>
+
+</BOUCLE_notice>

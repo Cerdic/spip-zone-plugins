@@ -1,0 +1,38 @@
+<BOUCLE_auteur(PMB:AUTEURS){id_auteur}>
+<div class="corps-conteneur surlignable">
+	[(#REM) seulement si du contenu... ]
+	[(#VALEUR{date}|ou{#WEB}|ou{#LIEU}|ou{#VILLE}|ou{#PAYS})
+	<div class="pmb-ouvrage-infos">	
+		<table class="spip pmb-tableau">
+			<tbody>
+			[<tr>
+				<td><strong><:pmb:author_date:></strong></td>
+				<td>(#VALEUR{date})</td></tr>]
+			[<tr>
+				<td><strong><:pmb:author_web:></strong></td>
+				<td><a class="spip_out" href="#WEB">(#WEB)</a></td>
+			</tr>]
+			[<tr>
+				<td><strong><:pmb:author_lieu:></strong></td>
+				<td>(#LIEU)</td>
+			</tr>]
+			[<tr>
+				<td><strong><:pmb:author_ville:></strong></td>
+				<td>(#VILLE)</td>
+			</tr>]
+			[<tr>
+				<td><strong><:pmb:author_pays:></strong></td>
+				<td>(#PAYS)</td></td>
+			</tr>]
+			</tbody>
+		</table>
+	</div>
+	]
+	[<div class="texte entry-content">(#COMMENTAIRE|ucfirst|paragrapher)</div>]
+</div>
+
+[(#INCLURE{fond=inclure/inc-pmb-recherche-notices,env,id_auteur})]
+</BOUCLE_auteur>
+
+
+

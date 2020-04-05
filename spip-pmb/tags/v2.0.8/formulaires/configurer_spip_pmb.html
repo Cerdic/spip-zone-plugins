@@ -1,0 +1,48 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+<h3 class='titrem'><:pmb:parametrage_options:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		#SET{name,pmb_partout}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<label><:pmb:config_pmb_partout:></label>
+			<div class='explication'><:pmb:config_pmb_partout_explication:></div>[
+			<span class='erreur_message'>(#GET{erreurs})</span>
+			]<div class="choix">
+				<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+				[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:item_oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+				[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
+			</div>
+		</li>
+		#SET{name,pmb_logo}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<label><:pmb:config_pmb_logo:></label>
+			<div class='explication'><:pmb:config_pmb_logo_explication:></div>[
+			<span class='erreur_message'>(#GET{erreurs})</span>
+			]<div class="choix">
+				<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+				[(#ENV{#GET{name}}|=={non}|non)checked="checked"] /><label for="#GET{name}_oui"><:item_oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+				[(#ENV{#GET{name}}|=={non}|oui)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
+			</div>
+		</li>
+	</ul>
+
+	  <input type='hidden' class='hidden' name='_meta_casier' value="spip_pmb" />
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

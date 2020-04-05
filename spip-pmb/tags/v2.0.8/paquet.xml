@@ -1,0 +1,31 @@
+<paquet
+	prefix="pmb"
+	categorie="divers"
+	version="2.0.8"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="img/logo-spip-pmb.png"
+	documentation="https://contrib.spip.net/Portail-Web-pour-PMB"
+	schema="1.0.0"
+>
+
+	<nom>SPIP-PMB</nom>
+	<!-- Utiliser SPIP comme portail web du logiciel PMB -->
+
+	<auteur lien="http://www.openstudio.fr">OpenStudio</auteur>
+	<auteur lien="http://magraine.net">Matthieu Marcillaud</auteur>
+
+	<copyright>2010-2012</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_principales" inclure="base/pmb.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/pmb.php" />
+
+	<!-- squelettes proposes avec le plugin -->
+	<utilise nom="Zpip" compatibilite="[2.0.0;]" />
+	<!--chargement asynchrone de certaines inclusions -->
+	<utilise nom="inclureajaxload" compatibilite="[1.1.0;]" />
+	<!-- utilisation de fenetres modales pour ajouter des mots cles ou donner des avis DANS PMB -->
+	<utilise nom="mediabox" compatibilite="[0.8.1;]" />
+</paquet>

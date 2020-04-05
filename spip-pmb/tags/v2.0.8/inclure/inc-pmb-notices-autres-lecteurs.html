@@ -1,0 +1,21 @@
+<B_autres_lecteurs>
+<div class="pmb-autreslecteurs">
+	<h2><:pmb:autres_lecteurs:></h2>
+
+	<table class="spip" style="width: 99%;">
+		<thead><tr class="row_first"><th></th><th><:pmb:titre:></th><th><:pmb:auteur:></th></tr></thead>
+		<tbody>
+		<BOUCLE_autres_lecteurs(PMB:NOTICES){id_notice}{autres_lecteurs}>
+			<tr class="[(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})]">
+				<td><a href="#URL_PMB_NOTICE">
+				[(#SOURCE_LOGO
+					|image_reduire{0,80}
+					|inserer_attribut{class,spip_logos})]</a></td>
+				<td><a href="#URL_PMB_NOTICE">#TITRE</a></td>
+				<td>#TOUSLIENSAUTEURS</td>
+			</tr>
+		</BOUCLE_autres_lecteurs>
+		</tbody>
+	</table>
+</div> 
+</B_autres_lecteurs>

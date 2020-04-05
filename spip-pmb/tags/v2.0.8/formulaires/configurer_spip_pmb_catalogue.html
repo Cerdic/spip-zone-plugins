@@ -1,0 +1,66 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+<h3 class='titrem'><:pmb:parametrage_catalogue:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <ul>
+
+	  	#SET{name,url}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
+	    <li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}"><:pmb:adress_opac:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name},'http://demo.bibli.fr/opac/'}" />
+	    </li>
+
+	  	#SET{name,wsdl}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}"><:pmb:wsdl:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+	    </li>
+
+	  	#SET{name,jsonrpc}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}"><:pmb:jsonrpc:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+	    </li>
+
+	  	#SET{name,jsonrpc_user}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}"><:pmb:jsonrpc_user:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+	    </li>
+
+	  	#SET{name,jsonrpc_pw}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}"><:pmb:jsonrpc_pw:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type='password' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+	    </li>
+
+	  	#SET{name,rpc_type}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}"><:pmb:rpc_type:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<select name="#GET{name}" id="#GET{name}">
+					<option value='jsonrpc'[ (#ENV{rpc_type}|!={soap}|?{selected="selected",''})]><:pmb:configurer_rpc_json:></option>
+					<option value='soap'[ (#ENV{rpc_type}|=={soap}|?{selected="selected",''})]><:pmb:configurer_rpc_soap:></option>					
+				</select>
+	    </li>
+	  </ul>
+
+	  <input type='hidden' class='hidden' name='_meta_casier' value="spip_pmb" />
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

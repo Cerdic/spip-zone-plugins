@@ -1,0 +1,14 @@
+<BOUCLE_collection(PMB:COLLECTIONS){id_collection}>
+
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+&gt; <:pmb:collections:> 
+&gt; <strong class="on">[(#TITRE|couper{80})]</strong></p>
+
+
+<div class="cartouche">	
+	<h1 class="h1">#TITRE</h1>
+</div>
+
+<INCLURE{fond=inclure/inc-pmb_collection}{env}{id_collection}>
+</BOUCLE_collection>

@@ -1,0 +1,126 @@
+#CACHE{0}
+
+<BOUCLE_auteurpmb(AUTEURS_PMB){id_auteur=#SESSION{id_auteur}}>
+
+[(#PMB_SESSION|pmb_tester_session{#ID_AUTEUR}|non)
+  <:pmb:session_expire:>[(#SET{session_expire,1})]
+]
+
+[(#SET{session_expire}|non)
+<div class="ps surlignable">
+<div>
+	<table class="spip pmb-tableau">
+	<tbody>
+		[<tr><td><strong>Pr&eacute;nom</strong></td><td>(#PMB_FIRSTNAME)</td></tr>]
+		[<tr><td><strong>Nom</strong></td><td>(#PMB_LASTNAME)</td></tr>]
+		[<tr><td><strong>Adresse 1</strong></td><td>(#PMB_ADRESS_PART1)</td></tr>]
+		[<tr><td><strong>Adresse 2</strong></td><td>(#PMB_ADRESS_PART2)</td></tr>]
+		[<tr><td><strong>CP</strong></td><td>(#PMB_ADRESS_CP)</td></tr>]
+		[<tr><td><strong>Ville</strong></td><td>(#PMB_ADRESS_CITY)</td></tr>]
+		[<tr><td><strong>T&eacute;l&eacute;phone 1</strong></td><td>(#PMB_PHONE_NUMBER1)</td></tr>]
+		[<tr><td><strong>T&eacute;l&eacute;phone 2</strong></td><td>(#PMB_PHONE_NUMBER2)</td></tr>]
+		[<tr><td><strong>Email</td><td>(#PMB_EMAIL)</strong></td></tr>]
+		[<tr><td><strong>Ann&eacute;e de naissance</strong></td><td>(#PMB_BIRTHYEAR)</td></tr>]
+		[<tr><td><strong>Localisation</strong></td><td>(#PMB_LOCATION_CAPTION)</td></tr>]
+		[<tr><td><strong>Date d'adh&eacute;sion</strong></td><td>(#PMB_ADHESION_DATE)</td></tr>]
+		[<tr><td><strong>Date d'expiration</strong></td><td>(#PMB_EXPIRATION_DATE)</td></tr>]
+	</tbody>
+	</table>
+</div>
+</div>
+]
+<div id="tabs">
+	[(#SET{session_expire}|non)
+	<ul>
+		<li><a href="#pmb-pretscours"><span><:pmb:prets_en_cours:></span></a></li>
+		<li><a href="#pmb-pretsretard"><span><:pmb:prets_en_retard:></span></a></li>
+		<li><a href="#pmb-reservations"><span><:pmb:reservations:></span></a></li>
+	</ul>
+	]
+
+[(#SET{prets,[(#ARRAY{
+	1,[(#LISTE{pmb-pretscours,<:pmb:prets_en_cours:>,'Pas de pr&ecirc;t en cours'})],
+	0,[(#LISTE{pmb-pretsretard,<:pmb:prets_en_retard:>,'Pas de pr&ecirc;t en retard'})]})]})]
+	
+<BOUCLE_prets_types(POUR){tableau #GET{prets}}>
+	<div id="#VALEUR{0}" class="ps surlignable"><h2 class="pas_surlignable">#VALEUR{1}</h2>
+	<div>
+	<B_prets>
+		<table class="spip pmb-tableau">
+		<thead>
+			<tr class="row_first">
+				<th><:pmb:code_barre:></th>
+				<th><:pmb:titre:></th>
+				<th><:pmb:support:></th>
+				<th><:pmb:date:></th>
+				<th><:pmb:retour:></th>
+			</tr>
+		</thead>
+		<tbody>
+	<BOUCLE_prets(PMB:PRETS){pmb_session}{type=#CLE}>
+			<tr[ class="(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})"]>
+				<td>
+				[(#URL_LOGO|oui)
+					<a href="#URL_PMB_NOTICE">
+					[(#URL_LOGO
+						|image_reduire{0,80}
+						|inserer_attribut{class,spip_logos})]
+					</a>
+				]
+				#EXEMPLAIRE_CODE_BARRE
+				</td>
+				<td><a href="#URL_PMB_NOTICE">#EXEMPLAIRE_LIBELLE</a></td>
+				<td>#EXEMPLAIRE_SUPPORT</td>
+				<td>#DATE_DEBUT</td>
+				<td>#DATE_RETOUR</td>
+			</tr>
+	</BOUCLE_prets>
+		</tbody>
+		</table>
+	</B_prets>
+		[(#_prets_types:VALEUR{2})]
+	<//B_prets>
+	</div>
+	</div>
+</BOUCLE_prets_types>
+
+
+<div id="pmb-reservations" class="ps surlignable">
+	<h2 class="pas_surlignable"><:pmb:reservations:></h2>
+	<div>
+	<B_reservations>
+		<table class="spip pmb-tableau">
+		<thead>
+			<tr class="row_first">
+				<th></th>
+				<th><:pmb:titre:></th>
+				<th><:pmb:rang:></th>
+			</tr>
+		</thead>
+		<tbody>
+		<BOUCLE_reservations(PMB:RESERVATIONS){pmb_session}>
+			<tr[ class="(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})"]>
+				<td>
+					[(#VALEUR{notice/logo_src}|oui)
+					<a href="#URL_PMB_NOTICE">
+						[(#VALEUR{notice/logo_src}
+							|image_reduire{0,80}
+							|inserer_attribut{class,spip_logos})]
+					</a>
+					]
+				</td>
+				<td><a href="#URL_PMB_NOTICE">#VALEUR{notice/titre}</a></td>
+				<td>#RANK</td>
+			</tr>
+		</BOUCLE_reservations>
+		</tbody>
+		</table>
+	</B_reservations>
+		Pas de r&eacute;servations
+	<//B_reservations>
+	</div>
+</div>
+</div>
+
+<br class="nettoyeur" />
+</BOUCLE_auteurpmb>

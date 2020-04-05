@@ -1,0 +1,30 @@
+<BOUCLE_logo_notice(PMB:NOTICES){id_notice}>
+#SET{logo,#SOURCE_LOGO}
+[(#REM) sinon chercher si un document joint est une image ]
+<BOUCLE_notice_image(PMB:DOCUMENTS){id_notice}{image=oui}{0,1}{si (#SOURCE_LOGO|non)}>
+#SET{logo,#SOURCE_TELECHARGEMENT|sinon{#SOURCE}}
+</BOUCLE_notice_image>
+[(#GET{logo}|oui)
+	[(#ENV{copieimage,non}|=={non}|non)
+		[(#REM) je comprend pas pourquoi 'force' ? ]
+		[(#SET{url,#GET{logo}}|copie_locale{force})]
+		[(#GET{logo}
+			|copie_locale{force}
+			|image_reduire{#ENV{largeur,100},#ENV{hauteur,0}}
+			|inserer_attribut{class,spip_logos})]
+	]
+	[(#ENV{copieimage,non}|=={non}|oui)
+		[(#SET{url,#GET{logo}})]
+	]
+	[(#GET{url}|oui)
+		[(#SET{logo,[(#GET{url}
+			|image_reduire{#ENV{largeur,100},#ENV{hauteur,0}}
+			|inserer_attribut{class,spip_logos})]})]
+		[(#REM) On n'affiche le logo que si sa taille est presente !
+				sinon c'est qu'on a pas reussi a le recuperer ! ]
+		[(#GET{logo}|extraire_attribut{width}|>{1}|oui)
+			#GET{logo}
+		]
+	]
+]
+</BOUCLE_logo_notice>

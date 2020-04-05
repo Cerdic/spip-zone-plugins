@@ -1,0 +1,101 @@
+
+<br class="nettoyeur" />
+[<h2><:pmb:recherche_dans:> : (#ENV{titre_pour_recherche})</h2>]
+	
+<div id="search">
+	<div class='formulaire_spip formulaire_recherche_avancee'>
+		<form action='#URL_PMB_RECHERCHE' method='get'>
+			<input type='hidden' name='page' value='[(#URL_PMB_RECHERCHE|parametre_url{page})]'/>
+			[<input type='hidden' name='id_section' value='(#ENV{id_section})'/>]
+			[<input type='hidden' name='id_location_memo' value='(#ENV{id_location_memo})'/>]
+			[<input type='hidden' name='id_section_memo' value='(#ENV{id_section_memo})'/>]
+			[<input type='hidden' name='titre_section' value='(#ENV{titre_section})'/>]
+[(#REM)		<input type='hidden' name='recherche_avancee' value='1'/>]
+
+			<fieldset>
+				<legend><:pmb:recherche_avancee:></legend>
+
+				<ul>
+					<li class="infos-recherche-avancee">
+						<:pmb:info_recherche_avancee:>
+					</li>
+					<li>
+						<input type='text' name='recherche' class='text_query' value="#ENV{recherche}" size='35' />
+					</li>
+					<li class="boutons">
+						<input type='submit' value='Rechercher' class='boutonrechercher'/>
+					</li>
+
+<BOUCLE_non(CONDITION){si 0}>
+[(#REM)
+	Il faudrait prevoir quels champs on decide d'afficher
+	dans les options de recherche, par exemple avec une conf...
+	bon, il faut aussi pouvoir les traiter ensuite :)
+]
+					[(#SET{tab_resultat, [(#VAL{0}|pmb_recuperer_champs_recherche)]})]
+					<BOUCLE_categories_recherche(DATA){source tableau,#GET{tab_resultat}}>
+						[(#REM) {si (# VALEUR{id}|=={17}) ]
+						[(#REM) {si (# VALEUR{label}|oui)} ]
+					<li>
+						<B_categorie_options>
+						<select name='categorie[#ID]'>
+							<option value=''>[(#LABEL|sinon{'...'})]</option>
+						<BOUCLE_categorie_options(DATA){source tableau,#VALEUR{values}}>
+							<option value='#VALUE_ID'[ (#ENV{categorie/#ID}|=={#VALUE_ID}|oui)selected="selected"]>
+								#VALUE_CAPTION
+							</option>
+						</BOUCLE_categorie_options>
+						</select>
+						</B_categorie_options>
+					</li>
+					</BOUCLE_categories_recherche>
+</BOUCLE_non>
+					<li>
+						<select name='typdoc'>  
+							<option  value=''>Tout type de document</option>
+							<option  value='a'[(#ENV{typdoc}|=={a}|oui)selected="selected")]>texte imprim&eacute;</option>
+							<option  value='b'[(#ENV{typdoc}|=={b}|oui)selected="selected")]>texte manuscrit</option>
+							<option  value='c'[(#ENV{typdoc}|=={c}|oui)selected="selected")]>partition musicale imprim&eacute;e</option>
+							<option  value='e'[(#ENV{typdoc}|=={e}|oui)selected="selected")]>document cartographique imprim&eacute;</option>
+							<option  value='g'[(#ENV{typdoc}|=={g}|oui)selected="selected")]>document projet&eacute; ou vid&eacute;o</option>
+
+							<option  value='i'[(#ENV{typdoc}|=={i}|oui)selected="selected")]>enregistrement sonore non musical</option>
+							<option  value='j'[(#ENV{typdoc}|=={j}|oui)selected="selected")]>enregistrement sonore musical</option>
+							<option  value='k'[(#ENV{typdoc}|=={k}|oui)selected="selected")]>document graphique &agrave; deux dimensions</option>
+							<option  value='l'[(#ENV{typdoc}|=={l}|oui)selected="selected")]>document &eacute;lectronique</option>
+							<option  value='m'[(#ENV{typdoc}|=={m}|oui)selected="selected")]>document multim&eacute;dia</option>
+
+							<option  value='r'[(#ENV{typdoc}|=={r}|oui)selected="selected")]>objet &agrave; 3 dimensions, artefacts, ...</option>
+						</select>
+					</li>
+					<li>
+						<table class="spip champ-recherche">
+						<tbody>
+							<tr class="row_even">
+								<td><input type='checkbox' name='look[]' id='recherche_avancee_look_TITLE' value='TITLE'[(#VAL{TITLE}|in_any{#ENV{look}}|oui)checked="checked"]  /><label for='recherche_avancee_look_TITLE'> Titres </label></td>
+								<td><input type='checkbox' name='look[]' id='recherche_avancee_look_AUTHOR' value='AUTHOR'[(#VAL{AUTHOR}|in_any{#ENV{look}}|oui)checked="checked"]  /><label for='recherche_avancee_look_AUTHOR'> Auteurs </label></td>
+								<td><input type='checkbox' name='look[]' id='recherche_avancee_look_PUBLISHER' value='PUBLISHER'[(#VAL{PUBLISHER}|in_any{#ENV{look}}|oui)checked="checked"]  /><label for='recherche_avancee_look_PUBLISHER'> Editeurs </label></td>
+							</tr>
+							<tr class="row_odd">
+								<td><input type='checkbox' name='look[]' id='recherche_avancee_look_COLLECTION' value='COLLECTION'[(#VAL{COLLECTION}|in_any{#ENV{look}}|oui)checked="checked"]  /><label for='recherche_avancee_look_COLLECTION'> Collections </label></td>
+								<td><input type='checkbox' name='look[]' id='recherche_avancee_look_SUBCOLLECTION' value='SUBCOLLECTION'[(#VAL{SUBCOLLECTION}|in_any{#ENV{look}}|oui)checked="checked"]  /><label for='recherche_avancee_look_SUBCOLLECTION'> Sous-collections </label></td>
+								<td><input type='checkbox' name='look[]' id='recherche_avancee_look_CATEGORY' value='CATEGORY'[(#VAL{CATEGORY}|in_any{#ENV{look}}|oui)checked="checked"]  /><label for='recherche_avancee_look_CATEGORY'> Cat&eacute;gories </label></td>
+							</tr>
+							<tr class="row_even">
+								<td><input type='checkbox' name='look[]' id='recherche_avancee_look_KEYWORDS' value='KEYWORDS'[(#VAL{KEYWORDS}|in_any{#ENV{look}}|oui)checked="checked"]  /><label for='recherche_avancee_look_KEYWORDS'> Tags</label></td>
+								<td><input type='checkbox' name='look[]' id='recherche_avancee_look_ABSTRACT' value='ABSTRACT'[(#VAL{ABSTRACT}|in_any{#ENV{look}}|oui)checked="checked"]  /><label for='recherche_avancee_look_ABSTRACT'> R&eacute;sum&eacute; et notes </label></td>
+								<td><input type='checkbox' name='look[]' id='recherche_avancee_look_ALL' value='ALL'[(#VAL{ALL}|in_any{#ENV{look}}|oui|ou{[(#ENV{look}|count|non)]})checked="checked"] /><label for='recherche_avancee_look_ALL'> Tous les champs </label></td>
+							</tr>
+							<tr class="row_odd">
+								<td><input type='checkbox' name='look[]' id='recherche_avancee_look_INDEXINT' value='INDEXINT'[(#VAL{INDEXINT}|in_any{#ENV{look}}|oui)checked="checked"]  /><label for='recherche_avancee_look_INDEXINT'> Indexations d&eacute;cimales </label></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+						</table>
+					</li>
+				</ul>
+			</fieldset>
+		</form>
+	</div>
+</div>

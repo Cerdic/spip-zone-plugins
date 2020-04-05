@@ -1,0 +1,101 @@
+<BOUCLE_notice(PMB:NOTICES){id_notice}>
+[<a href="(#ENV{url_ret}|urldecode)" class="lien-retour-recherche"><:pmb:retour_recherche:></a>]
+
+<div class="corps-conteneur surlignable">
+
+	[(#ENV{afficher_titre|=={oui}|oui)
+		<h1 class="h1">#TITRE</h1>
+		[<p class="soustitre">(#SOUSTITRE)</p>]
+	]
+	
+	[(#ENV{afficher_logo}|=={oui}|oui)
+		[(#INCLURE{fond=inclure/inc-pmb-notice-logo, id_notice, largeur=130})]
+	]
+
+	[(#ENV{afficher_resume}|=={oui}|oui)
+		[<div class="texte entry-content">(#RESUME|paragrapher)</div>]
+	]
+	
+	[(#ENV{afficher_info}|=={non}|non)
+	<div class="pmb-ouvrage-infos">	
+		<table class="spip pmb-tableau">
+			<tbody>
+				[<tr><td><strong><:pmb:auteur:></strong></td><td>(#TOUSLIENSAUTEURS)</td></tr>]
+				[<tr><td><strong><:pmb:serie:></strong></td><td>(#SERIE)</td></tr>]
+				[<tr><td><strong><:pmb:type:></strong></td><td>(#TYPE)</td></tr>]
+				[<tr><td><strong><:pmb:editeur:></strong></td><td>[<a href="(#URL_PMB_EDITEUR)">](#EDITEUR)[(#URL_PMB_EDITEUR|oui)</a>]</td></tr>]
+				[<tr><td><strong><:pmb:edition:></strong></td><td>(#EDITION)</td></tr>]
+				[<tr><td><strong><:pmb:collection:></strong></td><td>[<a href="(#URL_PMB_COLLECTION)">](#COLLECTION)[(#URL_PMB_COLLECTION|oui)</a>]</td></tr>]
+				[<tr><td><strong><:pmb:unite_materielle:></strong></td><td>[(#ID_UNITE_MATERIELLE|oui)<a href="#URL_PMB_NOTICE{#ID_UNITE_MATERIELLE}">](#UNITE_MATERIELLE|oui)[(#UNITE_MATERIELLE)</a>]</td></tr>]
+				[<tr><td><strong><:pmb:format:></strong></td><td>(#FORMAT)</td></tr>]
+				[<tr><td><strong><:pmb:annee_publication:></strong></td><td>(#ANNEE_PUBLICATION)</td></tr>]
+				[<tr><td><strong><:pmb:importance:></strong></td><td>(#IMPORTANCE)</td></tr>]
+				[<tr><td><strong><:pmb:mots_cles:></strong></td><td>(#MOTS_CLES)</td></tr>]
+				[<tr><td><strong><:pmb:presentation:></strong></td><td>(#PRESENTATION)</td></tr>]
+				[<tr><td><strong><:pmb:isbn:></strong></td><td>(#ISBN)</td></tr>]
+				[<tr><td><strong><:pmb:prix:></strong></td><td>(#PRIX)</td></tr>]
+				[<tr><td><strong><:pmb:note_generale:></strong></td><td>(#NOTE_GENERALE)</td></tr>]
+				[<tr><td><strong><:pmb:note_contenu:></strong></td><td>(#NOTE_CONTENU)</td></tr>]
+				[<tr><td><strong><:pmb:source:></strong></td><td>(#SOURCE|propre|ptobr)</a></td></tr>]
+				[(#CHEMIN{inclure/inc-pmb_notice-local.html}|oui)
+					[(#INCLURE{fond=inclure/inc-pmb_notice-local,id_notice})]
+				]
+			</tbody>
+		</table>
+	</div>
+	<br class="nettoyeur" />
+	]
+</div>
+<br class="nettoyeur" />
+
+
+[(#ENV{afficher_documents}|=={non}|non)
+	[(#INCLURE{fond=inclure/inc-pmb_documents,env,id_notice,ajax,ajaxload})]
+]
+
+[(#ENV{afficher_exemplaires}|=={non}|non)
+	[(#INCLURE{fond=inclure/inc-pmb_exemplaires,env,id_notice,titre_notice=#TITRE,ajax,ajaxload})]
+]
+
+[(#ENV{afficher_autreslecteurs}|=={non}|non)
+	[(#INCLURE{fond=inclure/inc-pmb-notices-autres-lecteurs,env,id_notice,ajax,ajaxload})]
+]
+
+<div class="pmb-toolbox" id="compte-lecteur">
+<h2><:pmb:compte_lecteur:></h2>
+<BOUCLE_auteurpmb(AUTEURS_PMB){id_auteur=#SESSION{id_auteur}}>
+	[(#ENV{afficher_toolbox}|=={non}|non)
+		[(#PMB_SESSION|oui)
+		[(#ENV{reserver}|=={1}|oui)
+			<strong>[(#PMB_SESSION|pmb_reserver_ouvrage{#ID_NOTICE,'',''})]</strong>
+		]
+		<ul class="spip">
+			<li><a href="[(#CONFIG{spip_pmb/url}|rtrim{/}|concat{/addtags.php}|parametre_url{noticeid,#ID})]" class="mediabox_iframe"><:pmb:ajouter_tag:></a></li>
+			<li><a href="[(#CONFIG{spip_pmb/url}|rtrim{/}|concat{/avis.php}|parametre_url{todo,liste}|parametre_url{noticeid,#ID})]" class="mediabox_iframe"><:pmb:donner_avis:></a></li>
+			<li><a href="[(#URL_PMB_NOTICE|parametre_url{reserver,1})]#compte-lecteur"><:pmb:reserver_ouvrage:></a></li>
+		</ul>
+		<script type='text/javascript'>
+		(function($){
+		$(document).ready(function() {
+			$('.mediabox_iframe').click(function() {
+				url = $(this).attr('href');
+				$.modalbox(url,{iframe:true,inline:false,fastIframe:false,height:'50%',width:'560px'});
+				return false;
+			});
+		});
+		})(jQuery);
+		</script>
+		]
+		[(#PMB_SESSION|non)
+		  <i>Identifiez-vous pour r&eacute;server cet ouvrage ou donner votre avis.</i>
+		]
+	  ]
+</BOUCLE_auteurpmb>
+</B_auteurpmb>
+  [(#ENV{afficher_toolbox}|=={non}|non)
+	<i>Identifiez-vous pour r&eacute;server cet ouvrage ou donner votre avis.</i>
+  ]
+<//B_auteurpmb>
+
+</div>
+</BOUCLE_notice>

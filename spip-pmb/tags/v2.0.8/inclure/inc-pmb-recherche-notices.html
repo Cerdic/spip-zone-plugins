@@ -1,0 +1,24 @@
+
+<div class="liste articles ouvrages pmb">
+	<B_liste_notices>
+
+	<h2 class="h2"><:pmb:ouvrages:></h2>
+	
+	#PMB_NOMBRE_RESULTATS
+	
+	[<p class="pagination">(#PAGINATION)</p>]
+	
+	<ul class="liste-items items">
+		<BOUCLE_liste_notices(PMB:NOTICES)
+			{id_notice ?}{id_auteur ?}{id_collection ?}{id_editeur ?}
+			{pagination 5}>
+				[(#INCLURE{fond=inclure/inc-pmb-notice-resume,id_notice, surlignable=1, compteur=#COMPTEUR_BOUCLE})]
+		</BOUCLE_liste_notices>
+	</ul>
+
+	[<p class="pagination">(#PAGINATION)</p>]
+	
+	</B_liste_notices>
+		<:pmb:pas_d_ouvrages_trouves:>
+	<//B_liste_notices>
+</div> 

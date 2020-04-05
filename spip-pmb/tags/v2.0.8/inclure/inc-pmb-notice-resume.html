@@ -1,0 +1,27 @@
+<BOUCLE_notice_resume(PMB:NOTICES){id_notice}>
+[(#SET{url,[(#URL_PMB_NOTICE|parametre_url{url_ret,#ENV{url_ret}})]})]
+
+[(#SET{logo,[(#INCLURE{fond=inclure/inc-pmb-notice-logo,id_notice,largeur,hauteur}|trim)]})]
+
+<li class="item hentry[(#GET{logo}|oui) avec_logo][ (#ENV{surlignable}|oui)surlignable][ (#ENV{compteur}|=={1}|oui)premier]">
+	[<div class="logo-encart">
+		<a href="#GET{url}">(#GET{logo})</a>
+	</div>]
+	<h3 class="h3 entry-title[ (#ENV{surlignable}|oui)surlignable]">
+		<a href="#GET{url}"[ title="(#NOM_SITE|texte_backend)"]>#TITRE</a>
+	</h3>
+	
+	[<span class="auteurs[ (#ENV{surlignable}|oui)surlignable]">
+		<:par_auteur:> (#TOUSLIENSAUTEURS)
+	</span>]
+	
+	[<div class="introduction entry-content[ (#ENV{surlignable}|oui)surlignable]">
+		(#RESUME|couper{#ENV{longueur_resume,250},'&ndash;'})
+	</div>]
+	
+	<div class="meta-publi">
+		<a class="lire-la-suite" href="#GET{url}"><:zcore:lire_la_suite:><span class="lire-la-suite-titre"><:zcore:lire_la_suite_de:> <em>#TITRE</em></span></a>
+	</div>
+	<br class="nettoyeur" />
+</li> 
+</BOUCLE_notice_resume>

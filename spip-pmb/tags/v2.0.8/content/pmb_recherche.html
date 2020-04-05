@@ -1,0 +1,19 @@
+
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+ &gt; <a href="#URL_PMB_RECHERCHE"><:pmb:rechercher_dans_catalogue:></a>
+[ &gt; <strong class="on">(#RECHERCHE)</strong>]</p>
+
+[<div class="cartouche">
+	<h1 class="h1"><:resultats_recherche:></h1>
+	<p class="soustitre">&#171;&nbsp;(#RECHERCHE)&nbsp;&#187;</p>
+</div>]
+
+[(#ENV{recherche}
+	|ou{#ENV{look}}
+	|ou{#ENV{categorie}}
+	|ou{#ENV{typedoc}}|oui)
+		[(#INCLURE{fond=inclure/inc-pmb-recherche-catalogue, env, ajax, rechercher=#ENV{recherche}})]
+]
+
+<INCLURE{fond=inclure/inc-pmb-recherche-formulaire}{recherche}{env}>

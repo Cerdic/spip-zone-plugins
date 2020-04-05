@@ -1,0 +1,60 @@
+[(#REM) On peut egalement passer une largeur ou hauteur maximale pour les logos...
+	hauteur=...
+	largeur=...
+]
+
+[(#REM)
+
+	On affiche les lieux racines (si ni id_location, ni id_section n'est present)
+	Sinon, les sous sections d'une section,
+	Sinon, les sections d'un lieu...
+
+]
+<B_lieux>
+<div class="liste menu articles">
+	<ul class="liste-items">
+	<BOUCLE_lieux(PMB:LIEUX){si (#ENV{id_location}|non|et{#ENV{id_section}|non})}>
+		<li class="item">
+			<a href="#URL_PMB_CATALOGUE{#ID_LOCATION}">
+				[(#CHEMIN{img/logo-localisation.png}
+					|image_reduire{#ENV{largeur,30},#ENV{hauteur,30}}
+					|inserer_attribut{class,spip_logos})]
+			</a>
+			<h3><a href="#URL_PMB_CATALOGUE{#ID_LOCATION}">#TITRE</a></h3>
+		</li>
+	</BOUCLE_lieux>
+	</ul>
+</div>
+</B_lieux>
+
+<B_sections>
+<div class="liste menu articles">
+	<ul class="liste-items">
+	<BOUCLE_sections(PMB:SECTIONS){id_location ?}{id_parent ?}>
+		[(#SET{url,[(#URL_PMB_CATALOGUE
+			|parametre_url{id_section,#ID_SECTION}
+			|parametre_url{id_location_memo,#ENV{id_location_memo,#ENV{id_location}}}
+			|parametre_url{id_section_memo,#ENV{id_section}})]})]
+
+		<li class="item">
+			<a href="#GET{url}">
+			[(#IMAGE|sinon{#CHEMIN{img/logo-section.png}}
+				|image_reduire{#ENV{largeur,30},#ENV{hauteur,30}}
+				|inserer_attribut{class,spip_logos})]
+			</a>
+			<h3><a href="#GET{url}">#TITRE</a></h3>
+		</li>
+	</BOUCLE_sections>
+	</ul>
+</div>
+</B_sections>
+
+[(#REM)
+	Si on est dans une section,
+	on affiche ses notices et la recherche
+]
+[(#ENV{id_section}|oui)
+	[(#INCLURE{fond=inclure/inc-pmb-recherche-catalogue}{env}{ajax}{rechercher=#ENV{recherche}})]
+
+	<INCLURE{fond=inclure/inc-pmb-recherche-formulaire}{recherche}{env}>
+]
