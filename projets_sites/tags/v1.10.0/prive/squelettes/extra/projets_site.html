@@ -1,0 +1,8 @@
+[(#BOITE_OUVRIR)]
+<BOUCLE_extra (PROJETS_SITES) {id_projets_site}>
+
+[(#URL_ECRIRE{webservice,id_projets_site=#ID_PROJETS_SITE}
+|icone_horizontale{<:projets_site:consultation_webservice:>, webservice})]
+
+</BOUCLE_extra>
+[(#BOITE_FERMER)]

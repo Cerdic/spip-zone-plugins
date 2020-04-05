@@ -1,0 +1,28 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:projets_sites:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+
+			[(#SAISIE{explication, curl_explication,
+				texte=<:projets_sites:curl_explication:>})]
+
+			[(#SAISIE{input, login,
+				label=<:projets_sites:login_label:>})]
+
+			[(#SAISIE{input, password,
+				label=<:projets_sites:password_label:>})]
+
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+
+		<input type="hidden" name="_meta_casier" value="projets_sites" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>

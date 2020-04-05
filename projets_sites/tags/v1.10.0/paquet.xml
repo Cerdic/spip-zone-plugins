@@ -1,0 +1,40 @@
+<paquet
+	prefix="projets_sites"
+	categorie="divers"
+	version="1.10.0"
+	etat="stable"
+	compatibilite="[3.0.5;3.2.*]"
+	logo="prive/themes/spip/images/projets_sites-64.png"
+	documentation=""
+	schema="1.5.2"
+>
+	<nom>Sites pour projets</nom>
+
+	<auteur>Teddy Payet</auteur>
+
+	<licence>GNU/GPL</licence>
+	<credit lien="https://www.iconfinder.com/icons/127910/document_file_format_specification_specs_standard_tag_text_xaml_xml_icon">
+		Aha-Soft (Icône webservice)
+	</credit>
+	<necessite nom="saisies" compatibilite="[3.23.2;]"/>
+	<necessite nom="projets" compatibilite="[1.0.9;]"/>
+
+	<pipeline nom="lister_logiciels_noms" action=''/>
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/projets_sites.php"/>
+	<pipeline nom="declarer_tables_interfaces" inclure="base/projets_sites.php"/>
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/projets_sites.php"/>
+
+	<pipeline nom="autoriser" inclure="projets_sites_autorisations.php"/>
+
+	<pipeline nom="taches_generales_cron" inclure="projets_sites_pipelines.php"/>
+	<pipeline nom="affiche_milieu" inclure="projets_sites_pipelines.php"/>
+	<pipeline nom="header_prive" inclure="projets_sites_pipelines.php"/>
+	<pipeline nom="optimiser_base_disparus" inclure="projets_sites_pipelines.php"/>
+	<pipeline nom="lister_logiciels_noms" inclure="projets_sites_pipelines.php"/>
+	<pipeline nom="revisions_chercher_label" inclure="projets_sites_pipelines.php"/>
+
+	<menu nom="projets_sites" titre="projets_site:titre_projets_sites" parent="menu_edition" icone="images/projets_site-16.png" action="projets_sites"/>
+	<menu nom="projets_site_creer" titre="projets_site:icone_creer_projets_site" parent="outils_rapides" icone="images/projets_site-new-16.png" action="projets_site_edit" parametres="new=oui"/>
+
+</paquet>
