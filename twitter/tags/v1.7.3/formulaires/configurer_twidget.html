@@ -1,0 +1,156 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	<h3 class="titrem"><:twitter:titre_configurer_widget:></h3>
+	[(#ENV{_info_config_erreur}|non)
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+	]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) déclarer les hidden qui déclencheront le service du formulaire
+		paramêtre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		#SET{fl,twitter}
+		[(#ENV{_info_config_erreur}|non)
+
+		<fieldset>
+			<legend><:twitter:legend_commun_widgets:></legend>
+				<p class="explication"><:twitter:explication_commun_widgets:></p>
+
+			<ul>
+				<!-- interval-->
+				#SET{name,interval}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},30000}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+				<!-- title -->
+				#SET{name,title}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},Du nouveau sur Twitter}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+				<!-- subject -->
+				#SET{name,subject}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},SPIP}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+				<!-- subject -->
+				#SET{name,footer}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},Rejoignez nous}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+				<!-- width-->
+				#SET{name,width}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},250}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+				<!-- height -->
+				#SET{name,height}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},300}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+				<!-- shell_background-->
+				#SET{name,shell_background}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#8ec1da}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+				<!-- shell_color-->
+				#SET{name,shell_color}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#ffffff}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+				<!-- tweets_background-->
+				#SET{name,tweets_background}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#ffffff}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+				<!--tweets_color -->
+				#SET{name,tweets_color}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#444444}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+				<!-- tweets_link -->
+				#SET{name,tweets_links}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#1986b5}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+			</ul>
+
+		</fieldset>
+		<fieldset>
+			<legend><:twitter:legend_recherche_widget:></legend>
+				<p class="explication"><:twitter:explication_recherche_widget:>
+				<br /><tt>\#INCLURE{fond=inclure/twidget_search}</tt>
+				</p>
+			<ul>
+				<!-- SEARCH-->
+				#SET{name,search}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#spip}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+			</ul>
+			#INCLURE{fond=inclure/twidget_search}
+		</fieldset>
+		<fieldset>
+			<legend><:twitter:legend_profil_widget:></legend>
+				<p class="explication"><:twitter:explication_profil_widget:>
+				<br /><tt>\#INCLURE{fond=inclure/twidget_profile}</tt>
+				</p>
+			<ul>
+				<!-- rpp -->
+				#SET{name,rpp}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},4}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+				<!-- user -->
+				#SET{name,user}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},spip}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+			</ul>
+			#INCLURE{fond=inclure/twidget_profile}
+		</fieldset>
+
+
+	  [(#REM) ajouter les saisies supplémentaires : extra et autre, à cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' name="cancel" class='submit' value='<:bouton_annuler:>' />
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+		]
+		[(#ENV{_info_config_erreur}|oui)
+			[<p class="notice">(#ENV**{_info_config_erreur})</p>]
+
+		  <p class='boutons'><span class='image_loading'>&nbsp;</span>
+				<input type='submit' name="cancel" class='submit' value="C'est fait !"/>
+		]
+
+	</div></form>
+	]
+</div>

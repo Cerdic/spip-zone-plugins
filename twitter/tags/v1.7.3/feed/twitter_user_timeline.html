@@ -1,0 +1,29 @@
+#CACHE{600}
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml version="1.0"[ encoding="(#CHARSET)"]?>
+<rss xmlns:twitter="http://api.twitter.com" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:georss="http://www.georss.org/georss">
+	#SET{screen_name,#ENV{screen_name,''}}
+	[(#GET{screen_name}|non)
+		[(#SET{infos_compte,[(#VAL{account/verify_credentials}|microblog_twitter_api)]})]
+		[(#SET{screen_name,#GET{infos_compte}|table_valeur{screen_name}})]
+	]
+	[(#SET{url_compte,#VAL{http://twitter.com/}|concat{#GET{screen_name}}})]
+  <channel>
+    <title>Twitter / #GET{screen_name}</title>
+    <link>#GET{url_compte}</link>
+    <atom:link type="application/rss+xml" href="#SELF" rel="self"/>
+    <description>Twitter updates from #GET{screen_name}.</description>
+    <language>en-us</language>
+    <ttl>40</ttl>
+    <BOUCLE_tweets(DATA) {source twitter,#VAL{statuses/user_timeline}|parametre_url{count,40,'&'}|parametre_url{screen_name,#GET{screen_name},'&'}}>
+	    <item>
+	      <title>[(#VALEUR{user/screen_name}|texte_backend)]: [(#VALEUR{text}|texte_backend)]</title>
+	      <description>[(#VALEUR{user/screen_name}|texte_backend)]: [(#VALEUR{text}|texte_backend)]</description>
+	      <pubDate>#VALEUR{created_at}</pubDate>
+	      <guid>http://twitter.com/#VALEUR{user/screen_name}/statuses/#VALEUR{id_str}</guid>
+	      <link>http://twitter.com/#VALEUR{user/screen_name}/statuses/#VALEUR{id_str}</link>
+	      <twitter:source>[(#VALEUR{id_str}|texte_backend)]</twitter:source>
+	      <twitter:place/>
+	    </item>
+    </BOUCLE_tweets>
+  </channel>
+</rss>
