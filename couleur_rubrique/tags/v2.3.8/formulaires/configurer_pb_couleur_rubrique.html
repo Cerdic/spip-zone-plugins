@@ -1,0 +1,33 @@
+
+
+<div class="formulaire_spip formulaire_config formulaire_#FORM">
+	<div class="hd titrem"><h3><:pb_couleur_rubrique:afficher_le_formulaire_de_couleur:></h3><div class="nettoyeur"></div><!--/hd--></div>
+	
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<ul>
+				<li class="editer pleine_largeur configurer_pb_couleur_rubrique">
+					<div class="choix">
+						<input type="checkbox" id="afficher" name='afficher' value='non'[(#CONFIG{pb_couleur_rubrique/afficher}|=={non}|oui) checked="checked"] />
+						<label for="afficher"><:pb_couleur_rubrique:ne_changez_plus_de_couleur:></label>
+						<p class="explication"><:pb_couleur_rubrique:geler_le_formulaire_de_couleur_explication:></p>
+					</div>
+				</li>
+				<li class="editer pleine_largeur configurer_pb_couleur_rubrique">
+					<div class="choix">
+						<input type="checkbox" id="secteurs" name='secteurs' value='oui'[(#CONFIG{pb_couleur_rubrique/secteurs}|=={oui}|oui) checked="checked"] />
+						<label for="secteurs"><:pb_couleur_rubrique:que_dans_les_secteurs:></label>
+						<p class="explication"><:pb_couleur_rubrique:que_dans_secteurs_explication:></p>
+					</div>
+				</li>
+			</ul>
+			<div class="boutons">
+				<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+			</div>
+		</div>
+	</form>
+</div>
