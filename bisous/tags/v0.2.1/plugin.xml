@@ -1,0 +1,27 @@
+<plugin>
+	<nom>SPIP Bisous !</nom>
+	<auteur>RastaPopoulos</auteur>
+	<licence>GPL</licence>
+	<version>0.2.1</version>
+	<version_base>0.2</version_base>
+	<etat>dev</etat>
+	<description>Vous &#234;tes en col&#232;re ? Il vous faut des bisous ! Vous &#234;tes content ? Il vous faut des bisous !</description>
+	<lien></lien> <!-- URI de documentation -->
+	<prefix>bisous</prefix>
+	<icon>images/amour.png</icon>
+	<install>base/bisous_installation.php</install>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/bisous_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/bisous_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+	   <nom>affiche_gauche</nom>
+	   <inclure>bisous_pipelines.php</inclure>
+    </pipeline>
+	<necessite id="SPIP" version="[3.0.0;3.0.99]" />
+	<categorie>communication</categorie>
+</plugin>
