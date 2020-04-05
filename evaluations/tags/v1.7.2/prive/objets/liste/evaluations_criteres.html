@@ -1,0 +1,43 @@
+[(#SET{defaut_tri,#ARRAY{
+	rang,1,
+	titre,1,
+	id_evaluations_critere,1,
+	points,-1
+}})]<B_liste_evaluations_criteres>
+#ANCRE_PAGINATION
+<div class="liste-objets evaluations_criteres">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{evaluations_critere:info_1_evaluations_critere,evaluations_critere:info_nb_evaluations_criteres}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:evaluations_critere:label_titre:>,ajax})]</th>
+			<th class='note' scope='col'><:evaluations_critere:label_noter:></th>
+			<th class='evaluer' scope='col'><:evaluations_critere:label_evaluation:></th>
+			<th class='commenter' scope='col'><:evaluations_critere:label_commenter:></th>
+			<th class='ponderation' scope='col'><:evaluations_critere:label_ponderation:></th>
+			<th class='id' scope='col'>[(#TRI{id_evaluations_critere,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_evaluations_criteres(EVALUATIONS_CRITERES){id_evaluation?}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par num titre,titre}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{evaluations_critere-16.png}|balise_img)]</td>
+			<td class='titre principale'>[(#LOGO_EVALUATIONS_CRITERE|image_reduire{20,26})]<a href="[(#ID_EVALUATIONS_CRITERE|generer_url_entite{evaluations_critere})]" title="<:info_numero_abbreviation|attribut_html:> #ID_EVALUATIONS_CRITERE">[(#RANG). ]#TITRE</a></td>
+			<td class='note'>[(#NOTER|oui)<span class="#EDIT{note_mini}">#NOTE_MINI</span>/<span class="#EDIT{note_maxi}">#NOTE_MAXI</span>]</td>
+			<td class='evaluer #EDIT{evaluer}'>[(#EVALUER|=={on}|?{<:oui:>,<:non:>})]</td>
+			<td class='commenter #EDIT{commenter}'>[(#COMMENTER|=={on}|?{<:oui:>,<:non:>})]</td>
+			<td class='ponderation #EDIT{ponderation}'>#PONDERATION</td>
+			<td class='id'>[(#AUTORISER{modifier,evaluations_critere,#ID_EVALUATIONS_CRITERE}|?{
+				<a href="[(#URL_ECRIRE{evaluations_critere_edit,id_evaluations_critere=#ID_EVALUATIONS_CRITERE})]">#ID_EVALUATIONS_CRITERE</a>,
+				#ID_EVALUATIONS_CRITERE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_evaluations_criteres>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_evaluations_criteres>[
+<div class="liste-objets evaluations_criteres caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_evaluations_criteres>

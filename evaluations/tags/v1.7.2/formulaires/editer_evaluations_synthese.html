@@ -1,0 +1,35 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_evaluations_synthese,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_evaluations_synthese' value='#ENV{id_evaluations_synthese}' />
+		<ul>
+
+			[(#SET{saisie,#ENV{simplifier}|et{#ENV{id_evaluation}}|?{hidden,evaluations}})]
+			[(#SAISIE{#GET{saisie}, id_evaluation, obligatoire=oui,
+				label=<:evaluations_synthese:label_id_evaluation:>})]
+
+			[(#SET{saisie,#ENV{simplifier}|et{#ENV{objet}}|et{#ENV{id_objet}}|?{hidden,input}})]
+			[(#SAISIE{#GET{saisie}, objet, obligatoire=oui,
+				label=<:evaluations_synthese:label_objet:>})]
+
+			[(#SAISIE{#GET{saisie}, id_objet, obligatoire=oui,
+				label=<:evaluations_synthese:label_id_objet:>})]
+
+			[(#SAISIE{input, note,
+				label=<:evaluations_synthese:label_note:>})]
+
+			[(#SAISIE{textarea, synthese,
+				label=<:evaluations_synthese:label_synthese:>,
+				li_class=haut, class=inserer_barre_edition, rows=6 })]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

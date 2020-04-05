@@ -1,0 +1,79 @@
+
+/* notation + bootstrap */
+.radio.star {
+	min-height: auto;
+	padding-left: 0px;
+}
+
+
+/* styles assez génériques sur le formulaire d'évaluation */
+.formulaire_evaluation .editer_critere + .editer_critere {
+	margin-top:2em;
+}
+.formulaire_evaluation .legend {
+	border-bottom:1px solid #888;
+}
+.formulaire_evaluation .notation_note {
+	margin-bottom:.5em;
+}
+
+
+/* encadrer le formulaire par une classe 'vert' (vieux CSS à supprimer ???) */ 
+.vert .formulaire_evaluation .boutons {
+	background: #82C93A;
+	background: -o-linear-gradient(top,#82C93A,#4c9900);
+	background: -moz-linear-gradient(top,#82C93A,#4c9900);
+	background: -webkit-linear-gradient(top,#82C93A,#4c9900);
+	background: linear-gradient(top,#82C93A,#4c9900);
+	margin:0 -15px -1em;
+	padding: 0.5em 1em;
+	border:none;
+	border-radius:0 0 9px 9px;
+}
+
+
+/* deco formulaire */
+.vert .formulaire_evaluation {
+	border:1px solid #4c9900;
+	border-radius:10px;
+	background: #ffffff;
+	padding:0 15px 1em;
+}
+
+.vert .formulaire_evaluation > h3 {
+	border-radius:9px 9px 0 0;
+	background:#4c9900;
+	background: -o-linear-gradient(top,#4c9900,#82C93A);
+	background: -webkit-linear-gradient(top,#4c9900,#82C93A);
+	background: -moz-linear-gradient(top,#4c9900,#82C93A);
+	background: linear-gradient(top,#4c9900,#82C93A);
+	color:white;
+	font-weight:bold;
+	margin:0 -15px .5em -15px;
+	padding:5px 15px;
+}
+
+.vert .formulaire_evaluation fieldset {
+	margin-left:130px;
+	padding-right:130px;
+}
+
+.vert .formulaire_evaluation fieldset .legend {
+	float:left;
+	margin-left:-130px;
+	width:100px;
+	font-size:110%;
+	margin-bottom:0;
+}
+
+.vert .formulaire_evaluation fieldset p.explication {
+	margin-bottom:0;
+}
+
+.vert .formulaire_evaluation .notation_note {
+	margin-top:5px;
+}
+.vert .formulaire_evaluation .label_note,
+.vert .formulaire_evaluation .label_commentaire {
+	display:none;
+}

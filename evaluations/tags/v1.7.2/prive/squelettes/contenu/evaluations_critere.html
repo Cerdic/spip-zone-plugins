@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,evaluations_critere,#ID_EVALUATIONS_CRITERE}|sinon_interdire_acces)]
+<BOUCLE_evaluations_critere(EVALUATIONS_CRITERES){id_evaluations_critere}{si #ENV{exec}|=={evaluations_critere}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,evaluations_critere,#ID_EVALUATIONS_CRITERE})
+		[(#ID_EVALUATIONS_CRITERE|afficher_qui_edite{evaluations_critere}|non)
+			[(#URL_ECRIRE{evaluations_critere_edit,id_evaluations_critere=#ID_EVALUATIONS_CRITERE}|icone_verticale{<:evaluations_critere:icone_modifier_evaluations_critere:>,evaluations_critere,edit,right ajax preload})]
+		]
+		[(#ID_EVALUATIONS_CRITERE|afficher_qui_edite{evaluations_critere}|oui)
+			[(#URL_ECRIRE{evaluations_critere_edit,id_evaluations_critere=#ID_EVALUATIONS_CRITERE}|icone_verticale{#ID_EVALUATIONS_CRITERE|afficher_qui_edite{evaluations_critere},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{evaluations_critere-24.png}|balise_img{evaluations_critere,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{evaluations_critere,#ID_EVALUATIONS_CRITERE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/evaluations_critere,id=#ID_EVALUATIONS_CRITERE,id_evaluations_critere=#ID_EVALUATIONS_CRITERE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,evaluations_critere,#ID_EVALUATIONS_CRITERE})
+	[(#ID_EVALUATIONS_CRITERE|afficher_qui_edite{evaluations_critere}|non)
+		[(#URL_ECRIRE{evaluations_critere_edit,id_evaluations_critere=#ID_EVALUATIONS_CRITERE}|icone_verticale{<:evaluations_critere:icone_modifier_evaluations_critere:>,evaluations_critere,edit,right ajax preload})]
+	]
+	[(#ID_EVALUATIONS_CRITERE|afficher_qui_edite{evaluations_critere}|oui)
+		[(#URL_ECRIRE{evaluations_critere_edit,id_evaluations_critere=#ID_EVALUATIONS_CRITERE}|icone_verticale{#ID_EVALUATIONS_CRITERE|afficher_qui_edite{evaluations_critere},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,evaluations_critere,id,#ID_EVALUATIONS_CRITERE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_evaluations_critere>
+[(#ENV**{exec}|=={evaluations_critere_edit}|?{#INCLURE{fond=prive/squelettes/contenu/evaluations_critere_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_evaluations_critere>

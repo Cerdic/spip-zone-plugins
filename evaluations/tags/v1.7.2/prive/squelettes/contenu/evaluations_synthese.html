@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,evaluations_synthese,#ID_EVALUATIONS_SYNTHESE}|sinon_interdire_acces)]
+<BOUCLE_evaluations_synthese(EVALUATIONS_SYNTHESES){id_evaluations_synthese}{si #ENV{exec}|=={evaluations_synthese}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,evaluations_synthese,#ID_EVALUATIONS_SYNTHESE})
+		[(#ID_EVALUATIONS_SYNTHESE|afficher_qui_edite{evaluations_synthese}|non)
+			[(#URL_ECRIRE{evaluations_synthese_edit,id_evaluations_synthese=#ID_EVALUATIONS_SYNTHESE}|icone_verticale{<:evaluations_synthese:icone_modifier_evaluations_synthese:>,evaluations_synthese,edit,right ajax preload})]
+		]
+		[(#ID_EVALUATIONS_SYNTHESE|afficher_qui_edite{evaluations_synthese}|oui)
+			[(#URL_ECRIRE{evaluations_synthese_edit,id_evaluations_synthese=#ID_EVALUATIONS_SYNTHESE}|icone_verticale{#ID_EVALUATIONS_SYNTHESE|afficher_qui_edite{evaluations_synthese},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#SYNTHESE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{evaluations_synthese-24.png}|balise_img{evaluations_synthese,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{evaluations_synthese,#ID_EVALUATIONS_SYNTHESE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/evaluations_synthese,id=#ID_EVALUATIONS_SYNTHESE,id_evaluations_synthese=#ID_EVALUATIONS_SYNTHESE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,evaluations_synthese,#ID_EVALUATIONS_SYNTHESE})
+	[(#ID_EVALUATIONS_SYNTHESE|afficher_qui_edite{evaluations_synthese}|non)
+		[(#URL_ECRIRE{evaluations_synthese_edit,id_evaluations_synthese=#ID_EVALUATIONS_SYNTHESE}|icone_verticale{<:evaluations_synthese:icone_modifier_evaluations_synthese:>,evaluations_synthese,edit,right ajax preload})]
+	]
+	[(#ID_EVALUATIONS_SYNTHESE|afficher_qui_edite{evaluations_synthese}|oui)
+		[(#URL_ECRIRE{evaluations_synthese_edit,id_evaluations_synthese=#ID_EVALUATIONS_SYNTHESE}|icone_verticale{#ID_EVALUATIONS_SYNTHESE|afficher_qui_edite{evaluations_synthese},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,evaluations_synthese,id,#ID_EVALUATIONS_SYNTHESE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_evaluations_synthese>
+[(#ENV**{exec}|=={evaluations_synthese_edit}|?{#INCLURE{fond=prive/squelettes/contenu/evaluations_synthese_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_evaluations_synthese>

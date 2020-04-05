@@ -1,0 +1,28 @@
+<BOUCLE_evaluation(EVALUATIONS){id_evaluation}{statut?}>
+
+[<div class="champ contenu_identifiant[ (#IDENTIFIANT*|strlen|?{'',vide})]">
+	<label><:evaluation:label_identifiant:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{identifiant} identifiant'>(#IDENTIFIANT)</span>
+</div>]
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:evaluation:label_titre:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{titre} titre'>(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+	<label><:evaluation:label_texte:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{texte} texte'>(#TEXTE)</span>
+</div>]
+
+[<div class="champ contenu_date_debut[ (#DATE_DEBUT*|strlen|?{'',vide})]">
+	<label><:evaluation:label_date_debut:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{date_debut} date_debut'>(#DATE_DEBUT|affdate)</span>
+</div>]
+
+[<div class="champ contenu_date_fin[ (#DATE_FIN*|strlen|?{'',vide})]">
+	<label><:evaluation:label_date_fin:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{date_fin} date_fin'>(#DATE_FIN|affdate)</span>
+</div>]
+
+</BOUCLE_evaluation>

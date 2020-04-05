@@ -1,0 +1,47 @@
+[(#REM) nécessite id_evaluation, objet, id_objet ]
+
+#SET{formulaire,#ENV{id_evaluation}|concat{#ENV{objet},#ENV{id_objet}}|md5|substr{6}}
+
+<BOUCLE_synthese(EVALUATIONS_SYNTHESES){id_evaluation}{objet}{id_objet}>
+	
+	[<div class="champ contenu_note[ (#NOTE*|strlen|?{'',vide})]">
+		<label><:evaluations_synthese:label_note:> : </label>
+		<span dir='#LANG_DIR' class='#EDIT{note} note'>(#NOTE)</span>
+	</div>]
+
+	[<div class="champ contenu_synthese[ (#SYNTHESE*|strlen|?{'',vide})]">
+		<label><:evaluations_synthese:label_synthese:> : </label>
+		<span dir='#LANG_DIR' class='#EDIT{synthese} synthese'>(#SYNTHESE)</span>
+	</div>]
+
+	[(#AUTORISER{modifier,evaluations_synthese,#ID_EVALUATIONS_SYNTHESE}|oui)
+		[(#SELF
+			|parametre_url{formulaire,#GET{formulaire}}
+			|parametre_url{id_evaluations_synthese,#ID_EVALUATIONS_SYNTHESE}
+			|icone_horizontale{Éditer la synthèse,evaluations_synthese,edit,ajax})]
+	]
+
+</BOUCLE_synthese>
+
+
+	[(#ENV{formulaire}|!={#GET{formulaire}}|oui)
+		<p class='notice'>
+			Aucune synthèse n'est encore rédigée
+		</p>
+
+		[(#AUTORISER{modifier,evaluations_synthese}|oui)
+			[(#SELF|parametre_url{formulaire,#GET{formulaire}}|icone_horizontale{Rédiger la synthèse,evaluations_synthese,new,ajax})]
+		]
+	]
+<//B_synthese>
+
+
+[(#ENV{formulaire}|=={#GET{formulaire}}|oui)
+	[(#SET{retour,[(#SELF|parametre_url{formulaire,''}|parametre_url{id_evaluations_synthese,''})#synthese_#ENV{objet}#ENV{id_objet}]})]
+
+	[(#FORMULAIRE_EDITER_EVALUATIONS_SYNTHESE{#ENV{id_evaluations_synthese,new}, #GET{retour}, [(#ARRAY{
+		simplifier,oui,
+		id_evaluation,#ID_EVALUATION,
+		objet,#OBJET,
+		id_objet,#ID_OBJET})]})]
+]

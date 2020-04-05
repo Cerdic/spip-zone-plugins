@@ -1,0 +1,13 @@
+
+<!-- hierarchie -->
+<a href="#URL_ECRIRE{evaluations}"><:evaluation:titre_evaluations:></a>
+<BOUCLE_critere(EVALUATIONS_CRITERES){id_evaluations_critere}{statut==.*}>
+	<BOUCLE_evaluation(EVALUATIONS){id_evaluation}{statut==.*}>
+	&gt; [(#URL_ECRIRE{evaluation,id_evaluation=#ID_EVALUATION}
+		|lien_ou_expose{ #TITRE, ''})]
+	</BOUCLE_evaluation>
+&gt; <strong class="on">#TITRE</strong>
+</BOUCLE_critere>
+
+&gt; <strong class="on"><:evaluations_critere:info_nouveau_evaluations_critere:></strong>
+<//B_critere>

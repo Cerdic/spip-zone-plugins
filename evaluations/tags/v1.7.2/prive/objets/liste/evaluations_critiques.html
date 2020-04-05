@@ -1,0 +1,38 @@
+[(#SET{defaut_tri,#ARRAY{
+	commentaire,1, 
+	date,-1, 
+	id_evaluations_critique,1,
+	points,-1
+}})]
+<B_liste_evaluations_critiques>
+#ANCRE_PAGINATION
+<div class="liste-objets evaluations_critiques">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{evaluations_critique:info_1_evaluations_critique,evaluations_critique:info_nb_evaluations_critiques}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='commentaire' scope='col'>[(#TRI{commentaire,<:evaluations_critique:label_commentaire:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class='id' scope='col'>[(#TRI{id_evaluations_critique,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_evaluations_critiques(EVALUATIONS_CRITIQUES){id_evaluation?}{id_evaluations_critere?}{id_objet?}{id_auteur?}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num commentaire},#GET{defaut_tri}}{par commentaire}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{evaluations_critique-16.png}|balise_img)]</td>
+			<td class='commentaire principale'>[(#LOGO_EVALUATIONS_CRITIQUE|image_reduire{20,26})]<a href="[(#ID_EVALUATIONS_CRITIQUE|generer_url_entite{evaluations_critique})]" title="<:info_numero_abbreviation|attribut_html:> #ID_EVALUATIONS_CRITIQUE">[(#RANG). ]#COMMENTAIRE</a></td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
+			<td class='id'>[(#AUTORISER{modifier,evaluations_critique,#ID_EVALUATIONS_CRITIQUE}|?{
+				<a href="[(#URL_ECRIRE{evaluations_critique_edit,id_evaluations_critique=#ID_EVALUATIONS_CRITIQUE})]">#ID_EVALUATIONS_CRITIQUE</a>,
+				#ID_EVALUATIONS_CRITIQUE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_evaluations_critiques>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_evaluations_critiques>[
+<div class="liste-objets evaluations_critiques caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_evaluations_critiques>

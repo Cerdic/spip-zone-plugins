@@ -1,0 +1,197 @@
+
+<h1 class='grostitre'><:evaluations:titre_visualiser_evaluations:></h1>
+
+<BOUCLE_evaluation(EVALUATIONS){id_evaluation}>
+
+	<h2>Évaluation #ID_EVALUATION : #TITRE</h2>
+	[<div class='chapo'>(#TEXTE)</div>]
+
+	<h3><:evaluations:titre_critere_evaluation:></h3>
+
+	<BOUCLE_criteres(EVALUATIONS_CRITERES){id_evaluation}{par num titre, titre}>
+		#BOITE_OUVRIR{#TITRE}
+			<div class='introduction'>#TEXTE</div>
+
+			<B_objets>
+			#ANCRE_PAGINATION
+			[<div class="pagination">(#PAGINATION{page_precedent_suivant})</div>]
+
+			<BOUCLE_objets(EVALUATIONS_CRITIQUES)
+				{id_evaluation}{id_evaluations_critere}
+				{objet ?}{id_objet ?}{par id_objet}{fusion concat(objet,id_objet)}{pagination #ENV{pagination,20}}>
+
+					<div class='element_presentation'>
+						<h5>[(#OBJET|objet_info{texte_objet}|_T)] : [(#INFO_TITRE{#OBJET,#ID_OBJET})]</h5>
+
+						<BOUCLE_si(CONDITION){si (#OBJET|=={site})}{si #PLUGIN{thumbsites}|oui}>
+						<BOUCLE_site(SITES){id_syndic=#ID_OBJET}>
+						[<a href="#URL_SITE" target="_blank">(#VAL{#URL_SITE}|evaluations_thumbshot|balise_img|image_passe_partout{200,150}|image_recadre{200,150})</a>]
+						</BOUCLE_site>
+						</BOUCLE_si>
+
+						#SET{somme,0}
+						#SET{nb,0}
+
+						<BOUCLE_noter(EVALUATIONS_CRITIQUES)
+							{si #_criteres:NOTER}
+							{id_evaluation}{id_evaluations_critere}
+							{objet}{id_objet}
+							>
+								[(#REM) le critere id_auteur ? ne va pas. On s'adapte ]
+								[(#ENV{id_auteur}|non|ou{#ID_AUTEUR|=={#ENV{id_auteur}}})
+									#SET{somme,#GET{somme}|plus{#NOTE}}
+									#SET{nb,#GET{nb}|plus{1}}
+								]
+							</BOUCLE_noter>
+
+							[(#GET{nb}|oui)
+								<div class='moyenne'>
+									<strong>
+										[(#GET{somme}|div{#GET{nb}}|round{2})]
+										/
+										[(#_criteres:NOTE_MAXI|?{#_criteres:NOTE_MAXI,5})]
+									</strong>
+									([(#GET{nb}|singulier_ou_pluriel{evaluation:info_1_evaluation,evaluation:info_nb_evaluations})])
+								</div>
+							]
+
+						</B_noter>
+					</div>
+
+
+					<div class='element_commentaires'>
+
+						[(#REM) soit tous les textes qq soit l'auteur ]
+						<B_commenter>
+							<div class='element_commentaire'>
+								<h6 class='titre'><:evaluations_critique:label_commentaires:></h6>
+						<BOUCLE_commenter(EVALUATIONS_CRITIQUES)
+							{si #_criteres:COMMENTER}
+							{si (#ENV{id_auteur}|non)}
+							{id_evaluation}{id_evaluations_critere}
+							{objet}{id_objet}
+							{commentaire != ''}
+							>
+								<div class='texte'>
+									#COMMENTAIRE
+								</div>
+						</BOUCLE_commenter>
+							</div>
+						</B_commenter>
+
+						[(#REM) soit les textes d'un auteur ]
+						<B_commenter_auteur>
+							<div class='element_commentaire'>
+								<h6 class='titre'><:evaluations_critique:label_commentaires:></h6>
+						<BOUCLE_commenter_auteur(EVALUATIONS_CRITIQUES)
+							{si #_criteres:COMMENTER}
+							{si #ENV{id_auteur}}
+							{id_evaluation}{id_evaluations_critere}
+							{objet}{id_objet}
+							{id_auteur = #ENV{id_auteur}}
+							{commentaire != ''}
+							>
+								<div class='texte'>
+									#COMMENTAIRE
+								</div>
+						</BOUCLE_commenter_auteur>
+							</div>
+						</B_commenter_auteur>
+
+
+
+						[(#REM) soit tous les textes qq soit l'auteur ]
+						<B_forces>
+							<div class='element_commentaire'>
+								<h6 class='titre'><:evaluations_critique:label_forces:></h6>
+						<BOUCLE_forces(EVALUATIONS_CRITIQUES)
+							{si #_criteres:EVALUER}
+							{si (#ENV{id_auteur}|non)}
+							{id_evaluation}{id_evaluations_critere}
+							{objet}{id_objet}
+							{forces != ''}
+							>
+								<div class='texte'>
+									#FORCES
+								</div>
+						</BOUCLE_forces>
+							</div>
+						</B_forces>
+
+
+						[(#REM) soit les textes d'un auteur ]
+						<B_forces_auteur>
+							<div class='element_commentaire'>
+								<h6 class='titre'><:evaluations_critique:label_forces:></h6>
+						<BOUCLE_forces_auteur(EVALUATIONS_CRITIQUES)
+							{si #_criteres:EVALUER}
+							{si #ENV{id_auteur}}
+							{id_evaluation}{id_evaluations_critere}
+							{objet}{id_objet}
+							{id_auteur = #ENV{id_auteur}}
+							{forces != ''}
+							>
+								<div class='texte'>
+									#FORCES
+								</div>
+						</BOUCLE_forces_auteur>
+							</div>
+						</B_forces_auteur>
+
+
+
+						[(#REM) soit tous les textes qq soit l'auteur ]
+						<B_faiblesses>
+							<div class='element_commentaire'>
+								<h6 class='titre'><:evaluations_critique:label_faiblesses:></h6>
+						<BOUCLE_faiblesses(EVALUATIONS_CRITIQUES)
+							{si #_criteres:EVALUER}
+							{si (#ENV{id_auteur}|non)}
+							{id_evaluation}{id_evaluations_critere}
+							{objet}{id_objet}
+							{faiblesses != ''}
+							>
+								<div class='texte'>
+									#FAIBLESSES
+								</div>
+						</BOUCLE_faiblesses>
+							</div>
+						</B_faiblesses>
+
+
+						[(#REM) soit les textes d'un auteur ]
+						<B_faiblesses_auteur>
+							<div class='element_commentaire'>
+								<h6 class='titre'><:evaluations_critique:label_faiblesses:></h6>
+						<BOUCLE_faiblesses_auteur(EVALUATIONS_CRITIQUES)
+							{si #_criteres:EVALUER}
+							{si #ENV{id_auteur}}
+							{id_evaluation}{id_evaluations_critere}
+							{objet}{id_objet}
+							{id_auteur = #ENV{id_auteur}}
+							{faiblesses != ''}
+							>
+								<div class='texte'>
+									#FAIBLESSES
+								</div>
+						</BOUCLE_faiblesses_auteur>
+							</div>
+						</B_faiblesses_auteur>
+
+					</div>
+
+
+
+			[<div class="pagination">(#PAGINATION{page_precedent_suivant})</div>]
+			</BOUCLE_objets>
+
+
+		#BOITE_FERMER
+	</BOUCLE_criteres>
+
+</BOUCLE_evaluation>
+
+	<h2>Aucune grille d'évaluation transmise. Choisissez :</h2>
+	<INCLURE{fond=prive/objets/liste/evaluations_visualisation, id_evaluation, env, ajax} />
+
+<//B_evaluation>

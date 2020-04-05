@@ -1,0 +1,88 @@
+[(#AUTORISER{voir,evaluation,#ID_EVALUATION}|sinon_interdire_acces)]
+<BOUCLE_evaluation(EVALUATIONS){id_evaluation}{statut==.*}{si #ENV{exec}|=={evaluation}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,evaluation,#ID_EVALUATION})
+		[(#ID_EVALUATION|afficher_qui_edite{evaluation}|non)
+			[(#URL_ECRIRE{evaluation_edit,id_evaluation=#ID_EVALUATION}|icone_verticale{<:evaluation:icone_modifier_evaluation:>,evaluation,edit,right ajax preload})]
+		]
+		[(#ID_EVALUATION|afficher_qui_edite{evaluation}|oui)
+			[(#URL_ECRIRE{evaluation_edit,id_evaluation=#ID_EVALUATION}|icone_verticale{#ID_EVALUATION|afficher_qui_edite{evaluation},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{evaluation-24.png}|balise_img{evaluation,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{evaluation,#ID_EVALUATION}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/evaluation,id=#ID_EVALUATION,id_evaluation=#ID_EVALUATION,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+[(#REM) Affiche les critères enfants ]
+<INCLURE{fond=prive/objets/liste/evaluations_criteres,id_evaluation=#ID_EVALUATION, env, ajax}>
+
+[(#AUTORISER{creerevaluationscriteredans,evaluation,#ID_EVALUATION}|oui)
+	[(#URL_ECRIRE{evaluations_critere_edit,id_evaluation=#ID_EVALUATION}|icone_verticale{<:evaluations_critere:icone_creer_evaluations_critere:>,evaluations_critere-24,new,right})]
+]
+
+
+[(#REM) Affiche les autres enfants ]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,evaluation,id_evaluation,#ID_EVALUATION,objet,evaluation,id_objet,#ID_EVALUATION},data,''})]})]
+
+
+<br class='nettoyeur' />
+
+[(#REM) Liste des objets ayant reçu des critiques ]
+<B_objets>
+	<h3><:evaluations:liste_objets_critiques:></h3>
+<BOUCLE_objets(EVALUATIONS_CRITIQUES){id_evaluation}{fusion objet}{par objet}>
+	[(#SET{titre,[(#OBJET|objet_info{texte_objets}|_T)]})]
+	<INCLURE{fond=prive/objets/liste/evaluations_objets, id_evaluation, objet, env, ajax, titre=#GET{titre}} />
+</BOUCLE_objets>
+
+
+[(#REM) Liste des auteurs ayant voté ]
+<B_auteurs>
+	<h3><:evaluations:liste_auteurs_critiques:></h3>
+<BOUCLE_auteurs(EVALUATIONS_CRITIQUES){id_evaluation}{fusion id_auteur}{0,1}>
+	<INCLURE{fond=prive/objets/liste/evaluations_auteurs, id_evaluation, env, ajax} />
+</BOUCLE_auteurs>
+
+[(#REM) Dernieres évaluations (objet/auteur) ]
+<B_dernieres_evaluations_auteurs>
+	<h3>Liste des dernières évaluations</h3>
+<BOUCLE_dernieres_evaluations_auteurs(EVALUATIONS_CRITIQUES){id_evaluation}{0,1}>
+	<INCLURE{fond=prive/objets/liste/evaluations_par_date, id_evaluation, env, ajax} />
+</BOUCLE_dernieres_evaluations_auteurs>
+
+
+[(#REM) TODO: ]
+[(#REM) Meilleurs votes (objet/auteur) ]
+
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,evaluation,#ID_EVALUATION})
+	[(#ID_EVALUATION|afficher_qui_edite{evaluation}|non)
+		[(#URL_ECRIRE{evaluation_edit,id_evaluation=#ID_EVALUATION}|icone_verticale{<:evaluation:icone_modifier_evaluation:>,evaluation,edit,right ajax preload})]
+	]
+	[(#ID_EVALUATION|afficher_qui_edite{evaluation}|oui)
+		[(#URL_ECRIRE{evaluation_edit,id_evaluation=#ID_EVALUATION}|icone_verticale{#ID_EVALUATION|afficher_qui_edite{evaluation},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,evaluation,id,#ID_EVALUATION},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_evaluation>
+[(#ENV**{exec}|=={evaluation_edit}|?{#INCLURE{fond=prive/squelettes/contenu/evaluation_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_evaluation>

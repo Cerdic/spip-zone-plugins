@@ -1,0 +1,71 @@
+[(#AUTORISER{voir,evaluations_syntheses}|sinon_interdire_acces)]
+
+
+
+<BOUCLE_evaluation(EVALUATIONS){id_evaluation}>
+
+	<div class='onglets_simple clearfix'>
+		<ul>
+			<li>[(#SELF|parametre_url{vue,''}
+					|lien_ou_expose{ Vue en fil, [(#ENV{vue}|!={classique})], ajax})]</li>
+			<li>[(#SELF|parametre_url{vue, classique}
+					|lien_ou_expose{ Vue classique, [(#ENV{vue}|=={classique})], ajax})]</li>
+		</ul>
+	</div>
+
+	<BOUCLE_vue(CONDITION){si #ENV{vue}|!={classique}}>
+		[(#REM) Vue en fil ]
+
+
+		[(#REM) Liste des objets ayant reçu des critiques ]
+		<B_objets>
+			<h2>Éléments ayant reçus des évaluations</h2>
+		<BOUCLE_objets(EVALUATIONS_CRITIQUES){id_evaluation}{fusion objet}{par objet}>
+			<h3>[(#OBJET|objet_info{texte_objets}|_T)]</h3>
+
+			<BOUCLE_id_objets(EVALUATIONS_CRITIQUES){id_evaluation}{objet}{par id_objet}{fusion id_objet}>
+				<a name="synthese_#OBJET#ID_OBJET"></a>
+
+				[(#BOITE_OUVRIR{
+					[<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">(#INFO_TITRE{#OBJET,#ID_OBJET})</a>]
+				})]
+
+					[(#URL_ECRIRE{evaluations_auteur}
+						|parametre_url{id_evaluation,#ID_EVALUATION}
+						|parametre_url{objet,#OBJET}
+						|parametre_url{id_objet,#ID_OBJET}
+						|icone_horizontale{Voir les réponses,evaluations_reponses-24})]
+
+					<INCLURE{fond=inclure/evaluations_synthese,id_evaluation,objet,id_objet,ajax,env} />
+
+				#BOITE_FERMER
+			</BOUCLE_id_objets>
+		</BOUCLE_objets>
+
+
+
+
+	</BOUCLE_vue>
+		[(#REM) Vue classique ]
+
+		#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+		<div class="nettoyeur"></div>
+
+		<INCLURE{fond=prive/objets/liste/evaluations_syntheses,
+			par=synthese, env, ajax,
+			sinon=<:evaluations_synthese:info_aucun_evaluations_synthese:>}>
+
+		[(#AUTORISER{creer,evaluations_synthese})
+			[(#URL_ECRIRE{evaluations_synthese_edit,new=oui}|icone_verticale{<:evaluations_synthese:icone_creer_evaluations_synthese:>,evaluations_synthese,new,right})]
+		]
+
+	<//B_vue>
+
+
+</BOUCLE_evaluation>
+	<p class='notice'>Sélectionnez une évaluation pour accéder à ses synthèses.</p>
+<//B_evaluation>
+
+
+
+

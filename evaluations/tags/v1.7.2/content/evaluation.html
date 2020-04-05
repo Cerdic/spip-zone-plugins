@@ -1,0 +1,57 @@
+[(#AUTORISER{voir,evaluation,#ID_EVALUATION}|sinon_interdire_acces)]
+<BOUCLE_evaluation(EVALUATIONS){id_evaluation}>
+<article>
+	<header class="cartouche">
+	  <h1 class="#EDIT{titre}">[(#LOGO_EVALUATION|image_reduire)]#TITRE</h1>
+	  <p class="publication">
+		  <time pubdate="pubdate" datetime="[(#DATE_DEBUT|date_iso)]">
+			  <i class="icon-calendar"></i>[(#DATE_DEBUT|nom_jour) ][(#DATE_DEBUT|affdate)]</time>
+			&rarr; <time datetime="[(#DATE_FIN|date_iso)]">
+			[(#DATE_FIN|nom_jour) ][(#DATE_FIN|affdate)]</time>
+		</p>
+	</header>
+
+	<div class="main">
+		[<div class="#EDIT{texte} texte">(#TEXTE)</div>]
+
+		[(#REM) Liste des objets ayant reçu des critiques ]
+		<B_objets>
+			<h2 class="h2"><:evaluations:liste_objets_critiques:></h2>
+		<BOUCLE_objets(EVALUATIONS_CRITIQUES){id_evaluation}{fusion objet}{par objet}>
+			[(#SET{titre,[(#OBJET|objet_info{texte_objets}|_T)]})]
+
+			<B_liste_evaluations_critiques>
+				<div class="menu evaluations_critiques">
+					<h3 class="h3">#GET{titre}</h3>
+					<ul class="menu-items menu-liste">
+			<BOUCLE_liste_evaluations_critiques(EVALUATIONS_CRITIQUES)
+				{id_evaluation}{objet}{par num commentaire,commentaire}
+				{fusion concat(objet,id_objet)}>
+					<li class="item menu-entree">
+						<a href="[(#URL_PAGE{evaluation_bilan}
+							|parametre_url{id_evaluation,#ID_EVALUATION}
+							|parametre_url{objet,#OBJET}
+							|parametre_url{id_objet,#ID_OBJET})]">[(#INFO_TITRE{#OBJET,#ID_OBJET})]</a>
+						<BOUCLE_nb_evaluations_objets(EVALUATIONS_CRITIQUES)
+							{id_evaluation}{id_evaluations_critere}
+							{objet}{id_objet}
+							{fusion id_auteur}> </BOUCLE_nb_evaluations_objets>
+
+							[(#TOTAL_BOUCLE|singulier_ou_pluriel{evaluation:info_1_evaluation,evaluation:info_nb_evaluations})]
+
+						</B_nb_evaluations_objets>
+					</li>
+			</BOUCLE_liste_evaluations_critiques>
+					</ul>
+				</div>
+			</B_liste_evaluations_critiques>
+		</BOUCLE_objets>
+	</div>
+
+	<footer>
+		[<div class="notes"><hr />(#NOTES)</div>]
+	</footer>
+
+</article>
+
+</BOUCLE_evaluation>

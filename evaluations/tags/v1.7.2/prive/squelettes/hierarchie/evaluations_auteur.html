@@ -1,0 +1,18 @@
+
+<!-- hierarchie -->
+<a href="#URL_ECRIRE{evaluations}"><:evaluation:titre_evaluations:></a>
+
+<BOUCLE_evaluation(EVALUATIONS){id_evaluation}{statut==.*}>
+&gt; [(#URL_ECRIRE{evaluation,id_evaluation=#ID_EVALUATION}
+	|lien_ou_expose{ #TITRE, ''})]
+</BOUCLE_evaluation>
+
+[(#OBJET|oui)
+&gt; [(#ID_OBJET|oui)<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">]
+	[(#OBJET|objet_info{texte_objet}|_T)]
+[(#ID_OBJET|oui) : [(#INFO_TITRE{#OBJET,#ID_OBJET})]</a>]
+]
+
+<BOUCLE_auteur(AUTEURS){id_auteur}{statut==.*}>
+&gt; <a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#VAL{auteur}|objet_info{texte_objet}|_T)] : #NOM</a>
+</BOUCLE_auteur>
