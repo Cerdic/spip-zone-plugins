@@ -1,0 +1,23 @@
+<div id="page">
+	<header id="entete">
+		<INCLURE{fond=inclure/entete,env}>
+	</header>
+	<nav id="nav">
+		<INCLURE{fond=inclure/barre-nav,env}>
+	</nav>
+	
+	<div id="conteneur">	
+		<div id="contenu">
+			<INCLURE{fond=contenu/#ENV{type},env}>
+		</div>
+
+		<nav id="navigation">
+			<INCLURE{fond=navigation/#ENV{type},env}>
+			<INCLURE{fond=extra/#ENV{type},env}>
+		</nav>
+	</div>
+
+	<footer id="pied">
+		<INCLURE{fond=inclure/pied,env}>
+	</footer>
+</div>

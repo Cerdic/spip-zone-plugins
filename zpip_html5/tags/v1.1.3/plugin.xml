@@ -1,0 +1,17 @@
+<plugin>
+	<nom>Zpip-dist en HTML5</nom>
+	<slogan>Apporte du balisage HTML5 au squelette ZPIP-dist</slogan>
+	<icon>img/z5.png</icon>
+	<auteur>davux</auteur>
+	<licence>GNU/GPL</licence>
+	<version>1.1.3</version>
+	<etat>test</etat>
+	<description>Une surcharge des squelettes Zpip-dist qui tire parti des nouvelles balises offertes par la sp&#233;cification HTML5. Les choix de balisage ne sont pas encore fix&#233;s &#224; 100%, n'h&#233;sitez pas &#224; faire vos commentaires.
+	</description>
+	<lien>https://contrib.spip.net/Zpip-dist-en-HTML5</lien>
+	<prefix>zpip_html5</prefix>
+	<necessite id="Z" version="[1.2.0;]" />
+	<necessite id="html5" />
+	<necessite id="SPIP" version="[2.0.10;2.1.99]" />
+	<categorie>squelette</categorie>
+</plugin>
