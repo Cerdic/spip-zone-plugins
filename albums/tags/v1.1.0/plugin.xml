@@ -1,0 +1,21 @@
+<plugin>
+	<nom>Albums</nom>
+	<prefix>albums</prefix>
+	<icon>icon/albums.png</icon>
+
+	<categorie>multimedia</categorie>
+	<slogan>Albums au fil du texte</slogan>
+	<description>Afficher une ou liste de documents, au fil du texte, dans les articles et ailleurs, pr&eacute;sent&eacute;s en galerie d'images ou en liste.</description>
+	<lien>https://contrib.spip.net/Albums</lien>
+	<auteur>[Tetue->http://spip.tetue.net]</auteur>
+	<licence>GPL - 2011</licence>
+
+	<version>1.1.0</version>
+	<etat>stable</etat>
+
+	<necessite id='SPIP' version='[2.0.0;3.0.99]' />
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>albums_pipelines.php</inclure>
+	</pipeline>
+</plugin>

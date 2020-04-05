@@ -1,0 +1,28 @@
+[(#REM)
+	Portfolio : album d'images
+]
+[(#MODELE{album,id_article,env}{titre=<:info_portfolio:>})]
+
+[(#REM)
+	Afficher en grand le document demande dans l'URL
+]
+<BOUCLE_afficher_document(DOCUMENTS) {id_document}{id_article} {mode=document}{extension IN png,jpg,gif}>
+[(#MODELE{emb}|image_reduire{500,0})]
+</BOUCLE_afficher_document>
+
+[(#REM)
+	Si un seul document est joint a l'article, et si le texte est vide,
+	on incruste automatiquement ce document
+]
+<BOUCLE_documents_decompte(DOCUMENTS spip_documents_liens articles) {id_article} {mode=document}{texte=''}{extension !IN gif,jpg,png} {vu=non}>[
+(#TOTAL_BOUCLE|=={1}
+	|?{[(#INCLURE{fond=modeles/emb}{id_document}
+	|trim)]})]</BOUCLE_documents_decompte>
+
+
+[(#REM)
+	Sinon, liste des autres documents joints
+]
+[(#MODELE{album_list,id_article,env}{titre=<:titre_documents_joints:>})]
+
+<//B_documents_decompte>

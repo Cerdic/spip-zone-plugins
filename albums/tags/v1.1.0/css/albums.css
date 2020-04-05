@@ -1,0 +1,18 @@
+/* --------------------------------------------------------------
+
+   albums.css
+   Style minimal pour les albums
+   Cf.: https://contrib.spip.net/1550
+
+-------------------------------------------------------------- */
+
+.album {}
+.album li { float: left; margin: 0 10px 10px 0; }
+.album li .spip_logos { float: none; margin: 0; }
+
+/* Alignements */
+.album.center {}
+.album.left {}
+.album.right {}
+
+/* end */
