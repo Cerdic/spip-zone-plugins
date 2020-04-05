@@ -1,0 +1,24 @@
+<paquet
+	prefix="ieconfigplus"
+	categorie="maintenance"
+	version="1.0.2"
+	etat="test"
+	compatibilite="[3.2.1;3.2.*]"
+	logo="prive/themes/spip/images/ieconfigplus-64.png"
+	documentation="https://contrib.spip.net/Importeur-Exporteur-de-configuration-PLUS"
+>
+	<nom>Importeur/Exporteur de configuration PLUS</nom>
+	<!-- Des exports supplémentaires pour ieconfig -->
+
+	<auteur lien="https://www.mister-graphx.com">Arnaud B. (Mist. GraphX)</auteur>
+	<licence>GNU/GPL</licence>
+
+
+	<!-- ieconfig : ajout de l'export/import des plugins non déclarés nativements -->
+	<pipeline nom="ieconfig_metas" inclure="ieconfigplus_pipelines.php" />
+	<!-- ieconfig : Formidables, pages, selections_editoriales  Export/Import -->
+	<pipeline nom="ieconfig" inclure="ieconfigplus_pipelines.php" />
+
+	<necessite nom="ieconfig" compatibilite="[1.3.2;[" />
+
+</paquet>
