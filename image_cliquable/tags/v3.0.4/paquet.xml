@@ -1,0 +1,23 @@
+<paquet
+	prefix="image_cliquable"
+	categorie="multimedia"
+	version="3.0.4"
+	etat="test"
+	compatibilite="[2.1.14;3.2.*]"
+	logo="image_cliquable.png"
+	documentation="https://contrib.spip.net/?article2084"
+>
+
+	<nom>Image cliquable</nom>
+	<!-- Ajouter des images cliquables dans vos textes -->
+
+	<auteur lien="http://www.openstudio.fr">Arnault PACHOT</auteur>
+	<auteur lien="http://www.pyrat.net/">RealET</auteur>
+	<auteur lien="http://www.mega-bricoleur.com/">Bruno CAILLARD</auteur>
+
+	<copyright>2012</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/lgpl-3.0.html">GPL</licence>
+
+	<pipeline nom="insert_head" inclure="image_cliquable_pipelines.php" />
+</paquet>

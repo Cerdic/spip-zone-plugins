@@ -1,0 +1,6 @@
+<B_AreaMap><map name="AP[(#URL_DOCUMENT|md5)]" id="AP[(#URL_DOCUMENT|md5)]">
+<BOUCLE_AreaMap(DATA){source table, #ENV*{args}}{cle==^alt}{par valeur}>
+[(#SET{indice,[(#CLE|replace{'alt',''})]})]
+[<area shape="#ENV{type#GET{indice}}" coords="(#ENV{coord#GET{indice}})" href="[(#ENV{lien#GET{indice}}|accessibilite_enlien)]" alt="#ENV{alt#GET{indice}}" title="#ENV{alt#GET{indice}}" />]
+</BOUCLE_AreaMap>
+</map></B_AreaMap>

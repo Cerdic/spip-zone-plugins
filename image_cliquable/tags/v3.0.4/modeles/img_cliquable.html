@@ -1,0 +1,57 @@
+<BOUCLE_document (DOCUMENTS) {id_document} {mode?} {tout}>
+[(#REM)
+
+	Modele pour <img>
+
+	Si on est en mode "image" ou "vignette", ou appele avec embed=oui,
+	on affiche l'image complete ; sinon le logo
+
+	Si un lien est passe #ENV{lien} on ajoute le a href
+	ou on truque le #URL_DOCUMENT
+	
+	Si une code de langue est passe #ENV{langue} ex: <img12|langue=en>
+	on ajoute l'attribut lang la balise img et eventuellement sur la balise a
+	
+	Dans le cas mode "image ou vignette", le contenu de l'attribut 
+	alt et title se construit selon le schema suivant : 
+	- prend la valeur de alt passe en environnement par le biais 
+	d'un parametre sur la balise ex: <img12|alt=xxx>
+	- sinon on prend le titre
+	- sinon si #ENV{lien} est passe on prend #ENV{lien} ou Document si lien vers #URL_DOCUMENT
+	- sinon alt vide
+	
+	Dans le cas mode "document", le contenu de l'attribut 
+	alt et title se construit selon le même schema a ceci pres
+	qu'on ajoute #TYPE_DOCUMENT - #TAILLE
+	sauf si #ENV{lien} est passe	
+
+	Le paramètre nolist permet de supprimer la liste des liens en dessous l'image. Ex :  <img12|cliquable|nolist|...>
+
+	Le paramètre maphilight provoque la colorisation des zones au survol de la souris. Attention, dans ce mode le focus des zones au clavier (tab) n'est plus accessible.
+]
+[(#SET{
+	image,
+		#MODE|match{'image|vignette'}
+		|sinon{#ENV{embed}}
+		|oui
+})][
+
+	(#REM) image complete ?
+
+][(#GET{image})
+<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});[ width:(#LARGEUR)px;]']>
+[<a href="(#ENV{lien})"[ class="(#ENV{lien_class})"][ lang="(#ENV{langue})"][ title="(#ENV{alt}|texte_backend|sinon{#TITRE|texte_backend|sinon{#ENV{lien}|texte_backend}})"]>]<img [(#ENV{maphilight}|?{' ',''})class='maphilight'] src='#URL_DOCUMENT'[ width="(#LARGEUR)"][ height="(#HAUTEUR)"][(#ENV{lien1}|oui) usemap="#[AP(#URL_DOCUMENT|md5)]"][ lang="(#ENV{langue})"] alt="[(#ENV{alt}|texte_backend|sinon{#TITRE|texte_backend|sinon{#ENV{lien}|texte_backend}})]"[(#DESCRIPTIF|?{' ',''})longdesc="[(#URL_PAGE{longdesc,id=#ID_DOCUMENT}|parametre_url{'lang',#ENV{langue,#LANG}})]"] />
+
+<INCLURE{fond=modeles/inc/areamap,url_document,env}>
+
+[(#ENV{lien}|?{</a>})]</span>
+	[(#ENV{nolist}|?{'',' '})
+		<INCLURE{fond=modeles/inc/listemap,titre,env}>
+	]
+][
+
+	(#REM) sinon logo document + lien + alt + title etc
+
+][(#GET{image}|?{'',' '})
+<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});[ width:(#LOGO_DOCUMENT|largeur)px;]']><a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]"[ (#ENV{lien}|?{'',type="#MIME_TYPE"})][ lang="(#ENV{langue})"] title="[(#ENV{alt}|texte_backend|sinon{#TITRE|texte_backend|sinon{#ENV{lien}|texte_backend|sinon{<:info_document:>}}})[(#ENV{lien}|?{'',' - '})]][(#ENV{lien}|?{'',[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]})]"><img src="[(#LOGO_DOCUMENT|extraire_attribut{src})]" width="[(#LOGO_DOCUMENT|largeur)]" height="[(#LOGO_DOCUMENT|hauteur)]"[ lang="(#ENV{langue})"] alt="[(#ENV{alt}|texte_backend|sinon{#TITRE|texte_backend|sinon{#ENV{lien}|texte_backend|sinon{<:info_document:>}}})[(#ENV{lien}|?{'',' - '})]][(#ENV{lien}|?{'',[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]})]"[(#DESCRIPTIF|?{' ',''})longdesc="[(#URL_PAGE{longdesc,id=#ID_DOCUMENT}|parametre_url{'lang',#ENV{langue,#LANG}})]"] /></a></span>
+]</BOUCLE_document>
