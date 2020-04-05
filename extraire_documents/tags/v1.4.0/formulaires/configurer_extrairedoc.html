@@ -1,0 +1,20 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="_meta_casier" value="extrairedoc_config" />	
+		<fieldset>
+			<legend>Tika Server</legend>
+			[(#SAISIE{input,url_serveur,
+				label=<:extrairedoc:configurer_tika_host_label:>})]
+			
+			[(#SAISIE{input,port,
+				label=<:extrairedoc:configurer_tika_port_label:>})]
+		</fieldset>
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>

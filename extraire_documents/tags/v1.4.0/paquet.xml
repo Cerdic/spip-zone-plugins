@@ -1,0 +1,21 @@
+<paquet
+	prefix="extrairedoc"
+	categorie="outil"
+	version="1.4.0"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="extrairedoc-32.png"
+	documentation=""
+>
+	<nom>Extracteur de document</nom>
+
+	<auteur>Fil</auteur>
+	<auteur>Gael Chareyre</auteur>
+	<auteur>Azerttyu</auteur>
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	<copyright>2009-2015</copyright>
+
+	<lib nom="TCPDF-6.2.17" lien="https://github.com/tecnickcom/TCPDF/archive/6.2.17.zip" />
+	<lib nom="pdfparser-0.12.0" lien="https://github.com/smalot/pdfparser/archive/v0.12.0.zip" />
+</paquet>
