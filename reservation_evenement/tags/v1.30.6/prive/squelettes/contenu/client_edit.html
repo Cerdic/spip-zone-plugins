@@ -1,0 +1,27 @@
+[(#ID_AUTEUR|oui)
+	[(#AUTORISER{modifier,auteur,#ID_AUTEUR}|sinon_interdire_acces)]
+]
+#SET{redirect,#ENV{redirect,#URL_ECRIRE{client,email=#INFO_EMAIL{auteur,#ID_AUTEUR}}}}
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#ID_AUTEUR|oui)
+	[(#GET{redirect}|icone_verticale{[(#VAL{auteur}|objet_info{texte_retour}|_T)],client,edit,left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		<:reservation:icone_modifier_client:>
+		<h1>(#ENV*{titre,#INFO_TITRE{auteur,#ID_AUTEUR}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_AUTEUR|generer_url_entite{auteur}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_AUTEUR{#ID_AUTEUR,#GET{redirect},#ENV{lier_trad}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>

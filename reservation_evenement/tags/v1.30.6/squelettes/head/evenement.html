@@ -1,0 +1,11 @@
+<BOUCLE_evenement_head(EVENEMENTS) {id_evenement}>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF|couper{150}|attribut_html)" />]
+<meta property="og:title" content="#TITRE" />
+[<meta property="og:description" content="(#DESCRIPTIF|couper{150}textebrut)" />]
+[<meta property="og:image" content="(#LOGO_EVENEMENT|extraire_attribut{src}|url_absolue)" />]
+[<meta property="og:url" content="(#URL_EVENEMENT|url_absolue)" />]
+<meta property="og:site_name" content="#NOM_SITE_SPIP" />
+<meta property="og:type" content="website"/>
+[<link rel="canonical" href="(#URL_EVENEMENT|url_absolue)" />]
+</BOUCLE_evenement_head>

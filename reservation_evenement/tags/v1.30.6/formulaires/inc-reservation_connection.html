@@ -1,0 +1,111 @@
+#SET{id_auteur,#SESSION{id_auteur}}
+<div class="identifiants">
+	[(#GET{id_auteur}|>{0}|non)
+		<div class="login">
+			#SET{url,#URL_PAGE{login}|parametre_url{url,#SELF}}
+			[(#SET{titre_login,<:lien_connecter:>})]
+			<strong class="explication"><:reservation:explication_login{url=#GET{url},titre_login=#GET{titre_login}}:></strong>
+		</div>
+	]
+
+	<BOUCLE_connecte(CONDITION){si #GET{id_auteur}|>{0}}>
+		<div class="donnes_personnels">
+			<div class="nom">
+				<span class="label"><:reservation:label_nom:></span> <span>#NOM</span>
+			</div>
+			<div class="nom">
+				<span class="label"><:reservation:label_email:></span> <span>#EMAIL</span>
+			</div>
+			<BOUCLE_extras(DATA){source tableau, #ENV{champs_extras_auteurs}}>
+				#SET{nom,#OPTIONS|table_valeur{nom}}
+				<div class="#GET{nom}">
+					<span class="label">[(#OPTIONS|table_valeur{label})]</span> <span>#ENV{#GET{nom}}</span>
+				</div>
+			</BOUCLE_extras>
+		</div>
+		<div class="editer-groupe">
+		[(#SAISIE{checkbox,modifier_donnees_auteur,
+			label=<:reservation:label_modifier_identifiants_personnels:>,
+			datas=#ARRAY{1,<:reservation:ok:>}
+			})]
+		</div>
+	</BOUCLE_connecte>
+
+	<div class="editer-groupe donnees_auteur">
+		[(#SAISIE{input,#ENV{name_nom,nom},label=<:reservation:label_nom:>,obligatoire=oui})]
+
+		[(#SAISIE{input,#ENV{name_email,email},label=<:reservation:label_email:>,obligatoire=oui})]
+
+		[(#REM)Géneration des champs extras auteurs]
+
+		#GENERER_SAISIES{#ENV{champs_extras_auteurs}}
+	</div>
+
+
+	<!--extra_connection1-->
+[(#GET{id_auteur}|>{0}|non|et{#ENV{enregistrement_inscrit}|=={on}|oui})
+	<div class="editer-groupe">
+		[(#ENV{enregistrement_inscrit_obligatoire}|!={on}|?{
+			[(#SAISIE{checkbox,enregistrer,
+				class=enregistrer,
+				label=<:reservation:label_enregistrer:>,
+				datas=#ARRAY{1,<:reservation:ok:>}
+			})]
+			,
+			#SET{obligatoire,oui}
+		})]
+		<div class="editer-groupe block_mp">
+			[(#SAISIE{input,#ENV{name_new_login,new_login},
+				label=<:item_login:>,
+				obligatoire=#GET{obligatoire}
+			})]
+			[(#SAISIE{input,#ENV{name_new_pass,new_pass},
+				type="password",
+				label=<:reservation:label_mot_passe:>,
+				obligatoire=#GET{obligatoire},
+				class=password,explication=<:info_plus_cinq_car:>
+			})]
+			[(#SAISIE{input,#ENV{name_new_pass2,new_pass2},
+				type="password",
+				label=<:reservation:label_mot_passe2:>,
+				obligatoire=#GET{obligatoire},
+				class=password
+			})]
+		</div>
+	</div>
+]
+</div>
+
+<!--extra_connection2-->
+<BOUCLE_condition(CONDITION){si #ENV{enregistrement_inscrit_obligatoire}|!={on}|oui}>
+	<script type="text/javascript">
+		/*<![CDATA[*/
+		if (!$('input[name="enregistrer[]"]').is(':checked')) {
+			$('.block_mp').hide();
+		}
+
+		$('input[name="enregistrer[]"]').click(function() {
+			$('.block_mp').slideToggle('slow', function() {
+			});
+		});
+		/*]]>*/
+	</script>
+</BOUCLE_condition>
+
+<BOUCLE_condition2(CONDITION){si #GET{id_auteur}|>{0}|oui}>
+	<script type="text/javascript">
+		/*<![CDATA[*/
+			if (!$('input[name="modifier_donnees_auteur[]"]').is(':checked')) {
+				$('.donnees_auteur').hide();
+			}
+			else {
+				$('.donnes_personnels').hide();
+			}
+
+			$('input[name="modifier_donnees_auteur[]"]').click(function() {
+				$('.donnees_auteur').slideToggle('slow', function() {});
+				$('.donnes_personnels').slideToggle('slow', function() {});
+			});
+		/*]]>*/
+	</script>
+</BOUCLE_condition2>

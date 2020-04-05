@@ -1,0 +1,10 @@
+[(#ENV{multiple}|oui)
+  <option data-id_article="#ID_ARTICLE" value="#ID_EVENEMENT"[(#ID_EVENEMENT|in_array{#ENV{valeur_forcee,#GET{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]>
+    [(#TITRE|!={#ENV{titre_article}}|oui)#TITRE, ][(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#HORAIRE})]
+  </option>
+]
+[(#ENV{multiple}|non)
+  <option data-id_article="#ID_ARTICLE"  value="#ID_EVENEMENT"[(#ID_EVENEMENT|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>
+    [(#TITRE|!={#ENV{titre_article}}|oui)#TITRE, ][(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#HORAIRE})]
+  </option>
+]
