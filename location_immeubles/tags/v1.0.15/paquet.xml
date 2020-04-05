@@ -1,0 +1,34 @@
+<paquet
+	prefix="location_immeubles"
+	categorie="divers"
+	version="1.0.15"
+	etat="test"
+	compatibilite="[3.0.0;3.3.*]"
+	logo="prive/themes/spip/images/location_immeubles-64.png"
+	documentation="https://contrib.spip.net/Location-d-immeubles"
+	schema="1.0.4"
+>
+
+	<nom>Location d&#039;immeubles</nom>
+	<!-- Louez vos immeubles -->
+
+	<auteur lien='https://web-simple.eu'>Rainer Müller</auteur>
+
+	<licence>GNU/GPL v3</licence>
+
+	<traduire module="location_immeubles" reference="fr" gestionnaire="salvatore" />
+
+	<necessite nom="location_objets" compatibilite="[1.5.7;]" />
+	<necessite nom="objets_infos_extras" compatibilite="[1.0.7;]" />
+	<necessite nom="objets_services_extras" compatibilite="[1.0.5;]" />
+	<necessite nom="immeubles" compatibilite="[1.0.11;]" />
+	<necessite nom="prix_objets_periodes" compatibilite="[1.1.5;]" />
+	<necessite nom="cextras" compatibilite="[3.12.4;[" />
+
+	<pipeline nom="declarer_champs_extras" inclure="base/location_immeubles.php" />
+	<pipeline nom="affiche_milieu" inclure="location_immeubles_pipelines.php" />
+
+	<chemin path="squelettes" />
+	<chemin path="" />
+
+</paquet>
