@@ -1,0 +1,52 @@
+#HTTP_HEADER{Content-Type: text/javascript; charset=#CHARSET}
+/*
+ *  Plugin persona pour SPIP
+ *
+ *  (c) Fil 2012 - Licence GNU/GPL
+ *
+ */
+
+/*
+ * fonction demandant au serveur de verifier l'assertion persona
+ * et de nous loger sur SPIP au passage, si le site est ainsi configure'
+ */
+function persona_verify_server(assertion) {
+  if (assertion) {
+    $.post("?action=persona_verify",
+      {
+      assertion: assertion,
+      audience: window.location.href.replace(/(\/\/.*?)\/.*/, '$1')
+      }, persona_welcome
+    );
+  }
+}
+
+
+/*
+ * Fonction appelee quand on a reussi a se connecter
+ */
+function persona_welcome(e) {
+  // console.log(e);
+  if (e.status == "okay") {
+    if (url) {
+      if (e.autoriser_ecrire) {
+        window.location = url;
+      } else if (e.autoriser_url) {
+        window.location = url;
+      } else {
+        e.message = "Vous êtes identifié comme " + e.email + " mais cet email n'a pas d'accès à l'espace privé du site.";
+      }
+    }
+    if (e.message) {
+      persona_message(e.message);
+    }
+    if (e.action) {
+      eval(e.action);
+    }
+  } else {
+    persona_message('something was wrong: '+(e.reason || ""));
+  }
+}
+
+/* definir a minima une fonction d'alerte */
+if (!persona_message) persona_message = alert;

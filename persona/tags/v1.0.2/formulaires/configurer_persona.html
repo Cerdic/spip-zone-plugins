@@ -1,0 +1,24 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_cacher_login_classique[ (#GET{erreurs}|oui)erreur]">
+				<label><:persona:affichage:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				<p class="explication"><:persona:explication_cacher_login_classique:></p>
+				<div class="choix">
+					<input type="checkbox" name="cacher_login_classique" id="cacher_login_classique" class="checkbox" value="true" [checked="checked"(#ENV{cacher_login_classique}|=={true}|oui)] />
+					<label for="cacher_login_classique"><:persona:cacher_login_classique:></label>
+				</div>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="valider" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div></form>
+</div>

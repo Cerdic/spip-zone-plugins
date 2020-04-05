@@ -1,0 +1,72 @@
+[(#REM)
+/*
+ *  Plugin persona pour SPIP
+ *
+ *  (c) Fil 2012 - Licence GNU/GPL
+ *
+ */
+]
+
+[(#REM)
+	le formulaire de login normal continue de fonctionner ;
+	on pourrait le desactiver avec une config
+]
+<div id="persona_traditionnel">
+<INCLURE{fond=prive/formulaires/login,env} />
+</div>
+<script src="https://login.persona.org/include.js"></script>
+<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
+[
+	var url = (#EVAL{_request('url')}|sinon{#EVAL{_DIR_RESTREINT_ABS}}|_q);
+	[(#AUTORISER{ecrire}|?{document.location = url;})]
+]
+
+function persona_message(m) {
+	$("#persona_login .message")
+	.html(m);
+}
+
+function persona_login() {
+	navigator.id.get(persona_verify_server);
+	persona_message("Veuillez autoriser les popups");
+}
+
+function persona_start() {
+	persona_message("connexion persona en cours…");
+//	$.getScript('?page=persona.js&v=8', persona_login);
+	persona_login();
+}
+/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
+
+<div id="persona_login">
+	<div class="formulaire_spip formulaire_login">
+		<div class="explication"><:persona:explication_login:></div>
+		<p class="boutons">
+			[<button onclick="persona_start();">(#CHEMIN{images/sign_in_red.png}|balise_img)</button>]
+		</p>
+		<div class="message"></div>
+		<div class="explication">
+			<a id="toggle_login_classique" href='javascript:;'><:persona:form_masquer:></a>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
+$(document).ready(function() {
+	if (!$("#persona_traditionnel .erreur").size()){
+		[(#CONFIG{persona/cacher_login_classique,''}|=={true}|oui)
+			$("#persona_traditionnel").hide();
+			$("a#toggle_login_classique").text("<:persona:form_afficher:>");
+		]
+		$("a#toggle_login_classique").click(function(){
+				$(this).text($(this).text() == "<:persona:form_masquer:>" ? "<:persona:form_afficher:>" : "<:persona:form_masquer:>");
+				$("#persona_traditionnel").slideToggle();
+				return false;
+			});
+	}
+});
+
+/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
+
+[<script src="(#URL_PAGE{persona.js}|parametre_url{v,9})" type="text/javascript"></script>]
+

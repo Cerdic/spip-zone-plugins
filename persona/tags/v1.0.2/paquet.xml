@@ -1,0 +1,19 @@
+<paquet
+	prefix="persona"
+	categorie="auteur"
+	version="1.0.2"
+	etat="dev"
+	compatibilite="[2.0.0;3.1.*]"
+	logo="prive/themes/spip/images/persona-32.png"
+	documentation="https://contrib.spip.net/4005"
+>	
+
+	<nom>Persona</nom>
+	<!-- Authentification des visiteurs via Mozilla persona -->
+
+	<auteur>Fil</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	
+	<pipeline nom="autoriser" inclure="inc/persona_autoriser.php" />
+	
+</paquet>
