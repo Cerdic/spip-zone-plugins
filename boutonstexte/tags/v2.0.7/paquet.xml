@@ -1,0 +1,18 @@
+<paquet
+	prefix="boutonstexte"
+	categorie="edition"
+	version="2.0.7"
+	etat="stable"
+	compatibilite="[3.0.0;3.3.*]"
+	logo="boutonstexte-32.png"
+	documentation="https://contrib.spip.net/Texte-agrandi-ou-pleine-page"
+>
+
+	<nom>Boutons dans le Texte</nom>
+	<!-- Des boutons pour g&#233;rer la taille des caract&#232;res -->
+
+	<auteur lien="http://toggg.com/">Bertrand Gugger</auteur>
+
+	<pipeline nom="insert_head_css" inclure="boutonstexte_pipelines.php" />
+	<pipeline nom="insert_head" inclure="boutonstexte_pipelines.php" />
+</paquet>

@@ -1,0 +1,79 @@
+<div class="ajax formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		#SET{fl,boutonstexte}
+		<fieldset>
+			<legend><:boutonstexte:textes_icones:></legend>
+			<ul>
+				#SET{name,txtOnly}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" class="text" name="#GET{name}" value="#ENV*{#GET{name},boutonstexte:texte_seulement}" id="#GET{name}"/>
+				</li>
+				#SET{name,txtBackSpip}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" class="text" name="#GET{name}" value="#ENV*{#GET{name},boutonstexte:retour_a_spip}" id="#GET{name}"/>
+				</li>
+				#SET{name,txtSizeUp}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" class="text" name="#GET{name}" value="#ENV*{#GET{name},boutonstexte:augmenter_police}" id="#GET{name}"/>
+				</li>
+				#SET{name,txtSizeDown}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" class="text" name="#GET{name}" value="#ENV*{#GET{name},boutonstexte:diminuer_police}" id="#GET{name}"/>
+				</li>
+			</ul>
+			<p class="explication">* si <b>_</b> ou vide, supprime la fonctionnalit&eacute; (vide reviendra au d&eacute;faut)</p>
+		</fieldset>
+		<fieldset>
+			<legend><:boutonstexte:selecteur:></legend>
+			<ul>
+				#SET{name,selector}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" class="text" name="#GET{name}" value="#ENV*{#GET{name},'#content .texte'}" id="#GET{name}"/>
+				</li>
+			</ul>
+		</fieldset>
+		<fieldset>
+			<legend><:boutonstexte:legend_apparence:></legend>
+			<ul>
+				#SET{name,skin}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]
+					<BOUCLE_skins(POUR){tableau #REM|find_boutons_skins}>
+					#SET{val,#VALEUR}
+					<div class="choix">
+						<input type="radio" class="radio" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},zoom}|=={#GET{val}}|oui)checked="checked"] />
+						<label for="#GET{name}_#GET{val}">#VALEUR
+							[(#CHEMIN{[boutonstexte/themes/(#VALEUR)/fontsizedown.png]}|balise_img)]
+							[(#CHEMIN{[boutonstexte/themes/(#VALEUR)/fontsizeup.png]}|balise_img)]
+							[(#CHEMIN{[boutonstexte/themes/(#VALEUR)/textonly.png]}|balise_img)]
+						</label>
+					</div>
+					</BOUCLE_skins>
+				</li>
+			</ul>
+		</fieldset>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+
+</div>
