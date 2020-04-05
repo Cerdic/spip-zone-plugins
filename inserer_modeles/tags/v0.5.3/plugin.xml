@@ -1,0 +1,38 @@
+<plugin>
+	<nom>Ins&#233;rer Mod&#232;les</nom>
+	<slogan>Une aide &#224; l'insertion des mod&#232;les dans vos textes</slogan>
+	<auteur>Joseph</auteur>
+	<licence>GPL v3</licence>
+	<version>0.5.3</version>
+	<etat>stable</etat>
+	<description>
+		Ce plugin fournit une aide &#224; l'insertion des mod&#232;les dans vos textes &#224; travers des formulaires de saisies. Ces formulaires sont accessibles dans la colonne de droite ou via un bouton dans le porte-plume.
+	</description>
+	<lien>https://contrib.spip.net/?article3631</lien>
+	<icon>images/inserer_modeles-48.png</icon>
+	<prefix>inserer_modeles</prefix>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<inclure>inserer_modeles_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>porte_plume_barre_pre_charger</nom>
+		<inclure>inserer_modeles_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>porte_plume_lien_classe_vers_icone</nom>
+		<inclure>inserer_modeles_pipelines.php</inclure>
+	</pipeline>
+	<categorie>edition</categorie>
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="spip_bonux" version="[1.8.10;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
+	<necessite id="verifier" version="[0.1.1;]" />
+	<necessite id="yaml" version="[1.5.2;]" />
+	<necessite id="mediabox" />
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>modalbox_insert_head</action>
+		<inclure>modalbox/modalbox_pipelines.php</inclure>
+	</pipeline>
+</plugin>
