@@ -1,0 +1,30 @@
+<paquet 
+	prefix="mots_techniques"
+	categorie="outil"
+	version="1.0.4"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/mots-techniques-48.png"
+	schema="0.3"
+	documentation="https://contrib.spip.net/?article3726"
+>
+
+	<nom>Mots techniques</nom>
+
+	<auteur>Matthieu Marcillaud</auteur>
+	<auteur>Joseph</auteur>
+	<licence>GNU/GPL</licence>
+
+	<credit lien="http://www.iconfinder.com/icondetails/10622/48/orange_tag_icon">MidTone Design (logo)</credit>
+
+	<necessite nom="cextras" compatibilite="[3.0.0;[" />
+	<utilise nom="mots" compatibilite="[2.4.6;[" />
+	<utilise nom="gma" compatibilite="[1.2.0;[" />
+
+	<pipeline nom="autoriser"  inclure="mots_techniques_autorisations.php" />
+	<pipeline nom="pre_boucle" inclure="mots_techniques_pipelines.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/mots_techniques.php" />
+	<pipeline nom="declarer_champs_extras"     inclure="base/mots_techniques.php" />
+	<pipeline nom="groupes_mots_arborescents_heritages" inclure="base/mots_techniques.php" />
+
+</paquet>
