@@ -1,0 +1,54 @@
+[(#AUTORISER{voir,cv,#ID_CV}|sinon_interdire_acces)]
+<BOUCLE_cv(CVS){id_cv}{statut==.*}{si #ENV{exec}|=={cv}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,cv,#ID_CV})
+		[(#ID_CV|afficher_qui_edite{cv}|non)
+			[(#URL_ECRIRE{cv_edit,id_cv=#ID_CV}|icone_verticale{<:cv:icone_modifier_cv:>,cv,edit,right ajax preload})]
+		]
+		[(#ID_CV|afficher_qui_edite{cv}|oui)
+			[(#URL_ECRIRE{cv_edit,id_cv=#ID_CV}|icone_verticale{#ID_CV|afficher_qui_edite{cv},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#NOM|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{cv-24.png}|balise_img{cv,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{cv,#ID_CV}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/cv,id=#ID_CV,id_cv=#ID_CV,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,cv,#ID_CV})
+	[(#ID_CV|afficher_qui_edite{cv}|non)
+		[(#URL_ECRIRE{cv_edit,id_cv=#ID_CV}|icone_verticale{<:cv:icone_modifier_cv:>,cv,edit,right ajax preload})]
+	]
+	[(#ID_CV|afficher_qui_edite{cv}|oui)
+		[(#URL_ECRIRE{cv_edit,id_cv=#ID_CV}|icone_verticale{#ID_CV|afficher_qui_edite{cv},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,cv,id,#ID_CV},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+
+#SET{enfants,''}
+[(#VAL{prive/objets/contenu/cv-enfants}|trouver_fond|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/cv-enfants,id_cv,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,cv,id_cv,#ID_CV,objet,cv,id_objet,#ID_CV},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_cv>
+[(#ENV**{exec}|=={cv_edit}|?{#INCLURE{fond=prive/squelettes/contenu/cv_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_cv>

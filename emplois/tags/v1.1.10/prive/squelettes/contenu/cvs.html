@@ -1,0 +1,11 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+#SET{autres, #LISTE{prepa, publie, poubelle}}
+<INCLURE{fond=prive/objets/liste/cvs, env, statut=prop, suffixe_titre=à valider,  ajax, sinon=<:cv:info_aucun_cv_a_valider:>}>
+<INCLURE{fond=prive/objets/liste/cvs, env, statut=#GET{autres}, suffixe_titre=en ligne, ajax, sinon=<:cv:info_aucun_cv:>}>
+<INCLURE{fond=prive/objets/liste/cvs, env, statut=refuse, suffixe_titre=refusé, ajax sinon=<:cv:info_aucun_cv_refuse:>}>
+
+[(#AUTORISER{creer,cv})
+	[(#URL_ECRIRE{cv_edit,new=oui}|icone_verticale{<:cv:icone_creer_cv:>,cv,new,right})]
+]

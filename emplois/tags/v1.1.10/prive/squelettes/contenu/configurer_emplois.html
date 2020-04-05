@@ -1,0 +1,12 @@
+[(#AUTORISER{configurer,_emplois}|sinon_interdire_acces)]
+
+<h1 class="grostitre"><:emplois:titre_page_configurer_emplois:></h1>
+
+[(#REM) <!-- Barre d'onglets de premier niveau --> ]
+[(#VAL{emplois}|barre_onglets{configurer_emplois})]
+
+#FORMULAIRE_CONFIGURER_OFFRES_ACTIVER
+
+[(#CONFIG{emplois/offres/activer_offres}|=={oui}|oui)
+	<div class="ajax">#FORMULAIRE_CONFIGURER_OFFRES_CONTENUS</div>
+]

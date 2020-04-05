@@ -1,0 +1,12 @@
+[(#AUTORISER{configurer,_emplois}|sinon_interdire_acces)]
+
+<h1 class="grostitre"><:emplois:titre_page_configurer_emplois:></h1>
+
+[(#REM) <!-- Barre d'onglets de premier niveau --> ]
+[(#VAL{emplois}|barre_onglets{configurer_cvs})]
+
+#FORMULAIRE_CONFIGURER_CVS_ACTIVER
+
+[(#CONFIG{emplois/cvs/activer_cvs}|=={oui}|oui)
+	<div class="ajax">#FORMULAIRE_CONFIGURER_CVS_CONTENUS</div>
+]

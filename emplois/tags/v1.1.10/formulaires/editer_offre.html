@@ -1,0 +1,112 @@
+<div class='formulaire_spip formulaire_editer formulaire_editer_offre'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_offre" value="#ENV{id_offre}" />
+		<input type="hidden" name="id_document_offre" value="#ENV{id_document_offre}" />
+
+		[(#CONFIG{emplois/offres/activer_deposant|=={oui}|oui})
+		<fieldset id="offre_deposant" [(#CONFIG{emplois/affichage_public/class_fieldset_deposant}|!={''}|oui) class="#CONFIG{emplois/affichage_public/class_fieldset_deposant}"]>
+		<legend><:offre:legende_deposant:></legend>
+			<div class="editer-groupe">
+	 
+				<div class="editer nom [ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
+					<label for="nom"><:offre:champ_signature_label:><span class="obligatoire"> <:required:></span></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</span>
+					]<input type='text' class='text' name='nom' id='nom'[ lang='(#LANGUE)']
+					[(#VAL{placeholder}|emplois_afficher_public|oui) placeholder="<:offre:champ_signature_label:>"]
+					value="[(#ENV**{nom})]" />
+				</div>
+
+	 			[(#CONFIG{emplois/offres/email}|=={oui}|oui)
+	 			<div class="editer email [ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
+					<label for="email"><:offre:champ_email_label:><span class="obligatoire"> <:required:></span></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</span>
+					]<input type='text' class='text' name='email' id='email'[ lang='(#LANGUE)']
+					[(#VAL{placeholder}|emplois_afficher_public|oui) placeholder="<:offre:champ_email_label:>"]
+					value="[(#ENV**{email})]" />
+				</div>]
+	 
+	 			[(#CONFIG{emplois/offres/telephone}|=={oui}|oui)
+	 			<div class="editer telephone [ (#ENV**{erreurs}|table_valeur{telephone}|oui)erreur]">
+					<label for="telephone"><:offre:champ_telephone_label:><span class="obligatoire"> <:required:></span></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{telephone})</span>
+					]<input type='text' class='text' name='telephone' id='telephone'[ lang='(#LANGUE)']
+					[(#VAL{placeholder}|emplois_afficher_public|oui) placeholder="<:offre:champ_telephone_label:>"]
+					value="[(#ENV**{telephone})]" />
+				</div>]
+
+	 		</div>
+ 		</fieldset>
+ 		]
+
+ 		<fieldset id="offre_description" [(#CONFIG{emplois/affichage_public/class_fieldset_description}|!={''}|oui)class="#CONFIG{emplois/affichage_public/class_fieldset_description}"]>
+			<legend><:offre:legende_description_offre:></legend>
+			<div class="editer-groupe">
+
+				<div class="editer titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+					<label for="titre"><:offre:champ_titre_label:><span class="obligatoire"> <:required:></span></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
+					]<input type='text' class='text' name='titre' id='titre'[ lang='(#LANGUE)']
+					[(#VAL{placeholder}|emplois_afficher_public|oui) placeholder="<:offre:champ_titre_label:>"]
+					value="[(#ENV**{titre})]" />
+				</div>
+
+				[<div class="editer editer_rubrique[ (#ENV**{erreurs/id_parent}|oui)erreur]">
+						<label for="id_parent"><:titre_cadre_interieur_rubrique:></label>[
+						<span class="erreur_message">(#ENV**{erreurs/id_parent})</span>
+						]
+						(#VAL|chercher_rubrique{#ENV{id_offre},#ENV{id_parent},'offre',#ENV{id_secteur},'',0,form_simple})
+				</div>]
+
+
+				[(#CONFIG{emplois/offres/emetteur}|=={oui}|oui)
+	 			<div class="editer emetteur obligatoire[ (#ENV**{erreurs}|table_valeur{emetteur}|oui)erreur]">
+					<label for="emetteur"><:offre:champ_emetteur_label:><span class="obligatoire"> <:required:></span></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{emetteur})</span>
+					]<input type='text' class='text' name='emetteur' id='emetteur'[ lang='(#LANGUE)']
+					[(#VAL{placeholder}|emplois_afficher_public|oui) placeholder="<:offre:champ_emetteur_label:>"]
+					value="[(#ENV**{emetteur})]" />
+				</div>]
+
+				[(#CONFIG{emplois/offres/texte_offre}|=={oui}|oui)
+				<div class="editer editer_texte_offre obligatoire pleine_largeur[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
+					<label for="texte_offre"><:offre:champ_texte_offre_label:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte_offre})</span>]
+					<textarea name='texte_offre' id='texte_offre' class="inserer_barre_edition"[ lang='(#LANGUE)'] rows='8' cols='40' [(#VAL{placeholder}|emplois_afficher_public|oui) placeholder="<:offre:champ_texte_offre_label:>"]>[(#ENV**{texte_offre})]</textarea>
+				</div>
+				]
+	 
+	 			[(#CONFIG{emplois/offres/date_fin}|=={oui}|oui)
+					[(#SAISIE{date, date_fin, label=<:offre:champ_date_fin_label:>})]
+				]
+			</div>
+ 		</fieldset>
+
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+
+		[(#CONFIG{emplois/offres/offre_pdf}|=={oui}|oui)
+			[(#REM|test_espace_prive|non)
+				<INCLURE{fond=formulaires/inc-pdf_joint,env, nom_input=offre_pdf, type_objet=offre, id_document=#ENV{id_document_offre}, id=#ENV{id_offre},ajax=pdf_upload}>
+			]
+		]
+		
+		[(#REM|test_espace_prive|oui)
+			<p class="boutons"><button type="submit" class="submit boutons"><:bouton_enregistrer:></button></p>
+		]
+
+		[(#REM|test_espace_prive|non)
+			[(#REM) Piege a robots spammeurs ]
+			<p style="display: none;">
+				<label for="nobot"><:antispam_champ_vide:></label>
+				<input type="text" class="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" />
+			</p>
+			<INCLURE{fond=formulaires/inc-emplois-valider}>
+		]
+	</div></form>
+	]
+</div>
