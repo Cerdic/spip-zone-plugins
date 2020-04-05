@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_objets_services_selectionnes>
+	<ul>
+	<BOUCLE_objets_services_selectionnes(OBJETS_SERVICES){id_objets_service IN #GET*{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+		<li class="choix">#TITRE (#ID_OBJETS_SERVICE)</li>
+	</BOUCLE_objets_services_selectionnes>
+	</ul>
+	</B_objets_services_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_objets_services_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_objets_service_selectionne(OBJETS_SERVICES){id_objets_service=#ENV{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+	  	<p>#TITRE (#ID_OBJETS_SERVICE)</p>
+	</BOUCLE_objets_service_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_objets_service_selectionne>
+<//B_test_multiple>
