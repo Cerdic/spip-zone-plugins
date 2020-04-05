@@ -1,0 +1,125 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_newsletter,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		#SET{fl,newsletter}
+		<input type='hidden' name='id_newsletter' value='#ENV{id_newsletter}' />
+		<ul class="editer-groupe">
+			#SET{name,titre}#SET{obli,'obligatoire'}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:info_titre:><em class="aide">#AIDER{titre}</em></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}"[(#HTML5|et{#GET{obli}})required='required']/>
+			</li>
+		</ul>
+		<ul class="editer-groupe nonbaked[(#ENV{baked}|oui)none]">
+			#SET{name,patron}#SET{obli,'obligatoire'}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:newsletter:label_patron:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<INCLURE{fond=formulaires/inc-options-patrons,name=#GET{name},defaut=#GET{defaut},env} />
+			</li>
+			#SET{name,selection_edito}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<INCLURE{fond=formulaires/selecteur/articles,rubriques=1,name=#GET{name},selected=#ENV*{#GET{name},#GET{defaut}}} />
+			</li>
+			#SET{name,chapo}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:info_chapeau:><em class="aide">#AIDER{chapo}</em></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<textarea name="#GET{name}" class="textarea"[ lang='(#LANGUE)'][ rows='(#ENV**{config}|table_valeur{lignes})'] cols='40'>
+#ENV*{#GET{name},#GET{defaut}}</textarea>
+			</li>
+			#SET{name,texte}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:info_texte:><em class="aide">#AIDER{text_area}</em></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				][(#ENV**{_texte_trop_long,''})
+				]<textarea name="#GET{name}" class="textarea"[ lang='(#LANGUE)'] rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'>
+#ENV*{#GET{name},#GET{defaut}}</textarea>
+			</li>
+		</ul>
+
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		[(#ENV{statut}|non|ou{#ENV{statut}|in_array{#LISTE{prepa,prop}}|oui})                
+			<!--extra-->
+		]
+		
+		<ul class="editer-groupe">
+			<li class="fieldset">
+				<fieldset>
+					<legend><:newsletter:legend_configuration_adresse_envoi:> <:newsletter:info_optionnel:></legend>
+					<ul class="editer-groupe">
+						#SET{name,adresse_envoi_nom}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label for="#GET{name}"><:facteur:facteur_adresse_envoi_nom:></label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<input type="text" name="#GET{name}" class="email text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+						</li>
+						#SET{name,adresse_envoi_email}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label for="#GET{name}"><:facteur:facteur_adresse_envoi_email:></label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<input type="text" name="#GET{name}" class="email text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			[(#ENV{statut}|in_array{#LISTE{'',prepa,prop}}|oui)
+			#SET{name,baked}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				#SET{val,0}
+				<input type="hidden" name="#GET{name}" value="#GET{val}" />
+				#SET{val,1}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"]
+					onchange="if (jQuery(this).prop('checked')) {jQuery('.baked').show('slow');jQuery('.nonbaked').hide('slow');} else {jQuery('.baked').hide('slow');jQuery('.nonbaked').show('slow');}"
+					/>
+					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+				</div>
+			</li>
+			]
+		</ul>
+		<div class="baked[(#ENV{baked}|non)none]">
+		[(#ENV{statut}|in_array{#LISTE{prepa,prop}}|oui)
+		<p class="explication"><:newsletter:explication_baked:></p>
+		]
+		[(#ENV{statut}|in_array{#LISTE{prepa,prop}}|non)
+		<p class="explication"><:newsletter:explication_baked_publie:></p>
+		]
+		<ul class="editer-groupe">
+			#SET{name,html_email}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<textarea name="#GET{name}" class="textarea" rows='[(#ENV**{config}|table_valeur{lignes}|plus{4})]' cols='40'>
+#ENV*{#GET{name},#GET{defaut}}</textarea>
+			</li>
+			#SET{name,texte_email}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<textarea name="#GET{name}" class="textarea" rows='[(#ENV**{config}|table_valeur{lignes}|plus{4})]' cols='40'>
+#ENV*{#GET{name},#GET{defaut}}</textarea>
+			</li>
+			#SET{name,html_page}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<p class="explication"><:newsletter:explication_html_page_vide:></p>
+				<textarea name="#GET{name}" class="textarea" rows='[(#ENV**{config}|table_valeur{lignes}|plus{4})]' cols='40'>
+#ENV*{#GET{name},#GET{defaut}}</textarea>
+			</li>
+		</ul>
+		</div>
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

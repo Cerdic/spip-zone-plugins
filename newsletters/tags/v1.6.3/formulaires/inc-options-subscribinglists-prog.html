@@ -1,0 +1,19 @@
+#SET{name,#ENV{name}}#SET{defaut,''}
+[(#VAL{open}|unique{liststatus})]
+<option value=""></option>
+<BOUCLE_listes(POUR){tableau #ENV{choix_listes}}>
+	#SET{val,#VALEUR{id}}
+	[(#ENV{status,''}|non
+	  |ou{#ENV{status,''}|=={#VALEUR{status}}}
+	  |ou{#GET{val}|in_any{#ENV{#GET{name},#GET{defaut}}}})
+
+		[
+		[(#VALEUR{status}|unique{liststatus}|oui)
+			[(#GET{optgroup_ouvert}|oui)</optgroup>]
+			<optgroup label="[(#VAL{}|concat{'mailsubscriberscfg:label_status_',#VALEUR{status}}|_T)]">
+			[(#SET{optgroup_ouvert,oui})]
+		]
+		<option value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)selected="selected"]>[(#VALEUR{titre})] \((#GET{val}|newsletters_list_subscribers|singulier_ou_pluriel{mailshot:info_1_mailsubscriber,mailshot:info_nb_mailsubscribers})\)</option>]
+	]
+</BOUCLE_listes>
+[(#GET{optgroup_ouvert}|oui)</optgroup>]

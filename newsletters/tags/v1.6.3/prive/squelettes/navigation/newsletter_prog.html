@@ -1,0 +1,7 @@
+<BOUCLE_nav(NEWSLETTERS){id_newsletter}{statut=prog}>
+[(#AUTORISER{supprimer,newsletter,#ID_NEWSLETTER}|oui)
+#BOITE_OUVRIR{'','simple'}
+	[(#URL_ACTION_AUTEUR{instituer_objet,[newsletter-(#ID_NEWSLETTER)-poubelle],#URL_ECRIRE{newsletters}}|icone_horizontale{<:programmernewsletter:icone_deprogrammer_newsletter:>,newsletter_prog,del})]
+#BOITE_FERMER
+]
+</BOUCLE_nav>

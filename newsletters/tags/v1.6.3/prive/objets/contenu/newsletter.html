@@ -1,0 +1,76 @@
+<BOUCLE_newsletter(NEWSLETTERS){id_newsletter}{statut?}>
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<div class="label"><:newsletter:label_titre:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{titre} titre'>(#TITRE)</div>
+</div>]
+[(#BAKED|non)
+[<p class="champ contenu_patron[ (#PATRON*|strlen|?{'',vide})]">
+	<span class="label"><:newsletter:label_patron:> : </span>
+	<span dir='#LANG_DIR' class='#EDIT{patron} patron'>(#PATRON)</span>
+</p>]
+]
+<B_selectionrubriques>
+<p class="champ contenu_selection_rubriques[ (#PATRON*|strlen|?{'',vide})]">
+	<span class="label"><:newsletter:label_selection_rubriques:> : </span>
+	<span dir='#LANG_DIR' class='selection_rubriques'>
+	<BOUCLE_selectionrubriques(RUBRIQUES){id_newsletter}{si #BAKED|non}{', '}>
+		<span dir='#LANG_DIR'><a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]">#TITRE</a></span>
+	</BOUCLE_selectionrubriques>
+	</span>
+</B_selectionrubriques>
+<B_selectionarticles>
+<p class="champ contenu_selection_articles[ (#PATRON*|strlen|?{'',vide})]">
+	<span class="label"><:newsletter:label_selection_articles:> : </span>
+	<span dir='#LANG_DIR' class='selection_articles'>
+	<BOUCLE_selectionarticles(ARTICLES){id_newsletter}{si #BAKED|non}{', '}>
+		<span dir='#LANG_DIR'><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></span>
+	</BOUCLE_selectionarticles>
+	</span>
+</B_selectionarticles>
+[(#BAKED|non)
+[<div class="champ contenu_chapo[ (#CHAPO*|strlen|?{'',vide})]">
+	<div class="label"><:newsletter:label_chapo:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{chapo} chapo'>(#CHAPO|image_reduire{500,0})</div>
+</div>]
+
+[<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+	<div class="label"><:newsletter:label_texte:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{texte} texte'>(#TEXTE|image_reduire{500,0})</div>
+</div>]
+
+]
+
+[(#ADRESSE_ENVOI_NOM|ou{#ADRESSE_ENVOI_EMAIL}|oui)
+[(#BOITE_OUVRIR{<:newsletter:legend_configuration_adresse_envoi:>,simple})]
+]
+<div class="champ contenu_adresse_envoi_nom[ (#ADRESSE_ENVOI_NOM*|strlen|?{'',vide})]">
+	<div class='label'><:facteur:facteur_adresse_envoi_nom:></div>
+	<span dir='#LANG_DIR' class='#EDIT{adresse_envoi_nom} adresse_envoi_nom'>#ADRESSE_ENVOI_NOM</span>
+</div>
+<div class="champ contenu_adresse_envoi_email[ (#ADRESSE_ENVOI_EMAIL*|strlen|?{'',vide})]">
+	<div class='label'><:facteur:facteur_adresse_envoi_email:></div>
+	<span dir='#LANG_DIR' class='#EDIT{adresse_envoi_email} adresse_envoi_email'>#ADRESSE_ENVOI_EMAIL</span>
+</div>
+[(#ADRESSE_ENVOI_NOM|ou{#ADRESSE_ENVOI_EMAIL}|oui)
+#BOITE_FERMER
+]
+
+[(#BAKED|oui)
+
+[<div class="champ contenu_html_email[ (#HTML_EMAIL*|strlen|?{'',vide})]">
+	<div class="label"><:newsletter:label_html_email:> : </div>
+	<div dir='#LANG_DIR' class='html_email'><iframe src="(#HTML_EMAIL**|newsletters_inline_base64src)" style="width: 100%;"></iframe></div>
+</div>]
+
+[<div class="champ contenu_texte_email[ (#TEXTE_EMAIL*|strlen|?{'',vide})]">
+	<div class="label"><:newsletter:label_texte_email:> : </div>
+	<div dir='#LANG_DIR' class='texte_email'><iframe src="(#TEXTE_EMAIL**|newsletters_inline_base64src{text/plain})" style="width: 100%;"></iframe></div>
+</div>]
+
+[<div class="champ contenu_html_page[ (#HTML_PAGE*|strlen|?{'',vide})]">
+	<div class="label"><:newsletter:label_html_page:> : </div>
+	<div dir='#LANG_DIR' class='html_page'><iframe src="(#HTML_PAGE**|newsletters_inline_base64src)" style="width: 100%;"></iframe></div>
+</div>]
+
+]
+</BOUCLE_newsletter>

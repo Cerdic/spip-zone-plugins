@@ -1,0 +1,186 @@
+<BOUCLE_rem(CONDITION){si #REM}>
+<!-- titre=<multi>[fr]Nouveautes[en]New Stories</multi> -->
+</BOUCLE_rem>
+<BOUCLE_newsletter(NEWSLETTERS){id_newsletter}{statut?}{lang_select}>
+#SET{nouveautes,''}
+<BOUCLE_hasnewarticles(ARTICLES){date<=#DATE}{date>#DATE_REDAC}{0,1}>#SET{nouveautes,' '}</BOUCLE_hasnewarticles>
+<BOUCLE_hasnewbreves(BREVES){date_heure<=#DATE}{date_heure>#DATE_REDAC}{0,1}>#SET{nouveautes,' '}</BOUCLE_hasnewbreves>
+<BOUCLE_si(CONDITION){si #GET{nouveautes}}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>#TITRE</title>
+	
+	<!-- Open Graph Protocol -->
+	[<meta property="og:title" content="(#TITRE|attribut_html)" />]
+	<meta property="og:type" content="article" />
+	[<meta property="og:image" content="(#LOGO_NEWSLETTER_NORMAL|sinon{#LOGO_SITE_SPIP}|extraire_attribut{src}|url_absolue)" />]
+	[<meta property="og:url" content="(#URL_NEWSLETTER|url_absolue)" />]
+	[<meta property="og:description" content="(#INTRODUCTION|supprimer_tags|entites_html)" />]
+	[<meta property="og:site_name" content="(#NOM_SITE_SPIP|attribut_html)" />]
+
+</head>
+<body>
+<style type="text/css">
+	h1 a:hover {background-color: #888;color: #fff ! important;}
+	div#emailbody table#itemcontentlist tr td div ul {list-style-type: square;padding-left: 1em;}
+	div#emailbody table#itemcontentlist tr td div blockquote {padding-left: 6px;border-left: 6px solid #dadada;margin-left: 1em;}
+	div#emailbody table#itemcontentlist tr td div li {margin-bottom: 1em;margin-left: 1em;}
+	div#emailbody table#itemcontentlist tr td .spip_documents_center { display: table; clear: both; margin: 1em auto; }
+	div#emailbody table#itemcontentlist tr td .spip_documents_left { margin-right: 15px; margin-bottom: 5px; }
+	div#emailbody table#itemcontentlist tr td .spip_documents_right { margin-left: 15px; margin-bottom: 5px; }
+	table#itemcontentlist tr td a:link, table#itemcontentlist tr td a:visited, table#itemcontentlist tr td a:active, ul#summarylist li a {color: #CC3300;font-weight: bold;text-decoration: none;}
+	img {border: none;}
+	div.chapo,div.texte,div.ps,div.notes {margin-bottom: 2em;}
+	div.notes {font-size: 11px;}
+	#emailbody {max-width: 800px;text-align: left;}
+	@media only screen and (max-width: 640px) {
+		#emailbody {width: auto !important;margin:0 1em !important;}
+		img {max-width: 100% !important;}
+	}
+</style>
+<center>
+<div xmlns="http://www.w3.org/1999/xhtml" id="emailbody"
+     style="margin:0 2em;font-family:Georgia,Helvetica,Arial,Sans-Serif;line-height:140%;font-size:14px;color:#000000;">
+	<table style="border:0;padding:0;margin:0;width:100%">
+		<tr>
+			<td style="vertical-align:top" width="100%">
+				<h1 style="margin:0;padding-bottom:6px;">
+					<a
+						style="color:#888;font-size:22px;font-family:Verdana, Arial, Helvetica, sans-serif;font-weight:normal;text-decoration:none;"
+						href="#URL_SITE_SPIP" title="#NOM_SITE_SPIP">
+						[(#LOGO_SITE_SPIP|image_reduire{100,200}
+										|inserer_attribut{id,feedimage}
+										|inserer_attribut{style,float:right;padding:0 0 10px 3px;border:0;})]
+						<:newsletter:label_a_lire_sur{site=#NOM_SITE_SPIP}:></a>
+				</h1>
+				<p
+					style="font-size:14px;color:#555;margin:9px 0 3px 0;font-family:Georgia,Helvetica,Arial,Sans-Serif;line-height:140%;font-size:14px;">
+					<:newsletter:info_email_not_displaying:><br><a href="#URL_NEWSLETTER" target="_blank"><:newsletter:info_email_voir_en_ligne:></a>.
+				</p>
+			</td>
+		</tr>
+	</table>
+	<hr style="border:1px solid #ccc;padding:0;margin:0"/>
+	<table id="itemcontentlist">
+		[(#CHAPO**|concat{#TEXTE**}|trim|strlen|oui)
+		<tr xmlns="">
+			<td style="margin-bottom:0;line-height:1.4em;">
+				<h1 style="margin:1em 0 3px 0;">
+					<a name="1" style="font-family:Verdana, Arial, Helvetica, sans-serif;font-size:18px;"
+					   href="#URL_NEWSLETTER">#TITRE</a>
+				</h1>
+				<div
+					style="margin:0;font-family:Georgia,Helvetica,Arial,Sans-Serif;line-height:140%;font-size:14px;color:#000000;">
+					[(#LOGO_NEWSLETTER_NORMAL|image_reduire{100,200}
+					|inserer_attribut{alt,''}
+					|inserer_attribut{border,'0'}
+					|inserer_attribut{style,'margin: 0;margin-left: 1em;margin-bottom: 1em;float:right;padding: 0;max-width:
+					100%;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;'}
+					|inserer_attribut{class,logo})]
+
+					[
+					<div class='chapo' style="margin-bottom: 2em;">(#CHAPO|image_reduire{500,0})</div>
+					]
+					[
+					<div class='texte' style="margin-bottom: 2em;">(#TEXTE|image_reduire{500,0})</div>
+					]
+					[<br/>
+					<hr/>
+					<div class="notes" style="margin-bottom: 2em;font-size: 11px">(#NOTES)</div>
+					]
+				</div>
+			</td>
+		</tr>
+		]
+		<BOUCLE_nouveautes(ARTICLES){date<=#DATE}{date>#DATE_REDAC}{!par date}{0,5}>
+		<tr xmlns="">
+			<td style="margin-bottom:0;line-height:1.4em;">
+
+				<h2 style="margin:1em 0 3px 0;">
+					<a style="font-family:Verdana, Arial, Helvetica, sans-serif;font-size:16px;"
+					   href="#URL_ARTICLE" class="#EDIT{titre}">
+						[(#LOGO_ARTICLE_NORMAL|image_reduire{100,200}
+						|inserer_attribut{alt,''}
+						|inserer_attribut{border,'0'}
+						|inserer_attribut{style,'margin: 0;margin-left: 1em;margin-bottom: 1em;float:right;padding: 0;max-width:
+						100%;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;'}
+						|inserer_attribut{class,logo})]
+						#TITRE</a></h2>
+				<p
+					style="font-size:14px;color:#555;margin:9px 0 3px 0;font-family:Georgia,Helvetica,Arial,Sans-Serif;line-height:140%;font-size:14px;">
+					<span><:newsletter:label_publie:></span> [(#DATE|affdate)]</p>
+				[
+				<div class='chapo' style="margin-bottom: 2em;">(#CHAPO)</div>
+				]
+				[
+				<div class='texte' style="margin-bottom: 2em;">(#TEXTE)</div>
+				]
+				[
+				<div class='ps' style="margin-bottom: 2em;">(#PS)</div>
+				]
+				[<br/>
+				<hr/>
+				<div class="notes" style="margin-bottom: 2em;font-size: 11px">(#NOTES)</div>
+				]
+			</td>
+		</tr>
+		</BOUCLE_nouveautes>
+		<BOUCLE_nouveautesbreves(BREVES){date_heure<=#DATE}{date_heure>#DATE_REDAC}{!par date}{0,5}>
+		<tr xmlns="">
+			<td style="margin-bottom:0;line-height:1.4em;">
+
+				<h2 style="margin:1em 0 3px 0;">
+					<a style="font-family:Verdana, Arial, Helvetica, sans-serif;font-size:16px;"
+					   href="#URL_BREVE" class="#EDIT{titre}">
+						[(#LOGO_BREVE_NORMAL|image_reduire{100,200}
+						|inserer_attribut{alt,''}
+						|inserer_attribut{border,'0'}
+						|inserer_attribut{style,'margin: 0;margin-left: 1em;margin-bottom: 1em;float:right;padding: 0;max-width:
+						100%;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;'}
+						|inserer_attribut{class,logo})]
+						#TITRE</a></h2>
+				<p
+					style="font-size:14px;color:#555;margin:9px 0 3px 0;font-family:Georgia,Helvetica,Arial,Sans-Serif;line-height:140%;font-size:14px;">
+					<span><:newsletter:label_publie:></span> [(#DATE_HEURE|affdate)]</p>
+
+				[
+				<div class='texte' style="margin-bottom: 2em;">(#TEXTE)</div>
+				]
+				[<br/>
+				<hr/>
+				<div class="notes" style="margin-bottom: 2em;font-size: 11px">(#NOTES)</div>
+				]
+			</td>
+		</tr>
+		</BOUCLE_nouveautesbreves>
+	</table>
+	<table style="border-top:1px solid #999;padding-top:4px;margin-top:1.5em;width:100%" id="footer">
+		<tr>
+			<td
+				style="text-align:left;font-family:Helvetica,Arial,Sans-Serif;font-size:11px;margin:0 6px 1.2em 0;color:#333;">
+				<:newsletter:info_email_inscrit_newletter:> <a href="#URL_SITE_SPIP">#NOM_SITE_SPIP</a>
+				<span class="unsubscribe_link">
+				<br/><a href="@url_unsubscribe@"><:newsletter:label_link_unsubscribe:></a>
+				</span>
+			</td>
+			<td
+				style="font-family:Helvetica,Arial,Sans-Serif;font-size:11px;margin:0 6px 1.2em 0;color:#333;text-align:right;vertical-align:top">
+
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"
+			    style="text-align:left;font-family:Helvetica,Arial,Sans-Serif;font-size:11px;margin:0 6px 1.2em 0;color:#333;">
+
+			</td>
+		</tr>
+	</table>
+</div>
+</center>
+</body>
+</html>
+</BOUCLE_si>
+</BOUCLE_newsletter>
+#FILTRE{newsletters_liens_absolus}

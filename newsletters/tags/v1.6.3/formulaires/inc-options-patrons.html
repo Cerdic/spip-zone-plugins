@@ -1,0 +1,6 @@
+<select name="#ENV{name}" class="select" id="#ENV{name}">
+<BOUCLE_patrons(POUR){tableau #ENV{#ENV{name},#ENV{defaut}}|liste_choix_patrons}>
+#SET{val,#CLE}
+<option value="#GET{val}"[(#ENV{#ENV{name},#ENV{defaut}}|=={#GET{val}}|oui)selected="selected"]>[(#VALEUR|extraire_multi)]</option>
+</BOUCLE_patrons>
+</select>

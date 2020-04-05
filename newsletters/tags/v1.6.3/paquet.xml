@@ -1,0 +1,32 @@
+<paquet
+	prefix="newsletters"
+	categorie="communication"
+	version="1.6.3"
+	etat="stable"
+	compatibilite="[3.0.5;3.2.*]"
+	logo="prive/themes/spip/images/newsletters-64.png"
+	documentation="https://contrib.spip.net/newsletters"
+	schema="0.3.0"
+>
+	<nom>Newsletters</nom>
+
+	<auteur lien='http://nursit.com/'>Cedric Morin</auteur>
+	<credit lien='https://github.com/tplaner/When'>When</credit>
+	<credit lien='https://github.com/ecenter/markdownify'>Markdownify</credit>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="autoriser" inclure="newsletters_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/newsletters.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/newsletters.php" /> 
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/newsletters.php" /> 
+	<pipeline nom="pre_edition" inclure="newsletters_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="newsletters_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="newsletters_pipelines.php" />
+
+	<menu nom="newsletters" titre="newsletter:titre_newsletters" parent="menu_edition" icone="images/newsletter-16.png" action="newsletters" />
+
+	<necessite nom="mailsubscribers" compatibilite="[0.7.0;]" />
+	<necessite nom="mailshot" compatibilite="[0.3.1;]" />
+</paquet>

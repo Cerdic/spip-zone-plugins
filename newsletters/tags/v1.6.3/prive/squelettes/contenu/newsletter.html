@@ -1,0 +1,55 @@
+[(#AUTORISER{voir,newsletter,#ID_NEWSLETTER}|sinon_interdire_acces)]
+<BOUCLE_newsletter(NEWSLETTERS){id_newsletter}{statut==.*}{si #ENV{exec}|=={newsletter}}>
+[(#STATUT|=={prog}|non|sinon_interdire_acces{#URL_ECRIRE{newsletters}})]
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,newsletter,#ID_NEWSLETTER})
+		[(#ID_NEWSLETTER|afficher_qui_edite{newsletter}|non)
+			[(#URL_ECRIRE{newsletter_edit,id_newsletter=#ID_NEWSLETTER}|icone_verticale{<:newsletter:icone_modifier_newsletter:>,newsletter,edit,right ajax preload})]
+		]
+		[(#ID_NEWSLETTER|afficher_qui_edite{newsletter}|oui)
+			[(#URL_ECRIRE{newsletter_edit,id_newsletter=#ID_NEWSLETTER}|icone_verticale{#ID_NEWSLETTER|afficher_qui_edite{newsletter},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{newsletter-24.png}|balise_img{newsletter,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{newsletter,#ID_NEWSLETTER,'',#ARRAY{date_redac,' '}}
+</div>
+
+<!--affiche_milieu-->
+[<div class="ajax">
+(#FORMULAIRE_NEWSLETTER_SEND{#ID_NEWSLETTER,#STATUT|=={publie}|?{'',<:newsletter:info_publier_pour_envoyer:>}})
+</div>]
+
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/newsletter,id=#ID_NEWSLETTER,id_newsletter=#ID_NEWSLETTER,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,newsletter,#ID_NEWSLETTER})
+	[(#ID_NEWSLETTER|afficher_qui_edite{newsletter}|non)
+		[(#URL_ECRIRE{newsletter_edit,id_newsletter=#ID_NEWSLETTER}|icone_verticale{<:newsletter:icone_modifier_newsletter:>,newsletter,edit,right ajax preload})]
+	]
+	[(#ID_NEWSLETTER|afficher_qui_edite{newsletter}|oui)
+		[(#URL_ECRIRE{newsletter_edit,id_newsletter=#ID_NEWSLETTER}|icone_verticale{#ID_NEWSLETTER|afficher_qui_edite{newsletter},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,newsletter,id,#ID_NEWSLETTER},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+#SET{enfants,''}
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,#ENV**{exec},objet,newsletter,id_objet,#ID_NEWSLETTER},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_newsletter>
+[(#ENV**{exec}|=={newsletter_edit}|?{#INCLURE{fond=prive/squelettes/contenu/newsletter_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_newsletter>

@@ -1,0 +1,274 @@
+<BOUCLE_rem(CONDITION){si #REM}>
+<!-- titre=<multi>[fr]Typographic (une colonne, responsive)[en]Typographic (one column, responsive)</multi> -->
+</BOUCLE_rem>
+<BOUCLE_newsletter(NEWSLETTERS){id_newsletter}{statut?}{lang_select}>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>#TITRE</title>
+<!-- Open Graph Protocol -->
+[<meta property="og:title" content="(#TITRE|attribut_html)" />]
+<meta property="og:type" content="article" />
+[<meta property="og:image" content="(#LOGO_NEWSLETTER_NORMAL|sinon{#LOGO_SITE_SPIP}|extraire_attribut{src}|url_absolue)" />]
+[<meta property="og:url" content="(#URL_NEWSLETTER|url_absolue)" />]
+[<meta property="og:description" content="(#INTRODUCTION|supprimer_tags|entites_html)" />]
+[<meta property="og:site_name" content="(#NOM_SITE_SPIP|attribut_html)" />]
+<style media="all" type="text/css">
+/* -------------------------------------
+    GLOBAL RESETS
+------------------------------------- */
+
+/* CLIENT-SPECIFIC STYLES */
+body,
+table,
+td,
+a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+
+/* Prevent WebKit and Windows mobile changing default text sizes */
+table,
+td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+
+/* Remove spacing between tables in Outlook 2007 and up */
+img { -ms-interpolation-mode: bicubic; }
+
+/* Allow smoother rendering of resized image in Internet Explorer */
+
+/* RESET STYLES */
+img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+body { height: 100%!important; margin: 0!important; padding: 0!important; width: 100%!important; }
+figure { margin: 0; padding: 0; }
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section { display: block; }
+
+/* iOS BLUE LINKS */
+a[x-apple-data-detectors] { color: inherit!important; text-decoration: none!important; font-size: inherit!important; font-family: inherit!important; font-weight: inherit!important; line-height: inherit!important; }
+
+/* ANDROID CENTER FIX */
+div[style*="margin: 16px 0;"] { margin: 0!important; }
+table,
+td,
+div,
+a { box-sizing: border-box; }
+img { -ms-interpolation-mode: bicubic; max-width: 100%; display: inline-block; padding: 5px; border: 1px solid #cccccc; }
+body,
+.body { font-family: Georgia,"Times New Roman",Times,serif; font-size: 20px; line-height: 1.5; height: 100%!important; width: 100%!important; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
+table { border-collapse: separate!important; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; }
+table td { font-family: Georgia,"Times New Roman",Times,serif; font-size: 20px; vertical-align: top; }
+.ExternalClass { width: 100%; }
+.ExternalClass,
+.ExternalClass p,
+.ExternalClass span,
+.ExternalClass font,
+.ExternalClass td,
+.ExternalClass div { line-height: 100%; }
+strong,
+b { font-weight: bold; }
+
+/* -------------------------------------
+    BODY & CONTAINER
+------------------------------------- */
+body { background-color: #ffffff; }
+.body { background-color: #ffffff; width: 100%; }
+
+/* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone or something */
+.container { display: block; Margin: 0 auto!important; /* makes it centered */max-width: 580px; padding: 10px; width: 100%!important; }
+
+/* This should also be a block element, so that it will fill 100% of the .container */
+.content { display: block; margin: 0 auto; max-width: 580px; padding: 10px; }
+
+/* -------------------------------------
+    HEADER, FOOTER, MAIN
+------------------------------------- */
+.main { background: #ffffff; border: none; border-radius: 0px; width: 100%; }
+.wrapper { padding: 30px; }
+.content-block { padding: 0 0 30px; }
+.header { margin-bottom: 30px; margin-top: 20px; width: 100%; }
+.footer { clear: both; width: 100%; }
+.footer * { color: #7F7F7F; font-size: 12px; }
+.footer td { padding: 20px 0; }
+
+/* -------------------------------------
+    TYPOGRAPHY
+------------------------------------- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 { color: #222222!important; font-family: "Roboto","Helvetica Neue","Segoe UI",Helvetica,Arial,sans-serif; font-weight: bold; line-height: 1.2; margin: 0; margin-bottom: 20px; margin-top: 30px; }
+h1,
+h2 { margin-bottom: 30px; margin-top: 40px; }
+h1 { font-size: 32px; }
+h2 { font-size: 28px; }
+h3 { font-size: 24px; }
+h4 { font-size: 22px; }
+h5 { font-size: 20px; }
+h6 { font-size: 18px; }
+p,
+ul,
+ol { font-family: Georgia,"Times New Roman",Times,serif; font-size: 20px; font-weight: normal; margin: 0; margin-bottom: 30px; color: #111111; }
+ul,
+ol { padding: 0; margin: 0; margin-bottom: 15px; padding-left: 25px; }
+ul li,
+ol li { list-style-position: outside; margin-left: 5px; margin-bottom: 2px; }
+li>ul,
+li>ol { margin-top: 15px; }
+a { color: #348eda; text-decoration: none; font-weight: bold; }
+code,
+pre,
+.word-wrap { word-break: break-word; word-wrap: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; }
+pre,
+code { font-family: Menlo,Monaco,Consolas,"Courier New",monospace; }
+pre { display: block; width: 96%; margin: 1em 0; background: #f6f6f6; padding: 2%; white-space: pre-wrap; font-size: 18px; }
+blockquote { margin: 0; padding: 0; padding-top: 20px; padding-bottom: 20px; padding-left: 40px; padding-right: 40px; border-left: 4px solid #cccccc; font-style: italic; margin: 2em 0; }
+blockquote p { margin-bottom: 0; }
+mark { background: #ff0; }
+dl dt { font-weight: bold; }
+dl dd { margin-left: 40px; }
+
+/* -------------------------------------
+  DIVIDERS
+------------------------------------- */
+.divider { border-collapse: separate; }
+.divider-spacer { padding: 20px 0; }
+.divider td { border-top: 1px solid #ccc; line-height: 0; font-size: 0; height: 1px; margin: 0; padding: 0; }
+
+/* -------------------------------------
+    OTHER STYLES THAT MIGHT BE USEFUL
+------------------------------------- */
+hr { margin: 40px 0; border: none; border-top: 1px solid #cccccc; color: #ffffff; }
+.last { margin-bottom: 0; }
+.first { margin-top: 0; }
+.align-center { text-align: center; }
+.align-right { text-align: right; }
+.align-left { text-align: left; }
+.clear { clear: both; }
+.mt0 { margin-top: 0; }
+.mb0 { margin-bottom: 0; }
+.preheader { color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0; }
+
+/* -------------------------------------
+    RESPONSIVE AND MOBILE FRIENDLY STYLES
+------------------------------------- */
+@media only screen and (max-width:620px) { 
+	table[class=body] { font-size: 18px!important; }
+	table[class=body] p,
+	table[class=body] ul,
+	table[class=body] ol { font-size: 18px!important; margin-bottom: 15px!important; }
+	table[class=body] .et-btn { margin-bottom: 15px; }
+	table[class=body] h1 { font-size: 26px!important; }
+	table[class=body] h2 { font-size: 24px!important; }
+	table[class=body] h3 { font-size: 22px!important; }
+	table[class=body] h4 { font-size: 21px!important; }
+	table[class=body] h5 { font-size: 18px!important; }
+	table[class=body] h6 { font-size: 17px!important; }
+	table[class=body] h1,
+	table[class=body] h2 { margin-bottom: 20px!important; margin-top: 20px!important; }
+	table[class=body] .container,
+	table[class=body] .content { width: 100%!important; max-width: 100%!important; }
+	table[class=body] .content,
+	table[class=body] .wrapper { padding: 10px!important; }
+	table[class=body] .container { padding: 0!important; width: 100%!important; }
+	table[class=body] .btn table,
+	table[class=body] .btn a { width: 100%!important; }
+ }
+</style>
+</head>
+
+<body style="background-color: #ffffff; -webkit-text-size-adjust: 100%; height: 100% !important; margin: 0 !important; padding: 0 !important; -ms-text-size-adjust: 100%; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 20px; line-height: 1.5; -webkit-font-smoothing: antialiased; width: 100% !important;">
+
+<table class="body" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; box-sizing: border-box; border-collapse: separate !important; line-height: 1.5; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 20px; -ms-text-size-adjust: 100%; height: 100% !important; width: 100% !important; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%; background-color: #ffffff;" width="100% !important" bgcolor="#ffffff">
+	<tr>
+		<td style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; box-sizing: border-box; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 20px; vertical-align: top;" valign="top"></td>
+		<td class="container" style="-webkit-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; box-sizing: border-box; -ms-text-size-adjust: 100%; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 20px; vertical-align: top; display: block; Margin: 0 auto !important; max-width: 580px; padding: 10px; width: 100% !important;" width="100% !important" valign="top">
+			<div class="content" style="box-sizing: border-box; display: block; margin: 0 auto; max-width: 580px; padding: 10px;">
+[<span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">(#INTRODUCTION)</span>]
+<span class="archive_link" style="font-family: Georgia, 'Times New Roman', Times, serif; font-weight: normal; margin: 0; margin-bottom: 30px; color: #7F7F7F; font-size: 12px;"><:newsletter:info_email_not_displaying:> <a href="#URL_NEWSLETTER" target="_blank"><:newsletter:info_email_voir_en_ligne:></a>.</span>
+
+<table class="main" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; box-sizing: border-box; border-collapse: separate !important; width: 100%; background: #ffffff; border: none; border-radius: 0px;" width="100%">
+	<tr>
+		<td class="wrapper" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; box-sizing: border-box; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 20px; vertical-align: top; padding: 30px;" valign="top">
+			<table style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; box-sizing: border-box; border-collapse: separate !important; width: 100%;" width="100%">
+				<tr>
+					<td class="reader-view" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; box-sizing: border-box; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 20px; vertical-align: top;" valign="top">
+
+						<h1 style="color: #222222 !important; font-family: 'Roboto', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif; font-weight: bold; line-height: 1.2; margin: 0; margin-bottom: 30px; margin-top: 40px; font-size: 32px;">#TITRE</h1>
+
+						[<div style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 20px; font-weight: normal; margin: 0; margin-bottom: 30px; color: #111111;">(#CHAPO)</div>]
+
+						[(#LOGO_NEWSLETTER|sinon{#LOGO_SITE_SPIP}|image_reduire{460}
+							|inserer_attribut{alt,''}
+							|inserer_attribut{border,'0'}
+							|inserer_attribut{style,'-ms-interpolation-mode: bicubic; border: 1px solid #cccccc; height: auto; line-height: 100%; outline: none; text-decoration: none; max-width: 100%; display: inline-block; padding: 5px; margin-bottom: 20px;'})]
+
+						[<div style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 20px; font-weight: normal; margin: 0; margin-bottom: 30px; color: #111111;">(#TEXTE|image_reduire{560,0})</div>]
+
+						<table class="divider-wrapper" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; box-sizing: border-box; border-collapse: separate !important; width: 100%;" width="100%">
+							<tr>
+								<td class="divider-spacer" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; box-sizing: border-box; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 20px; vertical-align: top; padding: 20px 0;" valign="top">
+									<table class="divider divider- " cellpadding="0" cellspacing="0" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; box-sizing: border-box; border-collapse: separate !important; width: 100%;" width="100%">
+										<tr>
+											<td style="-webkit-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; box-sizing: border-box; -ms-text-size-adjust: 100%; font-family: Georgia, 'Times New Roman', Times, serif; vertical-align: top; padding: 0; border-top: 1px solid #ccc; line-height: 0; height: 1px; margin: 0; font-size: 0;" valign="top"></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+              
+						<BOUCLE_selectionarticles(ARTICLES){id_newsletter}>
+						<h2 style="color: #222222 !important; font-family: 'Roboto', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif; font-weight: bold; line-height: 1.2; margin: 0; margin-bottom: 30px; margin-top: 40px; font-size: 28px;">#TITRE</h2>
+						[(#LOGO_ARTICLE_NORMAL|image_reduire{460}
+							|inserer_attribut{alt,''}
+							|inserer_attribut{border,'0'}
+							|inserer_attribut{style,'-ms-interpolation-mode: bicubic; border: 1px solid #cccccc; height: auto; line-height: 100%; outline: none; text-decoration: none; max-width: 100%; display: inline-block; padding: 5px; margin-bottom: 20px;'})]
+						[<div style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 20px; font-weight: normal; margin: 0; margin-bottom: 30px; color: #111111;">(#INTRODUCTION)</div>]
+						<p style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 20px; font-weight: normal; margin: 0; margin-bottom: 30px; color: #111111;">
+							<a href="#URL_ARTICLE" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; box-sizing: border-box; color: #348eda; text-decoration: none; font-weight: bold;"><:newsletter:lien_lire_en_ligne:> &laquo; #TITRE &raquo;</a>
+						</p>
+						</BOUCLE_selectionarticles>
+
+					</td><!-- content -->
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+  
+<div class="footer" style="box-sizing: border-box; clear: both; width: 100%;">
+	<table style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; box-sizing: border-box; border-collapse: separate !important; width: 100%; color: #7F7F7F; font-size: 12px;" width="100%">
+		<tr style="color: #7F7F7F; font-size: 12px;">
+			<td class="align-center" style="-webkit-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; box-sizing: border-box; -ms-text-size-adjust: 100%; font-family: Georgia, 'Times New Roman', Times, serif; vertical-align: top; font-size: 12px; color: #7F7F7F; text-align: center; padding: 20px 0;" valign="top" align="center">
+				<p style="font-family: Georgia, 'Times New Roman', Times, serif; font-weight: normal; margin: 0; margin-bottom: 30px; color: #7F7F7F; font-size: 12px;">
+					&copy; <a href="#URL_SITE_SPIP" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; box-sizing: border-box; text-decoration: none; font-weight: bold; color: #7F7F7F; font-size: 12px;">#NOM_SITE_SPIP</a> &mdash; [(#ENV{date}|annee)]
+				</p>
+				<p style="font-family: Georgia, 'Times New Roman', Times, serif; font-weight: normal; margin: 0; margin-bottom: 30px; color: #7F7F7F; font-size: 12px;">
+					<:newsletter:info_email_reception:> @email@<br>
+					&nbsp;<a href="@url_unsubscribe@" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; box-sizing: border-box; text-decoration: none; font-weight: bold; color: #7F7F7F; font-size: 12px;"><:newsletter:label_link_unsubscribe:></a>&nbsp;
+				</p>
+			</td>
+		</tr>
+	</table>
+</div>
+</div>
+		</td>
+		<td style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; box-sizing: border-box; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 20px; vertical-align: top;" valign="top"></td>
+	</tr>
+</table>
+
+</body>
+</html>
+</BOUCLE_newsletter>
+#FILTRE{newsletters_liens_absolus}
