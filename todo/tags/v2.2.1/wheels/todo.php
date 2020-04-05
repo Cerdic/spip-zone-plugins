@@ -1,0 +1,187 @@
+<?php
+
+// Regexp permettant de récupérer chacune des informations additionnelles qui peuvent compléter le titre de la tâche :
+// - @p ou p=1..9 et désigne la priorité. Exemple : @1
+// - @tag ou tag est un mot. Exemple : @courses ou @перевод-шаблон
+// - type:valeur ou type et valeur sont des mots. Exemple : fin:2013-06-02 ou commit:z72324
+// il est possible d'utiliser @ ou # pour les tags et priorités, @ étant la valeur par défaut
+if (!defined('_TODO_REGEXP_INFOS_COMPLEMENTAIRES'))
+	define('_TODO_REGEXP_INFOS_COMPLEMENTAIRES', '%([\w-]+:|indicateur_tag)([\w.-]+)(?:\s|$)%Uu');
+
+
+/**
+ * Analyse le contenu du bloc inclu entre les marqueurs de début et de fin de la todolist
+ * puis appelle un squelette avec les paramètres calculés
+ *
+ * @param array	$t	l'index 4 représente le contenu du bloc, l'index 3 la valeur du format si il existe.
+ * @return string	le html généré à partir d'un squelette
+ */
+function tw_todo($t) {
+	// Liste des statuts supportés
+	global $todo_statuts;
+
+	// Numéro d'appel de la fonction tw_todo dans le hit.
+	// -- sert à calculer une ancre unique pour chaque todolist sans nécessiter d'id ou de titre.
+	static $no_bloc = 0;
+
+	// Initialisation du html calculé
+	$html = $t;
+
+	// Instanciation de la regexp de repérage des informations complémentaires
+	global $todo_indicateur_tag;
+	$indicateur_tag = ($todo_indicateur_tag == '@') ? '@' : '#';
+	$regexp_infos_complementaires = str_replace('indicateur_tag', $indicateur_tag, _TODO_REGEXP_INFOS_COMPLEMENTAIRES);
+
+	// Extraction de lignes du texte
+	// La wheel renvoie un tableau à cette callback qui est le résultat d'un preg_match_all.
+	// Le contenu du tableau est le suivant :
+	// - index 0 : la capture du pattern complet
+	// - index 1 : la capture de l'attribut format si il existe
+	// - index 2 : la capture des quotes entourant la valeur de l'attribut format
+	// - index 3 : la capture de la valeur de l'attribut format
+	// - index 4 : la capture du texte compris entre les balises
+	// - index 5 : la balise fermante
+	// --> Seuls les index 3 et 4 sont utilisés.
+	$lignes = explode("\n", trim($t[4]));
+
+	// Initialisation des variables propres à l'ensemble des todos du bloc
+	$todos = array();
+	$index_todo = 0;
+	$index_tache = 0;
+
+	// Analyse de chaque ligne du bloc
+	foreach ($lignes as $_ligne){
+		// Initialisation des variables de la todolist en cours
+		if ($index_tache == 0) {
+			$todo_fermee[$index_todo] = true;
+			$types_info[$index_todo] = array();
+			$priorite_utilisee[$index_todo] = false;
+		}
+
+		// Initialisation des variables de la tâche en cours
+		$priorite = '';
+		$tags = $infos = array();
+		$texte = trim($_ligne);
+
+		if ($texte) {
+			// Extraction du premier caractère de la ligne qui détermine soit :
+			// - le statut d'une tâche,
+			// - l'indicateur d'un projet,
+			// - et sinon le descriptif libre de la tâche précédente.
+			// Les caractères de statut ! et ? sont traités par SPIP et précédés
+			// d'un &nbsp; qu'il faut au préalable supprimer.
+			if (strpos($texte, '&nbsp;') === 0) {
+				$texte = substr($texte, 6, strlen($texte)-6);
+			}
+			$premier = substr($texte, 0, 1);
+
+			if (array_key_exists($premier, $todo_statuts)) {
+				// C'est une tâche
+				$texte = trim(substr($texte, 1, strlen($texte)-1));
+
+				// -- le statut
+				$statut = $todo_statuts[$premier]['id'];
+
+				// -- le titre, que l'on sépare du reste des informations complémentaires éventuelles
+				if (preg_match_all($regexp_infos_complementaires, $texte, $infos_complementaires)) {
+					// Extraction du titre
+					$titre = trim(str_replace($infos_complementaires[0], '', $texte));
+
+					// Extraction des informations complémentaires
+					foreach($infos_complementaires[1] as $_cle => $_prefixe) {
+						$type = rtrim($_prefixe, ':');
+						$valeur = $infos_complementaires[2][$_cle];
+						if ($type == $indicateur_tag) {
+							if (preg_match('%^[1-9]$%', $valeur, $m)) {
+								// -- la priorité
+								$priorite = $valeur;
+								$priorite_utilisee[$index_todo] = true;
+							}
+							else {
+								// -- les étiquettes
+								if ($formater = charger_fonction("todo_formater_tag", 'inc', true))
+									$tags[] = $formater($valeur);
+								else
+									$tags[] = $valeur;
+							}
+						}
+						else {
+							// -- les informations typées
+							if ($formater = charger_fonction("todo_formater_${type}", 'inc', true)) {
+								// Si il existe une fonction de formatage, on considère que celle-ci s'occupe
+								// à la fois du format et aussi de la présentation si plusieurs informations
+								// du même type sont à afficher (cas du commit qui affiche les différents
+								// commits de la façon suivante : z123, z455, c21000)
+								if (!isset($infos[$type])) {
+									$infos[$type] = '';
+								}
+								$formater($valeur, $infos[$type]);
+							}
+							else {
+								// Si il n'existe pas de fonction on ne présume pas de la présentation et
+								// on considère donc que l'information typée est unique.
+								$infos[$type] = $valeur;
+							}
+							if (!in_array($type, $types_info[$index_todo]))
+								$types_info[$index_todo][] = $type;
+						}
+					}
+				}
+				else
+					$titre = $texte;
+
+				// Ajout de la tâche dans la liste fournie au modèle
+				if (!$todo_statuts[$premier]['final'])
+					$todo_fermee[$index_todo] = false;
+				$todos[$index_todo][$index_tache] = array(
+					'statut' => array(
+									'id' =>$statut,
+									'final' => $todo_statuts[$premier]['final'],
+									'alerte' => $todo_statuts[$premier]['alerte']),
+					'titre' => $titre,
+					'tags' => $tags,
+					'infos' => ($priorite_utilisee[$index_todo] ? array_merge($infos, array('priorite' => $priorite)) : $infos),
+				);
+				$index_tache += 1;
+			}
+			elseif ($premier == ':') {
+				// Projet
+				$index_todo += 1;
+				$projets[$index_todo] = trim(substr($texte, 1, strlen($texte)-1));
+				$index_tache = 0;
+			}
+			else {
+				// Descriptif libre de la tâche précédente
+				$todos[$index_todo][$index_tache-1]['titre'] .= '<br />' . $texte;
+			}
+		}
+	}
+
+	// Appel pour chaque todolist du modèle par défaut
+	if ($todos) {
+		$html = '';
+		$format = $t[3] ? $t[3] : 'table';
+		foreach($todos as $_cle => $_taches) {
+			if ($_taches) {
+				$html .= recuperer_fond(
+					"inclure/todo_${format}",
+					array(
+						'projet' => (isset($projets[$_cle]) ? $projets[$_cle] : ''),
+						'taches' => $_taches,
+						'types_info' => ($priorite_utilisee[$_cle] ? array_merge($types_info[$_cle], array('priorite')) : $types_info[$_cle]),
+						'ancre' => "todo_${no_bloc}_${_cle}",
+						'fermee' => $todo_fermee[$_cle]
+					),
+					array(
+						'ajax' => true
+					)
+				);
+			}
+		}
+		$no_bloc++;
+	}
+
+	return $html;
+}
+
+?>
