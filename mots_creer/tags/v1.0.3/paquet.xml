@@ -1,0 +1,24 @@
+<paquet
+	prefix="motscreer"
+	categorie="edition"
+	version="1.0.3"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/motscreer-64.png"
+>
+
+	<nom>Créer des mots clés</nom>
+
+	<auteur lien="https://contrib.spip.net/nicod_">nicod_</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<menu nom="motscreer" titre="motscreer:motscreer_titre" parent="menu_edition" icone="images/motscreer-16.png" action="motscreer" />
+
+	<pipeline nom="autoriser" inclure="motscreer_autorisations.php"/>
+	<pipeline nom="header_prive" inclure="motscreer_pipelines.php"/>
+	
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
+	<utilise nom="motsar"/>
+
+</paquet>
