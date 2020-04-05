@@ -1,0 +1,52 @@
+<BOUCLE_autoriser(CONDITION){si #ENV{id_dictionnaire}|et{#AUTORISER{modifier,dictionnaire,#ENV{id_dictionnaire}}}|ou{#ENV{id_dictionnaire}|non|et{#AUTORISER{creer,dictionnaire}}}}>
+
+<!--#hierarchie-->
+<div id="chemin">
+	<span class="bloc">
+		<a href="#URL_ECRIRE{dictionnaires}" class="racine"><:dictionnaire:titre_dictionnaires:></a>
+	</span>
+	[(#ENV{id_dictionnaire}|oui)
+	<span class="bloc">
+		<span class="sep">&gt;</span>
+		<a href="[(#ENV{id_dictionnaire}|generer_url_entite{dictionnaire})]">#INFO_TITRE{dictionnaire,#ENV{id_dictionnaire}}</a>
+	</span>
+	<span class="bloc">
+		<span class="sep">&gt;</span>
+		<:dictionnaire:icone_modifier_dictionnaire:>
+	</span>
+	]
+	[(#ENV{id_dictionnaire}|non)
+	<span class="bloc">
+		<span class="sep">&gt;</span>
+		<:dictionnaire:info_nouveau_dictionnaire:>
+	</span>
+	]
+</div>
+<!--/#hierarchie-->
+
+#SET{redirect,#ENV{redirect}|sinon{#ENV{id_dictionnaire}|?{#ENV{id_dictionnaire}|generer_url_entite{dictionnaire},#URL_ECRIRE{dictionnaires}}}}
+
+<div class="cadre-formulaire-editer">
+	<div class="entete-formulaire">
+		[(#GET{redirect}|icone{<:icone_retour:>,#CHEMIN{prive/themes/spip/images/dictionnaire-24.png}})]
+		<:dictionnaire:icone_modifier_dictionnaire:>
+		<h1>
+			[(#ENV{id_dictionnaire}|oui)#INFO_TITRE{dictionnaire,#ENV{id_dictionnaire}}]
+			[(#ENV{id_dictionnaire}|non)<:dictionnaire:info_nouveau_dictionnaire:>]
+		</h1>
+	</div>
+	
+	#SET{redirect,#ENV{redirect,#ENV{id_dictionnaire}|generer_url_entite{dictionnaire}}}
+	<div class="">
+		#FORMULAIRE_EDITER_DICTIONNAIRE{#ENV{id_dictionnaire,oui},#GET{redirect}}
+	</div>
+</div>
+
+<!--#navigation-->
+
+<!--/#navigation-->
+
+<!--#extra-->
+
+<!--/#extra-->
+</BOUCLE_autoriser>
