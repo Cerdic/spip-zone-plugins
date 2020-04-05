@@ -1,0 +1,43 @@
+<div class="formulaire_spip formulaire_langonet_lister" id="formulaire_langonet_lister">
+	<h3 class="titrem"><:langonet:titre_form_lister:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<!-- <br class='bugajaxie' /> -->
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action --> ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="fieldset">
+				<fieldset>
+					<p class="explication"><:langonet:info_lister:></p>
+					<ul>
+						<li class="editer_fichier_langue obligatoire[(#ENV{erreurs}|table_valeur{fichier_langue}|oui) erreur]">
+							<label for="fichier_langue"><:langonet:label_fichier_liste:></label>
+							<p class="explication"><:langonet:info_fichier_liste:></p>
+							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{fichier_langue})</span>]
+							[(#ENV{fichier_langue, 0}|langonet_creer_select_langues)]
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
+
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:langonet:bouton_lister:>" />
+		</p>
+	</div></form>
+	]
+
+	[(#REM) <!-- Affichage des resultats --> ]
+	[<ul>
+		<li class="fieldset" style="overflow: visible;">
+			<fieldset>
+				<h3 class="legend"><:langonet:legende_table:></h3>
+				[<p class="explication">(#ENV*{message_ok}|table_valeur{explication})</p>]
+				(#ENV*{message_ok}|table_valeur{table})
+			</fieldset>
+		</li>
+	</ul>]
+</div>
