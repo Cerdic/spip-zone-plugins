@@ -1,0 +1,9 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+<h1><:disponibilite_date:titre_disponibilite_dates:></h1>
+
+<INCLURE{fond=prive/objets/liste/disponibilite_dates, env, ajax, sinon=<:disponibilite_date:info_aucun_disponibilite_date:>}>
+
+[(#AUTORISER{creer,disponibilite_date})
+	[(#URL_ECRIRE{disponibilite_date_edit,new=oui}|icone_verticale{<:disponibilite_date:icone_creer_disponibilite_date:>,disponibilite_date,new,right})]
+]

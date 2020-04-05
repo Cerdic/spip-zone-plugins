@@ -1,0 +1,84 @@
+[(#REM)
+
+	Action :
+		- Les dates disponibles pour un objet données.
+
+	Parametres :
+		- date_limite_debut : a partir de quand les dates sont affichées.
+		- date_limite_fin : limite de dates à afficher
+		- utilisation_squelette : le squelette qui calcule les dates disponibles
+		- utilisation_id_exclu: identifiant à exlusre dans le calcul des disponibilités,
+			typiquement celui de l'objet su le quel se calcul les dsiponibilitées
+
+
+	Exemple d'appel :
+	[(#SAISIE{dates_disponibles, date_fin,
+		label=<:dates_outils:champ_date_fin_label:>,
+		objet=[(#ENV{location_objet}|objet_type)],
+		id_objet=#ENV{id_location_objet},
+		decalage_debut=#ENV{decalage_debut},
+		decalage_fin=#ENV{decalage_fin,1},
+		date_limite_debut=#ENV{date_limite_debut},
+		defaut=#ENV{date_debut},
+		utilisation_squelette=disponibilites/utilisees_objet_location.html,
+		utilisation_id_exclu=#ENV{id_objets_location}
+	})]
+]
+#SET{valeur,''}
+[(#ENV*{valeur}|oui)
+	#SET{valeur,#ENV{valeur}}
+]
+
+[(#ENV{multiple}|oui)
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+]
+
+#SET{date_actuelle,#ENV{date}}
+
+
+#SET{date_defaut,#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#GET{date_actuelle}}}}}
+[(#ENV{horaire}|non)
+	#SET{date_defaut,#GET{date_defaut}|formater_date{horaire_zero,Y-m-d H:i:s}}
+	[(#GET{valeur}|oui)
+		#SET{valeur,#GET{valeur}|formater_date{horaire_zero,Y-m-d H:i:s}}
+	]
+]
+
+[(#ENV{multiple}|oui)
+	#SET{date_actuelle,#ARRAY{#GET{date_actuelle}}
+]
+
+#SET{date_limite_debut,#ENV{date_limite_debut,#GET{date_actuelle}}}
+#SET{date_limite_fin,#ENV{date_limite_fin,#GET{date_actuelle}|date_relative_brut{+1 year, Y-m-d}}}
+
+#SET{contexte,#ARRAY{
+		date_limite_debut,#GET{date_limite_debut},
+		date_limite_fin,#GET{date_limite_fin},
+	}
+}
+
+#SET{dates, #GET{contexte}|dates_disponibles{#ENV**}}
+
+[(#GET{valeur}|oui)
+	#SET{dates,#GET{dates}|push{#GET{valeur}}
+]
+
+<select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"]>
+	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
+	<option value="">[(#ENV{option_intro})]</option>]
+	<BOUCLE_dates(DATA) {source tableau, #GET{dates}|array_unique} {par valeur} >
+		#SET{date,#VALEUR}
+		[(#ENV{horaire}|non)
+			#SET{date,#VALEUR|formater_date{horaire_zero,Y-m-d H:i:s}}
+
+		]
+		[(#ENV{multiple}|oui)
+		<option value="[(#GET{date}|htmlspecialchars)]"[(#GET{date}|in_array{#GET{date_defaut}}|oui) selected="selected"]>
+			[(#VALEUR|affdate{d-m-Y})]
+		</option>]
+	[(#ENV{multiple}|non)
+		<option value="[(#GET{date}|htmlspecialchars)]"[(#GET{date}|=={#GET{date_defaut}}|oui) selected="selected"]>
+		[(#VALEUR|affdate{d-m-Y})]
+		</option>]
+	</BOUCLE_dates>
+</select>

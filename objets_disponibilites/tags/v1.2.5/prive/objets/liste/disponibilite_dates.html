@@ -1,0 +1,45 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	date,-1,
+	id_disponibilite_date,1,
+	points,-1
+}})]<B_liste_disponibilite_dates>
+#ANCRE_PAGINATION
+<div class="liste-objets disponibilite_dates">
+<table class="spip liste">
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{disponibilite_date:info_1_disponibilite_date,disponibilite_date:info_nb_disponibilite_dates}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="picto" scope="col"></th>
+			<th class="titre" scope="col">[(#TRI{titre,<:ecrire:info_titre:>,ajax})]</th>
+			<th class="dates" scope="col"><:dates_outils:periode_label:></th>
+			<th class="disponible" scope="col"><:disponibilite_date:champ_disponible_label:></th>
+			<th class="id" scope="col">[(#TRI{id_disponibilite_date,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_disponibilite_dates(DISPONIBILITE_DATES){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="picto">[(#CHEMIN_IMAGE{disponibilite_date-16.png}|balise_img)]</td>
+			<td class="titre principale">[(#LOGO_DISPONIBILITE_DATE|image_reduire{20,26})]
+				<a
+					href="[(#ID_DISPONIBILITE_DATE|generer_url_entite{disponibilite_date})]"
+					title="<:info_numero_abbreviation|attribut_html:> #ID_DISPONIBILITE_DATE">
+					[(#RANG). ]#TITRE
+				</a>
+			</td>
+			<td class="dates">[(#DATE_DEBUT|dates_affdate_debut_fin{#DATE_FIN,#HORAIRE})]</td>
+			<td class="disponible">[(#DISPONIBLE|?{<:ecrire:item_oui:>,<:ecrire:item_non:>})]</td>
+			<td class="id">[(#AUTORISER{modifier,disponibilite_date,#ID_DISPONIBILITE_DATE}|?{
+				<a href="[(#URL_ECRIRE{disponibilite_date_edit,id_disponibilite_date=#ID_DISPONIBILITE_DATE})]">#ID_DISPONIBILITE_DATE</a>,
+				#ID_DISPONIBILITE_DATE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_disponibilite_dates>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_disponibilite_dates>[
+<div class="liste-objets disponibilite_dates caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_disponibilite_dates>

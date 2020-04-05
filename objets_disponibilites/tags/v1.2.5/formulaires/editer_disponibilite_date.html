@@ -1,0 +1,30 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_disponibilite_date,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_disponibilite_date" value="#ENV{id_disponibilite_date}" />
+		<div class="editer-groupe">
+
+			[(#SAISIE{input, titre, obligatoire=oui,
+				label=<:ecrire:info_titre:>})]
+
+			[(#SAISIE{oui_non, disponible,
+				label=<:disponibilite_date:champ_disponible_label:>,
+				valeur_oui=1, valeur_non=0})]
+
+			[(#SAISIE{date, date_debut, obligatoire=oui,
+				label=<:dates_outils:champ_date_debut_label:>})]
+
+			[(#SAISIE{date, date_fin, obligatoire=oui,
+				label=<:dates_outils:champ_date_fin_label:>})]
+
+		</div>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+	]
+</div>

@@ -1,0 +1,68 @@
+[(#AUTORISER{voir,disponibilite_date,#ID_DISPONIBILITE_DATE}|sinon_interdire_acces)]
+[(#SET{url_voir,#VAL{disponibilite_date}|objet_info{url_voir}})]
+[(#SET{url_edit,#VAL{disponibilite_date}|objet_info{url_edit}})]
+<BOUCLE_disponibilite_date(DISPONIBILITE_DATES){id_disponibilite_date}{si #ENV{exec}|=={#GET{url_voir}}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,disponibilite_date,#ID_DISPONIBILITE_DATE})
+		[(#ID_DISPONIBILITE_DATE|afficher_qui_edite{disponibilite_date}|non)
+			[(#URL_ECRIRE{#GET{url_edit},id_disponibilite_date=#ID_DISPONIBILITE_DATE}|icone_verticale{<:disponibilite_date:icone_modifier_disponibilite_date:>,disponibilite_date,edit,right ajax preload})]
+		]
+		[(#ID_DISPONIBILITE_DATE|afficher_qui_edite{disponibilite_date}|oui)
+			[(#URL_ECRIRE{#GET{url_edit},id_disponibilite_date=#ID_DISPONIBILITE_DATE}|icone_verticale{#ID_DISPONIBILITE_DATE|afficher_qui_edite{disponibilite_date},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{disponibilite_date-24.png}|balise_img{disponibilite_date,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{disponibilite_date,#ID_DISPONIBILITE_DATE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/disponibilite_date,id=#ID_DISPONIBILITE_DATE,id_disponibilite_date=#ID_DISPONIBILITE_DATE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,disponibilite_date,#ID_DISPONIBILITE_DATE})
+	[(#ID_DISPONIBILITE_DATE|afficher_qui_edite{disponibilite_date}|non)
+		[(#URL_ECRIRE{#GET{url_edit},id_disponibilite_date=#ID_DISPONIBILITE_DATE}|icone_verticale{<:disponibilite_date:icone_modifier_disponibilite_date:>,disponibilite_date,edit,right ajax preload})]
+	]
+	[(#ID_DISPONIBILITE_DATE|afficher_qui_edite{disponibilite_date}|oui)
+		[(#URL_ECRIRE{#GET{url_edit},id_disponibilite_date=#ID_DISPONIBILITE_DATE}|icone_verticale{#ID_DISPONIBILITE_DATE|afficher_qui_edite{disponibilite_date},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+<div class="nettoyeur"></div>
+<div class="liste">
+	<BOUCLE_objetslies(spip_disponibilite_dates_liens){id_disponibilite_date}{0,1}><h3><:disponibilite_date:titre_objets_lies_disponibilite_date:></h3></BOUCLE_objetslies>
+
+	<BOUCLE_listeobjets(spip_disponibilite_dates_liens){id_disponibilite_date}{fusion objet}{par objet}>
+		#SET{table,#OBJET|table_objet}
+		[(#SET{titre,[#OBJET:info_(#GET{table})_liees_disponibilite_date]})]
+		[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_disponibilite_date}})]
+		<INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_disponibilite_date,ajax,env} />
+	</BOUCLE_listeobjets>
+</div>
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,disponibilite_date,id,#ID_DISPONIBILITE_DATE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+
+#SET{enfants,''}
+[(#VAL{prive/objets/contenu/disponibilite_date-enfants}|trouver_fond|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/disponibilite_date-enfants,id_disponibilite_date,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,disponibilite_date,id_disponibilite_date,#ID_DISPONIBILITE_DATE,objet,disponibilite_date,id_objet,#ID_DISPONIBILITE_DATE},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_disponibilite_date>
+[(#ENV**{exec}|=={#GET{url_edit}}|?{#INCLURE{fond=prive/squelettes/contenu/#GET{url_edit},redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_disponibilite_date>
