@@ -1,0 +1,24 @@
+<paquet
+	prefix="connecteur"
+	categorie="auteur"
+	version="1.0.11"
+	etat="dev"
+	compatibilite="[3.1.0;3.1.*]"
+	logo="prive/themes/spip/images/connecteur-64.png"
+	documentation=""
+	schema="1.0.15"
+>
+
+	<nom>Connecteur universel</nom>
+
+	<auteur lien='http://p.henix.be'>Phenix</auteur>
+
+	<licence>GNU/GPL</licence>
+
+
+	<pipeline nom="autoriser" inclure="connecteur_autorisations.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/connecteur.php" />
+
+	<necessite nom="verifier" compatibilite="[1.0.9;]" />
+
+</paquet>
