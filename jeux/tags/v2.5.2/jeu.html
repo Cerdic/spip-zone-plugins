@@ -1,0 +1,24 @@
+<BOUCLE_principale(JEUX){id_jeu}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut) - ][(#TITRE_PUBLIC|sinon{<:info_sans_titre:>}|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION{150}|attribut_html)" />]
+<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_jeu">
+<div id="page">
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	<h1 class="entry-title">[(#REM|sinon{<:jeux:jeu_court:>}|replace{@id@,#ID_JEU}|replace{@nom@,#TYPE_JEU})]</h1>
+	<p class="soustitre">[(#TITRE_PUBLIC|sinon{<:info_sans_titre:>})]</p>
+	[<div id="jeu-#ID_JEU" class="#EDIT{contenu} imagereduire_500">(#CONTENU_PROPRE|image_reduire{500,0})</div>]
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div>
+</body></html>
+</BOUCLE_principale>

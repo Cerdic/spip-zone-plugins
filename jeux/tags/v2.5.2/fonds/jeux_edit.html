@@ -1,0 +1,26 @@
+#CACHE{0}
+<BOUCLE_jeu(JEUX){id_jeu}>
+[(#SET{grand_titre,[(#REM|sinon{<:jeux:modifier_jeu:>}|replace{@id@,#ID_JEU})]})]
+[(#SET{contenu,[(#CONTENU*|replace{</?jeux>,}|entites_html)]})]
+[(#SET{titre_prive,[(#TITRE_PRIVE|sinon{<:jeux:sans_titre_prive:>})]})]
+#SET{type_jeu,#TYPE_JEU}
+#SET{type_resultat,#TYPE_RESULTAT}
+</BOUCLE_jeu>
+<//B_jeu>
+<label><span class='titrem'><:jeux:jeu_titre_prive:></span><br />
+<input type="text" name="titre_prive" value="[(#GET{titre_prive}|textebrut)]" class="formo" />
+</label><br /><br />
+<label><span class='titrem'><:jeux:jeu_contenu:></span><br />
+<textarea name="contenu" rows="20" cols="40" class="formo" >#GET{contenu}</textarea>
+</label><br /><br />
+<label><span class='titrem'><:jeux:type_resultat:></span><br />
+<select name="type_resultat" class="formo">
+	<option value="defaut"[ selected="(#GET{type_resultat,defaut}|=={defaut}|?{selected})"]><:jeux:resultat2_defaut:></option>
+	<option value="premier"[ selected="(#GET{type_resultat,defaut}|=={premier}|?{selected})"]><:jeux:resultat2_premier:></option>
+	<option value="dernier"[ selected="(#GET{type_resultat,defaut}|=={dernier}|?{selected})"]><:jeux:resultat2_dernier:></option>
+	<option value="meilleur"[ selected="(#GET{type_resultat,defaut}|=={meilleur}|?{selected})"]><:jeux:resultat2_meilleur:></option>
+	<option value="meilleurs"[ selected="(#GET{type_resultat,defaut}|=={meilleurs}|?{selected})"]><:jeux:resultat2_meilleurs:></option>
+	<option value="tous"[ selected="(#GET{type_resultat,defaut}|=={tous}|?{selected})"]><:jeux:resultat2_tous:></option>
+	<option value="aucun"[ selected="(#GET{type_resultat,defaut}|=={aucun}|?{selected})"]><:jeux:resultat2_aucun:></option>
+</select>
+</label>

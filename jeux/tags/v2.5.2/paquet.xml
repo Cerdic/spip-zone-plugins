@@ -1,0 +1,32 @@
+<paquet
+	prefix="jeux"
+	categorie="divers"
+	version="2.5.2"
+	etat="test"
+	compatibilite="[2.0.0;3.0.*]"
+	logo="img/jeux-48.png"
+	schema="0.17"
+	documentation="https://contrib.spip.net/Des-jeux-dans-vos-articles"
+>	
+	<nom>Des jeux dans vos articles</nom>
+	<auteur>Patrice VANNEUFVILLE, Ma&#239;eul Rouquette</auteur>
+	<licence>GNU/LGPL - (c) 2006-2012</licence>
+
+	<chemin path='' />
+	<pipeline nom="insert_head" inclure="jeux_pipelines.php" />
+	<pipeline nom="pre_propre" inclure="jeux_pipelines.php" />
+	<pipeline nom="post_propre" inclure="jeux_pipelines.php" />
+	<pipeline nom="header_prive" inclure="jeux_pipelines.php" />
+	<pipeline nom="ajouter_boutons" inclure="jeux_boutons.php" />
+	<pipeline nom="taches_generales_cron" inclure="jeux_pipelines.php" />
+	<pipeline nom="declarer_tables_objets_surnoms" inclure="jeux_pipelines.php" />
+	<pipeline nom="affichage_final" inclure="jeux_pipelines.php" />
+
+	<menu nom="jeux" titre="jeux:jeux" parent="menu_edition" icone="img/jeu-16.png" action ="jeux_tous" parametres="" />
+	<menu nom="jeu_creer" titre="jeux:nouveau_jeu" parent="outils_rapides" icone="img/jeu-16.png" action ="jeux_edit" parametres="nouveau=oui" />
+
+<!--
+	<install>base/jeux_upgrade.php</install>
+	<utilise id="cfg" version="[1.10.5;]" />
+-->
+</paquet>
