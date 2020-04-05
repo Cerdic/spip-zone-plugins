@@ -1,0 +1,12 @@
+#CACHE{7*24*3600}
+#HTTP_HEADER{Content-Type: text/javascript; charset=#CHARSET}
+#SET{langues,#EVAL{$GLOBALS["meta"]["langues_multilingue"]}}
+var multilang_lang = {
+	champs_readonly : '<:multilang:message_champs_readonly|filtrer_entites|texte_script:>',
+	lien_desactiver : '<:multilang:lien_desactiver|filtrer_entites|texte_script:>',
+	<BOUCLE_langues(POUR){tableau #GET{langues}|explode{','}}>[(#SET{lang,[(#VALEUR|traduire_nom_langue)]})][
+	title_lien_multi_(#VALEUR) : '<:multilang:lien_multi_title{lang=#GET{lang}}|filtrer_entites|texte_script:>',][
+	title_lien_multi_sans_(#VALEUR) : '<:multilang:lien_multi_title_sans{lang=#GET{lang}}|filtrer_entites|texte_script:>',
+	]</BOUCLE_langues>
+	numero : '<:multilang:champ_numero|html2unicode|unicode2charset:>'
+};
