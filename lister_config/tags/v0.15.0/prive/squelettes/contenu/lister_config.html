@@ -1,0 +1,43 @@
+[(#AUTORISER{configurer,_plugins}|sinon_interdire_acces)]
+
+<div class="nettoyeur"> </div>
+<h1 class="grostitre"><:lister_config:titre_page:></h1>
+<p><:lister_config:description_page:></p>
+<div class="nettoyeur"></div>
+
+[(#SET{actif, #ARRAY})]
+<BOUCLE_actif(PLUGINS paquets) {tout} {actif=='oui'}>[(#SET{chemin, configurer_#PREFIXE|strtolower})]
+[(#GET{chemin}|tester_url_ecrire|oui)[(#SET{actif, #GET{actif}|push{#PREFIXE}})] ]
+</BOUCLE_actif>
+
+<B_config>
+<div class="liste-plugins">
+	<div class="liste plugins" id="liste_plugins">
+		<ul class="liste-items">
+			<BOUCLE_config(PAQUETS plugins) {tout} {par paquets.prefixe} {prefixe IN #GET{actif}} {fusion paquets.prefixe}>
+			<li class="item" id="[(#PREFIXE|strtolower)]">
+				<div class="resume">
+					[<h3 class="nom">(#NOM)</h3>]
+					<div class="short">
+						[(#GET{erreur}|ltrim{'-'}|sinon{#SLOGAN|extraire_multi|typo|sinon{#DESCRIPTION|extraire_multi|propre}|PtoBR|explode{'<br />'}|reset|couper{80}})]
+					</div>
+					[(#LOGO|oui)[
+					(#LOGO|trim|match{^http}|oui)
+					<div class="icon">
+						[(#CONSTANTE|constant|concat{#LOGO}|image_reduire{32})]
+					</div>][(#LOGO|trim|match{^http}|non)
+					<div class="icon">
+						[(#CONSTANTE|constant|concat{#SRC_ARCHIVE/#LOGO}|image_reduire{32})]
+					</div>]
+					]
+				#SET{prefixe,#PREFIXE|strtolower}
+					[(#CHEMIN_IMAGE{ok-16.png}|balise_img{<:svp:plugin_info_actif:>,picto_actif}|inserer_attribut{title,<:svp:plugin_info_actif:>})]
+					[(#INCLURE{fond=prive/squelettes/inclure/cfg,script=configurer_#GET{prefixe},nom=#NOM})]
+					[(#INCLURE{fond=prive/squelettes/inclure/page_link,prefixe=#GET{prefixe},nom=#NOM})]
+				</div>
+			</li>
+			</BOUCLE_config>
+		</ul>
+	</div>
+</div>
+</B_config>
