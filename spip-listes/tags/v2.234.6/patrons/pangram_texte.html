@@ -1,0 +1,58 @@
+#CACHE{1}
+[(#REM)
+<!--
+* Squelette pour spip-listes    
+* pangram_texte.html (CP-20081124)
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+*
+* Precautions:                             
+* - ne pas envoyer des gabarits de plus de 10Ko
+* - ne pas placer de balises html <html><body> ni de fermeture </body></html>
+* ils seront ajoutes automatiquement a l'envoi du mail 
+* - mettre les style  CSS directement dans les balises pour etre sur qu'ils seront interpretes (meme par les webmails)
+* - les urls et liens images seront automatiquement converties en absolues
+*  ex. rubrique5.html -> http://www.monsite.org/rubrique5.html
+*
+*
+* Exemple d'un patron _texte.
+* Si la version texte seul du courrier généré ne vous convient pas,
+* placez une copie de ce patron en le renommant *_texte.html
+* Par exemple, 
+*     la version HTML de ce patron est le fichier 'pangram_francais.html'
+*     la version texte seul est le fichier 'pangram_francais_texte.html'
+* 
+-->
+]
+	
+[Sujet : (#SUJET)
+
+]Pangram français
+--------------------------------------------------
+	
+[Nom du site: [(#NOM_SITE_SPIP|textebrut)] (#URL_SITE_SPIP)
+]
+[Rubrique sélectionnée: ID#(#ID_RUBRIQUE)
+]
+[Mot-clé sélectionné: ID#(#ID_MOT)
+]
+[A partir du patron: (#PATRON)
+]
+[A partir de la date: (#DATE)
+]
+[Objet du message: (#SUJET|textebrut)
+]
+
+	
+	
+	
+Le juge blond
+==================================================
+
+[Introduction: (#MESSAGE|textebrut)
+]
+	
+Portez ce vieux whisky au juge blond qui fume sur son île intérieure, à côté de l'alcôve ovoïde, où les bûches se consument dans l'âtre, ce qui lui permet de penser à la cœnogenèse de l'être dont il est question dans la cause ambiguë entendue à Moÿ, dans un capharnaüm qui, pense-t-il, diminue çà et là la qualité de son œuvre.
+
+Diacritiques : À Â Ä Ç É È Ê Ë Î Ï Ô Ö Ù Û Ü Ÿ Æ Œ à â ä ç é è ê ë î ï ô ö ù û ü ÿ æ œ

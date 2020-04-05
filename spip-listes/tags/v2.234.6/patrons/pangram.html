@@ -1,0 +1,68 @@
+#CACHE{1}
+[(#REM)
+<!--
+* Squelette pour spip-listes    
+* pangram_francais.html (CP-20071011 paladin@quesaco.org)
+// $LastChangedRevision: 15901 $
+// $LastChangedBy: paladin@quesaco.org $
+// $LastChangedDate: 2007-10-10 19:35:58 +0200 (mer., 10 oct. 2007) $
+*
+* Precautions:                             
+* - ne pas envoyer des gabarits de plus de 10Ko
+* - ne pas placer de balises html <html><body> ni de fermeture </body></html>
+* ils seront ajoutes automatiquement a l'envoi du mail 
+* - mettre les style  CSS directement dans les balises pour etre sur qu'ils seront interpretes (meme par les webmails)
+* - les urls et liens images seront automatiquement converties en absolues
+*  ex. rubrique5.html -> http://www.monsite.org/rubrique5.html
+*
+-->
+]
+
+	<div class="body" 
+		style="background: #fff;color: #ccc;font-family:'Trebuchet MS', Tahoma, Arial, Verdana,sans-serif;font-size:100%;text-align: left;">
+	<div class="conteneur" style="width: 500px;background: #fff;color: #000;text-align: left;margin: 0 auto;padding: 15px;">
+	
+	<h1 style="font-size: 1.2em;border-bottom: 1px solid #666;">#SUJET
+		<small style='display:block'>Pangram fran&ccedil;ais</small></h1>  
+	
+	<ul>
+		<li>Nom du site: [(#NOM_SITE_SPIP|textebrut)] (#URL_SITE_SPIP)</li>
+		[<li>Rubrique s&eacute;lectionn&eacute;e: ID#(#ID_RUBRIQUE)</li>
+		]
+		[<li>Mot-cl&eacute; s&eacute;lectionn&eacute;: ID#(#ID_MOT)</li>
+		]
+		[<li>A partir du patron: (#PATRON)</li>
+		]
+		[<li>A partir de la date: (#DATE|affdate)</li>
+		]
+		[<li>Objet du message: (#SUJET)</li>
+		]
+	</ul>
+	
+	
+	
+	<h2 class="titre" style="background: #EEE;border: 1px solid #CCC;padding: 0.5em;margin-bottom: 1em;font-weight: bold;text-align: center;">Le juge blond</h2>  
+	
+	[<p style='font-size: 120%;font-style: italic;line-height: 1.4em;text-align: center;'>Introduction: (#MESSAGE)</p>
+	]
+	
+	<div style="margin-top: 5px;margin-bottom: 2em;border: 1px solid #ccc;padding: 0.9em;font-size: 0.82em;line-height: 1.4em;" >
+	
+	<p>Portez ce vieux whisky au juge blond qui fume sur son &icirc;le int&eacute;rieure, 
+&agrave; c&ocirc;t&eacute; de l'alc&ocirc;ve ovo&iuml;de, o&ugrave; les b&ucirc;ches 
+se consument dans l'&acirc;tre, ce qui lui permet de penser &agrave; la c&#339;nogen&egrave;se 
+de l'&ecirc;tre dont il est question dans la cause ambigu&euml; entendue &agrave; 
+Mo&yuml;, dans un capharna&uuml;m qui, pense-t-il, diminue &ccedil;&agrave; et 
+l&agrave; la qualit&eacute; de son &#339;uvre.</p>
+	
+	<p>Diacritiques : 
+		À Â Ä Ç É È Ê Ë Î Ï Ô Ö Ù Û Ü Ÿ Æ Œ à â ä ç é è ê ë î ï ô ö ù û ü ÿ æ œ
+	</p>
+	
+	<div class="extra" style="color: #666;"><a href="#URL_PAGE{sommaire}"><:suite:></a></div>
+	
+	</div>
+	
+	
+	</div>
+	</div>

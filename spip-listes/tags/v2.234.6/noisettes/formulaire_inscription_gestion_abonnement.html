@@ -1,0 +1,18 @@
+[(#SET{titre_noisette, #ENV{titre_noisette}|sinon{spiplistes:lettres_information}})]
+[(#SET{titre,[(#GET{titre_noisette}|=={titre_perso}|?{[(#ENV**{titre_noisette_perso}|propre)],[(#GET{titre_noisette}|_T)]})]})]
+[(#SET{niveau_titre, #ENV{niveau_titre}|sinon{h2}})]
+
+[(#ENV{afficher_titre_noisette}|oui)[<[(#GET{niveau_titre})] class="#GET{niveau_titre}">(#GET{titre})</#GET{niveau_titre}>]]
+[<!--(#REM) si un cookie est passé OU si un auteur est connecté
+		on affiche le formulaire de gestion d'abonnement -->]
+
+[(#ENV{d}|oui|ou{#SESSION{id_auteur}|oui})
+	#FORMULAIRE_GESTION_ABONNEMENT]
+
+[<!--(#REM) sinon formulaire d'inscription -->]
+
+[(#ENV{d}|non|et{#SESSION{id_auteur}|non})
+	<div class="message-formulaire">
+		<p><:spiplistes:abonnement_explication:></p>
+	</div>
+	#FORMULAIRE_SPIP_LISTES_INSCRIPTION]

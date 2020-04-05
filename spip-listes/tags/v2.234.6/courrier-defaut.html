@@ -1,0 +1,61 @@
+#CACHE{86400}
+<BOUCLE_principale(COURRIERS){id_courrier}>
+[(#REM)
+// SPIP-Listes-V :: $Id: courrier.html,v 1.1 2007/09/05 20:50:38 cpaulus Exp $
+
+// $LastChangedRevision: 27755 $
+// $LastChangedBy: paladin@quesaco.org $
+// $LastChangedDate: 2009-04-09 16:07:33 +0200 (Thu, 09 Apr 2009) $
+
+]
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION{150}|attribut_html)" />]
+<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_courrier">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Contenu principal : contenu du courrier ]
+    <div class="hfeed" id="conteneur">
+    <div class="hentry" id="contenu">
+    
+        [(#REM) Fil d'Ariane ]
+        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</div>
+
+        <div class="cartouche">
+            <div class="surlignable">
+				<h1 class="#EDIT{titre} entry-title">#TITRE</h1>
+            </div>
+        </div>
+		
+        <div class="surlignable">
+			[<div class="#EDIT{texte} texte entry-content">(#TEXTE)</div>]
+		</div>
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+
+    [(#REM) Menu de navigation laterale ]
+    <div id="navigation">
+
+        [(#REM) Menu de navigation par rubriques ]
+        <INCLURE{fond=inc-rubriques}{id_rubrique}>
+	
+	#FORMULAIRE_RECHERCHE
+
+    </div><!--#navigation-->
+    
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!--#page-->
+</body>
+</html>
+</BOUCLE_principale>

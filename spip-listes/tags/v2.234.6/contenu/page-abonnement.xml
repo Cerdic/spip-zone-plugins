@@ -1,0 +1,5 @@
+<page>
+	<nom><:spiplistes:nom_page_abonnement:></nom>
+	<description><:spiplistes:description_page_abonnement:></description>
+	<icon>img_pack/abonner-24.png</icon>
+</page>

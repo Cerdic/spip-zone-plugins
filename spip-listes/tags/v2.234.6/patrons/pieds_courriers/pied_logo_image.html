@@ -1,0 +1,60 @@
+#CACHE{1}
+#HTTP_HEADER{Content-Type: text/html}
+[<!--(#REM)
+
+	* Squelette pour spip-listes    
+	* pied_logo_spip.html
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+	
+	* Le pied de courrier est applique a l'envoi de votre courrier.
+	
+	* - ne pas envoyer des gabarits de plus de 10Ko
+	* - ne pas placer de balises html <html><body> ni de fermeture </body></html>
+	* ils seront ajoutes automatiquement a l'envoi du mail 
+	* - mettre les style  CSS directement dans les balises pour etre sur qu'ils seront interpretes (meme par les webmails)
+	* - les urls et liens images seront automatiquement converties en absolues
+	*  ex. rubrique5.html -> http://www.monsite.org/rubrique5.html
+
+	Pour personnaliser votre pied de courrier, 2 solutions :
+	- soit creer un squelette et le placer dans le repertoire 'patrons/pieds_courriers/' puis le selectionner dans la page de configuration de SPIP-Listes
+	- soit le placer dans vos squelettes. Dans ce cas, creez un repertoire 'patrons/pieds_courriers/ et ajoutez-y votre squelette de pied en le nommant 'piedmail.html'
+	
+	Le pied de mail est calcule' a la creation de la liste.
+	Il est enregistre' dans le champ 'pied_page' de la table 'spip_listes'.
+	
+	Si vous voulez changer le pied de courrier d'une liste existante
+	, soit il faut remplacer la valeur de ce champ (c'est du code HTML)
+	, soit vous recreez une liste en reprenant les elements de la precedente. 
+
+	Illustration d'insertion d'une image dans un squelette.
+	Pour l'instant limitée au format PNG
+	@see: http://actuel.fr.selfhtml.org/articles/graphisme/inline-images/index.htm
+	
+	A noter: les images incrustées (in-line) sont souvent ignorées
+	(src supprimé) des webmail (gmail, yahoo, ...)
+	Les background CSS sont également ignorés de la plupart
+	des outils de mail (MUA).
+
+-->]<div style='text-align:left; font-size:11px;width:100%;height:36px;margin:0;padding:2px;
+	background-color:#ccf;'>
+<a href="https://www.spip.net/">
+<img
+	src="data:image/png;base64,
+	iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+bWFnZVJlYWR5ccllPAAAAX1JREFUeNrsVstRwzAQdYACdISbOjDpQCWoBB85kg5MBS5BUIGhAtOB
+00FCBUoHynpmM6MRu7FWukF25h3s2dX+P01zo/9OG+KfAliAjv7tAd+AU4GOZ5Rf3jWAz2vMPSAw
+8IABH5LQBJhR1nNMCplCBjx6lUupUx3FNGQqj43IjYRG/lj+EDuhhcovcJkGuERuSJ0whQb4DOVq
+5Y3uoaKDFFPxi0MtRvZamt4RxSkIieIpU2akirgjGOeV9IyRci9Im+ZCkhrRM0UUt5NEOduCacu4
+qFUUE50D8s8C5TOl8D75XkbtF+ADlW/xnyUK6AnwIijaR8APjmURUePZCIouhZUaMDLVH4Thv6Rr
+ih+/K+j3k3AXvGEqt9QmLBlEe8EeOEbd1GB9tbUp8IIUeAx5X3O0vBIPK2H/By5tOTVAXTB27bLJ
+3B2iqyYdRFYYAVNjABVyJ5wFuvaA1cLRm0bMcZtQSl2FIb/OuU1lWgx61AqLbFeyE270N+kswAAr
+MEtL44kj1AAAAABJRU5ErkJggg=="
+	width="32"
+	height="32"
+	/>
+</a> - 
+<a href="https://contrib.spip.net/SPIP-Listes">
+<:spiplistes:courrier_realise_avec_spiplistes:></a>
+</div>

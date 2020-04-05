@@ -1,0 +1,8 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type: text/html}
+[(#ENV{patron_html}|?{' '})
+<INCLURE{fond=#ENV{patron_html}}{patron_html}{format}{titre}{date}{id_rubrique}{id_mot}{ids_abos}{patron}{sujet}{message}{date_redac}{env}>]
+[(#ENV{patron_texte}|?{' '})
+<INCLURE{fond=#ENV{patron_texte}}{patron_texte}{format}{titre}{date}{id_rubrique}{id_mot}{ids_abos}{patron}{sujet}{message}{date_redac}{env}>]
+[(#ENV{id_courier}|?{' '})
+<INCLURE{fond=#ENV{courrier}}{env}>]
