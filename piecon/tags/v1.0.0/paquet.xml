@@ -1,0 +1,22 @@
+<paquet
+	prefix="piecon"
+	categorie="outil"
+	version="1.0.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	documentation="https://www.mediaspip.net/spip.php?article295"
+	logo="prive/themes/spip/images/piecon.png"
+>	
+
+	<nom>Piecon</nom>
+
+	<auteur lien="https://github.com/lipka/">lipka</auteur>
+	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
+
+	<copyright>2012</copyright>
+
+	<licence lien="http://opensource.org/licenses/MIT">MIT</licence>
+
+	<pipeline nom="jquery_plugins" inclure="piecon_pipelines.php" />
+	<pipeline nom="insert_head" inclure="piecon_pipelines.php" />
+</paquet>

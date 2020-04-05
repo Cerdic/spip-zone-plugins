@@ -1,0 +1,37 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<li class="editer editer_color[ (#ENV**{erreurs}|table_valeur{color}|oui)erreur]">
+			<label for="color"><:piecon:label_color:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{color})</span>]
+			<input type="text" class="text palette" name="color" id="color" value="#ENV{color}" />
+		</li>
+		<li class="editer editer_background[ (#ENV**{erreurs}|table_valeur{background}|oui)erreur]">
+			<label for="background"><:piecon:label_background:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{background})</span>]
+			<input type="text" class="text palette" name="background" id="background" value="#ENV{background}" />
+		</li>
+		<li class="editer editer_shadow[ (#ENV**{erreurs}|table_valeur{shadow}|oui)erreur]">
+			<label for="shadow"><:piecon:label_shadow:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{shadow})</span>]
+			<input type="text" class="text palette" name="shadow" id="shadow" value="#ENV{shadow}" />
+		</li>
+		<li class="editer editer_fallback[ (#ENV**{erreurs}|table_valeur{fallback}|oui)erreur]">
+			<label for="fallback"><:piecon:label_fallback:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fallback})</span>]
+			<p class="explication"><:piecon:explication_fallback:></p>
+			<select name="fallback" id="fallback">
+				<option value="false"[(#ENV**{fallback}|=={false}|oui) selected="selected"]><:piecon:option_fallback_false:></option>
+				<option value="true"[(#ENV**{fallback}|=={true}|oui) selected="selected"]><:piecon:option_fallback_true:></option>
+				<option value="force"[(#ENV**{fallback}|=={force}|oui) selected="selected"]><:piecon:option_fallback_force:></option>
+			</select>
+		</li>
+	</ul>
+	<p class="boutons">
+		<input type="submit" class="submit" value="<:bouton_valider:>" />
+	</p>
+</div></form>
+</div>
