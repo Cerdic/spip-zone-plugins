@@ -1,0 +1,1 @@
+- utiliser la fonction sale() du plugin https://zone.spip.org/trac/spip-zone/browser/_plugins_/sale/sale_fonctions.php

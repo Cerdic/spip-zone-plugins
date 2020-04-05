@@ -1,0 +1,35 @@
+<paquet
+	prefix="rss_commits"
+	categorie="divers"
+	version="0.6.8"
+	etat="dev"
+	compatibilite="[3.0.8;3.2.*]"
+	logo="prive/themes/spip/images/commits-64.png"
+	documentation=""
+	schema="1.0.0"
+>
+
+	<nom>Commits de projet</nom>
+
+	<auteur>Teddy Payet</auteur>
+	<credit lien="https://www.iconfinder.com/icons/282472/branch_git_svn_icon">IcoCenter (Logo, icones)</credit>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="projets" compatibilite="[1.0.10;]" />
+	<necessite nom="cextras" compatibilite="[3.0.5;[" />
+
+	<pipeline nom="autoriser" inclure="rss_commits_autorisations.php" />
+
+	<pipeline nom="affiche_auteurs_interventions" inclure="rss_commits_pipelines.php" />
+	<pipeline nom="afficher_fiche_objet" inclure="rss_commits_pipelines.php" />
+	<pipeline nom="boite_infos" inclure="rss_commits_pipelines.php" />
+	<pipeline nom="header_prive" inclure="rss_commits_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="rss_commits_pipelines.php" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/rss_commits.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/rss_commits.php" />
+	<pipeline nom="declarer_champs_extras" inclure="base/projets_depots.php" />
+
+	<menu nom="commits" titre="commit:titre_commits" parent="menu_edition" icone="images/commit-16.png" action="commits" />
+</paquet>

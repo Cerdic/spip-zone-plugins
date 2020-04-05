@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_commits_selectionnes>
+	<ul>
+	<BOUCLE_commits_selectionnes(COMMITS){id_commit IN #GET*{valeur}}
+		{par num titre, titre}{tout}>
+		<li class="choix">#TITRE (#ID_COMMIT)</li>
+	</BOUCLE_commits_selectionnes>
+	</ul>
+	</B_commits_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_commits_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_commit_selectionne(COMMITS){id_commit=#ENV{valeur}}
+		{par num titre, titre}{tout}>
+	  	<p>#TITRE (#ID_COMMIT)</p>
+	</BOUCLE_commit_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_commit_selectionne>
+<//B_test_multiple>
