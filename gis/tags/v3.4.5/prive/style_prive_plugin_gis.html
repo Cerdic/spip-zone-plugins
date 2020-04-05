@@ -1,0 +1,20 @@
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+/* liste des points exec=gis_tous */
+
+.points .liste_items .titre { font-size: small; }
+.points .liste_items .titre .numero { float: right; }
+.points .liste_items .description,
+.points .liste_items .geo { margin: 5px 0 0; color: #666; }
+.points .liste_items .geo abbr { border: 0; }
+.points .liste_items p.actions { font-size: 0.9em; margin: 5px 0 0; }
+
+/* Avec OpenLayer, le menu deroulant de spip passe dessous la carte... */
+.olMap .olMapViewport {z-index:0;}

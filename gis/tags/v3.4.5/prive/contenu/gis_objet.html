@@ -1,0 +1,6 @@
+[(#SET{titre, #VAL{gis:info_geolocalisation}|_T})]
+[(#BOITE_OUVRIR{#CHEMIN_IMAGE{gis-24.png}|balise_img{'',cadre-icone}|concat{#GET{titre}}, 'simple'})]
+<div id="editer_gis_[(#ENV{objet})]_[(#ENV{id_objet})]" class="ajax-action nom_action">
+	[(#INCLURE{fond=prive/inclure/gis_objet_formulaires,env,ajax})]
+</div>
+#BOITE_FERMER
