@@ -1,0 +1,69 @@
+[(#SET{legendes,[(#ARRAY{0,<:tickets:cfg_lgd_autorisation_ecrire:>,1,<:tickets:cfg_lgd_autorisation_assigner:>,2,<:tickets:cfg_lgd_autorisation_modifier:>,3,<:tickets:cfg_lgd_autorisation_commenter:>})]})]
+#SET{prefixes,#ARRAY{0,ecrire_,1,assigner_,2,modifier_,3,commenter_}}
+<B_bloc_autorisation>
+<ul>
+	<BOUCLE_bloc_autorisation(POUR){tableau #GET{legendes}}>
+	#SET{prefixe, #GET{prefixes}|table_valeur{#CLE}}
+	<li class="fieldset">
+		<fieldset>
+			<h3 class="legend">#VALEUR</h3>
+			<ul>
+			[(#REM) <!-- Choix de la methode d'autorisation --> ]
+				[(#SAISIE{radio, [(#GET{prefixe})]type,
+					label=<:tickets:cfg_lbl_type_autorisation:>,
+					explication=<:tickets:cfg_inf_type_autorisation:>,
+					datas=#ARRAY{
+						webmestre,<:tickets:cfg_lbl_autorisation_webmestre:>,
+						par_statut,<:tickets:cfg_lbl_autorisation_statuts:>,
+						par_auteur,<:tickets:cfg_lbl_autorisation_auteurs:>},
+					defaut=par_statut})]
+			</ul>
+			[(#REM) <!-- Methode par statut d'auteurs (choix multiple) --> ]
+			<ul id="[(#GET{prefixe})]bloc_par_statut" class="[(#GET{prefixe})]bloc[(#ENV{[(#GET{prefixe})type]}|non) visible]">
+				[(#CONFIG{[(#GET{prefixe})type]}|non)
+					[(#GET{prefixe}|in_array{#ARRAY{0,ecrire_,1,assigner_,2,modifier_}}|oui)
+						#SET{defaut,#ARRAY{0,0minirezo}}]
+					[(#GET{prefixe}|in_array{#ARRAY{0,commenter_}}|oui)
+						#SET{defaut,#ARRAY{0,0minirezo,1,1comite}}]
+				]
+
+				[(#SAISIE{statuts_auteurs,[(#GET{prefixe})]statuts,
+					label=<:tickets:cfg_lbl_statuts_auteurs:>,
+					afficher_tous=oui,
+					defaut=#GET{defaut},
+					multiple=oui})]
+			</ul>
+			[(#REM) <!-- Methode par id d'auteurs (choix multiple) --> ]
+			<ul id="[(#GET{prefixe})]bloc_par_auteur" class="[(#GET{prefixe})]bloc">
+				[(#SAISIE{auteurs,[(#GET{prefixe})]auteurs,
+					label=<:tickets:cfg_lbl_liste_auteurs:>,
+					multiple=oui,
+					option_statut=oui})]
+			</ul>
+		</fieldset>
+		<script type="text/javascript">
+		//<![CDATA[
+			jQuery(document).ready(function() {
+				// on cache tous les blocs du meme prefixe
+				jQuery(".[(#GET{prefixe})]bloc").not('.visible').hide();
+				//on recupere la valeur de celui qui est deja selectionne
+				var checked = jQuery("input[name='[(#GET{prefixe})]type']:checked").val();
+				// pour l'afficher
+				jQuery("#[(#GET{prefixe})]bloc_"+checked).show();
+				// si une checkbox change
+				jQuery("input[name='[(#GET{prefixe})]type']").change(function() {
+					var inputval = $(this).val();
+					// on cache tous les blocs du meme prefixe
+					jQuery(".[(#GET{prefixe})]bloc").fadeOut('slow',function(){
+						// pour afficher celui qui correspond a la checkbox selectionnee
+						jQuery("#[(#GET{prefixe})]bloc_"+inputval).fadeIn();
+					});
+					jQuery(this).blur();
+				});
+			});
+		//]]>
+		</script>
+	</li>
+	</BOUCLE_bloc_autorisation>
+</ul>
+</B_bloc_autorisation>
