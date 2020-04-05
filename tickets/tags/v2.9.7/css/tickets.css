@@ -1,0 +1,56 @@
+/* Pages publiques des tickets */
+.ticket .cartouche{overflow:auto;}
+.ticket .cartouche a {float:right; margin-top:3px;}
+
+#contenu .ticket h3 {margin:2em 0 .3em;}
+.ticket .infos {float:right; max-width:200px; margin:2em 0 1em 1em; padding: 0.5em;  background:#fafafa; border:1px solid #eee;
+	border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px;}
+.ticket .infos .formulaire_spip {margin:0; padding:0;}
+table.tickets { margin:0 0 .5em 0;} 
+.ticket dl { margin:0 0 .5em 0;} 
+.ticket dt {float: left; clear: left; width: 80px; text-align: right;} 
+.ticket dd {margin: 0 0 0 90px; padding: 0 .2em .2em 0;}
+
+.ticket_commentaires {clear:both;}
+
+.formulaire_editer_ticket input.text {width:98%;}
+.formulaire_editer_statut_ticket li.editer_statut .explication {color:#D06C07;}
+li.editer_forum_ticket .explication {display:none;}
+
+/* start - table */
+table.tickets,
+.ticket table.spip {margin: 15px 0px; width:100%; text-align:left; border:1px solid #ccc; border-spacing:2px; border-collapse:separate !important;}
+table.tickets th, table.tickets.spip th{background: white; color: #666; padding:3px; text-align: left; border:none;}
+table.ticket  th.tri,
+table.tickets.spip th.tri {background:#eee;padding:3px; border:none;}
+table.ticket  th a,
+table.tickets.spip th a {display:block;}
+table.ticket  tr,
+table.tickets.spip tr{color: #5b5b5b; background:#f3f3f3;}
+table.ticket  td,
+table.tickets.spip td {padding:3px; border:none;}
+table.ticket  tr.even,
+table.tickets.spip tr.row_even {background:#eee;}
+table.ticket  tr:hover {background:#EAF1F5;}
+
+table.progress{
+	border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    float: left;
+    margin: 1px 6px 1px 0;
+    text-align: center;
+}
+
+table.progress td{
+	padding:0;
+	height:1.2em;
+}
+
+table.progress td.todo{
+	background-color:#eee;
+}
+
+table.progress td.closed{
+	background-color:#AECCD7;
+}

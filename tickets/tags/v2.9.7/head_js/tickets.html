@@ -1,0 +1,23 @@
+<script type="text/javascript">
+	var tickets_trier = function(){
+		jQuery('.formulaire_trier_tickets').hide();
+		if(jQuery('.formulaire_trier_tickets').prev('.filtrer_tickets').size() == 0)
+			jQuery('.formulaire_trier_tickets').before('<div class="actions filtrer_tickets"><a href="#" class="afficher_filtres"><:tickets:lien_filtrer:><\/div>');
+		jQuery('.afficher_filtres').unbind('click').click(function(){
+			var form = jQuery(this).parent().next('.formulaire_trier_tickets');
+			if(form.is(':hidden')){
+				jQuery(this).removeClass('off').addClass('on');
+				form.slideDown('slow');
+			}
+			else{
+				form.slideUp('slow');
+				jQuery(this).removeClass('on').addClass('off');
+			}
+			return false;
+		});
+	}
+	jQuery(document).ready(function(){
+		tickets_trier();
+		onAjaxLoad(tickets_trier);
+	});
+</script>

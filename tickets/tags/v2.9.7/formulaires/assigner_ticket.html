@@ -1,0 +1,22 @@
+[(#ENV{editable}|oui)
+<div class="formulaire_spip formulaire_editer formulaire_editer_assigner_ticket ajax">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="editer_assigner editer">
+				<label for="id_assigne"><:tickets:champ_assigner:></label>
+				<select name="id_assigne" id="id_assigne" class="text" onchange="jQuery('#validation_bouton_assigner').slideDown();">
+					<option value="0" [(#ENV{id_assigne}|=={0}|?{" selected='selected'",""})]><:tickets:no_assignation:></option>
+					[(#ENV{id_assigne}|tickets_select_assignation)]
+				</select>
+			</li>
+		</ul>
+		<p class='boutons' id="validation_bouton_assigner" style="display: none;">
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+		</p>
+	</div></form>
+</div>]

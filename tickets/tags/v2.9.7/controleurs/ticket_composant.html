@@ -1,0 +1,17 @@
+[(#REM)
+
+	Controleur pour le crayon 'ticket_composant'
+	
+]
+#CACHE{0}
+<BOUCLE_t(TICKETS){id_ticket}{statut==.*}>
+[(#SET{valeurs,[(#VAL{composants}|tickets_champ_optionnel_actif|array_combine{[(#VAL{composants}|tickets_champ_optionnel_actif)]})]})]
+<B_composants>
+<select class="crayon-active" name="#ENV{name_composant}"
+	style="width:#ENV{largeur}px;#ENV{style}" >
+	<BOUCLE_composants(DATA){source table, #GET{valeurs}}>>
+		<option value="#VALEUR"[(#COMPOSANT**|=={#VALEUR}|?{selected})]>[(#VALEUR|typo)]</option>
+	</BOUCLE_composants>
+</select>
+</B_composants>
+</BOUCLE_t>

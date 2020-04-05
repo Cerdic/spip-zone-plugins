@@ -1,0 +1,8 @@
+[(#REM) Affiche les listes des tickets ouverts classes par tracker:
+	- probleme
+	- tache
+	- amelioration
+]
+<BOUCLE_trackers(DATA){source table, #VAL{1}|tickets_liste_tracker_nom_long}>
+	<INCLURE{fond=prive/squelettes/inclure/inc_liste_detaillee}{ajax}{env}{titre=#VALEUR}{statut=ouvert}{tracker=#CLE}{bloc=_bloc#CLE}>
+</BOUCLE_trackers>

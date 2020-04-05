@@ -1,0 +1,41 @@
+[(#SET{defaut_tri,#ARRAY{
+	date,#ENV{date_sens,-1},
+	titre,1,
+	num titre,1,
+	id_ticket,1
+}})
+]<B_liste_ticket>
+#ANCRE_PAGINATION
+<div class="liste-objets tickets">
+<table class='spip liste'>
+[(#ENV{where}|oui)[(#SET{titre,<:tickets:info_liste_tickets:>})]]
+[<caption><strong class="caption">(#GET{titre,#ENV*{titre,<:tickets:info_liste_tickets:>}}) ([(#GRAND_TOTAL)])</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:tickest:texte_ticket_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='auteur' scope='col'><:auteur:></th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_ticket,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_ticket(TICKETS){id_auteur?}{where?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'>[<img src="(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})"[ alt="(#STATUT|tickets_texte_statut)"] />]</td>
+			<td class='titre'><a href="[(#ID_TICKET|generer_url_entite{ticket})]">[(#TITRE|supprimer_numero)]</a></td>
+			<td class='auteur'><BOUCLE_auteurs(AUTEURS){id_auteur}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
+			<td class='date'>[(#DATE|affdate_jourcourt)]</td>
+			<td class='id'>[(#AUTORISER{modifier,ticket,#ID_TICKET}|?{
+				<a href="[(#URL_ECRIRE{ticket_edit,id_ticket=#ID_TICKET})]">#ID_TICKET</a>,
+				#ID_TICKET
+			})]</td>
+		</tr>
+	</BOUCLE_liste_ticket>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_ticket>[
+<div class="liste-objets tickets caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_ticket>
