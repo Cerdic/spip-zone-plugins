@@ -1,0 +1,81 @@
+<div class="formulaire_spip formulaire_envoi_malettre">
+
+[<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</div>]
+[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</div>]
+
+[(#EDITABLE|oui)
+  <form action="#ENV{action}" method="post"><div>
+  	#ACTION_FORMULAIRE{#ENV{action}}
+  	<ul style="padding:5px;">
+       <!-- lang -->
+  	  [(#SAISIE{hidden,lang_select,valeur_forcee=#LANG})]
+      
+      <!-- titre -->
+  	  [(#SAISIE{input,lettre_title,size=25,maxlength=255,label=<strong><:malettre:compose_sujet:></strong>})]
+  
+      <!-- expediteur -->     
+      #SET{expedi,#ARRAY}
+      [(#CONFIG{malettre/expediteur_email1}|oui) [(#SET{expedi,#GET{expedi}|array_merge{#ARRAY{i1,  #CONFIG{malettre/expediteur_nom1}  &nbsp;&lt;#CONFIG{malettre/expediteur_email1}&gt;  }}})]      ] 
+      [(#CONFIG{malettre/expediteur_email2}|oui) [(#SET{expedi,#GET{expedi}|array_merge{#ARRAY{i2,  #CONFIG{malettre/expediteur_nom2}  &nbsp;&lt;#CONFIG{malettre/expediteur_email2}&gt;  }}})]      ] 
+      [(#CONFIG{malettre/expediteur_email3}|oui) [(#SET{expedi,#GET{expedi}|array_merge{#ARRAY{i3', #CONFIG{malettre/expediteur_nom3}  &nbsp;&lt;#CONFIG{malettre/expediteur_email3}&gt;  }}})]      ]
+      [(#CONFIG{malettre/expediteur_email4}|oui) [(#SET{expedi,#GET{expedi}|array_merge{#ARRAY{i4,  #CONFIG{malettre/expediteur_nom4}  &nbsp;&lt;#CONFIG{malettre/expediteur_email4}&gt;  }}})]      ] 
+      [(#CONFIG{malettre/expediteur_email5}|oui) [(#SET{expedi,#GET{expedi}|array_merge{#ARRAY{i5,  #CONFIG{malettre/expediteur_nom5}  &nbsp;&lt;#CONFIG{malettre/expediteur_email5}&gt;  }}})]      ] 
+      [(#CONFIG{malettre/expediteur_email6}|oui) [(#SET{expedi,#GET{expedi}|array_merge{#ARRAY{i6', #CONFIG{malettre/expediteur_nom6}  &nbsp;&lt;#CONFIG{malettre/expediteur_email6}&gt;  }}})]      ] 
+      [(#CONFIG{malettre/expediteur_email7}|oui) [(#SET{expedi,#GET{expedi}|array_merge{#ARRAY{i7,  #CONFIG{malettre/expediteur_nom7}  &nbsp;&lt;#CONFIG{malettre/expediteur_email7}&gt;  }}})]      ] 
+      [(#CONFIG{malettre/expediteur_email8}|oui) [(#SET{expedi,#GET{expedi}|array_merge{#ARRAY{i8,  #CONFIG{malettre/expediteur_nom8}  &nbsp;&lt;#CONFIG{malettre/expediteur_email8}&gt;  }}})]      ] 
+      [(#CONFIG{malettre/expediteur_email9}|oui) [(#SET{expedi,#GET{expedi}|array_merge{#ARRAY{i9', #CONFIG{malettre/expediteur_nom9}  &nbsp;&lt;#CONFIG{malettre/expediteur_email9}&gt;  }}})]      ] 
+      [(#CONFIG{malettre/expediteur_email10}|oui) [(#SET{expedi,#GET{expedi}|array_merge{#ARRAY{i10', #CONFIG{malettre/expediteur_nom10}  &nbsp;&lt;#CONFIG{malettre/expediteur_email10}&gt;  }}})]      ] 
+
+      
+      [(#SAISIE{selection,expediteur,cacher_option_intro=oui,label=<strong><:malettre:expediteur:></strong>,datas=#GET{expedi}})]
+      [(#SAISIE{input,expediteur_more,size=25,maxlength=255,label=<:malettre:autre:><br /><i>(<:malettre:email_seulement:>)</i>})]
+      
+      <!-- destinataires -->     
+       #SET{desti,#ARRAY}
+       <!-- FIXME passerelle vers plugin mes abonnes -->
+       [(#CONFIG{malettre/adresse_email1}|oui) [(#SET{desti,#GET{desti}|array_merge{#ARRAY{i1,  #CONFIG{malettre/adresse_nom1}  &nbsp;&lt;#CONFIG{malettre/adresse_email1}&gt;  }}})]      ] 
+       [(#CONFIG{malettre/adresse_email2}|oui) [(#SET{desti,#GET{desti}|array_merge{#ARRAY{i2,  #CONFIG{malettre/adresse_nom2}  &nbsp;&lt;#CONFIG{malettre/adresse_email2}&gt;  }}})]      ]
+       [(#CONFIG{malettre/adresse_email3}|oui) [(#SET{desti,#GET{desti}|array_merge{#ARRAY{i3,  #CONFIG{malettre/adresse_nom3}  &nbsp;&lt;#CONFIG{malettre/adresse_email3}&gt;  }}})]      ] 
+       [(#CONFIG{malettre/adresse_email4}|oui) [(#SET{desti,#GET{desti}|array_merge{#ARRAY{i4,  #CONFIG{malettre/adresse_nom4}  &nbsp;&lt;#CONFIG{malettre/adresse_email4}&gt;  }}})]      ]
+       [(#CONFIG{malettre/adresse_email5}|oui) [(#SET{desti,#GET{desti}|array_merge{#ARRAY{i5,  #CONFIG{malettre/adresse_nom5}  &nbsp;&lt;#CONFIG{malettre/adresse_email5}&gt;  }}})]      ] 
+       [(#CONFIG{malettre/adresse_email6}|oui) [(#SET{desti,#GET{desti}|array_merge{#ARRAY{i6,  #CONFIG{malettre/adresse_nom6}  &nbsp;&lt;#CONFIG{malettre/adresse_email6}&gt;  }}})]      ]
+       [(#CONFIG{malettre/adresse_email7}|oui) [(#SET{desti,#GET{desti}|array_merge{#ARRAY{i7,  #CONFIG{malettre/adresse_nom7}  &nbsp;&lt;#CONFIG{malettre/adresse_email7}&gt;  }}})]      ] 
+       [(#CONFIG{malettre/adresse_email8}|oui) [(#SET{desti,#GET{desti}|array_merge{#ARRAY{i8,  #CONFIG{malettre/adresse_nom8}  &nbsp;&lt;#CONFIG{malettre/adresse_email8}&gt;  }}})]      ] 
+       [(#CONFIG{malettre/adresse_email9}|oui) [(#SET{desti,#GET{desti}|array_merge{#ARRAY{i9,  #CONFIG{malettre/adresse_nom9}  &nbsp;&lt;#CONFIG{malettre/adresse_email9}&gt;  }}})]      ]
+       [(#CONFIG{malettre/adresse_email10}|oui) [(#SET{desti,#GET{desti}|array_merge{#ARRAY{i10,  #CONFIG{malettre/adresse_nom10}  &nbsp;&lt;#CONFIG{malettre/adresse_email10}&gt;  }}})]      ] 
+       [(#CONFIG{malettre/adresse_email11}|oui) [(#SET{desti,#GET{desti}|array_merge{#ARRAY{i11,  #CONFIG{malettre/adresse_nom11}  &nbsp;&lt;#CONFIG{malettre/adresse_email11}&gt;  }}})]      ]
+       [(#CONFIG{malettre/adresse_email12}|oui) [(#SET{desti,#GET{desti}|array_merge{#ARRAY{i12,  #CONFIG{malettre/adresse_nom12}  &nbsp;&lt;#CONFIG{malettre/adresse_email12}&gt;  }}})]      ] 
+       [(#CONFIG{malettre/adresse_email13}|oui) [(#SET{desti,#GET{desti}|array_merge{#ARRAY{i13,  #CONFIG{malettre/adresse_nom13}  &nbsp;&lt;#CONFIG{malettre/adresse_email13}&gt;  }}})]      ]
+       [(#CONFIG{malettre/adresse_email14}|oui) [(#SET{desti,#GET{desti}|array_merge{#ARRAY{i14,  #CONFIG{malettre/adresse_nom14}  &nbsp;&lt;#CONFIG{malettre/adresse_email14}&gt;  }}})]      ] 
+       [(#CONFIG{malettre/adresse_email15}|oui) [(#SET{desti,#GET{desti}|array_merge{#ARRAY{i15,  #CONFIG{malettre/adresse_nom15}  &nbsp;&lt;#CONFIG{malettre/adresse_email15}&gt;  }}})]      ] 
+
+
+
+
+      [(#SAISIE{checkbox,desti,label=<strong><:malettre:destinataires:></strong>,datas=#GET{desti}})]
+      [(#SAISIE{input,desti_more,size=25,maxlength=255,label=<:malettre:autres:><br /><i>(<:malettre:email_seulement_autres:>)</i>})]
+      
+  	  [(#SAISIE{checkbox,no_archive,label=<strong><:malettre:no_archive:></strong>,datas=#ARRAY{'on',<:malettre:no_archive_info:>}})]
+      
+       
+  	</ul>
+    
+  <p class="boutons"><input type="submit" class="submit" value="<:malettre:lettre_envoyer:>" /></p>
+   
+  <br />   
+  <h5><:malettre:apercu:>
+     <br /><a href="[(#EVAL{_DIR_IMG}|concat{lettre/_malettre.html})]" target="_blank"><:malettre:lettre_preview_open:></a>
+  </h5>  
+  <iframe height="400" style="overflow:scroll;width:98%;margin-bottom:15px;" src="[(#EVAL{_DIR_IMG}|concat{lettre/_malettre.html})]?nocache=[(#DATE|md5)]"></iframe>
+  
+  <h5><:malettre:version_html:></h5>
+  <textarea cols='70' rows='20'>#ENV{sourcehtml}</textarea>
+  
+  <h5><:malettre:version_txt:></h5>
+  <textarea cols='70' rows='20'>#ENV{sourcetxt}</textarea>
+  
+    
+  </div></form>
+]
+
+</div>

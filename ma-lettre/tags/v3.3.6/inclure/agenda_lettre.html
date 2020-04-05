@@ -1,0 +1,19 @@
+<BOUCLE_vevent(EVENEMENTS spip_articles){id_evenement=#ENV{id,#ENV{id_evenement}}}{tout}>
+<BOUCLE_artri(ARTICLES){id_evenement}>[(#SET{lien_article,[(#TITRE)]})][(#SET{txt,[(#TEXTE|couper{120}|Ptobr)]})]</BOUCLE_artri>
+<tr><td style="vertical-align:top">
+<div style="color:#555; float:left;padding:5px 10px 5px;">
+[<a href="[(#URL_ARTICLE|url_absolue)]"><img src="(#LOGO_EVENEMENT|sinon{#LOGO_ARTICLE}|image_reduire{0,110}|image_reduire{110,0}|image_recadre{110,110,top}|sinon{[(#CHEMIN{img/agenda_logo.jpg}|image_reduire{80,80}|image_recadre{100,80,top})]}|extraire_attribut{src}|url_absolue)" alt="" border="0" /></a>]
+</div></td><td><div style="color:#555; text-align: justify;padding: 5px 0px 5px;">
+<h2 style="margin:0; padding:0; color:#A5B152; font-size:14px">#TITRE</h2>
+[<h4 style="margin:0; padding:0;font-size:12px">(#DATE_DEBUT|agenda_affdate_debut_fin{#DATE_FIN,''})</h4>]
+<B_mots>
+<h4 style="margin:2px 0; padding:0;font-size:12px"><BOUCLE_mots(MOTS){id_evenement}{par num titre,titre}{','}>
+#SET{mot,#TITRE}
+<a href="[(#URL_MOT|url_absolue)]" style="color:#57B2FF;">#TITRE</a></BOUCLE_mots>
+</h4>
+</B_mots>
+[<div style="color:#666;">(#DESCRIPTIF|sinon{#GET{txt}|liens_absolus|Ptobr})</div>]	
+<p style="color:#848484; margin:0.2em 0 0">[(#HORAIRE|=={oui}|oui)[(#DATE_DEBUT|affdate{H:i})][-(#DATE_FIN|affdate{H:i})]][(#LIEU|!={#GET{mot}}|oui)[ (#LIEU|Ptobr)][ (#ADRESSE|PtoBR)]][(#INSCRIPTION|oui)[ / ((#PLACES)  ]<:agenda:personnes:>)]</p>
+[<p style="margin:0.2em 0 0">&Agrave; retrouver dans... <a href="[(#URL_ARTICLE|url_absolue)]" style="color:#57B2FF;">(#GET{lien_article})</a></p>]
+</div></td></tr><tr><td colspan="2"><hr style="height:1px;padding:0;border:0;border-top:1px solid #eeeeee;" /></td></tr></BOUCLE_vevent>
+

@@ -1,0 +1,205 @@
+<div class="ajax formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	<h3 class="titrem">
+  [(#CHEMIN{images/malettre-24.png}|image_reduire{24}|inserer_attribut{class,cadre-icone}|inserer_attribut{alt,''})]
+  <:malettre:config:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+    
+		<ul>
+     [(#REM) ------------------------ EDITO ------------------------ ]         
+     #SET{erreurs,#ENV**{erreurs}|table_valeur{id_article_edito}}
+     <li class="editer_id_article_edito[ (#GET{erreurs}|oui)erreur]"> 
+        <h3 class="legend"><:malettre:edito:></h3>       
+      	<label><:malettre:edito_article_numero:></label>
+      	[<span class='erreur_message'>(#GET{erreurs})</span>]       	
+      	<input type="text" name="id_article_edito" class="text" size="3" id='id_article_edito' value="[(#ENV{id_article_edito}|intval)]" />
+        [<a href="[(#URL_ECRIRE{article}|parametre_url{id_article,#ENV{id_article_edito}})]">(#INFO_TITRE{article,#ENV{id_article_edito}})</a>]                
+     </li>
+    
+     [(#REM) ------------------------ CHOIX OBJETS ------------------------ ]
+     <li><h3 class="legend"><:malettre:choix_objets:></h3></li>
+    
+     #SET{erreurs,#ENV**{erreurs}|table_valeur{choix_objets}}
+     <li class="editer_choix_objets[ (#GET{erreurs}|oui)erreur]">        
+        <label><:malettre:choix_objets:></label>
+      	[<span class='erreur_message'>(#GET{erreurs})</span>]
+      	<div class="choix">
+      		<input type="checkbox" name="lister_articles" class="checkbox" value="on" id='lister_articles'[ (#ENV{lister_articles}|oui)checked="checked"] />
+      		<label for='lister_articles'><:malettre:lister_articles:></label>
+      	</div>
+        
+        [(#PLUGIN{agenda}|oui)
+              	<div class="choix">
+              		<input type="checkbox" name="lister_evenements" class="checkbox" value="on" id='lister_evenements'[ (#ENV{lister_evenements}|oui)checked="checked"] />
+              		<label for='lister_evenements'><:malettre:lister_evenements:></label>
+              	</div>
+        ]         
+      </li>
+      
+      [(#REM) ------------------------ EXPEDITEURS ------------------------ ]
+			<li class="fieldset fieldset_expediteurs">
+				<fieldset> 
+					<h3 class="legend"><:malettre:expediteurs:></h3> 					
+						  <table>
+						    <tr>
+							  <td></td>
+							  <td><:malettre:nom:></td>
+							  <td><:malettre:email:></td>
+						    </tr>
+						    <tr>
+							  <td><:malettre:adresse{num=1}:></td>
+							  <td><input type="text" name="expediteur_nom1" value="#ENV{expediteur_nom1, pierre dupond}"  id="expediteur_nom1" /></td>
+							  <td><input type="text" name="expediteur_email1" value="#ENV{expediteur_email1, p@mondomaine.org}"  id="expediteur_email1" /></td>
+						    </tr>
+						    <tr>
+							  <td><:malettre:adresse{num=2}:></td>
+							  <td><input type="text" name="expediteur_nom2" value="#ENV{expediteur_nom2,}"  id="expediteur_nom2" /></td>
+							  <td><input type="text" name="expediteur_email2" value="#ENV{expediteur_email2,}"  id="expediteur_email2" /></td>
+						    </tr>
+						    <tr>
+							  <td><:malettre:adresse{num=3}:></td>
+							  <td><input type="text" name="expediteur_nom3" value="#ENV{expediteur_nom3,}"  id="expediteur_nom3" /></td>
+							  <td><input type="text" name="expediteur_email3" value="#ENV{expediteur_email3,}"  id="expediteur_email3" /></td>
+						    </tr>
+                <td><:malettre:adresse{num=4}:></td>
+							  <td><input type="text" name="expediteur_nom4" value="#ENV{expediteur_nom4,}"  id="expediteur_nom4" /></td>
+							  <td><input type="text" name="expediteur_email4" value="#ENV{expediteur_email4, }"  id="expediteur_email4" /></td>
+						    </tr>
+						    <tr>
+							  <td><:malettre:adresse{num=5}:></td>
+							  <td><input type="text" name="expediteur_nom5" value="#ENV{expediteur_nom5,}"  id="expediteur_nom5" /></td>
+							  <td><input type="text" name="expediteur_email5" value="#ENV{expediteur_email5,}"  id="expediteur_email5" /></td>
+						    </tr>
+						    <tr>
+							  <td><:malettre:adresse{num=6}:></td>
+							  <td><input type="text" name="expediteur_nom6" value="#ENV{expediteur_nom6,}"  id="expediteur_nom6" /></td>
+							  <td><input type="text" name="expediteur_email6" value="#ENV{expediteur_email6,}"  id="expediteur_email6" /></td>
+						    </tr>
+                <td><:malettre:adresse{num=7}:></td>
+							  <td><input type="text" name="expediteur_nom7" value="#ENV{expediteur_nom7,}"  id="expediteur_nom7" /></td>
+							  <td><input type="text" name="expediteur_email7" value="#ENV{expediteur_email7,}"  id="expediteur_email7" /></td>
+						    </tr>
+                <td><:malettre:adresse{num=8}:></td>
+							  <td><input type="text" name="expediteur_nom8" value="#ENV{expediteur_nom8,}"  id="expediteur_nom8" /></td>
+							  <td><input type="text" name="expediteur_email8" value="#ENV{expediteur_email8, }"  id="expediteur_email8" /></td>
+						    </tr>
+						    <tr>
+							  <td><:malettre:adresse{num=9}:></td>
+							  <td><input type="text" name="expediteur_nom9" value="#ENV{expediteur_nom9,}"  id="expediteur_nom9" /></td>
+							  <td><input type="text" name="expediteur_email9" value="#ENV{expediteur_email9,}"  id="expediteur_email9" /></td>
+						    </tr>
+						    <tr>
+							  <td><:malettre:adresse{num=10}:></td>
+							  <td><input type="text" name="expediteur_nom10" value="#ENV{expediteur_nom10,}"  id="expediteur_nom10" /></td>
+							  <td><input type="text" name="expediteur_email10" value="#ENV{expediteur_email10,}"  id="expediteur_email10" /></td>
+						    </tr>
+						  </table>
+				</fieldset>
+			</li>
+      
+      
+			[(#REM) ------------------------ DESTINATAIRES ------------------------ ]
+			<li class="fieldset fieldset_destinataires">
+				<fieldset>
+					<h3 class="legend">Destinataires</h3>
+						  <table>
+						    <tr>
+							  <td></td>
+							  <td><:malettre:nom:></td>
+							  <td><:malettre:email:></td>
+						    </tr>
+						    <tr>
+							  <td><:malettre:adresse{num=1}:></td>
+							  <td><input type="text" name="adresse_nom1" value="#ENV{adresse_nom1, lettre d'information}"  id="adresse_nom1" /></td>
+							  <td><input type="text" name="adresse_email1" value="#ENV{adresse_email1, info@liste.mondomaine.org}"  id="adresse_email1" /></td>
+						    </tr>
+						    <tr>
+							  <td><:malettre:adresse{num=2}:></td>
+							  <td><input type="text" name="adresse_nom2" value="#ENV{adresse_nom2,}"  id="adresse_nom2" /></td>
+							  <td><input type="text" name="adresse_email2" value="#ENV{adresse_email2,}"  id="adresse_email2" /></td>
+						    </tr>
+						    <tr>
+							  <td><:malettre:adresse{num=3}:></td>
+							  <td><input type="text" name="adresse_nom3" value="#ENV{adresse_nom3,}"  id="adresse_nom3" /></td>
+							  <td><input type="text" name="adresse_email3" value="#ENV{adresse_email3,}"  id="adresse_email3" /></td>
+						    </tr>
+						    <tr>
+							  <td><:malettre:adresse{num=4}:></td>
+							  <td><input type="text" name="adresse_nom4" value="#ENV{adresse_nom4,}"  id="adresse_nom4" /></td>
+							  <td><input type="text" name="adresse_email4" value="#ENV{adresse_email4,}"  id="adresse_email4" /></td>
+						    </tr>
+						    <tr>
+							  <td><:malettre:adresse{num=5}:></td>
+							  <td><input type="text" name="adresse_nom5" value="#ENV{adresse_nom5,}"  id="adresse_nom5" /></td>
+							  <td><input type="text" name="adresse_email5" value="#ENV{adresse_email5,}"  id="adresse_email5" /></td>
+						    </tr>
+							<tr>
+							  <td><:malettre:adresse{num=6}:></td>
+							  <td><input type="text" name="adresse_nom6" value="#ENV{adresse_nom6,}"  id="adresse_nom6" /></td>
+							  <td><input type="text" name="adresse_email6" value="#ENV{adresse_email6,}"  id="adresse_email6" /></td>
+						    </tr>
+							<tr>
+							  <td><:malettre:adresse{num=7}:></td>
+							  <td><input type="text" name="adresse_nom7" value="#ENV{adresse_nom7,}"  id="adresse_nom7" /></td>
+							  <td><input type="text" name="adresse_email7" value="#ENV{adresse_email7,}"  id="adresse_email7" /></td>
+						    </tr>
+              <td><:malettre:adresse{num=8}:></td>
+							  <td><input type="text" name="adresse_nom8" value="#ENV{adresse_nom8,}"  id="adresse_nom8" /></td>
+							  <td><input type="text" name="adresse_email8" value="#ENV{adresse_email8,}"  id="adresse_email8" /></td>
+						    </tr>
+							<tr>
+							  <td><:malettre:adresse{num=9}:></td>
+							  <td><input type="text" name="adresse_nom9" value="#ENV{adresse_nom9,}"  id="adresse_nom9" /></td>
+							  <td><input type="text" name="adresse_email9" value="#ENV{adresse_email9,}"  id="adresse_email9" /></td>
+						    </tr>
+							<tr>
+							  <td><:malettre:adresse{num=10}:></td>
+							  <td><input type="text" name="adresse_nom10" value="#ENV{adresse_nom10,}"  id="adresse_nom10" /></td>
+							  <td><input type="text" name="adresse_email10" value="#ENV{adresse_email10,}"  id="adresse_email10" /></td>
+						    </tr>
+							<tr>
+							  <td><:malettre:adresse{num=11}:></td>
+							  <td><input type="text" name="adresse_nom11" value="#ENV{adresse_nom11,}"  id="adresse_nom11" /></td>
+							  <td><input type="text" name="adresse_email11" value="#ENV{adresse_email11,}"  id="adresse_email11" /></td>
+						    </tr>
+							<tr>
+							  <td><:malettre:adresse{num=12}:></td>
+							  <td><input type="text" name="adresse_nom12" value="#ENV{adresse_nom12,}"  id="adresse_nom12" /></td>
+							  <td><input type="text" name="adresse_email12" value="#ENV{adresse_email12,}"  id="adresse_email12" /></td>
+						    </tr>
+              <td><:malettre:adresse{num=13}:></td>
+							  <td><input type="text" name="adresse_nom13" value="#ENV{adresse_nom13,}"  id="adresse_nom13" /></td>
+							  <td><input type="text" name="adresse_email13" value="#ENV{adresse_email13,}"  id="adresse_email13" /></td>
+						    </tr>
+							<tr>
+							  <td><:malettre:adresse{num=14}:></td>
+							  <td><input type="text" name="adresse_nom14" value="#ENV{adresse_nom14,}"  id="adresse_nom14" /></td>
+							  <td><input type="text" name="adresse_email14" value="#ENV{adresse_email14,}"  id="adresse_email14" /></td>
+						    </tr>
+							<tr>
+							  <td><:malettre:adresse{num=15}:></td>
+							  <td><input type="text" name="adresse_nom15" value="#ENV{adresse_nom15,}"  id="adresse_nom15" /></td>
+							  <td><input type="text" name="adresse_email15" value="#ENV{adresse_email15,}"  id="adresse_email15" /></td>
+						    </tr>                
+                  
+						  </table> 
+				</fieldset>
+			</li>     
+     
+    
+
+		</ul>
+
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

@@ -1,0 +1,30 @@
+[(#REM) archives lettre]
+<B_archive>
+<table class="spip"><tbody>
+  <tr>
+      <th width="15">N°</th>
+      <th width="230"><:info_titre:></th>
+      <th width="40"><:date:></th>
+      <th width="30"></th>
+      <th width="30"></th>
+      <th width="30"></th>      
+  </tr>
+<BOUCLE_archive(MESLETTRES){pagination 5}{!par date}>
+  <tr>
+      <td width="20">#ID_MALETTRE</td>
+      <td width="230"><a href='#'[ onclick="malettref.location.href='(#CHEMIN{#EVAL{_DIR_IMG}|concat{#URL_HTML}})'"] style='color:green;'>#TITRE</a> - <small>#LANG</small></td>
+      <td width="40">[(#DATE|affdate_court)]</td>
+       <td width="30">[<a href="(#CHEMIN{#EVAL{_DIR_IMG}|concat{#URL_HTML}})" target="_blank">html</a>]</td>
+      <td width="30">[<a href="(#CHEMIN{#EVAL{_DIR_IMG}|concat{#URL_TXT}})"  target="_blank">txt</a>]</td>
+      <td width="30"><a href='[(#URL_ACTION_AUTEUR{supprimer_lettre,#ID_MALETTRE,#SELF})]'  onclick='return confirm("<:malettre:effacer_confirm:>");' style='color:red;'><:malettre:effacer:></a></td>      
+  </tr>
+</BOUCLE_archive>
+</tbody></table>
+<div class="pagination">[(#PAGINATION) - ]#GRAND_TOTAL <:malettre:lettres_dispo:></div>
+
+<iframe width="900" height="500" src='' id='malettref' name='malettref' style="both;border:1px solid #666;position:relative;left:-200px;margin:1em;background:#333;"></iframe>
+
+
+</B_archive>
+<div class="pagination">0  <:malettre:lettres_dispo:></div>
+<//B_archive>
