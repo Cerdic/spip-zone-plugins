@@ -1,0 +1,73 @@
+<BOUCLE_produit(PRODUITS){id_produit}{tous}>
+<!--#hierarchie-->
+<div id="chemin">
+	<span class="bloc">
+		<a href="#URL_ECRIRE" class="racine"><:info_racine_site:></a>
+	</span>
+	<BOUCLE_produit_chemin(HIERARCHIE){id_rubrique}>
+	<span class="bloc">
+		<em> &gt; </em>
+		<a class="on" href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]">#TITRE</a>
+	</span>
+	</BOUCLE_produit_chemin>
+	<span class="bloc">
+		<em> &gt; </em>
+		<a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]">#INFO_TITRE{rubrique,#ID_RUBRIQUE}</a>
+	</span>
+</div>
+<!--/#hierarchie-->
+
+<div class="fiche_objet">
+	[(#AUTORISER{modifier,produit,#ID_PRODUIT})
+		[(#URL_ECRIRE{produit_edit,id_produit=#ID_PRODUIT}|icone{<:produits:produit_editer:>,#CHEMIN{prive/themes/spip/images/produits-24.png},right})]
+	]
+	<h1>#TITRE</h1>
+	<h2 class="prix_ht"><:prix:prix_ht{prix=#PRIX_HT}:></h2>
+	[(#REFERENCE)<h4 class="reference"><:produits:produit_reference{reference=#REFERENCE}:></h4>]
+	
+	<div id="wysiwyg">
+	<INCLURE{fond=prive/objets/contenu/produit,id=#ID_PRODUIT,ajax=wysiwyg}>
+	</div>
+	
+	#INCLURE{fond=prive/contenu/portfolio_document,objet=produit,id_objet=#ID_PRODUIT}
+
+	#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,produit,id,#ID_PRODUIT},data,'<div class="nettoyeur"></div>'}}
+</div>
+
+<!--#navigation-->
+<div class="cadre infos cadre-info">
+	<div class="numero">
+		<:produits:produit_numero:>
+		<p>#ID_PRODUIT</p>
+	</div>
+	<ul class="instituer instituer_produit">
+		<li><:produits:produit_statut:>
+			<ul>
+				<li class="prop[ (#STATUT|=={prop}|oui)selected]">
+					[(#STATUT|=={prop}|non)<a onclick="javascript:return confirm(confirm_changer_statut);" href="#URL_ACTION_AUTEUR{instituer_produit, #ID_PRODUIT-prop, #SELF}">]
+						<img width="9" height="9" alt="" src="#CHEMIN{images/puce-orange.gif}">
+						<:texte_statut_propose_evaluation:>
+					[(#STATUT|=={prop}|non)</a>]
+				</li>
+				<li class="publie[ (#STATUT|=={publie}|oui)selected]">
+					[(#STATUT|=={publie}|non)<a onclick="javascript:return confirm(confirm_changer_statut);" href="#URL_ACTION_AUTEUR{instituer_produit, #ID_PRODUIT-publie, #SELF}">]
+						<img width="9" height="9" alt="" src="#CHEMIN{images/puce-verte.gif}">
+						<:texte_statut_publie:>
+					[(#STATUT|=={publie}|non)</a>]
+				</li>
+				<li class="poubelle[ (#STATUT|=={poubelle}|oui)selected]">
+					[(#STATUT|=={poubelle}|non)<a onclick="javascript:return confirm(confirm_changer_statut);" href="#URL_ACTION_AUTEUR{instituer_produit, #ID_PRODUIT-poubelle, #SELF}">]
+						<img width="9" height="9" alt="" src="#CHEMIN{images/puce-poubelle.gif}">
+						<:texte_statut_poubelle:>
+					[(#STATUT|=={poubelle}|non)</a>]
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+<!--/#navigation-->
+
+<!--#extra-->
+#INCLURE{fond=prive/objets/liste/produits_minis,objet=produit,id_objet=#ID_PRODUIT,id_rubrique=#ID_RUBRIQUE}
+<!--/#extra-->
+</BOUCLE_produit>
