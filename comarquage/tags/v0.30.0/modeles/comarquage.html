@@ -1,0 +1,41 @@
+#CACHE{0}
+[(#REM) Modèle pour le comarquage ]
+
+[(#SET{categorie,#ENV{categorie,'particuliers'}})]
+[(#SET{xml,#ENV{xml,#CONFIG{comarquage/default_xml_file}}})]
+[(#SET{xsl,#ENV{xsl,#CONFIG{comarquage/default_xsl_file}}})]
+
+[(#REM) Récupération de l'id xml pour le tag de stats Xiti ]
+#SET{tag_id,#EVAL{_request(xml)}}
+
+
+[(#SET{parametres,#ARRAY})]
+
+#SET{parametres, #GET{parametres}|array_merge{#ARRAY{categorie,#GET{categorie}}}}
+#SET{parametres, #GET{parametres}|array_merge{#ARRAY{xml,#GET{xml}}}}
+#SET{parametres, #GET{parametres}|array_merge{#ARRAY{xsl,#GET{xsl}}}}
+
+[(#REM) On déclenche le process ]
+[(#GET{parametres}|comarquage_run)]
+
+
+[(#REM) Marqueur XITI pour le service public 
+composé du code INSEE et de l'id du flux XML consulté ] 
+<div id="xiti-logo">
+<script type="text/javascript">
+<!--
+xtnv = document; //parent.document or top.document or document
+xtsd = "http://logi3";
+xtsite = "257817";
+xtn2 = "17"; // level 2 site
+xtpage = "#CONFIG{comarquage/code_insee}::[(#GET{tag_id}|replace{'.xml',''})]"; // page name - laisser les :: (creation de chapitres)
+xtdi = ""; //implication degree
+//-->
+</script>
+<script type="text/javascript" src="#URL_SITE_SPIP/[(#CHEMIN{xtcore2.js})]"></script>
+<noscript>
+<div id="xiti-logo-noscript">
+<img width="1" height="1" src="http://logi3.xiti.com/hit.xiti?s=257817&amp;s2=17&amp;p=#CONFIG{comarquage/code_insee}::[(#GET{tag_id}|replace{'.xml',''})]&amp;di=&amp;" alt="XiTi" />
+</div>
+</noscript>
+</div>

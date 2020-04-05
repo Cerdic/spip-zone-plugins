@@ -1,0 +1,39 @@
+#CACHE{0}
+<!-- titre=Comarquage -->
+<!-- autoriser=webmestre -->
+<!-- nom=comarquage -->
+
+<div class="formulaire_spip formulaire_config formulaire_config_comarquage">
+	
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method="post" action="#SELF"><div>
+	#ACTION_FORMULAIRE{SELF}
+<ul>
+	<li class="editer_local_refresh">
+		<label for='local_refresh'><:comarquage:cfg_local_refresh:></label>
+		<input type="text" name="local_refresh" class="text" id="local_refresh" value="#ENV{local_refresh,259200}" />
+	</li>
+	<li class="editer_local_timeout">
+		<label for='local_timeout'><:comarquage:cfg_local_timeout:></label>
+		<input type="text" name="local_timeout" class="text" id="local_timeout" value="#ENV{local_timeout,604800}" />
+	</li>
+	
+	<li class="editer_default_xml_file">
+		<label for='default_xml_file'><:comarquage:cfg_default_xml_file:></label>
+		<input type="text" name="default_xml_file" class="text" id="default_xml_file" value="#ENV{default_xml_file,Themes.xml}" />
+	</li>
+	<li class="editer_default_xsl_file">
+		<label for='default_xsl_file'><:comarquage:cfg_default_xsl_file:></label>
+		<input type="text" name="default_xsl_file" class="text" id="default_xsl_file" value="#ENV{default_xsl_file,spThemes.xsl}" />
+	</li>
+	<li class="editer_code_insee">
+		<label for='code_insee'><:comarquage:cfg_code_insee:></label>
+		<input type="text" name="code_insee" class="text" id="code_insee" value="#ENV{code_insee,34172}" />
+	</li>
+	
+</ul>
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+</div></form>
+</div>
