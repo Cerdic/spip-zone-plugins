@@ -1,0 +1,14 @@
+#CACHE{36*3600}
+#HTTP_HEADER{Content-Type: text/javascript; charset=#CHARSET}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+ZeroClipboard.config({swfPath:'#EVAL{_DIR_LIB_ZEROCLIPBOARD}dist/ZeroClipboard.swf'});
+
+if(typeof(window.locale) == 'undefined') window.locale = {};
+	
+window.locale.zeroclipboard = {
+	"link_text_copied": "<:zeroclipboard:link_text_copied|html2unicode|unicode2charset:>",
+	"link_title_copied": "<:zeroclipboard:link_title_copied|html2unicode|unicode2charset:>",
+	"link_text_copy": "<:zeroclipboard:link_text_copy|html2unicode|unicode2charset:>",
+	"link_title_copy": "<:zeroclipboard:link_title_copy|html2unicode|unicode2charset:>"
+};

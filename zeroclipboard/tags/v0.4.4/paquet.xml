@@ -1,0 +1,20 @@
+<paquet
+	prefix="zeroclipboard"
+	categorie="divers"
+	version="0.4.4"
+	etat="stable"
+	compatibilite="[3.0.5;3.2.*]"
+	logo="images/zeroclipboard_logo.png"
+	documentation="https://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/article/copier-coller-facile-zeroclipboard"
+>
+
+	<nom>Zeroclipboard</nom>
+
+	<auteur lien="http://www.kent1.info">kent1</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="header_prive" inclure="zeroclipboard_pipelines.php" />
+	<pipeline nom="insert_head" inclure="zeroclipboard_pipelines.php" />
+	<pipeline nom="jquery_plugins" inclure="zeroclipboard_pipelines.php" />
+	<lib nom="zeroclipboard-2.2.0" lien="https://github.com/zeroclipboard/zeroclipboard/archive/v2.2.0.zip" />
+</paquet>
