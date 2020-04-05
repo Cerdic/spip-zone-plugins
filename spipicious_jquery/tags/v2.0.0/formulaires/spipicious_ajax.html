@@ -1,0 +1,59 @@
+<div class="formulaire_spip formulaire_spipicious formulaire_#FORM ajax" id="formulaire_spipicious[_(#ENV{type})][_(#ENV{id_objet})]">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	#SET{mots,''}<BOUCLE_mots(SPIPICIOUS mots){id_objet}{objet=#ENV{type}}{id_auteur=#SESSION{id_auteur}}{statut?}>#SET{mots,oui}</BOUCLE_mots>
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'>
+		<div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		[<fieldset>(#GET{mots}|oui)
+			<legend><:spipicious:vos_tags:></legend>
+			<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+				[(#SAISIE{spipicious_del_tags,remove_tags,
+					explication=<:spipicious:explication_suppression_tag:>,
+					id_objet=#ENV{id_objet},
+					objet=#ENV{type},
+					label=''})]
+			</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+		</fieldset>]
+		<fieldset>
+		<legend><:spipicious:add_tags:></legend>
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+			<[(#VAL{li}|saisie_balise_structure_formulaire)] class="editer editer_spipicious_tags">
+				<label><:spipicious:tags:></label>
+				<p class="explication"><:spipicious:explication_ajout_tag{separateur=&#44;}:></p>
+				<input type="text" class="text" name="spipicious_tags" id="spipicious_tags" size="50" data-selecteur="[(#VAL{tags}|parametre_url{id_objet,#ENV{id_objet}}|parametre_url{objet,#ENV{type}})]" multiple="multiple" />
+			</[(#VAL{li}|saisie_balise_structure_formulaire)]>
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+		</fieldset>
+		<p class="boutons">
+			<input type="hidden" name="spipicious_id" id="spipicious_id" value="#ENV{id_objet}" />
+			<input type="hidden" name="spipicious_type" id="spipicious_type" value="#ENV{type}" />
+			<input type="submit" name="add_tags" value="<:bouton_valider:>" class="submit" />
+		</p>
+		</div>
+	</form>
+	<script type="text/javascript"><!--
+	if(typeof(jQuery) == 'function'){
+		var update_tags_#TYPE = function() {
+			if(jQuery('.tags_#ENV{type}_#ENV{id_objet}').size()>0){
+				jQuery.ajax({
+					type: "GET",
+					url:'#URL_PAGE{inc-tags}',
+					data: {
+						id_objet : #ENV{id_objet},
+						objet : '#ENV{type}'
+					},
+					success:function(data,status){
+						var newdata = jQuery(data+' #tags').html();
+						jQuery('.tags_#ENV{type}_#ENV{id_objet}').addClass('loading').html(newdata).removeClass('loading');
+					}
+				});
+			}
+		}
+		update_tags_[(#ENV{type})]();
+	}
+	</script>]
+</div>
