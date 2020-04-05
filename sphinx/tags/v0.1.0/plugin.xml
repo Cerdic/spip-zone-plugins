@@ -1,0 +1,31 @@
+<plugin>
+	<nom>
+	Sphinx - Moteur de recherche
+	</nom>
+	<auteur>
+	Fil
+	</auteur>
+	<licence>
+		&#169; 2013 - GNU/GPL
+	</licence>
+	<version>
+	0.1.0
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Intégration du moteur de recherche SPHINX ; attention, ce plugin est OBSOLETE, utiliser desormais le plugin INDEXER.
+	</description>
+	<prefix>
+	sphinx
+	</prefix>
+	<lien>https://contrib.spip.net/Sphinx</lien>
+	<icon>sphinx-128.png</icon>
+	<fonctions>inc/sphinx.php</fonctions>
+	<chemin dir='' />
+	<categorie>edition</categorie>
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+	<necessite id="fulltext" />
+	<necessite id="iterateurs" />
+</plugin>
