@@ -1,0 +1,189 @@
+<h2>Éléments HTML des formulaires</h2>
+
+<p>Les formulaires sont constitués de différents éléments HTML (<code>fieldset</code>, <code>legend</code>, <code>label</code>, <code>input</code>, <code>textarea</code>, etc.), dont voici un échantillon.</p>
+
+<div class="formulaire_spip">
+	<form action="#" method="post">
+		<fieldset>
+			<legend>Lettre d'information</legend>
+			<p>Abonnez-vous pour rester informé(e) : vous recrevrez nos dernières nouveautés par courrier électronique.</p>
+			<ul>
+				<li class="courriel obligatoire">
+					<label for="courriel">Courriel<em> (Obligatoire)</em></label>
+					<input type="text" class="text" name="courriel" id="courriel" value="adresse@email.fr" />
+				</li>
+			</ul>
+		</fieldset>
+		<fieldset>
+			<legend>Informations personnelles</legend>
+			<ul>
+				<li class="editer_civilite">
+					<fieldset>
+						<legend>Civilité</legend>
+						<ul>
+							<li>
+								<input type="radio" class="radio" name="civilite" id="monsieur" value="Monsieur" checked="checked" />
+								<label for="monsieur">Monsieur</label>
+							</li>
+							<li>
+								<input type="radio" class="radio" name="civilite" id="madame" value="Madame" />
+								<label for="madame">Madame</label>
+							</li>
+						</ul>
+					</fieldset>
+				</li>
+				<li class="nom">
+					<label for="nom">Nom</label>
+					<input type="text" class="text" name="nom" id="nom" value="" />
+				</li>
+				<li class="prenom erreur">
+					<label for="prenom">Prénom</label>
+					<input type="text" class="text" name="prenom" id="prenom" value="06 82 30 96 16" />
+					<p class="erreur_message">Le prénom ne doit pas contenir de chiffres !</p>
+				</li>
+				<li class="date">
+					<fieldset>
+						<legend>Date de naissance</legend>
+						<ul>
+							<li class="date_naissance_jour">
+								<label for="date_naissance_jour">Jour de naissance</label>
+								<select name="date_naissance_jour" id="date_naissance_jour">
+									<option label="01" value="01">01</option>
+									<option label="02" value="02">02</option>
+									<option label="03" value="03">03</option>
+									<option label="04" value="04">04</option>
+									<option label="05" value="05">05</option>
+									<option label="06" value="06">06</option>
+									<option label="07" value="07">07</option>
+									<option label="08" value="08">08</option>
+									<option label="09" value="09">09</option>
+									<option label="10" value="10">10</option>
+									<option label="11" value="11">11</option>
+									<option label="12" value="12">12</option>
+									<option label="13" value="13">13</option>
+									<option label="14" value="14">14</option>
+									<option label="15" value="15">15</option>
+									<option label="16" value="16">16</option>
+									<option label="17" value="17">17</option>
+									<option label="18" value="18">18</option>
+									<option label="19" value="19">19</option>
+									<option label="20" value="20">20</option>
+									<option label="21" value="21">21</option>
+									<option label="22" value="22">22</option>
+									<option label="23" value="23">23</option>
+									<option label="24" value="24">24</option>
+									<option label="25" value="25">25</option>
+									<option label="26" value="26">26</option>
+									<option label="27" value="27">27</option>
+									<option label="28" value="28">28</option>
+									<option label="29" value="29">29</option>
+									<option label="30" value="30">30</option>
+									<option label="31" value="31">31</option>
+								</select>
+							</li>
+							<li class="date_naissance_mois">
+								<label for="date_naissance_mois">Mois de naissance</label>
+								<select name="date_naissance_mois" id="date_naissance_mois">
+									<option label="Janvier" value="01">Janvier</option>
+									<option label="Février" value="02">Février</option>
+									<option label="Mars" value="03">Mars</option>
+									<option label="Avril" value="04">Avril</option>
+									<option label="Mai" value="05">Mai</option>
+									<option label="Juin" value="06">Juin</option>
+									<option label="Juillet" value="07">Juillet</option>
+									<option label="Août" value="08">Août</option>
+									<option label="Septembre" value="09">Septembre</option>
+									<option label="Octobre" value="10">Octobre</option>
+									<option label="Novembre" value="11">Novembre</option>
+									<option label="Décembre" value="12">Décembre</option>
+								</select>
+							</li>
+							<li class="date_naissance_annee">
+								<label for="date_naissance_annee">Année de naissance</label>
+								<input type="text" class="text" name="date_naissance_annee" id="date_naissance_annee" value="" />
+							</li>
+						</ul>
+					</fieldset>
+				</li>
+			</ul>
+		</fieldset>
+	
+		<fieldset class="conditions_generales">
+			<legend>Condition générales</legend>
+			<ul>
+				<li class="accepter_conditions">
+					<input type="checkbox" name="accepter_conditions" id="accepter_conditions" value="OK" />
+					<label for="accepter_conditions">J'ai lu et j'accepte les conditions générales du service</label>
+				</li>
+				<li class="accepter_spam">
+					<input type="checkbox" class="checkbox" name="accepter_spam" id="accepter_spam" value="OK" checked="checked" />
+					<label for="accepter_spam">J'autorise la divulgation de mes coordonnées à des tiers</label>
+				</li>
+			</ul>
+		</fieldset>
+		<p class="boutons">
+			<input type="button" class="button" value="Me desinscrire" />
+			<input type="submit" class="submit" value="Je m'abonne !" />
+		</p>
+	</form>
+</div>
+
+
+<h2>Réponses</h2>
+<h3>Prévisu</h3>
+
+<div class="formulaire_spip">
+	<form action="#" method="post">
+		<div>
+			<fieldset class="previsu">
+				<legend>Pr&eacute;visualisation</legend>
+				<ul>
+					<li><strong>De</strong> : adresse@couriel.fr</li>
+					<li><strong>Sujet</strong> : Titre du message</li>
+					<li><strong>Votre message</strong>
+					<p>Lorem ipsum dolor sit amet, sociis aliquam arcu ut, elit nullam suspendisse, quis et nulla ut, odio turpis cras molestie etiam vel consectetuer, laoreet pede vel cum non consectetuer.</p>
+					<p>Nulla tempus vitae felis ligula bibendum, taciti dui. Tellus ac mi dictum est accusantium in, vestibulum placerat. Et luctus praesent nibh. Etiam elit adipiscing dictum, nisl eu pulvinar eget dapibus nullam nulla. Dictum euismod vel. Ad lobortis quis, ultricies sollicitudin mauris, ut natoque purus, metus ipsam viverra dolor feugiat, enim donec morbi est.</p></li>
+				</ul>
+				<p class="boutons"><input type="submit" class="submit" name="confirmer" value="Confirmer l'envoi" /></p>
+			</fieldset>
+		</div>
+	</form>
+</div>
+
+
+<h2>Messages de réponse</h2>
+
+<div class="reponse">Exemple de message de réponse (div sans class). Lorem ipsum dolor sit <strong>amet</strong>, consectetuer adipiscing elit. <a href="#">Link</a>.</div>
+<div class="reponse info">Exemple de message d'information (<code>div.info</code>). Lorem ipsum dolor sit <strong>amet</strong>, consectetuer adipiscing elit. <a href="#">Link</a>.</div>
+<div class="reponse success">Bravo ! Exemple de message de succès (<code>div.success</code>). Lorem ipsum dolor sit <strong>amet</strong>, consectetuer adipiscing elit. <a href="#">Link</a>.</div>
+<div class="reponse notice">Attention ! Exemple de message d'alerte (<code>div.notice</code>). Lorem ipsum dolor sit <strong>amet</strong>, consectetuer adipiscing elit. <a href="#">Link</a>.</div>
+<div class="reponse error">Oooops ! Exemple de message d'erreur (<code>div.error</code>). Les images doivent obligatoirement faire <strong>moins de 1&nbsp;Mo</strong> (ce fichier fait 2.3&nbsp;Mo). <a href="#">Link</a>.</div>
+
+<h3>Classes historiques de SPIP</h3>
+<div class="formulaire_spip">
+	<p class="reponse_formulaire">Exemple de message de réponse (<code>.reponse_formulaire</code>). Lorem ipsum dolor sit <strong>amet</strong>, consectetuer adipiscing elit. <a href="#">Link</a>.</p>
+	<p class="reponse_formulaire reponse_formulaire_ok">Exemple de message de succès (<code>.reponse_formulaire_ok</code>). Lorem ipsum dolor sit <strong>amet</strong>, consectetuer adipiscing elit. <a href="#">Link</a>.</p>
+	<p class="reponse_formulaire reponse_formulaire_erreur">Exemple de message d'erreur (<code>.reponse_formulaire_erreur</code>). Les images doivent obligatoirement faire <strong>moins de 1&nbsp;Mo</strong> (ce fichier fait 2.3&nbsp;Mo). <a href="#">Link</a>.</p>
+</div>
+
+
+<h2>Exemples de formulaires SPIP fonctionnels</h2>
+
+#FORMULAIRE_RECHERCHE
+<hr />
+
+<BOUCLE_article(ARTICLES){id_auteur != 0}{par hasard}{0,1}>
+
+#FORMULAIRE_ECRIRE_AUTEUR
+<hr />
+
+#FORMULAIRE_FORUM
+<hr />
+
+#FORMULAIRE_INSCRIPTION
+<hr />
+
+<INCLURE{fond=formulaires/login}>
+<hr />
+
+</BOUCLE_article>
