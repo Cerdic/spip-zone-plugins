@@ -1,0 +1,70 @@
+[(#REM) <!-- Liste des boussoles :
+
+	Les parametres d'environnement specifiques sont :
+	- titre     : le titre de la liste
+	- par       : le champ tri principal
+	- pas       : le pas de pagination
+	- where		: condition supplementaire construite par l'appelant (exclusion de certaines lignes par ex)
+	- affichage : complet, simplifie
+ -->]
+
+[(#SET{defaut_tri,#ARRAY{
+	aka_boussole, 1,
+}})]
+<B_liste_boussoles>
+#ANCRE_PAGINATION
+<div class="liste-objets boussoles">
+	<table class="spip liste">
+		[<caption><strong class="caption">(#ENV*{titre, #GRAND_TOTAL|singulier_ou_pluriel{boussole:label_1_boussole, boussole:label_n_boussoles}})</strong></caption>]
+		<thead>
+			<tr class="first_row">
+				<th class="titre principale" scope="col"><:boussole:colonne_titre:></th>
+				<th class="titre" scope="col">[(#TRI{aka_boussole, <:boussole:colonne_alias:>, ajax})]</th>
+			[(#ENV{affichage}|=={complet}|oui)
+				<th class="logo" scope="col">&nbsp;</th>
+				<th class="version" scope="col"><:boussole:colonne_version:></th>
+				<th class="numero"><:boussole:colonne_nbr_sites:></th>
+				<th class="date" scope="col"><:boussole:label_actualise_le:></th>
+				<th class="lien" scope="col">&nbsp;</th>
+			]
+			</tr>
+		</thead>
+		<tbody>
+	<BOUCLE_liste_boussoles(BOUSSOLES) {fusion aka_boussole}{where?}{tri #ENV{par, aka_boussole}, #GET{defaut_tri}}{pagination #ENV{pas, 5}}>
+			#SET{infos, #BOUSSOLE_INFOS{#AKA_BOUSSOLE}}
+		<BOUCLE_logo_boussole(BOUSSOLES_EXTRAS){aka_boussole}{type_objet=boussole}{aka_objet=#AKA_BOUSSOLE}>
+			[(#SET{logo_boussole, #CHAMP_SQL{logo_objet}})]
+		</BOUCLE_logo_boussole>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
+				<td class="titre principale">
+					<a[ href="(#URL_ECRIRE{boussole}|parametre_url{alias, #AKA_BOUSSOLE})"]>
+						[(#AKA_BOUSSOLE|boussole_traduire{nom_boussole})]
+					</a>
+				</td>
+				<td class="titre" scope="col">#AKA_BOUSSOLE</td>
+			[(#ENV{affichage}|=={complet}|oui)
+				<td class="logo">
+					[(#GET{logo_boussole}
+						|image_reduire{20,26}
+						|inserer_attribut{alt, logo})]
+				</td>
+				<td class="version">[(#GET{infos}|table_valeur{version})]</td>
+				<td class="numero">[(#GET{infos}|table_valeur{nbr_sites}|singulier_ou_pluriel{boussole:label_1_site, boussole:label_n_sites})]</td>
+				<td class="date">[(#GET{infos}|table_valeur{maj}|affdate)]</td>
+				<td class="lien">
+					[(#BOUTON_ACTION{<:boussole:bouton_supprimer:>, #URL_ACTION_AUTEUR{client_supprimer_boussole, #AKA_BOUSSOLE, #SELF}, '', '', ''})]
+				</td>
+			]
+			</tr>
+	</BOUCLE_liste_boussoles>
+		</tbody>
+	</table>
+	[<p class='pagination'>(#PAGINATION{#ENV{pagination, prive}})</p>]
+</div>
+</B_liste_boussoles>
+[(#ENV{affichage}|=={complet}|oui)
+	#BOITE_OUVRIR{'','notice'}
+		<p><:boussole:info_liste_aucune_boussole:></p>
+	#BOITE_FERMER
+]
+<//B_liste_boussoles>

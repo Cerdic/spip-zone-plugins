@@ -1,0 +1,30 @@
+<paquet
+	prefix="boussole"
+	categorie="navigation"
+	version="2.7.7"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="boussole_logo-64.png"
+	schema="0.5"
+	documentation="https://contrib.spip.net/Boussole-v2-nouveau-fonctionnement-client-serveur"
+>	
+
+	<nom>Boussole</nom>
+	<!-- Les bonnes adresses de la galaxie SPIP ou d'ailleurs ! -->
+
+	<auteur lien="http://blog.smellup.net/">Eric Lupinacci</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
+
+	<pipeline nom="declarer_boussoles" action="" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/boussole_declarer.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/boussole_declarer.php" />
+	<pipeline nom="affiche_milieu" inclure="boussole_pipelines.php" />
+	<pipeline nom="affiche_gauche" inclure="boussole_pipelines.php" />
+	<pipeline nom="post_edition" inclure="boussole_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="genie/boussole_taches_generales_cron.php" />
+
+	<necessite nom="sites" compatibilite="[1.7.6;[" />
+
+	<menu nom="boussole" titre="boussole:bouton_boussole" parent="bando_squelette" icone="images/boussole_gerer-16.png" action="boussoles" />
+</paquet>

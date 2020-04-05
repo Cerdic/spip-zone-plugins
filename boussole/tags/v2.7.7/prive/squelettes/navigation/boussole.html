@@ -1,0 +1,34 @@
+[(#REM) <!-- Boite d'info de la boussole --> ]
+#BOITE_OUVRIR{'','info'}
+<div class="infos">
+	<div class="numero">
+		<:boussole:titre_boite_infos_boussole:>
+		<p>#ENV{alias}</p>
+	</div>
+
+	#SET{infos, #BOUSSOLE_INFOS{#ENV{alias}}}
+	<p>[<:boussole:label_actualise_le:><br />(#GET{infos}|table_valeur{maj}|affdate), [(#GET{infos}|table_valeur{maj}|affdate{H:i})]]</p>
+	<div class="liste">
+		<ul class="liste-items">
+			<li>[<:boussole:label_version:> (#GET{infos}|table_valeur{version})]</li>
+			<li>[(#GET{infos}|table_valeur{nbr_sites}|singulier_ou_pluriel{boussole:label_1_site, boussole:label_n_sites})]</li>
+		</ul>
+	</div>
+</div>
+#BOITE_FERMER
+
+[(#REM) <!-- Boite du logo de la boussole --> ]
+<div class="formulaire_spip formulaire_editer formulaire_editer_logo formulaire_editer_logo_plugin">
+	<h3 class="titrem">
+		[(#CHEMIN_IMAGE{image-24.png}|balise_img{'', cadre-icone})]
+		<:boussole:titre_boite_logo_boussole:>
+	</h3>
+	<BOUCLE_logo_boussole(BOUSSOLES_EXTRAS){aka_boussole=#ENV{alias}}{type_objet=boussole}{aka_objet=#ENV{alias}}>
+		[(#SET{logo_boussole, #CHAMP_SQL{logo_objet}})]
+	</BOUCLE_logo_boussole>
+	<INCLURE{fond=formulaires/inc-apercu-logo,
+		logo=#GET{logo_boussole},
+		quoi=logo_on,
+		editable='',
+		env} />
+</div>

@@ -1,0 +1,44 @@
+<div class="formulaire_spip formulaire_editer [formulaire_(#ENV{form})]">
+	<h3 class="titrem">
+		[<img width="24" height="24" class="cadre-icone" alt="icone boussole_ajout-24" src="(#CHEMIN{prive/themes/spip/images/boussole_ajout-24.png})" />]
+		<:boussole:titre_form_ajouter_boussole:>
+	</h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	<!-- <br class='bugajaxie' /> -->
+	<BOUCLE_editable(CONDITION) {si #ENV{editable}}>
+	<form method="post" action="#ENV{action}"><div>
+		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action --> ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<p class="explication"><:boussole:info_ajouter_boussole:></p>
+		<B_autres_boussoles>
+		<ul class="editer-groupe">
+			<li class="editer editer_mode[(#ENV{erreurs}|table_valeur{mode}|oui) erreur]">
+				<label><:boussole:label_mode:></label>
+		<BOUCLE_autres_boussoles(DATA) {source table, #ENV{_boussoles}}{par cle}>
+				#SET{alias, #VALEUR|table_valeur{alias}}
+				#SET{serveur, #VALEUR|table_valeur{serveur}}
+				#SET{infos, #GET{alias}|concat{:}|concat{#GET{serveur}}}
+
+				#SET{nom, #VALEUR|table_valeur{nom}|extraire_multi}
+				[(#GET{alias}|=={spip}|oui)
+					#SET{nom, #VAL{boussole:label_mode_standard}|_T{#ARRAY{boussole, #GET{nom}}}}
+				]
+				<div class="choix">
+					<input type="radio" value="#GET{infos}" id="boussole_#GET{alias}" class="radio" name="boussole" [(#ENV{boussole, spip:spip}|=={#GET{infos}}|oui) checked="checked"] />
+					<label for="boussole_#GET{alias}">[(#GET{nom}|sinon{#GET{alias}})][ \(<:boussole:colonne_serveur|strtolower:> (#GET{serveur})\)]</label>
+				</div>
+		</BOUCLE_autres_boussoles>
+			</li>
+		</ul>
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+		</B_autres_boussoles>
+			#BOITE_OUVRIR{'', notice}
+				<:boussole:message_nok_aucune_boussole_a_ajouter>
+			#BOITE_FERMER
+		<//B_autres_boussoles>
+	</div></form>
+	</BOUCLE_editable>
+</div>

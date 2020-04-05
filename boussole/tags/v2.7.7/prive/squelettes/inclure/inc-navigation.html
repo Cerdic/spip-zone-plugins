@@ -1,0 +1,26 @@
+[(#REM) <!-- Menu des onglets "fonction client", "fonction serveur" et "configuration du plugin"
+	L'item "fonction serveur" n'est présent que si la fonction serveur est activée sur le site.
+ --> ]
+<ul class="liste-items sous_navigation">
+	[<li class="item">
+		(#URL_ECRIRE{boussoles}|parametre_url{fonction, client}
+			|lien_ou_expose{
+				<:boussole:onglet_client:>,
+				[(#ENV{exec}|=={boussoles}|et{#ENV{fonction, client}|=={client}})]})
+	</li>]
+	<BOUCLE_si_serveur(CONDITION){si #CONFIG{boussole/serveur/actif}}>
+	[<li class="item">
+		(#URL_ECRIRE{boussoles}|parametre_url{fonction, serveur}
+			|lien_ou_expose{
+				<:boussole:onglet_serveur:>,
+					[(#ENV{exec}|=={boussoles}|et{#ENV{fonction, client}|=={serveur}})]})
+	</li>]
+	</BOUCLE_si_serveur>
+	[<li class="item">
+		(#URL_ECRIRE{configurer_boussole}
+			|lien_ou_expose{
+				<:boussole:onglet_configuration:>,
+				[(#ENV{exec}|=={configurer_boussole})]})
+	</li>]
+
+</ul>

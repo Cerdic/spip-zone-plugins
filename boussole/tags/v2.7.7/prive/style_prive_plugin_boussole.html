@@ -1,0 +1,79 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+.formulaire_editer_boussole, .formulaire_ajouter_boussole{
+	position:relative;
+}
+
+.formulaire_spip ul.groupe_entrees{
+	padding-top:0;
+	padding-bottom:0;
+	clear:both;
+}
+.formulaire_spip ul.groupe_entrees ul.groupe_entrees{
+	border-left:1px solid #ccc;
+}
+
+.formulaire_spip ul.groupe_entrees li.entree{
+	clear:both;
+	padding-left : 34px;
+	padding-right:0;
+	padding-bottom:0;
+	padding-top:0;
+	background-position:5px 10px;
+	background-repeat:no-repeat;
+	border-top:1px solid #ccc;
+}
+
+.formulaire_spip ul.groupe_entrees .ligne{
+	position:relative;
+	min-height: 33px;
+}
+
+.formulaire_spip ul.groupe_entrees .non{
+	color: #999;
+	background: url(#CHEMIN_IMAGE{fond-non.gif}) repeat;
+}
+
+.formulaire_spip ul.groupe_entrees .actions{
+	position:absolute;
+	right:5px;
+	top:5px;
+	text-align:right;
+}
+
+.formulaire_spip ul.groupe_entrees .titre{
+	font-weight:bold;
+	line-height:29px;
+}
+.formulaire_spip ul.groupe_entrees .infos{
+	font-size:0.9em;
+	margin-bottom:0;
+}
+
+.formulaire_spip ul.groupe_entrees .actions button{
+	border:none;
+	padding:0;
+	margin:0;
+	cursor:pointer;
+
+}
+.formulaire_spip ul.groupe_entrees img{
+	vertical-align:middle;
+}
+
+.boussoles-liees td.lien {text-align: right;}
