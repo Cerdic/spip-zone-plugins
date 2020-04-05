@@ -1,0 +1,10 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Sites</nom>
+
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008-2012 - licence GPL</auteur>
+  <version>0.8.8</version>
+  <necessite id='acs' version='[0.8.8;]' />
+  <group>content</group>
+</composant>

@@ -1,0 +1,26 @@
+[(#CACHE{0})]
+.cTags {
+  [border-width: (#VAR{acsTagsBord/Width});]
+  [border-style: (#VAR{acsTagsBord/Style});]
+  [border-color: (#VAR{acsTagsBord/Color});]
+  [background: (#VAR{acsTagsFond});]
+  -moz-border-radius: 5px;
+  [(#MODELE{c_css_shadow}{c=Tags})]
+}
+
+.cTags .text {
+  text-align : #VAR{acsTagsAlign,center};
+  padding : 5px;
+  overflow: hidden;
+}
+
+.cTags .bloc-title {
+  text-align : center;
+  font-weight: bold;
+  [background: (#VAR{acsTagsTitreFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsTagsTitreFondImage}})") repeat top left];]
+  [border-bottom: 1px solid (#VAR{acsTagsSep});]
+
+  -moz-border-radius: 5px;
+  -moz-border-radius-bottomleft: 0;
+  -moz-border-radius-bottomright: 0;
+}

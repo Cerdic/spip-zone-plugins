@@ -1,0 +1,45 @@
+[(#REM)
+                ACS
+           (Plugin Spip)
+      http://acs.geomaticien.org
+
+  Copyright Daniel FAIVRE, 2007-2012
+  Copyleft: licence GPL - Cf. LICENCES.txt
+
+Draw widget select controls on start and refresh (they works even without javascript !)
+
+]function initWidgets() {
+  jQuery(".ctlWidget").each(
+    function(i,cw) {
+      var selectid = "#select_" + cw.id;
+      jQuery(selectid).css("display", "none");
+      //if (jQuery(selectid).get(0)) jQuery(selectid).get(0).style.visibility = "hidden"; // for IE damned browser 
+      if (jQuery(selectid).val() != '') { 
+        var dragid = "#widget_" + jQuery(selectid).val();
+        jQuery("#widgets").append(jQuery(this).find(".widget"));
+        jQuery(this).find(".widget").remove();
+        jQuery(this).append(jQuery(dragid));
+      }
+    }
+  );
+[(#REM)
+
+Add widgets box filter on mouse enter into filter buttons
+]
+  jQuery(".widgets_filter_bar").show();
+  jQuery(".acs_box_composants a.grclbl:first").addClass("over");
+  jQuery(".acs_box_composants a.grclbl").each(function(i,btn) {
+    var g = jQuery(btn).attr("name");
+    g = g.replace(/gr_(.*)/, "$1");
+    jQuery(btn).mouseenter(function(e) {
+      jQuery(".acs_box_composants a.grclbl").removeClass("over");
+      jQuery(btn).addClass("over");
+      jQuery(".acs_box_composants ul.grclist").not(".gr_"+g).hide();
+      if (g=="all")
+        jQuery(".acs_box_composants ul.grclist").show();
+      else
+        jQuery(".acs_box_composants ul.gr_"+g).show();
+    });
+  });
+
+}

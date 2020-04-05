@@ -1,0 +1,6 @@
+[(#REM)
+
+Utilisation : <wiki|titre=truc> affiche un lien de type wiki vers l'article ayant
+pour titre "truc" s'il existe, et un lien pour le créer s'il n'existe pas.
+
+]<B_wiki><BOUCLE_wiki(ARTICLES){titre=#ENV{titre}}{0,1}{lang}><a class="wiki" href="#URL_ARTICLE" title="#TITRE">#ENV{titre}</a></BOUCLE_wiki><a class="wikinew" href="[(#URL_ECRIRE{articles_edit}|parametre_url{new,oui})]" title="<:ecrire:info_nouvel_article:>">#ENV{titre}</a><//B_wiki>

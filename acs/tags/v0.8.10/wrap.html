@@ -1,0 +1,45 @@
+[(#CACHE{0})][(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})][(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2012
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Encapsule un composant pour prévisualisation ou appel Ajax
+
+Wrap (encapsulate) widgets for preview or Ajax call
+
+]<html>
+<head>
+<meta name="robots" content="none">
+<!-- insert head  -->
+#INSERT_HEAD
+<!-- /insert head  -->
+[(#REM) Global ACS generated stylesheet]
+<link rel="stylesheet" href="spip.php?page=cat.css[&v=(#ACS_DERNIERE_MODIF)]" type="text/css" media="projection, screen, tv" />
+<?php // Widget's style is not included yet in above css if just activated
+$fond ='#ENV{c}.css';
+if (find_in_path($fond.'.html')) {
+	$fond = @recuperer_fond($fond);
+	if ($fond)
+		echo '<style>'.$fond.'</style>';
+}
+$fond ='#ENV{c}_instances.css';
+if (find_in_path($fond.'.html')) {
+	$fond = @recuperer_fond($fond, array("nic" => "#NIC"));
+	if ($fond)
+		echo '<style>'.$fond.'</style>';
+}
+?>
+</head>
+<body[ style="background: (#VAR{ACS_PREVIEW_BACKGROUND});"]>
+<?php
+// Use preview if exist, or component itself if not.
+$p = find_in_path($_GET['c'].'_preview.html');
+if ($p) : ?><INCLURE{fond=#EVAL{$_GET['c'].'_preview'}}{c}{nic=#ENV{nic}}>
+<?php else : ?><INCLURE{fond=#ENV{c}}{self}{env}{nic=#ENV{nic}}>
+<?php endif; ?>
+</body>
+</html>

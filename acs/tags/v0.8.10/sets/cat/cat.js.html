@@ -1,0 +1,39 @@
+[(#CACHE{7*24*3600,cache-client})][(#HTTP_HEADER{'Content-Type: text/javascript'})][(#REM)
+
+  Charger la librairie ACS, ses dependances, et les javascripts des composants
+  
+  Ne PAS compacter les js inclus dans ce fichier : c'est lui qu'on doit compacter
+
+][(#HEADER_COMPOSANTS{javascript})][(#REM)
+/**
+ * @fn wrapUrl(url, c)
+ * @brief Transforme une url spip pour "wrapper" un composant (requis pour Ajax)
+ * @param url URL
+ * @param c composant
+ * @return URL
+ */
+]function wrapUrl(url, c) {
+  url = url.replace(/\#[\w]*/, "");
+  creg = '&c=' + c;
+  url = url.replace(creg, "");
+  url = url.replace(/page=[\w]*/, "page=wrap&c=" + c);
+  if (url.indexOf("page=") < 0)
+    url = url.replace(/\?/, "?page=wrap&c=" + c + "&");
+  return url;
+}
+
+function unwrapUrl(url, c, page) {
+  creg = 'page=wrap&c=' + c;
+  url = url.replace(creg, page);
+  url = url.replace(/\?\&/, "?");
+  return url;
+}
+
+function pageUrl() {
+  page = document.URL.match(/page=[\w]*/);
+  if (page)
+    page = page[0];
+  else
+    page = "";
+  return page;
+}

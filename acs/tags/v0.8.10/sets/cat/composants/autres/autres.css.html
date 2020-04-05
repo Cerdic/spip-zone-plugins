@@ -1,0 +1,26 @@
+[(#CACHE{0})]
+.cAutres {
+  [border-width: (#VAR{acsAutresBord/Width});]
+  [border-style: (#VAR{acsAutresBord/Style});]
+  [border-color: (#VAR{acsAutresBord/Color});]
+  [background: (#VAR{acsAutresFond});]
+}
+.cAutres .bloc-title {
+  text-align : center;
+  font-weight: bold;
+  [background: (#VAR{acsAutresTitreFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsAutresTitreFondImage}})") repeat top left];]
+}
+.cAutres .menu-item {
+  [background: (#VAR{acsAutresFond});]
+  [border-top: 1px solid (#VAR{acsRubnavSep});]
+}
+.cAutres .menu-item a {
+  display: block;
+  [text-align: (#VAR{acsRubnavAlign});]
+  width: 100%;
+}
+[.cAutres .menu-item:hover, .cAutres .menu-item a:hover { background: (#VAR{acsRubnavFondHover});}]
+.cAutres .menu-item .titrearticle {
+  padding-left: 5px;
+  padding-right: 5px;
+}

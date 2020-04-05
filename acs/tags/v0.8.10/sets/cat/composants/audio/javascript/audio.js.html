@@ -1,0 +1,23 @@
+[(#CACHE{0})][(#REM)
+
+  Charger la librairie audio
+
+]var acsAudio_images = "#EVAL{_DIR_ACS}sets/#VAR{acsSet,cat}/composants/audio/images/";
+
+[(#REM) Debug with soundmanager2.js instead of soundmanager2-nodebug-jsmin.js ]
+[(#INCLURE{composants/audio/javascript/soundmanager2-nodebug-jsmin.js})]
+
+//soundManager.debugMode = true;
+soundManager.defaultOptions.volume = 100;
+soundManager.waitForWindowLoad = true;
+soundManager.url = "[(#CHEMIN{composants/audio/swf/})]";
+soundManager.onload = initSoundPlayers;
+
+[(#INCLURE{[(#EVAL{_DIR_JAVASCRIPT})md5.js]})]
+[(#INCLURE{composants/audio/javascript/audio.js})]
+
+jQuery(document).ready(
+  function() {
+    onAjaxLoad(initSoundPlayers);
+  }
+);

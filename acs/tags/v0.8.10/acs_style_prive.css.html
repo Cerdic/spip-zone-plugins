@@ -1,0 +1,550 @@
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+[(#REM)
+             ACS
+         (Plugin Spip)
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2012
+Copyleft: licence GPL - Cf. LICENCES.txt
+
+  Ce squelette definit les styles de l'espace prive pour ACS
+
+  Note: l'entete "Vary:" sert a repousser l'entete par
+  defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+  genant en cas de "rotation du cookie de session" apres
+  un changement d'IP (effet de clignotement).
+
+  ATTENTION: il faut absolument le charset sinon Firefox croit que
+  c'est du text/html !
+  
+]#CACHE{3600*100,cache-client}
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+
+[(#REM) On DOIT redéfinir la couleur du body pour overrider la couleur définie
+dans la feuille de style du modèle, qui est chargée.
+]body.acs {
+  background: #ffffff;
+}
+
+.acs table { margin: 0; padding: 0; border-collapse: collapse; border-spacing:0; border: 1px;}
+.acs table th,.acs table td,.acs table caption {padding:0; background:none}
+.acs table.centered {margin: 0 auto; text-align:center}
+.acs img { margin: 0; padding: 0; border: none;}
+.acs hr {height: 1px; margin:2px; border:0; border-top: 1px solid #GET{foncee};}
+
+.alert{
+  color: red;
+}
+
+[(#REM) Mise en page en colonnes - ne PAS mettre margin/padding là-dedans ! ]
+.acs_colonnes {
+  display: block;
+  padding: 0;
+  margin: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 10px;
+}
+.acs_col1, .acs_col2, .acs_col3 {
+  padding: 0;
+  margin: 0;
+}
+.acs_col1, .acs_col3 {
+  width: 25%;
+}
+.acs_col1 {
+  float: #LANG_LEFT;
+}
+.acs_col2 {
+  float: #LANG_LEFT;
+}
+.acs_col3 {
+  float: #LANG_RIGHT;
+}
+/* contenu des colonnes */
+.acs_col {
+  padding: 10px;
+}
+
+.acs_box {
+  position: relative;
+  border: thin solid #GET{foncee};
+  -moz-border-radius: 10px;
+  background: #ffffff;
+  margin-top: 14px;
+  width: 100%;
+}
+
+.acs_box_titre {
+  background: #GET{foncee};
+  padding-#LANG_LEFT: 40px;
+  padding-#LANG_RIGHT: 4px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  -moz-border-radius-topleft: 10px;
+  -moz-border-radius-topright: 10px;
+  color: #ffffff;
+  font-family: verdana,arial,helvetica,sans;
+  font-size: 12px;
+  font-weight: bold;
+}
+.acs_box_titre a {
+  font-weight: normal;
+  color: #ffffff;
+}
+
+.acs_box_texte {
+  padding: 8px;
+  text-align: #LANG_LEFT;
+  -moz-border-radius: 10px;
+  -moz-border-radius-topleft: 0;
+  -moz-border-radius-topright: 0;
+  color: #000000;
+  overflow: auto;
+}
+.acs_box_pages .acs_box_texte {
+  max-height: 600px;
+  overflow: auto;
+}
+.acs_box_composants {
+  width: 208px;
+}
+.acs_box_composants_hidden {
+  position: absolute;
+  display : none;
+}
+
+fieldset.apercu {
+  margin: 0;
+  padding: 0;
+  left: -1px;
+  top:-1px;
+  border: thin inset #GET{claire};
+  [background-color: (#VAR{acsFondColor, #ffffff});]
+  [background-image: url((#ACS_CHEMIN{fond/#VAR{acsFondImage}}));]
+  background-repeat: repeat;
+}
+
+.apercu legend {
+  margin-left: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  background: #fff;
+  border: thin inset #GET{claire};
+  -moz-border-radius: 8px;
+}
+
+.label {
+  color: black;
+}
+
+.forml {
+  padding:0;
+  padding-left:2px;
+  position: relative;
+  width: 100%;
+}
+
+.formc {
+  padding: 0;
+  line-height: 1em;
+  background: #e4e4e4;
+  border: 1px solid #GET{claire};
+  behavior: url(../dist/win_width.htc);
+  font-size: 12px;
+  font-family: Verdana,Arial,Sans,sans-serif;
+  width: 100%;
+}
+
+.led {
+  border: 1px solid #GET{foncee};
+  width: 1.15em;
+  height: 1.15em;
+  cursor:pointer;
+}
+
+.icon {
+  width: 1.27em; height: 1.27em;
+  cursor:pointer;
+}
+
+.liste_pages tr {
+  vertical-align: top;
+}
+.liste_pages td {
+  text-align: justify;
+}
+.liste_pages_sep {
+  height: 0.5em;
+}
+
+.spip_params {
+  line-height: 1em;
+  color: #3874b0;
+  margin-bottom: 2px;
+}
+
+
+.centre {
+  text-align: center;
+}
+
+.onlinehelp {
+  color: #GET{foncee};
+  cursor: default;
+}
+
+.onlinehelp .onlinehelplayer {
+  font-style: normal;
+}
+
+.onlinehelp .triangle {
+  vertical-align: top;
+  cursor:pointer;
+}
+
+.contexthelp {
+  z-index: 99999;
+  #LANG_RIGHT: 0;
+  margin: 0;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 5px;
+  background: #fffefd;
+  border: thin outset #GET{foncee};
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius-topright: 0;
+  -moz-border-radius-topright: 0;
+  -webkit-border-radius-topright: 0;
+  -khtml-border-radius-topright: 0;
+  box-shadow: 2px 2px 5px #dfdfdf;
+  -webkit-box-shadow: 2px 2px 5px #dfdfdf;
+  -moz-box-shadow: 2px 2px 5px #dfdfdf;
+}
+
+.btc_0 {
+  background: #f2fff2;
+}
+.btc_1 {
+  background: #ffe;
+}
+.btc_2 {
+  background: #fff8f8;
+}
+.btc_3 {
+  background: #f2f8ff;
+}
+.btc_4 {
+  background: #f8fff2;
+}
+.nompage {
+  color: black;
+}
+.nompage:hover {
+  color: blue;
+}
+
+.widgets {
+  width: 200px;
+  max-height : 400px;
+  overflow: auto;
+}
+.widgets_filter_bar {
+  display: none;
+}
+.widgets_filter_bar a {
+  display: inline-block;
+  border: 1px outset #GET{foncee};
+  background: #GET{claire};
+  text-align: center;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  border-radius: 5px 5px 0 0;
+}
+.widgets_filter_bar a.over {
+  background: none;
+  border: 1px inset #GET{foncee};
+}
+.widgets_filter_bar a img {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+}
+
+.widget, .widgy {
+  text-align: center;
+  -moz-border-radius: 12px;
+  color: #444;
+}
+.widget:hover, .widgy:hover {
+  color: black;
+}
+
+.widgy {
+  min-width: 80px;
+  padding-left: 5px;
+  padding-right: 5px;
+  background: #e5f6e8;
+  border: 1px outset #GET{foncee};
+  white-space: nowrap;
+}
+.widgy:hover {
+  background: #b4e9b4;
+  border: 1px inset #GET{foncee};
+}
+.widgy_overriden {
+  background: #ffe5b1;
+}
+.widgy_overriden:hover {
+  background: #fed991;
+}
+.widgy_unused {
+  background: #dfdfdf;
+}
+.acs .widgy_included {
+  border: thin dotted #GET{claire};
+  border-right: 0;
+  border-bottom: 0;
+  background: none;
+  vertical-align: top;
+  padding: 2px;
+}
+.widgy_included_label {
+  text-align : right;
+  vertical-align: top;
+}
+.widgy img {
+  vertical-align:middle;
+}
+
+.widget {
+  font-weight: bold;
+  font-size: 10px;
+  cursor: pointer;
+  height: 24px;
+  width: 180px;
+  margin: 0;
+  line-height: 10px;
+  background: url(#CHEMIN{images/composant.png}) no-repeat;
+  z-index: 3;
+}
+.widget_move {
+  cursor: move;
+  z-index: 9999;
+}
+.widget:hover {
+  color: black;
+  background: url(#CHEMIN{images/composant_hover.png}) no-repeat;
+}
+.widget_overriden {
+  background: url(#CHEMIN{images/composant_overide.png}) no-repeat;
+}
+.widget_overriden:hover {
+  background: url(#CHEMIN{images/composant_overide_hover.png}) no-repeat;
+}
+.widget_unused {
+  background: url(#CHEMIN{images/composant_inactif.png}) no-repeat;
+}
+.widget_unused:hover {
+  background: url(#CHEMIN{images/composant_inactif_hover.png}) no-repeat;
+}
+.widget img {
+  vertical-align:middle;
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+  cursor:move;
+}
+.widget_unused img {
+  cursor:pointer;
+}
+.widget a, .widgy a {
+  color: black;
+}
+.widget a:hover, .widgy a:hover {
+  color: darkgreen;
+}
+.widget table {
+  width: 100%;
+  height: 100%;
+}
+.widget table tr {
+  vertical-align: middle;
+}
+.widget div {
+  overflow:hidden; text-align:center;
+}
+.widget div a {
+  display: block;
+}
+
+.ctlWidget {
+  width: 180px;
+  height: 24px;
+  text-align: center;
+  border: 1px inset #GET{foncee};
+  background: #f0f0f8;
+}
+.ctlWidget, .c_config .ctlWidget_droppable_active, .c_config .ctlWidget_droppable_over, .c_config .ctlWidget_droppable_drop {
+  -moz-border-radius: 12px;
+  -moz-outline-radius: 12px;
+}
+.ctlWidget_droppable_active {
+  outline: thin dashed #dfdfdf;
+}
+.ctlWidget_droppable_over {
+  outline: 3px dotted lightgreen;
+}
+.ctlWidget_droppable_drop {
+  outline: 3px dotted orange;
+}
+
+.select_widget {
+  position:absolute;
+  width: 160px;
+  height: 18px;
+  margin-left:10px;
+  margin-top:2px;
+  left:0;
+  right:0;
+}
+
+.editeur_composant .select_widget {
+  position:relative;
+  width: 160px;
+}
+
+/* Coloration syntaxique acs-spip */
+.spip_source {
+  overflow: auto;
+  max-height: 600px;
+  border: 1px inset #dfdfdf;
+}
+
+.col_MODELE {
+  color: darkblue;
+}
+.col_BOUCLE, .col_FIN_BOUCLE, .col_B, .col_FIN_B {
+  color: darkviolet;
+}
+.col_REM {
+  color: grey;
+}
+.col_TRAD {
+  color: brown;
+}
+.col_INCLURE {
+  color: blue;
+}
+.col_VAR {
+  color: #00228f;
+}
+.col_BALISE {
+  color: #005d00;
+}
+
+[(#REM) Styles des pinceaux ACS. Les types autres que crayon permettent d'utiliser des controleurs spécifiques ]
+.crayon-icones em.crayon-pinceau {
+  background: url(#CHEMIN{images/pinceau.png}) no-repeat;
+  height: 20px;
+  width: 20px;
+  margin-top: -10px;
+  cursor: pointer;
+  display: none;
+}
+.crayon-changed em.crayon-pinceau {
+  display: none;
+}
+[(#REM) Hack : le type de crayon pour une traduction reprend l'icône normale des crayons, mais son existence permet d'éviter 
+l'utilisation du contrôleur par défaut qui pointe vers crayons_store standard et non vers la bonne action.]
+.crayon-icones em.crayon-traduction {
+  background: url(#CHEMIN{images/crayon20.png}) no-repeat;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  display: none;
+}
+.crayon-changed em.crayon-traduction {
+  display: none;
+}
+
+.edit_composant {
+; z-index: 99999000;
+  position: absolute;
+  display: block;
+  height: auto;
+  width: auto;
+}
+
+.editeur_composant .acs_box_texte{
+  padding: 0;
+  background: #f4f4f4;
+  border: thin outset;
+  font-size: 10px;
+  box-shadow: 2px 2px 5px #cfcfcf;
+  -webkit-box-shadow: 2px 2px 5px #cfcfcf;
+  -moz-box-shadow: 2px 2px 5px #cfcfcf;
+  filter: progid:DXImageTransform.Microsoft.dropShadow(color=#cfcfcf, offX=2, offY=2, positive=true);
+}
+
+.editeur_composant .c_config {
+  padding :8px;
+  max-height:300px;
+  overflow:auto;
+}
+img.bouton_edit_composant {
+  background: #e6f6e6;
+  border: 2px outset #88af88;
+  height:24px;
+  width: 24px;
+  padding: 2px;
+  -moz-border-radius: 4px;
+}
+img.bouton_edit_composant:hover {
+  background: #ffefaf;
+}
+
+.acsVarControleur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  z-index: 99999999;
+  background: #efefdf;
+  border : [(#GET{foncee})] 1px solid;
+  vertical-align: middle;
+  -moz-border-radius: 0;
+}
+.acsColorBlock {
+  float: right;
+  border:thin solid #000;
+  height:10px;
+  width:10px;
+  margin: 1px;
+}
+[(#REM) Position de l'image signalant un chargement en ajax 
+].image_loading {
+  position: absolute;
+}
+[(#REM) Style du selecteur d'admins
+].acs_editer_admins .highlight.off {
+  display :inline;
+  background: none;
+  font-weight: normal;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+.acs_editer_admins a.highlight {
+  background: #GET{claire};
+  font-weight: bold;
+}
+.acs_editer_admins a.highlight.off:hover {
+  background: #GET{claire};
+}
