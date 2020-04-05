@@ -1,0 +1,56 @@
+<B_mots>
+<div class='formulaire_spip formulaire_fusionmots'>
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+[(#ENV{erreurs}|count|oui)
+<div class='error'>
+[(#ENV{erreurs/remplacer})<br>][(#ENV{erreurs/par})<br>]
+</div>
+]<form action="#ENV{action}" method="post">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div class="liste-objets mots">			
+			<table class='spip liste'>
+				<caption>
+					<strong class="caption">
+						[(#ENV{id_groupe}|count|set{nb_grp})]
+						#TOTAL_BOUCLE <:mots:titre_page_mots_tous:>, 
+						[(#GET{nb_grp}|>{1}|oui)<:mots:info_nb_groupe_mots{nb=#GET{nb_grp}}:>]
+						[(#GET{nb_grp}|=={1}|oui)<:mots:info_1_groupe_mots:>]
+						</strong>
+					</caption>
+				<thead>
+					<tr class='first_row'>
+						<th colspan="2"><:fusionmots:remplacer:></th>
+						<th colspan="2"><:fusionmots:vers:></th>
+					</tr>
+				</thead>
+				<tbody>
+					
+				<BOUCLE_mots(MOTS){id_groupe IN #ENV{id_groupe} }{par titre}>
+				<tr class="[row_(#COMPTEUR_BOUCLE|alterner{odd,even})"]>
+					<td>
+						<input class='checkbox' type='checkbox' name='remplacer[]' id='remplacer_#ID_MOT' value='#ID_MOT'[(#ID_MOT|in_array{#ENV{remplacer}}|oui) checked='checked'] />
+						<label for='remplacer_#ID_MOT'>#TITRE</label>
+					</td>
+					<td>
+							<a href="[(#VAL{mot}|generer_url_ecrire{id_mot=#ID_MOT})]" [title="<:mots:info_dans_groupe|attribut_html:> (#INFO_TITRE{groupe_mot,#ID_GROUPE}|attribut_html)"]>#ID_MOT</a>
+					</td>
+					<td>
+						<input class='radio' type='radio' name='par' id='par_#ID_MOT' value='#ID_MOT'[(#ID_MOT|=={#ENV{par}}|oui) checked='checked'] />
+						<label for='par_#ID_MOT'>
+							#TITRE
+						</label>
+					</td>
+					<td>
+							<a href="[(#VAL{mot}|generer_url_ecrire{id_mot=#ID_MOT})]" [title="<:mots:info_dans_groupe|attribut_html:> (#INFO_TITRE{groupe_mot,#ID_GROUPE}|attribut_html)"] >#ID_MOT</a>
+					</td>
+				</tr>
+				</BOUCLE_mots>
+				</tbody>
+			</table>
+		</div>
+		<p class="boutons"><input type="submit" class="submit" value="<:pass_ok:>" /></p>
+	</form>
+</div>
+</B_mots>
+	<:fusionmots:aucun_groupe:><br><:fusionmots:choisir_groupe:>
+<//B_mots>

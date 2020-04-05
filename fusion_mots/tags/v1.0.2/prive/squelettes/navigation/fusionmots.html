@@ -1,0 +1,87 @@
+#SET{id_groupe,#ENV{id_groupe,#CONFIG{groupemot_actif}}}
+
+#BOITE_OUVRIR{'','info'}
+<:fusionmots:explication:>
+#BOITE_FERMER
+
+<B_grp>
+<div class="formulaire_spip formulaire_choix_groupe" id="formulaire_choix_groupe">
+	<h3 class="titrem">
+		[(#TOTAL_BOUCLE|>{1}|oui)<:mots:info_nb_groupe_mots{nb=#TOTAL_BOUCLE}:>]
+		[(#TOTAL_BOUCLE|=={1}|oui)<:mots:info_1_groupe_mots:>]
+	</h3>
+	<form action="[(#SELF|parametre_url{id_groupe,''})] "method="get">
+		[(#SELF|parametre_url{id_groupe,''}|form_hidden)]
+
+		<ul class="liste_items">
+			<BOUCLE_grp(GROUPES_MOTS){tout}{pagination 60}>
+			<li class="item editer [(#GET{id_groupe}|find{#ID_GROUPE}|oui)on ]">
+				<label class="label" for="grp_#ID_GROUPE">
+					<input 
+					id="grp_#ID_GROUPE" 
+					type="checkbox" 
+					class=""
+					[ (#GET{id_groupe}|find{#ID_GROUPE}|oui) checked="checked"]
+					name="id_groupe[]" 
+					value="#ID_GROUPE"/>
+					#TITRE
+				</label>
+			</li>
+			</BOUCLE_grp>
+		</ul>
+		<p class="boutons">
+			<input type="submit" class="btn" value="<:pass_ok:>"/>
+			<a href="./" class="js-check-all" style="display: none;" >
+				<:fusionmots:tous_groupes:>
+			</a>
+		</p>
+	</form>
+</div>
+<script type="text/javascript">
+
+var manipChoixGrp = function()	{
+
+	var  $f = $('.lat .formulaire_choix_groupe');
+	if ( $f.length == 0) return false;
+
+//fn callback qui met à jour le menu
+	var updateListeGrp = function(){
+		$f.find('.item').removeClass('on');
+		$f.find('input:checked').parents('.item').addClass('on');
+	}
+	// collecter les id_grp des checkbox => array
+	// et le donner a ajaxreload
+	var submitMot = function() {
+		t = [];
+		$f.find('input:checked').each(function(index, el) {
+			t.push(el.value);
+		});
+		ajaxReload('contenu', {
+			callback:function(){updateListeGrp()},
+			args:{'id_groupe':t}
+		})	
+	}
+	//bouton tout
+	$('.js-check-all').show().on('click', function(e) {
+		e.preventDefault();
+		var all = $f.find('input[type=checkbox]').length;
+		var on = $f.find('input:checked').length;
+		var state = (all>on) ? true : false;
+		$f.find('input[type=checkbox]').prop("checked", state);
+		submitMot();
+	});
+	//surveiller les checkbox
+	$f.find('ul').unbind('change').on('change', function(e) {
+		submitMot();
+	});
+
+}
+
+$(function(){
+	manipChoixGrp();
+});
+</script>
+
+</B_grp>
+<h3 class="titrem"><:mots:info_aucun_groupe_mots:></h3>
+<//B_grp>

@@ -1,0 +1,10 @@
+[(#AUTORISER{fusionner,mots}|oui)
+#SET{id_groupe,#ENV{id_groupe,#CONFIG{groupemot_actif}}}
+<h1 class="grostitre"><:fusionmots:fusionmots:></h1>
+	<div class='ajax'>
+		#FORMULAIRE_FUSIONMOTS{#GET{id_groupe}}
+	</div>
+][(#AUTORISER{fusionner,mots}|non)
+<p class="notice">
+	<:ecrire:info_page_interdite:>	
+</p>]
