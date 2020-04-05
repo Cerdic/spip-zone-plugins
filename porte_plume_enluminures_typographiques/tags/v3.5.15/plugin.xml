@@ -1,0 +1,79 @@
+<plugin>
+	<nom>Enluminures typographiques</nom>
+	<slogan>Plein de raccourcis pour la mise en forme !</slogan>
+	<auteur>[Jacques->https://contrib.spip.net/_Jacques-PYRAT_], &#224; partir des raccourcis mis en place par [Fran&#231;ois->https://contrib.spip.net/_Francois-Schreuer_]</auteur>
+	<licence>&#169; 2007 GNU/GPL</licence>
+	<lien>https://contrib.spip.net/Enluminures-typographiques-V3-pour-SPIP-2-avec</lien>
+	<version>3.5.15</version>
+	<version_base>0.1.0</version_base>
+	<install>base/typoenluminee_upgrade.php</install>
+	<etat>stable</etat>
+	<description>Ce plugin ajoute des raccourcis typographiques et des boutons au porte plume. Par exemple :
+-* Paragraphes :
+-** {{Sous-titres}} <code>{{{**</code>Texte du titre<code>}}}</code>, le nombre d'&#233;toiles (*) variant de 2 &#224; 5, la barre de raccourcis ne proposant que 2 et 3
+-** {{Centrer}} <code>[|</code>Paragraphe centr&#233;<code>|]</code>
+-** {{Aligner &#224; droite}} <code>[/</code>Paragraphe align&#233; &#224; droite<code>/]</code>
+-** {{Encadrer}} <code>[(</code>Paragraphe &#224; encadrer<code>)]</code>
+-* Caract&#232;res :
+-** {{Mise en &#233;vidence}} <code>[*</code>texte en &#233;vidence<code>*]</code>
+-** {{Mise en &#233;vidence variante}} <code>[**</code>texte en &#233;vidence (autre couleur)<code>*]</code>
+-** {{Mise en exposant}} {&lt;sup&gt;}texte en exposant{&lt;/sup&gt;}
+-** {{Petites capitales}} {&lt;sc&gt;}texte en petite capitales{&lt;/sc&gt;}
+-** {{Biff&#233;}} {&lt;del&gt;}texte biff&#233;{&lt;/del&gt;}
+
+{{Param&#233;trage}} : vous pouvez modifier le fonctionnement du plugin par votre fichier ecrire/mes_options.php ou en installant le plugin cfg (les options de cfg sont priortitaires par rapport &#224; celles de mes_options.php !)
+	</description>
+	<prefix>typoenluminee</prefix>
+	<icon>img_pack/moinecopiste.gif</icon>
+	<options>typoenluminee_options.php</options>
+
+	<pipeline>
+		<nom>pre_propre</nom>
+		<inclure>typoenluminee.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_propre</nom>
+		<inclure>typoenluminee.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_liens</nom>
+		<inclure>typoenluminee.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_typo</nom>
+		<inclure>typoenluminee.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_typo</nom>
+		<inclure>typoenluminee.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>nettoyer_raccourcis_typo</nom>
+		<inclure>typoenluminee.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>typoenluminee_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>typoenluminee_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>typoenluminee_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>porte_plume_barre_pre_charger</nom>
+		<inclure>enluminures_typo_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>porte_plume_lien_classe_vers_icone</nom>
+		<inclure>enluminures_typo_pipelines.php</inclure>
+	</pipeline>
+	<categorie>edition</categorie>
+	<necessite id="SPIP" version="[2.0.3;3.3.99]" />
+	<necessite id="porte_plume" version="[1.7.2;]" />
+	
+	<utilise id="frimousses" />
+</plugin>

@@ -1,0 +1,33 @@
+h2.spip, h3.spip, h4.spip, h5.spip, h6.spip {
+	border-left: 1px solid #ccd;
+    color: #666;
+	padding-left: 1em;
+	text-align: left;
+	margin-left: 15px;
+}
+h2.spip {
+    border-left-width: 16px;
+	margin-left: 0;
+}
+h3.spip {
+    border-left-width: 10px;
+	margin-left: 6px;
+}
+h4.spip {
+    border-left-width: 6px;
+	margin-left: 10px;
+}
+h5.spip {
+    border-left-width: 2px;
+	margin-left: 14px;
+}
+
+acronym, abbr { border-bottom: .1em dotted; cursor: help; }
+
+.preview  ol.spip {
+	padding: 0;
+}
+
+.smallcaps {
+	font-variant: small-caps;
+}
