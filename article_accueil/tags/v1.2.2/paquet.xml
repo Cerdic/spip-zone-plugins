@@ -1,0 +1,22 @@
+<paquet
+	prefix="article_accueil"
+	categorie="outil"
+	version="1.2.2"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/article_accueil-48.png"
+	schema="0.1.0"
+	documentation="https://contrib.spip.net/?article3776"
+>
+
+	<nom>Articles d'accueil</nom>
+	<!-- Attribuer un article d'accueil aux rubriques -->
+
+	<auteur lien="http://www.yterium.com">Cedric Morin</auteur>
+	<auteur lien="https://contrib.spip.net/Joseph">Joseph</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_principales" inclure="base/article_accueil.php" />
+	<pipeline nom="affiche_milieu" inclure="article_accueil_pipeline.php" />
+</paquet>
