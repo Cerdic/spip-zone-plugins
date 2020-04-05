@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/reservation_credit_mouvements, par=id_reservations_detail, env, ajax, sinon=<:reservation_credit_mouvement:info_aucun_reservation_credit_mouvement:>}>
+
+[(#AUTORISER{creer,reservation_credit_mouvement})
+	[(#URL_ECRIRE{reservation_credit_mouvement_edit,new=oui}|icone_verticale{<:reservation_credit_mouvement:icone_creer_reservation_credit_mouvement:>,reservation_credit_mouvement,new,right})]
+]

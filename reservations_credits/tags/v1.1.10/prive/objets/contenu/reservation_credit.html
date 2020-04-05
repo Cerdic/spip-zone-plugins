@@ -1,0 +1,15 @@
+<BOUCLE_reservation_credit(RESERVATION_CREDITS){id_reservation_credit}>
+
+[<div class="champ contenu_email[ (#EMAIL*|strlen|?{'',vide})]">
+  <label><:reservation:label_email:> </label>
+  <span dir='#LANG_DIR' class='#EDIT{email} email'>(#EMAIL)</span>
+</div>]
+  <B_montants>
+<div class="champ contenu_credit">
+  <label><:reservation_credit:champ_credit_label:> : </label>
+  <BOUCLE_montants(DATA){source tableau, #CREDIT|unserialize}>
+  [<div>(#VALEUR|prix_formater_devise{#CLE})</div>]
+  </BOUCLE_montants>
+</div>
+  <B_montants>
+</BOUCLE_reservation_credit>

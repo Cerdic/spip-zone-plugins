@@ -1,0 +1,17 @@
+<B_credit>
+[(#BOITE_OUVRIR{
+    [(#CHEMIN_IMAGE{reservation_credit-32.png}|balise_img{'','cadre-icone'})]
+    ,'simple personnel infos'})]  
+<BOUCLE_credit(RESERVATION_CREDITS){email}>
+<div class='infos'>
+  <h4><:reservation_credit:titre_reservation_credit:></h4>
+  <div class="credit">
+    <span class="label"><:reservation:montant:></span>
+    <BOUCLE_montant(DATA){source tableau, #CREDIT|unserialize}>
+      <div class="montant">#VALEUR[ (#CLE|!={sans_devise}|oui)#CLE]</div>
+    </BOUCLE_montant>
+  </div>
+</div>
+</BOUCLE_credit>
+#BOITE_FERMER     
+</B_credit>

@@ -1,0 +1,37 @@
+<paquet
+	prefix="reservations_credits"
+	categorie="date"
+	version="1.1.10"
+	etat="stable"
+	compatibilite="[3.0.20;3.3.*]"
+	logo="prive/themes/spip/images/reservations_credits-64.png"
+	documentation="https://contrib.spip.net/Reservations-credits-5020"
+	schema="1.1.1">
+
+	<nom>Réservations Crédits</nom>
+
+		<auteur lien='https://web-simple.eu'>Rainer Müller</auteur>
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="saisies" compatibilite="[3.32.1;]" />
+	<necessite nom="verifier" compatibilite="[1.9.6;]" />
+	<necessite nom="reservation_evenement" compatibilite="[1.30.5;]" />
+	<necessite nom="reservation_bank" compatibilite="[1.4.3;]" />
+
+	<pipeline nom="affiche_gauche" inclure="reservations_credits_pipelines.php" />
+	<pipeline nom="autoriser" inclure="reservations_credits_autorisations.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/reservations_credits.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/reservations_credits.php" />
+	<pipeline nom="post_edition" inclure="reservations_credits_pipelines.php" />
+	<pipeline nom="header_prive" inclure="reservations_credits_pipelines.php" />
+	<pipeline nom="reservation_evenement_objets_navigation" inclure="reservations_credits_pipelines.php" />
+
+
+	<menu
+		nom="reservation_credit_creer"
+		titre="reservation_credit:icone_creer_reservation_credit"
+		parent="outils_rapides"
+		icone="images/reservation_credit-new-16.png"
+		action="reservation_credit_edit"
+		parametres="new=oui" />
+</paquet>

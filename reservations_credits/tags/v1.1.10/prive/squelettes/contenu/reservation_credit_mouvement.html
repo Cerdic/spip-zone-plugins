@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,reservation_credit_mouvement,#ID_RESERVATION_CREDIT_MOUVEMENT}|sinon_interdire_acces)]
+<BOUCLE_reservation_credit_mouvement(RESERVATION_CREDIT_MOUVEMENTS){id_reservation_credit_mouvement}{si #ENV{exec}|=={reservation_credit_mouvement}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,reservation_credit_mouvement,#ID_RESERVATION_CREDIT_MOUVEMENT})
+		[(#ID_RESERVATION_CREDIT_MOUVEMENT|afficher_qui_edite{reservation_credit_mouvement}|non)
+			[(#URL_ECRIRE{reservation_credit_mouvement_edit,id_reservation_credit_mouvement=#ID_RESERVATION_CREDIT_MOUVEMENT}|icone_verticale{<:reservation_credit_mouvement:icone_modifier_reservation_credit_mouvement:>,reservation_credit_mouvement,edit,right ajax preload})]
+		]
+		[(#ID_RESERVATION_CREDIT_MOUVEMENT|afficher_qui_edite{reservation_credit_mouvement}|oui)
+			[(#URL_ECRIRE{reservation_credit_mouvement_edit,id_reservation_credit_mouvement=#ID_RESERVATION_CREDIT_MOUVEMENT}|icone_verticale{#ID_RESERVATION_CREDIT_MOUVEMENT|afficher_qui_edite{reservation_credit_mouvement},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#DESCRIPTIF|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{reservation_credit_mouvement-24.png}|balise_img{reservation_credit_mouvement,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{reservation_credit_mouvement,#ID_RESERVATION_CREDIT_MOUVEMENT}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/reservation_credit_mouvement,id=#ID_RESERVATION_CREDIT_MOUVEMENT,id_reservation_credit_mouvement=#ID_RESERVATION_CREDIT_MOUVEMENT,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,reservation_credit_mouvement,#ID_RESERVATION_CREDIT_MOUVEMENT})
+	[(#ID_RESERVATION_CREDIT_MOUVEMENT|afficher_qui_edite{reservation_credit_mouvement}|non)
+		[(#URL_ECRIRE{reservation_credit_mouvement_edit,id_reservation_credit_mouvement=#ID_RESERVATION_CREDIT_MOUVEMENT}|icone_verticale{<:reservation_credit_mouvement:icone_modifier_reservation_credit_mouvement:>,reservation_credit_mouvement,edit,right ajax preload})]
+	]
+	[(#ID_RESERVATION_CREDIT_MOUVEMENT|afficher_qui_edite{reservation_credit_mouvement}|oui)
+		[(#URL_ECRIRE{reservation_credit_mouvement_edit,id_reservation_credit_mouvement=#ID_RESERVATION_CREDIT_MOUVEMENT}|icone_verticale{#ID_RESERVATION_CREDIT_MOUVEMENT|afficher_qui_edite{reservation_credit_mouvement},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,reservation_credit_mouvement,id,#ID_RESERVATION_CREDIT_MOUVEMENT},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_reservation_credit_mouvement>
+[(#ENV**{exec}|=={reservation_credit_mouvement_edit}|?{#INCLURE{fond=prive/squelettes/contenu/reservation_credit_mouvement_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_reservation_credit_mouvement>

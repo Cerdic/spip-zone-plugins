@@ -1,0 +1,58 @@
+[(#AUTORISER{voir,reservation_credit,#ID_RESERVATION_CREDIT}|sinon_interdire_acces)]
+<BOUCLE_reservation_credit(RESERVATION_CREDITS){id_reservation_credit}{si #ENV{exec}|=={reservation_credit}}>
+	[(#BOITE_OUVRIR{[
+		[(#AUTORISER{modifier,reservation_credit,#ID_RESERVATION_CREDIT})
+			[(#ID_RESERVATION_CREDIT|afficher_qui_edite{reservation_credit}|non)
+				[(#URL_ECRIRE{reservation_credit_edit,id_reservation_credit=#ID_RESERVATION_CREDIT}|icone_verticale{<:reservation_credit:icone_modifier_reservation_credit:>,reservation_credit,edit,right ajax preload})]
+			]
+			[(#ID_RESERVATION_CREDIT|afficher_qui_edite{reservation_credit}|oui)
+				[(#URL_ECRIRE{reservation_credit_edit,id_reservation_credit=#ID_RESERVATION_CREDIT}|icone_verticale{#ID_RESERVATION_CREDIT|afficher_qui_edite{reservation_credit},warning-24,'',right edition_deja ajax preload})]
+			]
+		]
+	
+		<h1>[(#RANG). ](#EMAIL|infos_client{nom,''}|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{reservation_credit-24.png}|balise_img{reservation_credit,cadre-icone})]</h1>
+	
+		],simple fiche_objet}
+	)]
+
+	<div class="ajax">
+		#FORMULAIRE_DATER{reservation_credit,#ID_RESERVATION_CREDIT}
+	</div>
+
+	<!--affiche_milieu-->
+
+	<div id="wysiwyg">
+		<INCLURE{fond=prive/objets/contenu/reservation_credit,id=#ID_RESERVATION_CREDIT,id_reservation_credit=#ID_RESERVATION_CREDIT,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+	</div>
+
+	<div class="nettoyeur"></div>
+
+	[(#AUTORISER{modifier,reservation_credit,#ID_RESERVATION_CREDIT})
+		[(#ID_RESERVATION_CREDIT|afficher_qui_edite{reservation_credit}|non)
+			[(#URL_ECRIRE{reservation_credit_edit,id_reservation_credit=#ID_RESERVATION_CREDIT}|icone_verticale{<:reservation_credit:icone_modifier_reservation_credit:>,reservation_credit,edit,right ajax preload})]
+		]
+		[(#ID_RESERVATION_CREDIT|afficher_qui_edite{reservation_credit}|oui)
+			[(#URL_ECRIRE{reservation_credit_edit,id_reservation_credit=#ID_RESERVATION_CREDIT}|icone_verticale{#ID_RESERVATION_CREDIT|afficher_qui_edite{reservation_credit},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,reservation_credit,id,#ID_RESERVATION_CREDIT},data,'<div class="nettoyeur"></div>'}}
+
+	#BOITE_FERMER
+
+	<INCLURE{fond=prive/objets/liste/reservation_credit_mouvements,id_reservation_credit,par=id_reservation_credit_mouvement,env}/>
+
+	[(#AUTORISER{creer,reservationcreditmouvement})
+		[(#URL_ECRIRE{reservation_credit_mouvement_edit,new=oui&id_reservation_credit=#ID_RESERVATION_CREDIT}|icone_verticale{<:reservation_credit_mouvement:icone_creer_reservation_credit_mouvement:>,reservation_credit_mouvement,new,right})]
+	]
+
+	[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">
+		/*<!\\[CDATA\\[*/
+		reloadExecPage('#ENV{exec}', '#navigation,#chemin,#extra');
+		/*\\]\\]>*/
+	</script>
+	]
+	</BOUCLE_reservation_credit>
+	[(#ENV**{exec}|=={reservation_credit_edit}|?{#INCLURE{fond=prive/squelettes/contenu/reservation_credit_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+	<//B_reservation_credit>
