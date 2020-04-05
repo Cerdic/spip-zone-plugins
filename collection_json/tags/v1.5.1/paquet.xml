@@ -1,0 +1,23 @@
+<paquet
+	prefix="collectionjson"
+	categorie="outil"
+	version="1.5.1"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo=""
+>
+	<nom>API Collection+JSON</nom>
+	
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<credit lien="https://github.com/collection-json/spec">Spécifications Collection+JSON</credit>
+	<copyright>2013</copyright>
+	<licence>GPL v3</licence>
+	
+	<necessite nom="http" compatibilite="[1.2.0;]" />
+	
+	<pipeline nom="autoriser" inclure="collectionjson_autorisations.php" />
+	<pipeline nom="collectionjson_get_collection" action="" />
+	<pipeline nom="http_collectionjson_get_index_contenu" action="" />
+	<pipeline nom="http_collectionjson_get_collection_contenu" action="" />
+	<pipeline nom="http_collectionjson_get_ressource_contenu" action="" />
+</paquet>

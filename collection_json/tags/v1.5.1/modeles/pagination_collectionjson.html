@@ -1,0 +1,17 @@
+#SET{bornes,#ENV{page_courante}|bornes_pagination{#ENV{nombre_pages},10}}
+#SET{premiere, #GET{bornes}|reset}
+#SET{derniere, #GET{bornes}|end}
+#SET{i,#ENV{page_courante}|moins{1}}
+
+[(#ENV{page_courante}|>{1}|oui)
+	[(#SET{item, #ENV{page_courante}|moins{2}|mult{#ENV{pas}} })]
+	{"rel":"previous", "href":"[(#ENV{url}|url_absolue|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}})]"}
+]
+
+[(#REM) S'il y a les deux, il faut mettre une virgule ]
+[(#ENV{page_courante}|>{1}|et{#ENV{page_courante}|<{#ENV{nombre_pages}}}),]
+
+[(#ENV{page_courante}|<{#ENV{nombre_pages}}|oui)
+	[(#SET{item, #ENV{page_courante}|mult{#ENV{pas}} })]
+	{"rel":"next", "href":"[(#ENV{url}|url_absolue|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}})]"}
+]
