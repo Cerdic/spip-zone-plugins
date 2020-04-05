@@ -1,0 +1,21 @@
+<paquet
+	prefix="fil_ariane"
+	categorie="navigation"
+	version="0.1.13"
+	etat="dev"
+	compatibilite="[2.1.0;3.1.*]"
+	logo="img/fil_ariane-128.png"
+	documentation="https://contrib.spip.net/Plugin-Fil-d-Ariane"
+>
+
+	<nom>Fil d'Ariane</nom>
+
+	<auteur lien="http://www.cym.fr">Cyril MARION</auteur>
+	<auteur lien="http://magraine.net">Matthieu Marcillaud</auteur>
+
+	<licence>GNU/GPL</licence>
+	<traduire gestionnaire="salvatore" module="fil_ariane" reference="fr" />
+
+	<pipeline nom="insert_head" inclure="fil_ariane_pipelines.php" />
+
+</paquet>
