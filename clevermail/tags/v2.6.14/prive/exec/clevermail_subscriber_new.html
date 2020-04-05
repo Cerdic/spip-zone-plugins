@@ -1,0 +1,17 @@
+<!--#hierarchie-->
+<ul id="chemin">
+  <li><a href="#URL_ECRIRE{clevermail}"><:clevermail:administration:></a></li>
+  <li>&gt; <:clevermail:ajouter_abonnes:></li>
+</ul>
+<!--/#hierarchie-->
+<h1><:clevermail:ajouter_abonnes:></h1>
+[(#REM)<div class="ajax">]
+  #FORMULAIRE_CLEVERMAIL_SUBSCRIBER_NEW{}
+[(#REM)</div>]
+<!--#navigation-->
+  <INCLURE{fond=prive/menu}>
+<!--/#navigation-->
+<!--#extra-->
+	<strong>Ajout multiple</strong><br />
+	<p>Dans le fichier ou dans la zone de saisie, mettre une adresse e-mail par ligne, ou séparer les adresses par des virgules ou points virgules.</p>
+<!--/#extra-->

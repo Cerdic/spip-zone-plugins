@@ -1,0 +1,11 @@
+Évolutions envisagées :
+-* Choix des modes d'abonnement possibles pour chaque liste
+-* Export CSV des abonnés
+-* Page de gestion de profil pour les abonnés
+-* Extraction de tous les textes sous forme de chaînes de langue
+-* Salvatorisation. Nécessite un changement de nom du plugin (http://article.gmane.org/gmane.comp.web.spip.zone/13503 )... :-(
+-* Envoi programmé d'un message déjà créé
+-* Envoi en multipart avec images et CSS incluses ?
+-* Utilisation de CFG pour la configuration ? (bof, une dépendance en plus)
+-* Vos idées ?
+

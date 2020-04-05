@@ -1,0 +1,114 @@
+.error {
+    color: #cc0000;
+    font-weight: bold;
+}
+
+.noerror {
+    color: #00cc00;
+    font-weight: bold;
+}
+
+h4 {
+	font-weight: bold;
+	margin: 0 0 10px 0;
+	padding: 0;
+	font-size: 12px;
+}
+
+.clevermail_menu {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.clevermail_menu li {
+  margin-bottom: 10px;
+  line-height: 16px;
+  padding-left: 20px;
+}
+
+.clevermail_menu .liste_lettres {
+  background: url(../prive/themes/spip/images/fatcow/16/email_open.png) top left no-repeat;
+}
+
+.clevermail_menu .creer_lettre {
+  background: url(../prive/themes/spip/images/fatcow/16/email_add.png) top left no-repeat;
+}
+
+.clevermail_menu .liste_abonnes {
+  background: url(../prive/themes/spip/images/fatcow/16/group.png) top left no-repeat;
+}
+
+.clevermail_menu .ajouter_abonnes {
+  background: url(../prive/themes/spip/images/fatcow/16/user_add.png) top left no-repeat;
+}
+
+.clevermail_menu .parametres {
+  background: url(../prive/themes/spip/images/fatcow/16/gear_in.png) top left no-repeat;
+}
+
+.clevermail_menu .documentation {
+  background: url(../prive/themes/spip/images/fatcow/16/document_image.png) top left no-repeat;
+}
+
+
+/* Listes des lettres et des messages */
+
+.liste_lettres .description {
+  font-size: 1.2em;
+  margin: .5em 0;
+}
+
+.liste_lettres .actions, .liste_messages .actions {
+  list-style-type: none;
+  margin-top: 5px !important;
+}
+
+.liste_lettres .actions li, .liste_messages .actions li {
+  display: inline;
+  padding: 0 0 5px 18px;
+  margin-left: 10px;
+  font-size: 11px;
+  line-height: 20px;
+}
+
+/* Actions sur les lettres */
+
+
+.liste_lettres .actions li.lettre_modifier {
+  background: url(../prive/themes/spip/images/fatcow/16/email_edit.png) top left no-repeat;
+}
+
+.liste_lettres .actions li.lettre_supprimer {
+  background: url(../prive/themes/spip/images/fatcow/16/email_delete.png) top left no-repeat;
+}
+
+.liste_lettres .actions li.message_creer {
+  background: url(../prive/themes/spip/images/fatcow/16/page_white_add.png) top left no-repeat;
+}
+
+/* Actions sur les messages */
+.liste_messages .actions {text-align: left;}
+
+.liste_messages .actions li.message_actualiser {
+  background: url(../prive/themes/spip/images/fatcow/16/update.png) top left no-repeat;
+}
+
+.liste_messages .actions li.message_apercu_html {
+  background: url(../prive/themes/spip/images/fatcow/16/page_white_code.png) top left no-repeat;
+}
+
+.liste_messages .actions li.message_apercu_texte {
+  background: url(../prive/themes/spip/images/fatcow/16/page_white_text.png) top left no-repeat;
+}
+
+.liste_messages .actions li.message_modifier {
+  background: url(../prive/themes/spip/images/fatcow/16/page_white_edit.png) top left no-repeat;
+}
+
+.liste_messages .actions li.message_supprimer {
+  background: url(../prive/themes/spip/images/fatcow/16/page_white_delete.png) top left no-repeat;
+}
+
+.liste_messages .actions li.message_envoyer {
+  background: url(../prive/themes/spip/images/fatcow/16/page_white_go.png) top left no-repeat;
+}

@@ -1,0 +1,110 @@
+#SET{preview_text,#EVAL{_CLEVERMAIL_PREVIEW_TEXTE}}
+#SET{preview_html,#EVAL{_CLEVERMAIL_PREVIEW_HTML}}
+<BOUCLE_list(CM_LISTS){lst_id=#ENV{lst_id}}>
+  <!--#hierarchie-->
+  <ul id="chemin">
+    <li><a href="#URL_ECRIRE{clevermail}"><:clevermail:administration:></a></li>
+    <li>&gt; <a href="#URL_ECRIRE{clevermail_lists}"><:clevermail:liste_lettres:></a></li>
+    <li>&gt; <a href="#URL_ECRIRE{clevermail_lists}#lst#LST_ID">#LST_NAME</a></li>
+  </ul>
+  <!--/#hierarchie-->
+  <BOUCLE_subscribers(CM_LISTS_SUBSCRIBERS){lst_id} />#SET{nbSubs,#TOTAL_BOUCLE}<//B_subscribers>
+  <h1><:clevermail:liste_messages:></h1>
+  <B_posts_new>
+		<h2><:clevermail:nouveaux_messages:></h2>
+	  <p><:clevermail:nouveaux_messages_text:> :</p>
+		<ul class="liste_items liste_messages">
+			<BOUCLE_posts_new(CM_POSTS){lst_id}{pst_date_sent=0}{par pst_date_create}{inverse}>
+			  <li class="item">
+			    <p><strong>#PST_SUBJECT</strong></p>
+			    <ul>
+            <li><:clevermail:cree:> le [(#PST_DATE_CREATE|cm_date)] à [(#PST_DATE_CREATE|cm_heure)]</li>
+	          [(#PST_DATE_UPDATE|>{0}|oui)<li><:clevermail:modifie:> le [(#PST_DATE_UPDATE|cm_date)] à [(#PST_DATE_UPDATE|cm_heure)]</li>]
+		      </ul>
+			    <ul class="actions">
+			    <li class="message_actualiser">[(#BOUTON_ACTION{<:clevermail:actualiser:>,#URL_ACTION_AUTEUR{clevermail_post_update,#PST_ID,#SELF},ajax})]</li>
+	          <li class="message_apercu_html"><a href="[(#URL_PAGE{#GET{preview_html}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu_html:></a></li>
+				    <li class="message_apercu_texte"><a href="[(#URL_PAGE{#GET{preview_text}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu_texte:></a></li>
+				 </ul><ul class="actions">
+				    <li class="message_modifier"><a href="[(#URL_ECRIRE{clevermail_post_edit}|parametre_url{pst_id,#PST_ID})]"><:clevermail:modifier:></a></li>
+		        <li class="message_supprimer">[(#BOUTON_ACTION{<:clevermail:supprimer:>,#URL_ACTION_AUTEUR{clevermail_post_remove,#PST_ID,#SELF},ajax,<:clevermail:supprimer_confirmer:>})]</li>
+	          [(#GET{nbSubs}|>{0}|oui)
+  	          <li class="message_envoyer">[(#BOUTON_ACTION{<:clevermail:envoyer:>,#URL_ACTION_AUTEUR{clevermail_post_queue,#PST_ID,#SELF},ajax})]</li>
+  	        ]
+	          [(#GET{nbSubs}|>{0}|non)
+	            <li><span title="<:clevermail:envoyer_non_aucun_abonne:>"><:clevermail:envoyer:></span></li>
+	          ]
+			    </ul>
+			  </li>
+	  	</BOUCLE_posts_new>
+		</ul>
+	</B_posts_new>
+	#SET{posts,#ARRAY}
+	<BOUCLE_posts(CM_POSTS){lst_id}>
+	  #SET{posts,#GET{posts}|push{#PST_ID}}
+	</BOUCLE_posts>
+  <B_posts_queued>
+    <h2><:clevermail:messages_cours_envoi:></h2>
+    <p><:clevermail:messages_cours_envoi_text:> :</p>
+    <ul class="liste_items liste_messages">
+      <BOUCLE_posts_queued(CM_POSTS_QUEUED){pst_id IN #GET{posts}}{par psq_date}{inverse}{fusion pst_id}>
+        <BOUCLE_post_queued(CM_POSTS){pst_id}>
+	        <BOUCLE_still_queued1(CM_POSTS_QUEUED){pst_id} />#SET{nbQueued,#TOTAL_BOUCLE}<//B_still_queued1>
+	        <BOUCLE_already_sent1(CM_POSTS_DONE){pst_id} />#SET{nbSent,#TOTAL_BOUCLE}<//B_already_sent1>
+          <li class="item">
+	          <p><strong>#PST_SUBJECT</strong></p>
+	          <ul>
+              <li><:clevermail:cree:> le [(#PST_DATE_CREATE|cm_date)] à [(#PST_DATE_CREATE|cm_heure)]</li>
+              <li><:clevermail:envoye:> le [(#PST_DATE_SENT|cm_date)] à [(#PST_DATE_SENT|cm_heure)]</li>
+              <li>#GET{nbQueued}[ (#GET{nbQueued}|singulier_ou_pluriel{clevermail:message_queue_attente,clevermail:messages_queue_attente})]</li>
+              <li>[ (#GET{nbSent}|aucun_ou_un_ou_plusieurs{clevermail:aucun_message_queue_envoye,clevermail:message_queue_envoye,clevermail:messages_queue_envoye})]</li>
+	          </ul>
+            <ul class="actions">
+              <li class="message_apercu_html"><a href="[(#URL_PAGE{#GET{preview_html}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu_html:></a></li>
+              <li class="message_apercu_texte"><a href="[(#URL_PAGE{#GET{preview_text}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu_texte:></a></li>
+            </ul>
+	        </li>
+	      </BOUCLE_post_queued>
+      </BOUCLE_posts_queued>
+    </ul>
+  </B_posts_queued>
+  #SET{nbEnvoyes,0}
+  <B_posts_sent>
+      <BOUCLE_posts_sent(CM_POSTS){lst_id}{pst_date_sent!=0}{par pst_date_sent}{inverse}>
+        <BOUCLE_still_queued2(CM_POSTS_QUEUED){pst_id} />#SET{nbQueued,#TOTAL_BOUCLE}<//B_still_queued2>
+        <BOUCLE_already_sent2(CM_POSTS_DONE){pst_id} />#SET{nbSent,#TOTAL_BOUCLE}<//B_already_sent2>
+        [(#GET{nbQueued}|=={0}|oui)
+          [(#GET{nbEnvoyes}|=={0}|oui)
+            #SET{nbEnvoyes,1}
+				    <h2><:clevermail:messages_envoyes:></h2>
+				    <p><:clevermail:messages_envoyes_text:> :</p>
+				    <ul class="liste_items liste_messages">
+          ]
+          <li class="item">
+            <p><strong>#PST_SUBJECT</strong></p>
+            <ul>
+              <li><:clevermail:cree:> le [(#PST_DATE_CREATE|cm_date)] à [(#PST_DATE_CREATE|cm_heure)]</li>
+              <li><:clevermail:envoye:> le [(#PST_DATE_SENT|cm_date)] à [(#PST_DATE_SENT|cm_heure)]</li>
+              <li>[(#GET{nbSent}|aucun_ou_un_ou_plusieurs{clevermail:aucun_message_queue_envoye,clevermail:message_queue_envoye,clevermail:messages_queue_envoye})]</li>
+            </ul>
+            <ul class="actions">
+              <li class="message_apercu_html"><a href="[(#URL_PAGE{#GET{preview_html}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu_html:></a></li>
+              <li class="message_apercu_texte"><a href="[(#URL_PAGE{#GET{preview_text}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu_texte:></a></li>
+              <li class="message_supprimer">[(#BOUTON_ACTION{<:clevermail:supprimer:>,#URL_ACTION_AUTEUR{clevermail_post_remove,#PST_ID,#SELF},ajax,<:clevermail:supprimer_confirmer:>})]</li>
+            </ul>
+          </li>
+	      ]
+      </BOUCLE_posts_sent>
+      [(#GET{nbEnvoyes}|=={1}|oui)
+        </ul>
+      ]
+  </B_posts_sent>
+</BOUCLE_list>
+
+<!--#navigation-->
+<INCLURE{fond=prive/menu}>
+<!--/#navigation-->
+
+<!--#extra-->
+
+<!--/#extra-->

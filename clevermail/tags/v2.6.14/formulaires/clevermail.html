@@ -1,0 +1,50 @@
+<a id="#FORM"></a>
+<div class="formulaire_spip formulaire_editer formulaire_#FORM" id="formulaire_#FORM-#ENV{id,new}">
+  [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})[<br /><a href="(#SELF)"><:clevermail:procedure_termine:></a>]</p>]
+  [(#ENV{editable})
+	  [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})[<br /><a href="(#SELF)"><:clevermail:procedure_termine:></a>]</p>]
+	  <form action="[(#ENV{action}|ancre_url{#FORM})]" method="post" enctype="multipart/form-data"><div>
+	    #ACTION_FORMULAIRE{#ENV{action}}
+	        [(#ENV{lst_id_force}|oui)
+	          <input type="hidden" name="lst_id" value="#ENV{lst_id_force}" />
+	        ]
+          [(#ENV{lsr_mode_force}|oui)
+            <input type="hidden" name="lsr_mode" value="[(#ENV{lsr_mode_force}|=={texte}|?{0,1})]" />
+          ]
+	      <ul>
+	        [(#ENV{lst_id_force}|non)
+            [(#ENV{cbox}|non)<INCLURE{fond=public/clevermail_abonnement_plusieurs_listes}{env}>]
+            [(#ENV{cbox}|oui)<INCLURE{fond=public/clevermail_abonnement_plusieurs_listes_checkbox,env} />]
+          ]
+	        #SET{name,sub_email}
+	        #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	        #SET{obli,'obligatoire'}
+	        <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	          <label for="#GET{name}"><:clevermail:label_inscription_email:></label>
+	          [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" />
+	        </li>
+          [(#ENV{lsr_mode_force}|non)
+	          #SET{name,lsr_mode}
+		        #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		        #SET{obli,''}
+		        <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+		          <label><:clevermail:label_inscription_version:></label>
+		          [<span class='erreur_message'>(#GET{erreurs})</span>]
+		            #SET{value,0}
+		            <div class="choix">
+		              <input type="radio" name="#GET{name}" id="#GET{name}#GET{value}" class="radio" value="#GET{value}"[ (#ENV{#GET{name}}|=={#GET{value}}|oui)checked="checked"] />
+		              <label for="#GET{name}#GET{value}"><:clevermail:choix_version_texte|ucfirst:></label>
+		            </div>
+		            #SET{value,1}
+		            <div class="choix">
+		              <input type="radio" name="#GET{name}" id="#GET{name}#GET{value}" class="radio" value="#GET{value}"[ (#ENV{#GET{name}}|=={#GET{value}}|oui)checked="checked"] />
+		              <label for="#GET{name}#GET{value}"><:clevermail:choix_version_html:></label>
+		            </div>
+		        </li>
+	        ]
+	      </ul>
+	      <p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:clevermail:bouton_inscription:>" /></p>
+	  </div></form>
+	]
+</div>

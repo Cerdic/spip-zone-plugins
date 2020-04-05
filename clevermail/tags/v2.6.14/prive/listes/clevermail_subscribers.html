@@ -1,0 +1,31 @@
+<B_subs>
+  #ANCRE_PAGINATION
+	<h3><:clevermail:liste_abonnes:></h3>
+	#PAGINATION{page}
+	<table class="abonnes">
+	  <thead>
+	  <tr>
+	    <th><:clevermail:emails:></th>
+	    <th><:clevermail:infolettres:></th>
+	    <th><:clevermail:mode:></th>
+	    <th><:clevermail:actions:></th>
+	   </tr>
+	  </thead>
+	  <tbody>
+			<BOUCLE_subs(CM_LISTS_SUBSCRIBERS cm_subscribers cm_lists){lst_id?}{sub_email==#ENV{filtre_email,.*}}{par sub_email}{pagination 10}>
+		    <tr class="[(#COMPTEUR_BOUCLE|alterner{impair,pair})]">
+		      <td>#SUB_EMAIL</td>
+          <td>#LST_NAME</td>
+		      <td>[(#LSR_MODE|=={0}|?{<:clevermail:choix_version_texte:>,<:clevermail:choix_version_html:>})]</td>
+		      <td class="actions">
+            [(#BOUTON_ACTION{<:clevermail:changer_mode:>,#URL_ACTION_AUTEUR{clevermail_list_subscriber_toggle,#LSR_ID,#SELF},ajax})]
+            [(#BOUTON_ACTION{<:clevermail:desabonner:>,#URL_ACTION_AUTEUR{clevermail_list_subscriber_remove,#LSR_ID,#SELF},ajax,<:clevermail:desabonner_confirmer:>})]
+		      </td>
+		    </tr>
+			</BOUCLE_subs>
+		</tbody>
+	</table>
+	<p>
+	[(#BOUTON_ACTION{<:clevermail:nettoyer_abonnement:>,#URL_ACTION_AUTEUR{clevermail_list_subscriber_clear,#LSR_ID,#SELF},ajax})]
+	</p>
+</B_subs>

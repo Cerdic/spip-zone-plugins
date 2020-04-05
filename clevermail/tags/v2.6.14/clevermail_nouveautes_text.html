@@ -1,0 +1,22 @@
+#CACHE{0}
+#HTTP_HEADER{Content-type: text/plain; charset=#CHARSET}
+<B_articles>
++++ @@NOM_LETTRE@@ +++
+
+@@DESCRIPTION@@
+
+<:clevermail:mauvais_affichage:> : @@URL_LETTRE@@.
+
+#SET{id,1}
+<BOUCLE_articles(ARTICLES){age_relatif<=0}{par date}{inverse}{0,20}>
++#GET{id}: #SET{id,#GET{id}|plus{1}} [(#TITRE|textebrut)]
+     [par (#LESAUTEURS|textebrut)][ le (#DATE|affdate)]
+     [(#URL_ARTICLE|url_absolue)]
+[
+(#CHAPO|sinon{#INTRODUCTION}|textebrut|wordwrap{70})]
+</BOUCLE_articles>
+
+Pour vous désinscrire : @@URL_DESINSCRIPTION@@
+
+(Application du standard TEN : http://www.headstar.com/ten/ )
+</B_articles>

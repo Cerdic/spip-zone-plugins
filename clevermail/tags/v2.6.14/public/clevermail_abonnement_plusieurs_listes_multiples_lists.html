@@ -1,0 +1,14 @@
+#SET{name,lst_ids}
+#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+#SET{obli,'obligatoire'}
+
+<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+  <label for="#GET{name}">#ENV{currentCat}</label>
+  [<span class='erreur_message'>(#GET{erreurs})</span>]
+  <select name="#GET{name}[]" id="#GET{name}_#ENV{compteur}" class="select" multiple="multiple" size="4">
+    <BOUCLE_lists(CM_LISTS){lst_name LIKE %(#ENV{currentCat})%} {par lst_name}{lst_moderation!=closed}>
+
+      <option value="#LST_ID"[(#LST_ID|in_array{#ENV{#GET{name}}}|oui) selected="selected"]>[(#LST_NAME|supprimer_numero|substr{#ENV{pos}}|supprimer_numero)]</option>
+    </BOUCLE_lists>
+  </select>
+</li>
