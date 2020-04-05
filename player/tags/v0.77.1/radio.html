@@ -1,0 +1,135 @@
+#CACHE{7200}
+[<!--(#REM) 
+
+	Les sites n'ont pas de "lang" a proprement parler ; 
+	on se base donc sur la langue de la rubrique qui les contient. 
+	Les articles syndiques, eux, ont une "lang". 
+
+-->]<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<BOUCLE_lang(RUBRIQUES){id_rubrique}><html dir="#LANG_DIR" lang="#LANG"></BOUCLE_lang>
+<head>
+	<title>[(#NOM_SITE|textebrut)][ - (#NOM_SITE_SPIP|textebrut)]</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+	[<meta name="description" content="(#DESCRIPTIF|couper{150}|attribut_html)" />]
+	<meta name="robots" content="none" />
+	<meta name="generator" content="SPIP" />
+	[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
+
+	<!-- Feuille de styles CSS pour l'affichage du site sur ecran -->
+	<link rel="stylesheet" href="[(#CHEMIN{habillage.css}|direction_css)]" type="text/css" media="projection, screen, tv" />
+	<!-- Ceci est la feuille de style par defaut pour le code genere par SPIP -->
+	<link rel="stylesheet" href="[(#CHEMIN{spip_style.css}|direction_css)]" type="text/css" media="projection, screen, tv" />
+	<!-- Feuille de styles CSS pour l'impression -->
+	<link rel="stylesheet" href="[(#CHEMIN{impression.css}|direction_css)]" type="text/css" media="print" />
+	#INSERT_HEAD
+
+</head>
+
+<body id="page_site">
+<div id="page">
+
+	[<!--(#REM) Entete de la page + titre du site 
+	-->]<INCLURE{fond=inc-entete}{lang}>
+
+	[<!--(#REM) Fil d'Ariane 
+	-->]<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_syndic}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#NOM_SITE|couper{80})]</div>
+
+	<div id="conteneur">
+
+		
+		[(#REM) Contenu principal : affichage du site ]
+
+		<div id="contenu">
+
+<!-- facultatif, place le player sous ie-->
+<div id="player">
+</div>
+
+				<BOUCLE_sites_(SITES){id_syndic}>
+				<div class="cartouche">
+			<small style="display:block;width:100px;float:right"><a href="spip.php?page=radio">Derniers Podcasts</a></small>
+
+				<a href="#URL_SITE">[(#LOGO_SITE||image_reduire{150,100})]</a>
+				<h1 class="titre">#NOM_SITE</h1>
+				[<p class="soustitre"><a href="#URL_SITE" class="spip_out">(#URL_SITE|couper{80})</a></p>]
+
+			</div>
+						[<div class="chapo">(#DESCRIPTIF)</div>]
+
+			</BOUCLE_sites_>
+			
+			<div class="cartouche">
+		<small style="display:block;width:100px;float:right"><a href="spip.php?page=radio">Derniers Podcasts</a></small>
+
+				<h1 class="titre">RECEMMENT</h1>
+			</div>
+			<//B_sites_>
+
+			
+			[(#REM) Articles issus de la syndication ]
+			<B_articles>
+			<div class="liste-articles">
+				#ANCRE_PAGINATION
+				<h2 class="invisible"><:articles:></h2>
+				<ul>
+					<BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic ?} {age<180} {par date}{inverse} {pagination 10}>
+					<li>
+						<h3 class="titre"><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></h3>
+						[<div class="enclosures">(#TAGS|afficher_enclosures)</div>]
+						<small>[(#DATE|affdate_court)][,
+							<:par_auteur:> (#LESAUTEURS)]
+							[&mdash; <em>(#TAGS|afficher_tags)</em>]
+						</small>
+						[<div class="texte">(#DESCRIPTIF)</div>]
+					</li>
+					</BOUCLE_articles>
+				</ul>
+				[<p class="pagination">(#PAGINATION)</p>]
+			</div>
+			</B_articles>
+
+			[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+
+		</div><!-- fin contenu -->
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+			<h1 class="invisible"><:navigation:></h1>
+
+
+			[(#REM) Autres sites web ]
+			<B_sites>
+			<div class="syndic">
+				#ANCRE_PAGINATION
+				<h2 class="menu-titre">Chaines</h2>
+				[<p class="pagination">(#PAGINATION)</p>]
+				<ul>
+					<BOUCLE_sites(SITES) {id_rubrique=3} {par nom_site} {pagination 20}>
+					<li><a href="spip.php?page=radio&id_syndic=#ID_SYNDIC"[ class="(#EXPOSE)"]>#NOM_SITE</a></li>
+					</BOUCLE_sites>
+				</ul>
+			</div>
+			</B_sites>
+
+			[<!--(#REM) Menu de navigation mots-cles 
+			-->]<B_mots>
+			<div class="divers">
+				<h2 class="menu-titre"><:mots_clefs:></h2>
+				<ul>
+					<BOUCLE_mots(MOTS) {id_syndic} {par titre}>
+					<li><a href="#URL_MOT" rel="tag">#TITRE</a></li>
+					</BOUCLE_mots>
+				</ul>
+			</div>
+			</B_mots>
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[<!--(#REM) Pied de page 
+	-->]<INCLURE{fond=inc-pied}{lang}>
+
+</div><!-- fin page -->
+</body>
+</html>

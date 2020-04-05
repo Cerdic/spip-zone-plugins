@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plugin>
+	<!--  
+
+	// player plugin.xml
+
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+	
+	 -->
+	<nom>Lecteur Multim&#233;dia</nom>
+	<slogan>Lire des sons et des vid&#233;os</slogan>
+	<icon>images/logo-32.png</icon>
+	<auteur>BoOz, C&#233;dric, erational, CP.</auteur>
+	<version>0.77.1</version>
+	<etat>stable</etat>
+	<description>Ce plugin permet la lecture et l’affichage de sons ou de vid&#233;os. Il ajoute des lecteurs flash adapt&#233;s aux formats .mp3 et .flv. Il agit sur tous les <code><docXX|player></code> ins&#233;r&#233;s dans les textes, aussi bien que dans les squelettes.
+
+-* <code><docXX|player></code> affiche un lecteur flash audio ou vid&#233;o. (plusieurs lecteurs au choix)
+-* Avec <code>#MODELE{playliste}</code> vous pouvez afficher une playliste des derniers mp3
+-* Avec <code>[(#MODELE{playliste_video}{id_article=XX})]</code> vous pouvez afficher une playliste video.
+	</description>
+	<lien>https://contrib.spip.net/Lecteur-Multimedia</lien>
+	<options>player_options.php</options>
+	<fonctions>player_fonctions.php</fonctions>
+	<prefix>Player</prefix>
+	
+	<install>base/player_install.php</install>
+	<bouton id='player_config21' parent='bando_squelette'>
+		<icone>images/player-16.png</icone>
+		<titre>player:player_nom</titre>
+		<url>player_admin</url>
+	</bouton>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines 
+	La liste des pipelines disponibles est dans ecrire/inc_version ($spip_pipeline = ... ) 
+	-->
+	<pipeline>
+		<nom>post_propre</nom>
+		<inclure>player_fonctions.php</inclure>
+	</pipeline>
+	<pipeline>
+		<!-- les css du plugin dans l'espace privé -->
+		<nom>header_prive</nom>
+		<inclure>inc/player_pipeline_header_prive.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<inclure>inc/player_pipeline_ajouter_onglets.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head_css</nom>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+	</pipeline>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>player_fonctions.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>inc/player_pipeline_affiche_milieu.php</inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
+	<categorie>multimedia</categorie>
+</plugin>

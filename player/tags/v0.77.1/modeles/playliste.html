@@ -1,0 +1,54 @@
+[<!--(#REM)
+
+	Modele pour <doc> modifie pour le plugin Lecteur Flash pour MP3
+	http://spip-zone.info/spip.php?article18
+	
+	afficher une playliste
+	
+	CP-20090831: memo:
+	Pour transmettre un parametre au modele :
+	Ex: a partir d'un squelette 
+	[(#MODELE{playliste}{trierpar=fichier})]
+	permet de forcer l'ordre des elements dans la liste
+	trie'e par le nom du fichier mp3.
+	Pratique si vos noms de fichiers commencent par 
+	un chiffre ;-)
+	
+	
+-->]#SET{trierpar,#ENV{trierpar,1}}
+
+<B_doc>
+#ANCRE_PAGINATION
+<div class="radiobox">
+<div class="controles">
+<!--
+<li onclick="player_prev()"><</li>
+//-->
+<div id="scroller_container">
+<div id="scroller">
+<div id="now_playing">  </div>
+</div>
+</div>
+
+<span onclick="player_prev()"> <img src="#CHEMIN{images/precedant.jpg}" alt="precedant"/></span>
+<span onclick="player_next()"> <img src="#CHEMIN{images/suivant.jpg}" alt="suivant"/></span>
+<span onclick="player_play(0)"><img src="#CHEMIN{images/play.jpg}" alt="play"/></span>
+<span onclick="player_stop()"><img src="#CHEMIN{images/stop.jpg}" alt="stop"/></span>
+<!--
+<li onclick="player_next()">></li>
+//-->
+</div>
+
+<div id="scrollbar">
+<div id="loading"></div>
+<div id="position"></div>
+</div>
+
+<ul class="playliste">
+<BOUCLE_doc (DOCUMENTS) {id_article ?} {extension==mp3} {fichier==(mp3$)} {par #GET{trierpar}} {!par date}{pagination 15}{0,100}>
+<li class="play_"><a href="#FICHIER" rel="enclosure">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
+</BOUCLE_doc>
+</ul>
+[<div class="playliste_pagination">(#PAGINATION)</div>]
+</div>
+</B_doc>
