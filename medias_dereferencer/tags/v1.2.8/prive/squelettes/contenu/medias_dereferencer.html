@@ -1,0 +1,17 @@
+<h1>
+	<:medias_dereferencer:titre_page_medias_lister_disallow:>
+</h1>
+
+<h3>
+	<:medias_dereferencer:robots_txt_content:>
+</h3>
+<pre>
+#INCLURE{fond=inclure/medias_disallow, env}
+</pre>
+
+[(#CONFIG{medias_dereferencer/htaccess}|=={oui}|oui)
+<h3>
+	<:medias_dereferencer:htaccess_content:>
+</h3>
+[(#INCLURE{fond=prive/squelettes/inclure/medias_htaccess, env})]
+]
