@@ -1,0 +1,111 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=podcast -->
+
+<div class="formulaire_spip formulaire_config formulaire_config_podcast">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			[(#SAISIE{radio, podcast_auto,
+				label=<:podcast:label_podcast_auto:>,
+				explication=<:podcast:explication_podcast_auto:>,
+				defaut=oui,
+				datas=#ARRAY{
+					oui,<:item_oui:>,
+					non,<:item_non:>}})]
+			[(#SAISIE{checkbox, podcast_types,
+				label=<:podcast:label_podcast_types:>,
+				explication=<:podcast:explication_podcast_types:>,
+				datas=#ARRAY{
+					channels,<:podcast:valeur_channels:>,
+					itunes,<:podcast:valeur_itunes:>,
+					miro,<:podcast:valeur_miro:>,
+					mrss,<:podcast:valeur_mrss:>}})]
+			[(#SAISIE{input,titre_podcast,
+				explication=<:podcast:explication_titre:>,
+				label=<:podcast:label_titre:>,
+				class=multilang,
+				obligatoire=non})]
+			[(#SAISIE{input,nom_auteur_podcast,
+				explication=<:podcast:explication_nom_auteur:>,
+				class=multilang,
+				label=<:podcast:label_nom_auteur:>,
+				obligatoire=non})]
+			[(#SAISIE{input,email_auteur_podcast,
+				explication=<:podcast:explication_email_auteur:>,
+				label=<:podcast:label_email_auteur:>,
+				obligatoire=non})]
+			[(#SAISIE{input,copyright_podcast,
+				explication=<:podcast:explication_copyright:>,
+				class=multilang,
+				label=<:podcast:label_copyright:>,
+				obligatoire=non})]
+			[(#SAISIE{textarea, resume_podcast,
+				explication=<:podcast:explication_resume:>,
+				class=multilang,
+				label=<:podcast:label_resume:>,
+				rows=4,
+				obligatoire=non})]
+			[(#SAISIE{textarea, description_podcast,
+				explication=<:podcast:explication_description:>,
+				class=multilang,
+				label=<:podcast:label_description:>,
+				obligatoire=non})]
+			[(#SAISIE{textarea, keywords_podcast,
+				class=multilang,
+				explication=<:podcast:explication_keywords:>,
+				label=<:podcast:label_keywords:>,
+				rows=4,
+				obligatoire=non})]
+			<li class="fieldset">
+				<fieldset>
+					<h3 class="legend"><:podcast:legend_itunes:></h3>
+					<ul>
+					[(#SAISIE{radio, explicit_defaut,
+						label=<:podcast:label_explicit:>,
+						explication=<:podcast:explication_explicit:>,
+						defaut=clean,
+						datas=#ARRAY{
+							yes,<:item_oui:>,
+							clean,<:podcast:valeur_clean:>,
+							no,<:item_non:>}})]
+					#SET{itunes_categories_hassub,#ARRAY{
+						0,Arts,
+						1,Business,
+						2,Education,
+						3,Games & Hobbies,
+						4,Government & Organizations,
+						5,Health,
+						6,Religion & Spirituality,
+						7,Science & Medicine,
+						8,Society & Culture,
+						9,Sports & Recreation,
+						10,Technology}}
+					[(#SAISIE{itunes_categories,itunes_categories_principales,
+						explication=<:podcast:explication_itunes_categories_principales:>,
+						label=<:podcast:label_itunes_categories_principales:>,
+						type=main})]
+					<BOUCLE_souscategories(POUR){tableau #CONFIG{podcast/itunes_categories_principales}}>
+					[(#VALEUR|in_array{#GET{itunes_categories_hassub}}|oui)
+						[(#SET{type,[(#VALEUR|strtolower|replace{' ','_'})]})]
+						[(#SET{cat,[(#VAL{podcast:itunes_cat_[(#VALEUR|strtolower|replace{' ','_'}|replace{'_&',''})]}_T)]})]
+						[(#SET{label,[(#VAL{podcast:label_itunes_sous_categories}_T{#ARRAY{cat,#GET{cat}}})]})]
+						[(#SAISIE{itunes_categories,itunes_categories_#GET{type},
+							label=#GET{label},
+							type=#GET{type}})]
+					]
+					</BOUCLE_souscategories>
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div>
+</form>
+</div>
