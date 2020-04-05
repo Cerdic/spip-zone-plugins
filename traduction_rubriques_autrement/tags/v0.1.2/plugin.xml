@@ -1,0 +1,46 @@
+<plugin>
+	<nom><multi>[fr]Traductions de rubriques autrement[en]Section translations differently[es]Traducci&#243;n de secciones repensada[de]Rubriken&#252;bersetzung mal Anders</multi></nom>
+	<slogan>Naviguer entre les rubriques traduites</slogan>
+	<auteur>[Rainer M&#252;ller->http://websimple.be]</auteur>
+	<version>0.1.2</version>
+	<etat>stable</etat>
+	<description>
+		<multi>
+		[fr]Ce plugin, d&#233;stin&#233; pour les sites mutlilingues avec [un secteur par langue->https://contrib.spip.net/Un-exemple-de-site-multilingue], vous offre une approche similaire au niveau de la navigation et de la gestion de traductions des rubriques &#224; celle du plugin [Traduction articles autrement->https://files.spip.net/spip-zone/traduction_articles_autrement.zip] dont l'installation est recommand&#233;. Comme spip ne propose pas nativement la traduction des rubriques l'installation du plugin [Traduction entre rubrique->https://files.spip.net/spip-zone/tradrub.zip] est n&#233;cessaire.
+		</multi>	
+	</description>
+	<lien>https://contrib.spip.net/Traduction-de-rubriques-autrement</lien>
+	<licence>GPL 3</licence>
+	<prefix>trad_rub</prefix>
+	<icon>img_pack/Translation-icon_32.png</icon>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>trad_rub_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>afficher_contenu_objet</nom>
+		<inclure>trad_rub_pipelines.php</inclure>
+	</pipeline>	
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>trad_rub_pipelines.php</inclure>
+	</pipeline>	
+	<pipeline>
+		<nom>formulaire_traiter</nom>
+		<inclure>trad_rub_pipelines.php</inclure>
+	</pipeline>		
+	<pipeline>
+		<nom>pre_insertion</nom>
+		<inclure>trad_rub_pipelines.php</inclure>
+	</pipeline>		
+	<fonctions>trad_rub_fonctions.php</fonctions>
+	<categorie>edition</categorie>
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
+	<necessite id="spip_bonux" version="[2.2.14;]" />
+	<necessite id="tradrub" version="[2.1.0;]" />	
+	<necessite id="saisies" version="[1.42.11;]" />		
+	<utilise id="afficher_objets" version="[1.1.8;]" />	
+	<utilise id="taa" version="[0.1.5;]" />		
+	<traduire gestionnaire="salvatore" module="tra" reference="fr" />
+</plugin>
+
