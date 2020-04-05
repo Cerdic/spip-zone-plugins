@@ -1,0 +1,28 @@
+<paquet
+	prefix="uploadhtml5"
+	categorie="multimedia"
+	version="1.6.4"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/uploadhtml5-64.png"
+	documentation="https://contrib.spip.net/Formulaire-d-upload-en-html5"
+	schema="1.0.0"
+>
+
+	<nom>Formulaire upload html5</nom>
+
+	<auteur lien='http://p.henix.be'>Phenix</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<traduire module="uploadhtml5" reference="fr" gestionnaire="salvatore" />
+
+	<necessite nom="saisies" compatibilite="[2.28.0;]" />
+	<necessite nom="spip_bonux" compatibilite="[3.2.0;]" />
+
+	<pipeline nom="jquery_plugins" inclure="uploadhtml5_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="uploadhtml5_pipelines.php" />
+	<pipeline nom="header_prive" inclure="uploadhtml5_pipelines.php" />
+	<pipeline nom="formulaire_fond" inclure="uploadhtml5_pipelines.php" />
+	<pipeline nom="ieconfig_metas" inclure="uploadhtml5_pipelines.php" />
+</paquet>
