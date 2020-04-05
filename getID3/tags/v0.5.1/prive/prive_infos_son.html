@@ -1,0 +1,121 @@
+#CACHE{0}
+<BOUCLE_document(DOCUMENTS){id_document}{tout}>
+<div id="infosdoc-#ID_DOCUMENT">
+	<div id="infos_son_haut_#ID_DOCUMENT" class="infos_son_haut">
+		<strong>[(#LOGO_DOCUMENT||image_reduire{24,24}|inserer_attribut{class,logo})]<a href="#" onclick="if(jQuery('#infos_son_bas_#ID_DOCUMENT').is(':visible')){jQuery('#infos_son_bas_#ID_DOCUMENT').slideUp(); return false;}else{jQuery('#infos_son_bas_#ID_DOCUMENT').slideDown(); return false;}"><:getid3:son_infos_techniques:></a></strong>
+		<div id="infos_son_bas_#ID_DOCUMENT" class="infos_son_bas">
+			[(#PLUGIN{Player}|oui)
+			<script type="text/javascript">
+				jQuery(document).ready(function(){
+					var verif_taille_player = function(){
+						jQuery('#audioplayer#ID_DOCUMENT').parents('div:hidden').show(function(){
+							var div = this;
+							var widthnormale = #ENV{largeur,235};
+							var widthmax = jQuery('#audioplayer#ID_DOCUMENT').parent().width();
+							if(widthnormale > widthmax){
+								jQuery('#audioplayer#ID_DOCUMENT').attr('width',widthmax+'px');
+							}
+							jQuery(div).hide();
+						});
+					}
+					verif_taille_player();
+					onAjaxLoad(verif_taille_player);
+				});
+			</script>
+			[(#EXTENSION|=={mp3}|oui)
+				[(#MODELE{doc_player_getid3}{id_document}{bgcolor=#ENV{couleur_foncee}})]
+			]]
+			<table cellspacing='3' cellpadding='0'>
+				[<tr>
+					<td class="son_left">
+						<:getid3:son_nom_fichier:>
+					</td>
+					<td>
+						<strong><abbr title="[(#FICHIER|basename)]">(#FICHIER|basename|couper{20})</abbr></strong>
+					</td>
+				</tr>]
+
+				<tr>
+					<td class="son_left">
+						<:getid3:son_format:>
+					</td>
+					<td >
+						<strong>#MIME_TYPE</strong>
+					</td>
+				</tr>
+
+				<tr>
+					<td class="son_left">
+						<:getid3:son_extension:>
+					</td>
+					<td >
+						<strong>#EXTENSION</strong>
+					</td>
+				</tr>
+
+				[<tr>
+					<td class="son_left">
+						<:getid3:son_duree:>
+					</td>
+					<td >
+						<strong>[(#DUREE|getid3_duree)] ((#DUREE|floor) sec.)</strong>
+					</td>
+				</tr>]
+
+				[<tr>
+					<td class="son_left">
+						<:getid3:son_bitrate:>
+					</td>
+					<td >
+						<strong>(#BITRATE|>{0}|oui)#BITRATE bps</strong>
+					</td>
+				</tr>]
+
+				[<tr>
+					<td class="son_left">
+						<:getid3:son_bitratemode:>
+					</td>
+					<td >
+						<strong><abbr title="[(#BITRATE_MODE|=={cbr}|?{<:getid3:son_bitrate_cbr:>})][(#BITRATE_MODE|=={vbr}|?{<:getid3:son_bitrate_vbr:>})]">(#BITRATE_MODE)</abbr></strong>
+					</td>
+				</tr>]
+
+				[<tr>
+					<td class="son_left">
+						<:getid3:son_audiosamplerate:>
+					</td>
+					<td >
+						<strong>(#AUDIOSAMPLERATE|>{0}|oui)#AUDIOSAMPLERATE Hz</strong>
+					</td>
+				</tr>]
+
+				[<tr>
+					<td class="son_left">
+						<:getid3:son_bits:>
+					</td>
+					<td >
+						<strong>(#BITS|>{0}|oui)#BITS bits</strong>
+					</td>
+				</tr>]
+
+				[<tr>
+					<td class="son_left">
+						<:getid3:info_canaux:>
+					</td>
+					<td >
+						<strong>(#CANAUX)</strong>
+					</td>
+				</tr>]
+				[<tr>
+					<td class="son_left">
+						<:getid3:son_encodeur:>
+					</td>
+					<td >
+						<strong>(#ENCODEUR)</strong>
+					</td>
+				</tr>]
+			</table>
+		</div>
+	</div>
+</div>
+</BOUCLE_document>

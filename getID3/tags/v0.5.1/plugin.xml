@@ -1,0 +1,60 @@
+<plugin>
+	<nom>GetId3</nom>
+	<slogan>
+		<multi>
+			[fr]Lire et &#233;crire les tags audio
+			[en]Read and write audio tags
+		</multi>
+	</slogan>
+	<auteur>[BoOz->booz@rezo.net], [kent1->http://www.kent1.info]
+	</auteur>
+	<icon>images/id3v2.png</icon>
+	<licence>(c) 2008-2011 GPL</licence>
+	<version>0.5.1</version>
+	<version_base>0.3.1</version_base>
+	<etat>test</etat>
+	<description>
+		<multi>
+			[fr]Lire et &#233;crire les tags audio sur les documents de type audio
+_ [->http://getid3.sourceforge.net/]
+			[en]Read and write audio tags to audio documents
+_ [->http://getid3.sourceforge.net/]
+		</multi>
+	</description>
+	<options>
+	getid3_options.php
+	</options>
+	<fonctions>
+	getid3_fonctions.php
+	</fonctions>
+	<prefix>
+	getid3
+	</prefix>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/getid3_base.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>document_desc_actions</nom>
+		<inclure>getid3_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<action>editer_contenu_objet</action>
+		<inclure>getid3_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<action>post_edition</action>
+		<inclure>getid3_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>getid3_pipelines.php</inclure>
+	</pipeline>
+	<install>base/getid3_upgrade.php</install>
+	<necessite id="SPIP" version='[2.0.0;2.1.99]' />
+	<utilise id="cfg" />
+	<utilise id="medias" />
+	<categorie>multimedia</categorie>
+</plugin>

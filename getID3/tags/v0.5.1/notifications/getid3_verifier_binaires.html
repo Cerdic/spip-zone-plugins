@@ -1,0 +1,21 @@
+[(#REM)
+
+	GetID3
+ 	Gestion des métadonnées de fichiers sonores directement dans SPIP
+	
+	Auteurs :
+	Quentin Drouet (kent1), BoOz
+	2008-2010 - Distribué sous licence GNU/GPL
+
+	Squelette de notification lorsque des binaires nécessaires sont absents
+
+][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]#CACHE{0}
+[[(#NOM_SITE_SPIP|filtrer_entites|nettoyer_titre_email|trim)]] - <:getid3:info_erreurs:> : [(#ENV{nb}|affiche_un_ou_plusieurs{<:getid3:message_titre_binaire_manquant|nettoyer_titre_email:>,<:getid3:message_titre_binaires_manquant|nettoyer_titre_email:>})]
+[(#ENV{nb}|>{1}|non)
+<:getid3:message_texte_binaire_manquant:>][(#ENV{nb}|>{1}|oui)
+<:getid3:message_texte_binaires_manquant:>]
+<BOUCLE_binaires(POUR){tableau #ENV*{erreurs}}>
+- #VALEUR
+</BOUCLE_binaires>
+<:getid3:message_texte_binaires_informer:>
+#FILTRE{supprimer_tags|trim}
