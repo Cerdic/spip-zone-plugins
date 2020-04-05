@@ -1,0 +1,56 @@
+<BOUCLE_lienDoc(spip_visuels_liens){id_objet=#ENV{id_objet}}{objet=#ENV{objet}}>
+	[(#SET_PUSH{les_docs,#ID_VISUEL})]
+</BOUCLE_lienDoc>
+
+#SET{nbdocs,0}
+
+	[(#REM) Les visuels]
+	[(#ENV{objet}|=={article}|oui)
+		[(#SET{chaine_langue_titre_boite,<:spip_visuels:titre_boite_article:>})]
+	]
+	[(#ENV{objet}|=={rubrique}|oui)
+		[(#SET{chaine_langue_titre_boite,<:spip_visuels:titre_boite_rubrique:>})]
+	]
+
+#SET{classes,'titrem'}
+[(#SPIP_VERSION|match{^3.1}|oui) #SET{classes,'titrem spip_3_1'} ]
+
+<div id='spip_visuels_box'>
+	#BOITE_OUVRIR{#CHEMIN_IMAGE{spip_visuels-32.png}|balise_img{'',cadre-icone}|concat{#GET{chaine_langue_titre_boite}},'simple',#GET{classes}}
+
+	<div class="liste" id='liste_visuels'>
+			<B_documents>
+			[<p class="pagination">(#PAGINATION)</p>]
+			<ul class="liste-items">
+				<BOUCLE_documents(VISUELS){id_visuel IN #GET{les_docs}}{par date,id_visuel}{pagination 50}>
+					<li class="item" id="visu#ID_VISUEL">
+						[(#SET{le_fichier,[(#FICHIER|url_absolue)]})]
+						<a href="#GET{le_fichier}" class='mediabox'>[(#GET{le_fichier}|balise_img{'','visuel'}|image_reduire{60})]</a>
+						<div class='ajax'>#FORMULAIRE_CHANGER_TYPE{#ID_VISUEL,#TYPE}</div>
+						<a href="#URL_ACTION_AUTEUR{supprimer_visuel,#ID_VISUEL:#ID_OBJET:#OBJET,#SELF|ancre_url{liste_visuels}}" class='lien_suppr_visuel' onclick="return confirm(&quot;Êtes-vous sûr de vouloir supprimer ce visuel ?&quot;)?((function(){jQuery(&quot;#visu#ID_VISUEL&quot;).animateRemove();return true;})()):false"><:spip_visuels:supprimer_visuel:></a>
+					</li>
+				</BOUCLE_documents>
+				[(#TOTAL_BOUCLE|>{20}|oui)<p class="pagination">#PAGINATION</p>]
+				
+			</ul>
+			#SET{nbdocs,#GET{nbdocs}|plus{#GRAND_TOTAL}}
+			</B_documents>
+
+			<div class='ajax'>#FORMULAIRE_JOINDRE_VISUEL{#ENV{objet},#ENV{id_objet}}</div>
+	</div>
+
+	#BOITE_FERMER
+</div><!-- #spip_visuels_box -->
+
+<style>
+	#spip_visuels_box{clear: both}
+	/*#liste_visuels{background-color: #ffffff;border:1px solid #000000;padding: 5px;}*/
+	#liste_visuels .item .visuel, #liste_visuels .item .changer_type_visuel {float:left;}
+	#liste_visuels .item .lien_suppr_visuel {float:right;}
+	#liste_visuels .item .changer_type_visuel input, #liste_visuels .item .changer_type_visuel select {float: left;display: inline;height: 20px;}
+	#liste_visuels .item .changer_type_visuel select {margin-right: 20px;}
+	#liste_visuels .item .changer_type_visuel {width:250px;margin-left:102px;}
+	.simple .inner .spip_3_1{height: 25px;line-height: 25px;padding-left: 50px;}
+		.simple .inner .spip_3_1 h3{line-height: 25px;font-size: 13px;}
+		.simple .inner .spip_3_1 .cadre-icone{top: 3px;}
+</style>

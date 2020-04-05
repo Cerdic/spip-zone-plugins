@@ -1,0 +1,29 @@
+<paquet
+	prefix="spip_visuels"
+	categorie="edition"
+	version="0.0.5"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/spip_visuels-64.png"
+	documentation="https://contrib.spip.net/Plugin-Visuels"
+	schema="0.1.0" 
+>
+
+	<nom>Visuels</nom>
+
+	<auteur lien="http://demo.apsulis.com" mail="hadrien@apsulis.com">Hady</auteur>
+	<auteur lien="http://demo.apsulis.com" mail="XDjuj@apsulis.com">XDjuj</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="autoriser" inclure="spip_visuels_autorisations.php" /> 
+	<pipeline nom="affiche_milieu" inclure="spip_visuels_pipelines.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/spip_visuels.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/spip_visuels.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/spip_visuels.php" />
+
+	<necessite nom="spip_bonux" compatibilite="[3.0.0;]" />
+
+	<menu nom="spip_visuels" titre="spip_visuels:spip_visuels_titre" parent="menu_squelette" icone="images/spip_visuels-16.png" action="configurer_spip_visuels" />
+
+</paquet>

@@ -1,0 +1,10 @@
+- Améliorer le modèle :
+	- intégrer une limite (0,n)
+	- intégrer un numéro ! Pour par exemple extraire le 3è visuel de type XXX
+- Chaines de langues
+- Supprimer l'image physiquement et pas uniquement dans la base quand on supprime un visuel
+- Charter un peu la liste et le formulaire
+- Meilleure gestion de l'ajax
+- Autorisations : empêcher un "non auteur" de l'article d'ajouter/supprimer un visuel pour l'article concerné
+- Configuration : pouvoir choisir les objets sur lesquels on permet les visuels
+- Pouvoir "modifier/remplacer" les visuels, comme c'est le cas pour les documents, pour ne pas être obligé de supprimer/réuploader comme c'est actuellement le cas
