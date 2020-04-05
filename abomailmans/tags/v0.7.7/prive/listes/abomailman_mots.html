@@ -1,0 +1,9 @@
+<BOUCLE_groupes_mots(GROUPES_MOTS){tables_liees LIKE %articles%}{par num titre,titre}>
+	<B_mots>
+		<optgroup label="[(#TITRE|supprimer_numero|attribut_html)]">
+		<BOUCLE_mots(MOTS){id_groupe}{par num titre,titre}>
+			<option value="#ID_MOT"[(#ENV{id_mot}|=={#ID_MOT}|oui) selected="selected"]>[(#TITRE|supprimer_numero)]</option>
+		</BOUCLE_mots>
+		</optgroup>
+	</B_mots>
+</BOUCLE_groupes_mots>

@@ -1,0 +1,37 @@
+#CACHE{0}
+<B_listes>
+<div class="cadre cadre-liste">
+	<img class="cadre-icone" alt="" src="#CHEMIN{img_pack/mailman.gif}"/>
+	[(#VAL{abomailmans:les_listes_mailmans}|_T|bouton_block_depliable{true})]
+	[(#VAL{true}|debut_block_depliable)]
+	<table width='100%' cellpadding='4' cellspacing='0' border='0'>
+		<BOUCLE_listes(ABOMAILMANS){par titre}{pagination 10}>
+		<tr class="tr_liste">
+			<td class="arial11">
+				[<img src="(#CHEMIN{images/[(#REPONSES|?{'puce-verte-breve.gif','puce-orange-breve.gif'})]})" width="7" height="7" style="border:none" alt="" />]
+			</td>
+			<td class="arial11">
+				[(#TITRE|icone_horizontale{[(#URL_ECRIRE{abomailmans_edit}|parametre_url{id_abo,#ID_ABOMAILMAN}|parametre_url{retour,#SELF})],#CHEMIN{img_pack/mailman.gif},"edit.gif",""})]
+			</td>
+			<td>
+			</td>
+			<td class="arial1">
+				#LANG
+			</td>
+			<td class="arial1">
+				[(#DESACTIVE|=={1}|?{<:abomailmans:desactive:>,<:abomailmans:active:>})]
+			</td>
+		</tr>
+		</BOUCLE_listes>
+	</table>
+	[<div class="pagination">
+		(#PAGINATION)
+	</div>]
+</div>
+</B_listes>
+[(#VAL|fin_block)]
+[(#SESSION{statut}|=={0minirezo}|oui)
+	<div style="text-align:right">
+		#ENV*{icone}
+	</div>
+]
