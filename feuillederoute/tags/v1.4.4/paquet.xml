@@ -1,0 +1,23 @@
+<paquet
+	prefix="feuillederoute"
+	categorie="communication"
+	version="1.4.4"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="images/feuillederoute-32.png"
+	schema="0.0.2"
+	documentation="https://contrib.spip.net/?article4328"
+>
+
+	<nom>Feuille de Route</nom>
+	<!-- Un bouton d'admin pour partager des informations hors publication -->
+
+	<auteur>chankalan</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="formulaire_admin" inclure="feuillederoute_pipelines.php" />
+	<pipeline nom="body_prive" inclure="feuillederoute_pipelines.php" />
+	<pipeline nom="autoriser" inclure="inc/feuillederoute_autoriser.php" />
+
+</paquet>
