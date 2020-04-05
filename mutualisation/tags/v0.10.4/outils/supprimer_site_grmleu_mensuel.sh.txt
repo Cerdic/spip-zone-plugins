@@ -1,0 +1,75 @@
+#!/bin/bash 
+DIR="/home/grml/public_html"
+
+echo "-------------------------"
+echo "Liste de tous les sites" 
+echo "-------------------------"
+for i in ` find ${DIR}/sites -name "*grml.eu" -type d -mtime +25  `
+do
+  echo "   -------------------------"
+  echo "   on traite $i " 
+  echo "   -------------------------"
+ 
+  ############################################# 
+  #Recherche du plugin fictif onnemeffacepas 
+  ############################################# 
+  onSupprime=`grep 'etat";s:6:"stable";s:3:"dir";s:12:"nemeffacepas";s:7:"version";s:1:"1"' -l $i/tmp/meta* | wc -l` 
+  if (test ${onSupprime} -ne 0)
+  then
+   echo "     on ne supprime pas car le plugin est active " 
+  else
+    echo "    on supprime " 
+
+    site=`echo $i | sed -e"s/.grml.eu//" | sed -e "s/\/home\/grml\/public_html\/sites\///"`
+    echo "    $site"
+ 
+    ############################################# 
+    # informations sur la base 
+    ############################################# 
+    SQL_USER=`cat  ${i}/config/connect.php  | grep db | cut -d"," -f3| cut -d"'" -f2`
+    SQL_PWD=`cat ${i}/config/connect.php  | grep db | cut -d"," -f4| cut -d"'" -f2`
+    BASE=`cat ${i}/config/connect.php  | grep db | cut -d"," -f5| cut -d"'" -f2`
+    PREFIX=`cat ${i}/config/connect.php  | grep db | cut -d"," -f7| cut -d"'" -f2`
+    echo "    Login / pwd : $SQL_USER $SQL_PWD"
+
+    ############################################# 
+    # backup ... tofo : sauvegarder que les tables et pas toute la base
+    ############################################# 
+    mkdir ${DIR}/sites_backup
+    mysqldump -u${SQL_USER} -p${SQL_PWD} $BASE >$i/tmp/${BASE}.sql 
+    tar -cvf ${DIR}/sites_backup/$site.tar $i
+    echo "  - sauvegarde effectuee dans ${DIR}/sites_backup/$site.tar" 
+
+
+    ############################################# 
+    # liste des tables (avec le prefixe $site 
+    ############################################# 
+mysql -u${SQL_USER} -p${SQL_PWD}<<EOF2 >${DIR}/tmp/${site}_showtable.sql
+show TABLES from  $BASE LIKE '${PREFIX}_%'
+EOF2
+
+
+
+    ############################################# 
+    # suppression des tables 
+    ############################################# 
+    for j in `cat ${DIR}/tmp/${site}_showtable.sql| grep -v Tables ` 
+    do
+mysql -u${SQL_USER} -p${SQL_PWD} $BASE <<EOF3 
+drop TABLE $j 
+EOF3
+    done 
+
+
+    ############################################# 
+    # suppression du repertoire 
+    ############################################# 
+    rm -rf $i
+    echo "  - repertoire $i supprime "
+
+  fi
+
+done 
+
+exit 
+

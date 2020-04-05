@@ -1,0 +1,50 @@
+#!/bin/bash 
+site=$1
+DIR="/home/scriibe/public_html"
+
+echo "suppression de $site"
+echo "-------------------------"
+echo "recuperation du login 'maitre'" 
+echo "-------------------------"
+SQL_USER=`cat  ${DIR}/config/connect.php  | grep db | cut -d"," -f3| cut -d"'" -f2`
+SQL_PWD=`cat ${DIR}/config/connect.php  | grep db | cut -d"," -f4| cut -d"'" -f2`
+echo "Login / pwd : $SQL_USER $SQL_PWD"
+
+echo "recuperation du login 'fils'" 
+echo "-------------------------"
+SQL_USER_SITE=`cat  ${DIR}/sites/$site/config/connect.php  | grep db | cut -d"," -f3 | cut -d"'" -f2`
+SQL_PWD_SITE=`cat ${DIR}/sites/$site/config/connect.php  | grep db | cut -d"," -f4| cut -d"'" -f2`
+SQL_BASE_SITE=`cat ${DIR}/sites/$site/config/connect.php  | grep db | cut -d"," -f5| cut -d"'" -f2`
+SQL_SERVEUR_SITE=`cat ${DIR}/sites/$site/config/connect.php  | grep db | cut -d"," -f1| cut -d"'" -f2`
+echo "Login / pwd : $SQL_BASE_SITE $SQL_USER_SITE $SQL_PWD_SITE $SQL_SERVEUR_SITE"
+
+echo
+echo "Commencons par mettre de cote" 
+echo "-------------------------"
+mkdir ${DIR}/sites_backup
+mysqldump -u${SQL_USER} -p${SQL_PWD} $SQL_BASE_SITE >${DIR}/sites/$site/tmp/${SQL_BASE_SITE}.sql 
+tar -cvf ${DIR}/sites_backup/$site.tar ${DIR}/sites/$site
+echo "  - sauvegarde effectuee dans ${DIR}/sites_backup/$site.tar" 
+
+echo
+echo "On supprime la base  "
+echo "-------------------------"
+mysql -u${SQL_USER} -p${SQL_PWD}<<EOF2
+drop database $SQL_BASE_SITE
+EOF2
+echo "  - base $SQL_BASE_SITE supprimee" 
+
+echo
+echo "On supprime le user "
+echo "-------------------------"
+mysql -u${SQL_USER} -p${SQL_PWD}<<EOF3
+drop USER  ${SQL_USER_SITE}@${SQL_SERVEUR_SITE}
+EOF3
+echo "  - user mysql ${SQL_USER_SITE} supprime "
+
+echo
+echo "On supprime le repertoire "
+echo "-------------------------"
+rm -rf ${DIR}/sites/$site
+echo "  - repertoire ${DIR}/sites/$site supprime "
+
