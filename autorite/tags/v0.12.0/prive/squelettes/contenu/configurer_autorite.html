@@ -1,0 +1,10 @@
+<h1 class="grostitre"><:autorite:icone_menu_config:></h1>
+[(#AUTORISER{webmestre}|non)
+	<:autorite:refus_1:> (<b>[(#REM|liste_webmestres)]</b>)
+	<:autorite:refus_2:>
+]
+[(#AUTORISER{webmestre}|oui)
+	<div class="ajax">
+		#FORMULAIRE_CONFIGURER_AUTORITE
+	</div>
+]
