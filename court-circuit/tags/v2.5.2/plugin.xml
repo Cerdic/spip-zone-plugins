@@ -1,0 +1,37 @@
+<plugin>
+	<nom><multi>[fr]Court-circuit[en]Short circuit[es]Cortocircuito[de]Kurz</multi></nom>
+	<prefix>courtcircuit</prefix>
+	<icon>icon/courtcircuit-128.png</icon>
+
+	<version>2.5.2</version>
+	<etat>stable</etat>
+	<categorie>outil</categorie>
+
+	<slogan><multi>[fr]Acc&#232;s direct aux articles[en]Direct access to articles[es]Acceso directo a los artículos[de]Direkter Zugang zu~den~Artikeln</multi></slogan>
+	<description>Permet de rediriger certaines rubriques vers un article particulier. Vous pouvez configurer, dans l'espace priv&#233;, les r&eacute;gles de redirection &#224;&nbsp;appliquer.</description>
+	<lien>https://contrib.spip.net/3831</lien>
+	<auteur>[Tetue->http://spip.tetue.net], [Joseph->https://contrib.spip.net/Joseph]</auteur>
+
+	<fonctions>courtcircuit_fonctions.php</fonctions>
+	<pipeline>
+		<nom>styliser</nom>
+		<inclure>courtcircuit_pipelines.php</inclure>
+	</pipeline>
+	<bouton id='courtcircuit' parent='configuration'>
+		<icone>icon/courtcircuit-24.png</icone>
+		<titre>courtcircuit:courtcircuit</titre>
+		<url>configurer_courtcircuit</url>
+	</bouton>
+	<bouton id='courtcircuit21' parent='bando_squelette'>
+		<icone>icon/courtcircuit-16.png</icone>
+		<titre>courtcircuit:courtcircuit</titre>
+		<url>configurer_courtcircuit</url>
+	</bouton>
+	<pipeline>
+		<nom>ieconfig_metas</nom>
+		<inclure>courtcircuit_ieconfig_metas.php</inclure>
+	</pipeline>
+	<necessite id='SPIP' version='[2.1.0;3.2.99]' />
+	<utilise id="Z" />
+	<utilise id="compositions" />
+</plugin>

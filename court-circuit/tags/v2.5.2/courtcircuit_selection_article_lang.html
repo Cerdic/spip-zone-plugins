@@ -1,0 +1,14 @@
+[(#REM)
+	Ce squelette doit renvoyer l'identifiant de l'article vers lequel la rubrique doit etre redirigee.
+	La configuration de court-circuit lui est transmise en tant que variables d'environnement.
+]
+<BOUCLE_un_article(ARTICLES){id_rubrique}{lang}>[(#ENV{un_article,oui}|=={oui}|et{#TOTAL_BOUCLE|=={1}}|?{#ID_ARTICLE,''})]</BOUCLE_un_article>
+<BOUCLE_article_accueil(RUBRIQUES){id_rubrique}{lang}>[(#ENV{article_accueil,oui}|=={oui}|et{#PLUGIN{article_accueil}}|et{#ID_ARTICLE_ACCUEIL|>{0}}|?{#ID_ARTICLE_ACCUEIL,''})]</BOUCLE_article_accueil>
+<BOUCLE_rang_un(ARTICLES){id_rubrique}{lang}{par num titre, titre}{rang_titre_positif}{0,1}>[(#ENV{rang_un,oui}|=={oui}|et{#RANG}|?{#ID_ARTICLE,''})]</BOUCLE_rang_un>
+<BOUCLE_plus_recent(ARTICLES){id_rubrique}{lang}{par date}{inverse}{0,1}>[(#ENV{plus_recent,oui}|=={oui}|?{#ID_ARTICLE,''})]</BOUCLE_plus_recent>
+<BOUCLE_plus_recent_branche(ARTICLES){branche}{lang}{par date}{inverse}{0,1}>[(#ENV{plus_recent_branche,non}|=={oui}|?{#ID_ARTICLE,''})]</BOUCLE_plus_recent_branche>
+<//B_plus_recent_branche>
+<//B_plus_recent>
+<//B_rang_un>
+<//B_article_accueil>
+<//B_un_article>

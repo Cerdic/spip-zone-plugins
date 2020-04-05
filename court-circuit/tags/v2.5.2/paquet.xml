@@ -1,0 +1,24 @@
+<paquet
+	prefix="courtcircuit"
+	categorie="outil"
+	version="2.5.2"
+	etat="stable"
+	compatibilite="[2.1.0;3.2.*]"
+	logo="icon/courtcircuit-128.png"
+	documentation="https://contrib.spip.net/3831"
+>
+
+	<nom>Court-circuit</nom>
+	<!-- Acc&#232;s direct aux articles -->
+
+	<auteur lien="http://spip.tetue.net">Tetue</auteur>
+	<auteur lien="https://contrib.spip.net/Joseph">Joseph</auteur>
+
+	<pipeline nom="styliser" inclure="courtcircuit_pipelines.php" />
+	<pipeline nom="ieconfig_metas" inclure="courtcircuit_ieconfig_metas.php" />
+
+	<utilise nom="Z" />
+	<utilise nom="compositions" />
+
+	<menu nom="courtcircuit21" titre="courtcircuit:courtcircuit" parent="menu_squelette" icone="images/courtcircuit-16.png" action="configurer_courtcircuit" />
+</paquet>

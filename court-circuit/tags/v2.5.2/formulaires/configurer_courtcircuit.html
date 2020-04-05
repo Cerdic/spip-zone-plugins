@@ -1,0 +1,175 @@
+<!-- presentation=non -->
+<!-- nom=courtcircuit -->
+<div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<h3 class="titrem"><:courtcircuit:label_exceptions:></h3>
+		<ul class="editer-groupe">
+			<li class="editer editer_variantes_squelettes[ (#ENV**{erreurs}|table_valeur{variantes_squelettes}|oui)erreur]">
+				<label><:courtcircuit:label_variantes_squelettes:></label>
+				<p class="explication"><:courtcircuit:explication_variantes_squelettes:></p>
+				<div class="choix">
+					<input type="radio" name="variantes_squelettes" class="radio" id="variantes_squelettes_oui" value="oui" [(#ENV{variantes_squelettes,oui}|=={oui}|oui) checked="checked"] />
+					<label for='variantes_squelettes_oui'><:courtcircuit:item_jamais_rediriger:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="variantes_squelettes" class="radio" id="variantes_squelettes_non" value="non" [(#ENV{variantes_squelettes,oui}|=={non}|oui) checked="checked"] />
+					<label for='variantes_squelettes_non'><:courtcircuit:item_appliquer_redirections:></label>
+				</div>
+			</li>
+			[(#PLUGIN{compositions}|oui)
+			<li class="editer editer_composition_rubrique[ (#ENV**{erreurs}|table_valeur{composition_rubrique}|oui)erreur]">
+				<label><:courtcircuit:label_composition_rubrique:></label>
+				<div class="choix">
+					<input type="radio" name="composition_rubrique" class="radio" id="composition_rubrique_oui" value="oui" [(#ENV{composition_rubrique,oui}|=={oui}|oui) checked="checked"]
+						onclick="$(this).blur();"
+						onchange="if ($(this).prop('checked')) $('.editer_composition_rubrique').next('.editer').hide('fast');"
+					/>
+					<label for='composition_rubrique_oui'><:courtcircuit:item_jamais_rediriger:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="composition_rubrique" class="radio" id="composition_rubrique_non" value="non" [(#ENV{composition_rubrique,oui}|=={non}|oui) checked="checked"]
+						onclick="$(this).blur();"
+						onchange="if ($(this).prop('checked')) $('.editer_composition_rubrique').next('.editer').show('fast');"
+					/>
+					<label for='composition_rubrique_non'><:courtcircuit:item_appliquer_redirections:></label>
+				</div>
+			</li>
+			#SET{name,compositions_exclure}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]"[(#ENV{composition_rubrique,oui}|=={oui}|oui)style="display:none;"]>
+				<label for="#GET{name}"><:courtcircuit:label_compositions_exclure:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<p class="explication"><:courtcircuit:explication_compositions_exclure:></p>
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+			</li>]
+		</ul>
+		
+		<h3 class="titrem"><:courtcircuit:label_regles:></h3>
+		<ul class="editer-groupe">
+			<li class="editer editer_restreindre_langue[ (#ENV**{erreurs}|table_valeur{restreindre_langue}|oui)erreur]">
+				<label><:courtcircuit:label_restreindre_langue:></label>
+				<p class="explication"><:courtcircuit:explication_restreindre_langue:></p>
+				<div class="choix">
+					<input type="radio" name="restreindre_langue" class="radio" id="restreindre_langue_oui" value="oui" [(#ENV{restreindre_langue,non}|=={oui}|oui) checked="checked"] />
+					<label for='restreindre_langue_oui'><:item_oui:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="restreindre_langue" class="radio" id="restreindre_langue_non" value="non" [(#ENV{restreindre_langue,non}|=={non}|oui) checked="checked"] />
+					<label for='restreindre_langue_non'><:item_non:></label>
+				</div>
+			</li>
+			<li class="explication"><:courtcircuit:explication_regles:></li>
+			#SET{ordre,1}
+			<li class="editer editer_un_article[ (#ENV**{erreurs}|table_valeur{un_article}|oui)erreur]">
+				<label>#GET{ordre}) <:courtcircuit:label_un_article:></label>
+				<div class="choix">
+					<input type="radio" name="un_article" class="radio" id="un_article_oui" value="oui" [(#ENV{un_article,oui}|=={oui}|oui) checked="checked"] />
+					<label for='un_article_oui'><:courtcircuit:item_rediriger_sur_article:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="un_article" class="radio" id="un_article_non" value="non" [(#ENV{un_article,oui}|=={non}|oui) checked="checked"] />
+					<label for='un_article_non'><:courtcircuit:item_ne_pas_rediriger:></label>
+				</div>
+				#SET{ordre,#GET{ordre}|plus{1}}
+			</li>
+			[(#PLUGIN{article_accueil}|oui)
+			<li class="editer editer_article_accueil[ (#ENV**{erreurs}|table_valeur{article_accueil}|oui)erreur]">
+				<label>#GET{ordre}) <:courtcircuit:label_article_accueil:></label>
+				<div class="choix">
+					<input type="radio" name="article_accueil" class="radio" id="article_accueil_oui" value="oui" [(#ENV{article_accueil,oui}|=={oui}|oui) checked="checked"] />
+					<label for='article_accueil_oui'><:courtcircuit:item_rediriger_sur_article:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="article_accueil" class="radio" id="article_accueil_non" value="non" [(#ENV{article_accueil,oui}|=={non}|oui) checked="checked"] />
+					<label for='article_accueil_non'><:courtcircuit:item_ne_pas_rediriger:></label>
+				</div>
+				#SET{ordre,#GET{ordre}|plus{1}}
+			</li>]
+			<li class="editer editer_rang_un[ (#ENV**{erreurs}|table_valeur{rang_un}|oui)erreur]">
+				<label>#GET{ordre}) <:courtcircuit:label_rang_un:></label>
+				<div class="choix">
+					<input type="radio" name="rang_un" class="radio" id="rang_un_oui" value="oui" [(#ENV{rang_un,oui}|=={oui}|oui) checked="checked"] />
+					<label for='rang_un_oui'><:courtcircuit:item_rediriger_sur_article:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="rang_un" class="radio" id="rang_un_non" value="non" [(#ENV{rang_un,oui}|=={non}|oui) checked="checked"] />
+					<label for='rang_un_non'><:courtcircuit:item_ne_pas_rediriger:></label>
+				</div>
+				#SET{ordre,#GET{ordre}|plus{1}}
+			</li>
+			<li class="editer editer_plus_recent[ (#ENV**{erreurs}|table_valeur{plus_recent}|oui)erreur]">
+				<label>#GET{ordre}) <:courtcircuit:label_plus_recent:></label>
+				<div class="choix">
+					<input type="radio" name="plus_recent" class="radio" id="plus_recent_oui" value="oui" [(#ENV{plus_recent,oui}|=={oui}|oui) checked="checked"] />
+					<label for='plus_recent_oui'><:courtcircuit:item_rediriger_sur_article:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="plus_recent" class="radio" id="plus_recent_non" value="non" [(#ENV{plus_recent,oui}|=={non}|oui) checked="checked"] />
+					<label for='plus_recent_non'><:courtcircuit:item_ne_pas_rediriger:></label>
+				</div>
+				#SET{ordre,#GET{ordre}|plus{1}}
+			</li>
+			<li class="editer editer_plus_recent_branche[ (#ENV**{erreurs}|table_valeur{plus_recent_branche}|oui)erreur]">
+				<label>#GET{ordre}) <:courtcircuit:label_plus_recent_branche:></label>
+				<div class="choix">
+					<input type="radio" name="plus_recent_branche" class="radio" id="plus_recent_branche_oui" value="oui" [(#ENV{plus_recent_branche,non}|=={oui}|oui) checked="checked"] />
+					<label for='plus_recent_branche_oui'><:courtcircuit:item_rediriger_sur_article:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="plus_recent_branche" class="radio" id="plus_recent_branche_non" value="non" [(#ENV{plus_recent_branche,non}|=={non}|oui) checked="checked"] />
+					<label for='plus_recent_branche_non'><:courtcircuit:item_ne_pas_rediriger:></label>
+				</div>
+				#SET{ordre,#GET{ordre}|plus{1}}
+			</li>
+			<li class="editer editer_sousrubrique[ (#ENV**{erreurs}|table_valeur{sousrubrique}|oui)erreur]">
+				<label>#GET{ordre}) <:courtcircuit:label_sousrubrique:></label>
+				<p class="explication"><:courtcircuit:explication_sousrubrique:></p>
+				<div class="choix">
+					<input type="radio" name="sousrubrique" class="radio" id="sousrubrique_oui" value="oui" [(#ENV{sousrubrique,oui}|=={oui}|oui) checked="checked"] />
+					<label for='sousrubrique_oui'><:item_oui:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="sousrubrique" class="radio" id="sousrubrique_non" value="non" [(#ENV{sousrubrique,oui}|=={non}|oui) checked="checked"] />
+					<label for='sousrubrique_non'><:item_non:></label>
+				</div>
+			</li>
+		</ul>
+		[(#REM) L'option sousrubrique ne s'applique jamais si plus_recent_branche est actif.]
+		<script type="text/javascript">// <![CDATA[
+			$(document).ready(function(){
+				function maj_editer_sousrubrique() {
+					var plus_recent_branche = $("[name='plus_recent_branche']:checked").val();
+					if (plus_recent_branche == 'oui')
+						$("li.editer_sousrubrique").hide(500);
+					else
+						$("li.editer_sousrubrique").show(500);
+				};
+				maj_editer_sousrubrique();
+				$("[name='plus_recent_branche']").change(function(){maj_editer_sousrubrique();});
+			});
+		//]]></script>
+		
+		
+		<h3 class="titrem"><:courtcircuit:label_liens:></h3>
+		<ul class="editer-groupe">
+			<li class="editer editer_variantes_squelettes[ (#ENV**{erreurs}|table_valeur{variantes_squelettes}|oui)erreur]">
+				<label><:courtcircuit:label_liens_rubriques:></label>
+				<p class="explication"><:courtcircuit:explication_liens_rubriques:></p>
+				<div class="choix">
+					<input type="radio" name="liens_rubriques" class="radio" id="liens_rubriques_oui" value="oui" [(#ENV{liens_rubriques,oui}|=={oui}|oui) checked="checked"] />
+					<label for='liens_rubriques_oui'><:item_oui:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="liens_rubriques" class="radio" id="liens_rubriques_non" value="non" [(#ENV{liens_rubriques,oui}|=={non}|oui) checked="checked"] />
+					<label for='liens_rubriques_non'><:item_non:></label>
+				</div>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div></form>
+</div>
