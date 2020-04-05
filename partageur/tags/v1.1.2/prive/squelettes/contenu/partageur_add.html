@@ -1,0 +1,16 @@
+[(#AUTORISER{voir,partageur})
+	<h1><:partageur:ajout_via_partageur:></h1>
+     
+  
+  <div id="partageur_source" rel="#ID_RUBRIQUE"><img src="#CHEMIN{prive/images/searching.gif}" alt="" /></div>
+  <script type="text/javascript" src="#CHEMIN{javascript/partageur_prive.js}"></script> 
+  
+
+
+
+  <!-- retour rubrique -->
+  <div class='nettoyeur' style="margin-top:15px"></div>  
+  #SET{retour,#URL_ECRIRE{rubrique,id_rubrique=#ID_RUBRIQUE}}
+  [(#GET{retour}|icone_verticale{<:icone_retour:>,rubrique,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+
+]

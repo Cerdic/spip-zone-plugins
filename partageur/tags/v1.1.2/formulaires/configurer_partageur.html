@@ -1,0 +1,85 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:partageur:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<ul>
+			<!-- general -->
+      [(#SAISIE{input, cle,
+				label=<:partageur:cfg_cle:>,
+				explication=<:partageur:cfg_cle_explication:>})]
+        
+      [(#SAISIE{selection, import_statut,
+				label=<:partageur:cfg_import_statut:>,
+        cacher_option_intro=true,
+        datas=#ARRAY{            
+      			prop,<:sites:info_statut_site_3:>,
+      			publie,<:sites:info_statut_site_2:>}})] 
+      
+      <!-- export -->
+     <li><h4><:partageur:cfg_motcle_export:></h4></li> 
+      
+    	[(#SAISIE{checkbox, export_mot_article,
+    		label='',
+        datas=#ARRAY{0,<:partageur:cfg_export_mot_article:>}})] 
+        
+     	[(#SAISIE{checkbox, export_mot_evnt,
+    		label='',
+        datas=#ARRAY{0,<:partageur:cfg_export_mot_evnt:>}})]
+       
+      #SET{groupe_motcle,#ARRAY{Tous,-1}
+      
+      <BOUCLE_groupes(GROUPES_MOTS){par titre}>
+      [(#SET{groupe_motcle,#GET{groupe_motcle}|array_merge{#ARRAY{"&rarr; "#TITRE,#ID_GROUPE}}})]
+      </BOUCLE_groupes>
+      [(#SET{groupe_motcle, #GET{groupe_motcle}|array_flip})] 
+        
+      [(#SAISIE{selection_multiple,export_mot_groupe,
+      		label=<:partageur:cfg_export_mot_groupe:>,
+          cacher_option_intro=true,
+      		datas=#GET{groupe_motcle}})]   
+
+      
+      <!-- import -->
+      <li><h4><:partageur:cfg_motcle_import:></h4></li>
+      
+    	[(#SAISIE{checkbox, import_mot_article,
+    		label='',
+        datas=#ARRAY{0,<:partageur:cfg_import_mot_article:>}})] 
+        
+     	[(#SAISIE{checkbox, import_mot_evnt,
+    		label='',
+        datas=#ARRAY{0,<:partageur:cfg_import_mot_evnt:>}})]
+
+    	[(#SAISIE{radio, import_mot_groupe_creer,
+    		label=,
+    		explication=<:partageur:cfg_import_mot_groupe_creer:>,
+    		datas=#ARRAY{
+    			oui,<:partageur:cfg_import_mot_groupe_creer_oui:>,
+    			non,<:partageur:cfg_import_mot_groupe_creer_non:>}})]
+ 
+ 
+      
+      #SET{groupe_motcle,#ARRAY}
+      <BOUCLE_groupes1(GROUPES_MOTS){par titre}>
+      [(#SET{groupe_motcle,#GET{groupe_motcle}|array_merge{#ARRAY{#TITRE,#ID_GROUPE}}})]
+      </BOUCLE_groupes1>
+      [(#SET{groupe_motcle, #GET{groupe_motcle}|array_flip})]
+ 
+    	[(#SAISIE{selection,import_mot_groupe,
+    		label=,
+    		datas=#GET{groupe_motcle}})] 
+
+    </ul>
+    
+		<input type="hidden" name="_meta_casier" value="partageur" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>
