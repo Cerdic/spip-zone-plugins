@@ -1,0 +1,85 @@
+<div class="formulaire_spip formulaire_editer formulaire_cmots">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		[(#REM) Cas sans le plugin Mots arborescents ]
+		<B_mots>
+		<ul><li class="cmots_colonnes">
+		<BOUCLE_mots(MOTS){id_groupe}{par multi titre}{si #AUTORISER{associermots,#ENV{objet},#ENV{id_objet},'',#ARRAY{id_groupe,#ENV{id_groupe}}}}{si #PLUGIN{motsar}|non}>
+			<div class="choix choix_#ID_MOT" style="border:none; background: none;">
+				<input type="checkbox" name="mots[]" class="checkbox" id="champ_mot_#ID_MOT"[(#ID_MOT|in_array{#ENV{mots}}|oui)checked="checked"] value="#ID_MOT" />
+				<label for="champ_mot_#ID_MOT">#TITRE</label>
+			</div>
+		</BOUCLE_mots>
+		</li></ul>
+		</B_mots>
+		
+		<BOUCLE_parent(GROUPES_MOTS){id_groupe}{si #PLUGIN{gma}}>
+		<BOUCLE_sousgroupes(GROUPES_MOTS){id_parent}{par multi titre}>
+			<h4 style="margin-bottom: 0; margin-top: 20px;"><BOUCLE_hier(HIERARCHIE_GROUPES_MOTS?){tous}{" > "}>#TITRE</BOUCLE_hier></h4>
+			
+			<B_mots_sous>
+				<ul><li class="cmots_colonnes">
+			<BOUCLE_mots_sous(MOTS){id_groupe}{par multi titre}{si #AUTORISER{associermots,#ENV{objet},#ENV{id_objet},'',#ARRAY{id_groupe,#ENV{id_groupe}}}}>
+				<div class="choix choix_#ID_MOT" style="border:none; background: none;">
+					<input type="checkbox" name="mots[]" class="checkbox" id="champ_mot_#ID_MOT"[(#ID_MOT|in_array{#ENV{mots}}|oui)checked="checked"] value="#ID_MOT" />
+					<label for="champ_mot_#ID_MOT">#TITRE</label>
+				</div>
+			</BOUCLE_mots_sous>
+			</li></ul>
+			</B_mots_sous>
+			<BOUCLE_recursif(BOUCLE_sousgroupes) />
+		</BOUCLE_sousgroupes>
+		</BOUCLE_parent>
+
+		[(#REM) Cas avec le plugin Mots arborescents ]
+		<BOUCLE_parent_motsar(GROUPES_MOTS){id_groupe}{si #PLUGIN{motsar}}{si #AUTORISER{associermots,#ENV{objet},#ENV{id_objet},'',#ARRAY{id_groupe,#ENV{id_groupe}}}}>
+		<BOUCLE_arborescent(GROUPES_MOTS){id_groupe}{si #MOTS_ARBORESCENTS}>
+		<B_mots_parents>
+		<ul class="motsar">
+			<BOUCLE_mots_parents(MOTS){id_groupe}{id_parent=0}{par multi titre}>
+			<li>
+			<div class="choix choix_parent choix_#ID_MOT">
+				<input type="checkbox" name="mots[]" class="checkbox" id="champ_mot_#ID_MOT"[(#ID_MOT|in_array{#ENV{mots}}|oui)checked="checked"] value="#ID_MOT" />
+				<label for="champ_mot_#ID_MOT">#TITRE</label>
+			</div>
+			<B_mots_enfants>
+				<ul>
+					<BOUCLE_mots_enfants(MOTS){id_parent=#ID_MOT}{par multi titre}>
+					<li class="choix choix_enfant choix_#ID_MOT">
+						<input type="checkbox" name="mots[]" class="checkbox" id="champ_mot_#ID_MOT"[(#ID_MOT|in_array{#ENV{mots}}|oui)checked="checked"] value="#ID_MOT" />
+						<label for="champ_mot_#ID_MOT">#TITRE</label>
+						<BOUCLE_sous_mots_enfants(BOUCLE_mots_enfants) />
+					</li>
+					</BOUCLE_mots_enfants>
+				</ul>
+			</B_mots_enfants>
+			</li>
+			</BOUCLE_mots_parents>
+		</ul>
+		</B_mots_parents>
+		</BOUCLE_arborescent>
+
+		<ul><li class="cmots_colonnes">
+			<BOUCLE_mots_non_arbo(MOTS){id_groupe}{par multi titre}{si #AUTORISER{associermots,#ENV{objet},#ENV{id_objet},'',#ARRAY{id_groupe,#ENV{id_groupe}}}}>
+			<div class="choix choix_#ID_MOT" style="border:none; background: none;">
+				<input type="checkbox" name="mots[]" class="checkbox" id="champ_mot_#ID_MOT"[(#ID_MOT|in_array{#ENV{mots}}|oui)checked="checked"] value="#ID_MOT" />
+				<label for="champ_mot_#ID_MOT">#TITRE</label>
+			</div>
+			</BOUCLE_mots_non_arbo>
+		</li></ul>
+		
+		<//B_arborescent>
+
+		</BOUCLE_parent_motsar>
+		
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>
