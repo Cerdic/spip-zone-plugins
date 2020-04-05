@@ -1,0 +1,39 @@
+<plugin>
+	<nom> 
+  	<multi>
+    [fr]Convertisseur de formats
+    [en]Format convertor
+    </multi>
+	</nom>
+	<auteur>[erational->http://www.erational.org], Fil</auteur>
+	<licence>GNU/GPL</licence>
+	<icon>img_pack/convertisseur.png</icon>
+	<version>0.4.4</version>
+	<etat>test</etat>
+	<slogan>
+		<multi>
+		[fr]Convertir les textes wiki, phpBB et quark xpress en SPIP 
+		[en]Convert wiki, phpBB and quark xpress texts into SPIP
+		</multi>
+	</slogan>
+	<description>
+    	<multi>
+      [fr]Convertit les formats de type wiki, phpBB, quark xpress tags en format SPIP et vice versa ; int&#232;gre au besoin les textes convertis dans des articles ; on peut uploader plusieurs textes en un seul coup en les zippant au pr&#233;alable
+    	[en]Converts various formats (wiki, phpBB) into SPIP format
+      </multi>
+	</description>
+	<lien>https://contrib.spip.net/Plugin-Convertisseur</lien>
+	<prefix>convertisseur</prefix>
+  <bouton id='convertisseur1' parent='naviguer'>
+		<titre>convertisseur:convertir_titre</titre>
+		<icone>img_pack/icon_convertisseur.png</icone>
+		<url>convertisseur</url>
+	</bouton>
+	<bouton id='convertisseur2' parent='bando_edition'>
+		<titre>convertisseur:convertir_titre</titre>
+		<icone>img_pack/icon_convertisseur.png</icone>
+		<url>convertisseur</url>
+	</bouton>
+  <necessite id="SPIP" version="[2.0.0;3.1.99]" />
+	<categorie>edition</categorie>
+</plugin>
