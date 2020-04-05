@@ -1,0 +1,93 @@
+[(#REM)
+	Metas plus: génére les métas pour dublin core, open core, twitter
+	Vous devez renseigner les parametres par la boucle appelante
+	Les parametres doivent préablement en format simple texte  - HTML sans tags |supprimer_tags|textebrut
+
+	Parametres:
+	- titre	 (obligatoire)		titre
+	- lang	 (obligatoire)		langue :en format iso. ex fr
+	- territoire (facultatif)	territoire : permet de renseigner le duet langue_territoire, ex. UK
+					si rien n'est renseigné, on tente un lang_LANG
+	- desc				description
+	- auteur			les auteurs
+	- date				la date en format Y-m-d
+	- url				URL de la ressource
+	- logo				image de la ressource (URL) - image doit faire  au minimum 200x200px et moins d'un 1 Mo
+	- og-type			open graph : type de la ressource : article, website, ....
+
+][(#REM)
+
+	Tester si l'environnement reçoit un logo,
+	sinon prendre le logo du site
+
+
+][(#ENV{logo}|!={''}|?{
+	[(#SET{logo,#ENV*{logo}})]
+,
+	[(#SET{logo,[(#LOGO_SITE_SPIP|extraire_attribut{src})]})]
+})][
+
+	(#REM) Traiter le logo
+
+][(#SET{logo, #GET{logo}
+		|image_reduire{2400,1260}
+		|image_recadre{1.91:1,'-','center'}
+		|extraire_attribut{src}})]
+[(#REM)
+
+	metas Dublin Core
+	http://dublincore.org
+
+][(#CONFIG{metasplus/dublincore}|non)
+<!-- Dublin Core -->
+<link rel="schema.DC" href="https://purl.org/dc/elements/1.1/" />
+<link rel="schema.DCTERMS" href="https://purl.org/dc/terms/" />
+<meta name="DC.Format" content="text/html" />
+<meta name="dc.Type" content="text" />
+[<meta name="dc.Title" lang="#LANG" content="(#ENV{titre}|attribut_html)" />][
+<meta name="dc.Language" scheme="rfc1766" content="(#LANG)" />][
+<meta name="dc.Description" lang="#LANG" content="(#ENV{desc}|couper{200,'…'}|attribut_html)" />][
+<meta name="dc.Creator" content="(#ENV{author, #ENV{auteur}}|attribut_html)" />][
+<meta name="dc.Date" scheme="DCTERMS.W3CDTF" content="(#ENV{date}|affdate{Y-m-d})" />][
+<meta name="DC.Identifier" scheme="URI" content="(#ENV{url}|url_absolue)" />][
+<meta name="dc.Publisher" content="(#NOM_SITE_SPIP|attribut_html)" />]
+][(#REM)
+
+	metas Open Graph
+	http://ogp.me
+
+][(#CONFIG{metasplus/opengraph}|non)
+[(#ENV{territoire}|oui) [(#SET{lang_territoire,[(#ENV{lang})]_[(#ENV{territoire}|strtoupper)]})]
+][(#ENV{territoire}|non)
+	[(#LANG|=={en}|oui) [(#SET{lang_territoire,en_UK})]][
+	(#LANG|=={en}|non) [(#SET{lang_territoire,#LANG[_(#LANG|strtoupper)]})]]
+]<!-- Open Graph -->
+[<meta property="og:type" content="(#ENV{og-type}|sinon{article}|attribut_html)" />][
+<meta property="og:title" content="(#ENV{titre}|attribut_html)" />]
+<meta property="og:locale" content="#GET{lang_territoire}" />
+[<meta property="og:url" content="(#ENV{url}|url_absolue)" />][
+<meta property="og:description" content="(#ENV{desc}|couper{200,'…'}|attribut_html)" />][
+(#ENV{og-type}|sinon{article}|=={article}|oui)[<meta property="article:published_time" content="(#ENV{date}|affdate{Y-m-d})" />][
+<meta property="article:author" content="(#ENV{author, #ENV{auteur}}|attribut_html)" />]][
+<meta property="og:image" content="(#GET{logo}|url_absolue)" />
+[<meta property="og:image:width" content="(#GET{logo}|largeur)" />][
+<meta property="og:image:height" content="(#GET{logo}|hauteur)" />]][
+<meta property="og:site_name" content="(#NOM_SITE_SPIP|attribut_html)" />][(#REM)
+
+	Prise en charge du plugin facebook : s'il est présent, on envoie la méta fb:app_id
+
+][(#PLUGIN{facebook}|oui)[<meta property="fb:app_id" content="(#CONFIG{facebook/cle})" />]]][(#REM)
+
+	metas Twitter Card
+	https://dev.twitter.com/cards/types/summary
+
+][(#CONFIG{metasplus/twitter}|non)
+<!-- Twitter Card -->
+<meta name="twitter:card" content="[(#ENV{logo}|?{summary_large_image,summary})]" />
+[<meta name="twitter:title" content="(#ENV{titre}|attribut_html)" />][
+<meta name="twitter:description" content="(#ENV{desc}|couper{200,'…'}|attribut_html)" />][
+<meta name="twitter:image" content="(#GET{logo}|url_absolue)" />]
+<meta name="twitter:dnt" content="on" />
+[<meta name="twitter:url" content="(#ENV{url}|url_absolue)" />]
+]
+#FILTRE{trim}

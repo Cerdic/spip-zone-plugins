@@ -1,0 +1,42 @@
+[(#REM)
+	Metas plus: auteur
+
+	Parametres:
+	- id_auteur (obligatoire)
+
+]<BOUCLE_auteur(AUTEURS){id_auteur}>
+[(#REM)
+
+	1. D'abord rassembler les informations et les formater
+
+][
+(#SET{titre, #NOM|concat{" - ",#NOM_SITE_SPIP}|supprimer_tags|textebrut})][
+(#SET{lang, #LANG})][
+(#SET{desc,[(#BIO|sinon{#TITRE}|supprimer_tags|textebrut)]})][
+(#SET{author,#NOM|supprimer_tags|textebrut})][
+(#SET{date,#DATE})][
+(#SET{url,#URL_AUTEUR})][
+(#SET{logo,''})][
+(#LOGO_AUTEUR|oui)
+	[(#SET{logo, #LOGO_AUTEUR})]
+]
+<BOUCLE_illus(DOCUMENTS){id_auteur}{extension IN jpg,gif,png}
+						{largeur>=200}{hauteur>=200}{!par date}{0,1}
+						{si #LOGO_AUTEUR|non}>
+	[(#SET{logo,[(#FICHIER)]})]
+</BOUCLE_illus>
+[(#REM)
+
+	2. Passer les données au modèle général
+
+]<INCLURE{fond=inclure/metasplus,
+	titre=#GET{titre},
+	lang=#GET{lang},
+	desc=#GET{desc},
+	auteur=#GET{author},
+	date=#GET{date},
+	url=#GET{url},
+	logo=#GET{logo},
+	og-type=article} />
+</BOUCLE_auteur>
+#FILTRE{trim}

@@ -1,0 +1,44 @@
+<!-- autoriser=configurer -->
+<!-- refus=<:cfg:refus_configuration_administrateur:> -->
+<!-- nom=metasplus -->
+
+<div class="formulaire_spip formulaire_cfg formulaire_#FORM">
+
+<h3 class='titrem'><:metasplus:titre_config_metasplus:></h3>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+<ul>
+
+#SET{erreurs,#ENV**{erreurs}|table_valeur{filet}}
+<li class="editer editer_reseaux[ (#GET{erreurs}|oui)erreur]">
+	<label><:metasplus:label_reseaux:></label>
+	[<span class='erreur_message'>(#GET{erreurs})</span>]
+	<div class="choix">
+		<input type="checkbox" name="dublincore" id='dublincore' class="checkbox" value='on' [ (#ENV{dublincore}|oui)checked="checked"] />
+		<label for='dublincore'><:metasplus:label_dublincore:></label>
+	</div>
+	<div class="choix">
+		<input type="checkbox" name="opengraph" id='opengraph' class="checkbox" value='on' [ (#ENV{opengraph}|oui)checked="checked"] />
+		<label for='opengraph'><:metasplus:label_opengraph:></label>
+	</div>
+	<div class="choix">
+		<input type="checkbox" name="twitter" id='twitter' class="checkbox" value='on' [ (#ENV{twitter}|oui)checked="checked"] />
+		<label for='twitter'><:metasplus:label_twitter:></label>
+	</div>
+</li>
+
+
+
+
+</ul>
+<p class="boutons">
+	<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
+</p>
+</div>
+</form>
+</div>

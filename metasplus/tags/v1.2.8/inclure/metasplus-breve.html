@@ -1,0 +1,40 @@
+[(#REM)
+	Metas plus: brève
+
+	Parametres:
+	- id_breve (obligatoire)
+
+]<BOUCLE_breve(BREVES){id_breve}>
+[(#REM)
+
+	1. D'abord rassembler les informations et les formater
+
+][
+(#SET{titre, #TITRE|concat{" - ",#NOM_SITE_SPIP}|supprimer_tags|textebrut})][
+(#SET{lang, #LANG})][
+(#SET{desc,[(#INTRODUCTION|sinon{#TITRE}|supprimer_tags|textebrut)]})][
+(#SET{date,#DATE})][
+(#SET{url,#URL_BREVE})][
+(#SET{logo,''})][
+(#LOGO_BREVE|oui)
+	[(#SET{logo, #LOGO_BREVE})]
+]
+<BOUCLE_illus(DOCUMENTS){id_breve}{extension IN jpg,gif,png}
+						{largeur>=200}{hauteur>=200}{!par date}{0,1}
+						{si #LOGO_BREVE|non}>
+	[(#SET{logo,[(#FICHIER)]})]
+</BOUCLE_illus>
+[(#REM)
+
+	2. Passer les données au modèle général
+
+]<INCLURE{fond=inclure/metasplus,
+	titre=#GET{titre},
+	lang=#GET{lang},
+	desc=#GET{desc},
+	date=#GET{date},
+	url=#GET{url},
+	logo=#GET{logo},
+	og-type=article} />
+</BOUCLE_breve>
+#FILTRE{trim}

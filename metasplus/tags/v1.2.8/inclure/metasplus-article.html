@@ -1,0 +1,42 @@
+[(#REM)
+	Metas plus: article
+
+	Parametres:
+	- id_article (obligatoire)
+
+]<BOUCLE_article(ARTICLES){id_article}>
+[(#REM)
+
+	1. D'abord rassembler les informations et les formater
+
+][
+(#SET{titre, #TITRE|concat{" - ",#NOM_SITE_SPIP}|supprimer_tags|textebrut})][
+(#SET{lang, #LANG})][
+(#SET{desc,[(#CHAPO|sinon{#INTRODUCTION}|sinon{#TITRE}|supprimer_tags|textebrut)]})][
+(#SET{author,#LESAUTEURS|supprimer_tags|textebrut})][
+(#SET{date,#DATE})][
+(#SET{url,#URL_ARTICLE})][
+(#SET{logo,''})][
+(#LOGO_ARTICLE|oui)
+	[(#SET{logo, #LOGO_ARTICLE})]
+]
+<BOUCLE_illus(DOCUMENTS){id_article}{extension IN jpg,gif,png}
+						{largeur>=200}{hauteur>=200}{!par date}{0,1}
+						{si #LOGO_ARTICLE|non}>
+	[(#SET{logo,[(#FICHIER)]})]
+</BOUCLE_illus>
+[(#REM)
+
+	2. Passer les données au modèle général
+
+]<INCLURE{fond=inclure/metasplus,
+	titre=#GET{titre},
+	lang=#GET{lang},
+	desc=#GET{desc},
+	auteur=#GET{author},
+	date=#GET{date},
+	url=#GET{url},
+	logo=#GET{logo},
+	og-type=article} />
+</BOUCLE_article>
+#FILTRE{trim}

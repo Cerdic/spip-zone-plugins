@@ -1,0 +1,16 @@
+<paquet
+	prefix="metasplus"
+	categorie="divers"
+	version="1.2.8"
+	etat="stable"
+	compatibilite="[2.1.0;3.2.*]"
+	logo="opengraph.png"
+	documentation="https://contrib.spip.net/4845"
+>
+
+	<nom>Metas +</nom>
+	<!-- Métadonnées pour booster vos articles -->
+
+	<auteur lien="http://spip.tetue.net">tetue</auteur>
+	<auteur lien="https://www.erational.org">erational</auteur>
+</paquet>
