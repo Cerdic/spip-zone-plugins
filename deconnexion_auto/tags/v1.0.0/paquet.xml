@@ -1,0 +1,22 @@
+<paquet
+	prefix="decoauto"
+	categorie="auteur"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.2.3;3.2.*]"
+	logo="prive/themes/spip/images/decoauto-64.png"
+	documentation=""
+>
+
+	<nom>Déconnexion Automatique</nom>
+
+	<auteur lien='http://gamuza.fr'>tofulm</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="autoriser" inclure="decoauto_autorisations.php" />
+	<pipeline nom="jquery_plugins" inclure="decoauto_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="decoauto_pipelines.php" />
+
+
+</paquet>
