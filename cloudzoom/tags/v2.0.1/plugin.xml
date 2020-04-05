@@ -1,0 +1,24 @@
+<plugin>
+	<nom>Cloudzoom</nom>
+	<slogan>Variante zoomable du mod&#232;le doc</slogan>
+	<auteur>[yves Costiou->http://www.latelier2point0.fr]</auteur>
+	<licence>GNU/GPL</licence>
+	<icon>prive/themes/spip/images/cloudzoom-64.png</icon>
+	<version>2.0.1</version>
+	<etat>test</etat>
+	<description>
+Le plugin fournit un bloc image zoomable.
+_ Les param&#232;tres de personnalisation et de r&#233;glage sont accessibles via un formulaire (param&#233;trage des options)
+	</description>
+	<lien>https://contrib.spip.net/Cloudzoom</lien>
+	<prefix>cloudzoom</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>cloudzoom_pipelines.php</inclure>
+	</pipeline>
+	
+	<categorie>multimedia</categorie>
+
+	<necessite id="spip" version="[2.0.9;3.0.99]" />
+	
+</plugin>

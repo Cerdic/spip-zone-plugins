@@ -1,0 +1,24 @@
+<paquet
+	prefix="cloudzoom"
+	categorie="multimedia"
+	version="2.0.1"
+	etat="test"
+	compatibilite="[2.0.9;3.0.*]"
+	logo="prive/themes/spip/images/cloudzoom-32.png"
+	documentation="https://contrib.spip.net/Cloudzoom"
+>
+
+	<nom>CloudZoom</nom>
+	<!-- images zoomable -->
+
+	<credit lien="http://professorcloud.com/">Professor Cloud</credit>
+	<auteur>Yves Costiou</auteur>
+
+	<traduire module="cloudzoom" reference="fr" gestionnaire="salvatore" />
+
+
+	<pipeline nom="insert_head" inclure="cloudzoom_pipelines.php" />
+
+
+	<menu nom="cloudzoom" titre="cloudzoom:titre_menu_cloudzoom" parent="menu_squelette" icone="images/cloudzoom-16.png" action="configurer_cloudzoom" />
+</paquet>
