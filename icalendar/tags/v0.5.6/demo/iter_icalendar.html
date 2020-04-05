@@ -1,0 +1,31 @@
+#CACHE{0}
+
+
+#SET{today,#DATE}
+#SET{nextyear,#VAL{Y-m-d}|date{#VAL{next year}|strtotime}}
+
+<h1>Vacances scolaires</h1>
+
+<BOUCLE_zone(DATA){liste A,B,C}>
+<BOUCLE_vacances(DATA)
+{source ics, http://media.education.gouv.fr/ics/Calendrier_Scolaire_Zone_#VALEUR.ics}
+{par dtstart/str}
+{summary/value != ''}
+{dtend/str>=#GET{today}}
+{dtstart/str<=#GET{nextyear}}
+>
+[<h2>Vacances (#VALEUR{summary/value}|match{Zone.*$}|unique)</h2>]
+
+<dt>
+[(#SET{date,#VALEUR{dtstart/str}})]
+[(#GET{date}|jour) ][(#GET{date}|nom_mois)][ (#GET{date}|annee|unique{#_zone:VALEUR})]
+[(#SET{date,#VALEUR{dtend/str}})]
+[ &mdash; (#GET{date}|jour) ][(#GET{date}|nom_mois)][ (#GET{date}|annee|unique{#_zone:VALEUR})]
+</dt>
+<dd>[(#VALEUR{summary/value}|replace{- Zone.*$})]</dd>
+</BOUCLE_vacances>
+
+</BOUCLE_zone>
+
+
+<p><small>A noter : le format ical implique que DTEND est un jour apr&#232;s la fin de l'&#233;v&#232;nement&#160;; le calendrier indique donc le jour de rentrée et non le dernier jour des vacances.</small></p>
