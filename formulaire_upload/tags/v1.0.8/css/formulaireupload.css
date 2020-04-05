@@ -1,0 +1,13 @@
+/*pour plugin SPIP formulaire_upload  */ 
+.fupld  { border-bottom: 1px dotted #ccc; margin: 8px 0;padding:8px 0;}
+.fupld-first  { border-top: 1px dotted #ccc;}
+.fupld .spip_doc_logo { width: 100px; margin-bottom:8px; }
+.fupld .floatright { float: right; margin: 0 0 10px 10px; }
+.fupld .floatleft  { float: left;  margin: 0 10px 10px 0; }
+.fupld .choix { margin:0.8em 0; }    
+.fupld .insert_code strong { display: block; margin-bottom: 0.5em; }
+.fupld .pagination { width: 98%: }  
+
+@media print{
+	.formulaire_upload {display:none;}
+}

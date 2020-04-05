@@ -1,0 +1,20 @@
+<paquet
+	prefix="formulaireupload"
+	categorie="outil"
+	version="1.0.8"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/formulaireupload-32.png"
+	documentation="https://contrib.spip.net/Formulaire-upload"
+>
+	<nom>Formulaire Upload</nom>
+	<auteur lien="http://zzz.rezo.net">Fil</auteur>
+	<auteur>b_b</auteur>
+	<auteur lien='https://www.erational.org'>erational</auteur>
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="autoriser" inclure="formulaireupload_autorisations.php" />
+	<pipeline nom="insert_head_css"  action="insert_head_css" inclure="formulaireupload_pipelines.php" />
+	<pipeline nom="insert_head"  action="insert_head" inclure="formulaireupload_pipelines.php" />
+
+</paquet>

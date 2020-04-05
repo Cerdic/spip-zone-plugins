@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>Upload Zone - [(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+
+
+<style type="text/css"><!--
+	#zone-documents td { vertical-align: top; font-size:small;}
+	#zone-documents td { border-top: dotted gray 1px;  padding-top: 5px; padding-bottom:8px; }
+
+	#zone-documents table { }
+	.fiche-document { width: 70%; }
+	.logo-document { width: 130px; text-align: center; }
+
+	.ajaxloading {
+		background-image: url([(#CHEMIN{images/searching.gif}|url_absolue)]);
+		background-repeat:no-repeat;
+		background-position:center center;
+	}
+
+// --></style>
+[<script type="text/javascript" src="(#CHEMIN{javascript/jquery.upload_attach.js})"></script>
+]
+</head>
+
+<body class="page_upload">
+
+<div id="page">
+
+
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a></div>
+
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : contenu de l'article ]
+		<div id="contenu">
+			<div class="cartouche">
+			<h1 class="titre">Upload zone</h1>
+			</div>
+
+			<div id="tous_docs">
+			<INCLURE{fond=modeles/upload_documents_auteurs}>
+			</div>
+
+		</div>
+	</div>
+
+
+<script type="text/javascript"><!--
+
+var load_zone_documents = function() {
+
+	var r = ($(this).attr('href')||'').match(/[?&;]debut_tous=([0-9]+)/);
+	r = r ? r[1] : 0;
+	$('#tous_docs')
+	.addClass('ajaxloading')
+	.css({'opacity': 0.5});
+	$.get(
+		'#URL_PAGE{mini_formulaire_upload}&liste=1&debut_tous='+r,
+		function(c) {
+			$('#tous_docs')
+			.html(
+				$('<iframe>').html(c).find('#tous_docs').html()
+			)
+			.removeClass('ajaxloading')
+			.css({'opacity':1.0});
+			pagination_zone();
+		}
+	);
+	return false;
+};
+
+var pagination_zone = function() {
+	$('#zone-documents')
+	.prev('.pagination')
+	.find('a')
+	.click(load_zone_documents);
+};
+pagination_zone();
+
+// --></script>
+
+
+
+
+
+	<div id="navigation">
+		#FORMULAIRE_UPLOAD
+	</div>
+
+
+<script type='text/javascript'><!--
+if (window.jQuery && jQuery.fn.ajaxForm) {
+	window.jQuery(function() {
+		//options
+		//-url (string)
+		//-callback (function)
+		var options = {
+			url: '#URL_PAGE{mini_formulaire_upload}',
+			callback: function() {
+				load_zone_documents(); // recharge la partie du milieu
+				// si on reattache les evenements, remettre les crayons
+				if (window.cQuery)
+					cQuery(".crayon:lt(1000)",this).initcrayon();
+			}
+		};
+
+		jQuery('.formulaire_upload')
+		.upload_attach(options)
+		// et la pagination
+		.each(function() {
+			var self = this;
+			$('.pagination a',self)
+			.click(function(){
+				var r = ($(this).attr('href')||'').match(/[?&;]debut_docs=([0-9]+)/);
+				r = r ? r[1] : 0;
+				$(self)
+				.addClass('ajaxloading')
+				.css({'opacity': 0.5});
+				$.get(
+					'#URL_PAGE{mini_formulaire_upload}&debut_docs='+r,
+					function(c) {
+						$(self)
+						.removeClass('ajaxloading')
+						.css({'opacity': 1.0})
+						.html(
+							$('<iframe>').html(c).find('.formulaire_upload').html()
+						).
+						upload_attach(options);
+					}
+				);
+				return false;
+			});
+		});
+	});
+}
+// --></script>
+
+
+
+
+<hr style="clear:both;" />
+
+<a href="https://contrib.spip.net/Formulaire-Upload">Documentation &amp; bugs</a>
+
+</div>
+</body>
+</html>

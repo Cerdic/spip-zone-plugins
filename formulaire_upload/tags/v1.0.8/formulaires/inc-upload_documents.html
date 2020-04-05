@@ -1,0 +1,52 @@
+[(#REM)
+		noisette listant le portfolio d'un objet
+
+		attention subtilite spip 3! ambiguite des liaisons
+		http://marcimat.magraine.net/SPIP-3-Documents-Mots
+
+
+]<B_docs>
+#ANCRE_PAGINATION
+<BOUCLE_docs(DOCUMENTS documents_liens){id_auteur?}{id_article?}{id_breve?}{id_rubrique?}{!par id_document}{tout}{pagination}>
+<div class="fupld[(#COMPTEUR_BOUCLE|=={1}|oui) fupld-first]" id="documents_portfolio">  
+	<div class="spip_doc_logo float#LANG_RIGHT">
+		[(#SET{logo,[(#LOGO_DOCUMENT|#URL_DOCUMENT
+			|image_passe_partout{100,100}
+			|image_recadre{100,100,center}
+			|inserer_attribut{title,#TYPE_DOCUMENT[
+				- (#TAILLE|taille_en_octets)]}
+			)]}
+		)]
+		#GET{logo}  
+	</div>
+	<div class='decrire_doc'>
+	<h4>[(#FICHIER|basename|couper{20})]</h4>
+		[(#CONFIG{formulaireupload/manage_title}|oui)
+		<label for="titre_[(#ID_DOCUMENT)]_#ENV{objet}_#ENV{id_objet}"><:titre_titre_document:></label>
+		<input type="text" name="titrer_#ID_DOCUMENT" id="titre_[(#ID_DOCUMENT)]_#ENV{objet}_#ENV{id_objet}" class="text" value="#TITRE" />
+		<input type="hidden" name="ref\[\]"  class="hidden" value="#ID_DOCUMENT" />
+		]
+
+	<div class='choix'>
+			<input type="checkbox" name="supprimer[]" id="supprimer_[(#ID_DOCUMENT)]_#ENV{objet}_#ENV{id_objet}" class="checkbox" value="#ID_DOCUMENT" title="<:formupload:doc_delete:>" />
+		<label for="supprimer_[(#ID_DOCUMENT)]_#ENV{objet}_#ENV{id_objet}"><:formupload:remove:></label>
+	</div>
+
+	</div>
+	<br class='nettoyeur' />
+	[(#CONFIG{formulaireupload/insert_code}|oui)
+	<div class="insert_code">
+		<strong><:formupload:insert_code:></strong>
+		[(#EXTENSION|match{jpg|gif|png}|oui)
+		<div class="abbrimg"><abbr title="<:formupload:img_left:>">&lt;img#ID_DOCUMENT|left&gt;</abbr> <abbr title="<:formupload:img_center:>">&lt;img#ID_DOCUMENT|center&gt;</abbr> <abbr title="<:formupload:img_right:>">&lt;img#ID_DOCUMENT|right&gt;</div>]
+		[(#EXTENSION|match{jpg|gif|png}|non)
+		<div class="abbrdoc"><abbr title="<:formupload:doc_left:>">&lt;doc#ID_DOCUMENT|left&gt;</abbr> <abbr title="<:formupload:doc_center:>">&lt;doc#ID_DOCUMENT|center&gt;</abbr> <abbr title="<:formupload:doc_right:>">&lt;doc#ID_DOCUMENT|right&gt;</abbr></div>]
+	</div>]
+
+</div>
+</BOUCLE_docs>
+[<div class="pagination">(#PAGINATION)</div>]
+
+<p class='boutons'><input class='submit' type="submit" name="mise_a_jour" value="<:bouton_enregistrer:>"/></p>
+<br />
+</B_docs> 

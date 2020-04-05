@@ -1,0 +1,39 @@
+<div class="formulaire_spip formulaire_upload" id="formulaire_upload_#ENV{objet}_#ENV{id_objet}">
+<br class='bugajaxie' />
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[(#ENV{editable})
+<form action="#ENV{action}#formulaire_upload" method="post" enctype="multipart/form-data">
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<fieldset>
+		<legend><:formupload:yourfiles:></legend>
+		[(#INCLURE{fond=formulaires/#ENV*{fond_documents}}{env}{ajax})]
+		<ul>
+			<li class='saisie_fichier[ (#ENV**{erreurs}|table_valeur{fichier}|oui)erreur]'>
+			<div>
+				<label for="fichier_#ENV{objet}_#ENV{id_objet}"><:formupload:choosefiles:></label>
+				<input type="file" id="fichier_#ENV{objet}_#ENV{id_objet}" name="fichier\[\]" [ accept="(#CONFIG{formulaireupload/files_accepted})"][ maxlength="(#CONFIG{formulaireupload/files_number})"] />
+			</div>
+			</li>
+		</ul>
+		<p class='boutons'><input class='submit' type="submit" name="joindre_upload" value="<:bouton_upload:>"/></p>
+	</fieldset>
+<script type="text/javascript">
+(function($){
+	$(function(){
+		// si multifile est la, on l'utilise (trop bien)
+		if ($.fn.MultiFile)
+		$('#fichier_#ENV{objet}_#ENV{id_objet}').MultiFile({
+			[max: (#CONFIG{formulaireupload/files_number}),
+			][accept: '(#CONFIG{formulaireupload/files_accepted})',
+			]STRING: {
+				remove:'<:formupload:remove:>',
+				denied:'<:formupload:msg_format_non_autorise:>', 
+				duplicate:'<:formupload:msg_fichier_doublon:>'
+			}
+		});
+	});
+})(jQuery);
+</script>
+</form>]
+</div>
