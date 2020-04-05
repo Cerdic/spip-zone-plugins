@@ -1,0 +1,8 @@
+<select name="#ENV{nom}">
+<B_tables>
+	<option value=""></option>
+<BOUCLE_tables(DATA){source tableau,#VAL|lister_tables_sql}>
+	<option value="#CLE"[(#ENV{valeur}|=={#CLE}|oui)selected="selected"]>#VALEUR</option>
+</BOUCLE_tables>
+</B_tables>
+</select>

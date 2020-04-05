@@ -1,0 +1,31 @@
+[(#SET{titre,#ENV{objet/champ_titre}})][
+(#SET{mtitre,#GET{titre}|strtoupper})][
+(#REM)
+
+Squelette de vue simple
+Affiche un ou plusieurs elements en fonction du parametre multiple actif ou non
+
+]
+
+\<BOUCLE_test_multiple(CONDITION){si \#ENV{multiple}|=={on}|oui}>
+	\[(\#SET{valeur,\[(\#ENV*{valeur}|is_array|?{\[(\#ENV*{valeur})\],\[(\#ENV*{valeur}|explode{','})\]})\]})\]
+	\<B_[(#LOBJET)]_selectionnes>
+	<ul>
+	\<BOUCLE_[(#LOBJET)]_selectionnes\(#MOBJET\){#ID_OBJET IN \#GET*{valeur}}
+		{par num #GET{titre}, #GET{titre}}[(#OBJET|champ_present{statut}
+		|?{'{statut?}'})]{tout}>
+		<li class="choix">\#[(#GET{mtitre})] \(\##MID_OBJET\)</li>
+	\</BOUCLE_[(#LOBJET)]_selectionnes>
+	</ul>
+	\</B_[(#LOBJET)]_selectionnes>
+   	\[(\#ENV*{sans_reponse}|propre)\]
+	\<//B_[(#LOBJET)]_selectionnes>
+\</BOUCLE_test_multiple>
+	\<BOUCLE_[(#TYPE)]_selectionne\(#MOBJET\){#ID_OBJET=\#ENV{valeur}}
+		{par num #GET{titre}, #GET{titre}}[(#OBJET|champ_present{statut}
+		|?{'{statut?}'})]{tout}>
+	  	<p>\#[(#GET{mtitre})] \(\##MID_OBJET\)</p>
+	\</BOUCLE_[(#TYPE)]_selectionne>
+   	\[(\#ENV*{sans_reponse}|propre)\]
+	\<//B_[(#TYPE)]_selectionne>
+\<//B_test_multiple>

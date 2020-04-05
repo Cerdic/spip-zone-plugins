@@ -1,0 +1,76 @@
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+[(#REM) dans spip_prive.css ]
+#SET{font-size,#ENV{font-size,0.8125em}}
+#SET{line-height,#ENV{line-height,1.385em}}
+#SET{margin-bottom,#ENV{margin-bottom,#GET{line-height}}}
+
+/* Code en developpement .experimental */
+.experimental {border:2px solid;color:#333;font-weight: normal;padding:[(#GET{margin-bottom}|div{2})em] 10px;padding-left:40px;min-height:24px;background-repeat:no-repeat;background-position: 2px 5px;margin-bottom:#GET{margin-bottom};margin-top:#GET{margin-bottom};}
+.experimental {color: #513721; border-color: #FF862A; background-color:#FFE8C9;background-image:url(#CHEMIN_IMAGE{experimental-32.png});}
+.sous_parties .parties .experimental {margin-left:.5em; margin-right:.5em;}
+
+#tabs .tabs li {clear:none; display:inline; padding-left:1em;}
+#tabs .tabs li img {vertical-align: middle; padding-left:.5em;}
+#tabs.ui-tabs .tabs li {padding-left:0;}
+.ui-tabs { margin:.5em 0; font-size: 1em; }
+.ui-tabs.ui-widget-content {background:none}
+.ui-tabs .ui-tabs-panel {padding:1em 0em .5em; overflow: auto;}
+#tabs .ui-accordion-content {padding:1em 0em;}
+#tabs .ui-accordion-content.sous_parties {padding:1em 0.5em;}
+#tabs .ui-accordion-content.sous_parties .group {zoom: 1;}
+/* augmenter la largeur du label */
+.formulaire_fabriquer_plugin li, .formulaire_fabriquer_plugin li.gauche { padding-left: 180px;}
+.formulaire_fabriquer_plugin li label, .formulaire_fabriquer_plugin li.gauche label {margin-left: -170px; width: 154px;}
+.formulaire_fabriquer_plugin .li_colonne li {width:47%; float:left; clear:none;}
+.formulaire_fabriquer_plugin .li_colonne li .clear {clear:both;}
+
+/* titre du plugin */
+.formulaire_fabriquer_plugin > .h2 {margin-top:[(#GET{margin-bottom}|div{2})em];}
+
+/* coloration code reduit */
+.formulaire_fabriquer_plugin .coloration_code li {padding:0;}
+.formulaire_fabriquer_plugin .reponse_formulaire_diff {border:2px solid #ccc; padding:.8em 1em .3em;}
+.formulaire_fabriquer_plugin .reponse_formulaire_diff h4 {margin-bottom:.3em; color:#666;}
+.formulaire_fabriquer_plugin .reponse_formulaire_diff h4:hover {text-decoration:underline; cursor:pointer;}
+.formulaire_fabriquer_plugin .reponse_formulaire_diff .cadre {border:1px solid #ccc; background:white; margin:.8em 0 .5em; border-radius:5px;}
+.formulaire_fabriquer_plugin .reponse_formulaire_diff .notice p  {margin-bottom:0;}
+.formulaire_fabriquer_plugin .reponse_formulaire_diff .notice li {margin:0; padding:0 0 0 1em; list-style:inside square;}
+
+/* saisie oui non en ligne */
+.formulaire_fabriquer_plugin .saisie_oui_non .choix {display:inline; float:left; min-width:100px;}
+.formulaire_fabriquer_plugin .saisie_choisir_objets .choix {display:inline; float:left; min-width:200px;}
+.formulaire_fabriquer_plugin input[list] {width:95%;}
+.formulaire_fabriquer_plugin .datalist_aide {position:relative; top:3px;}
+.formulaire_fabriquer_plugin input.submit.left {float:left;}
+.formulaire_fabriquer_plugin input.submit.right {float:right;}
+.formulaire_fabriquer_plugin input.submit.action {margin:1em .5em .5em;}
+.formulaire_fabriquer_plugin .parties fieldset { padding-left: 0px; padding-right: 0px; margin-left: 0; margin-right: 0;}
+.formulaire_fabriquer_plugin .parties fieldset .legend { margin-left: 0px; margin-right: 0px; padding-left:.5em; padding-right:.5em; }
+.formulaire_fabriquer_plugin .parties ul { margin-left: 0px; margin-right: 0px; }
+/* separer les explications en entete des accordions */
+.formulaire_fabriquer_plugin .sous_parties>.explication {margin-bottom:1em;}
+
+/* code utilisateur avec vignette */
+.formulaire_fabriquer_plugin h3.surveiller a,
+.formulaire_fabriquer_plugin h4.surveiller a {
+	background:url([(#CHEMIN_IMAGE{eyes-24.png}|url_absolue)]) 99% 50% no-repeat;
+}
+/* erreurs en couleurs */
+.formulaire_fabriquer_plugin #tabs .tabs li.erreur,
+.formulaire_fabriquer_plugin h3.erreur,
+.formulaire_fabriquer_plugin h4.erreur{
+	background-image:url([(#CHEMIN{css/images/ui-bg_glass_75_e6e6e6_1x400.png}|image_sepia{F00}
+		|extraire_attribut{src}|url_absolue)]);
+}
+
+/* Taille automatique en hauteur */
+.CodeMirror { border: 1px solid #bbb; border-radius:5px; margin: 0.5em 0;}
+.CodeMirror-gutter { border-radius:5px 0 0 5px;}
+.CodeMirror-scroll {
+	height: auto;
+	overflow-y: hidden;
+	overflow-x: auto;
+	font-size:120%;
+	line-height:1.4em;
+}
