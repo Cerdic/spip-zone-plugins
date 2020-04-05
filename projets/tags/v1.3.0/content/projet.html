@@ -1,0 +1,44 @@
+<!-- #SQUELETTE -->[(#REM)
+        Squelette de la page projet listant les infos dudit projet
+        Format : Spipr-dist
+]<BOUCLE_principale(PROJETS) {id_projet}>
+<div class="contenu-principal">
+<div class="cartouche">
+[(#LOGO_PROJET||image_reduire{200,200})]
+<h1 class="h1 #EDIT{nom}">#NOM [ &ndash; &#91;(#ID_PROJET)&#93;]</h1>
+    <p class="info-publi">
+        [<strong><:projet:champ_date_debut_label:> : </strong><br/>
+        <abbr class="published" title="[(#DATE_DEBUT|date_iso)]">(#DATE_DEBUT|nom_jour|ucfirst) [(#DATE_DEBUT|affdate)]</abbr> ][<br />
+        <strong><:projet:champ_date_livraison_prevue_label:> : </strong><br/>
+        <abbr class="published" title="[(#DATE_LIVRAISON_PREVUE|date_iso)]">(#DATE_LIVRAISON_PREVUE|nom_jour|ucfirst) [(#DATE_LIVRAISON_PREVUE|affdate)]</abbr> ][<br/>
+        <strong><:projet:champ_date_livraison_label:> : </strong><br/>
+        <abbr class="published" title="[(#DATE_LIVRAISON|date_iso)]">(#DATE_LIVRAISON|nom_jour|ucfirst) [(#DATE_LIVRAISON|affdate)]</abbr> ][<br/>
+        <strong><:projet:champ_nb_heures_estimees_label:> : </strong><br/>
+        <span class="published">(#NB_HEURES_ESTIMEES)&nbsp;</span> ]
+
+    </p>
+    [<p>(#ENV{'recalcul'}|=={'oui'}|oui)Votre recalcul est fait. <br/>
+    [<pre>(#DATE**|affdate) [&mdash; (#DATE**|heures)h[(#DATE**|minutes)min][(#DATE**|secondes)sec]]</pre>]
+    </p>]
+</div>
+
+<div class="surlignable">
+    [<h4 class="invisible hide"><:projet:champ_objectif_label:></h4>
+    <div class="#EDIT{objectif} objectif">(#OBJECTIF|image_reduire{500,0})</div>]
+    [<h4 class="invisible hide"><:projet:champ_enjeux_label:></h4>
+    <div class="#EDIT{enjeux} enjeux">(#ENJEUX|image_reduire{500,0})</div>]
+    [<h4 class="invisible hide"><:projet:champ_methode_label:></h4>
+    <div class="#EDIT{methode} methode">(#METHODE|image_reduire{500,0})</div>]
+    [<h4 class="invisible hide"><:projet:champ_descriptif_label:></h4>
+    <div class="#EDIT{descriptif} descriptif">(#DESCRIPTIF|image_reduire{500,0})</div>]
+</div>
+
+[<p class="#EDIT{hyperlien} hyperlien"><:projet:champ_url_site_label:> : <a href="(#URL_SITE)" class="spip_out">[(#URL_SITE|couper{80})]</a></p>]
+
+
+[(#REM) Gestion du portfolio et des documents ]
+[(#INCLURE{fond=inclure/documents}{id_projet})]
+
+</div>
+</BOUCLE_principale>
+<!-- /end #SQUELETTE -->

@@ -1,0 +1,57 @@
+[(#AUTORISER{voir,projet,#ID_PROJET}|sinon_interdire_acces)]
+<BOUCLE_projet(PROJETS){id_projet}{statut==.*}{si #ENV{exec}|=={projet}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,projet,#ID_PROJET})
+		[(#ID_PROJET|afficher_qui_edite{projet}|non)
+			[(#URL_ECRIRE{projet_edit,id_projet=#ID_PROJET}|icone_verticale{<:projet:icone_modifier_projet:>,projet,edit,right ajax preload})]
+		]
+		[(#ID_PROJET|afficher_qui_edite{projet}|oui)
+			[(#URL_ECRIRE{projet_edit,id_projet=#ID_PROJET}|icone_verticale{#ID_PROJET|afficher_qui_edite{projet},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#NOM|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{projet-24.png}|balise_img{projet,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{projet,#ID_PROJET}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/projet,id=#ID_PROJET,id_projet=#ID_PROJET,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+<div class="nettoyeur"></div>
+
+
+[(#AUTORISER{modifier,projet,#ID_PROJET})
+	[(#ID_PROJET|afficher_qui_edite{projet}|non)
+		[(#URL_ECRIRE{projet_edit,id_projet=#ID_PROJET}|icone_verticale{<:projet:icone_modifier_projet:>,projet,edit,right ajax preload})]
+	]
+	[(#ID_PROJET|afficher_qui_edite{projet}|oui)
+		[(#URL_ECRIRE{projet_edit,id_projet=#ID_PROJET}|icone_verticale{#ID_PROJET|afficher_qui_edite{projet},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,projet,id,#ID_PROJET},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+[(#REM) Affiche les projets enfants ]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,projet,id_projet,#ID_PROJET,objet,projet,id_objet,#ID_PROJET},data,#INCLURE{fond=prive/objets/contenu/projet-enfants,id_projet,env}})]})]
+<div class="nettoyeur"></div>
+
+<div class="nettoyeur"></div>
+<BOUCLE_lies (spip_projets_liens) {id_projet} {fusion objet} {par objet}>
+	#SET{table,#OBJET|table_objet}
+	[(#SET{titre,[#OBJET:info_(#GET{table})_liees_projet]})]
+	<INCLURE{fond=prive/objets/liste/objets_lies_projet,objet,id_projet,ajax,env} />
+</BOUCLE_lies>
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_projet>
+[(#ENV**{exec}|=={projet_edit}|?{#INCLURE{fond=prive/squelettes/contenu/projet_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_projet>

@@ -1,0 +1,47 @@
+[(#AUTORISER{voir,projets_cadre,#ID_PROJETS_CADRE}|sinon_interdire_acces)]
+<BOUCLE_projets_cadre (PROJETS_CADRES) {id_projets_cadre} {si #ENV{exec}|=={projets_cadre}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,projets_cadre,#ID_PROJETS_CADRE})
+		[(#ID_PROJETS_CADRE|afficher_qui_edite{projets_cadre}|non)
+			[(#URL_ECRIRE{projets_cadre_edit,id_projets_cadre=#ID_PROJETS_CADRE}|icone_verticale{<:projets_cadre:icone_modifier_projets_cadre:>,projets_cadre,edit,right ajax preload})]
+		]
+		[(#ID_PROJETS_CADRE|afficher_qui_edite{projets_cadre}|oui)
+			[(#URL_ECRIRE{projets_cadre_edit,id_projets_cadre=#ID_PROJETS_CADRE}|icone_verticale{#ID_PROJETS_CADRE|afficher_qui_edite{projets_cadre},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{projets_cadre-24.png}|balise_img{projets_cadre,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/projets_cadre,id=#ID_PROJETS_CADRE,id_projets_cadre=#ID_PROJETS_CADRE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,projets_cadre,#ID_PROJETS_CADRE})
+	[(#ID_PROJETS_CADRE|afficher_qui_edite{projets_cadre}|non)
+		[(#URL_ECRIRE{projets_cadre_edit,id_projets_cadre=#ID_PROJETS_CADRE}|icone_verticale{<:projets_cadre:icone_modifier_projets_cadre:>,projets_cadre,edit,right ajax preload})]
+	]
+	[(#ID_PROJETS_CADRE|afficher_qui_edite{projets_cadre}|oui)
+		[(#URL_ECRIRE{projets_cadre_edit,id_projets_cadre=#ID_PROJETS_CADRE}|icone_verticale{#ID_PROJETS_CADRE|afficher_qui_edite{projets_cadre},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,projets_cadre,id,#ID_PROJETS_CADRE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+<div class="nettoyeur"></div>
+[(#REM) Lister les projets issus de ce cadre. ]
+<INCLURE{fond=prive/objets/liste/projets,id_projets_cadre=#ID_PROJETS_CADRE,env,ajax} />
+<div class="nettoyeur"></div>
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_projets_cadre>
+[(#ENV**{exec}|=={projets_cadre_edit}|?{#INCLURE{fond=prive/squelettes/contenu/projets_cadre_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_projets_cadre>

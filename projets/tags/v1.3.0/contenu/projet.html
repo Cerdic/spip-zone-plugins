@@ -1,0 +1,11 @@
+<!-- #SQUELETTE -->[(#REM)
+        Squelette de la page projet listant les infos dudit projet
+        Format : Z-dist
+]<BOUCLE_principale(PROJETS) {id_projet}>
+[(#REM) Fil d'ariane]
+        <p id="hierachie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><span><:projet:info_projets:></span><span class="sep"> &gt; </span>[<strong class="on">(#NOM|couper{80})</strong>]</p>
+
+<INCLURE{fond=content/projet,env} />
+
+</BOUCLE_principale>
+<!-- /end #SQUELETTE -->
