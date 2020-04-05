@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/coupons, env, ajax=liste-objets, nb=25, sinon=<:coupon:info_aucun_coupon:>}>
+
+[(#AUTORISER{creer,coupon})
+	[(#URL_ECRIRE{coupon_edit,new=oui}|icone_verticale{<:coupon:icone_creer_coupon:>,coupon,new,right})]
+]

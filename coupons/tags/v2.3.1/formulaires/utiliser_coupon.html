@@ -1,0 +1,48 @@
+<div class="formulaire_spip formulaire_utiliser_coupon">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<B_coupons>
+		<p><strong>Mes coupons de réduction :</strong></p>
+		<table class="spip">
+			<thead>
+			<tr>
+				<th>Nom</th>
+				<th>Montant</th>
+				<th>Date de validité</th>
+				<th>Code à utiliser</th>
+			</tr>
+			</thead>
+			<BOUCLE_coupons(COUPONS){id_auteur=#SESSION{id_auteur}}{par date}{inverse}{actif=on}>
+			[(#ID_COUPON|coupon_utilisable|oui)
+			<tr>
+				<td>#TITRE</td>
+				<td>[(#ID_COUPON|coupon_montant_utilisable|prix_formater)]</td>
+				<td>[(#DATE_VALIDITE|affdate)]</td>
+				<td><strong>#CODE</strong></td>
+				<td><button type="button"  class="js-appliquer-code" data-code="#CODE">Utiliser ce coupon</button></td>
+			</tr>
+			]
+			</BOUCLE_coupons>
+		</table>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('.js-appliquer-code').on('click', function(){
+					var $form = $(this).parents('.formulaire_utiliser_coupon').find('form');
+					$form.find('input[name="code_coupon"]').val($(this).data('code'));
+					$form.submit();
+				});
+			});
+		</script>
+	</B_coupons>
+	
+	<form method="post" action="#ENV{action}">		
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			[(#SAISIE{input,code_coupon,label=<:coupons:code_coupon:>})]
+			<p class="boutons">
+				<button type="submit" class="submit"><:coupons:utiliser_code_reduction:></button>
+			</p>
+		</div>
+	</form>
+</div>

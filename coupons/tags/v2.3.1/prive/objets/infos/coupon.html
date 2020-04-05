@@ -1,0 +1,16 @@
+<BOUCLE_coupon(COUPONS){id_coupon=#ENV{id}}>
+<div class="infos">
+[(#SET{texte_objet,<:coupon:titre_coupon:>})]
+<div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_COUPON</p></div>
+
+	<div class='nb_elements'><!--nb_elements--></div>
+
+	[(#AUTORISER{supprimer, coupon, #ID_COUPON}|oui)
+		[(#BOUTON_ACTION{
+			[(#CHEMIN_IMAGE{coupon-del-24.png}|balise_img{<:coupon:supprimer_coupon:>}|concat{' ',#VAL{<:coupon:supprimer_coupon:>}|wrap{<b>}}|trim)],
+			#URL_ACTION_AUTEUR{supprimer_coupon, #ID_COUPON, #URL_ECRIRE{coupons}},
+			icone s24 horizontale danger coupon-del-24, <:coupon:confirmer_supprimer_coupon:>})]
+	]
+
+</div>
+</BOUCLE_coupon>

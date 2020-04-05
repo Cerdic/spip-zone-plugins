@@ -1,0 +1,69 @@
+<BOUCLE_coupon(COUPONS){id_coupon}>
+
+<p class="champ">
+	<strong><:coupon:champ_actif_label:> : </strong>
+	[(#ACTIF|?{<:item_oui:>,<:item_non:>})]
+</p>
+
+<p class="champ">
+	<strong><:coupon:champ_date_validite_label:> : </strong>
+	[(#DATE_VALIDITE|affdate)]
+</p>
+
+[<p class="champ">
+	<strong><:coupon:champ_code_label:> : </strong>
+	(#CODE)
+</p>]
+
+[<p class="champ">
+	<strong><:coupon:champ_montant_label:> : </strong>
+	(#MONTANT|prix_formater)
+</p>]
+
+[<p class="champ">
+	<strong><:coupon:montant_utilisable:> : </strong>
+	(#ID_COUPON|coupon_montant_utilisable|prix_formater)
+</p>]
+
+[<p class="champ">(#ID_PRODUIT|oui)
+	<strong><:coupon:champ_restriction_produit_titre_label:> : </strong>
+	<a href="[(#ID_PRODUIT|generer_url_entite{produit})]">[(#INFO_TITRE{produit,#ID_PRODUIT})]</a>
+</p>]
+
+[<p class="champ">(#ID_AUTEUR|oui)
+	<strong><:coupon:champ_restriction_auteur_titre_label:> : </strong>
+	<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#INFO_TITRE{auteur,#ID_AUTEUR})]</a>
+</p>]
+
+[<p class="champ">(#RESTRICTION_TAXE|>{0}|oui)
+	<strong><:coupon:champ_restriction_taxe_label:> : </strong>
+	[(#RESTRICTION_TAXE|mult{100})%]
+</p>]
+
+
+[(#BOITE_OUVRIR{<:coupon:coupon_utilisable:>,'statut'})]
+	[(#ID_COUPON|coupon_utilisable|?{Oui,Non})]
+#BOITE_FERMER
+
+<BOUCLE_commande_detail_origine(COMMANDES_DETAILS){id_commandes_detail}>
+<BOUCLE_commande_origine(COMMANDES){id_commande}>
+[(#BOITE_OUVRIR{<:coupon:champ_id_commandes_detail_label:>,'info'})]
+	<a href="[(#ID_COMMANDE|generer_url_entite{commande})]">#REFERENCE</a>
+#BOITE_FERMER
+</BOUCLE_commande_origine>
+</BOUCLE_commande_detail_origine>
+
+<B_commandes>
+[(#BOITE_OUVRIR{<:coupon:utilise_dans_commandes:>,'info'})]
+<BOUCLE_commandes(COUPONS_COMMANDES){id_coupon}>
+
+	<p>
+		<a href="[(#ID_COMMANDE|generer_url_entite{commande})]">#INFO_REFERENCE{commande,#ID_COMMANDE}</a> : [(#MONTANT|prix_formater)] - [(#MAJ|affdate_heure)]
+	</p>
+
+</BOUCLE_commandes>
+#BOITE_FERMER
+</B_commandes>
+
+
+</BOUCLE_coupon>

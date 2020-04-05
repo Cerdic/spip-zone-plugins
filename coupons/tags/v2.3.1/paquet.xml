@@ -1,0 +1,33 @@
+<paquet
+	prefix="coupons"
+	categorie="divers"
+	version="2.3.1"
+	etat="test"
+	compatibilite="[3.1.0;3.2.*]"
+	logo="prive/themes/spip/images/coupons-64.png"
+	documentation=""
+	schema="2.2.0" 
+>
+	<nom>Coupons de réduction</nom>
+	
+	<auteur>nicod_</auteur>
+	<credit>Icone Coupon par Melissa Schmitt (the Noun Project)</credit>
+	
+	<licence>GNU/GPL</licence>
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="produits" compatibilite="[1.1.24;]" />
+	<necessite nom="commandes" compatibilite="[1.15.2;]" />
+	<necessite nom="cextras" compatibilite="[3.11.4;]" />
+	
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/coupons.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/coupons.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/coupons.php" />
+	<pipeline nom="declarer_champs_extras" inclure="base/coupons.php" />
+	<pipeline nom="autoriser" inclure="coupons_autorisations.php" />
+
+	<pipeline nom="pre_insertion" inclure="coupons_pipelines.php" />
+	<pipeline nom="post_edition" inclure="coupons_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="coupons_pipelines.php" />
+	
+	<menu nom="coupons" titre="coupon:titre_coupons" parent="menu_edition" icone="images/coupon-16.png" action="coupons" /> 
+</paquet>

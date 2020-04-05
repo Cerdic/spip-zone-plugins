@@ -1,0 +1,44 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	date,-1,
+	date_validite,-1,
+	id_coupon,1,
+	points,-1
+}})]<B_liste_coupons>
+#ANCRE_PAGINATION
+<div class="liste-objets coupons">
+<table class="spip liste">
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{coupon:info_1_coupon,coupon:info_nb_coupons}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="titre" scope="col">[(#TRI{titre,<:coupon:champ_titre_label:>,ajax})]</th>
+			<th class="" scope="col">[(#TRI{code,<:coupon:champ_code_label:>,ajax})]</th>
+			<th class="" scope="col"><:coupon:coupon_utilisable:></th>
+			<th class="date" scope="col">[(#TRI{date,<:coupon:champ_date_creation_label:>,ajax})]</th> 
+			<th class="date" scope="col">[(#TRI{date_validite,<:coupon:champ_date_validite_label:>,ajax})]</th> 
+			<th class="id" scope="col">[(#TRI{id_coupon,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_coupons(COUPONS)
+		{id_commandes_detail?}{id_mot?}{id_auteur?}{where?}{code?}{id_produit?}{recherche?}
+		{tri #ENV{par,date},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="titre principale">[(#LOGO_COUPON|image_reduire{20,26})]<a href="[(#ID_COUPON|generer_url_entite{coupon})]" title="<:info_numero_abbreviation|attribut_html:> #ID_COUPON">[(#RANG). ]#TITRE</a></td>
+			<td class="">#CODE</td>
+			<td class="">[(#ID_COUPON|coupon_utilisable|?{Oui,Non})]</td>
+			<td class="date secondaire">[(#DATE|affdate_jourcourt)]</td> 
+			<td class="date secondaire">[(#DATE_VALIDITE|affdate_jourcourt)]</td> 
+			<td class="id">[(#AUTORISER{modifier,coupon,#ID_COUPON}|?{
+				<a href="[(#URL_ECRIRE{coupon_edit,id_coupon=#ID_COUPON})]">#ID_COUPON</a>,
+				#ID_COUPON
+			})]</td>
+		</tr>
+	</BOUCLE_liste_coupons>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_coupons>[
+<div class="liste-objets coupons caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_coupons>

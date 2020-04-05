@@ -1,0 +1,42 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_coupon,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_coupon" value="#ENV{id_coupon}" />
+		<div class="editer-groupe">
+
+			[(#SAISIE{input, titre, obligatoire=oui,
+				label=<:coupon:champ_titre_label:>})]
+
+			[(#SAISIE{case, actif, 
+				label=<:coupon:champ_actif_label:>, defaut=on})]
+
+			[(#SAISIE{date, date_validite, 
+				label=<:coupon:champ_date_validite_label:>})]
+					
+					
+			[(#SAISIE{input, code, 
+				label=<:coupon:champ_code_label:>,explication=<:coupon:explication_code_label:>})]
+
+			[(#SAISIE{input, montant, obligatoire=oui,
+				label=<:coupon:champ_montant_label:>})]
+
+			[(#SAISIE{input, id_produit,
+				label=<:coupon:champ_restriction_produit_label:>})]
+
+			[(#SAISIE{input, id_auteur,
+				label=<:coupon:champ_restriction_auteur_label:>})]
+
+			[(#SAISIE{input, restriction_taxe,
+				label=<:coupon:champ_restriction_taxe_label:>})]
+
+		</div>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+	]
+</div>
