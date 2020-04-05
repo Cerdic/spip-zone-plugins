@@ -1,0 +1,49 @@
+#CACHE{0}
+<div class="formulaire_spip formulaire_#ENV{form}[ formulaire_#ENV{form}-(#ENV{id,nouveau})]">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+      <form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
+         [(#REM) declarer les hidden qui declencheront le service du formulaire 
+         parametre : url d'action ]
+         #ACTION_FORMULAIRE{#ENV{action}}
+         
+         <fieldset>
+		<h3 class='legend'><:docker:docker_description:></h3>
+			<ul>
+				<li>
+					<label for="objet"><:docker:objet:></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{objet})</span>]
+					<p class='explication'>
+						<:docker:entrer_objet_parent_as_article:><br />
+					</p>
+					<input type="text" name="objet" class="text" value = "#ENV{objet}" id="objet" />
+				</li>
+				<li>
+					<label for="id_objet"><:docker:id_objet:></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{id_objet})</span>]
+					<p class='explication'>
+						<:docker:entrer_id_objet_parent:><br />
+					</p>
+					<input type="text" name="id_objet" class="text" value = "#ENV{id_objet}" id="id_objet" />
+				</li>
+				<li>
+					<label for="nblimite"><:docker:nblimite_label:></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{nblimite})</span>]
+					<p class='explication'>
+						<:docker:entrer_nblimite_documents:><br />
+					</p>
+					<input type="text" name="nblimite" class="text" value = "#ENV{nblimite,1}" id="nblimite" />
+				</li>
+			</ul>
+	</fieldset>
+
+	
+	[(#INCLURE{fond=prive/liste/documents_distants, env, id_objet=#ENV{id_objet},objet=#ENV{objet}})]
+         
+         <p class="boutons">
+            <span class="image_loading">&nbsp;</span>
+            <input type="submit" class="submit" value="<:docker:docker_lancer_importation:>" />
+         </p>
+      </div></form>
+</div>
