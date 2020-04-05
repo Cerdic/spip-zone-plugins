@@ -1,0 +1,9 @@
+Todo 17-12-15
+
+-* Ajouter la librairie KaTeX : https://github.com/Khan/KaTeX/wiki/Function-Support-in-KaTeX
+-* Ajouter la configuration soit globale soit par article
+-* Ajouter des options de configuration à MathJax
+
+-* Coder proprement le changement de prefix
+
+-* Proposer une modification du core pour ne pas avoir à surcharger inc/math
