@@ -1,0 +1,18 @@
+[(#REM)
+	Affiche les traductions disponibles d'une rubrique.
+	La langue de la rubrique courante s'affiche en gras, sans lien.
+][(#REM)
+
+	Note : le lien <a rel="alternate" hreflang="xx" ...> indique qu'il
+	s'agit d'une traduction (version alternative dans la langue xx)
+
+]<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+<B_traductions>
+<p class="traductions">
+	<:tradrub:trad_rubrique_traduction:>
+	<BOUCLE_traductions(RUBRIQUES) {traduction} {par lang}>[(#TOTAL_BOUCLE|>{1}|?{' '})
+	<span lang="#LANG" xml:lang="#LANG" dir="#LANG_DIR"[ class="(#EXPOSE)"]>&#91;[(#EXPOSE{'',<a href="#URL_RUBRIQUE" rel="alternate" hreflang="#LANG"[ title="(#TITRE|attribut_html|couper{80})"]>})][(#LANG|traduire_nom_langue)]#EXPOSE{'',</a>}&#93;</span>
+	]</BOUCLE_traductions>
+</p>
+</B_traductions>
+</BOUCLE_rubrique>

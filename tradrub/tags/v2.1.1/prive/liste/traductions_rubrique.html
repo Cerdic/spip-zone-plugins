@@ -1,0 +1,51 @@
+[(#SET{defaut_tri,#ARRAY{
+	lang,1,
+	titre,1,
+	id_rubrique,1
+}})
+]<BOUCLE_rubrique_a_lister(RUBRIQUES){id_rubrique}{tout}{statut==#ENV{statut,.*}}{lang_select=non}>
+<B_liste_trad_rub>
+#ANCRE_PAGINATION
+<div class="liste-elements rubriques">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,<:tradrub:info_toutes_traductions_rubriques:>})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='titre'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='lang'>[(#TRI{lang,<:tradrub:langue:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_trad_rub(RUBRIQUES){tout}{traduction}{statut==#ENV{statut,.*}}{tri #ENV{order,lang},#GET{defaut_tri}}{pagination #ENV{nb,10}}>[(#TOTAL_BOUCLE|>{1}|oui)
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='titre'>
+				[(#ID_TRAD|=={#ID_RUBRIQUE}|ou{[(#ID_TRAD|non)]}|?{
+					[<img src="(#CHEMIN{images/langues-12.gif})" alt="" class="no_action" />],
+					[(#AUTORISER{modifier,rubrique,#ID_TRAD}|?{
+						[(#BOUTON_ACTION{
+							[(#CHEMIN{images/langues-off-12.gif}
+								|balise_img)],
+								[(#URL_ACTION_AUTEUR{referencer_traduction_rubrique,rubrique/#ID_TRAD/#ID_RUBRIQUE,#SELF})],ajax,'',<:tradrub:definir_comme_rubrique_de_reference:>})],
+						[<img src="(#CHEMIN{images/langues-off-12.gif})" alt="" class="no_action" />]
+					})]
+				})]
+				[(#LOGO_RUBRIQUE||image_reduire{20,26})]
+				[(#EXPOSE|?{
+					[(#RANG). ][(#TITRE|supprimer_numero)],
+					<a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]" hreflang="#LANG">[(#RANG). ][(#TITRE|supprimer_numero)]</a>
+				})]
+				[(#ID_TRAD|=={#ID_RUBRIQUE}|ou{[(#ID_TRAD|non)]}|oui)
+					(<:tradrub:rubrique_de_reference:>)
+				]
+			</td>
+			<td class='lang'>[(#LANG|traduire_nom_langue)]</td>
+		</tr>
+	]</BOUCLE_liste_trad_rub>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_trad_rub>[
+<div class="liste-elements rubriques traductions"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_trad_rub>
+</BOUCLE_rubrique_a_lister>

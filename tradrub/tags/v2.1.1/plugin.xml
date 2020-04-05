@@ -1,0 +1,37 @@
+<plugin>
+	<nom>Traductions entre rubriques</nom>
+	<slogan>Gestion de liens de traduction entre les rubriques</slogan>
+	<auteur>Stephane Laurent (Bill), Matthieu Marcillaud</auteur>
+	<categorie>edition</categorie>
+	<icon>images/tradrub-128.png</icon>
+	<licence>GNU/GPL</licence>
+	
+	<version>2.1.1</version>
+	<version_base>1.0</version_base>
+	<etat>stable</etat>
+	<description>Ce plugin rajoute un syst&#232;me inspir&#233; par celui des traductions des articles : il ajoute un champ id_trad &#224; la table rubriques et lie ainsi les traductions des rubriques.</description>
+	<prefix>tradrub</prefix>
+	
+	<necessite id="SPIP" version="[2.0.10;2.1.99]" />
+	<necessite id="saisies" version="[1.42.11;]" />
+	<necessite id="spip_bonux" version="[1.8.6;]" />
+	<necessite id="afficher_objets" version="[1.0.1;]" />
+
+	<install>base/tradrub_install.php</install>
+	
+		
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/tradrub.php</inclure>
+	</pipeline>
+		
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>tradrub_pipelines.php</inclure>
+	</pipeline>
+		
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>tradrub_pipelines.php</inclure>
+	</pipeline>
+</plugin>

@@ -1,0 +1,62 @@
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}{tout}{lang_select=non}>
+[(#REM) au retour d'ajax, icone_horizontale est pas trouvee ]
+[(#VAL{inc/presentation}|include_spip|oui)]
+[(#SET{icone_traduire,
+	[(#VAL{tradrub:trad_new_rubrique}|_T
+		|icone_horizontale{[(#URL_ECRIRE{rubriques_edit}
+			|parametre_url{new,oui}
+			|parametre_url{id_parent,#ID_PARENT}
+			|parametre_url{lier_trad,#ID_RUBRIQUE})],
+			traductions-24.gif,creer.gif, 0})]})]
+
+[(#SET{icone_delier,		
+	[(#BOUTON_ACTION{
+		[(#CHEMIN{images/traductions-delete-24.gif}
+			|balise_img{'delete'}
+			|concat{' ',<:tradrub:trad_delier_rubrique:>})],
+		[(#URL_ACTION_AUTEUR{dereferencer_traduction_rubrique,rubrique/#ID_RUBRIQUE,#SELF})],ajax})]
+})]
+	
+<BOUCLE_traductions(RUBRIQUES){traduction}{tout}> </BOUCLE_traductions>
+#SET{trads,#TOTAL_BOUCLE}
+</B_traductions>
+
+[(#GET{trads}|>{1}
+	|ou{[(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE})]}
+	|ou{[(#AUTORISER{creerrubriquedans,rubrique,#ID_PARENT})]})
+
+	[(#SET{identifiant,[(#VAL{trad_#ID_RUBRIQUE})]})]
+	[(#SET{icone,[(#CHEMIN{images/tradrub-22.png}|url_absolue)]})]
+	[(#SET{plie,0})]
+	[(#VAL{e}|debut_cadre{#GET{icone},'',[(#VAL{<:tradrub:traduction_rubrique:>}|bouton_block_depliable{[(#GET{plie}?{#EVAL{true},#EVAL{false}})],#GET{identifiant}})]})]
+
+
+
+		[(#INCLURE{fond=prive/liste/traductions_rubrique, id_rubrique=#ID_RUBRIQUE, ajax})]
+
+	[(#GET{plie}|debut_block_depliable{#GET{identifiant}})]
+
+		[(#AUTORISER{creerrubriquedans,rubrique,#ID_PARENT})
+			[<div class='icone_traduire'>(#GET{icone_traduire})</div>]
+		]
+		[(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE})
+			[(#ID_TRAD|oui)
+				[<div class='icone_delier_traduction'>(#GET{icone_delier})</div>]
+			]
+			[(#ID_TRAD|non)
+				[(#REM)
+					soit il recharge que le formulaire... (avec la div ajax)
+					soit toute la page (sans)
+					mais rafraichir une inclusion ajax parente, il sait pas encore faire...
+				]
+				<div class='ajax'>
+				[(#FORMULAIRE_DEFINIR_TRADUCTION{rubrique, #ID_RUBRIQUE})]
+				</div>
+			]
+		]
+
+	[(#GET{plie}|fin_block)]
+
+	[(#VAL{e}|fin_cadre)]
+]
+</BOUCLE_rubrique>
