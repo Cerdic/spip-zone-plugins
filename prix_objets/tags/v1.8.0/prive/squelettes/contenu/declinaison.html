@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,declinaison,#ID_DECLINAISON}|sinon_interdire_acces)]
+<BOUCLE_declinaison(DECLINAISONS){id_declinaison}{statut==.*}{si #ENV{exec}|=={declinaison}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,declinaison,#ID_DECLINAISON})
+		[(#ID_DECLINAISON|afficher_qui_edite{declinaison}|non)
+			[(#URL_ECRIRE{declinaison_edit,id_declinaison=#ID_DECLINAISON}|icone_verticale{<:declinaison:icone_modifier_declinaison:>,declinaison,edit,right ajax preload})]
+		]
+		[(#ID_DECLINAISON|afficher_qui_edite{declinaison}|oui)
+			[(#URL_ECRIRE{declinaison_edit,id_declinaison=#ID_DECLINAISON}|icone_verticale{#ID_DECLINAISON|afficher_qui_edite{declinaison},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{declinaison-24.png}|balise_img{declinaison,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{declinaison,#ID_DECLINAISON}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/declinaison,id=#ID_DECLINAISON,id_declinaison=#ID_DECLINAISON,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,declinaison,#ID_DECLINAISON})
+	[(#ID_DECLINAISON|afficher_qui_edite{declinaison}|non)
+		[(#URL_ECRIRE{declinaison_edit,id_declinaison=#ID_DECLINAISON}|icone_verticale{<:declinaison:icone_modifier_declinaison:>,declinaison,edit,right ajax preload})]
+	]
+	[(#ID_DECLINAISON|afficher_qui_edite{declinaison}|oui)
+		[(#URL_ECRIRE{declinaison_edit,id_declinaison=#ID_DECLINAISON}|icone_verticale{#ID_DECLINAISON|afficher_qui_edite{declinaison},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,declinaison,id,#ID_DECLINAISON},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_declinaison>
+[(#ENV**{exec}|=={declinaison_edit}|?{#INCLURE{fond=prive/squelettes/contenu/declinaison_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_declinaison>
