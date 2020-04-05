@@ -1,0 +1,20 @@
+(function () {
+
+    function logError(details) {
+
+        $('#formulaire_client_logger')
+            .find('input[name="nav"]')
+            .attr('value', navigator.userAgent)
+        .parents('form')
+            .find('input[name="err_msg"]')
+            .attr('value', details)
+        .parents('form')
+            .ajaxSubmit();
+    }
+
+    window.onerror = function(message, file, line) {
+        file = file.replace('#URL_SITE_SPIP', '');
+        logError('/ fichier : ' + file + ' / ligne : ' + line + ' / message : ' + message);
+    };
+
+})();
