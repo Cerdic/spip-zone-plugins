@@ -1,0 +1,10 @@
+<BOUCLE_ville_be_gis(VILLES_BELGES){id_villes_belge ?}{","}{entite=non}>
+  {"type": "Feature",
+	["geometry": (#GEOMETRY|appliquer_filtre{wkt_to_json}|sinon{{"type": "Point", "coordinates": \[#LON, #LAT\]}}),]
+	"id":"#ID_VILLES_BELGE",
+	"properties": {
+	"title": "#NOM \(#PROVINCE\)",
+	"description":[(#DESCRIPTIF_GIS|sinon{#DESCRIPTIF}|json_encode)][
+	(#LOGO_GIS|gis_icon_properties)]
+	}}
+</BOUCLE_ville_be_gis>
