@@ -1,0 +1,34 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	id_panorama,1,
+	points,-1
+}})]<B_liste_panoramas>
+#ANCRE_PAGINATION
+<div class="liste-objets panoramas">
+<table class="spip liste">
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{panorama:info_1_panorama,panorama:info_nb_panoramas}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="picto" scope="col"></th>
+			<th class="titre" scope="col">[(#TRI{titre,<:panorama:champ_titre_label:>,ajax})]</th>
+			<th class="id" scope="col">[(#TRI{id_panorama,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_panoramas(PANORAMAS){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="picto">[(#CHEMIN_IMAGE{panorama-16.png}|balise_img)]</td>
+			<td class="titre principale">[(#LOGO_PANORAMA|image_reduire{20,26})]<a href="[(#ID_PANORAMA|generer_url_entite{panorama})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PANORAMA">[(#RANG). ]#TITRE</a></td>
+			<td class="id">[(#AUTORISER{modifier,panorama,#ID_PANORAMA}|?{
+				<a href="[(#URL_ECRIRE{panorama_edit,id_panorama=#ID_PANORAMA})]">#ID_PANORAMA</a>,
+				#ID_PANORAMA
+			})]</td>
+		</tr>
+	</BOUCLE_liste_panoramas>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_panoramas>[
+<div class="liste-objets panoramas caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_panoramas>

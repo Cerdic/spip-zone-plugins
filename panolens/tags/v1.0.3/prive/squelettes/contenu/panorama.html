@@ -1,0 +1,56 @@
+[(#AUTORISER{voir,panorama,#ID_PANORAMA}|sinon_interdire_acces)]
+[(#SET{url_voir,#VAL{panorama}|objet_info{url_voir}})]
+[(#SET{url_edit,#VAL{panorama}|objet_info{url_edit}})]
+<BOUCLE_panorama(PANORAMAS){id_panorama}{si #ENV{exec}|=={#GET{url_voir}}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,panorama,#ID_PANORAMA})
+		[(#ID_PANORAMA|afficher_qui_edite{panorama}|non)
+			[(#URL_ECRIRE{#GET{url_edit},id_panorama=#ID_PANORAMA}|icone_verticale{<:panorama:icone_modifier_panorama:>,panorama,edit,right ajax preload})]
+		]
+		[(#ID_PANORAMA|afficher_qui_edite{panorama}|oui)
+			[(#URL_ECRIRE{#GET{url_edit},id_panorama=#ID_PANORAMA}|icone_verticale{#ID_PANORAMA|afficher_qui_edite{panorama},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{panorama-24.png}|balise_img{panorama,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{panorama,#ID_PANORAMA}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/panorama,id=#ID_PANORAMA,id_panorama=#ID_PANORAMA,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,panorama,#ID_PANORAMA})
+	[(#ID_PANORAMA|afficher_qui_edite{panorama}|non)
+		[(#URL_ECRIRE{#GET{url_edit},id_panorama=#ID_PANORAMA}|icone_verticale{<:panorama:icone_modifier_panorama:>,panorama,edit,right ajax preload})]
+	]
+	[(#ID_PANORAMA|afficher_qui_edite{panorama}|oui)
+		[(#URL_ECRIRE{#GET{url_edit},id_panorama=#ID_PANORAMA}|icone_verticale{#ID_PANORAMA|afficher_qui_edite{panorama},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,panorama,id,#ID_PANORAMA},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+
+#SET{enfants,''}
+[(#VAL{prive/objets/contenu/panorama-enfants}|trouver_fond|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/panorama-enfants,id_panorama,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,panorama,id_panorama,#ID_PANORAMA,objet,panorama,id_objet,#ID_PANORAMA},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_panorama>
+[(#ENV**{exec}|=={#GET{url_edit}}|?{#INCLURE{fond=prive/squelettes/contenu/#GET{url_edit},redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_panorama>

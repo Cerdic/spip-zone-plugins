@@ -1,0 +1,6 @@
+<BOUCLE_PANORAMA(PANORAMAS){id_panorama}>
+	[<div class="panorama-panolens" data-src="(#LOGO_PANORAMA|extraire_attribut{src})"></div>]
+</BOUCLE_PANORAMA>
+<BOUCLE_PANORAMA_DOC(DOCUMENTS) {id_document} {extension==gif|png|jpg|jpeg} >
+	[<div class="panorama-panolens" data-src="(#FICHIER)"></div>]
+</BOUCLE_PANORAMA_DOC>

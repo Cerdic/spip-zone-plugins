@@ -1,0 +1,10 @@
+<BOUCLE_panorama(PANORAMAS){id_panorama}>
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:panorama:champ_titre_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{titre} titre">(#TITRE)</span>
+</div>]
+
+[(#MODELE{img_panorama,env})]
+[(#MODELE{doc_panorama,env})]
+
+</BOUCLE_panorama>

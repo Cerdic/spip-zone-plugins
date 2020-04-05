@@ -1,0 +1,33 @@
+<paquet
+	prefix="panolens"
+	categorie="multimedia"
+	version="1.0.3"
+	etat="test"
+	compatibilite="[3.2.0;3.2.*]"
+	logo="prive/themes/spip/images/panolens-64.png"
+	documentation="https://www.lesmoutonssauvages.com/article39"
+	schema="1.0.0"
+>
+
+	<nom>Panolens</nom>
+	<!-- Un panorama d&#039;images anamorphosées -->
+
+	<auteur lien='https://www.lesmoutonssauvages.com'>Charles Stephan</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<lib nom="Panolens" lien="https://github.com/pchen66/panolens.js/archive/v0.9.0.zip" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+
+	<pipeline nom="autoriser" inclure="panolens_autorisations.php" />
+
+	<pipeline nom="insert_head" inclure="panolens_pipelines.php" />
+	<pipeline nom="header_prive" inclure="panolens_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="panolens_pipelines.php" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/panolens.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/panolens.php" />
+
+	<menu nom="panoramas" titre="panorama:titre_panoramas" parent="menu_edition" icone="images/panorama-16.png" action="panoramas" />
+	<menu nom="panorama_creer" titre="panorama:icone_creer_panorama" parent="outils_rapides" icone="images/panorama-new-16.png" action="panorama_edit" parametres="new=oui" />
+</paquet>

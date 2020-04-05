@@ -1,0 +1,22 @@
+.page_panorama {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.panorama-panolens {
+  height:360px;
+  position: relative;
+  margin-bottom: 1em;
+  overflow: hidden;
+}
+
+.page_panorama .panorama-panolens {
+  margin-top: 0;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  display: block;
+}
