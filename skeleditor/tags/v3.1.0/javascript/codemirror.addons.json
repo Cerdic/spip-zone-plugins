@@ -1,0 +1,26 @@
+{
+  "themes": [
+    "solarized"
+  ],
+  "extensions":[
+    "javascript/emmet"
+  ],
+  "addons": [
+    "display/fullscreen",
+    "edit/matchbrackets",
+    "edit/closebrackets",
+    "selection/active-line",
+    "fold/foldcode",
+    "fold/foldgutter",
+    "fold/brace-fold",
+    "fold/xml-fold",
+    "fold/indent-fold",
+    "fold/comment-fold",
+    "edit/matchtags",
+    "edit/closetag",
+    "dialog/dialog",
+    "search/searchcursor",
+    "search/search",
+    "search/jump-to-line"
+  ]
+}

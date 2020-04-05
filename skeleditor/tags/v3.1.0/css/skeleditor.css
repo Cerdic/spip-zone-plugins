@@ -1,0 +1,21 @@
+.codewrap {
+  border: 1px solid #333;
+  background: #fff;
+  font-size: 1rem;
+  clear: both;
+  position: relative
+}
+.CodeMirror pre {
+  font-size: 1rem;
+}
+.CodeMirror-fullscreen {
+  z-index: 1200;
+}
+.cm-searching {
+  background: yellow;
+  border-bottom: 1px solid black;
+}
+.cm-searching:focus,
+.cm-searching:active,{
+  border-bottom: 1px solid red;
+}
