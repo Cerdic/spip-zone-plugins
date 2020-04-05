@@ -1,0 +1,7 @@
+/*  ------------------------------------------
+/*  surcharge typographique pour les intertitres
+/*  ------------------------------------------ */
+h3 { font-size: 1.20em; font-weight: bold; } 
+h4 { font-size: 1.20em; font-weight: bold; font-style: italic; padding-left:1.5em;} 
+h5 { font-size: 1em; padding-left:3em; } 
+h6 { font-size: 1em; font-style: italic; padding-left:4.5em; } 

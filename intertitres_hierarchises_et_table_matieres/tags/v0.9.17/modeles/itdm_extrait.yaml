@@ -1,0 +1,37 @@
+---
+nom: '<:itdm:inserer_extrait:>'
+logo: 'itdm-64.png'
+icone_barre: 'quote.png'
+parametres:
+  - saisie: 'hidden'
+    options:
+      nom: 'modele'
+      defaut: 'extrait'
+  - saisie: 'articles_originaux'
+    options:
+      nom: 'id_modele'
+      defaut: ''
+      env: 'non'
+      recursif: 'oui'
+      obligatoire: 'oui'
+      label: '<:itdm:label_article:>'
+    verifier:
+      type: 'id_objet'
+      options:
+        nom: 'article'
+  - saisie: 'input'
+    options:
+      nom: 'debut'
+      defaut: 0
+      obligatoire: 'non'
+      label: '<:itdm:label_debut:>'
+    verifier:
+      type: 'entier'
+  - saisie: 'input'
+    options:
+      nom: 'taille'
+      defaut: 20
+      obligatoire: 'non'
+      label: '<:itdm:label_taille:>'
+    verifier:
+      type: 'entier'
