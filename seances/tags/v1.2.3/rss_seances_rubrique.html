@@ -1,0 +1,46 @@
+#CACHE{6*3600}[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml version="1.0"[ encoding="(#CHARSET)"]?>
+<rss version="2.0"[<!-- (#REM) rss 2.0.9) -->]
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+>
+<BOUCLE_rss_rubrique_seances(RUBRIQUES){id_rubrique}{seance=1}>
+<channel[ xml:lang="(#LANG)"]>
+	[<title>[(#TITRE|texte_backend)] - (#NOM_SITE_SPIP|texte_backend)</title>]
+	<link>#URL_RUBRIQUE</link>
+	[<description>(#DESCRIPTIF|supprimer_tags|texte_backend)</description>]
+	<language>#LANG</language>
+	<generator>SPIP - www.spip.net</generator>
+	
+[	<image>
+		<title>[(#TITRE|texte_backend)]</title>
+		<url>(#LOGO_RUBRIQUE_NORMAL|image_reduire{150,150}|extraire_attribut{src}|url_absolue|texte_backend)</url>
+		<link>#URL_RUBRIQUE</link>
+		[<height>(#LOGO_RUBRIQUE_NORMAL|image_reduire{150,150}|extraire_attribut{height})</height>]
+		[<width>(#LOGO_RUBRIQUE_NORMAL|image_reduire{150,150}|extraire_attribut{width})</width>]
+	</image>
+]
+	<BOUCLE_lesseances (SEANCES){id_rubrique}{statut=publie}{par date_seance}>
+	<B_article><item>
+	<BOUCLE_article(ARTICLES){id_article}{unique}>
+		[<title>(#TITRE|texte_backend)</title>]
+		<link>[(#URL_ARTICLE|url_absolue)]</link>
+		[<guid isPermaLink="true">(#URL_ARTICLE|url_absolue)</guid>]
+		<date>#DATE</date>
+		[<dc:date>(#DATE|date_iso)</dc:date>]
+		<dc:format>text/html</dc:format>
+		[<dc:language>(#LANG)</dc:language>]
+		<description><![CDATA[
+			[(#LOGO_ARTICLE_NORMAL||image_reduire{150,150}|inserer_attribut{align,right})]
+			<B_seances><ul>
+			<BOUCLE_seances (SEANCES seances_endroits){id_article}{par date_seance}>
+			<li>[(#DATE_SEANCE|nom_jour) ][(#DATE_SEANCE|affdate)][ - (#DATE_SEANCE|heures)][h(#DATE_SEANCE|minutes)][ - (#NOM_ENDROIT|supprimer_numero|texte_backend)][ - (#REMARQUE_SEANCE*|texte_backend)]</li>
+			</BOUCLE_seances></ul></B_seances>
+			[(#CHAPO|PtoBR|sinon{#INTRODUCTION})]
+		]]></description>
+	</BOUCLE_article>
+	</item></B_article>
+	</BOUCLE_lesseances>
+
+</channel>
+</BOUCLE_rss_rubrique_seances>
+</rss>

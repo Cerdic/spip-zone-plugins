@@ -1,0 +1,42 @@
+a.seances_action {}
+
+div.seances {
+	padding: 0.5em;}
+
+/* liste des séances dans exec articles bloc centre */
+#liste_seances {
+	padding: 0.5em;}
+	
+#liste_seances ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;}
+
+#liste_seances ul li:hover {
+	background-color: white;}
+
+#liste_seances ul li span {
+	display: block;
+	float: right;}
+
+/* formulaire editer seance */
+#formulaire_seance select {
+	font-size: 1em;
+	width: auto;}
+
+/* liste des endroits */
+#liste_seances_endroits {
+	padding: 0.5em;}
+
+#liste_seances_endroits ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;}
+
+#liste_seances_endroits ul li:hover {
+	background-color: white;}
+
+
+#liste_seances_endroits ul li span {
+	display: block;
+	float: right;}

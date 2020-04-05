@@ -1,0 +1,13 @@
+#CACHE{0}
+[<!-- (#REM) on vérifie les autorisations et on inclu la page d'éditon -->]
+[(#SET{id_seance,[(#VAL{id_seance}|_request|sinon{new})]})]
+
+[(#AUTORISER{modifier,seance})
+	[(#SET{retour,[(#URL_ECRIRE{articles}|parametre_url{id_article,#ENV{id_article}})]})]
+	[(#INCLURE{fond=prive/editer/seance,
+		id_seance=#GET{id_seance},
+		retour=#GET{retour},
+		id_article=#ENV{id_article},
+		duplicate=#ENV{duplicate,''}
+	})]
+]

@@ -1,0 +1,33 @@
+#CACHE{0}
+<div class="cadre cadre-e" id="liste_seances">
+<div class="titrem"><:seances:les_seances:></div>
+<B_seances>
+	<ul id="seances">
+<BOUCLE_seances (SEANCES SEANCES_ENDROITS){id_article}{par date_seance}{pagination}>
+	<li>[(#DATE_SEANCE|nom_jour) ][(#DATE_SEANCE|affdate_jourcourt)][ - (#DATE_SEANCE|heure_seance)]
+	[ - (#NOM_ENDROIT|supprimer_numero)][ - <a href="#" title="(#REMARQUE_SEANCE*|entites_html)"><:seances:remarque_court:></a>]
+		[(#AUTORISER{modifier,seance})
+			<span>[<a href="(#URL_ECRIRE{seance_edit}
+				|parametre_url{id_seance,#ID_SEANCE}
+				|parametre_url{id_article,#ENV{id_article}})" title="<:seances:action_modifier:>"><:seances:action_modifier_court:></a>]
+			[ | <a href="(#URL_ECRIRE{seance_edit}
+				|parametre_url{new,oui}
+				|parametre_url{id_article,#ENV{id_article}}
+				|parametre_url{duplicate,#ID_SEANCE})" title="<:seances:action_dupliquer:>"><:seances:action_dupliquer_court:></a>]
+			[ | <a href="(#URL_ACTION_AUTEUR{supprimer_seance,#ID_SEANCE,#SELF})" onclick="return confirm('<:seances:confirmer_action_supprimer_seance:>')" title="<:seances:action_supprimer:>"><:seances:action_supprimer_court:></a>]
+		]</span>
+	</li>
+</BOUCLE_seances>
+	</ul>
+	[<p class='pagination'>(#PAGINATION)</p>]
+	#SET{total_seances,#GRAND_TOTAL}
+</B_seances>
+[(#AUTORISER{modifier,seance})
+	<p>[<a class="seances_action" href="(#URL_ECRIRE{seance_edit}
+		|parametre_url{new,oui}
+		|parametre_url{id_article,#ENV{id_article}})"><:seances:nouvelle_seance:></a>]
+		
+	[(#GET{total_seances}|>{1}|oui)[ | <a class="seances_action" href="(#URL_ACTION_AUTEUR{supprimer_seances_article,#ENV{id_article},#SELF})" onclick="return confirm('<:seances:confirmer_action_supprimer_toutes_seances:>')"><:seances:action_supprimer_toutes_seances:></a>]]
+	</p>
+]
+</div>

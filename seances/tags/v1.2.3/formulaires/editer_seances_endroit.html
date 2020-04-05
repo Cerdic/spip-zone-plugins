@@ -1,0 +1,31 @@
+<a name="editer_seances_endroit"></a>
+<div class="formulaire_spip formulaire_seances_endroit" id="formulaire_seances_endroit">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV{message_erreur})</p>]
+	[(#ENV{editable}|oui)
+	<form name="editer_seances_endroit" id="editer_seances_endroit" class="formulaire_spip formulaire_editer_seances_endroit" method="post" action="#ENV{action}" enctype="multipart/form-data">
+	[<!--(#REM) declarer les hidden -->]
+	<input type="hidden" name="id_endroit" value="#ENV{id_endroit}" />
+	#ACTION_FORMULAIRE{#ENV{action},#FORM}
+	<ul>
+		<li class="saisie obligatoire[ (#ENV*{erreurs}|table_valeur{nom_endroit}|oui) erreur]">
+			<label for="nom_endroit" id="label_endroit"><:seances:nom_endroit:></label>
+			[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{nom_endroit})</span>]
+			<input type="text" class="text" name="nom_endroit" id="nom_endroit" value="#ENV{nom_endroit}" />
+		</li>
+		<li class="saisie[ (#ENV*{erreurs}|table_valeur{id_article}|oui) erreur]">
+			<label for="id_article" id="label_id_article"><:seances:article_rattachement:></label>
+			[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{id_article})</span>]
+			<input type="text" class="text" name="id_article" id="id_article" value="#ENV{id_article}" />
+		</li>
+		<li class="saisie">
+		<label for="descriptif_endroit" id="label_descriptif_endroit"><:seances:descriptif_endroit:></label>
+	    <textarea id="descriptif_endroit" name="descriptif_endroit" class="textarea inserer_barre_edition" rows="12">#ENV{descriptif_endroit}</textarea>
+		</li>
+	</ul>
+	[<!-- (#REM) pour extra et autre -->]
+		<!--extra-->
+	<p class="boutons"><input type="submit" class="submit" name="valider" id="valider" value="<:seances:action_enregistrer:>" /></p>
+	</form>
+	]
+</div>
