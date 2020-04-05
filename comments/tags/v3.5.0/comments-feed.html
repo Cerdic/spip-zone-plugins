@@ -1,0 +1,12 @@
+[(#PARAMETRES_FORUM|oui)<p class="comments-feed"><:comments:lien_suivre_commentaires:>
+<a href="[(#URL_PAGE{comments-rss}
+	|parametre_url{id_rubrique,#ENV{id_rubrique}}
+	|parametre_url{objet,#ENV{objet}}
+	|parametre_url{id_objet,#ENV{id_objet}}
+	|parametre_url{id_article,#ID_ARTICLE})]" rel="nofollow"><img src="#CHEMIN{feed/rss.png}" alt="RSS 2.0" /></a><span class="sep">
+|
+</span><a href="[(#URL_PAGE{comments-atom}
+	|parametre_url{id_rubrique,#ENV{id_rubrique}}
+	|parametre_url{objet,#ENV{objet}}
+	|parametre_url{id_objet,#ENV{id_objet}}
+	|parametre_url{id_article,#ID_ARTICLE})]" rel="nofollow"><img src="#CHEMIN{feed/atom.png}" alt="Atom" /></a></p>]

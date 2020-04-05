@@ -1,0 +1,33 @@
+<?php
+   @header("Content-type: application/atom+xml");
+   echo '<'.'?xml version="1.0" encoding="#CHARSET"?'.'>';
+?>
+<feed version="0.3" xmlns="http://purl.org/atom/ns#" xml:lang="#LANG">
+
+<BOUCLE_article(ARTICLES){id_article}>
+<title>[(#TITRE|textebrut|entites_html|charset2unicode )] - <:comments:comments:></title>
+[<link rel="alternate" type="text/html" href="(#URL_ARTICLE|url_absolue)"></link>]
+</BOUCLE_article>
+</B_article>
+[(#ENV{objet}|et{#ENV{id_objet}}|oui)
+<title>[(#INFO_TITRE{#ENV{objet},#ENV{id_objet}}|textebrut|entites_html|charset2unicode)] - <:comments:comments:></title>
+<link rel="alternate" type="text/html" href="[(#INFO_URL{#ENV{objet},#ENV{id_objet}})]"></link>]
+[(#ENV{objet}|et{#ENV{id_objet}}|non)
+<title>[(#NOM_SITE_SPIP|textebrut|entites_html|charset2unicode)] - <:comments:comments:></title>
+<link rel="alternate" type="text/html" href="#URL_SITE_SPIP"></link>]
+<//B_article>
+
+<BOUCLE_comments(FORUMS) {statut IN publie} {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?}{objet ?}{id_objet ?} {plat} {!par date}{0,#ENV{nb,100}}>
+    <item>
+        <entry>
+            [<title>(#TITRE|texte_backend)</title>]
+            [<link rel="alternate" type="text/html" href="(#URL_FORUM|url_absolue)"></link>]
+            [<issued>(#DATE|date_iso)</issued>]
+            [<id>(#URL_FORUM|url_absolue)</id>]
+            [<modified>(#DATE|date_iso)</modified>]
+            [<summary>(#TEXTE|texte_backend)</summary>]
+        </entry>
+    </item>
+</BOUCLE_comments>
+
+</feed>

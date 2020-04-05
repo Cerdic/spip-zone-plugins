@@ -1,0 +1,20 @@
+<BOUCLE_comment(FORUMS){id_forum}>
+<div class="comment hreview[ (#ID_PARENT|?{reply})]">
+	[(#ENV{thread}|oui|et{#ID_PARENT}|oui)<a href="#comment#ID_FORUM-#ID_THREAD" id="comment#ID_FORUM-#ID_THREAD"></a>]
+	<a href="#comment#ID_FORUM" id="comment#ID_FORUM"></a>
+	<a href="#forum#ID_FORUM" id="forum#ID_FORUM"></a>
+	[(#INCLURE{fond=modeles/comment-meta,env})]
+	<div class="comment-content description">
+		[<div class="comment-texte #EDIT{texte}">(#TEXTE|lignes_longues)</div>]
+		[<div class="comment-notes">(#NOTES|safehtml|lignes_longues)</div>]
+		<B_doc><div class="comment-doc"><BOUCLE_doc(DOCUMENTS){id_forum}>
+		[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
+			[(#MODELE{emb, lien=#URL_DOCUMENT,lien_class=mediabox}|image_reduire{300})]
+		,
+			[(#LOGO_DOCUMENT{#URL_DOCUMENT})]
+		})]
+		</BOUCLE_doc></div></B_doc>
+	</div>
+	[(#BOUTONS_ADMIN_FORUM)]
+</div><!--.comment-->
+</BOUCLE_comment> 

@@ -1,0 +1,61 @@
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml 
+version="1.0"[ encoding="(#CHARSET)"]?>
+<rss version="2.0" [(#REM) rss 2.0.9)]
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+>
+
+<channel[ xml:lang="(#LANG)"]>
+<BOUCLE_article(ARTICLES){id_article}>
+	<title>[(#TITRE|textebrut|entites_html|charset2unicode )] - <:comments:comments:></title>
+	<link>[(#URL_ARTICLE|url_absolue)]</link>
+	[<description>(#INTRODUCTION|supprimer_tags|texte_backend)</description>]
+	<language>#LANG</language>
+    <generator>SPIP - www.spip.net</generator>
+
+[	<image>
+		<title>[(#TITRE|texte_backend)]</title>
+		<url>(#LOGO_ARTICLE||image_reduire{144,400}|extraire_attribut{src}|url_absolue|texte_backend)</url>
+		<link>[(#URL_ARTICLE|url_absolue)]</link>
+		[<height>(#LOGO_ARTICLE||image_reduire{144,400}|extraire_attribut{height})</height>]
+		[<width>(#LOGO_ARTICLE||image_reduire{144,400}|extraire_attribut{width})</width>]
+	</image>
+]
+</BOUCLE_article>
+</B_article>
+[(#ENV{objet}|et{#ENV{id_objet}}|oui)
+	<title>[(#INFO_TITRE{#ENV{objet},#ENV{id_objet}}|textebrut|entites_html|charset2unicode)] - <:comments:comments:></title>
+	<link>[(#INFO_URL{#ENV{objet},#ENV{id_objet}})]</link>
+	[<language>(#INFO_LANG{#ENV{objet},#ENV{id_objet}})</language>]
+	<generator>SPIP - www.spip.net</generator>
+]
+[(#ENV{objet}|et{#ENV{id_objet}}|non)
+	<title>[(#NOM_SITE_SPIP|textebrut|entites_html|charset2unicode)] - <:comments:comments:></title>
+	<link>#URL_SITE_SPIP/</link>
+	[<description>(#DESCRIPTIF_SITE_SPIP|supprimer_tags|texte_backend)</description>]
+	<language>#LANG</language>
+	<generator>SPIP - www.spip.net</generator>
+
+[	<image>
+		<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+		<url>(#LOGO_SITE_SPIP||image_reduire{144,400}|extraire_attribut{src}|url_absolue|texte_backend)</url>
+		<link>#URL_SITE_SPIP/</link>
+		[<height>(#LOGO_SITE_SPIP||image_reduire{144,400}|extraire_attribut{height})</height>]
+		[<width>(#LOGO_SITE_SPIP||image_reduire{144,400}|extraire_attribut{width})</width>]
+	</image>
+]]
+<//B_article>
+
+<BOUCLE_comments(FORUMS) {statut IN publie} {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?}{objet ?}{id_objet ?} {plat} {!par date}{0,#ENV{nb,100}}>
+    <item>
+        [<title>(#TITRE|texte_backend)</title>]
+        [<link>(#URL_FORUM|url_absolue)</link>]
+        <dc:date>[(#DATE|date_iso)]</dc:date>
+        [<description>(#TEXTE|texte_backend)</description>]
+        [<dc:creator>(#NOM|texte_backend)</dc:creator>]
+    </item>
+</BOUCLE_comments>
+
+</channel>
+
+</rss>

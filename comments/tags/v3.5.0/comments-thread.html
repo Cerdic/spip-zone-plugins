@@ -1,0 +1,26 @@
+[(#REM) Cette balise (invisible) provoque le recalcul du forum la premiere fois qu'un message est poste (cf. inc/invalideur). ]
+[(#PARAMETRES_FORUM|?{''})]
+<B_comments-list>
+<div class="comments-posts comments-thread">
+	[<h2 class="h2">(#ENV{titre_liste_commentaires}|is_null|?{<:comments:comments_h:>,#ENV*{titre_liste_commentaires}|trim})</h2>]
+	<ul class="comments-ul comments-items">
+		<BOUCLE_comments-list(FORUMS) {statut IN publie} {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?}{objet ?}{id_objet ?}{par date}>
+		<li class="comment-li comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)][(#ID_OBJET|me{#OBJET,#ID_AUTEUR})me]">
+			<INCLURE{fond=inclure/comment,id_forum,compteur=#COMPTEUR_BOUCLE, thread=oui} />
+			[<p class="comment-reply"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="nofollow"><:forum:repondre_message:></a></p>]
+			<B_comments-fils>
+			<ul class="comments-ul comments-items">
+				<BOUCLE_comments-fils(FORUMS){id_parent}{par date}>
+				<li class="comment-li comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)][(#ID_OBJET|me{#OBJET,#ID_AUTEUR})me]">
+					<INCLURE{fond=inclure/comment,id_forum, thread=oui} />
+					[<p class="comment-reply"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="nofollow"><:forum:repondre_message:></a></p>]
+					<BOUCLE_comments-fils-etc(boucle_comments-fils)></BOUCLE_comments-fils-etc>
+				</li>
+				</BOUCLE_comments-fils>
+			</ul>
+			</B_comments-fils>
+		</li>
+		</BOUCLE_comments-list>
+	</ul>
+</div>
+</B_comments-list>

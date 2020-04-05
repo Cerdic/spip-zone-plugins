@@ -1,0 +1,93 @@
+<style type="text/css">
+.todo { opacity: 0.5; }
+.todo:hover { opacity: 1; }
+</style>
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+<h3 class="titrem"><:comments:titre_comments:></h3>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<fieldset>
+		<legend><:comments:cfg_forum_format_fil:></legend>
+		<ul>
+			<li class="editer comments_fil[ (#ENV**{erreurs}|table_valeur{comments_fil}|oui)erreur]">
+				<label for="comments_fil"><:comments:cfg_label_presentation_fil:></label>[
+				<span class='erreur'>(#ENV**{erreurs}|table_valeur{comments_fil})</span>
+				]<select name="comments_fil" id="comments_fil">
+						<option value="list"[(#ENV{comments_fil,list}|=={list}|oui) selected="selected"]><:comments:cfg_label_presentation_fil_liste:></option>
+						<option value="thread"[(#ENV{comments_fil,list}|=={thread}|oui) selected="selected"]><:comments:cfg_label_presentation_fil_thread:></option>
+						<option value="thread1"[(#ENV{comments_fil,list}|replace{'-',''}|=={thread1}|oui) selected="selected"]><:comments:cfg_label_presentation_fil_thread1:></option>
+				</select>
+			</li>
+		</ul>
+	</fieldset>
+	<fieldset>
+		<legend><:comments:cfg_forum_permalien:></legend>
+		<ul>
+			<li class="editer comments_permalink[ (#ENV**{erreurs}|table_valeur{comments_permalink}|oui)erreur]">
+				<label for="permalink"><:comments:cfg_label_apparence_permalien:></label>[
+				<span class='erreur'>(#ENV**{erreurs}|table_valeur{comments_fil})</span>
+				]<select name="permalink" id="permalink" style="width: 12em;">
+					<option value="aucun"[(#ENV{permalink,diese}|=={aucun}|oui) selected="selected"]><:comments:cfg_label_apparence_permalien_aucun:></option>
+					<option value="diese"[(#ENV{permalink,diese}|=={diese}|oui) selected="selected"]><:comments:cfg_label_apparence_permalien_diese:></option>
+					<option value="compteur"[(#ENV{permalink,diese}|=={compteur}|oui) selected="selected"]><:comments:cfg_label_apparence_permalien_compteur:></option>
+					<option value="picto"[(#ENV{permalink,diese}|=={picto}|oui) selected="selected"]><:comments:cfg_label_apparence_permalien_picto:></option>
+				</select>
+			</li>
+		</ul>
+	</fieldset>
+	<fieldset>
+		<legend><:comments:cfg_forum_longueur:></legend>
+		<ul>
+			<li class="editer comments_forum_longueur_mini[ (#ENV**{erreurs}|table_valeur{forum_longueur_mini}|oui)erreur]">
+				<label for="forum_longueur_mini"><:comments:cfg_forum_longueur_mini:><br /></label>[
+				<span class='erreur'>(#ENV**{erreurs}|table_valeur{forum_longueur_mini})</span>
+				]<input type="text" class="text" name="forum_longueur_mini"[ value="(#ENV{forum_longueur_mini}|sinon{10})"] id="forum_longueur_mini" style="width: 4em;" />
+			</li>
+			<li class="editer comments_forum_longueur_maxi[ (#ENV**{erreurs}|table_valeur{forum_longueur_maxi}|oui)erreur]">
+				<label for="forum_longueur_maxi"><:comments:cfg_forum_longueur_maxi:><br /></label>[
+				<span class='erreur'>(#ENV**{erreurs}|table_valeur{forum_longueur_maxi})</span>
+				]<input type="text" class="text" name="forum_longueur_maxi"[ value="(#ENV{forum_longueur_maxi}|sinon{1500})"] id="forum_longueur_maxi" style="width: 4em;" />
+			</li>
+		</ul>
+	</fieldset>
+    <fieldset>
+   		<legend><:comments:cfg_forum_champs_obligatoires:></legend>
+        <ul>
+            <li class="editer editer_champs_obligatoires">
+                #SET{name,nom_obli}#SET{val,1}
+                <div class="choix">
+                    <input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name}}|!={0}|oui)checked="checked"] />
+                    <label for="#GET{name}_#GET{val}"><:comments:cfg_label_nom_obligatoire:></label>
+                </div>
+                #SET{name,email_obli}#SET{val,1}
+                <div class="choix">
+                    <input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+                    <label for="#GET{name}_#GET{val}"><:comments:cfg_label_email_obligatoire:></label>
+                </div>
+            </li>
+   		</ul>
+   	</fieldset>
+	<fieldset class="todo none">
+		<legend>Style</legend>
+		<ul>
+			<li class="editer comments_style[ (#ENV**{erreurs}|table_valeur{comments_style}|oui)erreur]">
+				<label for="style">Style des commentaires<br /><b>SANS EFFET&nbsp;!</b></label>[
+				<span class='erreur'>(#ENV**{erreurs}|table_valeur{comments_fil})</span>
+				]<select name="style" id="style" style="width: 12em;" disabled="disabled">
+					<option value="aucun"[(#ENV{style,defaut}|=={picto}|oui) selected="selected"]>Aucun</option>
+					<option value="defaut"[(#ENV{style,defaut}|=={compteur}|oui) selected="selected"]>D&eacute;faut</option>
+					<option value="style-1"[(#ENV{style,defaut}|=={diese}|oui) selected="selected"]>Style 1</option>
+					<option value="style-2"[(#ENV{style,defaut}|=={aucun}|oui) selected="selected"]>Style 2</option>
+				</select>
+			</li>
+		</ul>
+	</fieldset>
+	<p class="boutons">
+		<input type="submit" name="enregistrer" class="submit" value="<:bouton_enregistrer:>" />
+	</p>
+</div></form>
+</div>

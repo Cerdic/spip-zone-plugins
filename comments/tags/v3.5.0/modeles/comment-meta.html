@@ -1,0 +1,12 @@
+<BOUCLE_comment(FORUMS){id_forum}>
+<p class="comment-meta">
+	[(#CONFIG{comments/permalink}|=={aucun}|non)<a rel="bookmark" href="#forum#ID_FORUM[(#ENV{thread}|oui|et{#ID_PARENT}|?{-#ID_THREAD})]" title="<:comments:permalink_to:> #ID_FORUM" class="permalink #CONFIG{comments/permalink}">[(#CONFIG{comments/permalink}|=={picto}|?{[<img src="(#CHEMIN{img/permalink.gif})" alt="#" />],[(#CONFIG{comments/permalink}|=={compteur}|?{[(#ENV{compteur})<span class="sep">.</span>],#})]})]</a>
+	[(#ENV{thread}|oui)[<a rel="in-reply-to" class="permalink in-reply-to" href="#forum(#ID_PARENT|?{#ID_PARENT})">^</a>]]
+	]<BOUCLE_auteur(AUTEURS){tout}{id_auteur}>
+	[<abbr class="dtreviewed"[ title="(#DATE|date_iso)"]><:comments:date_jour_le:> (#DATE|affdate_jourcourt)[ <:comments:date_heure_a:>&nbsp;(#DATE|heures)][:(#DATE|minutes)]</abbr>][<span class="reviewer vcard"><span class="sep">, </span><:par_auteur:> <a rel="nofollow" href="#URL_AUTEUR" class="url spip_in"><strong class="fn n">(#NOM)</strong></a>[(#PLUGIN{gravatar}|oui)[ (#MODELE{gravatar})]]</span>]
+	</BOUCLE_auteur>
+	[<abbr class="dtreviewed"[ title="(#DATE|date_iso)"]><:comments:date_jour_le:> (#DATE|affdate_jourcourt)[ <:comments:date_heure_a:>&nbsp;(#DATE|heures)][:(#DATE|minutes)]</abbr>][<span class="reviewer vcard"><span class="sep">, </span><:par_auteur:> [<a rel="nofollow" href="(#URL_SITE)"[ title="(#NOM_SITE*|attribut_html)"] class="#EDIT{hyperlien} url spip_out">]<strong class="#EDIT{qui} fn n">(#NOM|sinon{[(#PLUGIN{gravatar}|oui)?]})</strong>[</a>(#URL_SITE|oui)][(#PLUGIN{gravatar}|oui)[ (#MODELE{gravatar}{email=#EMAIL*})]]</span>]
+	<//B_auteur>
+	[<span class="item"><:en_reponse:> <a class="url fn" href="#INFO_URL{#OBJET,#ID_OBJET}">(#TITRE)</a></span>]
+</p>
+</BOUCLE_comment> 

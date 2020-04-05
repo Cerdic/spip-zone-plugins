@@ -1,0 +1,140 @@
+<div class="formulaire_spip formulaire_forum ajax" id="formulaire_forum">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{login_forum_abo})
+	<INCLURE{fond=formulaires/inc-login_forum_abo, env} />
+	]
+
+	[(#ENV{editable})
+
+
+	[(#REM)
+	Bloc de previsualisation du forum envoye
+
+	Si on valide la previsu, on n'envoie pas en ajax car, si le post reussit
+	il faudra certainement redessiner toute la page pour afficher le nouveau
+	forum
+
+	][
+	<form action="#ENV{action}#formulaire_forum" method="post" class="preview">
+		<div>
+			[(#ACTION_FORMULAIRE{#ENV{action}})]
+			<input type='hidden' name='titre' value="#ENV{titre}"/>
+			<input type='hidden' name='texte' value="#ENV{texte}"/>
+			<input type='hidden' name='url_site' value="#ENV{url_site}"/>
+			<input type='hidden' name='nom_site' value="#ENV{nom_site}"/>
+			[<input type="hidden" name="id_forum" value="(#ENV*{id_forum})"/>]
+			[<input type="hidden" name="notification" value="(#ENV*{notification})"/>]
+			[(#INCLURE{fond=formulaires/inc-forum_ajouter_mot, ajouter_mot})]
+			(#ENV*{erreurs}|table_valeur{previsu})
+		</div>
+	</form>
+	]
+
+
+	<form action="#ENV{action}#formulaire_forum" method="post" enctype='multipart/form-data'>
+		<div>
+			[(#ACTION_FORMULAIRE{#ENV{action}})]
+			[<input type="hidden" name="id_forum" value="(#ENV*{id_forum})"/>]
+			[
+			<fieldset class="fieldset moderation_info">
+				<legend><:forum:bouton_radio_modere_priori:></legend>
+				<p class="explication">(#ENV{modere})
+					<:comments:moderation_info:>
+				</p>
+			</fieldset>
+			]
+
+			[(#ENV**{afficher_texte}|choixsiegal{'non', ' ',''})
+			[<input type="hidden" name="titre" value="(#ENV{titre})"/>]
+			<p class="spip_bouton"><input type="submit" class="submit" value="<:forum:forum_valider:>"/></p>]
+
+			[(#ENV**{afficher_texte}|choixsiegal{'non', '',' '})
+
+			<INCLURE{fond=formulaires/inc-login_forum}{env} />
+
+			<fieldset class="fieldset fieldset-texte">
+				<legend><:comments:saisie_texte_legend:></legend>
+				<input type="hidden" name="titre" id="titre"[ value="(#ENV{titre})"] />
+				<[(#DIV|sinon{ul})] class="editer-groupe">
+					[(#CONFIG{forums_texte}|!={non}|?{
+					<[(#DIV|sinon{li})] class='editer saisie_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur] obligatoire'>
+						<label for='texte'><:forum:forum_texte|typo:></label>
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>]
+						<p class="explication saisie_texte_info">
+							<:comments:saisie_texte_info:>
+						</p>
+						<textarea name="texte" id="texte" rows="12" cols="60"[(#HTML5|oui)
+						required="required"][(#CONFIG{forums_afficher_barre}|=={non}|oui)
+						class="no_barre"]>[(#ENV{texte})]</textarea>
+					</[(#DIV|sinon{li})]>
+					})]
+					[
+					<[(#DIV|sinon{li})] class='saisie_mots_forum'>
+						(#INCLURE{fond=formulaires/inc-forum_bloc_choix_mots}{table=#ENV*{table}}{ajouter_mot})
+					</[(#DIV|sinon{li})]>
+					]
+					[(#PLUGIN{notifications}|oui)
+					#SET{name,notification}#SET{obli,''}#SET{defaut,1}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+					<[(#DIV|sinon{li})] class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+						<span class='erreur_message'>(#GET{erreurs})</span>
+						]<input type="hidden" name="#GET{name}" value="0" />
+						#SET{val,1}
+						<div class="choix">
+							<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+							<label for="#GET{name}_#GET{val}"><:comments:label_notification:></label>
+						</div>
+					</[(#DIV|sinon{li})]>
+					]
+				</[(#DIV|sinon{ul})]>
+			</fieldset>
+
+			[
+			<fieldset class="fieldset fieldset-documents">
+				<legend><:medias:bouton_ajouter_document:></legend>
+				<[(#DIV|sinon{ul})] class="editer-groupe">
+					<[(#DIV|sinon{li})] class='editer saisie_document_forum[ (#ENV**{erreurs}|table_valeur{document_forum}|oui)erreur]'>
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{document_forum})</span>]
+						<input type="hidden" name="cle_ajouter_document" value="(#ENV{cle_ajouter_document})"/>
+						[
+						<div id="ajouter_document_up">(#ENV{ajouter_document})
+							<label for="supprimer_document_ajoute"><input type='checkbox' name='supprimer_document_ajoute'
+							                                              id='supprimer_document_ajoute'/>
+								<:lien_supprimer:>
+							</label>
+						</div>
+						]
+						<div>
+							[<label for="ajouter_document">(#ENV{formats_documents_forum}|is_array|?{#ENV{formats_documents_forum}|implode{', '},#ENV{formats_documents_forum}})</label>]
+							<input class='file' type="file" name="ajouter_document" id="ajouter_document"[
+							accept="(#ENV{formats_documents_forum}|is_array|?{#ENV{formats_documents_forum}|implode{', '},''})"] />
+						</div>
+
+						<script type='text/javascript'>/*<!\[CDATA\[*/
+						if (window.jQuery) jQuery(function (){
+							jQuery('#ajouter_document_up')
+								.next().hide()
+								.prev().find(':checkbox').bind('change', function (){
+									jQuery('#ajouter_document_up').hide().next().show();
+								});
+						});
+						/*\]\]>*/</script>
+					</[(#DIV|sinon{li})]>
+				</[(#DIV|sinon{ul})]>
+			</fieldset>
+			]
+
+			[(#REM) Piege a robots spammeurs ]
+			<p style="display: none;">
+				<label for="nobot_forum"><:antispam_champ_vide:></label>
+				<input type="text" class="text" name="nobot" id="nobot_forum" value="#ENV{nobot}" size="10"/>
+			</p>
+			<p class="boutons"><input type="submit" class="submit" name="previsualiser_message" value="<:comments:submit1:>"/>[ 
+			(#ENV{forcer_previsu}|=={non}|et{#ENV*{erreurs}|table_valeur{previsu}|non}|oui)<input type="submit" class="submit" name="envoyer_message" value="<:forum:forum_envoyer:>" />]</p>
+			]
+		</div>
+	</form>
+	]
+</div>
