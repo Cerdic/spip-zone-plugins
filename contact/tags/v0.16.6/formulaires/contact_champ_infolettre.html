@@ -1,0 +1,8 @@
+<li class="editer [editer_(#ENV{name})][ saisie_(#ENV{name})][ (#ENV**{erreurs}|table_valeur{#ENV{name}}|oui)erreur]">
+[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{#ENV{name}})</span>]
+<div class='choix'>
+<label for="#ENV{name}">
+<input type='checkbox' class='checkbox' name='#ENV{name}' id='#ENV{name}' value="oui"[ (#ENV{#ENV{name}}|=={oui}|oui)checked="checked"] />
+&nbsp;[(#CONFIG{contact/texteinfolettre}|propre|sinon{<:contact:informez_moi:>})]</label>
+</div>
+</li>

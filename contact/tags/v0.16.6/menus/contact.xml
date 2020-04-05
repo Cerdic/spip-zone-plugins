@@ -1,0 +1,9 @@
+<entree>
+	<nom><:contact:titre:></nom>
+	<rang>10</rang>
+	<description><:contact:description_menu_contact:></description>
+	<icone>prive/themes/spip/images/contact-24.png</icone>
+	<parametre nom="titre" class="multilang" label="menus:entree_titre" />
+	<parametre nom="css" label="menus:entree_css" />
+	<necessite nom="z" type="plugin"/>
+</entree>

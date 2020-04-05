@@ -1,0 +1,36 @@
+<paquet
+	prefix="contact"
+	categorie="communication"
+	version="0.16.6"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/contact-32.png"
+	schema="0.2.0"
+	documentation="https://contrib.spip.net/Formulaire-de-contact-avance"
+>
+
+	<nom>Formulaire de contact avanc&#233;</nom>
+	<!-- Cette extension propose un formulaire de contact avec de multiples options -->
+
+	<auteur>Pierre Fiches</auteur>
+	<auteur>RastaPopoulos</auteur>
+	<auteur>Superyms (traduction)</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL V3</licence>
+
+	<traduire module="contact" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="jqueryui_plugins" inclure="contact_pipelines.php" />
+	<pipeline nom="contact_infos_supplementaires" action="" />
+	<pipeline nom="ieconfig_metas" inclure="contact_ieconfig_metas.php" />
+	<pipeline nom="formulaire_verifier" inclure="contact_pipelines.php" />
+	<pipeline nom="nospam_lister_formulaires" inclure="contact_pipelines.php" />
+	<pipeline nom="contact_pre_envoi" action="" />
+
+	<utilise nom="facteur" compatibilite="[3.5.2;]" />
+	<utilise nom="inserer_modeles" compatibilite="[1.0.0;]" />
+	<necessite nom="organiseur" compatibilite="[0.8.5;]" />
+
+	<menu nom="contact_message" action="messages" titre="contact:msg_messagerie" parent="menu_activite" icone="images/contact-16.png" />
+	<menu nom="configurer_contact" titre="contact:titre" parent="menu_configuration" icone="images/contact-16.png" />
+</paquet>

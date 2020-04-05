@@ -1,0 +1,5 @@
+<li class='editer editer_mail saisie_mail obligatoire[ (#ENV*{erreurs}|table_valeur{mail}|oui)erreur]'>
+<label for="mail"><:entree_adresse_email:> <strong><:info_obligatoire_02:></strong></label>
+[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{mail})</span>]
+<input type="text" class="text" name="mail" id="mail" value="#ENV{mail}" size="30" />
+</li>

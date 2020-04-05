@@ -1,0 +1,292 @@
+<!-- nom=contact -->
+<div class="formulaire_spip formulaire_editer formulaire_#FORM">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset id="fieldset_destinataires">
+			<legend><:contact:configuration_destinataires:></legend>
+			<ul class="decaler">
+				<li class="editer editer_choix_destinataires haut pleine_largeur">
+					<label for="choix_destinataires"><:contact:configuration_destinataires_explication:></label>
+					<B_auteurs>
+						<B_selection>
+							<p class="explication">
+								<BOUCLE_selection(AUTEURS){si #_auteurs:TOTAL_BOUCLE|>{25}}{tous}{email!=''}{statut IN '0minirezo','1comite'}{par nom}{id_auteur IN #ENV{choix_destinataires,#ARRAY}}{', '}>
+								[(#NOM)] (##ID_AUTEUR - [(#ARRAY{0minirezo,info_administrateurs,1comite,info_redacteurs,6forum,info_visiteurs,5poubelle,texte_statut_poubelle,contact,contact:titre}|table_valeur{#STATUT}|_T)[ (#NOM|non)#EMAIL]])
+								</BOUCLE_selection>
+							</p>
+						</B_selection>
+						<select name="choix_destinataires[]" id="choix_destinataires" multiple="multiple" size="[(#TOTAL_BOUCLE|min{25})]">
+              <BOUCLE_auteurs(AUTEURS){tous}{email!=''}{statut IN '0minirezo','1comite'}{par nom}>
+							<option value="#ID_AUTEUR" [(#ID_AUTEUR|in_array{#ENV{choix_destinataires,#ARRAY}}|oui)selected="selected"]>
+								[(#NOM)] (##ID_AUTEUR - [(#ARRAY{0minirezo,info_administrateurs,1comite,info_redacteurs,6forum,info_visiteurs,5poubelle,texte_statut_poubelle,contact,contact:titre}|table_valeur{#STATUT}|_T)[ (#NOM|non)#EMAIL]])
+							</option>
+							</BOUCLE_auteurs>
+						</select>
+					</B_auteurs>
+				</li>
+				<li class="editer editer_type_choix haut pleine_largeur">
+					<label><:contact:configuration_regle_liste_explication:></label>
+					<div class="choix">
+						<input type="radio" name="type_choix" id="tous" class="radio" value="tous"[ checked="checked"(#ENV{type_choix}|=={tous}|ou{#ENV{type_choix}|non}|oui)] />
+						<label for="tous"><:contact:configuration_destinataires_tous:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="type_choix" id="tous_ou" class="radio" value="tous_ou"[ checked="checked"(#ENV{type_choix}|=={tous_ou}|oui)] />
+						<label for="tous_ou"><:contact:configuration_destinataires_tous_ou:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="type_choix" id="tous_et" class="radio" value="tous_et"[ checked="checked"(#ENV{type_choix}|=={tous_et}|oui)] />
+						<label for="tous_et"><:contact:configuration_destinataires_tous_et:></label>
+					</div>
+				</li>
+				<li class="editer editer_type_choix haut pleine_largeur">
+					<div class="choix">
+						<input type="radio" name="type_choix" id="un" class="radio" value="un"[ checked="checked"(#ENV{type_choix}|=={un}|oui)] />
+						<label for="un"><:contact:configuration_destinataires_un:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="type_choix" id="un_ou" class="radio" value="un_ou"[ checked="checked"(#ENV{type_choix}|=={un_ou}|oui)] />
+						<label for="un_ou"><:contact:configuration_destinataires_un_ou:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="type_choix" id="un_et" class="radio" value="un_et"[ checked="checked"(#ENV{type_choix}|=={un_et}|oui)] />
+						<label for="un_et"><:contact:configuration_destinataires_un_et:></label>
+					</div>
+				</li>
+				<li class="editer editer_type_choix haut pleine_largeur">
+					<div class="choix">
+						<input type="radio" name="type_choix" id="plusieurs" class="radio" value="plusieurs"[ checked="checked"(#ENV{type_choix}|=={plusieurs}|oui)] />
+						<label for="plusieurs"><:contact:configuration_destinataires_plusieurs:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="type_choix" id="plusieurs_ou" class="radio" value="plusieurs_ou"[ checked="checked"(#ENV{type_choix}|=={plusieurs_ou}|oui)] />
+						<label for="plusieurs_ou"><:contact:configuration_destinataires_plusieurs_ou:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="type_choix" id="plusieurs_et" class="radio" value="plusieurs_et"[ checked="checked"(#ENV{type_choix}|=={plusieurs_et}|oui)] />
+						<label for="plusieurs_et"><:contact:configuration_destinataires_plusieurs_et:></label>
+					</div>
+					<div class="choix">
+						<input type="checkbox" name="c" id="c" class="checkbox" value="c"[ (#ENV{c}|=={c}|oui)checked="checked"] />
+						<label for="c"><:contact:preselection:></label>
+					</div>
+				</li>
+			</ul>
+		</fieldset>
+
+		[(#REM)
+			On récupère les champs possibles
+			Mais on divise en deux :
+				- d'abord les champs choisis
+				- puis les champs qui restent
+		]
+		#SET{champs_possibles, #VAL{rien}|contact_infos_supplementaires}
+		#SET{champs_choisis, #CONFIG{contact/champs,#ARRAY}|array_flip}
+		#SET{champs,#GET{champs_choisis}|array_merge{#GET{champs_possibles}}}
+		<fieldset id="fieldset_collecte">
+			<legend><:contact:infos_collecte:></legend>
+			<ol id="editer_champs" class="numeroter">
+				<BOUCLE_champs(POUR){tableau #GET{champs}}>
+				<li class="editer editer_champ pleine_largeur agrondir" title="<:contact:deplacement_possible:>" style="overflow:visible;">
+					[(#CLE|match{mail|sujet|texte}|oui)
+					<div class="choix">
+						<input type="text" name="champs[(#VAL{&#91;&#93;}|html_entity_decode)]" id="champ_#CLE" class="text" style="display:none;" value="#CLE" readonly='readonly' />
+						<input type="text" name="obligatoires[(#VAL{&#91;&#93;}|html_entity_decode)]" id="obli_#CLE" class="text" style="display:none;" value="#CLE" readonly='readonly' />
+						<label for="champ_#CLE">#VALEUR</label>
+						<label for="obli_#CLE"><em><:contact:champ_impose:></em></label>
+					</div>
+					][(#CLE|match{mail|sujet|texte}|non)
+					<div class="choix">
+						<input type="checkbox" name="champs[(#VAL{&#91;&#93;}|html_entity_decode)]" id="champ_#CLE" class="checkbox" value="#CLE"[ (#CLE|in_array{#ENV{champs,#ARRAY}}|oui)checked="checked"] />
+						<label for="champ_#CLE">#VALEUR</label>
+					</div>
+					<div class="choix">
+						<input type="checkbox" name="obligatoires[(#VAL{&#91;&#93;}|html_entity_decode)]" id="obli_#CLE" class="checkbox" value="#CLE"[ (#CLE|in_array{#ENV{obligatoires,#ARRAY}}|oui)checked="checked"] />
+						<label for="obli_#CLE"><:contact:champ_obligatoire:></label>
+					</div>
+					]
+				</li>
+				</BOUCLE_champs>
+			</ol>
+		</fieldset>
+	[(#PLUGIN{porte_plume,version}|oui)
+		<fieldset id="fieldset_porte_plume">
+			<legend><:contact:configuration_champs_message:></legend>
+			[<p class="attention">(#VAL{PORTE_PLUME_PUBLIC}|defined|et{#EVAL{PORTE_PLUME_PUBLIC}|non}|ou{#CONFIG{barre_outils_public}|=={non}|oui})<:contact:configuration_barre_impossible:></p>]
+			<ul>
+				<li class="editer editer_barre">
+					<label><:contact:configuration_champs_message_explication:></label>
+					<div class="choix">
+						<input type="radio" name="barre" id="no_b" class="radio" value="no_barre"[ checked="checked"(#ENV{barre}|=={no_barre}|ou{[(#CONFIG{contact/barre}|non)]}|oui)] />
+						<label for="no_b"><:contact:configuration_no_barre:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="barre" id="bf" class="radio" value="inserer_barre_forum"[ checked="checked"(#ENV{barre}|=={inserer_barre_forum}|oui)] />
+						<label for="bf"><:contact:configuration_barre_forum:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="barre" id="no_p" class="radio" value="no_previsualisation"[ checked="checked"(#ENV{barre}|=={no_previsualisation}|oui)] />
+						<label for="no_p"><:contact:configuration_no_previsualisation:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="barre" id="b" class="radio" value=""[ checked="checked"(#ENV{barre}|non|et{[(#VAL{mail}|in_array{#CONFIG{contact/obligatoires,#ARRAY}}|oui)]})] />
+						<label for="b"><:contact:configuration_barre_oui:></label>
+					</div>
+				</li>
+			</ul>
+		</fieldset>
+	]
+		<fieldset id="fieldset_pj">
+			<legend><:contact:configuration_pj:></legend>
+			<ul>
+				<li class="editer editer_autoriser_pj">
+					[(#REM) : On teste si le plugin facteur est présent pour pourvoir envoyer les pièces jointes ]
+					[(#PLUGIN{facteur}|oui)
+					<div class="choix">
+						<input type="checkbox" name="autoriser_pj" id="autoriser_pj" class="checkbox" value="true" [checked="checked"(#ENV{autoriser_pj}|=={true}|oui)] />
+						<label for="autoriser_pj"><:contact:configuration_pj_autoriser:></label>
+					</div>
+					<label for="nb_max_pj"><:contact:configuration_pj_nb_max:></label>
+					<select name="nb_max_pj" id="nb_max_pj">
+						<option value="1" [selected="selected" (#ENV{nb_max_pj}|=={1}|oui)]>1</option>
+						<option value="2" [selected="selected" (#ENV{nb_max_pj}|=={2}|oui)]>2</option>
+						<option value="3" [selected="selected" (#ENV{nb_max_pj}|=={3}|oui)]>3</option>
+						<option value="4" [selected="selected" (#ENV{nb_max_pj}|=={4}|oui)]>4</option>
+						<option value="5" [selected="selected" (#ENV{nb_max_pj}|=={5}|oui)]>5</option>
+					</select>
+					]
+					[(#PLUGIN{facteur}|non)
+					<p class="explication"><:contact:configuration_pj_facteur_absent:></p>
+					]
+				</li>
+			</ul>
+		</fieldset>
+
+		<fieldset id="fieldset_sauvegarde">
+			<legend><:contact:sauv_message:></legend>
+			<ul>
+				<li class="editer editer_sauvegarder_contacts">
+					<p class="explication"><:contact:sauv_message_explication:></p>
+					<div class="choix">
+						<input type="checkbox" name="sauvegarder_contacts" id="sauvegarder_contacts" class="checkbox" value="true" [checked="checked"(#ENV{sauvegarder_contacts}|=={true}|oui)] />
+						<label for="sauvegarder_contacts"><:contact:sauv_message_ok:></label>
+					</div>
+				</li>
+			</ul>
+		</fieldset>
+
+		<fieldset id="fieldset_intro">
+			<legend><:contact:configuration_intro:></legend>
+			<ul>
+				<li class="editer editer_texte pleine_largeur">
+					<p class="explication"><:contact:configuration_intro_explication:></p>
+					<textarea name="texte" id="texte" rows="10" cols="40">#ENV{texte}</textarea>
+				</li>
+			</ul>
+		</fieldset>
+
+		<fieldset id="fieldset_infolettre">
+			<legend><:contact:configuration_texteinfolettre:></legend>
+			<ul>
+				<li class="editer editer_texteinfolettre pleine_largeur">
+					<p class="explication"><:contact:configuration_texteinfolettre_explication:></p>
+					<textarea name="texteinfolettre" id="texteinfolettre" rows="2" cols="40">[(#ENV{texteinfolettre})]</textarea>
+				</li>
+			</ul>
+		</fieldset>
+
+		<div class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
+		</div>
+	</div></form>
+	[(#BOUTON_ACTION{<:contact:bouton_effacer:>,#URL_ACTION_AUTEUR{effacer_configuration,'contact',#SELF},ajax,<:contact:alerte_effacement:>})]
+</div>
+
+<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
+;(function($){
+	var contact_sortable = function(){
+		$('ol#editer_champs')
+			.sortable({
+				cursor : 'move',
+				axis : 'y',
+				cancel : 'input, label',
+				forceHelperSize : true,
+				forcePlaceholderSize : true,
+				placeholder : 'cadre-couleur',
+				start : function(event, ui){
+				}
+			});
+	}
+	$(function(){
+		/*
+		$('div.selection').each(function(){
+			if ($('div.non input.radio').is(':checked'))
+				$(this).hide();
+		});
+		$('div.enf').hide();
+
+		$('div.enf input.radio:checked').each(function(){
+		 		$(this).parent('div').show();
+		 		$(this).parent('div').siblings('div.enf').show();
+		 });
+
+		$('div.par input.radio:checked').each(function(){
+		 		$(this).parent('div').siblings('div.enf').show();
+		 });
+
+		$('div div.par input.radio')
+			.click(function(){
+				if ($(this).is(':checked'))
+					$(this).parent('.par').siblings('div.enf')
+						.slideDown();
+					$('div div.par input.radio').not(':checked').parent('.par').siblings('div.enf')
+						.slideUp();
+		});
+
+		$('div.plus input.radio')
+			.click(function(){
+				if ($(this).is(':checked'))
+					$('div.selection')
+						.slideDown();
+						});
+
+		$('div.non input.radio')
+			.click(function(){
+				if ($(this).is(':checked'))
+					$('div.selection input.checkbox')
+						.attr('checked','');
+					$('div.selection')
+						.slideUp();
+			});
+			*/
+
+		/*$('li.editer_champ div').each(function(){
+			if (!$(this).siblings(':checkbox').is(':checked'))
+				$(this).hide();
+		});
+
+		$('li.editer_champ input.checkbox')
+			.click(function(){
+				if ($(this).is(':checked'))
+					$(this).siblings('div')
+						.slideDown();
+				else
+					$(this).siblings('div')
+						.slideUp();
+			});
+*/
+		if(typeof($.fn.sortable) == 'undefined'){
+			$.getScript('#CHEMIN{javascript/contact_sortable.js}',function(){
+				contact_sortable();
+			});
+		}else{
+			contact_sortable();
+		}
+	});
+})(jQuery);
+/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>

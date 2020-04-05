@@ -1,0 +1,13 @@
+[(#SET{titre, <:contact:titre_court:>})]
+[(#ENV{titre}|oui)
+	#SET{titre, #ENV*{titre}|typo}
+]
+
+[(#ENV{appel_formulaire}|oui)
+	<div class="titre">#GET{titre}</div>
+	<div class="infos"><:contact:description_menu_contact:></div>
+]
+[(#ENV{appel_menu}|oui)
+	<li class="menu-entree item[ (#ENV{css})][(#ENV{env}|table_valeur{type}|=={page}|et{#ENV{env}|table_valeur{composition}|=={#ENV{page,contact}}}) on]">
+		<a href="#URL_PAGE{#ENV{page,contact}}">#GET{titre}</a>
+]

@@ -1,0 +1,5 @@
+<li class='editer editer_texte saisie_texte obligatoire[ (#ENV*{erreurs}|table_valeur{texte}|oui)erreur]'>
+<label for="contact_texte"><:info_texte_message:> <strong><:info_obligatoire_02:></strong></label>
+[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{texte})</span>]
+<textarea name="texte" id="contact_texte" rows="8" cols="60"[ class="(#CONFIG{contact/barre,no_barre})"]>#ENV{texte}</textarea>
+</li>

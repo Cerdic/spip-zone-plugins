@@ -1,0 +1,151 @@
+#CACHE{0}
+
+<div class="formulaire_spip formulaire_contact formulaire_editer_message_contact" id="formulaire_contact">
+
+<br class='bugajaxie' />
+
+[<div class="texte">(#CONFIG{contact/texte}|propre)</div>]
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<BOUCLE_editable(CONDITION){si #ENV{editable}}>
+<form method='post' action='[(#ENV{action}|ancre_url{formulaire_contact})]' enctype='multipart/form-data'>
+	[(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
+	#ACTION_FORMULAIRE{#ENV{action}}
+
+	[(#REM) Previsualisation... ]
+	<BOUCLE_previsu(CONDITION){si #ENV*{erreurs}|table_valeur{previsu}|oui}>
+	<fieldset class="previsu">
+		<legend><:previsualisation:></legend>
+		<ul>
+			[<li><strong><:contact:courriel_de:></strong> : (#ENV{mail})</li>]
+			<BOUCLE_previsu_infos(POUR){tableau #ENV{_champs}}>
+			[(#CLE|match{mail|sujet|texte}|non)
+			[<li><strong>[(#VALEUR)]</strong> : (#ENV{#CLE})</li>]
+			]
+			</BOUCLE_previsu_infos>
+			[<li><strong><:form_prop_sujet:></strong> : (#ENV{sujet})</li>]
+			[<li><div><strong><:info_texte_message:></strong></div>(#ENV{texte}|propre)</li>]
+			<B_previsu_pj>
+			<li>
+				[<strong>(#ENV{erreurs}|table_valeur{infos_pj}|count|>{1}|?{<:contact:form_pj_previsu_pluriel:>,<:contact:form_pj_previsu_singulier:>})</strong>]
+				<ul>
+				<BOUCLE_previsu_pj(POUR){tableau #ENV{erreurs}|table_valeur{infos_pj}}>
+					<li>
+						[<img src="(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{vignette}|image_reduire{32}|extraire_attribut{src})" [title="(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{mime})"] />]
+						[(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{nom})]
+					</li>
+				</BOUCLE_previsu_pj>
+				</ul>
+			</li>
+			</B_previsu_pj>
+		</ul>
+		<p class="boutons"><input type="submit" class="submit" name="confirmer" value="<:form_prop_confirmer_envoi:>" /></p>
+	</fieldset>
+	</BOUCLE_previsu>
+
+	[(#REM) Sinon, formulaire normal ]
+	<fieldset>
+		<legend><:envoyer_message:></legend>
+		<ul class="editer-groupe">
+			<BOUCLE_choix(CONDITION){si #ENV{choix_destinataires}|non}>
+				[(#REM) Si pas de choix, le destinataire est défini automatiquement ]
+				<BOUCLE_tous(POUR){tableau #ENV{destinataire}}>
+				<li style="display:none;"><input type="hidden" name="destinataire[]" value="#VALEUR" /></li>
+				</BOUCLE_tous>
+			</BOUCLE_choix>
+				[(#REM) Sinon on propose le choix, en select ou en checkbox suivant l'option "type_choix" ]
+				<B_destinataires>
+				<li class="editer obligatoire[ (#ENV*{erreurs}|table_valeur{destinataire}|oui)erreur]">
+					[(#ENV{type_choix}|match{plusieurs|plusieurs_et|plusieurs_ou}|oui)
+						<label><:contact:form_destinataires:></label>
+						[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{destinataire})</span>]
+						<ul class="choix_mots">
+					]
+					[(#ENV{type_choix}|match{un|un_et|un_ou}|oui)
+						<label for="destinataire"><:contact:form_destinataire:></label>
+						[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{destinataire})</span>]
+						<select name="destinataire&#91;&#93;" id="destinataire">
+					]
+					<BOUCLE_destinataires(AUTEURS){tous}{id_auteur IN #ENV**{choix_destinataires}}{par num nom,nom}>
+						[(#ENV{type_choix}|match{plusieurs|plusieurs_et|plusieurs_ou}|oui)
+							<li class="choix">
+								<input
+									type="checkbox" class="checkbox"
+									name="destinataire&#91;&#93;" id="destinataire#ID_AUTEUR"
+									value="#ID_AUTEUR"[(#ENV{destinataire_selection}|oui)[ (#ID_AUTEUR|in_array{#ENV*{destinataire_selection,#ARRAY}}|oui)checked="checked"]]
+									[(#ENV{destinataire_selection}|non)
+									[(#CONFIG{contact/c}|non)[ (#ID_AUTEUR|in_array{#ENV*{destinataire,#ARRAY}}|ou{[(#ID_AUTEUR|in_array{#ENV*{choix_destinataires,#ARRAY}})]}|oui)checked="checked"]]]
+								/>
+								<label for="destinataire#ID_AUTEUR">#NOM</label>
+							</li>
+						]
+						[(#ENV{type_choix}|match{un|un_et|un_ou}|oui)
+							<option value="#ID_AUTEUR"[ (#ID_AUTEUR|in_array{#ENV*{destinataire,#ARRAY}}|oui)selected="selected"]>#NOM</option>
+						]
+					</BOUCLE_destinataires>
+					[(#ENV{type_choix}|match{plusieurs|plusieurs_et|plusieurs_ou}|oui)
+						</ul>
+					]
+					[(#ENV{type_choix}|match{un|un_et|un_ou}|oui)
+						</select>
+					]
+				</li>
+				</B_destinataires>
+				BUG
+				<//B_destinataires>
+			<//B_choix>
+
+			<BOUCLE_infos(POUR){tableau #ENV{_champs}}>
+			#SET{existe, #CHEMIN{formulaires/contact_champ_#CLE.html}}
+			[(#GET{existe}|oui)
+			[(#INCLURE{fond=formulaires/contact_champ_#CLE,env,name=#CLE,titre=#VALEUR})]
+			]
+			[(#GET{existe}|non)
+			<li class="editer editer_#CLE saisie_#CLE[ (#CLE|in_array{#ENV{_obligatoires,#ARRAY}}|oui)obligatoire][ (#ENV*{erreurs}|table_valeur{#CLE}|oui)erreur]">
+				<label for="info_#CLE">#VALEUR[ (#CLE|in_array{#ENV{_obligatoires,#ARRAY}}|oui)<strong><:info_obligatoire_02:></strong>]</label>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{#CLE})</span>]
+				<input type="text" class="text" name="#CLE" id="info_#CLE" value="#ENV{#CLE}" size="30" />
+			</li>
+			]
+			</BOUCLE_infos>
+
+			<B_pj>
+			<li class ='editer pieces_jointes'>
+				<label>[(#ENV{nb_max_pj}|>{1}|?{<:contact:form_pj_ajouter_pluriel:>,<:contact:form_pj_ajouter_singulier:>})]</label>
+				<ul>
+					<BOUCLE_pj(POUR){tableau #ENV{pj_fichiers}}>
+						<li>
+							[(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{message}|oui)
+								<:contact:form_pj_fichier_ajoute:>
+								[<img src="(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{vignette}|image_reduire{32}|extraire_attribut{src})" [title="(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{mime})"] />]
+								[(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{nom})]
+								<input type="hidden" name="pj_enregistrees_nomfichier&#91;#CLE&#93;" value="[(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{nom})]"/>
+								<input type="hidden" name="pj_enregistrees_mime&#91;#CLE&#93;" value="[(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{mime})]"/>
+								<input type="hidden" name="pj_enregistrees_extension&#91;#CLE&#93;" value="[(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{extension})]"/>
+								<input type="hidden" name="pj_enregistrees_vignette&#91;#CLE&#93;" value="[(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{vignette})]"/>
+								<input type="submit" name="pj_supprimer_#CLE" value="<:contact:form_pj_supprimer:>"/>
+							]
+
+							[(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{message}|non)
+								<input type="file" class="fichier" name="pj_fichiers&#91;#CLE&#93;" title="<:contact:form_pj_importer:>" />
+							]
+						</li>
+					</BOUCLE_pj>
+				</ul>
+			</li>
+			</B_pj>
+		</ul>
+	</fieldset>
+
+	[(#REM) Piege a robots spammeurs ]
+	<p style="display:none;">
+		<label for="contact_nobot"><:antispam_champ_vide:></label>
+		<input type="text" class="text" name="nobot" id="contact_nobot" value="#ENV{nobot}" size="10" />
+	</p>
+
+	<p class="boutons"><input type="submit" class="submit" name="valide" value="<:form_prop_envoyer:>" /></p>
+</form>
+</BOUCLE_editable>
+</div>

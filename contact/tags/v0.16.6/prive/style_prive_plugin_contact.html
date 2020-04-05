@@ -1,0 +1,21 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html ! iso-8859-15 utf-8
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+.formulaire_configurer_contact .agrondir {margin-bottom:5px;-moz-border-radius:5px;-webkit-border-radius:5px;border:1px dashed #ddd;background-position: 97% 20%;background-repeat: no-repeat;}
+.formulaire_configurer_contact ol.numeroter {list-style-position:outside;list-style-type:decimal;}
+.formulaire_configurer_contact ol.numeroter > li {list-style-position:outside;margin-left:40px;list-style-type:decimal;}
+.formulaire_configurer_contact .bouton_action_post {display:block;position:absolute;bottom:5px;left:10px;}

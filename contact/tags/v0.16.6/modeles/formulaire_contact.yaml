@@ -1,0 +1,25 @@
+nom: '<:contact:modele_nom_formulaire:>'
+logo: 'images/contact-24.png'
+icone_barre: 'contact.png'
+parametres:
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'modele'
+      defaut: 'formulaire'
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'variante'
+      defaut: 'contact'
+  -
+    saisie: 'auteurs'
+    options:
+      nom: 'auteur'
+      label: '<:contact:modele_label_auteur:>'
+      multiple: 'oui'
+      option_statut: 'oui'
+      statut:
+        - '0minirezo'
+        - '1comite'
+        - '6forum'
