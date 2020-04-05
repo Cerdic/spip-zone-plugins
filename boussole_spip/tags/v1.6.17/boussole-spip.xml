@@ -1,0 +1,48 @@
+<boussole alias="spip" demo="https://boussole.spip.net/">
+
+	<!-- Sites de reference SPIP -->
+	<groupe type="reference">
+		<site alias="net" src="https://www.spip.net/" actif="oui" />
+		<site alias="doc" src="https://code.spip.net/" actif="oui" />
+		<site alias="programmer" src="https://programmer.spip.net/" actif="oui" />
+	</groupe>
+	
+	<!-- Sites des extensions & contributions SPIP -->
+	<groupe type="extension">
+		<site alias="plugin" src="https://plugins.spip.net/" actif="oui" />
+		<site alias="plugincode" src="https://code.plugins.spip.net/" actif="oui" />
+		<site alias="contrib" src="https://contrib.spip.net/" actif="oui" />
+		<site alias="trad" src="https://trad.spip.net/" actif="oui" />
+		<site alias="core" src="https://core.spip.net/" actif="oui" />
+		<site alias="zone" src="https://zone.spip.org/" actif="oui" />
+	</groupe>
+
+	<!-- Sites d'aide & echanges autour de SPIP -->
+	<groupe type="aide">
+		<site alias="forum" src="https://forum.spip.net/" actif="oui" />
+		<site alias="user" src="http://listes.rezo.net/mailman/listinfo/spip/" actif="oui" />
+		<site alias="irc" src="https://irc.spip.net/" actif="oui" />
+		<site alias="party" src="https://party.spip.net/" actif="oui" />
+		<site alias="edgard" src="https://edgard.spip.net/" actif="oui" />
+	</groupe>
+
+	<!-- Sites de decouverte des realisations SPIP -->
+	<groupe type="decouverte">
+		<site alias="info" src="http://info.spip.net/" actif="oui" />
+		<site alias="herbier" src="http://herbier.spip.net/" actif="oui" />
+		<site alias="video" src="https://medias.spip.net/" actif="oui" />
+		<site alias="demo" src="https://demo.spip.net/" actif="oui" />
+		<site alias="test" src="http://grml.eu/" actif="oui" />
+		<site alias="syntaxe" src="https://syntaxe.spip.net/" actif="oui" />
+	</groupe>
+
+	<!-- Sites des actualites SPIP -->
+	<groupe type="actualite">
+		<site alias="blog" src="https://blog.spip.net/" actif="oui" />
+		<site alias="twit" src="http://spip.org/" actif="non" />
+		<site alias="sedna" src="https://sedna.spip.net/" actif="oui" />
+		<site alias="zine" src="http://zine.spip.net/" actif="non" />
+		<site alias="mag" src="http://mag.spip.net/" actif="non" />
+	</groupe>
+
+</boussole>

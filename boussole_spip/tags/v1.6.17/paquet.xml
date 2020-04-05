@@ -1,0 +1,18 @@
+<paquet
+	prefix="bouspip"
+	categorie="navigation"
+	version="1.6.17"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="images/boussole/boussole-spip.png"
+	documentation="https://contrib.spip.net/Boussole"
+>
+
+	<nom>Boussole SPIP</nom>
+	<!-- Les bonnes adresses de la galaxie SPIP ! -->
+
+	<auteur lien="http://blog.smellup.net/">Eric Lupinacci</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
+
+	<pipeline nom="declarer_boussoles" inclure="bouspip_pipelines.php" />
+</paquet>
