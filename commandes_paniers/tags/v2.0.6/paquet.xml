@@ -1,0 +1,23 @@
+<paquet
+	prefix="panier2commande"
+	categorie="divers"
+	version="2.0.6"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="images/panier2commande-32.png"
+	documentation=""
+>
+
+	<nom>[Deprecie] Commandes de Paniers</nom>
+	<auteur lien="http://www.ldd.fr">Les D&#233;veloppements Durables</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="post_edition" inclure="panier2commande_pipelines.php" />
+	<pipeline nom="panier2commande_prix" action="" />
+
+	<necessite nom="commandes" compatibilite="[1.4.0;]" />
+	<necessite nom="paniers" compatibilite="[1.0.0;1.1.0[" />
+	<necessite nom="spip_bonux" compatibilite="[3.0.0;]" />
+
+</paquet>
