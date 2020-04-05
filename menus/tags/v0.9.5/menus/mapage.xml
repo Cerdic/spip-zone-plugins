@@ -1,0 +1,8 @@
+<entree>
+	<nom><:menus:nom_menu_mapage:></nom>
+	<rang>20</rang>
+	<description><:menus:description_menu_mapage:></description>
+	<icone>images/menus_mapage.png</icone>
+	<parametre nom="titre" class="multilang" label="menus:entree_titre" />
+	<parametre nom="css" label="menus:entree_css" />
+</entree>

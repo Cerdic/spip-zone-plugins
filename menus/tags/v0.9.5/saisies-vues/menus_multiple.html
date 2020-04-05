@@ -1,0 +1,9 @@
+<B_choix>
+<ul>
+	<BOUCLE_choix(MENUS){identifiant IN #ENV**{valeur}}>
+	<li class="choix">[(#TITRE|typo)] (#IDENTIFIANT)</li>
+	</BOUCLE_choix>
+</ul>
+</B_choix>
+<p>#ENV{sans_reponse}</p>
+<//B_choix>

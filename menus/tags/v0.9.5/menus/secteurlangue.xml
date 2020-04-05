@@ -1,0 +1,21 @@
+<entree>
+	<nom><:menus:nom_menu_secteurlangue:></nom>
+	<description><:menus:description_menu_secteurlangue:></description>
+	<icone>images/menus_secteurlangue.png</icone>
+	<parametre nom="niveau" label="menus:entree_niveau" />
+	<parametre nom="sousrub_cond" label="menus:entree_sousrub_cond" />
+	<parametre nom="classe_parent" label="menus:entree_classe_parent" />
+	<parametre nom="tri_num" label="menus:entree_tri_num" />
+	<parametre nom="tri_num_inverse" label="menus:entree_tri_num_inverse" />
+	<parametre nom="tri_alpha" label="menus:entree_tri_alpha" />
+	<parametre nom="tri_alpha_inverse" label="menus:entree_tri_alpha_inverse" />
+	<parametre nom="afficher_articles" label="menus:entree_afficher_articles" />
+	<parametre nom="masquer_articles_uniques" label="menus:entree_masquer_articles_uniques" />
+	<parametre nom="articles_max" label="menus:entree_articles_max" />
+	<parametre nom="articles_max_affiches" label="menus:entree_articles_max_affiches" />
+	<parametre nom="tri_num_articles" label="menus:entree_tri_num_articles" />
+	<parametre nom="tri_num_articles_inverse" label="menus:entree_tri_num_articles_inverse" />
+	<parametre nom="tri_alpha_articles" label="menus:entree_tri_alpha_articles" />
+	<parametre nom="tri_alpha_articles_inverse" label="menus:entree_tri_alpha_articles_inverse" />
+	<refuser_sous_menu/>
+</entree>
