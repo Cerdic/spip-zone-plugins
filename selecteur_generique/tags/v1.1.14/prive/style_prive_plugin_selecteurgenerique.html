@@ -1,0 +1,55 @@
+[(#REM)<style>
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+/**
+ * Passer devant les modales colorbox qui ont un z-index de 9999
+ * En principe la colorbox est avant la liste déroulante, juste avant la fermeture du body.
+ * Virer le sélecteur #colorbox ~ si ça pose problème.
+ */
+#colorbox ~ .ui-front {
+	z-index: 10000;
+}
+
+.ui-menu.ui-autocomplete .ui-menu-item-wrapper {
+		display: block;
+		max-width: 100%;
+}
+
+.ui-menu.ui-autocomplete .ui-menu-item-wrapper strong {
+	font-size: 1.2em;
+}
+
+.ac_results ul li.ac_odd {
+	background-color: #GET{claire};
+}
+
+.ac_results ul li.ac_over {
+	background-color: #GET{foncee};
+	color: white;
+}
+
+.ac_loading {
+	background: white url('#CHEMIN{images/searching.gif}') right center no-repeat;
+	opacity:.7;
+}
+.ac_results{
+	margin-left:1px;
+}

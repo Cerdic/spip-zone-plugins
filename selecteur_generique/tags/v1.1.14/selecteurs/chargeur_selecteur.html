@@ -1,0 +1,54 @@
+<script type="text/javascript" src="#CHEMIN{javascript/jquery.autocomplete.js}"></script>
+<style>
+    @import url(#CHEMIN{iautocompleter.css}) all;
+</style>
+
+<script type="text/javascript" >
+    #SET{ac,#URL_ECRIRE{selecteur_generique}}
+
+    (function($) {
+        var appliquer_selecteur_cherche_#GET{objet} = function() {
+
+	        // chercher l'input de saisie
+	        var me = jQuery('input[id=#ENV{input}]');
+	        me.each(function(){
+		        var inp = this;
+                    
+                [(#ENV{focus}|oui)
+                    //Vide le champ au focus                
+		            jQuery(inp).focus(function(){
+			            $(this).val('');
+		            });
+                ]
+                //Charge l'autocomplete pour le champ input_val                
+		        jQuery(inp).attr('disabled','').autocomplete('#GET{ac}',{
+			        extraParams:{quoi:'#ENV{objet}'},
+			        delay: 300,
+			        autofill: false,
+			        minChars: 1,
+			        formatItem: function(data, i, n, value) {
+				        return data[0];
+			        },
+		        });
+                //Affecte les valeurs aux bons champs
+		        jQuery(inp).result(function(event, data, formatted) {
+			        if (data[2] > 0) {
+				        jQuery(inp)
+				        .val(data[1])[
+				        .parents('form').find('input[(#VAL{91}|chr)]id=(#ENV{input_id})[(#VAL{93}|chr)]')
+				        .val(data[(#VAL{91}|chr)]2[(#VAL{93}|chr)])]
+				        .end();                            
+			        }
+			        else{
+				        return data[1];
+			        }
+		        });
+	        });
+        };
+        //Affecte les fonctions javascript
+        $(function(){
+	        appliquer_selecteur_cherche_#GET{objet}();
+	        onAjaxLoad(appliquer_selecteur_cherche_#GET{objet});
+        });
+    })(jQuery);
+</script>
