@@ -1,0 +1,16 @@
+<plugin>
+	<nom>Introduction distinguante</nom>
+	<etat>stable</etat>
+	<version>0.1.3</version>
+	<auteur>[Maïeul Rouquette->http://www.maieul.net]</auteur>
+	<licence>GNU/GPL</licence>
+	<prefix>introduction_distinguante</prefix>
+	<slogan>Ne mélangez pas le chapeau et le texte.</slogan>
+	<description>
+	Fournit une balise <code>#INTRODUCTION_DISTINGUANTE</code> qui fonctionne comme <code>#INTRODUCTION</code> mais entoure la partie provenante du chapo par un <code>span.introduction-chapo</code> et celle provenant du texte par un <code>span.introduction-texte</code>.
+	</description>
+	<necessite id="SPIP" version="[2.0.0;3.2.99]" />
+	<fonctions>introduction_distinguante_fonctions.php</fonctions>
+	<lien>https://contrib.spip.net/4449</lien>
+	<categorie>outil</categorie>
+</plugin>
