@@ -1,0 +1,38 @@
+<h4>#MOTIF</h4>[<br />
+(#ENV{par_auteur})
+]
+
+[
+(#TEXTE|safehtml)
+]
+
+<hr />
+
+<p>
+[
+(#STATUT|=={publie}|oui)<:signalement:mail_ne_repondez_pas:>][
+<a href="(#ENV{url}|url_absolue)">[(#ENV{url}|url_absolue)]</a>]
+</p>
+
+[(#ENV{url_moderer_refuse}|oui)
+<hr/>
+<h5><:notifications:titre_moderation:></h5>
+<div style="text-align:center;">
+	[<a class="submit" href="(#ENV{url_moderer_refuse})"><:signalement:mail_lien_refuser_commentaire:></a><br />]
+</div>
+]
+
+<br />
+<br />
+<p><small><:form_forum_message_auto:></small></p>
+
+<style type="text/css">
+.submit { position:relative;display:inline-block;width:auto;min-width:14em;text-align:center;padding:5px 1em 6px;margin:0.5em 1em;overflow:visible;cursor:pointer;background:#DDD;
+-webkit-box-shadow:0 1px 3px rgba(0,0,0,0.5);-moz-box-shadow:0 1px 3px rgba(0,0,0,0.5);box-shadow:0 1px 3px rgba(0,0,0,0.5);
+border:0;border-bottom:1px solid rgba(0,0,0,0.25);-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;font-size:100%;line-height:1;font-weight:bold;}
+.submit:hover{background-color: #CCC;}
+.submit:focus,.submit:active {-webkit-transform:translateY(1px);-moz-transform:translateY(1px);transform:translateY(1px);outline:none !important;}
+.submit:active {-webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,0.7);-moz-box-shadow:inset 0 1px 2px rgba(0,0,0,0.7);box-shadow:inset 0 1px 2px rgba(0,0,0,0.7);/*IE*/ border-bottom: 0\9; border-top: 1px solid #666\9;}
+.submit::-moz-focus-inner {border: 0 none; padding: 0;}
+.submit.small {font-size: 90%;padding: 4px 1em;}.submit.big{font-size:130%;padding: 8px 1em 9px;}.submit.super{font-size:200%;padding:8px 1em 9px;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;}
+</style>

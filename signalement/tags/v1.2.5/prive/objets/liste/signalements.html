@@ -1,0 +1,44 @@
+[(#SET{defaut_tri,#ARRAY{
+	date_heure,#ENV{date_sens,-1},
+	titre,1,
+	id_signalement,1,
+	points,-1
+}})
+]<B_liste_signalements>
+#ANCRE_PAGINATION
+<div class="liste-objets signalements">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{signalement:info_1_signalement,signalement:info_nb_signalements}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='titre principale' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='auteur' scope='col'><:auteur:></th>
+			<th class='date secondaire' scope='col'>[(#TRI{date_heure,<:date:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_signalement,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_signalements(SIGNALEMENTS){id_signalement?}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,date_heure},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'>[(#CHEMIN_IMAGE{[signalement-statut-(#STATUT)-24.png]}|balise_img|inserer_attribut{alt,#VAL{signalement:statut_}|concat{#STATUT}|_T})]</td>
+			<td class='titre principale'><a href="[(#ID_SIGNALEMENT|generer_url_entite{signalement})]"
+											title="<:info_numero_abbreviation|attribut_html:> #ID_SIGNALEMENT">[(#RANG). ]#TITRE</a>
+			[<div class='texte'>(#TEXTE|couper{100})</div>]
+			</td>
+			<td class='auteur'>[(#ID_AUTEUR|oui)<a
+							href='[(#ID_AUTEUR|generer_url_entite{auteur})]'>#MODELE{auteur_nom,id_auteur}</a>][(#ID_AUTEUR|non)#AUTEUR]</td>
+			<td class='date secondaire'>[(#DATE_HEURE|affdate_jourcourt)]</td>
+			<td class='id'>[(#AUTORISER{moderersignalement,#OBJET,#ID_OBJET}|?{
+				<a href="[(#URL_ECRIRE{controler_signalement,debut_signalement=#ID_SIGNALEMENT})]">#ID_SIGNALEMENT</a>,
+				#ID_SIGNALEMENT
+			})]</td>
+		</tr>
+	</BOUCLE_liste_signalements>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_signalements>[
+<div class="liste-objets signalements caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_signalements>

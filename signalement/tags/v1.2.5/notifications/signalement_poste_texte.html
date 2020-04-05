@@ -1,0 +1,31 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 SPIP
+  Distribue sous licence GPL
+
+][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+[[(#NOM_SITE_SPIP|textebrut)]] [<:signalement:mail_titre_signalement:>][ (#TITRE|nettoyer_titre_email)]
+
+[
+(#TEXTE|textebrut)
+]
+
+----
+** #MOTIF **[
+(#ENV{par_auteur})
+]
+
+[
+(#STATUT|=={publie}|oui)<:forum:forum_ne_repondez_pas:>][
+(#ENV{url}|url_absolue)]
+
+<:form_forum_message_auto:>
+
+
+
+[
+
+* \[<:signalement:mail_lien_refuser_commentaire:> -> (#ENV{url_moderer_publie}) \]]
+
+#FILTRE{supprimer_tags|filtrer_entites|trim}

@@ -1,0 +1,59 @@
+<div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+	    	<li class="editer editer_motifs[(#ENV**{erreurs}|table_valeur{motifs}|oui)erreur]">
+	    		<label for="motifs"><:signalement:label_select_motifs:></label>[
+	    		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{motifs})</span>]
+				<p class="explication"><:signalement:explication_select_motifs:></p>
+				<B_signalements>
+				<select id="motifs" name="motifs[]" multiple="multiple" size="[(#GRAND_TOTAL|plus{1})]">
+					<BOUCLE_signalements(DATA){source table,#REM|lister_signalements}>
+					<option value="#CLE"[(#CLE|in_array{#ENV{motifs,#ARRAY}}|oui)selected="selected"]>#VALEUR</option>
+					</BOUCLE_signalements>
+				</select>
+				</B_signalements>
+	    	</li>
+	    	<li class="editer editer_depublier[(#ENV**{erreurs}|table_valeur{depublier}|oui)erreur]">
+	    		<label for="depublier"><:signalement:label_depublier:></label>[
+	    		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{depublier})</span>]
+	    		<div class="choix">
+	    			<input type="checkbox"[(#ENV{depublier}|=={on}|oui)checked="checked"] name="depublier" id="depublier" />
+	    			<label for="depublier"><:signalement:label_depublier_long:></label>
+	    		</div>
+	    	</li>
+	    	<li class="editer editer_depublier_seuil[(#ENV**{erreurs}|table_valeur{depublier_seuil}|oui)erreur]">
+	    		<label for="depublier_seuil"><:signalement:label_depublier_seuil:></label>
+	    		<p class='explication'><:signalement:explication_depublier_seuil:></p>[
+	    		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{depublier_seuil})</span>]
+	    		<input type="text" class="texte text" name="depublier_seuil" maxlength="3" id="depublier_seuil" value="#ENV{depublier_seuil,5}" />
+	    	</li>
+	    	<li class="editer editer_notif_publication[(#ENV**{erreurs}|table_valeur{notif_publication}|oui)erreur]">
+	    		<label for="notif_publication"><:signalement:label_notif_publication:></label>[
+	    		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{notif_publication})</span>]
+				<p class="explication"><:signalement:explication_notif_publication:></p>
+				<B_notif_publication>
+				<select id="notif_publication" name="notif_publication[]" multiple="multiple" size="10">
+					<BOUCLE_notif_publication(AUTEURS){statut = 0minirezo}{email != ''}>
+					<option value="#ID_AUTEUR"[(#ID_AUTEUR|in_array{#ENV{notif_publication,#ARRAY}}|oui)selected="selected"]>##ID_AUTEUR #NOM</option>
+					</BOUCLE_notif_publication>
+				</select>
+				</B_notif_publication>
+	    	</li>
+	    	[(#PLUGIN{mediabox}|oui)
+	    	<li class="editer editer_mediabox[(#ENV**{erreurs}|table_valeur{mediabox}|oui)erreur]">
+	    		<label for="mediabox"><:signalement:label_mediabox:></label>[
+	    		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{mediabox})</span>]
+	    		<div class="choix">
+	    			<input type="checkbox"[(#ENV{mediabox}|=={on}|oui)checked="checked"] name="mediabox" id="mediabox" />
+	    			<label for="mediabox"><:signalement:label_mediabox_long:></label>
+	    		</div>
+	    	</li>]
+		</ul>
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div></form>
+</div>

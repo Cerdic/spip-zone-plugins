@@ -1,0 +1,23 @@
+<BOUCLE_si_editable(CONDITION){si #ENV{editable}}>
+<div id="formulaire_[(#FORM)]_[(#OBJET)]_[(#ID_OBJET)]" class="ajax formulaire_#FORM">
+<INCLURE{fond=formulaires/signalement_ajax,ajax,env} />
+</div>
+<script type="text/javascript">
+if(window.jQuery){
+	var signalement_activer_[(#OBJET)]_[(#ID_OBJET)] = function(){
+		var signalement_mediabox = [(#CONFIG{signalement/mediabox,off}|=={on}|?{false,true})];
+		jQuery('#formulaire_[(#FORM)]_[(#OBJET)]_[(#ID_OBJET)] .formulaire_signalement_hide').hide();
+		jQuery('#bouton_signalement_[(#OBJET)]_[(#ID_OBJET)]').unbind('click').click(function(e){
+			if(signalement_mediabox && typeof(jQuery.colorbox) == 'function'){
+				jQuery.colorbox({inline:true,href:"#formulaire_[(#FORM)]_[(#OBJET)]_[(#ID_OBJET)] .formulaire_signalement"});
+			}else{
+				jQuery('#formulaire_[(#FORM)]_[(#OBJET)]_[(#ID_OBJET)] .formulaire_signalement_hide').toggle('slow');
+			}
+			e.preventDefault();
+		});
+	}
+	signalement_activer_[(#OBJET)]_[(#ID_OBJET)]();
+	onAjaxLoad(signalement_activer_[(#OBJET)]_[(#ID_OBJET)]);
+}
+</script>
+</BOUCLE_si_editable>

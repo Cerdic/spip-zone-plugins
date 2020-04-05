@@ -1,0 +1,7 @@
+#BOITE_OUVRIR
+<BOUCLE_signalements(SIGNALEMENTS){objet}{id_objet}{tout}> </BOUCLE_signalements>
+[(#URL_ECRIRE{controler_signalement,objet=#ENV{objet}&id_objet=#ENV{id_objet}}|icone_horizontale{[(#GRAND_TOTAL|singulier_ou_pluriel{signalement:info_1_signalement,signalement:info_nb_signalements})],signalement-24.png,'',''})]
+</B_signalements>
+[(#URL_ECRIRE{controler_signalement,objet=#ENV{objet}&id_objet=#ENV{id_objet}}|icone_horizontale{<:signalement:info_aucun_signalement:>,signalement-24.png,'',''})]
+<//B_signalements>
+#BOITE_FERMER

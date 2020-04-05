@@ -1,0 +1,19 @@
+#SET{action,'<div class="actions moderer"><div>'}
+[(#SET{retour,[(#REM|test_espace_prive|?{[(#VAL{ecrire/}|concat{#SELF|replace{'./',''}})],#SELF}|ancre_url{signalement#ID_SIGNALEMENT})]})]
+#SET{redirect,#URL_PAGE{signalement}|parametre_url{id_signalement,#ID_SIGNALEMENT}
+	 |parametre_url{id_objet,#ID_OBJET}
+	 |parametre_url{objet,#OBJET}
+	 |parametre_url{retour,#GET{retour}}}
+
+[(#AUTORISER{instituer,signalement,#ID_SIGNALEMENT})
+	[(#STATUT|in_any{#LISTE{poubelle,refuse}})
+	 #GET{action}#SET{action,''}
+	 [(#BOUTON_ACTION{<:signalement:icone_valider_signalement:>,#URL_ACTION_AUTEUR{instituer_signalement,#ID_SIGNALEMENT-publie,#SELF|ancre_url{signalement#ID_SIGNALEMENT}},'ajax valider'})]
+	 <br />
+	]
+	[(#STATUT|in_any{#LISTE{publie}})
+	 #GET{action}#SET{action,''}
+	 [(#BOUTON_ACTION{<:signalement:icone_invalider_signalement:>,#URL_ACTION_AUTEUR{instituer_signalement,#ID_SIGNALEMENT-refuse,#SELF|ancre_url{signalement#ID_SIGNALEMENT}},'ajax supprimer'})]
+	]
+]
+[(#GET{action}|non)</div></div>]
