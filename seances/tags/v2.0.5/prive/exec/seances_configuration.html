@@ -1,0 +1,6 @@
+[(#AUTORISER{administrer,seances})
+	[(#BOITE_OUVRIR{#CHEMIN_IMAGE{seance-24.png}|balise_img{'',cadre-icone}|concat{<:seance:reinitialiser_seances:>},'simple','titrem'})]
+		<p><:seance:info_reinitialiser_seances:></p>
+		[<a class="seances_action" href="(#URL_ACTION_AUTEUR{reinitialiser_seances,'ok',#SELF})"  onclick="return confirm('<:seance:confirmer_reinitialiser_seances:>')"><:seance:action_reinitialiser_seances:></a>]
+	
+	#BOITE_FERMER]

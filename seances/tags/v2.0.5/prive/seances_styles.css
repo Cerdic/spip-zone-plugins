@@ -1,0 +1,6 @@
+/* formulaire editer seance */
+#formulaire_seance select {
+	font-size: .9em;
+	width: auto;}
+
+#formulaire_seance li span.seance_cl {font-size: .9em;}

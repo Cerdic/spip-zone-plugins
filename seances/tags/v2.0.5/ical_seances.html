@@ -1,0 +1,21 @@
+#CACHE{6*3600}#HTTP_HEADER{Content-Type: text/calendar; charset:#CHARSET}BEGIN:VCALENDAR
+VERSION:2.0
+X-WR-TIMEZONE:Europe/Paris
+CALSCALE:GREGORIAN
+X-WR-CALNAME;VALUE=TEXT:[(#NOM_SITE_SPIP|filtrer_ical)]
+[X-WR-CALDESC:(#DESCRIPTIF_SITE_SPIP|supprimer_tags|filtrer_ical)]
+X-WR-RELCALID:[(#URL_SITE_SPIP|filtrer_ical)]
+<BOUCLE_seances(SEANCES articles){statut=publie}{par date_seance}>
+BEGIN:VEVENT
+[SUMMARY:(#TITRE|filtrer_ical)]
+UID:#URL_SITE_SPIP-R#ID_RUBRIQUE-A#ID_ARTICLE-S#ID_SEANCE
+[DTSTAMP:(#DATE_SEANCE|date_ical)]
+[DTSTART:(#DATE_SEANCE|date_ical)]
+[DTEND:(#DATE_SEANCE|heure_fin_seance{1}|date_ical)]<BOUCLE_endroit (SEANCES_ENDROITS){id_endroit}>
+[LOCATION:(#NOM_ENDROIT|supprimer_numero|filtrer_ical)]</BOUCLE_endroit>
+DESCRIPTION:[(#REMARQUE_SEANCE|supprimer_tags|filtrer_ical)\n\n][(#CHAPO|supprimer_tags|textebrut|sinon{#INTRODUCTION}|filtrer_ical)]
+[URL:(#URL_ARTICLE|url_absolue|filtrer_ical)]
+STATUS:CONFIRMED
+END:VEVENT
+</BOUCLE_seances>
+END:VCALENDAR
