@@ -1,0 +1,21 @@
+<script type='text/javascript' src='#CHEMIN{formulaires/messages_recus.js}'></script>
+<B_recus>
+[<p class='pagination'>(#PAGINATION{page})</p>]
+<ul class='liste_items messages recus'>
+<BOUCLE_recus(MESSAGES auteurs_messages){auteurs_messages.id_auteur=#ENV{id_auteur}}{auteurs_messages.vu!=pou}{!par date_heure}{pagination 10}>
+<li class='item[ (#EXPOSE{on})
+<?php include_spip('inc/messages');messagerie_marquer_lus('#ENV{id_auteur}',array('#ID_MESSAGE'));?>
+]' id='message_#ID_MESSAGE'><div class='message[ (#VU|=={non}|?{new})]'><input type='checkbox' name='selectionne[]' value='#ID_MESSAGE' class='checkbox' /><a href='[(#SELF|parametre_url{id_message,''})]' class='plier' title='<:messagerie:replier:>' onclick="jQuery('#message_#ID_MESSAGE').removeClass('on');return false;"><img src='[(#CHEMIN{habillage/replier.png}|sinon{#CHEMIN{habillage/replier.gif}})]' alt='<:messagerie:replier:>' /></a>
+<span class="repondre"><a href="[(#ENV{_url_ecrire_message}|parametre_url{repondre,#ID_MESSAGE})]" title='<:messagerie:repondre_message|attribut_html:>'><img src='#CHEMIN{habillage/repondre.png}' alt='<:messagerie:repondre_message|attribut_html:>' /></a></span>
+<span class='from'>
+<BOUCLE_from(AUTEURS){id_auteur}{tout}>#SET{nom,#NOM}</BOUCLE_from>
+[(#TYPE|=={genera}|?{' '})<:messagerie:titre_message_general:>]
+[<:ecrire_message:de:> <a href='#URL_AUTEUR{#ID_AUTEUR}'>(#GET{nom})</a><em>, </em>]</span>
+<span class='date'> [(#DATE_HEURE|affdate_jourcourt)] - [(#DATE_HEURE|heures)]h[(#DATE_HEURE|minutes)]</span>
+<h3><a href='[(#SELF|parametre_url{id_message,#ID_MESSAGE})]' onclick="lit_message(#ID_MESSAGE,'#URL_ACTION_AUTEUR{liremessage,#ID_MESSAGE}');return false;">#TITRE</a></h3>
+<span class='intro'>[(#TEXTE|couper{80}|PtoBR)]</span>
+<div class='texte'>#TEXTE</div>
+</div></li>
+</BOUCLE_recus>
+</ul>
+</B_recus>

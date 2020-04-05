@@ -1,0 +1,32 @@
+<plugin>
+	<nom>Messagerie</nom>
+	<slogan>une messagerie interne</slogan>
+	<auteur>[Cedric MORIN->http://www.yterium.net]</auteur>
+	<licence>GPL - (c) 2008</licence>
+	<icon>habillage/messagerie-32.png</icon>
+	<version>2.0.1</version>
+	<version_base>1.0.0</version_base>
+	<etat>stable</etat>
+	<lien>https://contrib.spip.net/Messagerie-entre-membres</lien>
+	<description>
+	Gestion de la messagerie interne entre auteurs dans les squelettes publics.
+	</description>
+	<prefix>messagerie</prefix>
+	<install>base/messagerie_install.php</install>
+	<fonctions>messagerie_fonctions.php</fonctions>
+	<options>messagerie_options.php</options>
+	<pipeline>
+		<nom>messagerie_signer_message</nom>
+		<inclure>messagerie_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>messagerie_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>notifications</nom>
+		<inclure>messagerie_pipelines.php</inclure>
+	</pipeline>
+	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
+	<categorie>communication</categorie>
+</plugin>
