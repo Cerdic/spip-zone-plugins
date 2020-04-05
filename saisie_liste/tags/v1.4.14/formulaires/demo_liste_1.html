@@ -1,0 +1,23 @@
+<div class="formulaire_spip formulaire_demo_liste_1">
+
+  [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+  [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+  <form action='#ENV{action}' method='post'>
+    #ACTION_FORMULAIRE{#ENV{action}}
+
+    <ul>
+    [(#SAISIE{liste, liste_1,
+              label=Le menu du jour,
+              saisies=#ARRAY{0, #ARRAY{saisie, input,
+                                       label, Titre de l'élément,
+                                       nom, titre_element}}
+    })]
+    </ul>
+
+    <div class="boutons">
+      <input class="submit" type='submit' name='ok' value='Ok' />
+    </div>
+  </form>
+
+</div>

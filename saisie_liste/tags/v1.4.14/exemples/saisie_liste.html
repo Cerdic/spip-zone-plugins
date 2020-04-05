@@ -1,0 +1,42 @@
+<h1><:saisie_liste:titre_exemples:></h1>
+<ul>
+  <li><a class="ajax" href="[(#SELF|parametre_url{t, 1})]">
+      <:saisie_liste:titre_exemple_1:>
+  </a></li>
+  <li><a class="ajax" href="[(#SELF|parametre_url{t, 2})]">
+      <:saisie_liste:titre_exemple_2:>
+  </a></li>
+  <li><a class="ajax" href="[(#SELF|parametre_url{t, 3})]">
+      <:saisie_liste:titre_exemple_3:>
+  </a></li>
+</ul>
+
+[(#ENV{t}|=={1}|oui)
+  #FORMULAIRE_DEMO_LISTE_1
+]
+
+[(#ENV{t}|=={2}|oui)
+  [(#PLUGIN{yaml}|oui)
+    <div class="ajax">
+      #FORMULAIRE_DEMO_LISTE_2
+    </div>
+  ]
+  [(#PLUGIN{yaml}|non)
+    <div class="error">
+      <:saisie_liste:necessite_yaml:>
+    </div>
+  ]
+]
+
+[(#ENV{t}|=={3}|oui)
+  [(#PLUGIN{yaml}|oui)
+    <div class="ajax">
+      #FORMULAIRE_DEMO_LISTE_3
+    </div>
+  ]
+  [(#PLUGIN{yaml}|non)
+    <div class="error">
+      <:saisie_liste:necessite_yaml:>
+    </div>
+  ]
+]

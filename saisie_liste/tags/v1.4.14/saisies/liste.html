@@ -1,0 +1,106 @@
+<!--!inserer_saisie_editer-->
+<[(#ENV{saisies_base_conteneur,#DIV|sinon{li}})] class="editer editer_[(#ENV{nom}|saisie_nom2classe)][ (#ENV{obligatoire})][ (#ENV{erreurs}|oui)erreur][ (#ENV{conteneur_class,#ENV{li_class}})][ saisie_(#ENV{type_saisie})]"[ data-id="(#ENV{id_saisie})"][ data-afficher_si="(#ENV{afficher_si})"]>
+
+[<label for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ class="(#ENV{label_class})"]>
+  (#ENV*{label})
+  [<span class='obligatoire'>
+    (#ENV{obligatoire}|oui)[(#ENV*{info_obligatoire}|is_null|?{<:info_obligatoire_02:>,#ENV*{info_obligatoire}})]
+  </span>]
+</label>]
+
+
+[(#ENV{erreurs}|is_array|non)
+  [<span class='erreur_message'>(#ENV{erreurs})</span>]
+]
+
+[<p class="explication" id="[explication_(#ENV{nom}|saisie_nom2name)]">
+  (#ENV*{explication})
+</p>]
+
+[<em class='attention'>(#ENV*{attention})</em>]
+
+<fieldset>
+  [<legend>(#ENV{legende})</legend>]
+
+  <input type="hidden" name="#ENV{nom}\[permutations\]"
+         value="[(#ENV{valeur}|count|enumerer|joindre{','})]" />
+
+  <ul id="saisie-liste-#ENV{nom}" class="saisie-liste[ (#VAL{saisie_liste-#ENV{nom}-ajouter}|_request|oui)ajouter]">
+    <BOUCLE_liste(DATA) {enum #ENV{interdire_ajout}|?{1,0}, #ENV{valeur}|count}>
+      #SET{compteur_objets, #COMPTEUR_BOUCLE|moins{1}}
+      <li>
+        <fieldset class="table">
+
+        [(#ENV{ordre_fixe}|non)
+          <div class="boutons-bouger td">
+            [(#COMPTEUR_BOUCLE|=={1}|non)
+              <input type="submit"
+                     name="#ENV{nom}\[action\]\[monter-#GET{compteur_objets}\]"
+                     value="<:saisie_liste:bouton_monter:>"
+                     class="bouton-monter" />
+            ]
+            [(#COMPTEUR_BOUCLE|!=={#TOTAL_BOUCLE}|oui)
+              <input type="submit"
+                     name="#ENV{nom}\[action\]\[descendre-#GET{compteur_objets}\]"
+                     value="<:saisie_liste:bouton_descendre:>"
+                     class="bouton-descendre" />
+            ]
+          </div>
+        ]
+
+        <div class="objet td">
+          <div class="liste-saisies">
+            <BOUCLE_saisies_objet(DATA)
+               {source table, #ENV{saisies}|fusionner_options_saisies{
+                 #ENV{#ENV{nom}_options_saisies}|table_valeur{#GET{compteur_objets}}}}>
+
+              #SET{saisie, #VALEUR}
+
+              [(#SET{saisie, #GET{saisie}|preparer_tableau_saisie})]
+
+              [(#REM) charger les valeurs. ]
+              [(#SET{saisie, #GET{saisie}|charger_valeurs{#ENV{valeur}, #GET{compteur_objets}}})]
+
+              [(#REM) on renomme les saisies pour les grouper par objet. ]
+              [(#SET{saisie, #GET{saisie}|renommer_saisies{#GET{compteur_objets}, #ENV{nom}}})]
+
+              [(#GENERER_SAISIES{#ARRAY{0,#GET{saisie}}})]
+
+            </BOUCLE_saisies_objet>
+          </div>
+        </div>
+
+        [(#ENV{cacher_supprimer}|non)
+          <div class="bouton-supprimer td">
+            <input type="submit"
+                   name="#ENV{nom}\[action\]\[supprimer-#GET{compteur_objets}\]"
+                   title="[(#ENV{texte_bouton_supprimer, <:saisie_liste:bouton_supprimer:>})]"
+                   value="[(#ENV{texte_bouton_supprimer, <:saisie_liste:bouton_supprimer:>})]" />
+          </div>
+        ]
+      </fieldset></li>
+    </BOUCLE_liste>
+  </ul>
+
+  [(#ENV{interdire_ajout}|non)
+    <input type="submit" name="#ENV{nom}\[action\]\[ajouter\]" value="[(#ENV{texte_bouton_ajouter, <:saisie_liste:bouton_ajouter:>})]" />
+  ]
+
+</fieldset>
+
+[(#ENV{disable_avec_post}|et{#ENV{disable_avec_post}|!={non}}|oui)<input type='hidden' name='[(#ENV{nom}|saisie_nom2name)]' value="#ENV{valeur,#ENV{defaut}}" />]
+
+#ENV**{inserer_fin}
+</[(#ENV{saisies_base_conteneur,#DIV|sinon{li}})]>
+
+<script type="text/javascript">
+  [(#REM) s'il y a un fichier javascript/saisie_NOM_DE_LA_SAISIE, on le
+          prend. ]
+  [(#CHEMIN{javascript/saisie_#ENV{nom}.js.html}|oui)
+    #INCLURE{fond=javascript/saisie_#ENV{nom}.js, nom=#ENV{nom}, env}
+  ]
+  [(#REM) sinon on prend le squelette par défaut.]
+  [(#CHEMIN{javascript/saisie_#ENV{nom}.js.html}|non)
+    #INCLURE{fond=javascript/saisie_liste.js, nom=#ENV{nom}, env}
+  ]
+</script>

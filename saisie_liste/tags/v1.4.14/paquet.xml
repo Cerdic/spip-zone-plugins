@@ -1,0 +1,26 @@
+<paquet
+	prefix="saisie_liste"
+	categorie="outil"
+	version="1.4.14"
+	etat="stable"
+	compatibilite="[3.0.10;3.2.*]"
+	logo="images/logo_saisie_liste_48.png"
+	documentation="https://zone.spip.org/trac/spip-zone/browser/_plugins_/saisie_liste/trunk/README.md"
+	demonstration="?exec=exemples_saisie_liste"
+>
+
+	<nom>Saisie liste</nom>
+
+	<auteur>Michel Bystranowski</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="jqueryui_plugins" inclure="saisie_liste_pipelines.php" />
+	<pipeline nom="insert_head" inclure="saisie_liste_pipelines.php" />
+	<pipeline nom="header_prive" inclure="saisie_liste_pipelines.php" />
+	<pipeline nom="saisies_autonomes" inclure="saisie_liste_pipelines.php" />
+
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
+	<utilise nom="yaml" compatibilite="[1.5.1;[" />
+
+</paquet>

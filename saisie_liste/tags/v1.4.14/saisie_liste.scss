@@ -1,0 +1,127 @@
+/* classes de positionnement */
+.table {
+  display: table;
+}
+.td {
+  display: table-cell;
+  width: 100%;
+  vertical-align: top;
+}
+
+/* premier niveau de li */
+li.saisie_liste,
+.formulaire_spip div.saisie_liste {
+  padding: 0;
+  margin: 5px;
+  &.erreur {
+    background-color: inherit;
+  }
+  & > label {
+    display: inline-block;
+    padding: 6px 0 0;
+    width: 100%;
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+  label {
+    float: none;
+    margin-left: 0;
+  }
+  & > fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.saisie-liste {
+  border: none;
+  .objet {
+    vertical-align: middle;
+    text-align: center;
+  }
+  .liste-saisies {
+    margin: 0;
+    padding: 0;
+    &> li,
+	  &> div {
+      padding: 5px;
+      text-align: left;
+    }
+    & p {
+      margin-bottom: 0;
+    }
+  }
+  fieldset {
+    border: none;
+    .legend {
+      margin-left: -8px;
+      margin-right: 0;
+    }
+  }
+  &> li,
+  &> div {
+    padding: 3px;
+  }
+}
+
+/* blocs */
+.saisie-liste > li,
+.saisie-liste > div {
+  border: 2px solid #E4E4E4;
+  border-radius: 4px;
+  background-color: #F2F2F2;
+  margin: 5px 0 12px;
+}
+
+/* effets pour jqueryui.sortable */
+.saisie-liste.ui-sortable > li,
+.saisie-liste.ui-sortable > div {
+  cursor: move;
+  &:hover {
+    background-color: #EBE7E7;
+    background-color: rgba(232, 232, 232, 0.69);
+  }
+}
+
+/* Boutons */
+@mixin bouton {
+  border: none;
+  text-indent: -99999px;
+  cursor: pointer;
+  border-radius: 4px;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  &:hover, &:focus {
+    box-shadow: 0px 0px 3px rgba(129, 129, 129, 0.46) inset;
+  }
+}
+
+.boutons-bouger {
+  vertical-align: middle;
+  width: 40px;
+  padding-right: 5px;
+  input {
+    @include bouton;
+    padding: 0;
+    width: 29px;
+    height: 30px;
+    background-position: 3px 4px;
+    margin: 0;
+    &.bouton-monter {
+      background-image: url('images/up-icon-24x24.png');
+    }
+    &.bouton-descendre {
+      background-image: url('images/down-icon-24x24.png');
+    }
+  }
+}
+
+.bouton-supprimer input {
+  @include bouton;
+  background-image: url('images/delete-icon.png');
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  margin-left: 4px;
+}

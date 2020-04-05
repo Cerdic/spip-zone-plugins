@@ -1,0 +1,114 @@
+/* classes de positionnement */
+.table {
+  display: table; }
+
+.td {
+  display: table-cell;
+  width: 100%;
+  vertical-align: top; }
+
+/* premier niveau de li */
+li.saisie_liste,
+.formulaire_spip div.saisie_liste {
+  padding: 0;
+  margin: 5px; }
+  li.saisie_liste.erreur,
+  .formulaire_spip div.saisie_liste.erreur {
+    background-color: inherit; }
+  li.saisie_liste > label,
+  .formulaire_spip div.saisie_liste > label {
+    display: inline-block;
+    padding: 6px 0 0;
+    width: 100%;
+    font-size: 1.1em;
+    font-weight: bold; }
+  li.saisie_liste label,
+  .formulaire_spip div.saisie_liste label {
+    float: none;
+    margin-left: 0; }
+  li.saisie_liste > fieldset,
+  .formulaire_spip div.saisie_liste > fieldset {
+    border: none;
+    padding: 0;
+    margin: 0; }
+
+.saisie-liste {
+  border: none; }
+  .saisie-liste .objet {
+    vertical-align: middle;
+    text-align: center; }
+  .saisie-liste .liste-saisies {
+    margin: 0;
+    padding: 0; }
+    .saisie-liste .liste-saisies > li,
+    .saisie-liste .liste-saisies > div {
+      padding: 5px;
+      text-align: left; }
+    .saisie-liste .liste-saisies p {
+      margin-bottom: 0; }
+  .saisie-liste fieldset {
+    border: none; }
+    .saisie-liste fieldset .legend {
+      margin-left: -8px;
+      margin-right: 0; }
+  .saisie-liste > li,
+  .saisie-liste > div {
+    padding: 3px; }
+
+/* blocs */
+.saisie-liste > li,
+.saisie-liste > div {
+  border: 2px solid #E4E4E4;
+  border-radius: 4px;
+  background-color: #F2F2F2;
+  margin: 5px 0 12px; }
+
+/* effets pour jqueryui.sortable */
+.saisie-liste.ui-sortable > li,
+.saisie-liste.ui-sortable > div {
+  cursor: move; }
+  .saisie-liste.ui-sortable > li:hover,
+  .saisie-liste.ui-sortable > div:hover {
+    background-color: #EBE7E7;
+    background-color: rgba(232, 232, 232, 0.69); }
+
+/* Boutons */
+.boutons-bouger {
+  vertical-align: middle;
+  width: 40px;
+  padding-right: 5px; }
+  .boutons-bouger input {
+    border: none;
+    text-indent: -99999px;
+    cursor: pointer;
+    border-radius: 4px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    padding: 0;
+    width: 29px;
+    height: 30px;
+    background-position: 3px 4px;
+    margin: 0; }
+    .boutons-bouger input:hover, .boutons-bouger input:focus {
+      box-shadow: 0px 0px 3px rgba(129, 129, 129, 0.46) inset; }
+    .boutons-bouger input.bouton-monter {
+      background-image: url("images/up-icon-24x24.png"); }
+    .boutons-bouger input.bouton-descendre {
+      background-image: url("images/down-icon-24x24.png"); }
+
+.bouton-supprimer input {
+  border: none;
+  text-indent: -99999px;
+  cursor: pointer;
+  border-radius: 4px;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-image: url("images/delete-icon.png");
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  margin-left: 4px; }
+  .bouton-supprimer input:hover, .bouton-supprimer input:focus {
+    box-shadow: 0px 0px 3px rgba(129, 129, 129, 0.46) inset; }
+
+/*# sourceMappingURL=saisie_liste.css.map */
