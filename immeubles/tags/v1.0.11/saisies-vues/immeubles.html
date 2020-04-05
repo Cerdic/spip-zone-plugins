@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_immeubles_selectionnes>
+	<ul>
+	<BOUCLE_immeubles_selectionnes(IMMEUBLES){id_immeuble IN #GET*{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+		<li class="choix">#TITRE (#ID_IMMEUBLE)</li>
+	</BOUCLE_immeubles_selectionnes>
+	</ul>
+	</B_immeubles_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_immeubles_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_immeuble_selectionne(IMMEUBLES){id_immeuble=#ENV{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+	  	<p>#TITRE (#ID_IMMEUBLE)</p>
+	</BOUCLE_immeuble_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_immeuble_selectionne>
+<//B_test_multiple>

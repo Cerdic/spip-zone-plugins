@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+<h1><:immeubles:immeubles_titre:></h1>
+<INCLURE{fond=prive/objets/liste/immeubles, env, ajax, sinon=<:immeuble:info_aucun_immeuble:>}>
+
+[(#AUTORISER{creer,immeuble})
+	[(#URL_ECRIRE{immeuble_edit,new=oui}|icone_verticale{<:immeuble:icone_creer_immeuble:>,immeuble,new,right})]
+]

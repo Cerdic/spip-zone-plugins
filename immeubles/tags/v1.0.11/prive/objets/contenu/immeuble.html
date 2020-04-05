@@ -1,0 +1,17 @@
+<BOUCLE_immeuble(IMMEUBLES){id_immeuble}{statut?}>
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:ecrire:info_titre:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{titre} titre">(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<label><:ecrire:info_descriptif:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{descriptif} descriptif">(#DESCRIPTIF)</span>
+</div>]
+
+[<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+	<label><:ecrire:info_texte:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{texte} descriptif">(#TEXTE)</span>
+</div>]
+
+</BOUCLE_immeuble>

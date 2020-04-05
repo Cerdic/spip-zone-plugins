@@ -1,0 +1,56 @@
+[(#AUTORISER{voir,immeuble,#ID_IMMEUBLE}|sinon_interdire_acces)]
+[(#SET{url_voir,#VAL{immeuble}|objet_info{url_voir}})]
+[(#SET{url_edit,#VAL{immeuble}|objet_info{url_edit}})]
+<BOUCLE_immeuble(IMMEUBLES){id_immeuble}{statut==.*}{si #ENV{exec}|=={#GET{url_voir}}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,immeuble,#ID_IMMEUBLE})
+		[(#ID_IMMEUBLE|afficher_qui_edite{immeuble}|non)
+			[(#URL_ECRIRE{#GET{url_edit},id_immeuble=#ID_IMMEUBLE}|icone_verticale{<:immeuble:icone_modifier_immeuble:>,immeuble,edit,right ajax preload})]
+		]
+		[(#ID_IMMEUBLE|afficher_qui_edite{immeuble}|oui)
+			[(#URL_ECRIRE{#GET{url_edit},id_immeuble=#ID_IMMEUBLE}|icone_verticale{#ID_IMMEUBLE|afficher_qui_edite{immeuble},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{immeuble-24.png}|balise_img{immeuble,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{immeuble,#ID_IMMEUBLE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/immeuble,id=#ID_IMMEUBLE,id_immeuble=#ID_IMMEUBLE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,immeuble,#ID_IMMEUBLE})
+	[(#ID_IMMEUBLE|afficher_qui_edite{immeuble}|non)
+		[(#URL_ECRIRE{#GET{url_edit},id_immeuble=#ID_IMMEUBLE}|icone_verticale{<:immeuble:icone_modifier_immeuble:>,immeuble,edit,right ajax preload})]
+	]
+	[(#ID_IMMEUBLE|afficher_qui_edite{immeuble}|oui)
+		[(#URL_ECRIRE{#GET{url_edit},id_immeuble=#ID_IMMEUBLE}|icone_verticale{#ID_IMMEUBLE|afficher_qui_edite{immeuble},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,immeuble,id,#ID_IMMEUBLE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+
+#SET{enfants,''}
+[(#VAL{prive/objets/contenu/immeuble-enfants}|trouver_fond|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/immeuble-enfants,id_immeuble,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,immeuble,id_immeuble,#ID_IMMEUBLE,objet,immeuble,id_objet,#ID_IMMEUBLE},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_immeuble>
+[(#ENV**{exec}|=={#GET{url_edit}}|?{#INCLURE{fond=prive/squelettes/contenu/#GET{url_edit},redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_immeuble>
