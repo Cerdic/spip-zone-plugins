@@ -1,0 +1,48 @@
+<plugin>
+	<nom>Balise &#035;POPUP</nom>
+	<slogan>Gestion d'une fen&#234;tre popup unique</slogan>
+	<auteur>[Piero Wbmstr->https://contrib.spip.net/PieroWbmstr]</auteur>
+	<version>1.31.1</version>
+	<licence>&#169; 2010-2011 GPL</licence>
+	<icon>images/popup-128.png</icon>
+	<etat>stable</etat>
+	<lien>https://contrib.spip.net/?article3573</lien>
+	<description>
+Ce plugin permet de g&#233;rer d'une fen&#234;tre popup ({fen&#234;tre externe}) unique sous forme de squelette SPIP et aux dimensions r&#233;glables pour diff&#233;rents usages.
+
+-* {{Utilisation dans un squelette :}}<code><a href="#POPUP{objet SPIP,squelette,width,height,titre,options}">texte du lien</a></code>
+-* {{Utilisation dans un article :}}<code>
+<popup
+	|texte=le texte du lien (necessaire)
+	|lien=objet SPIP pour le lien (necessaire)
+	|skel=squelette (option)
+	|width=XX (option)
+	|height=XX (option)
+	|titre=mon titre (option)
+	|options=liste d'options (option - type 'variable:valeur,...')
+>
+</code>
+
+{{Attention}} : Le squelette livr&#233; avec le plugin n'est pas compatible avec SPIP 1.9.
+	</description>
+	<options>spipopup_options.php</options>
+	<options>spipopup_fonctions.php</options>
+	<traduire gestionnaire="salvatore" module="spipopup" reference="fr" />
+	<prefix>spipopup</prefix>
+	<chemin dir='' />
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>spipopup_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>porte_plume_barre_pre_charger</nom>
+		<inclure>spipopup_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>porte_plume_lien_classe_vers_icone</nom>
+		<inclure>spipopup_pipelines.php</inclure>
+	</pipeline>
+	<necessite id='SPIP' version='[1.9.2;2.1.99]' />
+	<necessite id="porte_plume" version="[1.2.2;]" />
+	<categorie>multimedia</categorie>
+</plugin>
