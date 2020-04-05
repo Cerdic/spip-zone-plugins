@@ -1,0 +1,29 @@
+[(#REM)
+	Affiche éventuellement un message d'avertissement, uniquement dans l'espace prive
+	- si l'album n'est pas publié
+	- s'il s'agit d'un diaporama ou autre, message indiquant que le script est désactivé
+	Paramètres :
+	id_album		requis
+	js = xxx		pour afficher le message concernant la désactivation du js
+][(#REM)
+	inclus dans /modeles/albums.html
+	inclus dans /modeles/albums_liste.html
+	+ éventuellement dans les modèles 'album' des plugins tiers
+]
+
+#SET{non_publie, #INFO_STATUT{album,#ID_ALBUM}|!={publie}|?{oui,''}}
+
+[(#GET{non_publie}|oui)
+	<ins><:album:info_statut_modele:></ins>
+	[(#AUTORISER{modifier,album,#ID_ALBUM}|oui)
+		[(#BOUTON_ACTION{
+			[(#CHEMIN_IMAGE{puce-publier-8.png}|balise_img)&nbsp;<:album:info_publier:>],
+			#URL_ACTION_AUTEUR{instituer_album,publie-#ID_ALBUM,#SELF},
+			'ajax album publier'}
+		)]
+	]
+]
+
+[(#ENV{js}|oui)
+	<ins><:album:info_js_prive:></ins>
+]

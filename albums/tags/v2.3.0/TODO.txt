@@ -1,0 +1,25 @@
+===========
+v 2.2 / 2.3
+===========
+
+- Modèles
+  reprendre les fonctionnement de la v1 qui surcharge le portfolio pour y inclure les albums ?
+
+- Pipeline affiche_gauche (édition d'un objet)
+  Afficher le liste des albums un peu a la façon du plugin 'médias', avec une touche du plugin 'insérer modèles'.
+    -> Pouvoir créer ou associer un album
+    -> générer les balises en fonction des variantes de modèles dispo, et insertion dans le texte automatique ou au double clic
+  
+- Fichiers surchargés du plugin medias :
+  Plusieurs fichiers sont surchargés à cause de pb javascripts, à terme il faudrait s'en passer.
+
+	* prive/squelettes/inclure/portfolio-documents (Modif incluse à partir de SPIP 3.06)
+		pb javascript quand plusieurs portfolios sont affichés en même temps.
+		Ajout d'un id unique aux blocs #portfolios, #illustrations, #documents et #portfolio
+
+	* formulaires/inc-upload_documents.html
+		pb javascript quand plusieurs formulaires sont affichés en même temps
+		Ajout d'un id unique au bloc #defautsubmit_xxx
+
+- Pipeline complement_objet (fiche d'un objet)
+  Bouton pour deplacer tous les documents du portfolio vers un album, et inversement

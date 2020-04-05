@@ -1,0 +1,47 @@
+[(#REM) 
+
+  Parametres supplementaire :
+  - defaut : valeur par defaut du parametre
+  - class : classe(s) css ajoutes a l'input
+  - size : taille du champ
+  - maxlength : nombre de caracteres maximum
+  - disable : champ insaisissable ? 'oui' (defaut : '')
+  - media : pour restreindre la modalboxe a un type de media particulier
+  - extension : pour restreindre a un type de fichier
+  - defaut : valeur par defaut si pas présente dans l'environnement
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+  
+  Note : dans les options, il faut definir 'env' a 'oui' pour que le selecteur puisse recuperer id_article, id_rubrique ou id_breve.
+  Note 2 : si on appelle le selecteur depuis une modalbox, il faut alors lui passer _modalbox_retour qui correspond a l'url de retour
+  apres selection du document. L'id du document sera alors passe par URL.
+]
+
+#SET{mod_fn, #ENV{_modalbox_retour}|?{'2','1'}}
+
+<label for="champ_[(#ENV{nom}|saisie_nom2classe)]"><:album:label_modele_identifiant:></label>
+
+<input type="text" name="#ENV{nom}" class="text[ (#ENV{class})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ value="(#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}})"][ size="(#ENV{size,4})"][ maxlength="(#ENV{maxlength})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][(#ENV{obligatoire}|et{#HTML5}|oui) required="required" ]style="width:auto; display:inline-block;" />
+
+<input class='submit' type="submit" name="parcourir" value="<:album:label_modele_parcourir_albums:>" style="display:inline-block;"
+	onclick="jQuery.modalboxload(
+		'[(#URL_ECRIRE{popin-choisir_album,var_zajax=contenu&selectfunc=mediaselect#GET{mod_fn}_#ENV{nom}&liste=selecteur&actions=choisir&colonnes=id-logo-titre-descriptif-contenu[&contenu=(#ENV{contenu})]})]',
+		{autoResize: true}
+	);"
+/>
+
+[(#ENV{_modalbox_retour}|non)
+<script type="text/javascript">
+	function mediaselect1_#ENV{nom}(id){
+		jQuery.modalboxclose();
+		jQuery("#champ_#ENV{nom}").attr('value',id).focus();
+	};
+</script>
+]
+
+[(#ENV{_modalbox_retour}|oui)
+<script type="text/javascript">
+	function mediaselect2_#ENV{nom}(id){
+		jQuery.modalboxload('#ENV**{_modalbox_retour}&#ENV{nom}='+id);
+	};
+</script>
+]

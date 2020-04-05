@@ -1,0 +1,280 @@
+[(#REM)<style>]
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,c5e41c}}
+#SET{foncee,##ENV{couleur_foncee,9dba00}}
+
+
+
+/*==============================
+  === BOITE COMPLEMENT OBJET ===
+  ==============================*/
+
+.albums 			{ position: relative; }
+
+/*= TITRE =*/
+.albums > h3			{
+				margin: 0 0 10px; padding: 2px 10px;
+				background-color: #GET{claire};
+				}
+
+/*= ONGLETS + ENTETE + FORMULAIRES =*/
+.albums .entete_ajouter,
+  .albums #associer,
+  .albums .onglets strong.on	{ border:1px solid #GET{foncee}; }
+
+/*= ONGLETS =*/
+.albums .onglets		{
+				display: table; width: 100%; margin-top: 10px;
+				font-weight: bold;
+				}
+.albums .onglets a,
+  .albums .onglets strong	{
+				display: table-cell; padding:.2em .8em;
+				background-color: #fff; border: 1px solid #dfdfdf; border-left: none; border-bottom: 1px solid #GET{foncee};
+				font-size: .92em; text-align: center; text-transform: uppercase;
+				}
+.albums .onglets > *:first-child{ border-left: 1px solid #dfdfdf; }
+.albums .onglets a:hover	{
+				background-color: rgba(0,0,0,.04); 
+				text-decoration: none;
+				}
+.albums .onglets strong.on	{ background-color: #GET{foncee}; border-bottom: none; }
+.albums .onglets .fermer 	{ width: 1px; padding: 0 .3em; }
+.albums .onglets .fermer img	{ vertical-align: middle; }
+
+/*= ENTETE =*/
+.albums .entete_ajouter		{
+				padding: 1em .5em;
+				background-color: #GET{foncee}; border-top: none;
+				}
+.albums .entete_ajouter h4	{
+				display: inline; margin: 0;
+				font-size: 1.3em; font-weight: normal; color: #fff;
+				}
+.albums .entete_ajouter img	{ vertical-align:bottom; }
+
+/*= FORMULAIRE ASSOCIER =*/
+.albums #associer		{ background-color: #fff; border-color: #aaa; border-top: none; }
+.albums #associer .entete	{
+				padding:.4em;
+				border-top: none; border-bottom: none;
+				}
+.albums #associer .formulaire_recherche,
+  .albums #associer .filtres	{margin: 0;}
+
+/*= FORMULAIRE CREER =*/
+.albums #creer .formulaire_editer{
+				margin-top:0;
+				border-top:none;
+				}
+
+
+/*==============
+  === LISTES ===
+  ==============*/
+
+/*==================
+  = LISTE : TOUTES =
+  ==================*/
+.albums .entete h2		{ display: inline; }
+.albums .liste-objets,
+  .albums .liste		{ margin: 0; border-width: 0; }
+.album .header			{ margin: 0; }
+.albums td,
+  .album td			{ vertical-align: top; }
+.album td img			{ vertical-align: middle; }
+.album td.logo			{ width: 1px; }
+.album .titre h4		{ margin: 0; }
+.album .descriptif p		{ margin: 0; }
+.album .infos			{ color: #888; }
+.album td.actions		{ text-align: right; }
+.album td.actions .submit	{ line-height: 0; }
+.album .pagination 		{ background-color: transparent; border: 0 none; }
+
+
+/*======================
+  = LISTE ALBUMOTHEQUE =
+  ======================*/
+.albumotheque .album.premier	{ margin-top: 10px; }
+.albums.albumotheque .album .inner { background-color: #fff; }
+.albumotheque .album .header	{ padding: .5em; }
+.albumotheque .album .header > div { max-width: 40%; }
+
+
+/*==============
+  = LISTE LIES =
+  ==============*/
+/* conteneurs */
+.albums .album			{ margin: 0 0 10px;}
+.albums .album .bd,
+  .albums .album .hd		{ padding: 0;}
+.albums .album .inner		{ border: 1px solid #e5e5e5; background-color: transparent; }
+.album.actif .inner		{ border-color: #GET{claire}; }
+.album.actif .bd		{ padding-left: 10px; padding-right: 10px; }
+.albums .album .inner:hover	{ background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
+/* header */
+.album .header,
+  .album .footer 		{padding: .2em;}
+.album .header > div 		{
+				display: inline-block; max-width: 80%; margin-#ENV{right}: 1em;
+				vertical-align: top;
+				}
+.album .header .infos 		{ float: #ENV{right}; }
+/* footer */
+.album .act			{
+				padding-bottom: 0; padding-top: 0;
+				border: none; background-color: transparent;
+				}
+/* documents : apercu */
+.album .liste_docs		{
+				padding: .5em; margin: 0;
+				border-top: 1px dotted #ccc; border-top-color: rgba(0,0,0,.1);
+				line-height: 0; /* supprime l'espace apres les images */
+				}
+.album .doc,
+  .placeholder-album		{ 
+				display: inline-block; position: relative; margin: 0 .5em .5em 0;
+				text-align: center;
+				}
+.album .doc.item		{ vertical-align: top; } /* document du portfolio dans album */
+.album .doc figure 		{ margin: 0; }
+.album .doc a 			{ display: block; }
+.album .doc a img 		{ vertical-align: middle; }
+.album .doc figcaption 		{ 
+				margin-top: .25em;
+				font-size: x-small; color: #888; line-height: 1;
+				}
+.placeholder-album		{ background-color:#GET{claire}; box-shadow:-1px 1px 1px #GET{foncee};}
+/* boutons */
+.album .bouton_fermer		{ margin: 10px 0; }
+.album .actions,
+  .album .actions button	{ font-size: x-small; text-align: #ENV{right};}
+.album .actions a		{ /*font-weight: bold;*/ }
+.album .actions img		{ vertical-align: middle; }
+.album .reveal			{ opacity: .1; }
+.album .inner:hover .reveal	{ opacity: 1; visibility: visible; }
+/* bouton retirer */
+.album .doc .retirer,
+  .album .doc .retirer button	{ width: 16px; height: 16px;}
+.album .doc .retirer		{
+				position: absolute; #ENV{right}: 0; top: 0; display: none; opacity: .65;
+				line-height: 0;
+				background: url('[(#CHEMIN_IMAGE{del-24.png})]') no-repeat bottom right transparent; border: 0;
+				}
+.album .doc:hover .retirer	{ display: block;}
+.album .retirer:hover		{ opacity: 1; visibility: visible; }
+.album .doc .retirer button.submit,
+  .album .doc .retirer button.submit:hover{border: 0;}
+#portfolios .doc .retirer	{ display:none; } /* quand doc d'un album deplace dans portfolios */
+/* formulaires */
+.album .formulaire_joindre_document { margin: 0 0 10px; }
+.album .formulaire_editer_album { margin-top: 0; }
+
+/* DRAG DROP */
+.formulaire_albums_deplacer_documents .fermer { float: #ENV{right}; cursor: pointer; }
+.cible-album			{ outline: 2px dashed #GET{foncee}; }
+.album .doc.drag:hover .retirer	{display: none;} /* cacher bouton retirer pendant deplacement */
+/* placeholder quand portfolio vide */
+.liste_items.placeholder	{ margin-bottom: 0; border-top: 0 none; }
+#portfolios.cible-album .liste_items { padding-top: 1em; padding-bottom: 1em; }
+
+
+/*==================
+  = LISTE ASSOCIER =
+  ==================*/
+.albums .associer .actions	{ width: 6em; }
+.albums .associer .actions img	{ vertical-align: middle; }
+.albums .associer .contenu	{ width: 8em; }
+.albums .associer .logo		{ width: 1px; } /* pour avoir taille minimale */
+
+
+/*===================
+  = LISTE SELECTEUR =
+  ===================*/
+
+.albums .entete.selecteur h2	{ font-size: 1em; }
+.albums .liste-objets.selecteur	{ font-size: .9em; }
+.albums .selecteur td.id	{ width: auto; }
+.albums .selecteur td.actions	{ display: table-cell; width: auto; }
+.albums .selecteur td.actions input[type=radio]	{ margin: 0; }
+
+
+/*===============
+  === ONGLETS ===
+  ===============*/
+
+.albums .onglets_simple .parents li:first-child {margin-#ENV{left}: 2.5em;}
+.albums .onglets_simple img	{ margin-right: 0.3em; vertical-align: middle; }
+.albums .onglets_simple.filtres a {padding-left: .2em; padding-right: .2em;}
+.albums .onglets_simple.filtres strong {padding-left: .5em; padding-right: .5em;}
+.albums .onglets_simple.filtres a,
+  .albums .onglets_simple.filtres a:hover { border-color: transparent; background-color: transparent; }
+
+
+/*============================ 
+  === BOITE COLONNE GAUCHE === 
+  ============================*/
+.lat .albums .menu .item	{ padding: .3em 0; }
+.lat .albums .menu .item img	{ vertical-align: middle; }
+.lat .albums .menu .item a	{ display: block; }
+.lat .albums .album		{ margin: 0; }
+.lat .album .inner		{ border: 0; }
+.lat .album .liste_docs		{ padding: 0; border-top: 0; text-align: center;}
+.lat .album .formulaire_joindre_document {margin: 0;}
+.lat .album .actions,
+  .lat .album .actions button	{ font-size: 1em; }
+
+/* */
+.album .raccourcis		{ padding: 0; }
+.album .raccourcis .toggle	{
+				display: block; margin: .6em 0;
+				font-weight: bold;
+				}
+.album .raccourcis .toggle.on	{
+				margin-bottom: 0;
+				background-color: #GET{foncee};
+				color: #333;
+				}
+.album .raccourcis .formulaire_spip {
+				margin-top: 0;
+				background: transparent;
+				}
+.album .raccourcis .formulaire_spip li { text-align: left; }
+
+
+/*==============
+  === DIVERS ===
+  ==============*/
+/* logo */
+.album.logo			{ margin: 0 auto; }
+/* bouton action */
+.albums button:hover,
+  .albums button:hover		{ cursor:pointer; }
+.actions .supprimer.off		{ margin-right: .25em; }
+
+
+/*==============
+  === MODELE ===
+  ==============*/
+.album ul 			{ margin: 0; }
+.album.liste h2			{ margin-bottom: 1em; }
+.album.vignettes li		{ display: inline-block; margin: 0 10px 10px 0; }
+.album.vignettes li .spip_logos	{ float: none; margin: 0; }
+.album tr td:nth-child(2)	{ padding-left: 1em }
+/* styles pour que le label ne dépasse pas */
+.album.vignettes figure,
+  .album.vignettes .figure	{ display: table; width: 1px; text-align: center; }
+.album.vignettes figcaption,
+  .album.vignettes .figcaption,
+  .album.vignettes img 		{ display: table-row; }
+
+/* notice espace privé */
+.album.publier			{ opacity:.3 }
+.album.publier:hover 		{ opacity: 1 }
+.album.publier .submit		{
+				padding: 0;
+				font-size: .8em;
+				}
+.album.publier .submit:hover	{ cursor: pointer; }

@@ -1,0 +1,45 @@
+nom: <:album:titre_inserer_modele_album:>
+logo: 'prive/themes/spip/images/album-24.png'
+icone_barre: 'album.png'
+parametres:
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'modele'
+      defaut: 'album'
+  -
+    saisie: 'selection_album'
+    options:
+      nom: 'id_modele'
+      env: 'oui'
+      label: <:album:label_modele_identifiant:>
+      defaut: ' '
+    verifier:
+      type: 'entier'
+      options:
+        min: 1
+        #max: 9999
+  -
+    saisie: 'input'
+    options:
+      nom: 'titre'
+      label: <:album:label_modele_titre:>
+  -
+    saisie: 'selection_variante_album'
+    options:
+      nom: 'variante'
+      label: <:album:label_modele_variante:>
+      cacher_option_intro: 'oui'
+      defaut: ''
+  -
+    saisie: 'selection'
+    options:
+      nom: 'align'
+      label: <:album:label_modele_alignement:>
+      cacher_option_intro: 'oui'
+      defaut: ''
+      datas:
+        '': <:album:label_modele_alignement_defaut:>
+        left: <:album:label_modele_alignement_gauche:>
+        center: <:album:label_modele_alignement_centre:>
+        right: <:album:label_modele_alignement_droite:>

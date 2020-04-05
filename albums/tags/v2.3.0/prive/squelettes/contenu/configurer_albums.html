@@ -1,0 +1,27 @@
+[(#REM)
+	page de configuration des albums.
+]
+
+[(#AUTORISER{configurer,albums}|sinon_interdire_acces)]
+
+<h1 class="grostitre"><:album:titre_page_configurer_albums:></h1>
+
+#SET{onglet, #ENV{onglet,base}}
+<div class='onglets_simple clearfix'>
+	<ul>
+		[<li>(#SELF|parametre_url{onglet,base}|lien_ou_expose{<:album:onglet_configurer_base:>,#GET{onglet}|=={base},ajax})</li>]
+		[<li>(#SELF|parametre_url{onglet,outils}|lien_ou_expose{<:album:onglet_configurer_outils:>,#GET{onglet}|=={outils},ajax})</li>]
+	</ul>
+</div>
+
+[(#GET{onglet}|=={base}|oui)
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_ALBUMS
+</div>
+]
+
+[(#GET{onglet}|=={outils}|oui)
+<div class="ajax">
+	#FORMULAIRE_MIGRER_ALBUMS
+</div>
+]
