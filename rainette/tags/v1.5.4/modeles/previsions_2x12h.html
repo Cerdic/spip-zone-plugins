@@ -1,0 +1,155 @@
+[(#REM)<!-- 
+	Ce sous-modele est celui utilise par defaut par Rainette pour presenter les previsions d'un jour d'une ville
+	Il est appelee par le filtre rainette_croaaaaa_previsions
+ -->]
+<div class="rainette_previsions_2x12h">
+	<!-- Cellule de gauche: 
+		- si aujourd'hui alors donnees du matin si l'heure est < 14:00 ou du soir sinon
+		- si autre jour alors donnees du matin -->
+	[(#ENV{index}|=={0}|?{'',' '})
+		[(#SET{titre_gauche, <:rainette:jour:>})]
+		[(#SET{titre_droite, <:rainette:nuit:>})]
+		[(#SET{temp_gauche, <:rainette:temperature_max:>})]
+		[(#SET{temp_droite, <:rainette:temperature_min:>})]
+		[(#SET{soleil_gauche, <:rainette:lever_soleil:>})]
+		[(#SET{soleil_droite, <:rainette:coucher_soleil:>})]
+		[(#SET{code_icone, #ENV{code_icone_jour}})]
+		[(#SET{temperature, #ENV{temperature_jour}})]
+		[(#SET{vitesse_vent, #ENV{vitesse_vent_jour}})]
+		[(#SET{direction_vent, #ENV{direction_vent_jour}})]
+		[(#SET{humidite, #ENV{humidite_jour}})]
+		[(#SET{risque_precipitation, #ENV{risque_precipitation_jour}})]
+		[(#SET{soleil, #ENV{lever_soleil}})]
+	]
+	[(#ENV{index}|=={0}|?{' '})
+		[(#ENV{temperature_jour}|=={N/D}|?{'',' '})
+			[(#SET{titre_gauche, <:rainette:jour:>})]
+			[(#SET{titre_droite, <:rainette:nuit:>})]
+			[(#SET{temp_gauche, <:rainette:temperature_max:>})]
+			[(#SET{temp_droite, <:rainette:temperature_min:>})]
+			[(#SET{soleil_gauche, <:rainette:lever_soleil:>})]
+			[(#SET{soleil_droite, <:rainette:coucher_soleil:>})]
+			[(#SET{code_icone, #ENV{code_icone_jour}})]
+			[(#SET{temperature, #ENV{temperature_jour}})]
+			[(#SET{vitesse_vent, #ENV{vitesse_vent_jour}})]
+			[(#SET{direction_vent, #ENV{direction_vent_jour}})]
+			[(#SET{humidite, #ENV{humidite_jour}})]
+			[(#SET{risque_precipitation, #ENV{risque_precipitation_jour}})]
+			[(#SET{soleil, #ENV{lever_soleil}})]
+		]
+		[(#ENV{temperature_jour}|=={N/D}|?{' '})
+			[(#SET{titre_gauche, <:rainette:nuit:>})]
+			[(#SET{titre_droite, <:rainette:demain:>})]
+			[(#SET{temp_gauche, <:rainette:temperature_min:>})]
+			[(#SET{temp_droite, <:rainette:temperature_max:>})]
+			[(#SET{soleil_gauche, <:rainette:coucher_soleil:>})]
+			[(#SET{soleil_droite, <:rainette:lever_soleil:>})]
+			[(#SET{code_icone, #ENV{code_icone_nuit}})]
+			[(#SET{temperature, #ENV{temperature_nuit}})]
+			[(#SET{vitesse_vent, #ENV{vitesse_vent_nuit}})]
+			[(#SET{direction_vent, #ENV{direction_vent_nuit}})]
+			[(#SET{humidite, #ENV{humidite_nuit}})]
+			[(#SET{risque_precipitation, #ENV{risque_precipitation_nuit}})]
+			[(#SET{soleil, #ENV{coucher_soleil}})]
+		]
+	]
+	[<div class="entete">(#GET{titre_gauche}|ucfirst)</div>]
+	[<div class="entete">(#GET{titre_droite}|ucfirst)</div>]
+	<div class="cadre">
+		<div class="cellule">
+			<div class="contenu">
+				<div class="icone">[(#GET{code_icone}|rainette_icone_meteo{grand}|image_reduire{95})]</div>
+				<div class="t_reelle">
+					[(#GET{temp_gauche}|ucfirst)<br/>]
+					<span>[(#GET{temperature}|rainette_afficher_unite{temperature})]</span><br/>
+					[(#GET{code_icone}|rainette_resume_meteo)]
+				</div>
+				<div class="details">
+					<ul>
+						<li>
+							<span><:rainette:vent|ucfirst:></span>
+							[(#GET{vitesse_vent}|rainette_afficher_unite{vitesse})]
+							[ - (#GET{direction_vent}|rainette_afficher_direction)]
+						</li>
+						<li>
+							<span><:rainette:humidite|ucfirst:></span>
+							[(#GET{humidite}|rainette_afficher_unite{pourcentage})]
+						</li>
+						<li>
+							<span><:rainette:risque_precipitation|ucfirst:></span>
+							[(#GET{risque_precipitation}|rainette_afficher_unite{pourcentage})]
+						</li>
+						<li>
+							<span>[(#GET{soleil_gauche}|ucfirst)]</span>
+							[(#GET{soleil}|affdate{'H\hi'})]
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	[(#ENV{index}|=={0}|?{'',' '})
+		[(#SET{code_icone, #ENV{code_icone_nuit}})]
+		[(#SET{temperature, #ENV{temperature_nuit}})]
+		[(#SET{vitesse_vent, #ENV{vitesse_vent_nuit}})]
+		[(#SET{direction_vent, #ENV{direction_vent_nuit}})]
+		[(#SET{humidite, #ENV{humidite_nuit}})]
+		[(#SET{risque_precipitation, #ENV{risque_precipitation_nuit}})]
+		[(#SET{soleil, #ENV{coucher_soleil}})]
+	]
+	[(#ENV{index}|=={0}|?{' '})
+		[(#ENV{temperature_jour}|=={N/D}|?{'',' '})
+			[(#SET{code_icone, #ENV{code_icone_nuit}})]
+			[(#SET{temperature, #ENV{temperature_nuit}})]
+			[(#SET{vitesse_vent, #ENV{vitesse_vent_nuit}})]
+			[(#SET{direction_vent, #ENV{direction_vent_nuit}})]
+			[(#SET{humidite, #ENV{humidite_nuit}})]
+			[(#SET{risque_precipitation, #ENV{risque_precipitation_nuit}})]
+			[(#SET{soleil, #ENV{coucher_soleil}})]
+		]
+		[(#ENV{temperature_jour}|=={N/D}|?{' '})
+			[(#SET{code_icone, #ENV{code_icone_demain}})]
+			[(#SET{temperature, #ENV{temperature_demain}})]
+			[(#SET{vitesse_vent, #ENV{vitesse_vent_demain}})]
+			[(#SET{direction_vent, #ENV{direction_vent_demain}})]
+			[(#SET{humidite, #ENV{humidite_demain}})]
+			[(#SET{risque_precipitation, #ENV{risque_precipitation_demain}})]
+			[(#SET{soleil, #ENV{lever_soleil_demain}})]
+		]
+	]
+		<div class="cellule">
+			<div class="contenu">
+				<div class="icone">[(#GET{code_icone}|rainette_icone_meteo{grand}|image_reduire{95})]</div>
+				<div class="t_reelle">
+					[(#GET{temp_droite}|ucfirst)<br/>]
+					<span>[(#GET{temperature}|rainette_afficher_unite{temperature})]</span><br/>
+					[(#GET{code_icone}|rainette_resume_meteo)]
+				</div>
+				<div class="details">
+					<ul>
+						<li>
+							<span><:rainette:vent|ucfirst:></span>
+							[(#GET{vitesse_vent}|rainette_afficher_unite{vitesse})]
+							[ - (#GET{direction_vent}|rainette_afficher_direction)]
+						</li>
+						<li>
+							<span><:rainette:humidite|ucfirst:></span>
+							[(#GET{humidite}|rainette_afficher_unite{pourcentage})]
+						</li>
+						<li>
+							<span><:rainette:risque_precipitation|ucfirst:></span>
+							[(#GET{risque_precipitation}|rainette_afficher_unite{pourcentage})]
+						</li>
+						<li>
+							<span>[(#GET{soleil_droite}|ucfirst)]</span>
+							[(#GET{soleil}|affdate{'H\hi'})]
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="maj">
+		<:rainette:derniere_maj|ucfirst:>&nbsp;:
+		[&nbsp;(#ENV{derniere_maj}|nom_jour)][&nbsp;(#ENV{derniere_maj}|affdate_heure)]
+	</div>
+</div>

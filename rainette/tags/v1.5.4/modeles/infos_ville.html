@@ -1,0 +1,12 @@
+[(#REM)<!-- 
+	Ce sous-modele est celui utilise par defaut par Rainette pour presenter les conditions temps reel d'une ville
+	Il est appelee par le filtre rainette_croaaaaa_infos
+ -->
+]
+<div class="rainette_infos">
+	<h2 class="ville">[(#ENV{ville})]</h2>
+	<ul class="coordonnees">
+		<li><:rainette:longitude|ucfirst:>&nbsp;:[&nbsp;(#ENV{longitude}|rainette_afficher_unite{angle})]</li>
+		<li><:rainette:latitude|ucfirst:>&nbsp;:[&nbsp;(#ENV{latitude}|rainette_afficher_unite{angle})]</li>
+	</ul>
+</div>

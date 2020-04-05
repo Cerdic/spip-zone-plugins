@@ -1,0 +1,64 @@
+#CACHE{1800}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN"
+	"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xml:lang="#LANG" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=#CHARSET' />
+	<title>Rainette - Demo</title>
+[
+<link rel="stylesheet" href="#CHEMIN{agenda.css}" type="text/css" /> 
+<style type='text/css'>
+(#ENV{ville, FRXX0076}|rainette_croaaaaa_previsions_css)
+</style>]
+#INSERT_HEAD
+</head>
+<body style="color: #000000;font-family: Arial,Helvetica,sans-serif;font-size: 11px;margin: auto;width: 640px;">
+	<div style="float: left; margin-right: 20px;">
+		<img height="32" width="32" title="Plugin Rainette" alt="Plugin Rainette" src="#CHEMIN{rainette-64.png}"/>
+	</div>
+	<h1 style="margin-bottom: 20px; color: #798F74;">PLUGIN RAINETTE[ ((#PLUGIN{RAINETTE, version}))]</h1>
+	<p style="font-size: 12px;">Pour appeler la page de demo:</p>
+	<ul>
+		<li><strong>http://monsite/spip.php?page=demo/rainette</strong> (Paris par d&eacute;faut) ou</li>
+		<li><strong>http://monsite/spip.php?page=demo/rainette&amp;ville=FRXXnnnn</strong> pour pr&eacute;sicer la ville</li>
+	</ul>
+	<p style="font-size: 12px;">Pour chercher le code d'une ville composer l'url:</p>
+	<ul><li><strong>http://xoap.weather.com/search/search?where=nom_de_la_ville</strong></li></ul>
+	
+	<div id="#ENV{ville, FRXX0076}" style='margin-top:5em'>
+		<p id='rainette_infos' style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_infos</strong></p>
+		[(#MODELE{rainette_infos,code=#ENV{ville, FRXX0076},sous_modele=infos_ville})]
+		<br style='clear:both' /><br /><br />
+		<p style="font-size: 12px;">&gt;&gt;&nbsp;Utilisation de la balise <strong>RAINETTE_INFOS</strong></p>
+		<ul>
+			<li>Ville observ&eacute;e:&nbsp;<strong>#RAINETTE_INFOS{#ENV{ville, FRXX0076}, VILLE}</strong></li>
+ 			<li>Longitude, appel sans filtre unit&eacute;:&nbsp;[<strong>(#RAINETTE_INFOS{#ENV{ville, FRXX0076}, longitude})</strong>]</li>
+			<li>Latitude, appel avec filtre unit&eacute;:&nbsp;[<strong>(#RAINETTE_INFOS{#ENV{ville, FRXX0076}, latitude}|rainette_afficher_unite{angle})</strong>]</li>
+			<li>Appel sans type d'info pr&eacute;cis&eacute;e, on renvoie le tableau s&eacute;rialis&eacute;:&nbsp;[<strong>(#RAINETTE_INFOS{#ENV{ville, FRXX0076}})</strong>]</li>
+			<li>Appel sans argument, on renvoie une chaine vide:&nbsp;[<strong>(#RAINETTE_INFOS)</strong>]</li>
+		</ul>
+		<br style='clear:both' /><br /><br />
+		<p id='rainette_conditions' style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_conditions</strong></p>
+		[(#MODELE{rainette_conditions,code=#ENV{ville, FRXX0076},sous_modele=conditions_tempsreel})]
+		<br style='clear:both' /><br /><br />
+		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour le jour courant (jour=0, type=1_jour, sous-modele=previsions_2x12h)<br />
+		Avant 14h00 on affiche jour et nuit, apr&egrave;s 14h00 on affiche nuit et le lendemain matin</p>
+ 		[(#MODELE{rainette_previsions,code=#ENV{ville, FRXX0076},type=1_jour,jour=0,sous_modele=previsions_2x12h})]
+		<br style='clear:both' /><br /><br />
+		<p id='rainette_previsions_2x12' style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour le surlendemain (jour=2, type=1_jour, sous-modele=previsions_2x12h)</p>
+ 		[(#MODELE{rainette_previsions,code=#ENV{ville, FRXX0076},type=1_jour,jour=2,sous_modele=previsions_2x12h})]
+		<br style='clear:both' /><br /><br />
+ 		<p id='rainette_previsions_24' style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour les jours &agrave; venir (jour=3, type=x_jours, sous-modele=previsions_24h)</p>
+		[(#MODELE{rainette_previsions,code=#ENV{ville, FRXX0076},type=x_jours,jour=5,sous_modele=previsions_24h})]
+	</div>
+	<div id="agenda-#ENV{ville, FRXX0076}">
+		<p  style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du filtre <strong>rainette_previsions_css</strong></p>
+		<br style='clear:both' />
+		<div class="page_agenda"><BOUCLE_mois(ARTICLES){agenda date, mois, #ENV{annee}, #ENV{mois}}>[
+			(#DATE|agenda_memo{#DESCRIPTIF,#TITRE,#URL_ARTICLE,calendrier-couleur[(#ID_SECTEUR|modulo{14,1})]})]</BOUCLE_mois>[(#DATE|
+			agenda_affiche{<:aucun_article:>, 'mois'})
+			]<//B_mois>
+		</div>
+	</div>
+</body>
+</html>
