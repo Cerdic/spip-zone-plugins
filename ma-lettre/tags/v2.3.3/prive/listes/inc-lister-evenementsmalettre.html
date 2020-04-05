@@ -1,0 +1,31 @@
+<B_liste>
+<p><:malettre:compose_cochant_eve:></p>
+<table class="spip" width="100%" border="0">
+<tbody>
+<BOUCLE_liste(EVENEMENTS)
+	{id_groupe ?}
+	{id_auteur ?}
+	{id_rubrique ?}
+	{id_mot ?}
+	{0,20}
+	{recherche ?}
+	{!par id_evenement}
+	{statut=publie}
+	>	
+<tr width="100%">
+<td bgcolor="[(#COMPTEUR_BOUCLE|alterner{#fff,#eee})]"><a href="?exec=evenements_edit&id_evenement=#ID_EVENEMENT">n&#176;#ID_EVENEMENT - #TITRE </a>[- <small>(#DESCRIPTIF|couper{30,...})</small>]</td>
+<td bgcolor="[(#COMPTEUR_BOUCLE|alterner{#fff,#eee})]" align="center"><input type="checkbox" value="#ID_EVENEMENT" name="addeve[]">
+</td></tr>
+</BOUCLE_liste>
+<tr><td colspan="2">
+<p><:malettre:compose_liste_eve:>
+<textarea name="eve_csv" id="eve_csv" cols="50" rows="5"></textarea>
+</p>
+</td></tr>
+</tbody>
+</table>
+</B_liste>
+
+
+
+

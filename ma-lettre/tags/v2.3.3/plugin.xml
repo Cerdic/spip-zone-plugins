@@ -1,0 +1,32 @@
+<plugin>
+	<nom>Ma lettre</nom>
+	<slogan>Composer sur mesure une lettre d'information (newsletter)</slogan>
+	<auteur>[erational->http://www.erational.org]</auteur>
+	<licence>GNU/GPL - (c) 2006-2012</licence>
+	<version>2.3.3</version>
+	<etat>stable</etat>
+	<description>
+		Permet de composer une lettre en s&#233;lectionnant manuellement les articles que l'on d&#233;sire ajouter  pour l'envoyer 
+	sur une lettre de diffusion g&#233;r&#233;e ext&#233;rieurement &#224; SPIP (de type [SYMPA->http://www.sympa.org], [Mailman->http://www.gnu.org/software/mailman/]...).
+	</description>
+	<lien>https://contrib.spip.net/Ma-lettre</lien>
+	<prefix>malettre</prefix>
+	<icon>img/malettre.png</icon>
+	<pipeline>
+	    <nom>autoriser</nom>
+	    <inclure>malettre_autoriser.php</inclure>
+	</pipeline>
+	<bouton id='malettre' parent='naviguer'>
+		<titre>malettre:ma_lettre</titre>
+		<icone>img/icon_malettre.png</icone>
+		<url>malettre</url>
+	</bouton>
+	<bouton id='malettre21' parent='bando_edition'>
+		<titre>malettre:ma_lettre</titre>
+		<icone>img/icon_malettre.png</icone>
+		<url>malettre</url>
+	</bouton>
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
+	<necessite id='spip_bonux' version='[1.3;]' />
+	<categorie>communication</categorie>
+</plugin>
