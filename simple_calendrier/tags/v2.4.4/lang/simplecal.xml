@@ -1,0 +1,16 @@
+<traduction
+	module="simplecal"
+	id="simplecal--simple_calendrier-f9113"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip-contrib-extensions/simple_calendrier.git"
+	reference="fr">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/simplecal-simple_calendrier?lang_cible=en" total="169" traduits="147" relire="0" modifs="1" nouveaux="21" pourcent="86.98">
+		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
+		<traducteur nom="Joseph" lien="https://trad.spip.net/auteur/joseph-larmarange" />
+		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
+		<traducteur nom="Rainer Müller" lien="https://trad.spip.net/auteur/rainer-muller" />
+		<traducteur nom="sQuonk" lien="https://trad.spip.net/auteur/squonk" />
+	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/simplecal-simple_calendrier?lang_cible=fr" total="169" traduits="169" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+</traduction>

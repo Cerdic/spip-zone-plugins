@@ -1,0 +1,18 @@
+[(#AUTORISER{lister,simplecal}|sinon_interdire_acces)]
+
+<h1><:simplecal:liste_des_evenements:></h1>
+
+
+#SET{editable,#AUTORISER{creer,evenement}}
+[(#SET{where,[(#VAL{''}|simplecal_evenements_where{#ENV{mode,''}, #ENV{annee,''},#ENV{mois,''}})]})]
+
+
+[(#INCLURE{fond=prive/objets/liste/evenements,where=#GET{where},par=date_debut,ajax,env})]
+
+
+[(#GET{editable})
+[(#URL_ECRIRE{evenement_edit,new=oui&retour=liste}
+	|parametre_url{id_rubrique,#ID_RUBRIQUE}
+	|icone_verticale{<:simplecal:raccourcis_ecrire_evenement:>,evenement,new,right})]
+]
+<br class='nettoyeur' />

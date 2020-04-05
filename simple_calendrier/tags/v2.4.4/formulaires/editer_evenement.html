@@ -1,0 +1,185 @@
+<div class='formulaire_spip formulaire_editer formulaire_editer_evenement formulaire_editer_evenement-#ENV{id_evenement,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'>
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_evenement' value='#ENV{id_evenement}' />
+		<div class="editer-groupe">
+			[(#REM) 'Titre' est un champ obligatoire]
+			<div class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+				<label for="titre"><:simplecal:info_titre:> : </label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
+				<input type='text' class='text' name='titre' id='titre' value="#ENV{titre}" />
+			</div>
+		</div>
+
+		<fieldset>
+			<legend><:simplecal:evenement_date:></legend>
+			<div class="editer-groupe">
+				[(#CONFIG{'simplecal_horaire'}|=={oui}|oui)
+				<div class="editer editer_horaire[ (#ENV**{erreurs}|table_valeur{horaire}|oui)erreur]">
+					<label for="horaire"><:simplecal:evenement_horaire:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{horaire})</span>
+					]<input type='checkbox' name='horaire' id='horaire' value='non' [(#ENV{horaire}|=={oui}|non)checked='checked']
+						onclick="if (this.checked==false) { $('span.afficher_horaire').show();} else {$('span.afficher_horaire').hide();}" />
+				</div>]
+
+				[(#REM) 'Date de début' est un champ obligatoire]
+				<div class="editer editer_date_debut obligatoire[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur]">
+					
+					<label for="date_debut"><:simplecal:info_date_debut:> : </label>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_debut})</span>]
+					<input type='text' class='text date' name='date_debut' id='date_debut' value="#ENV{date_debut}" />
+					[(#CONFIG{simplecal_horaire}|=={oui}|oui)
+					<span class='afficher_horaire[(#ENV{horaire}|=={oui}|non)none]'>
+					<input type='text' class='text heure' name='heure_debut' style="width:4em" id='heure_debut' size='4' maxlength='5' value="[(#ENV{heure_debut})]" /></span>]
+				</div>
+				
+				[(#REM) 'Date de fin' est un champ optionnel]
+				<div class="editer editer_date_fin[ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur]">
+					<label for="date_fin"><:simplecal:info_date_fin:> : </label>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</span>]
+					<input type='text' class='text date' name='date_fin' id='date_fin' value="#ENV{date_fin}" />
+					[(#CONFIG{simplecal_horaire}|=={oui}|oui)
+					<span class='afficher_horaire[(#ENV{horaire}|=={oui}|non)none]'>
+					<input type='text' class='text heure' name='heure_fin' style="width:4em" id='heure_fin' size='4' maxlength='5' value="[(#ENV{heure_fin})]" />
+					</span>]
+				</div>
+			</div>
+		</fieldset>
+
+		<div class="editer-groupe">
+		
+			[(#REM) 'Choix de la rubrique' est un champ facultatif]
+			[(#CONFIG{simplecal_rubrique}|=={partout}|oui)
+			<div class="editer editer_parent obligatoire[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">
+				<label for="id_parent"><:titre_cadre_interieur_rubrique:><em class="aide">#AIDER{id_parent}</em></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>]
+				[(#VAL|chercher_rubrique{#ENV{id_evenement},#ENV{id_parent},'evenement',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint},0,form_simple})]
+			</div>]
+			
+			[(#CONFIG{simplecal_rubrique}|=={secteur}|oui)
+			<div class="editer editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">
+				<label for="id_parent"><:entree_interieur_rubrique:><em class="aide">#AIDER{id_parent}</em></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>]
+				<!-- parametre 'evenement' pour avoir une liste de secteur (chercher_rubrique pas tres generique...) -->
+				<!-- depuis peu, cela ne fonctionne plus car chercher_rubrique dans filtre_ecrire.php teste une autorisation sur l'objet... -->
+				[(#VAL|chercher_rubrique{#ENV{id_evenement},#ENV{id_parent},'evenement',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint},0,form_simple})]
+			</div>]
+			
+			[(#REM) 'Descriptif' est un champ obligatoire]
+			[(#CONFIG{simplecal_descriptif}|=={oui}|oui)
+			<div class="editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
+				<label for="ta_descriptif"><:simplecal:info_descriptif_rapide:> : </label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>]
+				<textarea name='descriptif' id='ta_descriptif'[ lang='(#LANG)'] rows='5' cols='40'>[(#ENV**{descriptif})]</textarea>
+			</div>]
+
+			
+			[(#REM) 'Reference' est un champ optionnel]
+			[(#CONFIG{simplecal_refobj}|=={oui}|oui)
+			<div class="editer editer_ref[ (#ENV**{erreurs}|table_valeur{ref}|oui)erreur]">
+				<label for="ref"><:simplecal:info_ref:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ref})</span>]
+				<div class="explication"><:simplecal:explication_ref:></div>
+				<input type="text" id="ref" name="ref" value="[(#ENV**{ref})]" class="text" size="20" />
+			</div>]
+			
+			[(#REM) 'Texte' est un champ optionnel]
+			[(#CONFIG{simplecal_texte}|=={oui}|oui)
+			<div class="editer editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
+				<label for="texte">
+					[(#CONFIG{simplecal_refobj}|=={non}|oui)<:simplecal:info_texte:>]
+					[(#CONFIG{simplecal_refobj}|=={oui}|oui)<:simplecal:info_texte_2possibilites:>]
+				</label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>]
+				<div class="explication"><:simplecal:explication_texte:></div>
+				<textarea name='texte' id='texte'[ lang='(#LANG)'] rows='10' cols='40'>[(#ENV**{texte})]</textarea>
+			</div>]
+		</div>
+
+		[(#REM) 'Lieu' est un fieldset optionnel]
+		[(#CONFIG{simplecal_lieu}|=={oui}|oui)
+		<fieldset>
+			<h3 class="legend"><:simplecal:entree_lieu_evenement:></h3>
+			<div class="editer-groupe">
+				<div class="editer editer_lieu[ (#ENV**{erreurs}|table_valeur{lieu}|oui)erreur]">
+					<label for="lieu"><:simplecal:info_lieu:> : </label>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lieu})</span>]
+					<input type="text" id="lieu" name="lieu" value="#ENV{lieu}" class="text" size="20" />
+				</div>
+
+				<div class="editer editer_adresse[ (#ENV**{erreurs}|table_valeur{adresse}|oui)erreur]">
+					<label for="adresse"><:simplecal:info_adresse:> : </label>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse})</span>]
+					<textarea name='adresse' id='adresse'[ lang='(#LANG)'] rows='3' cols='40'>[(#ENV**{adresse})]</textarea>
+				</div>
+			</div>
+		</fieldset>
+		]
+		
+		[(#CONFIG{simplecal_lien}|=={oui}|oui)
+		<fieldset>
+			<h3 class="legend"><:entree_liens_sites:></h3>
+			<div class="editer-groupe">
+				<div class="editer editer_lien_titre[ (#ENV**{erreurs}|table_valeur{lien_titre}|oui)erreur]">
+					<label for="lien_titre"><:info_titre:><em class='aide'>#AIDER{lien_titre}</em></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lien_titre})</span>
+					]<input type='text' class='text' name='lien_titre' id='lien_titre' value="[(#ENV**{lien_titre})]" />
+				</div>
+				<div class="editer editer_lien_url[ (#ENV**{erreurs}|table_valeur{lien_url}|oui)erreur]">
+					<label for="lien_url"><:info_url:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lien_url})</span>
+					]<input type='text' class='text' name='lien_url' id='lien_url' value="[(#ENV**{lien_url})]" />
+				</div>
+			</div>
+		</fieldset>
+		]
+		
+		</div>
+		  
+		[(#REM) ajouter les saisies supplementaires : extra et autre, à cet endroit ]
+		<!--extra-->
+		<p class="boutons">
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+		</p>
+	
+	</div>
+	</form>
+	#INCLURE{fond=formulaires/dateur/inc-dateur}
+	<!-- #INCLURE{fond=formulaires/inc-editer_evenement_datepicker} -->
+	
+	]
+</div>
+<script type="text/javascript">
+	// Si changement de date_début, on change date_fin uniquement si inférieure à date_début
+	jQuery('#date_debut').on('change', function(){
+		var debut_date     = jQuery('#date_debut').datepicker("getDate");
+		jQuery('#date_fin').datepicker( "option", "minDate", new Date(debut_date));
+	}); 
+	var repetitions_done = false;
+	jQuery(document).bind('datePickerLoaded',function(){
+		if (!repetitions_done){
+			repetitions_done = true;
+			jQuery.getScript('#CHEMIN{javascript/jquery-ui.multidatespicker.js}',function(){
+				var multidate_picker_options = {altField: '#repetitions'};
+				/**
+				 * Multidatepicker n'aime pas un array vide apparemment
+				 */
+				if(jQuery('#repetitions').html() != ""){
+					multidate_picker_options.addDates = jQuery('#repetitions').html().split(',');
+				}
+				jQuery('#repetitions_picker')
+					.multiDatesPicker(jQuery.extend(
+								date_picker_options(),
+								multidate_picker_options
+					))
+					.addClass('.pickable'); // une seule fois;
+				jQuery('#repetitions').attr("readonly","readonly");
+			});
+		}
+	});
+</script>

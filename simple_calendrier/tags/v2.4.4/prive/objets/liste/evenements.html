@@ -1,0 +1,42 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	date_debut,1,
+	id_evenements,1,
+	points,-1
+}})]<B_liste_evt>
+#ANCRE_PAGINATION
+<div class="liste-objets evenements">
+<table class="spip liste">
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{simplecal:info_1_evenement,simplecal:info_nb_evenements}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class="titre" scope="col">[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class="date" scope="col">[(#TRI{date_debut,<:simplecal:dates:>,ajax})]</th> 
+			<th class="id" scope="col">[(#TRI{id_evenement,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_evt(EVENEMENTS){id_evenement?}{id_rubrique?}{id_secteur?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par, titre},#GET{defaut_tri}}{par date_debut, date_fin}{pagination 10}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="statut">[(#STATUT|puce_statut{'evenement',#ID_EVENEMENT,#ID_RUBRIQUE})]</td>
+			<td class="titre principale">
+				[(#LOGO_EVENEMENT|image_reduire{20,26})]
+				<a href="[(#ID_EVENEMENT|generer_url_entite{evenement})]" 
+					title="<:info_numero_abbreviation|attribut_html:> #ID_EVENEMENT"
+					[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]>#TITRE</a>[(#LIEU|textebrut)]</td>
+			<td class="date secondaire">[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,non,abbr})]</td>
+			<td class="id">[(#AUTORISER{modifier,evenement,#ID_EVENEMENT}|?{
+				<a href="[(#URL_ECRIRE{evenement_edit,id_evenement=#ID_EVENEMENT})]">#ID_EVENEMENT</a>,
+				#ID_EVENEMENT
+			})]</td>
+		</tr>
+	</BOUCLE_liste_evt>
+	
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_evt>[
+<div class="liste-objets breves"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_evt>

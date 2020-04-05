@@ -1,0 +1,12 @@
+[(#AUTORISER{demo,simplecal}|sinon_interdire_acces)]
+
+#BOITE_OUVRIR{'',info center}
+	[(#CHEMIN_IMAGE{simplecal-logo-96.png}|balise_img|inserer_attribut{alt,<:simplecal:alt_img_logo:>})]
+	<br />
+	<:simplecal:description_plugin:>
+#BOITE_FERMER
+
+
+#BOITE_OUVRIR{'',raccourcis}
+	[(#URL_ECRIRE{evenements,mode=avenir}|icone_horizontale{<:simplecal:raccourcis_tous_evenements:>,evenement,''})]
+#BOITE_FERMER
