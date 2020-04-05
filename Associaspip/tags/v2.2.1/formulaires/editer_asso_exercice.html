@@ -1,0 +1,26 @@
+<div class="formulaire_spip formulaire_#FORM">[
+    <p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>][
+    <p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    <form id="formulaire_#FORM" method="post" action="#ENV{action}">
+		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
+		<ul>
+			<li class="editer_intitule">[
+				<span class="erreur_message">(#ENV**{erreurs}|table_valeur{intitule})</span>]
+				<label for="intitule"><:asso:libelle_intitule:></label>
+				<input name="intitule" type="text" [value="(#ENV{intitule})"] id="intitule" class="text" />
+			</li>
+			<li class="editer_debut">[
+				<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_debut})</span>]
+				<label for="date_debut"><:asso:exercice_libelle_debut:></label>
+				<input name="date_debut" type="[(#HTML5|?{date,text})]" [value="(#ENV{date_debut})"] id="date_debut" class="date" />
+			</li>
+			<li class="editer_fin">[
+				<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_fin})</span>]
+				<label for="date_fin"><:asso:exercice_libelle_fin:></label>
+				<input name="date_fin" type="[(#HTML5|?{date,text})]" [value="(#ENV{date_fin})"] id="date_fin" class="date" />
+			</li>
+<INCLURE{fond=prive/editer/saisir_commentaires, commentaire } />
+		</ul>
+<INCLURE{fond=prive/editer/bouton_validation, pass_ok=#ENV{id_exercice} } />
+	</form>
+</div>

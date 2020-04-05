@@ -1,0 +1,110 @@
+<div class="titrem impliable" id="dhtns">
+	<a class="titremancre" href="#"></a>
+	[(#ENV{confirmForm}|non)<:asso:entete_mailing:>]
+	[(#ENV{confirmForm}|=={1}|oui)<:asso:entete_mailing_confirmation:>]
+	[(#ENV{confirmForm}|=={2}|oui)<:asso:entete_mailing_rapport:>]
+</div>
+<div class="cadre-padding">
+
+<div class="formulaire_spip formulaire_demo">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>
+		<div class="onglet" style="text-align:center; margin:0.5em auto; width:50%;"><a href="#URL_ECRIRE{adherents}"><:asso:menu2_titre_gestion_membres:></a></div>]
+	<form method="post" action="#ENV{action}">
+		<div [(#ENV{'confirmForm'}|oui)style='display:none']>
+		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
+		<ul>
+			<table class="asso_tablo_filtres"><tr>
+				<B_filtre_groupes>
+				<td class='filtre_groupe'>
+					<select class='filtreSelect' onchange="var p=document.createElement('input'); p.type='hidden'; p.name='majFiltres'; p.value='1'; form.appendChild(p); form.submit()" name="filtre_id_groupe">
+						<option value='tous'><:asso:tous_les_groupes:></option>
+						<BOUCLE_filtre_groupes(asso_groupes){id_groupe>99}>
+						<option value="#ID_GROUPE" [(#ID_GROUPE|=={#ENV{filtre_id_groupe}}|oui)selected="selected"]>#NOM</option>
+						</BOUCLE_filtre_groupes>
+					</select>
+				</td>
+				</B_filtre_groupes>
+				<td class='filtre_statut_interne'>
+					<select class='filtreSelect' onchange="var p=document.createElement('input'); p.type='hidden'; p.name='majFiltres'; p.value='1'; form.appendChild(p); form.submit()" name="filtre_statut_interne">
+						<option value='actif' [(#ENV{'filtre_statut_interne'}|=={actif}|oui)selected="selected"]><:asso:adherent_entete_statut_defaut:></option>
+						<option value='sorti' [(#ENV{'filtre_statut_interne'}|=={sorti}|oui)selected="selected"]><:asso:adherent_entete_statut_sorti:></option>
+						<option value='prospect' [(#ENV{'filtre_statut_interne'}|=={prospect}|oui)selected="selected"]><:asso:adherent_entete_statut_prospect:></option>
+						<option value='ok' [(#ENV{'filtre_statut_interne'}|=={ok}|oui)selected="selected"]><:asso:adherent_entete_statut_ok:></option>
+						<option value='echu' [(#ENV{'filtre_statut_interne'}|=={echu}|oui)selected="selected"]><:asso:adherent_entete_statut_echu:></option>
+						<option value='relance' [(#ENV{'filtre_statut_interne'}|=={relance}|oui)selected="selected"]><:asso:adherent_entete_statut_relance:></option>
+						<option value='tous' [(#ENV{'filtre_statut_interne'}|=={tous}|oui)selected="selected"]><:asso:adherent_entete_statut_tous:></option>
+					</select>
+				</td>
+				<td class='filtre_relance'>
+					<select class='filtreSelect' onchange="var p=document.createElement('input'); p.type='hidden'; p.name='majFiltres'; p.value='1'; form.appendChild(p); form.submit()" name="filtre_relance">
+					<option value='non' [(#ENV{'filtre_relance'}|=={0}|oui)selected="selected"]><:asso:menu2_titre_mailing:></option>
+					<option value='1' [(#ENV{'filtre_relance'}|=={1}|oui)selected="selected"]><:asso:relance:></option>
+					</select>
+				</td>
+				<noscript>
+					<td class='filtre_submit'>
+						<input type='hidden' value='1' name='majFiltres' />
+						<input type="submit" value="<:asso:bouton_lister:>" class="submit" />
+					</td>
+				</noscript>
+				</B_filtre_relance>
+			</tr></table>
+			<li class="fieldset">
+			<ul>
+				<li class="editer_sujet">
+				[<span class="erreur_sujet">(#ENV**{erreurs}|table_valeur{_sujet})</span>]
+				<label for="_sujet"><:asso:sujet:></label>
+				<input type="text" name="_sujet" value="[(#ENV{_sujet})]" id="_sujet" class="text"/>
+				</li>
+				<li class="editer_message">
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{_message})</span>]
+				<label for="_message"><:asso:message:></label>
+				<textarea cols="80" rows="15" name="_message" id="_message">[(#ENV{_message})]</textarea>
+				</li>
+			</ul>
+			</li>
+		</ul>
+		<table width='100%' class='asso_tablo' id='asso_tablo_relances'>
+			<caption><:asso:membres:></caption>
+				<tr class="row_first">
+					<th><:asso:entete_id:></th>
+					<th><:asso:entete_nom:></th>
+					<th><:asso:adherent_libelle_validite:></th>
+					<th><:asso:envoi:></th>
+				</tr>
+				<B_destinataires>
+				<BOUCLE_destinataires(asso_membres asso_fonctions){id_groupe?=#ENV{'filtre_id_groupe'}}{statut_interne IN (#ENV{'statut_interne'}|explode{:})}{par nom_famille,prenom}>
+				<tr class="[(#STATUT_INTERNE|association_styles_des_statuts)]">
+					<td class='integer'><label for='statut#ID_AUTEUR'>#ID_AUTEUR</label></td>
+					<td class='text'><a href='#URL_ECRIRE{auteur_infos,id_auteur=#ID_AUTEUR}'>[(#SEXE|association_formater_nom{#PRENOM,#NOM_FAMILLE})]</a></td>
+					<td class='date'>[(#DATE_VALIDITE|association_formater_date)]</td>
+					<td class='action'>
+						<input type='checkbox' [(#ENV**{selectId}|table_valeur{#ID_AUTEUR}|ou{#ENV{'selectTous'}}|oui)checked='checked'] name="id[#ID_AUTEUR]" />
+					</td>
+				</tr>
+				</BOUCLE_destinataires>
+				</B_destinataires>
+		</table>
+	</div>
+
+[(#ENV{editable})
+	<div [(#ENV{'confirmForm'}|non)style='display:none']>
+		[(#ENV{'confirmForm'}|oui)<input type='hidden' name='confirmForm' value='2'/>]
+		<p><em class="explication"><:asso:vous_vous_appretez_a_envoyer:> [(#ENV{_nb_messages})] [(#ENV{_nb_messages}|>{1}|?{<:asso:messages:>,<:asso:message:>})]</em></p>
+		<div class="fieldset previsu">
+			<p class="titre">
+				[<strong>(#ENV{_sujet})</strong>]
+			</p>
+			<div class="texte">
+				[(#ENV{_message}|nl2br)]
+			</div>
+		</div>
+
+	</div>
+		<p class="boutons">
+			<input type="submit" value="<:asso:bouton_envoyer:>" class="submit" />
+		</p>
+]
+	</form>
+</div>
+</div>

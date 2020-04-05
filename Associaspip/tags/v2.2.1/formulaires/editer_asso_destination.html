@@ -1,0 +1,16 @@
+<div class="formulaire_spip formulaire_#FORM">[
+    <p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>][
+    <p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    <form id="formulaire_#FORM" method="post" action="#ENV{action}">
+		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
+		<ul>
+			<li class="editer_intitule">
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{intitule})</span>]
+				<label for="intitule"><:asso:libelle_intitule:></label>
+				<input name="intitule" type="text" [value="(#ENV{intitule})"] id="intitule" class="text" />
+			</li>
+<INCLURE{fond=prive/editer/saisir_commentaires, commentaire } />
+		</ul>
+<INCLURE{fond=prive/editer/bouton_validation, pass_ok=#ENV{id_destination} } />
+	</form>
+</div>

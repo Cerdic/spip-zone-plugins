@@ -1,0 +1,47 @@
+[(#REM)<!-- CHOISIR le ComPTe financier (associe au mode de paiement) a impacter et ventiler par DESTinationns si active.
+le choix du compte financier se fait dans la liste des comptes actifs de la classe financiere (exepte virements internes bien sur)
+
+plugin = associaspip ; tables = spip_asso_plan, spip_asso_destinations.
+plugins necessaires = aucun
+
+parametres =
+- type_operation (caractere) : indique la "classe comptable" de l'operation (l'affichage est alors ajuste pour indiquer que le compte financier va etre credite ou debite)
+- journal (texte) : code/numero du compte financier precedemment selectionne
+- id_dest (tableau d'entiers) : numeros des destinations choisies
+- montant_dest (tableau de nombres) : montants des destinations choisies
+- defaut_dest (entier) : numero de la destination par defaut (premiere ou seule proposee)
+
+remarques:
+- les parametres relatifs aux destinations sont dans l'environnemnet du formulaire, il faut donc juste penser a passer le parametre "env" lors de l'inclusion de ce fichier
+- perfectible
+
+maj:2012-10-15; version:0.2.1; licence:GPL; copyleft:Jeannot Lapin, Marcel Bolla; -->
+]#CACHE{0}[
+(#REM) reperer d'abord l'erreur de mode de paiement absent)
+]<BOUCLE_mode_paiement_v(ASSO_PLAN) {active=1}{classe=#META{/association/classe_banques}}{code!=#META{/association/pc_intravirements}}{0,1}>
+<li id="saisie_mode_paiement" class="editer_journal [(#ENV{type_operation}|affichage_div{charges-produits-banques})]">
+	<label for="journal">
+		<span class="[(#ENV{type_operation}|affichage_div{charges-banques})]">
+<:asso:compte_debite:>
+		</span>
+		<span class="[(#ENV{type_operation}|affichage_div{produits})]">
+<:asso:compte_credite:>
+		</span>
+	</label>
+	<B_modes_paiement>
+	[(#TOTAL_BOUCLE|=={1}|oui)<input name="journal" id="journal" value="#CODE" type="hidden" />]
+	<select name="journal" id="journal" class="select"[(#TOTAL_BOUCLE|=={1}|oui) disabled="disabled"]>
+	<BOUCLE_modes_paiement(ASSO_PLAN) {par code} {active=1}{classe=#META{/association/classe_banques}}{code!=#META{/association/pc_intravirements}}>
+		<option value="#CODE"[(#ENV{journal}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
+	</BOUCLE_modes_paiement>
+	</select>
+	</B_modes_paiement>
+[
+</li>
+<li id="saisie_destination" class="editer_destinations[ (#ENV{type_operation}|affichage_div{charges-produits-contributions_volontaires})]">
+			[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{destinations})</span>]
+			(#EDITEUR_DESTINATIONS)]
+</BOUCLE_mode_paiement_v>
+<li><span class="erreur_message"><:asso:erreur_pas_de_classe_financiere:></span>
+<//B_mode_paiement_v>
+</li>

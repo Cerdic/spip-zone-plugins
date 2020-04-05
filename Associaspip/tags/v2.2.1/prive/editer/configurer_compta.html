@@ -1,0 +1,217 @@
+<B_plan_comptable>
+<li class="fieldset">
+<!-- Options du plugin: gestion comptable -->
+<fieldset>
+	<h3 class="legend"><:asso:config_libelle_comptes:></h3>
+	[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{comptes})</span>]
+	<ul>
+		<li class="editer_comptes">
+			<div class="choix">
+				<input type="checkbox" name= "comptes" value="on"[(#ENV{comptes}|oui) checked="checked"] id="comptes" onclick="toggle('comptes', 'dons'); toggle('comptes', 'ventes'); toggle('comptes', 'activites'); toggle('comptes', 'prets');" />
+				<label for="comptes"><:asso:config_libelle_activer_comptes:></label>
+			</div>
+		</li>
+	</ul>
+	<fieldset>
+		<legend><:asso:config_libelle_compta:></legend>
+		<ul>
+			<li class="editer_destinations">
+				<label for="destinations"><:asso:config_libelle_destinations:></label>
+				<select name="destinations">
+					<option value="0"[ (#ENV{destinations}|non) selected="selected"]><:asso:config_libelle_destination0:></option>
+					<option value="2"[ (#ENV{destinations}|>{1}) selected="selected"]><:asso:config_libelle_destination2:></option>
+					<option value="1"[ (#ENV{destinations}|=={1}) selected="selected"]><:asso:config_libelle_destination1:></option>
+				</select>
+			</li>
+			<li class="editer_exercices">
+				<label for="exercices"><:asso:config_libelle_exercices:></label>
+				<select name="exercices">
+					<option value=""[(#ENV{exercices}|non) selected="selected"]><:asso:config_libelle_exercice0:></option>
+					<option value="on"[(#ENV{exercices}|oui) selected="selected"]><:asso:config_libelle_exercice1:></option>
+				</select>
+			</li>
+			<li class="editer_plan_comptable">
+				<label for="selecteur_plan_comptable"><:asso:config_plan_comptable:></label>
+				[(#ENV{plan_comptable}|selecteur_compta_plan)]
+			</li>
+		</ul>
+	</fieldset>
+	<fieldset>
+		<legend><:asso:config_libelle_operations:></legend>
+		<ul>
+		<INCLURE{fond=prive/editer/saisir_config_cc, cc_nom=banques, cc_val=#ENV{classe_banques}, obligatoire=1 } />
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_classe=#ENV{classe_banques}, rc_val=#ENV{pc_intravirements}, rc_nom=intravirements, rc_titre=<:asso:config_libelle_virements_internes:>} />
+		<INCLURE{fond=prive/editer/saisir_config_cc, cc_val=#ENV{classe_charges}, cc_nom=charges, obligatoire=1} />
+		<INCLURE{fond=prive/editer/saisir_config_cc, cc_val=#ENV{classe_produits}, cc_nom=produits, obligatoire=1} />
+		<INCLURE{fond=prive/editer/saisir_config_cc, cc_val=#ENV{classe_contributions_volontaires}, cc_nom=contributions_volontaires, obligatoire=1} />
+<!--
+		<INCLURE{fond=prive/editer/saisir_config_cc, cc_val=#ENV{classe_immobilisations}, cc_nom=immobilisations, obligatoire=0} />
+-->
+		</ul>
+	</fieldset>
+</fieldset>
+</li>
+[(#REM)<!-- S'il y a des comptes actifs, on peut configurer la compta et les les modules lies a la compta (mais il faut activer la compta pour activer ces modules) ... -->]
+<BOUCLE_plan_comptable(ASSO_PLAN){active=1}{fusion classe}{3,3}>
+[(#REM)<!-- En regroupant par classe on a un compte par classe, mais ce n'est pas grave car ca indique que le plan comptable est renseigne avec des comptes actifs. En demandant exactement le 4eme resultat on s'assure qu'il y a au moins 4 classes differentes ; ce qui est requis pour pouvoir activer la compta. -->]
+</BOUCLE_plan_comptable>
+<li class="fieldset">
+<!-- Options comptables du module: gestion des cotisations -->
+<fieldset>
+	<h3 class="legend"><:asso:config_libelle_cotisations:></h3>
+	<fieldset>
+		[(#REM)<!--<legend></legend>-->]
+		<ul>
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_classe=#ENV{classe_produits}, rc_val=#ENV{pc_cotisations}, rc_nom=cotisations} />
+		<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_cotisations}, dc_nom=cotisations} />
+		</ul>
+	</fieldset>
+</fieldset>
+</li>
+<li class="fieldset">
+<!-- Options du plugin: gestion des dons et colis -->
+<fieldset>
+	<h3 class="legend"><:asso:config_libelle_dons:></h3>
+	[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{dons})</span>]
+	<ul>
+		<li class="editer_dons">
+			<div class="choix">
+				[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
+				<input type="checkbox" name="dons" value="on"[(#ENV{dons}|oui) checked="checked"][(#ENV{comptes}|non) disabled="disabled"] id="dons" />
+				<label for="dons"><:asso:config_libelle_activer_dons:></label>
+			</div>
+		</li>
+	</ul>
+	<fieldset>
+		<legend><:asso:config_libelle_don2argent:></legend>
+		<ul>
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_classe=#ENV{classe_produits}, rc_val=#ENV{pc_dons}, rc_nom=dons} />
+		<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_dons}, dc_nom=dons} />
+		</ul>
+	</fieldset>
+	<fieldset>
+		<legend><:asso:config_libelle_don2colis:></legend>
+		<ul>
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_classe=#ENV{classe_contributions_volontaires}, rc_val=#ENV{pc_colis}, rc_nom=colis} />
+		</ul>
+	</fieldset>
+</li>
+<li class="fieldset">
+<!-- Options du plugin: gestion des ventes -->
+	<fieldset>
+		<h3 class="legend"><:asso:config_libelle_ventes:></h3>
+		[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{ventes})</span>]
+		<ul>
+			<li class="editer_ventes">
+				<div class="choix">
+					[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
+					<input type="checkbox" name="ventes" value="on"[(#ENV{ventes}|oui) checked="checked"][(#ENV{comptes}|non) disabled="disabled"] id="ventes" />
+					<label for="ventes"><:asso:config_libelle_activer_ventes:></label>
+				</div>
+			</li>
+		</ul>
+	<fieldset>
+		<legend><:asso:config_libelle_article2vente:></legend>
+		<ul>
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_classe=#ENV{classe_produits}, rc_val=#ENV{pc_ventes}, rc_nom=ventes} />
+		<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_ventes}, dc_nom=ventes} />
+		</ul>
+	</fieldset>
+	<fieldset>
+		<legend><:asso:config_libelle_frais2port:></legend>
+		<ul>
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_classe=#ENV{classe_charges}, rc_val=#ENV{pc_frais_envoi}, rc_nom=frais_envoi} />
+		</ul>
+	</fieldset>
+</fieldset>
+</li>
+<li class="fieldset">
+<!-- Options du plugin: gestion des activites -->
+<fieldset>
+	<h3 class="legend"><:asso:config_libelle_activites:></h3>
+	[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{activites})</span>]
+	<ul>
+		<li class="editer_activites">
+	[(#PLUGIN{agenda}|?{
+			<div class="choix">
+				[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
+				<input type="checkbox" name="activites" value="on"[(#ENV{activites}|oui) checked="checked"][(#ENV{comptes}|non) disabled="disabled"] id="activites" />
+				<label for="activites"><:asso:config_libelle_activer_activites:></label>
+			</div>
+	,
+			<span class="erreur_message"><:asso:activer_agenda_pour_activer_module:></span>
+			<input type="hidden" name="activites" value="" />
+	})]
+		</li>
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_classe=#ENV{classe_produits}, rc_val=#ENV{pc_activites}, rc_nom=activites} />
+		<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_activites}, dc_nom=activites} />
+	</ul>
+</fieldset>
+</li>
+<li class="fieldset">
+<!-- Options du plugin: gestion des prets -->
+<fieldset>
+	<h3 class="legend"><:asso:config_libelle_prets:></h3>
+	[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{prets})</span>]
+	<ul>
+		<li class="editer_prets">
+			<div class="choix">
+				[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
+				<input type="checkbox" name="prets" value="on"[(#ENV{prets}|oui) checked="checked"][(#ENV{comptes}|non) disabled="disabled"] id="prets" />
+				<label for="prets"><:asso:config_libelle_activer_prets:></label>
+			</div>
+		</li>
+		<li class="editer_groupemots_ressources">
+			[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{groupemots_ressources})</span>]
+			<label for="groupemots_ressources"><:public:mots_clefs:></label>
+			<select name="groupemots_ressources" id="groupemots_ressources">
+				<option value="0"></option>
+		<BOUCLE_groupemots_ressources(GROUPES_MOTS){par titre}>
+				<option value="#ID_GROUPE"[(#ENV{groupemots_ressources}|=={#ID_GROUPE}|oui) selected="selected"]>#TITRE</option>
+		</BOUCLE_groupemots_ressources>
+			</select>
+		</li>
+	</ul>
+	<fieldset>
+		<legend><:asso:ressources_libelle_acquisition:></legend>
+		<ul>
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_val=#ENV{pc_ressources}, rc_nom=ressources} />
+		<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_ressources}, dc_nom=ressources} />
+		</ul>
+	</fieldset>
+	<fieldset>
+		<legend><:asso:ressources_libelle_caution:></legend>
+		<ul>
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_val=#ENV{pc_cautions}, rc_nom=cautions} />
+<!--
+		<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_cautions}, dc_nom=cautions} />
+-->
+		</ul>
+	</fieldset>
+	<fieldset>
+		<legend><:asso:ressources_libelle_location:></legend>
+		<ul>
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_classe=#ENV{classe_produits}, rc_val=#ENV{pc_prets}, rc_nom=prets} />
+		<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_prets}, dc_nom=prets} />
+		</ul>
+	</fieldset>
+</fieldset>
+</li>
+</B_plan_comptable>
+[(#REM)<!-- S'il n'y a pas de compte actif (ou carrement pas de compte du tout), on ne peut ni activer la compta ni configurer les modules lies !! -->]
+<li class="fieldset">
+<fieldset>
+	<h3 class="legend"><:asso:config_libelle_comptes:></h3>
+	<ul>
+		<li class="editer_comptes">
+			<a class="spip_form_erreur" href="#URL_ECRIRE{'plan_comptable'}"><:asso:erreur_creer_plan_et_activer_gestion_comptable:></a>
+			<input type="hidden" name="comptes" id="comptes" value="" /> [(#REM)<!-- pour etre bien sur de desactiver la gestion comptable -->]
+		</li>
+		<li class="editer_plan_comptable">
+			<label for="selecteur_plan_comptable"><:asso:config_plan_comptable:></label>
+			[(#ENV{plan_comptable}|selecteur_compta_plan)]
+		</li>
+	</ul>
+</fieldset>
+</li>
+<//B_plan_comptable>

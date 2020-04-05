@@ -1,0 +1,38 @@
+[(#AUTORISER{relancer_membres, association})
+
+<!--#hierarchie-->
+#ONGLETS_ASSOCIATION{titre_onglet_membres, adherents}
+<!--/#hierarchie-->
+
+<!--#navigation-->
+<div class="cadre cadre-info">
+    <div class="cadre_padding">
+        <div><:asso:aide_communications:></div>
+        [(#VAL{1}|association_aujourdhui)]
+    </div>
+</div>
+<!--/#navigation-->
+
+<!--#extra-->
+<div class="cadre cadre-e">
+    <div class="cadre_padding">
+        <div class="verdana1" style="font-size: x-small;">
+            <b><:spip:titre_cadre_raccourcis:></b>
+            <table cellpadding="0" style="vertical-align: middle;" class="cellule-h-table"><tbody><tr>
+				<td><a class="cellule-h" href="#URL_ECRIRE{adherents}"><span class="cell-i"><img width="24" height="24" style="background: url('#CHEMIN{img_pack/grille-24.png}') no-repeat scroll center center transparent;" alt="<:asso:bouton_retour:>" src="#CHEMIN{images/rien.gif}" /></span></a></td>
+				<td><a class="cellule-h" href="#URL_ECRIRE{adherents}"><:asso:adherent_titre_liste_actifs:></a>
+                </td>
+            </tr></tbody></table>
+        </div>
+    </div>
+</div>
+<!--/#extra-->
+
+<!--#contenu-->
+<div class="cadre cadre-r">
+    <img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/mail-24.png}"/>
+    #FORMULAIRE_MAILING_MEMBRES
+</div>
+<!--/#contenu-->
+
+]

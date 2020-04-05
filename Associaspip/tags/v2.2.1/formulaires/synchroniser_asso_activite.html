@@ -1,0 +1,69 @@
+<div class="formulaire_spip formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	<form method="post" action="#ENV{action}">
+		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
+		[<p class="erreur_message">(#ENV**{erreurs}|table_valeur{dir2cp})</p>]
+		<fieldset class="editer_dir2cp editer_import">[(#REM)<!-- import = mettre des inscriptions de Agenda2 dans Associaspip -->]
+			<legend class="legend">
+				<input type="radio" name="dir2cp" id="dir_imp"[(#ENV{dir2cp}|=={imp}|oui) checked="checked"] value="imp" />
+				<label for="dir_imp"><:asso:synchroniser_en_import:></label>
+			</legend>
+			<em class="explication"><:asso:synchroniser_choix_activites:></em>
+			<ul>
+				<li class="editer_imp">
+			<B_reponses>
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{imp})</span>]
+					<label><:agenda:liste_inscrits:></label>
+			<BOUCLE_reponses(spip_evenements_participants){id_evenement}{fusion reponse}{!par reponse}>
+					<div class="choix">
+						<input type="checkbox" name="imp[]" id="imp_#REPONSE" value="#REPONSE" />
+						<label for="imp_#REPONSE">
+						[(#REPONSE|=={oui}|?{
+							<:agenda:label_reponse_jyparticipe:>
+						,
+							[(#REPONSE|=={non}|?{
+								<:agenda:label_reponse_jyparticipe_pas:>
+							,
+								[(#REPONSE|=={?}|?{
+									<:agenda:label_reponse_jyparticipe_peutetre:>
+								,
+									[(#VAL{perso:reponse_#REPONSE}|_T)]
+								})]
+							})]
+						})]
+						</label>
+					</div>
+			</BOUCLE_reponses>
+					<div class="choix">
+						<input type="checkbox" id="imp_SelectAll" onclick="var currentVal = this.checked; var checkboxList = document.getElementsByName('imp[]'); for (var i in checkboxList) {checkboxList[i].checked=currentVal;}" />
+						<label for="imp_SelectAll"><:asso:selectionner_tout:></label>
+					</div>
+			</B_reponses>
+					<span class="erreur"><:asso:aucune_inscription_en_ligne:></span>
+			<//B_reponses>
+				</li>
+			</ul>
+		</fieldset>
+		<fieldset class="editer_dir2cp editer_export">[(#REM)<!-- export = mettre des inscriptions de Associaspip dans Agenda2 -->]
+			<legend class="legend">
+				<input type="radio" name="dir2cp" id="dir_exp"[(#ENV{dir2cp}|=={exp}|oui) checked="checked"] value="exp" />
+				<label for="dir_exp"><:asso:synchroniser_en_export:></label>
+			</legend>
+			<em class="explication"><:asso:synchroniser_choix_evenements:></em>
+			<ul>
+				<li class="editer_exp">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{exp})</span>]
+					<label for="exp"><:agenda:inscrits:></label>
+					<select name="exp" id="exp">
+						<option value="oui"><:agenda:label_reponse_jyparticipe:></option>
+						<option value="non"><:agenda:label_reponse_jyparticipe_pas:></option>
+						<option value="?"><:agenda:label_reponse_jyparticipe_peutetre:></option>
+					</select>
+				</li>
+			</ul>
+		</fieldset>
+		<p class="boutons">
+			<input type="submit" value="<:spip:pass_ok:>" class="submit" />
+		</p>
+	</form>
+</div>

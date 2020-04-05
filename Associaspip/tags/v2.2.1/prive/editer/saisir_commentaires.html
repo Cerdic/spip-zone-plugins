@@ -1,0 +1,15 @@
+[(#REM)<!-- champ de saisie de commentaire(s).
+
+plugin = associaspip ; tables = spip_asso_%.
+plugins necessaires = aucun
+
+parametres =
+- commentaire (texte) : texte a (r)afficher
+
+maj:2012-07-17; version:0.1.0; licence:GPL; copyleft:gilcot; -->]
+
+#CACHE{0}
+<li class="editer_commentaire">
+	<label for="commentaire"><:asso:libelle_commentaire:></label>
+	<textarea name="commentaire" id="commentaire" rows="3" cols='64'>[(#ENV{commentaire})]</textarea>
+</li>

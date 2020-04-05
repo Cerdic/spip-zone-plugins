@@ -1,0 +1,99 @@
+<div class="formulaire_spip formulaire_#FORM">
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    <form id="formulaire_#FORM" method="post" action="#ENV{action}">
+		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
+		<fieldset>
+			<legend><:asso:prets_entete_reservation:></legend>
+			<ul>
+			[(#ENV{prix_caution}|oui)
+				<li class="editer_date_caution1">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_caution1})</span>]
+					<label for="date_caution1"><:asso:prets_libelle_date_caution1:></label>
+					<input name="date_caution1" type="[(#HTML5|?{date,text})]" [value="(#ENV{date_caution1})"] id="date_caution1" class="date" [(#ENV{date_retour}|oui) readonly="readonly"] />
+				</li>
+				<li class="editer_mode_caution1">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{mode_caution1})</span>]
+					<label for="mode_caution1"><:asso:prets_libelle_mode_caution1:></label>
+					<select name="mode_caution1" id="mode_caution1" [(#ENV{date_retour}|oui) readonly="readonly"]>
+			]
+				<BOUCLE_mode_caution1(ASSO_PLAN) {par code} {active=1}{classe=#META{/association/classe_banques}}{code!=#META{/association/pc_intravirements}}>
+					[(#META{/association/pc_cautions}|oui|et{#ENV{prix_caution}|oui})
+						<option value="#CODE"[(#ENV{mode_caution1}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
+					]
+				</BOUCLE_mode_caution1>
+			[(#ENV{prix_caution}|oui)
+					[(#META{/association/pc_cautions}|non)
+						<option value="" selected="selected"><:asso:prets_libelle_caution_hors_compta:></option>
+					]
+					</select>
+				</li>
+			]
+				<li class="editer_date_sortie">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_sortie})</span>]
+					<label for="date_sortie"><:asso:prets_libelle_date_sortie:></label>
+					<input name="date_sortie" type="[(#HTML5|?{date,text})]" [value="(#ENV{date_sortie})"] id="date_sortie" class="date" />
+				[(#ENV{ud}|=={H}|ou{#ENV{ud}|=={T}})
+					<input name="heure_sortie" type="[(#HTML5|?{time,text})]" [value="(#ENV{heure_sortie})"] id="heure_sortie" class="time" />
+				]
+				</li>
+				<li class="editer_duree">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{duree})</span>]
+					<label for="duree"><:asso:prets_libelle_duree:></label>
+					<input name="duree" type="[(#HTML5|?{number,text})]" [value="(#ENV{duree})"] id="duree" class="number integer" />
+				</li>
+<INCLURE{fond=prive/editer/saisir_membre, nom, id_auteur} />
+				<li class="editer_commentaire_sortie">
+					<label for="commentaire_sortie"><:asso:libelle_commentaire:></label>
+					<textarea name="commentaire_sortie" id="commentaire_sortie" rows="3" cols='64'>[(#ENV{commentaire_sortie})]</textarea>
+				</li>
+			</ul>
+		</fieldset>
+		<fieldset>
+			<legend><:asso:prets_entete_retour:></legend>
+			<ul>
+				<li class="editer_date_retour">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_retour})</span>]
+					<label for="date_retour"><:asso:prets_libelle_date_retour:></label>
+					<input name="date_retour" type="[(#HTML5|?{date,text})]" [value="(#ENV{date_retour})"] id="date_retour" class="date" />
+				</li>
+				<li class="editer_montant">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{montant})</span>]
+					<label for="montant"><:asso:libelle_montant:></label>
+					<input name="montant" type="[(#HTML5|?{number,text})]" [value="(#ENV{montant})"] id="montant" class="number float price" />
+				</li>
+<INCLURE{fond=prive/editer/saisir_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, defaut_dest, env} />
+			[(#ENV{id_pret}|oui)
+				<li class="editer_commentaire_retour">
+					<label for="commentaire_retour"><:asso:libelle_commentaire:></label>
+					<textarea name="commentaire_retour" id="commentaire_retour" rows="3">[(#ENV{commentaire_retour})]</textarea>
+				</li>
+			]
+			[(#ENV{prix_caution}|oui|et{#ENV{id_pret}|oui})
+				<li class="editer_date_caution0">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_caution0})</span>]
+					<label for="date_caution0"><:asso:prets_libelle_date_caution0:></label>
+					<input name="date_caution0" type="[(#HTML5|?{date,text})]" [value="(#ENV{date_caution0})"] id="date_caution0" class="date" [(#ENV{date_cloture}|oui) readonly="readonly"] />
+				</li>
+				<li class="editer_mode_caution0">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{mode_caution0})</span>]
+					<label for="mode_caution0"><:asso:prets_libelle_mode_caution0:></label>
+					<select name="mode_caution0" id="mode_caution1" [(#ENV{date_cloture}|oui) readonly="readonly"]>
+			]
+				<BOUCLE_mode_caution0(ASSO_PLAN) {par code} {active=1}{classe=#META{/association/classe_banques}}{code!=#META{/association/pc_intravirements}}>
+					[(#META{/association/pc_cautions}|oui|et{#ENV{prix_caution}|oui})
+						<option value="#CODE"[(#ENV{mode_caution0}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
+					]
+				</BOUCLE_mode_caution0>
+			[(#ENV{prix_caution}|oui|et{#ENV{id_pret}|oui})
+					[(#META{/association/pc_cautions}|non)
+						<option value="" selected="selected"><:asso:prets_libelle_caution_hors_compta:></option>
+					]
+					</select>
+				</li>
+			]
+			</ul>
+		</fieldset>
+<INCLURE{fond=prive/editer/bouton_validation, pass_ok=#ENV{id_pret} } />
+	</form>
+</div>

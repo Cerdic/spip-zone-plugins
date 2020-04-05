@@ -1,0 +1,66 @@
+<fieldset>
+  <h3 class="legend"><:asso:config_info_asso:></h3>
+  <ul>
+	<li class="editer_nom obligatoire">[(#REM)<!-- Obligatoire car il faut au moins le nom de l'association !!!! -->]
+		[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{nom})</span>]
+		<label for="nom"><:asso:config_libelle_nom:></label>
+		<input type="text" name="nom" [value="(#ENV{nom})"] id="nom" class="text" />
+	</li>
+	<li class="editer_rue">
+		<label for="rue"><:asso:config_libelle_rue:></label>
+		<textarea name="rue" id="rue" rows="3">[(#ENV{rue})]</textarea>
+	</li>
+	<li class="editer_cp">
+		<label for="cp"><:asso:config_libelle_codepostal:></label>
+		<input type="text" size="10" name="cp" [value="(#ENV{cp})"] id="cp" class="text" />
+	</li>
+	<li class="editer_ville">
+		<label for="ville"><:asso:config_libelle_ville:></label>
+		<input type="text" name="ville" [value="(#ENV{ville})"] id="ville" class="text" />
+	</li>
+	<li class="editer_pays">
+		<label for="pays"><:asso:config_libelle_pays:></label>
+	<B_pays>
+		<select name="pays">
+			<option value=""></option>
+	<BOUCLE_pays(PAYS?) {par nom}>
+			<option value="#CODE"[ (#ENV{pays,FR}|=={#CODE}|?{selected="selected"})]>#NOM</option>
+	</BOUCLE_pays>
+		</select>
+	</B_pays>
+		[(#REM)<!-- Cette table est fournie par le plugin "Pays"
+		qui propose une balise SAISIE requerant le plugin "Saisies"
+		(les deux sont necessaires au plugin "Coordonnees")...
+		En son absence on propose une zone de saisie standard... -->]
+		<input type="text" size="3" name="pays" [value="(#ENV{pays,FR})"] id="champ_pays" class="text" />
+		<a class="explication" href="http://www.iso.org/iso/fr/country_codes/iso_3166_code_lists.htm"><:asso:config_aide_pays:></a>
+	<//B_pays>
+	</li>
+	<li class="editer_email">
+		<label for="email"><:asso:config_libelle_email:></label>
+		<input type="[(#HTML5|?{email,text})]" name="email" [value="(#ENV{email})"] id="email" class="email" />
+	</li>
+	<li class="editer_telephone">
+		<label for="telephone"><:asso:config_libelle_telephone:></label>
+		<input type="[(#HTML5|?{tel,text})]" name="telephone" [value="(#ENV{telephone})"] id="telephone" class="tel" />
+	</li>
+	<li class="editer_objet">
+		<label for="objet"><:asso:config_libelle_objet:></label>
+		<textarea name="objet" id="objet" rows="3">[(#ENV{objet})]</textarea>
+	</li>
+	<li class="editer_declaration">
+		<label for="declaration"><:asso:config_libelle_declaration:></label>
+		<input type="text" name="declaration" [value="(#ENV{declaration})"] id="declaration" class="text" />
+	</li>
+	<li class="editer_prefet">
+		<label for="prefet"><:asso:config_libelle_prefet:></label>
+		<input type="text" name="prefet" [value="(#ENV{prefet})"] id="prefet" class="text" />
+	</li>
+	<BOUCLE_metas_utilisateur(ASSOCIATION_METAS){nom LIKE meta_utilisateur_%}{par nom}>
+	<li class="editer_#NOM">
+		<label for="#NOM">[(#NOM|replace{meta_utilisateur}|_T)]</label>
+		<input type="text" name="#NOM" [value="(#VALEUR)"] id="#NOM" class="text" />
+	</li>
+	</BOUCLE_metas_utilisateur>
+	</ul>
+</fieldset>

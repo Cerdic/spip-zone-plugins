@@ -1,0 +1,106 @@
+<div class="formulaire_spip formulaire_#FORM">
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    <form id="formulaire_#FORM" method="post" action="#ENV{action}">
+		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
+		<fieldset>
+			<legend><:asso:ressources_libelle_acquisition:></legend>
+			<ul>
+				<li class="editer_intitule">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{intitule})</span>]
+					<label for="intitule"><:asso:ressources_libelle_intitule:></label>
+					<input type="text" name="intitule" [value="(#ENV{intitule})"] id="intitule"  class="text" />
+				</li>
+				<li class="editer_date_acquisition">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_acquisition})</span>]
+					<label for="date_acquisition"><:asso:ressources_libelle_date_acquisition:></label>
+					<input type="[(#HTML5|?{date,text})]" name="date_acquisition" [value="(#ENV{date_acquisition}|affdate{Y-m-d})"] id="date_acquisition"  class="date" />
+				</li>
+				<li class="editer_prix_acquisition">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{prix_acquisition})</span>]
+					<label for="prix_acquisition"><:asso:ressources_libelle_prix_acquisition:></label>
+					<input type="[(#HTML5|?{number,text})]" name="prix_acquisition" [value="(#ENV{prix_acquisition})"] id="prix_acquisition"  class="number float price" />
+				</li>
+<INCLURE{fond=prive/editer/saisir_paiement, journal, type_operation=#META{/association/classe_charges}, id_dest, montant_dest, defaut_dest, env} />
+			</ul>
+		</fieldset>
+		<fieldset>
+			<legend><:asso:ressources_libelle_location:></legend>
+			<ul>
+				<li class="editer_mot_cle">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{id_mot})</span>]
+					<label for="mot_cle"><:public:mots_clef:></label>
+					<select name="id_mot" id="mot_cle">
+						<option value="#ENV{id_mot}"> </option>
+					<BOUCLE_groupemots_ressources(MOTS){id_groupe=#META{/association/groupemots_ressources}}{par titre}>
+						<option value="#ID_MOT"[(#ENV{id_mot}|=={#ID_MOT}|oui) selected="selected"]>#TITRE</option>
+					</BOUCLE_groupemots_ressources>
+					</select>
+				</li>
+				<li class="editer_caution">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{caution})</span>]
+					<label for="code"><:asso:ressources_libelle_prix_caution:></label>
+					<input type="[(#HTML5|?{number,text})]" name="prix_caution" [value="(#ENV{prix_caution})"] id="caution"  class="umber float price" />
+				</li>
+				<li class="editer_code">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{code})</span>]
+					<label for="code"><:asso:ressources_libelle_code:></label>
+					<input type="text" name="code" [value="(#ENV{code})"] id="code"  class="text" />
+				</li>
+				<li class="editer_prix">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{pu})</span>]
+					<label for="prix"><:asso:ressources_libelle_prix_location:></label>
+					<input type="[(#HTML5|?{number,text})]" name="pu" [value="(#ENV{pu})"] id="prix"  class="number float price" />
+				</li>
+				<li class="editer_unite">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{unite})</span>]
+					<label for="unite"><:asso:ressources_libelle_unite:></label>
+					<select name="ud" id="unite">
+						<option value="#ENV{ud}"> </option>
+					[(#REM)<!-- trop grand l'annee (deja limite le mois)
+						<option value="Y"[ (#ENV{ud}|strtoupper|=={Y})selected="selected"]><:local:an:></option>
+					-->]
+						<option value="M"[ (#ENV{ud}|strtoupper|=={M})selected="selected"]><:spip:date_un_mois:></option>
+						<option value="W"[ (#ENV{ud}|strtoupper|=={W})selected="selected"]><:spip:date_une_semaine:></option>
+						<option value="D"[ (#ENV{ud}|strtoupper|=={D}|ou{#ENV{ud}|strtoupper|=={J}})selected="selected"]><:local:jour:></option>
+						<option value="H"[ (#ENV{ud}|strtoupper|=={H})selected="selected"]><:spip:date_une_heure:></option>
+					</select>
+				</li>
+				<li class="editer_statut">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{statut})</span>]
+			[(#ENV{quantite}|oui)
+					<label for="quantite"><:asso:libelle_quantite:></label>
+					<input type="[(#HTML5|?{number,text})]" name="quantite" [value="(#ENV{quantite})"] id="quantite" class="number integer" />
+				</li>
+				<li class="editer_suspendu">
+					<input type="checkbox" name="suspendu"[ (#ENV{suspendu}|oui)checked="checked"] id="suspension" class="checkbox" />
+					<label for="suspension"><:asso:ressources_libelle_statut_suspendu:></label>
+			] [(#REM)<!-- Nouveaux statuts numeriques -->]
+			[(#ENV{quantite}|non)
+					<label for="statut"><:asso:ressources_libelle_statut:></label>
+					<div class="choix">
+						<input type="radio" class="radio" name="statut" value="ok" id="statut_ok"[ (#ENV{statut}|=={ok}|oui)checked="checked"] />
+						<label for="statut_ok"><:asso:ressources_libelle_statut_ok:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" class="radio" name="statut" value="reserve" id="statut_reserve"[ (#ENV{statut}|=={reserve}|oui)checked="checked"] />
+						<label for="statut_reserve"><:asso:ressources_libelle_statut_reserve:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" class="radio" name="statut" value="suspendu" id="statut_suspendu"[ (#ENV{statut}|=={suspendu}|oui)checked="checked"] />
+						<label for="statut_suspendu"><:asso:ressources_libelle_statut_suspendu:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" class="radio" name="statut" value="sorti" id="statut_sorti"[ (#ENV{statut}|=={sorti}|oui)checked="checked"] />
+						<label for="statut_sorti"><:asso:ressources_libelle_statut_sorti:></label>
+					</div>
+			] [(#REM)<!-- Anciens statuts textuels -->]
+				</li>
+<INCLURE{fond=prive/editer/saisir_commentaires, commentaire } />
+			</ul>
+		</fieldset>
+		[(#REM)<!-- ajouter les saisies supplementaires : extra et autre, a cet endroit -->]
+		<!--extra-->
+<INCLURE{fond=prive/editer/bouton_validation, pass_ok=#ENV{id_ressource} } />
+	</form>
+</div>

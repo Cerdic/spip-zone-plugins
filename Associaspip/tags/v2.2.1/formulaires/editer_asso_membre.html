@@ -1,0 +1,52 @@
+<div class="formulaire_spip formulaire_#FORM">
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    <form id="formulaire_#FORM" method="post" action="#ENV{action}">
+		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
+		<ul>
+		[(#META{/association/civilite}|oui)
+			<li class="editer_sexe">
+				<label for="sexe"><:asso:adherent_libelle_sexe:></label>
+				<input type="text" name="sexe" value="[(#ENV{sexe})]" id="sexe"  class="text" />
+			</li>
+		]
+			<li class="editer_nom_famille">
+				<label for="nom_famille"><:asso:adherent_libelle_nom_famille:></label>
+				<input type="text" name="nom_famille" value="[(#ENV{nom_famille})]" id="nom_famille"  class="text" />
+			</li>
+		[(#META{/association/prenom}|oui)
+			<li class="editer_prenom">
+				<label for="prenom"><:asso:adherent_libelle_prenom:></label>
+				<input type="text" name="prenom" value="[(#ENV{prenom})]" id="prenom"  class="text" />
+			</li>
+		]
+<INCLURE{fond=prive/editer/saisir_categorie}{categorie=#ENV{id_categorie}} />
+			<li class="editer_validite">
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_validite})</span>]
+				<label for="saisie_date_validite"><:asso:adherent_libelle_validite:></label>
+				<input type="[(#HTML5|?{date,text})]" name="date_validite" value="[(#ENV{date_validite}|affdate{Y-m-d})]" id="saisie_date_validite" class="date" />
+			</li>
+			<li class="editer_statut_interne">
+				<label for="statut_interne"><:asso:adherent_libelle_statut:></label>
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{statut_interne})</span>]
+				<select name="statut_interne" id="statut_interne">
+					<option value='sorti' [(#ENV{statut_interne}|=={sorti}|oui)selected="selected"]><:asso:adherent_entete_statut_sorti:></option>
+					<option value='prospect' [(#ENV{statut_interne}|=={prospect}|oui)selected="selected"]><:asso:adherent_entete_statut_prospect:></option>
+					<option value='ok' [(#ENV{statut_interne}|=={ok}|oui)selected="selected"]><:asso:adherent_entete_statut_ok:></option>
+					<option value='echu' [(#ENV{statut_interne}|=={echu}|oui)selected="selected"]><:asso:adherent_entete_statut_echu:></option>
+					<option value='relance' [(#ENV{statut_interne}|=={relance}|oui)selected="selected"]><:asso:adherent_entete_statut_relance:></option>
+				</select>
+			</li>
+		[(#META{/association/id_asso}|oui)
+			<li class="editer_id_asso">
+				<label for="id_asso"><:asso:adherent_libelle_reference_interne:></label>
+				<input type="text" name="id_asso" value="[(#ENV{id_asso})]" id="id_asso" class="text" />
+			</li>
+		]
+<INCLURE{fond=prive/editer/saisir_commentaires}{commentaire=#ENV{commentaire}} />
+		</ul>
+		[(#REM)<!-- ajouter les saisies supplementaires : extra et autre, a cet endroit -->]
+		<!--extra-->
+<INCLURE{fond=prive/editer/bouton_validation, pass_ok=0 } />
+    </form>
+</div>

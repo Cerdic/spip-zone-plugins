@@ -1,0 +1,43 @@
+<div class="formulaire_spip formulaire_#FORM">
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    <form id="formulaire_#FORM" method="post" action="#ENV{action}">
+		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
+		<fieldset>
+			<legend><:asso:activite_libelle_inscription:></legend>
+			<ul>
+				<li class="editer_date">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_inscription})</span>]
+					<label for="date_inscription"><:asso:libelle_date:></label>
+					<input name="date_inscription" type="[(#HTML5|?{date,text})]" [value="(#ENV{date_inscription})"] id="date_inscription" class="date" readonly="readonly" />
+				</li>
+<INCLURE{fond=prive/editer/saisir_membre, nom, id_auteur, lecture_seule=#ENV{date_paiement} } />
+				<li class="editer_quantite">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{quantite})</span>]
+					<label for="nombre_places"><:asso:libelle_quantite:></label>
+					<input name="quantite" type="[(#HTML5|?{number,text})]" [value="(#ENV{quantite})" ]id="nombre_places" class="number integer" />
+				</li>
+<INCLURE{fond=prive/editer/saisir_commentaires, commentaire } />
+			</ul>
+			[(#REM)<!-- ajouter les saisies supplementaires : extra et autre, a cet endroit -->]
+			<!--extra-->
+		</fieldset>
+		<fieldset>
+			<legend><:asso:activite_libelle_paiement:></legend>
+			<ul>
+				<li class="editer_montant">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{montant})</span>]
+					<label for="prix_unitaire"><:asso:libelle_montant:></label>
+					<input name="prix_unitaire" type="[(#HTML5|?{number,text})]" [value="(#ENV{prix_unitaire})" ]id="prix_unitaire" class="number float price" />
+				</li>
+				<li class="editer_date">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_paiement})</span>]
+					<label for="date_paiement"><:asso:libelle_date:></label>
+					<input name="date_paiement" type="[(#HTML5|?{date,text})]" [value="(#ENV{date_paiement})" ]id="date_paiement" class="date" />
+				</li>
+<INCLURE{fond=prive/editer/saisir_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, defaut_dest, env} />
+			</ul>
+		</fieldset>
+<INCLURE{fond=prive/editer/bouton_validation, pass_ok=#ENV{id_activite} } />
+	</form>
+</div>

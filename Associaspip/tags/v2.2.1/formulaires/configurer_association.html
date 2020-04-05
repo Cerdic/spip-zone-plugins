@@ -1,0 +1,36 @@
+<script type="text/javascript">//<![CDATA[
+	// http://www.annedorko.com/blog/toggle-enable-and-disable-a-form-field-with-a-checkbox-javascript-101
+	function toggle(checkboxID, toggleID) {
+		var checkbox = document.getElementById(checkboxID);
+		var toggle = document.getElementById(toggleID);
+		updateToggle = checkbox.checked ? toggle.disabled=false : toggle.disabled=true;
+	}
+//]]></script>
+<div class="formulaire_spip formulaire_#FORM">
+  [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+  [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+  <form id="formulaire_#FORM" method="post" action="#ENV{action}">
+    <div>#ACTION_FORMULAIRE{#ENV{action}}</div>
+    <ul>
+[(#REM)<!-- Informations sur l'association -->]
+      <li class="fieldset" id="conf_informations">
+#INCLURE{fond=prive/editer/configurer_infos,env}
+      </li>
+[(#REM)<!-- Options de gestion des membres -->]
+      <li class="fieldset" id="conf_membres">
+#INCLURE{fond=prive/editer/configurer_membres,env}
+      </li>
+[(#REM)<!-- PDF des listes a telecharger pour impression et CERFA -->]
+[(#PLUGIN{fpdf}|oui)
+      <li class="fieldset" id="conf_pdf">
+#INCLURE{fond=prive/editer/configurer_pdf,env}
+      </li>
+]
+[(#REM)<!-- Compta -->]
+#INCLURE{fond=prive/editer/configurer_compta,env}
+    </ul>
+    <p class="boutons">
+      <input type="submit" value="<:pass_ok:>" class="submit" />
+    </p>
+  </form>
+</div>

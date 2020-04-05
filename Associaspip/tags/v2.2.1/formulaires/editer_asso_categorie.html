@@ -1,0 +1,31 @@
+<div class="formulaire_spip formulaire_#FORM">
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    <form id="formulaire_#FORM" method="post" action="#ENV{action}">
+		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
+		<ul>
+			<li class="editer_valeur">
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{valeur})</span>]
+				<label for="valeur"><:asso:categorie:></label>
+				<input name="valeur" type="text" [value="(#ENV{valeur})"] id="valeur" class="text" />
+			</li>
+			<li class="editer_libelle">
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{libelle})</span>]
+				<label for="libelle"><:asso:libelle_complet:></label>
+				<input name="libelle" type="text" [value="(#ENV{libelle})"] id="libelle" class="text" />
+			</li>
+			<li class="editer_duree">
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{duree})</span>]
+				<label for="duree"><:asso:libelle_duree:></label>
+				<input name="duree" type="[(#HTML5|?{number,text})]" [value="(#ENV{duree})"] id="duree" class="number integer" />
+			</li>
+			<li class="editer_cotisation">
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{prix_cotisation})</span>]
+				<label for="cotisation"><:asso:libelle_montant:></label>
+				<input name="prix_cotisation" type="[(#HTML5|?{number,text})]" [value="(#ENV{prix_cotisation})"] id="cotisation" class="number float price" />
+			</li>
+<INCLURE{fond=prive/editer/saisir_commentaires, commentaire } />
+		</ul>
+<INCLURE{fond=prive/editer/bouton_validation, pass_ok=#ENV{id_categorie} } />
+	</form>
+</div>

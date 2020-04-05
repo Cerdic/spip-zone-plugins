@@ -1,0 +1,289 @@
+#CACHE{0}
+[(#REM)<style>]
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+
+/* CSS Document */
+/* Espace prive*/
+
+/*** Conventions de nommage
+ *
+ **  Les classes englobantes (tags DIV/TABLE/UL/etc de plus haut niveau des pages)
+ -* pour les tables SQL spip_asso_XX :
+ -** .asso_tablo pour presenter plusieurs enregistrements en tableau dans la colonne principale
+ -** .asso_filtres pour la zone d'elements de filtrage au dessus
+ -** .asso_stats pour presenter les statistiques (sommes/totaux, moyennes) dans le cadre informatif de la colonne gauche (toujours en bas, avant la date)
+ -** .asso_infos pour presenter un seul enregistrement (avec d'eventuelles informationsormations connexes) dans le cadre d'infos de la colonne gauche (toujours en premier avec le nom/titre et le id_XX de l'objet)
+ -* pour le reste :
+ -** .assso_autres seulement pour l'instant
+ ** Les identifiants englobants (idem) prennent le nom de l'objet (au singulier) ou de la collection/table (au pluriel) -- nom qui est souvent le nom de la page-- et sont prefixees par le nom de la classe
+
+ */
+
+
+
+/** Titres
+ ******************************/
+
+h1.asso_titre
+{
+	text-align: center;
+}
+
+
+
+/** Tableaux
+ ******************************/
+
+table.asso_infos,
+table.asso_stats,
+table.asso_tablo
+{
+	width: 100%; /* HTML:TABLE width=100% */
+	border: 1px solid #aaa; /* HTML:TABLE border=1 bordercolor=#aaaaaa */
+	border-collapse: collapse; /* HTML:TABLE cellspacing=0 */
+	font-family: Arial, Sans, sans-serif;
+	font-size: 8pt;
+	margin-bottom: .4em; /* ajout pour ne pas trop coller ce qui suit */
+} /* @: http://stackoverflow.com/a/7129454 http://w3schools.com/cssref/pr_tab_border-collapse.asp */
+table.asso_tablo thead tr,
+table.asso_tablo tr.head,
+table.asso_tablo tr.row_first
+{
+	background-color: #dbe1c5; /* HTML:TR bgcolor=#dbe1c5 */
+}
+table.asso_tablo tbody tr,
+table.asso_tablo tr.row_odd,
+table.asso_tablo tr.row_even
+{
+	background-color: #eee; /* HTML:TR bgcolor=#eeeeee */
+}
+table.asso_tablo tfoot tr
+table.asso_tablo tr.foot,
+table.asso_tablo tr.row_last
+{
+	background-color: #eee; /* HTML:TR bgcolor=#eeeeee */
+}
+table.asso_tablo th, table.asso_tablo td
+{ /* cas par defaut des cellules */
+	text-align: left; /* HTML:TD align=left */
+	padding: 2px; /* HTML:TABLE cellpadding=2 */
+/*	font-size: 11px; /* HTML: class=arial11 ? */
+}
+table.asso_tablo tbody td,
+tablo.asso_stats tfoot td,
+tablo.asso_stats tfoot th,
+tablo.asso_stats tr.foot td,
+tablo.asso_stats tr.foot th
+{
+	border-top: 1px solid #ccc; /* class=border1 */
+}
+table.asso_tablo tfoot th,
+table.asso_tablo tr.foot th
+{
+	color: #9F1C30;
+/*	text-align: right; */
+}
+
+/* couleurs de texte specifiques */
+td.entree, th.entree
+{ /* mini-bilan : entrees/recettes */
+	color: #00f; /* blue */
+}
+td.sortie, th.sortie
+{ /* mini-bilan : sorties/depenses */
+	color: #FF1493; /* pink */
+}
+td.solde, th.solde
+{ /* mini-bilan : solde/difference/benefice/perte */
+	color: #9F1C30;
+}
+
+/* couleurs de fond specifiques */
+tr.pair, td.pair
+{ /* membres : relances (relance | >0) ; mini-bilan : sorties/depenses (solde<0) ; pret : restitue */
+	background-color: #dcf3f4 !important;
+}
+tr.impair, td.impair
+{ /* membres : echus (echu | >0) ; mini-bilan : entrees/recettes (solde>0) ; pret : du ; activite : impayee */
+	background-color: #f0dcf4 !important;
+}
+tr.valide, td.valide
+{ /* membres : a jour (ok | >0) ; ressources : libres/disponibles (ok | >0) ; activite : payee */
+	background-color: #a0ffa0 !important;
+}
+tr.sortie, td.sortie
+{ /* membres : desactives ; ressources : indisponibles car supprimees ? (sorti | NULL) */
+	background-color: #e6eac9 !important;
+}
+tr.prospect, td.prospect
+{ /* membres : prospects (prospect | =0) ; ressources : indisponibles car suspendues (suspendu | <0) */
+	background-color: #fff8dc !important;
+}
+tr.vi, td.vi
+{ /* comptes : virement interne (classe 5) ; ressources : indisponibles car suspendues (suspendu | <0) */
+	background-color: #b4ffb4;
+}
+tr.cv, td.cv
+{ /* comptes : contribution volontaire (classe 8) ; ressources : indisponibles car reservees (reserve | =0) */
+	background-color: #ffbc61;
+}
+
+tr.surligne, td.surligne
+{ /* comptes : operation mise en evidence */
+	background-color: #fee347 !important;
+}
+
+/* alignements specifiques de cellules */
+td.boutons, td.icones, td.action,
+td.buttons, td.icons, td.actions
+{
+	text-align: center; /* HTML : align=center */
+}
+td.entier,
+td.integer, td.date,
+th.integer, th.date
+{
+	text-align: right; /* HTML:TD align=right */
+}
+td.flottant, td.taux, td.pourcentage,
+td.float, td.decimal, td.rate, td.percent,
+th.float, th.decimal, th.rate, th.percent
+{
+	text-align: right; /* On pourrait centrer sur le separteur decimal mais il varie selon la locale (francophone="," & anglosaxon="." & etc.) Or les montants et durees ayant ici le meme nombre de chiffres en partie fractionnaire, le mieux est de les aligner a droit. De surcroit, contrairement a ce que dit http://www.w3.org/TR/css3-text/#character-alignment mettre deux attributs a cette propriete n'est pas reconnu par le validateur jigsaw.w3.org/css-validator/ et de surcroit ca plante le parsing avec FF9 */
+}
+td.horaire,  td.horodatage,
+td.time, td.datetime,
+th.time, th.datetime
+{
+	text-align: "h"; /* HTML:TD align=char char="h" */
+	/* On pourrait utiliser ":" mais je ne suis pas certain du resultat si on a des HH:MM:SS... */
+} /* @: http://stackoverflow.com/q/1363239 */
+table.asso_filtres td.formulaire,
+table.asso_filtres td form
+{
+	text-align: right; !important /* HTML:TD align=right */
+}
+table.asso_filtres td.pagination,
+table.asso_filtres td .pagination
+{
+	text-align: left; !important /* HTML:TD align=right */
+}
+
+td.taux:after, td.pourcentage:after, td.pourcent:after,
+td.rate:after, td.percent:after, th.percent:after
+{
+	content: "%"; /* &#37; = per cent ; &#137; = per million */
+}
+
+td.action
+{ /* ce champ contient un/une bouton/image de 12px de cote qui doit etre centre dans une cellule avec 2px de marge */
+	width: 15px;
+}
+
+/** Formulaires
+ ******************************/
+
+input.text,
+input.password,
+input.url,
+input.email
+{ /* adapte de dans prive/minipress.css : pour cibler les input par type on leur rajourte des class="TYPE" car IE ne connait pas input[type="TYPE"] qu'on aurait pu utiliser. */
+	width: 50%; /* moitie de la ligne pour donner effet colonne sans utiliser de tableau (dans chaque LI/P/DIV il y a le input/select/textareau et le label) */
+	display: block; /* pour s'assurer de la rupture de lignes autour s'il y a un span.message_erreur et/ou em.explication ou autre */
+	/*behavior: url(win_width.htc); /* http://reference.sitepoint.com/css/behavior */
+}
+input.submit, input[type="submit"] {
+	font-weight: bold;
+	margin-top: 3px;
+}
+label
+{
+	font-weight: bold; /* HTML:B | HTML:STRONG */
+}
+.reponse_formulaire,
+.erreur_message
+{
+	font-weight: bold;
+	color: red;
+}
+span.nettoyeur{
+	clear:both;
+	line-height:1px;
+	font-size:1px;
+	display:block;
+}
+span.erreur {
+	display: block;
+	color: red;
+}
+
+/* formulaires CVT */
+.formulaire_spip input,
+.formulaire_spip select,
+.formulaire_spip textarea
+{ /* adapte de .formo dans prive/minipress.css (voir s'il faut combiner avec celui de prive/styles_vieilles_def.html) */
+/*	font-size: 1.1em; */
+	background-color: #f8f8f9;
+	background-position: center bottom;
+/*	margin-bottom: 1em; */
+	padding: 3px;
+	border: 1px inset #333;
+}
+
+.formulaire_spip input[readonly] {border:0}
+
+/* formulaires specifiques du plugin */
+.formulaire_ajouter_membres_groupe
+{
+	margin-top: 2em;
+}
+.formulaire_ajouter_membres_groupe .pagination
+{
+	margin: 0px;
+}
+.formulaire_spip li.liste_auteurs
+{ /* liste auteurs 4 par lignes dans un formulaire */
+	/*display: table-cell;*/
+	list-style: none;
+	padding: .5em .3em;
+	width: 23%;
+	float: left;
+	clear: none;
+	min-height: 2.8em;
+	/*height: 2.8em;*/
+	border-left: 1px ridge brown;
+	border-bottom: 1px ridge brown;
+	border-bottom-left-radius: 1.3em;
+}
+.formulaire_spip li .formulaire_edition_destinations li
+{
+	padding: 0px;
+	display: inline;
+}
+.formulaire_spip .editer_statut .choix,
+.formulaire_spip .editer_type_operation .choix
+{ /* cases a cocher ou boutons regroupes en une ligne (au lieu d'un choix par ligne habituellement) */
+    display: inline;
+}
+.cachediv
+{ /* masquer certains blocs hors-contexte */
+    visibility: hidden;
+    overflow: hidden;
+    height: 1px;
+    margin-top: -1px;
+    position: absolute;
+}
+.asso_filtres input,
+.asso_filtres select
+{ /* adapte de .fondl dans prive/styles_vielles_def.html */
+	margin-top: 0px;
+	padding: 0px; /* 3px dans styles_vieilles_def.html mais redefini a 0px dans style_prive.html pour les select ; et ca convient mieux ici */
+	background-color: #e4e4e4;
+	border: 1px solid #edf3fe;
+	background-position: center bottom;
+	float: none;
+	font-size: 11px;
+}
+

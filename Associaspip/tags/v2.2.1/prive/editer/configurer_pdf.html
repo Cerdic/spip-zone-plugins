@@ -1,0 +1,84 @@
+<fieldset>
+	<h3 class="legend"><:asso:config_libelle_fpdf:></h3>
+	<fieldset>
+	<legend><:asso:config_fpdf_page:></legend>
+	<em class="explication"><:asso:config_aide_fpdf:></em>
+	<ul>
+		<li class="editer_fpdf_orientation">
+			<label for="fpdf_orientation"><:asso:config_fpdf_orientation:></label>
+			<select name="fpdf_orientation" id="fpdf_orientation">
+				<option value="P"[ (#ENV{fpdf_orientation}|strtoupper|=={P}|oui)selected="selected"]><:asso:config_fpdf_portrait:></option>
+				<option value="L"[ (#ENV{fpdf_orientation}|strtoupper|=={L}|oui) selected="selected"]><:asso:config_fpdf_landscape:></option>
+			</select>
+		</li>
+		<li class="editer_fpdf_unit">
+			<label for="fpdf_unit"><:asso:config_fpdf_unit:></label>
+			<select name="fpdf_unit" id="fpdf_unit">
+				<option value="pt"[ (#ENV{fpdf_unit}|strtolower|=={pt}|oui)selected="selected"]><:asso:config_fpdf_point:></option>
+				<option value="cm"[ (#ENV{fpdf_unit}|strtolower|=={cm}|oui) selected="selected"]><:asso:config_fpdf_centimeter:></option>
+				<option value="mm"[ (#ENV{fpdf_unit}|strtolower|=={mm}|oui) selected="selected"]><:asso:config_fpdf_millimeter:></option>
+				<option value="in"[ (#ENV{fpdf_unit}|strtolower|=={in}|oui) selected="selected"]><:asso:config_fpdf_inch:></option>
+			</select>
+		</li>
+		<li class="editer_fpdf_format">
+			<label for="fpdf_format"><:asso:config_fpdf_format:></label>
+			<select name="fpdf_format" id="fpdf_format">
+				<option value="A3"[ (#ENV{fpdf_format}|ucfirst|=={A3}|oui)selected="selected"]><:asso:config_fpdf_a3:></option>
+				<option value="A4"[ (#ENV{fpdf_format}|ucfirst|=={A4}|oui) selected="selected"]><:asso:config_fpdf_a4:></option>
+				<option value="A5"[ (#ENV{fpdf_format}|ucfirst|=={A5}|oui) selected="selected"]><:asso:config_fpdf_a5:></option>
+				<option value="Legal"[ (#ENV{fpdf_format}|ucfirst|=={Legal}|oui) selected="selected"]><:asso:config_fpdf_legal:></option>
+				<option value="Letter"[ (#ENV{fpdf_format}|ucfirst|=={Letter}|oui) selected="selected"]><:asso:config_fpdf_letter:></option>
+			</select>
+		</li>
+		<li>
+			<label for="fpdf_marginl"><:asso:config_fpdf_marginh:></label>
+			<input type="[(#HTML5|?{number,text})]" class="number, integer" name="fpdf_marginl" id="fpdf_marginl" value="[(#ENV{fpdf_marginl,10})]" />
+		</li>
+		<li>
+			<label for="fpdf_margint"><:asso:config_fpdf_marginv:></label>
+			<input type="[(#HTML5|?{number,text})]" class="number, integer" name="fpdf_margint" id="fpdf_margint" value="[(#ENV{fpdf_margint,10})]" />
+		</li>
+		<li>
+			<label for="fpdf_font"><:asso:config_fpdf_font:></label>
+			<select name="fpdf_font" id="fpdf_font">
+				<option value="courier"[ (#ENV{fpdf_font}|strtolower|=={courier}|oui) selected="selected"]>Courier</option>
+				<option value="helvetica"[ (#ENV{fpdf_font}|strtolower|=={helvetica}|oui) selected="selected"]>Helvetica</option>
+				<option value="symbol"[ (#ENV{fpdf_font}|strtolower|=={symbol}|oui) selected="selected"]>Symbol</option>
+				<option value="tahoma"[ (#ENV{fpdf_font}|strtolower|=={tahoma}|oui) selected="selected"]>Tahoma</option>
+				<option value="times"[ (#ENV{fpdf_font}|strtolower|=={times}|oui) selected="selected"]>Times</option>
+				<option value="zapfdingbats"[ (#ENV{fpdf_font}|strtolower|=={zapfdingbats}|oui) selected="selected"]>Zapf Dingbats</option>
+			</select>
+		</li>
+	</ul>
+	</fieldset>
+	<fieldset>
+	<legend><:asso:config_fpdf_table:></legend>
+	<em class="explication"><:asso:config_aide_fpdf:></em>
+	<ul>
+		<li>
+			<label for="fpdf_tablealign"><:asso:config_fpdf_tablealign:></label>
+			<select name="fpdf_tablealign" id="fpdf_tablealign">
+				<option value="L"[ (#ENV{fpdf_tablealign}|strtoupper|=={L}|oui) selected="selected"]><:asso:config_fpdf_left:></option>
+				<option value="C"[ (#ENV{fpdf_tablealign}|strtoupper|=={C}|oui) selected="selected"]><:asso:config_fpdf_center:></option>
+				<option value="R"[ (#ENV{fpdf_tablealign}|strtoupper|=={R}|oui) selected="selected"]><:asso:config_fpdf_right:></option>
+			</select>
+		</li>
+		<li>
+			<label for="fpdf_marginc"><:asso:config_fpdf_marginc:></label>
+			<input type="[(#HTML5|?{number,text})]" class="number integer" name="fpdf_marginc" id="fpdf_marginc" value="[(#ENV{fpdf_marginc,2})]" />
+		</li>
+		<li>
+			<label for="fpdf_rowhead"><:asso:config_fpdf_rowhead:></label>
+			<input type="[(#HTML5|?{color,text})]" class="color palette" name="fpdf_rowhead" id="fpdf_rowhead" value="[(#ENV{fpdf_rowhead,FF9664})]" />
+		</li>
+		<li>
+			<label for="fpdf_roweven"><:asso:config_fpdf_roweven:></label>
+			<input type="[(#HTML5|?{color,text})]" class="color palette" name="fpdf_roweven" id="fpdf_roweven" value="[(#ENV{fpdf_roweven,E0EBFF})]" />
+		</li>
+		<li>
+			<label for="fpdf_rowodd"><:asso:config_fpdf_rowodd:></label>
+			<input type="[(#HTML5|?{color,text})]" class="color palette" name="fpdf_rowodd" id="fpdf_rowodd" value="[(#ENV{fpdf_rowodd,FFFFFF})]" />
+		</li>
+	</ul>
+	</fieldset>
+</fieldset>

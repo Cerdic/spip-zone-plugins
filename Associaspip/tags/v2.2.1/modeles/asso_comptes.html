@@ -1,0 +1,43 @@
+[(#REM)<!-- doc: contrib.spip.net/4174#modeles -->]
+<B_historique_comptable>
+#ANCRE_PAGINATION
+<table class="spip asso_tablo" width="100%">
+	[<caption>(#ENV{titre}|sinon{<:asso:recherche_reponses{nombre=#GRAND_TOTAL}:>})</caption>]
+	<tr class="row_first">
+		<th><:asso:entete_date:></th>
+		<th><:asso:adherent_entete_justification:></th>
+		<th><:asso:entete_montant:></th>
+		<th><:asso:compte_entete_financier:></th>
+	[(#SESSION{statut}|=={0minirezo}|oui)
+		<th><:asso:adherent_entete_journal:></th>
+		<th><:asso:compte_entete_imputation:></th>
+	]
+	</tr>
+<BOUCLE_historique_comptable(ASSO_COMPTES)
+	{date_operation?LIKE #ENV{date_operation}%}
+	{recette?}
+	{depense?}
+	{jutification?LIKE %#ENV{justification}%}
+	{imputation?LIKE #ENV{imputation}%}
+	{journal?LIKE #ENV{journal}%}
+	{id_journal?IN #ENV{id_journal}}
+	{maj?LIKE #ENV{maj}%}
+	{par #ENV{tri, date_operation DESC}}
+	{pagination #ENV{pagination,10} assocomptes}
+	>
+	<tr id="compte#ID_COMPTE" class="[row_(#COMPTEUR_BOUCLE|alterner{'odd','even'})]">
+		<td><span title="#DATE">[(#DATE_OPERATION|appliquer_filtre{association_formater_date})]</span></td>
+		<td>[(#JUSTIFICATION|propre)]</td>
+		<td>[(#RECETTE|>{0}|?{[<span title="+#RECETTE">(#VAL{'%.2n'}|money_format{#RECETTE})</span>],[<span title="-#DEPENSE">-(#VAL{'%.2n'}|money_format{#DEPENSE})</span>]})]</td>
+		<td><BOUCLE_ModePaiement(spip_asso_plan){code=#JOURNAL}{0,1}><span title="#JOURNAL">#INTITULE</span></BOUCLE_ModePaiement></td>
+	[(#SESSION{statut}|=={0minirezo}|oui)
+		<td>#ID_JOURNAL</td>
+		<td>#IMPUTATION</td>
+	]
+	</tr>
+</BOUCLE_historique_comptable>
+</table>
+[<p class="pagination">(#PAGINATION{page})</p>]
+</B_historique_comptable>
+[<div class="erreur">(#ENV{vide}|sinon{<:asso:recherche_reponse0:>})</div>]
+<//B_historique_comptable>

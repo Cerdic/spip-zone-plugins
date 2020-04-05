@@ -1,0 +1,64 @@
+[(#REM)<!-- CHOISIR MemBRes acteur/destinataire et indiquer le NOM affiche...
+si c'est un membre on le choisi directement dans la liste, puis on indique le nom a afficher ;
+si ce n'est pas un membre le nom a aficher est son nom.
+
+plugin = associaspip ; tables = spip_asso_comptes.
+plugins necessaires = aucun
+
+parametres =
+- champ_nom (texte) : nom du "champ de nom libre"
+- valeur_nom (texte) : valeur du "champ de nom libre"
+- lignes_noms (entier) : nombre de lignes visibles pour la saisie de noms (experimental v:0.1.1)
+- champ_id (texte) : nom du "cham id d'auteur"
+- valeur_id (entier) : valeur du "champ id d'auteur"
+- tri_id (texte) : champ par lequel trier la liste des membres (par defaut nom de famille et prenom)
+- statut_interne (texte) : "statut de membres" auquel restreindre la liste
+- categorie (texte) : "categorie de membres" auquel restreindre la liste
+- champs_legende (texte) : titre a utiliser si on veut grouper tous les champs
+- lecture_seule (booleen) : indique si les champs sont non-editables ou au contraire.
+
+maj:2012-10-14; version:0.1.0; licence:GPL; copyleft:gilcot; -->]
+
+#CACHE{0}
+[
+<fieldset>
+    <legend>(#ENV{champs_legende})</legend>
+    <ul>
+]
+[(#ENV{champ_nom}|oui)
+        <li class="editer_#ENV{champ_nom}">
+        [<span class="erreur_message">(#ENV**{erreurs}|table_valeur{#ENV{champ_nom}})</span>]
+            <label for="saisie_#ENV{champ_nom}">[(#ENV{lignes_noms}|?{<:asso:libelle_noms:>,<:asso:libelle_nom:>})]</label>
+    [(#ENV{lignes_noms}|oui)
+            <textarea name="#ENV{champ_nom}" id="saisie_#ENV{champ_nom}" rows="#ENV{lignes_noms}" [(#ENV{lecture_seule}|oui) readonly="readonly" disabled="disabled"]>#ENV{valeur_nom}</textarea>
+    ]
+    [(#ENV{lignes_noms}|non)
+            <input type="text" name="#ENV{champ_nom}" [value="(#ENV{valeur_nom})"] id="saisie_#ENV{champ_nom}" class="text" [(#ENV{lecture_seule}|oui) readonly="readonly" disabled="disabled"] />
+    ]
+        </li>
+]
+        <li class="editer_#ENV{champ_id}">
+            [<span class="erreur_message">(#ENV**{erreurs}|table_valeur{#ENV{champ_id}})</span>]
+<B_choix2membre>
+            <label for="saisie_#ENV{champ_id}">[(#ENV{lignes_noms}|?{<:asso:libelle_membres:>,<:asso:libelle_membre:>})]</label>
+            <select name="#ENV{champ_id}" [ multiple="multiple" size="(#ENV{lignes_noms})" ] id="saisie_#ENV{champ_id}" [(#ENV{lecture_seule}|oui) readonly="readonly" disabled="disabled"]>
+                <option></option>
+<BOUCLE_choix2membre(ASSO_MEMBRES) {statut_interne?IN #ENV{statut_interne}}{id_categorie?IN #ENV{categorie}} {par #ENV{tri_id,nom_famille,prenom}} >
+                <option value="#ID_AUTEUR"[ (#ENV{valeur_id}|=={#ID_AUTEUR}|oui)selected="selected"]>#NOM_FAMILLE[, (#META{/association/prenom}|oui) #PRENOM [((#SEXE))] ]</option>
+</BOUCLE_choix2membre>
+            </select>
+</B_choix2membre>
+    [(#REM)<!-- bah idealement s'il n'y a pas de membre on ne met rien... mais ceci permet juste de desactiver la liste (en specifiant un/une statutcategorie inexistant/inexistante par exemple pour retomber sur l'ancienne interface et indiquer un auteur non membre par exemple ) -->]
+            <label for="saisie_#ENV{champ_id}"><:asso:nd_de_membre:></label>
+    [(#ENV{lignes_noms}|oui)
+            <textarea name="#ENV{champ_id}" id="saisie_#ENV{champ_id}" rows="#ENV{lignes_noms}" [(#ENV{lecture_seule}|oui) readonly="readonly" disabled="disabled"]>#ENV{valeur_id}</textarea>
+    ]
+    [(#ENV{lignes_noms}|non)
+            <input type="[(#HTML5|?{number,text})]" name="#ENV{champ_id}" [value="(#ENV{valeur_id})"] id="saisie_#ENV{champ_id}" class="number integer" [(#ENV{lecture_seule}|oui) readonly="readonly" disabled="disabled"] />
+    ]
+<//B_choix2membre>
+        </li>
+[(#ENV{champs_legende}|oui)
+    </ul>
+</fieldset>
+]

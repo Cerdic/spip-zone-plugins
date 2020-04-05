@@ -1,0 +1,38 @@
+[(#REM)<!-- champs de selection d'un membre et de saisie d'un nom alternatif...
+si c'est un membre on le choisi directement dans la liste, puis on indique le nom a afficher ;
+si ce n'est pas un membre le nom a aficher est son nom.
+
+plugin = associaspip ; tables = spip_asso_membres, spip_asso_{activites|dons|ventes}.
+plugins necessaires = aucun
+
+parametres =
+- id_auteur (entier) : ID du membre selectionne
+- statut_interne (texte) : "statut de membres" auquel restreindre la liste
+- categorie (texte) : "categorie de membres" auquel restreindre la liste
+- champs_legende (texte) : titre a utiliser si on veut grouper tous les champs
+- tous_aucun (texte) : texte correspondant a l'absence d'ID
+- lecture_seule (booleen) : indique si les champs sont non-editables ou au contraire.
+
+maj:2012-10-14; version:0.1.0; licence:GPL; copyleft:gilcot; -->
+]#CACHE{0}
+        <li class="editer_nom">
+            [<span class="erreur_message">(#ENV**{erreurs}|table_valeur{nom})</span>]
+            <label for="saisie_nom"><:asso:libelle_nom:></label>
+            <input type="text" name="nom" [value="(#ENV{nom})"] id="saisie_nom" class="text" [(#ENV{lecture_seule}|oui) readonly="readonly" ] />
+        </li>
+        <li class="editer_auteur">
+            [<span class="erreur_message">(#ENV**{erreurs}|table_valeur{id_auteur})</span>]
+<B_choix2membre>
+            <label for="id_auteur"><:asso:libelle_membre:></label>
+            <select name="id_auteur" id="id_auteur" [(#ENV{lecture_seule}|oui) readonly="readonly"]>
+                <option>[(#ENV{tous_aucun})]</option>
+<BOUCLE_choix2membre(ASSO_MEMBRES) {statut_interne?IN #ENV{statut_interne}}{id_categorie?IN #ENV{categorie}} {par nom_famille,prenom} >
+                <option value="#ID_AUTEUR"[ (#ENV{id_auteur}|=={#ID_AUTEUR}|oui)selected="selected"]>#NOM_FAMILLE[, (#META{/association/prenom}|oui) #PRENOM [((#SEXE))] ]</option>
+</BOUCLE_choix2membre>
+            </select>
+</B_choix2membre>
+    [(#REM)<!-- bah idealement s'il n'y a pas de membre on ne met rien... mais ceci permet juste de desactiver la liste (en specifiant un/une statutcategorie inexistant/inexistante par exemple pour retomber sur l'ancienne interface et indiquer un auteur non membre par exemple ) -->]
+            <label for="id_membre"><:asso:nd_de_membre:></label>
+            <input type="[(#HTML5|?{number,text})]" name="id_auteur" [value="(#ENV{id_auteur})"] id="id_membre" class="number integer" [(#ENV{lecture_seule}|oui) readonly="readonly"] />
+<//B_choix2membre>
+        </li>
