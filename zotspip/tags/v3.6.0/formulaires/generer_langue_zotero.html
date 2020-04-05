@@ -1,0 +1,20 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li>
+				<label>Source</label>
+				<p class="explication">Récupérez les élements sources sur <a href="https://github.com/zotero/zotero/blob/master/chrome/locale/fr-FR/zotero/zotero.properties">https://github.com/zotero/zotero/blob/master/chrome/locale/fr-FR/zotero/zotero.properties</a> (adapter l'URL à la langue). Recopiez ci-dessous les entrées itemTypes, itemFields et creatorTypes. Validez le formulaire.</p>
+				<textarea name="source" class="textarea">#ENV*{source}</textarea>
+			</li>
+			[<li>
+				<label>Code à recopier</label>
+				<p class="explication">Code à recopier dans un fichier de langue Spip.</p>
+				<textarea name="source" class="textarea">(#ENV*{code})</textarea>
+			</li>]
+		</ul>
+		<p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+		</p>
+	</div></form>
+</div>

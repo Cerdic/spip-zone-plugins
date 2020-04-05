@@ -1,0 +1,150 @@
+#SET{id,#EVAL{'rand();'}}
+#SET{erreurs,#ENV**{erreurs}|table_valeur{itemType}}
+<li class="editer_itemType[ (#GET{erreurs}|oui)erreur]" id="li_itemType_#GET{id}">
+	<label for="itemType_#GET{id}"><:zotero:itemfields_itemtype:></label>[
+	<span class='erreur_message'>(#GET{erreurs})</span>
+	]<select name="itemType" class="select" id="itemType_#GET{id}">
+		<option value="" id="itemType_aucun_#GET{id}"></option>
+		<BOUCLE_itemtypes(POUR){tableau #SCHEMA_ZOTERO{itemTypes}|zotspip_trier_itemTypes}>
+		<option value="#VALEUR"[(#ENV{itemType}|=={#VALEUR}|oui)selected="selected"] id="itemType_#VALEUR_#GET{id}">[(#VALEUR|zotspip_traduire_type)]</option>
+		</BOUCLE_itemtypes>
+	</select>
+</li>
+<!-- Auteurs -->
+<li class="label_#GET{id}"><label><:zotspip:createurs:> (<:zotspip:nom_prenom:>)</label></li>
+<BOUCLE_creators(POUR){tableau #ENV{creatorType}}>
+<li class="editer_creator editer_creator_#GET{id}">
+	<select name="creatorType[]" class="select creatorType">
+		<BOUCLE_creatortypes(POUR){tableau #SCHEMA_ZOTERO{creatorTypes}|zotspip_liste_creatorTypes_complete}>
+		<option value="#VALEUR"[(#ENV**{creatorType}|table_valeur{#CLE}|sinon{author}|=={#VALEUR}|oui)selected="selected"] class="creatorType_[(#GET{id})] creatorType_[(#VALEUR)]_[(#GET{id})]">[(#VALEUR|zotspip_traduire_createur)]</option>
+		</BOUCLE_creatortypes>
+	</select>
+	<input type="text" name="lastName[]" class="text lastName" value="[(#ENV**{lastName}|table_valeur{#CLE})]" />, 
+	<input type="text" name="firstName[]" class="text firstName" value="[(#ENV**{firstName}|table_valeur{#CLE})]" />
+	<span class="remove_creator remove_creator_#GET{id}" style="display:none;"><a href="#" title="<:zotspip:supprimer_createur:>"><img src="#CHEMIN_IMAGE{remove-creator-16.png}" alt="" width="16" height="16" /></a></span>
+</li>
+</BOUCLE_creators>
+<li class="ajouter_creator" id="ajouter_creator_#GET{id}" style="display:none;">
+	<a href="#" title="<:zotspip:ajouter_createur:>"><:zotspip:ajouter_createur:></a>
+</li>
+
+<BOUCLE_itemfields(POUR){tableau #SCHEMA_ZOTERO{itemFields}}>
+#SET{erreurs,#ENV**{erreurs}|table_valeur{#VALEUR}}
+#SET{val,#VALEUR|=={date}|?{itemDate,#VALEUR}} [(#REM) La date doit être traitée spécifiquement pour éviter les interférences avec SPIP. ]
+<li class="editer_[(#GET{val})] li_itemField_[(#GET{id})] zotspip_itemField [ (#GET{erreurs}|oui)erreur]" id="li_#GET{val}_#GET{id}" data-infos="0">
+	<label for="#GET{val}_#GET{id}">[(#VALEUR|zotspip_traduire_champ)]</label>[
+	<span class='erreur_message'>(#GET{erreurs})</span>
+	][(#GET{val}|=={abstractNote}|oui)<textarea name='#GET{val}' id='#GET{val}_#GET{id}' class='textarea'>[(#ENV**{#GET{val}})]</textarea>
+	][(#GET{val}|=={abstractNote}|non)<input type="text" name="#GET{val}" class="text" value="#ENV*{#GET{val}}" id="#GET{val}_#GET{id}" />]
+</li>
+</BOUCLE_itemfields>
+
+<!--  Mots-clés -->
+<li class="label_#GET{id}"><label><:zotspip:label_tags:></label></li>
+<BOUCLE_tags(POUR){tableau #ENV{tags}}>
+<li class="editer_tag_zotero editer_tag_#GET{id}">
+	<input type="text" name="tags[]" class="text" value="[(#ENV**{tags}|table_valeur{#CLE})]" />
+	<span class="remove_tag remove_tag_#GET{id}" style="display:none;"><a href="#" title="<:zotspip:supprimer_tag:>"><img src="#CHEMIN_IMAGE{remove-tag-16.png}" alt="" width="16" height="16" /></a></span>
+</li>
+</BOUCLE_tags>
+<li class="ajouter_tag" id="ajouter_tag_#GET{id}" style="display:none;">
+	<a href="#" title="<:zotspip:ajouter_tag:>"><:zotspip:ajouter_tag:></a>
+</li>
+
+
+<script src="#CHEMIN{inclure/jquery.sortElements.js}"></script>
+<script type="text/javascript">// <![CDATA[
+	$(document).ready(function(){
+		$('#ajouter_creator_[(#GET{id})] a').click(function(event)
+			{
+				event.preventDefault();
+				c = $('li.editer_creator_#GET{id}:first').clone();
+				c.find('input').attr('value','');
+				c.find('label').remove();
+				c.insertBefore('#ajouter_creator_#GET{id}');
+				if ($('.remove_creator_#GET{id}').length>1) {
+					$('.remove_creator_#GET{id}').show();
+				}
+				return false;
+			});
+		if ($('.remove_creator_#GET{id}').length>1) {
+				$('.remove_creator_#GET{id}').show();
+			}
+		$('.remove_creator_[(#GET{id})] a').click(function(event)
+			{
+				event.preventDefault();
+				$(this).parents('li.editer_creator').remove();
+				if ($('.remove_creator_#GET{id}').length==1) {
+					$('.remove_creator_#GET{id}').hide();
+				}
+				return false;
+			});
+		$('#ajouter_tag_[(#GET{id})] a').click(function(event)
+			{
+				event.preventDefault();
+				c = $('li.editer_tag_#GET{id}:first').clone();
+				c.find('input').attr('value','');
+				c.find('label').remove();
+				c.insertBefore('#ajouter_tag_#GET{id}');
+				if ($('.remove_tag_#GET{id}').length>1) {
+					$('.remove_tag_#GET{id}').show();
+				}
+				return false;
+			});
+		if ($('.remove_tag_#GET{id}').length>1) {
+				$('.remove_tag_#GET{id}').show();
+			}
+		$('.remove_tag_[(#GET{id})] a').click(function(event)
+			{
+				event.preventDefault();
+				$(this).parents('li.editer_tag_zotero').remove();
+				if ($('.remove_tag_#GET{id}').length==1) {
+					$('.remove_tag_#GET{id}').hide();
+				}
+				return false;
+			});
+		function toggle_itemFields_#GET{id}() {
+			$('.li_itemField_#GET{id}').hide();
+			$('.creatorType_[(#GET{id})]').hide();
+			if ($('#itemType_#GET{id}').val()=='') {
+				$('.label_#GET{id}').hide();
+				$('.editer_creator_#GET{id}').hide();
+				$('.editer_tag_#GET{id}').hide();
+				$('#ajouter_tag_#GET{id}').hide();
+				$('#ajouter_creator_#GET{id}').hide();
+			} else {
+				$('.label_#GET{id}').show();
+				$('.editer_creator_#GET{id}').show();
+				$('.editer_tag_#GET{id}').show();
+				$('#ajouter_tag_#GET{id}').show();
+				$('#ajouter_creator_#GET{id}').show();
+			}
+			<BOUCLE_js_itemtypes(POUR){tableau #SCHEMA_ZOTERO{itemTypes}}>
+			if ($('#itemType_#GET{id}').val()=='#VALEUR') {
+				<BOUCLE_js_itemtypefields(POUR){tableau #SCHEMA_ZOTERO{itemTypeFields}|table_valeur{#VALEUR}}>
+				#SET{val,#VALEUR|=={date}|?{itemDate,#VALEUR}}
+				$('#li_[(#GET{val})]_[(#GET{id})]').attr('data-infos',#CLE);
+				$('#li_[(#GET{val})]_[(#GET{id})]').show();
+				</BOUCLE_js_itemtypefields>
+				<BOUCLE_js_creatortypes(POUR){tableau #SCHEMA_ZOTERO{creatorTypes}|table_valeur{#VALEUR}}>
+				$('.creatorType_[(#VALEUR)]_[(#GET{id})]').show();
+				</BOUCLE_js_creatortypes>
+				$('select.creatorType').each(function(index) {
+					if ($.inArray($(this).val(),[(#SCHEMA_ZOTERO{creatorTypes}|table_valeur{#VALEUR}|json_encode)])==-1) {
+						$(this).val('[(#SCHEMA_ZOTERO{creatorTypes}|table_valeur{#VALEUR}|table_valeur{0})]');
+					}
+				});
+			}
+			</BOUCLE_js_itemtypes>
+			$('.li_itemField_#GET{id}').sortElements(function(a, b){
+				vala = $(a).attr('data-infos');
+				valb = $(b).attr('data-infos');
+				return (parseInt(vala) > parseInt(valb)) ? 1 : -1;
+			});
+		};
+		toggle_itemFields_#GET{id}();
+		$('#itemType_#GET{id}').change(function() {
+			toggle_itemFields_#GET{id}();
+		});
+	});
+ //]]></script>

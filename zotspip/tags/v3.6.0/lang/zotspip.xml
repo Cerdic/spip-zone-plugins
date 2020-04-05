@@ -1,0 +1,19 @@
+<traduction
+	module="zotspip"
+	id="zotspip--zotspip-a9b9e"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip-contrib-extensions/zotspip.git"
+	reference="fr">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/zotspip?lang_cible=en" total="137" traduits="124" relire="0" modifs="1" nouveaux="12" pourcent="90.51">
+		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
+		<traducteur nom="Joseph" lien="https://trad.spip.net/auteur/joseph-larmarange" />
+	</langue>
+	<langue code="es" url="https://trad.spip.net/tradlang_module/zotspip?lang_cible=es" total="137" traduits="136" relire="0" modifs="1" nouveaux="0" pourcent="99.27">
+		<traducteur nom="agnesg63" lien="https://trad.spip.net/auteur/agnesg63" />
+		<traducteur nom="dani" lien="https://trad.spip.net/auteur/dani" />
+		<traducteur nom="Joseph" lien="https://trad.spip.net/auteur/joseph-larmarange" />
+		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
+	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/zotspip?lang_cible=fr" total="137" traduits="137" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+</traduction>

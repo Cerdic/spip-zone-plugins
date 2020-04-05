@@ -1,0 +1,12 @@
+<h1 class="grostitre"><:zotspip:liste_tags:></h1>
+
+<B_ztags>
+<ul class="liste-items">
+	<BOUCLE_ztags(ZTAGS){fusion tag}{par tag}>
+	<li class="item">
+		<a href="#URL_ECRIRE{ztag,tag=#TAG}">#TAG</a>
+		<span style="float:right;"><BOUCLE_nb(ZTAGS){tag}></BOUCLE_nb>[(#TOTAL_BOUCLE|singulier_ou_pluriel{zotspip:une_reference, zotspip:plusieurs_references, nb})]<//B_nb></span>
+	</li>
+	</BOUCLE_ztags>
+</ul>
+</B_ztags>

@@ -1,0 +1,6 @@
+[(#REM) Un modele a utiliser sur des pages chercheurs
+        Affiche les publications des trois dernieres annees et ajoute un lien vers toutes les publis de ce chercheur]
+
+#INCLURE{fond=modeles/biblio_annee,auteur,depuis=3ans,export=non,details=non, max=1000000}
+[(#ENV{auteur}|et{#CONFIG{zotspip/page_biblio}}|oui)
+	<div class="zotspip_voir_publis_auteur"><a href="#URL_PAGE{biblio,auteur=#ENV{auteur}}"><:zotspip:voir_publis_auteur{auteur=#ENV{auteur}}:></a></div>]

@@ -1,0 +1,157 @@
+nom: '<:zotspip:bibliographie_zotero:>'
+logo: 'images/zotspip-24.png'
+icone_barre: 'zotspip.png'
+parametres:
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'modele'
+      defaut: 'biblio'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'variante'
+      label: '<:zotspip:label_variante:>'
+      cacher_option_intro: 'on'
+      datas:
+        '': '<:zotspip:item_liste:>'
+        simple: '<:zotspip:item_liste_simple:>'
+        annee: '<:zotspip:item_annee:>'
+        type: '<:zotspip:item_type:>'
+        annee_type: '<:zotspip:item_annee_type:>'
+        type_annee: '<:zotspip:item_type_annee:>'
+        premier_auteur: '<:zotspip:item_premier_auteur:>'
+        recente: '<:zotspip:item_recente:>'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'selection_references'
+      label: '<:zotspip:label_selection_references:>'
+    saisies:
+      -
+        saisie: 'zotspip_creator'
+        options:
+          nom: 'auteur'
+          label: '<:zotspip:label_auteur:>'
+      -
+        saisie: 'selection'
+        options:
+          nom: 'souligne'
+          label: '<:zotspip:label_souligne:>'
+          option_intro: '<:item_oui:>'
+          afficher_si: '@auteur@!=""'
+          datas:
+            non: '<:item_non:>'
+      -
+        saisie: 'zotspip_type'
+        options:
+          nom: 'type_ref'
+          label: '<:zotspip:label_type_ref:>'
+      -
+        saisie: 'zotspip_annee'
+        options:
+          nom: 'annee'
+          label: '<:zotspip:label_annee:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'depuis'
+          label: '<:zotspip:label_depuis:>'
+          explication: '<:zotspip:explication_depuis:>'
+      -
+        saisie: 'zotspip_tag'
+        options:
+          nom: 'tag'
+          label: '<:zotspip:label_tag:>'
+      -
+        saisie: 'zotspip_zcollection'
+        options:
+          nom: 'zcollection'
+          label: '<:zotspip:label_zcollection:>'
+      -
+        saisie: 'zotspip_publication'
+        options:
+          nom: 'publication'
+          label: '<:zotspip:label_publication:>'
+      -
+        saisie: 'zotspip_conference'
+        options:
+          nom: 'conference'
+          label: '<:zotspip:label_conference:>'
+      -
+        saisie: 'zotspip_editeur'
+        options:
+          nom: 'editeur'
+          label: '<:zotspip:label_editeur:>'
+      -
+        saisie: 'zotspip_collection'
+        options:
+          nom: 'collection'
+          label: '<:zotspip:label_collection:>'
+      -
+        saisie: 'zotspip_type_doc'
+        options:
+          nom: 'type_doc'
+          label: '<:zotspip:label_type_doc:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'recherche'
+          label: '<:zotspip:label_recherche_libre:>'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'options_affichage'
+      label: '<:zotspip:label_options_affichage:>'
+    saisies:
+      -
+        saisie: 'selection'
+        options:
+          nom: 'tri'
+          label: '<:zotspip:label_tri:>'
+          afficher_si: '@variante@=="" || @variante@=="simple"'
+          option_intro: '<:zotspip:item_auteur:>'
+          datas:
+            annee: '<:zotspip:item_annee:>'
+            type_ref: '<:zotspip:item_type:>'
+            volume: '<:zotspip:item_volume:>'
+            numero: '<:zotspip:item_numero:>'
+            date_ajout: '<:zotspip:item_date_ajout:>'
+      -
+        saisie: 'csl'
+        options:
+          nom: 'csl'
+          label: '<:zotspip:label_csl:>'
+      -
+        saisie: 'selection'
+        options:
+          nom: 'liens'
+          label: '<:zotspip:label_liens:>'
+          option_intro: '<:item_oui:>'
+          datas:
+            non: '<:item_non:>'
+      -
+        saisie: 'selection'
+        options:
+          nom: 'export'
+          label: '<:zotspip:label_export:>'
+          option_intro: '<:item_oui:>'
+          datas:
+            non: '<:item_non:>'
+      -
+        saisie: 'selection'
+        options:
+          nom: 'details'
+          label: '<:zotspip:label_details:>'
+          cacher_option_intro: 'on'
+          datas:
+            non: '<:zotspip:item_aucun:>'
+            '': '<:zotspip:item_resume_tags:>'
+            complet: '<:zotspip:item_complet:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'max'
+          label: '<:zotspip:label_max:>'
+        verifier:
+          type: 'entier'

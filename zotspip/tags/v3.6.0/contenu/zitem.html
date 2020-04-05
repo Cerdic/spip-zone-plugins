@@ -1,0 +1,15 @@
+<BOUCLE_zitem(ZITEMS){id_zitem=#ENV{id}}{si #CONFIG{zotspip/page_biblio}}>
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{biblio}"><:zotspip:titre_page_biblio:></a>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
+
+
+<div class="contenu-principal">
+	<div class="cartouche">
+		[<p class="surtitre">(#ANNEE)</p>]
+		<h1 class="h1">#TITRE</h1>
+		[<p class="soustitre">(#AUTEURS)</p>]
+	</div>
+</div>
+
+	#INCLURE{fond=inclure/zitem,id_zitem,csl,details=complet,export=oui,liens=oui,nojs=on}
+</BOUCLE_zitem>
