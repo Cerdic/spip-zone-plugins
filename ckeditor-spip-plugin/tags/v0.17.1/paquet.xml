@@ -1,0 +1,43 @@
+<paquet
+	prefix="ckeditor"
+	categorie="edition"
+	version="0.17.1"
+	etat="stable"
+	compatibilite="[2.0.9;3.2.*]"
+	logo="images/ckspip-logo.png"
+	documentation="https://contrib.spip.net/CKeditor-3-0"
+	schema="1.0.0"
+>
+	<nom>ckeditor-spip3-plugin</nom>
+
+	<auteur mail="fredlefred@gmail.com">Fr&#233;d&#233;ric Bonnaud</auteur>
+	<auteur mail="superyms@gmail.com">Mehdi Cherifi (Superyms)</auteur>
+	<auteur mail="manu@netbsd.or">Emmanuel Dreyfus</auteur>
+	<credit>Alex (https://contrib.spip.net/CKeditor-3-0#forum459606)</credit>
+	<credit>Les icones des onglets de configuration sont cr&#233;&#233;es par Patricia Clausnitzer (http://pc.de/icons/pc.de-berlin-icon-pack.zip)</credit>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-2.0.html">GNU/GPL v2</licence>
+	<copyright>2009-2013</copyright>
+
+	<menu nom="configurer_ckeditor" titre="ckeditor:ckeditor_titre" parent="menu_configuration"  icone="images/ckspip-logo-16.png" />
+
+	<onglet nom="configurer_ckeditor" titre="ckeditor:ckeditor_p1" parent="configurer_ckeditor"  icone="images/cke24-basique.png" />
+	<onglet nom="configurer_ckeditor_p2" titre="ckeditor:ckeditor_p2" parent="configurer_ckeditor"  icone="images/cke24-toolbars.png" />
+	<onglet nom="configurer_ckeditor_p3" titre="ckeditor:ckeditor_p3" parent="configurer_ckeditor"  icone="images/cke24-avance.png" />
+	<onglet nom="configurer_ckeditor_p4" titre="ckeditor:ckeditor_p4" parent="configurer_ckeditor"  icone="images/cke24-imgdoc.png" />
+	<onglet nom="configurer_ckeditor_p5" titre="ckeditor:ckeditor_p5" parent="configurer_ckeditor"  icone="images/cke24-styles.png" />
+	<onglet nom="configurer_ckeditor_p6" titre="ckeditor:ckeditor_p6" parent="configurer_ckeditor"  icone="images/cke24-modeles.png" />
+	<onglet nom="configurer_ckeditor_p7" titre="ckeditor:ckeditor_p7" parent="configurer_ckeditor"  icone="images/cke24-plugins.png" />
+	<onglet nom="configurer_ckeditor_p8" titre="ckeditor:ckeditor_p8" parent="configurer_ckeditor"  icone="images/cke24-spipmodeles.png" />
+
+	<pipeline nom="autoriser" inclure="ckeditor_autorisations.php" />
+	<pipeline nom="insert_head" inclure="ckeditor_fonctions.php" />
+	<pipeline nom="header_prive" inclure="ckeditor_fonctions.php" />
+	<pipeline nom="saisies_autonomes" inclure="ckeditor_fonctions.php" />
+
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="yaml" compatibilite="[1.5.1;]" />
+
+	<lib nom='ckeditor' lien='http://download.cksource.com/CKEditor/CKEditor/CKEditor%203.6.6.2/ckeditor_3.6.6.2.zip' />
+
+</paquet>
