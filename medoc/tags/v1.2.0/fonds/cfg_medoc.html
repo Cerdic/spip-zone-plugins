@@ -1,0 +1,128 @@
+#CACHE{0}
+[(#AUTORISER{configurer}|sinon_interdire_acces)]
+
+<style>
+#page .largeur { width: 100%; }
+#conteneur { width: auto; padding: 0 2em; }
+#navigation { display: none; }
+#contenu,
+#contenu table { width: 100%; }
+#contenu table td { padding: 10px; vertical-align: top; }
+#contenu table thead td b { font-size: 110%; }
+#contenu table tr.first { border-top: 1px solid; }
+.text-right { text-align: right; }
+</style>
+
+<h1>Modèle &lt;doc&gt; unifié</h1>
+<p>Exemples aléatoires des différents rendus du modèle &lt;doc&gt; unifié. Recharchez la page pour changer d'exemples.</p>
+
+<table>
+<thead>
+	<tr>
+		<td class="text-right">Styntaxe&nbsp;:</td>
+		<td>
+			<b>&lt;doc&gt;</b>
+			<br>vignette cliquable
+		</td>
+		<td>
+			<b>&lt;doc|img&gt;</b>
+			<br>image seule, pleine largeur
+		</td>
+		<td>
+			<b>&lt;doc|emb&gt;</b>
+			<br>incrustation, avec légende
+		</td>
+	</tr>
+</thead>
+
+<BOUCLE_images_mode_image(DOCUMENTS){extension IN jpg,gif,png}{descriptif=''}{titre=''}{largeur<500} {mode=image} {par hasard}{0,2}>
+<tr[(#COMPTEUR_BOUCLE|=={1}|oui) class="first"]>
+	<td rowspan="#COMPTEUR_BOUCLE" class="text-right[(#COMPTEUR_BOUCLE|>{1}|oui) hidden]">Images en&nbsp;mode image</td>
+	<td>
+		&lt;doc#ID_DOCUMENT&gt;<br>
+		#MODELE{doc}
+	</td>
+	<td>
+		&lt;doc#ID_DOCUMENT|img&gt;<br>
+		#MODELE{doc_img}
+	</td>
+	<td>
+		&lt;doc#ID_DOCUMENT|emb&gt;<br>
+		#MODELE{doc_emb}
+	</td>
+<tr>
+</BOUCLE_images_mode_image>
+
+<BOUCLE_images_mode_document(DOCUMENTS){extension IN jpg,gif,png}{descriptif=''}{titre=''}{largeur<500} {mode=document} {par hasard}{0,2}>
+<tr[(#COMPTEUR_BOUCLE|=={1}|oui) class="first"]>
+	<td rowspan="#COMPTEUR_BOUCLE" class="text-right[(#COMPTEUR_BOUCLE|>{1}|oui) hidden]">Images en&nbsp;mode document</td>
+	<td>
+		&lt;doc#ID_DOCUMENT&gt;<br>
+		#MODELE{doc}
+	</td>
+	<td>
+		&lt;doc#ID_DOCUMENT|img&gt;<br>
+		#MODELE{doc_img}
+	</td>
+	<td>
+		&lt;doc#ID_DOCUMENT|emb&gt;<br>
+		#MODELE{doc_emb}
+	</td>
+<tr>
+</BOUCLE_images_mode_document>
+
+<BOUCLE_documents_mode_image(DOCUMENTS){extension IN jpg,gif,png}{!descriptif}{largeur<500} {mode=image} {par hasard}{0,2}>
+<tr[(#COMPTEUR_BOUCLE|=={1}|oui) class="first"]>
+	<td rowspan="#COMPTEUR_BOUCLE" class="text-right[(#COMPTEUR_BOUCLE|>{1}|oui) hidden]">Images avec&nbsp;descriptif en&nbsp;mode image</td>
+	<td>
+		&lt;doc#ID_DOCUMENT&gt;<br>
+		#MODELE{doc}
+	</td>
+	<td>
+		&lt;doc#ID_DOCUMENT|img&gt;<br>
+		#MODELE{doc_img}
+	</td>
+	<td>
+		&lt;doc#ID_DOCUMENT|emb&gt;<br>
+		#MODELE{doc_emb}
+	</td>
+<tr>
+</BOUCLE_documents_mode_image>
+
+<BOUCLE_documents_mode_document(DOCUMENTS){extension IN jpg,gif,png}{!descriptif}{largeur<500} {mode=document} {par hasard}{0,2}>
+<tr[(#COMPTEUR_BOUCLE|=={1}|oui) class="first"]>
+	<td rowspan="#COMPTEUR_BOUCLE" class="text-right[(#COMPTEUR_BOUCLE|>{1}|oui) hidden]">Images avec&nbsp;descriptif en&nbsp;mode document</td>
+	<td>
+		&lt;doc#ID_DOCUMENT&gt;<br>
+		#MODELE{doc}
+	</td>
+	<td>
+		&lt;doc#ID_DOCUMENT|img&gt;<br>
+		#MODELE{doc_img}
+	</td>
+	<td>
+		&lt;doc#ID_DOCUMENT|emb&gt;<br>
+		#MODELE{doc_emb}
+	</td>
+<tr>
+</BOUCLE_documents_mode_document>
+
+<BOUCLE_autres(DOCUMENTS){extension !IN jpg,gif,png} {par hasard}{0,2}>
+<tr[(#COMPTEUR_BOUCLE|=={1}|oui) class="first"]>
+	<td rowspan="#COMPTEUR_BOUCLE" class="text-right[(#COMPTEUR_BOUCLE|>{1}|oui) hidden]">Autres types&nbsp;de documents</td>
+	<td>
+		&lt;doc#ID_DOCUMENT&gt;<br>
+		#MODELE{doc}
+	</td>
+	<td>
+		&lt;doc#ID_DOCUMENT|img&gt;<br>
+		#MODELE{doc_img}
+	</td>
+	<td>
+		&lt;doc#ID_DOCUMENT|emb&gt;<br>
+		#MODELE{doc_emb}
+	</td>
+<tr>
+</BOUCLE_autres>
+
+</table>

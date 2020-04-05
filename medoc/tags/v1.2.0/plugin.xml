@@ -1,0 +1,27 @@
+<plugin>
+	<nom>
+		<multi>[fr]Mod&#232;le &lt;doc&gt; unifi&eacute;[en]Unified &lt;doc&gt; model[es]Unificada modelo &lt;doc&gt;[de]Modell &lt;doc&gt; einheitlich</multi>
+	</nom>
+	<prefix>medoc</prefix>
+	<icon>medoc.png</icon>
+
+	<version>1.2.0</version>
+	<etat>stable</etat>
+	<categorie>edition</categorie>
+
+	<slogan>
+		<multi>[fr]L'insertion de documents simplifi&eacute;e&nbsp;![en]Simplified document insertion![es]La inserción de documentos simplificados![de]Vereinfachte Eintragung des~Dokuments!</multi>
+	</slogan>
+	<description>
+		Patch unifiant le comportement et la syntaxe d'insertion des documents, pour soigner l'inconstance d'affichage dont souffrent les documents de&nbsp;SPIP. D&eacute;sormais, c'est vous qui d&eacute;cidez !
+
+		- Le raccourci &lt;doc&gt; affiche toujours une vignette cliquable
+		- Syntaxe d'insertion unifi&eacute;e&nbsp;: &lt;docXXX|left&gt;, &lt;docXXX|img|right&gt;, &lt;docXXX|emb|center&gt;
+		- R&eacute;trocompatibilit&eacute; pr&eacute;serv&eacute;e
+	</description>
+	<lien>https://contrib.spip.net/4026</lien>
+	<auteur>[tetue->http://spip.tetue.net] - 2011</auteur>
+
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<utilise id="medias" version="[;]" />
+</plugin>
