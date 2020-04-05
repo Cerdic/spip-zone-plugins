@@ -1,0 +1,9 @@
+[(#REM)<style>]
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
+#HTTP_HEADER{Vary: Accept-Encoding}
+#SET{claire,##ENV{couleur_claire,c5e41c}}
+#SET{foncee,##ENV{couleur_foncee,9dba00}}
+
+.formulaire_spip .editer_url_page .url		{ margin-#ENV{left}:.66em; float:#ENV{right}; font-size:.8em; font-weight:normal; }
+.formulaire_spip .editer_url_page.on		{ background-color:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
+.formulaire_spip .editer_url_page.on .text	{ border-color:#GET{foncee}; }
