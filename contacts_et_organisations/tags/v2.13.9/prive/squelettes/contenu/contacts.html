@@ -1,0 +1,14 @@
+[(#VAL{contacts}|barre_onglets{contacts})]
+
+<h1><:contacts:contacts:></h1>
+
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class='nettoyeur'></div>
+
+<INCLURE{fond=prive/objets/liste/contacts,env,ajax,sinon=<:contacts:aucun_contact:>}>
+
+
+[(#AUTORISER{creer,contact})
+	[(#URL_ECRIRE{contact_edit,new=oui}
+		|icone_verticale{<:contacts:contact_creer:>,contact,new,right})]
+]

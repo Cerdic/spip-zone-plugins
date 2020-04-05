@@ -1,0 +1,46 @@
+<paquet
+	prefix="contacts"
+	categorie="auteur"
+	version="2.13.9"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="images/contacts-128.png"
+	schema="1.11.1"
+	documentation="https://contrib.spip.net/Plugin-Contacts-Organisations"
+>
+	<nom>Contacts &#38; Organisations</nom>
+	<!-- Ajouter un gestionnaire de contacts à SPIP -->
+
+	<auteur>Cyril MARION</auteur>
+	<auteur lien="http://www.cym.fr/">Ateliers CYM</auteur>
+	<auteur lien="http://magraine.net/">Matthieu Marcillaud</auteur>
+	<auteur lien="http://www.ldd.fr/">Les D&#233;veloppements Durables</auteur>
+
+	<traduire module="contacts" reference="fr" gestionnaire="salvatore" />
+	<traduire module="paquet-contacts" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/contacts.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/contacts.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/contacts.php" />
+	<pipeline nom="affiche_gauche" inclure="contacts_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="contacts_pipelines.php" />
+	<pipeline nom="afficher_contenu_objet" inclure="contacts_pipelines.php" />
+	<pipeline nom="affiche_hierarchie" inclure="contacts_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="contacts_pipelines.php" />
+	<pipeline nom="autoriser" inclure="contacts_autoriser.php" />
+	<pipeline nom="ieconfig_metas" inclure="contacts_pipelines.php" />
+
+	<necessite nom="saisies" compatibilite="[1.42.11;[" />
+	<necessite nom="medias" compatibilite="[2.7.27;[" />
+	<necessite nom="editer_liens_simples" compatibilite="[1.0.0;[" />
+	<necessite nom="spip_bonux" compatibilite="[3.1.0;[" />
+
+	<utilise nom="coordonnees" compatibilite="[2.1.0;[" />
+	<utilise nom="crayons" compatibilite="[1.13.8;[" />
+
+	<menu nom="contacts_organisations" titre="contacts:bouton_contacts_organisations" parent="menu_edition" icone="images/contact-16.png" action="repertoire" />
+
+	<onglet nom="repertoire" titre="contacts:bouton_repertoire" parent="contacts" icone="images/annuaire-24.png" />
+	<onglet nom="organisations" titre="contacts:bouton_organisations" parent="contacts" icone="images/organisation-24.png" />
+	<onglet nom="contacts" titre="contacts:bouton_contacts" parent="contacts" icone="images/contact-24.png" />
+</paquet>

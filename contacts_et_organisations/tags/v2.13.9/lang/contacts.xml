@@ -1,0 +1,20 @@
+<traduction module="contacts" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/contacts_et_organisations/trunk/lang/" reference="fr">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/contacts?lang_cible=en" total="184" traduits="171" relire="0" modifs="13" nouveaux="0" pourcent="92.93">
+		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
+		<traducteur nom="Cyril MARION" lien="https://trad.spip.net/auteur/cyril-marion" />
+		<traducteur nom="EScott" lien="https://trad.spip.net/auteur/escott" />
+		<traducteur nom="Gilles" lien="https://trad.spip.net/auteur/gilles" />
+		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
+		<traducteur nom="RastaPopoulos" lien="https://trad.spip.net/auteur/rastapopoulos" />
+	</langue>
+	<langue code="fa" url="https://trad.spip.net/tradlang_module/contacts?lang_cible=fa" total="184" traduits="85" relire="0" modifs="11" nouveaux="88" pourcent="46.20">
+		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
+	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/contacts?lang_cible=fr" total="184" traduits="184" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="nl" url="https://trad.spip.net/tradlang_module/contacts?lang_cible=nl" total="184" traduits="141" relire="0" modifs="7" nouveaux="36" pourcent="76.63">
+	</langue>
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/contacts?lang_cible=sk" total="184" traduits="154" relire="0" modifs="13" nouveaux="17" pourcent="83.70">
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
+	</langue>
+</traduction>
