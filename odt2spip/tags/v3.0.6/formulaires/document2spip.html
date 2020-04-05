@@ -1,0 +1,52 @@
+<div  class="formulaire_spip formulaire_#FORM">
+
+	[(#ENV{_conversion_disponible}|oui)
+		[(#ENV{objet}|=={rubrique}|oui)<h3 class="titrem"><:odtspip:importer_fichier_source:></h3>]
+		[(#ENV{objet}|!={rubrique}|oui)<h3 class="titrem"><:odtspip:remplacer_article_source:></h3>]
+	][(#ENV{_conversion_disponible}|non)
+		[(#ENV{objet}|=={rubrique}|oui)<h3 class="titrem"><:odtspip:importer_fichier:></h3>]
+		[(#ENV{objet}|!={rubrique}|oui)<h3 class="titrem"><:odtspip:remplacer_article:></h3>]
+	]
+
+	[<img class="cadre-icone" width="24" height="24" alt="" src="(#CHEMIN{odt2spip-24.png})"/>]
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<BOUCLE_editable(CONDITION){si #EDITABLE}>
+	<form action="#ENV{action}" method="POST" enctype="multipart/form-data"><div>
+		#ACTION_FORMULAIRE
+		<div class="editer-groupe">
+			[(#PLUGIN{bigup}|oui)
+				[(#SAISIE_FICHIER{bigup, fichier, label=<:odtspip:choix_fichier_source:>, accept=#ENV{_accept}, obligatoire=oui})]
+			][(#PLUGIN{bigup}|non)
+				[(#SAISIE{input, fichier, type=file, label=<:odtspip:choix_fichier_source:>, accept=#ENV{_accept}, obligatoire=oui})]
+			]
+
+			[(#SAISIE{case, attacher_fichier, label_case=<:odtspip:attacher_fichier_source:>})]
+
+			[(#ENV{_conversion_disponible}|et{#AUTORISER{debug}}|oui)
+				[(#SAISIE{case, attacher_fichier_odt, label_case=<:odtspip:attacher_fichier_odt_genere:>})]
+			]
+
+			[(#SAISIE{radio, mode_image,
+				label=<:odtspip:images_mode_document:>,
+				datas=#ARRAY{image,<:odtspip:mode_image:>,document,<:odtspip:mode_document:>},
+			})]
+
+			[(#ENV{_selecteur_langue}|oui)
+				[(#SAISIE{selecteur_langue, lang_publi, label=<:odtspip:langue_publication:>})]
+			]
+		</div>
+
+		<p class="boutons">
+			<input type="submit" name="Valider" value="<:bouton_valider|attribut_html:>" class="submit" />
+		</p>
+	</div></form>
+</BOUCLE_editable>
+</div>
+<style type="text/css">
+	.lat .formulaire_#FORM .editer.editer_fichier label {
+		display:none;
+	}
+</style>

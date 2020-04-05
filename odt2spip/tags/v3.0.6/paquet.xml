@@ -1,0 +1,25 @@
+<paquet
+	prefix="odt2spip"
+	categorie="edition"
+	version="3.0.6"
+	schema="201406091738"
+	etat="test"
+	compatibilite="[3.1.0;3.2.*]"
+	logo="odt2spip-64.png"
+	documentation="https://contrib.spip.net/3001"
+>
+	<nom>odt2spip</nom>
+	<!-- générateur d'articles spip à partir de fichiers odt -->
+	<auteur>cy_altern</auteur>
+	<copyright>2009-2017</copyright>
+	<licence lien="http://www.gnu.org/licenses/lgpl-3.0.html">LGPL 3</licence>
+	<credit lien="http://www.raleigh.ru/MathML/mmltex/index.php?lang=en">XSLT pour la transformation MathML 2.0 to LaTeX :
+	Vasil Yaroshevich, yarosh@raleigh.ru</credit>
+
+	<pipeline nom="affiche_gauche" inclure="odt2spip_pipelines.php" />
+
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<utilise nom="bigup" compatibilite="[1.0.0-dev;]" />
+
+	<genie nom="nettoyer_repertoire_upload" periode="3600" />
+</paquet>

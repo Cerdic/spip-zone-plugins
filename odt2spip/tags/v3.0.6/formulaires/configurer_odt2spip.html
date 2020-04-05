@@ -1,0 +1,78 @@
+<div class="formulaire_spip formulaire_config formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE
+
+		<fieldset>
+			<legend class="legend"><:odtspip:defaut_attacher_fichier_source:></legend>
+			<div class="editer-groupe">
+				[(#SAISIE{case, defaut_attacher,
+					label_case=<:odtspip:defaut_attacher_label:>,
+					conteneur_class=pleine_largeur,
+					valeur_oui=oui,
+				})]
+			</div>
+		</fieldset>
+
+		<fieldset>
+			<legend class="legend">Serveur de conversion</legend>
+
+			<div class="explication">
+				<p>Si la commande <code>libreoffice</code> est disponible sur le serveur,
+				ou si un serveur de conversion est renseigné avec une clé d’API valide,
+				alors il sera possible de téléverser des documents de différents formats
+				en plus du format ODT.</p>
+
+				<p>Ces documents seront convertis au format ODT
+				par l’application libreoffice, puis intégrés à l’article.
+				Des fichiers <code>.doc</code> ou <code>.docx</code>
+				pourront dès lors être utilisés.
+				La conversion sera plus fidèle si le document source utilise
+				une sémantique appropriée (titres, listes...) lors de
+				sa création dans le logiciel de traitement de textes.</p>
+
+				<p>Un serveur possédant <code>libreoffice</code> peut servir de serveur de conversion.
+				Vous pouvez créer des clefs d’API autorisées à s’y connecter.
+				Il suffira de remplir sur le site client l’URL du site serveur et la clé d’API attribuée</p>
+			</div>
+
+			[(#ENV{_libreoffice_ok}|non)
+				<div class="notice">
+					La commande <code>libreoffice</code> n’est pas disponible sur ce serveur.
+				</div>
+
+				<div class="editer-groupe">
+					[(#SAISIE{input, serveur_api_url,
+						label=URL du serveur de conversion,
+						conteneur_class=pleine_largeur})]
+					[(#SAISIE{input, serveur_api_cle,
+						label=Clé d’API,
+						conteneur_class=pleine_largeur})]
+				</div>
+			]
+			[(#ENV{_libreoffice_ok}|oui)
+				<div class="success">
+					La commande <code>libreoffice</code> est disponible sur ce serveur.
+				</div>
+				<div class="editer-groupe">
+					[(#SAISIE{textarea, authorized_keys,
+						label=Clés d’API autorisées,
+						conteneur_class=pleine_largeur,
+						rows=5,
+						explication=Format pour chaque ligne : 'clé : nom du site',
+					})]
+				</div>
+			]
+
+		</fieldset>
+
+		<p class="boutons">
+			[(#ENV{_libreoffice_ok}|oui)
+			<input type="submit" name="generer_cle" class="submit" value="Générer nouvelle une clé d’autorisation" />
+			]
+			<input type="submit" class="submit" value="<:bouton_valider|attribut_html:>" />
+		</p>
+	</div></form>
+</div>
