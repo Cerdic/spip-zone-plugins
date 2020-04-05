@@ -1,0 +1,27 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	<form method="post" action="#ENV{action,#FORM}">
+		<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+			<[(#DIV|sinon{ul})] class="editer-groupe">
+				<[(#DIV|sinon{li})] class="editer editer_interdit_meme_rubrique">
+					<div class="choix">
+						<input type="checkbox" name="interdit_meme_rubrique" id="champ_interdit_meme_rubrique" value="on"[(#ENV{interdit_meme_rubrique}|=={on}|oui)checked="checked"] />
+						<label for="champ_interdit_meme_rubrique"><:tradrub_proposee:label_interdit_meme_rubrique:></label>
+					</div>
+				</[(#DIV|sinon{li})]>
+				<[(#DIV|sinon{li})] class="editer editer_interdit_meme_secteur">
+					<div class="choix">
+						<input type="checkbox" name="interdit_meme_secteur" id="champ_interdit_meme_secteur" value="on"[(#ENV{interdit_meme_secteur}|=={on}|oui)checked="checked"] />
+						<label for="champ_interdit_meme_secteur"><:tradrub_proposee:label_interdit_meme_secteur:></label>
+					</div>
+				</[(#DIV|sinon{li})]>
+			</[(#DIV|sinon{ul})]>
+			<p class="boutons">
+				<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+			</p>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,20 @@
+<paquet
+	prefix="tradrub_proposee"
+	categorie="edition"
+	version="0.6.0"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/tradrub_proposee-32.png"
+	documentation="https://contrib.spip.net/article4940"
+>
+
+	<nom>TradRub proposée</nom>
+
+	<auteur lien="https://kent1.info/">kent1</auteur>
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="tradrub" />
+	<pipeline nom="formulaire_fond" inclure="tradrub_proposee_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="tradrub_proposee_pipelines.php" />
+
+</paquet>

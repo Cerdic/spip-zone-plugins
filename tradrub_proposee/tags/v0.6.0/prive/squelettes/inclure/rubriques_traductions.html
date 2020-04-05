@@ -1,0 +1,13 @@
+#SET{config_rubrique,#CONFIG{tradrub_proposee/interdit_meme_rubrique}}
+#SET{config_secteur,#CONFIG{tradrub_proposee/interdit_meme_secteur}}
+<B_trads>
+<p class="trads_rubriques">
+<strong><:tradrub_proposee:info_raccourcis:></strong>
+<BOUCLE_trads(DATA){source table, #ENV{traductions}}>[(#SET{titre,[\[#VALEUR{lang}\] (#VALEUR{titre}|typo)]})]
+<BOUCLE_si_ok_rub(CONDITION){si #GET{config_rubrique}|=={on}|et{#VALEUR{id_rubrique}|=={#ENV{id_parent}}|oui}|non}>
+<BOUCLE_si_ok_secteur(CONDITION){si #GET{config_secteur}|=={on}|et{#VALEUR{id_secteur}|=={#ENV{id_secteur}}|oui}|non}>
+<a class="btn bouton[(#VALEUR{id_rubrique}|=={#ENV{id_parent}}|oui)on]" href="#" onclick="$(this).parents('form').find('input[name=id_parent], select[name=id_parent]').val(#VALEUR{id_rubrique});$(this).parents('form').find('input[name=titreparent]').val('[(#GET{titre})]');$('.trads_rubriques a.btn').removeClass('on');$(this).addClass('on');return false;">[(#GET{titre})]</a></BOUCLE_si_ok_secteur></BOUCLE_si_ok_rub>
+</BOUCLE_trads>
+</p>
+</B_trads>
+#FILTRE{trim}

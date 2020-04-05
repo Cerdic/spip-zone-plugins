@@ -1,0 +1,12 @@
+<traduction
+	module="tradrub_proposee"
+	id="tradrub_proposee--tradrub_proposee-048e3"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip-contrib-extensions/tradrub_proposee.git"
+	reference="fr">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/tradrub_proposee?lang_cible=de" total="6" traduits="6" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
+	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/tradrub_proposee?lang_cible=fr" total="6" traduits="6" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+</traduction>
