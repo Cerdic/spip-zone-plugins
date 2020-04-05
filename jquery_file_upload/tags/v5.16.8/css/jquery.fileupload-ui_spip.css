@@ -1,0 +1,74 @@
+.page .ui-widget{
+	font-size:inherit;
+	font-family:inherit;
+}
+
+.page .ui-widget-content{
+	color:inherit;
+}
+
+
+.formulaire_spip.jfupload{
+	border: 1px solid #AAAAAA;
+	padding: 0.2em;
+	margin: 0;
+}
+
+.progress_container {
+	border: 1px solid #ebebeb;
+}
+
+.files .progress_container{
+	border:none;
+}
+
+.files .error{
+	clear:none;
+}
+
+.files .preview{
+	margin:5px 0 5px 5px;
+}
+
+.jfupload .ui-progressbar{
+	width:100%;
+	height:22px;
+	margin:5px 0;
+	background:#EDEDED;
+}
+
+.progress-animated .bar,.ui-progressbar .ui-progressbar-value {
+	border:none;
+}
+
+#progress_bar_container div.red {
+	border: solid 1px #B50000;
+	background-color: #FFEBEB;
+}
+
+#progress_bar_container div.red .statut{
+	color:#B50000;
+}
+
+#progress_bar_container div.green {
+	border: solid 1px #DDF0DD;
+	background-color: #EBFFEB;
+}
+
+#progress_bar_container div.blue {
+	border: solid 1px #CEE2F2;
+	background-color: #F0F5FF;
+}
+
+/* Informations sur l'upload en cours */
+.upload_info {
+	margin-top: 3px;
+	padding:15px 3px;
+	color: #969696;
+	background:transparent;
+	overflow:auto;
+	border-top:1px solid #EDEDED;
+}
+.upload_info .cancel,.upload_info .hide { float: right;clear:both }
+.upload_info .filename,.files .upload_info .filename { font-weight: bold; color: #3e3e3e;padding:0; }
+.upload_info .transfer .time_remaining { color: #3e3e3e; font-weight: bold; margin-left: 10px; }
