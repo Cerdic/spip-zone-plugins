@@ -1,0 +1,46 @@
+
+<div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_#FORM">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method='post' action='#ENV{action}'><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<li class="editer editer_type saisie_checkbox">
+			<label><:coordonnees:label_objets_actifs:></label>
+			<p class="explication"><:coordonnees:explication_objets_actifs:></p>
+			<div class="choix choix_auteur">
+				<input name="objets[]" class="checkbox" id="champ_objets_auteur" value="auteur" type="checkbox"[(#VAL{auteur}|in_array{#ENV{objets}}|oui) checked="checked"]>
+				<label for="champ_objets_auteur"><:ecrire:info_auteurs:></label>
+			</div>
+			<div class="choix choix_article">
+				<input name="objets[]" class="checkbox" id="champ_objets_article" value="article" type="checkbox"[(#VAL{article}|in_array{#ENV{objets}}|oui) checked="checked"]>
+				<label for="champ_objets_article"><:ecrire:info_articles_2:></label>
+			</div>
+			<div class="choix choix_rubrique">
+				<input name="objets[]" class="checkbox" id="champ_objets_rubrique" value="rubrique" type="checkbox"[(#VAL{rubrique}|in_array{#ENV{objets}}|oui) checked="checked"]>
+				<label for="champ_objets_rubrique"><:ecrire:info_rubriques:></label>
+			</div>
+			<div class="choix choix_breve">
+				<input name="objets[]" class="checkbox" id="champ_objets_breve" value="breve" type="checkbox"[(#VAL{breve}|in_array{#ENV{objets}}|oui) checked="checked"]>
+				<label for="champ_objets_breve"><:ecrire:info_breves_03:></label>
+			</div>
+			<div class="choix choix_site">
+				<input name="objets[]" class="checkbox" id="champ_objets_site" value="site" type="checkbox"[(#VAL{site}|in_array{#ENV{objets}}|oui) checked="checked"]>
+				<label for="champ_objets_site"><:ecrire:titre_page_sites_tous:></label>
+			</div>
+		[(#PLUGIN{contacts}|oui)
+			<div class="choix choix_contact">
+				<input name="objets&#91;&#93;" class="checkbox" id="champ_objets_contact" value="contact" type="checkbox"[(#VAL{contact}|in_array{#ENV{objets}}|oui) checked="checked"]>
+				<label for="champ_objets_contact"><:contacts:bouton_contacts:></label>
+			</div>
+			<div class="choix choix_organisation">
+				<input name="objets&#91;&#93;" class="checkbox" id="champ_objets_organisation" value="organisation" type="checkbox"[(#VAL{organisation}|in_array{#ENV{objets}}|oui) checked="checked"]>
+				<label for="champ_objets_organisation"><:contacts:bouton_organisations:></label>
+			</div>
+		]
+		</li>
+	</ul>
+	<p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+</div></form>
+</div>

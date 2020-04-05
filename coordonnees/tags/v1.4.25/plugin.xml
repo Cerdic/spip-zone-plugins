@@ -1,0 +1,77 @@
+<plugin>
+	<nom><multi>[fr]Coordonn&#233;es[en]Address book</multi></nom>
+	<slogan>
+	<multi>
+	[fr]Des coordonn&#233;es postales, t&#233;l&#233;phoniques... pour vos auteurs
+	[en]Postal adresses , phone numbers... for your authors
+	</multi>
+	</slogan>
+	<description>
+	<multi>[fr]Ajoute la possibilit&#233; de donner des coordonn&#233;es postales (adresses, mails, t&#233;l&#233;phones)
+	aux objets de SPIP, tout particuli&#232;rement aux auteurs. Plusieurs adresses et num&#233;ros de t&#233;l&#233;phone peuvent ainsi &#234;tre donn&#233;s &#224; chaque auteur.
+	[en]Provides the ability to add postal details (addresses, e-mail, phone numbers) to SPIP objects, specifically to authors. Several addresses or phone numbers can be given to each single author.
+	</multi>
+	</description>
+	<lien>https://contrib.spip.net/Plugin-Coordonnees</lien>
+	<icon>images/addressbook-128.png</icon>
+
+	<version>1.4.25</version>
+	<version_base>1.7</version_base>
+	<etat>test</etat>
+
+	<auteur>Matthieu Marcillaud - Cyril MARION - [Ateliers CYM->http://www.cym.fr]</auteur>
+
+	<licence>GNU/GPL</licence>
+	<traduire gestionnaire="salvatore" module="coordonnees" reference="fr" />
+
+	<prefix>coordonnees</prefix>
+	<fonctions>coordonnees_fonctions.php</fonctions>
+
+	<install>base/coordonnees_upgrade.php</install>
+
+	<!-- Declaration des tables -->
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/coordonnees.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/coordonnees.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/coordonnees.php</inclure>
+	</pipeline>
+
+	<!-- Autorisations -->
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>coordonnees_autorisations.php</inclure>
+	</pipeline>
+
+	<!-- Éléments d'interface -->
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>coordonnees_pipelines.php</inclure>
+	</pipeline>
+
+	<!-- avec plugin champs extras 2 -->
+	<pipeline>
+		<nom>objets_extensibles</nom>
+		<inclure>coordonnees_pipelines.php</inclure>
+	</pipeline>
+
+	<bouton id='configurer_coordonnees' parent="bando_configuration">
+		<titre>coordonnees:titre_coordonnees</titre>
+		<icone>images/addressbook-16.png</icone>
+		<url>configurer_coordonnees</url>
+	</bouton>
+
+	<necessite id="SPIP" version="[2.1.0;3.0.0)" />
+	<necessite id="saisies" version="[1.42.11;]" />
+
+	<necessite id="pays" version="[1.0.5;]" />
+
+	<categorie>auteur</categorie>
+
+</plugin>

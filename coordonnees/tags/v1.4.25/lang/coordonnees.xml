@@ -1,0 +1,6 @@
+<traduction module="coordonnees" gestionnaire="salvatore" reference="fr">
+	<langue code="en" />
+	<langue code="sk">
+		<traducteur nom="jaro" />
+	</langue>
+</traduction>
