@@ -1,0 +1,37 @@
+<paquet
+	prefix="linkcheck"
+	categorie="maintenance"
+	version="1.5.3"
+	etat="stable"
+	compatibilite="[3.0.5;3.2.*]"
+	logo="prive/themes/spip/images/linkcheck-64.png"
+	documentation="https://contrib.spip.net/article4605"
+	schema="1.4.4"
+>
+
+	<nom>LinkCheck</nom>
+
+	<auteur lien="http://www.brgm.fr">BRGM</auteur>
+	<auteur>Benjamin Grapeloux</auteur>
+	<auteur lien="http://www.pyrat.net/">Jacques Pyrat</auteur>
+	<auteur lien="http://www.declic3000.com">Guillaume Wauquier</auteur>
+	<auteur lien="http://www.kent1.info">kent1</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="facteur" compatibilite="[3.6.2;]" />
+
+	<pipeline nom="autoriser" inclure="linkcheck_autorisations.php" />
+	<pipeline nom="linkcheck_champs_a_traiter" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/linkcheck.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/linkcheck.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/linkcheck.php" />
+	<pipeline nom="affiche_gauche" inclure="linkcheck_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="linkcheck_pipelines.php" />
+	<pipeline nom="post_edition" inclure="linkcheck_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="linkcheck_pipelines.php" />
+	<pipeline nom="alertes_auteur" inclure="linkcheck_pipelines.php" />
+
+	<menu nom="linkcheck" titre="linkcheck:linkcheck" parent="menu_administration" icone="images/linkcheck-16.png" action="linkchecks" />
+</paquet>

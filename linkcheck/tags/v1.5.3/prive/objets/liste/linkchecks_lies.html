@@ -1,0 +1,51 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi url,1,
+	date,-1, 
+	id_linkcheck,1
+}})
+]
+#SET{selection,#ENV**{selection,#ENV{objet_source,linkcheck}|lister_objets_lies{#ENV{objet},#ENV{id_objet},'*'}}}
+
+#SET{debut,#ENV{debutlinl,#EVAL{_request("debutlinl");}}}
+<B_liste_linkchecks>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutlinl,#EVAL{_request("debutlinl");}}}
+
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies linkchecks">
+	[(#SET{nb_liens,[(#GRAND_TOTAL|singulier_ou_pluriel{linkcheck:info_1_linkcheck,linkcheck:info_nb_linkchecks})]})]
+<table class='spip liste'>
+	
+[<caption><strong class="caption">(#ENV*{titre, #GET{nb_liens}})</strong></caption>]
+	<thead>
+		[<tr><td colspan="5"><p class='pagination'>(#GET{p})</p></td></tr>]
+		<tr class='first_row'>
+			<th scope='col'><:linkcheck:url:></th>
+			<th class="etat" scope='col'><:linkcheck:etat:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_linkchecks(LINKCHECKS){id_linkcheck IN #GET{selection}}
+		{tri #ENV{par,multi url},#GET{defaut_tri}}{pagination #ENV{nb,10} linl}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#URL**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_LINKCHECK|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td>
+				[(#URL|linkcheck_en_url{#DISTANT}|inserer_attribut{target,_blank})]
+				[<br /><br /><:linkcheck:redirection:><br />
+				(#REDIRECTION|match{'//'}|?{[(#REDIRECTION|linkcheck_en_url{1})],[(#REDIRECTION|linkcheck_en_url{0})]}|inserer_attribut{target,_blank}|trim)]
+			</td>
+			<td>
+				[(#VAL{linkcheck:etat_}|concat{#ETAT}|_T)] <br />
+				<a href="[(#URL_ACTION_AUTEUR{linkcheck_test,#ID_LINKCHECK,#SELF|parametre_url{id_test,#ID_LINKCHECK}})]" class="ajax"><:linkcheck:bouton_tester_lien:></a>
+			</td>
+		</tr>
+	</BOUCLE_liste_linkchecks>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_linkchecks>
+<div class="liste-objets liste-objets-lies LINKCHECKS caption-wrap">
+	<strong class="caption">[(#ENV*{titre,<:linkcheck:info_aucun_linkcheck:>})]</strong>
+</div>
+<//B_liste_linkchecks>

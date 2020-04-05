@@ -1,0 +1,15 @@
+<div class="formulaire_spip formulaire_#FORM">
+	[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</div>]
+	[<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</div>]
+	
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe"> 
+			[(#SAISIE{oui_non,afficher_alerte,label=<:linkcheck:afficher_alerte:>})]
+			[(#SAISIE{oui_non,notifier_courriel,label=<:linkcheck:notifier_par_courriel:>})]
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />
+		</p>
+	</div></form>
+</div>

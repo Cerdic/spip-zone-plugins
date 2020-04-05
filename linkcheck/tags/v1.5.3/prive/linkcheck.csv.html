@@ -1,0 +1,4 @@
+#HTTP_HEADER{Content-Type: text/csv}
+<:linkcheck:etat:>	<:linkcheck:url:>	<:linkcheck:redirection:>	<:linkcheck:utilise:>
+<BOUCLE_li(LINKCHECKS){etat IN #ENV{etat,#LISTE{mort,deplace}}}{publie?}{objet?}{distant?}>#ETAT	#URL	#REDIRECTION	<BOUCLE_l(spip_linkchecks_liens){id_linkcheck}{', '}>[(#ID_OBJET|generer_url_entite{#OBJET}|url_absolue)]</BOUCLE_l>
+</BOUCLE_li>

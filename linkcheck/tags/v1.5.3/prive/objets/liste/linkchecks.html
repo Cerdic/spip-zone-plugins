@@ -1,0 +1,66 @@
+[(#SET{distant,#LISTE{'1','0'}})]
+[(#ENV{distant}|=={oui}|oui)[(#SET{distant,#LISTE{1}})]]
+[(#ENV{distant}|=={non}|oui)[(#SET{distant,#LISTE{'0'}})]]
+<div class='onglets_simple clearfix'>
+	<ul>
+	[<li>(#SELF|parametre_url{etat,''}|parametre_url{debut_ListeLink,''}|lien_ou_expose{<:linkcheck:tous_les_liens:>,#ENV{etat,''}|=={''},ajax})</li>]
+	<BOUCLE_etats(DATA){liste mort,malade,deplace,ok}>
+		<BOUCLE_comptem(LINKCHECKS){etat=#VALEUR}{url LIKE %#ENV{recherche}%}{distant IN #GET{distant}}{objet ?}{publie?} />
+		[<li class='#VALEUR'>(#SELF|parametre_url{etat,#VALEUR}|parametre_url{debut_ListeLink,''}|lien_ou_expose{#VAL{linkcheck:etat_}|concat{#VALEUR}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{etat}|=={#VALEUR},ajax})</li>]
+		<//B_comptem>
+	</BOUCLE_etats>
+	</ul>
+</div>
+
+#BOITE_OUVRIR
+
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF}
+
+<div class='onglets_simple second clearfix'>
+	<ul>
+		[<li>(#SELF|parametre_url{publie,''}|parametre_url{debut_ListeLink,''}|lien_ou_expose{<:linkcheck:tous_les_liens:>,#ENV{publie,''}|=={''},ajax})</li>]
+		[<li>(#SELF|parametre_url{publie,oui}|parametre_url{debut_ListeLink,''}|lien_ou_expose{<:linkcheck:liens_publies:>,#ENV{publie}|=={oui},ajax})</li>]
+		[<li>(#SELF|parametre_url{publie,non}|parametre_url{debut_ListeLink,''}|lien_ou_expose{<:linkcheck:liens_publies_non:>,#ENV{publie}|=={non},ajax})</li>]
+	</ul>
+</div>
+
+<div class='onglets_simple second clearfix'>
+	<ul>
+		[<li>(#SELF|parametre_url{objet,''}|parametre_url{debut_ListeLink,''}|lien_ou_expose{<:linkcheck:tous_les_liens:>,#ENV{objet,''}|=={''},ajax})</li>]
+		<BOUCLE_objets(spip_linkchecks_liens){fusion objet}{objet != linkcheck}{par objet}>
+		[<li>(#SELF|parametre_url{objet,#OBJET}|parametre_url{debut_ListeLink,''}|lien_ou_expose{#OBJET,#ENV{objet}|=={#OBJET},ajax})</li>]
+		</BOUCLE_objets>
+	</ul>
+</div>
+<div class='onglets_simple second clearfix'>
+	<ul>
+		[<li>(#SELF|parametre_url{distant,''}|parametre_url{debut_ListeLink,''}|lien_ou_expose{<:linkcheck:tous_les_liens:>,#ENV{distant,''}|=={''},ajax})</li>]
+		[<li>(#SELF|parametre_url{distant,oui}|parametre_url{debut_ListeLink,''}|lien_ou_expose{<:linkcheck:distant_oui:>,#ENV{distant}|=={oui},ajax})</li>]
+		[<li>(#SELF|parametre_url{distant,non}|parametre_url{debut_ListeLink,''}|lien_ou_expose{<:linkcheck:distant_non:>,#ENV{distant}|=={non},ajax})</li>]
+	</ul>
+</div>
+<div class="liste-objets">
+<B_ListeLink>
+	[<div class="pagination">(#PAGINATION{prive})</div>]
+	<table>
+	<thead>
+		<tr class='first_row'>
+		<th class="id" scope='col'><:linkcheck:id:></th>
+		<th scope='col'><:linkcheck:url:></th>
+		<th class="utilise" scope='col'><:linkcheck:utilise:></th>
+		<th class="etat" scope='col'><:linkcheck:etat:></th>
+		<th class='date' scope='col'><:linkcheck:maj:></th>
+		</tr>
+	</thead>
+<BOUCLE_ListeLink(LINKCHECKS){objet?}{objet != linkcheck}{!par maj}{code?}{etat?}{url?}{publie?}{url LIKE %#ENV{recherche}%}{distant IN #GET{distant}}{pagination #ENV{pagination,10}}>
+	<INCLURE{fond=prive/objets/liste/linkcheck_detail,id_linkcheck,env}>
+</BOUCLE_ListeLink>
+	</table>
+	[<p class="pagination">(#PAGINATION{prive})</p>]
+	#SET{nb_orphelins,#GRAND_TOTAL}
+</B_ListeLink>
+<//B_ListeLink>
+</div>
+#BOITE_PIED
+	<a download="[(#NOM_SITE_SPIP|attribut_html)-linkchecks[_(#ENV{etat})][_(#ENV{distant})].csv]" href="[(#URL_PAGE{prive/linkcheck.csv}|parametre_url{etat,#ENV{etat}}|parametre_url{distant,[(#GET{distant}|count|=={1}|?{#GET{distant},''})]})]" class="btn"><:linkcheck:bouton_exporter_selection:></a>
+#BOITE_FERMER

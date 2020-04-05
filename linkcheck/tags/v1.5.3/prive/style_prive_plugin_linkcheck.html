@@ -1,0 +1,108 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
+
+.linkchecks .patience_la_fontaine{margin:0.5em 0;padding:0.25em 0.25em 0.25em 25px;background:transparent url("[(#CHEMIN{prive/themes/spip/images/sablier.gif})]") no-repeat left center;border:1px #CCC solid;}
+
+.linkchecks .progress {
+	background-color: #F7F7F7;
+	background-image: linear-gradient(to bottom, #F5F5F5, #F9F9F9);
+	background-repeat: repeat-x;
+	border-radius: 4px 4px 4px 4px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+	height: 20px;
+	overflow: hidden;
+	font-size:0.9em;
+}
+
+.linkchecks .progress .bar {
+	-moz-box-sizing: border-box;
+	background-color: #0E90D2;
+	background-image: linear-gradient(to bottom, #149BDF, #0480BE);
+	background-repeat: repeat-x;
+	box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15) inset;
+	color: #FFFFFF;
+	float: left;
+	font-size: 12px;
+	height: 100%;
+	text-align: center;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	transition: width 0.6s ease 0s;
+	width: 0;
+}
+
+.linkchecks .progress-ok .bar,.linkchecks  .progress .bar-ok {
+	background-color: #5EB95E;
+	background-image: linear-gradient(to bottom, #62C462, #57A957);
+}
+.linkchecks .progress-examen .bar,.linkchecks  .progress .bar-deplace {
+	background-color: #FAA732;
+	background-image: linear-gradient(to bottom, #FBB450, #F89406);
+}
+.linkchecks .progress-examen .bar,.linkchecks  .progress .bar-mort {
+	background-color: #333333;
+	background-image: linear-gradient(to bottom, #444, #333);
+}
+.linkchecks .progress-examen .bar,.linkchecks  .progress .bar-malade {
+	background-color: #DDDD33;
+	background-image: linear-gradient(to bottom, #FAFA44, #DDDD33);
+}
+
+.linkchecks .stats{margin-bottom:1em;}
+
+#contenu .liste-objets-lies.linkchecks{
+	margin:2.0775em 0;
+}
+.liste-objets.linkchecks .caption {
+	background-image: url("[(#CHEMIN{prive/themes/spip/images/linkcheck-24.png})]");
+	padding-left: 30px;
+}
+
+
+.linkchecks table{
+	table-layout:fixed;
+	word-wrap:break-word;
+}
+
+.linkchecks .utilise{
+	width:100px;
+}
+
+.linkchecks .etat{
+	width:80px;
+}
+
+.linkchecks td{
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+
+.linkchecks .largeur #contenu .formulaire_recherche {
+	float:none;
+	clear:both;
+	width:auto;
+	margin-bottom:1em;
+}
+
+.linkchecks .largeur #contenu .formulaire_spip.formulaire_recherche input.text{
+	float:none;
+}
