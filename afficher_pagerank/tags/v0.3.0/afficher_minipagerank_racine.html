@@ -1,0 +1,5 @@
+#HTTP_HEADER{'Content-Type: text/html'}
+
+[(#ENV{url}|urldecode|afficher_pagerank{1}|>{0}|oui)<span>
+	[<img src="#URL_SITE_SPIP/(#CHEMIN{[images/minipagerank(#ENV{url}|urldecode|afficher_pagerank{1}).gif]})" alt="PR" />]
+</span>]
