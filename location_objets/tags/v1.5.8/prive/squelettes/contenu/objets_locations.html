@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+<h1><:objets_location:titre_objets_locations:></h1>
+<INCLURE{fond=prive/objets/liste/objets_locations, env, ajax, sinon=<:objets_location:info_aucun_objets_location:>}>
+
+[(#AUTORISER{creer,objetslocation})
+	[(#URL_ECRIRE{objets_location_edit,new=oui}|icone_verticale{<:objets_location:icone_creer_objets_location:>,objets_location,new,right})]
+]

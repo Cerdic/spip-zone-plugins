@@ -1,0 +1,10 @@
+<!-- hierarchie -->
+<a href="#URL_ECRIRE{objets_locations_details}"><:objets_locations_detail:titre_objets_locations_details:></a>
+<BOUCLE_hierarchie(OBJETS_LOCATIONS_DETAILS){id_objets_locations_detail}{statut?}>
+&gt; [(#URL_ECRIRE{objets_location,id_objets_location=#ID_OBJETS_LOCATION}|lien_ou_expose{#INFO_TITRE{objets_locations,#ID_OBJETS_LOCATION},''})]
+&gt; <strong class="on">#TITRE</strong>
+</BOUCLE_hierarchie>
+[(#ENV{id_objets_location}|oui)
+	&gt; [(#URL_ECRIRE{objets_location,id_objets_location=#ID_OBJETS_LOCATION}|lien_ou_expose{#INFO_TITRE{objets_locations,#ID_OBJETS_LOCATION},''})]
+]&gt; <strong class="on"><:ecrire:info_sans_titre:></strong>
+<//B_hierarchie>

@@ -1,0 +1,42 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_objets_location,nouveau}'>
+[(#ENV{space_prive}|non)#SET{balise_message,div}]
+	[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</div>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_objets_location" value="#ENV{id_objets_location}" />
+		<div class="editer-groupe">
+			[(#ENV{espace_prive}|oui)
+				[(#SAISIE{auteurs, id_auteur, obligatoire=oui,
+					label=<:public:auteur:>
+				})]
+				[(#ENV{nombre_langues}|>{0}|oui)
+					[(#SAISIE{selecteur_langue, lang, obligatoire=oui,
+						label=<:objets_location:champ_lang_label:>
+					})]
+				]
+				[(#SAISIE{selection, entite_duree, obligatoire=oui,
+						label=<:objets_location:champ_entite_duree_label:>,
+						data=#ENV{entite_duree_definitions}
+					})]
+
+			]
+			[(#ENV{nombre_langues}|>{0}|oui)
+				[(#ENV{espace_prive}|non|et{#ENV{new}|non})
+					[(#SAISIE{selecteur_langue, lang, obligatoire=oui,
+						label=<:objets_location:champ_lang_label:>
+					})]
+				]
+			]
+			<INCLURE{
+				fond=formulaires/inc-editer_objets_location_champs_relatives,
+				env,
+				ajax=location_champs_relatives} />
+
+		</div>
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+	]
+</div>
+
