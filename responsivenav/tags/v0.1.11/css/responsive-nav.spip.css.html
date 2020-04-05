@@ -1,0 +1,27 @@
+a.nav-toggle {text-align:center;font-size:1.2em;}
+[(#CONFIG{responsivenav/selector,#nav})] {border-top:0;}
+[(#CONFIG{responsivenav/selector,#nav})] ul li {text-align:center;}
+
+[(#PLUGIN{Z}|oui) 
+	/* Si ZDist V1 avec le plugin Menus */
+	[(#CONFIG{responsivenav/selector,#nav})] .menu-conteneur ul.menu-liste li.menu-entree {box-sizing:border-box;margin:0;padding:0.5em;display:inline-block;}
+]
+
+@media screen and (min-width: #CONFIG{responsivenav/breakpoint,40em}) {
+	.nav-collapse ul li.nav-item {display:inline;} /* Pour SPIP 3.1 dist */
+	.nav-collapse ul.menu-items li.item {width:auto;} /* Pour ZDist V1 + V2 */
+}
+
+@media screen and (max-width: #CONFIG{responsivenav/breakpoint,40em}) {
+	a.nav-toggle {display:block;}
+	[(#CONFIG{responsivenav/selector,#nav})] ul {display:block;}
+	[(#CONFIG{responsivenav/selector,#nav})] ul li a {float:none;}  /* Pour SPIP 3.0 dist */
+	[(#CONFIG{responsivenav/selector,#nav})] ul.menu-items {float:none;overflow:hidden;}  /* Pour ZDist V2 */
+}
+
+[(#CONFIG{responsivenav/menuburger}|oui) 
+@media screen and (max-width: #CONFIG{responsivenav/breakpoint,40em}) {
+	a.nav-toggle:link, a.nav-toggle:focus {height:30px;color:transparent  !important;text-align:center;background:url('#CHEMIN{images/menu-burger.png}') transparent top center no-repeat !important;background-size:30px 60px  !important;}
+	a.nav-toggle.active, a.nav-toggle.active:focus {background-position: bottom center !important;}
+}
+]

@@ -1,0 +1,25 @@
+<paquet
+	prefix="responsivenav"
+	categorie="navigation"
+	version="0.1.11"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/responsivenav-32.png"
+	documentation="https://contrib.spip.net/4782"
+>
+
+	<nom>Responsive Nav</nom>
+	<!-- Un menu responsive dans vos squelettes -->
+
+	<auteur>jeanmarie</auteur>
+
+	<credit lien="http://responsive-nav.com/">Responsive Nav</credit>
+
+	<licence>Creative Commons by-sa</licence>
+
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+
+	<pipeline nom="insert_head_css" inclure="responsivenav_pipelines.php" />
+	<pipeline nom="insert_head" inclure="responsivenav_pipelines.php" />
+
+</paquet>

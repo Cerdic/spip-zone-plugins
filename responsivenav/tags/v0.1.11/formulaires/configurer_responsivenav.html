@@ -1,0 +1,43 @@
+<div class="formulaire_spip formulaire_configurer formulaire_configurer_responsivenav">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+		[(#SAISIE{input,breakpoint,
+			label=<:responsivenav:breakpoint:>,
+			explication=<:responsivenav:breakpoint_explication:>,
+			defaut=40em,
+			size=10})]
+		[(#SAISIE{input,selector,
+			label=<:responsivenav:selector:>,
+			explication=<:responsivenav:selector_explication:>,
+			defaut=#nav,
+			size=10})]
+		[(#SAISIE{input,label,
+			label=<:responsivenav:label:>,
+			explication=<:responsivenav:label_explication:>,
+			defaut=&#9776; Menu,
+			size=10})]
+		[(#SAISIE{radio,insert,
+			datas=#ARRAY{
+				before,<:responsivenav:avant:>,
+				after,<:responsivenav:apres:>},
+			label=<:responsivenav:insert:>,
+			explication=<:responsivenav:insert_explication:>,
+			defaut=before})]
+		[(#SAISIE{checkbox,menuburger,
+			datas=true|<:responsivenav:oui:>,
+			label=<:responsivenav:menuburger:>,
+			explication=<:responsivenav:menuburger_explication:>,
+			defaut=unchecked})]
+	</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+	</p>
+</div></form>
+
+</div>
