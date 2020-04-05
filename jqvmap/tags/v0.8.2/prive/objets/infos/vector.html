@@ -1,0 +1,13 @@
+<BOUCLE_vector(VECTORS){id_vector=#ENV{id}}>
+<div class='infos'>
+[(#SET{texte_objet,<:vector:titre_vector:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_VECTOR</p></div>
+
+	[(#AUTORISER{supprimer, vector, #ID_VECTOR}|oui)
+		[(#BOUTON_ACTION{
+			[(#CHEMIN_IMAGE{vector-del-24.png}|balise_img{<:vector:supprimer_vector:>}|concat{' ',#VAL{<:vector:supprimer_vector:>}|wrap{<b>}}|trim)],
+			#URL_ACTION_AUTEUR{supprimer_vector, #ID_VECTOR, #URL_ECRIRE{map,id_map=#ID_MAP}},
+			icone s24 horizontale danger vector-del-24, <:vector:confirmer_supprimer_vector:>})]
+	]
+</div>
+</BOUCLE_vector>

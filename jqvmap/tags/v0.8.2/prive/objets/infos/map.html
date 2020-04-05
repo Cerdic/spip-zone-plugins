@@ -1,0 +1,13 @@
+<BOUCLE_map(MAPS){id_map=#ENV{id}}{statut?}>
+<div class='infos'>
+[(#SET{texte_objet,<:map:titre_map:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_MAP</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{maps,#ID_MAP})]
+
+[(#URL_PAGE{prive/transmettre/map_xml}
+    |parametre_url{id_map,#ID_MAP}
+    |parametre_url{titre,#CODE_MAP}
+    |icone_horizontale{<:map:icone_exporter_map:>,map,export})]
+</div>
+</BOUCLE_map>

@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_vectors_selectionnes>
+	<ul>
+	<BOUCLE_vectors_selectionnes(VECTORS){id_vector IN #GET*{valeur}}
+		{par num titre, titre}{tout}>
+		<li class="choix">#TITRE (#ID_VECTOR)</li>
+	</BOUCLE_vectors_selectionnes>
+	</ul>
+	</B_vectors_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_vectors_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_vector_selectionne(VECTORS){id_vector=#ENV{valeur}}
+		{par num titre, titre}{tout}>
+	  	<p>#TITRE (#ID_VECTOR)</p>
+	</BOUCLE_vector_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_vector_selectionne>
+<//B_test_multiple>

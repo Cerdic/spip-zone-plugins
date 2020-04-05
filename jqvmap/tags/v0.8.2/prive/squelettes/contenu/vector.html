@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,vector,#ID_VECTOR}|sinon_interdire_acces)]
+<BOUCLE_vector(VECTORS){id_vector}{si #ENV{exec}|=={vector}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,vector,#ID_VECTOR})
+		[(#ID_VECTOR|afficher_qui_edite{vector}|non)
+			[(#URL_ECRIRE{vector_edit,id_vector=#ID_VECTOR}|icone_verticale{<:vector:icone_modifier_vector:>,vector,edit,right ajax preload})]
+		]
+		[(#ID_VECTOR|afficher_qui_edite{vector}|oui)
+			[(#URL_ECRIRE{vector_edit,id_vector=#ID_VECTOR}|icone_verticale{#ID_VECTOR|afficher_qui_edite{vector},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{vector-24.png}|balise_img{vector,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{vector,#ID_VECTOR}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/vector,id=#ID_VECTOR,id_vector=#ID_VECTOR,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,vector,#ID_VECTOR})
+	[(#ID_VECTOR|afficher_qui_edite{vector}|non)
+		[(#URL_ECRIRE{vector_edit,id_vector=#ID_VECTOR}|icone_verticale{<:vector:icone_modifier_vector:>,vector,edit,right ajax preload})]
+	]
+	[(#ID_VECTOR|afficher_qui_edite{vector}|oui)
+		[(#URL_ECRIRE{vector_edit,id_vector=#ID_VECTOR}|icone_verticale{#ID_VECTOR|afficher_qui_edite{vector},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,vector,id,#ID_VECTOR},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_vector>
+[(#ENV**{exec}|=={vector_edit}|?{#INCLURE{fond=prive/squelettes/contenu/vector_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_vector>

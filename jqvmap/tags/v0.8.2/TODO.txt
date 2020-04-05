@@ -1,0 +1,7 @@
+- si la carte est déjà présente, on met à jour les données en bdd. Il faudra avoir une alerte à ce sujet et/ou une case à cocher. Actuellement, les données sont mis à jour mais il n'y a pas d'alerte ni de case à cocher.
+- stocker dans une meta jqvmap_import le nom du fichier xml importé et l'id_map qui a été créé ;
+- Pouvoir vérifier la bonne structure du fichier xml (cf. plugonet et/ou core) ;
+- peut-être créer toutes les cartes présentes dans jVectorMap et jqvmap ;
+- voir pour la personnalisation des couleurs (pas la priorité pour le moment) ;
+- Hum… Ecrire la documentation ;
+- la suite ?

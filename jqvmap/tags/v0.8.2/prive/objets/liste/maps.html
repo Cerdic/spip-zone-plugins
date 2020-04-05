@@ -1,0 +1,39 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	id_map,1,
+	code_map,1,
+	points,-1
+}})]<B_liste_maps>
+#ANCRE_PAGINATION
+<div class="liste-objets maps">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{map:info_1_map,map:info_nb_maps}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class='titre' scope='col'>[(#TRI{titre,<:map:champ_titre_label:>,ajax})]</th>
+			<th class='code_map' scope='col'>[(#TRI{code_map,<:map:champ_code_map_label:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_map,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_maps(MAPS){id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{map-16.png}|balise_img)]</td>
+			<td class='statut'>[(#STATUT|puce_statut{map,#ID_MAP})]</td> 
+			<td class='titre principale'>[(#LOGO_MAP|image_reduire{20,26})]<a href="[(#ID_MAP|generer_url_entite{map})]" title="<:info_numero_abbreviation|attribut_html:> #ID_MAP">[(#RANG). ]#TITRE</a></td>
+			<td class='code_map'>[(#CODE_MAP)]</td>
+			<td class='id'>[(#AUTORISER{modifier,map,#ID_MAP}|?{
+				<a href="[(#URL_ECRIRE{map_edit,id_map=#ID_MAP})]">#ID_MAP</a>,
+				#ID_MAP
+			})]</td>
+		</tr>
+	</BOUCLE_liste_maps>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_maps>[
+<div class="liste-objets maps caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_maps>
