@@ -1,0 +1,25 @@
+<paquet
+	prefix="statsobjets"
+	categorie="statistique"
+	version="1.1.5"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/statsobjets.png"
+	documentation="https://contrib.spip.net/5189"
+	schema="1.0.0"
+>
+	<nom>Statistiques des objets éditoriaux</nom>
+	<!--Étendre les statistiques de SPIP à tous les objets éditoriaux -->
+
+	<auteur>tcharlss</auteur>
+
+	<necessite nom="stats" compatibilite="[0.4.7;[" />
+
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/statsobjets.php" />
+	<pipeline nom="formulaire_fond" inclure="statsobjets_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="statsobjets_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="statsobjets_pipelines.php" />
+	<pipeline nom="formulaire_admin" inclure="statsobjets_pipelines.php" />
+	<pipeline nom="boite_infos" inclure="statsobjets_pipelines.php" />
+
+</paquet>

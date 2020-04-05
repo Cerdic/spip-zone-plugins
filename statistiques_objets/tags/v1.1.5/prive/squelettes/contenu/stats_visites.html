@@ -1,0 +1,33 @@
+[(#REM)
+
+	Surcharge : prise en compte des différents objets éditoriaux
+
+]
+[(#AUTORISER{voirstats}|sinon_interdire_acces)][
+
+(#SET{url_propre, #SELF|parametre_url{objet|id_objet|id_article,''}})][
+(#SET{objet,      #ENV{objet,#ENV{id_article}|?{article}}})]
+
+<h1 class="grostitre"><:statistiques:titre_evolution_visite:></h1>
+
+[(#REM) onglets des objets activés ]
+<div class="onglets_simple clearfix">
+	<ul>
+		<li>[(#GET{url_propre}|lien_ou_expose{[(#CHEMIN_IMAGE{toggle_expand-16}|balise_img) ]<:statistiques:onglet_visites_toutes:>,[(#GET{objet}|non)]})]</li>
+		<BOUCLE_menu_objets(DATA){source table, #CONFIG{activer_statistiques_objets,#ARRAY}|unserialize|array_filter}>
+		[(#SET{objet_menu,#VALEUR|objet_type})]
+		<li>[(#GET{url_propre}|parametre_url{objet,#GET{objet_menu}}|lien_ou_expose{[(#GET{objet_menu}|objet_icone{16}) ][(#GET{objet_menu}|objet_info{texte_objets}|_T)],#GET{objet_menu}|=={#GET{objet}}})]</li>
+		</BOUCLE_menu_objets>
+	</ul>
+</div>
+
+[(#REM) graphiques ]
+<INCLURE{fond=prive/squelettes/inclure/stats-visites-data, env} />
+
+[(#REM) listes des objets populaires ]
+[(#GET{objet}|oui)
+<INCLURE{fond=prive/squelettes/inclure/stats-visites-populaires, env} />
+]
+
+[(#REM) scripts ]
+<INCLURE{fond=prive/stats/visites} />

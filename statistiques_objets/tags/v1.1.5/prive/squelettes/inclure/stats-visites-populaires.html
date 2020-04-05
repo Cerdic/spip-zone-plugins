@@ -1,0 +1,131 @@
+[(#REM)
+
+	Surcharge : prise en compte des différents objets éditoriaux
+
+	Notes :
+	Certaines balises ne pouvant être utilisées dans une boucle DATA, on les émule :
+	- \#POPULARITE_ABSOLUE : on applique ceil à la popularite
+	- \#EXPOSE : avec une balise conditionnelle
+
+	Inclus dans :
+	- prive/squelettes/contenu/stats_visites.html
+
+]
+[(#SET{objet,          #ENV{objet}|sinon{#ENV{id_article}|?{article}}})][
+(#SET{id_objet,        #ENV{id_objet,#ENV{id_article}}|intval})][
+(#SET{id_table_objet,  #GET{objet}|id_table_objet})][
+(#SET{table_objet_sql, #GET{objet}|table_objet_sql})][
+(#SET{champ_titre,     #GET{objet}|objet_info{titre}})][
+(#SET{champ_date,      #GET{objet}|objet_info{date}|sinon{maj}})][
+(#SET{champ_statut,    #GET{objet}|objet_info{statut}|table_valeur{0/champ}})][
+(#SET{statut_publie,   #GET{objet}|objet_info{statut}|table_valeur{0/publie}})]
+
+#BOITE_OUVRIR{'','note'}
+<div class="stats-articles">
+
+	<div class="unit size1of2">
+
+		[(#REM)
+		        ======================
+		        les 30 plus populaires
+		        ======================
+		]
+		[(#SET{c,      #GET{objet}|classement_populaires|sinon{#LISTE{0}}})][
+		(#SET{ids_pop, #ARRAY})][
+		(#SET{select,  [(#GET{id_table_objet}),visites,popularite][,(#GET{champ_titre})]})][
+		(#SET{from,    #GET{table_objet_sql}})][
+		(#GET{champ_statut}|oui) #SET{req_statut, #GET{champ_statut}=#GET{statut_publie}|sql_quote}][
+		(#REM) Exception pour les auteurs (en attendant https://core.spip.net/issues/4175#note-6 ?)][
+		(#GET{champ_statut}|and{#GET{objet}|=={auteur}}|oui) #SET{req_statut, statut IN ('0minirezo', '1comite', '6forum')}][
+		(#SET{where,   [(#GET{id_table_objet})] IN \([(#GET{c}|join{','})]\)[(#GET{champ_statut}|oui) AND #GET{req_statut}]})][
+		(#SET{groupby, #GET{id_table_objet}})][
+		(#SET{orderby, FIELD\([(#GET{id_table_objet})][,(#GET{c}|join{','})]\)})][
+		(#SET{limit,   '0,30'})][
+		(#SET{req_pop, [SELECT (#GET{select})][ FROM (#GET{from})][ WHERE (#GET{where})][ GROUP BY (#GET{groupby})][ ORDER BY (#GET{orderby})][ LIMIT (#GET{limit})]})]
+
+
+		<h4><:statistiques:info_visites_objets_plus_populaires:></h4>
+		<B_pluspop>
+		<ol class="classement">
+			<BOUCLE_pluspop(DATA){source sql, #GET{req_pop}}>
+				#SET{ids_pop,#GET{ids_pop}|push{#VALEUR{#GET{id_table_objet}}}}
+				#SET{popularite,#VALEUR{popularite}|ceil}
+				<li[ (#GET{id_objet}|=={#VALEUR{#GET{id_table_objet}}}|?{class="on"})]>
+					<a
+						href="[(#SELF|parametre_url{objet,#GET{objet}}|parametre_url{id_objet,#VALEUR{#GET{id_table_objet}}}|parametre_url{id_article,''})]#contenu" class="ajax"
+						title="<:statistiques:info_popularite_3{visites=#VALEUR{visites},popularite=#GET{popularite}}|attribut_html:>">
+						#VALEUR{titre}
+					</a>
+				</li>
+			</BOUCLE_pluspop>
+		</ol>
+		[(#REM)
+		        =======================================================================
+		        les 10 derniers populaires publiés, pas en doublons avec les précédents
+		        =======================================================================
+		]
+		[(#SET{select, [(#GET{id_table_objet}),visites,popularite][,(#GET{champ_date})][,(#GET{champ_titre})]})][
+		(#SET{from,    #GET{table_objet_sql}})][
+		(#SET{where,   popularite > 0[(#GET{ids_pop}|count|oui) AND [(#GET{id_table_objet})] NOT IN \([(#GET{ids_pop}|join{','})]\)][(#GET{champ_statut}|oui) AND #GET{req_statut}]})][
+		(#SET{groupby, #GET{id_table_objet}})][
+		(#SET{orderby, [(#GET{champ_date}) DESC]})][
+		(#SET{limit,   '0,10'})][
+		(#SET{req_derniers,[SELECT (#GET{select})][ FROM (#GET{from})][ WHERE (#GET{where})][ GROUP BY (#GET{groupby})][ ORDER BY (#GET{orderby})][ LIMIT (#GET{limit})]})]
+		<B_derniers>
+			<p class="center">[...]</p>
+			<h4><:statistiques:info_visites_objets_derniers:></h4>
+			<ol class='classement'>
+				<BOUCLE_derniers(DATA){source sql, #GET{req_derniers}}>
+				#SET{popularite,#VALEUR{popularite}|ceil}
+				<li value="[(#VALEUR{#GET{id_table_objet}}|array_search{#GET{c}}|plus{1})]"[ (#GET{id_objet}|=={#VALEUR{#GET{id_table_objet}}}|?{class="on"})]>
+					<a
+						href="[(#SELF|parametre_url{objet,#GET{objet}}|parametre_url{id_objet,#VALEUR{#GET{id_table_objet}}}|parametre_url{id_article,''})]#contenu" class="ajax"
+						title="<:statistiques:info_popularite_3{visites=#VALEUR{visites},popularite=#GET{popularite}}|attribut_html:>">
+						#VALEUR{titre}
+					</a>
+				</li>
+			</BOUCLE_derniers>
+			</ol>
+		</B_derniers>
+		</B_pluspop>
+
+	</div>
+
+	[(#REM)
+	        ===================================
+	        les 30 plus visités depuis le début
+	        ===================================
+	]
+	<div class="unit lastUnit">
+
+		<h4><:statistiques:info_afficher_visites_objets_plus_visites:></h4>
+		[(#SET{c,      #GET{objet}|classement_populaires})][
+		(#SET{select,  [(#GET{id_table_objet}),visites,popularite][,(#GET{champ_titre})]})][
+		(#SET{from,    #GET{table_objet_sql}})][
+		(#SET{where,   popularite > 0[(#GET{champ_statut}|oui) AND #GET{req_statut} ]})][
+		(#SET{groupby, #GET{id_table_objet}})][
+		(#SET{orderby, 'visites DESC'})][
+		(#SET{limit,   '0,30'})][
+		(#SET{req_plusvisites,[SELECT (#GET{select})][ FROM (#GET{from})][ WHERE (#GET{where})][ GROUP BY (#GET{groupby})][ ORDER BY (#GET{orderby})][ LIMIT (#GET{limit})]})]
+
+		<ol class='classement'>
+			<BOUCLE_plusvisites(DATA){source sql, #GET{req_plusvisites}}>
+			#SET{popularite,#VALEUR{popularite}|ceil}
+			<li value="[(#VALEUR{#GET{id_table_objet}}|array_search{#GET{c}}|plus{1})]"[ (#GET{id_objet}|=={#VALEUR{#GET{id_table_objet}}}|?{class="on"})]>
+				<a href="[(#SELF|parametre_url{objet,#GET{objet}}|parametre_url{id_objet,#VALEUR{#GET{id_table_objet}}}|parametre_url{id_article,''})]#contenu" class="ajax"
+						title="<:statistiques:info_popularite_3{visites=#VALEUR{visites},popularite=#GET{popularite}}|attribut_html:>">
+						#VALEUR{titre}
+				</a>
+			</li>
+			</BOUCLE_plusvisites>
+		</ol>
+
+		<br class="nettoyeur" />
+		<hr />
+		<h4><:statistiques:info_comment_lire_tableau:></h4>
+		<p><:statistiques:texte_comment_lire_tableau:></p>
+
+	</div>
+
+</div>
+#BOITE_FERMER

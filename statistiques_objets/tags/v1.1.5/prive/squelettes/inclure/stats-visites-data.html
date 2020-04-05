@@ -1,0 +1,41 @@
+[(#REM)
+
+	Graphiques : visites par jours et par mois
+	Surcharge : prise en compte des différents objets éditoriaux
+
+	Inclus dans :
+	- prive/squelettes/contenu/stats_visites.html
+
+]
+[(#BOITE_OUVRIR{'','simple stats'})][
+
+(#SET{url_propre, #SELF|parametre_url{objet|id_objet|id_article,''}})][
+(#SET{objet,      #ENV{objet,#ENV{id_article}|?{article}}})][
+(#SET{id_objet,   #ENV{id_objet,#ENV{id_article}}|intval})][
+
+(#REM) Éventuel objet sélectionné ]
+<BOUCLE_expose(CONDITION){si #GET{objet}|et{#GET{id_objet}}}>
+[(#SET{id_table_objet, #GET{objet}|id_table_objet})][
+(#SET{table_objet_sql, #GET{objet}|table_objet_sql})][
+(#SET{champ_titre,     #GET{objet}|objet_info{titre}})][
+(#SET{champ_date,      #GET{objet}|objet_info{date}|sinon{maj}})]
+[(#REM) requête ]
+[(#SET{select,         [(#GET{id_table_objet})][,(#GET{champ_titre})]})][
+(#SET{from,            #GET{table_objet_sql}})][
+(#SET{where,           [(#GET{id_table_objet})] = [(#GET{id_objet}|intval)][(#GET{champ_statut}|oui) AND [(#GET{champ_statut})]=[(#GET{statut_publie}|sql_quote)]]})][
+(#SET{req,             [SELECT (#GET{select})][ FROM (#GET{from})][ WHERE (#GET{where})]})]
+<BOUCLE_objet(DATA){source sql, #GET{req}}>
+#BOITE_OUVRIR{'','note'}
+	<a class='annule_filtre' href="[(#GET{url_propre})]" title="<:info_tout_afficher|attribut_html:>">[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{alt,<:info_tout_afficher:>})]</a>
+	<:statistiques:titre_page_statistiques_visites:> <:info_pour:>
+	<h2 class='objet_titre'><a href='[(#GET{id_objet}|generer_url_entite{#GET{objet},'','',#EVAL{true}})]'>#VALEUR{titre}</a></h2>
+	<a href="[(#URL_ECRIRE{stats_referers}|parametre_url{objet,#GET{objet}}|parametre_url{id_objet,#VALEUR{#GET{id_table_objet}}})]"><:statistiques:titre_liens_entrants:></a>
+#BOITE_FERMER
+</BOUCLE_objet>
+</BOUCLE_expose>
+
+[(#REM) Graphiques : visites par jour et par mois ]
+<INCLURE{fond=prive/squelettes/inclure/stats-visites-jours,ajax,env} />
+<INCLURE{fond=prive/squelettes/inclure/stats-visites-mois,ajax,env} />
+
+#BOITE_FERMER

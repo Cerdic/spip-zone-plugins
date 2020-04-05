@@ -1,0 +1,12 @@
+[(#REM)
+
+	Page de configuration des statistiques.
+
+]
+[(#AUTORISER{configurer,statsobjets}|sinon_interdire_acces)]
+
+<h1 class="grostitre"><:statistiques:cfg_titre:></h1>
+
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_COMPTEUR
+</div>
