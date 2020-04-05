@@ -1,0 +1,45 @@
+[(#REM)
+
+	Liste des URLs n'ayant pas pu être migrées lors du passage à la V1
+
+]
+<div class="notice">
+	<:urls_pages:message_erreur_migration:>
+</div>
+
+<B_liste_urls>
+#ANCRE_PAGINATION
+<div class="liste-objets urls_pages erreur">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{urls_pages:info_1_url_page,urls_pages:info_nb_urls_pages}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='page principale' scope='col'><:urls_pages:champ_page_label:></th>
+			<th class='url secondaire' scope='col'><:urls_pages:champ_url_label:></th>
+			<th class='fond secondaire' scope='col'><:urls_pages:champ_fond_label:></th>
+			<th class='objet secondaire' scope='col'><:urls_pages:utilisation:></th>
+			<th class="action"></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_urls(DATA){source table, #CONFIG{urls_pages}}{par cle}{pagination #ENV{nb,20}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='page principale'>[(#CLE*)]</td>
+			<td class='url'>#VALEUR</td>
+			<td class='fond secondaire'>
+				[(#CLE|trouver_fond_page|sinon{#CHEMIN_IMAGE{erreur-16}|balise_img{'X','erreur'}|concat{' ',<span class="erreur"><:urls_pages:erreur_fond_absent:></span>}})]
+			</td>
+			<td class='objet secondaire'>
+				<BOUCLE_url_objet(spip_urls){url=#VALEUR}{page=''}><a href="[(#ID_OBJET|generer_url_entite{#TYPE})]">#TYPE #ID_OBJET</a></BOUCLE_url_objet>
+				Ø<//B_url_objet>
+			</td>
+			<td class='action'>
+				
+			</td>
+		</tr>
+	</BOUCLE_liste_urls>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_urls>

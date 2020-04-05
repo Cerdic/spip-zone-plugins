@@ -1,0 +1,15 @@
+[(#REM)<style>]
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
+#HTTP_HEADER{Vary: Accept-Encoding}
+#SET{claire,##ENV{couleur_claire,c5e41c}}
+#SET{foncee,##ENV{couleur_foncee,9dba00}}
+
+/* liste des pages et des fonds de pages */
+.liste-objets.urls_pages .liste .erreur {color: red; vertical-align: middle;}
+.liste-objets.urls_pages .page {font-weight: bold}
+.liste-objets.fonds_pages .dossier {padding-top: 1em; padding-bottom: 1em; text-align: center; background-color: [#(#GET{claire}|couleur_eclaircir{0.8})]}
+.pseudo.bouton_action_post .submit {display: inline-block}
+
+/* formulaire d'édition */
+.formulaire_editer_url_page .editer_page {position: relative}
+.formulaire_editer_url_page #choisir_page {z-index: 2; position: absolute; bottom: 10px; #ENV{right}: 15px;}

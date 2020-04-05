@@ -1,0 +1,48 @@
+[(#REM)
+
+	Liste des fonds des pages détectées
+
+	Paramètres (*obligatoire)
+	- boutons : choisir | editer
+
+]
+#SET{boutons,#ENV{boutons}|?{#ENV{boutons}|is_array|?{#ENV{boutons},#ENV{boutons}|explode{','}},#ARRAY}}
+
+<B_dossiers_pages>
+<div class="liste-objets fonds_pages" id="fonds_pages">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,<:urls_pages:info_fonds_pages:>})</strong></caption>]
+<thead>
+	<tr class='first_row'>
+		<th class='page principale' scope='col'><:urls_pages:champ_page_tri:></th>
+		<th class="action"><:urls_pages:champ_action:></th>
+	</tr>
+</thead>
+<tbody>
+	#SET{compteur,0}
+	<BOUCLE_dossiers_pages(DATA){source fonds_pages, exclure_pages_bdd, groupby_dossier, filtrer_prioritaires}{par cle}>
+	#SET{compteur,#GET{compteur}|plus{1}}
+	<tr class="[(#GET{compteur}|alterner{row_odd,row_even})]">
+		<th class="dossier" colspan="2">#CLE</th>
+	</tr>
+	<BOUCLE_liste_pages(DATA){source table, #VALEUR}{par cle}>
+	#SET{compteur,#GET{compteur}|plus{1}}
+	<tr class="[(#GET{compteur}|alterner{row_odd,row_even})][ (#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)close]">
+		<td class='page principale'>#CLE</td>
+		<td class='action'>
+			[(#VAL{choisir}|in_any{#GET{boutons}}|oui)
+			<button data-page="[(#CLE*|attribut_html)]" class="submit"><:urls_pages:icone_choisir:></button>
+			][(#VAL{editer}|in_any{#GET{boutons}}|oui)
+			[(#URL_ECRIRE{url_page_edit, page=#CLE}|parametre_url{redirect,#SELF|parametre_url{onglet,''}}|icone_horizontale{<:urls_pages:icone_attribuer_url_page:>,url,new})]
+			]
+		</td>
+	</tr>
+</BOUCLE_liste_pages>
+</BOUCLE_dossiers_pages>
+</tbody>
+</table>
+</div>
+</B_dossiers_pages>
+
+[<div class="liste-objets urls caption-wrap"><strong class="caption">(#ENV*{sinon,<:urls_pages:info_0_fond_page:>})</strong></div>
+]<//B_dossiers_pages>

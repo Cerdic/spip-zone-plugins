@@ -1,0 +1,38 @@
+[(#REM)
+
+	Administration des URLs des pages
+
+]
+[(#AUTORISER{administrer,url}|sinon_interdire_acces)]
+
+<INCLURE{fond=prive/squelettes/inclure/menu_urls_pages}>
+
+<h1 class="grostitre"><:urls_pages:titre_urls_pages:></h1>
+
+#SET{onglets, #LISTE{pages,fonds}}
+[(#LIRE_CONFIG{urls_pages}|oui)#SET{onglets,#GET{onglets}|push{erreurs}}]
+#SET{onglet, #ENV{onglet}|in_array{#GET{onglets}}|?{#ENV{onglet},#GET{onglets/0}}}
+<div class='onglets_simple clearfix'>
+	<ul>
+		<BOUCLE_onglets(DATA){source table, #GET{onglets}}>
+		<li>
+			[(#SELF|parametre_url{onglet,#VALEUR}
+				|lien_ou_expose{#VAL{#VAL{urls_pages:menu_onglet_#VALEUR}|_T},#GET{onglet}|=={#VALEUR}})]
+		</li>
+		</BOUCLE_onglets>
+	</ul>
+</div>
+
+[(#GET{onglet}|=={pages}|oui)
+<INCLURE{fond=prive/objets/liste/urls_pages, ajax}>
+]
+
+[(#GET{onglet}|=={fonds}|oui)
+<INCLURE{fond=prive/objets/liste/fonds_pages, boutons=editer}>
+]
+
+[(#GET{onglet}|=={erreurs}|oui)
+<INCLURE{fond=prive/objets/liste/urls_pages_erreurs}>
+]
+
+[(#URL_ECRIRE{url_page_edit}|parametre_url{redirect,#SELF}|icone_verticale{<:urls_pages:icone_ajouter_url_page:>,url,new,'right'})]

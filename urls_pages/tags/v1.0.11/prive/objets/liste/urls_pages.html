@@ -1,0 +1,47 @@
+#SET{defaut_tri,#ARRAY{
+	date,#ENV{date_sens,-1},
+	page,1,
+	url,1,
+	fond,1,
+}}
+
+<B_liste_urls>
+#ANCRE_PAGINATION
+<div class="liste-objets urls_pages">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{urls_pages:info_1_url_page,urls_pages:info_nb_urls_pages}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='page principale' scope='col'>[(#TRI{page,<:urls_pages:champ_page_tri:>,ajax})]</th>
+			<th class='url secondaire' scope='col'>[(#TRI{url,<:urls:label_tri_url:>,ajax})]</th>
+			<th class='fond secondaire' scope='col'><:urls_pages:champ_fond_label:></th>
+			<th class='date secondaire' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class="action"></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_urls(spip_urls){tout}{page != ''}{where?}{url like #ENV{recherche,%}}{tri #ENV{par,page},#GET{defaut_tri}}{par page}{pagination #ENV{nb,20}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='page principale'>[(#PAGE*)]</td>
+			<td class='url'><a href="[(#URL_PAGE{#PAGE*}|url_absolue{#URL_SITE_SPIP/})]">[(#URL*)]</a></td>
+			<td class='fond secondaire'>
+				[(#PAGE|trouver_fond_page|sinon{#CHEMIN_IMAGE{erreur-16}|balise_img{'X','erreur'}|concat{' ',<span class="erreur"><:urls_pages:erreur_fond_absent:></span>}})]
+			</td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
+			<td class='action'>
+				[(#AUTORISER{modifierurl,'',0})
+				<span class="pseudo bouton_action_post"><a href="[(#URL_ECRIRE{url_page_edit, page=#PAGE}|parametre_url{redirect,#SELF})]" class="submit" title="<:urls_pages:icone_editer_url_page|attribut_html:>">[(#CHEMIN{prive/themes/spip/images/edit-bis-12.png}|balise_img{<:urls_pages:icone_editer_url_page:>})]</a></span>
+				]
+				[(#AUTORISER{modifierurl,'',0})
+				[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{supprimer-12}|balise_img{<:urls_pages:icone_supprimer_url_page:>})],[(#URL_ACTION_AUTEUR{supprimer_url,[(#ID_PARENT)-#URL],#SELF})],ajax,'',<:urls_pages:icone_supprimer_url_page|attribut_html:>})]
+				]
+			</td>
+		</tr>
+	</BOUCLE_liste_urls>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_urls>[
+<div class="liste-objets urls caption-wrap"><strong class="caption">(#ENV*{sinon,<:urls_pages:info_0_url_page:>})</strong></div>
+]<//B_liste_urls>

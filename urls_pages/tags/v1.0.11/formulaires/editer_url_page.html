@@ -1,0 +1,79 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div class="editer-groupe">
+
+			#SET{name,page}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,'obligatoire'}
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="champ_#GET{name}"><:urls_pages:champ_page_label:></label>
+				[(#ENV{page_locked}|non)
+				<span class='explication'><:urls_pages:champ_page_explication|propre:></span>
+				]
+				[(#ENV{page_locked}|et{#ENV{page_fond}}|oui)
+				<span class='explication'><:urls_pages:champ_page_explication_fond{fond=#ENV{page_fond}}|propre:></span>
+				]
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type="text" class="text" name="#GET{name}[(#ENV{page_locked}|oui)_off]" id="champ_#GET{name}" size="40" value="#ENV{#GET{name}}"[ (#ENV{page_locked}|oui)disabled="disabled" readonly="readonly"][ (#GET{obli}|oui)required="required"] />
+				[(#ENV{page_locked}|non)
+				<a href="[(#URL_ECRIRE{choisir_fond_page}|parametre_url{var_zajax,contenu}|parametre_url{selectfunc,choisir_page})]" id="choisir_page" class="icone-choisir-page" role="button" tabindex="0" title="<:urls_pages:icone_choisir_page|attribut_html:>">[(#CHEMIN_IMAGE{bullet_arrow_down-16}|balise_img{"+"})]</a>
+				]
+			</div>
+			[(#ENV{page_locked}|oui)
+			<input type="hidden" name="#GET{name}" value="#ENV{#GET{name}}">
+			]
+
+			#SET{name,url}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,'obligatoire'}
+			#SET{url_site_spip,#URL_SITE_SPIP|replace{'/$', ''}|concat{'/'}}
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="champ_#GET{name}"><:urls_pages:champ_url_label:></label>
+				<span class='explication'><:urls_pages:champ_url_explication{racine=#GET{url_site_spip}}:></span>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type="text" class="text" name="#GET{name}" id="champ_#GET{name}" size="40" value="#ENV{#GET{name}}"[ (#GET{obli}|oui)required="required"] />
+			</div>
+
+		</div>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'><span class='image_loading'></span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>]
+</div>
+
+[(#REM) Gestion de la modale ]
+<script>
+$(document).ready( function(){
+
+	// Ouverture au clic + touche espace
+	var ouvrir_modale = function(event){
+		if (event.type == "click" || (event.type == "keypress" && event.which == 32)){
+			event.preventDefault();
+			var url = $(this).attr( "href" );
+			$.modalboxload(url, {autoResize: true});
+		}
+	}
+	$( "#choisir_page" ).on( "click", ouvrir_modale );
+	$( "#choisir_page" ).on( "keypress", ouvrir_modale );
+	// Init choisir page
+	choisir_page();
+	// Relance choisir page si rechargement ajax
+	if (window.jQuery) {
+		jQuery(function(){
+			onAjaxLoad(choisir_page);
+		});
+	}
+	// Fonction choisir page : remplissage du champ au clic
+	function choisir_page(){
+		$( "#fonds_pages [data-page] ").on( "click", function() {
+			var page = $(this).data("page");
+			$( "[name=page]:not(:disabled)" ).val(page);
+			$.modalboxclose();
+		});
+	}
+});
+</script>

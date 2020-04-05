@@ -1,0 +1,15 @@
+[(#REM)
+
+	Édition de l'URL d'une page
+
+]
+<div class="cadre-formulaire-editer">
+	<div class="entete-formulaire">
+		[(#ENV{redirect,#URL_ECRIRE{controler_urls_pages}}|icone_verticale{<:urls_pages:icone_retour:>,url,'',left})]
+		[(#ENV{page}|?{<:urls_pages:titre_editer_url_page:>,<:urls_pages:titre_creer_url_page:>})]
+		<h1>[(#ENV{page}|sinon{<:urls_pages:titre_nouvelle_url:>})]</h1>
+	</div>
+	<div class="ajax">
+		#FORMULAIRE_EDITER_URL_PAGE{#ENV{page}, #ENV{redirect}}
+	</div>
+</div>
