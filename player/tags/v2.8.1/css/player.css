@@ -1,0 +1,11 @@
+.link-player .icon-play,
+.link-player .icon-pause {
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	margin-right: 5px;
+	background: url(img/controls-16.png) no-repeat -32px center;
+}
+.link-player .icon-pause {
+	background-position: -64px center;
+}

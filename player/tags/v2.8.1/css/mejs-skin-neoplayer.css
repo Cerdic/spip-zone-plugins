@@ -1,0 +1,115 @@
+/* Dewplayer */
+.mejs-container.mejs-neoplayer {
+	background: none;
+	height:20px !important;
+}
+.mejs-neoplayer .mejs-controls {
+	background: none;
+	border-radius:5px;
+	height:20px;
+	background-color: #e5e5e5;
+	background-image: -moz-linear-gradient(top, #fcfcfc, #cecece); /* FF 3.6+*/
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fcfcfc), to(#cecece)); /* Safari 4+, Chrome 2+*/
+	background-image: -webkit-linear-gradient(top, #fcfcfc, #cecece); /* Safari 5.1+, Chrome 10+*/
+	background-image: -o-linear-gradient(top, #fcfcfc, #cecece); /* Opera 11.10*/
+	background-image: linear-gradient(to bottom, #fcfcfc, #cecece); /* Standard, IE10 */
+}
+.mejs-neoplayer .mejs-controls .mejs-playpause-button {
+	margin-right: 5px;
+}
+.mejs-neoplayer .mejs-controls .mejs-playpause-button button {
+	position:relative;
+	background: url(img/controls-neoplayer.png) no-repeat left 0;
+	width: 16px;
+	margin-right: 5px;
+	margin-top: 3px;
+	margin-left: 6px;
+}
+.mejs-neoplayer .mejs-controls .mejs-playpause-button button:after {
+	content:"";
+	display: block;
+	position: absolute;
+	top:-1px;
+	right: -6px;
+	height: 100%;
+	width: 0;
+	border-left: 1px solid #afafaf;
+	border-right: 1px solid #e2e2e2;
+
+}
+.mejs-neoplayer .mejs-controls .mejs-play button:hover {
+	background-position: left -16px;
+}
+.mejs-neoplayer .mejs-controls .mejs-pause button {
+	background-position: left -32px;
+}
+.mejs-neoplayer .mejs-controls .mejs-pause button:hover {
+	background-position: left -48px;
+}
+
+
+.mejs-neoplayer .mejs-controls .mejs-time-rail {
+	margin-right: 10px;
+	margin-left: 10px;
+}
+.mejs-neoplayer .mejs-controls .mejs-time-rail>span {
+	height: 5px;
+}
+.mejs-neoplayer .mejs-controls .mejs-time-rail .mejs-time-total {
+	border-top:1px solid #c7c7c7;
+	background: none;
+}
+
+.mejs-neoplayer .mejs-controls .mejs-time-rail .mejs-time-buffering {
+	height: 0;
+	background: none;
+	border-top:1px solid #d7d7d7;
+}
+
+.mejs-neoplayer .mejs-controls .mejs-time-rail .mejs-time-loaded {
+	height: 0;
+	background: none;
+	border-top:1px solid #ddd;
+}
+
+.mejs-neoplayer .mejs-controls .mejs-time-rail .mejs-time-current {
+	height: 0;
+	background: none;
+	position: relative;
+}
+.mejs-neoplayer .mejs-controls .mejs-time-rail .mejs-time-current:after {
+	content:"";
+	display: block;
+	width: 20px;
+	height: 10px;
+	border-radius: 3px;
+	position: absolute;
+	top:-5px;
+	right: 0;
+	margin-right: -10px;
+	top:-6px;
+	background-color: #a4a4a4;
+	background-image: -moz-linear-gradient(top, #ddd, #888); /* FF 3.6+*/
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ddd), to(#888)); /* Safari 4+, Chrome 2+*/
+	background-image: -webkit-linear-gradient(top, #ddd, #888); /* Safari 5.1+, Chrome 10+*/
+	background-image: -o-linear-gradient(top, #ddd, #888); /* Opera 11.10*/
+	background-image: linear-gradient(to bottom, #ddd, #888); /* Standard, IE10 */
+
+}
+
+
+.mejs-neoplayer .mejs-controls .mejs-currenttime-container {
+	display: none;
+}
+.mejs-neoplayer .mejs-controls .mejs-duration-container {
+	display: none;
+}
+
+.mejs-neoplayer .mejs-controls .mejs-volume-button {
+	width:1px;
+	visibility:hidden;
+}
+.mejs-neoplayer .mejs-controls div.mejs-horizontal-volume-slider {
+	width:1px;
+	visibility:hidden;
+}

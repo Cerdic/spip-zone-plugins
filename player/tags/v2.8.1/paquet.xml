@@ -1,0 +1,31 @@
+<paquet
+	prefix="player"
+	categorie="multimedia"
+	version="2.8.1"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/player-32.png"
+	documentation="https://contrib.spip.net/Lecteur-Multimedia"
+	schema="0.2.4"
+>	
+
+	<nom>Lecteur Multim&#233;dia</nom>
+	<!-- Lire des sons -->
+
+	<auteur>BoOz</auteur>
+	<auteur>Cédric</auteur>
+	<auteur>erational</auteur>
+	<auteur>CP.</auteur>
+
+	<pipeline nom="post_propre" />
+	<pipeline nom="insert_head_css" />
+	<pipeline nom="insert_head" />
+	<pipeline nom="header_prive_css" action="insert_head_css"/>
+	<pipeline nom="header_prive" action="insert_head"/>
+	<pipeline nom="affichage_final" inclure="player_fonctions.php" />
+
+	<menu nom="configurer_player" titre="player:player_nom" parent="menu_squelette" icone="images/player-16.png" />
+
+	<utilise nom="medias" compatibilite="[2.7.27;]" />
+
+</paquet>

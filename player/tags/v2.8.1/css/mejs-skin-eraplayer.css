@@ -1,0 +1,42 @@
+/* Dewplayer */
+.mejs-container.mejs-eraplayer {
+	background: none;
+	height:20px !important;
+	width:24px !important;
+	margin: 0 auto;
+}
+.mejs-eraplayer .mejs-controls {
+	background: none;
+	height:20px;
+}
+.mejs-eraplayer .mejs-controls .mejs-playpause-button {
+	width: 24px;
+	height:20px;
+}
+.mejs-eraplayer .mejs-controls .mejs-playpause-button button {
+	position:relative;
+	background: url(img/controls-eraplayer.png) no-repeat center -2px;
+	width: 24px;
+	height:20px;
+	margin: 0;
+}
+.mejs-eraplayer .mejs-controls .mejs-playpause-button button:hover {
+	background-position: center -26px;
+}
+
+
+.mejs-eraplayer .mejs-controls .mejs-time-rail {
+	display: none;
+}
+.mejs-eraplayer .mejs-controls .mejs-currenttime-container {
+	display: none;
+}
+.mejs-eraplayer .mejs-controls .mejs-duration-container {
+	display: none;
+}
+.mejs-eraplayer .mejs-controls .mejs-volume-button {
+	display: none;
+}
+.mejs-eraplayer .mejs-controls div.mejs-horizontal-volume-slider {
+	display: none;
+}
