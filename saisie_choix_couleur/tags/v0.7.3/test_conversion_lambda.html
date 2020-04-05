@@ -1,0 +1,12 @@
+<table>
+    <tr><td>Lambda</td><td>hex</td>
+    <td>réciproque</td></tr>
+<BOUCLE_lambda(DATA){source table, #VAL{380}|range{780}}>
+   <tr style="background-color:[(#VAL{lambda#VALEUR}|lambda_to_css_hexa)]">
+        <td>#VALEUR</td>
+        <td>[(#VAL{lambda#VALEUR}|lambda_to_css_hexa)]</td>
+        <td[ (#VAL{lambda#VALEUR}|lambda_to_css_hexa|css_hexa_to_lambda|=={#VALEUR}|oui) style="background-color:white"]>[(#VAL{lambda#VALEUR}|lambda_to_css_hexa|css_hexa_to_lambda)]</td>
+    </tr>
+</BOUCLE_lambda>
+
+</table>

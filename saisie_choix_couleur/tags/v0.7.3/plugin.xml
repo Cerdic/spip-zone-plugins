@@ -1,0 +1,25 @@
+<plugin>
+	<nom>Choix parmi des couleurs</nom>
+	<auteur>[Maïeul Rouquette->http://www.maieul.net]</auteur>
+	<licence>GNU/GPL</licence>
+	<version>0.7.3</version>
+	<etat>stable</etat>
+	<categorie>outil</categorie>
+	<slogan>Formidable : vous avez le choix de la couleur !</slogan>
+	<description>
+		Une saisie de formulaire pour proposer plusieurs choix de couleurs.
+	</description>
+	<lien>https://contrib.spip.net/4428</lien>
+	<prefix>saisie_choix_couleur</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>saisie_choix_couleur_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>saisie_choix_couleur_pipelines.php</inclure>
+	</pipeline>
+	<fonctions>saisie_choix_couleur_fonctions.php</fonctions>
+	<necessite id="SPIP" version="[2.0.0;3.2.99]" />
+	<necessite id="saisies" version="[1.42.12;]" />
+</plugin>
