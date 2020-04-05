@@ -1,0 +1,23 @@
+<paquet
+	prefix="ordoc"
+	categorie="edition"
+	version="1.1.3"
+	etat="test"
+	compatibilite="[3.1.3;3.1.*]"
+	logo="prive/themes/spip/images/ordoc-64.png"
+	documentation="https://contrib.spip.net/4860"
+	schema="1.1.0"
+>
+	<!-- Ce plugin est intégré dans SPIP 3.2 ! -->
+	<nom>Ordre des documents</nom>
+	<!-- Permet d’ordonner les documents liés à un objet par glisser / déposer. -->
+
+	<auteur>Matthieu Marcillaud</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="declarer_tables_auxiliaires" inclure="ordoc_administrations.php" />
+	<pipeline nom="document_desc_actions" inclure="ordoc_administrations.php" />
+
+	<necessite nom="medias" compatibilite="[2.10.35;[" />
+</paquet>
