@@ -1,0 +1,8 @@
+<traduction module="paquet-coloration_code" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/coloration_code/spip-2.0/lang/" reference="fr">
+	<langue code="en" />
+	<langue code="fr" />
+	<langue code="it" />
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/paquet-coloration_code?lang_cible=sk">
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
+	</langue>
+</traduction>
