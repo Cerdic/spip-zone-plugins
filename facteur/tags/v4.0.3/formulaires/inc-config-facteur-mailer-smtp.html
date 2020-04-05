@@ -1,0 +1,71 @@
+<div class="choix">
+	<input type="radio" name="mailer" class="radio" value="smtp" id="mailer_smtp"[(#ENV{mailer,'mail'}|=={smtp}|oui)checked="checked"]/>
+	<label for="mailer_smtp"><:facteur:utiliser_smtp:></label>
+
+	<div class="suite editer-groupe editer_smtp_param" [(#ENV{mailer,'mail'}|=={smtp}|non)style='display:none;']>
+		<div class="editer editer_smtp_host [ (#ENV**{erreurs}|table_valeur{smtp_host}|oui)erreur]">
+			<label for="smtp_host"><:facteur:facteur_smtp_host:></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{smtp_host})</span>]
+			<input type="text" name="smtp_host" class="text" value="#ENV**{smtp_host}" id="smtp_host" />
+		</div>
+		<div class="editer editer_smtp_port [ (#ENV**{erreurs}|table_valeur{smtp_port}|oui)erreur]">
+			<label for="smtp_port"><:facteur:facteur_smtp_port:></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{smtp_port})</span>]
+			<input type="text" name="smtp_port" class="text" value="#ENV**{smtp_port}" id="smtp_port" />
+		</div>
+		<div class="editer editer_smtp_auth [ (#ENV**{erreurs}|table_valeur{smtp_auth}|oui)erreur]">
+			<label><:facteur:facteur_smtp_auth:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{smtp_auth})</span>]
+			<div class="choix">
+				<input type="radio" name="smtp_auth" class="radio" value="non" id="smtp_auth_non"[(#ENV{smtp_auth,'non'}|=={non}|oui)checked="checked"]/>
+				<label for="smtp_auth_non"><:facteur:facteur_smtp_auth_non:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="smtp_auth" class="radio" value="oui" id="smtp_auth_oui"[(#ENV{smtp_auth,'non'}|=={oui}|oui)checked="checked"]/>
+				<label for="smtp_auth_oui"><:facteur:facteur_smtp_auth_oui:></label>
+				<div class="suite editer-groupe" [(#ENV{smtp_auth,'non'}|=={non}|oui)style='display:none;']>
+					<div class="editer editer_smtp_username [ (#ENV**{erreurs}|table_valeur{smtp_username}|oui)erreur]">
+						<label for="smtp_username"><:facteur:facteur_smtp_username:></label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{smtp_username})</span>]
+						<input type="text" name="smtp_username" class="text" value="#ENV**{smtp_username}" id="smtp_username" />
+					</div>
+					<div class="editer editer_smtp_password [ (#ENV**{erreurs}|table_valeur{smtp_password}|oui)erreur]">
+						<label for="smtp_password"><:facteur:facteur_smtp_password:></label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{smtp_password})</span>]
+						<input type="password" name="smtp_password" class="text" value="#ENV**{smtp_password}" id="smtp_password"
+						[placeholder="(#ENV**{_smtp_password}|facteur_affiche_password_masque|attribut_html)"] />
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="editer editer_smtp_secure [ (#ENV**{erreurs}|table_valeur{smtp_secure}|oui)erreur]">
+			<label><:facteur:facteur_smtp_secure:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{smtp_secure})</span>]
+			<div class="choix">
+				<input type="radio" name="smtp_secure" class="radio" value="non" id="smtp_secure_non"[(#ENV{smtp_secure,'non'}|=={non}|oui)checked="checked"]/>
+				<label for="smtp_secure_non"><:facteur:facteur_smtp_secure_non:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="smtp_secure" class="radio" value="tls" id="smtp_secure_tls"[(#ENV{smtp_secure,'non'}|=={tls}|oui)checked="checked"]/>
+				<label for="smtp_secure_tls"><:facteur:facteur_smtp_secure_tls:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="smtp_secure" class="radio" value="ssl" id="smtp_secure_ssl"[(#ENV{smtp_secure,'non'}|=={ssl}|oui)checked="checked"]/>
+				<label for="smtp_secure_ssl"><:facteur:facteur_smtp_secure_ssl:></label>
+			</div>
+		</div>
+		<div class="editer editer_smtp_tls_allow_self_signed [ (#ENV**{erreurs}|table_valeur{smtp_tls_allow_self_signed}|oui)erreur]">
+			<label><:facteur:configuration_facteur_smtp_tls_allow_self_signed:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{smtp_tls_allow_self_signed})</span>]
+			<div class="choix">
+				<input type="radio" name="smtp_tls_allow_self_signed" class="radio" value="non" id="smtp_tls_allow_self_signed_non"[(#ENV{smtp_tls_allow_self_signed,'non'}|=={non}|oui)checked="checked"]/>
+				<label for="smtp_tls_allow_self_signed_non"><:facteur:facteur_smtp_tls_allow_self_signed_non:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="smtp_tls_allow_self_signed" class="radio" value="oui" id="smtp_tls_allow_self_signed_oui"[(#ENV{smtp_tls_allow_self_signed,'non'}|=={oui}|oui)checked="checked"]/>
+				<label for="smtp_tls_allow_self_signed_oui"><:facteur:facteur_smtp_tls_allow_self_signed_oui:></label>
+			</div>
+		</div>
+	</div>
+
+</div>

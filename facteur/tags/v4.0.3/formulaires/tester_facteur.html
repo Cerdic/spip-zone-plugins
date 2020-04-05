@@ -1,0 +1,60 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:facteur:tester_la_configuration:></h3>
+	[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</div>]
+	[<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</div>]
+
+	[<div class="notice">(#ENV*{_message_warning})</div>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div class="editer-groupe">
+			#SET{name,email_test}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:facteur:facteur_email_test:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				<p class="explication"><:facteur:note_test_configuration:></p>
+			</div>
+			#SET{name,email_test_from}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:facteur:label_email_test_from:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" placeholder="<:facteur:label_email_test_from_placeholder|attribut_html:>" [(#HTML5|et{#GET{obli}})required='required']/>
+			</div>
+			#SET{name,email_test_important}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<div class="choix">
+					#SET{val,0}
+					<input type="hidden" name="#GET{name}" value="#GET{val}" />
+					#SET{val,1}
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}" aria-describedby="#GET{name}_explication" [(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}"><:facteur:label_email_test_important:></label>
+				</div>
+			</div>
+		</div>
+		<p class="boutons">
+			<input type="submit" name="tester" class="submit" value="<:facteur:tester:>" />
+		</p>
+	</div></form>
+
+	[(#ENV{_message_html_test}|oui)
+	<div class="feedback_message_test">
+		<h3><:facteur:label_message_envoye:></h3>
+		<iframe class="message_test" src='[(#ENV*{_message_html_test}|facteur_inline_base64src)]'></iframe>
+		<style>
+			.feedback_message_test {
+				margin: 1.5em 0;
+			}
+			.message_test {
+				width: 100%;
+				box-shadow: 0 0 10px #888;
+				max-height: 90vh;
+				height: [(#ENV*{_message_html_test}|strlen|div{130}|round)em];
+			}
+		</style>
+	</div>
+	]
+
+</div>
