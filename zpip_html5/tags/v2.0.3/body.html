@@ -1,0 +1,12 @@
+<body>
+	<section class="page">
+		<header id="header"><INCLURE{fond=header/#ENV{type-page},env} /></header>
+		<nav class="hornav clearfix" id="nav"><INCLURE{fond=inclure/nav,env} /></nav>
+		<section class="container" id="container" role="main">
+			<section class="content" id="content"><INCLURE{fond=content/#ENV{type-page},env} /></section>
+			<aside class="extra1 col" id="extra1"><INCLURE{fond=extra1/#ENV{type-page},env} /></aside>
+			<aside class="extra2 col" id="extra2"><INCLURE{fond=extra2/#ENV{type-page},env} /></aside>
+		</section>
+		<footer id="footer"><INCLURE{fond=footer/#ENV{type-page},env} /></footer>
+	</section>
+</body>

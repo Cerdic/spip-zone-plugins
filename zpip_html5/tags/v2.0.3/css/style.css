@@ -1,0 +1,568 @@
+/*
+ * HTML5 Boilerplate
+ *
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ *
+ * Detailed information about this CSS: h5bp.com/css
+ *
+ * ==|== normalize ==========================================================
+ */
+
+/* ============================================================================= */
+/*	 http://meyerweb.com/eric/tools/css/reset/  */
+/*   v2.0 | 20110126 */
+/*   License: none (public domain) */
+/*   ========================================================================== */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+ 
+
+/* =============================================================================
+   HTML5 display definitions
+   ========================================================================== */
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+audio, canvas, video { display: inline-block; *display: inline; *zoom: 1; }
+audio:not([controls]) { display: none; }
+[hidden] { display: none; }
+
+
+/* =============================================================================
+   Base
+   ========================================================================== */
+
+/*
+ * 1. Correct text resizing oddly in IE6/7 when body font-size is set using em units
+ * 2. Prevent iOS text size adjust on device orientation change, without disabling user zoom: h5bp.com/g
+ */
+
+html { font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+
+html, button, input, select, textarea { font-family: sans-serif; color: #222; }
+
+body { margin: 0; font-size: 1em; line-height: 1.4; }
+
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection declarations have to be separate
+ * Also: hot pink! (or customize the background color to match your design)
+ */
+
+::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
+::selection { background: #fe57a1; color: #fff; text-shadow: none; }
+
+
+/* =============================================================================
+   Links
+   ========================================================================== */
+
+a { color: #00e; }
+a:visited { color: #551a8b; }
+a:hover { color: #06e; }
+a:focus { outline: thin dotted; }
+
+/* Improve readability when focused and hovered in all browsers: h5bp.com/h */
+a:hover, a:active { outline: 0; }
+
+
+/* =============================================================================
+   Typography
+   ========================================================================== */
+
+abbr[title] { border-bottom: 1px dotted; }
+
+b, strong { font-weight: bold; }
+
+blockquote { margin: 1em 40px; }
+
+dfn { font-style: italic; }
+
+hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
+
+ins { background: #ff9; color: #000; text-decoration: none; }
+
+mark { background: #ff0; color: #000; font-style: italic; font-weight: bold; }
+
+/* Redeclare monospace font family: h5bp.com/j */
+pre, code, kbd, samp { font-family: monospace, serif; _font-family: 'courier new', monospace; font-size: 1em; }
+
+/* Improve readability of pre-formatted text in all browsers */
+pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
+
+q { quotes: none; }
+q:before, q:after { content: ""; content: none; }
+
+small { font-size: 85%; }
+
+/* Position subscript and superscript content without affecting line-height: h5bp.com/k */
+sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+
+/* =============================================================================
+   Lists
+   ========================================================================== */
+
+ul, ol { margin: 1em 0; padding: 0 0 0 40px; }
+dd { margin: 0 0 0 40px; }
+nav ul, nav ol { list-style: none; list-style-image: none; margin: 0; padding: 0; }
+
+
+/* =============================================================================
+   Embedded content
+   ========================================================================== */
+
+/*
+ * 1. Improve image quality when scaled in IE7: h5bp.com/d
+ * 2. Remove the gap between images and borders on image containers: h5bp.com/i/440
+ */
+
+img { border: 0; -ms-interpolation-mode: bicubic; vertical-align: middle; }
+
+/*
+ * Correct overflow not hidden in IE9
+ */
+
+svg:not(:root) { overflow: hidden; }
+
+
+/* =============================================================================
+   Figures
+   ========================================================================== */
+
+figure { margin: 0; }
+
+
+/* =============================================================================
+   Forms
+   ========================================================================== */
+
+form { margin: 0; }
+fieldset { border: 0; margin: 0; padding: 0; }
+
+/* Indicate that 'label' will shift focus to the associated form element */
+label { cursor: pointer; }
+
+/*
+ * 1. Correct color not inheriting in IE6/7/8/9
+ * 2. Correct alignment displayed oddly in IE6/7
+ */
+
+legend { border: 0; *margin-left: -7px; padding: 0; white-space: normal; }
+
+/*
+ * 1. Correct font-size not inheriting in all browsers
+ * 2. Remove margins in FF3/4 S5 Chrome
+ * 3. Define consistent vertical alignment display in all browsers
+ */
+
+button, input, select, textarea { font-size: 100%; margin: 0; vertical-align: baseline; *vertical-align: middle; }
+
+/*
+ * 1. Define line-height as normal to match FF3/4 (set using !important in the UA stylesheet)
+ */
+
+button, input { line-height: normal; }
+
+/*
+ * 1. Display hand cursor for clickable form elements
+ * 2. Allow styling of clickable form elements in iOS
+ * 3. Correct inner spacing displayed oddly in IE7 (doesn't effect IE6)
+ */
+
+button, input[type="button"], input[type="reset"], input[type="submit"] { cursor: pointer; -webkit-appearance: button; *overflow: visible; }
+
+/*
+ * Re-set default cursor for disabled elements
+ */
+
+button[disabled], input[disabled] { cursor: default; }
+
+/*
+ * Consistent box sizing and appearance
+ */
+
+input[type="checkbox"], input[type="radio"] { box-sizing: border-box; padding: 0; *width: 13px; *height: 13px; }
+input[type="search"] { -webkit-appearance: textfield; -moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box; }
+input[type="search"]::-webkit-search-decoration, input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; }
+
+/*
+ * Remove inner padding and border in FF3/4: h5bp.com/l
+ */
+
+button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
+
+/*
+ * 1. Remove default vertical scrollbar in IE6/7/8/9
+ * 2. Allow only vertical resizing
+ */
+
+textarea { overflow: auto; vertical-align: top; resize: vertical; }
+
+/* Colors for form validity */
+input:valid, textarea:valid {  }
+input:invalid, textarea:invalid { background-color: #f0dddd; }
+
+
+/* =============================================================================
+   Tables
+   ========================================================================== */
+
+table { border-collapse: collapse; border-spacing: 0; }
+td { vertical-align: top; }
+
+
+/* =============================================================================
+   Chrome Frame Prompt
+   ========================================================================== */
+
+.chromeframe { margin: 0.2em 0; background: #ccc; color: black; padding: 0.2em 0; }
+
+
+/* ==|== primary styles =====================================================
+   Author: 
+   ========================================================================== */
+
+/* Ca à priori, pas toucher (readapter au besoin) */
+	/* reset.css */
+	/* font.css */
+	/* typo.css */
+	/* box.css */
+	/* box_skins.css */
+	/* form.css */
+
+	/* spip.comment.css - Habillage des forums */
+	.comments { margin-bottom:/*@margin-bottom*/1.5em/*/@*/}
+	/* comments list */
+	.comments-items {border-bottom: 1px solid #eee;}
+	.comments-items .comments-items {margin-left: /*@text-indent*/50px/*/@*/;border-bottom: 0;}
+	.comments-items .comments-items .comments-items .comments-items {margin-left: /*@demi-text-indent*/25px/*/@*/;border-bottom: 0;}
+	.comments-items .comment-item {border-top: 1px solid #eee;}
+	.comments-items .comment-item .comment-item {border-top: 0;}
+	.comment {overflow:hidden}
+	.comment-meta {background: #eee;padding: /*@demi-margin-bottom*/0.75em/*/@*/;padding-right: /*@margin-bottom*/1.5em/*/@*/;position: relative;margin:0;}
+	.comment-item .comment-item .comment-meta {background : #f4f4f4;}
+	.comment-meta .spip_logos {margin-bottom:0;}
+	.comment-meta .permalink { position: absolute;right: 0;font-size: 2em;color:#ccc;}
+	.comment-meta .forum-titre {display: block;}
+	.comment-content {background: transparent;padding: /*@demi-margin-bottom*/0.75em/*/@*/;max-height:60em;overflow:auto;overflow-x:none;}
+	.comment-reply { clear: both; text-align: right; font-weight: bold; margin-bottom:0;}
+	/* en thread */
+	.comments-thread .comment-item {margin-bottom:/*@margin-bottom*/1.5em/*/@*/;border-left:1px solid #eee;}
+	.comments-thread .comment-item .comment-item {margin-bottom:0;border-left:0;}
+	.comments-thread .permalink.in-reply-to {bottom:0;}
+	/* avec plugin comments */
+	.comment-meta .permalink.picto {font-size:1em;right:/*@demi-margin-bottom*/0.75em/*/@*/;}
+	.comment {position:relative;}
+	.comment .spip-admin {position:absolute;left:0;bottom:0;visibility:hidden;}
+	.comment:hover .spip-admin {visibility:visible;}
+	/* en list avec plugin comments */
+	.comment-meta .item {display:block;}
+
+	/* spip.list.css - Sous-navigation et autres menus */
+	.menu { clear: both; margin-bottom: /*@margin-bottom*/1.5em/*/@*/; text-align: left; }
+	.menu > h1,
+	.menu > h2,
+	.menu > h3,
+	.menu > h4,
+	.menu > h5,
+	.menu > h6 {margin-bottom: 0;}
+	.menu-items { margin: 0; padding: 0; list-style: none; border-bottom: 1px solid #ddd; }
+	.menu-items .item { margin: 0; padding: /*@quart-margin-bottom*/0.375em/*/@*/;}
+	.menu-items .menu-items { margin-left: 1em; border: 0; }
+	.menu-items .menu-items .item { padding: 0; border: 0; }
+	/* habillage barre de nav horizontale */
+	.hornav {background:#eee;border-left: 1px solid #eee;border-right: 1px solid #eee;}
+	.hornav .menu {margin: 0;}
+	.hornav .menu-items {float:left;width: 100%;border: 0;}
+	.hornav .menu-items .item {float:left;padding: 0;}
+	.hornav .item a {color:#333;font-weight:bold;text-decoration: none;display:block;padding:/*@demi-margin-bottom*/0.75em/*/@*/;}
+	.hornav .item a:hover {background:#ddd;color:#222;}
+	.hornav .on {color:#000;background: #fff;}
+	.hornav .on a {color:#000;}
+	/* Listes d'items */
+	.liste {margin-bottom: /*@margin-bottom*/1.5em/*/@*/;}
+	.liste > h1,
+	.liste > h2,
+	.liste > h3,
+	.liste > h4,
+	.liste > h5,
+	.liste > h6 {margin-bottom: 0;}
+	.liste-items {margin: 0; padding: 0; list-style: none; border-bottom:0;border-top: 1px solid #eee;margin-bottom: /*@margin-bottom*/1.5em/*/@*/;}
+	.liste .liste-items {margin-bottom: 0;}
+	.liste-items .item {list-style:square; margin-left:0; padding:/*@demi-margin-bottom*/0.75em/*/@*/ 0; clear:both; overflow:hidden;border-bottom: 1px solid #eee;}
+	.liste-items .item .h3 { margin: /*@demi-margin-bottom*/0.75em/*/@*/ 0;}
+	.liste-items .item .h3 a:hover { text-decoration:none;}
+	.liste-items .item:hover {background-color: #eee;}
+	.liste-items .item ul {margin-left: /*@text-indent*/50px/*/@*/;list-style-type: disc;}
+	.liste-items .item ol {margin-left: /*@text-indent*/50px/*/@*/;list-style-type: numeric;}
+	.liste.articles .spip_logos { float: right; clear: right; margin: .8em 0 4px 16px; }
+	.liste .articles .item .introduction { margin-top: 0.30em; line-height: 1.40em; padding: 0.5em 0 1.5em 1em;}
+	/* plan du site */
+	ul.plan {margin-bottom: /*@margin-bottom*/1.5em/*/@*/;}
+	ul.plan li {margin-left: /*@text-indent*/50px/*/@*/;list-style-type: disc;}
+	
+	/* spip.petition.css */
+	#signatures { }
+	#signatures caption h2 { margin: 0; }
+	#signatures td.signature-date { white-space: nowrap; }
+	#signatures td.signature-nom small { display: block; }
+	#signatures .formulaire_recherche {  } /*Cf.: spip_formulaires.css*/
+	#signatures .formulaire_recherche input.text {  } /*Cf.: spip_formulaires.css*/
+	
+	/* spip.pagination.css */
+	.pagination .sep,.pagination .label {display:none;}
+	.pagination {padding:10px 0 10px 0;text-align:center;}
+	.pagination .lien_pagination {padding:2px 5px;margin:0 2px;text-decoration:none;border:2px solid #f0f0f0;}
+	.pagination .lien_pagination:hover, .pagination .lien_pagination:active {border:2px solid #444;}
+	.pagination .on {padding:2px 5px; margin:0 2px; border:2px solid #222; color:#fff; font-weight:bold; background-color:#999;}
+	.pagination .disabled {display:none;}
+	.col .pagination .prev,.col .pagination .next {display: none;}	
+	
+	/* spip.portfolio.css */
+	.documents_portfolio { clear: both; margin: /*@margin-bottom*/1.5em/*/@*/ auto; text-align: center; }
+	.documents_portfolio .spip_logos { float: none; margin: 6px 3px 0 3px; border: 4px solid #DDD; }
+	.documents_portfolio a.on .spip_logos { border-color: #222; }
+	.documents_portfolio a:focus .spip_logos,
+	.documents_portfolio a:hover .spip_logos,
+	.documents_portfolio a:active .spip_logos { border-color: #444; }	
+	
+	/* clear.css */
+	/* Blocs */
+	.bloc { display: block; margin-bottom: /*@margin-bottom*/1.5em/*/@*/; }
+	.box { display: block; margin-bottom: /*@margin-bottom*/1.5em/*/@*/; padding: /*@line-height*/1.5em/*/@*/; background: #EEE; }
+
+	/* Listes, tableaux et mosaiques */
+	.first { margin-left: 0; padding-left: 0; }
+	.last { margin-right: 0; padding-right: 0; }
+	.top { margin-top: 0; padding-top: 0; }
+	.bottom { margin-bottom: 0; padding-bottom: 0; }
+	.odd {}
+	.even {}
+	.sep {}
+
+	/* Alignements */
+	.left { float: left !important; }
+	.right { float: right !important; }
+	.center { text-align: center; margin-right: auto; margin-left: auto; }
+
+	/* Espaceur de blocs */
+	.clear { clear: both; }
+	br.clear, .nettoyeur { clear: both; margin: 0; padding: 0; border: 0; height: 0; line-height: 1px; font-size: 1px; }
+	hr.clear { visibility: hidden; }
+
+	/* clearfix : http://www.positioniseverything.net/easyclearing.html */
+	.clearfix:after {
+			content: "\0020";
+			display: block; 
+			height: 0; 
+			clear: both; 
+			visibility: hidden;
+			overflow: hidden;
+	}
+	.clearfix { display: inline-table; }
+
+	/* Hides from IE-mac \*/
+	.clearfix { height: 1%; }
+	.clearfix { display: block; }
+	/* End hide from IE-mac */
+
+	/* Non visible a l'ecran */
+	.offscreen, .invisible { position: absolute; left: -999em; height: 1%; }
+	.hidden { visibility: hidden; }
+	.none { display: none; }
+
+	/* debug */
+	.todo { opacity: 0.5; }
+	.todo:hover { opacity: 1; }
+	
+	/* grid.css */
+	.line, .lastUnit {overflow: hidden;_overflow:visible;_zoom:1; }
+	.unit{float:left;_zoom:1;}
+	.unitExt{float:right;}
+	.size1of1{float:none;}
+	.size1of2{width:50%;}
+	.size1of3{width:33.33333%;}
+	.size2of3{width:66.66666%;}
+	.size1of4{width:25%;}
+	.size3of4{width:75%;}
+	.size1of5{width:20%;}
+	.size2of5{width:40%;}
+	.size3of5{width:60%;}
+	.size4of5{width:80%;}
+	.lastUnit {float:none;_position:relative; _left:-3px; _margin-right: -3px;width:auto;}
+	/* extending grids to allow a unit that takes the width of its content */
+	.media{width:auto;}	
+	
+	/* button.css - check varicelle.css */
+
+	/* layout.css */
+	body { background: #f9f9f9; margin: 0; padding: 0; text-align: center; }
+	.page { position: relative; background: #fff; width: 58em; margin: 1em auto; padding:1em 2em; text-align: left; border:3px solid #ddd; }
+	.header { width: 100%; margin: 0; border-bottom: 2px solid #46839B; }
+	.container { clear: both; overflow: hidden; margin-top:/*@margin-bottom*/1.5em/*/@*/; }
+	.content { float:left; width:65%;}
+	.extra1 { float: right; width: 30%; overflow: hidden; margin-bottom:/*@margin-bottom*/1.5em/*/@*/; }
+	.extra2 { float: right; clear:right; width: 30%; overflow: hidden; margin-bottom:/*@margin-bottom*/1.5em/*/@*/; }
+	.footer { clear: both; width: 100%; margin: 1em 0 0 0; padding: 0.60em 0; border: 2px solid #ddd; background:#f9f9f9; text-align: center; font-size: 0.90em; }
+	.footer a { /*color:#666;*/ } /* ne pas utiliser de selecteur trop precis, et eviter de toucher aux liens */
+	.footer img { vertical-align: middle; }
+	
+	/* theme.css */
+	/* Titraille / Intertitres */
+	h1,h2,h3,h4,h5,h6,
+	.h1,.h2,.h3,.h4,.h5,.h6 { font-family: Georgia, Times, serif; }
+	h1,.h1 { color: #000; }
+	h2, h2 a, h2 a:focus, h2 a:hover, h2 a:active { color: #222; }
+	.h2, .h2 a, .h2 a:focus, .h2 a:hover, .h2 a:active { color: #222; }
+
+	/* Citations, code et poesie */
+	.spip_code {color:#777;}
+	.spip_cadre {color:#777; background-color: #fff; border: 1px solid #ddd; }
+
+	/* Tableaux */
+	thead th, tbody th { background: #666; color:white; }
+	table.spip tr.row_even td,table.spip tr.row_even th {background: #eee;}
+	/* ------------------------------------------
+	/* Habillage des elements du contenu
+	/* ------------------------------------------ */
+	.page {-webkit-box-shadow: 0px 0px 30px #909090;-moz-box-shadow: 0px 0px 30px #909090;box-shadow: 0px 0px 30px #909090; border-width:2px;}
+
+	.header { margin: 0; padding : /*@margin-bottom*/1.5em/*/@*/ 0;border-bottom: 2px solid #333;position: relative;}
+	.header .accueil { display: block; width: 67%; }
+	.header .accueil .spip_logos { vertical-align: bottom; line-height: 1em; margin-bottom: 0;}
+	.header .accueil #nom_site_spip { vertical-align: bottom; font-size: 2.2em; font-family: Georgia, Times, serif; font-weight: normal; }
+	.header .formulaire_menu_lang { position: absolute; right: 0; top: 0.90em; display: block; width: 30%; } /*Cf.: spip_formulaires.css*/
+	.header .formulaire_menu_lang select {width: 100%;}
+
+	.hornav {background-color: #ebeeee;}
+	.hornav .item a:hover {background:#dadddd}
+	.hornav .on {color:#000;}
+	.hornav .on a {color:#000;}
+
+
+	#hierarchie { clear: both; margin-bottom: /*@margin-bottom*/1.5em/*/@*/; font-size: 0.846em; }
+	#hierarchie, #hierarchie a { color: #666; }
+
+	.cartouche { margin-bottom: /*@margin-bottom*/1.5em/*/@*/; }
+	.cartouche .spip_logos { float: right; margin-left: 16px; margin-bottom: 4px; }
+	.cartouche .info-publi { margin: 0; padding: 0; clear: left; }
+
+	.chapo { margin-bottom: /*@margin-bottom*/1.5em/*/@*/; font-weight:bold; color:#666;}
+	.chapo .spip_cadre {color:#888;}
+	.ps, .notes { margin-bottom: /*@margin-bottom*/1.5em/*/@*/;}
+	.notes { clear: both; font-size: 0.846em; }
+
+
+	/* ------------------------------------------
+	/* Sous-navigation et autres menus
+	/* ------------------------------------------ */
+
+	/* Listes d'articles et extraits introductifs */
+	.resume .liste-items .item { border-bottom: 0;}
+	.resume .liste-items .item .h3 { border-bottom:1px solid #888;}
+	.liste-items .item .info-publi {  display:block; float:right; margin-top:0.6em; margin-left:.3em; padding:.3em; background:#ddd;}
+	.liste-items .item .introduction { font-size: 0.923em;}
+
+	.liste.articles .spip_logos { float: right; clear: right; margin: .8em 0 4px 16px; }
+	.liste .articles .item .introduction { margin-top: 0.30em; line-height: 1.40em; padding: 0.5em 0 1.5em 1em;}
+
+
+	.extra1 .menu {background:#fcfcfc; padding:0 /*@demi-margin-bottom*/0.75em/*/@*/ /*@demi-margin-bottom*/0.75em/*/@*/; border: 1px solid #ddd;}
+	.extra1 .menu a {/*color:#666;*/} /* ne pas utiliser de selecteur trop precis, et eviter de toucher aux liens */
+	.extra1 .menu-items {border-bottom:0;}
+	.extra1 .menu-items .item {list-style:square; margin-left:15px; padding:0; color:#333;}
+
+	.formulaire_recherche input.text {width: 170px;}
+
+
+	/* Couleurs des liens
+	---------------------------------------------- */
+	a { color: #3996BB; text-decoration: none; }
+	a:focus,a:hover,a:active { color: #46839B; text-decoration: underline; }
+	a.spip_out, a.spip_glossaire {
+		color: #46839B;
+		background:transparent url(img/spip_out.gif) no-repeat scroll right center;
+		padding-right:12px;
+	}
+
+/* ==|== media queries ======================================================
+   EXAMPLE Media Query for Responsive Design.
+   This example overrides the primary ('mobile first') styles
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (min-width: 35em) {
+  /* Style adjustments for viewports that meet the condition */
+}
+
+
+
+/* ==|== non-semantic helper classes ========================================
+   Please define your styles before this section.
+   ========================================================================== */
+
+/* For image replacement */
+.ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; *line-height: 0; }
+.ir br { display: none; }
+
+/* Hide from both screenreaders and browsers: h5bp.com/u */
+.hidden { display: none !important; visibility: hidden; }
+
+/* Hide only visually, but have it available for screenreaders: h5bp.com/v */
+.visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+
+/* Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p */
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
+
+/* Hide visually and from screenreaders, but maintain layout */
+.invisible { visibility: hidden; }
+
+/* Contain floats: h5bp.com/q */
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { *zoom: 1; }
+
+
+
+/* ==|== print styles =======================================================
+   Print styles.
+   Inlined to avoid required HTTP connection: h5bp.com/r
+   ========================================================================== */
+
+@media print {
+  * { background: transparent !important; color: black !important; box-shadow:none !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; } /* Black prints faster: h5bp.com/s */
+  a, a:visited { text-decoration: underline; }
+  a[href]:after { content: " (" attr(href) ")"; }
+  abbr[title]:after { content: " (" attr(title) ")"; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }  /* Don't show links for images, or javascript/internal links */
+  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
+  thead { display: table-header-group; } /* h5bp.com/t */
+  tr, img { page-break-inside: avoid; }
+  img { max-width: 100% !important; }
+  @page { margin: 0.5cm; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3 { page-break-after: avoid; }
+}
