@@ -1,0 +1,102 @@
+/* Pre et Code
+ * pour SPIP
+ */
+
+/* patch pour SPIP qui génère des <br> intempestifs
+à corriger : https://core.spip.net/issues/2504 */
+pre br,
+pre code br { display: none !important; }
+
+/* Positionner de même le nom du langage et le bouton */
+.precode {
+  position: relative;
+}
+pre[class]::before,
+.btn-copy {
+  position: absolute;
+  top: 5px;
+  text-transform: lowercase;
+  font-family: monospace;
+  line-height: 1;
+  font-size: 0.8rem;
+}
+
+/* scroll pour les contenus longs */
+pre,
+pre code {
+  overflow-x: auto;       /* Ajoute un scroll horizontal en cas de dépassement */
+  padding: 15px 10px;
+  padding-bottom: 15px;   /* Préserve l'espace suffisant pour la barre de scroll */
+}
+
+/* texte pré-formaté */
+pre {
+  border: 1px solid;
+  border-style: solid;
+  border-width: 2px 2px 2px 4px;
+  border-radius: 0 4px 4px 0;
+  line-height: initial;   /* Préserve la lisibilité en monoscpace */
+}
+
+/* blocs de code */
+pre[class] {
+  position:relative;
+  overflow: hidden;       /* Annule le scroll qui est déplacé sur code */
+  padding: 0;
+  background: #F8F8F8;
+}
+pre[class]::before {
+  content: attr(class);
+  right: 6px;
+}
+pre code {
+  display: block;
+  background: transparent;
+}
+
+/* bouton de copie */
+.btn-copy {
+  display: none;
+  cursor: pointer;
+  color: #999;
+  right: 4em;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+}
+.precode:hover .btn-copy,
+.precode .btn-copy.copied { display: block; }
+.precode .btn-copy:hover { color: #666; transition: color 250ms ease-out; }
+.precode .btn-copy.copied { color: #42DC42 !important; transition: color 250ms ease-out; }
+.precode .btn-copy.copied span::before { content: '\2713\a0'; }
+
+/* Variantes colorées par langage */
+pre               { border-color: rgba(119, 119, 119, .2); border-left-color: #BBB; }
+pre::before       { color: rgba(119, 119, 119, .5); }
+pre.spip,
+pre.spip2         { border-color: rgba(102, 0, 102, .2); border-left-color: #660066; }
+pre.spip::before,
+pre.spip2::before { color: rgba(102, 0, 102, .75); }
+pre.html          { border-color: rgba(236, 102, 43, .2); border-left-color: #EC662B; }
+pre.html::before  { color: rgba(236, 102, 43, .75); }
+pre.css           { border-color: rgba(133, 202, 21, .2); border-left-color: #85CA15; }
+pre.css::before   { color: rgba(133, 202, 21, .75); }
+pre.less          { border-color: rgba(29, 54, 93, .2); border-left-color: #1d365d; }
+pre.less::before  { color: rgba(29, 54, 93, .75); }
+pre.sass,
+pre.scss          { border-color: rgba(207, 100, 154, .2); border-left-color: #CF649A; }
+pre.sass::before,
+pre.scss::before  { color: rgba(207, 100, 154, .75); }
+pre.js            { border-color: rgba(228, 162, 39, .2); border-left-color: #E4A227; }
+pre.js::before    { color: rgba(228, 162, 39, .75); }
+pre.php           { border-color: rgba(119, 123, 179, .2); border-left-color: #777BB3; }
+pre.php::before   { color: rgba(119, 123, 179, .75); }
+pre.xml           { border-color: rgba(246, 120, 0, .2); border-left-color: #F67800; }
+pre.xml::before   { color: rgba(246, 120, 0, .75); }
+/* pour trouver la couleur rgba transparente correspondant à l'hexa :
+http://hex2rgba.devoth.com */
+
+/* end */

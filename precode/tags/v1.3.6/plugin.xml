@@ -1,0 +1,33 @@
+<plugin>
+	<nom>Pre &amp; Code</nom>
+	<prefix>precode</prefix>
+	<icon>precode.png</icon>
+
+	<version>1.3.6</version>
+	<etat>test</etat>
+	<categorie>edition</categorie>
+
+	<slogan>Affichez proprement du code dans SPIP</slogan>
+	<description>
+		Affichez proprement du code dans SPIP et facilitez le copier-coller de n'importe quel bloc de code.
+	</description>
+	<lien>https://contrib.spip.net/?article4983</lien>
+	<auteur>&copy; 2017 [tetue->http://spip.tetue.net]</auteur>
+	<auteur>nicod_</auteur>
+	<auteur>Librairie clipboard.js par [Zeno Rocha->https://zenorocha.com]</auteur>
+
+	<fonctions>precode_fonctions.php</fonctions>
+
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>precode_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>precode_pipelines.php</inclure>
+	</pipeline>
+	
+	<utilise id="tinytypo" version="[;]"/>
+	<utilise id="coloration_code" version="[0.6.7;]"/>
+	<necessite id="SPIP" version="[2.1.0;3.2.99]"/>
+</plugin>

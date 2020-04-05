@@ -1,0 +1,93 @@
+= TODO
+= pour Pre & Code
+
+== WHY
+Ce plugin a pour vocation de rationaliser l’affichage du code sous SPIP, par l’usage des éléments HTML corrects <code> et <pre>, en préservant les chouettes avantages du traitement du code par SPIP.
+
+Constat / problèmes à résoudre :
+- SPIP génère du code tout pourri-old pour <cadre> et aussi <code> :
+il faudrait du <pre><code> (pour les 2)
+- L’intérêt de <cadre> est de faciliter le copier-coller :
+ce qui peut se faire via JS auj.
+- Nous avons 2 raccourcis pour 3 effets :
+2 effets et 1 seul raccourci suffisent.
+
+
+==== ==== ==== ==== V1
+
+== Code généré - HTML — DOING by tetue
+Dans l’immédiat, ce plugin fait POC, en corrigeant le code généré de SPIP qui est simplifié (patch à supprimer ultérieurement) et n’a plus que deux formes principales, suffisantes et conformes aux standards W3C :
+
+exemple de <code>code</code> inline
+
+<pre><code>Exemple de
+code en bloc</code></code>
+
+x Fournir une page-skel de test exemplaire -> ../?page=demo/precode
+x Expliquer à quoi sert <pre> -> http://romy.tetue.net/a-quoi-sert-la-balise-pre
+
+
+== Copier facilement — JS — TODO
+L’intérêt de <cadre> était de présenter du code facile à copier. Cela peut se faire de façon automatisée via JS. Exemple sur les extraits de code de cette page :
+http://a11y-style-guide.com/style-guide/section-media.html
+
+x insérer auto un bouton « copier » à chaque bloc <pre><code>
+- et pourquoi pas plutôt à chaque bloc <pre> (qu’il contienne du code ou pas) finalement ?
+x qui a pour action de copier auto le code dans le presse-papier local
+x prévoir feedback confirmant la copie
+x détail luxueux : une seule class .copied à la fois dans la page (pour éviter le feedback multiple, qui ne correspond pas à la réalité de l’action)
+- avec les aria qui vont bien pour l’accessibilité
+= on verra ensuite comment looker toussa — DOING
+- pas d’autre gadget : on se contente de couvrir le périmètre fonctionnel existant
+- <cadre> est consécutivement déprécié.
+
+
+==== ==== ==== ==== V2 ?
+
+== Raccourcis — SPIP — TODO
+Puisque l’on peut faire la même chose qu’avant, mais avec un seul, il n’est plus nécessaire d’avoir 2 raccourcis différents.
+
+Améliorer le raccourci <code> pour qu’il génère :
+- du code en ligne balisé de <code>
+- du code en bloc balisé de <pre><code>
+
+= avec les attributs qui vont bien : dir='ltr'
+- faut-il maintenir la class='spip_code' ?
+- voir aussi : https://core.spip.net/issues/2504
+- préserver le SUPER-méga-top-génial traitement de SPIP qui encode automatiquement ce qui est dans <code>
+
+Rétro-compat : l’ancien raccourci <cadre> est déprécié (à ne plus utiliser) mais maintenu pour rétrocmpat :
+= <cadre> fait comme <code> en bloc
+- supprimer les cols='40' rows='7' résiduels
+
+<pre> n’est pas un raccourci SPIP, mais devrait pouvoir être utilisé sans dommage :
+- empêcher SPIP de traiter les balises et raccourcis contenus dans <pre> (comme pour <code>)
+- sinon, a minima, remplacer automatiquement le <pre> saisi par <html><pre> ?
+- pre respecte nativement les espaces, indentations, retours… => ne pas générer de <br> ni de <p> dans <pre> (ni dans <pre><code>)
+- voir : https://core.spip.net/issues/3990
+
+
+== Style — CSS — TODO by tetue
+- Supprimer les sélecteurs spip_code et spip_cadre
+x Prévoir feuille minimale, injectée auto, pour s’assurer d’un rendu correct.
+= Ne pas imposer de look particulier.
+x La coloration syntaxique relève toujours d’autres plugins.
+
+
+
+==== ==== ==== ==== V3++
+
+== Evol/idées — STANDBY (mais DOING quand même par Romy)
+
+Ce serait super pour les lecteurices, s’ils savaient à quel type de code ils ont affaire, histoire de savoir dans quel format de fichier l’utiliser :
+- Un raccourci abrégé, plus rapide à écrire : <c> ?
+- Pouvoir déclarer facilement la nature du code, par exemple : <c|html>, <c|spip>, <c|css>, <c|js>, <c|php>, etc.
+- Qui générerait respectivement <pre class="html" (ou <pre data-lang="HTML"><code> ; vérifier la pertinence de l’attribut data-lang), etc.
+x Afficher consécutivement « code html » en :before juste avant le bloc correspondant (sinon rien)
+x Avec le joli style qui va bien
+
+Proposer panneau de conf styles ?
+( ) wrap, no-wrap
+( ) dark, light
+
+/* end */

@@ -1,0 +1,32 @@
+
+$(function() {
+	precodeCopyCode.init();
+});
+
+var precodeCopyCode = (function() {
+	var that = {};
+
+	that.init = function() {
+		// ajouter un bouton pour copier le code
+		$('pre:has(code)')
+			.after('<button type="button" class="btn-copy" aria-label="<:precode:bouton_copier_aria_label:>"><span><:precode:bouton_copier_label:></span></button>');
+
+		var clip = new Clipboard('.btn-copy', {
+			target: function(trigger) {
+				var text = trigger.previousSibling.children[0];
+				return text;
+			}
+		});
+
+		clip.on('success', function(e) {
+			$('.btn-copy').removeClass('copied');
+			e.trigger.className = e.trigger.className + ' copied';
+			e.clearSelection();
+		});
+	};
+
+	return that;
+	
+})();
+
+	
