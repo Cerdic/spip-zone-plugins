@@ -1,0 +1,10 @@
+<traduction module="ieconfig" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/ieconfig/trunk/lang/" reference="fr">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/ieconfig?lang_cible=en" total="28" traduits="28" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
+	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/ieconfig?lang_cible=fr" total="28" traduits="28" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/ieconfig?lang_cible=sk" total="28" traduits="28" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
+	</langue>
+</traduction>
