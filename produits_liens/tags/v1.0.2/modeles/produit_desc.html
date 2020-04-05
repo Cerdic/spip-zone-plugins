@@ -1,0 +1,33 @@
+[(#REM)
+
+  Squelette
+  (c) xxx
+  Distribue sous licence GPL
+
+]
+<BOUCLE_produitslies(PRODUITS produits_liens){id_produit}{id_objet}{objet}{statut?}>
+	<div class="item statut_#STATUT" id="produit#ID_PRODUIT"
+			 onclick="jQuery(this).toggleClass('hover');">
+		
+		[<div class='vignette'>(#LOGO_PRODUIT{#URL_PRODUIT,150,150})</div>]
+		<h4 class="titrem">
+			[<span class="#EDIT{titre} titre">(#TITRE|sinon{<i class="sanstitre"><:info_sans_titre:></i>})</span>]
+			<span class="image_loading"></span>
+		</h4>
+		<div class="prix">
+		#PRIX
+		</div>
+		<div class="infos">
+		#REFERENCE #DESCRIPTIF
+		</div>
+		
+		<div class="actions">
+			<BOUCLE_compte(produits_liens){id_produit}{0,2} />
+			[(#AUTORISER{delierproduits,#OBJET,#ID_OBJET})[(#BOUTON_ACTION{<:produits_liens:bouton_enlever_produit:>,#URL_ACTION_AUTEUR{delier_produit,#ID_PRODUIT/#ID_OBJET/#OBJET/#RANG,#SELF},ajax,'','',[(function(){jQuery("#produit(#ID_PRODUIT)").animateRemove();return true;})()]})]<span>|</span>]
+			[(#AUTORISER{modifier,produit,#ID_PRODUIT}|oui)
+			<a href="#URL_ECRIRE{produit,id_produit=#ID_PRODUIT}" tabindex="0" role="button"><:produits_liens:bouton_voir_produit:></a>
+			]<//B_compte>
+		</div>
+		<div class="nettoyeur"></div>
+	</div>
+</BOUCLE_produitslies>

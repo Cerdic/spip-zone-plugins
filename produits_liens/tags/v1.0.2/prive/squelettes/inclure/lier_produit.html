@@ -1,0 +1,10 @@
+[(#ENV{lier_produit}|=={oui}|oui)
+<a href='[(#SELF|parametre_url{lier_produit,non})]' class='ajax bouton_fermer'>[(#CHEMIN_IMAGE{fermer-16.png}|balise_img)]</a>
+	<div class="ajax">
+		#FORMULAIRE_LIER_PRODUIT{new,#ENV{id_objet,0},#ENV{objet,''}}
+	</div>
+]
+[(#ENV{lier_produit}|=={oui}|non)
+[(#SELF|parametre_url{lier_produit,oui}|icone{<:produits_liens:bouton_lier_produit:>,produits_liens-24.png,#LANG_RIGHT,new,ajax})]
+]
+<div class="nettoyeur"></div>

@@ -1,0 +1,36 @@
+[(#REM)
+
+  Squelette
+  (c) xxx
+  Distribue sous licence GPL
+
+]
+#SET{nbproduits,0}
+
+
+[(#REM) puis les produits]
+<B_produits>
+<h3><:produits_liens:info_produits_lies:></h3>
+<div class="liste_items produits" id="produits">
+[<p class="pagination">(#PAGINATION)</p>]
+<BOUCLE_produits(PRODUITS produits_liens){id_objet}{objet}{par num titre,date,id_produit}{pagination 50}{statut?}>
+	#MODELE{produit_desc,id_produit,id_objet,objet}
+</BOUCLE_produits>
+[(#TOTAL_BOUCLE|>{20}|oui)<p class="pagination">#PAGINATION</p>]
+</div>
+#SET{nbproduits,#GET{nbproduits}|plus{#GRAND_TOTAL}}
+</B_produits>
+
+<script type="text/javascript">/*<![CDATA[*/
+function check_reload_page(){
+	var reload = false;
+	if($('#produits').length && !$('#produits .item').length){
+		$('#produits').remove(); reload = true;
+	}
+	if (reload) {
+		jQuery('#portfolios').ajaxReload();
+		jQuery('#navigation .box.info').ajaxReload();
+	}
+}
+if (window.jQuery) jQuery(function(){onAjaxLoad(check_reload_page);});
+/*]]>*/</script>

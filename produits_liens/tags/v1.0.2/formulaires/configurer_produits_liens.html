@@ -1,0 +1,13 @@
+<div class="editer-groupe">
+<div class="fieldset fieldset_fieldset_parametres saisie_fieldset">
+	
+	<ul>
+			#SET{name,produits_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}, exclus=produits_liens}
+			<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label><:produits_liens:label_activer_liaison_produits_objets:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]#INCLURE{fond=formulaires/inc-choisir-objets,name=#GET{name},selected=#ENV**{#GET{name}}}
+			</li>
+	</ul>
+</div>
+</div>

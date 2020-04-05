@@ -1,0 +1,33 @@
+<paquet
+	prefix="produits_liens"
+	categorie="outil"
+	version="1.0.2"
+	etat="test"
+	compatibilite="[3.0.13;3.2.*]"
+	logo="prive/themes/spip/images/produits_liens-64.png"
+	documentation=""
+	schema="1.0.0"
+>
+
+	<nom>Produits Liens</nom>
+
+	<auteur>Anne-lise Martenot</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="produits" compatibilite="[1.1.1;]" />
+
+
+	<pipeline nom="autoriser" inclure="produits_liens_autorisations.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/produits_liens.php" /> 
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/produits_liens.php" /> 
+	<pipeline nom="affiche_milieu" inclure="produits_liens_pipelines.php" /> 
+	<pipeline nom="recuperer_fond" inclure="produits_liens_pipelines.php" /> 
+	<pipeline nom="formulaire_traiter" inclure="produits_liens_pipelines.php" />
+	<pipeline nom="afficher_complement_objet" inclure="produits_liens_pipelines.php" /> 
+
+	<pipeline nom="affiche_enfants" inclure="produits_liens_pipelines.php" /> 
+	<pipeline nom="compte_enfants" inclure="produits_liens_pipelines.php" /> 
+
+	<utilise nom="selecteurgenerique" compatibilite="[1.1.4;]" />
+</paquet>
