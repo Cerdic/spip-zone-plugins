@@ -1,0 +1,125 @@
+<div class="cadre cadre-r">
+	<div class="cadre_padding">
+		[(#ENV{id_auteur}|oui)
+			[(#ENV{id_auteur}|is_numeric|oui)
+				#SET{auteur,#INFO_NOM{auteur,#ENV{id_auteur}}
+			][(#ENV{id_auteur}|is_numeric|non)
+				#SET{auteur,#ENV{id_auteur}}
+			]
+			<h1><:bigbrother:titre_page_stats_id_auteur{auteur=#GET{auteur}}:></h1>
+		]
+		
+		[(#REM) Calculs des statistiques générales ]
+		#SET{nb_auteurs,0}
+		<BOUCLE_nb_auteurs(JOURNAL)
+			{par date}{inverse}
+			{date>#ENV{date_debut,0}}{date<#ENV{date_fin,#ENV{date}}}
+			{objet ?}{id_objet ?}
+			{id_auteur ?}{id_auteur !IN #CONFIG{bigbrother/exclure_auteurs,#ARRAY}}
+			{action like #ENV{action,%}}
+			{fusion id_auteur}
+		/>#SET{nb_auteurs,#TOTAL_BOUCLE}<//B_nb_auteurs>
+		#SET{nb_actions,0}
+		<BOUCLE_nb_actions(JOURNAL)
+			{par date}{inverse}
+			{date>#ENV{date_debut,0}}{date<#ENV{date_fin,#ENV{date}}}
+			{objet ?}{id_objet ?}
+			{id_auteur ?}{id_auteur !IN #CONFIG{bigbrother/exclure_auteurs,#ARRAY}}
+			{action like #ENV{action,%}}
+			{fusion action}
+		/>#SET{nb_actions,#TOTAL_BOUCLE}<//B_nb_actions>
+		#SET{nb_dates,0}
+		<BOUCLE_nb_dates(JOURNAL)
+			{par date}{inverse}
+			{date>#ENV{date_debut,0}}{date<#ENV{date_fin,#ENV{date}}}
+			{objet ?}{id_objet ?}
+			{id_auteur ?}{id_auteur !IN #CONFIG{bigbrother/exclure_auteurs,#ARRAY}}
+			{action like #ENV{action,%}}
+			{fusion date(date)}
+		/>#SET{nb_dates,#TOTAL_BOUCLE}<//B_nb_dates>
+		
+		<p><:bigbrother:explication_page_stats:></p>
+		<B_journal_stats>
+		#SET{total,#GRAND_TOTAL}
+		<p><:bigbrother:info_nombre_resultat{nb=#GET{total}}:></p>
+
+		[(#GET{nb_auteurs}|plus{#GET{nb_dates}}|plus{#GET{nb_actions}}|>{3}|oui)
+		<div>
+			<p><:bigbrother:info_donnees_concernant:> :</p>
+			<ul>
+				[(#GET{nb_auteurs}|>{1}|oui)<li>
+					<:bigbrother:info_donnees_users{nb=#GET{nb_auteurs}}:>
+				</li>]
+				[(#GET{nb_dates}|>{1}|oui)<li>
+					<:bigbrother:info_donnees_dates{nb=#GET{nb_dates}}:>
+				</li>]
+				[(#GET{nb_actions}|>{1}|oui)<li>
+					<:bigbrother:info_donnees_actions{nb=#GET{nb_actions}}:>
+				</li>]
+			</ul>
+		</div>]
+		#FORMULAIRE_BIGBROTHER_PAGINATION
+		#ANCRE_PAGINATION
+		<table class="bigbrother">
+			<thead>
+				<tr class="row_first">
+					<th><:bigbrother:thead_id_journal:></th>
+					<th><:bigbrother:thead_id_auteur:></th>
+					<th><:bigbrother:thead_action:></th>
+					<th><:bigbrother:thead_objet:></th>
+					<th><:bigbrother:thead_id_objet:></th>
+					<th><:bigbrother:thead_date:></th>
+				</tr>
+			</thead>
+			<tbody class="ajax">
+				<BOUCLE_journal_stats(JOURNAL)
+					{par date}{inverse}
+					{date>#ENV{date_debut,0}}{date<#ENV{date_fin,#ENV{date}}}
+					{objet ?}{id_objet ?}
+					{id_auteur ?}{id_auteur !IN #CONFIG{bigbrother/exclure_auteurs,#ARRAY}}
+					{action like #ENV{action,%}}
+					{pagination #ENV{pagination_journal_stats,10}}
+				>
+				<tr class="tr_liste">
+					<td>##ID_JOURNAL</td>
+					<td>
+						[(#ID_AUTEUR|is_numeric|oui)
+							#SET{auteur,#INFO_NOM{auteur,#ID_AUTEUR}}]
+						[(#ID_AUTEUR|is_numeric|non)
+							#SET{auteur,#ID_AUTEUR}]
+						[(#ENV{id_auteur}|non)<a href="[(#SELF|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{debut_journal_stats,''})]" title="<:bigbrother:title_afficher_uniquement_user{user=#GET{auteur}}:>">]
+							#GET{auteur}
+						[(#ENV{id_auteur}|non)</a>]
+					</td>
+					<td>
+						[(#ENV{journal_action}|non)<a href="[(#SELF|parametre_url{journal_action,#ACTION}|parametre_url{debut_journal_stats,''})]" title="<:bigbrother:filtrer_par_action{action=#ACTION}:>">]
+						#ACTION
+						[(#ENV{journal_action}|non)</a>]
+					</td>
+					<td>
+						[(#ENV{objet}|non)
+						<a href="[(#SELF|parametre_url{objet,#OBJET}|parametre_url{id_objet,''})]" title="<:bigbrother:title_afficher_uniquement_objet{objet=#OBJET}:>">]
+							#OBJET
+						[(#ENV{objet}|non)</a>]
+					</td>
+					<td>
+					[(#ID_OBJET|oui)
+						[(#ENV{objet}|et{#ENV{id_objet}}|non)#SET{link_id_objet,oui}]
+						[(#GET{link_id_objet}|oui)
+							#SET{objet,#OBJET}
+							<a href="[(#SELF|parametre_url{objet,#OBJET}|parametre_url{id_objet,#ID_OBJET})]" title="<:bigbrother:title_afficher_uniquement_id_objet{id=#ID_OBJET,objet=#GET{objet}}:>">]
+							#ID_OBJET
+						[(#GET{link_id_objet}|oui)</a>]
+					]</td>
+					<td>[(#DATE)]</td>
+				</tr>
+				</BOUCLE_journal_stats>
+			</tbody>
+		</table>
+		[<div class="pagination pagination_bigbrother">(#PAGINATION{page_precedent_suivant})</div>]
+		[(#GRAND_TOTAL|<{2000}|oui)<INCLURE{fond=prive/journal/journal_defaut_infos,env,ajax}>]
+		</B_journal_stats>
+		<p><:bigbrother:info_aucun_resultat:></p>
+		<//B_journal_stats>
+	</div>
+</div>
