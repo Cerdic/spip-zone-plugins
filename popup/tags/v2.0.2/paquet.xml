@@ -1,0 +1,27 @@
+<paquet
+	prefix="spipopup"
+	categorie="multimedia"
+	version="2.0.2"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="images/popup-128.png"
+	documentation="https://contrib.spip.net/?article3573"
+>
+	<nom>Balise &#035;POPUP</nom>
+	<!-- Gestion d'une fenêtre popup unique -->
+
+	<auteur lien="https://contrib.spip.net/PieroWbmstr">Piero Wbmstr</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<copyright>2010-2017</copyright>
+
+	<traduire module="spipopup" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="insert_head" inclure="spipopup_pipelines.php" />
+	<pipeline nom="porte_plume_barre_pre_charger" inclure="spipopup_pipelines.php" />
+	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="spipopup_pipelines.php" />
+
+	<necessite nom="porte_plume" compatibilite="[1.2.2;[" />
+
+</paquet>

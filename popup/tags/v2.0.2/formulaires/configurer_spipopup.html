@@ -1,0 +1,51 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	
+<h3 class="titrem"><:spipopup:spipopup:></h3>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+
+<ul>
+
+	#SET{name,popup_skel}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="popup_skel"><:spipopup:skel_defaut:></label>
+		<div class="explication"><:spipopup:skel_defaut_comment|propre:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<input type="text" name="popup_skel" id="popup_skel" class="text" value="#ENV{popup_skel,#EVAL{POPUP_SKEL_DEFAUT}}" />
+	</li>	
+
+	<li class="editer editer_sizes">
+		<label for="nothing"><:spipopup:width_and_height:></label>
+		<input type="text" name="popup_width" id="popup_width" class="text" value="#ENV{popup_width,#EVAL{POPUP_WIDTH_DEFAUT}}" size="10" style="width:60px" />
+			x
+		<input type="text" name="popup_height" id="popup_height" class="text" value="#ENV{popup_height,#EVAL{POPUP_HEIGHT_DEFAUT}}" size="10" style="width:60px" />
+	</li>	
+
+	#SET{name,popup_titre}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="popup_titre"><:spipopup:titre_popup:></label>
+		<div class="explication"><:spipopup:titre_popup_comment|propre:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<input type="text" name="popup_titre" id="popup_titre" class="text" value="#ENV{popup_titre,#EVAL{POPUP_TITRE_DEFAUT}}" />
+	</li>	
+
+	#SET{name,popup_options}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="popup_options"><:spipopup:options_popup:></label>
+		<div class="explication"><:spipopup:options_popup_comment|propre:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<input type="text" name="popup_options" id="popup_options" class="text" value="#ENV{popup_options,#EVAL{POPUP_OPTIONS_DEFAUT}}" />
+	</li>	
+
+</ul>
+
+<input type="hidden" name="_meta_casier" value="spipopup" />
+<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+
+</div>
+</form>
+</div>
