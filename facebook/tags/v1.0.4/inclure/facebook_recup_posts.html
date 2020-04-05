@@ -1,0 +1,10 @@
+<B_facebook_messages>
+	<BOUCLE_facebook_messages(DATA){source tableau, #REM|facebook_recup_posts}{0,5}>
+		[<img src="(#VALEUR|table_valeur{url_picture})" alt="fb_picture">]
+		<span class="fb_date"> le [(#VALEUR|table_valeur{date_creation}|affdate{d/m/Y})] </span>
+		<div class="fb_message">
+			[(#VALEUR|table_valeur{message})]
+		</div>
+		<hr>
+	</BOUCLE_facebook_messages>
+</B_facebook_messages>

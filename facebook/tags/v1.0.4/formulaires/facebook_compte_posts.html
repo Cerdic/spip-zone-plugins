@@ -1,0 +1,16 @@
+<div class="formulaire_spip formulaire_#FORM">
+
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+
+	<form name="formulaire_#FORM" action="#ENV{action}" method="post"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+
+    #GENERER_SAISIES{#ENV{_saisies}}
+
+	<p class="boutons"><input type="submit" class="submit" value="<:valider:>" /></p>
+	</div></form>
+
+</div>
+
+

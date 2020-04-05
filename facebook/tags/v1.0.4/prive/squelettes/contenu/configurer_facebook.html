@@ -1,0 +1,19 @@
+[(#AUTORISER{configurer,_facebook}|sinon_interdire_acces)]
+
+<h1 class="grostitre"><:facebook:titre_page_configurer_facebook:></h1>
+
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_FACEBOOK
+</div>
+
+[(#CONFIG{facebook}|oui)
+[(#BOITE_OUVRIR{<:facebook:titre_compte_boite:>,'info'})]
+
+[(#TOKEN_FACEBOOK{0}|oui)
+<INCLURE{fond=inclure/facebook_profil, env} />]
+
+[(#REM) Connecteur facebook pour le site ]
+[(#CONNECTEUR_FACEBOOK{#SELF, oui}|icone_horizontale{<:facebook:titre_connecter_facebook:>,facebook})]
+
+#BOITE_FERMER
+]

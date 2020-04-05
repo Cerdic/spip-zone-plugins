@@ -1,0 +1,32 @@
+<paquet
+	prefix="facebook"
+	categorie="communication"
+	version="1.0.4"
+	etat="dev"
+	compatibilite="[3.1.0;3.1.*]"
+	logo="prive/themes/spip/images/facebook-64.png"
+	documentation=""
+	schema="1.0.3"
+>
+	<!--
+		Paquet généré le 2016-02-03 16:26:08
+		(Vous pouvez bien entendu supprimer ces commentaires)
+	-->
+
+	<nom>Facebook</nom>
+	<!-- Intégration de Facebook à SPIP -->
+
+	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs -->
+	<auteur lien='http://www.vertige.org'>vertige</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="autoriser" inclure="facebook_autorisations.php" />
+	<pipeline nom="affiche_gauche" inclure="facebook_pipelines.php" />
+
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+	<necessite nom="connecteur" compatibilite="[1.0.0;]" />
+
+	<menu nom="facebook_poster" titre="facebook:facebook_titre" parent="menu_publication" icone="images/facebook-16.png" />
+
+</paquet>

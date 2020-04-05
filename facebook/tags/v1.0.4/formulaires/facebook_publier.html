@@ -1,0 +1,25 @@
+<div class="formulaire_spip formulaire_#FORM">
+  <h3 class="titrem">
+	[(#CHEMIN_IMAGE{facebook-24.png}|balise_img{'',cadre-icone})]
+	<:facebook:publication:>
+  </h3>
+
+  [<p class="reponse_formulaire reponse_formulaire_erreur">
+  (#ENV*{message_erreur})
+  </p>]
+  [<p class="reponse_formulaire reponse_formulaire_ok">
+    (#ENV*{message_ok})
+  </p>]
+
+  [(#EDITABLE|oui)
+  <form action="#ENV{action}" method="post">
+	#ACTION_FORMULAIRE{#ENV{action}}
+
+    #GENERER_SAISIES{#ENV{_saisies}}
+
+    <p class="boutons">
+      <input type="submit" class="submit" value="<:pass_ok:>" />
+    </p>
+  </form>
+  ]
+</div>
