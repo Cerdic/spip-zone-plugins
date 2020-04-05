@@ -1,0 +1,27 @@
+#CACHE{0}
+[(#ENV{publicites}|=={''}|?{
+	#SET{tablo_publicites,#ARRAY{1,#ENV{id_publicite,''}}}
+	,
+	#SET{tablo_publicites,#ENV{publicites,''}|explode{','}}
+})]
+[(#ENV{bannieres}|=={''}|?{
+	#SET{tablo_bannieres,#ARRAY{1,#ENV{id_banniere,''}}}
+	,
+	#SET{tablo_bannieres,#ENV{bannieres,''}|explode{','}}
+})]
+[(#ENV{type}|=={export}|oui)
+	[(#GET{tablo_publicites}|pubban_exporter{#GET{tablo_bannieres}})]
+<br />
+]
+[(#ENV{type}|=={export}|non)
+<br />
+<center>
+	&#091;&nbsp;<a href="[(#SELF|parametre_url{type,export})]"><:pubban:exporter:></a>&nbsp;&#093;
+	&nbsp;&nbsp;
+	&#091;&nbsp;<a href="javascript:print()"><:pubban:imprimer:></a>&nbsp;&#093;
+	<hr>
+		[(#MODELE{publicite_statistiques, tablo_publicites=#GET{tablo_publicites}, tablo_bannieres=#GET{tablo_bannieres}})]
+	<hr>
+	&#091;&nbsp;<a href="javascript:print()"><:pubban:imprimer:></a>&nbsp;&#093;
+</center>
+]

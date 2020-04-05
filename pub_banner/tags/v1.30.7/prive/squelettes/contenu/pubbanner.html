@@ -1,0 +1,40 @@
+<h1 class="grostitre"><:pubban:gestion_pubban:></h1>
+
+[(#SESSION{statut}|=={0minirezo}|oui)
+	<INCLURE{fond=prive/squelettes/inclure/pubban_recherche,env} />
+]
+[(#ENV{mode}|=={''}|oui)
+
+<INCLURE{fond=prive/squelettes/inclure/statistiques_pubban_resume} />
+
+<br class='nettoyeur' />
+[(#URL_ECRIRE{statistiques_bannieres}|icone_verticale{<:pubban:page_stats:>,stock-tool-button-color-balance.png,'',right})]
+[(#URL_ECRIRE{pubban_info}|icone_verticale{<:pubban:page_infos:>,status-dock-24.png,'',right})]
+[(#SESSION{statut}|=={0minirezo}|oui)
+	[(#URL_ECRIRE{publicites}|icone_verticale{<:pubban:liste_pub:>,publicite-24.png,'',right})]
+	[(#URL_ECRIRE{bannieres}|icone_verticale{<:pubban:list_empl:>,banniere-24.png,'',right})]
+]
+[(#EVAL{pubban_poubelle_pleine()}|=={false}|non)
+	[(#URL_ECRIRE{pubbanner,mode=trash}|icone_verticale{<:pubban:open_trash:>,stock_delete.png,'',right})]
+]
+
+][(#ENV{mode}|=={trash}|oui)
+
+<INCLURE{fond=prive/squelettes/inclure/poubelle_liste_voir,env} />
+
+<br class='nettoyeur' />
+[(#URL_ECRIRE{pubbanner}|icone_verticale{<:pubban:home:>,stock_home.png,'',right})]
+[(#SESSION{statut}|=={0minirezo}|oui)
+	[(#URL_ACTION_AUTEUR{vider_poubelle_pubban,vider,#URL_ECRIRE{pubbanner}}|icone_verticale{<:pubban:vider_trash:>,trash-empty-accept.png,'',right,onclick="return confirm('<:pubban:confirm_undelete:>');"})]
+][(#ENV{retour}|=={''}|non)
+	[(#ENV{retour}|icone_horizontale{<:pubban:retour_search:>,stock_search.png})]
+]
+
+][(#ENV{mode}|=={search}|oui)
+
+<INCLURE{fond=prive/squelettes/inclure/pubban_recherche_resultats,env} />
+
+<br class='nettoyeur' />
+[(#URL_ECRIRE{pubbanner}|icone_verticale{<:pubban:home:>,stock_home.png,'',right})]
+
+]

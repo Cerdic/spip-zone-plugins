@@ -1,0 +1,74 @@
+<div class="liste-objets pubban statistiques">
+<table class='spip liste'>
+<caption><strong class="caption"><:pubban:info_stats:> #AIDER{pubbanner}</strong></caption>
+	<tbody>
+
+		<tr class="row_odd">
+			<td class='titre principale'>
+				<a href="#URL_ECRIRE{bannieres}" title="<:pubban:lien_page:>"><:pubban:nb_bannieres:></a>
+			</td>
+			<td class='numeration'><strong>
+			<BOUCLE_bannieres_actives(BANNIERES){statut=2actif}>#TOTAL_BOUCLE</BOUCLE_bannieres_actives>
+			</strong></td>
+		</tr>
+
+		<tr class="row_even">
+			<td class='titre principale'>
+				<a href="#URL_ECRIRE{publicites}" title="<:pubban:lien_page:>"><:pubban:nb_pub:></a>
+			</td>
+			<td class='numeration'><strong>
+			<BOUCLE_publicites_pas_poubelle(PUBLICITES){statut!=5poubelle}>#TOTAL_BOUCLE</BOUCLE_publicites_pas_poubelle>
+			</strong></td>
+		</tr>
+
+		<tr class="row_even">
+			<td class='titre principale'>&nbsp;-&nbsp;<em><:pubban:nb_pub_actives:></em></td>
+			<td class='numeration'><strong>
+			<BOUCLE_publicites_actives(PUBLICITES){statut=2actif}>#TOTAL_BOUCLE</BOUCLE_publicites_actives>
+			</strong></td>
+		</tr>
+		<tr class="row_even">
+			<td class='titre principale'>&nbsp;-&nbsp;<em><:pubban:nb_pub_inactives:></em></td>
+			<td class='numeration'><strong>
+			<BOUCLE_publicites_inactives(PUBLICITES){statut=1inactif}>#TOTAL_BOUCLE</BOUCLE_publicites_inactives>
+			</strong></td>
+		</tr>
+		<tr class="row_even">
+			<td class='titre principale'>&nbsp;-&nbsp;<em><:pubban:nb_pub_obsoletes:></em></td>
+			<td class='numeration'><strong>
+			<BOUCLE_publicites_obsoletes(PUBLICITES){statut=3obsolete}>#TOTAL_BOUCLE</BOUCLE_publicites_obsoletes>
+			</strong></td>
+		</tr>
+
+		<tr class="row_odd">
+			<td class='titre principale'>
+				<a href="#URL_ECRIRE{statistiques_bannieres}" title="<:pubban:lien_page:>"><:pubban:nb_affichages:></a>
+			</td>
+			<td class='numeration'><strong>
+			#SET{counter_affs,0}
+			<BOUCLE_bannieres_affs(PUBLICITES){tout}>#SET{counter_affs,#GET{counter_affs}|plus{#AFFICHAGES}}</BOUCLE_bannieres_affs>
+			#GET{counter_affs}
+			</strong></td>
+		</tr>
+
+		<tr class="row_even">
+			<td class='titre principale'>
+				<a href="#URL_ECRIRE{statistiques_bannieres}" title="<:pubban:lien_page:>"><:pubban:nb_clics:></a>
+			</td>
+			<td class='numeration'><strong>
+			#SET{counter_clics,0}
+			<BOUCLE_bannieres_clics(PUBLICITES){tout}>#SET{counter_clics,#GET{counter_clics}|plus{#CLICS}}</BOUCLE_bannieres_clics>
+			#GET{counter_clics}
+			</strong></td>
+		</tr>
+
+		<tr class="row_even">
+			<td class='titre principale'>&nbsp;-&nbsp;<em><:pubban:info_ratio:></em></td>
+			<td class='numeration'><strong>
+			[(#GET{counter_clics}|div{#GET{counter_affs}}|mult{100}|round{2})] %
+			</strong></td>
+		</tr>
+
+	</tbody>
+</table>
+</div>

@@ -1,0 +1,8 @@
+#CACHE{0}
+<BOUCLE_publicite(PUBLICITES){id_publicite}>
+	<BOUCLE_banniere(BANNIERES){id_banniere}>
+#SET{width, #WIDTH}
+#SET{height, #HEIGHT}
+	</BOUCLE_banniere>
+[(#MODELE{publicite}{type=#TYPE}{objet=#OBJET}{url=#URL}{width=#GET{width}}{height=#GET{height}})]
+</BOUCLE_publicite>

@@ -1,0 +1,18 @@
+#CACHE{0}
+<BOUCLE_payer(PUBLICITES){id_publicite}{tout}>
+	<BOUCLE_banniere(BANNIERES){id_banniere}>
+		#SET{width, #WIDTH}
+		#SET{height, #HEIGHT}
+	</BOUCLE_banniere>
+<br />
+<center>
+[(#ENV{type}|=={apercu}|oui)
+	&#091;&nbsp;<a href="#URL_PAGE{publicites_statistiques,id_publicite=#ID_PUBLICITE}"><:pubban:retour:></a>&nbsp;&#093;
+]
+	[&nbsp;<a href="javascript:print()"><:pubban:imprimer:></a>&nbsp;]
+	<hr>
+		[(#MODELE{publicite, type=#TYPE, objet=#OBJET, url=#URL, width=#GET{width}, height=#GET{height}, apercu=oui})]
+	<hr>
+	[&nbsp;<a href="javascript:print()"><:pubban:imprimer:></a>&nbsp;]
+</center>
+</BOUCLE_payer>

@@ -1,0 +1,36 @@
+<paquet
+	prefix="pubban"
+	categorie="multimedia"
+	version="1.30.7"
+	etat="test"
+	compatibilite="[3.0.10;3.1.*]"
+	logo="img/ico-pubban.png"
+	schema="0.9"
+	documentation="https://contrib.spip.net/?article3637"
+>	
+
+	<nom>Pub Banner</nom>
+	<!-- Gestionnaire de bannières publicitaires -->
+
+	<auteur lien="https://contrib.spip.net/PieroWbmstr">Piero Wbmstr</auteur>
+
+	<licence lien="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons BY-SA</licence>
+
+	<traduire module="pubban" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="autoriser" inclure="pubban_autoriser.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/pubban.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/pubban.php" />
+	<pipeline nom="taches_generales_cron" inclure="pubban_pipelines.php" />
+
+	<necessite nom="spip_bonux" compatibilite="[3.0.4;[" />
+
+	<menu nom="pubbanner" titre="pubban:pubban_titre" parent="menu_edition" icone="images/ico-pubban-16.png" action="pubbanner" position="-1" />
+	<menu nom="pubbanner_stats" titre="pubban:stats_pubban" parent="menu_activite" icone="images/ico-pubban-16.png" action="statistiques_bannieres" position="-1" />
+	<menu nom="pubbanner_creer_publicite" titre="pubban:icone_nouvelle_banniere" parent="outils_rapides" icone="images/banniere-new-16.png" action="banniere_edit" parametres="new=oui" />
+	<menu nom="pubbanner_creer_banniere" titre="pubban:icone_nouvelle_publicite" parent="outils_rapides" icone="images/publicite-new-16.png" action="publicite_edit" parametres="new=oui" />
+
+	<chemin path="public" type="public" />
+	<chemin path="prive" type="prive" />
+	<chemin path="" />
+</paquet>

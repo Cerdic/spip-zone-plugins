@@ -1,0 +1,54 @@
+[(#SET{defaut_tri,#ARRAY{
+	statut,1,
+	titre,1,
+	type,1,
+	id_publicite,1
+}})
+]<B_liste_publicites>
+#ANCRE_PAGINATION
+<div class="liste-objets publicites">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{pubban:info_1_publicite,pubban:info_nb_publicites}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='type' scope='col'>[(#TRI{type,<:pubban:type:>,ajax})]</th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:pubban:titre:>,ajax})]</th>
+			<th class='outils' scope='col'><:outils:></th>
+			<th class='id' scope='col'>[(#TRI{id_publicite,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_publicites(PUBLICITES){id_publicite?}{where?}{recherche?}{statut?}{tri #ENV{par,id_publicite},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'>[(#STATUT|puce_statut{publicite,#ID_PUBLICITE})]</td>
+			<td class='type'>
+				<img src='[(#TYPE|pubban_recup_puce_pub)]' title='[(#TYPE|pubban_recup_puce_pub{type})]' alt='[(#TYPE|pubban_recup_puce_pub{type})]' border='0' />
+			</td>
+			<td class='titre principale'>
+				<a href="[(#ID_PUBLICITE|generer_url_entite{publicite})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PUBLICITE">#TITRE</a>
+			</td>
+			<td class='outils secondaire'>
+				<a href="#URL_PAGE{publicite_apercu,id_publicite=#ID_PUBLICITE}" class="mediabox boxIframe boxWidth-600px boxHeight-90%">
+					<img src='#CHEMIN_IMAGE{stock_search-16.png}' title='<:pubban:btn_apercu:>' alt='<:pubban:btn_apercu:>' border="0" align="absmiddle" hspace="3" />
+				</a>
+				[(#STATUT|=={5poubelle}|non)<a href='[(#URL_ECRIRE{publicite_edit,id_publicite=#ID_PUBLICITE})]'>
+					<img src='#CHEMIN_IMAGE{publicite-edit-16.png}' title='<:bouton_modifier:>' alt='<:bouton_modifier:>' border="0" align="absmiddle" hspace="3" />
+				</a>]
+				<a href="javascript:delete_entry('[(#URL_ACTION_AUTEUR{activer_publicite,trash-#ID_PUBLICITE,#SELF})]', '<:pubban:confirm_delete:>');">
+					<img src='#CHEMIN_IMAGE{stock_delete-16.png}' title='<:pubban:btn_supprimer:>' alt='<:pubban:btn_supprimer:>' border="0" align="absmiddle" hspace="3" />
+				</a>
+			</td>
+			<td class='id'>[(#AUTORISER{modifier,publicite,#ID_PUBLICITE}|?{
+				<a href="[(#URL_ECRIRE{publicite_edit,id_publicite=#ID_PUBLICITE})]">#ID_PUBLICITE</a>,
+				#ID_PUBLICITE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_publicites>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_publicites>[
+<div class="liste-objets publicites caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_publicites>

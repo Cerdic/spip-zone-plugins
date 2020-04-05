@@ -1,0 +1,11 @@
+<BOUCLE_nav(BANNIERES){id_banniere}{statut==.*}{si #ENV{exec}|=={banniere}}>
+#BOITE_OUVRIR{'','info'}
+#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','banniere','id',#ENV{id_banniere}}}}
+<:pubban:url_stats_banniere:>
+<br />
+<a href="#URL_PAGE{publicites_statistiques,id_banniere=#ID_BANNIERE}" class='mediabox boxIframe boxWidth-700px boxHeight-90%'>
+	<img width="24" height="24" alt="<:pubban:voir_les_statistiques:>" src="#CHEMIN_IMAGE{stock-tool-button-color-balance.png}">
+	<:pubban:voir_les_statistiques:>
+</a>
+#BOITE_FERMER
+</BOUCLE_nav>

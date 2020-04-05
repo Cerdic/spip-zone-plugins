@@ -1,0 +1,44 @@
+<BOUCLE_publicite(PUBLICITES){id_publicite}{statut==.*}{si #ENV{exec}|=={publicite}}>
+[(#SET{icon,[(#TYPE|pubban_recup_img_pub{#OBJET})]})]
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,banniere,#ID_BANNIERE})
+				
+		[(#ID_PUBLICITE|afficher_qui_edite{publicite}|non)
+			[(#URL_ECRIRE{publicite_edit,id_publicite=#ID_PUBLICITE}|icone_verticale{<:pubban:icone_modifier_publicite:>,publicite-24.png,edit,right})]
+		]
+		[(#ID_PUBLICITE|afficher_qui_edite{publicite}|oui)
+			[(#URL_ECRIRE{publicite_edit,id_publicite=#ID_PUBLICITE}|icone_verticale{#ID_PUBLICITE|afficher_qui_edite{publicite},warning-24.png,'',right edition_deja})]
+		]
+	]
+	<h1><br />[(#RANG). ](#TITRE|sinon{<:info_sans_titre_2:>})[(#CHEMIN_IMAGE{#GET{icon,object_edit.png}}|balise_img{publicite,cadre-icone})]</h1>
+],simple fiche_objet})]
+
+
+<!--affiche_milieu-->
+<div id="wysiwyg">
+	<div class="champ contenu_descriptif">
+	<INCLURE{fond=prive/objets/contenu/publicite,
+		id=#ID_PUBLICITE,
+		id_publicite=#ID_PUBLICITE,
+		wysiwyg=1
+	} />
+	</div>
+</div>
+
+#BOITE_OUVRIR
+<div class="label"><strong>&nbsp;<:pubban:apercu:></strong></div>
+<div style="text-align: center; padding: 1em 0; overflow-x: scroll;">
+	[(#MODELE{publicite}{type=#TYPE}
+		{objet=#OBJET}
+		{url=#URL}
+		{id_publicite=#ID_PUBLICITE}
+		{nom_pub=#TITRE}
+	)]
+</div>
+#BOITE_FERMER
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>
+]
+</BOUCLE_publicite>

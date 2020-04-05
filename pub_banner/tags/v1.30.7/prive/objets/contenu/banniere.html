@@ -1,0 +1,32 @@
+<BOUCLE_afficher_contenu(BANNIERES){id_banniere=#ENV{id}}{statut?}>
+[<p><small>
+<:pubban:date_maj:>&nbsp;:&nbsp;<abbr title="[(#MAJ|date_iso)]">(#MAJ|affdate) [(#MAJ|affdate{H:i})]</abbr>
+</small></p>]
+<div class="champ contenu_date">
+<div class='label'><:pubban:dimensions:></div>
+<div dir='#LANG_DIR' class='dimensions_banniere'>#WIDTH x #HEIGHT px</div>
+</div>
+<br />
+
+[(#REFRESH|=={0}|non)<div class="champ refresh">
+<div class='label'><:pubban:refresh_time:></div>
+<div dir='#LANG_DIR' class='refresh_banniere'>#REFRESH <:pubban:secondes:></div>
+</div>
+<br />]
+
+<div class="champ contenu_donnees">
+<div class='label'><:pubban:stats:></div>
+<div dir='#LANG_DIR' class='donnees_banniere'>
+	<ul>
+		<li><:pubban:ratio_pages:>&nbsp;:&nbsp;<strong>#RATIO_PAGES %</strong></li>
+		<li><:pubban:nb_pub:>&nbsp;:&nbsp;<strong>[(#ENV{decompte_pub}|singulier_ou_pluriel{pubban:publicite_1,pubban:publicites}|sinon{<:pubban:publicite_0:>})]</strong>
+		<ul>
+			<li><:pubban:nb_pub_actives:>&nbsp;:&nbsp;<strong>[(#ENV{decompte_pub_actives}|singulier_ou_pluriel{pubban:publicite_1,pubban:publicites}|sinon{<:pubban:publicite_0:>})]</strong>
+			<li><:pubban:nb_pub_inactives:>&nbsp;:&nbsp;<strong>[(#ENV{decompte_pub_inactives}|singulier_ou_pluriel{pubban:publicite_1,pubban:publicites}|sinon{<:pubban:publicite_0:>})]</strong>
+			<li><:pubban:nb_pub_obsoletes:>&nbsp;:&nbsp;<strong>[(#ENV{decompte_pub_obsoletes}|singulier_ou_pluriel{pubban:publicite_1,pubban:publicites}|sinon{<:pubban:publicite_0:>})]</strong>
+		</ul></li>
+	</ul>
+</div>
+</div>
+<br />
+</BOUCLE_afficher_contenu>

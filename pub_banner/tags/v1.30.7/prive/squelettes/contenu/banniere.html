@@ -1,0 +1,81 @@
+<BOUCLE_banniere(BANNIERES){id_banniere}{statut==.*}{si #ENV{exec}|=={banniere}}>
+[(#BOITE_OUVRIR{[
+				
+	[(#AUTORISER{modifier,banniere,#ID_BANNIERE})
+		[(#STATUT|=={2actif}|oui)
+			[(#URL_ECRIRE{publicite_edit,id_publicite=new&id_banniere=#ID_BANNIERE}|icone_verticale{<:pubban:nouveau_pub_dans_banniere:>,publicite-24.png,new,right})]
+		]
+		[(#ID_BANNIERE|afficher_qui_edite{banniere}|non)
+			[(#URL_ECRIRE{banniere_edit,id_banniere=#ID_BANNIERE}|icone_verticale{<:pubban:icone_modifier_banniere:>,banniere-24.png,edit,right})]
+		]
+		[(#ID_BANNIERE|afficher_qui_edite{banniere}|oui)
+			[(#URL_ECRIRE{banniere_edit,id_banniere=#ID_BANNIERE}|icone_verticale{#ID_BANNIERE|afficher_qui_edite{banniere},warning-24.png,'',right edition_deja})]
+		]
+	]
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre_2:>})[(#CHEMIN_IMAGE{banniere-24.png}|balise_img{banniere,cadre-icone})]</h1>
+	<p>&nbsp;<:pubban:info_titre_id_banniere:> : <strong>#TITRE_ID</strong></p>
+],simple fiche_objet})]
+
+<!--decomptes-->
+#SET{decompte_pub,0}
+#SET{decompte_pub_actives,0}
+#SET{decompte_pub_inactives,0}
+#SET{decompte_pub_obsoletes,0}
+#SET{listing_pub,#ARRAY{}}
+<BOUCLE_decompte_objets(BANNIERES_PUBLICITES){id_banniere=#ID_BANNIERE}>
+	<BOUCLE_statut_objets(PUBLICITES){id_publicite=#ID_PUBLICITE}{statut!=5poubelle}>
+	[(#SET{decompte_pub,#GET{decompte_pub}|plus{1}})]
+	[(#SET{listing_pub,#GET{listing_pub}|push{#ID_PUBLICITE}})]
+	[(#STATUT|=={2actif}|?{
+		[(#SET{decompte_pub_actives,#GET{decompte_pub_actives}|plus{1}})],
+			[(#STATUT|=={3obsolete}|?{
+				[(#SET{decompte_pub_obsoletes,#GET{decompte_pub_obsoletes}|plus{1}})]
+				,
+				[(#SET{decompte_pub_inactives,#GET{decompte_pub_inactives}|plus{1}})]
+			})]
+	})]
+	</BOUCLE_statut_objets>
+</BOUCLE_decompte_objets>
+
+<!--affiche_milieu-->
+<div id="wysiwyg">
+	<div class="champ contenu_descriptif">
+<INCLURE{fond=prive/objets/contenu/banniere,
+	id=#ID_BANNIERE,
+	id_banniere=#ID_BANNIERE,
+	decompte_pub=#GET{decompte_pub},
+	decompte_pub_actives=#GET{decompte_pub_actives},
+	decompte_pub_inactives=#GET{decompte_pub_inactives},
+	decompte_pub_obsoletes=#GET{decompte_pub_obsoletes},
+	wysiwyg=1
+} />
+	</div>
+</div>
+
+[(#GET{decompte_pub}|=={0}|non)
+<INCLURE{fond=prive/objets/liste/publicites,
+	id_publicite=#GET{listing_pub},
+	titre=<:pubban:listing_empl:>
+} />
+]
+
+[(#GET{decompte_pub}|=={0}|?{
+#BOITE_OUVRIR
+<div class="label"><strong>&nbsp;<:pubban:apercu:></strong></div>
+	<p><:pubban:apercu_indisponible:></p>
+#BOITE_FERMER
+})]
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>
+]
+</BOUCLE_banniere>
+
+<script type='text/javascript'>
+function popup(l,h,url) {
+	var pp = window.open(url,"popup","resizable=yes,toolbar=no,scrollbars=yes,width="+l+",height="+h);
+	pp.focus();
+	return false;
+}
+</script>

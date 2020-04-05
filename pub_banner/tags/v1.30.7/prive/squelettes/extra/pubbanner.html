@@ -1,0 +1,11 @@
+#SET{open,#BOITE_OUVRIR{'',raccourcis}}
+[(#AUTORISER{creer,publicite})
+	[(#GET{open}|unique)]
+[(#URL_ECRIRE{publicite_edit,id_publicite=new}|icone_horizontale{<:pubban:nouveau_pub:>,publicite-24.png,new})]
+][(#AUTORISER{creer,banniere})
+	[(#GET{open}|unique)]
+[(#URL_ECRIRE{banniere_edit,id_banniere=new}|icone_horizontale{<:pubban:nouveau_empl:>,banniere-24.png,new})]
+]
+[(#GET{open}|unique|?{'',#BOITE_FERMER})]
+
+#MODELE{pubban_boite_info}

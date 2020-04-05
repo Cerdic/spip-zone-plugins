@@ -1,0 +1,42 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr" dir="ltr">
+<head>
+	<link rel='stylesheet' href='https://www.spip.net/prive/spip_admin.css' type='text/css' />
+</head>
+<body>
+<h1>Usages avancés</h1>
+<h2>pubbanner/Gestion des publicités</h2>
+<!-- ajout d'aide personnalisée -->
+
+	<p><a name="plugin_pubbanner"></a></p>
+	<h3 class="spip">Fonctionnalités du plugin '<i>Pub Banner</i>'</h3>
+	
+	<p>Le plugin 'Pub Banner' ajoute deux nouveaux objets "éditoriaux" à SPIP : les <strong>bannières</strong> et les <strong>publicités</strong>.</p>
+	
+	<p>Il ne s'agit pas, bien sûr, d'élément éditoriaux informatifs comme un article ou une brève, mais ils sont ajoutés et référencés dans SPIP comme tout autre objet. Ils sont donc utilisables dans les boucles et les squelettes.</p>
+
+	<p>Le plugin ajoute également la balise <var>#PUBBAN{ arg }</var> à SPIP, qui sera remplacée à la compilation par la bannière que vous avez appelé en argument.</p>
+
+	<p><a name="pubbanner_banniere"></a></p>
+	<h4 class="spip">Les bannières</h4>
+
+	<p>La <strong>bannière</strong> est l'objet qui est affichée à l'emplacement de la balise dans les squelettes. Il s'agira le plus souvent d'une <var>DIV</var> entourant une <var>iFrame</var> dans laquelle apparaissent une ou plusieurs publicités associées à la bannière, selon la valeur du rafraîchissement de celle-ci.</p>
+
+	<p>Une <strong>bannière</strong> se définit principalement par des dimensions (<em>largeur et hauteur</em>) et un délai de rafraîchissement qui correspond au temps d'affichage au bout duquel une publicité disparaît pour être remplacée par une autre (<em>cette valeur peut être annulée</em>).</p>
+
+	<p><a name="pubbanner_publicite"></a></p>
+	<h4 class="spip">Les publicités</h4>
+
+	<p>La <strong>publicité</strong> est l'image ou l'objet qui est visible par l'internaute dans une bannière.</p>
+
+	<p>Une <strong>publicité</strong> se définit principalement par un contenu (<em>image ou objet flash</em>), une URL de redirection au clic ainsi qu'une ou plusieurs bannières associées. Plusieurs variables permettent également de régler les droits d'affichage et de clic pour chaque publicité : un nombre défini d'affichages ou de clics et des dates de début et de fin d'affichage. Cela permet notamment de préparer des campagnes publicitaires en fonction de dates précises, de proposer un nombre d'affichage définit etc.</p>
+
+	<p><a name="pubbanner_auth"></a></p>
+	<h4 class="spip">Autorisations sur les bannières et publicités</h4>
+
+	<p>Seul les administrateurs du site ont le droit de créer ou modifier les bannières et publicités.</p>
+
+	<p>Les auteurs peuvent accéder à la visualisation des statistiques et aux fiches récapitulatives des objets.</p>
+
+<!-- fin ajout d'aide personnalisée -->
+</body>
+</html>

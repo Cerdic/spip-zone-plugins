@@ -1,0 +1,67 @@
+<div class="liste-objets publicites">
+<table class='spip liste'>
+<caption><strong class="caption"><:pubban:poubelle_contenu:></caption>
+	<thead>
+		<tr class='first_row'>
+			<th class='type' scope='col'><:pubban:type:></th>
+			<th class='titre' scope='col'><:pubban:titre:></th>
+			<th class='date' scope='col'><:pubban:date_add:></th>
+			<th class='outils' scope='col'><:outils:></th>
+		</tr>
+	</thead>
+	<tbody>
+
+<B_pubban>
+	<BOUCLE_pubban(PUBLICITES){pagination #ENV{pagine,20}}{par titre}{inverse #ENV{inverse}}{statut=5poubelle}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='type'>
+				<img src='[(#TYPE|pubban_recup_puce_pub)]' title='[(#TYPE|pubban_recup_puce_pub{type})]' alt='[(#TYPE|pubban_recup_puce_pub{type})]' border='0' />
+			</td>
+			<td class='titre principale'>
+				[<a href="[(#ID_PUBLICITE|generer_url_entite{publicite})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PUBLICITE">(#TITRE)</a>]
+			</td>
+			<td class='date secondaire'>[(#DATE_ADD|affdate)]</td>
+			<td class='outils secondaire'>
+				<a href="javascript:delete_entry('[(#URL_ACTION_AUTEUR{activer_publicite,out_trash-#ID_PUBLICITE,#SELF})]', '<:pubban:confirm_undelete:>');">
+					<img src='#CHEMIN_IMAGE{stock_undelete-16.png}' title='<:pubban:btn_reabiliter:>' alt='<:pubban:btn_reabiliter:>' border="0" align="absmiddle" hspace="3" />
+				</a>
+			</td>
+		</tr>
+	</BOUCLE_pubban>
+</B_pubban>
+
+<B_pubbanempl>
+	<BOUCLE_pubbanempl(BANNIERES){pagination #ENV{pagine,20}}{par titre}{inverse #ENV{inverse}}{statut=5poubelle}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='type'>
+				<img src='#CHEMIN_IMAGE{banniere-16.png}' title='<:pubban:banner:>' alt='<:pubban:banner:>' border="0" align="absmiddle" hspace="3" />
+			</td>
+			<td class='titre principale'>
+				[<a href="[(#ID_BANNIERE|generer_url_entite{banniere})]" title="<:info_numero_abbreviation|attribut_html:> #ID_BANNIERE">(#TITRE)</a>]
+			</td>
+			<td class='date secondaire'>-</td>
+			<td class='outils secondaire'>
+				<a href="javascript:delete_entry('[(#URL_ACTION_AUTEUR{activer_banniere,out_trash-#ID_BANNIERE,#SELF})]', '<:pubban:confirm_undelete:>');">
+					<img src='#CHEMIN_IMAGE{stock_undelete-16.png}' title='<:pubban:btn_reabiliter:>' alt='<:pubban:btn_reabiliter:>' border="0" align="absmiddle" hspace="3" />
+				</a>
+			</td>
+		</tr>
+	</BOUCLE_pubbanempl>
+</B_pubbanempl>
+
+</table>
+</div>
+
+<script type='text/javascript'>
+<!--
+function popup(l,h,url) {
+	var pp = window.open(url,"popup","resizable=yes,toolbar=no,scrollbars=yes,width="+l+",height="+h);
+	pp.focus();
+}
+function delete_entry(url, mess){
+	if(confirm(mess)){
+		window.location.href = url;
+	}
+}
+//-->
+</script>

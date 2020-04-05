@@ -1,0 +1,23 @@
+<div class='cadre-formulaire-editer'>
+<script type="text/javascript" src="#CHEMIN{javascripts/jquery.bgiframe.js}"></script>
+<script type="text/javascript" src="#CHEMIN{javascripts/jquery.dimensions.js}"></script>
+<script type="text/javascript" src="#CHEMIN{javascripts/jquery.tooltip.js}"></script>
+<link rel="stylesheet" type="text/css" href="#CHEMIN{javascripts/jquery.tooltip.css}" media='all' />
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.pubban_tltp').tooltip({ track: true, showURL: false, delay: 0, left: -30, extraClass: 'pubban' });
+});
+</script>
+<script type="text/javascript" src="#CHEMIN{javascripts/wz_jsgraphics.js}"></script>
+<script type="text/javascript" src="#CHEMIN{javascripts/pie.js}"></script>
+<script type="text/javascript" src="#CHEMIN{javascripts/line.js}"></script>
+<script type="text/javascript" src="#CHEMIN{javascripts/graph.js}"></script>
+
+Page en construction
+
+[(#ENV{no_datas}|oui)
+	<h3><:pubban:no_datas_yet:></h3>
+][(#ENV{no_datas}|non)
+	#FORMULAIRE_PUBBAN_STATISTIQUES_PUBLICITES
+]
+</div>

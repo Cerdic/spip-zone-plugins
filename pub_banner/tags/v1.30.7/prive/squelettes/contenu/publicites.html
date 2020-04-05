@@ -1,0 +1,22 @@
+<h1 class="grostitre"><:pubban:liste_pub:></h1>
+
+<INCLURE{fond=prive/squelettes/inclure/pubban_recherche,env} />
+
+<INCLURE{fond=prive/objets/liste/publicites,
+	titre=<:pubban:pub_actives:>,statut=2actif,par=id_publicite,ajax
+	redirect=#URL_ECRIR{pubban_pub},
+	inverse=#ENV{inverse}
+} />
+
+<INCLURE{fond=prive/objets/liste/publicites,
+	titre=<:pubban:pub_inactives:>,statut=1inactif,par=id_publicite,ajax
+	redirect=#URL_ECRIR{pubban_pub},
+	inverse=#ENV{inverse}
+} />
+
+<INCLURE{fond=prive/objets/liste/publicites,
+	titre=<:pubban:pub_obsoletes:>,statut=3obsolete,par=id_publicite,ajax
+	redirect=#URL_ECRIR{pubban_pub},
+	inverse=#ENV{inverse}
+} />
+

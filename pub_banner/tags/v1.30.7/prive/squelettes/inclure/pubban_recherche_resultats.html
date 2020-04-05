@@ -1,0 +1,100 @@
+#SET{pubban_search,#ENV{search_pubban}|pubban_search}
+#SET{table_pub,#GET{pubban_search}|table_valeur{pub}}
+#SET{table_emp,#GET{pubban_search}|table_valeur{emp}}
+#SET{boucle_search,#GET{table_pub}|count|plus{#GET{table_emp}|count}}
+
+<div class="liste-objets publicites">
+<table class='spip liste'>
+<caption><strong class="caption">
+[(#GET{boucle_search}|=={0}|?{
+	<:pubban:no_results_match:>
+	,
+	#GET{boucle_search}[ (#GET{boucle_search}|singulier_ou_pluriel{pubban:result_match,pubban:results_match})]
+})]
+</strong></caption>
+	<thead>
+		<tr class='first_row'>
+			<th class='type' scope='col'><:pubban:type:></th>
+			<th class='titre' scope='col'><:pubban:titre:></th>
+			<th class='outils' scope='col'><:outils:></th>
+		</tr>
+	</thead>
+	<tbody>
+
+<BOUCLE_pubban(PUBLICITES){id_publicite IN #GET{table_pub}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='type'>
+				<img src='[(#TYPE|pubban_recup_puce_pub)]' title='[(#TYPE|pubban_recup_puce_pub{type})]' alt='[(#TYPE|pubban_recup_puce_pub{type})]' border='0' />
+			</td>
+			<td class='titre principale'>
+[(#STATUT|=={5poubelle}|non)
+				<a href='[(#ID_PUBLICITE|generer_url_entite{publicite}|parametre_url{retour,[(#URL_ECRIRE{pubbanner,mode=search&search_pubban=#ENV{search_pubban}})]})]' title='<:pubban:btn_details:>'>#TITRE</a>
+][(#STATUT|=={5poubelle}|oui)
+				<a href='[(#URL_ECRIRE{pubban_trash,id_publicite=#ID_PUBLICITE}|parametre_url{retour,[(#URL_ECRIRE{pubbanner,mode=search&search_pubban=#ENV{search_pubban}})]})]' title='<:pubban:poubelle:>'>#TITRE</a>
+]
+			</td>
+			<td class='outils secondaire'>
+[(#STATUT|=={5poubelle}|non)
+				<a href="javascript:popup(600,600,'#URL_SITE_SPIP/?page=publicite_apercu&id_publicite=#ID_PUBLICITE');">
+					<img src='#CHEMIN_IMAGE{stock_search-16.png}' title='<:pubban:btn_apercu:>' alt='<:pubban:btn_apercu:>' border="0" align="absmiddle" hspace="3" />
+				</a>
+				<a href='[(#URL_ECRIRE{publicite_edit,id_publicite=#ID_PUBLICITE}|parametre_url{retour,[(#URL_ECRIRE{pubbanner,mode=search&search_pubban=#ENV{search_pubban}})]})]'>
+					<img src='#CHEMIN_IMAGE{publicite-edit-16.png}' title='<:bouton_modifier:>' alt='<:bouton_modifier:>' border="0" align="absmiddle" hspace="3" />
+				</a>
+				<a href="javascript:delete_entry('[(#URL_ACTION_AUTEUR{activer_publicite,trash-#ID_PUBLICITE,[(#URL_ECRIRE{pubbanner,mode=search&search_pubban=#ENV{search_pubban}})]})]', '<:pubban:confirm_delete:>');">
+					<img src='#CHEMIN_IMAGE{stock_delete-16.png}' title='<:pubban:btn_supprimer:>' alt='<:pubban:btn_supprimer:>' border="0" align="absmiddle" hspace="3" />
+				</a>
+][(#STATUT|=={5poubelle}|oui)
+				<a href="javascript:delete_entry('[(#URL_ACTION_AUTEUR{activer_publicite,out_trash-#ID_PUBLICITE,[(#URL_ECRIRE{pubbanner,mode=search&search_pubban=#ENV{search_pubban}})]})]', '<:pubban:confirm_undelete:>');">
+					<img src='#CHEMIN_IMAGE{stock_undelete-16.png}' title='<:pubban:btn_reabiliter:>' alt='<:pubban:btn_reabiliter:>' border="0" align="absmiddle" hspace="3" />
+				</a>
+]
+			</td>
+		</tr>
+</BOUCLE_pubban>
+
+<BOUCLE_pubban2(BANNIERES){id_banniere IN #GET{table_emp}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='type'>
+				<img src='#CHEMIN_IMAGE{banniere-16.png}' title='<:pubban:banner:>' alt='<:pubban:banner:>' border="0" align="absmiddle" hspace="3" />
+			</td>
+			<td class='titre principale'>
+[(#STATUT|=={5poubelle}|non)
+				<a href='[(#ID_BANNIERE|generer_url_entite{banniere}|parametre_url{retour,[(#URL_ECRIRE{pubbanner,mode=search&search_pubban=#ENV{search_pubban}})]})]' title='<:pubban:btn_details:>'>#TITRE</a>
+][(#STATUT|=={5poubelle}|oui)
+			<a href='[(#URL_ECRIRE{pubban_trash,id_publicite=#ID_BANNIERE}|parametre_url{retour,[(#URL_ECRIRE{pubbanner,mode=search&search_pubban=#ENV{search_pubban}})]})]' title='<:pubban:poubelle:>'>#TITRE</a>
+]
+			</td>
+			<td class='outils secondaire'>
+[(#STATUT|=={5poubelle}|oui)
+				<a href="javascript:delete_entry('[(#URL_ACTION_AUTEUR{activer_banniere,out_trash-#ID_BANNIERE,[(#URL_ECRIRE{pubbanner,mode=search&search_pubban=#ENV{search_pubban}})]})]', '<:pubban:confirm_undelete:>');">
+					<img src='#CHEMIN_IMAGE{stock_undelete-16.png}' title='<:pubban:btn_reabiliter:>' alt='<:pubban:btn_reabiliter:>' border="0" align="absmiddle" hspace="3" />
+				</a>
+][(#STATUT|=={5poubelle}|non)
+				<a href='[(#URL_ECRIRE{banniere_edit,id_banniere=#ID_BANNIERE}|parametre_url{retour,[(#URL_ECRIRE{pubbanner,mode=search&search_pubban=#ENV{search_pubban}})]})]'>
+					<img src='#CHEMIN_IMAGE{banniere-edit-16.png}' title='<:bouton_modifier:>' alt='<:bouton_modifier:>' border="0" align="absmiddle" hspace="3" />
+				</a>
+				<a href="javascript:delete_entry('[(#URL_ACTION_AUTEUR{activer_banniere,trash-#ID_BANNIERE,[(#URL_ECRIRE{pubbanner,mode=search&search_pubban=#ENV{search_pubban}})]})]', '<:pubban:confirm_delete_empl:>');">
+					<img src='#CHEMIN_IMAGE{stock_delete-16.png}' title='<:pubban:btn_supprimer:>' alt='<:pubban:btn_supprimer:>' border="0" align="absmiddle" hspace="3" />
+				</a>
+]
+			</td>
+		</tr>
+</BOUCLE_pubban2>
+
+</table>
+</div>
+
+<script type='text/javascript'>
+<!--
+function popup(l,h,url) {
+	var pp = window.open(url,"popup","resizable=yes,toolbar=no,scrollbars=yes,width="+l+",height="+h);
+	pp.focus();
+}
+function delete_entry(url, mess){
+	if(confirm(mess)){
+		window.location.href = url;
+	}
+}
+//-->
+</script>
