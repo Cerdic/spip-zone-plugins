@@ -1,0 +1,11 @@
+<BOUCLE_rub(RUBRIQUES){id_rubrique}{tout}>
+<select name='id_article_accueil' id='id_article_accueil'>
+<option value='0'><:article_accueil:aucun_article_accueil:></option>
+<BOUCLE_art(ARTICLES){id_rubrique=#ID_RUBRIQUE}{statut IN 'prop','prepa','publie'}>
+<option value='#ID_ARTICLE'[ (#ID_ARTICLE|=={#ID_ARTICLE_ACCUEIL}|oui)selected="selected"]>#TITRE</option>
+</BOUCLE_art>
+<BOUCLE_art_polyhier(ARTICLES){enfants_indirects}{statut IN 'prop','prepa','publie'}{si #PLUGIN{polyhier}|oui}>
+<option value='#ID_ARTICLE'[ (#ID_ARTICLE|=={#ID_ARTICLE_ACCUEIL}|oui)selected="selected"]>#TITRE</option>
+</BOUCLE_art_polyhier>
+</select>
+</BOUCLE_rub>
