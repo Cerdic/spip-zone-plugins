@@ -1,0 +1,14 @@
+<BOUCLE_liste(SYMPATIC_LISTES){id_liste}>
+<h1 class="grostitre"><:sympatic:titre_page_abonnes{titre=#TITRE}:></h1>
+</BOUCLE_liste>
+
+[(#INCLURE{fond=prive/contenu/sympatic_abonnes,ajax,env})]
+
+<div class="nettoyeur" />
+
+<!--#navigation-->
+<a href="#ENV{retour,#URL_ECRIRE{sympatic_tous}}" class="icone36" style="float:left;">
+	<img width="24" height="24" src="#CHEMIN{images/sympatic-24.png}" />
+	<span><:retour:></span>
+</a>
+<!--/#navigation-->

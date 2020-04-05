@@ -1,0 +1,19 @@
+<div class="formulaire_spip formulaire_editer formulaire_sympatic_importer ajax">
+<!-- <br class='bugajaxie' /> -->
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[(#ENV{editable})
+<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		[(#INCLURE{fond=formulaires/inc-sympatic_listes})]
+		[(#SAISIE{textarea,emails,
+			label=<:sympatic:label_importer_emails:>,
+			explication=<:sympatic:explication_importer_emails:>,
+			rows=10})]
+	</ul>
+	<p class="boutons">
+		<input type="submit" class="submit" name="valider" value="<:bouton_enregistrer:>" />
+	</p>
+</div></form>]
+</div>

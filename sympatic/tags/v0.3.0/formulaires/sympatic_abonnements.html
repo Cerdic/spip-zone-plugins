@@ -1,0 +1,22 @@
+<div class="formulaire_spip formulaire_editer formulaire_sympatic_abonnements[_(#ENV{id_auteur})]">
+<!-- <br class='bugajaxie' /> -->
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[(#ENV{editable})
+<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<li class="fieldset">
+		<fieldset>
+			<h3 class="legend"><:sympatic:legend_listes:></h3>
+			<ul>
+				[(#INCLURE{fond=formulaires/inc-sympatic_listes_abonne,id_auteur})]
+			</ul>
+		</fieldset>
+		</li>
+	</ul>
+	<p class="boutons">
+		<input type="submit" class="submit" name="valider" value="<:bouton_enregistrer:>" />
+	</p>
+</div></form>]
+</div>
