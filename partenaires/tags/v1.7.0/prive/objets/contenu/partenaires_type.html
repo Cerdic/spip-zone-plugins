@@ -1,0 +1,13 @@
+<BOUCLE_partenaires_type(PARTENAIRES_TYPES){id_type}>
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+    <div class='label'><:partenaires_type:label_titre:> : </div>
+    <div dir='#LANG_DIR' class='#EDIT{titre} titre'>(#TITRE)</div>
+</div>]
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+    <div class='label'><:partenaires_type:label_descriptif:> : </div>
+    <div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>(#DESCRIPTIF|image_reduire{500,0})</div>
+</div>]
+
+</BOUCLE_partenaires_type>

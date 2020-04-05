@@ -1,0 +1,9 @@
+<h1 class="grostitre"><:partenaire:titre_page_partenaires_page:></h1>
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/partenaires, par=nom, env, ajax, sinon=<:partenaire:info_aucun_partenaire:>}>
+
+[(#AUTORISER{creer,partenaire})
+	[(#URL_ECRIRE{partenaire_edit,new=oui}|icone_verticale{<:partenaire:icone_creer_partenaire:>,partenaire,new,right})]
+]

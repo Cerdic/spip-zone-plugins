@@ -1,0 +1,13 @@
+<BOUCLE_partenaire(PARTENAIRES){id_partenaire}>
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+    <div class='label'><:partenaire:label_descriptif:> : </div>
+    <div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>(#DESCRIPTIF|image_reduire{500,0})</div>
+</div>]
+
+[<div class="champ contenu_url_site[ (#URL_SITE*|strlen|?{'',vide})]">
+    <div class="label"><:partenaire:label_url_site:> : </div>
+    <div dir='#LANG_DIR' class='#EDIT{url_site} url_site'><a href="#URL_SITE" class="spip_out">(#URL_SITE)</a></div>
+</div>]
+
+</BOUCLE_partenaire>

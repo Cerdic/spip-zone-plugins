@@ -1,0 +1,30 @@
+<paquet
+	prefix="partenaires"
+	categorie="divers"
+	version="1.7.0"
+	etat="dev"
+	compatibilite="[3.0.5;3.2.*]"
+	logo="prive/themes/spip/images/partenaires-64.png"
+	documentation=""
+	schema="1.5.3"
+>
+	<nom>Partenaires</nom>
+
+	<auteur>Teddy Payet</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="saisies" compatibilite="[1.42.11;]" />
+
+	<pipeline nom="autoriser" inclure="partenaires_autorisations.php" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/partenaires.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/partenaires.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/partenaires.php" />
+	<pipeline nom="affiche_milieu" inclure="partenaires_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="partenaires_pipelines.php" />
+
+	<menu nom="partenaires" titre="partenaire:titre_partenaires" parent="menu_edition" icone="images/partenaire-16.png" action="partenaires" />
+	<menu nom="partenaire_creer" titre="partenaire:icone_creer_partenaire" parent="outils_rapides" icone="images/partenaire-new-16.png" action="partenaire_edit" parametres="new=oui" />
+	<menu nom="partenaires_types" titre="partenaires_type:titre_partenaires_types" parent="menu_edition" icone="images/partenaires_type-16.png" action="partenaires_types" />
+	<menu nom="partenaires_type_creer" titre="partenaires_type:icone_creer_partenaires_type" parent="outils_rapides" icone="images/partenaires_type-new-16.png" action="partenaires_type_edit" parametres="new=oui" />
+</paquet>

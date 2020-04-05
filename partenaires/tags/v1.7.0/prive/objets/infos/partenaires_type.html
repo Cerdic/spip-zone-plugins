@@ -1,0 +1,7 @@
+<BOUCLE_partenaires_type(PARTENAIRES_TYPES){id_type=#ENV{id}}>
+<div class='infos'>
+[(#SET{texte_objet,<:partenaires_type:titre_partenaires_type:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_TYPE</p></div>
+
+</div>
+</BOUCLE_partenaires_type>

@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,partenaire,#ID_PARTENAIRE}|sinon_interdire_acces)]
+<BOUCLE_partenaire(PARTENAIRES){id_partenaire}{si #ENV{exec}|=={partenaire}}{statut?}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,partenaire,#ID_PARTENAIRE})
+		[(#ID_PARTENAIRE|afficher_qui_edite{partenaire}|non)
+			[(#URL_ECRIRE{partenaire_edit,id_partenaire=#ID_PARTENAIRE}|icone_verticale{<:partenaire:icone_modifier_partenaire:>,partenaire,edit,right ajax preload})]
+		]
+		[(#ID_PARTENAIRE|afficher_qui_edite{partenaire}|oui)
+			[(#URL_ECRIRE{partenaire_edit,id_partenaire=#ID_PARTENAIRE}|icone_verticale{#ID_PARTENAIRE|afficher_qui_edite{partenaire},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#NOM|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{partenaire-24.png}|balise_img{partenaire,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{partenaire,#ID_PARTENAIRE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/partenaire,id=#ID_PARTENAIRE,id_partenaire=#ID_PARTENAIRE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,partenaire,#ID_PARTENAIRE})
+	[(#ID_PARTENAIRE|afficher_qui_edite{partenaire}|non)
+		[(#URL_ECRIRE{partenaire_edit,id_partenaire=#ID_PARTENAIRE}|icone_verticale{<:partenaire:icone_modifier_partenaire:>,partenaire,edit,right ajax preload})]
+	]
+	[(#ID_PARTENAIRE|afficher_qui_edite{partenaire}|oui)
+		[(#URL_ECRIRE{partenaire_edit,id_partenaire=#ID_PARTENAIRE}|icone_verticale{#ID_PARTENAIRE|afficher_qui_edite{partenaire},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,partenaire,id,#ID_PARTENAIRE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_partenaire>
+[(#ENV**{exec}|=={partenaire_edit}|?{#INCLURE{fond=prive/squelettes/contenu/partenaire_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_partenaire>
