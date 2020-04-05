@@ -1,0 +1,6 @@
+<!-- formulaire de saisie de l'URL openid dans la fiche auteur -->
+<div class="editer editer_openid[ (#ENV**{erreurs}|table_valeur{openid}|oui)erreur]">
+	<label for="openid"><:openid:openid:></label>
+	[<span class='erreur_message'>(#ENV*{erreurs}|table_valeur{openid})</span>]
+	<input type='text' name='openid' id='openid' class='text' value="[(#ENV*{openid})]" />
+</div>

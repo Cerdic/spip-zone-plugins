@@ -1,0 +1,50 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 inc-inscription-openid
+  Distribue sous licence GPL
+
+]
+<div class="openid_openid">
+	<a id="bouton_insc_openid" href="#" onclick="insc_with_openid(true);return false;"><img src="#CHEMIN{images/openid_badge.png}" width="71" height="21" alt="<:openid:form_forum_openid|attribut_html:>" /></a>
+	<a id="bouton_insc_conv" href="#" onclick="insc_with_openid(false);return false;">Retour</a>
+</div>
+<div class="editer-groupe">
+	<div class='editer saisie_url_openid obligatoire[ (#ENV*{erreurs}|table_valeur{url_openid}|oui)erreur]'>
+		<label for="url_openid"><:openid:form_pet_votre_openid:></label>[
+		<span class="erreur_message">(#ENV*{erreurs}|table_valeur{url_openid})</span>
+		]<input type="text" class="text" name="url_openid" id="url_openid" value="#ENV*{url_openid}" size="30" />
+		<input type="hidden" name="openid" value="#ENV*{openid}" />
+	</div>
+</div>
+[<div class="openid"><img src="#CHEMIN{images/openid-16.png}" width="16" height="16" />(#ENV*{openid})</div>]
+<script type="text/javascript">
+	function initinscform(){
+		if (!jQuery('#url_openid').val())
+			insc_with_openid(false);
+		else if (!jQuery('#nom_inscription').val() && !jQuery('#mail_inscription').val())
+			insc_with_openid(true);
+		else
+			jQuery('#bouton_insc_conv, #bouton_insc_openid').hide();
+	}
+	function insc_with_openid(openid){
+		if (openid){
+			jQuery('#url_openid').parents('.editer-groupe').eq(0).show().siblings('.editer-groupe').hide();
+			jQuery('#bouton_insc_openid').hide();
+			jQuery('#bouton_insc_conv').show();
+		}
+		else{
+			jQuery('#nom_inscription').parents('.editer-groupe').eq(0).show().siblings('.editer-groupe').hide();
+			jQuery('#bouton_insc_openid').show();
+			jQuery('#bouton_insc_conv').hide();
+		}
+	}
+	jQuery(initinscform);
+	onAjaxLoad(initinscform);
+	[(#ENV{message_erreur}|non|et{#ENV{openid,''}|et{#ENV{nom_inscription,''}}|et{#ENV{mail_inscription,''}}})
+	jQuery(function(){setTimeout(
+		function(){jQuery('#formulaire_inscription input#EVAL{chr(91)}type=submit#EVAL{chr(93)}').get(0).click();},
+		10
+	)});
+	]
+</script>
