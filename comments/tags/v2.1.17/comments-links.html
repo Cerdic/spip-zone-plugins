@@ -1,0 +1,10 @@
+<B_comments-links>
+<div class="comments-links">
+	<h2><:derniers_commentaires:></h2>
+	<ul>
+		<BOUCLE_comments-links(FORUMS) {plat}{statut IN publie}{id_auteur !IN #ENV{exclure_auteur,-9}} {age<150}{!par date} {0,5}>
+        [<li[ class="(#COMPTEUR_BOUCLE|=={1}|oui)first"]>[(#NOM)&nbsp;: ]<a href="#URL_FORUM">(#TEXTE|couper{80})</a></li>]
+		</BOUCLE_comments-links>
+	</ul>
+</div>
+</B_comments-links>

@@ -1,0 +1,59 @@
+<plugin>
+	<nom>Comments</nom>
+	<slogan>Des commentaires, tout simplement</slogan>
+	<icon>comments.png</icon>
+	<auteur>[Tetue->http://spip.tetue.net]</auteur>
+	<licence>GNU/GPL - (c) 2009-2011</licence>
+	<version>2.1.17</version>
+	<etat>stable</etat>
+	<description>
+		<multi>
+			[fr]Affichage des messages en liste, fa&#231;on commentaires de blog, avec formulaire simplifi&#233;. Commentaires microformat&#233;s, nomenclature homog&#232;ne.
+			[en]Displaying messages in list, as blog comments, with simplified form. Microformated comments, uniform nomenclature.
+		</multi>
+	</description>
+	<lien>https://contrib.spip.net/?article3448</lien>
+	<prefix>comments</prefix>
+	
+	<options>comments_options.php</options>
+	<fonctions>comments_pipelines.php</fonctions>
+	
+	<pipeline>
+		<nom>pre_boucle</nom>
+		<inclure>comments_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>comments_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>comments_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_verifier</nom>
+		<inclure>comments_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_traiter</nom>
+		<inclure>comments_pipelines.php</inclure>
+	</pipeline>
+	<bouton id='comments_old' parent='configuration'>
+		<icone>prive/themes/spip/images/comments-20.png</icone>
+		<titre>comments:titre_comments</titre>
+		<url>configurer_comments</url>
+	</bouton>
+	<bouton id='comments' parent='bando_squelette'>
+		<icone>images/comments-16.png</icone>
+		<titre>comments:titre_comments</titre>
+		<url>configurer_comments</url>
+	</bouton>
+	
+	<chemin dir="" />
+	<chemin dir="feed/" />
+	
+	<necessite id="SPIP" version="[2.0.9;2.1.99]" />
+	<utilise id='Z' version="[;]" />
+	<categorie>communication</categorie>
+	<traduire gestionnaire="salvatore" module="comments" reference="fr" />
+</plugin>
