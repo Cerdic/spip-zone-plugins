@@ -1,0 +1,9 @@
+# fix #4235 calcul des sessionnements des caches
+
+Pour SPIP3.3 mettre à jour avec une release > r24214
+
+Pour SPIP 3.0 à SPIP3.2, passer à spip 3.3 
+OU bien, par ftp ou ssh
+- dans ecrire/inc il faut sauvegarder la version distribuée de utils.php en la renommant utils.php.sav 
+- puis il faut prendre dans cachefix/inc la version de utils.fix qui correspond à la branche de votre spip
+  et la copier dans ecrire/inc en la renommant utils.php
