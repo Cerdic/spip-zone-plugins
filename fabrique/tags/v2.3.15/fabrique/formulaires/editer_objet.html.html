@@ -1,0 +1,53 @@
+<div class='formulaire_spip formulaire_editer formulaire_\#FORM formulaire_\#FORM-\#ENV{#ID_OBJET,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(\#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(\#ENV*{message_erreur})</p>]
+
+	[(\#ENV{editable})
+	<form method="post" action="\#ENV{action}"><div>
+		\#ACTION_FORMULAIRE{\#ENV{action}}
+		<input type="hidden" name="#ID_OBJET" value="\#ENV{#ID_OBJET}" />
+		<div class="editer-groupe">[
+
+(#REM) On essaie de placer le formulaire de rubrique (s'il est demande)
+       apres le titre, s'il est saisissable, sinon en 2e position 
+
+][(#SET{titre,''})][(#REM)
+][(#SET{parent,[(#OBJET|champ_present{id_rubrique}|ou{#OBJET|option_presente{liaison_directe}})]})][(#REM)
+]<BOUCLE_un_titre(DATA){source tableau,#ENV{objet/champs}}{saisie != ''}
+	{champ=#ENV{objet/champ_titre}}
+	{si #ENV{objet/champ_titre}}>#SET{titre,' '}</BOUCLE_un_titre>
+<BOUCLE_saisies(DATA){source tableau,#ENV{objet/champs}}{saisie != ''}>[(#VALEUR|champ_option_presente{editable}|oui)
+			\[(\#SAISIE{#VALEUR{saisie}, #CHAMP,[(#VALEUR|champ_option_presente{obligatoire}|oui)obligatoire=oui,]
+				label=\<:#TYPE:[champ_(#CHAMP)_label]:>[,
+				explication=\<:#TYPE:[champ_(#CHAMP)_explication]:>(#EXPLICATION|oui)][,
+				(#SAISIE_OPTIONS|trim)]})\]][
+
+(#REM) On teste donc s'il faut placer le formulaire de parentée ici
+
+]<BOUCLE_si_parent(CONDITION){si #GET{parent}}{si (#GET{titre}|et{#ENV{objet/champ_titre}|=={#CHAMP}}|ou{#GET{titre}|non|et{#_saisies:COMPTEUR_BOUCLE|=={1}}})}>[(#REM)
+]<BOUCLE_si_rubrique(CONDITION){si #OBJET|champ_present{id_rubrique}}>
+
+			\[<div class="editer editer_rubrique\[ (\#ENV**{erreurs/id_parent}|oui)erreur\]">
+					<label for="id_parent">\<:titre_cadre_interieur_rubrique:></label>\[
+					<span class="erreur_message">(\#ENV**{erreurs/id_parent})</span>
+					\]
+					(\#VAL|chercher_rubrique{\#ENV{#ID_OBJET},\#ENV{id_parent},'#TYPE',\#ENV{id_secteur},'',0,form_simple})
+			</div>\]
+
+</BOUCLE_si_rubrique>[(#REM)
+
+]<BOUCLE_si_liaison_directe(CONDITION){si #OBJET|option_presente{liaison_directe}}>[(#REM)
+]
+
+			\[(\#SAISIE{[(#ENV{parent/objet})], [(#ENV{parent/id_objet})], obligatoire=oui,
+				label=\<:[(#ENV{parent/type})]:titre_[(#ENV{parent/type})]:>})\]
+</BOUCLE_si_liaison_directe>[(#REM)
+]</BOUCLE_si_parent>
+</BOUCLE_saisies>
+		</div>
+		[(\#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type="submit" class="submit" value="\<:bouton_enregistrer:>" /></p>
+	</div></form>
+	]
+</div>

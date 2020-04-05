@@ -1,0 +1,58 @@
+#PHP
+[(#INCLURE{fond=fabrique/entetes/php,env,
+	description=Utilisation de l'action supprimer pour l'objet #ENV{type},
+	package=Action})]
+
+
+
+/**
+ * Action pour supprimer un·e [(#ENV{type})]
+ *
+ * Vérifier l'autorisation avant d'appeler l'action.
+ *<BOUCLE_si_exemples(CONDITION){si #EXEMPLES}>
+ * @example
+ *     ```
+ *     [(\#AUTORISER{supprimer, #TYPE, \##MID_OBJET}|oui)
+ *         [(\#BOUTON_ACTION{\<:#TYPE:supprimer_#TYPE:>,
+ *             \#URL_ACTION_AUTEUR{supprimer_#TYPE, \##MID_OBJET, \#URL_ECRIRE{#LOBJET}},
+ *             danger, \<:#TYPE:confirmer_supprimer_#TYPE:>})]
+ *     ]
+ *     ```
+ *
+ * @example
+ *     ```
+ *     [(\#AUTORISER{supprimer, #TYPE, \##MID_OBJET}|oui)
+ *         [(\#BOUTON_ACTION{
+ *             [(\#CHEMIN_IMAGE{#TYPE-del-24.png}|balise_img{\<:#TYPE:supprimer_#TYPE:>}|concat{' ',\#VAL{\<:#TYPE:supprimer_#TYPE:>}|wrap{<b>}}|trim)],
+ *             \#URL_ACTION_AUTEUR{supprimer_#TYPE, \##MID_OBJET, \#URL_ECRIRE{#LOBJET}},
+ *             icone s24 horizontale danger #TYPE-del-24, \<:#TYPE:confirmer_supprimer_#TYPE:>})]
+ *     ]
+ *     ```
+ *
+ * @example
+ *     ```
+ *     if (autoriser('supprimer', '#TYPE', $#ID_OBJET)) {
+ *          $supprimer_#TYPE = charger_fonction('supprimer_#TYPE', 'action');
+ *          $supprimer_#TYPE($#ID_OBJET);
+ *     }
+ *     ```
+ *</BOUCLE_si_exemples>
+ * @param null|int $arg
+ *     Identifiant à supprimer.
+ *     En absence de id utilise l'argument de l'action sécurisée.
+**/
+function action_supprimer_#ENV{type}_dist($arg=null) {
+	if (is_null($arg)){
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
+	}
+	$arg = intval($arg);
+
+	// cas suppression
+	if ($arg) {
+		sql_delete('#TABLE',  '#ID_OBJET=' . sql_quote($arg));
+	}
+	else {
+		spip_log("action_supprimer_#ENV{type}_dist $arg pas compris");
+	}
+}

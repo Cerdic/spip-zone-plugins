@@ -1,0 +1,14 @@
+#PHP
+[(#INCLURE{fond=fabrique/entetes/php,env,
+	description=Fonctions utiles au plugin #ENV{paquet/nom},
+	package=Fonctions})]
+
+<BOUCLE_si_exemples(CONDITION){si #EXEMPLES}>
+/*
+ * Un fichier de fonctions permet de définir des éléments
+ * systématiquement chargés lors du calcul des squelettes.
+ *
+ * Il peut par exemple définir des filtres, critères, balises, …
+ * 
+ */
+</BOUCLE_si_exemples>

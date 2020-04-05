@@ -1,0 +1,78 @@
+[(#SET{titre,#ENV{objet/champ_titre}})][
+(#SET{mtitre,#GET{titre}|strtoupper})][
+(#SET{date,#ENV{objet/champ_date}})][
+(#SET{mdate,#GET{date}|strtoupper})][
+(#REM)
+
+
+
+]\[(\#AUTORISER{voir,#TYPE,\##MID_OBJET}|sinon_interdire_acces)\]
+\[(\#SET{url_voir,\#VAL{#TYPE}|objet_info{url_voir}})\]
+\[(\#SET{url_edit,\#VAL{#TYPE}|objet_info{url_edit}})\]
+\<BOUCLE_#TYPE\(#MOBJET\){#ID_OBJET}[(#OBJET|champ_present{statut}
+	|?{'{statut==.*}'})]{si \#ENV{exec}|=={\#GET{url_voir}}}>
+\[(\#BOITE_OUVRIR{\[
+	\[(\#AUTORISER{modifier,#TYPE,\##MID_OBJET})
+		\[(\##MID_OBJET|afficher_qui_edite{#TYPE}|non)
+			\[(\#URL_ECRIRE{\#GET{url_edit},#ID_OBJET=\##MID_OBJET}|icone_verticale{\<:#TYPE:icone_modifier_#TYPE:>,#TYPE,edit,right ajax preload})\]
+		\]
+		\[(\##MID_OBJET|afficher_qui_edite{#TYPE}|oui)
+			\[(\#URL_ECRIRE{\#GET{url_edit},#ID_OBJET=\##MID_OBJET}|icone_verticale{\##MID_OBJET|afficher_qui_edite{#TYPE},warning-24,'',right edition_deja ajax preload})\]
+		\]
+	\]
+
+	<h1>\[(\#RANG). \](\#[(#GET{mtitre})]|sinon{\<:info_sans_titre:>})\[(\#CHEMIN_IMAGE{#TYPE-24.png}|balise_img{#TYPE,cadre-icone})\]</h1>
+
+\],simple fiche_objet})\]
+
+<div class="ajax">
+	\#FORMULAIRE_DATER{#TYPE,\##MID_OBJET}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+\<INCLURE{fond=prive/objets/contenu/#TYPE,id=\##MID_OBJET,#ID_OBJET=\##MID_OBJET,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+\[(\#AUTORISER{modifier,#TYPE,\##MID_OBJET})
+	\[(\##MID_OBJET|afficher_qui_edite{#TYPE}|non)
+		\[(\#URL_ECRIRE{\#GET{url_edit},#ID_OBJET=\##MID_OBJET}|icone_verticale{\<:#TYPE:icone_modifier_#TYPE:>,#TYPE,edit,right ajax preload})\]
+	\]
+	\[(\##MID_OBJET|afficher_qui_edite{#TYPE}|oui)
+		\[(\#URL_ECRIRE{\#GET{url_edit},#ID_OBJET=\##MID_OBJET}|icone_verticale{\##MID_OBJET|afficher_qui_edite{#TYPE},warning-24,'',right edition_deja ajax preload})\]
+	\]
+\]
+<BOUCLE_afficher_liens(CONDITION){si #OBJET|option_presente{afficher_liens}}>
+<div class="nettoyeur"></div>
+<div class="liste">
+	\<BOUCLE_objetslies([(#TABLE)]_liens){#ID_OBJET}{0,1}><h3>\<:#TYPE:titre_objets_lies_#TYPE:></h3>\</BOUCLE_objetslies>
+
+	\<BOUCLE_listeobjets([(#TABLE)]_liens){#ID_OBJET}{fusion objet}{par objet}>
+		\#SET{table,\#OBJET|table_objet}
+		\[(\#SET{titre,\[\#OBJET:info_(\#GET{table})_liees_#TYPE\]})\]
+		\[(\#SET{liste,\#VAL{prive/objets/liste/\#GET{table}}|trouver_fond|?{\#GET{table},objets_lies_#TYPE}})\]
+		\<INCLURE{fond=prive/objets/liste/\#GET{liste},objet,#ID_OBJET,ajax,env} />
+	\</BOUCLE_listeobjets>
+</div>
+</BOUCLE_afficher_liens>[(#REM)
+]
+\#PIPELINE{afficher_complement_objet,\#ARRAY{args,\#ARRAY{type,#TYPE,id,\##MID_OBJET},data,'<div class="nettoyeur"></div>'}}
+
+\#BOITE_FERMER
+
+
+\#SET{enfants,''}
+\[(\#VAL{prive/objets/contenu/#TYPE-enfants}|trouver_fond|oui)
+	\[(\#SET{enfants,\[(\#INCLURE{fond=prive/objets/contenu/#TYPE-enfants,#ID_OBJET,env})\]})\]
+\]
+\[(\#PIPELINE{affiche_enfants,\[(\#ARRAY{args,\#ARRAY{exec,#TYPE,#ID_OBJET,\##MID_OBJET,objet,#TYPE,id_objet,\##MID_OBJET},data,\#GET{enfants}})\]})\]
+
+\[(\#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\\[CDATA\\\[*/reloadExecPage('\#ENV{exec}','\#navigation,\#chemin,\#extra');/*\\\]\\\]>*/</script>
+\]
+\</BOUCLE_#TYPE>
+\[(\#ENV**{exec}|=={\#GET{url_edit}}|?{\#INCLURE{fond=prive/squelettes/contenu/\#GET{url_edit},redirect='',env,retourajax=oui},\#REM|sinon_interdire_acces})\]
+\<//B_#TYPE>

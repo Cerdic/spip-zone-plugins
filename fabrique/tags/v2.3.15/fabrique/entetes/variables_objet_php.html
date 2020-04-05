@@ -1,0 +1,19 @@
+[(#REM) Ecrire quelques variables pour se simplifier la creation de squelettes SPIP/HTML des objets ]
+
+$prefixe = "[(#PREFIXE|trim)]";
+$mprefixe = strtoupper($titre);
+
+$titre = "[(#ENV{objet/champ_titre}|trim)]";
+$mtitre = strtoupper($titre);
+
+$date = "[(#ENV{objet/champ_date}|trim)]";
+$mdate = strtoupper($date);
+
+$id_objet = "[(#ENV{objet/id_objet})]";
+$mid_objet = strtoupper($id_objet);
+
+$objet = "[(#ENV{objet/objet})]";
+$mobjet = strtoupper($objet);
+
+$type = "[(#ENV{objet/type})]";
+$mtype = strtoupper($type);

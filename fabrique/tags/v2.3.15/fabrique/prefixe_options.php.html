@@ -1,0 +1,15 @@
+#PHP
+[(#INCLURE{fond=fabrique/entetes/php,env,
+	description=Options au chargement du plugin #ENV{paquet/nom},
+	package=Options})]
+
+<BOUCLE_si_exemples(CONDITION){si #EXEMPLES}>
+/*
+ * Un fichier d'options permet de définir des éléments
+ * systématiquement chargés à chaque hit sur SPIP.
+ *
+ * Il vaut donc mieux limiter au maximum son usage
+ * tout comme son volume !
+ * 
+ */
+</BOUCLE_si_exemples>
