@@ -1,0 +1,21 @@
+<B_liaison>
+<div class="formulaire_spip formulaire_a2a_changer_typeliaison">
+<form method='post' action='#ENV{action}'>
+#ACTION_FORMULAIRE{#ENV{action}}
+[<div class='erreur'><span class='erreur_message'>(#ENV{message_erreur})</span>]
+<select name="type_liaison">
+[(#CONFIG{a2a/type_obligatoire}|non)
+	<option value=''></option>
+]
+<BOUCLE_liaison(DATA){source tableau, #TYPES_LIAISONS}{par valeur}{si #EDITABLE}>
+	<option value="#CLE"[(#CLE|=={#ENV{type_liaison}}|oui) selected="selected"]>#VALEUR</option>
+</BOUCLE_liaison>
+</select>
+<input type='submit' name="save" class='submit' value='<:a2a:changer_type_liaison:>' />
+[</div>(#ENV{message_erreur}|oui)]
+</form>
+</div>
+</B_liaison>
+[(#ENV*{message_ok}|a2a_traduire_type_liaisons)]
+(<a href="[(#SELF|parametre_url{formulaire,oui}|parametre_url{type_liaison,#ENV*{message_ok}|sinon{' '}})]" class='ajax nohistory'><:a2a:changer_type_liaison:></a>)
+<//B_liaison>

@@ -1,0 +1,78 @@
+<div class="formulaire_spip formulaire_configurer_a2a" id="formulaire_configurer_a2a">
+<form method='post' action='#ENV{action}'>
+[(#ENV{message_ok}|?{
+	#SET{types_liaisons,#ENV{types_liaisons}|a2a_types_liaisons2array},
+	#ENV**{erreurs}|?{
+		#SET{types_liaisons,#ENV{types_liaisons}|a2a_types_liaisons2array},
+		#SET{types_liaisons,#ENV{types_liaisons}}
+	}}
+)]
+#ACTION_FORMULAIRE{#ENV{action}}
+<ul>
+	<B_types_liaisons_non_modifiables>
+	<li>
+		<p class='explication'><:a2a:types_liaisons_non_modifiables:></P>
+		<ul class='spip'>
+		<BOUCLE_types_liaisons_non_modifiables(DATA){source tableau,#EVAL{$GLOBALS['a2a_types_liaisons'];}}{par cle}>
+			<li>#CLE ([(#VALEUR|_T)])</li>
+		</BOUCLE_types_liaisons_non_modifiables>
+		</ul>
+	</li>
+	</B_types_liaisons_non_modifiables>
+	<li class='editer_types_liaisons editer[(#ENV**{erreurs}|table_valeur{sup_pb}|oui) erreur]'>
+		<label for="types_liaisons"><:a2a:types_liaisons:></label>
+		<p class="explication"><:a2a:explication_types_liaisons:></p>
+		<B_sup_pb>
+		<div class='erreur_message'>
+			<p><:a2a:sup_pb:></p>
+			<ul class='spip'>
+			<BOUCLE_sup_pb(DATA){source tableau, #ENV**{erreurs}|table_valeur{sup_pb}}>
+				<li>#CLE ([(#CLE|a2a_traduire_type_liaisons)])<:a2a:utilise_par_articles:> 
+					<B_sup_pb_art>
+					<ul class='spip'>
+					<BOUCLE_sup_pb_art(DATA){source tableau, #VALEUR}>
+						<li><a href="[(#URL_ECRIRE{article,id_article=#VALEUR|table_valeur{id_article}}|parametre_url{articles_lies_visibles,oui}|ancre_url{pave_a2a})]">#INFO_TITRE{article,#VALEUR|table_valeur{id_article}}</a></li>
+					</BOUCLE_sup_pb_art>
+					</ul>
+					<B_sup_pb_art>
+				</li>
+			</BOUCLE_sup_pb>
+			</ul>
+		</div>
+		</B_sup_pb>
+		<textarea name="types_liaisons" id='types_liaisons' row='10' cols='80'>
+<BOUCLE_types_liaisons(DATA){source tableau, #GET{types_liaisons}}{valeur!=''}{cle!=''}{par cle}{"
+"}>#CLE,#VALEUR</BOUCLE_types_liaisons></textarea>
+	</li>
+	<li class='editer_type_obligatoire editer[(#ENV**{erreurs}|table_valeur{ob_pb}|oui) erreur]'>
+		<label for='type_obligatoire'><:a2a:type_obligatoire:></label>
+		<p class='explication'><input type="checkbox" id="type_obligatoire"[ checked="checked"(#ENV{type_obligatoire}|oui)] name="type_obligatoire" /><:a2a:explication_type_obligatoire:></p>
+		<B_ob_pb>
+		<div class='erreur_message'>
+			<p><:a2a:ob_pb:></p>
+			<ul class='spip'> 
+			<BOUCLE_ob_pb(DATA){source tableau, #ENV**{erreurs}|table_valeur{ob_pb}}>
+				<li><a href="[(#URL_ECRIRE{article,id_article=#VALEUR|table_valeur{id_article}}|parametre_url{articles_lies_visibles,oui}|ancre_url{pave_a2a})]">#INFO_TITRE{article,#VALEUR|table_valeur{id_article}}</a></li>
+			</BOUCLE_ob_pb>
+			</ul>
+		</div>
+		</B_ob_pb>
+	</li>
+	<li class="editer_types_differents editer[(#ENV**{erreurs}|table_valeur{td_pb}|oui) erreur]">
+		<label for='types_differents'><:a2a:types_differents:></label>
+		<p class='explication'><input type="checkbox" id="types_differents"[ checked="checked"(#ENV{types_differents}|oui)] name="types_differents" /><:a2a:explication_types_differents:></p>
+		<B_td_pb>
+		<div class='erreur_message'>
+			<p><:a2a:td_pb:></p>
+			<ul class='spip'>
+			<BOUCLE_td_pb(DATA){source tableau,#ENV**{erreurs}|table_valeur{td_pb}}>
+				<li><a href="[(#URL_ECRIRE{article,id_article=#VALEUR|table_valeur{id_article}}|parametre_url{articles_lies_visibles,oui}|ancre_url{pave_a2a})]">#INFO_TITRE{article,#VALEUR|table_valeur{id_article}}</a> ([(#INFO_TITRE{article,#VALEUR|table_valeur{id_article_lie}})] : [(#VALEUR|table_valeur{liaison_total})])</li>
+			</BOUCLE_td_pb>
+			</ul>
+		</B_td_pb>
+	</li>
+</ul>
+<p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>
+</form>
+</div>
+

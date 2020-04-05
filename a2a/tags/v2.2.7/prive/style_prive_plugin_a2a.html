@@ -1,0 +1,51 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+.liste-objets.articles_lies .caption { padding-left: 30px; background-image:url(#CHEMIN_IMAGE{a2a-22.png}); }
+#pave_a2a { margin: 0 -10px 0 -10px; }
+#pave_a2a .liste-objets { border: none; margin: 0; }
+#pave_a2a .liste-objets table { margin: 1em auto 0; }
+#pave_a2a .toggle_box_link,
+#pave_a2a_bloc .toggle_box_link { position: absolute; right: 5px; top: 5px; }
+
+#type_recherche_a2a { margin: 0; }
+.formulaire_reponses_a2a .resultats li { padding: 5px 10px; border-bottom: 1px solid #GET{claire}; }
+.formulaire_reponses_a2a .resultats li .titre,
+.formulaire_reponses_a2a .resultats li .actions { display: block; }
+.formulaire_reponses_a2a .resultats li .actions { margin-top: 4px; text-align: #GET{right}; }
+
+.a2a-rang_moins button,
+.a2a-rang_plus button,
+.a2a-supprimer_le_lien button { display: inline; width: 16px; height: 16px; border: 0; background-color: transparent; color: transparent; }
+.a2a-rang_plus button,button.a2a-rang_plus { background : none ; border:none ; }
+.a2a-rang_moins button,button.a2a-rang_moins { background : none ; border:none ;}
+.a2a-supprimer_le_lien button,button.a2a-supprimer_le_lien { background : none ; border:none ; }
+.formulaire_a2a_changer_typeliaison,
+.formulaire_ajoute_a2a { border: 0; padding: 0; margin: 0; background-color: transparent; }
+.formulaire_a2a_changer_typeliaison select,
+.formulaire_ajoute_a2a select { width: auto; }
+
+#pave_a2a_bloc { padding: 10px 5px; }
+#pave_a2a_bloc .formulaire_ajoute_a2a { border: 0; }
+
+#pave_a2a_31 .toggle_box_link a { color: #444; }
+#pave_a2a_31 .formulaire_spip { margin: 0.5em 0; padding: 0; }

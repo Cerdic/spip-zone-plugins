@@ -1,0 +1,122 @@
+<?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+function action_a2a_dist(){
+
+	$securiser_action = charger_fonction('securiser_action','inc');
+	$args = $securiser_action();
+
+	list($action, $id_article_cible, $id_article_source, $type_liaison, $type) = explode('/',$args);
+
+	if (!$action_a2a = charger_fonction('a2a_'.$action,'action')) {
+		include_spip('inc/minipres');
+		minipres(_L('Action a2a_'.$action.' introuvable'));
+	}
+
+	$action_a2a($id_article_cible, $id_article_source, $type_liaison, $type);
+
+	include_spip('inc/headers');
+	if ($redirect = _request('redirect')) {
+		redirige_par_entete(str_replace('&amp;', '&', $redirect));
+	}
+	redirige_par_entete(generer_url_ecrire("articles", "id_article=".$id_article_source, "&"));
+}
+
+function action_a2a_lier_article_dist($id_article_cible, $id_article_source, $type_liaison='', $type=null){
+	include_spip('inc/config');
+	//on verifie que cet article n'est pas deja lie
+	if (
+		// Si on autorise pas les type différents, vérifier qu'il n'y pas deja de liaisons, quelque soit le type
+		!((!lire_config('a2a/types_differents')
+		and
+		sql_countsel('spip_articles_lies', array(
+			'id_article=' . sql_quote($id_article_source),
+			'id_article_lie=' . sql_quote($id_article_cible)))
+		))
+
+		and
+		// Dans tous les cas, vérifier qu'il n'y a pas une liaison de ce type, pour ne pas avoir d'entrée dupliquée (notamment sqlite, qui les gère pas automatiquement ce genre de contrainte)
+		(!sql_countsel('spip_articles_lies', array(
+			'id_article=' . sql_quote($id_article_source),
+			'id_article_lie=' . sql_quote($id_article_cible),'type_liaison='.sql_quote($type_liaison)))
+		)
+	){
+
+		//on recupere le rang le plus haut pour definir celui de l'article a lier
+		$rang = sql_getfetsel('MAX(rang)', 'spip_articles_lies', 'id_article='. sql_quote($id_article_source));
+		//on ajoute le lien vers l'article
+
+		sql_insertq('spip_articles_lies', array(
+			'id_article' => $id_article_source,
+			'id_article_lie' => $id_article_cible,
+			'rang' => ++$rang,
+			'type_liaison' => $type_liaison,
+		));
+	}
+	if ($type == 'both') {//Lier dans l'autre sens, si demandé
+		action_a2a_lier_article_dist($id_article_source, $id_article_cible, $type_liaison);
+	} else {
+		//invalider les caches
+		include_spip('inc/invalideur');
+		suivre_invalideur("id='id_article/$id_article_source'");
+	}
+	return true;
+}
+
+function action_a2a_supprimer_lien_dist($id_article_cible, $id_article, $type_liaison='', $type=null){
+	include_spip('inc/utils');
+
+	$rang = sql_getfetsel('rang', 'spip_articles_lies', 'id_article=' . sql_quote($id_article) . ' AND id_article_lie=' . sql_quote($id_article_cible) . ' AND type_liaison=' . sql_quote($type_liaison));
+
+	// on recupere les articles lies dont le rang est superieur a celui a supprimer
+	$res = sql_select('*', 'spip_articles_lies', 'id_article=' . sql_quote($id_article) . ' AND rang>' . sql_quote($rang));
+	//on boucle sur le resultat et on met a jour le rang des articles lies avant suppression
+	while ($r = sql_fetch($res)) {
+		sql_update('spip_articles_lies', array('rang' => sql_quote(--$r["rang"])), 'id_article=' . sql_quote($r["id_article"]) . ' AND id_article_lie=' . sql_quote($r["id_article_lie"]));
+	}
+	sql_delete('spip_articles_lies',  array(
+		'id_article = ' . sql_quote($id_article),
+		'id_article_lie = ' . sql_quote($id_article_cible),
+		'type_liaison=' . sql_quote($type_liaison)
+	));
+	if ($type == 'both') {
+		action_a2a_supprimer_lien_dist($id_article, $id_article_cible, $type_liaison='');
+	} else {
+		// invalider les caches
+		include_spip('inc/invalideur');
+		suivre_invalideur("id='id_article/$id_article'");
+	}
+	return true;
+}
+
+
+function action_a2a_modifier_rang_dist($id_article_cible, $id_article, $type_liaison, $type_modif){
+
+	if (!$type_modif){
+		list($type_modif,$type_liaison)=array($type_liaison,$type_modif);
+	}
+
+	if ($type_modif == "plus") {
+		//on recupere le rang de l'article à modifier
+		$rang = sql_getfetsel('rang', 'spip_articles_lies', 'id_article=' . sql_quote($id_article) . ' AND id_article_lie=' . sql_quote($id_article_cible) . ' AND type_liaison=' . sql_quote($type_liaison));
+
+		//on intervertit le rang de l'article suivant
+		sql_update('spip_articles_lies', array('rang' => $rang), 'id_article=' . sql_quote($id_article) . ' AND rang=' . sql_quote($rang + 1));
+		//on met à jour le rang de l'article à modifier
+		sql_update('spip_articles_lies', array('rang' => ++$rang), 'id_article=' . sql_quote($id_article) . ' AND id_article_lie=' . sql_quote($id_article_cible) . ' AND type_liaison=' . sql_quote($type_liaison));
+
+	}
+	if ($type_modif == "moins") {
+		$rang = sql_getfetsel('rang', 'spip_articles_lies', 'id_article=' . sql_quote($id_article) . ' AND id_article_lie=' . sql_quote($id_article_cible) . ' AND type_liaison=' . sql_quote($type_liaison));
+		//on intervertit le rang de l'article précédent
+		sql_update('spip_articles_lies', array('rang' => $rang), 'id_article=' . sql_quote($id_article) . ' AND rang=' . sql_quote($rang - 1));
+		//on met à jour le rang de l'article à modifier
+		sql_update('spip_articles_lies', array('rang' => --$rang), 'id_article=' . sql_quote($id_article) . ' AND id_article_lie=' . sql_quote($id_article_cible) . ' AND type_liaison=' . sql_quote($type_liaison));
+	}
+	// invalider les caches
+	include_spip('inc/invalideur');
+	suivre_invalideur("id='id_article/$id_article'");
+	return true;
+}
+

@@ -1,0 +1,20 @@
+<div class="formulaire_spip formulaire_navigateur_a2a ajax" id="formulaire_navigateur_a2a">
+#ENV{type_obligatoire}
+<form method='post' action='#ENV{action}#formulaire_recherche_a2a'>
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div class="cadre_padding">
+			<p class="explication"><:a2a:explication_navigateur:></p>
+			<INCLURE{fond=formulaires/selecteur/articles}{selected=#ENV{parents}}{name=parents}{articles=1}>
+		</div>
+		[<p class='erreur_message erreur'>(#ENV**{message_erreur})</p>]
+		<div>
+		<INCLURE{fond=formulaires/inclure/types_liaisons}{selected=#ENV{type_liaison}} />
+		</div>
+		<p class='boutons'>
+			<input type="submit" name="uni" value="<:a2a:lier_cet_article:>" />
+			<input type="submit" name="both" value="<:a2a:lier_cet_article_deux_cotes:>" />
+		</p>
+	</div>
+</form>
+</div>

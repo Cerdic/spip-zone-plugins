@@ -1,0 +1,13 @@
+<B_Recherche>
+<div class='formulaire_spip formulaire_reponses_a2a'>
+	<ul class="resultats">
+<BOUCLE_Recherche(ARTICLES){statut IN prop,prepa,publie}{titre LIKE %(#ENV{recherche})%}{!id_article IN #ENV{exclure}}{!lang_select}>
+	[<li>
+		<div class='ajax'>(#FORMULAIRE_AJOUTE_A2A{#ID_ARTICLE_ORIG,#ID_ARTICLE})</div>
+	</li>]
+</BOUCLE_Recherche>
+	</ul>
+</div>
+</B_Recherche>
+	[(#ENV*{message_erreur})]
+<//B_Recherche>

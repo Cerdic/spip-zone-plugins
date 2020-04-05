@@ -1,0 +1,59 @@
+[(#SET{defaut_tri,#ARRAY{
+	date_debut,#ENV{date_sens,1},
+	titre,1,
+	points,-1
+}})
+]<B_liste_articles_lies>
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies articles_lies">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{a2a:info_un_article_lie,a2a:info_nombre_articles_lies}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='rang' scope='col'>[(#TRI{rang,<:a2a:rang:>,ajax})]</th>
+			[(#TYPES_LIAISONS|types_liaisons_existent|oui)<th class='type_liaison' scope='col'><:a2a:type_liaison:></th>]
+			<th class='titre principale' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<BOUCLE_autorise_th(CONDITION){si #AUTORISER{modifier,article,#ID_ARTICLE_ORIG}|oui}> 
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			</BOUCLE_autorise_th>
+		</tr>
+	</thead>
+	<tbody>
+	
+	<BOUCLE_liste_articles_lies(ARTICLES_LIES){id_article = #ENV{id_article_orig}}{pagination #ENV{nb,10}}{where?}{tri #ENV{par,rang},#GET{defaut_tri}}{pagination #ENV{nb,15}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE)]">
+			<BOUCLE_les_articles_lies(ARTICLES){id_article = #ID_ARTICLE_LIE}{!lang_select}{statut==.*}>
+			<td class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
+			<td class='rang'>#CHAMP_SQL{RANG}</td>
+			[(#TYPES_LIAISONS|types_liaisons_existent|oui)
+			<td class='type_liaison'>[(#AUTORISER{modifier,article,#ID_ARTICLE_ORIG}|oui)
+				<INCLURE{fond=prive/inclure/a2a_changer_typeliaisons,id_article_lie,id_article,formulaire,type_liaison}{ajax}>]
+				[(#AUTORISER{modifier,article,#ID_ARTICLE_ORIG}|non)
+					[(#TYPE_LIAISON|a2a_traduire_type_liaisons)]
+				]
+			</td>]
+			<td><a href="[(#URL_ECRIRE{article,id_article=#ID_ARTICLE})]">#TITRE (#ID_ARTICLE)</a></td>
+			<BOUCLE_autorise(CONDITION){si #AUTORISER{modifier,article,#ID_ARTICLE_ORIG}|oui}>
+				<td title="<:a2a:rang_moins:>">[(#_liste_articles_lies:COMPTEUR_BOUCLE|>{1}|oui)[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{a2a-rang_moins.png}|balise_img{<:a2a:rang_moins:>})],#URL_ACTION_AUTEUR{a2a,modifier_rang/#ID_ARTICLE/#ID_ARTICLE_ORIG/#TYPE_LIAISON/moins,#SELF},ajax a2a-rang_moins button link})]]</td>
+				<td title="<:a2a:rang_plus:>">[(#_liste_articles_lies:COMPTEUR_BOUCLE|<{#_liste_articles_lies:GRAND_TOTAL}|oui)[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{a2a-rang_plus.png}|balise_img{<:a2a:rang_plus:>})],#URL_ACTION_AUTEUR{a2a,modifier_rang/#ID_ARTICLE/#ID_ARTICLE_ORIG/#TYPE_LIAISON/plus,#SELF},ajax a2a-rang_plus button link})]]</td>
+				[<td title="<:a2a:supprimer_le_lien:>">(#BOUTON_ACTION{[(#CHEMIN_IMAGE{a2a-supprimer_le_lien.png}|balise_img{<:a2a:supprimer_le_lien:>})] ,#URL_ACTION_AUTEUR{a2a,supprimer_lien/#ID_ARTICLE/#ID_ARTICLE_ORIG/#TYPE_LIAISON,#SELF},ajax a2a-supprimer_le_lien button link})</td>]
+				<BOUCLE_lies_both(ARTICLES_LIES){id_article_lie=#_les_articles_lies:ID_ARTICLE_ORIG}{id_article=#ID_ARTICLE_LIE}{type_liaison=#TYPE_LIAISON}>
+					[<td>(#BOUTON_ACTION{<:a2a:supprimer_le_lien_deux_cotes:>,#URL_ACTION_AUTEUR{a2a,supprimer_lien/#ID_ARTICLE/#ID_ARTICLE_ORIG/#TYPE_LIAISON/both,#SELF},ajax button link})</td>]
+				</BOUCLE_lies_both>
+				<td>&nbsp;</td>
+				<//B_lies_both>
+			</BOUCLE_autorise>
+			</BOUCLE_les_articles_lies>
+		</tr>
+	</BOUCLE_liste_articles_lies>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_articles_lies>[
+<div class="liste-objets liste-objets-lies articles_lies caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_articles_lies>

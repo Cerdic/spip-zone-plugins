@@ -1,0 +1,34 @@
+#SET{deja_relie,''}
+<BOUCLE_deja_relie(ARTICLES_LIES){id_article=#ID_ARTICLE_ORIG}{id_article_lie=#ID_ARTICLE_DEST}/>
+[(#CONFIG{a2a/type_obligatoire}|?{
+	[(#TOTAL_BOUCLE|plus{1}|>{#TYPES_LIAISONS|count}|oui)#SET{deja_relie,oui}],
+	[(#TOTAL_BOUCLE|>{#TYPES_LIAISONS|count}|oui)#SET{deja_relie,oui}]
+})]
+<//B_deja_relie>
+[(#GET{deja_relie}|non)
+<div class="formulaire_spip formulaire_ajoute_a2a" id="formulaire_ajoute_a2a_#ENV{id_article_dest}_#ENV{id_article_orig}">
+<form method='post' action='#ENV{action}#formulaire_ajoute_a2a'>
+<script type="text/javascript">
+(function($){
+	$(function(){
+		$('#formulaire_ajoute_a2a_#ENV{id_article_dest}_#ENV{id_article_orig}').submit(function(e){
+			e.preventDefault();
+			$(this).ajaxSubmit({success: function(){
+				ajaxReload('bloca2a')}
+			});
+		});
+	})
+})(jQuery);
+</script>
+#ACTION_FORMULAIRE{#ENV{action}}
+<div class='content clearfix'>
+	[<strong class="titre">(#INFO_TITRE{article,#ID_ARTICLE_DEST})</strong>]
+	<div class="actions">
+		<a href="#URL_ARTICLE{#ID_ARTICLE_DEST}"><:a2a:voir:></a>
+		<INCLURE{fond=formulaires/inclure/types_liaisons}{message_erreur}{id_article_orig}{id_article_dest} />
+		<button name="lier" value="lier" type="submit"><:a2a:lier_cet_article:></button>
+		<button name="lier2" value="lier2" type="submit"><:a2a:lier_cet_article_deux_cotes:></button>
+	</div>
+</div>
+</form>
+</div>]
