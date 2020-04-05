@@ -1,0 +1,25 @@
+<paquet
+	prefix="xray"
+	categorie="outil"
+	version="0.25.0"
+	etat="test"
+	compatibilite="[2.1.0;3.3.*]"
+	logo="images/xray-32.png"
+	documentation="https://contrib.spip.net/4946"
+>
+	<nom>XRay</nom>
+	<!-- Explorer les caches APC des squelettes SPIP pour les comprendre et les optimiser -->
+
+	<auteur lien="https://contrib.spip.net/JLuc">JLuc</auteur>
+	<licence lien="http://www.php.net/license/3_01.txt">PHP</licence>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+	<credit lien="mailto:beckerr@php.net">Ralf Becker</credit>
+	<credit lien="mailto:rasmus@php.net">Rasmus Lerdorf</credit>
+	<credit lien="mailto:ilia@prohost.org">Ilia Alshanetsky</credit>
+	<credit lien="https://thenounproject.com/term/radiology-android/101572/">Inspiration pour l'icone : Radiology Android By Hadi Davodpour, Licence Creative Commons</credit>
+
+	<menu nom="xray" titre="XRay" parent="menu_squelette" icone="images/prive-xray-16.jpg" action="xray" />
+	<necessite nom="memoization"/>
+	<utilise nom="macrosession" />
+	<utilise nom='cachelab'  compatibilite="[0.99.0;["  />
+</paquet>

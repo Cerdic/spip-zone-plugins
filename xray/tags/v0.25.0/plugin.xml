@@ -1,0 +1,30 @@
+<plugin>
+	<nom>Navigateur de cache APC avec mémoization</nom>
+	<slogan>Explorer les caches APC des squelettes SPIP, les filtrer et optimiser</slogan>
+	<icon>images/xray-32.png</icon>
+	<auteur>JLuc</auteur>
+	<auteur>Ralf Becker</auteur>
+	<auteur>Rasmus Lerdorf</auteur>
+	<auteur>Ilia Alshanetsky</auteur>
+	<licence>GPL</licence>
+	<licence>PHP</licence>
+	<version>0.25.0</version>
+	<etat>test</etat>
+	<description>
+	Explorer les caches des squelettes SPIP avec memoization APC pour les comprendre et les optimiser
+	</description>
+	<lien>http://contrib.spip.net/4946</lien>
+	<prefix>xray</prefix>
+
+	<bouton id="xray" parent='bando_squelette'>
+		<icone>images/xray-32.png</icone>
+		<titre>Xray</titre>
+		<url>xray</url> 
+	</bouton>
+	<necessite id="SPIP" version="[2.1.0;3.3.99]" />
+	<necessite id="memoization" />
+	<utilise id="macrosession" />
+	<utilise id="cachelab" />
+	<categorie>outil</categorie>
+	<options>xray_options.php</options>
+</plugin>
