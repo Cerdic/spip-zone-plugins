@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/chatbox_messages, par=message, env, ajax, sinon=<:chatbox_message:info_aucun_chatbox_message:>}>
+
+[(#AUTORISER{creer,chatbox_message})
+	[(#URL_ECRIRE{chatbox_message_edit,new=oui}|icone_verticale{<:chatbox_message:icone_creer_chatbox_message:>,chatbox_message,new,right})]
+]

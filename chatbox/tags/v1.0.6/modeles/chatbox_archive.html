@@ -1,0 +1,18 @@
+[(#CACHE{0})]
+<B_chat_box_archive>
+    [(#ANCRE_PAGINATION)]
+    [(#PAGINATION)]
+    <ul>
+    <BOUCLE_chat_box_archive(CHATBOX_MESSAGES){lang}{pagination}{par id_chatbox_message}{inverse}>
+	<li>
+	    <br/>
+	    <p>
+		[(#ID_AUTEUR|afficher_avatar{'',50})&nbsp;][(#ID_AUTEUR|colore_user{#LANG})],&nbsp;<span class="gris"><:chatbox:le:>&nbsp;[(#DATE|affdate)]&nbsp;<:a:>&nbsp;[(#DATE|affdate{"H:i"})]</span>
+	    </p>
+	    <div class="#EDIT{message}" style="margin-left: 15px;">[(#MESSAGE)]</div>
+	</li>
+    </BOUCLE_chat_box_archive>
+    </ul>
+    [(#PAGINATION)]
+
+</B_chat_box_archive>

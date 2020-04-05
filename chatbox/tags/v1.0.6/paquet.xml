@@ -1,0 +1,32 @@
+<paquet
+	prefix="chatbox"
+	categorie="communication"
+	version="1.0.6"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/chatbox-64.png"
+	documentation="https://contrib.spip.net/4574"
+	schema="1.0.0" 
+>
+	<!--
+		Paquet généré le 2013-02-09 09:22:51
+		(Vous pouvez bien entendu supprimer ces commentaires) 
+	-->
+
+	<nom>Chatbox</nom>
+
+	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs --> 
+	<auteur lien='http://www.root-me.org'>g0uZ</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="saisies" compatibilite="[3.23.2;]" /> 
+
+	<pipeline nom="autoriser" inclure="chatbox_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/chatbox.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/chatbox.php" /> 
+
+	<menu nom="chatbox_messages" titre="chatbox_message:titre_chatbox_messages" parent="menu_edition" icone="images/chatbox_message-16.png" action="chatbox_messages" /> 
+	<menu nom="chatbox_message_creer" titre="chatbox_message:icone_creer_chatbox_message" parent="outils_rapides" icone="images/chatbox_message-new-16.png" action="chatbox_message_edit" parametres="new=oui" /> 
+</paquet>
