@@ -1,0 +1,8 @@
+/* --------------------------------------------------------------
+
+   knacsspip.css
+   pour enlever le style trop "personnalisés" de spip
+
+-------------------------------------------------------------- */
+body {background: #fff;}
+input.text,textarea {background-color: #fff;border: 1px solid #B2B2B2;}
