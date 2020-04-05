@@ -1,0 +1,56 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+  <h3 class="titrem"><:logos_roles:cfg_titre_parametrages:></h3>
+
+  [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+  [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+  <form method="post" action="#ENV{action}">
+	  <div>
+		#ACTION_FORMULAIRE
+
+		[(#GENERER_SAISIES{#ENV{_saisies}})]
+
+		  <input type="hidden" name="_meta_casier" value="logos_roles" />
+		  <p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	  </div>
+	</form>
+</div>
+
+<script type="text/javascript">
+// Pour alléger le formulaire, on masque les explications, qu'on pourra alors
+// déplier via un bouton d'aide qu'on ajoute.
+$(function () {
+    "use strict";
+
+    // On parcourt les saisies que l'on va traiter
+    $('.formulaire_configurer_logos_roles')
+        .find('.saisie_slug, .saisie_titre')
+        .each(function (index, saisie) {
+            var $saisie = $(saisie);
+
+            // Ajouter les boutons d'aide
+            $saisie.find('> label')
+                .append('<a class="aide" href="#"><img src="../prive/themes/spip/images/aide-16.png" alt="AIDE" title="Cliquer pour afficher l\'aide" class="aide" width="16" height="16"></a>');
+
+            // Déplier-replie les explications au clic
+            $saisie.find('.aide')
+                .click(function (e) {
+                    var explication = $(e.target).parents('.editer').first()
+                        .find('.explication');
+
+                    if (explication.hasClass('masque')) {
+                        explication.show().removeClass('masque');
+                    } else {
+                        explication.hide().addClass('masque');
+                    }
+
+                    e.preventDefault();
+                    return false;
+                });
+
+            // Masquer les explications
+            $saisie.find('.explication').hide().addClass('masque');
+        });
+});
+</script>

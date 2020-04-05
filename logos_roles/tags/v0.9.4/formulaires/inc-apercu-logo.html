@@ -1,0 +1,104 @@
+[(#SET{role, #ENV{quoi}})]
+
+[(#GET{role}|=={logo_off}|oui)
+  [(#SET{role, logo_survol})]
+]
+
+<div class="apercu">
+  [<div class="spip_logo">
+    <a href="[(#ENV{logo}|balise_img
+               |massicoter_objet{#ENV{objet},#ENV{id_objet},#GET{role}}
+               |forcer_dimensions_role{#ENV{objet},#ENV{id_objet},#GET{role}}
+               |extraire_attribut{src}
+               |url_absolue
+             )]"
+       class='mediabox'>
+      (#ENV{logo}
+       |massicoter_objet{#ENV{objet},#ENV{id_objet},#GET{role}}
+       |forcer_dimensions_role{#ENV{objet},#ENV{id_objet},#GET{role}}
+       |image_reduire{[(#ENV{_options}|table_valeur{image_reduire}|sinon{100})]}
+       |inserer_attribut{alt,#ENV{quoi,logo_on}})
+    </a>
+  </div>]
+  [(#SET{largeur, #ENV{logo}
+                  |massicoter_objet{#ENV{objet},#ENV{id_objet},#GET{role}}
+                  |forcer_dimensions_role{#ENV{objet},#ENV{id_objet},#GET{role}}
+                  |largeur})]
+  [(#SET{hauteur, #ENV{logo}
+                  |massicoter_objet{#ENV{objet},#ENV{id_objet},#GET{role}}
+                  |forcer_dimensions_role{#ENV{objet},#ENV{id_objet},#GET{role}}
+                  |hauteur})]
+	[<div class="titre">(#ENV{titre,''})</div>]
+	<div class="taille"><:info_largeur_vignette{largeur_vignette=#GET{largeur},hauteur_vignette=#GET{hauteur}}:></div>
+	[(#ENV{editable}|oui)
+    [(#PIPELINE{logo_desc_actions, #ARRAY{args,#ARRAY{logo, #ENV{logo}, objet, #ENV{objet}, id_objet, #ENV{id_objet}}, data, ''}})]
+
+    [(#PLUGIN{massicot}|oui)
+      <a href="[(#URL_ECRIRE{massicoter_image, objet=#ENV{objet}&id_objet=#ENV{id_objet}}|parametre_url{redirect,#SELF}|parametre_url{role, #GET{role}})]"
+         class="bouton">
+        <strong><:massicot:massicoter:></strong>
+      </a>
+      <br>
+    ]
+
+    [(#ENV{logo}|trouver_document_fichier|intval|oui)
+      <a href="[(#URL_ECRIRE{document_edit, id_document=#ENV{logo}|trouver_document_fichier}|parametre_url{redirect, #SELF})]"
+         class="popin">
+        <:logos_roles:titre_modifier_logo:>
+      </a>
+    ]
+
+    [(#REM) On ne permet pas de supprimer les logos qui reprennent le logo par
+            défaut, parce que ça revient à supprimer le logo original ! ]
+    [(#SET{suppression_possible, #ENV{quoi}|=={logo}
+                                  |ou{#ENV{logo}|est_logo_par_defaut{#ENV{id_objet}, #ENV{objet}, #ENV{quoi}}|non}})]
+
+    [(#GET{suppression_possible}|oui)
+		  <input type='submit' class='submit supprimer' id="supprimer_#ENV{quoi,logo_on}_#ENV{objet}_#ENV{id_objet}" name="supprimer_#ENV{quoi,logo_on}" value='<:lien_supprimer|ucfirst|attribut_html:>' />
+    ]
+
+    [(#REM) Par contre on propose une façon de les remplacer. ]
+    [(#GET{suppression_possible}|non)
+			<label for="#ENV{quoi}_#ENV{objet}_#ENV{id_objet}">
+        [(#ENV{_options}|table_valeur{label}|sinon{<:logos_roles:changer_de_logo:>})]
+      </label>
+      <div class="boutons">
+        [<span class='erreur_message'>
+          (#ENV**{erreurs}|table_valeur{#ENV{quoi}})
+        </span>]
+        <div class="upload">
+          <input type='file' class='file' name='#ENV{quoi}' size="[(#ENV{_options}|table_valeur{size_input}|sinon{12})]" id='#ENV{quoi}_#ENV{objet}_#ENV{id_objet}' value="" />
+          <input type='submit' class='submit' value='<:bouton_upload:>' />
+        </div>
+        <div class="mediatheque">
+          <input class="hidden" name="document_mediatheque_#ENV{quoi}_#ENV{objet}_#ENV{id_objet}" type="hidden" value=""/>
+          <input class="invisible" name="choisir_document_mediatheque_#ENV{quoi}_#ENV{objet}_#ENV{id_objet}"
+                 type="submit" value="<:logos_roles:valider:>"/>
+
+          <a href="#" id="choisir_document_#ENV{quoi}">
+            <:logos_roles:choisir_mediatheque:>
+          </a>
+
+          <script type="text/javascript">
+           $(function () {
+             // Ouvrir une modale de sélection dans la médiathèque avec le lien
+             $('#choisir_document_#ENV{quoi}').click(function (e) {
+               e.preventDefault();
+               $.modalboxload(
+                 '[(#URL_ECRIRE*{popin-choisir_document, var_zajax=contenu&selectfunc=maj_document_mediatheque_[(#ENV{quoi})]})]',
+                 {autoResize: true}
+               );
+             });
+           });
+           // Callback du popin, on ferme la modale, on met à jour le formulaire et on le soumet
+           function maj_document_mediatheque_[(#ENV{quoi})] (id) {
+             $.modalboxclose();
+             $('input\[name="document_mediatheque_#ENV{quoi}_#ENV{objet}_#ENV{id_objet}"\]').val(id);
+             $('input\[name="choisir_document_mediatheque_#ENV{quoi}_#ENV{objet}_#ENV{id_objet}"\]').click();
+           };
+          </script>
+        </div>
+      </div>
+    ]
+	]
+</div>

@@ -1,0 +1,74 @@
+#CACHE{0}
+<div class='formulaire_spip formulaire_editer formulaire_editer_logo formulaire_editer_logo_#ENV{objet}'>
+	[<h3 class="titrem">(#ENV*{_options/titre})</h3>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	#SET{valider,#ENV{valider,''}}
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		#ACTION_FORMULAIRE
+		[(#REM) un submit pour attraper la touche entree]
+		<div style="display:none;"><input type='submit' class='submit' value='<:bouton_upload:>' /></div>
+	]
+		<div class="editer-groupe">
+      <BOUCLE_roles_logos(DATA){source array, #ENV{objet}|table_objet|lister_roles_logos}>
+
+        [(#CONFIG{activer_logos_survol}|=={oui}|ou{#CLE|!={logo_survol}})
+          <div class="editer editer_#CLE[ (#ENV{#CLE}|non)logo_upload][ (#ENV**{erreurs/#CLE}|oui)erreur]">
+            <h4>[(#VALEUR{label}|_T)]</h4>
+            [(#ENV{#CLE}|oui)
+              [(#INCLURE{fond=formulaires/inc-apercu-logo,env,logo=#ENV{#CLE},quoi=#CLE})]
+              <input type="hidden" name="#CLE" value="#ENV{#CLE}" />
+            ]
+            [(#ENV{editable}|et{#ENV{#CLE}|non}|oui)
+					    <label for="[(#CLE)]_#ENV{objet}_#ENV{id_objet}">
+                [(#ENV{_options/label}|sinon{<:info_telecharger_nouveau_logo:>})]
+              </label>
+              [<span class='erreur_message'>
+                (#ENV**{erreurs/#CLE})
+              </span>]
+              <input type='file' class='file' name='#CLE' size="[(#ENV{_options/size_input}|sinon{12})]" id='[(#CLE)]_#ENV{objet}_#ENV{id_objet}' value="" />
+					    #SET{valider,' '}
+
+              <div class="mediatheque">
+                <input class="hidden" name="document_mediatheque_[(#CLE)]_#ENV{objet}_#ENV{id_objet}" type="hidden" value=""/>
+                <input class="invisible" name="choisir_document_mediatheque_[(#CLE)]_#ENV{objet}_#ENV{id_objet}"
+                       type="submit" value="<:logos_roles:valider:>"/>
+
+                <a href="#" id="choisir_document_[(#CLE)]_#ENV{objet}_#ENV{id_objet}">
+                  <:logos_roles:choisir_mediatheque:>
+                </a>
+
+                <script type="text/javascript">
+                 $(function () {
+                   // Ouvrir une modale de sélection dans la médiathèque avec le lien
+                   $('#choisir_document_[(#CLE)]_#ENV{objet}_#ENV{id_objet}').click(function (e) {
+                     e.preventDefault();
+                     $.modalboxload(
+                       '[(#URL_ECRIRE*{popin-choisir_document, var_zajax=contenu&selectfunc=maj_document_mediatheque_[(#CLE)_#ENV{objet}_#ENV{id_objet}]})]',
+                       {autoResize: true}
+                     );
+                   });
+                 });
+                 // Callback du popin, on ferme la modale, on met à jour le formulaire et on le soumet
+                 function maj_document_mediatheque_[(#CLE)_#ENV{objet}_#ENV{id_objet}] (id) {
+                   $.modalboxclose();
+                   $('input\[name="document_mediatheque_[(#CLE)]_#ENV{objet}_#ENV{id_objet}"\]').val(id);
+                   $('input\[name="choisir_document_mediatheque_[(#CLE)]_#ENV{objet}_#ENV{id_objet}"\]').click();
+                 };
+                </script>
+              </div>
+            ]
+          </div>
+        ]
+      </BOUCLE_roles_logos>
+		</div>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+	[(#ENV{editable})
+		[(#GET{valider})
+		<p class="boutons"[(#GET{hide})style='display:none;']><input type='submit' class='submit' value='<:bouton_upload:>' /></p>
+		]
+	</div></form>
+	]
+</div>

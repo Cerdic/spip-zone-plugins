@@ -1,0 +1,20 @@
+<div class="ajax formulaire_spip formulaire_logos_roles">
+	<h3 class="titrem"><:logos_roles:titre_formulaire_migrer_logos_roles:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+
+	<p class="explication"><:logos_roles:explications_formulaire_migrer_logos_roles:></p>
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div class="editer-groupe">
+			<div class="editer">
+        <label><:logos_roles:saisie_objets_migration_label:>&nbsp;:</label>
+				#INCLURE{fond=formulaires/inc-choisir-objets,name=liste_objet}
+			</div>
+		</div>
+	</ul>
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:logos_roles:bouton_migrer_logos:>' /></p>
+
+	</div></form>
+</div>
