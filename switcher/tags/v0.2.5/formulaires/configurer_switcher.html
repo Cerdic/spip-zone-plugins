@@ -1,0 +1,18 @@
+<!-- nom=switcher -->
+
+<div class="formulaire_spip formulaire_editer formulaire_cfg">
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	<p class="explication"><:switcher:configurer_switcher:></p>
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+        [(#SAISIE{input, dossiers_squelettes, defaut=#ENV{dossiers_squelettes}, label=<:switcher:repertoires_alternatifs_label:>,explication=<:switcher:repertoires_alternatifs_explication:>})]
+        [(#SAISIE{oui_non, switcher_public, defaut=#ENV{switcher_public}, label=<:switcher:switcher_public_label:>, explication=<:switcher:switcher_public_explication:>})]
+
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />
+		</p>
+	</div></form>
+
+</div>

@@ -1,0 +1,24 @@
+<paquet
+	prefix="switcher"
+	categorie="maintenance"
+	version="0.2.5"
+	etat="test"
+	compatibilite="[2.0.0;3.0.*]"
+	logo="prive/themes/spip/images/switcher-64.png"
+	documentation="http://zine.spip.net/spip.php?article8"
+>
+	<nom>Switcher</nom>
+
+	<auteur>Philippe Drouot</auteur>
+	<auteur>idée originale contribution switcher de Fil</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+	<copyright>2006-2014</copyright>
+
+	<pipeline nom="affichage_final" inclure="switcher_fonctions.php" />
+	<pipeline nom="insert_head_css" inclure="head.php" />
+
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+
+	<menu nom="configurer_switcher" titre="switcher:menu" parent="menu_squelette" icone="" />
+</paquet>
