@@ -1,0 +1,56 @@
+<div class="formulaire_spip formulaire_abosympa_auteurinfos formfx ajax" id="formulaire_abosympa_auteurinfos">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{erreur_liste})</p>]
+   
+<form method='post' action='#ENV{action}'>
+<div class="abonnement">
+#ACTION_FORMULAIRE{#ENV{action}}
+<p class="abonne"><:soapsympa:listes_abonne:></p>
+	<B_abo>
+	<table id="abonnees" border="1" cellpadding="5">
+	<tr>
+	 <th> <:soapsympa:adresse_liste:></th>
+	 <th><:soapsympa:statut:></th>
+	 <th>  </th>
+	 
+	  </tr>
+
+	<BOUCLE_abo(POUR){tableau #ENV{abonne}}>
+	<tr>
+	<td class="listaddress tooltip"><label for="[(#VALEUR|table_valeur{'listaddress'})]">[(#VALEUR|table_valeur{'listaddress'})]</label><span class="subject">[(#VALEUR|table_valeur{'subject'})]</span></td>
+	<td class="statuts">[(#VALEUR|table_valeur{'statut'})]</td>
+	<td><input name="listes_des[]" type="checkbox" id="[(#VALEUR|table_valeur{'listname'})]" value="[(#VALEUR|table_valeur{'listname'})]"[(#GRAND_TOTAL|=={1}|oui) checked="checked"] /></td>
+	</tr>
+	</BOUCLE_abo>
+	</table>
+	<br/>
+	<input name="desabonnement" type="submit" value="<:soapsympa:btn_desabonnement_lists:>" class="submit" />
+	</B_abo>
+
+
+<p class="nonabonne"><:soapsympa:listes_nonabonne:></p>
+	<B_nonabo>
+	<table id="nonabonnees" border="1" cellpadding="5">
+	
+	<tr>
+	 <th> <:soapsympa:adresse_liste:></th>
+
+	 <th>  </th>
+	 
+	  </tr>
+	<BOUCLE_nonabo(POUR){tableau #ENV{nonabonne}}>
+	<tr>
+	<td class="listaddress tooltip"><label for="[(#VALEUR|table_valeur{'listaddress'})]">[(#VALEUR|table_valeur{'listaddress'})]</label><span class="subject">[(#VALEUR|table_valeur{'subject'})]</span></td>
+	<td><input name="listes_ab[]" type="checkbox" id="[(#VALEUR|table_valeur{'listname'})]" value="[(#VALEUR|table_valeur{'listname'})]"[(#GRAND_TOTAL|=={1}|oui) checked="checked"] /></td>
+	</tr>
+	</BOUCLE_nonabo>
+	</table>
+	<br/>
+	<input name="abonnement" type="submit" value="<:soapsympa:btn_abonnement_lists:>" class="submit" />
+	</B_nonabo>
+</div>
+</form>
+   
+</div>

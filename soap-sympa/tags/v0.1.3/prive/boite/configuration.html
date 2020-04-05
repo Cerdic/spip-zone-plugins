@@ -1,0 +1,31 @@
+[(#SET{identifiant,soapsympa_conf})]
+[(#SET{icone,[(#CHEMIN{images/soapsympa-24.png}|url_absolue)]})]
+[(#SET{plie,0})]
+
+
+[(#VAL{e}|debut_cadre{#GET{icone},'',[(#VAL{<:soapsympa:liste_des_listes:>}|bouton_block_depliable{[(#GET{plie}?{#EVAL{true},#EVAL{false}})],#GET{identifiant}})]})]
+
+[(#GET{plie}|debut_block_depliable{#GET{identifiant}})]
+<div id="soapsympa">
+<table id="abonnees" border="1" cellpadding="5">
+<tr>
+ <th> <:soapsympa:adresse_liste:></th>
+<th> <:soapsympa:description_liste:></th>
+ <th> <:soapsympa:action:> </th>
+ 
+  </tr>
+<BOUCLE_abo(POUR){tableau #ENV{listoflists}}>
+<tr>
+<td class="listaddress tooltip">[(#VALEUR|table_valeur{'listaddress'})]</td>
+<td class="subject">[(#VALEUR|table_valeur{'subject'})]</td>
+<td><a href="?exec=soapsympa_review&amp;list=[(#VALEUR|table_valeur{'listaddress'})]"><:soapsympa:voir_abonnes:></a></td>
+</tr>
+</BOUCLE_abo>
+</table>
+
+</div>
+
+
+[(#GET{plie}|fin_block)]
+[(#VAL{e}|fin_cadre)]
+
