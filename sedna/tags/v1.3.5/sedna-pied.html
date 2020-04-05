@@ -1,0 +1,39 @@
+<div class="bottom">
+	<div class="bottomrss">
+		<BOUCLE_url_backend_ori2(SITES){id_syndic}>
+			 <a
+				href="[(#URL_PAGE{sedna-rss}|parametre_url{id_syndic,#ID_SYNDIC}|parametre_url{recherche,#ENV{recherche}})]"
+				title="RSS [(#NOM_SITE|attribut_html)], via [(#NOM_SITE_SPIP|attribut_html)]">
+				<span class="rss-button">RSS</span>
+			</a>[
+			<a
+				href="(#URL_SYNDIC)"
+				title="RSS original [(#NOM_SITE|attribut_html)]">
+				<span class="rss-button">RSS</span>
+			</a>]
+		</BOUCLE_url_backend_ori2>
+		<a
+			href="[(#URL_PAGE{sedna-rss}|parametre_url{recherche,#ENV{recherche}})]"
+			title="RSS [(#NOM_SITE_SPIP|attribut_html)][ ((#ENV{recherche}|attribut_html))]">
+			<span class="rss-button">RSS</span>
+		</a>
+		<//B_url_backend_ori2>
+	</div>
+	<BOUCLE_refresh(SITES){id_syndic=#ENV{id_syndic}}>
+		[(#SESSION{statut}|=={0minirezo}|oui)
+			#SET{ignore,oui}
+
+		[(#ENV{refresh}|=={#ENV{id_syndic}}|?{' ',''}) <:sedna:syndication_fait:>]
+		[(#ENV{refresh}|=={#ENV{id_syndic}}|?{'',<!-- #SYNDICATION -->})
+			[<:sedna:derniere_syndication:>
+			(#DATE_SYNDIC|date_relative) - ]
+		<a href="[(#SELF|parametre_url{refresh,#ID_SYNDIC})]"><:sedna:syndication_ajour:></a>][
+		(#SYNDICATION|in_array{#ARRAY{0,off,1,sus}}|oui)- <:sedna:probleme_de_syndication:>]
+	]
+	</BOUCLE_refresh>
+	<BOUCLE_last(jobs){fonction=syndic}{0,1}>[(#SET{max_age,#VAL{'Y-m-d H:i:s'}|date{#DATE|strtotime|moins{#EVAL{_PERIODE_SYNDICATION}|intval|sinon{120}|mult{60}}}})]</BOUCLE_last>
+	[(#GET{ignore}|!={oui}|oui)
+		[<:sedna:derniere_syndication:>
+		(#GET{max_age}|date_relative)]
+	]
+</div>
