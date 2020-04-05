@@ -1,0 +1,20 @@
+<paquet
+	prefix="speedsyndic"
+	categorie="communication"
+	version="0.3.1"
+	etat="stable"
+	compatibilite="[3.1.6;3.2.*]"
+	documentation="https://contrib.spip.net/Plugin-Speedsyndic-2"
+	logo="prive/themes/spip/images/speedsyndic-32.png"
+>
+
+	<nom>Speedsyndic</nom>
+	<!-- Automatiser vos syndications -->
+
+	<auteur>Stephane</auteur>
+	<auteur>Piffeo</auteur>
+	<auteur lien="http://www.ituc-csi.org">Wilco</auteur>
+	<auteur lien="https://www.erational.org">erational</auteur>
+
+	<pipeline nom="taches_generales_cron" inclure="speedsyndic_pipelines.php" />
+</paquet>
