@@ -1,0 +1,145 @@
+<?php
+
+/**
+ * spip.icio.us
+ * Gestion de tags lies aux auteurs
+ *
+ * Auteurs :
+ * kent1 (kent1@arscenic.info)
+ * Erational
+ *
+ * © 2007-2011 - Distribue sous licence GNU/GPL
+ *
+ */
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+function spipicious_upgrade($nom_meta_base_version,$version_cible){
+	$current_version = 0.0;
+	if ((!isset($GLOBALS['meta'][$nom_meta_base_version]) )
+			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
+		include_spip('base/spipicious');
+		include_spip('base/create');
+		if (version_compare($current_version,'0.0','<=')){
+			creer_base();
+			ecrire_meta($nom_meta_base_version,$current_version=$version_base,'non');
+
+			/**
+			 * On crée un groupe de mots dédié qui servira à la configuration
+			 * On active les mots clés dans le site si ce n'est déjà fait
+			 * On active une configuration du plugin par défaut
+			 */
+			$titre_groupe = '- Tags -';
+			$id_groupe = sql_getfetsel('id_groupe','spip_groupes_mots','titre='.sql_quote($titre_groupe));
+			if(!$id_groupe){
+				$id_groupe = sql_insertq('spip_groupes_mots',array('titre' => $titre_groupe,'tables_liees' => 'articles','minirezo'=>'oui','comite'=>'oui','forum'=>'oui'));
+			}
+			if($GLOBALS['meta']['config_precise_groupes'] == 'non'){
+				ecrire_meta('config_precise_groupes','oui','oui');
+			}
+			if($GLOBALS['meta']['articles_mots'] == 'non'){
+				ecrire_meta('articles_mots','oui','oui');
+			}
+			$config_spipicious = array('people' => array('0minirezo'),'groupe_mot' => $id_groupe);
+			ecrire_meta('spipicious',serialize($config_spipicious),'oui');
+			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
+		}
+		if(version_compare($current_version,'0.2','<')){
+			sql_alter("TABLE `spip_spipicious` ADD PRIMARY KEY (`id_mot`) ");
+			sql_alter("TABLE `spip_spipicious` ADD KEY (`id_auteur`) ");
+			sql_alter("TABLE `spip_spipicious` ADD maj timestamp AFTER position ");
+			ecrire_meta($nom_meta_base_version,$current_version=0.2,'non');
+		}
+		if(version_compare($current_version,'0.3','<')){
+			sql_alter("TABLE `spip_spipicious` ADD id_rubrique bigint(21) NOT NULL AFTER`id_article` ");
+			sql_alter("TABLE `spip_spipicious` ADD id_document bigint(21) NOT NULL AFTER`id_rubrique` ");
+			ecrire_meta($nom_meta_base_version,$current_version=0.3,'non');
+		}
+		if(version_compare($current_version,'0.4','<')){
+			$desc = sql_showtable("spip_spipicious", true);
+			if (isset($desc['PRIMARY KEY']['id_mot'])){
+				sql_alter("TABLE `spip_spipicious` DROP PRIMARY KEY (`id_mot`) ");
+				sql_alter("TABLE `spip_spipicious` ADD KEY (`id_mot`) ");
+			}
+			$desc_mots_docs = sql_showtable("spip_mots_documents", true);
+			if(!isset($desc_mots_docs['field']['id_mot'])){
+				include_spip('base/create');
+				include_spip('base/abstract_sql');
+				creer_base();
+				echo "Creation de la table spip_mots_documents<br/>";
+			}
+			ecrire_meta($nom_meta_base_version,$current_version=0.4,'non');
+		}
+		if(version_compare($current_version,'0.5','<')){
+			sql_alter("TABLE `spip_spipicious` ADD id_syndic bigint(21) NOT NULL AFTER`id_document` ");
+			sql_alter("TABLE `spip_spipicious` ADD id_evenement bigint(21) NOT NULL AFTER`id_syndic` ");
+			ecrire_meta($nom_meta_base_version,$current_version=0.5,'non');
+		}
+		if(version_compare($current_version,'0.6','<')){
+			sql_alter("TABLE `spip_spipicious` ADD id_objet bigint(21) NOT NULL AFTER `id_auteur` ");
+			sql_alter("TABLE `spip_spipicious` ADD objet VARCHAR (25) DEFAULT '' NOT NULL AFTER `id_objet` ");
+			spipicious_id_objet_objet_upgrade();
+			sql_alter("TABLE `spip_spipicious` DROP PRIMARY KEY");
+			sql_alter("TABLE `spip_spipicious` ADD PRIMARY KEY (`id_mot`,`id_auteur`,`id_objet`,`objet`)");
+			sql_alter("TABLE `spip_spipicious` DROP COLUMN `id_article`");
+			sql_alter("TABLE `spip_spipicious` DROP COLUMN `id_document`");
+			sql_alter("TABLE `spip_spipicious` DROP COLUMN `id_rubrique`");
+			sql_alter("TABLE `spip_spipicious` DROP COLUMN `id_syndic`");
+			sql_alter("TABLE `spip_spipicious` DROP COLUMN `id_evenement`");
+			ecrire_meta($nom_meta_base_version,$current_version=0.6,'non');
+		}
+		if(version_compare($current_version,'0.6.1','<')){
+			$id_groupe = lire_config('spipicious/groupe_mot');
+			if($id_groupe){
+				sql_updateq('spip_groupes_mots',array('tables_liees' => 'articles','minirezo'=>'oui','comite'=>'oui','forum'=>'oui'),'id_groupe='.$id_groupe);
+			}
+			ecrire_meta($nom_meta_base_version,$current_version='0.6.1','non');
+		}
+		if(version_compare($current_version,'0.6.2','<')){
+			maj_tables(array('spip_spipicious'));
+			$spipicious = sql_select('*','spip_spipicious');
+			while($iter = sql_fetch($spipicious)){
+				$table = table_objet_sql($iter['objet']);
+				$id_table_objet = id_table_objet($iter['objet']);
+				$objet = sql_fetsel('*',$table,$id_table_objet.'='.intval($iter['id_objet']));
+				if(isset($objet['statut']) && $objet['statut'] != 'publie'){
+					sql_updateq('spip_spipicious',array('statut'=>'prop'),'id_objet='.intval($iter['id_objet'].' AND objet='.sql_quote($iter['objet'])));
+				}else if(!is_array($objet)){
+					sql_updateq('spip_spipicious',array('statut'=>'prop'),'id_objet='.intval($iter['id_objet'].' AND objet='.sql_quote($iter['objet'])));
+				}
+			}
+			ecrire_meta($nom_meta_base_version,$current_version='0.6.2','non');
+		}
+		if(version_compare($current_version,'0.6.3','<')){
+			sql_alter("TABLE `spip_spipicious` ADD INDEX id_mot (`id_mot`)");
+			sql_alter("TABLE `spip_spipicious` ADD INDEX id_objet (`id_objet`)");
+			sql_alter("TABLE `spip_spipicious` ADD INDEX objet (`objet`)");
+			ecrire_meta($nom_meta_base_version,$current_version='0.6.3','non');
+		}
+		ecrire_metas();
+	}
+}
+
+function spipicious_vider_tables($nom_meta_version_base) {
+	sql_drop_table("spip_spipicious");
+	effacer_meta($nom_meta_version_base);
+	effacer_meta('spipicious');
+	ecrire_metas();
+}
+
+
+/**
+ * Reunir en un seul champs id_objet/objet
+ */
+function spipicious_id_objet_objet_upgrade () {
+	// Recopier les donnees avec le coupe id_objet / objet
+	foreach (array('article', 'rubrique', 'document', 'evenement', 'syndic') as $liste => $l) {
+		$s = sql_select('*', 'spip_spipicious','id_'.$l.' > 0');
+		while ($t = sql_fetch($s)) {
+			$t['id_objet'] = $t["id_$l"];
+			$t['objet'] = $l;
+			sql_updateq('spip_spipicious',$t,'id_'.$l.' = '.intval($t['id_'.$l]).' AND id_mot='.intval($t['id_mot'].' AND id_auteur='.intval($t{'id_auteur'})));
+		}
+	}
+}
+?>

@@ -1,0 +1,67 @@
+<plugin>
+	<nom>spip.icio.us</nom>
+	<auteur>[kent1->kent1@arscenic.info], [erational->http://www.erational.org]</auteur>
+	<slogan>
+		<multi>
+		[fr]Tagger tous les objets
+		[en]Tag each objects
+		</multi>
+	</slogan>
+	<licence>GNU/GPLv3 - (c) 2007-2011</licence>
+	<version>0.7.9</version>
+	<version_base>0.6.3</version_base>
+	<etat>stable</etat>
+	<description>
+	<multi>
+[fr]Permet aux visiteurs authentifi&#233;s d'ajouter des tags (mots-cl&#233;s) aux différents objets.
+_ Les mots-cl&#233;s sont ajout&#233;s dans un groupe configurable (par d&#233;faut '{{- tags -}}')
+_ Icone de [Pawel Kadysz->http://oneseventyseven.com/]
+[en]Help authenticated users to add keywords/tags to objects from the public area.
+_ Keywords are added to a group we can configure ('{{- tags -}}' by default)
+_ Icon from [Pawel Kadysz->http://oneseventyseven.com/]
+	</multi>
+	</description>
+	<icon>images/spipicious-128.png</icon>
+	<lien>https://contrib.spip.net/Plugin-Spipicious</lien>
+	<prefix>spipicious</prefix>
+	<install>base/spipicious_upgrade.php</install>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/spipicious.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/spipicious.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/spipicious.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>spipicious_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>spipicious_autoriser.php</inclure>
+    </pipeline>
+	<pipeline>
+		<nom>optimiser_base_disparus</nom>
+		<inclure>spipicious_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_boucle</nom>
+		<inclure>spipicious_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>spipicious_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.0.9;2.1.99]" />
+	<necessite id="SelecteurGenerique" version="[0.7.0;]" />
+	<necessite id="cfg" version="[1.10.1;]" />
+	<necessite id="saisies" version="[1.42.11;]" />
+	<utilise id="nuage" version="[3.2.1;]" />
+	<categorie>communication</categorie>
+	<traduire gestionnaire="salvatore" module="spipicious" reference="fr" />
+</plugin>
