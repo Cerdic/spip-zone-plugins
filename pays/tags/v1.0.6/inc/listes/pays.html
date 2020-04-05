@@ -1,0 +1,19 @@
+<B_p>#PAGINATION
+<table class="spip" width="100%">
+	<thead>
+	<tr class="row_first">
+		<th><:pays:id_pays:></th>
+		<th><:pays:code:></th>
+		<th><:pays:nom:></th>
+	</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_p(pays){par nom}{pagination 20}>
+	<tr[ class="(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})"]>
+		<td>#ID_PAYS</td>
+		<td>#CODE</td>
+		<td>#NOM</td>
+	</tr>
+	</BOUCLE_p>
+	</tbody>
+</table>
