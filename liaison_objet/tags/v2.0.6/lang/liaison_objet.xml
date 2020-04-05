@@ -1,0 +1,12 @@
+<traduction
+	module="liaison_objet"
+	id="liaison_objet--liaison_objet-65595"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip-contrib-extensions/liaison_objet.git"
+	reference="fr">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/liaison_objet?lang_cible=de" total="47" traduits="47" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="en" url="https://trad.spip.net/tradlang_module/liaison_objet?lang_cible=en" total="47" traduits="47" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="es" url="https://trad.spip.net/tradlang_module/liaison_objet?lang_cible=es" total="47" traduits="45" relire="0" modifs="0" nouveaux="2" pourcent="95.74" />
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/liaison_objet?lang_cible=fr" total="47" traduits="47" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+</traduction>

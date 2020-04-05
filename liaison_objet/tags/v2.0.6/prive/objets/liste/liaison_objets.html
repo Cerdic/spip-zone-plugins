@@ -1,0 +1,44 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	date,-1,
+	id_objet,1,
+	points,-1
+}})]<B_liste_liaison_objets>
+#ANCRE_PAGINATION
+<div class="liste-objets liaison_objets">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{liaison_objet:info_1_liaison_objet,liaison_objet:info_nb_liaison_objets}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:liaison_objet:label_titre:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_objet,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_liaison_objets(LIAISON_OBJETS){id_liaison_objet?}{id_objet_dest?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{objet-16.png}|balise_img)]</td>
+			<td class='statut'>[(#STATUT|puce_statut{liaison_objet,#ID_LIAISON_OBJET})]</td>
+			<td class='titre principale'>
+				[(#LOGO_LIAISON_OBJET|image_reduire{20,26})]
+				<a href="[(#URL_ECRIRE{liaison_objet,id_liaison_objet=#ID_LIAISON_OBJET})]" title="<:info_numero_abbreviation|attribut_html:> #ID_OBJET">
+					[(#RANG). ][(#TITRE|sinon{#OBJET|info_objet{#ID_OBJET,titre}})]
+				</a>[((#TYPE_LIEN|nom_type{#OBJET_DEST}))]
+			</td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
+			<td class='id'>[(#AUTORISER{modifier,objet,#ID_OBJET}|?{
+				<a href="[(#URL_ECRIRE{liaison_objet_edit,id_objet=#ID_LIAISON_OBJET})]">#ID_LIAISON_OBJET</a>,
+				#ID_OBJET
+			})]</td>
+		</tr>
+	</BOUCLE_liste_liaison_objets>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_liaison_objets>[
+<div class="liste-objets liaison_objets caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_liaison_objets>

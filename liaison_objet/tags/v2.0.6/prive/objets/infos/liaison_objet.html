@@ -1,0 +1,14 @@
+<BOUCLE_objet(LIAISON_OBJETS){id_liaison_objet=#ENV{id}}{statut?}>
+<div class='infos'>
+[(#SET{texte_objet,<:liaison_objet:titre_liaison_objets:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_LIAISON_OBJET</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{liaison_objet,#ID_LIAISON_OBJET})]
+
+[(#REM)
+
+	Bouton voir en ligne
+
+]
+</div>
+</BOUCLE_objet>

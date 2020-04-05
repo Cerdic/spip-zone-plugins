@@ -1,0 +1,36 @@
+<div id="[(#ENV{id})]">
+<B_liaison>
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{liaison_objet:info_1_liaison_objet,liaison_objet:info_nb_liaison_objets}})
+		[(#ENV{langues,#ARRAY}|count|>{1}|oui)
+			[(#VALEUR)]
+		]</strong>
+		</caption>]
+	<BOUCLE_liaison(LIAISON_OBJETS){par ordre,lang}{lang ?=#ENV{l}}{statut ?}{id_objet_dest ?} {objet_dest ?}>
+	[<tr class="tr_liste" id='#ID_LIAISON_OBJET'>(#ID_OBJET|generer_modele{#OBJET,modeles_lo/liaison_interface_tr,#ARRAY{
+		ordre,#ORDRE,
+		id_liaison_objet,#ID_LIAISON_OBJET,
+		langue,#ENV{l},
+		objet_dest,#OBJET_DEST,
+		id_objet_dest,#ID_OBJET_DEST,
+		total_boucle,#TOTAL_BOUCLE,
+		id_liaison_objet,#ID_LIAISON_OBJET,
+		titre,#TITRE,
+		compteur_boucle,#COMPTEUR_BOUCLE,
+		date,#DATE,
+		type_lien,#TYPE_LIEN,
+		tables,#ENV{tables}
+		}})</tr>]
+	</BOUCLE_liaison>
+	</table>
+<script type="text/javascript">
+	$(function() {
+		[(#REM)action rangement]
+		$('#[(#ENV{id}) ] .tr_liste a.select').click(function(){
+			$('#[(#ENV{id})]').load($(this).attr("href"),{id:'#ENV{id}'});
+			return false;
+		});
+	});
+</script>
+</B_liaison>
+</div>
