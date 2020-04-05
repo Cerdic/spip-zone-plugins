@@ -1,0 +1,139 @@
+[(#REM)
+    Fichier HTML du formulaire CVT.
+    Appelé par la balise #FORMULAIRE_EDITER_EVENEMENT dans le fond 'prive/editer/evenement.html'.					
+]
+
+<div class='formulaire_spip formulaire_editer formulaire_editer_breve formulaire_editer_breve-#ENV{id_evenement,nouveau}'>
+    <!-- <br class='bugajaxie' /> -->
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    [(#ENV{editable})
+
+    <form method='post' action='#ENV{action}' enctype='multipart/form-data'>
+    <div>
+        #ACTION_FORMULAIRE{#ENV{action}}
+        <input type='hidden' name='id_evenement' value='#ENV{id_evenement}' />
+        <ul>
+
+        [(#REM) 'Titre' est un champ obligatoire]
+        <li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+            <label for="titre"><:simplecal:info_titre:> : </label>
+            [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
+            <input type='text' class='text' name='titre' id='titre' value="#ENV{titre}" />
+        </li>
+        
+        [(#REM) 'Date de début' est un champ obligatoire]
+        <li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur]">
+            <label for="date_debut"><:simplecal:info_date_debut:> : </label>
+            [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_debut})</span>]
+            <input type='text' class='text' style="width:auto;" name='date_debut' id='date_debut' value="#ENV{date_debut}" />
+        </li>
+        
+        [(#REM) 'Date de fin' est un champ optionnel]
+        <li class="editer_titre[ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur]">
+            <label for="date_fin"><:simplecal:info_date_fin:> : </label>
+            [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</span>]
+            <input type='text' class='text' style="width:auto;" name='date_fin' id='date_fin' value="#ENV{date_fin}" />
+        </li>
+        
+        [(#REM) 'Choix de la rubrique' est un champ facultatif]
+        [(#ENV{config_rubrique}|=={partout}|oui)
+        <li class="editer_parent obligatoire">
+            <label for="id_parent"><:titre_cadre_interieur_rubrique:><em class="aide">#AIDER{id_parent}</em></label>
+            [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>]
+            [(#VAL|chercher_rubrique{#ENV{id_evenement}, #ENV{id_parent}, 'evenement', #ENV{id_secteur}, true, 0, form_simple})]
+	    </li>
+        ]
+        
+        [(#ENV{config_rubrique}|=={secteur}|oui)
+        <li class="editer_parent">
+            <label for="id_parent"><:titre_cadre_interieur_rubrique:><em class="aide">#AIDER{id_parent}</em></label>
+            [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>]
+            <!-- parametre 'breve' pour avoir une liste de secteur (chercher_rubrique pas générique...) -->
+            [(#VAL|chercher_rubrique{#ENV{id_evenement}, #ENV{id_parent}, 'breve', #ENV{id_secteur}, true, 0, form_simple})]
+	    </li>
+        ]
+        
+
+        [(#REM) 'Lieu' est un champ optionnel]
+        [(#ENV{config_lieu}|=={oui}|oui)
+        <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{lieu}|oui)erreur]">
+            <label for="lieu"><:simplecal:info_lieu:> : </label>
+            [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lieu})</span>]
+            <input type="text" id="lieu" name="lieu" value="#ENV{lieu}" class="text" size="20" />
+        </li>
+        ]
+        
+    
+        [(#REM) 'Descriptif' est un champ obligatoire]
+        [(#ENV{config_descriptif}|=={oui}|oui)
+        <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
+            <label for="ta_descriptif"><:simplecal:info_descriptif_rapide:> : </label>
+            [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>]
+            <textarea name='descriptif' id='ta_descriptif'[ lang='(#LANG)'] rows='5' cols='40'>[(#ENV**{descriptif})]</textarea>
+        </li>
+        ]
+        
+        [(#REM) 'Reference' est un champ optionnel]
+        [(#ENV{config_reference}|=={oui}|oui)
+        <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{ref}|oui)erreur]">
+            <label for="ref">
+                [(#ENV{config_texte}|=={oui}|oui)<:simplecal:info_ref_1pos:>]
+                [(#ENV{config_texte}|=={non}|oui)<:simplecal:info_ref:>]
+            </label>
+            [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ref})</span>]
+            <div class="explication"><:simplecal:explication_ref:></div>
+            <input type="text" id="ref" name="ref" value="#ENV{ref}" class="text" size="20" />
+        </li>
+        ]
+        
+        [(#REM) 'Texte' est un champ optionnel]
+        [(#ENV{config_texte}|=={oui}|oui)
+        <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
+            <label for="texte">
+                [(#ENV{config_reference}|=={non}|oui)<:simplecal:info_texte:>]
+                [(#ENV{config_reference}|=={oui}|oui)<:simplecal:info_texte_2possibilites:>]
+            </label>
+            [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>]
+            <div class="explication"><:simplecal:explication_texte:></div>
+            <textarea name='texte' id='texte' class='inserer_barre_edition inserer_previsualisation'[ lang='(#LANG)'] rows='20' cols='40'>[(#ENV**{texte})]</textarea>
+        </li>
+        ]
+        
+        [(#ENV{config_lien}|=={oui}|oui)
+        <li class="editer_liens_sites fieldset">
+            <fieldset>
+            <h3 class="legend"><:entree_liens_sites:></h3>
+            <ul>
+                <li class="editer_lien_titre[ (#ENV**{erreurs}|table_valeur{lien_titre}|oui)erreur]">
+                    <label for="lien_titre"><:info_titre:><em class='aide'>#AIDER{lien_titre}</em></label>[
+                    <span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lien_titre})</span>
+                    ]<input type='text' class='text' name='lien_titre' id='lien_titre' value="[(#ENV**{lien_titre})]" />
+                </li>
+                <li class="editer_lien_url[ (#ENV**{erreurs}|table_valeur{lien_url}|oui)erreur]">
+                    <label for="lien_url"><:info_url:></label>[
+                    <span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lien_url})</span>
+                    ]<input type='text' class='text' name='lien_url' id='lien_url' value="[(#ENV**{lien_url})]" />
+                </li>
+            </ul>
+            </fieldset>
+        </li>
+        ]
+        
+        
+        </ul>
+          
+          
+        [(#REM) ajouter les saisies supplementaires : extra et autre, à cet endroit ]
+        <!--extra-->
+        <p class="boutons">
+            <input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+        </p>
+    
+    </div>
+    </form>
+    
+    #INCLURE{fond=formulaires/inc-editer_evenement_datepicker}
+    
+    ]
+</div>

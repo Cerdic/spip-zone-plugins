@@ -1,0 +1,22 @@
+[(#REM)
+ Boite infos pour la page privée 'exec/evenement_voir.php'
+ Correspond à l'encart qui affiche l'id de l'objet et
+ le formulaire de changement de statut à la volée.
+]
+
+<BOUCLE_infos(EVENEMENTS){id_evenement=#ENV{id_evenement}}{statut?}{!lang_select}>
+    <div class='infos'>
+        <div class='numero'><:simplecal:info_gauche_numero_evenement:><p>#ID_EVENEMENT</p></div>
+        
+        [(#REM)	
+            Bloc de changement de statut : 
+            fait appel à (prive/infos/evenement_fonctions.php) 
+        ]
+        [(#ID_EVENEMENT|instituer_evenement{#STATUT})]
+        
+        
+        [(#REM) Bouton voir en ligne]
+        [(#VAL{evenement}|simplecal_voir_en_ligne{#ID_EVENEMENT, #STATUT, racine-24.gif, 0, 0})]
+        
+    </div>
+</BOUCLE_infos>

@@ -1,0 +1,12 @@
+[(#REM)
+	Fond appele par 'exec/evenements_edit.php', qui	calcule et affiche le formulaire d'edition d'un evenement.
+	Appelle le formulaire CVT : 'formulaire/evenement.html et php'.
+]
+
+<div class='cadre-formulaire-editer'>
+    <div class="entete-formulaire">
+        #ENV**{icone_retour}
+        [<:simplecal:texte_modifier_evenement:><h1>(#ENV{titre})</h1>]
+    </div>
+    #FORMULAIRE_EDITER_EVENEMENT{#ENV{new}, #ENV{id_evenement}, #ENV{row}, #ENV{redirect}, #ENV{config}}
+</div>

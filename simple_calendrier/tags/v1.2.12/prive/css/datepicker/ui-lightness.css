@@ -1,0 +1,68 @@
+.ui-datepicker {
+    display:block;
+    padding:0.2em 0.2em 0;
+    width:17em;
+    font-size:0.9em;
+}
+
+.ui-widget-header {
+    -moz-background-clip:border;
+    -moz-background-inline-policy:continuous;
+    -moz-background-origin:padding;
+    background-image:none;
+    background-color:#f6a828;
+    border:1px solid #e78f08;
+    color:#ffffff ;
+    font-weight:bold;
+}
+
+.ui-widget-content {
+    -moz-background-clip:border;
+    -moz-background-inline-policy:continuous;
+    -moz-background-origin:padding;
+    background-image:none;
+    background-color:#eeeeee;
+    border:1px solid #dddddd;
+    color:#333333;
+}
+
+/* Jours quelconques du mois */
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    -moz-background-clip:border;
+    -moz-background-inline-policy:continuous;
+    -moz-background-origin:padding;
+    background-image:none;
+    background-color:#f6f6f6;
+    border:1px solid #cccccc;
+    color:#1c94c4;
+    font-weight:normal;
+}
+
+/* Jour J */
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+    -moz-background-clip:border;
+    -moz-background-inline-policy:continuous;
+    -moz-background-origin:padding;
+    background-image:none;
+    background-color:#ffe45c ;
+    border:1px solid #fed22f;
+    color:#363636;
+}
+
+/* Jour Actif */
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+    -moz-background-clip:border;
+    -moz-background-inline-policy:continuous;
+    -moz-background-origin:padding;
+    background-image:none;
+    background-color:#ffffff;
+    border:1px solid #fbd850;
+    color:#eb8f00;
+    font-weight:normal;
+}
+
+/* Jours des mois precedent/suivant */
+.ui-state-disabled, .ui-widget-content .ui-state-disabled, .ui-widget-header .ui-state-disabled {
+    background-image:none;
+    opacity:0.35;
+}

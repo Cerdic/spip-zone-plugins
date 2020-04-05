@@ -1,0 +1,158 @@
+<div id="configurer-simplecal">
+	
+    
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form action="#ENV{action}" method="post">
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+		
+        
+        <div class="cadre cadre-r">
+            <div class="titrem impliable">
+                <:simplecal:config_blocautorisation:>
+            </div>
+            <div class="cadre_padding">
+            <ul>
+                <li>
+                    <p><:simplecal:config_autorisation_explication:></p>
+                    [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{simplecal_autorisation_redac})</span>]
+                    
+                    <div class='choix'>
+                        <input type="radio" class="radio" name="simplecal_autorisation_redac" value='non'[ (#ENV{simplecal_autorisation_redac}|=={non}|oui)checked="checked"] id="simplecal_autorisation_redac_non"/>
+                        <label for="simplecal_autorisation_redac_non"[ (#ENV{simplecal_autorisation_redac}|=={non}|oui)class="actif"]><:simplecal:config_autorisation_redac_non:></label>
+                    </div>
+                    <div class='choix'>
+                        <input type="radio" class="radio" name="simplecal_autorisation_redac" value='oui'[ (#ENV{simplecal_autorisation_redac}|=={oui}|oui)checked="checked"] id="simplecal_autorisation_redac_oui"/>
+                        <label for="simplecal_autorisation_redac_oui"[ (#ENV{simplecal_autorisation_redac}|=={oui}|oui)class="actif"]><:simplecal:config_autorisation_redac_oui:></label>
+                    </div>
+                </li>
+            </ul>
+            </div>
+        </div>
+        
+        <div class="cadre cadre-r">
+            <div class="titrem impliable">
+                <:simplecal:config_blocrubrique:>
+            </div>
+            <div class="cadre_padding">
+            <ul>
+                <li>
+                    <p><:simplecal:config_rubrique_explication:></p>
+                    [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{simplecal_rubrique})</span>]
+                    
+                    
+                    <div class='choix'>
+                        <input type="radio" class="radio" name="simplecal_rubrique" value='partout'[ (#ENV{simplecal_rubrique}|=={partout}|oui)checked="checked"] id="simplecal_rubrique_partout"/>
+                        <label for="simplecal_rubrique_partout"[ (#ENV{simplecal_rubrique}|=={partout}|oui)class="actif"]><:simplecal:config_rubrique_partout:></label>
+                    </div>
+                    <div class='choix'>
+                        <input type="radio" class="radio" name="simplecal_rubrique" value='secteur'[ (#ENV{simplecal_rubrique}|=={secteur}|oui)checked="checked"] id="simplecal_rubrique_secteur"/>
+                        <label for="simplecal_rubrique_secteur"[ (#ENV{simplecal_rubrique}|=={secteur}|oui)class="actif"]><:simplecal:config_rubrique_secteur:></label>
+                    </div>
+                    <div class='choix'>
+                        <input type="radio" class="radio" name="simplecal_rubrique" value='non'[ (#ENV{simplecal_rubrique}|=={non}|oui)checked="checked"] id="simplecal_rubrique_non"/>
+                        <label for="simplecal_rubrique_non"[ (#ENV{simplecal_rubrique}|=={non}|oui)class="actif"]><:simplecal:config_rubrique_non:></label>
+                    </div>                    
+                </li>
+            </ul>
+            </div>
+        </div>
+        
+        <div class="cadre cadre-r">
+            <div class="titrem impliable">
+                <:simplecal:config_champs:>
+            </div>
+            <div class="cadre_padding">
+            <p><:simplecal:config_champs_explication:></p>
+            <ul>
+                <li>
+                    <span class="titre-champ"><:info_descriptif:></span>
+                    <input type="radio" class="radio" name="simplecal_descriptif" value='oui'[ (#ENV{simplecal_descriptif}|=={oui}|oui)checked="checked"] id="simplecal_descriptif_oui"/>
+                    <label for="simplecal_descriptif_oui"[ (#ENV{simplecal_descriptif}|=={oui}|oui)class="actif"]><:item_oui:></label>
+                    
+                    <input type="radio" class="radio" name="simplecal_descriptif" value='non'[ (#ENV{simplecal_descriptif}|=={non}|oui)checked="checked"] id="simplecal_descriptif_non"/>
+                    <label for="simplecal_descriptif_non"[ (#ENV{simplecal_descriptif}|=={non}|oui)class="actif"]><:item_non:></label>
+                </li>
+                <li>
+                    <span class="titre-champ"><:info_texte:>&nbsp;: </span>
+                    <input type="radio" class="radio" name="simplecal_texte" value='oui'[ (#ENV{simplecal_texte}|=={oui}|oui)checked="checked"] id="simplecal_texte_oui"/>
+                    <label for="simplecal_texte_oui"[ (#ENV{simplecal_texte}|=={oui}|oui)class="actif"]><:item_oui:></label>
+                    
+                    <input type="radio" class="radio" name="simplecal_texte" value='non'[ (#ENV{simplecal_texte}|=={non}|oui)checked="checked"] id="simplecal_texte_non"/>
+                    <label for="simplecal_texte_non"[ (#ENV{simplecal_texte}|=={non}|oui)class="actif"]><:item_non:></label>
+                </li>
+                <li>
+                    <span class="titre-champ"><:simplecal:info_lieu:>&nbsp;: </span>
+                    <input type="radio" class="radio" name="simplecal_lieu" value='oui'[ (#ENV{simplecal_lieu}|=={oui}|oui)checked="checked"] id="simplecal_lieu_oui"/>
+                    <label for="simplecal_lieu_oui"[ (#ENV{simplecal_lieu}|=={oui}|oui)class="actif"]><:item_oui:></label>
+                    
+                    <input type="radio" class="radio" name="simplecal_lieu" value='non'[ (#ENV{simplecal_lieu}|=={non}|oui)checked="checked"] id="simplecal_lieu_non"/>
+                    <label for="simplecal_lieu_non"[ (#ENV{simplecal_lieu}|=={non}|oui)class="actif"]><:item_non:></label>
+                </li>
+                <li>
+                    <span class="titre-champ"><:info_lien_hypertexte:> </span>
+                    <input type="radio" class="radio" name="simplecal_lien" value='oui'[ (#ENV{simplecal_lien}|=={oui}|oui)checked="checked"] id="simplecal_lien_oui"/>
+                    <label for="simplecal_lien_oui"[ (#ENV{simplecal_lien}|=={oui}|oui)class="actif"]><:item_oui:></label>
+                    
+                    <input type="radio" class="radio" name="simplecal_lien" value='non'[ (#ENV{simplecal_lien}|=={non}|oui)checked="checked"] id="simplecal_lien_non"/>
+                    <label for="simplecal_lien_non"[ (#ENV{simplecal_lien}|=={non}|oui)class="actif"]><:item_non:></label>
+                </li>
+            </ul>
+            </div>
+        </div>
+        
+        <div class="cadre cadre-r">
+            <div class="titrem impliable">
+                <:simplecal:config_blocreference:>
+            </div>
+            <div class="cadre_padding">
+            <ul>
+                <li>
+                    <p><:simplecal:config_refobj_explication:></p>
+                    [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{simplecal_refobj})</span>]
+                    
+                    <div class='choix'>
+                        <input type="radio" class="radio" name="simplecal_refobj" value='oui'[ (#ENV{simplecal_refobj}|=={oui}|oui)checked="checked"] id="simplecal_refobj_oui"/>
+                        <label for="simplecal_refobj_oui"[ (#ENV{simplecal_refobj}|=={oui}|oui)class="actif"]><:simplecal:config_refobj_oui:></label>
+                    </div>
+                    <div class='choix'>
+                        <input type="radio" class="radio" name="simplecal_refobj" value='non'[ (#ENV{simplecal_refobj}|=={non}|oui)checked="checked"] id="simplecal_refobj_non"/>
+                        <label for="simplecal_refobj_non"[ (#ENV{simplecal_refobj}|=={non}|oui)class="actif"]><:simplecal:config_refobj_non:></label>
+                    </div>
+                </li>
+            </ul>
+            </div>
+        </div>
+        
+        
+        <div class="cadre cadre-r">
+            <div class="titrem impliable">
+                <:simplecal:config_blocthemes:>
+            </div>
+            <div class="cadre_padding">
+            <ul>
+                <li>
+                    <p><:simplecal:config_themes_explication:></p>
+                    [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{simplecal_themepublic})</span>]
+                    
+                    <table>
+                    <tr>
+                        <th>
+                            <:simplecal:config_themepublic:> :
+                            <br /><small>(<:simplecal:config_minicalendrier:>)</small>
+                        </th>
+                        <td valign="top">
+                            [(#VAL{simplecal_themepublic}|simplecal_liste_themes{#ENV{simplecal_themepublic}})]
+                        </td>
+                    </tr>
+                    </table>
+                </li>
+            </ul>
+            </div>
+        </div>
+        
+		<input type="submit" class="submit" name="ok" value="<:bouton_valider:>" />
+        <div style="clear:both;"></div>
+    </form>
+</div>
