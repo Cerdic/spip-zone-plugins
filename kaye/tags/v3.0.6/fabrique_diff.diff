@@ -1,0 +1,190 @@
+Seulement dans ../plugins/fabrique_auto/kaye/: base
+Seulement dans ../plugins/fabrique_auto/kaye/formulaires: editer_classe.html
+Seulement dans ../plugins/fabrique_auto/kaye/formulaires: editer_classe.php
+Seulement dans ../plugins/fabrique_auto/kaye/formulaires: editer_devoir.html
+Seulement dans ../plugins/fabrique_auto/kaye/formulaires: editer_devoir.php
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_kaye.php ../plugins/fabrique_auto/.backup/kaye/kaye_administrations.php ../plugins/fabrique_auto/kaye/kaye_administrations.php
+39a40,41
+> 	$maj['create'] = array(array('maj_tables', array('spip_classes', 'spip_devoirs')));
+>
+56a59,65
+> 	sql_drop_table("spip_classes");
+> 	sql_drop_table("spip_devoirs");
+>
+> 	# Nettoyer les versionnages et forums
+> 	sql_delete("spip_versions",              sql_in("objet", array('classe', 'devoir')));
+> 	sql_delete("spip_versions_fragments",    sql_in("objet", array('classe', 'devoir')));
+> 	sql_delete("spip_forum",                 sql_in("objet", array('classe', 'devoir')));
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_kaye.php ../plugins/fabrique_auto/.backup/kaye/kaye_autorisations.php ../plugins/fabrique_auto/kaye/kaye_autorisations.php
+31a32,99
+> // -----------------
+> // Objet classes
+>
+>
+> // bouton de menu
+> function autoriser_classes_menu_dist($faire, $type, $id, $qui, $opts){
+> 	return true;
+> }
+>
+>
+> // creer
+> function autoriser_classe_creer_dist($faire, $type, $id, $qui, $opt) {
+> 	return autoriser('webmestre', '', '', $qui);
+> }
+>
+> // voir les fiches completes
+> function autoriser_classe_voir_dist($faire, $type, $id, $qui, $opt) {
+> 	return true;
+> }
+>
+> // modifier
+> function autoriser_classe_modifier_dist($faire, $type, $id, $qui, $opt) {
+> 	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
+> }
+>
+> // supprimer
+> function autoriser_classe_supprimer_dist($faire, $type, $id, $qui, $opt) {
+> 	return autoriser('webmestre', '', '', $qui);
+> }
+>
+>
+>
+> // -----------------
+> // Objet devoirs
+>
+>
+> // bouton de menu
+> function autoriser_devoirs_menu_dist($faire, $type, $id, $qui, $opts){
+> 	return true;
+> }
+>
+> // bouton d'outils rapides
+> function autoriser_devoircreer_menu_dist($faire, $type, $id, $qui, $opts){
+> 	return autoriser('creer', 'devoir', '', $qui, $opts);
+> }
+>
+> // creer
+> function autoriser_devoir_creer_dist($faire, $type, $id, $qui, $opt) {
+> 	return in_array($qui['statut'], array('0minirezo', '1comite'));
+> }
+>
+> // voir les fiches completes
+> function autoriser_devoir_voir_dist($faire, $type, $id, $qui, $opt) {
+> 	return true;
+> }
+>
+> // modifier
+> function autoriser_devoir_modifier_dist($faire, $type, $id, $qui, $opt) {
+> 	return $qui['statut'] == '0minirezo';
+> }
+>
+> // supprimer
+> function autoriser_devoir_supprimer_dist($faire, $type, $id, $qui, $opt) {
+> 	return $qui['statut'] == '0minirezo';
+> }
+>
+>
+>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_kaye.php ../plugins/fabrique_auto/.backup/kaye/kaye_pipelines.php ../plugins/fabrique_auto/kaye/kaye_pipelines.php
+18a19,64
+> /**
+>  * Ajout de contenu sur certaines pages,
+>  * notamment des formulaires de liaisons entre objets
+>  */
+> function kaye_affiche_milieu($flux) {
+> 	$texte = "";
+> 	$e = trouver_objet_exec($flux['args']['exec']);
+>
+> 	// auteurs sur les classes
+> 	if (!$e['edition'] AND in_array($e['type'], array('classe'))) {
+> 		$texte .= recuperer_fond('prive/objets/editer/liens', array(
+> 			'table_source' => 'auteurs',
+> 			'objet' => $e['type'],
+> 			'id_objet' => $flux['args'][$e['id_table_objet']]
+> 		));
+> 	}
+>
+>
+>
+> 	if ($texte) {
+> 		if ($p=strpos($flux['data'],"<!--affiche_milieu-->"))
+> 			$flux['data'] = substr_replace($flux['data'],$texte,$p,0);
+> 		else
+> 			$flux['data'] .= $texte;
+> 	}
+>
+> 	return $flux;
+> }
+>
+>
+> /**
+>  * Ajout de liste sur la vue d'un auteur
+>  */
+> function kaye_affiche_auteurs_interventions($flux) {
+> 	if ($id_auteur = intval($flux['args']['id_auteur'])) {
+>
+> 		$flux['data'] .= recuperer_fond('prive/objets/liste/classes', array(
+> 			'id_auteur' => $id_auteur,
+> 			'titre' => _T('classe:info_classes_auteur')
+> 		), array('ajax' => true));
+>
+> 	}
+> 	return $flux;
+> }
+>
+>
+Seulement dans ../plugins/fabrique_auto/kaye/lang: classe_fr.php
+Seulement dans ../plugins/fabrique_auto/kaye/lang: devoir_fr.php
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_kaye.php ../plugins/fabrique_auto/.backup/kaye/paquet.xml ../plugins/fabrique_auto/kaye/paquet.xml
+12c12
+< 		Paquet généré le 2012-05-08 15:20:17
+---
+> 		Paquet généré le 2012-05-08 16:02:00
+42c42
+< 	<pipeline nom="autoriser" inclure="kaye_autorisations.php" />
+---
+> 	<necessite nom="saisies" compatibilite="[1.24.0;]" />
+43a44
+> 	<pipeline nom="autoriser" inclure="kaye_autorisations.php" />
+44a46,53
+> 	<pipeline nom="declarer_tables_objets_sql" inclure="base/kaye.php" />
+> 	<pipeline nom="declarer_tables_interfaces" inclure="base/kaye.php" />
+> 	<pipeline nom="affiche_milieu" inclure="kaye_pipelines.php" />
+> 	<pipeline nom="affiche_auteurs_interventions" inclure="kaye_pipelines.php" />
+>
+> 	<menu nom="classes" titre="classe:titre_classes" parent="menu_edition" icone="images/classe-16.png" action="classes" />
+> 	<menu nom="devoirs" titre="devoir:titre_devoirs" parent="menu_edition" icone="images/devoir-16.png" action="devoirs" />
+> 	<menu nom="devoir_creer" titre="devoir:icone_creer_devoir" parent="outils_rapides" icone="images/devoir-new-16.png" action="devoir_edit" parametres="new=oui" />
+Seulement dans ../plugins/fabrique_auto/kaye/prive: objets
+Seulement dans ../plugins/fabrique_auto/kaye/prive/squelettes/contenu: classes.html
+Seulement dans ../plugins/fabrique_auto/kaye/prive/squelettes/contenu: devoirs.html
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: classe-16.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: classe-24.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: classe-32.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: classe-add-16.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: classe-add-24.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: classe-add-32.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: classe-del-16.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: classe-del-24.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: classe-del-32.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: classe-edit-16.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: classe-edit-24.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: classe-edit-32.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: classe-new-16.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: classe-new-24.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: classe-new-32.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: devoir-16.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: devoir-24.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: devoir-32.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: devoir-add-16.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: devoir-add-24.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: devoir-add-32.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: devoir-del-16.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: devoir-del-24.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: devoir-del-32.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: devoir-edit-16.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: devoir-edit-24.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: devoir-edit-32.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: devoir-new-16.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: devoir-new-24.png
+Seulement dans ../plugins/fabrique_auto/kaye/prive/themes/spip/images: devoir-new-32.png

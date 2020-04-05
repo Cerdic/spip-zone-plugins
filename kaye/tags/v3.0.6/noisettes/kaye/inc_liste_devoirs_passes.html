@@ -1,0 +1,32 @@
+<B_liste_devoir_passes>
+<table class='devoirs spip'>
+	<thead>
+	<tr class="row_first">
+		<th><:devoir:label_date_echeance:></th>
+		<th><:devoir:label_matiere:></th>
+		<th><:devoir:label_texte:></th>
+		<th><:devoir:label_doc_joints:></th>
+		<th><:date:></th>
+	</tr>
+	</thead>
+	<tbody>
+<BOUCLE_liste_devoir_passes(DEVOIRS){id_classe=#ENV{classe}}{par date_echeance}{inverse}{age_echeance>0}{pagination 10}>	
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+		<td><div class="#EDIT{date_echeance} date_echeance">[(#DATE_ECHEANCE|nom_jour)] [(#DATE_ECHEANCE|jour)] [(#DATE_ECHEANCE|nom_mois)]</div></td>
+		<td><div class="#EDIT{matiere} matiere">#MATIERE</div></td>
+		<td><div class="#EDIT{texte} texte">#TEXTE</div></td>
+		<td>
+		<BOUCLE_doc(DOCUMENTS){id_objet=#ID_DEVOIR}{objet=devoir}></BOUCLE_doc>
+		<BOUCLE_doc2(spip_documents_liens){id_objet=#ID_DEVOIR}{objet=devoir}>
+           <BOUCLE_affiche_doc(spip_documents){id_document= #ID_DOCUMENT}>
+              #PUCE [(#LOGO_DOCUMENT|#URL_DOCUMENT)] #TITRE <br>
+           </BOUCLE_affiche_doc>
+      </BOUCLE_doc2>
+		</td>
+		<td>[(#DATE_PUBLICATION|jour)]/[(#DATE_PUBLICATION|mois)]/[(#DATE_PUBLICATION|annee)]</td>
+	</tr>
+</BOUCLE_liste_devoir_passes>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION)</p>]
+</B_liste_devoir_passes>

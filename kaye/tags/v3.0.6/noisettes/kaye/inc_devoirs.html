@@ -1,0 +1,13 @@
+[(#REM) <!-- liste des devoirs --> ]
+<B_liste_devoir>
+<BOUCLE_liste_devoir(DEVOIRS){id_devoir}{pagination 10}>
+<div style="float:left; padding-right:1em;" >Pour le [(#DATE_ECHEANCE|jour)] [(#DATE_ECHEANCE|nom_mois)] :</div>
+<div class="#EDIT{matiere} matiere">#MATIERE</div>
+<div class="#EDIT{texte} texte">#TEXTE</div>
+<div class="bloc clearfix" id="documents_portfolio">
+	<BOUCLE_doc(DOCUMENTS){id_objet=#ID_DEVOIR}{objet=devoir}>[(#LOGO_DOCUMENT|#URL_DOCUMENT)]</BOUCLE_doc>
+</div>
+</BOUCLE_liste_devoir>
+
+[<p class='pagination'>(#PAGINATION)</p>]
+</B_liste_devoir>

@@ -1,0 +1,6 @@
+[(#REM) <!-- choix du jour de la semaine --> ]
+
+<BOUCLE_choix_jour(DEVOIRS){id_classe=#ENV{classe}}>
+[(#DATE_ECHEANCE|nom_jour|=={#ENV{jour}}|oui) <INCLURE{fond=noisettes/kaye/inc_devoirs}{id_devoir}{env}{ajax}>]
+</BOUCLE_choix_jour>
+

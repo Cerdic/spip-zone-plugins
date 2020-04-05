@@ -1,0 +1,25 @@
+<BOUCLE_devoir(DEVOIRS){id_devoir}{statut?}>
+
+[<div class="formulaire_spip formulaire_dater formulaire_dater-devoir-#ID_DEVOIR champ contenu_date_echeance[ (#DATE_ECHEANCE*|strlen|?{'',vide})]">
+	<label class='affiche'><:devoir:label_date_echeance:> : </label>
+<!-- <span dir='#LANG_DIR' class='#EDIT{date_echeance} date_echeance'>(#DATE_ECHEANCE)</span> -->
+	<span dir='#LANG_DIR' class='affiche #EDIT{date_echeance} date_echeance'>(#DATE_ECHEANCE|nom_jour)] [(#DATE_ECHEANCE|jour)] [(#DATE_ECHEANCE|nom_mois)] [(#DATE_ECHEANCE|annee)</span>
+
+</div>]
+
+[<div class="champ contenu_matiere[ (#MATIERE*|strlen|?{'',vide})]">
+	<label><:devoir:label_matiere:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{matiere} matiere'>(#MATIERE)</span>
+</div>]
+
+[<div class="champ contenu_id_classe[ (#ID_CLASSE*|strlen|?{'',vide})]">
+	<label><:devoir:label_id_classe:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{id_classe} id_classe'>(#ID_CLASSE)</span>
+</div>]
+
+[<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+	<label><:devoir:label_texte:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{texte} texte'>(#TEXTE)</span>
+</div>]
+
+</BOUCLE_devoir>

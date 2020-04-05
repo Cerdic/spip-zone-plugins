@@ -1,0 +1,32 @@
+<BOUCLE_devoir(DEVOIRS){id_devoir=#ENV{id}}{statut?}>
+<div class='infos'>
+[(#SET{texte_objet,<:devoir:titre_devoir:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_DEVOIR</p></div>
+
+[(#AUTORISER{supprimer,devoir,#ID_DEVOIR}|oui)
+				[(#URL_ACTION_AUTEUR{supprimer_devoir,#ID_DEVOIR,#ID_PARENT|?{#URL_ECRIRE{devoir,id_devoir=#ID_PARENT},#URL_ECRIRE{devoirs}}}|icone_horizontale{<:devoir:icone_supprimer_devoir:>,devoir,del})]
+				]
+
+[(#FORMULAIRE_INSTITUER_OBJET{devoirs,#ID_DEVOIR})]
+
+[(#REM)
+
+	Bouton voir en ligne
+
+]
+<BOUCLE_publie(DEVOIRS){id_devoir}>
+	[(#VAL{redirect}
+		|generer_url_action{type=devoirs&id=#ID_DEVOIR}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</BOUCLE_publie>
+	[(#AUTORISER{previsualiser,devoirs,#ID_DEVOIR,'',#ARRAY{statut,#STATUT}})
+		[(#VAL{redirect}
+			|generer_url_action{type=devoirs&id=#ID_DEVOIR}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{<:previsualiser:>,preview})]
+	]
+<//B_publie>
+
+</div>
+</BOUCLE_devoir>

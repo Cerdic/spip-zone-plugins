@@ -1,0 +1,41 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:kaye:cfg_titre_affichage_public:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		<ul>
+			[(#SAISIE{radio, kaye_vue,
+				label=<:kaye:cfg_vue:>,
+				datas=#ARRAY{
+						onglets,onglets,
+						tableau,tableau}})]
+		</ul>
+		[(#CONFIG{kaye/kaye_vue}|=={onglets}|?{' '})
+		
+		<fieldset>
+		<legend><:kaye:cfg_label_choix_joursemaine:></legend>
+		<ul>
+			[(#SAISIE{oui_non, mercredi,
+				label=<:kaye:cfg_mercredi:>
+				})]
+		</ul>
+		
+		<ul>
+			[(#SAISIE{oui_non, samedi,
+				label=<:kaye:cfg_samedi:>
+				})]
+		</ul>
+		</fieldset>
+		]
+
+		<input type="hidden" name="_meta_casier" value="kaye" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>
