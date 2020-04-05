@@ -1,0 +1,69 @@
+<plugin>
+	<nom>
+		<multi>
+		[fr]Squelette par mot clef
+		[en]Template by keyword
+		[it]Modello mediante una parola chiave
+		</multi>
+	</nom>
+	<slogan>
+		<multi>
+		[fr]Permet de choisir le squelette en fonction d'un mot clef
+		[en]Provides selection of template using keywords
+		[it]Scegliere un modello mediante una parola chiave
+		</multi>
+	</slogan>
+	<auteur>Pierre Andrews (Mortimer), d'apr&#232;s un code propos&#233; par D&#233;esse A.</auteur>
+	<version>2.1.0</version>
+	<etat>test</etat>
+	<description>
+		<multi>
+		[fr]Ce plugin permet de choisir le squelette en fonction d'un mot clef.
+	  
+      La page de configuration permet de cr&#233;er des r&#232;gles liant:
+-* un type d'&#233;l&#233;ment, 
+-* un groupe de mot clef sp&#233;cifiant le squelette 
+-* un fond.
+
+	  Ainsi, les auteurs n'ont plus qu'&#224; associer le bon mot clef &#224; leur article (par exemple) pour s&#233;lectionner sa mise en page.
+	[en]This plugin provides selection of template using keywords.
+
+	  You can create rules on the configuration page to link:
+-* an element type,
+-* a group of keyword specifying the template
+-* a template base name.
+	  
+	  Then, the authors only have to associate a keyword to their article (for example) to set its layout.
+	[it]Questo plugin permette di scegliere un modello mediante una parola chiave.
+
+	La pagina di configurazione permette di creare regole per legare:
+-* un tipo di elemento,
+-* un gruppo di parole chiave per scegliere il modello,
+-* un sfondo,
+
+	Cos&#236;, gli autori devono solamente scegliere la parola chiave giusta per cambiare il modello de la pagina che visualizza l'elemento (l'articolo per esempio)
+		</multi>
+	</description>
+	<icon>spip_death.png</icon>
+	<lien>https://contrib.spip.net/SPMC-Squelette-par-mot-cle-V2-0</lien>
+	<prefix>SquelettesMots</prefix>
+	
+	<pipeline>
+	  <nom>header_prive</nom>
+	  <inclure>SquelettesMots.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+	  <nom>styliser</nom>
+	  <inclure>SquelettesMots.php</inclure>
+	</pipeline>
+		
+	<onglet id='config_chercher_squelettes_mots' parent='configuration'>
+		<icone>spip_death.png</icone>
+		<titre>squelettesmots:titre_onglet</titre>
+	</onglet>
+	
+	<necessite id="spip" version="[2.0.6;2.1.99]" />
+	<categorie>outil</categorie>
+	<chemin dir='' />
+</plugin>
