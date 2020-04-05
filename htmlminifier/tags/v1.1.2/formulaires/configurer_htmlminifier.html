@@ -1,0 +1,234 @@
+
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:htmlminifier:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV{message_ok_config})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE
+		<input type="hidden" name="_meta_casier" value="htmlminifier" />
+		
+		<div class="barre_onglet clearfix">
+			<p>
+				<:htmlminifier:config_label:>:
+				<ul>
+					<li><a class="ajax nohistory" href="[(#URL_ACTION_AUTEUR{htmlminifier_appliquer_options, super_safe, #SELF})]"><:htmlminifier:config_super_safe:></a></li>
+					<li><a class="ajax nohistory" href="[(#URL_ACTION_AUTEUR{htmlminifier_appliquer_options, safe, #SELF})]"><:htmlminifier:config_safe:></a></li>
+					<li><a class="ajax nohistory" href="[(#URL_ACTION_AUTEUR{htmlminifier_appliquer_options, moderate, #SELF})]"><:htmlminifier:config_moderate:></a></li>
+					<li><a class="ajax nohistory" href="[(#URL_ACTION_AUTEUR{htmlminifier_appliquer_options, fully_optimised, #SELF})]"><:htmlminifier:config_fully_optimised:></a></li>
+				</ul>
+			</p>
+		</div>
+		
+		<div class="tabs" style="margin-bottom: 2em;">
+			<ul>
+				<li>
+					<a href="#section-general"><:htmlminifier:section_general:></a>
+				</li>
+				<li>
+					<a href="#section-css"><:htmlminifier:section_css:></a>
+				</li>
+				<li>
+					<a href="#section-javascript"><:htmlminifier:section_javascript:></a>
+				</li>
+			</ul>
+			<div id="section-general">
+					<div class="editer-groupe">
+
+						[(#SAISIE{selection, compression_mode,
+							conteneur_class=pleine_largeur,
+							defaut=all_whitespace_not_newlines,
+							cacher_option_intro=oui,
+							explication=<:htmlminifier:compression_mode_explication:>,
+							datas=#ARRAY{
+								none, <:htmlminifier:compression_mode_none:>,
+								all_whitespace_not_newlines, <:htmlminifier:compression_mode_all_whitespace_not_newlines:>,
+								all_whitespace, <:htmlminifier:compression_mode_all_whitespace:>}
+						})]
+						
+						[(#SAISIE{case, clean_html_comments,
+							conteneur_class=pleine_largeur,
+							valeur_oui=1,
+							defaut=on,
+							label_case=<:htmlminifier:clean_html_comments_label_case:>,
+							explication=<:htmlminifier:clean_html_comments_explication:>})]
+
+						[(#SAISIE{case, merge_multiple_head_tags,
+							conteneur_class=pleine_largeur,
+							valeur_oui=1,
+							defaut=on,
+							label_case=<:htmlminifier:merge_multiple_head_tags_label_case:>,
+							explication=<:htmlminifier:merge_multiple_head_tags_explication:>})]
+
+						[(#SAISIE{case, merge_multiple_body_tags,
+							conteneur_class=pleine_largeur,
+							valeur_oui=1,
+							defaut=on,
+							label_case=<:htmlminifier:merge_multiple_body_tags_label_case:>,
+							explication=<:htmlminifier:merge_multiple_body_tags_explication:>})]
+
+						[(#SAISIE{case, show_signature,
+							conteneur_class=pleine_largeur,
+							valeur_oui=1,
+							defaut=on,
+							label_case=<:htmlminifier:show_signature_label_case:>,
+							explication=<:htmlminifier:show_signature_explication:>})]
+
+						[(#SAISIE{textarea, compression_ignored_tags,
+							conteneur_class=pleine_largeur,
+							label=<:htmlminifier:compression_ignored_tags_label_case:>,
+							explication=<:htmlminifier:compression_ignored_tags_explication:>,
+							rows=3})]
+					</div>
+			</div>
+			<div id="section-css">
+				<div class="editer-groupe">
+
+					[(#SAISIE{case, clean_css_comments,
+						valeur_oui=1,
+						conteneur_class= pleine_largeur parent,
+						defaut=on,
+						label_case=<:htmlminifier:clean_css_comments_label_case:>,
+						explication=<:htmlminifier:clean_css_comments_explication:>})]
+
+					[(#REM) sub-setting de clean_css_comments ]	
+					[(#SAISIE{case, remove_comments_with_cdata_tags_css,
+						valeur_oui=1,
+						defaut="",
+						conteneur_class=enfant,
+						label_case=<:htmlminifier:remove_comments_with_cdata_tags_css_label_case:>,
+						explication=<:htmlminifier:remove_comments_with_cdata_tags_css_explication:>})]
+
+					[(#SAISIE{case, shift_link_tags_to_head,
+						valeur_oui=1,
+						conteneur_class= pleine_largeur parent,
+						defaut=on,
+						label_case=<:htmlminifier:shift_link_tags_to_head_label_case:>,
+						explication=<:htmlminifier:shift_link_tags_to_head_explication:>})]
+
+					[(#REM) sub-setting de shift_link_tags_to_head ]	
+					[(#SAISIE{case, ignore_link_schema_tags,
+						valeur_oui=1,
+						defaut=on,
+						conteneur_class=enfant,
+						label_case=<:htmlminifier:ignore_link_schema_tags_label_case:>,
+						explication=<:htmlminifier:ignore_link_schema_tags_explication:>})]
+
+					[(#SAISIE{case, shift_meta_tags_to_head,
+						valeur_oui=1,
+						conteneur_class= pleine_largeur parent,
+						defaut=on,
+						label_case=<:htmlminifier:shift_meta_tags_to_head_label_case:>,
+						explication=<:htmlminifier:shift_meta_tags_to_head_explication:>})]
+
+					[(#REM) sub-setting de shift_meta_tags_to_head ]
+					[(#SAISIE{case, ignore_meta_schema_tags,
+						valeur_oui=1,
+						defaut=on,
+						conteneur_class=enfant,
+						label_case=<:htmlminifier:ignore_meta_schema_tags_label_case:>,
+						explication=<:htmlminifier:ignore_meta_schema_tags_explication:>})]
+
+					[(#SAISIE{case, shift_style_tags_to_head,
+						valeur_oui=1,
+						conteneur_class= pleine_largeur parent,
+						defaut=on,
+						label_case=<:htmlminifier:shift_style_tags_to_head_label_case:>,
+						explication=<:htmlminifier:shift_style_tags_to_head_explication:>})]
+
+					[(#REM) defaut="", Only works if shift_style_tags_to_head is true.]
+					[(#SAISIE{case, combine_style_tags,
+						valeur_oui=1,
+						conteneur_class=enfant,
+						defaut="",
+						label_case=<:htmlminifier:combine_style_tags_label_case:>,
+						explication=<:htmlminifier:combine_style_tags_explication:>})]
+
+				</div>
+			</div>
+			<div id="section-javascript">
+				<div class="editer-groupe">
+
+					[(#SAISIE{case, clean_js_comments,
+						valeur_oui=1,
+						conteneur_class= pleine_largeur parent,
+						defaut=on,
+						label_case=<:htmlminifier:clean_js_comments_label_case:>,
+						explication=<:htmlminifier:clean_js_comments_explication:>})]
+
+					[(#SAISIE{case, remove_comments_with_cdata_tags_js,
+						valeur_oui=1,
+						conteneur_class=enfant,
+						defaut="",
+						label_case=<:htmlminifier:remove_comments_with_cdata_tags_js_label_case:>,
+						explication=<:htmlminifier:remove_comments_with_cdata_tags_js_explication:>})]
+					
+
+					[(#SAISIE{case, shift_script_tags_to_bottom,
+						valeur_oui=1,
+						conteneur_class= pleine_largeur parent,
+						defaut="",
+						label_case=<:htmlminifier:shift_script_tags_to_bottom_label_case:>,
+						explication=<:htmlminifier:shift_script_tags_to_bottom_explication:>})]
+
+					[(#SAISIE{case, combine_javascript_in_script_tags,
+						valeur_oui=1,
+						conteneur_class=enfant,
+						defaut="",
+						label_case=<:htmlminifier:combine_javascript_in_script_tags_label_case:>,
+						explication=<:htmlminifier:combine_javascript_in_script_tags_explication:>})]
+					
+					[(#SAISIE{case, ignore_async_and_defer_tags,
+						valeur_oui=1,
+						conteneur_class=enfant,
+						defaut="",
+						label_case=<:htmlminifier:ignore_async_and_defer_tags_label_case:>,
+						explication=<:htmlminifier:ignore_async_and_defer_tags_explication:>})]
+				</div>
+			</div>
+		</div>
+
+		<p class="boutons clearfix">
+			<span class="image_loading">&nbsp;</span>
+			<input type="submit" class="submit" name="valider" value="<:bouton_enregistrer:>" />
+		</p>
+
+	</div>
+	</form>
+	<script type="text/javascript">
+		$('.parent').each(function(){
+			var parent = $(this);
+			var selection = $(this).find('input:checkbox');
+			selection.on("change rightnow", function(){
+				if(selection.is(':checked')) {
+					parent
+					.nextUntil('.parent')
+					.show("normal");
+				}else{
+					parent
+					.nextUntil('.parent')
+					.hide();
+				}
+			}).triggerHandler("rightnow");
+		});
+
+		$(function() {
+			$(".tabs").tabs({
+				create: function (event, ui) {
+					var scrollTop = $(window).scrollTop();
+					window.location.hash = ui.panel.attr('id');
+					$(window).scrollTop(scrollTop);
+				},
+				activate: function (event, ui) {
+					var scrollTop = $(window).scrollTop();
+					window.location.hash = ui.newPanel.attr('id');
+					$(window).scrollTop(scrollTop);
+				}
+			});
+		});
+	</script>
+</div>
