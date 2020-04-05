@@ -1,0 +1,66 @@
+/** Bouton pour telechargement */
+
+.doc_bouton:hover
+{	top:1px;
+	left:1px
+}
+.doc_bouton
+{	display:;
+	position:relative;
+	margin:0;
+	padding:0;
+}
+.doc_bouton_center
+{	margin-left:auto;
+	margin-right:auto;
+}
+.doc_bouton_left
+{	float:left;
+}
+.doc_bouton_right
+{	float:right;
+}
+
+.doc_bouton td
+{	background:url("img/bouton_orange.png") no-repeat left top transparent;
+}
+.doc_bouton_mauve td
+{	background:url("img/bouton_mauve.png") no-repeat left top transparent;
+}
+.doc_bouton_bleu td
+{	background:url("img/bouton_bleu.png") no-repeat left top transparent;
+}
+.doc_bouton td.left
+{	background-position:left;
+	height:57px;
+}
+.doc_bouton td.right
+{	background-position:right;
+	height:57px;
+}
+
+.doc_bouton a
+{	display:block;
+	font-weight:bold;
+}
+.doc_bouton a:hover,
+.doc_bouton a:active,
+.doc_bouton a:focus
+{	text-decoration:none;
+	color:Navy;
+}
+.doc_bouton .info
+{	display:block;
+	font-size:0.9em;
+	font-style:italic;
+	line-height:1em;
+}
+.doc_bouton .left a
+{	padding-left:2em;
+}
+.doc_bouton .right a
+{	padding:0 2em 12px 1em;
+}
+.doc_bouton .spip_logos
+{	padding-bottom:12px;
+}
