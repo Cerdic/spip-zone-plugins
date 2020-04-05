@@ -1,0 +1,23 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+<h3 class='titrem'><:chmlatex:configuration_compilation:></h3>
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    <form action='[(#ENV{action}|parametre_url{format|num|secteur|lang,''})]' method='post'>
+        #ACTION_FORMULAIRE{#ENV{action}}
+        <fieldset>
+        <p class="explication"><:chmlatex:compil_chm_desc:></p>
+        <legend><:chmlatex:options_compilation:></legend>
+        [(#SAISIE{input,
+            compilateur_html,
+            label=<:chmlatex:compil_chm_label:>})]
+        [(#SAISIE{input,
+            compilateur_tex,
+            label=<:chmlatex:compil_latex_label:>,
+            description=<:chmlatex:compil_latex_description:>})]
+
+        <p class='boutons'><span class='image_loading'>&nbsp;</span>
+
+        <input type="submit" class="submit" name="Valider" value="<:chmlatex:valider:>" /> </p>
+        </fieldset>
+    </form>
+</div>

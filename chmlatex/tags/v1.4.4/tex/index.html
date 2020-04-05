@@ -1,0 +1,14 @@
+#HTTP_HEADER{content-type:application/x-latex}
+<INCLURE{fond=tex/header}>
+
+<INCLURE{fond=generic/rubrique,
+    id_rubrique,
+    format=tex
+}>
+
+\clearpage
+\ifodd\thepage\hbox{}\newpage\else\fi%si page paire ou impaire
+
+\input{inclus/derniere}
+
+\end{document}

@@ -1,0 +1,14 @@
+<BOUCLE_art1(ARTICLES){id_article=#ENV{id_article}}{origine_traduction}{par num titre}>
+    <li class="li_article">
+    <BOUCLE_art2 (ARTICLES){traduction}{lang=#ENV{lang}}>
+        <a href="article#ID_ARTICLE.html">
+            [(#TITRE|supprimer_numero|to_win1252)]
+        </a>
+    </BOUCLE_art2>
+        <a href="article#ID_ARTICLE.html">
+            [(#TITRE|supprimer_numero|to_win1252)]
+        </a>
+            (<:documentation:non_disponible_en:> <:documentation:langue:>)
+    <//B_art2>
+    </li>
+</BOUCLE_art1>

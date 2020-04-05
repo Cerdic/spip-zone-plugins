@@ -1,0 +1,9 @@
+#BOITE_OUVRIR{#CHEMIN_IMAGE{chmlatex-32.png}|balise_img{'',cadre-icone}|concat{#ENV{boite_titre}},'simple','titrem'}
+
+<p>#ENV{titre_objet}</p>
+<div style="text-align: center;">
+<progress id='barre-progression' max="100" value="#ENV{progression}" style="text-align: center;width: 90%;height: 2em;margin: .5em;border: 3px solid white;border-radius: 5px;box-shadow: 0 0 0 3px #b6b6b6;"></progress>
+<div id='lbl-avancement' style="font-size: 200%;">#ENV{progression}&nbsp;%</div>
+</div>
+
+#BOITE_FERMER

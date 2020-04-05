@@ -1,0 +1,11 @@
+<BOUCLE_art1(ARTICLES){id_article=#ENV{id_article}}{origine_traduction}{par num titre}>
+    <li><object type="text/sitemap">
+    <BOUCLE_art2 (ARTICLES){traduction}{lang=#ENV{lang}}>
+        <param name="Name" value="[(#TITRE|supprimer_numero|textebrut|to_win1252)]">
+        <param name="Local" value="article[(#ID_ARTICLE.html)].html">
+    </BOUCLE_art2>
+        <param name="Name" value="[(#TITRE|supprimer_numero|textebrut|to_win1252)]">
+        <param name="Local" value="article[(#ID_ARTICLE.html)].html">
+    <//B_art2>
+    </object></li>
+</BOUCLE_art1>

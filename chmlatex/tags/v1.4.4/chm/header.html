@@ -1,0 +1,46 @@
+[(#REM) <!-- Header inclus dans chaque page du squelette documentation
+
+   Cette noisette supporte 3 arguments:
+      - meta_titre : le titre de la page affiche par la balise title
+      - meta_description : la description de la page inseree dans le metatag description
+
+   et quelques variables de config:
+      - recurrence_robot : nombre de jours entre deux visite (metatag revisit-after)
+      - auteur_site : nom de l'auteur du site (metatag author)
+      - licence_site : le type de copyright choisi pour le site, idem que le footer (metatag copyright)
+      - keywords_site : la liste des mots-cles caracterisant le site (metatag keywords)
+--> ]
+
+[(#SET{meta_description, [(#ENV{meta_description}|sinon{#DESCRIPTIF_SITE_SPIP})]})]
+
+<head>
+   [(#REM) <!-- Metatags proposes en standard par le squelette --> ]
+   <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+   <meta name="revisit-after" content="[(#CONFIG{sarkaspip_header/recurrence_robot, 30}) days]" />
+   <meta name="robots" content="index,follow" />
+   <meta name="generator" content="SPIP[ (#SPIP_VERSION)] - Sarka-SPIP[ (#VERSION_SQUELETTE|textebrut)]" />
+   <meta name="author" content="[(#CONFIG{sarkaspip_header/auteur_site, <:sarkaspip:realisation_squelette:>})]" />
+   <meta name="copyright" content="Copyright [(#NOM_SITE_SPIP|textebrut)][ - (#CONFIG{sarkaspip_header/licence_site}|textebrut)]" />
+   <meta name="distribution" content="global" />
+   <meta name="description" content="[(#GET{meta_description}|textebrut)]" />
+   [<meta name="keywords" content="(#CONFIG{sarkaspip_header/keywords_site}|textebrut)" />]
+
+   <title>[(#ENV{meta_titre}|textebrut|to_win1252)]</title>
+
+
+  
+   [(#REM) <!-- Styles SPIP par defaut --> ]
+   
+   <link rel="stylesheet" type="text/css" media="all" href="chm.css" />
+
+      [(#REM) <!-- Balise permettant aux plugins d'inserer des appels javascript ou css --> ]
+   <script type="text/javascript">
+    //<![CDATA[
+        function setHover(){
+        }
+    //]]>
+    </script>
+
+   [(#REM) <!-- Agreger et compacter tout cela dans des fichiers statiques -->
+   #FILTRE{compacte_head}]
+</head>
