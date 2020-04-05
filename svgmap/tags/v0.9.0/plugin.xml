@@ -1,0 +1,44 @@
+<plugin>
+	<prefix>svgmap</prefix>
+	<nom>Carte SVG des départements ou régions française</nom>
+	<slogan>Modèles pour insérer une carte SVG des départements ou régions(ancienne et nouvelle) françaises</slogan>
+	<auteur>guillaumew</auteur>
+	<licence>GNU/GPL - (c) 2015</licence>
+	<version>0.9.0</version>
+	<etat>dev</etat>
+	<description>
+	    Propose trois modèles pour afficher une carte de France en SVG :
+_ Découpée par départements : &lt;svgmap_departements|lien_base=truc&gt; ou [(#MODELE{departements}{lien_base=truc})];
+_ Découpée par régions  : &lt;svgmap_regions|lien_base=truc&gt; ou [(#MODELE{regions}{lien_base=truc})];
+_ Découpée par super régions (régions francaise à compter du 1er janvier 2016) : &lt;svgmap_super_regions|lien_base=truc&gt; ou [(#MODELE{super_regions}{lien_base=truc})];
+
+
+Toutes ces modeles acceptent les paramètres suivants:
+    -* |height=400px : hauteur de la carte
+    -* |width=400px : largeur de la carte
+    -* |lien_base= : l'url des liens sur les départements (par défaut #SELF donc la page en cours)
+    -* |lien_param= : le paramètre de l'url pour passer le numéro de département (par défaut "depart" : ...?depart=...)
+    -* |param=nom : pour passer le nom du département à la place de son numéro comme valeur du paramètre |lien_param
+    -* |lien_param= : le paramètre de l'url pour passer le numéro de département (par défaut "depart" : ...?depart=...)
+    -* |param=nom : pour passer le nom du département à la place de son numéro comme valeur du paramètre |lien_param
+    -* |borderColor=#000000 si on souhaite la couleur des bordures des régions
+    -* |color=#FACC2E si vous souhaitez modifier la couleur des régions
+    -* |colors=true|{{false}} Applique les couleurs défini dans la variable javacript couleurs
+    -* |selectedColor=#EC0000 si vous souhaitez modifier la couleur de la région sélectionnée
+    -* |hoverOpacity=0.5 si vous souhaitez modifier la couleur de la région sélectionnée
+    -* |hoverColor=#EC0000 si vous souhaitez modifier la couleur de la région sélectionnée
+    -* |backgroundColor=transparent si vous souhaitez modifier la couleur de la région sélectionnée
+    -* |enableZoom=false si vous souhaitez activer ou désactiver le zoom
+
+
+
+Crédits:
+-* Big UP à cy_altern pour son plugin ImageMap  
+-* Source de la carte [JQVMap / Gaël Jaffredo->http://www.jaffredo.com]
+	</description>
+	<lien>https://contrib.spip.net/SVG-map-des-cartes-reactives-en-SVG</lien>
+	<icon>svgmap-64.png</icon>
+
+	<categorie>divers</categorie>
+	<necessite id="spip" version="[2.0.0;3.0.99]" />
+</plugin>

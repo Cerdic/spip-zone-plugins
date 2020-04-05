@@ -1,0 +1,33 @@
+    <div id="#MAP" style="[width: (#WIDTH|sinon{400px});][ height: (#HEIGHT|sinon{400px})];"></div>
+    [<link href="(#CHEMIN{css/jqvmap.css})" media="screen" rel="stylesheet" type="text/css" />]
+    [<script src="(#CHEMIN{js/jquery.vmap.js})" type="text/javascript"></script>]
+    [<script src="(#CHEMIN{js/vmap_#MAP.js})" type="text/javascript"></script>]
+
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$('##MAP').vectorMap({
+		    map: '#MAP',
+			hoverOpacity: [(#HOVEROPACITY|sinon{0.5})],
+			hoverColor: "[(#HOVERCOLOR|sinon{'#EC0000'})]",
+			backgroundColor: "[(#BACKGROUNDCOLOR|sinon{'transparent'})]",
+			color: "[(#COLOR|sinon{'#FACC2E'})]",
+			borderColor: "[(#BORDERCOLOR|sinon{'#000000'})]",
+			selectedColor: "[(#SELECTEDCOLOR|sinon{'#EC0000'})]",
+			enableZoom: "[(#ZOOM|sinon{'false'})]",
+			[(#COLORS|oui)colors: couleurs,]
+			showTooltip: "[(#TOOLTIP|sinon{'false'})]",
+		    onRegionClick: function(element, code, region,data)
+		    {
+                if(data.id_article){
+                    document_url='[(#URL_PAGE{article})]&id_article='+data.id_article
+                    window.location.replace(document_url)}
+                if(data.id_rubrique){
+                    document_url='[(#URL_PAGE{rubrique})]&id_rubrique='+data.id_rubrique
+                    window.location.replace(document_url)}
+                if(data.id_rubrique){
+                    window.location.replace(data.url)}
+		    }
+		});
+	});
+	</script>
+
