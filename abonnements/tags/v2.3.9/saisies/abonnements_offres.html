@@ -1,0 +1,19 @@
+[(#SET{defaut_tri,#ARRAY{
+	num titre,1,
+	titre,1, 
+	id_abonnement,1,
+	points,-1
+}})]
+
+#SET{data,#ARRAY}
+<BOUCLE_abonnements_offres(ABONNEMENTS_OFFRES){tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{statut?}{recherche?}>
+[(#SET{titre, #TITRE[ (#ENV{afficher_prix}|oui)<span class="prix">\(#PRIX\)</span>]})]
+#SET{data,#GET{data}|plus{#ARRAY{#ID_ABONNEMENTS_OFFRE,#GET{titre}}}}
+</BOUCLE_abonnements_offres>
+
+[(#ENV{multiple}|oui)
+#INCLURE{fond=saisies/checkbox, env, datas=#GET{data}}
+]
+[(#ENV{multiple}|non)
+#INCLURE{fond=saisies/radio, env, datas=#GET{data}}
+]
