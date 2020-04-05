@@ -1,0 +1,16 @@
+<traduction
+	module="paquet-epubreader"
+	id="paquet-epubreader--epub_reader-889a4"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip-contrib-extensions/epub_reader.git"
+	reference="fr">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/paquet-epubreader?lang_cible=en" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="es" url="https://trad.spip.net/tradlang_module/paquet-epubreader?lang_cible=es" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
+	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-epubreader?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="nl" url="https://trad.spip.net/tradlang_module/paquet-epubreader?lang_cible=nl" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
+	</langue>
+</traduction>
