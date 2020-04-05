@@ -1,0 +1,32 @@
+[(#REM)
+
+  Parametres :
+  - class : classe(s) css ajoutes au select
+  - multiple : si quelquechose est passe, le select est multiple, sinon, c'est un select simple
+  	Dans le cas multiple, defaut et valeur doivent être un array, sinon un int
+  - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+
+  Exemple d'appel :
+	[(#SAISIE{sites_piwik,idpiwik,
+		label=<:piwik:label_identifiant_site:>
+	})]
+]
+<B_selection>
+<select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"]>
+	[<option value="">(#ENV{option_intro})</option>]
+	<BOUCLE_selection(POUR){tableau #CONFIG{piwik_sites_dispo}}>
+		#SET{id_site,''}
+		#SET{name,''}
+		<BOUCLE_selection_bis(POUR){tableau #VALEUR}>
+			[(#CLE|=={idsite}|oui)#SET{idsite,#VALEUR}]
+			[(#CLE|=={name}|oui)#SET{name,#VALEUR}]
+			[(#CLE|=={main_url}|oui)#SET{main_url,#VALEUR}]
+		</BOUCLE_selection_bis>
+		<option value="#GET{idsite}"[(#GET{idsite}|=={#ENV{valeur}}|ou{#GET{main_url}|=={#ENV{defaut}}}|oui) selected="selected"]>#GET{name}</option>
+	</BOUCLE_selection>
+</select>
+</B_selection>
+<p><:piwik:info_aucun_site_compte:></p>
+[(#CONFIG{piwik_admin}|=={non}|oui)
+<p><:piwik:info_aucun_site_compte_demander_admin:></p>]
+<//B_selection>
