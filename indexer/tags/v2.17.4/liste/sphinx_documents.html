@@ -1,0 +1,25 @@
+
+<B_documents>
+    <h2>Documents trouvés</h2>
+    <small>
+    [(#ENV{meta}|table_valeur{total}|=={1000}|?{'+ de '}) ][(#ENV{meta}|table_valeur{total}) ]résultats ([(#ENV{meta}|table_valeur{time}|mult{1000})] ms)
+    </small>
+
+    <div class='liste long resultats'>
+        [<div class="pagination">(#DEBUT_DOCUMENTS|?{#PAGINATION,#ANCRE_PAGINATION})</div>]
+        <ul class='liste-items'>
+<BOUCLE_documents(DATA){source tableau, #DOCS}{pagination 20}>
+            <li class='item'>
+                <article class='entry article hentry'>
+                    <strong class='h3-like entry-title'>#SCORE/#ENV{max} = [(#SCORE|mult{100}|div{#ENV{max}}|intval)%] <a href="#URI">#TITLE</a></strong>
+                    <p class="publication">
+                        [<time pubdate="pubdate" datetime="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</time>][<span class="authors"><span class="sep">, </span> <:par_auteur:> (#PROPERTIES{authors}|implode{', '})</span>]
+                    </p>
+                    [<div class="introduction entry-content">(#SNIPPET|sinon{#SUMMARY})</div>]
+                </article>
+            </li>
+</BOUCLE_documents>
+        </ul>
+    </div>
+[<div class="pagination">(#PAGINATION)</div>]
+</B_documents>

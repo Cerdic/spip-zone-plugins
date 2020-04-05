@@ -1,0 +1,58 @@
+
+[(#REM) Lister les statuts de l'objet ]
+#SET{statuts, #ENV{table}|objet_info{statut_titres}}
+<B_statut>
+<li class="editer">
+	<label><:indexer:configurer_statuts_ignores_label:></label>
+	<p class="explication"><:indexer:configurer_statuts_ignores_explication:></p>
+	<BOUCLE_statut(DATA){source table,#ARRAY{publie,publie,prop,prop,prepa,prepa}}>
+	<div class="choix">
+		<input
+			type="checkbox" class="checkbox"
+			name="#ENV{objet}\[statuts_ignores\]\[\]"
+			id="#ENV{objet}_statuts_ignores_#CLE"
+			value="#CLE"
+			[checked="(#CLE|in_array{#ENV{#ENV{objet}/statuts_ignores}|sinon{#ARRAY}}|?{checked})"]
+		/>
+		<label for="#ENV{objet}_statuts_ignores_#CLE">[(#VALEUR|_T)]</label>
+	</div>
+	</BOUCLE_statut>
+</li>
+</B_statut>
+
+[(#REM) Lister les champs de l'objet 
+#SET{champs, #ENV{table}|objet_info{field}|array_keys}
+
+<li class="editer">
+	<label for="#ENV{objet}_champ_titre">Champs fulltext</label>
+	<select name="#ENV{objet}\[champ_titre\]" id="#ENV{objet}_champ_titre" multiple="multiple">
+		<option value="">Auto</option>
+		< BOUCLE_champ_titre(DATA){source table,#GET{champs}}>
+		<option value="#VALEUR">#VALEUR</option>
+		</BOUCLE_champ_titre>
+	</select>
+</li>
+]
+
+[(#REM)
+	Des configurations pour chaque jointure possible
+	Déjà l'activation, et peut-être d'autres config
+]
+<BOUCLE_jointures(DATA){source table,#ENV{table}|indexer_lister_jointures}>
+	#SET{jointure_humaine,#VALEUR|objet_info{texte_objets}|_T|strtolower}
+	<li class="editer pleine_largeur">
+		<div class="choix">
+			<input
+				type="checkbox" class="checkbox"
+				name="#ENV{objet}\[jointure_[(#VALEUR)]\]\[activer\]"
+				id="#ENV{objet}_jointure_[(#VALEUR)]_activer"
+				[checked="(#ENV{#ENV{objet}/jointure_#VALEUR/activer}|?{checked})"]
+				onchange="jQuery('.editer.#ENV{objet}_jointure_#VALEUR').toggle(500);"
+			/>
+			<label for="#ENV{objet}_jointure_[(#VALEUR)]_activer"><:indexer:configurer_jointure_activer_label{jointure=#GET{jointure_humaine}}:></label>
+		</div>
+	</li>
+	[(#CHEMIN{formulaires/configurer_indexer/jointure_#VALEUR.html}|oui)
+		#INCLURE{fond=formulaires/configurer_indexer/jointure_#VALEUR,env}
+	]
+</BOUCLE_jointures>

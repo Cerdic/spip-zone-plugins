@@ -1,0 +1,19 @@
+#BOITE_OUVRIR{Indexer les contenus,simple}
+
+<div class='liste'>
+    <ul class='liste-items'>
+        <li class='item'><a href="[(#URL_ECRIRE{indexer})]">Gestion de l’indexation</a></li>
+
+        <li class='item'><a href="[(#URL_ECRIRE{configurer_indexer})]">Configurer l’indexation</a></li>
+
+        <li class='item'><a href="[(#URL_ECRIRE{indexer}|parametre_url{run,1})]">Démarrer</a></li>
+        [(#CONFIG{indexer/indexing/stats}|oui)
+        <li class='item'><a href="[(#URL_ECRIRE{indexer}|parametre_url{continue,1})]">Continuer</a></li>]
+
+        <li class='item'><a href="[(#URL_ECRIRE{indexer}|parametre_url{purger,1})]">Purger l’index</a></li>
+
+    </ul>
+</div>
+
+
+#BOITE_FERMER

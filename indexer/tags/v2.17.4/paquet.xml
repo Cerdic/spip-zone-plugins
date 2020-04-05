@@ -1,0 +1,29 @@
+<paquet
+	prefix="indexer"
+	categorie="navigation"
+	version="2.17.4"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/indexer-64.png"
+	documentation="https://contrib.spip.net/Sphinx-Indexer"
+>
+	<nom>Indexer</nom>
+
+	<auteur>Matthieu Marcillaud</auteur>
+	<auteur>Rastapopoulos</auteur>
+	<auteur>Fil</auteur>
+	<auteur>Maïeul Rouquette</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="post_edition" inclure="indexer_pipelines.php" />
+	<pipeline nom="post_edition_lien" inclure="indexer_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="indexer_pipelines.php" />
+
+	<!-- Pipelines ajoutés par le plugin -->
+	<pipeline nom="indexer_indexer" action="" />
+	<pipeline nom="indexer_sources" action="" />
+	<pipeline nom="indexer_document" action="" />
+
+	<menu nom="indexer" titre="Configurer l’indexation" parent="menu_configuration" position="-1" icone="images/indexer-16.png" />
+</paquet>

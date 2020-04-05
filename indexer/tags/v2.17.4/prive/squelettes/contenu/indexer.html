@@ -1,0 +1,101 @@
+<h1 class="grostitre">Test de l'indexer</h1>
+
+<BOUCLE_test(SPHINX) {select COUNT(*)} />
+[<div class="[(#TOTAL_BOUCLE|?{success,error})]">Connexion
+  à l’index <tt>#EVAL{SPHINX_DEFAULT_INDEX}</tt>
+  via <tt>#EVAL{SPHINX_SERVER_HOST}:#EVAL{SPHINX_SERVER_PORT}</tt>
+  <br>Statut: <strong>(#TOTAL_BOUCLE|?{OK,échec})</strong>
+</div>]
+
+<//B_test>
+
+<style>
+dd { margin-left: 2em; }
+</style>
+<B_compte>
+<h3>Contenus indexés</h3>
+<div>
+#SET{f,#SPHINX_FACETS*}
+<BOUCLE_facettes(DATA){source tableau, #GET{f}}>
+<BOUCLE_f1(DATA){source tableau, #VALEUR}>[(#CLE|oui)]</BOUCLE_f1>
+<dt><strong>[(#CLE|ucfirst)]</strong></dt>
+<dd><BOUCLE_f2(DATA){source tableau, #VALEUR}{" &nbsp; &bullet; &nbsp; "}>
+<span>[(#CLE|sinon{n/a}):&nbsp;][(#VALEUR|print)]</span></BOUCLE_f2></dd>
+</B_f1></BOUCLE_facettes>
+</div>
+<BOUCLE_compte(SPHINX)
+	{facet objet, properties.objet ORDER BY COUNT(*) DESC}
+	{facet source, properties.source ORDER BY COUNT(*) DESC}
+	{facet lang, properties.lang ORDER BY COUNT(*) DESC}
+	{facet secteur, properties.secteur ORDER BY COUNT(*) DESC}
+	{facet statut, properties.statut ORDER BY COUNT(*) DESC}
+	{facet authors, properties.authors ORDER BY COUNT(*) DESC}
+	{facet tags, properties.tags ORDER BY COUNT(*) DESC}
+	{0,1}
+	{!par date_indexation}
+> </BOUCLE_compte>
+
+</B_compte>
+<div class="error">Base SPHINX vide.</div>
+[<hr>(#SPHINX_META|print)]
+<//B_compte>
+
+[(#SET{last,#CONFIG{indexer_derniere_reindexation}})]
+[
+<p class='info'>Dernière réindexation complète lancée le :
+(#GET{last}|?{[(#VAL{Y-m-d H:i:s}|date{#GET{last}})]})</p>]
+
+
+
+<?php
+
+
+// Appeler la fonction qui donne l'indexeur configuré pour ce SPIP
+include_spip('inc/indexer');
+$indexer = indexer_indexer();
+
+if (_request('run') || _request('continue')) {
+	
+	// Appeler la fonction qui liste les sources et qui comporte un pipeline pour étendre
+    $sources = indexer_sources();
+
+    $SpipSourcesIndexer = new Spip\Indexer\Sources\SpipSourcesIndexer($indexer, $sources);
+
+    if (_request('run')) {
+        $SpipSourcesIndexer->resetIndexesStats();
+    }
+    $res = $SpipSourcesIndexer->indexAll();
+
+    if (!$res) {
+        echo "\n<br/><a id='recharger' href='[(#SELF|parametre_url{run,''}|parametre_url{continue,1})]'>Recharger la page pour continuer l'indexation</a>";
+        echo "<script type='text/javascript'>setTimeout(function(){ $('#recharger').ajaxReload({\"href\":$('#recharger').attr('href')})},100);</script>";
+    } else {
+        echo "\n<pre class='success'>"; print_r($res); echo "</pre>";
+    }
+
+}
+
+
+if (_request('purger')) {
+	$ret = $indexer->purgeDocuments();
+	if (!$ret) {
+		echo "\n<p class='error'>";
+		echo "Erreur lors de la requête de purge. Veuillez vérifier les logs de spip (tmp/log/indexer.log)\n";
+		echo "</p>\n";
+	} else {
+		echo "\n<p class='success'>";
+		echo "L’index a été purgé.\n";
+		echo "</p>\n";
+	}
+}
+
+?>
+
+[(#ENV{continue}|non|et{#ENV{run}|non}|oui)
+[(#CONFIG{indexer/indexing/stats}|oui)
+<h3>Dernière indexation</h3>
+<pre>
+[(#CONFIG{indexer/indexing/stats}|print)]
+</pre>
+]]
+

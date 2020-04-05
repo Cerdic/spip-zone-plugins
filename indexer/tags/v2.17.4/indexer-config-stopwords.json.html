@@ -1,0 +1,6 @@
+#HTTP_HEADER{Content-Type: application/json}#CACHE{0}
+[(#CONFIG{indexer/stopwords}
+  |mb_strtolower|translitteration
+  |explode{','}|replace{' '}
+  |json_encode)
+]

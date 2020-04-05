@@ -1,0 +1,62 @@
+[(#REM)
+
+	Par defaut si la meta est vide (pas de configuration),
+	on n'indexe que les spip_articles
+
+][(#ENV{sources_objets}|is_array|?{#SET{sources,#ENV{sources_objets}},#SET{sources,#LISTE{spip_articles}}})]
+
+<div class="formulaire_spip formulaire_configurer[ formulaire_(#FORM)]">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	<form action="#ENV{action}" method="post"><div>
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+		
+		[(#REM) Pour que l'API configurer charge et accepte les sous-config ]
+		<BOUCLE_objets_declaration(DATA){source table,#VAL|lister_tables_objets_sql}>
+		[(#VALEUR{editable}|oui)
+		#SET{objet, #CLE|objet_type}
+		<input type="hidden" name="#GET{objet}" />
+		]
+		</BOUCLE_objets_declaration>
+		
+		<ul class="editer-groupe">
+			<li class="editer [ (#ENV**{erreurs/sources_objets}|oui)erreur]">
+				<label><:indexer:configurer_sources_objets_label:></label>
+				#INCLURE{fond=formulaires/inc-choisir-objets,
+					name=sources_objets,
+					selected=#GET{sources}}
+			</li>
+			<li class="editer [ (#ENV**{erreurs/source}|oui)erreur]">
+				<label for="source"><:indexer:configurer_source_label:></label>
+				<input type="text" class="text" name="source" id="source" value="#ENV{source,#URL_SITE_SPIP}" />
+			</li>
+			<li class="editer [ (#ENV**{erreurs/stopwords}|oui)erreur]">
+				<label for="stopwords"><:indexer:configurer_stopwords_label:></label>
+				<p class="explication"><:indexer:configurer_stopwords_explication:></p>
+				<textarea class="textarea" rows="10" name="stopwords" id="stopwords">#ENV*{stopwords}</textarea>
+			</li>
+			
+			[(#REM) Pour chaque objet on peut potentiellement configurer des précisions ]
+			<BOUCLE_objets(DATA){source table,#GET{sources}|array_filter}>
+			#SET{objet, #VALEUR|objet_type}
+			
+			[(#REM) S'il y a un squelette dédié pour cet objet sinon squelette générique ]
+			[<li class="fieldset">
+				<fieldset>
+					<legend>[(#VALEUR|objet_info{texte_objets}|_T)]</legend>
+					<ul class="editer-groupe">
+					(#CHEMIN{formulaires/configurer_indexer/#GET{objet}.html}|?{
+						#INCLURE{fond=formulaires/configurer_indexer/#GET{objet},objet=#GET{objet},table=#VALEUR,env},
+						#INCLURE{fond=formulaires/configurer_indexer/objet,objet=#GET{objet},table=#VALEUR,env}
+					})
+					</ul>
+				</fieldset>
+			</li>]
+			</BOUCLE_objets>
+		</ul>
+		
+		<p class='boutons'><input class='submit' type="submit" name="ok" value="<:bouton_enregistrer:>"/></p>
+	</div></form>
+</div>

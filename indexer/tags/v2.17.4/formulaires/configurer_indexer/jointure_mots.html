@@ -1,0 +1,15 @@
+<li class="editer #ENV{objet}_jointure_mots" [(#ENV{#ENV{objet}/jointure_mots/activer}|non)style="display:none;"]>
+	<label for="#ENV{objet}_jointure_mots_groupes_ignores"><:indexer:configurer_groupes_ignores_label:></label>
+	<p class="explication"><:indexer:configurer_groupes_ignores_explication:></p>
+	<B_groupes_ignores>
+	<select
+		multiple="multiple"
+		name="#ENV{objet}\[jointure_mots\]\[groupes_ignores\]\[\]"
+		id="#ENV{objet}_jointure_mots_groupes_ignores"
+	>
+	<BOUCLE_groupes_ignores(GROUPES_MOTS){par titre}>
+		<option value="#ID_GROUPE" [(#ID_GROUPE|in_array{#ENV{#ENV{objet}/jointure_mots/groupes_ignores, #ARRAY}}|oui)selected="selected"]>#TITRE</option>
+	</BOUCLE_groupes_ignores>
+	</select>
+	</B_groupes_ignores>
+</li>

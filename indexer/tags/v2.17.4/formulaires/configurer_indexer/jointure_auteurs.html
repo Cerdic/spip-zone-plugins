@@ -1,0 +1,11 @@
+<li class="editer #ENV{objet}_jointure_auteurs" [(#ENV{#ENV{objet}/jointure_auteurs/activer}|non)style="display:none;"]>
+	<div class="choix">
+		<input
+			type="checkbox" class="checkbox"
+			name="#ENV{objet}\[jointure_auteurs\]\[indexer_email\]"
+			id="#ENV{objet}_jointure_auteurs_indexer_email"
+			[checked="(#ENV{#ENV{objet}/jointure_auteurs/indexer_email}|?{checked})"]
+		/>
+		<label for="#ENV{objet}_jointure_auteurs_indexer_email"><:indexer:configurer_indexer_email_label:></label>
+	</div>
+</li>
