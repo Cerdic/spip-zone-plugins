@@ -1,0 +1,18 @@
+<paquet
+	prefix="convertisseur"
+	categorie="edition"
+	version="0.5.3"
+	etat="test"
+	compatibilite="[2.0.0;3.2.*]"
+	logo="img_pack/convertisseur.png"
+	documentation="https://contrib.spip.net/Plugin-Convertisseur"
+>
+	<nom>Convertisseur</nom>
+
+	<auteur lien="https://www.erational.org">erational</auteur>
+	<auteur lien="http://zzz.rezo.net/">Fil</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+
+	<menu nom="convertisseur" titre="convertisseur:convertir_titre" parent="bando_edition" icone="images/convertisseur-16.png" />
+
+</paquet>
