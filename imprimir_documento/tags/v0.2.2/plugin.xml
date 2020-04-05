@@ -1,0 +1,30 @@
+<plugin>
+	<nom>
+		<multi>
+		[es]Imprimir documento
+		[fr]Imprimer document
+		</multi>
+	</nom>
+	<slogan>
+		<multi>
+		[es]Imprimir art&#237;culos y breves sin cabeceras, ni mens,...
+		[fr]Obtenir une version imprimable des articles et des br&#232;ves...
+		</multi>
+	</slogan>
+	<auteur>joseluis@digital77.com</auteur>
+	<licence>CopyLeft 2006</licence>
+	<version>0.2.2</version>
+	<etat>stable</etat>
+	<description>
+		<multi>
+		[es]Versi&#243;n para imprimir art&#237;culos y breves sin cabeceras, ni mens,... Para utilizarla coloca la baliza <code>#IMPRIMIR_DOCUMENTO**</code> donde quieras que aparezca el enlace (art&#237;ulos o breves). Los dos ** asteriscos son importantes, no los olvides.
+		[fr]Plugin pour obtenir une version imprimable des articles et des br&#232;ves... Pour l'utiliser, il suffit d'ajouter la balise <code>#IMPRIMIR_DOCUMENTO**</code> dans les squelettes sans oublier les deux ast&#233;risques (dans les aricles et br&#232;ves)
+		</multi>
+	</description>
+	<lien>https://contrib.spip.net/article2227.html</lien>
+	<icon>imprimir_documento.png</icon>
+	<fonctions>baliza_imprimir_documento.php</fonctions>
+	<prefix>imprimir_documento</prefix>
+	<necessite id="SPIP" version="[2.0.0;3.2.99]" />
+	<categorie>edition</categorie>
+</plugin>
