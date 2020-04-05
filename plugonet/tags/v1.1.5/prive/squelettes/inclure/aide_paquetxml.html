@@ -1,0 +1,14 @@
+#SET{index_aide,#EVAL{$GLOBALS['index_aide_plugonet']}} 
+<div class="liste-objets">
+	<table class="spip liste" summary="<:plugonet:resume_table_aide_paquetxml:>">
+	<caption><strong class="caption"><:plugonet:titre_boite_aide_paquetxml:></strong></caption>
+		<tbody>
+<BOUCLE_index_aide(DATA){source table, #GET{index_aide}}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<td class="titre principale">[(#VAL{plugonet:index_aide_#VALEUR}|_T)]</td>
+				<td class="bouton">#AIDER{#VALEUR}</td>
+			</tr>
+</BOUCLE_index_aide>
+		</tbody>
+	</table>
+</div>
