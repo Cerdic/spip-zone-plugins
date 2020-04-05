@@ -1,0 +1,35 @@
+<paquet
+	prefix="depublie"
+	categorie="divers"
+	version="1.1.10"
+	etat="stable"
+	compatibilite="[3.0.13;3.0.*]"
+	logo="depublie.png"
+	documentation="https://contrib.spip.net/4484"
+	schema="1.0.0" 
+>
+	<nom>Dépublie</nom>
+	<!-- Dépublie automatiquement à une date donnée -->
+	
+	<auteur lien="http://elastick.net">Anne-lise Martenot</auteur>
+	<credit>Nouveaux Territoires</credit>
+
+	<licence>GNU/GPL</licence>
+
+	<traduire module="depublie" reference="fr" gestionnaire="salvatore" />
+	<traduire module="paquet-depublie" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/depublie.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/depublie.php" />
+	
+	<pipeline nom="recuperer_fond" inclure="depublie_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="depublie_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="depublie_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="depublie_pipelines.php" />
+	<pipeline nom="post_edition" inclure="depublie_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="depublie_pipelines.php" />
+	<pipeline nom="autoriser" inclure="depublie_autoriser.php" />
+  
+	<menu nom="depublies" titre="depublie:icone_voir_depublie" parent="bando_activite" icone="images/depublie-16.png" />
+
+</paquet>
