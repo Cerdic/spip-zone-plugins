@@ -1,0 +1,348 @@
+<?php
+function calcule_repertoire_max() {
+$icone = "../"._DIR_PLUGIN_COMPTEURGRAPHIQUE."/img_pack/CompteurGraphique.gif";
+    $i=0;
+    $j=0;
+    $cheminCG_rel=_DIR_PLUGIN_COMPTEURGRAPHIQUE."img_pack/";
+    while ($j==0) {
+        $i++;
+        if (file_exists($cheminCG_rel.$i.'/0.gif') || file_exists($cheminCG_rel.$i.'/0.png')) {}
+        else {$j=1;}
+    }
+    $i--;
+    return $i;        
+}
+
+
+$CG_nom_table = "spip_compteurgraphique";
+$cheminCG_rel=_DIR_PLUGIN_COMPTEURGRAPHIQUE."img_pack/";
+
+//On récupère le numéro d'article
+$id_article=_request('id_article');
+
+//On récupère les éventuelles données concernant les statistiques de cet article dans les tables spip
+$resultat3 = sql_select("id_rubrique,visites","spip_articles","id_article = $id_article");
+$resultat3_tableau = sql_fetch($resultat3);
+$CG_idr = $resultat3_tableau['id_rubrique'];
+$CG_vis = $resultat3_tableau['visites'];
+
+//On récupère les éventuelles données concernant le compteur de cet article dans la table du plugin
+$resultat1 = sql_select("id_compteur,decompte,statut,longueur,habillage",$CG_nom_table,"id_article = $id_article");
+$resultat1_tableau = sql_fetch($resultat1);
+$CG_id_compteur = $resultat1_tableau['id_compteur'];
+$CG_statut = $resultat1_tableau['statut'];
+$CG_decompte = $resultat1_tableau['decompte'];
+$CG_longueur = $resultat1_tableau['longueur'];
+$CG_habillage = $resultat1_tableau['habillage'];
+
+//On traite la création initiale d'un compteur de visite pour l'article, ou la mise à jour (peut-être...)
+if (_request('creer_compteur_specifique_article')) {
+	$limiteCG = calcule_repertoire_max();
+    $nbre_cellules=3;
+	?>
+	<form method='post' action='#ENV{action}' name ="compteur_articles">
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div style="text-align:center;">
+		<table class="spip" style="margin:0;padding:0;">
+		<?php
+		for ($k=1;$k<=$limiteCG;$k++) {
+			if (($k%$nbre_cellules)==1){echo '<tr style="margin:0;padding:0;text-align:center;">';}
+			echo '<td align="center" style="margin:0;padding:0;text-align:center;">';
+			if (file_exists($cheminCG_rel.$k.'/8.gif')) {
+				echo '<div style="text-align:center;margin:0;padding:0;">
+				<img src="'.$cheminCG_rel.$k.'/8.gif"  style="text-align:center;margin:0;padding:0;">
+				</div>
+				<input type="radio" style="text-align:center;margin:0;padding:0;"
+				name="nouveau_habillage_creation" value='.$k;
+				if ($k==1) {echo ' checked';}
+				echo ' >';
+			}
+			echo '</td>';
+			if (($k%$nbre_cellules)==0){echo '</tr>';}
+		}
+		if (($limiteCG%$nbre_cellules)!=0) {echo '</tr>';}
+		?>
+		</table><hr />&nbsp;<br />
+		<:compteurgraphique:cg_article_utilise_decompte:>
+		<input type="radio" name="nouveau_decompte" value=1 checked>
+		<:compteurgraphique:cg_article_utilise_stat_spip:>
+		<br />&nbsp;<br /><input type="radio" name="nouveau_decompte" value=2>
+		<:compteurgraphique:cg_article_utilise_decompte_perso:>
+		<input type="text" name="choix_decompte" value="0"><hr />&nbsp;<br />
+		<:compteurgraphique:cg_choix_nombre_chiffres:>
+		<select name="nouveau_chiffres"><option value="0" selected>
+		<:compteurgraphique:cg_chiffre_auto:>
+		</option>
+		<?php
+		for ($n=1;$n<=10;$n++) {
+			echo '<option value="'.$n.'">'.$n._T('compteurgraphique:cg_chiffre');
+			if ($n!=1){echo _T('compteurgraphique:cg_pluriel');}
+			echo '</option>';
+		}
+		?>
+		</select><br />&nbsp;<br />
+		#BOITE_PIED
+		<input type="submit" value="<:compteurgraphique:cg_creer:>">
+		</div>
+	</form>
+	<?php
+}
+elseif (_request('compteur_article_modifie')) {
+	$limiteCG = calcule_repertoire_max();
+    $nbre_cellules=3;
+	?>
+	<form method='post' action='#ENV{action}' name ="compteur_articles_modifie">
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div style="text-align:center;">
+		<table class="spip" style="margin:0;padding:0;">
+		<?php
+		for ($k=1;$k<=$limiteCG;$k++) {
+			if (($k%$nbre_cellules)==1){echo '<tr style="margin:0;padding:0;text-align:center;">';}
+			echo '<td align="center" style="margin:0;padding:0;text-align:center;">';
+			if (file_exists($cheminCG_rel.$k.'/8.gif')) {
+				echo '<div style="text-align:center;margin:0;padding:0;">
+				<img src="'.$cheminCG_rel.$k.'/8.gif"  style="text-align:center;margin:0;padding:0;">
+				</div>
+				<input type="radio" style="text-align:center;margin:0;padding:0;"
+				name="nouveau_habillage" value='.$k;
+				if ($k==$CG_habillage) {echo ' checked';}
+				echo ' >';
+			}
+			echo '</td>';
+			if (($k%$nbre_cellules)==0){echo '</tr>';}
+		}
+		if (($limiteCG%$nbre_cellules)!=0) {echo '</tr>';}
+		?>
+		</table><hr />&nbsp;<br />
+		<:compteurgraphique:cg_article_utilise_decompte:>
+		<input type="radio" name="nouveau_decompte" value=1
+		<?php
+		if ($CG_statut==1) {echo 'checked ';}
+		?>
+		>
+		<:compteurgraphique:cg_article_utilise_stat_spip:>
+		<br />&nbsp;<br /><input type="radio" name="nouveau_decompte" value=2
+		<?php
+		if ($CG_statut==2) {echo 'checked ';}
+		?>
+		>
+		<:compteurgraphique:cg_article_utilise_decompte_perso:>
+		<?php
+		echo '<input type="text" name="choix_decompte" value="'.$CG_decompte.'">';
+		?>
+		<hr />&nbsp;<br />
+		<:compteurgraphique:cg_choix_nombre_chiffres:>
+		<select name="nouveau_chiffres"><option value="0"
+		<?php
+		if ($CG_longueur==0) {echo 'selected';}
+		?>
+		>
+		<:compteurgraphique:cg_chiffre_auto:>
+		</option>
+		<?php
+		for ($n=1;$n<=10;$n++) {
+			echo '<option value="'.$n.'"';
+			if ($CG_longueur==$n) {echo 'selected';}
+			echo ' >'.$n._T('compteurgraphique:cg_chiffre');
+			if ($n!=1){echo _T('compteurgraphique:cg_pluriel');}
+			echo '</option>';
+		}
+		?>
+		</select><br />&nbsp;<br />
+		#BOITE_PIED
+		<input type="submit" value="<:compteurgraphique:cg_valider:>"
+		name="modification_article_validee">
+		</div>
+	</form>
+	<?php
+}
+//On traite le cas d'un compteur défini pour l'article avec utilisation des statistiques de SPIP
+elseif ($CG_statut==1) {
+?>
+<:compteurgraphique:cg_article_modele_choisi:>
+<form method='post' action='#ENV{action}' name ="compteur_articles">
+	[(#REM) declarer les hidden qui declencheront le service du formulaire
+	parametre : url d'action ]
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<div style='text-align:center;'>
+		<:compteurgraphique:cg_habillage_choisi:>
+		<?php
+		for ($m=1;$m<=5;$m++){
+			echo '<img src="'.$cheminCG_rel.$CG_habillage.'/'.$m.'.gif">';
+		}
+		echo '<br />&nbsp;<br />';
+		if ($CG_longueur==0) {echo _T('compteurgraphique:cg_gestion_chiffres_automatique');}
+			else {
+				echo $CG_longueur." ";
+				if ($CG_longueur==1) {echo _T('compteurgraphique:cg_article_chiffre_affiche');}
+					else {echo _T('compteurgraphique:cg_article_chiffres_affiches');}
+					echo _T('compteurgraphique:cg_article_modele_chiffre');
+			}
+		?>
+		#BOITE_PIED
+		<input type="submit" value="<:compteurgraphique:cg_modif:>"	name="compteur_article_modifie"><br />
+		<input type="submit" value="<:compteurgraphique:cg_suppr:>"	name="compteur_article_supprime">
+	</div>
+</form>
+<?php
+}
+//On traite le cas d'un compteur défini pour l'article avec utilisation d'un décompte personnalisé
+elseif ($CG_statut==2) {
+	?>
+	<div style="text-align:center;">
+	<:compteurgraphique:cg_article_decompte_est:>
+	<div style="font-weight:bold">
+	<?php echo $CG_decompte;?>
+	</div><br />
+	<form method='post' action='#ENV{action}' name ="compteur_articles">
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div style='text-align:center;'>
+			<:compteurgraphique:cg_habillage_choisi:>
+			<?php
+			for ($m=1;$m<=5;$m++){
+				echo '<img src="'.$cheminCG_rel.$CG_habillage.'/'.$m.'.gif">';
+			}
+			echo '<br />&nbsp;<br />';
+			if ($CG_longueur==0) {echo _T('compteurgraphique:cg_gestion_chiffres_automatique');}
+				else {
+					echo $CG_longueur." ";
+					if ($CG_longueur==1) {echo _T('compteurgraphique:cg_article_chiffre_affiche');}
+						else {echo _T('compteurgraphique:cg_article_chiffres_affiches');}
+						echo _T('compteurgraphique:cg_article_modele_chiffre');
+				}
+			?>
+			#BOITE_PIED
+			<input type="submit" value="<:compteurgraphique:cg_modif:>"	name="compteur_article_modifie"><br />
+			<input type="submit" value="<:compteurgraphique:cg_suppr:>"	name="compteur_article_supprime">
+		</div>
+	</form>
+	</div>
+	<?php
+}
+//On traite le cas d'un compteur dont l'affichage est interdit pour l'article
+elseif ($CG_statut==3) {
+	?>
+	<form method='post' action='#ENV{action}' name ="compteur_articles">
+	[(#REM) declarer les hidden qui declencheront le service du formulaire
+	parametre : url d'action ]
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<div style="text-align:center;">
+	<:compteurgraphique:cg_article_compteur_desactive:>
+	<:compteurgraphique:cg_article_reactive_compteur:>
+	#BOITE_PIED
+	<input type='submit' value='<:compteurgraphique:cg_reactive:>'
+		name='reactiver_compteur_specifique_article' />
+	</div>
+	</form>
+	<?php
+}
+
+//Cas où rien n'est défini spécifiquement pour l'article
+else {
+	$resultat_rub = sql_select("statut,longueur,habillage",$CG_nom_table,"id_rubrique = $CG_idr");
+	$resultat_rub_tableau = sql_fetch($resultat_rub);
+	$CG_rub_statut = $resultat_rub_tableau['statut'];
+	$CG_rub_longueur = $resultat_rub_tableau['longueur'];
+	$CG_rub_habillage = $resultat_rub_tableau['habillage'];
+
+	$resultat_tous = sql_select("habillage",$CG_nom_table,"statut = 6");
+	$resultat_tous_tableau = sql_fetch($resultat_tous);
+	$CG_tous_habillage = $resultat_tous_tableau['habillage'];
+	
+	//Cas où un compteur spécifique a été créé pour la rubrique contenant l'article
+	if ($CG_rub_statut==4){
+		?>
+		<form method='post' action='#ENV{action}' name ="compteur_articles">
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+			<div style='text-align:center;'>
+			<:compteurgraphique:cg_article_aucun_compteur_cree_rubrique:>
+			<?php
+			for ($m=1;$m<=5;$m++){
+				echo '<img src="'.$cheminCG_rel.$CG_rub_habillage.'/'.$m.'.gif">';
+			}
+			?>
+			<hr />
+			<:compteurgraphique:cg_article_interdire_compteur:>
+			<input type='submit' value='<:compteurgraphique:cg_interdire:>'
+			name='interdire_compteur_specifique_article' />
+			<hr />
+			<:compteurgraphique:cg_article_creer_compteur:><br />&nbsp;<br />
+			#BOITE_PIED
+			<input type='submit' value='<:compteurgraphique:cg_creer:>'
+			name='creer_compteur_specifique_article' />
+			</div>
+		</form>
+		<?php
+	}
+	//Cas où les compteurs sont interdits dans la rubrique
+	elseif ($CG_rub_statut==5){
+		?>
+		<form method='post' action='#ENV{action}' name ="compteur_articles">
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+			<div style='text-align:center;'>
+			<:compteurgraphique:cg_article_aucun_compteur_cree_desactive:>
+			<hr />
+			<:compteurgraphique:cg_article_creer_compteur:><br />&nbsp;<br />
+			#BOITE_PIED
+			<input type='submit' value='<:compteurgraphique:cg_creer:>'
+			name='creer_compteur_specifique_article' />
+			</div>
+		</form>
+		<?php
+	}
+	//Sinon cas où un compteur est défini pour tous les articles : on propose de définir un compteur spécifique pour l'article
+	elseif (isset($CG_tous_habillage)){
+		?>
+		<form method='post' action='#ENV{action}' name ="compteur_articles">
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div style="text-align:center;">
+		<:compteurgraphique:cg_article_aucun_compteur_cree_site:>
+		<?php
+		for ($m=1;$m<=5;$m++){
+            echo '<img src="'.$cheminCG_rel.$CG_tous_habillage.'/'.$m.'.gif">';
+        }
+		?>
+		<hr />
+		<:compteurgraphique:cg_article_interdire_compteur:>
+		<input type='submit' value='<:compteurgraphique:cg_interdire:>'
+		name='interdire_compteur_specifique_article' />
+		<hr />
+		<:compteurgraphique:cg_article_creer_compteur:><br />&nbsp;<br />
+		#BOITE_PIED
+		<input type='submit' value='<:compteurgraphique:cg_creer:>'
+		name='creer_compteur_specifique_article' />
+		</div>
+		</form>
+		<?php
+	}
+	//Dernier cas, rien n'est défini : on propose de créer un compteur spécifique pour l'article
+	else {
+	?>
+	<form method='post' action='#ENV{action}' name ="compteur_articles">
+	[(#REM) declarer les hidden qui declencheront le service du formulaire
+	parametre : url d'action ]
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<div style="text-align:center;">
+		<:compteurgraphique:cg_article_aucun_compteur_cree:>
+		<:compteurgraphique:cg_article_creer_compteur:><br />&nbsp;<br />
+		#BOITE_PIED
+		<input type='submit' value='<:compteurgraphique:cg_creer:>'
+		name='creer_compteur_specifique_article' />
+	</div>
+	</form>
+	<?php
+	}
+}
+?>

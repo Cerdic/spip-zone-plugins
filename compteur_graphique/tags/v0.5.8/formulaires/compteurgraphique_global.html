@@ -1,0 +1,100 @@
+<?php
+$CG_nom_table = "spip_compteurgraphique";
+$cheminCG_rel=_DIR_PLUGIN_COMPTEURGRAPHIQUE."img_pack/";
+function calcule_repertoire_max2() {
+    $i=0;
+    $j=0;
+    $cheminCG_rel=_DIR_PLUGIN_COMPTEURGRAPHIQUE."img_pack/";
+    while ($j==0) {
+        $i++;
+        if (file_exists($cheminCG_rel.$i.'/0.gif') || file_exists($cheminCG_rel.$i.'/0.png')) {}
+        else {$j=1;}
+    }
+    $i--;
+    return $i;        
+}
+?>
+
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+<h3 class='titrem'>
+<img src="#CHEMIN_IMAGE{CompteurGraphique.gif}" class="cadre-icone" />
+<center><:compteurgraphique:cg_def_compteur_tot:></center></h3>
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method='post' action='#ENV{action}' name ="compteurgraphique_global">
+[(#REM) declarer les hidden qui declencheront le service du formulaire
+parametre : url d'action ]
+#ACTION_FORMULAIRE{#ENV{action}}
+<?php
+	$resultat1= sql_select("longueur,habillage",$CG_nom_table,"statut = 7");
+	$resultat1_tableau = sql_fetch($resultat1);
+	$CG_tous_longueur = $resultat1_tableau['longueur'];
+	$CG_tous_habillage = $resultat1_tableau['habillage'];
+	if (isset($CG_tous_habillage)) {
+		echo _T('compteurgraphique:cg_exec_modele_total');
+		if ($CG_tous_longueur==0) {echo _T('compteurgraphique:cg_gestion_chiffres_automatique');}
+		else {
+			echo " ".$CG_tous_longueur." ";
+			if ($CG_tous_longueur==1) {echo _T('compteurgraphique:cg_affiche_chiffre');}
+			else {echo _T('compteurgraphique:cg_affiche_chiffres');}
+			echo _T('compteurgraphique:cg_exec_modele_compteur');
+		}
+		echo _T('compteurgraphique:cg_habillage_choisi');
+		for ($m=1;$m<=5;$m++){
+			echo '<img src="'.$cheminCG_rel.$CG_tous_habillage.'/'.$m.'.gif">';
+		}
+		echo '<br /><hr />';		
+	}
+	else {
+		echo _T('compteurgraphique:cg_exec_creer_modele_compteur_total');
+	}
+	$limiteCG = calcule_repertoire_max2();
+	$nbre_cellules=8;
+	echo _T('compteurgraphique:cg_choix_habillage');
+	echo '<table align="center" class="spip">';
+	for ($k=1;$k<=$limiteCG;$k++) {
+		if (($k%$nbre_cellules)==1){echo '<tr>';}
+		echo '<td align="center">';
+		if (file_exists($cheminCG_rel.$k.'/8.gif')) {
+			echo '<div style="text-align:center;margin:0;padding:0;"><img src="'.$cheminCG_rel.$k.'/8.gif"></div><br />
+			<center><input type="radio" name="tous_habillage"  style="padding:0;margin:0;" value='.$k;
+			if ( (isset($CG_tous_habillage)) AND ($k==$CG_tous_habillage)) {echo ' checked';}
+			elseif ($k==1) {echo ' checked';}
+			echo ' ></center>';
+		}
+		echo '</td>';
+		if (($k%$nbre_cellules)==0){echo '</tr>';}
+	}
+	if (($limiteCG%$nbre_cellules)!=0) {echo '</tr>';}
+	echo '</table>&nbsp;<br />';
+	echo _T('compteurgraphique:cg_choix_nombre_chiffres');?>
+	<select name="tous_chiffres">
+	<option value="0"
+<?php
+	if ((!isset($CG_tous_longueur)) OR ($CG_tous_longueur=='0')) {echo 'selected';}
+?>
+	>
+	<:compteurgraphique:cg_chiffre_auto:></option>
+	<?php
+	for ($n=1;$n<=10;$n++) {
+		echo '<option value="'.$n.'" ';
+		if ($CG_tous_longueur==$n) echo 'selected';
+		echo '>'.$n._T('compteurgraphique:cg_chiffre');
+		if ($n!=1){echo _T('compteurgraphique:cg_pluriel');}
+		echo '</option>';
+	}
+	echo '</select><br />&nbsp;<br />';
+	if (isset($CG_tous_habillage)) {
+		echo "<p class='boutons' style='text-align:center;'><span class='image_loading'>&nbsp;</span>
+		<input type='submit' value='<:compteurgraphique:cg_suppr:>' name='supprimer_compteur_tous' />
+		&nbsp;
+		<input type='submit' value='<:compteurgraphique:cg_modif:>' name='modifier_compteur_tous' /></p>";
+	}
+	else {
+		echo "<p class='boutons'><span class='image_loading'>&nbsp;</span>
+		<input type='submit' value='<:compteurgraphique:cg_creer:>' name='creer_compteur_tous' /></p>";
+	}
+?>
+</form>
+</div>

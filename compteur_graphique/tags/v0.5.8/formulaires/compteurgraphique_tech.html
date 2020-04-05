@@ -1,0 +1,78 @@
+<?php
+$CG_nom_table = "spip_compteurgraphique";
+$test_config = sql_select("id_compteur",$CG_nom_table,"statut = 9");
+$tab_config = sql_fetch($test_config);
+$res_config = $tab_config['id_compteur'];
+$test1 = sql_select("id_compteur",$CG_nom_table,"statut = 11");
+$tab1 = sql_fetch($test1);
+$res1 = $tab1['id_compteur'];
+if (isset($res1)) {$t1GIF=''; $t1PNG='checked';} else {$t1GIF='checked'; $t1PNG='';}
+$test2 = sql_select("id_compteur",$CG_nom_table,"statut = 12");
+$tab2 = sql_fetch($test2);
+$res2 = $tab2['id_compteur'];
+if (isset($res2)) {$t2GIF=''; $t2PNG='checked';} else {$t2GIF='checked'; $t2PNG='';}
+$test3 = sql_select("id_compteur",$CG_nom_table,"statut = 13");
+$tab3 = sql_fetch($test3);
+$res3 = $tab3['id_compteur'];
+if (isset($res3)) {$t3OUI=''; $t2NON='checked';} else {$t2OUI='checked'; $t2NON='';}
+?>
+
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+<h3 class='titrem'>
+<img src="#CHEMIN_IMAGE{CompteurGraphique.gif}" class="cadre-icone" />
+<center><:compteurgraphique:cg_config_cg:></center></h3>
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method='post' action='#ENV{action}' name ="compteurgraphique_tech">
+[(#REM) declarer les hidden qui declencheront le service du formulaire
+parametre : url d'action ]
+#ACTION_FORMULAIRE{#ENV{action}}
+<p style="text-align:center;"><:compteurgraphique:cg_config_cg_explic:><br />
+<:compteurgraphique:cg_oui:><input type="radio" name="config_CG" value="oui"
+<?php
+	if (!isset($res_config)) {echo 'checked';}
+?>
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<:compteurgraphique:cg_non:><input type="radio" name="config_CG" value="non"
+<?php
+	if (isset($res_config)) {echo 'checked';}
+?>
+ ></p><hr />
+<p style="text-align:center;"><:compteurgraphique:cg_config_genere:>
+<br /><div style="text-align:center;">GIF <input type="radio" name="genere_CG_miniatures" value="gif"
+<?php
+echo $t1GIF;
+?>
+ >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PNG <input type="radio" name="genere_CG_miniatures" value="png"
+<?php
+	echo $t1PNG;
+?>
+></div></p><hr />
+<p style="text-align:center;"><:compteurgraphique:cg_config_genere_final:>
+<br /><div style="text-align:center;">GIF <input type="radio" name="genere_CG" value="gif"
+<?php
+echo $t2GIF;
+?>
+ >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PNG <input type="radio" name="genere_CG" value="png"
+<?php
+echo $t2PNG;
+?>
+ ></div></p><hr />
+<p style="text-align:center;"><:compteurgraphique:cg_config_transparence:>
+<br /><div style="text-align:center;">
+<:compteurgraphique:cg_oui:> <input type="radio" name="transparent_CG" value="oui"
+<?php
+echo $t2OUI;
+?>
+ >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<:compteurgraphique:cg_non:> <input type="radio" name="transparent_CG" value="non"
+<?php
+echo $t2NON;
+?>
+></div></p>
+<p class='boutons' style='text-align:center;'><span class='image_loading'>&nbsp;</span>
+<input type='submit' value='<:compteurgraphique:cg_valider:>' name='cg_config_tech' />
+</p>
+</form>
+</div>

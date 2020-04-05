@@ -1,0 +1,17 @@
+<paquet
+	prefix="compteurgraphique"
+	categorie="statistique"
+	version="0.5.8"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/CompteurGraphique.gif"
+	documentation="https://contrib.spip.net/Plugin-Compteur-Graphique"
+	schema="2012.11.23"
+>
+	<nom>Compteurs graphiques</nom>
+	<auteur>Olivier Gautier</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+	<menu nom="compteurgraphique_configurer" titre="compteurgraphique_config:bouton_compteurgraphique" parent="menu_activite" icone="images/CompteurGraphique_mini.gif" />
+	<pipeline nom="declarer_tables_interfaces" inclure="compteurgraphique_pipeline.php" />
+	<pipeline nom="affiche_gauche" inclure="compteurgraphique_pipeline.php" />
+</paquet>

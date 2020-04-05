@@ -1,0 +1,16 @@
+<?php
+$test_configuration = sql_select("id_compteur", 'spip_compteurgraphique', "statut = 9");
+$tab_configuration = sql_fetch($test_configuration);
+$res_configuration = $tab_configuration['id_compteur'];
+if (!isset($res_configuration) OR ($GLOBALS['connect_statut'] == "0minirezo")) {
+?>
+	#BOITE_OUVRIR{#EVAL{_T('compteurgraphique:cg_article_cet_article')},simple}
+	<div class="ajax">
+	#FORMULAIRE_COMPTEUR_GRAPHIQUE_ARTICLE{article,#ID_ARTICLE,'',#ENV**}
+	</div>
+	#BOITE_FERMER
+<?php
+}
+?>
+
+[(#AUTORISER{configurer})]
