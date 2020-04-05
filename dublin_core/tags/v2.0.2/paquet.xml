@@ -1,0 +1,23 @@
+<paquet
+	prefix="dublin_core"
+	categorie="statistique"
+	version="2.0.2"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/dublin_core-48.png"
+	documentation="https://contrib.spip.net/Dublin-Core"
+>
+
+	<nom>Dublin Core</nom>
+	<!-- Des Dublins Core pour vos articles -->
+
+	<auteur lien="https://contrib.spip.net/Tony-Gheeraert">Tony Gheeraert</auteur>
+	<auteur lien="https://contrib.spip.net/Joseph">Joseph</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="insert_head" inclure="dublin_core_pipelines.php" />
+	<pipeline nom="ieconfig_metas" inclure="dublin_core_ieconfig_metas.php" />
+
+	<menu nom="dublin_core" titre="dublin_core:dublin_core" parent="menu_squelette" icone="images/dublin_core-16.png" action="configurer_dublin_core" />
+</paquet>
