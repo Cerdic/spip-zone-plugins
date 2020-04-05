@@ -1,0 +1,15 @@
+<B_resultats>
+<p class="afficher[ afficher_(#ENV{nom})][ saisie_(#ENV{type_saisie})]">
+<BOUCLE_resultats(DATA){source tableau, #ENV{valeur}} {"<br class='spip' />"}>
+	[(#EXTENSION|in_array{#LISTE{jpg,png,gif}}|?{
+		[(#VIGNETTE|balise_img|image_reduire{150})],
+		[(#VIGNETTE|image_reduire{48})]
+	})]
+	<br class="spip" />
+	[(#ERREUR|?{
+	<span class='erreur'><:cvtupload:erreur{erreur=#ERREUR}:></span>,
+	[<a href='(#URL|attribut_html)' [ (#HTML5|oui)download="download"]>]#NOM [\([(#EXTENSION|strtoupper)] - (#TAILLE|taille_en_octets)\)][(#URL|oui)</a>]
+	})]
+</BOUCLE_resultats>
+</p>
+</B_resultats>

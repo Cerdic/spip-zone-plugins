@@ -1,0 +1,21 @@
+<div class="cvtup-fichier-precedent">
+	<input type="hidden" name="cvtupload_fichiers_precedents[(#ENV{crochets})]" value="#ENV{infos_encodees}" />
+	<div class="cvtup-description">
+		[(#EXTENSION**|in_array{#LISTE{jpg,png,gif}}|?{
+			[<a href="(#ENV{url}|attribut_html)" class="mediabox">][(#ENV**{vignette}|balise_img|_image_reduire_base64{150})],
+			[<a href="(#ENV{url}|attribut_html)"[ (#HTML5|oui)download="download"]>][(#ENV{vignette}|balise_img|image_reduire{48})]
+			}
+		)][<span class="cvtup-filename">(#ENV{name})</span>][(#ENV{url}|oui)</a>]
+
+	</div>
+	<div class="cvtup-actions">
+		<div class="cvtup-action">
+			<input type="checkbox" class="checkbox" id="cvtupload_supprimer_fichier[(#ENV{crochets}|cvtupload_nom2classe)]" name="cvtupload_supprimer_fichier[(#ENV{crochets})]" />
+			<label for="cvtupload_supprimer_fichier[(#ENV{crochets}|cvtupload_nom2classe)]"><:cvtupload:supprimer_fichier:></label>
+		</div>
+		<div class="cvtup-remplacer">
+			<label for="[(#ENV{champ}|cvtupload_nom2classe)]_remplacer"><:cvtupload:remplacer_fichier:></label>
+			<input type="file" class="file[ (#ENV{class})]" name="#ENV{champ}" id="[(#ENV{champ}|cvtupload_nom2classe)]_remplacer" size="40"[(#HTML5|oui)[ accept="(#ENV{mime})"]]/>
+		</div>
+	</div>
+</div>

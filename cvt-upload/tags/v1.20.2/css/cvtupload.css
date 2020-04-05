@@ -1,0 +1,41 @@
+.formulaire_spip .saisie_fichiers input[type=file] {
+	display:       block;
+	margin-bottom: 1em;
+}
+
+.cvtup-fichier-precedent {
+	display:       block;
+	width:         100%;
+	overflow: auto;
+	margin-bottom: 1em;
+	border:        1px solid #DDD;
+	border-radius: 5px;
+}
+
+.cvtup-fichier-precedent .cvtup-description,
+.cvtup-fichier-precedent .cvtup-action {
+	display: block;
+	overflow: visible;
+	padding: .5em;
+	vertical-align: top;
+}
+.cvtup-fichier-precedent .cvtup-description {
+	overflow: visible;
+}
+.cvtup-fichier-precedent .cvtup-description img {
+	max-width: 100%;
+	height: auto;
+	margin-bottom: .5em;
+}
+.cvtup-fichier-precedent .cvtup-description .cvtup-filename {
+	display: block;
+}
+
+.cvtup-fichier-precedent .cvtup-action label {
+	display: inline;
+}
+
+.cvtup-fichier-precedent .cvtup-remplacer {
+	clear:both;
+	padding:.5em;
+}
