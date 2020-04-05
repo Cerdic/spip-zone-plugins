@@ -1,0 +1,67 @@
+<div class='formulaire_spip formulaire_ajouter formulaire_#FORM[ (#ENV{profil})]'>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<ul>
+			<fieldset class='ligne'>
+				[(#SAISIE{date,
+				date_debut,
+				label=<:dayfill:label_date_action:>})]
+
+				[(#SAISIE{heure,
+				heure_debut,
+				heure_pas=5,
+				label=<:dayfill:label_heure_de:>})]
+
+				[(#SAISIE{heure,
+				heure_fin,
+				heure_pas=5,
+				label=<:dayfill:label_heure_a:>})]
+
+				[(#SAISIE{mot, type_activite,
+				class="chosen",
+				id_groupe=#CONFIG{dayfill/types_activite},
+				defaut=#CONFIG{dayfill/activite_par_defaut},
+				label=<:dayfill:label_type_activite:>,
+				explication=<:dayfill:explication_type_activite:>})]
+
+				[(#SAISIE{textarea, detail_activite, obligatoire=oui,
+				rows=3,
+				label=<:dayfill:label_detail_activite:>,
+				explication=<:dayfill:explication_detail_activite:>})]
+
+				[(#SAISIE{input,
+					nb_heures_passees,
+					readonly=oui,
+					label=<:dayfill:label_temps_passe:>})]
+
+				[(#SAISIE{input,
+					nb_heures_facturees,
+					label=<:dayfill:label_temps_facture:>})]
+
+				[(#SAISIE{auteurs_activite, id_auteur, obligatoire=oui,
+				class="chosen",
+				id_projet=#ID_PROJET,
+				label=<:dayfill:label_id_auteur:>,
+				explication=<:dayfill:explication_id_auteur:> })]
+
+				[(#SAISIE{factures_activite, id_facture,
+				id_organisation=#ID_ORGANISATION,
+				label=<:dayfill:label_facture_activite:>,
+				explication=<:dayfill:explication_facture_activite{organisation=#ENV{organisation}:>})]
+			</fieldset>
+
+		</ul>
+
+		<p class="boutons"><input type='submit' class='submit' name='enregistrer_activite' value='<:bouton_enregistrer:>' /></p>
+
+
+	</div>
+	</form>]
+</div>

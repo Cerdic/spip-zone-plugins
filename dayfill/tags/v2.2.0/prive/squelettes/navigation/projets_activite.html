@@ -1,0 +1,10 @@
+<BOUCLE_nav(PROJETS_ACTIVITES){id_projets_activite}{si #ENV{exec}|=={projets_activite}}>
+#BOITE_OUVRIR{'','info'}
+#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{type,projets_activite,id,#ENV{id_projets_activite}}}}
+#BOITE_FERMER
+
+#PIPELINE{afficher_config_objet,#ARRAY{args,#ARRAY{type,projets_activite,id,#ID_PROJETS_ACTIVITE},data,''}}
+
+</BOUCLE_nav>
+[(#ENV{exec}|=={projets_activite_edit}|oui)<INCLURE{fond=prive/squelettes/navigation/projets_activite_edit,env}>]
+<//B_nav>
