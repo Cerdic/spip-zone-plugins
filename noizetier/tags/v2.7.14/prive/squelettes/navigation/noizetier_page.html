@@ -1,0 +1,33 @@
+[(#ENV{exec}|=={noizetier_page}|et{#AUTORISER{configurer,noizetier}}|oui)
+	#SET{titre,#VAL{noizetier:noisettes_disponibles}|_T}
+	#BOITE_OUVRIR{#GET{titre},'info noisettes_disponibles none'}
+	<p><:noizetier:explication_glisser_deposer:></p>
+	<INCLURE{fond=formulaires/inc-liste_noisettes_disponibles,page,objet,id_objet,ordre=oui}>
+	#BOITE_FERMER
+	<script type="text/javascript">/*<!\[CDATA\[*/
+		jQuery('.noisettes_disponibles').show();
+		jQuery('ul.liste-noisettes-disponibles li.noisette').draggable({
+			connectToSortable: "ul.bloc",
+			containment: "ul.bloc",
+			helper: "clone",
+			revert: "invalid",
+			cursor: 'move'
+		});
+		// Position fixe lors du scroll
+		noisettes_dispos_sticky = function(){
+			var container = $(".noisettes_disponibles");
+			var limite = container.offset().top;
+			var largeur = container.width()+'px';
+			$(window).scroll(function() {
+				if($(this).scrollTop() > limite)
+					container.addClass('is-stuck').css({'width': largeur});
+				if($(this).scrollTop() < limite)
+					container.removeClass('is-stuck').css({'width': 'auto'});	
+			});
+		}
+		noisettes_dispos_sticky();
+	/*\]\]>*/</script>
+]
+[(#ENV{exec}|=={noisette_edit}|oui)<INCLURE{fond=prive/squelettes/navigation/noisette_edit,env}>]
+[(#ENV{exec}|=={noisette_add}|oui)<INCLURE{fond=prive/squelettes/navigation/noisette_add,env}>]
+[(#ENV{exec}|=={noizetier_page_edit}|oui)<INCLURE{fond=prive/squelettes/navigation/noizetier_page_edit,env}>]

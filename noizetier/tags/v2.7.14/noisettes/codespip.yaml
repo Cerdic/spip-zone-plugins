@@ -1,0 +1,23 @@
+nom: '<:noizetier:nom_codespip:>'
+icon: 'code-spip-24.png'
+contexte: 'env'
+parametres:
+  -
+    saisie: 'textarea'
+    options:
+      nom: 'description_code'
+      label: '<:noizetier:label_description_code:>'
+      explication: '<:noizetier:explication_description_code:>'
+      obligatoire: ''
+      inserer_barre: 'forum'
+      rows: 4
+      class: 'pleine_largeur'
+  -
+    saisie: 'textarea'
+    options:
+      nom: 'code'
+      label: '<:noizetier:label_code:>'
+      explication: '<:noizetier:explication_code:>'
+      obligatoire: 'oui'
+      class: 'pleine_largeur'
+      rows: 25

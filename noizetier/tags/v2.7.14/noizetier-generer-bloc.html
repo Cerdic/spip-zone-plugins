@@ -1,0 +1,5 @@
+#SET{type,#OBJET|?{'',#ENV{type,#ENV{type-page,#ENV{page}}}}}
+#SET{composition,#OBJET|?{'',#ENV{composition}}}
+<BOUCLE_noisettes(NOISETTES){objet?}{id_objet?}{bloc=#ENV{bloc}}{type=#GET{type}}{composition=#GET{composition}}{par rang}>
+	[<div class="noisette noisette_#NOISETTE[ (#CHAMP_SQL{css})]">(#NOIZETIER_AFFICHER_NOISETTE)</div>]
+</BOUCLE_noisettes>

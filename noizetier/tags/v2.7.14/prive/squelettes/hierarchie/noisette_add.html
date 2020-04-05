@@ -1,0 +1,4 @@
+<a href="#URL_ECRIRE{noizetier_pages}"><:noizetier:liste_pages:></a>
+&gt; <a href="#URL_ECRIRE{noizetier_page,page=#ENV{page}}"> [(#NOIZETIER_LISTE_PAGES{#ENV{page}}|table_valeur{nom})]</a>
+&gt; [(#NOIZETIER_LISTE_PAGES{#ENV{page}}|table_valeur{blocs}|table_valeur{#ENV{bloc}}|table_valeur{nom})]
+&gt; <strong class="on"><:noizetier:formulaire_ajouter_noisette:></strong>

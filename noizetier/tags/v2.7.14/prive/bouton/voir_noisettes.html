@@ -1,0 +1,21 @@
+#CACHE{0}
+[(#PLUGIN{minibando}|non)
+	[(#SELF|match{voir=noisettes}|non)
+		[<a href="(#SELF|parametre_url{voir,noisettes})" class="spip-admin-boutons" id="noizetier_voir_noisettes"><:noizetier:mode_noisettes:></a>]
+	][(#SELF|match{voir=noisettes}|oui)
+		[<a href="(#SELF|parametre_url{voir,''})" class="spip-admin-boutons" id="noizetier_voir_noisettes"><:noizetier:quitter_mode_noisettes:></a>]
+	]
+][(#PLUGIN{minibando}|oui)
+	<li id="minibando_noizetier">
+	[(#SELF|match{voir=noisettes}|non)
+		[<a href="(#SELF|parametre_url{voir,noisettes})" id="noizetier_voir_noisettes"><:noizetier:mode_noisettes:></a>]
+	][(#SELF|match{voir=noisettes}|oui)
+		[<a href="(#SELF|parametre_url{voir,''})" id="noizetier_voir_noisettes"><:noizetier:quitter_mode_noisettes:></a>]
+	]
+	<span> </span>
+	<ul>
+		<li><p>[(#SELF|match{voir=noisettes}|?{<:noizetier:quitter_mode_noisettes:>,<:noizetier:mode_noisettes:>})]</p></li> 
+	</ul>
+	<style type="text/css">#minibando #minibando_noizetier > a {background: #F8F8F8 url([(#CHEMIN{images/bricks.png})]) 50% no-repeat;}</style>
+	</li>
+]

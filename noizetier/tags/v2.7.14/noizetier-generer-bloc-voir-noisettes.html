@@ -1,0 +1,88 @@
+#SET{type,#OBJET|?{'',#ENV{type,#ENV{type-page,#ENV{page}}}}}
+#SET{composition,#OBJET|?{'',#ENV{composition}}}
+
+<div class="noizetier-bloc" id="noizetier-bloc-#ENV{bloc}"
+	style="padding:10px; border:4px dotted #DF454F; margin:10px 0;"
+>
+	<input type='hidden' name='ordre[]' value='bloc-#ENV{bloc}' class="noizetier-tri" />
+	[(#GET{type}|oui)
+	<input type='hidden' name='ordre\[\]' value='page-#GET{type}[-(#GET{composition})]' class="noizetier-tri" />
+	]
+	[(#GET{type}|non)
+	<input type='hidden' name='ordre\[\]' value='objet-#OBJET' class="noizetier-tri" />
+	<input type='hidden' name='ordre\[\]' value='id_objet-#ID_OBJET' class="noizetier-tri" />
+	]
+
+	<div style="color:#8A1F11; font-size:2em; margin:5px 0;">
+		[(#NOIZETIER_LISTE_PAGES{[(#GET{type}|sinon{#OBJET})][-(#GET{composition})]}|table_valeur{blocs}|table_valeur{#ENV{bloc}}|table_valeur{nom}|sinon{#ENV{bloc}})]
+	</div>
+
+	<div>
+		[(#GET{type}|oui)
+			[<strong>(#NOIZETIER_LISTE_PAGES{#GET{type}[-(#ENV{composition})]}|table_valeur{nom})</strong>]
+			([(#GET{type})][-(#ENV{composition})])
+		]
+
+		[(#GET{type}|?{
+			[(#SET{url_admin,[(#URL_ECRIRE{noizetier_page,page=#GET{type}[-(#ENV{composition})]})]})],
+			#SET{url_admin,#URL_ECRIRE{noizetier_page}|parametre_url{objet,#OBJET}|parametre_url{id_objet,#ID_OBJET}}
+		})]
+		[\[<a href="(#GET{url_admin})">
+			<:noizetier:modifier_dans_prive:>
+		</a>\]]
+	</div>
+
+	<BOUCLE_noisettes(NOISETTES){objet?}{id_objet?}{bloc=#ENV{bloc}}{type=#GET{type}}{composition=#GET{composition}}{par rang}>
+	<div class="noizetier-noisette" id="noizetier-noisette-#ID_NOISETTE"
+		style="padding:10px; border:2px solid #9DBA00; margin:10px 0;"
+	>
+		<div style="color:#9DBA00; font-size:1.5em; margin:5px 0;"><strong>
+			<div style="float:right;">[(#NOIZETIER_INFO_NOISETTE{#NOISETTE}|table_valeur{icon}|sinon{noisette-24.png}|noizetier_chemin_icone|balise_img{})]</div>
+			[(#NOIZETIER_INFO_NOISETTE{#NOISETTE}|table_valeur{nom})]
+		</strong></div>
+
+		[(#ENV{editer_noisette}|=={#ID_NOISETTE}|oui)
+			[(#FORMULAIRE_EDITER_NOISETTE{#ID_NOISETTE,[(#SELF|parametre_url{editer_noisette,''})#noizetier-noisette-#ID_NOISETTE]})]
+			<div style="text-align:#LANG_RIGHT;">\[<strong><a href="[(#SELF|parametre_url{editer_noisette,''})#noizetier-noisette-#ID_NOISETTE]"><:bouton_annuler:></a></strong>\]</div>
+		]
+
+		[(#ENV{ajouter_noisette}|ou{#ENV{editer_noisette}}|non)
+			[<div class="noisette noisette_#NOISETTE[ (#CHAMP_SQL{css})]">(#NOIZETIER_AFFICHER_NOISETTE)</div>]
+			<div class="noizetier-action" style="text-align:#LANG_RIGHT;">
+				\[<strong><a href="[(#SELF|parametre_url{editer_noisette,#ID_NOISETTE})#noizetier-noisette-#ID_NOISETTE]"><:noizetier:formulaire_modifier_noisette:></a></strong>\]
+				[(#BOUTON_ACTION{[(#VAL{noizetier:formulaire_supprimer_noisette}|_T)],#URL_ACTION_AUTEUR{supprimer_noisette,#ID_NOISETTE,#SELF#noizetier-noisette-#ID_NOISETTE}})]
+			</div>
+		]
+		<input type='hidden' name='ordre[]' value='noisette-#ID_NOISETTE' class="noizetier-tri" />
+	</div>
+	</BOUCLE_noisettes>
+
+	[(#ENV{ajouter_noisette}|ou{#ENV{editer_noisette}}|non)
+		<div class="noizetier-action" style="text-align:#LANG_RIGHT;">
+			\[<strong><a href="[(#SELF|parametre_url{ajouter_noisette,#ENV{bloc}})#noizetier-ajouter-noisette]"><:noizetier:formulaire_ajouter_noisette:></a></strong>\]
+		</div>
+	]
+	[(#ENV{ajouter_noisette}|=={#ENV{bloc}}|oui)
+		<div id="noizetier-ajouter-noisette">
+			[(#SET{page,[(#GET{type}|?{#GET{type}[-(#ENV{composition})], #ARRAY{objet,#OBJET,id_objet,#ID_OBJET}})]})]
+			[(#FORMULAIRE_AJOUTER_NOISETTE{#GET{page},#ENV{bloc},[(#SELF|parametre_url{ajouter_noisette,''})&editer_noisette=@id_noisette@#noizetier-noisette-@id_noisette@]})]
+			<div style="text-align:#LANG_RIGHT;">\[<strong><a href="[(#SELF|parametre_url{ajouter_noisette,''})#noizetier-bloc-#ENV{bloc}]"><:bouton_annuler:></a></strong>\]</div>
+			<style type="text/css">ul.liste-noisettes li.noisette {padding-#LANG_LEFT: 30px; background-repeat: no-repeat; background-position: #LANG_LEFT 9px;}</style>
+		</div>
+	]
+	[(#ENV{ajouter_noisette}|ou{#ENV{editer_noisette}}|non)<div class="ajax">#FORMULAIRE_NOIZETIER_VALIDER_TRI{#SELF}</div>]
+</div>
+[(#ENV{ajouter_noisette}|ou{#ENV{editer_noisette}}|non)
+<script type="text/javascript">/*<!\[CDATA\[*/
+	jQuery('div#noizetier-bloc-#ENV{bloc}').sortable({
+		items: 'div.noizetier-noisette',
+		opacity: 0.8,
+		connectWith: 'div.noizetier-bloc',
+		forcePlaceholderSize: true,
+		cursor: 'move',
+		update: function(event, ui) {
+			jQuery('.noizetier-valider-tri').show(500);
+			jQuery('.noizetier-action').hide(500);
+		}
+	});
+/*\]\]>*/</script>]

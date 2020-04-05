@@ -1,0 +1,12 @@
+[(#PLUGIN{ieconfig}|oui)
+#BOITE_OUVRIR{'','simple'}
+	[(#URL_ECRIRE{ieconfig_export}|icone_horizontale{<:noizetier:editer_exporter_configuration:>,config-export})]
+	[(#URL_ECRIRE{ieconfig_import}|icone_horizontale{<:noizetier:editer_importer_configuration:>,config-import})]
+#BOITE_FERMER]
+
+[(#PLUGIN{compositions}|non|ou{#PLUGIN{ieconfig}|non}|oui)
+#BOITE_OUVRIR{'','info'}
+	[(#PLUGIN{compositions}|non)<p><:noizetier:compositions_non_installe:></p>]
+	[(#PLUGIN{ieconfig}|non)<p><:noizetier:ieconfig_non_installe:></p>]
+#BOITE_FERMER
+]
