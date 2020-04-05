@@ -1,14 +1,14 @@
 <paquet
 	prefix="lien_court"
 	categorie="edition"
-	version="1.0.1"
+	version="1.0.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.2.*]"
 >
 
 	<nom>Lien court</nom>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
-	
+
 	<!-- Gestion des medias dans SPIP -->
 
 	<auteur>ARNO* pour [Seenthis.net->http://seenthis.net]</auteur>
