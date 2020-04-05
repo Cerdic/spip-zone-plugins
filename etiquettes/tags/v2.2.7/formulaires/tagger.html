@@ -1,0 +1,19 @@
+<span class="formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{_objet}-#ENV{_id_objet}">
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	]
+		<ul>
+			#INCLURE{fond=formulaires/inc-saisie-tags,objet=#ENV{_objet},id_objet=#ENV{_id_objet},type_mot=#ENV{_type_mot},supprimable=#ENV{_supprimable},ajoutable=#ENV{_ajoutable},autosubmit=' ',env}
+		</ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	[(#ENV{editable})
+	  <p class='boutons none-js'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</span>
+<style type="text/css">#INCLURE{css/tagger.css}</style>

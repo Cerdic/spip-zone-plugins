@@ -1,0 +1,41 @@
+#SET{fl,etiquettes}
+#SET{name,tags}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur][(#ENV{supprimable}|oui)supprimable][(#ENV{ajoutable}|oui)ajoutable]">
+	#SET{value,#ENV*{#GET{name}}}
+	<B_mots>
+	<ul class="tags[(#ENV{autosubmit,''}|oui)autosubmit][(#ENV{supprimable}|oui)supprimable]"><BOUCLE_mots(MOTS){type=#ENV{type_mot}}{id_objet}{objet}{par titre}><li
+			class="tag"><span class="label"><a href="#URL_MOT"><i class="icon-tag"></i>#TITRE</a><input 	#SET{value,#GET{value}|array_diff{#LISTE{#TITRE}}}
+			type="hidden" name="tags[]" value="[(#TITRE|entites_html)]" />[<img (#ENV{supprimable}|oui)
+	    src="#CHEMIN_IMAGE{supprimer-12.png}" width="12" height="12"
+		  title="[(#GET{fl}|concat{':tag_supprimer'}|_T|attribut_html)]"
+			alt="[(#GET{fl}|concat{':tag_supprimer'}|_T|attribut_html)]"
+		  onclick="tags_remove_tag(this);"
+		  />]</span></li>
+		</BOUCLE_mots></ul>
+	</B_mots>
+	<ul class="tags empty[(#ENV{autosubmit,''}|oui)autosubmit][(#ENV{supprimable}|oui)supprimable]"><li class="notag">[(#GET{fl}|concat{':tag_aucun'}|_T)]</li></ul>
+	<//B_mots>[(#ENV{ajoutable}|oui)
+	<label for="#GET{name}-#ENV{objet}-#ENV{id_objet}" class="invisible">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+	<span class='erreur_message'>(#GET{erreurs})</span>
+	]<input type="text"
+					name="#GET{name}&#91;&#93;"
+					class="text"
+					value="[(#GET{value}|implode{','})]"
+					id="#GET{name}-#ENV{objet}-#ENV{id_objet}"
+					placeholder="[(#GET{fl}|concat{':tag_placeholder'}|_T|attribut_html)]"
+					onkeydown="tags_autoadd(this,event);"
+					[(#HTML5|et{#GET{obli}})required='required']/>
+	]
+</li>
+[(#ENV{editable}|oui)
+<script type="text/javascript">
+	if (typeof(tags_autosubmit)=="undefined"){
+		var tags_autosubmit = function(){}; /* eviter double loading*/
+		var tags_remove_img = jQuery('<img src="#CHEMIN_IMAGE{supprimer-12.png}" width="12" height="12" />')
+					.attr('title',"[(#GET{fl}|concat{':tag_supprimer'}|_T|attribut_html)]")
+					.attr('alt',"[(#GET{fl}|concat{':tag_supprimer'}|_T|attribut_html)]")
+					.attr('onclick',"tags_remove_tag(this);");
+		var tags_linotag = jQuery("<li class='notag'>[(#GET{fl}|concat{':tag_aucun'}|_T)]</li>");
+		jQuery.getScript("#CHEMIN{javascript/tagger.js}");
+	}
+</script>]

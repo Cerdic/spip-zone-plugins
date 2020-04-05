@@ -1,0 +1,27 @@
+
+<B_mots>
+<ul id="popular_tags_#ENV{identifiant}" class="popular_tags">
+	<BOUCLE_mots(MOTS){tous}{type ?}{par num titre, titre}>
+		[<li><span>(#TITRE*|supprimer_numero)</span></li>]
+	</BOUCLE_mots>
+</ul>
+</B_mots>
+
+[(#REM) On utilise le javascript pour cette liste précise ]
+<script  type="text/javascript">
+<!--
+var appliquer_etiquettes_aide_nuage_#ENV{identifiant} = function(){
+	appliquer_etiquettes_aide_nuage(
+		'##ENV{name}',
+		'#popular_tags_#ENV{identifiant}'
+	);
+}
+// on applique avec un timeout pour laisser la page s'afficher
+$(function(){
+	setTimeout(appliquer_etiquettes_aide_nuage_#ENV{identifiant}, 200);
+});
+onAjaxLoad(function(){
+	setTimeout(appliquer_etiquettes_aide_nuage_#ENV{identifiant}, 200);
+});
+// -->
+</script>

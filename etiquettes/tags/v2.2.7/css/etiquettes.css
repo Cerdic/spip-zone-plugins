@@ -1,0 +1,42 @@
+/* Partie pour le sélécteur générique */
+
+.ac_results
+{
+	border: 1px solid #8B6F92;
+	color: #604A7F;
+	background-color: #F4F8F8;
+	opacity:0.9;
+	z-index:10000;
+}
+.ac_results ul{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+.ac_results ul li
+{
+	padding: 2px 10px;
+	white-space: nowrap;
+	font-size: 11px;
+	cursor:pointer;
+}
+.ac_results ul li.ac_over
+{
+	color:white;
+	background-color: #8B6F92;
+}
+
+/* Partie pour le nuage d'aide */
+
+.popular_tags, .formulaire_spip ul.popular_tags{
+	margin:1em 0;
+	line-height:1.2em ;
+}
+.popular_tags span { background-color: #F4F8F8; cursor: pointer; margin:2px }
+.popular_tags span.selected { color:#eee; background-color: #8B6F92; }
+.popular_tags span.auto { background-color: #ccffcc; }
+
+/* Partie pour le crayon */
+.formulaire_crayon input.etiquettes{
+	width:95%;
+}

@@ -1,0 +1,15 @@
+/* formulaire_tagger */
+.editer_tags .tags {padding:0;margin:0;min-height: 16px;float: left;}
+.editer_tags .tags .tag {display: block;float: left;padding: 2px 4px;padding-left:20px;
+    background: #ddd url(img/tag-16.png) no-repeat 2px center;margin-right:5px; border-radius: 5px;}
+.editer_tags .tags .tag img {padding: 2px 0px 2px 4px;vertical-align: middle;}
+.editer_tags .tags .tag img:hover {cursor: hand;cursor: pointer;}
+.editer_tags .tags .notag {display: block;float: left;margin-right:5px;font-style: italic;color:#bbb;}
+.editer_tags.ajoutable .notag {display: none;}
+
+.editer_tags input.text {width: 10em;float: left;padding-left: 20px;
+    background-image:url(img/tag-16.png);
+    background-repeat: no-repeat;
+    background-position: 2px center;}
+
+.js .formulaire_tagger .none-js {display: none;}

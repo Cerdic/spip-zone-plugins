@@ -1,0 +1,12 @@
+
+[(#ENV{aide_autocompletion}|oui)
+[(#SET{
+	attr, data-selecteur="[(#VAL{etiquettes}|parametre_url{groupe,#ENV{groupe}})]" multiple="multiple"[ (#ENV{aide_liste}|oui)style="display:none;"]
+ })]
+]
+
+<INCLURE{
+		fond=saisies/input,
+		env,
+		class=text etiquettes,
+		attributs=#GET{attr}} />

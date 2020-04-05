@@ -1,0 +1,94 @@
+[(#REM) S'il y a proposition du login, il y a donc erreur d'autorisation et on affiche erreur et login]
+[(#ENV*{proposer_login}|oui)
+<div class="formulaire_spip formulaire_etiquettes"  id="form_etiquettes_#ENV{identifiant}">
+	[<p class="reponse_formulaire reponse_formulaire_erreur">
+		(#ENV*{message_erreur})
+		[(#REM) Si la personne est déjà connectée mais avec un compte non-autorisé, on propose la déconnexion]
+		[(#SESSION{id_auteur}|oui)
+			<br /><a href="#URL_LOGOUT"><:etiquettes:se_deconnecter:></a>
+		]
+	</p>]
+	#LOGIN_PUBLIC
+</div>
+]
+
+[(#REM) S'il n'y a pas d'erreur d'autorisation on affiche le formulaire ]
+[(#ENV*{erreur_autorisation}|non)
+
+[(#REM) Si on ne veut pas que le champ ]
+[(#ENV*{uniquement_champ}|non)
+<div class="formulaire_spip formulaire_etiquettes"  id="form_etiquettes_#ENV{identifiant}">
+	
+	[<p class="reponse_formulaire reponse_formulaire_erreur">
+		(#ENV*{message_erreur})
+	</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">
+		(#ENV*{message_ok})
+	</p>]
+	
+	<form action="#ENV{action}" method="post"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			
+			<ul[ (#ENV{aide_liste}|?{style="display:none;"})]>
+			<li class="editer">
+]
+				<label for="#ENV{name}">[(#ENV{label})][(#ENV*{label}|non)[(#ENV*{remplacer}|?{<:etiquettes:modifier_etiquettes:>,<:etiquettes:ajouter_etiquettes:>})]]</label>
+				<input type="text" class="text etiquettes"
+					id="#ENV{name}"
+					name="#ENV{name}"
+					value="#ENV*{#ENV{name}}"
+					[(#ENV{aide_autocompletion}|?{data-selecteur="[(#VAL{etiquettes}|parametre_url{groupe,#ENV{groupe}})]" multiple="multiple"})]
+					[(#ENV{aide_liste}|?{style="display:none;"})]
+				/>
+				[<div class="explication">(#ENV{explication}|htmlspecialchars_decode)</div>]
+[(#REM) Si on ne veut pas que le champ ]
+[(#ENV*{uniquement_champ}|non)
+			</li>
+			</ul>
+]
+			
+			[(#REM) Si on est dans un crayon on ajoute la bonne classe ]
+			<script type="text/javascript">
+			<!--
+			var crayon_etiquettes_#ENV{identifiant} = function(){
+				var input = $('##ENV{name}');
+				var crayon = input.parents('.crayon-html');
+				if (crayon.length > 0)
+					input
+						.addClass("crayon-active");
+			}
+			$(function(){
+				setTimeout(crayon_etiquettes_#ENV{identifiant}, 100);
+			});
+			// -->
+			</script>
+			
+			[(#ENV{aide_nuage}|oui)
+				<INCLURE{fond=fonds/#ENV{squelette_nuage}}{type=#ENV{groupe}}{type_objet}{id_objet}{identifiant}{name}>
+			]
+			
+			[(#ENV{aide_liste}|oui)
+				<INCLURE{fond=fonds/etiquettes_aide_liste}{type=#ENV{groupe}}{type_objet}{id_objet}{identifiant}{name}>
+			]
+			
+			[(#ENV{aide_select}|oui)
+				<INCLURE{fond=fonds/etiquettes_aide_liste}{type=#ENV{groupe}}{type_objet}{id_objet}{identifiant}{name}>
+			]
+
+
+[(#REM) Si on ne veut pas que le champ ]
+[(#ENV*{uniquement_champ}|non)			
+			<p class="boutons">
+				<input type="submit" class="submit"
+					name="valider_etiquettes_#ENV{identifiant}"
+					value="<:bouton_valider:>"
+				/>
+			</p>
+		
+		</fieldset>
+	</div></form>
+	
+</div>
+]
+]
