@@ -1,0 +1,54 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=table_matieres -->
+
+<div class="formulaire_spip formulaire_config">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<ul class="editer-groupe">
+				<li class="editer editer_auto[ (#ENV**{erreurs}|table_valeur{auto}|oui)erreur]">
+					<label><:tdm:automatique:></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{auto})</span>]
+					<p class='explication'><:tdm:automatique_desription:></p>
+					<div class="choix">
+						<label for="auto_oui"><:item_oui:></label>
+						<input type="radio" name="auto" id="auto_oui" size="4" [checked="(#ENV{auto,#EVAL{_AUTO_ANCRE}}|=={oui}|?{checked})"] value='oui' />
+						<label for="auto_non"><:item_non:></label>
+						<input type="radio" name="auto" id="auto_non" size="4" [checked="(#ENV{auto,#EVAL{_AUTO_ANCRE}}|!={oui}|?{checked})"] value='non' />
+					</div>
+				</li>		
+				<li class="editer editer_longueur[ (#ENV**{erreurs}|table_valeur{lg}|oui)erreur]">
+					<label for= "lg"><:tdm:longueur:></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{lg})</span>]
+					<p class='explication'><:tdm:explication_longueur:></p>
+					<input type="text" name="lg" class="text" size="4" value="#ENV{lg,#EVAL{_LG_ANCRE}}" />
+				</li>
+				<li class="editer editer_separateur[ (#ENV**{erreurs}|table_valeur{sep}|oui)erreur]">
+					<label for="sep"><:tdm:separateur:></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{sep})</span>]
+					<p class='explication'><:tdm:explication_separateur:></p>
+					<input type="text" name="sep" class="text" size="4" value="#ENV{sep,#EVAL{_SEP_ANCRE}}" />
+				</li>
+				<li class="editer editer_min[ (#ENV**{erreurs}|table_valeur{min}|oui)erreur]">
+					<label for="min"><:tdm:min_intertitres:></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{min})</span>]
+					<p class='explication'><:tdm:explication_min:></p>
+					<input type="text" name="min" class="text" size="4" value="#ENV{min,#EVAL{_MIN_ANCRE}}" />
+				</li>
+				<li class="editer editer_tdm_flottante[ (#ENV**{erreurs}|table_valeur{tdm_flottante}|oui)erreur]">
+					<label for="tdm_flottante"><:tdm:label_tdm_flottante:></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{tdm_flottante})</span>]
+					<p class='explication'><:tdm:explication_tdm_flottante:></p>
+					<input type="checkbox" name="tdm_flottante" id="tdm_flottante" [checked="(#ENV{tdm_flottante}|=={on}|?{checked})"] value='on' />
+				</li>
+			</ul>
+			<p class="boutons">
+				<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />
+			</p>
+		</div>
+	</form>
+</div>
