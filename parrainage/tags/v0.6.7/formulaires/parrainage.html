@@ -1,0 +1,28 @@
+<div class="formulaire_spip formulaire_editer formulaire_#ENV{form}[ formulaire_#ENV{form}-(#ENV{id,nouveau})]">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	[(#ENV{editable}|oui)
+	<form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		[<p class="erreur_message">(#ENV{erreurs}|table_valeur{filleuls})</p>]
+		#INCLURE{fond=formulaires/inc-liste-filleuls,env,id_parrain=#ENV{_id_parrain}}
+		
+		<ul>
+			[(#SAISIE{textarea, message, label=<:parrainage:parrainage_message_label:>,rows=10})]
+		</ul>
+		
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		
+		<p class="boutons">
+			<span class="image_loading"></span>
+			<input type="submit" class="submit" name="submit_valider" value="<:parrainage:parrainage_inviter:>" />
+			<input type="submit" class="submit" name="submit_supprimer" value="<:parrainage:parrainage_supprimer_filleuls:>" onclick="return confirm('<:parrainage:parrainage_supprimer_filleuls_confirmation:>')" />
+		</p>
+	</div></form>
+	]
+</div>
