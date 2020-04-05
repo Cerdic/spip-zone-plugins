@@ -1,0 +1,21 @@
+<paquet
+	prefix="mes_preferences"
+	categorie="maintenance"
+	version="0.1.4"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="images/mes_preferences-32.png"
+	documentation=""
+>
+
+	<nom>Mes Préférences</nom>
+
+	<auteur>Arnaud Bérard (Mist. GraphX)</auteur>
+
+	<licence>GNU/GPL</licence>
+	
+	<pipeline nom="header_prive" inclure="mes_preferences_pipelines.php" />
+	
+	<utilise nom="jappix_mini" compatibilite="[1.0.0;]" />
+
+</paquet>

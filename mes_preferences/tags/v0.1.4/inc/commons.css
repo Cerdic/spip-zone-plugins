@@ -1,0 +1,14 @@
+
+/*#MARK : Bando*/
+
+/* puces sur menus ayant des enfants */
+#bando_outils ul.deroulant li.haschild > a {
+    background-image:url(#CHEMIN_IMAGE{triangle-droite#ENV{rtl}|concat{.gif}});
+    background-position:right center;
+    }
+
+/*#MARK : Footer*/
+
+#logo_site {display:block;margin-right:15px;width:100px;height:100px;float:left;}
+#copyright {text-align:left;}
+

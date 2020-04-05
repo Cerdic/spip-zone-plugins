@@ -1,0 +1,55 @@
+
+/* #MARK : ELASTIC LAYOUT */
+/* Layout */
+body {min-width: 780px;}
+body.elastic {min-width: 974px;}
+
+div.messages-alertes {text-align: right;background: #fff;padding: 5px;width: 770px;clear: both; margin-right: auto; margin-left: auto;}
+
+/* layout elastic */
+.elastic .largeur {width:95%;}
+.elastic #conteneur,.elastic .table_page { width: 100%; }
+.elastic div.messages-alertes {width: 964px;}
+.elastic #navigation {float:left; width:200px; }
+.elastic #extra { float: right; clear:none; width: 200px; }
+.elastic #contenu {
+    float:none;
+    margin-left: 220px;
+    margin-right:220px;
+    overflow:hidden;
+    width: auto;
+    }
+
+/* les formulaires sont en 600px en config large */
+body.elastic.edition #contenu,
+.articles_edit.elastic #contenu,
+.mots_edit.elastic #contenu,
+.breves_edit.elastic #contenu,
+.rubriques_edit.elastic #contenu {/*width:600px;*/}
+
+body.elastic.edition #extra,
+.articles_edit.elastic #extra,
+.mots_edit.elastic #extra,
+.breves_edit.elastic #extra,
+.rubriques_edit.elastic #extra {/*width:140px;*/}
+
+/* une seule colonne centrale */
+.pleine_largeur #navigation,
+.pleine_largeur #extra,
+body.elastic .pleine_largeur #navigation,
+body.elastic .pleine_largeur #extra {display:none;}
+.pleine_largeur #contenu,
+body.elastic .pleine_largeur #contenu {margin-left:0;width:100%;}
+
+/*fix all layout problems of IE6 and IE7*/
+.lte7 .cadre,
+.lte7 .fiche_objet, /*title not visible*/
+.lte7 .ajax-action, /*containers of expandible boxes go mad*/
+.lte7 .tabs-container, /*containers of expandible boxes go mad*/
+.lte7 #portfolio,
+.lte7 #documents {zoom:1}
+
+div.table_page { margin-top: 1em; }
+.centered { margin: 0 auto; text-align: center; }
+#page { margin: auto; text-align: center; }
+.table_page{ margin: auto; text-align: left; }

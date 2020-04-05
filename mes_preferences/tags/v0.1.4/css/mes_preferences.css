@@ -1,0 +1,4 @@
+/* Les styles utilisé par le plugin dans l'espace privé */
+
+#theme_selector {}
+#theme_selector .choix p {border:1px solid silver;padding:5px;margin-bottom:0.8em;margin-left:30px;}
