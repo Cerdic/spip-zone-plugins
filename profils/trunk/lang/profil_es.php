@@ -42,6 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_groupe_auteur_label' => 'Cuenta del utilizador',
 	'champ_groupe_contact_label' => 'Contacto',
 	'champ_groupe_organisation_label' => 'Organización',
+	'champ_identifiant_label' => 'Nombre de usuario',
 	'champ_titre_label' => 'Título',
 	'comptes_aucun' => 'No hay cuenta de este perfil',
 	'comptes_creer' => 'Crear una nueva cuenta para este perfil',
