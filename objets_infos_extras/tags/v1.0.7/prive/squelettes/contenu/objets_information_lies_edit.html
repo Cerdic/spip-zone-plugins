@@ -1,0 +1,19 @@
+[(#ID_OBJETS_INFORMATION|oui)
+	[(#AUTORISER{modifier,objets_information,#ID_OBJETS_INFORMATION}|sinon_interdire_acces)]
+]
+
+
+[(#ID_OBJETS_INFORMATION|non)
+	[(#AUTORISER{creer,objets_information}|sinon_interdire_acces)]
+]
+
+<div class="cadre-formulaire-editer">
+	<div class="entete-formulaire">
+
+	</div>
+
+	<div class="ajax">
+		[(#FORMULAIRE_EDITER_OBJETS_INFORMATION_LIES{#ENV{id_objets_information},#ENV{objet}, #ENV{id_objet}})]
+	</div>
+
+</div>

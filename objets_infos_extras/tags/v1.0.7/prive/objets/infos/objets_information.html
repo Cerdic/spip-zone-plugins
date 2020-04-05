@@ -1,0 +1,30 @@
+<BOUCLE_objets_information(OBJETS_INFORMATIONS){id_objets_information=#ENV{id}}{statut?}>
+<div class="infos">
+[(#SET{texte_objet,<:objets_information:titre_objets_information:>})]
+<div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_OBJETS_INFORMATION</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{objets_informations,#ID_OBJETS_INFORMATION})]
+
+<div class='nb_elements'><!--nb_elements--></div>
+
+[(#REM)
+
+	Bouton voir en ligne
+
+]
+<BOUCLE_publie(OBJETS_INFORMATIONS){id_objets_information}>
+	[(#VAL{redirect}
+		|generer_url_action{type=objets_informations&id=#ID_OBJETS_INFORMATION}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</BOUCLE_publie>
+	[(#AUTORISER{previsualiser,objets_informations,#ID_OBJETS_INFORMATION,'',#ARRAY{statut,#STATUT}})
+		[(#VAL{redirect}
+			|generer_url_action{type=objets_informations&id=#ID_OBJETS_INFORMATION}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{<:previsualiser:>,preview})]
+	]
+<//B_publie>
+
+</div>
+</BOUCLE_objets_information>

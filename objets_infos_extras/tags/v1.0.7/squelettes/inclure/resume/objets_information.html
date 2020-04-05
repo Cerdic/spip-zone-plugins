@@ -1,0 +1,23 @@
+[(#REM)
+
+	Squelette Presentation resumee d'un article dans une liste
+	Distribue sous licence GPL
+
+]
+<BOUCLE_resume_objets_information(OBJETS_INFORMATIONS objets_informations_liens) {id_objets_information} {statut?}>
+<article class="entry article hentry">
+	<strong class="h3-like entry-title">
+		<a href="#URL_OBJETS_INFORMATION" rel="bookmark">
+			[(#LOGO_OBJETS_INFORMATION|image_reduire{#ENV{largeur_logo,-1},#ENV{hauteur_logo,-1}}|responsive_logo)]
+			[(#QUANTITE|>{0}|oui)#QUANTITE ]#TITRE
+				<i
+					class="icon-chevron-right"
+					title="<:zcore:lire_la_suite|attribut_html:><:zcore:lire_la_suite_de|attribut_html:>&laquo;[(#TITRE|attribut_html)]&raquo;">
+					>
+				</i>
+			</span>
+		</a>
+		</strong>
+	[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION{#ENV{coupe,300}})</div>]
+</article>
+</BOUCLE_resume_objets_information>
