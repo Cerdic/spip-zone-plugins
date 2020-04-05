@@ -1,0 +1,5 @@
+[(#BOITE_OUVRIR{#CHEMIN{svpstats_logo-24.png}|balise_img{'',cadre-icone}, simple})]
+	#SET{periode, #VAL|svpstats_periode_actualisation_stats}
+	[(#GET{periode}|oui)<:svpstats:info_boite_statistiques{periode=#GET{periode}}:>]
+	[(#BOUTON_ACTION{<:svpstats:bouton_actualiser_stats:>, #URL_ACTION_AUTEUR{actualiser_stats, tout, #SELF}, '', '', <:svpstats:bulle_actualiser_stats:>})]
+#BOITE_FERMER

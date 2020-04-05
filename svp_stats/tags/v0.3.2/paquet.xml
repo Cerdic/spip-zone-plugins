@@ -1,0 +1,25 @@
+<paquet
+	prefix="svpstats"
+	categorie="statistique"
+	version="0.3.2"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="svpstats_logo-64.png"
+	schema="0.2"
+>	
+
+	<nom>SVP Statistiques</nom>
+	<!-- Module SVP de gestion des statistiques d'utilisation des plugins -->
+
+	<auteur>Eric Lupinacci</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/svpstats_declarer.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/svpstats_declarer.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/svpstats_declarer.php" />
+	<pipeline nom="taches_generales_cron" inclure="genie/svpstats_taches_generales_cron.php" />
+	<pipeline nom="affiche_gauche" inclure="svpstats_pipelines.php" />
+
+	<necessite nom="svp" compatibilite="[0.78.11;[" />
+</paquet>
