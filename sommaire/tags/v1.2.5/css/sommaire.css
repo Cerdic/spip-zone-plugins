@@ -1,0 +1,9 @@
+.nav-sommaire {border: 1px solid #eee;margin-left: 30%;margin-bottom: 1.5em;}
+.nav-sommaire h2 {font-size: inherit;text-transform: uppercase;}
+.nav-sommaire ul {}
+
+.sommaire-back {color:#DDD;display:block;width:16px;height:16px;background:url(img/sommaire-up-16.png) no-repeat center;float: right;opacity:0.5;}
+
+/* masquer les sommaires avec un seul lien */
+.nav-sommaire-1 {display: none}
+.sommaire-back-1 {display: none}

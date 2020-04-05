@@ -1,0 +1,24 @@
+<paquet
+	prefix="sommaire"
+	categorie="edition"
+	version="1.2.5"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/sommaire-64.png"
+	documentation="https://contrib.spip.net/Sommaire-automatique"
+>
+
+	<nom>Sommaire automatique</nom>
+
+	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs -->
+	<auteur lien="https://contrib.spip.net/auteur5384">Cédric</auteur>
+	<credit lien="https://contrib.spip.net/auteur6809">James</credit>
+	<credit lien="https://contrib.spip.net/auteur5714">Patrice Vanneufville</credit>
+	<credit lien="https://contrib.spip.net/auteur83">NoPlay</credit>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="declarer_tables_interfaces" inclure="sommaire_fonctions.php" />
+	<pipeline nom="insert_head_css" inclure="sommaire_fonctions.php" />
+
+</paquet>
