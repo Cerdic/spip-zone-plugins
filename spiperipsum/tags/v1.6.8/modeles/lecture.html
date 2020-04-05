@@ -1,0 +1,17 @@
+[(#REM)<!-- 
+	Afficher:
+		- la lecture demandee
+		- pour le jour requis
+		- dans la langue du contexte courant
+		- et suivant le mode d'appel article ou page
+ -->]
+<div class="lecture[ (#ENV{lecture, evangile})]">
+	[(#ENV{mode}|=={#EVAL{_SPIPERIPSUM_MODE_ARTICLE}}|oui)
+		[<h3 class="spip h3 titre">(#ENV{titre})</h3>]
+	]
+	[(#ENV{mode}|=={#EVAL{_SPIPERIPSUM_MODE_PAGE}}|oui)
+		[<h2 class="h2 titre">(#ENV{titre})</h2>]
+	]
+	[<p class="texte">(#ENV*{texte})</p>]
+	[<p class="copyright">(#ENV*{copyright})</p>]
+</div>

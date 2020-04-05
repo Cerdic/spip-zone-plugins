@@ -1,0 +1,22 @@
+[(#REM)<!-- 
+	Afficher:
+		- la date iso, liturgique ou les deux
+		- pour le jour requis
+		- dans la langue du contexte courant
+		- et suivant le mode d'appel article ou page
+ -->]
+[(#ENV{lecture}|=={#EVAL{_SPIPERIPSUM_LECTURE_DATE_ISO}}|oui)
+	[(#SET{jour_iso, [(#ENV{iso}|nom_jour)][&nbsp;(#ENV{iso}|affdate)]})]
+	#SET{date_affichee, #GET{jour_iso}}
+]
+[(#ENV{lecture}|=={#EVAL{_SPIPERIPSUM_LECTURE_DATE_ISO}}|non)
+	#SET{date_affichee, #ENV{#ENV{lecture}|replace{date_}}}]
+
+<div class="lecture date">
+	[(#ENV{mode}|=={#EVAL{_SPIPERIPSUM_MODE_ARTICLE}}|oui)
+		[<h2 class="h2 date">(#GET{date_affichee}|ucfirst)</h3>]
+	]
+	[(#ENV{mode}|=={#EVAL{_SPIPERIPSUM_MODE_PAGE}}|oui)
+		[(#GET{date_affichee}|ucfirst)]
+	]
+</div>
