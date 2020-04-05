@@ -1,0 +1,13 @@
+[(#REM)
+A mettre a la racine du squelette pour qu'à partir de l'espace privé on soit bien redirigé vers le domaine du secteur pour les articles
+]
+
+<BOUCLE_principale_rubrique(RUBRIQUES){id_rubrique}>
+  [(#URL_SECTEUR|=={#URL_SECTEUR{#ID_SECTEUR_COURANT}}|non)
+  #HTTP_HEADER{Status: 301 Moved Permanently}
+  #HTTP_HEADER{Location:#URL_SECTEUR#SELF}
+  ]
+  [(#URL_SECTEUR|=={#URL_SECTEUR{#ID_SECTEUR_COURANT}}|oui)
+  <INCLURE{fond=structure}{env}{id_secteur=#ID_SECTEUR}{type=rubrique}{composition=#COMPOSITION} />
+  ]
+</BOUCLE_principale_rubrique>

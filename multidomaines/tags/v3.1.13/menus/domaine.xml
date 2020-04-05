@@ -1,0 +1,11 @@
+<entree>
+	<nom>Domaine</nom>
+	<rang>20</rang>
+	<description>Lien vers un des domaines configurés</description>
+	<icone>prive/themes/spip/images/multidomaines-24.png</icone>
+	<parametre nom="id_domaine" label="multidomaines:label_menu_id_domaine" obligatoire="oui" />
+	<parametre nom="titre" class="multilang" label="menus:entree_titre" />
+	<parametre nom="parametres" label="menus:entree_parametres" />
+	<parametre nom="ancre" label="menus:entree_ancre" />
+	<parametre nom="css" label="menus:entree_css" />
+</entree>
