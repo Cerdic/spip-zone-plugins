@@ -1,0 +1,26 @@
+#HTTP_HEADER{Content-Type: text/plain; charset=#CHARSET}
+
+[(#REM)
+	Menu de selection d'un mot a partir d'une valeur passee en parametre
+]
+
+#SET{plusieurs,1}
+[(#SET{cherche,#ENV{q}})]
+
+[(#GET{cherche}|etiquettes_position_quot|!={100000}|?{' '})
+	[(#GET{cherche}|etiquettes_position_quot|=={0}|?{' '})
+		#SET{plusieurs,0}
+		[(#SET{cherche,[(#GET{cherche}|substr{6})]})]
+	]
+]
+
+[(#REM) Chercher les mots correspondant a la requete ]
+<BOUCLE_s(MOTS){titre LIKE (#GET{cherche})%}{type=#ENV{groupe}}{0,20}{par titre}{doublons}>
+[(#TITRE*|textebrut|entites_html)]
+</BOUCLE_s>
+	
+	<BOUCLE_s1(MOTS){titre LIKE %(#GET{cherche})%}{type=#ENV{groupe}}{0,20}{par titre}{doublons}>
+	[(#TITRE*|textebrut|entites_html)]
+	</BOUCLE_s1>
+	
+<//B_s>
