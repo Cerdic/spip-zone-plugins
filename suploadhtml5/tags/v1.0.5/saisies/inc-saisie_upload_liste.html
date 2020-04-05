@@ -1,0 +1,23 @@
+[(#REM)
+Ce fichier affiche les fichiers temporairement uploadés par la saisie "upload"
+]
+<div class="dropzone-upload [dropzone-upload-(#ENV{id})] dropzone-upload-liste">
+  <BOUCLE_saisie_upload(DOCUMENTS){id_document IN #SESSION{upload}}{statut=tmp}>
+    <div class="fichier">
+      <div class="fichier-logo">
+      [(#LOGO_DOCUMENT
+      |image_passe_partout{100,100}
+      |image_recadre{100,100}
+      |vider_attribut{class})]
+      </div>
+      <div class="fichier-info">
+        <p>[(#FICHIER|basename|couper{40})]
+        <br>#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)][ - (#LARGEUR|oui|et{#HAUTEUR|oui})[(#LARGEUR) x ][(#HAUTEUR)] pixels]
+        </p>
+        <div class="action">
+          <a href="#URL_ACTION_AUTEUR{supprimer_document_tmp, #ID_DOCUMENT, #SELF}" class="ajax supprimer">Supprimer</a>
+        </div>
+      </div>
+    </div>
+  </BOUCLE_saisie_upload>
+</div>

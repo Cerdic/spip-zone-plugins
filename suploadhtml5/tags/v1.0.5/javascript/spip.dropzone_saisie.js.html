@@ -1,0 +1,37 @@
+[(#REM) Si env contient un maxFiles il surpasse la configuration ]
+[(#SET{maxFiles, [(#ENV{maxFiles, [(#CONFIG{uploadhtml5/max_file}|>{0}|?{#CONFIG{uploadhtml5/max_file},null})]})]})]
+
+[(#REM) maxFiles peut également être altérer lorsqu'il y a déjà des fichiers en session ]
+<BOUCLE_upload_en_session(DOCUMENTS){id_document IN #SESSION{upload}}{statut=tmp}{si #GET{maxFiles}|!={null}|oui}>
+  [(#SET{maxFiles, #GET{maxFiles}|moins{#TOTAL_BOUCLE}})]
+</BOUCLE_upload_en_session>
+
+<script type="text/javascript">
+ var options = {
+   [url: "(#ENV*{url})",]
+   paramName: ["(#ENV{paramName, file})"],
+   maxFilesize: #CONFIG{uploadhtml5/max_file_size},
+   maxFiles: #GET{maxFiles},
+
+   // On déclenchera manuellement l'envoie
+   autoProcessQueue: true,
+
+   // Pour ne pas embrouiller le script d'upload, on ne va faire qu'un seul fichier à la fois
+   parallelUploads: 1,
+
+   [acceptedFiles: "(#ENV{acceptedFiles})",]
+
+   success: function(file, response) {
+     ajaxReload("[dropzone-upload-(#ENV{id})]");
+   },
+
+   // Traduire dropzone
+   #INCLURE{fond=javascript/traduire_dropzone/#ENV{paramName, file}, env}
+ };
+
+ // Désactiver la découverte automatique de dropzone
+ Dropzone.autoDiscover = false;
+
+ $("\##ENV{id}").dropzone(options);
+
+</script>

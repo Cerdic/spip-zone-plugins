@@ -1,0 +1,26 @@
+<paquet
+	prefix="suploadhtml5"
+	categorie="multimedia"
+	version="1.0.5"
+	etat="experimental"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/suploadhtml5-64.png"
+	documentation=""
+>
+
+	<nom>Saisie Uploadhtml5</nom>
+	<!-- Support de saisie dans via uploadhtml5 -->
+
+	<auteur lien="http://p.henix.be">phenix</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="uploadhtml5" compatibilite="[1.6.0;]" />
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+
+	<pipeline nom="autoriser" inclure="suploadhtml5_autorisations.php" />
+
+	<pipeline nom="formulaire_verifier" inclure="suploadhtml5_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="suploadhtml5_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="suploadhtml5_pipelines.php" />
+
+</paquet>
