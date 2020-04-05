@@ -1,0 +1,8 @@
+<B_projets>
+<select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"] onchange="jQuery('#association_projet').slideDown();">
+	[<option value="">(#ENV{option_intro})</option>]
+<BOUCLE_projets(PROJETS){par titre}>
+	<option value="#ID_PROJET"[(#ENV{valeur}|=={#ID_PROJET}|oui)selected="selected"]>#TITRE</option>
+</BOUCLE_projets>
+</select>
+</B_projets>
