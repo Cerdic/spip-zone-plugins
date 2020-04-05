@@ -1,0 +1,28 @@
+<!-- nom=accordeon -->
+<div class="formulaire_spip formulaire_editer formulaire_#FORM">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+      <ul>
+         <li>
+             <label for="identifiant"><:accordeon:label_identifiant:></label>
+             <div class="explication"><:accordeon:explication_identifiant:></div>
+             <input name="identifiant" id="identifiant" class="text" type="text" value="[(#ENV{identifiant}|sinon{.accordeon})]" />
+         </li>
+         <li>
+             <label for="options"><:accordeon:label_options:></label>
+             <div class="explication"><:accordeon:explication_options:></div>
+             <textarea name="options" id="options" rows="3" cols="40">#ENV{options}</textarea>
+         </li>
+      </ul>
+
+		<div class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
+		</div>
+	</div>
+   </form>
+</div>
