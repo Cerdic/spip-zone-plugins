@@ -1,0 +1,14 @@
+<BOUCLE_niveau(XITI_NIVEAUX){id_xiti_niveau}{tout}>
+<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+<div class='label'><:info_titre:></div>
+<div dir='#LANG_DIR' class='#EDIT{titre} titre'>#TITRE</div>
+</div>
+<div class="champ contenu_niveau contenu_descriptif[ (#NIVEAU*|strlen|?{'',vide})]">
+<div class='label'><:xiti_niveau:entree_xiti_niveau:></div>
+<div dir='#LANG_DIR' class='#EDIT{niveau} niveau span'>[(#NIVEAU)]</div>
+</div>
+<div class="champ contenu_xtsite contenu_descriptif[ (#NIVEAU*|strlen|?{'',vide})]">
+<div class='label'><:xiti_niveau:entree_xtsite:></div>
+<div dir='#LANG_DIR' class='#EDIT{xtsite} xtsite span'>[(#XTSITE)]</div>
+</div>
+</BOUCLE_niveau>

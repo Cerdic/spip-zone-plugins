@@ -1,0 +1,148 @@
+[(#REM)
+	
+	Plugin Xiti
+	
+	Génération des différentes variables utiles pour le code javascript du marqueur
+	et insertion du marqueur javascript
+
+]<BOUCLE_si_activer(CONDITION){si #CONFIG{xiti/activer_xiti}|=={oui}|oui}>
+[(#REM)
+
+	Les configurations de base
+
+]
+[(#SET{xtnv,[(#CONFIG{xiti/xtnv_xiti, document})]})]
+[(#SET{xtdi,[(#CONFIG{xiti/xtdi_xiti})]})]
+[(#SET{xtdmc,[(#CONFIG{xiti/xtdmc_xiti,[(#URL_SITE_SPIP|xiti_xtdmc)]})]})]
+[(#SET{profondeur, -1})]
+[(#SET{chapitres, #ARRAY})]
+[(#SET{prefixe_chapitres, ''})]
+<BOUCLE_artourub(ARTICLES){si #ENV{id_article}|>{0}}{id_article}>
+	[(#CONFIG{xiti/secteur_xiti}|=={oui}|oui)
+		[(#CONFIG{xiti/xtsite_xiti_#ID_SECTEUR}|trim|strlen|>{2}|oui)
+			#SET{xtsite,#CONFIG{xiti/xtsite_xiti_#ID_SECTEUR}}
+			[(#CONFIG{xiti/xtpage_xiti}|=={oui}|et{#CONFIG{xiti/secteur_xiti_home}|=={on}}|oui)
+				#SET{profondeur,0}
+			]
+		]
+		[(#CONFIG{xiti/xtsd_xiti_#ID_SECTEUR}|trim|strlen|>{2}|oui)
+			#SET{xtsd,#CONFIG{xiti/xtsd_xiti_#ID_SECTEUR}}
+		]
+		[(#CONFIG{xiti/logssl_xiti_#ID_SECTEUR}|trim|strlen|>{2}|oui)
+			#SET{logssl,#CONFIG{xiti/logssl_xiti_#ID_SECTEUR}}
+		]
+	]
+	[(#CONFIG{xiti/langue_xiti}|=={oui}|oui) 
+		[(#GET{xtsd}|non|et{#CONFIG{xiti/xtsd_xiti_#LANG}|trim|strlen|>{2}|oui}|oui)
+			#SET{xtsd,#CONFIG{xiti/xtsd_xiti_#LANG}}
+		]
+		[(#GET{logssl}|non|et{#CONFIG{xiti/logssl_#LANG}|trim|strlen|>{2}|oui}|oui)
+			#SET{logssl,#CONFIG{xiti/logssl_#LANG}}
+		]
+		[(#GET{xtsite}|non|et{#CONFIG{xiti/xtsite_xiti_#LANG}|trim|strlen|>{2}|oui}|oui)
+			[(#SET{xtsite,[(#CONFIG{xiti/xtsite_xiti_[(#LANG)]})]})]
+		]
+	]
+	<BOUCLE_xtn2_art(XITI_NIVEAUX){si #CONFIG{xiti/niveaux_deux}|=={on}}{id_article}>
+	[(#SET{niveau2,#NIVEAU})][(#SET{niveau2_objet,oui})]
+	</BOUCLE_xtn2_art>
+	[(#REM) placer un libelle de page pour les rapports Xiti]
+	<BOUCLE_chemin_art2(HIERARCHIE){si #CONFIG{xiti/xtpage_xiti}|=={oui}}{id_article}{profondeur > #GET{profondeur}}>
+		[(#GET{chapitres}|count|<{3}|?{
+			[(#SET{chapitres,[(#GET{chapitres}|push{[(#TITRE|xiti|couper{50,''}|textebrut)]})]})],
+			[(#SET{prefixe_chapitres,[(#GET{prefixe_chapitres}|concat{[[(#GET{prefixe_chapitres}|strlen|>{0}|?{'/',''})](#TITRE|xiti|couper{50,''}|textebrut)]})]})]
+		})]
+		<BOUCLE_xtn2_hierarchie_art(XITI_NIVEAUX){si #GET{niveau2_objet}|non|et{#CONFIG{xiti/niveaux_deux}|=={on}}}{id_rubrique}>
+		[(#SET{niveau2,#NIVEAU})]
+		</BOUCLE_xtn2_hierarchie_art>
+	</BOUCLE_chemin_art2>
+	[(#SET{page,[(#TITRE|xiti|textebrut)]})]
+</BOUCLE_artourub>
+	<BOUCLE_rubchemin(RUBRIQUES){id_rubrique}>
+		[(#CONFIG{xiti/secteur_xiti}|=={oui}|oui)
+			[(#CONFIG{xiti/xtsite_xiti_[(#ID_SECTEUR)]}|trim|strlen|>{2}|oui)
+				[(#SET{xtsite,[(#CONFIG{xiti/xtsite_xiti_[(#ID_SECTEUR)]})]})]
+				[(#CONFIG{xiti/xtpage_xiti}|=={oui}|et{#CONFIG{xiti/secteur_xiti_home}|=={on}}|oui)
+					#SET{profondeur,0}
+					[(#ID_RUBRIQUE|=={#ID_SECTEUR}|et{#CONFIG{xiti/niveaux_deux}|=={on}|et{#CONFIG{xiti/xtn2_home_xiti_#ID_RUBRIQUE}|strlen|>{0}}}|oui)
+					#SET{niveau2,#CONFIG{xiti/xtn2_home_xiti_#ID_RUBRIQUE}}
+					]
+				]
+			]
+			[(#CONFIG{xiti/xtsd_xiti_#ID_SECTEUR}|trim|strlen|>{2}|oui)
+				#SET{xtsd,#CONFIG{xiti/xtsd_xiti_#ID_SECTEUR}}
+			]
+			[(#CONFIG{xiti/logssl_xiti_#ID_SECTEUR}|trim|strlen|>{2}|oui)
+				#SET{logssl,#CONFIG{xiti/logssl_xiti_#ID_SECTEUR}}
+			]
+		]
+		[(#CONFIG{xiti/langue_xiti}|=={oui}|oui) 
+			[(#GET{logssl}|non|et{#CONFIG{xiti/logssl_#LANG}|trim|strlen|>{2}|oui}|oui)
+				#SET{logssl,#CONFIG{xiti/logssl_#LANG}}
+			]
+			[(#GET{xtsd}|non|et{#CONFIG{xiti/xtsd_xiti_#LANG}|trim|strlen|>{2}|oui}|oui)
+				#SET{xtsd,#CONFIG{xiti/xtsd_xiti_#LANG}}
+			]
+			[(#GET{xtsite}|non|et{#CONFIG{xiti/xtsite_xiti_#LANG}|trim|strlen|>{2}|oui}|oui)
+				[(#SET{xtsite,[(#CONFIG{xiti/xtsite_xiti_[(#LANG)]})]})]
+			]
+		]
+		<BOUCLE_xtn2_rub(XITI_NIVEAUX){si #CONFIG{xiti/niveaux_deux}|=={on}|et{#GET{niveau2}|non}}{id_rubrique}>
+		[(#SET{niveau2,#NIVEAU})][(#SET{niveau2_objet,oui})]
+		</BOUCLE_xtn2_rub>
+		[(#REM) placer un libelle de page pour les rapports Xiti]
+		<BOUCLE_chemin2(HIERARCHIE){si #CONFIG{xiti/xtpage_xiti}|=={oui}}{id_rubrique}{profondeur > #GET{profondeur}}>
+			[(#GET{chapitres}|count|<{3}|?{
+				[(#SET{chapitres,[(#GET{chapitres}|push{[(#TITRE|xiti|couper{50,''}|textebrut)]})]})],
+				[(#SET{prefixe_chapitres,[(#GET{prefixe_chapitres}|concat{[[(#GET{prefixe_chapitres}|strlen|>{0}|?{'/',''})](#TITRE|xiti|couper{50,''}|textebrut)]})]})]
+			})]
+			<BOUCLE_xtn2_hierarchie_rub(XITI_NIVEAUX){si #GET{niveau2_objet}|non|et{#CONFIG{xiti/niveaux_deux}|=={on}}}{id_rubrique}>
+			[(#SET{niveau2,#NIVEAU})]
+			</BOUCLE_xtn2_hierarchie_rub>
+		</BOUCLE_chemin2>
+		[(#PROFONDEUR|>{#GET{profondeur}}|oui)
+		[(#SET{page,[(#TITRE|xiti|textebrut)]})]]
+	</BOUCLE_rubchemin>
+<//B_artourub>
+[(#ENV{page}|=={recherche}|oui)
+	[(#SET{page,[(#RECHERCHE|xiti)]})]
+	[(#SET{chapitres,[(#GET{chapitres}|push{page_recherche})]})]
+]
+
+[(#ENV{page}|=={sommaire}|et{#CONFIG{xiti,xtn2_accueil_xiti}|strlen|>{0}}|oui)
+	[(#SET{niveau2,[(#CONFIG{xiti/xtn2_accueil_xiti})]})]
+]
+
+[(#GET{page}|non|ou{#GET{page}|=={''}|oui}|oui)
+	[(#SET{page, [page_(#ENV{page,accueil})][_(#LANG)]})]
+]
+
+[(#CONFIG{xiti/langue_xiti}|=={oui}|oui) 
+	[(#GET{xtsd}|non|et{#CONFIG{xiti/xtsd_xiti_#LANG}|trim|strlen|>{2}|oui}|oui)
+		#SET{xtsd,#CONFIG{xiti/xtsd_xiti_#LANG}}
+	]
+	[(#GET{logssl}|non|et{#CONFIG{xiti/logssl_#LANG}|trim|strlen|>{2}|oui}|oui)
+		#SET{logssl,#CONFIG{xiti/logssl_#LANG}}
+	]
+	[(#GET{xtsite}|non|et{#CONFIG{xiti/xtsite_xiti_#LANG}|trim|strlen|>{2}|oui}|oui)
+		[(#SET{xtsite,[(#CONFIG{xiti/xtsite_xiti_[(#LANG)]})]})]
+	]
+]
+
+[(#GET{niveau2}|non)
+	[(#SET{niveau2,[(#ENV{niveau2,[(#CONFIG{xiti/xtn2_xiti})]})]})]
+]
+#SET{https,#EVAL{$_SERVER\['HTTPS'\]}}
+[(#GET{prefixe_chapitres}|strlen|>{0}|oui)
+[(#SET{page,[(#GET{prefixe_chapitres}|concat{[/(#GET{page})]})]})]]
+<INCLURE{fond=inclure/marqueur_js,
+	xtnv=#GET{xtnv},
+	xtsd=#GET{xtsd,#CONFIG{xiti/xtsd_xiti}},
+	logssl=#GET{logssl,#CONFIG{xiti/logssl}},
+	xtsite=#GET{xtsite,#CONFIG{xiti/xtsite_xiti}},
+	niveau2=#GET{niveau2},
+	page=#GET{page},
+	chapitres=#GET{chapitres},
+	https=#GET{https}} />
+</BOUCLE_si_activer>
+#FILTRE{trim}

@@ -1,0 +1,51 @@
+[(#REM)
+
+	Plugins Xiti
+
+]<div id="xiti-tag">[(#SET{smarttime,[(#CHEMIN{javascript/smarttag.js}|filemtime)]})][(#SET{asynchrone,[(#CONFIG{xiti/marqueur_async}|=={on}|?{oui,non})]})]
+	[<script type="text/javascript" src="(#PRODUIRE{fond=javascript/xiti.js,smart=#GET{smarttime}}|timestamp|url_absolue)"[(#GET{asynchrone}|=={oui}|oui)defer]></script>]
+	<script type="text/javascript">[(#REM)
+
+			Si le plugin cookiebar est installé
+
+		]var cookie = true, conf_page = {};
+		if(window.jQuery && window.jQuery.cookieBar){
+			cookie = jQuery.cookieBar('cookies');
+		}
+		if(cookie) {<BOUCLE_si_async(CONDITION){si #GET{asynchrone}|=={oui}}>
+			window.ATInternet = {
+				onTrackerLoad:function(){
+					window.ATTag = new ATInternet.Tracker.Tag({[
+						site: (#ENV{xtsite}|trim),][
+						log: '(#ENV{xtsd}|trim)'][,
+						logSSL: '(#ENV{logssl}|trim)']
+					});
+					conf_page = {
+						name: '[(#ENV{page})]'<B_chapitres_async>,<BOUCLE_chapitres_async(DATA){source table, #ENV{chapitres,#ARRAY}}{','}>
+						chapter[(#COMPTEUR_BOUCLE)]: '#VALEUR'</BOUCLE_chapitres_async>[,
+						level2: (#ENV{niveau2}|trim)
+					]}
+					ATTag.page.set(conf_page);
+					ATTag.dispatch();
+				}
+			}</BOUCLE_si_async></B_si_async>
+			window.ATTag = new ATInternet.Tracker.Tag({[
+				site: (#ENV{xtsite}|trim),][
+				log: '(#ENV{xtsd}|trim)'][,
+				logSSL: '(#ENV{logssl}|trim)']
+			});
+			conf_page = {
+				name: '[(#ENV{page})]'<B_chapitres>,<BOUCLE_chapitres(DATA){source table, #ENV{chapitres,#ARRAY}}{','}>
+				chapter[(#COMPTEUR_BOUCLE)]: '#VALEUR'</BOUCLE_chapitres>[,
+				level2: (#ENV{niveau2}|trim)
+			]}
+			ATTag.page.set(conf_page);
+			ATTag.dispatch();<//B_si_async>
+		}
+	</script>
+</div>
+<noscript>
+	<div id='xiti-tag-noscript'>[(#SET{page,[(#ENV{chapitres,#ARRAY}|push{[(#ENV{page}|trim)]}|implode{'::'})]})]
+		<img width='1' height='1' src='http[(#ENV{https}|?{'s',''})]://[(#ENV{https}|?{#ENV{logssl},#ENV{xtsd}}|trim)].xiti.com/hit.xiti?s=[(#ENV{xtsite}|trim)]&amp;s2=[(#ENV{niveau2})]&amp;p=[(#GET{page})]&amp;di=&amp;' alt='XiTi' />
+	</div>
+</noscript>

@@ -1,0 +1,10 @@
+[(#REM)
+
+	Concaténation de xtclick.js et xtcore.js
+	Remplacement de .mondomaine.tld par le xtsd configuré
+
+]
+
+[(#INCLURE{javascript/smarttag.js}|replace{xiti_id_site,[(#CONFIG{xiti/xtsite_xiti})]})]
+[(#CONFIG{auto_compress_js}|=={oui}|oui)
+#FILTRE{compacte}]

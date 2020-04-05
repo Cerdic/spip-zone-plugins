@@ -1,0 +1,18 @@
+#BOITE_OUVRIR
+<div class='xiti_niveaux_utilisations'>
+<B_liens>
+		<h3>[(#TOTAL_BOUCLE|singulier_ou_pluriel{xiti_niveau:info_utilisation,xiti_niveau:info_utilisations})]</h3>
+		<ul class='liste_items'>
+			<BOUCLE_liens(xiti_niveaux_liens){id_xiti_niveau}>
+			<li class='item #OBJET'>[(#CHEMIN_IMAGE{#OBJET|objet_info{icone_objet}|concat{-16.png}}|balise_img) ]<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[(#INFO_TITRE{#OBJET,#ID_OBJET})]</a>
+			[(#AUTORISER{dissocierxitiniveau,#OBJET,#ID_OBJET}|oui)
+				[(#BOUTON_ACTION{<:xiti_niveau:bouton_xiti_niveau:>,[(#URL_ACTION_AUTEUR{dissocier_xiti_niveau,#ID_OBJET-#OBJET-#ID_XITI_NIVEAU,#SELF})],ajax,'',''})]
+			]
+			</li>
+			</BOUCLE_liens>
+		</ul>
+</B_liens>
+<strong><:xiti_niveau:info_aucune_utilisation:></strong>
+<//B_liens>
+</div>
+#BOITE_FERMER
