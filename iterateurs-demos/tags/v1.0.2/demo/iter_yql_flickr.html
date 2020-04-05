@@ -1,0 +1,26 @@
+<h2>flickr.photos.search + google.translate</h2>
+
+<BOUCLE_topic(DATA){liste red, green, blue}>
+#SET{query,select * from flickr.photos.search(6) where text="#VALEUR" AND extras='url_sq'}
+
+<BOUCLE_trad(DATA)
+{source yql, select * from google.translate where q="#VALEUR" and target="fr"}
+>
+<h3>[(#_topic:VALEUR) =] #VALEUR{results/translatedText}</h3>
+
+</BOUCLE_trad>
+
+
+<p><kbd>#GET{query}</kbd></p>
+
+<BOUCLE_r10(DATA)
+{source yql, #GET{query}}
+{datapath query/results/photo}
+{par hasard}
+>
+<img src="#URL_SQ" height=#HEIGHT_SQ width=#WIDTH_SQ [
+title="(#TITLE|attribut_html)"]
+/>
+</BOUCLE_r10>
+
+</BOUCLE_topic>

@@ -1,0 +1,17 @@
+#CACHE{0}
+
+<h2>(DATA) JSON</h2>
+
+<dl>
+
+<B_r1>
+#PAGINATION
+<br />#TOTAL_BOUCLE/#GRAND_TOTAL
+<BOUCLE_r1(DATA)
+	{source json, http://per.sonn.es/Fil.json}
+	{pagination 5}>
+<dt>#CLE</dt>
+<dd> [(#VALEUR|print)] </dd>
+</BOUCLE_r1>
+
+</dl>

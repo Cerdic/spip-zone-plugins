@@ -1,0 +1,10 @@
+<h2>twitter.search</h2>
+
+<BOUCLE_r11(DATA)
+{source yql, select * from twitter.search where q='#spip'}
+{datapath query/results/results}
+>
+[<dt>@(#VALEUR{from_user}):</dt>]
+<dd>#VALEUR{text}</dd>
+
+</BOUCLE_r11>

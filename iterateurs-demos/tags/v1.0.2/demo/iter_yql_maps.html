@@ -1,0 +1,24 @@
+#CACHE{0}
+<h2>maps.map</h2>
+
+#SET{place,#ENV{place,Mont Saint-Michel}}
+<div style="position:absolute; top:0; left:0; width:0;height:0;">
+<img src="http://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/A_large_blank_world_map_with_oceans_marked_in_blue.gif/800px-A_large_blank_world_map_with_oceans_marked_in_blue.gif" width="880" height="440"
+/>
+</div>
+<div style="height:440px"></div>
+
+<form action="#SELF" method="POST">
+[(#SELF|form_hidden)]
+<input type="text" name="place" value="#GET{place}" />
+<input type="submit" name="go" value="go" />
+</form>
+
+<BOUCLE_ce(DATA)
+{source yql, select * from geo.places where text=(#GET{place}|_q)}
+{datapath query/results/place}
+>
+<div style="position:absolute; top:[(#VAL{180}|moins{[(#VALEUR{centroid/latitude}|intval|mult{2})]})]px;
+left:[(#VALEUR{centroid/longitude}|intval|mult{2}|plus{360})]px; width:[(#VALEUR{areaRank}|mult{4})]px; z-index:10; height:[(#VALEUR{areaRank}|mult{4})]px; background-color: #f00;" title="#NAME | #VALEUR{admin1/content}"></div>
+</BOUCLE_ce>
+

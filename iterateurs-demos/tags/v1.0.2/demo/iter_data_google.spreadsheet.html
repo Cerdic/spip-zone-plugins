@@ -1,0 +1,49 @@
+#CACHE{0}
+
+<h2>google.spreadsheet</h2>
+
+<p>Pour utiliser un tableur Google Documents, il faut "publier le document", puis r&#233;cup&#233;rer sa cl&#233;. On peut ensuite exploiter diff&#233;rents formats&nbsp;:</p>
+
+#SET{key,0AolUP3c6K9JodGwxRjJzb2hyTGZLU29qRVItRXk1VXc}
+
+<h3>Format CSV</h3>
+
+<B_csv>
+<table border="1">
+<BOUCLE_csv(DATA){source csv, https://spreadsheets.google.com/pub?key=#GET{key}&hl=en&dsds&output=csv}
+>
+#SET{td,(#COMPTEUR_BOUCLE|=={1}|?{th,td})}
+<tr>
+<#GET{td}>#VALEUR{0}</#GET{td}>
+<#GET{td}>#VALEUR{1}</#GET{td}>
+<#GET{td}>#VALEUR{2}</#GET{td}>
+</tr>
+</BOUCLE_csv>
+</table>
+</B_csv>
+
+(pas de donn&#233;es)
+
+<//B_csv>
+
+
+<h3>Format RSS/List</h3>
+
+<BOUCLE_list(DATA){source rss, https://spreadsheets.google.com/feeds/list/#GET{key}/od6/public/basic?alt=rss}>
+
+<dt>#TITRE</dt><dd>#VALEUR{descriptif}</dd>
+
+</BOUCLE_list>
+
+
+
+<h3>Format RSS/Cells</h3>
+
+
+<BOUCLE_cells(DATA){source rss, https://spreadsheets.google.com/feeds/cells/#GET{key}/od6/public/basic?alt=rss}>
+
+<dt>#TITRE</dt><dd>#VALEUR{descriptif}</dd>
+
+</BOUCLE_cells>
+
+
