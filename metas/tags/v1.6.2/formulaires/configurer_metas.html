@@ -1,0 +1,63 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<input type="hidden" value="#CONFIG{spip_metas_title}" name="spip_metas_title_old"/>
+			<input type="hidden" value="#CONFIG{spip_metas_description}" name="spip_metas_description_old"/>
+			<input type="hidden" value="#CONFIG{spip_metas_keywords}" name="spip_metas_keywords_old"/>
+			<input type="hidden" value="#CONFIG{spip_metas_mots_importants}" name="spip_metas_mots_importants_old"/>
+			<h3 class="titrem">
+				<:metas:config_metas_defaut:>
+			</h3>
+			<ul class="editer-groupe">
+				<li class="editer editer-spip_metas_title">
+					<label for="spip_metas_title">
+						<:metas:title:>
+					</label>
+					<p class="explication">
+						<:metas:title_defaut_explication:>
+					</p>
+					<input type="text" class="text" maxlength="255" name="spip_metas_title" id="spip_metas_title" value="#CONFIG{spip_metas_title}"/>
+				</li>
+				<li class="editer editer-spip_metas_description">
+					<label for="spip_metas_description">
+						<:metas:meta_description:>
+					</label>
+					<p class="explication">
+						<:metas:meta_description_defaut_explication:>
+					</p>
+					<textarea name="spip_metas_description" id="spip_metas_description" maxlength="255" cols="40" rows="4" class="forml">#CONFIG{spip_metas_description}</textarea>
+				</li>
+				<li class="editer editer-spip_metas_keywords">
+					<label for="spip_metas_keywords">
+						<:metas:meta_keywords:>
+					</label>
+					<p class="explication">
+						<:metas:meta_keywords_defaut_explication:>
+					</p>
+					<textarea name="spip_metas_keywords" id="spip_metas_keywords" cols="40" rows="4" class="forml">#CONFIG{spip_metas_keywords}</textarea>
+				</li>
+			</ul>
+			<h3 class="titrem">
+				<:metas:config_mots_importants:>
+			</h3>
+			<ul class="editer-groupe">
+				<li class="editer editer-spip_metas_mots_importants">
+					<label for="spip_metas_mots_importants">
+						<:metas:mots_importants_label:>
+					</label>
+					<p class="explication">
+						<:metas:mots_importants_explication:>
+					</p>
+					<textarea name="spip_metas_mots_importants" id="spip_metas_mots_importants" cols="40" rows="4" class="forml">#CONFIG{spip_metas_mots_importants}</textarea>
+				</li>
+			</ul>
+
+			<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>"/></p>
+		</div>
+	</form>
+</div>

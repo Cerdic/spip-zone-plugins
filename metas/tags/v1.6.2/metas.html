@@ -1,0 +1,33 @@
+#CACHE{0}
+<BOUCLE_article(ARTICLES){id_article}>
+<BOUCLE_metas_article(METAS){id_article}>
+<title>[(#TITRE|sinon{#_article:TITRE|couper{80}}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTION|sinon{#_article:DESCRIPTIF}|sinon{#_article:INTRODUCTION{250}}|sinon{#METAS_DESCRIPTION}|PtoBR|attribut_html)" />]
+[<meta name="keywords" content="(#KEYWORDS|sinon{#METAS_KEYWORDS}|attribut_html)" />]
+[<link rel="canonical" href="(#CANONICAL|sinon{#URL_ARTICLE|url_absolue})" />]
+</BOUCLE_metas_article>
+<title>[(#TITRE|couper{80}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF|sinon{#INTRODUCTION|couper{250}}|sinon{#METAS_DESCRIPTION}|PtoBR|attribut_html)" />]
+[<meta name="keywords" content="(#METAS_KEYWORDS|attribut_html)" />]
+[<link rel="canonical" href="(#CANONICAL|sinon{#URL_ARTICLE|url_absolue})" />]
+<//B_metas_article>
+</BOUCLE_article>
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+<BOUCLE_metas_rubrique(METAS){id_rubrique}>
+<title>[(#TITRE|sinon{#_rubrique:TITRE|supprimer_numero|couper{80}}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTION|sinon{#_rubrique:DESCRIPTIF}|sinon{#_rubrique:INTRODUCTION{250}}|sinon{#METAS_DESCRIPTION}|PtoBR|attribut_html)" />]
+[<meta name="keywords" content="(#KEYWORDS|sinon{#METAS_KEYWORDS}|attribut_html)" />]
+[<link rel="canonical" href="(#CANONICAL|sinon{#URL_RUBRIQUE|url_absolue})" />]
+</BOUCLE_metas_rubrique>
+<title>[(#TITRE|supprimer_numero|couper{80}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF|sinon{#INTRODUCTION|couper{250}}|sinon{#METAS_DESCRIPTION}|PtoBR|attribut_html)" />]
+[<meta name="keywords" content="(#METAS_KEYWORDS|attribut_html)" />]
+[<link rel="canonical" href="(#CANONICAL|sinon{#URL_RUBRIQUE|url_absolue})" />]
+<//B_metas_rubrique>
+</BOUCLE_rubrique>
+<title>[(#METAS_TITLE|sinon{#NOM_SITE_SPIP|textebrut})][ - (#SLOGAN_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#METAS_DESCRIPTION|sinon{#DESCRIPTIF_SITE_SPIP}|PtoBR|attribut_html)" />]
+[<meta name="keywords" content="(#METAS_KEYWORDS|attribut_html)" />]
+[<link rel="canonical" href="(#CANONICAL|sinon{#URL_SITE_SPIP|url_absolue})" />]
+<//B_rubrique>
+<//B_article>
