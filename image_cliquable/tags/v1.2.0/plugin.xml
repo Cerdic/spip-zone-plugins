@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plugin>
+	<nom>Image cliquable</nom>
+	<slogan>Ajouter des images cliquables dans vos textes</slogan>
+	<auteur>Arnault PACHOT, [OpenStudio->http://www.openstudio.fr]</auteur>
+	<licence>GPL</licence>
+	<version>1.2.0</version>
+	<etat>test</etat>
+	<description>
+	Ce plugin permet d'ajouter des images cliquables dans le texte de vos articles, rubriques, br&#232;ves...
+	</description>
+	<lien>https://contrib.spip.net/Plugin-Image-Cliquable</lien>
+	<icon>image_cliquable.png</icon>
+	<prefix>image_cliquable</prefix>
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
+	<categorie>multimedia</categorie>
+</plugin>
