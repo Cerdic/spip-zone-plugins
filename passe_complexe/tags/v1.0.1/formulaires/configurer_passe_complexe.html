@@ -1,0 +1,37 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:passe_complexe:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE
+		<div class="editer-groupe">
+			[(#PLUGIN{motpassecomplexe}|oui)
+			<div class="editer">
+				<div class="explication"><:passe_complexe:motpassecomplexe_actif:></div>
+			</div>
+			]
+			[(#PLUGIN{motpassecomplexe}|non)
+			<div class="editer">
+				<label for="common"><:passe_complexe:cfg_longueur:></label>
+				<input type="text" name="length" id="length" value="[(#ENV{length,#EVAL{_PASS_LONGUEUR_MINI}}|max{6})]" />
+			</div>
+			]
+			<div class="editer">
+				<label for="common"><:passe_complexe:cfg_common:></label>
+				<textarea type="text" name="common" id="common">#CONFIG{passe_complexe/common}</textarea>
+			</div>
+			<div class="editer">
+				<label for="common"><:passe_complexe:cfg_showpercent:></label>
+				<input type="radio" name="showpercent" value="false" [(#CONFIG{passe_complexe/showpercent}|in_array{#LISTE{'',false}}|oui)checked] /><:passe_complexe:cfg_false:><br />
+				<input type="radio" name="showpercent" value="true" [(#CONFIG{passe_complexe/showpercent}|=={true}|oui)checked] /><:passe_complexe:cfg_true:>
+			</div>
+		</div>
+		<input type="hidden" name="_meta_casier" value="passe_complexe" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>
