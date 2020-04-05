@@ -1,0 +1,24 @@
+<paquet
+	prefix="csv2auteurs"
+	categorie="outil"
+	version="1.1.7"
+	etat="test"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/csv2auteurs-128.png"
+	schema="1.0.0"
+	documentation="https://contrib.spip.net/Plugin-csv2auteurs"
+>
+
+	<nom>csv2auteurs</nom>
+
+	<auteur>cy_altern</auteur>
+	<auteur>tofulm</auteur>
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="saisies" compatibilite="[3.23.2;]" />
+
+	<pipeline nom="header_prive" inclure="csv2auteurs_pipelines.php" />
+
+	<menu nom="csv2auteurs" titre="csv2auteurs:csv2auteurs_titre" parent="menu_administration"  icone="images/csv2auteurs-16.png" />
+
+</paquet>

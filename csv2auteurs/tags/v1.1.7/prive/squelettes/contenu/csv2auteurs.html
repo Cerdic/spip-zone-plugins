@@ -1,0 +1,46 @@
+<h3><:csv2auteurs:presentation_formulaire:></h3>
+
+[(#SESSION{webmestre}|=={oui}|oui)
+	<div id="separteur" class="ajax">
+		#FORMULAIRE_CSV2AUTEURS_SEPARATEUR
+	</div>
+
+	<div id="choix_manip" class="formulaire_spip">
+		<h3 class="legend"><:csv2auteurs:choix_manip:></h3>
+		<ul>
+			<li><input type="radio"  name="choix" value="importer" checked="checked" id="choix_import"> <label for="choix_import"><:csv2auteurs:importer:></label></li>
+			<li><input type="radio"  name="choix" value="exporter" id="choix_export"> <label for="choix_export"><:csv2auteurs:exporter:></label></li>
+		</ul>
+	</div>
+
+	<div id="exporter" class="aaa">
+		#FORMULAIRE_CSV2AUTEURS_EXPORTATION
+	</div>
+
+	<div id="importer" class="ajax">
+		#FORMULAIRE_CSV2AUTEURS_IMPORTATION
+	</div>
+]
+[(#SESSION{webmestre}|=={oui}|non)
+	<div class="formulaire_spip formulaire_#FORM">
+		<p class="reponse_formulaire reponse_formulaire_erreur"><:csv2auteurs:non_autorise:></p>
+	</div>
+]
+
+
+<script type="text/javascript" charset="utf-8">
+	jQuery(document).ready(function(){
+		export_import();
+		jQuery("input[type=radio][name=choix]").on("change", export_import);
+	});
+	function export_import() {
+		if (jQuery('input[value=importer]').is(':checked')){
+			jQuery("#importer").show();
+			jQuery("#exporter").hide();
+		}
+		else {
+			jQuery("#importer").hide();
+			jQuery("#exporter").show();
+		}
+	}
+</script>

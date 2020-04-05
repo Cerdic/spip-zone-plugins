@@ -1,0 +1,79 @@
+<div class="formulaire_spip formulaire_#FORM">
+
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+
+[(#ENV{editable}|oui)
+	<form name="formulaire_#FORM" action="#ENV{action}" method="post">
+		<div>#ACTION_FORMULAIRE{#ENV{action}}
+			<ul>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend"><:csv2auteurs:titre_choix_statuts:></h3>
+						<ul>
+							[(#SAISIE{checkbox, choix_statut}
+								{label=<:csv2auteurs:choix_statut:>}
+								{datas=#ARRAY{
+									0minirezo,<:csv2auteurs:administrateurs:>,
+									1comite,<:csv2auteurs:redacteurs:>,
+									6forum,<:csv2auteurs:visiteurs:>
+								}}
+							)]
+						</ul>
+					</fieldset>
+				</li>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend"><:csv2auteurs:titre_choix_formats:></h3>
+						<ul>
+							[(#SAISIE{radio, choix_format}
+								{label=<:csv2auteurs:choix_format_rub_zones:>}
+								{datas=#ARRAY{
+									titre,<:csv2auteurs:format_titres_rub_zone:>,
+									id,<:csv2auteurs:format_id_rub_zone:>
+								}}
+							)]
+						</ul>
+					</fieldset>
+				</li>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend"><:csv2auteurs:titre_choix_champs:></h3>
+						<p><:csv2auteurs:nb_champ_passes:></p>
+						<ul>
+							<li>
+								<label><:csv2auteurs:export_fichier_compatible_import:></label>
+							</li>
+						</ul>
+					</fieldset>
+				</li>
+			</ul>
+			<p class="boutons"><input type="submit" id="config_import" class="submit" value="<:csv2auteurs:submit_format_import:>" /></p>
+			<ul>
+				<li class="fieldset">
+					<fieldset>
+						<ul>
+							[(#SAISIE{checkbox, nom_champs}
+								{label=<:csv2auteurs:nom_champs:>}
+								{datas=#ENV{nom_champs}}
+							)]
+						</ul>
+					</fieldset>
+				</li>
+			</ul>
+			<p class="boutons"><input type="submit" class="submit" value="<:csv2auteurs:submit_export_:>" /></p>
+		</div>
+	</form>
+]
+</div>
+
+<script type="text/javascript" charset="utf-8">
+	jQuery(document).ready(function() {
+		jQuery("#config_import").on('click', function() {
+			jQuery(".editer_nom_champs input").prop("checked", false);
+			var Tchamp_import = ['nom', 'login', 'email', 'pass', 'statut'];
+			for (i in Tchamp_import) 
+			jQuery(".choix_" + Tchamp_import[i] + " input").prop("checked", true);
+		});
+	});
+</script>

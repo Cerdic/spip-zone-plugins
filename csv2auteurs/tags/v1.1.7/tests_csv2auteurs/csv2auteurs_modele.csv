@@ -1,0 +1,37 @@
+login~pass~email~statut~ss_groupe~zone
+PARENT01~parent01~parent01.nadia@laposte.net~VISITEUR~P TSTT A~zone de test 
+PARENT02~parent02~parent02.guillaume@laposte.net~VISITEUR~P TSTT A~zone de test 
+PARENT03~parent03~parent03.janique@laposte.net~VISITEUR~P TSTT A~zone de test 
+PARENT04~parent04~parent04.clement@laposte.net~VISITEUR~P TSTT A~zone de test 
+PARENT05~parent05~parent05.anne@laposte.net~VISITEUR~P TSTT A~zone de test 
+PARENT06~parent06~parent06.laure@laposte.net~VISITEUR~P TSTT G~zone de test 
+PARENT07~parent07~parent07.aurelia@laposte.net~VISITEUR~P TSTT G~zone de test 
+PARENT08~parent08~parent08.olivier@laposte.net~VISITEUR~P TSTT G~zone de test 
+PARENT09~parent09~parent09.mickael@laposte.net~VISITEUR~P TSTT G~zone de test 
+PARENT10~parent10~parent10.laetitia@laposte.net~VISITEUR~P TSTT G~zone de test 
+ELEVE01~eleve01~eleve01.nadia@laposte.net~REDACTEUR~TSTT A~zone de test 
+ELEVE02~eleve02~eleve02.guillaume@laposte.net~REDACTEUR~TSTT A~zone de test 
+ELEVE03~eleve03~eleve03.janique@laposte.net~REDACTEUR~TSTT A~zone de test 
+ELEVE04~eleve04~eleve04.clement@laposte.net~REDACTEUR~TSTT A~zone de test 
+ELEVE05~eleve05~eleve05.anne@laposte.net~REDACTEUR~TSTT A~zone de test 
+ELEVE06~eleve06~eleve06.laure@laposte.net~REDACTEUR~TSTT G~zone de test 
+ELEVE07~eleve07~eleve07.aurelia@laposte.net~REDACTEUR~TSTT G~zone de test 
+ELEVE08~eleve08~eleve08.olivier@laposte.net~REDACTEUR~TSTT G~zone de test 
+ELEVE09~eleve09~eleve09.mickael@laposte.net~REDACTEUR~TSTT G~zone de test 
+ELEVE10~eleve10~eleve10.laetitia@laposte.net~REDACTEUR~TSTT G~zone de test 
+PROF01~prof01~~ADMINIStrateur~CDI~zone de test 
+PROF02~prof02~prof02.isabelle@laposte.net~ADMINIStrateur~ECONOMIE ET GESTION~zone de test 
+PROF03~prof03~~ADMINIStrateur~ECONOMIE ET GESTION~zone de test 
+PROF04~prof04~prof04.marion@laposte.net~ADMINIStrateur~EPS~zone de test 
+PROF05~prof05~~ADMINIStrateur~EPS~zone de test 
+PROF06~prof06~prof06.christine@laposte.net~ADMINIStrateur~SVT~zone de test 
+PROF07~prof07~~ADMINIStrateur~SVT~zone de test 
+PROF08~prof08~prof08.severine@laposte.net~ADMINIStrateur~HISTOIRE GEOGRAPHIE~zone de test 
+PROF09~prof09~~ADMINIStrateur~HISTOIRE GEOGRAPHIE~zone de test 
+PROF10~prof10~prof10.laurence@laposte.net~ADMINIStrateur~ITALIEN~zone de test 
+PROF11~prof11~~ADMINIStrateur~ITALIEN~zone de test 
+PROF12~prof12~prof10.laurence@laposte.net~ADMINIStrateur~Simple|douBle~zone de test 
+PROF13~prof13~~ADMINIStrateur~Simple|douBle~zone de test 
+PROF14~prof14~prof10.laurence@laposte.net~ADMINIStrateur~technique|1. About us|recup netvibes~zone de test 
+PROF15~prof15~~ADMINIStrateur~~zone de test 
+PROF16~prof16~prof10.laurence@laposte.net~ADMINIStrateur~~zone de test|zone 2
