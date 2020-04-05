@@ -1,0 +1,107 @@
+<?php 
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+function gis_autoriser(){};
+
+/**
+ * Autorisation a modifier le logo d'un point
+ * Si on est autorisé à modifier le point en question
+ * 
+ * @param string $faire L'action
+ * @param string $type Le type d'objet
+ * @param int $id L'identifiant numérique de l'objet
+ * @param array $qui Les informations de session de l'auteur
+ * @param array $opt Des options
+ * @return boolean true/false
+ */
+function autoriser_gis_iconifier_dist($faire,$quoi){
+	return autoriser('modifier','gis',$id,$qui,$opts);
+}
+
+/**
+ * Autorisation a modifier un point
+ * Avoir un statut dans les 3 fournis par SPIP
+ * (On n'a pas d'auteur pour un point ...)
+ * 
+ * @param string $faire L'action
+ * @param string $type Le type d'objet
+ * @param int $id L'identifiant numérique de l'objet
+ * @param array $qui Les informations de session de l'auteur
+ * @param array $opt Des options
+ * @return boolean true/false
+ */
+function autoriser_gis_modifier_dist($faire,$quoi,$id,$qui,$opts){
+	return (in_array($qui['statut'],array('0minirezo','1comite','6forum')));
+}
+
+/**
+ * Autorisation a creer un point
+ * Avoir un statut dans les 3 fournis par SPIP
+ * (On n'a pas d'auteur pour un point ...)
+ * 
+ * @param string $faire L'action
+ * @param string $type Le type d'objet
+ * @param int $id L'identifiant numérique de l'objet
+ * @param array $qui Les informations de session de l'auteur
+ * @param array $opt Des options
+ * @return boolean true/false
+ */
+function autoriser_gis_creer_dist($faire,$quoi,$id,$qui,$opts){
+	return (in_array($qui['statut'],array('0minirezo','1comite','6forum')));
+}
+
+/**
+ * Autorisation a lier un point d'un objet
+ * Un auteur peut lier un point à un autre objet que s'il peut modifier l'objet à lier en question
+ * 
+ * @param string $faire L'action
+ * @param string $type Le type d'objet
+ * @param int $id L'identifiant numérique de l'objet
+ * @param array $qui Les informations de session de l'auteur
+ * @param array $opt Des options
+ * @return boolean true/false
+ */
+function autoriser_gis_lier_dist($faire,$quoi,$id,$qui,$opts){
+	if(is_array($opts) && isset($opts['objet']) && isset($opts['id_objet'])){
+		return autoriser('modifier',$opts['objet'],$opts['id_objet'],$qui);
+	}
+	return false;
+}
+
+/**
+ * Autorisation a délier un point d'un objet
+ * Un auteur peut délier un point à un autre objet que s'il peut modifier l'objet à lier en question
+ * 
+ * @param string $faire L'action
+ * @param string $type Le type d'objet
+ * @param int $id L'identifiant numérique de l'objet
+ * @param array $qui Les informations de session de l'auteur
+ * @param array $opt Des options
+ * @return boolean true/false
+ */
+function autoriser_gis_delier_dist($faire,$quoi,$id,$qui,$opts){
+	return autoriser('lier','gis',$id,$qui,$opts);
+}
+
+/**
+ * Autorisation a supprimer un point
+ * Un auteur peut supprimer un point s'il peut délier tous les objets et modifier le point
+ * 
+ * @param string $faire L'action
+ * @param string $type Le type d'objet
+ * @param int $id L'identifiant numérique de l'objet
+ * @param array $qui Les informations de session de l'auteur
+ * @param array $opt Des options
+ * @return boolean true/false
+ */
+function autoriser_gis_supprimer_dist($faire,$quoi,$id,$qui,$opts){
+	$liaisons = sql_select('*','spip_gis_liens','id_gis='.intval($id));
+	while($liaison = sql_fetch($liaisons)){
+		if(!autoriser('delier','gis',$liaison['id_gis'],$qui,$liaison)){
+			return false;
+		}
+	}
+	return autoriser('modifier','gis',$id,$qui,$opts);
+}
+?>

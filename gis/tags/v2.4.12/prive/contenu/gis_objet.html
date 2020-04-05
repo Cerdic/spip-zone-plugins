@@ -1,0 +1,9 @@
+<div id="editer_gis_[(#ENV{objet})]_[(#ENV{id_objet})]" class="ajax-action nom_action">
+	
+	<div id="pave_gis_depliable" class="bloc_depliable blocreplie">
+		[(#INCLURE{fond=prive/inclure/gis_objet_formulaires,env,ajax})]
+	</div>
+	
+	[(#INCLURE{fond=modeles/carte_gis_preview,id_objet,objet})]
+	
+</div>
