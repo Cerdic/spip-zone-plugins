@@ -1,0 +1,5 @@
+#HTTP_HEADER{Content-Type: text/plain; charset=#CHARSET}
+#CACHE{0}
+[(#REM)
+	"replace{^<\?.*>,'',Ums}" permet de virer la première ligne &lt;?xml qui apparait sur certains fichiers
+][(#ENV{content}|recuperer_page|liens_absolus{[(#ENV{base}|url_absolue|concat{/})]}|replace{^<\?.*>,'',Ums}|trim)]

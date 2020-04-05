@@ -1,0 +1,42 @@
+<plugin>
+	<nom>
+		<multi>
+			[fr]Lecteur ePUB
+			[en]ePUB reader
+		</multi>
+	</nom>
+	<auteur>[kent1->http://www.kent1.info]</auteur>
+	<slogan>
+		<multi>
+			[fr]Lire les fichiers ePUB
+			[en]Read ePUB files
+		</multi>
+	</slogan>
+	<etat>dev</etat>
+	<description>
+		<multi>
+			[fr]Lire les fichiers [ePUB->http://fr.wikipedia.org/wiki/EPUB_%28format%29] directement dans le site
+			[en]Read [ePUB->http://en.wikipedia.org/wiki/EPUB] files directly in the website
+		</multi>
+	</description>
+	<icon>images/epub-256.png</icon>
+	<prefix>epubreader</prefix>
+	<version>0.2.1</version>
+	<version_base>0.1</version_base>
+	<install>base/epubreader_upgrade.php</install>
+	<fonctions>epubreader_fonctions.php</fonctions>
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>epubreader_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>jquery_plugins</nom>
+		<inclure>epubreader_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>epubreader_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.1.1;2.1.99]" />
+	<categorie>multimedia</categorie>
+</plugin>
