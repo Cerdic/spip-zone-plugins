@@ -1,0 +1,13 @@
+[(#REM) TimeCircles
+	short <model> available sitewide ('class' is optional)
+		<datecountdown|data-date=2019-01-01 00:00:00|class=my-css-selector>
+	Short <model> available if plugin 'agenda' is installed & active
+	- using sitewide as <datecountdown|id_evenement=XYZ>
+	- using directly in any SPIP event context &/or loop as
+		<datecountdown|> or in template as #MODELE{datecountdown}{...}
+]<BOUCLE_datecountdown(EVENEMENTS){id_evenement}>
+	[(#SET{date_time_cd,[(#DATE_DEBUT|affdate{'Y-m-d H:i:s'})]})]</BOUCLE_datecountdown>
+</B_datecountdown>
+[(#SET{date_time_cd,#ENV{data-date}})]
+<//B_datecountdown>
+<div class="DateCountdown[ (#ENV{class})]" data-date="[(#GET{date_time_cd})]" style="width: 100%;"></div>

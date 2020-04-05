@@ -1,0 +1,41 @@
+Règles d'intervention =====================
+
+        Pour toute modification dans ce repository svn, vous devez respecter les
+        règles de commit ( de modifications ) qui se trouvent dans le fichier
+        _REGLES_DE_COMMIT le plus proche du répertoire dans lequel vous
+        travaillez.
+
+        Si le fichier le plus proche en remontant l'arborescence est celui ci,
+        alors :
+
+        - A l'image du plugin adminer, le versionement de ce plugin se calque
+          sur celui de la librairie qu'il fournit (ici le plugin jQuery TimeCircles
+          v 1.5.3 - cf: https://github.com/wimbarelds/TimeCircles)
+        - Ainsi, les modifications mineures et bug fixes peuvent faire l'objet d'un
+          up .z+1
+        - En revanche, les up de w.x.y sont eux, exclusivement réservés aux mises
+          à jour de la librairie d'origine dans lib/timecircles.js, auquel cas .z
+          revient à .0
+
+        Merci de votre compréhension.
+
+Rules for commiting =====================
+
+        For any modification in that svn repository, you should agree with, and
+        abide by the rules for comitting listed in the nearest _REGLES_DE_COMMIT
+        file, from the directorry you're working on.
+
+        if said nearest file is this one, then :
+
+        - Following 'adminer' plugin's example, TimeCircles versions are numbered
+          after the official librairy's versions that is actualy embedded
+          (current: v 1.5.3 - see: https://github.com/wimbarelds/TimeCircles)
+
+        - As a consequence, any modification, wether it's minor or not should come
+          only with a .z+1 update
+
+        - Besides, w.x.y +1 ups are strictly reserved to original librairy upgrades
+          in lib/timecircles.js, which in ever case, .z comes back to .0
+
+        Thank you for your understanding.
+
