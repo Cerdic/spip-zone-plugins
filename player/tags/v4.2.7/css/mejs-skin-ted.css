@@ -1,0 +1,179 @@
+/* TED player */
+.mejs__container.mejs__ted {
+	height: 65px !important;
+}
+.mejs__ted .mejs__controls {
+	background: #eee;
+	height: 65px;
+}
+
+.mejs__ted .mejs__button,
+.mejs__ted .mejs__time {
+	position: absolute;
+	background: #ddd;
+}
+.mejs__ted .mejs__controls .mejs__time-rail {
+	margin-left: 0;
+	height: 30px;
+}
+.mejs__ted .mejs__controls .mejs__time-rail .mejs__time-total {
+	background-color: none;
+	background: url(img/controls-ted.png) repeat-x 0 -52px;
+	height: 6px;
+}
+.mejs__ted .mejs__controls .mejs__time-rail .mejs__time-buffering {
+	height: 6px;
+}
+.mejs__ted .mejs__controls .mejs__time-rail .mejs__time-loaded {
+	background-color: none;
+	background: url(img/controls-ted.png) repeat-x 0 -52px;
+	width: 0;
+	height: 6px;
+}
+.mejs__ted .mejs__controls .mejs__time-rail .mejs__time-current {
+	width: 0;
+	height: 6px;
+	background-color: none;
+	background: url(img/controls-ted.png) repeat-x 0 -59px;
+}
+.mejs__ted .mejs__controls .mejs__time-rail .mejs__time-handle  {
+	display: block;
+	margin: 0;
+	width: 14px;
+	height: 21px;
+	top: -7px;
+	left:-1px;
+	border: 0;
+	background: url(img/controls-ted.png) no-repeat 0 0;	
+}
+.mejs__ted .mejs__controls .mejs__time-rail .mejs__time-handle .mejs__time-handle-content {
+	left: 0;
+	display: none;
+}
+.mejs__ted .mejs__controls .mejs__time-rail .mejs__time-float {	
+	display: none;
+}
+.mejs__ted .mejs__controls .mejs__playpause-button  {
+	top: 29px;
+	left: 9px;
+	width: 49px;
+	height: 28px;
+}
+.mejs__ted .mejs__controls .mejs__playpause-button  button {
+	width: 49px;
+	height: 28px;
+	background: url(img/controls-ted.png) no-repeat -50px -23px;
+	margin: 0;
+	padding: 0;
+}
+.mejs__ted .mejs__controls .mejs__pause button  {
+	background-position: 0 -23px;
+}
+
+.mejs__ted .mejs__controls .mejs__fullscreen-button  {
+	top: 34px;
+	right: 9px;
+	width: 17px;
+	height: 15px;
+	background : none;
+}
+.mejs__ted .mejs__controls .mejs__fullscreen-button  button {
+	width: 19px;
+	height: 17px;
+	background: transparent url(img/controls-ted.png) no-repeat 0 -66px;
+	margin: 0;
+	padding: 0;
+}
+.mejs__ted .mejs__controls .mejs__unfullscreen  button {
+	background: transparent url(img/controls-ted.png) no-repeat -21px -66px;
+	margin: 0;
+	padding: 0;
+}
+.mejs__ted .mejs__controls .mejs__volume-button  {
+	top: 30px;
+	right: 35px;
+	width: 24px;
+	height: 22px;
+}
+.mejs__ted .mejs__controls .mejs__mute button {
+	background: url(img/controls-ted.png) no-repeat -15px 0;
+	width: 24px;
+	height: 22px;
+	margin: 0;
+	padding: 0;
+}
+.mejs__ted .mejs__controls .mejs__unmute button {
+	background: url(img/controls-ted.png) no-repeat -40px 0;
+	width: 24px;
+	height: 22px;
+	margin: 0;
+	padding: 0;	
+}
+.mejs__ted  .mejs__controls .mejs__volume-button .mejs__volume-slider {
+	background: #fff;
+	border: solid 1px #aaa;
+	border-width: 1px 1px 0 1px;
+	width: 22px;
+	height: 65px;
+	top: -65px;
+}
+.mejs__ted  .mejs__controls .mejs__horizontal-volume-slider {
+	margin-right: -7px;
+}
+
+.mejs__ted  .mejs__controls .mejs__volume-button .mejs__volume-total {
+	background: url(img/controls-ted.png) repeat-y -41px -66px;
+	left: 8px;
+	width: 6px;
+	height: 50px;
+}
+.mejs__ted  .mejs__controls .mejs__volume-button .mejs__volume-current {
+	left: 8px;
+	width: 6px;	
+	background: url(img/controls-ted.png) repeat-y -48px -66px;
+	height: 50px;
+}
+
+.mejs__ted  .mejs__controls .mejs__volume-button .mejs__volume-handle {
+	display: none;
+}
+
+.mejs__ted .mejs__controls .mejs__time {
+	height: 10px;
+}
+.mejs__ted .mejs__controls .mejs__time span {
+	color: #333;
+}
+.mejs__ted .mejs__controls .mejs__currenttime-container  {
+	position: absolute;
+	top: 31px;
+	right: 100px;
+	border: solid 1px #999;
+	background: #fff;
+	color: #333;
+	padding: 5px 3px;
+	border-radius: 3px;
+	color: #333;
+}
+.mejs__ted .mejs__controls .mejs__duration-container  {
+
+	position: absolute;
+	top: 31px;
+	right: 65px;
+	border: solid 1px #999;
+	background: #fff;
+	color: #333;
+	padding: 5px 3px;
+	border-radius: 3px;
+	color: #333;
+}
+
+.mejs__ted .mejs__controls .mejs__time  button{
+	color: #333;
+}
+.mejs__ted .mejs__controls .mejs__captions-button {
+	display: none;
+}
+/* END: TED player */
+
+

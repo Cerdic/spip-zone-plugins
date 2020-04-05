@@ -1,0 +1,131 @@
+/* Dewplayer */
+.mejs__container.mejs__neoplayer {
+	background: none;
+	height:20px !important;
+}
+.mejs__neoplayer .mejs__controls {
+	background: none;
+	padding:0;
+	border-radius:5px;
+	height:20px;
+	background-color: #e5e5e5;
+	background-image: -moz-linear-gradient(top, #fcfcfc, #cecece); /* FF 3.6+*/
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fcfcfc), to(#cecece)); /* Safari 4+, Chrome 2+*/
+	background-image: -webkit-linear-gradient(top, #fcfcfc, #cecece); /* Safari 5.1+, Chrome 10+*/
+	background-image: -o-linear-gradient(top, #fcfcfc, #cecece); /* Opera 11.10*/
+	background-image: linear-gradient(to bottom, #fcfcfc, #cecece); /* Standard, IE10 */
+}
+.mejs__neoplayer .mejs__controls .mejs__playpause-button {
+	margin-right: 5px;
+}
+.mejs__neoplayer .mejs__controls .mejs__playpause-button button {
+	position:relative;
+	background: url(img/controls-neoplayer.png) no-repeat left 0;
+	width: 16px;
+	height: 16px;
+	margin-right: 5px;
+	margin-top: 3px;
+	margin-left: 6px;
+	overflow: visible;
+}
+.mejs__neoplayer .mejs__controls .mejs__playpause-button button::after {
+	content:"";
+	display: block;
+	position: absolute;
+	top:-1px;
+	right: -6px;
+	height: 100%;
+	width: 0;
+	border-left: 1px solid #afafaf;
+	border-right: 1px solid #e2e2e2;
+
+}
+.mejs__neoplayer .mejs__controls .mejs__play button:hover {
+	background-position: left -16px;
+}
+.mejs__neoplayer .mejs__controls .mejs__pause button {
+	background-position: left -32px;
+}
+.mejs__neoplayer .mejs__controls .mejs__pause button:hover {
+	background-position: left -48px;
+}
+
+
+.mejs__neoplayer .mejs__controls .mejs__time-rail {
+	margin-right: 10px;
+	margin-left: 10px;
+	padding-top: 4px;
+}
+.mejs__neoplayer .mejs__controls .mejs__time-rail>span {
+	height: 5px;
+}
+.mejs__neoplayer .mejs__controls .mejs__time-rail .mejs__time-total {
+	border-top:1px solid #c7c7c7;
+	background: none;
+}
+
+.mejs__neoplayer .mejs__controls .mejs__time-rail .mejs__time-buffering {
+	height: 0;
+	background: none;
+	border-top:1px solid #d7d7d7;
+}
+
+.mejs__neoplayer .mejs__controls .mejs__time-rail .mejs__time-loaded {
+	height: 0;
+	background: none;
+	border-top:1px solid #ddd;
+}
+
+.mejs__neoplayer .mejs__controls .mejs__time-rail .mejs__time-current {
+	height: 0;
+	background: none;
+}
+
+.mejs__neoplayer .mejs__controls .mejs__time-rail .mejs__time-hovered {
+	height: 0;
+	background: none;
+	border-top:1px solid #fff;
+}
+
+.mejs__neoplayer .mejs__controls .mejs__time-rail .mejs__time-handle-content {
+	display: block;
+	width: 20px;
+	height: 10px;
+	border-radius: 3px;
+	position: absolute;
+	top:-9px;
+	left: -12px;
+	border:0;
+	background-color: #a4a4a4;
+	background-image: -moz-linear-gradient(top, #ddd, #888); /* FF 3.6+*/
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ddd), to(#888)); /* Safari 4+, Chrome 2+*/
+	background-image: -webkit-linear-gradient(top, #ddd, #888); /* Safari 5.1+, Chrome 10+*/
+	background-image: -o-linear-gradient(top, #ddd, #888); /* Opera 11.10*/
+	background-image: linear-gradient(to bottom, #ddd, #888); /* Standard, IE10 */
+	-webkit-transform: scale(1);
+	-ms-transform: scale(1);
+	transform: scale(1);
+}
+.mejs__neoplayer .mejs__controls .mejs__time-float {
+	background: #ddd;
+	border: 0;
+}
+.mejs__neoplayer .mejs__controls .mejs__time-float .mejs__time-float-corner {
+	border-color: #ddd transparent transparent;
+}
+
+.mejs__neoplayer .mejs__controls .mejs__currenttime-container {
+	display: none;
+}
+.mejs__neoplayer .mejs__controls .mejs__duration-container {
+	display: none;
+}
+
+.mejs__neoplayer .mejs__controls .mejs__volume-button {
+	width:1px;
+	visibility:hidden;
+}
+.mejs__neoplayer .mejs__controls .mejs__horizontal-volume-slider {
+	width:1px;
+	visibility:hidden;
+}
