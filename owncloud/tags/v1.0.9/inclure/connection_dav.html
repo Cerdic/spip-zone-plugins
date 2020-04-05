@@ -1,0 +1,6 @@
+[(#BOITE_OUVRIR{<:owncloud:connexion_webdav:>})]
+	[(#REM|test_connexion_dav|table_valeur{message_auth}|=={oui}|oui) <p class="success"><:owncloud:connexion_ok_webdav:></p>]
+	[(#REM|test_connexion_dav|table_valeur{message_auth}|=={non}|oui) <p class="error"><:owncloud:connexion_erreur_webdav:> 
+	<br />[(#REM|test_connexion_dav|table_valeur{code})]</p>
+	[(#ENV{type-page}|=={liste_owncloud}|oui) <a href="#URL_ECRIRE{configurer_owncloud}" title="<:owncloud:cfg_configuration:>"><:owncloud:cfg_configuration:></a>]]
+#BOITE_FERMER

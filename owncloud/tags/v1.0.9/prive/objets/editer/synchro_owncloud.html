@@ -1,0 +1,12 @@
+
+[(#CONFIG{owncloud/activer_synchro}|=={on}|non)
+	[(#BOITE_OUVRIR{'','raccourcis'})]
+		[(#URL_ECRIRE{configurer_owncloud#champ_activer_synchro}|icone_horizontale{<:owncloud:bouton_activer_synchro:>,activer_synchro,new})]
+	#BOITE_FERMER
+]
+[(#CONFIG{owncloud/activer_synchro}|=={on}|oui)
+	[(#BOITE_OUVRIR{'','raccourcis'})]
+	<p class="note"><:owncloud:message_activation_synchro:></p>
+	[(#URL_ECRIRE{configurer_owncloud#champ_activer_synchro}|icone_horizontale{<:owncloud:bouton_desactiver_synchro:>,activer_synchro,new})]
+	#BOITE_FERMER
+]

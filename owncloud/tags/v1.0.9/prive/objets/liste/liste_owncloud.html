@@ -1,0 +1,82 @@
+<h1 class="grostitre"><:owncloud:titre_liste_owncloud:></h1>
+#SET{json,#EVAL{_DIR_TMP}|concat{owncloud.json}}
+
+<B_liste_owncloud>
+<p><:owncloud:date_fichier_recuperer:> [(#VAL{'Y-m-d H:i:s'}|date{[(#GET{json}|filemtime)]}|affdate_heure)]</p>
+#ANCRE_PAGINATION
+<div class="liste-objets owncloud">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{medias:un_document,medias:des_files}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'>#</th>
+			<th class='titre' scope='col'><:owncloud:fichier:></th>
+			<th class='date principale' scope='col'><:date:></th>
+			<th class='taille' scope='col'><:owncloud:taille_fichier:></th>
+			<th class='action' scope='col'><:owncloud:action:></th>
+		</tr>
+	</thead>
+	<tbody>
+		<BOUCLE_liste_owncloud(DATA){si #GET{json}|file_exists}{source json, #GET{json}}{pagination #ENV{nb,10}}>
+		[(#SET{statut, [(#VALEUR|table_valeur{nom})]})]
+		<BOUCLE_condition_erreur(CONDITION){si #GET{statut}|=={404}}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<td class='titre principale' colspan='5'>
+					<div class="liste-objets owncloud documents caption-wrap">
+						<p class="caption">
+							<:owncloud:pas_de_media:> <:owncloud:pas_de_media_erreur:>
+						</p>
+					</div>
+				</td>
+			</tr>
+		</BOUCLE_condition_erreur>
+
+		<BOUCLE_condition_ok(CONDITION){si #GET{statut}|!={404}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'></td>
+			<td class='titre principale'>
+				[(#VALEUR|table_valeur{body/extension}|in_array{#LISTE{jpg,png,gif}}|oui)
+				<a href="[(#URL_ACTION_AUTEUR{securise_media, [(#VALEUR|table_valeur{'document'})]})]" type="[(#VALEUR|table_valeur{'body/mime_type'})]" title="[(#VALEUR|table_valeur{nom}|basename)] - [(#VALEUR|table_valeur{'body/mime_type'})]" class='mediabox'>
+					[(#VALEUR|table_valeur{document}|securise_identifiants{true}|trim|balise_img|image_reduire{42,42})]
+				</a>
+				]
+				[(#VALEUR|table_valeur{body/extension}|in_array{#LISTE{jpg,png,gif}}|non)
+				<a href="[(#URL_ACTION_AUTEUR{securise_media, [(#VALEUR|table_valeur{'document'})]}|parametre_url{type,[(#VALEUR|table_valeur{'body/mime_type'})]})]" type="[(#VALEUR|table_valeur{'body/mime_type'})]" title="[(#VALEUR|table_valeur{nom}|basename)] - [(#VALEUR|table_valeur{'body/mime_type'})]">
+					[(#CHEMIN{[prive/vignettes/(#VALEUR|table_valeur{body/extension}).png]}|sinon{#CHEMIN{rien.gif}}|balise_img)]
+				</a>
+				]
+			</td>
+			[<td class='date'>(#VALEUR|table_valeur{'getlastmodified'})</td>]	
+			[<td class='taille'>(#VALEUR|table_valeur{'body/taille'}|taille_en_octets)</td>]
+			<td class='action'>
+				#SET{md5,#ARRAY}
+				<BOUCLE_import_document(OWNCLOUDS){par date_modif}>
+					#SET{md5, #GET{md5}|push{#MD5}}
+				</BOUCLE_import_document>
+				<BOUCLE_liste_doc(DOCUMENTS){id_document?}{where?}{statut?}{recherche?}{md5=#VALEUR|table_valeur{md5}}>
+				#SET{id_document, #ID_DOCUMENT}
+				</BOUCLE_liste_doc>
+				[(#VALEUR|table_valeur{md5}|in_array{#GET{md5}}|oui)
+					<a href="[(#URL_ECRIRE{document_edit}|parametre_url{id_document,#GET{id_document}})]">
+					<div class="owncloud_success"><:owncloud:document_deja_importe:></div></a>
+				]
+				[(#VALEUR|table_valeur{md5}|in_array{#GET{md5}}|non)
+					[(#BOUTON_ACTION{<:owncloud:importer_image:>, [(#URL_ACTION_AUTEUR{importer_media, [(#VALEUR|table_valeur{'document'})]?[(#VALEUR|table_valeur{md5})], #SELF})], ajax})]
+				]
+			</td>
+		</tr>
+		</BOUCLE_condition_ok>
+		</BOUCLE_liste_owncloud>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{#ENV{pagination,prive}})</p>]
+</div>
+
+[(#INCLURE{fond=prive/objets/editer/importer_owncloud,env,ajax})]
+
+</B_liste_owncloud>
+<div class="liste-objets owncloud documents caption-wrap">
+	<p class="caption"><:owncloud:pas_de_media:></p>
+</div>
+[(#INCLURE{fond=inclure/connection_dav, env})]
+<//B_liste_owncloud>

@@ -1,0 +1,9 @@
+<traduction
+	module="paquet-owncloud"
+	id="paquet-owncloud--owncloud-1b015"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip-contrib-extensions/owncloud.git"
+	reference="fr">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/paquet-owncloud?lang_cible=fr" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+</traduction>
