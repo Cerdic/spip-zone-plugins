@@ -1,0 +1,36 @@
+<paquet
+	prefix="dictionnaires"
+	categorie="divers"
+	version="1.3.2"
+	etat="stable"
+	compatibilite="[3.0.0;3.3.*]"
+	logo="prive/themes/spip/images/dictionnaire-32.png"
+	schema="0.4.4"
+	documentation="https://contrib.spip.net/4429"
+>
+
+	<nom>Dictionnaires</nom>
+	<!-- Créer des dictionnaires -->
+
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="lister_definitions" action="" />
+	<pipeline nom="autoriser" inclure="dictionnaires_autoriser.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/dictionnaires_tables.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/dictionnaires_tables.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/dictionnaires_tables.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="dictionnaires_pipelines.php" />
+
+	<!-- <pipeline nom="post_edition" inclure="dictionnaires_pipelines.php" /> -->
+	<pipeline nom="post_propre" inclure="dictionnaires_pipelines.php" />
+
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
+
+	<utilise nom="inserer_modeles" compatibilite="[1.2.11;[" />
+
+	<menu nom="dictionnaires" titre="dictionnaire:titre_dictionnaires" parent="bando_edition" icone="images/dictionnaire-16.png" action="dictionnaires" />
+	<menu nom="definition_creer" titre="definition:titre_definition_creer" parent="outils_rapides" icone="images/definition-add-16.png" action="definition_edit" parametres="new=oui&amp;id_dictionnaire=@id_dictionnaire@" />
+	<menu nom="dictionnaires_configuration" titre="dictionnaire:titre_dictionnaires" parent="bando_configuration" icone="images/dictionnaire-16.png" action="configurer_dictionnaires" />
+</paquet>

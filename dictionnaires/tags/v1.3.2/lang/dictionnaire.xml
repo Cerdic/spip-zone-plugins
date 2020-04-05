@@ -1,0 +1,16 @@
+<traduction
+	module="dictionnaire"
+	id="dictionnaire--dictionnaires-2bc37"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip-contrib-extensions/dictionnaires.git"
+	reference="fr">
+	<langue code="eu" url="https://trad.spip.net/tradlang_module/dictionnaire?lang_cible=eu" total="27" traduits="24" relire="0" modifs="0" nouveaux="3" pourcent="88.89" />
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/dictionnaire?lang_cible=fr" total="27" traduits="27" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="nl" url="https://trad.spip.net/tradlang_module/dictionnaire?lang_cible=nl" total="27" traduits="27" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
+	</langue>
+	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/dictionnaire?lang_cible=pt_br" total="27" traduits="27" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
+	</langue>
+</traduction>

@@ -1,0 +1,15 @@
+nom: '<:definition:info_1_definition:>'
+logo: 'images/definition-24.png'
+icone_barre: 'definition.png'
+parametres:
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'modele'
+      defaut: 'definition'
+  -
+    saisie: 'formulaire_dictionnairesdefinition'
+    options:
+      nom: 'id_modele'
+      label: '<:definition:titre_quelle_definition:>'
+      cacher_option_intro: 'oui'

@@ -1,0 +1,44 @@
+<BOUCLE_definition(DEFINITIONS){id_definition}{statut==.*}{si #ENV{exec}|=={definition}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,definition,#ID_DEFINITION})
+		[(#ID_DEFINITION|afficher_qui_edite{definition}|non)
+			[(#URL_ECRIRE{definition_edit,id_definition=#ID_DEFINITION}|icone_verticale{<:definition:icone_modifier_definition:>,definition,edit,right ajax preload})]
+		]
+		[(#ID_DEFINITION|afficher_qui_edite{definition}|oui)
+			[(#URL_ECRIRE{definition_edit,id_definition=#ID_DEFINITION}|icone_verticale{#ID_DEFINITION|afficher_qui_edite{definition},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{definition-24.png}|balise_img{definition,cadre-icone})]</h1>
+	[<h2 class='soustitre'>(#TERMES)</h2>]
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{definition,#ID_DEFINITION}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/definition,id=#ID_DEFINITION,id_definition=#ID_DEFINITION,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,definition,#ID_DEFINITION})
+	[(#ID_DEFINITION|afficher_qui_edite{definition}|non)
+		[(#URL_ECRIRE{definition_edit,id_definition=#ID_DEFINITION}|icone_verticale{<:definition:icone_modifier_definition:>,definition,edit,right ajax preload})]
+	]
+	[(#ID_DEFINITION|afficher_qui_edite{definition}|oui)
+		[(#URL_ECRIRE{definition_edit,id_definition=#ID_DEFINITION}|icone_verticale{#ID_DEFINITION|afficher_qui_edite{definition},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,definition,id,#ID_DEFINITION},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>
+]
+</BOUCLE_definition>
+[(#ENV**{exec}|=={definition_edit}|?{#INCLURE{fond=prive/squelettes/contenu/definition_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_definition>
