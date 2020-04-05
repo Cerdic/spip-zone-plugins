@@ -1,0 +1,40 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi titre,1,
+	multi pays,1,
+	multi ville,1,
+	id_gis,1,
+	points,-1
+}})
+]
+<B_liste_gis>
+#ANCRE_PAGINATION
+<div class="liste-objets gis">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{gis:info_1_gis,gis:info_nb_gis}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='titre' scope='col'>[(#TRI{multi titre,<:info_titre:>,ajax})]</th>
+			<th class='pays' scope='col'>[(#TRI{multi pays,<:gis:label_pays:>,ajax})]</th>
+			<th class='ville' scope='col'>[(#TRI{multi ville,<:gis:label_ville:>,ajax})]</th>
+			<th class='id_gis' scope='col'>[(#TRI{id_gis,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_gis(GIS){id_gis ?}{objet ?}{id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{id_mot ?}{id_auteur ?}{id_syndic ?}{pays ?}{code_pays ?}{region ?}{code_postal ?}{ville ?}{where?}{recherche?}{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][(#ID_GIS|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class='#EDIT{titre} titre principale'>[(#LOGO_GIS|image_reduire{20,20})]<a href="[(#ID_GIS|generer_url_entite{gis})]"
+				title="<:gis:texte_voir_gis:>">[(#TITRE|sinon{<:ecrire:info_sans_titre:>})]</a></td>
+			<td class='#EDIT{pays} pays'>#PAYS</td>
+			<td class='#EDIT{ville} ville'>#VILLE</td>
+			<td class='id_gis'><a href="[(#URL_ECRIRE{gis_edit,id_gis=#ID_GIS})]"
+				title="<:gis:texte_voir_gis:>">#ID_GIS</a></td>
+		</tr>
+	</BOUCLE_liste_gis>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_gis>
+[
+<div class="liste-objets gis caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_gis>

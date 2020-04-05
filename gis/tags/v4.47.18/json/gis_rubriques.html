@@ -1,0 +1,10 @@
+		<BOUCLE_rub(RUBRIQUES){gis}{id_rubrique ?}{id_secteur ?}{id_parent?=#ENV{id_parent}}{id_mot ?}{recherche ?}{0, #ENV{limit}}{","}>
+		{"type": "Feature",
+		["geometry": (#GEOMETRY|appliquer_filtre{wkt_to_json}|sinon{{"type": "Point", "coordinates": \[#LON, #LAT\]}}),]
+		"id":"#ID_GIS",
+		"properties": {
+			"title":[(#URL_RUBRIQUE|extraire_multi|lien_ou_expose{[(#TITRE_GIS*|sinon{#TITRE*}|supprimer_numero)]}|json_encode)],
+			"description":[(#DESCRIPTIF_GIS|sinon{#DESCRIPTIF}|json_encode)][
+			(#LOGO_GIS|gis_icon_properties)][,
+			"styles": (#GEOMETRY_STYLES|appliquer_filtre{geometry_styles_to_json})]
+		}}</BOUCLE_rub>

@@ -1,0 +1,286 @@
+nom: <:gis:info_1_gis:>
+logo: 'prive/themes/spip/images/gis-24.png'
+icone_barre: 'gis.png'
+traiter: 'gis_inserer_modeles_traiter'
+parametres:
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'modele'
+      defaut: 'carte_gis'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'objets'
+      label: <:gis:label_inserer_modele_objets:>
+      defaut: 'point_libre' #pas pris en compte ?
+      cacher_option_intro: 'oui'
+      datas:
+        '': <:gis:label_inserer_modele_point_gis:>
+        point_libre: <:gis:label_inserer_modele_point_libre:>
+        articles: <:gis:label_inserer_modele_articles:>
+        sites: <:gis:label_inserer_modele_sites:>
+        articles_plus_sites: <:gis:label_inserer_modele_articles_sites:>
+        rubriques: <:gis:label_inserer_modele_rubriques:>
+        documents: <:gis:label_inserer_modele_documents:>
+        mots: <:gis:label_inserer_modele_mots:>
+        auteurs: <:gis:label_inserer_modele_auteurs:>
+  # IDENTIFIANTS
+  -
+    saisie: 'input'
+    options:
+      nom: 'id_gis'
+      label: <:gis:label_inserer_modele_identifiant:>
+      placeholder: <:gis:label_inserer_modele_identifiant_placeholder:>
+      afficher_si: '@objets@ == ""'
+  -
+    saisie: 'input'
+    options:
+      nom: 'id_article'
+      label: <:gis:label_inserer_modele_identifiant_opt:>
+      placeholder: 'id_article'
+      afficher_si: '@objets@ == "articles" || @objets@ == "articles_plus_sites"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'id_rubrique'
+      label: <:gis:label_inserer_modele_identifiant_opt:>
+      placeholder: 'id_rubrique'
+      afficher_si: '@objets@ == "rubriques"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'id_document'
+      label: <:gis:label_inserer_modele_identifiant_opt:>
+      placeholder: 'id_document'
+      afficher_si: '@objets@ == "documents"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'id_mot'
+      label: <:gis:label_inserer_modele_identifiant_opt:>
+      placeholder: 'id_mot'
+      afficher_si: '@objets@ == "mots"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'id_site'
+      label: <:gis:label_inserer_modele_identifiant_opt:>
+      placeholder: 'id_site'
+      afficher_si: '@objets@ == "sites"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'id_auteur'
+      label: <:gis:label_inserer_modele_identifiant_opt:>
+      placeholder: 'id_auteur'
+      afficher_si: '@objets@ == "auteurs"'
+#
+# === POINT LIBRE ===
+#
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'field_point_libre'
+      afficher_si: '@objets@ == "point_libre"'
+    saisies:
+      -
+        saisie: 'carte'
+        options:
+          nom: 'carte'
+          hauteur: '200px'
+      -
+        saisie: 'input'
+        options:
+          nom: 'titre'
+          label: <:gis:titre_objet:>
+      -
+        saisie: 'textarea'
+        options:
+          nom: 'description'
+          label: <:gis:label_inserer_modele_description:>
+          rows: '2'
+      -
+        saisie: 'hidden'
+        options:
+          nom: 'lat'
+      -
+        saisie: 'hidden'
+        options:
+          nom: 'lon'
+      -
+        saisie: 'hidden'
+        options:
+          nom: 'zoom'
+      -
+        saisie: 'input'
+        options:
+          nom: 'adresse'
+          placeholder: <:gis:label_adress:>
+          readonly: 'oui'
+      -
+        saisie: 'input'
+        options:
+          nom: 'code_postal'
+          placeholder: <:gis:label_code_postal:>
+          readonly: 'oui'
+      -
+        saisie: 'input'
+        options:
+          nom: 'ville'
+          placeholder: <:gis:label_ville:>
+          readonly: 'oui'
+      -
+        saisie: 'input'
+        options:
+          nom: 'pays'
+          placeholder: <:gis:label_pays:>
+          readonly: 'oui'
+#
+# === OPTIONS ===
+#
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'field_options'
+      pliable: 'oui'
+      plie: 'oui'
+      label: 'options'
+    saisies:
+      -
+        saisie: 'input'
+        options:
+          nom: 'titre_carte'
+          label: <:gis:label_inserer_modele_titre_carte:>
+      -
+        saisie: 'input'
+        options:
+          nom: 'largeur'
+          label: <:gis:label_inserer_modele_largeur_carte:>
+          placeholder: '100%'
+      -
+        saisie: 'input'
+        options:
+          nom: 'hauteur'
+          label: <:gis:label_inserer_modele_hauteur_carte:>
+          placeholder: '400px'
+#      -
+#        saisie: 'case'
+#        options:
+#          nom: 'style'
+#          label_case: 'ne pas styler la carte'
+#          defaut: ''
+#          valeur_oui: 'non'
+#          valeur_non: ''
+      -
+        saisie: 'input'
+        options:
+          nom: 'limit'
+          label:  <:gis:label_inserer_modele_limite:>
+          afficher_si: '@objets@ != "gis" || @objets@ != "point_unique"'
+          placeholder: '500'
+      -
+        saisie: 'case'
+        options:
+          nom: 'scale'
+          label_case: <:gis:label_inserer_modele_echelle:>
+          defaut: ''
+          valeur_oui: 'oui'
+          valeur_non: ''
+      -
+        saisie: 'case'
+        options:
+          nom: 'fullscreen'
+          label_case: <:gis:label_inserer_modele_fullscreen:>
+          defaut: ''
+          valeur_oui: 'oui'
+          valeur_non: ''
+      -
+        saisie: 'case'
+        options:
+          nom: 'overview'
+          label_case: <:gis:label_inserer_modele_mini_carte:>
+          defaut: ''
+          valeur_oui: 'oui'
+          valeur_non: ''
+      -
+        saisie: 'case'
+        options:
+          nom: 'zoom_molette'
+          label_case: <:gis:label_inserer_modele_molette:>
+          defaut: ''
+          valeur_oui: 'non'
+          valeur_non: ''
+      -
+        saisie: 'case'
+        options:
+          nom: 'aucun_controle'
+          label_case: <:gis:label_inserer_modele_controle:>
+          defaut: ''
+          valeur_oui: 'oui'
+          valeur_non: ''
+      -
+        saisie: 'case'
+        options:
+          nom: 'controle_type'
+          label_case: <:gis:label_inserer_modele_controle_type:>
+          defaut: ''
+          valeur_oui: 'non'
+          valeur_non: ''
+      -
+        saisie: 'case'
+        options:
+          nom: 'tooltip'
+          label_case: <:gis:label_inserer_modele_tooltip:>
+          defaut: ''
+          valeur_oui: 'oui'
+          valeur_non: ''
+      -
+        saisie: 'case'
+        options:
+          nom: 'localize_visitor'
+          label_case: <:gis:label_inserer_modele_localiser_visiteur:>
+          defaut: ''
+          valeur_oui: 'oui'
+          valeur_non: ''
+      -
+        saisie: 'case'
+        options:
+          nom: 'centrer_auto'
+          label_case: <:gis:label_inserer_modele_centrer_auto:>
+          defaut: 'oui'
+          valeur_oui: ''
+          valeur_non: 'oui'
+          afficher_si: '@objets@ != "gis" || @objets@ != "point_unique"'
+      -
+        saisie: 'input'
+        options:
+          nom: 'kml'
+          label: <:gis:label_inserer_modele_kml:>
+          placeholder: <:gis:label_inserer_modele_kml_gpx:>
+          afficher_si: '@objets@ != "gis" || @objets@ != "point_unique"'
+      -
+        saisie: 'input'
+        options:
+          nom: 'gpx'
+          label: <:gis:label_inserer_modele_gpx:>
+          placeholder: <:gis:label_inserer_modele_kml_gpx:>
+          afficher_si: '@objets@ != "gis" || @objets@ != "point_unique"'
+      -
+        saisie: 'case'
+        options:
+          nom: 'centrer_fichier'
+          label_case: <:gis:label_inserer_modele_centrer_fichier:>
+          valeur_oui: 'oui'
+          valeur_non: ''
+          afficher_si: '@objets@ != "gis" || @objets@ != "point_unique"'
+      -
+        saisie: 'case'
+        options:
+          nom: 'point'
+          label_case: <:gis:label_inserer_modele_points:>
+          #explication: "Utile pour n'afficher que les données kml/gpx"
+          defaut: ''
+          valeur_oui: 'non'
+          valeur_non: ''
+          afficher_si: '@objets@ != "gis" || @objets@ != "point_unique"'
