@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+
+		<title>#NOM_SITE_SPIP</title>
+		<INCLURE{fond=inclure/deckjs_css}>
+
+	</head>
+	<body>
+		<div class="deck-container">
+
+			[(#REM) la presentation = 1 article]
+			<BOUCLE_article(ARTICLES){id_article}{statut in publie,prepa}>
+				[<section class="slide">
+					<h1>(#TITRE)</h1>
+				</section>]
+				[(#TEXTE|creer_deckjs{article})]
+			</BOUCLE_article>
+
+				[(#REM) la presentation = les articles d'une rubrique]
+				<BOUCLE_titre_rub(RUBRIQUES){id_rubrique}>
+					[<section class="slide">
+						<h1>(#TITRE)</h1>
+					</section>]
+				</BOUCLE_titre_rub>
+
+				<BOUCLE_articles(ARTICLES){id_rubrique}{par num titre}>
+					<section class="slide alignement">
+						<h2 class="spip">#TITRE</h2>
+						[(#TEXTE|creer_deckjs{rubrique})]
+					</section>
+				</BOUCLE_articles>
+			
+			<//B_article>
+
+			<!-- Begin extension snippets. Add or remove as needed. -->
+
+			<!-- deck.navigation snippet -->
+			<div aria-role="navigation">
+				<a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+				<a href="#" class="deck-next-link" title="Next">&#8594;</a>
+			</div>
+
+			<!-- deck.status snippet -->
+			<p class="deck-status" aria-role="status">
+			<span class="deck-status-current"></span>
+			/
+			<span class="deck-status-total"></span>
+			</p>
+
+			<!-- deck.goto snippet -->
+			<form action="." method="get" class="goto-form">
+				<label for="goto-slide">Go to slide:</label>
+				<input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+				<datalist id="goto-datalist"></datalist>
+				<input type="submit" value="Go">
+			</form>
+
+			<!-- End extension snippets. -->
+		</div>
+
+		<INCLURE{fond=inclure/deckjs_js}>
+
+		<!-- Initialize the deck. You can put this in an external file if desired. -->
+		<script>
+			jQuery(function() {
+				jQuery.deck('.slide');
+			});
+		</script>
+	</body>
+</html>
