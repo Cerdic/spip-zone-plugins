@@ -1,0 +1,39 @@
+[(#SET{fichiers, [(#REM|saveauto_a_telecharger)]})]
+
+<B_telechager_saveauto>
+#ANCRE_PAGINATION
+<div class="liste-objets saveauto">
+	<table id="saveautos_telecharger" class="spip liste">
+		<thead>
+			#SET{dossier_save, #CONFIG{saveauto/repertoire_save}|joli_repertoire}
+			<caption><strong class="caption"><:saveauto:titre_boite_historique{dossier=#GET{dossier_save}}:></strong></caption>
+			<tr class="first_row">
+				<th scope="col"><:saveauto:colonne_nom:></th>
+				<th scope="col"><:label_poids_fichier:></th>
+				<th scope="col"><:date:></th>
+				<th scope="col"><:saveauto:colonne_auteur:></th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+		<tbody>
+<BOUCLE_telechager_saveauto(DATA){source table, #GET{fichiers}}{pagination 10}>
+			<tr id="zip_#COMPTEUR_BOUCLE"[ class="(#COMPTEUR_BOUCLE|alterner{row_even, row_odd})"]>
+				<td class="fichier principale">[<label[ for="zip_(#CLE|plus{1})"]>(#VALEUR|basename)</label>]</td>
+				<td class="taille">[(#VALEUR|filesize|taille_en_octets)]</td>
+				<td class="date">[(#VAL{'Y-m-d H:i:s'}|date{#VALEUR|filemtime}|affdate_heure)]</td>
+				<td class="auteur">[(#VALEUR|saveauto_informer{auteur})]</td>
+				<td>
+					<a href="#URL_ACTION_AUTEUR{saveauto_telecharger, #VALEUR}" title="<:bouton_download|attribut_html:>">[(#CHEMIN_IMAGE{telecharger-16.png}|balise_img{<:bouton_download:>})]</a>
+				</td>
+			</tr>
+</BOUCLE_telechager_saveauto>
+		</tbody>
+	</table>
+	[<p class='pagination'>(#PAGINATION{#ENV{pagination,prive}})</p>]
+</div>
+</B_telechager_saveauto>
+
+#BOITE_OUVRIR{'', notice}
+	<:saveauto:message_aucune_sauvegarde:>
+#BOITE_FERMER
+<//B_telechager_saveauto>
