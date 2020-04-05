@@ -1,0 +1,23 @@
+<paquet
+	prefix="smush"
+	categorie="performance"
+	version="0.8.3"
+	etat="stable"
+	compatibilite="[3.0.3;3.2.*]"
+	schema="0.2.0"
+	logo="prive/themes/spip/images/smush-64.png"
+	documentation="https://www.mediaspip.net/?article349"
+	developpement="https://www.mediaspip.net/spip.php?page=tickets&amp;composant=plugins%20-%20smush"
+>
+
+	<nom>Smush</nom>
+	<!-- Optimiser les images recadrées, retaillées -->
+
+	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+
+	<pipeline nom="post_image_filtrer" inclure="smush_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="smush_pipelines.php" />
+	<necessite nom="medias" compatibilite="[2.7.30;[" />
+</paquet>
