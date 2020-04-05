@@ -1,0 +1,45 @@
+<div class="formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{objet}-#ENV{id,nouveau}">
+<h3 class='titrem'><img src="#CHEMIN_IMAGE{shortcut_url-24.png}" class="cadre-icone" /><:shortcut_url:shortcut_url:></h3>
+
+<BOUCLE_auteurs(AUTEURS){id_objet=#ENV{id_shortcut_url}}>
+<span class="vcard author"><:shortcut_url:auteur_shortcut_url:> <a class="url fn spip_in" href="[(#URL_ECRIRE{auteur}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a></span></BOUCLE_auteurs>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	]
+	[(#ENV{editable})
+		<ul>
+			
+			#SET{name,url}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:shortcut_url:ajouter_shortcut_url:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				<input type="input" class="text" name="#GET{name}" id="#GET{name}" value="#ENV{#GET{name}}" size="50" />
+			</li>
+			#SET{name,titre}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:shortcut_url:ajouter_shortcut_title:></label>
+				<p class="explication">[(#VAL{shortcut_url:item_utiliser_shortcut_title}|_T{[(#ARRAY{nb,[(#ENV{taille_raccourci})]})]})]</p>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="input" name="#GET{name}" id="#GET{name}" class="text" value="#ENV{#GET{name}}" maxlength="#ENV{taille_raccourci}" /><label for="#GET{name}"></label>
+			</li>
+		</ul>
+	]
+	[(#ENV{id_shortcut_url_existe}|oui)<fieldset class="erreur">
+		<legend><:shortcut_url:titre_shortcut_url_enbase:></legend>
+		#INCLURE{fond=prive/objets/editer/shortcut_url_verif,id_shortcut_url=#ENV{id_shortcut_url_existe}}</fieldset>]
+
+	[(#ENV{editable})
+	[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	<!--extra-->
+	<p class='boutons'><span class='image_loading'>&nbsp;</span>
+		<input type='submit' class='submit' name='enregistrer' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

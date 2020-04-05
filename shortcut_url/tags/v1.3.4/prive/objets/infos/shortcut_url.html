@@ -1,0 +1,46 @@
+<div class='infos'>
+#SET{texte_objet,#ENV{type}|objet_info{texte_objet}|_T}
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>[(#ENV{id}|generer_info_entite{#ENV{type},[(#ENV{type}|id_table_objet)],'**'})]</p></div>
+
+
+[(#REM)
+
+	Bouton voir en ligne
+	seulement s'il existe une URL publique
+	pour la prévisualisation, on ne teste que le cas le plus courant : le premier champ déclaré
+
+]
+[(#ENV{type}|objet_info{page}|oui)
+	[(#PUBLIE{#ENV{type}, #ENV{id}}|oui)
+		[(#VAL{redirect}
+			|generer_url_action{type=#ENV{type}&id=#ENV{id}}
+			|parametre_url{var_mode,calcul}
+			|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+	]
+	[(#PUBLIE{#ENV{type}, #ENV{id}}|non)
+		#SET{champ_statut,#ENV{type}|objet_info{statut}|table_valeur{0/champ}}
+		[(#GET{champ_statut}|oui|et{#AUTORISER{previsualiser,#ENV{type},#ENV{id},'',#ARRAY{#GET{champ_statut},#ENV{id}|generer_info_entite{#ENV{type},#GET{champ_statut}}}}})
+			[(#VAL{redirect}
+				|generer_url_action{type=#ENV{type}&id=#ENV{id}}
+				|parametre_url{var_mode,preview}
+				|icone_horizontale{<:previsualiser:>,preview})]
+		]
+	]
+]
+
+<BOUCLE_stats(SHORTCUT_URLS_LOGS){id_shortcut_url=#ENV{id}}{0,1}>
+<span class="icone s24 horizontale shortcut_url">
+<a href="[(#URL_ECRIRE{shortcut_url_logs_stats,id_shortcut_url=#ID_SHORTCUT_URL}|parametre_url{page,detail})]"><img width="24" height="24" alt="Supprimer URL raccourci" src="#CHEMIN_IMAGE{shortcut_url-new-24.png}"><b><:shortcut_url:titre_shortcut_url_liste_log:></a></b>
+</span>
+</BOUCLE_stats>
+[(#ENV{id}|intval|>{0}|et{#AUTORISER{supprimer,shortcut_url,#ENV{id}}}|oui)
+[(#URL_ACTION_AUTEUR{supprimer_shortcut_url,#ENV{id},#URL_ECRIRE{accueil}}|icone_horizontale{<:shortcut_url:icone_supprimer_shortcut_url:>,danger shortcut_url,shortcut_url-del})]]
+
+<script type="text/javascript">
+	(function($) {
+		$('span.danger.shortcut_url a').click(function(){
+			return confirm("[(#VAL{shortcut_url:supprimer_confirmation}|_T|attribut_html)]");
+		});
+	})(jQuery);
+</script>
+</div>

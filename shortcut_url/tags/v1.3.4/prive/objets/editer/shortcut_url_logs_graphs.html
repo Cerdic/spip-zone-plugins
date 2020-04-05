@@ -1,0 +1,349 @@
+<BOUCLE_count_humains(SHORTCUT_URLS_LOGS) {id_shortcut_url}>
+[(#SET{total_humain, #TOTAL_BOUCLE})]
+</BOUCLE_count_humains>
+
+<BOUCLE_liste_shortcut_url_logs_detail(SHORTCUT_URLS){id_shortcut_url}>
+
+<h1><:shortcut_url:titre_shortcut_url_log_detail:> #URL_SITE_SPIP/#TITRE</h1>
+
+<div class="sites syndic">
+<table class='spip liste'>
+<caption><strong class="caption"><:shortcut_url:titre_details_url:></strong></caption>
+	<thead>
+		<tr class='first_row'>
+			<th class='description' scope='col'><:shortcut_url:titre_page:></th>
+			<td>#DESCRIPTION</td>
+		</tr>
+		<tr class='first_row'>
+			<th class='description' scope='col'><:shortcut_url:titre_url:></th>
+			<td>#URL</td>
+		</tr>
+		<tr class='first_row'>
+			<th class='description' scope='col'><:shortcut_url:form_date_modif:></th>
+			<td>[(#DATE_MODIF|affdate_jourcourt)]</td>
+		</tr>
+		<tr class='first_row'>
+			<th class='description' scope='col'><:shortcut_url:info_1_shortcut_url_humain:></th>
+			<td>#GET{total_humain}</td>
+		</tr>
+	</thead>
+</table>
+</div>
+
+<br class="nettoyeur" />
+
+<B_si_plugins_d3js>
+<BOUCLE_si_plugins_d3js(CONDITION) {si #PLUGIN{D3JS}}>
+
+<h2><:shortcut_url:titre_shortcut_url_graph_carte:></h2>
+
+<script type="text/javascript">
+
+$(document).ready(function($) {
+	var data = [(#INCLURE{fond=json/compteur_pays,id_shortcut_url}|trim)],
+		data_full = [(#INCLURE{fond=json/compteur_pays,id_shortcut_url,limite=300}|trim)],
+		scale = [1, 10, 50, 100, 500],
+		colors = ["couleur1","couleur2","couleur3","couleur4","couleur5"];
+
+	if(data.length > 0){
+		max = d3.max(data, function(d) { return d.value+1; });
+		if(max > 500){
+			var interval = (max - 500) / 5,
+				last = 500;
+			for (i = 0; i < 4; i++) {
+				last = last +interval;
+				scale.push(Math.floor(last));
+				colors.push("couleur"+(6+i));
+			}
+			
+			scale.push(max);
+			colors.push("couleur10");
+		}
+	}
+	// Affiche les stats sur la carte
+	var color = d3.scale.threshold()
+		.domain(scale)
+		.range(colors);
+
+	var width = 760, 
+		height = 500;
+
+	var m_width = $("#map").width(),
+		width = width,
+		height = height;
+
+	var projection = d3.geo.mercator()
+		.scale(100)
+		.translate([width / 2, height / 1.5]);
+
+	var path = d3.geo.path()
+		.projection(projection);
+
+	var svg = d3.select("#map").append("svg")
+			.attr("width", width)
+			.attr("height", height);
+
+	var path = d3.geo.path()
+		.projection(projection);
+
+	var g = svg.append("g");
+
+	var color_fill = [];
+	var tooltip_click = [];
+
+	// Récupérer le TopoJSON des pays
+	d3.json('[(#CHEMIN{json/regions.json})]', function(error, borders) {
+		collection = topojson.feature(borders, borders.objects.maedi_pays);
+		var tooltip = d3.select("body")
+				.append("div")
+				.attr("class", "tooltip")
+				.style("opacity", 0);
+		for (var i = 0; i < collection.features.length; i++) {
+			var iso2 = collection.features[i].properties.ISO2;
+			data_full.forEach(function(d) {
+					if(iso2 == d.label) {
+						color_fill[d.label] = color(d.value);
+						tooltip_click[d.label] = d.value;
+						return false;
+					}
+			});
+		}
+
+		g.attr("id", "countries")
+			.selectAll("path")
+			.data(collection.features)
+			.enter()
+			.append("path")
+			.attr("class", function(d) { return color_fill[d.properties['ISO2']]; })
+			.attr("d", path)
+			.on("mouseenter", function (d,event) {
+				if(tooltip_click[d.properties['ISO2']] == undefined) 
+					var tooltip_data = "";
+				else
+					var tooltip_data = tooltip_click[d.properties['ISO2']] + " <:shortcut_url:nb_click:>";
+
+				tooltip.html("<strong>" + d.properties['NAME_ISO'].toLowerCase() + "</strong> " + tooltip_data);
+				if(d3.event.pageX && d3.event.pageY) {
+					tooltip.style("left", (d3.event.pageX + 20)+ "px")
+						.style("top",(d3.event.pageY + 20) + "px").style("opacity", "1");
+				}
+
+			}).on("mousemove", function (d) {
+				if(d3.event.pageX && d3.event.pageY){
+					tooltip.style("left", (d3.event.pageX + 20)+ "px")
+						.style("top",(d3.event.pageY + 20) + "px");
+				}
+
+			}).on("mouseout", function (d) {
+				return tooltip.style("opacity", "0");
+			});
+	});
+
+	// Affiche les barres horizontales
+	var margin = {top: 20, right:20, bottom: 20, left: 60},
+		width = 760 - margin.left - margin.right,
+		height = 300 - margin.top - margin.bottom;
+
+	var x = d3.scale.linear().range([0, width]),
+		y = d3.scale.ordinal().rangeRoundBands([0, height], .1);
+
+	var xAxis = d3.svg.axis().scale(x).orient("top").tickSize(-height),
+		yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
+
+	var svg = d3.select("#bar").append("svg")
+		.attr("width", width + margin.right + margin.left)
+		.attr("height", height + margin.top + margin.bottom)
+		.append("g")
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	var tooltip2 = d3.select("body")
+				.append("div")
+				.attr("class", "tooltip tooltip2")
+				.style("opacity", 0);
+		data.forEach(function(d) { d.value = +d.value; });
+		data.sort(function(a, b) { return b.value - a.value; });
+
+		x.domain([0, d3.max(data, function(d) { return d.value; })]);
+		y.domain(data.map(function(d) { return d.label; }));
+
+		var bar = svg.selectAll("g.bar")
+			.data(data)
+			.enter().append("g")
+			.attr("class",  function(d) { return color(d.value); })
+			.attr("transform", function(d) { return "translate(0," + y(d.label) + ")"; })
+			.on("mouseenter", function (d,event) {
+				tooltip2.html("<strong>" + d.value + " <:shortcut_url:nb_click:></strong> (" + d.percent + " %) ");
+				if(d3.event.pageX && d3.event.pageY) {
+					tooltip2.style("left", (d3.event.pageX +20)+ "px")
+						.style("top",(d3.event.pageY + 20) + "px").style("opacity", "1");
+				}
+
+			}).on("mousemove", function (d) {
+				if(d3.event.pageX && d3.event.pageY){
+					tooltip2.style("left", (d3.event.pageX + 20)+ "px")
+						.style("top",(d3.event.pageY + 20) + "px");
+				}
+			}).on("mouseout", function (d) {
+				return tooltip2.style("opacity", "0");
+			});
+
+		bar.append("rect")
+			.attr("width", function(d) { return x(d.value); })
+			.attr("height", y.rangeBand());
+
+		svg.append("g")
+			.attr("class", "y axis")
+			.call(yAxis);
+
+});
+</script>
+
+#BOITE_OUVRIR
+	<div id="map"></div>
+	<div class="tooltip_map"></div>
+	<div id="bar"></div>
+#BOITE_FERMER
+
+<h2><:shortcut_url:titre_shortcut_url_graph_humain_click:></h2>
+
+<script type="text/javascript">
+	var d3_locale_i18n = d3.locale({
+		decimal: ".",
+		thousands: " ",
+		grouping: [ 3 ],
+		currency: [ "$", "" ],
+		dateTime: "%a %b %e %X %Y",
+		date: "%m/%d/%Y",
+		time: "%H:%M:%S",
+		periods: [ "AM", "PM" ],
+		days: [ '<:date_jour_1|texte_script:>', '<:date_jour_2|texte_script:>', '<:date_jour_3|texte_script:>', '<:date_jour_4|texte_script:>', '<:date_jour_5|texte_script:>', '<:date_jour_6|texte_script:>', '<:date_jour_7|texte_script:>' ],
+		shortDays: [ '<:date_jour_1_abbr|texte_script:>', '<:date_jour_2_abbr|texte_script:>', '<:date_jour_3_abbr|texte_script:>', '<:date_jour_4_abbr|texte_script:>', '<:date_jour_5_abbr|texte_script:>', '<:date_jour_6_abbr|texte_script:>', '<:date_jour_7_abbr|texte_script:>' ],
+		months: [ '<:date_mois_1|texte_script:>', '<:date_mois_2|texte_script:>', '<:date_mois_3|texte_script:>', '<:date_mois_4|texte_script:>', '<:date_mois_5|texte_script:>', '<:date_mois_6|texte_script:>', '<:date_mois_7|texte_script:>', '<:date_mois_8|texte_script:>', '<:date_mois_9|texte_script:>', '<:date_mois_10|texte_script:>', '<:date_mois_11|texte_script:>', '<:date_mois_12:>' ],
+		shortMonths: [ '<:date_mois_1_abbr|texte_script:>', '<:date_mois_2_abbr|texte_script:>', '<:date_mois_3_abbr|texte_script:>', '<:date_mois_4_abbr|texte_script:>', '<:date_mois_5_abbr|texte_script:>', '<:date_mois_6_abbr|texte_script:>', '<:date_mois_7_abbr|texte_script:>', '<:date_mois_8_abbr|texte_script:>', '<:date_mois_9_abbr|texte_script:>', '<:date_mois_10_abbr|texte_script:>', '<:date_mois_11_abbr|texte_script:>', '<:date_mois_12_abbr:>' ]
+	});
+	$(document).ready(function($) {
+			var json = [
+				<BOUCLE_liste_shortcut_url_click_graph(SHORTCUT_URLS){id_shortcut_url}>
+					<BOUCLE_shortcut_url_dateclick_graph(SHORTCUT_URLS_LOGS){id_shortcut_url}{humain=oui}{fusion DATE_FORMAT(date_modif, '%Y-%m-%d')}{!par date_modif}>#SET{date_modif,#DATE_MODIF|affdate{Y-m-d}}
+					<BOUCLE_shortcut_url_dateclick_graph_nb(SHORTCUT_URLS_LOGS){id_shortcut_url}{humain=oui}{date_modif LIKE (#GET{date_modif})%}> </BOUCLE_shortcut_url_dateclick_graph_nb>
+						{
+							"label": "[(#GET{date_modif})]",
+							"value": "#TOTAL_BOUCLE"
+						},
+					</B_shortcut_url_dateclick_graph_nb>
+					</BOUCLE_shortcut_url_dateclick_graph>
+				</BOUCLE_liste_shortcut_url_click_graph>
+			];
+
+			var title_value = "<:shortcut_url:nb_click:>";
+
+			var margin = {top: 60, right: 60, bottom: 88, left: 60},
+				width = 760 - margin.left - margin.right,
+				height = 400 - margin.top - margin.bottom;
+
+			var parseDate = d3_locale_i18n.timeFormat("%Y-%m-%d");
+			var tooltipDate = d3_locale_i18n.timeFormat("%e %b");
+
+			var x = d3.time.scale()
+				.range([0, width]);
+
+			var y = d3.scale.linear()
+				.range([height, 0]);
+
+			var xAxis = d3.svg.axis()
+				.scale(x)
+				.tickSize(-height)
+				.tickFormat(d3_locale_i18n.timeFormat("%B %Y"))
+				.tickSubdivide(1);
+
+			var yAxis = d3.svg.axis()
+				.scale(y)
+				.ticks(6)
+				.orient("left");
+
+			var line = d3.svg.area()
+				.x(function(d) { return x(d.label); })
+				.y(function(d) { return y(d.value); });
+
+			var div = d3.select("body")
+				.append("div")
+				.attr("class", "tooltip")
+				.style("opacity", 0);
+
+			var svg = d3.select("#d3_click").append("svg")
+				.attr("width", (width + margin.left + margin.right))
+				.attr("height", height + margin.top + margin.bottom)
+				.append("g")
+				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+			json.forEach(function(d) {
+				d.label = parseDate.parse(d.label);
+				d.value = +d.value;
+			});
+
+			x.domain(d3.extent(json, function(d) { return d.label; }));
+			y.domain(d3.extent(json, function(d) { return d.value; }));
+
+			svg.append("g")
+				.attr("class", "x axis")
+				.attr("transform", "translate(0," + height + ")")
+				.call(xAxis)
+				.selectAll("text")  
+					.style("text-anchor", "end")
+					.attr("dx", "-.8em")
+					.attr("dy", ".15em")
+					.attr("transform", "rotate(-65)" );
+
+			svg.append("g")
+				.attr("class", "y axis")
+				.call(yAxis)
+				.append("text")
+				.attr("y", -16)
+				.attr("dy", ".71em")
+				.style("text-anchor", "end")
+				.text(title_value);
+
+			svg.append("path")
+				.datum(json)
+				.attr("class", "line")
+				.attr("d", line);
+
+			svg.selectAll("dot")
+				.data(json)
+				.enter().append("circle")
+				.attr("class", "circle")
+				.attr("r", 6)
+				.attr("cx", function(d) { return x(d.label); })
+				.attr("cy", function(d) { return y(d.value); })
+				.on("mouseover", function(d) {
+					div.transition()
+						.duration(500)
+						.style("opacity", 0);
+					div.transition()
+						.duration(200)
+						.style("opacity", .9);
+					div.html(tooltipDate(d.label) + "<br/>"  + d.value + " " + title_value)
+						.style("left", (d3.event.pageX) + "px")
+						.style("top", (d3.event.pageY - 28) + "px")
+						.style("z-index", 5000);
+				})
+				.on("mousemove", function (d) {
+					div.style("left", (d3.event.pageX)+ "px")
+						.style("top",(d3.event.pageY - 48) + "px");
+				})
+				.on("mouseout", function(d) {
+					div.style("opacity", 0);
+				});
+
+		});
+</script>
+
+#BOITE_OUVRIR
+	<div id="d3_click"></div>
+#BOITE_FERMER
+
+</BOUCLE_si_plugins_d3js>
+</B_si_plugins_d3js>
+	<p><:shortcut_url:plugin_d3js_noninstalle:></p>
+<//B_si_plugins_d3js>
+</BOUCLE_liste_shortcut_url_logs_detail>

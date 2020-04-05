@@ -1,0 +1,44 @@
+[(#SET{defaut_tri,#ARRAY{
+	date_modif,#ENV{date_sens,-1},
+	titre,1,
+	description,1,
+	ip_address,1,
+	click,-1,
+	points,-1
+}})]<B_liste_shortcut_url>
+<h1><:shortcut_url:titre_shortcut_url_liste:></h1>
+#ANCRE_PAGINATION
+<div class="liste-objets sites shortcut_url">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{shortcut_url:info_1_shortcut_url,shortcut_url:info_nb_shortcut_urls}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'>id</th>
+			<th class='keywords' scope='col'>[(#TRI{titre,<:shortcut_url:form_titre:>,ajax})]</th>
+			<th class='titre' scope='col'>[(#TRI{description,<:shortcut_url:form_description:>,ajax})]</th>
+			<th class='url' scope='col'><:shortcut_url:form_url:></th>
+			<th class='ip' scope='col'>[(#TRI{ip_address,<:shortcut_url:form_ip_address:>,ajax})]</th>
+			<th class='date_modif' scope='col'>[(#TRI{date_modif,<:shortcut_url:form_date_modif:>,ajax})]</th>
+			<th class='click' scope='col'>[(#TRI{click,<:shortcut_url:form_click:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_shortcut_url(SHORTCUT_URLS){recherche?}{tri #ENV{par,date_modif},#GET{defaut_tri}}{!par num click}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'><a href="[(#URL_ECRIRE{shortcut_url,id_shortcut_url=#ID_SHORTCUT_URL})]">#ID_SHORTCUT_URL</a></td>
+			<td class='principale'><a href="#URL_SHORTCUT_URL">[(#TITRE)]</a></td>
+			<td class='principale'><a href="[(#URL_ECRIRE{shortcut_url,id_shortcut_url=#ID_SHORTCUT_URL})]">#DESCRIPTION</a></td>
+			<td class='principale ellipsis'><a href="#URL" title="#URL">#URL</a></td>
+			<td class='principale'>#IP_ADDRESS</td>
+			<td class='secondaire'>[(#DATE_MODIF|affdate_jourcourt)]</td>
+			<td class='secondaire'><a href="[(#URL_ECRIRE{shortcut_url_logs_stats,id_shortcut_url=#ID_SHORTCUT_URL}|parametre_url{page,detail})]">#CLICK</a></td>
+		</tr>
+	</BOUCLE_liste_shortcut_url>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_shortcut_url>[
+<div class="liste-objets sites caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong>
+<p><:shortcut_url:pas_de_shortcut_url:></p></div>
+]<//B_liste_shortcut_url>

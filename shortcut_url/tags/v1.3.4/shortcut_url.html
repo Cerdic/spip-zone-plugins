@@ -1,0 +1,7 @@
+#CACHE{0}
+<BOUCLE_shortcut(SHORTCUT_URLS){id_shortcut_url}>[(#ID_SHORTCUT_URL|shortcut_compteur)]
+[(#HTTP_HEADER{Location: [(#URL)]})]
+#HTTP_HEADER{HTTP/1.1 302 Found}
+#HTTP_HEADER{Status: 302 Found}
+</BOUCLE_shortcut>
+#FILTRE{trim}

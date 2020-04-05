@@ -1,0 +1,64 @@
+<div class="formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{objet}-#ENV{id,nouveau}">
+<h3 class='titrem'><img src="#CHEMIN_IMAGE{shortcut_url-24.png}" class="cadre-icone" /><:shortcut_url:titre_export_logs_shortcut_url:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	]
+		[(#ENV{editable})
+		<p class="explication"><:shortcut_url:item_utiliser_shortcut_export:></p>
+		<ul>
+			
+			#SET{name,mois}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:shortcut_url:label_mois:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+					[(#SET{date_mois, [(#DATE|mois)]})]
+					<select id="#GET{name}" name="#GET{name}">
+						<option value="01" [(#GET{date_mois}|=={01}|oui) selected]><:date_mois_1:></option>
+						<option value="02" [(#GET{date_mois}|=={02}|oui) selected]><:date_mois_2:></option>
+						<option value="03" [(#GET{date_mois}|=={03}|oui) selected]><:date_mois_3:></option>
+						<option value="04" [(#GET{date_mois}|=={04}|oui) selected]><:date_mois_4:></option>
+						<option value="05" [(#GET{date_mois}|=={05}|oui) selected]><:date_mois_5:></option>
+						<option value="06" [(#GET{date_mois}|=={06}|oui) selected]><:date_mois_6:></option>
+						<option value="07" [(#GET{date_mois}|=={07}|oui) selected]><:date_mois_7:></option>
+						<option value="08" [(#GET{date_mois}|=={08}|oui) selected]><:date_mois_8:></option>
+						<option value="09" [(#GET{date_mois}|=={09}|oui) selected]><:date_mois_9:></option>
+						<option value="10" [(#GET{date_mois}|=={10}|oui) selected]><:date_mois_10:></option>
+						<option value="11" [(#GET{date_mois}|=={11}|oui) selected]><:date_mois_11:></option>
+						<option value="12" [(#GET{date_mois}|=={12}|oui) selected]><:date_mois_12:></option>
+					</select>
+			</li>
+
+			#SET{name,annee}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:shortcut_url:label_annee:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				[(#SET{date_annee, [(#DATE|annee)]})]
+					<select id="#GET{name}" name="#GET{name}">
+						<option value="2014" [(#GET{date_annee}|=={2014}|oui) selected]>2014</option>
+						<option value="2015" [(#GET{date_annee}|=={2015}|oui) selected]>2015</option>
+						<option value="2016" [(#GET{date_annee}|=={2016}|oui) selected]>2016</option>
+						<option value="2017" [(#GET{date_annee}|=={2017}|oui) selected]>2017</option>
+						<option value="2018" [(#GET{date_annee}|=={2018}|oui) selected]>2018</option>
+					</select>
+			</li>
+		</ul>]
+		[(#ENV{id_shortcut_url_existe}|oui)<fieldset class="erreur">
+			<legend><:shortcut_url:titre_shortcut_url_enbase:></legend>
+			#INCLURE{fond=prive/objets/editer/shortcut_url_verif,id_shortcut_url=#ENV{id_shortcut_url_existe}}</fieldset>]
+
+	[(#ENV{editable})
+	[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	<!--extra-->
+	<p class='boutons'><span class='image_loading'>&nbsp;</span>
+		<input type='submit' class='submit' id='enregistrer' name='enregistrer' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

@@ -1,0 +1,84 @@
+[(#SET{defaut_tri,#ARRAY{
+	date_modif,#ENV{date_sens,-1},
+	user_agent,1
+}})
+]
+<BOUCLE_count_humains(SHORTCUT_URLS_LOGS) {id_shortcut_url}>
+[(#SET{total_humain, #TOTAL_BOUCLE})]
+</BOUCLE_count_humains>
+<BOUCLE_count_bots(SHORTCUT_URLS_BOTS) {id_shortcut_url}>
+[(#SET{total_bot, #TOTAL_BOUCLE})]
+</BOUCLE_count_bots>
+
+<BOUCLE_liste_shortcut_url_bots_detail(SHORTCUT_URLS){id_shortcut_url}>
+<h1><:shortcut_url:titre_shortcut_url_log_detail:> #URL_SITE_SPIP/#TITRE</h1>
+
+<div class="sites syndic">
+<table class='spip liste'>
+<caption><strong class="caption"><:shortcut_url:titre_details_url:></strong></caption>
+	<thead>
+		<tr class='first_row'>
+			<th class='description' scope='col'><:shortcut_url:titre_page:></th>
+			<td>#DESCRIPTION</td>
+		</tr>
+		<tr class='first_row'>
+			<th class='description' scope='col'><:shortcut_url:titre_url:></th>
+			<td>#URL</td>
+		</tr>
+		<tr class='first_row'>
+			<th class='description' scope='col'><:shortcut_url:form_date_modif:></th>
+			<td>[(#DATE_MODIF|affdate_jourcourt)]</td>
+		</tr>
+		<tr class='first_row'>
+			<th class='description' scope='col'><:shortcut_url:info_nb_shortcut_url_clicks:></th>
+			<td>#CLICK</td>
+		</tr>
+		<tr class='first_row'>
+			<th class='description' scope='col'><:shortcut_url:info_1_shortcut_url_humain:></th>
+			<td>#GET{total_humain}</td>
+		</tr>
+		<tr class='first_row'>
+			<th class='description' scope='col'><:shortcut_url:info_1_shortcut_url_bot:></th>
+			<td>#GET{total_bot}</td>
+		</tr>
+	</thead>
+</table>
+</div>
+
+<B_liste_shortcut_url_bots>
+#ANCRE_PAGINATION
+<div class="liste-objets sites syndic">
+<table class='spip liste'>
+<caption><strong class="caption"><:shortcut_url:titre_url_clicks:></strong></caption>
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'>id</th>
+			<th class='click_time' scope='col'>[(#TRI{date_modif,<:shortcut_url:form_date_connect:>,ajax})]</th>
+			<th class='referrer' scope='col'><:shortcut_url:form_referrer:></th>
+			<th class='user_agent' scope='col'>[(#TRI{user_agent,<:shortcut_url:form_user_agent:>,ajax})]</th>
+			<th class='ip_address' scope='col'><:shortcut_url:form_ip_address:></th>
+			<th class='nb_click' scope='col'><:shortcut_url:form_click:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_shortcut_url_bots(SHORTCUT_URLS_BOTS){id_shortcut_url}{tri #ENV{par,date_modif},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'>#ID_SHORTCUT_URLS_BOT</td>
+			<td class='principale'>[(#DATE_MODIF|affdate)] [(#DATE_MODIF|affdate{'H:i:s'})]</td>
+			<td class='principale'>#REFERRER</td>
+			<td class='principale'>[(#USER_AGENT|couper{150})]</td>
+			<td class='principale'>#IP_ADDRESS</td>
+			<td class='principale'>#TOTAL_BOUCLE</td>
+		</tr>
+	</BOUCLE_liste_shortcut_url_bots>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_shortcut_url_bots>[
+<div class="liste-objets sites caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong>
+<p><:shortcut_url::></div>
+]<//B_liste_shortcut_url_bots>
+
+</BOUCLE_liste_shortcut_url_bots_detail>
+

@@ -1,0 +1,39 @@
+<br class="nettoyeur" />
+<div class="box simple fiche_objet">
+
+<B_liste_shortcut_url_auteur>
+<h1><:shortcut_url:titre_shortcut_url_auteur:></h1>
+#ANCRE_PAGINATION
+<div class="liste-objets sites syndic">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{shortcut_url:info_1_shortcut_url,shortcut_url:info_nb_shortcut_urls}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'>id</th>
+			<th class='keywords' scope='col'><:shortcut_url:form_titre:></th>
+			<th class='titre' scope='col'><:shortcut_url:form_description:></th>
+			<th class='url' scope='col'><:shortcut_url:form_url:></th>
+			<th class='ip' scope='col'><:shortcut_url:form_ip_address:></th>
+			<th class='date_modif' scope='col'><:shortcut_url:form_date_modif:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_shortcut_url_auteur(SHORTCUT_URLS auteurs_shortcut_urls auteurs){id_auteur=#ENV{id_auteur}}{!par date_modif}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'><a href="[(#URL_ECRIRE{shortcut_url,id_shortcut_url=#ID_SHORTCUT_URL})]">#ID_SHORTCUT_URL</a></td>
+			<td class='principale'><a href="[(#URL_SITE_SPIP)]/#TITRE">[(#TITRE)]</a></td>
+			<td class='principale'><a href="[(#URL_ECRIRE{shortcut_url,id_shortcut_url=#ID_SHORTCUT_URL})]">#DESCRIPTION</a></td>
+			<td class='principale'>#URL</td>
+			<td class='principale'>#IP_ADDRESS</td>
+			<td class='secondaire'>[(#DATE_MODIF|affdate_jourcourt)]</td>
+		</tr>
+	</BOUCLE_liste_shortcut_url_auteur>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_shortcut_url_auteur>[
+<div class="liste-objets sites caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong>
+<p><:shortcut_url:pas_de_shortcut_url_auteur:></p></div>
+]<//B_liste_shortcut_url_auteur>
+</div>

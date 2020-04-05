@@ -1,0 +1,17 @@
+<div class="barre_onglet clearfix">
+	<ul>
+		<li>
+			[(#URL_ECRIRE{shortcut_url_logs_stats,id_shortcut_url=#ENV{id_shortcut_url}}|parametre_url{page,detail}|lien_ou_expose{<:shortcut_url:stats_afficher_logs:>,#ENV{page,''}|=={detail},ajax})]
+		</li>
+		<li>
+			[(#URL_ECRIRE{shortcut_url_logs_stats,id_shortcut_url=#ENV{id_shortcut_url}}|parametre_url{page,graphs}|lien_ou_expose{<:shortcut_url:stats_afficher_graphs_logs:>,#ENV{page}|=={graphs},ajax})]
+		</li>
+		<li>
+			[(#URL_ECRIRE{shortcut_url_logs_stats,id_shortcut_url=#ENV{id_shortcut_url}}|parametre_url{page,bdetail}|lien_ou_expose{<:shortcut_url:stats_afficher_bots:>,#ENV{page}|=={bdetail},ajax})]
+		</li>
+		<li>
+			[(#URL_ECRIRE{shortcut_url_logs_stats,id_shortcut_url=#ENV{id_shortcut_url}}|parametre_url{page,bgraphs}|lien_ou_expose{<:shortcut_url:stats_afficher_graphs_bots:>,#ENV{page}|=={bgraphs},ajax})]
+		</li>
+	</ul>
+</div>
+

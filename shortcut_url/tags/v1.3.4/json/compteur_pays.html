@@ -1,0 +1,21 @@
+#HTTP_HEADER{Content-Type: application/json; charset=#CHARSET}
+[(#SET{pays,#ARRAY})][(#SET{total,0})][(#SET{total9,0})]
+<BOUCLE_liste_shortcut_url_pays(SHORTCUT_URLS_LOGS){fusion country_code}{par country_code}{humain=oui}{id_shortcut_url}>
+	<BOUCLE_compte(SHORTCUT_URLS_LOGS){country_code}{humain=oui}{id_shortcut_url}> </BOUCLE_compte>
+	[(#SET{total_pays,[(#TOTAL_BOUCLE)]})][(#SET{total,[(#GET{total}|plus{[(#TOTAL_BOUCLE)]})]})]
+	[(#SET{pays,[(#GET{pays}|array_merge{[(#ARRAY{#COUNTRY_CODE,[(#GET{total_pays})]})]})]})]
+	</B_compte>
+</BOUCLE_liste_shortcut_url_pays>
+<BOUCLE_comptetotal(SHORTCUT_URLS_LOGS){id_shortcut_url}> </BOUCLE_comptetotal>[(#SET{total,[(#TOTAL_BOUCLE)]})]</B_comptetotal>
+
+[<BOUCLE_liste_shortcut_url_pays_pie(DATA){source table,#GET{pays}}{!par valeur}{0,#ENV{limite,9}}{','}>#SET{total9,#GET{total9}|plus{#VALEUR}}
+	{
+		"label": "[(#CLE|=={''}|?{nc,#CLE})]",
+		"value": [(#VALEUR)],
+		"percent": [(#VALEUR|div{#GET{total}}|mult{100}|intval)]
+	}</BOUCLE_liste_shortcut_url_pays_pie>[(#GET{total}|moins{#GET{total9}}|>{0}|oui),{
+		"label": "<:shortcut_url:label_autres:>",
+		"value": [(#GET{total}|moins{#GET{total9}})],
+		"percent": [(#GET{total}|moins{#GET{total9}}|div{#GET{total}}|mult{100}|intval)]
+	}]]
+#FILTRE{trim}

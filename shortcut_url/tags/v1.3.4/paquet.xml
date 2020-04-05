@@ -1,0 +1,33 @@
+<paquet
+	prefix="shortcut_url"
+	categorie="edition"
+	version="1.3.4"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/shortcut_url-24.png"
+	documentation="https://contrib.spip.net/Raccourcisseur-d-URL"
+	schema="0.0.5"
+>
+
+	<nom>Shortcut URL</nom>
+
+	<auteur mail="cyp@rouquin.me">cyp</auteur>
+	<auteur lien="http://www.kent1.info">kent1</auteur>
+
+	<licence>GPL &#169;</licence>
+	<copyright>2015-2017</copyright>
+
+	<necessite nom="geoip" compatibilite="[1.0.0;]" />
+	<necessite nom="fulltext" compatibilite="[1.1.12;]" />
+	<utilise nom="d3js" compatibilite="[1.2.0;]" />
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/shortcut_url.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/shortcut_url.php" />
+	<pipeline nom="header_prive_css" inclure="shortcut_url_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="shortcut_url_pipelines.php" />
+	<pipeline nom="ajouter_menus" inclure="shortcut_url_pipelines.php" />
+	<pipeline nom="autoriser" inclure="shortcut_url_pipelines.php" />
+	<pipeline nom="d3js_plugins" inclure="shortcut_url_pipelines.php" />
+
+	<menu nom="menu_shortcut_url" position="10" action="navigation" parametres="menu=menu_shortcut_url" titre="shortcut_url:icone_stats_shortcut" icone="images/shortcut_url-menu.png" />
+</paquet>

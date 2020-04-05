@@ -1,0 +1,25 @@
+<BOUCLE_shortcut(SHORTCUT_URLS){id_shortcut_url}>
+[(#BOITE_OUVRIR{<:shortcut_url:titre_shortcut_url_partage:>})]
+<div id="shortcut_supplement">
+<div class="simple fiche_objet">
+	<div class="formulaire_spip">
+		<textarea name='texte_rs' class="texte" rows='3'>#DESCRIPTION #URL_SITE_SPIP/#TITRE</textarea>
+	</div>
+	<ul>
+		[<li class="seenthis">
+			<a onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" href="http://seenthis.net/#ajouter=[(#DESCRIPTION)]&url_site=#URL_SITE_SPIP/(#TITRE)" title="<:shortcut_url:partage_seenthis|attribut_html:>" data-print="seenthis"><:shortcut_url:partage_seenthis:></a>
+		</li>]
+		[<li class="twitter">
+			<a onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" href="https://www.twitter.com/share?text=[(#DESCRIPTION)]&url=#URL_SITE_SPIP/(#TITRE)" title="<:shortcut_url:partage_twitter|attribut_html:>" data-print="twitter"><:shortcut_url:partage_twitter:></a>
+		</li>]
+		[<li class="facebook">
+			<a onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" href="http://www.facebook.com/sharer.php?u=#URL_SITE_SPIP/(#TITRE)&t=[(#DESCRIPTION)]" title="<:shortcut_url:partage_facebook|attribut_html:>" data-print="facebook"><:shortcut_url:partage_googleplus:></a>
+		</li>]
+		[<li class="googleplus">
+			<a onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" href="https://plus.google.com/share?url=#URL_SITE_SPIP/(#TITRE)&t=[(#DESCRIPTION)]" title="<:shortcut_url:partage_googleplus|attribut_html:>" data-print="googleplus"><:shortcut_url:partage_googleplus:></a>
+		</li>]
+	</ul>
+</div>
+</div>
+#BOITE_FERMER
+</BOUCLE_shortcut>
