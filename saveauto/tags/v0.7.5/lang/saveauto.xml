@@ -1,0 +1,8 @@
+<traduction module="saveauto" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/saveauto/2.1/lang/" reference="fr">
+	<langue code="ca" />
+	<langue code="en" />
+	<langue code="fr" />
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/saveauto?lang_cible=sk">
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
+	</langue>
+</traduction>

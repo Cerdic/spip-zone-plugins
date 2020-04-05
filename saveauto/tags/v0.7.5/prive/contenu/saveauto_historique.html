@@ -1,0 +1,38 @@
+#SET{racine,#EVAL{_DIR_SITE}|?{#EVAL{_DIR_SITE},#EVAL{_DIR_RACINE}}}
+#SET{rep_base,#GET{racine}#CONFIG{saveauto/rep_bases}}
+#SET{regexp,#CONFIG{saveauto/prefixe_save}.+[.](zip|sql)$}
+#SET{sauvegardes,#GET{rep_base}|preg_files{#GET{regexp}}}
+
+<B_historique>
+<p><:saveauto:info_telecharger_sauvegardes:></p>
+#SET{jours,#CONFIG{saveauto/jours_obso,15}}
+<p><:saveauto:info_sauvegardes_obsolete{nb=#GET{jours}}:></p>
+[(#ANCRE_PAGINATION)]
+<table id="saveauto_telecharger" class="spip" summary="<:saveauto:resume_table_telecharger:>">
+	<thead>
+		<tr>
+			<th><:saveauto:colonne_nom:></th>
+			<th><:saveauto:colonne_taille_octets:></th>
+			<th><:saveauto:colonne_date:></th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+<BOUCLE_historique(POUR){tableau #GET{sauvegardes}}{par valeur}{pagination 10}{inverse}>
+		<tr id="zip_#CLE"[ class="(#COMPTEUR_BOUCLE|alterner{row_even, row_odd})"]>
+			<td>[(#VALEUR|basename)]</td>
+			<td style="text-align: right">[(#VALEUR|filesize|taille_en_octets)]</td>
+			<td>[(#VAL{Y-m-d H:i:s}|date{[(#VALEUR|filemtime)]}|affdate_heure{'Y-m-d H:i:s'})]</td>
+			<td>[(#BOUTON_ACTION{<:bouton_download:>, #URL_ACTION_AUTEUR{saveauto_telecharger,#VALEUR,#SELF}})]</td>
+		</tr>
+</BOUCLE_historique>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION)</p>]
+</B_historique>
+<div class="cadre cadre-e" style="margin: 10px 0;">
+	<div class="cadre_padding">
+		<:saveauto:message_aucune_sauvegarde:>
+	</div>
+</div>
+<//B_historique>

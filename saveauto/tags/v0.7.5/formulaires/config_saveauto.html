@@ -1,0 +1,125 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=saveauto -->
+
+#CACHE{0}
+<div class="formulaire_spip formulaire_config formulaire_config_saveauto">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#SELF">
+		<div>
+			#ACTION_FORMULAIRE{SELF}
+			<ul>
+				<li class="editer_base">
+					<label for="base"><:saveauto:label_nom_base:></label>
+					<input type="text" name="base" class="text" id="base" value="[(#ENV{base}|sinon{nom_base_SPIP})]" />
+				</li>
+				<li class="editer_rep_bases">
+					<label for="rep_bases"><:saveauto:label_repertoire_stockage:></label>
+					<p class="explication"><:saveauto:help_rep:></p>
+					<input type="text" name="rep_bases" class="text" id="rep_bases" value="[(#ENV{rep_bases}|sinon{tmp/})]" />
+					[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV**{erreurs}|table_valeur{rep_bases})</p>]
+				</li>
+				<li class="editer_prefixe_save">
+					<label for="prefixe_save"><:saveauto:label_prefixe_sauvegardes:></label>
+					<p class="explication"><:saveauto:help_prefixe:></p>
+					<input type="text" name="prefixe_save" class="text" id="prefixe_save" value="[(#ENV{prefixe_save,saveauto_})]" />
+				</li>
+				<li class="editer_frequence_maj">
+					<label for="frequence_maj"><:saveauto:label_frequence:></label>
+					<input type="text" name="frequence_maj" class="text" id="frequence_maj" value="[(#ENV{frequence_maj,1})]" style="width: 30px;" /> <:saveauto:valeur_jours:>
+				</li>
+				<li class="editer_gz">
+					<label><:saveauto:label_compression_gz:></label>
+					<p class="explication"><:saveauto:help_gz:></p>
+					<div class="choix">
+						 <input type="radio" name="gz" id="gz_true" value="true"[(#ENV{gz}|=={true}|oui)checked="checked"] />
+						 <label for="gz_true"><:item_oui:></label>
+					</div>
+					<div class="choix">
+						 <input type="radio" name="gz" id="gz_false" value="false"[(#ENV{gz}|=={false}|oui)checked="checked"] />
+						 <label for="gz_false"><:item_non:></label>
+					</div>
+				</li>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend"><:saveauto:legend_structure_donnees:></h3>
+						<ul>
+							<li class="editer_structure">
+								<label><:saveauto:label_structure:></label>
+								<div class="choix">
+									 <input type="radio" name="structure" id="structure_true" value="true"[(#ENV{structure}|=={true}|oui)checked="checked"] />
+									 <label for="structure_true"><:item_oui:></label>
+								</div>
+								<div class="choix">
+									 <input type="radio" name="structure" id="structure_false" value="false"[(#ENV{structure}|=={false}|oui)checked="checked"] />
+									 <label for="structure_false"><:item_non:></label>
+								</div>
+							</li>
+							<li class="editer_donnees">
+								<label><:saveauto:label_donnees:></label>
+								<div class="choix">
+									 <input type="radio" name="donnees" id="donnees_true" value="true" [(#ENV{donnees}|=={true}|oui)checked="checked"] />
+									 <label for="donnees_true"><:item_oui:></label>
+								</div>
+								<div class="choix">
+									 <input type="radio" name="donnees" id="donnees_false" value="false"[(#ENV{donnees}|=={false}|oui)checked="checked"] />
+									 <label for="donnees_false"><:item_non:></label>
+								</div>
+							</li>
+						</ul>
+					</fieldset>
+				</li>
+				<li class="editer_destinataire_save">
+					<label for="destinataire_save"><:saveauto:envoi_mail:><:saveauto:label_adresse:></label>
+					<p class="explication"><:saveauto:help_envoi:></p>
+					[(#EVAL{function_exists('mail');}|non)
+	                	<em class="attention"><strong><:saveauto:attention:></strong><:saveauto:erreur_config_inadaptee_mail:> <:saveauto:message_pas_envoi:></em>
+					]
+					<input type="text" name="destinataire_save" class="text" id="destinataire_save" value="[(#ENV{destinataire_save})]" />
+				</li>
+				<li class="editer_mail_max_size">
+					<label for="mail_max_size"><:saveauto:label_mail_max_size:></label>
+					<p class="explication"><:saveauto:help_mail_max_size:></p>
+					<input type="text" name="mail_max_size" class="text" id="mail_max_size" value="[(#ENV{mail_max_size}|sinon{2})]" size="2" style="width:30px" /> Mo
+				</li>
+				<li class="editer_accepter">
+					<label for="accepter"><:saveauto:label_tables_acceptes:></label>
+					<p class="explication"><:saveauto:help_accepter:></p>
+					<input type="text" name="accepter" class="text" id="accepter" value="[(#ENV{accepter})]" />
+				</li>
+				<li class="editer_eviter">
+					<label for="eviter"><:saveauto:label_donnees_ignorees:></label>
+					<p class="explication"><:saveauto:help_eviter:></p>
+					<input type="text" name="eviter" class="text" id="eviter" value="[(#ENV{eviter,_index;_temp;_cache})]" />
+				</li>
+				<li class="editer_ecrire_succes">
+					<label><:saveauto:label_message_succes:></label>
+					<p class="explication"><:saveauto:help_msg:></p>
+					<div class="choix">
+						 <input type="radio" name="ecrire_succes" id="ecrire_succes_true" value="true" [(#ENV{ecrire_succes}|=={true}|oui)checked="checked"] />
+						 <label for="ecrire_succes_true"><:item_oui:></label>
+					</div>
+					<div class="choix">
+						 <input type="radio" name="ecrire_succes" id="ecrire_succes_false" value="false"[(#ENV{ecrire_succes}|=={false}|oui)checked="checked"] />
+						 <label for="ecrire_succes_false"><:item_non:></label>
+					</div>
+				</li>
+				<li class="editer_jours_obso">
+					<label for="jours_obso"><:saveauto:label_obsolete_jours:></label>
+					<p class="explication"><:saveauto:help_obsolete:></p>
+					<input type="text" name="jours_obso" class="text" id="jours_obso" value="[(#ENV{jours_obso,15})]" style="width: 30px;" /><:saveauto:valeur_jours:>
+				</li>
+				<li>
+					<label><:saveauto:label_restauration:></label>
+					<:saveauto:help_restauration:>
+				</li>
+			</ul>
+			<p class="boutons">
+				<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_valider:>" />
+				<input type="submit" name="_cfg_delete" class="reset" value="<:cfg:bouton_effacer:>" />
+			</p>
+		</div>
+	</form>
+</div>

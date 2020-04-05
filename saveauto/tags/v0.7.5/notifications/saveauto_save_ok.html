@@ -1,0 +1,16 @@
+[(#REM)
+
+  Squelette de notification de sauvegarde de la base réussie
+  (c) 2010 SPIP
+  Distribue sous licence GPL
+
+][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+<:saveauto:sauvegarde_ok_mail:>
+
+<:saveauto:info_sql_base:>[(#ENV{cfg}|table_valeur{base})]
+
+<:saveauto:info_sql_serveur:>[(#ENV{serveur})]
+
+<:saveauto:info_sql_date:>[(#ENV{date}|affdate{d/m/Y H:i})][
+
+(#ENV{filesize}|<{[(#ENV**{cfg}|table_valeur{mail_max_size})]}|?{'',' '})<:saveauto:erreur_mail_fichier_lourd{fichier=#ENV{fichier_racine}}:>]
