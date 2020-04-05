@@ -1,0 +1,119 @@
+[(#REM) liste des versions de SPIP proposées
+		à l'ajout d'une nouvelle version,
+		on veillera à mettre à jour de y du plugin
+]
+#SET{spip_versions,#ARRAY{3.1.0,SPIP 3.1,3.2.0,SPIP 3.2, 3.3.0, SPIP 3.3}}
+[(#REM) version testée par defaut]
+#SET{vspip,3.3.0}
+
+#SET{incompatible,0}
+#SET{total_plugin,0}
+#SET{version_demandee,#GET{vspip}}
+[(#ENV{cible}|oui) [(#SET{version_demandee,#ENV{cible}})]]
+
+<form action="#SELF" method="post" style="margin-bottom:1rem;text-align:right">
+	<label for="cible"><:verifier_plugins:version_cible:></label>
+	<select name="cible" onchange="this.form.submit()">
+	<BOUCLE_mot(DATA){source tableau,#GET{spip_versions}}>
+	<option value="#CLE"
+		[(#GET{version_demandee}|=={#CLE}|oui)
+			selected="selected"
+			#SET{vspip,#CLE}
+		]
+	>#VALEUR</option>
+	</BOUCLE_mot>
+	</select>
+	<!-- <input type="submit" value="ok"> -->
+</form>
+
+<h1><:verifier_plugins:titre_verifier_plugins_version{version=#GET{vspip}}:></h1>
+
+
+<B_plugins_current>
+<div class="liste-objets plugins actifs">
+	<table class="spip">
+		<caption><strong class="caption"><:verifier_plugins:liste_plugins:></strong></caption>
+		<thead>
+			<tr>
+				<th class="picto"> </th>
+				<th><:verifier_plugins:plugin_nom:></th>
+				<th><:verifier_plugins:plugin_borne:></th>
+				<th><:verifier_plugins:plugin_compat_version{version=#GET{vspip}}:></th>
+			</tr>
+		</thead>
+		<tbody>
+		<BOUCLE_plugins_current (PAQUETS plugins) {tout} {par multi nom, paquets.prefixe} {!par constante, actif} {id_depot=0} {constante !=_DIR_PLUGINS_DIST} {actif=oui}>
+		<tr>
+			<td class="picto"> </td>
+			<td>#NOM[ <small class="site">(<a href="(#LIEN_DOC)" class="spip_out"><:en_savoir_plus:></a>)</small>]</td>
+			<td>#COMPATIBILITE_SPIP</td>
+			<td>
+				[(#COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}}|oui)  <span style="color:#090;"><:verifier_plugins:plugin_compat_version_ok:></span>]
+				[(#COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}}|non)
+				<span style="color:#900;"><:verifier_plugins:plugin_compat_version_notok:></span>
+				#SET{incompatible,#GET{incompatible}|plus{1}}
+				]
+				[(#REM) si pas compatible, on regarde si le plugin du depot l'est]
+				<BOUCLE_plugins_current_item (PLUGINS){prefixe}{si #COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}}|non}>
+				[(#COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}}|oui)
+				<p style="margin-top:1em;">
+				<:verifier_plugins:plugin_compat_version_maj:>
+				<a href="#URL_ECRIRE{admin_plugin}"><:verifier_plugins:plugin_compat_version_maj_gestion:></a>
+				</p>]
+				</BOUCLE_plugins_current_item>
+			</td>
+		</tr>
+		</BOUCLE_plugins_current>
+		</tbody>
+	</table>
+</div>
+#SET{total_plugin,#TOTAL_BOUCLE}
+<p><:verifier_plugins:bilan{total=#GET{total_plugin},total_notok=#GET{incompatible}}:></p>
+</B_plugins_current>
+[(#REM)
+	On vérifie aussi les plugins inactifs.
+	Ce n'est pas parce qu'un plugin est inactif aujourd'hui qu'il n'est pas du tout utile à la vie du site à un autre moment.
+]
+#SET{incompatible,0}
+#SET{total_plugin,0}
+<B_plugins_inactif>
+<div class="liste-objets plugins inactifs">
+	<table class="spip">
+		<caption><strong class="caption"><:verifier_plugins:liste_plugins_inactifs:></strong></caption>
+		<thead>
+			<tr class="first_row">
+				<th class="picto"></th>
+				<th><:verifier_plugins:plugin_nom:></th>
+				<th><:verifier_plugins:plugin_borne:></th>
+				<th><:verifier_plugins:plugin_compat_version{version=#GET{vspip}}:></th>
+			</tr>
+		</thead>
+		<tbody>
+		<BOUCLE_plugins_inactif (PAQUETS plugins) {tout} {par multi nom, paquets.prefixe} {!par constante, actif} {id_depot=0} {constante IN _DIR_PLUGINS} {actif=non}>
+		<tr>
+			<td class="picto"> </td>
+			<td>#NOM[ <small class="site">(<a href="(#LIEN_DOC)" class="spip_out"><:en_savoir_plus:></a>)</small>]</td>
+			<td>#COMPATIBILITE_SPIP</td>
+			<td>
+				[(#COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}}|oui)  <span style="color:#090;"><:verifier_plugins:plugin_compat_version_ok:></span>]
+				[(#COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}}|non)
+				<span style="color:#900;"><:verifier_plugins:plugin_compat_version_notok:></span>
+				#SET{incompatible,#GET{incompatible}|plus{1}}
+				]
+				[(#REM) si pas compatible, on regarde si le plugin du depot l'est]
+				<BOUCLE_plugins_inactif_item (PLUGINS){prefixe}{si #COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}}|non}>
+				[(#COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}}|oui)
+				<p style="margin-top:1em;">
+				<:verifier_plugins:plugin_compat_version_maj:>
+				<a href="#URL_ECRIRE{admin_plugin}"><:verifier_plugins:plugin_compat_version_maj_gestion:></a>
+				</p>]
+				</BOUCLE_plugins_inactif_item>
+			</td>
+		</tr>
+		</BOUCLE_plugins_inactif>
+		</tbody>
+	</table>
+</div>
+#SET{total_plugin,#TOTAL_BOUCLE}
+<p><:verifier_plugins:bilan_inactif{total=#GET{total_plugin},total_notok=#GET{incompatible}}:></p>
+</B_plugins_inactif>

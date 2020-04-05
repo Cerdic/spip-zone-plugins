@@ -1,0 +1,18 @@
+<paquet
+	prefix="verifier_plugins"
+	categorie="maintenance"
+	version="1.2.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.3.*]"
+	logo="prive/themes/spip/images/verifier_plugins-64.png"
+	documentation="https://contrib.spip.net/4882"
+>
+
+	<nom>Vérifie la compatibilité des plugins avant un changement de version de SPIP</nom>
+	<auteur lien='http://www.erational.org'>erational</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<menu nom="verifier_plugins" parent="menu_administration" icone="images/verifier_plugins-16.png" action="verifier_plugins" titre="verifier_plugins:titre_verifier_plugins" />
+
+</paquet>
