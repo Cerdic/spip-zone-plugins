@@ -1,0 +1,66 @@
+[(#REM)<!-- # Slick - Portfolio Articles
+
+Gallerie portfolio avec d'article avec Slick
+Insertion du modele <articleX|slick>
+N'utilise pas la configuration générale du plugin, mais les paramètres suivants :
+
+@param : id_article
+@param : id-carousel : id unique du carousel
+@param : docs : 1,2,3 : sélectionne individuellement les documents
+@param : infinite : true ou false - revient à la diapo 1 après la dernière
+@param : speed : 300 - vitesse de transition
+@param : slidesToShow : 1 - nb images à montrer à la fois
+@param : slidesToScroll : 1 - nb images à faire défiler en même temps
+@param : centerMode : false ou true - centrer sur l'image (si slidesToShow > 1)
+@param : centerPadding : espace latéraux (si centerMode = true)
+@param : dots : false ou true - afficher les points de navigation
+@param : variableWidth : false ou true - diapositives de largeurs différentes
+@param : adaptiveHeight : false ou true - adapter la hauteur du diaporama à la hauteur de la diapositive
+@param : autoplay : false ou true - démarage automatique
+@param : autoplaySpeed : 300 - temps d'exposition d'une diapositive en mode démarrage automatique
+@param : fade : false ou true - effet de transition fondu
+@param : couleurNav : red, black, green... ou un code héxadécimal de couleur - couleur des navigation (flèches et points)
+@param : agrandir : oui - pour avoir un lien sur les images et les agrandir (Mediabox activé)
+@param : afftitre : oui - pour afficher le titre de l’image (défaut  non)
+@param : affdesc : oui - pour afficher le descriptif de l’image (défaut  non)
+@param : largeur : 1000 - largeur de l'image en px dans le diaporama (défaut 960)
+
+-->][(#SET{largeur,#ENV{largeur,960}})
+][(#ENV{slidePadding}|ou{#ENV{couleurNav}}|?{' '})<style type="text/css">
+[.slick-slide > * {
+    padding: (#ENV{slidePadding});
+    display: block;
+}][
+.slick-prev:before, .slick-next:before, .slick-dots li.slick-active button:before, .slick-dots li button:before { color:(#ENV{couleurNav}); }]
+</style>]
+[(#REM) <!-- Diaporama -->]
+<div id="#ENV{id-carousel,demo}">
+	<BOUCLE_listDocs(DOCUMENTS){id_article?}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{extension==jpg|png|gif}{vu=non}>
+	<div>[
+		(#ENV{agrandir}|oui)<a href="#FICHIER" class="mediabox"[ rel="diaporama(#ENV{id-carousel,demo})"][ title="(#TITRE|textebrut|attribut_html)"]>]
+		<img src="[(#FICHIER|image_reduire{#GET{largeur},*}|extraire_attribut{src})]" alt="[(#TITRE|textebrut|attribut_html)]">
+		[(#ENV{afftitre}|oui)<div class="slick-titre">#TITRE</div>]
+		[(#ENV{affdesc}|oui)[<div class="slick-descriptif">(#DESCRIPTIF|ptobr)</div>]]
+		[(#ENV{agrandir}|oui)</a>]
+	</div>
+	</BOUCLE_listDocs>
+</div>
+
+<script type="text/javascript">
+jQuery(function($){
+	$("[#(#ENV{id-carousel,demo})]").slick({[
+		infinite: 	(#ENV{infinite,true})][,
+		speed: 		(#ENV{speed})][,
+		slidesToShow: 	(#ENV{slidesToShow})][,
+		slidesToScroll:	(#ENV{slidesToScroll})][,
+		centerMode: 	(#ENV{centerMode})][,
+		centerPadding: 	'(#ENV{centerPadding})'][,
+		dots: 		(#ENV{dots})][,
+		variableWidth: 	(#ENV{variableWidth})][,
+		adaptiveHeight: (#ENV{adaptiveHeight})][,
+		autoplay: 	(#ENV{autoplay})][,
+		autoplaySpeed: 	(#ENV{autoplaySpeed})][,
+		fade: 		(#ENV{fade})]
+	});
+});
+</script>
