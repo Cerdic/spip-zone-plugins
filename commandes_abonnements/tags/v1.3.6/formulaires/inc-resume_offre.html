@@ -1,0 +1,171 @@
+[(#REM)
+
+	Sélection et présentation résumée d'une offre d'abonnement.
+
+	On affiche les informations suivantes :
+	- Logo et titre de l'offre
+	- Infos techniques de l'abo : prix, dates...
+	- Descriptif de l'offre
+
+	Paramètres :
+	**obligatoire
+
+	- **id_abonnements_offre
+	- **titre
+	- **descriptif
+	- **prix
+	- **montant
+	- **periode
+	- **duree
+	- **renouvellement_auto
+	- **montant_perso
+	- **montant_minimum
+
+]
+
+#SET{prix,#ENV{prix/#ID_ABONNEMENTS_OFFRE}}
+#SET{prix_libre,#ENV{prix_libre/abonnement#ID_ABONNEMENTS_OFFRE}}
+
+[(#REM) Dates de début du nouvel abonnement : si abonnement actif pour la même offre → à la suite, sinon aujourd'hui ]
+<BOUCLE_meme_abonnement(ABONNEMENTS)
+	{id_auteur = #SESSION{id_auteur}}
+	{id_abonnements_offre}
+	{statut = actif}
+	{!par date_fin}
+	{0,1}
+>
+#SET{date_debut, #DATE_FIN}
+#SET{meme_abonnement,oui}
+</BOUCLE_meme_abonnement>
+#SET{date_debut, #ENV{date}}
+<//B_abonnement>
+
+[(#REM) Date de fin ]
+#SET{periodes_datetime, #ARRAY{
+	heures, hour,
+	jours,  day,
+	mois,   month,
+}}
+#SET{periode_fin, #GET{periodes_datetime/#ENV{periode}}}
+#SET{date_fin, #VAL{Y-m-d H:i:s}|date{#GET{date_debut}|concat{" + ", #ENV{duree}, #GET{periode_fin}}|strtotime}}
+
+<form
+	method="post" action="#ENV{action}" enctype="multipart/form-data"
+	id="offre#ID_ABONNEMENTS_OFFRE"
+	class="editer editer_abonnements_offre abonnement abonnement_resume abonnement_resume_choisir[ abonnement_(#ENV{alternative/quel}|!={principal}|?{alternative})][ (#ENV{renouvellement_auto}|oui)abonnement_renouvelable]"
+><div>
+	[(#REM) declarer les hidden qui declencheront le service du formulaire 
+	parametre : url d'action ]
+	#ACTION_FORMULAIRE{#ENV{action}}
+
+	[(#REM) Logo et titre ]
+	[<header class="abonnement__header">
+		(#LOGO_ABONNEMENTS_OFFRE{#ID_ABONNEMENTS_OFFRE}|extraire_attribut{src}|balise_img{'','abonnement__logo spip_logo'})
+	</header>]
+
+	[(#REM) Infos techniques et descriptif ]
+	<div class="abonnement__content">
+
+		[<h3 class="abonnement__titre">
+			(#ENV{titre})
+		</h3>]
+
+		<div class="abonnement__infos">
+
+			[(#REM) Montant et période éventuelle ]
+			<div class="abonnement__info abonnement__info_prix">
+				<strong class="label"><:abonnement:label_montant:></strong>
+				<span class="valeur">
+					[<span class="montant">(#ENV*{montant}|prix_formater)</span>]
+					[(#ENV{renouvellement_auto}|oui)
+						<span class="par">/</span>
+						<span class="periode">[(#VAL{abonnementsoffre:champ_periode_choix_#ENV{periode}}|_T)]</span>
+					]
+				</span>
+			</div>
+
+			[(#ENV{alternative}|oui)
+			<div class="abonnement__alternative">
+				<a class="button" [(#ENV{alternative/quel}|!={principal}|oui)href="#offre#ENV{alternative/id}"]>
+					#ENV{alternative/label1}
+				</a>
+				<a class="button" [(#ENV{alternative/quel}|=={principal}|oui)href="#offre#ENV{alternative/id}"]>
+					#ENV{alternative/label2}
+				</a>
+			</div>
+			]
+
+			[(#REM) Montant personnalisé ]
+			<BOUCLE_test_perso(CONDITION){si #ENV{montant_perso}}>
+			<fieldset class="abonnement__perso">
+				<legend>Personnaliser le montant</legend>
+				[<span class="erreur">(#ENV{erreurs/montant_#ID_ABONNEMENTS_OFFRE})</span>]
+				<BOUCLE_montants(DATA){source table, #VAL{#ENV{montant}}|concat{'|', #ENV{montant_minimum}}|explode{'|'}|array_filter}>
+				#SET{montant,#VALEUR|trim}
+				<input type="radio" id="montants_persos_[(#ID_ABONNEMENTS_OFFRE)]_#GET{montant}" name="montants_persos\[#ID_ABONNEMENTS_OFFRE\]\[predef\]" value="#GET{montant}" [(#COMPTEUR_BOUCLE|=={1}|oui)checked="checked"] />
+				<label for="montants_persos_[(#ID_ABONNEMENTS_OFFRE)]_#GET{montant}">[(#GET{montant}|prix_formater)]</label>
+				</BOUCLE_montants>
+				<input
+					type="text"
+					class="ui-widget ui-button ui-checkboxradio-label ui-checkboxradio-radio-label"
+					id="montants_persos_#ID_ABONNEMENTS_OFFRE"
+					name="montants_persos\[#ID_ABONNEMENTS_OFFRE\]\[libre\]"
+					placeholder="Autre"
+					value="#ENV{montants_persos/#ID_ABONNEMENTS_OFFRE/libre}"
+					size="3"
+				/>
+			</fieldset>
+			</BOUCLE_test_perso>
+
+			[(#REM) Durée / renouvellement ]
+			<div class="abonnement__info abonnement__info_duree">
+				<strong class="label"><:abonnement:label_duree:></strong>
+				<span class="valeur">
+					[(#ENV{renouvellement_auto}|?{
+						<span class="renouvellement"><:abonnementsoffre:info_renouvellement_auto:></span>,
+						<span class="duree">[(#ENV{duree}|abonnements_afficher_duree{#ENV{periode}})]</span>
+					})]
+				</span>
+			</div>
+
+			[(#REM) Dates ]
+			<div class="abonnement__info abonnement__info_dates">
+				<strong class="label"><:abonnement:label_dates:></strong>
+				<span class="valeur">
+					[(#ENV{renouvellement_auto}|?{
+						[<span class="dates dates_debut"><:abonnement:label_date_a_partir:> (#GET{date_debut}|affdate)</span>],
+						[<span class="dates dates_debut-fin">(#GET{date_debut}|affdate_debut_fin{#GET{date_fin}, ''})</span>]
+					})]
+				</span>
+			</div>
+
+			[(#REM) Type de paiement ]
+			[(#REM)
+			<div class="abonnement__paiement">
+				[(#ENV{renouvellement_auto}|non)
+					<strong class="label"><:abonnementsoffre:info_paiement:></strong>
+					<span class="valeur"><:abonnementsoffre:info_paiement_unique:></span>
+				]
+				[(#ENV{renouvellement_auto}|oui)
+				<strong class="label"><:abonnementsoffre:info_paiement_auto:></strong>
+				<span class="valeur">[(#ENV{duree})][ (#ENV{periode})]</span>
+				]
+			</div>
+			]
+
+		</div>
+
+		[<div class="abonnement__descriptif">
+			(#ENV*{descriptif})
+		</div>]
+
+	</div>
+
+	[(#REM) Footer : bouton ]
+	<footer class="abonnement__footer">
+		<button type="submit" name="id_abonnements_offre" value="#ENV{id_abonnements_offre}">
+			<:abonnementsoffre:bouton_choisir_offre:>
+		</button>
+	</footer>
+	
+</div></form>

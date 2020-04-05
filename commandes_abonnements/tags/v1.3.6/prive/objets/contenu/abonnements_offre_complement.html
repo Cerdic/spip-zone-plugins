@@ -1,0 +1,28 @@
+[(#REM)
+
+	Champs supplémentaires pour les offres d'abonnements
+
+	Squelette inclus via le pipeline recuperer_fond
+]
+<BOUCLE_abonnements_offre(ABONNEMENTS_OFFRES){id_abonnements_offre}{statut?}>
+
+<div class="champ contenu_renouvellement_auto[ (#RENOUVELLEMENT_AUTO*|strlen|?{'',vide})]">
+	<label><:abonnementsoffre:champ_renouvellement_auto_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{renouvellement_auto} renouvellement_auto'>
+		[(#RENOUVELLEMENT_AUTO|?{[(#CHEMIN_IMAGE{ok-16}|balise_img) ]<:abonnementsoffre:champ_renouvellement_auto_label_case:>,<:item_non:>})]
+	</span>
+</div>
+
+<div class="champ contenu_montant_perso[ (#MONTANT_PERSO*|strlen|?{'',vide})]">
+	<label><:abonnementsoffre:champ_montant_perso_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{montant_perso} montant_perso'>
+		[(#MONTANT_PERSO|?{[(#CHEMIN_IMAGE{ok-16}|balise_img) ]<:abonnementsoffre:champ_montant_perso_label_case:>,<:item_non:>})]
+	</span>
+</div>
+
+<div class="champ contenu_montant_minimum[ (#MONTANT_MINIMUM*|strlen|?{'',vide})]">
+	<label><:abonnementsoffre:champ_montant_minimum_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{montant_minimum} montant_minimum'>[(#MONTANT_MINIMUM|?{#VAL{#MONTANT_MINIMUM|prix_formater},-})]</span>
+</div>
+
+</BOUCLE_abonnements_offre>

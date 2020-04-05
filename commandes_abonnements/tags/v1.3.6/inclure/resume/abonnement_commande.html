@@ -1,0 +1,172 @@
+[(#REM)
+
+	Présentation résumée d'un abonnement en cours de commande.
+
+	Prévu pour être inclus dans un tunnel de commande.
+	On prend en priorité la commande en cours, sinon la commande d'abonnement en session.
+
+	On affiche les informations suivantes :
+	- Logo et titre de l'offre
+	- Infos techniques de l'abo : prix, dates...
+	- Descriptif de l'offre
+
+	Paramètres :
+	**obligatoire
+
+	- masquer : tableau d'éléments à masquer
+							logo | descriptif
+	- class : classe ajoutée au conteneur
+
+]
+#CACHE{0}
+[(#REM)
+	On prend en priorité la commande en cours
+	nb : boucler sur les détails pour éviter les jointures fortuites sur id_auteur
+]
+<BOUCLE_commande_encours(COMMANDES_DETAILS commandes)
+	{commandes.id_auteur = #SESSION{id_auteur}}
+	{commandes.statut = encours}
+	{objet = abonnements_offre}
+	{!par commandes.date}
+	{0,1}
+>
+#SET{commande, #ARRAY{
+	id_abonnements_offre, #ID_OBJET,
+	prix,                 #PRIX*,
+	reference,            #REFERENCE,
+	periode,              #ECHEANCES_TYPE|replace{annee,an},
+	renouvellement,       #ECHEANCES_TYPE|?{on},
+	id_commande,          #ID_COMMANDE,
+}}
+</BOUCLE_commande_encours>
+
+[(#REM) Sinon on prend la commande d'abonnement en session ]
+#SET{commande, #ARRAY{
+	id_abonnements_offre, #SESSION{commande_abonnement/id_abonnements_offre},
+	prix,                 #SESSION{commande_abonnement/montant},
+	renouvellement,       #SESSION{commande_abonnement/renouvellement_auto},
+}}
+<//B_commande_encours>
+
+[(#REM) Pour aller plus loin il faut donc une commande ]
+<BOUCLE_is_commande(CONDITION) {si #GET{commande}}>
+
+[(#REM) L'offre d'abonnement liée ]
+<BOUCLE_offre(ABONNEMENTS_OFFRES) {id_abonnements_offre = #GET{commande/id_abonnements_offre}}>
+#SET{offre, #ARRAY{
+	logo,           #LOGO_ABONNEMENTS_OFFRE|extraire_attribut{src},
+	titre,          #TITRE,
+	prix,           #PRIX*,
+	renouvellement, #RENOUVELLEMENT_AUTO,
+	periode,        #PERIODE,
+	duree,          #DUREE,
+	descriptif,     #DESCRIPTIF,
+}
+</BOUCLE_offre>
+
+[(#REM) Infos sur l'abonnement : prendre en priorité dans la commande éventuelle ]
+#SET{prix,           #GET{commande/prix}|sinon{#GET{offre/prix}}}
+#SET{renouvellement, #GET{commande}|?{#GET{commande/renouvellement},#GET{offre/renouvellement}}}
+#SET{periode,        #GET{commande/periode}|sinon{#GET{offre/periode}}}
+#SET{duree,          #GET{offre/duree}}
+
+[(#REM) Dates de début du nouvel abonnement : si abonnement actif pour la même offre → à la suite, sinon aujourd'hui ]
+<BOUCLE_meme_abonnement(ABONNEMENTS)
+	{id_auteur = #SESSION{id_auteur}}
+	{id_abonnements_offre = #GET{commande/id_abonnements_offre}}
+	{statut = actif}
+	{!par date_fin}
+	{0,1}
+>
+#SET{date_debut, #DATE_FIN}
+#SET{meme_abonnement,oui}
+</BOUCLE_meme_abonnement>
+#SET{date_debut, #ENV{date}}
+<//B_abonnement>
+
+[(#REM) Date de fin ]
+#SET{periodes_datetime, #ARRAY{
+	heures, hour,
+	jours,  day,
+	mois,   month,
+}}
+#SET{periode_fin, #GET{periodes_datetime/#GET{periode}}}
+#SET{date_fin, #VAL{Y-m-d H:i:s}|date{#GET{date_debut}|concat{" + ", #GET{duree}, #GET{periode_fin}}|strtotime}}
+
+<article class="abonnement abonnement_resume abonnement_resume_commande[ (#GET{renouvellement}|oui)abonnement_renouvelable][ (#ENV{class}|attribut_html)]">
+
+	[(#REM) Logo et titre ]
+	[(#VAL{logo}|in_any{#ENV{masquer}}|non)
+	[<header class="abonnement__header">
+		(#GET{offre/logo}|balise_img{'','abonnement__logo spip_logo'})
+	</header>]
+	]
+
+	[(#REM) Titre, infos techniques, descriptif ]
+	<div class="abonnement__content">
+
+		[<h3 class="abonnement__titre">
+			(#GET{offre/titre})
+		</h3>]
+
+		<div class="abonnement__infos">
+
+			[(#REM) Commande éventuelle ]
+			<div class="abonnement__info abonnement__info_commande">
+				[<strong class="label"><:commandes:commande_titre:></strong>
+				<span class="valeur">
+					<span class="reference">(#GET{commande/reference})</span>
+				</span>]
+			</div>
+
+			[(#REM) Montant et période éventuelle ]
+			<div class="abonnement__info abonnement__info_prix">
+				<strong class="label"><:abonnement:label_montant:></strong>
+				<span class="valeur">
+					[<span class="montant">(#GET{prix}|prix_formater)</span>]
+					[(#GET{renouvellement}|oui)
+						<span class="par">/</span>
+						<span class="periode">[(#VAL{abonnementsoffre:champ_periode_choix_#GET{periode}}|_T)]</span>
+					]
+				</span>
+			</div>
+
+			[(#REM) Durée / renouvellement ]
+			<div class="abonnement__info abonnement__info_duree">
+				<strong class="label"><:abonnement:label_duree:></strong>
+				<span class="valeur">
+					[(#GET{renouvellement}|?{
+						<span class="renouvellement"><:abonnementsoffre:info_renouvellement_auto:></span>,
+						<span class="duree">[(#GET{duree}|abonnements_afficher_duree{#GET{periode}})]</span>
+					})]
+				</span>
+			</div>
+
+			[(#REM) Dates ]
+			<div class="abonnement__info abonnement__info_dates">
+				<strong class="label"><:abonnement:label_dates:></strong>
+				<span class="valeur">
+					[(#GET{renouvellement}|?{
+						[<span class="dates dates_debut"><:abonnement:label_date_a_partir:> (#GET{date_debut}|affdate)</span>],
+						[<span class="dates dates_debut-fin">(#GET{date_debut}|affdate_debut_fin{#GET{date_fin}, ''})</span>]
+					})]
+				</span>
+			</div>
+
+		</div>
+
+		[(#VAL{descriptif}|in_any{#ENV{masquer}}|non)
+		[<div class="abonnement__descriptif">
+			(#GET{offre/descriptif})
+		</div>]
+		]
+
+	</div>
+
+	[(#REM) Footer : boutons, liens... ]
+	[<footer class="abonnement__footer">
+		(#INCLURE{fond=inclure/resume/inc-abonnement_commande_footer, env})
+	</footer>]
+
+</article>
+</BOUCLE_is_commande>

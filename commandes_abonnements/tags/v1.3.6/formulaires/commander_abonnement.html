@@ -1,0 +1,54 @@
+<link rel="stylesheet" href="#CHEMIN{css/ui/jquery-ui.min.css}" type="text/css" />
+<script type="text/javascript" src="#CHEMIN{prive/javascript/ui/jquery-ui.min.js}"></script>
+<div class="formulaire_spip formulaire_#ENV{form}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+	
+	<BOUCLE_editable (CONDITION) {si #ENV{editable}}>
+	<B_offres>
+	<div class="liste_offres">
+		<BOUCLE_offres (ABONNEMENTS_OFFRES) {par num titre, titre}>
+		<INCLURE{fond=formulaires/inc-resume_offre,env,
+			id_abonnements_offre=#ID_ABONNEMENTS_OFFRE,
+			titre=#TITRE,
+			descriptif=#DESCRIPTIF,
+			montant=#PRIX**,
+			periode=#PERIODE,
+			duree=#DUREE,
+			renouvellement_auto=#RENOUVELLEMENT_AUTO,
+			montant_perso=#MONTANT_PERSO,
+			montant_minimum=#MONTANT_MINIMUM}/>
+		</BOUCLE_offres>
+	</div>
+	</B_offres>
+		
+	<script type="text/javascript">
+	/*<![CDATA[*/
+	;(function($){
+		function commander_abonnement() {
+			// Gestion des montants persos
+			$('.offre__perso').find('input[type=radio]').checkboxradio({icon: false}).on('focus', function() {
+				$(this).closest('.offre__perso').find('input[type=text]').removeClass('ui-state-active').val('');
+			});
+			$('.offre__perso input[type=text]')
+				.on('focus', function() {
+					$(this).addClass('ui-state-active').closest('.offre__perso').find('input:checked').prop('checked', false).checkboxradio('refresh');
+				})
+				.on('blur', function() {
+					var val = $(this).val().trim();
+					if (!val.match(/^\d+$/)) {
+						$(this).val('').removeClass('ui-state-active').closest('.offre__perso').find('input[type=radio]').first().prop('checked', true).checkboxradio('refresh');
+					}
+				});
+		}
+		
+		$(function(){
+			commander_abonnement();
+			onAjaxLoad(commander_abonnement);
+		});
+	})(jQuery);
+	/*]]>*/
+	</script>
+	</BOUCLE_editable>
+</div>
+
