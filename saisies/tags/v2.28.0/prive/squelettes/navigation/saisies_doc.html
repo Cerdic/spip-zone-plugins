@@ -1,0 +1,9 @@
+<B_saisies>
+	<div class="navigation">
+		<ul class="liste_items sous_navigation">
+		<BOUCLE_saisies (DATA) {source table, #VAL{saisies}|saisies_lister_disponibles} {si #VAL{_DIR_PLUGIN_YAML}|defined}>
+				<li class="item"><a href="#[saisie_(#CLE)]" class="bando2_saisie_[(#CLE)]">[(#TITRE)] [((#CLE))]</a></li>
+		</BOUCLE_saisies>
+		</ul>
+	</div>
+</B_saisies>
