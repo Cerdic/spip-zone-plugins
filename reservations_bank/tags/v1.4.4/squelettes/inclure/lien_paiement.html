@@ -1,0 +1,40 @@
+	#SET{montant_total,#ENV{total,#ARRAY}}
+	#SET{montant_paye,#ENV{montant_paye,#ARRAY}}
+	#SET{paiement,''}
+	<BOUCLE_details(RESERVATIONS_DETAILS){id_reservation}{tout}{si #ENV{montant_paye}|non|ou{#ENV{total}}|non}>1
+		#SET{prix,#PRIX**}
+		[(#PRIX**|=={0}|oui)
+			#SET{prix,#PRIX_HT**|plus{#TAXE}}
+		]
+		#SET{montant_total,#GET{montant_total}|push{#GET{prix}}}
+		#SET{montant_paye,#GET{montant_paye}|push{#MONTANT_PAYE}}
+	</BOUCLE_details>
+	[(#GET{montant_total}|array_sum|>{#GET{montant_paye}|array_sum}|oui)
+		#SET{paiement,oui}
+	]
+	</B_details>
+		[(#GET{montant_total}|>{#GET{montant_paye}}|oui)
+		#SET{paiement,oui}
+	]
+	<//B_details>
+
+	<BOUCLE_transactions(TRANSACTIONS){id_reservation}{statut IN commande,attente}{!par date_transaction}{0,1}>
+	[(#AUTORISER{regler,transaction,#ID_TRANSACTION})
+		[(#GET{paiement}|oui|et{#TRANSACTION_HASH|oui})
+			<a class="action_paiement"  href="[(#URL_ECRIRE{payer_reservation,id_transaction=#ID_TRANSACTION}
+					|parametre_url{transaction_hash,#TRANSACTION_HASH}
+					|parametre_url{id_reservation,#ID_RESERVATION})]"><:bank:payer:></a>
+		]
+	]
+	</BOUCLE_transactions>
+	[(#AUTORISER{regler,transaction,#ID_TRANSACTION})
+		[(#GET{paiement}|oui)
+		[(#ID_RESERVATION|rb_inserer_transaction|set{id_transaction})]
+		[(#GET{id_transaction}|oui)
+			#SET{transaction_hash,#INFO_TRANSACTION_HASH{transaction,#GET{id_transaction}}}
+			<a class="action_paiement" href="[(#URL_ECRIRE{payer_reservation,id_transaction=#GET{id_transaction}}
+					|parametre_url{id_reservation,#ID_RESERVATION}
+					|parametre_url{transaction_hash,#GET{transaction_hash}})]"><:bank:payer:></a>]
+			]
+	]
+	<//B_transactions>

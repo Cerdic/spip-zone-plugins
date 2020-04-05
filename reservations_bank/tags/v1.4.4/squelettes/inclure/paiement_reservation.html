@@ -1,0 +1,37 @@
+<BOUCLE_reservation(RESERVATIONS){id_reservation}{tout}>
+	#SET{reference,#REFERENCE}
+	#SET{email,#EMAIL|sinon{#INFO_EMAIL{auteur,#ID_AUTEUR}}}
+	#SET{id_reservation,#ID_RESERVATION}
+	#SET{prix_ht_total, #ARRAY}
+	#SET{prix_total, #ARRAY}
+	<BOUCLE_reservation_details(RESERVATIONS_DETAILS){id_reservation}{id_reservations_detail ?}{tout}>
+		#SET{prix,#PRIX*|moins{#MONTANT_PAYE}}
+		#SET{prix_ht_total,#GET{prix_ht_total}|push{#GET{prix}|rb_montant_du_ht{#TAXE}}}
+		#SET{prix_total,#GET{prix_total}|push{#GET{prix}}}
+	</BOUCLE_reservation_details>
+		#SET{montant_ht,#GET{prix_ht_total}|array_sum}
+		#SET{total,#GET{prix_total}|array_sum}
+	</B_reservation_details>
+</BOUCLE_reservation>
+#SET{options,#ARRAY{
+		montant_ht,#GET{montant_ht},
+		auteur,#GET{email},
+		id_reservation,#GET{id_reservation},
+		tracking_id,#GET{reference},
+		champs,#ARRAY{id_reservation,#GET{id_reservation}},
+	}
+}
+#SET{donnees, #ARRAY{
+		montant, #GET{total},
+		options, #GET{options}
+	}
+}
+
+[(#ENV{cacher_paiement_public}|oui)
+	[(#REM) Retourne un tableau des données pour l'enregistrement de la transaction]
+	[(#GET{donnees}|serialize)]
+]
+[(#ENV{cacher_paiement_public}|non)
+	[(#REM) Affiche le formulaire Paiement de Bank]
+	[(#FORMULAIRE_PAYER_ACTE{#GET{total},#GET{options}})]
+]

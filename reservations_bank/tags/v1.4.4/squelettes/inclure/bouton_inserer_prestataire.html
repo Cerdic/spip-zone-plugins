@@ -1,0 +1,27 @@
+#SET{config,#CONFIG{reservation_bank}}
+#SET{prestataire_defaut, #GET{config}|table_valeur{presta_defaut}}
+#SET{prestataires_simples_actives,#ID_RESERVATION|rb_prestataires_simples_actives_reservation}
+[(#BOITE_OUVRIR{})]
+<p><strong><:reservation_bank:label_choisir_mode_paiement:></strong></p>
+<BOUCLE_teste(CONDITION){si #GET{prestataire_defaut}|oui}>
+	#BOUTON_ACTION{
+		#GET{prestataires_simples_actives}|table_valeur{#GET{prestataire_defaut}},
+		#URL_ACTION_AUTEUR{
+			rb_instituer_prestataire,#ENV{id_reservation}-#GET{prestataire_defaut},
+			#SELF,
+			'',
+			confirmation message}
+	}
+</BOUCLE_teste>
+	<BOUCLE_prestataires(DATA) {source tableau, #GET{prestataires_simples_actives}}>
+		#BOUTON_ACTION{
+		#VALEUR,
+		#URL_ACTION_AUTEUR{
+			rb_instituer_prestataire,#ENV{id_reservation}-#CLE,
+			#SELF,
+			'',
+			confirmation message}
+		}
+	</BOUCLE_prestataires>
+<//B_teste>
+[(#BOITE_FERMER{})]

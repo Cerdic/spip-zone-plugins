@@ -1,0 +1,17 @@
+#SET{montant_paye,#ARRAY} #SET{prix,#ARRAY}
+<BOUCLE_details(RESERVATIONS_DETAILS) {id_reservation}{statut ?}>
+	#SET{montant_paye,#GET{montant_paye}|push{#MONTANT_PAYE}} #SET{prix,#GET{prix}|push{#PRIX*}}
+</BOUCLE_details>
+#SET{paye_total, #GET{montant_paye}|array_sum} #SET{total_du, #GET{prix}|array_sum|moins{#GET{paye_total}}}
+[(#GET{paye_total}|>{0}|oui)
+<tr class="montant_paye">
+	<td class="descriptif"><:reservation_bank:montant_paye:></td>
+	<td class="montant">[(#GET{paye_total}|appliquer_filtre{prix_formater,#GET{paye_total}})]</td>
+	<td></td>
+</tr>
+<tr class="montant_du">
+	<td class="descriptif"><:reservation_bank:montant_du:></td>
+	<td class="montant">[(#GET{total_du}|appliquer_filtre{prix_formater,#GET{total_du}})]</td>
+	<td></td>
+</tr>
+]

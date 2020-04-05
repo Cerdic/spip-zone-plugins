@@ -1,0 +1,8 @@
+<td class='client'>
+	#SET{total,0}
+	<BOUCLE_reservation_details(RESERVATIONS_DETAILS){id_reservation}{id_reservations_detail ?}{tout}>
+		[(#SET{total,[(#GET{total}|plus{#PRIX*})]})]
+	</BOUCLE_reservation_details>
+	<INCLURE{fond=prive/objets/contenu/inc-reservation_montant,id_reservation,total=#GET{total}}/>
+	<INCLURE{fond=inclure/lien_paiement,id_reservation}/>
+</td>

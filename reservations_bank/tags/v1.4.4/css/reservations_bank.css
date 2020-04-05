@@ -1,0 +1,29 @@
+#formulaire_mode_paiement {
+	background: #f5f5f5 none repeat scroll 0 0;
+	padding: 0.5em;
+	width: 100%;
+}
+
+#formulaire_mode_paiement .boutons {
+	margin: 0;
+}
+
+.payer_mode {
+	border: 2px solid #e5e5e5;
+	margin: 1em 0;
+	padding: 1em;
+}
+
+.payer_mode {
+	border: 2px solid #e5e5e5;
+	margin: 1em 0;
+	padding: 1em;
+}
+
+.payer_mode .titre {
+	font-weight:bold;
+}
+
+#formulaire_mode_paiement .boutons {
+	border: none;
+}

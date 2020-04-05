@@ -1,0 +1,40 @@
+[(#AUTORISER{regler,transaction,#ID_TRANSACTION}|sinon_interdire_acces)]
+
+<B_trans>
+<h1 class="grostitre"><:reservation_bank:titre_paiement_reservation:> #ID_TRANSACTION</h1>
+<BOUCLE_trans(TRANSACTIONS){id_transaction}{transaction_hash}{statut IN commande,attente}>
+	[<h2><:reservation:titre_reservation:> #(#ID_TRANSACTION) / [(#DATE_TRANSACTION|affdate_heure)]</h2>]
+	<INCLURE{fond=inclure/reservation,id_reservation,id_transaction,titre=#GET{titre}} />
+	<BOUCLE_reservations_detail(RESERVATIONS_DETAILS){id_reservation}{tout}{0,1}>
+		#SET{devise,#DEVISE}
+		#SET{titre,#VAL{reservation_bank:titre_payer_reservation}|_T|concat{ #VAL{&nbsp;#}}|concat{#ID_TRANSACTION,'&nbsp;: ',#MONTANT|prix_formater_devise{#DEVISE}}}
+	</BOUCLE_reservations_detail>
+
+	<BOUCLE_client(AUTEURS){email = #AUTEUR}{statut==.*}>
+		[(#VAL{client_adresse_facture}|trouver_fond{modeles}|oui)
+		<br />
+		<p>#INCLURE{fond=modeles/client_adresse_facture,id_auteur}</p>
+		]
+		<p>
+			<strong><a href="#URL_ECRIRE{client,email=#EMAIL}" title="#NOM">#NOM</a></strong>
+		</p>
+	</BOUCLE_client>
+		<BOUCLE_reservation(RESERVATIONS){id_reservation}{tout}>
+		<p>
+			<strong><a href="#URL_ECRIRE{client,email=#EMAIL}" title="#NOM">#NOM</a></strong>
+		</p>
+		</BOUCLE_reservation>
+
+	<//B_client>
+	<INCLURE{fond=modeles/payer_acte,id_transaction,transaction_hash,title=#GET{titre}}>
+</BOUCLE_trans>
+<p><:paniers:erreur_aucune_commande:></p>
+<//B_trans>
+<style type="text/css">
+.payer_mode {margin-top: 3em;}
+.payer_mode .titre {font-weight: bold;font-size: 1.2em;}
+.payer_mode .boutons form,
+.payer_mode .boutons div {display: inline;}
+a.right {text-align: right;display: block;float: right;}
+
+</style>

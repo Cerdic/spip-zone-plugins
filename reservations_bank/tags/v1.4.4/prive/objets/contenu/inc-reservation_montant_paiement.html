@@ -1,0 +1,8 @@
+[(#ENV{montant_paye}|>{0}|oui)
+	<div class="champ contenu_montant_paye">
+		<label><:reservation_bank:montant_paye:></label>
+		<span>[(#ENV{montant_paye}|appliquer_filtre{prix_formater})]</span>
+	</div>
+]
+
+<INCLURE{fond=inclure/lien_paiement,env} />

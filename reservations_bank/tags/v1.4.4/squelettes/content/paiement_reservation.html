@@ -1,0 +1,19 @@
+#SET{preceder_formulaire,#CONFIG{reservation_bank/preceder_formulaire}}
+
+<h1><:reservation_bank:titre_paiement_reservation:></h1>
+
+[(#GET{preceder_formulaire}|non)
+<h2><:reservation:details_reservation:></h2>
+<div class="reponse_formulaire reponse_formulaire_ok">
+	<INCLURE{fond=inclure/reservation,id_reservation} />
+</div>
+]
+
+<INCLURE{fond=inclure/paiement_reservation,id_reservation,cacher_paiement_public=''} />
+
+[(#GET{preceder_formulaire}|oui)
+<h2><:reservation:details_reservation:></h2>
+<div class="reponse_formulaire reponse_formulaire_ok">
+	<INCLURE{fond=inclure/reservation,id_reservation} />
+</div>
+]
