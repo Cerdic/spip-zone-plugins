@@ -1,0 +1,21 @@
+<paquet
+	prefix="mathjax_latex"
+	categorie="outil"
+	version="1.0.6"
+	etat="stable"
+	logo="prive/themes/spip/images/mathjax_latex-32.png"
+	documentation="https://contrib.spip.net/4827"
+	compatibilite="[3.1.0;3.2.*]"
+>
+
+	<nom>MathJax Latex</nom>
+	<!-- Afficher des expressions mathematiques -->
+
+	<auteur lien="https://www.mathjax.org/">MathJax</auteur>
+	<auteur lien="https://www.erational.org">erational</auteur>
+	<auteur lien="https://contrib.spip.net/yohannp">Yohann</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+
+	<pipeline nom="insert_head" inclure="mathjax_latex_pipelines.php" />
+	<pipeline nom="header_prive" inclure="mathjax_latex_pipelines.php" />
+</paquet>
