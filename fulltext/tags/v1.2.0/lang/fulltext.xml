@@ -1,0 +1,59 @@
+<traduction
+	module="fulltext"
+	id="fulltext--fulltext-f6999"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip-contrib-extensions/fulltext.git"
+	reference="fr">
+	<langue code="ar" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=ar" total="92" traduits="92" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
+	</langue>
+	<langue code="ast" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=ast" total="92" traduits="35" relire="0" modifs="20" nouveaux="37" pourcent="38.04">
+		<traducteur nom="Xuacu" lien="https://trad.spip.net/auteur/xuacu" />
+	</langue>
+	<langue code="ca" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=ca" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65" />
+	<langue code="cs" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=cs" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65" />
+	<langue code="da" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=da" total="92" traduits="27" relire="0" modifs="20" nouveaux="45" pourcent="29.35" />
+	<langue code="de" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=de" total="92" traduits="43" relire="0" modifs="20" nouveaux="29" pourcent="46.74">
+		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
+	</langue>
+	<langue code="el" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=el" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65" />
+	<langue code="en" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=en" total="92" traduits="92" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
+		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
+		<traducteur nom="Pierre KUHN" lien="https://trad.spip.net/auteur/pierre-kuhn" />
+	</langue>
+	<langue code="es" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=es" total="92" traduits="92" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Pierre KUHN" lien="https://trad.spip.net/auteur/pierre-kuhn" />
+		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
+	</langue>
+	<langue code="et" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=et" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65" />
+	<langue code="fa" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=fa" total="92" traduits="89" relire="0" modifs="3" nouveaux="0" pourcent="96.74">
+		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
+	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=fr" total="92" traduits="92" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=fr_tu" total="92" traduits="92" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Cerf" lien="https://trad.spip.net/auteur/cerf" />
+		<traducteur nom="Pierre KUHN" lien="https://trad.spip.net/auteur/pierre-kuhn" />
+	</langue>
+	<langue code="id" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=id" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65" />
+	<langue code="it" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=it" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65" />
+	<langue code="lv" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=lv" total="92" traduits="40" relire="0" modifs="20" nouveaux="32" pourcent="43.48" />
+	<langue code="nl" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=nl" total="92" traduits="92" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
+	</langue>
+	<langue code="no" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=no" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65" />
+	<langue code="oc_ni_mis" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=oc_ni_mis" total="92" traduits="92" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="sylvain" lien="https://trad.spip.net/auteur/sylvain" />
+	</langue>
+	<langue code="pl" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=pl" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65" />
+	<langue code="pt" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=pt" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65" />
+	<langue code="ro" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=ro" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65" />
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=sk" total="92" traduits="92" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
+	</langue>
+	<langue code="tr" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=tr" total="92" traduits="30" relire="0" modifs="20" nouveaux="42" pourcent="32.61" />
+	<langue code="uk" url="https://trad.spip.net/tradlang_module/fulltext?lang_cible=uk" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65">
+		<traducteur nom="olly" lien="https://trad.spip.net/auteur/olly" />
+	</langue>
+</traduction>

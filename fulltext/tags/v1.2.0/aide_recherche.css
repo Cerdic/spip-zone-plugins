@@ -1,0 +1,31 @@
+#aide_recherche .txt {
+	width:200px;
+	height:1.5em;
+	font-size:.9em;
+	border:1px solid #cdcdcd; 
+	background-color:#dedede;
+	padding-left:10px;
+}
+#aide_recherche table {
+	background-color:#ffffff;
+	font-family:Arial,Verdana,Helvetica,sans-serif;
+	color:#555555;
+	border-collapse:collapse;
+	border:1px solid #555555;
+	empty-cells:show;
+	margin:5px;
+}
+#aide_recherche thead {
+	font-weight:bold;
+}
+#aide_recherche thead .soustitre{
+	text-align:center;
+}
+#aide_recherche th, #aide_recherche td {
+	border-collapse:collapse;
+	padding:5px;
+	width:300px;
+}
+#aide_recherche td {
+	width:450px;
+}
