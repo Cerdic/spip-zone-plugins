@@ -1,0 +1,18 @@
+<paquet
+	prefix="ncore"
+	categorie="outil"
+	version="0.10.0"
+	etat="test"
+	compatibilite="[3.2.0;3.2.*]"
+	logo="ncore_logo-32.png"
+>
+	<nom>N-Core</nom>
+	<!-- Un coeur fondant aux noisettes -->
+
+	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<necessite nom="yaml" compatibilite="[2.0.7;[" />
+	<necessite nom="ezcache" compatibilite="[0.6.0;[" />
+</paquet>

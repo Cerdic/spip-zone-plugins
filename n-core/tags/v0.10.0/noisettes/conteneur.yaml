@@ -1,0 +1,31 @@
+nom: '<:ncore:type_noisette_conteneur_titre:>'
+description: '<:ncore:type_noisette_conteneur_description:>'
+icon: 'conteneur-24.png'
+conteneur: 'oui'
+# Paramètre valorisé à titre indicatif : l'environnement est toujours fourni quelque soit la valeur configurée.
+contexte: 'env'
+ajax: 'non'
+# Paramètre valorisé à titre indicatif : l'inclusion d'un conteneur est toujours statique quelque soit la valeur configurée.
+inclusion: 'statique'
+parametres:
+  -
+    saisie: 'selection'
+    options:
+      nom: 'conteneur_balise'
+      label: '<:ncore:saisie_conteneur_balise_label:>'
+      defaut: 'div'
+      cacher_option_intro: 'oui'
+      datas:
+        div: 'div'
+        section: 'section'
+        article: 'article'
+        aside: 'aside'
+        nav: 'nav'
+        p: 'p'
+  -
+    saisie: 'input'
+    options:
+      nom: 'conteneur_css'
+      label: '<:ncore:saisie_conteneur_css_label:>'
+    verifier:
+      type: 'attribut_class'

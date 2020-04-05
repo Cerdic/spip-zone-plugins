@@ -1,0 +1,116 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "title": "Type de noisette N-Core",
+  "description": "Règles de validation du fichier YAML de description d'une noisette",
+  "definitions": {
+    "texte_ou_item": {
+      "anyOf": [
+        {
+          "item_langue": {
+            "type": "string",
+            "pattern": "^<:(?:([a-z0-9_]+):)?([a-z0-9_]+):>$"
+          }
+        },
+        {
+          "texte_libre": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "parametre_saisie": {
+      "saisie": {
+        "type": "string"
+      },
+      "options": {
+        "type": "object",
+        "properties": {
+          "nom": "string",
+          "label": {
+            "$ref": "#/definitions/texte_ou_item"
+          }
+        },
+        "required": ["nom"]
+      },
+      "verifier": {
+        "type": "object",
+        "properties": {
+          "type": "string"
+        }
+      },
+      "required": ["saisie", "options"]
+    }
+  },
+  "type": "object",
+  "required": [
+    "nom"
+  ],
+  "properties": {
+    "nom": {
+      "$ref": "#/definitions/texte_ou_item"
+    },
+    "description": {
+      "$ref": "#/definitions/texte_ou_item"
+    },
+    "icon": {
+      "type": "string",
+      "pattern": "^[a-z0-9_-]+.(png|jpg|jpeg|gif)$"
+    },
+    "conteneur": {
+      "type": "string",
+      "enum": [
+        "oui",
+        "non"
+      ],
+      "defaut": "non"
+    },
+    "contexte": {
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": [
+            "aucun",
+            "env"
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ],
+      "defaut": "env"
+    },
+    "ajax": {
+      "type": "string",
+      "enum": [
+        "defaut",
+        "oui",
+        "non"
+      ],
+      "defaut": "defaut"
+    },
+    "inclusion": {
+      "type": "string",
+      "enum": [
+        "defaut",
+        "statique",
+        "dynamique"
+      ],
+      "defaut": "statique"
+    },
+    "necessite": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "parametres":{
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/parametre_saisie"
+      }
+    }
+  }
+}

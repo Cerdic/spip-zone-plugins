@@ -1,0 +1,20 @@
+[(#REM) <!--  CONTENEUR_COMPILER
+
+	Compile les noisettes d'un conteneur fourni en paramètre de l'inclusion.
+	Cette inclusion est utilisée pour compiler récursivement une noisette conteneur.
+	Elle peut être surchargée pour s'adapter au mieux au stockage du plugin utilisateur.
+
+	@api
+
+    @param string plugin
+           Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
+           un script. Pour un plugin, le plus pertinent est d'utiliser le préfixe.
+	@param string  id_conteneur
+	       Identifiant du conteneur.
+	@param string stockage
+           Identifiant du service de stockage à utiliser si précisé.
+-->]
+#SET{noisettes, #NOISETTE_REPERTORIER{#ENV{plugin}, #ENV{id_conteneur}, #ENV{stockage}}}
+<BOUCLE_noisettes_conteneur(DATA) {source table, #ENV{noisettes, #ARRAY}}{plugin}{par rang_noisette}>
+	[(#NOISETTE_COMPILER{#VALEUR{id_noisette}, #ENV{stockage, ''}})]
+</BOUCLE_noisettes_conteneur>
