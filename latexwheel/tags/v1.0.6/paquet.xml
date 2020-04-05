@@ -1,0 +1,15 @@
+<paquet
+	prefix="latexwheel"
+	categorie="edition"
+	version="1.0.6"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="spiplatex.png"
+	documentation="https://contrib.spip.net/Livre-avec-SPIP"
+	etat="test"
+>
+	<nom>LaTeXWheel</nom>
+	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
+	<necessite nom="tw" compatibilite="[0.8.11;[" />
+	<utilise nom="zippeur" compatibilite="[2.0.0;[" />
+</paquet>
