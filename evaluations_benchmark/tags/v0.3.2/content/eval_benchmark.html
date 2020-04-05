@@ -1,0 +1,86 @@
+<iframe name='eval_benchmark' id='eval_benchmark' src='#ENV{url}'
+ style='position:absolute; top:0px; left:0px; width:100%; height:100%;
+        z-index:0' frameborder='no'>
+</iframe>
+
+
+<div id="evaluation_notation">
+	[<div id="evaluation_retour" title="<:eval_benchmark:bouton_sortie|attribut_html:>">
+		<a href="(#ENV{retour})">
+			[(#CHEMIN{img/sortie_noir-24.png}|balise_img{<:eval_benchmark:bouton_sortie:>})]
+		</a>
+	</div>]
+
+<BOUCLE_s(SITES){id_syndic}>
+#SET{id_evaluation,''}
+[(#REM) retrouver l'évaluation à appliquer ]
+<BOUCLE_e(EVALUATIONS){id_rubrique}>
+	#SET{id_evaluation,#ID_EVALUATION}
+</BOUCLE_e>
+[(#GET{id_evaluation}|oui)
+	<div class='ajax'>#FORMULAIRE_EVALUATION{#GET{id_evaluation}}</div>
+]
+[(#GET{id_evaluation}|non)
+	<p class='error'>Vous n'avez pas lié d'évaluation à la rubrique !</p>
+]
+</BOUCLE_s>
+</div>
+
+
+<style type='text/css'>
+#evaluation_notation {
+	position:absolute;
+	right: 30px;
+	top: 10px;
+	width: 390px;
+	padding: 5px;
+	border-radius:5px;
+	background-color: #888;
+	z-index:10000;
+	box-shadow:0px 0px 10px #fff, 0px 0px 10px #fff, 0px 0px 10px #fff;
+}
+#evaluation_notation form {
+	padding: 0 10px 0 0;
+	overflow:auto;
+	height: 300px;
+}
+#evaluation_notation .handle {
+	cursor:move;
+}
+#evaluation_notation form textarea {
+	width: 95%;
+}
+
+
+/* bouton de retour */
+#evaluation_retour {
+	position: absolute;
+	right: 25px;
+	top: 20px;
+	z-index: 1000;
+}
+
+/* repasser dessus bootstrap */
+#evaluation_notation .formulaire_spip .editer {
+	padding: .5em 0;
+	margin:0;
+}
+#evaluation_notation .formulaire_spip .boutons {
+	margin: 0 0 -1.42857em;
+}
+#evaluation_notation .formulaire_spip {
+	margin-bottom:0;
+	border-radius:5px;
+}
+</style>
+
+<script type='text/javascript'>
+(function($){
+$(document).ready(function(){
+	$('#evaluation_notation').draggable({
+		handle: ".formulaire_spip>h3" /* icone déplacement sur le titre */
+		/* cancel: "ul" *//* pas de déplacement dans le ul du formulaire */
+	}).find(".formulaire_spip>h3").addClass('handle');
+});
+})(jQuery);
+</script>
