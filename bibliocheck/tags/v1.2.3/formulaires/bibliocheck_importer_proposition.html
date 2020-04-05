@@ -1,0 +1,29 @@
+<BOUCLE_ticket(TICKETS){id_ticket}>
+[(#ID_ZITEM|non|et{#ZITEM_JSON}|oui)
+<div class="formulaire_spip formulaire_editer formulaire_bibliocheck_importer_proposition">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<p><strong><:bibliocheck:proposition:></strong></p>
+	[(#ZITEM_JSON|zotspip_calculer_zitem_details)]
+	[(#REM) Désactivé car ne fonctionne plus
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:bibliocheck:importer_dans_zotero:>' />
+		</p>
+	</div></form>
+	]
+</div>
+<p />]
+
+[(#ID_ZITEM||oui)
+[<div class="formulaire_spip formulaire_editer formulaire_bibliocheck_importer_proposition">
+	<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>
+</div>]
+#BOITE_OUVRIR{'','simple','section'}
+	<strong class="caption"><:bibliocheck:reference_en_base:></a></strong>
+	<p><ul>#INCLURE{fond=inclure/zitem,id_zitem=#ID_ZITEM,liste=oui,details=complet,icones=oui,liens=oui,csl=#CONFIG{bibliocheck/csl}}</ul></p>
+	<div style="text-align:right;"><a href="[(#ID_ZITEM|modifier_sur_zotero)]" target="_blank"><:zotspip:modifier_en_ligne:></a></div>
+#BOITE_FERMER
+]
+</BOUCLE_ticket>

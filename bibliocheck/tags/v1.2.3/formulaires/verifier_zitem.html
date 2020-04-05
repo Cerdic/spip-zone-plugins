@@ -1,0 +1,43 @@
+<div class="formulaire_spip formulaire_verifier_zitem formulaire_editer formulaire_editer_ticket formulaire_editer_ticket-#ENV{id_ticket,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok bibliocheck_info_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur bibliocheck_info_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{message_ok}|non)
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='titre' value='<:bibliocheck:corriger_reference{id=#ENV{id_zitem}}:>' />
+		<input type='hidden' name='java' value=''/>
+		<ul>
+			[(#SAISIE{textarea, texte,
+				label=<:bibliocheck:champ_description_correction:>,
+				explication=<:bibliocheck:explication_description_correction:>,
+				obligatoire=oui,
+				class=inserer_barre_forum,
+				rows=10})]
+			[(#SAISIE{input, exemple,
+				label=<:bibliocheck:champ_lien:>,
+				explication=<:bibliocheck:explication_lien:>})]
+			[(#CONFIG{tickets/general/joindre_fichiers}|=={on}|et{#PLUGIN{medias}}|oui)
+				[(#SAISIE{input, ajouter_document,
+					type=file,
+					label=<:tickets:champ_fichier:>,
+					explication=#VAL{bibliocheck:explication_fichier}|_T{#ARRAY{formats,#CONFIG{tickets/general/formats_documents_ticket}}}})]
+			]
+			[(#CONFIG{bibliocheck/email}|oui)
+				<li>
+					<label><:bibliocheck:probleme_question:></label>
+					<div><:bibliocheck:envoyer_email{email=#CONFIG{bibliocheck/email}}:></div>
+				</li>
+			]
+		</ul>
+		<!--extra-->
+		<p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>]
+</div>
+<script type="text/javascript">// <![CDATA[
+	$(document).ready(function(){
+		$('input[name=java]').val('oui');
+	});
+//]]></script>
+#FILTRE{mailcrypt}

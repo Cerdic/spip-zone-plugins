@@ -1,0 +1,61 @@
+<div class="formulaire_spip formulaire_ajouter_zitem">
+	[<p class="reponse_formulaire reponse_formulaire_ok bibliocheck_info_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur bibliocheck_info_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{message_ok}|non)
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='titre' value='<:bibliocheck:ajouter_reference:>' />
+		<input type='hidden' name='java' value=''/>
+		<h3 class="h3"><:bibliocheck:proposer_nouvelle_reference:></h3>
+		<div class="explication">
+			[(#CONFIG{bibliocheck/explication_personnalisee_ajouter_reference}|oui)
+				[(#CONFIG{bibliocheck/explication_personnalisee_ajouter_reference}|propre)]
+			]
+			[(#CONFIG{bibliocheck/explication_personnalisee_ajouter_reference}|non)
+				<:bibliocheck:explication_ajouter_reference:><br />
+				[(#CONFIG{tickets/general/joindre_fichiers}|=={on}|et{#PLUGIN{medias}}|oui)<:bibliocheck:explication_ajouter_reference_docs:><br />]
+				<:bibliocheck:explication_ajouter_reference_une_a_une:>
+			]
+		</div>
+		<ul>
+		[(#REM) Désactivé car non fonctionnel
+			[(#SAISIE{textarea, texte,
+				label=<:tickets:champ_description:>,
+				class=inserer_barre_forum,
+				rows=10})]
+			[(#SAISIE{input, exemple,
+				label=<:bibliocheck:champ_lien:>,
+				explication=<:bibliocheck:explication_lien:>})]
+			<li class="fieldset"><fieldset>
+				<legend>Saisir les détails de la référence</legend>
+				<ul>
+				#INCLURE{fond=inclure/inc-form_item_zotero,env}
+				</ul>
+			</fieldset></li>
+			
+			[(#CONFIG{tickets/general/joindre_fichiers}|=={on}|et{#PLUGIN{medias}}|oui)
+				[(#SAISIE{input, ajouter_document,
+					type=file,
+					label=<:tickets:champ_fichier:>,
+					explication=#VAL{bibliocheck:explication_fichier}|_T{#ARRAY{formats,#CONFIG{tickets/general/formats_documents_ticket}}}})]
+			]
+			[(#CONFIG{bibliocheck/email}|oui)
+				<li>
+					<label><:bibliocheck:probleme_question:></label>
+					<div><:bibliocheck:envoyer_email{email=#CONFIG{bibliocheck/email}}:></div>
+				</li>
+			]
+		</ul>
+		<!--extra-->
+		<p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+		]
+	</div></form>]
+</div>
+<script type="text/javascript">// <![CDATA[
+	$(document).ready(function(){
+		$('input[name=java]').val('oui');
+	});
+//]]></script>
+#FILTRE{mailcrypt}

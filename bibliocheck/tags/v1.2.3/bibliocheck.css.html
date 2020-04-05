@@ -1,0 +1,71 @@
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css}
+
+.bibliocheck .verifier_zitem {
+	padding: 10px;
+	border: 1px solid #CCC;
+	margin-bottom: 10px;
+}
+
+.bibliocheck_bouton {
+	float:right;
+	text-align: center;
+	width: 100px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+.bibliocheck_bouton img {
+	border: solid 2px;
+	padding: 4px;
+}
+
+.bibliocheck_bouton a:hover img {
+	border-color: #666;
+}
+
+div.bibliocheck_info_ok, div.bibliocheck_info_erreur, div.bibliocheck_info_notice {
+	border:2px solid;
+	color:#333;
+	font-weight:normal;
+	padding:5px;
+	padding-left:40px;
+	min-height:24px;
+	margin-bottom:5px;
+}
+div.bibliocheck_info_ok{
+	border-color:#53AD20;
+	background:#E0FFCF url("#CHEMIN_IMAGE{ok-24.png}") no-repeat 5px 5px;
+}
+div.bibliocheck_info_erreur{
+	border-color:#C30;
+	background:#FFD0BF url("#CHEMIN_IMAGE{erreur-24.png}") no-repeat 5px 5px;
+}
+div.bibliocheck_info_notice {
+	border-color: #FFD324;
+	background:#FFF6BF url("#CHEMIN_IMAGE{warning-24.png}") no-repeat 5px 5px;
+}
+
+div.formulaire_verifier_zitem input.text {width: 100%;}
+
+div.bibliocheck_date {text-align: right;}
+
+div.bibliocheck_texte p {margin: 5px 0;} 
+
+div.aeres_info {
+	background: url("#CHEMIN{img_pack/message_notice-24.png}") no-repeat;
+	padding-left:40px;
+	padding-height: 5px;
+	min-height:24px;
+}
+
+div.bibliocheck_ticket {margin-bottom: 10px;}
+
+div.bibliocheck_comment {
+	margin-bottom: 10px;
+	border-top: 1px dashed #CCC;
+	padding-top: 5px;
+}
+
+.bibliocheck fieldset.tickets_formulaire_forum {display: none;}
+
+.bibliocheck_ticket .zitem_details {font-size: 90%;}

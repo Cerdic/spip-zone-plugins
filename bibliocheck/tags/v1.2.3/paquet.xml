@@ -1,0 +1,30 @@
+<paquet
+	prefix="bibliocheck"
+	categorie="edition"
+	version="1.2.3"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/bibliocheck-32.png"
+	schema="0.1.0"
+	documentation="https://contrib.spip.net/4310"
+>
+
+	<nom>Biblio Check</nom>
+	<!-- Vérifiez votre base bibliographique Zotero -->
+
+	<auteur lien="https://contrib.spip.net/Joseph">Joseph Larmarange</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_principales" inclure="base/bibliocheck.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/bibliocheck.php" />
+	<pipeline nom="ieconfig_metas" inclure="bibliocheck_ieconfig.php" />
+	<pipeline nom="affiche_milieu" inclure="bibliocheck_pipelines.php" />
+	<pipeline nom="affiche_droite" inclure="bibliocheck_pipelines.php" />
+	<pipeline nom="autoriser" inclure="bibliocheck_pipelines.php"/>
+
+	<necessite nom="zotspip" compatibilite="[2.0.0;]" />
+	<necessite nom="tickets" compatibilite="[4.0.0;[" />
+	<necessite nom="medias" compatibilite="[2.7.27;]" />
+	<necessite nom="forum" compatibilite="[1.8.12;]" />
+</paquet>

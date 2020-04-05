@@ -1,0 +1,69 @@
+#CACHE{0}
+[(#REM) Fil d'Ariane ]
+[(#ENV{masquer_fil}|non)
+	<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{biblio}"><:zotspip:titre_page_biblio:></a> &gt; <strong class="on"><:bibliocheck:verifier_biblio:></strong></p>
+]
+	
+#SET{selection,#ARRAY{}}
+[(#ENV{auteur}|oui)#SET{selection,#GET{selection}|push{#ENV{auteur}}}]
+[(#ENV{annee}|oui)#SET{selection,#GET{selection}|push{#ENV{annee}}}]
+[(#ENV{recherche}|oui)#SET{selection,#GET{selection}|push{#ENV{recherche}}}]
+[(#ENV{type_ref}|oui)#SET{selection,#GET{selection}|push{#ENV{type_ref}|zotspip_traduire_type}}]
+[(#ENV{tag}|oui)#SET{selection,#GET{selection}|push{#ENV{tag}}}]
+[(#ENV{zcollection}|oui)#SET{selection,#GET{selection}|push{#ENV{zcollection}}}]
+
+<div class="contenu-principal">
+	<div class="cartouche">
+		<h1 class="h1"><:bibliocheck:verifier_biblio:></h1>
+		[<p class="soustitre">(#GET{selection}|implode{', '}).</p>]
+	</div>
+</div>
+
+<BOUCLE_si_autorise(CONDITION){si #AUTORISER{verifier,biblio}}>
+
+[(#SET{defaut_tri,#ARRAY{
+	auteurs,1,
+	annee,-1,
+	type_ref,1,
+}})]
+
+<BOUCLE_test_tri(CONDITION){si #ENV{tri}|=={type_ref}}>
+	<B_biblio_type>
+	#ANCRE_PAGINATION
+	<div class="liste bibliocheck">
+	<BOUCLE_biblio_type(ZITEMS spip_zitems_zcollections spip_zcollections){id_parent==0}{auteur?}{type_ref?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{spip_zcollections.zcollection?}{json LIKE %#ENV{recherche}%}{zotsip_depuis}{0,#ENV{max,100000}}{par_type_zotero}{pagination 50}>
+		[<h3 class="h3">(#TYPE_REF|unique|zotspip_traduire_type)</h3>]
+		<INCLURE{fond=inclure/verifier_zitem,id_zitem=#ID_ZITEM,env,ajax=ref#ID_ZITEM}>
+	</BOUCLE_biblio_type>
+	</div>
+	[<p class="pagination">(#PAGINATION)</p>]
+	</B_biblio_type>
+	<:zotspip:aucune_reference:>
+	<//B_biblio_type>
+</BOUCLE_test_tri>
+	<B_biblio>
+	#ANCRE_PAGINATION
+	<div class="liste bibliocheck">
+	<BOUCLE_biblio(ZITEMS spip_zitems_zcollections spip_zcollections){id_parent==0}{auteur?}{type_ref?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{spip_zcollections.zcollection?}{json LIKE %#ENV{recherche}%}{zotsip_depuis}{0,#ENV{max,100000}}{tri #ENV{tri,annee},#GET{defaut_tri}}{pagination 50}>
+		[(#ENV{tri,annee}|=={annee}|oui)[<h3 class="h3">(#ANNEE|unique)</h3>]]
+		[(#ENV{tri,annee}|=={auteurs}|oui)[<h3 class="h3">(#AUTEURS|unique)</h3>]]
+		<INCLURE{fond=inclure/verifier_zitem,id_zitem=#ID_ZITEM,env,ajax=ref#ID_ZITEM}>
+	</BOUCLE_biblio>
+	</div>
+	[<p class="pagination">(#PAGINATION)</p>]
+	</B_biblio>
+	<:zotspip:aucune_reference:>
+	<//B_biblio>
+<//B_test_tri>
+
+<INCLURE{fond=inclure/ajouter_zitems,env,ajax=ajouter_zitems}>
+
+</BOUCLE_si_autorise>
+
+[(#SESSION|non)
+<p><:bibliocheck:connexion_requise:></p>
+#LOGIN_PUBLIC
+]
+[(#SESSION|oui)<p><:bibliocheck:droits_insuffisants:></p>]
+
+<//B_si_autorise>

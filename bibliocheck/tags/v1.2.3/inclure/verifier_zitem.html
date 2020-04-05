@@ -1,0 +1,82 @@
+<BOUCLE_ref(ZITEMS){id_zitem}>
+<div class="verifier_zitem" id="verifier_zitem_#ID_ZITEM">
+	#INCLURE{fond=inclure/zitem,id_zitem,csl,icones=oui,details=complet,export=oui,liens=oui,souligne=#ENV{auteur}}
+	[(#REM) Faire les vérifications ici]
+	[(#TYPE_REF|in_array{#ARRAY{0,attachment,1,note}}|non|et{#TITRE|non}|oui)
+		<div class="bibliocheck_info_erreur"><:bibliocheck:erreur_titre:></div>]
+	[(#TYPE_REF|in_array{#ARRAY{0,journalArticle,1,magazineArticle,2,bookSection}}|et{#PAGES|non}|oui)
+		<div class="bibliocheck_info_erreur"><:bibliocheck:erreur_pages_debut_fin2:></div>]
+	[(#TYPE_REF|in_array{#ARRAY{0,book,1,report,2,thesis,3,manuscript}}|et{#PAGES|non}|oui)
+		<div class="bibliocheck_info_erreur"><:bibliocheck:erreur_nb_pages:></div>]
+	[(#TYPE_REF|=={conferencePaper}|et{#PUBLICATION}|et{#PAGES|non}|oui)
+		<div class="bibliocheck_info_erreur"><:bibliocheck:erreur_pages_debut_fin:></div>]
+	[(#TYPE_REF|in_array{#ARRAY{0,book,1,bookSection}}|oui|et{#EDITEUR|non}|oui)
+		<div class="bibliocheck_info_erreur"><:bibliocheck:erreur_maison_edition:></div>]
+	[(#TYPE_REF|in_array{#ARRAY{0,journalArticle,1,magazineArticle}}|oui|et{#PUBLICATION|non}|oui)
+		<div class="bibliocheck_info_erreur"><:bibliocheck:erreur_revue:></div>]
+	[(#TYPE_REF|=={bookSection}|et{#PUBLICATION|non}|oui)
+		<div class="bibliocheck_info_erreur"><:bibliocheck:erreur_nom_ouvrage:></div>]
+	[(#TYPE_REF|=={conferencePaper}|et{#PUBLICATION|non}|et{#CONFERENCE|non}|oui)
+		<div class="bibliocheck_info_erreur"><:bibliocheck:erreur_conference:></div>]
+	[(#TYPE_REF|=={report}|et{#TYPE_DOC|non}|oui)
+		<div class="bibliocheck_info_erreur"><:bibliocheck:erreur_type_rapport:></div>]
+	<BOUCLE_test_chapitre(CONDITION){si #TYPE|=={bookSection}}>
+		<BOUCLE_nb_aut_livre(ZCREATORS){id_zitem}{role IN editor,bookAuthor} />[(#TOTAL_BOUCLE|non)<div class="bibliocheck_info_erreur"><:bibliocheck:erreur_editeurs_ouvrage:></div>]<//B_nb_aut_livre>
+	</BOUCLE_test_chapitre>
+
+	<BOUCLE_test_ticket(TICKETS){id_zitem}{statut=ouvert}>
+	<div class="bibliocheck_info_notice">
+		<div class="bibliocheck_ticket">
+			<div class="bibliocheck_date"><:tickets:ticket:> #ID_TICKET, [(#DATE|affdate)] ([(#DATE|heures)]:[(#DATE|minutes)]) [<:par_auteur:> (#INFO_NOM{auteur,#ID_AUTEUR})]</div>
+			<div class="bibliocheck_texte">#TEXTE</div>
+			[<div class="bibliocheck_exemple"><strong><:bibliocheck:lien:></strong> <a href="#EXEMPLE">(#EXEMPLE|couper{80})</a></div>]
+			<BOUCLE_doc_ticket(DOCUMENTS){id_ticket}{tout}><div class="bibliocheck_doc"><strong><:bibliocheck:fichier_joint:></strong> <a href="#URL_DOCUMENT">[(#FICHIER|basename)]</a> (#TYPE_DOCUMENT [(#TAILLE|taille_en_octets)])</div></BOUCLE_doc_ticket>
+		</div>
+		<BOUCLE_commentaires(FORUMS){objet=ticket}{id_objet=#ID_TICKET}{par date}{tout}>
+		<div class="bibliocheck_comment" id="forum#ID_FORUM">
+			<div class="bibliocheck_date">[(#DATE|affdate)] ([(#DATE|heures)]:[(#DATE|minutes)]) [<:par_auteur:> (#INFO_NOM{auteur,#ID_AUTEUR})]</div>
+			<div class="bibliocheck_texte">#TEXTE</div>
+			[<div class="bibliocheck_exemple"><strong><:bibliocheck:lien:></strong> <a href="#URL_SITE">(#NOM_SITE|sinon{#URL_SITE}|couper{80})</a></div>]
+			<BOUCLE_doc_forum(DOCUMENTS){id_forum}{tout}><div class="bibliocheck_doc"><strong><:bibliocheck:fichier_joint:></strong> <a href="#URL_DOCUMENT">[(#FICHIER|basename)]</a> (#TYPE_DOCUMENT [(#TAILLE|taille_en_octets)])</div></BOUCLE_doc_forum>
+		</div>
+		</BOUCLE_commentaires>
+
+		<div class="bibliocheck_bouton" id="bouton_commenter_#ID_TICKET" style="display:none;">
+			<a href="javascript:void(0);" onclick="$('#commenter_#ID_TICKET').toggle(400);" title="<:bibliocheck:corriger:>">
+				[(#CHEMIN_IMAGE{forum-add-24.png}|balise_img|inserer_attribut{alt,<:bibliocheck:ajouter_commentaire:>})]<br />
+				<:bibliocheck:ajouter_commentaire:>
+			</a>
+		</div>
+		<br style="clear:both;" />
+		<div id="commenter_#ID_TICKET" class="ajax">#FORMULAIRE_FORUM{#SELF}</div>
+		<script type="text/javascript">// <![CDATA[
+			$(document).ready(function(){
+				$('#bouton_commenter_#ID_TICKET').show();
+				$('#commenter_#ID_TICKET').hide();
+			});
+		//]]></script>
+	</div>
+	</BOUCLE_test_ticket>
+	
+	<div class="bibliocheck_bouton" id="bouton_verifier_#ID_ZITEM" style="display:none;">
+		<a href="javascript:void(0);" onclick="$('#verifier_#ID_ZITEM').toggle(400);" title="<:bibliocheck:corriger:>">
+			[(#CHEMIN_IMAGE{bibliocheck-24.png}|balise_img|inserer_attribut{alt,<:bibliocheck:corriger:>})]<br />
+			<:bibliocheck:corriger:>
+		</a>
+	</div>
+	<br style="clear:both;" />
+	#SET{redirect,#SELF#verifier_zitem_#ID_ZITEM}
+	#SET{redirectjava,javascript:if (window.jQuery) ajaxReload("ref#ID_ZITEM");}
+	<div id="verifier_#ID_ZITEM" class="ajax">#FORMULAIRE_VERIFIER_ZITEM{#ID_ZITEM,#ENV{auteur},#GET{redirect},#GET{redirectjava}}</div>
+
+	<script type="text/javascript">// <![CDATA[
+		$(document).ready(function(){
+			$('#bouton_verifier_#ID_ZITEM').show();
+			$('#verifier_#ID_ZITEM').hide();
+		});
+	//]]></script>
+
+	<//B_test_ticket>
+	<div style="text-align:right;"><:zotspip:reference_num:> #ID_ZITEM</div>
+</div>
+</BOUCLE_ref>
