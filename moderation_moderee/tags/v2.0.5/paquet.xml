@@ -1,0 +1,23 @@
+<paquet
+	prefix="moderation"
+	categorie="communication"
+	version="2.0.5"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/moderation.png"
+	documentation="https://contrib.spip.net/Moderation-Moderee"
+	schema="1.0.0"
+>
+
+	<nom>Mod&#233;ration Mod&#233;r&#233;e</nom>
+	<!-- Amélioration de la modération -->
+
+	<auteur>Yohann</auteur>
+	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
+
+	<pipeline nom="pre_edition" inclure="moderation_pipelines.php" />
+
+	<menu nom="configurer_moderation" titre="moderation:titre" parent="menu_configuration" icone="images/moderation-16.png" />
+	<necessite nom="forum" />
+	<necessite nom="saisies" compatibilite="[3.23.2;[" />
+</paquet>

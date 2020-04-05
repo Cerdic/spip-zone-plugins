@@ -1,0 +1,24 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+
+<ul>
+	    <BOUCLE_choix(DATA){source table, #LISTE{'0minirezo','1comite','6forum'}}>
+          <li>
+          [(#SET{label,moderation:[(#VALEUR)]_config})]
+          [(#SAISIE{oui_non,#VALEUR,label=#GET{label}|_T})]
+          </li>
+	    </BOUCLE_choix>
+</ul>
+
+
+<p class='boutons'>
+<input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+
+</div>
+</form>
+</div>
