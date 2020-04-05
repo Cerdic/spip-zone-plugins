@@ -1,0 +1,39 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi titre,1,
+	titre,1,
+	identifiant,1,
+	id_menu,1,
+	points,-1
+}})
+]<B_liste_menus>
+#ANCRE_PAGINATION
+<div class="liste-objets menus">
+<table class="spip liste">
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{menus:info_1_menu,menus:info_nb_menus}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="titre" scope="col">[(#TRI{multi titre,<:menus:formulaire_titre:>,ajax})]</th>
+			<th class="titre" scope="col">[(#TRI{identifiant,<:menus:formulaire_identifiant:>,ajax})]</th>
+			<th class="action" scope="col"></th>
+			<th class="id" scope="col">[(#TRI{id_menu,#,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_menus(MENUS){id_menu?}{id_menus_entree?}{identifiant?}{recherche?}{where?}
+		{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} menl}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TITRE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_MENU|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class="titre principal">[(#LOGO_MENU|image_reduire{20,20})]<a href="[(#URL_ECRIRE{menu_edit,id_menu=#ID_MENU})]">#TITRE</a></td>
+			<td class="identifiant secondaire">#IDENTIFIANT</td>
+			<td class="action">
+				[(#URL_ECRIRE{menu_edit,id_menu=#ID_MENU}|icone_horizontale{<:menus:editer_menus_editer:>,menu-24,edit})]
+			</td>
+			<td class="id"><a href="[(#URL_ECRIRE{menu_edit,id_menu=#ID_MENU})]">#ID_MENU</a></td>
+		</tr>
+	</BOUCLE_liste_menus>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_menus>[
+<div class="liste-objets menus caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_menus>

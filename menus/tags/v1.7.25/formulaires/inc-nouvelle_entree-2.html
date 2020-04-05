@@ -1,0 +1,38 @@
+
+#SET{type_entree, (#ENV{type_entree})}
+#SET{infos, (#ENV{infos_#GET{type_entree}})}
+<fieldset>
+<legend class="legend">
+	[(#ENV{id_menus_entree}|non)
+		[(#GET{infos}|table_valeur{icone}|image_reduire{24})]
+	]
+	[<span style="vertical-align:middle;">(#GET{infos}|table_valeur{nom})</span>]
+</legend>
+<div class="explication">[(#GET{infos}|table_valeur{description})]</div>
+<B_parametres>
+<ul class="editer-groupe">
+	<BOUCLE_parametres(POUR){tableau #GET{infos}|table_valeur{parametres}}>
+	#SET{erreurs,(#ENV**{erreurs}|table_valeur{parametres}|table_valeur{#CLE})}
+	<li class="editer editer_texte[ (#GET{erreurs}|oui)erreur]">
+		<label for="#CLE">[(#VALEUR|table_valeur{label})] [(#VALEUR|table_valeur{obligatoire}|non)&#91;<:menus:formulaire_facultatif:>&#93;]</label>
+		[<span class='erreur_message'>(#GET{erreurs})</span>]
+		<input type="text" class="text[ (#VALEUR|table_valeur{class})]" name="parametres[#CLE]" value="[(#ENV{parametres}|table_valeur{#CLE}|sinon{#ENV{donnees}|table_valeur{#CLE}}|attribut_html)]" />
+	</li>
+	</BOUCLE_parametres>
+</ul>
+</B_parametres>
+
+<p class='boutons'>
+	<span class='image_loading'></span>
+	[(#ENV{id_menu_nouvelle_entree}|oui)
+		<input type="hidden" name="id_menu_nouvelle_entree" value="#ENV{id_menu_nouvelle_entree}" />
+		<input type="hidden" name="rang" value="#ENV{rang_suivant}" />
+	]
+	[(#ENV{id_menus_entree}|oui)
+		<input type="hidden" name="id_menus_entree" value="#ENV{id_menus_entree}" />
+	]
+	<input type="hidden" name="type_entree" value="#GET{type_entree}" />
+	<input type="submit" class="submit link" name="annuler" value="<:bouton_annuler:>" />
+	<input type="submit" class="submit" name="enregistrer" value="<:bouton_enregistrer:>" />
+</p>
+</fieldset>

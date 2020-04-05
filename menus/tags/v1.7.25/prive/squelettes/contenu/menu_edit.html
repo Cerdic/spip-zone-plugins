@@ -1,0 +1,19 @@
+
+<div class="cadre-formulaire-editer">
+	<div class="entete-formulaire">
+		[(#ENV{redirect,#URL_ECRIRE{menus}}|icone_verticale{<:retour:>,menus-24,'',left})]
+		<:menus:formulaire_modifier_menu:>
+		<h1>
+			<BOUCLE_menu(MENUS){id_menu=#VAL{id_menu}|_request}>
+			#TITRE
+			</BOUCLE_menu>
+			[(#ENV{id_menu}|=={new}|?{<:menus:formulaire_nouveau:>,#VAL{id_menu}|_request})]
+			<//B_menu>
+		</h1>
+	</div>
+	#FORMULAIRE_EDITER_MENU{#ENV{id_menu,''},#ENV{redirect},#ENV{associer_objet}}
+	[(#ENV{id_menu,0}|intval|oui)
+		<div class="ajax">#FORMULAIRE_EDITER_MENUS_ENTREE{#ENV{id_menu}}</div>
+	]
+
+</div>
