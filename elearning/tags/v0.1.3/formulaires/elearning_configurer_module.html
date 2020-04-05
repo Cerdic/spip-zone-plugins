@@ -1,0 +1,31 @@
+<!-- nom=elearning -->
+<!-- depot=tablepack -->
+<!-- colonne=extra -->
+<!-- table=spip_rubriques -->
+
+
+[(#REM)
+	Ce formulaire sert à configurer les conditions d'accès à chaque module
+	C'est-à-dire quel jeu et quel score minimum à atteindre
+]
+#CACHE{0}
+
+<form method="post" action="#SELF">
+#ACTION_FORMULAIRE{#SELF}
+
+<B_jeux>
+<label><:elearning:configuration_test:></label> 
+<select name="jeu">
+	<option value="0"><:elearning:configuration_selectionnez_test:></option>
+	<option value="0" [(#ENV{jeu}|=={0}|?{'selected="selected"'})]><:elearning:configuration_test_aucun:></option>
+	<BOUCLE_jeux(JEUX){tout}>
+	<option value="#ID_JEU" [(#ENV{jeu}|=={#ID_JEU}|?{'selected="selected"'})]>#TITRE_PRIVE</option>
+	</BOUCLE_jeux>
+</select>
+<label><:elearning:configuration_score:></label>
+<input type="text" name="score" value="#ENV{score,0}" maxlength="3" style="width:3em;" />
+</B_jeux>
+
+<input type="submit" name="_cfg_ok" value="<:oK:>" />
+
+</form>

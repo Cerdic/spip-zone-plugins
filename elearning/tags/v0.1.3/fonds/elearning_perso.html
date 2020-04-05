@@ -1,0 +1,7 @@
+<?php if (
+	($GLOBALS['visiteur_session']['id_auteur'] and $GLOBALS['visiteur_session']['id_auteur'] == '#ENV{id_auteur}')
+	or
+	($GLOBALS['visiteur_session']['statut'] and $GLOBALS['visiteur_session']['statut'] <= '1comite')
+){?>
+	<INCLURE{fond=fonds/elearning_perso_prive}{id_auteur}>
+<?php } ?>

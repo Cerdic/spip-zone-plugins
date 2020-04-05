@@ -1,0 +1,71 @@
+<!-- descriptif=
+<:elearning:configuration_description:>
+-->
+<!-- titre=<:elearning:configuration_titre:>-->
+
+
+<form method="post" action="#SELF">
+	<fieldset>
+	<legend><:elearning:configuration_rubrique_titre:></legend>
+		[(#ENV{_cfg_}|form_hidden)]
+		<div class="explication">Choisissez la rubrique qui va contenir les modules de cours.</div>
+		[(#VAL|elearning_chercher_rubrique{#CONFIG{elearning/rubrique_elearning,0}, 'rubrique_elearning'})]
+
+		<input type="submit" name="_cfg_ok" value="<:oK:>" />
+		<input type="submit" name="_cfg_delete" value="<:supprimer:>" />
+	</fieldset>
+</form>
+
+<br />
+
+<fieldset>
+	<legend><:elearning:configuration_modules_titre:></legend>
+	<BOUCLE_modules(RUBRIQUES){tous}{id_parent=#CONFIG{elearning/rubrique_elearning,10000}}{par num titre}>
+	[<h4>(#TITRE|supprimer_numero)</h4>]
+	<div class="ajax">#FORMULAIRE_ELEARNING_CONFIGURER_MODULE{#ID_RUBRIQUE}</div>
+	</BOUCLE_modules>
+	<:elearning:pas_de_modules:>
+	<//B_modules>
+</fieldset>
+
+<script type="text/javascript">
+	function elearning_champ_score(){
+	
+		$('select[name="jeu"]')
+			.each(function(){
+			
+				if (!$(this).val() || $(this).val() == 0)
+					$(this)
+						.siblings('input[name="score"]')
+							.val(0)
+							.attr('disabled', 'disabled');
+				else
+					$(this)
+						.siblings('input[name="score"]')
+							.removeAttr('disabled');
+			
+			})
+			.change(function(){
+			
+				if (!$(this).val() || $(this).val() == 0)
+					$(this)
+						.siblings('input[name="score"]')
+							.val(0)
+							.attr('disabled', 'disabled');
+				else
+					$(this)
+						.siblings('input[name="score"]')
+							.removeAttr('disabled');
+			
+			});
+	
+	}
+	
+	
+	$(function(){
+	
+		elearning_champ_score();
+		onAjaxLoad(elearning_champ_score);
+	
+	});
+</script>
