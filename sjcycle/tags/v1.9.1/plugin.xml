@@ -1,0 +1,57 @@
+<plugin>
+	<nom>jQuery Cycle</nom>
+	<slogan>Un diaporama param&#233;trable pour Spip</slogan>
+	<auteur>Yffic d'apr&#232;s la version 1 de [Minimalteck->http://www.minimalteck.fr/]</auteur>
+	<version>1.9.1</version>
+	<version_base>0.5</version_base>
+	<etat>stable</etat>
+	<description>
+		<multi>
+		[fr]Diaporama param&#233;trable pour Spip bas&#233; sur le plugin [jQuery Cycle->http://malsup.com/jquery/cycle/]. Le diaporama peut s'ins&#233;rer dans le texte de vos articles. Le plugin fournit &#233;galement des mod&#232;les permettant par exemple d'ajouter un diaporama al&#233;atoire d'images ou un diaporama des sites syndiqu&#233;s dans un squelette...
+		</multi>
+	</description>
+	<icon>images/sjcycle-32.png</icon>
+	<lien>https://contrib.spip.net/Plugin-Spip-jQuery-Cycle-pour-Spip-2-1-et-3</lien>
+	<prefix>sjcycle</prefix>
+	<install>base/sjcycle_install.php</install>
+	<fonctions>sjcycle_fonctions.php</fonctions>
+	<options>sjcycle_options.php</options>
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>sjcycle_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>sjcycle_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head</action>
+		<inclure>sjcycle_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>sjcycle_prive_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ieconfig_metas</nom>
+		<inclure>sjcycle_ieconfig_metas.php</inclure>
+	</pipeline>
+	<bouton id='sjcycle' parent='configuration'>
+		<icone>images/sjcycle-24.png</icone>
+		<titre>sjcycle:titre_menu</titre>
+		<url>configurer_sjcycle</url>
+	</bouton>
+	<bouton id='sjcycle2' parent='bando_squelette'>
+		<icone>images/sjcycle-16.png</icone>
+		<titre>sjcycle:titre_menu</titre>
+		<url>configurer_sjcycle</url>
+	</bouton>
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="saisies" version="[1.42.11;]" />
+	<necessite id="spip_bonux" version="[1.9.0;]" />
+	<necessite id="YAML" version="[1.5.2;]" />
+	<utilise id="aveline" version="[1.7.0;]" />
+	<utilise id="palette" version="[1.3.4;]" />
+	<categorie>multimedia</categorie>
+</plugin>
