@@ -1,0 +1,23 @@
+#SET{repertoire,#ARRAY}
+#SET{id_rubrique,#ENV{id_zip_chant_repertoire,#ENV{id_rubrique}}}
+#SET{cmd,#ENV{cmd,#CONFIG{zippeur/zippeur_cmd}}}
+<BOUCLE_chant(CHANTS){id_rubrique}>
+[(#SET{filename, [(#CCLI|replace{' ',''})_][(#TITRE|textebrut|replace{\W})]})]
+[(#SET{fichier,[(#VAL{chant_export.xml}|chants_creer_xml{[(#GET{filename})],#ARRAY{id_chant,#ID_CHANT}})]})]
+
+[(#SET{repertoire,#GET{repertoire}|push{#GET{fichier}}})]
+</BOUCLE_chant>
+<BOUCLE_date(CHANTS){!par maj}{id_rubrique=#GET{id_rubrique}}{0,1}>
+[(#SET{nomdoc,repertoire_#GET{id_rubrique}})]
+[(#SET{urlzip,#GET{repertoire}|zippeur{#MAJ,#GET{cmd},#GET{nomdoc}}})]
+<dl class='spip_chants'>
+	<dt>
+		<a type="application/zip" href="[(#GET{urlzip})]" title="<:zippeur:ensemble_fichier:> [(#GET{urlzip}|filesize|taille_en_octets)])">
+		<img src='[(#CHEMIN{prive/vignettes/zip.png}|sinon{#CHEMIN{vignettes/zip.png}})]' alt="<:zippeur:ensemble_fichier:> [(#GET{urlzip}|filesize|taille_en_octets)])" /></a>
+	</dt>
+	<dt class='spip_doc_titre'><strong>(<:zippeur:ensemble_fichier:> - [(#GET{urlzip}|filesize|taille_en_octets)])</strong></dt>
+</dl>
+</BOUCLE_date>
+</B_chant>
+
+

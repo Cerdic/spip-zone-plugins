@@ -1,0 +1,29 @@
+<BOUCLE_art(CHANTS){id_chant=#ENV{id}}{statut?}{!lang_select}>
+<div class='infos'>
+<div class='numero'><:chant:info_numero_chant:><p>#ID_CHANT</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{chant,#ID_CHANT})]
+
+[(#REM)
+
+	Bouton voir en ligne
+
+]
+<BOUCLE_publie(CHANTS){id_chant}>
+	[(#VAL{redirect}
+		|generer_url_action{type=chant&id=#ID_CHANT}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</BOUCLE_publie>
+	[(#AUTORISER{previsualiser,chant,#ID_CHANT,'',#ARRAY{statut,#STATUT}})
+		[(#VAL{redirect}
+			|generer_url_action{type=chant&id=#ID_CHANT}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{<:previsualiser:>,preview})]
+	]
+<//B_publie>
+[(#SET{filename, [(#CCLI|replace{' ',''})_][(#TITRE|textebrut|replace{\W})]})]
+[(#URL_PAGE{chant_export.xml}|parametre_url{'id_chant',#ID_CHANT}|parametre_url{'filename',#GET{filename}}|parametre_url{'var_mode','recalcul'}|icone_horizontale{<:chant:exporter_opensong:>,chant-exporter,chant-exporter-24,center})]
+
+</div>
+</BOUCLE_art>

@@ -1,0 +1,26 @@
+<BOUCLE_afficher_contenu(CHANTS){id_chant=#ENV{id}}{statut?}>
+<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+<div class='label'><:info_titre:></div>
+<div dir='#LANG_DIR' class='#EDIT{titre} titre'>#TITRE</div>
+</div>
+
+<div class="champ contenu_alias[ (#ALIAS*|strlen|?{'',vide})]">
+<div class='label'><:chant:texte_alias:></div>
+<div dir='#LANG_DIR' class='#EDIT{alias} alias'>#ALIAS</div>
+</div>
+
+<div class="champ contenu_copyright[ (#COPYRIGHT*|strlen|?{'',vide})]">
+<div class='label'><:chant:texte_copyright:></div>
+<div dir='#LANG_DIR' class='#EDIT{copyright} copyright'>#COPYRIGHT</div>
+</div>
+
+<div class="champ contenu_ligne_principale[ (#LIGNE_PRINCIPALE*|strlen|?{'',vide})]">
+<div class='label'><:chant:texte_ligne_principale:></div>
+<div dir='#LANG_DIR' class='#EDIT{ligne_principale} ligne_principale'>#LIGNE_PRINCIPALE</div>
+</div>
+
+<div class="champ contenu_paroles[ (#PAROLES*|strlen|?{'',vide})]">
+<div class='label'><:chant:info_paroles:></div>
+<div dir='#LANG_DIR' class='#EDIT{paroles} paroles'>[(#PAROLES|image_reduire{500,0})]</div>
+</div>
+</BOUCLE_afficher_contenu>

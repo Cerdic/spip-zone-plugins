@@ -1,0 +1,31 @@
+<paquet
+	prefix="chants"
+	categorie="edition"
+	version="0.9.0"
+	etat="test"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/chant-128.png"
+	schema="0.7.6"
+	documentation="https://contrib.spip.net/Plugin-Chants"
+>
+	<nom>Chants</nom>
+	<!-- Gestion des chants dans SPIP sur la base d'OpenSong -->
+	<auteur lien="http://www.teddypayet.com/">Teddy Payet</auteur>
+	<licence>GNU/GPL</licence>
+	<credit lien="http://thenounproject.com/noun/music/#icon-No928">The NounProject</credit>
+
+	<!-- Les pipelines ici pour un peu d'ordre -->   
+	<pipeline nom="declarer_tables_interfaces" inclure="base/chants.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/chants.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/chants.php" />
+	<pipeline nom="affiche_enfants" inclure="chants_pipelines.php" />
+	<pipeline nom="autoriser" inclure="chants_autoriser.php" />
+
+	<!-- facilitons les champs de formulaires -->
+	<necessite nom="saisies" compatibilite="[1.42.11;]" />
+	<necessite nom="zippeur" compatibilite="[1.5.0;]" />
+
+	<!-- Les menus -->
+	<menu nom="chants" titre="chant:titre_chants" parent="menu_edition" icone="images/chant-16.png" />
+	<menu nom="chant_creer" titre="chant:icone_creer_chant" parent="outils_rapides" icone="images/chant-new-16.png" action="chant_edit" parametres="new=oui" />
+</paquet>

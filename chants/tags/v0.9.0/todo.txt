@@ -1,0 +1,3 @@
+Les tâches à réaliser :
+- ajouter un squelette par défaut si pas de présence du plugin Z ;
+- créer une page de création de "Sets" (Plugin Grappes ?) ;

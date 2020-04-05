@@ -1,0 +1,5 @@
+<BOUCLE_principale_chant(CHANTS){id_chant}>
+[(#PLUGIN{Z}|oui) <INCLURE{fond=structure}{env}{id_rubrique=#ENV{id_rubrique,#ID_RUBRIQUE}}{id_secteur=#ID_SECTEUR}{type=chant}{composition=#COMPOSITION} />]
+[(#PLUGIN{Z}|non) <INCLURE{fond=chant-defaut}{env}>]
+</BOUCLE_principale_chant>
+

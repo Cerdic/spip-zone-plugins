@@ -1,0 +1,36 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_chant,nouveau}'>
+        [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+        [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+        [(#ENV{editable})
+        <form method='post' action='#ENV{action}'><div>
+                #ACTION_FORMULAIRE{#ENV{action}}
+                <input type='hidden' name='id_chant' value='#ENV{id_chant}' />
+                <ul>
+                    [(#SAISIE{input, titre, label=<:chant:label_titre:>, obligatoire=oui})]
+                    [<li class="editer editer_rubrique[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">
+                    <label for="id_parent"><:titre_cadre_interieur_rubrique:></label>[
+                    <span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>
+                    ]
+                    (#VAL|chercher_rubrique{#ENV{id_chant},#ENV{id_parent},'chant',#ENV{id_secteur},'',0,form_simple})
+                    </li>]
+                        [(#SAISIE{input, alias, label=<:chant:label_alias:>})]
+                        [(#SAISIE{input, copyright, label=<:chant:label_copyright:>})]
+                        [(#SAISIE{textarea, paroles, label=<:chant:label_paroles:>, inserer_barre=edition})]
+
+[(#SAISIE{input, date_annee, label=<:chant:label_date_annee:>})]
+[(#SAISIE{input, ccli, label=<:chant:label_ccli:>})]
+[(#SAISIE{input, presentation, label=<:chant:label_presentation:>})]
+[(#SAISIE{input, numero, label=<:chant:label_numero:>})]
+[(#SAISIE{input, ligne_principale, label=<:chant:label_ligne_principale:>})]
+[(#SAISIE{input, capo, label=<:chant:label_capo:>})]
+[(#SAISIE{input, tempo, label=<:chant:label_tempo:>})]
+[(#SAISIE{input, signature, label=<:chant:label_signature:>})]
+[(#SAISIE{input, tonalite, label=<:chant:label_tonalite:>})]
+
+                </ul>
+                [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+                <!--extra-->
+                <p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+        </div></form>
+        ]
+</div>

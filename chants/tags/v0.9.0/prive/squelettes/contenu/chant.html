@@ -1,0 +1,61 @@
+<BOUCLE_chant(CHANTS){id_chant}{statut==.*}{si #ENV{exec}|=={chant}}>
+[(#BOITE_OUVRIR{[
+				
+	[(#AUTORISER{modifier,chant,#ID_CHANT})
+				
+		[(#ID_CHANT|afficher_qui_edite{chant}|non)
+			[(#URL_ECRIRE{chant_edit,id_chant=#ID_CHANT}|icone_verticale{<:chant:icone_modifier_chant:>,chant,edit,right})]
+		]
+		[(#ID_CHANT|afficher_qui_edite{chant}|oui)
+			[(#URL_ECRIRE{chant_edit,id_chant=#ID_CHANT}|icone_verticale{#ID_CHANT|afficher_qui_edite{chant},warning-24,'',right})]
+		]
+	]
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{chant-24.png}|balise_img{chant,cadre-icone})]</h1>
+],simple fiche_objet})]
+
+[<div class="ajax">
+	(#FORMULAIRE_DATER{chant,#ID_CHANT})
+</div>]
+
+[<div class="ajax">
+	(#FORMULAIRE_EDITER_LIENS{auteurs,chant,#ID_CHANT})
+</div>]
+
+<!--affiche_milieu-->
+<BOUCLE_proposer(CHANTS)
+	{id_chant}
+	{statut=prepa}
+	{id_auteur=#SESSION{id_auteur}}
+	{si #SESSION{statut}|=={1comite}|et{#AUTORISER{modifier,chant,#ID_CHANT}}}
+	>
+#BOITE_OUVRIR{'',note center proposer}
+	<p><:texte_proposer_publication:></p>
+	[(#BOUTON_ACTION{<:bouton_demande_publication:>,#URL_ACTION_AUTEUR{instituer_objet,chant-#ID_CHANT-prop,#SELF},'',<:confirm_changer_statut:>})]
+#BOITE_FERMER
+</BOUCLE_proposer>
+[(#STATUT|=={prop}|oui)
+#BOITE_OUVRIR{'',note center propose}
+<p><:chant:text_chant_propose_publication:></p>
+#BOITE_FERMER
+]
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/chant,id=#ID_CHANT,id_chant=#ID_CHANT,ajax=wysiwyg}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,chant,#ID_CHANT})
+
+	[(#ID_CHANT|afficher_qui_edite{chant}|non)
+		[(#URL_ECRIRE{chant_edit,id_chant=#ID_CHANT}|icone_verticale{<:chant:icone_modifier_chant:>,chant,edit,right})]
+	]
+	[(#ID_CHANT|afficher_qui_edite{chant}|oui)
+		[(#URL_ECRIRE{chant_edit,id_chant=#ID_CHANT}|icone_verticale{#ID_CHANT|afficher_qui_edite{chant},warning-24,'',right})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,chant,id,#ID_CHANT},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+</BOUCLE_chant>

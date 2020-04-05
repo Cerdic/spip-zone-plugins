@@ -1,0 +1,64 @@
+<BOUCLE_contenu_rubrique(RUBRIQUES){id_rubrique}>
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
+
+<div class="contenu-principal">
+
+	<div class="cartouche">
+		[(#LOGO_RUBRIQUE||image_reduire{200,200})]
+		<h1 class="h1 #EDIT{titre}">#TITRE</h1>
+		[<p class="info-publi"><span class="published"><:dernier_ajout:> : (#DATE|affdate_jourcourt).</span></p>]
+	</div>
+
+	[<div class="#EDIT{texte} chapo">(#TEXTE)</div>]
+</div>
+
+[(#REM) La boucle chants et son affichage alternatif sont construit sur la même base que la boucle articles de la Z-dist.
+Ce qui est aussi pratique pour les chants si on désire mettre les chants directement dans les "répertoires" officiels.
+]
+<B_chants>
+<div class="liste chants">
+	#ANCRE_PAGINATION
+	<h2 class="h2"><:chant:chants_rubrique:></h2>
+	<ul class="liste-items">
+		<BOUCLE_chants(CHANTS){id_rubrique} {!par date} {pagination 5}>
+		#INCLURE{fond=inclure/chant-resume,id_chant}
+		</BOUCLE_chants>
+	</ul>
+	[<p class="pagination">(#PAGINATION)</p>]
+</div>
+</B_chants>
+
+	[(#REM) Si aucun chant, affiche un plan de la rubrique ]
+	<B_sous_rubriques>
+	<div class="menu rubriques">
+		<h2 class="h2"><:sous_rubriques:></h2>
+		<ul class="menu-liste">
+			<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}>
+			<li class="menu-entree">
+				<a href="#URL_RUBRIQUE">[(#TITRE)]</a>
+
+				[(#REM) Une boucle recursive pour le mini plan]
+				<B_miniplan>
+				<ul class="menu-liste">
+					<BOUCLE_miniplan(RUBRIQUES) {id_parent} {par num titre, titre}>
+					<li class="menu-entree">
+						<a href="#URL_RUBRIQUE">[(#TITRE)]</a>
+						<BOUCLE_m2(BOUCLE_miniplan)></BOUCLE_m2>
+					</li>
+					</BOUCLE_miniplan>
+				</ul>
+				</B_miniplan>
+
+			</li>
+			</BOUCLE_sous_rubriques>
+		</ul>
+		</div>
+	</B_sous_rubriques>
+<//B_chants>
+
+[(#REM) Gestion du portfolio et des documents ]
+[(#INCLURE{fond=inclure/documents}{id_rubrique})]	
+
+[<div class="notes"><h2 class="h2"><:info_notes:></h2>(#NOTES)</div>]
+</BOUCLE_contenu_rubrique>

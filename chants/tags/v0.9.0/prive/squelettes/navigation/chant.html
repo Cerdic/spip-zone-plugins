@@ -1,0 +1,32 @@
+<BOUCLE_nav(CHANTS){id_chant}{statut==.*}{si #ENV{exec}|=={chant}}>
+[(#BOITE_OUVRIR{'','info'})]
+#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','chant','id',#ENV{id_chant}}}}
+[(#BOITE_OUVRIR{<:chant:infos_complementaires:>,'raccourcis'})]
+<ul class="liste-item">
+    [<li class="item"><strong><:chant:label_date_annee:></strong> <span class="#EDIT{date_annee}">(#DATE_ANNEE|=={'0000'}|oui|?{<:chant:texte_non_renseignee:>,#DATE_ANNEE})</span></li>]
+    [<li class="item #EDIT{ligne_principale}"><strong><:chant:label_ligne_principale:></strong> (#LIGNE_PRINCIPALE)</li>]
+    [<li class="item #EDIT{numero}"><strong><:chant:label_numero:></strong> (#NUMERO)</li>]
+    [<li class="item #EDIT{ccli}"><strong><:chant:label_ccli:></strong> (#CCLI)</li>]
+    [<li class="item #EDIT{capo}"><strong><:chant:label_capo:></strong> (#CAPO)</li>]
+    [<li class="item #EDIT{presentation}"><strong><:chant:label_presentation:></strong> (#PRESENTATION)</li>]
+    [<li class="item #EDIT{signature}"><strong><:chant:label_signature:></strong> (#SIGNATURE)</li>]
+    [<li class="item #EDIT{tempo}"><strong><:chant:label_tempo:></strong> (#TEMPO)</li>]
+    [<li class="item #EDIT{tonalite}"><strong><:chant:label_tonalite:></strong> (#TONALITE)</li>]
+</ul>
+#BOITE_FERMER
+
+#BOITE_FERMER
+
+<div class="ajax">
+#FORMULAIRE_EDITER_LOGO{chant,#ID_CHANT,'',#ENV**}
+</div>
+
+#PIPELINE{afficher_config_objet,#ARRAY{args,#ARRAY{type,chant,id,#ID_CHANT},data,''}}
+
+<div class="ajax">
+#FORMULAIRE_REDIRIGER_CHANT{#ENV{id_chant}}
+</div>
+
+</BOUCLE_nav>
+[(#ENV{exec}|=={chant_edit}|oui)<INCLURE{fond=prive/squelettes/navigation/chant_edit,env}>]
+<//B_nav>

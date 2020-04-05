@@ -1,0 +1,3 @@
+<?php
+defined('_DIR_SITE') ? define('_DIR_CHANTS',_DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES.'chants/') : define('_DIR_CHANTS',_DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES.'chants/');
+?>
