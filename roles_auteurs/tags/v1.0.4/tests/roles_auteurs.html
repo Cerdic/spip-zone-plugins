@@ -1,0 +1,132 @@
+<html>
+<head>
+<title>[#NOM_SITE_SPIP] - test mots techniques - </title>
+<style type="text/css">
+body{font-size:100%;}
+h1{
+	font-size:100%;
+	color:#E84D08;
+	border-bottom:1px solid #E84D08;
+	text-align:left;
+}
+h2{
+	font-size:90%;
+	color:#4A8CC5;
+	text-align:left;
+}
+i { font-style:italic; color:#666;}
+b { font-weight:normal; color:#E5BB3C;}
+li { padding-bottom:.5em;}
+</style>
+</head>
+<body>
+
+
+<h1>Boucle ARTICLES</h1>
+
+<h2>5 derniers articles, boucle auteurs dedans</h2>
+
+<B_art>
+	<ul>
+<BOUCLE_art(ARTICLES){!par date}{0,5}>
+	<li>#ID_ARTICLE #TITRE : <br />
+		<i>
+			<BOUCLE_aut(AUTEURS){id_article}{par nom}{", "}>#NOM</BOUCLE_aut>
+		</i>
+	</li>
+</BOUCLE_art>
+	</ul>
+</B_art>
+
+<h2>5 derniers articles, boucle auteurs dedans, + roles</h2>
+
+<B_art2>
+	<ul>
+<BOUCLE_art2(ARTICLES){!par date}{0,5}>
+	<li>#ID_ARTICLE #TITRE : <br />
+		<i>
+			<BOUCLE_aut2(AUTEURS){id_article}{par nom}{"<br />"}>
+				- #NOM : 
+				<b>
+					<BOUCLES_roles2(spip_auteurs_liens){id_article}{id_auteur}{', '}>
+					[(#ROLE|role{auteur})]
+					</BOUCLES_roles2>
+				</b>
+			</BOUCLE_aut2>
+		</i>
+	</li>
+</BOUCLE_art2>
+	</ul>
+</B_art2>
+
+
+
+<h2>5 derniers articles ayant un role 'correcteur'</h2>
+
+<B_art3>
+	<ul>
+<BOUCLE_art3(ARTICLES){!par date}{role=correcteur}{0,5}>
+	<li>#ID_ARTICLE #TITRE</li>
+</BOUCLE_art3>
+	</ul>
+</B_art3>
+
+
+<h2>5 derniers articles, liste des auteurs 'correcteur'</h2>
+
+<B_art4>
+	<ul>
+<BOUCLE_art4(ARTICLES){!par date}{0,5}>
+	<li>#ID_ARTICLE #TITRE<br />
+		<B_aut4>
+		<b>Correcteurs :</b><br />
+		<i>
+			<BOUCLE_aut4(AUTEURS){id_article}{par nom}{role=correcteur}{"<br />"}>
+				- #NOM
+			</BOUCLE_aut4>
+		</i>
+	</li>
+</BOUCLE_art4>
+	</ul>
+</B_art4>
+
+
+<h2>5 derniers articles, liste des auteurs par rôle</h2>
+
+<B_art5>
+	<ul>
+<BOUCLE_art5(ARTICLES){!par date}{0,5}>
+	<li>#ID_ARTICLE #TITRE<br />
+		<BOUCLE_roles5(auteurs_liens){id_article}{fusion role}{"<br />"}>
+			<b>[(#ROLE|role{auteur})]</b><br />
+			<BOUCLE_aut5(AUTEURS){id_article}{par nom}{role}{"<br />"}>
+				- #NOM
+			</BOUCLE_aut5>
+		</BOUCLE_roles5>
+	</li>
+</BOUCLE_art5>
+	</ul>
+</B_art5>
+
+
+<h1>Boucle AUTEURS</h1>
+
+<h2>Tous les auteurs qui ont été correcteurs sur un article (et les articles en question)</h2>
+
+<B_aut6>
+	<ul>
+<BOUCLE_aut6(AUTEURS){par nom}{role=correcteur}{objet=article}{"<br />"}>
+	<li>#NOM
+		<B_art6>
+			<ol>
+			<BOUCLE_art6(ARTICLES){id_auteur}{role=correcteur}{par titre}>
+				<li>#TITRE</li>
+			</BOUCLE_art6>
+			</ol>
+		</B_art6>
+	</li>
+</BOUCLE_aut6>
+	</ul>
+</B_aut6>
+</body>
+</html>
