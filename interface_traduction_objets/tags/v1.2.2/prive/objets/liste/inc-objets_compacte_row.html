@@ -1,0 +1,57 @@
+#SET{id_trad,#INFO_ID_TRAD{#ENV{objet},#ID}}
+#SET{traductions,#ARRAY}
+[(#GET{id_trad}|>{0}|oui)
+	[(#SET{traductions,[(#GET{id_trad}|lister_traductions{#ENV{objet}})]})]
+]
+
+#SET{lang,#INFO_LANG{#ENV{objet},#ID}}[(#GET{lang}|changer_typo)]
+#SET{titre,#INFO_TITRE{#ENV{objet},#ID}}
+<tr[ class="(#ENV{class})"][ (#ENV{activer_rang}|oui)[data-id_objet="(#ID)"]]>
+	[(#ENV{activer_rang}|oui)<td class="rang">[(#ENV{rang}).]</td>]
+	[(#ENV{champs}|table_valeur{statut}|oui)
+	<td class='statut'>[(#ID|puce_changement_statut{#INFO_STATUT{#ENV{objet},#ID},#ENV{id_rubrique},#ENV{objet}})]</td>
+	]
+	<td class='picto'>#ENV**{picto}</td>
+	<td class='titre principale'><a
+		href="[(#ID|generer_url_entite{#ENV{objet}})]"
+		[hreflang="(#ENV{lang}|=={#GET{lang}}|non|?{#GET{lang}})"]
+		title="<:info_numero_abbreviation|attribut_html:> #VALEUR{id}">[(#ENV{rang}). ][(#GET{titre}|sinon{<:info_sans_titre:>})]</a>
+	</td>
+	[(#ENV{champ_auteur}|oui)
+		<td class='auteur'><INCLURE{fond=prive/objets/liste/inc-objets_compacte_auteurs,id,objet} /></td>
+	]
+	[(#ENV{champ_date}|oui)
+	<td class='date'>[(#DATE|affdate_court)]</td>
+	]
+	<td class='id'>[(#AUTORISER{modifier,#ENV{objet},#ID}|?{
+		[<a href="[(#ID|generer_url_ecrire_entite_edit{#ENV{objet}})]">(#ID)</a>],
+		[(#ID)]
+	})]</td>
+	<td>
+	<BOUCLE_trads(DATA) {source tableau, #GET{traductions}}{id!=#ID}>
+	[(#ENV{voir}|!={[(#GET{id_trad})]}|?{
+		<span>[(#ID|puce_changement_statut{#STATUT,#ENV{id_rubrique},#ENV{objet}})]&nbsp;[(#AUTORISER{modifier,#ENV{objet},#ID}|?{
+			<a
+				href="[(#ID|generer_url_entite{#ENV{objet}})]"
+				title="[(#GET{titre})] / <:info_numero_abbreviation|attribut_html:> [(#VALEUR{id})]">[(#GET{lang})]</a>,
+			#GET{lang}
+			})]
+		</span>,
+		&nbsp;
+		})]
+	</BOUCLE_trads>
+		<div>
+		[(#SET{voir,[(#OBJET)_][(#GET{id_trad})]})]
+		[(#ENV{voir}|=={#GET{voir}}|?{
+			<a class="ajax" href="[(#SELF|parametre_url{voir,''})]" title="<:interface_traduction_objets:fermer:>"><img src="[(#CHEMIN{prive/images/deplierbas.gif})]" alt="replier"/></a>,
+			<a class="ajax" href="[(#SELF|parametre_url{voir,#GET{voir}})]" title="<:interface_traduction_objets:voir_traductions:>"><img src="[(#CHEMIN{prive/images/deplierhaut.gif})]" alt="deplier"/></a>})]
+		</div>
+		</B_trads>
+		[(#ENV{trads}|non) - ]
+	<//B_trads>
+	</td>
+</tr>
+
+[(#ENV{voir}|et{#ENV{voir}|=={#GET{voir}}}|oui)
+	<INCLURE{fond=prive/objets/liste/inc-objets_compacte_trads_row,id,id_trad=#GET{id_trad},env}/>
+]

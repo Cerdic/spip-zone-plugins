@@ -1,0 +1,64 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+<h3 class='titrem'><img src="#CHEMIN_IMAGE{interface_traduction_objets-32.png}" class="cadre-icone" /><:interface_traduction_objets:interface_traduction_objets_titre:>&nbsp;:&nbsp;#ENV{_langue_site}</h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE
+		<input type="hidden" name="desactiver_interface_traduction&#91;&#93;" value="" />
+		<input type="hidden" name="desactiver_liste_compacte&#91;&#93;" value="" />
+	  <div class="editer-groupe">
+			<div class="fieldset">
+				<fieldset><div class="editer-groupe">
+					#SET{objets,#VAL{rubrique}|objet_info{texte_objets}|_T}
+					#SET{val,spip_rubriques}
+						#SET{name,desactiver_interface_traduction}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label>#GET{objets}</label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<div class="choix">
+								<input type="checkbox" name="#GET{name}&#91;&#93;" id="#GET{val}#GET{name}_oui" value="#GET{val}"
+								[(#GET{val}|in_any{#ENV{#GET{name}}}|oui)checked="checked"] /><label for="#GET{val}#GET{name}_oui"><:interface_traduction_objets:info_desactiver_interface_traduction:></label>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+			]
+			<BOUCLE_objets(POUR){tableau #REM|lister_tables_objets_sql}{cle!=spip_rubriques}{cle!=spip_auteurs}{si #ENV{editable}}>[(#CLE|table_supporte_lang|et{#VALEUR{type}|objet_info{editable}})
+			#SET{val,#CLE}
+			<div class="fieldset">
+				<fieldset>
+					#SET{objets,#VALEUR{texte_objets}|_T}
+					<div class="editer-groupe">
+						#SET{name,desactiver_interface_traduction}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label>#GET{objets}</label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<div class="choix">
+								<input type="checkbox" name="#GET{name}&#91;&#93;" id="#GET{val}#GET{name}_oui" value="#GET{val}"
+								[(#GET{val}|in_any{#ENV{#GET{name}}}|oui)checked="checked"] /><label for="#GET{val}#GET{name}_oui"><:interface_traduction_objets:info_desactiver_interface_traduction:></label>
+							</div>
+						</div>
+						[(#CLE|table_supporte_trad|oui)
+						#SET{name,desactiver_liste_compacte}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<div class="choix">
+								<input type="checkbox" name="#GET{name}&#91;&#93;" id="#GET{val}#GET{name}_oui" value="#GET{val}"
+								[(#GET{val}|in_any{#ENV{#GET{name}}}|oui)checked="checked"] /><label for="#GET{val}#GET{name}_oui"><:interface_traduction_objets:info_desactiver_liste_compacte:></label>
+							</div>
+						</div>
+						]
+					</div>
+				</fieldset>
+			</div>]</BOUCLE_objets>
+	[(#ENV{editable})
+		</div>
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

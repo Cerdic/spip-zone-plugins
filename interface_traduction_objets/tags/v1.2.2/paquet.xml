@@ -1,0 +1,27 @@
+<paquet
+	prefix="interface_traduction_objets"
+	categorie="edition"
+	version="1.2.2"
+	etat="test"
+	compatibilite="[3.0.0;3.3.*]"
+	logo="prive/themes/spip/images/interface_traduction_objets-64.png"
+	documentation="https://contrib.spip.net/Interface-de-traduction-pour-objets"
+>
+
+	<nom>Interface de traduction pour objets</nom>
+	<!-- Rend la traduction de vos objets encore plus simple -->
+
+	<auteur>Rainer Müller</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<traduire module="interface_traduction_objets" reference="fr" gestionnaire="salvatore" />
+
+	<utilise nom="rang" compatibilite="[1.0.13;[" />
+
+	<pipeline nom="recuperer_fond" inclure="interface_traduction_objets_pipelines.php" />
+	<pipeline nom="header_prive" inclure="interface_traduction_objets_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="interface_traduction_objets_pipelines.php" />
+	<pipeline nom="pre_insertion" inclure="interface_traduction_objets_pipelines.php" />
+
+</paquet>
