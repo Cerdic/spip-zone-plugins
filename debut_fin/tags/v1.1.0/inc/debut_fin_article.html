@@ -1,0 +1,25 @@
+<BOUCLE_principale(ARTICLES){id_article}>
+[(#AGENDA|=={1}|oui)
+	<span class="dates">
+	[(#DATE_DEBUT|=={#DATE_FIN}|oui)
+		[(#DATE_DEBUT|nom_jour)] [(#DATE_DEBUT|affdate)]
+	]
+
+	[(#DATE_DEBUT|=={#DATE_FIN}|non)
+		du [(#DATE_DEBUT|nom_jour)] 
+		
+			[(#DATE_DEBUT|jour)]
+
+			[(#DATE_DEBUT|mois|concat{[(#DATE_DEBUT|annee)]}|=={[(#DATE_FIN|mois|concat{[(#DATE_FIN|annee)]})]}|non)
+				[(#DATE_DEBUT|nom_mois)]
+			]
+			
+			[(#DATE_DEBUT|annee|=={[(#DATE_FIN|annee)]}|non)
+				[(#DATE_DEBUT|annee)]
+			]
+		
+		au [(#DATE_FIN|nom_jour)] [(#DATE_FIN|affdate)]
+	]
+	</span>
+]
+</BOUCLE_principale>
