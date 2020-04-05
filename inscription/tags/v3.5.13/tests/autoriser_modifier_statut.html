@@ -1,0 +1,15 @@
+[(#REM)
+	On va tester la possibilité d'un auteur à modifier son profil
+]
+<BOUCLE_a(AUTEURS){statut=6forum}{0,1}{tout}>
+[(#AUTORISER{modifier,auteur,#ID_AUTEUR}|?{#SET{ok1,1},' '})
+	L'auteur #ID_AUTEUR #STATUT ne peut modifier son profil
+]
+
+[(#AUTORISER{modifier,auteur,#ID_AUTEUR,#SESSION,#ARRAY{statut,'?'}}|?{' ',[(#SET{ok2,2})]})
+	L'auteur #ID_AUTEUR #STATUT peut modifier son statut => pas normal
+]
+</BOUCLE_a>
+NA Ce test exige un auteur en statut visiteur
+<//B_a>
+[(#GET{ok1}|et{#GET{ok2}}|?{OK})]

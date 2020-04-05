@@ -1,0 +1,22 @@
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a></p>
+<div class="content-principal">
+	<div class="cartouche">
+		[(#ENV{s}|non)
+		<h1 class="h1 spip"><:login_motpasseoublie|ucfirst:></h1>]
+		[(#ENV{s}|oui)
+		<h1 class="h1 spip"><:inscription3:titre_supprimer_compte:></h1>]
+	</div>
+	<div class="pass">
+		[(#ENV{s}|non)
+			[(#ENV{p}|non)
+			  #FORMULAIRE_OUBLI
+			]
+			[(#ENV{p}|oui)
+			  #FORMULAIRE_MOT_DE_PASSE{p=#ENV{p}}
+			]
+		]
+		[(#ENV{s}|oui)
+			#FORMULAIRE_SUPPRIMER_VISITEUR
+		]
+	</div>
+</div>
