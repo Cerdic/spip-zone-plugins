@@ -1,0 +1,73 @@
+[(#REM)<style>]#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css;charset=utf-8}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+/**
+ * ===============
+ * Correctifs SPIP
+ * ===============
+ */
+
+/* Liste objets qui dépasse */
+.lat .formulaire_editer_liens .liste-objets-lies {
+  margin-left: -5px;
+  margin-right: -5px;
+}
+
+/**
+ * ==============================
+ * Simplifications et ajustements
+ * ==============================
+ */
+
+/* Liste d'objets : icônes et heading inutiles */
+.affiche_connexe .liste-objets {
+  background-color: white;
+}
+.affiche_connexe .liste-objets thead {
+  display: none;
+}
+.affiche_connexe .liste-objets caption {
+  background-color: transparent;
+}
+.affiche_connexe .liste-objets .caption {
+  background-image: none !important;
+  padding-left: 5px !important;
+  font-size: 1em;
+}
+.affiche_connexe .liste-objets tr > .picto {
+  width: 0;
+}
+.affiche_connexe .liste-objets tr > .picto img {
+  display: none;
+}
+/* Headings normalisés */
+.affiche_connexe h4,
+.affiche_connexe .h4,
+.affiche_connexe caption,
+.affiche_connexe .caption-wrap {
+  font-size: 0.9em;
+}
+/* Formulaires */
+.affiche_connexe .formulaire_spip {
+  border-color: #ddd;
+  background-color: white;
+}
+.lat .affiche_connexe .formulaire_traduire .editer label {
+  font-weight: bold;
+}
+/* Marges autour du wysiwyg */
+#wysiwyg {
+  margin: 2.0775em 0;
+}
+
+/**
+ * ==================
+ * Correctifs plugins
+ * ==================
+ */
+
+.formulaire_editer_composition_objet h4 {
+  background: none !important;
+  padding-left: 5px !important;
+}

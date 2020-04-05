@@ -1,0 +1,11 @@
+[(#REM)
+
+	Surcharge : ajout du marqueur affiche_connexe
+
+]
+#SET{exec,#ENV{exec}|trouver_objet_exec}
+<div class="affiche_connexe">
+	<INCLURE{fond=prive/objets/editer/traductions, affiche_connexe=oui, objet=#GET{exec/type}, id_objet=#ENV{#GET{exec/id_table_objet}}, espace_prive=1, env} />
+	<!--affiche_connexe-->
+</div>
+<!-- extra -->

@@ -1,0 +1,24 @@
+[(#REM)
+
+	Surcharge : on ajoute un div .affiche_connexe avec les formulaires de langue, de date et liens auteurs
+
+]
+<div class="affiche_connexe">
+	<INCLURE{fond=prive/objets/editer/traductions, affiche_connexe=oui, objet=article, id_objet=#ENV{id_article}, espace_prive=1, env} />
+	<div class="ajax">
+		#FORMULAIRE_DATER{article,#ID_ARTICLE}
+	</div>
+	<div class="ajax">
+		#FORMULAIRE_EDITER_LIENS{auteurs,article,#ID_ARTICLE}
+	</div>
+	<!--affiche_connexe-->
+</div>
+
+<BOUCLE_extra(ARTICLES){id_article}{statut?}{si #ENV{exec}|=={article}}>
+#SET{statut,#SESSION{statut}|statuts_articles_visibles}
+#SET{where,#VAL{id_article!=}|concat{#ID_ARTICLE}}
+<INCLURE{fond=prive/objets/liste/articles-memerubrique,id_rubrique=#ID_RUBRIQUE,where=#GET{where},statut=#GET{statut},env,ajax}>
+
+</BOUCLE_extra>
+[(#ENV{exec}|=={article_edit}|oui)<INCLURE{fond=prive/squelettes/extra/article_edit,env}>]
+<//B_extra>
