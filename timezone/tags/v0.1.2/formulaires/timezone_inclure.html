@@ -1,0 +1,10 @@
+[(#SPIP_VERSION|substr{0,3}|=={3.0}|?{#SET{balise,li},#SET{balise,div}})]
+<[(#GET{balise})] class="editer editer_timezone[(#ENV**{erreurs}|table_valeur{timezone}|oui)erreur]">
+	<label for="timezone"><:timezone:label_choisir_timezone:></label>
+	<select name="timezone" id="timezone">
+		<option value="">-</option>
+	<BOUCLE_zones(DATA){source tableau,#EVAL{timezone_identifiers_list()}}>
+		<option value="#VALEUR"[(#ENV{timezone}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option>
+	</BOUCLE_zones>
+	</select>
+</[(#GET{balise})]>

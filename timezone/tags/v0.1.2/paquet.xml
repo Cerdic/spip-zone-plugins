@@ -1,0 +1,20 @@
+<paquet
+	prefix="timezone"
+	categorie="date"
+	version="0.1.2"
+	etat="stable"
+	compatibilite="[3.0.0;3.2.*]"
+	logo="prive/themes/spip/images/timezone-64.png"
+	documentation="https://contrib.spip.net/Timezone-4591"
+>
+
+	<nom>Timezone</nom>
+	<auteur mail="kent1@arscenic.info" lien="http://www.kent1.info">kent1</auteur>
+
+	<copyright>2014</copyright>
+
+	<licence>GNU/GPL v3</licence>
+
+	<pipeline nom="formulaire_fond" inclure="timezone_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="timezone_pipelines.php" />
+</paquet>
