@@ -1,0 +1,25 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 SPIP
+  Distribue sous licence GPL
+
+]
+<title>[\[(#NOM_SITE_SPIP|concat{'\] : ',<:form_forum_identifiants:>}|nettoyer_titre_email)]</title>
+
+<body>
+[(#SET{nom,[<strong>(#ENV{nom})</strong>]})]
+<p><:form_forum_bonjour{nom=#GET{nom}}:></p>
+
+[(#SET{url_confirm, [(#ENV{url_confirm}|parametre_url{redirect,#ENV{redirect}})]})]
+<div>
+[<br><center>(#INCLURE{fond=emails/inc-button,url=[(#GET{url_confirm}|url_absolue)],label=<:form_auteur_confirmation:>,width=250px})</center><br>]
+</div>
+
+#SET{url_site,#URL_SITE_SPIP/}
+[(#SET{nom_site,[<a href="#GET{url_site}">(#NOM_SITE_SPIP)</a>]})]
+
+
+</body>
+
+#FILTRE{facteur_email_wrap_to_html}
